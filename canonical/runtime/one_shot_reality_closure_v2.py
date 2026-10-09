@@ -20,6 +20,7 @@ from __future__ import annotations
 from copy import deepcopy
 from hashlib import sha256
 import json
+from pathlib import Path
 from typing import Any, Callable, Mapping, Sequence
 
 from canonical.runtime import one_shot_verified_closure_v1 as v1
@@ -27,6 +28,7 @@ from canonical.runtime import one_shot_verified_closure_v1 as v1
 SCHEMA = "PROJECT_BRAIN_ONE_SHOT_REALITY_CLOSURE_V2"
 GAP_SCHEMA = "PROJECT_BRAIN_PROOF_CARRYING_GAP_CONTRACT_V1"
 CONTEXT_GATE_SCHEMA = "PROJECT_BRAIN_CONTEXT_CAPACITY_REPAIR_GATE_V1"
+SEMANTIC_WORK_SCHEMA = "PROJECT_BRAIN_CONSTRUCTIVE_SEMANTIC_WORK_CONTRACT_V1"
 
 _HEX = set("0123456789abcdef")
 
@@ -65,6 +67,116 @@ def _positive_int(name: str, value: Any, *, allow_zero: bool = False) -> int:
     if value < floor:
         raise RealityClosureError(name + "_OUT_OF_RANGE")
     return value
+
+
+def _pending_semantic_work(*, state_path: Any = None) -> list[dict[str, Any]]:
+    """Load the exact pending R3 work that made V1 stop.
+
+    Durable R3 state is already JSON. V2 preserves the complete pending payload
+    and content-addresses each work item before exposing it to synthesis.
+    """
+    resolved = state_path
+    if resolved is None:
+        learning = getattr(v1, "learning", None)
+        resolved = getattr(learning, "DEFAULT_STATE_PATH", None)
+    if resolved is None:
+        return []
+    target = Path(resolved)
+    if not target.exists():
+        return []
+    state = json.loads(target.read_text(encoding="utf-8"))
+    queue = state.get("improvement_queue", {})
+    if not isinstance(queue, Mapping):
+        return []
+
+    out: list[dict[str, Any]] = []
+    for wid, raw in queue.items():
+        if not isinstance(raw, Mapping):
+            continue
+        if raw.get("status") not in {"PENDING", "PARKED"}:
+            continue
+        payload = raw.get("payload")
+        payload = deepcopy(dict(payload)) if isinstance(payload, Mapping) else {}
+        core = {
+            "work_id": _s(wid),
+            "kind": _s(raw.get("kind")),
+            "status": _s(raw.get("status")),
+            "observations": int(raw.get("observations", 0)),
+            "last_attempt_observations": raw.get("last_attempt_observations"),
+            "last_attempt_status": raw.get("last_attempt_status"),
+            "last_attempt_reason": raw.get("last_attempt_reason"),
+            "last_attempt_provider_id": raw.get("last_attempt_provider_id"),
+            "last_attempt_frontier_sha256": raw.get("last_attempt_frontier_sha256"),
+            "frontier_expansion_work_id": raw.get("frontier_expansion_work_id"),
+            "verification_frontier_sha256": raw.get("verification_frontier_sha256"),
+            "adapter_frontier_sha256": raw.get("adapter_frontier_sha256"),
+            "verification_authority_sha256": raw.get("verification_authority_sha256"),
+            "payload": payload,
+        }
+        out.append({
+            "schema": SEMANTIC_WORK_SCHEMA,
+            **core,
+            "work_digest": _sha(core),
+        })
+    return sorted(out, key=lambda row: (row["kind"], row["work_id"]))
+
+
+def _constructive_capability_contracts(
+    pending_work: Sequence[Mapping[str, Any]],
+) -> list[dict[str, Any]]:
+    """Compile pending durable work into verifier-preserving synthesis contracts."""
+    out: list[dict[str, Any]] = []
+    for raw in pending_work:
+        work = deepcopy(dict(raw))
+        payload = work.get("payload")
+        payload = payload if isinstance(payload, Mapping) else {}
+        kind = _s(work.get("kind"))
+        if kind == "REPAIR_FAILURE_CLASS":
+            acceptance = "ORIGINAL_FAILURE_REPLAY_MUST_PASS_UNCHANGED_VERIFIER"
+            mutation = "CAPABILITY_IMPLEMENTATION_OR_POLICY_ONLY__VERIFIER_IMMUTABLE"
+        elif kind == "EXPAND_SUCCESS_VERIFICATION_FRONTIER":
+            acceptance = "BLOCKED_SUCCESS_MUST_ADAPT_AND_INDEPENDENTLY_VERIFY"
+            mutation = "SUCCESS_ADAPTER_ONLY__VERIFIER_IMMUTABLE"
+        elif kind == "ADAPT_SUCCESS_TO_VERIFIABLE_EPISODE":
+            acceptance = "SUCCESS_OBSERVATION_MUST_BECOME_INDEPENDENTLY_VERIFIABLE_EPISODE"
+            mutation = "ADAPTER_OR_VERIFIABLE_REPRESENTATION_ONLY__VERIFIER_IMMUTABLE"
+        else:
+            acceptance = "ORIGINAL_PENDING_OBLIGATION_MUST_CLOSE_UNDER_EXISTING_AUTHORITY"
+            mutation = "MINIMUM_CONSTRUCTIVE_CHANGE__VERIFIER_IMMUTABLE"
+
+        basis = {
+            "work_id": _s(work.get("work_id")),
+            "work_digest": _s(work.get("work_digest")),
+            "kind": kind,
+            "required_result": payload.get("required_result"),
+            "repair_class": payload.get("repair_class"),
+            "failure_fingerprint": payload.get("failure_fingerprint"),
+            "failure_status": payload.get("failure_status"),
+            "falsified_capability_ids": deepcopy(payload.get("falsified_capability_ids", [])),
+            "counterexamples": deepcopy(payload.get("counterexamples", [])),
+            "observation_id": payload.get("observation_id"),
+            "retry_capsule_sha256": payload.get("retry_capsule_sha256"),
+            "replay_capsule_sha256": payload.get("replay_capsule_sha256"),
+            "proof_capsule_sha256": payload.get("proof_capsule_sha256"),
+            "surface": payload.get("surface"),
+            "boundary_root": payload.get("boundary_root"),
+            "required_capability_class": payload.get("required_capability_class"),
+            "verification_frontier_sha256": work.get("verification_frontier_sha256"),
+            "adapter_frontier_sha256": work.get("adapter_frontier_sha256"),
+            "verification_authority_sha256": work.get("verification_authority_sha256"),
+            "acceptance_condition": acceptance,
+            "allowed_mutation_class": mutation,
+        }
+        out.append({
+            "schema": "PROJECT_BRAIN_CONSTRUCTIVE_CAPABILITY_CONTRACT_V1",
+            "contract_id": "constructive:" + _sha(basis),
+            "basis": basis,
+            "verification_authority_mutation_allowed": False,
+            "self_verification_allowed": False,
+            "promotion_authority": False,
+            "terminal_authority": False,
+        })
+    return out
 
 
 def certify_context_capacity_repair(
@@ -165,7 +277,11 @@ def certify_context_capacity_repair(
     return payload
 
 
-def compile_gap_contract(closure_result: Mapping[str, Any]) -> dict[str, Any]:
+def compile_gap_contract(
+    closure_result: Mapping[str, Any],
+    *,
+    pending_work: Sequence[Mapping[str, Any]] = (),
+) -> dict[str, Any]:
     """Convert one V1 residual into an exact repair/acquisition contract."""
     row = deepcopy(dict(closure_result))
     residual = row.get("residual")
@@ -206,12 +322,18 @@ def compile_gap_contract(closure_result: Mapping[str, Any]) -> dict[str, Any]:
         "evidence_blockers": evidence,
         "irreducible_external_information_proved": external_proved,
     }
+    semantic_work = [deepcopy(dict(x)) for x in pending_work]
+    constructive_contracts = _constructive_capability_contracts(semantic_work)
     return {
         "schema": GAP_SCHEMA,
         "gap_class": gap_class,
         "required_action": required_action,
         "basis": basis,
         "basis_digest": _sha(basis),
+        "pending_semantic_work": semantic_work,
+        "pending_semantic_work_digest": _sha(semantic_work),
+        "constructive_capability_contracts": constructive_contracts,
+        "constructive_capability_contract_count": len(constructive_contracts),
         "verification_authority_mutation_allowed": False,
         "terminal_credit": False,
     }
@@ -328,7 +450,8 @@ def run(
                 "terminal_authority": False,
             }
 
-        contract = compile_gap_contract(closure)
+        pending_work = _pending_semantic_work(state_path=state_path)
+        contract = compile_gap_contract(closure, pending_work=pending_work)
         transcript.append(
             {
                 "repair_round": repair_round,
@@ -336,6 +459,8 @@ def run(
                 "closure_pass": closure.get("pass") is True,
                 "gap_class": contract["gap_class"],
                 "basis_digest": contract["basis_digest"],
+                "pending_semantic_work_digest": contract["pending_semantic_work_digest"],
+                "constructive_capability_contract_count": contract["constructive_capability_contract_count"],
             }
         )
 
