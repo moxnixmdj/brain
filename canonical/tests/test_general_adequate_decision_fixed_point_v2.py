@@ -889,6 +889,59 @@ class GeneralAdequateDecisionFixedPointV2Tests(unittest.TestCase):
 
 
     @patch.object(fixed.direct_adequacy, "preflight")
+    @patch.object(fixed, "run_controller")
+    def test_dimension_lattice_atom_reaches_resolver_without_authority(
+        self, controller, preflight
+    ):
+        obligation = {
+            "kind": "PROVE_DOCUMENT_EFFECT_DIMENSION",
+            "document_id": "B",
+            "source_id": "B",
+            "effect_id": "B.t",
+            "target_id": "threshold",
+            "dimension": "value",
+        }
+        atom = {
+            "document_id": "B",
+            "effect_id": "B.t",
+            "dimension": "value",
+            "target_id": "threshold",
+            "state": "TOP",
+            "proof_obligation": obligation,
+        }
+        preflight.return_value = {
+            "matched": False,
+            "pass": False,
+            "status": "NOT_APPLICABLE__EFFECT_DIMENSION_LATTICE_OPEN",
+            "direct_route_semantic_open": True,
+            "route_id": "DIRECT_ADEQUACY::CROSS_DOCUMENT_EFFECT_DIMENSION_LATTICE_V1",
+            "effect_status": "OPEN__QUERY_RELEVANT_EFFECT_DIMENSION_TOP_REMAINS",
+            "open_lattice_atoms": [atom],
+            "next_proof_obligations": [obligation],
+            "minimum_discriminator_slots": [],
+            "possible_outcomes": [],
+            "world_count": None,
+            "query_relative_effect_semantics_finite": False,
+        }
+        controller.side_effect = [self._open(), self._pass()]
+        provider = Mock(return_value={
+            "request_patch": {"decision_payload": {"context_id": "value-proved"}}
+        })
+
+        out = fixed.run(self._request(), proposal_provider=provider)
+
+        self.assertTrue(out["pass"], out)
+        hint = provider.call_args.args[0]["direct_preflight_hint"]
+        self.assertEqual(hint["open_lattice_atoms"], [atom])
+        self.assertEqual(hint["next_proof_obligations"], [obligation])
+        self.assertFalse(hint["query_relative_effect_semantics_finite"])
+        self.assertFalse(hint["semantic_truth_authority"])
+        self.assertFalse(hint["execution_authority"])
+        self.assertFalse(hint["acceptance_authority"])
+        self.assertFalse(hint["terminal_authority"])
+
+
+    @patch.object(fixed.direct_adequacy, "preflight")
     @patch.object(fixed.direct_adequacy, "run")
     @patch.object(fixed, "run_controller")
     def test_progressive_repair_reenters_direct_adequacy_before_second_controller(
