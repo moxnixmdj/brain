@@ -1,0 +1,96 @@
+{
+  "schema": "PROJECT_BRAIN_R2_CERTIFIED_RAW_CROSS_DOCUMENT_EFFECT_SENTENCES_V13_VERIFY_V1",
+  "date": "2026-10-09",
+  "source_verified_branch": "r2-certified-effect-sentences-v1",
+  "promotion_branch": "r2-certified-effect-sentences-v1-current",
+  "promotion_branch_head_sha": "26b26751a2ddb7d3631580f85c2f8f5362e93900",
+  "capability": "RAW_CROSS_DOCUMENT_EXPLICIT_EFFECT_SENTENCES_TO_VERIFIED_V13_DECISION",
+  "status": "VERIFIED_ISOLATED_FULL_CROSS_DOCUMENT_STACK__131_OF_131_PASS__CURRENT_MAIN_REPLAY_BYTE_IDENTICAL",
+  "theorem": {
+    "positive_raw_semantics": [
+      "Effect <id> defines <target> as <JSON scalar>.",
+      "Effect <id> replaces <base-id> on <target> with <JSON scalar> [effective YYYY-MM-DD].",
+      "Effect <id> excepts <base-id> on <target> with <JSON scalar> when <condition-id> = <JSON scalar> [effective YYYY-MM-DD].",
+      "Effect <id> overrides <base-id> on <target> with <JSON scalar> [effective YYYY-MM-DD]."
+    ],
+    "segmentation": "RAW_UTF8_DOCUMENTS_ARE_PARTITIONED_BYTE_EXACTLY_BY_LINES__CERTIFIED_SENTENCES_CLOSE__WHITESPACE_IS_INERT__ALL_OTHER_NONWHITESPACE_BYTES_REMAIN_OPEN_TOP",
+    "end_to_end": "RAW_BUNDLE_COMPILER_OUTPUT_IS_REPARSED_BY_V12_BYTE_COVERAGE_AND_COMBINED_SOURCE_RESIDUAL_VERIFIERS_BEFORE_V13_CAN_COMMIT",
+    "ambiguity": "UNRECOGNIZED_OR_NEAR_MISS_WORDING_IS_NOT_NORMALIZED_OR_GUESSED",
+    "query_result": "A_DEFINE_10__B_REPLACE_12__C_SMALL_EXCEPTION_8_RETURNS_8_FOR_SMALL_TRUE_AFTER_2026_07_01"
+  },
+  "exact_changed_blobs": {
+    "canonical/runtime/certified_raw_effect_sentence_v1.py": "a871e79d763993a264d10f86b908125f229a4377",
+    "canonical/runtime/cross_document_effect_source_coverage_gate_v1.py": "eb4d2a5422f6975d98d05efd4487eb2e890efaaa",
+    "canonical/runtime/cross_document_effect_source_coverage_gate_verify_v1.py": "7dc9b4d2b36aa043d9d51e07c88283b7a0adc918",
+    "canonical/runtime/raw_cross_document_effect_bundle_v1.py": "f34936635b3782e07e3cdaef021fea89c25af564",
+    "canonical/runtime/r2_raw_cross_document_effect_bundle_direct_adequacy_v1.py": "db14dc8ce06eb3cd3efcdd1deef00c94b7944ecc",
+    "canonical/runtime/r2_direct_end_to_end_adequacy_v13.py": "f4b6339815a43da58f9324a1407ccb966fb0353b",
+    "canonical/runtime/general_adequate_decision_fixed_point_v2.py": "d337643b9714a8f4646752fcca6f92768b582925",
+    "canonical/tests/test_certified_raw_effect_sentence_v1.py": "ee2df74cd298719c8a8530301ee0284fbb2e23da",
+    "canonical/tests/test_cross_document_effect_source_coverage_gate_v1.py": "7911eab922d4831a750432f95d3f02b2efe37cdf",
+    "canonical/tests/test_raw_cross_document_effect_bundle_v1.py": "685baa321164d9e3fae12dcc7bb530bc7645c84d",
+    "canonical/tests/test_r2_cross_document_source_residual_direct_adequacy_v1.py": "4b8745fb9392a7f34b1893c4d973c0eab89cfd25",
+    "canonical/tests/test_r2_raw_cross_document_effect_bundle_direct_adequacy_v1.py": "a83428bfce1d7083b6c5a9b31005123c7ebb8f48"
+  },
+  "isolated_verification": {
+    "sprite": "brain-r2-grounded-frontier-verify-20261008",
+    "inherited_core_effect_calculus_typed_direct_worldset": {
+      "passed": 21,
+      "failed": 0
+    },
+    "inherited_v10_worldset_route": {
+      "passed": 7,
+      "failed": 0
+    },
+    "source_aligned_v7_and_residual_frontier": {
+      "passed": 18,
+      "failed": 0
+    },
+    "inherited_v11_residual_route": {
+      "passed": 8,
+      "failed": 0
+    },
+    "certified_raw_effect_sentence_plus_byte_gate_plus_combined_frontier_plus_raw_bundle": {
+      "passed": 35,
+      "failed": 0
+    },
+    "v12_combined_route": {
+      "passed": 10,
+      "failed": 0
+    },
+    "v13_raw_bundle_route": {
+      "passed": 8,
+      "failed": 0
+    },
+    "fixed_point_v13": {
+      "passed": 24,
+      "failed": 0
+    },
+    "total_passed": 131,
+    "total_failed": 0,
+    "harness_notes": {
+      "v10_focused": "DELEGATED_V9_FALLBACK_STUB_ONLY",
+      "v11_focused": "DELEGATED_V10_FALLBACK_STUB_ONLY",
+      "v12_focused": "DELEGATED_V11_FALLBACK_STUB_ONLY",
+      "v13_focused": "DELEGATED_V12_FALLBACK_STUB_ONLY",
+      "fixed_point": "REAL_V13_THROUGH_V10_STACK_WITH_HISTORICAL_V9_FALLBACK_AND_ALREADY_MOCKED_CONTROLLER_REPAIR_SURFACES_STUBBED"
+    }
+  },
+  "promotion_replay": {
+    "all_changed_runtime_and_test_blobs_match_verified_source_branch": true,
+    "changed_blob_count": 12
+  },
+  "hard_nonclaims": [
+    "NO_GENERAL_ARBITRARY_NATURAL_LANGUAGE_EFFECT_EXTRACTION",
+    "NO_NEAR_MISS_PARAPHRASE_NORMALIZATION",
+    "NO_IMPLICIT_EFFECT_ID_TARGET_PRECEDENCE_OR_REFERENCE_INFERENCE",
+    "NO_UNRECOGNIZED_NONWHITESPACE_SOURCE_BYTE_IS_DISCARDED",
+    "NO_EXTERNAL_WORLD_TRUTH",
+    "NO_TERMINAL_CREDIT_FROM_TEST_PASS_COUNT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
