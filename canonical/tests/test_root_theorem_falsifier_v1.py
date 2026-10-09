@@ -2,6 +2,7 @@ from canonical.runtime.root_theorem_falsifier_v1 import (
     assess_mechanism_admission,
     classify_false_success,
     evaluate_root_closure,
+    evaluate_canonical_registry_authority,
     exhaustive_boolean_theorem_check,
 )
 
@@ -80,16 +81,17 @@ def test_r4_failure_localized():
     assert "R4" in out["failed_roots"]
 
 
-def test_unknown_fails_closed():
+def test_unknown_semantics_cannot_override_open_canonical_registry():
     x = false_success_base()
     x["in_behavior_upper"] = "UNKNOWN"
     x["in_good_lower"] = "UNKNOWN"
     out = classify_false_success(x)
-    assert out["status"] == "UNKNOWN_FAIL_CLOSED"
+    assert out["status"] == "ROOT_FAILURE_WITNESS"
+    assert "R4" in out["failed_roots"]
     assert out["terminal_credit"] == 0
 
 
-def test_four_roots_closed_still_grants_zero_credit():
+def test_synthetic_four_root_receipts_cannot_bypass_open_canonical_registry():
     binding = exact_binding()
     out = evaluate_root_closure({
         "R1": True,
@@ -99,8 +101,17 @@ def test_four_roots_closed_still_grants_zero_credit():
         "root_proofs": exact_root_proofs(binding),
         "expected_binding": binding,
     })
-    assert out["status"] == "FOUR_ROOT_PRECONDITIONS_CLOSED"
+    assert out["status"] == "ROOT_NOT_CLOSED"
+    assert out["failed_roots"] == ["R4"]
     assert out["terminal_credit"] == 0
+
+
+def test_current_canonical_registry_is_authoritatively_open():
+    out = evaluate_canonical_registry_authority()
+    assert out["status"] == "R4_CANONICAL_ROOT_CERTIFICATES_OPEN"
+    assert out["authorized"] is False
+    assert out["registry"]["proved_root_ids"] == []
+    assert len(out["registry"]["open_root_ids"]) == 3
 
 
 def test_four_roots_without_exact_binding_refine():
@@ -109,9 +120,11 @@ def test_four_roots_without_exact_binding_refine():
     assert out["roots"]["R4"] is None
 
 
-def test_root_unknown_returns_refine():
+def test_root_unknown_plus_open_registry_is_not_closed():
     out = evaluate_root_closure({"R1": True, "R2": True, "R3": "UNKNOWN", "R4": True})
-    assert out["status"] == "REFINE"
+    assert out["status"] == "ROOT_NOT_CLOSED"
+    assert "R4" in out["failed_roots"]
+    assert "R3" in out["unknown_roots"]
     assert out["terminal_credit"] == 0
 
 
