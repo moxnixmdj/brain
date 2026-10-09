@@ -26,13 +26,15 @@
     "member_material_theorem_verified_count": 2,
     "verified_d_final_replay_route_count": 2,
     "verified_d_final_route_candidate_count": 1,
-    "bound_provider_executor_theorem_bound_count": 43
+    "bound_provider_executor_theorem_bound_count": 43,
+    "provider_theorem_bound_member_count": 2,
+    "ready_for_d_epoch_and_live_binding_count": 2
   },
   "rows": [
     {
       "capability_id": "bound:archive.tar_gz.create_from_manifest",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
-      "status": "PENDING_D_FINAL_CERTIFICATE",
+      "status": "READY_FOR_D_EPOCH_AND_LIVE_BINDING",
       "candidate_proof_class": "STDLIB_SIMPLE_LOCAL",
       "adapter_git_blob_sha": "2ae62c04ef495d855ca8d46263b4cf05110b5648",
       "member_material_theorem": {
@@ -61,6 +63,13 @@
         "astra_runtime_git_blob_sha": "dc61f199c064980d475c7a086cd30a4bddef1f60",
         "promoted_executor_git_blob_sha": "bf9d686521bdc3a2d18775d42b64adb287ed8e3a",
         "d_epoch_git_blob_sha": "60cbc536215571fbd7e41b5ce28239ce370120c3"
+      },
+      "provider_theorem": {
+        "status": "VERIFIED_SHARED_PROVIDER_THEOREM",
+        "receipt_path": "canonical/verification/D_FINAL_STDLIB_PROVIDER_THEOREM_20261009_V1.json",
+        "provider_git_blob_sha": "e2d0992f84da629358ae1ee5406c23d5f21c26c2",
+        "registry_git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85",
+        "zero_ambient_launcher_git_blob_sha": "6e687527e9c4da82fb5d974a729aaa263ee73ea8"
       }
     },
     {
@@ -159,7 +168,7 @@
     {
       "capability_id": "bound:decision.synthesis.verify.stdlib",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
-      "status": "PENDING_D_FINAL_CERTIFICATE",
+      "status": "READY_FOR_D_EPOCH_AND_LIVE_BINDING",
       "candidate_proof_class": "STDLIB_SIMPLE_LOCAL",
       "adapter_git_blob_sha": "63cf325320c7b91bf48ea2f2769c999c5a090929",
       "member_material_theorem": {
@@ -198,6 +207,13 @@
         "astra_runtime_git_blob_sha": "dc61f199c064980d475c7a086cd30a4bddef1f60",
         "promoted_executor_git_blob_sha": "bf9d686521bdc3a2d18775d42b64adb287ed8e3a",
         "d_epoch_git_blob_sha": "60cbc536215571fbd7e41b5ce28239ce370120c3"
+      },
+      "provider_theorem": {
+        "status": "VERIFIED_SHARED_PROVIDER_THEOREM",
+        "receipt_path": "canonical/verification/D_FINAL_STDLIB_PROVIDER_THEOREM_20261009_V1.json",
+        "provider_git_blob_sha": "e2d0992f84da629358ae1ee5406c23d5f21c26c2",
+        "registry_git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85",
+        "zero_ambient_launcher_git_blob_sha": "6e687527e9c4da82fb5d974a729aaa263ee73ea8"
       }
     },
     {
