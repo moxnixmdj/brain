@@ -9,6 +9,8 @@ on:
       - "canonical/tests/test_r3_root1_adapter_gap_witness_v1.py"
       - "canonical/tests/test_r3_verification_frontier_repair_reducer_v1.py"
       - "canonical/tests/test_r3_distinguishing_evidence_request_v1.py"
+      - "canonical/runtime/r3_distinguishing_evidence_acquisition_v1.py"
+      - "canonical/tests/test_r3_distinguishing_evidence_acquisition_v1.py"
       - "canonical/tests/test_r3_repair_reduction_scheduler_v1.py"
       - "canonical/runtime/r3_root1_adapter_gap_witness_v1.py"
       - "canonical/runtime/r3_verification_frontier_repair_reducer_v1.py"
@@ -68,6 +70,8 @@ on:
       - "canonical/tests/test_r3_root1_adapter_gap_witness_v1.py"
       - "canonical/tests/test_r3_verification_frontier_repair_reducer_v1.py"
       - "canonical/tests/test_r3_distinguishing_evidence_request_v1.py"
+      - "canonical/runtime/r3_distinguishing_evidence_acquisition_v1.py"
+      - "canonical/tests/test_r3_distinguishing_evidence_acquisition_v1.py"
       - "canonical/tests/test_r3_repair_reduction_scheduler_v1.py"
       - "canonical/runtime/r3_root1_adapter_gap_witness_v1.py"
       - "canonical/runtime/r3_verification_frontier_repair_reducer_v1.py"
@@ -161,6 +165,8 @@ jobs:
         run: python -m unittest canonical.tests.test_r3_verification_frontier_repair_reducer_v1 -v
       - name: Run R3 distinguishing-evidence request compiler suite
         run: python -m unittest canonical.tests.test_r3_distinguishing_evidence_request_v1 -v
+      - name: Run R3 distinguishing-evidence acquisition suite
+        run: python -m unittest canonical.tests.test_r3_distinguishing_evidence_acquisition_v1 -v
       - name: Run R3 repair-reduction scheduler suite
         run: python -m unittest canonical.tests.test_r3_repair_reduction_scheduler_v1 -v
       - name: Run R3/Root1 adapter-gap queue integration suite
