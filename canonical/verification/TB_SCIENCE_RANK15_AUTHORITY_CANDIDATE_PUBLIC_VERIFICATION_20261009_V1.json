@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK15_AUTHORITY_CANDIDATE_PUBLIC_VERIFICATION_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__RANK15_CANDIDATE__V19_LEDGER__V12_CLOSURE__FROZEN_REQUIREMENTS_REPAIR__ZERO_EXPOSURE",
+  "candidate": {
+    "path": "canonical/governance/TB_SCIENCE_RANK15_ONE_SLOT_EXECUTION_AUTHORITY_CANDIDATE_20261009_V1.json",
+    "git_blob_sha": "88ffb2b0117a9fb7f8885118171b53b187bc581d"
+  },
+  "intent": {
+    "path": "canonical/action_intents/ACTION_INTENT_TB_SCIENCE_RANK15_20261009_V1.json",
+    "git_blob_sha": "ce2c7aeb17c450e17b02a3b616ce8a8374edabe4"
+  },
+  "current_ledger_v19_git_blob_sha": "c9b887ac4fb57046be666492748d25ca96056378",
+  "v12_closure_git_blob_sha": "8008b1e2382c1235e3b788e0f8d4ab9a48487409",
+  "v12_closure_verification_git_blob_sha": "2f604985baa7f88c61b23958d59dc2ecd4c0990b",
+  "frozen_requirements_repair_verification_git_blob_sha": "d60c84676de7dfa090810b3b65132d324ac49f38",
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify-tbscience-r15-authority-v1-20261009",
+    "head_sha": "ab64adfcc2461677fc0411b7bb6fb06e39d90e3e",
+    "workflow_run_id": 37888284764,
+    "workflow_job_id": 113683148385,
+    "artifact_id": 11596963685,
+    "artifact_zip_sha256": "38c8204db4a2c01f31184e129181df37ce98dea7a40b7b020680db5a3fd10612",
+    "conclusion": "success",
+    "benchmark_task_exposure": 0,
+    "benchmark_trials_executed": 0
+  },
+  "verified_state": {
+    "candidate_execution_authority": false,
+    "candidate_task_read_authority": false,
+    "candidate_task_start_authority": false,
+    "slot_unconsumed": true,
+    "rank15_task_started": false,
+    "rank15_execution_authority_consumed": false,
+    "rank15_benchmark_trials_consumed": 0,
+    "v12_file_count": 15,
+    "v12_exact_blob_matches": 15,
+    "v12_mismatches": 0,
+    "frozen_requirements_repair": "26_OF_26_PASS__PY_COMPILE_PASS",
+    "later_requirement_redeclaration_authority": false,
+    "candidate_cover_outside_frozen_set_fail_closed": true
+  },
+  "benchmark_task_exposure": 0,
+  "benchmark_trials_executed": 0,
+  "execution_authority": false,
+  "task_read_authority": false,
+  "acceptance_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
