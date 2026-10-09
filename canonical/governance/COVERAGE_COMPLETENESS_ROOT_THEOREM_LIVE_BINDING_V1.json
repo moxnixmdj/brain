@@ -102,9 +102,9 @@
   },
   "root_certificate_registry_precondition": {
     "registry_path": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_CERTIFICATE_REGISTRY_V1.json",
-    "registry_git_blob_sha": "77c5f8e2d1b63838c63baa1db9fb9954a02636f3",
+    "registry_git_blob_sha": "65eeca96cdf48c0d4bc404efb3b705c348e7cd75",
     "current_pointer_path": "canonical/governance/CURRENT_COVERAGE_COMPLETENESS_ROOT_CERTIFICATES.json",
-    "current_pointer_git_blob_sha": "eace743c6cb2399dd1c1bc35d8678bba8a74d415",
+    "current_pointer_git_blob_sha": "188f8b17fdc3fea0bc3dfd28f0ed2f31bc727800",
     "guard_path": "canonical/runtime/coverage_root_certificate_registry_guard_v1.py",
     "guard_git_blob_sha": "508df599e111e9aec47cbd175ce4f760299da786",
     "tests_path": "canonical/tests/test_coverage_root_certificate_registry_guard_v1.py",
@@ -112,6 +112,14 @@
     "active_claim": "fda1409a94d983f61888f08f3df99cad50dc36edc3f5feb01b6df20e31156eaa",
     "role": "R4_PROOF_CLOSURE_REQUIRES_EXACT_FROZEN_CLAIM_BEFORE_ANY_PROVED_CC_ROOT_SLOT",
     "current_root_certificates_proved": 0,
-    "r4_proof_closure": false
+    "r4_proof_closure": false,
+    "current_root_falsifications": {
+      "CC_R3_TERMINAL_CLOSURE_V1": {
+        "path": "canonical/verification/CC_R3_COUNTEREXAMPLE_20261009_V1.json",
+        "git_blob_sha": "bf6e8ef01894350c5d51abe53038cea315984ea3",
+        "claim_id": "fda1409a94d983f61888f08f3df99cad50dc36edc3f5feb01b6df20e31156eaa",
+        "u_empty": false
+      }
+    }
   }
 }
