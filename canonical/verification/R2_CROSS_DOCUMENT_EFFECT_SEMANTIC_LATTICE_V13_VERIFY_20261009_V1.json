@@ -1,0 +1,118 @@
+{
+  "schema": "PROJECT_BRAIN_R2_CROSS_DOCUMENT_EFFECT_SEMANTIC_LATTICE_V13_VERIFY_V1",
+  "date": "2026-10-09",
+  "branch": "r2-effect-lattice-v13-current2",
+  "base_main_sha": "ffc31b30b9b6d83b9d6e4d236947c45654bb2315",
+  "capability": "QUERY_RELATIVE_MONOTONE_DOCUMENT_EFFECT_SEMANTIC_LATTICE",
+  "status": "VERIFIED_ISOLATED_FULL_STACK__133_OF_133_PASS",
+  "theorem": {
+    "initial_state": "EVERY_UNPROVED_QUERY_RELEVANT_EFFECT_DIMENSION_IS_TOP",
+    "refinement_law": "ONLY_INDEPENDENTLY_SOURCE_ALIGNED_PROOFS_MAY_SHRINK_TOP",
+    "rejection_law": "ABSENT_OR_REJECTED_CLAIMS_NEVER_NARROW_THE_LATTICE",
+    "inventory_law": "CERTIFIED_EFFECT_ID_INVENTORY_REFINES_ONLY_THE_ID_SET;EACH_INVENTORIED_ID_REMAINS_RELATION_TOP_UNTIL_PROVED",
+    "relation_law": "CERTIFIED_DOCUMENT_EFFECT_RELATION_BINDS_ID_TARGET_CLASS_VALUE_CONDITIONS_VALIDITY_SUPERSESSION_AND_SOURCE_DERIVED_LOCATOR",
+    "execution_law": "FINITE_EFFECT_WORLDS_ARE_COMPILED_ONLY_AFTER_EVERY_QUERY_RELEVANT_RELATION_TOP_IS_CLOSED",
+    "answer_law": "RETURN_VALUE_ONLY_IF_INDEPENDENT_FINITE_WORLDSET_RECOMPUTATION_CLOSES"
+  },
+  "exact_changed_blobs": {
+    "canonical/runtime/certified_document_effect_relation_v1.py": "944033c65c183975e347990bcd3d3b9720981d32",
+    "canonical/runtime/cross_document_effect_semantic_lattice_v1.py": "dd40c70e52230f1ebbaa3bc7fae12191c45c5508",
+    "canonical/runtime/cross_document_effect_semantic_lattice_verify_v1.py": "7835fa23b1b9330d077059e59796c0179f0bcf64",
+    "canonical/runtime/r2_cross_document_effect_semantic_lattice_direct_adequacy_v1.py": "02067a5995486be87bf66d7a9112b1043c2f5534",
+    "canonical/runtime/r2_direct_end_to_end_adequacy_v13.py": "6784e7274d640c7f75659d4dab9237188ea784d1",
+    "canonical/runtime/source_aligned_semantic_proof_v8.py": "d6987bfcaf2dcfb4bcbb95862dd5f5cbf877b568",
+    "canonical/runtime/general_adequate_decision_fixed_point_v2.py": "9209c70d2049ebc6e183cc4e500b3c46e95af4c1",
+    "canonical/tests/test_cross_document_effect_semantic_lattice_v1.py": "74ef7bccecda130462fb5cdac061ec5fd19ee21c",
+    "canonical/tests/test_general_adequate_decision_fixed_point_v2.py": "f25dbd263f8341a1ef2879f7841cb7af0531adf0",
+    "canonical/tests/test_r2_cross_document_effect_semantic_lattice_direct_v1.py": "7126bf4e82cef804dfba7fb3a2df510166d9eb7d",
+    "canonical/tests/test_r2_direct_end_to_end_adequacy_v13.py": "9b9bcf9ab68b4051fcd80cd156ea5fb953c44493",
+    "canonical/tests/test_source_aligned_semantic_proof_v8.py": "8a46d26374fa3ea30443053a10686a01cade7d0f"
+  },
+  "isolated_verification": {
+    "sprite": "brain-r2-grounded-frontier-verify-20261008",
+    "core_effect_calculus": {
+      "passed": 6,
+      "failed": 0
+    },
+    "typed_effect_direct_route": {
+      "passed": 4,
+      "failed": 0
+    },
+    "correlated_effect_worldset": {
+      "passed": 11,
+      "failed": 0
+    },
+    "source_aligned_v7_scope_inventory": {
+      "passed": 10,
+      "failed": 0
+    },
+    "residual_top_frontier": {
+      "passed": 8,
+      "failed": 0
+    },
+    "byte_source_coverage_gate": {
+      "passed": 12,
+      "failed": 0
+    },
+    "combined_source_residual_frontier": {
+      "passed": 7,
+      "failed": 0
+    },
+    "source_aligned_v8_effect_relation": {
+      "passed": 8,
+      "failed": 0
+    },
+    "semantic_lattice": {
+      "passed": 10,
+      "failed": 0
+    },
+    "semantic_lattice_direct_route": {
+      "passed": 4,
+      "failed": 0
+    },
+    "v10_worldset_route": {
+      "passed": 7,
+      "failed": 0
+    },
+    "v11_residual_route": {
+      "passed": 8,
+      "failed": 0
+    },
+    "v12_combined_route": {
+      "passed": 10,
+      "failed": 0
+    },
+    "v13_router": {
+      "passed": 3,
+      "failed": 0
+    },
+    "fixed_point_v13": {
+      "passed": 25,
+      "failed": 0
+    },
+    "total_passed": 133,
+    "total_failed": 0
+  },
+  "cleanroom_boundaries": {
+    "route_harnesses": "HISTORICAL_DELEGATED_FALLBACK_ROUTER_ONLY_STUBBED_WHERE_OLD_SPRITE_LACKED_ANCESTOR_MODULES",
+    "fixed_point_harness": "CONTROLLER_AND_REPAIR_SURFACES_ALREADY_MOCKED_BY_UNIT_SUITE_PLUS_V12_DELEGATED_FALLBACK_STUBBED;REAL_V13_AND_REAL_LATTICE_ROUTE_LOADED"
+  },
+  "nonclaims": [
+    "NO_GLOBAL_ARBITRARY_NATURAL_LANGUAGE_SEMANTIC_COMPLETENESS",
+    "NO_UNPROVED_PROSE_EFFECT_RELATION",
+    "NO_IMPLICIT_PRECEDENCE_INFERENCE",
+    "NO_EXTERNAL_WORLD_TRUTH",
+    "NO_TERMINAL_CREDIT_FROM_TEST_PASS_COUNT"
+  ],
+  "architectural_result": [
+    "TRUSTED_HYPOTHESIS_COMPLETENESS_REPLACED_BY_TOP_TO_FINITE_MONOTONE_REFINEMENT",
+    "V7_INVENTORY_AND_V8_COMPLETE_EFFECT_RELATION_PROOFS_COMPOSE_IN_ONE_QUERY_RELATIVE_LATTICE",
+    "REJECTED_SEMANTIC_PROPOSALS_CANNOT_NARROW_TOP",
+    "OPEN_TOP_DIMENSIONS_REACH_R2_RESOLVER_AS_EXACT_NON_AUTHORITATIVE_PROOF_OBLIGATIONS"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
