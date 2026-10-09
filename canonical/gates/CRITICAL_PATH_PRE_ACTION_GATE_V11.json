@@ -31,7 +31,8 @@
     "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
     "ACTION_BEHAVIORAL_CONTRACT",
     "canonical/governance/PREQUALIFICATION_FAILURE_IMMUNITY_V1.json",
-    "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json"
+    "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
+    "external_side_effect_admission_receipt_when_applicable"
   ],
   "checks": [
     {
@@ -398,6 +399,11 @@
       "id": "USER_INTERVENTION_MINIMAL",
       "question": "If user action is requested, is it the smallest genuine external authority boundary?",
       "required": true
+    },
+    {
+      "id": "EXTERNAL_SIDE_EFFECT_DEDUP_AND_MINIMUM_CUT",
+      "question": "Before any consequential external side effect such as sending a message, submitting a form, mutating an API, or requesting owner evaluation, did canonical prior-action search show no equivalent unresolved acquisition lease, or did a verified material delta reopen it, and is the proposed side effect selected by the exact minimum-reality cut?",
+      "required": true
     }
   ],
   "recursive_obs": {
@@ -485,7 +491,9 @@
     "ACTION_HAS_NO_CURRENT_CANONICAL_NECESSITY_PROOF",
     "INFRASTRUCTURE_WORK_WHILE_EXISTING_ROUTE_CAN_EXECUTE_REAL_MISSION",
     "ACTIVITY_METRIC_SUBSTITUTED_FOR_CAPABILITY_METRIC",
-    "CONSEQUENTIAL_OPERATOR_DECISION_WITHOUT_CURRENT_BASE_OBS"
+    "CONSEQUENTIAL_OPERATOR_DECISION_WITHOUT_CURRENT_BASE_OBS",
+    "DUPLICATE_EXTERNAL_SIDE_EFFECT_WHILE_PRIOR_ACQUISITION_PENDING_WITHOUT_VERIFIED_MATERIAL_DELTA",
+    "EXTERNAL_SIDE_EFFECT_NOT_IN_EXACT_MINIMUM_REALITY_CUT"
   ],
   "on_abort": "REFRESH_LIVE_CANONICAL_STATE__INVALIDATE_AFFECTED_OBS_LAYERS__DELETE_OR_SWITCH_ROUTE__UPDATE_REAL_OUTPUT_SCOREBOARD__EXECUTE_SHORTEST_SURVIVING_PATH",
   "behavioral_contract_control": {
@@ -504,5 +512,26 @@
     "reducer": "canonical/runtime/execution_authority_reducer.py",
     "verification": "canonical/verification/EXECUTION_AUTHORITY_CARRIER_BINDING_VERIFICATION_20261002_V1.json",
     "fail_closed": true
+  },
+  "external_side_effect_control": {
+    "required_before": [
+      "EMAIL_OR_MESSAGE_SEND",
+      "EXTERNAL_API_MUTATION",
+      "OWNER_OR_PROVIDER_CONTACT_REQUEST",
+      "FORM_SUBMISSION",
+      "OTHER_CONSEQUENTIAL_EXTERNAL_SIDE_EFFECT"
+    ],
+    "runtime": "canonical/runtime/external_side_effect_admission_v1.py",
+    "blocker_lease_identity": [
+      "canonical_generation",
+      "capability_target",
+      "causal_blocker"
+    ],
+    "recipient_wording_or_action_label_changes_lease": false,
+    "unresolved_prior_acquisition_blocks_duplicate": true,
+    "verified_policy_changing_material_delta_required_to_reopen": true,
+    "exact_minimum_reality_cut_membership_required": true,
+    "post_hoc_admission_receipt_valid": false,
+    "fail_closed_on_missing_or_unknown": true
   }
 }
