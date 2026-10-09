@@ -196,19 +196,29 @@ class BoundMaterialCompilerV2Tests(unittest.TestCase):
                 (root / "canonical/runtime" / name).write_text(
                     "VALUE=1\n", encoding="utf-8"
                 )
-            (root / "canonical/runtime/bound_capabilities/loader_patterns.py").write_text(
+            (root / "canonical/runtime/goal_compiler.py").write_text(
                 "import importlib.util\n"
                 "from pathlib import Path\n"
                 "def _load_sibling_runtime_module(filename, module_name):\n"
-                "    path=Path(__file__).resolve().parents[1]/filename\n"
+                "    path=Path(__file__).resolve().with_name(filename)\n"
                 "    return importlib.util.spec_from_file_location(module_name,path)\n"
                 "def _load_from_runtime_dir(runtime_dir):\n"
                 "    path=Path(runtime_dir)/'helper_c.py'\n"
                 "    return importlib.util.spec_from_file_location('c',path)\n"
-                "def run(args, root):\n"
+                "def use(root):\n"
                 "    _load_sibling_runtime_module('helper_a.py','a')\n"
                 "    _load_sibling_runtime_module('helper_b.py','b')\n"
                 "    return _load_from_runtime_dir(str(Path(root)/'canonical'/'runtime'))\n",
+                encoding="utf-8",
+            )
+            (root / "canonical/runtime/bound_capabilities/loader_patterns.py").write_text(
+                "import importlib.util\n"
+                "from pathlib import Path\n"
+                "def _load_runtime_module(root, filename, module_name):\n"
+                "    path=Path(root)/'canonical'/'runtime'/filename\n"
+                "    return importlib.util.spec_from_file_location(module_name,path)\n"
+                "def run(args, root):\n"
+                "    return _load_runtime_module(root,'goal_compiler.py','g')\n",
                 encoding="utf-8",
             )
             out = compile_candidate("cap.test", repo_root=root)
@@ -219,6 +229,7 @@ class BoundMaterialCompilerV2Tests(unittest.TestCase):
             targets = set(out["member"]["dynamic_literal_targets"])
             self.assertTrue(
                 {
+                    "canonical/runtime/goal_compiler.py",
                     "canonical/runtime/helper_a.py",
                     "canonical/runtime/helper_b.py",
                     "canonical/runtime/helper_c.py",
