@@ -38,7 +38,7 @@ _TLAC_FUNC_GSIB = re.compile(
     re.I,
 )
 
-_CCOB_STRUCT_PERCENT = re.compile(r"\b2\.5(?:%|\s+percent)\b", re.I)
+_CCOB_STRUCT_PERCENT = re.compile(r"(?<!\w)2\.5(?:%|\s+percent\b)", re.I)
 _CCOB_STRUCT_CET1 = re.compile(r"\b(?:CET1|Common\s+Equity\s+Tier\s+1)\b", re.I)
 _CCOB_STRUCT_ABOVE = re.compile(
     r"\babove\s+(?:the\s+)?regulatory\s+minimum(?:\s+capital\s+requirement)?s?\b",
