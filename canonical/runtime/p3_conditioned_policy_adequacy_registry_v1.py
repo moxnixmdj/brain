@@ -32,6 +32,23 @@ _REGISTRY = {
         ),
         "binding_blob_sha": "7d2322ff8205e98752c4cd2674215f93c145305c",
     },
+    "BRAIN_INDEPENDENT_ACCEPTANCE_MODEL_TYPED_PLAN_V1": {
+        "condition": {
+            "op": "AND",
+            "args": [
+                {"op": "ATOM", "id": "SPEC_ACCEPT_TYPED_SEMANTICS_BOUND_V1"},
+                {"op": "ATOM", "id": "SPEC_ACCEPT_SUPPORTED_TRANSFORM_KINDS_ONLY_V1"},
+                {"op": "ATOM", "id": "SPEC_ACCEPT_FAILURE_MODE_COMPLETENESS_V1"},
+                {"op": "ATOM", "id": "SPEC_ACCEPT_DEPENDENCY_PROVENANCE_TRUTH_V1"},
+                {"op": "ATOM", "id": "SPEC_ACCEPT_NO_HIDDEN_VERIFIER_ACCESS_V1"},
+            ],
+        },
+        "binding_path": (
+            "canonical/governance/"
+            "CURSORBENCH_TYPED_ACCEPTANCE_PLAN_POLICY_ADEQUACY_BINDING_20261009_V1.json"
+        ),
+        "binding_blob_sha": "f385b555064e546e90c04c285053c9717014fa8a",
+    },
 }
 
 _BINDING_KEYS = (
