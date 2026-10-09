@@ -534,6 +534,139 @@ class GeneralAdequateDecisionFixedPointV2Tests(unittest.TestCase):
         self.assertEqual(record["reason"], "REQUEST_PATCH_REQUIRED")
         self.assertFalse(record["policy_adequacy_authority"])
 
+    @patch.object(fixed, "_owned_verified_capability_frontier")
+    @patch.object(fixed, "repair_basis_discriminator")
+    @patch.object(fixed, "repair_existing_adequacy")
+    @patch.object(fixed, "run_controller")
+    def test_verified_owned_frontier_change_retries_unchanged_request(
+        self, controller, existing_repair, basis_repair, frontier
+    ):
+        opened = {
+            **self._open("OPEN__POSITIVE_POLICY_ADEQUACY_CERTIFICATE_REQUIRED"),
+            "next_required_edge": "AUTHENTICATED_POSITIVE_POLICY_ADEQUACY_CERTIFICATE",
+            "next_policy_request": {
+                "schema": "PROJECT_BRAIN_MINIMUM_POLICY_REPAIR_REQUEST_V1",
+                "required_artifact": "POSITIVE_POLICY_ADEQUACY_CERTIFICATE",
+                "selected_policy_id": "policy.p",
+                "policy_adequacy_authority": False,
+            },
+        }
+        controller.side_effect = [opened, self._pass()]
+        existing_repair.return_value = {
+            "pass": False,
+            "status": "UNRESOLVED__NO_NEW_EXISTING_POLICY_ADEQUACY_BINDING_DISCOVERED",
+        }
+        basis_repair.return_value = {
+            "pass": False,
+            "status": "NOT_APPLICABLE__NO_CONFLICT_WITNESS_BASIS_REPAIR",
+        }
+        goal = self._request()["goal"]
+        frontier.side_effect = [
+            {"sha256": "sha256:before", "capability_ids": [], "rows": {}},
+            {
+                "sha256": "sha256:after",
+                "capability_ids": ["auto.test.new"],
+                "rows": {
+                    "auto.test.new": {
+                        "entry_sha256": "sha256:entry",
+                        "independent_verified": True,
+                        "autonomous_acquisition": True,
+                        "origin_goal": goal,
+                    }
+                },
+            },
+        ]
+        expander = Mock(
+            return_value={
+                "source_id": "owned-root1-acquisition",
+                "status": "VERIFIED_AND_PROMOTED",
+            }
+        )
+
+        original = self._request()
+        out = fixed.run(original, capability_expander=expander)
+
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(controller.call_count, 2)
+        self.assertEqual(controller.call_args_list[0].args[0], original)
+        self.assertEqual(controller.call_args_list[1].args[0], original)
+        record = out["r2_fixed_point_trace"][0][
+            "policy_adequacy_capability_expansion"
+        ]
+        self.assertEqual(
+            record["status"],
+            "VERIFIED_OWNED_CAPABILITY_FRONTIER_EXPANDED__RETRY_UNCHANGED_REQUEST",
+        )
+        self.assertEqual(
+            record["verified_goal_bound_capability_additions"],
+            ["auto.test.new"],
+        )
+        self.assertTrue(record["downstream_reverification_required"])
+        self.assertFalse(record["policy_adequacy_authority"])
+
+    @patch.object(fixed, "_owned_verified_capability_frontier")
+    @patch.object(fixed, "repair_basis_discriminator")
+    @patch.object(fixed, "repair_existing_adequacy")
+    @patch.object(fixed, "run_controller")
+    def test_unrelated_frontier_change_does_not_buy_same_request_retry(
+        self, controller, existing_repair, basis_repair, frontier
+    ):
+        opened = {
+            **self._open("OPEN__POSITIVE_POLICY_ADEQUACY_CERTIFICATE_REQUIRED"),
+            "next_required_edge": "AUTHENTICATED_POSITIVE_POLICY_ADEQUACY_CERTIFICATE",
+            "next_policy_request": {
+                "schema": "PROJECT_BRAIN_MINIMUM_POLICY_REPAIR_REQUEST_V1",
+                "required_artifact": "POSITIVE_POLICY_ADEQUACY_CERTIFICATE",
+                "selected_policy_id": "policy.p",
+                "policy_adequacy_authority": False,
+            },
+        }
+        controller.return_value = opened
+        existing_repair.return_value = {
+            "pass": False,
+            "status": "UNRESOLVED__NO_NEW_EXISTING_POLICY_ADEQUACY_BINDING_DISCOVERED",
+        }
+        basis_repair.return_value = {
+            "pass": False,
+            "status": "NOT_APPLICABLE__NO_CONFLICT_WITNESS_BASIS_REPAIR",
+        }
+        frontier.side_effect = [
+            {"sha256": "sha256:before", "capability_ids": [], "rows": {}},
+            {
+                "sha256": "sha256:after",
+                "capability_ids": ["auto.test.other"],
+                "rows": {
+                    "auto.test.other": {
+                        "entry_sha256": "sha256:entry",
+                        "independent_verified": True,
+                        "autonomous_acquisition": True,
+                        "origin_goal": "a different goal",
+                    }
+                },
+            },
+        ]
+        expander = Mock(
+            return_value={
+                "source_id": "owned-root1-acquisition",
+                "status": "VERIFIED_AND_PROMOTED",
+            }
+        )
+
+        out = fixed.run(self._request(), capability_expander=expander)
+
+        self.assertFalse(out["pass"])
+        self.assertEqual(controller.call_count, 1)
+        self.assertEqual(
+            out["r2_fixed_point_status"],
+            "OPEN__R2_EDGE_RESOLVER_UNAVAILABLE",
+        )
+        record = out["r2_fixed_point_trace"][0][
+            "policy_adequacy_capability_expansion"
+        ]
+        self.assertEqual(record["status"], "CANDIDATE_REJECTED")
+        self.assertEqual(record["reason"], "REQUEST_PATCH_REQUIRED")
+        self.assertEqual(record["verified_goal_bound_capability_additions"], [])
+
     @patch.object(fixed, "run_controller")
     def test_provider_pass_claim_cannot_bypass_controller(self, controller):
         controller.return_value = self._open()
