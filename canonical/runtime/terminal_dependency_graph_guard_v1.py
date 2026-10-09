@@ -12,6 +12,11 @@ import json
 from pathlib import Path
 from typing import Any, Mapping, Sequence
 
+from canonical.runtime.executable_refinement_receipt_guard_v1 import (
+    RefinementReceiptFailClosed,
+    validate_receipt as validate_refinement_receipt,
+)
+
 SCHEMA = "PROJECT_BRAIN_CURRENT_TERMINAL_DEPENDENCY_GRAPH_V1"
 RECEIPT_SCHEMA = "PROJECT_BRAIN_TERMINAL_DEPENDENCY_GRAPH_GUARD_RECEIPT_V1"
 LEAF_STATUSES = frozenset(
@@ -170,8 +175,9 @@ def validate_graph(
             return _fail("ROUTE_LIVE_AUTHORITY_STATUS_INVALID", node_id=node_id)
 
         implementation = node.get("implementation")
+        implementation_path: Path | None = None
         if lifecycle != "SPECIFIED":
-            _, reason = _bound_file(
+            implementation_path, reason = _bound_file(
                 implementation, root=root, label=f"{node_id}_IMPLEMENTATION"
             )
             if reason:
@@ -185,18 +191,35 @@ def validate_graph(
             return _fail("ROUTE_REFINEMENT_STATUS_INVALID", node_id=node_id)
 
         cert = refinement.get("certificate")
+        cert_path: Path | None = None
+        cert_obj: Mapping[str, Any] | None = None
         if cert is not None:
-            _, reason = _bound_file(
+            cert_path, reason = _bound_file(
                 cert, root=root, label=f"{node_id}_REFINEMENT_CERTIFICATE"
             )
             if reason:
                 return _fail(reason, node_id=node_id)
+            cert_obj = _load_json(
+                cert_path, label=f"{node_id}_REFINEMENT_CERTIFICATE"
+            )
+            if cert_obj is None:
+                return _fail(
+                    "REFINEMENT_CERTIFICATE_INVALID_JSON", node_id=node_id
+                )
 
         receipt = refinement.get("verification_receipt")
         needs_verified = lifecycle in {"REFINEMENT_VERIFIED", "VERIFIED_LIVE"}
         if needs_verified:
             if refinement_status != "PROVED":
                 return _fail("REFINEMENT_PROOF_REQUIRED", node_id=node_id)
+            if cert_obj is None or cert_path is None:
+                return _fail(
+                    "REFINEMENT_CERTIFICATE_REQUIRED", node_id=node_id
+                )
+            if implementation_path is None or not isinstance(implementation, Mapping):
+                return _fail(
+                    "REFINEMENT_IMPLEMENTATION_REQUIRED", node_id=node_id
+                )
             receipt_path, reason = _bound_file(
                 receipt,
                 root=root,
@@ -209,10 +232,22 @@ def validate_graph(
             )
             if receipt_obj is None:
                 return _fail("REFINEMENT_RECEIPT_INVALID_JSON", node_id=node_id)
-            if receipt_obj.get("subject_id") != node_id:
-                return _fail("REFINEMENT_RECEIPT_SUBJECT_MISMATCH", node_id=node_id)
-            if receipt_obj.get("refinement_verified") is not True:
-                return _fail("REFINEMENT_RECEIPT_NOT_VERIFIED", node_id=node_id)
+            try:
+                validate_refinement_receipt(
+                    receipt_obj,
+                    certificate=cert_obj,
+                    expected_certificate_git_blob_sha=git_blob_sha(cert_path),
+                    expected_concrete_route_git_blob_sha=git_blob_sha(
+                        implementation_path
+                    ),
+                    expected_subject_id=node_id,
+                    repo_root=root,
+                )
+            except RefinementReceiptFailClosed as exc:
+                return _fail(
+                    "REFINEMENT_RECEIPT_INVALID:" + str(exc),
+                    node_id=node_id,
+                )
 
         if node.get("creditable") is True and not needs_verified:
             return _fail("CREDITABLE_ROUTE_REFINEMENT_REQUIRED", node_id=node_id)
