@@ -469,17 +469,24 @@
     "incremental_spend_usd": 0,
     "terminal_credit_delta": 0
   },
-  "current_route_count": 21,
+  "current_route_count": 22,
   "exact_cell_count": 3,
   "route_expansion_note": "THREE_EXACT_CELLS_PLUS_EIGHTEEN_BOUNDED_FAMILIES_ACTIVE",
   "runtime_binding": {
     "path": "canonical/runtime/r2_direct_end_to_end_adequacy_v2.py",
     "git_blob_sha": "9b6170ebaa4136f94fad885f7bc9444a280c58ca"
   },
-  "bounded_family_count": 18,
+  "bounded_family_count": 19,
   "supersedes": {
     "path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V16.json",
     "git_blob_sha": "84ed669325e82cf7cb007d71f5ce66799dd55058",
     "reason": "ADD_VERIFIED_NORMALIZED_FINANCE_IF_THEN_DIRECT_ADEQUACY_FAMILY"
+  },
+  "count_reconciliation": {
+    "route_list_count": 22,
+    "exact_cell_count": 3,
+    "bounded_family_count": 19,
+    "invariant": "current_route_count == exact_cell_count + bounded_family_count == len(current_routes)",
+    "reconciled_from_runtime": "canonical/runtime/r2_direct_end_to_end_adequacy_v2.py"
   }
 }
