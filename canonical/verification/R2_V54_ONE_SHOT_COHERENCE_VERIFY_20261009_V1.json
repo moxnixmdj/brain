@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_R2_V54_ONE_SHOT_COHERENCE_VERIFY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__EXACT_COMPOSED_STATE__44_OF_44__PYCOMPILE_PASS__V1_STABLE_BYTE_REBOUND__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "r2-regcap-matrix-discriminator-compose-20261009",
+    "exact_blobs": {
+      "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json": "cae43342de7e6dac1f76ba4a64fb608d0b5e770c",
+      "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json": "667b356e9ab1e88aa0c00f15ad6f6fbf69c0fdc8",
+      "canonical/governance/CURRENT_ONE_SHOT_REALITY_CLOSURE.json": "762e2b40df81a180e8c83e9cf3ef33930a6579ff",
+      "canonical/runtime/one_shot_verified_closure_v1.py": "117d85bec1e5fb49428271aa9883e89d0ef1aa0a",
+      "canonical/runtime/one_shot_reality_closure_v2.py": "e4eb89ab3872a79837afd0e2a4bbc3f777b7a807",
+      "canonical/runtime/regcap_candidate_ambiguity_control_v1.py": "72a670a8a417afeccfa6fca8a50917265b00bc5c",
+      "canonical/tests/test_one_shot_verified_closure_v1.py": "6bc42ae1a10c1ceb8acee4de7072ae72b8403d92",
+      "canonical/tests/test_current_terminal_authority_r2_reconciliation_v1.py": "83be3f9213e5cc704fc6fa8f82022a137eab8b5c",
+      "canonical/tests/test_current_one_shot_pointer_coherence_v1.py": "a381831bcc5010ce6d4c2e62e7787091384cdd91",
+      "canonical/governance/R2_REGCAP_CANDIDATE_AMBIGUITY_CONTROL_ACTIVATION_20261009_V2.json": "24df5284c37477da65b36978ad91939d045eb7af"
+    }
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "name": "brain-live-integrated-v1-run-20261008",
+    "sprite_id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "workspace": "/home/sprite/verify-strict-3411-hardened",
+    "log_sha256": "035f6aecb5de1f76418769ec7586a74a804f22892172b3158f104bbbbf49975c"
+  },
+  "verification": {
+    "py_compile": "PASS",
+    "tests_run": 44,
+    "failures": 0,
+    "errors": 0,
+    "overall_rc": 0,
+    "suites": [
+      "canonical.tests.test_one_shot_verified_closure_v1",
+      "canonical.tests.test_one_shot_reality_closure_v2",
+      "canonical.tests.test_current_terminal_authority_r2_reconciliation_v1",
+      "canonical.tests.test_current_one_shot_pointer_coherence_v1"
+    ]
+  },
+  "proved": [
+    "ONE_SHOT_V1_STABLE_BYTE_BINDING_MATCHES_THE_CURRENT_VERIFIED_RUNTIME",
+    "SCALAR_AND_LIST_R2_HARD_FRONTIER_SHAPES_ARE_PRESERVED",
+    "V2_REMAINS_COMPATIBLE_WITH_THE_REBOUND_V1_RUNTIME",
+    "CURRENT_R2_V54_AND_TERMINAL_REVISION_94_ARE_COHERENT",
+    "DYNAMIC_ONE_SHOT_PROJECTION_RESOLVES_CURRENT_R2_AND_TERMINAL_EXACTLY",
+    "REGCAP_BOUND_THREE_RIVAL_DISCRIMINATOR_POLICY_REMAINS_ONE_OBSERVATION_WITHOUT_PREMATURE_IDENTITY",
+    "R2_PRIMARY_INTERNAL_UNSOLVED_COUNT_REMAINS_ONE",
+    "TERMINAL_REMAINS_FALSE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
