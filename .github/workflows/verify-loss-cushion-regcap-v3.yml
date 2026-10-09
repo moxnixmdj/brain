@@ -1,0 +1,19 @@
+name: verify-loss-cushion-regcap-v3
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/runtime/loss_absorbing_cushion_regcap_grounding_v3.py
+      - canonical/tests/test_loss_absorbing_cushion_regcap_v3_identity.py
+      - .github/workflows/verify-loss-cushion-regcap-v3.yml
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m unittest canonical.tests.test_loss_absorbing_cushion_regcap_v3_identity -v
