@@ -19,10 +19,13 @@ from typing import Any, Dict, Iterable, Mapping, Optional
 
 ROOTS = ("R1", "R2", "R3", "R4")
 
-from canonical.runtime.coverage_root_certificate_registry_guard_v1 import validate as validate_root_registry
+from canonical.runtime.coverage_root_claim_registry_guard_v2 import (
+    find_exact_claim,
+    validate as validate_claim_registry,
+)
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-ROOT_REGISTRY_PATH = REPO_ROOT / "canonical/governance/COVERAGE_COMPLETENESS_ROOT_CERTIFICATE_REGISTRY_V1.json"
+ROOT_REGISTRY_PATH = REPO_ROOT / "canonical/governance/COVERAGE_COMPLETENESS_CLAIM_CERTIFICATE_REGISTRY_V2.json"
 MISSION_PATH = REPO_ROOT / "canonical/governance/CURRENT_MISSION_OBJECTIVE.json"
 
 BINDING_FIELDS = (
@@ -77,15 +80,23 @@ def _git_blob_sha(path: Path) -> str:
     return sha1(header + payload).hexdigest()
 
 
-def evaluate_canonical_registry_authority() -> Dict[str, Any]:
+def evaluate_canonical_registry_authority(data: Mapping[str, Any]) -> Dict[str, Any]:
+    expected_binding = data.get("expected_binding")
+    if _binding_key(expected_binding) is None:
+        return {
+            "status": "UNKNOWN_FAIL_CLOSED",
+            "authorized": None,
+            "error": "EXPECTED_BINDING_MISSING_OR_INVALID",
+            "terminal_credit": 0,
+        }
+
     try:
         registry = json.loads(ROOT_REGISTRY_PATH.read_text(encoding="utf-8"))
         mission_pointer = json.loads(MISSION_PATH.read_text(encoding="utf-8"))
         authority_rel = (mission_pointer.get("authoritative_source") or {}).get("path")
         if not isinstance(authority_rel, str) or not authority_rel:
             raise ValueError("MISSION_AUTHORITY_PATH_MISSING")
-        authority_path = REPO_ROOT / authority_rel
-        mission_authority_sha = _git_blob_sha(authority_path)
+        mission_authority_sha = _git_blob_sha(REPO_ROOT / authority_rel)
     except (OSError, json.JSONDecodeError, ValueError) as exc:
         return {
             "status": "UNKNOWN_FAIL_CLOSED",
@@ -94,71 +105,48 @@ def evaluate_canonical_registry_authority() -> Dict[str, Any]:
             "terminal_credit": 0,
         }
 
-    checked = validate_root_registry(
+    checked = validate_claim_registry(
         registry,
         current_mission_pointer=mission_pointer,
         current_mission_authority_blob_sha=mission_authority_sha,
+        repo_root=REPO_ROOT,
     )
-    if checked["pass"]:
-        for slot in registry.get("certificate_slots", []):
-            if slot.get("status") != "PROVED_CURRENT":
-                continue
-            for field in ("certificate", "independent_verification"):
-                ref = slot.get(field) or {}
-                rel = ref.get("path")
-                claimed_sha = ref.get("git_blob_sha")
-                if (
-                    not isinstance(rel, str)
-                    or rel.startswith("/")
-                    or ".." in Path(rel).parts
-                    or not isinstance(claimed_sha, str)
-                ):
-                    checked["errors"].append(
-                        f"PROVED_SLOT_{field.upper()}_PATH_OR_SHA_INVALID:{slot.get('root_id')}"
-                    )
-                    continue
-                target = REPO_ROOT / rel
-                try:
-                    actual_sha = _git_blob_sha(target)
-                except OSError:
-                    checked["errors"].append(
-                        f"PROVED_SLOT_{field.upper()}_FILE_MISSING:{slot.get('root_id')}"
-                    )
-                    continue
-                if actual_sha != claimed_sha:
-                    checked["errors"].append(
-                        f"PROVED_SLOT_{field.upper()}_CONTENT_ADDRESS_MISMATCH:{slot.get('root_id')}"
-                    )
-        if checked["errors"]:
-            checked["pass"] = False
-            checked["status"] = "FAIL_CLOSED"
-            checked["r4_proof_closure"] = False
     if not checked["pass"]:
         return {
-            "status": "R4_CANONICAL_REGISTRY_INVALID",
+            "status": "R4_CANONICAL_CLAIM_REGISTRY_INVALID",
             "authorized": False,
             "registry": checked,
             "terminal_credit": 0,
         }
-    if not checked["r4_proof_closure"]:
+
+    claim = find_exact_claim(checked, expected_binding)
+    if claim is None:
         return {
-            "status": "R4_CANONICAL_ROOT_CERTIFICATES_OPEN",
+            "status": "R4_CLAIM_NOT_REGISTERED",
             "authorized": False,
+            "registry": checked,
+            "terminal_credit": 0,
+        }
+    if not claim["r4_proof_closure"]:
+        return {
+            "status": "R4_CLAIM_ROOT_CERTIFICATES_OPEN",
+            "authorized": False,
+            "claim": claim,
             "registry": checked,
             "terminal_credit": 0,
         }
     return {
-        "status": "PASS_CANONICAL_ROOT_CERTIFICATE_AUTHORITY",
+        "status": "PASS_CLAIM_SCOPED_ROOT_CERTIFICATE_AUTHORITY",
         "authorized": True,
+        "claim": claim,
         "registry": checked,
         "terminal_credit": 0,
     }
 
-
 def _effective_r4(value: Any, data: Mapping[str, Any]) -> Optional[bool]:
     trust = _tri(value)
     coherent = evaluate_binding_coherence(data)["coherent"]
-    registry = evaluate_canonical_registry_authority()["authorized"]
+    registry = evaluate_canonical_registry_authority(data)["authorized"]
     if trust is False or coherent is False or registry is False:
         return False
     if trust is None or coherent is None or registry is None:
