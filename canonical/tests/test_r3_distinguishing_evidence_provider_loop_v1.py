@@ -10,6 +10,10 @@ from canonical.runtime import r3_improvement_queue_driver_v1 as driver
 from canonical.runtime import unified_cognitive_fabric_v1 as fabric
 
 
+REQUEST_SHA = "sha256:" + "a" * 64
+PROOF_SHA = "sha256:" + "b" * 64
+
+
 def work() -> dict:
     return {
         "work_id": "frontier",
@@ -30,14 +34,14 @@ def work() -> dict:
     }
 
 
-def request(sha_char: str = "a") -> dict:
+def evidence_request() -> dict:
     return {
         "schema": "PROJECT_BRAIN_R3_DISTINGUISHING_EVIDENCE_REQUEST_V1",
         "status": "PASS__MINIMUM_STRUCTURAL_DISTINGUISHING_EVIDENCE_REQUEST_READY",
         "pass": True,
-        "request_sha256": "sha256:" + sha_char * 64,
-        "proof_capsule_sha256": "sha256:" + "p" * 64,
-        "replay_capsule_sha256": "sha256:" + "r" * 64,
+        "request_sha256": REQUEST_SHA,
+        "proof_capsule_sha256": PROOF_SHA,
+        "replay_capsule_sha256": None,
         "candidate_evidence_bundles": [
             {
                 "route": "CHECKPOINTED_VERIFIED_EXECUTION",
@@ -52,33 +56,68 @@ def request(sha_char: str = "a") -> dict:
     }
 
 
-def reduction(sha_char: str = "a", *, evidence_only: bool = True) -> dict:
+def reduction() -> dict:
     return {
         "pass": True,
         "status": "PASS__VERIFICATION_FRONTIER_REPAIR_CLASSES_REDUCED",
-        "admissible_repair_classes": (
-            ["NEW_DISTINGUISHING_EVIDENCE"]
-            if evidence_only
-            else [
-                "VERIFIER_PRESERVING_SUCCESS_ADAPTER",
-                "INDEPENDENT_READONLY_SUCCESS_VERIFIER",
-                "NEW_DISTINGUISHING_EVIDENCE",
-            ]
-        ),
+        "admissible_repair_classes": ["NEW_DISTINGUISHING_EVIDENCE"],
         "preferred_repair_order": ["NEW_DISTINGUISHING_EVIDENCE"],
-        "must_acquire_new_distinguishing_evidence": evidence_only,
-        "distinguishing_evidence_request": (
-            request(sha_char) if evidence_only else None
-        ),
+        "must_acquire_new_distinguishing_evidence": True,
+        "distinguishing_evidence_request": evidence_request(),
     }
 
 
-def receipt(request_sha: str) -> dict:
+def proof_context() -> dict:
+    return {
+        "observation_id": "obs",
+        "proof_capsule_sha256": PROOF_SHA,
+        "material": {
+            "source_schema": "TEST_SUCCESS",
+            "source_status": "PASS",
+            "task_id": "task",
+            "selected_plan": ["cap"],
+            "verified_target_effects": ["DONE"],
+            "controller_checkpoint": {"path": None, "plan_sha256": None},
+            "execution": [
+                {
+                    "capability_id": "cap",
+                    "pass": True,
+                    "status": "PASS",
+                    "composition_capsule_head_hash": "c" * 64,
+                }
+            ],
+            "cognition_dependency_class": None,
+            "model_dependency_count": 0,
+            "semantic_acceptance_complete": False,
+            "raw_goal_sha256": None,
+            "raw_task_contract_sha256": None,
+            "raw_acceptance_obligation_count": None,
+            "accepted_raw_obligation_ids": [],
+            "compiled_capability_id": None,
+            "raw_goal_acceptance": None,
+        },
+    }
+
+
+def receipt(*, extra_evidence: dict | None = None) -> dict:
+    candidate = {
+        "controller_checkpoint": {
+            "path": "canonical/astra_runtime/tmp/test-checkpoint.json",
+            "plan_sha256": "d" * 64,
+        }
+    }
+    if extra_evidence:
+        candidate.update(extra_evidence)
     out = {
+        "schema": driver.DISTINGUISHING_EVIDENCE_RECEIPT_SCHEMA,
         "pass": True,
-        "request_sha256": request_sha,
+        "request_sha256": REQUEST_SHA,
+        "route": "CHECKPOINTED_VERIFIED_EXECUTION",
+        "candidate_evidence": candidate,
         "acquisition_or_experiment_attempted": True,
         "evidence_trace_sha256": "sha256:" + "e" * 64,
+        "runtime_source_mutated": False,
+        "r3_learning_state_mutated": False,
         "verification_authority_mutated": False,
         "adapter_frontier_mutated": False,
         "provider_truth_authority": False,
@@ -102,7 +141,7 @@ class R3DistinguishingEvidenceProviderLoopV1Tests(unittest.TestCase):
         learning._write_state(state, path)
         return path
 
-    def _hash_patches(self):
+    def _authority_patches(self):
         return (
             mock.patch.object(
                 driver,
@@ -121,77 +160,85 @@ class R3DistinguishingEvidenceProviderLoopV1Tests(unittest.TestCase):
             ),
             mock.patch.object(
                 driver,
-                "_frontier_acquisition_attempt_consumed",
-                return_value=False,
+                "_frontier_sha256",
+                return_value="sha256:" + "4" * 64,
             ),
-            mock.patch.object(driver, "_record_frontier_acquisition_attempt"),
+            mock.patch.object(
+                learning,
+                "get_success_proof_context",
+                return_value=proof_context(),
+            ),
+            mock.patch.object(
+                learning,
+                "get_success_replay_context",
+                side_effect=learning.SelfImprovementError("NO_REPLAY"),
+            ),
         )
 
-    def test_provider_receipt_without_observed_reduction_change_fails_closed(self):
-        before = reduction("a")
-        provider = mock.Mock(
-            return_value=receipt(before["distinguishing_evidence_request"]["request_sha256"])
-        )
-        patches = self._hash_patches()
-        with patches[0], patches[1], patches[2], patches[3], patches[4], mock.patch.object(
-            driver,
-            "_current_frontier_repair_reduction",
-            return_value=before,
-        ):
+    def test_candidate_bundle_reingests_through_normal_success_pipeline(self):
+        path = self._state()
+        provider = mock.Mock(return_value=receipt())
+        patches = self._authority_patches()
+        with patches[0], patches[1], patches[2], patches[3], patches[4], patches[5]:
             out = driver._execute_distinguishing_evidence_acquisition(
                 work(),
-                state_path=self._state(),
+                state_path=path,
                 repo_root=driver.ROOT,
                 provider=provider,
                 provider_id="TEST_EVIDENCE_PROVIDER",
-                repair_reduction=before,
+                repair_reduction=reduction(),
+            )
+        self.assertTrue(out["pass"], out)
+        self.assertTrue(out["progress"], out)
+        self.assertTrue(out["candidate_only"])
+        self.assertFalse(out["candidate_evidence_verified"])
+        self.assertFalse(out["provider_truth_authority"])
+        self.assertFalse(out["provider_verification_authority"])
+        state = learning.load_state(path)
+        self.assertEqual(
+            state["improvement_queue"]["frontier"]["status"],
+            "RESOLVED",
+        )
+        candidate_id = out["candidate_observation_id"]
+        self.assertIn(candidate_id, state["observations"])
+        candidate = state["observations"][candidate_id]
+        self.assertIsInstance(candidate.get("proof_capsule"), dict)
+        queued = [
+            row
+            for row in state["improvement_queue"].values()
+            if row.get("kind") == "ADAPT_SUCCESS_TO_VERIFIABLE_EPISODE"
+            and row.get("status") == "PENDING"
+        ]
+        self.assertEqual(len(queued), 1)
+
+    def test_provider_cannot_mutate_r3_learning_state_directly(self):
+        path = self._state()
+
+        def mutate_state(_request):
+            state = learning.load_state(path)
+            state["stats"]["provider_was_here"] = 1
+            learning._write_state(state, path)
+            return receipt()
+
+        patches = self._authority_patches()
+        with patches[0], patches[1], patches[2], patches[3], patches[4], patches[5]:
+            out = driver._execute_distinguishing_evidence_acquisition(
+                work(),
+                state_path=path,
+                repo_root=driver.ROOT,
+                provider=mutate_state,
+                provider_id="TEST_EVIDENCE_PROVIDER",
+                repair_reduction=reduction(),
             )
         self.assertFalse(out["pass"], out)
         self.assertEqual(
             out["status"],
-            "FAIL_CLOSED__EVIDENCE_PROVIDER_RECEIPT_WITHOUT_OBSERVED_REDUCTION_CHANGE",
+            "DISTINGUISHING_EVIDENCE_PROVIDER_MUTATED_R3_STATE",
         )
-        self.assertFalse(out["progress"])
-        provider.assert_called_once()
-
-    def test_changed_minimum_request_counts_as_observed_progress(self):
-        before = reduction("a")
-        after = reduction("b")
-        provider = mock.Mock(
-            return_value=receipt(before["distinguishing_evidence_request"]["request_sha256"])
-        )
-        patches = self._hash_patches()
-        with patches[0], patches[1], patches[2], patches[3], patches[4], mock.patch.object(
-            driver,
-            "_current_frontier_repair_reduction",
-            return_value=after,
-        ):
-            out = driver._execute_distinguishing_evidence_acquisition(
-                work(),
-                state_path=self._state(),
-                repo_root=driver.ROOT,
-                provider=provider,
-                provider_id="TEST_EVIDENCE_PROVIDER",
-                repair_reduction=before,
-            )
-        self.assertTrue(out["pass"], out)
-        self.assertTrue(out["progress"], out)
-        self.assertEqual(
-            out["status"],
-            "IMPROVEMENT_ADVANCED__DISTINGUISHING_EVIDENCE_CHANGED_REPAIR_REDUCTION",
-        )
-        self.assertNotEqual(
-            out["request_sha256_before"],
-            out["request_sha256_after"],
-        )
-        self.assertFalse(out["provider_truth_authority"])
-        self.assertFalse(out["provider_verification_authority"])
 
     def test_provider_cannot_mutate_adapter_frontier(self):
-        before = reduction("a")
-        provider = mock.Mock(
-            return_value=receipt(before["distinguishing_evidence_request"]["request_sha256"])
-        )
+        path = self._state()
+        provider = mock.Mock(return_value=receipt())
         with mock.patch.object(
             driver,
             "_owned_success_learning_frontier_sha256",
@@ -206,19 +253,20 @@ class R3DistinguishingEvidenceProviderLoopV1Tests(unittest.TestCase):
             side_effect=["3" * 64, "3" * 64],
         ), mock.patch.object(
             driver,
-            "_frontier_acquisition_attempt_consumed",
-            return_value=False,
+            "_frontier_sha256",
+            side_effect=["sha256:" + "4" * 64, "sha256:" + "4" * 64],
         ), mock.patch.object(
-            driver,
-            "_record_frontier_acquisition_attempt",
+            learning,
+            "get_success_proof_context",
+            return_value=proof_context(),
         ):
             out = driver._execute_distinguishing_evidence_acquisition(
                 work(),
-                state_path=self._state(),
+                state_path=path,
                 repo_root=driver.ROOT,
                 provider=provider,
                 provider_id="TEST_EVIDENCE_PROVIDER",
-                repair_reduction=before,
+                repair_reduction=reduction(),
             )
         self.assertFalse(out["pass"], out)
         self.assertEqual(
@@ -226,10 +274,30 @@ class R3DistinguishingEvidenceProviderLoopV1Tests(unittest.TestCase):
             "DISTINGUISHING_EVIDENCE_ADAPTER_FRONTIER_CHANGED",
         )
 
+    def test_incomplete_or_extra_bundle_is_rejected(self):
+        path = self._state()
+        provider = mock.Mock(
+            return_value=receipt(extra_evidence={"selected_plan": ["forged"]})
+        )
+        patches = self._authority_patches()
+        with patches[0], patches[1], patches[2], patches[3], patches[4], patches[5]:
+            out = driver._execute_distinguishing_evidence_acquisition(
+                work(),
+                state_path=path,
+                repo_root=driver.ROOT,
+                provider=provider,
+                provider_id="TEST_EVIDENCE_PROVIDER",
+                repair_reduction=reduction(),
+            )
+        self.assertFalse(out["pass"], out)
+        self.assertEqual(
+            out["status"],
+            "DISTINGUISHING_EVIDENCE_MINIMUM_BUNDLE_INCOMPLETE_OR_EXTRA",
+        )
+
     def test_advance_once_uses_evidence_provider_only_for_evidence_only_gap(self):
         path = self._state()
-        before = reduction("a")
-        provider = mock.Mock(return_value={})
+        provider = mock.Mock(return_value=receipt())
         evidence_out = {
             "schema": driver.SCHEMA,
             "status": "TEST_EVIDENCE_PROGRESS",
@@ -241,7 +309,7 @@ class R3DistinguishingEvidenceProviderLoopV1Tests(unittest.TestCase):
         with mock.patch.object(
             driver,
             "_current_frontier_repair_reduction",
-            return_value=before,
+            return_value=reduction(),
         ), mock.patch.object(
             driver,
             "_execute_distinguishing_evidence_acquisition",
@@ -256,7 +324,6 @@ class R3DistinguishingEvidenceProviderLoopV1Tests(unittest.TestCase):
         self.assertTrue(out["progress"], out)
         kwargs = execute.call_args.kwargs
         self.assertIs(kwargs["provider"], provider)
-        self.assertEqual(kwargs["repair_reduction"], before)
         self.assertFalse(out["provider_truth_authority"])
         self.assertFalse(out["provider_verification_authority"])
 
