@@ -149,6 +149,8 @@ def verify_pair(
 
         lsig=_signature(left)
         rsig=_signature(right)
+        if lsig["local_name"]!=rsig["local_name"]:
+            return _base("FAIL_CLOSED",reason="LOCAL_NAME_MISMATCH")
         differences=[
             key for key in sorted(set(lsig)|set(rsig))
             if lsig.get(key)!=rsig.get(key)
