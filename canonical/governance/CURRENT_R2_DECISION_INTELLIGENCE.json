@@ -19,7 +19,7 @@
   },
   "scheduler_cut": {
     "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V33.json",
-    "git_blob_sha": "43ce7e6ecd08798ae92985f310431edd3137b8fa"
+    "git_blob_sha": "52a3af5046761bac2f5aff1c583d6d0241647a7d"
   },
   "direct_adequacy": {
     "activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V19.json",
