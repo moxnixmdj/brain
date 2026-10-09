@@ -431,7 +431,11 @@ def run(
             )
             out = _unwrap_live_runtime(wrapped, "decision_output")
         elif mode == "P3":
-            out = p3.evaluate(payload, repo_root=ROOT)
+            out = p3.evaluate(
+                payload,
+                repo_root=ROOT,
+                relation_edge_verifier=semantic_authority_verifier,
+            )
         elif mode == "ADAPTIVE_SOLVER":
             solver_kwargs = {
                 "proposal_provider_id": str(options.get("proposal_provider_id") or "HOST_GENERAL_COGNITION_SUBSTRATE"),
