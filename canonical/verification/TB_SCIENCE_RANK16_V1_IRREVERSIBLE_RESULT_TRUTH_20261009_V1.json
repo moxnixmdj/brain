@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK16_V1_IRREVERSIBLE_RESULT_TRUTH_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__EXACT_PUBLIC_ARTIFACT_AND_FINALIZER_RECEIPT_BOUND__RANK16_FINAL_ZERO__NO_REPLAY_OR_REPLACEMENT__ZERO_ACCEPTANCE_TERMINAL_CREDIT",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "slot_id": "terminal-bench-science/sparse-network-assimilation::trial-0",
+  "task_digest": "sha256:52ba7089dc32952df08c478af76b732fa82468c125431388adbf9798d869826f",
+  "public_execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "activation_pr": 2524,
+    "activation_head_sha": "24fa554b61a44c63ef1b1360aef3fcdf783bc21f",
+    "base_reseal_merge_commit": "eba00b63ba9ee9a5081ed43fb5daa8b51a5a2ea2",
+    "workflow_run_id": 37948159650,
+    "workflow_run_attempt": 1,
+    "workflow_conclusion": "success",
+    "workflow_job_id": 113879739119,
+    "artifact_id": 11627643266,
+    "artifact_name": "tb-science-sparse-network-assimilation-trial-0-rank16-v1",
+    "artifact_digest": "sha256:03217d7a98a01f9f6c49cd3b3c7af77bc9d2a81d216d7699068815b558825f3b"
+  },
+  "final_receipt": {
+    "artifact_path": "sparse-network-assimilation-trial-0__SLOT_RECEIPT_V6.json",
+    "sha256": "c759f63c783f8daf20596e14c8eb496929257d3466d9429c9e9cc0068d1ddfb9",
+    "schema": "PROJECT_BRAIN_TB_SCIENCE_TERMINAL_SLOT_RECEIPT_RANK16_V6",
+    "status": "FINAL_ZERO",
+    "reward": 0,
+    "task_read": true,
+    "task_started": true,
+    "benchmark_trials_consumed": 1,
+    "execution_authority_consumed": true,
+    "consumed_successes_delta": 0,
+    "consumed_final_failures_delta": 1,
+    "start_cas_acquired": true,
+    "start_cas_identity_valid": true,
+    "start_cas_logical_attempt_id": "c7feaa1fac90c9bde92480bf3fddfa858069b08267d7a35f01b919e864c5fb8e",
+    "start_cas_runtime_identity_sha256": "56e5e5a1f5aee7ac9ac1c327eff9a0173e99e0250f113d286376cd827d466687",
+    "start_cas_durable_record_sha256": "2bcb7d4ce966dd0704b975e394eee6b19bf9f1a69a0605a7a6a4105e4aac1c09",
+    "prestart_input_tokens": 2939,
+    "prestart_context_headroom_tokens": 9349,
+    "raw_task_obligation_count": 40,
+    "rerun_credit": false,
+    "replay_authority": false,
+    "replacement_carrier_authority": false,
+    "incremental_spend_usd": 0,
+    "promotion_authority": false
+  },
+  "result_hashes": {
+    "aggregate_result_json": "628d5e642a46d24d7d2fd6fec6872bb794207c8dfec70451870ee192ec708bd7",
+    "trial_result_json": "9ac021cef73a02ddc6e785f49b631c3f7d06d47ad760266cff2547c8b4546d51"
+  },
+  "conclusion": {
+    "irreversible_result": "FINAL_ZERO",
+    "rank16_trial_consumed": true,
+    "replay_authority": false,
+    "replacement_authority": false,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_RANK16_SUCCESS_CREDIT",
+    "NO_RANK16_RETRY_OR_REPLACEMENT",
+    "NO_AGGREGATE_TB_SCIENCE_ACCEPTANCE_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ]
+}
