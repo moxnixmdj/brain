@@ -10,7 +10,7 @@
   },
   "registry": {
     "path": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_CERTIFICATE_REGISTRY_V1.json",
-    "git_blob_sha": "65eeca96cdf48c0d4bc404efb3b705c348e7cd75"
+    "git_blob_sha": "373f4d4f92e3ca92df33bba732985549143b928a"
   },
   "guard": {
     "path": "canonical/runtime/coverage_root_certificate_registry_guard_v1.py",
@@ -62,14 +62,14 @@
   },
   "active_claim_descriptor": {
     "path": "canonical/governance/CC_ACTIVE_FROZEN_CLAIM_20261009_V1.json",
-    "git_blob_sha": "d4f7068322c5417f806b38ff8b39fe530ccde4ba"
+    "git_blob_sha": "9a6141373b9ef087ee7a12413d1afe8cfaefa262"
   },
   "current_root_falsifications": {
     "CC_R3_TERMINAL_CLOSURE_V1": {
       "status": "FALSIFIED_CURRENT_EPISTEMIC_ENVELOPE",
       "claim_id": "fda1409a94d983f61888f08f3df99cad50dc36edc3f5feb01b6df20e31156eaa",
       "path": "canonical/verification/CC_R3_COUNTEREXAMPLE_20261009_V1.json",
-      "git_blob_sha": "bf6e8ef01894350c5d51abe53038cea315984ea3"
+      "git_blob_sha": "e707b115609dd475d258514eac26cbdb070870ac"
     }
   }
 }
