@@ -734,5 +734,54 @@ class GeneralAdequateDecisionFixedPointV2Tests(unittest.TestCase):
         self.assertFalse(hint["semantic_truth_authority"])
 
 
+    @patch.object(fixed.direct_adequacy, "preflight")
+    @patch.object(fixed, "run_controller")
+    def test_direct_unknown_source_region_reaches_resolver_without_authority(
+        self, controller, preflight
+    ):
+        region = {
+            "document_id": "C",
+            "region_id": "C.unknown",
+            "start": 317,
+            "end": 334,
+            "text_sha256": "a" * 64,
+        }
+        preflight.return_value = {
+            "matched": False,
+            "pass": False,
+            "status": "NOT_APPLICABLE__SOURCE_OR_EFFECT_SEMANTICS_OPEN",
+            "direct_route_semantic_open": True,
+            "route_id": "DIRECT_ADEQUACY::CROSS_DOCUMENT_SOURCE_COVERAGE_V1",
+            "effect_status": "OPEN__SOURCE_EFFECT_COVERAGE_INCOMPLETE",
+            "open_unknown_regions": [region],
+            "minimum_discriminator_slots": [],
+            "possible_outcomes": [],
+            "world_count": None,
+            "source_byte_coverage_complete": True,
+            "finite_effect_hypothesis_completeness_proved": False,
+        }
+        controller.side_effect = [self._open(), self._pass()]
+        provider = Mock(
+            return_value={
+                "request_patch": {
+                    "decision_payload": {"context_id": "source-region-resolved"}
+                }
+            }
+        )
+
+        out = fixed.run(self._request(), proposal_provider=provider)
+
+        self.assertTrue(out["pass"], out)
+        packet = provider.call_args.args[0]
+        hint = packet["direct_preflight_hint"]
+        self.assertEqual(hint["open_unknown_regions"], [region])
+        self.assertTrue(hint["source_byte_coverage_complete"])
+        self.assertFalse(hint["finite_effect_hypothesis_completeness_proved"])
+        self.assertFalse(hint["semantic_truth_authority"])
+        self.assertFalse(hint["execution_authority"])
+        self.assertFalse(hint["acceptance_authority"])
+        self.assertFalse(hint["terminal_authority"])
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
