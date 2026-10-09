@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_R2_FINANCE_EXPLICIT_ALIAS_UNLESS_DIRECT_ADEQUACY_VERIFY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__EXPLICIT_ALIAS_FINANCE_UNLESS_DIRECT_ADEQUACY__V5_OVER_V34__10_OF_10_FOCUSED__4_OF_4_INTEGRATION__20_OF_20_FIXED_POINT_REGRESSION__ZERO_CREDIT",
+  "base_main_head": "b64ad71a88c1bdbf16908aafca31a601d7d1d166",
+  "exact_branch_blobs": {
+    "canonical/runtime/finance_explicit_alias_unless_branch_v1.py": "3b44d625c16c0bc201104ec79525c59b9dba8b36",
+    "canonical/runtime/finance_explicit_alias_unless_verify_v1.py": "7d0ff43736a32006c55b67e9390098b224369eeb",
+    "canonical/runtime/r2_finance_explicit_alias_unless_direct_adequacy_v1.py": "a46eb2d7038060cd773c0f1b060dc340387b6254",
+    "canonical/runtime/r2_direct_end_to_end_adequacy_v5.py": "16794162259dec4495970cd2bae9dd39d1b3df73",
+    "canonical/runtime/general_adequate_decision_fixed_point_v2.py": "f8e99fd92dbea95116f8153d450bb53d290a883c",
+    "canonical/tests/test_r2_finance_explicit_alias_unless_direct_adequacy_v1.py": "2a8d2574aaa280978089433bd4f62afdf2dedb39"
+  },
+  "carrier": {
+    "id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "name": "brain-live-integrated-v1-run-20261008"
+  },
+  "focused_replay": {
+    "passed": 10,
+    "total": 10
+  },
+  "integration_replay": {
+    "passed": 4,
+    "total": 4,
+    "assertions": [
+      "V5_ALIAS_DIRECT_PASS",
+      "FIXED_POINT_STEP_ZERO_PASS",
+      "V5_TO_V4_PREFLIGHT_FALLBACK_EQUIVALENT",
+      "V5_TO_V4_NONMATCHING_RUN_DELEGATES_EXACTLY"
+    ]
+  },
+  "regression": {
+    "fixed_point_existing_suite": "PASS__20_OF_20",
+    "py_compile": "PASS__6_OF_6"
+  },
+  "coverage_delta": {
+    "closed_subregion": "EXPLICIT_REFERS_TO_OR_IS_DEFINED_AS_ALIAS_TO_EXACT_LATER_UNLESS_REFERENCE_WITH_TYPED_BOOLEAN_OR_DECIMAL_CONDITION",
+    "prior_v34_cross_document_route_preserved": true,
+    "route_successor": "V5_OVER_V4"
+  },
+  "hard_nonclaims": [
+    "NO_INFERRED_SYNONYMY",
+    "NO_GENERAL_COREFERENCE",
+    "NO_CONTEXT_DEPENDENT_WORD_SENSE_CLOSURE",
+    "NO_ONTOLOGY_OR_DOMAIN_MAPPING",
+    "NO_GENERAL_CROSS_DOCUMENT_SEMANTICS",
+    "NO_EXTERNAL_WORLD_FACT_AUTHENTICATION",
+    "NO_GLOBAL_FINANCE_SEMANTIC_CLOSURE",
+    "NO_OPUS_CHECKPOINT_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0
+  }
+}
