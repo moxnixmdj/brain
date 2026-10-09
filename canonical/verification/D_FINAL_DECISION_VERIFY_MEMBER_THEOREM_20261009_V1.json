@@ -1,0 +1,88 @@
+{
+  "schema": "PROJECT_BRAIN_D_FINAL_DECISION_VERIFY_MEMBER_THEOREM_V1",
+  "date": "2026-10-09",
+  "status": "VERIFIED_MEMBER_MATERIAL_THEOREM__TWO_FRESH_ZERO_AMBIENT_CARRIERS__TAMPER_REJECTION__PROVIDER_EXECUTOR_THEOREM_STILL_REQUIRED__ZERO_CREDIT",
+  "capability_id": "bound:decision.synthesis.verify.stdlib",
+  "exact_subject": {
+    "adapter_path": "canonical/runtime/bound_capabilities/evidence_decision_verify.py",
+    "adapter_git_blob_sha": "63cf325320c7b91bf48ea2f2769c999c5a090929",
+    "launcher_path": "canonical/runtime/zero_ambient_namespace_launcher_v1.py",
+    "launcher_git_blob_sha": "6e687527e9c4da82fb5d974a729aaa263ee73ea8"
+  },
+  "theorem": {
+    "member_material_replay_pass": true,
+    "donor_network_authority_zero_for_replay": true,
+    "fresh_challenge_generated_after_donor_cut": true,
+    "valid_fresh_result_accepted": true,
+    "tampered_result_rejected": true,
+    "producer_independent_verifier": true,
+    "model_dependency_count_zero": true,
+    "provider_executor_theorem_included": false
+  },
+  "replay_1": {
+    "carrier": {
+      "provider": "SPRITES",
+      "name": "brain-live-integrated-v1-run-20261008",
+      "id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34"
+    },
+    "fresh_nonce_sha256": "fc2cf1d651ae432a1c53658a35594de784512eba375b03ceb5a71729709c2f7c",
+    "problem_sha256": "5f50b82985f5fde0a64930db3d9f99a48f6a996a11f702404b6258ffcd8199eb",
+    "result_sha256": "3373de2393861045c7aec3b6bbc69fd2a9b0952c22ab78589e1f89ca63c30966",
+    "network_probe_result": "DENIED__OSError_ERRNO_101_NETWORK_IS_UNREACHABLE",
+    "checks": {
+      "environment_minimal": true,
+      "fresh_valid_result_verified": true,
+      "model_dependency_zero": true,
+      "network_escape_denied": true,
+      "producer_independent_flag": true,
+      "tamper_detected": true
+    },
+    "result": "PASS"
+  },
+  "replay_2": {
+    "carrier": {
+      "provider": "SPRITES",
+      "name": "brain-r3-root1-gap-verify-20261008",
+      "id": "sprite-91472ada-4fea-4536-9558-7a7e3da49928"
+    },
+    "fresh_nonce_sha256": "159bcf8dfcbfdeebede55f8387a434d3e086307de7f306bcb935c02668879531",
+    "problem_sha256": "ab31fc24fa19d8d96a9b7b1f1d31bb412b8d35d2c6a1ae2d80faea0f4b52cb5a",
+    "result_sha256": "fb3229dfa9e711cb09dd5b4e4cfeb7570f3956e2316509679a66bdfc53917c83",
+    "network_probe_result": "DENIED__OSError_ERRNO_101_NETWORK_IS_UNREACHABLE",
+    "checks": {
+      "environment_minimal": true,
+      "fresh_valid_result_verified": true,
+      "model_dependency_zero": true,
+      "network_escape_denied": true,
+      "producer_independent_flag": true,
+      "tamper_detected": true
+    },
+    "result": "PASS"
+  },
+  "independence": {
+    "distinct_carrier_ids": true,
+    "distinct_fresh_nonce_sha256": true,
+    "distinct_problem_sha256": true,
+    "distinct_result_sha256": true,
+    "same_exact_adapter_blob": true,
+    "same_exact_launcher_blob": true
+  },
+  "next_required": [
+    "PROVE_SHARED_VERIFIED_BOUND_CAPABILITY_EXECUTOR_THEOREM_ON_CURRENT_EXACT_BYTES",
+    "BIND_BOUND_REGISTRY_ENTRY_HASH_AND_RENDERED_ACTION_CONTRACT",
+    "COMPOSE_MEMBER_THEOREM_WITH_PROVIDER_THEOREM_AND_D_EXECUTION_EPOCH_POLICY",
+    "ONLY_THEN_PROMOTE_ROW_TO_VERIFIED_D_FINAL_CURRENT"
+  ],
+  "hard_nonclaims": [
+    "NO_FULL_D_FINAL_CERTIFICATE_YET",
+    "NO_PROVIDER_EXECUTOR_THEOREM_YET",
+    "NO_OWNERSHIP_CREDIT",
+    "NO_D_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
