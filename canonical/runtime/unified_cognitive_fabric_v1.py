@@ -672,7 +672,7 @@ def run(
             )
             out = deepcopy(dict(composed))
             observation = out.get("learning_observation")
-            if isinstance(observation, Mapping):
+            if d_finality_guard.implicit_learning_allowed() and isinstance(observation, Mapping):
                 try:
                     out["learning"] = live_runtime.observe_runtime_outcome(
                         observation,
