@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_AUTHORITY_RUNTIME_BINDING_CENSUS_REBASED_VERIFY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__EXACT_REBASED_GIT_TREE_RUNTIME_BINDING_CENSUS__ZERO_DRIFT__ZERO_MISSING__ZERO_CONFLICTS",
+  "repository": "moxnixmdj/brain",
+  "branch": "impl-executable-refinement-terminal-closure-rebased-20261009",
+  "observed_head_sha": "21c5a6076b64948eb17f0ecee9204a81d363326e",
+  "authority_pointer": {
+    "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+    "git_blob_sha": "cd6e5190e311cc39f301e93f403fec55988a1c45",
+    "pointer_revision": 110
+  },
+  "method": "GITHUB_CONNECTOR_EXACT_RECURSIVE_GIT_TREE_BLOB_CENSUS_USING_CURRENT_VS_EXPLICITLY_SUPERSEDED_PRECEDENCE",
+  "verifier": {
+    "path": "canonical/runtime/current_authority_runtime_binding_census_v1.py",
+    "git_blob_sha": "e8746d141989f5279c66931d9cc9167504034b98",
+    "prior_focused_verifier_tests": "7_OF_7_PASS_ON_EXISTING_ZERO_SPEND_SPRITE"
+  },
+  "rebind_proof": {
+    "path": "canonical/verification/CURRENT_RUNTIME_BYTE_REBIND_PROOF_20261009_V1.json",
+    "git_blob_sha": "f6392c5bef845e4f97a94cd5754afac88c4a34c7"
+  },
+  "counts": {
+    "runtime_binding_reference_count": 50,
+    "current_binding_count": 48,
+    "superseded_binding_count": 2,
+    "current_unique_runtime_path_count": 42,
+    "drift_count": 0,
+    "missing_blob_binding_count": 0,
+    "missing_runtime_file_count": 0,
+    "conflicting_current_path_count": 0
+  },
+  "result": {
+    "byte_binding_coherence_proved": true,
+    "semantic_refinement_proved": false,
+    "runtime_reachability_proved": false,
+    "r1_full_lifecycle_replay_reproved": false,
+    "terminal_authority": false,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_BYTE_COHERENCE_PROVES_EXECUTABLE_SEMANTIC_REFINEMENT.",
+    "NO_CLAIM_BYTE_COHERENCE_REPROVES_R1_FULL_LIFECYCLE_CLOSURE.",
+    "NO_CLAIM_BYTE_COHERENCE_PROVES_TERMINALITY."
+  ]
+}
