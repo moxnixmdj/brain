@@ -2224,7 +2224,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 70,
+  "pointer_revision": 71,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
@@ -2714,6 +2714,19 @@
     "scheduler_cut_git_blob_sha": "4245cdb3797012ac0308d27d703189fe71bba77e",
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "scoped_proof_carrying_domain_mapping_bound": true,
+    "terminal_credit_delta": 0
+  },
+  "r2_v47_sec_companyconcept_source_native_projection_reconciliation": {
+    "status": "RECONCILED__CURRENT_R2_POINTER_BINDS_VERIFIED_STANDARDIZED_SEC_COMPANYCONCEPT_SOURCE_NATIVE_SEMANTICS__V46_SCHEDULER_CELL_COUNTS_REUSED_UNCHANGED__TERMINAL_STILL_FALSE",
+    "current_r2_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+    "current_r2_git_blob_sha": "76ecf2c9e09761dcb8e0e42b516741910f74c84c",
+    "verification_path": "canonical/verification/R2_SEC_COMPANYCONCEPT_SOURCE_NATIVE_VERIFY_20261009_V1.json",
+    "verification_git_blob_sha": "dbccbb21c40414ab18f6de71df98d97f5b0fcd72",
+    "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
+    "primary_internal_unsolved_count": 1,
+    "direct_route_count": 31,
+    "bounded_family_count": 28,
+    "standardized_sec_source_native_semantics_bound": true,
     "terminal_credit_delta": 0
   }
 }
