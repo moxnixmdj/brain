@@ -80,16 +80,23 @@ class OneShotClosureTests(unittest.TestCase):
         self.assertTrue(out["fixed_point"], out)
         self.assertEqual(
             out["status"],
-            "OPEN__INTERNAL_UNSOLVED_R2_GAP_REMAINS",
+            "OPEN__INTERNAL_UNSOLVED__PENDING_ACQUISITION_OR_EXPERIMENT",
         )
         self.assertTrue(out["residual"]["internally_solvable_gap_remaining"])
+        self.assertEqual(out["residual"]["internal_blockers"], [])
         self.assertIn(
-            "R2_CURRENT_INTERNAL_UNSOLVED:FINANCE_SEMANTIC_ADEQUACY_TAIL",
-            out["residual"]["internal_blockers"],
+            "R2_PENDING_ACQUISITION:FINANCE_SEMANTIC_ADEQUACY_TAIL",
+            out["residual"]["evidence_blockers"],
         )
         self.assertTrue(
             out["residual"]["pending_acquisition_or_experiment_required"]
         )
+        self.assertEqual(out["residual"]["r2_acquisition_request_count"], 1)
+        request = out["residual"]["r2_acquisition_requests"][0]
+        self.assertEqual(request["cell_id"], "FINANCE_SEMANTIC_ADEQUACY_TAIL")
+        self.assertEqual(request["required_action"], "ACQUIRE_OR_EXPERIMENT")
+        self.assertEqual(len(request["request_sha256"]), 64)
+        self.assertFalse(request["full_benchmark_default"])
 
     def test_internal_root1_gap_remains_open(self):
         pending = [{"work_id": "w1", "kind": "EXPAND_SUCCESS_VERIFICATION_FRONTIER"}]
