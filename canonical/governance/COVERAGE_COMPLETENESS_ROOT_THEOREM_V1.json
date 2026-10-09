@@ -164,7 +164,7 @@
     "scope": "ARCHITECTURE_LOGIC_ONLY__NOT_CURRENT_MISSION_CLOSURE"
   },
   "reconciliation": {
-    "current_base_commit": "cf1bb9b70251d05883ada9a5c9689dffc2ca9201",
+    "current_base_commit": "0dac48cab2ae3334e6d00bf35d0c2a988b29aa42",
     "current_terminal_authority": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
     "ancestor_action_intent": "canonical/action_intents/ACTION_INTENT_TERMINAL_FOUR_INVARIANT_COLLAPSE_20261007_V1.json",
     "stale_specialized_pr": {
