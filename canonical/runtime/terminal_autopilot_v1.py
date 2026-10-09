@@ -211,6 +211,7 @@ def build_manifest_from_repo(repo_root: str | Path, *, max_concurrency: int = 32
             key for key in prerequisite_keys
             if live_truth.get(key) is not True
         ]
+        proof_cost_bound = bool(prerequisite_keys) or spec.get("proof_cost_bound") is True
         declared_minimum = float(spec.get("estimated_wall_clock_units", 1.0))
         proof_work_lower_bound = max(
             declared_minimum,
@@ -228,6 +229,12 @@ def build_manifest_from_repo(repo_root: str | Path, *, max_concurrency: int = 32
             ),
             "verified_prerequisite_truth_keys": list(prerequisite_keys),
             "missing_verified_premises": missing_verified_premises,
+            "proof_cost_bound": proof_cost_bound,
+            "proof_cost_status": (
+                "BOUND_BY_VERIFIED_MISSING_PREMISE_COUNT"
+                if proof_cost_bound
+                else "UNBOUND__NOT_RANKABLE"
+            ),
             "proof_class": spec["proof_class"],
             "candidate_only": True,
             "promotion_authority": False,
@@ -330,6 +337,8 @@ def plan(manifest: dict[str, Any]) -> dict[str, Any]:
             continue
         deps = route.get("dependencies", [])
         if not isinstance(deps, list) or not _closed_dependencies(deps, closed):
+            continue
+        if route.get("proof_cost_bound") is not True:
             continue
         discharges = sorted(set(route.get("can_discharge", [])) & open_ids)
         if not discharges:
