@@ -1223,6 +1223,11 @@
       "path": "canonical/governance/FINANCE_ACCEPTANCE_ROUTE_SPLIT_20261009_V1.json",
       "git_blob_sha": "09ff2c5368fc9643fd1f1e64f37a1687a3f338f2",
       "note": "FINANCE_INDEX_AND_FINANCE_AGENT_V2_HAVE_DISTINCT_PROOF_SHAPES__ZERO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+    },
+    "finance_index_current_evidence_fixed_point_reconciliation_20261009_v2": {
+      "path": "canonical/governance/FINANCE_INDEX_CURRENT_EVIDENCE_FIXED_POINT_RECONCILIATION_20261009_V2.json",
+      "git_blob_sha": "ddb8feed95d5b0632f040fd7594f64decc30736a",
+      "note": "FINANCE_INDEX_ROUTE_SPLIT_RECONCILED_TO_EMPTY_RECEIPTED_COMPONENT_PREMISE_VECTOR__WAKE_GATED__ZERO_CREDIT"
     }
   },
   "live_truth": {
@@ -1978,7 +1983,7 @@
     "coding_v5_wal_singleton_target_relevance_to_cursorbench_proved": false,
     "coding_v5_wal_singleton_target_relevance_to_frontiercode_proved": false,
     "finance_acceptance_predicates_share_one_mandatory_serial_semantic_tail": false,
-    "finance_index_fixed_bar_state": "OPEN_BLOCKED__COMPONENT_NORMALIZATION_AND_OR_LOWER_BOUND_RECEIPTS_REQUIRED",
+    "finance_index_fixed_bar_state": "DORMANT_WAKE_GATED__EMPTY_RECEIPTED_COMPONENT_PREMISE_VECTOR",
     "finance_index_general_finance_semantic_tail_serial_prerequisite": false,
     "finance_index_separate_index_execution_required": false,
     "finance_index_direct_threshold_sufficient_condition": "SUM_WEIGHTED_VERIFIED_NORMALIZED_BRAIN_COMPONENT_LOWER_BOUNDS_GE_61",
@@ -1990,7 +1995,18 @@
     "finance_agent_v2_public_contract_superset_route_admissible": false,
     "finance_agent_v2_private_scored_population_publicly_complete": false,
     "finance_agent_v2_next_wake": "EXACT_RESULT_OR_PRIVATE_CONVENTION_SCOPE_BIND_OR_STRONGER_SCOPE_COMPLETE_CERTIFICATE",
-    "finance_acceptance_next_proof_object": "FINANCE_INDEX__SATURATE_EXISTING_CONTENT_ADDRESSED_COMPONENT_LOWER_BOUND_AND_NORMALIZATION_EVIDENCE__FINANCE_AGENT_V2__SLEEP_UNTIL_WAKE"
+    "finance_acceptance_next_proof_object": "FINANCE_INDEX__SLEEP_UNTIL_COMPONENT_PREMISE_VECTOR_CHANGES__FINANCE_AGENT_V2__SLEEP_UNTIL_EXACT_RESULT_PRIVATE_SCOPE_BIND_OR_STRONGER_SCOPE_COMPLETE_CERTIFICATE",
+    "finance_index_current_bound_component_lower_bound_receipt_count": 0,
+    "finance_index_current_direct_threshold_certificate_computable": false,
+    "finance_index_repeat_existing_evidence_saturation_authorized": false,
+    "finance_index_wake_condition_count": 5,
+    "finance_index_next_wake": [
+      "NEW_INDEPENDENT_NORMALIZED_BRAIN_COMPONENT_LOWER_BOUND_RECEIPT",
+      "NEW_VERIFIED_COMPONENT_SUBSCORE_FLOOR_OR_INNER_TRANSFORM",
+      "ARTIFICIAL_ANALYSIS_RESULT_BEARING_FINANCE_INDEX_OR_COMPONENT_RECEIPT",
+      "MATERIAL_OWNER_METHODOLOGY_OR_API_SCHEMA_CHANGE",
+      "SCOPE_SAFE_STRONGER_PROOF_THAT_DIRECTLY_IMPLIES_FINANCE_ACCOUNTING_INDEX_GE_61"
+    ]
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -2692,7 +2708,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 96,
+  "pointer_revision": 97,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
@@ -3732,6 +3748,23 @@
     "rank16_execution_authority": false,
     "next_required_transition": "FRESH_ZERO_EXPOSURE_CARRIER_QUALIFICATION_THEN_CONTENT_ADDRESSED_ONE_SLOT_AUTHORITY",
     "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "finance_index_fixed_point_reconciliation_20261009_v2": {
+    "source": {
+      "path": "canonical/governance/FINANCE_INDEX_CURRENT_EVIDENCE_FIXED_POINT_RECONCILIATION_20261009_V2.json",
+      "git_blob_sha": "ddb8feed95d5b0632f040fd7594f64decc30736a"
+    },
+    "prior_terminal_revision": 96,
+    "result": "FINANCE_INDEX_ACTIVE_SATURATION_DEMOTED_TO_WAKE_GATED_DORMANT_ROUTE__UNCHANGED_EMPTY_COMPONENT_PREMISE_VECTOR",
+    "independent_open_acceptance_obligations_preserved": 13,
+    "frozen_acceptance_family_open_count_preserved": 12,
+    "current_primary_u_primitives_preserved": [
+      "ESCAPE_POLICY_ADEQUACY"
+    ],
+    "terminal_remains_false": true,
+    "acceptance_credit_delta": 0,
+    "checkpoint_credit_delta": 0,
     "terminal_credit_delta": 0
   }
 }
