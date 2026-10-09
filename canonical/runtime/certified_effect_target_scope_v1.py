@@ -17,10 +17,11 @@ import re
 from typing import Any
 
 SCHEMA="BRAIN_CERTIFIED_EFFECT_TARGET_SCOPE_V1"
+_TOKEN=r"(?:[A-Za-z]|[A-Za-z][A-Za-z0-9_.-]*[A-Za-z0-9_])"
 _LINE=re.compile(
-    r"^\s*Effect\s+targets\s+only:\s*"
-    r"(?P<targets>[A-Za-z][A-Za-z0-9_.-]*(?:\s*,\s*[A-Za-z][A-Za-z0-9_.-]*)*)"
-    r"\s*\.?\s*$",
+    rf"^\s*Effect\s+targets\s+only:\s*"
+    rf"(?P<targets>{_TOKEN}(?:\s*,\s*{_TOKEN})*)"
+    rf"\s*\.?\s*$",
     re.I,
 )
 
