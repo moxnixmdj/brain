@@ -202,7 +202,7 @@
     "current_registry_state": "PASS__0_PROVED__3_OPEN__R4_PROOF_CLOSURE_FALSE"
   },
   "reconciliation": {
-    "current_base_commit": "8f98b5d72fd11fe5dbd00ad38f88a47be3ed724e",
+    "current_base_commit": "87af41c4f76db6a4d8e5c5ec596ded05df788729",
     "current_terminal_authority": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
     "ancestor_action_intent": "canonical/action_intents/ACTION_INTENT_TERMINAL_FOUR_INVARIANT_COLLAPSE_20261007_V1.json",
     "stale_specialized_pr": {
