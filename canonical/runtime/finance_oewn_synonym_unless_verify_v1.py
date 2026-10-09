@@ -75,6 +75,30 @@ def _trim(text: str, a: int, b: int) -> tuple[int, int]:
     return a, b
 
 
+def _scope_id(source_id: str, text: str, match: re.Match[str]) -> tuple[str, tuple[int, int], tuple[int, int]]:
+    left = _trim(text, 0, match.start())
+    right = _trim(text, match.end(), len(text))
+    material = (
+        f"{source_id}\\0{match.start()}\\0{match.end()}\\0CONDITIONAL_UNLESS\\0"
+        f"{text[match.start():match.end()].lower()}"
+    )
+    operator_id = "OP-" + sha256(material.encode("utf-8")).hexdigest()[:20]
+    scope_raw = f"{source_id}\\0UNLESS\\0{operator_id}\\0{(left, right)!r}".encode("utf-8")
+    return "SCOPE-" + sha256(scope_raw).hexdigest()[:20], left, right
+
+
+def _atom(source_id: str, scope_id: str, field: str, operator: str, literal: str, digest: str) -> str:
+    payload = {
+        "source_id": source_id,
+        "scope_id": scope_id,
+        "field_name": field,
+        "operator": operator,
+        "literal": literal,
+        "typed_context_sha256": digest,
+    }
+    return "CERTIFIED_CONDITION::" + sha256(_canon(payload).encode("utf-8")).hexdigest()
+
+
 def _decimal(v: Any) -> Decimal:
     if not isinstance(v, str) or _DECIMAL.fullmatch(v) is None:
         raise ValueError("DECIMAL_STRING_INVALID")
@@ -161,6 +185,17 @@ def verify(case: Mapping[str, Any], result: Mapping[str, Any], *, repo_root: str
         if rm is None:
             raise ValueError("CUE_CONDITION_INVALID")
         mode, synsets, evidence = _resolve(rm.group("cue"), target, context, knowledge)
+        ordinary = rule[left[0]:left[1]]
+        expanded = ordinary + " unless " + target + " " + rm.group("rest") + "."
+        expanded_matches = list(_UNLESS.finditer(expanded))
+        if len(expanded_matches) != 1:
+            raise ValueError("EXPANDED_UNLESS_INVALID")
+        expanded_source_id = source_id + "#expanded"
+        expanded_scope, _, _ = _scope_id(
+            expanded_source_id,
+            expanded,
+            expanded_matches[0],
+        )
         condition_text = target + " " + rm.group("rest")
         match = _BOOL.fullmatch(condition_text)
         field = operator = literal = required = ""
@@ -193,6 +228,16 @@ def verify(case: Mapping[str, Any], result: Mapping[str, Any], *, repo_root: str
         else:
             av, lv = _decimal(value), _decimal(literal)
             holds = av >= lv if operator == "DECIMAL_GE" else av <= lv if operator == "DECIMAL_LE" else av == lv
+        atom_id = _atom(
+            expanded_source_id,
+            expanded_scope,
+            field,
+            operator,
+            literal,
+            digest,
+        )
+        atom = {"op": "ATOM", "id": atom_id}
+        constraint = atom if holds else {"op": "NOT", "arg": atom}
         local = right if holds else left
         selected = rule[local[0]:local[1]]
         start = source.find(rule)
@@ -210,7 +255,10 @@ def verify(case: Mapping[str, Any], result: Mapping[str, Any], *, repo_root: str
             "lexical_evidence_tokens": evidence,
             "query_record_count": len(knowledge["queries"][_norm(rm.group("cue"))]["records"]),
             "rule_text_sha256": _sha(rule),
+            "expanded_rule_sha256": _sha(expanded),
             "condition_holds": holds,
+            "condition_atom_id": atom_id,
+            "proved_constraint": constraint,
             "field_name": field,
             "field_type": required,
             "operator": operator,
