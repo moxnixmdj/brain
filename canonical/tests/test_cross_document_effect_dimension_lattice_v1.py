@@ -133,7 +133,11 @@ class CrossDocumentEffectDimensionLatticeV1Tests(unittest.TestCase):
         self.assertEqual(state["effect_class"]["kind"],"EXACT")
         self.assertEqual(state["value"],{"kind":"TOP"})
         self.assertEqual(len(out["open_lattice_atoms"]),5)
-        self.assertTrue(lv.verify(_problem(_doc(\n            "A",inventory=["A.t"],\n            dimensions={"A.t":{"effect_class":"DEFINE"}},\n        )),out)["verified"])
+        partial_problem=_problem(_doc(
+            "A",inventory=["A.t"],
+            dimensions={"A.t":{"effect_class":"DEFINE"}},
+        ))
+        self.assertTrue(lv.verify(partial_problem,out)["verified"])
 
     def test_all_independent_dimensions_close_define(self):
         out=l.evaluate(_problem(_doc(
@@ -143,7 +147,10 @@ class CrossDocumentEffectDimensionLatticeV1Tests(unittest.TestCase):
         self.assertTrue(out["pass"],out)
         self.assertEqual(out["effective_value"],"10")
         self.assertEqual(out["open_lattice_atoms"],[])
-        self.assertTrue(lv.verify(_problem(_doc(\n            "A",inventory=["A.t"],dimensions={"A.t":_effect_dims()},\n        )),out)["verified"])
+        closed_problem=_problem(_doc(
+            "A",inventory=["A.t"],dimensions={"A.t":_effect_dims()},
+        ))
+        self.assertTrue(lv.verify(closed_problem,out)["verified"])
 
     def test_v8_full_relation_still_closes(self):
         relation={
