@@ -7,6 +7,13 @@ on:
       - canonical/runtime/r2_direct_end_to_end_adequacy_v1.py
       - canonical/runtime/r2_direct_end_to_end_adequacy_v2.py
       - canonical/runtime/r2_direct_end_to_end_adequacy_v3.py
+      - canonical/runtime/r2_direct_end_to_end_adequacy_v4.py
+      - canonical/runtime/r2_finance_task_role_raw_fact_unless_direct_adequacy_v1.py
+      - canonical/runtime/finance_task_role_raw_fact_unless_branch_v1.py
+      - canonical/runtime/finance_task_role_raw_fact_unless_verify_v1.py
+      - canonical/runtime/certified_defined_term_raw_typed_condition_v2.py
+      - canonical/runtime/authoritative_typed_context_compiler_v1.py
+      - canonical/runtime/bounded_task_source_set_gate_v1.py
       - canonical/runtime/r2_finance_explicit_definition_unless_direct_adequacy_v1.py
       - canonical/runtime/finance_explicit_definition_unless_branch_v1.py
       - canonical/runtime/finance_explicit_definition_unless_verify_v1.py
@@ -22,6 +29,7 @@ on:
       - canonical/tests/test_r2_direct_end_to_end_adequacy_v1.py
       - canonical/tests/test_r2_finance_normalized_if_direct_adequacy_v1.py
       - canonical/tests/test_r2_finance_explicit_definition_unless_direct_adequacy_v1.py
+      - canonical/tests/test_r2_finance_task_role_raw_fact_unless_direct_adequacy_v1.py
       - canonical/tests/test_r2_docx_direct_adequacy_v1.py
       - canonical/tests/test_goal_compiler.py
       - canonical/tests/test_raw_goal_exact_literal_acceptance_v1.py
@@ -44,10 +52,18 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+      - name: Compile new cross-document route
+        run: |
+          python3 -m py_compile \
+            canonical/runtime/finance_task_role_raw_fact_unless_branch_v1.py \
+            canonical/runtime/finance_task_role_raw_fact_unless_verify_v1.py \
+            canonical/runtime/r2_finance_task_role_raw_fact_unless_direct_adequacy_v1.py \
+            canonical/runtime/r2_direct_end_to_end_adequacy_v4.py \
+            canonical/runtime/general_adequate_decision_fixed_point_v2.py
       - name: Run R2 V2 falsification suite
         run: |
           set -o pipefail
-          python3 -m unittest canonical.tests.test_r2_docx_direct_adequacy_v1 canonical.tests.test_r2_direct_end_to_end_adequacy_v1 canonical.tests.test_r2_finance_normalized_if_direct_adequacy_v1 canonical.tests.test_r2_finance_explicit_definition_unless_direct_adequacy_v1 canonical.tests.test_general_adequate_decision_fixed_point_v2 canonical.tests.test_live_brain_runtime_v1 canonical.tests.test_unified_cognitive_fabric_v1 -v 2>&1 | tee r2-v2-test-output.txt
+          python3 -m unittest canonical.tests.test_r2_finance_task_role_raw_fact_unless_direct_adequacy_v1 canonical.tests.test_r2_docx_direct_adequacy_v1 canonical.tests.test_r2_direct_end_to_end_adequacy_v1 canonical.tests.test_r2_finance_normalized_if_direct_adequacy_v1 canonical.tests.test_r2_finance_explicit_definition_unless_direct_adequacy_v1 canonical.tests.test_general_adequate_decision_fixed_point_v2 canonical.tests.test_live_brain_runtime_v1 canonical.tests.test_unified_cognitive_fabric_v1 -v 2>&1 | tee r2-v2-test-output.txt
       - name: Publish verification output
         if: always()
         uses: actions/upload-artifact@v4
