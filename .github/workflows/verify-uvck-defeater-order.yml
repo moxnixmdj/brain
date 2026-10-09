@@ -9,7 +9,7 @@ on:
 permissions:
   contents: read
 jobs:
-  verify:
+  compile:
     runs-on: ubuntu-latest
     timeout-minutes: 3
     steps:
@@ -19,19 +19,31 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: python --version
       - run: python -m py_compile canonical/runtime/assurance_closure_compiler_v1.py canonical/tests/test_assurance_closure_compiler_v1.py
-      - name: Run UVCK tests with durable summary
-        shell: bash
-        run: |
-          set +e
-          python -m unittest canonical.tests.test_assurance_closure_compiler_v1 -v > uvck-test.log 2>&1
-          rc=$?
-          cat uvck-test.log
-          {
-            echo '### UVCK unittest output'
-            echo '```text'
-            tail -n 200 uvck-test.log
-            echo '```'
-          } >> "$GITHUB_STEP_SUMMARY"
-          exit "$rc"
+  unit:
+    name: ${{ matrix.test }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    strategy:
+      fail-fast: false
+      matrix:
+        test:
+          - test_generic_graph_cannot_self_certify_execution_or_adversary
+          - test_open_obligation_is_residual_not_new_primitive
+          - test_supported_defeater_counterproves_root
+          - test_supported_defeater_dominates_earlier_unresolved_defeater_regardless_of_order
+          - test_unresolved_defeater_keeps_root_open
+          - test_unsupported_primitive_is_only_new_primitive_trigger
+          - test_dangling_reference_fails_closed
+          - test_dependency_cycle_fails_closed
+          - test_stale_evidence_reopens_proof
+          - test_pass_controller_result_still_requires_adversarial_closure
+          - test_open_controller_result_becomes_existing_kernel_obligation
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m unittest canonical.tests.test_assurance_closure_compiler_v1.AssuranceClosureCompilerV1Tests.${{ matrix.test }} -v
