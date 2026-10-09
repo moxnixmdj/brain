@@ -3,6 +3,7 @@ import unittest
 
 from canonical.runtime import cross_document_effect_hypothesis_worldset_v1 as w
 from canonical.runtime import cross_document_residual_effect_frontier_v1 as f
+from canonical.runtime import cross_document_residual_effect_frontier_verify_v1 as verify
 
 
 def _e(eid,target,value):
@@ -88,6 +89,7 @@ class CrossDocumentResidualEffectFrontierV1Tests(unittest.TestCase):
             "OPEN__RESIDUAL_TOP_EFFECT_MAY_CHANGE_QUERY",
         )
         self.assertEqual(out["blocking_residual_document_ids"],["A"])
+        self.assertTrue(verify.verify(_problem(_source("The threshold is ten."),ws),out)["verified"])
         self.assertEqual(
             out["finite_worldset_preview"]["effective_value"],
             "10",
@@ -116,6 +118,7 @@ class CrossDocumentResidualEffectFrontierV1Tests(unittest.TestCase):
             "PASS__RESIDUAL_TOP_CLOSED_FOR_QUERY_AND_FINITE_WORLDSET_PASSED",
         )
         self.assertEqual(out["effective_value"],"10")
+        self.assertTrue(verify.verify(_problem(source,ws),out)["verified"])
         self.assertEqual(
             out["residuals"][0]["state"],
             "PROVED_QUERY_EFFECT_ID_INVENTORY_EXHAUSTIVE",
@@ -150,6 +153,7 @@ class CrossDocumentResidualEffectFrontierV1Tests(unittest.TestCase):
             out["minimum_discriminator_slots"],
             ["A.effect"],
         )
+        self.assertTrue(verify.verify(_problem(source,ws),out)["verified"])
 
     def test_inventory_mismatch_fails_closed(self):
         ws=_worldset(_e("A.t","reporting.threshold","10"))
