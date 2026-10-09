@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK13_AUTHORITY_CANDIDATE_STATIC_VERIFICATION_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__NONEXECUTABLE_RANK13_CANDIDATE__CURRENT_15_FILE_CLOSURE__FRESH_LIVE_V8_GATE_STILL_REQUIRED__ZERO_EXPOSURE",
+  "subject": {
+    "candidate_path": "canonical/governance/TB_SCIENCE_RANK13_ONE_SLOT_EXECUTION_AUTHORITY_CANDIDATE_20261009_V1.json",
+    "candidate_git_blob_sha": "5d65e6b0491dc53c09e45259d2108b0385ce3e8b",
+    "intent_path": "canonical/action_intents/ACTION_INTENT_TB_SCIENCE_RANK13_AUTHORITY_CANDIDATE_20261009_V1.json",
+    "intent_git_blob_sha": "c0d157df50295ba7341feaaa786520d1ac91f1fd"
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/rank13-candidate-v1"
+  },
+  "verified": {
+    "slot_id": "terminal-bench-science/dapi-he-alignment::trial-0",
+    "task_digest": "sha256:a4291c3f09b0fc2a1c8713129d3afd1b46929482f6c03df630c25814b53b755e",
+    "ledger_schedule_rank": 13,
+    "prior_consumed_slots": 12,
+    "prior_successes": 0,
+    "prior_final_failures": 12,
+    "successes_still_needed": 124,
+    "remaining_slots": 198,
+    "failures_before_fail_lock": 75,
+    "pass_still_mathematically_reachable": true,
+    "ledger_blob": "7cd1dbbc29c03ba3d9b14941098abc738b3510d3",
+    "terminal_authority_blob": "a0e4d889a990e090bea765bd9ddcd21b1ea95bd1",
+    "closure_manifest_blob": "99240debf7233f97f88deaf76e98f3e01434b799",
+    "closure_verification_blob": "53dfb7bce0424da1b333aca8ce793ad42071eb3b",
+    "transitive_runtime_file_count": 15,
+    "transitive_closure_missing_paths": 0,
+    "transitive_closure_mismatched_paths": 0,
+    "live_v8_workflow_run_id": 37867504619,
+    "live_v8_gate_receipt_bound": false,
+    "candidate_execution_authority": false
+  },
+  "activation_blocker": "FRESH_ZERO_EXPOSURE_V8_MULTI_ACTION_LIVE_RECEIPT_NOT_YET_BOUND",
+  "benchmark_task_exposure": 0,
+  "benchmark_trials_executed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "hard_nonclaims": [
+    "NO_RANK13_TASK_CONTENT_READ",
+    "NO_RANK13_TASK_START",
+    "NO_RANK13_EXECUTION_AUTHORITY",
+    "NO_TB_SCIENCE_ACCEPTANCE_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ]
+}
