@@ -3,7 +3,7 @@
   "date":"2026-10-09",
   "status":"PASS__EXACT_CHANGED_BYTES__KERNEL_7_OF_7__SCHEDULER_RUNTIME_PASS__FABRIC_FORWARDING_STRUCTURAL_PASS__ZERO_AUTHORITY_CREDIT",
   "subject":{
-    "branch":"r3-distinguishing-evidence-provider-20261009",
+    "branch":"r3-distinguishing-evidence-provider-v2-20261009",
     "files":{
       "acquisition_runtime":{"path":"canonical/runtime/r3_distinguishing_evidence_acquisition_v1.py","git_blob_sha":"6c76b89fb552f7edca3cbc849771f8402bfc522b"},
       "queue_driver":{"path":"canonical/runtime/r3_improvement_queue_driver_v1.py","git_blob_sha":"32491a250a3e689e8438d4db28dac5d6ae1b5b37"},
@@ -14,7 +14,7 @@
   },
   "independent_execution":{
     "carrier":{"name":"brain-r3-root1-gap-verify-20261008","id":"sprite-91472ada-4fea-4536-9558-7a7e3da49928","workspace":"/home/sprite/r3_distinguishing_evidence_exact"},
-    "exact_byte_materialization":"GITHUB_BRANCH_BLOBS_WRITTEN_DIRECTLY_TO_ISOLATED_SPRITE_WORKSPACE",
+    "exact_byte_materialization":"IDENTICAL_CONTENT_ADDRESSED_SOURCE_BLOBS_REBASED_ON_CURRENT_MAIN_AND_WRITTEN_DIRECTLY_TO_ISOLATED_SPRITE_WORKSPACE",
     "py_compile":{"pass":true,"files":4},
     "acquisition_kernel":{"tests_run":7,"passed":7,"failed":0,"errors":0},
     "scheduler_runtime":{"pass":true,"claim":"EVIDENCE_ONLY_FRONTIER_BRANCH_ROUTES_TO_DISTINGUISHING_EVIDENCE_PROVIDER_AND_DOES_NOT_CALL_ADAPTER_PROVIDER"},
