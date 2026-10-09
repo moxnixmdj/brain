@@ -152,6 +152,60 @@ class R2FinanceOEWNSynonymUnlessTests(unittest.TestCase):
         self.assertFalse(checked["verified"])
         self.assertIn("MISMATCH:selected_branch", checked["errors"])
 
+    def test_decimal_condition_and_ordinary_branch(self):
+        case = _case(
+            cue="upshot",
+            field="result",
+            context="The policy concerns a consequence effect outcome from a previous event.",
+            value="9",
+            literal="at least 10",
+        )
+        self._write(case)
+        out = direct.run({"task_id": "o-dec", "goal": _goal()}, repo_root=self.root)
+        self.assertTrue(out["pass"], out)
+        self.assertFalse(out["condition_holds"])
+        self.assertEqual(out["selected_branch"], "ORDINARY_BRANCH")
+
+    def test_verifier_rejects_tampered_proof_atom(self):
+        case = _case()
+        self._write(case)
+        res = producer.compute(case, repo_root=self.root)
+        res["condition_atom_id"] = "CERTIFIED_CONDITION::" + "0" * 64
+        checked = verifier.verify(case, res, repo_root=self.root)
+        self.assertFalse(checked["verified"])
+        self.assertIn("MISMATCH:condition_atom_id", checked["errors"])
+
+    def test_run_rolls_back_existing_output_on_postwrite_verifier_failure(self):
+        from unittest.mock import patch
+
+        case = _case()
+        self._write(case)
+        op = self.root / "canonical/tmp/oewn_out.json"
+        op.parent.mkdir(parents=True, exist_ok=True)
+        op.write_text('{"old":true}\n', encoding="utf-8")
+        old = op.read_bytes()
+        original = direct.verifier.verify
+        calls = {"n": 0}
+
+        def injected(c, result, repo_root=None):
+            calls["n"] += 1
+            if calls["n"] == 1:
+                return original(c, result, repo_root=repo_root)
+            return {
+                "verified": False,
+                "producer_independent": True,
+                "errors": ["forced-postwrite-failure"],
+            }
+
+        with patch.object(direct.verifier, "verify", side_effect=injected):
+            out = direct.run(
+                {"task_id": "o-rollback", "goal": _goal()},
+                repo_root=self.root,
+            )
+        self.assertFalse(out["pass"], out)
+        self.assertTrue(out["rollback_complete"], out)
+        self.assertEqual(op.read_bytes(), old)
+
     def test_nonmatching_goal_claims_no_scope(self):
         out = direct.preflight(
             {"task_id": "o10", "goal": "Analyze this finance policy."},
