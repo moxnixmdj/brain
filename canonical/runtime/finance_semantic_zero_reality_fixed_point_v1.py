@@ -77,17 +77,30 @@ def evaluate()->dict:
     if "POLICY_ADEQUACY_QUOTIENT_DOES_NOT_REMOVE_THE_TWO_WORLD_COUNTERMODEL" not in conclusion:
         errors.append("FIXED_POINT_CONCLUSION_DRIFT")
     scheduler=fixed.get("scheduler_delta") or {}
-    if scheduler.get("finance_semantic_adequacy_tail_state")!="EXTERNAL_REQUIRED_SLEEP":
-        errors.append("FIXED_POINT_SCHEDULER_STATE_INVALID")
+    legacy_state=scheduler.get("finance_semantic_adequacy_tail_state")
+    if legacy_state!="EXTERNAL_REQUIRED_SLEEP":
+        errors.append("FIXED_POINT_LEGACY_SCHEDULER_STATE_DRIFT")
 
     return {
         "schema":SCHEMA,
-        "status":"PASS__FINANCE_SEMANTIC_ZERO_REALITY_FIXED_POINT__WAKE_GATED__ZERO_CREDIT" if not errors else "FAIL_CLOSED",
+        "status":(
+            "PASS__FINANCE_SEMANTIC_ZERO_REALITY_FIXED_POINT__"
+            "STRICT_EXTERNALITY_RECONCILED__ZERO_CREDIT"
+            if not errors else "FAIL_CLOSED"
+        ),
         "pass":not errors,
         "errors":errors,
         "two_world_countermodel_preserved_by_policy_quotient":not errors,
         "zero_reality_internal_recomputation_exhausted":not errors,
-        "finance_semantic_adequacy_tail_state":"EXTERNAL_REQUIRED_SLEEP" if not errors else "UNRESOLVED",
+        "finance_semantic_adequacy_tail_state":(
+            "INTERNAL_UNSOLVED__PENDING_ACQUISITION_OR_EXPERIMENT"
+            if not errors else "UNRESOLVED"
+        ),
+        "pending_acquisition_or_experiment_required":not errors,
+        "information_theoretic_externality_proved":False,
+        "irreducible_external_information_proved":False,
+        "legacy_scheduler_state":legacy_state,
+        "legacy_scheduler_state_authoritative":False,
         "root2_globally_closed":False,
         "terminal_credit_delta":0,
     }
