@@ -9,7 +9,8 @@
     "exact_blobs": {
       "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json": "d45b5cdc0e0bbbfb44d88c37a5761776afbcf5fd",
       "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json": "87e4f88f09ba08e9b6f0e5cb6f41d5c8b13a6fb7"
-    }
+    },
+    "final_merge_base_main_sha": "d6cb86e8f6561b7466b793f9a4453d84ed8acccf"
   },
   "independent_carrier": {
     "name": "participial-disposition-verify-20261009-sol",
@@ -33,7 +34,13 @@
     "bounded_family_count": 36,
     "primary_internal_unsolved_count": 1,
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
-    "terminal_remains_false": true
+    "terminal_remains_false": true,
+    "final_merge_base_reaudit": {
+      "result": "PASS",
+      "r2_changed_leaf_count": 7,
+      "terminal_changed_leaf_count": 6,
+      "unexpected_leaf_count": 0
+    }
   },
   "proved": [
     "CURRENT_R2_NOW_RECORDS_VERIFIED_SAME_SENTENCE_REGCAP_CONTEXTUAL_RELATIVE_SELECTION",
