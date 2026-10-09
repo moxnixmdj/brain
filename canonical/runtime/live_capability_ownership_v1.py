@@ -19,7 +19,7 @@ from typing import Any, Mapping
 from canonical.runtime import live_integrated_brain_v1 as live_brain
 from canonical.runtime import autonomous_verified_self_improvement_v1 as self_improvement
 from canonical.runtime import h100_verified_capability_registry_v8 as h100_registry
-from canonical.runtime import certificate_gated_selected_route_runtime_entrypoint_v2 as certified_route
+from canonical.runtime import certificate_gated_selected_route_runtime_entrypoint_v3 as certified_route
 
 SCHEMA = "PROJECT_BRAIN_LIVE_CAPABILITY_OWNERSHIP_V1"
 MANIFEST_SCHEMA = "PROJECT_BRAIN_LIVE_CAPABILITY_OWNERSHIP_MANIFEST_V1"
@@ -194,12 +194,10 @@ def evaluate(
     }
 
     certified_registry = certified_route.load_registry()
-    receipts, _rows = certified_route._verified_rows(certified_registry)
-    route_ids = sorted({
-        "certified_route:" + r.route_id
-        for r in receipts
-        if r.admitted is True
-    })
+    route_ids = sorted(
+        "certified_route:" + route_id
+        for route_id in certified_route.verified_route_ids(certified_registry)
+    )
     for cid in route_ids:
         owned.append({
             "capability_id": cid,

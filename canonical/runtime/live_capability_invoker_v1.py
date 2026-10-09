@@ -15,7 +15,7 @@ from pathlib import Path
 from typing import Any, Callable, Mapping, Sequence
 
 from canonical.runtime import autonomous_verified_self_improvement_v1 as self_improvement
-from canonical.runtime import certificate_gated_selected_route_runtime_entrypoint_v2 as certified_route
+from canonical.runtime import certificate_gated_selected_route_runtime_entrypoint_v3 as certified_route
 from canonical.runtime import h100_verified_capability_registry_v8 as h100
 from canonical.runtime.verified_bound_capability_execution_adapter_v1 import execute as execute_bound
 
@@ -235,15 +235,11 @@ def _invoke_certified_route(route_id: str, payload: Mapping[str, Any]) -> dict[s
         raise LiveCapabilityInvocationError("CERTIFIED_ROUTE_CONTEXT_NOT_OBJECT")
     if not isinstance(route_payload, Mapping):
         raise LiveCapabilityInvocationError("CERTIFIED_ROUTE_PAYLOAD_NOT_OBJECT")
-    registry = certified_route.load_registry()
-    receipts, _ = certified_route._verified_rows(registry)
-    selected = certified_route.select_certified_route(
-        actual_context_digest=certified_route.context_digest(context),
-        receipts=receipts,
-    )
-    if selected.route_id != route_id:
+    selected = certified_route.select_route(context)
+    selected_route_id = str(selected.get("route_id") or "")
+    if selected_route_id != route_id:
         raise LiveCapabilityInvocationError(
-            "CERTIFIED_ROUTE_IDENTITY_MISMATCH:" + selected.route_id
+            "CERTIFIED_ROUTE_IDENTITY_MISMATCH:" + selected_route_id
         )
     out = certified_route.dispatch(context, route_payload)
     return {"pass": True, **dict(out)}

@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_CERTIFICATE_GATED_SELECTED_ROUTE_RUNTIME_REGISTRY_V3",
+  "date": "2026-10-09",
+  "status": "ACTIVE_CURRENT_FAIL_CLOSED_MULTI_MATCH_REGISTRY__EXACT_AND_SYMBOLIC_CANARIES__ZERO_CREDIT",
+  "selection_rule": "UNIQUE_MATCH_REQUIRED__ANY_EXACT_SYMBOLIC_OR_SYMBOLIC_SYMBOLIC_OVERLAP_FAILS_CLOSED",
+  "routes": [
+    {
+      "match_mode": "EXACT_CONTEXT_DIGEST",
+      "context_digest": "c1a047876bb0bd9e8d51044832957721099bbfaa9b59c1234dbefb890351a256",
+      "cell_id": "ROUTER_DEPLOYMENT_CANARY_ONLY",
+      "route_id": "router-deployment-canary",
+      "route_path": "canonical/runtime/router_deployment_canary_v1.py",
+      "route_blob_sha": "de71202a17071c8af88ec7ac6e1f241fb42854c2",
+      "callable": "invoke",
+      "adequacy_certificate_path": "canonical/verification/ROUTER_DEPLOYMENT_CANARY_ADEQUACY_CERTIFICATE_20261007_V1.json",
+      "adequacy_certificate_blob_sha": "e521f7b75123bca5cc9704340283a727bb45e957",
+      "admission_certificate_path": "canonical/verification/ROUTER_DEPLOYMENT_CANARY_ADMISSION_CERTIFICATE_20261007_V1.json",
+      "admission_certificate_blob_sha": "1b2f97e7d46877b8782ea211fd15f679e6bfb5b0",
+      "admitted": true,
+      "creditable": false
+    },
+    {
+      "match_mode": "SYMBOLIC_PREDICATE_CALLABLE",
+      "scope_id": "scope://opus55/observable-trace",
+      "cell_id": "SYMBOLIC_ROUTER_DEPLOYMENT_CANARY_ONLY",
+      "route_id": "router-deployment-canary",
+      "route_path": "canonical/runtime/router_deployment_canary_v1.py",
+      "route_blob_sha": "de71202a17071c8af88ec7ac6e1f241fb42854c2",
+      "callable": "invoke",
+      "admission_predicate_id": "SYMBOLIC_CANARY_KIND_V1",
+      "admission_predicate_path": "canonical/runtime/symbolic_router_deployment_canary_predicate_v1.py",
+      "admission_predicate_blob_sha": "b8a9ba97dc4a2e11cfbcf03fb36dcaa5ca0e45e6",
+      "admission_predicate_callable": "admit",
+      "adequacy_certificate_path": "canonical/verification/SYMBOLIC_ROUTER_DEPLOYMENT_CANARY_ADEQUACY_CERTIFICATE_20261007_V1.json",
+      "adequacy_certificate_blob_sha": "1f87838111c606437442b5d100f57004faf89a05",
+      "admission_certificate_path": "canonical/verification/SYMBOLIC_ROUTER_DEPLOYMENT_CANARY_ADMISSION_CERTIFICATE_20261007_V1.json",
+      "admission_certificate_blob_sha": "5eda5a3275cb11c273159426ab79565d6d2ceaab",
+      "admitted": true,
+      "creditable": false
+    }
+  ],
+  "default": "FAIL_CLOSED",
+  "selected_cover_complete": false,
+  "abc_credit": false,
+  "d_credit": false,
+  "terminal_credit_delta": 0
+}

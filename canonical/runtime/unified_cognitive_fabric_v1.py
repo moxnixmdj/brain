@@ -25,7 +25,7 @@ from canonical.runtime import live_capability_invoker_v1 as live_invoker
 from canonical.runtime import live_capability_composition_v1 as live_composition
 from canonical.runtime import r1_live_architecture_closure_gate_v1 as r1_closure_gate
 from canonical.runtime import universal_escape_resolver_v1 as universal_escape
-from canonical.runtime import certificate_gated_selected_route_runtime_entrypoint_v2 as certified_route
+from canonical.runtime import certificate_gated_selected_route_runtime_entrypoint_v3 as certified_route
 from canonical.runtime import terminal_autopilot_v1 as terminal_autopilot
 from canonical.runtime import terminal_root_decision_gate_v1 as terminal_root
 from canonical.runtime import terminal_closure_reducer as terminal_closure
@@ -54,7 +54,7 @@ ENGINE_DESCRIPTORS = {
     "REPAIR_SYNTHESIS": "live_brain_runtime_v1.synthesize_failure_repair",
     "REPAIR_CYCLE": "live_brain_runtime_v1.execute_failure_repair_cycle",
     "UNIVERSAL_ESCAPE": "universal_escape_resolver_v1.resolve",
-    "CERTIFIED_ROUTE": "certificate_gated_selected_route_runtime_entrypoint_v2",
+    "CERTIFIED_ROUTE": "certificate_gated_selected_route_runtime_entrypoint_v3",
     "TERMINAL_AUTOPILOT": "terminal_autopilot_v1",
     "TERMINAL_ROOT": "terminal_root_decision_gate_v1.evaluate",
     "TERMINAL_CLOSURE": "terminal_closure_reducer",

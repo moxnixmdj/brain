@@ -1,0 +1,18 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "CLOSE-CERTIFIED-ROUTE-REGISTRY-VERSION-ACTIVATION-SEAM-20261009-V1",
+  "status": "PROPOSED",
+  "date": "2026-10-09",
+  "scope": "DEFAULT_RUNTIME_INTEGRATION__CERTIFICATE_GATED_SELECTED_ROUTE_CURRENT_REGISTRY_POINTER",
+  "causal_blocker": "LIVE_CERTIFIED_ROUTE_RUNTIME_HARD_CODES_V1_REGISTRY_WHILE_STRONGER_SYMBOLIC_V2_REGISTRY_EXISTS_OUTSIDE_LIVE_POINTER_IDENTITY",
+  "expected_parent_frontier_change": "Replace version-hardcoded certified-route live wiring with one content-addressed current-registry pointer and one V3 compatibility entrypoint that executes exact-context and symbolic-predicate rows under a global unique-match fail-closed rule.",
+  "constraints": [
+    "NO_SECOND_ROUTER_FAMILY",
+    "PRESERVE_V2_IMMUTABLE_VERIFICATION_BYTES",
+    "NO_LEXICAL_TIE_BREAK_FOR_OVERLAPS",
+    "NO_TERMINAL_OR_SELECTED_COVER_CREDIT",
+    "ZERO_INCREMENTAL_SPEND"
+  ],
+  "incremental_spend_usd": 0,
+  "terminal_authority": false
+}
