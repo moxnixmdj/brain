@@ -1,0 +1,671 @@
+{
+  "schema": "PROJECT_BRAIN_R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V24",
+  "date": "2026-10-09",
+  "status": "ACTIVE__THIRTY_DIRECT_ROUTES__THREE_EXACT_CELLS__TWENTY_SEVEN_BOUNDED_FAMILIES__GENERAL_CROSS_DOCUMENT_EFFECT_COMPOSITION_AND_DECISION_INVARIANT_WORLDSETS_BOUND",
+  "root": "R2_GENERAL_ADEQUATE_DECISION_INTELLIGENCE_INCOMPLETE",
+  "runtime": "canonical/runtime/r2_direct_end_to_end_adequacy_v10.py",
+  "controller": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
+  "rule": [
+    "PURE_EXACT_PREFLIGHT_MUST_MATCH_BEFORE_ANY_EFFECT",
+    "MATCHED_ROUTE_EXECUTES_AT_MOST_ONCE",
+    "SUCCESS_REQUIRES_INDEPENDENT_POST_EXECUTION_ACCEPTANCE_OF_EVERY_RAW_OBLIGATION",
+    "PARTIAL_ACCEPTANCE_IS_NOT_ADEQUACY",
+    "MATCHED_ROUTE_FAILURE_MUST_NOT_RETRY_THROUGH_ANOTHER_POLICY_PATH",
+    "UNMATCHED_GOALS_FALL_THROUGH_TO_THE_EXISTING_R2_FIXED_POINT_LOOP",
+    "TRANSACTIONAL_FAMILY_ROUTES_MAY_COMMIT_ONLY_AFTER_PRODUCER_INDEPENDENT_SEMANTIC_ACCEPTANCE__FAILURE_RESTORES_OR_REMOVES_THE_DECLARED_REPOSITORY_LOCAL_OUTPUT",
+    "DOCX_FAMILY_COMMITS_ONLY_AFTER_EXACT_RAW_INTENT_SIDECAR_BINDING_AND_PRODUCER_INDEPENDENT_STDLIB_OOXML_SEMANTIC_VERIFICATION",
+    "DOCX_JSON_FAMILY_COMMITS_ONLY_AFTER_SOURCE_HASH_STABILITY_EXACT_INTENT_BINDING_AND_PRODUCER_INDEPENDENT_OOXML_SEMANTIC_VERIFICATION",
+    "STRUCTURED_TABLE_FAMILY_COMMITS_ONLY_AFTER_SOURCE_HASH_STABILITY_AND_PRODUCER_INDEPENDENT_JSON_TO_XLSX_OR_SQLITE_SEMANTIC_READBACK",
+    "VISUAL_CODE_FAMILY_COMMITS_ONLY_AFTER_EXACT_QUOTED_PAYLOAD_BINDING_TRANSACTIONAL_PNG_EXECUTION_AND_PRODUCER_INDEPENDENT_ZBAR_SEMANTIC_DECODE_EQUALS_THE_EXACT_PAYLOAD",
+    "MARKDOWN_PDF_FAMILY_COMMITS_ONLY_AFTER_SOURCE_HASH_STABILITY_AND_PRODUCER_INDEPENDENT_PYPDF_VISIBLE_TEXT_READBACK_EQUALS_THE_EXACT_DECLARED_PLAIN_SEMANTIC_SOURCE_PROJECTION",
+    "TYPED_JSON_TRANSFORM_FAMILY_COMMITS_ONLY_AFTER_SOURCE_AND_SPEC_HASH_STABILITY_CONTENT_ADDRESSED_JQ_EXECUTION_AND_PRODUCER_INDEPENDENT_PYTHON_STDLIB_FULL_TRANSFORM_RECOMPUTATION",
+    "HTTP_JSON_OBSERVATION_FAMILY_COMMITS_ONLY_AFTER_STATE_HASH_STABILITY_EXACT_URL_KEY_BINDING_VERIFIED_HTTP_JSON_FETCH_AND_PRODUCER_INDEPENDENT_CURL_PARSED_JSON_SEMANTIC_EQUALITY",
+    "PYPI_PROVENANCE_FAMILY_COMMITS_ONLY_AFTER_SELECTION_AND_METADATA_HASH_STABILITY_CANONICAL_PYPI_METADATA_BINDING_VERIFIED_PRODUCER_AUDIT_AND_PRODUCER_INDEPENDENT_CURL_METADATA_REFETCH_PLUS_WHEEL_REDOWNLOAD_HASH_CONVERGENCE",
+    "EXACT_CLAIM_SUPPORT_FAMILY_COMMITS_ONLY_AFTER_GROUNDED_EVIDENCE_HASH_OFFSET_ID_INTEGRITY_EXACT_QUOTED_CLAIM_PRESENCE_VERIFIED_PRODUCER_RELATION_AND_PRODUCER_INDEPENDENT_MATCH_SET_RECOMPUTATION",
+    "EXPLICIT_NUMERIC_COMPARISON_FAMILY_COMMITS_ONLY_AFTER_VERIFIED_BOUNDED_OBJECTIVE_ROLE_BINDING_AND_PRODUCER_INDEPENDENT_EVIDENCE_INTEGRITY_NUMERIC_LITERAL_EXACT_UNIT_THRESHOLD_AND_DECIMAL_PREDICATE_RECOMPUTATION",
+    "UNIT_NORMALIZED_COMPARISON_FAMILY_COMMITS_ONLY_AFTER_INHERITED_VERIFIED_ROLE_BINDING_EXPLICIT_MULTIPLICATIVE_DIMENSION_MATCH_AND_DUAL_EXACT_RATIONAL_CONVERSION_AND_PREDICATE_RECOMPUTATION",
+    "KNOWLEDGE_CONSISTENCY_FAMILY_COMMITS_ONLY_AFTER_KNOWLEDGE_EVIDENCE_CONTRACT_VALIDATION_CANONICAL_URL_PLUS_JSON_PATH_SOURCE_IDENTITY_RECOMPUTATION_CANONICAL_VALUE_FRESHNESS_AND_TERMINAL_STATUS_RECOMPUTATION",
+    "ROR_AUTHORITY_IDENTITY_FAMILY_COMMITS_ONLY_AFTER_SINGLE_CANDIDATE_BINDING_EXACT_ACTIVE_ROR_DOMAIN_MATCH_AND_PRODUCER_INDEPENDENT_SECOND_ROR_READ_CONVERGENCE",
+    "FINANCE_NORMALIZED_UNLESS_FAMILY_COMMITS_ONLY_AFTER_EXACT_NORMALIZED_SINGLE_UNLESS_SCOPE_BINDING_EXPLICIT_TYPED_EXCEPTION_TRUTH_SOURCE_IMMUTABILITY_AND_SEPARATE_STDLIB_BRANCH_RECOMPUTATION",
+    "FINANCE_CONTROLLED_TYPED_UNLESS_FAMILY_COMMITS_ONLY_AFTER_TASK_BOUND_TYPED_CONTEXT_DIGEST_MATCH_LITERAL_FIELD_CONTROLLED_BOOLEAN_OR_DECIMAL_CONDITION_PROOF_SOURCE_IMMUTABILITY_AND_PRODUCER_INDEPENDENT_SCOPE_CONDITION_BRANCH_RECOMPUTATION",
+    "FINANCE_NORMALIZED_IF_THEN_FAMILY_COMMITS_ONLY_AFTER_EXACT_CERTIFIED_SINGLE_IF_THEN_SCOPE_EXPLICIT_TYPED_ANTECEDENT_TRUTH_SOURCE_IMMUTABILITY_AND_SEPARATE_STDLIB_IF_REPARSE_BRANCH_AND_HASH_RECOMPUTATION",
+    "FINANCE_NORMALIZED_SOURCE_UNIVERSE_FAMILY_COMMITS_ONLY_AFTER_EXACT_PACKAGE_FIELD_COVERAGE_COMPLETE_DISJOINT_FINANCE_ROLE_PARTITION_EXACT_RECONCILIATION_CHECKS_PRODUCER_INDEPENDENT_TYPED_DECISION_RECOMPUTATION_AND_COMPLETE_CONTRIBUTING_EVIDENCE_DOMAIN_COVERAGE",
+    "FINANCE_CROSS_DOCUMENT_JSON_FAMILY_COMMITS_ONLY_AFTER_CASE_SOURCE_AND_TARGET_IMMUTABILITY_CONTENT_ADDRESS_MATCH_EXACT_REFERENCE_ID_BINDING_EXACT_DECIMAL_FACT_EXTRACTION_PRODUCER_INDEPENDENT_EQUALITY_ACTION_RECOMPUTATION_AND_POST_WRITE_READBACK",
+    "FINANCE_EXTERNAL_JSON_POLICY_COMMITS_ONLY_AFTER_INDEPENDENT_HTTPS_JSON_OBSERVATION_SEMANTIC_EQUALITY_EXACT_JSON_PATH_BOOLEAN_OR_DECIMAL_POLICY_RECOMPUTATION_AND_TRANSACTIONAL_ROLLBACK",
+    "FINANCE_BOUNDED_CONTEXTUAL_REFERENCE_COMMITS_ONLY_AFTER_EXACT_STRUCTURAL_PATTERN_MATCH_ZERO_UNRESOLVED_REFERENCE_HOLES_AND_PRODUCER_INDEPENDENT_FULL_SPAN_BINDING_RELATION_OBLIGATION_RECOMPUTATION",
+    "FINANCE_EXPLICIT_ORDERED_PAIR_REFERENCE_COMMITS_ONLY_AFTER_EXACT_SOURCE_PAIR_DECLARATION_UNIQUE_DISTINCT_PAIR_ENTITIES_AND_PRODUCER_INDEPENDENT_FORMER_TO_FIRST_LATTER_TO_SECOND_SPAN_RECOMPUTATION"
+  ],
+  "current_routes": [
+    {
+      "route_id": "DIRECT_ADEQUACY::ARCHIVE_MANIFEST_TAR_GZ_V1",
+      "capability_id": "archive.tar_gz.create_from_manifest",
+      "preflight": "raw_goal_archive_acceptance_v1.GRAMMAR.fullmatch",
+      "acceptance": "raw_goal_archive_acceptance_v1.verify",
+      "scope": "EXACT_ARCHIVE_MANIFEST_VERIFICATION_PATHS_GOAL_ONLY"
+    },
+    {
+      "route_id": "DIRECT_ADEQUACY::EXACT_LITERAL_RESPONSE_V1",
+      "capability_id": null,
+      "preflight": "raw_goal_exact_literal_acceptance_v1.preflight",
+      "acceptance": "raw_goal_exact_literal_acceptance_v1.verify",
+      "scope": "STRICT_REPLY_OR_RESPOND_WITH_EXACTLY_LITERAL_GOAL_ONLY"
+    },
+    {
+      "route_id": "DIRECT_ADEQUACY::LITERAL_JSON_RECORDS_V1",
+      "capability_id": null,
+      "preflight": "raw_goal_literal_json_acceptance_v1.preflight",
+      "acceptance": "raw_goal_literal_json_acceptance_v1.verify",
+      "scope": "STRICT_LITERAL_JSON_RECORDS_TO_CANONICAL_REPOSITORY_PATH_ONLY"
+    },
+    {
+      "route_id": "DIRECT_ADEQUACY::STRUCTURED_BINARY_CODEC_FAMILY_V1",
+      "capability_id": "DYNAMIC_VERIFIED_BOUND_CODEC",
+      "runtime": "canonical/runtime/r2_structured_binary_direct_adequacy_v1.py",
+      "runtime_git_blob_sha": "d3d687fbd1d049b1162520f96c7ba4fb57927f42",
+      "preflight": "EXACT_SINGLE_ACTION_JSON_TO_CBOR_MSGPACK_OR_BSON_GRAMMAR_PLUS_VERIFIED_GOAL_COMPILATION",
+      "acceptance": "PRODUCER_INDEPENDENT_CROSS_SUPPLIER_DECODE_MUST_EQUAL_EXACT_SOURCE_JSON",
+      "transaction": "ONE_REPOSITORY_LOCAL_OUTPUT_FILE__ROLLBACK_ON_ANY_EXECUTION_OR_ACCEPTANCE_FAILURE",
+      "scope": "EXACT_SINGLE_ACTION_JSON_TO_STRUCTURED_BINARY_GOAL_FAMILY",
+      "current_verified_capability_count": 4,
+      "verification": {
+        "path": "canonical/verification/R2_STRUCTURED_BINARY_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
+        "git_blob_sha": "16947dbae01230fe3739d8016dcdb63c10e17675",
+        "isolated_checks": 16
+      }
+    },
+    {
+      "route_id": "DIRECT_ADEQUACY::LITERAL_DOCX_OOXML_FAMILY_V1",
+      "capability_id": "docx.document.create.python_docx",
+      "runtime": "canonical/runtime/r2_docx_direct_adequacy_v1.py",
+      "runtime_git_blob_sha": "631fcf2aa82d090d1f3ade6199829f060b000937",
+      "preflight": "EXACT_TWO_CLAUSE_LITERAL_DOCX_GRAMMAR_PLUS_CURRENT_DETERMINISTIC_COMPILER_CHAIN",
+      "acceptance": "EXACT_INTENT_SIDECAR_BINDING_PLUS_PRODUCER_INDEPENDENT_STDLIB_OOXML_SEMANTIC_VERIFICATION",
+      "transaction": "DOCX_PLUS_INTENT_SIDECAR__ROLLBACK_BOTH_ON_ANY_EXECUTION_OR_ACCEPTANCE_FAILURE",
+      "scope": "EXACT_TWO_CLAUSE_LITERAL_DOCX_PLUS_INDEPENDENT_REOPEN_VERIFY_FAMILY",
+      "current_verified_capability_count": 1,
+      "verification": {
+        "path": "canonical/verification/R2_DOCX_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
+        "git_blob_sha": "f47ba33f5d8aed21bd856315380fc5b391a7e314",
+        "isolated_standalone_checks": 5,
+        "isolated_modified_surface_checks": 20
+      }
+    },
+    {
+      "route_id": "DIRECT_ADEQUACY::DOCX_JSON_RECORD_FAMILY_V1",
+      "capability_id": "docx.document.create_from_json_record",
+      "runtime": "canonical/runtime/r2_docx_json_direct_adequacy_v1.py",
+      "runtime_git_blob_sha": "27fdb096b00bd5dda21e912a1b740ac79bf35cd4",
+      "preflight": "EXACT_SINGLE_RECORD_JSON_TO_DOCX_REPORT_GRAMMAR_PLUS_CURRENT_DETERMINISTIC_COMPILER_BINDING",
+      "acceptance": "SOURCE_HASH_STABILITY_PLUS_EXACT_INTENT_BINDING_PLUS_PRODUCER_INDEPENDENT_OOXML_SEMANTIC_REOPEN",
+      "transaction": "DOCX_PLUS_INTENT_SIDECAR__ROLLBACK_BOTH_ON_ANY_EXECUTION_BINDING_OR_ACCEPTANCE_FAILURE",
+      "scope": "EXACT_SINGLE_RECORD_JSON_TO_SEMANTICALLY_VERIFIED_DOCX_REPORT_FAMILY",
+      "current_verified_capability_count": 1,
+      "verification": {
+        "path": "canonical/verification/R2_DOCX_JSON_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
+        "git_blob_sha": "2ed67b97a6a20338fee346af3e4339823176f24a",
+        "exact_branch_control_replay": "12_OF_12_PASS",
+        "fresh_real_acceptance_verifier_replay": true
+      }
+    },
+    {
+      "route_id": "DIRECT_ADEQUACY::STRUCTURED_TABLE_ARTIFACT_FAMILY_V1",
+      "capability_id": "DYNAMIC_VERIFIED_BOUND_STRUCTURED_TABLE",
+      "runtime": "canonical/runtime/r2_structured_table_direct_adequacy_v1.py",
+      "runtime_git_blob_sha": "2db9a7b10fab4410e08f8f59a8f414817b4f51c3",
+      "preflight": "EXACT_JSON_RECORDS_TO_XLSX_OR_SQLITE_GRAMMAR_PLUS_CURRENT_VERIFIED_PRODUCER_BINDING",
+      "acceptance": "SOURCE_HASH_STABILITY_PLUS_PRODUCER_INDEPENDENT_SEMANTIC_READBACK_AGAINST_CANONICAL_JSON",
+      "transaction": "ONE_REPOSITORY_LOCAL_OUTPUT_FILE__ROLLBACK_ON_ANY_EXECUTION_OR_ACCEPTANCE_FAILURE",
+      "scope": "EXACT_SINGLE_ACTION_JSON_RECORDS_TO_XLSX_OR_SQLITE_GOAL_FAMILY",
+      "current_verified_capability_count": 2,
+      "verification": {
+        "path": "canonical/verification/R2_STRUCTURED_TABLE_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
+        "git_blob_sha": "786bf330876f558b08be368f97525a198fcdd060",
+        "focused_remote_replay": "10_OF_10_PASS",
+        "fresh_isolated_carrier_claimed": false
+      }
+    },
+    {
+      "route_id": "DIRECT_ADEQUACY::TYPED_EVIDENCE_DECISION_FAMILY_V1",
+      "capability_id": "decision.synthesis.typed.stdlib",
+      "verifier_capability_id": "decision.synthesis.verify.stdlib",
+      "runtime": "canonical/runtime/r2_typed_decision_direct_adequacy_v1.py",
+      "runtime_git_blob_sha": "fae1ff72fb5b1369e3fae43ed468ba879fb24f5a",
+      "preflight": "EXACT_TYPED_DECISION_REPOSITORY_LOCAL_JSON_GOAL_GRAMMAR_PLUS_PROJECT_BRAIN_TYPED_DECISION_PROBLEM_V1_SCHEMA",
+      "acceptance": "LOSSLESS_RAW_GOAL_OBLIGATION_COVERAGE_PLUS_SOURCE_SHA_STABILITY_PLUS_PRODUCER_INDEPENDENT_FULL_DECISION_RECOMPUTATION",
+      "transaction": "ONE_REPOSITORY_LOCAL_OUTPUT_FILE__RESTORE_PREEXISTING_BYTES_OR_REMOVE_NEW_OUTPUT_ON_ANY_EXECUTION_OR_VERIFICATION_FAILURE",
+      "scope": "EXACT_REPOSITORY_LOCAL_TYPED_DECISION_PROBLEM_TO_INDEPENDENTLY_VERIFIED_DECISION_RESULT",
+      "current_verified_capability_count": 2,
+      "verification": {
+        "path": "canonical/verification/R2_TYPED_DECISION_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
+        "git_blob_sha": "f804ec785bdac98855c520c7d275bcd0cda2ed99",
+        "standalone_family_replay": "4_OF_4_PASS",
+        "focused_route_integration": "1_OF_1_PASS"
+      }
+    },
+    {
+      "route_id": "DIRECT_ADEQUACY::VISUAL_CODE_QR_CODE128_FAMILY_V1",
+      "capability_id": "DYNAMIC_VERIFIED_BOUND_VISUAL_CODE_PRODUCER",
+      "runtime": "canonical/runtime/r2_visual_code_direct_adequacy_v1.py",
+      "runtime_git_blob_sha": "59f574d5e6726330f29bc41bf2afeb2044c7f7ea",
+      "preflight": "EXACT_QUOTED_ASCII_PAYLOAD_TO_QR_OR_CODE128_PNG_GRAMMAR_PLUS_VERIFIED_PRODUCER_BINDING",
+      "acceptance": "PRODUCER_INDEPENDENT_ZBARIMG_DECODE_MUST_EQUAL_THE_EXACT_QUOTED_PAYLOAD",
+      "transaction": "ONE_REPOSITORY_LOCAL_PNG_OUTPUT__RESTORE_PREEXISTING_BYTES_OR_REMOVE_NEW_OUTPUT_ON_ANY_EXECUTION_OR_ACCEPTANCE_FAILURE",
+      "scope": "EXACT_QUOTED_ASCII_PAYLOAD_TO_QR_OR_CODE128_PNG_GOAL_FAMILY",
+      "current_verified_producer_member_count": 2,
+      "independent_verifier_capability_id": "image.code.decode.zbarimg",
+      "verification": {
+        "path": "canonical/verification/R2_VISUAL_CODE_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
+        "git_blob_sha": "b40830a085a813963134890ed4bb3248082ab802",
+        "focused_remote_replay": "11_OF_11_PASS",
+        "exact_pinned_producer_replay_qr": true,
+        "exact_pinned_producer_replay_code128": true,
+        "exact_pinned_zbarimg_replay": false,
+        "fresh_live_independent_semantic_decode_replay": true
+      }
+    },
+    {
+      "route_id": "DIRECT_ADEQUACY::PLAIN_MARKDOWN_PDF_FAMILY_V1",
+      "capability_id": "document.convert.markdown_pdf.pandoc_weasyprint",
+      "verifier_capability_id": "pdf.extract.text.pypdf",
+      "runtime": "canonical/runtime/r2_markdown_pdf_direct_adequacy_v1.py",
+      "runtime_git_blob_sha": "5b2c1b2ac72952006bc257b5fda379dbeebd2d21",
+      "compiler": "canonical/runtime/goal_compiler.py",
+      "compiler_git_blob_sha": "983126e65544efa098870afb8cc69898652dcc4c",
+      "preflight": "EXACT_REPOSITORY_LOCAL_MARKDOWN_TO_PDF_GRAMMAR_PLUS_ASCII_PLAIN_SEMANTIC_SUBSET_PLUS_VERIFIED_PRODUCER_BINDING",
+      "acceptance": "SOURCE_HASH_STABILITY_PLUS_PRODUCER_INDEPENDENT_PYPDF_VISIBLE_TEXT_READBACK_MUST_EQUAL_EXACT_SOURCE_SEMANTIC_PROJECTION",
+      "transaction": "ONE_REPOSITORY_LOCAL_PDF_OUTPUT__RESTORE_PREEXISTING_BYTES_OR_REMOVE_NEW_OUTPUT_ON_ANY_EXECUTION_BINDING_OR_ACCEPTANCE_FAILURE",
+      "scope": "EXACT_REPOSITORY_LOCAL_PLAIN_SEMANTIC_MARKDOWN_TO_PDF",
+      "current_verified_capability_count": 2,
+      "verification": {
+        "path": "canonical/verification/R2_MARKDOWN_PDF_DIRECT_ADEQUACY_VERIFY_20261008_V2.json",
+        "git_blob_sha": "a89b7710298a84651874dcb8b975cbe05ac0709a",
+        "current_main_regression": "34_OF_34_PASS",
+        "public_real_byte_run_id": 37808591307,
+        "public_real_byte_job_id": 113419266807,
+        "public_real_byte_result": "PASS"
+      }
+    },
+    {
+      "route_id": "DIRECT_ADEQUACY::TYPED_JSON_TRANSFORM_FAMILY_V1",
+      "capability_id": "json.query.jq",
+      "runtime": "canonical/runtime/r2_typed_json_transform_direct_adequacy_v1.py",
+      "runtime_git_blob_sha": "6c89b82321525689b27fd08b730a19567b864fe7",
+      "preflight": "EXACT_TYPED_REPOSITORY_LOCAL_JSON_TRANSFORM_GOAL_PLUS_PROJECT_BRAIN_TYPED_JSON_TRANSFORM_V1_SPEC",
+      "acceptance": "SOURCE_AND_SPEC_IMMUTABILITY_PLUS_PRODUCER_INDEPENDENT_PYTHON_STDLIB_FULL_TRANSFORM_RECOMPUTATION",
+      "transaction": "ONE_REPOSITORY_LOCAL_JSON_OUTPUT__ROLLBACK_ON_FAILURE",
+      "scope": "EXACT_TYPED_LOCAL_JSON_ARRAY_TRANSFORMS__SELECT_EQ_SORT_BY_PROJECT_TAKE",
+      "current_verified_operation_count": 4,
+      "verification": {
+        "path": "canonical/verification/R2_TYPED_JSON_TRANSFORM_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
+        "git_blob_sha": "8b560061f0e41b2c0587d872eceac75c2c006b9b",
+        "direct_router_regression": "15_OF_15_PASS",
+        "family_and_integration": "6_OF_6_PASS",
+        "mutation_falsifier_pass": true,
+        "live_semantic_crosscheck": "2_OF_2_PASS"
+      }
+    },
+    {
+      "route_id": "DIRECT_ADEQUACY::STATE_KEYED_HTTPS_JSON_OBSERVATION_FAMILY_V1",
+      "capability_id": "http.json.fetch_from_state",
+      "runtime": "canonical/runtime/r2_http_json_observation_direct_adequacy_v1.py",
+      "runtime_git_blob_sha": "a633bb191ec27493bee30eb8ba6f9f800e97a427",
+      "preflight": "EXACT_STATE_FILE_PLUS_UNIQUE_NAMED_URL_KEY_PLUS_REPOSITORY_LOCAL_JSON_OUTPUT",
+      "acceptance": "STATE_IMMUTABILITY_PLUS_PRODUCER_INDEPENDENT_CURL_REFETCH_PARSED_JSON_EQUALITY",
+      "transaction": "ONE_REPOSITORY_LOCAL_JSON_OUTPUT__ROLLBACK_ON_ANY_EXECUTION_OR_ACCEPTANCE_FAILURE",
+      "scope": "EXACT_STATE_KEYED_READ_ONLY_HTTPS_JSON_OBSERVATION",
+      "current_verified_capability_count": 1,
+      "external_effect_class": "READ_ONLY_HTTPS_OBSERVATION",
+      "verification": {
+        "path": "canonical/verification/R2_HTTP_JSON_OBSERVATION_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
+        "git_blob_sha": "1b612143fb95e841f098bb88fee5967dc2b8400f",
+        "branch_regression": "22_OF_22_PASS",
+        "public_real_observation_pass": true,
+        "historical_registry_hash_reproduced": true
+      }
+    },
+    {
+      "route_id": "DIRECT_ADEQUACY::PYPI_PINNED_ARTIFACT_PROVENANCE_FAMILY_V1",
+      "capability_id": "pypi.provenance.audit_live_artifact",
+      "runtime": "canonical/runtime/r2_pypi_provenance_direct_adequacy_v1.py",
+      "runtime_git_blob_sha": "2ead573756663bbb119e7319eff64b9ffcbc4da0",
+      "preflight": "EXACT_CANONICAL_SELECTION_PLUS_PYPI_METADATA_PLUS_REPOSITORY_LOCAL_REPORT",
+      "acceptance": "SELECTION_AND_METADATA_IMMUTABILITY_PLUS_PRODUCER_INDEPENDENT_CURL_METADATA_REFETCH_AND_WHEEL_REDOWNLOAD_HASH_CONVERGENCE",
+      "transaction": "ONE_REPOSITORY_LOCAL_JSON_REPORT__ROLLBACK_ON_ANY_EXECUTION_OR_ACCEPTANCE_FAILURE",
+      "scope": "EXACT_CANONICAL_PYPI_PINNED_WHEEL_PROVENANCE_AUDIT",
+      "current_verified_capability_count": 1,
+      "external_effect_class": "READ_ONLY_PYPI_METADATA_AND_WHEEL_OBSERVATION",
+      "verification": {
+        "path": "canonical/verification/R2_PYPI_PROVENANCE_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
+        "git_blob_sha": "16108ce6af5439f3685c53f3f0453f50aa0df8f6",
+        "branch_regression": "22_OF_22_PASS",
+        "real_pypdf_replay_pass": true,
+        "all_four_hashes_equal": true
+      }
+    },
+    {
+      "route_id": "DIRECT_ADEQUACY::EXACT_GROUNDED_EVIDENCE_CLAIM_SUPPORT_FAMILY_V1",
+      "capability_id": "evidence.claim_relation.generic_units.stdlib",
+      "runtime": "canonical/runtime/r2_exact_evidence_claim_support_direct_adequacy_v1.py",
+      "runtime_git_blob_sha": "1ee84b6e1fd4dad3296d034315936e21b2d6c658",
+      "preflight": "EXACT_REPOSITORY_LOCAL_VERIFIED_GENERIC_V2_EXTRACTION_PLUS_EXACT_QUOTED_CLAIM_PLUS_JSON_OUTPUT",
+      "acceptance": "INDEPENDENT_EVIDENCE_UNIT_HASH_OFFSET_ID_RECOMPUTATION_PLUS_EXACT_NORMALIZED_SUBSTRING_MATCH_SET_EQUALITY",
+      "transaction": "ONE_REPOSITORY_LOCAL_JSON_OUTPUT__ROLLBACK_ON_ANY_EXECUTION_OR_ACCEPTANCE_FAILURE",
+      "scope": "EXACT_NORMALIZED_SUBSTRING_SUPPORT_OVER_INTEGRITY_CHECKED_GROUNDED_EVIDENCE_UNITS",
+      "current_verified_capability_count": 1,
+      "verification": {
+        "path": "canonical/verification/R2_EXACT_EVIDENCE_CLAIM_SUPPORT_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
+        "git_blob_sha": "bac9c5365981585db8fa6afcca7204c46a3394d1",
+        "branch_regression": "24_OF_24_PASS",
+        "actual_producer_direct_replay_pass": true,
+        "tamper_negative_pass": true,
+        "absent_claim_negative_pass": true
+      }
+    },
+    {
+      "route_id": "DIRECT_ADEQUACY::EXPLICIT_GROUNDED_NUMERIC_COMPARISON_FAMILY_V1",
+      "capability_id": "evidence.claim_spec.bind.explicit_comparison.stdlib",
+      "runtime": "canonical/runtime/r2_explicit_numeric_comparison_direct_adequacy_v1.py",
+      "runtime_git_blob_sha": "ad688f55d86e3d995e9f1e3851913833a453ad66",
+      "preflight": "EXACT_VERIFIED_GENERIC_V2_EXTRACTION_PLUS_EXPLICIT_QUOTED_BOUNDED_COMPARISON_OBJECTIVE_PLUS_JSON_OUTPUT",
+      "acceptance": "INHERITED_INDEPENDENTLY_QUALIFIED_ROLE_BINDING_PLUS_PRODUCER_INDEPENDENT_EVIDENCE_INTEGRITY_NUMERIC_LITERAL_UNIT_THRESHOLD_AND_DECIMAL_PREDICATE_RECOMPUTATION",
+      "transaction": "ONE_REPOSITORY_LOCAL_JSON_OUTPUT__ROLLBACK_ON_ANY_EXECUTION_OR_ACCEPTANCE_FAILURE",
+      "scope": "EXPLICIT_BOUNDED_GROUNDED_NUMERIC_COMPARISON_GT_LT_GTE_LTE_EQ_NE_ABS_DIFF_LTE",
+      "current_verified_operator_count": 7,
+      "verification": {
+        "path": "canonical/verification/R2_EXPLICIT_NUMERIC_COMPARISON_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
+        "git_blob_sha": "7332bad585a48b7c178dc235555b2e38d088b4ca",
+        "branch_regression": "24_OF_24_PASS",
+        "actual_true_predicate_replay_pass": true,
+        "actual_false_predicate_replay_pass": true,
+        "unit_mismatch_negative_pass": true,
+        "ambiguous_role_negative_pass": true,
+        "wrong_predicate_rollback_pass": true
+      }
+    },
+    {
+      "route_id": "DIRECT_ADEQUACY::UNIT_NORMALIZED_GROUNDED_NUMERIC_COMPARISON_FAMILY_V1",
+      "capability_id": "evidence.claim_spec.bind.explicit_comparison.stdlib",
+      "runtime": "canonical/runtime/r2_unit_normalized_numeric_comparison_direct_adequacy_v1.py",
+      "runtime_git_blob_sha": "2cc68f8c9d52255f4d09a9f5ea93985ca49a0506",
+      "preflight": "EXACT_VERIFIED_GENERIC_V2_EXTRACTION_PLUS_EXPLICIT_QUOTED_COMPARISON_OBJECTIVE_WITH_DIFFERENT_ENUMERATED_MULTIPLICATIVE_UNITS_PLUS_JSON_OUTPUT",
+      "acceptance": "INHERITED_VERIFIED_ROLE_BINDING_PLUS_PRODUCER_FRACTION_AND_INDEPENDENT_INTEGER_RATIO_UNIT_CONVERSION_AND_PREDICATE_RECOMPUTATION",
+      "transaction": "ONE_REPOSITORY_LOCAL_JSON_OUTPUT__ROLLBACK_ON_ANY_FAILURE",
+      "scope": "EXPLICIT_MULTIPLICATIVE_UNIT_NORMALIZED_GROUNDED_NUMERIC_COMPARISON",
+      "current_verified_dimension_count": 11,
+      "current_verified_operator_count": 7,
+      "verification": {
+        "path": "canonical/verification/R2_UNIT_NORMALIZED_NUMERIC_COMPARISON_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
+        "git_blob_sha": "a0555c2fc891393f4da377a375efdb882977f9bc",
+        "branch_regression": "27_OF_27_PASS",
+        "cross_unit_equality_pass": true,
+        "false_predicate_pass": true,
+        "converted_threshold_pass": true,
+        "force_conversion_pass": true,
+        "affine_temperature_negative_pass": true
+      }
+    },
+    {
+      "route_id": "DIRECT_ADEQUACY::PROVENANCE_KNOWLEDGE_CONSISTENCY_FAMILY_V1",
+      "capability_id": "knowledge.consistency.assess",
+      "runtime": "canonical/runtime/r2_knowledge_consistency_direct_adequacy_v1.py",
+      "runtime_git_blob_sha": "14c87718111c4fc235eb697624a98b2a95fa8968",
+      "preflight": "EXACT_KNOWLEDGE_CONSISTENCY_MANIFEST_OVER_PROJECT_BRAIN_KNOWLEDGE_EVIDENCE_V1_PLUS_JSON_OUTPUT",
+      "acceptance": "PRODUCER_INDEPENDENT_EVIDENCE_CONTRACT_SOURCE_IDENTITY_CANONICAL_VALUE_FRESHNESS_COUNT_AND_TERMINAL_STATUS_RECOMPUTATION",
+      "transaction": "ONE_REPOSITORY_LOCAL_JSON_OUTPUT__ROLLBACK_ON_ANY_EXECUTION_OR_ACCEPTANCE_FAILURE",
+      "scope": "PROVENANCE_BEARING_EXTERNAL_JSON_VALUE_CONSISTENCY_OVER_DISTINCT_URL_AND_JSON_PATH_IDENTITIES",
+      "valid_terminal_outcomes": [
+        "SUPPORTED",
+        "CONFLICTED",
+        "STALE",
+        "INSUFFICIENT"
+      ],
+      "verification": {
+        "path": "canonical/verification/R2_KNOWLEDGE_CONSISTENCY_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
+        "git_blob_sha": "99cceec24f88ce9842a73760d51f98e63eb55fa7",
+        "branch_regression": "25_OF_25_PASS",
+        "supported_replay_pass": true,
+        "conflicted_replay_pass": true,
+        "stale_replay_pass": true,
+        "insufficient_same_identity_pass": true
+      }
+    },
+    {
+      "route_id": "DIRECT_ADEQUACY::EXACT_ROR_AUTHORITY_IDENTITY_FAMILY_V1",
+      "capability_id": "source.authority.identity.ror",
+      "runtime": "canonical/runtime/r2_ror_authority_identity_direct_adequacy_v1.py",
+      "runtime_git_blob_sha": "30a661044f4c18ff14c2f15cdc46187c3be184f5",
+      "preflight": "EXACT_ONE_LOCAL_SINGLE_CANDIDATE_ENVELOPE_PLUS_ONE_LOCAL_JSON_OUTPUT__NO_NETWORK_READ_IN_PREFLIGHT",
+      "acceptance": "ONE_ACTIVE_EXACT_ROR_DOMAIN_BINDING_PLUS_PRODUCER_INDEPENDENT_CURL_ROR_V2_IDENTITY_CONVERGENCE",
+      "transaction": "ONE_REPOSITORY_LOCAL_JSON_OUTPUT__ROLLBACK_ON_ANY_EXECUTION_OR_ACCEPTANCE_FAILURE",
+      "scope": "EXACT_PUBLIC_HOST_TO_ONE_ACTIVE_ROR_ORGANIZATION_IDENTITY",
+      "current_verified_capability_count": 1,
+      "external_effect_class": "READ_ONLY_ROR_V2_QUERY",
+      "verification": {
+        "path": "canonical/verification/R2_ROR_AUTHORITY_IDENTITY_DIRECT_ADEQUACY_VERIFY_20261009_V1.json",
+        "git_blob_sha": "d3c3c0e101d97a86f9aff16e9b00d2bc0ca5d34e",
+        "branch_regression": "23_OF_23_PASS",
+        "real_worldbank_replay_pass": true,
+        "worldbank_ror_id": "https://ror.org/02md09461",
+        "worldbank_organization_name": "World Bank Group",
+        "producer_independent_convergence": true
+      }
+    },
+    {
+      "route_id": "DIRECT_ADEQUACY::FINANCE_NORMALIZED_UNLESS_BRANCH_FAMILY_V1",
+      "capability_id": "finance.normalized_unless.branch.stdlib",
+      "verifier_capability_id": "finance.normalized_unless.verify.stdlib",
+      "runtime": "canonical/runtime/r2_finance_normalized_unless_direct_adequacy_v1.py",
+      "runtime_git_blob_sha": "eb33e45d31d984a3339d7390827853366eb55ddb",
+      "producer": "canonical/runtime/finance_normalized_unless_branch_v1.py",
+      "producer_git_blob_sha": "8fb1d23d3c2c56d602f075e01c09d02132a74e2d",
+      "independent_verifier": "canonical/runtime/finance_normalized_unless_verify_v1.py",
+      "independent_verifier_git_blob_sha": "233faeaea7bad6e4525f1d4d09bbc94dda565ba4",
+      "preflight": "EXACT_REPOSITORY_LOCAL_NORMALIZED_FINANCE_CASE_SCHEMA_PLUS_CERTIFIED_SINGLE_UNLESS_SCOPE_PLUS_EXPLICIT_BOOLEAN_EXCEPTION_APPLIES",
+      "acceptance": "SOURCE_IMMUTABILITY_PLUS_SEPARATE_STDLIB_UNLESS_REPARSE_PLUS_BRANCH_SPAN_TEXT_HASH_AND_TYPED_BOOLEAN_RECOMPUTATION",
+      "transaction": "ONE_REPOSITORY_LOCAL_JSON_OUTPUT__RESTORE_PREEXISTING_BYTES_OR_REMOVE_NEW_OUTPUT_ON_ANY_POST_WRITE_VERIFICATION_FAILURE",
+      "scope": "EXACT_NORMALIZED_SUPERVISORY_FINANCE_SINGLE_UNLESS_WITH_EXPLICIT_TYPED_EXCEPTION_TRUTH",
+      "current_verified_capability_count": 2,
+      "verification": {
+        "path": "canonical/verification/R2_FINANCE_NORMALIZED_UNLESS_DIRECT_ADEQUACY_VERIFY_20261009_V1.json",
+        "git_blob_sha": "218ad506472fa413314e6a3ff2015445d5b962c9",
+        "compile_pass": true,
+        "stdlib_and_router_checks": "15_OF_15_PASS",
+        "both_boolean_branches_replayed": true,
+        "rollback_negative_pass": true
+      }
+    },
+    {
+      "route_id": "DIRECT_ADEQUACY::FINANCE_CONTROLLED_TYPED_UNLESS_FAMILY_V1",
+      "capability_id": "finance.controlled_typed_unless.branch.stdlib",
+      "verifier_capability_id": "finance.controlled_typed_unless.verify.stdlib",
+      "runtime": "canonical/runtime/r2_finance_controlled_typed_unless_direct_adequacy_v1.py",
+      "runtime_git_blob_sha": "77ce6472a8a923a805d21e09b7bc40fc0e8ba6e3",
+      "producer": "canonical/runtime/finance_controlled_typed_unless_branch_v1.py",
+      "producer_git_blob_sha": "d8e55fbae6303ef2ec8a06c7ff66d9474e567ad7",
+      "independent_verifier": "canonical/runtime/finance_controlled_typed_unless_verify_v1.py",
+      "independent_verifier_git_blob_sha": "bdd726c08f31821706849ee0aa83a6ff7dfdb1e2",
+      "preflight": "EXACT_CONTROLLED_TYPED_FINANCE_CASE_PLUS_TASK_BOUND_CONTENT_ADDRESS_PLUS_CERTIFIED_SINGLE_UNLESS_LITERAL_FIELD_BOOLEAN_OR_DECIMAL_GRAMMAR",
+      "acceptance": "SOURCE_IMMUTABILITY_PLUS_PRODUCER_INDEPENDENT_OPERATOR_SCOPE_TYPED_CONTEXT_CONDITION_ATOM_BRANCH_TEXT_AND_HASH_RECOMPUTATION",
+      "transaction": "ONE_REPOSITORY_LOCAL_JSON_OUTPUT__ROLLBACK_ON_ANY_POST_WRITE_VERIFICATION_FAILURE",
+      "scope": "CONTROLLED_SINGLE_UNLESS_LITERAL_TYPED_FIELD_BOOLEAN_OR_DECIMAL_CONDITION_RELATIVE_TO_TASK_BOUND_CONTENT_ADDRESSED_CONTEXT",
+      "current_verified_capability_count": 2,
+      "verification": {
+        "path": "canonical/verification/R2_FINANCE_CONTROLLED_TYPED_UNLESS_DIRECT_ADEQUACY_VERIFY_20261009_V1.json",
+        "git_blob_sha": "aa9643827c602dd774695c7f5659d0059accef05",
+        "remote_checks": "21_OF_21_PASS",
+        "boolean_and_decimal_replays": true,
+        "uncontrolled_language_negative": true,
+        "rollback_negative": true
+      }
+    },
+    {
+      "route_id": "DIRECT_ADEQUACY::FINANCE_NORMALIZED_IF_BRANCH_FAMILY_V1",
+      "capability_id": "finance.normalized_if.branch.stdlib",
+      "verifier_capability_id": "finance.normalized_if.verify.stdlib",
+      "runtime": "canonical/runtime/r2_finance_normalized_if_direct_adequacy_v1.py",
+      "runtime_git_blob_sha": "44502069bf0430106f2c6cbcfe8da410195c67e9",
+      "producer": "canonical/runtime/finance_normalized_if_branch_v1.py",
+      "producer_git_blob_sha": "6ee4f0db31328d308f5ec3853c8630e15d8b38f8",
+      "independent_verifier": "canonical/runtime/finance_normalized_if_verify_v1.py",
+      "independent_verifier_git_blob_sha": "7b6a3d1cb40386bf8774e170743e0fb4ca28857c",
+      "preflight": "EXACT_REPOSITORY_LOCAL_NORMALIZED_FINANCE_IF_CASE_SCHEMA_PLUS_CERTIFIED_SINGLE_IF_THEN_SCOPE_PLUS_EXPLICIT_BOOLEAN_ANTECEDENT_HOLDS",
+      "acceptance": "SOURCE_IMMUTABILITY_PLUS_SEPARATE_STDLIB_IF_REPARSE_PLUS_ANTECEDENT_CONSEQUENT_BRANCH_SPAN_TEXT_HASH_AND_TYPED_BOOLEAN_RECOMPUTATION",
+      "transaction": "ONE_REPOSITORY_LOCAL_JSON_OUTPUT__RESTORE_PREEXISTING_BYTES_OR_REMOVE_NEW_OUTPUT_ON_ANY_POST_WRITE_VERIFICATION_FAILURE",
+      "scope": "EXACT_NORMALIZED_SUPERVISORY_FINANCE_SINGLE_IF_THEN_WITH_EXPLICIT_TYPED_ANTECEDENT_TRUTH",
+      "current_verified_capability_count": 2,
+      "verification": {
+        "path": "canonical/verification/R2_FINANCE_NORMALIZED_IF_DIRECT_ADEQUACY_VERIFY_20261009_V1.json",
+        "git_blob_sha": "5a0f58dd93d4109183d94b5c00ef911e830525b3",
+        "focused_assertions": "10_OF_10_PASS",
+        "py_compile": "5_OF_5_PASS",
+        "v1_fallback_equivalence": "2_OF_2_PASS",
+        "prefix_and_suffix_if_replayed": true,
+        "rollback_negative_pass": true
+      }
+    },
+    {
+      "route_id": "DIRECT_ADEQUACY::FINANCE_NORMALIZED_SOURCE_UNIVERSE_DECISION_FAMILY_V1",
+      "capability_id": "decision.synthesis.typed.stdlib",
+      "verifier_capability_id": "decision.synthesis.verify.stdlib",
+      "runtime": "canonical/runtime/r2_finance_normalized_source_universe_direct_adequacy_v1.py",
+      "runtime_git_blob_sha": "7530b3717eda4429a7903bf5d317384d727b8de7",
+      "front_door": "canonical/runtime/r2_direct_end_to_end_adequacy_v2.py",
+      "front_door_git_blob_sha": "f0724b0c0c96fe4fac2aacdfd19b7a9c6a62f737",
+      "preflight": "EXACT_COMPLETE_NORMALIZED_FINANCE_PACKAGE_GRAMMAR_PLUS_EXACT_PACKAGE_FIELD_SET_TYPED_DECISION_SCHEMA_COMPLETE_DISJOINT_LEAF_ROLE_PARTITION_AND_EXACT_RECONCILIATION_BINDING",
+      "acceptance": "INPUT_IMMUTABILITY_PLUS_PRODUCER_INDEPENDENT_TYPED_DECISION_RECOMPUTATION_PLUS_COMPLETE_RANKING_EVIDENCE_DOMAIN_COVERAGE",
+      "scope": "COMPLETE_TYPED_FINANCE_PACKAGE_SOURCE_UNIVERSE_TO_INDEPENDENTLY_RECOMPUTED_DECISION",
+      "current_verified_leaf_count": 2,
+      "verification": {
+        "path": "canonical/verification/R2_FINANCE_NORMALIZED_SOURCE_UNIVERSE_DIRECT_ADEQUACY_VERIFY_20261009_V2.json",
+        "git_blob_sha": "f3a340593a17a849381bde9ef0cc3633ce006a43",
+        "status": "PASS__V31_REBASED_NORMALIZED_FINANCE_SOURCE_UNIVERSE_DIRECT_ADEQUACY__28_OF_28_BEHAVIORAL__3_OF_3_COMPILE__ZERO_CREDIT"
+      }
+    },
+    {
+      "route_id": "DIRECT_ADEQUACY::FINANCE_EXPLICIT_DEFINITION_UNLESS_FAMILY_V1",
+      "capability_id": "finance.explicit_definition_unless.branch.stdlib",
+      "runtime": "canonical/runtime/r2_finance_explicit_definition_unless_direct_adequacy_v1.py",
+      "runtime_git_blob_sha": "ece0f13678afddfd2f93ffe375f6483f5f0ebb4f",
+      "producer": "canonical/runtime/finance_explicit_definition_unless_branch_v1.py",
+      "producer_git_blob_sha": "8f5450a727060c5fddc708b2a9e45520a287aa87",
+      "independent_verifier": "canonical/runtime/finance_explicit_definition_unless_verify_v1.py",
+      "independent_verifier_git_blob_sha": "e7e5cc3cac06e9d204d726286ef00a55771f97ae",
+      "preflight": "EXACT_TWO_SENTENCE_EXPLICIT_MEANS_DEFINITION_TO_LITERAL_TYPED_UNLESS_REFERENCE",
+      "acceptance": "PRODUCER_INDEPENDENT_EXPLICIT_DEFINITION_REFERENCE_TYPED_CONDITION_SCOPE_ATOM_BRANCH_AND_HASH_RECOMPUTATION",
+      "scope": "EXACT_TWO_SENTENCE_EXPLICIT_MEANS_DEFINITION_TO_LITERAL_TYPED_UNLESS_REFERENCE",
+      "verification": {
+        "path": "canonical/verification/R2_FINANCE_EXPLICIT_DEFINITION_UNLESS_DIRECT_ADEQUACY_VERIFY_20261009_V1.json",
+        "git_blob_sha": "3f628acd089b42420bf00d4a787655f999a3d2d2",
+        "focused": "13_OF_13_PASS",
+        "compile": "5_OF_5_PASS",
+        "v2_fallback_equivalence": "2_OF_2_PASS"
+      }
+    },
+    {
+      "route_id": "DIRECT_ADEQUACY::FINANCE_CROSS_DOCUMENT_JSON_BINDING_FAMILY_V1",
+      "capability_id": "finance.cross_document_json.binding.stdlib",
+      "verifier_capability_id": "finance.cross_document_json.binding.verify.stdlib",
+      "runtime": "canonical/runtime/r2_finance_cross_document_json_direct_adequacy_v1.py",
+      "runtime_git_blob_sha": "8a4616e140409f40bcf8645d1e4b3416fc7bfcc7",
+      "producer": "canonical/runtime/finance_cross_document_binding_v1.py",
+      "producer_git_blob_sha": "cf629024c1b81b103b509b79291c7342093d1133",
+      "independent_verifier": "canonical/runtime/finance_cross_document_binding_verify_v1.py",
+      "independent_verifier_git_blob_sha": "7781c9396e1ae40ec2dffc42b87bc0352ba603b0",
+      "preflight": "EXACT_REPOSITORY_LOCAL_CASE_PLUS_TWO_LOCAL_JSON_DOCUMENTS_PLUS_CANONICAL_CONTENT_HASHES_EXACT_REFERENCE_ID_PATHS_DECIMAL_FACT_PATHS_AND_DISTINCT_ACTIONS",
+      "acceptance": "PRODUCER_INDEPENDENT_DOCUMENT_HASH_REFERENCE_ID_DECIMAL_EQUALITY_SELECTED_ACTION_AND_BINDING_HASH_RECOMPUTATION",
+      "transaction": "ONE_REPOSITORY_LOCAL_JSON_OUTPUT__RESTORE_PREEXISTING_BYTES_OR_REMOVE_NEW_OUTPUT_ON_ANY_POST_WRITE_VERIFICATION_FAILURE",
+      "scope": "EXACT_CONTENT_ADDRESSED_LOCAL_JSON_REFERENCE_ID_BINDING_PLUS_DECIMAL_FACT_EQUALITY_TO_EXPLICIT_TWO_ACTION_POLICY",
+      "current_verified_capability_count": 2,
+      "verification": {
+        "path": "canonical/verification/R2_FINANCE_CROSS_DOCUMENT_JSON_DIRECT_ADEQUACY_VERIFY_20261009_V1.json",
+        "git_blob_sha": "404d3f81b05ea36584d33d2892e0af617b68a241",
+        "exact_blob_behavioral": "28_OF_28_PASS",
+        "remote_carrier_replay_claimed": false
+      }
+    },
+    {
+      "route_id": "DIRECT_ADEQUACY::FINANCE_EXPLICIT_ALIAS_TYPED_UNLESS_FAMILY_V1",
+      "capability_id": "finance.explicit_alias_unless.branch.stdlib",
+      "verifier_capability_id": "finance.explicit_alias_unless.verify.stdlib",
+      "runtime": "canonical/runtime/r2_finance_explicit_alias_unless_direct_adequacy_v1.py",
+      "runtime_git_blob_sha": "a46eb2d7038060cd773c0f1b060dc340387b6254",
+      "producer": "canonical/runtime/finance_explicit_alias_unless_branch_v1.py",
+      "producer_git_blob_sha": "3b44d625c16c0bc201104ec79525c59b9dba8b36",
+      "independent_verifier": "canonical/runtime/finance_explicit_alias_unless_verify_v1.py",
+      "independent_verifier_git_blob_sha": "7d0ff43736a32006c55b67e9390098b224369eeb",
+      "preflight": "EXACT_TWO_SENTENCE_EXPLICIT_REFERS_TO_OR_IS_DEFINED_AS_ALIAS_PLUS_TYPED_BOOLEAN_OR_DECIMAL_CONDITION",
+      "acceptance": "PRODUCER_INDEPENDENT_ALIAS_REFERENCE_TYPED_CONDITION_BRANCH_AND_HASH_RECOMPUTATION",
+      "transaction": "ONE_REPOSITORY_LOCAL_JSON_OUTPUT__ROLLBACK_ON_ANY_EXECUTION_OR_ACCEPTANCE_FAILURE",
+      "scope": "EXACT_EXPLICIT_REFERS_TO_OR_IS_DEFINED_AS_ALIAS_TO_LITERAL_TYPED_UNLESS_REFERENCE",
+      "verification": {
+        "path": "canonical/verification/R2_FINANCE_EXPLICIT_ALIAS_UNLESS_DIRECT_ADEQUACY_VERIFY_20261009_V1.json",
+        "git_blob_sha": "9beaa80af044dbf6d6eeef48386a35d180fba18f",
+        "focused_replay": "10_OF_10_PASS",
+        "integration_replay": "4_OF_4_PASS",
+        "fixed_point_regression": "20_OF_20_PASS"
+      }
+    },
+    {
+      "route_id": "DIRECT_ADEQUACY::FINANCE_STATE_KEYED_EXTERNAL_JSON_POLICY_FAMILY_V1",
+      "capability_id": "finance.external_json_policy.stdlib",
+      "verifier_capability_id": "finance.external_json_policy.verify.stdlib",
+      "runtime": "canonical/runtime/r2_finance_external_json_policy_direct_adequacy_v1.py",
+      "runtime_git_blob_sha": "6ad117814488685418f4e090b924a59bcb89ea9f",
+      "producer": "canonical/runtime/finance_external_json_policy_v1.py",
+      "producer_git_blob_sha": "1ae08f7b96c5a889682510976ed183708e7cd30a",
+      "independent_verifier": "canonical/runtime/finance_external_json_policy_verify_v1.py",
+      "independent_verifier_git_blob_sha": "012a428b48af8a588da18c9059b017239b59a9f0",
+      "preflight": "EXACT_STATE_KEYED_HTTPS_JSON_OBSERVATION_CASE_PLUS_EXACT_JSON_PATH_BOOLEAN_OR_DECIMAL_POLICY",
+      "acceptance": "INDEPENDENT_HTTP_SEMANTIC_REFETCH_PLUS_PRODUCER_INDEPENDENT_POLICY_RECOMPUTATION",
+      "transaction": "OBSERVATION_AND_FINAL_JSON_OUTPUTS_ROLL_BACK_ON_POST_OBSERVATION_POLICY_FAILURE",
+      "scope": "STATE_KEYED_INDEPENDENTLY_REFETCHED_HTTPS_JSON_VALUE_TO_EXACT_BOOLEAN_OR_DECIMAL_FINANCE_POLICY",
+      "verification": {
+        "path": "canonical/verification/R2_FINANCE_EXTERNAL_JSON_POLICY_DIRECT_ADEQUACY_VERIFY_20261009_V1.json",
+        "git_blob_sha": "031b989adfd1d009328a887eb28f61102cb5a8b1",
+        "status": "PASS__STATE_KEYED_INDEPENDENTLY_REFETCHED_EXTERNAL_JSON_FINANCE_POLICY__COMPOSITION_22_OF_22__INHERITS_HTTP_REAL_OBSERVATION_22_OF_22__ZERO_CREDIT"
+      }
+    },
+    {
+      "route_id": "DIRECT_ADEQUACY::FINANCE_BOUNDED_CONTEXTUAL_REFERENCE_FAMILY_V1",
+      "capability_id": "finance.contextual_reference.resolve.stdlib",
+      "verifier_capability_id": "finance.contextual_reference.verify.stdlib",
+      "runtime": "canonical/runtime/r2_finance_contextual_reference_direct_adequacy_v1.py",
+      "runtime_git_blob_sha": "f02b16830b70b1138ba2ea8acab5a047b7d11dee",
+      "producer": "canonical/runtime/finance_contextual_reference_resolve_v1.py",
+      "producer_git_blob_sha": "f030c4e20bede91468289a27916bb765b73fb7ed",
+      "independent_verifier": "canonical/runtime/finance_contextual_reference_verify_v1.py",
+      "independent_verifier_git_blob_sha": "f32b7623523af8ef6d774258d624ab205a4c825f",
+      "preflight": "EXACT_REPOSITORY_LOCAL_FINANCE_CONTEXTUAL_REFERENCE_CASE_WITH_ONE_OR_MORE_SUPPORTED_STRUCTURAL_PATTERNS_AND_ZERO_UNRESOLVED_HOLES",
+      "acceptance": "PRODUCER_INDEPENDENT_FULL_BINDING_RELATION_OBLIGATION_SPAN_RECOMPUTATION",
+      "transaction": "ONE_REPOSITORY_LOCAL_JSON_OUTPUT__ROLLBACK_ON_POST_WRITE_VERIFICATION_FAILURE",
+      "scope": "MODAL_SUBJECT_PRONOUN_IT_THEY__UNIQUE_PRIOR_MODE_TO_THAT_MODE__MODAL_ELLIPSIS_TOO__TWO_BY_TWO_RESPECTIVELY",
+      "verification": {
+        "path": "canonical/verification/R2_V37_CONTEXTUAL_REFERENCE_VERIFY_20261009_V1.json",
+        "git_blob_sha": "cb3cf706a9be08d4561168ee8103b15d4d831c9e",
+        "status": "PASS__BOUNDED_CONTEXTUAL_REFERENCE_FAMILY__REMOTE_13_OF_13__SUCCESSOR_ROUTER_3_OF_3__V7_EXECUTABLE_BODY_EQUIVALENT_TO_TESTED_SUCCESSOR__ZERO_CREDIT"
+      }
+    },
+    {
+      "route_id": "DIRECT_ADEQUACY::FINANCE_EXPLICIT_ORDERED_PAIR_FORMER_LATTER_FAMILY_V1",
+      "capability_id": "finance.former_latter.resolve.stdlib",
+      "verifier_capability_id": "finance.former_latter.verify.stdlib",
+      "runtime": "canonical/runtime/r2_finance_former_latter_direct_adequacy_v1.py",
+      "runtime_git_blob_sha": "c47cf50d69e24bc1490b9c6c1ce2e5683a03d68f",
+      "producer": "canonical/runtime/finance_former_latter_resolve_v1.py",
+      "producer_git_blob_sha": "92e4029419ac21f0cf0a18247bee0aa191b9a205",
+      "independent_verifier": "canonical/runtime/finance_former_latter_verify_v1.py",
+      "independent_verifier_git_blob_sha": "8510d9db74a7e3f50480e0c0aa586d3333441569",
+      "preflight": "EXACT_TWO_SENTENCE_FINANCE_CASE_WITH_EXPLICIT_ORDERED_PAIR_DECLARATION_AND_AT_LEAST_ONE_FORMER_OR_LATTER_REFERENCE",
+      "acceptance": "PRODUCER_INDEPENDENT_PAIR_ENTITY_REFERENCE_MENTION_TARGET_SPAN_AND_TEXT_RECOMPUTATION",
+      "transaction": "ONE_REPOSITORY_LOCAL_JSON_OUTPUT__ROLLBACK_ON_POST_WRITE_VERIFICATION_FAILURE",
+      "scope": "EXPLICIT_ORDERED_PAIR_FORMER_TO_FIRST_LATTER_TO_SECOND_ONLY",
+      "verification": {
+        "path": "canonical/verification/R2_V38_PAIR_REFERENCE_VERIFY_20261009_V1.json",
+        "git_blob_sha": "5d283287394557520ce709b91c93dd5a25b44083",
+        "status": "PASS__EXPLICIT_ORDERED_PAIR_REFERENCE__EXACT_CONTENT_ADDRESSED_13_OF_13__COMPILE_4_OF_4__ZERO_CREDIT"
+      }
+    },
+    {
+      "route_id": "DIRECT_ADEQUACY::CROSS_DOCUMENT_EFFECT_COMPOSITION_V1",
+      "capability_id": "cross_document.effect_composition.typed.stdlib",
+      "verifier_capability_id": "cross_document.effect_composition.verify.stdlib",
+      "runtime": "canonical/runtime/r2_cross_document_effect_direct_adequacy_v1.py",
+      "runtime_git_blob_sha": "0377f5b533fba3966f4ba9b9eb53acf49a38b4a0",
+      "preflight": "EXACT_TYPED_CONTENT_ADDRESSED_CROSS_DOCUMENT_EFFECT_CASE__COMMON_EFFECTIVE_VALUE_ONLY",
+      "acceptance": "PRODUCER_INDEPENDENT_EFFECT_APPLICABILITY_SUPERSESSION_AND_COMMON_VALUE_RECOMPUTATION",
+      "transaction": "ONE_REPOSITORY_LOCAL_JSON_OUTPUT__ROLLBACK_ON_ANY_POST_WRITE_VERIFICATION_FAILURE",
+      "scope": "TYPED_CONTENT_ADDRESSED_CROSS_DOCUMENT_VALUE_EFFECTS_WITH_EXPLICIT_CONDITIONS_VALID_TIME_AND_SUPERSESSION_DAG__COMMON_EFFECTIVE_VALUE_ONLY",
+      "verification": {
+        "path": "canonical/verification/R2_GENERAL_CROSS_DOCUMENT_EFFECT_WORLDSET_VERIFY_20261009_V1.json",
+        "git_blob_sha": "eaa5620e23843ceaced452686312c6faa665a4e6",
+        "status": "PASS__GENERAL_PROOF_CARRYING_CROSS_DOCUMENT_EFFECT_COMPOSITION__CHANGED_SURFACE_50_OF_50_TOTAL_STACK"
+      }
+    },
+    {
+      "route_id": "DIRECT_ADEQUACY::CROSS_DOCUMENT_EFFECT_WORLDSET_V1",
+      "capability_id": "cross_document.effect_worldset.invariant.stdlib",
+      "verifier_capability_id": "cross_document.effect_worldset.verify.stdlib",
+      "runtime": "canonical/runtime/r2_cross_document_effect_worldset_direct_adequacy_v1.py",
+      "runtime_git_blob_sha": "a6c8f965cedda0d42e47b0d71667af5f2c9cf8df",
+      "preflight": "DECLARED_COMPLETE_FINITE_TYPED_EFFECT_HYPOTHESIS_UNIVERSE__COMMON_EFFECTIVE_VALUE_ONLY",
+      "acceptance": "PRODUCER_INDEPENDENT_WORLDSET_RECOMPUTATION_AND_OUTPUT_READBACK",
+      "transaction": "ONE_REPOSITORY_LOCAL_JSON_OUTPUT__ROLLBACK_ON_ANY_POST_WRITE_VERIFICATION_FAILURE",
+      "scope": "DECLARED_COMPLETE_FINITE_TYPED_EFFECT_HYPOTHESIS_UNIVERSE__COMMON_EFFECTIVE_VALUE_ONLY",
+      "verification": {
+        "path": "canonical/verification/R2_GENERAL_CROSS_DOCUMENT_EFFECT_WORLDSET_VERIFY_20261009_V1.json",
+        "git_blob_sha": "eaa5620e23843ceaced452686312c6faa665a4e6",
+        "status": "PASS__CORRELATED_EFFECT_WORLDSET_AND_V10_ROUTING_INCLUDED_IN_50_OF_50_CHANGED_SURFACE_VERIFICATION"
+      }
+    }
+  ],
+  "expansion_law": "ADD_A_ROUTE_ONLY_WHEN_BOTH_AN_EXACT_SIDE_EFFECT_FREE_PREFLIGHT_AND_AN_INDEPENDENT_FULL_RAW_OBLIGATION_ACCEPTANCE_VERIFIER_EXIST",
+  "hard_nonclaims": [
+    "NO_GENERAL_NATURAL_LANGUAGE_SEMANTIC_CLOSURE",
+    "NO_CLAIM_UNMATCHED_GOALS_ARE_INADEQUATE",
+    "NO_CLAIM_EXECUTION_SUCCESS_ALONE_IS_GOAL_SUCCESS",
+    "NO_CLAIM_THE_CODEC_FAMILY_GENERALIZES_BEYOND_THE_EXACT_DECLARED_GRAMMAR_OR_TO_EXTERNAL_IRREVERSIBLE_EFFECTS",
+    "NO_CLAIM_THE_DOCX_FAMILY_GENERALIZES_BEYOND_THE_EXACT_TWO_CLAUSE_GRAMMAR_OR_TO_EXTERNAL_IRREVERSIBLE_EFFECTS",
+    "NO_TERMINAL_CREDIT",
+    "NO_CLAIM_THE_DOCX_JSON_FAMILY_GENERALIZES_BEYOND_ITS_EXACT_JSON_RECORD_REPORT_GRAMMAR",
+    "NO_CLAIM_THE_STRUCTURED_TABLE_FAMILY_GENERALIZES_BEYOND_ITS_EXACT_XLSX_AND_SQLITE_GRAMMARS",
+    "NO_CLAIM_THE_TYPED_DECISION_FAMILY_GENERALIZES_BEYOND_ITS_EXACT_TYPED_INPUT_AND_GOAL_GRAMMAR",
+    "NO_CLAIM_THE_VISUAL_CODE_FAMILY_GENERALIZES_BEYOND_ITS_EXACT_QUOTED_ASCII_QR_AND_CODE128_GRAMMARS",
+    "NO_CLAIM_THE_MARKDOWN_PDF_FAMILY_GENERALIZES_BEYOND_ITS_EXACT_ASCII_HEADINGS_AND_PLAIN_PARAGRAPH_SEMANTIC_SUBSET_OR_PROVES_LAYOUT_OR_PROFESSIONAL_QUALITY",
+    "NO_CLAIM_TYPED_JSON_TRANSFORM_GENERALIZES_BEYOND_BOUNDED_ARRAYS_OF_OBJECTS_AND_DECLARED_OPERATIONS",
+    "NO_CLAIM_THE_HTTP_JSON_OBSERVATION_FAMILY_AUTHORIZES_ARBITRARY_URLS_CREDENTIALS_BROWSER_INTERACTION_OR_MUTATING_NETWORK_EFFECTS",
+    "NO_CLAIM_THE_PYPI_PROVENANCE_FAMILY_AUTHORIZES_PACKAGE_INSTALLATION_ARBITRARY_HOSTS_CREDENTIALS_OR_MUTATING_NETWORK_EFFECTS",
+    "NO_CLAIM_THE_EXACT_CLAIM_SUPPORT_FAMILY_PROVES_PARAPHRASE_ENTAILMENT_FACTUAL_CORRECTNESS_CAUSALITY_EVIDENCE_QUALITY_SUFFICIENCY_OR_SOURCE_INDEPENDENCE",
+    "NO_CLAIM_EXPLICIT_NUMERIC_COMPARISON_AUTHORIZES_GENERAL_NATURAL_LANGUAGE_UNIT_CONVERSION_PARAPHRASE_ENTAILMENT_FACTUAL_CORRECTNESS_CAUSALITY_EVIDENCE_SUFFICIENCY_OR_SOURCE_INDEPENDENCE",
+    "NO_CLAIM_UNIT_NORMALIZED_COMPARISON_AUTHORIZES_AFFINE_TEMPERATURES_ARBITRARY_UNIT_ALIASES_INFERRED_DIMENSIONS_OR_GENERAL_COMPOUND_UNIT_ALGEBRA",
+    "NO_CLAIM_DISTINCT_URL_PLUS_JSON_PATH_IDENTITIES_PROVE_ORGANIZATIONAL_INDEPENDENCE_OR_FACTUAL_TRUTH",
+    "NO_CLAIM_ROR_AUTHORITY_IDENTITY_PROVES_PRIMARY_SOURCE_STATUS_OBJECTIVE_RELEVANCE_FACTUAL_CORRECTNESS_EVIDENCE_SUFFICIENCY_ENDORSEMENT_OR_ORGANIZATIONAL_INDEPENDENCE",
+    "NO_CLAIM_FINANCE_NORMALIZED_UNLESS_DIRECT_ADEQUACY_INFERS_EXCEPTION_TRUTH_OR_CLOSES_RAW_UNSTRUCTURED_FINANCE_SEMANTICS",
+    "NO_CLAIM_FINANCE_SEMANTIC_ADEQUACY_TAIL_IS_GLOBALLY_CLOSED_BY_THIS_BOUNDED_ROUTE",
+    "NO_CLAIM_CONTROLLED_TYPED_FINANCE_UNLESS_ROUTE_PROVES_TYPED_CONTEXT_EXTERNAL_WORLD_TRUTH_SYNONYMY_REFERENCE_RESOLUTION_ONTOLOGY_BINDING_OR_GENERAL_FINANCE_SEMANTICS",
+    "NO_CLAIM_FINANCE_NORMALIZED_IF_THEN_POSITIVE_ADEQUACY_INFERS_ANTECEDENT_TRUTH_OR_CLOSES_RAW_OR_UNSTRUCTURED_FINANCE_SEMANTICS.",
+    "NO_CLAIM_FINANCE_NORMALIZED_SOURCE_UNIVERSE_DIRECT_ADEQUACY_PROVES_RAW_TEXT_TO_PACKAGE_NORMALIZATION_SYNONYMY_REFERENCE_RESOLUTION_ONTOLOGY_CROSS_DOCUMENT_BINDING_OR_EXTERNAL_FACT_AUTHENTICATION.",
+    "NO_CLAIM_EXPLICIT_DEFINITION_ROUTE_SOLVES_IMPLICIT_OR_AMBIGUOUS_REFERENCE_SYNONYMY_CONTEXT_DEPENDENT_WORD_SENSE_GENERAL_ONTOLOGY_CROSS_DOCUMENT_OR_EXTERNAL_FACT_BINDING",
+    "NO_CLAIM_SOURCE_UNIVERSE_OR_EXPLICIT_DEFINITION_ROUTES_CLOSE_FINANCE_FAMILY_OR_OPEN_WORLD",
+    "NO_CLAIM_CROSS_DOCUMENT_JSON_ROUTE_PROVES_EXTERNAL_WORLD_TRUTH_OR_GENERAL_CROSS_DOCUMENT_SEMANTICS",
+    "NO_CLAIM_CROSS_DOCUMENT_JSON_ROUTE_SOLVES_SYNONYMY_CONTEXT_DEPENDENT_WORD_SENSE_OR_ONTOLOGY_MAPPING",
+    "NO_CLAIM_V20_CLOSES_FINANCE_FAMILY_OR_OPEN_WORLD",
+    "NO_CLAIM_EXTERNAL_JSON_POLICY_PROVES_ENDPOINT_AUTHORITY_OR_GENERAL_EXTERNAL_FACT_AUTHENTICATION",
+    "NO_CLAIM_BOUNDED_CONTEXTUAL_REFERENCE_ROUTE_SOLVES_GENERAL_COREFERENCE_SYNONYMY_CONTEXT_WORD_SENSE_ONTOLOGY_OR_GENERAL_CROSS_DOCUMENT_SEMANTICS",
+    "NO_CLAIM_EXPLICIT_ORDERED_PAIR_REFERENCE_ROUTE_SOLVES_IMPLICIT_OR_AMBIGUOUS_FORMER_LATTER_GENERAL_COREFERENCE_SYNONYMY_WORD_SENSE_OR_ONTOLOGY",
+    "NO_CLAIM_GENERAL_CROSS_DOCUMENT_RAW_LANGUAGE_HYPOTHESIS_COMPLETENESS",
+    "NO_CLAIM_IMPLICIT_PRECEDENCE_OR_EXTERNAL_WORLD_TRUTH",
+    "NO_CLAIM_OUTCOME_CHANGING_CROSS_DOCUMENT_AMBIGUITY_IS_CLOSED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "current_route_count": 30,
+  "exact_cell_count": 3,
+  "route_expansion_note": "THREE_EXACT_CELLS_PLUS_TWENTY_SEVEN_BOUNDED_FAMILIES_ACTIVE",
+  "runtime_binding": {
+    "path": "canonical/runtime/r2_direct_end_to_end_adequacy_v10.py",
+    "git_blob_sha": "1a78930ab5536a8db35097eb7e924284b0a0de73"
+  },
+  "bounded_family_count": 27,
+  "supersedes": {
+    "path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V23.json",
+    "git_blob_sha": "933b12e60a8e4843a47999dbe5f7c15d060a16b3",
+    "reason": "ADD_VERIFIED_GENERIC_CROSS_DOCUMENT_EFFECT_COMPOSITION_AND_DECISION_INVARIANT_EFFECT_WORLDSET_ROUTES"
+  },
+  "controller_binding": {
+    "path": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
+    "git_blob_sha": "9b2978c54712eabd0c7d55919be12be22937a81d"
+  },
+  "current_runtime": {
+    "path": "canonical/runtime/r2_direct_end_to_end_adequacy_v10.py",
+    "git_blob_sha": "1a78930ab5536a8db35097eb7e924284b0a0de73"
+  },
+  "count_reconciliation": {
+    "route_list_count": 30,
+    "declared_current_route_count": 30,
+    "exact_cell_count": 3,
+    "bounded_family_count": 27,
+    "coherent": true
+  }
+}
