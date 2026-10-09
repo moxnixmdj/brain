@@ -105,6 +105,24 @@ class Tests(unittest.TestCase):
             ]
         self.assertTrue(all(x["pass"] for x in results), results)
 
+    def test_all_three_rivals_entail_same_dispositional_loss_absorption_atom(self):
+        with patch.object(regcap, "verify_pack", side_effect=fake_source_result):
+            results = [
+                regcap.verify_property_request(
+                    request(concept, "DISPOSITION::LOSS_ABSORPTION"),
+                    repo_root=ROOT,
+                )
+                for concept in (regcap.CCOB, regcap.CCYB, regcap.TLAC)
+            ]
+        self.assertTrue(all(x["pass"] for x in results), results)
+        self.assertEqual(
+            {x["edge_receipt"]["target_id"] for x in results},
+            {"DISPOSITION::LOSS_ABSORPTION"},
+        )
+        self.assertTrue(
+            all(x["reverse_inference_authorized"] is False for x in results)
+        )
+
     def test_loss_absorption_property_does_not_reverse_classify_to_tlac(self):
         with patch.object(regcap, "verify_pack", side_effect=fake_source_result):
             out = regcap.verify_property_request(
