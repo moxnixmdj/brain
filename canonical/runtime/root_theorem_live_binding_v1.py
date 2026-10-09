@@ -29,6 +29,10 @@ FALSIFIER_TESTS_PATH = "canonical/tests/test_root_theorem_falsifier_v1.py"
 R4_BINDING_TESTS_PATH = "canonical/tests/test_root_theorem_r4_binding_coherence_v1.py"
 LIVE_VALIDATOR_PATH = "canonical/runtime/root_theorem_live_binding_v1.py"
 LIVE_VALIDATOR_TESTS_PATH = "canonical/tests/test_root_theorem_live_binding_v1.py"
+TERMINAL_REDUCER_PATH = "canonical/runtime/terminal_closure_reducer.py"
+TERMINAL_REDUCER_TESTS_PATH = "canonical/tests/test_terminal_closure_reducer_semantic_states_v1.py"
+TERMINAL_MANIFEST_PATH = "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json"
+TARGET_ENVELOPE_PATH = "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json"
 
 
 def git_blob_sha(data: bytes) -> str:
@@ -67,6 +71,12 @@ def validate_documents(
     r4_binding_tests_blob_sha: str,
     live_validator_blob_sha: str,
     live_validator_tests_blob_sha: str,
+    terminal_reducer_blob_sha: str,
+    terminal_reducer_tests_blob_sha: str,
+    terminal_manifest: Mapping[str, Any],
+    terminal_manifest_blob_sha: str,
+    target_envelope: Mapping[str, Any],
+    target_envelope_blob_sha: str,
 ) -> dict[str, Any]:
     errors: list[str] = []
 
@@ -218,6 +228,10 @@ def validate_repo(root: Path) -> dict[str, Any]:
     r4_binding_tests_path = root / R4_BINDING_TESTS_PATH
     live_validator_path = root / LIVE_VALIDATOR_PATH
     live_validator_tests_path = root / LIVE_VALIDATOR_TESTS_PATH
+    terminal_reducer_path = root / TERMINAL_REDUCER_PATH
+    terminal_reducer_tests_path = root / TERMINAL_REDUCER_TESTS_PATH
+    terminal_manifest_path = root / TERMINAL_MANIFEST_PATH
+    target_envelope_path = root / TARGET_ENVELOPE_PATH
 
     mission_bytes = mission_path.read_bytes()
     theorem_bytes = theorem_path.read_bytes()
@@ -247,4 +261,10 @@ def validate_repo(root: Path) -> dict[str, Any]:
         r4_binding_tests_blob_sha=git_blob_sha(r4_binding_tests_path.read_bytes()),
         live_validator_blob_sha=git_blob_sha(live_validator_path.read_bytes()),
         live_validator_tests_blob_sha=git_blob_sha(live_validator_tests_path.read_bytes()),
+        terminal_reducer_blob_sha=git_blob_sha(terminal_reducer_path.read_bytes()),
+        terminal_reducer_tests_blob_sha=git_blob_sha(terminal_reducer_tests_path.read_bytes()),
+        terminal_manifest=load_json(terminal_manifest_path),
+        terminal_manifest_blob_sha=git_blob_sha(terminal_manifest_path.read_bytes()),
+        target_envelope=load_json(target_envelope_path),
+        target_envelope_blob_sha=git_blob_sha(target_envelope_path.read_bytes()),
     )
