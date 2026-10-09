@@ -221,7 +221,7 @@ def augment_problem(
                     rows.append(deepcopy(atom))
                 working[key] = rows
 
-    boundary_ref = working.get("typed_acceptance_information_boundary_binding")
+    boundary_ref = working.get("typed_acceptance_no_hidden_verifier_evidence")
     if boundary_ref is not None:
         proof = verify_no_hidden_verifier_atom(boundary_ref, repo_root=root)
         source_bound_atom_proofs.append(deepcopy(proof))
@@ -349,7 +349,7 @@ def augment_problem(
             "SEMANTIC_CONDITION_ATOMS_MUST_ALREADY_EXIST_IN_DECISION_BASIS;"
             "THE_SUPPORTED_TRANSFORM_ATOM_MAY_BE_RECOMPUTED_FROM_EXACT_MODEL_STRUCTURE;"
             "THE_NO_HIDDEN_VERIFIER_ATOM_MAY_BE_RECOMPUTED_ONLY_FROM_THE_EXACT_"
-            "CONTENT_ADDRESSED_PREWAVE_INFORMATION_BOUNDARY;"
+            "INDEPENDENT_EXECUTION_RECEIPT_AND_BOUND_PUBLIC_TASK_DATAFLOW;"
             "REGISTRY_NEVER_PROVES_THE_OTHER_THREE_CONDITION_ATOMS;"
             "P3_STILL_REQUIRES_SOURCE_AUTHORIZED_REFINEMENT_TO_REMOVE_FALSE_WORLDS"
         ),
