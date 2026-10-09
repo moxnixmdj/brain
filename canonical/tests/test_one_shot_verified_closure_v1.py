@@ -68,6 +68,8 @@ class OneShotClosureTests(unittest.TestCase):
             out["status"],
             "VERIFIED_INTERNAL_FIXED_POINT__IMPROVEMENT_QUEUE_EMPTY",
         )
+        self.assertTrue(out["internal_improvement_queue_closed"])
+        self.assertFalse(out["verified_goal_satisfied_or_irreducible_external_only"])
 
     def test_internal_root1_gap_remains_open(self):
         pending = [{"work_id": "w1", "kind": "EXPAND_SUCCESS_VERIFICATION_FRONTIER"}]
@@ -100,7 +102,7 @@ class OneShotClosureTests(unittest.TestCase):
             out = closure.run(repo_root=".", state_path="state.json")
         self.assertFalse(out["pass"])
         self.assertTrue(out["fixed_point"])
-        self.assertEqual(out["status"], "OPEN__INTERNAL_SOLVABLE_GAP_REMAINS")
+        self.assertEqual(out["status"], "OPEN__INTERNAL_UNSOLVED_GAP_REMAINS")
         self.assertTrue(out["residual"]["internally_solvable_gap_remaining"])
 
     def test_external_evidence_only_fixed_point_stays_open_without_irreducibility_proof(self):
@@ -132,7 +134,7 @@ class OneShotClosureTests(unittest.TestCase):
         self.assertFalse(out["pass"])
         self.assertEqual(
             out["status"],
-            "OPEN__NEW_INFORMATION_OR_EXPERIENCE_REQUIRED__IRREDUCIBILITY_NOT_PROVED",
+            "OPEN__INTERNAL_UNSOLVED_GAP_REMAINS",
         )
         self.assertFalse(out["irreducible_external_information_proved"])
 
@@ -155,7 +157,7 @@ class OneShotClosureTests(unittest.TestCase):
         ):
             out = closure.run(repo_root=".", state_path="state.json")
         self.assertFalse(out["pass"])
-        self.assertEqual(out["status"], "OPEN__INTERNAL_SOLVABLE_GAP_REMAINS")
+        self.assertEqual(out["status"], "OPEN__INTERNAL_UNSOLVED_GAP_REMAINS")
         self.assertEqual(out["residual"]["class"], "UNCLASSIFIED_UNRESOLVED_WORK")
         self.assertIn(
             "UNCLASSIFIED_UNRESOLVED_WORK_WITHOUT_BLOCKER_CERTIFICATE",
@@ -223,7 +225,7 @@ class OneShotClosureTests(unittest.TestCase):
         ):
             out = closure.run(repo_root=".", state_path="state.json")
         self.assertFalse(out["pass"])
-        self.assertEqual(out["status"], "OPEN__INTERNAL_SOLVABLE_GAP_REMAINS")
+        self.assertEqual(out["status"], "OPEN__INTERNAL_UNSOLVED_GAP_REMAINS")
         self.assertIn(
             "ROOT1_SUCCESS_ADAPTER_OR_VERIFIER_FRONTIER_GAP",
             out["residual"]["internal_blockers"],
@@ -268,7 +270,7 @@ class OneShotClosureTests(unittest.TestCase):
         self.assertFalse(out["pass"])
         self.assertEqual(
             out["status"],
-            "OPEN__NEW_INFORMATION_OR_EXPERIENCE_REQUIRED__IRREDUCIBILITY_NOT_PROVED",
+            "OPEN__INTERNAL_UNSOLVED_GAP_REMAINS",
         )
         self.assertFalse(out["irreducible_external_information_proved"])
         self.assertIn(
