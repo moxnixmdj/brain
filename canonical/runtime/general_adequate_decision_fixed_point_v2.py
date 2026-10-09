@@ -21,7 +21,7 @@ from typing import Any, Callable, Mapping
 from canonical.runtime.general_adequate_decision_controller_v1 import (
     run as run_controller,
 )
-from canonical.runtime import r2_direct_end_to_end_adequacy_v1 as direct_adequacy
+from canonical.runtime import r2_direct_end_to_end_adequacy_v2 as direct_adequacy
 from canonical.runtime.r2_existing_policy_adequacy_repair_v1 import (
     repair as repair_existing_adequacy,
 )
@@ -306,9 +306,9 @@ def run(
     trace: list[dict[str, Any]] = []
     prior_candidates: list[dict[str, Any]] = []
 
-    direct_preflight = direct_adequacy.preflight(current)
+    direct_preflight = direct_adequacy.preflight(current, repo_root=repo_root)
     if direct_preflight.get("matched") is True:
-        direct_result = direct_adequacy.run(current)
+        direct_result = direct_adequacy.run(current, repo_root=repo_root)
         trace.append(
             {
                 "step": 0,
