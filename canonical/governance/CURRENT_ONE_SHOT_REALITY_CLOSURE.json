@@ -1,10 +1,10 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_ONE_SHOT_REALITY_CLOSURE_POINTER_V1",
   "date": "2026-10-09",
-  "status": "ACTIVE_VERIFIED_ORCHESTRATOR__STRICT_EXTERNALITY_LAW_VERIFIED__ACTUAL_LIVE_R3_INTERNAL_FIXED_POINT__NO_RESIDUAL__NOT_LIVE_DEFAULT",
+  "status": "ACTIVE_VERIFIED_ORCHESTRATOR__DECISION_SUFFICIENT_AND_MINIMUM_INFORMATION_GATES_LOAD_BEARING__STRICT_EXTERNALITY_LAW_VERIFIED__ACTUAL_LIVE_R3_INTERNAL_FIXED_POINT__NO_RESIDUAL__NOT_LIVE_DEFAULT",
   "runtime": {
     "path": "canonical/runtime/one_shot_reality_closure_v2.py",
-    "git_blob_sha": "b304e9f5857044d2e1e28a3d5122140d38dc1069"
+    "git_blob_sha": "f7e42025aa80d2ae18e752262b4f5cb933d0ba39"
   },
   "predecessor": {
     "path": "canonical/runtime/one_shot_verified_closure_v1.py",
@@ -12,8 +12,9 @@
     "role": "LOAD_BEARING_INNER_FIXED_POINT__HISTORICAL_STATE_INSUFFICIENCY_ONLY__INFORMATION_THEORETIC_EXTERNALITY_REQUIRES_SEPARATE_PROOF"
   },
   "verification": {
-    "path": "canonical/verification/LIVE_R3_PROVENANCE_DEPLOYMENT_20261009_V1.json",
-    "status": "PASS__ACTUAL_LIVE_RUNTIME_AND_STATE__R3_INTERNAL_RESIDUAL_ZERO"
+    "path": "canonical/verification/ONE_SHOT_DECISION_SUFFICIENT_GATE_VERIFY_20261009_V2.json",
+    "status": "PASS__FOCUSED_18_OF_18__CURRENT_V1_ADJACENT_7_OF_7__PY_COMPILE_PASS",
+    "preserves_live_r3_fixed_point_verification": "canonical/verification/LIVE_R3_PROVENANCE_DEPLOYMENT_20261009_V1.json"
   },
   "authority": {
     "callable_as_verified_orchestrator": true,
@@ -31,17 +32,25 @@
     "orphan_failure_telemetry_is_not_terminal_obligation": true,
     "current_r3_internal_unsolved": false,
     "actual_live_runtime_deployment_verified": true,
-    "actual_live_state_migrated_and_verified": true
+    "actual_live_state_migrated_and_verified": true,
+    "decision_sufficient_gap_contract_load_bearing": true,
+    "minimum_policy_changing_information_contract_load_bearing": true,
+    "unverified_semantic_omission_allowed": false,
+    "full_empirical_evaluation_default": false,
+    "verifier_authority_mutation_from_synthesis_or_acquisition": false
   },
   "next_load_bearing_roots": [
     "RECOMPUTE_CURRENT_TERMINAL_TRUTH_FRONTIER_FROM_ACTUAL_LIVE_R3_ZERO_RESIDUAL_STATE",
-    "CONTINUE_ONLY_CURRENT_LOAD_BEARING_R2_OR_TERMINAL_TRUTH_CLOSURE",
+    "ROUTE_EVERY_CONSTRUCTIVE_GAP_THROUGH_DECISION_SUFFICIENT_CONTRACT_BEFORE_SYNTHESIS",
+    "ROUTE_EVERY_EVIDENCE_GAP_THROUGH_MINIMUM_POLICY_CHANGING_INFORMATION_CONTRACT_BEFORE_ACQUISITION",
     "PRODUCE_EXACT_IDENTITY_ZERO_EXPOSURE_16384_CONTEXT_CAPACITY_RECEIPT_BEFORE_TB_SCIENCE_RANK14_ONLY_IF_STILL_ON_CURRENT_TERMINAL_FRONTIER",
     "KEEP_STRICT_EXTERNALITY_PROOF_GATE_AND_REPLAY_PROVENANCE_INVARIANT_LOAD_BEARING"
   ],
   "accounting": {
     "incremental_spend_usd": 0,
-    "terminal_credit_delta": 0
+    "terminal_credit_delta": 0,
+    "decision_sufficient_gate_credit_delta": 0,
+    "minimum_information_gate_credit_delta": 0
   },
   "live_r3_fixed_point": {
     "path": "canonical/verification/LIVE_R3_PROVENANCE_DEPLOYMENT_20261009_V1.json",
