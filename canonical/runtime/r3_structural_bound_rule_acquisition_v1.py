@@ -102,8 +102,14 @@ def acquire(
             "replay_context": dict(replay),
             "authority_requested": "CANDIDATE_ONLY",
         }
-        if structural.preflight(adapter_request, repo_root=repo_root) is None:
+        candidate = structural.preflight(adapter_request, repo_root=repo_root)
+        if not isinstance(candidate, Mapping):
             return fail("EXISTING_BOUND_VERIFIER_CONTRACT_NOT_SATISFIED")
+        normalization_profile = str(
+            candidate.get("structural_normalization_profile") or ""
+        ).strip()
+        if normalization_profile not in structural.NORMALIZATION_PROFILES:
+            return fail("STRUCTURAL_NORMALIZATION_PROFILE_INVALID")
 
         surface = str(obs.get("surface") or "").strip()
         source_schema = str(obs.get("schema") or "").strip()
@@ -127,6 +133,7 @@ def acquire(
             "surface": surface,
             "source_schema": source_schema,
             "verification_kind": bound.VERIFICATION_KIND,
+            "normalization_profile": normalization_profile,
             "source_observation_id": oid,
         }
         rule = {
@@ -158,6 +165,7 @@ def acquire(
             "provider_id": PROVIDER_ID,
             "rule_id": rule["rule_id"],
             "verification_kind": bound.VERIFICATION_KIND,
+            "normalization_profile": normalization_profile,
             "adapter_frontier_sha256_before": sha256(before_raw).hexdigest(),
             "adapter_frontier_sha256_after": sha256(after_raw).hexdigest(),
             "candidate_generation_authority": True,
