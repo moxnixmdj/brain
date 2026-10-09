@@ -193,6 +193,205 @@ def compile_criterion(criterion: str, *, criterion_id: str | None = None) -> dic
                 )
                 break
 
+    # Exact top-level file count with no semantic role claim.
+    if not checks:
+        m = re.fullmatch(
+            r"Exactly\s+(one|two|three|four|five|\d+)\s+(?:deliverable\s+)?files?\s+"
+            r"(?:is|are)\s+submitted[.]?",
+            text,
+            re.I,
+        )
+        if m:
+            words = {"one": 1, "two": 2, "three": 3, "four": 4, "five": 5}
+            raw = m.group(1).casefold()
+            count = words.get(raw, int(raw) if raw.isdigit() else -1)
+            if 0 < count <= 64:
+                checks.append(Check("EXACT_TOP_LEVEL_FILE_COUNT", {"count": count}))
+
+    # Additional whole-criterion simple native format forms observed in the
+    # public-220 rubric. These checks deliberately prove only the file fact.
+    if not checks and re.fullmatch(
+        r"The\s+deliverable\s+is\s+a\s+Microsoft\s+Word\s+document\s+with\s+"
+        r"a\s+\.docx\s+file\s+extension[.]?",
+        text,
+        re.I,
+    ):
+        checks.append(Check("AT_LEAST_ONE_VALID_FILE_BY_EXTENSION", {"extension": ".docx"}))
+
+    if not checks and re.fullmatch(
+        r"The\s+(?:submitted\s+)?deliverable\s+is\s+an\s+Excel\s+file[.]?",
+        text,
+        re.I,
+    ):
+        checks.append(
+            Check(
+                "AT_LEAST_ONE_VALID_FILE_ALLOWED_EXTENSIONS",
+                {"extensions": [".xlsx", ".xlsm"]},
+            )
+        )
+
+    # Generic whole-deliverable native-format statements. For singular
+    # "is/provides as" wording we deliberately require exactly one top-level
+    # native-valid file, which is stricter than many rubrics but cannot produce
+    # a false positive.
+    if not checks:
+        exact_generic_formats = (
+            (r"Output\s+is\s+a\s+PDF[.]?", ".pdf"),
+            (r"The\s+deliverable\s+is\s+in\s+PDF\s+format[.]?", ".pdf"),
+            (r"Provides\s+the\s+deliverable\s+as\s+a\s+PDF[.]?", ".pdf"),
+            (r"The\s+deliverable\s+file\s+is\s+a\s+pdf\s+file[.]?", ".pdf"),
+            (r"The\s+output\s+deliverable\s+is\s+a\s+PDF\s+file[.]?", ".pdf"),
+            (r"A\s+single\s+PDF\s+file\s+is\s+delivered[.]?", ".pdf"),
+            (r"Submission\s+is\s+a\s+single\s+PDF\s+file\s*\(\.pdf\)[.]?", ".pdf"),
+            (r"Provides\s+deliverable\s+as\s+a\s+single\s+PDF\s+file[.]?", ".pdf"),
+            (r"The\s+deliverable\s+is\s+a\s+single\s+PDF\s+file\s*\(\.pdf\)[.]?", ".pdf"),
+            (r"The\s+deliverable\s+is\s+a\s+single\s+file\s+in\s+PDF\s+format[.]?", ".pdf"),
+            (r"Deliverable\s+is\s+a\s+Word\s+document[.]?", ".docx"),
+            (r"Deliverable\s+is\s+a\s+Microsoft\s+Word\s+file[.]?", ".docx"),
+            (r"The\s+deliverable\s+is\s+a\s+Microsoft\s+Word\s+file[.]?", ".docx"),
+            (r"Submission\s+is\s+a\s+PowerPoint\s+file[.]?", ".pptx"),
+            (r"Provides\s+the\s+deliverable\s+as\s+a\s+PowerPoint\s+file[.]?", ".pptx"),
+        )
+        for pat, ext in exact_generic_formats:
+            if re.fullmatch(pat, text, re.I):
+                checks.append(
+                    Check(
+                        "EXACT_TOP_LEVEL_FILE_COUNT_BY_EXTENSION",
+                        {
+                            "count": 1,
+                            "extension": ext,
+                            "total_files_must_equal_count": True,
+                        },
+                    )
+                )
+                break
+
+    # "Includes" is weaker than singular whole-deliverable language: prove only
+    # existence of a native-valid PDF, not exclusivity.
+    if not checks and re.fullmatch(
+        r"Deliverable\s+includes\s+a\s+PDF\s+file[.]?",
+        text,
+        re.I,
+    ):
+        checks.append(Check("AT_LEAST_ONE_VALID_FILE_BY_EXTENSION", {"extension": ".pdf"}))
+
+    # Generic Excel-file statements. Modern XLSX/XLSM are natively reopened by
+    # this verifier. Legacy XLS remains a deliberate false negative.
+    if not checks:
+        excel_single_patterns = (
+            r"Deliverable\s+is\s+an\s+Excel\s+file[.]?",
+            r"Provides\s+an\s+Excel\s+deliverable\s+file[.]?",
+            r"Deliverable\s+is\s+an\s+Excel\s+spreadsheet[.]?",
+            r"Delivers\s+a\s+single\s+Excel\s+workbook[.]?",
+        )
+        if any(re.fullmatch(pat, text, re.I) for pat in excel_single_patterns):
+            checks.append(
+                Check(
+                    "EXACT_TOP_LEVEL_FILE_COUNT_ALLOWED_EXTENSIONS",
+                    {
+                        "count": 1,
+                        "extensions": [".xlsm", ".xlsx"],
+                        "total_files_must_equal_count": True,
+                    },
+                )
+            )
+
+    # Explicit matching-file count when other unrelated output files are not
+    # excluded by the criterion.
+    if not checks:
+        m = re.fullmatch(
+            r"Output\s+contains\s+a\s+single\s+Excel(?:\s*\(\.xlsx\))?\s+file[.]?",
+            text,
+            re.I,
+        )
+        if m:
+            checks.append(
+                Check(
+                    "EXACT_VALID_FILE_COUNT_ALLOWED_EXTENSIONS",
+                    {"count": 1, "extensions": [".xlsm", ".xlsx"]},
+                )
+            )
+
+    # Exact PDF multiplicity with no semantic-role inference.
+    if not checks:
+        m = re.fullmatch(
+            r"Exactly\s+(one|two|three|four|five|\d+)\s+(?:separate\s+)?PDF\s+files?\s+"
+            r"(?:is|are)\s+delivered[.]?",
+            text,
+            re.I,
+        )
+        if m:
+            words = {"one": 1, "two": 2, "three": 3, "four": 4, "five": 5}
+            raw = m.group(1).casefold()
+            count = words.get(raw, int(raw) if raw.isdigit() else -1)
+            if 0 < count <= 64:
+                checks.append(
+                    Check(
+                        "EXACT_TOP_LEVEL_FILE_COUNT_BY_EXTENSION",
+                        {
+                            "count": count,
+                            "extension": ".pdf",
+                            "total_files_must_equal_count": True,
+                        },
+                    )
+                )
+
+    if not checks and re.fullmatch(
+        r"Exactly\s+one\s+submitted\s+file\s+exists[.]?",
+        text,
+        re.I,
+    ):
+        checks.append(Check("EXACT_TOP_LEVEL_FILE_COUNT", {"count": 1}))
+
+    # Generic singular PDF page-count facts. We require the artifact directory
+    # to contain exactly one top-level file so the referenced PDF is unambiguous.
+    if not checks:
+        page_count_patterns = (
+            r"The\s+PDF\s+is\s+exactly\s+(\d+)\s+pages?[.]?",
+            r"The\s+PDF\s+contains\s+exactly\s+(\d+)\s+pages?[.]?",
+            r"The\s+PDF\s+is\s+exactly\s+(\d+)\s+pages?\s+in\s+length[.]?",
+            r"The\s+output\s+PDF\s+is\s+a\s+single\s+page\s+only[.]?",
+        )
+        matched_count = None
+        for pat in page_count_patterns:
+            m = re.fullmatch(pat, text, re.I)
+            if m:
+                matched_count = int(m.group(1)) if m.lastindex else 1
+                break
+        if matched_count is not None and 0 < matched_count <= 10000:
+            checks.append(
+                Check(
+                    "SINGLE_PDF_PAGE_COUNT",
+                    {
+                        "page_count": matched_count,
+                        "total_files_must_equal_count": True,
+                    },
+                )
+            )
+
+    if not checks:
+        page_range_patterns = (
+            r"The\s+PDF\s+length\s+is\s+(\d+)\s*[–-]\s*(\d+)\s+pages?\s+inclusive[.]?",
+            r"The\s+PDF\s+is\s+between\s+(\d+)\s+and\s+(\d+)\s+pages?\s+inclusive[.]?",
+            r"The\s+PDF\s+has\s+between\s+(\d+)\s+and\s+(\d+)\s+pages?\s+inclusive[.]?",
+        )
+        for pat in page_range_patterns:
+            m = re.fullmatch(pat, text, re.I)
+            if m:
+                lo, hi = int(m.group(1)), int(m.group(2))
+                if 0 < lo <= hi <= 10000:
+                    checks.append(
+                        Check(
+                            "SINGLE_PDF_PAGE_RANGE",
+                            {
+                                "min_pages": lo,
+                                "max_pages": hi,
+                                "total_files_must_equal_count": True,
+                            },
+                        )
+                    )
+                break
+
     # Simple role-free artifact-format statements. Requiring a natively
     # reopenable matching file is a sound one-sided check; extra files do not
     # falsify these criteria unless the criterion explicitly says "single".
@@ -467,6 +666,25 @@ def verify_compiled(compiled: Mapping[str, Any], artifact_dir: str | Path) -> di
             cand = [p for p in files if p.suffix.lower() == ext]
             ok = bool(cand) and all(_valid_package(p) for p in cand)
 
+        elif kind == "AT_LEAST_ONE_VALID_FILE_ALLOWED_EXTENSIONS":
+            exts = {str(x).lower() for x in (args.get("extensions") or [])}
+            cand = [p for p in files if p.suffix.lower() in exts]
+            ok = bool(cand) and all(_valid_package(p) for p in cand)
+
+        elif kind == "EXACT_VALID_FILE_COUNT_ALLOWED_EXTENSIONS":
+            exts = {str(x).lower() for x in (args.get("extensions") or [])}
+            cand = [p for p in files if p.suffix.lower() in exts]
+            target_count = int(args.get("count", -1))
+            ok = (
+                target_count >= 0
+                and len(cand) == target_count
+                and all(_valid_package(p) for p in cand)
+            )
+
+        elif kind == "EXACT_TOP_LEVEL_FILE_COUNT":
+            target_count = int(args.get("count", -1))
+            ok = target_count >= 0 and len(files) == target_count
+
         elif kind == "XLSX_SHEET_NAME_CASEFOLD_TRIM":
             target = str(args.get("sheet_name") or "").strip().casefold()
             ok = False
@@ -490,6 +708,27 @@ def verify_compiled(compiled: Mapping[str, Any], artifact_dir: str | Path) -> di
 
                     reader = PdfReader(str(cand[0]), strict=True)
                     ok = len(reader.pages) == target_count
+                except Exception:
+                    ok = False
+
+        elif kind == "SINGLE_PDF_PAGE_RANGE":
+            cand = [p for p in files if p.suffix.lower() == ".pdf"]
+            lo = int(args.get("min_pages", -1))
+            hi = int(args.get("max_pages", -1))
+            ok = False
+            if (
+                0 < lo <= hi
+                and len(cand) == 1
+                and (
+                    not args.get("total_files_must_equal_count")
+                    or len(files) == 1
+                )
+            ):
+                try:
+                    from pypdf import PdfReader
+
+                    reader = PdfReader(str(cand[0]), strict=True)
+                    ok = lo <= len(reader.pages) <= hi
                 except Exception:
                     ok = False
 
