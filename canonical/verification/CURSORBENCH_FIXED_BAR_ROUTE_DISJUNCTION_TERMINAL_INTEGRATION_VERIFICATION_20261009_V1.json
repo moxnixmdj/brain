@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_CURSORBENCH_FIXED_BAR_ROUTE_DISJUNCTION_TERMINAL_INTEGRATION_VERIFICATION_20261009_V1",
+  "date": "2026-10-09",
+  "status": "INDEPENDENT_REMOTE_INTEGRATION_PASS__CURRENT_TERMINAL_AUTHORITY_BINDS_THRESHOLD_AND_STRONGER_ROUTE_DISJUNCTION__ZERO_CREDIT",
+  "subjects": {
+    "terminal_authority": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+      "git_blob_sha": "7e2526ccb4ba5237902b1c005bc7a6cc94f815c0"
+    },
+    "integration_test": {
+      "path": "canonical/tests/test_current_terminal_cursorbench_fixed_bar_route_disjunction_v1.py",
+      "git_blob_sha": "05d9689b99f152d6f909beb37409ff8d77e91ae7"
+    },
+    "route_reconciliation": {
+      "path": "canonical/governance/CURSORBENCH_FIXED_BAR_ROUTE_DISJUNCTION_RECONCILIATION_20261009_V1.json",
+      "git_blob_sha": "7e9e5c1070696888913bc3189ffd07ffe2746f20"
+    },
+    "route_reconciliation_verification": {
+      "path": "canonical/verification/CURSORBENCH_FIXED_BAR_ROUTE_DISJUNCTION_INDEPENDENT_VERIFICATION_20261009_V1.json",
+      "git_blob_sha": "8387e09408c80460f5c088435f74ac6732fc2962"
+    }
+  },
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-live-integrated-v1-run-20261008",
+    "sprite_id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "working_directory": "/home/sprite/cursorbench-route-disjunction-terminal-verify",
+    "package_install_performed": false,
+    "incremental_spend_usd": 0
+  },
+  "result": {
+    "tests_run": 1,
+    "tests_passed": 1,
+    "tests_failed": 0,
+    "pointer_revision": 80,
+    "threshold_lower_bound_route_defined": true,
+    "threshold_lower_bound_route_sufficient": true,
+    "threshold_lower_bound_route_ready": false,
+    "whole_scope_positive_adequacy_logically_necessary_for_fixed_bar": false,
+    "scope_complete_stronger_proof_route_sufficient": true,
+    "current_active_proof_lane": "ROUTE_B_SCOPE_COMPLETE_STRONGER_PROOF",
+    "typed_acceptance_external_membership_atoms_remaining": 4,
+    "acceptance_predicate_closed": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "promotion_authority": false,
+  "terminal_authority": false
+}
