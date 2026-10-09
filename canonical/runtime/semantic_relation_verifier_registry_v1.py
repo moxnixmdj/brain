@@ -1,28 +1,22 @@
 """Brain-owned semantic relation verifier registry V1.
 
-Purpose:
-  turn portable evidence envelopes into canonical semantic-relation edge receipts
-  without caller-supplied executable verifier callbacks.
+V1 exposes a callback compatible with semantic_relation_entailment_dag_v1
+without accepting caller-supplied executable verifiers.
 
-V1 registers one self-contained verifier family:
-  SEMANTIC_RELATION_CONTROL_EDGE_V1
+Registered verifier:
+  EXPLICIT_SOURCE_EFFECT_FIELD_DEFINITION_V1
 
-That verifier recomputes semantic_relation_control_v1 from content-addressed,
-portable evidence. It intentionally forbids relation-control branches that
-themselves require external verifier callbacks:
-  - shared_concept_identity_receipt
-  - terminal_signature_authority_receipt
-  - entailment_dag_evidence
+It proves one ENTAILS edge only when all of the following recompute:
+- the left node is the deterministic mention ID of exact source_id/scope/raw_span;
+- the right node is the deterministic effect-field concept ID for
+  scope/effect_id/field/normalized value;
+- the target surface is the canonical JSON rendering of that normalized value;
+- the exact raw source span contains an explicit named definition that
+  semantic_relation_control_v1 recomputes as identity between the supplied
+  left surface and that canonical target surface.
 
-Supported authority in V1 therefore comes from Brain-owned source-explicit
-definition logic and/or the content-addressed bounded semantic relation proof.
-
-A caller-provided verifier_id is not authority. Envelope schema determines the
-candidate verifier. Unsupported or multiply matching evidence fails closed.
-
-The returned receipt is exactly the schema expected by
-semantic_relation_entailment_dag_v1. The registry grants no execution,
-acceptance, policy-adequacy, or terminal authority.
+No caller boolean, verifier ID, bounded universe, similarity score, or receipt
+can add authority. Unsupported evidence returns no verifier match.
 """
 from __future__ import annotations
 
@@ -31,38 +25,33 @@ from hashlib import sha256
 import json
 from typing import Any, Mapping
 
+from canonical.runtime.certified_document_effect_field_edge_v1 import (
+    field_concept_id,
+)
+from canonical.runtime.certified_document_effect_field_v1 import (
+    FIELDS,
+    _normalize_field,
+)
 from canonical.runtime.semantic_relation_control_v1 import resolve
 from canonical.runtime.semantic_relation_entailment_dag_v1 import (
     RECEIPT_SCHEMA,
 )
 
 SCHEMA="PROJECT_BRAIN_SEMANTIC_RELATION_VERIFIER_REGISTRY_V1"
-CONTROL_EDGE_EVIDENCE_SCHEMA=(
-    "PROJECT_BRAIN_SEMANTIC_RELATION_CONTROL_EDGE_EVIDENCE_V1"
+EXPLICIT_FIELD_EDGE_SCHEMA=(
+    "PROJECT_BRAIN_EXPLICIT_SOURCE_EFFECT_FIELD_DEFINITION_EDGE_V1"
 )
-SUPPORTED_RELATIONS={"ENTAILS","NOT_ENTAILS"}
-
-_FORBIDDEN_CONTROL_FIELDS={
-    "shared_concept_identity_receipt",
-    "terminal_signature_rows",
-    "terminal_signature_authority_receipt",
-    "entailment_dag_evidence",
-    "expected_entailment_dag_sha256",
-}
 
 
-def _canon(value:Any)->bytes:
+def _canon(value:Any)->str:
     return json.dumps(
-        value,
-        sort_keys=True,
-        separators=(",",":"),
-        ensure_ascii=False,
-        allow_nan=False,
-    ).encode("utf-8")
+        value,sort_keys=True,separators=(",",":"),
+        ensure_ascii=False,allow_nan=False,
+    )
 
 
 def _sha(value:Any)->str:
-    return sha256(_canon(value)).hexdigest()
+    return sha256(_canon(value).encode("utf-8")).hexdigest()
 
 
 def _token(value:Any,name:str)->str:
@@ -74,10 +63,10 @@ def _token(value:Any,name:str)->str:
     return cleaned
 
 
-def evidence_sha256(problem:Mapping[str,Any])->str:
-    if not isinstance(problem,Mapping):
-        raise ValueError("PROBLEM_NOT_OBJECT")
-    return _sha(dict(problem))
+def _mention_id(source_id:str,scope_id:str,raw_span:str)->str:
+    return "MENTION:"+sha256(
+        (source_id+"\n"+scope_id+"\n"+raw_span).encode("utf-8")
+    ).hexdigest()
 
 
 def _fail(reason:str,**extra:Any)->dict[str,Any]:
@@ -94,55 +83,54 @@ def _fail(reason:str,**extra:Any)->dict[str,Any]:
     }
 
 
-def _control_candidate(raw:Mapping[str,Any])->dict[str,Any]:
-    if set(raw)!={
-        "schema",
-        "relation",
-        "problem",
-        "expected_problem_sha256",
-    }:
-        return _fail("CONTROL_EDGE_ENVELOPE_FIELD_SET_NOT_EXACT")
+def _explicit_field_candidate(raw:Mapping[str,Any])->dict[str,Any]:
+    allowed={
+        "schema","source_id","raw_span","scope_id",
+        "effect_id","field","value","left_surface",
+    }
+    if set(raw)!=allowed:
+        return _fail("EXPLICIT_FIELD_EDGE_FIELD_SET_NOT_EXACT")
 
-    relation=_token(raw.get("relation"),"RELATION").upper()
-    if relation not in SUPPORTED_RELATIONS:
-        return _fail("RELATION_UNSUPPORTED:"+relation)
+    try:
+        source_id=_token(raw.get("source_id"),"SOURCE_ID")
+        raw_span=raw.get("raw_span")
+        if not isinstance(raw_span,str) or not raw_span.strip():
+            raise ValueError("RAW_SPAN_REQUIRED")
+        scope_id=_token(raw.get("scope_id"),"SCOPE_ID")
+        effect_id=_token(raw.get("effect_id"),"EFFECT_ID")
+        field=_token(raw.get("field"),"FIELD")
+        if field not in FIELDS:
+            raise ValueError("FIELD_UNSUPPORTED:"+field)
+        left_surface=_token(raw.get("left_surface"),"LEFT_SURFACE")
+        normalized=_normalize_field(field,raw.get("value"))
+    except Exception as exc:
+        return _fail(type(exc).__name__+":"+str(exc))
 
-    problem=raw.get("problem")
-    if not isinstance(problem,Mapping):
-        return _fail("CONTROL_PROBLEM_NOT_OBJECT")
-    problem=deepcopy(dict(problem))
+    left_id=_mention_id(source_id,scope_id,raw_span)
+    right_id=field_concept_id(
+        scope_id=scope_id,
+        effect_id=effect_id,
+        field=field,
+        value=normalized,
+    )
+    right_surface=_canon(normalized)
 
-    expected=str(raw.get("expected_problem_sha256") or "")
-    actual=_sha(problem)
-    if expected!=actual:
-        return _fail(
-            "CONTROL_PROBLEM_CONTENT_ADDRESS_MISMATCH",
-            expected_problem_sha256=expected,
-            actual_problem_sha256=actual,
-        )
-
-    forbidden=sorted(_FORBIDDEN_CONTROL_FIELDS & set(problem))
-    if forbidden:
-        return _fail(
-            "CONTROL_PROBLEM_REQUIRES_EXTERNAL_VERIFIER:"
-            +",".join(forbidden)
-        )
-
-    left=_token(problem.get("left_id"),"LEFT_ID")
-    right=_token(problem.get("right_id"),"RIGHT_ID")
-    scope=_token(problem.get("scope_id"),"SCOPE_ID")
-    if left==right:
-        return _fail("DISTINCT_LEFT_RIGHT_IDS_REQUIRED")
-
-    if problem.get("required_relation")!="LEFT_ENTAILS_RIGHT":
-        return _fail(
-            "CONTROL_REQUIRED_RELATION_MUST_BE_LEFT_ENTAILS_RIGHT"
-        )
-
+    problem={
+        "left_id":left_id,
+        "right_id":right_id,
+        "left_surface":left_surface,
+        "right_surface":right_surface,
+        "scope_id":scope_id,
+        "required_relation":"LEFT_ENTAILS_RIGHT",
+        "explicit_definition_sources":[{
+            "source_id":source_id,
+            "scope_id":scope_id,
+            "source_text":raw_span,
+        }],
+    }
     result=resolve(problem)
     if not isinstance(result,Mapping):
         return _fail("SEMANTIC_RELATION_CONTROL_RETURNED_NO_RESULT")
-
     if str(result.get("status") or "").startswith("FAIL_CLOSED"):
         return _fail(
             "SEMANTIC_RELATION_CONTROL_FAIL_CLOSED:"
@@ -150,70 +138,43 @@ def _control_candidate(raw:Mapping[str,Any])->dict[str,Any]:
             control_result=deepcopy(dict(result)),
         )
 
-    if (
-        result.get("scope_id")!=scope
-        or result.get("left_id")!=left
-        or result.get("right_id")!=right
-    ):
-        return _fail(
-            "SEMANTIC_RELATION_CONTROL_BINDING_MISMATCH",
-            control_result=deepcopy(dict(result)),
-        )
+    proved=(
+        result.get("pass") is True
+        and isinstance(result.get("proved_facts"),Mapping)
+        and result["proved_facts"].get("left_entails_right") is True
+        and result.get("scope_id")==scope_id
+        and result.get("left_id")==left_id
+        and result.get("right_id")==right_id
+    )
+    if not proved:
+        return {
+            "schema":SCHEMA,
+            "status":"UNKNOWN__REGISTERED_RELATION_NOT_PROVED",
+            "pass":False,
+            "reason":"EXACT_SOURCE_DEFINITION_DID_NOT_PROVE_FIELD_EDGE",
+            "left_id":left_id,
+            "right_id":right_id,
+            "right_surface":right_surface,
+            "control_result":deepcopy(dict(result)),
+            "semantic_relation_authority":False,
+            "execution_authority":False,
+            "acceptance_authority":False,
+            "terminal_authority":False,
+        }
 
-    if relation=="ENTAILS":
-        proved=(
-            result.get("pass") is True
-            and isinstance(result.get("proved_facts"),Mapping)
-            and result["proved_facts"].get("left_entails_right") is True
-        )
-        if not proved:
-            return {
-                "schema":SCHEMA,
-                "status":"UNKNOWN__REGISTERED_RELATION_NOT_PROVED",
-                "pass":False,
-                "reason":"LEFT_ENTAILS_RIGHT_NOT_PROVED",
-                "control_result":deepcopy(dict(result)),
-                "semantic_relation_authority":False,
-                "execution_authority":False,
-                "acceptance_authority":False,
-                "terminal_authority":False,
-            }
-    else:
-        disproved=(
-            result.get("required_relation_disproved") is True
-            and result.get("pass") is not True
-        )
-        if not disproved:
-            return {
-                "schema":SCHEMA,
-                "status":"UNKNOWN__REGISTERED_COUNTEREXAMPLE_NOT_PROVED",
-                "pass":False,
-                "reason":"LEFT_ENTAILS_RIGHT_NOT_DISPROVED",
-                "control_result":deepcopy(dict(result)),
-                "semantic_relation_authority":False,
-                "execution_authority":False,
-                "acceptance_authority":False,
-                "terminal_authority":False,
-            }
-
-    evidence_bundle={
-        "registry_schema":SCHEMA,
-        "registered_verifier":"SEMANTIC_RELATION_CONTROL_EDGE_V1",
-        "relation":relation,
-        "scope_id":scope,
-        "source_id":left,
-        "target_id":right,
-        "problem_sha256":actual,
+    evidence_basis={
+        "registered_verifier":"EXPLICIT_SOURCE_EFFECT_FIELD_DEFINITION_V1",
+        "source_id":source_id,
+        "raw_span_sha256":sha256(raw_span.encode("utf-8")).hexdigest(),
+        "scope_id":scope_id,
+        "left_id":left_id,
+        "right_id":right_id,
+        "left_surface":left_surface,
+        "right_surface":right_surface,
+        "effect_id":effect_id,
+        "field":field,
+        "value":normalized,
         "control_status":result.get("status"),
-        "strongest_proved_relation":result.get(
-            "strongest_proved_relation"
-        ),
-        "required_relation_disproved":result.get(
-            "required_relation_disproved"
-        ),
-        "bounded_extension_proof":deepcopy(
-            result.get("bounded_extension_proof")
-        ),
         "explicit_equivalence":deepcopy(
             result.get("explicit_equivalence")
         ),
@@ -221,19 +182,20 @@ def _control_candidate(raw:Mapping[str,Any])->dict[str,Any]:
     receipt={
         "pass":True,
         "schema":RECEIPT_SCHEMA,
-        "scope_id":scope,
-        "source_id":left,
-        "target_id":right,
-        "relation":relation,
+        "scope_id":scope_id,
+        "source_id":left_id,
+        "target_id":right_id,
+        "relation":"ENTAILS",
         "source_semantics_authenticated":True,
         "target_semantics_authenticated":True,
         "relation_semantics_authenticated":True,
         "verification_authority_mutated":False,
-        "evidence_sha256":_sha(evidence_bundle),
+        "evidence_sha256":_sha(evidence_basis),
     }
     receipt["receipt_sha256"]=_sha(receipt)
-    receipt["registry_verifier_id"]="SEMANTIC_RELATION_CONTROL_EDGE_V1"
-    receipt["registry_problem_sha256"]=actual
+    receipt["registry_verifier_id"]=(
+        "EXPLICIT_SOURCE_EFFECT_FIELD_DEFINITION_V1"
+    )
     return {
         "schema":SCHEMA,
         "status":"PASS__REGISTERED_SEMANTIC_RELATION_RECOMPUTED",
@@ -247,33 +209,26 @@ def _control_candidate(raw:Mapping[str,Any])->dict[str,Any]:
     }
 
 
-def verify(raw:Mapping[str,Any])->Mapping[str,Any]|None:
-    """Relation-verifier callback compatible with entailment DAG V1.
-
-    Returns the canonical edge receipt on success.
-    Unsupported evidence returns None. Matching evidence that is malformed,
-    unresolved, or disproved returns None; callers that need diagnostics should
-    use evaluate().
-    """
-    out=evaluate(raw)
-    if out.get("pass") is True and isinstance(out.get("receipt"),Mapping):
-        return deepcopy(dict(out["receipt"]))
-    return None
-
-
 def evaluate(raw:Mapping[str,Any])->dict[str,Any]:
     if not isinstance(raw,Mapping):
         return _fail("EDGE_EVIDENCE_NOT_OBJECT")
-    schema=raw.get("schema")
-    if schema==CONTROL_EDGE_EVIDENCE_SCHEMA:
-        return _control_candidate(raw)
+    if raw.get("schema")==EXPLICIT_FIELD_EDGE_SCHEMA:
+        return _explicit_field_candidate(raw)
     return {
         "schema":SCHEMA,
         "status":"UNRESOLVED__NO_REGISTERED_RELATION_VERIFIER_MATCHED",
         "pass":False,
-        "evidence_schema":schema,
+        "evidence_schema":raw.get("schema"),
         "semantic_relation_authority":False,
         "execution_authority":False,
         "acceptance_authority":False,
         "terminal_authority":False,
     }
+
+
+def verify(raw:Mapping[str,Any])->Mapping[str,Any]|None:
+    """Callback compatible with semantic_relation_entailment_dag_v1."""
+    out=evaluate(raw)
+    if out.get("pass") is True and isinstance(out.get("receipt"),Mapping):
+        return deepcopy(dict(out["receipt"]))
+    return None
