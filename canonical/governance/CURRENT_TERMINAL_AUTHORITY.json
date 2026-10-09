@@ -1224,6 +1224,11 @@
       "path": "canonical/runtime/certificate_gated_selected_route_runtime_entrypoint_v2.py",
       "git_blob_sha": "e6cce56b50bea1261fb3473389a28e8263417930",
       "note": "CREDITABLE_ROUTE_ROWS_REQUIRE_CONTENT_ADDRESSED_REFINEMENT_CERTIFICATE_AND_VERIFIED_RECEIPT_BEFORE_CANDIDATE_ADMISSION"
+    },
+    "executable_refinement_structural_framework_independent_verification": {
+      "path": "canonical/verification/EXECUTABLE_REFINEMENT_STRUCTURAL_FRAMEWORK_SPRITE_VERIFICATION_20261009_V1.json",
+      "git_blob_sha": "81984fda2a10856c55cc46ce6a85e7d4fcaa54e2",
+      "note": "INDEPENDENT_SPRITE_EXECUTION_OF_STRUCTURAL_REFINEMENT_FRAMEWORK__31_FOCUSED_BEHAVIOR_CHECKS__ZERO_TERMINAL_CREDIT__SEMANTIC_REFINEMENT_OPEN"
     }
   },
   "live_truth": {
@@ -1971,7 +1976,7 @@
     "r2_regcap_open_world_ontology_closed": false,
     "r2_regcap_missing_context_is_external_impossibility": false,
     "executable_refinement_structural_binding_framework_present": true,
-    "executable_refinement_framework_execution_verified": false,
+    "executable_refinement_framework_execution_verified": true,
     "creditable_route_refinement_receipt_required_by_candidate_admission": true,
     "router_canary_structural_refinement_binding_bound": true,
     "router_canary_refinement_verified": false,
@@ -1981,12 +1986,15 @@
     "all_creditable_live_routes_refinement_verified": false,
     "terminal_executable_refinement_gap_closed": false,
     "executable_refinement_missing_is_external_impossibility": false,
-    "executable_refinement_current_classification": "INTERNAL_UNRESOLVED__SELECTED_ROUTE_ADMISSION_ENFORCED__NON_SELECTED_RUNTIME_REFINEMENT_COVERAGE_OPEN",
+    "executable_refinement_current_classification": "INTERNAL_UNRESOLVED__STRUCTURAL_FRAMEWORK_EXECUTION_VERIFIED__SEMANTIC_PROOF_RESOURCE_BOUND_AND_NON_SELECTED_RUNTIME_COVERAGE_OPEN",
     "creditable_selected_route_refinement_admission_enforced": true,
     "current_selected_route_registry_creditable_row_count": 0,
     "all_current_creditable_selected_routes_refinement_requirement_satisfied": true,
     "non_selected_runtime_executable_refinement_coverage_closed": false,
-    "runtime_binding_precedence_reconciled": true
+    "runtime_binding_precedence_reconciled": true,
+    "executable_refinement_structural_framework_independent_replay_verified": true,
+    "executable_refinement_semantic_proof_route_closed": false,
+    "executable_refinement_structural_resource_bound_closed": false
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -2153,7 +2161,8 @@
     "NO_CLAIM_ROUTER_CANARY_EXECUTABLE_REFINEMENT_IS VERIFIED.",
     "NO_CLAIM_BRAIN_OWNED_SEMANTIC_EDGE_EXECUTABLE_REFINEMENT_IS VERIFIED.",
     "NO_CLAIM_REPOSITORY_WIDE_OR_ALL_CREDITABLE_LIVE_ROUTE_EXECUTABLE_REFINEMENT_IS CLOSED.",
-    "NO_CLAIM_SELECTED_ROUTE_REFINEMENT_ADMISSION_ENFORCEMENT_CLOSES_NON_SELECTED_RUNTIME_EXECUTABLE_REFINEMENT."
+    "NO_CLAIM_SELECTED_ROUTE_REFINEMENT_ADMISSION_ENFORCEMENT_CLOSES_NON_SELECTED_RUNTIME_EXECUTABLE_REFINEMENT.",
+    "NO_CLAIM_STRUCTURAL_FRAMEWORK_REPLAY_PROVES_SEMANTIC_EXECUTABLE_REFINEMENT."
   ],
   "accounting": {
     "incremental_spend_usd": 0,
@@ -3669,8 +3678,8 @@
     "structural_verifier_bound": true,
     "terminal_dependency_graph_bound": true,
     "creditable_route_anti_bypass_guard_implemented": true,
-    "execution_tests_run": false,
-    "independent_replay_run": false,
+    "execution_tests_run": true,
+    "independent_replay_run": true,
     "router_canary_refinement_verified": false,
     "brain_owned_semantic_edge_refinement_verified": false,
     "all_creditable_live_routes_refinement_verified": false,
@@ -3682,6 +3691,9 @@
     "current_selected_route_registry_creditable_row_count": 0,
     "all_current_creditable_selected_routes_refinement_requirement_satisfied": true,
     "non_selected_runtime_refinement_coverage_closed": false,
-    "runtime_binding_precedence_reconciled": true
+    "runtime_binding_precedence_reconciled": true,
+    "structural_framework_execution_verified": true,
+    "semantic_proof_route_closed": false,
+    "structural_resource_bound_closed": false
   }
 }
