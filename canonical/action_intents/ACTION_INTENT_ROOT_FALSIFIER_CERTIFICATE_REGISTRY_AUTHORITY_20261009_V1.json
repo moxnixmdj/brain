@@ -2,7 +2,7 @@
   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V12_INSTANCE",
   "action_id": "ROOT_FALSIFIER_CANONICAL_CERTIFICATE_REGISTRY_AUTHORITY_20261009_V1",
   "date": "2026-10-09",
-  "status": "ACTIVE_PROOF_ONLY__ZERO_FRESH_REALITY__ZERO_TERMINAL_CREDIT",
+  "status": "COMPLETED_PROOF_ONLY__VERIFIED_CANONICAL_ROOT_CERTIFICATE_AUTHORITY__ZERO_TERMINAL_CREDIT",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
   "canonical_base_commit": "7891422979a25feeaffc72380676e239ee22bd46",
   "capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
@@ -44,5 +44,23 @@
     "terminal_credit_delta": 0,
     "acceptance_credit_delta": 0,
     "ownership_credit_delta": 0
+  },
+  "outputs": {
+    "root_falsifier": "canonical/runtime/root_theorem_falsifier_v1.py",
+    "registry_guard": "canonical/runtime/coverage_root_certificate_registry_guard_v1.py",
+    "registry": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_CERTIFICATE_REGISTRY_V1.json",
+    "current_registry_authority": "canonical/governance/CURRENT_COVERAGE_COMPLETENESS_ROOT_CERTIFICATES.json",
+    "law": "canonical/laws/COVERAGE_COMPLETENESS_ROOT_THEOREM_LAW_V1.md",
+    "governance": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_THEOREM_V1.json",
+    "verification": "canonical/verification/ROOT_FALSIFIER_CANONICAL_REGISTRY_AUTHORITY_VERIFICATION_20261009_V1.json",
+    "regression": "canonical/regressions/2026-10-09_ROOT_CERTIFICATE_AUTHORITY_BYPASS.json",
+    "reasoning": "canonical/reasoning/2026-10-09_ROOT_CERTIFICATE_AUTHORITY_INTEGRATION_V1.json",
+    "pull_request": 3816
+  },
+  "verification": {
+    "exact_branch_remote_tests": "28_PASSED__0_FAILED",
+    "current_registry": "PASS__0_PROVED__3_OPEN__R4_PROOF_CLOSURE_FALSE",
+    "synthetic_local_proved_receipts_bypass": "BLOCKED",
+    "terminal_credit_delta": 0
   }
 }
