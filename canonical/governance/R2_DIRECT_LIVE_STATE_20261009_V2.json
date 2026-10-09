@@ -1,0 +1,131 @@
+{
+  "schema": "PROJECT_BRAIN_R2_DIRECT_LIVE_STATE_V1",
+  "date": "2026-10-09",
+  "status": "ACTIVE_R2_DIRECT_LIVE_STATE",
+  "generation": 1,
+  "baseline": {
+    "runtime_path": "canonical/runtime/r2_direct_end_to_end_adequacy_v14.py",
+    "runtime_git_blob_sha": "cf7c391c92264675d2082693e9161e7229225ba8",
+    "preflight_callable": "preflight",
+    "run_callable": "run",
+    "declared_route_count": 34,
+    "declared_route_ids": [
+      "DIRECT_ADEQUACY::ARCHIVE_MANIFEST_TAR_GZ_V1",
+      "DIRECT_ADEQUACY::EXACT_LITERAL_RESPONSE_V1",
+      "DIRECT_ADEQUACY::LITERAL_JSON_RECORDS_V1",
+      "DIRECT_ADEQUACY::STRUCTURED_BINARY_CODEC_FAMILY_V1",
+      "DIRECT_ADEQUACY::LITERAL_DOCX_OOXML_FAMILY_V1",
+      "DIRECT_ADEQUACY::DOCX_JSON_RECORD_FAMILY_V1",
+      "DIRECT_ADEQUACY::STRUCTURED_TABLE_ARTIFACT_FAMILY_V1",
+      "DIRECT_ADEQUACY::TYPED_EVIDENCE_DECISION_FAMILY_V1",
+      "DIRECT_ADEQUACY::VISUAL_CODE_QR_CODE128_FAMILY_V1",
+      "DIRECT_ADEQUACY::PLAIN_MARKDOWN_PDF_FAMILY_V1",
+      "DIRECT_ADEQUACY::TYPED_JSON_TRANSFORM_FAMILY_V1",
+      "DIRECT_ADEQUACY::STATE_KEYED_HTTPS_JSON_OBSERVATION_FAMILY_V1",
+      "DIRECT_ADEQUACY::PYPI_PINNED_ARTIFACT_PROVENANCE_FAMILY_V1",
+      "DIRECT_ADEQUACY::EXACT_GROUNDED_EVIDENCE_CLAIM_SUPPORT_FAMILY_V1",
+      "DIRECT_ADEQUACY::EXPLICIT_GROUNDED_NUMERIC_COMPARISON_FAMILY_V1",
+      "DIRECT_ADEQUACY::UNIT_NORMALIZED_GROUNDED_NUMERIC_COMPARISON_FAMILY_V1",
+      "DIRECT_ADEQUACY::PROVENANCE_KNOWLEDGE_CONSISTENCY_FAMILY_V1",
+      "DIRECT_ADEQUACY::EXACT_ROR_AUTHORITY_IDENTITY_FAMILY_V1",
+      "DIRECT_ADEQUACY::FINANCE_NORMALIZED_UNLESS_BRANCH_FAMILY_V1",
+      "DIRECT_ADEQUACY::FINANCE_CONTROLLED_TYPED_UNLESS_FAMILY_V1",
+      "DIRECT_ADEQUACY::FINANCE_NORMALIZED_IF_BRANCH_FAMILY_V1",
+      "DIRECT_ADEQUACY::FINANCE_NORMALIZED_SOURCE_UNIVERSE_DECISION_FAMILY_V1",
+      "DIRECT_ADEQUACY::FINANCE_EXPLICIT_DEFINITION_UNLESS_FAMILY_V1",
+      "DIRECT_ADEQUACY::FINANCE_CROSS_DOCUMENT_JSON_BINDING_FAMILY_V1",
+      "DIRECT_ADEQUACY::FINANCE_EXPLICIT_ALIAS_TYPED_UNLESS_FAMILY_V1",
+      "DIRECT_ADEQUACY::FINANCE_STATE_KEYED_EXTERNAL_JSON_POLICY_FAMILY_V1",
+      "DIRECT_ADEQUACY::FINANCE_BOUNDED_CONTEXTUAL_REFERENCE_FAMILY_V1",
+      "DIRECT_ADEQUACY::FINANCE_EXPLICIT_ORDERED_PAIR_FORMER_LATTER_FAMILY_V1",
+      "DIRECT_ADEQUACY::CROSS_DOCUMENT_EFFECT_COMPOSITION_V1",
+      "DIRECT_ADEQUACY::CROSS_DOCUMENT_EFFECT_WORLDSET_V1",
+      "DIRECT_ADEQUACY::CROSS_DOCUMENT_RESIDUAL_EFFECT_FRONTIER_V1",
+      "DIRECT_ADEQUACY::CROSS_DOCUMENT_SOURCE_RESIDUAL_FRONTIER_V1",
+      "DIRECT_ADEQUACY::CROSS_DOCUMENT_EFFECT_SEMANTIC_LATTICE_V1",
+      "DIRECT_ADEQUACY::CROSS_DOCUMENT_EFFECT_FIELD_LATTICE_V2"
+    ],
+    "authority_activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V28.json",
+    "authority_activation_git_blob_sha": "d8e432e0904c88a9188679e3a36e0e0c0757e615",
+    "runtime_closure": [
+      {
+        "path": "canonical/runtime/r2_direct_end_to_end_adequacy_v1.py",
+        "git_blob_sha": "ee0f2e786bb58d6547dff98840c9ff8afa5f0b50"
+      },
+      {
+        "path": "canonical/runtime/r2_direct_end_to_end_adequacy_v2.py",
+        "git_blob_sha": "f0724b0c0c96fe4fac2aacdfd19b7a9c6a62f737"
+      },
+      {
+        "path": "canonical/runtime/r2_direct_end_to_end_adequacy_v3.py",
+        "git_blob_sha": "0f461952b61249c1e038e942eafe8f3e776f85f7"
+      },
+      {
+        "path": "canonical/runtime/r2_direct_end_to_end_adequacy_v4.py",
+        "git_blob_sha": "67a46d379500366179860f51afdea720e1a47ac2"
+      },
+      {
+        "path": "canonical/runtime/r2_direct_end_to_end_adequacy_v5.py",
+        "git_blob_sha": "16794162259dec4495970cd2bae9dd39d1b3df73"
+      },
+      {
+        "path": "canonical/runtime/r2_direct_end_to_end_adequacy_v6.py",
+        "git_blob_sha": "a34337ed333678b62a1fa8a7cd47ed11a53e03ae"
+      },
+      {
+        "path": "canonical/runtime/r2_direct_end_to_end_adequacy_v7.py",
+        "git_blob_sha": "3afc0cb17288ebf4e1e29689a7af241bf73eb708"
+      },
+      {
+        "path": "canonical/runtime/r2_direct_end_to_end_adequacy_v8.py",
+        "git_blob_sha": "76abf119813d133bf05e19602ee375c8d5c5d7b6"
+      },
+      {
+        "path": "canonical/runtime/r2_direct_end_to_end_adequacy_v9.py",
+        "git_blob_sha": "41bd95b1fd275d797b900636cf88c8b0ecbbc03e"
+      },
+      {
+        "path": "canonical/runtime/r2_direct_end_to_end_adequacy_v10.py",
+        "git_blob_sha": "1a78930ab5536a8db35097eb7e924284b0a0de73"
+      },
+      {
+        "path": "canonical/runtime/r2_direct_end_to_end_adequacy_v11.py",
+        "git_blob_sha": "98fc03a33aa8f051245c8adbb9a0d8d896b0057b"
+      },
+      {
+        "path": "canonical/runtime/r2_direct_end_to_end_adequacy_v12.py",
+        "git_blob_sha": "5414387d6a7950885beb955f86e4fa0241233d00"
+      },
+      {
+        "path": "canonical/runtime/r2_direct_end_to_end_adequacy_v13.py",
+        "git_blob_sha": "6784e7274d640c7f75659d4dab9237188ea784d1"
+      },
+      {
+        "path": "canonical/runtime/r2_direct_end_to_end_adequacy_v14.py",
+        "git_blob_sha": "cf7c391c92264675d2082693e9161e7229225ba8"
+      }
+    ],
+    "verification_path": "canonical/verification/R2_CROSS_DOCUMENT_EFFECT_FIELDS_V14_VERIFY_20261009_V1.json",
+    "verification_git_blob_sha": "16e522aae193846f6fc859cc1e37cb627e0f5709",
+    "verification_status": "VERIFIED_ISOLATED_FULL_STACK__199_OF_199_PASS"
+  },
+  "dynamic_routes": [],
+  "invariants": {
+    "baseline_behavior_preserved_by_exact_transitive_router_closure": true,
+    "baseline_activation_route_set_load_bearing": true,
+    "activation_route_runtime_blobs_checked": true,
+    "dynamic_routes_require_exact_runtime_and_verification_blobs": true,
+    "baseline_dynamic_overlap_fails_closed": true,
+    "multiple_dynamic_engagement_fails_closed": true,
+    "dynamic_semantic_open_requires_explicit_barrier_authority": true,
+    "future_route_source_edit_required": false,
+    "future_fixed_point_edit_required": false
+  },
+  "dispatcher": {
+    "path": "canonical/runtime/r2_direct_live_dispatcher_v1.py",
+    "git_blob_sha": "ac922deb68a070d747b803809032ae016de931b3"
+  },
+  "incremental_spend_usd": 0,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0
+}
