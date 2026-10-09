@@ -1,0 +1,129 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK15_V6_IRREVERSIBLE_RESULT_TRUTH_20261009_V1",
+  "date": "2026-10-09",
+  "status": "FINAL_ZERO__EXACT_VERIFIER_REWARD_0_0__RANK15_IRREVERSIBLY_CONSUMED__NO_REPLAY_OR_REPLACEMENT__ZERO_ACCEPTANCE_AND_TERMINAL_CREDIT",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "slot": {
+    "id": "terminal-bench-science/protein-active-learning::trial-0",
+    "ledger_schedule_rank": 15,
+    "frozen_manifest_schedule_order": 14,
+    "attempt_index": 0,
+    "task_rank": 14,
+    "task_name": "terminal-bench-science/protein-active-learning",
+    "digest": "sha256:d7e16b7c468551b468364cf2a86dba2383b007f3f2f01c6d2ce01d99ff30d48f"
+  },
+  "frozen_manifest": {
+    "path": "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json",
+    "git_blob_sha": "6dfa880b1f68881531afbba6ca211681801fd19b",
+    "fixed_denominator": 210,
+    "required_successes": 124,
+    "fail_lock_failures": 87
+  },
+  "public_execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2515,
+    "execution_branch": "execute/tb-science-rank15-20261009-v6",
+    "execution_head_sha": "7e6ef250831b4db93834cca1ef1e572b213aec01",
+    "github_run_sha": "c33108accbe42b04c51e55a7d98ca0e7b1b34979",
+    "workflow_run_id": 37936453784,
+    "workflow_job_id": 113839606975,
+    "run_attempt": 1,
+    "workflow_conclusion": "success",
+    "harbor_step_outcome": "success",
+    "artifact_id": 11620343895,
+    "artifact_name": "tb-science-protein-active-learning-trial-0-rank15-v6",
+    "artifact_zip_sha256": "cb074ccbda27e2ddeb240d36440679159595f41c4aee18f636e601248360ad86"
+  },
+  "exact_artifact_hashes_sha256": {
+    "slot_receipt": "6eb8c1ecd6617051b5f29a849fc936707e57ea8f632b1b9556a27340ae331b87",
+    "trial_result": "6b73b9695e6af84b141147c908fb55f2b7acefaecb556e5551d7b8419fbd969b",
+    "job_result": "f8e00e73c287d46c9580933a8280888c858c77d41ab1ef956b63cd264c1a8949",
+    "status_journal_runner_receipt": "1f2c903ef7daeaf0a99580cdf174c59b5ac592c4be37dd7f5df8776b967ad5f3",
+    "agent_ready": "48095f248fc03f299170186a211d6bef0369d74b04ce723d6ad96d30d5f5c098",
+    "start_committed": "6b22557d2b1d2561cfaa8e99f9460bd8e4f034fd4adfb2b15e65bbf81295b2a6"
+  },
+  "execution_identity": {
+    "activation_git_blob_sha": "2f15682e6041beeb47edde7e96102f778e6b0453",
+    "public_authority_git_blob_sha": "e50a434c0caf92c752407f7ce7a990461a5eb968",
+    "brain_authority_v12_git_blob_sha": "04e2c15b143dd0e4f80bb96c82b7573b780dd56f",
+    "epoch_git_blob_sha": "a996f76a06a104570375d4703d79274ba8786f7d",
+    "execution_claim_git_blob_sha": "bebd667e92c3e1f0bba2bcb7acc25858e816fee7",
+    "workflow_git_blob_sha": "7fb38b0e110455a2115034254ec4e77a13a66afa",
+    "logical_attempt_id": "0194bc222f0e66f1d734f637fefd1eb0c355b9707150222444ac08a0e70527f6",
+    "runtime_identity_sha256": "a00ba0e0ffa7ffc8d95f0c3bd3dbcd340103ac10d5ee1c7b54b5e5ba37d6a4d2",
+    "durable_start_record_sha256": "724f5c893924efdc128a918e7005d537105663ca91a50f42326825d9260a3d24",
+    "prestart_receipt_sha256": "aa80e4ab5b72785959027aa0cb1f1ced9af8ae8f852fb171ea8ecfda1c2f25d1",
+    "agent_ready_receipt_sha256": "48095f248fc03f299170186a211d6bef0369d74b04ce723d6ad96d30d5f5c098"
+  },
+  "exact_prestart_measurement": {
+    "guard_status": "PASS__RANK15_V4_SLOT_BOUND_IDENTITY__MAXIMAL_RESERVED_CYCLE0_CORE_FITS__TASK_NOT_STARTED",
+    "guard_pass": true,
+    "raw_task_obligation_count": 78,
+    "input_tokens": 2882,
+    "reserved_completion_tokens": 4096,
+    "server_context_tokens": 16384,
+    "context_headroom_tokens": 9406,
+    "first_cycle_prompt_sha256": "0df7076cdf0fc27f9b08fec4010a61c857dfcf733cabc803fb7e1a419e50f003",
+    "instruction_sha256": "85c97d56cb097325f86659cfdd61afb3fb650d74949de90d7a8441719048e7b6"
+  },
+  "execution_truth": {
+    "carrier_ready": true,
+    "task_read": true,
+    "task_started": true,
+    "start_cas_acquired": true,
+    "execution_authority_consumed": true,
+    "benchmark_trials_consumed": 1,
+    "harbor_returncode": 0,
+    "verifier_reached": true,
+    "verifier_result_present": true,
+    "verifier_reward": 0,
+    "completed_trials": 1,
+    "errored_trials": 0,
+    "retries": 0,
+    "exception_info": null,
+    "receipt_status": "FINAL_ZERO",
+    "rerun_credit": false,
+    "replacement_carrier_authority": false,
+    "replay_authority": false
+  },
+  "causal_classification": {
+    "infrastructure_failure": false,
+    "carrier_failure": false,
+    "planner_transport_failure": false,
+    "context_capacity_failure": false,
+    "task_execution_exception": false,
+    "verifier_failure": false,
+    "exact_frozen_slot_scored_zero": true,
+    "task_capability_negative_evidence_for_this_exact_slot": true,
+    "aggregate_family_capability_negative_conclusion_authorized": false,
+    "root_cause_beyond_zero_score_proved": false,
+    "note": "THE_EXACT_FROZEN_SLOT_COMPLETED_AND_WAS_SCORED_ZERO__THE_RECEIPT_DOES_NOT_PROVE_A_FINER_CAUSAL_EXPLANATION_FOR_WHY_THE_SCIENTIFIC_OUTPUT_FAILED_ACCEPTANCE"
+  },
+  "next_slot": {
+    "ledger_schedule_rank": 16,
+    "frozen_manifest_schedule_order": 15,
+    "attempt_index": 0,
+    "task_rank": 15,
+    "slot_id": "terminal-bench-science/sparse-network-assimilation::trial-0",
+    "task_name": "terminal-bench-science/sparse-network-assimilation",
+    "task_digest": "sha256:52ba7089dc32952df08c478af76b732fa82468c125431388adbf9798d869826f",
+    "standard_public_storage_feasible": true
+  },
+  "hard_nonclaims": [
+    "NO_RANK15_RETRY_OR_REPLACEMENT_AUTHORITY",
+    "NO_CLAIM_ZERO_REWARD_IDENTIFIES_A_UNIQUE_CAUSAL_DEFECT",
+    "NO_CLAIM_ONE_RANK15_ZERO_PROVES_AGGREGATE_TB_SCIENCE_FAILURE",
+    "NO_TB_SCIENCE_ACCEPTANCE_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed_delta": 1,
+    "benchmark_trials_consumed_delta": 1,
+    "consumed_successes_delta": 0,
+    "consumed_final_failures_delta": 1,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
