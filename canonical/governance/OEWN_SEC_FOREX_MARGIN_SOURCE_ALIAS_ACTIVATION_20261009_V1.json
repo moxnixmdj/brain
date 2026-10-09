@@ -1,0 +1,59 @@
+{
+  "schema":"PROJECT_BRAIN_OEWN_SEC_FOREX_MARGIN_SOURCE_ALIAS_ACTIVATION_20261009_V1",
+  "date":"2026-10-09",
+  "status":"CANDIDATE__SOURCE_AUTHENTICATED_MARGIN_ALIAS_TO_OEWN_RELEASE_SENSE__ZERO_TERMINAL_CREDIT",
+  "objective":"CLOSE_ONE_REAL_FINANCE_WORD_SENSE_SUBREGION_WITHOUT_MODEL_INFERENCE",
+  "runtime":{
+    "kernel":"canonical/runtime/oewn_source_alias_kernel_v1.py",
+    "resolver":"canonical/runtime/oewn_source_declared_alias_sense_v1.py"
+  },
+  "source_projection_pack":{
+    "schema":"PROJECT_BRAIN_HTTPS_SOURCE_FRAGMENT_PROJECTION_PACK_V2",
+    "source_id":"SEC_FOREX_FOREIGN_CURRENCY_TRANSACTIONS_MARGIN_ALIAS",
+    "url":"https://www.sec.gov/answers/forcurr.htm",
+    "fragments":[
+      {
+        "fragment_id":"SEC_FOREX_SECURITY_DEPOSIT_OR_MARGIN_ALIAS",
+        "section_anchor":"you could lose your entire investment or more.",
+        "text":"You will be required to deposit an amount of money (usually called a “security deposit” or “margin”) with a forex dealer in order to purchase or sell an off-exchange forex contract.",
+        "max_chars_after_anchor":2500
+      }
+    ]
+  },
+  "oewn_release":{
+    "release_id":"OEWN_2025_JSON",
+    "release_sha256":"7d749f6e2c39e6970e4997839dcf6e42fd281f3c2fae0171d2192bae8cfa4b51",
+    "public_source_commit":"bff3181fe5c810dcd157cba0eed60322a6e0aaed",
+    "margin_entry_path":"src/yaml/entries-m.yaml",
+    "margin_release_relative_senses":[
+      {"sense_id":"margin%1:25:00::","synset_id":"13926393-n"},
+      {"sense_id":"margin%1:07:00::","synset_id":"05127983-n"},
+      {"sense_id":"margin%1:21:01::","synset_id":"13372293-n"},
+      {"sense_id":"margin%1:21:02::","synset_id":"13281661-n"},
+      {"sense_id":"margin%1:10:00::","synset_id":"06401041-n"},
+      {"sense_id":"margin%1:07:01::","synset_id":"04757264-n"}
+    ],
+    "selected_synset_member_evidence":{
+      "path":"src/yaml/noun.possession.yaml",
+      "synset_id":"13372293-n",
+      "members":["margin","security deposit"]
+    }
+  },
+  "expected_live_result":{
+    "ambiguous_term":"margin",
+    "declared_alias":"security deposit",
+    "selected_sense_id":"margin%1:21:01::",
+    "selected_synset_id":"13372293-n",
+    "candidate_sense_count":6
+  },
+  "soundness_rule":"AUTHENTICATED_SOURCE_MUST_EXPLICITLY_CO_NAME_THE_AMBIGUOUS_TERM_AND_ALIAS__OEWN_RELEASE_RELATIVE_SENSE_SET_MUST_BE_COMPLETE__THE_ALIAS_MUST_BE_AN_EXACT_MEMBER_OF_EXACTLY_ONE_RELEASE_SENSE",
+  "hard_nonclaims":[
+    "NO_MODEL_OR_EMBEDDING_SELECTED_SENSE",
+    "NO_PARAPHRASE_EQUIVALENCE",
+    "NO_GLOBAL_SYNONYMY",
+    "NO_OPEN_WORLD_ENGLISH_COMPLETENESS",
+    "NO_GENERAL_FINANCE_SEMANTIC_CLOSURE",
+    "NO_POLICY_ADEQUACY_EXECUTION_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting":{"incremental_spend_usd":0,"terminal_credit_delta":0}
+}
