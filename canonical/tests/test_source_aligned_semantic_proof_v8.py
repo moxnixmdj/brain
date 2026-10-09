@@ -42,7 +42,7 @@ class CertifiedDocumentEffectRelationV1Tests(unittest.TestCase):
 
     def test_invalid_cross_field_effect_fails_closed_to_unresolved(self):
         out=parse_effect_relations(
-            _line(effect_class="DEFINE",supersedes=["A.t"]),
+            _line(effect_class="REPLACE",supersedes=[]),
             source="doc",
         )
         self.assertEqual(out["status"],"UNRESOLVED")
