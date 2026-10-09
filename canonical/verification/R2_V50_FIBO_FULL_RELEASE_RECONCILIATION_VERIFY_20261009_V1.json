@@ -1,0 +1,73 @@
+{
+  "schema": "PROJECT_BRAIN_R2_V50_FIBO_FULL_RELEASE_RECONCILIATION_VERIFY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__EXACT_BRANCH_BYTES__FULL_FIBO_WAKE_REFINED__LIVE_PROJECTIONS_RECONCILED__ONE_INTERNAL_FINANCE_RESIDUAL__TERMINAL_FALSE__ZERO_CREDIT",
+  "branch": "r2-v50-fibo-fullrelease-reconcile-20261009",
+  "tested_branch_head": "912949fe63510ad57de18f6dc3aeb9febbf3269a",
+  "exact_blobs": {
+    "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V50.json": "62fb4256237a175b939d4885098e2989547410d1",
+    "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json": "0e992babd1f90d72af0b9760568e1205c6b9de42",
+    "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json": "601ba3dd0b757f5750219a8db2aa0b9b9e0ed29e",
+    "canonical/governance/CURRENT_ONE_SHOT_REALITY_CLOSURE.json": "075449a59b08bffa6600472da4080d23a9bdcd6f"
+  },
+  "source_authority": {
+    "verification_path": "canonical/verification/FIBO_Q2_2026_FULL_RELEASE_AUTHORITY_VERIFY_20261009_V1.json",
+    "verification_git_blob_sha": "cc286caacdf914eb168da35ac543a5dea04b3b07",
+    "evidence_git_blob_sha": "e77fcf1232c0422c0af9bcbda6d85026dfd09092",
+    "runtime_git_blob_sha": "4d94a315ac4ba8e728ff15500a114ee8134b5bf3",
+    "source_file_count": 295,
+    "concept_count": 2671,
+    "direct_subclass_edge_count": 3443
+  },
+  "exact_byte_projection_verification": {
+    "carrier": "brain-live-integrated-v1-run-20261008",
+    "verifier": "/home/sprite/verify_r2_v50_full_fibo.py",
+    "status": "PASS__R2_V50_FULL_FIBO_RESIDUAL_RECOMPUTATION",
+    "log_sha256": "8dbd75dd27107734507ec32a803fcd141637951cb5fe453d82e3789b9eb4bea2",
+    "active_wake_count": 11,
+    "primary_internal_unsolved_count": 1,
+    "direct_route_count": 33,
+    "bounded_family_count": 30,
+    "terminal": false,
+    "terminal_credit_delta": 0
+  },
+  "verified_changes": {
+    "prior_scheduler": "ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V49",
+    "current_scheduler": "ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V50",
+    "prior_source_scope_wake": "NEW_CONTENT_ADDRESSED_COMPLETE_FINANCE_SOURCE_OR_CONVENTION_SCOPE_BOUND_OUTSIDE_VERIFIED_FIBO_Q2_2026_CORE7_SCOPE",
+    "current_source_scope_wake": "NEW_CONTENT_ADDRESSED_COMPLETE_FINANCE_SOURCE_OR_CONVENTION_SCOPE_BOUND_OUTSIDE_VERIFIED_FIBO_Q2_2026_FULL_RDF_TREE_SCOPE",
+    "stale_core7_active_wake_removed": true,
+    "full_fibo_positive_subregion_bound": true,
+    "route_count_changed": false,
+    "bounded_family_count_changed": false,
+    "active_wake_count_changed": false,
+    "internal_unsolved_cell_count_changed": false,
+    "information_theoretic_externality_reclassification": false,
+    "terminal_changed": false
+  },
+  "repaired_projection_defect": {
+    "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+    "defect": "V49_CURRENT_SCHEDULER_PATH_WAS_PAIRED_WITH_V48_SCHEDULER_GIT_BLOB_SHA",
+    "repaired": true,
+    "v50_path_and_blob_consistent": true
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_FINANCE_SEMANTIC_ADEQUACY_TAIL_IS_EMPTY",
+    "NO_CLAIM_FIBO_FULL_RDF_TREE_IS_EXTERNAL_IMPORT_CLOSURE",
+    "NO_CLAIM_OPEN_WORLD_FINANCE_ONTOLOGY_COMPLETENESS",
+    "NO_CLAIM_CONTEXTUAL_WORD_SENSE_FROM_LABEL_EQUALITY",
+    "NO_CLAIM_MISSING_SUBCLASS_PATH_PROVES_NON_ENTAILMENT",
+    "NO_DIRECT_ROUTE_OR_BOUNDED_FAMILY_COUNT_CREDIT",
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "direct_route_count_delta": 0,
+    "bounded_family_count_delta": 0,
+    "active_wake_count_delta": 0,
+    "primary_internal_unsolved_count_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
