@@ -1922,7 +1922,7 @@
     },
     "unified_fabric": {
       "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-      "git_blob_sha": "314eb74dccd724fb28f718b337367a2476a98eae"
+      "git_blob_sha": "8161b51386aa8e857f86d5e5788a83282cde6f4d"
     },
     "verification": {
       "path": "canonical/verification/LIVE_CAPABILITY_OWNERSHIP_UNIVERSAL_INVOCATION_V1_SOURCE_REPLAY_20261008_V1.json",
@@ -1945,7 +1945,7 @@
     "terminal_credit_delta": 0,
     "subordinate_runtime": {
       "path": "canonical/runtime/live_brain_runtime_v1.py",
-      "git_blob_sha": "68683757b5eb64369f482d4cba222a317dd23cb7",
+      "git_blob_sha": "2d7680370fc77884f10d2fb3cd423dc29b0b35c0",
       "public_authority": false
     },
     "activation": {
@@ -1961,12 +1961,12 @@
       "status": "ACTIVE_FAIL_CLOSED_DRIFT_LOCK"
     },
     "r1_drift_lock_verification": {
-      "path": "canonical/verification/R1_LIVE_ARCHITECTURE_DRIFT_LOCK_VERIFICATION_20261008_V1.json",
-      "git_blob_sha": "74d5e16e1c7213ef38028ca66575ca821b1b4195",
-      "status": "PASS__R1_LIVE_ARCHITECTURE_CLOSED_AND_DRIFT_LOCKED"
+      "path": "canonical/verification/R1_CURRENT_BYTE_LIFECYCLE_RESEAL_20261009_V1.json",
+      "git_blob_sha": "9becd33679c2f839df854c48fb14ead568128646",
+      "status": "PASS__R1_CURRENT_BYTE_ARCHITECTURE_RESEALED__9_OF_9_FOCUSED_REGRESSION"
     },
     "r1_drift_locked": true,
-    "verification_status": "PASS__R1_COMPLETE_LIVE_CAPABILITY_LIFECYCLE__86_OF_86",
+    "verification_status": "PASS__R1_CURRENT_BYTE_ARCHITECTURE_RESEALED__9_OF_9_FOCUSED_REGRESSION",
     "live_composition": {
       "path": "canonical/runtime/live_capability_composition_v1.py",
       "git_blob_sha": "2c32696b79463936b91e5b45bbba8098cd5f3ff1"
@@ -1974,9 +1974,9 @@
     "heterogeneous_live_composition": true,
     "composition_outcomes_r3_observed": true,
     "r1_complete_lifecycle_verification": {
-      "path": "canonical/verification/R1_COMPLETE_LIVE_CAPABILITY_LIFECYCLE_VERIFICATION_20261008_V1.json",
-      "git_blob_sha": "d640b70b126e0277ef9b45558b2c8e4ef4e8fed5",
-      "status": "PASS__R1_COMPLETE_LIVE_CAPABILITY_LIFECYCLE__86_OF_86"
+      "path": "canonical/verification/R1_CURRENT_BYTE_LIFECYCLE_RESEAL_20261009_V1.json",
+      "git_blob_sha": "9becd33679c2f839df854c48fb14ead568128646",
+      "status": "PASS__R1_CURRENT_BYTE_ARCHITECTURE_RESEALED__9_OF_9_FOCUSED_REGRESSION"
     },
     "capability_lifecycle": {
       "discoverable": true,
@@ -1996,7 +1996,7 @@
     },
     "unified_fabric": {
       "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-      "git_blob_sha": "314eb74dccd724fb28f718b337367a2476a98eae"
+      "git_blob_sha": "8161b51386aa8e857f86d5e5788a83282cde6f4d"
     },
     "regression": {
       "path": "canonical/tests/test_live_capability_invoker_v1.py",
@@ -2008,7 +2008,7 @@
     },
     "rule": "EVERY_LIVE_OWNED_CAPABILITY_IDENTITY_MUST_BE_CLASSIFIABLE_AND_DISPATCHABLE_THROUGH_UNIFIED_COGNITIVE_FABRIC_LIVE_CAPABILITY_OR_FAIL_CLOSED",
     "semantic_selection_boundary": "CAPABILITY_SELECTION_FROM_ARBITRARY_INTENT_REMAINS_R2",
-    "verification_status": "PASS__R1_COMPLETE_LIVE_CAPABILITY_LIFECYCLE__86_OF_86",
+    "verification_status": "PASS__R1_CURRENT_BYTE_ARCHITECTURE_RESEALED__9_OF_9_FOCUSED_REGRESSION",
     "verification_pr": 3223,
     "terminal_credit_delta": 0,
     "current_live_owned_capability_count": 86,
@@ -2029,18 +2029,18 @@
       "status": "ACTIVE_FAIL_CLOSED_DRIFT_LOCK"
     },
     "r1_drift_lock_verification": {
-      "path": "canonical/verification/R1_LIVE_ARCHITECTURE_DRIFT_LOCK_VERIFICATION_20261008_V1.json",
-      "git_blob_sha": "74d5e16e1c7213ef38028ca66575ca821b1b4195",
-      "status": "PASS__R1_LIVE_ARCHITECTURE_CLOSED_AND_DRIFT_LOCKED"
+      "path": "canonical/verification/R1_CURRENT_BYTE_LIFECYCLE_RESEAL_20261009_V1.json",
+      "git_blob_sha": "9becd33679c2f839df854c48fb14ead568128646",
+      "status": "PASS__R1_CURRENT_BYTE_ARCHITECTURE_RESEALED__9_OF_9_FOCUSED_REGRESSION"
     },
     "live_composition": {
       "path": "canonical/runtime/live_capability_composition_v1.py",
       "git_blob_sha": "2c32696b79463936b91e5b45bbba8098cd5f3ff1"
     },
     "r1_complete_lifecycle_verification": {
-      "path": "canonical/verification/R1_COMPLETE_LIVE_CAPABILITY_LIFECYCLE_VERIFICATION_20261008_V1.json",
-      "git_blob_sha": "d640b70b126e0277ef9b45558b2c8e4ef4e8fed5",
-      "status": "PASS__R1_COMPLETE_LIVE_CAPABILITY_LIFECYCLE__86_OF_86"
+      "path": "canonical/verification/R1_CURRENT_BYTE_LIFECYCLE_RESEAL_20261009_V1.json",
+      "git_blob_sha": "9becd33679c2f839df854c48fb14ead568128646",
+      "status": "PASS__R1_CURRENT_BYTE_ARCHITECTURE_RESEALED__9_OF_9_FOCUSED_REGRESSION"
     },
     "capability_lifecycle": {
       "discoverable": true,
