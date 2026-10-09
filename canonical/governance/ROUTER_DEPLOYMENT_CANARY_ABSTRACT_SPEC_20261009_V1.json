@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_ROUTER_DEPLOYMENT_CANARY_ABSTRACT_SPEC_V1",
+  "date": "2026-10-09",
+  "subject_id": "router-deployment-canary",
+  "semantic_version": "ROUTER_DEPLOYMENT_CANARY_ABSTRACT_V1",
+  "scope": "EXACT_GOAL_RELEVANT_BEHAVIOR_OF_ROUTER_DEPLOYMENT_CANARY_V1_ONLY",
+  "input_contract": {
+    "accepted_type": "MAPPING",
+    "encoding": {
+      "function": "json.dumps",
+      "sort_keys": true,
+      "separators": [
+        ",",
+        ":"
+      ],
+      "ensure_ascii": false,
+      "allow_nan": "PYTHON_JSON_DEFAULT_TRUE"
+    }
+  },
+  "transition_partition": [
+    {
+      "case_id": "PAYLOAD_NON_MAPPING",
+      "precondition": "INPUT_IS_NOT_MAPPING",
+      "outcome": "TYPE_ERROR",
+      "detail": "raises TypeError('PAYLOAD_MAPPING_REQUIRED')"
+    },
+    {
+      "case_id": "JSON_ENCODING_ERROR",
+      "precondition": "INPUT_IS_MAPPING_AND_JSON_DUMPS_RAISES",
+      "outcome": "TYPE_ERROR",
+      "detail": "propagates JSON encoder exception"
+    },
+    {
+      "case_id": "PAYLOAD_MAPPING",
+      "precondition": "INPUT_IS_MAPPING_AND_JSON_DUMPS_SUCCEEDS",
+      "outcome": "PASS"
+    }
+  ],
+  "success_observation": {
+    "schema": "PROJECT_BRAIN_ROUTER_DEPLOYMENT_CANARY_V1",
+    "status": "PASS__DETERMINISTIC_CANARY_EXECUTED",
+    "payload_sha256": "SHA256(PYTHON_JSON_DUMPS_BYTES_WITH_DECLARED_ENCODING)",
+    "terminal_result": false,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "nondeterminism": "DETERMINISTIC_FOR_FIXED_RUNTIME_AND_INPUT",
+  "liveness_scope": "NO_TERMINAL_LIVENESS_CLAIM__NONCREDITABLE_CANARY_ONLY",
+  "nonclaims": [
+    "THIS_SPEC_DOES_NOT_PROVE_REFINEMENT_BY_ITSELF",
+    "THIS_CANARY_IS_NON_CREDITABLE",
+    "THIS_SPEC_DOES_NOT_CLOSE_SELECTED_COVER_OR_TERMINAL",
+    "THIS_SPEC_DOES_NOT_GENERALIZE_TO_OTHER_ROUTES"
+  ],
+  "terminal_credit_delta": 0
+}
