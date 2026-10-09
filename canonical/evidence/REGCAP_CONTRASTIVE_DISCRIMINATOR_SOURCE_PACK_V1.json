@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_REGCAP_CONTRASTIVE_DISCRIMINATOR_SOURCE_PACK_V1",
+  "scope_id": "REGCAP_CCOB_CCYB_TLAC_CONTRASTIVE_MATRIX_V1",
+  "sources": [
+    {
+      "schema": "PROJECT_BRAIN_HTTPS_SOURCE_FRAGMENT_PROJECTION_PACK_V2",
+      "source_id": "BIS_CAD20_2026_COUNTERCYCLICAL_CAPITAL_BUFFERS",
+      "url": "https://www.bis.org/committees/bcbs/basel-consolidated-guidelines/module/cad/20",
+      "retrieval_user_agent": "ProjectBrainSourceProjectionVerifier/2.0",
+      "fragments": [
+        {
+          "fragment_id": "BASEL_BUFFER_FRAMEWORK_MEMBERS",
+          "section_anchor": "Countercyclical capital buffers",
+          "text": "The Basel capital buffer framework comprises the capital conservation buffer (CCoB), the countercyclical capital buffer (CCyB), buffers for global systemically important banks (G-SIBs) and domestic systemically important banks (D-SIBs), and Pillar 2 buffers.",
+          "max_chars_after_anchor": 12000
+        },
+        {
+          "fragment_id": "BASEL_BUFFERS_ABOVE_MINIMUM_CET1",
+          "section_anchor": "Countercyclical capital buffers",
+          "text": "These buffers take the form of an additional layer of capital above the regulatory minimums, and must be met with Common Equity Tier 1 (CET1) capital.",
+          "max_chars_after_anchor": 12000
+        },
+        {
+          "fragment_id": "CCYB_ONLY_DESIGNATED_RELEASABLE_BUFFER",
+          "section_anchor": "Countercyclical capital buffers",
+          "text": "The CCyB (and any variants of it) is the only designated releasable buffer in the Basel Framework.",
+          "max_chars_after_anchor": 12000
+        }
+      ]
+    },
+    {
+      "schema": "PROJECT_BRAIN_HTTPS_SOURCE_FRAGMENT_PROJECTION_PACK_V2",
+      "source_id": "FSB_TLAC_STANDARD_2015_11_09",
+      "url": "https://www.fsb.org/2015/11/total-loss-absorbing-capacity-tlac-principles-and-term-sheet-2/",
+      "retrieval_user_agent": "ProjectBrainSourceProjectionVerifier/2.0",
+      "fragments": [
+        {
+          "fragment_id": "TLAC_SEPARATE_MINIMUM_REQUIREMENT",
+          "section_anchor": "Total Loss-Absorbing Capacity (TLAC) Principles and Term Sheet",
+          "text": "All G-SIB are required to meet a new requirement for Minimum External TLAC alongside minimum regulatory capital requirements set out in the Basel III framework.",
+          "max_chars_after_anchor": 12000
+        }
+      ]
+    }
+  ]
+}
