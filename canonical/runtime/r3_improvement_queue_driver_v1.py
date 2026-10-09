@@ -246,6 +246,7 @@ def _current_frontier_repair_reduction(
 
         from canonical.runtime import r3_success_adapter_author_context_v1 as author_context
         from canonical.runtime import r3_verification_frontier_repair_reducer_v1 as repair_reducer
+        from canonical.runtime import r3_distinguishing_evidence_request_v1 as evidence_request
 
         proof = learning.get_success_proof_context(
             observation_id,
@@ -300,7 +301,17 @@ def _current_frontier_repair_reduction(
                 "status": "FRONTIER_REPAIR_REDUCTION_UNAVAILABLE",
                 "reason": "VERIFICATION_AUTHORITY_FRONTIER_CHANGED",
             }
-        return deepcopy(dict(reduction))
+        out = deepcopy(dict(reduction))
+        if (
+            reduction.get("must_acquire_new_distinguishing_evidence") is True
+            and reduction.get("admissible_repair_classes")
+            == [repair_reducer.NEW_EVIDENCE]
+        ):
+            compiled_request = evidence_request.compile_request(context)
+            out["distinguishing_evidence_request"] = deepcopy(
+                dict(compiled_request)
+            )
+        return out
     except Exception as exc:
         return {
             "pass": False,
@@ -1984,11 +1995,20 @@ def advance_once(
                     repair_reduction.get("pass") is True
                     and "VERIFIER_PRESERVING_SUCCESS_ADAPTER" not in admissible
                 ):
+                    evidence_request = repair_reduction.get(
+                        "distinguishing_evidence_request"
+                    )
+                    request_ready = (
+                        isinstance(evidence_request, Mapping)
+                        and evidence_request.get("pass") is True
+                    )
                     blockers.append({
                         "work_id": wid,
                         "kind": kind,
                         "blocker": (
                             "R3_VERIFICATION_FRONTIER_NEW_DISTINGUISHING_EVIDENCE_REQUIRED"
+                            if request_ready
+                            else "R3_VERIFICATION_FRONTIER_DISTINGUISHING_EVIDENCE_REQUEST_UNAVAILABLE"
                         ),
                         "boundary_root": (
                             payload.get("boundary_root")
@@ -1997,6 +2017,11 @@ def advance_once(
                         ),
                         "repair_class_reduction": deepcopy(
                             dict(repair_reduction)
+                        ),
+                        "distinguishing_evidence_request": (
+                            deepcopy(dict(evidence_request))
+                            if isinstance(evidence_request, Mapping)
+                            else None
                         ),
                         "adapter_acquisition_provider_skipped": True,
                         "replay_original_success": False,
