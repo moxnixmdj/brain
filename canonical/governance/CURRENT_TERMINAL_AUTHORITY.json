@@ -968,7 +968,7 @@
       "git_blob_sha": "7d2d2e2a271bd893a59c33e6cb7ce5e2e505dbf8",
       "verification": {
         "path": "canonical/verification/CURSORBENCH_V5_ADVANCED_CODING_RESIDUAL_BASIS_RECOMPUTE_20261009_V1.json",
-        "git_blob_sha": "f1d0e249922d16b91f4dc5ea9a7c0ce27cbdf88c"
+        "git_blob_sha": "62cbb3b8554a2f0398c08007901b4e1090ebb731"
       },
       "note": "FOUR_CANONICAL_ADVANCED_CODING_RESIDUALS_REDUCED_TO_TWO_BY_EXACT_REUSE__ZERO_BENCHMARK_CREDIT"
     }
