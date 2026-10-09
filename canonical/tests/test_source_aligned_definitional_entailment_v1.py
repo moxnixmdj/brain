@@ -4,6 +4,11 @@ import hashlib
 import json
 import unittest
 
+from canonical.runtime import semantic_relation_control_v1
+from canonical.runtime.semantic_relation_entailment_dag_v1 import (
+    EVIDENCE_SCHEMA as DAG_EVIDENCE_SCHEMA,
+    evidence_sha256 as dag_evidence_sha256,
+)
 from canonical.runtime.source_aligned_definitional_entailment_v1 import (
     CONCEPT_DEFINITION_AUTHORITY_SCHEMA,
     SOURCE_ATOM_AUTHORITY_SCHEMA,
@@ -321,6 +326,52 @@ class Tests(unittest.TestCase):
         )
         self.assertFalse(out["pass"])
         self.assertIn("RELATION_NOT_PROVED", out["reason"])
+
+    def test_existing_semantic_relation_controller_accepts_definitional_edge(self):
+        definition = concept_definition()
+        edge = {
+            "relation": "ENTAILS",
+            "source_id": LEFT,
+            "target_id": RIGHT,
+            "scope_id": SCOPE,
+            "raw_span": RAW,
+            "raw_source_id": SOURCE_ID,
+            "source_atom_receipts": atom_receipts(*definition["definition_atoms"]),
+            "concept_definition_receipt": {"candidate": True},
+        }
+        dag = {
+            "schema": DAG_EVIDENCE_SCHEMA,
+            "scope_id": SCOPE,
+            "left_id": LEFT,
+            "right_id": RIGHT,
+            "entailment_receipts": [edge],
+            "counterexample_receipts": [],
+        }
+
+        def edge_verifier(receipt):
+            return verify_relation_edge(
+                receipt,
+                source_atom_verifier=source_atom_verifier,
+                concept_definition_verifier=concept_definition_verifier,
+            )
+
+        out = semantic_relation_control_v1.resolve(
+            {
+                "left_id": LEFT,
+                "right_id": RIGHT,
+                "left_surface": RAW,
+                "right_surface": "capital conservation buffer",
+                "scope_id": SCOPE,
+                "required_relation": "LEFT_ENTAILS_RIGHT",
+                "entailment_dag_evidence": dag,
+                "expected_entailment_dag_sha256": dag_evidence_sha256(dag),
+            },
+            relation_edge_verifier=edge_verifier,
+        )
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(out["strongest_proved_relation"], "LEFT_ENTAILS_RIGHT")
+        self.assertTrue(out["proved_facts"]["left_entails_right"])
+        self.assertFalse(out["terminal_authority"])
 
     def test_no_terminal_or_acceptance_authority(self):
         definition = concept_definition()
