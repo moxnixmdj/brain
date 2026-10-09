@@ -887,10 +887,10 @@
     "current_r2_decision_intelligence": {
       "path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
       "scheduler_cut": {
-        "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V49.json",
-        "git_blob_sha": "bb7df134a969d52dfee603c8ea16b9653ab11eba"
+        "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V50.json",
+        "git_blob_sha": "62fb4256237a175b939d4885098e2989547410d1"
       },
-      "status": "ACTIVE_CURRENT_R2_AUTHORITY__V49__THIRTY_THREE_DIRECT_ROUTES__THIRTY_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__V12_SOURCE_RESIDUAL_AND_V13_MONOTONE_EFFECT_LATTICE_BOUND__SCOPED_DOMAIN_MAPPING_SEC_STANDARD_XBRL_AND_PINNED_FIBO_Q2_2026_AUTHORITIES_BOUND__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_REMAINS",
+      "status": "ACTIVE_CURRENT_R2_AUTHORITY__V50__THIRTY_THREE_DIRECT_ROUTES__THIRTY_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__V12_SOURCE_RESIDUAL_AND_V13_MONOTONE_EFFECT_LATTICE_BOUND__FIBO_Q2_2026_FULL_RDF_TREE_AUTHORITY_BOUND__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_REMAINS",
       "pointer_semantics": "MUTABLE_CURRENT_POINTER__PATH_IDENTITY_AUTHORITATIVE__IMMUTABLE_SCHEDULER_CUT_HASH_BOUND_BELOW",
       "mutable_pointer_blob_is_not_load_bearing": true
     },
@@ -1490,7 +1490,7 @@
     "gdpval_owner_layer_wake_authority": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V9.json",
     "opus_5_5_is_global_terminal_objective": false,
     "opus_5_5_is_frontier_checkpoint": true,
-    "current_r2_scheduler_cut": "ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V49",
+    "current_r2_scheduler_cut": "ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V50",
     "historical_root2_scheduler_fields_currently_authoritative": false,
     "r2_general_control_mechanism_closed_as_adequacy_or_abstain": true,
     "r2_open_world_positive_action_coverage_complete": false,
@@ -2270,14 +2270,14 @@
   },
   "r2_scheduler_precedence": {
     "current_authority_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
-    "current_scheduler_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V49.json",
-    "current_scheduler_git_blob_sha": "989d5ed04f1b706cf1f2105d518d768114f68fb7",
+    "current_scheduler_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V50.json",
+    "current_scheduler_git_blob_sha": "62fb4256237a175b939d4885098e2989547410d1",
     "single_live_primitive": "ESCAPE_POLICY_ADEQUACY",
     "general_mechanism_missing": false,
     "enumerated_active_zero_reality_cell_count": 0,
     "enumerated_external_required_sleep_cell_count": 0,
     "historical_root2_scheduler_fields_authoritative_for_current_r2": false,
-    "rule": "CURRENT_R2_POINTER_AND_V49_CONTENT_ADDRESSED_SCHEDULER_HAVE_PRECEDENCE__THIRTY_THREE_DIRECT_ROUTES__THIRTY_BOUNDED_FAMILIES__V12_QUERY_RELATIVE_SOURCE_RESIDUAL_AND_V13_MONOTONE_EFFECT_SEMANTIC_LATTICE_BOUND__TEN_VERIFIED_FINANCE_DIRECT_SUBREGIONS__SCOPED_DOMAIN_MAPPING__VERIFIED_STANDARD_SEC_XBRL_SOURCE_NATIVE_SEMANTICS__PINNED_FIBO_Q2_2026_CORE7_SOURCE_AND_ENTAILMENT_AUTHORITY_BOUND__ONE_GENUINE_FINANCE_SEMANTIC_RESIDUAL_REMAINS_INTERNAL_UNSOLVED__GDPVAL_DORMANT",
+    "rule": "CURRENT_R2_POINTER_AND_V50_CONTENT_ADDRESSED_SCHEDULER_HAVE_PRECEDENCE__THIRTY_THREE_DIRECT_ROUTES__THIRTY_BOUNDED_FAMILIES__V12_QUERY_RELATIVE_SOURCE_RESIDUAL_AND_V13_MONOTONE_EFFECT_SEMANTIC_LATTICE_BOUND__TEN_VERIFIED_FINANCE_DIRECT_SUBREGIONS__SCOPED_DOMAIN_MAPPING__VERIFIED_STANDARD_SEC_XBRL_SOURCE_NATIVE_SEMANTICS__PINNED_FIBO_Q2_2026_FULL_295_FILE_RDF_TREE_SOURCE_AND_POSITIVE_SUBCLASS_ENTAILMENT_AUTHORITY_BOUND__ONE_GENUINE_FINANCE_SEMANTIC_RESIDUAL_REMAINS_INTERNAL_UNSOLVED__GDPVAL_DORMANT",
     "current_authority_pointer_mutable": true,
     "current_authority_pointer_blob_is_not_load_bearing": true,
     "binding_law": "CURRENT_POINTERS_BIND_BY_CANONICAL_PATH_IDENTITY__IMMUTABLE_VERSIONED_AUTHORITY_ARTIFACTS_BIND_BY_GIT_BLOB_SHA",
@@ -2286,7 +2286,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 73,
+  "pointer_revision": 74,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
@@ -2482,7 +2482,7 @@
     "terminal_remains_false": true,
     "terminal_credit_delta": 0
   },
-  "live_scheduler": "ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V49",
+  "live_scheduler": "ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V50",
   "r2_v35_live_projection_reconciliation": {
     "status": "RECONCILED__CURRENT_R2_AND_TERMINAL_LIVE_PROJECTIONS_BIND_V35",
     "current_r2_blob_sha": "70cfd4ea77cd54ed321edac7f59abe1aa2ff49ff",
@@ -2852,6 +2852,28 @@
     "gate_blob_sha": "c777c4a2c9e34cb3e37ae8ed75565c5a3aefa390",
     "verification_blob_sha": "ec006e826547d810aa3fe61e77871ed0dc35e131",
     "boundary_blob_sha": "ab28e64d73392bd7810a579ce5a1ed346c9e2925",
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "r2_v50_fibo_full_release_reconciliation": {
+    "status": "RECONCILED__CURRENT_R2_AND_TERMINAL_LIVE_PROJECTIONS_BIND_V50_FULL_FIBO_SCOPE__TERMINAL_STILL_FALSE",
+    "current_r2_status": "ACTIVE_CURRENT_R2_AUTHORITY__V50__THIRTY_THREE_DIRECT_ROUTES__THIRTY_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__V12_SOURCE_RESIDUAL_AND_V13_MONOTONE_EFFECT_LATTICE_BOUND__FIBO_Q2_2026_FULL_RDF_TREE_AUTHORITY_BOUND__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_REMAINS",
+    "current_r2_pointer_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+    "current_r2_pointer_git_blob_sha": "0e992babd1f90d72af0b9760568e1205c6b9de42",
+    "scheduler_cut_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V50.json",
+    "scheduler_cut_git_blob_sha": "62fb4256237a175b939d4885098e2989547410d1",
+    "full_fibo_verification_path": "canonical/verification/FIBO_Q2_2026_FULL_RELEASE_AUTHORITY_VERIFY_20261009_V1.json",
+    "full_fibo_verification_git_blob_sha": "cc286caacdf914eb168da35ac543a5dea04b3b07",
+    "full_fibo_evidence_git_blob_sha": "e77fcf1232c0422c0af9bcbda6d85026dfd09092",
+    "full_fibo_runtime_git_blob_sha": "4d94a315ac4ba8e728ff15500a114ee8134b5bf3",
+    "source_file_count": 295,
+    "concept_count": 2671,
+    "direct_subclass_edge_count": 3443,
+    "direct_route_count": 33,
+    "bounded_family_count": 30,
+    "primary_finance_unsolved_count": 1,
+    "information_theoretic_externality_proved": false,
+    "terminal_remains_false": true,
     "acceptance_credit_delta": 0,
     "terminal_credit_delta": 0
   }
