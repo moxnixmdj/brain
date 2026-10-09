@@ -15,6 +15,9 @@ def instance():
         "source_path":"tmp/instance.xml",
         "source_sha256":"1"*64,
         "source_native_instance_fact_semantics_proved":True,
+        "semantic_truth_authority":False,
+        "terminal_authority":False,
+        "terminal_credit_delta":0,
         "facts":[{
             "ordinal":7,
             "concept_qname":Q,
