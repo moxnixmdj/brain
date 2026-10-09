@@ -1319,6 +1319,48 @@
         "git_blob_sha": "a19d683f86b01fdf3ed174d35c4e2cc96f8f71fa"
       },
       "note": "SECOND_AUTHENTICATED_CONSTRUCTIVE_CODING_REGION__FORMAL_ALL_MEMBERS_LIVENESS_UNDER_SIX_PREEXECUTION_ATOMS__NO_PRIVATE_CURSORBENCH_MEMBERSHIP_OR_WHOLE_COVER"
+    },
+    "coding_robust_finite_multi_interpretation_constructive_region_20261009_v1": {
+      "theorem": {
+        "path": "canonical/governance/CODING_ROBUST_FINITE_MULTI_INTERPRETATION_CONSTRUCTIVE_ADEQUACY_THEOREM_20261009_V1.json",
+        "git_blob_sha": "b4d75cb7c80bdb0b5f8d7d96bdd2a36177e2d37a"
+      },
+      "certificate": {
+        "path": "canonical/governance/CODING_ROBUST_FINITE_MULTI_INTERPRETATION_POLICY_ADEQUACY_CERTIFICATE_20261009_V1.json",
+        "git_blob_sha": "7924c5a4d5e38e1d417d56c8be08575587ed66fd"
+      },
+      "binding": {
+        "path": "canonical/governance/CODING_ROBUST_FINITE_MULTI_INTERPRETATION_POLICY_ADEQUACY_BINDING_20261009_V1.json",
+        "git_blob_sha": "d0b7f819e38d10009082cc695976ad00b6ab6228"
+      },
+      "independent_verification": {
+        "path": "canonical/verification/CODING_ROBUST_FINITE_MULTI_INTERPRETATION_POLICY_ADEQUACY_INDEPENDENT_VERIFICATION_20261009_V1.json",
+        "git_blob_sha": "aab059467a92aee05db25bfd8fb077a7db55c319"
+      },
+      "final_integration_seal": {
+        "path": "canonical/verification/CODING_ROBUST_FINITE_MULTI_INTERPRETATION_FINAL_INTEGRATION_SEAL_20261009_V1.json",
+        "git_blob_sha": "b06bedd719d2533662d296f0e1fe75182a446df7"
+      },
+      "registry": {
+        "path": "canonical/runtime/p3_conditioned_policy_adequacy_registry_v1.py",
+        "git_blob_sha": "ede67d5191af7b6b423e48e162ea6b701bf02328"
+      },
+      "note": "THIRD_AUTHENTICATED_CONSTRUCTIVE_CODING_REGION__ROBUST_ACROSS_SOUND_COMPLETE_FINITE_INTERPRETATION_SET__NO_TARGET_MEMBERSHIP_OR_WHOLE_COVER"
+    },
+    "cursorbench_three_region_complement_nonidentifiability_20261009_v1": {
+      "theorem": {
+        "path": "canonical/governance/CURSORBENCH_THREE_REGION_COMPLEMENT_NONIDENTIFIABILITY_20261009_V1.json",
+        "git_blob_sha": "2fcea005ffb8734dfe3398f9f8026838111d8385"
+      },
+      "runtime": {
+        "path": "canonical/runtime/cursorbench_three_region_complement_nonidentifiability_v1.py",
+        "git_blob_sha": "dda7a3e6dec2d7b8d32b48eb0e1bca09ea0b3ca0"
+      },
+      "independent_verification": {
+        "path": "canonical/verification/CURSORBENCH_THREE_REGION_COMPLEMENT_NONIDENTIFIABILITY_INDEPENDENT_VERIFICATION_20261009_V1.json",
+        "git_blob_sha": "ab0aa44fdee52125c0749ff6e511db8410bf584a"
+      },
+      "note": "CURRENT_STATIC_EVIDENCE_IDENTIFIES_NEITHER_EMPTY_NOR_NONEMPTY_COMPLEMENT_OF_THE_THREE_CONSTRUCTIVE_REGIONS__ZERO_CREDIT"
     }
   },
   "live_truth": {
@@ -1881,7 +1923,7 @@
     "cursorbench_absence_of_bound_v5_failure_is_adequacy_proof": false,
     "cursorbench_one_v5_pass_is_scope_complete_adequacy_proof": false,
     "cursorbench_selector_work_authorized_now": false,
-    "cursorbench_next_proof_object": "COVER_OR_ELIMINATE_THE_COMPLEMENT_OF_THE_TWO_AUTHENTICATED_CONSTRUCTIVE_CODING_REGIONS_OVER_THE_CLAIM_RELEVANT_SCOPE__PREEMPT_ON_ROUTE_A_SCORE_AUTHORITY_OR_ACTUAL_CURSORBENCH_TARGET_EVIDENCE",
+    "cursorbench_next_proof_object": "AUTHENTICATE_A_GENUINELY_BROADER_CONSTRUCTIVE_REGION_OR_ACQUIRE_TARGET_MEMBERSHIP_EVIDENCE_OR_ROUTE_A_SCORE_AUTHORITY__DO_NOT_REPEAT_STATIC_THREE_REGION_COMPLEMENT_ELIMINATION",
     "r2_sec_standard_xbrl_companyconcept_source_native_semantics_bound": true,
     "r2_sec_standard_xbrl_source_native_policy_adequacy_claimed": false,
     "cursorbench_advanced_coding_canonical_residual_count": 4,
@@ -1899,8 +1941,8 @@
     "r2_fibo_complete_import_closure_claimed": false,
     "r2_fibo_missing_path_is_non_entailment": false,
     "coding_specification_semantic_control_mechanism_gap": false,
-    "coding_specification_registered_conditioned_policy_count": 2,
-    "coding_specification_registered_coding_policy_count": 2,
+    "coding_specification_registered_conditioned_policy_count": 3,
+    "coding_specification_registered_coding_policy_count": 3,
     "coding_specification_first_missing_object": "CODING_V5_AUTHENTICATED_POSITIVE_ADEQUACY_CERTIFICATE_V1",
     "coding_specification_selected_discriminator_truth_state": "CONDITIONAL_ONLY_AFTER_NO_COMMON_AUTHENTICATED_CODING_POLICY",
     "coding_specification_common_policy_realization_binding_state": "CONDITIONAL_ONLY_AFTER_AUTHENTICATED_COMMON_POLICY_EXISTS",
@@ -1938,7 +1980,7 @@
     "r2_source_explicit_semantic_autofill_bound": true,
     "r2_source_explicit_autofill_replaces_caller_claims": false,
     "r2_unrecognized_prose_remains_semantic_top": true,
-    "coding_specification_registered_coding_specialist_policy_count": 2,
+    "coding_specification_registered_coding_specialist_policy_count": 3,
     "coding_specification_registered_coding_specialist_policy_id": "BRAIN_INDEPENDENT_ACCEPTANCE_MODEL_TYPED_PLAN_V1",
     "coding_specification_specialist_membership_self_certified": false,
     "cursorbench_secondary_zero_synthesis_route": "PROVE_SOURCE_AUTHORIZED_TRUTH_OF_ALL_FIVE_TYPED_ACCEPTANCE_SPECIALIST_ATOMS_FOR_A_REACHED_TARGET_RELEVANT_CONTEXT__THEN_REUSE_EXISTING_REGISTERED_SPECIALIST",
@@ -2130,11 +2172,31 @@
     "coding_finite_exact_oracle_target_membership_self_certified": false,
     "coding_finite_exact_oracle_private_cursorbench_membership_proved": false,
     "coding_finite_exact_oracle_whole_cursorbench_cover_proved": false,
-    "coding_specification_authenticated_constructive_region_count": 2,
+    "coding_specification_authenticated_constructive_region_count": 3,
     "coding_specification_authenticated_constructive_region_policy_ids": [
       "BRAIN_INDEPENDENT_ACCEPTANCE_MODEL_TYPED_PLAN_V1",
-      "BRAIN_FINITE_CANDIDATE_EXACT_ORACLE_SOLVER_V1"
-    ]
+      "BRAIN_FINITE_CANDIDATE_EXACT_ORACLE_SOLVER_V1",
+      "BRAIN_ROBUST_FINITE_MULTI_INTERPRETATION_SOLVER_V1"
+    ],
+    "coding_robust_finite_multi_interpretation_constructive_region_verified": true,
+    "coding_robust_finite_multi_interpretation_policy_id": "BRAIN_ROBUST_FINITE_MULTI_INTERPRETATION_SOLVER_V1",
+    "coding_robust_finite_multi_interpretation_constructive_liveness_proved": true,
+    "coding_robust_finite_multi_interpretation_ambiguity_robustness_proved": true,
+    "coding_robust_finite_multi_interpretation_condition_atom_count": 7,
+    "coding_robust_finite_multi_interpretation_target_membership_self_certified": false,
+    "coding_robust_finite_multi_interpretation_private_cursorbench_membership_proved": false,
+    "coding_robust_finite_multi_interpretation_whole_cursorbench_cover_proved": false,
+    "coding_specification_registered_coding_specialist_policy_ids": [
+      "BRAIN_INDEPENDENT_ACCEPTANCE_MODEL_TYPED_PLAN_V1",
+      "BRAIN_FINITE_CANDIDATE_EXACT_ORACLE_SOLVER_V1",
+      "BRAIN_ROBUST_FINITE_MULTI_INTERPRETATION_SOLVER_V1"
+    ],
+    "cursorbench_current_constructive_region_union_count": 3,
+    "cursorbench_current_constructive_region_union_distinct_condition_atom_count": 18,
+    "cursorbench_three_region_complement_nonidentifiability_proved": true,
+    "cursorbench_current_static_evidence_identifies_three_region_complement_emptiness": false,
+    "cursorbench_actual_three_region_complement_empty_claimed": false,
+    "cursorbench_actual_three_region_complement_nonempty_claimed": false
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -2840,7 +2902,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 110,
+  "pointer_revision": 111,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
@@ -4100,6 +4162,18 @@
       "current_git_blob_sha": "8340829830dc81095abd4d643a8be6894a39f2f3"
     },
     "semantic_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "cursorbench_three_region_constructive_frontier_reconciliation_20261009_v1": {
+    "result": "THIRD_CONSTRUCTIVE_REGION_BOUND__THREE_REGION_COMPLEMENT_EMPTINESS_REMAINS_NONIDENTIFIED_BY_CURRENT_STATIC_EVIDENCE",
+    "robust_policy_id": "BRAIN_ROBUST_FINITE_MULTI_INTERPRETATION_SOLVER_V1",
+    "registered_coding_policy_count_after": 3,
+    "authenticated_constructive_region_count_after": 3,
+    "union_distinct_condition_atom_count": 18,
+    "complement_emptiness_identified": false,
+    "private_cursorbench_membership_delta": 0,
+    "whole_cursorbench_cover_delta": 0,
     "acceptance_credit_delta": 0,
     "terminal_credit_delta": 0
   }
