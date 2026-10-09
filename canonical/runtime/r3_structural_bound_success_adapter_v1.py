@@ -24,9 +24,11 @@ SCHEMA = "PROJECT_BRAIN_R3_STRUCTURAL_BOUND_SUCCESS_ADAPTER_V1"
 RULES_PATH = "canonical/runtime/R3_STRUCTURAL_BOUND_ADAPTER_RULES_V1.json"
 PROFILE_REPLAY_TARGETS = "REPLAY_TARGET_EFFECTS_V1"
 PROFILE_PROOF_TARGETS = "PROOF_VERIFIED_TARGET_EFFECTS_V1"
+PROFILE_PROOF_IO = "PROOF_VERIFIED_INITIAL_AND_TARGET_EFFECTS_V1"
 NORMALIZATION_PROFILES = (
     PROFILE_REPLAY_TARGETS,
     PROFILE_PROOF_TARGETS,
+    PROFILE_PROOF_IO,
 )
 
 
@@ -56,6 +58,15 @@ def _items(value: Any) -> list[str] | None:
         return None
     out = [str(x).strip() for x in value]
     if not out or any(not x for x in out):
+        return None
+    return out
+
+
+def _items_allow_empty(value: Any) -> list[str] | None:
+    if not isinstance(value, Sequence) or isinstance(value, (str, bytes)):
+        return None
+    out = [str(x).strip() for x in value]
+    if any(not x for x in out):
         return None
     return out
 
@@ -92,6 +103,23 @@ def _normalized_request(
         replay_targets = _items(normalized_raw.get("target_effects"))
         if replay_targets is not None and replay_targets != proved_targets:
             return None
+        normalized_raw["target_effects"] = proved_targets
+    elif normalization_profile == PROFILE_PROOF_IO:
+        material = _proof_material(observation)
+        if not isinstance(material, Mapping):
+            return None
+        proved_initial = _items_allow_empty(material.get("verified_initial_facts"))
+        proved_targets = _items(material.get("verified_target_effects"))
+        if proved_initial is None or proved_targets is None:
+            return None
+        if "initial_facts" in normalized_raw:
+            replay_initial = _items_allow_empty(normalized_raw.get("initial_facts"))
+            if replay_initial is None or replay_initial != proved_initial:
+                return None
+        replay_targets = _items(normalized_raw.get("target_effects"))
+        if replay_targets is not None and replay_targets != proved_targets:
+            return None
+        normalized_raw["initial_facts"] = proved_initial
         normalized_raw["target_effects"] = proved_targets
     else:
         return None
