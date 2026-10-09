@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_ONE_SHOT_CANONICAL_FRONTDOOR_INTEGRATION_VERIFY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__CANONICAL_FRONTDOOR_META_ORCHESTRATOR__FOCUSED_16_OF_16__R1_4_OF_4__ONE_SHOT_V2_20_OF_20__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "base_main": "5ad84c172003c5d55247e59f733b07859acc8054",
+    "branch": "integrate-one-shot-meta-frontdoor-20261009-v1",
+    "branch_head": "748b9864e9b19d95249215c4d5875dc55a8cdf9f",
+    "unified_fabric": {
+      "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
+      "git_blob_sha": "7c4e4724b2aa347d56a9d6ca7891823ecc197a92"
+    },
+    "tested_authority_rebind": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+      "git_blob_sha": "012126ffa755f5d860bbaa980e3c1a3d3e81b07b"
+    },
+    "permanent_regression": {
+      "path": "canonical/tests/test_unified_cognitive_fabric_one_shot_meta_v1.py",
+      "git_blob_sha": "7543715e24c1a8b5cd48fe49f9af37805b603dee"
+    },
+    "one_shot_runtime": {
+      "path": "canonical/runtime/one_shot_reality_closure_v2.py",
+      "git_blob_sha": "17b693029dc3ab5be7d4c8b523c104c33265700d"
+    }
+  },
+  "carrier": {
+    "kind": "SPRITES",
+    "sprite_id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "sprite_name": "brain-live-integrated-v1-run-20261008",
+    "workspace": "/home/sprite/brain"
+  },
+  "verification": {
+    "python_compile": "PASS",
+    "focused_frontdoor_dispatch": "PASS__16_OF_16",
+    "r1_live_architecture_closure_gate": "PASS__4_OF_4",
+    "one_shot_reality_closure_v2_suite": "PASS__20_OF_20",
+    "observed_total_assertion_groups": 40
+  },
+  "proved": [
+    "VERIFIED_ONE_SHOT_V2_IS_CALLABLE_THROUGH_CANONICAL_UNIFIED_FABRIC_FRONT_DOOR_BY_EXPLICIT_META_ORCHESTRATOR_MODE",
+    "ONE_SHOT_META_DISPATCH_DOES_NOT_REQUIRE_A_TASK_PAYLOAD",
+    "ONE_SHOT_PROVIDER_HOOKS_ARE_FORWARDED_WITHOUT_AUTHORITY_UPGRADE",
+    "POST_ENGINE_R3_COMPOUNDING_TICK_IS_NOT_RUN_AFTER_ONE_SHOT_META_ORCHESTRATION",
+    "ONE_SHOT_RESULT_REMAINS_ZERO_TERMINAL_AUTHORITY",
+    "ONE_SHOT_IS_NOT_ADDED_TO_LIVE_OWNED_ENGINE_DESCRIPTORS",
+    "R1_LIVE_CAPABILITY_COUNT_AND_INVOCATION_IDENTITY_REMAIN_UNCHANGED",
+    "R1_CLOSURE_GATE_PASSES_AFTER_EXACT_FABRIC_BYTE_REBIND"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_ONE_SHOT_IS_AUTOMATIC_DEFAULT_ROUTING_FOR_ORDINARY_TASK_REQUESTS",
+    "NO_CLAIM_ARBITRARY_CAPABILITY_SYNTHESIS_IS_CLOSED",
+    "NO_CLAIM_ARBITRARY_EXTERNAL_REALITY_ACQUISITION_IS_AUTHORIZED",
+    "NO_CLAIM_OPEN_WORLD_POSITIVE_ACTION_COVERAGE_IS_CLOSED",
+    "NO_TERMINAL_AUTHORITY",
+    "NO_TERMINAL_CREDIT",
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_CAPABILITY_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0
+  }
+}
