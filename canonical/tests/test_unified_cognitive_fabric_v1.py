@@ -53,6 +53,7 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
         self.assertIn("SEMANTIC_RELATION", c["engines"])
         self.assertIn("SEMANTIC_RELATION", c["engines"])
         self.assertIn("SEMANTIC_RELATION", c["engines"])
+        self.assertIn("SEMANTIC_RELATION", c["engines"])
         self.assertGreater(c["brain_owned_transitive_file_count"], 1)
         self.assertGreater(c["brain_owned_transitive_source_bytes"], 0)
         self.assertIn(
@@ -523,6 +524,54 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
             "TASK_EQUIVALENT",
         )
         self.assertTrue(out["result"]["task_equivalent"])
+
+
+    def test_auto_semantic_relation_accepts_scoped_exact_equivalence_receipt(self):
+        scope = "1" * 64
+        out = run({
+            "payload": {
+                "expression_a": "reserve buffer",
+                "expression_b": "liquidity cushion",
+                "required_relation": "BIDIRECTIONAL_EQUIVALENCE",
+                "scope_sha256": scope,
+                "evidence": {
+                    "explicit_source_equivalence": {
+                        "verified": True,
+                        "relation": "EXACT_EQUIVALENT",
+                        "source_kind": "EXPLICIT_SOURCE_DEFINITION",
+                        "verifier_id": "verifier:test",
+                        "evidence_sha256": "e" * 64,
+                        "scope_sha256": scope,
+                    }
+                },
+            },
+        })
+        self.assertTrue(out["auto_routed"])
+        self.assertEqual(out["mode"], "SEMANTIC_RELATION")
+        self.assertTrue(out["inner_pass"], out)
+        self.assertEqual(
+            out["result"]["strongest_proved_relation"],
+            "EXACT_EQUIVALENT",
+        )
+
+    def test_auto_semantic_relation_rejects_similarity_as_authority(self):
+        scope = "1" * 64
+        out = run({
+            "payload": {
+                "expression_a": "reserve buffer",
+                "expression_b": "liquidity cushion",
+                "required_relation": "ANY_SOUND_RELATION",
+                "scope_sha256": scope,
+                "evidence": {"embedding_similarity": 0.99},
+            },
+        })
+        self.assertTrue(out["auto_routed"])
+        self.assertEqual(out["mode"], "SEMANTIC_RELATION")
+        self.assertFalse(out["inner_pass"])
+        self.assertEqual(
+            out["result"]["reason"],
+            "UNSAFE_SIMILARITY_EVIDENCE_CANNOT_GRANT_SEMANTIC_RELATION",
+        )
 
     def test_capability_scheduler_is_inside_fabric(self):
         out = run({
