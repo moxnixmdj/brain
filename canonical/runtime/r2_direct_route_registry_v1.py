@@ -27,6 +27,7 @@ from canonical.runtime import raw_goal_archive_acceptance_v1 as archive_acceptan
 from canonical.runtime import raw_goal_exact_literal_acceptance_v1 as literal_acceptance
 from canonical.runtime import raw_goal_literal_json_acceptance_v1 as literal_json_acceptance
 from canonical.runtime import r2_direct_end_to_end_adequacy_v1 as legacy_v1
+from canonical.runtime import r2_direct_route_dynamic_admission_v1 as dynamic_admission
 
 SCHEMA = "PROJECT_BRAIN_R2_DIRECT_ROUTE_REGISTRY_DISPATCHER_V1"
 POINTER_SCHEMA = "PROJECT_BRAIN_CURRENT_R2_DIRECT_ROUTE_REGISTRY_V1"
@@ -301,20 +302,23 @@ def effective_state(
     repo_root: str | Path = ROOT,
     pointer_path: str | Path | None = None,
 ) -> dict[str, Any]:
-    """Join current deployable authority with legacy selection metadata."""
+    """Join frozen baseline activation, dynamic admissions, and legacy precedence."""
     root = Path(repo_root).resolve()
     metadata = load_registry(repo_root=root, pointer_path=pointer_path)
     current = load_current_activation(repo_root=root)
+    dynamic = dynamic_admission.load_current_admissions(repo_root=root)
+
     metadata_by_id = {
         str(row["route_id"]): deepcopy(dict(row))
         for row in metadata["routes"]
     }
-    activation_ids: list[str] = []
+    baseline_ids: list[str] = []
     rows: list[dict[str, Any]] = []
-    auto: list[str] = []
+    activation_auto: list[str] = []
+
     for index, raw in enumerate(current["routes"]):
         route_id = str(raw.get("route_id") or "")
-        activation_ids.append(route_id)
+        baseline_ids.append(route_id)
         if route_id in metadata_by_id:
             row = _validate_legacy_binding(
                 metadata_by_id[route_id],
@@ -324,26 +328,65 @@ def effective_state(
             row["activation_index"] = index
         else:
             row = _derive_dynamic_row(raw, activation_index=index, root=root)
-            auto.append(route_id)
+            activation_auto.append(route_id)
         rows.append(row)
 
-    activation_set = set(activation_ids)
-    stale = sorted(set(metadata_by_id) - activation_set)
+    baseline_set = set(baseline_ids)
+    dynamic_ids: list[str] = []
+    dynamic_shadowed: list[str] = []
+    by_baseline = {str(row["route_id"]): row for row in rows}
+    for offset, admitted in enumerate(dynamic["admissions"]):
+        route_id = str(admitted.get("route_id") or "")
+        if route_id in baseline_set:
+            baseline = by_baseline[route_id]
+            same = (
+                baseline.get("runtime_git_blob_sha")
+                == admitted.get("runtime_git_blob_sha")
+                and baseline.get("verification_git_blob_sha")
+                == admitted.get("verification_git_blob_sha")
+            )
+            if not same:
+                raise DirectRouteRegistryError(
+                    "DYNAMIC_ADMISSION_CONFLICTS_WITH_BASELINE:" + route_id
+                )
+            dynamic_shadowed.append(route_id)
+            continue
+        row = deepcopy(dict(admitted))
+        row["activation_index"] = len(current["routes"]) + offset
+        row["selection_class"] = DYNAMIC_SELECTION_CLASS
+        row["automatic_live_admission"] = True
+        rows.append(row)
+        dynamic_ids.append(route_id)
+
+    deployable_set = baseline_set | set(dynamic_ids)
+    if len(deployable_set) != len(rows):
+        raise DirectRouteRegistryError("EFFECTIVE_ROUTE_ID_COLLISION")
+
+    stale = sorted(set(metadata_by_id) - baseline_set)
+    auto = sorted(set(activation_auto) | set(dynamic_ids))
     return {
         "schema": SCHEMA,
-        "status": "PASS__CURRENT_R2_AUTHORITY_JOINED_WITH_SELECTION_METADATA",
+        "status": "PASS__CURRENT_R2_BASELINE_PLUS_DYNAMIC_ADMISSIONS_JOINED_WITH_SELECTION_METADATA",
         "rows": rows,
-        "deployable_route_ids": sorted(activation_set),
+        "deployable_route_ids": sorted(deployable_set),
+        "baseline_activation_route_ids": sorted(baseline_set),
         "legacy_selection_metadata_route_ids": sorted(metadata_by_id),
-        "auto_admitted_route_ids": sorted(auto),
+        "activation_auto_admitted_route_ids": sorted(activation_auto),
+        "dynamic_admission_route_ids": sorted(dynamic_ids),
+        "dynamic_shadowed_by_baseline_route_ids": sorted(dynamic_shadowed),
+        "auto_admitted_route_ids": auto,
         "stale_selection_metadata_route_ids": stale,
         "deployable_route_count": len(rows),
+        "baseline_activation_route_count": len(baseline_set),
         "legacy_selection_metadata_count": len(metadata_by_id),
+        "activation_auto_admitted_route_count": len(activation_auto),
+        "dynamic_admission_route_count": len(dynamic_ids),
         "auto_admitted_route_count": len(auto),
         "current_activation_path": current["activation_path"],
         "current_activation_git_blob_sha": current["activation_git_blob_sha"],
+        "dynamic_admission_target_path": dynamic["target_path"],
+        "dynamic_admission_target_git_blob_sha": dynamic["target_git_blob_sha"],
     }
-
 
 def _base(status: str, *, passed: bool = False) -> dict[str, Any]:
     return {
@@ -635,14 +678,19 @@ def catalog(
         "pass": True,
         "route_count": state["deployable_route_count"],
         "route_ids": state["deployable_route_ids"],
+        "baseline_activation_route_count": state["baseline_activation_route_count"],
         "legacy_selection_metadata_count": state["legacy_selection_metadata_count"],
+        "activation_auto_admitted_route_count": state["activation_auto_admitted_route_count"],
+        "dynamic_admission_route_count": state["dynamic_admission_route_count"],
         "auto_admitted_route_count": state["auto_admitted_route_count"],
         "auto_admitted_route_ids": state["auto_admitted_route_ids"],
         "stale_selection_metadata_route_ids": state["stale_selection_metadata_route_ids"],
         "current_pointer_path": "canonical/governance/CURRENT_R2_DIRECT_ROUTE_REGISTRY.json",
         "current_activation_path": state["current_activation_path"],
+        "dynamic_admission_target_path": state["dynamic_admission_target_path"],
         "future_route_source_edit_required": False,
         "future_route_registry_edit_required": False,
+        "future_route_current_r2_edit_required": False,
         "new_route_collision_policy": (
             "UNIQUE_MATCH_REQUIRED__COLLISION_FAILS_CLOSED_UNTIL_EXPLICIT_"
             "EQUIVALENCE_OR_DOMINANCE_AUTHORITY"

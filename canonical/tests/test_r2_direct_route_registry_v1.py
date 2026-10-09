@@ -67,6 +67,8 @@ class R2DirectRouteRegistryV1Tests(unittest.TestCase):
     def test_current_effective_universe_has_exact_28_verified_routes(self):
         state = registry_router.effective_state()
         self.assertEqual(state["deployable_route_count"], 28)
+        self.assertEqual(state["baseline_activation_route_count"], 28)
+        self.assertEqual(state["dynamic_admission_route_count"], 0)
         self.assertEqual(state["legacy_selection_metadata_count"], 28)
         self.assertEqual(state["auto_admitted_route_count"], 0)
         self.assertEqual(state["stale_selection_metadata_route_ids"], [])
@@ -163,6 +165,7 @@ class R2DirectRouteRegistryV1Tests(unittest.TestCase):
         self.assertEqual(catalog["route_count"], 28)
         self.assertIs(catalog["future_route_source_edit_required"], False)
         self.assertIs(catalog["future_route_registry_edit_required"], False)
+        self.assertIs(catalog["future_route_current_r2_edit_required"], False)
 
 
 if __name__ == "__main__":

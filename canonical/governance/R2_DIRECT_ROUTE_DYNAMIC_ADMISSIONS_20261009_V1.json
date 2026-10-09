@@ -1,0 +1,13 @@
+{
+  "schema": "PROJECT_BRAIN_R2_DIRECT_ROUTE_DYNAMIC_ADMISSIONS_V1",
+  "date": "2026-10-09",
+  "status": "ACTIVE_DYNAMIC_ADMISSIONS__EMPTY_BASELINE",
+  "selection_class": "UNIQUE_MATCH_REQUIRED",
+  "collision_policy": "FAIL_CLOSED_ON_ANY_OTHER_DYNAMIC_OR_LEGACY_MATCH",
+  "admissions": [],
+  "admission_count": 0,
+  "default": "NOT_LIVE_UNLESS_EXACT_INDEPENDENT_DEPLOYMENT_RECEIPT_VALIDATES",
+  "incremental_spend_usd": 0,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0
+}

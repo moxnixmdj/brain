@@ -15,6 +15,7 @@ from pathlib import Path
 from typing import Any, Mapping
 
 from canonical.runtime import r2_direct_route_registry_v1 as dispatcher
+from canonical.runtime import r2_direct_route_dynamic_admission_v1 as dynamic_admission
 
 SCHEMA = "PROJECT_BRAIN_R2_DIRECT_ROUTE_LIVE_INTEGRATION_CLOSURE_V1"
 ROOT = Path(__file__).resolve().parents[2]
@@ -51,11 +52,18 @@ def evaluate(*, repo_root: str | Path = ROOT) -> dict[str, Any]:
     if _blob(activation) != str(direct.get("activation_git_blob_sha") or ""):
         raise R2DirectRouteClosureError("CURRENT_R2_ACTIVATION_BLOB_DRIFT")
     activation_doc = _json(activation)
-    deployable = {
+    baseline_deployable = {
         str(row.get("route_id") or "")
         for row in activation_doc.get("current_routes", [])
         if isinstance(row, Mapping) and str(row.get("route_id") or "")
     }
+    dynamic = dynamic_admission.load_current_admissions(repo_root=root)
+    dynamic_deployable = {
+        str(row.get("route_id") or "")
+        for row in dynamic["admissions"]
+        if isinstance(row, Mapping) and str(row.get("route_id") or "")
+    }
+    deployable = baseline_deployable | dynamic_deployable
 
     state = dispatcher.effective_state(repo_root=root)
     executable = set(state["deployable_route_ids"])
@@ -96,8 +104,9 @@ def evaluate(*, repo_root: str | Path = ROOT) -> dict[str, Any]:
         and not legacy_import_live
         and direct.get("future_route_source_edit_required") is False
         and direct.get("future_route_registry_edit_required") is False
-        and not stale_metadata
-        and auto_admitted == set(metadata_missing_for_deployable)
+        and direct.get("future_route_current_r2_edit_required") is False
+        and auto_admitted == set(metadata_missing_for_deployable) | dynamic_deployable
+        and stale_metadata.isdisjoint(executable)
     )
     return {
         "schema": SCHEMA,
@@ -108,6 +117,8 @@ def evaluate(*, repo_root: str | Path = ROOT) -> dict[str, Any]:
         ),
         "pass": passed,
         "verified_deployable_route_count": len(deployable),
+        "baseline_activation_route_count": len(baseline_deployable),
+        "dynamic_admission_route_count": len(dynamic_deployable),
         "executable_dispatch_route_count": len(executable),
         "legacy_selection_metadata_count": len(metadata),
         "auto_admitted_route_count": len(auto_admitted),
@@ -126,6 +137,9 @@ def evaluate(*, repo_root: str | Path = ROOT) -> dict[str, Any]:
         ),
         "future_route_registry_edit_required": direct.get(
             "future_route_registry_edit_required"
+        ),
+        "future_route_current_r2_edit_required": direct.get(
+            "future_route_current_r2_edit_required"
         ),
         "new_activation_routes_auto_admitted_fail_closed": (
             direct.get("dynamic_activation_auto_admission") is True
