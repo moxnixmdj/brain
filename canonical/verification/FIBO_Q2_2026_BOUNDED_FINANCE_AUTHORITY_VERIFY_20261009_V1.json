@@ -1,0 +1,123 @@
+{
+  "schema": "PROJECT_BRAIN_FIBO_Q2_2026_BOUNDED_FINANCE_AUTHORITY_VERIFY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__PINNED_FIBO_Q2_2026_CORE7_SOURCE_AUTHORITY__253_DEFINED_LABELED_CLASSES__177_IN_SCOPE_DIRECT_SUBCLASS_EDGES__FOCUSED_9_OF_9__INDEPENDENT_XML_REEXTRACTION_PASS__ZERO_TERMINAL_CREDIT",
+  "subject_branch": "r2-fibo-q2-2026-bounded-finance-authority-v1",
+  "subject_head_sha": "0224fd63a28fcf0d20276cbc2660a7ac1edfd7cd",
+  "exact_subjects": {
+    "canonical/evidence/FIBO_Q2_2026_CORE_FINANCE_BOUNDED_SOURCE_V1.json": {
+      "path": "canonical/evidence/FIBO_Q2_2026_CORE_FINANCE_BOUNDED_SOURCE_V1.json",
+      "git_blob_sha": "5849e1fdd68b5883deaa0fbd6146f2b9aea9729a"
+    },
+    "canonical/runtime/fibo_q2_2026_bounded_finance_authority_v1.py": {
+      "path": "canonical/runtime/fibo_q2_2026_bounded_finance_authority_v1.py",
+      "git_blob_sha": "1ff1143aa2d659db76020b22c6f30313d81f23e3"
+    },
+    "canonical/tests/test_fibo_q2_2026_bounded_finance_authority_v1.py": {
+      "path": "canonical/tests/test_fibo_q2_2026_bounded_finance_authority_v1.py",
+      "git_blob_sha": "1871319f16cb5d535d9c040bb006e6722a1d4e55"
+    },
+    "canonical/runtime/semantic_relation_entailment_dag_v1.py": {
+      "path": "canonical/runtime/semantic_relation_entailment_dag_v1.py",
+      "git_blob_sha": "3e092ba1581f674c1302288b2800771a81b5bb02"
+    },
+    "canonical/runtime/semantic_relation_control_v1.py": {
+      "path": "canonical/runtime/semantic_relation_control_v1.py",
+      "git_blob_sha": "13aa27ea19cefd8ce6059f037ff5491402d9fa68"
+    }
+  },
+  "upstream": {
+    "repository": "edmcouncil/fibo",
+    "release_tag": "master_2026Q2",
+    "commit_sha": "f59157fe156e3d91b1c045222d0a7dc06b7d78a2",
+    "exact_source_files": [
+      [
+        "FBC/FinancialInstruments/FinancialInstruments.rdf",
+        "5456f5cb395f30d4636f8d2b1e5f0463466b764e",
+        56770
+      ],
+      [
+        "FBC/DebtAndEquities/Debt.rdf",
+        "a5eb752f32d6af7bfa09331e93472caabb9c2369",
+        103624
+      ],
+      [
+        "FBC/ProductsAndServices/FinancialProductsAndServices.rdf",
+        "9c07773a5f78ae872e297517004b9a3d47a2d6ab",
+        90893
+      ],
+      [
+        "FBC/FunctionalEntities/FinancialServicesEntities.rdf",
+        "1e9a14a20cf56f651853d3afb8bec60654f1a226",
+        82365
+      ],
+      [
+        "FND/Accounting/AccountingEquity.rdf",
+        "85c2ca077946d14dda74c52338a7523a1b44c1e3",
+        11047
+      ],
+      [
+        "FND/Accounting/CurrencyAmount.rdf",
+        "f06b766f11fe040a0f4d2d511c8a7a856045a05c",
+        36093
+      ],
+      [
+        "FND/Agreements/Contracts.rdf",
+        "90e96983bfb78e300875cdff01ef4dff3a4a2d3b",
+        73907
+      ]
+    ]
+  },
+  "verification": {
+    "carrier": "brain-live-integrated-v1-run-20261008",
+    "sprite_id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "focused_unittest": "9_OF_9_PASS",
+    "independent_source_replay": {
+      "method": "PYTHON_STDLIB_XML_ELEMENTTREE_REEXTRACTION_FROM_SEVEN_EXACT_UPSTREAM_GIT_BLOBS",
+      "result": "PASS__EXACT_PACK_MATCH",
+      "concept_count": 253,
+      "direct_entailment_edge_count": 177,
+      "duplicate_label_count": 0,
+      "pack_git_blob_sha": "5849e1fdd68b5883deaa0fbd6146f2b9aea9729a"
+    },
+    "live_semantic_relation_controller_integration": "PASS__PROMISSORY_NOTE_ENTAILS_DEBT_INSTRUMENT_ENTAILS_FINANCIAL_INSTRUMENT",
+    "falsification_cases": [
+      "FABRICATED_DIRECT_EDGE_REJECTED",
+      "REVERSE_MISSING_PATH_REMAINS_UNKNOWN_NOT_NOT_ENTAILS",
+      "OUT_OF_SCOPE_LABEL_CREATES_NO_CONCEPT",
+      "PACK_BINDING_TAMPER_REJECTED",
+      "LABEL_MATCH_DOES_NOT_GRANT_CONTEXTUAL_SEMANTIC_IDENTITY"
+    ],
+    "independent_falsifier_caught_initial_generator_error": true,
+    "initial_error": "REGEX_GENERATOR_MISSED_12_LABELED_CLASSES_AND_13_IN_SCOPE_EDGES",
+    "repair": "REGENERATED_PACK_WITH_XML_PARSER_AND_REPLAYED_ALL_TESTS"
+  },
+  "proved": [
+    "EXACT_PINNED_SOURCE_PACK_AUTHENTICATES_253_LABELED_DEFINED_FIBO_CLASSES_IN_THE_SEVEN_FILE_SCOPE",
+    "EXACT_PINNED_SOURCE_PACK_AUTHENTICATES_177_DIRECT_RDFS_SUBCLASSOF_EDGES_WITH_BOTH_ENDPOINTS_IN_SCOPE",
+    "AUTHENTICATED_DIRECT_EDGES_CAN_FEED_EXISTING_SCOPED_ENTAILMENT_DAG_WITHOUT_MUTATING_VERIFICATION_AUTHORITY",
+    "EXISTING_SEMANTIC_RELATION_CONTROL_CAN_CONSUME_THE_RESULT_AS_DIRECTIONAL_ENTAILMENT",
+    "MISSING_PATH_IS_NOT_PROMOTED_TO_NON_ENTAILMENT",
+    "FIBO_LABELS_ARE_CANDIDATE_DISCOVERY_ONLY"
+  ],
+  "wake_condition_effect": {
+    "cell_id": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
+    "candidate_condition_satisfied": "NEW_CONTENT_ADDRESSED_COMPLETE_FINANCE_SOURCE_OR_CONVENTION_SCOPE_BOUND",
+    "satisfied_scope": "EXACT_SEVEN_FILE_FIBO_Q2_2026_LABELED_CLASS_AND_INTERNAL_DIRECT_SUBCLASS_EDGE_MANIFEST_ONLY",
+    "global_finance_tail_closed": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_COMPLETE_FIBO_IMPORT_CLOSURE",
+    "NO_CLAIM_COMPLETE_OPEN_WORLD_FINANCE_ONTOLOGY",
+    "NO_CLAIM_LABEL_EQUALITY_PROVES_CONTEXTUAL_WORD_SENSE",
+    "NO_CLAIM_ABSENT_SUBCLASS_PATH_PROVES_NON_ENTAILMENT",
+    "NO_CLAIM_FINANCE_SEMANTIC_TAIL_IS_CLOSED",
+    "NO_ACCEPTANCE_FAMILY_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
