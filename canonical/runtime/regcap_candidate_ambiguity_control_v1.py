@@ -61,6 +61,30 @@ def _validate_candidate_result(value: Any) -> tuple[dict[str, Any] | None, str |
     return row, None
 
 
+GROUNDING_SCHEMA = "PROJECT_BRAIN_LOSS_ABSORBING_CUSHION_REGCAP_GROUNDING_V1"
+
+
+def plan_from_grounding(
+    grounding_result: Mapping[str, Any],
+    **kwargs: Any,
+) -> dict[str, Any]:
+    """Route one verified grounding result into candidate ambiguity control."""
+    if not isinstance(grounding_result, Mapping):
+        return _base("FAIL_CLOSED", reason="GROUNDING_RESULT_REQUIRED")
+    if grounding_result.get("schema") != GROUNDING_SCHEMA:
+        return _base("FAIL_CLOSED", reason="GROUNDING_RESULT_SCHEMA_INVALID")
+    if grounding_result.get("source_constraint_proved") is not True:
+        return _base("FAIL_CLOSED", reason="GROUNDING_SOURCE_CONSTRAINT_NOT_PROVED")
+    candidate_result = grounding_result.get("candidate_discovery")
+    if not isinstance(candidate_result, Mapping):
+        return _base("FAIL_CLOSED", reason="GROUNDING_CANDIDATE_DISCOVERY_MISSING")
+    out = plan(candidate_result, **kwargs)
+    out["grounding_source_id"] = grounding_result.get("source_id")
+    out["grounding_source_span"] = deepcopy(grounding_result.get("source_span"))
+    out["grounding_raw_span"] = grounding_result.get("raw_span")
+    return out
+
+
 def plan(
     candidate_result: Mapping[str, Any],
     *,
