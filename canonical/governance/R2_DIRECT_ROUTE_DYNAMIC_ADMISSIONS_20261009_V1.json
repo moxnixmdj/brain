@@ -15,14 +15,15 @@
       "verification_path": "canonical/verification/R2_CROSS_DOCUMENT_SOURCE_RESIDUAL_V12_VERIFY_20261009_V1.json",
       "verification_git_blob_sha": "77261e0a7becc2156ff7f9d214f6441b602826c4",
       "candidate_path": "canonical/governance/R2_CROSS_DOCUMENT_SOURCE_RESIDUAL_DIRECT_ROUTE_DEPLOYMENT_CANDIDATE_20261009_V1.json",
-      "candidate_git_blob_sha": "72af5e4672ae54d301d3ad52d279a85f11682500",
+      "candidate_git_blob_sha": "3f20407a5b2718d96288ea002c4ceb1b94e87ebd",
       "independent_receipt_path": "canonical/verification/R2_CROSS_DOCUMENT_SOURCE_RESIDUAL_DIRECT_ROUTE_DEPLOYMENT_INDEPENDENT_RECEIPT_20261009_V1.json",
-      "independent_receipt_git_blob_sha": "9840bb49b0726822b2c909e968f78ee84bc34f53",
+      "independent_receipt_git_blob_sha": "6b3a175ef1b4ace4ad5e4dcfac47d5d4b1b62b11",
       "scope": "QUERY_RELATIVE_BYTE_COVERAGE_PLUS_SOURCE_RESIDUAL_TOP_EFFECT_REASONING",
       "selection_class": "UNIQUE_MATCH_REQUIRED",
       "active": true,
       "automatic_live_admission": true,
-      "collision_policy": "FAIL_CLOSED_ON_ANY_OTHER_DYNAMIC_OR_LEGACY_MATCH"
+      "collision_policy": "FAIL_CLOSED_ON_ANY_OTHER_DYNAMIC_OR_LEGACY_MATCH",
+      "semantic_open_stops_fallback": true
     }
   ],
   "admission_count": 1,
