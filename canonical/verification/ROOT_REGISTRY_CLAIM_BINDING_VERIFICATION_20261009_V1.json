@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT_REGISTRY_CLAIM_BINDING_VERIFICATION_V1",
+  "date": "2026-10-09",
+  "status": "PASS_POLICY_EXHAUSTION_AND_STATIC_RECONCILIATION__REPO_CI_NOT_AVAILABLE__ZERO_CREDIT",
+  "subject": "claim-scoped CC root certificate registry promotion rule",
+  "branch": "proof/root-registry-claim-binding-20261009-sol",
+  "policy_model": {
+    "variables": [
+      "active_claim_valid",
+      "slot_proved",
+      "certificate_claim_matches",
+      "verification_claim_matches"
+    ],
+    "promotion_rule": "NOT(slot_proved) OR (active_claim_valid AND certificate_claim_matches AND verification_claim_matches)",
+    "boolean_valuations_checked": 16,
+    "unsafe_promotion_counterexamples": 0
+  },
+  "representative_mutations_checked": [
+    "PROVED_SLOT_WITHOUT_ACTIVE_CLAIM_REJECTED",
+    "EXACT_ACTIVE_CLAIM_BOUND_SLOT_ACCEPTED_WITH_R4_STILL_OPEN",
+    "WRONG_SCOPE_CLAIM_CERTIFICATE_REJECTED",
+    "INDEPENDENT_VERIFICATION_FOR_OTHER_CLAIM_REJECTED",
+    "STALE_MISSION_POINTER_BINDING_REJECTED",
+    "MISSING_CURRENT_MISSION_POINTER_BLOB_FAILS_CLOSED",
+    "MALFORMED_ACTIVE_CLAIM_FAILS_CLOSED_WITHOUT_EXCEPTION"
+  ],
+  "repository_regressions": {
+    "path": "canonical/tests/test_coverage_root_certificate_registry_guard_v1.py",
+    "deterministic_test_count": 14,
+    "github_actions_runs_observed": 0,
+    "exact_ci_result_claimed": false
+  },
+  "branch_content_addresses": {
+    "registry": "fa395c54a9f5c7d93eff01dd8ccf28575c0a0361",
+    "guard": "508df599e111e9aec47cbd175ce4f760299da786",
+    "tests": "7944f9c4fa46de905f7f6976b9dd2968f174733c",
+    "current_root_certificate_pointer": "b5ecc5a30abd046fb4f034e9ac1972ebdcf73c66",
+    "root_theorem": "f7a824a60b91c914af37b1a911d3f0ee7d6f52a8",
+    "claim_scope": "05b555f4f9a0227ee0b3e6121246172078857279",
+    "live_binding": "149891188b32fd7e52460b1536c6a52cb4bf5919"
+  },
+  "result": "NO_CC_ROOT_PROVED_SLOT_CAN_BE_SOUNDLY_ACCEPTED_WITHOUT_ONE_EXACT_ACTIVE_FROZEN_CLAIM_AND_MATCHING_CERTIFICATE_PLUS_VERIFICATION_CLAIM",
+  "nonclaims": [
+    "NO_CC_R1_CERTIFICATE_PROVED",
+    "NO_CC_R2_CERTIFICATE_PROVED",
+    "NO_CC_R3_CERTIFICATE_PROVED",
+    "NO_R4_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "fresh_reality_units_consumed": 0,
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}

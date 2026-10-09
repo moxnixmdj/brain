@@ -1,10 +1,10 @@
 {
   "schema": "PROJECT_BRAIN_COVERAGE_COMPLETENESS_ROOT_THEOREM_LIVE_BINDING_V1",
   "date": "2026-10-09",
-  "status": "ACTIVE_R4_CONTENT_ADDRESSED_LIVE_BINDING_VERIFIED_CURRENT_BYTES__ZERO_CREDIT",
+  "status": "ACTIVE_R4_CONTENT_ADDRESSED_LIVE_BINDING_REFRESHED_WITH_CLAIM_SCOPED_ROOT_REGISTRY__ZERO_CREDIT",
   "mission_objective": {
     "path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
-    "git_blob_sha": "2b37b3185e03b55678d7d394c8d29202a4b3ab48",
+    "git_blob_sha": "7ad5f82d8434966781bf97c725d482e10133fc7c",
     "real_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE"
   },
   "checkpoint_objective": {
@@ -13,13 +13,13 @@
   },
   "root_theorem": {
     "path": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_THEOREM_V1.json",
-    "git_blob_sha": "4e2a77fc661a386f1affb4297ec9739a583872eb"
+    "git_blob_sha": "f7a824a60b91c914af37b1a911d3f0ee7d6f52a8"
   },
   "falsifier": {
     "path": "canonical/runtime/root_theorem_falsifier_v1.py",
-    "git_blob_sha": "d3fbf6e5e7434aef89002594cedb3263858cdc9c",
+    "git_blob_sha": "1f6ea3530e42530480a2d5416d82f04496fcd17e",
     "tests_path": "canonical/tests/test_root_theorem_falsifier_v1.py",
-    "tests_git_blob_sha": "624123c130e9619219bc7fbd7aa2becc769f88de",
+    "tests_git_blob_sha": "06d84644d65de7a4babd1abf17a19aa60c900ff1",
     "r4_binding_tests_path": "canonical/tests/test_root_theorem_r4_binding_coherence_v1.py",
     "r4_binding_tests_git_blob_sha": "4dde83a2ab994c82d78dcb1a0a1887ba0b51f298"
   },
@@ -32,7 +32,7 @@
   "terminal_authority": {
     "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
     "required_authoritative_source_key": "coverage_completeness_root_theorem_r1_r4",
-    "required_mission_blob_sha": "2b37b3185e03b55678d7d394c8d29202a4b3ab48",
+    "required_mission_blob_sha": "7ad5f82d8434966781bf97c725d482e10133fc7c",
     "fail_closed_on_absence_or_drift": true
   },
   "harvested_mutation_classes": [
@@ -57,7 +57,9 @@
     "CLAIM_SCOPE_DRIFT_IS_R4_FAILURE",
     "CARRIER_AND_ROOT_THEOREM_MUST_BIND_THE_SAME_FROZEN_CLAIM_SEMANTICS",
     "FALSIFIER_AND_R4_BINDING_TEST_BLOBS_MUST_BE_CURRENT",
-    "LIVE_BINDING_VALIDATOR_AND_TEST_BLOBS_MUST_BE_CURRENT"
+    "LIVE_BINDING_VALIDATOR_AND_TEST_BLOBS_MUST_BE_CURRENT",
+    "ROOT_CERTIFICATE_REGISTRY_MUST_NOT_PROMOTE_ANY_CC_ROOT_WITHOUT_ONE_EXACT_ACTIVE_FROZEN_CLAIM",
+    "PROVED_CC_ROOT_CERTIFICATE_AND_INDEPENDENT_VERIFICATION_MUST_MATCH_ACTIVE_CLAIM_EXACTLY"
   ],
   "accounting": {
     "fresh_reality_units_consumed": 0,
@@ -90,12 +92,26 @@
   },
   "claim_scope_precondition": {
     "path": "canonical/governance/COVERAGE_COMPLETENESS_CLAIM_SCOPE_V1.json",
-    "git_blob_sha": "907c2935f7a6aeaf69e9288219fd94b36f58e8b2",
+    "git_blob_sha": "05b555f4f9a0227ee0b3e6121246172078857279",
     "role": "FROZEN_CLAIM_INDEX_FOR_R1_R4_AND_CARRIER_FACTORIZATION__ZERO_CREDIT"
   },
   "currentness_repair": {
-    "pr": 3786,
-    "reason": "MISSION_ROOT_THEOREM_FALSIFIER_TEST_AND_VALIDATOR_BYTES_DRIFTED_AFTER_PRIOR_BINDING_FREEZE",
+    "pr": 3845,
+    "reason": "MISSION_ROOT_THEOREM_CLAIM_SCOPE_AND_ROOT_CERTIFICATE_REGISTRY_BINDINGS_REFRESHED_TO_CURRENT_BYTES",
     "terminal_credit_delta": 0
+  },
+  "root_certificate_registry_precondition": {
+    "registry_path": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_CERTIFICATE_REGISTRY_V1.json",
+    "registry_git_blob_sha": "fa395c54a9f5c7d93eff01dd8ccf28575c0a0361",
+    "current_pointer_path": "canonical/governance/CURRENT_COVERAGE_COMPLETENESS_ROOT_CERTIFICATES.json",
+    "current_pointer_git_blob_sha": "b5ecc5a30abd046fb4f034e9ac1972ebdcf73c66",
+    "guard_path": "canonical/runtime/coverage_root_certificate_registry_guard_v1.py",
+    "guard_git_blob_sha": "508df599e111e9aec47cbd175ce4f760299da786",
+    "tests_path": "canonical/tests/test_coverage_root_certificate_registry_guard_v1.py",
+    "tests_git_blob_sha": "7944f9c4fa46de905f7f6976b9dd2968f174733c",
+    "active_claim": null,
+    "role": "R4_PROOF_CLOSURE_REQUIRES_EXACT_FROZEN_CLAIM_BEFORE_ANY_PROVED_CC_ROOT_SLOT",
+    "current_root_certificates_proved": 0,
+    "r4_proof_closure": false
   }
 }
