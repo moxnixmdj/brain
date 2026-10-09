@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_VERIFIED_TO_LIVE_COMPLETENESS_GAP_VERIFY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "FAIL_CLOSED__ONE_VERIFIED_DEPLOYABLE_R2_ROUTE_NOT_LIVE",
+  "source_main_head": "f929f1f493e252f8b0455f0dad6446d5cba5ea33",
+  "scope": "CURRENT_EXPLICIT_R2_DIRECT_ROUTE_DEPLOYMENT_CONTRACTS_ONLY",
+  "current_live_admission_pointer": {
+    "path": "canonical/governance/CURRENT_R2_DIRECT_ROUTE_ADMISSIONS.json",
+    "git_blob_sha": "88c15f651615b9fb56788c8165d5c9507d03f073",
+    "target_path": "canonical/governance/R2_DIRECT_ROUTE_DYNAMIC_ADMISSIONS_20261009_V2.json",
+    "target_git_blob_sha": "18baef636174b1f2f9e2ffb03477966c20baf60d",
+    "live_dynamic_route_count": 1
+  },
+  "verified_deployable_route_count": 2,
+  "missing_promotion_count": 1,
+  "missing_promotion": {
+    "route_id": "DIRECT_ADEQUACY::FINANCE_MARKED_MENTION_UNIVERSE_AMBIGUITY_CONTROL_V1",
+    "candidate_path": "canonical/governance/R2_DIRECT_ROUTE_DEPLOYMENT_CANDIDATE_FINANCE_MARKED_MENTION_UNIVERSE_20261009_V1.json",
+    "candidate_git_blob_sha": "5cbba21f9fb44c91eec87a6c9044e55a576debe3",
+    "independent_receipt_path": "canonical/verification/R2_DIRECT_ROUTE_DEPLOYMENT_RECEIPT_FINANCE_MARKED_MENTION_UNIVERSE_20261009_V1.json",
+    "independent_receipt_git_blob_sha": "40b9db187a7fe70133605b96a80717ab252968ef",
+    "runtime_path": "canonical/runtime/r2_finance_marked_mention_universe_direct_adequacy_v1.py",
+    "runtime_git_blob_sha": "2b3c57f04237c6b0dc66a27b8dfd92c479e70cc7",
+    "route_verification_path": "canonical/verification/R2_FINANCE_MARKED_MENTION_UNIVERSE_DIRECT_ADEQUACY_VERIFY_20261009_V1.json",
+    "route_verification_git_blob_sha": "1198d40e2a51c60c54008e77bef1c9c52444d8ba",
+    "deployment_eligible": true
+  },
+  "already_live_verified_deployable": {
+    "route_id": "DIRECT_ADEQUACY::CROSS_DOCUMENT_SEMANTIC_REGISTRY_V3_LATTICE_V8",
+    "candidate_git_blob_sha": "70800391f346599ea8fbcd1ee2e65d1ce721a71e",
+    "independent_receipt_git_blob_sha": "5a6cf01c33237496a8b6eb7804f6c3c76a14a703"
+  },
+  "compiled_successor_if_pointer_unchanged": {
+    "admission_count": 2,
+    "manifest_git_blob_sha": "8e2418aecd87bbeaece8025d6bbb6c03f52c8b8e",
+    "manifest_sha256": "d63d875adb66b46ea065419500f9ec65bccde66a8b133b4f52b2beab8307348c",
+    "manifest_byte_length": 3260,
+    "stale_if_current_pointer_changes": true
+  },
+  "checks": {
+    "finance_candidate_generic_deployment_schema": true,
+    "finance_independent_receipt_generic_deployment_schema": true,
+    "finance_receipt_status_independent_pass": true,
+    "finance_receipt_deployment_eligible": true,
+    "finance_route_absent_from_static_v21_v20_v19": true,
+    "finance_route_absent_from_current_dynamic_manifest": true,
+    "domain_mapping_generic_deployable_route_present_in_current_dynamic_manifest": true
+  },
+  "authority_boundaries": {
+    "verification_authority_mutated": false,
+    "promotion_authority": false,
+    "terminal_authority": false,
+    "terminal_credit_delta": 0,
+    "historical_repository_capability_completeness_proved": false,
+    "arbitrary_raw_language_route_selection_proved": false
+  },
+  "required_next_action": "PROMOTE_THE_EXACT_FINANCE_MARKED_MENTION_ROUTE_THROUGH_THE_EXISTING_ATOMIC_R2_DYNAMIC_ADMISSION_COMPILER__THEN_REPLAY_VERIFIED_TO_LIVE_COMPLETENESS_ON_CURRENT_BYTES"
+}
