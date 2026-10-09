@@ -120,3 +120,4 @@ def test_valid_bounded_certificate_emits_content_bound_receipt(tmp_path):
     assert out["terminal_credit_delta"] == 0
     assert len(out["certificate_sha256"]) == 64
     assert len(out["receipt_sha256"]) == 64
+\n\ndef test_declarations_do_not_self_certify_refinement(tmp_path):\n    cert, _, _ = _make_repo(tmp_path)\n    cert["safety_refinement"] = {"proved": True}\n    cert["liveness_refinement"] = {"required": False, "proved": True}\n    out = verify_certificate(cert, repo_root=tmp_path)\n    assert out["pass"] is True\n    assert out["refinement_verified"] is False\n    assert out["execution_authority"] is False\n
