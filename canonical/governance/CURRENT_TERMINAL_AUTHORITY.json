@@ -1046,6 +1046,15 @@
       },
       "note": "ONE_OF_FIVE_TYPED_ACCEPTANCE_MEMBERSHIP_ATOMS_INTERNALIZED_STRUCTURALLY_WHEN_EXACT_TYPED_MODEL_PASSES__FOUR_EXTERNAL_ATOMS_REMAIN__ZERO_BENCHMARK_CREDIT"
     },
+    "cursorbench_preverifier_information_boundary_atom_20261009_v1": {
+      "path": "canonical/governance/CURSORBENCH_PREVERIFIER_INFORMATION_BOUNDARY_ATOM_ACTIVATION_20261009_V1.json",
+      "git_blob_sha": "821b3714c444992177eec6ef8e1cc69630a2efaf",
+      "independent_verification": {
+        "path": "canonical/verification/CURSORBENCH_PREVERIFIER_INFORMATION_BOUNDARY_ATOM_INDEPENDENT_VERIFICATION_20261009_V1.json",
+        "git_blob_sha": "8a9f85f2a18e7c861bca950ba8b6e3f18c63d94f"
+      },
+      "note": "MECHANISM_READY__ATOM_TRUTH_REMAINS_EVIDENCE_GATED__MISSING_REAL_CURSORBENCH_RECEIPT__FOUR_EXTERNAL_MEMBERSHIP_ATOMS_REMAIN__ZERO_CREDIT"
+    },
     "tb_science_rank15_runtime_derived_admission_authority_v9": {
       "path": "canonical/governance/TB_SCIENCE_RANK15_RUNTIME_DERIVED_ADMISSION_ONE_SLOT_EXECUTION_AUTHORITY_20261009_V9.json",
       "git_blob_sha": "c98bc25882279a12aece65fb1bbd827b90148b82",
@@ -1703,6 +1712,10 @@
     "cursorbench_typed_acceptance_membership_atom_count_total": 5,
     "cursorbench_typed_acceptance_membership_atom_count_structurally_internalized": 1,
     "cursorbench_typed_acceptance_membership_atom_count_external_when_exact_model_passes": 4,
+    "cursorbench_no_hidden_verifier_atom_mechanism_ready": true,
+    "cursorbench_no_hidden_verifier_atom_truth_proved_for_real_target_context": false,
+    "cursorbench_no_hidden_verifier_atom_real_receipt_exists": false,
+    "cursorbench_no_hidden_verifier_atom_missing_evidence_is_not_disproof": true,
     "cursorbench_typed_acceptance_remaining_external_membership_atoms": [
       "SPEC_ACCEPT_TYPED_SEMANTICS_BOUND_V1",
       "SPEC_ACCEPT_FAILURE_MODE_COMPLETENESS_V1",
@@ -2429,7 +2442,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 81,
+  "pointer_revision": 82,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
