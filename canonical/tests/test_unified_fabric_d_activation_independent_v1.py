@@ -66,12 +66,48 @@ def _load_runtime(root: Path):
     _mod("canonical.runtime.semantic_ambiguity_control_v1")
     _mod("canonical.runtime.semantic_relation_control_v1")
     _mod("canonical.runtime.oewn_decision_sense_control_v1")
+    physical_calls=[]
+    def physical_run(request,*,capability_id,repo_root):
+        physical_calls.append({
+            "request":dict(request),
+            "capability_id":capability_id,
+            "repo_root":str(repo_root),
+        })
+        return {
+          "pass":True,
+          "status":"PASS__PHYSICAL_D_FINAL_ZERO_AMBIENT",
+          "certificate_sha256":"1"*64,
+          "policy_sha256":"2"*64,
+          "execution_epoch_sha256":"3"*64,
+          "material_closure_root":"4"*64,
+          "launcher_git_blob_sha":"5"*40,
+          "child_git_blob_sha":"6"*40,
+          "launcher_policy_sha256":"7"*64,
+          "broker_sha256":"8"*64,
+          "material_effects_committed":0,
+          "result":{
+            "schema":"PROJECT_BRAIN_UNIFIED_COGNITIVE_FABRIC_V1",
+            "status":"FABRIC_DISPATCH_COMPLETE",
+            "mode":"P3",
+            "requested_mode":"P3",
+            "auto_routed":False,
+            "engine":"p3_real_context_v3_admission_v12.evaluate",
+            "inner_pass":True,
+            "inner_status":"P3_OK",
+            "result":{"pass":True,"status":"P3_OK"},
+            "single_front_door":True,
+            "terminal_authority":False,
+            "terminal_credit_delta":0,
+          },
+        }
+    _mod("canonical.runtime.d_finality_zero_ambient_frontdoor_v1",run=physical_run)
 
     us=importlib.util.spec_from_file_location(
         "fabric_under_test",
         runtime/"unified_cognitive_fabric_v1.py",
     )
     fabric=importlib.util.module_from_spec(us); us.loader.exec_module(fabric)
+    state["physical_calls"]=physical_calls
     return d,resolver,fabric,state
 
 
@@ -151,13 +187,26 @@ class FabricDActivationTests(unittest.TestCase):
         self.assertFalse(state["p3_epoch_seen"])
         self.assertEqual(state["p3_calls"],1)
 
-    def test_d_final_refuses_until_physical_membrane_is_live(self):
+    def test_d_final_routes_only_through_physical_membrane(self):
         td,root,(d,resolver,fabric,state)=self.stage()
         self.addCleanup(td.cleanup)
-        out=fabric.run({"mode":"P3","payload":{},"ownership_mode":"D_FINAL"})
-        self.assertFalse(out["pass"])
-        self.assertIn("D_FINAL_PHYSICAL_ZERO_AMBIENT_MEMBRANE_NOT_LIVE",out["reason"])
+        out=fabric.run({
+          "mode":"P3",
+          "payload":{"fresh":1},
+          "options":{"learn":True},
+          "ownership_mode":"D_FINAL",
+        })
+        self.assertEqual(out["status"],"FABRIC_DISPATCH_COMPLETE")
+        self.assertTrue(out["inner_pass"])
         self.assertEqual(state["p3_calls"],0)
+        self.assertEqual(len(state["physical_calls"]),1)
+        call=state["physical_calls"][0]
+        self.assertEqual(call["capability_id"],"engine:P3")
+        self.assertNotIn("ownership_mode",call["request"])
+        self.assertFalse(call["request"]["options"]["learn"])
+        self.assertEqual(out["d_finality"]["mode"],"D_FINAL")
+        self.assertTrue(out["d_finality"]["physical_zero_ambient_enforced"])
+        self.assertEqual(out["d_finality"]["material_effects_committed"],0)
 
     def test_d_certified_context_uses_only_canonical_authority(self):
         td,root,(d,resolver,fabric,state)=self.stage()
