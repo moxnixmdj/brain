@@ -1372,6 +1372,37 @@ def _record_frontier_acquisition_attempt(
     learning._write_state(state, state_path)
 
 
+DISTINGUISHING_EVIDENCE_RECEIPT_SCHEMA = (
+    "PROJECT_BRAIN_R3_DISTINGUISHING_EVIDENCE_ACQUISITION_RECEIPT_V1"
+)
+DISTINGUISHING_EVIDENCE_AUTHORITY_PATHS = (
+    *SUCCESS_LEARNING_FRONTIER_PATHS,
+    "canonical/runtime/autonomous_verified_self_improvement_v1.py",
+    "canonical/runtime/r3_improvement_queue_driver_v1.py",
+    "canonical/runtime/r3_success_adapter_author_context_v1.py",
+    "canonical/runtime/r3_verification_frontier_repair_reducer_v1.py",
+    "canonical/runtime/r3_distinguishing_evidence_request_v1.py",
+)
+EVIDENCE_KEYS_BY_OBLIGATION = {
+    "NONEMPTY_SELECTED_PLAN": {"selected_plan"},
+    "NONEMPTY_VERIFIED_TARGET_EFFECT_SET": {"verified_target_effects"},
+    "CONTROLLER_CHECKPOINT_BOUND": {"controller_checkpoint"},
+    "EXECUTION_COUNT_MATCHES_SELECTED_PLAN_AND_NONZERO": {"execution"},
+    "ALL_EXECUTION_ROWS_PASS": {"execution"},
+    "COMPOSITION_DIGEST_PRESENT_FOR_EVERY_EXECUTION_ROW": {"execution"},
+    "SEMANTIC_ACCEPTANCE_COMPLETE": {"semantic_acceptance_complete"},
+    "RAW_GOAL_DIGEST_BOUND": {"raw_goal_sha256"},
+    "RAW_TASK_CONTRACT_DIGEST_BOUND": {"raw_task_contract_sha256"},
+    "RAW_GOAL_ACCEPTANCE_BINDING_PRESENT": {"raw_goal_acceptance"},
+    "RAW_ACCEPTANCE_OBLIGATION_COUNT_POSITIVE": {
+        "raw_acceptance_obligation_count"
+    },
+    "ALL_RAW_ACCEPTANCE_OBLIGATIONS_ACCEPTED": {
+        "accepted_raw_obligation_ids"
+    },
+}
+
+
 def _canon_receipt(value: Mapping[str, Any]) -> str:
     return json.dumps(
         value,
@@ -1398,6 +1429,57 @@ def _valid_sha256(value: Any) -> bool:
     return len(raw) == 64 and all(ch in "0123456789abcdef" for ch in raw.lower())
 
 
+def _state_sha256(state_path: str | Path) -> str:
+    path = Path(state_path)
+    if not path.exists():
+        return "sha256:" + sha256(b"").hexdigest()
+    return "sha256:" + sha256(path.read_bytes()).hexdigest()
+
+
+def _candidate_output_from_proof_material(
+    material: Mapping[str, Any],
+) -> dict[str, Any]:
+    return {
+        "pass": True,
+        "schema": str(
+            material.get("source_schema")
+            or "PROJECT_BRAIN_R3_DISTINGUISHING_EVIDENCE_CANDIDATE_V1"
+        ),
+        "status": str(
+            material.get("source_status")
+            or "R3_DISTINGUISHING_EVIDENCE_CANDIDATE"
+        ),
+        "task_id": material.get("task_id"),
+        "selected_plan": deepcopy(list(material.get("selected_plan") or [])),
+        "verified_target_effects": deepcopy(
+            list(material.get("verified_target_effects") or [])
+        ),
+        "controller_checkpoint": deepcopy(
+            dict(material.get("controller_checkpoint") or {})
+        ),
+        "execution": deepcopy(list(material.get("execution") or [])),
+        "cognition_dependency_class": material.get("cognition_dependency_class"),
+        "model_dependency_count": material.get("model_dependency_count"),
+        "semantic_acceptance_complete": (
+            material.get("semantic_acceptance_complete") is True
+        ),
+        "raw_goal_sha256": material.get("raw_goal_sha256"),
+        "raw_task_contract_sha256": material.get("raw_task_contract_sha256"),
+        "raw_acceptance_obligation_count": material.get(
+            "raw_acceptance_obligation_count"
+        ),
+        "accepted_raw_obligation_ids": deepcopy(
+            list(material.get("accepted_raw_obligation_ids") or [])
+        ),
+        "compiled_capability_id": material.get("compiled_capability_id"),
+        "raw_goal_acceptance": (
+            deepcopy(dict(material.get("raw_goal_acceptance")))
+            if isinstance(material.get("raw_goal_acceptance"), Mapping)
+            else None
+        ),
+    }
+
+
 def _execute_distinguishing_evidence_acquisition(
     work: Mapping[str, Any],
     *,
@@ -1411,6 +1493,9 @@ def _execute_distinguishing_evidence_acquisition(
     if not isinstance(payload, Mapping):
         raise ImprovementDriverError("FRONTIER_EXPANSION_PAYLOAD_INVALID")
     wid = str(work.get("work_id") or "").strip()
+    observation_id = str(payload.get("observation_id") or "").strip()
+    if not observation_id:
+        raise ImprovementDriverError("DISTINGUISHING_EVIDENCE_OBSERVATION_ID_MISSING")
     evidence_request = repair_reduction.get("distinguishing_evidence_request")
     if (
         not isinstance(evidence_request, Mapping)
@@ -1421,11 +1506,27 @@ def _execute_distinguishing_evidence_acquisition(
     if not _valid_sha256(request_sha):
         raise ImprovementDriverError("DISTINGUISHING_EVIDENCE_REQUEST_SHA256_INVALID")
 
+    proof = learning.get_success_proof_context(
+        observation_id,
+        state_path=state_path,
+    )
+    if evidence_request.get("proof_capsule_sha256") != proof.get(
+        "proof_capsule_sha256"
+    ):
+        raise ImprovementDriverError(
+            "DISTINGUISHING_EVIDENCE_PROOF_CAPSULE_MISMATCH"
+        )
+
     before_frontier = _owned_success_learning_frontier_sha256(repo_root=repo_root)
     before_adapter = _owned_success_adapter_frontier_sha256(repo_root=repo_root)
     before_authority = _owned_success_verification_authority_sha256(
         repo_root=repo_root,
     )
+    before_ingest_authority = _frontier_sha256(
+        DISTINGUISHING_EVIDENCE_AUTHORITY_PATHS,
+        repo_root=repo_root,
+    )
+    before_state = _state_sha256(state_path)
     attempt_provider_id = provider_id + "::" + request_sha
     if _frontier_acquisition_attempt_consumed(
         work,
@@ -1434,7 +1535,10 @@ def _execute_distinguishing_evidence_acquisition(
     ):
         return {
             "schema": SCHEMA,
-            "status": "DISTINGUISHING_EVIDENCE_ACQUISITION_ALREADY_ATTEMPTED_FOR_CURRENT_REQUEST",
+            "status": (
+                "DISTINGUISHING_EVIDENCE_ACQUISITION_ALREADY_ATTEMPTED_"
+                "FOR_CURRENT_REQUEST"
+            ),
             "pass": True,
             "progress": False,
             "work_id": wid,
@@ -1448,7 +1552,7 @@ def _execute_distinguishing_evidence_acquisition(
         "kind": "R3_VERIFICATION_FRONTIER_DISTINGUISHING_EVIDENCE_ACQUISITION",
         "improvement_work_id": wid,
         "blocked_success_work_id": payload.get("blocked_success_work_id"),
-        "observation_id": payload.get("observation_id"),
+        "observation_id": observation_id,
         "request_sha256": request_sha,
         "distinguishing_evidence_request": deepcopy(dict(evidence_request)),
         "proof_capsule_sha256": evidence_request.get("proof_capsule_sha256"),
@@ -1457,9 +1561,10 @@ def _execute_distinguishing_evidence_acquisition(
         "adapter_frontier_sha256": before_adapter,
         "verification_authority_sha256": before_authority,
         "allowed_effect": (
-            "ACQUIRE_OR_EXPERIMENT_FOR_REQUESTED_EVIDENCE_ONLY__"
-            "NO_VERIFICATION_OR_ADAPTER_AUTHORITY_MUTATION"
+            "RETURN_CANDIDATE_STRUCTURAL_EVIDENCE_FOR_REQUESTED_OBLIGATIONS_ONLY"
         ),
+        "runtime_source_mutation_allowed": False,
+        "r3_learning_state_mutation_allowed": False,
         "provider_truth_authority": False,
         "provider_verification_authority": False,
         "provider_promotion_authority": False,
@@ -1490,7 +1595,9 @@ def _execute_distinguishing_evidence_acquisition(
     receipt = deepcopy(dict(raw_result))
     receipt_sha = str(receipt.get("receipt_sha256") or "")
     receipt_error = None
-    if receipt.get("pass") is not True:
+    if receipt.get("schema") != DISTINGUISHING_EVIDENCE_RECEIPT_SCHEMA:
+        receipt_error = "DISTINGUISHING_EVIDENCE_RECEIPT_SCHEMA_INVALID"
+    elif receipt.get("pass") is not True:
         receipt_error = "DISTINGUISHING_EVIDENCE_PROVIDER_DID_NOT_PASS"
     elif receipt.get("request_sha256") != request_sha:
         receipt_error = "DISTINGUISHING_EVIDENCE_RECEIPT_REQUEST_MISMATCH"
@@ -1500,6 +1607,10 @@ def _execute_distinguishing_evidence_acquisition(
         receipt_error = "DISTINGUISHING_EVIDENCE_ACQUISITION_NOT_PROVED"
     elif not _valid_sha256(receipt.get("evidence_trace_sha256")):
         receipt_error = "DISTINGUISHING_EVIDENCE_TRACE_SHA256_INVALID"
+    elif receipt.get("runtime_source_mutated") is not False:
+        receipt_error = "DISTINGUISHING_EVIDENCE_RUNTIME_SOURCE_MUTATION_FORBIDDEN"
+    elif receipt.get("r3_learning_state_mutated") is not False:
+        receipt_error = "DISTINGUISHING_EVIDENCE_LEARNING_STATE_MUTATION_FORBIDDEN"
     elif receipt.get("verification_authority_mutated") is not False:
         receipt_error = "DISTINGUISHING_EVIDENCE_VERIFICATION_AUTHORITY_MUTATION_FORBIDDEN"
     elif receipt.get("adapter_frontier_mutated") is not False:
@@ -1521,10 +1632,60 @@ def _execute_distinguishing_evidence_acquisition(
     after_authority = _owned_success_verification_authority_sha256(
         repo_root=repo_root,
     )
+    after_ingest_authority = _frontier_sha256(
+        DISTINGUISHING_EVIDENCE_AUTHORITY_PATHS,
+        repo_root=repo_root,
+    )
+    after_state = _state_sha256(state_path)
     if receipt_error is None and after_authority != before_authority:
         receipt_error = "DISTINGUISHING_EVIDENCE_VERIFICATION_AUTHORITY_CHANGED"
     if receipt_error is None and after_adapter != before_adapter:
         receipt_error = "DISTINGUISHING_EVIDENCE_ADAPTER_FRONTIER_CHANGED"
+    if receipt_error is None and after_ingest_authority != before_ingest_authority:
+        receipt_error = "DISTINGUISHING_EVIDENCE_RUNTIME_SOURCE_CHANGED"
+    if receipt_error is None and after_state != before_state:
+        receipt_error = "DISTINGUISHING_EVIDENCE_PROVIDER_MUTATED_R3_STATE"
+
+    chosen_route = str(receipt.get("route") or "")
+    candidate_evidence = receipt.get("candidate_evidence")
+    bundles = evidence_request.get("candidate_evidence_bundles")
+    selected_bundle = None
+    if receipt_error is None:
+        if (
+            not isinstance(bundles, Sequence)
+            or isinstance(bundles, (str, bytes))
+            or not isinstance(candidate_evidence, Mapping)
+        ):
+            receipt_error = "DISTINGUISHING_EVIDENCE_CANDIDATE_SHAPE_INVALID"
+        else:
+            for bundle in bundles:
+                if (
+                    isinstance(bundle, Mapping)
+                    and bundle.get("route") == chosen_route
+                ):
+                    selected_bundle = bundle
+                    break
+            if not isinstance(selected_bundle, Mapping):
+                receipt_error = "DISTINGUISHING_EVIDENCE_ROUTE_NOT_REQUESTED"
+
+    allowed_keys: set[str] = set()
+    if receipt_error is None and isinstance(selected_bundle, Mapping):
+        missing = selected_bundle.get("missing_obligations")
+        if not isinstance(missing, Sequence) or isinstance(missing, (str, bytes)):
+            receipt_error = "DISTINGUISHING_EVIDENCE_MISSING_OBLIGATIONS_INVALID"
+        else:
+            for obligation in missing:
+                keys = EVIDENCE_KEYS_BY_OBLIGATION.get(str(obligation))
+                if not keys:
+                    receipt_error = (
+                        "DISTINGUISHING_EVIDENCE_UNKNOWN_REQUESTED_OBLIGATION"
+                    )
+                    break
+                allowed_keys.update(keys)
+    if receipt_error is None:
+        candidate_keys = set(str(key) for key in candidate_evidence)
+        if not candidate_keys or not candidate_keys.issubset(allowed_keys):
+            receipt_error = "DISTINGUISHING_EVIDENCE_UNREQUESTED_FIELDS_PRESENT"
 
     if receipt_error is not None:
         _record_frontier_acquisition_attempt(
@@ -1542,112 +1703,48 @@ def _execute_distinguishing_evidence_acquisition(
             "progress": False,
             "work_id": wid,
             "provider_receipt": receipt,
-            "verification_frontier_sha256_before": before_frontier,
-            "verification_frontier_sha256_after": after_frontier,
-            "adapter_frontier_sha256_before": before_adapter,
-            "adapter_frontier_sha256_after": after_adapter,
-            "verification_authority_sha256_before": before_authority,
-            "verification_authority_sha256_after": after_authority,
             "attempt_backoff_recorded": True,
             "terminal_authority": False,
         }
 
-    after_reduction = _current_frontier_repair_reduction(
-        work,
+    merged = deepcopy(dict(proof["material"]))
+    for key, value in candidate_evidence.items():
+        merged[str(key)] = deepcopy(value)
+    candidate_output = _candidate_output_from_proof_material(merged)
+    observed = learning.record_success_observation(
+        candidate_output,
+        surface="R3_DISTINGUISHING_EVIDENCE_CANDIDATE",
         state_path=state_path,
-        repo_root=repo_root,
+        replay_context=None,
     )
-    if after_reduction.get("pass") is not True:
-        status = "DISTINGUISHING_EVIDENCE_REDUCTION_RECOMPUTE_FAILED"
-        _record_frontier_acquisition_attempt(
-            wid,
-            provider_id=attempt_provider_id,
-            frontier_sha256=after_frontier,
-            status=status,
-            reason=str(after_reduction.get("reason") or status),
-            state_path=state_path,
+    candidate_observation_id = str(observed.get("observation_id") or "")
+    if not candidate_observation_id:
+        raise ImprovementDriverError(
+            "DISTINGUISHING_EVIDENCE_CANDIDATE_OBSERVATION_NOT_RECORDED"
         )
-        return {
-            "schema": SCHEMA,
-            "status": status,
-            "pass": False,
-            "progress": False,
-            "work_id": wid,
-            "provider_receipt": receipt,
-            "repair_class_reduction_after": deepcopy(dict(after_reduction)),
-            "attempt_backoff_recorded": True,
-            "terminal_authority": False,
-        }
-
-    after_request = after_reduction.get("distinguishing_evidence_request")
-    after_request_sha = (
-        str(after_request.get("request_sha256") or "")
-        if isinstance(after_request, Mapping)
-        and after_request.get("pass") is True
-        else None
-    )
-    still_evidence_only = (
-        after_reduction.get("must_acquire_new_distinguishing_evidence") is True
-        and after_reduction.get("admissible_repair_classes")
-        == ["NEW_DISTINGUISHING_EVIDENCE"]
-    )
-    changed = (
-        not still_evidence_only
-        or (
-            isinstance(after_request_sha, str)
-            and after_request_sha
-            and after_request_sha != request_sha
-        )
-    )
-    if not changed:
-        status = "FAIL_CLOSED__EVIDENCE_PROVIDER_RECEIPT_WITHOUT_OBSERVED_REDUCTION_CHANGE"
-        _record_frontier_acquisition_attempt(
-            wid,
-            provider_id=attempt_provider_id,
-            frontier_sha256=after_frontier,
-            status=status,
-            reason=status,
-            state_path=state_path,
-        )
-        return {
-            "schema": SCHEMA,
-            "status": status,
-            "pass": False,
-            "progress": False,
-            "work_id": wid,
-            "provider_receipt": receipt,
-            "request_sha256_before": request_sha,
-            "request_sha256_after": after_request_sha,
-            "repair_class_reduction_after": deepcopy(dict(after_reduction)),
-            "attempt_backoff_recorded": True,
-            "terminal_authority": False,
-        }
-
-    _record_frontier_acquisition_attempt(
+    _resolve_work(
         wid,
-        provider_id=attempt_provider_id,
-        frontier_sha256=after_frontier,
-        status="DISTINGUISHING_EVIDENCE_ACQUISITION_OBSERVED_REDUCTION_CHANGE",
-        reason=None,
+        resolved_by=(
+            "DISTINGUISHING_EVIDENCE_CANDIDATE_OBSERVED:"
+            + candidate_observation_id
+        ),
         state_path=state_path,
     )
     return {
         "schema": SCHEMA,
-        "status": "IMPROVEMENT_ADVANCED__DISTINGUISHING_EVIDENCE_CHANGED_REPAIR_REDUCTION",
+        "status": (
+            "IMPROVEMENT_ADVANCED__DISTINGUISHING_EVIDENCE_CANDIDATE_"
+            "REINGESTED_FOR_NORMAL_VERIFICATION"
+        ),
         "pass": True,
         "progress": True,
         "work_id": wid,
         "provider_receipt": receipt,
-        "request_sha256_before": request_sha,
-        "request_sha256_after": after_request_sha,
-        "repair_class_reduction_before": deepcopy(dict(repair_reduction)),
-        "repair_class_reduction_after": deepcopy(dict(after_reduction)),
-        "verification_frontier_sha256_before": before_frontier,
-        "verification_frontier_sha256_after": after_frontier,
-        "adapter_frontier_sha256_before": before_adapter,
-        "adapter_frontier_sha256_after": after_adapter,
-        "verification_authority_sha256_before": before_authority,
-        "verification_authority_sha256_after": after_authority,
+        "candidate_observation_id": candidate_observation_id,
+        "candidate_improvement_work_id": observed.get("improvement_work_id"),
+        "candidate_only": True,
+        "candidate_evidence_verified": False,
+        "replay_original_success": False,
         "provider_truth_authority": False,
         "provider_verification_authority": False,
         "provider_promotion_authority": False,
