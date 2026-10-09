@@ -14,6 +14,12 @@ from typing import Any, Mapping
 
 from canonical.runtime.coverage_root_namespace_guard_v1 import validate_bridge_document
 
+CLAIM_SCOPE_PATH = "canonical/governance/COVERAGE_COMPLETENESS_CLAIM_SCOPE_V1.json"
+REQUIRED_CLAIM_CORE_FIELDS = {
+    "claim_kind", "mission_blob_sha", "scope_sha256",
+    "target_predicate_sha256", "semantics_sha256", "epoch", "authority_id",
+}
+
 
 def git_blob_sha(data: bytes) -> str:
     header = f"blob {len(data)}\0".encode("ascii")
@@ -39,6 +45,8 @@ def validate_documents(
     binding_blob_sha: str,
     namespace_bridge: Mapping[str, Any],
     namespace_bridge_blob_sha: str,
+    claim_scope: Mapping[str, Any],
+    claim_scope_blob_sha: str,
     authority: Mapping[str, Any],
 ) -> dict[str, Any]:
     errors: list[str] = []
@@ -46,6 +54,26 @@ def validate_documents(
     bridge_check = validate_bridge_document(namespace_bridge)
     if not bridge_check.get("pass"):
         errors.extend("ROOT_NAMESPACE_" + e for e in bridge_check.get("errors", []))
+
+    claim_mission = claim_scope.get("mission") or {}
+    _fail(errors, "CLAIM_SCOPE_MISSION_PATH_DRIFT", claim_mission.get("path") == "canonical/governance/CURRENT_MISSION_OBJECTIVE.json")
+    _fail(errors, "CLAIM_SCOPE_MISSION_BLOB_STALE", claim_mission.get("git_blob_sha") == mission_blob_sha)
+    claim_root = claim_scope.get("root_theorem") or {}
+    _fail(errors, "CLAIM_SCOPE_ROOT_PATH_DRIFT", claim_root.get("path") == "canonical/governance/COVERAGE_COMPLETENESS_ROOT_THEOREM_V1.json")
+    _fail(errors, "CLAIM_SCOPE_ROOT_BLOB_STALE", claim_root.get("git_blob_sha") == root_theorem_blob_sha)
+    _fail(
+        errors,
+        "CLAIM_SCOPE_CORE_FIELDS_DRIFT",
+        set(claim_scope.get("required_claim_core_fields") or []) == REQUIRED_CLAIM_CORE_FIELDS,
+    )
+    semantics = claim_scope.get("claim_semantics") or {}
+    _fail(errors, "CLAIM_SCOPE_QUANTIFICATION_DRIFT", semantics.get("quantification") == "FOR_EACH_FROZEN_CERTIFICATION_CLAIM_C")
+    _fail(errors, "CLAIM_SCOPE_GLOBAL_COMPLETION_ENABLED", semantics.get("does_not_imply") == "GLOBAL_OPEN_ENDED_MISSION_COMPLETE")
+    _fail(
+        errors,
+        "CLAIM_SCOPE_GLOBAL_KIND_NOT_FORBIDDEN",
+        "GLOBAL_OPEN_ENDED_MISSION_COMPLETE" in set(claim_scope.get("forbidden_claim_kinds") or []),
+    )
 
     real_objective = mission.get("real_objective")
     _fail(errors, "MISSION_REAL_OBJECTIVE_MISSING", isinstance(real_objective, str) and bool(real_objective))
@@ -119,6 +147,10 @@ def validate_documents(
         (binding.get("accounting") or {}).get("terminal_credit_delta") == 0,
     )
 
+    claim_scope_ref = binding.get("claim_scope_precondition") or {}
+    _fail(errors, "BINDING_CLAIM_SCOPE_PATH_DRIFT", claim_scope_ref.get("path") == CLAIM_SCOPE_PATH)
+    _fail(errors, "BINDING_CLAIM_SCOPE_BLOB_STALE", claim_scope_ref.get("git_blob_sha") == claim_scope_blob_sha)
+
     namespace_ref = binding.get("root_namespace_bridge") or {}
     _fail(
         errors,
@@ -145,6 +177,10 @@ def validate_documents(
         live_ref.get("git_blob_sha") == binding_blob_sha,
     )
 
+    claim_scope_authority = sources.get("coverage_completeness_claim_scope") or {}
+    _fail(errors, "LIVE_AUTHORITY_CLAIM_SCOPE_MISSING", claim_scope_authority.get("path") == CLAIM_SCOPE_PATH)
+    _fail(errors, "LIVE_AUTHORITY_CLAIM_SCOPE_BLOB_STALE", claim_scope_authority.get("git_blob_sha") == claim_scope_blob_sha)
+
     namespace_authority = sources.get("coverage_root_namespace_bridge") or {}
     _fail(
         errors,
@@ -164,6 +200,8 @@ def validate_documents(
         "errors": errors,
         "terminal_credit_delta": 0,
         "root_closed_claimed": False,
+        "claim_scope_load_bearing": not errors,
+        "global_mission_completion_derivable": False,
     }
 
 
@@ -172,12 +210,14 @@ def validate_repo(root: Path) -> dict[str, Any]:
     theorem_path = root / "canonical/governance/COVERAGE_COMPLETENESS_ROOT_THEOREM_V1.json"
     binding_path = root / "canonical/governance/COVERAGE_COMPLETENESS_ROOT_THEOREM_LIVE_BINDING_V1.json"
     namespace_bridge_path = root / "canonical/governance/COVERAGE_ROOT_NAMESPACE_BRIDGE_V1.json"
+    claim_scope_path = root / CLAIM_SCOPE_PATH
     authority_path = root / "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json"
 
     mission_bytes = mission_path.read_bytes()
     theorem_bytes = theorem_path.read_bytes()
     binding_bytes = binding_path.read_bytes()
     namespace_bridge_bytes = namespace_bridge_path.read_bytes()
+    claim_scope_bytes = claim_scope_path.read_bytes()
 
     return validate_documents(
         mission=load_json(mission_path),
@@ -188,5 +228,7 @@ def validate_repo(root: Path) -> dict[str, Any]:
         binding_blob_sha=git_blob_sha(binding_bytes),
         namespace_bridge=load_json(namespace_bridge_path),
         namespace_bridge_blob_sha=git_blob_sha(namespace_bridge_bytes),
+        claim_scope=load_json(claim_scope_path),
+        claim_scope_blob_sha=git_blob_sha(claim_scope_bytes),
         authority=load_json(authority_path),
     )
