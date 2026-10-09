@@ -19,7 +19,7 @@ VERIFIER_CAPABILITY_ID="cross_document.semantic_registry_v3_lattice.verify.stdli
 ROOT=Path(__file__).resolve().parents[2]
 
 GRAMMAR=re.compile(
-    r"Using the semantic-edge cross-document effect lattice case at "
+    r"Using the domain-mapped semantic-edge cross-document effect lattice case at "
     r"(?P<input>canonical/[A-Za-z0-9_.\-/]+\.json), compute and independently "
     r"verify the effective value and save it to "
     r"(?P<output>canonical/[A-Za-z0-9_.\-/]+\.json)\.?",
