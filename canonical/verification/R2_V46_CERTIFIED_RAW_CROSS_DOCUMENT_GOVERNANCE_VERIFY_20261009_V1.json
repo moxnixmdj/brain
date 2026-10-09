@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_R2_V46_CERTIFIED_RAW_CROSS_DOCUMENT_GOVERNANCE_VERIFY_V1",
+  "date": "2026-10-09",
+  "branch": "r2-certified-effect-sentences-v1-current",
+  "tested_branch_head_sha": "17e4698452e9ce6c7b395e0beb7e709c44d1856e",
+  "status": "PASS__V13_BEHAVIOR_131_OF_131__V46_CANONICAL_POINTER_COHERENCE_19_OF_19__TERMINAL_FALSE",
+  "exact_blobs": {
+    "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V26.json": "623be9172bfda91e442e5f16a4e2cbad53c36af4",
+    "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json": "de73f711a894643956c29440cc66c4e24253bcf1",
+    "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json": "1acff0cda13b48e645b5162a263c21f4abb2842f",
+    "canonical/governance/CURRENT_ONE_SHOT_REALITY_CLOSURE.json": "97a5ecea171a15bc0ad68c4bfcd4376041895c3b",
+    "canonical/runtime/r2_direct_end_to_end_adequacy_v13.py": "f4b6339815a43da58f9324a1407ccb966fb0353b",
+    "canonical/runtime/general_adequate_decision_fixed_point_v2.py": "d337643b9714a8f4646752fcca6f92768b582925",
+    "canonical/verification/R2_CERTIFIED_RAW_CROSS_DOCUMENT_EFFECT_SENTENCES_V13_VERIFY_20261009_V1.json": "91d0de3c743e33e8481c650cefd52e4e5a9984cd"
+  },
+  "behavioral_verification": {
+    "path": "canonical/verification/R2_CERTIFIED_RAW_CROSS_DOCUMENT_EFFECT_SENTENCES_V13_VERIFY_20261009_V1.json",
+    "total_passed": 131,
+    "total_failed": 0
+  },
+  "governance_verification": {
+    "sprite": "brain-r2-grounded-frontier-verify-20261008",
+    "checks_passed": 19,
+    "checks_failed": 0,
+    "proved": [
+      "V26_ROUTE_LIST_IS_33_AND_COUNT_MATCHES",
+      "V26_DECOMPOSES_AS_3_EXACT_PLUS_30_BOUNDED_FAMILIES",
+      "V26_BINDS_V12_AND_V13",
+      "V26_RUNTIME_IS_V13",
+      "CURRENT_R2_BINDS_EXACT_V26_BLOB_AND_33_30_COUNTS",
+      "CURRENT_R2_RUNTIME_IS_V13",
+      "CURRENT_TERMINAL_BINDS_EXACT_CURRENT_R2_BLOB_AND_33_30_COUNTS",
+      "V45_CONTENT_ADDRESSED_SCHEDULER_CUT_REMAINS_CURRENT",
+      "ONE_SHOT_BINDS_R2_V46_AND_EXACT_CURRENT_R2_AND_TERMINAL_BLOBS",
+      "ONE_SHOT_COUNTS_ARE_33_30_AND_FINANCE_WAKE_COUNT_IS_11",
+      "FIXED_POINT_FRONT_DOOR_IMPORTS_V13",
+      "TERMINAL_REMAINS_FALSE"
+    ]
+  },
+  "live_scope": {
+    "direct_route_count": 33,
+    "exact_cell_count": 3,
+    "bounded_family_count": 30,
+    "direct_runtime": "canonical/runtime/r2_direct_end_to_end_adequacy_v13.py",
+    "scheduler_cut": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V45.json",
+    "current_r2_version": "V46",
+    "certified_raw_effect_sentence_grammar_bound": true,
+    "arbitrary_raw_language_effect_semantics_globally_closed": false,
+    "terminal_remains_false": true
+  },
+  "hard_nonclaims": [
+    "NO_GENERAL_ARBITRARY_NATURAL_LANGUAGE_EFFECT_EXTRACTION",
+    "NO_PARAPHRASE_NORMALIZATION_OUTSIDE_EXACT_CERTIFIED_EFFECT_SENTENCE_GRAMMAR",
+    "NO_IMPLICIT_EFFECT_ID_TARGET_CONDITION_REFERENCE_OR_PRECEDENCE_INFERENCE",
+    "NO_UNRECOGNIZED_NONWHITESPACE_SOURCE_BYTES_DISCARDED",
+    "NO_TERMINAL_AUTHORITY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
