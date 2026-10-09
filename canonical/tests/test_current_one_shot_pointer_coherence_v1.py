@@ -105,6 +105,44 @@ class CurrentOneShotPointerCoherenceV1Tests(unittest.TestCase):
             pointer["predecessor"]["git_blob_sha"],
         )
 
+    def test_current_v54_snapshot_matches_dynamic_sources(self):
+        pointer = json.loads(POINTER.read_text(encoding="utf-8"))
+        r2_path = ROOT / projection.PATHS["r2"]
+        terminal_path = ROOT / projection.PATHS["terminal"]
+        r2 = json.loads(r2_path.read_text(encoding="utf-8"))
+        terminal = json.loads(terminal_path.read_text(encoding="utf-8"))
+
+        self.assertIn("CURRENT_R2_V54", pointer["status"])
+        self.assertIn("__V54__", r2["status"])
+        self.assertIn("CURRENT_R2_V54", terminal["status"])
+        self.assertEqual(
+            pointer["authority"]["current_r2_pointer_git_blob_sha"],
+            git_blob_sha(r2_path),
+        )
+        self.assertEqual(
+            pointer["authority"]["current_terminal_authority_git_blob_sha"],
+            git_blob_sha(terminal_path),
+        )
+        self.assertEqual(
+            pointer["authority"]["current_terminal_authority_pointer_revision"],
+            terminal["pointer_revision"],
+        )
+        self.assertEqual(
+            pointer["authority"]["r2_regcap_authenticated_one_step_discriminator_id"],
+            "RELEASABILITY_CLASS",
+        )
+        self.assertFalse(
+            pointer["authority"]["r2_regcap_discriminator_observation_truth_currently_bound"]
+        )
+        current = pointer["current_main_v54_projection_reconciliation"]
+        self.assertEqual(current["current_r2_pointer_git_blob_sha"], git_blob_sha(r2_path))
+        self.assertEqual(
+            current["current_terminal_authority_git_blob_sha"],
+            git_blob_sha(terminal_path),
+        )
+        self.assertEqual(current["r2_primary_internal_unsolved_count"], 1)
+        self.assertEqual(current["terminal_credit_delta"], 0)
+
     def test_no_false_terminal_credit_added(self):
         pointer = json.loads(POINTER.read_text(encoding="utf-8"))
         self.assertFalse(pointer["authority"]["terminal_authority"])
