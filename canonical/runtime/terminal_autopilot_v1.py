@@ -19,6 +19,13 @@ UNIVERSAL_ROUTE_VERIFIED_PREMISES = (
     "generator_closure_equals_trace_scope_proved",
 )
 
+OBJECTIVE_COMMON_LAW_VERIFIED_PREMISES = (
+    "objective_acceptance_common_law_brain_routes_exactly_bound",
+    "objective_acceptance_common_law_relations_exactly_bound",
+    "objective_acceptance_common_law_brain_bounds_at_target_or_top_proved",
+    "objective_acceptance_common_law_scope_completeness_proved",
+)
+
 ONE_SHOT_ROUTE_RACES = (
     {
         "id": "SCOPE_COMPLETE_UNIVERSAL_COVER",
@@ -39,6 +46,7 @@ ONE_SHOT_ROUTE_RACES = (
         ),
         "estimated_wall_clock_units": 1.0,
         "proof_class": "O_OBJECTIVE_ACCEPTANCE",
+        "verified_prerequisite_truth_keys": OBJECTIVE_COMMON_LAW_VERIFIED_PREMISES,
     },
     {
         "id": "PROFESSIONAL_QUALITATIVE_ROBUST_DOMINANCE",

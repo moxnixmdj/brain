@@ -203,17 +203,59 @@ class TerminalAutopilotTests(unittest.TestCase):
                 "VERIFIED_MISSING_PREMISE_COUNT_LOWER_BOUND",
             )
 
+            objective = by_id["OBJECTIVE_ACCEPTANCE_COMMON_LAW"]
+            self.assertEqual(objective["estimated_wall_clock_units"], 4.0)
+            self.assertEqual(
+                set(objective["missing_verified_premises"]),
+                {
+                    "objective_acceptance_common_law_brain_routes_exactly_bound",
+                    "objective_acceptance_common_law_relations_exactly_bound",
+                    "objective_acceptance_common_law_brain_bounds_at_target_or_top_proved",
+                    "objective_acceptance_common_law_scope_completeness_proved",
+                },
+            )
+            self.assertEqual(
+                objective["wall_clock_basis"],
+                "VERIFIED_MISSING_PREMISE_COUNT_LOWER_BOUND",
+            )
+
             out = plan(built)
             self.assertEqual(len(out["dispatch"]), 1)
             self.assertEqual(out["dispatch"][0]["kind"], "ROUTE_RACE")
             self.assertEqual(
                 out["dispatch"][0]["route_id"],
-                "OBJECTIVE_ACCEPTANCE_COMMON_LAW",
-            )
-            self.assertNotEqual(
-                out["dispatch"][0]["route_id"],
                 "SCOPE_COMPLETE_UNIVERSAL_COVER",
             )
+
+
+    def test_objective_common_law_cost_collapses_only_after_all_verified_premises(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            q = root / "canonical/governance"
+            q.mkdir(parents=True)
+            (q / "FROZEN_19_ACCEPTANCE_PROOF_SHAPE_QUOTIENT_20261007_V1.json").write_text(
+                json.dumps({"independent_open_obligations": OPEN}), encoding="utf-8")
+            (q / "CURRENT_TERMINAL_AUTHORITY.json").write_text(json.dumps({
+                "live_truth": {
+                    "objective_acceptance_common_law_brain_routes_exactly_bound": True,
+                    "objective_acceptance_common_law_relations_exactly_bound": True,
+                    "objective_acceptance_common_law_brain_bounds_at_target_or_top_proved": True,
+                    "objective_acceptance_common_law_scope_completeness_proved": True,
+                }
+            }), encoding="utf-8")
+
+            built = build_manifest_from_repo(root, max_concurrency=1)
+            objective = {
+                row["id"]: row for row in built["routes"]
+            }["OBJECTIVE_ACCEPTANCE_COMMON_LAW"]
+            self.assertEqual(objective["estimated_wall_clock_units"], 1.0)
+            self.assertEqual(objective["missing_verified_premises"], [])
+            self.assertEqual(
+                objective["wall_clock_basis"],
+                "VERIFIED_MISSING_PREMISE_COUNT_LOWER_BOUND",
+            )
+            out = plan(built)
+            self.assertEqual(out["dispatch"][0]["route_id"], "OBJECTIVE_ACCEPTANCE_COMMON_LAW")
 
 
     def test_repo_mode_installs_one_shot_attack_graph(self):
