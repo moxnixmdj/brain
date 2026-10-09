@@ -5,11 +5,11 @@
   "subjects": {
     "certificate": {
       "path": "canonical/governance/CURSORBENCH_TYPED_ACCEPTANCE_PLAN_POLICY_ADEQUACY_CERTIFICATE_20261009_V2.json",
-      "git_blob_sha": "ea269ac0eb56f4ead1b4f614b1b1f0544baa25d1"
+      "git_blob_sha": "bddb8f51f6dc91f98759c5c3b92c1257ca8b9577"
     },
     "tests": {
       "path": "canonical/tests/test_cursorbench_typed_acceptance_plan_policy_adequacy_v2.py",
-      "git_blob_sha": "666aa5fc5df343c7319a480274084e5e83500bf8"
+      "git_blob_sha": "1379dfe32bc310844b6ec1bc88108969285ba525"
     },
     "v1_certificate": {
       "path": "canonical/governance/CURSORBENCH_TYPED_ACCEPTANCE_PLAN_POLICY_ADEQUACY_CERTIFICATE_20261009_V1.json",
@@ -37,6 +37,7 @@
     "exact_v1_region_bound": true,
     "exact_policy_bytes_bound": true,
     "scope_widening_detected": false,
+    "adequacy_proved_marker_verified": true,
     "membership_self_certified": false,
     "whole_behavior_adequacy_claimed": false,
     "whole_cursorbench_adequacy_claimed": false
