@@ -24,7 +24,7 @@ or terminal authority.
 from __future__ import annotations
 
 from copy import deepcopy
-from typing import Any, Mapping, Sequence
+from typing import Any, Callable, Mapping, Sequence
 
 from canonical.runtime.explicit_definition_reference_graph import (
     compile_reference_graph,
@@ -37,6 +37,8 @@ from canonical.runtime.bounded_semantic_relation_proof_v1 import (
 )
 
 SCHEMA = "PROJECT_BRAIN_DECISION_RELATIVE_SEMANTIC_RELATION_CONTROL_V1"
+CONCEPT_IDENTITY_AUTHORITY_SCHEMA = "PROJECT_BRAIN_SHARED_CONCEPT_IDENTITY_AUTHORITY_RECEIPT_V1"
+_HEX = set("0123456789abcdef")
 
 REQUIRED_RELATIONS = {
     "SEMANTIC_IDENTITY",
@@ -49,6 +51,79 @@ REQUIRED_RELATIONS = {
 
 class SemanticRelationError(ValueError):
     pass
+
+
+def _sha_ok(value: Any) -> bool:
+    text = str(value or "").lower()
+    return len(text) == 64 and all(ch in _HEX for ch in text)
+
+
+def _shared_concept_identity(
+    *,
+    scope_id: str,
+    left_id: str,
+    right_id: str,
+    receipt: Any,
+    verifier: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None,
+) -> dict[str, Any]:
+    if receipt is None:
+        return {
+            "available": False,
+            "proved": False,
+            "reason": "NO_SHARED_CONCEPT_IDENTITY_RECEIPT",
+        }
+    if not isinstance(receipt, Mapping) or not callable(verifier):
+        return {
+            "available": True,
+            "proved": False,
+            "reason": "SHARED_CONCEPT_IDENTITY_RECEIPT_AND_VERIFIER_REQUIRED",
+        }
+    out = verifier(deepcopy(dict(receipt)))
+    if not isinstance(out, Mapping):
+        return {
+            "available": True,
+            "proved": False,
+            "reason": "SHARED_CONCEPT_IDENTITY_VERIFIER_RETURNED_NO_RECEIPT",
+        }
+    out = deepcopy(dict(out))
+    required = {
+        "pass": True,
+        "schema": CONCEPT_IDENTITY_AUTHORITY_SCHEMA,
+        "scope_id": scope_id,
+        "left_id": left_id,
+        "right_id": right_id,
+        "left_binding_authenticated": True,
+        "right_binding_authenticated": True,
+        "concept_semantics_authenticated": True,
+        "verification_authority_mutated": False,
+    }
+    bad = [k for k, v in required.items() if out.get(k) != v]
+    shared = str(out.get("shared_concept_id") or "").strip()
+    if not shared:
+        bad.append("shared_concept_id")
+    for key in (
+        "left_binding_sha256",
+        "right_binding_sha256",
+        "registry_sha256",
+        "receipt_sha256",
+    ):
+        if not _sha_ok(out.get(key)):
+            bad.append(key)
+    if bad:
+        return {
+            "available": True,
+            "proved": False,
+            "reason": "SHARED_CONCEPT_IDENTITY_BINDING_INVALID",
+            "mismatch_fields": sorted(set(bad)),
+            "authority_result": out,
+        }
+    return {
+        "available": True,
+        "proved": True,
+        "reason": "AUTHENTICATED_SHARED_CONCEPT_IDENTITY",
+        "shared_concept_id": shared,
+        "authority_result": out,
+    }
 
 
 def _norm(value: Any) -> str:
@@ -243,7 +318,11 @@ def _next_targets(required: str) -> list[str]:
     ]
 
 
-def resolve(problem: Mapping[str, Any]) -> dict[str, Any]:
+def resolve(
+    problem: Mapping[str, Any],
+    *,
+    concept_identity_verifier: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
+) -> dict[str, Any]:
     if not isinstance(problem, Mapping):
         return {
             "schema": SCHEMA,
@@ -266,6 +345,7 @@ def resolve(problem: Mapping[str, Any]) -> dict[str, Any]:
         "candidate_relations",
         "bounded_extension_evidence",
         "expected_bounded_extension_sha256",
+        "shared_concept_identity_receipt",
     }
     extra = set(problem) - allowed
     if extra:
@@ -314,6 +394,27 @@ def resolve(problem: Mapping[str, Any]) -> dict[str, Any]:
         right_id,
         problem.get("terminal_signature_rows"),
     )
+
+    shared_concept = _shared_concept_identity(
+        scope_id=scope_id,
+        left_id=left_id,
+        right_id=right_id,
+        receipt=problem.get("shared_concept_identity_receipt"),
+        verifier=concept_identity_verifier,
+    )
+    if (
+        shared_concept.get("available") is True
+        and shared_concept.get("proved") is not True
+    ):
+        return {
+            "schema": SCHEMA,
+            "pass": False,
+            "status": "FAIL_CLOSED__SHARED_CONCEPT_IDENTITY_EVIDENCE_INVALID",
+            "reason": shared_concept.get("reason"),
+            "shared_concept_identity": shared_concept,
+            "terminal_authority": False,
+            "terminal_credit_delta": 0,
+        }
 
     bounded = {
         "available": False,
@@ -371,11 +472,15 @@ def resolve(problem: Mapping[str, Any]) -> dict[str, Any]:
             "scope_id": scope_id,
             "required_relation": required,
             "explicit_equivalence": explicit,
+            "shared_concept_identity": shared_concept,
             "terminal_authority": False,
             "terminal_credit_delta": 0,
         }
 
-    semantic_identity = explicit.get("proved") is True
+    semantic_identity = (
+        explicit.get("proved") is True
+        or shared_concept.get("proved") is True
+    )
     task_equivalent = terminal.get("proved") is True
 
     bounded_equivalent = (
@@ -480,6 +585,7 @@ def resolve(problem: Mapping[str, Any]) -> dict[str, Any]:
             "current_decision_substitution": task_equivalent,
         },
         "explicit_equivalence": explicit,
+        "shared_concept_identity": shared_concept,
         "terminal_equivalence": terminal,
         "bounded_extension_proof": bounded,
         "required_relation_disproved": disproved,

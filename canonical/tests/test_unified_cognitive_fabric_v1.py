@@ -213,6 +213,45 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
         )
         self.assertFalse(out["result"]["proved_facts"]["semantic_identity"])
 
+    def test_auto_semantic_relation_forwards_semantic_authority_verifier(self):
+        receipt = {
+            "pass": True,
+            "schema": "PROJECT_BRAIN_SHARED_CONCEPT_IDENTITY_AUTHORITY_RECEIPT_V1",
+            "scope_id": "finance:policy:2026",
+            "left_id": "reserve-buffer",
+            "right_id": "liquidity-cushion",
+            "shared_concept_id": "REGCAP:42",
+            "left_binding_authenticated": True,
+            "right_binding_authenticated": True,
+            "concept_semantics_authenticated": True,
+            "left_binding_sha256": "a" * 64,
+            "right_binding_sha256": "b" * 64,
+            "registry_sha256": "c" * 64,
+            "verification_authority_mutated": False,
+            "receipt_sha256": "d" * 64,
+        }
+        verifier = Mock(side_effect=lambda value: value)
+        out = run(
+            {
+                "payload": {
+                    "left_id": "reserve-buffer",
+                    "right_id": "liquidity-cushion",
+                    "scope_id": "finance:policy:2026",
+                    "required_relation": "SEMANTIC_IDENTITY",
+                    "shared_concept_identity_receipt": receipt,
+                },
+            },
+            semantic_authority_verifier=verifier,
+        )
+        self.assertTrue(out["auto_routed"], out)
+        self.assertEqual(out["mode"], "SEMANTIC_RELATION")
+        self.assertTrue(out["inner_pass"], out)
+        self.assertEqual(
+            out["result"]["strongest_proved_relation"],
+            "SEMANTIC_IDENTITY",
+        )
+        verifier.assert_called_once()
+
     @patch("canonical.runtime.unified_cognitive_fabric_v1.oewn_decision_sense.resolve")
     def test_auto_oewn_decision_sense_routes_through_authenticated_control(self, resolver):
         resolver.return_value = {
