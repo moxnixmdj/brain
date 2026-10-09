@@ -1,0 +1,113 @@
+{
+  "schema": "PROJECT_BRAIN_SEC_EDGAR_2026_TAXONOMY_SOURCE_UNIVERSE_OBSERVATION_V1",
+  "date": "2026-10-09",
+  "status": "CANDIDATE_AUTHENTICATED_SOURCE_UNIVERSE_OBSERVATION__ZERO_SEMANTIC_OR_TERMINAL_AUTHORITY",
+  "source": {
+    "requested_url": "https://www.sec.gov/info/edgar/edgartaxonomies.xml",
+    "final_url": "https://www.sec.gov/files/edgartaxonomies.xml",
+    "last_modified": "Mon, 14 Sep 2026 18:18:45 GMT",
+    "retrieval_channel": "TINYFISH_FETCH_CONTENT_JSON__SOURCE_DERIVED_TEXT__NOT_RAW_HTTP_BYTES",
+    "source_owner": "U.S. Securities and Exchange Commission"
+  },
+  "bounded_observation": {
+    "version_filter": "2026_OR_2026Q*",
+    "normalized_row_count": 69,
+    "normalized_rowset_sha256": "d539e3ca0929527a79a4df08e2df708a771c32805944851a349e8f40d894fb59",
+    "family_counts": {
+      "CEF": 2,
+      "COUNTRY": 2,
+      "CURRENCY": 1,
+      "CYD": 6,
+      "DEI": 5,
+      "ECD": 2,
+      "EXCH": 1,
+      "FFD": 1,
+      "FND": 12,
+      "NAICS": 1,
+      "OEF": 5,
+      "RXP": 1,
+      "SBS": 7,
+      "SIC": 1,
+      "SNJ": 2,
+      "SPAC": 6,
+      "SRO": 2,
+      "STPR": 1,
+      "US GAAP": 7,
+      "VIP": 4
+    },
+    "policy_relevant_anchors": [
+      {
+        "family": "DEI",
+        "version": "2026",
+        "url": "https://xbrl.sec.gov/dei/2026/dei-2026.xsd",
+        "role": "Schema",
+        "allowed": "1",
+        "namespace": "http://xbrl.sec.gov/dei/2026"
+      },
+      {
+        "family": "FND",
+        "version": "2026",
+        "url": "https://xbrl.sec.gov/fnd/2026/fnd-2026.xsd",
+        "role": "Schema",
+        "allowed": "1",
+        "namespace": "http://xbrl.sec.gov/fnd/2026"
+      },
+      {
+        "family": "OEF",
+        "version": "2026",
+        "url": "https://xbrl.sec.gov/oef/2026/oef-2026.xsd",
+        "role": "Schema",
+        "allowed": "1",
+        "namespace": "http://xbrl.sec.gov/oef/2026"
+      },
+      {
+        "family": "SBS",
+        "version": "2026",
+        "url": "https://xbrl.sec.gov/sbs/2026/sbs-2026.xsd",
+        "role": "Schema",
+        "allowed": "1",
+        "namespace": "http://xbrl.sec.gov/sbs/2026"
+      },
+      {
+        "family": "SPAC",
+        "version": "2026",
+        "url": "https://xbrl.sec.gov/spac/2026/spac-2026.xsd",
+        "role": "Schema",
+        "allowed": "1",
+        "namespace": "http://xbrl.sec.gov/spac/2026"
+      },
+      {
+        "family": "US GAAP",
+        "version": "2026",
+        "url": "https://xbrl.fasb.org/us-gaap/2026/elts/us-gaap-2026.xsd",
+        "role": "Schema",
+        "allowed": "1",
+        "namespace": "http://fasb.org/us-gaap/2026"
+      },
+      {
+        "family": "US GAAP",
+        "version": "2026",
+        "url": "https://xbrl.fasb.org/srt/2026/elts/srt-2026.xsd",
+        "role": "Schema",
+        "allowed": "1",
+        "namespace": "http://fasb.org/srt/2026"
+      }
+    ]
+  },
+  "proved_only": [
+    "OFFICIAL_SEC_REGISTRY_OBSERVATION_EXPOSES_A_FINITE_2026_EDGAR_TAXONOMY_FILE_UNIVERSE",
+    "CURRENT_US_GAAP_2026_SRT_2026_AND_MULTIPLE_SEC_2026_TAXONOMY_FAMILIES_ARE_PRESENT_IN_THE_OBSERVED_REGISTRY",
+    "NORMALIZED_OBSERVED_ROW_SET_IS_CONTENT_ADDRESSED_BY_ITS_CANONICAL_SHA256"
+  ],
+  "hard_nonclaims": [
+    "NO_RAW_HTTP_XML_BYTE_IDENTITY_CLAIM",
+    "NO_CLAIM_EXTRACTOR_PRESERVES_UNOBSERVED_XML_ATTRIBUTES_OR_FORMATTING",
+    "NO_CLAIM_TAXONOMY_MEMBERSHIP_IDENTIFIES_CONTEXTUAL_INTENDED_SENSE",
+    "NO_CLAIM_2026_EDGAR_TAXONOMY_UNIVERSE_IS_OPEN_WORLD_FINANCE_ONTOLOGY_COMPLETE",
+    "NO_POLICY_ADEQUACY_ACCEPTANCE_OR_TERMINAL_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
