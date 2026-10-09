@@ -12,7 +12,7 @@ from typing import Any, Mapping, Sequence
 
 SCHEMA = "PROJECT_BRAIN_EXECUTABLE_REFINEMENT_CERTIFICATE_V1"
 RECEIPT_SCHEMA = "PROJECT_BRAIN_EXECUTABLE_REFINEMENT_RECEIPT_V1"
-ALLOWED_TRANSITION_KINDS = frozenset({"PASS", "FAIL_CLOSED", "TYPE_ERROR", "STUTTER"})
+SUPPORTED_PROOF_CLASSES = frozenset({"DECLARATIVE_BOUNDING"})\nALLOWED_TRANSITION_KINDS = frozenset({"PASS", "FAIL_CLOSED", "TYPE_ERROR", "STUTTER"})
 ALLOWED_COVERAGE_MODES = frozenset({"DECLARED_FINITE_PARTITION", "EXHAUSTIVE_ENUMERATION"})
 ALLOWED_INPUT_BINDING_MODES = frozenset({"CANONICAL_JSON", "DIRECT_TYPED_MAPPING", "EXACT_BYTES"})
 ALLOWED_STATE_MAPPING_MODES = frozenset({"IDENTITY", "DECLARED_RELATION", "STATELESS"})
@@ -101,7 +101,7 @@ def verify_certificate(
             missing_fields=sorted(_REQUIRED_FIELDS - set(raw)),
             extra_fields=sorted(set(raw) - _REQUIRED_FIELDS),
         )
-    subject_id = str(raw.get("subject_id") or "").strip()
+    if raw.get("proof_class") not in SUPPORTED_PROOF_CLASSES:\n        return _fail("PROOF_CLASS_UNSUPPORTED")\n    subject_id = str(raw.get("subject_id") or "").strip()
     if not subject_id:
         return _fail("SUBJECT_ID_REQUIRED")
     if raw.get("terminal_credit_delta") != 0:
@@ -209,7 +209,7 @@ def verify_certificate(
     receipt_body = {
         "pass": True,
         "schema": RECEIPT_SCHEMA,
-        "status": "PASS__BOUNDED_EXECUTABLE_REFINEMENT_VERIFIED",
+        "status": "PASS__STRUCTURAL_REFINEMENT_BINDING_VERIFIED",\n        "proof_class": str(raw.get("proof_class")),\n        "assurance_level": "STRUCTURAL_BINDING_ONLY",\n        "refinement_verified": False,
         "subject_id": subject_id,
         "certificate_sha256": certificate_sha,
         "abstract_spec": {
@@ -220,9 +220,9 @@ def verify_certificate(
         "concrete_implementation": concrete_receipts,
         "proof_dependencies": checked_deps,
         "transition_case_ids": sorted(seen),
-        "safety_refinement_verified": True,
+        "safety_refinement_declared": bool(safety.get("proved")),
         "liveness_refinement_required": bool(liveness.get("required")),
-        "liveness_refinement_verified": bool(liveness.get("proved")),
+        "liveness_refinement_declared": bool(liveness.get("proved")),
         "semantic_truth_authority": False,
         "execution_authority": False,
         "acceptance_authority": False,
