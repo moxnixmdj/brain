@@ -167,6 +167,29 @@ def load_at_ref(ref,path):
 def fail(msg):
     FAIL.append(msg)
 
+def terminal_objective_currentness_errors(mission,pointer,hierarchy,intent):
+    errors=[]
+    if not isinstance(mission,dict):
+        return ["CURRENT_MISSION_OBJECTIVE_INVALID"]
+    real=str(mission.get("real_objective") or "").strip()
+    if not real:
+        return ["CURRENT_REAL_MISSION_OBJECTIVE_MISSING"]
+    legacy=str((pointer.get("mission_lock") or {}).get("terminal_objective") or "").strip()
+    hierarchy_objective=str(hierarchy.get("terminal_objective") or "").strip()
+    if hierarchy_objective!=real:
+        checkpoint_ok=(
+            bool(legacy)
+            and hierarchy_objective==legacy
+            and legacy!=real
+            and mission.get("opus_5_5_role")=="FIRST_FRONTIER_CHECKPOINT_NOT_TERMINAL_OBJECTIVE"
+        )
+        if not checkpoint_ok:
+            errors.append("HIERARCHY_OBJECTIVE_NOT_REAL_MISSION_OR_DECLARED_CHECKPOINT")
+    if str(intent.get("terminal_objective") or "").strip()!=real:
+        errors.append("INTENT_REAL_MISSION_OBJECTIVE_MISMATCH")
+    return errors
+
+
 def git(*args):
     return subprocess.check_output(["git",*args],cwd=ROOT,text=True).strip()
 
@@ -1138,11 +1161,14 @@ def main():
         enforce_target_continuity(intent,ns.base,hierarchy)
         enforce_promotion_truth(intent,files,ns.base)
 
-    terminal=str(pointer.get("mission_lock",{}).get("terminal_objective") or "")
-    if hierarchy.get("terminal_objective")!=terminal:
-        fail("HIERARCHY_TERMINAL_OBJECTIVE_MISMATCH")
-    if intent.get("terminal_objective")!=terminal:
-        fail("INTENT_TERMINAL_OBJECTIVE_MISMATCH")
+    try:
+        current_mission=load("canonical/governance/CURRENT_MISSION_OBJECTIVE.json")
+    except Exception as exc:
+        fail("CURRENT_MISSION_OBJECTIVE_READ_FAILED:"+type(exc).__name__)
+        current_mission={}
+    for item in terminal_objective_currentness_errors(current_mission,pointer,hierarchy,intent):
+        fail(item)
+    terminal=str(current_mission.get("real_objective") or "")
 
     program=str(pointer.get("current_frontier",{}).get("program") or "")
     if hierarchy.get("active_program")!=program:
