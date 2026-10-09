@@ -29,7 +29,7 @@
     "current_route_count": 30,
     "current_activation_status": "THREE_EXACT_CELLS_PLUS_TWENTY_SEVEN_BOUNDED_FAMILIES",
     "direct_runtime_path": "canonical/runtime/r2_direct_route_registry_v1.py",
-    "direct_runtime_git_blob_sha": "d0bd1af8c2e0ebb51e65bf400920892accb9542e",
+    "direct_runtime_git_blob_sha": "151641160bb6623a89e2584f2b3cd5cb62050bd4",
     "coverage_verifications": [
       {
         "path": "canonical/verification/R2_DOCX_JSON_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
