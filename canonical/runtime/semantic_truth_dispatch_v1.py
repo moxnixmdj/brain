@@ -1,8 +1,9 @@
 """Semantic truth proof-family dispatcher V1.
 
 Preserves the existing selected-semantic truth certificate as the default path.
-Adds one explicit proof family for proof-carrying domain-mapping relations.
-Unknown declared truth kinds fail closed.
+Adds explicit proof families for proof-carrying domain-mapping relations and
+bounded source-aligned regulatory-capital contextual atoms. Unknown declared
+truth kinds fail closed.
 """
 from __future__ import annotations
 
@@ -13,6 +14,9 @@ from canonical.runtime.domain_mapping_truth_certificate_v1 import (
 )
 from canonical.runtime.regcap_loss_cushion_truth_certificate_v1 import (
     evaluate as evaluate_regcap_loss_cushion,
+)
+from canonical.runtime.regcap_context_atom_truth_certificate_v1 import (
+    evaluate as evaluate_regcap_context_atom,
 )
 
 SCHEMA = "PROJECT_BRAIN_SEMANTIC_TRUTH_DISPATCH_V1"
@@ -45,6 +49,8 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
         return evaluate_domain_mapping(payload)
     if kind == "REGCAP_LOSS_CUSHION_GROUNDING":
         return evaluate_regcap_loss_cushion(payload)
+    if kind == "REGCAP_CONTEXT_ATOM":
+        return evaluate_regcap_context_atom(payload)
     return {
         "schema": SCHEMA,
         "pass": False,
