@@ -12,8 +12,8 @@
     "scope_id": "FIBO_Q2_2026_CORE7_LABELED_CLASSES_AND_INTERNAL_DIRECT_SUBCLASS_EDGES",
     "source_file_manifest_complete": true,
     "extraction_complete_for": "ALL_OWL_CLASS_DECLARATIONS_WITH_AT_LEAST_ONE_RDFS_LABEL_AND_ALL_DIRECT_RDFS_SUBCLASSOF_RESOURCE_EDGES_WHOSE_ENDPOINTS_ARE_BOTH_LABELED_CLASSES_DECLARED_IN_THE_EXACT_SEVEN_FILE_MANIFEST",
-    "class_count": 241,
-    "direct_entailment_edge_count": 164,
+    "class_count": 253,
+    "direct_entailment_edge_count": 177,
     "open_world_finance_ontology_complete": false,
     "imported_ontology_closure_complete": false,
     "unrestricted_synonymy_proved": false,
@@ -256,20 +256,20 @@
       "source_blob_sha": "a5eb752f32d6af7bfa09331e93472caabb9c2369"
     },
     {
-      "concept_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/Debt/Debtor",
-      "surfaces": [
-        "debtor"
-      ],
-      "definition": "a party that owes a debt or other obligation to another party",
-      "source_path": "FBC/DebtAndEquities/Debt.rdf",
-      "source_blob_sha": "a5eb752f32d6af7bfa09331e93472caabb9c2369"
-    },
-    {
       "concept_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/Debt/DebtTerms",
       "surfaces": [
         "debt terms"
       ],
       "definition": "contract terms that specify the formal rights and obligations of borrower and lender under a contract in which funds are lent from the one party to the other",
+      "source_path": "FBC/DebtAndEquities/Debt.rdf",
+      "source_blob_sha": "a5eb752f32d6af7bfa09331e93472caabb9c2369"
+    },
+    {
+      "concept_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/Debt/Debtor",
+      "surfaces": [
+        "debtor"
+      ],
+      "definition": "a party that owes a debt or other obligation to another party",
       "source_path": "FBC/DebtAndEquities/Debt.rdf",
       "source_blob_sha": "a5eb752f32d6af7bfa09331e93472caabb9c2369"
     },
@@ -459,6 +459,15 @@
         "physical collateral"
       ],
       "definition": "asset pledged as collateral that has a material form, i.e., is a physical asset of the obligor",
+      "source_path": "FBC/DebtAndEquities/Debt.rdf",
+      "source_blob_sha": "a5eb752f32d6af7bfa09331e93472caabb9c2369"
+    },
+    {
+      "concept_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/Debt/Principal",
+      "surfaces": [
+        "principal"
+      ],
+      "definition": "with respect to a debt: the value of an obligation, such as a bond or loan, raised and that must be repaid at maturity; for investments: the original amount of money invested, separate from any associated interest, dividends or capital gains",
       "source_path": "FBC/DebtAndEquities/Debt.rdf",
       "source_blob_sha": "a5eb752f32d6af7bfa09331e93472caabb9c2369"
     },
@@ -679,6 +688,15 @@
       "source_blob_sha": "5456f5cb395f30d4636f8d2b1e5f0463466b764e"
     },
     {
+      "concept_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/Issuer",
+      "surfaces": [
+        "issuer"
+      ],
+      "definition": "role of a party that issues (or proposes to issue in a formal filing) one or more financial instruments",
+      "source_path": "FBC/FinancialInstruments/FinancialInstruments.rdf",
+      "source_blob_sha": "5456f5cb395f30d4636f8d2b1e5f0463466b764e"
+    },
+    {
       "concept_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/NegotiableSecurity",
       "surfaces": [
         "negotiable security"
@@ -702,6 +720,15 @@
         "option"
       ],
       "definition": "derivative instrument that grants to the holder either the privilege to purchase or the privilege to sell the assets specified at a predetermined price or formula at or within a time period in the future",
+      "source_path": "FBC/FinancialInstruments/FinancialInstruments.rdf",
+      "source_blob_sha": "5456f5cb395f30d4636f8d2b1e5f0463466b764e"
+    },
+    {
+      "concept_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/PackagedFinancialProduct",
+      "surfaces": [
+        "packaged financial product"
+      ],
+      "definition": "financial product that acts as a container for at least one financial instrument, including other financial products, and whose value is derived from, or based on a reference asset, market measure, or investment strategy",
       "source_path": "FBC/FinancialInstruments/FinancialInstruments.rdf",
       "source_blob_sha": "5456f5cb395f30d4636f8d2b1e5f0463466b764e"
     },
@@ -949,6 +976,15 @@
       "source_blob_sha": "1e9a14a20cf56f651853d3afb8bec60654f1a226"
     },
     {
+      "concept_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/ContractualSavingsInstitution",
+      "surfaces": [
+        "contractual savings institution"
+      ],
+      "definition": "financial institution that provides the opportunity for individuals to invest in collective investment vehicles in a fiduciary rather than a principle role",
+      "source_path": "FBC/FunctionalEntities/FinancialServicesEntities.rdf",
+      "source_blob_sha": "1e9a14a20cf56f651853d3afb8bec60654f1a226"
+    },
+    {
       "concept_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/CreditUnion",
       "surfaces": [
         "credit union"
@@ -1084,6 +1120,15 @@
       "source_blob_sha": "1e9a14a20cf56f651853d3afb8bec60654f1a226"
     },
     {
+      "concept_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/InvestmentBank",
+      "surfaces": [
+        "investment bank"
+      ],
+      "definition": "financial service provider that acts as an underwriter or agent that serves as intermediary between the issuer of securities and the investing public",
+      "source_path": "FBC/FunctionalEntities/FinancialServicesEntities.rdf",
+      "source_blob_sha": "1e9a14a20cf56f651853d3afb8bec60654f1a226"
+    },
+    {
       "concept_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/InvestmentCompany",
       "surfaces": [
         "investment company"
@@ -1179,6 +1224,15 @@
         "principal underwriter"
       ],
       "definition": "underwriter who, as principal, purchases from an investment company, or pursuant to some contract has the right to purchase from such company, any security for distribution, or who as agent for such company sells or has the right to sell any security to a dealer or to the public, excluding any dealer who purchases from such company through sn underwriter acting as an agent for such company",
+      "source_path": "FBC/FunctionalEntities/FinancialServicesEntities.rdf",
+      "source_blob_sha": "1e9a14a20cf56f651853d3afb8bec60654f1a226"
+    },
+    {
+      "concept_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/RegisteredInvestmentAdvisor",
+      "surfaces": [
+        "registered investment advisor"
+      ],
+      "definition": "registered agent and financial service provider that advises high net worth individuals on investments and manages their portfolios",
       "source_path": "FBC/FunctionalEntities/FinancialServicesEntities.rdf",
       "source_blob_sha": "1e9a14a20cf56f651853d3afb8bec60654f1a226"
     },
@@ -1300,6 +1354,24 @@
       "source_blob_sha": "9c07773a5f78ae872e297517004b9a3d47a2d6ab"
     },
     {
+      "concept_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/Broker",
+      "surfaces": [
+        "broker"
+      ],
+      "definition": "any party that acts as an intermediary between a buyer and a seller, usually charging a commission",
+      "source_path": "FBC/ProductsAndServices/FinancialProductsAndServices.rdf",
+      "source_blob_sha": "9c07773a5f78ae872e297517004b9a3d47a2d6ab"
+    },
+    {
+      "concept_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/BrokerDealer",
+      "surfaces": [
+        "broker-dealer"
+      ],
+      "definition": "any party in the business of buying and selling securities, operating as both a broker and a dealer, depending on the transaction",
+      "source_path": "FBC/ProductsAndServices/FinancialProductsAndServices.rdf",
+      "source_blob_sha": "9c07773a5f78ae872e297517004b9a3d47a2d6ab"
+    },
+    {
       "concept_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/Catalog",
       "surfaces": [
         "catalog"
@@ -1359,6 +1431,15 @@
         "contract lifecycle stage occurrence"
       ],
       "definition": "realization, from start to finish of a phase in an occurrence of a specific contract lifecycle",
+      "source_path": "FBC/ProductsAndServices/FinancialProductsAndServices.rdf",
+      "source_blob_sha": "9c07773a5f78ae872e297517004b9a3d47a2d6ab"
+    },
+    {
+      "concept_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/Dealer",
+      "surfaces": [
+        "dealer"
+      ],
+      "definition": "any party that purchases goods or services for resale and acts on their own behalf in a transaction",
       "source_path": "FBC/ProductsAndServices/FinancialProductsAndServices.rdf",
       "source_blob_sha": "9c07773a5f78ae872e297517004b9a3d47a2d6ab"
     },
@@ -1552,6 +1633,15 @@
       "source_blob_sha": "9c07773a5f78ae872e297517004b9a3d47a2d6ab"
     },
     {
+      "concept_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/RegisteredAgent",
+      "surfaces": [
+        "registered agent"
+      ],
+      "definition": "legal agent designated by some party to represent them and act on their behalf under a formal agency agreement",
+      "source_path": "FBC/ProductsAndServices/FinancialProductsAndServices.rdf",
+      "source_blob_sha": "9c07773a5f78ae872e297517004b9a3d47a2d6ab"
+    },
+    {
       "concept_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/RegulatedCommodity",
       "surfaces": [
         "regulated commodity"
@@ -1575,6 +1665,15 @@
         "third-party agent"
       ],
       "definition": "any service provider that is licensed to perform a legally binding function and has been legally empowered to act on behalf of another party",
+      "source_path": "FBC/ProductsAndServices/FinancialProductsAndServices.rdf",
+      "source_blob_sha": "9c07773a5f78ae872e297517004b9a3d47a2d6ab"
+    },
+    {
+      "concept_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/Trade",
+      "surfaces": [
+        "trade"
+      ],
+      "definition": "situation that realizes an agreement between parties participating in a voluntary action of buying and selling goods and services",
       "source_path": "FBC/ProductsAndServices/FinancialProductsAndServices.rdf",
       "source_blob_sha": "9c07773a5f78ae872e297517004b9a3d47a2d6ab"
     },
@@ -2155,11 +2254,11 @@
       "source_blob_sha": "90e96983bfb78e300875cdff01ef4dff3a4a2d3b"
     },
     {
-      "concept_id": "https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/TerminationProvision",
+      "concept_id": "https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/SettlementNettingProvision",
       "surfaces": [
-        "termination provision"
+        "settlement netting provision"
       ],
-      "definition": "contractual element that specifies the circumstances under which the parties can dissolve their legal relationship and discontinue the fulfillment of their obligations under the contract",
+      "definition": "netting provision that specifies the way in which on a given payment date, each party will aggregate the amounts of a currency to be delivered by it, and only the difference in the aggregate amounts will be delivered by the party with the larger aggregate obligation",
       "source_path": "FND/Agreements/Contracts.rdf",
       "source_blob_sha": "90e96983bfb78e300875cdff01ef4dff3a4a2d3b"
     },
@@ -2169,6 +2268,15 @@
         "term sheet"
       ],
       "definition": "nonbinding agreement setting forth the basic terms and conditions under which a proposed business deal may be made",
+      "source_path": "FND/Agreements/Contracts.rdf",
+      "source_blob_sha": "90e96983bfb78e300875cdff01ef4dff3a4a2d3b"
+    },
+    {
+      "concept_id": "https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/TerminationProvision",
+      "surfaces": [
+        "termination provision"
+      ],
+      "definition": "contractual element that specifies the circumstances under which the parties can dissolve their legal relationship and discontinue the fulfillment of their obligations under the contract",
       "source_path": "FND/Agreements/Contracts.rdf",
       "source_blob_sha": "90e96983bfb78e300875cdff01ef4dff3a4a2d3b"
     },
@@ -2565,6 +2673,12 @@
       "source_blob_sha": "5456f5cb395f30d4636f8d2b1e5f0463466b764e"
     },
     {
+      "source_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/Issuer",
+      "target_id": "https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/ContractPrincipal",
+      "source_path": "FBC/FinancialInstruments/FinancialInstruments.rdf",
+      "source_blob_sha": "5456f5cb395f30d4636f8d2b1e5f0463466b764e"
+    },
+    {
       "source_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/NegotiableSecurity",
       "target_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/Security",
       "source_path": "FBC/FinancialInstruments/FinancialInstruments.rdf",
@@ -2589,6 +2703,12 @@
       "source_blob_sha": "5456f5cb395f30d4636f8d2b1e5f0463466b764e"
     },
     {
+      "source_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/PackagedFinancialProduct",
+      "target_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/FinancialProduct",
+      "source_path": "FBC/FinancialInstruments/FinancialInstruments.rdf",
+      "source_blob_sha": "5456f5cb395f30d4636f8d2b1e5f0463466b764e"
+    },
+    {
       "source_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/PromissoryNote",
       "target_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/DebtInstrument",
       "source_path": "FBC/FinancialInstruments/FinancialInstruments.rdf",
@@ -2597,6 +2717,12 @@
     {
       "source_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/RedemptionProvision",
       "target_id": "https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/ContractualCommitment",
+      "source_path": "FBC/FinancialInstruments/FinancialInstruments.rdf",
+      "source_blob_sha": "5456f5cb395f30d4636f8d2b1e5f0463466b764e"
+    },
+    {
+      "source_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/SecuritiesTransaction",
+      "target_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/Trade",
       "source_path": "FBC/FinancialInstruments/FinancialInstruments.rdf",
       "source_blob_sha": "5456f5cb395f30d4636f8d2b1e5f0463466b764e"
     },
@@ -2651,6 +2777,12 @@
     {
       "source_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/BrokerageFirm",
       "target_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/NonDepositoryInstitution",
+      "source_path": "FBC/FunctionalEntities/FinancialServicesEntities.rdf",
+      "source_blob_sha": "1e9a14a20cf56f651853d3afb8bec60654f1a226"
+    },
+    {
+      "source_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/BrokerageFirm",
+      "target_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/BrokerDealer",
       "source_path": "FBC/FunctionalEntities/FinancialServicesEntities.rdf",
       "source_blob_sha": "1e9a14a20cf56f651853d3afb8bec60654f1a226"
     },
@@ -2733,6 +2865,12 @@
       "source_blob_sha": "1e9a14a20cf56f651853d3afb8bec60654f1a226"
     },
     {
+      "source_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/ContractualSavingsInstitution",
+      "target_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/NonDepositoryInstitution",
+      "source_path": "FBC/FunctionalEntities/FinancialServicesEntities.rdf",
+      "source_blob_sha": "1e9a14a20cf56f651853d3afb8bec60654f1a226"
+    },
+    {
       "source_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/CreditUnion",
       "target_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/DepositoryInstitution",
       "source_path": "FBC/FunctionalEntities/FinancialServicesEntities.rdf",
@@ -2805,6 +2943,12 @@
       "source_blob_sha": "1e9a14a20cf56f651853d3afb8bec60654f1a226"
     },
     {
+      "source_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/InvestmentBank",
+      "target_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/FinancialInstitution",
+      "source_path": "FBC/FunctionalEntities/FinancialServicesEntities.rdf",
+      "source_blob_sha": "1e9a14a20cf56f651853d3afb8bec60654f1a226"
+    },
+    {
       "source_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/InvestmentCompany",
       "target_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/NonDepositoryInstitution",
       "source_path": "FBC/FunctionalEntities/FinancialServicesEntities.rdf",
@@ -2865,6 +3009,18 @@
       "source_blob_sha": "1e9a14a20cf56f651853d3afb8bec60654f1a226"
     },
     {
+      "source_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/RegisteredInvestmentAdvisor",
+      "target_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/FinancialServiceProvider",
+      "source_path": "FBC/FunctionalEntities/FinancialServicesEntities.rdf",
+      "source_blob_sha": "1e9a14a20cf56f651853d3afb8bec60654f1a226"
+    },
+    {
+      "source_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/RegisteredInvestmentAdvisor",
+      "target_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/RegisteredAgent",
+      "source_path": "FBC/FunctionalEntities/FinancialServicesEntities.rdf",
+      "source_blob_sha": "1e9a14a20cf56f651853d3afb8bec60654f1a226"
+    },
+    {
       "source_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/RiskPoolingInstitution",
       "target_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/NonDepositoryInstitution",
       "source_path": "FBC/FunctionalEntities/FinancialServicesEntities.rdf",
@@ -2919,6 +3075,18 @@
       "source_blob_sha": "9c07773a5f78ae872e297517004b9a3d47a2d6ab"
     },
     {
+      "source_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/AgentForServiceOfProcess",
+      "target_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/RegisteredAgent",
+      "source_path": "FBC/ProductsAndServices/FinancialProductsAndServices.rdf",
+      "source_blob_sha": "9c07773a5f78ae872e297517004b9a3d47a2d6ab"
+    },
+    {
+      "source_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/Broker",
+      "target_id": "https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/ContractThirdParty",
+      "source_path": "FBC/ProductsAndServices/FinancialProductsAndServices.rdf",
+      "source_blob_sha": "9c07773a5f78ae872e297517004b9a3d47a2d6ab"
+    },
+    {
       "source_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/FinancialExposure",
       "target_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/Exposure",
       "source_path": "FBC/ProductsAndServices/FinancialProductsAndServices.rdf",
@@ -2945,6 +3113,18 @@
     {
       "source_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/Position",
       "target_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/FinancialExposure",
+      "source_path": "FBC/ProductsAndServices/FinancialProductsAndServices.rdf",
+      "source_blob_sha": "9c07773a5f78ae872e297517004b9a3d47a2d6ab"
+    },
+    {
+      "source_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/RegisteredAgent",
+      "target_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/LegalAgent",
+      "source_path": "FBC/ProductsAndServices/FinancialProductsAndServices.rdf",
+      "source_blob_sha": "9c07773a5f78ae872e297517004b9a3d47a2d6ab"
+    },
+    {
+      "source_id": "https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/RegisteredAgent",
+      "target_id": "https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/ContractParty",
       "source_path": "FBC/ProductsAndServices/FinancialProductsAndServices.rdf",
       "source_blob_sha": "9c07773a5f78ae872e297517004b9a3d47a2d6ab"
     },
@@ -3167,6 +3347,12 @@
     {
       "source_id": "https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/Representation",
       "target_id": "https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/ContractualCommitment",
+      "source_path": "FND/Agreements/Contracts.rdf",
+      "source_blob_sha": "90e96983bfb78e300875cdff01ef4dff3a4a2d3b"
+    },
+    {
+      "source_id": "https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/SettlementNettingProvision",
+      "target_id": "https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/NettingProvision",
       "source_path": "FND/Agreements/Contracts.rdf",
       "source_blob_sha": "90e96983bfb78e300875cdff01ef4dff3a4a2d3b"
     },
