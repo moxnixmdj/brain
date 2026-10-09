@@ -7,7 +7,7 @@
     "branch": "semantic-root-uvck-reconcile-20261009-v1",
     "semantic_governance": {
       "path": "canonical/governance/SEMANTIC_COMPLETENESS_ROOT_THEOREM_20261009_V2.json",
-      "git_blob_sha": "55c027579d56672aab59fb863d38e105a46afea4"
+      "git_blob_sha": "985d4c9c62f627c78380dbfda6d78a7b73a5ea5e"
     },
     "adapter": {
       "path": "canonical/runtime/semantic_root_uvck_adapter_v1.py",
@@ -37,7 +37,8 @@
     "failures": 0,
     "errors": 0,
     "independent_execution_environment": true,
-    "independent_verifier_logic": false
+    "independent_verifier_logic": false,
+    "governance_post_replay_change": "ONLY_MUTABLE_UVCK_POINTER_BINDING_CHANGED_FROM_EXACT_HASH_TO_PATH_IDENTITY__EXECUTABLE_BYTES_UNCHANGED"
   },
   "proved": [
     "SEMANTIC_ROOT_SET_IS_EXACTLY_SR1_REALITY_SR2_MISSION_SR3_CLOSURE_SR4_ASSURANCE",
@@ -53,7 +54,8 @@
     "NO_CLAIM_SR1_SR2_SR3_OR_SR4_IS_CLOSED.",
     "NO_CLAIM_THIS_IS_AN_INDEPENDENT_VERIFIER_IMPLEMENTATION.",
     "NO_LIVE_DEFAULT_PROMOTION.",
-    "NO_TERMINAL_AUTHORITY_OR_CREDIT."
+    "NO_TERMINAL_AUTHORITY_OR_CREDIT.",
+    "NO_CLAIM_THE_REMOTE_REPLAY_EXECUTED_THE_NONEXECUTABLE_POINTER_BINDING_EDIT."
   ],
   "accounting": {
     "incremental_spend_usd": 0,
