@@ -135,6 +135,7 @@ class CandidatePolicyTerminalSignatureTests(unittest.TestCase):
             pf = route.preflight(request, repo_root=root)
             self.assertTrue(pf["matched"], pf)
             self.assertEqual(pf["status"], "DIRECT_ADEQUACY_ROUTE_MATCHED")
+            self.assertFalse(outp.exists(), "preflight must be effect-free")
             result = route.run(request, repo_root=root)
             self.assertTrue(result["pass"], result)
             self.assertTrue(result["direct_adequacy_authority"])
@@ -143,6 +144,25 @@ class CandidatePolicyTerminalSignatureTests(unittest.TestCase):
             self.assertEqual(result["terminal_credit_delta"], 0)
             saved = json.loads(outp.read_text(encoding="utf-8"))
             self.assertTrue(verifier.verify(unless_case({"a": False, "b": True}), saved)["verified"])
+
+    def test_matching_invalid_case_fails_closed_not_not_applicable(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            inp = root / "canonical/evidence/candidate_policy_case.json"
+            inp.parent.mkdir(parents=True, exist_ok=True)
+            bad = unless_case({"a": False})
+            bad["candidate_fact_bindings"]["b"] = "not-a-bool"
+            inp.write_text(json.dumps(bad), encoding="utf-8")
+            goal = (
+                "Using the bounded finance candidate policy worldset at "
+                "canonical/evidence/candidate_policy_case.json, derive and independently "
+                "verify complete candidate terminal signatures and save them to "
+                "canonical/verification/candidate_policy_result.json."
+            )
+            out = route.preflight({"task_id": "x", "goal": goal}, repo_root=root)
+            self.assertTrue(out["matched"], out)
+            self.assertEqual(out["status"], "FAIL_CLOSED")
+            self.assertIn("CANDIDATE_FACT_BOOLEAN_REQUIRED", out["reason"])
 
     def test_route_nonmatching_goal_is_not_applicable(self):
         out = route.preflight({"task_id": "x", "goal": "do something else"}, repo_root=".")
