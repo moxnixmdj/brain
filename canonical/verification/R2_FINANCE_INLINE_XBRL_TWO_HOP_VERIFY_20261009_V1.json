@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_R2_FINANCE_INLINE_XBRL_TWO_HOP_VERIFICATION_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__EXACT_STACKED_TWO_HOP_CANDIDATE__27_OF_27_ADVERSARIAL_TESTS__4_OF_4_PY_COMPILE",
+  "objective": "VERIFY_AND_REBASE_BOUNDED_SOURCE_NATIVE_FINANCE_SEMANTIC_ACQUISITION_WITHOUT_POLICY_OR_TERMINAL_PROMOTION",
+  "source": {
+    "repository": "moxnixmdj/brain",
+    "stacked_ref": "r2-sec-inline-xbrl-release-metadata-v1",
+    "source_blobs": {
+      "canonical/runtime/bound_capabilities/sec_inline_xbrl_fact_anchor_v1.py": "835c2a7b97ddbefa44237d89c824789553145ea9",
+      "canonical/runtime/sec_inline_xbrl_fact_anchor_verify_v1.py": "b4841e72a4817a7128fcbc14ea3ca1de99f613aa",
+      "canonical/tests/test_sec_inline_xbrl_fact_anchor_v1.py": "6ddb550fab1a2292b17c3c9c8198d6c3b67ad6f2",
+      "canonical/runtime/sec_inline_xbrl_fasb_release_metadata_v1.py": "f214389516b07c2c3c8d959cdf86ee7458b9ca22",
+      "canonical/runtime/sec_inline_xbrl_fasb_release_metadata_verify_v1.py": "bc3844de5a410dad8ab4aaa78b33c670d9f48996",
+      "canonical/tests/test_sec_inline_xbrl_fasb_release_metadata_v1.py": "ce9644f721f27ab100860772fa99406236cdcab1",
+      "canonical/runtime/source_traceable_semantic_ir.py": "cf40b0b4d8f71f15f0140f009b602ff913db6750"
+    }
+  },
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2507,
+    "head_sha": "7b366829e496761f6f957276c5f4687d305e25c5",
+    "merge_test_sha": "b89a2a7bb5a95b31b996d5219e3f1ddbece191eb",
+    "workflow_run_id": 37927301822,
+    "workflow_job_id": 113809202080,
+    "python": "3.12.15",
+    "compile": {
+      "sec_inline_xbrl_fact_anchor_v1.py": "PASS",
+      "sec_inline_xbrl_fact_anchor_verify_v1.py": "PASS",
+      "sec_inline_xbrl_fasb_release_metadata_v1.py": "PASS",
+      "sec_inline_xbrl_fasb_release_metadata_verify_v1.py": "PASS"
+    },
+    "stacked_adversarial_tests": "27_OF_27_PASS",
+    "task_or_benchmark_exposure": false
+  },
+  "proved": [
+    "AN_INLINE_XBRL_FACT_OCCURRENCE_CAN_BE_BOUND_TO_ITS_EXACT_SOURCE_DECLARED_EXPANDED_QNAME_WHEN_THE_PREFIX_BINDING_IS_PRESENT_IN_THE_SAME_CONTENT_ADDRESSED_FILING_BYTES",
+    "FOR_STANDARD_FASB_US_GAAP_2024_2025_2026_NAMESPACES_THE_EXACT_QNAME_CAN_BE_BOUND_TO_THE_MATCHING_RELEASE_XSD_AND_DOCUMENTATION_LINKBASE_METADATA",
+    "THE_FASB_RELEASE_METADATA_OUTPUT_IS_INDEPENDENTLY_REDERIVED_FROM_PRESERVED_RAW_TAXONOMY_BYTES",
+    "THE_EMITTED_SOURCE_TRACEABLE_SEMANTIC_CONTRACT_COMPILES_INTO_THE_EXISTING_SEMANTIC_IR",
+    "CUSTOM_NAMESPACES_REDIRECTS_DTD_ENTITY_INPUT_WRONG_NAMESPACE_MISSING_CONCEPT_WRONG_DOCUMENTATION_BINDING_AND_AUTHORITY_SELF_PROMOTION_FAIL_CLOSED"
+  ],
+  "scope_boundary": [
+    "NO_NEARBY_VISIBLE_LABEL_TO_QNAME_SEMANTICS",
+    "NO_CUSTOM_CONCEPT_DOMAIN_MEANING",
+    "NO_FREE_TEXT_POLICY_ATOM_INFERENCE",
+    "NO_ONTOLOGY_CLASSIFICATION",
+    "NO_ARBITRARY_FINANCE_WORD_SENSE_RESOLUTION",
+    "NO_POLICY_ADEQUACY",
+    "NO_GLOBAL_FINANCE_SEMANTIC_TAIL_CLOSURE"
+  ],
+  "authority": {
+    "semantic_truth_authority": false,
+    "policy_adequacy_authority": false,
+    "acceptance_authority": false,
+    "terminal_authority": false,
+    "promotion_authority": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
