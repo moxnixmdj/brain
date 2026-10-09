@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_SEMANTIC_MAPPING_PACK_VERIFY_V1",
+  "date": "2026-10-09",
+  "status": "PASS__PRIMARY_SOURCE_REVIEWED_BOUNDED_BASEL_FSB_LOSS_ABSORPTION_PACK__ZERO_TERMINAL_CREDIT",
+  "pass": true,
+  "independent_verified": true,
+  "pack_id": "finance-regulatory-loss-absorption-basel-fsb-20261009-v1",
+  "scope_id": "finance:global-standard-terminology:basel-rbc30-fsb-tlac:2026-10-09",
+  "pack_sha256": "52cfe8c6cf354b79983f7c9f40392a3457b7bd9e4a09d2cb841703a3447267f9",
+  "phrase_lexicon_semantics_authenticated": true,
+  "concept_definitions_authenticated": true,
+  "source_authority_reviewed": true,
+  "verification_authority_mutated": false,
+  "verification_method": "INDEPENDENT_PRIMARY_SOURCE_REVIEW_AGAINST_VERSIONED_BIS_BASEL_AND_FSB_STANDARD_PAGES",
+  "primary_sources": [
+    {
+      "authority": "BCBS/BIS",
+      "section": "RBC30.1-RBC30.3",
+      "url": "https://www.bis.org/committees/bcbs/basel-framework/standard/rbc/30/inforce/2019-12-15/published/2019-12-15",
+      "supports": [
+        "CCoB loss-drawdown purpose",
+        "CCoB CET1 composition",
+        "CCoB above-regulatory-minimum position",
+        "conservation-range operation"
+      ]
+    },
+    {
+      "authority": "BCBS/BIS",
+      "section": "RBC20.1 footnote",
+      "url": "https://www.bis.org/committees/bcbs/basel-framework/standard/rbc/20/inforce/2023-01-01/published/2020-11-26",
+      "supports": [
+        "CCoB 2.5% of RWA calibration"
+      ]
+    },
+    {
+      "authority": "FSB",
+      "section": "TLAC standard overview and term sheet",
+      "url": "https://www.fsb.org/2015/11/total-loss-absorbing-capacity-tlac-principles-and-term-sheet-2/",
+      "supports": [
+        "TLAC applies to G-SIBs",
+        "TLAC loss-absorption and recapitalisation purpose",
+        "TLAC resolution regime",
+        "TLAC eligible instruments and liabilities"
+      ]
+    }
+  ],
+  "semantic_boundary": [
+    "ONLY_THE_DECLARED_EXACT_PHRASE_SURFACES_ARE_AUTHENTICATED",
+    "ONLY_TWO_DECLARED_CONCEPT_DEFINITIONS_ARE_AUTHENTICATED",
+    "NO_PARAPHRASE_OR_OPEN_WORLD_COMPLETENESS",
+    "NO_JURISDICTION_SPECIFIC_IMPLEMENTATION_EQUIVALENCE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
