@@ -712,7 +712,7 @@
       "scope": "EXACT_AUTHENTICATED_NYFED_SOURCE_CONTEXT_LOSS_ABSORBING_CUSHION_TO_CCOB_ONLY",
       "verification": {
         "path": "canonical/verification/R2_SOURCE_BOUND_REGCAP_DIRECT_ADEQUACY_VERIFY_20261009_V1.json",
-        "git_blob_sha": "a87acfd1b75e2a2cecdf5311275342e886c69e7e",
+        "git_blob_sha": "00dc359634d2798cabcf3ba3d6074b5cc18e8423",
         "core_mechanism": "5_OF_5_PASS",
         "v19_seam": "3_OF_3_PASS",
         "live_two_fetch_replay": true,
