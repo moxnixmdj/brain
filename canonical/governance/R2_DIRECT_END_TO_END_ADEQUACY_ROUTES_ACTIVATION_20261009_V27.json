@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V27",
+  "date": "2026-10-09",
+  "status": "ACTIVE__THIRTY_FOUR_DIRECT_ROUTES__THREE_EXACT_CELLS__THIRTY_ONE_BOUNDED_FAMILIES__V15_BOUNDED_FINANCE_COREFERENCE_AMBIGUITY_CONTROL_BOUND__ZERO_TERMINAL_CREDIT",
+  "root": "R2_GENERAL_ADEQUATE_DECISION_INTELLIGENCE_INCOMPLETE",
+  "supersedes": {
+    "path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V26.json",
+    "git_blob_sha": "9bbb2b604fdf31c16679c9b71ccd47996e018cb1",
+    "preserve_all_prior_routes": true
+  },
+  "runtime": {
+    "path": "canonical/runtime/r2_direct_end_to_end_adequacy_v15.py",
+    "git_blob_sha": "7ef033b93b34dc65a6910cf393e7be3589fd03ea"
+  },
+  "controller": {
+    "path": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
+    "git_blob_sha": "0319dbf0c09c87dfdeec318071f36f8e5d26d442"
+  },
+  "counts": {
+    "exact_cell_count": 3,
+    "bounded_family_count": 31,
+    "current_route_count": 34
+  },
+  "delta": {
+    "route_id": "DIRECT_ADEQUACY::FINANCE_BOUNDED_COREFERENCE_AMBIGUITY_CONTROL_V1",
+    "capability_id": "finance.coreference.ambiguity_control.stdlib",
+    "verifier_capability_id": "finance.coreference.ambiguity.control.verify.stdlib",
+    "scope": "DECLARED_COMPLETE_BOUNDED_MENTION_UNIVERSE__ONE_REFERENCE__COMPLETE_CANDIDATE_TERMINAL_SIGNATURES__DECLARED_COMPLETE_OBSERVATION_MAPS",
+    "control": [
+      "TERMINALLY_EQUIVALENT_CANDIDATE_ANTECEDENTS_CONTINUE_WITHOUT_IDENTITY_SELECTION",
+      "TERMINALLY_DISTINCT_SEPARABLE_CANDIDATES_ACQUIRE_MINIMUM_DECLARED_DISCRIMINATOR",
+      "USER_OWNED_UNDERDETERMINATION_WITHOUT_SEPARATOR_REQUESTS_MINIMUM_CLARIFICATION"
+    ],
+    "producer": "canonical/runtime/finance_coreference_ambiguity_control_v1.py",
+    "independent_verifier": "canonical/runtime/finance_coreference_ambiguity_control_verify_v1.py",
+    "direct_route": "canonical/runtime/r2_finance_coreference_ambiguity_direct_adequacy_v1.py",
+    "verification": {
+      "path": "canonical/verification/R2_FINANCE_COREFERENCE_AMBIGUITY_CONTROL_VERIFY_20261009_V2.json",
+      "git_blob_sha": "dec5f52893f4e26b8135408f7969390020fc861b",
+      "status": "PASS__REBASING_PRESERVES_EXACT_TESTED_BLOBS__FOCUSED_8_OF_8__ADJACENT_12_OF_12__SUCCESSOR_WRAPPER_3_OF_3__PYCOMPILE_PASS__ZERO_TERMINAL_CREDIT"
+    }
+  },
+  "authority_boundary": {
+    "antecedent_identity_asserted": false,
+    "general_coreference_resolution_claimed": false,
+    "open_world_mention_completeness_claimed": false,
+    "semantic_truth_authority_added": false,
+    "terminal_authority": false,
+    "terminal_credit_delta": 0
+  },
+  "remaining_after_delta": [
+    "UNPROVED_MENTION_UNIVERSE_COMPLETENESS",
+    "MISSING_COMPLETE_TERMINAL_SIGNATURE_BINDINGS",
+    "UNAVAILABLE_DECISIVE_OBSERVATIONS",
+    "GENERAL_IMPLICIT_OR_OPEN_WORLD_COREFERENCE",
+    "WORD_SENSE_DOMAIN_MAPPING_AND_ONTOLOGY_RESIDUALS",
+    "UNPROVED_CROSS_DOCUMENT_QUERY_RELEVANT_EFFECT_INVENTORY_RELATION_OR_PRECEDENCE",
+    "STRONGER_EXTERNAL_FACT_AUTHENTICATION_BEYOND_BOUND_OBSERVATION_CHANNELS"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
