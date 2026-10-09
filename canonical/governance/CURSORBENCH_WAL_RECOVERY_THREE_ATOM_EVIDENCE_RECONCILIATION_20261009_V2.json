@@ -1,0 +1,75 @@
+{
+  "schema": "PROJECT_BRAIN_CURSORBENCH_WAL_RECOVERY_THREE_ATOM_EVIDENCE_RECONCILIATION_V2",
+  "date": "2026-10-09",
+  "status": "MINCUT_RECONCILED__WAL_PROVES_LOCAL_SOURCE_AND_PROVENANCE_ATOMS__DEMONSTRATES_BRAIN_CONTROLLED_AUDIT_PATTERN__DOES_NOT_DISCHARGE_CURRENT_CURSORBENCH_4_0_PROTOCOL_CONTINUITY_OR_TARGET_CONTEXT_BOUNDARY__ZERO_CREDIT",
+  "supersedes": {
+    "path": "canonical/governance/CURSORBENCH_WAL_RECOVERY_THREE_ATOM_EVIDENCE_RECONCILIATION_20261009_V1.json",
+    "git_blob_sha": "ed80bcbd499444a8cfd9a7940f02d2541e7e3bcd",
+    "reason": "V1_PRECEDED_THE_CURRENT_CURSORBENCH_INFORMATION_BOUNDARY_MINIMUM_CUT__V2_BINDS_THE_LOCAL_WAL_EVIDENCE_TO_THAT_NEWER_DECOMPOSITION_WITHOUT_CROSS_BENCHMARK_TRANSFER"
+  },
+  "information_boundary_mincut": {
+    "path": "canonical/governance/CURSORBENCH_PREVERIFIER_INFORMATION_BOUNDARY_MINCUT_20261009_V1.json",
+    "git_blob_sha": "a5c283e8e09f82ff10c9daaeea0951a304bd6e6d",
+    "independent_verification": {
+      "path": "canonical/verification/CURSORBENCH_PREVERIFIER_INFORMATION_BOUNDARY_MINCUT_INDEPENDENT_VERIFICATION_20261009_V1.json",
+      "git_blob_sha": "8325235535e9c41930c65bc516d9e841e693ad40"
+    },
+    "exact_external_unknown": "CURRENT_CURSORBENCH_4_0_USES_THE_PUBLISHED_PRODUCTION_HARNESS_PRETERMINAL_INFORMATION_BOUNDARY",
+    "external_protocol_unknown_count": 1,
+    "per_model_internal_audit_required": true
+  },
+  "wal_exact_context": {
+    "task": "wal-recovery-ordering",
+    "benchmark": "TERMINAL_BENCH_4_0",
+    "terminal_bench_ref": "452bf305c6daa62fc59061d22133a7cbc7c1572e",
+    "source_task_sha256": "f8e44418b9cb1329b1ac226d88a03c8c9654c496e1a32950ce31d768139a4ad3",
+    "typed_model_sha256": "642157445ee9cf869fcfc9020c4ab18ed216844f78a2f72119b313eab9b706b6",
+    "local_atom_truth": {
+      "SPEC_ACCEPT_SUPPORTED_TRANSFORM_KINDS_ONLY_V1": true,
+      "SPEC_ACCEPT_TYPED_SEMANTICS_BOUND_V1": true,
+      "SPEC_ACCEPT_FAILURE_MODE_COMPLETENESS_V1": true,
+      "SPEC_ACCEPT_DEPENDENCY_PROVENANCE_TRUTH_V1": true,
+      "SPEC_ACCEPT_NO_HIDDEN_VERIFIER_ACCESS_V1": false
+    },
+    "exact_open_requirement": "R13_NO_TASK_SPECIFIC_CHEATING",
+    "independent_acceptance_pass": false
+  },
+  "relation_to_mincut": {
+    "demonstrated_brain_controlled_mechanics": [
+      "LOSSLESS_RAW_TASK_SOURCE_CONTRACT_FROM_CONTENT_ADDRESSED_BYTES",
+      "EXACT_SOURCE_OBLIGATION_TO_TYPED_MODEL_MAPPING_AUDIT",
+      "EXACT_DEPENDENCY_AND_PROVENANCE_PROJECTION_AUDIT",
+      "PRODUCER_INDEPENDENT_CONTENT_ADDRESSED_REPLAY"
+    ],
+    "target_per_model_boundary_audit_satisfied": false,
+    "why_target_per_model_boundary_audit_not_satisfied": "WAL_IS_A_TERMINAL_BENCH_CONTEXT_AND_THE_EXISTING_AUDIT_EXPLICITLY_DID_NOT_PROVE_ABSENCE_OF_TASK_SPECIFIC_SOLUTION_INFORMATION__THE_MINCUT_REQUIRES_A_BOUNDARY_AUDIT_FOR_THE_ACTUAL_REACHED_CURSORBENCH_TARGET_CONTEXT",
+    "current_4_0_protocol_continuity_fact_satisfied": false,
+    "why_protocol_continuity_not_satisfied": "WAL_EVIDENCE_CONTAINS_NO_OWNER_AUTHORITY_BINDING_CURRENT_CURSORBENCH_4_0_TO_THE_PUBLISHED_PRODUCTION_HARNESS_INFORMATION_BOUNDARY",
+    "no_hidden_verifier_atom_truth_delta": 0,
+    "global_cursorbench_atom_truth_delta": 0
+  },
+  "scheduler": {
+    "reusable_internal_template": "ON_FIRST_REAL_CURSORBENCH_TARGET_CONTEXT__FREEZE_VISIBLE_INPUT_DIGESTS_BEFORE_MODEL_DERIVATION__REUSE_LOSSLESS_SOURCE_AND_PROVENANCE_AUDIT_SHAPE__ADD_THE_MINCUT_REQUIRED_BOUNDARY_RECEIPT_AND_INDEPENDENT_AUDIT",
+    "external_parallel_lane": "SEARCH_ONLY_FOR_EXPLICIT_CURRENT_CURSORBENCH_4_0_PRODUCTION_HARNESS_OR_PRETERMINAL_INPUT_BOUNDARY_CONTINUITY",
+    "target_context_precondition": "DO_NOT_BUILD_SOURCE_OR_PROVENANCE_RECEIPTS_FOR_AN_UNBOUND_NON_TARGET_CONTEXT_AND_CALL_THEM_CURSORBENCH_TRUTH",
+    "route_a_preemption": "ONLY_ON_MATERIAL_CURSOR_OR_EQUIVALENT_SCORING_SOURCE_DELTA"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_WAL_SATISFIES_THE_CURSORBENCH_TARGET_PER_MODEL_BOUNDARY_AUDIT",
+    "NO_CLAIM_CURRENT_CURSORBENCH_4_0_PROTOCOL_CONTINUITY_IS_PROVED",
+    "NO_CLAIM_SPEC_ACCEPT_NO_HIDDEN_VERIFIER_ACCESS_V1",
+    "NO_CLAIM_WAL_ATOM_TRUTH_TRANSFERS_TO_CURSORBENCH",
+    "NO_CURSORBENCH_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_CHECKPOINT_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "checkpoint_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
