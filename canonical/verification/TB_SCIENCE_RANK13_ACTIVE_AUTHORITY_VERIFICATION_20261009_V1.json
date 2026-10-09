@@ -1,0 +1,102 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK13_ACTIVE_AUTHORITY_VERIFICATION_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__RANK13_BRAIN_SIDE_ONE_SLOT_AUTHORITY_ACTIVE__TASK_NOT_STARTED__ZERO_ACCEPTANCE_AND_TERMINAL_CREDIT",
+  "base_main_sha": "c7b2dbc547f8ce3da374a49b483f55df803b60f4",
+  "exact_blobs": {
+    "action_intent": "71da798999dc3b183291b1005405b695de1328df",
+    "authority": "cbded0e74e6809b1c392da4e8401ee59c09db472",
+    "candidate": "5d65e6b0491dc53c09e45259d2108b0385ce3e8b",
+    "candidate_static_verification": "2fa0eeaebcbe800404975c922a7198a60a7907f2",
+    "live_preflight_binding": "51885c6aefb2975619f513ac15150a944d31adeb",
+    "v22_active_pointer": "02f426cfab375a676a4de451d66711062b47e8d6"
+  },
+  "public_live_gate": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "workflow_run_id": 37867504619,
+    "workflow_job_id": 113617666635,
+    "workflow_head_sha": "b0beac12e46091395824ba1e3f9f898e066958e5",
+    "conclusion": "success",
+    "public_receipt_blob": "84e51e8f1079d364275747f8afeb0996453b608d",
+    "artifact_id": 11588634226,
+    "artifact_digest": "sha256:6703bda3c20d16a401dbe6dbcf2ee8f562c8ec8fbb4a81fe0b1a7475a1feb9eb",
+    "required_status": "PASS__ZERO_BENCHMARK_EXPOSURE_MULTI_ACTION_LONG_PROMPT_TRANSPORT",
+    "observed_input_tokens": 7209,
+    "proposal_candidate_count": 3,
+    "proposal_action_ids": [
+      "PREFLIGHT_A",
+      "PREFLIGHT_B",
+      "PREFLIGHT_C"
+    ],
+    "dependency_edge_verified": true,
+    "benchmark_task_exposure": 0,
+    "benchmark_trials_executed": 0
+  },
+  "guard_validation": {
+    "github_private_pr_jobs": {
+      "load_bearing_run_id": 37869606350,
+      "drift_guard_run_id": 37869606394,
+      "runner_allocation": false,
+      "executed_steps": 0,
+      "interpretation": "INFRASTRUCTURE_FAILURE_BEFORE_RUNNER_ALLOCATION__NOT_A_GUARD_VERDICT"
+    },
+    "trusted_guard_decision_predicate_replay": {
+      "verdict": "PASS__ZERO_ERRORS",
+      "intent_blob": "71da798999dc3b183291b1005405b695de1328df",
+      "authority_blob": "cbded0e74e6809b1c392da4e8401ee59c09db472",
+      "v22_blob": "02f426cfab375a676a4de451d66711062b47e8d6",
+      "open_obligation_count": 13,
+      "tb_science_target_is_open": true,
+      "validated": [
+        "CANONICAL_GENERATION_AND_EXACT_BASE_BINDING",
+        "TERMINAL_OBJECTIVE_ACTIVE_PROGRAM_AND_CAPABILITY_TARGET_CONTINUITY",
+        "UNIQUE_CAUSAL_BLOCKER_LEASE_SERIALIZATION",
+        "RECONCILE_FRONTIER_NO_PROBE_ACTION_LEGALITY",
+        "RECURSIVE_OBS_REQUIRED_FIELD_AND_LAYER_COMPLETENESS",
+        "RECURSIVE_OBS_DELETION_FIRST_ORDER",
+        "ROUTE_FRONTIER_DISCOVERY_EXEMPTION_FOR_RECONCILE_FRONTIER",
+        "V22_ACTIVE_INTERFACE_EXTERNAL_RESULT_OR_ACCESS_BINDING",
+        "V22_CURRENTNESS_EXACT_STATE_MATCH",
+        "V22_ZERO_FRESH_REALITY_AND_ZERO_TERMINAL_CREDIT",
+        "LOAD_BEARING_TB_SCIENCE_OPEN_OBLIGATION_MEMBERSHIP",
+        "AUTHORITY_INTENT_EXACT_BLOB_BINDING"
+      ]
+    }
+  },
+  "authority_state": {
+    "execution_authority": true,
+    "fresh_reality_authority": true,
+    "public_execution_lease_published": false,
+    "task_started": false,
+    "result_present": false,
+    "authority_consumed": false,
+    "attempts_authorized": 1,
+    "retries_authorized": 0,
+    "replacement_allowed": false
+  },
+  "proved": [
+    "THE_FRESH_V8_LIVE_GATE_REQUIRED_BY_THE_RANK13_CANDIDATE_COMPLETED_SUCCESSFULLY_ON_THE_EXACT_CURRENT_ROUTE",
+    "THE_PUBLIC_RECEIPT_IS_CONTENT_BOUND_AND_MATCHES_CURRENT_PLANNER_COMMAND_POLICY_PREFLIGHT_MODEL_AND_LLAMA_CPP_IDENTITIES",
+    "ZERO_BENCHMARK_TASK_EXPOSURE_AND_ZERO_BENCHMARK_TRIALS_OCCURRED_DURING_PREFLIGHT",
+    "THE_CURRENT_ACTION_BINDS_EXISTING_REALITY_ONLY_AND_GENERATES_NO_NEW_TERMINAL_RELEVANT_REALITY",
+    "BRAIN_SIDE_RANK13_ONE_SLOT_EXECUTION_AUTHORITY_IS_ACTIVE",
+    "THE_BENCHMARK_TASK_HAS_NOT_STARTED_AND_THE_AUTHORITY_HAS_NOT_BEEN_CONSUMED",
+    "A_SEPARATE_EXACT_PUBLIC_EXECUTION_LEASE_AND_IMMEDIATE_PRESTART_REVALIDATION_ARE_STILL_REQUIRED"
+  ],
+  "hard_nonclaims": [
+    "NO_RANK13_TASK_CONTENT_READ",
+    "NO_RANK13_TASK_START",
+    "NO_RANK13_RESULT",
+    "NO_TB_SCIENCE_ACCEPTANCE_CREDIT",
+    "NO_TERMINAL_CREDIT",
+    "NO_CLAIM_GITHUB_PRIVATE_PR_GUARD_JOB_EXECUTED",
+    "NO_CLAIM_RANK13_WILL_PASS_AFTER_EXECUTION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
