@@ -83,6 +83,32 @@ def _dynamic_policy(row: Mapping[str,Any]) -> dict[str,Any]:
     }
 
 
+def _request_contract(row: Mapping[str,Any]) -> dict[str,Any]:
+    raw_keys=row.get("allowed_request_keys")
+    if not isinstance(raw_keys,list) or any(
+        not isinstance(x,str) or not x.strip() for x in raw_keys
+    ):
+        raise ZeroAmbientDFinalError("ALLOWED_REQUEST_KEYS_INVALID")
+    keys=[str(x).strip() for x in raw_keys]
+    if len(keys)!=len(set(keys)):
+        raise ZeroAmbientDFinalError("ALLOWED_REQUEST_KEYS_DUPLICATE")
+
+    raw_paths=row.get("request_path_fields") or []
+    if not isinstance(raw_paths,list) or any(
+        not isinstance(x,str) or not x.strip() for x in raw_paths
+    ):
+        raise ZeroAmbientDFinalError("REQUEST_PATH_FIELDS_INVALID")
+    paths=[str(x).strip() for x in raw_paths]
+    if len(paths)!=len(set(paths)):
+        raise ZeroAmbientDFinalError("REQUEST_PATH_FIELDS_DUPLICATE")
+    if not set(paths).issubset(set(keys)):
+        raise ZeroAmbientDFinalError("REQUEST_PATH_FIELD_NOT_ALLOWED_KEY")
+    return {
+      "allowed_request_keys":sorted(keys),
+      "request_path_fields":sorted(paths),
+    }
+
+
 def capability_contract(capability_id: str, row: Mapping[str,Any]) -> dict[str,Any]:
     return {
       "schema":CONTRACT_SCHEMA,
@@ -92,6 +118,7 @@ def capability_contract(capability_id: str, row: Mapping[str,Any]) -> dict[str,A
           row.get("physical_dispatch_kind") or "UNIFIED_FABRIC_V1"
       ),
       "dynamic_input_policy":_dynamic_policy(row),
+      "request_contract":_request_contract(row),
       "allowed_knowledge_channels":[],
       "allowed_effect_channels":[],
     }
@@ -157,21 +184,12 @@ def _stage_dynamic_inputs(
     clean=dict(request)
     clean.pop("d_input_files",None)
 
-    allowed_keys=row.get("allowed_request_keys")
-    if allowed_keys is not None:
-        if not isinstance(allowed_keys,list) or any(
-            not isinstance(x,str) or not x.strip() for x in allowed_keys
-        ):
-            raise ZeroAmbientDFinalError("ALLOWED_REQUEST_KEYS_INVALID")
-        expected=set(str(x).strip() for x in allowed_keys)
-        if set(clean)!=expected:
-            raise ZeroAmbientDFinalError("REQUEST_KEYS_OUTSIDE_CERTIFIED_CONTRACT")
+    request_contract=_request_contract(row)
+    expected=set(request_contract["allowed_request_keys"])
+    if set(clean)!=expected:
+        raise ZeroAmbientDFinalError("REQUEST_KEYS_OUTSIDE_CERTIFIED_CONTRACT")
 
-    path_fields=row.get("request_path_fields") or []
-    if not isinstance(path_fields,list) or any(
-        not isinstance(x,str) or not x.strip() for x in path_fields
-    ):
-        raise ZeroAmbientDFinalError("REQUEST_PATH_FIELDS_INVALID")
+    path_fields=request_contract["request_path_fields"]
     dynamic_paths={x["path"] for x in out}
     for field in path_fields:
         value=str(clean.get(field) or "").strip().replace("\\","/")
