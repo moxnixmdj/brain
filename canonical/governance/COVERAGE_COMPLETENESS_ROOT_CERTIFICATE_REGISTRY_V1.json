@@ -112,7 +112,7 @@
       "status": "FALSIFIED_CURRENT_EPISTEMIC_ENVELOPE",
       "claim_id": "fda1409a94d983f61888f08f3df99cad50dc36edc3f5feb01b6df20e31156eaa",
       "path": "canonical/verification/CC_R3_COUNTEREXAMPLE_20261009_V1.json",
-      "git_blob_sha": "bf6e8ef01894350c5d51abe53038cea315984ea3",
+      "git_blob_sha": "e707b115609dd475d258514eac26cbdb070870ac",
       "u_empty": false,
       "terminal_credit_delta": 0
     }
