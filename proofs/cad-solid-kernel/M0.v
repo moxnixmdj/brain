@@ -132,6 +132,7 @@ Proof.
   rewrite /collision_at /patch_x /patch_y /patch_z
           /plane_z0 /plane_z1 /affine_value /=.
   move=> [_ [_ [_ [_ [_ [_ Hz]]]]]].
+  rewrite !mul0r !add0r !addr0 in Hz.
   have hneq := @oner_neq0 R.
   by rewrite -Hz eqxx in hneq.
 Qed.
