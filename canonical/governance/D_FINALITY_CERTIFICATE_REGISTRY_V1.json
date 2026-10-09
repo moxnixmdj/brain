@@ -21,13 +21,16 @@
       "ACTIVE_VERIFIED_LEARNED_SKILLS": 0,
       "H100_VERIFIED_CAPABILITIES": 21,
       "CERTIFICATE_GATED_SELECTED_ROUTES": 1
-    }
+    },
+    "stdlib_tranche_annotated_count": 19
   },
   "rows": [
     {
       "capability_id": "bound:archive.tar_gz.create_from_manifest",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
-      "status": "PENDING_D_FINAL_CERTIFICATE"
+      "status": "PENDING_D_FINAL_CERTIFICATE",
+      "candidate_proof_class": "STDLIB_SIMPLE_LOCAL",
+      "adapter_git_blob_sha": "2ae62c04ef495d855ca8d46263b4cf05110b5648"
     },
     {
       "capability_id": "bound:archive.verify.tar_gz.gnu",
@@ -62,12 +65,16 @@
     {
       "capability_id": "bound:decision.synthesis.typed.stdlib",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
-      "status": "PENDING_D_FINAL_CERTIFICATE"
+      "status": "PENDING_D_FINAL_CERTIFICATE",
+      "candidate_proof_class": "STDLIB_SIMPLE_LOCAL",
+      "adapter_git_blob_sha": "d7c73c24d2038c40bfb38ea6f10749a15a2d5415"
     },
     {
       "capability_id": "bound:decision.synthesis.verify.stdlib",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
-      "status": "PENDING_D_FINAL_CERTIFICATE"
+      "status": "PENDING_D_FINAL_CERTIFICATE",
+      "candidate_proof_class": "STDLIB_SIMPLE_LOCAL",
+      "adapter_git_blob_sha": "63cf325320c7b91bf48ea2f2769c999c5a090929"
     },
     {
       "capability_id": "bound:document.convert.markdown_pdf.pandoc_weasyprint",
@@ -87,27 +94,37 @@
     {
       "capability_id": "bound:docx.document.verify.intent_ooxml",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
-      "status": "PENDING_D_FINAL_CERTIFICATE"
+      "status": "PENDING_D_FINAL_CERTIFICATE",
+      "candidate_proof_class": "STDLIB_DYNAMIC_LOCAL",
+      "adapter_git_blob_sha": "937944128257c10d95038b99dd3d120cd3104ae1"
     },
     {
       "capability_id": "bound:docx.document.verify.ooxml",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
-      "status": "PENDING_D_FINAL_CERTIFICATE"
+      "status": "PENDING_D_FINAL_CERTIFICATE",
+      "candidate_proof_class": "STDLIB_SIMPLE_LOCAL",
+      "adapter_git_blob_sha": "41c2d9043b65376e13366cbdcd2d35a2cf12b2dc"
     },
     {
       "capability_id": "bound:evidence.claim_relation.generic_units.stdlib",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
-      "status": "PENDING_D_FINAL_CERTIFICATE"
+      "status": "PENDING_D_FINAL_CERTIFICATE",
+      "candidate_proof_class": "STDLIB_SIMPLE_LOCAL",
+      "adapter_git_blob_sha": "d66a7eb30774f66160b698d8082947776888293d"
     },
     {
       "capability_id": "bound:evidence.claim_spec.bind.explicit_comparison.stdlib",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
-      "status": "PENDING_D_FINAL_CERTIFICATE"
+      "status": "PENDING_D_FINAL_CERTIFICATE",
+      "candidate_proof_class": "STDLIB_DYNAMIC_LOCAL",
+      "adapter_git_blob_sha": "48fd058430d8d361fc75beced567c7b6d1166531"
     },
     {
       "capability_id": "bound:http.json.fetch_from_state",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
-      "status": "PENDING_D_FINAL_CERTIFICATE"
+      "status": "PENDING_D_FINAL_CERTIFICATE",
+      "candidate_proof_class": "STDLIB_WORLD_IO",
+      "adapter_git_blob_sha": "269e7b0f1aee8cac785f7f0e60338a1562a45201"
     },
     {
       "capability_id": "bound:image.code.decode.zbarimg",
@@ -162,47 +179,65 @@
     {
       "capability_id": "bound:plain_goal.bound_capability.grounding.stdlib",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
-      "status": "PENDING_D_FINAL_CERTIFICATE"
+      "status": "PENDING_D_FINAL_CERTIFICATE",
+      "candidate_proof_class": "STDLIB_DYNAMIC_LOCAL",
+      "adapter_git_blob_sha": "f2d96dd40c01cde214443108fe5f9f372cf04444"
     },
     {
       "capability_id": "bound:plain_goal.bound_capability.grounding.verify.stdlib",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
-      "status": "PENDING_D_FINAL_CERTIFICATE"
+      "status": "PENDING_D_FINAL_CERTIFICATE",
+      "candidate_proof_class": "STDLIB_SIMPLE_LOCAL",
+      "adapter_git_blob_sha": "d4aa64dc995845fcf8045f14f476f84b7f1d9cb8"
     },
     {
       "capability_id": "bound:pypi.provenance.audit_live_artifact",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
-      "status": "PENDING_D_FINAL_CERTIFICATE"
+      "status": "PENDING_D_FINAL_CERTIFICATE",
+      "candidate_proof_class": "STDLIB_WORLD_IO",
+      "adapter_git_blob_sha": "fd8af415d7846be0f2ff23aa1674df77af504d03"
     },
     {
       "capability_id": "bound:python.source.audit.ast",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
-      "status": "PENDING_D_FINAL_CERTIFICATE"
+      "status": "PENDING_D_FINAL_CERTIFICATE",
+      "candidate_proof_class": "STDLIB_SIMPLE_LOCAL",
+      "adapter_git_blob_sha": "f708d51a480f3e49b3c9e4e0c0a34239094228ea"
     },
     {
       "capability_id": "bound:python.tests.audit.unittest",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
-      "status": "PENDING_D_FINAL_CERTIFICATE"
+      "status": "PENDING_D_FINAL_CERTIFICATE",
+      "candidate_proof_class": "STDLIB_SUBPROCESS_LOCAL",
+      "adapter_git_blob_sha": "b6fe40131583587e21f9c1e369679de140349e81"
     },
     {
       "capability_id": "bound:source.authority.identity.ror",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
-      "status": "PENDING_D_FINAL_CERTIFICATE"
+      "status": "PENDING_D_FINAL_CERTIFICATE",
+      "candidate_proof_class": "STDLIB_WORLD_IO",
+      "adapter_git_blob_sha": "9396ff7169b274af9bbfbe736e004587631e3b05"
     },
     {
       "capability_id": "bound:source.evidence.extract.objective_grounded.stdlib",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
-      "status": "PENDING_D_FINAL_CERTIFICATE"
+      "status": "PENDING_D_FINAL_CERTIFICATE",
+      "candidate_proof_class": "STDLIB_WORLD_IO",
+      "adapter_git_blob_sha": "227877b9f7c80c8e810a1042a0bad5c0ed94577d"
     },
     {
       "capability_id": "bound:source.objective_relevance.rank.bm25",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
-      "status": "PENDING_D_FINAL_CERTIFICATE"
+      "status": "PENDING_D_FINAL_CERTIFICATE",
+      "candidate_proof_class": "STDLIB_DYNAMIC_LOCAL",
+      "adapter_git_blob_sha": "380e08142841fbc1e641f017b91f4c0fe5fb5680"
     },
     {
       "capability_id": "bound:sqlite.table.create_from_json_records",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
-      "status": "PENDING_D_FINAL_CERTIFICATE"
+      "status": "PENDING_D_FINAL_CERTIFICATE",
+      "candidate_proof_class": "STDLIB_SIMPLE_LOCAL",
+      "adapter_git_blob_sha": "d729d19ba5c0808273268426e7450f1db74a5c07"
     },
     {
       "capability_id": "bound:sqlite.table.verify_against_json_records",
@@ -212,7 +247,9 @@
     {
       "capability_id": "bound:terminal.kstar.root.assess.stdlib",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
-      "status": "PENDING_D_FINAL_CERTIFICATE"
+      "status": "PENDING_D_FINAL_CERTIFICATE",
+      "candidate_proof_class": "STDLIB_SIMPLE_LOCAL",
+      "adapter_git_blob_sha": "c313dfa5f253d0065d56e0c66aae316fea466f03"
     },
     {
       "capability_id": "bound:web.browser.rendered.capture.chromedriver",
@@ -222,7 +259,9 @@
     {
       "capability_id": "bound:web.release.verify.independent_http",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
-      "status": "PENDING_D_FINAL_CERTIFICATE"
+      "status": "PENDING_D_FINAL_CERTIFICATE",
+      "candidate_proof_class": "STDLIB_WORLD_IO",
+      "adapter_git_blob_sha": "126b46cd2cd11dd12bfa16aa0e337349fe0d70bf"
     },
     {
       "capability_id": "bound:xlsx.table.create_from_json_records",
@@ -475,7 +514,8 @@
     "ROW_BECOMES_VERIFIED_D_FINAL_CURRENT_ONLY_AFTER_CURRENT_POLICY_CURRENT_CLOSURE_FRESH_REPLAY_INDEPENDENT_REPLAY_DONOR_ZERO_AND_UNDECLARED_DEPENDENCIES_ZERO",
     "NEW_LIVE_ADMITTED_IDENTITY_IS_NOT_D_FINAL_BY_DEFAULT",
     "REMOVED_LIVE_IDENTITY_CANNOT_RETAIN_LIVE_OWNERSHIP_BY_STALE_CERTIFICATE",
-    "SAME_EPOCH_PROMOTION_DOES_NOT_EXPAND_CURRENT_D_AUTHORITY"
+    "SAME_EPOCH_PROMOTION_DOES_NOT_EXPAND_CURRENT_D_AUTHORITY",
+    "CANDIDATE_PROOF_CLASS_IS_SCHEDULING_METADATA_ONLY_AND_NEVER_D_FINAL_CREDIT"
   ],
   "hard_nonclaims": [
     "NO_CURRENT_ROW_IS_D_FINAL",
