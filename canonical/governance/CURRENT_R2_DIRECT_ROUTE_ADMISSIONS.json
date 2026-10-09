@@ -5,7 +5,7 @@
   "binding_semantics": "MUTABLE_CURRENT_POINTER_PATH_IDENTITY__IMMUTABLE_TARGET_GIT_BLOB_BOUND",
   "target": {
     "path": "canonical/governance/R2_DIRECT_ROUTE_DYNAMIC_ADMISSIONS_20261009_V1.json",
-    "git_blob_sha": "183c4f9f6ddc5bbdd793d1da53cfc2fc037a127a",
+    "git_blob_sha": "6ca1b9b9395805f00634cd24220425466d4b1c95",
     "schema": "PROJECT_BRAIN_R2_DIRECT_ROUTE_DYNAMIC_ADMISSIONS_V1"
   },
   "incremental_spend_usd": 0,
