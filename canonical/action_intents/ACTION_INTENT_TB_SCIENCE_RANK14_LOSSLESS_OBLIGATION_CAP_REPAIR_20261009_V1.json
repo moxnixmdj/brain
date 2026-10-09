@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_TB_SCIENCE_RANK14_LOSSLESS_OBLIGATION_CAP_REPAIR_20261009_V1",
+  "date": "2026-10-09",
+  "action_id": "TB_SCIENCE_RANK14_REMOVE_FALSE_RAW_OBLIGATION_CARDINALITY_CEILING",
+  "status": "ACTIVE_INTENT__INTERNAL_REPAIR__RANK14_UNCONSUMED__ZERO_CREDIT",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "target_obligation": "TB_SCIENCE_GE_58_7",
+  "action_kind": "REPAIR_CAPABILITY",
+  "causal_blocker": "RANK14_PRESTART_READ_PRODUCED_MORE_THAN_64_LOSSLESS_RAW_TASK_OBLIGATIONS__AGENT_LAYER_HARD_CAP_ABORTED_BEFORE_PLANNER_TOKEN_BUDGET_COULD_BE_MEASURED",
+  "highest_leverage_now": true,
+  "expected_parent_frontier_change": "LOSSLESS_TASK_SCOPE_NO_LONGER_FAILS_ON_ARBITRARY_64_SEGMENT_CEILING__EXACT_CONTEXT_GUARD_BECOMES_THE_RESOURCE_ADMISSION_BOUNDARY",
+  "stop_condition": "MORE_THAN_64_EXACT_RAW_SOURCE_SEGMENTS_COMPILE_AND_LOCALIZE_WITH_ZERO_DROPPED_OBLIGATIONS__CURRENT_SMALL_SCOPE_REGRESSION_PASSES__NO_RANK14_TASK_START",
+  "load_bearing_primary": {
+    "open_obligation_ids": [],
+    "constructive_gap_for_open_obligation_ids": [
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "scope_complete_discharge": false,
+    "expected_obligation_discharge_lcb": "0",
+    "expected_obligation_unlock_lcb": "1/13",
+    "success_probability_lcb": "1",
+    "wall_clock_cost_ub": "1"
+  },
+  "evidence": {
+    "public_run_id": 37880547075,
+    "public_artifact_id": 11594189159,
+    "slot_id": "terminal-bench-science/inverse-lithography::trial-0",
+    "task_digest": "sha256:8c4da4b5b3a00283335e83dda92584aaf9293ff773bc43f2bf95eb0e2c0f8530",
+    "task_read": true,
+    "task_started": false,
+    "execution_authority_consumed": false,
+    "guard_status": "PREEXPOSURE_ABORT_NONCONSUMING__TOKEN_GUARD_ERROR",
+    "exact_error": "SCIENCE_RAW_TASK_OBLIGATION_COUNT_INVALID",
+    "prior_agent_blob": "5e851d884b9784c6dc6fc9f83c08c502e41c3bdc"
+  },
+  "repair_law": "PRESERVE_EVERY_LOSSLESS_RAW_SOURCE_OBLIGATION__DO_NOT_USE_ARBITRARY_OBLIGATION_COUNT_AS_RESOURCE_POLICY__FAIL_CLOSED_LATER_ON_EXACT_PLANNER_TOKEN_BUDGET_OR_OTHER_REAL_RESOURCE_BOUND",
+  "safety": {
+    "benchmark_task_content_persisted_in_brain": false,
+    "new_benchmark_task_read_authority": false,
+    "benchmark_trials_consumed": 0,
+    "rank14_task_start_authority": false,
+    "retries_authorized": 0,
+    "incremental_spend_usd_max": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

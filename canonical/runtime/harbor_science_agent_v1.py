@@ -203,8 +203,6 @@ async def _declared_output_gate(
             })
     return failures
 
-MAX_RAW_TASK_OBLIGATIONS = 64
-
 def _compile_lossless_task_scope(goal: str) -> tuple[dict[str, Any], dict[str, Any], list[dict[str, Any]]]:
     """Compile the exact raw goal into non-droppable Brain-owned acceptance scope."""
     contract = compile_raw_task_contract(
@@ -216,8 +214,11 @@ def _compile_lossless_task_scope(goal: str) -> tuple[dict[str, Any], dict[str, A
         raise RuntimeError("SCIENCE_RAW_TASK_CONTRACT_FAILED:" + ";".join(contract.get("errors") or []))
     acceptance = contract.get("acceptance_contract") or {}
     obligations = acceptance.get("obligations") or []
-    if not obligations or len(obligations) > MAX_RAW_TASK_OBLIGATIONS:
+    if not obligations:
         raise RuntimeError("SCIENCE_RAW_TASK_OBLIGATION_COUNT_INVALID")
+    # Do not impose a second semantic/cardinality ceiling above the lossless
+    # source contract. Resource admissibility belongs to the exact planner
+    # token-budget guard, which can fail closed without dropping obligations.
     localization = localize_raw_task_acceptance(contract)
     if localization.get("pass") is not True:
         raise RuntimeError("SCIENCE_RAW_TASK_LOCALIZATION_FAILED:" + str(localization.get("reason") or "UNKNOWN"))

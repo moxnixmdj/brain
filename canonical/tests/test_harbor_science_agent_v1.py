@@ -101,6 +101,20 @@ class ScienceAgentTests(unittest.TestCase):
         self.assertTrue(all(r["acceptance_receipt_required"] for r in rows))
         self.assertEqual(localized["accounted_obligation_count"],2)
 
+    def test_lossless_raw_task_scope_preserves_more_than_64_obligations(self):
+        goal=" ".join(f"Create item{i:03d}." for i in range(80))
+        contract,localized,rows=s._compile_lossless_task_scope(goal)
+        self.assertTrue(contract["pass"],contract)
+        self.assertTrue(localized["pass"],localized)
+        self.assertEqual(len(rows),80)
+        self.assertEqual(localized["required_obligation_count"],80)
+        self.assertEqual(localized["accounted_obligation_count"],80)
+        self.assertEqual(
+            {r["obligation_id"] for r in rows},
+            set(contract["acceptance_contract"]["required_obligation_ids"]),
+        )
+        self.assertTrue(all(r["acceptance_receipt_required"] for r in rows))
+
     def test_submission_ready_never_claims_raw_task_acceptance(self):
         env,result=self.run_goal([{
             "material_requirements":["R1"],
