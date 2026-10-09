@@ -24,6 +24,11 @@ CARRIER_PATH = "canonical/governance/MISSION_SUFFICIENT_SEMANTIC_CARRIER_V1.json
 CARRIER_RUNTIME_PATH = "canonical/runtime/mission_carrier_factorization_v1.py"
 CARRIER_TESTS_PATH = "canonical/tests/test_mission_carrier_factorization_v1.py"
 CLAIM_SCOPE_PATH = "canonical/governance/COVERAGE_COMPLETENESS_CLAIM_SCOPE_V1.json"
+FALSIFIER_PATH = "canonical/runtime/root_theorem_falsifier_v1.py"
+FALSIFIER_TESTS_PATH = "canonical/tests/test_root_theorem_falsifier_v1.py"
+R4_BINDING_TESTS_PATH = "canonical/tests/test_root_theorem_r4_binding_coherence_v1.py"
+LIVE_VALIDATOR_PATH = "canonical/runtime/root_theorem_live_binding_v1.py"
+LIVE_VALIDATOR_TESTS_PATH = "canonical/tests/test_root_theorem_live_binding_v1.py"
 
 
 def git_blob_sha(data: bytes) -> str:
@@ -57,6 +62,11 @@ def validate_documents(
     carrier_tests_blob_sha: str,
     claim_scope: Mapping[str, Any],
     claim_scope_blob_sha: str,
+    falsifier_blob_sha: str,
+    falsifier_tests_blob_sha: str,
+    r4_binding_tests_blob_sha: str,
+    live_validator_blob_sha: str,
+    live_validator_tests_blob_sha: str,
 ) -> dict[str, Any]:
     errors: list[str] = []
 
@@ -138,6 +148,20 @@ def validate_documents(
         claim_carrier.get("global_open_ended_mission_completion_derivable") is False,
     )
 
+    falsifier_ref = binding.get("falsifier") or {}
+    _fail(errors, "BINDING_FALSIFIER_PATH_DRIFT", falsifier_ref.get("path") == FALSIFIER_PATH)
+    _fail(errors, "BINDING_FALSIFIER_BLOB_STALE", falsifier_ref.get("git_blob_sha") == falsifier_blob_sha)
+    _fail(errors, "BINDING_FALSIFIER_TESTS_PATH_DRIFT", falsifier_ref.get("tests_path") == FALSIFIER_TESTS_PATH)
+    _fail(errors, "BINDING_FALSIFIER_TESTS_BLOB_STALE", falsifier_ref.get("tests_git_blob_sha") == falsifier_tests_blob_sha)
+    _fail(errors, "BINDING_R4_TESTS_PATH_DRIFT", falsifier_ref.get("r4_binding_tests_path") == R4_BINDING_TESTS_PATH)
+    _fail(errors, "BINDING_R4_TESTS_BLOB_STALE", falsifier_ref.get("r4_binding_tests_git_blob_sha") == r4_binding_tests_blob_sha)
+
+    validator_ref = binding.get("live_binding_validator") or {}
+    _fail(errors, "BINDING_LIVE_VALIDATOR_PATH_DRIFT", validator_ref.get("path") == LIVE_VALIDATOR_PATH)
+    _fail(errors, "BINDING_LIVE_VALIDATOR_BLOB_STALE", validator_ref.get("git_blob_sha") == live_validator_blob_sha)
+    _fail(errors, "BINDING_LIVE_VALIDATOR_TESTS_PATH_DRIFT", validator_ref.get("tests_path") == LIVE_VALIDATOR_TESTS_PATH)
+    _fail(errors, "BINDING_LIVE_VALIDATOR_TESTS_BLOB_STALE", validator_ref.get("tests_git_blob_sha") == live_validator_tests_blob_sha)
+
     root_ref = binding.get("root_theorem") or {}
     _fail(errors, "BINDING_ROOT_PATH_DRIFT", root_ref.get("path") == THEOREM_PATH)
     _fail(errors, "BINDING_ROOT_BLOB_STALE", root_ref.get("git_blob_sha") == root_theorem_blob_sha)
@@ -189,6 +213,11 @@ def validate_repo(root: Path) -> dict[str, Any]:
     carrier_runtime_path = root / CARRIER_RUNTIME_PATH
     carrier_tests_path = root / CARRIER_TESTS_PATH
     claim_scope_path = root / CLAIM_SCOPE_PATH
+    falsifier_path = root / FALSIFIER_PATH
+    falsifier_tests_path = root / FALSIFIER_TESTS_PATH
+    r4_binding_tests_path = root / R4_BINDING_TESTS_PATH
+    live_validator_path = root / LIVE_VALIDATOR_PATH
+    live_validator_tests_path = root / LIVE_VALIDATOR_TESTS_PATH
 
     mission_bytes = mission_path.read_bytes()
     theorem_bytes = theorem_path.read_bytes()
@@ -213,4 +242,9 @@ def validate_repo(root: Path) -> dict[str, Any]:
         carrier_tests_blob_sha=git_blob_sha(carrier_tests_path.read_bytes()),
         claim_scope=load_json(claim_scope_path),
         claim_scope_blob_sha=git_blob_sha(claim_scope_bytes),
+        falsifier_blob_sha=git_blob_sha(falsifier_path.read_bytes()),
+        falsifier_tests_blob_sha=git_blob_sha(falsifier_tests_path.read_bytes()),
+        r4_binding_tests_blob_sha=git_blob_sha(r4_binding_tests_path.read_bytes()),
+        live_validator_blob_sha=git_blob_sha(live_validator_path.read_bytes()),
+        live_validator_tests_blob_sha=git_blob_sha(live_validator_tests_path.read_bytes()),
     )

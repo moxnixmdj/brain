@@ -4,13 +4,13 @@
   "status": "ACTIVE_SCOPE_TRUTH_REPAIR__ROOT_THEOREM_IS_CLAIM_SCOPED__ZERO_CREDIT",
   "mission": {
     "path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
-    "git_blob_sha": "52b98f8019938fa7d8164e6a47e359ffb0faeb6a",
+    "git_blob_sha": "2b37b3185e03b55678d7d394c8d29202a4b3ab48",
     "real_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
     "terminality": "OPEN_ENDED_CAPABILITY_OPTIMIZATION"
   },
   "root_theorem": {
     "path": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_THEOREM_V1.json",
-    "git_blob_sha": "0825ee841e11e3e439b2c2d530a25de1ae0a1255"
+    "git_blob_sha": "4e2a77fc661a386f1affb4297ec9739a583872eb"
   },
   "claim_semantics": {
     "quantification": "FOR_EACH_FROZEN_CERTIFICATION_CLAIM_C",
@@ -68,5 +68,10 @@
     ],
     "transport_rule": "NO_CROSS_CLAIM_FACTORIZATION_TRANSPORT_WITHOUT_EXPLICIT_SCOPE_AND_SEMANTICS_PRESERVATION_PROOF",
     "global_open_ended_mission_completion_derivable": false
+  },
+  "currentness_repair": {
+    "status": "BOUND_TO_CURRENT_MISSION_AND_ROOT_THEOREM",
+    "pr": 3786,
+    "terminal_credit_delta": 0
   }
 }

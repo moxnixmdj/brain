@@ -189,15 +189,15 @@
     "r4_cross_binding_symbolic_engine": "WOLFRAM_LANGUAGE"
   },
   "reconciliation": {
-    "current_base_commit": "0dac48cab2ae3334e6d00bf35d0c2a988b29aa42",
-    "current_terminal_authority": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+    "current_base_commit": "b1e19d7a45f96a40aadba95c17b712e406af0965",
+    "current_terminal_authority": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
     "ancestor_action_intent": "canonical/action_intents/ACTION_INTENT_TERMINAL_FOUR_INVARIANT_COLLAPSE_20261007_V1.json",
     "stale_specialized_pr": {
       "number": 2206,
       "status": "CLOSED_AS_SUPERSEDED_LIVE_INTEGRATION_VEHICLE",
       "preserve_evidence": true
     },
-    "active_pr": 3768
+    "active_pr": 3786
   },
   "accounting": {
     "incremental_spend_usd": 0,
@@ -218,7 +218,7 @@
   ],
   "mission_objective_binding": {
     "path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
-    "git_blob_sha": "52b98f8019938fa7d8164e6a47e359ffb0faeb6a",
+    "git_blob_sha": "2b37b3185e03b55678d7d394c8d29202a4b3ab48",
     "real_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
     "opus_5_5_role": "FIRST_FRONTIER_CHECKPOINT_NOT_TERMINAL_OBJECTIVE"
   },
@@ -276,5 +276,12 @@
     "stale_or_foreign_binding": "R4_STALE_OR_FOREIGN_BINDING",
     "naked_boolean_trust_sufficient": false,
     "cross_binding_composition_forbidden": true
+  },
+  "r4_live_binding_currentness": {
+    "status": "VERIFIED_CURRENT_BYTES_PENDING_FINAL_MERGE",
+    "required_validator": "canonical/runtime/root_theorem_live_binding_v1.py",
+    "verification_path": "canonical/verification/R4_LIVE_BINDING_CURRENTNESS_REPAIR_VERIFY_20261009_V1.json",
+    "rule": "ALL_CONTENT_ADDRESSED_R4_DEPENDENCIES_MUST_MATCH_CURRENT_REPO_BYTES",
+    "zero_credit": true
   }
 }
