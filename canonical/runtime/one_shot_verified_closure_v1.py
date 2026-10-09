@@ -165,6 +165,13 @@ def _canonical_r2_residual(root: Path) -> dict[str, Any]:
         isinstance(mechanism, Mapping)
         and mechanism.get("universal_positive_action_coverage_closed") is True
     )
+    raw_hard_frontier = doc.get("remaining_hard_frontier")
+    if isinstance(raw_hard_frontier, str):
+        remaining_hard_frontier = [raw_hard_frontier] if raw_hard_frontier else []
+    elif isinstance(raw_hard_frontier, list):
+        remaining_hard_frontier = deepcopy(raw_hard_frontier)
+    else:
+        remaining_hard_frontier = []
     return {
         "authority_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
         "authority_sha256": authority_sha256,
@@ -172,7 +179,7 @@ def _canonical_r2_residual(root: Path) -> dict[str, Any]:
         "primary_primitive": doc.get("primary_primitive"),
         "primary_primitive_state": doc.get("primary_primitive_state"),
         "remaining_problem_class": doc.get("remaining_problem_class"),
-        "remaining_hard_frontier": deepcopy(list(doc.get("remaining_hard_frontier") or [])),
+        "remaining_hard_frontier": remaining_hard_frontier,
         "universal_positive_action_coverage_closed": positive_coverage_closed,
         "current_internal_unsolved_cells": sorted(
             open_cells, key=lambda row: row["cell_id"]
