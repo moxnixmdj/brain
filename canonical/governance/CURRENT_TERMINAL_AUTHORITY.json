@@ -962,6 +962,15 @@
         "git_blob_sha": "81dd440f5d5afdfe60a4194d882189abc88f1ecd"
       },
       "note": "EXACT_V5_COMMON_POLICY_BRANCH_UNREFUTED_BY_BOUND_HISTORICAL_FAILURE_RECEIPTS__WHOLE_SCOPE_ADEQUACY_UNPROVED__ZERO_CREDIT"
+    },
+    "cursorbench_v5_advanced_coding_residual_basis_20261009_v1": {
+      "path": "canonical/governance/CURSORBENCH_V5_ADVANCED_CODING_RESIDUAL_BASIS_REDUCTION_20261009_V1.json",
+      "git_blob_sha": "7d2d2e2a271bd893a59c33e6cb7ce5e2e505dbf8",
+      "verification": {
+        "path": "canonical/verification/CURSORBENCH_V5_ADVANCED_CODING_RESIDUAL_BASIS_RECOMPUTE_20261009_V1.json",
+        "git_blob_sha": "f1d0e249922d16b91f4dc5ea9a7c0ce27cbdf88c"
+      },
+      "note": "FOUR_CANONICAL_ADVANCED_CODING_RESIDUALS_REDUCED_TO_TWO_BY_EXACT_REUSE__ZERO_BENCHMARK_CREDIT"
     }
   },
   "live_truth": {
@@ -1526,7 +1535,18 @@
     "cursorbench_selector_work_authorized_now": false,
     "cursorbench_next_proof_object": "CURSORBENCH_V5_TARGET_RELEVANT_POLICY_ADEQUACY_REGION_V1",
     "r2_sec_standard_xbrl_companyconcept_source_native_semantics_bound": true,
-    "r2_sec_standard_xbrl_source_native_policy_adequacy_claimed": false
+    "r2_sec_standard_xbrl_source_native_policy_adequacy_claimed": false,
+    "cursorbench_advanced_coding_canonical_residual_count": 4,
+    "cursorbench_advanced_coding_reused_discharged_residual_count": 2,
+    "cursorbench_advanced_coding_surviving_residual_count": 2,
+    "cursorbench_advanced_coding_surviving_residual_ids": [
+      "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+      "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001"
+    ],
+    "cursorbench_structured_method_contract_reproof_required": false,
+    "cursorbench_trajectory_failure_localization_reproof_required": false,
+    "cursorbench_next_contract_residual": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+    "cursorbench_cad_contract_dormant_until_target_relevant_membership_or_family_closure": true
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -2226,7 +2246,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 70,
+  "pointer_revision": 71,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
