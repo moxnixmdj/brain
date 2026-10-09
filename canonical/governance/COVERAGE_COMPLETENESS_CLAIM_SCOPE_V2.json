@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_COVERAGE_COMPLETENESS_CLAIM_SCOPE_V2",
+  "date": "2026-10-09",
+  "status": "ACTIVE_V2_STRUCTURAL_CLAIM_SCOPE__MISSION_SEMANTICS_BOUND__AUTHORIZATION_SEPARATE__ZERO_CREDIT",
+  "supersedes_for_new_ccrt_claims": "canonical/governance/COVERAGE_COMPLETENESS_CLAIM_SCOPE_V1.json",
+  "mission_semantic_authority": {
+    "path": "canonical/governance/MISSION_SEMANTIC_AUTHORITY_V1.json",
+    "git_blob_sha": "71822fa590b3733fc00f4f295e3fce284303f820",
+    "mission_semantics_sha256": "4d3d7866ad8ee54606a11791f53519eef15a80700bd5dcc221ec0da676ceb942"
+  },
+  "claim_semantics": {
+    "quantification": "FOR_EACH_FROZEN_AUTHORIZED_CERTIFICATION_CLAIM_C",
+    "indexed_sets": [
+      "B_real[C]",
+      "B_plus[C]",
+      "G_minus[C]",
+      "G_real[C]"
+    ],
+    "theorem": "R1(C) AND R2(C) AND R3(C) AND R4(C) => B_real[C] SUBSETEQ G_real[C]",
+    "conclusion_name": "CLAIM_SOUND[C]",
+    "global_open_ended_mission_completion_derivable": false
+  },
+  "required_claim_core_fields": [
+    "claim_kind",
+    "mission_semantics_sha256",
+    "scope_sha256",
+    "target_predicate_sha256",
+    "semantics_sha256",
+    "epoch",
+    "authority_id"
+  ],
+  "allowed_claim_kinds": [
+    "CHECKPOINT_ACCEPTANCE",
+    "PROPERTY_CERTIFICATE",
+    "BOUNDED_SUBGOAL",
+    "EXECUTION_OBLIGATION"
+  ],
+  "structural_guard": {
+    "path": "canonical/runtime/coverage_claim_scope_guard_v2.py",
+    "structural_only": true,
+    "mission_authorization_proved": false
+  },
+  "authorization_required": {
+    "policy": "canonical/governance/COVERAGE_CLAIM_AUTHORIZATION_POLICY_V1.json",
+    "guard": "canonical/runtime/coverage_claim_authorization_guard_v1.py",
+    "rule": "A_STRUCTURALLY_VALID_CLAIM_HAS_ZERO_CCRT_GOODNESS_AUTHORITY_UNTIL_EXACT_MISSION_AUTHORIZATION_AND_INDEPENDENT_VERIFICATION_PASS"
+  },
+  "hard_rules": [
+    "STRUCTURAL_SCOPE_VALIDITY_IS_NOT_MISSION_AUTHORIZATION",
+    "AUTHORITY_ID_STRING_IS_NOT_AUTHORIZATION",
+    "ARBITRARY_TARGET_OR_SEMANTICS_HASH_CANNOT_ENTER_G_MINUS",
+    "MISSION_POINTER_BLOB_IS_NOT_PART_OF_CLAIM_ID",
+    "MISSION_SEMANTICS_DIGEST_IS_PART_OF_CLAIM_ID",
+    "GLOBAL_OPEN_ENDED_MISSION_COMPLETE_IS_NOT_AN_ALLOWED_CLAIM_KIND"
+  ],
+  "accounting": {
+    "fresh_reality_units_consumed": 0,
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
