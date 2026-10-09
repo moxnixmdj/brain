@@ -78,7 +78,7 @@ def _validate_package(pkg):
  normalized=producer._normalize(problem)
  evid_ids={x["id"] for x in normalized["evidence"]}
  roles=pkg.get("role_evidence_ids")
- if not isinstance(roles,Mapping) or tuple(roles.keys())!=ROLE_KEYS[leaf]: raise ValueError("FINANCE_ROLE_PARTITION_KEYS_INVALID")
+ if not isinstance(roles,Mapping) or set(roles)!=set(ROLE_KEYS[leaf]): raise ValueError("FINANCE_ROLE_PARTITION_KEYS_INVALID")
  seen=set()
  for role in ROLE_KEYS[leaf]:
   ids=roles.get(role)
