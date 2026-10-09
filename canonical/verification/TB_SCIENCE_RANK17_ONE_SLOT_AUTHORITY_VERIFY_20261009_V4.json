@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK17_ONE_SLOT_AUTHORITY_VERIFY_20261009_V4",
+  "date": "2026-10-09",
+  "status": "PASS__RANK17_V4_BOUND_TO_V32_NONCONSUMING_ABORT_AND_VERIFIED_RAW_TASK_REPAIR__TASK_READ_WITHHELD_PENDING_PUBLIC_RESEAL__ZERO_CREDIT",
+  "authority": {
+    "path": "canonical/governance/TB_SCIENCE_RANK17_ONE_SLOT_EXECUTION_AUTHORITY_20261009_V4.json",
+    "git_blob_sha": "ebbe7b3d4707509bde94dd05f54dede77b8f152f"
+  },
+  "ledger": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261009_V32.json",
+    "git_blob_sha": "646e14081867ba2b394ba920d1133b92938851fb",
+    "consumed_slots": 16,
+    "next_rank": 17
+  },
+  "preexposure_abort": {
+    "path": "canonical/verification/TB_SCIENCE_RANK17_V6_PREEXPOSURE_ABORT_TRUTH_20261009_V1.json",
+    "git_blob_sha": "7bb8e234fbe4458c9a1e97c82aba2becfa1c895e",
+    "task_started": false,
+    "benchmark_trials_consumed": 0
+  },
+  "repair": {
+    "path": "canonical/verification/TB_SCIENCE_RANK17_RAW_TASK_PUNCTUATION_REPAIR_VERIFY_20261009_V1.json",
+    "git_blob_sha": "43890776ca25284e8f7db33952ec1af6e07e577d",
+    "pass": true,
+    "exact_lossless_raw_task_blob": "de5fbd7af64303d5e6d4ecb8f8a16199bcf18da9",
+    "exact_explicit_requirement_index_blob": "72dce62beb82e304299e8df74db3af6d6994befb"
+  },
+  "controls_verified": {
+    "logical_attempts_authorized": 1,
+    "retries_authorized": 0,
+    "replacement_allowed": false,
+    "execution_authority": true,
+    "task_read_authority": false,
+    "benchmark_trials_consumed": 0,
+    "public_v4_reseal_required": true,
+    "prior_v3_activation_reuse_authority": false
+  },
+  "pass": true,
+  "acceptance_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
