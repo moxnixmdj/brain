@@ -55,7 +55,7 @@ SOURCE_REQUIREMENTS = {
             "BASEL_BUFFER_FRAMEWORK_MEMBERS",
             "BASEL_BUFFERS_ABOVE_MINIMUM_CET1",
         ),
-        "FSB_TLAC_STANDARD_2015_11_09": (
+        "FSB_TLAC_2015_11_09": (
             "TLAC_SEPARATE_MINIMUM_REQUIREMENT",
         ),
     },
