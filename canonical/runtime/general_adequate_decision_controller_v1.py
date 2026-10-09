@@ -30,6 +30,9 @@ from canonical.runtime.r2_existing_policy_cover_observation_reuse_v1 import (
     discover as discover_existing_cover_observation,
 )
 from canonical.runtime import r2_grounded_candidate_policy_frontier_v1 as grounded_policy_frontier
+from canonical.runtime.minimum_information_origin_policy_v1 import (
+    route as route_minimum_information_origin,
+)
 
 SCHEMA = "PROJECT_BRAIN_GENERAL_ADEQUATE_DECISION_CONTROLLER_V1"
 ROOT = Path(__file__).resolve().parents[2]
@@ -863,6 +866,7 @@ def run(
             "max_information_rounds",
             "episode_id",
             "scope_id",
+            "information_origin_by_predicate_id",
         }
         extra = set(request) - allowed
         if extra:
@@ -875,6 +879,21 @@ def run(
             raise DecisionControllerError("TASK_ID_REQUIRED")
         if not goal:
             raise DecisionControllerError("GOAL_REQUIRED")
+
+        information_origin_by_predicate_id = request.get(
+            "information_origin_by_predicate_id", {}
+        )
+        if not isinstance(information_origin_by_predicate_id, Mapping):
+            raise DecisionControllerError(
+                "INFORMATION_ORIGIN_BY_PREDICATE_ID_NOT_OBJECT"
+            )
+        for predicate_id, origin in information_origin_by_predicate_id.items():
+            if not isinstance(predicate_id, str) or not predicate_id:
+                raise DecisionControllerError("INFORMATION_ORIGIN_PREDICATE_ID_INVALID")
+            if not isinstance(origin, Mapping):
+                raise DecisionControllerError(
+                    "INFORMATION_ORIGIN_RECORD_NOT_OBJECT:" + predicate_id
+                )
 
         raw_contract = compile_contract(
             goal,
@@ -1363,6 +1382,28 @@ def run(
                     information_trace=information_trace,
                     goal_to_decision_binding=goal_binding,
                 )
+            origin = information_origin_by_predicate_id.get(
+                gap["predicate_id"], {}
+            )
+            origin = deepcopy(dict(origin)) if isinstance(origin, Mapping) else {}
+            origin_problem = {
+                "decision_relevant": True,
+                "context_value_bound": origin.get("context_value_bound", False),
+                "information_owner": origin.get("information_owner", "UNKNOWN"),
+                "source_scope": deepcopy(
+                    origin.get("source_scope", {"kind": "UNBOUND_SOURCE"})
+                ),
+                "discovery_delegated": origin.get("discovery_delegated", False),
+                "context_binding_id": origin.get("context_binding_id"),
+                "clarification_key": origin.get("clarification_key"),
+            }
+            acquisition_plan = route_minimum_information_origin(origin_problem)
+            if acquisition_plan.get("pass") is not True:
+                raise DecisionControllerError(
+                    "MINIMUM_INFORMATION_ORIGIN_ROUTING_FAIL_CLOSED:"
+                    + str(acquisition_plan.get("reason") or "UNKNOWN")
+                )
+
             request_packet = {
                 "schema": "PROJECT_BRAIN_MINIMUM_POLICY_CHANGING_INFORMATION_REQUEST_V1",
                 "task_id": task_id,
@@ -1370,16 +1411,68 @@ def run(
                 "decision_payload_sha256": _digest(working),
                 "predicate_id": gap["predicate_id"],
                 "reason": gap["loop_status"],
+                "acquisition_plan": acquisition_plan,
+                "external_research_authorized": acquisition_plan.get(
+                    "external_research_authorized"
+                ) is True,
                 "information_authority": False,
                 "semantic_truth_authority": False,
             }
-            if information_provider is None:
+
+            if acquisition_plan.get("action") == "REUSE_BOUND_CONTEXT":
+                bound_truth_payload = origin.get("bound_truth_payload")
+                if isinstance(bound_truth_payload, Mapping):
+                    _append_truth_payload(
+                        working, gap["predicate_id"], bound_truth_payload
+                    )
+                    information_trace.append(
+                        {
+                            "round": round_index,
+                            "predicate_id": gap["predicate_id"],
+                            "kind": "BOUND_CONTEXT_REUSE",
+                            "context_binding_id": acquisition_plan.get(
+                                "context_binding_id"
+                            ),
+                            "provider_authority": False,
+                            "downstream_truth_authentication_required": True,
+                        }
+                    )
+                    continue
                 return _open(
-                    "OPEN__MINIMUM_POLICY_CHANGING_INFORMATION_REQUIRED",
+                    "OPEN__BOUND_CONTEXT_TRUTH_PAYLOAD_REQUIRED",
                     task_id=task_id,
                     goal=goal,
                     raw_contract=raw_contract,
-                    next_required_edge="SOURCE_BOUND_TRUTH_FOR_SELECTED_PREDICATE",
+                    next_required_edge="AUTHENTICATED_BOUND_CONTEXT_TRUTH_PAYLOAD",
+                    next_information_request=request_packet,
+                    decision_result=decision,
+                    information_trace=information_trace,
+                    goal_to_decision_binding=goal_binding,
+                )
+
+            if information_provider is None:
+                action = acquisition_plan.get("action")
+                if action == "ASK_USER_MINIMUM_CLARIFICATION":
+                    open_status = "OPEN__USER_MINIMUM_CLARIFICATION_REQUIRED"
+                    next_edge = "MINIMUM_USER_CONTROLLED_SPECIFICATION"
+                elif action == "ASK_USER_SOURCE_OR_SCOPE":
+                    open_status = "OPEN__USER_SOURCE_OR_SCOPE_REQUIRED"
+                    next_edge = "MINIMUM_USER_SOURCE_OR_SCOPE_BINDING"
+                elif action == "OBSERVE_BOUND_SOURCE_ONLY":
+                    open_status = "OPEN__BOUND_SOURCE_OBSERVATION_REQUIRED"
+                    next_edge = "AUTHENTICATED_OBSERVATION_FROM_BOUND_SOURCE_ONLY"
+                elif action == "RESEARCH_MINIMUM_AUTHENTICATED_FACT":
+                    open_status = "OPEN__DELEGATED_MINIMUM_RESEARCH_REQUIRED"
+                    next_edge = "MINIMUM_AUTHENTICATED_EXTERNAL_FACT_RESEARCH"
+                else:
+                    open_status = "OPEN__MINIMUM_POLICY_CHANGING_INFORMATION_REQUIRED"
+                    next_edge = "SOURCE_BOUND_TRUTH_FOR_SELECTED_PREDICATE"
+                return _open(
+                    open_status,
+                    task_id=task_id,
+                    goal=goal,
+                    raw_contract=raw_contract,
+                    next_required_edge=next_edge,
                     next_information_request=request_packet,
                     decision_result=decision,
                     information_trace=information_trace,
