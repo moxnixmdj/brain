@@ -77,7 +77,26 @@ _REGISTRY = {
             "CURSORBENCH_TYPED_ACCEPTANCE_PLAN_POLICY_ADEQUACY_BINDING_20261009_V1.json"
         ),
         "binding_blob_sha": "f385b555064e546e90c04c285053c9717014fa8a",
-    },
+    },,
+    "BRAIN_FINITE_CANDIDATE_EXACT_ORACLE_SOLVER_V1": {
+        "condition": {
+            "op": "AND",
+            "args": [
+                {"op": "ATOM", "id": "CODING_FINITE_SOLVER_CANDIDATE_SET_FINITE_V1"},
+                {"op": "ATOM", "id": "CODING_FINITE_SOLVER_ORACLE_TOTAL_V1"},
+                {"op": "ATOM", "id": "CODING_FINITE_SOLVER_ORACLE_SOUND_COMPLETE_V1"},
+                {"op": "ATOM", "id": "CODING_FINITE_SOLVER_VALID_MEMBER_EXISTS_V1"},
+                {"op": "ATOM", "id": "CODING_FINITE_SOLVER_CALL_BUDGET_SUFFICIENT_V1"},
+                {"op": "ATOM", "id": "CODING_FINITE_SOLVER_ORACLE_PRETERMINAL_ADMISSIBLE_V1"},
+            ],
+        },
+        "binding_path": (
+            "canonical/governance/"
+            "CODING_FINITE_EXACT_ORACLE_POLICY_ADEQUACY_BINDING_20261009_V1.json"
+        ),
+        "binding_blob_sha": "25a8c91580a9d2409b30806f4eae4b77e31dab65",
+    }
+
 }
 
 _BINDING_KEYS = (
