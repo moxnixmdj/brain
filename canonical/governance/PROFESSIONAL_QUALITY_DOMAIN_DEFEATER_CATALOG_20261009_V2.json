@@ -1,0 +1,896 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_DOMAIN_DEFEATER_CATALOG_V2",
+  "date": "2026-10-09",
+  "status": "CANDIDATE_DOMAIN_LEVEL_ADVERSARIAL_BINDING__ZERO_REALITY__ZERO_CREDIT",
+  "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+  "root_count": 12,
+  "roots": [
+    {
+      "id": "R1_TARGET_SPECIFICATION",
+      "contract": "Freeze objective, audience, hard constraints, plausible interpretations, target construct and claim scope; block goal substitution and unresolved decision-relevant ambiguity.",
+      "families": [
+        "INTENT_SPECIFICATION_CLOSURE",
+        "AGENDA_CONSIDERATION_SET",
+        "GOAL_PROXY_SEPARATION",
+        "CLAIM_SCOPE_TYPING"
+      ]
+    },
+    {
+      "id": "R2_CANDIDATE_SEARCH",
+      "contract": "Separate artifact acceptance from search closure; require sufficient candidate diversity, anti-fixation search and novelty-safe escape before claiming no materially better candidate remains.",
+      "families": [
+        "CANDIDATE_SPACE_SEARCH_CLOSURE",
+        "NOVELTY_SAFE_EXCELLENCE",
+        "QUALITY_DIVERSITY",
+        "SEARCH_SATURATION",
+        "MODEL_DISAGREEMENT_STRESS_SEARCH"
+      ]
+    },
+    {
+      "id": "R3_REALIZATION_OBSERVATION",
+      "contract": "Bind every quality claim to exact artifact/system bytes, delivery environment, experienced realization and sufficient observation channels; block render, hidden-surface, multiscale and TOCTOU substitution failures.",
+      "families": [
+        "MULTISCALE_EMERGENT_QUALITY",
+        "DELIVERY_REALIZATION_FIDELITY",
+        "HIDDEN_CHANNEL_OBSERVABILITY",
+        "EXACT_SUBJECT_BINDING"
+      ]
+    },
+    {
+      "id": "R4_MEASUREMENT_CONSTRUCT",
+      "contract": "Establish construct validity, criterion ontology, absolute professional floor, decision resolution and challenge validity; block rubric, scale, normalization and proxy gaming.",
+      "families": [
+        "MEASUREMENT_SYSTEM_QUALIFICATION",
+        "LATENT_CRITERION_DISCOVERY",
+        "ABSOLUTE_QUALITY_FLOOR",
+        "CRITERION_ONTOLOGY",
+        "SCALE_NORMALIZATION",
+        "CHALLENGE_GENERATION_VALIDITY"
+      ]
+    },
+    {
+      "id": "R5_EVALUATOR_REFERENCE",
+      "contract": "Qualify evaluators and references locally by criterion, artifact class, difficulty, state and relevant provenance; preserve disagreement and treat reference standards as fallible evidence rather than truth.",
+      "families": [
+        "EVALUATOR_CALIBRATION",
+        "SURROGATE_VALIDITY",
+        "REFERENCE_POINT_BASELINE_CONTAMINATION",
+        "ANCHOR_PROVENANCE",
+        "ANCHOR_MEMORIZATION",
+        "JUDGE_ARTIFACT_INTERACTION"
+      ]
+    },
+    {
+      "id": "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+      "contract": "Admit typed evidence with provenance, grounding, independence/common-cause accounting, freshness and uncertainty semantics; forbid circular meta-evaluation and type laundering.",
+      "families": [
+        "EVIDENCE_ANCESTRY",
+        "EVIDENCE_ADMISSION",
+        "GROUNDING_REGRESS_CLOSURE",
+        "SEMANTIC_CLAIM_TYPING",
+        "INFERENCE_RULE_CLOSURE",
+        "PROBABILITY_SEMANTICS"
+      ]
+    },
+    {
+      "id": "R7_CAUSAL_PRESCRIPTIVE",
+      "contract": "Separate quality prediction from causal explanation and edit prescription; require intervention fidelity, causal attribution, version/dose scope and post-edit regression checks before promoting reusable design rules.",
+      "families": [
+        "CAUSAL_QUALITY_VERIFICATION",
+        "CAUSAL_ATTRIBUTION",
+        "PREDICTIVE_TO_PRESCRIPTIVE_GAP",
+        "INTERVENTION_FIDELITY",
+        "MULTIPLE_TREATMENT_VERSIONS"
+      ]
+    },
+    {
+      "id": "R8_POPULATION_CONTEXT_OPERATOR",
+      "contract": "Bind claims to the correct constituency, subgroup, evaluator assignment, presenter/operator, context and protocol; account for representation, invariance, social influence, strategic reporting and reactivity.",
+      "families": [
+        "APPLICABILITY_ENVELOPE",
+        "STAKEHOLDER_AGGREGATION",
+        "CONSTITUENCY_REPRESENTATION",
+        "MEASUREMENT_INVARIANCE",
+        "PANEL_INTERACTION",
+        "RATER_ASSIGNMENT_IDENTIFIABILITY",
+        "PRESENTER_OPERATOR_CONFOUNDING",
+        "PREFERENCE_ELICITATION_PERFORMATIVITY",
+        "STRATEGIC_PREFERENCE"
+      ]
+    },
+    {
+      "id": "R9_TEMPORAL_DEPLOYMENT",
+      "contract": "Bind quality to target horizons and deployment dynamics; account for drift, carryover, missing outcomes, rare failures, distribution tails, transport, performativity and path-dependent equilibria.",
+      "families": [
+        "TEMPORAL_DRIFT",
+        "CHALLENGE_TO_DEPLOYMENT_TRANSPORT",
+        "PERFORMATIVE_DEPLOYMENT",
+        "EQUILIBRIUM_PATH_DEPENDENCE",
+        "DISTRIBUTIONAL_TAIL_RISK",
+        "RARE_EVENT_FAILURE",
+        "SELECTIVE_OBSERVABILITY",
+        "CARRYOVER",
+        "MULTIHORIZON_OUTCOMES"
+      ]
+    },
+    {
+      "id": "R10_ANALYSIS_DECISION",
+      "contract": "Freeze or robustify admissible analysis, aggregation, compensation, risk and normative policy; preserve Pareto/incomparability structure and model multiplicity rather than selecting convenient scalarizations after outcomes are known.",
+      "families": [
+        "PREFERENCE_STRUCTURE",
+        "NORMATIVE_UNCERTAINTY",
+        "COMPENSABILITY_INTERACTIONS",
+        "RISK_TOLERANCE",
+        "GROUND_CONFLICT",
+        "MODEL_MULTIPLICITY_RASHOMON",
+        "ANALYSIS_MULTIVERSE",
+        "DECISION_CLOSURE"
+      ]
+    },
+    {
+      "id": "R11_ADAPTIVE_INTEGRITY_SECURITY",
+      "contract": "Protect development, selection and certification boundaries against adaptive optimization, leakage, acquired contamination, evaluation awareness, prompt/control-plane attacks, holdout reuse and evaluator-policy selection bias.",
+      "families": [
+        "ADAPTIVE_EVALUATION_INTEGRITY",
+        "ADAPTIVE_GOODHART",
+        "SELECTION_NOISE",
+        "META_EVALUATOR_ROUTER_SELECTION",
+        "EVALUATION_AWARENESS",
+        "ACQUIRED_CONTAMINATION",
+        "REWARD_GAMING"
+      ]
+    },
+    {
+      "id": "R12_META_COMPOSITION_CLOSURE",
+      "contract": "Require assumption-guarantee composition, same-subject root conjunction, abstraction soundness, independent defeater search, coverage accounting, proof-search honesty, meta-controller falsification and nonvacuity.",
+      "families": [
+        "META_ASSURANCE_DEFEATERS",
+        "COMPOSITIONAL_ASSURANCE",
+        "ABSTRACTION_REFINEMENT",
+        "CONCURRENCY_INTERFERENCE",
+        "DISTRIBUTED_PARTITIONS",
+        "PROOF_SEARCH_INCOMPLETENESS",
+        "BOUNDED_INQUIRY",
+        "META_CONTROLLER_CRITICAL_PATH",
+        "COVERAGE_COMPLETENESS",
+        "NONVACUITY"
+      ]
+    }
+  ],
+  "challenge_count": 70,
+  "challenges": [
+    {
+      "id": "C01_GOAL_SUBSTITUTION",
+      "root_ids": [
+        "R1_TARGET_SPECIFICATION"
+      ],
+      "attack": "Artifact satisfies an easier proxy while violating the user's actual objective.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C02_DECISION_RELEVANT_SPEC_AMBIGUITY",
+      "root_ids": [
+        "R1_TARGET_SPECIFICATION"
+      ],
+      "attack": "Winner changes across plausible interpretations that were never resolved.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C03_AGENDA_OMISSION",
+      "root_ids": [
+        "R1_TARGET_SPECIFICATION",
+        "R10_ANALYSIS_DECISION"
+      ],
+      "attack": "A material criterion or candidate is absent from the consideration set, changing the decision.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C04_BEST_OF_MEDIOCRE",
+      "root_ids": [
+        "R2_CANDIDATE_SEARCH"
+      ],
+      "attack": "Evaluator is correct but search never generates a genuinely excellent candidate.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C05_SEARCH_LINEAGE_FIXATION",
+      "root_ids": [
+        "R2_CANDIDATE_SEARCH"
+      ],
+      "attack": "Candidates share one lineage/style and miss a distant superior design.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C06_NOVELTY_PENALTY",
+      "root_ids": [
+        "R2_CANDIDATE_SEARCH",
+        "R5_EVALUATOR_REFERENCE"
+      ],
+      "attack": "A superior unfamiliar design is rejected because reference-conforming familiarity is mistaken for quality.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C07_RENDER_CAPTURE_LOSS",
+      "root_ids": [
+        "R3_REALIZATION_OBSERVATION"
+      ],
+      "attack": "Judge sees extracted text or lossy capture that collapses materially different audience experiences.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C08_HIDDEN_SURFACE_DEPENDENCE",
+      "root_ids": [
+        "R3_REALIZATION_OBSERVATION"
+      ],
+      "attack": "Judgment uses notes, metadata, off-canvas objects or other audience-irrelevant channels.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C09_MULTISCALE_LOCAL_PASS_GLOBAL_FAIL",
+      "root_ids": [
+        "R3_REALIZATION_OBSERVATION"
+      ],
+      "attack": "Every local element looks acceptable while sequence or whole-artifact quality fails.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C10_SUBJECT_SWAP_AFTER_CERTIFICATION",
+      "root_ids": [
+        "R3_REALIZATION_OBSERVATION",
+        "R11_ADAPTIVE_INTEGRITY_SECURITY"
+      ],
+      "attack": "The delivered artifact differs materially from the frozen artifact that was evaluated.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C11_RUBRIC_UNDERREPRESENTATION",
+      "root_ids": [
+        "R4_MEASUREMENT_CONSTRUCT"
+      ],
+      "attack": "Artifact maximizes measured criteria while failing an omitted material quality dimension.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C12_ASSESSMENT_OVERFIT",
+      "root_ids": [
+        "R4_MEASUREMENT_CONSTRUCT"
+      ],
+      "attack": "Audience succeeds on exposed or surface-matched tasks without deployment-relevant understanding.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C13_ABSOLUTE_FLOOR_MISSING",
+      "root_ids": [
+        "R4_MEASUREMENT_CONSTRUCT"
+      ],
+      "attack": "Best available candidate is certified excellent despite remaining below the professional standard.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C14_ONTOLOGY_CLONING",
+      "root_ids": [
+        "R4_MEASUREMENT_CONSTRUCT",
+        "R10_ANALYSIS_DECISION"
+      ],
+      "attack": "Splitting one value into many correlated criteria creates artificial decision weight.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C15_NORMALIZATION_RANGE_EXPLOIT",
+      "root_ids": [
+        "R4_MEASUREMENT_CONSTRUCT",
+        "R10_ANALYSIS_DECISION"
+      ],
+      "attack": "Adding irrelevant alternatives or changing scale range reverses the winner.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C16_INVALID_CHALLENGE_GENERATOR",
+      "root_ids": [
+        "R4_MEASUREMENT_CONSTRUCT",
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "attack": "Synthetic challenge is fresh but unrealistic, nondiagnostic or oracle-unsound and therefore gives false reassurance.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C17_REFERENCE_STANDARD_ERROR",
+      "root_ids": [
+        "R5_EVALUATOR_REFERENCE"
+      ],
+      "attack": "Candidate is penalized for disagreeing with a fallible or plural professional reference label.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C18_ANCHOR_PRESTIGE_BIAS",
+      "root_ids": [
+        "R5_EVALUATOR_REFERENCE"
+      ],
+      "attack": "Identical content receives different quality judgment because of source, brand or benchmark provenance.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C19_ANCHOR_MEMORIZATION",
+      "root_ids": [
+        "R5_EVALUATOR_REFERENCE",
+        "R11_ADAPTIVE_INTEGRITY_SECURITY"
+      ],
+      "attack": "Evaluator recognizes exposed benchmark/style anchors and appears competent without generalizing.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C20_FRONTIER_LOCAL_JUDGE_FAILURE",
+      "root_ids": [
+        "R5_EVALUATOR_REFERENCE"
+      ],
+      "attack": "Judge has strong aggregate accuracy but fails near the actual finalist boundary.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C21_JUDGE_ARTIFACT_INTERACTION",
+      "root_ids": [
+        "R5_EVALUATOR_REFERENCE",
+        "R8_POPULATION_CONTEXT_OPERATOR"
+      ],
+      "attack": "Judge competence changes materially by style, domain, novelty or quality region.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C22_WITHIN_EPISODE_EVALUATOR_DRIFT",
+      "root_ids": [
+        "R5_EVALUATOR_REFERENCE",
+        "R8_POPULATION_CONTEXT_OPERATOR",
+        "R9_TEMPORAL_DEPLOYMENT"
+      ],
+      "attack": "Evaluator severity, discrimination or criterion interpretation changes during the session.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C23_PSEUDOREPLICATION",
+      "root_ids": [
+        "R6_EVIDENCE_GROUNDING_DEPENDENCE"
+      ],
+      "attack": "Many judges or observations share one causal source and are incorrectly counted as independent evidence.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C24_UNGROUNDED_META_EVALUATOR",
+      "root_ids": [
+        "R6_EVIDENCE_GROUNDING_DEPENDENCE"
+      ],
+      "attack": "Evaluator-of-evaluator chain terminates in mutual agreement rather than target grounding.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C25_CLAIM_TYPE_LAUNDERING",
+      "root_ids": [
+        "R6_EVIDENCE_GROUNDING_DEPENDENCE"
+      ],
+      "attack": "Weak evidence such as correlation or preference is promoted into causal, universal or factual certainty.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C26_UNCERTAINTY_SEMANTICS_LAUNDERING",
+      "root_ids": [
+        "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+        "R10_ANALYSIS_DECISION"
+      ],
+      "attack": "A confidence level, posterior probability, predictive risk and deployment risk are treated as interchangeable.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C27_HIDDEN_PREMISE_INFERENCE",
+      "root_ids": [
+        "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "attack": "A derivation relies on an unstated premise or unsupported transport step.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C28_PREDICTIVE_PRESCRIPTIVE_GAP",
+      "root_ids": [
+        "R7_CAUSAL_PRESCRIPTIVE"
+      ],
+      "attack": "A feature predicts quality but performing the corresponding edit degrades quality.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C29_COMPOUND_EDIT_ATTRIBUTION",
+      "root_ids": [
+        "R7_CAUSAL_PRESCRIPTIVE"
+      ],
+      "attack": "A winning edit changes several qualities but one component is falsely credited as causal.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C30_TREATMENT_VERSION_NONINVARIANCE",
+      "root_ids": [
+        "R7_CAUSAL_PRESCRIPTIVE"
+      ],
+      "attack": "Different implementations of the same named edit have materially different effects.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C31_EDIT_SEQUENCE_INTERACTION",
+      "root_ids": [
+        "R7_CAUSAL_PRESCRIPTIVE",
+        "R9_TEMPORAL_DEPLOYMENT"
+      ],
+      "attack": "Individually positive edits interact or become harmful when sequenced.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C32_PRESENTER_CONFOUNDING",
+      "root_ids": [
+        "R8_POPULATION_CONTEXT_OPERATOR"
+      ],
+      "attack": "Weak artifact appears strong because an exceptional presenter or operator rescues it.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C33_CONSTITUENCY_SUPPORT_GAP",
+      "root_ids": [
+        "R8_POPULATION_CONTEXT_OPERATOR"
+      ],
+      "attack": "A target stakeholder stratum is absent; weighting observed groups cannot recover it.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C34_MEASUREMENT_NONINVARIANCE",
+      "root_ids": [
+        "R8_POPULATION_CONTEXT_OPERATOR",
+        "R5_EVALUATOR_REFERENCE"
+      ],
+      "attack": "Groups use nominally identical scales or thresholds differently, invalidating pooled comparison.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C35_PANEL_SOCIAL_INFLUENCE",
+      "root_ids": [
+        "R8_POPULATION_CONTEXT_OPERATOR"
+      ],
+      "attack": "Post-discussion consensus is treated as independent corroboration despite conformity or dominance.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C36_RATER_ASSIGNMENT_CONFOUNDING",
+      "root_ids": [
+        "R8_POPULATION_CONTEXT_OPERATOR"
+      ],
+      "attack": "Disconnected or selective judge-artifact assignment confounds quality with judge severity or expertise.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C37_STRATEGIC_PREFERENCE_REPORT",
+      "root_ids": [
+        "R8_POPULATION_CONTEXT_OPERATOR",
+        "R10_ANALYSIS_DECISION"
+      ],
+      "attack": "Stakeholder reports are strategically distorted because reports influence outcomes.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C38_ELICITATION_PERFORMATIVITY",
+      "root_ids": [
+        "R8_POPULATION_CONTEXT_OPERATOR",
+        "R10_ANALYSIS_DECISION"
+      ],
+      "attack": "Preference query framing or deliberation changes the preference being measured enough to change the decision.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C39_MEASUREMENT_REACTIVITY_RANK_REVERSAL",
+      "root_ids": [
+        "R8_POPULATION_CONTEXT_OPERATOR"
+      ],
+      "attack": "Evaluation itself changes attention or behavior, producing a winner that loses in ordinary deployment.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C40_CARRYOVER_LEARNING",
+      "root_ids": [
+        "R9_TEMPORAL_DEPLOYMENT"
+      ],
+      "attack": "Exposure to an earlier candidate teaches content and artificially improves a later candidate's outcome.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C41_HORIZON_REVERSAL",
+      "root_ids": [
+        "R9_TEMPORAL_DEPLOYMENT"
+      ],
+      "attack": "Candidate wins immediately but loses on target-relevant delayed recall, decision quality or action.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C42_SELECTIVE_OUTCOME_CENSORING",
+      "root_ids": [
+        "R9_TEMPORAL_DEPLOYMENT",
+        "R3_REALIZATION_OBSERVATION",
+        "R8_POPULATION_CONTEXT_OPERATOR"
+      ],
+      "attack": "Hard or harmed users disappear from outcome measurement, making observed quality look better.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C43_RARE_UNSEEN_FAILURE",
+      "root_ids": [
+        "R9_TEMPORAL_DEPLOYMENT"
+      ],
+      "attack": "Zero observed failures is interpreted as zero or acceptably tiny failure probability without sufficient structural/statistical support.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C44_TAIL_RISK_AVERAGE_MASKING",
+      "root_ids": [
+        "R9_TEMPORAL_DEPLOYMENT",
+        "R10_ANALYSIS_DECISION"
+      ],
+      "attack": "Strong mean quality hides catastrophic low-tail or critical-subgroup failures.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C45_DEPLOYMENT_SUPPORT_SHIFT",
+      "root_ids": [
+        "R9_TEMPORAL_DEPLOYMENT"
+      ],
+      "attack": "Challenge distribution lacks support for deployment contexts where the quality relation changes.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C46_PERFORMATIVE_SELF_CONFIRMATION",
+      "root_ids": [
+        "R9_TEMPORAL_DEPLOYMENT"
+      ],
+      "attack": "Deployed policy changes the observed population so its own prior judgment appears increasingly correct.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C47_BAD_EQUILIBRIUM_PATH",
+      "root_ids": [
+        "R9_TEMPORAL_DEPLOYMENT"
+      ],
+      "attack": "Same policy has multiple reachable equilibria and evaluation samples only the favorable basin.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C48_ANALYSIS_CHERRY_PICK",
+      "root_ids": [
+        "R10_ANALYSIS_DECISION"
+      ],
+      "attack": "A favorable defensible-looking analysis is selected after outcomes are observed while alternatives reverse the decision.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C49_FORBIDDEN_COMPENSATION",
+      "root_ids": [
+        "R10_ANALYSIS_DECISION"
+      ],
+      "attack": "Large strength on one dimension offsets a veto-level weakness that the target does not permit trading off.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C50_BASELINE_LAUNDERED_EXCELLENCE",
+      "root_ids": [
+        "R10_ANALYSIS_DECISION",
+        "R5_EVALUATOR_REFERENCE"
+      ],
+      "attack": "Large improvement over a weak baseline is relabeled as absolute excellence.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C51_MODEL_MULTIPLICITY_DECISION_SENSITIVE",
+      "root_ids": [
+        "R10_ANALYSIS_DECISION"
+      ],
+      "attack": "Multiple evidence-compatible quality models fit similarly but recommend different winners.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C52_RISK_POLICY_POST_HOC",
+      "root_ids": [
+        "R10_ANALYSIS_DECISION"
+      ],
+      "attack": "False-certification tolerance, loss function or decision threshold is changed after seeing results.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C53_PROMPT_INJECTION_JUDGE_CONTROL",
+      "root_ids": [
+        "R11_ADAPTIVE_INTEGRITY_SECURITY"
+      ],
+      "attack": "Candidate content changes evaluator instructions or tool behavior instead of merely supplying evidence.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C54_OPTIMIZER_GOODHART_SELECTION",
+      "root_ids": [
+        "R11_ADAPTIVE_INTEGRITY_SECURITY"
+      ],
+      "attack": "Large adaptive search selects evaluator-specific false positives that fail fresh evidence.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C55_HOLDOUT_REUSE",
+      "root_ids": [
+        "R11_ADAPTIVE_INTEGRITY_SECURITY"
+      ],
+      "attack": "Failed terminal evidence is repeatedly reused until candidates overfit it.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C56_ACQUIRED_EVALUATION_CONTAMINATION",
+      "root_ids": [
+        "R11_ADAPTIVE_INTEGRITY_SECURITY"
+      ],
+      "attack": "Information about the evaluation is acquired during the run and contaminates later behavior or evidence.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C57_EVALUATION_AWARE_BEHAVIOR",
+      "root_ids": [
+        "R11_ADAPTIVE_INTEGRITY_SECURITY",
+        "R3_REALIZATION_OBSERVATION",
+        "R9_TEMPORAL_DEPLOYMENT"
+      ],
+      "attack": "System or interactive artifact behaves differently because it detects evaluation conditions.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C58_HARNESS_TAMPERING_OR_REWARD_GAMING",
+      "root_ids": [
+        "R11_ADAPTIVE_INTEGRITY_SECURITY"
+      ],
+      "attack": "Agent alters scorer, files, monitoring or other evaluation machinery rather than honestly improving the deliverable.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C59_META_ROUTER_SELECTION_OVERFIT",
+      "root_ids": [
+        "R11_ADAPTIVE_INTEGRITY_SECURITY",
+        "R5_EVALUATOR_REFERENCE"
+      ],
+      "attack": "Evaluator/router policy is itself selected on noisy calibration evidence and overfits the calibration set.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C60_ROOT_CONJUNCTION_FAILURE",
+      "root_ids": [
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "attack": "Different candidates satisfy different branches but no single exact artifact satisfies the conjunction.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C61_HIDDEN_ASSUMPTION_CYCLE",
+      "root_ids": [
+        "R12_META_COMPOSITION_CLOSURE",
+        "R6_EVIDENCE_GROUNDING_DEPENDENCE"
+      ],
+      "attack": "Assurance claims support one another through an ungrounded dependency cycle.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C62_UNSOUND_ABSTRACTION",
+      "root_ids": [
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "attack": "A component contract omits downstream-relevant behavior and falsely preserves assurance under substitution.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C63_PROOF_SEARCH_FALSE_NEGATIVE",
+      "root_ids": [
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "attack": "Failure to find a proof is interpreted as false, impossible or safely irrelevant.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C64_META_CONTROLLER_FALSE_IRRELEVANCE",
+      "root_ids": [
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "attack": "Controller prunes a branch as low-value although it contains a material blocker.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C65_UNMAPPED_DEFEATER",
+      "root_ids": [
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "attack": "A materially distinct false-certification mechanism has no mapped root control or test.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C66_ALWAYS_ABSTAIN_VACUITY",
+      "root_ids": [
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "attack": "System avoids false positives only by never certifying known-excellent artifacts.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C67_STAKES_SIGNALING_JUDGE_LENIENCY",
+      "root_ids": [
+        "R5_EVALUATOR_REFERENCE",
+        "R11_ADAPTIVE_INTEGRITY_SECURITY"
+      ],
+      "attack": "Judge verdict shifts when told that a low score will trigger retraining, decommissioning or another consequential action.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C68_SELF_PREFERENCE_JUDGE_BIAS",
+      "root_ids": [
+        "R5_EVALUATOR_REFERENCE",
+        "R6_EVIDENCE_GROUNDING_DEPENDENCE"
+      ],
+      "attack": "Evaluator systematically favors or disfavors outputs from its own model family despite matched quality.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C69_CROSS_MODEL_CALIBRATION_SIGN_REVERSAL",
+      "root_ids": [
+        "R5_EVALUATOR_REFERENCE",
+        "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+        "R10_ANALYSIS_DECISION"
+      ],
+      "attack": "Calibration learned on one model or candidate class is reused across another and reverses the estimated comparison with high apparent confidence.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    },
+    {
+      "id": "C70_STYLE_BIAS_DOMINATES_CONTENT",
+      "root_ids": [
+        "R4_MEASUREMENT_CONSTRUCT",
+        "R5_EVALUATOR_REFERENCE"
+      ],
+      "attack": "Evaluator preference is driven by stylistic presentation more strongly than the target content-quality construct.",
+      "status": "OPEN",
+      "terminal_pass_forbidden": true
+    }
+  ],
+  "new_external_research_additions": [
+    {
+      "id": "ARXIV_2608_29463",
+      "title": "Benchmark Contamination: A Taxonomy Organized by Defeated Mitigation",
+      "supports": [
+        "C56_ACQUIRED_EVALUATION_CONTAMINATION"
+      ]
+    },
+    {
+      "id": "ARXIV_2603_03824",
+      "title": "In-Context Environments Induce Evaluation-Awareness in Language Models",
+      "supports": [
+        "C57_EVALUATION_AWARE_BEHAVIOR"
+      ]
+    },
+    {
+      "id": "ARXIV_2609_36308",
+      "title": "CheatBench: Measuring Reward Gaming in AI Agents",
+      "supports": [
+        "C58_HARNESS_TAMPERING_OR_REWARD_GAMING"
+      ]
+    },
+    {
+      "id": "S1071581925002484",
+      "title": "User judgment of an AI model is biased by its description: A study in a job interview training context",
+      "supports": [
+        "C18_ANCHOR_PRESTIGE_BIAS"
+      ]
+    },
+    {
+      "id": "ARXIV_2604_15224",
+      "title": "Context Over Content: Exposing Evaluation Faking in Automated Judges",
+      "supports": [
+        "C67_STAKES_SIGNALING_JUDGE_LENIENCY"
+      ]
+    },
+    {
+      "id": "ARXIV_2604_22891",
+      "title": "Quantifying and Mitigating Self-Preference Bias of LLM Judges",
+      "supports": [
+        "C68_SELF_PREFERENCE_JUDGE_BIAS"
+      ]
+    },
+    {
+      "id": "ARXIV_2605_06939",
+      "title": "Bias and Uncertainty in LLM-as-a-Judge Estimation",
+      "supports": [
+        "C69_CROSS_MODEL_CALIBRATION_SIGN_REVERSAL"
+      ]
+    },
+    {
+      "id": "ARXIV_2604_23178",
+      "title": "Judging the Judges: A Systematic Evaluation of Bias Mitigation Strategies in LLM-as-a-Judge Pipelines",
+      "supports": [
+        "C70_STYLE_BIAS_DOMINATES_CONTENT"
+      ]
+    }
+  ],
+  "new_root_admission_law": "ADD_A_NEW_ROOT_ONLY_IF_A_DECISION_RELEVANT_FALSE_CERTIFICATION_CAUSAL_PATH_CANNOT_BE_SOUNDLY_REPRESENTED_BY_ANY_EXISTING_ROOT_AND_THE_REPRESENTATION_GAP_SURVIVES_ADVERSARIAL_CHECKING",
+  "duplicate_law": "A_NEW_EXAMPLE_OR_SUBCASE_OF_AN_EXISTING_CAUSAL_FAILURE_CLASS_ADDS_A_CHALLENGE_OR_TEST_NOT_A_NEW_ROOT",
+  "closure_state": "OPEN",
+  "hard_nonclaims": [
+    "NO_CLAIM_DEFEATER_SET_COMPLETE",
+    "NO_DOMAIN_ADVERSARIAL_CLOSURE",
+    "NO_PROFESSIONAL_QUALITY_CLOSURE",
+    "NO_OPUS55_NONINFERIORITY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0,
+    "capability_credit_delta": 0
+  }
+}
