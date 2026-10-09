@@ -184,5 +184,78 @@ class RealityClosureV2Tests(unittest.TestCase):
         self.assertAlmostEqual(rows[0]["conservative_leverage_score"], 1.0)
 
 
+    def test_constructive_contract_preserves_semantic_failure_evidence(self):
+        pending = [{
+            "schema": v2.SEMANTIC_WORK_SCHEMA,
+            "work_id": "w1",
+            "work_digest": "1" * 64,
+            "kind": "REPAIR_FAILURE_CLASS",
+            "status": "PARKED",
+            "verification_frontier_sha256": "2" * 64,
+            "adapter_frontier_sha256": "3" * 64,
+            "verification_authority_sha256": "4" * 64,
+            "payload": {
+                "required_result": "VERIFIED_REPAIR",
+                "repair_class": "ACQUIRE_COMPOSE_OR_INVENT_VERIFIABLE_CAPABILITY",
+                "failure_fingerprint": "failure:abc",
+                "failure_status": "FAIL",
+                "falsified_capability_ids": ["cap.old"],
+                "counterexamples": [{"input": "x", "expected": "y"}],
+                "retry_capsule_sha256": "5" * 64,
+            },
+        }]
+        out = v2.compile_gap_contract(
+            closure(status="OPEN", internal=("ROOT1_GAP",)),
+            pending_work=pending,
+        )
+        self.assertEqual(out["constructive_capability_contract_count"], 1)
+        contract = out["constructive_capability_contracts"][0]
+        basis = contract["basis"]
+        self.assertEqual(basis["failure_fingerprint"], "failure:abc")
+        self.assertEqual(basis["counterexamples"][0]["expected"], "y")
+        self.assertEqual(basis["retry_capsule_sha256"], "5" * 64)
+        self.assertEqual(
+            basis["verification_authority_sha256"], "4" * 64
+        )
+        self.assertFalse(contract["verification_authority_mutation_allowed"])
+        self.assertFalse(contract["self_verification_allowed"])
+
+    def test_pending_semantic_work_loads_complete_durable_payload(self):
+        import json
+        from pathlib import Path
+        from tempfile import TemporaryDirectory
+
+        with TemporaryDirectory() as td:
+            path = Path(td) / "state.json"
+            path.write_text(json.dumps({
+                "improvement_queue": {
+                    "w2": {
+                        "kind": "EXPAND_SUCCESS_VERIFICATION_FRONTIER",
+                        "status": "PENDING",
+                        "observations": 3,
+                        "verification_authority_sha256": "a" * 64,
+                        "payload": {
+                            "observation_id": "obs-1",
+                            "required_capability_class": "R3_SUCCESS_ADAPTER_PATCH_AUTHOR",
+                            "counterexamples": [{"shape": "novel-wrapper"}],
+                            "proof_capsule_sha256": "b" * 64,
+                        },
+                    }
+                }
+            }), encoding="utf-8")
+            rows = v2._pending_semantic_work(state_path=path)
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows[0]["work_id"], "w2")
+        self.assertEqual(
+            rows[0]["payload"]["required_capability_class"],
+            "R3_SUCCESS_ADAPTER_PATCH_AUTHOR",
+        )
+        self.assertEqual(
+            rows[0]["payload"]["counterexamples"],
+            [{"shape": "novel-wrapper"}],
+        )
+        self.assertEqual(len(rows[0]["work_digest"]), 64)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
