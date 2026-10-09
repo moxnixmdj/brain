@@ -1,0 +1,75 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261009_V19",
+  "date": "2026-10-09",
+  "status": "CURRENT_POST_RANK14_V3_IRREVERSIBLE_FINAL_ZERO__FOURTEEN_CONSUMED__RANK15_NEXT__ZERO_ACCEPTANCE_CREDIT",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "predecessor": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261009_V18.json",
+    "git_blob_sha": "566a3756392ee2d4cc41947b66617acbc6f6ce92"
+  },
+  "rank14_v3_result": {
+    "path": "canonical/verification/TB_SCIENCE_RANK14_V3_IRREVERSIBLE_RESULT_TRUTH_20261009_V1.json",
+    "git_blob_sha": "d5e5412b086c4e23d853dadcf5c70f07f7344e4d"
+  },
+  "current_counts": {
+    "consumed_slots": 14,
+    "consumed_successes": 0,
+    "consumed_final_failures": 14,
+    "successes_remaining_for_pass_lock": 124,
+    "additional_failures_before_fail_lock": 73,
+    "maximum_possible_successes_remaining": 196,
+    "minimum_required_success_rate_over_remaining_slots": 0.6326530612244898,
+    "pass_still_mathematically_reachable": true,
+    "next_unconsumed_slot": {
+      "ledger_schedule_rank": 15,
+      "frozen_manifest_schedule_order": 14,
+      "task_rank": 14,
+      "slot_id": "terminal-bench-science/protein-active-learning::trial-0",
+      "task_digest": "sha256:d7e16b7c468551b468364cf2a86dba2383b007f3f2f01c6d2ce01d99ff30d48f"
+    }
+  },
+  "rank14": {
+    "authority_v3_historical": true,
+    "v3_execution_claim_consumed": true,
+    "task_read_history": true,
+    "task_started": true,
+    "execution_authority_consumed": true,
+    "benchmark_trials_consumed": 1,
+    "reward": 0,
+    "result": "FINAL_ZERO",
+    "exact_prestart_input_tokens": 2354,
+    "exact_reserved_completion_tokens": 4096,
+    "exact_server_context_tokens": 16384,
+    "exact_context_headroom_tokens": 9934,
+    "exact_raw_task_obligation_count": 87,
+    "prompt_representation_blocker_closed": true,
+    "final_failure": "SCIENCE_REQUIREMENTS_MUTATED_AFTER_FREEZE",
+    "rerun_authority": false
+  },
+  "rank15": {
+    "task_started": false,
+    "execution_authority_consumed": false,
+    "benchmark_trials_consumed": 0,
+    "fresh_execution_authority": false,
+    "fresh_task_read_authority": false,
+    "required_pre_execution_repair": "BRAIN_FROZEN_REQUIREMENTS_MUST_BE_IMMUTABLE_AND_LATER_SUBSTRATE_REDECLARATIONS_NON_AUTHORITATIVE",
+    "next_action": "REPAIR_AND_VERIFY_FROZEN_REQUIREMENT_PROTOCOL_ON_SYNTHETIC_MULTI_CYCLE_REPLAYS__THEN_BUILD_FRESH_RANK15_ZERO_EXPOSURE_AUTHORITY_AND_PRESTART_GATE"
+  },
+  "scheduler": [
+    "DO_NOT_RERUN_RANK14.",
+    "COUNT_RANK14_AS_ONE_IRREVERSIBLE_FINAL_FAILURE.",
+    "REPAIR_THE_INTERNAL_FROZEN_REQUIREMENT_PROTOCOL_BEFORE_RANK15.",
+    "AFTER_FIRST_CYCLE_BRAIN_OWNS_THE_REQUIREMENT_SET; LATER SUBSTRATE material_requirements MUST NOT MUTATE IT OR FATAL_ABORT AN OTHERWISE_ADMISSIBLE CYCLE.",
+    "KEEP_CANDIDATE_COVERS_FAIL_CLOSED_AGAINST_THE_FROZEN_BRAIN_REQUIREMENT_SET.",
+    "RANK15_REMAINS_UNEXPOSED_UNTIL_FRESH_AUTHORITY_AND_PRESTART_GATES_EXIST."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_trials_consumed_delta": 1,
+    "consumed_successes_delta": 0,
+    "consumed_final_failures_delta": 1,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
