@@ -43,8 +43,10 @@ on:
       - "canonical/tests/test_r3_success_adapter_patch_firewall_v1.py"
       - "canonical/runtime/r3_success_adapter_author_context_v1.py"
       - "canonical/runtime/r3_success_adapter_patch_author_wrapper_v1.py"
+      - "canonical/runtime/r3_deterministic_mode_guard_patch_author_v1.py"
       - "canonical/tests/test_r3_success_adapter_author_context_v1.py"
       - "canonical/tests/test_r3_success_adapter_patch_author_wrapper_v1.py"
+      - "canonical/tests/test_r3_deterministic_mode_guard_patch_author_v1.py"
       - ".github/workflows/r3-autonomous-self-improvement-v1.yml"
   push:
     branches:
@@ -89,8 +91,10 @@ on:
       - "canonical/tests/test_r3_success_adapter_patch_firewall_v1.py"
       - "canonical/runtime/r3_success_adapter_author_context_v1.py"
       - "canonical/runtime/r3_success_adapter_patch_author_wrapper_v1.py"
+      - "canonical/runtime/r3_deterministic_mode_guard_patch_author_v1.py"
       - "canonical/tests/test_r3_success_adapter_author_context_v1.py"
       - "canonical/tests/test_r3_success_adapter_patch_author_wrapper_v1.py"
+      - "canonical/tests/test_r3_deterministic_mode_guard_patch_author_v1.py"
       - ".github/workflows/r3-autonomous-self-improvement-v1.yml"
 
 jobs:
@@ -114,6 +118,7 @@ jobs:
           canonical/runtime/bound_capability_execution_verifier_v1.py
           canonical/runtime/r3_bound_success_adapter_v1.py
           canonical/runtime/r3_success_adapter_author_context_v1.py
+          canonical/runtime/r3_deterministic_mode_guard_patch_author_v1.py
           canonical/runtime/r3_bound_success_checkpoint_verifier_v1.py
           canonical/runtime/executable_skill_program_v7.py
           canonical/runtime/executable_skill_verification_authenticator_v1.py
@@ -178,3 +183,5 @@ jobs:
         run: python -m unittest canonical.tests.test_r3_success_adapter_author_context_v1 -v
       - name: Run R3 candidate patch-author wrapper suite
         run: python -m unittest canonical.tests.test_r3_success_adapter_patch_author_wrapper_v1 -v
+      - name: Run R3 deterministic mode-guard patch-author suite
+        run: python -m unittest canonical.tests.test_r3_deterministic_mode_guard_patch_author_v1 -v
