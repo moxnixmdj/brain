@@ -44,6 +44,8 @@ def adapt(
     pid = kernel_verdict.get("predicate_id")
     rows = _registry_rows(registry)
 
+    if registry.get("schema") != "PROJECT_BRAIN_OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2":
+        errors.append("FROZEN_REGISTRY_SCHEMA_MISMATCH")
     if kernel_verdict.get("schema") != "PROJECT_BRAIN_BENCHMARK_CLAIM_KERNEL_V4":
         errors.append("KERNEL_SCHEMA_MISMATCH")
     if kernel_verdict.get("status") != "PROVEN":
