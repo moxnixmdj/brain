@@ -6,6 +6,25 @@ from canonical.runtime.semantic_relation_control_v1 import resolve
 SCOPE = "finance:policy:2026"
 
 
+def shared_concept_receipt(*, scope=SCOPE, left_id="A", right_id="B"):
+    return {
+        "pass": True,
+        "schema": "PROJECT_BRAIN_SHARED_CONCEPT_IDENTITY_AUTHORITY_RECEIPT_V1",
+        "scope_id": scope,
+        "left_id": left_id,
+        "right_id": right_id,
+        "shared_concept_id": "REGCAP:42",
+        "left_binding_authenticated": True,
+        "right_binding_authenticated": True,
+        "concept_semantics_authenticated": True,
+        "left_binding_sha256": "a" * 64,
+        "right_binding_sha256": "b" * 64,
+        "registry_sha256": "c" * 64,
+        "verification_authority_mutated": False,
+        "receipt_sha256": "d" * 64,
+    }
+
+
 class Tests(unittest.TestCase):
     def test_similarity_candidate_never_certifies_equivalence(self):
         out = resolve({
@@ -226,6 +245,85 @@ class Tests(unittest.TestCase):
         self.assertEqual(
             out["status"],
             "FAIL_CLOSED__EXPLICIT_SOURCE_EVIDENCE_INVALID",
+        )
+
+    def test_authenticated_shared_concept_identity_proves_semantic_identity(self):
+        receipt = shared_concept_receipt()
+        out = resolve(
+            {
+                "left_id": "A",
+                "right_id": "B",
+                "scope_id": SCOPE,
+                "required_relation": "SEMANTIC_IDENTITY",
+                "shared_concept_identity_receipt": receipt,
+            },
+            concept_identity_verifier=lambda value: value,
+        )
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(out["strongest_proved_relation"], "SEMANTIC_IDENTITY")
+        self.assertTrue(out["shared_concept_identity"]["proved"])
+        self.assertEqual(
+            out["shared_concept_identity"]["shared_concept_id"],
+            "REGCAP:42",
+        )
+
+    def test_shared_concept_receipt_without_verifier_fails_closed(self):
+        out = resolve({
+            "left_id": "A",
+            "right_id": "B",
+            "scope_id": SCOPE,
+            "required_relation": "SEMANTIC_IDENTITY",
+            "shared_concept_identity_receipt": shared_concept_receipt(),
+        })
+        self.assertFalse(out["pass"])
+        self.assertEqual(
+            out["status"],
+            "FAIL_CLOSED__SHARED_CONCEPT_IDENTITY_EVIDENCE_INVALID",
+        )
+        self.assertEqual(
+            out["reason"],
+            "SHARED_CONCEPT_IDENTITY_RECEIPT_AND_VERIFIER_REQUIRED",
+        )
+
+    def test_shared_concept_identity_wrong_scope_is_rejected(self):
+        receipt = shared_concept_receipt(scope="another-scope")
+        out = resolve(
+            {
+                "left_id": "A",
+                "right_id": "B",
+                "scope_id": SCOPE,
+                "required_relation": "SEMANTIC_IDENTITY",
+                "shared_concept_identity_receipt": receipt,
+            },
+            concept_identity_verifier=lambda value: value,
+        )
+        self.assertFalse(out["pass"])
+        self.assertEqual(
+            out["status"],
+            "FAIL_CLOSED__SHARED_CONCEPT_IDENTITY_EVIDENCE_INVALID",
+        )
+        self.assertEqual(
+            out["shared_concept_identity"]["reason"],
+            "SHARED_CONCEPT_IDENTITY_BINDING_INVALID",
+        )
+
+    def test_shared_concept_identity_requires_content_address_bindings(self):
+        receipt = shared_concept_receipt()
+        receipt["registry_sha256"] = "not-a-digest"
+        out = resolve(
+            {
+                "left_id": "A",
+                "right_id": "B",
+                "scope_id": SCOPE,
+                "required_relation": "SEMANTIC_IDENTITY",
+                "shared_concept_identity_receipt": receipt,
+            },
+            concept_identity_verifier=lambda value: value,
+        )
+        self.assertFalse(out["pass"])
+        self.assertIn(
+            "registry_sha256",
+            out["shared_concept_identity"]["mismatch_fields"],
         )
 
     def test_generic_proof_record_field_is_rejected(self):
