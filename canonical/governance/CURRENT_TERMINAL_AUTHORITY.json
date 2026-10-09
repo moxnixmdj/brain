@@ -971,6 +971,15 @@
         "git_blob_sha": "62cbb3b8554a2f0398c08007901b4e1090ebb731"
       },
       "note": "FOUR_CANONICAL_ADVANCED_CODING_RESIDUALS_REDUCED_TO_TWO_BY_EXACT_REUSE__ZERO_BENCHMARK_CREDIT"
+    },
+    "coding_shared_specification_coverage_only_successor_20261009_v2": {
+      "path": "canonical/governance/CODING_SHARED_SPECIFICATION_COVERAGE_ONLY_SUCCESSOR_20261009_V2.json",
+      "git_blob_sha": "ab64aa1ed5bc498b4e74debb729820f26b41dee9",
+      "verification": {
+        "path": "canonical/verification/CODING_SHARED_SPECIFICATION_COVERAGE_ONLY_RECOMPUTE_20261009_V2.json",
+        "git_blob_sha": "baceff064ad0d184b61e06eac7e7413a18368bfd"
+      },
+      "note": "SPECIFICATION_RESIDUAL_REDUCED_TO_COVERAGE_EVIDENCE_ONLY__FIRST_MISSING_OBJECT_ONE_AUTHENTICATED_V5_CODING_POLICY_ADEQUACY_CERTIFICATE__ZERO_CREDIT"
     }
   },
   "live_truth": {
@@ -1533,7 +1542,7 @@
     "cursorbench_absence_of_bound_v5_failure_is_adequacy_proof": false,
     "cursorbench_one_v5_pass_is_scope_complete_adequacy_proof": false,
     "cursorbench_selector_work_authorized_now": false,
-    "cursorbench_next_proof_object": "CURSORBENCH_V5_TARGET_RELEVANT_POLICY_ADEQUACY_REGION_V1",
+    "cursorbench_next_proof_object": "CODING_V5_AUTHENTICATED_POSITIVE_ADEQUACY_CERTIFICATE_V1",
     "r2_sec_standard_xbrl_companyconcept_source_native_semantics_bound": true,
     "r2_sec_standard_xbrl_source_native_policy_adequacy_claimed": false,
     "cursorbench_advanced_coding_canonical_residual_count": 4,
@@ -1549,7 +1558,15 @@
     "cursorbench_cad_contract_dormant_until_target_relevant_membership_or_family_closure": true,
     "r2_fibo_q2_2026_bounded_finance_authority_bound": true,
     "r2_fibo_complete_import_closure_claimed": false,
-    "r2_fibo_missing_path_is_non_entailment": false
+    "r2_fibo_missing_path_is_non_entailment": false,
+    "coding_specification_semantic_control_mechanism_gap": false,
+    "coding_specification_registered_conditioned_policy_count": 1,
+    "coding_specification_registered_coding_policy_count": 0,
+    "coding_specification_first_missing_object": "CODING_V5_AUTHENTICATED_POSITIVE_ADEQUACY_CERTIFICATE_V1",
+    "coding_specification_selected_discriminator_truth_state": "CONDITIONAL_ONLY_AFTER_NO_COMMON_AUTHENTICATED_CODING_POLICY",
+    "coding_specification_common_policy_realization_binding_state": "CONDITIONAL_ONLY_AFTER_AUTHENTICATED_COMMON_POLICY_EXISTS",
+    "coding_specification_selector_work_authorized_now": false,
+    "coding_specification_whole_residual_closed": false
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -2249,7 +2266,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 71,
+  "pointer_revision": 72,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
