@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_D_FINAL_DECISION_VERIFY_LIVE_TWO_CARRIER_VERIFICATION_V1",
+  "date": "2026-10-09",
+  "status": "PASS__TWO_INDEPENDENT_LIVE_D_FINAL_CANARIES__FRESH_INPUTS__TAMPER_REJECTED__MISSING_MATERIAL_FAIL_CLOSED",
+  "capability_id": "bound:decision.synthesis.verify.stdlib",
+  "certificate": {
+    "path": "canonical/verification/D_FINAL_DECISION_VERIFY_LIVE_CANDIDATE_CERTIFICATE_20261009_V1.json",
+    "certificate_sha256": "08c5617cb8b0921276f87ffb62a021ea0665d976321a5e7063ad6b1f225dc8e0",
+    "execution_epoch_sha256": "6f0ac41d007fe49822bf13d3aa6056f1acd6f8b718548e4fb2055d6c3881b431",
+    "material_closure_root": "6f0c51a33fdc1c20487239785f30321ff90822595b79c091d758a88a4c8ac8b7",
+    "policy_sha256": "eceb3f27c47ae4c0ac452e595f00b0d7d89fb895b5740e2a1d8c456847e994b1"
+  },
+  "carrier_1": {
+    "provider": "SPRITES",
+    "name": "brain-live-integrated-v1-run-20261008",
+    "id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "fresh_nonce_sha256": "1f18e3eedc4e5b743efd416965aedd1f5c41742967999078b0bb3325fa7c5ea8",
+    "valid_fresh_execution": true,
+    "tamper_rejected": true,
+    "preflight_pass": true,
+    "material_closure_match": true,
+    "result": "PASS"
+  },
+  "carrier_2": {
+    "provider": "SPRITES",
+    "name": "brain-r3-root1-gap-verify-20261008",
+    "id": "sprite-91472ada-4fea-4536-9558-7a7e3da49928",
+    "first_attempt": {
+      "result": "FAIL_CLOSED_BEFORE_EXECUTION",
+      "reason": "MATERIAL_FILE_MISSING:canonical/runtime/bound_capabilities/evidence_decision_verify.py",
+      "significance": "PROVES_CERTIFIED_MATERIAL_SET_IS_LOAD_BEARING"
+    },
+    "restored_exact_adapter_git_blob_sha": "63cf325320c7b91bf48ea2f2769c999c5a090929",
+    "fresh_nonce_sha256": "7dce6f3129868d04032144a16c78efa3298aea10fa1240c6a1486fd40da9cfa4",
+    "valid_fresh_execution": true,
+    "tamper_rejected": true,
+    "preflight_pass": true,
+    "material_closure_match": true,
+    "result": "PASS"
+  },
+  "independence": {
+    "distinct_carrier_ids": true,
+    "distinct_fresh_nonce_sha256": true,
+    "same_certificate_sha256": true,
+    "same_execution_epoch_sha256": true,
+    "same_material_closure_root": true
+  },
+  "promotion_conclusion": {
+    "verified_d_final_current_for_this_capability": true,
+    "other_capability_promotion_implied": false,
+    "archive_effectful_route_still_pending": true
+  },
+  "hard_nonclaims": [
+    "NO_OTHER_LIVE_CAPABILITY_D_FINAL_CREDIT",
+    "NO_GLOBAL_D_FINAL_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "ownership_credit_delta": 1,
+    "terminal_credit_delta": 0
+  }
+}
