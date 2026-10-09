@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CONTEXT16K_REPAIR_CANDIDATE_20261009_V1",
+  "date": "2026-10-09",
+  "status": "CANDIDATE_AWAITING_ZERO_EXPOSURE_LIVE_VERIFICATION",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "source_ledger": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261009_V15.json",
+    "git_blob_sha": "8ac981dc3a5386e1c8c083952986fb48e009e418"
+  },
+  "source_failure": {
+    "path": "canonical/verification/TB_SCIENCE_RANK13_IRREVERSIBLE_RESULT_TRUTH_20261009_V1.json",
+    "git_blob_sha": "14527391610235e78a99d6148545a4098dfbd148",
+    "observed_request_tokens": 9202,
+    "failed_context_tokens": 8192,
+    "failure_class": "MINIMUM_CONTROL_PLANE_CONTEXT_CAPACITY_FAILURE"
+  },
+  "repair": {
+    "change_class": "EXECUTION_CARRIER_CONFIGURATION_ONLY",
+    "server_context_tokens_before": 8192,
+    "server_context_tokens_candidate": 16384,
+    "planner_blob_unchanged": "715aee168f02cb4abff961849b2b26709eef2e64",
+    "command_policy_blob_unchanged": "a525773417291c7a4841bf35e1baff5370350d0d",
+    "qwen_model_sha256_unchanged": "f41c0a0c0e43bf721fb2da29374cd1a97271bac0bab08a9dc42964525e82350c",
+    "llama_cpp_commit_unchanged": "bec4772f6a2527d371557b5d2032641e5ff7619c",
+    "synthetic_live_gate_target_input_tokens_min": 10000,
+    "synthetic_live_gate_target_input_tokens_max": 10200,
+    "max_tool_completion_tokens": 4096,
+    "required_positive_context_headroom": true
+  },
+  "live_gate": {
+    "runner_repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify-tbscience-v9-context16k-preflight-20261009",
+    "workflow_run_id": 37872005534,
+    "status": "IN_PROGRESS",
+    "receipt_bound": false,
+    "benchmark_task_exposure_required": 0,
+    "benchmark_trials_executed_required": 0
+  },
+  "downstream": {
+    "next_untouched_slot_rank": 14,
+    "next_untouched_slot_id": "terminal-bench-science/inverse-lithography::trial-0",
+    "task_digest": "sha256:8c4da4b5b3a00283335e83dda92584aaf9293ff773bc43f2bf95eb0e2c0f8530",
+    "rank14_task_read_authority": false,
+    "rank14_execution_authority": false,
+    "activation_rule": "NO_RANK14_AUTHORITY_UNTIL_THE_EXACT_ZERO_EXPOSURE_16K_GATE_PASSES_AND_IS_BOUND"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_16K_REPAIR_IS_VERIFIED_YET",
+    "NO_RANK14_TASK_READ",
+    "NO_RANK14_EXECUTION_AUTHORITY",
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "terminal_authority": false
+}
