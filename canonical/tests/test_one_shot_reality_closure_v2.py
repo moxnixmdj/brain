@@ -361,5 +361,114 @@ class RealityClosureV2Tests(unittest.TestCase):
         self.assertEqual(len(rows[0]["work_digest"]), 64)
 
 
+    def test_decision_sufficient_baseline_is_lossless_and_content_addressed(self):
+        gap = v2.compile_gap_contract(
+            closure(
+                status="OPEN",
+                internal=("ROOT1_GAP",),
+                evidence=("MISSING_FACT",),
+            )
+        )
+        out = v2.compile_decision_sufficient_contract(gap)
+        self.assertTrue(out["pass"])
+        self.assertEqual(
+            out["reduction_mode"],
+            "LOSSLESS_IDENTITY__NO_UNVERIFIED_OMISSION",
+        )
+        self.assertEqual(out["omitted_evidence"], [])
+        self.assertEqual(len(out["source_contract_sha256"]), 64)
+        self.assertEqual(len(out["representation_sha256"]), 64)
+        kinds = {row["kind"] for row in out["representation"]["policy_changing_requirements"]}
+        self.assertIn("INTERNAL_BLOCKER", kinds)
+        self.assertIn("EVIDENCE_BLOCKER", kinds)
+
+    def test_minimum_information_contract_deduplicates_and_forbids_broad_default(self):
+        gap = v2.compile_gap_contract(
+            closure(
+                status="OPEN",
+                evidence=("MISSING_FACT", "MISSING_FACT", "OTHER_FACT"),
+            )
+        )
+        decision = v2.compile_decision_sufficient_contract(gap)
+        out = v2.compile_minimum_information_contract(gap, decision)
+        self.assertEqual(out["request_count"], 2)
+        self.assertEqual(
+            out["proof_precedence"][-1],
+            "FULL_EMPIRICAL_EVALUATION_LAST",
+        )
+        self.assertTrue(all(
+            row["broad_acquisition_forbidden_without_minimality_proof"]
+            for row in out["requests"]
+        ))
+
+    def test_synthesis_provider_receives_decision_sufficient_contract(self):
+        first = closure(
+            status="OPEN",
+            internal=("ROOT1_GAP",),
+            initial="i0",
+            final="f0",
+        )
+        second = closure(
+            status="PASS",
+            passed=True,
+            initial="i1",
+            final="f1",
+        )
+        seen = {}
+        def provider(contract):
+            seen.update(contract)
+            return {
+                "pass": True,
+                "frontier_changed": True,
+                "verification_authority_mutated": False,
+                "receipt_sha256": "7" * 64,
+                "reuse_or_search_trace_complete": True,
+                "new_code_written": False,
+                "verifier_generated_or_reused": True,
+                "verifier_passed": True,
+            }
+        with patch.object(v2.v1, "run", side_effect=[first, second]):
+            out = v2.run(repo_root=".", capability_synthesis_provider=provider)
+        self.assertTrue(out["pass"])
+        self.assertEqual(
+            seen["decision_sufficient_contract"]["schema"],
+            v2.DECISION_SUFFICIENT_SCHEMA,
+        )
+
+    def test_evidence_provider_receives_minimum_information_contract(self):
+        first = closure(
+            status="OPEN",
+            evidence=("MISSING_FACT",),
+            initial="i0",
+            final="f0",
+        )
+        first["residual"]["pending_acquisition_or_experiment_required"] = True
+        second = closure(
+            status="PASS",
+            passed=True,
+            initial="i1",
+            final="f1",
+        )
+        seen = {}
+        def provider(contract):
+            seen.update(contract)
+            return {
+                "pass": True,
+                "frontier_changed": True,
+                "verification_authority_mutated": False,
+                "receipt_sha256": "6" * 64,
+                "acquisition_or_experiment_attempted": True,
+                "evidence_trace_sha256": "5" * 64,
+            }
+        with patch.object(v2.v1, "run", side_effect=[first, second]):
+            out = v2.run(repo_root=".", evidence_acquisition_provider=provider)
+        self.assertTrue(out["pass"])
+        self.assertEqual(
+            seen["minimum_information_contract"]["schema"],
+            v2.MINIMUM_INFORMATION_SCHEMA,
+        )
+        self.assertEqual(seen["minimum_information_contract"]["request_count"], 1)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
