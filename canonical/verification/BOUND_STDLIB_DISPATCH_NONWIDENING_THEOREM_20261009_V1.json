@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_BOUND_STDLIB_DISPATCH_NONWIDENING_THEOREM_V1",
+  "date": "2026-10-09",
+  "status": "INDEPENDENT_CONDITIONAL_SOURCE_THEOREM_PASS__PYTHON_STDLIB_DISPATCH_NONWIDENING__ZERO_CREDIT",
+  "exact_subject": {
+    "astra_runtime_path": "canonical/runtime/astra_runtime.py",
+    "astra_runtime_git_blob_sha": "cbbaa444ec1a70b16593af3c39bfb270c7859d2c",
+    "extracted_slice_path": "canonical/verification/ASTRA_BOUND_STDLIB_DISPATCH_SLICE_20261009_V1.py",
+    "extracted_slice_git_blob_sha": "4c817c942a6c915009557092766985cb879d85a1",
+    "extracted_slice_sha256": "55111126e56616e12e821a5f70c81d3af89964dac1cedf925e697445b8faef48"
+  },
+  "audit": {
+    "path": "canonical/runtime/bound_stdlib_dispatch_nonwidening_audit_v1.py",
+    "git_blob_sha": "fc29a53824b38dec3041ec0cd1d937fa58cd9cd2",
+    "hostile_test_path": "canonical/tests/test_bound_stdlib_dispatch_nonwidening_audit_v1.py",
+    "hostile_test_git_blob_sha": "2003b5b6fdb440b20e455a5f4a70923c4713fae3",
+    "carrier": {
+      "provider": "SPRITES",
+      "name": "brain-live-runtime-v1-verify-20261008",
+      "id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13"
+    },
+    "hostile_tests_run": 7,
+    "hostile_failures": 0,
+    "exact_slice_audit_pass": true
+  },
+  "conditional_scope": "EXACT_REGISTRY_ROWS_WITH_SOURCE_TYPE_PYTHON_STDLIB_ONLY",
+  "proved": [
+    "PYTHON_STDLIB_BRANCH_USES_IMPORTABILITY_PROBE_ONLY",
+    "NO_NETWORK_OR_PROCESS_CALL_IN_LOCAL_DEPENDENCY_FUNCTION",
+    "LOCAL_SOURCE_DISPATCH_ROUTES_TO_ENSURE_LOCAL_DEPENDENCY",
+    "ADAPTER_ID_COMES_FROM_REGISTRY_ROW",
+    "ADAPTER_NAME_IS_SANITIZED_TO_ALNUM_UNDERSCORE",
+    "ADAPTER_PATH_FIXED_UNDER_CANONICAL_RUNTIME_BOUND_CAPABILITIES",
+    "ADAPTER_DYNAMIC_LOAD_FIXED_TO_SANITIZED_PATH",
+    "EXACTLY_ONE_MEMBER_ADAPTER_ENTRYPOINT_CALL",
+    "REGISTRY_LOAD_PATH_AND_SCHEMA_ARE_FIXED",
+    "TEMPLATE_RENDERER_AND_EXPECTATION_CHECKER_HAVE_NO_EXTERNAL_EXECUTION_CHANNEL"
+  ],
+  "theorem": "WHEN_A_CONTENT_BOUND_REGISTRY_ROW_HAS_SOURCE_TYPE_PYTHON_STDLIB_THE_ASTRA_PRE_ADAPTER_DISPATCH_PATH_ADDS_NO_NETWORK_OR_PROCESS_DONOR_CHANNEL",
+  "remaining": [
+    "EXACT_MEMBER_REGISTRY_ROW_BINDING",
+    "MEMBER_MATERIAL_THEOREM",
+    "WRAPPER_NONWIDENING_THEOREM",
+    "D_EXECUTION_EPOCH_COMPOSITION",
+    "SOURCE_SLICE_EXTRACTION_MUST_REMAIN_BOUND_TO_THE_DECLARED_ASTRA_BLOB"
+  ],
+  "hard_nonclaims": [
+    "NO_APT_NPM_PYPI_OR_SYSTEM_TOOL_THEOREM",
+    "NO_FULL_D_FINAL_ROW_PROMOTION_YET",
+    "NO_OWNERSHIP_CREDIT",
+    "NO_D_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
