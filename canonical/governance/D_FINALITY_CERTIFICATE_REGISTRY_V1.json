@@ -25,7 +25,8 @@
     "stdlib_tranche_annotated_count": 19,
     "member_material_theorem_verified_count": 2,
     "verified_d_final_replay_route_count": 2,
-    "verified_d_final_route_candidate_count": 1
+    "verified_d_final_route_candidate_count": 1,
+    "bound_provider_executor_theorem_bound_count": 43
   },
   "rows": [
     {
@@ -52,44 +53,108 @@
         "policy_sha256": "d9c25144dddd93212eda736ee912a9ebcb85d7deecd28493340dca3d742c45cd",
         "live_front_door_enforced": false,
         "live_ownership_authority": false
+      },
+      "provider_executor_theorem": {
+        "status": "TWO_CARRIER_PASS",
+        "evidence_path": "canonical/governance/D_FINALITY_EXECUTION_EPOCH_V1_CANDIDATE_20261009.json",
+        "production_registry_git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85",
+        "astra_runtime_git_blob_sha": "dc61f199c064980d475c7a086cd30a4bddef1f60",
+        "promoted_executor_git_blob_sha": "bf9d686521bdc3a2d18775d42b64adb287ed8e3a",
+        "d_epoch_git_blob_sha": "60cbc536215571fbd7e41b5ce28239ce370120c3"
       }
     },
     {
       "capability_id": "bound:archive.verify.tar_gz.gnu",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
-      "status": "PENDING_D_FINAL_CERTIFICATE"
+      "status": "PENDING_D_FINAL_CERTIFICATE",
+      "provider_executor_theorem": {
+        "status": "TWO_CARRIER_PASS",
+        "evidence_path": "canonical/governance/D_FINALITY_EXECUTION_EPOCH_V1_CANDIDATE_20261009.json",
+        "production_registry_git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85",
+        "astra_runtime_git_blob_sha": "dc61f199c064980d475c7a086cd30a4bddef1f60",
+        "promoted_executor_git_blob_sha": "bf9d686521bdc3a2d18775d42b64adb287ed8e3a",
+        "d_epoch_git_blob_sha": "60cbc536215571fbd7e41b5ce28239ce370120c3"
+      }
     },
     {
       "capability_id": "bound:auto.apt.zint",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
-      "status": "PENDING_D_FINAL_CERTIFICATE"
+      "status": "PENDING_D_FINAL_CERTIFICATE",
+      "provider_executor_theorem": {
+        "status": "TWO_CARRIER_PASS",
+        "evidence_path": "canonical/governance/D_FINALITY_EXECUTION_EPOCH_V1_CANDIDATE_20261009.json",
+        "production_registry_git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85",
+        "astra_runtime_git_blob_sha": "dc61f199c064980d475c7a086cd30a4bddef1f60",
+        "promoted_executor_git_blob_sha": "bf9d686521bdc3a2d18775d42b64adb287ed8e3a",
+        "d_epoch_git_blob_sha": "60cbc536215571fbd7e41b5ce28239ce370120c3"
+      }
     },
     {
       "capability_id": "bound:auto.npm.dfinity-cbor",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
-      "status": "PENDING_D_FINAL_CERTIFICATE"
+      "status": "PENDING_D_FINAL_CERTIFICATE",
+      "provider_executor_theorem": {
+        "status": "TWO_CARRIER_PASS",
+        "evidence_path": "canonical/governance/D_FINALITY_EXECUTION_EPOCH_V1_CANDIDATE_20261009.json",
+        "production_registry_git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85",
+        "astra_runtime_git_blob_sha": "dc61f199c064980d475c7a086cd30a4bddef1f60",
+        "promoted_executor_git_blob_sha": "bf9d686521bdc3a2d18775d42b64adb287ed8e3a",
+        "d_epoch_git_blob_sha": "60cbc536215571fbd7e41b5ce28239ce370120c3"
+      }
     },
     {
       "capability_id": "bound:auto.npm.msgpack-msgpack",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
-      "status": "PENDING_D_FINAL_CERTIFICATE"
+      "status": "PENDING_D_FINAL_CERTIFICATE",
+      "provider_executor_theorem": {
+        "status": "TWO_CARRIER_PASS",
+        "evidence_path": "canonical/governance/D_FINALITY_EXECUTION_EPOCH_V1_CANDIDATE_20261009.json",
+        "production_registry_git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85",
+        "astra_runtime_git_blob_sha": "dc61f199c064980d475c7a086cd30a4bddef1f60",
+        "promoted_executor_git_blob_sha": "bf9d686521bdc3a2d18775d42b64adb287ed8e3a",
+        "d_epoch_git_blob_sha": "60cbc536215571fbd7e41b5ce28239ce370120c3"
+      }
     },
     {
       "capability_id": "bound:auto.pypi.bson-modern",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
-      "status": "PENDING_D_FINAL_CERTIFICATE"
+      "status": "PENDING_D_FINAL_CERTIFICATE",
+      "provider_executor_theorem": {
+        "status": "TWO_CARRIER_PASS",
+        "evidence_path": "canonical/governance/D_FINALITY_EXECUTION_EPOCH_V1_CANDIDATE_20261009.json",
+        "production_registry_git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85",
+        "astra_runtime_git_blob_sha": "dc61f199c064980d475c7a086cd30a4bddef1f60",
+        "promoted_executor_git_blob_sha": "bf9d686521bdc3a2d18775d42b64adb287ed8e3a",
+        "d_epoch_git_blob_sha": "60cbc536215571fbd7e41b5ce28239ce370120c3"
+      }
     },
     {
       "capability_id": "bound:auto.pypi.msgpack",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
-      "status": "PENDING_D_FINAL_CERTIFICATE"
+      "status": "PENDING_D_FINAL_CERTIFICATE",
+      "provider_executor_theorem": {
+        "status": "TWO_CARRIER_PASS",
+        "evidence_path": "canonical/governance/D_FINALITY_EXECUTION_EPOCH_V1_CANDIDATE_20261009.json",
+        "production_registry_git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85",
+        "astra_runtime_git_blob_sha": "dc61f199c064980d475c7a086cd30a4bddef1f60",
+        "promoted_executor_git_blob_sha": "bf9d686521bdc3a2d18775d42b64adb287ed8e3a",
+        "d_epoch_git_blob_sha": "60cbc536215571fbd7e41b5ce28239ce370120c3"
+      }
     },
     {
       "capability_id": "bound:decision.synthesis.typed.stdlib",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
       "status": "PENDING_D_FINAL_CERTIFICATE",
       "candidate_proof_class": "STDLIB_SIMPLE_LOCAL",
-      "adapter_git_blob_sha": "d7c73c24d2038c40bfb38ea6f10749a15a2d5415"
+      "adapter_git_blob_sha": "d7c73c24d2038c40bfb38ea6f10749a15a2d5415",
+      "provider_executor_theorem": {
+        "status": "TWO_CARRIER_PASS",
+        "evidence_path": "canonical/governance/D_FINALITY_EXECUTION_EPOCH_V1_CANDIDATE_20261009.json",
+        "production_registry_git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85",
+        "astra_runtime_git_blob_sha": "dc61f199c064980d475c7a086cd30a4bddef1f60",
+        "promoted_executor_git_blob_sha": "bf9d686521bdc3a2d18775d42b64adb287ed8e3a",
+        "d_epoch_git_blob_sha": "60cbc536215571fbd7e41b5ce28239ce370120c3"
+      }
     },
     {
       "capability_id": "bound:decision.synthesis.verify.stdlib",
@@ -125,209 +190,489 @@
         "material_closure_root": "e74911d0128ab7356902ad3d56be87a4fbdc9ceafa0a2d5e7427dbe766ba3109",
         "independent_verification_path": "canonical/verification/D_FINAL_DECISION_VERIFY_CERTIFICATE_INDEPENDENT_VERIFICATION_20261009_V1.json",
         "live_front_door_bound": false
+      },
+      "provider_executor_theorem": {
+        "status": "TWO_CARRIER_PASS",
+        "evidence_path": "canonical/governance/D_FINALITY_EXECUTION_EPOCH_V1_CANDIDATE_20261009.json",
+        "production_registry_git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85",
+        "astra_runtime_git_blob_sha": "dc61f199c064980d475c7a086cd30a4bddef1f60",
+        "promoted_executor_git_blob_sha": "bf9d686521bdc3a2d18775d42b64adb287ed8e3a",
+        "d_epoch_git_blob_sha": "60cbc536215571fbd7e41b5ce28239ce370120c3"
       }
     },
     {
       "capability_id": "bound:document.convert.markdown_pdf.pandoc_weasyprint",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
-      "status": "PENDING_D_FINAL_CERTIFICATE"
+      "status": "PENDING_D_FINAL_CERTIFICATE",
+      "provider_executor_theorem": {
+        "status": "TWO_CARRIER_PASS",
+        "evidence_path": "canonical/governance/D_FINALITY_EXECUTION_EPOCH_V1_CANDIDATE_20261009.json",
+        "production_registry_git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85",
+        "astra_runtime_git_blob_sha": "dc61f199c064980d475c7a086cd30a4bddef1f60",
+        "promoted_executor_git_blob_sha": "bf9d686521bdc3a2d18775d42b64adb287ed8e3a",
+        "d_epoch_git_blob_sha": "60cbc536215571fbd7e41b5ce28239ce370120c3"
+      }
     },
     {
       "capability_id": "bound:docx.document.create_from_json_record",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
-      "status": "PENDING_D_FINAL_CERTIFICATE"
+      "status": "PENDING_D_FINAL_CERTIFICATE",
+      "provider_executor_theorem": {
+        "status": "TWO_CARRIER_PASS",
+        "evidence_path": "canonical/governance/D_FINALITY_EXECUTION_EPOCH_V1_CANDIDATE_20261009.json",
+        "production_registry_git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85",
+        "astra_runtime_git_blob_sha": "dc61f199c064980d475c7a086cd30a4bddef1f60",
+        "promoted_executor_git_blob_sha": "bf9d686521bdc3a2d18775d42b64adb287ed8e3a",
+        "d_epoch_git_blob_sha": "60cbc536215571fbd7e41b5ce28239ce370120c3"
+      }
     },
     {
       "capability_id": "bound:docx.document.create.python_docx",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
-      "status": "PENDING_D_FINAL_CERTIFICATE"
+      "status": "PENDING_D_FINAL_CERTIFICATE",
+      "provider_executor_theorem": {
+        "status": "TWO_CARRIER_PASS",
+        "evidence_path": "canonical/governance/D_FINALITY_EXECUTION_EPOCH_V1_CANDIDATE_20261009.json",
+        "production_registry_git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85",
+        "astra_runtime_git_blob_sha": "dc61f199c064980d475c7a086cd30a4bddef1f60",
+        "promoted_executor_git_blob_sha": "bf9d686521bdc3a2d18775d42b64adb287ed8e3a",
+        "d_epoch_git_blob_sha": "60cbc536215571fbd7e41b5ce28239ce370120c3"
+      }
     },
     {
       "capability_id": "bound:docx.document.verify.intent_ooxml",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
       "status": "PENDING_D_FINAL_CERTIFICATE",
       "candidate_proof_class": "STDLIB_DYNAMIC_LOCAL",
-      "adapter_git_blob_sha": "937944128257c10d95038b99dd3d120cd3104ae1"
+      "adapter_git_blob_sha": "937944128257c10d95038b99dd3d120cd3104ae1",
+      "provider_executor_theorem": {
+        "status": "TWO_CARRIER_PASS",
+        "evidence_path": "canonical/governance/D_FINALITY_EXECUTION_EPOCH_V1_CANDIDATE_20261009.json",
+        "production_registry_git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85",
+        "astra_runtime_git_blob_sha": "dc61f199c064980d475c7a086cd30a4bddef1f60",
+        "promoted_executor_git_blob_sha": "bf9d686521bdc3a2d18775d42b64adb287ed8e3a",
+        "d_epoch_git_blob_sha": "60cbc536215571fbd7e41b5ce28239ce370120c3"
+      }
     },
     {
       "capability_id": "bound:docx.document.verify.ooxml",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
       "status": "PENDING_D_FINAL_CERTIFICATE",
       "candidate_proof_class": "STDLIB_SIMPLE_LOCAL",
-      "adapter_git_blob_sha": "41c2d9043b65376e13366cbdcd2d35a2cf12b2dc"
+      "adapter_git_blob_sha": "41c2d9043b65376e13366cbdcd2d35a2cf12b2dc",
+      "provider_executor_theorem": {
+        "status": "TWO_CARRIER_PASS",
+        "evidence_path": "canonical/governance/D_FINALITY_EXECUTION_EPOCH_V1_CANDIDATE_20261009.json",
+        "production_registry_git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85",
+        "astra_runtime_git_blob_sha": "dc61f199c064980d475c7a086cd30a4bddef1f60",
+        "promoted_executor_git_blob_sha": "bf9d686521bdc3a2d18775d42b64adb287ed8e3a",
+        "d_epoch_git_blob_sha": "60cbc536215571fbd7e41b5ce28239ce370120c3"
+      }
     },
     {
       "capability_id": "bound:evidence.claim_relation.generic_units.stdlib",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
       "status": "PENDING_D_FINAL_CERTIFICATE",
       "candidate_proof_class": "STDLIB_SIMPLE_LOCAL",
-      "adapter_git_blob_sha": "d66a7eb30774f66160b698d8082947776888293d"
+      "adapter_git_blob_sha": "d66a7eb30774f66160b698d8082947776888293d",
+      "provider_executor_theorem": {
+        "status": "TWO_CARRIER_PASS",
+        "evidence_path": "canonical/governance/D_FINALITY_EXECUTION_EPOCH_V1_CANDIDATE_20261009.json",
+        "production_registry_git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85",
+        "astra_runtime_git_blob_sha": "dc61f199c064980d475c7a086cd30a4bddef1f60",
+        "promoted_executor_git_blob_sha": "bf9d686521bdc3a2d18775d42b64adb287ed8e3a",
+        "d_epoch_git_blob_sha": "60cbc536215571fbd7e41b5ce28239ce370120c3"
+      }
     },
     {
       "capability_id": "bound:evidence.claim_spec.bind.explicit_comparison.stdlib",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
       "status": "PENDING_D_FINAL_CERTIFICATE",
       "candidate_proof_class": "STDLIB_DYNAMIC_LOCAL",
-      "adapter_git_blob_sha": "48fd058430d8d361fc75beced567c7b6d1166531"
+      "adapter_git_blob_sha": "48fd058430d8d361fc75beced567c7b6d1166531",
+      "provider_executor_theorem": {
+        "status": "TWO_CARRIER_PASS",
+        "evidence_path": "canonical/governance/D_FINALITY_EXECUTION_EPOCH_V1_CANDIDATE_20261009.json",
+        "production_registry_git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85",
+        "astra_runtime_git_blob_sha": "dc61f199c064980d475c7a086cd30a4bddef1f60",
+        "promoted_executor_git_blob_sha": "bf9d686521bdc3a2d18775d42b64adb287ed8e3a",
+        "d_epoch_git_blob_sha": "60cbc536215571fbd7e41b5ce28239ce370120c3"
+      }
     },
     {
       "capability_id": "bound:http.json.fetch_from_state",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
       "status": "PENDING_D_FINAL_CERTIFICATE",
       "candidate_proof_class": "STDLIB_WORLD_IO",
-      "adapter_git_blob_sha": "269e7b0f1aee8cac785f7f0e60338a1562a45201"
+      "adapter_git_blob_sha": "269e7b0f1aee8cac785f7f0e60338a1562a45201",
+      "provider_executor_theorem": {
+        "status": "TWO_CARRIER_PASS",
+        "evidence_path": "canonical/governance/D_FINALITY_EXECUTION_EPOCH_V1_CANDIDATE_20261009.json",
+        "production_registry_git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85",
+        "astra_runtime_git_blob_sha": "dc61f199c064980d475c7a086cd30a4bddef1f60",
+        "promoted_executor_git_blob_sha": "bf9d686521bdc3a2d18775d42b64adb287ed8e3a",
+        "d_epoch_git_blob_sha": "60cbc536215571fbd7e41b5ce28239ce370120c3"
+      }
     },
     {
       "capability_id": "bound:image.code.decode.zbarimg",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
-      "status": "PENDING_D_FINAL_CERTIFICATE"
+      "status": "PENDING_D_FINAL_CERTIFICATE",
+      "provider_executor_theorem": {
+        "status": "TWO_CARRIER_PASS",
+        "evidence_path": "canonical/governance/D_FINALITY_EXECUTION_EPOCH_V1_CANDIDATE_20261009.json",
+        "production_registry_git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85",
+        "astra_runtime_git_blob_sha": "dc61f199c064980d475c7a086cd30a4bddef1f60",
+        "promoted_executor_git_blob_sha": "bf9d686521bdc3a2d18775d42b64adb287ed8e3a",
+        "d_epoch_git_blob_sha": "60cbc536215571fbd7e41b5ce28239ce370120c3"
+      }
     },
     {
       "capability_id": "bound:image.qr.generate.qrencode",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
-      "status": "PENDING_D_FINAL_CERTIFICATE"
+      "status": "PENDING_D_FINAL_CERTIFICATE",
+      "provider_executor_theorem": {
+        "status": "TWO_CARRIER_PASS",
+        "evidence_path": "canonical/governance/D_FINALITY_EXECUTION_EPOCH_V1_CANDIDATE_20261009.json",
+        "production_registry_git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85",
+        "astra_runtime_git_blob_sha": "dc61f199c064980d475c7a086cd30a4bddef1f60",
+        "promoted_executor_git_blob_sha": "bf9d686521bdc3a2d18775d42b64adb287ed8e3a",
+        "d_epoch_git_blob_sha": "60cbc536215571fbd7e41b5ce28239ce370120c3"
+      }
     },
     {
       "capability_id": "bound:json.query.jq",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
-      "status": "PENDING_D_FINAL_CERTIFICATE"
+      "status": "PENDING_D_FINAL_CERTIFICATE",
+      "provider_executor_theorem": {
+        "status": "TWO_CARRIER_PASS",
+        "evidence_path": "canonical/governance/D_FINALITY_EXECUTION_EPOCH_V1_CANDIDATE_20261009.json",
+        "production_registry_git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85",
+        "astra_runtime_git_blob_sha": "dc61f199c064980d475c7a086cd30a4bddef1f60",
+        "promoted_executor_git_blob_sha": "bf9d686521bdc3a2d18775d42b64adb287ed8e3a",
+        "d_epoch_git_blob_sha": "60cbc536215571fbd7e41b5ce28239ce370120c3"
+      }
     },
     {
       "capability_id": "bound:knowledge.consistency.assess",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
-      "status": "PENDING_D_FINAL_CERTIFICATE"
+      "status": "PENDING_D_FINAL_CERTIFICATE",
+      "provider_executor_theorem": {
+        "status": "TWO_CARRIER_PASS",
+        "evidence_path": "canonical/governance/D_FINALITY_EXECUTION_EPOCH_V1_CANDIDATE_20261009.json",
+        "production_registry_git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85",
+        "astra_runtime_git_blob_sha": "dc61f199c064980d475c7a086cd30a4bddef1f60",
+        "promoted_executor_git_blob_sha": "bf9d686521bdc3a2d18775d42b64adb287ed8e3a",
+        "d_epoch_git_blob_sha": "60cbc536215571fbd7e41b5ce28239ce370120c3"
+      }
     },
     {
       "capability_id": "bound:knowledge.json.fetch.external",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
-      "status": "PENDING_D_FINAL_CERTIFICATE"
+      "status": "PENDING_D_FINAL_CERTIFICATE",
+      "provider_executor_theorem": {
+        "status": "TWO_CARRIER_PASS",
+        "evidence_path": "canonical/governance/D_FINALITY_EXECUTION_EPOCH_V1_CANDIDATE_20261009.json",
+        "production_registry_git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85",
+        "astra_runtime_git_blob_sha": "dc61f199c064980d475c7a086cd30a4bddef1f60",
+        "promoted_executor_git_blob_sha": "bf9d686521bdc3a2d18775d42b64adb287ed8e3a",
+        "d_epoch_git_blob_sha": "60cbc536215571fbd7e41b5ce28239ce370120c3"
+      }
     },
     {
       "capability_id": "bound:knowledge.status.assert",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
-      "status": "PENDING_D_FINAL_CERTIFICATE"
+      "status": "PENDING_D_FINAL_CERTIFICATE",
+      "provider_executor_theorem": {
+        "status": "TWO_CARRIER_PASS",
+        "evidence_path": "canonical/governance/D_FINALITY_EXECUTION_EPOCH_V1_CANDIDATE_20261009.json",
+        "production_registry_git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85",
+        "astra_runtime_git_blob_sha": "dc61f199c064980d475c7a086cd30a4bddef1f60",
+        "promoted_executor_git_blob_sha": "bf9d686521bdc3a2d18775d42b64adb287ed8e3a",
+        "d_epoch_git_blob_sha": "60cbc536215571fbd7e41b5ce28239ce370120c3"
+      }
     },
     {
       "capability_id": "bound:knowledge.support.materialize",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
-      "status": "PENDING_D_FINAL_CERTIFICATE"
+      "status": "PENDING_D_FINAL_CERTIFICATE",
+      "provider_executor_theorem": {
+        "status": "TWO_CARRIER_PASS",
+        "evidence_path": "canonical/governance/D_FINALITY_EXECUTION_EPOCH_V1_CANDIDATE_20261009.json",
+        "production_registry_git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85",
+        "astra_runtime_git_blob_sha": "dc61f199c064980d475c7a086cd30a4bddef1f60",
+        "promoted_executor_git_blob_sha": "bf9d686521bdc3a2d18775d42b64adb287ed8e3a",
+        "d_epoch_git_blob_sha": "60cbc536215571fbd7e41b5ce28239ce370120c3"
+      }
     },
     {
       "capability_id": "bound:math.numeric_expression.sympy",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
-      "status": "PENDING_D_FINAL_CERTIFICATE"
+      "status": "PENDING_D_FINAL_CERTIFICATE",
+      "provider_executor_theorem": {
+        "status": "TWO_CARRIER_PASS",
+        "evidence_path": "canonical/governance/D_FINALITY_EXECUTION_EPOCH_V1_CANDIDATE_20261009.json",
+        "production_registry_git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85",
+        "astra_runtime_git_blob_sha": "dc61f199c064980d475c7a086cd30a4bddef1f60",
+        "promoted_executor_git_blob_sha": "bf9d686521bdc3a2d18775d42b64adb287ed8e3a",
+        "d_epoch_git_blob_sha": "60cbc536215571fbd7e41b5ce28239ce370120c3"
+      }
     },
     {
       "capability_id": "bound:pdf.extract.ocr.tesseract",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
-      "status": "PENDING_D_FINAL_CERTIFICATE"
+      "status": "PENDING_D_FINAL_CERTIFICATE",
+      "provider_executor_theorem": {
+        "status": "TWO_CARRIER_PASS",
+        "evidence_path": "canonical/governance/D_FINALITY_EXECUTION_EPOCH_V1_CANDIDATE_20261009.json",
+        "production_registry_git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85",
+        "astra_runtime_git_blob_sha": "dc61f199c064980d475c7a086cd30a4bddef1f60",
+        "promoted_executor_git_blob_sha": "bf9d686521bdc3a2d18775d42b64adb287ed8e3a",
+        "d_epoch_git_blob_sha": "60cbc536215571fbd7e41b5ce28239ce370120c3"
+      }
     },
     {
       "capability_id": "bound:pdf.extract.text.pypdf",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
-      "status": "PENDING_D_FINAL_CERTIFICATE"
+      "status": "PENDING_D_FINAL_CERTIFICATE",
+      "provider_executor_theorem": {
+        "status": "TWO_CARRIER_PASS",
+        "evidence_path": "canonical/governance/D_FINALITY_EXECUTION_EPOCH_V1_CANDIDATE_20261009.json",
+        "production_registry_git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85",
+        "astra_runtime_git_blob_sha": "dc61f199c064980d475c7a086cd30a4bddef1f60",
+        "promoted_executor_git_blob_sha": "bf9d686521bdc3a2d18775d42b64adb287ed8e3a",
+        "d_epoch_git_blob_sha": "60cbc536215571fbd7e41b5ce28239ce370120c3"
+      }
     },
     {
       "capability_id": "bound:plain_goal.bound_capability.grounding.stdlib",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
       "status": "PENDING_D_FINAL_CERTIFICATE",
       "candidate_proof_class": "STDLIB_DYNAMIC_LOCAL",
-      "adapter_git_blob_sha": "f2d96dd40c01cde214443108fe5f9f372cf04444"
+      "adapter_git_blob_sha": "f2d96dd40c01cde214443108fe5f9f372cf04444",
+      "provider_executor_theorem": {
+        "status": "TWO_CARRIER_PASS",
+        "evidence_path": "canonical/governance/D_FINALITY_EXECUTION_EPOCH_V1_CANDIDATE_20261009.json",
+        "production_registry_git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85",
+        "astra_runtime_git_blob_sha": "dc61f199c064980d475c7a086cd30a4bddef1f60",
+        "promoted_executor_git_blob_sha": "bf9d686521bdc3a2d18775d42b64adb287ed8e3a",
+        "d_epoch_git_blob_sha": "60cbc536215571fbd7e41b5ce28239ce370120c3"
+      }
     },
     {
       "capability_id": "bound:plain_goal.bound_capability.grounding.verify.stdlib",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
       "status": "PENDING_D_FINAL_CERTIFICATE",
       "candidate_proof_class": "STDLIB_SIMPLE_LOCAL",
-      "adapter_git_blob_sha": "d4aa64dc995845fcf8045f14f476f84b7f1d9cb8"
+      "adapter_git_blob_sha": "d4aa64dc995845fcf8045f14f476f84b7f1d9cb8",
+      "provider_executor_theorem": {
+        "status": "TWO_CARRIER_PASS",
+        "evidence_path": "canonical/governance/D_FINALITY_EXECUTION_EPOCH_V1_CANDIDATE_20261009.json",
+        "production_registry_git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85",
+        "astra_runtime_git_blob_sha": "dc61f199c064980d475c7a086cd30a4bddef1f60",
+        "promoted_executor_git_blob_sha": "bf9d686521bdc3a2d18775d42b64adb287ed8e3a",
+        "d_epoch_git_blob_sha": "60cbc536215571fbd7e41b5ce28239ce370120c3"
+      }
     },
     {
       "capability_id": "bound:pypi.provenance.audit_live_artifact",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
       "status": "PENDING_D_FINAL_CERTIFICATE",
       "candidate_proof_class": "STDLIB_WORLD_IO",
-      "adapter_git_blob_sha": "fd8af415d7846be0f2ff23aa1674df77af504d03"
+      "adapter_git_blob_sha": "fd8af415d7846be0f2ff23aa1674df77af504d03",
+      "provider_executor_theorem": {
+        "status": "TWO_CARRIER_PASS",
+        "evidence_path": "canonical/governance/D_FINALITY_EXECUTION_EPOCH_V1_CANDIDATE_20261009.json",
+        "production_registry_git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85",
+        "astra_runtime_git_blob_sha": "dc61f199c064980d475c7a086cd30a4bddef1f60",
+        "promoted_executor_git_blob_sha": "bf9d686521bdc3a2d18775d42b64adb287ed8e3a",
+        "d_epoch_git_blob_sha": "60cbc536215571fbd7e41b5ce28239ce370120c3"
+      }
     },
     {
       "capability_id": "bound:python.source.audit.ast",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
       "status": "PENDING_D_FINAL_CERTIFICATE",
       "candidate_proof_class": "STDLIB_SIMPLE_LOCAL",
-      "adapter_git_blob_sha": "f708d51a480f3e49b3c9e4e0c0a34239094228ea"
+      "adapter_git_blob_sha": "f708d51a480f3e49b3c9e4e0c0a34239094228ea",
+      "provider_executor_theorem": {
+        "status": "TWO_CARRIER_PASS",
+        "evidence_path": "canonical/governance/D_FINALITY_EXECUTION_EPOCH_V1_CANDIDATE_20261009.json",
+        "production_registry_git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85",
+        "astra_runtime_git_blob_sha": "dc61f199c064980d475c7a086cd30a4bddef1f60",
+        "promoted_executor_git_blob_sha": "bf9d686521bdc3a2d18775d42b64adb287ed8e3a",
+        "d_epoch_git_blob_sha": "60cbc536215571fbd7e41b5ce28239ce370120c3"
+      }
     },
     {
       "capability_id": "bound:python.tests.audit.unittest",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
       "status": "PENDING_D_FINAL_CERTIFICATE",
       "candidate_proof_class": "STDLIB_SUBPROCESS_LOCAL",
-      "adapter_git_blob_sha": "b6fe40131583587e21f9c1e369679de140349e81"
+      "adapter_git_blob_sha": "b6fe40131583587e21f9c1e369679de140349e81",
+      "provider_executor_theorem": {
+        "status": "TWO_CARRIER_PASS",
+        "evidence_path": "canonical/governance/D_FINALITY_EXECUTION_EPOCH_V1_CANDIDATE_20261009.json",
+        "production_registry_git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85",
+        "astra_runtime_git_blob_sha": "dc61f199c064980d475c7a086cd30a4bddef1f60",
+        "promoted_executor_git_blob_sha": "bf9d686521bdc3a2d18775d42b64adb287ed8e3a",
+        "d_epoch_git_blob_sha": "60cbc536215571fbd7e41b5ce28239ce370120c3"
+      }
     },
     {
       "capability_id": "bound:source.authority.identity.ror",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
       "status": "PENDING_D_FINAL_CERTIFICATE",
       "candidate_proof_class": "STDLIB_WORLD_IO",
-      "adapter_git_blob_sha": "9396ff7169b274af9bbfbe736e004587631e3b05"
+      "adapter_git_blob_sha": "9396ff7169b274af9bbfbe736e004587631e3b05",
+      "provider_executor_theorem": {
+        "status": "TWO_CARRIER_PASS",
+        "evidence_path": "canonical/governance/D_FINALITY_EXECUTION_EPOCH_V1_CANDIDATE_20261009.json",
+        "production_registry_git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85",
+        "astra_runtime_git_blob_sha": "dc61f199c064980d475c7a086cd30a4bddef1f60",
+        "promoted_executor_git_blob_sha": "bf9d686521bdc3a2d18775d42b64adb287ed8e3a",
+        "d_epoch_git_blob_sha": "60cbc536215571fbd7e41b5ce28239ce370120c3"
+      }
     },
     {
       "capability_id": "bound:source.evidence.extract.objective_grounded.stdlib",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
       "status": "PENDING_D_FINAL_CERTIFICATE",
       "candidate_proof_class": "STDLIB_WORLD_IO",
-      "adapter_git_blob_sha": "227877b9f7c80c8e810a1042a0bad5c0ed94577d"
+      "adapter_git_blob_sha": "227877b9f7c80c8e810a1042a0bad5c0ed94577d",
+      "provider_executor_theorem": {
+        "status": "TWO_CARRIER_PASS",
+        "evidence_path": "canonical/governance/D_FINALITY_EXECUTION_EPOCH_V1_CANDIDATE_20261009.json",
+        "production_registry_git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85",
+        "astra_runtime_git_blob_sha": "dc61f199c064980d475c7a086cd30a4bddef1f60",
+        "promoted_executor_git_blob_sha": "bf9d686521bdc3a2d18775d42b64adb287ed8e3a",
+        "d_epoch_git_blob_sha": "60cbc536215571fbd7e41b5ce28239ce370120c3"
+      }
     },
     {
       "capability_id": "bound:source.objective_relevance.rank.bm25",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
       "status": "PENDING_D_FINAL_CERTIFICATE",
       "candidate_proof_class": "STDLIB_DYNAMIC_LOCAL",
-      "adapter_git_blob_sha": "380e08142841fbc1e641f017b91f4c0fe5fb5680"
+      "adapter_git_blob_sha": "380e08142841fbc1e641f017b91f4c0fe5fb5680",
+      "provider_executor_theorem": {
+        "status": "TWO_CARRIER_PASS",
+        "evidence_path": "canonical/governance/D_FINALITY_EXECUTION_EPOCH_V1_CANDIDATE_20261009.json",
+        "production_registry_git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85",
+        "astra_runtime_git_blob_sha": "dc61f199c064980d475c7a086cd30a4bddef1f60",
+        "promoted_executor_git_blob_sha": "bf9d686521bdc3a2d18775d42b64adb287ed8e3a",
+        "d_epoch_git_blob_sha": "60cbc536215571fbd7e41b5ce28239ce370120c3"
+      }
     },
     {
       "capability_id": "bound:sqlite.table.create_from_json_records",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
       "status": "PENDING_D_FINAL_CERTIFICATE",
       "candidate_proof_class": "STDLIB_SIMPLE_LOCAL",
-      "adapter_git_blob_sha": "d729d19ba5c0808273268426e7450f1db74a5c07"
+      "adapter_git_blob_sha": "d729d19ba5c0808273268426e7450f1db74a5c07",
+      "provider_executor_theorem": {
+        "status": "TWO_CARRIER_PASS",
+        "evidence_path": "canonical/governance/D_FINALITY_EXECUTION_EPOCH_V1_CANDIDATE_20261009.json",
+        "production_registry_git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85",
+        "astra_runtime_git_blob_sha": "dc61f199c064980d475c7a086cd30a4bddef1f60",
+        "promoted_executor_git_blob_sha": "bf9d686521bdc3a2d18775d42b64adb287ed8e3a",
+        "d_epoch_git_blob_sha": "60cbc536215571fbd7e41b5ce28239ce370120c3"
+      }
     },
     {
       "capability_id": "bound:sqlite.table.verify_against_json_records",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
-      "status": "PENDING_D_FINAL_CERTIFICATE"
+      "status": "PENDING_D_FINAL_CERTIFICATE",
+      "provider_executor_theorem": {
+        "status": "TWO_CARRIER_PASS",
+        "evidence_path": "canonical/governance/D_FINALITY_EXECUTION_EPOCH_V1_CANDIDATE_20261009.json",
+        "production_registry_git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85",
+        "astra_runtime_git_blob_sha": "dc61f199c064980d475c7a086cd30a4bddef1f60",
+        "promoted_executor_git_blob_sha": "bf9d686521bdc3a2d18775d42b64adb287ed8e3a",
+        "d_epoch_git_blob_sha": "60cbc536215571fbd7e41b5ce28239ce370120c3"
+      }
     },
     {
       "capability_id": "bound:terminal.kstar.root.assess.stdlib",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
       "status": "PENDING_D_FINAL_CERTIFICATE",
       "candidate_proof_class": "STDLIB_SIMPLE_LOCAL",
-      "adapter_git_blob_sha": "c313dfa5f253d0065d56e0c66aae316fea466f03"
+      "adapter_git_blob_sha": "c313dfa5f253d0065d56e0c66aae316fea466f03",
+      "provider_executor_theorem": {
+        "status": "TWO_CARRIER_PASS",
+        "evidence_path": "canonical/governance/D_FINALITY_EXECUTION_EPOCH_V1_CANDIDATE_20261009.json",
+        "production_registry_git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85",
+        "astra_runtime_git_blob_sha": "dc61f199c064980d475c7a086cd30a4bddef1f60",
+        "promoted_executor_git_blob_sha": "bf9d686521bdc3a2d18775d42b64adb287ed8e3a",
+        "d_epoch_git_blob_sha": "60cbc536215571fbd7e41b5ce28239ce370120c3"
+      }
     },
     {
       "capability_id": "bound:web.browser.rendered.capture.chromedriver",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
-      "status": "PENDING_D_FINAL_CERTIFICATE"
+      "status": "PENDING_D_FINAL_CERTIFICATE",
+      "provider_executor_theorem": {
+        "status": "TWO_CARRIER_PASS",
+        "evidence_path": "canonical/governance/D_FINALITY_EXECUTION_EPOCH_V1_CANDIDATE_20261009.json",
+        "production_registry_git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85",
+        "astra_runtime_git_blob_sha": "dc61f199c064980d475c7a086cd30a4bddef1f60",
+        "promoted_executor_git_blob_sha": "bf9d686521bdc3a2d18775d42b64adb287ed8e3a",
+        "d_epoch_git_blob_sha": "60cbc536215571fbd7e41b5ce28239ce370120c3"
+      }
     },
     {
       "capability_id": "bound:web.release.verify.independent_http",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
       "status": "PENDING_D_FINAL_CERTIFICATE",
       "candidate_proof_class": "STDLIB_WORLD_IO",
-      "adapter_git_blob_sha": "126b46cd2cd11dd12bfa16aa0e337349fe0d70bf"
+      "adapter_git_blob_sha": "126b46cd2cd11dd12bfa16aa0e337349fe0d70bf",
+      "provider_executor_theorem": {
+        "status": "TWO_CARRIER_PASS",
+        "evidence_path": "canonical/governance/D_FINALITY_EXECUTION_EPOCH_V1_CANDIDATE_20261009.json",
+        "production_registry_git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85",
+        "astra_runtime_git_blob_sha": "dc61f199c064980d475c7a086cd30a4bddef1f60",
+        "promoted_executor_git_blob_sha": "bf9d686521bdc3a2d18775d42b64adb287ed8e3a",
+        "d_epoch_git_blob_sha": "60cbc536215571fbd7e41b5ce28239ce370120c3"
+      }
     },
     {
       "capability_id": "bound:xlsx.table.create_from_json_records",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
-      "status": "PENDING_D_FINAL_CERTIFICATE"
+      "status": "PENDING_D_FINAL_CERTIFICATE",
+      "provider_executor_theorem": {
+        "status": "TWO_CARRIER_PASS",
+        "evidence_path": "canonical/governance/D_FINALITY_EXECUTION_EPOCH_V1_CANDIDATE_20261009.json",
+        "production_registry_git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85",
+        "astra_runtime_git_blob_sha": "dc61f199c064980d475c7a086cd30a4bddef1f60",
+        "promoted_executor_git_blob_sha": "bf9d686521bdc3a2d18775d42b64adb287ed8e3a",
+        "d_epoch_git_blob_sha": "60cbc536215571fbd7e41b5ce28239ce370120c3"
+      }
     },
     {
       "capability_id": "bound:xlsx.table.verify_against_json_records",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
-      "status": "PENDING_D_FINAL_CERTIFICATE"
+      "status": "PENDING_D_FINAL_CERTIFICATE",
+      "provider_executor_theorem": {
+        "status": "TWO_CARRIER_PASS",
+        "evidence_path": "canonical/governance/D_FINALITY_EXECUTION_EPOCH_V1_CANDIDATE_20261009.json",
+        "production_registry_git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85",
+        "astra_runtime_git_blob_sha": "dc61f199c064980d475c7a086cd30a4bddef1f60",
+        "promoted_executor_git_blob_sha": "bf9d686521bdc3a2d18775d42b64adb287ed8e3a",
+        "d_epoch_git_blob_sha": "60cbc536215571fbd7e41b5ce28239ce370120c3"
+      }
     },
     {
       "capability_id": "bound:yaml.to_json.yq",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
-      "status": "PENDING_D_FINAL_CERTIFICATE"
+      "status": "PENDING_D_FINAL_CERTIFICATE",
+      "provider_executor_theorem": {
+        "status": "TWO_CARRIER_PASS",
+        "evidence_path": "canonical/governance/D_FINALITY_EXECUTION_EPOCH_V1_CANDIDATE_20261009.json",
+        "production_registry_git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85",
+        "astra_runtime_git_blob_sha": "dc61f199c064980d475c7a086cd30a4bddef1f60",
+        "promoted_executor_git_blob_sha": "bf9d686521bdc3a2d18775d42b64adb287ed8e3a",
+        "d_epoch_git_blob_sha": "60cbc536215571fbd7e41b5ce28239ce370120c3"
+      }
     },
     {
       "capability_id": "certified_route:router-deployment-canary",
