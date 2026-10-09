@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_COVERAGE_COMPLETENESS_CLAIM_CERTIFICATES_V2",
+  "date": "2026-10-09",
+  "status": "ACTIVE_CLAIM_SCOPED_AUTHORITY__ZERO_REGISTERED_CLAIMS__ZERO_CREDIT",
+  "mission_binding": {
+    "pointer_path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
+    "authority_path": "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+    "authority_git_blob_sha": "13c470645b037bbb46245c687dd35197b420d51a"
+  },
+  "registry": {
+    "path": "canonical/governance/COVERAGE_COMPLETENESS_CLAIM_CERTIFICATE_REGISTRY_V2.json",
+    "git_blob_sha": "44ff62c97b0ecb7dec2036b649656c74c2a0dbaf"
+  },
+  "guard": {
+    "path": "canonical/runtime/coverage_root_claim_registry_guard_v2.py",
+    "git_blob_sha": "db8f5008f1ee56181b7bc90334fb424e60fd384d"
+  },
+  "tests": {
+    "path": "canonical/tests/test_coverage_root_claim_registry_guard_v2.py",
+    "git_blob_sha": "b457a38c7cc7a7139e52a7eeb47ae9dfae7d3bd8"
+  },
+  "root_falsifier": {
+    "path": "canonical/runtime/root_theorem_falsifier_v1.py",
+    "git_blob_sha": "7d3cbf9ea44ec22b1ac669463222370d0fc5b34b"
+  },
+  "registered_claims": 0,
+  "closed_claims": 0,
+  "global_mission_completion_derivable": false,
+  "v1_global_registry": {
+    "path": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_CERTIFICATE_REGISTRY_V1.json",
+    "authority": "HISTORICAL_SCHEMA_ONLY__NO_R4_AUTHORITY_AFTER_V2"
+  },
+  "next": "REGISTER_A_REAL_FROZEN_CERTIFICATION_CLAIM_THEN_PROVE_OR_FALSIFY_ITS_R1_R2_R3_BUNDLE",
+  "accounting": {
+    "fresh_reality_units_consumed": 0,
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
