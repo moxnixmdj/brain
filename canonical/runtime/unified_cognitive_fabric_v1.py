@@ -33,6 +33,7 @@ from canonical.runtime.verified_bound_capability_execution_adapter_v1 import exe
 from canonical.runtime import semantic_ambiguity_control_v1 as semantic_ambiguity
 from canonical.runtime import semantic_relation_control_v1 as semantic_relation
 from canonical.runtime import oewn_decision_sense_control_v1 as oewn_decision_sense
+from canonical.runtime import one_shot_reality_closure_v2 as one_shot_reality_closure
 
 SCHEMA = "PROJECT_BRAIN_UNIFIED_COGNITIVE_FABRIC_V1"
 ROOT = Path(__file__).resolve().parents[2]
@@ -62,6 +63,10 @@ ENGINE_DESCRIPTORS = {
     "SEMANTIC_AMBIGUITY": "semantic_ambiguity_control_v1.decide",
     "SEMANTIC_RELATION": "semantic_relation_control_v1.resolve",
     "OEWN_DECISION_SENSE": "oewn_decision_sense_control_v1.resolve",
+}
+
+META_ORCHESTRATORS = {
+    "ONE_SHOT_REALITY_CLOSURE": "one_shot_reality_closure_v2.run",
 }
 
 KNOWN_R1_RESIDUALS: tuple[str, ...] = ()
@@ -291,6 +296,7 @@ def catalog() -> dict[str, Any]:
         "subordinate_runtime_entrypoint": SUBORDINATE_RUNTIME_ENTRYPOINT,
         "subordinate_runtime_public_authority": False,
         "single_front_door": True,
+        "meta_orchestrators": dict(META_ORCHESTRATORS),
         "all_historical_brain_capabilities_unified": False,
         "terminal_authority": False,
         "terminal_credit_delta": 0,
@@ -314,6 +320,10 @@ def run(
     verification_frontier_acquisition_provider_id: str = (
         "HOST_VERIFICATION_FRONTIER_ACQUISITION_PROVIDER"
     ),
+    one_shot_failure_repair_provider: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
+    one_shot_externality_certificate_provider: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
+    one_shot_capability_synthesis_provider: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
+    one_shot_evidence_acquisition_provider: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
 ) -> dict[str, Any]:
     try:
         if not isinstance(request, Mapping):
@@ -321,6 +331,49 @@ def run(
         requested_mode = str(request.get("mode") or "").strip().upper()
         if requested_mode == "CATALOG":
             return catalog()
+        if requested_mode == "ONE_SHOT_REALITY_CLOSURE":
+            options = request.get("options") or {}
+            if not isinstance(options, Mapping):
+                raise CognitiveFabricError("OPTIONS_NOT_OBJECT")
+            out = one_shot_reality_closure.run(
+                repo_root=ROOT,
+                state_path=options.get("state_path"),
+                verification_frontier_acquisition_provider=(
+                    verification_frontier_acquisition_provider
+                ),
+                verification_frontier_acquisition_provider_id=(
+                    verification_frontier_acquisition_provider_id
+                ),
+                failure_repair_provider=one_shot_failure_repair_provider,
+                externality_certificate_provider=(
+                    one_shot_externality_certificate_provider
+                ),
+                capability_synthesis_provider=(
+                    one_shot_capability_synthesis_provider
+                ),
+                evidence_acquisition_provider=(
+                    one_shot_evidence_acquisition_provider
+                ),
+                max_repair_rounds=int(options.get("one_shot_max_repair_rounds", 8)),
+                v1_max_rounds=int(options.get("one_shot_v1_max_rounds", 64)),
+                v1_max_actions_per_round=int(
+                    options.get("one_shot_v1_max_actions_per_round", 32)
+                ),
+            )
+            return {
+                "schema": SCHEMA,
+                "status": "FABRIC_META_ORCHESTRATOR_COMPLETE",
+                "mode": requested_mode,
+                "requested_mode": requested_mode,
+                "auto_routed": False,
+                "engine": META_ORCHESTRATORS[requested_mode],
+                "inner_pass": out.get("pass") is True,
+                "inner_status": out.get("status"),
+                "result": deepcopy(dict(out)),
+                "single_front_door": True,
+                "terminal_authority": False,
+                "terminal_credit_delta": 0,
+            }
 
         payload = request.get("payload")
         if not isinstance(payload, Mapping):

@@ -2018,7 +2018,7 @@
     },
     "unified_fabric": {
       "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-      "git_blob_sha": "8161b51386aa8e857f86d5e5788a83282cde6f4d"
+      "git_blob_sha": "5badd256e18ab4bad58be862c69ef9e272bf7eb1"
     },
     "verification": {
       "path": "canonical/verification/LIVE_CAPABILITY_OWNERSHIP_UNIVERSAL_INVOCATION_V1_SOURCE_REPLAY_20261008_V1.json",
@@ -2092,7 +2092,7 @@
     },
     "unified_fabric": {
       "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-      "git_blob_sha": "8161b51386aa8e857f86d5e5788a83282cde6f4d"
+      "git_blob_sha": "5badd256e18ab4bad58be862c69ef9e272bf7eb1"
     },
     "regression": {
       "path": "canonical/tests/test_live_capability_invoker_v1.py",
@@ -2626,6 +2626,21 @@
     "residual_proof_obligations_reach_non_authoritative_resolver": true,
     "arbitrary_raw_language_effect_semantics_globally_closed": false,
     "terminal_remains_false": true,
+    "terminal_credit_delta": 0
+  },
+  "one_shot_canonical_frontdoor_integration_20261009_v2": {
+    "current_pointer_path": "canonical/governance/CURRENT_ONE_SHOT_REALITY_CLOSURE.json",
+    "unified_fabric_git_blob_sha": "5badd256e18ab4bad58be862c69ef9e272bf7eb1",
+    "verification": {
+      "path": "canonical/verification/ONE_SHOT_CANONICAL_FRONTDOOR_INTEGRATION_VERIFY_20261009_V2.json",
+      "git_blob_sha": "198f44753c200eb8d8e572135bcb3b980b1ad611",
+      "status": "PASS__CANONICAL_FRONTDOOR_META_ORCHESTRATOR__EXACT_REBASE_PY_COMPILE__STRUCTURE_7_OF_7__BEHAVIORAL_LINEAGE_16_OF_16__R1_LINEAGE_4_OF_4__ONE_SHOT_V2_LINEAGE_20_OF_20__ZERO_TERMINAL_CREDIT"
+    },
+    "explicit_meta_mode": "ONE_SHOT_REALITY_CLOSURE",
+    "auto_default": false,
+    "live_owned_engine_added": false,
+    "exact_current_full_r1_runtime_replay": false,
+    "r1_behavioral_lineage_preserved": true,
     "terminal_credit_delta": 0
   }
 }

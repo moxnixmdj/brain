@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_ONE_SHOT_REALITY_CLOSURE_POINTER_V1",
   "date": "2026-10-09",
-  "status": "ACTIVE_VERIFIED_ORCHESTRATOR__DECISION_SUFFICIENT_AND_MINIMUM_INFORMATION_GATES_LOAD_BEARING__STRUCTURED_R2_PENDING_ACQUISITION_HANDOFF_VERIFIED__STRICT_EXTERNALITY_LAW_VERIFIED__ACTUAL_LIVE_R3_INTERNAL_FIXED_POINT__NO_RESIDUAL__NOT_LIVE_DEFAULT",
+  "status": "ACTIVE_VERIFIED_ORCHESTRATOR__CANONICAL_FRONTDOOR_META_MODE_LIVE__DECISION_SUFFICIENT_AND_MINIMUM_INFORMATION_GATES_LOAD_BEARING__STRUCTURED_R2_PENDING_ACQUISITION_HANDOFF_VERIFIED__STRICT_EXTERNALITY_LAW_VERIFIED__ACTUAL_LIVE_R3_INTERNAL_FIXED_POINT__NO_RESIDUAL__NOT_AUTO_DEFAULT",
   "runtime": {
     "path": "canonical/runtime/one_shot_reality_closure_v2.py",
     "git_blob_sha": "17b693029dc3ab5be7d4c8b523c104c33265700d"
@@ -42,7 +42,10 @@
     "r2_structured_pending_acquisition_handoff_verified": true,
     "r2_pending_acquisition_is_not_constructive_capability_gap_when_exact_evidence_request_is_bound": true,
     "structured_r2_minimum_information_contract_load_bearing": true,
-    "current_r2_exact_scheduler_cell_projection_reconciled": true
+    "current_r2_exact_scheduler_cell_projection_reconciled": true,
+    "live_canonical_frontdoor_callable": true,
+    "live_canonical_frontdoor_mode": "ONE_SHOT_REALITY_CLOSURE",
+    "post_dispatch_compounding_tick_suppressed": true
   },
   "next_load_bearing_roots": [
     "FOLLOW_CURRENT_TERMINAL_AUTHORITY__R3_NOT_CURRENT_BLOCKER__PROVE_ONE_SOUND_TERMINAL_ACCEPTANCE_ROUTE",
@@ -99,5 +102,14 @@
     "terminal_obligation_established": false,
     "repairability": "ORPHANED_TELEMETRY__NO_REPLAY_CONTEXT",
     "provenance_gap": "RETRY_CONTEXT_MISSING_AT_SOURCE"
+  },
+  "frontdoor_binding": {
+    "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
+    "git_blob_sha": "5badd256e18ab4bad58be862c69ef9e272bf7eb1",
+    "mode": "ONE_SHOT_REALITY_CLOSURE",
+    "role": "META_ORCHESTRATOR_NOT_LIVE_OWNED_ENGINE",
+    "verification_path": "canonical/verification/ONE_SHOT_CANONICAL_FRONTDOOR_INTEGRATION_VERIFY_20261009_V2.json",
+    "verification_git_blob_sha": "198f44753c200eb8d8e572135bcb3b980b1ad611",
+    "verification_status": "PASS__CANONICAL_FRONTDOOR_META_ORCHESTRATOR__EXACT_REBASE_PY_COMPILE__STRUCTURE_7_OF_7__BEHAVIORAL_LINEAGE_16_OF_16__R1_LINEAGE_4_OF_4__ONE_SHOT_V2_LINEAGE_20_OF_20__ZERO_TERMINAL_CREDIT"
   }
 }
