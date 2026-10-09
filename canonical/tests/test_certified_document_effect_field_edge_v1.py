@@ -53,8 +53,6 @@ class CertifiedDocumentEffectFieldEdgeV1Tests(unittest.TestCase):
             (self.source+"\n"+self.scope+"\n"+self.raw).encode("utf-8")
         ).hexdigest()
         self.concept=field_concept_id(
-            source_id=self.source,
-            raw_span=self.raw,
             scope_id=self.scope,
             effect_id="A.t",
             field="value",
@@ -89,6 +87,8 @@ class CertifiedDocumentEffectFieldEdgeV1Tests(unittest.TestCase):
     def test_missing_relation_verifier_cannot_prove_field(self):
         ev=evidence(self.scope,self.left,self.concept)
         out=prove_field(
+            source_id=self.source,
+            raw_span=self.raw,
             scope_id=self.scope,effect_id="A.t",field="value",value="10",
             dag_evidence=ev,
             expected_dag_sha256=evidence_sha256(ev),
@@ -101,6 +101,8 @@ class CertifiedDocumentEffectFieldEdgeV1Tests(unittest.TestCase):
         wrong="EFFECT_FIELD_CONCEPT::"+"0"*64
         ev=evidence(self.scope,self.left,wrong)
         out=prove_field(
+            source_id=self.source,
+            raw_span=self.raw,
             scope_id=self.scope,effect_id="A.t",field="value",value="10",
             dag_evidence=ev,
             expected_dag_sha256=evidence_sha256(ev),
@@ -135,6 +137,8 @@ class CertifiedDocumentEffectFieldEdgeV1Tests(unittest.TestCase):
     def test_tampered_evidence_hash_fails_closed(self):
         ev=evidence(self.scope,self.left,self.concept)
         out=prove_field(
+            source_id=self.source,
+            raw_span=self.raw,
             scope_id=self.scope,effect_id="A.t",field="value",value="10",
             dag_evidence=ev,
             expected_dag_sha256="0"*64,
@@ -150,6 +154,8 @@ class CertifiedDocumentEffectFieldEdgeV1Tests(unittest.TestCase):
         ev=evidence(self.scope,self.left,self.concept)
         bad=verifier_for("wrong-scope",self.left,self.concept)
         out=prove_field(
+            source_id=self.source,
+            raw_span=self.raw,
             scope_id=self.scope,effect_id="A.t",field="value",value="10",
             dag_evidence=ev,
             expected_dag_sha256=evidence_sha256(ev),
@@ -166,6 +172,8 @@ class CertifiedDocumentEffectFieldEdgeV1Tests(unittest.TestCase):
             counters=[{"kind":"counter"}],
         )
         out=prove_field(
+            source_id=self.source,
+            raw_span=self.raw,
             scope_id=self.scope,effect_id="A.t",field="value",value="10",
             dag_evidence=ev,
             expected_dag_sha256=evidence_sha256(ev),
