@@ -51,6 +51,7 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
         self.assertIn("SEMANTIC_RELATION", c["engines"])
         self.assertIn("SEMANTIC_RELATION", c["engines"])
         self.assertIn("SEMANTIC_RELATION", c["engines"])
+        self.assertIn("SEMANTIC_RELATION", c["engines"])
         self.assertGreater(c["brain_owned_transitive_file_count"], 1)
         self.assertGreater(c["brain_owned_transitive_source_bytes"], 0)
         self.assertIn(
@@ -368,6 +369,54 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
                 "required_relation": "BIDIRECTIONAL_EQUIVALENCE",
                 "scope_sha256": "1" * 64,
                 "evidence": {"embedding_similarity": 0.999},
+            },
+        })
+        self.assertTrue(out["auto_routed"])
+        self.assertEqual(out["mode"], "SEMANTIC_RELATION")
+        self.assertFalse(out["inner_pass"])
+        self.assertEqual(
+            out["result"]["reason"],
+            "UNSAFE_SIMILARITY_EVIDENCE_CANNOT_GRANT_SEMANTIC_RELATION",
+        )
+
+
+    def test_auto_semantic_relation_routes_and_preserves_direction(self):
+        scope = "1" * 64
+        out = run({
+            "payload": {
+                "expression_a": "CET1 capital",
+                "expression_b": "regulatory capital",
+                "required_relation": "A_ENTAILS_B_REQUIRED",
+                "scope_sha256": scope,
+                "evidence": {
+                    "entailment_a_to_b": {
+                        "verified": True,
+                        "relation": "A_ENTAILS_B",
+                        "source_kind": "CHECKED_PROOF_DAG",
+                        "verifier_id": "verifier:test",
+                        "evidence_sha256": "e" * 64,
+                        "scope_sha256": scope,
+                    }
+                },
+            },
+        })
+        self.assertTrue(out["auto_routed"])
+        self.assertEqual(out["mode"], "SEMANTIC_RELATION")
+        self.assertTrue(out["inner_pass"], out)
+        self.assertEqual(
+            out["result"]["strongest_proved_relation"],
+            "A_ENTAILS_B",
+        )
+
+    def test_auto_semantic_relation_rejects_similarity_as_authority(self):
+        scope = "1" * 64
+        out = run({
+            "payload": {
+                "expression_a": "reserve buffer",
+                "expression_b": "liquidity cushion",
+                "required_relation": "ANY_SOUND_RELATION",
+                "scope_sha256": scope,
+                "evidence": {"embedding_similarity": 0.99},
             },
         })
         self.assertTrue(out["auto_routed"])
