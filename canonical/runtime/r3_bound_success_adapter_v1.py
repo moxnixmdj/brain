@@ -133,6 +133,7 @@ def adapt(request: Mapping[str, Any], *, repo_root: str | Path) -> Mapping[str, 
 
         steps: list[dict[str, Any]] = []
         trace: list[dict[str, Any]] = []
+        reachable = set(initial_facts)
         for index, capability_id in enumerate(selected_plan):
             record = completed[index]
             if not isinstance(record, Mapping):
@@ -148,6 +149,15 @@ def adapt(request: Mapping[str, Any], *, repo_root: str | Path) -> Mapping[str, 
                 raise BoundSuccessAdapterError("BOUND_ADAPTER_RESULT_NOT_PASSING")
             requires = _items(args.get("requires", []), "STEP_REQUIRES")
             provides = _items(args.get("provides"), "STEP_PROVIDES", allow_empty=False)
+            missing_requires = sorted(set(requires) - reachable)
+            if missing_requires:
+                raise BoundSuccessAdapterError(
+                    "REPLAY_INITIAL_FACTS_DO_NOT_SUPPORT_CHECKPOINT_STEP:"
+                    + capability_id
+                    + ":"
+                    + ",".join(missing_requires)
+                )
+            reachable.update(provides)
             result_sha = str(result.get("result_sha256") or "").strip()
             composition_head = str(result.get("composition_capsule_head_hash") or "").strip()
             if len(result_sha) != 64 or len(composition_head) != 64:
@@ -167,6 +177,13 @@ def adapt(request: Mapping[str, Any], *, repo_root: str | Path) -> Mapping[str, 
                 "composition_capsule_head_hash": composition_head,
                 "effect_outcome_sha256": result_sha,
             })
+
+        missing_targets = sorted(set(target_effects) - reachable)
+        if missing_targets:
+            raise BoundSuccessAdapterError(
+                "REPLAY_TARGET_EFFECTS_NOT_REACHED_BY_CHECKPOINT:"
+                + ",".join(missing_targets)
+            )
 
         fact_head, value_head = _lineage_heads(
             initial_facts=initial_facts,
