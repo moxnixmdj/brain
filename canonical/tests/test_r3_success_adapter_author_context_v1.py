@@ -159,6 +159,43 @@ class R3SuccessAdapterAuthorContextV1Tests(unittest.TestCase):
         self.assertNotIn("schema with secret prose", rendered)
         self.assertNotIn("capability with secret prose", rendered)
 
+    def test_safe_looking_secret_symbol_is_hashed(self):
+        out = ctx.compile_context(
+            {
+                "proof_capsule_sha256": "a" * 64,
+                "material": {
+                    "source_schema": "SECRET123",
+                    "source_status": "TOKENABC",
+                    "selected_plan": ["PRIVATECAPABILITY123"],
+                    "execution": [
+                        {
+                            "capability_id": "PRIVATEEXECUTION123",
+                            "pass": True,
+                            "status": "SECRETPASS123",
+                        }
+                    ],
+                },
+            },
+            {
+                "replay_capsule_sha256": "b" * 64,
+                "context": {
+                    "mode": "specialized",
+                    "request": {},
+                },
+            },
+        )
+        self.assertTrue(out["pass"], out)
+        rendered = repr(out)
+        for secret in (
+            "SECRET123",
+            "TOKENABC",
+            "PRIVATECAPABILITY123",
+            "PRIVATEEXECUTION123",
+            "SECRETPASS123",
+        ):
+            self.assertNotIn(secret, rendered)
+        self.assertEqual(out["replay"]["mode"], "specialized")
+
     def test_invalid_context_fails_closed(self):
         out = ctx.compile_context({}, {})
         self.assertFalse(out["pass"])
