@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_STRICT_TERMINAL_CLOSURE_V1_POST_REPLAY_SHAPE_FIX_V1",
+  "date": "2026-10-09",
+  "status": "PENDING_PR_REPLAY__EXACT_DELTA_AUDITED__TARGETED_REGRESSION_ADDED__ZERO_CREDIT",
+  "repository": "moxnixmdj/brain",
+  "prior_verified_source_head": "cbf5d0fa2c70b05072e2607946f9f7e139f67abd",
+  "prior_verified_v1_git_blob_sha": "826d9bae80ed2c1f37be0e830f5e4807b262fb14",
+  "current_v1_git_blob_sha": "117d85bec1e5fb49428271aa9883e89d0ef1aa0a",
+  "exact_delta": {
+    "function": "_canonical_r2_residual",
+    "changed_behavior": "remaining_hard_frontier scalar string is preserved as one list item instead of list(string) character expansion",
+    "added_lines": 7,
+    "removed_lines": 1,
+    "information_theoretic_externality_logic_touched": false,
+    "blocker_classification_logic_touched": false,
+    "provider_failure_logic_touched": false,
+    "terminal_credit_logic_touched": false
+  },
+  "regression": {
+    "path": "canonical/tests/test_one_shot_verified_closure_v1.py",
+    "test": "test_scalar_remaining_hard_frontier_is_preserved_as_one_item",
+    "purpose": "prevent scalar hard-frontier corruption and bind current V1 bytes to an executable acceptance check"
+  },
+  "required_before_promotion": [
+    "PR-triggered strict closure workflow must pass on current branch bytes",
+    "pointer predecessor blob must equal current V1 blob",
+    "no terminal/checkpoint/acceptance credit may be added"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "checkpoint_credit_delta": 0
+  }
+}
