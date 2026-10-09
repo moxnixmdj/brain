@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_ONTOLOGY_BINDING_CONTROL_ACTIVATION_20261009_V1",
+  "date": "2026-10-09",
+  "status": "ACTIVE_CANDIDATE__BOUNDED_CONTENT_ADDRESSED_ONTOLOGY_BINDING__ZERO_TERMINAL_CREDIT",
+  "objective": "CLOSE_A_SOUND_POSITIVE_SUBREGION_OF_CONTEXT_DEPENDENT_WORD_SENSE_AND_DOMAIN_ONTOLOGY_MAPPING_WITHOUT_FUZZY_SELF_CERTIFICATION",
+  "runtime": {
+    "path": "canonical/runtime/ontology_binding_control_v1.py",
+    "git_blob_sha": "ef7011135e139bbe1d0f8eb8315dd527d2836b1c",
+    "unified_front_door": "canonical/runtime/unified_cognitive_fabric_v1.py",
+    "unified_front_door_git_blob_sha": "0ea4b097131519c63fbd56f1a9b431f476f5360c",
+    "fabric_mode": "ONTOLOGY_BINDING"
+  },
+  "proved_subregion": [
+    "UNIQUE_EXACT_PREFERRED_OR_ALTERNATIVE_LABEL_IN_CONTENT_ADDRESSED_SCOPE_BOUND_ONTOLOGY",
+    "AMBIGUOUS_EXACT_LABEL_DISAMBIGUATED_BY_ONTOLOGY_DECLARED_SUFFICIENT_CONTEXT_FACT_SET",
+    "UNIQUE_ONTOLOGY_DECLARED_SUFFICIENT_CONTEXT_FACT_SET",
+    "CURRENT_DECISION_SUBSTITUTION_WHEN_THE_COMPLETE_EXACT_LABEL_CANDIDATE_SET_HAS_ONE_COMPLETE_IDENTICAL_DECISION_SIGNATURE",
+    "MINIMUM_MISSING_SUFFICIENT_FACT_SET_EXPOSED_WHEN_IDENTITY_IS_NOT_PROVED"
+  ],
+  "control_law": [
+    "SENSE_OR_CONCEPT_BINDING_PRECEDES_WIDER_SEMANTIC_RELATION_REASONING",
+    "FUZZY_SIMILARITY_EMBEDDINGS_MODELS_AND_CALLER_CANDIDATE_IDS_HAVE_ZERO_IDENTITY_AUTHORITY",
+    "CONTENT_HASH_PROVES_INTEGRITY_NOT_SOURCE_AUTHORITY",
+    "TASK_DECISION_SUBSTITUTION_MUST_NOT_BE_UPGRADED_TO_CONCEPT_IDENTITY",
+    "PRESERVE_ALL_SURVIVING_CONCEPTS_WHEN_DISCRIMINATING_EVIDENCE_IS_MISSING",
+    "REQUEST_ONLY_THE_SMALLEST_ONTOLOGY_DECLARED_SUFFICIENT_FACT_SET_NEEDED_TO_DISCRIMINATE"
+  ],
+  "research_basis": [
+    {
+      "source": "W3C_SKOS",
+      "url": "https://www.w3.org/TR/skos-reference",
+      "principle": "MAPPING_RELATIONS_HAVE_TYPED_STRENGTH__CLOSE_MATCH_IS_NOT_TRANSITIVE__EXACT_MATCH_IS_STRONGER"
+    },
+    {
+      "source": "PRINCETON_WORDNET",
+      "url": "https://wordnet.princeton.edu/documentation/wngloss7wn",
+      "principle": "WORD_FORMS_MAY_HAVE_MULTIPLE_SENSES__SEMANTIC_RELATIONS_APPLY_TO_SENSES_SYNSETS_NOT_RAW_STRINGS"
+    },
+    {
+      "source": "BASEL_FRAMEWORK_RBC30",
+      "url": "https://www.bis.org/committees/bcbs/basel-framework/standard/rbc/30/inforce/2019-12-15/published/2019-12-15",
+      "principle": "REGULATORY_CAPITAL_TERMS_OCCUPY_DISTINCT_ONTOLOGY_LEVELS__CAPITAL_CONSERVATION_BUFFER_IS_COMPRISED_OF_CET1_AND_DRAWN_DOWN_AS_LOSSES_ARE_INCURRED"
+    }
+  ],
+  "r2_effect": {
+    "current_parent_frontier": "R2_V39_DECISION_RELATIVE_SEMANTIC_RELATION_FRONTIER",
+    "closes_global_ontology_mapping": false,
+    "closes_general_word_sense": false,
+    "closes_general_inferred_synonymy": false,
+    "bounded_positive_coverage_added": true
+  },
+  "authority_boundaries": {
+    "expected_digest_authenticates_external_source_authority": false,
+    "ontology_content_integrity_recomputed": true,
+    "context_content_integrity_recomputed": true,
+    "candidate_relation_is_authority": false,
+    "semantic_truth_authority": false,
+    "execution_authority": false,
+    "promotion_authority": false,
+    "terminal_authority": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
