@@ -36,6 +36,7 @@ def test_v2_atomizes_every_v1_membership_premise_without_widening_scope():
     assert cert["behavior_id"] == "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001"
     assert _atoms(cert["policy_condition"]) == EXPECTED_ATOMS
     assert set(cert["condition_atom_semantics"]) == EXPECTED_ATOMS
+    assert cert["adequacy_proved"] is True
     assert cert["membership_self_certified"] is False
     assert cert["adequacy_self_certified"] is False
     assert cert["adequacy_theorem"]["whole_behavior_adequacy"] is False
