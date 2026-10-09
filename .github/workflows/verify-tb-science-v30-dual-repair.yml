@@ -1,0 +1,88 @@
+name: Verify TB-Science V30 dual controller repair
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261009_V30.json"
+      - "canonical/verification/TB_SCIENCE_CANDIDATE_LOCAL_REJECTION_V9_PUBLIC_VERIFICATION_20261009_V1.json"
+      - "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json"
+      - ".github/workflows/verify-tb-science-v30-dual-repair.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify exact V30 graph, dual repair, and zero exposure
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib, json, pathlib
+          R=pathlib.Path(".")
+          def blob(path):
+              raw=(R/path).read_bytes()
+              return hashlib.sha1(b"blob "+str(len(raw)).encode()+b"\0"+raw).hexdigest()
+          v29p="canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261009_V29.json"
+          v30p="canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261009_V30.json"
+          r15p="canonical/verification/TB_SCIENCE_RANK15_V6_IRREVERSIBLE_RESULT_TRUTH_20261009_V1.json"
+          genp="canonical/governance/TB_SCIENCE_RANK16_PREEXECUTION_REPAIR_RECONCILIATION_20261009_V1.json"
+          genvp="canonical/verification/SCIENCE_CANDIDATE_LOCAL_REJECTION_VERIFY_20261009_V1.json"
+          pubp="canonical/verification/TB_SCIENCE_CANDIDATE_LOCAL_REJECTION_V9_PUBLIC_VERIFICATION_20261009_V1.json"
+          ctap="canonical/governance/CURRENT_TERMINAL_AUTHORITY.json"
+          v30=json.loads((R/v30p).read_text())
+          pub=json.loads((R/pubp).read_text())
+          gen=json.loads((R/genp).read_text())
+          genv=json.loads((R/genvp).read_text())
+          cta=json.loads((R/ctap).read_text())
+          assert blob(v29p)=="0c97c84d98ef3ce97025ea6672971f188d5fc566"
+          assert blob(r15p)=="a585c98a3acebd51198bc8c2ac4638ef13e98adc"
+          assert blob(genp)=="56b7bc8e0c1eb821d0b71788fce4a2e9eda4794e"
+          assert blob(genvp)=="5070f37f6d6364efbd572f41c942c326b1cd0265"
+          assert blob(pubp)=="51cf0243e5df133dd3615e241bf6f1c6605e33e7"
+          assert blob(v30p)=="dcd60ea4ca41fbaf5f07584fb52b3ca603bdc221"
+          assert gen["authority"]["controller_repair_prerequisite_satisfied"] is True
+          assert gen["authority"]["execution_authority"] is False
+          assert gen["authority"]["task_read_authority"] is False
+          assert genv["verification"]["full_science_agent_unittest"]["tests_run"]==28
+          assert genv["verification"]["full_science_agent_unittest"]["failures"]==0
+          assert genv["verification"]["full_science_agent_unittest"]["errors"]==0
+          assert pub["status"].startswith("PASS__")
+          assert pub["public_repair"]["merge_commit"]=="2e81af0f15a6ebe9886267658697220a7fb439ee"
+          assert pub["public_repair"]["files"]["agent_v9"]["git_blob_sha"]=="c3b9bbc93e070b9974598636ebbb2fd3156581cb"
+          assert all(x["conclusion"]=="success" for x in pub["verification_runs"])
+          assert v30["current_counts"]["consumed_slots"]==15
+          assert v30["rank15"]["result"]=="FINAL_ZERO"
+          assert v30["rank15"]["rerun_authority"] is False
+          assert v30["rank15"]["replacement_authority"] is False
+          assert v30["rank16"]["task_read"] is False
+          assert v30["rank16"]["task_started"] is False
+          assert v30["rank16"]["fresh_execution_authority"] is False
+          assert v30["rank16"]["fresh_task_read_authority"] is False
+          x=cta["tb_science_v30_post_rank15_dual_controller_repair_reconciliation"]
+          assert x["current_ledger_git_blob_sha"]==blob(v30p)
+          assert x["canonical_generic_repair"]["reconciliation_git_blob_sha"]==blob(genp)
+          assert x["canonical_generic_repair"]["independent_verification_git_blob_sha"]==blob(genvp)
+          assert x["public_execution_repair"]["verification_git_blob_sha"]==blob(pubp)
+          assert x["public_execution_repair"]["agent_v9_git_blob_sha"]=="c3b9bbc93e070b9974598636ebbb2fd3156581cb"
+          assert x["required_repair_satisfied"] is True
+          assert x["rank16_task_read"] is False
+          assert x["rank16_task_started"] is False
+          assert x["rank16_execution_authority"] is False
+          assert x["rank16_task_read_authority"] is False
+          s=cta["authoritative_sources"]
+          assert s["tb_science_current_slot_ledger_v30"]["git_blob_sha"]==blob(v30p)
+          assert s["tb_science_public_v9_candidate_local_rejection_verification"]["git_blob_sha"]==blob(pubp)
+          assert s["tb_science_rank16_preexecution_generic_controller_repair"]["git_blob_sha"]==blob(genp)
+          assert x["acceptance_credit_delta"]==0 and x["terminal_credit_delta"]==0
+          print("PASS__TB_SCIENCE_V30_DUAL_REPAIR_GRAPH__RANK16_ZERO_EXPOSURE")
+          PY
