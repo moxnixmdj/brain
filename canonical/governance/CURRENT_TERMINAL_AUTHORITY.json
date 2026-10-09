@@ -888,7 +888,7 @@
       "path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
       "scheduler_cut": {
         "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V52.json",
-        "git_blob_sha": "b6a35642b67e10e380200d55d4b5195be609d5cf"
+        "git_blob_sha": "385d50ba4003192becb4dae07c75d20cd93f840f"
       },
       "status": "ACTIVE_CURRENT_R2_AUTHORITY__V53__THIRTY_SEVEN_DIRECT_ROUTES__THIRTY_FOUR_BOUNDED_FAMILIES__STABLE_REGISTRY_DISPATCH__GENERAL_MECHANISM_CLOSED__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_REMAINS",
       "pointer_semantics": "MUTABLE_CURRENT_POINTER__PATH_IDENTITY_AUTHORITATIVE__IMMUTABLE_SCHEDULER_CUT_HASH_BOUND_BELOW",
@@ -2556,7 +2556,7 @@
   "r2_scheduler_precedence": {
     "current_authority_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
     "current_scheduler_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V52.json",
-    "current_scheduler_git_blob_sha": "b6a35642b67e10e380200d55d4b5195be609d5cf",
+    "current_scheduler_git_blob_sha": "385d50ba4003192becb4dae07c75d20cd93f840f",
     "single_live_primitive": "ESCAPE_POLICY_ADEQUACY",
     "general_mechanism_missing": false,
     "enumerated_active_zero_reality_cell_count": 0,
@@ -3423,10 +3423,10 @@
   "r2_v53_default_runtime_stable_dispatch_reconciliation": {
     "status": "RECONCILED__CURRENT_R2_AND_TERMINAL_LIVE_PROJECTIONS_BIND_V53_STABLE_37_ROUTE_DISPATCH__TERMINAL_STILL_FALSE",
     "current_r2_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
-    "current_r2_pointer_blob_sha": "52ee3417fd20d4041b7ce4f9d4393f5bc34181e6",
+    "current_r2_pointer_blob_sha": "de498fd51000bd4adbecb756d1713335694efdd7",
     "current_r2_pointer_blob_is_not_load_bearing": true,
     "scheduler_cut_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V52.json",
-    "scheduler_cut_git_blob_sha": "b6a35642b67e10e380200d55d4b5195be609d5cf",
+    "scheduler_cut_git_blob_sha": "385d50ba4003192becb4dae07c75d20cd93f840f",
     "direct_activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V28.json",
     "direct_activation_git_blob_sha": "fc024656e97618f90f0852771851f911ec3e2830",
     "direct_runtime_path": "canonical/runtime/r2_direct_route_registry_v1.py",
