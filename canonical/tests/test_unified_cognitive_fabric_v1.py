@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import tempfile
 import unittest
@@ -184,26 +185,54 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
 
 
     def test_auto_semantic_relation_uses_task_equivalence_without_claiming_identity(self):
-        out = run({
-            "payload": {
-                "left_id": "reserve-buffer",
-                "right_id": "liquidity-cushion",
-                "scope_id": "finance:policy:2026",
-                "required_relation": "CURRENT_DECISION_SUBSTITUTION",
-                "terminal_signature_rows": [
-                    {
-                        "raw_id": "reserve-buffer",
-                        "signature_complete": True,
-                        "terminal_signature": {"action": "REDUCE"},
-                    },
-                    {
-                        "raw_id": "liquidity-cushion",
-                        "signature_complete": True,
-                        "terminal_signature": {"action": "REDUCE"},
-                    },
-                ],
+        signature = {"action": "REDUCE"}
+        signature_sha = hashlib.sha256(
+            json.dumps(
+                signature,
+                sort_keys=True,
+                separators=(",", ":"),
+                ensure_ascii=False,
+                allow_nan=False,
+            ).encode("utf-8")
+        ).hexdigest()
+        receipt = {
+            "pass": True,
+            "schema": "PROJECT_BRAIN_TERMINAL_SIGNATURE_COMPLETENESS_AUTHORITY_RECEIPT_V1",
+            "scope_id": "finance:policy:2026",
+            "left_id": "reserve-buffer",
+            "right_id": "liquidity-cushion",
+            "left_terminal_signature_complete": True,
+            "right_terminal_signature_complete": True,
+            "left_terminal_signature_sha256": signature_sha,
+            "right_terminal_signature_sha256": signature_sha,
+            "verification_authority_mutated": False,
+            "receipt_sha256": "f" * 64,
+        }
+        verifier = Mock(side_effect=lambda value: value)
+        out = run(
+            {
+                "payload": {
+                    "left_id": "reserve-buffer",
+                    "right_id": "liquidity-cushion",
+                    "scope_id": "finance:policy:2026",
+                    "required_relation": "CURRENT_DECISION_SUBSTITUTION",
+                    "terminal_signature_rows": [
+                        {
+                            "raw_id": "reserve-buffer",
+                            "signature_complete": True,
+                            "terminal_signature": signature,
+                        },
+                        {
+                            "raw_id": "liquidity-cushion",
+                            "signature_complete": True,
+                            "terminal_signature": signature,
+                        },
+                    ],
+                    "terminal_signature_authority_receipt": receipt,
+                },
             },
-        })
+            semantic_authority_verifier=verifier,
+        )
         self.assertTrue(out["auto_routed"])
         self.assertEqual(out["mode"], "SEMANTIC_RELATION")
         self.assertTrue(out["inner_pass"], out)
@@ -212,6 +241,7 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
             "CURRENT_DECISION_SUBSTITUTION",
         )
         self.assertFalse(out["result"]["proved_facts"]["semantic_identity"])
+        verifier.assert_called_once()
 
     def test_auto_semantic_relation_forwards_semantic_authority_verifier(self):
         receipt = {
