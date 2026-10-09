@@ -18,5 +18,6 @@
     "verification_status": "VERIFIED_ISOLATED_FULL_STACK__103_OF_103_PASS",
     "exact_runtime_bound": true,
     "verification_authority_mutated": false
-  }
+  },
+  "semantic_open_stops_fallback": true
 }
