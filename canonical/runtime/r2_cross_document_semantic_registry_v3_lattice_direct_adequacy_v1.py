@@ -9,12 +9,11 @@ import re
 from typing import Any, Mapping
 
 from canonical.runtime.lossless_raw_task_contract_v1 import compile_contract
-from canonical.runtime import cross_document_effect_semantic_lattice_v7 as producer
-from canonical.runtime import cross_document_effect_semantic_lattice_verify_v7 as verifier
-from canonical.runtime import brain_owned_semantic_relation_edge_registry_v3 as registry
+from canonical.runtime import cross_document_effect_semantic_lattice_v8 as producer
+from canonical.runtime import cross_document_effect_semantic_lattice_verify_v8 as verifier
 
 SCHEMA="PROJECT_BRAIN_R2_CROSS_DOCUMENT_SEMANTIC_REGISTRY_V3_LATTICE_DIRECT_ADEQUACY_V1"
-ROUTE_ID="DIRECT_ADEQUACY::CROSS_DOCUMENT_SEMANTIC_REGISTRY_V3_LATTICE_V7"
+ROUTE_ID="DIRECT_ADEQUACY::CROSS_DOCUMENT_SEMANTIC_REGISTRY_V3_LATTICE_V8"
 CAPABILITY_ID="cross_document.semantic_registry_v3_lattice.stdlib"
 VERIFIER_CAPABILITY_ID="cross_document.semantic_registry_v3_lattice.verify.stdlib"
 ROOT=Path(__file__).resolve().parents[2]
@@ -73,13 +72,13 @@ def _contract(goal:str)->dict[str,Any]:
 
 
 def _material(problem:Mapping[str,Any])->tuple[dict[str,Any],dict[str,Any]]:
-    result=producer.evaluate(problem,relation_verifier=registry.verify)
+    result=producer.evaluate(problem)
     if result.get("status")=="FAIL_CLOSED":
         raise ValueError(
             "SEMANTIC_EDGE_LATTICE_PRODUCER_FAIL_CLOSED:"
             +str(result.get("reason") or "UNKNOWN")
         )
-    checked=verifier.verify(problem,result,relation_verifier=registry.verify)
+    checked=verifier.verify(problem,result)
     if checked.get("verified") is not True:
         raise ValueError(
             "PREFLIGHT_INDEPENDENT_SEMANTIC_EDGE_LATTICE_RECOMPUTATION_FAILED:"
@@ -151,7 +150,7 @@ def preflight(request:Mapping[str,Any],*,repo_root=None)->dict[str,Any]:
             "raw_acceptance_obligation_ids":ids,
             "semantic_scope":(
                 "QUERY_RELATIVE_EFFECT_FIELD_LATTICE_WITH_COMPOSITIONAL_V14_SOURCE_PROOF_"
-                "AND_BRAIN_OWNED_REGISTRY_V3_WITH_DOMAIN_MAPPING_RELATION_AUTHORITY"
+                "AND_BRAIN_OWNED_REGISTRY_V3_WITH_DOMAIN_MAPPING_RELATION_AUTHORITY_AND_V15_ADMISSIBILITY_GATE"
             ),
             "preflight_execution_authority":False,
             "preflight_verification":deepcopy(checked),
