@@ -1,0 +1,121 @@
+{
+  "schema": "PROJECT_BRAIN_FINANCE_ACCEPTANCE_ROUTE_SPLIT_20261009_V1",
+  "date": "2026-10-09",
+  "status": "TWO_FINANCE_ACCEPTANCE_OBLIGATIONS_SPLIT_BY_PROOF_SHAPE__GENERIC_SEMANTIC_TAIL_NOT_A_MANDATORY_SERIAL_PREREQUISITE_FOR_FINANCE_INDEX__FINANCE_AGENT_PUBLIC_CONTRACT_SHORTCUT_REMAINS_FALSIFIED__ZERO_CREDIT",
+  "checkpoint_obligations": [
+    "FINANCE_ACCOUNTING_INDEX_GE_61",
+    "FINANCE_AGENT_V2_GE_58_59"
+  ],
+  "source_bindings": {
+    "finance_index_direct_threshold": {
+      "path": "canonical/governance/FINANCE_INDEX_DIRECT_THRESHOLD_THEOREM_V1.json",
+      "git_blob_sha": "37f47143f62fe2f59e56d8eca4a64bae18a1ce8b"
+    },
+    "finance_index_component_floor_boundary": {
+      "path": "canonical/governance/FINANCE_INDEX_COMPONENT_FLOOR_BOUNDARY_20261004_V1.json",
+      "git_blob_sha": "277feb222baaa87526a17ac846d16413b31df44a"
+    },
+    "finance_agent_scope_falsification": {
+      "path": "canonical/governance/FINANCE_AGENT_V2_PUBLISHED_CONTRACT_SCOPE_FALSIFICATION_20261007_V1.json",
+      "git_blob_sha": "01ebffa49705f3e06edddcec98a080bccc795ce7"
+    },
+    "finance_agent_scope_falsification_verification": {
+      "path": "canonical/verification/FINANCE_AGENT_V2_PUBLISHED_CONTRACT_SCOPE_FALSIFICATION_VERIFICATION_20261007_V1.json",
+      "git_blob_sha": "093526b361425861bf5a40332ca83338ae218db6"
+    },
+    "open_obligation_reconciliation": {
+      "path": "canonical/governance/TOURNAMENT_FAILURE_CURRENT_13_OBLIGATION_RECONCILIATION_20261007_V2.json",
+      "git_blob_sha": "d841f3feb5dc6594974af955ef71f0e7c2659325"
+    }
+  },
+  "current_owner_observation": {
+    "observed_at": "2026-10-09",
+    "source_authority": "ARTIFICIAL_ANALYSIS_FIRST_PARTY_CURRENT_WEB__NON_CONTENT_ADDRESSED__SCHEDULING_ONLY",
+    "capability_index_methodology_url": "https://artificialanalysis.ai/methodology/capability-indices",
+    "finance_index_url": "https://artificialanalysis.ai/models/capabilities/finance-and-accounting",
+    "facts": [
+      "FINANCE_AND_ACCOUNTING_INDEX_IS_A_WEIGHTED_AVERAGE_OF_SIX_CAPABILITY_SUBSCORES",
+      "PUBLISHED_WEIGHTS_REMAIN_30_30_20_10_5_5",
+      "CURRENT_TOP_PUBLISHED_FINANCE_INDEX_SCORE_FOR_OPUS_5_5_MAX_IS_61",
+      "CAPABILITY_BREAKDOWN_VALUES_ARE_MARKED_NOT_PUBLICLY_AVAILABLE",
+      "NO_INNER_CAPABILITY_SUBSCORE_NORMALIZATION_OR_AGGREGATION_FORMULA_IS_PUBLISHED_ON_THE_OBSERVED_FIRST_PARTY_PAGES"
+    ],
+    "acceptance_credit_authority": false
+  },
+  "finance_index": {
+    "target": "FINANCE_ACCOUNTING_INDEX_GE_61",
+    "proof_shape": "DIRECT_WEIGHTED_COMPONENT_LOWER_BOUND",
+    "sufficient_condition": "SUM_i(weight_i * VERIFIED_NORMALIZED_BRAIN_COMPONENT_LOWER_BOUND_i) >= 61",
+    "weights": {
+      "BUSINESS_KNOWLEDGE": "0.30",
+      "AGENTIC_KNOWLEDGE_WORK": "0.30",
+      "REASONING": "0.20",
+      "AGENTIC_TOOL_USE": "0.10",
+      "LONG_CONTEXT": "0.05",
+      "NON_HALLUCINATION": "0.05"
+    },
+    "general_finance_semantic_tail_required_as_serial_prerequisite": false,
+    "separate_index_execution_required": false,
+    "current_blockers": [
+      "INDEPENDENT_NORMALIZED_BRAIN_COMPONENT_LOWER_BOUNDS_OR_VERIFIED_COMPONENT_FLOORS",
+      "EXACT_NORMALIZATION_BINDING_FOR_EVERY_REUSED_COMPONENT_BOUND",
+      "OWNER_ACCEPTED_OR_EQUIVALENT_COMPONENT_SUBSCORE_MAPPING_WHERE_REQUIRED"
+    ],
+    "forbidden_shortcuts": [
+      "DEFAULT_ZERO_COMPONENT_FLOORS",
+      "TRANSFER_RELATED_BENCHMARK_SCORE_WITHOUT_EXACT_NORMALIZATION_OR_SCOPE_PROOF",
+      "INFER_COMPONENT_SUBSCORE_NONNEGATIVITY_ONLY_FROM_UNDERLYING_EVALUATION_NONNEGATIVITY"
+    ],
+    "reusable_checkpoint_dependencies": [
+      "PROWORK_GDPVAL_GE_1846",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "HLE_TOOLS_GE_67_7",
+      "AUTOMATIONBENCH_GE_40"
+    ],
+    "state": "OPEN_BLOCKED__COMPONENT_NORMALIZATION_AND_OR_LOWER_BOUND_RECEIPTS_REQUIRED"
+  },
+  "finance_agent_v2": {
+    "target": "FINANCE_AGENT_V2_GE_58_59",
+    "proof_shape": "EXACT_OFFICIAL_RESULT_OR_SCOPE_COMPLETE_STRONGER_CERTIFICATE",
+    "public_task_contract_superset_route": "FALSIFIED",
+    "falsifier": "FIRST_PARTY_METHODOLOGY_ADMITS_IMPLICIT_SECTOR_CONVENTIONS_AND_INDUSTRY_SPECIFIC_NORMALIZATION_NOT_EXHAUSTED_BY_PUBLIC_PROMPT_OR_CATEGORY_STRUCTURE",
+    "public_question_population_complete_for_private_scored_scope": false,
+    "current_wake_conditions": [
+      "EXACT_OFFICIAL_RESULT_RECEIPT",
+      "CONTENT_ADDRESSED_COMPLETE_SECTOR_CONVENTION_AND_SOURCE_SEMANTICS_BOUND_SUFFICIENT_FOR_PRIVATE_ELIGIBLE_TASKS",
+      "FIRST_PARTY_PRIVATE_TASK_CONTRACT_SCOPE_BOUND_WITHOUT_CASE_EXPOSURE",
+      "STRONGER_SCOPE_COMPLETE_CERTIFICATE"
+    ],
+    "state": "DORMANT_ON_CURRENT_PUBLIC_SCOPE_CUT"
+  },
+  "theorem": {
+    "statement": "THE_TWO_FINANCE_ACCEPTANCE_OBLIGATIONS_DO_NOT_SHARE_ONE_MANDATORY_SERIAL_PROOF_ROUTE__FINANCE_INDEX_CAN_CLOSE_BY_ITS_VERIFIED_WEIGHTED_COMPONENT_LOWER_BOUND_THEOREM_WITHOUT_GLOBAL_FINANCE_SEMANTIC_TAIL_CLOSURE__FINANCE_AGENT_V2_REMAINS_PRIVATE_SCOPE_BOUND_AND_CANNOT_BE_CLOSED_BY_THE_KILLED_PUBLIC_CONTRACT_SUPERSET_SHORTCUT",
+    "consequence": "SCHEDULE_FINANCE_INDEX_EVIDENCE_NORMALIZATION_SATURATION_SEPARATELY_FROM_FINANCE_AGENT_PRIVATE_SCOPE_OR_EXACT_RESULT_WAKES"
+  },
+  "scheduler": {
+    "finance_index_next": "SATURATE_EXISTING_CONTENT_ADDRESSED_EVIDENCE_FOR_SIX_NORMALIZED_COMPONENT_LOWER_BOUNDS_AND_NORMALIZATION_BINDINGS__NO_NEW_FINANCE_SEMANTIC_MECHANISM",
+    "finance_agent_next": "SLEEP_UNTIL_EXACT_RESULT_PRIVATE_SCOPE_BIND_OR_STRONGER_SCOPE_COMPLETE_CERTIFICATE__DO_NOT_REPEAT_PUBLIC_CONTRACT_SUPERSET_ROUTE",
+    "shared_semantic_tail_role": "MAY_STILL_SUPPORT_OTHER_FINANCE_CAPABILITY_SCOPE_PROOFS__NOT_A_SERIAL_PREREQUISITE_FOR_FINANCE_INDEX_FIXED_BAR"
+  },
+  "hard_nonclaims": [
+    "NO_FINANCE_INDEX_COMPONENT_LOWER_BOUND_CREATED",
+    "NO_FINANCE_INDEX_SCORE_CREATED",
+    "NO_FINANCE_AGENT_V2_SCORE_OR_PRIVATE_SCOPE_CLOSURE",
+    "NO_FINANCIAL_ANALYSIS_FAMILY_ACCEPTANCE",
+    "NO_CHECKPOINT_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false
+}
