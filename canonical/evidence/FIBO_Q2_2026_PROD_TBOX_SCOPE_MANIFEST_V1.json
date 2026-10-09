@@ -1,0 +1,815 @@
+{
+  "schema": "PROJECT_BRAIN_FIBO_Q2_2026_PROD_TBOX_SCOPE_MANIFEST_V1",
+  "date": "2026-10-09",
+  "status": "BOUND_EXTERNAL_CONVENTION_SCOPE__FIBO_Q2_2026_PRODUCTION_TBOX__ZERO_SEMANTIC_MAPPING_AUTHORITY",
+  "source": {
+    "repository": "edmcouncil/fibo",
+    "tag": "master_2026Q2",
+    "tag_object_type": "commit",
+    "tag_object_sha": "f59157fe156e3d91b1c045222d0a7dc06b7d78a2",
+    "commit_sha": "f59157fe156e3d91b1c045222d0a7dc06b7d78a2",
+    "commit_tree_sha": "82d3273e1e93a98152b730538761b9e3264a37ea",
+    "commit_signature_verified": true,
+    "commit_signature_reason": "valid",
+    "loader_path": "AboutFIBOProd-TBoxOnly.rdf",
+    "loader_git_blob_sha": "69b9b10debbd5ad37e62a302d04e37ecbc063cc0",
+    "catalog_path": "catalog-v001.xml",
+    "catalog_git_blob_sha": "40dfc76ba525503852a58757fb93992ff89b28b3"
+  },
+  "scope": {
+    "id": "FIBO_Q2_2026_PRODUCTION_TBOX",
+    "completeness_basis": "THE_EXACT_RELEASE_LOADER_AboutFIBOProd-TBoxOnly.rdf_DECLARES_THE_PRODUCTION_ONTOLOGY_SET__EVERY_DECLARED_IMPORT_RESOLVES_THROUGH_THE_EXACT_RELEASE_CATALOG_TO_ONE_BLOB_IN_THE_EXACT_RELEASE_TREE",
+    "loader_import_count": 106,
+    "unique_loader_import_count": 106,
+    "resolved_blob_count": 106,
+    "unresolved_import_count": 0,
+    "total_source_bytes": 3452615,
+    "domain_counts": {
+      "BE": 16,
+      "CAE": 1,
+      "DER": 15,
+      "FBC": 15,
+      "FND": 31,
+      "IND": 5,
+      "LOAN": 7,
+      "SEC": 16
+    },
+    "production_tbox_only": true,
+    "reference_data_in_scope": false,
+    "examples_in_scope": false,
+    "metadata_files_in_scope": false,
+    "other_load_files_in_scope": false,
+    "external_dependency_closure_in_scope": false,
+    "explicit_source_declarations_authoritative_within_bound_release": true,
+    "inferred_semantics_requiring_unbound_external_dependencies_authoritative": false
+  },
+  "ontology_files": [
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/BE/FunctionalEntities/FunctionalEntities/",
+      "path": "BE/FunctionalEntities/FunctionalEntities.rdf",
+      "git_blob_sha": "7ecd3c49a6bf8c79b5955f13f52dad663cb457b3",
+      "size_bytes": 23084,
+      "domain": "BE"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/BE/FunctionalEntities/Publishers/",
+      "path": "BE/FunctionalEntities/Publishers.rdf",
+      "git_blob_sha": "73e6abb1ca7f55748e2d09736246a7bb650f4a03",
+      "size_bytes": 14672,
+      "domain": "BE"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/GovernmentEntities/",
+      "path": "BE/GovernmentEntities/GovernmentEntities.rdf",
+      "git_blob_sha": "84f62a9bb16e689d8865a1596afdf20888c829f6",
+      "size_bytes": 39790,
+      "domain": "BE"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/CorporateBodies/",
+      "path": "BE/LegalEntities/CorporateBodies.rdf",
+      "git_blob_sha": "d7a5cce3dff67a381273179ec219e34a28b5fd47",
+      "size_bytes": 29524,
+      "domain": "BE"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/FormalBusinessOrganizations/",
+      "path": "BE/LegalEntities/FormalBusinessOrganizations.rdf",
+      "git_blob_sha": "c4c59cc99b2034a3df5a057d69f41fd913b7d465",
+      "size_bytes": 22391,
+      "domain": "BE"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/LegalPersons/",
+      "path": "BE/LegalEntities/LegalPersons.rdf",
+      "git_blob_sha": "072e4b38e0e1d9dc5cfe4cdac7e2512b9f526fba",
+      "size_bytes": 25138,
+      "domain": "BE"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/LEIEntities/",
+      "path": "BE/LegalEntities/LEIEntities.rdf",
+      "git_blob_sha": "175569aff80e72b2389eedb22563c0612a10b0fd",
+      "size_bytes": 39015,
+      "domain": "BE"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/BE/OwnershipAndControl/ControlParties/",
+      "path": "BE/OwnershipAndControl/ControlParties.rdf",
+      "git_blob_sha": "6c1bf848a5f24c40069d1b7a81f03ec1aa2e2c1d",
+      "size_bytes": 23210,
+      "domain": "BE"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/BE/OwnershipAndControl/CorporateControl/",
+      "path": "BE/OwnershipAndControl/CorporateControl.rdf",
+      "git_blob_sha": "f8ece09bea943121cc1b6f603ddebc6e8f42d856",
+      "size_bytes": 22358,
+      "domain": "BE"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/BE/OwnershipAndControl/CorporateOwnership/",
+      "path": "BE/OwnershipAndControl/CorporateOwnership.rdf",
+      "git_blob_sha": "5ddc6e98dee4e08b4bf41d1218b65b2e274a9f1a",
+      "size_bytes": 20096,
+      "domain": "BE"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/BE/OwnershipAndControl/Executives/",
+      "path": "BE/OwnershipAndControl/Executives.rdf",
+      "git_blob_sha": "8df033d03a9f123908850895d74d7b214e894850",
+      "size_bytes": 48210,
+      "domain": "BE"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/BE/OwnershipAndControl/OwnershipParties/",
+      "path": "BE/OwnershipAndControl/OwnershipParties.rdf",
+      "git_blob_sha": "2a436ad310fe4fb68694fb2cb4ae0f81ac57e042",
+      "size_bytes": 24496,
+      "domain": "BE"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/BE/Partnerships/Partnerships/",
+      "path": "BE/Partnerships/Partnerships.rdf",
+      "git_blob_sha": "4c9996f5ec9359c1741e33b78353e38ac296cb22",
+      "size_bytes": 23047,
+      "domain": "BE"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/BE/PrivateLimitedCompanies/PrivateLimitedCompanies/",
+      "path": "BE/PrivateLimitedCompanies/PrivateLimitedCompanies.rdf",
+      "git_blob_sha": "f09bcea6c22f2c5271d206f40a20af52ba7117ab",
+      "size_bytes": 16223,
+      "domain": "BE"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/BE/SoleProprietorships/SoleProprietorships/",
+      "path": "BE/SoleProprietorships/SoleProprietorships.rdf",
+      "git_blob_sha": "0f702708e794214dae7c5978a01778bea9809eca",
+      "size_bytes": 9885,
+      "domain": "BE"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/BE/Trusts/Trusts/",
+      "path": "BE/Trusts/Trusts.rdf",
+      "git_blob_sha": "7941f617371c35bce65dd73ed56aa78d9fc27716",
+      "size_bytes": 20936,
+      "domain": "BE"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActions/",
+      "path": "CAE/CorporateEvents/CorporateActions.rdf",
+      "git_blob_sha": "ca47e7d5747de3d169b72103a0fec590099afdd2",
+      "size_bytes": 24999,
+      "domain": "CAE"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/DER/CreditDerivatives/CreditDefaultSwaps/",
+      "path": "DER/CreditDerivatives/CreditDefaultSwaps.rdf",
+      "git_blob_sha": "605bc2275419c28355545c72eca2269b820171a0",
+      "size_bytes": 39854,
+      "domain": "DER"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/CommoditiesContracts/",
+      "path": "DER/DerivativesContracts/CommoditiesContracts.rdf",
+      "git_blob_sha": "fe54a2ec03a9e738321f4ddc0615b840db2984be",
+      "size_bytes": 39197,
+      "domain": "DER"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/CurrencyContracts/",
+      "path": "DER/DerivativesContracts/CurrencyContracts.rdf",
+      "git_blob_sha": "d779363afb67e940c7f27df833cfb621d6168e4c",
+      "size_bytes": 24249,
+      "domain": "DER"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/",
+      "path": "DER/DerivativesContracts/DerivativesBasics.rdf",
+      "git_blob_sha": "d13985320de88e2dd7ebf52b16e78c840fb081b2",
+      "size_bytes": 53266,
+      "domain": "DER"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/",
+      "path": "DER/DerivativesContracts/DerivativesMasterAgreements.rdf",
+      "git_blob_sha": "ad90f5568752f8c2cf02301227dc5a4431ab0a77",
+      "size_bytes": 9419,
+      "domain": "DER"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/ExoticOptions/",
+      "path": "DER/DerivativesContracts/ExoticOptions.rdf",
+      "git_blob_sha": "28b6fdf3a5727a43ee44acd55ecc4e69202da49d",
+      "size_bytes": 67374,
+      "domain": "DER"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/FuturesAndForwards/",
+      "path": "DER/DerivativesContracts/FuturesAndForwards.rdf",
+      "git_blob_sha": "8942c1378de50fd735a1ed62a72f41ea687a2a05",
+      "size_bytes": 38434,
+      "domain": "DER"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/",
+      "path": "DER/DerivativesContracts/Options.rdf",
+      "git_blob_sha": "3f05186a8c533fe51b0156dcf8abd5898610908a",
+      "size_bytes": 66673,
+      "domain": "DER"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/RightsAndWarrants/",
+      "path": "DER/DerivativesContracts/RightsAndWarrants.rdf",
+      "git_blob_sha": "caa7f96aa17cfc0649ee86ac519db391b06994c5",
+      "size_bytes": 52269,
+      "domain": "DER"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/StructuredInstruments/",
+      "path": "DER/DerivativesContracts/StructuredInstruments.rdf",
+      "git_blob_sha": "7d7af65a94f854f441201d6cacc621a4252fa87d",
+      "size_bytes": 43353,
+      "domain": "DER"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Swaps/",
+      "path": "DER/DerivativesContracts/Swaps.rdf",
+      "git_blob_sha": "f68582e9af0c1e63294c1178d5991d23047aa7e2",
+      "size_bytes": 54931,
+      "domain": "DER"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IRSwaps/",
+      "path": "DER/RateDerivatives/IRSwaps.rdf",
+      "git_blob_sha": "2295ad5671cd3b016e64157f76be128320910030",
+      "size_bytes": 44493,
+      "domain": "DER"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/RateDerivatives/",
+      "path": "DER/RateDerivatives/RateDerivatives.rdf",
+      "git_blob_sha": "6ebf9358acc20585278e4d3204c115ad9f43d1fa",
+      "size_bytes": 8337,
+      "domain": "DER"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/DER/SecurityBasedDerivatives/EquitySwaps/",
+      "path": "DER/SecurityBasedDerivatives/EquitySwaps.rdf",
+      "git_blob_sha": "8e00e6e7f1dfa4155d9c1c61facd3897909da953",
+      "size_bytes": 21138,
+      "domain": "DER"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/DER/SecurityBasedDerivatives/SecurityBasedDerivatives/",
+      "path": "DER/SecurityBasedDerivatives/SecurityBasedDerivatives.rdf",
+      "git_blob_sha": "7b4b672ee816e0ffd153eca3c73c6a0ad5c006a4",
+      "size_bytes": 22621,
+      "domain": "DER"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/CreditEvents/",
+      "path": "FBC/DebtAndEquities/CreditEvents.rdf",
+      "git_blob_sha": "d09b3de3d34c7eb1f85e772cf5437d7a048c29a0",
+      "size_bytes": 27376,
+      "domain": "FBC"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/Debt/",
+      "path": "FBC/DebtAndEquities/Debt.rdf",
+      "git_blob_sha": "a5eb752f32d6af7bfa09331e93472caabb9c2369",
+      "size_bytes": 103624,
+      "domain": "FBC"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/Guaranty/",
+      "path": "FBC/DebtAndEquities/Guaranty.rdf",
+      "git_blob_sha": "dcf948c1db13f724ff0c652d5c9d4ccc2a8b6388",
+      "size_bytes": 25672,
+      "domain": "FBC"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/",
+      "path": "FBC/FinancialInstruments/FinancialInstruments.rdf",
+      "git_blob_sha": "5456f5cb395f30d4636f8d2b1e5f0463466b764e",
+      "size_bytes": 56770,
+      "domain": "FBC"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/InstrumentPricing/",
+      "path": "FBC/FinancialInstruments/InstrumentPricing.rdf",
+      "git_blob_sha": "ce991e6053bd36d3bae1b39437d03070065466ba",
+      "size_bytes": 45723,
+      "domain": "FBC"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/Settlement/",
+      "path": "FBC/FinancialInstruments/Settlement.rdf",
+      "git_blob_sha": "d34ad1a2d5c35e516df3e9c8c74c2dc52981fb81",
+      "size_bytes": 19901,
+      "domain": "FBC"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/BusinessCenters/",
+      "path": "FBC/FunctionalEntities/BusinessCenters.rdf",
+      "git_blob_sha": "fcc880776cb773ed5786e2418a4f585ef4ee1345",
+      "size_bytes": 9521,
+      "domain": "FBC"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/BusinessRegistries/",
+      "path": "FBC/FunctionalEntities/BusinessRegistries.rdf",
+      "git_blob_sha": "e3c987c5b3171be9c58ae372f6c836596dc7d01e",
+      "size_bytes": 62465,
+      "domain": "FBC"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/EuropeanEntities/EUFinancialServicesEntities/",
+      "path": "FBC/FunctionalEntities/EuropeanEntities/EUFinancialServicesEntities.rdf",
+      "git_blob_sha": "10ea6165c62c18517cd2226dfb6e52f6606f863a",
+      "size_bytes": 12234,
+      "domain": "FBC"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/",
+      "path": "FBC/FunctionalEntities/FinancialServicesEntities.rdf",
+      "git_blob_sha": "1e9a14a20cf56f651853d3afb8bec60654f1a226",
+      "size_bytes": 82365,
+      "domain": "FBC"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/Markets/",
+      "path": "FBC/FunctionalEntities/Markets.rdf",
+      "git_blob_sha": "ef619309739a8d69faf1819a60a9128b7c91bcc0",
+      "size_bytes": 72297,
+      "domain": "FBC"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/CAFinancialServicesEntities/",
+      "path": "FBC/FunctionalEntities/NorthAmericanEntities/CAFinancialServicesEntities.rdf",
+      "git_blob_sha": "1f85288d6472aafef92edaad74f3b9138d56b33c",
+      "size_bytes": 7300,
+      "domain": "FBC"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/RegulatoryAgencies/",
+      "path": "FBC/FunctionalEntities/RegulatoryAgencies.rdf",
+      "git_blob_sha": "a076db694eee8ff3357a3e2e83a4e5d548da892e",
+      "size_bytes": 18420,
+      "domain": "FBC"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/ClientsAndAccounts/",
+      "path": "FBC/ProductsAndServices/ClientsAndAccounts.rdf",
+      "git_blob_sha": "1b0c9a8739cefaea0f3f05cb64dcf8af280bfb0d",
+      "size_bytes": 82924,
+      "domain": "FBC"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/",
+      "path": "FBC/ProductsAndServices/FinancialProductsAndServices.rdf",
+      "git_blob_sha": "9c07773a5f78ae872e297517004b9a3d47a2d6ab",
+      "size_bytes": 90893,
+      "domain": "FBC"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/",
+      "path": "FND/Accounting/CurrencyAmount.rdf",
+      "git_blob_sha": "f06b766f11fe040a0f4d2d511c8a7a856045a05c",
+      "size_bytes": 36093,
+      "domain": "FND"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/People/",
+      "path": "FND/AgentsAndPeople/People.rdf",
+      "git_blob_sha": "035b7497fdc163c860206f1b121088e923adc8b8",
+      "size_bytes": 56638,
+      "domain": "FND"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Agreements/",
+      "path": "FND/Agreements/Agreements.rdf",
+      "git_blob_sha": "4d70259221e3d5f708f3b34b3ea517befa0d4dea",
+      "size_bytes": 15669,
+      "domain": "FND"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/",
+      "path": "FND/Agreements/Contracts.rdf",
+      "git_blob_sha": "90e96983bfb78e300875cdff01ef4dff3a4a2d3b",
+      "size_bytes": 73907,
+      "domain": "FND"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Arrangements/",
+      "path": "FND/Arrangements/Arrangements.rdf",
+      "git_blob_sha": "26cadce9820cfe9415e22ca926a16138ed2861a5",
+      "size_bytes": 7830,
+      "domain": "FND"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Assessments/",
+      "path": "FND/Arrangements/Assessments.rdf",
+      "git_blob_sha": "f8685f1414e8e06a8a5d9a924432634d190e4723",
+      "size_bytes": 25147,
+      "domain": "FND"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/ClassificationSchemes/",
+      "path": "FND/Arrangements/ClassificationSchemes.rdf",
+      "git_blob_sha": "7ac5bd7633f699dfcea3dd8d08d014b297a27657",
+      "size_bytes": 7659,
+      "domain": "FND"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Documents/",
+      "path": "FND/Arrangements/Documents.rdf",
+      "git_blob_sha": "b02fe19b14ed17f436cecb9a6a1e2ded5c084c94",
+      "size_bytes": 9932,
+      "domain": "FND"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/IdentifiersAndIndices/",
+      "path": "FND/Arrangements/IdentifiersAndIndices.rdf",
+      "git_blob_sha": "5829023d405112dd26ada43ca37931834bbea61d",
+      "size_bytes": 12662,
+      "domain": "FND"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Lifecycles/",
+      "path": "FND/Arrangements/Lifecycles.rdf",
+      "git_blob_sha": "873ebe9e2b48608a4b87c685ee62af3861faea53",
+      "size_bytes": 14476,
+      "domain": "FND"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Ratings/",
+      "path": "FND/Arrangements/Ratings.rdf",
+      "git_blob_sha": "86d4fc4edfe07c639eab6058562a87ccd5ce5fd8",
+      "size_bytes": 24338,
+      "domain": "FND"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Reporting/",
+      "path": "FND/Arrangements/Reporting.rdf",
+      "git_blob_sha": "02d84dc4c06ebebc4a46a8bc98186fd6739903f2",
+      "size_bytes": 17482,
+      "domain": "FND"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/BusinessDates/",
+      "path": "FND/DatesAndTimes/BusinessDates.rdf",
+      "git_blob_sha": "492fffac81aa4d72b2be458a7282772820f9fe81",
+      "size_bytes": 19594,
+      "domain": "FND"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/",
+      "path": "FND/DatesAndTimes/FinancialDates.rdf",
+      "git_blob_sha": "b372b7681fe597fc8d515605c1508c5b7fa3c985",
+      "size_bytes": 45044,
+      "domain": "FND"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/Occurrences/",
+      "path": "FND/DatesAndTimes/Occurrences.rdf",
+      "git_blob_sha": "a01185ba81909112bf28465b5ba695f66a2fb246",
+      "size_bytes": 21054,
+      "domain": "FND"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/FND/GoalsAndObjectives/Objectives/",
+      "path": "FND/GoalsAndObjectives/Objectives.rdf",
+      "git_blob_sha": "3f5ea8888d0a476d1fedcfc5db4ac9405bd7e3e5",
+      "size_bytes": 30110,
+      "domain": "FND"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/",
+      "path": "FND/Law/LegalCapacity.rdf",
+      "git_blob_sha": "a18926b52696d4810c15d7afb8802e70b60f633c",
+      "size_bytes": 42397,
+      "domain": "FND"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCore/",
+      "path": "FND/Law/LegalCore.rdf",
+      "git_blob_sha": "af240b5c11926b0feb535f53094d92d24b3c0749",
+      "size_bytes": 11520,
+      "domain": "FND"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/FND/Organizations/FormalOrganizations/",
+      "path": "FND/Organizations/FormalOrganizations.rdf",
+      "git_blob_sha": "7580090266b905c1b7dddc739f39ac9705df807b",
+      "size_bytes": 19012,
+      "domain": "FND"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/FND/OwnershipAndControl/Control/",
+      "path": "FND/OwnershipAndControl/Control.rdf",
+      "git_blob_sha": "7e827b792f34bf875ff8fc496d0eac49f242dc3c",
+      "size_bytes": 15925,
+      "domain": "FND"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/FND/OwnershipAndControl/Ownership/",
+      "path": "FND/OwnershipAndControl/Ownership.rdf",
+      "git_blob_sha": "0b6fec0a5e01fef5ba49c2560fbf6ac42cabe05a",
+      "size_bytes": 29922,
+      "domain": "FND"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/FND/OwnershipAndControl/OwnershipAndControl/",
+      "path": "FND/OwnershipAndControl/OwnershipAndControl.rdf",
+      "git_blob_sha": "9f84a8dd3c29fa4cb385a5668171738261c86c8d",
+      "size_bytes": 6995,
+      "domain": "FND"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/",
+      "path": "FND/Parties/Parties.rdf",
+      "git_blob_sha": "33c12a127838572afba5fb2b84a86a77d264e8e4",
+      "size_bytes": 18545,
+      "domain": "FND"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/FND/Places/Addresses/",
+      "path": "FND/Places/Addresses.rdf",
+      "git_blob_sha": "f0a407680d4e772636b2cb8a655d40e7d60ccac5",
+      "size_bytes": 57050,
+      "domain": "FND"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/FND/Places/RealProperty/",
+      "path": "FND/Places/RealProperty.rdf",
+      "git_blob_sha": "2b148815bc00827218bcc912a960e9df0cef447b",
+      "size_bytes": 16425,
+      "domain": "FND"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/FND/Places/VirtualPlaces/",
+      "path": "FND/Places/VirtualPlaces.rdf",
+      "git_blob_sha": "04a82dcd9e5d52dec55d33a48cb81ad52ed1510c",
+      "size_bytes": 10284,
+      "domain": "FND"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/PaymentsAndSchedules/",
+      "path": "FND/ProductsAndServices/PaymentsAndSchedules.rdf",
+      "git_blob_sha": "47711e456ca372401715aded04e83d5190ac860a",
+      "size_bytes": 15908,
+      "domain": "FND"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/",
+      "path": "FND/ProductsAndServices/ProductsAndServices.rdf",
+      "git_blob_sha": "3d68d2d48fb85ef8cdcc167898b7231126d4a4d2",
+      "size_bytes": 35295,
+      "domain": "FND"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/",
+      "path": "FND/Relations/Relations.rdf",
+      "git_blob_sha": "49844659bbd359013597adcf736fca4ea8e72fde",
+      "size_bytes": 23946,
+      "domain": "FND"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/",
+      "path": "FND/Utilities/Analytics.rdf",
+      "git_blob_sha": "00980a537f4d32cd666fcb43b5d8dfccd031197d",
+      "size_bytes": 52098,
+      "domain": "FND"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/",
+      "path": "FND/Utilities/AnnotationVocabulary.rdf",
+      "git_blob_sha": "09852d9612ebb559433e77b78a57dd055cca8ffd",
+      "size_bytes": 10870,
+      "domain": "FND"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/EconomicIndicators/",
+      "path": "IND/EconomicIndicators/EconomicIndicators.rdf",
+      "git_blob_sha": "ac19dfd8a5c272e553d353967ba81409f03320e4",
+      "size_bytes": 86428,
+      "domain": "IND"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/IND/ForeignExchange/ForeignExchange/",
+      "path": "IND/ForeignExchange/ForeignExchange.rdf",
+      "git_blob_sha": "247abbd6d4a4b145c9f096c57751289dfd8162c2",
+      "size_bytes": 20505,
+      "domain": "IND"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/IND/Indicators/Indicators/",
+      "path": "IND/Indicators/Indicators.rdf",
+      "git_blob_sha": "4e2aa6f6a802cc5f88384904e4e58ce0d36ac742",
+      "size_bytes": 22857,
+      "domain": "IND"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/IND/InterestRates/InterestRates/",
+      "path": "IND/InterestRates/InterestRates.rdf",
+      "git_blob_sha": "e32e937cba83ff2f38ff484fee41b8c3b02c00da",
+      "size_bytes": 30930,
+      "domain": "IND"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/IND/MarketIndices/BasketIndices/",
+      "path": "IND/MarketIndices/BasketIndices.rdf",
+      "git_blob_sha": "d26ff9a2f562216041b63f0cea15516b3131d4eb",
+      "size_bytes": 25785,
+      "domain": "IND"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansGeneral/Loans/",
+      "path": "LOAN/LoansGeneral/Loans.rdf",
+      "git_blob_sha": "63c3dcb8c6b2307233cdc6ba9b48018ac10f1063",
+      "size_bytes": 45350,
+      "domain": "LOAN"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansSpecific/CardAccounts/",
+      "path": "LOAN/LoansSpecific/CardAccounts.rdf",
+      "git_blob_sha": "5c36a55704b36c50ea18c4cf709acd855850c513",
+      "size_bytes": 44645,
+      "domain": "LOAN"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansSpecific/CommercialLoans/",
+      "path": "LOAN/LoansSpecific/CommercialLoans.rdf",
+      "git_blob_sha": "41593075892828d907934b1c58a81c59020e03e0",
+      "size_bytes": 7693,
+      "domain": "LOAN"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansSpecific/ConsumerLoans/",
+      "path": "LOAN/LoansSpecific/ConsumerLoans.rdf",
+      "git_blob_sha": "349e3911f26b9ceeed65c94086089e3be36a2292",
+      "size_bytes": 12727,
+      "domain": "LOAN"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansSpecific/GreenLoans/",
+      "path": "LOAN/LoansSpecific/GreenLoans.rdf",
+      "git_blob_sha": "352c522967def39e14767a364d64a2d568095854",
+      "size_bytes": 48894,
+      "domain": "LOAN"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansSpecific/StudentLoans/",
+      "path": "LOAN/LoansSpecific/StudentLoans.rdf",
+      "git_blob_sha": "01e3bbc428127e4bea37942e766453781a76aa5e",
+      "size_bytes": 7543,
+      "domain": "LOAN"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/LOAN/RealEstateLoans/Mortgages/",
+      "path": "LOAN/RealEstateLoans/Mortgages.rdf",
+      "git_blob_sha": "d01b02e2cf059a237b00e06afbe8d583f5bc0e4a",
+      "size_bytes": 15274,
+      "domain": "LOAN"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/",
+      "path": "SEC/Debt/AssetBackedSecurities.rdf",
+      "git_blob_sha": "4167b4b423dee27e0b3032afcf2e40c4138059ad",
+      "size_bytes": 23667,
+      "domain": "SEC"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/",
+      "path": "SEC/Debt/Bonds.rdf",
+      "git_blob_sha": "d91cc4e3d4153d47b736bc9c9023405d82c26bf1",
+      "size_bytes": 105855,
+      "domain": "SEC"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/",
+      "path": "SEC/Debt/DebtInstruments.rdf",
+      "git_blob_sha": "62bff6e22db37379856e6f13f4e5f39c6b57dde4",
+      "size_bytes": 51175,
+      "domain": "SEC"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DistributedLoans/",
+      "path": "SEC/Debt/DistributedLoans.rdf",
+      "git_blob_sha": "f94259f6f107dee015e1fb6e587ca305402631aa",
+      "size_bytes": 15757,
+      "domain": "SEC"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/ExerciseConventions/",
+      "path": "SEC/Debt/ExerciseConventions.rdf",
+      "git_blob_sha": "427ee7cd06f0479f62f5d5eee6662c8ae5e99b59",
+      "size_bytes": 14968,
+      "domain": "SEC"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/PoolBackedSecurities/",
+      "path": "SEC/Debt/PoolBackedSecurities.rdf",
+      "git_blob_sha": "ed88eeec19cf15e26109ba5b9aee03b9e4cd3373",
+      "size_bytes": 41128,
+      "domain": "SEC"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/TradedShortTermDebt/",
+      "path": "SEC/Debt/TradedShortTermDebt.rdf",
+      "git_blob_sha": "e1d58b06ea50053b5ed96949d05108b629df63a4",
+      "size_bytes": 19662,
+      "domain": "SEC"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/",
+      "path": "SEC/Equities/EquityInstruments.rdf",
+      "git_blob_sha": "940b0f2a5ee2040cdaf09e05f616b007baeee4db",
+      "size_bytes": 85487,
+      "domain": "SEC"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/SEC/Funds/Funds/",
+      "path": "SEC/Funds/Funds.rdf",
+      "git_blob_sha": "d593ee8c65a2d63e4be8b1f9ea2f2211a6327ead",
+      "size_bytes": 44404,
+      "domain": "SEC"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/Baskets/",
+      "path": "SEC/Securities/Baskets.rdf",
+      "git_blob_sha": "a52b7e8a7d24bd4e6034ddf9b9d35c27a689ef7a",
+      "size_bytes": 11713,
+      "domain": "SEC"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/ParametricSchedules/",
+      "path": "SEC/Securities/ParametricSchedules.rdf",
+      "git_blob_sha": "5606c6540eb1c1ac44f94f4c10c9368b9a3d0f42",
+      "size_bytes": 20821,
+      "domain": "SEC"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/Pools/",
+      "path": "SEC/Securities/Pools.rdf",
+      "git_blob_sha": "75145e6ff708d4935d1f96204c52d0b01fbd45c2",
+      "size_bytes": 17993,
+      "domain": "SEC"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesClassification/",
+      "path": "SEC/Securities/SecuritiesClassification.rdf",
+      "git_blob_sha": "f17267cacfcc3b4e73572dd53f14bbd9384d2659",
+      "size_bytes": 17691,
+      "domain": "SEC"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesIdentification/",
+      "path": "SEC/Securities/SecuritiesIdentification.rdf",
+      "git_blob_sha": "a861e8e2e1c3e4c7d087739a35ece1fa46da27a7",
+      "size_bytes": 28030,
+      "domain": "SEC"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesIssuance/",
+      "path": "SEC/Securities/SecuritiesIssuance.rdf",
+      "git_blob_sha": "fb1a6d3ba346528b9efd26c278bad2df73a56315",
+      "size_bytes": 48304,
+      "domain": "SEC"
+    },
+    {
+      "ontology_iri": "https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesListings/",
+      "path": "SEC/Securities/SecuritiesListings.rdf",
+      "git_blob_sha": "96968b35dd2763d9f2cac67e72b5b7c043c212cc",
+      "size_bytes": 23335,
+      "domain": "SEC"
+    }
+  ],
+  "authority_boundary": {
+    "release_relative_finance_convention_scope_authority": true,
+    "task_context_to_fibo_concept_mapping_authority": false,
+    "open_world_ontology_completeness_authority": false,
+    "factual_world_truth_authority": false,
+    "regulatory_policy_truth_authority": false,
+    "semantic_relation_inference_authority": false,
+    "policy_adequacy_authority": false,
+    "execution_authority": false,
+    "acceptance_authority": false,
+    "terminal_authority": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_FIBO_COVERS_ALL_FINANCE_CONCEPTS_OR_ALL_FINANCE_LANGUAGE",
+    "NO_CLAIM_A_FIBO_TERM_MATCH_PROVES_THE_USER_OR_SOURCE_INTENDED_THAT_CONCEPT",
+    "NO_CLAIM_FIBO_REFERENCE_OR_EXAMPLE_DATA_IS_IN_THIS_SCOPE",
+    "NO_CLAIM_EXTERNAL_OMG_COMMONS_OR_OTHER_TRANSITIVE_DEPENDENCY_SEMANTICS_IS_BOUND_BY_THIS_MANIFEST",
+    "NO_CLAIM_FIBO_DECLARATIONS_ARE_CURRENT_EXTERNAL_WORLD_FACTS_OR_REGULATORY_RULES",
+    "NO_CLAIM_GLOBAL_FINANCE_SEMANTIC_ADEQUACY_IS_CLOSED",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
