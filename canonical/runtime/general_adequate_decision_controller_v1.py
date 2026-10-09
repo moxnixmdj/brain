@@ -33,6 +33,9 @@ from canonical.runtime import r2_grounded_candidate_policy_frontier_v1 as ground
 from canonical.runtime.minimum_information_origin_policy_v1 import (
     route as route_minimum_information_origin,
 )
+from canonical.runtime.minimum_information_request_packet_v1 import (
+    build as build_minimum_information_request,
+)
 
 SCHEMA = "PROJECT_BRAIN_GENERAL_ADEQUATE_DECISION_CONTROLLER_V1"
 ROOT = Path(__file__).resolve().parents[2]
@@ -646,10 +649,21 @@ def _extract_information_gap(decision: Mapping[str, Any]) -> dict[str, Any] | No
     )
     if not isinstance(predicate_id, str) or not predicate_id:
         return None
+    raw_proof_requests = (
+        loop_detail.get("proof_requests") if isinstance(loop_detail, Mapping) else []
+    )
+    proof_requests = []
+    if isinstance(raw_proof_requests, list):
+        proof_requests = [
+            deepcopy(dict(row))
+            for row in raw_proof_requests
+            if isinstance(row, Mapping)
+        ]
     return {
         "predicate_id": predicate_id,
         "loop_status": status,
         "loop_reason": loop.get("reason"),
+        "proof_requests": proof_requests,
     }
 
 
@@ -1404,20 +1418,20 @@ def run(
                     + str(acquisition_plan.get("reason") or "UNKNOWN")
                 )
 
-            request_packet = {
-                "schema": "PROJECT_BRAIN_MINIMUM_POLICY_CHANGING_INFORMATION_REQUEST_V1",
-                "task_id": task_id,
-                "goal_sha256": sha256(goal.encode("utf-8")).hexdigest(),
-                "decision_payload_sha256": _digest(working),
-                "predicate_id": gap["predicate_id"],
-                "reason": gap["loop_status"],
-                "acquisition_plan": acquisition_plan,
-                "external_research_authorized": acquisition_plan.get(
-                    "external_research_authorized"
-                ) is True,
-                "information_authority": False,
-                "semantic_truth_authority": False,
-            }
+            request_packet = build_minimum_information_request(
+                task_id=task_id,
+                goal=goal,
+                decision_payload=working,
+                predicate_id=gap["predicate_id"],
+                reason=gap["loop_status"],
+                acquisition_plan=acquisition_plan,
+                proof_requests=gap.get("proof_requests", []),
+            )
+            if request_packet.get("pass") is not True:
+                raise DecisionControllerError(
+                    "MINIMUM_INFORMATION_REQUEST_PACKET_FAIL_CLOSED:"
+                    + str(request_packet.get("reason") or "UNKNOWN")
+                )
 
             if acquisition_plan.get("action") == "REUSE_BOUND_CONTEXT":
                 bound_truth_payload = origin.get("bound_truth_payload")
