@@ -193,6 +193,43 @@ def compile_criterion(criterion: str, *, criterion_id: str | None = None) -> dic
                 )
                 break
 
+    # Exact top-level file count with no semantic role claim.
+    if not checks:
+        m = re.fullmatch(
+            r"Exactly\s+(one|two|three|four|five|\d+)\s+(?:deliverable\s+)?files?\s+"
+            r"(?:is|are)\s+submitted[.]?",
+            text,
+            re.I,
+        )
+        if m:
+            words = {"one": 1, "two": 2, "three": 3, "four": 4, "five": 5}
+            raw = m.group(1).casefold()
+            count = words.get(raw, int(raw) if raw.isdigit() else -1)
+            if 0 < count <= 64:
+                checks.append(Check("EXACT_TOP_LEVEL_FILE_COUNT", {"count": count}))
+
+    # Additional whole-criterion simple native format forms observed in the
+    # public-220 rubric. These checks deliberately prove only the file fact.
+    if not checks and re.fullmatch(
+        r"The\s+deliverable\s+is\s+a\s+Microsoft\s+Word\s+document\s+with\s+"
+        r"a\s+\.docx\s+file\s+extension[.]?",
+        text,
+        re.I,
+    ):
+        checks.append(Check("AT_LEAST_ONE_VALID_FILE_BY_EXTENSION", {"extension": ".docx"}))
+
+    if not checks and re.fullmatch(
+        r"The\s+(?:submitted\s+)?deliverable\s+is\s+an\s+Excel\s+file[.]?",
+        text,
+        re.I,
+    ):
+        checks.append(
+            Check(
+                "AT_LEAST_ONE_VALID_FILE_ALLOWED_EXTENSIONS",
+                {"extensions": [".xlsx", ".xlsm"]},
+            )
+        )
+
     # Simple role-free artifact-format statements. Requiring a natively
     # reopenable matching file is a sound one-sided check; extra files do not
     # falsify these criteria unless the criterion explicitly says "single".
@@ -466,6 +503,15 @@ def verify_compiled(compiled: Mapping[str, Any], artifact_dir: str | Path) -> di
             ext = str(args.get("extension") or "").lower()
             cand = [p for p in files if p.suffix.lower() == ext]
             ok = bool(cand) and all(_valid_package(p) for p in cand)
+
+        elif kind == "AT_LEAST_ONE_VALID_FILE_ALLOWED_EXTENSIONS":
+            exts = {str(x).lower() for x in (args.get("extensions") or [])}
+            cand = [p for p in files if p.suffix.lower() in exts]
+            ok = bool(cand) and all(_valid_package(p) for p in cand)
+
+        elif kind == "EXACT_TOP_LEVEL_FILE_COUNT":
+            target_count = int(args.get("count", -1))
+            ok = target_count >= 0 and len(files) == target_count
 
         elif kind == "XLSX_SHEET_NAME_CASEFOLD_TRIM":
             target = str(args.get("sheet_name") or "").strip().casefold()
