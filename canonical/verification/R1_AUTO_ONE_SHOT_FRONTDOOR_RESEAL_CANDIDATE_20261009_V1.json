@@ -1,0 +1,74 @@
+{
+  "schema": "PROJECT_BRAIN_R1_AUTO_ONE_SHOT_FRONTDOOR_RESEAL_CANDIDATE_20261009_V1",
+  "date": "2026-10-09",
+  "status": "CANDIDATE__EXACT_BYTE_BINDINGS_CLOSED__EXECUTABLE_REPLAY_PENDING",
+  "objective": "MAKE_PROOF_CARRYING_ONE_SHOT_AN_AUTOMATIC_FALLBACK_FOR_CURRENT_TASK_AUTO_ROUTED_INTERNAL_R2_REPAIR_GAPS_WITHOUT_BLIND_REPLAY",
+  "exact_blobs": {
+    "unified_fabric": {
+      "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
+      "git_blob_sha": "537b6db4998f21d21a4f191625bd5661994a63e7"
+    },
+    "existing_explicit_meta_regression": {
+      "path": "canonical/tests/test_unified_cognitive_fabric_one_shot_meta_v1.py",
+      "git_blob_sha": "7543715e24c1a8b5cd48fe49f9af37805b603dee"
+    },
+    "auto_default_regression": {
+      "path": "canonical/tests/test_unified_cognitive_fabric_one_shot_auto_default_v1.py",
+      "git_blob_sha": "60f5f66875b88de97f1d604993f0881e8c7e7c0e"
+    },
+    "fabric_workflow": {
+      "path": ".github/workflows/verify-unified-cognitive-fabric-v1.yml",
+      "git_blob_sha": "89f7def54427bb454430f57b227cfedfd49607cb"
+    },
+    "r1_closure_gate": {
+      "path": "canonical/runtime/r1_live_architecture_closure_gate_v1.py",
+      "git_blob_sha": "34e559b81e08ff67281a2feb401ebc24bb663741"
+    },
+    "current_terminal_authority": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+      "git_blob_sha": "580f451b37a5cf8c399bf3528b3a5c6d2d640337",
+      "pointer_revision": 81
+    }
+  },
+  "structural_contract": {
+    "auto_scope": "AUTO_ROUTED_ADEQUATE_DECISION_ONLY",
+    "required_r2_meta_action": "REPAIR_OR_EXPAND_VERIFIABLE_ADEQUACY_COVER",
+    "current_task_durable_retry_binding_required": true,
+    "normal_live_runtime_auto_repair_runs_first": true,
+    "normal_compounding_tick_runs_before_one_shot": true,
+    "one_shot_failure_repair_uses_existing_verified_repair_cycle": true,
+    "blind_fabric_redispatch_allowed": false,
+    "task_success_upgrade_requires": "REPAIR_VERIFIED_BY_ORIGINAL_OBLIGATION_REPLAY__ORIGINAL_REPLAY_PASS__ACTUAL_GOAL_SATISFACTION_VERIFIED",
+    "explicit_one_shot_meta_mode_preserved": true,
+    "request_kill_switch": "options.auto_one_shot=false",
+    "terminal_authority": false
+  },
+  "static_reconciliation": {
+    "terminal_authority_fabric_bindings_rebound": true,
+    "r1_old_reseal_receipt_reused_as_current_verification": false,
+    "existing_one_shot_meta_test_included_in_main_fabric_workflow": true,
+    "new_auto_default_test_included_in_main_fabric_workflow": true
+  },
+  "executable_verification": {
+    "python_compile_executed": false,
+    "unit_tests_executed": false,
+    "r1_closure_gate_reexecuted": false,
+    "original_obligation_replay_executed": false,
+    "reason": "PRIVATE_GITHUB_ACTIONS_RUNNER_HAS_REPEATEDLY_RETURNED_RUNNER_ID_0_AND_ZERO_STEPS__REMOTE_PRIVATE_REPO_EXECUTION_CHANNEL_NOT_CURRENTLY_AUTHENTICATED"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_EXECUTABLE_REPLAY_HAS_PASSED",
+    "NO_CLAIM_R1_CURRENT_BYTE_RESEAL_IS_COMPLETE",
+    "NO_CLAIM_ONE_SHOT_FIXED_POINT_ALONE_PROVES_TASK_SUCCESS",
+    "NO_CLAIM_USER_INTENT_OR_MINIMUM_INFORMATION_GAPS_ARE_AUTO_RESOLVED",
+    "NO_CLAIM_EXPLICIT_ADEQUATE_DECISION_CALLS_AUTO_INVOKE_ONE_SHOT",
+    "NO_TERMINAL_AUTHORITY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0
+  }
+}
