@@ -353,7 +353,7 @@ def _candidate_timeout(value: Any, *, default: int, maximum: int, field: str) ->
     return value
 
 
-def _candidate_rows(raw: Any, requirements: set[str]) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+def _candidate_rows(\n    raw: Any,\n    requirements: set[str],\n    *,\n    include_rejections: bool = False,\n) -> list[dict[str, Any]] | tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     """Partition untrusted candidates into executable rows and explicit rejections.
 
     Brain's frozen requirement set is authority. Unknown coverage is rejected
