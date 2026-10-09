@@ -30,7 +30,7 @@ _NAMED_OUTPUT_RE = re.compile(
 
 
 def _brain_mandated_deliverables(goal: str) -> dict[str, str]:
-    paths = list(_v1._brain_mandated_deliverables(goal).values())
+    paths = list(_V1_BRAIN_MANDATED_DELIVERABLES(goal).values())
 
     def add(path: str) -> None:
         if not _v1._valid_mandated_output_path(path):
