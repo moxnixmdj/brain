@@ -1,3 +1,4 @@
+# branch-verification-v2
 name: verify-sec-issuer-extension-custom-semantics
 on:
   pull_request:
