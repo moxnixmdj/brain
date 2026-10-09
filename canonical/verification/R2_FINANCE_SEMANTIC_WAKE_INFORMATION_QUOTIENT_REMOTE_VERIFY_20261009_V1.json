@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_R2_FINANCE_SEMANTIC_WAKE_INFORMATION_QUOTIENT_REMOTE_VERIFY_V1",
+  "date": "2026-10-09",
+  "status": "PASS__INDEPENDENT_EXACT_BRANCH_BYTES__PY_COMPILE_PASS__2_OF_2_ASSERTIONS_PASS__ZERO_CREDIT",
+  "subjects": {
+    "quotient": {
+      "path": "canonical/governance/R2_FINANCE_SEMANTIC_WAKE_INFORMATION_QUOTIENT_20261009_V1.json",
+      "git_blob_sha": "cb56e4cda2d8f9fec7f19cb0f82dea1afec1a6ff"
+    },
+    "scheduler": {
+      "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V56.json",
+      "git_blob_sha": "4a2dbec85d6f863f182d8afb2e41cd0afc6b0cd4"
+    },
+    "test": {
+      "path": "canonical/tests/test_r2_finance_semantic_wake_information_quotient_v1.py",
+      "git_blob_sha": "1505d6e5c125eee2ad2f8d4462e8a7ada060215f"
+    }
+  },
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-live-integrated-v1-run-20261008",
+    "sprite_id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "working_directory": "/home/sprite/verify-r2-finance-wake-quotient-v1",
+    "package_install_performed": false,
+    "incremental_spend_usd": 0
+  },
+  "result": {
+    "py_compile_pass": true,
+    "assertions_run": 2,
+    "assertions_passed": 2,
+    "assertions_failed": 0,
+    "concrete_wake_conditions": 11,
+    "decision_effect_classes": 3,
+    "normalization_total": true,
+    "concrete_routes_preserved": true,
+    "finance_tail_closed": false,
+    "information_theoretic_externality_proved": false,
+    "execution_log_sha256": "6e746c2be519096e226131b6ccf623c9b4aefdf1c15d1882628733bd05880bd2"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "promotion_authority": false,
+  "terminal_authority": false
+}
