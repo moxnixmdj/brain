@@ -12,7 +12,7 @@ XLINK="http://www.w3.org/1999/xlink"
 DOC_ROLE="http://www.xbrl.org/2003/role/documentation"
 STD_ROLE="http://www.xbrl.org/2003/role/label"
 MAX_BYTES=4_000_000
-_EMAIL_RE=re.compile(r"^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$")
+_EMAIL_RE=re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
 _NAME_RE=re.compile(r"^[A-Za-z_][A-Za-z0-9_.-]*$")
 
 class ExtensionConceptError(RuntimeError):
