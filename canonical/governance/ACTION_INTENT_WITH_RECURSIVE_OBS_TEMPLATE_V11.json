@@ -72,7 +72,8 @@
     "terminal_proof_control",
     "continuous_obs",
     "reality_query_admission",
-    "global_terminal_proof_cut"
+    "global_terminal_proof_cut",
+    "external_side_effect_admission"
   ],
   "supersedes": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V10.json",
   "required_deletion_first_order": [
@@ -260,6 +261,30 @@
       "terminal_decision_value"
     ],
     "stage_a_cleanliness_does_not_imply_membership": true,
+    "fail_closed_on_missing_or_unknown": true
+  },
+  "required_external_side_effect_admission": {
+    "required_when": "ACTION_CAN_CAUSE_A_CONSEQUENTIAL_EXTERNAL_SIDE_EFFECT_BEFORE_TERMINAL_CLOSURE_OR_INFORMATION_ACQUISITION",
+    "runtime": "canonical/runtime/external_side_effect_admission_v1.py",
+    "must_be_computed_before_side_effect": true,
+    "required_fields": [
+      "canonical_generation",
+      "capability_target",
+      "causal_blocker",
+      "proposed_action",
+      "prior_actions",
+      "minimum_reality_cut"
+    ],
+    "blocker_lease_identity": [
+      "canonical_generation",
+      "capability_target",
+      "causal_blocker"
+    ],
+    "duplicate_pending_external_acquisition_forbidden": true,
+    "recipient_or_wording_change_does_not_create_new_lease": true,
+    "verified_material_delta_required_to_reopen": true,
+    "exact_minimum_reality_cut_membership_required": true,
+    "post_hoc_admission_forbidden": true,
     "fail_closed_on_missing_or_unknown": true
   }
 }
