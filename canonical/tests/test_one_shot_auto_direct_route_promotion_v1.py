@@ -3,6 +3,9 @@ from __future__ import annotations
 import sys
 import types
 import unittest
+import json
+import tempfile
+from pathlib import Path
 from unittest.mock import patch
 
 fake_v1 = types.ModuleType("canonical.runtime.one_shot_verified_closure_v1")
@@ -143,6 +146,156 @@ class OneShotAutoDirectRoutePromotionV1Tests(unittest.TestCase):
             "OPEN__INTERNAL_UNSOLVED__INFRASTRUCTURE_OR_PROVIDER_FAILURE",
         )
         self.assertIn("R2_DIRECT_ROUTE_PROMOTION_FAILED", out["failure"]["reason"])
+
+
+    def test_real_promoter_transaction_updates_dynamic_pointer_before_retry(self):
+        first = closure(status="OPEN", internal=("ROOT1_GAP",), initial="i0", final="f0")
+        second = closure(status="PASS", passed=True, initial="i1", final="f1")
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            governance = root / "canonical/governance"
+            verification = root / "canonical/verification"
+            runtime = root / "canonical/runtime"
+            governance.mkdir(parents=True)
+            verification.mkdir(parents=True)
+            runtime.mkdir(parents=True)
+
+            route_runtime_rel = "canonical/runtime/test_direct_route_v1.py"
+            route_runtime = root / route_runtime_rel
+            route_runtime.write_text(
+                "def preflight(request, **kwargs): return {'matched': True}\n"
+                "def run(request, **kwargs): return {'pass': True}\n",
+                encoding="utf-8",
+            )
+            route_verify_rel = "canonical/verification/TEST_ROUTE_VERIFY.json"
+            route_verify = root / route_verify_rel
+            route_verify.write_text(
+                json.dumps({"pass": True, "status": "INDEPENDENT_PASS"}) + "\n",
+                encoding="utf-8",
+            )
+
+            admission = v2.r2_direct_route_promoter.admission
+            manifest_rel = "canonical/governance/R2_DIRECT_ROUTE_DYNAMIC_ADMISSIONS_TEST_BASE.json"
+            manifest = {
+                "schema": admission.MANIFEST_SCHEMA,
+                "date": "2026-10-09",
+                "status": "ACTIVE_DYNAMIC_ADMISSIONS__EMPTY_BASELINE",
+                "selection_class": admission.SELECTION_CLASS,
+                "collision_policy": "FAIL_CLOSED_ON_ANY_OTHER_DYNAMIC_OR_LEGACY_MATCH",
+                "admissions": [],
+                "admission_count": 0,
+                "default": "NOT_LIVE_UNLESS_EXACT_INDEPENDENT_DEPLOYMENT_RECEIPT_VALIDATES",
+                "incremental_spend_usd": 0,
+                "terminal_authority": False,
+                "terminal_credit_delta": 0,
+            }
+            manifest_path = root / manifest_rel
+            manifest_path.write_text(
+                json.dumps(manifest, indent=2, sort_keys=True) + "\n",
+                encoding="utf-8",
+            )
+            pointer = {
+                "schema": admission.POINTER_SCHEMA,
+                "date": "2026-10-09",
+                "status": "ACTIVE_CURRENT_R2_DYNAMIC_ADMISSIONS_POINTER",
+                "binding_semantics": "MUTABLE_CURRENT_POINTER_PATH_IDENTITY__IMMUTABLE_TARGET_GIT_BLOB_BOUND",
+                "target": {
+                    "path": manifest_rel,
+                    "git_blob_sha": admission.git_blob_sha(manifest_path),
+                    "schema": admission.MANIFEST_SCHEMA,
+                },
+                "incremental_spend_usd": 0,
+                "terminal_authority": False,
+                "terminal_credit_delta": 0,
+            }
+            (governance / "CURRENT_R2_DIRECT_ROUTE_ADMISSIONS.json").write_text(
+                json.dumps(pointer, indent=2, sort_keys=True) + "\n",
+                encoding="utf-8",
+            )
+
+            candidate_rel = "canonical/governance/TEST_DIRECT_ROUTE_CANDIDATE.json"
+            candidate = {
+                "schema": admission.CANDIDATE_SCHEMA,
+                "route_id": "DIRECT_ADEQUACY::TEST_AUTO_PROMOTION_V1",
+                "capability_id": "test.auto.promotion",
+                "runtime_path": route_runtime_rel,
+                "runtime_git_blob_sha": admission.git_blob_sha(route_runtime),
+                "preflight_callable": "preflight",
+                "run_callable": "run",
+                "route_verification_path": route_verify_rel,
+                "route_verification_git_blob_sha": admission.git_blob_sha(route_verify),
+                "scope": "TEST_EXACT_SCOPE",
+                "selection_class": admission.SELECTION_CLASS,
+                "deployment_requested": True,
+                "incremental_spend_usd": 0,
+                "terminal_authority": False,
+            }
+            candidate_path = root / candidate_rel
+            candidate_path.write_text(
+                json.dumps(candidate, indent=2, sort_keys=True) + "\n",
+                encoding="utf-8",
+            )
+            candidate_sha = admission.git_blob_sha(candidate_path)
+
+            independent_rel = "canonical/verification/TEST_DIRECT_ROUTE_DEPLOYMENT_RECEIPT.json"
+            independent = {
+                "schema": admission.RECEIPT_SCHEMA,
+                "status": "INDEPENDENT_PASS__R2_DIRECT_ROUTE_DEPLOYMENT",
+                "candidate_path": candidate_rel,
+                "candidate_git_blob_sha": candidate_sha,
+                "route_id": candidate["route_id"],
+                "runtime_path": candidate["runtime_path"],
+                "runtime_git_blob_sha": candidate["runtime_git_blob_sha"],
+                "route_verification_path": candidate["route_verification_path"],
+                "route_verification_git_blob_sha": candidate["route_verification_git_blob_sha"],
+                "selection_class": admission.SELECTION_CLASS,
+                "independent_verified": True,
+                "preflight_pure_no_effect": True,
+                "matched_route_failure_no_fallthrough": True,
+                "producer_independent_acceptance": True,
+                "exact_raw_obligation_acceptance": True,
+                "deployment_eligible": True,
+                "verification_authority_mutated": False,
+                "promotion_authority": False,
+                "terminal_authority": False,
+                "incremental_spend_usd": 0,
+            }
+            independent_path = root / independent_rel
+            independent_path.write_text(
+                json.dumps(independent, indent=2, sort_keys=True) + "\n",
+                encoding="utf-8",
+            )
+
+            provider = lambda contract: provider_receipt(
+                r2_direct_route_candidate_path=candidate_rel,
+                r2_direct_route_independent_receipt_path=independent_rel,
+            )
+            with patch.object(v2.v1, "run", side_effect=[first, second]):
+                out = v2.run(
+                    repo_root=root,
+                    capability_synthesis_provider=provider,
+                )
+
+            self.assertTrue(out["pass"], out)
+            promotion = out["transcript"][0]["r2_direct_route_promotion"]
+            self.assertTrue(promotion["attempted"])
+            self.assertTrue(promotion["frontier_changed"])
+            self.assertEqual(promotion["route_id"], candidate["route_id"])
+
+            current = json.loads(
+                (governance / "CURRENT_R2_DIRECT_ROUTE_ADMISSIONS.json").read_text(
+                    encoding="utf-8"
+                )
+            )
+            self.assertNotEqual(current["target"]["path"], manifest_rel)
+            promoted_manifest = json.loads(
+                (root / current["target"]["path"]).read_text(encoding="utf-8")
+            )
+            self.assertEqual(promoted_manifest["admission_count"], 1)
+            self.assertEqual(
+                promoted_manifest["admissions"][0]["route_id"],
+                candidate["route_id"],
+            )
 
 
 if __name__ == "__main__":
