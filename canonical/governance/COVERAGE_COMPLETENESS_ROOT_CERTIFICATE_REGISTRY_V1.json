@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_COVERAGE_COMPLETENESS_ROOT_CERTIFICATE_REGISTRY_V1",
   "date": "2026-10-09",
-  "status": "ACTIVE_OPEN_REGISTRY__THREE_ROOT_CERTIFICATE_OBLIGATIONS__ZERO_PROVED__ZERO_CREDIT",
+  "status": "ACTIVE_OPEN_REGISTRY__SINGLE_FROZEN_CLAIM_REQUIRED_BEFORE_ANY_PROVED_SLOT__THREE_ROOT_CERTIFICATE_OBLIGATIONS__ZERO_PROVED__ZERO_CREDIT",
   "namespace": "PROJECT_BRAIN_COVERAGE_COMPLETENESS_ROOTS_V1",
   "mission_binding": {
     "pointer_path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
@@ -62,7 +62,7 @@
     ],
     "hard_rule": "AN_UNRELATED_R2_OR_R3_RECEIPT_CANNOT_SATISFY_CC_R2_OR_CC_R3_BY_NAME_MATCH"
   },
-  "proof_closure_rule": "R4_PROOF_CLOSURE_REQUIRES_ALL_THREE_CERTIFICATE_SLOTS_PROVED_CURRENT_WITH_CONTENT_ADDRESSED_CERTIFICATE_AND_INDEPENDENT_VERIFICATION_EXACT_CURRENT_MISSION_AUTHORITY_BINDING_EXACT_CANONICAL_ROOT_ID_AND_EXACT_ROOT_SEMANTIC_BINDING",
+  "proof_closure_rule": "R4_PROOF_CLOSURE_REQUIRES_ONE_VALID_ACTIVE_FROZEN_CLAIM_AND_ALL_THREE_CANONICAL_ROOT_SLOTS_PROVED_CURRENT_FOR_THAT_EXACT_CLAIM_WITH_CONTENT_ADDRESSED_CERTIFICATE_INDEPENDENT_VERIFICATION_CURRENT_MISSION_AUTHORITY_AND_EXACT_ROOT_SEMANTIC_BINDING",
   "currently_proved_root_certificates": 0,
   "currently_open_root_certificates": 3,
   "r4_proof_closure": false,
@@ -70,5 +70,27 @@
     "fresh_reality_units_consumed": 0,
     "incremental_spend_usd": 0,
     "terminal_credit_delta": 0
-  }
+  },
+  "registry_scope": "SINGLE_ACTIVE_FROZEN_CERTIFICATION_CLAIM_AT_A_TIME",
+  "active_claim": null,
+  "claim_binding_policy": {
+    "claim_scope_law": "canonical/governance/COVERAGE_COMPLETENESS_CLAIM_SCOPE_V1.json",
+    "claim_guard": "canonical/runtime/coverage_claim_scope_guard_v1.py",
+    "active_claim_required_before_any_proved_slot": true,
+    "required_claim_fields": [
+      "claim_id",
+      "claim_kind",
+      "mission_blob_sha",
+      "scope_sha256",
+      "target_predicate_sha256",
+      "semantics_sha256",
+      "epoch",
+      "authority_id"
+    ],
+    "proved_certificate_must_match_active_claim_exactly": true,
+    "independent_verification_must_match_active_claim_id": true,
+    "no_cross_claim_root_certificate_transport": true,
+    "no_global_open_ended_mission_claim": true
+  },
+  "next": "FREEZE_ONE_VALID_CERTIFICATION_CLAIM__THEN_PROVE_OR_FALSIFY_CC_R3_CC_R1_CC_R2_FOR_THAT_EXACT_CLAIM__NO_GLOBAL_OR_CROSS_CLAIM_PROMOTION"
 }

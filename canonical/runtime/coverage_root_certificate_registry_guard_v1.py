@@ -4,6 +4,8 @@ from __future__ import annotations
 
 from typing import Any, Mapping
 
+from canonical.runtime.coverage_claim_scope_guard_v1 import ALLOWED_KINDS, CORE_FIELDS, compute_claim_id
+
 
 SCHEMA = "PROJECT_BRAIN_COVERAGE_COMPLETENESS_ROOT_CERTIFICATE_REGISTRY_V1"
 NAMESPACE = "PROJECT_BRAIN_COVERAGE_COMPLETENESS_ROOTS_V1"
@@ -15,6 +17,7 @@ ROOTS = (
 )
 CERTIFICATE_ROOT_IDS = tuple(x[0] for x in ROOTS[:3])
 ALLOWED_SLOT_STATUSES = frozenset({"OPEN_NO_GLOBAL_CERTIFICATE_BOUND", "PROVED_CURRENT"})
+CLAIM_BINDING_FIELDS = ("claim_id",) + CORE_FIELDS
 
 
 def validate(
@@ -22,6 +25,7 @@ def validate(
     *,
     current_mission_pointer: Mapping[str, Any],
     current_mission_authority_blob_sha: str,
+    current_mission_pointer_blob_sha: str | None = None,
 ) -> dict[str, Any]:
     errors: list[str] = []
     if not isinstance(registry, Mapping):
@@ -65,6 +69,33 @@ def validate(
                 errors.append(f"DUPLICATE_CANONICAL_ROOT_ID:{i}")
             seen.add(row.get("canonical_id"))
 
+    active_claim = registry.get("active_claim")
+    active_claim_valid = active_claim is None or isinstance(active_claim, Mapping)
+    if active_claim is not None:
+        if not isinstance(active_claim, Mapping):
+            errors.append("ACTIVE_CLAIM_NOT_OBJECT")
+        else:
+            for field in CORE_FIELDS:
+                value = active_claim.get(field)
+                if not isinstance(value, str) or not value:
+                    errors.append("ACTIVE_CLAIM_INVALID_FIELD:" + field)
+            if active_claim.get("claim_kind") not in ALLOWED_KINDS:
+                errors.append("ACTIVE_CLAIM_KIND_NOT_ALLOWED")
+            if current_mission_pointer_blob_sha is None:
+                errors.append("CURRENT_MISSION_POINTER_BLOB_REQUIRED_FOR_ACTIVE_CLAIM")
+            elif active_claim.get("mission_blob_sha") != current_mission_pointer_blob_sha:
+                errors.append("ACTIVE_CLAIM_MISSION_BINDING_STALE")
+            for field in ("scope_sha256", "target_predicate_sha256", "semantics_sha256"):
+                value = active_claim.get(field)
+                if isinstance(value, str) and (
+                    len(value) != 64 or any(c not in "0123456789abcdef" for c in value)
+                ):
+                    errors.append("ACTIVE_CLAIM_INVALID_SHA256:" + field)
+            if active_claim.get("claim_id") != compute_claim_id(active_claim):
+                errors.append("ACTIVE_CLAIM_ID_MISMATCH")
+            if active_claim.get("terminal_credit_delta", 0) != 0:
+                errors.append("ACTIVE_CLAIM_NONZERO_CREDIT_FORBIDDEN")
+
     alias = registry.get("alias_policy") or {}
     if alias.get("short_aliases_are_display_only") is not True:
         errors.append("SHORT_ALIAS_AUTHORITY_ENABLED")
@@ -105,6 +136,8 @@ def validate(
             proved_ids.append(root_id)
             cert = slot.get("certificate")
             verify = slot.get("independent_verification")
+            if active_claim is None:
+                errors.append(f"PROVED_SLOT_WITHOUT_ACTIVE_CLAIM:{root_id}")
             if not isinstance(cert, Mapping):
                 errors.append(f"PROVED_SLOT_CERTIFICATE_MISSING:{root_id}")
             else:
@@ -114,8 +147,18 @@ def validate(
                     errors.append(f"PROVED_SLOT_MISSION_AUTHORITY_DRIFT:{root_id}")
                 if not isinstance(cert.get("path"), str) or not isinstance(cert.get("git_blob_sha"), str):
                     errors.append(f"PROVED_SLOT_CONTENT_ADDRESS_MISSING:{root_id}")
+                claim_binding = cert.get("claim_binding")
+                if isinstance(active_claim, Mapping):
+                    if not isinstance(claim_binding, Mapping):
+                        errors.append(f"PROVED_SLOT_CLAIM_BINDING_MISSING:{root_id}")
+                    else:
+                        for field in CLAIM_BINDING_FIELDS:
+                            if claim_binding.get(field) != active_claim.get(field):
+                                errors.append(f"PROVED_SLOT_CLAIM_BINDING_MISMATCH:{root_id}:{field}")
             if not isinstance(verify, Mapping) or not isinstance(verify.get("path"), str) or not isinstance(verify.get("git_blob_sha"), str):
                 errors.append(f"PROVED_SLOT_INDEPENDENT_VERIFICATION_MISSING:{root_id}")
+            elif isinstance(active_claim, Mapping) and verify.get("claim_id") != active_claim.get("claim_id"):
+                errors.append(f"PROVED_SLOT_VERIFICATION_CLAIM_MISMATCH:{root_id}")
 
     if set(seen_slots) != set(CERTIFICATE_ROOT_IDS):
         errors.append("CERTIFICATE_SLOT_COVERAGE_INCOMPLETE")

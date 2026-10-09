@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_COVERAGE_COMPLETENESS_ROOT_CERTIFICATES_V1",
   "date": "2026-10-09",
-  "status": "ACTIVE__THREE_OPEN_CC_ROOT_CERTIFICATE_OBLIGATIONS__ZERO_PROVED__ZERO_CREDIT",
+  "status": "ACTIVE__NO_ACTIVE_FROZEN_CLAIM__THREE_OPEN_CC_ROOT_CERTIFICATE_OBLIGATIONS__ZERO_PROVED__ZERO_CREDIT",
   "mission_binding": {
     "pointer_path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
     "authority_path": "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
@@ -10,15 +10,15 @@
   },
   "registry": {
     "path": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_CERTIFICATE_REGISTRY_V1.json",
-    "git_blob_sha": "19c62ecd1d60066b79ad143c3a8ef877b7cd80d3"
+    "git_blob_sha": "fa395c54a9f5c7d93eff01dd8ccf28575c0a0361"
   },
   "guard": {
     "path": "canonical/runtime/coverage_root_certificate_registry_guard_v1.py",
-    "git_blob_sha": "cb08524f6703b00567e1bfb41cf32321d0b46258"
+    "git_blob_sha": "508df599e111e9aec47cbd175ce4f760299da786"
   },
   "tests": {
     "path": "canonical/tests/test_coverage_root_certificate_registry_guard_v1.py",
-    "git_blob_sha": "06569b7e607ef812e2ae67d6a7a80d28e7d4c1e6"
+    "git_blob_sha": "7944f9c4fa46de905f7f6976b9dd2968f174733c"
   },
   "canonical_root_ids": [
     "CC_R1_REALITY_CONTAINMENT_V1",
@@ -33,12 +33,21 @@
   "proved": 0,
   "open": 3,
   "r4_proof_closure": false,
-  "next": "PROVE_OR_FALSIFY_CC_R1_CC_R2_CC_R3_USING_CONTENT_ADDRESSED_MISSION_BOUND_CERTIFICATES__NO_SHORT_LABEL_INHERITANCE",
+  "next": "FREEZE_EXACT_ALLOWED_CERTIFICATION_CLAIM__THEN_ATTACK_CC_R3_FOR_THAT_CLAIM__NO_ROOT_PROMOTION_BEFORE_EXACT_CLAIM_BINDING",
   "terminal_credit_delta": 0,
   "root_theorem_falsifier": {
     "path": "canonical/runtime/root_theorem_falsifier_v1.py",
     "git_blob_sha": "1f6ea3530e42530480a2d5416d82f04496fcd17e",
     "authoritative_registry_required": true
   },
-  "r4_authority_rule": "LOCAL_ROOT_RECEIPTS_CANNOT_CLOSE_R4_UNLESS_THE_CANONICAL_ROOT_CERTIFICATE_REGISTRY_VALIDATES_AND_ALL_THREE_CANONICAL_ROOT_SLOTS_ARE_PROVED_CURRENT"
+  "r4_authority_rule": "LOCAL_ROOT_RECEIPTS_CANNOT_CLOSE_R4_UNLESS_THE_CANONICAL_ROOT_CERTIFICATE_REGISTRY_VALIDATES_AND_ALL_THREE_CANONICAL_ROOT_SLOTS_ARE_PROVED_CURRENT",
+  "active_claim": null,
+  "claim_scope": {
+    "policy": "SINGLE_ACTIVE_FROZEN_CERTIFICATION_CLAIM_AT_A_TIME",
+    "claim_scope_path": "canonical/governance/COVERAGE_COMPLETENESS_CLAIM_SCOPE_V1.json",
+    "claim_scope_git_blob_sha": "05b555f4f9a0227ee0b3e6121246172078857279",
+    "mission_pointer_blob_sha": "7ad5f82d8434966781bf97c725d482e10133fc7c",
+    "proved_slot_without_active_claim_forbidden": true,
+    "cross_claim_certificate_transport_forbidden": true
+  }
 }
