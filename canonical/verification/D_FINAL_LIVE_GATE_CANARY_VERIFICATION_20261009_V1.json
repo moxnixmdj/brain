@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_D_FINAL_LIVE_GATE_CANARY_VERIFICATION_V1",
+  "date": "2026-10-09",
+  "status": "PASS__REPLAY_CERTIFICATES_REJECTED_AS_LIVE_AUTHORITY__ZERO_LIVE_D_FINAL_CREDIT",
+  "subject": {
+    "gate": {
+      "path": "canonical/runtime/d_final_live_gate_v1.py",
+      "git_blob_sha": "58d285b57a7cea3aa922971305208f157a90f80e"
+    },
+    "epoch_verifier": {
+      "path": "canonical/runtime/d_finality_execution_epoch_v1.py",
+      "git_blob_sha": "60cbc536215571fbd7e41b5ce28239ce370120c3"
+    },
+    "registry": {
+      "path": "canonical/governance/D_FINALITY_CERTIFICATE_REGISTRY_V1.json",
+      "git_blob_sha": "cc80e40e2207d1638ed1a0c58f0e6624f174c6a0"
+    }
+  },
+  "carrier": {
+    "provider": "SPRITES",
+    "name": "brain-live-integrated-v1-run-20261008",
+    "id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "canary_root": "/tmp/d-live-canary",
+    "base_runtime": "EXACT_CURRENT_RUNTIME_COPY_PLUS_BRANCH_D_FINAL_MODULES"
+  },
+  "verified": [
+    {
+      "capability_id": "bound:archive.tar_gz.create_from_manifest",
+      "replay_route_certificate_present": true,
+      "live_route_certificate_present": false,
+      "result": "REJECTED",
+      "reason_class": "D_FINAL_REPLAY_CERTIFICATE_NOT_LIVE_AUTHORITY"
+    },
+    {
+      "capability_id": "bound:decision.synthesis.verify.stdlib",
+      "replay_route_certificate_present": true,
+      "live_route_certificate_present": false,
+      "result": "REJECTED",
+      "reason_class": "D_FINAL_REPLAY_CERTIFICATE_NOT_LIVE_AUTHORITY"
+    }
+  ],
+  "theorem": {
+    "replay_certificate_implies_live_authority": false,
+    "live_authority_requires_exact_verified_d_final_current_row": true,
+    "default_fail_closed": true
+  },
+  "hard_nonclaims": [
+    "NO_LIVE_D_FINAL_CERTIFICATE_EXISTS",
+    "NO_LIVE_D_FINAL_CAPABILITY_EXECUTION_HAS_PASSED",
+    "D_FINAL_LIVE_INVOKER_WRAPPER_NOT_YET_INDEPENDENTLY_REPLAYED",
+    "NO_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "live_d_final_count": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0,
+    "incremental_spend_usd": 0
+  }
+}
