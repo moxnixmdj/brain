@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_D_FINALITY_COVERAGE_GATE_V1_SPRITE_VERIFICATION",
+  "date": "2026-10-09",
+  "status": "INDEPENDENT_SPRITE_EXACT_BLOB_REPLAY_PASS__8_OF_8_TESTS__ZERO_CREDIT",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/d_finality_coverage_gate_v1.py",
+      "git_blob_sha": "3974b89b4d614c9a39c5c71eeb3b1774b21f8e91"
+    },
+    "tests": {
+      "path": "canonical/tests/test_d_finality_coverage_gate_v1.py",
+      "git_blob_sha": "7bc274baaf0fb79b621517f039af2510e76d2681"
+    }
+  },
+  "carrier": {
+    "provider": "SPRITES",
+    "name": "brain-live-runtime-v1-verify-20261008",
+    "id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13",
+    "workspace": "/tmp/d-finality-coverage-v1",
+    "materialization": "EXACT_GITHUB_CONNECTOR_BYTES"
+  },
+  "execution": {
+    "command": "python3 -m unittest canonical.tests.test_d_finality_coverage_gate_v1 -v",
+    "tests_run": 8,
+    "failures": 0,
+    "errors": 0,
+    "result": "PASS"
+  },
+  "verified": [
+    "EMPTY_REGISTRY_FAILS_WITH_EXACT_MISSING_SET",
+    "EXACT_CURRENT_ROWS_CLOSE_COVERAGE",
+    "PROVIDER_THEOREM_REUSE_PRESERVES_PER_MEMBER_MATERIAL_CERTIFICATE_REQUIREMENT",
+    "NONCURRENT_ROW_DOES_NOT_COVER",
+    "FALSE_REPLAY_OR_DONOR_CLAIM_FAILS_CLOSED",
+    "UNDECLARED_DEPENDENCY_FAILS_CLOSED",
+    "STALE_NONLIVE_CERTIFICATE_CANNOT_EXPAND_LIVE_OWNERSHIP",
+    "DUPLICATE_CAPABILITY_ROW_FAILS_CLOSED"
+  ],
+  "hard_nonclaims": [
+    "NO_89_ROW_CERTIFICATE_PROMOTION",
+    "NO_D_CREDIT",
+    "NO_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
