@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK16_POSTSLOT_REDUCTION_VERIFY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__INDEPENDENT_SPRITE_EXACT_REDUCER_REPLAY__RANK16_FINAL_ZERO_TO_V31_COUNTS__ZERO_ACCEPTANCE_TERMINAL_CREDIT",
+  "subject": {
+    "reducer_path": "canonical/runtime/tb_science_postslot_reducer_v1.py",
+    "reducer_git_blob_sha": "a17ee9df93dddb17295b180c71fc284c2c3443b2",
+    "predecessor_ledger_path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261009_V30.json",
+    "predecessor_ledger_git_blob_sha": "7e46f2a5c0c418a4d3be4360c8a85b7be7611abb",
+    "manifest_path": "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json",
+    "manifest_git_blob_sha": "6dfa880b1f68881531afbba6ca211681801fd19b",
+    "rank16_final_receipt_sha256": "c759f63c783f8daf20596e14c8eb496929257d3466d9429c9e9cc0068d1ddfb9"
+  },
+  "independent_carrier": {
+    "name": "brain-objective-pass-lock-v1-verify",
+    "sprite_id": "sprite-64f51750-7c85-4715-9c30-a6bb89f60a24",
+    "workspace": "/home/sprite/tbpost"
+  },
+  "verification": {
+    "py_compile": "PASS",
+    "reducer_output": {
+      "status": "FINAL_ZERO",
+      "consumed_delta": 1,
+      "success_delta": 0,
+      "failure_delta": 1,
+      "consumed_slots": 16,
+      "consumed_successes": 0,
+      "consumed_final_failures": 16,
+      "successes_remaining_for_pass_lock": 124,
+      "additional_failures_before_fail_lock": 71,
+      "maximum_possible_successes_remaining": 194,
+      "minimum_required_success_rate_over_remaining_slots": 0.6391752577319587,
+      "pass_still_mathematically_reachable": true,
+      "next_unconsumed_slot": {
+        "ledger_schedule_rank": 17,
+        "frozen_manifest_schedule_order": 16,
+        "task_rank": 16,
+        "slot_id": "terminal-bench-science/variable-star-vetting::trial-0",
+        "task_digest": "sha256:51bf2b9d8e87a428772d92c6765d83ad3edc7c24283d2ff75af5f050aaee0c67"
+      }
+    }
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
