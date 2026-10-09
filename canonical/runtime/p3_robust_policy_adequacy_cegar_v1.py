@@ -483,6 +483,10 @@ def solve(problem: Mapping[str, Any]) -> dict[str, Any]:
         "skipped_registered_policies": list(
             registry.get("skipped_registered_policies") or []
         ),
+        "structural_atom_proofs": list(registry.get("structural_atom_proofs") or []),
+        "structurally_proved_atom_ids": list(
+            registry.get("structurally_proved_atom_ids") or []
+        ),
         "membership_self_certified": False,
         "registry_authority": False,
     }
