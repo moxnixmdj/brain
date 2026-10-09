@@ -1,0 +1,105 @@
+{
+  "schema": "PROJECT_BRAIN_R2_FINANCE_COREFERENCE_AMBIGUITY_CONTROL_VERIFY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__BOUNDED_COMPLETE_MENTION_UNIVERSE_COREFERENCE_AMBIGUITY_CONTROL__FOCUSED_8_OF_8__ADJACENT_12_OF_12__SUCCESSOR_WRAPPER_3_OF_3__PYCOMPILE_PASS__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "r2-bounded-coreference-ambiguity-control-20261009",
+    "base_main_sha": "91cca650799dc6072ef0ba6558a8c14b219141db",
+    "candidate_head_before_receipt": "d3abd816b2c2c42be2d8a0937556dd58e5ac9b65",
+    "exact_blobs": {
+      "canonical/runtime/finance_coreference_ambiguity_control_v1.py": "c53392553a201109082e1739692d3060caf2ad7d",
+      "canonical/runtime/finance_coreference_ambiguity_control_verify_v1.py": "b81deda6b315250f08131c6555a5b3bc82bc57d6",
+      "canonical/runtime/r2_finance_coreference_ambiguity_direct_adequacy_v1.py": "d7661614d03fcc96d6a451db15bae318aaf8efa1",
+      "canonical/runtime/r2_direct_end_to_end_adequacy_v15.py": "7ef033b93b34dc65a6910cf393e7be3589fd03ea",
+      "canonical/runtime/general_adequate_decision_fixed_point_v2.py": "0319dbf0c09c87dfdeec318071f36f8e5d26d442",
+      "canonical/tests/test_r2_finance_coreference_ambiguity_direct_adequacy_v1.py": "98caa42fa3e208327eb73f555718d21df3a2df36"
+    }
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "name": "brain-live-integrated-v1-run-20261008",
+    "sprite_id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "workspace": "/home/sprite/brain",
+    "note": "Carrier workspace predates current V14 router stack; exact new branch bytes and exact current semantic dependencies were materialized directly. V15 successor behavior was verified with a stubbed V14 delegation boundary rather than claiming full current-router-stack replay."
+  },
+  "verification": {
+    "focused_new_family": {
+      "result": "PASS",
+      "checks_run": 8,
+      "checks_passed": 8,
+      "covered": [
+        "TERMINALLY_EQUIVALENT_ANTECEDENT_CANDIDATES_CONTINUE_WITHOUT_DISAMBIGUATION",
+        "TERMINALLY_DISTINCT_USER_OWNED_AMBIGUITY_WITHOUT_SEPARATOR_ASKS_MINIMUM_CLARIFICATION",
+        "DECLARED_MINIMUM_DISCRIMINATOR_SELECTED_WHEN_AVAILABLE",
+        "INCOMPLETE_MENTION_UNIVERSE_FAILS_CLOSED",
+        "INCOMPLETE_TERMINAL_SIGNATURE_COVER_FAILS_CLOSED",
+        "PRODUCER_OUTPUT_TAMPER_REJECTED_BY_INDEPENDENT_VERIFIER",
+        "TRANSACTIONAL_DIRECT_ROUTE_SUCCESS",
+        "POSTWRITE_VERIFIER_FAILURE_ROLLS_BACK_PRIOR_OUTPUT_BYTES"
+      ]
+    },
+    "adjacent_semantic_primitives": {
+      "result": "PASS",
+      "checks_run": 12,
+      "checks_passed": 12,
+      "suites": [
+        "canonical.tests.test_source_grounded_coreference",
+        "canonical.tests.test_semantic_ambiguity_control_v1"
+      ]
+    },
+    "successor_router_wrapper": {
+      "result": "PASS",
+      "checks_run": 3,
+      "checks_passed": 3,
+      "proved": [
+        "NEW_ROUTE_ADDED_ONCE",
+        "UNMATCHED_REQUEST_DELEGATES_TO_V14_BOUNDARY",
+        "MATCHED_REQUEST_EXECUTES_NEW_ROUTE"
+      ],
+      "boundary": "V14_PREDECESSOR_WAS_STUBBED_ONLY_FOR_SUCCESSOR_WRAPPER_LOGIC_BECAUSE_THE_AUTHORIZED_SPRITE_COPY_PREDATES_CURRENT_V14_STACK"
+    },
+    "py_compile": {
+      "result": "PASS",
+      "files": 5
+    }
+  },
+  "proved": [
+    "EXACT_SOURCE_BOUND_MENTION_SPANS_AND_DECLARED_COMPLETE_MENTION_UNIVERSE_PRODUCE_A_FINITE_PROVENANCE_PRESERVING_ANTECEDENT_CANDIDATE_SET",
+    "NO_UNIQUE_ANTECEDENT_IS_REQUIRED_WHEN_ALL_COMPLETE_CANDIDATE_TERMINAL_SIGNATURES_ARE_EQUAL",
+    "WHEN_COMPLETE_CANDIDATE_TERMINAL_SIGNATURES_DIVERGE_THE_EXISTING_EXACT_MINIMAX_SEMANTIC_INFORMATION_POLICY_SELECTS_THE_CHEAPEST_DECLARED_SEPARATOR",
+    "USER_OWNED_UNDERDETERMINATION_WITH_NO_DECLARED_SEPARATOR_ROUTES_TO_MINIMUM_CLARIFICATION_INSTEAD_OF_GUESSING",
+    "INCOMPLETE_MENTION_UNIVERSE_OR_TERMINAL_COVERAGE_FAILS_CLOSED",
+    "PRODUCER_INDEPENDENT_RECOMPUTATION_REBUILDS_THE_CANDIDATE_GRAPH_AND_AMBIGUITY_DECISION",
+    "DIRECT_ROUTE_IS_TRANSACTIONAL_AND_PRESERVES_SOURCE_BYTES",
+    "FIXED_POINT_FRONT_DOOR_IS_WIRED_TO_V15_ON_THE_BRANCH"
+  ],
+  "coverage_delta": {
+    "closes_or_shrinks": "FINANCE_CONTEXTS_REQUIRING_AMBIGUOUS_COREFERENCE_WHEN_THE_EXACT_MENTION_UNIVERSE_IS_DECLARED_COMPLETE_AND_EVERY_CANDIDATE_ANTECEDENT_HAS_A_COMPLETE_TERMINAL_SIGNATURE",
+    "still_open": [
+      "IMPLICIT_OR_UNENUMERATED_ANTECEDENTS_WHERE_MENTION_UNIVERSE_COMPLETENESS_IS_UNPROVED",
+      "CASES_WITH_MISSING_OR_INCOMPLETE_TERMINAL_SIGNATURE_BINDINGS",
+      "CASES_REQUIRING_UNDECLARED_OR_UNAVAILABLE_DISCRIMINATING_OBSERVATIONS",
+      "GENERAL_OPEN_WORLD_COREFERENCE",
+      "GENERAL_WORD_SENSE_OR_ONTOLOGY_MAPPING"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_GENERAL_COREFERENCE_RESOLUTION",
+    "NO_ANTECEDENT_IDENTITY_AUTHORITY",
+    "NO_OPEN_WORLD_MENTION_UNIVERSE_COMPLETENESS",
+    "NO_SEMANTIC_TRUTH_AUTHORITY_FROM_CANDIDATE_GENERATION",
+    "NO_POLICY_ADEQUACY_AUTHORITY_BEYOND_THE_EXACT_DIRECT_TASK_CONTRACT",
+    "NO_FULL_CURRENT_ROUTER_STACK_REPLAY_ON_THE_SPRITE",
+    "NO_FULL_REPOSITORY_SUITE_CLAIM",
+    "NO_ACCEPTANCE_FAMILY_OR_OPUS_CHECKPOINT_CREDIT",
+    "NO_TERMINAL_AUTHORITY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0
+  }
+}
