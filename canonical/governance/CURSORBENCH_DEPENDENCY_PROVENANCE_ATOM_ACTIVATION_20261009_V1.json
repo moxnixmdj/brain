@@ -21,7 +21,8 @@
       "git_blob_sha": "6976c0d79d3c9ff56f387353ea2ab443b3a40e9e"
     },
     "independent_verification": {
-      "path": "canonical/verification/CURSORBENCH_DEPENDENCY_PROVENANCE_ATOM_INDEPENDENT_VERIFICATION_20261009_V1.json"
+      "path": "canonical/verification/CURSORBENCH_DEPENDENCY_PROVENANCE_ATOM_INDEPENDENT_VERIFICATION_20261009_V1.json",
+      "git_blob_sha": "59daf292a30f83557dfb05dcf1f72670a1d3b85d"
     }
   },
   "admission_contract": {
