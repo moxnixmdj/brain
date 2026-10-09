@@ -198,3 +198,63 @@ def test_p3_exposes_information_boundary_proof_without_terminal_authority():
     assert info["membership_self_certified"] is False
     assert out["terminal_authority"] is False
     assert out["terminal_credit_delta"] == 0
+
+
+def test_real_registered_specialist_requires_boundary_and_closes_when_other_atoms_are_proved():
+    source_root = Path(__file__).resolve().parents[2]
+    required = [
+        "canonical/governance/CURSORBENCH_TYPED_ACCEPTANCE_PLAN_POLICY_ADEQUACY_BINDING_20261009_V1.json",
+        "canonical/governance/CURSORBENCH_TYPED_ACCEPTANCE_PLAN_POLICY_ADEQUACY_CERTIFICATE_20261009_V2.json",
+        "canonical/verification/CURSORBENCH_TYPED_ACCEPTANCE_PLAN_POLICY_ADEQUACY_P3_NORMALIZATION_20261009_V1.json",
+    ]
+    with tempfile.TemporaryDirectory() as td:
+        root = Path(td)
+        for rel in required:
+            src = source_root / rel
+            dst = root / rel
+            dst.parent.mkdir(parents=True, exist_ok=True)
+            dst.write_bytes(src.read_bytes())
+
+        m = model()
+        b = binding(root, m)
+        other = [
+            "SPEC_ACCEPT_TYPED_SEMANTICS_BOUND_V1",
+            "SPEC_ACCEPT_FAILURE_MODE_COMPLETENESS_V1",
+            "SPEC_ACCEPT_DEPENDENCY_PROVENANCE_TRUTH_V1",
+        ]
+        formal = [{"op": "ATOM", "id": x} for x in other]
+        base_problem = {
+            "decision_basis": list(other),
+            "formal_source_constraints": formal,
+            "proposed_refinements": formal,
+            "typed_acceptance_model": m,
+        }
+
+        old_root = p3.ROOT
+        p3.ROOT = root
+        try:
+            without = p3.solve(dict(base_problem))
+            with_boundary = dict(base_problem)
+            with_boundary["typed_acceptance_information_boundary_binding"] = b
+            with_result = p3.solve(with_boundary)
+        finally:
+            p3.ROOT = old_root
+
+    assert without["pass"] is False
+    assert without["reason"] == "POLICY_CONDITIONS_REQUIRED"
+    skipped = without["conditioned_policy_adequacy_registry"]["skipped_registered_policies"]
+    cursor = next(
+        row for row in skipped
+        if row["policy_id"] == "BRAIN_INDEPENDENT_ACCEPTANCE_MODEL_TYPED_PLAN_V1"
+    )
+    assert cursor["missing_atoms"] == [NO_HIDDEN_ATOM]
+
+    assert with_result["pass"] is True, with_result
+    assert with_result["status"] == "COMMON_POLICY_CERTIFIED_ACROSS_ALL_SURVIVING_MODELS"
+    assert with_result["selected_policy_id"] == "BRAIN_INDEPENDENT_ACCEPTANCE_MODEL_TYPED_PLAN_V1"
+    proved = set(
+        with_result["conditioned_policy_adequacy_registry"]["proved_condition_atom_ids"]
+    )
+    assert proved == {TRANSFORM_ATOM, NO_HIDDEN_ATOM}
+    assert with_result["terminal_authority"] is False
+    assert with_result["terminal_credit_delta"] == 0
