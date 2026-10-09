@@ -1240,7 +1240,7 @@
     },
     "coverage_completeness_root_theorem_r1_r4": {
       "path": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_THEOREM_LIVE_BINDING_V1.json",
-      "git_blob_sha": "149891188b32fd7e52460b1536c6a52cb4bf5919",
+      "git_blob_sha": "8df282ac48547f7d0bdd5f8e1917151ab065f227",
       "note": "CCRT_R1_R4_META_CONTROL_BOUND_TO_CURRENT_REAL_MISSION__EXPLICIT_ROOT_NAMESPACE__FROZEN_CLAIM_SCOPE__MISSION_SUFFICIENT_SEMANTIC_CARRIER__CLAIM_SCOPED_ROOT_CERTIFICATE_REGISTRY__R4_FAIL_CLOSED__ZERO_CREDIT",
       "semantic_carrier_precondition": {
         "path": "canonical/governance/MISSION_SUFFICIENT_SEMANTIC_CARRIER_V1.json",
@@ -3010,7 +3010,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 120,
+  "pointer_revision": 121,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
@@ -4287,12 +4287,12 @@
   },
   "r4_live_binding_currentness": {
     "status": "REFRESHED_CURRENT_BYTES_WITH_CLAIM_SCOPED_ROOT_REGISTRY__ZERO_CREDIT",
-    "live_binding_sha": "149891188b32fd7e52460b1536c6a52cb4bf5919",
+    "live_binding_sha": "8df282ac48547f7d0bdd5f8e1917151ab065f227",
     "mission_sha": "7ad5f82d8434966781bf97c725d482e10133fc7c",
     "claim_scope_sha": "05b555f4f9a0227ee0b3e6121246172078857279",
-    "root_registry_sha": "fa395c54a9f5c7d93eff01dd8ccf28575c0a0361",
-    "current_root_certificate_pointer_sha": "b5ecc5a30abd046fb4f034e9ac1972ebdcf73c66",
-    "active_claim": null,
+    "root_registry_sha": "77c5f8e2d1b63838c63baa1db9fb9954a02636f3",
+    "current_root_certificate_pointer_sha": "eace743c6cb2399dd1c1bc35d8678bba8a74d415",
+    "active_claim": "fda1409a94d983f61888f08f3df99cad50dc36edc3f5feb01b6df20e31156eaa",
     "registry_guard_sha": "508df599e111e9aec47cbd175ce4f760299da786",
     "registry_tests_sha": "7944f9c4fa46de905f7f6976b9dd2968f174733c",
     "terminal_credit_delta": 0
