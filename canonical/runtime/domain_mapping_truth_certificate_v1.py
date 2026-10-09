@@ -14,6 +14,10 @@ import json
 from typing import Any, Mapping, Sequence
 
 from canonical.runtime.proof_carrying_domain_mapping_v1 import resolve as resolve_mapping
+from canonical.runtime.finance_margin_context_proof_v1 import (
+    KIND as MARGIN_CONTEXT_KIND,
+    verify_context as verify_margin_context,
+)
 from canonical.runtime.source_aligned_regcap_context_proof_v1 import (
     CCOB_KIND,
     CCYB_KIND,
@@ -115,27 +119,50 @@ def _contextual_refinement(raw_span: str, source_id: str) -> dict[str, Any]:
         )
         if not isinstance(result, Mapping):
             raise ValueError("CONTEXT_PROOF_RESULT_NOT_MAPPING")
-        atom_ids = sorted({
+        regcap_atom_ids = {
             str(row.get("id"))
             for row in result.get("proved_constraints", [])
             if isinstance(row, Mapping) and str(row.get("id") or "").strip()
-        })
-        accepted_kinds = sorted({
+        }
+        accepted_kinds = {
             str(row.get("kind"))
             for row in result.get("accepted_claims", [])
             if isinstance(row, Mapping) and str(row.get("kind") or "").strip()
-        })
+        }
+
+        margin_result = verify_margin_context(
+            raw_span,
+            source_id=source_id,
+            start=0,
+            end=len(raw_span),
+        )
+        margin_atom_ids = {
+            str(x)
+            for x in (margin_result.get("proved_atom_ids") or [])
+            if isinstance(x, str) and x.strip()
+        }
+        if margin_result.get("pass") is True and margin_atom_ids:
+            accepted_kinds.add(MARGIN_CONTEXT_KIND)
+
+        atom_ids = sorted(regcap_atom_ids | margin_atom_ids)
+        regcap_authority = bool(
+            regcap_atom_ids and result.get("semantic_truth_authority") is True
+        )
+        margin_authority = bool(
+            margin_atom_ids and margin_result.get("semantic_truth_authority") is True
+        )
         return {
             "status": (
-                "PASS__AUTHENTICATED_REGCAP_CONTEXT_FACTS"
-                if atom_ids and result.get("semantic_truth_authority") is True
-                else "OPEN__NO_BOUND_REGCAP_CONTEXT_FACTS"
+                "PASS__AUTHENTICATED_CONTEXT_FACTS"
+                if atom_ids and (regcap_authority or margin_authority)
+                else "OPEN__NO_BOUND_CONTEXT_FACTS"
             ),
             "source_proof_status": result.get("status"),
+            "margin_context_proof_status": margin_result.get("status"),
             "proved_atom_ids": atom_ids,
-            "accepted_context_kinds": accepted_kinds,
+            "accepted_context_kinds": sorted(accepted_kinds),
             "semantic_truth_authority": bool(
-                atom_ids and result.get("semantic_truth_authority") is True
+                atom_ids and (regcap_authority or margin_authority)
             ),
             "concept_identity_claimed": False,
             "reverse_property_to_concept_classification_authorized": False,
