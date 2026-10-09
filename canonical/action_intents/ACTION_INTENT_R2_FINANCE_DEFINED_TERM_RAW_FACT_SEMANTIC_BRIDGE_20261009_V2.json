@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_R2_FINANCE_DEFINED_TERM_RAW_FACT_SEMANTIC_BRIDGE_20261009_V2",
+  "date": "2026-10-09",
+  "action_id": "R2_FINANCE_COMPOSE_V32_SOURCE_GATE_V3_REFERENCE_RESOLUTION_WITH_RAW_FACT_BINDING",
+  "status": "ACTIVE_INTENT__LOAD_BEARING_FINANCE_SEMANTIC_COVERAGE_EXPANSION__ZERO_CREDIT",
+  "base_main_head": "010df1ff3537e7b13b1e57c9868d2e864abb5585",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "target_obligation": "FINANCE_AGENT_V2_GE_58_59__AND__FINANCE_ACCOUNTING_INDEX_GE_61",
+  "action_kind": "REUSE_AND_COMPOSE_EXISTING_VERIFIED_CAPABILITIES",
+  "causal_blocker": [
+    "CURRENT_PRIMARY_CELL_IS_FINANCE_SEMANTIC_ADEQUACY_TAIL",
+    "V32_CLOSES_COMPLETE_NORMALIZED_TYPED_FINANCE_SOURCE_UNIVERSE_BUT_EXPLICITLY_DOES_NOT_PROVE_RAW_TEXT_TO_PACKAGE_NORMALIZATION_OR_REFERENCE_FACT_BINDING",
+    "V3_CLOSES_TERM_MEANS_CONDITION_TO_LATER_EXACT_REFERENCE_RELATIVE_TO_ALREADY_TYPED_CONTEXT",
+    "REMAINING_DISTINCT_SLICE_IS_TERM_MEANS_FIELD_PLUS_STRICT_RAW_FACT_BYTES_TO_POLICY_CHANGING_TYPED_CONDITION"
+  ],
+  "exact_new_subregion": [
+    "TASK_BOUND_FINANCE_POLICY_SOURCE_HAS_PROOF_CARRYING_STRUCTURAL_SOURCE_COVERAGE",
+    "POLICY_SOURCE_EXPLICITLY_DECLARES_HUMAN_TERM_TO_ONE_TYPED_FIELD",
+    "SINGLE_UNLESS_CONDITION_USES_THAT_EXACT_DEFINED_TERM_WITH_BOOLEAN_OR_DECIMAL_LITERAL_PREDICATE",
+    "TASK_BOUND_FACT_SOURCE_IS_STRICT_JSON_COMPILED_TO_CONTENT_ADDRESSED_TYPED_CONTEXT",
+    "PRODUCER_AND_INDEPENDENT_VERIFIER_RECOMPUTE_DEFINITION_BINDING_TYPED_CONTEXT_CONDITION_ATOM_AND_BRANCH"
+  ],
+  "highest_leverage_now": true,
+  "expected_parent_frontier_change": "REMOVE_ONE_SOURCE_DECLARED_REFERENCE_PLUS_RAW_FACT_BINDING_SLICE_FROM_FINANCE_SEMANTIC_TAIL_WITHOUT_TOUCHING_SYNONYMY_ONTOLOGY_CROSS_DOCUMENT_OR_EXTERNAL_FACT_TRUTH",
+  "stop_condition": "EXACT_GITHUB_BRANCH_BYTES_PASS_NEW_CORE_DIRECT_AND_FRONT_DOOR_TESTS_PLUS_V29_V30_V31_V32_V3_ADJACENT_REPLAY_AND_LOAD_BEARING_ADMISSION",
+  "load_bearing_primary": {
+    "open_obligation_ids": [],
+    "constructive_gap_for_open_obligation_ids": [
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59"
+    ],
+    "scope_complete_discharge": false,
+    "expected_obligation_discharge_lcb": "0",
+    "expected_obligation_unlock_lcb": "1/26",
+    "success_probability_lcb": "9/10",
+    "wall_clock_cost_ub": "1"
+  },
+  "reuse_first_basis": [
+    "canonical/runtime/finance_proof_carrying_source_gate_v1.py",
+    "canonical/runtime/r2_finance_explicit_definition_unless_direct_adequacy_v1.py",
+    "canonical/runtime/explicit_definition_reference_graph.py",
+    "canonical/runtime/certified_defined_term_raw_typed_condition_v2.py",
+    "canonical/runtime/source_aligned_semantic_proof_v6.py",
+    "canonical/runtime/r2_finance_normalized_source_universe_direct_adequacy_v1.py",
+    "canonical/runtime/r2_direct_end_to_end_adequacy_v3.py"
+  ],
+  "prohibited_claims": [
+    "NO_CLAIM_GENERAL_SYNONYMY_OR_COREFERENCE",
+    "NO_CLAIM_GENERAL_ONTOLOGY_OR_DOMAIN_CONCEPT_MAPPING",
+    "NO_CLAIM_IMPLICIT_SECTOR_CONVENTION_RESOLUTION",
+    "NO_CLAIM_CROSS_DOCUMENT_ENTITY_OR_FACT_LINKING",
+    "NO_CLAIM_EXTERNAL_WORLD_FACTUAL_AUTHENTICATION",
+    "NO_CLAIM_FINANCE_FAMILY_CLOSED",
+    "NO_ACCEPTANCE_CHECKPOINT_OR_TERMINAL_CREDIT"
+  ],
+  "safety": {
+    "incremental_spend_usd_max": 0,
+    "fresh_benchmark_task_reads": 0,
+    "benchmark_trials_consumed": 0,
+    "verification_authority_mutation": false,
+    "terminal_credit_delta": 0
+  }
+}
