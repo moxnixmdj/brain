@@ -88,6 +88,63 @@ class SourceAlignedSemanticProofV7Tests(unittest.TestCase):
         self.assertEqual(out["status"],"PROOF_CHECKED_WITH_REJECTIONS")
         self.assertEqual(out["proved_constraints"],[])
 
+
+    def test_exact_effect_id_inventory_is_proved(self):
+        text=(
+            "Effect targets only: reporting.threshold.\n"
+            "Effect IDs only for reporting.threshold: B.t, C.t.\n"
+        )
+        out=verify_proof(
+            text,
+            source_id="doc",
+            claims=[{
+                "claim_id":"inventory",
+                "kind":"CERTIFIED_EFFECT_ID_INVENTORY",
+                "target_id":"reporting.threshold",
+                "effect_ids":["C.t","B.t"],
+            }],
+        )
+        self.assertEqual(out["status"],"PROOF_CHECKED",out)
+        row=out["accepted_claims"][0]
+        self.assertEqual(row["target_id"],"reporting.threshold")
+        self.assertEqual(row["effect_ids"],["B.t","C.t"])
+        self.assertTrue(
+            row["constraint"]["id"].startswith("EFFECT_ID_INVENTORY::doc::")
+        )
+
+    def test_wrong_effect_id_inventory_is_rejected(self):
+        text="Effect IDs only for reporting.threshold: B.t."
+        out=verify_proof(
+            text,
+            source_id="doc",
+            claims=[{
+                "claim_id":"inventory",
+                "kind":"CERTIFIED_EFFECT_ID_INVENTORY",
+                "target_id":"reporting.threshold",
+                "effect_ids":["X.t"],
+            }],
+        )
+        self.assertEqual(out["status"],"PROOF_CHECKED_WITH_REJECTIONS")
+        self.assertEqual(out["proved_constraints"],[])
+
+    def test_duplicate_target_inventory_declaration_is_not_certifiable(self):
+        text=(
+            "Effect IDs only for reporting.threshold: B.t.\n"
+            "Effect IDs only for reporting.threshold: C.t.\n"
+        )
+        out=verify_proof(
+            text,
+            source_id="doc",
+            claims=[{
+                "claim_id":"inventory",
+                "kind":"CERTIFIED_EFFECT_ID_INVENTORY",
+                "target_id":"reporting.threshold",
+                "effect_ids":["B.t"],
+            }],
+        )
+        self.assertEqual(out["status"],"PROOF_CHECKED_WITH_REJECTIONS")
+        self.assertEqual(out["proved_constraints"],[])
+
     def test_v6_primitives_still_pass_through(self):
         text="ABC\nEffect targets only: x."
         import hashlib
