@@ -1,0 +1,104 @@
+{
+  "schema": "PROJECT_BRAIN_D_FINAL_STDLIB_PROVIDER_THEOREM_V1",
+  "date": "2026-10-09",
+  "status": "VERIFIED_SHARED_PROVIDER_THEOREM__TWO_CARRIERS__TWO_DISTINCT_REAL_MEMBERS_EACH__ZERO_AMBIENT__ZERO_CREDIT_UNTIL_LIVE_BINDING",
+  "subject": {
+    "provider_path": "canonical/runtime/d_final_bound_stdlib_provider_v1.py",
+    "provider_git_blob_sha": "e2d0992f84da629358ae1ee5406c23d5f21c26c2",
+    "registry_path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+    "registry_git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85",
+    "registry_file_sha256": "8c2ac9bdfd0eacfa11b3af879ff027f50ed54078448ab11cadf0ab6fcce2ed38",
+    "verifier_closure": [
+      {
+        "path": "canonical/runtime/bound_capability_execution_verifier_v1.py",
+        "git_blob_sha": "2bc99699ec721e4b0ef239340e0c220370811e6f"
+      },
+      {
+        "path": "canonical/runtime/capability_planner.py",
+        "git_blob_sha": "629766f8a1194fd298e0809b64a5e9c5a39fa3ea"
+      },
+      {
+        "path": "canonical/runtime/capability_execution_trace_capsule_v1.py",
+        "git_blob_sha": "75faca7736d75f7e5385952ecb16240731bcdb7e"
+      },
+      {
+        "path": "canonical/runtime/composition_state_capsule_v1.py",
+        "git_blob_sha": "6337298b4804307315308689fbeb65692c67980d"
+      }
+    ],
+    "zero_ambient_launcher_git_blob_sha": "6e687527e9c4da82fb5d974a729aaa263ee73ea8"
+  },
+  "generic_scope": {
+    "accepted_source_type": "python_stdlib",
+    "package_installation": false,
+    "network_discovery": false,
+    "shell_tool_invocation": false,
+    "exact_registry_file_pin_supported": true,
+    "exact_registry_entry_pin_supported": true,
+    "exact_adapter_git_blob_required": true,
+    "frozen_template_rendering": true,
+    "frozen_expectation_verification": true,
+    "independent_execution_trace_verification": true,
+    "per_member_material_theorem_still_required": true
+  },
+  "hostile_suite": {
+    "carrier": "brain-live-runtime-v1-verify-20261008",
+    "tests_run": 8,
+    "failures": 0,
+    "errors": 0,
+    "result": "PASS",
+    "covered": [
+      "REGISTRY_FILE_DRIFT_REJECTED",
+      "REGISTRY_ENTRY_DRIFT_REJECTED",
+      "NON_STDLIB_ROW_REJECTED",
+      "MISSING_TEMPLATE_INPUT_REJECTED",
+      "ADAPTER_BYTE_DRIFT_REJECTED",
+      "EXPECTATION_FAILURE_REJECTED",
+      "STRUCTURAL_TEMPLATE_RENDERING_FAIL_CLOSED",
+      "EXACT_VERIFIED_STDLIB_ROW_ACCEPTED"
+    ]
+  },
+  "real_replay_1": {
+    "carrier": {
+      "provider": "SPRITES",
+      "name": "brain-live-integrated-v1-run-20261008",
+      "id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34"
+    },
+    "result": "PASS__TWO_DISTINCT_MEMBERS_ZERO_AMBIENT",
+    "archive_nonce_sha256": "68c339fc7b2855f5d7e478bb9b48881a59c5de7c7063d9aaef62de42973c13cf",
+    "decision_nonce_sha256": "f8c3013328962c2a81fbe2a9d30ac9061ed16d891baed8f4f3181248967d40c3",
+    "archive_capsule_head": "5db63c9d755a0b5770a5221610a9f0ac8628fdd785141644811f3a04477378ed",
+    "decision_capsule_head": "c9fc5d10c9b619e57a9fee52d24a414eb3224e7e927fb25f8aaf59dbbb03207e",
+    "network_probe": "DENIED__ERRNO_101_NETWORK_IS_UNREACHABLE"
+  },
+  "real_replay_2": {
+    "carrier": {
+      "provider": "SPRITES",
+      "name": "brain-r3-root1-gap-verify-20261008",
+      "id": "sprite-91472ada-4fea-4536-9558-7a7e3da49928"
+    },
+    "result": "PASS__TWO_DISTINCT_MEMBERS_ZERO_AMBIENT",
+    "archive_nonce_sha256": "29a45fe515341cceaab8e69668646fb9ef8f00afe24f3708bcaef71b2a8ed8ef",
+    "decision_nonce_sha256": "f216b2bcde063d734c15ae0e000e0f3ae31c052af05ff81498ee9b0a63a60738",
+    "archive_capsule_head": "6a35cd286b0ef46b3a0bd2c12fe9bb2a1af809c72c6966c67268d3e0bdf1ea7c",
+    "decision_capsule_head": "6baf98caf5e75c6889a4b9c9680d6680b3c1478d29ab2e2bd7cf4d70e7fcdaed",
+    "network_probe": "DENIED__ERRNO_101_NETWORK_IS_UNREACHABLE"
+  },
+  "exact_member_entry_hashes": {
+    "bound:archive.tar_gz.create_from_manifest": "ede9a7b0a4ffb17310de55b2dc76a7c4ba8a74b88f3b5153c434aa96418f9693",
+    "bound:decision.synthesis.verify.stdlib": "bf45f7e92d29a32fee4b2c40481a593e1c9f3b3e5b04f3da529fac5d0c5ec2c6"
+  },
+  "conclusion": "PROVIDER_EXECUTION_SEMANTICS_PROVED_FOR_CONTENT_BOUND_PYTHON_STDLIB_ROWS__MEMBER_MATERIAL_AND_LIVE_BINDING_REMAIN_SEPARATE_OBLIGATIONS",
+  "hard_nonclaims": [
+    "NO_CLAIM_ALL_PYTHON_STDLIB_MEMBERS_HAVE_MEMBER_THEOREMS",
+    "NO_CLAIM_LIVE_INVOKER_ALREADY_USES_THIS_PROVIDER",
+    "NO_CURRENT_FULL_D_FINAL_PROMOTION_FROM_THIS_THEOREM_ALONE",
+    "NO_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
