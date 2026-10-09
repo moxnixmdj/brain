@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_R2_V41_SEMANTIC_RELATION_PROOF_RECONCILIATION_VERIFY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__5_OF_5_REMOTE_CONSISTENCY_CHECKS__EXACT_V41_SCHEDULER_POINTER_AND_TERMINAL_BYTES__ZERO_TERMINAL_CREDIT",
+  "subject_branch": "reconcile/r2-v41-semantic-relation-proof-20261009",
+  "carrier": {
+    "name": "brain-live-integrated-v1-run-20261008",
+    "id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "workspace": "/home/sprite/r2-v41-semantic-relation-verify"
+  },
+  "exact_blobs": {
+    "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V41.json": "f3eb629ac2b7d732b28aa72bda4732bed4000f98",
+    "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json": "f3463f6a1ae1b2d0240faad6fddef873c479ca31",
+    "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json": "5a2e95a1ef11b89c9f93e750f12bce58bf420422",
+    "canonical/tests/test_r2_v41_semantic_relation_reconciliation_v1.py": "51f44cf5f5445f7ec9031d3591090a7c89f24bda"
+  },
+  "replay": {
+    "tests_run": 5,
+    "failures": 0,
+    "errors": 0,
+    "result": "PASS"
+  },
+  "proved": [
+    "CURRENT_R2_POINTER_BINDS_V41_EXACT_SCHEDULER_BLOB",
+    "CURRENT_TERMINAL_PRECEDENCE_BINDS_THE_SAME_V41_EXACT_SCHEDULER_BLOB",
+    "ROUTE_COUNT_REMAINS_28",
+    "BOUNDED_FAMILY_COUNT_REMAINS_25",
+    "VERIFIED_FINANCE_POSITIVE_SUBREGION_COUNT_REMAINS_10",
+    "EXACT_BOUNDED_SEMANTIC_RELATION_PROOF_KERNEL_IS_BOUND_WITH_25_OF_25_COMPONENT_VERIFICATION",
+    "GENERAL_INFERRED_SYNONYMY_REMAINS_UNCLOSED",
+    "REMAINING_FRONTIER_IS_NARROWED_TO_CASES_WITHOUT_COMPLETE_AUTHENTIC_BOUNDED_DENOTATIONS_PLUS_WORD_SENSE_CROSS_DOCUMENT_AND_EXTERNAL_FACT_RESIDUALS",
+    "TERMINAL_REMAINS_FALSE",
+    "ZERO_TERMINAL_CREDIT_PRESERVED"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_GENERAL_SYNONYMY_OR_WORD_SENSE_IS_SOLVED",
+    "NO_CLAIM_BOUNDED_DENOTATION_PACKAGES_SELF_AUTHENTICATE",
+    "NO_NEW_DIRECT_ROUTE_OR_FINANCE_SUBREGION_CREDIT",
+    "NO_TERMINAL_OR_CHECKPOINT_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
