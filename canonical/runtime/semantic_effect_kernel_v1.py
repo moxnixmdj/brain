@@ -220,7 +220,12 @@ def material_slice(
     ]
 
 
-def _run_proof(proof_kind: str, proof_problem: Mapping[str, Any]) -> dict[str, Any]:
+def _run_proof(
+    proof_kind: str,
+    proof_problem: Mapping[str, Any],
+    *,
+    effect: Mapping[str, Any],
+) -> dict[str, Any]:
     kind = _token(proof_kind, "PROOF_KIND")
     if not isinstance(proof_problem, Mapping):
         raise SemanticEffectError("PROOF_PROBLEM_NOT_OBJECT")
@@ -235,6 +240,37 @@ def _run_proof(proof_kind: str, proof_problem: Mapping[str, Any]) -> dict[str, A
             or verdict.get("action") != "CONTINUE_WITHOUT_DISAMBIGUATION"
         ):
             raise SemanticEffectError("AMBIGUITY_NOT_PROVED_TERMINALLY_IRRELEVANT")
+        return dict(verdict)
+    if kind == PROOF_IDENTIFIABILITY_UNIQUE:
+        from canonical.runtime.semantic_identifiability_gate import adjudicate
+
+        allowed = {
+            "interpretations",
+            "authorized_context_ids",
+            "required_interpretation_id",
+        }
+        if set(proof_problem) != allowed:
+            raise SemanticEffectError("IDENTIFIABILITY_PROOF_FIELDS_INVALID")
+        required_id = _token(
+            proof_problem.get("required_interpretation_id"),
+            "REQUIRED_INTERPRETATION_ID",
+        )
+        expected_property = f"interpretation({effect['semvar_id']})={required_id}"
+        if effect["property_name"] != expected_property:
+            raise SemanticEffectError("IDENTIFIABILITY_PROPERTY_BINDING_MISMATCH")
+        interpretations = proof_problem.get("interpretations")
+        context_ids = proof_problem.get("authorized_context_ids")
+        verdict = adjudicate(
+            interpretations,
+            authorized_context_ids=context_ids,
+        )
+        selected = verdict.get("interpretation")
+        if (
+            verdict.get("status") != "UNIQUE"
+            or not isinstance(selected, Mapping)
+            or selected.get("id") != required_id
+        ):
+            raise SemanticEffectError("INTERPRETATION_NOT_UNIQUELY_IDENTIFIED")
         return dict(verdict)
     raise SemanticEffectError("PROOF_KIND_UNSUPPORTED:" + kind)
 
@@ -262,7 +298,7 @@ def issue_discharge_certificate(
     problem_sha = _sha(problem)
     if problem_sha != checked["proof_obligation_sha256"]:
         raise SemanticEffectError("PROOF_PROBLEM_NOT_BOUND_TO_EFFECT")
-    verdict = _run_proof(proof_kind, problem)
+    verdict = _run_proof(proof_kind, problem, effect=checked)
     proof_digest = _sha(verdict)
     cert = {
         "schema": CERTIFICATE_SCHEMA,
@@ -323,7 +359,7 @@ def _verify_certificate(effect: Mapping[str, Any], certificate: Mapping[str, Any
         raise SemanticEffectError("CERTIFICATE_PROOF_PROBLEM_DIGEST_MISMATCH")
     if checked["proof_obligation_sha256"] != problem_sha:
         raise SemanticEffectError("CERTIFICATE_PROOF_PROBLEM_NOT_BOUND_TO_EFFECT")
-    verdict = _run_proof(certificate.get("proof_kind"), dict(problem))
+    verdict = _run_proof(certificate.get("proof_kind"), dict(problem), effect=checked)
     proof_digest = _sha(verdict)
     if certificate.get("proof_digest") != proof_digest:
         raise SemanticEffectError("CERTIFICATE_PROOF_DIGEST_MISMATCH")
