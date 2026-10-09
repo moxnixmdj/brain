@@ -1190,6 +1190,18 @@ def _observe_runtime_outcome(
 
     learning = _learning_module()
     path = learning.DEFAULT_STATE_PATH if state_path is None else Path(state_path)
+    if (
+        str(surface) == "ADEQUATE_DECISION_DIRECT_SUCCESS"
+        and out.get("r2_fixed_point_status")
+        == "PASS__R2_DIRECT_END_TO_END_ADEQUACY_CLOSED"
+        and out.get("semantic_acceptance_complete") is True
+        and out.get("actual_goal_satisfaction_verified") is True
+    ):
+        return learning.record_owned_direct_success_observation(
+            out,
+            surface="ADEQUATE_DECISION_DIRECT_SUCCESS",
+            state_path=path,
+        )
     return learning.record_success_observation(
         out,
         surface=surface,
