@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261009_V31",
+  "date": "2026-10-09",
+  "status": "CURRENT_POST_RANK16_IRREVERSIBLE_FINAL_ZERO__SIXTEEN_CONSUMED__RANK17_NEXT_UNTOUCHED__ZERO_ACCEPTANCE_CREDIT",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "predecessor": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261009_V30.json",
+    "git_blob_sha": "7e46f2a5c0c418a4d3be4360c8a85b7be7611abb"
+  },
+  "rank16_v1_result": {
+    "path": "canonical/verification/TB_SCIENCE_RANK16_V1_IRREVERSIBLE_RESULT_TRUTH_20261009_V1.json"
+  },
+  "frozen_manifest": {
+    "path": "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json",
+    "git_blob_sha": "6dfa880b1f68881531afbba6ca211681801fd19b",
+    "slot_count": 210
+  },
+  "current_counts": {
+    "consumed_slots": 16,
+    "consumed_successes": 0,
+    "consumed_final_failures": 16,
+    "successes_remaining_for_pass_lock": 124,
+    "additional_failures_before_fail_lock": 71,
+    "maximum_possible_successes_remaining": 194,
+    "minimum_required_success_rate_over_remaining_slots": 0.6391752577319587,
+    "pass_still_mathematically_reachable": true,
+    "next_unconsumed_slot": {
+      "ledger_schedule_rank": 17,
+      "frozen_manifest_schedule_order": 16,
+      "task_rank": 16,
+      "slot_id": "terminal-bench-science/variable-star-vetting::trial-0",
+      "task_digest": "sha256:51bf2b9d8e87a428772d92c6765d83ad3edc7c24283d2ff75af5f050aaee0c67"
+    }
+  },
+  "rank16": {
+    "task_read": true,
+    "task_started": true,
+    "execution_authority_consumed": true,
+    "benchmark_trials_consumed": 1,
+    "reward": 0,
+    "result": "FINAL_ZERO",
+    "logical_attempt_id": "c7feaa1fac90c9bde92480bf3fddfa858069b08267d7a35f01b919e864c5fb8e",
+    "rerun_authority": false,
+    "replacement_authority": false
+  },
+  "rank17": {
+    "slot_id": "terminal-bench-science/variable-star-vetting::trial-0",
+    "task_digest": "sha256:51bf2b9d8e87a428772d92c6765d83ad3edc7c24283d2ff75af5f050aaee0c67",
+    "task_read": false,
+    "task_started": false,
+    "benchmark_trials_consumed": 0,
+    "execution_authority": false,
+    "task_read_authority": false,
+    "next_action": "QUALIFY_FRESH_ZERO_EXPOSURE_CARRIER_AND_BIND_ONE_SLOT_RANK17_AUTHORITY_BEFORE_ANY_TASK_READ"
+  },
+  "scheduler": [
+    "DO_NOT_RERUN_OR_REPLACE_RANK16.",
+    "USE_THE_FROZEN_210_SLOT_MANIFEST_TO_SELECT_RANK17_VARIABLE_STAR_VETTING_AS_THE_NEXT_UNCONSUMED_SLOT.",
+    "DO_NOT_READ_RANK17_UNTIL_A_FRESH_ZERO_EXPOSURE_CARRIER_AND_ONE_SLOT_AUTHORITY_ARE_VERIFIED.",
+    "PRESERVE_DURABLE_START_CAS_AGENT_READY_CAUSAL_JOURNAL_AND_UNCERTAIN_EFFECT_NO_REPLAY_INVARIANTS.",
+    "ONE_SLOT_SUCCESS_CANNOT_GRANT_AGGREGATE_TB_SCIENCE_ACCEPTANCE_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_trials_consumed_delta": 1,
+    "consumed_successes_delta": 0,
+    "consumed_final_failures_delta": 1,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
