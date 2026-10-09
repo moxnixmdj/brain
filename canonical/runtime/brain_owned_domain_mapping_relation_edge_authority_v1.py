@@ -87,8 +87,8 @@ def verify(raw:Mapping[str,Any])->dict[str,Any]:
         return _fail("SCOPE_ID_REQUIRED")
     if not source_id or not target_id or source_id==target_id:
         return _fail("DISTINCT_SOURCE_TARGET_IDS_REQUIRED")
-    if relation not in {"ENTAILS","NOT_ENTAILS"}:
-        return _fail("RELATION_UNSUPPORTED")
+    if relation!="ENTAILS":
+        return _fail("ONLY_POSITIVE_ENTAILS_SUPPORTED")
 
     source=raw.get("domain_mapping_source")
     allowed_source={
@@ -158,7 +158,7 @@ def verify(raw:Mapping[str,Any])->dict[str,Any]:
             certificate_reason=certificate.get("reason"),
         )
     truth=str(certificate.get("predicate_truth") or "").upper()
-    expected_truth="TRUE" if relation=="ENTAILS" else "FALSE"
+    expected_truth="TRUE"
     if (
         certificate.get("pass") is not True
         or certificate.get("semantic_truth_authority") is not True
@@ -202,5 +202,5 @@ def verify(raw:Mapping[str,Any])->dict[str,Any]:
         "execution_authority":False,
         "acceptance_authority":False,
         "terminal_authority":False,
-        "boundary":"SCOPED_DOMAIN_MAPPING_LEFT_ENTAILS_RIGHT_TRUTH_ONLY__NO_OPEN_WORLD_ONTOLOGY_COMPLETENESS",
+        "boundary":"POSITIVE_SCOPED_DOMAIN_MAPPING_LEFT_ENTAILS_RIGHT_TRUTH_ONLY__NO_NEGATIVE_EDGE_OR_OPEN_WORLD_ONTOLOGY_COMPLETENESS",
     }
