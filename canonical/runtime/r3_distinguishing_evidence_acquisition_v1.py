@@ -1,22 +1,19 @@
 """Candidate-only distinguishing-evidence acquisition for R3 verification gaps.
 
-A provider may return one complete candidate success output bound to an exact
-minimum distinguishing-evidence request. The provider gains no truth,
-verification, promotion, acceptance, execution, or terminal authority.
+A provider receives one exact minimum structural evidence request and may return
+only evidence fields explicitly named by one candidate request bundle. It never
+returns or replaces the complete success subject.
 
-A candidate is admitted only when:
-- it is bound to the exact request digest and original task identity;
-- it yields a valid bounded success proof capsule;
-- its redacted retained-proof shape strictly reduces the current evidence gap
-  or reopens an already-owned verifier-preserving route.
-
-Admitted candidates are re-ingested as ordinary R3 success observations and
-must pass the existing adapter + independent verification pipeline later.
+The Brain merges admitted evidence into the retained proof subject itself, so
+task identity and all unrequested retained fields remain Brain-owned. The merged
+candidate still has zero truth/verification/promotion/acceptance authority and
+must strictly reduce the gap before being re-ingested as an ordinary unverified
+R3 success observation.
 """
 from __future__ import annotations
 
 from copy import deepcopy
-from typing import Any, Callable, Mapping
+from typing import Any, Callable, Mapping, Sequence
 
 from canonical.runtime import autonomous_verified_self_improvement_v1 as learning
 from canonical.runtime import r3_success_adapter_author_context_v1 as author_context
@@ -26,6 +23,21 @@ from canonical.runtime import r3_distinguishing_evidence_request_v1 as request_c
 SCHEMA = "PROJECT_BRAIN_R3_DISTINGUISHING_EVIDENCE_ACQUISITION_V1"
 CANDIDATE_SCHEMA = "PROJECT_BRAIN_R3_DISTINGUISHING_EVIDENCE_CANDIDATE_V1"
 SURFACE = "R3_DISTINGUISHING_EVIDENCE_ACQUISITION"
+
+_OBLIGATION_FIELDS = {
+    "NONEMPTY_SELECTED_PLAN": "selected_plan",
+    "NONEMPTY_VERIFIED_TARGET_EFFECT_SET": "verified_target_effects",
+    "CONTROLLER_CHECKPOINT_BOUND": "controller_checkpoint",
+    "EXECUTION_COUNT_MATCHES_SELECTED_PLAN_AND_NONZERO": "execution",
+    "ALL_EXECUTION_ROWS_PASS": "execution",
+    "COMPOSITION_DIGEST_PRESENT_FOR_EVERY_EXECUTION_ROW": "execution",
+    "SEMANTIC_ACCEPTANCE_COMPLETE": "semantic_acceptance_complete",
+    "RAW_GOAL_DIGEST_BOUND": "raw_goal_sha256",
+    "RAW_TASK_CONTRACT_DIGEST_BOUND": "raw_task_contract_sha256",
+    "RAW_GOAL_ACCEPTANCE_BINDING_PRESENT": "raw_goal_acceptance",
+    "RAW_ACCEPTANCE_OBLIGATION_COUNT_POSITIVE": "raw_acceptance_obligation_count",
+    "ALL_RAW_ACCEPTANCE_OBLIGATIONS_ACCEPTED": "accepted_raw_obligation_ids",
+}
 
 
 def _fail(reason: str, **extra: Any) -> dict[str, Any]:
@@ -43,6 +55,51 @@ def _fail(reason: str, **extra: Any) -> dict[str, Any]:
         "terminal_credit_delta": 0,
         **extra,
     }
+
+
+def _bundle_for_route(
+    compiled_request: Mapping[str, Any],
+    route: str,
+) -> Mapping[str, Any] | None:
+    rows = compiled_request.get("candidate_evidence_bundles")
+    if not isinstance(rows, Sequence) or isinstance(rows, (str, bytes, bytearray)):
+        return None
+    matched = [
+        row
+        for row in rows
+        if isinstance(row, Mapping) and str(row.get("route") or "") == route
+    ]
+    return matched[0] if len(matched) == 1 else None
+
+
+def _allowed_fields(bundle: Mapping[str, Any]) -> set[str] | None:
+    obligations = bundle.get("missing_obligations")
+    if (
+        not isinstance(obligations, Sequence)
+        or isinstance(obligations, (str, bytes, bytearray))
+    ):
+        return None
+    out: set[str] = set()
+    for raw in obligations:
+        obligation = str(raw or "").strip()
+        field = _OBLIGATION_FIELDS.get(obligation)
+        if not field:
+            return None
+        out.add(field)
+    return out
+
+
+def _candidate_from_retained_material(
+    material: Mapping[str, Any],
+    evidence: Mapping[str, Any],
+) -> dict[str, Any]:
+    out = deepcopy(dict(material))
+    out["schema"] = material.get("source_schema")
+    out["status"] = material.get("source_status")
+    out["pass"] = True
+    for key, value in evidence.items():
+        out[key] = deepcopy(value)
+    return out
 
 
 def acquire(
@@ -87,6 +144,7 @@ def acquire(
         "distinguishing_evidence_request": deepcopy(dict(compiled_request)),
         "provider_contract": {
             "candidate_evidence_only": True,
+            "complete_success_subject_may_not_be_replaced": True,
             "automatic_effectful_replay_authorized": False,
             "provider_truth_authority": False,
             "provider_verification_authority": False,
@@ -94,7 +152,8 @@ def acquire(
             "provider_acceptance_authority": False,
             "provider_terminal_authority": False,
             "required_downstream_action": (
-                "REINGEST_AS_NEW_SUCCESS_OBSERVATION_THEN_USE_EXISTING_"
+                "MERGE_ONLY_REQUESTED_EVIDENCE_INTO_RETAINED_PROOF__"
+                "REINGEST_AS_NEW_SUCCESS_OBSERVATION__THEN_USE_EXISTING_"
                 "ADAPTER_AND_INDEPENDENT_VERIFICATION_PIPELINE"
             ),
         },
@@ -123,31 +182,33 @@ def acquire(
     ):
         return _fail("DISTINGUISHING_EVIDENCE_CANDIDATE_BINDING_INVALID")
 
-    candidate = result.get("candidate_success_output")
-    if not isinstance(candidate, Mapping) or candidate.get("pass") is not True:
-        return _fail("DISTINGUISHING_EVIDENCE_CANDIDATE_SUCCESS_OUTPUT_INVALID")
-    for key in (
-        "verification_authority",
-        "promotion_authority",
-        "acceptance_authority",
-        "terminal_authority",
-    ):
-        if candidate.get(key) is True:
-            return _fail(
-                "DISTINGUISHING_EVIDENCE_CANDIDATE_OUTPUT_AUTHORITY_ESCALATION_REJECTED",
-                authority_field=key,
-            )
+    route = str(result.get("route") or "").strip()
+    bundle = _bundle_for_route(compiled_request, route)
+    if not isinstance(bundle, Mapping):
+        return _fail("DISTINGUISHING_EVIDENCE_ROUTE_NOT_REQUESTED")
+    allowed_fields = _allowed_fields(bundle)
+    if allowed_fields is None:
+        return _fail("DISTINGUISHING_EVIDENCE_REQUEST_BUNDLE_INVALID")
+    evidence = result.get("evidence")
+    if not isinstance(evidence, Mapping):
+        return _fail("DISTINGUISHING_EVIDENCE_FIELDS_NOT_OBJECT")
+    evidence_keys = {str(key) for key in evidence}
+    if not evidence_keys:
+        return _fail("DISTINGUISHING_EVIDENCE_FIELDS_EMPTY")
+    unrequested = sorted(evidence_keys - allowed_fields)
+    if unrequested:
+        return _fail(
+            "DISTINGUISHING_EVIDENCE_UNREQUESTED_FIELDS_REJECTED",
+            unrequested_fields=unrequested,
+        )
 
     proof = learning.get_success_proof_context(oid, state_path=state_path)
     replay = learning.get_success_replay_context(oid, state_path=state_path)
     material = proof.get("material")
     if not isinstance(material, Mapping):
         return _fail("SOURCE_PROOF_MATERIAL_INVALID")
-    original_task = str(material.get("task_id") or "").strip()
-    candidate_task = str(candidate.get("task_id") or "").strip()
-    if original_task and candidate_task != original_task:
-        return _fail("DISTINGUISHING_EVIDENCE_CANDIDATE_TASK_BINDING_MISMATCH")
 
+    candidate = _candidate_from_retained_material(material, evidence)
     candidate_proof = learning._make_success_proof_capsule(candidate)
     if not isinstance(candidate_proof, Mapping):
         return _fail("DISTINGUISHING_EVIDENCE_CANDIDATE_PROOF_CAPSULE_UNAVAILABLE")
@@ -222,6 +283,8 @@ def acquire(
         "new_observation_id": recorded.get("observation_id"),
         "new_improvement_work_id": recorded.get("improvement_work_id"),
         "request_sha256": request_sha,
+        "selected_route": route,
+        "accepted_evidence_keys": sorted(evidence_keys),
         "provider_id": str(provider_id or "").strip() or "UNSPECIFIED_PROVIDER",
         "repair_class_reduction": deepcopy(dict(reduced)),
         "provider_truth_authority": False,
