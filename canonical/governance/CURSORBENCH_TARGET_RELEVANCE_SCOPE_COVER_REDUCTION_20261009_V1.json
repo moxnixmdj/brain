@@ -66,12 +66,13 @@
     ]
   },
   "deduction": {
-    "wal_direct_cursorbench_finite_cell_route_closed": false,
     "wal_direct_cursorbench_finite_cell_route_state": "REJECTED__NO_TARGET_MEMBERSHIP_OR_INTERSECTION_PROOF",
     "react_direct_cursorbench_finite_cell_route_state": "REJECTED__NO_TARGET_MEMBERSHIP_OR_INTERSECTION_PROOF",
     "separate_target_relevance_verifier_needed": false,
     "existing_scope_cover_kernel_is_canonical_relation_mechanism": true,
-    "next_sound_route": "PROVE_A_TARGET_DEFINED_OR_PROOF_CARRYING_SUPERSET_ADEQUACY_REGION_THAT_ACTUALLY_COVERS_CURSORBENCH_SCOPE__OR_BIND_A_REAL_CURSORBENCH_TARGET_MEMBER"
+    "next_sound_route": "PROVE_A_TARGET_DEFINED_OR_PROOF_CARRYING_SUPERSET_ADEQUACY_REGION_THAT_ACTUALLY_COVERS_CURSORBENCH_SCOPE__OR_BIND_A_REAL_CURSORBENCH_TARGET_MEMBER",
+    "wal_direct_cursorbench_finite_cell_transfer_rejected": true,
+    "react_direct_cursorbench_finite_cell_transfer_rejected": true
   },
   "hard_nonclaims": [
     "NO_CLAIM_WAL_OR_REACT_LEAD_FORM_IS_CURSORBENCH",
