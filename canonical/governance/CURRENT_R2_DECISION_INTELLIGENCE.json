@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_R2_DECISION_INTELLIGENCE_POINTER_V1",
   "date": "2026-10-09",
-  "status": "ACTIVE_CURRENT_R2_AUTHORITY__V43__TWENTY_EIGHT_DIRECT_ROUTES__TWENTY_FIVE_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL__OEWN_RELEASE_SENSE_UNIVERSE_AUTHENTICATED_CONTEXT_TO_CONCEPT_BOUNDED_CONCEPT_UNIVERSE_AND_EXACT_BOUNDED_RELATION_PROOF_BOUND__AFTER_TEN_VERIFIED_SUBREGIONS",
+  "status": "ACTIVE_CURRENT_R2_AUTHORITY__V44__THIRTY_DIRECT_ROUTES__TWENTY_SEVEN_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL__GENERAL_CROSS_DOCUMENT_EFFECT_WORLDS_AND_AUTHENTICATED_OEWN_DECISION_SENSE_CONTROL_BOUND__AFTER_TEN_VERIFIED_FINANCE_SUBREGIONS",
   "mission_objective": {
     "path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json"
   },
@@ -18,18 +18,18 @@
     "fixed_point_regression_test_git_blob_sha": "46333fedc0a91113d83e8c32184fb37cafb9bccd"
   },
   "scheduler_cut": {
-    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V43.json",
-    "git_blob_sha": "4fdc6171f14ce3bff684032db734c8c8bace7992"
+    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V44.json",
+    "git_blob_sha": "55be062f58a20e13fc32acc47746abb11750f7b7"
   },
   "direct_adequacy": {
-    "activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V23.json",
-    "activation_git_blob_sha": "933b12e60a8e4843a47999dbe5f7c15d060a16b3",
+    "activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V24.json",
+    "activation_git_blob_sha": "3a9668be458507e4295e733bc692b65b8ed7a866",
     "exact_cell_count": 3,
-    "bounded_family_count": 25,
-    "current_route_count": 28,
-    "current_activation_status": "THREE_EXACT_CELLS_PLUS_TWENTY_FIVE_BOUNDED_FAMILIES",
-    "direct_runtime_path": "canonical/runtime/r2_direct_end_to_end_adequacy_v8.py",
-    "direct_runtime_git_blob_sha": "76abf119813d133bf05e19602ee375c8d5c5d7b6",
+    "bounded_family_count": 27,
+    "current_route_count": 30,
+    "current_activation_status": "THREE_EXACT_CELLS_PLUS_TWENTY_SEVEN_BOUNDED_FAMILIES",
+    "direct_runtime_path": "canonical/runtime/r2_direct_end_to_end_adequacy_v10.py",
+    "direct_runtime_git_blob_sha": "1a78930ab5536a8db35097eb7e924284b0a0de73",
     "coverage_verifications": [
       {
         "path": "canonical/verification/R2_DOCX_JSON_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
@@ -163,7 +163,7 @@
     "path": "canonical/governance/R2_BRAIN_OWNED_ADVISORY_JUDGMENT_POLICY_20261008_V1.json"
   },
   "primary_primitive": "ESCAPE_POLICY_ADEQUACY_COVERAGE",
-  "primary_primitive_state": "OPEN__ADEQUACY_COVERAGE_AND_OBSERVABILITY_ONLY__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL__TEN_VERIFIED_POSITIVE_SUBREGIONS__DECISION_RELATION_AND_BOUNDED_CONCEPT_UNIVERSE_CONTROL_BOUND__GDPVAL_DORMANT",
+  "primary_primitive_state": "OPEN__ADEQUACY_COVERAGE_AND_OBSERVABILITY_ONLY__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL__TEN_VERIFIED_FINANCE_SUBREGIONS__GENERAL_CROSS_DOCUMENT_EFFECT_WORLDS_AND_AUTHENTICATED_OEWN_DECISION_SENSE_CONTROL_BOUND__GDPVAL_DORMANT",
   "general_mechanism_missing": false,
   "learned_judgment_role": "ADVISORY_GENERATION_RANKING_AND_SEARCH_ACCELERATION_ONLY",
   "authority": "AUTHENTICATED_POLICY_COVER_MINIMUM_POLICY_CHANGING_INFORMATION_AND_INDEPENDENT_GOAL_ACCEPTANCE",
@@ -270,7 +270,7 @@
     "positive_adequacy_coverage_credit_delta": 0
   },
   "control_mechanism_status": "CLOSED__TOTAL_FAIL_CLOSED_ADEQUACY_OR_ABSTAIN_CONTROL",
-  "remaining_problem_class": "POSITIVE_ADEQUACY_COVERAGE_AND_POLICY_CHANGING_OBSERVABILITY__FINANCE_RESIDUAL_LIMITED_TO_AMBIGUOUS_OR_IMPLICIT_COREFERENCE_BEYOND_VERIFIED_STRUCTURAL_FORMS__INTENDED_SENSE_SELECTION_WHEN_MULTIPLE_OEWN_OR_AUTHENTICATED_REGISTRY_CANDIDATES_REMAIN_DECISION_DISTINCT_WITHOUT_AUTHENTICATED_DISCRIMINATOR__TERMS_OR_DOMAIN_CONCEPTS_OUTSIDE_PROVED_COMPLETE_LEXICAL_OR_DOMAIN_UNIVERSES__NONEXPLICIT_SEMANTIC_RELATIONS_WHEN_NO_COMPLETE_AUTHENTIC_BOUNDED_DENOTATION_OR_PROVABLE_SET_RELATION_IS_AVAILABLE__TASK_SPECIFIC_SENSE_OR_CONCEPT_TO_TERMINAL_SIGNATURE_MAPPING_WHEN_UNBOUND__OPEN_WORLD_ONTOLOGY_MAPPING_WITHOUT_PROVED_COMPLETE_REGISTRY__GENERAL_CROSS_DOCUMENT_OR_STRONGER_EXTERNAL_FACT_AUTHENTICATION__OPEN_WORLD_NOT_CLOSED",
+  "remaining_problem_class": "POSITIVE_ADEQUACY_COVERAGE_AND_POLICY_CHANGING_OBSERVABILITY__FINANCE_RESIDUAL_LIMITED_TO_AMBIGUOUS_OR_IMPLICIT_COREFERENCE_BEYOND_VERIFIED_STRUCTURAL_FORMS__OEWN_SENSE_CASES_WITHOUT_INDEPENDENTLY_AUTHENTICATED_COMPLETE_SENSE_TO_TERMINAL_SIGNATURE_OR_OBSERVATION_OUTCOME_BINDINGS__TERMS_OR_DOMAIN_CONCEPTS_OUTSIDE_PROVED_COMPLETE_LEXICAL_OR_DOMAIN_UNIVERSES__NONEXPLICIT_SEMANTIC_RELATIONS_WITHOUT_COMPLETE_AUTHENTIC_BOUNDED_DENOTATION_OR_PROVABLE_SET_RELATION__OPEN_WORLD_ONTOLOGY_MAPPING_WITHOUT_PROVED_COMPLETE_REGISTRY__CROSS_DOCUMENT_CASES_WITH_UNDECLARED_OR_UNPROVED_HYPOTHESIS_COMPLETENESS_OR_IMPLICIT_PRECEDENCE__STRONGER_EXTERNAL_FACT_AUTHENTICATION_BEYOND_BOUND_OBSERVATION_CHANNELS__OPEN_WORLD_NOT_CLOSED",
   "control_law_totalizer": {
     "path": "canonical/runtime/general_adequate_decision_totalized_v1.py",
     "git_blob_sha": "675d1d4a3df3fcff4c8eb14947610389832103ea",
@@ -889,6 +889,32 @@
     "exact_release_relative_candidate_completeness": true,
     "intended_contextual_sense_identified": false,
     "open_world_english_sense_completeness": false,
+    "terminal_credit_delta": 0
+  },
+  "r2_v44_semantic_control_reconciliation": {
+    "status": "RECONCILED__CURRENT_R2_BINDS_V44_SENSE_CONTROL_AND_GENERAL_CROSS_DOCUMENT_EFFECT_WORLDS__TERMINAL_STILL_FALSE",
+    "scheduler_cut_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V44.json",
+    "scheduler_cut_git_blob_sha": "55be062f58a20e13fc32acc47746abb11750f7b7",
+    "direct_activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V24.json",
+    "direct_activation_git_blob_sha": "3a9668be458507e4295e733bc692b65b8ed7a866",
+    "direct_runtime_path": "canonical/runtime/r2_direct_end_to_end_adequacy_v10.py",
+    "direct_runtime_git_blob_sha": "1a78930ab5536a8db35097eb7e924284b0a0de73",
+    "oewn_decision_sense_runtime_path": "canonical/runtime/oewn_decision_sense_control_v1.py",
+    "oewn_decision_sense_runtime_git_blob_sha": "45be452cff132190b741608040471695fcde4f13",
+    "oewn_decision_sense_verification_path": "canonical/verification/OEWN_DECISION_SENSE_CONTROL_VERIFY_20261009_V1.json",
+    "oewn_decision_sense_verification_git_blob_sha": "5cca391b9a64317ac53e412a4b8271663fd45ce1",
+    "cross_document_verification_path": "canonical/verification/R2_GENERAL_CROSS_DOCUMENT_EFFECT_WORLDSET_VERIFY_20261009_V1.json",
+    "cross_document_verification_git_blob_sha": "eaa5620e23843ceaced452686312c6faa665a4e6",
+    "route_count": 30,
+    "exact_cell_count": 3,
+    "bounded_family_count": 27,
+    "verified_finance_positive_subregion_count": 10,
+    "primary_remaining_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
+    "authenticated_decision_sense_control_bound": true,
+    "general_cross_document_effect_worldsets_bound": true,
+    "general_word_sense_closed": false,
+    "open_world_ontology_mapping_closed": false,
+    "terminal_remains_false": true,
     "terminal_credit_delta": 0
   }
 }
