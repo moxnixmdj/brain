@@ -13,12 +13,19 @@ ACTION_INTENT_DIR = "canonical/action_intents"
 CURRENT_AUTHORITY = "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json"
 SCIENCE_OBLIGATION = "TB_SCIENCE_GE_58_7"
 
+UNIVERSAL_ROUTE_VERIFIED_PREMISES = (
+    "generator_basis_scope_complete_proved",
+    "generator_transforms_abc_preserving_proved",
+    "generator_closure_equals_trace_scope_proved",
+)
+
 ONE_SHOT_ROUTE_RACES = (
     {
         "id": "SCOPE_COMPLETE_UNIVERSAL_COVER",
         "can_discharge": "__ALL_OPEN__",
         "estimated_wall_clock_units": 1.0,
         "proof_class": "SCOPE_COMPLETE_UNIVERSAL_COVER",
+        "verified_prerequisite_truth_keys": UNIVERSAL_ROUTE_VERIFIED_PREMISES,
     },
     {
         "id": "OBJECTIVE_ACCEPTANCE_COMMON_LAW",
@@ -191,11 +198,28 @@ def build_manifest_from_repo(repo_root: str | Path, *, max_concurrency: int = 32
             discharges = list(open_rows)
         else:
             discharges = [oid for oid in declared if oid in open_ids]
+        prerequisite_keys = tuple(spec.get("verified_prerequisite_truth_keys", ()))
+        missing_verified_premises = [
+            key for key in prerequisite_keys
+            if live_truth.get(key) is not True
+        ]
+        declared_minimum = float(spec.get("estimated_wall_clock_units", 1.0))
+        proof_work_lower_bound = max(
+            declared_minimum,
+            float(len(missing_verified_premises)),
+        )
         routes.append({
             "id": spec["id"],
             "status": "OPEN" if discharges else "CLOSED",
             "can_discharge": discharges,
-            "estimated_wall_clock_units": spec["estimated_wall_clock_units"],
+            "estimated_wall_clock_units": proof_work_lower_bound,
+            "wall_clock_basis": (
+                "VERIFIED_MISSING_PREMISE_COUNT_LOWER_BOUND"
+                if prerequisite_keys
+                else "DECLARED_MINIMUM_WORK_UNIT"
+            ),
+            "verified_prerequisite_truth_keys": list(prerequisite_keys),
+            "missing_verified_premises": missing_verified_premises,
             "proof_class": spec["proof_class"],
             "candidate_only": True,
             "promotion_authority": False,
@@ -310,6 +334,8 @@ def plan(manifest: dict[str, Any]) -> dict[str, Any]:
             "kind": "ROUTE_RACE", "action_id": action_id, "route_id": route["id"],
             "obligation_ids": discharges, "discharge_count": len(discharges), "unlock_count": 0,
             "estimated_wall_clock_units": float(route.get("estimated_wall_clock_units", 1.0)),
+            "wall_clock_basis": route.get("wall_clock_basis"),
+            "missing_verified_premises": list(route.get("missing_verified_premises", [])),
             "lease_key": lease_key,
         })
 
