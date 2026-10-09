@@ -1,0 +1,74 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CONTEXT16K_SCOPED_TIMEOUT_REPAIR_FINAL_VERIFICATION_V2",
+  "date": "2026-10-09",
+  "status": "PASS__EXACT_SCOPED_PLANNER__ZERO_BENCHMARK_EXPOSURE_10K_LIVE_GATE__FOCUSED_22_OF_22__FINAL_LOAD_BEARING_ADMISSION_PASS__ZERO_CREDIT",
+  "base_main_sha": "0a68f9d4a81e3bbe16db264f772c3b33bca8869c",
+  "exact_blobs": {
+    "planner": "58964dc8d6b5eed5c202081cd800035c791eeb1d",
+    "planner_test": "ad5a0a7c7f3d549e4b196590eddb31f77c755015",
+    "command_policy": "a525773417291c7a4841bf35e1baff5370350d0d",
+    "action_intent": "7a10b6fa23327b6ef249db0e7f019a06316f07bf",
+    "focused_verification": "b59131b501465b0d92b97648565bab6511489e33",
+    "final_load_bearing_admission_verification": "5fdcc477cf38959ad25781f17154fe431f85f323"
+  },
+  "public_live_gate": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "workflow_run_id": 37876839032,
+    "workflow_job_id": 113647266077,
+    "workflow_head_sha": "a72ea4f59b08af477894fbf68491fa337d66ef09",
+    "conclusion": "success",
+    "artifact_id": 11592294318,
+    "artifact_zip_sha256": "2162192ece07a50249b4654adcbdec82107292f22b9bfb11001519d78d86795a",
+    "receipt_sha256": "4c111907e8b2b409bce9672557fa4f1177cfa420a0dad1d8cda45bcc9a61bdf2",
+    "server_log_sha256": "5bf917ffe9e4919f2098a32843499da2d115c5f572784b4fe0dbadd04dfab1b2",
+    "health_sha256": "a29ee2b15c494311c52521766e44af56a3ad2248e7a8ab465e5206463c13d288",
+    "required_status": "PASS__ZERO_BENCHMARK_EXPOSURE__CONTEXT16K_ACCEPTS_GT9202_MULTI_ACTION_REQUEST",
+    "server_context_tokens": 16384,
+    "observed_input_tokens": 10004,
+    "reserved_max_output_tokens": 4096,
+    "context_headroom_after_input_plus_reserved_output": 2284,
+    "effective_timeout_s": 1491,
+    "planner_duration_s": 319.596,
+    "proposal_candidate_count": 3,
+    "proposal_action_ids": [
+      "PREFLIGHT_A",
+      "PREFLIGHT_B",
+      "PREFLIGHT_C"
+    ],
+    "dependency_edge_verified": true,
+    "benchmark_task_exposure": 0,
+    "benchmark_trials_executed": 0,
+    "truncated": false
+  },
+  "focused_regression": {
+    "workflow_run_id": 37876982879,
+    "workflow_job_id": 113647717368,
+    "result": "PASS__22_OF_22"
+  },
+  "trusted_admission": {
+    "workflow_run_id": 37877909564,
+    "workflow_job_id": 113650612588,
+    "action_intent_blob": "7a10b6fa23327b6ef249db0e7f019a06316f07bf",
+    "result": "PASS__ZERO_ERRORS"
+  },
+  "proves": [
+    "LEGACY_TIMEOUT_POLICY_IS_PRESERVED_AT_AND_BELOW_8192_INPUT_TOKENS",
+    "EXACT_REPAIRED_PLANNER_COMPLETES_A_10004_TOKEN_STRUCTURED_MULTI_ACTION_REQUEST_ON_16384_CONTEXT",
+    "INPUT_PLUS_4096_RESERVED_COMPLETION_HAS_2284_TOKENS_OF_HEADROOM",
+    "ZERO_BENCHMARK_TASK_EXPOSURE_AND_ZERO_BENCHMARK_TRIALS_OCCURRED",
+    "FROZEN_FINAL_ACTION_INTENT_IS_ADMITTED_AS_LOAD_BEARING_FOR_TB_SCIENCE_GE_58_7"
+  ],
+  "hard_nonclaims": [
+    "NO_RANK14_TASK_CONTENT_READ",
+    "NO_RANK14_EXECUTION_AUTHORITY",
+    "NO_TB_SCIENCE_ACCEPTANCE_CREDIT",
+    "NO_TERMINAL_CREDIT",
+    "NO_CLAIM_ALL_FUTURE_TASK_PROMPTS_FIT_16K"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_trials_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

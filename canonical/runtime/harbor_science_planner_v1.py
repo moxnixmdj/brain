@@ -28,6 +28,10 @@ MAX_TIMEOUT_S = 900
 TOKEN_COUNT_TIMEOUT_S = 60
 PREFILL_TOKENS_PER_SECOND_FLOOR = 15
 GENERATION_AND_TRANSPORT_MARGIN_S = 180
+LONG_CONTEXT_THRESHOLD_TOKENS = 8192
+LONG_CONTEXT_PREFILL_TOKENS_PER_SECOND_FLOOR = 8
+LONG_CONTEXT_GENERATION_AND_TRANSPORT_MARGIN_S = 240
+LONG_CONTEXT_MAX_TIMEOUT_S = 1800
 
 
 def effective_timeout_s(input_tokens: int, requested_timeout_s: int) -> int:
@@ -43,9 +47,17 @@ def effective_timeout_s(input_tokens: int, requested_timeout_s: int) -> int:
         or not 1 <= requested_timeout_s <= MAX_TIMEOUT_S
     ):
         raise SciencePlannerError("SCIENCE_PLANNER_TIMEOUT_INVALID")
-    prompt_floor = math.ceil(input_tokens / PREFILL_TOKENS_PER_SECOND_FLOOR)
-    required = prompt_floor + GENERATION_AND_TRANSPORT_MARGIN_S
-    return min(MAX_TIMEOUT_S, max(MIN_TIMEOUT_S, requested_timeout_s, required))
+    if input_tokens > LONG_CONTEXT_THRESHOLD_TOKENS:
+        prefill_floor = LONG_CONTEXT_PREFILL_TOKENS_PER_SECOND_FLOOR
+        margin_s = LONG_CONTEXT_GENERATION_AND_TRANSPORT_MARGIN_S
+        effective_cap_s = LONG_CONTEXT_MAX_TIMEOUT_S
+    else:
+        prefill_floor = PREFILL_TOKENS_PER_SECOND_FLOOR
+        margin_s = GENERATION_AND_TRANSPORT_MARGIN_S
+        effective_cap_s = MAX_TIMEOUT_S
+    prompt_floor = math.ceil(input_tokens / prefill_floor)
+    required = prompt_floor + margin_s
+    return min(effective_cap_s, max(MIN_TIMEOUT_S, requested_timeout_s, required))
 
 TOOL = {
     "type": "function",
