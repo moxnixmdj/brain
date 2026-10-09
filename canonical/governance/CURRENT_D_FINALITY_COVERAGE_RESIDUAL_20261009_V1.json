@@ -1,0 +1,159 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_D_FINALITY_COVERAGE_RESIDUAL_20261009_V1",
+  "date": "2026-10-09",
+  "status": "CURRENT_MAIN_SOURCE_ACCOUNTING__89_LIVE_ADMITTED_IDENTITIES__D_CERTIFICATE_COVERAGE_NOT_YET_COMPILED__ZERO_CREDIT",
+  "current_main": {
+    "commit": "ca3db3c2e9fde06e58e20ac7589d34acc212ef16",
+    "note": "MAIN_CONTINUES_TO_MOVE__LOAD_BEARING_BLOBS_BELOW_ARE_THE_ACCOUNTING_AUTHORITY"
+  },
+  "exact_sources": {
+    "unified_fabric": {
+      "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
+      "git_blob_sha": "5c660c788d3a65288a619cd8fc98cec9fd40a2c5"
+    },
+    "bound_registry": {
+      "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+      "git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85"
+    },
+    "h100_registry_v8": {
+      "path": "canonical/runtime/h100_verified_capability_registry_v8.py",
+      "git_blob_sha": "a4f952fbf054dbfe4f9617da837b3bf5c3c2e3ab"
+    },
+    "selected_route_registry": {
+      "path": "canonical/governance/CERTIFICATE_GATED_SELECTED_ROUTE_RUNTIME_REGISTRY_V1.json",
+      "git_blob_sha": "78ef7174fd7cdebb24f97882e8c325a5164f18cb"
+    },
+    "self_improvement_runtime": {
+      "path": "canonical/runtime/autonomous_verified_self_improvement_v1.py",
+      "default_state_path": "canonical/runtime/SELF_IMPROVEMENT_STATE_V1.json",
+      "current_default_state_file_present": false,
+      "missing_state_semantics": "load_state_returns_empty_state"
+    }
+  },
+  "live_admitted_accounting": {
+    "fabric_engine_count": 24,
+    "bound_capability_count": 43,
+    "active_verified_learned_skill_count": 0,
+    "h100_live_identity_count": 21,
+    "h100_count_basis": "UNCHANGED_V8_BLOB_MATCHES_EXACT_BLOB_IN_20261008_INDEPENDENT_21_IDENTITY_REPLAY",
+    "certificate_gated_admitted_route_count": 1,
+    "total_live_admitted_identity_count": 89,
+    "prior_20261008_replay_count": 84,
+    "delta_vs_prior_replay": 5,
+    "reason_for_delta": "CURRENT_DYNAMIC_ENGINE_DESCRIPTOR_SET_HAS_24_ENGINES_VS_19_IN_PRIOR_REPLAY"
+  },
+  "bound_capability_material_classes": {
+    "source_type_counts": {
+      "python_stdlib": 19,
+      "system_tool": 2,
+      "apt": 12,
+      "npm": 2,
+      "pypi": 4,
+      "runtime_native": 4
+    },
+    "adapter_class_counts": {
+      "runtime_native_action": 4,
+      "cli_command": 3,
+      "node_library_codec": 2,
+      "python_library_codec": 2,
+      "archive_tarfile": 1,
+      "archive_verify_gnu_tar": 1,
+      "pandoc_weasyprint": 1,
+      "docx_report_from_json": 1,
+      "python_document_builder": 1,
+      "docx_verify_ooxml_intent": 1,
+      "docx_verify_ooxml": 1,
+      "http_json_fetch": 1,
+      "jq_query": 1,
+      "pdf_ocr_tesseract": 1,
+      "pdf_pypdf": 1,
+      "pypi_provenance_audit": 1,
+      "python_source_audit": 1,
+      "python_test_audit": 1,
+      "sqlite_table_stdlib": 1,
+      "sqlite_verify_cli": 1,
+      "browser_chromedriver": 1,
+      "web_release_verify": 1,
+      "xlsx_table_xlsxwriter": 1,
+      "xlsx_verify_openpyxl": 1,
+      "yq_yaml_json": 1,
+      "evidence_decision_synthesis": 1,
+      "evidence_decision_verify": 1,
+      "plain_goal_bound_grounding": 1,
+      "plain_goal_bound_grounding_verify": 1,
+      "numeric_expression_sympy": 1,
+      "source_authority_binding_ror": 1,
+      "objective_relevance_bm25": 1,
+      "objective_evidence_unit_extract": 1,
+      "generic_evidence_claim_relation": 1,
+      "objective_claim_operand_binding": 1,
+      "terminal_kstar_root_assess": 1
+    },
+    "exact_rule": "ADAPTER_CLASS_MAY_SHARE_PROVIDER_EXECUTOR_THEOREM_ONLY__EVERY_CAPABILITY_STILL_REQUIRES_OWN_MATERIAL_CERTIFICATE_AND_D_CERTIFICATE"
+  },
+  "proof_compression_plan": {
+    "fabric_engines": {
+      "identities": 24,
+      "shared_candidate": "UNIFIED_FABRIC_FRONT_DOOR_AND_D_EPOCH_ENFORCEMENT_THEOREM",
+      "member_obligation": "EACH_ENGINE_OPERATIVE_CLOSURE_AND_CONTRACT_REMAINS_MEMBER_BOUND"
+    },
+    "bound_capabilities": {
+      "identities": 43,
+      "shared_candidate": "ADAPTER_CLASS_EXECUTOR_THEOREMS",
+      "current_adapter_class_count": 36,
+      "member_obligation": "43_SEPARATE_MATERIAL_CERTIFICATES_REQUIRED"
+    },
+    "h100": {
+      "identities": 21,
+      "shared_candidate": "CONTENT_BOUND_H100_REGISTRY_EXECUTOR_CHAIN_THEOREM",
+      "member_obligation": "21_IDENTITY_CONTRACT_BINDINGS_REQUIRED",
+      "note": "DO_NOT_INFER_ROW_EQUIVALENCE_FROM_SHARED_REGISTRY_MEMBERSHIP"
+    },
+    "selected_routes": {
+      "identities": 1,
+      "shared_candidate": "NONE_NEEDED_AT_CURRENT_COUNT",
+      "member_obligation": "EXACT_ROUTE_D_CERTIFICATE_REQUIRED"
+    },
+    "learned_skills": {
+      "identities": 0,
+      "future_rule": "NEW_SKILL_CAN_ENTER_D_FINAL_OWNERSHIP_ONLY_IN_A_LATER_CERTIFIED_EXECUTION_EPOCH"
+    }
+  },
+  "current_D_equation": {
+    "live_admitted": 89,
+    "current_d_final_owned": "UNKNOWN_UNTIL_CERTIFICATE_REGISTRY_IS_COMPILED",
+    "required_terminal_condition": "MISSING_D_CERTIFICATE_COUNT_EQUALS_ZERO_FOR_CURRENT_LIVE_ADMITTED_SET",
+    "no_inference": "STRUCTURAL_LIVE_OWNERSHIP_89_DOES_NOT_IMPLY_D_FINAL_OWNERSHIP_89"
+  },
+  "implementation_status": {
+    "d_epoch_primitive_pr": 3510,
+    "d_epoch_primitive_independent_sprite_tests": "PASS_10_OF_10_ON_EXACT_BLOBS",
+    "coverage_reducer": "IMPLEMENTED_ON_PR_BRANCH",
+    "coverage_reducer_independent_verification": "OPEN__AVAILABLE_SPRITE_CARRIERS_TRANSPORT_FAILED_DURING_REPLAY",
+    "live_front_door_integration": false,
+    "d_certificate_registry_populated": false
+  },
+  "next_minimum_cut": [
+    "INDEPENDENTLY_VERIFY_D_FINALITY_COVERAGE_REDUCER_EXACT_BLOBS",
+    "COMPILE_89_LIVE_IDENTITIES_TO_PROVIDER_THEOREM_PLUS_MEMBER_MATERIAL_CERTIFICATE_ROWS",
+    "START_WITH_PURE_LOCAL_CLASSES_FIRST_TO_MAXIMIZE_CERTIFICATE_MASS_PER_UNIT_WORK",
+    "SEAL_NETWORK_OR_WORLD_IO_BOUND_CAPABILITIES_UNDER_KNOWLEDGE_EFFECT_BROKER_RULES",
+    "THREAD_D_CONTEXT_THROUGH_LIVE_INVOKER_AND_COMPOSITION",
+    "CHANGE_OWNERSHIP_ONTOLOGY_TO_LIVE_D_FINAL_OWNED_EQUALS_LIVE_ADMITTED_INTERSECT_CURRENT_D_FINAL",
+    "ATOMically_ENABLE_OWNERSHIP_AUTHORITATIVE_FRONT_DOOR_GATE_ONLY_WHEN_CURRENT_MISSING_D_CERTIFICATE_COUNT_IS_ZERO",
+    "RUN_CURRENT_BYTE_DONOR_DELETION_CLEANROOM_AND_INDEPENDENT_FINALITY_REPLAY"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_89_IDENTITIES_ARE_CURRENTLY_D_FINAL",
+    "NO_CLAIM_36_ADAPTER_CLASSES_ARE_PROVED_EQUIVALENCE_CLASSES",
+    "NO_CLAIM_PROVIDER_THEOREM_REUSE_REMOVES_MEMBER_MATERIAL_PROOF",
+    "NO_LIVE_OWNERSHIP_CREDIT",
+    "NO_D_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
