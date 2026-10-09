@@ -337,3 +337,17 @@ Then run the dependency falsifier on the promoted bounded graph and record the n
 ## Review focus
 
 The implementation succeeds only if the concrete promotion path cannot obtain `VERIFIED_LIVE`/creditable status for the selected subject without a valid content-bound executable-refinement certificate, while every pre-existing unsupported/general scope stays explicitly open.
+
+
+## Execution correction discovered during Task 1
+
+The initial Task 1 wording was too permissive: a content-bound certificate containing `proved: true` declarations would still be self-certification. TDD caught this before any creditable route was changed.
+
+Implemented rule:
+- `DECLARATIVE_BOUNDING` can verify schema, exact blobs, declared transition partition, and zero-credit boundaries;
+- it **cannot** set `refinement_verified: true`;
+- the creditable-route gate requires a mechanically verified proof class with `refinement_verified: true`;
+- no such proof class exists yet, so current bounded canary/semantic bindings remain `IMPLEMENTED` / structural-only;
+- the terminal graph records `terminal-live-paths-executable-refinement` as the highest-dominance unresolved leaf.
+
+Accordingly, Tasks 4-6 are considered correctly executed only as bounded structural binding + anti-bypass enforcement, not as closure of executable refinement. Full closure requires a mechanically checked refinement proof class in a later task.
