@@ -26,6 +26,18 @@ class Tests(unittest.TestCase):
         self.assertTrue(out["pass"])
         fn.assert_called_once()
 
+    def test_regcap_context_atom_kind_dispatches_to_bounded_certificate(self):
+        with patch(
+            "canonical.runtime.semantic_truth_dispatch_v1.evaluate_regcap_context_atom",
+            return_value={"pass": True, "predicate_truth": "TRUE"},
+        ) as fn:
+            out = evaluate({
+                "truth_kind": "REGCAP_CONTEXT_ATOM",
+                "predicate_id": "x",
+            })
+        self.assertTrue(out["pass"])
+        fn.assert_called_once()
+
     def test_absent_kind_preserves_legacy_path(self):
         with patch(
             "canonical.runtime.semantic_truth_dispatch_v1.evaluate_legacy",
