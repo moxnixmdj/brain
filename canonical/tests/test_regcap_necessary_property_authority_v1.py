@@ -156,7 +156,7 @@ class Tests(unittest.TestCase):
     def test_source_authentication_failure_fails_closed(self):
         with patch.object(
             regcap,
-            "verify_pack",
+            "verify_projection_pack",
             return_value={"pass": False, "reason": "RAW_SOURCE_SHA256_MISMATCH"},
         ):
             out = regcap.verify_property_request(
