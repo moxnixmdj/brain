@@ -35,6 +35,7 @@ def base_graph(root: Path) -> dict:
                 "id": "FRAMEWORK",
                 "kind": "LEAF",
                 "status": "UNRESOLVED",
+                "attack_families": ["COMPOSITION_MISMATCH"],
                 "note": "fixture",
             },
             {
@@ -56,6 +57,7 @@ def base_graph(root: Path) -> dict:
                     "verification_receipt": None,
                 },
                 "live_authority_status": "UNRESOLVED",
+                "attack_families": ["IMPLEMENTATION_REFINEMENT_MISMATCH"],
                 "note": "fixture route",
             },
         ],
