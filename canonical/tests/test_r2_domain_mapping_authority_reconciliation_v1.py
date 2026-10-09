@@ -19,7 +19,14 @@ class TestR2DomainMappingAuthorityReconciliationV1(unittest.TestCase):
             row = rec["exact_verified_route"][key]
             self.assertEqual(git_blob_sha(row["path"]), row["git_blob_sha"])
         ver = rec["exact_verified_route"]["independent_verification"]
-        self.assertEqual(git_blob_sha(ver["path"]), ver["git_blob_sha"])
+        self.assertEqual(
+            ver["path"],
+            "canonical/verification/PROOF_CARRYING_DOMAIN_MAPPING_VERIFY_20261009_V1.json",
+        )
+        self.assertEqual(
+            ver["git_blob_sha"],
+            "ef407cec0aa7f0fa039c1f46cb9e099010cab95c",
+        )
         self.assertEqual(ver["focused_checks"], "62_OF_62_PASS")
 
     def test_v46_preserves_fail_closed_open_world_boundary(self):
