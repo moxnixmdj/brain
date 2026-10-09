@@ -30,6 +30,7 @@ from canonical.runtime.explicit_definition_reference_graph import (
 from canonical.runtime.terminal_semantic_quotient_v1 import (
     compile_minimal_quotient,
 )
+from canonical.runtime.source_aligned_semantic_entailment_v1 import prove as prove_source_entailment
 
 SCHEMA = "PROJECT_BRAIN_DECISION_RELATIVE_SEMANTIC_RELATION_CONTROL_V1"
 
@@ -259,6 +260,7 @@ def resolve(problem: Mapping[str, Any]) -> dict[str, Any]:
         "explicit_definition_sources",
         "terminal_signature_rows",
         "candidate_relations",
+        "source_entailment_spans",
     }
     extra = set(problem) - allowed
     if extra:
@@ -308,6 +310,42 @@ def resolve(problem: Mapping[str, Any]) -> dict[str, Any]:
         problem.get("terminal_signature_rows"),
     )
 
+    source_entailment = {
+        "available": False,
+        "pass": False,
+        "status": "NOT_REQUESTED",
+        "proved_facts": {
+            "left_entails_right": False,
+            "right_entails_left": False,
+            "logical_equivalence_in_scope": False,
+            "left_entails_right_disproved": False,
+            "right_entails_left_disproved": False,
+        },
+    }
+    if problem.get("source_entailment_spans") is not None:
+        source_entailment = prove_source_entailment({
+            "left_surface": left_surface,
+            "right_surface": right_surface,
+            "scope_id": scope_id,
+            "required_relation": "ANY_DIRECTIONAL_RELATION",
+            "source_spans": problem.get("source_entailment_spans"),
+        })
+        source_entailment = {"available": True, **source_entailment}
+        if str(source_entailment.get("status") or "").startswith("FAIL_CLOSED"):
+            return {
+                "schema": SCHEMA,
+                "pass": False,
+                "status": "FAIL_CLOSED__SOURCE_ALIGNED_ENTAILMENT_INVALID",
+                "reason": source_entailment.get("reason")
+                or source_entailment.get("conflicts")
+                or source_entailment.get("status"),
+                "scope_id": scope_id,
+                "required_relation": required,
+                "source_entailment": source_entailment,
+                "terminal_authority": False,
+                "terminal_credit_delta": 0,
+            }
+
     if explicit.get("reason") == "EXPLICIT_SOURCE_EVIDENCE_FAIL_CLOSED":
         return {
             "schema": SCHEMA,
@@ -324,16 +362,35 @@ def resolve(problem: Mapping[str, Any]) -> dict[str, Any]:
     semantic_identity = explicit.get("proved") is True
     task_equivalent = terminal.get("proved") is True
 
-    # V1 intentionally does not promote candidate lexical/ontology/model output
-    # into directional entailment. Those need a source-aligned checker.
-    left_entails_right = semantic_identity
-    right_entails_left = semantic_identity
-    logical_equivalence = semantic_identity
+    source_facts = (
+        source_entailment.get("proved_facts")
+        if isinstance(source_entailment.get("proved_facts"), Mapping)
+        else {}
+    )
+    left_entails_right = bool(
+        semantic_identity or source_facts.get("left_entails_right") is True
+    )
+    right_entails_left = bool(
+        semantic_identity or source_facts.get("right_entails_left") is True
+    )
+    logical_equivalence = bool(
+        semantic_identity or (left_entails_right and right_entails_left)
+    )
 
     if semantic_identity:
         strongest = "SEMANTIC_IDENTITY"
+    elif logical_equivalence:
+        strongest = "LOGICAL_EQUIVALENCE_IN_SCOPE"
+    elif left_entails_right:
+        strongest = "LEFT_ENTAILS_RIGHT"
+    elif right_entails_left:
+        strongest = "RIGHT_ENTAILS_LEFT"
     elif task_equivalent:
         strongest = "CURRENT_DECISION_SUBSTITUTION"
+    elif source_facts.get("left_entails_right_disproved") is True:
+        strongest = "LEFT_ENTAILS_RIGHT_DISPROVED"
+    elif source_facts.get("right_entails_left_disproved") is True:
+        strongest = "RIGHT_ENTAILS_LEFT_DISPROVED"
     else:
         strongest = "UNKNOWN"
 
@@ -379,6 +436,7 @@ def resolve(problem: Mapping[str, Any]) -> dict[str, Any]:
         },
         "explicit_equivalence": explicit,
         "terminal_equivalence": terminal,
+        "source_entailment": source_entailment,
         "next_proof_targets": next_targets,
         "counterexample_first": not satisfied,
         "candidate_relation_count": len(candidate_snapshot),
