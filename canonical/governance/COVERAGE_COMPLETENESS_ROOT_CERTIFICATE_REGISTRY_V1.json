@@ -102,9 +102,19 @@
     "no_cross_claim_root_certificate_transport": true,
     "no_global_open_ended_mission_claim": true
   },
-  "next": "ATTACK_CC_R3_TERMINAL_CLOSURE_FOR_ACTIVE_CLAIM__PROVE_U_EMPTY_OR_RECORD_CLAIM_BOUND_COUNTEREXAMPLE",
+  "next": "RESOLVE_ACTIVE_CC_R3_COUNTEREXAMPLE_FRONTIER__SHRINK_B_PLUS_OR_SOUNDLY_EXPAND_G_MINUS_UNTIL_U_EMPTY_OR_NEW_COUNTEREXAMPLE__DO_NOT_PROMOTE_R3",
   "active_claim_descriptor": {
     "path": "canonical/governance/CC_ACTIVE_FROZEN_CLAIM_20261009_V1.json",
     "git_blob_sha": "d4f7068322c5417f806b38ff8b39fe530ccde4ba"
+  },
+  "current_root_falsifications": {
+    "CC_R3_TERMINAL_CLOSURE_V1": {
+      "status": "FALSIFIED_CURRENT_EPISTEMIC_ENVELOPE",
+      "claim_id": "fda1409a94d983f61888f08f3df99cad50dc36edc3f5feb01b6df20e31156eaa",
+      "path": "canonical/verification/CC_R3_COUNTEREXAMPLE_20261009_V1.json",
+      "git_blob_sha": "bf6e8ef01894350c5d51abe53038cea315984ea3",
+      "u_empty": false,
+      "terminal_credit_delta": 0
+    }
   }
 }
