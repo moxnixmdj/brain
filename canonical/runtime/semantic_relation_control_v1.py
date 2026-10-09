@@ -384,6 +384,7 @@ def _terminal_equivalence(
                 or "TERMINAL_QUOTIENT_FAILED"
             ),
             "quotient": quotient,
+            "terminal_signature_authority": authority,
         }
 
     same = quotient["raw_to_class"][left_id] == quotient["raw_to_class"][right_id]
@@ -396,6 +397,7 @@ def _terminal_equivalence(
             else "COMPLETE_TERMINAL_SIGNATURES_DIFFER"
         ),
         "quotient": quotient,
+        "terminal_signature_authority": authority,
     }
 
 
