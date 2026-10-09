@@ -6,7 +6,7 @@
   "claim_id": "fda1409a94d983f61888f08f3df99cad50dc36edc3f5feb01b6df20e31156eaa",
   "claim_descriptor": {
     "path": "canonical/governance/CC_ACTIVE_FROZEN_CLAIM_20261009_V1.json",
-    "git_blob_sha": "d4f7068322c5417f806b38ff8b39fe530ccde4ba"
+    "git_blob_sha": "9a6141373b9ef087ee7a12413d1afe8cfaefa262"
   },
   "evidence": {
     "terminal_manifest": {
