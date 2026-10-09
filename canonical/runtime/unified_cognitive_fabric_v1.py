@@ -32,6 +32,7 @@ from canonical.runtime import terminal_closure_reducer as terminal_closure
 from canonical.runtime.verified_bound_capability_execution_adapter_v1 import execute as execute_bound
 from canonical.runtime import semantic_ambiguity_control_v1 as semantic_ambiguity
 from canonical.runtime import semantic_relation_control_v1 as semantic_relation
+from canonical.runtime import oewn_decision_sense_control_v1 as oewn_decision_sense
 
 SCHEMA = "PROJECT_BRAIN_UNIFIED_COGNITIVE_FABRIC_V1"
 ROOT = Path(__file__).resolve().parents[2]
@@ -60,6 +61,7 @@ ENGINE_DESCRIPTORS = {
     "LIVE_COMPOSITION": "live_capability_composition_v1.execute",
     "SEMANTIC_AMBIGUITY": "semantic_ambiguity_control_v1.decide",
     "SEMANTIC_RELATION": "semantic_relation_control_v1.resolve",
+    "OEWN_DECISION_SENSE": "oewn_decision_sense_control_v1.resolve",
 }
 
 KNOWN_R1_RESIDUALS: tuple[str, ...] = ()
@@ -145,6 +147,9 @@ def _unwrap_live_runtime(wrapper: Mapping[str, Any], inner_key: str) -> dict[str
 def _auto_mode(payload: Mapping[str, Any], options: Mapping[str, Any]) -> str:
     """Select only structurally unambiguous fabric routes; otherwise fail closed."""
     keys = set(payload)
+
+    if {"sense_universe", "decision_manifest"} <= keys:
+        return "OEWN_DECISION_SENSE"
 
     if {
         "ambiguity_owner",
@@ -301,6 +306,8 @@ def run(
     episode_verification_provider=None,
     skill_verification_provider=None,
     success_episode_adapter_provider=None,
+    semantic_authority_verifier: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
+    semantic_evidence_verifier: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
     verification_frontier_acquisition_provider: Callable[
         [Mapping[str, Any]], Mapping[str, Any] | None
     ] | None = None,
@@ -443,6 +450,16 @@ def run(
             out = semantic_ambiguity.decide(payload)
         elif mode == "SEMANTIC_RELATION":
             out = semantic_relation.resolve(payload)
+        elif mode == "OEWN_DECISION_SENSE":
+            out = oewn_decision_sense.resolve(
+                sense_universe=payload.get("sense_universe"),
+                decision_manifest=payload.get("decision_manifest"),
+                authority_receipt=payload.get("authority_receipt"),
+                authority_verifier=semantic_authority_verifier,
+                evidence_receipts=payload.get("evidence_receipts"),
+                evidence_verifier=semantic_evidence_verifier,
+                ambiguity_owner=str(payload.get("ambiguity_owner") or "SYSTEM_MODEL"),
+            )
         elif mode == "CAPABILITY_SCHEDULER":
             work = payload.get("work")
             if not isinstance(work, list):
