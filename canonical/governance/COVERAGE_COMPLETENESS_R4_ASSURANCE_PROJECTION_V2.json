@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_COVERAGE_COMPLETENESS_R4_ASSURANCE_PROJECTION_V2",
+  "date": "2026-10-09",
+  "status": "CURRENT_R4_ROOT_REGISTRY_BOUND__REPRESENTATION_CLOSED_ON_DECLARED_REGISTRY__EXACT_ROOT_PROOFS_EXECUTION_AND_ADVERSARIAL_CLOSURE_OPEN__ZERO_CREDIT",
+  "purpose": "Replace the prior missing-root-registry residual with a content-addressed fail-closed R1/R2/R3 root-status registry, while preserving UNKNOWN as UNKNOWN and leaving execution/adversarial closure open.",
+  "predecessor": "canonical/governance/COVERAGE_COMPLETENESS_R4_ASSURANCE_PROJECTION_V1.json",
+  "root_registry": {
+    "path": "canonical/governance/COVERAGE_ROOT_CERTIFICATE_REGISTRY_20261009_V1.json",
+    "validator": "canonical/runtime/root_certificate_registry_v1.py",
+    "expected_status_vector": ["UNKNOWN", "UNKNOWN", "UNKNOWN"],
+    "registry_complete_for_declared_roots": true,
+    "proof_closure_ready": false
+  },
+  "mapping": {
+    "representation_closure": {
+      "status": "PROVED_CURRENT_DECLARED_REGISTRY_ONLY"
+    },
+    "proof_closure": {
+      "status": "OPEN__REGISTRY_BOUND__EXACT_ROOT_PROPOSITIONS_UNKNOWN",
+      "residual": "R1_R2_R3_EXACT_ROOT_CERTIFICATES_NOT_PROVED"
+    },
+    "execution_closure": {
+      "status": "OPEN",
+      "residual": "ROOT_PROOF_TO_REALIZATION_EXECUTION_BINDING_NOT_BOUND"
+    },
+    "adversarial_closure": {
+      "status": "OPEN",
+      "residual": "INDEPENDENT_DOMAIN_LEVEL_ADVERSARIAL_DEFEATER_BINDING_NOT_CLOSED"
+    }
+  },
+  "r4_closed": false,
+  "new_primitive_required": false,
+  "current_exact_residuals": [
+    "R4_R1_R2_R3_EXACT_ROOT_PROOF_CLOSURE",
+    "R4_ROOT_PROOF_TO_REALIZATION_EXECUTION_CLOSURE",
+    "R4_INDEPENDENT_DOMAIN_ADVERSARIAL_CLOSURE"
+  ],
+  "next_required_edge": "PROVE_OR_FALSIFY_THE_EXACT_R1_R2_R3_SET_CLAIMS_WITH_CONTENT_ADDRESSED_CURRENT_MISSION_EVIDENCE__DO_NOT_SUBSTITUTE_ARCHITECTURE_LIFECYCLE_CONTROL_LOOP_OR_ZERO_QUEUE_RECEIPTS_FOR_DIFFERENT_ROOT_PROPOSITIONS",
+  "hard_nonclaims": [
+    "NO_R1_ROOT_CLOSURE",
+    "NO_R2_ROOT_CLOSURE",
+    "NO_R3_ROOT_CLOSURE",
+    "NO_R4_GLOBAL_CLOSURE",
+    "NO_UVCK_LIVE_DEFAULT_PROMOTION",
+    "NO_TERMINAL_ACCEPTANCE_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
