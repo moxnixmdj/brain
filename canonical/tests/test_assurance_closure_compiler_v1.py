@@ -71,6 +71,26 @@ class AssuranceClosureCompilerV1Tests(unittest.TestCase):
         self.assertEqual(out["status"], "COUNTERPROVED")
         self.assertEqual(out["active_defeater_ids"], ["d"])
 
+    def test_supported_defeater_dominates_earlier_unresolved_defeater_regardless_of_order(self):
+        for order in (["open_d", "active_d"], ["active_d", "open_d"]):
+            g = closed_graph()
+            g["nodes"].extend([
+                {"id": "open_d", "type": "DEFEATER", "status": "OPEN"},
+                {
+                    "id": "active_d",
+                    "type": "DEFEATER",
+                    "status": "SUPPORTED",
+                    "depends_on": ["de"],
+                    "defeated_by": [],
+                },
+                evidence("de"),
+            ])
+            g["nodes"][0]["defeated_by"] = order
+            out = c.evaluate(g)
+            self.assertEqual(out["status"], "COUNTERPROVED", (order, out))
+            self.assertEqual(out["active_defeater_ids"], ["active_d"], (order, out))
+            self.assertFalse(out["pass"], (order, out))
+
     def test_unresolved_defeater_keeps_root_open(self):
         g = closed_graph()
         g["nodes"].append({"id": "d", "type": "DEFEATER", "status": "OPEN"})
