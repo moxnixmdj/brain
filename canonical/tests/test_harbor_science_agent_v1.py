@@ -293,8 +293,81 @@ class ScienceAgentTests(unittest.TestCase):
             {"material_requirements":["R2"],"candidates":[{"action_id":"b","covers":["R2"],"command":"echo bad","verify_command":"echo verify"}]},
         ]
         with patch.object(s.science_planner, "plan", planner(outputs)):
-            with self.assertRaisesRegex(RuntimeError,"COVERAGE_OUTSIDE_CONTRACT"):
-                asyncio.run(s.run_science_goal("goal",env,max_cycles=2))
+            result=asyncio.run(s.run_science_goal("goal",env,max_cycles=2))
+        self.assertEqual(env.commands,["echo ok","verify-bad"])
+        self.assertEqual(result["material_requirements"],["R1"])
+        self.assertEqual(result["resolved_requirements"],[])
+        self.assertEqual(result["status"],"BLOCKED_MAX_CYCLES_NO_BRAIN_AUTHORIZED_FINISH")
+        rejected=[x for x in result["trace"] if x.get("kind")=="BRAIN_CANDIDATE_REJECTED"]
+        self.assertEqual(len(rejected),1,rejected)
+        self.assertEqual(rejected[0]["action_id"],"b")
+        self.assertEqual(rejected[0]["proposed_covers"],["R2"])
+        self.assertEqual(rejected[0]["unknown_cover_ids"],["R2"])
+        self.assertEqual(rejected[0]["source_error"],"SCIENCE_COVERAGE_OUTSIDE_CONTRACT")
+        self.assertFalse(rejected[0]["executed"])
+        self.assertFalse(rejected[0]["coverage_promoted"])
+        self.assertFalse(rejected[0]["requirement_set_rewritten"])
+        self.assertEqual(len(rejected[0]["candidate_metadata_sha256"]),64)
+
+    def test_out_of_contract_candidate_does_not_abort_valid_sibling_or_later_cycle(self):
+        env=Env()
+        outputs=[
+            {
+                "material_requirements":["R1","R2"],
+                "candidates":[
+                    {
+                        "action_id":"bad",
+                        "covers":["R9"],
+                        "command":"curl https://example.com/should-never-run",
+                        "verify_command":"echo should-never-verify",
+                    },
+                    {
+                        "action_id":"good1",
+                        "covers":["R1"],
+                        "command":"echo good1",
+                        "verify_command":"echo verify-good1",
+                    },
+                ],
+            },
+            {
+                "material_requirements":["NONAUTHORITATIVE_REDECLARATION"],
+                "candidates":[
+                    {
+                        "action_id":"good2",
+                        "covers":["R2"],
+                        "command":"echo good2",
+                        "verify_command":"echo verify-good2",
+                    }
+                ],
+            },
+        ]
+        with patch.object(s.science_planner, "plan", planner(outputs)):
+            result=asyncio.run(s.run_science_goal("goal",env,max_cycles=2))
+        self.assertEqual(
+            env.commands,
+            ["echo good1","echo verify-good1","echo good2","echo verify-good2"],
+        )
+        self.assertEqual(result["resolved_requirements"],["R1","R2"])
+        self.assertEqual(
+            result["status"],
+            "SUBMISSION_READY__RAW_TASK_ACCEPTANCE_PENDING_EXTERNAL_INDEPENDENT_VERIFIER",
+        )
+        rejected=[x for x in result["trace"] if x.get("kind")=="BRAIN_CANDIDATE_REJECTED"]
+        self.assertEqual(len(rejected),1,rejected)
+        self.assertEqual(rejected[0]["action_id"],"bad")
+        self.assertEqual(rejected[0]["unknown_cover_ids"],["R9"])
+        self.assertFalse(rejected[0]["executed"])
+        self.assertNotIn("curl https://example.com/should-never-run",env.commands)
+
+    def test_candidate_rows_without_rejection_sink_preserves_historical_fail_closed(self):
+        raw=[{
+            "action_id":"bad",
+            "covers":["R2"],
+            "command":"echo bad",
+            "verify_command":"echo verify",
+        }]
+        with self.assertRaisesRegex(RuntimeError,"SCIENCE_COVERAGE_OUTSIDE_CONTRACT"):
+            s._candidate_rows(raw,{"R1"})
 
     def test_malformed_later_requirement_redeclaration_is_ignored(self):
         frozen=["R1","BRAIN_DELIVERABLE_01"]

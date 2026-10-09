@@ -353,7 +353,12 @@ def _candidate_timeout(value: Any, *, default: int, maximum: int, field: str) ->
     return value
 
 
-def _candidate_rows(raw: Any, requirements: set[str]) -> list[dict[str, Any]]:
+def _candidate_rows(
+    raw: Any,
+    requirements: set[str],
+    *,
+    rejected_candidates: list[dict[str, Any]] | None = None,
+) -> list[dict[str, Any]]:
     if not isinstance(raw, list) or not raw or len(raw) > MAX_CANDIDATES:
         raise RuntimeError("SCIENCE_CANDIDATES_INVALID")
     rows: list[dict[str, Any]] = []
@@ -366,8 +371,31 @@ def _candidate_rows(raw: Any, requirements: set[str]) -> list[dict[str, Any]]:
             raise RuntimeError("SCIENCE_ACTION_ID_INVALID_OR_DUPLICATE")
         ids.add(aid)
         covers = _nonempty_strings(item.get("covers"), maximum=MAX_REQUIREMENTS, field="COVERS")
-        if not set(covers).issubset(requirements):
-            raise RuntimeError("SCIENCE_COVERAGE_OUTSIDE_CONTRACT")
+        unknown_covers = sorted(set(covers) - requirements)
+        if unknown_covers:
+            if rejected_candidates is None:
+                # Preserve historical fail-closed semantics for callers that did
+                # not explicitly opt into candidate-local rejection evidence.
+                raise RuntimeError("SCIENCE_COVERAGE_OUTSIDE_CONTRACT")
+            metadata_bytes = json.dumps(
+                item,
+                sort_keys=True,
+                separators=(",", ":"),
+                ensure_ascii=False,
+            ).encode("utf-8")
+            rejected_candidates.append({
+                "kind": "BRAIN_CANDIDATE_REJECTED",
+                "reason": "COVERAGE_OUTSIDE_FROZEN_REQUIREMENTS",
+                "source_error": "SCIENCE_COVERAGE_OUTSIDE_CONTRACT",
+                "action_id": aid,
+                "proposed_covers": list(covers),
+                "unknown_cover_ids": unknown_covers,
+                "candidate_metadata_sha256": hashlib.sha256(metadata_bytes).hexdigest(),
+                "executed": False,
+                "coverage_promoted": False,
+                "requirement_set_rewritten": False,
+            })
+            continue
         depends_on_raw = item.get("depends_on") or []
         if not isinstance(depends_on_raw, list) or len(depends_on_raw) > MAX_CANDIDATES:
             raise RuntimeError("SCIENCE_DEPENDS_ON_INVALID")
@@ -403,7 +431,13 @@ def _candidate_rows(raw: Any, requirements: set[str]) -> list[dict[str, Any]]:
             raise RuntimeError("SCIENCE_DEPENDS_ON_UNKNOWN_ACTION")
     return rows
 
-def _extract_contract(raw: dict[str, Any], prior_requirements: list[str] | None, mandatory_requirements: list[str] | None = None) -> tuple[list[str], list[dict[str, Any]], str | None]:
+def _extract_contract(
+    raw: dict[str, Any],
+    prior_requirements: list[str] | None,
+    mandatory_requirements: list[str] | None = None,
+    *,
+    rejected_candidates: list[dict[str, Any]] | None = None,
+) -> tuple[list[str], list[dict[str, Any]], str | None]:
     mandatory = list(mandatory_requirements or [])
     if len(mandatory) > MAX_REQUIREMENTS:
         raise RuntimeError("SCIENCE_MANDATORY_REQUIREMENTS_OVERFLOW")
@@ -436,7 +470,11 @@ def _extract_contract(raw: dict[str, Any], prior_requirements: list[str] | None,
         raise RuntimeError("SCIENCE_CANDIDATE_ALIAS_CONFLICT")
     candidate_rows = primary_candidates if primary_candidates is not None else alias_candidates
     if candidate_rows is not None:
-        candidates = _candidate_rows(candidate_rows, set(requirements))
+        candidates = _candidate_rows(
+            candidate_rows,
+            set(requirements),
+            rejected_candidates=rejected_candidates,
+        )
     return requirements, candidates, summary
 
 async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycles: int = 8) -> dict[str, Any]:
@@ -498,7 +536,17 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
         )
         if not isinstance(raw, dict):
             raise RuntimeError("SCIENCE_PLANNER_OBJECT_REQUIRED")
-        requirements, candidates, finish_summary = _extract_contract(raw, requirements, mandatory_requirement_ids)
+        candidate_rejections: list[dict[str, Any]] = []
+        requirements, candidates, finish_summary = _extract_contract(
+            raw,
+            requirements,
+            mandatory_requirement_ids,
+            rejected_candidates=candidate_rejections,
+        )
+        for rejection in candidate_rejections:
+            record = {"cycle": cycle, **rejection}
+            trace.append(record)
+            observations.append(record)
         unresolved_set = set(requirements) - resolved
 
         if finish_summary is not None:
