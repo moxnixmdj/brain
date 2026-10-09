@@ -13,182 +13,47 @@
     "raw_source_is_final_semantic_reference": true,
     "unverified_obligation_may_be_silently_dropped": false,
     "required_obligation_ids": [
-      "RAWREQ:1f45c9f4b76e9b5e7cde1ec163d93c4f3514703f067eccc1d099f7c1c7c96ded",
-      "RAWREQ:ee4b02ef32f3f717c90be16ccdba7c7a24cb6cc07c7b26e6c5626c14c00d94d1",
-      "RAWREQ:6796cfe8a31785716fd4e97990d458d117db8806281acb808bb2db6c14c54416",
-      "RAWREQ:cf90ad3b534ebdd09394d16d09cec67aea48425ca21fbda0f4b447290d9cb2c3",
-      "RAWREQ:a6928419afd6355b3b3be0f74922c040826384c162d01b6fef4e887bc146155a",
-      "RAWREQ:5a5962b1c796fd9666738083511a8ffcde9cb839b92180810d16aabeea888d71",
-      "RAWREQ:92315f1911f9653e14d422c2fc3fc152e03ebff37569ada24cc68623c1354962",
-      "RAWREQ:14c7d8d8689452cbeb96757dc383633e88b09ecd38b96c5f70949026f5358558",
-      "RAWREQ:ae2847f59e5f69f011cecab6f6501d5a2efa1165c0ccce48588dc468e1c0e8a8",
-      "RAWREQ:b6982af93d4d16abeb20be4b2ba2acb417dc86bfc3a2cddf3027967d91903e5b",
-      "RAWREQ:f652e19a2da49a9d2fc883d2d27c5fd84914d34cd557a86bbce7b373332cec59",
-      "RAWREQ:4a3233ca85809e0c3a7831a0f3b418df2ebdf9423d81c775971e895afcf23119",
-      "RAWREQ:b35a91427aa00a6bcb7ca7f3045c4227dc55543ca6067eaa6a2119c09f163506",
-      "RAWREQ:faa08c4f4012f4a4e7c400fbf8bac53ef2941816dca13a8826b925ec76dcae6e",
-      "RAWREQ:4434d63d537ae1ab2c6e5bd6748097905e935b489788dd0f2c3b8cdee6afd740",
-      "RAWREQ:5663f88ddabe3ffdaf7b2a725bbfe34a0c4ff6854a9b28f291324d9035be76e7",
-      "RAWREQ:f2b028405a3eee8b061e0898af49bdcb1f19df1a24f1518aae17a9d3aef1cf5e",
-      "RAWREQ:7d95ed06cfaf2a9461d6cb006e65a28774b6a3cf14b4a33ac8faf76599d3201d",
-      "RAWREQ:6f1e11ce7439978f4164fd142b44c721292b4484723ed8038ada1edd839d567e",
-      "RAWREQ:740c11acdd27c8b5c08c3028a9dd6d0e539e7b9062f4282e879fab8553a0b930",
-      "RAWREQ:2e627c0e73a567aa8a83582b9ccc0576ba69bfba7a21ab4b537f7f1f140535da",
-      "RAWREQ:04314a68a91968c9e8b60c0c1f8969201f3e162ef6eca2ad0878e2cb04d8c740",
-      "RAWREQ:406d179371bae1b9410f6c1519cdd01c822e7de08643a79cd2aa5df2a6d9d143",
-      "RAWREQ:c531ed16147d159e3176bf1e03e5c8a38e2d069121eb301740568be4716d181b",
-      "RAWREQ:bb401d1829f632cdbdb3b7b7be1163266f9235b4f34e4d37f9550807ed086e64",
-      "RAWREQ:5cb24d86f4f74f9055ab630fc19369e28484b90fff6b48c2ea742ea0b72f96b7",
-      "RAWREQ:55dad7a72602d0974aaa1bc6c923a1eb000bd3f0d72a08502d7d63c97af6da1f",
-      "RAWREQ:b647d4ce76e83c8bf3ea33bc0e7264d7445216de7704d8f76164103b740afdf9",
-      "RAWREQ:065a03c5787b78f73e65b77e0b1d0ae2664053390becf1c79b17f21aa139244a",
-      "RAWREQ:af68a604515634b13f34dcb9965fbd46702f19c2700b137b029ffe91ba7c1934",
-      "RAWREQ:9b5ea057d9f5e772d093ab8ab28f1f9c9ee1a1b9eba64ab084fbe8af1b55bf49",
-      "RAWREQ:54c0a1e6545d0bb09db0df4317470a5dbdc55be9b741eb4229730140f33d05e9",
-      "RAWREQ:12331427bdd7c05c8ee8b964b41606d6a9e44d4a5787e92d2e5f62efe91e4da8",
-      "RAWREQ:cb61ee87ff0c5fcf8c39f123915982db336f2c45d24e01fc943bfe418135f4a8",
-      "RAWREQ:9fd6ea7047ddec19e7ff4920148f1b070c95e65847c0f89add0ce0d2cf9ddeea"
+      "RAWREQ:6589c83f452d2aacd9291501c0f8c9d0cd5d0c8f39a4e48828314897e3ae9bee",
+      "RAWREQ:4d8f4f74df6764ef2ab6a7a90ca78b8ba36f687a0dd9a961b5b5877ab0c1b7d4",
+      "RAWREQ:c7946ca6e1c78d561d1734d560546d4065939ae76523c6f7c92072ff057dc95e",
+      "RAWREQ:aa143c033c46b5fae470e5e3929f664e14d2b68a57c3d00bb968980d0b1c1e36"
     ],
     "obligations": [
       {
-        "obligation_id": "RAWREQ:1f45c9f4b76e9b5e7cde1ec163d93c4f3514703f067eccc1d099f7c1c7c96ded",
-        "segment_index": 0
+        "obligation_id": "RAWREQ:6589c83f452d2aacd9291501c0f8c9d0cd5d0c8f39a4e48828314897e3ae9bee",
+        "segment_index": 0,
+        "span": [
+          0,
+          64
+        ],
+        "segment_sha256": "db51bf63af329a5aed718a8814cd7701d500aca2f20c221d1cca0ef75e89c243"
       },
       {
-        "obligation_id": "RAWREQ:ee4b02ef32f3f717c90be16ccdba7c7a24cb6cc07c7b26e6c5626c14c00d94d1",
-        "segment_index": 1
+        "obligation_id": "RAWREQ:4d8f4f74df6764ef2ab6a7a90ca78b8ba36f687a0dd9a961b5b5877ab0c1b7d4",
+        "segment_index": 1,
+        "span": [
+          66,
+          3226
+        ],
+        "segment_sha256": "4f02b34f0fc21d363164b64cdb170ef31dcdd03e50f462f20194db06bfc35ee1"
       },
       {
-        "obligation_id": "RAWREQ:6796cfe8a31785716fd4e97990d458d117db8806281acb808bb2db6c14c54416",
-        "segment_index": 2
+        "obligation_id": "RAWREQ:c7946ca6e1c78d561d1734d560546d4065939ae76523c6f7c92072ff057dc95e",
+        "segment_index": 2,
+        "span": [
+          3228,
+          3273
+        ],
+        "segment_sha256": "d8dcf87d930f80fadd5edceec7c568a7000a5b82ec229dda78e523486e58cfab"
       },
       {
-        "obligation_id": "RAWREQ:cf90ad3b534ebdd09394d16d09cec67aea48425ca21fbda0f4b447290d9cb2c3",
-        "segment_index": 3
-      },
-      {
-        "obligation_id": "RAWREQ:a6928419afd6355b3b3be0f74922c040826384c162d01b6fef4e887bc146155a",
-        "segment_index": 4
-      },
-      {
-        "obligation_id": "RAWREQ:5a5962b1c796fd9666738083511a8ffcde9cb839b92180810d16aabeea888d71",
-        "segment_index": 5
-      },
-      {
-        "obligation_id": "RAWREQ:92315f1911f9653e14d422c2fc3fc152e03ebff37569ada24cc68623c1354962",
-        "segment_index": 6
-      },
-      {
-        "obligation_id": "RAWREQ:14c7d8d8689452cbeb96757dc383633e88b09ecd38b96c5f70949026f5358558",
-        "segment_index": 7
-      },
-      {
-        "obligation_id": "RAWREQ:ae2847f59e5f69f011cecab6f6501d5a2efa1165c0ccce48588dc468e1c0e8a8",
-        "segment_index": 8
-      },
-      {
-        "obligation_id": "RAWREQ:b6982af93d4d16abeb20be4b2ba2acb417dc86bfc3a2cddf3027967d91903e5b",
-        "segment_index": 9
-      },
-      {
-        "obligation_id": "RAWREQ:f652e19a2da49a9d2fc883d2d27c5fd84914d34cd557a86bbce7b373332cec59",
-        "segment_index": 10
-      },
-      {
-        "obligation_id": "RAWREQ:4a3233ca85809e0c3a7831a0f3b418df2ebdf9423d81c775971e895afcf23119",
-        "segment_index": 11
-      },
-      {
-        "obligation_id": "RAWREQ:b35a91427aa00a6bcb7ca7f3045c4227dc55543ca6067eaa6a2119c09f163506",
-        "segment_index": 12
-      },
-      {
-        "obligation_id": "RAWREQ:faa08c4f4012f4a4e7c400fbf8bac53ef2941816dca13a8826b925ec76dcae6e",
-        "segment_index": 13
-      },
-      {
-        "obligation_id": "RAWREQ:4434d63d537ae1ab2c6e5bd6748097905e935b489788dd0f2c3b8cdee6afd740",
-        "segment_index": 14
-      },
-      {
-        "obligation_id": "RAWREQ:5663f88ddabe3ffdaf7b2a725bbfe34a0c4ff6854a9b28f291324d9035be76e7",
-        "segment_index": 15
-      },
-      {
-        "obligation_id": "RAWREQ:f2b028405a3eee8b061e0898af49bdcb1f19df1a24f1518aae17a9d3aef1cf5e",
-        "segment_index": 16
-      },
-      {
-        "obligation_id": "RAWREQ:7d95ed06cfaf2a9461d6cb006e65a28774b6a3cf14b4a33ac8faf76599d3201d",
-        "segment_index": 17
-      },
-      {
-        "obligation_id": "RAWREQ:6f1e11ce7439978f4164fd142b44c721292b4484723ed8038ada1edd839d567e",
-        "segment_index": 18
-      },
-      {
-        "obligation_id": "RAWREQ:740c11acdd27c8b5c08c3028a9dd6d0e539e7b9062f4282e879fab8553a0b930",
-        "segment_index": 19
-      },
-      {
-        "obligation_id": "RAWREQ:2e627c0e73a567aa8a83582b9ccc0576ba69bfba7a21ab4b537f7f1f140535da",
-        "segment_index": 20
-      },
-      {
-        "obligation_id": "RAWREQ:04314a68a91968c9e8b60c0c1f8969201f3e162ef6eca2ad0878e2cb04d8c740",
-        "segment_index": 21
-      },
-      {
-        "obligation_id": "RAWREQ:406d179371bae1b9410f6c1519cdd01c822e7de08643a79cd2aa5df2a6d9d143",
-        "segment_index": 22
-      },
-      {
-        "obligation_id": "RAWREQ:c531ed16147d159e3176bf1e03e5c8a38e2d069121eb301740568be4716d181b",
-        "segment_index": 23
-      },
-      {
-        "obligation_id": "RAWREQ:bb401d1829f632cdbdb3b7b7be1163266f9235b4f34e4d37f9550807ed086e64",
-        "segment_index": 24
-      },
-      {
-        "obligation_id": "RAWREQ:5cb24d86f4f74f9055ab630fc19369e28484b90fff6b48c2ea742ea0b72f96b7",
-        "segment_index": 25
-      },
-      {
-        "obligation_id": "RAWREQ:55dad7a72602d0974aaa1bc6c923a1eb000bd3f0d72a08502d7d63c97af6da1f",
-        "segment_index": 26
-      },
-      {
-        "obligation_id": "RAWREQ:b647d4ce76e83c8bf3ea33bc0e7264d7445216de7704d8f76164103b740afdf9",
-        "segment_index": 27
-      },
-      {
-        "obligation_id": "RAWREQ:065a03c5787b78f73e65b77e0b1d0ae2664053390becf1c79b17f21aa139244a",
-        "segment_index": 28
-      },
-      {
-        "obligation_id": "RAWREQ:af68a604515634b13f34dcb9965fbd46702f19c2700b137b029ffe91ba7c1934",
-        "segment_index": 29
-      },
-      {
-        "obligation_id": "RAWREQ:9b5ea057d9f5e772d093ab8ab28f1f9c9ee1a1b9eba64ab084fbe8af1b55bf49",
-        "segment_index": 30
-      },
-      {
-        "obligation_id": "RAWREQ:54c0a1e6545d0bb09db0df4317470a5dbdc55be9b741eb4229730140f33d05e9",
-        "segment_index": 31
-      },
-      {
-        "obligation_id": "RAWREQ:12331427bdd7c05c8ee8b964b41606d6a9e44d4a5787e92d2e5f62efe91e4da8",
-        "segment_index": 32
-      },
-      {
-        "obligation_id": "RAWREQ:cb61ee87ff0c5fcf8c39f123915982db336f2c45d24e01fc943bfe418135f4a8",
-        "segment_index": 33
-      },
-      {
-        "obligation_id": "RAWREQ:9fd6ea7047ddec19e7ff4920148f1b070c95e65847c0f89add0ce0d2cf9ddeea",
-        "segment_index": 34
+        "obligation_id": "RAWREQ:aa143c033c46b5fae470e5e3929f664e14d2b68a57c3d00bb968980d0b1c1e36",
+        "segment_index": 3,
+        "span": [
+          3274,
+          3344
+        ],
+        "segment_sha256": "afd0c8a14c6e2cd8ba27c391d91024a2537403afebad13b1849f419012be1e3e"
       }
     ]
   },
