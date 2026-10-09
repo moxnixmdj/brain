@@ -1372,6 +1372,182 @@ def _record_frontier_acquisition_attempt(
     learning._write_state(state, state_path)
 
 
+def _valid_sha256_hex(value: Any) -> bool:
+    return (
+        isinstance(value, str)
+        and len(value) == 64
+        and all(ch in "0123456789abcdef" for ch in value.lower())
+    )
+
+
+def _execute_distinguishing_evidence_acquisition(
+    work: Mapping[str, Any],
+    *,
+    state_path: str | Path,
+    repo_root: str | Path,
+    provider: Callable[[Mapping[str, Any]], Mapping[str, Any] | None],
+    provider_id: str,
+    evidence_request: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Record provider output only as fresh unverified experience."""
+    payload = work.get("payload")
+    if not isinstance(payload, Mapping):
+        raise ImprovementDriverError("FRONTIER_EXPANSION_PAYLOAD_INVALID")
+    if (
+        not isinstance(evidence_request, Mapping)
+        or evidence_request.get("pass") is not True
+        or evidence_request.get("schema")
+        != "PROJECT_BRAIN_R3_DISTINGUISHING_EVIDENCE_REQUEST_V1"
+    ):
+        raise ImprovementDriverError("DISTINGUISHING_EVIDENCE_REQUEST_NOT_PROVED")
+    request_sha = str(evidence_request.get("request_sha256") or "")
+    if not request_sha.startswith("sha256:") or len(request_sha) != 71:
+        raise ImprovementDriverError("DISTINGUISHING_EVIDENCE_REQUEST_SHA256_INVALID")
+
+    wid = str(work.get("work_id") or "").strip()
+    observation_id = str(payload.get("observation_id") or "").strip()
+    before_learning = _owned_success_learning_frontier_sha256(repo_root=repo_root)
+    before_adapter = _owned_success_adapter_frontier_sha256(repo_root=repo_root)
+    before_authority = _owned_success_verification_authority_sha256(
+        repo_root=repo_root
+    )
+    before_state = learning.load_state(state_path)
+    before_observation_ids = set(str(x) for x in before_state.get("observations", {}))
+
+    provider_request = {
+        "schema": "PROJECT_BRAIN_R3_DISTINGUISHING_EVIDENCE_PROVIDER_REQUEST_V1",
+        "kind": "ACQUIRE_NEW_DISTINGUISHING_EVIDENCE",
+        "improvement_work_id": wid,
+        "source_observation_id": observation_id,
+        "distinguishing_evidence_request": deepcopy(dict(evidence_request)),
+        "request_sha256": request_sha,
+        "verification_frontier_sha256": before_learning,
+        "adapter_frontier_sha256": before_adapter,
+        "verification_authority_sha256": before_authority,
+        "state_write_authority": False,
+        "source_write_authority": False,
+        "verification_authority": False,
+        "promotion_authority": False,
+        "acceptance_authority": False,
+        "terminal_authority": False,
+    }
+    result = provider(deepcopy(provider_request))
+    if not isinstance(result, Mapping):
+        raise ImprovementDriverError("DISTINGUISHING_EVIDENCE_PROVIDER_RESULT_INVALID")
+    if (
+        result.get("schema")
+        != "PROJECT_BRAIN_R3_DISTINGUISHING_EVIDENCE_PROVIDER_RESULT_V1"
+        or result.get("pass") is not True
+        or result.get("request_sha256") != request_sha
+        or result.get("source_observation_id") != observation_id
+        or result.get("acquisition_or_experiment_attempted") is not True
+        or not _valid_sha256_hex(result.get("evidence_trace_sha256"))
+        or result.get("verification_authority_mutated") is not False
+        or result.get("provider_truth_authority") is not False
+        or result.get("provider_verification_authority") is not False
+        or result.get("provider_acceptance_authority") is not False
+        or result.get("provider_terminal_authority") is not False
+    ):
+        raise ImprovementDriverError(
+            "DISTINGUISHING_EVIDENCE_PROVIDER_RECEIPT_INVALID"
+        )
+
+    candidate = result.get("candidate_success_output")
+    if not isinstance(candidate, Mapping) or candidate.get("pass") is not True:
+        raise ImprovementDriverError(
+            "DISTINGUISHING_EVIDENCE_CANDIDATE_SUCCESS_OUTPUT_REQUIRED"
+        )
+    if str(result.get("candidate_success_output_sha256") or "") != learning._sha(candidate):
+        raise ImprovementDriverError(
+            "DISTINGUISHING_EVIDENCE_CANDIDATE_OUTPUT_DIGEST_MISMATCH"
+        )
+    for key in (
+        "verification_authority",
+        "promotion_authority",
+        "acceptance_authority",
+        "terminal_authority",
+    ):
+        if candidate.get(key) is True:
+            raise ImprovementDriverError(
+                "DISTINGUISHING_EVIDENCE_CANDIDATE_AUTHORITY_FORBIDDEN:" + key
+            )
+
+    after_learning = _owned_success_learning_frontier_sha256(repo_root=repo_root)
+    after_adapter = _owned_success_adapter_frontier_sha256(repo_root=repo_root)
+    after_authority = _owned_success_verification_authority_sha256(
+        repo_root=repo_root
+    )
+    if (
+        after_learning != before_learning
+        or after_adapter != before_adapter
+        or after_authority != before_authority
+    ):
+        raise ImprovementDriverError(
+            "DISTINGUISHING_EVIDENCE_PROVIDER_MUTATED_OWNED_FRONTIER"
+        )
+
+    observed = learning.record_success_observation(
+        deepcopy(dict(candidate)),
+        surface=(
+            "R3_DISTINGUISHING_EVIDENCE_"
+            + request_sha.replace("sha256:", "")[:16]
+        ),
+        state_path=state_path,
+        replay_context=None,
+    )
+    new_observation_id = str(observed.get("observation_id") or "")
+    if not new_observation_id or new_observation_id in before_observation_ids:
+        _record_frontier_acquisition_attempt(
+            wid,
+            provider_id=provider_id,
+            frontier_sha256=before_learning,
+            status="DISTINGUISHING_EVIDENCE_DUPLICATE_OBSERVATION_NO_PROGRESS",
+            reason="CANDIDATE_SUCCESS_OUTPUT_ALREADY_OBSERVED",
+            state_path=state_path,
+        )
+        return {
+            "schema": SCHEMA,
+            "status": "DISTINGUISHING_EVIDENCE_DUPLICATE_OBSERVATION_NO_PROGRESS",
+            "pass": False,
+            "progress": False,
+            "work_id": wid,
+            "source_observation_id": observation_id,
+            "candidate_observation_id": new_observation_id or None,
+            "provider_result": deepcopy(dict(result)),
+            "attempt_backoff_recorded": True,
+            "historical_success_resolved": False,
+            "verification_authority_unchanged": True,
+            "terminal_authority": False,
+        }
+
+    _record_frontier_acquisition_attempt(
+        wid,
+        provider_id=provider_id,
+        frontier_sha256=before_learning,
+        status="DISTINGUISHING_EVIDENCE_CANDIDATE_RECORDED",
+        reason=None,
+        state_path=state_path,
+    )
+    return {
+        "schema": SCHEMA,
+        "status": "IMPROVEMENT_ADVANCED__DISTINGUISHING_EVIDENCE_CANDIDATE_RECORDED",
+        "pass": True,
+        "progress": True,
+        "work_id": wid,
+        "source_observation_id": observation_id,
+        "candidate_observation_id": new_observation_id,
+        "candidate_improvement_work_id": observed.get("improvement_work_id"),
+        "provider_result": deepcopy(dict(result)),
+        "historical_success_resolved": False,
+        "candidate_evidence_verified": False,
+        "verification_authority_unchanged": True,
+        "required_next_step": (
+            "RUN_NORMAL_SUCCESS_ADAPTER_AND_INDEPENDENT_VERIFICATION_PIPELINE"
+        ),
+        "terminal_authority": False,
+    }
+
+
 def _execute_frontier_acquisition(
     work: Mapping[str, Any],
     *,
@@ -1621,6 +1797,12 @@ def advance_once(
     ] | None = None,
     verification_frontier_acquisition_provider_id: str = (
         "HOST_VERIFICATION_FRONTIER_ACQUISITION_PROVIDER"
+    ),
+    distinguishing_evidence_provider: Callable[
+        [Mapping[str, Any]], Mapping[str, Any] | None
+    ] | None = None,
+    distinguishing_evidence_provider_id: str = (
+        "HOST_R3_DISTINGUISHING_EVIDENCE_PROVIDER"
     ),
 ) -> dict[str, Any]:
     """Execute the highest-priority *actionable* pending improvement exactly once."""
@@ -2002,6 +2184,40 @@ def advance_once(
                         isinstance(evidence_request, Mapping)
                         and evidence_request.get("pass") is True
                     )
+                    if (
+                        request_ready
+                        and distinguishing_evidence_provider is not None
+                    ):
+                        if _frontier_acquisition_attempt_consumed(
+                            work,
+                            provider_id=distinguishing_evidence_provider_id,
+                            repo_root=repo_root,
+                        ):
+                            blockers.append({
+                                "work_id": wid,
+                                "kind": kind,
+                                "blocker": (
+                                    "DISTINGUISHING_EVIDENCE_ACQUISITION_ATTEMPT_"
+                                    "ALREADY_CONSUMED_FOR_CURRENT_FRONTIER"
+                                ),
+                                "distinguishing_evidence_request": deepcopy(
+                                    dict(evidence_request)
+                                ),
+                                "adapter_acquisition_provider_skipped": True,
+                            })
+                            continue
+                        out = _execute_distinguishing_evidence_acquisition(
+                            work,
+                            state_path=state_path,
+                            repo_root=repo_root,
+                            provider=distinguishing_evidence_provider,
+                            provider_id=distinguishing_evidence_provider_id,
+                            evidence_request=evidence_request,
+                        )
+                        return {
+                            **out,
+                            "blockers_skipped": blockers,
+                        }
                     blockers.append({
                         "work_id": wid,
                         "kind": kind,
@@ -2150,6 +2366,12 @@ def drain(
     verification_frontier_acquisition_provider_id: str = (
         "HOST_VERIFICATION_FRONTIER_ACQUISITION_PROVIDER"
     ),
+    distinguishing_evidence_provider: Callable[
+        [Mapping[str, Any]], Mapping[str, Any] | None
+    ] | None = None,
+    distinguishing_evidence_provider_id: str = (
+        "HOST_R3_DISTINGUISHING_EVIDENCE_PROVIDER"
+    ),
     max_actions: int = 4,
 ) -> dict[str, Any]:
     if isinstance(max_actions, bool) or not isinstance(max_actions, int) or max_actions < 1 or max_actions > 32:
@@ -2168,6 +2390,10 @@ def drain(
             ),
             verification_frontier_acquisition_provider_id=(
                 verification_frontier_acquisition_provider_id
+            ),
+            distinguishing_evidence_provider=distinguishing_evidence_provider,
+            distinguishing_evidence_provider_id=(
+                distinguishing_evidence_provider_id
             ),
         )
         actions.append(result)
