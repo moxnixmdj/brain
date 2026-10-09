@@ -18,10 +18,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
       - name: Run source-native semantic falsification suite
+        id: semantic_tests
+        shell: bash
         run: |
-          set -o pipefail
-          python3 -m unittest -v canonical.tests.test_sec_companyconcept_source_native_v1
+          set +e
+          python3 -m unittest -v canonical.tests.test_sec_companyconcept_source_native_v1 > sec-companyconcept-test.log 2>&1
+          rc=$?
+          cat sec-companyconcept-test.log
+          echo "$rc" > sec-companyconcept-test.exit
+          exit "$rc"
+      - name: Preserve diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sec-companyconcept-source-native-diagnostics
+          path: |
+            sec-companyconcept-test.log
+            sec-companyconcept-test.exit
+          if-no-files-found: warn
