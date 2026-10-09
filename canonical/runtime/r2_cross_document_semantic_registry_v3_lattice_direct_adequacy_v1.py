@@ -9,8 +9,8 @@ import re
 from typing import Any, Mapping
 
 from canonical.runtime.lossless_raw_task_contract_v1 import compile_contract
-from canonical.runtime import cross_document_effect_semantic_lattice_v8 as producer
-from canonical.runtime import cross_document_effect_semantic_lattice_verify_v8 as verifier
+from canonical.runtime import cross_document_effect_semantic_lattice_v9 as producer
+from canonical.runtime import cross_document_effect_semantic_lattice_verify_v9 as verifier
 
 SCHEMA="PROJECT_BRAIN_R2_CROSS_DOCUMENT_SEMANTIC_REGISTRY_V3_LATTICE_DIRECT_ADEQUACY_V1"
 ROUTE_ID="DIRECT_ADEQUACY::CROSS_DOCUMENT_SEMANTIC_REGISTRY_V3_LATTICE_V8"
