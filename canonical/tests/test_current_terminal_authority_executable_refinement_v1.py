@@ -28,7 +28,7 @@ def test_refinement_framework_source_bindings_are_exactly_projected():
     assert src["verifier"]["git_blob_sha"] == "13618667e6f87b29b1e56ceeb8947c51d64de683"
     assert src["creditable_route_gate"]["git_blob_sha"] == "58602558b3a6ef81e9c6dcaf28cbc61eb0b1d70d"
     assert src["dependency_graph_guard"]["git_blob_sha"] == "7ee3988dc393965f83994fba70cd1903e7e2aa7c"
-    assert src["dependency_graph"]["git_blob_sha"] == "b4fc9176f5e463e2352c437708dfe4dc75898368"
+    assert src["dependency_graph"]["git_blob_sha"] == "769b2f277b41045f8a95ad3a2d0eb2cfaabcdb27"
     assert src["gated_entrypoint"]["git_blob_sha"] == "c4f3ed3ea767a8930789f2426484fbce710d8f14"
 
 
@@ -36,5 +36,5 @@ def test_refinement_reconciliation_grants_zero_terminal_credit():
     terminal = json.loads(TERMINAL.read_text(encoding="utf-8"))
     rec = terminal["executable_refinement_reconciliation_20261009_v1"]
     assert rec["terminal_credit_delta"] == 0
-    assert "MECHANICALLY_CHECKED_MODEL_TO_EXECUTABLE_REFINEMENT" in rec["highest_dominance_open_leaf"]
+    assert rec["highest_dominance_open_leaf"] == "terminal-live-paths-executable-refinement"
     assert any("NO_SUPPORTED_PROOF_CLASS" in item for item in rec["open"])
