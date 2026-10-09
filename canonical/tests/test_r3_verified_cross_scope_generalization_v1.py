@@ -438,7 +438,7 @@ class VerifiedCrossScopeGeneralizationTests(unittest.TestCase):
             "behavior_preserving_on_claimed_scope": True,
             "candidate_reexecuted_or_equivalently_checked": True,
             "source_episode_lineage_reverified": True,
-            "independent_verifier_id": "independent:test",
+            "independent_verifier_id": independent.INDEPENDENT_VERIFIER_ID,
         }
         resolve.side_effect = [
             {"document": receipt_doc, "git_blob_sha": "blob-receipt", "path": "receipt.json"},
@@ -482,7 +482,7 @@ class VerifiedCrossScopeGeneralizationTests(unittest.TestCase):
             "behavior_preserving_on_claimed_scope": True,
             "candidate_reexecuted_or_equivalently_checked": True,
             "source_episode_lineage_reverified": True,
-            "independent_verifier_id": "independent:test",
+            "independent_verifier_id": independent.INDEPENDENT_VERIFIER_ID,
         }
         resolve.side_effect = [
             {"document": receipt_doc, "git_blob_sha": "blob-receipt", "path": "receipt.json"},
