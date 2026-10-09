@@ -118,7 +118,9 @@ class Tests(unittest.TestCase):
                 "canonical/tmp/source.txt and save them to canonical/../escape.json."
             )
             out = d.preflight({"task_id": "x", "goal": g}, repo_root=root)
-            self.assertFalse(out["matched"])
+            self.assertTrue(out["matched"])
+            self.assertEqual(out["status"], "FAIL_CLOSED")
+            self.assertIn("PATH_INVALID", out["reason"])
 
 
 if __name__ == "__main__":
