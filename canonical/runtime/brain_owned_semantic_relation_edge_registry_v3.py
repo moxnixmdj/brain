@@ -27,6 +27,14 @@ def supported_proof_classes()->list[str]:
 def supports(raw:Any)->bool:
     return any(handler.supports(raw) for handler in _HANDLERS)
 
+def can_prove(raw:Any)->bool:
+    """True only when the registered class recomputes a valid standard receipt."""
+    if not supports(raw):
+        return False
+    out=verify(raw)
+    return isinstance(out,Mapping) and out.get("pass") is True
+
+
 def verify(raw:Mapping[str,Any])->dict[str,Any]:
     matched=[handler for handler in _HANDLERS if handler.supports(raw)]
     if len(matched)!=1:
