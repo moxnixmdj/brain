@@ -181,5 +181,94 @@ class HistoricalFailureIrreducibilityV1Tests(unittest.TestCase):
         )
 
 
+    def test_boolean_only_externality_claim_cannot_escape_internal_unsolved(self):
+        pending = [{
+            "work_id": "w-failure",
+            "kind": "REPAIR_FAILURE_CLASS",
+            "last_attempt_status": "IMPROVEMENT_REPAIR_BLOCKED__REPLAY_CAPSULE_REQUIRED",
+            "last_attempt_reason": None,
+            "payload": {
+                "retry_capsule_sha256": None,
+                "repair_class": cert.SUPPORTED_REPAIR_CLASS,
+            },
+        }]
+
+        def snap(digest):
+            return {
+                "schema": closure.SCHEMA,
+                "digest": digest,
+                "state_sha256": "state-" + digest,
+                "payload": {
+                    "state_file": {
+                        "path": "state.json",
+                        "sha256": "state-" + digest,
+                        "bytes": 1,
+                    },
+                    "files": [],
+                    "pending": pending,
+                    "stats": {},
+                },
+            }
+
+        snaps = [snap("a"), snap("a"), snap("a")]
+        blocker = {
+            "work_id": "w-failure",
+            "kind": "REPAIR_FAILURE_CLASS",
+            "blocker": "WORK_ALREADY_ATTEMPTED_FOR_CURRENT_EVIDENCE",
+        }
+        bounded = {
+            "pass": True,
+            "status": "PASS__CURRENT_STATE_ONLY",
+            "irreducible_external_information_proved": False,
+            "current_durable_state_insufficiency_proved": True,
+        }
+        boolean_only = {
+            "information_theoretic_externality_proved": True,
+            "observational_equivalence_proved": True,
+            "optimal_action_divergence_proved": True,
+            "search_exhausted": True,
+            "theorem_route_exhausted": True,
+            "simulation_route_exhausted": True,
+            "experiment_route_exhausted": True,
+            "alternative_route_exhausted": True,
+            "weaker_sufficient_fact_exhausted": True,
+            "synthesized_capability_bypass_exhausted": True,
+            "proof_scope_closed_and_exhaustive": True,
+            "independent_verifier_passed": True,
+            "verification_authority_mutated": False,
+            "witness_sha256": "a" * 64,
+            "proof_scope_digest": "b" * 64,
+        }
+        with patch.object(closure, "frontier_snapshot", side_effect=snaps), \
+             patch.object(closure.r3, "drain", return_value={
+                 "status": "IMPROVEMENT_QUEUE_STABLE",
+                 "pass": True,
+                 "progress_count": 0,
+                 "actions": [{"blockers": [blocker]}],
+             }), \
+             patch.object(
+                 closure.historical_evidence,
+                 "certify_pending_set",
+                 return_value={"pass": False},
+             ), \
+             patch.object(
+                 closure.historical_failure,
+                 "certify_pending_set",
+                 return_value=bounded,
+             ):
+            out = closure.run(
+                repo_root=".",
+                state_path="state.json",
+                information_theoretic_externality_provider=lambda request: boolean_only,
+            )
+
+        self.assertFalse(out["pass"], out)
+        self.assertFalse(out["irreducible_external_information_proved"])
+        self.assertEqual(
+            out["status"],
+            "OPEN__INTERNAL_UNSOLVED__PENDING_ACQUISITION_OR_EXPERIMENT",
+        )
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
