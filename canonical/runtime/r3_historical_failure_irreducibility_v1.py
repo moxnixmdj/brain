@@ -1,12 +1,14 @@
-"""Strict bounded certificate for unreplayable historical R3 failures.
+"""Bounded current-state insufficiency certificate for historical R3 failures.
 
 This certifier is intentionally narrow. It proves only that one exact historical
 failure-repair item cannot be replayed or causally localized from the current
 durable R3 state because the state retained only a generic many-to-one diagnosis
 and retained no retry capsule or task/replay identity.
 
-It does not claim the original task can never be observed again. It proves that
-new information is required before the exact historical repair can proceed.
+This is NOT an information-theoretic externality proof. A new replayable
+experiment, search result, alternative route, or regenerated task context may
+reopen the repair. The certificate therefore authorizes acquisition/experiment
+work, never terminal "external impossibility" classification.
 """
 from __future__ import annotations
 
@@ -58,6 +60,8 @@ def _fail(reason: str, **extra: Any) -> dict[str, Any]:
         "pass": False,
         "reason": reason,
         "irreducible_external_information_proved": False,
+        "information_theoretic_externality_proved": False,
+        "current_durable_state_insufficiency_proved": False,
         "future_evidence_reopens": True,
         "terminal_authority": False,
         **extra,
@@ -159,7 +163,7 @@ def certify(
         return {
             "schema": SCHEMA,
             "status": (
-                "PASS__EXACT_HISTORICAL_FAILURE_REQUIRES_EXTERNAL_REPLAY_INFORMATION"
+                "PASS__EXACT_HISTORICAL_FAILURE_REQUIRES_REPLAY_INFORMATION_OR_NEW_EXPERIENCE"
             ),
             "pass": True,
             "claim_scope": (
@@ -169,7 +173,11 @@ def certify(
             "failure_fingerprint": fid,
             "witness_sha256": _sha(witness),
             "witness": witness,
-            "irreducible_external_information_proved": True,
+            "irreducible_external_information_proved": False,
+            "information_theoretic_externality_proved": False,
+            "current_durable_state_insufficiency_proved": True,
+            "classification": "PENDING_ACQUISITION_OR_EXPERIMENT",
+            "global_alternative_routes_exhausted": False,
             "irreducibility_basis": (
                 "CURRENT_DURABLE_STATE_RETAINS_ONLY_GENERIC_MANY_TO_ONE_FAILURE_"
                 "DIAGNOSIS_AND_NO_REPLAY_OR_TASK_IDENTITY"
@@ -217,11 +225,15 @@ def certify_pending_set(
         certs.append(cert)
     return {
         "schema": SCHEMA,
-        "status": "PASS__ALL_PENDING_FAILURE_WORK_REQUIRES_EXTERNAL_REPLAY_INFORMATION",
+        "status": "PASS__ALL_PENDING_FAILURE_WORK_REQUIRES_REPLAY_INFORMATION_OR_NEW_EXPERIENCE",
         "pass": True,
         "certificate_count": len(certs),
         "certificates": certs,
-        "irreducible_external_information_proved": True,
+        "irreducible_external_information_proved": False,
+        "information_theoretic_externality_proved": False,
+        "current_durable_state_insufficiency_proved": True,
+        "classification": "PENDING_ACQUISITION_OR_EXPERIMENT",
+        "global_alternative_routes_exhausted": False,
         "claim_scope": "EXACT_CURRENT_PENDING_HISTORICAL_FAILURE_SET",
         "required_new_information_class": (
             "EXACT_ORIGINAL_RETRY_CONTEXT_OR_NEW_REPLAYABLE_FAILURE_EXPERIENCE"
