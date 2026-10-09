@@ -127,5 +127,18 @@
     "root_closed": false,
     "next_required_edge": "PROFESSIONAL_EDIT_CAUSAL_CERTIFICATE_FOR_REAL_EXECUTION_OUTCOME_VERSION_DOSE_COMPOUND_ATTRIBUTION_AND_SEQUENCE_INTERACTION",
     "terminal_credit_delta": 0
+  },
+  "professional_quality_r7_single_edit_causal_instance": {
+    "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_R7_SINGLE_EDIT_CAUSAL_INSTANCE_VERIFY_20261009_V1.json",
+    "verification_git_blob_sha": "0c692f55dedb6a8523bcd78541d4cb77ef06d610",
+    "claim_scope": "EXACT_SINGLE_EDIT_PROFESSIONAL_CODE_INTERVENTION_INSTANCE",
+    "predecessor_runtime_git_blob_sha": "a52d62d63aeb50a6bbb613c37ec76d1c86327b12",
+    "repaired_runtime_git_blob_sha": "b4274a48edbe626a9ae9fd33da2f2227ca4dd5e8",
+    "same_test_git_blob_sha": "0eba4d1cd42d62a9a6e13830804223300e290e68",
+    "causal_signature": "PREDECESSOR_FAIL__REPAIRED_PASS",
+    "r7_global_root_closed": false,
+    "domain_semantic_closure": false,
+    "domain_execution_closure": false,
+    "terminal_credit_delta": 0
   }
 }
