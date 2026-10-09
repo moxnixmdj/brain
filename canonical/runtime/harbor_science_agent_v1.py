@@ -353,10 +353,17 @@ def _candidate_timeout(value: Any, *, default: int, maximum: int, field: str) ->
     return value
 
 
-def _candidate_rows(raw: Any, requirements: set[str]) -> list[dict[str, Any]]:
+def _candidate_rows(raw: Any, requirements: set[str]) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    """Partition untrusted candidates into executable rows and explicit rejections.
+
+    Brain's frozen requirement set is authority. Unknown coverage is rejected
+    locally: the candidate is never executed or promoted, while valid siblings
+    and later cycles remain available.
+    """
     if not isinstance(raw, list) or not raw or len(raw) > MAX_CANDIDATES:
         raise RuntimeError("SCIENCE_CANDIDATES_INVALID")
     rows: list[dict[str, Any]] = []
+    rejections: list[dict[str, Any]] = []
     ids: set[str] = set()
     for item in raw:
         if not isinstance(item, dict):
@@ -366,8 +373,17 @@ def _candidate_rows(raw: Any, requirements: set[str]) -> list[dict[str, Any]]:
             raise RuntimeError("SCIENCE_ACTION_ID_INVALID_OR_DUPLICATE")
         ids.add(aid)
         covers = _nonempty_strings(item.get("covers"), maximum=MAX_REQUIREMENTS, field="COVERS")
-        if not set(covers).issubset(requirements):
-            raise RuntimeError("SCIENCE_COVERAGE_OUTSIDE_CONTRACT")
+        unknown_covers = sorted(set(covers) - requirements)
+        if unknown_covers:
+            rejections.append({
+                "action_id": aid,
+                "reason": "SCIENCE_COVERAGE_OUTSIDE_CONTRACT",
+                "covers": covers,
+                "unknown_covers": unknown_covers,
+                "executed": False,
+                "coverage_promoted": False,
+            })
+            continue
         depends_on_raw = item.get("depends_on") or []
         if not isinstance(depends_on_raw, list) or len(depends_on_raw) > MAX_CANDIDATES:
             raise RuntimeError("SCIENCE_DEPENDS_ON_INVALID")
@@ -398,12 +414,38 @@ def _candidate_rows(raw: Any, requirements: set[str]) -> list[dict[str, Any]]:
             "command": command,
             "verify_command": verify_command,
         })
-    for row in rows:
-        if not set(row["depends_on"]).issubset(ids):
-            raise RuntimeError("SCIENCE_DEPENDS_ON_UNKNOWN_ACTION")
-    return rows
 
-def _extract_contract(raw: dict[str, Any], prior_requirements: list[str] | None, mandatory_requirements: list[str] | None = None) -> tuple[list[str], list[dict[str, Any]], str | None]:
+    # Remove dependency chains rooted in rejected/unknown actions to a fixed point.
+    while True:
+        accepted_ids = {row["action_id"] for row in rows}
+        invalid = [
+            row for row in rows
+            if not set(row["depends_on"]).issubset(accepted_ids)
+        ]
+        if not invalid:
+            break
+        invalid_ids = {row["action_id"] for row in invalid}
+        kept: list[dict[str, Any]] = []
+        for row in rows:
+            if row["action_id"] not in invalid_ids:
+                kept.append(row)
+                continue
+            rejections.append({
+                "action_id": row["action_id"],
+                "reason": "SCIENCE_DEPENDS_ON_REJECTED_OR_UNKNOWN_ACTION",
+                "covers": list(row["covers"]),
+                "unknown_dependencies": sorted(set(row["depends_on"]) - accepted_ids),
+                "executed": False,
+                "coverage_promoted": False,
+            })
+        rows = kept
+    return rows, rejections
+
+def _extract_contract(
+    raw: dict[str, Any],
+    prior_requirements: list[str] | None,
+    mandatory_requirements: list[str] | None = None,
+) -> tuple[list[str], list[dict[str, Any]], str | None, list[dict[str, Any]]]:
     mandatory = list(mandatory_requirements or [])
     if len(mandatory) > MAX_REQUIREMENTS:
         raise RuntimeError("SCIENCE_MANDATORY_REQUIREMENTS_OVERFLOW")
@@ -420,24 +462,25 @@ def _extract_contract(raw: dict[str, Any], prior_requirements: list[str] | None,
             raise RuntimeError("SCIENCE_REQUIREMENTS_WITH_MANDATORY_OVERFLOW")
     else:
         # Brain owns the requirement set after the first successful freeze.
-        # Later substrate material_requirements are non-authoritative metadata:
-        # they cannot add, remove, reorder, or fatal-abort Brain requirements.
-        # Candidate covers below remain validated strictly against this frozen set.
+        # Later substrate material_requirements are non-authoritative metadata.
         requirements = list(prior_requirements)
     summary = raw.get("finish_summary")
     if summary is not None:
         if not isinstance(summary, str) or not summary.strip():
             raise RuntimeError("SCIENCE_FINISH_SUMMARY_INVALID")
         summary = summary.strip()
-    candidates = []
+    candidates: list[dict[str, Any]] = []
+    candidate_rejections: list[dict[str, Any]] = []
     primary_candidates = raw.get("candidates")
     alias_candidates = raw.get("candidate_actions")
     if primary_candidates is not None and alias_candidates is not None and primary_candidates != alias_candidates:
         raise RuntimeError("SCIENCE_CANDIDATE_ALIAS_CONFLICT")
     candidate_rows = primary_candidates if primary_candidates is not None else alias_candidates
     if candidate_rows is not None:
-        candidates = _candidate_rows(candidate_rows, set(requirements))
-    return requirements, candidates, summary
+        candidates, candidate_rejections = _candidate_rows(
+            candidate_rows, set(requirements)
+        )
+    return requirements, candidates, summary, candidate_rejections
 
 async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycles: int = 8) -> dict[str, Any]:
     goal = str(goal or "").strip()
@@ -498,8 +541,18 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
         )
         if not isinstance(raw, dict):
             raise RuntimeError("SCIENCE_PLANNER_OBJECT_REQUIRED")
-        requirements, candidates, finish_summary = _extract_contract(raw, requirements, mandatory_requirement_ids)
+        requirements, candidates, finish_summary, candidate_rejections = _extract_contract(
+            raw, requirements, mandatory_requirement_ids
+        )
         unresolved_set = set(requirements) - resolved
+        for rejected_candidate in candidate_rejections:
+            rejected = {
+                "cycle": cycle,
+                "kind": "BRAIN_CANDIDATE_REJECTED",
+                **rejected_candidate,
+            }
+            trace.append(rejected)
+            observations.append(rejected)
 
         if finish_summary is not None:
             if unresolved_set:
