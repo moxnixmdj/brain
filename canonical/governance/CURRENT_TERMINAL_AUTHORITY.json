@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V36",
   "date": "2026-10-09",
-  "status": "ACTIVE_FAIL_CLOSED_REAL_MISSION_BOUND__STRICT_EXTERNALITY_RECONCILED__R3_ZERO_RESIDUAL_RECONCILED__OPUS_5_5_CHECKPOINT_TERMINAL_FALSE__CURRENT_R2_V57_AND_CODING_V3_PROJECTION_BOUND__COVERAGE_R1_R4_LIVE_BINDING_REPAIRED__CLAIM_SCOPED_COMPLETENESS_THEOREM_BOUND__ROOT_NAMESPACE_COLLISION_GUARDED",
+  "status": "ACTIVE_FAIL_CLOSED_REAL_MISSION_BOUND__STRICT_EXTERNALITY_RECONCILED__R3_ZERO_RESIDUAL_RECONCILED__OPUS_5_5_CHECKPOINT_TERMINAL_FALSE__CURRENT_R2_V57_AND_CODING_V3_PROJECTION_BOUND__COVERAGE_R1_R4_LIVE_BINDING_REPAIRED__CLAIM_SCOPED_COMPLETENESS_THEOREM_BOUND__ROOT_NAMESPACE_COLLISION_GUARDED__CLAIM_SCOPE_LIVE_BINDING_RESTORED",
   "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "authoritative_sources": {
     "universal_escape_resolver_v2_active_planning_overlay": {
@@ -1240,8 +1240,8 @@
     },
     "coverage_completeness_root_theorem_r1_r4": {
       "path": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_THEOREM_LIVE_BINDING_V1.json",
-      "git_blob_sha": "57d41d6dd8c0d7cf29eabb4bae07669a2d6086ea",
-      "note": "R1_R4_META_CONTROL_BOUND_TO_CURRENT_REAL_MISSION_CONTENT_ADDRESSED_ARTIFACTS_AND_EXPLICIT_ROOT_NAMESPACE_GUARD__ZERO_TERMINAL_CREDIT"
+      "git_blob_sha": "3284c5b7da2dc7da11869892ba1cc49fc1ac5419",
+      "note": "R1_R4_META_CONTROL_BOUND_TO_CURRENT_REAL_MISSION_CONTENT_ADDRESSED_ARTIFACTS_EXPLICIT_ROOT_NAMESPACE_GUARD_AND_CLAIM_SCOPE_PRECONDITION__ZERO_TERMINAL_CREDIT"
     },
     "cursorbench_route_b_current_evidence_nonentailment_20261009_v1": {
       "path": "canonical/governance/CURSORBENCH_ROUTE_B_CURRENT_EVIDENCE_NONENTAILMENT_20261009_V1.json",
@@ -2771,7 +2771,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 102,
+  "pointer_revision": 103,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
@@ -3894,5 +3894,21 @@
     "route_b_closed_claimed": false,
     "acceptance_credit_delta": 0,
     "terminal_credit_delta": 0
+  },
+  "coverage_claim_scope_live_binding_repair_20261009_v1": {
+    "status": "RECONCILED__CLAIM_SCOPE_IS_LOAD_BEARING_IN_R4_LIVE_VALIDATOR__ZERO_CREDIT",
+    "claim_scope_path": "canonical/governance/COVERAGE_COMPLETENESS_CLAIM_SCOPE_V1.json",
+    "claim_scope_git_blob_sha": "0c61f253a1013b564e7a254ba9a3a230f667d6ca",
+    "live_binding_path": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_THEOREM_LIVE_BINDING_V1.json",
+    "live_binding_git_blob_sha": "3284c5b7da2dc7da11869892ba1cc49fc1ac5419",
+    "validator_path": "canonical/runtime/root_theorem_live_binding_v1.py",
+    "validator_git_blob_sha": "ca2cc80f3f78de699313b805e357eb5c1cbb15f2",
+    "tests_path": "canonical/tests/test_root_theorem_live_binding_v1.py",
+    "tests_git_blob_sha": "86d43cb40b1c6ce0d75114954a3f2247537ef612",
+    "root_truth_delta": 0,
+    "acceptance_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0,
+    "global_open_ended_mission_completion_derivable": false
   }
 }
