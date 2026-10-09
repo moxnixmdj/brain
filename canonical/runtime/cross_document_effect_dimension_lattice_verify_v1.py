@@ -7,6 +7,10 @@ import json
 from typing import Any, Mapping, Sequence
 
 from canonical.runtime.source_aligned_semantic_proof_v9 import verify_proof
+from canonical.runtime.certified_effect_target_scope_v1 import parse_effect_target_scope
+from canonical.runtime.certified_effect_id_inventory_v1 import parse_effect_id_inventories
+from canonical.runtime.certified_document_effect_relation_v1 import parse_effect_relations
+from canonical.runtime.certified_document_effect_dimension_v1 import parse_effect_dimensions
 from canonical.runtime import cross_document_effect_calculus_v1 as calculus
 from canonical.runtime import cross_document_effect_hypothesis_worldset_v1 as worldset
 from canonical.runtime import cross_document_effect_hypothesis_worldset_verify_v1 as worldset_verify
@@ -43,6 +47,139 @@ def _locator(source_id:str,eid:str,state:Mapping[str,Any])->str:
     return "verify-proofset:"+source_id+":"+eid+":"+digest
 
 
+def _independent_missing_claims(
+    source_text:str,
+    source_id:str,
+    existing_claims:Sequence[Any],
+)->list[dict[str,Any]]:
+    if len(existing_claims)>256:
+        raise ValueError("EXISTING_CLAIM_COUNT_EXCEEDS_BOUND")
+    existing_ids=set()
+    scope_present=False
+    inventory_targets=set()
+    relation_ids=set()
+    dimension_slots=set()
+    dimension_effect_ids=set()
+    block_inventory=False
+    block_relation=False
+    block_dimensions=False
+    block_relations_from_dimensions=False
+
+    for row in existing_claims:
+        if not isinstance(row,Mapping):
+            continue
+        cid=row.get("claim_id")
+        if isinstance(cid,str) and cid:
+            existing_ids.add(cid)
+        kind=row.get("kind")
+        if kind=="CERTIFIED_EFFECT_TARGET_SCOPE":
+            scope_present=True
+        elif kind=="CERTIFIED_EFFECT_ID_INVENTORY":
+            target=row.get("target_id")
+            if isinstance(target,str) and target.strip():
+                inventory_targets.add(target.strip())
+            else:
+                block_inventory=True
+        elif kind=="CERTIFIED_DOCUMENT_EFFECT_RELATION":
+            effect=row.get("effect")
+            eid=effect.get("effect_id") if isinstance(effect,Mapping) else None
+            if isinstance(eid,str) and eid.strip():
+                relation_ids.add(eid.strip())
+            else:
+                block_relation=True
+                block_dimensions=True
+        elif kind=="CERTIFIED_DOCUMENT_EFFECT_DIMENSION":
+            eid=row.get("effect_id"); dim=row.get("dimension")
+            if (
+                isinstance(eid,str) and eid.strip()
+                and isinstance(dim,str) and dim in DIMS
+            ):
+                eid=eid.strip()
+                dimension_slots.add((eid,dim))
+                dimension_effect_ids.add(eid)
+            else:
+                block_dimensions=True
+                block_relations_from_dimensions=True
+
+    out=[]
+    counter=0
+    def fresh(kind:str)->str:
+        nonlocal counter
+        while True:
+            counter+=1
+            cid=f"VERIFY_V14_AUTOFILL::{kind}::{counter}"
+            if cid not in existing_ids:
+                existing_ids.add(cid)
+                return cid
+
+    scope=parse_effect_target_scope(source_text,source=source_id)
+    if not scope_present and scope.get("status")=="PARSED":
+        out.append({
+            "claim_id":fresh("scope"),
+            "kind":"CERTIFIED_EFFECT_TARGET_SCOPE",
+            "target_ids":list(scope["parse"]["target_ids"]),
+        })
+
+    inventories=parse_effect_id_inventories(source_text,source=source_id)
+    if not block_inventory and inventories.get("status")=="PARSED":
+        for parsed in inventories.get("inventories") or []:
+            target=str(parsed.get("target_id") or "")
+            if target and target not in inventory_targets:
+                out.append({
+                    "claim_id":fresh("inventory"),
+                    "kind":"CERTIFIED_EFFECT_ID_INVENTORY",
+                    "target_id":target,
+                    "effect_ids":list(parsed.get("effect_ids") or []),
+                })
+
+    relations=parse_effect_relations(source_text,source=source_id)
+    if (
+        not block_relation
+        and not block_relations_from_dimensions
+        and relations.get("status")=="PARSED"
+    ):
+        for parsed in relations.get("relations") or []:
+            effect=parsed.get("effect")
+            if not isinstance(effect,Mapping):
+                continue
+            eid=str(effect.get("effect_id") or "")
+            if (
+                not eid or eid in relation_ids
+                or eid in dimension_effect_ids
+            ):
+                continue
+            out.append({
+                "claim_id":fresh("relation"),
+                "kind":"CERTIFIED_DOCUMENT_EFFECT_RELATION",
+                "effect":{
+                    k:v for k,v in effect.items() if k!="source_locator"
+                },
+            })
+
+    dimensions=parse_effect_dimensions(source_text,source=source_id)
+    if not block_dimensions and dimensions.get("status")=="PARSED":
+        for parsed in dimensions.get("dimensions") or []:
+            eid=str(parsed.get("effect_id") or "")
+            dim=str(parsed.get("dimension") or "")
+            if (
+                not eid or dim not in DIMS
+                or eid in relation_ids
+                or (eid,dim) in dimension_slots
+            ):
+                continue
+            out.append({
+                "claim_id":fresh("dimension"),
+                "kind":"CERTIFIED_DOCUMENT_EFFECT_DIMENSION",
+                "effect_id":eid,
+                "dimension":dim,
+                "value":deepcopy(parsed.get("value")),
+            })
+
+    if len(existing_claims)+len(out)>256:
+        raise ValueError("COMBINED_CLAIM_COUNT_EXCEEDS_BOUND")
+    return out
+
+
 def _recompute(problem:Mapping[str,Any])->dict[str,Any]:
     if not isinstance(problem,Mapping) or problem.get("schema")!=PROBLEM_SCHEMA:
         raise ValueError("PROBLEM_SCHEMA_INVALID")
@@ -74,7 +211,11 @@ def _recompute(problem:Mapping[str,Any])->dict[str,Any]:
         if not isinstance(claims,Sequence) or isinstance(claims,(str,bytes)):
             raise ValueError("CLAIMS_INVALID")
 
-        proof=verify_proof(text,source_id=sid,claims=claims)
+        synthesized=_independent_missing_claims(text,sid,claims)
+        proof=verify_proof(
+            text,source_id=sid,
+            claims=list(claims)+synthesized,
+        )
         if proof.get("status")=="FAIL_CLOSED": raise ValueError("SOURCE_PROOF_FAIL_CLOSED")
         accepted=[x for x in proof.get("accepted_claims") or [] if isinstance(x,Mapping)]
 
