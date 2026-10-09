@@ -1206,6 +1206,18 @@
         "git_blob_sha": "d9b1b08ebc882a8d9c21a062dc07e027cb530679"
       },
       "note": "CURRENT_TYPED_SPECIALIST_COVERS_EXACTLY_ONE_OF_THIRTY_TWO_UNCONSTRAINED_FIVE_ATOM_VALUATIONS__BRANCH_LOCAL_ONLY__ZERO_CREDIT"
+    },
+    "coding_v5_soundness_liveness_separation_20261009_v1": {
+      "path": "canonical/governance/CODING_V5_TERMINAL_SOUNDNESS_VS_CONSTRUCTIVE_ADEQUACY_SEPARATION_20261009_V1.json",
+      "git_blob_sha": "67d4a1878cbbdf4619dea457fd78c56e32c0fdf1",
+      "independent_verification": {
+        "path": "canonical/verification/CODING_V5_SOUNDNESS_LIVENESS_WOLFRAM_VERIFY_20261009_V1.json",
+        "git_blob_sha": "ebf5d34af9f4b059a46d3ca0b772c4298bf6e063"
+      }
+    },
+    "coding_v5_wal_singleton_finite_cell_reduction_20261009_v1": {
+      "path": "canonical/governance/CODING_V5_WAL_SINGLETON_FINITE_CELL_REDUCTION_20261009_V1.json",
+      "git_blob_sha": "11c8997961bef45c415d16e6d1a0e47d5fa8e21d"
     }
   },
   "live_truth": {
@@ -1768,7 +1780,7 @@
     "cursorbench_absence_of_bound_v5_failure_is_adequacy_proof": false,
     "cursorbench_one_v5_pass_is_scope_complete_adequacy_proof": false,
     "cursorbench_selector_work_authorized_now": false,
-    "cursorbench_next_proof_object": "FIRST_AUTHENTICATE_A_BROADER_CODING_POLICY_ADEQUACY_REGION_OR_SOURCE_PROVE_CONSTRAINTS_ELIMINATING_CURRENTLY_UNCOVERED_TYPED_MODELS__THEN_RUN_P3_COMMON_POLICY_CEGAR__V5_COMMON_POLICY_CERTIFICATE_REMAINS_HIGHEST_LEVERAGE_BROADER_CANDIDATE",
+    "cursorbench_next_proof_object": "EITHER_BIND_A_TARGET_RELEVANT_COMPLETE_FINITE_V5_CELL_WITH_ALL_CERTIFICATE_RECEIPTS__OR_AUTHENTICATE_A_BROADER_CODING_POLICY_WITH_A_CONSTRUCTIVE_COMPLETION_THEOREM__DO_NOT_USE_TERMINAL_SOUNDNESS_AS_LIVENESS_PROOF",
     "r2_sec_standard_xbrl_companyconcept_source_native_semantics_bound": true,
     "r2_sec_standard_xbrl_source_native_policy_adequacy_claimed": false,
     "cursorbench_advanced_coding_canonical_residual_count": 4,
@@ -1951,7 +1963,15 @@
     "r2_regcap_candidate_ambiguity_minimum_information_control_bound": true,
     "r2_regcap_global_loss_cushion_identity_closed": false,
     "r2_regcap_open_world_ontology_closed": false,
-    "r2_regcap_missing_context_is_external_impossibility": false
+    "r2_regcap_missing_context_is_external_impossibility": false,
+    "coding_v5_terminal_soundness_implies_constructive_all_members_adequacy": false,
+    "coding_v5_completion_contract_alone_sufficient_for_formal_all_members_certificate": false,
+    "coding_v5_formal_all_members_additional_constructive_liveness_premise_required": true,
+    "coding_v5_wal_singleton_preexecution_cell_defined": true,
+    "coding_v5_wal_singleton_cell_membership_complete": true,
+    "coding_v5_wal_singleton_exact_v5_success_bound": true,
+    "coding_v5_wal_singleton_target_relevance_to_cursorbench_proved": false,
+    "coding_v5_wal_singleton_target_relevance_to_frontiercode_proved": false
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -2653,7 +2673,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 93,
+  "pointer_revision": 94,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
@@ -3621,6 +3641,14 @@
     "finance_semantic_tail_closed": false,
     "global_phrase_identity_claimed": false,
     "open_world_ontology_complete": false,
+    "terminal_credit_delta": 0
+  },
+  "coding_v5_soundness_liveness_singleton_reconciliation_20261009_v1": {
+    "separation_blob_sha": "67d4a1878cbbdf4619dea457fd78c56e32c0fdf1",
+    "separation_verification_blob_sha": "ebf5d34af9f4b059a46d3ca0b772c4298bf6e063",
+    "wal_singleton_reduction_blob_sha": "11c8997961bef45c415d16e6d1a0e47d5fa8e21d",
+    "result": "FORMAL_GATE_ONLY_ROUTE_INVALID__WAL_SINGLETON_COMPLETENESS_RECOVERED__TARGET_RELEVANCE_UNPROVED",
+    "acceptance_credit_delta": 0,
     "terminal_credit_delta": 0
   }
 }
