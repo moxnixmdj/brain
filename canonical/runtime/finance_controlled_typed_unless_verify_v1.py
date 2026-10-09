@@ -132,8 +132,8 @@ def verify(case: Mapping[str, Any], result: Mapping[str, Any]) -> dict[str, Any]
                 # The producer's scope id is checked indirectly by its atom id.  Build
                 # the same public scope-id formula without importing the producer parser.
                 operator_id_material=(
-                    f"{source_id.strip()}\\0{m.start()}\\0{m.end()}\\0"
-                    f"CONDITIONAL_UNLESS\\0{text[m.start():m.end()].lower()}"
+                    f"{source_id.strip()}\0{m.start()}\0{m.end()}\0"
+                    f"CONDITIONAL_UNLESS\0{text[m.start():m.end()].lower()}"
                 )
                 operator_id="OP-" + sha256(operator_id_material.encode("utf-8")).hexdigest()[:20]
                 scope_raw=f"{source_id.strip()}\0UNLESS\0{operator_id}\0{(left,right)!r}".encode("utf-8")
