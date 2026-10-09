@@ -1,0 +1,75 @@
+{
+  "schema": "PROJECT_BRAIN_D_FINALITY_CERTIFICATE_V1",
+  "status": "VERIFIED_D_FINAL",
+  "capability_id": "bound:decision.synthesis.verify.stdlib",
+  "capability_contract_sha256": "bf45f7e92d29a32fee4b2c40481a593e1c9f3b3e5b04f3da529fac5d0c5ec2c6",
+  "policy_sha256": "a39902b2a0c49b2dde625e513e87bb2400e7bd3306017686a9ee8df8ab61a359",
+  "registry_snapshot_root": "8c2ac9bdfd0eacfa11b3af879ff027f50ed54078448ab11cadf0ab6fcce2ed38",
+  "state_snapshot_root": "185d8031046cbc672a0baa6ee269e3831ae917b180d718524d68962746945e3b",
+  "materials": [
+    {
+      "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+      "git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85"
+    },
+    {
+      "path": "canonical/runtime/bound_capabilities/evidence_decision_verify.py",
+      "git_blob_sha": "63cf325320c7b91bf48ea2f2769c999c5a090929"
+    },
+    {
+      "path": "canonical/runtime/bound_capability_execution_verifier_v1.py",
+      "git_blob_sha": "2bc99699ec721e4b0ef239340e0c220370811e6f"
+    },
+    {
+      "path": "canonical/runtime/capability_execution_trace_capsule_v1.py",
+      "git_blob_sha": "75faca7736d75f7e5385952ecb16240731bcdb7e"
+    },
+    {
+      "path": "canonical/runtime/capability_planner.py",
+      "git_blob_sha": "629766f8a1194fd298e0809b64a5e9c5a39fa3ea"
+    },
+    {
+      "path": "canonical/runtime/composition_state_capsule_v1.py",
+      "git_blob_sha": "6337298b4804307315308689fbeb65692c67980d"
+    },
+    {
+      "path": "canonical/runtime/d_final_bound_stdlib_provider_v1.py",
+      "git_blob_sha": "e2d0992f84da629358ae1ee5406c23d5f21c26c2"
+    },
+    {
+      "path": "canonical/runtime/d_final_live_bound_bridge_v1.py",
+      "git_blob_sha": "025a544e55219617a9ff90f0cb81554425614762"
+    },
+    {
+      "path": "canonical/runtime/d_final_pure_stdlib_confined_runner_v1.py",
+      "git_blob_sha": "df6755ae794bf8607a0b8c21db57dbd7fd8721b4"
+    },
+    {
+      "path": "canonical/runtime/d_finality_execution_epoch_v1.py",
+      "git_blob_sha": "60cbc536215571fbd7e41b5ce28239ce370120c3"
+    },
+    {
+      "path": "canonical/runtime/d_finality_live_registry_v1.py",
+      "git_blob_sha": "490cd295e1ad4385b3f57ae5a00d6acf184e9810"
+    },
+    {
+      "path": "canonical/runtime/live_capability_invoker_v1.py",
+      "git_blob_sha": "b6ef19e965ca7630d3737ecefd14cdea56159fda"
+    },
+    {
+      "path": "canonical/runtime/zero_ambient_namespace_launcher_v1.py",
+      "git_blob_sha": "6e687527e9c4da82fb5d974a729aaa263ee73ea8"
+    }
+  ],
+  "material_closure_root": "907d4d2dae7e2f9f7aa3663421c2d621860b9c673e290213cf1f5ebd0cb7588d",
+  "allowed_capability_ids": [
+    "bound:decision.synthesis.verify.stdlib"
+  ],
+  "allowed_knowledge_channels": [],
+  "allowed_effect_channels": [],
+  "donor_authority_zero": true,
+  "fresh_replay_pass": true,
+  "independent_replay_pass": true,
+  "knowledge_capability_nonsmuggling_pass": true,
+  "undeclared_dependency_count": 0,
+  "certificate_sha256": "32593f39385c171c75c86c8d28be73b1648dd24b082d1bbed8dca81c8d0f2752"
+}
