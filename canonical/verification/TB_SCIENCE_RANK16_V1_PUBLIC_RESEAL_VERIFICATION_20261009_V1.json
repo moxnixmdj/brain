@@ -1,0 +1,134 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK16_V1_PUBLIC_RESEAL_VERIFICATION_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__PUBLIC_RANK16_V1_RESEAL_MERGED__AGENT_V9__V6_DURABLE_RUNTIME__THREE_ZERO_EXPOSURE_GATES_PASS__ACTIVATION_ABSENT__TASK_UNREAD_UNSTARTED__ZERO_CREDIT",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "brain_basis": {
+    "authority_path": "canonical/governance/TB_SCIENCE_RANK16_ONE_SLOT_EXECUTION_AUTHORITY_20261009_V1.json",
+    "authority_git_blob_sha": "20ebbe8ed593a7ead08b27a1c57864ede429cb46",
+    "ledger_v30_path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261009_V30.json",
+    "ledger_v30_git_blob_sha": "7e46f2a5c0c418a4d3be4360c8a85b7be7611abb",
+    "agent_v9_qualification_path": "canonical/verification/TB_SCIENCE_RANK16_AGENT_V9_ZERO_EXPOSURE_QUALIFICATION_20261009_V1.json",
+    "agent_v9_qualification_git_blob_sha": "999f4adc79bba0e4477126ccb34139f9292c46ce"
+  },
+  "public_reseal": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "base_branch": "terminal-execution-v1",
+    "reseal_pr": 2523,
+    "reseal_merge_commit": "eba00b63ba9ee9a5081ed43fb5daa8b51a5a2ea2",
+    "verified_pr_head": "edc303af1b34cd8fa42ef1f53d9ba4818d6440ff",
+    "slot_id": "terminal-bench-science/sparse-network-assimilation::trial-0",
+    "task_digest": "sha256:52ba7089dc32952df08c478af76b732fa82468c125431388adbf9798d869826f",
+    "activation_path": "capsules/tb_science_rank16_20261009_v1/ACTIVATE_RANK16_V1_PR.json",
+    "activation_present_on_merged_base": false,
+    "files": {
+      "current_surface": {
+        "path": "execution_guard/CURRENT_TERMINAL_EXECUTION_SURFACE_V1.json",
+        "git_blob_sha": "df4a7158e717ee64a4b42c70d39ff19423d545dc"
+      },
+      "behavior": {
+        "path": "execution_guard/TB_SCIENCE_RANK16_EXECUTION_BEHAVIOR_V1.json",
+        "git_blob_sha": "9f0ba7c8c4cb836bf4e11e683015b3563d4aeaff"
+      },
+      "public_authority": {
+        "path": "capsules/tb_science_rank16_20261009_v1/RANK16_PUBLIC_AUTHORITY_BINDING_V1.json",
+        "git_blob_sha": "edfc9c1f9dcfd7fc94a2808af08e70b7a62a1840"
+      },
+      "public_ledger": {
+        "path": "capsules/tb_science_rank16_20261009_v1/RANK16_PUBLIC_LEDGER_BINDING_V30.json",
+        "git_blob_sha": "d682f56b4f225740cee952dca875bd0c9d014e42"
+      },
+      "epoch": {
+        "path": "capsules/tb_science_rank16_20261009_v1/RANK16_EPOCH_V6.json",
+        "git_blob_sha": "2ddc3e422570306db3fef3c15df36f5a7d411443"
+      },
+      "execution_claim": {
+        "path": "capsules/tb_science_rank16_20261009_v1/RANK16_EXECUTION_CLAIM_V6.json",
+        "git_blob_sha": "295ff199c4f5896a1c5c05f4afa7e525f366b100"
+      },
+      "preflight": {
+        "path": "capsules/tb_science_rank16_20261009_v1/rank16_execution_preflight_v6.py",
+        "git_blob_sha": "9e96db4dc49ce6d52fcb05c08047e4c5c5febe2c"
+      },
+      "execution_workflow": {
+        "path": ".github/workflows/execute-tb-science-rank16-20261009-v1.yml",
+        "git_blob_sha": "571e3641f89d35d12bd5b9895e4e6b52a2506b7b"
+      },
+      "reseal_verifier": {
+        "path": ".github/workflows/verify-tb-science-rank16-reseal-v1.yml",
+        "git_blob_sha": "3995d2d8fd103e8b0ab190b09291f03352d02832"
+      },
+      "current_surface_ratchet": {
+        "path": ".github/workflows/verify-tb-science-execution-ratchet-v1.yml",
+        "git_blob_sha": "dc612661405b8f7adc5a9489d15462e7d398e4a6"
+      },
+      "rank15_historical_quarantine_ratchet": {
+        "path": ".github/workflows/verify-rank15-v6-robust-reseal.yml",
+        "git_blob_sha": "81b27f9ca8feec2b8b389a02172a825953413b68"
+      },
+      "agent_v9": {
+        "path": "capsules/tb_science_rank15_20261009_v1/canonical/runtime/harbor_science_agent_v9.py",
+        "git_blob_sha": "c3b9bbc93e070b9974598636ebbb2fd3156581cb"
+      }
+    }
+  },
+  "verification_runs": [
+    {
+      "id": 37947489639,
+      "name": "Verify TB-Science Rank16 V1 zero-exposure reseal",
+      "conclusion": "success",
+      "head_sha": "edc303af1b34cd8fa42ef1f53d9ba4818d6440ff"
+    },
+    {
+      "id": 37947490473,
+      "name": "Verify TB-Science execution ratchet v1",
+      "conclusion": "success",
+      "head_sha": "edc303af1b34cd8fa42ef1f53d9ba4818d6440ff"
+    },
+    {
+      "id": 37947490102,
+      "name": "Verify Rank15 V6 final robust reseal",
+      "conclusion": "success",
+      "head_sha": "edc303af1b34cd8fa42ef1f53d9ba4818d6440ff"
+    }
+  ],
+  "proved": [
+    "PUBLIC_RANK16_SURFACE_BINDS_EXACT_BRAIN_RANK16_V1_AUTHORITY_AND_BRAIN_V30_LEDGER",
+    "PUBLIC_RANK16_SURFACE_BINDS_EXACT_QUALIFIED_AGENT_V9_BYTES_AND_FORBIDS_AGENT_V8",
+    "FRESH_RANK16_SLOT_DIGEST_EPOCH_EXECUTION_CLAIM_PREFLIGHT_AND_WORKFLOW_ARE_CONTENT_ADDRESSED",
+    "V6_DURABLE_START_CAS_AGENT_READY_CAUSAL_JOURNAL_AND_UNCERTAIN_EFFECT_NO_REPLAY_INVARIANTS_ARE_PRESERVED",
+    "CANDIDATE_LOCAL_UNKNOWN_COVERAGE_REJECTION_NO_COERCION_VALID_SIBLING_CONTINUITY_AND_REJECTED_DEPENDENCY_CLOSURE_ARE_BOUND",
+    "CURRENT_EXECUTION_RATCHET_IS_PROOF_CARRYING_AND_NO_LONGER_VERSION_LOCKED_TO_RANK15",
+    "RANK15_IS_PERMANENTLY_QUARANTINED_FINAL_ZERO_WITH_NO_REPLAY_OR_REPLACEMENT",
+    "RANK16_ACTIVATION_FILE_IS_ABSENT_ON_MERGED_PUBLIC_BASE",
+    "RANK16_TASK_WAS_NOT_READ_OR_STARTED_DURING_RESEAL",
+    "ZERO_BENCHMARK_TRIALS_WERE_CONSUMED_BY_RESEAL"
+  ],
+  "state": {
+    "public_rank16_surface_resealed": true,
+    "public_rank16_activation_armed": false,
+    "task_read": false,
+    "task_started": false,
+    "benchmark_trials_consumed": 0,
+    "task_read_authority": "CONDITIONAL_ONLY_AFTER_EXACT_ONE_FILE_ACTIVATION_PR_AND_LIVE_CARRIER_QUALIFICATION",
+    "durable_start_required": true,
+    "post_start_result_irreversible": true
+  },
+  "hard_nonclaims": [
+    "NO_RANK16_TASK_READ",
+    "NO_RANK16_TASK_START",
+    "NO_RANK16_RESULT",
+    "NO_RANK16_SUCCESS_CREDIT",
+    "NO_RANK15_RERUN_REPLAY_OR_REPLACEMENT_AUTHORITY",
+    "NO_AGGREGATE_TB_SCIENCE_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_trials_consumed_delta": 0,
+    "consumed_successes_delta": 0,
+    "consumed_final_failures_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
