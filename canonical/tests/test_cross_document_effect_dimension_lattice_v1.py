@@ -267,5 +267,45 @@ class CrossDocumentEffectDimensionLatticeV1Tests(unittest.TestCase):
         self.assertTrue(lv.verify(_problem(a,b),out)["verified"])
 
 
+    def test_source_explicit_autofill_closes_without_caller_claims(self):
+        source_doc=_doc(
+            "A",inventory=["A.t"],
+            dimensions={"A.t":_effect_dims()},
+        )
+        source_doc["claims"]=[]
+        out=l.evaluate(_problem(source_doc))
+        self.assertTrue(out["pass"],out)
+        self.assertEqual(out["effective_value"],"10")
+        self.assertGreater(
+            out["lattice_documents"][0]["synthesized_claim_count"],0
+        )
+        self.assertTrue(lv.verify(_problem(source_doc),out)["verified"])
+
+    def test_wrong_caller_dimension_blocks_autofill_and_leaves_top(self):
+        source_doc=_doc(
+            "A",inventory=["A.t"],
+            dimensions={"A.t":_effect_dims()},
+        )
+        source_doc["claims"]=[{
+            "claim_id":"caller.bad.value",
+            "kind":"CERTIFIED_DOCUMENT_EFFECT_DIMENSION",
+            "effect_id":"A.t",
+            "dimension":"value",
+            "value":"99",
+        }]
+        out=l.evaluate(_problem(source_doc))
+        self.assertFalse(out["pass"],out)
+        self.assertEqual(
+            out["status"],
+            "OPEN__QUERY_RELEVANT_EFFECT_DIMENSION_TOP_REMAINS",
+        )
+        value_atoms=[
+            x for x in out["open_lattice_atoms"]
+            if x.get("effect_id")=="A.t" and x.get("dimension")=="value"
+        ]
+        self.assertEqual(len(value_atoms),1)
+        self.assertTrue(lv.verify(_problem(source_doc),out)["verified"])
+
+
 if __name__=="__main__":
     unittest.main()
