@@ -10,7 +10,7 @@ from canonical.runtime import r3_root1_adapter_gap_witness_v1 as witness
 
 
 class R3Root1AdapterGapDriverV1Tests(unittest.TestCase):
-    def test_proof_bearing_owned_adapter_miss_surfaces_constructive_root1_gap(self):
+    def test_partial_proof_owned_adapter_miss_routes_to_new_evidence(self):
         with tempfile.TemporaryDirectory() as td:
             state_path = Path(td) / "state.json"
             observed = learning.record_success_observation(
@@ -50,25 +50,17 @@ class R3Root1AdapterGapDriverV1Tests(unittest.TestCase):
             )
             self.assertEqual(
                 blocker["blocker"],
-                "ROOT1_CONSTRUCTIVE_R3_VERIFICATION_FRONTIER_GAP__NO_BOUND_ACQUISITION_ROUTE",
+                "R3_VERIFICATION_FRONTIER_NEW_DISTINGUISHING_EVIDENCE_REQUIRED",
             )
-            self.assertTrue(blocker["root1_positive_gap_established"])
-            gap = blocker["root1_gap_witness"]
-            self.assertTrue(gap["pass"], gap)
+            self.assertTrue(blocker["adapter_acquisition_provider_skipped"])
+            reduction = blocker["repair_class_reduction"]
+            self.assertTrue(reduction["pass"], reduction)
             self.assertEqual(
-                gap["required_primitive"],
-                witness.REQUIRED_PRIMITIVE,
+                reduction["admissible_repair_classes"],
+                ["NEW_DISTINGUISHING_EVIDENCE"],
             )
             self.assertTrue(
-                gap["root1_transaction"]["gate"]["root1_active"]
-            )
-            self.assertEqual(
-                gap["root1_transaction"]["minimum_delta"]["missing_primitives"],
-                [witness.REQUIRED_PRIMITIVE],
-            )
-            self.assertEqual(
-                gap["root1_transaction"]["route_cover"]["status"],
-                "NO_ADMISSIBLE_ROUTE_COVER",
+                reduction["must_acquire_new_distinguishing_evidence"]
             )
 
             state = learning.load_state(state_path)
@@ -209,9 +201,13 @@ class R3Root1AdapterGapDriverV1Tests(unittest.TestCase):
             )
             self.assertEqual(
                 blocker["blocker"],
-                "ROOT1_CONSTRUCTIVE_R3_VERIFICATION_FRONTIER_GAP__NO_BOUND_ACQUISITION_ROUTE",
+                "R3_VERIFICATION_FRONTIER_NEW_DISTINGUISHING_EVIDENCE_REQUIRED",
             )
-            self.assertTrue(blocker["root1_positive_gap_established"])
+            self.assertTrue(blocker["adapter_acquisition_provider_skipped"])
+            self.assertEqual(
+                blocker["repair_class_reduction"]["admissible_repair_classes"],
+                ["NEW_DISTINGUISHING_EVIDENCE"],
+            )
 
 
 if __name__ == "__main__":
