@@ -3,6 +3,8 @@ from __future__ import annotations
 import hashlib
 import json
 from pathlib import Path
+import shutil
+from tempfile import TemporaryDirectory
 import unittest
 
 from canonical.runtime import current_one_shot_projection_v1 as projection
@@ -52,18 +54,40 @@ class CurrentOneShotPointerCoherenceV1Tests(unittest.TestCase):
             terminal["pointer_revision"],
         )
 
-    def test_static_projection_drift_is_observable_not_authoritative(self):
+    def test_future_snapshot_drift_is_observable_not_authoritative(self):
         pointer = json.loads(POINTER.read_text(encoding="utf-8"))
-        out = projection.evaluate(ROOT)
-        self.assertTrue(out["pass"], out)
         self.assertFalse(
             pointer["authority"]["static_projection_snapshots_authoritative"]
         )
+
+        with TemporaryDirectory() as td:
+            root = Path(td)
+            for rel in projection.PATHS.values():
+                src = ROOT / rel
+                dst = root / rel
+                dst.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copyfile(src, dst)
+
+            terminal_path = root / projection.PATHS["terminal"]
+            terminal = json.loads(terminal_path.read_text(encoding="utf-8"))
+            terminal["pointer_revision"] = int(terminal["pointer_revision"]) + 1
+            terminal["status"] = str(terminal["status"]) + "__SIMULATED_NEXT_REVISION"
+            terminal_path.write_text(
+                json.dumps(terminal, sort_keys=True) + "\n",
+                encoding="utf-8",
+            )
+
+            out = projection.evaluate(root)
+
+        self.assertTrue(out["pass"], out)
         self.assertFalse(out["snapshot_drift"]["snapshot_is_authoritative"])
         self.assertTrue(
-            out["snapshot_drift"]["r2_snapshot_differs_from_current"]
-            or out["snapshot_drift"]["terminal_snapshot_differs_from_current"],
+            out["snapshot_drift"]["terminal_snapshot_differs_from_current"],
             out,
+        )
+        self.assertEqual(
+            out["current_terminal_authority"]["pointer_revision"],
+            terminal["pointer_revision"],
         )
 
     def test_latest_v1_truth_repair_binds_current_v1_bytes(self):
