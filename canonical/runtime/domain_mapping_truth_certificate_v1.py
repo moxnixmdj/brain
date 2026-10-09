@@ -14,6 +14,12 @@ import json
 from typing import Any, Mapping, Sequence
 
 from canonical.runtime.proof_carrying_domain_mapping_v1 import resolve as resolve_mapping
+from canonical.runtime.source_aligned_regcap_context_proof_v1 import (
+    CCOB_KIND,
+    CCYB_KIND,
+    TLAC_KIND,
+    verify_proof as verify_regcap_context_proof,
+)
 
 SCHEMA = "PROJECT_BRAIN_DOMAIN_MAPPING_TRUTH_CERTIFICATE_V1"
 TRUTH_KIND = "DOMAIN_MAPPING_RELATION"
@@ -79,14 +85,87 @@ def checked_predicate_id(
     return "domain-mapping-sha256:" + sha256(material).hexdigest()
 
 
+def _contextual_refinement(raw_span: str, source_id: str) -> dict[str, Any]:
+    """Harvest bounded source-native context facts without minting concept identity."""
+    try:
+        claims = [
+            {
+                "claim_id": "auto:ccob-structure",
+                "kind": CCOB_KIND,
+                "start": 0,
+                "end": len(raw_span),
+            },
+            {
+                "claim_id": "auto:ccyb-release",
+                "kind": CCYB_KIND,
+                "start": 0,
+                "end": len(raw_span),
+            },
+            {
+                "claim_id": "auto:tlac-resolution",
+                "kind": TLAC_KIND,
+                "start": 0,
+                "end": len(raw_span),
+            },
+        ]
+        result = verify_regcap_context_proof(
+            raw_span,
+            source_id=source_id,
+            claims=claims,
+        )
+        if not isinstance(result, Mapping):
+            raise ValueError("CONTEXT_PROOF_RESULT_NOT_MAPPING")
+        atom_ids = sorted({
+            str(row.get("id"))
+            for row in result.get("proved_constraints", [])
+            if isinstance(row, Mapping) and str(row.get("id") or "").strip()
+        })
+        accepted_kinds = sorted({
+            str(row.get("kind"))
+            for row in result.get("accepted_claims", [])
+            if isinstance(row, Mapping) and str(row.get("kind") or "").strip()
+        })
+        return {
+            "status": (
+                "PASS__AUTHENTICATED_REGCAP_CONTEXT_FACTS"
+                if atom_ids and result.get("semantic_truth_authority") is True
+                else "OPEN__NO_BOUND_REGCAP_CONTEXT_FACTS"
+            ),
+            "source_proof_status": result.get("status"),
+            "proved_atom_ids": atom_ids,
+            "accepted_context_kinds": accepted_kinds,
+            "semantic_truth_authority": bool(
+                atom_ids and result.get("semantic_truth_authority") is True
+            ),
+            "concept_identity_claimed": False,
+            "reverse_property_to_concept_classification_authorized": False,
+            "candidate_universe_complete": False,
+            "terminal_authority": False,
+        }
+    except Exception as exc:
+        return {
+            "status": "OPEN__CONTEXT_REFINEMENT_UNAVAILABLE",
+            "reason": type(exc).__name__ + ":" + str(exc),
+            "proved_atom_ids": [],
+            "accepted_context_kinds": [],
+            "semantic_truth_authority": False,
+            "concept_identity_claimed": False,
+            "reverse_property_to_concept_classification_authorized": False,
+            "candidate_universe_complete": False,
+            "terminal_authority": False,
+        }
+
+
 def _unknown(
     *,
     checked_id: str,
     requested_id: str,
     reason: str,
     mapping_result: Mapping[str, Any] | None = None,
+    contextual_refinement: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
-    return {
+    refinement = dict(contextual_refinement or {})
+    out = {
         "schema": SCHEMA,
         "pass": False,
         "status": "UNKNOWN__DOMAIN_MAPPING_RELATION_NOT_PROVED",
@@ -96,6 +175,7 @@ def _unknown(
         "requested_predicate_id_authority": False,
         "predicate_truth": "UNKNOWN",
         "mapping_result": dict(mapping_result or {}),
+        "authenticated_context_refinement": refinement,
         "truthful_precommitment_observation": False,
         "semantic_truth_authority": False,
         "policy_adequacy_authority": False,
@@ -104,6 +184,17 @@ def _unknown(
         "terminal_authority": False,
         "terminal_credit_delta": 0,
     }
+    atom_ids = list(refinement.get("proved_atom_ids") or [])
+    if refinement.get("semantic_truth_authority") is True and atom_ids:
+        out["next_information_request"] = {
+            "kind": "REUSE_AUTHENTICATED_CONTEXT_FACTS_FOR_DOMAIN_MAPPING",
+            "proved_atom_ids": atom_ids,
+            "relation_truth_still_required": True,
+            "concept_identity_authorized": False,
+            "candidate_universe_complete": False,
+            "terminal_authority": False,
+        }
+    return out
 
 
 def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
@@ -157,6 +248,8 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
     if not isinstance(relation_problems, Mapping):
         return _fail("RELATION_PROBLEMS_INVALID")
 
+    contextual_refinement = _contextual_refinement(raw_span, source_id)
+
     target_problem = relation_problems.get(target)
     if not isinstance(target_problem, Mapping):
         checked = checked_predicate_id(
@@ -170,6 +263,7 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
             checked_id=checked,
             requested_id=requested_id,
             reason="TARGET_RELATION_PROBLEM_REQUIRED",
+            contextual_refinement=contextual_refinement,
         )
     target_required = str(target_problem.get("required_relation") or required).strip().upper()
     if target_required != required:
@@ -217,6 +311,7 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
             requested_id=requested_id,
             reason="TARGET_CONCEPT_NOT_SURVIVING_FOR_RELATION_EVALUATION",
             mapping_result=result,
+            contextual_refinement=contextual_refinement,
         )
 
     relation = target_eval.get("relation_result")
@@ -226,6 +321,7 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
             requested_id=requested_id,
             reason="TARGET_RELATION_RESULT_UNAVAILABLE",
             mapping_result=result,
+            contextual_refinement=contextual_refinement,
         )
 
     if (
@@ -250,6 +346,7 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
                 or "TARGET_RELATION_NOT_PROVED"
             ),
             mapping_result=result,
+            contextual_refinement=contextual_refinement,
         )
 
     return {
@@ -266,6 +363,7 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
         "source_sha256": sha256(raw_span.encode("utf-8")).hexdigest(),
         "scope_id": scope_id,
         "mapping_result": result,
+        "authenticated_context_refinement": contextual_refinement,
         "truthful_precommitment_observation": True,
         "semantic_truth_authority": True,
         "policy_adequacy_authority": False,
