@@ -2235,7 +2235,7 @@
     },
     "unified_fabric": {
       "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-      "git_blob_sha": "5badd256e18ab4bad58be862c69ef9e272bf7eb1"
+      "git_blob_sha": "537b6db4998f21d21a4f191625bd5661994a63e7"
     },
     "verification": {
       "path": "canonical/verification/LIVE_CAPABILITY_OWNERSHIP_UNIVERSAL_INVOCATION_V1_SOURCE_REPLAY_20261008_V1.json",
@@ -2274,12 +2274,11 @@
       "status": "ACTIVE_FAIL_CLOSED_DRIFT_LOCK"
     },
     "r1_drift_lock_verification": {
-      "path": "canonical/verification/R1_CURRENT_BYTE_LIFECYCLE_RESEAL_20261009_V1.json",
-      "git_blob_sha": "9becd33679c2f839df854c48fb14ead568128646",
-      "status": "PASS__R1_CURRENT_BYTE_ARCHITECTURE_RESEALED__9_OF_9_FOCUSED_REGRESSION"
+      "path": "canonical/verification/R1_AUTO_ONE_SHOT_FRONTDOOR_RESEAL_CANDIDATE_20261009_V1.json",
+      "status": "PENDING_EXECUTABLE_REPLAY__STATIC_BINDING_ONLY"
     },
-    "r1_drift_locked": true,
-    "verification_status": "PASS__R1_CURRENT_BYTE_ARCHITECTURE_RESEALED__9_OF_9_FOCUSED_REGRESSION",
+    "r1_drift_locked": false,
+    "verification_status": "PENDING_EXECUTABLE_REPLAY__STATIC_BINDING_ONLY",
     "live_composition": {
       "path": "canonical/runtime/live_capability_composition_v1.py",
       "git_blob_sha": "2c32696b79463936b91e5b45bbba8098cd5f3ff1"
@@ -2287,9 +2286,8 @@
     "heterogeneous_live_composition": true,
     "composition_outcomes_r3_observed": true,
     "r1_complete_lifecycle_verification": {
-      "path": "canonical/verification/R1_CURRENT_BYTE_LIFECYCLE_RESEAL_20261009_V1.json",
-      "git_blob_sha": "9becd33679c2f839df854c48fb14ead568128646",
-      "status": "PASS__R1_CURRENT_BYTE_ARCHITECTURE_RESEALED__9_OF_9_FOCUSED_REGRESSION"
+      "path": "canonical/verification/R1_AUTO_ONE_SHOT_FRONTDOOR_RESEAL_CANDIDATE_20261009_V1.json",
+      "status": "PENDING_EXECUTABLE_REPLAY__STATIC_BINDING_ONLY"
     },
     "capability_lifecycle": {
       "discoverable": true,
@@ -2309,7 +2307,7 @@
     },
     "unified_fabric": {
       "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-      "git_blob_sha": "5badd256e18ab4bad58be862c69ef9e272bf7eb1"
+      "git_blob_sha": "537b6db4998f21d21a4f191625bd5661994a63e7"
     },
     "regression": {
       "path": "canonical/tests/test_live_capability_invoker_v1.py",
@@ -2321,7 +2319,7 @@
     },
     "rule": "EVERY_LIVE_OWNED_CAPABILITY_IDENTITY_MUST_BE_CLASSIFIABLE_AND_DISPATCHABLE_THROUGH_UNIFIED_COGNITIVE_FABRIC_LIVE_CAPABILITY_OR_FAIL_CLOSED",
     "semantic_selection_boundary": "CAPABILITY_SELECTION_FROM_ARBITRARY_INTENT_REMAINS_R2",
-    "verification_status": "PASS__R1_CURRENT_BYTE_ARCHITECTURE_RESEALED__9_OF_9_FOCUSED_REGRESSION",
+    "verification_status": "PENDING_EXECUTABLE_REPLAY__STATIC_BINDING_ONLY",
     "verification_pr": 3223,
     "terminal_credit_delta": 0,
     "current_live_owned_capability_count": 86,
@@ -2342,18 +2340,16 @@
       "status": "ACTIVE_FAIL_CLOSED_DRIFT_LOCK"
     },
     "r1_drift_lock_verification": {
-      "path": "canonical/verification/R1_CURRENT_BYTE_LIFECYCLE_RESEAL_20261009_V1.json",
-      "git_blob_sha": "9becd33679c2f839df854c48fb14ead568128646",
-      "status": "PASS__R1_CURRENT_BYTE_ARCHITECTURE_RESEALED__9_OF_9_FOCUSED_REGRESSION"
+      "path": "canonical/verification/R1_AUTO_ONE_SHOT_FRONTDOOR_RESEAL_CANDIDATE_20261009_V1.json",
+      "status": "PENDING_EXECUTABLE_REPLAY__STATIC_BINDING_ONLY"
     },
     "live_composition": {
       "path": "canonical/runtime/live_capability_composition_v1.py",
       "git_blob_sha": "2c32696b79463936b91e5b45bbba8098cd5f3ff1"
     },
     "r1_complete_lifecycle_verification": {
-      "path": "canonical/verification/R1_CURRENT_BYTE_LIFECYCLE_RESEAL_20261009_V1.json",
-      "git_blob_sha": "9becd33679c2f839df854c48fb14ead568128646",
-      "status": "PASS__R1_CURRENT_BYTE_ARCHITECTURE_RESEALED__9_OF_9_FOCUSED_REGRESSION"
+      "path": "canonical/verification/R1_AUTO_ONE_SHOT_FRONTDOOR_RESEAL_CANDIDATE_20261009_V1.json",
+      "status": "PENDING_EXECUTABLE_REPLAY__STATIC_BINDING_ONLY"
     },
     "capability_lifecycle": {
       "discoverable": true,
@@ -2363,7 +2359,8 @@
       "learnable": true,
       "reusable": true
     },
-    "capability_lifecycle_complete": true
+    "capability_lifecycle_complete": true,
+    "r1_drift_locked": false
   },
   "current_option_preserving_optimization_20261008_v1": {
     "status": "ACTIVE_FAIL_CLOSED_OPTION_PRESERVATION_LAW",
