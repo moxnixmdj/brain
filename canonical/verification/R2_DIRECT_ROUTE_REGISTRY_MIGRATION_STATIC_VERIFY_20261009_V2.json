@@ -1,0 +1,78 @@
+{
+  "schema": "PROJECT_BRAIN_R2_DIRECT_ROUTE_REGISTRY_MIGRATION_STATIC_VERIFY_20261009_V2",
+  "date": "2026-10-09",
+  "status": "PASS__STATIC_CURRENTNESS_EXACT_BLOB_BINDING_AND_ACTIVATION_AUTO_ADMISSION_STRUCTURE__RUNTIME_REPLAY_NOT_EXECUTED",
+  "verification_class": "STATIC_CONNECTOR_EXACT_BLOB_AND_AUTHORITY_CURRENTNESS",
+  "candidate_bindings": {
+    "registry": {
+      "path": "canonical/governance/R2_DIRECT_ROUTE_REGISTRY_20261009_V1.json",
+      "git_blob_sha": "4617692855cdc7510c3b2077cb42e1a977bd8374",
+      "role": "LEGACY_PRECEDENCE_METADATA_ONLY"
+    },
+    "current_pointer": {
+      "path": "canonical/governance/CURRENT_R2_DIRECT_ROUTE_REGISTRY.json",
+      "git_blob_sha": "bdeba75f860236c4e6603fb684a8aab350df4f74",
+      "load_bearing_identity": "CANONICAL_PATH_NOT_POINTER_BLOB"
+    },
+    "dispatcher": {
+      "path": "canonical/runtime/r2_direct_route_registry_v1.py",
+      "git_blob_sha": "663aacd5bd41659e89091cc2783edde4c83f6717"
+    },
+    "closure_gate": {
+      "path": "canonical/runtime/r2_direct_route_live_integration_closure_v1.py",
+      "git_blob_sha": "c316613bd90b23444540c6ae672b62b938e00d79"
+    },
+    "fixed_point_controller": {
+      "path": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
+      "git_blob_sha": "538903ef11a015acd784e075d3efb705c7c4f897"
+    },
+    "current_r2_candidate": {
+      "path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+      "git_blob_sha": "d727695b057439a5f0a22e12a6d84393c63c069f"
+    },
+    "registry_test": {
+      "path": "canonical/tests/test_r2_direct_route_registry_v1.py",
+      "git_blob_sha": "c265c65af4c5dc9c69c6f0f47b87526c698cb408"
+    },
+    "closure_test": {
+      "path": "canonical/tests/test_r2_direct_route_live_integration_closure_v1.py",
+      "git_blob_sha": "e808a74a7e5997b07d1db3b62b05d2b0470867b6"
+    }
+  },
+  "checks": {
+    "current_route_count": 28,
+    "current_legacy_metadata_count": 28,
+    "current_auto_admitted_route_count": 0,
+    "route_runtime_exact_blob_checks": 28,
+    "bound_verification_exact_blob_checks": 25,
+    "route_runtime_binding_errors": 0,
+    "bound_verification_binding_errors": 0,
+    "current_r2_activation_is_deployable_universe": true,
+    "future_activation_route_source_edit_required": false,
+    "future_activation_route_registry_edit_required": false,
+    "future_activation_route_default_selection": "UNIQUE_MATCH_REQUIRED_FAIL_CLOSED_ON_COLLISION",
+    "immutable_registry_target_blob_match": true,
+    "current_pointer_binding_law": "CURRENT_POINTERS_BIND_BY_CANONICAL_PATH_IDENTITY__IMMUTABLE_VERSIONED_AUTHORITY_ARTIFACTS_BIND_BY_GIT_BLOB_SHA"
+  },
+  "not_executed": {
+    "python_compile": true,
+    "unittest_replay": true,
+    "canonical_front_door_runtime_replay": true,
+    "reason": "HARD_ZERO_INCREMENTAL_SPEND_GUARD__PRIVATE_REPO_GITHUB_HOSTED_ACTIONS_NOT_TRIGGERED__NO_PROVEN_PRIVATE_READ_PATH_TO_PUBLIC_ZERO_COST_RUNNER"
+  },
+  "truth_boundary": [
+    "STATIC_EXACT_BLOB_CURRENTNESS_AND_DEFAULT_ADMISSION_STRUCTURE_PROVED",
+    "CURRENT_28_ROUTE_RUNTIME_AND_VERIFICATION_BINDINGS_EXACT",
+    "FUTURE_CURRENT_R2_ACTIVATION_ROUTE_DOES_NOT_REQUIRE_SOURCE_OR_METADATA_REGISTRY_EDIT",
+    "COLLISION_RESOLUTION_REMAINS_FAIL_CLOSED_WITHOUT_EXPLICIT_EQUIVALENCE_OR_DOMINANCE_AUTHORITY",
+    "NO_CLAIM_PYTHON_TEST_SUITE_EXECUTED",
+    "NO_CLAIM_RUNTIME_BEHAVIORAL_EQUIVALENCE_INDEPENDENTLY_REPLAYED",
+    "NO_OPEN_WORLD_SEMANTIC_COVERAGE_CLAIM",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "independent_verification": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}

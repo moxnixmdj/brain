@@ -1,11 +1,11 @@
-"""R2 direct-route live integration closure gate V1.
+"""R2 direct-route default-runtime integration closure gate V1.
 
-Proves, for the current bounded direct-route universe declared by current R2
-authority, that independently verified deployable routes, active registry rows,
-and executable stable-dispatcher routes are the same set.
+Current R2 activation defines the deployable direct-route universe. The stable
+dispatcher must expose exactly that universe. Legacy registry metadata may cover
+some or all routes only to preserve historical precedence; a newly activated route
+may be auto-admitted under UNIQUE_MATCH_REQUIRED without a registry or source edit.
 
-This is an R2 default-runtime integration theorem only. It does not claim
-open-world semantic coverage or terminal completion.
+This gate does not claim open-world semantic coverage or terminal completion.
 """
 from __future__ import annotations
 
@@ -18,8 +18,6 @@ from canonical.runtime import r2_direct_route_registry_v1 as dispatcher
 
 SCHEMA = "PROJECT_BRAIN_R2_DIRECT_ROUTE_LIVE_INTEGRATION_CLOSURE_V1"
 ROOT = Path(__file__).resolve().parents[2]
-CURRENT_R2 = ROOT / "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json"
-FIXED_POINT = ROOT / "canonical/runtime/general_adequate_decision_fixed_point_v2.py"
 EXPECTED_DISPATCHER = "canonical/runtime/r2_direct_route_registry_v1.py"
 
 
@@ -59,13 +57,11 @@ def evaluate(*, repo_root: str | Path = ROOT) -> dict[str, Any]:
         if isinstance(row, Mapping) and str(row.get("route_id") or "")
     }
 
-    registry = dispatcher.load_registry(repo_root=root)
-    active = {
-        str(row.get("route_id") or "")
-        for row in registry["routes"]
-        if isinstance(row, Mapping) and row.get("active") is True
-    }
-    executable = set(dispatcher.ROUTES)
+    state = dispatcher.effective_state(repo_root=root)
+    executable = set(state["deployable_route_ids"])
+    metadata = set(state["legacy_selection_metadata_route_ids"])
+    auto_admitted = set(state["auto_admitted_route_ids"])
+    stale_metadata = set(state["stale_selection_metadata_route_ids"])
 
     direct_runtime_rel = str(direct.get("direct_runtime_path") or "")
     direct_runtime = root / direct_runtime_rel
@@ -73,7 +69,6 @@ def evaluate(*, repo_root: str | Path = ROOT) -> dict[str, Any]:
         direct_runtime_rel == EXPECTED_DISPATCHER
         and _blob(direct_runtime) == str(direct.get("direct_runtime_git_blob_sha") or "")
     )
-
     fixed_point_blob_ok = (
         _blob(fixed_point_path)
         == str(direct.get("fixed_point_controller_git_blob_sha") or "")
@@ -88,12 +83,11 @@ def evaluate(*, repo_root: str | Path = ROOT) -> dict[str, Any]:
         in source
     )
 
-    missing_activation = sorted(active - deployable)
-    missing_promotion = sorted(deployable - active)
-    missing_execution = sorted(active - executable)
+    missing_execution = sorted(deployable - executable)
     unauthorized_execution = sorted(executable - deployable)
+    metadata_missing_for_deployable = sorted(deployable - metadata)
 
-    equality = deployable == active == executable
+    equality = deployable == executable
     passed = (
         equality
         and runtime_binding_ok
@@ -101,24 +95,28 @@ def evaluate(*, repo_root: str | Path = ROOT) -> dict[str, Any]:
         and stable_import
         and not legacy_import_live
         and direct.get("future_route_source_edit_required") is False
-        and direct.get("legacy_v1_to_v8_runtime_chain_load_bearing") is False
+        and direct.get("future_route_registry_edit_required") is False
+        and not stale_metadata
+        and auto_admitted == set(metadata_missing_for_deployable)
     )
     return {
         "schema": SCHEMA,
         "status": (
-            "PASS__VERIFIED_DEPLOYABLE_EQUALS_ACTIVE_EQUALS_EXECUTABLE_DIRECT_ROUTES"
+            "PASS__CURRENT_R2_DEPLOYABLE_EQUALS_DEFAULT_EXECUTABLE_DIRECT_ROUTES"
             if passed
-            else "FAIL_CLOSED__R2_DIRECT_ROUTE_LIVE_INTEGRATION_OPEN"
+            else "FAIL_CLOSED__R2_DIRECT_ROUTE_DEFAULT_INTEGRATION_OPEN"
         ),
         "pass": passed,
         "verified_deployable_route_count": len(deployable),
-        "active_registry_route_count": len(active),
         "executable_dispatch_route_count": len(executable),
-        "verified_deployable_equals_active_equals_executable": equality,
-        "missing_promotion": missing_promotion,
-        "registry_not_in_verified_universe": missing_activation,
+        "legacy_selection_metadata_count": len(metadata),
+        "auto_admitted_route_count": len(auto_admitted),
+        "verified_deployable_equals_executable": equality,
         "missing_execution": missing_execution,
         "unauthorized_execution": unauthorized_execution,
+        "deployable_without_legacy_metadata": metadata_missing_for_deployable,
+        "auto_admitted_route_ids": sorted(auto_admitted),
+        "stale_selection_metadata_route_ids": sorted(stale_metadata),
         "runtime_binding_ok": runtime_binding_ok,
         "fixed_point_blob_ok": fixed_point_blob_ok,
         "stable_dispatcher_import_live": stable_import,
@@ -126,8 +124,11 @@ def evaluate(*, repo_root: str | Path = ROOT) -> dict[str, Any]:
         "future_route_source_edit_required": direct.get(
             "future_route_source_edit_required"
         ),
-        "legacy_version_chain_load_bearing": direct.get(
-            "legacy_v1_to_v8_runtime_chain_load_bearing"
+        "future_route_registry_edit_required": direct.get(
+            "future_route_registry_edit_required"
+        ),
+        "new_activation_routes_auto_admitted_fail_closed": (
+            direct.get("dynamic_activation_auto_admission") is True
         ),
         "open_world_semantic_coverage_claimed": False,
         "terminal_authority": False,

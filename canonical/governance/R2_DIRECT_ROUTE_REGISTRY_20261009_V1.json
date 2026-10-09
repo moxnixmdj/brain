@@ -1,12 +1,12 @@
 {
   "schema": "PROJECT_BRAIN_R2_DIRECT_ROUTE_REGISTRY_V1",
   "date": "2026-10-09",
-  "status": "ACTIVE_MIGRATED_EXACT_CURRENT_ROUTE_SET__FUTURE_ADMISSION_DATA_DRIVEN",
+  "status": "ACTIVE_LEGACY_PRECEDENCE_METADATA__CURRENT_28_ROUTE_ORDER_FROZEN__FUTURE_ACTIVATED_ROUTES_AUTO_ADMIT_FAIL_CLOSED",
   "source_activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V23.json",
   "source_activation_git_blob_sha": "933b12e60a8e4843a47999dbe5f7c15d060a16b3",
   "route_count": 28,
   "selection_semantics": "FIRST_MATCH_BY_EXPLICIT_VERIFIED_MIGRATION_PRECEDENCE__NO_EFFECT_BEFORE_SELECTED_RUN",
-  "future_rule": "NEW_ROUTE_REQUIRES_INDEPENDENT_VERIFICATION_AND_EXPLICIT_DISJOINTNESS_EQUIVALENCE_OR_DOMINANCE_AUTHORITY_BEFORE_ADMISSION",
+  "future_rule": "CURRENT_R2_ACTIVATION_ROUTE_NOT_PRESENT_IN_LEGACY_METADATA_AUTO_ADMITS_AS_UNIQUE_MATCH_REQUIRED__ANY_COLLISION_WITH_ANOTHER_DYNAMIC_OR_LEGACY_ROUTE_FAILS_CLOSED_UNTIL_EXPLICIT_EQUIVALENCE_OR_DOMINANCE_AUTHORITY_EXISTS",
   "routes": [
     {
       "route_id": "DIRECT_ADEQUACY::FINANCE_EXPLICIT_ORDERED_PAIR_FORMER_LATTER_FAMILY_V1",
@@ -20,7 +20,8 @@
       "verification_path": "canonical/verification/R2_V38_PAIR_REFERENCE_VERIFY_20261009_V1.json",
       "verification_git_blob_sha": "5d283287394557520ce709b91c93dd5a25b44083",
       "migration_authority": "EXACT_V8_TO_V1_PRECEDENCE_PRESERVATION",
-      "new_route_admission_requires": "INDEPENDENT_VERIFICATION_PLUS_EXPLICIT_PRECEDENCE_OR_DISJOINTNESS_AUTHORITY"
+      "new_route_admission_requires": "NOT_APPLICABLE_TO_FUTURE_ROUTES__CURRENT_R2_ACTIVATION_AUTO_ADMITS_UNIQUE_MATCH_REQUIRED",
+      "selection_class": "LEGACY_ORDERED_MIGRATION"
     },
     {
       "route_id": "DIRECT_ADEQUACY::FINANCE_BOUNDED_CONTEXTUAL_REFERENCE_FAMILY_V1",
@@ -34,7 +35,8 @@
       "verification_path": "canonical/verification/R2_V37_CONTEXTUAL_REFERENCE_VERIFY_20261009_V1.json",
       "verification_git_blob_sha": "cb3cf706a9be08d4561168ee8103b15d4d831c9e",
       "migration_authority": "EXACT_V8_TO_V1_PRECEDENCE_PRESERVATION",
-      "new_route_admission_requires": "INDEPENDENT_VERIFICATION_PLUS_EXPLICIT_PRECEDENCE_OR_DISJOINTNESS_AUTHORITY"
+      "new_route_admission_requires": "NOT_APPLICABLE_TO_FUTURE_ROUTES__CURRENT_R2_ACTIVATION_AUTO_ADMITS_UNIQUE_MATCH_REQUIRED",
+      "selection_class": "LEGACY_ORDERED_MIGRATION"
     },
     {
       "route_id": "DIRECT_ADEQUACY::FINANCE_STATE_KEYED_EXTERNAL_JSON_POLICY_FAMILY_V1",
@@ -48,7 +50,8 @@
       "verification_path": "canonical/verification/R2_FINANCE_EXTERNAL_JSON_POLICY_DIRECT_ADEQUACY_VERIFY_20261009_V1.json",
       "verification_git_blob_sha": "031b989adfd1d009328a887eb28f61102cb5a8b1",
       "migration_authority": "EXACT_V8_TO_V1_PRECEDENCE_PRESERVATION",
-      "new_route_admission_requires": "INDEPENDENT_VERIFICATION_PLUS_EXPLICIT_PRECEDENCE_OR_DISJOINTNESS_AUTHORITY"
+      "new_route_admission_requires": "NOT_APPLICABLE_TO_FUTURE_ROUTES__CURRENT_R2_ACTIVATION_AUTO_ADMITS_UNIQUE_MATCH_REQUIRED",
+      "selection_class": "LEGACY_ORDERED_MIGRATION"
     },
     {
       "route_id": "DIRECT_ADEQUACY::FINANCE_EXPLICIT_ALIAS_TYPED_UNLESS_FAMILY_V1",
@@ -62,7 +65,8 @@
       "verification_path": "canonical/verification/R2_FINANCE_EXPLICIT_ALIAS_UNLESS_DIRECT_ADEQUACY_VERIFY_20261009_V1.json",
       "verification_git_blob_sha": "9beaa80af044dbf6d6eeef48386a35d180fba18f",
       "migration_authority": "EXACT_V8_TO_V1_PRECEDENCE_PRESERVATION",
-      "new_route_admission_requires": "INDEPENDENT_VERIFICATION_PLUS_EXPLICIT_PRECEDENCE_OR_DISJOINTNESS_AUTHORITY"
+      "new_route_admission_requires": "NOT_APPLICABLE_TO_FUTURE_ROUTES__CURRENT_R2_ACTIVATION_AUTO_ADMITS_UNIQUE_MATCH_REQUIRED",
+      "selection_class": "LEGACY_ORDERED_MIGRATION"
     },
     {
       "route_id": "DIRECT_ADEQUACY::FINANCE_CROSS_DOCUMENT_JSON_BINDING_FAMILY_V1",
@@ -76,7 +80,8 @@
       "verification_path": "canonical/verification/R2_FINANCE_CROSS_DOCUMENT_JSON_DIRECT_ADEQUACY_VERIFY_20261009_V1.json",
       "verification_git_blob_sha": "404d3f81b05ea36584d33d2892e0af617b68a241",
       "migration_authority": "EXACT_V8_TO_V1_PRECEDENCE_PRESERVATION",
-      "new_route_admission_requires": "INDEPENDENT_VERIFICATION_PLUS_EXPLICIT_PRECEDENCE_OR_DISJOINTNESS_AUTHORITY"
+      "new_route_admission_requires": "NOT_APPLICABLE_TO_FUTURE_ROUTES__CURRENT_R2_ACTIVATION_AUTO_ADMITS_UNIQUE_MATCH_REQUIRED",
+      "selection_class": "LEGACY_ORDERED_MIGRATION"
     },
     {
       "route_id": "DIRECT_ADEQUACY::FINANCE_EXPLICIT_DEFINITION_UNLESS_FAMILY_V1",
@@ -90,7 +95,8 @@
       "verification_path": "canonical/verification/R2_FINANCE_EXPLICIT_DEFINITION_UNLESS_DIRECT_ADEQUACY_VERIFY_20261009_V1.json",
       "verification_git_blob_sha": "3f628acd089b42420bf00d4a787655f999a3d2d2",
       "migration_authority": "EXACT_V8_TO_V1_PRECEDENCE_PRESERVATION",
-      "new_route_admission_requires": "INDEPENDENT_VERIFICATION_PLUS_EXPLICIT_PRECEDENCE_OR_DISJOINTNESS_AUTHORITY"
+      "new_route_admission_requires": "NOT_APPLICABLE_TO_FUTURE_ROUTES__CURRENT_R2_ACTIVATION_AUTO_ADMITS_UNIQUE_MATCH_REQUIRED",
+      "selection_class": "LEGACY_ORDERED_MIGRATION"
     },
     {
       "route_id": "DIRECT_ADEQUACY::FINANCE_NORMALIZED_IF_BRANCH_FAMILY_V1",
@@ -104,7 +110,8 @@
       "verification_path": "canonical/verification/R2_FINANCE_NORMALIZED_IF_DIRECT_ADEQUACY_VERIFY_20261009_V1.json",
       "verification_git_blob_sha": "5a0f58dd93d4109183d94b5c00ef911e830525b3",
       "migration_authority": "EXACT_V8_TO_V1_PRECEDENCE_PRESERVATION",
-      "new_route_admission_requires": "INDEPENDENT_VERIFICATION_PLUS_EXPLICIT_PRECEDENCE_OR_DISJOINTNESS_AUTHORITY"
+      "new_route_admission_requires": "NOT_APPLICABLE_TO_FUTURE_ROUTES__CURRENT_R2_ACTIVATION_AUTO_ADMITS_UNIQUE_MATCH_REQUIRED",
+      "selection_class": "LEGACY_ORDERED_MIGRATION"
     },
     {
       "route_id": "DIRECT_ADEQUACY::FINANCE_NORMALIZED_SOURCE_UNIVERSE_DECISION_FAMILY_V1",
@@ -118,7 +125,8 @@
       "verification_path": "canonical/verification/R2_FINANCE_NORMALIZED_SOURCE_UNIVERSE_DIRECT_ADEQUACY_VERIFY_20261009_V2.json",
       "verification_git_blob_sha": "f3a340593a17a849381bde9ef0cc3633ce006a43",
       "migration_authority": "EXACT_V8_TO_V1_PRECEDENCE_PRESERVATION",
-      "new_route_admission_requires": "INDEPENDENT_VERIFICATION_PLUS_EXPLICIT_PRECEDENCE_OR_DISJOINTNESS_AUTHORITY"
+      "new_route_admission_requires": "NOT_APPLICABLE_TO_FUTURE_ROUTES__CURRENT_R2_ACTIVATION_AUTO_ADMITS_UNIQUE_MATCH_REQUIRED",
+      "selection_class": "LEGACY_ORDERED_MIGRATION"
     },
     {
       "route_id": "DIRECT_ADEQUACY::ARCHIVE_MANIFEST_TAR_GZ_V1",
@@ -132,7 +140,8 @@
       "verification_path": null,
       "verification_git_blob_sha": null,
       "migration_authority": "EXACT_V8_TO_V1_PRECEDENCE_PRESERVATION",
-      "new_route_admission_requires": "INDEPENDENT_VERIFICATION_PLUS_EXPLICIT_PRECEDENCE_OR_DISJOINTNESS_AUTHORITY"
+      "new_route_admission_requires": "NOT_APPLICABLE_TO_FUTURE_ROUTES__CURRENT_R2_ACTIVATION_AUTO_ADMITS_UNIQUE_MATCH_REQUIRED",
+      "selection_class": "LEGACY_ORDERED_MIGRATION"
     },
     {
       "route_id": "DIRECT_ADEQUACY::EXACT_LITERAL_RESPONSE_V1",
@@ -146,7 +155,8 @@
       "verification_path": null,
       "verification_git_blob_sha": null,
       "migration_authority": "EXACT_V8_TO_V1_PRECEDENCE_PRESERVATION",
-      "new_route_admission_requires": "INDEPENDENT_VERIFICATION_PLUS_EXPLICIT_PRECEDENCE_OR_DISJOINTNESS_AUTHORITY"
+      "new_route_admission_requires": "NOT_APPLICABLE_TO_FUTURE_ROUTES__CURRENT_R2_ACTIVATION_AUTO_ADMITS_UNIQUE_MATCH_REQUIRED",
+      "selection_class": "LEGACY_ORDERED_MIGRATION"
     },
     {
       "route_id": "DIRECT_ADEQUACY::LITERAL_JSON_RECORDS_V1",
@@ -160,7 +170,8 @@
       "verification_path": null,
       "verification_git_blob_sha": null,
       "migration_authority": "EXACT_V8_TO_V1_PRECEDENCE_PRESERVATION",
-      "new_route_admission_requires": "INDEPENDENT_VERIFICATION_PLUS_EXPLICIT_PRECEDENCE_OR_DISJOINTNESS_AUTHORITY"
+      "new_route_admission_requires": "NOT_APPLICABLE_TO_FUTURE_ROUTES__CURRENT_R2_ACTIVATION_AUTO_ADMITS_UNIQUE_MATCH_REQUIRED",
+      "selection_class": "LEGACY_ORDERED_MIGRATION"
     },
     {
       "route_id": "DIRECT_ADEQUACY::EXACT_ROR_AUTHORITY_IDENTITY_FAMILY_V1",
@@ -174,7 +185,8 @@
       "verification_path": "canonical/verification/R2_ROR_AUTHORITY_IDENTITY_DIRECT_ADEQUACY_VERIFY_20261009_V1.json",
       "verification_git_blob_sha": "d3c3c0e101d97a86f9aff16e9b00d2bc0ca5d34e",
       "migration_authority": "EXACT_V8_TO_V1_PRECEDENCE_PRESERVATION",
-      "new_route_admission_requires": "INDEPENDENT_VERIFICATION_PLUS_EXPLICIT_PRECEDENCE_OR_DISJOINTNESS_AUTHORITY"
+      "new_route_admission_requires": "NOT_APPLICABLE_TO_FUTURE_ROUTES__CURRENT_R2_ACTIVATION_AUTO_ADMITS_UNIQUE_MATCH_REQUIRED",
+      "selection_class": "LEGACY_ORDERED_MIGRATION"
     },
     {
       "route_id": "DIRECT_ADEQUACY::PROVENANCE_KNOWLEDGE_CONSISTENCY_FAMILY_V1",
@@ -188,7 +200,8 @@
       "verification_path": "canonical/verification/R2_KNOWLEDGE_CONSISTENCY_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
       "verification_git_blob_sha": "99cceec24f88ce9842a73760d51f98e63eb55fa7",
       "migration_authority": "EXACT_V8_TO_V1_PRECEDENCE_PRESERVATION",
-      "new_route_admission_requires": "INDEPENDENT_VERIFICATION_PLUS_EXPLICIT_PRECEDENCE_OR_DISJOINTNESS_AUTHORITY"
+      "new_route_admission_requires": "NOT_APPLICABLE_TO_FUTURE_ROUTES__CURRENT_R2_ACTIVATION_AUTO_ADMITS_UNIQUE_MATCH_REQUIRED",
+      "selection_class": "LEGACY_ORDERED_MIGRATION"
     },
     {
       "route_id": "DIRECT_ADEQUACY::UNIT_NORMALIZED_GROUNDED_NUMERIC_COMPARISON_FAMILY_V1",
@@ -202,7 +215,8 @@
       "verification_path": "canonical/verification/R2_UNIT_NORMALIZED_NUMERIC_COMPARISON_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
       "verification_git_blob_sha": "a0555c2fc891393f4da377a375efdb882977f9bc",
       "migration_authority": "EXACT_V8_TO_V1_PRECEDENCE_PRESERVATION",
-      "new_route_admission_requires": "INDEPENDENT_VERIFICATION_PLUS_EXPLICIT_PRECEDENCE_OR_DISJOINTNESS_AUTHORITY"
+      "new_route_admission_requires": "NOT_APPLICABLE_TO_FUTURE_ROUTES__CURRENT_R2_ACTIVATION_AUTO_ADMITS_UNIQUE_MATCH_REQUIRED",
+      "selection_class": "LEGACY_ORDERED_MIGRATION"
     },
     {
       "route_id": "DIRECT_ADEQUACY::EXPLICIT_GROUNDED_NUMERIC_COMPARISON_FAMILY_V1",
@@ -216,7 +230,8 @@
       "verification_path": "canonical/verification/R2_EXPLICIT_NUMERIC_COMPARISON_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
       "verification_git_blob_sha": "7332bad585a48b7c178dc235555b2e38d088b4ca",
       "migration_authority": "EXACT_V8_TO_V1_PRECEDENCE_PRESERVATION",
-      "new_route_admission_requires": "INDEPENDENT_VERIFICATION_PLUS_EXPLICIT_PRECEDENCE_OR_DISJOINTNESS_AUTHORITY"
+      "new_route_admission_requires": "NOT_APPLICABLE_TO_FUTURE_ROUTES__CURRENT_R2_ACTIVATION_AUTO_ADMITS_UNIQUE_MATCH_REQUIRED",
+      "selection_class": "LEGACY_ORDERED_MIGRATION"
     },
     {
       "route_id": "DIRECT_ADEQUACY::EXACT_GROUNDED_EVIDENCE_CLAIM_SUPPORT_FAMILY_V1",
@@ -230,7 +245,8 @@
       "verification_path": "canonical/verification/R2_EXACT_EVIDENCE_CLAIM_SUPPORT_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
       "verification_git_blob_sha": "bac9c5365981585db8fa6afcca7204c46a3394d1",
       "migration_authority": "EXACT_V8_TO_V1_PRECEDENCE_PRESERVATION",
-      "new_route_admission_requires": "INDEPENDENT_VERIFICATION_PLUS_EXPLICIT_PRECEDENCE_OR_DISJOINTNESS_AUTHORITY"
+      "new_route_admission_requires": "NOT_APPLICABLE_TO_FUTURE_ROUTES__CURRENT_R2_ACTIVATION_AUTO_ADMITS_UNIQUE_MATCH_REQUIRED",
+      "selection_class": "LEGACY_ORDERED_MIGRATION"
     },
     {
       "route_id": "DIRECT_ADEQUACY::PYPI_PINNED_ARTIFACT_PROVENANCE_FAMILY_V1",
@@ -244,7 +260,8 @@
       "verification_path": "canonical/verification/R2_PYPI_PROVENANCE_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
       "verification_git_blob_sha": "16108ce6af5439f3685c53f3f0453f50aa0df8f6",
       "migration_authority": "EXACT_V8_TO_V1_PRECEDENCE_PRESERVATION",
-      "new_route_admission_requires": "INDEPENDENT_VERIFICATION_PLUS_EXPLICIT_PRECEDENCE_OR_DISJOINTNESS_AUTHORITY"
+      "new_route_admission_requires": "NOT_APPLICABLE_TO_FUTURE_ROUTES__CURRENT_R2_ACTIVATION_AUTO_ADMITS_UNIQUE_MATCH_REQUIRED",
+      "selection_class": "LEGACY_ORDERED_MIGRATION"
     },
     {
       "route_id": "DIRECT_ADEQUACY::STATE_KEYED_HTTPS_JSON_OBSERVATION_FAMILY_V1",
@@ -258,7 +275,8 @@
       "verification_path": "canonical/verification/R2_HTTP_JSON_OBSERVATION_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
       "verification_git_blob_sha": "1b612143fb95e841f098bb88fee5967dc2b8400f",
       "migration_authority": "EXACT_V8_TO_V1_PRECEDENCE_PRESERVATION",
-      "new_route_admission_requires": "INDEPENDENT_VERIFICATION_PLUS_EXPLICIT_PRECEDENCE_OR_DISJOINTNESS_AUTHORITY"
+      "new_route_admission_requires": "NOT_APPLICABLE_TO_FUTURE_ROUTES__CURRENT_R2_ACTIVATION_AUTO_ADMITS_UNIQUE_MATCH_REQUIRED",
+      "selection_class": "LEGACY_ORDERED_MIGRATION"
     },
     {
       "route_id": "DIRECT_ADEQUACY::TYPED_JSON_TRANSFORM_FAMILY_V1",
@@ -272,7 +290,8 @@
       "verification_path": "canonical/verification/R2_TYPED_JSON_TRANSFORM_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
       "verification_git_blob_sha": "8b560061f0e41b2c0587d872eceac75c2c006b9b",
       "migration_authority": "EXACT_V8_TO_V1_PRECEDENCE_PRESERVATION",
-      "new_route_admission_requires": "INDEPENDENT_VERIFICATION_PLUS_EXPLICIT_PRECEDENCE_OR_DISJOINTNESS_AUTHORITY"
+      "new_route_admission_requires": "NOT_APPLICABLE_TO_FUTURE_ROUTES__CURRENT_R2_ACTIVATION_AUTO_ADMITS_UNIQUE_MATCH_REQUIRED",
+      "selection_class": "LEGACY_ORDERED_MIGRATION"
     },
     {
       "route_id": "DIRECT_ADEQUACY::PLAIN_MARKDOWN_PDF_FAMILY_V1",
@@ -286,7 +305,8 @@
       "verification_path": "canonical/verification/R2_MARKDOWN_PDF_DIRECT_ADEQUACY_VERIFY_20261008_V2.json",
       "verification_git_blob_sha": "a89b7710298a84651874dcb8b975cbe05ac0709a",
       "migration_authority": "EXACT_V8_TO_V1_PRECEDENCE_PRESERVATION",
-      "new_route_admission_requires": "INDEPENDENT_VERIFICATION_PLUS_EXPLICIT_PRECEDENCE_OR_DISJOINTNESS_AUTHORITY"
+      "new_route_admission_requires": "NOT_APPLICABLE_TO_FUTURE_ROUTES__CURRENT_R2_ACTIVATION_AUTO_ADMITS_UNIQUE_MATCH_REQUIRED",
+      "selection_class": "LEGACY_ORDERED_MIGRATION"
     },
     {
       "route_id": "DIRECT_ADEQUACY::VISUAL_CODE_QR_CODE128_FAMILY_V1",
@@ -300,7 +320,8 @@
       "verification_path": "canonical/verification/R2_VISUAL_CODE_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
       "verification_git_blob_sha": "b40830a085a813963134890ed4bb3248082ab802",
       "migration_authority": "EXACT_V8_TO_V1_PRECEDENCE_PRESERVATION",
-      "new_route_admission_requires": "INDEPENDENT_VERIFICATION_PLUS_EXPLICIT_PRECEDENCE_OR_DISJOINTNESS_AUTHORITY"
+      "new_route_admission_requires": "NOT_APPLICABLE_TO_FUTURE_ROUTES__CURRENT_R2_ACTIVATION_AUTO_ADMITS_UNIQUE_MATCH_REQUIRED",
+      "selection_class": "LEGACY_ORDERED_MIGRATION"
     },
     {
       "route_id": "DIRECT_ADEQUACY::FINANCE_CONTROLLED_TYPED_UNLESS_FAMILY_V1",
@@ -314,7 +335,8 @@
       "verification_path": "canonical/verification/R2_FINANCE_CONTROLLED_TYPED_UNLESS_DIRECT_ADEQUACY_VERIFY_20261009_V1.json",
       "verification_git_blob_sha": "aa9643827c602dd774695c7f5659d0059accef05",
       "migration_authority": "EXACT_V8_TO_V1_PRECEDENCE_PRESERVATION",
-      "new_route_admission_requires": "INDEPENDENT_VERIFICATION_PLUS_EXPLICIT_PRECEDENCE_OR_DISJOINTNESS_AUTHORITY"
+      "new_route_admission_requires": "NOT_APPLICABLE_TO_FUTURE_ROUTES__CURRENT_R2_ACTIVATION_AUTO_ADMITS_UNIQUE_MATCH_REQUIRED",
+      "selection_class": "LEGACY_ORDERED_MIGRATION"
     },
     {
       "route_id": "DIRECT_ADEQUACY::FINANCE_NORMALIZED_UNLESS_BRANCH_FAMILY_V1",
@@ -328,7 +350,8 @@
       "verification_path": "canonical/verification/R2_FINANCE_NORMALIZED_UNLESS_DIRECT_ADEQUACY_VERIFY_20261009_V1.json",
       "verification_git_blob_sha": "218ad506472fa413314e6a3ff2015445d5b962c9",
       "migration_authority": "EXACT_V8_TO_V1_PRECEDENCE_PRESERVATION",
-      "new_route_admission_requires": "INDEPENDENT_VERIFICATION_PLUS_EXPLICIT_PRECEDENCE_OR_DISJOINTNESS_AUTHORITY"
+      "new_route_admission_requires": "NOT_APPLICABLE_TO_FUTURE_ROUTES__CURRENT_R2_ACTIVATION_AUTO_ADMITS_UNIQUE_MATCH_REQUIRED",
+      "selection_class": "LEGACY_ORDERED_MIGRATION"
     },
     {
       "route_id": "DIRECT_ADEQUACY::TYPED_EVIDENCE_DECISION_FAMILY_V1",
@@ -342,7 +365,8 @@
       "verification_path": "canonical/verification/R2_TYPED_DECISION_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
       "verification_git_blob_sha": "f804ec785bdac98855c520c7d275bcd0cda2ed99",
       "migration_authority": "EXACT_V8_TO_V1_PRECEDENCE_PRESERVATION",
-      "new_route_admission_requires": "INDEPENDENT_VERIFICATION_PLUS_EXPLICIT_PRECEDENCE_OR_DISJOINTNESS_AUTHORITY"
+      "new_route_admission_requires": "NOT_APPLICABLE_TO_FUTURE_ROUTES__CURRENT_R2_ACTIVATION_AUTO_ADMITS_UNIQUE_MATCH_REQUIRED",
+      "selection_class": "LEGACY_ORDERED_MIGRATION"
     },
     {
       "route_id": "DIRECT_ADEQUACY::STRUCTURED_TABLE_ARTIFACT_FAMILY_V1",
@@ -356,7 +380,8 @@
       "verification_path": "canonical/verification/R2_STRUCTURED_TABLE_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
       "verification_git_blob_sha": "786bf330876f558b08be368f97525a198fcdd060",
       "migration_authority": "EXACT_V8_TO_V1_PRECEDENCE_PRESERVATION",
-      "new_route_admission_requires": "INDEPENDENT_VERIFICATION_PLUS_EXPLICIT_PRECEDENCE_OR_DISJOINTNESS_AUTHORITY"
+      "new_route_admission_requires": "NOT_APPLICABLE_TO_FUTURE_ROUTES__CURRENT_R2_ACTIVATION_AUTO_ADMITS_UNIQUE_MATCH_REQUIRED",
+      "selection_class": "LEGACY_ORDERED_MIGRATION"
     },
     {
       "route_id": "DIRECT_ADEQUACY::STRUCTURED_BINARY_CODEC_FAMILY_V1",
@@ -370,7 +395,8 @@
       "verification_path": "canonical/verification/R2_STRUCTURED_BINARY_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
       "verification_git_blob_sha": "16947dbae01230fe3739d8016dcdb63c10e17675",
       "migration_authority": "EXACT_V8_TO_V1_PRECEDENCE_PRESERVATION",
-      "new_route_admission_requires": "INDEPENDENT_VERIFICATION_PLUS_EXPLICIT_PRECEDENCE_OR_DISJOINTNESS_AUTHORITY"
+      "new_route_admission_requires": "NOT_APPLICABLE_TO_FUTURE_ROUTES__CURRENT_R2_ACTIVATION_AUTO_ADMITS_UNIQUE_MATCH_REQUIRED",
+      "selection_class": "LEGACY_ORDERED_MIGRATION"
     },
     {
       "route_id": "DIRECT_ADEQUACY::LITERAL_DOCX_OOXML_FAMILY_V1",
@@ -384,7 +410,8 @@
       "verification_path": "canonical/verification/R2_DOCX_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
       "verification_git_blob_sha": "f47ba33f5d8aed21bd856315380fc5b391a7e314",
       "migration_authority": "EXACT_V8_TO_V1_PRECEDENCE_PRESERVATION",
-      "new_route_admission_requires": "INDEPENDENT_VERIFICATION_PLUS_EXPLICIT_PRECEDENCE_OR_DISJOINTNESS_AUTHORITY"
+      "new_route_admission_requires": "NOT_APPLICABLE_TO_FUTURE_ROUTES__CURRENT_R2_ACTIVATION_AUTO_ADMITS_UNIQUE_MATCH_REQUIRED",
+      "selection_class": "LEGACY_ORDERED_MIGRATION"
     },
     {
       "route_id": "DIRECT_ADEQUACY::DOCX_JSON_RECORD_FAMILY_V1",
@@ -398,9 +425,11 @@
       "verification_path": "canonical/verification/R2_DOCX_JSON_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
       "verification_git_blob_sha": "2ed67b97a6a20338fee346af3e4339823176f24a",
       "migration_authority": "EXACT_V8_TO_V1_PRECEDENCE_PRESERVATION",
-      "new_route_admission_requires": "INDEPENDENT_VERIFICATION_PLUS_EXPLICIT_PRECEDENCE_OR_DISJOINTNESS_AUTHORITY"
+      "new_route_admission_requires": "NOT_APPLICABLE_TO_FUTURE_ROUTES__CURRENT_R2_ACTIVATION_AUTO_ADMITS_UNIQUE_MATCH_REQUIRED",
+      "selection_class": "LEGACY_ORDERED_MIGRATION"
     }
   ],
   "terminal_authority": false,
-  "terminal_credit_delta": 0
+  "terminal_credit_delta": 0,
+  "selection_role": "LEGACY_PRECEDENCE_OVERLAY_ONLY__CURRENT_R2_ACTIVATION_IS_DEPLOYABLE_ROUTE_UNIVERSE"
 }

@@ -4,6 +4,7 @@ import hashlib
 import json
 from pathlib import Path
 import unittest
+from unittest import mock
 
 from canonical.runtime import r2_direct_end_to_end_adequacy_v8 as legacy_v8
 from canonical.runtime import r2_direct_route_registry_v1 as registry_router
@@ -51,28 +52,25 @@ def git_blob_sha(path: Path) -> str:
 
 
 class R2DirectRouteRegistryV1Tests(unittest.TestCase):
-    def test_current_pointer_binds_immutable_registry_and_all_load_bearing_bytes(self):
+    def test_current_pointer_binds_immutable_selection_metadata(self):
         registry = registry_router.load_registry()
         self.assertEqual(registry["route_count"], 28)
         self.assertEqual(len(registry["routes"]), 28)
-
         pointer = json.loads(POINTER.read_text(encoding="utf-8"))
         target = ROOT / pointer["target"]["path"]
         self.assertEqual(git_blob_sha(target), pointer["target"]["git_blob_sha"])
+        self.assertEqual(
+            pointer["role"],
+            "LEGACY_PRECEDENCE_METADATA_ONLY__DEPLOYABLE_UNIVERSE_COMES_FROM_CURRENT_R2_ACTIVATION",
+        )
 
-        for row in registry["routes"]:
-            runtime = ROOT / row["runtime_path"]
-            self.assertEqual(git_blob_sha(runtime), row["runtime_git_blob_sha"])
-            if row["verification_path"] is not None:
-                verification = ROOT / row["verification_path"]
-                self.assertEqual(
-                    git_blob_sha(verification),
-                    row["verification_git_blob_sha"],
-                )
-
-    def test_registry_is_exact_current_legacy_route_universe(self):
-        self.assertEqual(set(registry_router.ROUTES), set(legacy_v8.ROUTES))
-        self.assertEqual(len(registry_router.ROUTES), 28)
+    def test_current_effective_universe_has_exact_28_verified_routes(self):
+        state = registry_router.effective_state()
+        self.assertEqual(state["deployable_route_count"], 28)
+        self.assertEqual(state["legacy_selection_metadata_count"], 28)
+        self.assertEqual(state["auto_admitted_route_count"], 0)
+        self.assertEqual(state["stale_selection_metadata_route_ids"], [])
+        self.assertEqual(set(state["deployable_route_ids"]), set(legacy_v8.ROUTES))
 
     def test_migration_preserves_exact_v8_to_v1_precedence(self):
         registry = registry_router.load_registry()
@@ -103,6 +101,51 @@ class R2DirectRouteRegistryV1Tests(unittest.TestCase):
         self.assertIs(old.get("matched"), False)
         self.assertIs(new.get("matched"), False)
 
+    def test_dynamic_activation_route_derives_unique_match_fail_closed_policy(self):
+        activation = registry_router.load_current_activation()
+        row = next(
+            r for r in activation["routes"]
+            if r.get("runtime") and isinstance(r.get("verification"), dict)
+        )
+        derived = registry_router._derive_dynamic_row(
+            row,
+            activation_index=0,
+            root=ROOT,
+        )
+        self.assertEqual(derived["route_id"], row["route_id"])
+        self.assertEqual(
+            derived["selection_class"],
+            registry_router.DYNAMIC_SELECTION_CLASS,
+        )
+        self.assertTrue(derived["automatic_live_admission"])
+        self.assertEqual(
+            derived["collision_policy"],
+            "FAIL_CLOSED_ON_ANY_OTHER_DYNAMIC_OR_LEGACY_MATCH",
+        )
+
+    def test_dynamic_collision_fails_closed_without_executing_priority_guess(self):
+        dynamic_a={"route_id":"DYN_A","selection_class":registry_router.DYNAMIC_SELECTION_CLASS,"activation_index":0}
+        dynamic_b={"route_id":"DYN_B","selection_class":registry_router.DYNAMIC_SELECTION_CLASS,"activation_index":1}
+        state={
+            "rows":[dynamic_a,dynamic_b],
+            "deployable_route_ids":["DYN_A","DYN_B"],
+            "legacy_selection_metadata_route_ids":[],
+            "auto_admitted_route_ids":["DYN_A","DYN_B"],
+            "stale_selection_metadata_route_ids":[],
+            "deployable_route_count":2,
+            "legacy_selection_metadata_count":0,
+            "auto_admitted_route_count":2,
+            "current_activation_path":"x",
+            "current_activation_git_blob_sha":"y",
+        }
+        def fake_pf(row, request, repo_root):
+            return {"matched":True,"route_id":row["route_id"]}
+        with mock.patch.object(registry_router,"effective_state",return_value=state):
+            with mock.patch.object(registry_router,"_preflight_row",side_effect=fake_pf):
+                out=registry_router.preflight({"task_id":"t","goal":"g"})
+        self.assertEqual(out["status"],"FAIL_CLOSED__DIRECT_ROUTE_COLLISION")
+        self.assertEqual(out["matching_route_ids"],["DYN_A","DYN_B"])
+
     def test_fixed_point_no_longer_depends_on_version_chained_router(self):
         source = FIXED_POINT.read_text(encoding="utf-8")
         self.assertIn(
@@ -114,11 +157,12 @@ class R2DirectRouteRegistryV1Tests(unittest.TestCase):
             source,
         )
 
-    def test_future_route_growth_is_registry_data_not_fixed_point_source(self):
+    def test_future_route_growth_requires_neither_source_nor_registry_edit(self):
         catalog = registry_router.catalog()
         self.assertTrue(catalog["pass"])
         self.assertEqual(catalog["route_count"], 28)
         self.assertIs(catalog["future_route_source_edit_required"], False)
+        self.assertIs(catalog["future_route_registry_edit_required"], False)
 
 
 if __name__ == "__main__":
