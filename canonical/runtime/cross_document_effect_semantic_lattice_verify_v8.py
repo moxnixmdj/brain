@@ -311,7 +311,11 @@ def _recompute(
             }
             exact.append(calculus._validate_effect(assembled))
 
-        if not doc_open:
+        if exact:
+            # Exact effects remain exact evidence even when a sibling effect in
+            # the same document still has TOP fields. Open sibling semantics
+            # block terminal closure, but must not erase independently proved
+            # exact effects from producer/verifier state comparison.
             exact_by_doc[doc["document_id"]]=exact
 
     if open_atoms:
