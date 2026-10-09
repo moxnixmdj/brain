@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_DEPENDENCY_GRAPH_V1",
+  "date": "2026-10-09",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "claims_complete": false,
+  "leaves": [
+    {
+      "id": "router-canary-implementation",
+      "status": "PROVED",
+      "binding": {
+        "path": "canonical/runtime/router_deployment_canary_v1.py",
+        "git_blob_sha": "de71202a17071c8af88ec7ac6e1f241fb42854c2"
+      }
+    },
+    {
+      "id": "router-canary-executable-refinement",
+      "status": "UNRESOLVED",
+      "binding": {
+        "path": "canonical/governance/ROUTER_DEPLOYMENT_CANARY_EXECUTABLE_REFINEMENT_20261009_V1.json",
+        "git_blob_sha": "d430de0c6ed47b1d18737a5261c345b7546896c9"
+      },
+      "reason": "STRUCTURAL_BINDING_ONLY__NO_MECHANICALLY_CHECKED_REFINEMENT_PROOF_CLASS"
+    }
+  ],
+  "routes": [
+    {
+      "id": "router-deployment-canary",
+      "lifecycle": "IMPLEMENTED",
+      "creditable": false,
+      "terminal_load_bearing": false,
+      "dependency_leaf_ids": [
+        "router-canary-implementation",
+        "router-canary-executable-refinement"
+      ],
+      "executable_refinement_leaf_id": "router-canary-executable-refinement",
+      "deployment_identity_leaf_id": null
+    }
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_credit_delta": 0,
+  "nonclaims": [
+    "THIS_GRAPH_DOES_NOT_PROVE_ITS_OWN_COMPLETENESS",
+    "STRUCTURAL_REFINEMENT_BINDING_IS_NOT_EXECUTABLE_REFINEMENT_PROOF",
+    "THE_CANARY_IS_NOT_CREDITABLE_OR_TERMINAL"
+  ]
+}
