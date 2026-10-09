@@ -29,6 +29,10 @@ FALSIFIER_TESTS_PATH = "canonical/tests/test_root_theorem_falsifier_v1.py"
 R4_BINDING_TESTS_PATH = "canonical/tests/test_root_theorem_r4_binding_coherence_v1.py"
 LIVE_VALIDATOR_PATH = "canonical/runtime/root_theorem_live_binding_v1.py"
 LIVE_VALIDATOR_TESTS_PATH = "canonical/tests/test_root_theorem_live_binding_v1.py"
+TERMINAL_REDUCER_PATH = "canonical/runtime/terminal_closure_reducer.py"
+TERMINAL_REDUCER_TESTS_PATH = "canonical/tests/test_terminal_closure_reducer_semantic_states_v1.py"
+TERMINAL_MANIFEST_PATH = "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json"
+TARGET_ENVELOPE_PATH = "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json"
 
 
 def git_blob_sha(data: bytes) -> str:
@@ -67,6 +71,12 @@ def validate_documents(
     r4_binding_tests_blob_sha: str,
     live_validator_blob_sha: str,
     live_validator_tests_blob_sha: str,
+    terminal_reducer_blob_sha: str,
+    terminal_reducer_tests_blob_sha: str,
+    terminal_manifest: Mapping[str, Any],
+    terminal_manifest_blob_sha: str,
+    target_envelope: Mapping[str, Any],
+    target_envelope_blob_sha: str,
 ) -> dict[str, Any]:
     errors: list[str] = []
 
@@ -148,6 +158,38 @@ def validate_documents(
         claim_carrier.get("global_open_ended_mission_completion_derivable") is False,
     )
 
+    checkpoint_aggregator = claim_scope.get("checkpoint_aggregator") or {}
+    _fail(errors, "CLAIM_SCOPE_CHECKPOINT_SCOPE_DRIFT", checkpoint_aggregator.get("scope") == "OPUS_5_5_CHECKPOINT_ONLY")
+    _fail(errors, "CLAIM_SCOPE_TERMINAL_REDUCER_PATH_DRIFT", (checkpoint_aggregator.get("reducer") or {}).get("path") == TERMINAL_REDUCER_PATH)
+    _fail(errors, "CLAIM_SCOPE_TERMINAL_REDUCER_BLOB_STALE", (checkpoint_aggregator.get("reducer") or {}).get("git_blob_sha") == terminal_reducer_blob_sha)
+    _fail(errors, "CLAIM_SCOPE_TERMINAL_REDUCER_TESTS_PATH_DRIFT", (checkpoint_aggregator.get("tests") or {}).get("path") == TERMINAL_REDUCER_TESTS_PATH)
+    _fail(errors, "CLAIM_SCOPE_TERMINAL_REDUCER_TESTS_BLOB_STALE", (checkpoint_aggregator.get("tests") or {}).get("git_blob_sha") == terminal_reducer_tests_blob_sha)
+    _fail(errors, "CLAIM_SCOPE_TERMINAL_MANIFEST_PATH_DRIFT", (checkpoint_aggregator.get("manifest") or {}).get("path") == TERMINAL_MANIFEST_PATH)
+    _fail(errors, "CLAIM_SCOPE_TERMINAL_MANIFEST_BLOB_STALE", (checkpoint_aggregator.get("manifest") or {}).get("git_blob_sha") == terminal_manifest_blob_sha)
+    _fail(errors, "CLAIM_SCOPE_TARGET_ENVELOPE_PATH_DRIFT", (checkpoint_aggregator.get("target_envelope") or {}).get("path") == TARGET_ENVELOPE_PATH)
+    _fail(errors, "CLAIM_SCOPE_TARGET_ENVELOPE_BLOB_STALE", (checkpoint_aggregator.get("target_envelope") or {}).get("git_blob_sha") == target_envelope_blob_sha)
+    _fail(errors, "CLAIM_SCOPE_CHECKPOINT_GLOBAL_MISSION_ESCALATION", checkpoint_aggregator.get("global_open_ended_mission_completion_derivable") is False)
+
+    envelope_families = target_envelope.get("families")
+    envelope_ids = [
+        row.get("id")
+        for row in envelope_families
+        if isinstance(row, Mapping) and isinstance(row.get("id"), str) and row.get("id")
+    ] if isinstance(envelope_families, list) else []
+    _fail(errors, "TARGET_ENVELOPE_FAMILY_COUNT_DRIFT", target_envelope.get("target_family_count") == 19 and len(envelope_ids) == 19)
+    _fail(errors, "TARGET_ENVELOPE_FAMILY_ID_DUPLICATE", len(envelope_ids) == len(set(envelope_ids)) == 19)
+
+    manifest_target = terminal_manifest.get("target_envelope_binding") or {}
+    _fail(errors, "TERMINAL_MANIFEST_TARGET_PATH_DRIFT", manifest_target.get("path") == TARGET_ENVELOPE_PATH)
+    _fail(errors, "TERMINAL_MANIFEST_TARGET_BLOB_STALE", manifest_target.get("git_blob_sha") == target_envelope_blob_sha)
+    manifest_families = terminal_manifest.get("families")
+    manifest_ids = [
+        row.get("id")
+        for row in manifest_families
+        if isinstance(row, Mapping) and isinstance(row.get("id"), str) and row.get("id")
+    ] if isinstance(manifest_families, list) else []
+    _fail(errors, "TERMINAL_MANIFEST_REQUIRED_FAMILY_ID_SET_DRIFT", set(manifest_ids) == set(envelope_ids) and len(manifest_ids) == len(envelope_ids) == 19)
+
     falsifier_ref = binding.get("falsifier") or {}
     _fail(errors, "BINDING_FALSIFIER_PATH_DRIFT", falsifier_ref.get("path") == FALSIFIER_PATH)
     _fail(errors, "BINDING_FALSIFIER_BLOB_STALE", falsifier_ref.get("git_blob_sha") == falsifier_blob_sha)
@@ -179,6 +221,25 @@ def validate_documents(
     claim_ref = binding.get("claim_scope_precondition") or {}
     _fail(errors, "BINDING_CLAIM_SCOPE_PATH_MISSING", claim_ref.get("path") == CLAIM_SCOPE_PATH)
     _fail(errors, "BINDING_CLAIM_SCOPE_BLOB_STALE", claim_ref.get("git_blob_sha") == claim_scope_blob_sha)
+
+    aggregator_ref = binding.get("checkpoint_claim_aggregator_precondition") or {}
+    _fail(errors, "BINDING_CHECKPOINT_REDUCER_PATH_DRIFT", (aggregator_ref.get("reducer") or {}).get("path") == TERMINAL_REDUCER_PATH)
+    _fail(errors, "BINDING_CHECKPOINT_REDUCER_BLOB_STALE", (aggregator_ref.get("reducer") or {}).get("git_blob_sha") == terminal_reducer_blob_sha)
+    _fail(errors, "BINDING_CHECKPOINT_REDUCER_TESTS_PATH_DRIFT", (aggregator_ref.get("tests") or {}).get("path") == TERMINAL_REDUCER_TESTS_PATH)
+    _fail(errors, "BINDING_CHECKPOINT_REDUCER_TESTS_BLOB_STALE", (aggregator_ref.get("tests") or {}).get("git_blob_sha") == terminal_reducer_tests_blob_sha)
+    _fail(errors, "BINDING_CHECKPOINT_MANIFEST_PATH_DRIFT", (aggregator_ref.get("manifest") or {}).get("path") == TERMINAL_MANIFEST_PATH)
+    _fail(errors, "BINDING_CHECKPOINT_MANIFEST_BLOB_STALE", (aggregator_ref.get("manifest") or {}).get("git_blob_sha") == terminal_manifest_blob_sha)
+    _fail(errors, "BINDING_CHECKPOINT_TARGET_PATH_DRIFT", (aggregator_ref.get("target_envelope") or {}).get("path") == TARGET_ENVELOPE_PATH)
+    _fail(errors, "BINDING_CHECKPOINT_TARGET_BLOB_STALE", (aggregator_ref.get("target_envelope") or {}).get("git_blob_sha") == target_envelope_blob_sha)
+    _fail(errors, "BINDING_CHECKPOINT_GLOBAL_MISSION_ESCALATION", aggregator_ref.get("global_open_ended_mission_completion_derivable") is False)
+
+    terminal_override = authority.get("terminal_semantics_override") or {}
+    reducer_authority = terminal_override.get("mandatory_terminal_reducer") or {}
+    _fail(errors, "TERMINAL_AUTHORITY_REDUCER_PATH_DRIFT", reducer_authority.get("path") == TERMINAL_REDUCER_PATH)
+    _fail(errors, "TERMINAL_AUTHORITY_REDUCER_BLOB_STALE", reducer_authority.get("git_blob_sha") == terminal_reducer_blob_sha)
+    manifest_authority = terminal_override.get("mandatory_terminal_manifest") or {}
+    _fail(errors, "TERMINAL_AUTHORITY_MANIFEST_PATH_DRIFT", manifest_authority.get("path") == TERMINAL_MANIFEST_PATH)
+    _fail(errors, "TERMINAL_AUTHORITY_MANIFEST_BLOB_STALE", manifest_authority.get("git_blob_sha") == terminal_manifest_blob_sha)
 
     sources = authority.get("authoritative_sources") or {}
     live_ref = sources.get("coverage_completeness_root_theorem_r1_r4") or {}
@@ -218,6 +279,10 @@ def validate_repo(root: Path) -> dict[str, Any]:
     r4_binding_tests_path = root / R4_BINDING_TESTS_PATH
     live_validator_path = root / LIVE_VALIDATOR_PATH
     live_validator_tests_path = root / LIVE_VALIDATOR_TESTS_PATH
+    terminal_reducer_path = root / TERMINAL_REDUCER_PATH
+    terminal_reducer_tests_path = root / TERMINAL_REDUCER_TESTS_PATH
+    terminal_manifest_path = root / TERMINAL_MANIFEST_PATH
+    target_envelope_path = root / TARGET_ENVELOPE_PATH
 
     mission_bytes = mission_path.read_bytes()
     theorem_bytes = theorem_path.read_bytes()
@@ -247,4 +312,10 @@ def validate_repo(root: Path) -> dict[str, Any]:
         r4_binding_tests_blob_sha=git_blob_sha(r4_binding_tests_path.read_bytes()),
         live_validator_blob_sha=git_blob_sha(live_validator_path.read_bytes()),
         live_validator_tests_blob_sha=git_blob_sha(live_validator_tests_path.read_bytes()),
+        terminal_reducer_blob_sha=git_blob_sha(terminal_reducer_path.read_bytes()),
+        terminal_reducer_tests_blob_sha=git_blob_sha(terminal_reducer_tests_path.read_bytes()),
+        terminal_manifest=load_json(terminal_manifest_path),
+        terminal_manifest_blob_sha=git_blob_sha(terminal_manifest_path.read_bytes()),
+        target_envelope=load_json(target_envelope_path),
+        target_envelope_blob_sha=git_blob_sha(target_envelope_path.read_bytes()),
     )

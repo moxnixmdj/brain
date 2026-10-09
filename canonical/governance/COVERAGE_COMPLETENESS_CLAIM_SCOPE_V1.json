@@ -73,5 +73,29 @@
     "status": "BOUND_TO_CURRENT_MISSION_AND_ROOT_THEOREM",
     "pr": 3786,
     "terminal_credit_delta": 0
+  },
+  "checkpoint_aggregator": {
+    "scope": "OPUS_5_5_CHECKPOINT_ONLY",
+    "reducer": {
+      "path": "canonical/runtime/terminal_closure_reducer.py",
+      "git_blob_sha": "05d366142079f1bc8c3c5234aa049a73ceccd7aa"
+    },
+    "tests": {
+      "path": "canonical/tests/test_terminal_closure_reducer_semantic_states_v1.py",
+      "git_blob_sha": "f1d8a9951d6594781c6af33eba03a7c50c5c0e3a"
+    },
+    "manifest": {
+      "path": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
+      "git_blob_sha": "d449a24039d57c7439ca7dea7449d5be26f2d24a"
+    },
+    "target_envelope": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d",
+      "required_family_count": 19
+    },
+    "identity_rule": "MANIFEST_FAMILY_ID_SET_MUST_EQUAL_CONTENT_ADDRESSED_TARGET_ENVELOPE_FAMILY_ID_SET",
+    "universal_cover_route_preserved": true,
+    "global_open_ended_mission_completion_derivable": false,
+    "terminal_credit_delta": 0
   }
 }

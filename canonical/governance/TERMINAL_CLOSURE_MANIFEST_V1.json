@@ -633,5 +633,11 @@
     "promotion_evidence": "canonical/verification/ACCEPTED_THREE_OWNERSHIP_PROMOTION_PROOF_20261003_V1.json",
     "new_reality_units_consumed": 0,
     "incremental_spend_usd": 0
+  },
+  "target_envelope_binding": {
+    "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+    "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d",
+    "target_family_count": 19,
+    "role": "AUTHORITATIVE_FROZEN_CHECKPOINT_FAMILY_IDENTITY_UNIVERSE"
   }
 }
