@@ -2,6 +2,7 @@ from __future__ import annotations
 import unittest
 
 from canonical.runtime import cross_document_effect_hypothesis_worldset_v1 as w
+from canonical.runtime import cross_document_effect_hypothesis_worldset_verify_v1 as verify
 
 def _e(eid,target,cls,value,*,cond=None,start=None,sup=None):
     return {
@@ -81,6 +82,7 @@ class CrossDocumentEffectHypothesisWorldsetV1Tests(unittest.TestCase):
         self.assertEqual(out["world_count"],2)
         self.assertEqual(out["minimum_discriminator_slots"],[])
         self.assertTrue(out["does_not_require_unique_effect_interpretation"])
+        self.assertTrue(verify.verify(_problem(small=True),out)["verified"])
 
     def test_same_ambiguity_reopens_when_exception_not_applicable(self):
         out=w.evaluate(_problem(small=False))
@@ -88,6 +90,7 @@ class CrossDocumentEffectHypothesisWorldsetV1Tests(unittest.TestCase):
         self.assertEqual(out["status"],"OPEN__TERMINALLY_RELEVANT_EFFECT_AMBIGUITY")
         self.assertEqual(set(out["possible_outcomes"]),{"12","13"})
         self.assertEqual(out["minimum_discriminator_slots"],["B.effect"])
+        self.assertTrue(verify.verify(_problem(small=False),out)["verified"])
 
     def test_irrelevant_second_ambiguity_is_excluded_from_minimum_discriminator(self):
         out=w.evaluate(_problem(small=False,add_irrelevant=True))
