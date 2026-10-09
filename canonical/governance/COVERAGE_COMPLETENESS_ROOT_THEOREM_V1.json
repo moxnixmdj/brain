@@ -1,0 +1,191 @@
+{
+  "schema": "PROJECT_BRAIN_COVERAGE_COMPLETENESS_ROOT_THEOREM_V1",
+  "date": "2026-10-09",
+  "status": "ACTIVE_PROOF_ARCHITECTURE__SUBORDINATE_TO_CURRENT_TERMINAL_AUTHORITY__ZERO_TERMINAL_CREDIT",
+  "authority_scope": "PROOF_ARCHITECTURE_ONLY",
+  "terminal_objective_unchanged": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+  "roots": {
+    "R1": {
+      "id": "REALITY_CONTAINMENT",
+      "claim": "B_real SUBSETEQ B_plus",
+      "meaning": "Every real mission-relevant behavior is retained by the conservative possible-behavior upper envelope."
+    },
+    "R2": {
+      "id": "MISSION_SOUNDNESS",
+      "claim": "G_minus SUBSETEQ G_real",
+      "meaning": "Every definitely-good behavior is actually accepted by the authorized mission."
+    },
+    "R3": {
+      "id": "TERMINAL_CLOSURE",
+      "claim": "B_plus SUBSETEQ G_minus",
+      "meaning": "Every still-possible behavior is definitely mission-acceptable."
+    },
+    "R4": {
+      "id": "PROOF_AND_REALIZATION_TRUST",
+      "claim": "TRUSTWORTHY_PROOF_AND_REALIZATION(R1,R2,R3)",
+      "meaning": "The evidence, proof calculus, provenance, revision binding, realization, and trust chain used to assert R1-R3 are authoritative.",
+      "meta_level": true
+    }
+  },
+  "theorem": {
+    "pure_set_claim": "R1 AND R2 AND R3 => B_real SUBSETEQ G_real",
+    "proof_rule": "SET_INCLUSION_TRANSITIVITY",
+    "r4_role": "OPERATIONAL_AUTHORITY_FOR_THE_ASSERTED_PREMISES__NOT_A_FOURTH_SET_INCLUSION",
+    "terminal_success_requires": [
+      "R1",
+      "R2",
+      "R3",
+      "R4"
+    ],
+    "current_terminal_success_asserted": false
+  },
+  "root_mapping": {
+    "R1": [
+      "BOUNDARY_SUFFICIENCY",
+      "GENERALIZED_BEHAVIORAL_CARRIER",
+      "IMPLEMENTATION_REFINEMENT_OR_MEDIATED_CONTAINMENT",
+      "SOUND_ABSTRACTION",
+      "UNKNOWN_TO_TOP",
+      "EFFECT_AND_RESOURCE_CONTAINMENT",
+      "REALITY_ANCHORING",
+      "COMPLETE_MEDIATION_WHERE_USED",
+      "RUNTIME_CONTAINMENT_FALSIFICATION"
+    ],
+    "R2": [
+      "MISSION_AUTHORITY",
+      "MISSION_SEMANTICS_ENVELOPE",
+      "MODALITY_PRESERVATION",
+      "SCOPE_AND_ASSUMPTION_DISCIPLINE",
+      "PROXY_EVALUATOR_MISSION_BINDING",
+      "QUALITATIVE_ACCEPTANCE_SEMANTICS",
+      "MISSION_REVISION_AUTHORITY"
+    ],
+    "R3": [
+      "DIRECT_SUBSET_CLOSURE",
+      "VIABILITY_WHERE_REQUIRED",
+      "WINNING_OR_LIVENESS_WHERE_REQUIRED",
+      "FINALITY_WHERE_REQUIRED",
+      "QUANTITATIVE_RISK_WHERE_REQUIRED"
+    ],
+    "R4": [
+      "TYPED_CERTIFICATES",
+      "WELL_FOUNDED_PROOF_DEPENDENCIES",
+      "PREMISE_CONSISTENCY_OR_NONEXPLOSION",
+      "PROOF_CALCULUS_SEMANTIC_SOUNDNESS",
+      "PROOF_OBLIGATION_COVERAGE",
+      "BYTES_TO_SEMANTICS",
+      "PROOF_TO_USE_CONTINUITY",
+      "EXECUTION_REALIZATION",
+      "EPOCH_AND_REVISION_BINDING",
+      "NON_EQUIVOCATING_AUTHORITY_HISTORY",
+      "EXPLICIT_TRUST_ATOMS"
+    ]
+  },
+  "statuses": {
+    "root": [
+      "PROVED",
+      "FALSIFIED",
+      "UNKNOWN"
+    ],
+    "terminal": [
+      "PROVED_GOOD",
+      "PROVED_BAD",
+      "REFINE"
+    ],
+    "new_e": [
+      "ROOT_FAILURE_WITNESS",
+      "THEOREM_BINDING_INCONSISTENCY",
+      "UNKNOWN_FAIL_CLOSED",
+      "NOT_A_FALSE_SUCCESS_WITNESS"
+    ],
+    "mechanism": [
+      "ADMIT_ROOT_REPAIR_CANDIDATE",
+      "ADMIT_DERIVED_OPTIMIZATION",
+      "REJECT_PENDING_TCB_DOMINANCE_PROOF",
+      "REJECT_REDUNDANT_META_MECHANISM"
+    ]
+  },
+  "hard_rules": [
+    "UNKNOWN_NEVER_EQUALS_PROVED",
+    "NOT_PROVED_NEVER_EQUALS_FALSE",
+    "TIMEOUT_NEVER_EQUALS_UNSAT",
+    "NO_NEW_ROOT_FROM_A_NAMED_CATEGORY_ALONE",
+    "FALSE_SUCCESS_WITH_ASSERTED_R1_R2_R3_REOPENS_R4_AND_SEMANTIC_BINDINGS_BEFORE_ANY_R5",
+    "NO_TERMINAL_CREDIT_FROM_ARCHITECTURE_SELF_CHECK",
+    "NO_FRESH_TARGET_REALITY_FROM_THIS_ARTIFACT"
+  ],
+  "new_e_admission": {
+    "default": "REJECT_AS_PEER_ARCHITECTURE",
+    "admit_if_any": [
+      "CLOSES_DEMONSTRATED_R1_R2_R3_OR_R4_GAP",
+      "MATERIALLY_REDUCES_ROOT_PROOF_COST_WITHOUT_WEAKENING_SOUNDNESS"
+    ],
+    "tcb_growth_rule": "IF_TRUSTED_CORE_GROWS_REQUIRE_EXPLICIT_DOMINANCE_PROOF",
+    "anti_bloat_metric": "ROOT_DELTA_OR_PROOF_COST_DELTA_REQUIRED"
+  },
+  "falsification_program": {
+    "runtime": "canonical/runtime/root_theorem_falsifier_v1.py",
+    "tests": "canonical/tests/test_root_theorem_falsifier_v1.py",
+    "mutations": [
+      {
+        "id": "M_R1_OMISSION",
+        "expected": "R1"
+      },
+      {
+        "id": "M_R2_UNSOUND_GOOD",
+        "expected": "R2"
+      },
+      {
+        "id": "M_R3_OPEN_FRONTIER",
+        "expected": "R3"
+      },
+      {
+        "id": "M_R4_UNTRUSTWORTHY_CHAIN",
+        "expected": "R4"
+      },
+      {
+        "id": "M_UNKNOWN_PROMOTION",
+        "expected": "UNKNOWN_FAIL_CLOSED"
+      },
+      {
+        "id": "M_META_CATEGORY_WITH_ZERO_ROOT_DELTA",
+        "expected": "REJECT_REDUNDANT_META_MECHANISM"
+      }
+    ],
+    "mutation_score_semantics": "DIAGNOSTIC_ONLY__NEVER_UNIVERSAL_COMPLETENESS_PROOF"
+  },
+  "independent_verification": {
+    "path": "canonical/verification/COVERAGE_COMPLETENESS_ROOT_THEOREM_INDEPENDENT_VERIFICATION_20261009_V1.json",
+    "pure_boolean_valuations_checked": 16,
+    "counterexamples_with_R1_R2_R3": 0,
+    "each_of_R1_R2_R3_individually_load_bearing": true,
+    "local_test_count": 11,
+    "local_test_failures": 0,
+    "scope": "ARCHITECTURE_LOGIC_ONLY__NOT_CURRENT_MISSION_CLOSURE"
+  },
+  "reconciliation": {
+    "current_base_commit": "0dac48cab2ae3334e6d00bf35d0c2a988b29aa42",
+    "current_terminal_authority": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+    "ancestor_action_intent": "canonical/action_intents/ACTION_INTENT_TERMINAL_FOUR_INVARIANT_COLLAPSE_20261007_V1.json",
+    "stale_specialized_pr": {
+      "number": 2206,
+      "status": "CLOSED_AS_SUPERSEDED_LIVE_INTEGRATION_VEHICLE",
+      "preserve_evidence": true
+    },
+    "active_pr": 3693
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "nonclaims": [
+    "CURRENT_R1_NOT_PROVED_BY_THIS_ARTIFACT",
+    "CURRENT_R2_NOT_PROVED_BY_THIS_ARTIFACT",
+    "CURRENT_R3_NOT_PROVED_BY_THIS_ARTIFACT",
+    "CURRENT_TERMINAL_GOAL_NOT_CHANGED",
+    "CURRENT_ACCEPTANCE_OR_OWNERSHIP_COUNTS_NOT_CHANGED"
+  ]
+}
