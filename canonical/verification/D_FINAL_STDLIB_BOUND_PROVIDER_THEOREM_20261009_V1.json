@@ -1,0 +1,153 @@
+{
+  "schema": "PROJECT_BRAIN_D_FINAL_STDLIB_BOUND_PROVIDER_THEOREM_V1",
+  "date": "2026-10-09",
+  "status": "VERIFIED_PROVIDER_THEOREM__TWO_INDEPENDENT_ZERO_AMBIENT_CARRIERS__EXACT_NINE_FILE_CLOSURE__ZERO_CREDIT_UNTIL_MEMBER_COMPOSITION",
+  "provider_id": "D_FINAL_STDLIB_BOUND_EXECUTOR_V1",
+  "exact_subject": {
+    "provider_kernel": {
+      "path": "canonical/runtime/d_final_stdlib_bound_executor_v1.py",
+      "git_blob_sha": "6d064ee1a01cfde7de80df65e3e0ea3a87d35ed4"
+    },
+    "material_manifest": {
+      "path": "canonical/governance/D_FINAL_STDLIB_PROVIDER_MATERIAL_MANIFEST_V1.json",
+      "git_blob_sha": "2c517cab595bc050de67d6f6bb86ab0545ed7dd3"
+    },
+    "replay_harness": {
+      "path": "canonical/tests/d_final_stdlib_provider_zero_ambient_replay_v1.py",
+      "git_blob_sha": "91936de9ae765fb2de016359d70d7f14d545f290"
+    },
+    "zero_ambient_launcher": {
+      "path": "canonical/runtime/zero_ambient_namespace_launcher_v1.py",
+      "git_blob_sha": "6e687527e9c4da82fb5d974a729aaa263ee73ea8"
+    },
+    "registry": {
+      "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+      "git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85"
+    }
+  },
+  "theorem": {
+    "source_class": "python_stdlib",
+    "nonstdlib_source_class_rejected": true,
+    "exact_material_closure_verified_before_use": true,
+    "registry_admission_verified": true,
+    "zero_incremental_spend_required": true,
+    "frozen_template_rendering_verified": true,
+    "registry_file_pin_enforced": true,
+    "registry_entry_pin_enforced": true,
+    "rendered_action_pin_enforced": true,
+    "declared_expectation_enforced": true,
+    "independent_execution_trace_reverification": true,
+    "composition_capsule_compiled": true,
+    "zero_ambient_namespace_inherited_from_exact_launcher": true,
+    "host_material_effects_committed": 0,
+    "member_material_certificate_still_required": true
+  },
+  "exact_materials": [
+    {
+      "path": "canonical/runtime/d_final_stdlib_bound_executor_v1.py",
+      "git_blob_sha": "6d064ee1a01cfde7de80df65e3e0ea3a87d35ed4"
+    },
+    {
+      "path": "canonical/tests/test_d_final_stdlib_bound_executor_v1.py",
+      "git_blob_sha": "13e287b67f5e082e50faeb035e1eca8e702019da"
+    },
+    {
+      "path": "canonical/runtime/bound_capability_execution_verifier_v1.py",
+      "git_blob_sha": "2bc99699ec721e4b0ef239340e0c220370811e6f"
+    },
+    {
+      "path": "canonical/runtime/capability_planner.py",
+      "git_blob_sha": "629766f8a1194fd298e0809b64a5e9c5a39fa3ea"
+    },
+    {
+      "path": "canonical/runtime/capability_execution_trace_capsule_v1.py",
+      "git_blob_sha": "75faca7736d75f7e5385952ecb16240731bcdb7e"
+    },
+    {
+      "path": "canonical/runtime/composition_state_capsule_v1.py",
+      "git_blob_sha": "6337298b4804307315308689fbeb65692c67980d"
+    },
+    {
+      "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+      "git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85"
+    },
+    {
+      "path": "canonical/runtime/bound_capabilities/archive_tarfile.py",
+      "git_blob_sha": "2ae62c04ef495d855ca8d46263b4cf05110b5648"
+    },
+    {
+      "path": "canonical/runtime/bound_capabilities/evidence_decision_verify.py",
+      "git_blob_sha": "63cf325320c7b91bf48ea2f2769c999c5a090929"
+    }
+  ],
+  "hostile_suite": {
+    "test_count": 5,
+    "tests": [
+      "ARCHIVE_EXECUTES_AND_TRACE_REVERIFIES",
+      "DECISION_VERIFIER_ACCEPTS_VALID_AND_REJECTS_TAMPER",
+      "MISSING_TEMPLATE_INPUT_FAILS_CLOSED",
+      "NONSTDLIB_REGISTRY_ROW_REJECTED",
+      "STALE_REGISTRY_PIN_REJECTED"
+    ],
+    "carrier_1": "PASS_5_OF_5",
+    "carrier_2": "PASS_5_OF_5"
+  },
+  "replay_1": {
+    "carrier": {
+      "provider": "SPRITES",
+      "name": "brain-live-integrated-v1-run-20261008",
+      "id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34"
+    },
+    "launcher_policy_sha256": "789462c054531544257d162fbabb634518a932a376c05cb2abb848a0c7d13faf",
+    "broker_sha256": "0230cd23d29efb15e8eb449623ea5e88f85359aa794808b76bf482f3a175fd9b",
+    "fresh_nonce_sha256": "0ac6505f413028aef2ff78c528a277af4a889f9079f4709a07776f47b6866a9d",
+    "fresh_archive_result_sha256": "ad230a8df77de677c6e3a5c8007927560c9c28307496188f489f38a635720a8b",
+    "fresh_archive_capsule_head_hash": "d912a25fb9e6d5f8b642f3bf321c1264d98cca1d9eb20343be7debee94536331",
+    "registry_file_sha256": "8c2ac9bdfd0eacfa11b3af879ff027f50ed54078448ab11cadf0ab6fcce2ed38",
+    "archive_registry_entry_sha256": "ede9a7b0a4ffb17310de55b2dc76a7c4ba8a74b88f3b5153c434aa96418f9693",
+    "archive_rendered_action_sha256": "cd3ae03ff12ce05921edb5f05c855d272a58cff60ce6d4d3d0819bc1646ab7a1",
+    "result": "PASS"
+  },
+  "replay_2": {
+    "carrier": {
+      "provider": "SPRITES",
+      "name": "brain-r3-root1-gap-verify-20261008",
+      "id": "sprite-91472ada-4fea-4536-9558-7a7e3da49928"
+    },
+    "launcher_policy_sha256": "376a3f34128f8d60cbe28daee05267e08c6dd744a491bfbdd74bc58f0dc1e4fb",
+    "broker_sha256": "bb82b1ab366157e752d37b7c2f83030d0c660939c7e2580f727d24c0b778d072",
+    "fresh_nonce_sha256": "7319c6cfe4b8d6f74ad8a16e73157e49a558a0f3afc8fdca9a4bf9b5bb7ccba4",
+    "fresh_archive_result_sha256": "ec674faf813c40dbd9e5a370739277c72dffc98413dbe89fca5e38a4bc209781",
+    "fresh_archive_capsule_head_hash": "406ee45a1f0edfc122805b995159d8eca448cef34eeb277e4346105b682025b0",
+    "registry_file_sha256": "8c2ac9bdfd0eacfa11b3af879ff027f50ed54078448ab11cadf0ab6fcce2ed38",
+    "archive_registry_entry_sha256": "ede9a7b0a4ffb17310de55b2dc76a7c4ba8a74b88f3b5153c434aa96418f9693",
+    "archive_rendered_action_sha256": "cd3ae03ff12ce05921edb5f05c855d272a58cff60ce6d4d3d0819bc1646ab7a1",
+    "result": "PASS"
+  },
+  "independence": {
+    "distinct_carrier_ids": true,
+    "distinct_fresh_nonce_sha256": true,
+    "distinct_fresh_archive_result_sha256": true,
+    "distinct_fresh_archive_capsule_head_hash": true,
+    "same_exact_provider_kernel": true,
+    "same_exact_material_manifest": true,
+    "same_exact_zero_ambient_launcher": true
+  },
+  "claim_boundary": [
+    "PROVES_SHARED_EXECUTOR_SEMANTICS_FOR_PYTHON_STDLIB_REGISTRY_ROWS",
+    "DOES_NOT_PROVE_ANY_UNSEEN_MEMBER_ADAPTER_SEMANTICS",
+    "EACH_MEMBER_REQUIRES_ITS_OWN_MATERIAL_THEOREM",
+    "DOES_NOT_COVER_PYPI_NPM_APT_SYSTEM_TOOL_RUNTIME_NATIVE_OR_NETWORK_ACQUISITION"
+  ],
+  "authority": {
+    "execution": false,
+    "promotion": false,
+    "ownership": false,
+    "terminal": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
