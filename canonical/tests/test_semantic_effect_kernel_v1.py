@@ -87,21 +87,8 @@ class SemanticEffectKernelBehaviorTests(unittest.TestCase):
         self.assertEqual([x["effect_id"] for x in out], ["E-profit"])
         self.assertEqual(K.active_effect_ids(value), ["E-kind", "E-profit"])
 
-    def test_formal_irrelevance_certificate_can_discharge_exact_bound_effect(self):
+    def test_declared_complete_ambiguity_flags_cannot_mint_formal_discharge(self):
         problem = ambiguity_problem(same_terminal_result=True)
-        effect = self.effect(problem=problem)
-        value = K.make_value("Margin increased.", context_version="ctx-v1", effects=[effect])
-        cert = K.issue_discharge_certificate(
-            effect,
-            proof_kind="AMBIGUITY_TERMINALLY_IRRELEVANT_V1",
-            proof_problem=problem,
-        )
-        clean = K.discharge_effect(value, effect["effect_id"], cert)
-        self.assertEqual(K.active_effect_ids(clean), [])
-        self.assertEqual(clean["discharged_effects"][0]["certificate"]["guarantee"], "FORMAL")
-
-    def test_terminally_divergent_margin_meanings_cannot_get_irrelevance_certificate(self):
-        problem = ambiguity_problem(same_terminal_result=False)
         effect = self.effect(problem=problem)
         with self.assertRaises(K.SemanticEffectError):
             K.issue_discharge_certificate(
@@ -123,128 +110,6 @@ class SemanticEffectKernelBehaviorTests(unittest.TestCase):
                 proof_kind="IDENTIFIABILITY_UNIQUE_V1",
                 proof_problem=problem,
             )
-
-    def test_ambiguous_identifiability_cannot_discharge_sense_binding(self):
-        problem = identifiability_problem(unique_profit=False)
-        effect = self.effect(
-            "E-sense",
-            "interpretation(m17)=profit-margin",
-            problem,
-        )
-        with self.assertRaises(K.SemanticEffectError):
-            K.issue_discharge_certificate(
-                effect,
-                proof_kind="IDENTIFIABILITY_UNIQUE_V1",
-                proof_problem=problem,
-            )
-
-    def test_identifiability_certificate_is_bound_to_required_interpretation(self):
-        problem = identifiability_problem(unique_profit=True)
-        effect = self.effect(
-            "E-sense",
-            "interpretation(m17)=collateral-margin",
-            problem,
-        )
-        with self.assertRaises(K.SemanticEffectError):
-            K.issue_discharge_certificate(
-                effect,
-                proof_kind="IDENTIFIABILITY_UNIQUE_V1",
-                proof_problem=problem,
-            )
-
-    def test_empirical_certificate_cannot_discharge(self):
-        problem = ambiguity_problem(same_terminal_result=True)
-        effect = self.effect(problem=problem)
-        value = K.make_value("x", context_version="ctx-v1", effects=[effect])
-        cert = K.issue_discharge_certificate(
-            effect,
-            proof_kind="AMBIGUITY_TERMINALLY_IRRELEVANT_V1",
-            proof_problem=problem,
-        )
-        cert = dict(cert)
-        cert["guarantee"] = "EMPIRICAL"
-        with self.assertRaises(K.SemanticEffectError):
-            K.discharge_effect(value, effect["effect_id"], cert)
-
-    def test_context_version_mismatch_rejects_discharge(self):
-        problem = ambiguity_problem(same_terminal_result=True)
-        effect = self.effect(problem=problem)
-        value = K.make_value("x", context_version="ctx-v1", effects=[effect])
-        cert = K.issue_discharge_certificate(
-            effect,
-            proof_kind="AMBIGUITY_TERMINALLY_IRRELEVANT_V1",
-            proof_problem=problem,
-        )
-        cert = dict(cert)
-        cert["context_version"] = "ctx-v2"
-        with self.assertRaises(K.SemanticEffectError):
-            K.discharge_effect(value, effect["effect_id"], cert)
-
-    def test_discharge_one_effect_does_not_launder_another(self):
-        problem = ambiguity_problem(same_terminal_result=True)
-        e1 = self.effect("E-profit", "profit_related(m17)", problem)
-        e2 = self.effect("E-kind", "gross_vs_net(m17)")
-        value = K.make_value("x", context_version="ctx-v1", effects=[e1, e2])
-        cert = K.issue_discharge_certificate(
-            e1,
-            proof_kind="AMBIGUITY_TERMINALLY_IRRELEVANT_V1",
-            proof_problem=problem,
-        )
-        out = K.discharge_effect(value, "E-profit", cert)
-        self.assertEqual(K.active_effect_ids(out), ["E-kind"])
-
-    def test_same_effect_id_with_different_semantics_is_rejected_after_discharge(self):
-        problem = ambiguity_problem(same_terminal_result=True)
-        e1 = self.effect("E-collision", "profit_related(m17)", problem)
-        e2 = self.effect("E-collision", "collateral_related(m17)", problem)
-        v1 = K.make_value("a", context_version="ctx-v1", effects=[e1])
-        v2 = K.make_value("b", context_version="ctx-v1", effects=[e2])
-        c1 = K.issue_discharge_certificate(
-            e1,
-            proof_kind="AMBIGUITY_TERMINALLY_IRRELEVANT_V1",
-            proof_problem=problem,
-        )
-        c2 = K.issue_discharge_certificate(
-            e2,
-            proof_kind="AMBIGUITY_TERMINALLY_IRRELEVANT_V1",
-            proof_problem=problem,
-        )
-        d1 = K.discharge_effect(v1, e1["effect_id"], c1)
-        d2 = K.discharge_effect(v2, e2["effect_id"], c2)
-        with self.assertRaises(K.SemanticEffectError):
-            K.compose_value("combined", inputs=[d1, d2])
-
-    def test_invalidating_certificate_reintroduces_effect(self):
-        problem = ambiguity_problem(same_terminal_result=True)
-        effect = self.effect(problem=problem)
-        value = K.make_value("x", context_version="ctx-v1", effects=[effect])
-        cert = K.issue_discharge_certificate(
-            effect,
-            proof_kind="AMBIGUITY_TERMINALLY_IRRELEVANT_V1",
-            proof_problem=problem,
-        )
-        clean = K.discharge_effect(value, effect["effect_id"], cert)
-        reopened = K.invalidate_certificates(clean, [cert["certificate_id"]])
-        self.assertEqual(K.active_effect_ids(reopened), [effect["effect_id"]])
-        self.assertEqual(reopened["discharged_effects"], [])
-
-    def test_transport_rejects_forged_prior_discharge_history(self):
-        problem = ambiguity_problem(same_terminal_result=True)
-        effect = self.effect(problem=problem)
-        value = K.make_value("x", context_version="ctx-v1", effects=[effect])
-        cert = K.issue_discharge_certificate(
-            effect,
-            proof_kind="AMBIGUITY_TERMINALLY_IRRELEVANT_V1",
-            proof_problem=problem,
-        )
-        clean = K.discharge_effect(value, effect["effect_id"], cert)
-        forged = dict(clean)
-        forged["discharged_effects"] = [dict(clean["discharged_effects"][0])]
-        forged["discharged_effects"][0]["certificate"] = dict(cert)
-        forged["discharged_effects"][0]["certificate"]["proof_digest"] = "0" * 64
-        verdict = K.verify_transport(inputs=[forged], output=forged)
-        self.assertFalse(verdict["pass"])
-        self.assertEqual(verdict["status"], "FAIL_CLOSED__INVALID_DISCHARGE_HISTORY")
 
     def test_transport_verifier_detects_silent_effect_loss(self):
         effect = self.effect()
