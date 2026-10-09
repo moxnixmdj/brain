@@ -1,9 +1,43 @@
+import hashlib
+import json
 import unittest
 
 from canonical.runtime.semantic_relation_control_v1 import resolve
 
 
 SCOPE = "finance:policy:2026"
+
+
+def _sha(value):
+    return hashlib.sha256(
+        json.dumps(
+            value,
+            sort_keys=True,
+            separators=(",", ":"),
+            ensure_ascii=False,
+            allow_nan=False,
+        ).encode("utf-8")
+    ).hexdigest()
+
+
+def terminal_signature_receipt(rows, *, scope=SCOPE, left_id=None, right_id=None):
+    by_id = {row["raw_id"]: row for row in rows}
+    ids = list(by_id)
+    left_id = left_id or ids[0]
+    right_id = right_id or ids[1]
+    return {
+        "pass": True,
+        "schema": "PROJECT_BRAIN_TERMINAL_SIGNATURE_COMPLETENESS_AUTHORITY_RECEIPT_V1",
+        "scope_id": scope,
+        "left_id": left_id,
+        "right_id": right_id,
+        "left_terminal_signature_complete": True,
+        "right_terminal_signature_complete": True,
+        "left_terminal_signature_sha256": _sha(by_id[left_id]["terminal_signature"]),
+        "right_terminal_signature_sha256": _sha(by_id[right_id]["terminal_signature"]),
+        "verification_authority_mutated": False,
+        "receipt_sha256": "f" * 64,
+    }
 
 
 def shared_concept_receipt(*, scope=SCOPE, left_id="A", right_id="B"):
@@ -103,30 +137,33 @@ class Tests(unittest.TestCase):
         )
 
     def test_complete_terminal_signature_equality_is_enough_for_current_decision(self):
+        rows = [
+            {
+                "raw_id": "reserve-buffer",
+                "signature_complete": True,
+                "terminal_signature": {
+                    "threshold": 10,
+                    "action_below": "REDUCE_EXPOSURE",
+                },
+            },
+            {
+                "raw_id": "liquidity-cushion",
+                "signature_complete": True,
+                "terminal_signature": {
+                    "threshold": 10,
+                    "action_below": "REDUCE_EXPOSURE",
+                },
+            },
+        ]
+        receipt = terminal_signature_receipt(rows, left_id="reserve-buffer", right_id="liquidity-cushion")
         out = resolve({
             "left_id": "reserve-buffer",
             "right_id": "liquidity-cushion",
             "scope_id": SCOPE,
             "required_relation": "CURRENT_DECISION_SUBSTITUTION",
-            "terminal_signature_rows": [
-                {
-                    "raw_id": "reserve-buffer",
-                    "signature_complete": True,
-                    "terminal_signature": {
-                        "threshold": 10,
-                        "action_below": "REDUCE_EXPOSURE",
-                    },
-                },
-                {
-                    "raw_id": "liquidity-cushion",
-                    "signature_complete": True,
-                    "terminal_signature": {
-                        "threshold": 10,
-                        "action_below": "REDUCE_EXPOSURE",
-                    },
-                },
-            ],
-        })
+            "terminal_signature_rows": rows,
+            "terminal_signature_authority_receipt": receipt,
+        }, terminal_signature_verifier=lambda value: value)
         self.assertTrue(out["pass"], out)
         self.assertEqual(
             out["strongest_proved_relation"],
@@ -135,24 +172,18 @@ class Tests(unittest.TestCase):
         self.assertFalse(out["proved_facts"]["semantic_identity"])
 
     def test_task_equivalence_does_not_prove_semantic_identity(self):
+        rows = [
+            {"raw_id": "A", "signature_complete": True, "terminal_signature": {"action": "ALLOW"}},
+            {"raw_id": "B", "signature_complete": True, "terminal_signature": {"action": "ALLOW"}},
+        ]
         out = resolve({
             "left_id": "A",
             "right_id": "B",
             "scope_id": SCOPE,
             "required_relation": "SEMANTIC_IDENTITY",
-            "terminal_signature_rows": [
-                {
-                    "raw_id": "A",
-                    "signature_complete": True,
-                    "terminal_signature": {"action": "ALLOW"},
-                },
-                {
-                    "raw_id": "B",
-                    "signature_complete": True,
-                    "terminal_signature": {"action": "ALLOW"},
-                },
-            ],
-        })
+            "terminal_signature_rows": rows,
+            "terminal_signature_authority_receipt": terminal_signature_receipt(rows),
+        }, terminal_signature_verifier=lambda value: value)
         self.assertFalse(out["pass"])
         self.assertEqual(
             out["strongest_proved_relation"],
@@ -160,51 +191,74 @@ class Tests(unittest.TestCase):
         )
 
     def test_terminal_difference_blocks_task_substitution(self):
+        rows = [
+            {"raw_id": "A", "signature_complete": True, "terminal_signature": {"action": "ALLOW"}},
+            {"raw_id": "B", "signature_complete": True, "terminal_signature": {"action": "DENY"}},
+        ]
         out = resolve({
             "left_id": "A",
             "right_id": "B",
             "scope_id": SCOPE,
             "required_relation": "CURRENT_DECISION_SUBSTITUTION",
-            "terminal_signature_rows": [
-                {
-                    "raw_id": "A",
-                    "signature_complete": True,
-                    "terminal_signature": {"action": "ALLOW"},
-                },
-                {
-                    "raw_id": "B",
-                    "signature_complete": True,
-                    "terminal_signature": {"action": "DENY"},
-                },
-            ],
-        })
+            "terminal_signature_rows": rows,
+            "terminal_signature_authority_receipt": terminal_signature_receipt(rows),
+        }, terminal_signature_verifier=lambda value: value)
         self.assertFalse(out["pass"])
         self.assertFalse(out["proved_facts"]["current_decision_substitution"])
 
     def test_incomplete_terminal_signature_fails_to_prove_substitution(self):
+        rows = [
+            {"raw_id": "A", "signature_complete": False, "terminal_signature": {"action": "ALLOW"}},
+            {"raw_id": "B", "signature_complete": True, "terminal_signature": {"action": "ALLOW"}},
+        ]
         out = resolve({
             "left_id": "A",
             "right_id": "B",
             "scope_id": SCOPE,
             "required_relation": "CURRENT_DECISION_SUBSTITUTION",
-            "terminal_signature_rows": [
-                {
-                    "raw_id": "A",
-                    "signature_complete": False,
-                    "terminal_signature": {"action": "ALLOW"},
-                },
-                {
-                    "raw_id": "B",
-                    "signature_complete": True,
-                    "terminal_signature": {"action": "ALLOW"},
-                },
-            ],
-        })
+            "terminal_signature_rows": rows,
+            "terminal_signature_authority_receipt": terminal_signature_receipt(rows),
+        }, terminal_signature_verifier=lambda value: value)
         self.assertFalse(out["pass"])
         self.assertIn(
             "SIGNATURE_COMPLETENESS_UNPROVED",
             out["terminal_equivalence"]["reason"],
         )
+
+    def test_terminal_signature_rows_without_authority_receipt_fail_closed(self):
+        rows = [
+            {"raw_id": "A", "signature_complete": True, "terminal_signature": {"action": "ALLOW"}},
+            {"raw_id": "B", "signature_complete": True, "terminal_signature": {"action": "ALLOW"}},
+        ]
+        out = resolve({
+            "left_id": "A",
+            "right_id": "B",
+            "scope_id": SCOPE,
+            "required_relation": "CURRENT_DECISION_SUBSTITUTION",
+            "terminal_signature_rows": rows,
+        })
+        self.assertFalse(out["pass"])
+        self.assertEqual(out["status"], "FAIL_CLOSED__TERMINAL_SIGNATURE_AUTHORITY_INVALID")
+        self.assertEqual(out["reason"], "TERMINAL_SIGNATURE_AUTHORITY_RECEIPT_REQUIRED")
+
+    def test_terminal_signature_authority_bound_to_wrong_signature_fails_closed(self):
+        rows = [
+            {"raw_id": "A", "signature_complete": True, "terminal_signature": {"action": "ALLOW"}},
+            {"raw_id": "B", "signature_complete": True, "terminal_signature": {"action": "ALLOW"}},
+        ]
+        receipt = terminal_signature_receipt(rows)
+        receipt["right_terminal_signature_sha256"] = "0" * 64
+        out = resolve({
+            "left_id": "A",
+            "right_id": "B",
+            "scope_id": SCOPE,
+            "required_relation": "CURRENT_DECISION_SUBSTITUTION",
+            "terminal_signature_rows": rows,
+            "terminal_signature_authority_receipt": receipt,
+        }, terminal_signature_verifier=lambda value: value)
+        self.assertFalse(out["pass"])
+        self.assertEqual(out["status"], "FAIL_CLOSED__TERMINAL_SIGNATURE_AUTHORITY_INVALID")
+        self.assertIn("right_terminal_signature_sha256", out["terminal_equivalence"]["terminal_signature_authority"]["mismatch_fields"])
 
     def test_conflicting_explicit_definitions_fail_closed(self):
         out = resolve({
