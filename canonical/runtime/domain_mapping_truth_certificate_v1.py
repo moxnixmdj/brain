@@ -106,7 +106,11 @@ def _unknown(
     }
 
 
-def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
+def evaluate(
+    payload: Mapping[str, Any],
+    *,
+    relation_edge_verifier=None,
+) -> dict[str, Any]:
     if not isinstance(payload, Mapping):
         return _fail("PAYLOAD_MAPPING_REQUIRED")
 
@@ -198,6 +202,7 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
         evidence=payload.get("evidence", ()),
         candidate_semantic_atoms=payload.get("candidate_semantic_atoms", ()),
         relation_problems=relation_problems,
+        relation_edge_verifier=relation_edge_verifier,
     )
     if result.get("status") == "FAIL_CLOSED":
         return _fail(
