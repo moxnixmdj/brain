@@ -40,6 +40,8 @@ on:
       - "canonical/tests/test_r3_second_family_grounding_compounding_cycle_v1.py"
       - "canonical/runtime/r3_success_adapter_patch_firewall_v1.py"
       - "canonical/tests/test_r3_success_adapter_patch_firewall_v1.py"
+      - "canonical/runtime/r3_success_adapter_patch_author_wrapper_v1.py"
+      - "canonical/tests/test_r3_success_adapter_patch_author_wrapper_v1.py"
       - ".github/workflows/r3-autonomous-self-improvement-v1.yml"
   push:
     branches:
@@ -81,6 +83,8 @@ on:
       - "canonical/tests/test_r3_second_family_grounding_compounding_cycle_v1.py"
       - "canonical/runtime/r3_success_adapter_patch_firewall_v1.py"
       - "canonical/tests/test_r3_success_adapter_patch_firewall_v1.py"
+      - "canonical/runtime/r3_success_adapter_patch_author_wrapper_v1.py"
+      - "canonical/tests/test_r3_success_adapter_patch_author_wrapper_v1.py"
       - ".github/workflows/r3-autonomous-self-improvement-v1.yml"
 
 jobs:
@@ -161,3 +165,5 @@ jobs:
         run: python -m unittest canonical.tests.test_r3_second_family_grounding_compounding_cycle_v1 -v
       - name: Run R3 candidate patch firewall suite
         run: python -m unittest canonical.tests.test_r3_success_adapter_patch_firewall_v1 -v
+      - name: Run R3 candidate patch-author wrapper suite
+        run: python -m unittest canonical.tests.test_r3_success_adapter_patch_author_wrapper_v1 -v
