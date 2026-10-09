@@ -104,6 +104,14 @@ def reduce_author_context(
     if author_context.get("candidate_generation_authority") is not True:
         return _fail("AUTHOR_CONTEXT_CANDIDATE_GENERATION_NOT_AUTHORIZED")
 
+    structural_view_complete = (
+        proof.get("structural_view_complete") is True
+        and redaction.get("structural_coverage_complete") is True
+        and redaction.get("unmodeled_request_key_count") == 0
+        and redaction.get("unmodeled_material_key_count") == 0
+        and redaction.get("unmodeled_execution_key_count") == 0
+    )
+
     selected_count = _int(proof.get("selected_plan_count")) or 0
     target_count = _int(proof.get("verified_target_effect_count")) or 0
     execution_count = _int(proof.get("execution_count")) or 0
@@ -133,7 +141,17 @@ def reduce_author_context(
     replay_capsule_bound = bool(bindings.get("replay_capsule_sha256"))
     capsule_identity_bound = proof_capsule_bound and replay_capsule_bound
 
-    if checkpointed_verified_execution:
+    if not structural_view_complete:
+        retained_class = "REDACTED_VIEW_STRUCTURALLY_INCOMPLETE"
+        admissible = [ADAPTER, READONLY_VERIFIER, NEW_EVIDENCE]
+        order = [ADAPTER, READONLY_VERIFIER, NEW_EVIDENCE]
+        evidence_required = False
+        reason = (
+            "UNMODELED_RETAINED_STRUCTURE_EXISTS__ABSENCE_FROM_THE_REDACTED_VIEW_"
+            "CANNOT_PROVE_ABSENCE_FROM_THE_SUCCESS_RECORD__NO_REPAIR_CLASS_MAY_"
+            "BE_ELIMINATED_FROM_INCOMPLETE_STRUCTURAL_COVERAGE"
+        )
+    elif checkpointed_verified_execution:
         retained_class = "CHECKPOINTED_VERIFIED_EXECUTION"
         admissible = [ADAPTER, READONLY_VERIFIER, NEW_EVIDENCE]
         order = [ADAPTER, READONLY_VERIFIER, NEW_EVIDENCE]
@@ -170,6 +188,7 @@ def reduce_author_context(
         "pass": True,
         "retained_proof_class": retained_class,
         "capsule_identity_bound": capsule_identity_bound,
+        "structural_view_complete": structural_view_complete,
         "checkpointed_verified_execution": checkpointed_verified_execution,
         "semantically_accepted_raw_success": semantically_accepted_raw,
         "admissible_repair_classes": admissible,
