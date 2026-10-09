@@ -41,7 +41,7 @@ class CurrentTerminalAuthorityR2ReconciliationV1Tests(unittest.TestCase):
         self.assertTrue(
             terminal["schema"].startswith("PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V")
         )
-        self.assertGreaterEqual(terminal["pointer_revision"], 93)
+        self.assertGreaterEqual(terminal["pointer_revision"], 94)
         self.assertEqual(terminal["terminal_objective"], REAL_OBJECTIVE)
         self.assertEqual(
             terminal["objective_precedence"]["authoritative_path"],
@@ -150,12 +150,12 @@ class CurrentTerminalAuthorityR2ReconciliationV1Tests(unittest.TestCase):
         self.assertTrue(terminal["live_truth"]["opus_5_5_is_frontier_checkpoint"])
         self.assertFalse(terminal["live_truth"]["current_escape_policy_adequacy_closed"])
 
-    def test_r2_v53_regcap_routing_precedence_and_nonclaims(self):
+    def test_r2_v54_regcap_routing_precedence_and_nonclaims(self):
         terminal = self.load(TERMINAL)
         r2 = self.load(R2)
         activation = self.load(REGCAP_ACTIVATION)
 
-        self.assertIn("__V53__", r2["status"])
+        self.assertIn("__V54__", r2["status"])
         rec = r2["r2_v53_regcap_semantic_routing_reconciliation"]
         self.assertEqual(
             rec["precedence"][:3],
@@ -202,10 +202,33 @@ class CurrentTerminalAuthorityR2ReconciliationV1Tests(unittest.TestCase):
             truth["r2_primary_internal_unsolved_cell"],
             "FINANCE_SEMANTIC_ADEQUACY_TAIL",
         )
-        self.assertIn("CURRENT_R2_V53", terminal["status"])
+        self.assertIn("CURRENT_R2_V54", terminal["status"])
         self.assertIn("TERMINAL_FALSE", terminal["status"])
         self.assertEqual(
             terminal["r2_v53_regcap_semantic_routing_reconciliation_20261009_v1"][
+                "terminal_credit_delta"
+            ],
+            0,
+        )
+        v54 = r2["r2_v54_regcap_one_step_discriminator_reconciliation"]
+        self.assertEqual(v54["next_observation_id"], "RELEASABILITY_CLASS")
+        self.assertEqual(v54["minimum_observation_count"], 1)
+        self.assertFalse(v54["observation_truth_currently_bound"])
+        self.assertFalse(v54["concept_identity_before_observation"])
+        self.assertFalse(v54["open_world_candidate_completeness"])
+        self.assertEqual(v54["primary_internal_unsolved_count_after"], 1)
+        self.assertTrue(
+            terminal["live_truth"]["r2_regcap_authenticated_one_step_discriminator_bound"]
+        )
+        self.assertEqual(
+            terminal["live_truth"]["r2_regcap_authenticated_one_step_discriminator_id"],
+            "RELEASABILITY_CLASS",
+        )
+        self.assertFalse(
+            terminal["live_truth"]["r2_regcap_discriminator_observation_truth_currently_bound"]
+        )
+        self.assertEqual(
+            terminal["r2_v54_regcap_one_step_discriminator_reconciliation_20261009_v1"][
                 "terminal_credit_delta"
             ],
             0,
