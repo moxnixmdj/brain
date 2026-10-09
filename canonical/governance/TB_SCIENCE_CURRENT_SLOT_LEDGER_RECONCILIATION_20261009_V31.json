@@ -13,11 +13,11 @@
   },
   "rank16_final_reconciliation": {
     "path": "canonical/governance/TB_SCIENCE_RANK16_FINAL_EXECUTION_RECONCILIATION_20261009_V1.json",
-    "git_blob_sha": "92e610734b70921bbcbd78557208be0af23b8744"
+    "git_blob_sha": "f0ef7101f7723d4d03fea90b9348a0a7c94d700a"
   },
   "rank16_final_verification": {
     "path": "canonical/verification/TB_SCIENCE_RANK16_FINAL_EXECUTION_VERIFY_20261009_V1.json",
-    "git_blob_sha": "d7fd3eca6d8f8a22958d0a081f4ce6e024806299"
+    "git_blob_sha": "60c98eaa6907ce69a028ffb65de9c684cc4a4d53"
   },
   "current_counts": {
     "consumed_slots": 16,
