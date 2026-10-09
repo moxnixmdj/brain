@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_R2_DECISION_INTELLIGENCE_POINTER_V1",
   "date": "2026-10-09",
-  "status": "ACTIVE_CURRENT_R2_AUTHORITY__V35__TWENTY_FIVE_DIRECT_ROUTES__TWENTY_TWO_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_AFTER_SEVEN_VERIFIED_SUBREGIONS",
+  "status": "ACTIVE_CURRENT_R2_AUTHORITY__V37__TWENTY_SEVEN_DIRECT_ROUTES__TWENTY_FOUR_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_AFTER_NINE_VERIFIED_SUBREGIONS",
   "mission_objective": {
     "path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json"
   },
@@ -18,18 +18,18 @@
     "fixed_point_regression_test_git_blob_sha": "46333fedc0a91113d83e8c32184fb37cafb9bccd"
   },
   "scheduler_cut": {
-    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V35.json",
-    "git_blob_sha": "892141ec5c7efcfaa89c8d4f3c7cf323efee1d8e"
+    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V37.json",
+    "git_blob_sha": "3c409ea62f6004701c4cd5062c1116078d5ae6d9"
   },
   "direct_adequacy": {
-    "activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V21.json",
-    "activation_git_blob_sha": "259ca42d6b6648f8a966f20c42e418f19afdfa8e",
+    "activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V22.json",
+    "activation_git_blob_sha": "fddafe92f65ff990aa0718edfbad722828667e0e",
     "exact_cell_count": 3,
-    "bounded_family_count": 22,
-    "current_route_count": 25,
-    "current_activation_status": "THREE_EXACT_CELLS_PLUS_TWENTY_TWO_BOUNDED_FAMILIES",
-    "direct_runtime_path": "canonical/runtime/r2_direct_end_to_end_adequacy_v5.py",
-    "direct_runtime_git_blob_sha": "16794162259dec4495970cd2bae9dd39d1b3df73",
+    "bounded_family_count": 24,
+    "current_route_count": 27,
+    "current_activation_status": "THREE_EXACT_CELLS_PLUS_TWENTY_FOUR_BOUNDED_FAMILIES",
+    "direct_runtime_path": "canonical/runtime/r2_direct_end_to_end_adequacy_v7.py",
+    "direct_runtime_git_blob_sha": "3afc0cb17288ebf4e1e29689a7af241bf73eb708",
     "coverage_verifications": [
       {
         "path": "canonical/verification/R2_DOCX_JSON_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
@@ -115,13 +115,23 @@
         "path": "canonical/verification/R2_FINANCE_EXPLICIT_ALIAS_UNLESS_DIRECT_ADEQUACY_VERIFY_20261009_V1.json",
         "git_blob_sha": "9beaa80af044dbf6d6eeef48386a35d180fba18f",
         "status": "PASS__V5_EXPLICIT_ALIAS_FINANCE_UNLESS__ZERO_CREDIT"
+      },
+      {
+        "path": "canonical/verification/R2_FINANCE_EXTERNAL_JSON_POLICY_DIRECT_ADEQUACY_VERIFY_20261009_V1.json",
+        "git_blob_sha": "031b989adfd1d009328a887eb28f61102cb5a8b1",
+        "status": "PASS__STATE_KEYED_INDEPENDENTLY_REFETCHED_EXTERNAL_JSON_FINANCE_POLICY__COMPOSITION_22_OF_22__INHERITS_HTTP_REAL_OBSERVATION_22_OF_22__ZERO_CREDIT"
+      },
+      {
+        "path": "canonical/verification/R2_V37_CONTEXTUAL_REFERENCE_VERIFY_20261009_V1.json",
+        "git_blob_sha": "cb3cf706a9be08d4561168ee8103b15d4d831c9e",
+        "status": "PASS__BOUNDED_CONTEXTUAL_REFERENCE_FAMILY__REMOTE_13_OF_13__SUCCESSOR_ROUTER_3_OF_3__V7_EXECUTABLE_BODY_EQUIVALENT_TO_TESTED_SUCCESSOR__ZERO_CREDIT"
       }
     ],
-    "latest_verification_path": "canonical/verification/R2_FINANCE_EXPLICIT_ALIAS_UNLESS_DIRECT_ADEQUACY_VERIFY_20261009_V1.json",
-    "latest_verification_git_blob_sha": "9beaa80af044dbf6d6eeef48386a35d180fba18f",
-    "latest_verification_status": "PASS__V5_EXPLICIT_ALIAS_FINANCE_UNLESS__ZERO_CREDIT",
+    "latest_verification_path": "canonical/verification/R2_V37_CONTEXTUAL_REFERENCE_VERIFY_20261009_V1.json",
+    "latest_verification_git_blob_sha": "cb3cf706a9be08d4561168ee8103b15d4d831c9e",
+    "latest_verification_status": "PASS__BOUNDED_CONTEXTUAL_REFERENCE_FAMILY__REMOTE_13_OF_13__SUCCESSOR_ROUTER_3_OF_3__V7_EXECUTABLE_BODY_EQUIVALENT_TO_TESTED_SUCCESSOR__ZERO_CREDIT",
     "fixed_point_controller_path": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
-    "fixed_point_controller_git_blob_sha": "f8e99fd92dbea95116f8153d450bb53d290a883c"
+    "fixed_point_controller_git_blob_sha": "af19739e4c058d5cb9e54697f61032475edce567"
   },
   "fixed_point_information_policy": {
     "minimum_policy_changing_information": true,
@@ -148,7 +158,7 @@
     "path": "canonical/governance/R2_BRAIN_OWNED_ADVISORY_JUDGMENT_POLICY_20261008_V1.json"
   },
   "primary_primitive": "ESCAPE_POLICY_ADEQUACY_COVERAGE",
-  "primary_primitive_state": "OPEN__ADEQUACY_COVERAGE_AND_OBSERVABILITY_ONLY__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL__SEVEN_VERIFIED_POSITIVE_SUBREGIONS__GDPVAL_DORMANT",
+  "primary_primitive_state": "OPEN__ADEQUACY_COVERAGE_AND_OBSERVABILITY_ONLY__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL__NINE_VERIFIED_POSITIVE_SUBREGIONS__GDPVAL_DORMANT",
   "general_mechanism_missing": false,
   "learned_judgment_role": "ADVISORY_GENERATION_RANKING_AND_SEARCH_ACCELERATION_ONLY",
   "authority": "AUTHENTICATED_POLICY_COVER_MINIMUM_POLICY_CHANGING_INFORMATION_AND_INDEPENDENT_GOAL_ACCEPTANCE",
@@ -255,7 +265,7 @@
     "positive_adequacy_coverage_credit_delta": 0
   },
   "control_mechanism_status": "CLOSED__TOTAL_FAIL_CLOSED_ADEQUACY_OR_ABSTAIN_CONTROL",
-  "remaining_problem_class": "POSITIVE_ADEQUACY_COVERAGE_AND_POLICY_CHANGING_OBSERVABILITY__FINANCE_RESIDUAL_LIMITED_TO_IMPLICIT_OR_AMBIGUOUS_REFERENCE_SYNONYMY_CONTEXT_DEPENDENT_WORD_SENSE_ONTOLOGY_DOMAIN_MAPPING_GENERAL_CROSS_DOCUMENT_SEMANTIC_BINDING_OR_EXTERNAL_FACT_AUTHENTICATION__OPEN_WORLD_NOT_CLOSED",
+  "remaining_problem_class": "POSITIVE_ADEQUACY_COVERAGE_AND_POLICY_CHANGING_OBSERVABILITY__FINANCE_RESIDUAL_LIMITED_TO_AMBIGUOUS_COREFERENCE_INFERRED_SYNONYMY_CONTEXT_WORD_SENSE_ONTOLOGY_DOMAIN_MAPPING_GENERAL_CROSS_DOCUMENT_OR_STRONGER_EXTERNAL_FACT_AUTHENTICATION__OPEN_WORLD_NOT_CLOSED",
   "control_law_totalizer": {
     "path": "canonical/runtime/general_adequate_decision_totalized_v1.py",
     "git_blob_sha": "675d1d4a3df3fcff4c8eb14947610389832103ea",
@@ -689,8 +699,8 @@
       "prior_state": "EXTERNAL_REQUIRED_SLEEP",
       "information_theoretic_externality_proved": false,
       "externality_certificate": null,
-      "required_action": "ROUTE_ALREADY_COVERED_FINANCE_SUBREGIONS_DIRECTLY__FOR_REMAINING_IMPLICIT_OR_AMBIGUOUS_REFERENCE_INFERRED_SYNONYMY_CONTEXT_WORD_SENSE_ONTOLOGY_GENERAL_CROSS_DOCUMENT_OR_EXTERNAL_FACT_RESIDUAL_REUSE_SEARCH_DERIVE_COMPOSE_OR_ACQUIRE_ONLY_THE_MINIMUM_POLICY_CHANGING_BINDING",
-      "remaining_boundary": "FINANCE_CONTEXTS_REQUIRING_IMPLICIT_OR_AMBIGUOUS_REFERENCE_INFERRED_SYNONYMY_BEYOND_EXPLICIT_REFERS_TO_OR_IS_DEFINED_AS_ALIAS_CONTEXT_DEPENDENT_WORD_SENSE_ONTOLOGY_OR_DOMAIN_CONCEPT_MAPPING_GENERAL_CROSS_DOCUMENT_SEMANTIC_BINDING_BEYOND_EXACT_LOCAL_JSON_REFERENCE_IDS_AND_DECLARED_PATHS_OR_EXTERNAL_FACT_AUTHENTICATION",
+      "required_action": "ROUTE_ALL_NINE_VERIFIED_FINANCE_SUBREGIONS_DIRECTLY__FOR_REMAINING_SEMANTIC_RESIDUAL_REUSE_SEARCH_DERIVE_COMPOSE_OR_ACQUIRE_ONLY_THE_MINIMUM_POLICY_CHANGING_BINDING",
+      "remaining_boundary": "FINANCE_CONTEXTS_REQUIRING_IMPLICIT_OR_AMBIGUOUS_REFERENCE_BEYOND_MODAL_IT_THEY_UNIQUE_THAT_MODE_ELLIPSIS_OR_RESPECTIVELY__INFERRED_SYNONYMY_BEYOND_EXPLICIT_ALIASES__CONTEXT_DEPENDENT_WORD_SENSE__ONTOLOGY_OR_DOMAIN_MAPPING__GENERAL_CROSS_DOCUMENT_BINDING_BEYOND_EXACT_LOCAL_JSON_REFERENCE_IDS__OR_EXTERNAL_FACT_AUTHENTICATION_BEYOND_STATE_KEYED_INDEPENDENTLY_REFETCHED_HTTPS_JSON_EXACT_PATH_POLICY",
       "verified_positive_subregions": [
         {
           "id": "NORMALIZED_SUPERVISORY_SINGLE_UNLESS_WITH_EXPLICIT_TYPED_EXCEPTION_TRUTH",
@@ -726,6 +736,16 @@
           "id": "EXPLICIT_REFERS_TO_OR_IS_DEFINED_AS_ALIAS_TO_LITERAL_TYPED_UNLESS_REFERENCE",
           "state": "CLOSED__DIRECT_END_TO_END_ADEQUACY_VERIFIED",
           "verification": "canonical/verification/R2_FINANCE_EXPLICIT_ALIAS_UNLESS_DIRECT_ADEQUACY_VERIFY_20261009_V1.json"
+        },
+        {
+          "id": "STATE_KEYED_INDEPENDENTLY_REFETCHED_EXTERNAL_JSON_EXACT_BOOLEAN_OR_DECIMAL_POLICY",
+          "state": "CLOSED__DIRECT_END_TO_END_ADEQUACY_VERIFIED",
+          "verification": "canonical/verification/R2_FINANCE_EXTERNAL_JSON_POLICY_DIRECT_ADEQUACY_VERIFY_20261009_V1.json"
+        },
+        {
+          "id": "BOUNDED_STRUCTURAL_CONTEXTUAL_REFERENCE__IT_THEY_THAT_MODE_ELLIPSIS_RESPECTIVELY",
+          "state": "CLOSED__DIRECT_END_TO_END_ADEQUACY_VERIFIED",
+          "verification": "canonical/verification/R2_V37_CONTEXTUAL_REFERENCE_VERIFY_20261009_V1.json"
         }
       ]
     }
@@ -738,8 +758,8 @@
     "dormant_alternative_route_cell_count": 1,
     "primary_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER",
-    "state": "GENERAL_CONTROL_MECHANISM_CLOSED__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_AFTER_SEVEN_VERIFIED_POSITIVE_SUBREGIONS__GDPVAL_OWNER_RELATION_DORMANT",
-    "rule": "DO_NOT_RESEARCH_ALREADY_COVERED_NORMALIZED_TYPED_EXPLICIT_DEFINITION_EXPLICIT_ALIAS_OR_EXACT_LOCAL_JSON_CROSS_DOCUMENT_CASES__FOCUS_ONLY_ON_IMPLICIT_OR_AMBIGUOUS_REFERENCE_INFERRED_SYNONYMY_CONTEXT_WORD_SENSE_ONTOLOGY_GENERAL_CROSS_DOCUMENT_OR_EXTERNAL_FACT_BINDING_RESIDUAL"
+    "state": "GENERAL_CONTROL_MECHANISM_CLOSED__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_AFTER_NINE_VERIFIED_POSITIVE_SUBREGIONS__GDPVAL_OWNER_RELATION_DORMANT",
+    "rule": "DO_NOT_RESEARCH_ANY_OF_THE_NINE_VERIFIED_FINANCE_SUBREGIONS__FOCUS_ONLY_ON_REMAINING_AMBIGUOUS_COREFERENCE_INFERRED_SYNONYMY_CONTEXT_WORD_SENSE_ONTOLOGY_GENERAL_CROSS_DOCUMENT_OR_STRONGER_EXTERNAL_FACT_AUTHENTICATION"
   },
   "finance_explicit_alias_unless_direct_adequacy": {
     "status": "VERIFIED_POSITIVE_ADEQUACY_SUBREGION__EXPLICIT_REFERS_TO_OR_IS_DEFINED_AS_ALIAS_TO_LITERAL_TYPED_UNLESS_REFERENCE__ZERO_TERMINAL_CREDIT",
@@ -759,5 +779,27 @@
     "general_coreference_closed": false,
     "ontology_mapping_closed": false,
     "external_fact_authentication_closed": false
+  },
+  "finance_external_json_policy_direct_adequacy": {
+    "route_id": "DIRECT_ADEQUACY::FINANCE_STATE_KEYED_EXTERNAL_JSON_POLICY_FAMILY_V1",
+    "verification_path": "canonical/verification/R2_FINANCE_EXTERNAL_JSON_POLICY_DIRECT_ADEQUACY_VERIFY_20261009_V1.json",
+    "verification_git_blob_sha": "031b989adfd1d009328a887eb28f61102cb5a8b1",
+    "authority_added": "BOUNDED_DIRECT_ADEQUACY_ONLY",
+    "endpoint_authority_claimed": false,
+    "general_external_fact_authentication_closed": false
+  },
+  "finance_contextual_reference_direct_adequacy": {
+    "route_id": "DIRECT_ADEQUACY::FINANCE_BOUNDED_CONTEXTUAL_REFERENCE_FAMILY_V1",
+    "verification_path": "canonical/verification/R2_V37_CONTEXTUAL_REFERENCE_VERIFY_20261009_V1.json",
+    "verification_git_blob_sha": "cb3cf706a9be08d4561168ee8103b15d4d831c9e",
+    "authority_added": "BOUNDED_DIRECT_ADEQUACY_ONLY",
+    "supported_forms": [
+      "MODAL_SUBJECT_PRONOUN_IT_THEY",
+      "UNIQUE_PRIOR_MODE_TO_THAT_MODE",
+      "MODAL_ELLIPSIS_TOO",
+      "TWO_BY_TWO_RESPECTIVELY"
+    ],
+    "general_coreference_closed": false,
+    "global_open_world_closure_claimed": false
   }
 }

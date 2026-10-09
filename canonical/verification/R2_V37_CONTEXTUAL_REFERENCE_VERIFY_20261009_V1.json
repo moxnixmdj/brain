@@ -1,0 +1,78 @@
+{
+  "schema": "PROJECT_BRAIN_R2_V37_CONTEXTUAL_REFERENCE_VERIFY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__BOUNDED_CONTEXTUAL_REFERENCE_FAMILY__REMOTE_13_OF_13__SUCCESSOR_ROUTER_3_OF_3__V7_EXECUTABLE_BODY_EQUIVALENT_TO_TESTED_SUCCESSOR__ZERO_CREDIT",
+  "branch": "r2-v37-contextual-reference",
+  "exact_blobs": {
+    "canonical/runtime/contextual_reference_operators.py": "a437c23cc845637824083dcd50a90ad1f7e09fef",
+    "canonical/runtime/finance_contextual_reference_resolve_v1.py": "f030c4e20bede91468289a27916bb765b73fb7ed",
+    "canonical/runtime/finance_contextual_reference_verify_v1.py": "f32b7623523af8ef6d774258d624ab205a4c825f",
+    "canonical/runtime/r2_finance_contextual_reference_direct_adequacy_v1.py": "f02b16830b70b1138ba2ea8acab5a047b7d11dee",
+    "canonical/runtime/r2_direct_end_to_end_adequacy_v7.py": "3afc0cb17288ebf4e1e29689a7af241bf73eb708",
+    "canonical/runtime/general_adequate_decision_fixed_point_v2.py": "af19739e4c058d5cb9e54697f61032475edce567",
+    "canonical/tests/test_r2_finance_contextual_reference_direct_adequacy_v1.py": "9b546fe4d5d9503b1fd3a7998b02584d2c36cf5a"
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "sprite": "brain-live-integrated-v1-run-20261008",
+    "sprite_id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34"
+  },
+  "family_verification": {
+    "checks_run": 13,
+    "checks_passed": 13,
+    "covered": [
+      "SINGULAR_MODAL_SUBJECT_PRONOUN",
+      "PLURAL_MODAL_SUBJECT_PRONOUN",
+      "UNIQUE_PRIOR_MODE_TO_THAT_MODE",
+      "MODAL_ELLIPSIS_TOO",
+      "TWO_BY_TWO_RESPECTIVELY",
+      "PRONOUN_NUMBER_MISMATCH_FAIL_CLOSED",
+      "FORMER_LATTER_FAIL_CLOSED",
+      "DEMONSTRATIVE_EVENT_FAIL_CLOSED",
+      "OUTPUT_TAMPER_REJECTED",
+      "DIRECT_PREFLIGHT_MATCH",
+      "DIRECT_EXECUTION_PASS",
+      "POSTWRITE_VERIFIER_FAILURE_ROLLBACK",
+      "ROLLBACK_BYTES_RESTORED"
+    ]
+  },
+  "successor_router_verification": {
+    "tested_predecessor_router_blob": "b6edf398fd58c49aa96335d501449190320440f9",
+    "checks_run": 3,
+    "checks_passed": 3,
+    "assertions": [
+      "ROUTE_ADDED_ONCE",
+      "MATCHING_REQUEST_EXECUTES_CONTEXTUAL_ROUTE",
+      "NONMATCHING_REQUEST_DELEGATES_TO_PREDECESSOR"
+    ],
+    "v7_executable_body_equivalent_after_only_version_and_predecessor_normalization": true,
+    "v7_exact_blob": "3afc0cb17288ebf4e1e29689a7af241bf73eb708"
+  },
+  "fixed_point_activation": {
+    "main_predecessor_blob": "4b19beeb9379187c3cb776d50e48f80c04954988",
+    "branch_blob": "af19739e4c058d5cb9e54697f61032475edce567",
+    "exact_delta": "ONE_IMPORT_LINE__r2_direct_end_to_end_adequacy_v6_TO_v7"
+  },
+  "proves": [
+    "FOUR_STRUCTURALLY_IDENTIFIABLE_CONTEXTUAL_REFERENCE_FORMS_CAN_BE_RESOLVED_WITHOUT_MODEL_DEPENDENCY",
+    "AN_INDEPENDENT_IMPLEMENTATION_RECOMPUTES_ALL_BINDING_RELATION_AND_OBLIGATION_SPANS",
+    "AMBIGUOUS_OR_SEMANTICALLY_RICH_REFERENCE_FORMS_FAIL_CLOSED",
+    "DIRECT_ROUTE_IS_TRANSACTIONAL_AND_SOURCE_IMMUTABLE",
+    "V7_PRESERVES_PREDECESSOR_ROUTING_FOR_NONMATCHING_REQUESTS_BY_EXECUTABLE_BODY_EQUIVALENCE"
+  ],
+  "boundary": [
+    "NO_GENERAL_COREFERENCE",
+    "NO_INFERRED_SYNONYMY",
+    "NO_CONTEXT_DEPENDENT_WORD_SENSE",
+    "NO_ONTOLOGY_OR_DOMAIN_MAPPING",
+    "NO_GENERAL_CROSS_DOCUMENT_BINDING",
+    "NO_EXTERNAL_WORLD_TRUTH",
+    "EXACT_V7_BLOB_WAS_NOT_REMATERIALIZED_ON_THE_CARRIER_AFTER_CONNECTOR_FILE_WRITE_REJECTIONS;SUCCESSOR_EQUIVALENCE_IS_STATIC_PLUS_PRIOR_ROUTER_RUNTIME_PROOF",
+    "NO_FINANCE_FAMILY_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
