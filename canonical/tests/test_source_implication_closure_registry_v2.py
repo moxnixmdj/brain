@@ -4,6 +4,8 @@ import unittest
 from canonical.runtime.certified_semantic_implication_source_v1 import parse
 from canonical.runtime import brain_owned_source_implication_closure_edge_authority_v1 as auth
 from canonical.runtime import brain_owned_semantic_relation_edge_registry_v2 as registry
+from canonical.runtime import brain_owned_semantic_relation_edge_authority_v1 as identity
+from canonical.runtime import brain_owned_bounded_semantic_relation_edge_authority_v1 as bounded
 from canonical.runtime.semantic_relation_entailment_dag_v1 import RECEIPT_SCHEMA
 
 
@@ -92,6 +94,46 @@ class RegistryTests(unittest.TestCase):
         self.assertFalse(out["pass"])
         self.assertEqual(out["reason"],"PROOF_CLASS_UNSUPPORTED")
 
+
+    def test_registry_preserves_explicit_identity(self):
+        raw={
+            "schema":identity.SCHEMA,
+            "proof_class":identity.PROOF_CLASS,
+            "scope_id":"s",
+            "source_id":"left",
+            "target_id":"right",
+            "source_surface":"reserve buffer",
+            "target_surface":"liquidity cushion",
+            "relation":"ENTAILS",
+            "explicit_definition_sources":[{
+                "source_id":"doc","scope_id":"s",
+                "source_text":"Reserve buffer means liquidity cushion.",
+            }],
+        }
+        out=registry.verify(raw)
+        self.assertTrue(out["pass"],out)
+        self.assertEqual(out["proof_class"],"EXPLICIT_SOURCE_IDENTITY")
+
+    def test_registry_preserves_bounded_extension(self):
+        text="\n".join([
+            'Semantic universe: {"members":["a","b"],"scope_id":"s"}',
+            'Semantic extension: {"concept_id":"L","members":["a"],"scope_id":"s"}',
+            'Semantic extension: {"concept_id":"R","members":["a","b"],"scope_id":"s"}',
+        ])
+        raw={
+            "schema":bounded.SCHEMA,
+            "proof_class":bounded.PROOF_CLASS,
+            "scope_id":"s",
+            "source_id":"L",
+            "target_id":"R",
+            "relation":"ENTAILS",
+            "bounded_extension_source":{
+                "source_id":"decl","scope_id":"s","source_text":text,
+            },
+        }
+        out=registry.verify(raw)
+        self.assertTrue(out["pass"],out)
+        self.assertEqual(out["proof_class"],"EXPLICIT_BOUNDED_EXTENSION")
 
 if __name__=="__main__":
     unittest.main()
