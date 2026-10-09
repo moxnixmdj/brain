@@ -2,6 +2,7 @@ import html
 #!/usr/bin/env python3
 import argparse, ast, base64, gzip, hashlib, importlib.util, io, json, os, pathlib, re, shlex, shutil, subprocess, sys, sysconfig, tempfile, time, urllib.error, urllib.parse, urllib.request
 import importlib.metadata
+from canonical.runtime import d_finality_execution_epoch_v1 as d_finality
 from datetime import datetime, timezone
 
 ROOT=pathlib.Path(__file__).resolve().parents[2]
@@ -1143,6 +1144,7 @@ def _invoke_bound_capability(args):
     path=ROOT/"canonical"/"runtime"/"bound_capabilities"/(module_name+".py")
     if not path.is_file():
         raise Blocker("BOUND_CAPABILITY_ADAPTER_MISSING")
+    d_finality.require_material_file_if_active(path,repo_root=ROOT)
     spec=importlib.util.spec_from_file_location("project_brain_bound_"+module_name,path)
     if spec is None or spec.loader is None:
         raise Blocker("BOUND_CAPABILITY_ADAPTER_LOAD_FAILED")
