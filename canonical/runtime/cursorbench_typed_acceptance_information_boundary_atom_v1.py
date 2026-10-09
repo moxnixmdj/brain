@@ -185,6 +185,9 @@ def verify(
         boundary_id = receipt.get("boundary_id")
         if not isinstance(boundary_id, str) or not boundary_id.strip():
             raise ValueError("RECEIPT_BOUNDARY_ID_INVALID")
+        producer_id = receipt.get("producer_id")
+        if not isinstance(producer_id, str) or not producer_id.strip():
+            raise ValueError("RECEIPT_PRODUCER_ID_INVALID")
 
         visible_inputs = _digest_list(
             receipt.get("declared_visible_input_sha256"),
@@ -211,6 +214,19 @@ def verify(
             raise ValueError("VERIFICATION_BOUNDARY_ID_MISMATCH")
         if verification.get("declared_visible_input_sha256") != visible_inputs:
             raise ValueError("VERIFICATION_VISIBLE_INPUT_DIGESTS_MISMATCH")
+        if verification.get("producer_id") != producer_id:
+            raise ValueError("VERIFICATION_PRODUCER_ID_MISMATCH")
+        verifier_id = verification.get("independent_verifier_id")
+        if not isinstance(verifier_id, str) or not verifier_id.strip():
+            raise ValueError("VERIFICATION_INDEPENDENT_VERIFIER_ID_INVALID")
+        if verifier_id == producer_id:
+            raise ValueError("VERIFICATION_NOT_PRODUCER_INDEPENDENT")
+        if verification.get("verification_method") not in {
+            "INDEPENDENT_REPLAY",
+            "INDEPENDENT_AUDIT",
+            "CONTROLLED_ENVIRONMENT_AUDIT",
+        }:
+            raise ValueError("VERIFICATION_METHOD_INVALID")
 
         required_verify_truth = (
             "pass",
@@ -236,6 +252,9 @@ def verify(
             "proof_basis": "CONTENT_ADDRESSED_INDEPENDENT_PREVERIFIER_INFORMATION_BOUNDARY",
             "model_sha256": digest,
             "boundary_id": boundary_id,
+            "producer_id": producer_id,
+            "independent_verifier_id": verifier_id,
+            "verification_method": verification.get("verification_method"),
             "declared_visible_input_sha256": visible_inputs,
             "receipt_path": receipt_path,
             "receipt_git_blob_sha": receipt_blob,
