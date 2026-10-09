@@ -13,6 +13,7 @@ MAX_DOCUMENTS=32
 MAX_SLOTS=16
 MAX_HYPOTHESES_PER_SLOT=16
 MAX_WORLDS=4096
+MAX_INCOMPATIBILITY_CONSTRAINTS=256
 _NO_VALUE={"kind":"NO_APPLICABLE_EFFECT"}
 
 
@@ -26,7 +27,9 @@ def _token(v:Any,name:str)->str:
     return v.strip()
 
 
-def _effect(v:Any)->dict[str,Any]:
+def _effect(v:Any)->dict[str,Any]|None:
+    if v is None:
+        return None
     if not isinstance(v,Mapping):
         raise ValueError("EFFECT_NOT_OBJECT")
     allowed={"effect_id","target_id","effect_class","value","conditions","valid_from","valid_until","supersedes","source_locator"}
@@ -38,15 +41,17 @@ def _effect(v:Any)->dict[str,Any]:
 def _parse(problem:Mapping[str,Any]):
     if not isinstance(problem,Mapping) or problem.get("schema")!=PROBLEM_SCHEMA:
         raise ValueError("PROBLEM_SCHEMA_INVALID")
-    if set(problem)!={"schema","case_id","hypothesis_set_complete","documents","query"}:
+    if set(problem)!={"schema","case_id","hypothesis_set_complete","compatibility_constraints_complete","incompatible_hypothesis_sets","documents","query"}:
         raise ValueError("PROBLEM_FIELD_SET_NOT_EXACT")
     if problem.get("hypothesis_set_complete") is not True:
         raise ValueError("HYPOTHESIS_SET_NOT_COMPLETE")
+    if problem.get("compatibility_constraints_complete") is not True:
+        raise ValueError("COMPATIBILITY_CONSTRAINTS_NOT_COMPLETE")
     case_id=_token(problem.get("case_id"),"CASE_ID")
     docs=problem.get("documents")
     if not isinstance(docs,Sequence) or isinstance(docs,(str,bytes)) or not docs or len(docs)>MAX_DOCUMENTS:
         raise ValueError("DOCUMENTS_INVALID")
-    clean=[]; dids=set(); sids=set(); slots=0; worlds=1
+    clean=[]; dids=set(); sids=set(); all_hids=set(); slots=0; worlds=1
     for doc in docs:
         if not isinstance(doc,Mapping) or set(doc)!={"document_id","effect_slots"}:
             raise ValueError("DOCUMENT_INVALID")
@@ -76,7 +81,8 @@ def _parse(problem:Mapping[str,Any]):
                     raise ValueError("HYPOTHESIS_INVALID")
                 hid=_token(hyp.get("hypothesis_id"),"HYPOTHESIS_ID")
                 if hid in hids: raise ValueError("HYPOTHESIS_ID_DUPLICATE")
-                hids.add(hid)
+                if hid in all_hids: raise ValueError("HYPOTHESIS_ID_NOT_GLOBALLY_UNIQUE")
+                hids.add(hid); all_hids.add(hid)
                 eff=_effect(hyp.get("effect"))
                 ce=_canon(eff)
                 if ce in effs: raise ValueError("SEMANTIC_HYPOTHESIS_DUPLICATE")
@@ -88,6 +94,28 @@ def _parse(problem:Mapping[str,Any]):
             cslots.append({"slot_id":sid,"hypotheses":ch})
         cslots.sort(key=lambda x:x["slot_id"])
         clean.append({"document_id":did,"effect_slots":cslots})
+    raw_constraints=problem.get("incompatible_hypothesis_sets")
+    if (
+        not isinstance(raw_constraints,Sequence)
+        or isinstance(raw_constraints,(str,bytes))
+        or len(raw_constraints)>MAX_INCOMPATIBILITY_CONSTRAINTS
+    ):
+        raise ValueError("INCOMPATIBLE_HYPOTHESIS_SETS_INVALID")
+    incompatible=[]; seen_constraints=set()
+    for idx,row in enumerate(raw_constraints):
+        if not isinstance(row,Sequence) or isinstance(row,(str,bytes)) or len(row)<2:
+            raise ValueError("INCOMPATIBILITY_CONSTRAINT_INVALID")
+        ids=[_token(x,"INCOMPATIBLE_HYPOTHESIS_ID") for x in row]
+        if len(ids)!=len(set(ids)):
+            raise ValueError("INCOMPATIBILITY_CONSTRAINT_DUPLICATE_ID")
+        if set(ids)-all_hids:
+            raise ValueError("INCOMPATIBILITY_CONSTRAINT_UNKNOWN_HYPOTHESIS")
+        key=tuple(sorted(ids))
+        if key in seen_constraints:
+            raise ValueError("INCOMPATIBILITY_CONSTRAINT_DUPLICATE")
+        seen_constraints.add(key)
+        incompatible.append(frozenset(ids))
+
     q=problem.get("query")
     if not isinstance(q,Mapping) or set(q)!={"target_id","as_of","context"}:
         raise ValueError("QUERY_INVALID")
@@ -95,7 +123,8 @@ def _parse(problem:Mapping[str,Any]):
     if not isinstance(q.get("context"),Mapping): raise ValueError("CONTEXT_INVALID")
     _canon(q)
     clean.sort(key=lambda x:x["document_id"])
-    return case_id,clean,dict(q)
+    incompatible.sort(key=lambda x:tuple(sorted(x)))
+    return case_id,clean,dict(q),incompatible
 
 
 def _world_outcomes(result:Mapping[str,Any])->tuple[str,...]:
@@ -124,25 +153,36 @@ def _minimum_slots(worlds:Sequence[Mapping[str,Any]])->list[str]:
 
 
 def _recompute(problem:Mapping[str,Any])->dict[str,Any]:
-    case_id,docs,query=_parse(problem)
+    case_id,docs,query,incompatible=_parse(problem)
     slots=[]
     for doc in docs:
         for slot in doc["effect_slots"]:
             slots.append((doc["document_id"],slot["slot_id"],slot["hypotheses"]))
+    raw_cartesian_world_count=1
+    for row in slots: raw_cartesian_world_count*=len(row[2])
     worlds=[]; union={}
     for selected in product(*(row[2] for row in slots)):
+        selected_ids={h["hypothesis_id"] for h in selected}
+        if any(constraint.issubset(selected_ids) for constraint in incompatible):
+            continue
         selection={sid:h["hypothesis_id"] for (_,sid,_),h in zip(slots,selected)}
         bydoc={d["document_id"]:[] for d in docs}
         for (did,_,_),h in zip(slots,selected):
-            bydoc[did].append(dict(h["effect"]))
+            if h["effect"] is not None:
+                bydoc[did].append(dict(h["effect"]))
         typed={}; specs=[]
         for did in sorted(bydoc):
+            if not bydoc[did]:
+                continue
             path="compiled/"+did+".json"
             doc={"schema":calculus.DOC_SCHEMA,"document_id":did,"effects":sorted(bydoc[did],key=lambda x:x["effect_id"])}
             typed[path]=doc
             specs.append({"path":path,"sha256":calculus._sha(doc)})
         case={"schema":calculus.CASE_SCHEMA,"case_id":case_id,"documents":specs,"query":query}
-        result=calculus.compute(case,typed)
+        if specs:
+            result=calculus.compute(case,typed)
+        else:
+            result={"pass":False,"status":"OPEN__NO_APPLICABLE_EFFECT","surviving_effect_ids":[]}
         outs=_world_outcomes(result)
         for key in outs:
             union[key]=json.loads(key)
@@ -153,6 +193,8 @@ def _recompute(problem:Mapping[str,Any])->dict[str,Any]:
             "effective_value":result.get("effective_value"),
             "surviving_effect_ids":list(result.get("surviving_effect_ids") or []),
         })
+    if not worlds:
+        raise ValueError("NO_ADMISSIBLE_HYPOTHESIS_WORLD")
     worlds.sort(key=lambda x:_canon(x))
     keys=sorted(union)
     if len(keys)==1 and union[keys[0]]!=_NO_VALUE:
@@ -160,6 +202,8 @@ def _recompute(problem:Mapping[str,Any])->dict[str,Any]:
             "status":"PASS__EFFECT_AMBIGUITY_TERMINALLY_IRRELEVANT",
             "pass":True,
             "world_count":len(worlds),
+            "raw_cartesian_world_count":raw_cartesian_world_count,
+            "incompatibility_constraint_count":len(incompatible),
             "effective_value":union[keys[0]],
             "minimum_discriminator_slots":[],
         }
@@ -167,6 +211,8 @@ def _recompute(problem:Mapping[str,Any])->dict[str,Any]:
         "status":"OPEN__TERMINALLY_RELEVANT_EFFECT_AMBIGUITY",
         "pass":False,
         "world_count":len(worlds),
+        "raw_cartesian_world_count":raw_cartesian_world_count,
+        "incompatibility_constraint_count":len(incompatible),
         "possible_outcomes":[union[k] for k in keys],
         "minimum_discriminator_slots":_minimum_slots(worlds),
     }
@@ -187,6 +233,8 @@ def verify(problem:Mapping[str,Any],result:Mapping[str,Any])->dict[str,Any]:
             errors.append("TERMINAL_AUTHORITY_CLAIMED")
         if result.get("hypothesis_set_complete_relative_to_declared_universe") is not True:
             errors.append("DECLARED_UNIVERSE_COMPLETENESS_FLAG_MISSING")
+        if result.get("compatibility_constraints_complete_relative_to_declared_universe") is not True:
+            errors.append("COMPATIBILITY_COMPLETENESS_FLAG_MISSING")
     except Exception as exc:
         errors.append(type(exc).__name__+":"+str(exc))
     return {
@@ -197,5 +245,5 @@ def verify(problem:Mapping[str,Any],result:Mapping[str,Any])->dict[str,Any]:
         "producer_independent":True,
         "semantic_truth_authority":False,
         "terminal_authority":False,
-        "boundary":"INDEPENDENT_RECOMPUTATION_RELATIVE_TO_DECLARED_COMPLETE_FINITE_TYPED_EFFECT_HYPOTHESIS_UNIVERSE",
+        "boundary":"INDEPENDENT_RECOMPUTATION_RELATIVE_TO_DECLARED_COMPLETE_FINITE_TYPED_EFFECT_HYPOTHESIS_UNIVERSE_AND_COMPLETE_COMPATIBILITY_CONSTRAINTS",
     }
