@@ -34,7 +34,8 @@
       "git_blob_sha": "29872fc55a5ec577feea769cc919dc889899c2bd"
     },
     "direct_adequacy_activation": {
-      "path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V24.json"
+      "path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V25.json",
+      "git_blob_sha": "1287ba34e3cdaf4717de10c3662d2b9ef28a4a6c"
     },
     "direct_adequacy_exact_cell_count": 3,
     "policy_cover_information_provider_integration": {
@@ -106,7 +107,7 @@
       "status": "ACTIVE__ZERO_AUTHORITY_REQUEST_PATCH_ONLY__V1_REVERIFICATION_REQUIRED",
       "isolated_replay": "30_OF_30_PASS"
     },
-    "direct_adequacy_bounded_family_count": 27,
+    "direct_adequacy_bounded_family_count": 28,
     "durable_grounded_policy_repair_context": {
       "verification_path": "canonical/verification/R2_CODEC_DURABLE_RUNTIME_AUTHORITY_RECONCILIATION_VERIFY_20261008_V1.json",
       "verification_git_blob_sha": "a1100dfe069ecf75c1631805b6db62d0effef5df",
@@ -115,7 +116,7 @@
       "exact_current_full_runtime_replay_claimed": false,
       "authority_added": false
     },
-    "direct_adequacy_route_count": 30,
+    "direct_adequacy_route_count": 31,
     "transactional_docx_direct_adequacy": {
       "runtime_path": "canonical/runtime/r2_docx_direct_adequacy_v1.py",
       "runtime_git_blob_sha": "631fcf2aa82d090d1f3ade6199829f060b000937",
@@ -126,8 +127,8 @@
       "isolated_replay": "5_OF_5_STANDALONE__20_OF_20_MODIFIED_SURFACE"
     },
     "direct_adequacy_current_runtime": {
-      "path": "canonical/runtime/r2_direct_end_to_end_adequacy_v8.py",
-      "git_blob_sha": "76abf119813d133bf05e19602ee375c8d5c5d7b6"
+      "path": "canonical/runtime/r2_direct_end_to_end_adequacy_v11.py",
+      "git_blob_sha": "98fc03a33aa8f051245c8adbb9a0d8d896b0057b"
     },
     "docx_json_direct_adequacy": {
       "path": "canonical/runtime/r2_docx_json_direct_adequacy_v1.py",
@@ -842,8 +843,8 @@
     "activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V25.json",
     "activation_blob_sha": "1287ba34e3cdaf4717de10c3662d2b9ef28a4a6c",
     "verified_finance_positive_subregion_count": 10,
-    "prior_scheduler_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V44.json",
-    "prior_scheduler_git_blob_sha": "55be062f58a20e13fc32acc47746abb11750f7b7",
+    "prior_scheduler_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V45.json",
+    "prior_scheduler_git_blob_sha": "61864ecb3e9be0643bbcd21ed31d35bee7cd2458",
     "proof_carrying_domain_mapping_subregion_count": 1,
     "proof_carrying_domain_mapping_verification_path": "canonical/verification/PROOF_CARRYING_DOMAIN_MAPPING_VERIFY_20261009_V1.json"
   },
