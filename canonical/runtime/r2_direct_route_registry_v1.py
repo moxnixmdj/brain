@@ -26,7 +26,6 @@ from typing import Any, Mapping
 from canonical.runtime import raw_goal_archive_acceptance_v1 as archive_acceptance
 from canonical.runtime import raw_goal_exact_literal_acceptance_v1 as literal_acceptance
 from canonical.runtime import raw_goal_literal_json_acceptance_v1 as literal_json_acceptance
-from canonical.runtime import r2_direct_end_to_end_adequacy_v1 as legacy_v1
 from canonical.runtime import r2_direct_route_dynamic_admission_v1 as dynamic_admission
 
 SCHEMA = "PROJECT_BRAIN_R2_DIRECT_ROUTE_REGISTRY_DISPATCHER_V1"
@@ -466,6 +465,11 @@ def _inline_literal_json_preflight(
 def _inline_v1_run(
     request: Mapping[str, Any], *, repo_root: str | Path = ROOT
 ) -> dict[str, Any]:
+    # Keep the stable route registry importable without dragging the entire
+    # legacy execution graph into registry/closure verification.
+    legacy_v1 = importlib.import_module(
+        "canonical.runtime.r2_direct_end_to_end_adequacy_v1"
+    )
     return legacy_v1.run(request)
 
 
