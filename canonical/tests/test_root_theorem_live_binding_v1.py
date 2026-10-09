@@ -13,6 +13,30 @@ CARRIER_PATH = "canonical/governance/MISSION_SUFFICIENT_SEMANTIC_CARRIER_V1.json
 CLAIM_SCOPE_PATH = "canonical/governance/COVERAGE_COMPLETENESS_CLAIM_SCOPE_V1.json"
 NAMESPACE_PATH = "canonical/governance/COVERAGE_ROOT_NAMESPACE_BRIDGE_V1.json"
 
+TERMINAL_REDUCER_PATH = "canonical/runtime/terminal_closure_reducer.py"
+TERMINAL_REDUCER_TESTS_PATH = "canonical/tests/test_terminal_closure_reducer_semantic_states_v1.py"
+TERMINAL_MANIFEST_PATH = "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json"
+TARGET_ENVELOPE_PATH = "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json"
+TARGET_IDS = [f"FAMILY_{i:02d}" for i in range(19)]
+
+
+def target_envelope():
+    return {
+        "target_family_count": 19,
+        "families": [{"id": fid} for fid in TARGET_IDS],
+    }
+
+
+def terminal_manifest():
+    return {
+        "target_envelope_binding": {
+            "path": TARGET_ENVELOPE_PATH,
+            "git_blob_sha": "target-envelope-sha",
+        },
+        "families": [{"id": fid} for fid in TARGET_IDS],
+    }
+
+
 
 def docs():
     mission = {"real_objective": "REAL_OBJECTIVE"}
@@ -49,6 +73,14 @@ def docs():
             "carrier_governance_path": CARRIER_PATH,
             "carrier_governance_git_blob_sha": "carrier-sha",
             "required_same_claim_bindings": ["claim_id", "scope_sha256", "semantics_sha256"],
+            "global_open_ended_mission_completion_derivable": False,
+        },
+        "checkpoint_aggregator": {
+            "scope": "OPUS_5_5_CHECKPOINT_ONLY",
+            "reducer": {"path": TERMINAL_REDUCER_PATH, "git_blob_sha": "terminal-reducer-sha"},
+            "tests": {"path": TERMINAL_REDUCER_TESTS_PATH, "git_blob_sha": "terminal-reducer-tests-sha"},
+            "manifest": {"path": TERMINAL_MANIFEST_PATH, "git_blob_sha": "terminal-manifest-sha"},
+            "target_envelope": {"path": TARGET_ENVELOPE_PATH, "git_blob_sha": "target-envelope-sha"},
             "global_open_ended_mission_completion_derivable": False,
         },
     }
@@ -88,6 +120,13 @@ def docs():
             "path": CLAIM_SCOPE_PATH,
             "git_blob_sha": "claim-scope-sha",
         },
+        "checkpoint_claim_aggregator_precondition": {
+            "reducer": {"path": TERMINAL_REDUCER_PATH, "git_blob_sha": "terminal-reducer-sha"},
+            "tests": {"path": TERMINAL_REDUCER_TESTS_PATH, "git_blob_sha": "terminal-reducer-tests-sha"},
+            "manifest": {"path": TERMINAL_MANIFEST_PATH, "git_blob_sha": "terminal-manifest-sha"},
+            "target_envelope": {"path": TARGET_ENVELOPE_PATH, "git_blob_sha": "target-envelope-sha"},
+            "global_open_ended_mission_completion_derivable": False,
+        },
         "falsifier": {
             "path": "canonical/runtime/root_theorem_falsifier_v1.py",
             "git_blob_sha": "falsifier-sha",
@@ -110,6 +149,16 @@ def docs():
             "authoritative_path": MISSION_PATH,
             "authoritative_git_blob_sha": "mission-sha",
             "real_objective": "REAL_OBJECTIVE",
+        },
+        "terminal_semantics_override": {
+            "mandatory_terminal_reducer": {
+                "path": TERMINAL_REDUCER_PATH,
+                "git_blob_sha": "terminal-reducer-sha",
+            },
+            "mandatory_terminal_manifest": {
+                "path": TERMINAL_MANIFEST_PATH,
+                "git_blob_sha": "terminal-manifest-sha",
+            },
         },
         "authoritative_sources": {
             "coverage_completeness_root_theorem_r1_r4": {
@@ -151,6 +200,12 @@ def check(mission, theorem, binding, namespace_bridge, authority, carrier, claim
         r4_binding_tests_blob_sha="r4-tests-sha",
         live_validator_blob_sha="live-validator-sha",
         live_validator_tests_blob_sha="live-validator-tests-sha",
+        terminal_reducer_blob_sha="terminal-reducer-sha",
+        terminal_reducer_tests_blob_sha="terminal-reducer-tests-sha",
+        terminal_manifest=terminal_manifest(),
+        terminal_manifest_blob_sha="terminal-manifest-sha",
+        target_envelope=target_envelope(),
+        target_envelope_blob_sha="target-envelope-sha",
     )
 
 
@@ -295,6 +350,41 @@ def test_stale_live_validator_tests_blob_fails():
     binding["live_binding_validator"]["tests_git_blob_sha"] = "stale"
     out = check(mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope)
     assert "BINDING_LIVE_VALIDATOR_TESTS_BLOB_STALE" in out["errors"]
+
+
+def test_checkpoint_reducer_blob_drift_fails():
+    mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope = docs()
+    claim_scope["checkpoint_aggregator"]["reducer"]["git_blob_sha"] = "stale"
+    out = check(mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope)
+    assert "CLAIM_SCOPE_TERMINAL_REDUCER_BLOB_STALE" in out["errors"]
+
+
+def test_checkpoint_manifest_blob_drift_fails():
+    mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope = docs()
+    binding["checkpoint_claim_aggregator_precondition"]["manifest"]["git_blob_sha"] = "stale"
+    out = check(mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope)
+    assert "BINDING_CHECKPOINT_MANIFEST_BLOB_STALE" in out["errors"]
+
+
+def test_terminal_authority_reducer_blob_drift_fails():
+    mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope = docs()
+    authority["terminal_semantics_override"]["mandatory_terminal_reducer"]["git_blob_sha"] = "stale"
+    out = check(mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope)
+    assert "TERMINAL_AUTHORITY_REDUCER_BLOB_STALE" in out["errors"]
+
+
+def test_checkpoint_target_envelope_blob_drift_fails():
+    mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope = docs()
+    claim_scope["checkpoint_aggregator"]["target_envelope"]["git_blob_sha"] = "stale"
+    out = check(mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope)
+    assert "CLAIM_SCOPE_TARGET_ENVELOPE_BLOB_STALE" in out["errors"]
+
+
+def test_checkpoint_cannot_escalate_to_global_mission_completion():
+    mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope = docs()
+    claim_scope["checkpoint_aggregator"]["global_open_ended_mission_completion_derivable"] = True
+    out = check(mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope)
+    assert "CLAIM_SCOPE_CHECKPOINT_GLOBAL_MISSION_ESCALATION" in out["errors"]
 
 
 def test_git_blob_sha():
