@@ -579,5 +579,71 @@ class RealityClosureV2Tests(unittest.TestCase):
         self.assertEqual(seen["minimum_information_contract"]["request_count"], 1)
 
 
+    def test_evidence_provider_open_attempt_remains_internal_unsolved(self):
+        first = closure(
+            status="OPEN__INTERNAL_UNSOLVED__PENDING_ACQUISITION_OR_EXPERIMENT",
+            evidence=("MISSING_FACT",),
+            initial="i0",
+            final="f0",
+        )
+        first["residual"]["pending_acquisition_or_experiment_required"] = True
+        provider = lambda contract: {
+            "pass": False,
+            "status": "OPEN__NO_VERIFIED_POLICY_CHANGING_WITNESS_YET",
+            "frontier_changed": False,
+            "verification_authority_mutated": False,
+            "receipt_sha256": "1" * 64,
+            "reuse_or_acquisition_attempted": True,
+            "acquisition_or_experiment_attempted": True,
+            "evidence_trace_sha256": "2" * 64,
+        }
+        with patch.object(v2.v1, "run", return_value=first):
+            out = v2.run(repo_root=".", evidence_acquisition_provider=provider)
+        self.assertFalse(out["pass"], out)
+        self.assertEqual(
+            out["status"],
+            "OPEN__INTERNAL_UNSOLVED__EVIDENCE_ACQUISITION_ATTEMPTED__"
+            "NO_VERIFIED_POLICY_CHANGING_WITNESS",
+        )
+        self.assertFalse(out["provider_receipt"]["frontier_changed"])
+        self.assertEqual(
+            out["provider_receipt"]["status"],
+            "OPEN__NO_VERIFIED_POLICY_CHANGING_WITNESS_YET",
+        )
+
+    def test_evidence_provider_success_can_reuse_existing_verified_receipt(self):
+        first = closure(
+            status="OPEN__INTERNAL_UNSOLVED__PENDING_ACQUISITION_OR_EXPERIMENT",
+            evidence=("MISSING_FACT",),
+            initial="i0",
+            final="f0",
+        )
+        first["residual"]["pending_acquisition_or_experiment_required"] = True
+        second = closure(
+            status="PASS",
+            passed=True,
+            initial="i1",
+            final="f1",
+        )
+        provider = lambda contract: {
+            "pass": True,
+            "status": "PASS__EXISTING_VERIFIED_RECEIPT_REUSED_AND_FRONTIER_CHANGED",
+            "frontier_changed": True,
+            "verification_authority_mutated": False,
+            "receipt_sha256": "3" * 64,
+            "existing_verified_receipt_reused": True,
+            "acquisition_or_experiment_attempted": False,
+            "new_reality_consumed": False,
+            "evidence_trace_sha256": "4" * 64,
+        }
+        with patch.object(v2.v1, "run", side_effect=[first, second]):
+            out = v2.run(repo_root=".", evidence_acquisition_provider=provider)
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(
+            out["status"],
+            "PASS__PROOF_CARRYING_REALITY_CLOSURE_FIXED_POINT",
+        )
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
