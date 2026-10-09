@@ -23,6 +23,7 @@ from canonical.runtime.current_authority_runtime_census_v1 import run as authori
 from canonical.runtime import live_capability_ownership_v1 as live_ownership
 from canonical.runtime import live_capability_invoker_v1 as live_invoker
 from canonical.runtime import live_capability_composition_v1 as live_composition
+from canonical.runtime import d_finality_fabric_guard_v1 as d_finality_guard
 from canonical.runtime import r1_live_architecture_closure_gate_v1 as r1_closure_gate
 from canonical.runtime import universal_escape_resolver_v1 as universal_escape
 from canonical.runtime import certificate_gated_selected_route_runtime_entrypoint_v2 as certified_route
@@ -330,6 +331,7 @@ def run(
         if not isinstance(request, Mapping):
             raise CognitiveFabricError("REQUEST_NOT_OBJECT")
         requested_mode = str(request.get("mode") or "").strip().upper()
+        d_finality_guard.authorize_requested_mode(requested_mode)
         if requested_mode == "CATALOG":
             return catalog()
         if requested_mode == "ONE_SHOT_REALITY_CLOSURE":
@@ -396,6 +398,8 @@ def run(
             mode = "LEARNING_EPISODE"
         if mode not in ENGINE_DESCRIPTORS:
             raise CognitiveFabricError("MODE_INVALID:" + mode)
+
+        d_finality_guard.authorize_dispatch(mode, payload)
 
         if mode == "RAW_GOAL":
             wrapped = live_runtime.run(
@@ -805,6 +809,7 @@ def run(
         direct_learning_error = None
         if (
             mode in R3_DIRECT_EXPERIENCE_MODES
+            and d_finality_guard.implicit_learning_allowed()
             and isinstance(out, Mapping)
             and options.get("learn", True) is not False
         ):
@@ -854,7 +859,7 @@ def run(
             autonomous_failure_repair_provider = _autonomous_repair_pending
 
         compounding_tick = None
-        if mode != "IMPROVEMENT_CYCLE":
+        if mode != "IMPROVEMENT_CYCLE" and d_finality_guard.implicit_learning_allowed():
             compounding_tick = improvement_driver.drain(
                 state_path=options.get(
                     "state_path",
@@ -902,6 +907,8 @@ def run(
             "compounding_tick": deepcopy(compounding_tick),
             "episode_compounding_tick": deepcopy(episode_compounding_tick),
             "single_front_door": True,
+            "d_finality_epoch_active": d_finality_guard.active(),
+            "implicit_learning_suppressed_by_d_epoch": not d_finality_guard.implicit_learning_allowed(),
             "terminal_authority": False,
             "terminal_credit_delta": 0,
         }
