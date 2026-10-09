@@ -1,10 +1,10 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_ONE_SHOT_REALITY_CLOSURE_POINTER_V1",
   "date": "2026-10-09",
-  "status": "ACTIVE_VERIFIED_ORCHESTRATOR__DECISION_SUFFICIENT_AND_MINIMUM_INFORMATION_GATES_LOAD_BEARING__STRICT_EXTERNALITY_LAW_VERIFIED__ACTUAL_LIVE_R3_INTERNAL_FIXED_POINT__NO_RESIDUAL__TERMINAL_TRUTH_FRONTIER_RECONCILED__NOT_LIVE_DEFAULT",
+  "status": "ACTIVE_VERIFIED_ORCHESTRATOR__DECISION_SUFFICIENT_AND_MINIMUM_INFORMATION_GATES_LOAD_BEARING__STRUCTURED_R2_PENDING_ACQUISITION_HANDOFF_VERIFIED__STRICT_EXTERNALITY_LAW_VERIFIED__ACTUAL_LIVE_R3_INTERNAL_FIXED_POINT__NO_RESIDUAL__NOT_LIVE_DEFAULT",
   "runtime": {
     "path": "canonical/runtime/one_shot_reality_closure_v2.py",
-    "git_blob_sha": "f7e42025aa80d2ae18e752262b4f5cb933d0ba39"
+    "git_blob_sha": "17b693029dc3ab5be7d4c8b523c104c33265700d"
   },
   "predecessor": {
     "path": "canonical/runtime/one_shot_verified_closure_v1.py",
@@ -12,8 +12,9 @@
     "role": "LOAD_BEARING_INNER_FIXED_POINT__HISTORICAL_STATE_INSUFFICIENCY_ONLY__INFORMATION_THEORETIC_EXTERNALITY_REQUIRES_SEPARATE_PROOF"
   },
   "verification": {
-    "path": "canonical/verification/ONE_SHOT_DECISION_SUFFICIENT_GATE_VERIFY_20261009_V2.json",
-    "status": "PASS__FOCUSED_18_OF_18__CURRENT_V1_ADJACENT_7_OF_7__PY_COMPILE_PASS",
+    "path": "canonical/verification/ONE_SHOT_R2_STRUCTURED_ACQUISITION_HANDOFF_VERIFY_20261009_V1.json",
+    "git_blob_sha": "3d696ae6691d55a97e1aa97405ad7273c9cff269",
+    "status": "PASS__V1_8_OF_8__V2_20_OF_20__LIVE_V44_STRUCTURED_HANDOFF_PASS__POINTER_COHERENCE_18_OF_18__ZERO_TERMINAL_CREDIT",
     "preserves_live_r3_fixed_point_verification": "canonical/verification/LIVE_R3_PROVENANCE_DEPLOYMENT_20261009_V1.json"
   },
   "authority": {
@@ -37,22 +38,28 @@
     "minimum_policy_changing_information_contract_load_bearing": true,
     "unverified_semantic_omission_allowed": false,
     "full_empirical_evaluation_default": false,
-    "verifier_authority_mutation_from_synthesis_or_acquisition": false
+    "verifier_authority_mutation_from_synthesis_or_acquisition": false,
+    "r2_structured_pending_acquisition_handoff_verified": true,
+    "r2_pending_acquisition_is_not_constructive_capability_gap_when_exact_evidence_request_is_bound": true,
+    "structured_r2_minimum_information_contract_load_bearing": true,
+    "current_r2_exact_scheduler_cell_projection_reconciled": true
   },
   "next_load_bearing_roots": [
     "FOLLOW_CURRENT_TERMINAL_AUTHORITY__R3_NOT_CURRENT_BLOCKER__PROVE_ONE_SOUND_TERMINAL_ACCEPTANCE_ROUTE",
     "ROUTE_ALL_TEN_VERIFIED_FINANCE_SUBREGIONS_AND_V10_GENERAL_CROSS_DOCUMENT_EFFECT_CASES_DIRECTLY__DO_NOT_RESEARCH_THEM_AGAIN",
+    "FOR_THE_REMAINING_FINANCE_CELL_USE_THE_CONTENT_ADDRESSED_STRUCTURED_R2_ACQUISITION_REQUEST__SATISFY_ONE_BOUND_WAKE_CONDITION_WITH_PROOF_OR_EXISTING_RECEIPT_BEFORE_NEW_REALITY",
     "FOR_OEWN_SENSE_AMBIGUITY_REQUIRE_AUTHENTICATED_COMPLETE_DECISION_MANIFESTS__SKIP_DISAMBIGUATION_WHEN_TERMINAL_SIGNATURES_AGREE__ACQUIRE_ONLY_MINIMUM_AUTHENTICATED_DISCRIMINATOR_WHEN_ACTIONS_DIFFER",
     "ATTACK_ONLY_REMAINING_AMBIGUOUS_COREFERENCE__UNBOUND_SEMANTIC_MANIFESTS__NONEXPLICIT_RELATIONS__OPEN_WORLD_ONTOLOGY__UNPROVED_CROSS_DOCUMENT_HYPOTHESIS_COMPLETENESS__OR_STRONGER_EXTERNAL_FACT_AUTHENTICATION",
     "ROUTE_EVERY_CONSTRUCTIVE_GAP_THROUGH_DECISION_SUFFICIENT_CONTRACT_BEFORE_SYNTHESIS",
-    "ROUTE_EVERY_EVIDENCE_GAP_THROUGH_MINIMUM_POLICY_CHANGING_INFORMATION_CONTRACT_BEFORE_ACQUISITION",
+    "ROUTE_EVERY_EVIDENCE_GAP_THROUGH_STRUCTURED_MINIMUM_POLICY_CHANGING_INFORMATION_CONTRACT_BEFORE_ACQUISITION",
     "KEEP_STRICT_EXTERNALITY_PROOF_GATE_AND_REPLAY_PROVENANCE_INVARIANT_LOAD_BEARING"
   ],
   "accounting": {
     "incremental_spend_usd": 0,
     "terminal_credit_delta": 0,
     "decision_sufficient_gate_credit_delta": 0,
-    "minimum_information_gate_credit_delta": 0
+    "minimum_information_gate_credit_delta": 0,
+    "r2_structured_acquisition_handoff_credit_delta": 0
   },
   "terminal_truth_frontier_reconciliation": {
     "path": "canonical/governance/R3_ZERO_RESIDUAL_TERMINAL_TRUTH_RECONCILIATION_20261009_V1.json",
@@ -64,15 +71,18 @@
     "current_r2_remaining_problem_class": "POSITIVE_ADEQUACY_COVERAGE_AND_POLICY_CHANGING_OBSERVABILITY__FINANCE_RESIDUAL_LIMITED_TO_AMBIGUOUS_OR_IMPLICIT_COREFERENCE_BEYOND_VERIFIED_STRUCTURAL_FORMS__OEWN_SENSE_CASES_WITHOUT_INDEPENDENTLY_AUTHENTICATED_COMPLETE_SENSE_TO_TERMINAL_SIGNATURE_OR_OBSERVATION_OUTCOME_BINDINGS__TERMS_OR_DOMAIN_CONCEPTS_OUTSIDE_PROVED_COMPLETE_LEXICAL_OR_DOMAIN_UNIVERSES__NONEXPLICIT_SEMANTIC_RELATIONS_WITHOUT_COMPLETE_AUTHENTIC_BOUNDED_DENOTATION_OR_PROVABLE_SET_RELATION__OPEN_WORLD_ONTOLOGY_MAPPING_WITHOUT_PROVED_COMPLETE_REGISTRY__CROSS_DOCUMENT_CASES_WITH_UNDECLARED_OR_UNPROVED_HYPOTHESIS_COMPLETENESS_OR_IMPLICIT_PRECEDENCE__STRONGER_EXTERNAL_FACT_AUTHENTICATION_BEYOND_BOUND_OBSERVATION_CHANNELS__OPEN_WORLD_NOT_CLOSED",
     "next_primary_root": "PROVE_ONE_SOUND_TERMINAL_ACCEPTANCE_ROUTE",
     "terminal_credit_delta": 0,
-    "terminal_authority_current_git_blob_sha": "4afd24a761df99beed5c6be3346edda3cb7ee613",
-    "terminal_authority_current_pointer_revision": 64,
+    "terminal_authority_current_git_blob_sha": "d305aa593470a0c3edb62f62d035291756f6dcf6",
+    "terminal_authority_current_pointer_revision": 67,
     "current_r2_version": "V44",
-    "current_r2_pointer_git_blob_sha": "6b4545f42a92ce2049617b635237935bcc0f75fb",
+    "current_r2_pointer_git_blob_sha": "582785532683c28a34191779b93704d0ff24ce86",
     "current_r2_scheduler_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V44.json",
     "current_r2_scheduler_git_blob_sha": "55be062f58a20e13fc32acc47746abb11750f7b7",
     "current_r2_verified_finance_positive_subregion_count": 10,
     "current_r2_direct_route_count": 30,
-    "current_r2_bounded_family_count": 27
+    "current_r2_bounded_family_count": 27,
+    "current_r2_structured_pending_acquisition_request_count": 1,
+    "current_r2_structured_pending_acquisition_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
+    "current_r2_structured_pending_acquisition_wake_condition_count": 12
   },
   "live_r3_fixed_point": {
     "path": "canonical/verification/LIVE_R3_PROVENANCE_DEPLOYMENT_20261009_V1.json",

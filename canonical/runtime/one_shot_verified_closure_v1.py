@@ -79,6 +79,43 @@ def _safe_file_digest(root: Path, relative: str) -> dict[str, Any]:
     }
 
 
+def _compile_r2_acquisition_request(
+    cell: Mapping[str, Any],
+    *,
+    authority_sha256: str | None = None,
+) -> dict[str, Any] | None:
+    """Preserve one exact pending-acquisition R2 cell as a proof-carrying request."""
+    state = str(cell.get("state") or "")
+    if "PENDING_ACQUISITION_OR_EXPERIMENT" not in state:
+        return None
+    cell_id = str(cell.get("cell_id") or "").strip()
+    if not cell_id:
+        return None
+    wake_on = sorted({
+        str(x).strip()
+        for x in (cell.get("wake_on") or [])
+        if str(x).strip()
+    })
+    payload = {
+        "schema": "PROJECT_BRAIN_R2_PENDING_ACQUISITION_REQUEST_V1",
+        "cell_id": cell_id,
+        "state": state,
+        "required_action": cell.get("required_action"),
+        "remaining_boundary": cell.get("remaining_boundary"),
+        "wake_conditions": wake_on,
+        "request_kind": "R2_POLICY_CHANGING_EVIDENCE_OR_SCOPE_CERTIFICATE",
+        "proof_or_existing_receipt_precedes_new_reality": True,
+        "broad_acquisition_forbidden_without_minimality_proof": True,
+        "full_benchmark_default": False,
+        "terminal_authority": False,
+        "terminal_credit_delta": 0,
+    }
+    if authority_sha256:
+        payload["source_r2_authority_sha256"] = authority_sha256
+    payload["request_sha256"] = _sha(payload)
+    return payload
+
+
 def _canonical_r2_residual(root: Path) -> dict[str, Any]:
     """Read current canonical R2 truth without inventing closure from an empty R3 queue."""
     target = (root / "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json").resolve(strict=True)
@@ -88,8 +125,10 @@ def _canonical_r2_residual(root: Path) -> dict[str, Any]:
     if not isinstance(doc, Mapping):
         raise OneShotClosureError("CURRENT_R2_AUTHORITY_NOT_OBJECT")
 
+    authority_sha256 = sha256(raw).hexdigest()
     cells = doc.get("current_cell_classifications")
     open_cells: list[dict[str, Any]] = []
+    acquisition_requests: list[dict[str, Any]] = []
     if isinstance(cells, Mapping):
         for cell_id, row in cells.items():
             if not isinstance(row, Mapping):
@@ -97,12 +136,28 @@ def _canonical_r2_residual(root: Path) -> dict[str, Any]:
             state = str(row.get("state") or "")
             if not state.startswith("INTERNAL_UNSOLVED"):
                 continue
-            open_cells.append({
+            cell = {
                 "cell_id": str(cell_id),
                 "state": state,
                 "required_action": row.get("required_action"),
+                "remaining_boundary": row.get("remaining_boundary"),
                 "wake_on": deepcopy(list(row.get("wake_on") or [])),
-            })
+                "information_theoretic_externality_proved": (
+                    row.get("information_theoretic_externality_proved") is True
+                ),
+            }
+            if isinstance(row.get("decision_relative_sense_control"), Mapping):
+                cell["decision_relative_sense_control"] = deepcopy(
+                    dict(row["decision_relative_sense_control"])
+                )
+            request = _compile_r2_acquisition_request(
+                cell,
+                authority_sha256=authority_sha256,
+            )
+            if request is not None:
+                cell["acquisition_request_sha256"] = request["request_sha256"]
+                acquisition_requests.append(request)
+            open_cells.append(cell)
 
     mechanism = doc.get("mechanism_closure")
     positive_coverage_closed = (
@@ -111,7 +166,7 @@ def _canonical_r2_residual(root: Path) -> dict[str, Any]:
     )
     return {
         "authority_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
-        "authority_sha256": sha256(raw).hexdigest(),
+        "authority_sha256": authority_sha256,
         "status": doc.get("status"),
         "primary_primitive": doc.get("primary_primitive"),
         "primary_primitive_state": doc.get("primary_primitive_state"),
@@ -122,6 +177,10 @@ def _canonical_r2_residual(root: Path) -> dict[str, Any]:
             open_cells, key=lambda row: row["cell_id"]
         ),
         "current_internal_unsolved_count": len(open_cells),
+        "pending_acquisition_requests": sorted(
+            acquisition_requests, key=lambda row: row["cell_id"]
+        ),
+        "pending_acquisition_request_count": len(acquisition_requests),
     }
 
 
@@ -477,26 +536,75 @@ def run(
             )
             if open_r2:
                 residual = classify_residual([], pending=[])
+                acquisition_requests = [
+                    deepcopy(dict(row))
+                    for row in (
+                        r2_residual.get("pending_acquisition_requests") or []
+                    )
+                    if isinstance(row, Mapping)
+                ]
+                by_cell = {
+                    str(row.get("cell_id") or ""): row
+                    for row in acquisition_requests
+                }
+                evidence_blockers: list[str] = []
+                internal_blockers: list[str] = []
+                for raw_cell in open_r2:
+                    if not isinstance(raw_cell, Mapping):
+                        continue
+                    cell = deepcopy(dict(raw_cell))
+                    cell_id = str(cell.get("cell_id") or "")
+                    state = str(cell.get("state") or "")
+                    if "PENDING_ACQUISITION_OR_EXPERIMENT" in state:
+                        if cell_id and cell_id not in by_cell:
+                            request = _compile_r2_acquisition_request(
+                                cell,
+                                authority_sha256=str(
+                                    r2_residual.get("authority_sha256") or ""
+                                )
+                                or None,
+                            )
+                            if request is not None:
+                                by_cell[cell_id] = request
+                        evidence_blockers.append(
+                            "R2_PENDING_ACQUISITION:" + cell_id
+                        )
+                    else:
+                        internal_blockers.append(
+                            "R2_CURRENT_INTERNAL_UNSOLVED:" + cell_id
+                        )
+                acquisition_requests = [
+                    deepcopy(by_cell[key])
+                    for key in sorted(by_cell)
+                    if key
+                ]
+                acquisition_only = bool(evidence_blockers) and not bool(
+                    internal_blockers
+                )
                 residual.update({
-                    "class": "INTERNAL_SOLVABLE_OR_CONSTRUCTIVE_GAP",
+                    "class": (
+                        "PENDING_ACQUISITION_OR_EXPERIMENT"
+                        if acquisition_only
+                        else "INTERNAL_SOLVABLE_OR_CONSTRUCTIVE_GAP"
+                    ),
                     "internally_solvable_gap_remaining": True,
                     "internal_unsolved": True,
-                    "pending_acquisition_or_experiment_required": any(
-                        "PENDING_ACQUISITION_OR_EXPERIMENT"
-                        in str(row.get("state") or "")
-                        for row in open_r2
-                        if isinstance(row, Mapping)
+                    "pending_acquisition_or_experiment_required": bool(
+                        evidence_blockers
                     ),
-                    "internal_blockers": [
-                        "R2_CURRENT_INTERNAL_UNSOLVED:" + str(row.get("cell_id") or "")
-                        for row in open_r2
-                        if isinstance(row, Mapping)
-                    ],
+                    "internal_blockers": sorted(set(internal_blockers)),
+                    "evidence_blockers": sorted(set(evidence_blockers)),
+                    "r2_acquisition_requests": acquisition_requests,
+                    "r2_acquisition_request_count": len(acquisition_requests),
                     "r2_residual": deepcopy(r2_residual),
                 })
                 return {
                     "schema": SCHEMA,
-                    "status": "OPEN__INTERNAL_UNSOLVED_R2_GAP_REMAINS",
+                    "status": (
+                        "OPEN__INTERNAL_UNSOLVED__PENDING_ACQUISITION_OR_EXPERIMENT"
+                        if acquisition_only
+                        else "OPEN__INTERNAL_UNSOLVED_R2_GAP_REMAINS"
+                    ),
                     "pass": False,
                     "fixed_point": True,
                     "closure_class": residual["class"],

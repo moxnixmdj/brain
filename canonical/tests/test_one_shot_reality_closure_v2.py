@@ -401,6 +401,115 @@ class RealityClosureV2Tests(unittest.TestCase):
             for row in out["requests"]
         ))
 
+    def test_structured_r2_acquisition_survives_minimum_information_compilation(self):
+        row = closure(
+            status="OPEN__INTERNAL_UNSOLVED__PENDING_ACQUISITION_OR_EXPERIMENT",
+            evidence=("R2_PENDING_ACQUISITION:FINANCE_SEMANTIC_ADEQUACY_TAIL",),
+        )
+        row["residual"]["pending_acquisition_or_experiment_required"] = True
+        row["residual"]["internal_unsolved"] = True
+        row["residual"]["r2_acquisition_requests"] = [{
+            "schema": "PROJECT_BRAIN_R2_PENDING_ACQUISITION_REQUEST_V1",
+            "cell_id": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
+            "state": "INTERNAL_UNSOLVED__PENDING_ACQUISITION_OR_EXPERIMENT",
+            "required_action": "ACQUIRE_ONLY_MINIMUM_AUTHENTICATED_DISCRIMINATOR",
+            "remaining_boundary": "UNBOUND_SEMANTIC_MANIFEST_OR_EVIDENCE",
+            "wake_conditions": [
+                "NEW_AUTHENTICATED_OEWN_DECISION_MANIFEST_BINDING_COMPLETE_TERMINAL_SIGNATURES_TO_ALL_RELEASE_RELATIVE_SENSES",
+                "NEW_AUTHENTICATED_SENSE_DISCRIMINATOR_OBSERVATION_RECEIPT",
+            ],
+            "request_kind": "R2_POLICY_CHANGING_EVIDENCE_OR_SCOPE_CERTIFICATE",
+            "proof_or_existing_receipt_precedes_new_reality": True,
+            "broad_acquisition_forbidden_without_minimality_proof": True,
+            "full_benchmark_default": False,
+            "source_r2_authority_sha256": "9" * 64,
+            "request_sha256": "8" * 64,
+            "terminal_authority": False,
+            "terminal_credit_delta": 0,
+        }]
+        gap = v2.compile_gap_contract(row)
+        self.assertEqual(gap["gap_class"], "PENDING_ACQUISITION_OR_EXPERIMENT")
+        self.assertEqual(gap["basis"]["r2_acquisition_request_count"], 1)
+        decision = v2.compile_decision_sufficient_contract(gap)
+        kinds = {
+            x["kind"]
+            for x in decision["representation"]["policy_changing_requirements"]
+        }
+        self.assertIn("R2_STRUCTURED_ACQUISITION_REQUEST", kinds)
+        out = v2.compile_minimum_information_contract(gap, decision)
+        self.assertEqual(out["request_count"], 1)
+        self.assertEqual(out["structured_r2_request_count"], 1)
+        request = out["requests"][0]
+        self.assertEqual(
+            request["kind"],
+            "R2_STRUCTURED_POLICY_CHANGING_ACQUISITION",
+        )
+        self.assertEqual(
+            request["r2_cell_id"],
+            "FINANCE_SEMANTIC_ADEQUACY_TAIL",
+        )
+        self.assertEqual(
+            request["remaining_boundary"],
+            "UNBOUND_SEMANTIC_MANIFEST_OR_EVIDENCE",
+        )
+        self.assertEqual(len(request["wake_conditions"]), 2)
+        self.assertFalse(request["full_benchmark_default"])
+
+    def test_evidence_provider_receives_exact_structured_r2_acquisition(self):
+        first = closure(
+            status="OPEN__INTERNAL_UNSOLVED__PENDING_ACQUISITION_OR_EXPERIMENT",
+            evidence=("R2_PENDING_ACQUISITION:FINANCE_SEMANTIC_ADEQUACY_TAIL",),
+            initial="i0",
+            final="f0",
+        )
+        first["residual"]["pending_acquisition_or_experiment_required"] = True
+        first["residual"]["internal_unsolved"] = True
+        first["residual"]["r2_acquisition_requests"] = [{
+            "schema": "PROJECT_BRAIN_R2_PENDING_ACQUISITION_REQUEST_V1",
+            "cell_id": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
+            "state": "INTERNAL_UNSOLVED__PENDING_ACQUISITION_OR_EXPERIMENT",
+            "required_action": "ACQUIRE_ONLY_MINIMUM_AUTHENTICATED_DISCRIMINATOR",
+            "remaining_boundary": "UNBOUND_SEMANTIC_MANIFEST_OR_EVIDENCE",
+            "wake_conditions": ["NEW_AUTHENTICATED_SENSE_DISCRIMINATOR_OBSERVATION_RECEIPT"],
+            "request_kind": "R2_POLICY_CHANGING_EVIDENCE_OR_SCOPE_CERTIFICATE",
+            "proof_or_existing_receipt_precedes_new_reality": True,
+            "broad_acquisition_forbidden_without_minimality_proof": True,
+            "full_benchmark_default": False,
+            "source_r2_authority_sha256": "7" * 64,
+            "request_sha256": "6" * 64,
+            "terminal_authority": False,
+            "terminal_credit_delta": 0,
+        }]
+        second = closure(
+            status="PASS",
+            passed=True,
+            initial="i1",
+            final="f1",
+        )
+        seen = {}
+        def provider(contract):
+            seen.update(contract)
+            return {
+                "pass": True,
+                "frontier_changed": True,
+                "verification_authority_mutated": False,
+                "receipt_sha256": "5" * 64,
+                "acquisition_or_experiment_attempted": True,
+                "evidence_trace_sha256": "4" * 64,
+            }
+        with patch.object(v2.v1, "run", side_effect=[first, second]):
+            out = v2.run(repo_root=".", evidence_acquisition_provider=provider)
+        self.assertTrue(out["pass"], out)
+        minimum = seen["minimum_information_contract"]
+        self.assertEqual(minimum["request_count"], 1)
+        self.assertEqual(minimum["structured_r2_request_count"], 1)
+        request = minimum["requests"][0]
+        self.assertEqual(request["r2_cell_id"], "FINANCE_SEMANTIC_ADEQUACY_TAIL")
+        self.assertEqual(
+            request["wake_conditions"],
+            ["NEW_AUTHENTICATED_SENSE_DISCRIMINATOR_OBSERVATION_RECEIPT"],
+        )
+
     def test_synthesis_provider_receives_decision_sufficient_contract(self):
         first = closure(
             status="OPEN",

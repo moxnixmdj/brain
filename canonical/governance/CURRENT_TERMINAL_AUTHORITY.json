@@ -1455,9 +1455,9 @@
     "direct_main_write_load_bearing_admission_enforced": false,
     "primary_pr_admission_trusted_base_validation_defined": true,
     "primary_pr_admission_required_status_check_enforced": false,
-    "r2_direct_adequacy_route_count": 28,
+    "r2_direct_adequacy_route_count": 30,
     "r2_direct_adequacy_exact_cell_count": 3,
-    "r2_direct_adequacy_bounded_family_count": 25,
+    "r2_direct_adequacy_bounded_family_count": 27,
     "r2_verified_finance_positive_subregion_count": 10,
     "r2_primary_internal_unsolved_count": 1,
     "r2_primary_internal_unsolved_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
@@ -1486,7 +1486,10 @@
     "semantic_relation_current_rule": "PROVE_ONLY_THE_WEAKEST_SOUND_RELATION_WHOSE_TRUTH_CAN_CHANGE_THE_CURRENT_ACTION__EXACT_SOURCE_DECLARATION_OR_COMPLETE_TERMINAL_SIGNATURE_SUBSTITUTION_WHEN_AVAILABLE__IF_A_SCOPE_COMPLETE_AUTHENTICATED_BOUNDED_CONCEPT_REGISTRY_EXISTS_COMPILE_IT_TO_A_COMPLETE_HYPOTHESIS_SET_AND_REUSE_EXACT_MINIMAX_DISCRIMINATION__OTHERWISE_ACQUIRE_ONLY_MINIMUM_SOURCE_ALIGNED_ENTAILMENT_WORD_SENSE_ONTOLOGY_OR_AUTHORITY_EVIDENCE",
     "semantic_relation_terminal_credit_delta": 0,
     "bounded_authenticated_concept_universe_control_bound": true,
-    "bounded_authenticated_concept_universe_verification": "19_OF_19_FOCUSED_PLUS_ADJACENT_PASS"
+    "bounded_authenticated_concept_universe_verification": "19_OF_19_FOCUSED_PLUS_ADJACENT_PASS",
+    "r2_general_cross_document_effect_worldsets_bound": true,
+    "r2_oewn_decision_sense_control_bound": true,
+    "r2_structured_minimum_information_handoff_active": true
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -2171,7 +2174,7 @@
   "r2_scheduler_precedence": {
     "current_authority_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
     "current_scheduler_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V44.json",
-    "current_scheduler_git_blob_sha": "4fdc6171f14ce3bff684032db734c8c8bace7992",
+    "current_scheduler_git_blob_sha": "55be062f58a20e13fc32acc47746abb11750f7b7",
     "single_live_primitive": "ESCAPE_POLICY_ADEQUACY",
     "general_mechanism_missing": false,
     "enumerated_active_zero_reality_cell_count": 0,
@@ -2186,7 +2189,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 66,
+  "pointer_revision": 67,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
@@ -2557,7 +2560,7 @@
   "r2_v44_semantic_control_reconciliation": {
     "status": "RECONCILED__CURRENT_R2_AND_TERMINAL_PRECEDENCE_BIND_V44__TERMINAL_STILL_FALSE",
     "current_r2_pointer_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
-    "current_r2_candidate_git_blob_sha": "6b4545f42a92ce2049617b635237935bcc0f75fb",
+    "current_r2_candidate_git_blob_sha": "582785532683c28a34191779b93704d0ff24ce86",
     "scheduler_cut_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V44.json",
     "scheduler_cut_git_blob_sha": "55be062f58a20e13fc32acc47746abb11750f7b7",
     "direct_activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V24.json",
@@ -2574,6 +2577,24 @@
     "intended_sense_selection_closed_only_for_authenticated_complete_decision_manifests": true,
     "general_word_sense_closed": false,
     "open_world_ontology_mapping_closed": false,
+    "terminal_remains_false": true,
+    "terminal_credit_delta": 0,
+    "exact_scheduler_projection_reconciled": true,
+    "structured_pending_acquisition_handoff_bound": true,
+    "one_shot_v1_candidate_git_blob_sha": "885324316e4b2a9c330bc98364383ece954b7e09",
+    "one_shot_v2_candidate_git_blob_sha": "17b693029dc3ab5be7d4c8b523c104c33265700d"
+  },
+  "r2_v44_projection_truth_repair": {
+    "status": "RECONCILED__CURRENT_ONLY__HISTORICAL_VERSIONED_R2_RECEIPTS_PRESERVED",
+    "repaired_current_r2_pointer_git_blob_sha": "582785532683c28a34191779b93704d0ff24ce86",
+    "scheduler_cut_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V44.json",
+    "scheduler_cut_git_blob_sha": "55be062f58a20e13fc32acc47746abb11750f7b7",
+    "direct_route_count": 30,
+    "exact_cell_count": 3,
+    "bounded_family_count": 27,
+    "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
+    "structured_pending_acquisition_handoff_candidate": true,
+    "historical_records_mutated": false,
     "terminal_remains_false": true,
     "terminal_credit_delta": 0
   }
