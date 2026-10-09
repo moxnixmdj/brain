@@ -140,6 +140,8 @@ class DExecutionEpoch:
     root_capability_id: str
     current_capability_id: str
     capability_contract_sha256: str
+    substrate_contract_sha256: str
+    substrate_contract_canonical_json: str
     material_closure_root: str
     registry_snapshot_root: str
     state_snapshot_root: str
@@ -205,6 +207,17 @@ def verify_certificate(
     contract_sha = _hex(
         certificate.get("capability_contract_sha256"), 64, "CAPABILITY_CONTRACT_SHA256"
     )
+    substrate_contract = certificate.get("substrate_contract")
+    if not isinstance(substrate_contract, Mapping) or not substrate_contract:
+        raise DFinalityError("SUBSTRATE_CONTRACT_REQUIRED")
+    substrate_sha = sha256_json(dict(substrate_contract))
+    if _hex(
+        certificate.get("substrate_contract_sha256"),
+        64,
+        "SUBSTRATE_CONTRACT_SHA256",
+    ) != substrate_sha:
+        raise DFinalityError("SUBSTRATE_CONTRACT_DIGEST_MISMATCH")
+    substrate_json = _canon(dict(substrate_contract)).decode("utf-8")
     registry_root = _hex(
         certificate.get("registry_snapshot_root"), 64, "REGISTRY_SNAPSHOT_ROOT"
     )
@@ -238,6 +251,7 @@ def verify_certificate(
         "policy_sha256": actual_policy_sha,
         "root_capability_id": capability_id,
         "capability_contract_sha256": contract_sha,
+        "substrate_contract_sha256": substrate_sha,
         "material_closure_root": expected_root,
         "registry_snapshot_root": registry_root,
         "state_snapshot_root": state_root,
@@ -253,6 +267,8 @@ def verify_certificate(
         root_capability_id=capability_id,
         current_capability_id=capability_id,
         capability_contract_sha256=contract_sha,
+        substrate_contract_sha256=substrate_sha,
+        substrate_contract_canonical_json=substrate_json,
         material_closure_root=expected_root,
         registry_snapshot_root=registry_root,
         state_snapshot_root=state_root,
@@ -397,6 +413,8 @@ def child_scope(
         root_capability_id=parent.root_capability_id,
         current_capability_id=capability_id,
         capability_contract_sha256=parent.capability_contract_sha256,
+        substrate_contract_sha256=parent.substrate_contract_sha256,
+        substrate_contract_canonical_json=parent.substrate_contract_canonical_json,
         material_closure_root=parent.material_closure_root,
         registry_snapshot_root=parent.registry_snapshot_root,
         state_snapshot_root=parent.state_snapshot_root,
