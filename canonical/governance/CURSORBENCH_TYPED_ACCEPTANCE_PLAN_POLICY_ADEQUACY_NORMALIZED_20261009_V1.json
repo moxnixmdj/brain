@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_POLICY_ADEQUACY_CERTIFICATE_V1",
+  "date": "2026-10-09",
+  "policy_id": "BRAIN_INDEPENDENT_ACCEPTANCE_MODEL_TYPED_PLAN_V1",
+  "policy_condition": {
+    "op": "ATOM",
+    "id": "CURSORBENCH_TYPED_ACCEPTANCE_PLAN_REGION_V1"
+  },
+  "policy_condition_sha256": "14ad78ce3941868e7d61f3b8369d7e9a01504b1f2fd0ee5fe45b299948268c92",
+  "adequacy_proved": true,
+  "brain_owned": true,
+  "load_bearing_constraints_preserved": true,
+  "status": "NORMALIZED_EXISTING_CONDITIONAL_TYPED_ACCEPTANCE_PLAN_ADEQUACY__MEMBERSHIP_EXTERNAL__ZERO_CREDIT",
+  "exact_policy": {
+    "path": "canonical/runtime/independent_acceptance_model.py",
+    "git_blob_sha": "710298c5d7154b5a3c2a4a1700420c40cb2fa55a"
+  },
+  "normalized_from": {
+    "certificate": {
+      "path": "canonical/governance/CURSORBENCH_TYPED_ACCEPTANCE_PLAN_POLICY_ADEQUACY_CERTIFICATE_20261009_V1.json",
+      "git_blob_sha": "09d4ac9e2134842fa6d07ace238f2adcc47b4133"
+    },
+    "independent_verification": {
+      "path": "canonical/verification/CURSORBENCH_TYPED_ACCEPTANCE_PLAN_POLICY_ADEQUACY_INDEPENDENT_VERIFICATION_20261009_V1.json",
+      "git_blob_sha": "8645dca87c5c57d3a6d63299732b32839bcf42d9"
+    }
+  },
+  "condition_atom_semantics": {
+    "source_condition_id": "CURSORBENCH_TYPED_ACCEPTANCE_PLAN_REGION_V1",
+    "source_condition_sha256": "e81e54a159aa97d94833dc5e00615d2fe9b71ba0439ffbad85a50b0c77b4ecb6",
+    "requirements": [
+      "ALL_MATERIAL_TERMINAL_ACCEPTANCE_SEMANTICS_ALREADY_BOUND_IN_NORMALIZED_REQUIREMENTS",
+      "EVERY_TRANSFORM_KIND_IS_ONE_OF_THE_EXACT_RUNTIME_SUPPORTED_KINDS",
+      "GENERATED_OBLIGATIONS_ARE_COMPLETE_FOR_EVERY_MATERIAL_INDEPENDENTLY_KNOWABLE_FAILURE_MODE_IN_THE_BOUND_REGION",
+      "DEPENDENCY_AND_PROVENANCE_LABELS_ARE_TRUTHFUL_AND_INDEPENDENTLY_BOUND",
+      "NO_HIDDEN_VERIFIER_OR_TASK_SPECIFIC_SOLUTION_ACCESS_BEFORE_TERMINAL_AUTHORIZATION"
+    ],
+    "atom_is_exact_alias_for_full_conjunction": true,
+    "membership_self_certified": false
+  },
+  "meaning": "WHEN_AN_INDEPENDENT_AUTHORIZED_SOURCE_OR_PROOF_ESTABLISHES_THE_EXACT_MEMBERSHIP_ATOM__THE_BOUND_BRAIN_OWNED_POLICY_IS_ADEQUATE_FOR_SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001_ON_THAT_CONDITIONAL_REGION.",
+  "hard_nonclaims": [
+    "NO_HIDDEN_CURSORBENCH_TASK_MEMBERSHIP",
+    "NO_ARBITRARY_LANGUAGE_TO_TYPED_PLAN_SEMANTIC_CREDIT",
+    "NO_WHOLE_SPECIFICATION_RESIDUAL_CLOSURE",
+    "NO_WHOLE_CURSORBENCH_ADEQUACY",
+    "NO_V5_POLICY_ADEQUACY_CLAIM",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
