@@ -203,7 +203,7 @@ class R3ModeGuardPatchAuthorDominanceV1Tests(unittest.TestCase):
                     structural.PROFILE_PROOF_TARGETS,
                 )
 
-    def test_checkpoint_reconstruction_also_covers_valid_nonraw_mode(self):
+    def test_checkpoint_reconstruction_yields_to_structural_owner_for_this_class(self):
         TMP.mkdir(parents=True, exist_ok=True)
         with TemporaryDirectory(dir=TMP) as td:
             request = _request(
@@ -211,13 +211,18 @@ class R3ModeGuardPatchAuthorDominanceV1Tests(unittest.TestCase):
                 mode="specialized",
                 include_targets=False,
             )
-            candidate = checkpoint.adapt(request, repo_root=ROOT)
-        self.assertIsInstance(candidate, dict)
+            structural_candidate = structural.preflight(
+                request,
+                repo_root=ROOT,
+                normalization_profile=structural.PROFILE_PROOF_TARGETS,
+            )
+            checkpoint_candidate = checkpoint.adapt(request, repo_root=ROOT)
+        self.assertIsInstance(structural_candidate, dict)
         self.assertEqual(
-            candidate["status"],
-            "CHECKPOINT_RECONSTRUCTION_SUCCESS_EPISODE_CANDIDATE_READY",
+            structural_candidate["structural_normalization_profile"],
+            structural.PROFILE_PROOF_TARGETS,
         )
-        self.assertEqual(candidate["reconstructed_postconditions"], ["done"])
+        self.assertIsNone(checkpoint_candidate)
 
     def test_corrupt_checkpoint_is_not_fixed_by_mode_guard_patch(self):
         TMP.mkdir(parents=True, exist_ok=True)
