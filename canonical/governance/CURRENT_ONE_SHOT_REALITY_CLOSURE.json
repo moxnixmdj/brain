@@ -8,7 +8,7 @@
   },
   "predecessor": {
     "path": "canonical/runtime/one_shot_verified_closure_v1.py",
-    "git_blob_sha": "117d85bec1e5fb49428271aa9883e89d0ef1aa0a",
+    "git_blob_sha": "68b24c27df3348b618c064741a63c9930fae0e6c",
     "role": "LOAD_BEARING_INNER_FIXED_POINT__STRICT_EXTERNALITY__STRUCTURED_R2_HANDOFF__GENERALIZED_R3_VERIFICATION_FRONTIER_GAP_CLASSIFICATION"
   },
   "verification": {
@@ -36,7 +36,7 @@
       "path": "canonical/verification/STRICT_TERMINAL_CLOSURE_V1_POST_REPLAY_SHAPE_FIX_20261009_V2.json",
       "status": "PASS__INDEPENDENT_EXACT_BYTE_REPLAY__COMPILE_PASS__39_OF_39_FOCUSED_PASS__ZERO_CREDIT",
       "prior_verified_v1_git_blob_sha": "826d9bae80ed2c1f37be0e830f5e4807b262fb14",
-      "current_v1_git_blob_sha": "117d85bec1e5fb49428271aa9883e89d0ef1aa0a",
+      "current_v1_git_blob_sha": "68b24c27df3348b618c064741a63c9930fae0e6c",
       "semantic_delta": "PRESERVE_SCALAR_REMAINING_HARD_FRONTIER_AS_ONE_LIST_ITEM_INSTEAD_OF_SPLITTING_TO_CHARACTERS",
       "externality_control_law_touched": false,
       "terminal_credit_delta": 0,
@@ -270,7 +270,7 @@
   "current_projection_refresh_20261009": {
     "status": "LAST_VERIFIED_SNAPSHOT__NONAUTHORITATIVE_FOR_MOVING_R2_AND_TERMINAL__DYNAMIC_PROJECTION_REQUIRED",
     "source_main_head": "0e7899926a61ca41c866e95debbf801cac69cd64",
-    "one_shot_v1_runtime_git_blob_sha": "117d85bec1e5fb49428271aa9883e89d0ef1aa0a",
+    "one_shot_v1_runtime_git_blob_sha": "68b24c27df3348b618c064741a63c9930fae0e6c",
     "one_shot_v2_runtime_git_blob_sha": "b8347a3993f96aa5e6fa2f1fe68d7c8afccb8bec",
     "current_r2_pointer_git_blob_sha": "07120fcb2b9ceebb065849122f5a685dd85d7ec6",
     "current_terminal_authority_git_blob_sha": "3f8207f72bf0685883253924c9089dbda0bda1f0",
@@ -332,5 +332,13 @@
     "fixed_point_reentry_required": true,
     "exact_task_replay_required": true,
     "externality_is_not_task_success": true
+  },
+  "frontier_observability_v1": {
+    "status": "LIVE__CAPABILITY_REGISTRY_AND_DYNAMIC_ROUTE_POINTER_ARE_LOAD_BEARING_FRONTIER_STATE",
+    "capability_registry_path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+    "dynamic_route_pointer_path": "canonical/governance/CURRENT_R2_DIRECT_ROUTE_ADMISSIONS.json",
+    "false_progress_rule": "PROVIDER_RECEIPT_COUNTS_ONLY_IF_NEXT_V1_FRONTIER_DIGEST_OBSERVES_REAL_LOAD_BEARING_CHANGE",
+    "unrelated_file_mutation_does_not_count": true,
+    "terminal_credit_delta": 0
   }
 }

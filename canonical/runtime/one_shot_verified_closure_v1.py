@@ -33,6 +33,8 @@ LOAD_BEARING_PATHS = (
     "canonical/runtime/information_theoretic_externality_gate_v1.py",
     "canonical/runtime/live_brain_runtime_v1.py",
     "canonical/runtime/unified_cognitive_fabric_v1.py",
+    "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+    "canonical/governance/CURRENT_R2_DIRECT_ROUTE_ADMISSIONS.json",
     "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
     "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
 )
