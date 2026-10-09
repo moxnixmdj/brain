@@ -15,6 +15,7 @@ WORK_ROOT = pathlib.Path("/work")
 REPO_INPUT = INPUT_ROOT / "repo"
 REPO_WORK = WORK_ROOT / "repo"
 MANIFEST = INPUT_ROOT / "material_manifest.json"
+EXPECTED_MANIFEST_GIT_BLOB = "2c517cab595bc050de67d6f6bb86ab0545ed7dd3"
 
 
 def git_blob(raw: bytes) -> str:
@@ -32,7 +33,10 @@ def emit(value: dict) -> None:
 
 
 def verify_input_materials() -> tuple[dict[str, bool], dict[str, str]]:
-    doc = json.loads(MANIFEST.read_text(encoding="utf-8"))
+    manifest_raw = MANIFEST.read_bytes()
+    if git_blob(manifest_raw) != EXPECTED_MANIFEST_GIT_BLOB:
+        raise RuntimeError("MATERIAL_MANIFEST_BLOB_MISMATCH")
+    doc = json.loads(manifest_raw.decode("utf-8"))
     rows = doc.get("materials")
     if not isinstance(rows, list) or not rows:
         raise RuntimeError("MATERIAL_MANIFEST_INVALID")
