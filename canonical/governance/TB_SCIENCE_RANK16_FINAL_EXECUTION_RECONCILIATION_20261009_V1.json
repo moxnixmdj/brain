@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK16_FINAL_EXECUTION_RECONCILIATION_V1",
   "date": "2026-10-09",
-  "status": "FINAL_ZERO__ONE_SLOT_CONSUMED__NO_REPLAY__CAUSAL_REPEAT_DEFECT_LOCALIZED__V10_SUCCESSOR_REPAIR_MERGED__ZERO_TERMINAL_CREDIT",
+  "status": "FINAL_ZERO__ONE_SLOT_CONSUMED__NO_REPLAY__CAUSAL_REPEAT_DEFECT_LOCALIZED__V10_V2_SUCCESSOR_RUNTIME_CANONICALLY_OWNED__ZERO_TERMINAL_CREDIT",
   "predicate": "TB_SCIENCE_GE_58_7",
   "predecessor": {
     "live_reconciliation_path": "canonical/governance/TB_SCIENCE_RANK16_LIVE_EXECUTION_RECONCILIATION_20261009_V1.json",
@@ -82,22 +82,39 @@
     }
   },
   "successor_repair": {
-    "repository": "moxnixmdj/verification-capsule-runner",
-    "pull_request": 2530,
-    "merge_commit": "efc5409027e69e2c523b63a90de09a12094af58d",
-    "agent_v10_git_blob_sha": "0e5b3ee96cbe7560ab62287573e40e6f79bc147b",
-    "planner_v5_git_blob_sha": "050bbae7c38900023fc4110070a48e8e50c161ee",
-    "evidence_store_v1_git_blob_sha": "57373f94e4f8ad64f071a2e55ff04d49074d39d5",
+    "public_repository": "moxnixmdj/verification-capsule-runner",
+    "pull_requests": [
+      2530,
+      2533
+    ],
+    "execution_base_merge_commit": "9a84e452ab3da6cee89095f2ad3d521e151a422a",
+    "exact_runtime_blobs": {
+      "agent_v10": "6fa7993b7691f7e8d6f9befa988271d9afbd29a2",
+      "planner_v5": "050bbae7c38900023fc4110070a48e8e50c161ee",
+      "evidence_store_v1": "57373f94e4f8ad64f071a2e55ff04d49074d39d5",
+      "harbor_environment_transport_v2": "9aebd804c6d71b07da5134ed4e2d14a6427de84c",
+      "logical_attempt_identity_v1": "6d29ac6a30e7094feb673147802aaecdf391fff0",
+      "terminal_agent_start_barrier_v1": "be71f063b232429dc9e416bb58b4138f35341079",
+      "terminal_causal_journal_v2": "866e1801c3c61f01a6f8b9229015262ffaa13b46",
+      "terminal_causal_journal_filebridge_v2": "0f4bf3335501d04dbeda9606e017dbd075de9c9a"
+    },
+    "canonical_mirror_verification": {
+      "path": "canonical/verification/TB_SCIENCE_V10_RUNTIME_CLOSURE_MIRROR_VERIFY_20261009_V1.json",
+      "git_blob_sha": "389bdf3b72697ca900036ce01722a689de7f82e1"
+    },
     "exact_candidate_verification_runs": {
-      "lossless_evidence": 37956859376,
-      "execution_ratchet": 37956859847,
-      "zero_exposure_carrier": 37956860338,
-      "robust_reseal": 37956860715
+      "lossless_evidence": 37958174949,
+      "execution_ratchet": 37958174581,
+      "zero_exposure_carrier": 37958174194,
+      "robust_reseal": 37958174701,
+      "causal_journal_v2_closure": 37958174702
     },
     "repaired": [
       "OMITTED_OBSERVATIONS_REMAIN_CONTENT_ADDRESSED_AND_EXACTLY_RETRIEVABLE",
       "FULL_ACTION_AND_VERIFICATION_RECEIPTS_ARE_PRESERVED_BEFORE_PROMPT_COMPACTION",
-      "IDENTICAL_EXECUTED_BUT_NONPROMOTED_EFFECTS_ARE_REJECTED_ACROSS_CYCLES_UNTIL_INDEPENDENTLY_VERIFIED_PROMOTION_CHANGES_STATE"
+      "IDENTICAL_EXECUTED_BUT_NONPROMOTED_EFFECTS_ARE_REJECTED_ACROSS_CYCLES_UNTIL_INDEPENDENTLY_VERIFIED_PROMOTION_CHANGES_STATE",
+      "V10_COGNITION_ONLY_EVIDENCE_AND_CANDIDATE_REJECTION_EVENTS_ARE_ACCEPTED_BY_CAUSAL_JOURNAL_V2",
+      "CANONICAL_BRAIN_OWNS_BYTE_IDENTICAL_RUNTIME_CLOSURE"
     ],
     "benchmark_trials_consumed_by_repair": 0,
     "terminal_credit_delta": 0
