@@ -1399,5 +1399,18 @@
     "NO_CLAIM_SOURCE_BOUND_CCOB_IDENTITY_GENERALIZES_TO_OTHER_LOSS_ABSORBING_CUSHION_CONTEXTS.",
     "NO_CLAIM_LOCAL_APPOSITIVE_IDENTITY_CREATES_A_GLOBAL_ALIAS.",
     "NO_CLAIM_REGCAP_CANDIDATE_AMBIGUITY_CONTROL_CLOSES_OPEN_WORLD_ONTOLOGY_OR_THE_FINANCE_FAMILY."
-  ]
+  ],
+  "assurance_closure_compiler_v2": {
+    "path": "canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json",
+    "status": "CURRENT_UVCK_V2_CANDIDATE__IMPLEMENTED_ISOLATED_10_OF_10_PASS__NOT_LIVE_DEFAULT",
+    "role": "META_ASSURANCE_CLOSURE_ACCOUNTING_ABOVE_EXISTING_R2_FIXED_POINT__NO_NEW_SEMANTIC_OR_TERMINAL_AUTHORITY",
+    "live_default": false,
+    "current_r2_fixed_point_unchanged": true,
+    "current_domain_routes_unchanged": true,
+    "universal_positive_action_coverage_closed": false,
+    "next_required_edge": "INTEGRATED_MAIN_REPLAY_PLUS_ADVERSARIAL_DEFEATER_GENERATOR_BINDING_BEFORE_LIVE_DEFAULT_PROMOTION",
+    "terminal_authority": false,
+    "terminal_credit_delta": 0,
+    "incremental_spend_usd": 0
+  }
 }
