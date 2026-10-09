@@ -29,16 +29,25 @@ jobs:
       - name: Run stdlib hostile suite
         run: |
           set -euo pipefail
-          python3 -m unittest canonical.tests.test_d_finality_execution_epoch_v1 canonical.tests.test_d_finality_coverage_gate_v1 -v
+          python3 -m unittest \
+            canonical.tests.test_d_finality_execution_epoch_v1 \
+            canonical.tests.test_d_finality_coverage_gate_v1 \
+            -v
 
       - name: Compile exact runtime and tests
         run: |
           set -euo pipefail
           python3 -m py_compile \
             canonical/runtime/d_finality_execution_epoch_v1.py \
-            canonical/tests/test_d_finality_execution_epoch_v1.py \\
-            canonical/runtime/d_finality_coverage_gate_v1.py \\
+            canonical/tests/test_d_finality_execution_epoch_v1.py \
+            canonical/runtime/d_finality_coverage_gate_v1.py \
             canonical/tests/test_d_finality_coverage_gate_v1.py
+
+      - name: Parse governance evidence
+        run: |
+          set -euo pipefail
+          python3 -m json.tool canonical/governance/CURRENT_D_FINALITY_COVERAGE_RESIDUAL_20261009_V1.json >/dev/null
+          python3 -m json.tool canonical/governance/D_FINALITY_EXECUTION_EPOCH_V1_CANDIDATE_20261009.json >/dev/null
 
       - name: Emit exact byte bindings
         run: |
