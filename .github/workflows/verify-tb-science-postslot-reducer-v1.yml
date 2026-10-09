@@ -1,3 +1,4 @@
+# stdlib-only focused verifier
 name: Verify TB-Science post-slot reducer v1
 
 on:
