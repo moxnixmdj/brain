@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK14_ACTIVE_AUTHORITY_V2_PUBLIC_VERIFY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__REPAIRED_RANK14_ACTIVE_AUTHORITY_EXACT_BINDINGS_VERIFIED__TASK_READ_STILL_LEASE_GATED__ZERO_CREDIT",
+  "authority_path": "canonical/governance/TB_SCIENCE_RANK14_ONE_SLOT_EXECUTION_AUTHORITY_20261009_V2.json",
+  "authority_git_blob_sha": "65bad902596c39b98acbd81446fb1014437ef8f3",
+  "candidate_git_blob_sha": "e57e8588048b58c7fad5f273608f463bc586be9e",
+  "candidate_verification_git_blob_sha": "a7ae7e35e34595e0fcd096a61f410e485b2af268",
+  "ledger_git_blob_sha": "c8e9720e3f53c0eb483552c902b7841821f335b0",
+  "v10_closure_git_blob_sha": "ae37559320105277e017ff17af7c3dbeae2f9c27",
+  "public_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify-tbscience-r14-repaired-authority-v2",
+    "head_sha": "5396fff9fb8d53a34cfc82beecb464fbd5b43598",
+    "workflow_run_id": 37882599398,
+    "workflow_job_id": 113665429293,
+    "conclusion": "success",
+    "artifact_id": 11594663712,
+    "artifact_zip_sha256": "4cbdfdebd97c38d13dfa63c33b59c9a9d3e4977decfdf6ba852c638c12719dc5",
+    "errors": []
+  },
+  "proves": [
+    "ACTIVE_AUTHORITY_BINDS_REPAIRED_AGENT_AND_V10_CLOSURE_EXACTLY",
+    "RANK14_SLOT_REMAINS_UNCONSUMED",
+    "EXECUTION_AUTHORITY_IS_ACTIVE_BUT_TASK_READ_REMAINS_GATED_ON_A_FRESH_PUBLIC_LEASE",
+    "NO_PROMOTION_AUTHORITY_IS_GRANTED"
+  ],
+  "authority_state": {
+    "execution_authority": true,
+    "task_read_authority": false,
+    "task_start_authority": false,
+    "promotion_authority": false,
+    "rank14_slot_consumed": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_trials_consumed_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
