@@ -77,6 +77,11 @@ class R3DirectExperienceTotalityV1Tests(unittest.TestCase):
             observe.call_args.kwargs["surface"],
             "UNIFIED_FABRIC_DIRECT_P3",
         )
+        retry = observe.call_args.kwargs["retry_context"]
+        self.assertEqual(retry["mode"], "fabric_direct")
+        self.assertEqual(retry["request"]["mode"], "P3")
+        self.assertEqual(retry["request"]["payload"], {})
+        self.assertFalse(retry["request"]["options"]["learn"])
         drain.assert_called_once()
 
     def test_direct_failure_is_causal_experience_not_silently_dropped(self):
@@ -111,6 +116,11 @@ class R3DirectExperienceTotalityV1Tests(unittest.TestCase):
         self.assertFalse(observation["pass"])
         self.assertEqual(observation["failure_class"], "DIRECT_FAILURE")
         self.assertNotIn("reason", observation)
+        retry = observe.call_args.kwargs["retry_context"]
+        self.assertEqual(retry["mode"], "fabric_direct")
+        self.assertEqual(retry["request"]["mode"], "P3")
+        self.assertEqual(retry["request"]["payload"], {})
+        self.assertFalse(retry["request"]["options"]["learn"])
 
     def test_learn_false_disables_direct_observation(self):
         with (
