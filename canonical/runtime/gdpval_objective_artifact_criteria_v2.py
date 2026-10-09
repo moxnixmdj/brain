@@ -223,7 +223,7 @@ def compile_criterion(criterion: str, *, criterion_id: str | None = None) -> dic
     if _matches(text, _PPTX_EXISTS):
         return _at_least_ext(base, ".pptx")
 
-    m = re.fullmatch(r"Provides an Excel \\.xlsx workbook with exactly (\\d+|one|two|three|four|five|six|seven|eight|nine|ten) worksheets? \\(tabs\\)[.]?", text, re.I)
+    m = re.fullmatch(r"Provides an Excel \.xlsx workbook with exactly (\d+|one|two|three|four|five|six|seven|eight|nine|ten) worksheets? \(tabs\)[.]?", text, re.I)
     if m:
         token = m.group(1).lower()
         count = int(token) if token.isdigit() else _NUMBER_WORDS[token]
