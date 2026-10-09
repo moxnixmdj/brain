@@ -176,6 +176,7 @@ def build_registry(
     }
     registry = dict(registry_core)
     registry["registry_sha256"] = _sha(registry_core)
+    registry["source_text"] = source_text
     return registry
 
 
@@ -202,6 +203,9 @@ def make_identity_claim(
         raise ConceptRegistryError("TERM_NOT_BOUND_IN_REGISTRY")
     if lrow.get("concept_id") != rrow.get("concept_id"):
         raise ConceptRegistryError("TERMS_DO_NOT_SHARE_CONCEPT")
+    source_text = registry.get("source_text")
+    if not isinstance(source_text, str) or not source_text:
+        raise ConceptRegistryError("REGISTRY_SOURCE_TEXT_MISSING")
     claim_core = {
         "schema": CLAIM_SCHEMA,
         "scope_id": registry.get("scope_id"),
@@ -216,6 +220,8 @@ def make_identity_claim(
         "authority_git_blob_sha": (
             registry.get("authority") or {}
         ).get("git_blob_sha"),
+        "source_text": source_text,
+        "registry": dict(registry),
     }
     claim = dict(claim_core)
     claim["claim_sha256"] = _sha(claim_core)
