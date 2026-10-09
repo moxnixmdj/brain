@@ -77,7 +77,7 @@ _REGISTRY = {
             "CURSORBENCH_TYPED_ACCEPTANCE_PLAN_POLICY_ADEQUACY_BINDING_20261009_V1.json"
         ),
         "binding_blob_sha": "f385b555064e546e90c04c285053c9717014fa8a",
-    },,
+    },
     "BRAIN_FINITE_CANDIDATE_EXACT_ORACLE_SOLVER_V1": {
         "condition": {
             "op": "AND",
