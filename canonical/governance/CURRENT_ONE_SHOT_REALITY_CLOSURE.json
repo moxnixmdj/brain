@@ -59,9 +59,16 @@
     "terminal_authority_git_blob_sha_after_reconciliation": "e30fee34e3ace236b5e18b2b013ffc07827bf2b7",
     "r3_is_current_terminal_blocker": false,
     "terminal_remains_false": true,
-    "current_r2_remaining_problem_class": "POSITIVE_ADEQUACY_COVERAGE_AND_POLICY_CHANGING_OBSERVABILITY__ONE_PRIMARY_KNOWN_FINANCE_CELL__OPEN_WORLD_NOT_CLOSED",
+    "current_r2_remaining_problem_class": "POSITIVE_ADEQUACY_COVERAGE_AND_POLICY_CHANGING_OBSERVABILITY__FINANCE_RESIDUAL_EXCLUDES_NINE_VERIFIED_SUBREGIONS__REMAINING_AMBIGUOUS_COREFERENCE_INFERRED_SYNONYMY_CONTEXT_DEPENDENT_WORD_SENSE_ONTOLOGY_OR_DOMAIN_MAPPING_GENERAL_CROSS_DOCUMENT_SEMANTIC_BINDING_OR_STRONGER_EXTERNAL_FACT_AUTHENTICATION__OPEN_WORLD_NOT_CLOSED",
     "next_primary_root": "PROVE_ONE_SOUND_TERMINAL_ACCEPTANCE_ROUTE",
-    "terminal_credit_delta": 0
+    "terminal_credit_delta": 0,
+    "terminal_authority_current_git_blob_sha": "007e71ea976fe3a5655f2c5400562bb1e06dab45",
+    "terminal_authority_current_pointer_revision": 63,
+    "current_r2_version": "V37",
+    "current_r2_pointer_git_blob_sha": "c93bac6f8443cc947e511ff60194358844804631",
+    "current_r2_scheduler_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V37.json",
+    "current_r2_scheduler_git_blob_sha": "3c409ea62f6004701c4cd5062c1116078d5ae6d9",
+    "current_r2_verified_finance_positive_subregion_count": 9
   },
   "live_r3_fixed_point": {
     "path": "canonical/verification/LIVE_R3_PROVENANCE_DEPLOYMENT_20261009_V1.json",
