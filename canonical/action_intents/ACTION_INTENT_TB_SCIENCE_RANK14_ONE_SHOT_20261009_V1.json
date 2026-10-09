@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_TB_SCIENCE_RANK14_ONE_SHOT_20261009_V1",
+  "date": "2026-10-09",
+  "action_id": "TB_SCIENCE_RANK14_BRAIN_SIDE_ONE_SLOT_AUTHORITY_ACTIVATION_V1",
+  "status": "ACTIVE_INTENT__BIND_EXISTING_REPAIR_AND_LEDGER_ONLY__NO_TASK_READ_OR_START",
+  "canonical_base_commit": "0871818156a48bfa70e0b60f444666a46ff6824d",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "checkpoint_obligation": "TB_SCIENCE_GE_58_7",
+  "action_kind": "RECONCILE_FRONTIER",
+  "causal_blocker": "TB_SCIENCE_RANK14_IS_NEXT_UNTOUCHED_AND_CONTEXT_TIMEOUT_REPAIR_IS_VERIFIED__BRAIN_SIDE_EXACT_ONE_SLOT_AUTHORITY_NOT_YET_BOUND",
+  "blocker_lease_key": "TB_SCIENCE_GE_58_7::RANK14_ONE_SLOT_AUTHORITY::20261009_V1",
+  "highest_leverage_now": true,
+  "expected_parent_frontier_change": "RANK14_BRAIN_SIDE_ONE_SLOT_AUTHORITY_ACTIVE__TASK_READ_FALSE__TASK_STARTED_FALSE__PUBLIC_EXECUTION_LEASE_STILL_REQUIRED",
+  "stop_condition": "EXACT_RANK14_AUTHORITY_BINDS_V16_LEDGER_V9_RUNTIME_CLOSURE_AND_VERIFIED_16K_SCOPED_TIMEOUT_REPAIR__TASK_UNREAD_UNSTARTED__ZERO_CREDIT",
+  "load_bearing_primary": {
+    "open_obligation_ids": [],
+    "constructive_gap_for_open_obligation_ids": [
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "scope_complete_discharge": false,
+    "expected_obligation_discharge_lcb": "0",
+    "expected_obligation_unlock_lcb": "1/13",
+    "success_probability_lcb": "1",
+    "wall_clock_cost_ub": "1"
+  },
+  "source_bindings": {
+    "ledger": {
+      "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261009_V16.json",
+      "git_blob_sha": "748232e21b081083d353e4f901b8607a32c32b55"
+    },
+    "timeout_repair_verification": {
+      "path": "canonical/verification/TB_SCIENCE_CONTEXT16K_SCOPED_TIMEOUT_REPAIR_FINAL_VERIFICATION_20261009_V2.json",
+      "git_blob_sha": "8b8cdc3fc112bd0a253af795fb79c0f641b8b3b4"
+    },
+    "runtime_closure": {
+      "path": "canonical/governance/TB_SCIENCE_TRANSITIVE_RUNTIME_CLOSURE_MANIFEST_20261009_V9.json",
+      "git_blob_sha": "4785c42631ea6feae6297e97f03263fd3c7ca384"
+    },
+    "terminal_manifest": {
+      "path": "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json",
+      "git_blob_sha": "6dfa880b1f68881531afbba6ca211681801fd19b"
+    }
+  },
+  "safety": {
+    "benchmark_task_exposure_authorized": false,
+    "rank14_task_read_authority": false,
+    "rank14_task_start_authority": false,
+    "benchmark_trials_consumed": 0,
+    "incremental_spend_usd_max": 0,
+    "promotion_authority": false,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

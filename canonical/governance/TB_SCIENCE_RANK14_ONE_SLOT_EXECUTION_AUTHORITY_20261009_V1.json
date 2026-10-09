@@ -1,0 +1,113 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK14_ONE_SLOT_EXECUTION_AUTHORITY_V1",
+  "date": "2026-10-09",
+  "status": "PROSPECTIVE_ACTIVE_ON_CANONICAL_MERGE__ONE_SLOT_AUTHORITY__TASK_UNREAD_UNSTARTED__PUBLIC_LEASE_REQUIRED",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "slot": {
+    "id": "terminal-bench-science/inverse-lithography::trial-0",
+    "ledger_schedule_rank": 14,
+    "frozen_manifest_schedule_order": 13,
+    "digest": "sha256:8c4da4b5b3a00283335e83dda92584aaf9293ff773bc43f2bf95eb0e2c0f8530"
+  },
+  "intent": {
+    "path": "canonical/action_intents/ACTION_INTENT_TB_SCIENCE_RANK14_ONE_SHOT_20261009_V1.json",
+    "git_blob_sha": "f0071f0b283cf7b9ca1308c4762b08e8d051d091"
+  },
+  "source_bindings": {
+    "ledger": {
+      "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261009_V16.json",
+      "git_blob_sha": "748232e21b081083d353e4f901b8607a32c32b55"
+    },
+    "terminal_authority": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+      "git_blob_sha": "3ed1ac0effcbeff37fd5206b1d46649166f3b71f"
+    },
+    "terminal_manifest": {
+      "path": "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json",
+      "git_blob_sha": "6dfa880b1f68881531afbba6ca211681801fd19b"
+    },
+    "runtime_closure": {
+      "path": "canonical/governance/TB_SCIENCE_TRANSITIVE_RUNTIME_CLOSURE_MANIFEST_20261009_V9.json",
+      "git_blob_sha": "4785c42631ea6feae6297e97f03263fd3c7ca384"
+    },
+    "scoped_timeout_repair": {
+      "path": "canonical/verification/TB_SCIENCE_CONTEXT16K_SCOPED_TIMEOUT_REPAIR_FINAL_VERIFICATION_20261009_V2.json",
+      "git_blob_sha": "8b8cdc3fc112bd0a253af795fb79c0f641b8b3b4"
+    }
+  },
+  "exact_route": {
+    "agent_blob": "5e851d884b9784c6dc6fc9f83c08c502e41c3bdc",
+    "planner_blob": "58964dc8d6b5eed5c202081cd800035c791eeb1d",
+    "command_policy_blob": "a525773417291c7a4841bf35e1baff5370350d0d",
+    "transitive_runtime_file_count": 15,
+    "qwen_model_sha256": "f41c0a0c0e43bf721fb2da29374cd1a97271bac0bab08a9dc42964525e82350c",
+    "llama_cpp_commit": "bec4772f6a2527d371557b5d2032641e5ff7619c",
+    "server_context_tokens": 16384,
+    "threads": 4,
+    "parallel": 1
+  },
+  "verified_preconditions": {
+    "prior_consumed_slots": 13,
+    "prior_successes": 0,
+    "prior_final_failures": 13,
+    "successes_still_needed": 124,
+    "remaining_slots": 197,
+    "failures_before_fail_lock": 74,
+    "pass_still_mathematically_reachable": true,
+    "timeout_repair_live_gate_run_id": 37876839032,
+    "timeout_repair_observed_input_tokens": 10004,
+    "timeout_repair_headroom_tokens": 2284,
+    "benchmark_task_exposure": 0
+  },
+  "prestart_token_budget_guard": {
+    "required": true,
+    "phase": "AFTER_EXACT_TASK_READ_AUTHORITY_AND_BEFORE_IRREVERSIBLE_TASK_START",
+    "token_counter": "harbor_science_planner_v1.count_input_tokens(_request_payload(exact_first_cycle_prompt))",
+    "server_context_tokens": 16384,
+    "reserved_completion_tokens": 4096,
+    "maximum_admissible_input_tokens": 12288,
+    "pass_condition": "input_tokens + 4096 <= 16384",
+    "fail_action": "PREEXPOSURE_ABORT_NONCONSUMING",
+    "failure_consumes_slot": false,
+    "retry_same_attempt_allowed": false
+  },
+  "controls": {
+    "attempts_authorized": 1,
+    "retries_authorized": 0,
+    "replacement_allowed": false,
+    "incremental_spend_usd_max": 0,
+    "public_execution_claim_required": true,
+    "exact_public_epoch_required": true,
+    "exact_runtime_blob_identity_required": true,
+    "current_epoch_recheck_required_immediately_before_task_start": true,
+    "post_model_storage_gate_required": true,
+    "prestart_token_budget_guard_required": true,
+    "precheck_failure_consumes_slot": false,
+    "post_start_result_irreversible": true,
+    "final_non_success_counts_zero": true
+  },
+  "state": {
+    "execution_claim_active": false,
+    "public_activation_armed": false,
+    "task_read_authority": false,
+    "task_content_read": false,
+    "task_started": false,
+    "result_present": false,
+    "authority_consumed": false
+  },
+  "execution_authority": true,
+  "fresh_reality_authority": true,
+  "promotion_authority": false,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "hard_nonclaims": [
+    "NO_RANK14_TASK_CONTENT_READ",
+    "NO_RANK14_TASK_START",
+    "NO_RANK14_RESULT",
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ]
+}
