@@ -18,7 +18,7 @@
   },
   "generic_repair_verification": {
     "path": "canonical/verification/TB_SCIENCE_RANK17_RAW_TASK_PUNCTUATION_REPAIR_VERIFY_20261009_V1.json",
-    "git_blob_sha": "43890776ca25284e8f7db33952ec1af6e07e577d",
+    "git_blob_sha": "28ec71862357908bd2c868ca6494a9d89439a223",
     "pass": true,
     "public_reseal_required": true
   },
@@ -59,7 +59,7 @@
     "generic_repair_verified": true,
     "fresh_execution_authority": false,
     "fresh_task_read_authority": false,
-    "required_pre_execution_repair": "FRESH_PUBLIC_PROOF_CARRYING_RESEAL_BINDING_REPAIRED_LOSSLESS_RAW_TASK_AND_EXPLICIT_REQUIREMENT_SEGMENTERS"
+    "required_pre_execution_repair": "FRESH_PUBLIC_PROOF_CARRYING_RESEAL_BINDING_CANONICAL_DIRECT_SCANNER_IN_BOTH_LOSSLESS_RAW_TASK_AND_EXPLICIT_REQUIREMENT_INDEX"
   },
   "scheduler": [
     "DO_NOT_RERUN_OR_MERGE_RANK17_V3_ACTIVATION_PR_2537.",
