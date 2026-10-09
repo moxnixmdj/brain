@@ -28,8 +28,8 @@
     "bounded_family_count": 27,
     "current_route_count": 30,
     "current_activation_status": "THREE_EXACT_CELLS_PLUS_TWENTY_SEVEN_BOUNDED_FAMILIES",
-    "direct_runtime_path": "canonical/runtime/r2_direct_end_to_end_adequacy_v10.py",
-    "direct_runtime_git_blob_sha": "1a78930ab5536a8db35097eb7e924284b0a0de73",
+    "direct_runtime_path": "canonical/runtime/r2_direct_route_registry_v1.py",
+    "direct_runtime_git_blob_sha": "d0bd1af8c2e0ebb51e65bf400920892accb9542e",
     "coverage_verifications": [
       {
         "path": "canonical/verification/R2_DOCX_JSON_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
@@ -136,7 +136,14 @@
     "latest_verification_git_blob_sha": "5d283287394557520ce709b91c93dd5a25b44083",
     "latest_verification_status": "PASS__EXPLICIT_ORDERED_PAIR_REFERENCE__EXACT_CONTENT_ADDRESSED_13_OF_13__COMPILE_4_OF_4__ZERO_CREDIT",
     "fixed_point_controller_path": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
-    "fixed_point_controller_git_blob_sha": "cbc37346e5838b761cbc124b956d6e4e04986594"
+    "fixed_point_controller_git_blob_sha": "6b719dd7bc23738885759650034302f96704d13f",
+    "current_route_selection_metadata_pointer": "canonical/governance/CURRENT_R2_DIRECT_ROUTE_REGISTRY.json",
+    "current_dynamic_admissions_pointer": "canonical/governance/CURRENT_R2_DIRECT_ROUTE_ADMISSIONS.json",
+    "future_route_source_edit_required": false,
+    "future_route_registry_edit_required": false,
+    "legacy_v1_to_v10_runtime_chain_load_bearing": false,
+    "selection_semantics": "V10_CURRENT_THIRTY_ROUTE_PRECEDENCE_PRESERVED_BY_CONTENT_ADDRESSED_METADATA__FUTURE_PROOF_CARRYING_ROUTES_UNIQUE_MATCH_FAIL_CLOSED",
+    "dynamic_route_collision_policy": "FAIL_CLOSED_UNLESS_EXPLICIT_EQUIVALENCE_OR_DOMINANCE_AUTHORITY"
   },
   "fixed_point_information_policy": {
     "minimum_policy_changing_information": true,
