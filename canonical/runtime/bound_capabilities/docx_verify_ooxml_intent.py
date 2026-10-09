@@ -2,6 +2,7 @@
 """Verify DOCX content against independently parsed raw creation intent."""
 from __future__ import annotations
 import importlib.util,json,pathlib,re,sys
+from canonical.runtime import d_finality_execution_epoch_v1 as d_finality
 
 def _safe(root,raw):
     root=pathlib.Path(root).resolve()
@@ -64,6 +65,7 @@ def _expected_json(goal,data):
 
 def _load_base():
     path=pathlib.Path(__file__).resolve().with_name("docx_verify_ooxml.py")
+    d_finality.require_material_file_if_active(path)
     spec=importlib.util.spec_from_file_location("project_brain_docx_verify_ooxml_base",path)
     if spec is None or spec.loader is None:
         raise RuntimeError("DOCX_BASE_VERIFIER_LOAD_FAILED")

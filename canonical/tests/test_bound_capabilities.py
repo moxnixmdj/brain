@@ -5,6 +5,7 @@ import pathlib
 import re
 import sys
 import unittest
+from unittest import mock
 
 CANONICAL_ROOT = pathlib.Path(__file__).resolve().parents[1]
 REPO_ROOT = CANONICAL_ROOT.parent
@@ -72,6 +73,20 @@ class BoundCapabilityTests(unittest.TestCase):
             self.assertEqual(len(modules),len(set(modules)),cid)
             for module in modules:
                 self.assertIsNotNone(importlib.util.find_spec(module),cid)
+
+    def test_stdlib_binding_accepts_real_stdlib_origin(self):
+        row=runtime._verified_stdlib_spec("json")
+        self.assertEqual(row["module"],"json")
+        self.assertIn(row["origin_kind"],{"stdlib_file","frozen","built-in"})
+
+    def test_stdlib_binding_rejects_shadow_module_origin(self):
+        fake=type("FakeSpec",(),{"origin":"/tmp/json.py"})()
+        with mock.patch.object(runtime.importlib.util,"find_spec",return_value=fake):
+            with self.assertRaisesRegex(
+                runtime.Blocker,
+                "BOUND_PYTHON_STDLIB_ORIGIN_OUTSIDE_STDLIB",
+            ):
+                runtime._verified_stdlib_spec("json")
 
     def test_unknown_bound_capability_rejected(self):
         with self.assertRaisesRegex(runtime.Blocker,"BOUND_CAPABILITY_UNKNOWN"):

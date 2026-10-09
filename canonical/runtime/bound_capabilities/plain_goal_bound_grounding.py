@@ -15,6 +15,7 @@ import json
 import pathlib
 import re
 import sys
+from canonical.runtime import d_finality_execution_epoch_v1 as d_finality
 
 SCHEMA="PROJECT_BRAIN_PLAIN_GOAL_BOUND_GROUNDING_V1"
 
@@ -47,6 +48,7 @@ def _load_broad_objective_decomposer():
     path=pathlib.Path(__file__).resolve().with_name("broad_objective_decompose.py")
     if not path.is_file():
         return None
+    d_finality.require_material_file_if_active(path)
     spec=importlib.util.spec_from_file_location(
         "project_brain_broad_objective_decompose",path
     )
@@ -223,6 +225,7 @@ def _load_runtime_module(root,filename,module_name):
     path=pathlib.Path(root).resolve()/"canonical"/"runtime"/filename
     if not path.is_file():
         raise GroundingError("BINDING_RUNTIME_MODULE_MISSING:"+filename)
+    d_finality.require_material_file_if_active(path)
     spec=importlib.util.spec_from_file_location(module_name,path)
     if spec is None or spec.loader is None:
         raise GroundingError("BINDING_RUNTIME_MODULE_LOAD_FAILED:"+filename)

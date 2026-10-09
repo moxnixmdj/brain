@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_LIVE_CAPABILITY_INVOKER_D_EPOCH_VERIFICATION_V1",
+  "date": "2026-10-09",
+  "status": "INDEPENDENT_SPRITE_PASS__TRANSITIVE_D_EPOCH_ENFORCEMENT__ZERO_CREDIT",
+  "exact_subject": {
+    "epoch_runtime": {
+      "path": "canonical/runtime/d_finality_execution_epoch_v1.py",
+      "git_blob_sha": "60cbc536215571fbd7e41b5ce28239ce370120c3"
+    },
+    "invoker": {
+      "path": "canonical/runtime/live_capability_invoker_v1.py",
+      "git_blob_sha": "d48b0a0267e247c5b63326144047f431ba19d0dd"
+    },
+    "test": {
+      "path": "canonical/tests/test_live_capability_invoker_d_epoch_independent_v1.py",
+      "git_blob_sha": "ce27adc6d15200f2df714250d7e59af2ea6fb2e7"
+    }
+  },
+  "carrier": {
+    "provider": "SPRITES",
+    "name": "brain-live-runtime-v1-verify-20261008",
+    "id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13"
+  },
+  "tests_run": 4,
+  "failures": 0,
+  "proved": [
+    "NO_EPOCH_PRESERVES_EXPERIMENTAL_EXECUTION",
+    "ACTIVE_EPOCH_ALLOWS_CERTIFIED_MEMBER",
+    "CHILD_SEES_EXACT_CURRENT_CAPABILITY_IDENTITY",
+    "OUT_OF_EPOCH_CAPABILITY_DENIED_BEFORE_DISPATCH",
+    "BOUND_CAPABILITY_PATH_USES_SAME_EPOCH_GATE",
+    "EPOCH_CONTEXT_CLEARS_AFTER_ROOT_SCOPE"
+  ],
+  "hard_nonclaims": [
+    "NO_COMPOSITION_NO_BYPASS_PROOF_YET",
+    "NO_UNIFIED_FABRIC_ROOT_ACTIVATION_YET",
+    "NO_FULL_D_FINAL_ROW_PROMOTION",
+    "NO_D_CREDIT",
+    "NO_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

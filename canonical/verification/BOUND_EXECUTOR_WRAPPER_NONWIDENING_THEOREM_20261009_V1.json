@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_BOUND_EXECUTOR_WRAPPER_NONWIDENING_THEOREM_V1",
+  "date": "2026-10-09",
+  "status": "INDEPENDENT_EXACT_BLOB_STATIC_THEOREM_PASS__WRAPPER_NONWIDENING__DELEGATED_SOURCE_TYPE_THEOREM_REQUIRED__ZERO_CREDIT",
+  "exact_subject": {
+    "path": "canonical/runtime/verified_bound_capability_execution_adapter_v1.py",
+    "git_blob_sha": "a24193006070904142d66455b8f6d4c1756036f1",
+    "sha256": "8083fe869d19ef70e604fee3f4508a038e72ddf78ece793f6592951377a3458e"
+  },
+  "audit": {
+    "path": "canonical/runtime/bound_executor_wrapper_nonwidening_audit_v1.py",
+    "git_blob_sha": "418254fc9ab526923e7bdac9ef4969a00d7762b4",
+    "hostile_test_path": "canonical/tests/test_bound_executor_wrapper_nonwidening_audit_v1.py",
+    "hostile_test_git_blob_sha": "13f57a6d04b6410db329c1a56eac8ef295f2a77c",
+    "carrier": {
+      "provider": "SPRITES",
+      "name": "brain-live-runtime-v1-verify-20261008",
+      "id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13"
+    },
+    "hostile_tests_run": 6,
+    "hostile_failures": 0,
+    "exact_wrapper_audit_pass": true
+  },
+  "proved": [
+    "NO_WRAPPER_NETWORK_OR_PROCESS_IMPORT",
+    "NO_FORBIDDEN_DYNAMIC_EXECUTION_PRIMITIVE",
+    "EXACTLY_ONE_OPERATIVE_DELEGATE_ASTRA_RUNTIME_INVOKE_BOUND_CAPABILITY",
+    "EXACTLY_ONE_EXPECTATION_CHECK",
+    "EXACTLY_ONE_INDEPENDENT_TRACE_VERIFICATION",
+    "EXACTLY_ONE_PLAN_ACTIONS_RECOMPUTATION",
+    "PREPARE_REQUIRES_INSPECT",
+    "EXECUTE_REINSPECTS",
+    "REGISTRY_FILE_ENTRY_AND_RENDERED_ACTION_DRIFT_GUARDS_PRESENT"
+  ],
+  "theorem": "WRAPPER_ITSELF_ADDS_NO_INDEPENDENT_EXECUTION_CHANNEL_BEYOND_THE_DELEGATED_BOUND_CAPABILITY_PATH",
+  "remaining": [
+    "DELEGATED_SOURCE_TYPE_THEOREM",
+    "MEMBER_MATERIAL_THEOREM",
+    "D_EXECUTION_EPOCH_COMPOSITION"
+  ],
+  "hard_nonclaims": [
+    "NO_FULL_PROVIDER_EXECUTOR_THEOREM_YET",
+    "NO_D_FINAL_ROW_PROMOTION",
+    "NO_OWNERSHIP_CREDIT",
+    "NO_D_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

@@ -1,0 +1,60 @@
+name: Verify D-finality execution epoch V1
+
+on:
+  pull_request:
+    paths:
+      - 'canonical/runtime/d_finality_execution_epoch_v1.py'
+      - 'canonical/tests/test_d_finality_execution_epoch_v1.py'
+      - 'canonical/runtime/d_finality_coverage_gate_v1.py'
+      - 'canonical/tests/test_d_finality_coverage_gate_v1.py'
+      - 'canonical/governance/CURRENT_D_FINALITY_COVERAGE_RESIDUAL_20261009_V1.json'
+      - 'canonical/governance/D_FINALITY_EXECUTION_EPOCH_V1_CANDIDATE_20261009.json'
+      - '.github/workflows/verify-d-finality-execution-epoch-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  hostile-contract-suite:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Checkout exact PR head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 1
+
+      - name: Run stdlib hostile suite
+        run: |
+          set -euo pipefail
+          python3 -m unittest \
+            canonical.tests.test_d_finality_execution_epoch_v1 \
+            canonical.tests.test_d_finality_coverage_gate_v1 \
+            -v
+
+      - name: Compile exact runtime and tests
+        run: |
+          set -euo pipefail
+          python3 -m py_compile \
+            canonical/runtime/d_finality_execution_epoch_v1.py \
+            canonical/tests/test_d_finality_execution_epoch_v1.py \
+            canonical/runtime/d_finality_coverage_gate_v1.py \
+            canonical/tests/test_d_finality_coverage_gate_v1.py
+
+      - name: Parse governance evidence
+        run: |
+          set -euo pipefail
+          python3 -m json.tool canonical/governance/CURRENT_D_FINALITY_COVERAGE_RESIDUAL_20261009_V1.json >/dev/null
+          python3 -m json.tool canonical/governance/D_FINALITY_EXECUTION_EPOCH_V1_CANDIDATE_20261009.json >/dev/null
+
+      - name: Emit exact byte bindings
+        run: |
+          set -euo pipefail
+          git hash-object canonical/runtime/d_finality_execution_epoch_v1.py
+          git hash-object canonical/tests/test_d_finality_execution_epoch_v1.py
+          git hash-object canonical/runtime/d_finality_coverage_gate_v1.py
+          git hash-object canonical/tests/test_d_finality_coverage_gate_v1.py
+          git hash-object canonical/governance/CURRENT_D_FINALITY_COVERAGE_RESIDUAL_20261009_V1.json
+          git rev-parse HEAD

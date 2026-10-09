@@ -1,7 +1,8 @@
 import html
 #!/usr/bin/env python3
-import argparse, ast, base64, gzip, hashlib, importlib.util, io, json, os, pathlib, re, shlex, shutil, subprocess, sys, tempfile, time, urllib.error, urllib.parse, urllib.request
+import argparse, ast, base64, gzip, hashlib, importlib.util, io, json, os, pathlib, re, shlex, shutil, subprocess, sys, sysconfig, tempfile, time, urllib.error, urllib.parse, urllib.request
 import importlib.metadata
+from canonical.runtime import d_finality_execution_epoch_v1 as d_finality
 from datetime import datetime, timezone
 
 ROOT=pathlib.Path(__file__).resolve().parents[2]
@@ -614,6 +615,7 @@ def _safe_repo_mutation_path(raw):
 
 def _load_bound_capability_registry():
     path=ROOT/"canonical"/"runtime"/"BOUND_CAPABILITY_REGISTRY_V1.json"
+    d_finality.require_material_file_if_active(path,repo_root=ROOT)
     data=readj(path)
     if data.get("schema")!="PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1":
         raise Blocker("BOUND_CAPABILITY_REGISTRY_INVALID")
@@ -958,6 +960,63 @@ def _ensure_git_source_tree_dependency(source):
       "total_bytes":int(manifest.get("total_bytes") or 0),
     }
 
+def _path_is_within(path,root):
+    try:
+        path.resolve().relative_to(root.resolve())
+        return True
+    except ValueError:
+        return False
+
+
+def _verified_stdlib_spec(module):
+    name=str(module or "").strip()
+    if not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_.]*",name):
+        raise Blocker("BOUND_PYTHON_STDLIB_MODULE_INVALID:"+name)
+    top=name.split(".",1)[0]
+    stdlib_names=getattr(sys,"stdlib_module_names",None)
+    if not isinstance(stdlib_names,frozenset) or top not in stdlib_names:
+        raise Blocker("BOUND_PYTHON_STDLIB_TOPLEVEL_NOT_DECLARED_STDLIB:"+top)
+
+    stdlib_root=pathlib.Path(sysconfig.get_path("stdlib")).resolve()
+    excluded=[]
+    for key in ("purelib","platlib"):
+        raw=sysconfig.get_path(key)
+        if raw:
+            excluded.append(pathlib.Path(raw).resolve())
+
+    def check_spec(label,spec):
+        if spec is None:
+            raise Blocker("BOUND_PYTHON_STDLIB_MODULE_MISSING:"+label)
+        origin=str(getattr(spec,"origin",None) or "")
+        if origin in {"built-in","frozen"}:
+            return {"module":label,"origin":origin,"origin_kind":origin}
+        if not origin:
+            raise Blocker("BOUND_PYTHON_STDLIB_ORIGIN_MISSING:"+label)
+        p=pathlib.Path(origin).resolve()
+        if not _path_is_within(p,stdlib_root):
+            raise Blocker("BOUND_PYTHON_STDLIB_ORIGIN_OUTSIDE_STDLIB:"+label+":"+str(p))
+        if any(_path_is_within(p,x) for x in excluded):
+            raise Blocker("BOUND_PYTHON_STDLIB_ORIGIN_IN_SITE_PACKAGES:"+label+":"+str(p))
+        return {"module":label,"origin":str(p),"origin_kind":"stdlib_file"}
+
+    try:
+        top_spec=importlib.util.find_spec(top)
+    except Exception as exc:
+        raise Blocker("BOUND_PYTHON_STDLIB_TOPLEVEL_PROBE_FAILED:"+top+":"+type(exc).__name__) from exc
+    top_binding=check_spec(top,top_spec)
+    if name==top:
+        return top_binding
+
+    # Only resolve a dotted child after the top-level package has been proved to
+    # come from the declared stdlib substrate. This prevents a shadow parent from
+    # executing merely because verification tried to inspect its child.
+    try:
+        spec=importlib.util.find_spec(name)
+    except Exception as exc:
+        raise Blocker("BOUND_PYTHON_STDLIB_PROBE_FAILED:"+name+":"+type(exc).__name__) from exc
+    return check_spec(name,spec)
+
+
 def _ensure_local_dependency(source):
     typ=str(source.get("type") or "").strip()
     if typ=="python_stdlib":
@@ -974,22 +1033,15 @@ def _ensure_local_dependency(source):
             raise Blocker("BOUND_PYTHON_STDLIB_MODULE_REQUIRED")
         if len(set(modules))!=len(modules):
             raise Blocker("BOUND_PYTHON_STDLIB_MODULES_DUPLICATE")
-        verified=[]
-        for module in modules:
-            if not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_.]*",module):
-                raise Blocker("BOUND_PYTHON_STDLIB_MODULE_INVALID:"+module)
-            try:
-                spec=importlib.util.find_spec(module)
-            except Exception as exc:
-                raise Blocker("BOUND_PYTHON_STDLIB_PROBE_FAILED:"+module+":"+type(exc).__name__) from exc
-            if spec is None:
-                raise Blocker("BOUND_PYTHON_STDLIB_MODULE_MISSING:"+module)
-            verified.append(module)
+        bindings=[_verified_stdlib_spec(module) for module in modules]
+        verified=[row["module"] for row in bindings]
         out={
           "status":"LOCAL_VERIFIED",
           "type":"python_stdlib",
           "modules":verified,
+          "module_bindings":bindings,
           "python_version":sys.version.split()[0],
+          "stdlib_root":str(pathlib.Path(sysconfig.get_path("stdlib")).resolve()),
         }
         if len(verified)==1:
             out["module"]=verified[0]
@@ -1093,6 +1145,7 @@ def _invoke_bound_capability(args):
     path=ROOT/"canonical"/"runtime"/"bound_capabilities"/(module_name+".py")
     if not path.is_file():
         raise Blocker("BOUND_CAPABILITY_ADAPTER_MISSING")
+    d_finality.require_material_file_if_active(path,repo_root=ROOT)
     spec=importlib.util.spec_from_file_location("project_brain_bound_"+module_name,path)
     if spec is None or spec.loader is None:
         raise Blocker("BOUND_CAPABILITY_ADAPTER_LOAD_FAILED")

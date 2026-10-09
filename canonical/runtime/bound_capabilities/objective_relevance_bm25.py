@@ -9,6 +9,7 @@ status, authority, or evidence sufficiency.
 from __future__ import annotations
 
 import importlib.util
+from canonical.runtime import d_finality_execution_epoch_v1 as d_finality
 import json
 import math
 import pathlib
@@ -32,6 +33,7 @@ def _tokens(value):
 
 def _focus(objective):
     path=pathlib.Path(__file__).resolve().with_name("research_query_focus.py")
+    d_finality.require_material_file_if_active(path)
     spec=importlib.util.spec_from_file_location("project_brain_research_query_focus_relevance",path)
     if spec is None or spec.loader is None:
         raise RuntimeError("RESEARCH_QUERY_FOCUS_LOAD_FAILED")
@@ -50,6 +52,7 @@ def _decision_role_focus(objective):
     grammar. Unsupported/ambiguous objectives fall back to lexical ranking.
     """
     path=pathlib.Path(__file__).resolve().with_name("objective_claim_operand_binding.py")
+    d_finality.require_material_file_if_active(path)
     spec=importlib.util.spec_from_file_location("project_brain_objective_claim_role_relevance",path)
     if spec is None or spec.loader is None:
         return None

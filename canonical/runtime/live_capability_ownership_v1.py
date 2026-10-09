@@ -20,11 +20,13 @@ from canonical.runtime import live_integrated_brain_v1 as live_brain
 from canonical.runtime import autonomous_verified_self_improvement_v1 as self_improvement
 from canonical.runtime import h100_verified_capability_registry_v8 as h100_registry
 from canonical.runtime import certificate_gated_selected_route_runtime_entrypoint_v2 as certified_route
+from canonical.runtime import d_finality_coverage_gate_v1 as d_finality_coverage
 
 SCHEMA = "PROJECT_BRAIN_LIVE_CAPABILITY_OWNERSHIP_V1"
 MANIFEST_SCHEMA = "PROJECT_BRAIN_LIVE_CAPABILITY_OWNERSHIP_MANIFEST_V1"
 ROOT = Path(__file__).resolve().parents[2]
 MANIFEST_PATH = ROOT / "canonical/governance/LIVE_CAPABILITY_OWNERSHIP_MANIFEST_V1.json"
+D_FINALITY_REGISTRY_PATH = ROOT / "canonical/governance/D_FINALITY_CERTIFICATE_REGISTRY_V1.json"
 
 EXPECTED_PROVIDERS = (
     "FABRIC_ENGINES",
@@ -46,9 +48,9 @@ def _load_manifest(path: str | Path = MANIFEST_PATH) -> dict[str, Any]:
         raise LiveOwnershipError("OWNERSHIP_MANIFEST_NOT_OBJECT")
     if doc.get("schema") != MANIFEST_SCHEMA:
         raise LiveOwnershipError("OWNERSHIP_MANIFEST_SCHEMA_INVALID")
-    if doc.get("status") != "ACTIVE_AUTHORITATIVE_LIVE_OWNERSHIP_ONTOLOGY":
+    if doc.get("status") != "ACTIVE_AUTHORITATIVE_LIVE_ADMISSION_AND_D_FINAL_OWNERSHIP_ONTOLOGY":
         raise LiveOwnershipError("OWNERSHIP_MANIFEST_NOT_ACTIVE")
-    if doc.get("default") != "NOT_LIVE_OWNED_UNLESS_ADMITTED_BY_ONE_PROVIDER":
+    if doc.get("default") != "NOT_LIVE_OWNED_UNLESS_D_FINAL_CERTIFIED":
         raise LiveOwnershipError("OWNERSHIP_DEFAULT_NOT_FAIL_CLOSED")
     providers = doc.get("providers")
     if not isinstance(providers, Mapping):
@@ -119,6 +121,7 @@ def evaluate(
     *,
     manifest_path: str | Path = MANIFEST_PATH,
     self_improvement_state_path: str | Path = self_improvement.DEFAULT_STATE_PATH,
+    d_finality_registry_path: str | Path = D_FINALITY_REGISTRY_PATH,
 ) -> dict[str, Any]:
     if not isinstance(engine_descriptors, Mapping) or not engine_descriptors:
         raise LiveOwnershipError("ENGINE_DESCRIPTORS_REQUIRED")
@@ -127,12 +130,12 @@ def evaluate(
 
     modes = {str(k) for k in engine_descriptors}
     provider_rows: dict[str, dict[str, Any]] = {}
-    owned: list[dict[str, Any]] = []
+    admitted: list[dict[str, Any]] = []
 
     # Direct fabric engines are themselves live-owned entry capabilities.
     engine_ids = ["engine:" + mode for mode in sorted(modes)]
     for mode in sorted(modes):
-        owned.append({
+        admitted.append({
             "capability_id": "engine:" + mode,
             "provider": "FABRIC_ENGINES",
             "carrier_mode": mode,
@@ -148,7 +151,7 @@ def evaluate(
     bound = live_brain.load_verified_registry()
     bound_ids = sorted(str(x) for x in bound)
     for cid in bound_ids:
-        owned.append({
+        admitted.append({
             "capability_id": "bound:" + cid,
             "provider": "VERIFIED_BOUND_CAPABILITIES",
             "carrier_mode": str(providers["VERIFIED_BOUND_CAPABILITIES"]["fabric_carrier"]),
@@ -163,7 +166,7 @@ def evaluate(
     state = self_improvement.load_state(self_improvement_state_path)
     skill_ids = _active_skill_ids(state)
     for sid in skill_ids:
-        owned.append({
+        admitted.append({
             "capability_id": sid,
             "provider": "ACTIVE_VERIFIED_LEARNED_SKILLS",
             "carrier_mode": str(providers["ACTIVE_VERIFIED_LEARNED_SKILLS"]["fabric_carrier"]),
@@ -178,7 +181,7 @@ def evaluate(
     h100_entries = list(h100_registry.REGISTRY)
     h100_ids, h100_collisions = _h100_owned_ids(h100_entries)
     for ownership_id in h100_ids:
-        owned.append({
+        admitted.append({
             "capability_id": ownership_id,
             "provider": "H100_VERIFIED_CAPABILITIES",
             "carrier_mode": str(providers["H100_VERIFIED_CAPABILITIES"]["fabric_carrier"]),
@@ -201,7 +204,7 @@ def evaluate(
         if r.admitted is True
     })
     for cid in route_ids:
-        owned.append({
+        admitted.append({
             "capability_id": cid,
             "provider": "CERTIFICATE_GATED_SELECTED_ROUTES",
             "carrier_mode": str(providers["CERTIFICATE_GATED_SELECTED_ROUTES"]["fabric_carrier"]),
@@ -213,47 +216,94 @@ def evaluate(
         "carrier_modes": [str(providers["CERTIFICATE_GATED_SELECTED_ROUTES"]["fabric_carrier"])],
     }
 
-    ids = [row["capability_id"] for row in owned]
+    ids = [row["capability_id"] for row in admitted]
     duplicates = sorted({cid for cid in ids if ids.count(cid) > 1})
     if duplicates:
-        raise LiveOwnershipError("LIVE_OWNERSHIP_ID_COLLISION:" + ",".join(duplicates))
+        raise LiveOwnershipError("LIVE_ADMISSION_ID_COLLISION:" + ",".join(duplicates))
 
     missing_carriers = sorted({
         str(row["carrier_mode"])
-        for row in owned
+        for row in admitted
         if str(row["carrier_mode"]) not in modes
     })
     discoverable = sorted(
         row["capability_id"]
-        for row in owned
+        for row in admitted
         if str(row["carrier_mode"]) in modes
     )
-    owned_ids = sorted(ids)
-    equality = not missing_carriers and discoverable == owned_ids
+    admitted_ids = sorted(ids)
+    admission_equality = not missing_carriers and discoverable == admitted_ids
+
+    d_path = Path(d_finality_registry_path)
+    if not d_path.is_file():
+        raise LiveOwnershipError("D_FINALITY_REGISTRY_MISSING")
+    try:
+        d_registry = json.loads(d_path.read_text(encoding="utf-8"))
+    except Exception as exc:
+        raise LiveOwnershipError(
+            "D_FINALITY_REGISTRY_INVALID_JSON:" + type(exc).__name__ + ":" + str(exc)
+        ) from exc
+    if not isinstance(d_registry, Mapping):
+        raise LiveOwnershipError("D_FINALITY_REGISTRY_NOT_OBJECT")
+    try:
+        d_coverage = d_finality_coverage.evaluate(admitted_ids, d_registry)
+    except Exception as exc:
+        raise LiveOwnershipError(
+            "D_FINALITY_COVERAGE_INVALID:" + type(exc).__name__ + ":" + str(exc)
+        ) from exc
+
+    missing_d = {
+        str(x) for x in d_coverage.get("missing_d_certificate_ids", [])
+    }
+    d_final_owned_ids = sorted(
+        cid for cid in admitted_ids if cid not in missing_d
+    )
+    d_final_complete = (
+        d_coverage.get("pass") is True
+        and len(d_final_owned_ids) == len(admitted_ids)
+    )
+    ownership_equality = (
+        admission_equality
+        and d_final_complete
+        and d_final_owned_ids == discoverable
+    )
 
     return {
         "schema": SCHEMA,
         "status": (
-            "PASS__LIVE_OWNED_EQUALS_FABRIC_REACHABLE"
-            if equality
-            else "FAIL_CLOSED__LIVE_OWNERSHIP_FABRIC_DIVERGENCE"
+            "PASS__LIVE_ADMITTED_AND_D_FINAL_OWNERSHIP_CLOSED"
+            if ownership_equality
+            else "FAIL_CLOSED__D_FINAL_OWNERSHIP_INCOMPLETE"
         ),
-        "pass": equality,
+        "pass": ownership_equality,
         "manifest_status": manifest["status"],
         "ownership_default": manifest["default"],
         "provider_count": len(EXPECTED_PROVIDERS),
         "providers": provider_rows,
-        "live_owned_capability_count": len(owned_ids),
-        "live_owned_capability_ids": owned_ids,
+        "live_admitted_capability_count": len(admitted_ids),
+        "live_admitted_capability_ids": admitted_ids,
+        "live_owned_capability_count": len(d_final_owned_ids),
+        "live_owned_capability_ids": d_final_owned_ids,
         "fabric_reachable_capability_count": len(discoverable),
         "fabric_reachable_capability_ids": discoverable,
         "missing_carrier_modes": missing_carriers,
-        "live_owned_equals_fabric_reachable": equality,
-        "provider_coverage_complete": equality,
+        "structurally_admitted_equals_fabric_reachable": admission_equality,
+        "live_owned_equals_fabric_reachable": ownership_equality,
+        "provider_coverage_complete": admission_equality,
+        "d_finality_coverage": deepcopy(dict(d_coverage)),
+        "d_final_coverage_complete": d_final_complete,
+        "d_final_missing_capability_count": int(
+            d_coverage.get("missing_d_certificate_count", -1)
+        ),
+        "d_final_missing_capability_ids": list(
+            d_coverage.get("missing_d_certificate_ids", [])
+        ),
+        "experimental_execution_without_ownership_permitted": True,
         "unregistered_repository_code_live_owned": False,
         "historical_repository_capability_completeness_proved": False,
         "arbitrary_raw_language_route_selection_proved": False,
-        "r1_structural_closure": equality,
+        "r1_admission_structural_closure": admission_equality,
+        "r1_structural_closure": ownership_equality,
         "terminal_authority": False,
         "capability_credit_delta": 0,
         "ownership_credit_delta": 0,

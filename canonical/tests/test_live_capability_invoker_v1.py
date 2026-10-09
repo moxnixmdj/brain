@@ -1,12 +1,96 @@
 from __future__ import annotations
 
+import tempfile
 import unittest
+from pathlib import Path
 
+from canonical.runtime import d_finality_execution_epoch_v1 as d_finality
 from canonical.runtime import live_capability_invoker_v1 as invoker
 from canonical.runtime.unified_cognitive_fabric_v1 import catalog, run
 
 
 class LiveCapabilityInvokerV1Tests(unittest.TestCase):
+
+    def _d_policy_and_certificate(self, root: Path, allowed):
+        material = root / "material.txt"
+        material.write_text("sealed\n", encoding="utf-8")
+        materials = [{
+            "path": "material.txt",
+            "git_blob_sha": d_finality.git_blob_sha_file(material),
+        }]
+        policy = {
+            "schema": d_finality.POLICY_SCHEMA,
+            "status": "ACTIVE_FAIL_CLOSED",
+            "semantic_version": "invoker-test-v1",
+            "rule": "NO_UNCERTIFIED_AUTHORITY_WIDENING",
+            "revoked_certificate_sha256": [],
+        }
+        policy["policy_sha256"] = d_finality.policy_sha256(policy)
+        cert = {
+            "schema": d_finality.CERT_SCHEMA,
+            "status": "VERIFIED_D_FINAL",
+            "capability_id": allowed[0],
+            "capability_contract_sha256": d_finality.sha256_json({"scope": "invoker-test"}),
+            "policy_sha256": policy["policy_sha256"],
+            "registry_snapshot_root": d_finality.sha256_json({"registry": "test"}),
+            "state_snapshot_root": d_finality.sha256_json({"state": "test"}),
+            "materials": materials,
+            "material_closure_root": d_finality.material_closure_root(materials),
+            "allowed_capability_ids": list(allowed),
+            "allowed_knowledge_channels": [],
+            "allowed_effect_channels": [],
+            "donor_authority_zero": True,
+            "fresh_replay_pass": True,
+            "independent_replay_pass": True,
+            "knowledge_capability_nonsmuggling_pass": True,
+            "undeclared_dependency_count": 0,
+        }
+        cert["certificate_sha256"] = d_finality.certificate_sha256(cert)
+        return policy, cert
+
+    def test_no_epoch_preserves_direct_invoker_behavior(self):
+        calls = []
+        def engine_runner(mode, payload, options):
+            calls.append((mode, dict(payload), dict(options)))
+            return {"pass": True, "status": "OK"}
+        out = invoker.invoke(
+            "engine:TEST_ENGINE",
+            {"x": 1},
+            engine_runner=engine_runner,
+        )
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(calls[0][0], "TEST_ENGINE")
+
+    def test_active_epoch_allows_member_and_denies_nonmember_before_dispatch(self):
+        with tempfile.TemporaryDirectory(prefix="brain-d-invoker-") as td:
+            root = Path(td)
+            policy, cert = self._d_policy_and_certificate(
+                root,
+                ["engine:TEST_ENGINE"],
+            )
+            calls = []
+            def engine_runner(mode, payload, options):
+                calls.append(mode)
+                return {"pass": True, "status": "OK"}
+
+            with d_finality.activate(cert, policy=policy, repo_root=root):
+                allowed = invoker.invoke(
+                    "engine:TEST_ENGINE",
+                    {},
+                    engine_runner=engine_runner,
+                )
+                self.assertTrue(allowed["pass"], allowed)
+                with self.assertRaisesRegex(
+                    d_finality.DFinalityError,
+                    "CAPABILITY_OUTSIDE_EPOCH",
+                ):
+                    invoker.invoke(
+                        "engine:OTHER_ENGINE",
+                        {},
+                        engine_runner=engine_runner,
+                    )
+            self.assertEqual(calls, ["TEST_ENGINE"])
+
     def test_classifier_covers_every_ownership_kind(self):
         rows = {
             "engine:RAW_GOAL": "ENGINE",

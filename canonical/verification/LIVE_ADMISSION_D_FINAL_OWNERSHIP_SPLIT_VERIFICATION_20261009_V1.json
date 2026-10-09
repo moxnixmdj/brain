@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_LIVE_ADMISSION_D_FINAL_OWNERSHIP_SPLIT_VERIFICATION_V1",
+  "date": "2026-10-09",
+  "status": "INDEPENDENT_SPRITE_PASS__ADMISSION_PRESERVED__OWNERSHIP_D_FINAL_ONLY__ZERO_CREDIT",
+  "exact_subject": {
+    "ownership_runtime": {
+      "path": "canonical/runtime/live_capability_ownership_v1.py",
+      "git_blob_sha": "0585fe57352a6d8a0d0b0ea99549831e7ea2f793"
+    },
+    "d_coverage_gate": {
+      "path": "canonical/runtime/d_finality_coverage_gate_v1.py",
+      "git_blob_sha": "3974b89b4d614c9a39c5c71eeb3b1774b21f8e91"
+    },
+    "test": {
+      "path": "canonical/tests/test_live_capability_ownership_d_final_split_v1.py",
+      "git_blob_sha": "64f0bd54126b37ffeec9e1c30b461ea788ca963e"
+    }
+  },
+  "carrier": {
+    "provider": "SPRITES",
+    "name": "brain-live-runtime-v1-verify-20261008",
+    "id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13"
+  },
+  "tests_run": 2,
+  "failures": 0,
+  "proved": [
+    "PENDING_D_REGISTRY_PRESERVES_STRUCTURAL_ADMISSION",
+    "PENDING_D_REGISTRY_GRANTS_ZERO_LIVE_OWNERSHIP",
+    "EXPERIMENTAL_EXECUTION_REMAINS_SEPARATE_FROM_OWNERSHIP",
+    "FULL_CURRENT_D_REGISTRY_REOPENS_OWNERSHIP_WITHOUT_CHANGING_ADMISSION_SET",
+    "R1_OWNERSHIP_CLOSURE_REOPENS_WHEN_D_COVERAGE_IS_INCOMPLETE"
+  ],
+  "current_truth": {
+    "live_admitted_current_registry": 89,
+    "live_d_final_owned_current_registry": 0,
+    "member_material_theorems_verified": 2,
+    "full_d_final_rows": 0
+  },
+  "hard_nonclaims": [
+    "NO_LIVE_FRONT_DOOR_D_EPOCH_ENFORCEMENT_YET",
+    "NO_D_CREDIT",
+    "NO_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

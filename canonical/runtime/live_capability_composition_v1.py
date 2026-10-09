@@ -16,6 +16,8 @@ from hashlib import sha256
 import json
 from typing import Any, Callable, Mapping, Sequence
 
+from canonical.runtime import d_finality_execution_epoch_v1 as d_finality
+
 SCHEMA = "PROJECT_BRAIN_LIVE_CAPABILITY_COMPOSITION_V1"
 MAX_STEPS = 128
 MAX_DEPTH = 32
@@ -290,6 +292,9 @@ def execute(
                 raise LiveCompositionError("STEP_OPTIONS_NOT_OBJECT:" + sid)
             merged_options = dict(global_options)
             merged_options.update(dict(step_options))
+
+            if d_finality.has_active_epoch():
+                d_finality.require_capability(capability_id)
 
             raw = invoke_capability(capability_id, payload, merged_options)
             if not isinstance(raw, Mapping):

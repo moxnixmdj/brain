@@ -18,6 +18,7 @@ from canonical.runtime import autonomous_verified_self_improvement_v1 as self_im
 from canonical.runtime import certificate_gated_selected_route_runtime_entrypoint_v2 as certified_route
 from canonical.runtime import h100_verified_capability_registry_v8 as h100
 from canonical.runtime.verified_bound_capability_execution_adapter_v1 import execute as execute_bound
+from canonical.runtime import d_finality_execution_epoch_v1 as d_finality
 
 SCHEMA = "PROJECT_BRAIN_LIVE_CAPABILITY_INVOKER_V1"
 ROOT = Path(__file__).resolve().parents[2]
@@ -249,7 +250,7 @@ def _invoke_certified_route(route_id: str, payload: Mapping[str, Any]) -> dict[s
     return {"pass": True, **dict(out)}
 
 
-def invoke(
+def _invoke_impl(
     capability_id: str,
     payload: Mapping[str, Any],
     *,
@@ -323,3 +324,33 @@ def invoke(
         }
 
     raise LiveCapabilityInvocationError("CAPABILITY_KIND_UNIMPLEMENTED:" + kind)
+
+
+def invoke(
+    capability_id: str,
+    payload: Mapping[str, Any],
+    *,
+    engine_runner: Callable[[str, Mapping[str, Any], Mapping[str, Any]], Mapping[str, Any]],
+    options: Mapping[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Invoke one exact live capability, respecting an active D-finality epoch.
+
+    Outside a D epoch this preserves the existing experimental/live behavior.
+    Inside a D epoch the requested capability must already belong to the frozen
+    epoch authority set; the child scope may preserve or shrink authority but
+    can never widen it.
+    """
+    if d_finality.has_active_epoch():
+        with d_finality.child_scope(capability_id):
+            return _invoke_impl(
+                capability_id,
+                payload,
+                engine_runner=engine_runner,
+                options=options,
+            )
+    return _invoke_impl(
+        capability_id,
+        payload,
+        engine_runner=engine_runner,
+        options=options,
+    )

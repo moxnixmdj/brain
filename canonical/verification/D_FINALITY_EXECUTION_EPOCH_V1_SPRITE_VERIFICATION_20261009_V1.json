@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_D_FINALITY_EXECUTION_EPOCH_V1_SPRITE_VERIFICATION",
+  "date": "2026-10-09",
+  "status": "INDEPENDENT_SPRITE_EXACT_BLOB_REPLAY_PASS__10_OF_10_HOSTILE_TESTS__PY_COMPILE_PASS__ZERO_CREDIT",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/d_finality_execution_epoch_v1.py",
+      "git_blob_sha": "2dc7e2e02830750df31ca9799f9c688952f62e1a"
+    },
+    "tests": {
+      "path": "canonical/tests/test_d_finality_execution_epoch_v1.py",
+      "git_blob_sha": "57108ea04ffc9034e31e166fd873eae0bd0d6d36"
+    }
+  },
+  "carrier": {
+    "provider": "SPRITES",
+    "name": "brain-live-integrated-v1-run-20261008",
+    "id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "workspace": "/tmp/d-finality-epoch-v1",
+    "materialization": "EXACT_GITHUB_CONNECTOR_BYTES"
+  },
+  "execution": {
+    "command": "python3 -m unittest canonical.tests.test_d_finality_execution_epoch_v1 -v",
+    "tests_run": 10,
+    "failures": 0,
+    "errors": 0,
+    "result": "PASS"
+  },
+  "compile": {
+    "command": "python3 -m py_compile canonical/runtime/d_finality_execution_epoch_v1.py canonical/tests/test_d_finality_execution_epoch_v1.py",
+    "result": "PASS"
+  },
+  "verified": [
+    "VALID_ROOT_EPOCH_AND_CHILD_SCOPE_SHRINK",
+    "CHILD_CAPABILITY_AUTHORITY_WIDENING_REJECTED",
+    "SAME_EPOCH_NEW_CAPABILITY_REJECTED",
+    "PREEXECUTION_MATERIAL_DRIFT_REJECTED",
+    "MID_EPOCH_MATERIAL_DRIFT_REJECTED_AT_POINT_OF_USE",
+    "UNRELATED_REPOSITORY_DRIFT_DOES_NOT_INVALIDATE_CLOSURE_RELATIVE_CERTIFICATE",
+    "TARGETED_REVOCATION_PRESERVES_POLICY_ROOT_AND_REJECTS_REVOKED_CERTIFICATE",
+    "SEMANTIC_POLICY_DRIFT_INVALIDATES_CERTIFICATE",
+    "FALSE_DONOR_REPLAY_OR_NONSMUGGLING_PREDICATES_FAIL_CLOSED",
+    "NO_ACTIVE_EPOCH_HAS_ZERO_D_FINAL_AUTHORITY"
+  ],
+  "github_actions_non_authoritative_attempt": {
+    "workflow_run_id": 37900926241,
+    "job_id": 113723039612,
+    "observed": "COMPLETED_FAILURE_WITH_ZERO_STEPS_AND_NO_AVAILABLE_JOB_LOG",
+    "disposition": "CARRIER_NONEXECUTION__NOT_A_TEST_FAILURE__EXCLUDED_FROM_PROOF_ACCOUNTING"
+  },
+  "hard_nonclaims": [
+    "NO_LIVE_FRONT_DOOR_INTEGRATION",
+    "NO_CURRENT_CAPABILITY_D_CERTIFICATE_REGISTRY",
+    "NO_PROCESS_LEVEL_IMMUTABLE_SNAPSHOT_EXECUTION_PROOF",
+    "NO_D_CREDIT",
+    "NO_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

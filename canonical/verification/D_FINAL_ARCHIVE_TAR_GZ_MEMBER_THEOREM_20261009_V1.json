@@ -1,0 +1,108 @@
+{
+  "schema": "PROJECT_BRAIN_D_FINAL_ARCHIVE_TAR_GZ_MEMBER_THEOREM_V1",
+  "date": "2026-10-09",
+  "status": "VERIFIED_MEMBER_MATERIAL_THEOREM__TWO_FRESH_ZERO_AMBIENT_CARRIERS__PROVIDER_EXECUTOR_THEOREM_STILL_REQUIRED__ZERO_CREDIT",
+  "capability_id": "bound:archive.tar_gz.create_from_manifest",
+  "exact_subject": {
+    "adapter_path": "canonical/runtime/bound_capabilities/archive_tarfile.py",
+    "adapter_git_blob_sha": "2ae62c04ef495d855ca8d46263b4cf05110b5648",
+    "launcher_path": "canonical/runtime/zero_ambient_namespace_launcher_v1.py",
+    "launcher_git_blob_sha": "6e687527e9c4da82fb5d974a729aaa263ee73ea8"
+  },
+  "theorem": {
+    "member_material_replay_pass": true,
+    "donor_network_authority_zero_for_replay": true,
+    "fresh_challenge_generated_after_donor_cut": true,
+    "host_repository_mutation_committed": false,
+    "output_reconstructed_from_fresh_input": true,
+    "provider_executor_theorem_included": false
+  },
+  "replay_1": {
+    "carrier": {
+      "provider": "SPRITES",
+      "name": "brain-live-integrated-v1-run-20261008",
+      "id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34"
+    },
+    "launcher_git_blob_sha": "6e687527e9c4da82fb5d974a729aaa263ee73ea8",
+    "launcher_policy_sha256": "111f67895e1b97ad8268e3c3d4e493f36e88820b760b3db2199a3dcaad550e05",
+    "fresh_nonce_sha256": "30287128cc1966e9928fb7b9ed1fb729d2006a50323c1e00e34e9cf64cd83bb1",
+    "source_sha256": "aaf52f3d8eebe82fca2a01641adb817a7f068bc0aee3784bbe2dd5992cf3f7ef",
+    "archive_sha256": "d4ebd4dc138900f4bf65748f24baaca18ceb17f87d669b4c53b3bd236da97801",
+    "network_probe_result": "DENIED__OSError_ERRNO_101_NETWORK_IS_UNREACHABLE",
+    "environment_keys": [
+      "HOME",
+      "LANG",
+      "PATH",
+      "PROJECT_BRAIN_BROKER_FD",
+      "PYTHONDONTWRITEBYTECODE",
+      "PYTHONHASHSEED",
+      "TZ"
+    ],
+    "checks": {
+      "adapter_output_verified": true,
+      "environment_minimal": true,
+      "member_count_two": true,
+      "network_escape_denied": true,
+      "source_bytes_exact": true,
+      "source_member_present": true
+    },
+    "result": "PASS"
+  },
+  "replay_2": {
+    "carrier": {
+      "provider": "SPRITES",
+      "name": "brain-r3-root1-gap-verify-20261008",
+      "id": "sprite-91472ada-4fea-4536-9558-7a7e3da49928"
+    },
+    "launcher_git_blob_sha": "6e687527e9c4da82fb5d974a729aaa263ee73ea8",
+    "launcher_policy_sha256": "51e7f955c4de1786f3ade1467cdd2b1997d4c4cda35035cecccf1890982dccd7",
+    "fresh_nonce_sha256": "d2260fe31abf533d005071fac71617e131e8eb299c731c6d48aabe9d97a2521b",
+    "source_sha256": "ad6056194965b56928100ad5c106c8ed6e9da45e1d17c8c767e549a16d8b3467",
+    "archive_sha256": "2eb8a969f65c0f9d3e82dbe3dc4ca7330b5242be465127f7e9e299d6b108c6f7",
+    "network_probe_result": "DENIED__OSError_ERRNO_101_NETWORK_IS_UNREACHABLE",
+    "environment_keys": [
+      "HOME",
+      "LANG",
+      "PATH",
+      "PROJECT_BRAIN_BROKER_FD",
+      "PYTHONDONTWRITEBYTECODE",
+      "PYTHONHASHSEED",
+      "TZ"
+    ],
+    "checks": {
+      "adapter_output_verified": true,
+      "environment_minimal": true,
+      "member_count_two": true,
+      "network_escape_denied": true,
+      "source_bytes_exact": true,
+      "source_member_present": true
+    },
+    "result": "PASS"
+  },
+  "independence": {
+    "distinct_carrier_ids": true,
+    "distinct_fresh_nonce_sha256": true,
+    "distinct_fresh_source_sha256": true,
+    "distinct_archive_sha256": true,
+    "same_exact_adapter_blob": true,
+    "same_exact_launcher_blob": true
+  },
+  "next_required": [
+    "PROVE_SHARED_VERIFIED_BOUND_CAPABILITY_EXECUTOR_THEOREM_ON_CURRENT_EXACT_BYTES",
+    "BIND_BOUND_REGISTRY_ENTRY_HASH_AND_RENDERED_ACTION_CONTRACT",
+    "COMPOSE_MEMBER_THEOREM_WITH_PROVIDER_THEOREM_AND_D_EXECUTION_EPOCH_POLICY",
+    "ONLY_THEN_PROMOTE_ROW_TO_VERIFIED_D_FINAL_CURRENT"
+  ],
+  "hard_nonclaims": [
+    "NO_FULL_D_FINAL_CERTIFICATE_YET",
+    "NO_PROVIDER_EXECUTOR_THEOREM_YET",
+    "NO_OWNERSHIP_CREDIT",
+    "NO_D_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
