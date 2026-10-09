@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_R2_FINANCE_COREFERENCE_AMBIGUITY_CONTROL_VERIFY_20261009_V2",
+  "date": "2026-10-09",
+  "status": "PASS__REBASING_PRESERVES_EXACT_TESTED_BLOBS__FOCUSED_8_OF_8__ADJACENT_12_OF_12__SUCCESSOR_WRAPPER_3_OF_3__PYCOMPILE_PASS__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "r2-bounded-coreference-ambiguity-control-20261009-v2",
+    "base_main_sha": "f29ac512599d938c225f62a7b7c1a8dc1c330eb9",
+    "candidate_head_before_receipt": "7ad7748fe62ab5f5b2685fba4a667e95b77c3545",
+    "exact_blobs": {
+      "canonical/runtime/finance_coreference_ambiguity_control_v1.py": "c53392553a201109082e1739692d3060caf2ad7d",
+      "canonical/runtime/finance_coreference_ambiguity_control_verify_v1.py": "b81deda6b315250f08131c6555a5b3bc82bc57d6",
+      "canonical/runtime/r2_finance_coreference_ambiguity_direct_adequacy_v1.py": "d7661614d03fcc96d6a451db15bae318aaf8efa1",
+      "canonical/runtime/r2_direct_end_to_end_adequacy_v15.py": "7ef033b93b34dc65a6910cf393e7be3589fd03ea",
+      "canonical/runtime/general_adequate_decision_fixed_point_v2.py": "0319dbf0c09c87dfdeec318071f36f8e5d26d442",
+      "canonical/tests/test_r2_finance_coreference_ambiguity_direct_adequacy_v1.py": "98caa42fa3e208327eb73f555718d21df3a2df36"
+    },
+    "rebased_from_receipt": "canonical/verification/R2_FINANCE_COREFERENCE_AMBIGUITY_CONTROL_VERIFY_20261009_V1.json",
+    "exact_tested_blob_identity_preserved": true
+  },
+  "verification": {
+    "focused_new_family": "8_OF_8_PASS",
+    "adjacent_semantic_primitives": "12_OF_12_PASS",
+    "successor_router_wrapper": "3_OF_3_PASS_WITH_STUBBED_V14_BOUNDARY",
+    "py_compile": "PASS",
+    "rebase_truth": "ALL_SIX_LOAD_BEARING_BLOBS_IDENTICAL_TO_THE_INDEPENDENTLY_TESTED_V1_RECEIPT_BYTES"
+  },
+  "proved": [
+    "REBASING_ON_LATEST_MAIN_CHANGED_NO_LOAD_BEARING_IMPLEMENTATION_OR_TEST_BLOB",
+    "BOUNDED_COMPLETE_MENTION_UNIVERSE_CAN_BE_PROJECTED_TO_EXACT_FINITE_ANTECEDENT_WORLDS",
+    "TERMINALLY_EQUIVALENT_CANDIDATES_REQUIRE_NO_ANTECEDENT_SELECTION",
+    "TERMINALLY_DISTINCT_CANDIDATES_USE_THE_EXISTING_EXACT_MINIMAX_INFORMATION_POLICY",
+    "USER_OWNED_UNDERDETERMINATION_WITHOUT_SEPARATOR_REQUESTS_MINIMUM_CLARIFICATION",
+    "INCOMPLETE_MENTION_OR_TERMINAL_COVERAGE_FAILS_CLOSED",
+    "PRODUCER_INDEPENDENT_RECOMPUTATION_AND_TRANSACTIONAL_ROLLBACK_ARE_PRESERVED"
+  ],
+  "coverage_delta": {
+    "positive_subregion": "BOUNDED_FINANCE_COREFERENCE_WITH_DECLARED_COMPLETE_MENTION_UNIVERSE_AND_COMPLETE_CANDIDATE_TERMINAL_SIGNATURES",
+    "residual_after_this_slice": [
+      "UNPROVED_MENTION_UNIVERSE_COMPLETENESS",
+      "MISSING_TERMINAL_SIGNATURE_BINDINGS",
+      "UNAVAILABLE_DECISIVE_OBSERVATIONS",
+      "GENERAL_IMPLICIT_OR_OPEN_WORLD_COREFERENCE",
+      "WORD_SENSE_DOMAIN_MAPPING_AND_ONTOLOGY_RESIDUALS"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_GENERAL_COREFERENCE_RESOLUTION",
+    "NO_ANTECEDENT_IDENTITY_AUTHORITY",
+    "NO_OPEN_WORLD_MENTION_COMPLETENESS",
+    "NO_FULL_CURRENT_ROUTER_STACK_REPLAY_ON_THE_SPRITE",
+    "NO_FULL_REPOSITORY_SUITE_CLAIM",
+    "NO_OPUS_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0
+  }
+}
