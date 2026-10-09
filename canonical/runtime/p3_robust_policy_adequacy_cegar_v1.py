@@ -487,6 +487,15 @@ def solve(problem: Mapping[str, Any]) -> dict[str, Any]:
         "structurally_proved_atom_ids": list(
             registry.get("structurally_proved_atom_ids") or []
         ),
+        "information_boundary_atom_proofs": list(
+            registry.get("information_boundary_atom_proofs") or []
+        ),
+        "information_boundary_proved_atom_ids": list(
+            registry.get("information_boundary_proved_atom_ids") or []
+        ),
+        "proved_condition_atom_ids": list(
+            registry.get("proved_condition_atom_ids") or []
+        ),
         "membership_self_certified": False,
         "registry_authority": False,
     }
