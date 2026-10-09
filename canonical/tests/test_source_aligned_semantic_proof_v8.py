@@ -59,13 +59,14 @@ class SourceAlignedSemanticProofV8Tests(unittest.TestCase):
     def test_exact_relation_claim_is_proved(self):
         text=_line()
         parsed=parse_effect_relations(text,source="doc")["relations"][0]
+        semantic={k:v for k,v in parsed["effect"].items() if k!="source_locator"}
         out=verify_proof(
             text,
             source_id="doc",
             claims=[{
                 "claim_id":"rel",
                 "kind":"CERTIFIED_DOCUMENT_EFFECT_RELATION",
-                "effect":parsed["effect"],
+                "effect":semantic,
             }],
         )
         self.assertEqual(out["status"],"PROOF_CHECKED",out)
@@ -79,7 +80,7 @@ class SourceAlignedSemanticProofV8Tests(unittest.TestCase):
     def test_changed_value_is_rejected(self):
         text=_line()
         effect=parse_effect_relations(text,source="doc")["relations"][0]["effect"]
-        claimed=dict(effect); claimed["value"]="99"
+        claimed={k:v for k,v in effect.items() if k!="source_locator"}; claimed["value"]="99"
         out=verify_proof(
             text,source_id="doc",
             claims=[{
@@ -94,7 +95,7 @@ class SourceAlignedSemanticProofV8Tests(unittest.TestCase):
     def test_changed_supersession_is_rejected(self):
         text=_line()
         effect=parse_effect_relations(text,source="doc")["relations"][0]["effect"]
-        claimed=dict(effect); claimed["supersedes"]=[]
+        claimed={k:v for k,v in effect.items() if k!="source_locator"}; claimed["supersedes"]=[]
         out=verify_proof(
             text,source_id="doc",
             claims=[{
