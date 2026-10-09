@@ -2,9 +2,9 @@
   "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK13_RESULT_LEDGER_V15_VERIFICATION_20261009_V1",
   "date": "2026-10-09",
   "status": "PASS__RANK13_IRREVERSIBLE_FINAL_ZERO_CAUSE_BOUND__LEDGER_V15_ADVANCED_TO_RANK14__ZERO_CREDIT",
-  "base_main_sha": "b89b3395fa916c6ff61238a4f5d30f6b1d085ce4",
+  "base_main_sha": "a6a36761f549a742ce8aa3c1584ac4b1e0bfd1df",
   "exact_blobs": {
-    "action_intent": "177d65e206075f0dddba19a092ac15b7d750004e",
+    "action_intent": "a771c35f86c8c0de3589fb247369bcae4f23780c",
     "rank13_result_truth": "14527391610235e78a99d6148545a4098dfbd148",
     "ledger_v15": "8ac981dc3a5386e1c8c083952986fb48e009e418",
     "frozen_manifest": "6dfa880b1f68881531afbba6ca211681801fd19b",
