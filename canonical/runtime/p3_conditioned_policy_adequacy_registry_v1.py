@@ -96,6 +96,48 @@ _REGISTRY = {
         ),
         "binding_blob_sha": "25a8c91580a9d2409b30806f4eae4b77e31dab65",
     }
+,
+    "BRAIN_ROBUST_FINITE_MULTI_INTERPRETATION_SOLVER_V1": {
+        "condition": {
+            "op": "AND",
+            "args": [
+                {"op": "ATOM", "id": "CODING_ROBUST_FINITE_CANDIDATE_SET_FINITE_V1"},
+                {"op": "ATOM", "id": "CODING_ROBUST_FINITE_INTERPRETATION_SET_SOUND_COMPLETE_V1"},
+                {"op": "ATOM", "id": "CODING_ROBUST_FINITE_ORACLE_TOTAL_V1"},
+                {"op": "ATOM", "id": "CODING_ROBUST_FINITE_ORACLE_SOUND_COMPLETE_PER_INTERPRETATION_V1"},
+                {"op": "ATOM", "id": "CODING_ROBUST_FINITE_COMMON_VALID_MEMBER_EXISTS_V1"},
+                {"op": "ATOM", "id": "CODING_ROBUST_FINITE_CALL_BUDGET_SUFFICIENT_V1"},
+                {"op": "ATOM", "id": "CODING_ROBUST_FINITE_ORACLE_PRETERMINAL_ADMISSIBLE_V1"},
+            ],
+        },
+        "binding_path": (
+            "canonical/governance/"
+            "CODING_ROBUST_FINITE_MULTI_INTERPRETATION_POLICY_ADEQUACY_BINDING_20261009_V1.json"
+        ),
+        "binding_blob_sha": "d0b7f819e38d10009082cc695976ad00b6ab6228",
+    }
+,
+    "BRAIN_STATIC_VERIFIED_CAPABILITY_ROUTE_SOLVER_V1": {
+        "condition": {
+            "op": "AND",
+            "args": [
+                {"op": "ATOM", "id": "CODING_CAP_ROUTE_STATIC_FINITE_GRAPH_V1"},
+                {"op": "ATOM", "id": "CODING_CAP_ROUTE_PLANNER_SELECTED_PLAN_BOUND_V1"},
+                {"op": "ATOM", "id": "CODING_CAP_ROUTE_TARGET_EFFECTS_TASK_CORRECTNESS_COMPLETE_V1"},
+                {"op": "ATOM", "id": "CODING_CAP_ROUTE_STEP_EFFECT_SEMANTICS_AUTHENTICATED_V1"},
+                {"op": "ATOM", "id": "CODING_CAP_ROUTE_STEP_VERIFIERS_TOTAL_SOUND_COMPLETE_V1"},
+                {"op": "ATOM", "id": "CODING_CAP_ROUTE_STEP_EXECUTION_TOTAL_SUCCESS_V1"},
+                {"op": "ATOM", "id": "CODING_CAP_ROUTE_NO_UNRESOLVED_IRREVERSIBLE_EFFECT_V1"},
+                {"op": "ATOM", "id": "CODING_CAP_ROUTE_CYCLE_BUDGET_SUFFICIENT_V1"},
+                {"op": "ATOM", "id": "CODING_CAP_ROUTE_PRETERMINAL_INFORMATION_ADMISSIBLE_V1"},
+            ],
+        },
+        "binding_path": (
+            "canonical/governance/"
+            "CODING_STATIC_VERIFIED_CAPABILITY_ROUTE_POLICY_ADEQUACY_BINDING_20261009_V1.json"
+        ),
+        "binding_blob_sha": "59e59ce11fa004c177f86049f9d51af63f8aac9a",
+    }
 
 }
 
