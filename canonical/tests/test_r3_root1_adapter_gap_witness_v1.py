@@ -92,6 +92,20 @@ class R3Root1AdapterGapWitnessV1Tests(unittest.TestCase):
             out["required_primitive"],
             witness.REQUIRED_PRIMITIVE,
         )
+        self.assertFalse(
+            out["gap_evidence"]["adapter_patch_authorship_assumed_sufficient"]
+        )
+        self.assertTrue(
+            out["gap_evidence"]["verification_frontier_expansion_required"]
+        )
+        self.assertEqual(
+            out["gap_evidence"]["admissible_repair_classes"],
+            [
+                "VERIFIER_PRESERVING_SUCCESS_ADAPTER",
+                "INDEPENDENT_READONLY_SUCCESS_VERIFIER",
+                "NEW_DISTINGUISHING_EVIDENCE",
+            ],
+        )
         tx = out["root1_transaction"]
         self.assertTrue(tx["gate"]["root1_active"])
         self.assertEqual(

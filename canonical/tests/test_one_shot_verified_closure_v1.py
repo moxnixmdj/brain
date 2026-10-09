@@ -109,7 +109,7 @@ class OneShotClosureTests(unittest.TestCase):
             "work_id": "w1",
             "kind": "EXPAND_SUCCESS_VERIFICATION_FRONTIER",
             "blocker": (
-                "ROOT1_CONSTRUCTIVE_R3_ADAPTER_AUTHORING_GAP__"
+                "ROOT1_CONSTRUCTIVE_R3_VERIFICATION_FRONTIER_GAP__"
                 "NO_BOUND_ACQUISITION_ROUTE"
             ),
         }

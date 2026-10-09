@@ -1860,7 +1860,7 @@ def advance_once(
                         "work_id": wid,
                         "kind": kind,
                         "blocker": (
-                            "ROOT1_CONSTRUCTIVE_R3_ADAPTER_AUTHORING_GAP__"
+                            "ROOT1_CONSTRUCTIVE_R3_VERIFICATION_FRONTIER_GAP__"
                             "NO_BOUND_ACQUISITION_ROUTE"
                             if gap_established
                             else "ROOT1_VERIFICATION_CAPABILITY_ACQUISITION_REQUIRED"
