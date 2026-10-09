@@ -188,6 +188,85 @@ def _owned_success_verification_authority_sha256(
     )
 
 
+def _current_frontier_repair_reduction(
+    work: Mapping[str, Any],
+    *,
+    state_path: str | Path,
+    repo_root: str | Path,
+) -> dict[str, Any]:
+    """Classify one pending frontier handoff without granting repair authority."""
+    payload = work.get("payload")
+    if not isinstance(payload, Mapping):
+        return {
+            "pass": False,
+            "status": "FRONTIER_REPAIR_REDUCTION_UNAVAILABLE",
+            "reason": "FRONTIER_EXPANSION_PAYLOAD_INVALID",
+        }
+    observation_id = str(payload.get("observation_id") or "").strip()
+    if not observation_id:
+        return {
+            "pass": False,
+            "status": "FRONTIER_REPAIR_REDUCTION_UNAVAILABLE",
+            "reason": "SUCCESS_OBSERVATION_ID_REQUIRED",
+        }
+    try:
+        from canonical.runtime import r3_success_adapter_author_context_v1 as author_context
+        from canonical.runtime import r3_verification_frontier_repair_reducer_v1 as repair_reducer
+
+        proof = learning.get_success_proof_context(
+            observation_id,
+            state_path=state_path,
+        )
+        replay = learning.get_success_replay_context(
+            observation_id,
+            state_path=state_path,
+        )
+        context = author_context.compile_context(proof, replay)
+        if context.get("pass") is not True:
+            return {
+                "pass": False,
+                "status": "FRONTIER_REPAIR_REDUCTION_UNAVAILABLE",
+                "reason": "ADAPTER_AUTHOR_CONTEXT_COMPILATION_FAILED",
+                "adapter_author_context": deepcopy(dict(context)),
+            }
+        reduction = repair_reducer.reduce_author_context(context)
+        if reduction.get("pass") is not True:
+            return {
+                "pass": False,
+                "status": "FRONTIER_REPAIR_REDUCTION_UNAVAILABLE",
+                "reason": "VERIFICATION_FRONTIER_REPAIR_CLASS_REDUCTION_FAILED",
+                "repair_class_reduction": deepcopy(dict(reduction)),
+            }
+
+        current_adapter = _owned_success_adapter_frontier_sha256(
+            repo_root=repo_root,
+        )
+        current_authority = _owned_success_verification_authority_sha256(
+            repo_root=repo_root,
+        )
+        stored_adapter = str(payload.get("adapter_frontier_sha256") or "")
+        stored_authority = str(payload.get("verification_authority_sha256") or "")
+        if stored_adapter and stored_adapter != current_adapter:
+            return {
+                "pass": False,
+                "status": "FRONTIER_REPAIR_REDUCTION_UNAVAILABLE",
+                "reason": "SUCCESS_ADAPTER_FRONTIER_CHANGED",
+            }
+        if stored_authority and stored_authority != current_authority:
+            return {
+                "pass": False,
+                "status": "FRONTIER_REPAIR_REDUCTION_UNAVAILABLE",
+                "reason": "VERIFICATION_AUTHORITY_FRONTIER_CHANGED",
+            }
+        return deepcopy(dict(reduction))
+    except Exception as exc:
+        return {
+            "pass": False,
+            "status": "FRONTIER_REPAIR_REDUCTION_UNAVAILABLE",
+            "reason": type(exc).__name__ + ":" + str(exc),
+        }
+
+
 def _assert_owned_success_module_origin(
     module: Any,
     *,
@@ -1247,6 +1326,7 @@ def _execute_frontier_acquisition(
     repo_root: str | Path,
     provider: Callable[[Mapping[str, Any]], Mapping[str, Any] | None],
     provider_id: str,
+    repair_reduction: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     payload = work.get("payload")
     if not isinstance(payload, Mapping):
@@ -1265,7 +1345,30 @@ def _execute_frontier_acquisition(
         "verification_frontier_sha256": before,
         "adapter_frontier_sha256": before_adapter,
         "verification_authority_sha256": before_authority,
-        "required_capability_class": payload.get("required_capability_class"),
+        "required_capability_class": (
+            "VERIFIER_PRESERVING_SUCCESS_ADAPTER"
+            if isinstance(repair_reduction, Mapping)
+            and repair_reduction.get("pass") is True
+            else payload.get("required_capability_class")
+        ),
+        "admissible_repair_classes": (
+            deepcopy(list(repair_reduction.get("admissible_repair_classes") or []))
+            if isinstance(repair_reduction, Mapping)
+            and repair_reduction.get("pass") is True
+            else None
+        ),
+        "preferred_repair_order": (
+            deepcopy(list(repair_reduction.get("preferred_repair_order") or []))
+            if isinstance(repair_reduction, Mapping)
+            and repair_reduction.get("pass") is True
+            else None
+        ),
+        "must_acquire_new_distinguishing_evidence": (
+            repair_reduction.get("must_acquire_new_distinguishing_evidence") is True
+            if isinstance(repair_reduction, Mapping)
+            and repair_reduction.get("pass") is True
+            else False
+        ),
         "boundary_root": payload.get("boundary_root"),
         "allowed_frontier_change_class": (
             "SUCCESS_ADAPTER_ONLY__VERIFICATION_AUTHORITY_IMMUTABLE"
@@ -1825,6 +1928,39 @@ def advance_once(
 
             if kind == FRONTIER_EXPANSION_KIND:
                 payload = work.get("payload")
+                repair_reduction = _current_frontier_repair_reduction(
+                    work,
+                    state_path=state_path,
+                    repo_root=repo_root,
+                )
+                admissible = (
+                    set(repair_reduction.get("admissible_repair_classes") or [])
+                    if repair_reduction.get("pass") is True
+                    else set()
+                )
+                if (
+                    repair_reduction.get("pass") is True
+                    and "VERIFIER_PRESERVING_SUCCESS_ADAPTER" not in admissible
+                ):
+                    blockers.append({
+                        "work_id": wid,
+                        "kind": kind,
+                        "blocker": (
+                            "R3_VERIFICATION_FRONTIER_NEW_DISTINGUISHING_EVIDENCE_REQUIRED"
+                        ),
+                        "boundary_root": (
+                            payload.get("boundary_root")
+                            if isinstance(payload, Mapping)
+                            else "R1_CAPABILITY_ACQUISITION"
+                        ),
+                        "repair_class_reduction": deepcopy(
+                            dict(repair_reduction)
+                        ),
+                        "adapter_acquisition_provider_skipped": True,
+                        "replay_original_success": False,
+                    })
+                    continue
+
                 acquisition_provider = verification_frontier_acquisition_provider
                 acquisition_provider_id = verification_frontier_acquisition_provider_id
                 if acquisition_provider is None:
@@ -1886,6 +2022,11 @@ def advance_once(
                     repo_root=repo_root,
                     provider=acquisition_provider,
                     provider_id=acquisition_provider_id,
+                    repair_reduction=(
+                        repair_reduction
+                        if repair_reduction.get("pass") is True
+                        else None
+                    ),
                 )
                 return {
                     **out,
