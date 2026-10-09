@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V34",
-  "date": "2026-10-08",
-  "status": "ACTIVE_FAIL_CLOSED_REAL_MISSION_BOUND__OPUS_5_5_CHECKPOINT_TERMINAL_FALSE__CURRENT_R2_FIXED_POINT_SCHEDULER_BOUND",
+  "date": "2026-10-09",
+  "status": "ACTIVE_FAIL_CLOSED_REAL_MISSION_BOUND__STRICT_EXTERNALITY_RECONCILED__OPUS_5_5_CHECKPOINT_TERMINAL_FALSE__CURRENT_R2_FIXED_POINT_SCHEDULER_BOUND",
   "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "authoritative_sources": {
     "universal_escape_resolver_v2_active_planning_overlay": {
@@ -1386,7 +1386,7 @@
     "tb_science_rank12_execution_claim_active": false,
     "tb_science_rank12_public_activation_armed": false,
     "tb_science_rank12_authority_consumed": false,
-    "gdpval_owner_layer_target_relative_route_state": "EXTERNAL_REQUIRED_SLEEP",
+    "gdpval_owner_layer_target_relative_route_state": "INTERNAL_UNSOLVED__PENDING_ACQUISITION_OR_EXPERIMENT",
     "gdpval_owner_layer_wake_authority": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V9.json",
     "opus_5_5_is_global_terminal_objective": false,
     "opus_5_5_is_frontier_checkpoint": true,
@@ -2148,5 +2148,13 @@
     "branch_protection_enforced": false,
     "workflow_execution_is_merge_authority": false,
     "current_truth": "TRUSTED_VALIDATOR_AND_WORKFLOW_EXIST_AND_PASS_LOCAL_INDEPENDENT_REPLAY__BUT_GITHUB_DOES_NOT_CURRENTLY_REQUIRE_THE_CHECK_BEFORE_MERGE_AND_DIRECT_MAIN_WRITES_REMAIN_POSSIBLE"
+  },
+  "strict_externality_reconciliation": {
+    "path": "canonical/verification/R2_STRICT_EXTERNALITY_RECLASSIFICATION_20261009_V1.json",
+    "git_blob_sha": "8919cd98397586027bbf711cfced58c8c3d62e45",
+    "terminal_externality_requires_proof_carrying_certificate": true,
+    "current_reclassified_unproved_external_sleep_count": 2,
+    "current_information_theoretic_externality_proved_count": 0,
+    "classification_without_certificate": "INTERNAL_UNSOLVED__PENDING_ACQUISITION_OR_EXPERIMENT"
   }
 }
