@@ -917,14 +917,14 @@ def _attempt_infrastructure_repair(
     except Exception:
         return None
     if not isinstance(raw, Mapping):
-        return False
+        return None
     receipt = deepcopy(dict(raw))
     if receipt.get("pass") is not True:
-        return False
+        return None
     if receipt.get("infrastructure_repaired") is not True:
-        return False
+        return None
     if receipt.get("verification_authority_mutated") is not False:
-        return False
+        return None
     if not _valid_sha256(receipt.get("receipt_sha256")):
         return None
     if prior_verified and receipt.get("reuse_first_attempted") is not True:
