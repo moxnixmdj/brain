@@ -5,6 +5,7 @@ from pathlib import Path
 import unittest
 
 from canonical.runtime import fibo_q2_2026_bounded_finance_authority_v1 as fibo
+from canonical.runtime import semantic_relation_control_v1 as semantic_relation
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -49,6 +50,30 @@ class FiboBoundedFinanceAuthorityTests(unittest.TestCase):
             [PROMISSORY_NOTE, DEBT_INSTRUMENT, FINANCIAL_INSTRUMENT],
         )
         self.assertEqual(out["accepted_entailment_edge_count"], 2)
+        self.assertFalse(out["terminal_authority"])
+
+    def test_live_semantic_relation_controller_consumes_fibo_receipts(self):
+        built = fibo.build_entailment_evidence(
+            PROMISSORY_NOTE, FINANCIAL_INSTRUMENT, repo_root=ROOT
+        )
+        self.assertTrue(built["pass"])
+        out = semantic_relation.resolve(
+            {
+                "left_id": PROMISSORY_NOTE,
+                "right_id": FINANCIAL_INSTRUMENT,
+                "left_surface": "promissory note",
+                "right_surface": "financial instrument",
+                "scope_id": fibo.SCOPE_ID,
+                "required_relation": "LEFT_ENTAILS_RIGHT",
+                "entailment_dag_evidence": built["evidence"],
+                "expected_entailment_dag_sha256": built["evidence_sha256"],
+            },
+            relation_edge_verifier=lambda receipt: fibo.verify_edge_receipt(
+                receipt, repo_root=ROOT
+            ),
+        )
+        self.assertTrue(out["pass"])
+        self.assertEqual(out["strongest_proved_relation"], "LEFT_ENTAILS_RIGHT")
         self.assertFalse(out["terminal_authority"])
 
     def test_reverse_missing_path_remains_unknown(self):
