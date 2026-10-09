@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CERTIFICATE_GATED_SELECTED_ROUTE_RUNTIME_REGISTRY_V1",
   "date": "2026-10-07",
-  "status": "DEPLOYED_FAIL_CLOSED_REGISTRY__CANARY_ONLY__NO_SELECTED_COVER_CREDIT",
+  "status": "CANDIDATE_FAIL_CLOSED_REGISTRY__D_FINAL_ROUTE_ADDED__NO_GLOBAL_SELECTED_COVER_CREDIT",
   "router": {
     "path": "canonical/runtime/certificate_gated_selected_route_router_v1.py",
     "git_blob_sha": "4b99ef1e95e033badfb21ab7af7355122933224a"
@@ -20,6 +20,23 @@
       "admission_certificate_blob_sha": "1b2f97e7d46877b8782ea211fd15f679e6bfb5b0",
       "admitted": true,
       "creditable": false
+    },
+    {
+      "context_digest": "7a71a0ab6ddc9ccf6b06345031ddf52c9e8d502d13b46e232851b1dead24dec7",
+      "cell_id": "D_FINAL_BOUND_DECISION_VERIFY_LIVE_V1",
+      "route_id": "d-final-decision-verify-live-v1",
+      "route_path": "canonical/runtime/d_final_decision_verify_certified_route_v1.py",
+      "route_blob_sha": "3430eea0f0313b8d6ac6871a0f3c931f5cb616b1",
+      "callable": "invoke",
+      "adequacy_certificate_path": "canonical/verification/D_FINAL_DECISION_VERIFY_CERTIFIED_ROUTE_ADEQUACY_20261009_V1.json",
+      "adequacy_certificate_blob_sha": "a1f2eb5fbee18c7ee304b7abc1c062586fcc89b2",
+      "admission_certificate_path": "canonical/verification/D_FINAL_DECISION_VERIFY_CERTIFIED_ROUTE_ADMISSION_20261009_V1.json",
+      "admission_certificate_blob_sha": "d3fa7920df20a92ed6306f92cf1600f6db60fe56",
+      "admitted": true,
+      "creditable": true,
+      "payload_validator_path": "canonical/runtime/d_final_decision_verify_payload_validator_v1.py",
+      "payload_validator_blob_sha": "099db70ee9a03392748d1788bf9301988f32b81f",
+      "payload_validator_callable": "validate"
     }
   ],
   "default": "FAIL_CLOSED",
