@@ -136,3 +136,17 @@ def test_non_runtime_paths_are_ignored(tmp_path):
     out = run(tmp_path)
     assert out["pass"] is True
     assert out["runtime_binding_reference_count"] == 0
+
+
+def test_runtime_path_regex_matches_canonical_python_path():
+    from canonical.runtime.current_authority_runtime_binding_census_v1 import (
+        RUNTIME_PATH_RE,
+    )
+
+    assert RUNTIME_PATH_RE.fullmatch("canonical/runtime/a.py")
+    assert RUNTIME_PATH_RE.fullmatch(
+        "canonical/runtime/nested/example_v1.py"
+    )
+    assert not RUNTIME_PATH_RE.fullmatch(
+        "canonical/governance/example.json"
+    )
