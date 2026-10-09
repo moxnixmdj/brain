@@ -35,6 +35,7 @@ from canonical.runtime import semantic_relation_control_v1 as semantic_relation
 from canonical.runtime import oewn_decision_sense_control_v1 as oewn_decision_sense
 from canonical.runtime import d_finality_execution_epoch_v1 as d_finality
 from canonical.runtime import d_finality_canonical_resolver_v1 as d_finality_resolver
+from canonical.runtime import d_finality_zero_ambient_frontdoor_v1 as d_finality_physical
 
 SCHEMA = "PROJECT_BRAIN_UNIFIED_COGNITIVE_FABRIC_V1"
 ROOT = Path(__file__).resolve().parents[2]
@@ -402,9 +403,53 @@ def run(
                 )
             options["learn"] = False
         elif ownership_mode == "D_FINAL":
-            raise CognitiveFabricError(
-                "D_FINAL_PHYSICAL_ZERO_AMBIENT_MEMBRANE_NOT_LIVE"
+            physical_request = deepcopy(dict(request))
+            physical_request.pop("ownership_mode", None)
+            physical_request["mode"] = mode
+            physical_options = dict(options)
+            physical_options["learn"] = False
+            physical_request["options"] = physical_options
+            physical = d_finality_physical.run(
+                physical_request,
+                capability_id=d_root_capability_id,
+                repo_root=ROOT,
             )
+            if not isinstance(physical, Mapping):
+                raise CognitiveFabricError("D_FINAL_PHYSICAL_RESULT_NOT_OBJECT")
+            if physical.get("pass") is not True:
+                return {
+                    "schema": SCHEMA,
+                    "status": "FAIL_CLOSED__D_FINAL_PHYSICAL_DISPATCH",
+                    "pass": False,
+                    "mode": mode,
+                    "requested_mode": requested_mode or "AUTO",
+                    "auto_routed": auto_routed,
+                    "reason": str(physical.get("status") or "PHYSICAL_D_FINAL_FAILED"),
+                    "d_finality": deepcopy(dict(physical)),
+                    "single_front_door": True,
+                    "terminal_authority": False,
+                    "terminal_credit_delta": 0,
+                }
+            nested = physical.get("result")
+            if not isinstance(nested, Mapping):
+                raise CognitiveFabricError("D_FINAL_CHILD_FABRIC_RESULT_NOT_OBJECT")
+            wrapped = deepcopy(dict(nested))
+            wrapped["d_finality"] = {
+                "mode": "D_FINAL",
+                "logical_epoch_active_during_dispatch": True,
+                "physical_zero_ambient_enforced": True,
+                "capability_id": d_root_capability_id,
+                "certificate_sha256": physical.get("certificate_sha256"),
+                "policy_sha256": physical.get("policy_sha256"),
+                "execution_epoch_sha256": physical.get("execution_epoch_sha256"),
+                "material_closure_root": physical.get("material_closure_root"),
+                "launcher_git_blob_sha": physical.get("launcher_git_blob_sha"),
+                "child_git_blob_sha": physical.get("child_git_blob_sha"),
+                "launcher_policy_sha256": physical.get("launcher_policy_sha256"),
+                "broker_sha256": physical.get("broker_sha256"),
+                "material_effects_committed": physical.get("material_effects_committed"),
+            }
+            return wrapped
         elif ownership_mode == "D_CERTIFIED_CONTEXT":
             authority = d_finality_resolver.resolve_for_capability(
                 d_root_capability_id,
