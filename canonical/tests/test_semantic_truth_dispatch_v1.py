@@ -38,6 +38,28 @@ class Tests(unittest.TestCase):
         self.assertTrue(out["pass"])
         fn.assert_called_once()
 
+    def test_regcap_context_atom_end_to_end_dispatch_is_source_bound(self):
+        text = (
+            "a 2.5% buffer comprised of Common Equity Tier 1 (CET1) "
+            "above the regulatory minimum capital requirement"
+        )
+        out = evaluate({
+            "truth_kind": "REGCAP_CONTEXT_ATOM",
+            "predicate_id": "caller-label",
+            "source_text": text,
+            "source_id": "doc:A",
+            "start": 0,
+            "end": len(text),
+            "context_kind": "CERTIFIED_REGCAP_CCOB_STRUCTURE_CONTEXT",
+            "target_atom_id": "AMOUNT::2.5_PERCENT",
+        })
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(out["predicate_truth"], "TRUE")
+        self.assertTrue(out["semantic_truth_authority"])
+        self.assertFalse(out["semantic_identity_authority"])
+        self.assertFalse(out["policy_adequacy_authority"])
+        self.assertFalse(out["terminal_authority"])
+
     def test_absent_kind_preserves_legacy_path(self):
         with patch(
             "canonical.runtime.semantic_truth_dispatch_v1.evaluate_legacy",
