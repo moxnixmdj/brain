@@ -121,6 +121,8 @@ def _policy_freeze_lock(policy: Mapping[str, Any], evidence: Mapping[str, Any]) 
     observed_at = _parse_time(evidence.get("observed_at"))
     if frozen_at is None or observed_at is None:
         return "UNKNOWN", "POLICY_OR_EVIDENCE_TIME_INVALID"
+    if frozen_at.tzinfo is None or observed_at.tzinfo is None:
+        return "UNKNOWN", "POLICY_OR_EVIDENCE_TIMEZONE_MISSING"
     if observed_at < frozen_at:
         return "UNKNOWN", "EVIDENCE_PREDATES_FROZEN_POLICY"
     return "PASS", "POLICY_FROZEN_BEFORE_EVIDENCE"
@@ -218,6 +220,17 @@ def _evaluator_lock(policy: Mapping[str, Any], evidence: Mapping[str, Any]) -> t
     if mode == "OBJECTIVE":
         if ep.get("objective_validator") is not True:
             return "UNKNOWN", "OBJECTIVE_EVALUATOR_NOT_DECLARED"
+        objective = evidence.get("objective_evaluator")
+        if not isinstance(objective, Mapping):
+            return "UNKNOWN", "OBJECTIVE_EVALUATOR_EVIDENCE_MISSING"
+        if not _binding(objective.get("binding")):
+            return "UNKNOWN", "OBJECTIVE_EVALUATOR_BINDING_INVALID"
+        if objective.get("independent_verified") is not True:
+            return "UNKNOWN", "OBJECTIVE_EVALUATOR_NOT_INDEPENDENTLY_VERIFIED"
+        if objective.get("relation") == "TARGET_GT_BRAIN":
+            return "DISPROVEN", "OBJECTIVE_EVALUATOR_FAVORS_TARGET"
+        if objective.get("relation") not in {"BRAIN_GT_TARGET", "BRAIN_GE_TARGET"}:
+            return "UNKNOWN", "OBJECTIVE_EVALUATOR_RELATION_INCONCLUSIVE"
         return "PASS", "OBJECTIVE_EVALUATOR"
 
     required = ep.get("required_evaluator_ids")
