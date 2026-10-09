@@ -1,0 +1,89 @@
+{
+  "schema": "PROJECT_BRAIN_STRICT_TERMINAL_CLOSURE_HARDENED_REMOTE_VERIFICATION_V1",
+  "date": "2026-10-09",
+  "status": "PASS__STRICT_TERMINAL_CLOSURE_HARDENED__34_OF_34_FOCUSED__8_OF_8_ADJACENT__CLEANROOM_PASS__ZERO_CREDIT",
+  "branch": "strict-externality-20261009",
+  "tested_runtime_source_commit": "d2a3b3650bd8f283974ba0340c271017bd204ca7",
+  "supersedes_verification": "canonical/verification/STRICT_TERMINAL_CLOSURE_REMOTE_VERIFICATION_20261009_V1.json",
+  "test_carrier": {
+    "kind": "REMOTE_SPRITE",
+    "name": "brain-live-integrated-v1-run-20261008",
+    "checkout_path": "/home/sprite/verify-strict-3411-hardened",
+    "log_sha256": "13395a51307a3c5b1079692396e7e9e58968bd69cb3e0641318d5cd3ad7a57db",
+    "compile_rc": 0,
+    "focused_tests_run": 34,
+    "focused_failures": 0,
+    "focused_errors": 0,
+    "adjacent_unique_tests_run": 8,
+    "adjacent_failures": 0,
+    "adjacent_errors": 0,
+    "cleanroom_pass": true,
+    "cleanroom_status": "VERIFIED_INTERNAL_FIXED_POINT__IMPROVEMENT_QUEUE_EMPTY",
+    "overall_rc": 0
+  },
+  "verified_invariants": {
+    "no_externality_without_proof_carrying_world_pair": true,
+    "identical_accessible_observation_required": true,
+    "divergent_required_action_required": true,
+    "exhaustive_internal_bypass_falsification_required": true,
+    "proof_receipts_content_addressed": true,
+    "proof_receipts_bound_to_exact_statement_and_evidence": true,
+    "prover_self_verification_rejected": true,
+    "forged_receipt_digest_rejected": true,
+    "boolean_only_externality_claim_rejected": true,
+    "historical_replay_absence_is_current_state_insufficiency_not_externality": true,
+    "pending_acquisition_or_experiment_remains_internal_unsolved": true,
+    "search_before_new_code_contract_enforced": true,
+    "minimum_missing_transform_receipt_enforced": true,
+    "verifier_with_solution_receipt_enforced": true,
+    "shared_cause_collapse_present": true,
+    "false_progress_rejected": true,
+    "verification_authority_immutable": true,
+    "cleanroom_fixed_point_passed": true
+  },
+  "required_bypass_classes": [
+    "BRAIN_SEARCH",
+    "EXTERNAL_SEARCH",
+    "DEDUCTION_OR_THEOREM",
+    "CAPABILITY_COMPOSITION",
+    "NEW_SYNTHESIS_OR_CODE",
+    "SIMULATION_OR_EXPERIMENT",
+    "WEAKER_SUFFICIENT_OBSERVATION",
+    "ALTERNATIVE_ROUTE"
+  ],
+  "load_bearing_blobs": {
+    "canonical/runtime/information_theoretic_externality_gate_v1.py": "008e3b8e43ba26336eee71092a67a13c02b19e1c",
+    "canonical/runtime/r3_historical_failure_irreducibility_v1.py": "180dbd3ce28b797cd613c0ef0e3fe9f68bc9073b",
+    "canonical/runtime/one_shot_verified_closure_v1.py": "87452102d9c6c1d330a1d714763ad078b8f2d103",
+    "canonical/runtime/one_shot_reality_closure_v2.py": "2c940c522ee8360d6516798182359e81dd94a8ce",
+    "canonical/tests/test_information_theoretic_externality_gate_v1.py": "7bfb8e57c071461d0abe3822ab8dc569f844179c",
+    "canonical/tests/test_r3_historical_failure_irreducibility_v1.py": "66ce88fcf545adfb8231f248acea3b1572a1a40d",
+    "canonical/tests/test_one_shot_verified_closure_v1.py": "bc58a3a997b2b9941374201be18fa59b2e3f153b",
+    "canonical/tests/test_one_shot_reality_closure_v2.py": "f6fb6d28cfadf39ec8b2925415b8a1bc4fd5cbdf",
+    "canonical/tests/test_one_shot_reality_closure_v2_integration.py": "07752cea3a1953d7e4f33c43d95da384572bdc83",
+    "canonical/tests/test_r3_structural_bound_acquisition_v1.py": "a4549a2672a5e25b37d2ff0989a3f613fe3d30a1",
+    "canonical/tests/test_r3_bound_success_readonly_learning_v1.py": "dbd4b0df468aa5e3a2f09ae744a3bbd4fb6e00a3",
+    "canonical/tests/test_r3_real_structural_compounding_cycle_v1.py": "608507a8107b8396ffb6d0fd4549d46b4e2a25a8"
+  },
+  "github_actions_carrier": {
+    "status": "REMOVED_AFTER_ZERO_STEP_FAILURE",
+    "treated_as_terminal_evidence": false,
+    "replacement": "REMOTE_SPRITE_EXACT_LOAD_BEARING_REPLAY"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_ALL_BRAIN_TERMINAL_OBLIGATIONS_ARE_CLOSED",
+    "NO_CLAIM_OPEN_WORLD_GENERAL_INTELLIGENCE_IS_COMPLETE",
+    "NO_CLAIM_A_CURRENT_RESIDUAL_HAS_ACTUALLY_PRODUCED_A_VALID_EXTERNALITY_CERTIFICATE",
+    "NO_OPUS_CHECKPOINT_CREDIT",
+    "NO_ACCEPTANCE_FAMILY_CREDIT",
+    "NO_TERMINAL_AUTHORITY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "checkpoint_credit_delta": 0
+  },
+  "terminal_authority": false
+}
