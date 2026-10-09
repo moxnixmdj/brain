@@ -1,0 +1,96 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK14_V3_IRREVERSIBLE_RESULT_TRUTH_20261009_V1",
+  "date": "2026-10-09",
+  "status": "FINAL_ZERO__TASK_STARTED__SCIENCE_REQUIREMENTS_MUTATED_AFTER_FREEZE__RANK14_IRREVERSIBLY_CONSUMED__ZERO_ACCEPTANCE_CREDIT",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "slot": {
+    "id": "terminal-bench-science/inverse-lithography::trial-0",
+    "ledger_schedule_rank": 14,
+    "frozen_manifest_schedule_order": 13,
+    "task_rank": 13,
+    "task_name": "terminal-bench-science/inverse-lithography",
+    "digest": "sha256:8c4da4b5b3a00283335e83dda92584aaf9293ff773bc43f2bf95eb0e2c0f8530"
+  },
+  "public_execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2457,
+    "workflow_run_id": 37885166960,
+    "workflow_job_id": 113673429588,
+    "artifact_id": 11595824909,
+    "artifact_zip_sha256": "6470b88bf67d787da2967e65af6af001508ceb683ee87efbb65329591cbb8815",
+    "activation_head_sha": "4a99ca5ffb66ea30601c591f41195a84a0cdc45e",
+    "github_run_sha": "f10e1d703248ac62389ac5804b85cc67d74a47fb",
+    "run_attempt": 1,
+    "workflow_conclusion": "success",
+    "harbor_step_outcome": "success"
+  },
+  "exact_prestart_measurement": {
+    "guard_status": "PASS__RANK14_EXACT_TASK_READ__TOKEN_BUDGET_FITS_16K__TASK_NOT_STARTED",
+    "guard_pass": true,
+    "instruction_sha256": "0a5b758ec1933d8fb2cb2d736dcb6a365c239a16aa2c1158fd0f0487231eade1",
+    "first_cycle_prompt_sha256": "268d9d0e4d8fc2bd69381701de400a02d93d2bc349db7d2727abfc6d3ed0d42d",
+    "raw_task_obligation_count": 87,
+    "input_tokens": 2354,
+    "reserved_completion_tokens": 4096,
+    "required_context_tokens": 6450,
+    "server_context_tokens": 16384,
+    "context_headroom_tokens": 9934,
+    "prior_v2_input_tokens": 17500,
+    "input_token_reduction": 15146,
+    "prior_v2_context_deficit_tokens": 5212,
+    "prompt_representation_blocker_closed": true
+  },
+  "execution_truth": {
+    "task_read_under_v3": true,
+    "task_started": true,
+    "execution_authority_consumed": true,
+    "benchmark_trials_consumed": 1,
+    "reward": 0,
+    "receipt_status": "FINAL_ZERO",
+    "verifier_result_present": false,
+    "rerun_credit": false,
+    "result_hashes": {
+      "jobs/inverse-lithography-trial-0/inverse-lithography-trial-0/inverse-lithography__ZhTtWSJ/result.json": "169fcbf9104c5bd04a6c50b52e13e5c3dd8e8a064197472abe5915f1d109b5fc",
+      "jobs/inverse-lithography-trial-0/inverse-lithography-trial-0/result.json": "27af071e77ab468c157f3991cf2e62fc02e6e5cc3e8391f31ed9fff026af0f08"
+    }
+  },
+  "failure": {
+    "exception_type": "RuntimeError",
+    "exception_message": "SCIENCE_REQUIREMENTS_MUTATED_AFTER_FREEZE",
+    "failure_location": "canonical/runtime/harbor_science_agent_v1.py::_extract_contract",
+    "trigger": "SECOND_OR_LATER_PLANNER_RESPONSE_REDECLARED_MATERIAL_REQUIREMENTS_DIFFERENTLY_FROM_BRAIN_FROZEN_REQUIREMENTS",
+    "causal_classification": "INTERNAL_CONTROLLER_PROTOCOL__UNTRUSTED_OPTIONAL_SUBSTRATE_REDECLARATION_CAUSES_FATAL_ABORT_INSTEAD_OF_BEING_NON_AUTHORITATIVE_AFTER_FREEZE",
+    "model_capacity_failure": false,
+    "context_capacity_failure": false,
+    "external_information_failure": false,
+    "verifier_failure": false
+  },
+  "exact_repair_requirement": {
+    "invariant": "ONCE_BRAIN_FREEZES_MATERIAL_REQUIREMENTS_THE_SUBSTRATE_HAS_ZERO_AUTHORITY_TO_MUTATE_OR_REDECLARE_THEM",
+    "required_behavior": "IGNORE_LATER_MATERIAL_REQUIREMENTS_AS_NON_AUTHORITATIVE_METADATA__VALIDATE_ALL_CANDIDATE_COVERS_ONLY_AGAINST_THE_FROZEN_BRAIN_SET__KEEP_UNKNOWN_COVERS_FAIL_CLOSED",
+    "forbidden_repair": "DO_NOT_ALLOW_REQUIREMENT_MUTATION__DO_NOT_RERUN_RANK14__DO_NOT_RELAX_CANDIDATE_COVERAGE_VALIDATION"
+  },
+  "next_slot": {
+    "ledger_schedule_rank": 15,
+    "frozen_manifest_schedule_order": 14,
+    "task_rank": 14,
+    "slot_id": "terminal-bench-science/protein-active-learning::trial-0",
+    "task_name": "terminal-bench-science/protein-active-learning",
+    "task_digest": "sha256:d7e16b7c468551b468364cf2a86dba2383b007f3f2f01c6d2ce01d99ff30d48f"
+  },
+  "hard_nonclaims": [
+    "NO_RANK14_RETRY_AUTHORITY",
+    "NO_TB_SCIENCE_SUCCESS_CREDIT",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT",
+    "NO_CLAIM_QWEN_SCIENTIFIC_REASONING_WAS_VERIFIER_EVALUATED",
+    "NO_CLAIM_THE_REQUIREMENT_FREEZE_REPAIR_WOULD_HAVE_MADE_RANK14_SUCCEED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_trials_consumed_delta": 1,
+    "consumed_successes_delta": 0,
+    "consumed_final_failures_delta": 1,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
