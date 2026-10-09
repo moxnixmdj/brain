@@ -22,6 +22,8 @@ from hashlib import sha256
 import json
 from typing import Any, Mapping, Sequence
 
+from canonical.runtime import trusted_exact_byte_proof_replay_v1 as trusted_replay
+
 SCHEMA="PROJECT_BRAIN_PREDICATE_SELECTED_COVER_COMPLEMENT_GATE_V1"
 ALLOWED_PROOF_KINDS={"FORMAL_UNSAT","UNIVERSAL_THEOREM","PROVEN_SUPERSET_COVER"}
 
@@ -149,27 +151,69 @@ def evaluate(payload:Mapping[str,Any])->dict[str,Any]:
     if not str(cr.get("receipt_id") or "").strip():
         return _fail("COMPLEMENT_RECEIPT_ID_REQUIRED")
 
+    expected_claim={
+        "kind":"SELECTED_COVER_SCOPE_COMPLETE",
+        "scope_id":scope_id,
+        "predicate_set_sha256":digest,
+        "residual_definition":"S_TRACE_AND_NOT_ANY_SOUND_ADMISSION_PREDICATE",
+        "admission_soundness_required":True,
+        "conclusion":"UNSAT_COMPLEMENT",
+    }
+    replay_request=payload.get("proof_replay_request")
+    if not isinstance(replay_request,Mapping):
+        return {
+            "schema":SCHEMA,
+            "pass":False,
+            "status":"STRUCTURALLY_CONSISTENT__TRUSTED_REPLAY_REQUIRED__FAIL_CLOSED",
+            "reason":"INDEPENDENT_PROOF_REPLAY_NOT_PERFORMED",
+            "scope_id":scope_id,
+            "predicate_set_sha256":digest,
+            "route_count":len(normalized),
+            "routes":sorted(normalized,key=lambda x:(x["admission_predicate_id"],x["route_id"])),
+            "receipt_claim_shape_consistent":True,
+            "independent_proof_replay_performed":False,
+            "selected_cover_complete_authorized":False,
+            "u_empty_authorized":False,
+            "abc_closed_authorized":False,
+            "d_finality_required":True,
+            "terminal_authority":False,
+            "terminal_credit_delta":0,
+            "next_required":"TRUSTED_SELECTED_COVER_PROOF_KERNEL_AND_EXACT_PROOF_OBJECT",
+            "boundary":"STRUCTURAL_CLAIM_CONSISTENCY_ONLY__NO_GLOBAL_AUTHORITY_WITHOUT_EXACT_BYTE_KERNEL_REPLAY",
+        }
+
+    if dict(replay_request.get("expected_claim") or {})!=expected_claim:
+        return _fail("PROOF_REPLAY_EXPECTED_CLAIM_MISMATCH")
+    replayed=trusted_replay.replay(replay_request)
+    if replayed.get("pass") is not True:
+        return _fail(
+            "TRUSTED_PROOF_REPLAY_FAILED",
+            replay_reason=replayed.get("reason"),
+            replay_status=replayed.get("status"),
+        )
+    if replayed.get("independent_proof_replay_performed") is not True:
+        return _fail("TRUSTED_PROOF_REPLAY_NOT_PERFORMED")
+    if replayed.get("verification_authority_mutated") is not False:
+        return _fail("TRUSTED_PROOF_REPLAY_AUTHORITY_MUTATION")
+    if dict(replayed.get("proved_claim") or {})!=expected_claim:
+        return _fail("TRUSTED_PROOF_REPLAY_CLAIM_MISMATCH")
+
     return {
         "schema":SCHEMA,
-        "pass":False,
-        "status":"STRUCTURALLY_CONSISTENT__UNCHECKED_PROOF__FAIL_CLOSED",
-        "reason":"INDEPENDENT_PROOF_REPLAY_NOT_PERFORMED",
+        "pass":True,
+        "status":"PASS__SELECTED_COVER_COMPLETE_BY_TRUSTED_EXACT_BYTE_PROOF_REPLAY",
         "scope_id":scope_id,
         "predicate_set_sha256":digest,
         "route_count":len(normalized),
         "routes":sorted(normalized,key=lambda x:(x["admission_predicate_id"],x["route_id"])),
-        # The receipts above are plain mappings supplied by the caller. This
-        # function validates internal field agreement, NOT the existence,
-        # contents, or mathematical validity of the referenced proof objects.
-        # Therefore no global closure authority may follow from these fields.
         "receipt_claim_shape_consistent":True,
-        "independent_proof_replay_performed":False,
-        "selected_cover_complete_authorized":False,
-        "u_empty_authorized":False,
-        "abc_closed_authorized":False,
+        "independent_proof_replay_performed":True,
+        "proof_replay_receipt_sha256":replayed.get("replay_receipt_sha256"),
+        "selected_cover_complete_authorized":True,
+        "u_empty_authorized":True,
+        "abc_closed_authorized":True,
         "d_finality_required":True,
         "terminal_authority":False,
         "terminal_credit_delta":0,
-        "next_required":"TRUSTED_EXACT_BYTE_PROOF_REPLAY_AND_SCOPE_COMPLETE_ADMISSION_ADEQUACY_CHECKER",
-        "boundary":"STRUCTURAL_CLAIM_CONSISTENCY_ONLY__CALLER_ASSERTED_FLAGS_AND_SHA_SHAPES_ARE_NOT_PROOFS__NO_U_EMPTY_OR_ABC_AUTHORITY",
+        "boundary":"ABC_ONLY__D_FINALITY_AND_FINAL_CLEANROOM_REMAIN_MANDATORY",
     }
