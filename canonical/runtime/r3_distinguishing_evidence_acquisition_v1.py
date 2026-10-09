@@ -65,6 +65,15 @@ def acquire(
     request_sha = str(compiled_request.get("request_sha256") or "").strip()
     if not request_sha:
         return _fail("DISTINGUISHING_EVIDENCE_REQUEST_DIGEST_MISSING")
+    request_base = deepcopy(dict(compiled_request))
+    request_base.pop("request_sha256", None)
+    expected_request_sha = request_compiler._digest(request_base)
+    if request_sha != expected_request_sha:
+        return _fail(
+            "DISTINGUISHING_EVIDENCE_REQUEST_DIGEST_MISMATCH",
+            expected_request_sha256=expected_request_sha,
+            observed_request_sha256=request_sha,
+        )
     oid = str(observation_id or "").strip()
     if not oid:
         return _fail("SOURCE_OBSERVATION_ID_REQUIRED")
