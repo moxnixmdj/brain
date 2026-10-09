@@ -48,6 +48,49 @@ class OneShotClosureTests(unittest.TestCase):
             "VERIFIED_INTERNAL_FIXED_POINT__IMPROVEMENT_QUEUE_EMPTY",
         )
 
+    def test_empty_r3_queue_does_not_hide_current_r2_internal_gap(self):
+        r2_residual = {
+            "current_internal_unsolved_count": 1,
+            "current_internal_unsolved_cells": [{
+                "cell_id": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
+                "state": "INTERNAL_UNSOLVED__PENDING_ACQUISITION_OR_EXPERIMENT",
+                "required_action": "ACQUIRE_OR_EXPERIMENT",
+                "wake_on": [],
+            }],
+        }
+        snaps = [
+            self._snap("a", []),
+            self._snap("a", []),
+            self._snap("a", []),
+        ]
+        for snap in snaps:
+            snap["payload"]["r2_residual"] = r2_residual
+        with patch.object(closure, "frontier_snapshot", side_effect=snaps), patch.object(
+            closure.r3,
+            "drain",
+            return_value={
+                "status": "IMPROVEMENT_QUEUE_STABLE",
+                "pass": True,
+                "progress_count": 0,
+                "actions": [],
+            },
+        ):
+            out = closure.run(repo_root=".", state_path="state.json")
+        self.assertFalse(out["pass"], out)
+        self.assertTrue(out["fixed_point"], out)
+        self.assertEqual(
+            out["status"],
+            "OPEN__INTERNAL_UNSOLVED_R2_GAP_REMAINS",
+        )
+        self.assertTrue(out["residual"]["internally_solvable_gap_remaining"])
+        self.assertIn(
+            "R2_CURRENT_INTERNAL_UNSOLVED:FINANCE_SEMANTIC_ADEQUACY_TAIL",
+            out["residual"]["internal_blockers"],
+        )
+        self.assertTrue(
+            out["residual"]["pending_acquisition_or_experiment_required"]
+        )
+
     def test_internal_root1_gap_remains_open(self):
         pending = [{"work_id": "w1", "kind": "EXPAND_SUCCESS_VERIFICATION_FRONTIER"}]
         snaps = [
