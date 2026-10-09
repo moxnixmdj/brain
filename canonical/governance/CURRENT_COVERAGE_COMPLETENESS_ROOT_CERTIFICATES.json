@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_COVERAGE_COMPLETENESS_ROOT_CERTIFICATES_V1",
   "date": "2026-10-09",
-  "status": "ACTIVE__NO_ACTIVE_FROZEN_CLAIM__THREE_OPEN_CC_ROOT_CERTIFICATE_OBLIGATIONS__ZERO_PROVED__ZERO_CREDIT",
+  "status": "ACTIVE__FROZEN_CLAIM_BOUND__THREE_OPEN_CC_ROOT_CERTIFICATE_OBLIGATIONS__ZERO_PROVED__ZERO_CREDIT",
   "mission_binding": {
     "pointer_path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
     "authority_path": "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
@@ -10,7 +10,7 @@
   },
   "registry": {
     "path": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_CERTIFICATE_REGISTRY_V1.json",
-    "git_blob_sha": "fa395c54a9f5c7d93eff01dd8ccf28575c0a0361"
+    "git_blob_sha": "77c5f8e2d1b63838c63baa1db9fb9954a02636f3"
   },
   "guard": {
     "path": "canonical/runtime/coverage_root_certificate_registry_guard_v1.py",
@@ -33,7 +33,7 @@
   "proved": 0,
   "open": 3,
   "r4_proof_closure": false,
-  "next": "FREEZE_EXACT_ALLOWED_CERTIFICATION_CLAIM__THEN_ATTACK_CC_R3_FOR_THAT_CLAIM__NO_ROOT_PROMOTION_BEFORE_EXACT_CLAIM_BINDING",
+  "next": "ATTACK_CC_R3_FOR_ACTIVE_CLAIM__U_EMPTY_OR_CLAIM_BOUND_COUNTEREXAMPLE",
   "terminal_credit_delta": 0,
   "root_theorem_falsifier": {
     "path": "canonical/runtime/root_theorem_falsifier_v1.py",
@@ -41,7 +41,17 @@
     "authoritative_registry_required": true
   },
   "r4_authority_rule": "LOCAL_ROOT_RECEIPTS_CANNOT_CLOSE_R4_UNLESS_THE_CANONICAL_ROOT_CERTIFICATE_REGISTRY_VALIDATES_AND_ALL_THREE_CANONICAL_ROOT_SLOTS_ARE_PROVED_CURRENT",
-  "active_claim": null,
+  "active_claim": {
+    "claim_kind": "CHECKPOINT_ACCEPTANCE",
+    "mission_blob_sha": "7ad5f82d8434966781bf97c725d482e10133fc7c",
+    "scope_sha256": "e7461e484491196b40ebf88b7840fe17fb464be83f7a74d13363cd0427c665c9",
+    "target_predicate_sha256": "24820adb64697831d6ef7b13ea471c6f23a6fc1b995a7f15deb3f65963b8c0ba",
+    "semantics_sha256": "19fe42d190497e96546799cbdaa269c09f2505f0b76fa735d3f8c10e9e5eac3c",
+    "epoch": "2026-10-09-CCRT-R3-CLAIM-V1",
+    "authority_id": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_CHECKPOINT_OBJECTIVE",
+    "terminal_credit_delta": 0,
+    "claim_id": "fda1409a94d983f61888f08f3df99cad50dc36edc3f5feb01b6df20e31156eaa"
+  },
   "claim_scope": {
     "policy": "SINGLE_ACTIVE_FROZEN_CERTIFICATION_CLAIM_AT_A_TIME",
     "claim_scope_path": "canonical/governance/COVERAGE_COMPLETENESS_CLAIM_SCOPE_V1.json",
@@ -49,5 +59,9 @@
     "mission_pointer_blob_sha": "7ad5f82d8434966781bf97c725d482e10133fc7c",
     "proved_slot_without_active_claim_forbidden": true,
     "cross_claim_certificate_transport_forbidden": true
+  },
+  "active_claim_descriptor": {
+    "path": "canonical/governance/CC_ACTIVE_FROZEN_CLAIM_20261009_V1.json",
+    "git_blob_sha": "d4f7068322c5417f806b38ff8b39fe530ccde4ba"
   }
 }
