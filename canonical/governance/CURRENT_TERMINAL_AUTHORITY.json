@@ -2506,7 +2506,7 @@
     "terminal_credit_delta": 0
   },
   "r2_v42_semantic_stack_reconciliation": {
-    "status": "CANDIDATE_RECONCILED__CURRENT_R2_AND_TERMINAL_PRECEDENCE_BIND_V42__TERMINAL_STILL_FALSE",
+    "status": "RECONCILED__CURRENT_R2_AND_TERMINAL_PRECEDENCE_BIND_V42__TERMINAL_STILL_FALSE",
     "current_r2_pointer_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
     "current_r2_candidate_git_blob_sha": "822eef374e235715bc82cc01cf47c30cf7e1e56b",
     "scheduler_cut_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V42.json",
