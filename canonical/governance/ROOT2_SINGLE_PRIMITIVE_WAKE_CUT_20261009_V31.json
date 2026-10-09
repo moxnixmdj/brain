@@ -38,7 +38,7 @@
     },
     "direct_adequacy_activation": {
       "path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V17.json",
-      "git_blob_sha": null
+      "git_blob_sha": "fc1892ae6e3985cabd8829b7a8626124c04647ff"
     },
     "direct_adequacy_exact_cell_count": 3,
     "policy_cover_information_provider_integration": {
