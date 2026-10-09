@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import json
+import tempfile
+import unittest
 from pathlib import Path
 
 from canonical.runtime.source_aligned_semantic_proof_v3 import typed_context_sha256
@@ -49,114 +51,115 @@ def _goal():
     )
 
 
-def _write(root: Path, case):
-    p = root / "canonical/tmp/oewn_case.json"
-    p.parent.mkdir(parents=True, exist_ok=True)
-    p.write_text(json.dumps(case), encoding="utf-8")
-    kp = root / "canonical/governance/H100_OEWN_REAL_LEXICAL_KNOWLEDGE_V1.json"
-    kp.parent.mkdir(parents=True, exist_ok=True)
-    kp.write_bytes(PINNED.read_bytes())
-    return p
+class R2FinanceOEWNSynonymUnlessTests(unittest.TestCase):
+    def setUp(self):
+        self.td = tempfile.TemporaryDirectory()
+        self.root = Path(self.td.name)
+
+    def tearDown(self):
+        self.td.cleanup()
+
+    def _write(self, case):
+        p = self.root / "canonical/tmp/oewn_case.json"
+        p.parent.mkdir(parents=True, exist_ok=True)
+        p.write_text(json.dumps(case), encoding="utf-8")
+        kp = self.root / "canonical/governance/H100_OEWN_REAL_LEXICAL_KNOWLEDGE_V1.json"
+        kp.parent.mkdir(parents=True, exist_ok=True)
+        kp.write_bytes(PINNED.read_bytes())
+        return p
+
+    def test_inferred_synonym_consensus_upshot_to_result_passes(self):
+        self._write(_case())
+        out = direct.run({"task_id": "o1", "goal": _goal()}, repo_root=self.root)
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(out["lexical_binding_mode"], "SENSE_CONSENSUS_SYNONYM")
+        self.assertEqual(out["target_field"], "result")
+        self.assertEqual(out["selected_branch"], "EXCEPTION_BRANCH")
+        self.assertTrue(out["acceptance_receipt"]["producer_independent"])
+
+    def test_context_word_sense_comment_to_input_passes(self):
+        case = _case(
+            cue="comment",
+            field="input",
+            context="A personal opinion belief that adds information from users is relevant.",
+        )
+        self._write(case)
+        out = direct.run({"task_id": "o2", "goal": _goal()}, repo_root=self.root)
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(out["lexical_binding_mode"], "CONTEXT_UNIQUE_TOP_SENSE_SYNONYM")
+        self.assertEqual(out["selected_synsets"], ["06777755-n"])
+
+    def test_context_selecting_non_target_sense_fails_closed(self):
+        case = _case(
+            cue="comment",
+            field="input",
+            context="A written explanation criticism illustration added to a book is relevant.",
+        )
+        self._write(case)
+        out = direct.preflight({"task_id": "o3", "goal": _goal()}, repo_root=self.root)
+        self.assertTrue(out["matched"])
+        self.assertEqual(out["status"], "FAIL_CLOSED")
+        self.assertIn("SELECTED_SENSE_NOT_TARGET_FIELD_SYNONYM", out["reason"])
+
+    def test_ambiguous_polysemy_without_context_fails_closed(self):
+        self._write(_case(cue="comment", field="input", context="Context unavailable."))
+        out = direct.preflight({"task_id": "o4", "goal": _goal()}, repo_root=self.root)
+        self.assertEqual(out["status"], "FAIL_CLOSED")
+        self.assertIn("LEXICAL_SENSE_AMBIGUOUS", out["reason"])
+
+    def test_target_field_must_be_member_of_selected_synset(self):
+        case = _case(field="not_a_member")
+        case["typed_context"], case["typed_context_sha256"] = _ctx("not_a_member", True)
+        self._write(case)
+        out = direct.preflight({"task_id": "o5", "goal": _goal()}, repo_root=self.root)
+        self.assertEqual(out["status"], "FAIL_CLOSED")
+        self.assertIn("TARGET_FIELD_NOT_SYNONYM", out["reason"])
+
+    def test_incomplete_query_tamper_fails_blob_binding(self):
+        case = _case()
+        self._write(case)
+        kp = self.root / case["knowledge_path"]
+        knowledge = json.loads(kp.read_text(encoding="utf-8"))
+        knowledge["queries"]["upshot"]["noun_query_complete"] = False
+        kp.write_text(json.dumps(knowledge), encoding="utf-8")
+        out = direct.preflight({"task_id": "o6", "goal": _goal()}, repo_root=self.root)
+        self.assertEqual(out["status"], "FAIL_CLOSED")
+        self.assertIn("KNOWLEDGE_BLOB_MISMATCH", out["reason"])
+
+    def test_query_completeness_tamper_fails_blob_binding(self):
+        case = _case()
+        self._write(case)
+        kp = self.root / case["knowledge_path"]
+        knowledge = json.loads(kp.read_text(encoding="utf-8"))
+        knowledge["queries"]["upshot"]["records"][0]["members"] = ["not-upshot", "result"]
+        kp.write_text(json.dumps(knowledge), encoding="utf-8")
+        out = direct.preflight({"task_id": "o7", "goal": _goal()}, repo_root=self.root)
+        self.assertEqual(out["status"], "FAIL_CLOSED")
+        self.assertIn("KNOWLEDGE_BLOB_MISMATCH", out["reason"])
+
+    def test_preflight_is_side_effect_free(self):
+        self._write(_case())
+        out = direct.preflight({"task_id": "o8", "goal": _goal()}, repo_root=self.root)
+        self.assertEqual(out["status"], "DIRECT_ADEQUACY_ROUTE_MATCHED", out)
+        self.assertFalse((self.root / "canonical/tmp/oewn_out.json").exists())
+
+    def test_verifier_rejects_tampered_selected_branch(self):
+        case = _case()
+        self._write(case)
+        res = producer.compute(case, repo_root=self.root)
+        res["selected_branch"] = "ORDINARY_BRANCH"
+        checked = verifier.verify(case, res, repo_root=self.root)
+        self.assertFalse(checked["verified"])
+        self.assertIn("MISMATCH:selected_branch", checked["errors"])
+
+    def test_nonmatching_goal_claims_no_scope(self):
+        out = direct.preflight(
+            {"task_id": "o10", "goal": "Analyze this finance policy."},
+            repo_root=self.root,
+        )
+        self.assertFalse(out["matched"])
+        self.assertFalse(out["pass"])
 
 
-def test_inferred_synonym_consensus_upshot_to_result_passes(tmp_path: Path):
-    _write(tmp_path, _case())
-    out = direct.run({"task_id": "o1", "goal": _goal()}, repo_root=tmp_path)
-    assert out["pass"] is True, out
-    assert out["lexical_binding_mode"] == "SENSE_CONSENSUS_SYNONYM"
-    assert out["target_field"] == "result"
-    assert out["selected_branch"] == "EXCEPTION_BRANCH"
-    assert out["acceptance_receipt"]["producer_independent"] is True
-
-
-def test_context_word_sense_comment_to_input_passes(tmp_path: Path):
-    case = _case(
-        cue="comment",
-        field="input",
-        context="A personal opinion belief that adds information from users is relevant.",
-    )
-    _write(tmp_path, case)
-    out = direct.run({"task_id": "o2", "goal": _goal()}, repo_root=tmp_path)
-    assert out["pass"] is True, out
-    assert out["lexical_binding_mode"] == "CONTEXT_UNIQUE_TOP_SENSE_SYNONYM"
-    assert out["selected_synsets"] == ["06777755-n"]
-
-
-def test_context_selecting_non_target_sense_fails_closed(tmp_path: Path):
-    case = _case(
-        cue="comment",
-        field="input",
-        context="A written explanation criticism illustration added to a book is relevant.",
-    )
-    _write(tmp_path, case)
-    out = direct.preflight({"task_id": "o3", "goal": _goal()}, repo_root=tmp_path)
-    assert out["matched"] is True
-    assert out["status"] == "FAIL_CLOSED"
-    assert "SELECTED_SENSE_NOT_TARGET_FIELD_SYNONYM" in out["reason"]
-
-
-def test_ambiguous_polysemy_without_context_fails_closed(tmp_path: Path):
-    case = _case(cue="comment", field="input", context="Context unavailable.")
-    _write(tmp_path, case)
-    out = direct.preflight({"task_id": "o4", "goal": _goal()}, repo_root=tmp_path)
-    assert out["status"] == "FAIL_CLOSED"
-    assert "LEXICAL_SENSE_AMBIGUOUS" in out["reason"]
-
-
-def test_target_field_must_be_member_of_selected_synset(tmp_path: Path):
-    case = _case(field="not_a_member")
-    case["typed_context"], case["typed_context_sha256"] = _ctx("not_a_member", True)
-    _write(tmp_path, case)
-    out = direct.preflight({"task_id": "o5", "goal": _goal()}, repo_root=tmp_path)
-    assert out["status"] == "FAIL_CLOSED"
-    assert "TARGET_FIELD_NOT_SYNONYM" in out["reason"]
-
-
-def test_incomplete_query_fails_closed(tmp_path: Path):
-    case = _case()
-    _write(tmp_path, case)
-    kp = tmp_path / case["knowledge_path"]
-    knowledge = json.loads(kp.read_text(encoding="utf-8"))
-    knowledge["queries"]["upshot"]["noun_query_complete"] = False
-    kp.write_text(json.dumps(knowledge), encoding="utf-8")
-    out = direct.preflight({"task_id": "o6", "goal": _goal()}, repo_root=tmp_path)
-    assert out["status"] == "FAIL_CLOSED"
-    assert "KNOWLEDGE_BLOB_MISMATCH" in out["reason"]
-
-
-def test_query_completeness_tamper_fails_closed(tmp_path: Path):
-    case = _case()
-    _write(tmp_path, case)
-    kp = tmp_path / case["knowledge_path"]
-    knowledge = json.loads(kp.read_text(encoding="utf-8"))
-    knowledge["queries"]["upshot"]["records"][0]["members"] = ["not-upshot", "result"]
-    kp.write_text(json.dumps(knowledge), encoding="utf-8")
-    out = direct.preflight({"task_id": "o7", "goal": _goal()}, repo_root=tmp_path)
-    assert out["status"] == "FAIL_CLOSED"
-    assert "KNOWLEDGE_BLOB_MISMATCH" in out["reason"]
-
-
-def test_preflight_is_side_effect_free(tmp_path: Path):
-    _write(tmp_path, _case())
-    out = direct.preflight({"task_id": "o8", "goal": _goal()}, repo_root=tmp_path)
-    assert out["status"] == "DIRECT_ADEQUACY_ROUTE_MATCHED", out
-    assert not (tmp_path / "canonical/tmp/oewn_out.json").exists()
-
-
-def test_verifier_rejects_tampered_selected_branch(tmp_path: Path):
-    case = _case()
-    _write(tmp_path, case)
-    res = producer.compute(case, repo_root=tmp_path)
-    res["selected_branch"] = "ORDINARY_BRANCH"
-    checked = verifier.verify(case, res, repo_root=tmp_path)
-    assert checked["verified"] is False
-    assert "MISMATCH:selected_branch" in checked["errors"]
-
-
-def test_nonmatching_goal_claims_no_scope(tmp_path: Path):
-    out = direct.preflight(
-        {"task_id": "o10", "goal": "Analyze this finance policy."},
-        repo_root=tmp_path,
-    )
-    assert out["matched"] is False
-    assert out["pass"] is False
+if __name__ == "__main__":
+    unittest.main(verbosity=2)
