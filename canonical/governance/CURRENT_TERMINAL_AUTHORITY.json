@@ -893,6 +893,10 @@
       "status": "ACTIVE_CURRENT_R2_AUTHORITY__V37__TWENTY_SEVEN_DIRECT_ROUTES__TWENTY_FOUR_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_AFTER_NINE_VERIFIED_SUBREGIONS",
       "pointer_semantics": "MUTABLE_CURRENT_POINTER__PATH_IDENTITY_AUTHORITATIVE__IMMUTABLE_SCHEDULER_CUT_HASH_BOUND_BELOW",
       "mutable_pointer_blob_is_not_load_bearing": true
+    },
+    "frontiercode_owner_evaluation_access_refresh_20261009_v2": {
+      "path": "canonical/governance/FRONTIERCODE_OWNER_EVALUATION_ACCESS_REFRESH_20261009_V2.json",
+      "git_blob_sha": "2142821c2b443ea9bb1dfbe0a4dabd6e59a09b6b"
     }
   },
   "live_truth": {
@@ -1410,7 +1414,16 @@
     "r2_verified_finance_positive_subregion_count": 9,
     "r2_primary_internal_unsolved_count": 1,
     "r2_primary_internal_unsolved_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
-    "r2_dormant_alternative_route_count": 1
+    "r2_dormant_alternative_route_count": 1,
+    "frontiercode_owner_evaluation_open_to_model_creators": true,
+    "frontiercode_owner_evaluation_globally_unavailable": false,
+    "frontiercode_public_specific_intake_channel_bound": false,
+    "frontiercode_public_self_run_bound": false,
+    "frontiercode_brain_configured_system_eligibility_bound": false,
+    "frontiercode_owner_admissible_brain_harness_bound": false,
+    "frontiercode_zero_incremental_cost_terms_bound": false,
+    "frontiercode_direct_owner_route_executable": false,
+    "frontiercode_current_classification": "INTERNAL_UNSOLVED__PENDING_ACQUISITION"
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -2389,5 +2402,22 @@
     "remaining_boundary": "FINANCE_CONTEXTS_REQUIRING_AMBIGUOUS_OR_IMPLICIT_COREFERENCE_BEYOND_MODAL_IT_THEY_UNIQUE_THAT_MODE_ELLIPSIS_RESPECTIVELY_OR_EXPLICIT_ORDERED_PAIR_FORMER_LATTER__INFERRED_SYNONYMY_BEYOND_EXPLICIT_ALIASES__CONTEXT_DEPENDENT_WORD_SENSE__ONTOLOGY_OR_DOMAIN_MAPPING__GENERAL_CROSS_DOCUMENT_BINDING_BEYOND_EXACT_LOCAL_JSON_REFERENCE_IDS__OR_EXTERNAL_FACT_AUTHENTICATION_BEYOND_STATE_KEYED_INDEPENDENTLY_REFETCHED_HTTPS_JSON_EXACT_PATH_POLICY",
     "terminal_credit_delta": 0,
     "terminal_remains_false": true
+  },
+  "frontiercode_owner_access_reconciliation_20261009_v2": {
+    "source": {
+      "path": "canonical/governance/FRONTIERCODE_OWNER_EVALUATION_ACCESS_REFRESH_20261009_V2.json",
+      "git_blob_sha": "2142821c2b443ea9bb1dfbe0a4dabd6e59a09b6b"
+    },
+    "result": "OWNER_EVALUATION_EXISTS_IN_PRINCIPLE__EXECUTABLE_REQUEST_CONTRACT_NOT_PUBLICLY_BOUND",
+    "minimum_missing": [
+      "EXACT_FRONTIERCODE_EVALUATION_REQUEST_CHANNEL_OR_OWNER_CONFIRMED_CONTACT_PATH",
+      "BRAIN_CONFIGURED_SYSTEM_ELIGIBILITY_AS_AN_EVALUATION_SUBJECT",
+      "OWNER_ACCEPTED_BRAIN_HARNESS_OR_ADAPTER_INTERFACE",
+      "ZERO_INCREMENTAL_COST_TERMS"
+    ],
+    "externality_proved": false,
+    "execution_authority": false,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
   }
 }
