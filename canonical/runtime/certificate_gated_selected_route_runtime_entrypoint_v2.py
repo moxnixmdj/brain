@@ -1,7 +1,7 @@
 """Certificate-gated selected-route runtime entrypoint v2.
 
-V2 preserves v1 selection mechanics and adds a mandatory content-addressed
-payload-admission validator for every creditable real route. Non-creditable
+V2 preserves v1 selection mechanics and adds mandatory content-addressed
+payload-admission and executable-refinement gates for every creditable real route. Non-creditable
 deployment canaries may remain context-only.
 
 A creditable route cannot execute until the validator attests the exact cell,
@@ -21,6 +21,10 @@ from canonical.runtime.certificate_gated_selected_route_router_v1 import (
     AdmissionReceipt,
     RouterFailClosed,
     select_certified_route,
+)
+from canonical.runtime.creditable_route_refinement_gate_v1 import (
+    RefinementGateFailClosed,
+    verify_creditable_refinement_binding,
 )
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -175,6 +179,10 @@ def _verified_rows(
             raise RuntimeBindingFailClosed(f"ADMISSION_CREDITABLE_MISMATCH:{index}")
 
         if row.get("creditable") is True:
+            try:
+                verify_creditable_refinement_binding(row, repo_root=ROOT)
+            except RefinementGateFailClosed as exc:
+                raise RuntimeBindingFailClosed(str(exc)) from exc
             required = (
                 "payload_validator_path",
                 "payload_validator_blob_sha",
