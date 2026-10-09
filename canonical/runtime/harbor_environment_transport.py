@@ -11,6 +11,9 @@ from dataclasses import dataclass
 from typing import Any, Mapping
 
 
+MAX_EXEC_TIMEOUT_S = 3600
+
+
 class HarborTransportError(RuntimeError):
     pass
 
@@ -38,7 +41,7 @@ class HarborEnvironmentTransport:
             not isinstance(timeout_sec, int)
             or isinstance(timeout_sec, bool)
             or timeout_sec < 1
-            or timeout_sec > 3600
+            or timeout_sec > MAX_EXEC_TIMEOUT_S
         ):
             raise HarborTransportError("TIMEOUT_INVALID")
 
