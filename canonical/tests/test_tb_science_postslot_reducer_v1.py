@@ -1,3 +1,4 @@
+# stdlib-only deterministic verification
 import json
 import math
 from pathlib import Path
