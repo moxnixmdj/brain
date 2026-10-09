@@ -34,7 +34,7 @@
     },
     "direct_adequacy_activation": {
       "path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V18.json",
-      "git_blob_sha": "df0bbe75e31c6df9b6b1987eda4daaa02c3af931"
+      "git_blob_sha": "4095508c34b19eaed64084b66a22916484747029"
     },
     "direct_adequacy_exact_cell_count": 3,
     "policy_cover_information_provider_integration": {
@@ -577,5 +577,13 @@
     "current_fixed_bar_owner_pairwise_semantics_required": false,
     "matched_direct_comparison_route_preserved": true,
     "gdpval_credit_delta": 0
+  },
+  "reconciliation": {
+    "activation_count_invariant_verified": true,
+    "activation_route_count": 22,
+    "activation_exact_cell_count": 3,
+    "activation_bounded_family_count": 19,
+    "activation_route_list_count": 22,
+    "activation_blob_sha": "4095508c34b19eaed64084b66a22916484747029"
   }
 }
