@@ -1,0 +1,151 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_RUNTIME_BYTE_REBIND_PROOF_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__EXACT_RUNTIME_BYTE_REBIND_JUSTIFIED__SEMANTIC_REFINEMENT_SCOPE_LIMITED__ZERO_TERMINAL_CREDIT",
+  "repository": "moxnixmdj/brain",
+  "branch": "impl-executable-refinement-terminal-closure-rebased-20261009",
+  "observed_head_before_rebind": "fa8f44ae46fdf212b588b8160c534bd2fcb983d6",
+  "purpose": "CLOSE_CURRENT_TERMINAL_AUTHORITY_RUNTIME_BYTE_BINDING_COHERENCE_ONLY",
+  "bindings": [
+    {
+      "key_paths": [
+        "authoritative_sources.creditable_router_context_payload_v2.runtime"
+      ],
+      "path": "canonical/runtime/certificate_gated_selected_route_runtime_entrypoint_v2.py",
+      "old_git_blob_sha": "ba260cd997adb8df97417e5f03eaf547b5365379",
+      "new_git_blob_sha": "e6cce56b50bea1261fb3473389a28e8263417930",
+      "proof_class": "EXACT_INDEPENDENT_STRUCTURAL_REPLAY",
+      "evidence": {
+        "path": "canonical/verification/EXECUTABLE_REFINEMENT_STRUCTURAL_FRAMEWORK_SPRITE_VERIFICATION_20261009_V1.json",
+        "git_blob_sha": "81984fda2a10856c55cc46ce6a85e7d4fcaa54e2",
+        "exact_tested_runtime_blob": "e6cce56b50bea1261fb3473389a28e8263417930",
+        "focused_behavior_checks": 31
+      },
+      "semantic_nonclaim": "STRUCTURAL_ANTI_BYPASS_REPLAY_DOES_NOT_PROVE_GENERAL_EXECUTABLE_REFINEMENT"
+    },
+    {
+      "key_paths": [
+        "authoritative_sources.terminal_candidate_donor_independence_audit"
+      ],
+      "path": "canonical/runtime/terminal_candidate_donor_independence_audit_v1.py",
+      "old_git_blob_sha": "0ed69641693538f15b7e1658f5ac5e80031afb26",
+      "new_git_blob_sha": "7b3713267d32f9b4ae7e2ca56ea17c5859bdec71",
+      "proof_class": "MONOTONE_FAIL_CLOSED_COVERAGE_STRENGTHENING",
+      "change_commit": "5b31d444fb8e6588be254765c344fed6828c2ba8",
+      "immediate_parent_blob_matches_old_binding": true,
+      "change_summary": "ONLY_ADDS_ADDITIONAL_FROZEN_ROOT_MODULES_TO_RECURSIVE_DONOR_AUDIT__CAN_ADD_FAILURES_OR_CHECKS__CANNOT_REMOVE_EXISTING_FORBIDDEN_IMPORT_DYNAMIC_EXECUTION_OR_UNCLASSIFIED_DEPENDENCY_GATES",
+      "semantic_nonclaim": "DOES_NOT_BY_ITSELF_PROVE_THE_EXPANDED_DEPENDENCY_CLOSURE_PASSES"
+    },
+    {
+      "key_paths": [
+        "authoritative_sources.terminal_autopilot_executor_v1.runtime"
+      ],
+      "path": "canonical/runtime/terminal_autopilot_executor_v1.py",
+      "old_git_blob_sha": "657a94d00833ad91403070132ef4e1f0d7337336",
+      "new_git_blob_sha": "6f828ce5631db582ea4d4a3d73c59b08f232abf0",
+      "proof_class": "MONOTONE_FAIL_CLOSED_RESULT_PROJECTION_RESTRICTION",
+      "change_commit": "a7a519b60a9e61c8b568d9c1606f0a69604fb878",
+      "immediate_parent_blob_matches_old_binding": true,
+      "change_summary": "ROUTE_RACE_EXECUTE_COMPLETION_NO_LONGER_PROJECTS_RESULT_PRESENT_WITHOUT_SEPARATE_SEMANTIC_VERIFICATION_PROMOTION",
+      "semantic_nonclaim": "DOES_NOT_PROVE_ALL_EXECUTOR_PATHS_OR_LIVENESS"
+    },
+    {
+      "key_paths": [
+        "authoritative_sources.terminal_autopilot_executor_v1.planner"
+      ],
+      "path": "canonical/runtime/terminal_autopilot_v1.py",
+      "old_git_blob_sha": "bb72c160f3be00efedbd5d111b77d956bed2cb11",
+      "new_git_blob_sha": "78fa2cbabf8ed5e70de8b3ed987b510ca033076b",
+      "proof_class": "VERIFIED_BASE_PLUS_AUTHORITY_NONBROADENING_SCHEDULING_REFINEMENTS",
+      "chain": [
+        {
+          "commit": "4aeba4332e97d54d42eb0143c280fad14b3876e7",
+          "blob": "3ebdcdac161d818f88d2a864f9cfce061190f846",
+          "evidence": "COMMIT_RECORDS_EXACT_PLANNER_BYTES_INDEPENDENTLY_REPLAYED_IN_PUBLIC_VERIFICATION_CAPSULE_RUNNER",
+          "authority_effect": "ROUTE_FANOUT_CANDIDATE_ONLY__PROMOTION_AUTHORITY_FALSE__TERMINAL_CREDIT_FALSE"
+        },
+        {
+          "commit": "913d11611138845eca21e8353746e060de0f8ebc",
+          "blob": "ecd9bd467381911ba8990250b3c7f57d12eb08ef",
+          "authority_effect": "ADDS_VERIFIED_PREMISE_COST_METADATA_AND_RANKING_ONLY"
+        },
+        {
+          "commit": "ce46c7eba587a813a8da65e7370fab5a350f4f7d",
+          "blob": "6a3309dc598a1f7587d1bec09006729edbf7440e",
+          "authority_effect": "ADDS_OBJECTIVE_ROUTE_VERIFIED_PREMISE_COST_METADATA_AND_TESTS_ONLY"
+        },
+        {
+          "commit": "0f223442335eef1952fecb28e138ff9d651e8c85",
+          "blob": "78fa2cbabf8ed5e70de8b3ed987b510ca033076b",
+          "authority_effect": "FAILS_CLOSED_ON_UNCOSTED_PROOF_RACES__NARROWS_RANKABLE_ROUTE_SET"
+        }
+      ],
+      "semantic_nonclaim": "BYTE_REBIND_DOES_NOT CLAIM_OPTIMAL_SCHEDULING_OR_BOUNDED_COMPLETION"
+    },
+    {
+      "key_paths": [
+        "terminal_execution_root.runtime_gate"
+      ],
+      "path": "canonical/runtime/terminal_root_decision_gate_v1.py",
+      "old_git_blob_sha": "7c7e0c34cc599c7114fb83421307db2433e2b269",
+      "new_git_blob_sha": "6f546f657900405c628c1eb3575bc1e4ac220aeb",
+      "proof_class": "EXACT_BYTE_INDEPENDENT_REPLAY_AND_FAIL_CLOSED_STRENGTHENING",
+      "change_commit": "2148b81d79e5cbe6879ff17ea17ae5cf37cb9409",
+      "immediate_parent_blob_matches_old_binding": true,
+      "evidence": "COMMIT_RECORDS_INDEPENDENT_EXACT_BYTE_REPLAY_PASS_8_OF_8",
+      "change_summary": "REQUIRES_REAL_CONTENT_ADDRESSED_PROOF_AND_VERIFIER_ARTIFACTS_AND_REJECTS_MISSING_DRIFTED_SELF_CERTIFIED_OR_VERIFIER_MISMATCHED_INPUTS",
+      "semantic_nonclaim": "DOES_NOT_PROVE_THE_TERMINAL_ROOT_PREMISES_ARE_CURRENTLY_SATISFIED"
+    },
+    {
+      "key_paths": [
+        "live_capability_ownership_20261008_v1.unified_fabric",
+        "r1_universal_live_capability_invocation_20261008_v1.unified_fabric"
+      ],
+      "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
+      "old_git_blob_sha": "5badd256e18ab4bad58be862c69ef9e272bf7eb1",
+      "new_git_blob_sha": "5eaea605c4e441ef33180bd76a951a9f973dc40f",
+      "proof_class": "EXACT_ISOLATED_AND_INDEPENDENT_REPLAY",
+      "evidence": {
+        "path": "canonical/verification/DEFAULT_RUNTIME_INTEGRATION_ISOLATED_VERIFY_20261009_V1.json",
+        "git_blob_sha": "714b332d0e3be2bd3f3f7c219d9ba357d635bca3",
+        "exact_runtime_blob": "5eaea605c4e441ef33180bd76a951a9f973dc40f",
+        "public_isolated_run_id": 37953899596,
+        "sprite_replay": true
+      },
+      "semantic_nonclaim": "DEFAULT_RUNTIME_INTEGRATION_RECEIPT_DOES_NOT_PROVE_OPEN_WORLD_SEMANTIC_COMPLETENESS_OR_TERMINALITY"
+    },
+    {
+      "key_paths": [
+        "current_option_preserving_optimization_20261008_v1.runtime"
+      ],
+      "path": "canonical/runtime/option_preserving_capability_optimizer_v1.py",
+      "old_git_blob_sha": null,
+      "new_git_blob_sha": "367478e71b015fb2f4b7cc40dad34f88a7f47238",
+      "proof_class": "EXACT_REMOTE_BEHAVIORAL_REPLAY",
+      "evidence": {
+        "path": "canonical/verification/OPTION_PRESERVING_SCOPED_BEHAVIOR_OVERRIDE_REMOTE_VERIFY_20261009_V1.json",
+        "git_blob_sha": "33ba8ffa2ed908c8b29fee2e3b1f24182f25ad0a",
+        "exact_runtime_blob": "367478e71b015fb2f4b7cc40dad34f88a7f47238",
+        "tests_run": 12,
+        "failures": 0,
+        "errors": 0
+      },
+      "semantic_nonclaim": "NO_EXECUTION_OR_TERMINAL_AUTHORITY_GRANTED_BY_SCOPED_OVERRIDE"
+    }
+  ],
+  "result": {
+    "runtime_paths_covered": 7,
+    "authority_references_covered": 8,
+    "byte_binding_rebind_justified": true,
+    "general_executable_refinement_proved": false,
+    "terminal_authority": false,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_BYTE_BINDING_COHERENCE_PROVES_RUNTIME_SEMANTICS.",
+    "NO_CLAIM_MONOTONE_FAIL_CLOSED_CODE_REFINEMENT_PROVES_LIVENESS.",
+    "NO_CLAIM_PLANNER_REBIND_PROVES_OPTIMAL_OR_COMPLETE_SCHEDULING.",
+    "NO_CLAIM_EXECUTABLE_REFINEMENT_SEMANTIC_PROOF_ROUTE_IS_CLOSED.",
+    "NO_TERMINAL_OR_CAPABILITY_CREDIT_FROM_REBINDING."
+  ]
+}
