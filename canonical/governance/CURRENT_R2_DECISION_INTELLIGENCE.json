@@ -23,7 +23,7 @@
   },
   "direct_adequacy": {
     "activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V19.json",
-    "activation_git_blob_sha": "c29fa1a8480bf2deaca7b3d818f48b6797f419d0",
+    "activation_git_blob_sha": "a62cfd2f117cd334febdbe9e447401b0f03e0327",
     "exact_cell_count": 3,
     "bounded_family_count": 20,
     "current_route_count": 23,
@@ -616,7 +616,7 @@
   "finance_explicit_definition_direct_adequacy": {
     "route_id": "DIRECT_ADEQUACY::FINANCE_EXPLICIT_DEFINITION_UNLESS_FAMILY_V1",
     "activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V19.json",
-    "activation_git_blob_sha": "c29fa1a8480bf2deaca7b3d818f48b6797f419d0",
+    "activation_git_blob_sha": "a62cfd2f117cd334febdbe9e447401b0f03e0327",
     "verification_path": "canonical/verification/R2_FINANCE_EXPLICIT_DEFINITION_UNLESS_DIRECT_ADEQUACY_VERIFY_20261009_V1.json",
     "verification_git_blob_sha": "3f628acd089b42420bf00d4a787655f999a3d2d2",
     "authority_added": "BOUNDED_DIRECT_ADEQUACY_ONLY",
@@ -630,7 +630,7 @@
   "finance_normalized_source_universe_direct_adequacy": {
     "route_id": "DIRECT_ADEQUACY::FINANCE_NORMALIZED_SOURCE_UNIVERSE_FAMILY_V1",
     "activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V19.json",
-    "activation_git_blob_sha": "c29fa1a8480bf2deaca7b3d818f48b6797f419d0",
+    "activation_git_blob_sha": "a62cfd2f117cd334febdbe9e447401b0f03e0327",
     "verification_path": "canonical/verification/R2_FINANCE_NORMALIZED_SOURCE_UNIVERSE_DIRECT_ADEQUACY_VERIFY_20261009_V2.json",
     "verification_git_blob_sha": "f3a340593a17a849381bde9ef0cc3633ce006a43",
     "authority_added": "BOUNDED_DIRECT_ADEQUACY_ONLY",
