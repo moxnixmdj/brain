@@ -1,0 +1,135 @@
+"""Fail-closed validator for the coverage-completeness root certificate registry."""
+
+from __future__ import annotations
+
+from typing import Any, Mapping
+
+
+SCHEMA = "PROJECT_BRAIN_COVERAGE_COMPLETENESS_ROOT_CERTIFICATE_REGISTRY_V1"
+NAMESPACE = "PROJECT_BRAIN_COVERAGE_COMPLETENESS_ROOTS_V1"
+ROOTS = (
+    ("CC_R1_REALITY_CONTAINMENT_V1", "R1", "B_real SUBSETEQ B_plus"),
+    ("CC_R2_MISSION_SOUNDNESS_V1", "R2", "G_minus SUBSETEQ G_real"),
+    ("CC_R3_TERMINAL_CLOSURE_V1", "R3", "B_plus SUBSETEQ G_minus"),
+    ("CC_R4_PROOF_AUTHORITY_V1", "R4", "TRUSTWORTHY_PROOF_AND_REALIZATION(CC_R1,CC_R2,CC_R3)"),
+)
+CERTIFICATE_ROOT_IDS = tuple(x[0] for x in ROOTS[:3])
+ALLOWED_SLOT_STATUSES = frozenset({"OPEN_NO_GLOBAL_CERTIFICATE_BOUND", "PROVED_CURRENT"})
+
+
+def validate(registry: Mapping[str, Any], *, current_mission_blob_sha: str) -> dict[str, Any]:
+    errors: list[str] = []
+    if not isinstance(registry, Mapping):
+        return {"pass": False, "status": "FAIL_CLOSED", "errors": ["REGISTRY_NOT_OBJECT"], "terminal_credit_delta": 0}
+
+    if registry.get("schema") != SCHEMA:
+        errors.append("SCHEMA_DRIFT")
+    if registry.get("namespace") != NAMESPACE:
+        errors.append("NAMESPACE_DRIFT")
+
+    mission = registry.get("mission_binding") or {}
+    if mission.get("path") != "canonical/governance/CURRENT_MISSION_OBJECTIVE.json":
+        errors.append("MISSION_PATH_DRIFT")
+    if mission.get("git_blob_sha") != current_mission_blob_sha:
+        errors.append("MISSION_BLOB_STALE")
+
+    identities = registry.get("root_identities")
+    if not isinstance(identities, list) or len(identities) != 4:
+        errors.append("ROOT_IDENTITIES_SHAPE_INVALID")
+        identities = []
+    else:
+        seen: set[str] = set()
+        for i, expected in enumerate(ROOTS):
+            row = identities[i]
+            if not isinstance(row, Mapping):
+                errors.append(f"ROOT_IDENTITY_NOT_OBJECT:{i}")
+                continue
+            cid, alias, claim = expected
+            if row.get("canonical_id") != cid:
+                errors.append(f"CANONICAL_ROOT_ID_DRIFT:{i}")
+            if row.get("display_alias") != alias:
+                errors.append(f"DISPLAY_ALIAS_DRIFT:{i}")
+            if row.get("claim") != claim:
+                errors.append(f"ROOT_CLAIM_DRIFT:{i}")
+            if row.get("canonical_id") in seen:
+                errors.append(f"DUPLICATE_CANONICAL_ROOT_ID:{i}")
+            seen.add(row.get("canonical_id"))
+
+    alias = registry.get("alias_policy") or {}
+    if alias.get("short_aliases_are_display_only") is not True:
+        errors.append("SHORT_ALIAS_AUTHORITY_ENABLED")
+    if alias.get("short_aliases_have_zero_cross_artifact_authority") is not True:
+        errors.append("SHORT_ALIAS_CROSS_ARTIFACT_AUTHORITY_ENABLED")
+    if alias.get("cross_artifact_binding_requires_namespace_and_canonical_id") is not True:
+        errors.append("CANONICAL_ID_BINDING_NOT_REQUIRED")
+
+    slots = registry.get("certificate_slots")
+    if not isinstance(slots, list) or len(slots) != 3:
+        errors.append("CERTIFICATE_SLOT_SHAPE_INVALID")
+        slots = []
+
+    open_ids: list[str] = []
+    proved_ids: list[str] = []
+    seen_slots: set[str] = set()
+    for i, slot in enumerate(slots):
+        if not isinstance(slot, Mapping):
+            errors.append(f"CERTIFICATE_SLOT_NOT_OBJECT:{i}")
+            continue
+        root_id = slot.get("root_id")
+        if root_id not in CERTIFICATE_ROOT_IDS:
+            errors.append(f"INVALID_CERTIFICATE_ROOT_ID:{root_id}")
+            continue
+        if root_id in seen_slots:
+            errors.append(f"DUPLICATE_CERTIFICATE_SLOT:{root_id}")
+        seen_slots.add(root_id)
+        status = slot.get("status")
+        if status not in ALLOWED_SLOT_STATUSES:
+            errors.append(f"INVALID_CERTIFICATE_STATUS:{root_id}")
+            continue
+
+        if status == "OPEN_NO_GLOBAL_CERTIFICATE_BOUND":
+            open_ids.append(root_id)
+            if slot.get("certificate") is not None or slot.get("independent_verification") is not None:
+                errors.append(f"OPEN_SLOT_HAS_AUTHORITY_PAYLOAD:{root_id}")
+        else:
+            proved_ids.append(root_id)
+            cert = slot.get("certificate")
+            verify = slot.get("independent_verification")
+            if not isinstance(cert, Mapping):
+                errors.append(f"PROVED_SLOT_CERTIFICATE_MISSING:{root_id}")
+            else:
+                if cert.get("root_id") != root_id:
+                    errors.append(f"PROVED_SLOT_ROOT_ID_MISMATCH:{root_id}")
+                if cert.get("mission_blob_sha") != current_mission_blob_sha:
+                    errors.append(f"PROVED_SLOT_MISSION_DRIFT:{root_id}")
+                if not isinstance(cert.get("path"), str) or not isinstance(cert.get("git_blob_sha"), str):
+                    errors.append(f"PROVED_SLOT_CONTENT_ADDRESS_MISSING:{root_id}")
+            if not isinstance(verify, Mapping) or not isinstance(verify.get("path"), str) or not isinstance(verify.get("git_blob_sha"), str):
+                errors.append(f"PROVED_SLOT_INDEPENDENT_VERIFICATION_MISSING:{root_id}")
+
+    if set(seen_slots) != set(CERTIFICATE_ROOT_IDS):
+        errors.append("CERTIFICATE_SLOT_COVERAGE_INCOMPLETE")
+
+    claimed_proved = registry.get("currently_proved_root_certificates")
+    claimed_open = registry.get("currently_open_root_certificates")
+    if claimed_proved != len(proved_ids):
+        errors.append("PROVED_COUNT_DRIFT")
+    if claimed_open != len(open_ids):
+        errors.append("OPEN_COUNT_DRIFT")
+
+    proof_closed = len(proved_ids) == 3 and not errors
+    if registry.get("r4_proof_closure") is not proof_closed:
+        errors.append("R4_PROOF_CLOSURE_FLAG_DRIFT")
+
+    if (registry.get("accounting") or {}).get("terminal_credit_delta") != 0:
+        errors.append("UNAUTHORIZED_TERMINAL_CREDIT")
+
+    return {
+        "pass": not errors,
+        "status": "PASS__ROOT_CERTIFICATE_REGISTRY" if not errors else "FAIL_CLOSED",
+        "errors": errors,
+        "open_root_ids": open_ids,
+        "proved_root_ids": proved_ids,
+        "r4_proof_closure": proof_closed,
+        "terminal_credit_delta": 0,
+    }

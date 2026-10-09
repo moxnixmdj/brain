@@ -1,0 +1,73 @@
+{
+  "schema": "PROJECT_BRAIN_COVERAGE_COMPLETENESS_ROOT_CERTIFICATE_REGISTRY_V1",
+  "date": "2026-10-09",
+  "status": "ACTIVE_OPEN_REGISTRY__THREE_ROOT_CERTIFICATE_OBLIGATIONS__ZERO_PROVED__ZERO_CREDIT",
+  "namespace": "PROJECT_BRAIN_COVERAGE_COMPLETENESS_ROOTS_V1",
+  "mission_binding": {
+    "path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
+    "git_blob_sha": "52b98f8019938fa7d8164e6a47e359ffb0faeb6a",
+    "real_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE"
+  },
+  "root_identities": [
+    {
+      "canonical_id": "CC_R1_REALITY_CONTAINMENT_V1",
+      "display_alias": "R1",
+      "claim": "B_real SUBSETEQ B_plus"
+    },
+    {
+      "canonical_id": "CC_R2_MISSION_SOUNDNESS_V1",
+      "display_alias": "R2",
+      "claim": "G_minus SUBSETEQ G_real"
+    },
+    {
+      "canonical_id": "CC_R3_TERMINAL_CLOSURE_V1",
+      "display_alias": "R3",
+      "claim": "B_plus SUBSETEQ G_minus"
+    },
+    {
+      "canonical_id": "CC_R4_PROOF_AUTHORITY_V1",
+      "display_alias": "R4",
+      "claim": "TRUSTWORTHY_PROOF_AND_REALIZATION(CC_R1,CC_R2,CC_R3)",
+      "meta_level": true
+    }
+  ],
+  "certificate_slots": [
+    {
+      "root_id": "CC_R1_REALITY_CONTAINMENT_V1",
+      "status": "OPEN_NO_GLOBAL_CERTIFICATE_BOUND",
+      "certificate": null,
+      "independent_verification": null
+    },
+    {
+      "root_id": "CC_R2_MISSION_SOUNDNESS_V1",
+      "status": "OPEN_NO_GLOBAL_CERTIFICATE_BOUND",
+      "certificate": null,
+      "independent_verification": null
+    },
+    {
+      "root_id": "CC_R3_TERMINAL_CLOSURE_V1",
+      "status": "OPEN_NO_GLOBAL_CERTIFICATE_BOUND",
+      "certificate": null,
+      "independent_verification": null
+    }
+  ],
+  "alias_policy": {
+    "short_aliases_are_display_only": true,
+    "short_aliases_have_zero_cross_artifact_authority": true,
+    "cross_artifact_binding_requires_namespace_and_canonical_id": true,
+    "existing_unrelated_label_examples": [
+      "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+      "canonical/governance/R3_ZERO_RESIDUAL_TERMINAL_TRUTH_RECONCILIATION_20261009_V1.json"
+    ],
+    "hard_rule": "AN_UNRELATED_R2_OR_R3_RECEIPT_CANNOT_SATISFY_CC_R2_OR_CC_R3_BY_NAME_MATCH"
+  },
+  "proof_closure_rule": "R4_PROOF_CLOSURE_REQUIRES_ALL_THREE_CERTIFICATE_SLOTS_PROVED_CURRENT_WITH_CONTENT_ADDRESSED_CERTIFICATE_INDEPENDENT_VERIFICATION_EXACT_CURRENT_MISSION_BINDING_AND_EXACT_CANONICAL_ROOT_ID",
+  "currently_proved_root_certificates": 0,
+  "currently_open_root_certificates": 3,
+  "r4_proof_closure": false,
+  "accounting": {
+    "fresh_reality_units_consumed": 0,
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
