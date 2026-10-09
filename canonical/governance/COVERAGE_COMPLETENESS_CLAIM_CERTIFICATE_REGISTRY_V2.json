@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_COVERAGE_COMPLETENESS_CLAIM_CERTIFICATE_REGISTRY_V2",
+  "date": "2026-10-09",
+  "status": "ACTIVE_CLAIM_SCOPED_REGISTRY__ZERO_REGISTERED_CLAIMS__ZERO_CREDIT",
+  "namespace": "PROJECT_BRAIN_COVERAGE_COMPLETENESS_ROOTS_V1",
+  "mission_binding": {
+    "pointer_path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
+    "authority_path": "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+    "authority_git_blob_sha": "13c470645b037bbb46245c687dd35197b420d51a",
+    "real_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE"
+  },
+  "claim_binding_fields": [
+    "claim_id",
+    "scope_sha256",
+    "semantics_sha256",
+    "carrier_schema_id",
+    "mission_id",
+    "epoch_id",
+    "canonical_generation"
+  ],
+  "canonical_root_ids": [
+    "CC_R1_REALITY_CONTAINMENT_V1",
+    "CC_R2_MISSION_SOUNDNESS_V1",
+    "CC_R3_TERMINAL_CLOSURE_V1"
+  ],
+  "claims": [],
+  "global_mission_completion_derivable": false,
+  "transport_rule": "NO_ROOT_CERTIFICATE_TRANSPORT_ACROSS_CLAIM_BINDINGS_WITHOUT_EXPLICIT_PRESERVATION_PROOF_AND_REISSUANCE_IN_THE_TARGET_CLAIM_BUNDLE",
+  "accounting": {
+    "fresh_reality_units_consumed": 0,
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
