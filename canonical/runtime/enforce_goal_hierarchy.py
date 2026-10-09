@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Fail-closed anti-drift validator for frontier-sensitive changes."""
 from __future__ import annotations
-import argparse, base64, hashlib, json, os, pathlib, subprocess, sys, urllib.parse, urllib.request
+import argparse, base64, hashlib, importlib.util, json, os, pathlib, subprocess, sys, urllib.parse, urllib.request
 from datetime import datetime, timezone, timedelta
 
 try:
@@ -730,6 +730,46 @@ def enforce_blocker_lease(intent):
         else:
             fail(f"DUPLICATE_BLOCKER_LEASE_OPEN_PR:{peer_pr}")
 
+def enforce_external_side_effect_admission(intent):
+    if intent.get("external_side_effect") is not True:
+        return
+    admission=intent.get("external_side_effect_admission")
+    if not isinstance(admission,dict):
+        fail("EXTERNAL_SIDE_EFFECT_ADMISSION_MISSING")
+        return
+    if admission.get("computed_before_side_effect") is not True:
+        fail("EXTERNAL_SIDE_EFFECT_ADMISSION_NOT_PRECOMMITTED")
+        return
+    payload=admission.get("input")
+    if not isinstance(payload,dict):
+        fail("EXTERNAL_SIDE_EFFECT_ADMISSION_INPUT_MISSING")
+        return
+    runtime_path=ROOT/"canonical/runtime/external_side_effect_admission_v1.py"
+    try:
+        spec=importlib.util.spec_from_file_location(
+            "project_brain_external_side_effect_guard",
+            runtime_path,
+        )
+        if spec is None or spec.loader is None:
+            raise RuntimeError("SPEC_LOAD_FAILED")
+        module=importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        result=module.evaluate(payload)
+    except Exception as exc:
+        fail(
+            "EXTERNAL_SIDE_EFFECT_ADMISSION_RECOMPUTE_FAILED:"
+            +type(exc).__name__+":"+str(exc)
+        )
+        return
+    if result.get("pass") is not True or result.get("admitted") is not True:
+        fail("EXTERNAL_SIDE_EFFECT_NOT_ADMISSIBLE:"+str(result.get("status") or "UNKNOWN"))
+        return
+    expected=str(admission.get("admission_digest") or "")
+    actual=str(result.get("admission_digest") or "")
+    if not expected or expected!=actual:
+        fail("EXTERNAL_SIDE_EFFECT_ADMISSION_DIGEST_MISMATCH")
+
+
 def enforce_target_continuity(intent,base,hierarchy):
     action_kind=str(intent.get("action_kind") or "")
     try:
@@ -1134,6 +1174,7 @@ def main():
     if intent:
         enforce_v22_prewrite_admission(intent,ns.base)
         enforce_blocker_lease(intent)
+        enforce_external_side_effect_admission(intent)
         enforce_recursive_obs(intent,files,ns.base)
         enforce_target_continuity(intent,ns.base,hierarchy)
         enforce_promotion_truth(intent,files,ns.base)
