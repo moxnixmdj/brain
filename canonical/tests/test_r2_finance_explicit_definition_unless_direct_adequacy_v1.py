@@ -207,3 +207,28 @@ def test_nonmatching_goal_claims_no_scope(tmp_path: Path):
     )
     assert out["matched"] is False
     assert out["pass"] is False
+
+def test_fixed_point_front_door_closes_explicit_definition_route_at_step_zero(tmp_path: Path):
+    from canonical.runtime import general_adequate_decision_fixed_point_v2 as fixed
+
+    _write(tmp_path, _case_bool(True))
+    out = fixed.run(
+        {"task_id": "finance-def-live", "goal": _goal()},
+        repo_root=tmp_path,
+    )
+    assert out["pass"] is True, out
+    assert out["route_id"] == d.ROUTE_ID
+    assert out["r2_fixed_point_status"] == "PASS__R2_DIRECT_END_TO_END_ADEQUACY_CLOSED"
+    assert out["r2_fixed_point_steps"] == 0
+    assert out["r2_fixed_point_trace"][0]["kind"] == "DIRECT_END_TO_END_ADEQUACY"
+
+
+def test_v3_router_falls_back_exactly_to_v2_for_non_definition_goal(tmp_path: Path):
+    from canonical.runtime import r2_direct_end_to_end_adequacy_v2 as v2
+    from canonical.runtime import r2_direct_end_to_end_adequacy_v3 as v3
+
+    request = {"task_id": "fallback", "goal": 'Reply with exactly "HELLO".'}
+    assert v3.preflight(request, repo_root=tmp_path) == v2.preflight(
+        request, repo_root=tmp_path
+    )
+
