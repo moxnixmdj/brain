@@ -594,7 +594,9 @@
     },
     "terminal_candidate_donor_independence_audit": {
       "path": "canonical/runtime/terminal_candidate_donor_independence_audit_v1.py",
-      "git_blob_sha": "0ed69641693538f15b7e1658f5ac5e80031afb26"
+      "git_blob_sha": "0ed69641693538f15b7e1658f5ac5e80031afb26",
+      "current_byte_binding_verified": false,
+      "current_byte_status": "OPEN__BYTE_DRIFT_FROM_BOUND_AUTHORITY"
     },
     "adaptive_positive_cover_fixed_point_v2": {
       "path": "canonical/governance/ADAPTIVE_ABSTRACT_POSITIVE_COVER_FIXED_POINT_THEOREM_20261007_V2.json"
@@ -779,7 +781,9 @@
         "path": "canonical/runtime/terminal_autopilot_v1.py",
         "git_blob_sha": "bb72c160f3be00efedbd5d111b77d956bed2cb11"
       },
-      "role": "ACTIVE_GATED_CONCURRENT_EXECUTOR__REVERSIBLE_ZERO_REALITY_AND_INDEPENDENT_VERIFY__PER_TASK_CONTENT_BOUND_PROMOTION__NO_IRREVERSIBLE_BENCHMARK_AUTOEXECUTION"
+      "role": "ACTIVE_GATED_CONCURRENT_EXECUTOR__REVERSIBLE_ZERO_REALITY_AND_INDEPENDENT_VERIFY__PER_TASK_CONTENT_BOUND_PROMOTION__NO_IRREVERSIBLE_BENCHMARK_AUTOEXECUTION",
+      "current_byte_binding_verified": false,
+      "current_byte_status": "OPEN__PLANNER_AND_EXECUTOR_BYTES_DRIFT_FROM_ACTIVATION"
     },
     "gdpval_public_220_composed_semantic_localization_public_execution": {
       "path": "canonical/evidence/GDPVAL_PUBLIC_220_COMPOSED_SEMANTIC_LOCALIZATION_PUBLIC_EXECUTION_RECEIPT_20261007_V1.json",
@@ -1229,6 +1233,21 @@
       "path": "canonical/verification/EXECUTABLE_REFINEMENT_STRUCTURAL_FRAMEWORK_SPRITE_VERIFICATION_20261009_V1.json",
       "git_blob_sha": "81984fda2a10856c55cc46ce6a85e7d4fcaa54e2",
       "note": "INDEPENDENT_SPRITE_EXECUTION_OF_STRUCTURAL_REFINEMENT_FRAMEWORK__31_FOCUSED_BEHAVIOR_CHECKS__ZERO_TERMINAL_CREDIT__SEMANTIC_REFINEMENT_OPEN"
+    },
+    "current_authority_runtime_binding_census_verifier": {
+      "path": "canonical/runtime/current_authority_runtime_binding_census_v1.py",
+      "git_blob_sha": "e8746d141989f5279c66931d9cc9167504034b98",
+      "note": "FAIL_CLOSED_CURRENT_VS_SUPERSEDED_RUNTIME_BYTE_BINDING_CENSUS__NO_SEMANTIC_OR_TERMINAL_AUTHORITY"
+    },
+    "current_authority_runtime_binding_census_verification": {
+      "path": "canonical/verification/CURRENT_AUTHORITY_RUNTIME_BINDING_CENSUS_SPRITE_VERIFICATION_20261009_V1.json",
+      "git_blob_sha": "e78149062926ee7e11ca3dc15bfc61054c269761",
+      "note": "7_OF_7_FOCUSED_VERIFIER_CHECKS_PASS_ON_EXISTING_ZERO_SPEND_SPRITE"
+    },
+    "current_authority_runtime_binding_connector_census": {
+      "path": "canonical/verification/CURRENT_AUTHORITY_RUNTIME_BINDING_CONNECTOR_CENSUS_20261009_V1.json",
+      "git_blob_sha": "7bd365c56d24b46cc5c924c339dc0838566e31cf",
+      "note": "EXACT_GITHUB_BRANCH_BLOB_SCAN__CURRENT_BYTE_COHERENCE_FALSE"
     }
   },
   "live_truth": {
@@ -1994,7 +2013,16 @@
     "runtime_binding_precedence_reconciled": true,
     "executable_refinement_structural_framework_independent_replay_verified": true,
     "executable_refinement_semantic_proof_route_closed": false,
-    "executable_refinement_structural_resource_bound_closed": false
+    "executable_refinement_structural_resource_bound_closed": false,
+    "current_authority_runtime_byte_binding_coherence": false,
+    "current_authority_runtime_binding_reference_count": 45,
+    "current_authority_runtime_unique_path_count": 39,
+    "current_authority_runtime_drift_reference_count": 6,
+    "current_authority_runtime_drift_unique_path_count": 5,
+    "current_authority_runtime_missing_blob_binding_count": 1,
+    "current_authority_runtime_drift_is_external_impossibility": false,
+    "current_authority_runtime_binding_classification": "INTERNAL_UNRESOLVED__CURRENT_BYTE_DRIFT_AND_MISSING_BINDING",
+    "r1_current_byte_drift_lock_valid": false
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -2162,7 +2190,9 @@
     "NO_CLAIM_BRAIN_OWNED_SEMANTIC_EDGE_EXECUTABLE_REFINEMENT_IS VERIFIED.",
     "NO_CLAIM_REPOSITORY_WIDE_OR_ALL_CREDITABLE_LIVE_ROUTE_EXECUTABLE_REFINEMENT_IS CLOSED.",
     "NO_CLAIM_SELECTED_ROUTE_REFINEMENT_ADMISSION_ENFORCEMENT_CLOSES_NON_SELECTED_RUNTIME_EXECUTABLE_REFINEMENT.",
-    "NO_CLAIM_STRUCTURAL_FRAMEWORK_REPLAY_PROVES_SEMANTIC_EXECUTABLE_REFINEMENT."
+    "NO_CLAIM_STRUCTURAL_FRAMEWORK_REPLAY_PROVES_SEMANTIC_EXECUTABLE_REFINEMENT.",
+    "NO_CLAIM_PRIOR_CURRENT_BYTE_RESEAL_RECEIPTS_VERIFY_RUNTIME_BYTES_CHANGED_AFTER_THOSE_RECEIPTS.",
+    "NO_CLAIM_CURRENT_RUNTIME_BLOB_DRIFT_CAN_BE_CLOSED_BY_UPDATING_HASHES_WITHOUT_CURRENT_BYTE_VERIFICATION."
   ],
   "accounting": {
     "incremental_spend_usd": 0,
@@ -2242,7 +2272,9 @@
       "git_blob_sha": "4cb8e472dd4f8a8f65abd278cada8508d4ba47d0",
       "tests_path": "canonical/tests/test_exact_sound_db_admission_convergence_v1.py",
       "tests_git_blob_sha": "e4130b4e3401d382e27e233a02c2447e6c07d459"
-    }
+    },
+    "current_runtime_gate_binding_verified": false,
+    "current_runtime_gate_status": "OPEN__RUNTIME_GATE_BYTE_DRIFT"
   },
   "zero_bureaucracy_truth_reconciliation_20261007_v1": {
     "status": "BOUND_EXISTING_PROOF_INTO_LIVE_AUTHORITY__NO_TERMINAL_CREDIT",
@@ -2571,7 +2603,7 @@
       "git_blob_sha": "9becd33679c2f839df854c48fb14ead568128646",
       "status": "PASS__R1_CURRENT_BYTE_ARCHITECTURE_RESEALED__9_OF_9_FOCUSED_REGRESSION"
     },
-    "r1_drift_locked": true,
+    "r1_drift_locked": false,
     "verification_status": "PASS__R1_CURRENT_BYTE_ARCHITECTURE_RESEALED__9_OF_9_FOCUSED_REGRESSION",
     "live_composition": {
       "path": "canonical/runtime/live_capability_composition_v1.py",
@@ -2592,7 +2624,9 @@
       "learnable": true,
       "reusable": true
     },
-    "capability_lifecycle_complete": true
+    "capability_lifecycle_complete": true,
+    "current_byte_binding_status": "OPEN__CURRENT_UNIFIED_FABRIC_BYTE_DRIFT_AFTER_PRIOR_RESEAL",
+    "r1_structural_closure_current_byte_verified": false
   },
   "r1_universal_live_capability_invocation_20261008_v1": {
     "status": "ACTIVE_FAIL_CLOSED_UNIVERSAL_LIVE_CAPABILITY_INVOCATION__V3_FRONT_DOOR_BOUND",
@@ -2656,7 +2690,9 @@
       "learnable": true,
       "reusable": true
     },
-    "capability_lifecycle_complete": true
+    "capability_lifecycle_complete": true,
+    "current_byte_binding_status": "OPEN__CURRENT_UNIFIED_FABRIC_BYTE_DRIFT_AFTER_PRIOR_RESEAL",
+    "current_byte_invocation_closure_verified": false
   },
   "current_option_preserving_optimization_20261008_v1": {
     "status": "ACTIVE_FAIL_CLOSED_OPTION_PRESERVATION_LAW",
@@ -2674,7 +2710,9 @@
     "verification": {
       "path": "canonical/verification/OPTION_PRESERVING_CAPABILITY_OPTIMIZER_INDEPENDENT_VERIFICATION_20261008_V1.json",
       "status": "PASS__OPTION_PRESERVING_OPTIMIZER_AND_SCHEDULER_REGRESSION__16_OF_16__GOVERNANCE_PASS"
-    }
+    },
+    "current_runtime_blob_binding_verified": false,
+    "current_runtime_blob_binding_status": "OPEN__CURRENT_RUNTIME_SHA_NOT_BOUND"
   },
   "checkpoint_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "objective_precedence": {
@@ -3694,6 +3732,11 @@
     "runtime_binding_precedence_reconciled": true,
     "structural_framework_execution_verified": true,
     "semantic_proof_route_closed": false,
-    "structural_resource_bound_closed": false
+    "structural_resource_bound_closed": false,
+    "current_authority_runtime_byte_binding_coherence": false,
+    "current_authority_runtime_drift_reference_count": 6,
+    "current_authority_runtime_drift_unique_path_count": 5,
+    "current_authority_runtime_missing_blob_binding_count": 1,
+    "current_authority_runtime_binding_census_verified": true
   }
 }
