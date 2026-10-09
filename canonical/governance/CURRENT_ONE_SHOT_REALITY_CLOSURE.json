@@ -88,12 +88,12 @@
     "fibo_q2_2026_full_release_source_file_count": 295,
     "fibo_q2_2026_full_release_concept_count": 2671,
     "fibo_q2_2026_full_release_direct_subclass_edge_count": 3443,
-    "current_r2_semantic_revision": "V56_V54_FULL_FIBO_SET_RELATION_PLUS_OEWN_RELEASE_SENSE_UNIVERSE_PLUS_SEC_INLINE_XBRL_STANDARD_FASB_FIELD_SEMANTICS",
+    "current_r2_semantic_revision": "V56_V54_FULL_FIBO_SET_RELATION_PLUS_OEWN_RELEASE_SENSE_UNIVERSE_PLUS_SEC_INLINE_XBRL_STANDARD_FASB_FIELD_SEMANTICS_PLUS_REGCAP_CONTEXTUAL_RELATIVE_SELECTION",
     "current_r2_pointer_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
-    "current_r2_pointer_git_blob_sha": "07120fcb2b9ceebb065849122f5a685dd85d7ec6",
+    "current_r2_pointer_git_blob_sha": "17c8f109140f172e173ebb85a5275b75b8de9fbe",
     "current_terminal_authority_path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
-    "current_terminal_authority_git_blob_sha": "3f8207f72bf0685883253924c9089dbda0bda1f0",
-    "current_terminal_authority_pointer_revision": 96,
+    "current_terminal_authority_git_blob_sha": "e12a504e117a49a6d08f7f2a7e1f6f6dd204f430",
+    "current_terminal_authority_pointer_revision": 98,
     "r2_source_explicit_semantic_autofill_bound": true,
     "r2_unrecognized_prose_remains_semantic_top": true,
     "coding_registered_conditioned_policy_count": 2,
@@ -251,12 +251,12 @@
   },
   "current_projection_refresh_20261009": {
     "status": "LAST_VERIFIED_SNAPSHOT__NONAUTHORITATIVE_FOR_MOVING_R2_AND_TERMINAL__DYNAMIC_PROJECTION_REQUIRED",
-    "source_main_head": "0e7899926a61ca41c866e95debbf801cac69cd64",
+    "source_main_head": "4674409e8f607ed603d2cc23b4f5f168814610bd",
     "one_shot_v1_runtime_git_blob_sha": "117d85bec1e5fb49428271aa9883e89d0ef1aa0a",
     "one_shot_v2_runtime_git_blob_sha": "e4eb89ab3872a79837afd0e2a4bbc3f777b7a807",
-    "current_r2_pointer_git_blob_sha": "07120fcb2b9ceebb065849122f5a685dd85d7ec6",
-    "current_terminal_authority_git_blob_sha": "3f8207f72bf0685883253924c9089dbda0bda1f0",
-    "current_terminal_authority_pointer_revision": 96,
+    "current_r2_pointer_git_blob_sha": "17c8f109140f172e173ebb85a5275b75b8de9fbe",
+    "current_terminal_authority_git_blob_sha": "e12a504e117a49a6d08f7f2a7e1f6f6dd204f430",
+    "current_terminal_authority_pointer_revision": 98,
     "terminal_credit_delta": 0,
     "infrastructure_failclosed_verified": true,
     "snapshot_authoritative": false
@@ -276,10 +276,10 @@
     "terminal_credit_delta": 0
   },
   "current_main_v56_projection_reconciliation": {
-    "status": "RECONCILED__ONE_SHOT_FRONTDOOR_SEES_CURRENT_R2_V56_V54_AND_TERMINAL_REVISION_96__FINANCE_ACCEPTANCE_ROUTE_SPLIT_PRESERVED__TERMINAL_FALSE",
-    "current_r2_pointer_git_blob_sha": "07120fcb2b9ceebb065849122f5a685dd85d7ec6",
-    "current_terminal_authority_git_blob_sha": "3f8207f72bf0685883253924c9089dbda0bda1f0",
-    "current_terminal_authority_pointer_revision": 96,
+    "status": "RECONCILED__ONE_SHOT_FRONTDOOR_SEES_CURRENT_R2_V56_V54_AND_TERMINAL_REVISION_97__REGCAP_CONTEXTUAL_RELATIVE_SELECTION_BOUND__FINANCE_ACCEPTANCE_ROUTE_SPLIT_PRESERVED__TERMINAL_FALSE",
+    "current_r2_pointer_git_blob_sha": "17c8f109140f172e173ebb85a5275b75b8de9fbe",
+    "current_terminal_authority_git_blob_sha": "e12a504e117a49a6d08f7f2a7e1f6f6dd204f430",
+    "current_terminal_authority_pointer_revision": 98,
     "scheduler_cut_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V54.json",
     "scheduler_cut_git_blob_sha": "9af38f747794c1f953962d1c647dd459446fef37",
     "direct_route_count": 35,
@@ -288,6 +288,8 @@
     "r3_current_internal_unsolved": false,
     "finance_acceptance_route_split_preserved": true,
     "terminal_remains_false": true,
-    "terminal_credit_delta": 0
+    "terminal_credit_delta": 0,
+    "regcap_contextual_relative_selection_bound": true,
+    "regcap_contextual_selection_is_global_identity": false
   }
 }
