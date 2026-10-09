@@ -82,3 +82,9 @@ def test_empty_dynamic_skill_state_is_valid_provider():
         assert out["pass"] is True
         assert out["live_owned_equals_fabric_reachable"] is True
         assert out["providers"]["ACTIVE_VERIFIED_LEARNED_SKILLS"]["count"] == 0
+        assert out["live_admitted_capability_count"] == out["live_owned_capability_count"]
+        assert out["live_admitted_capability_ids"] == out["live_owned_capability_ids"]
+        assert out["live_d_final_owned_capability_count"] == 0
+        assert out["live_d_final_owned_capability_ids"] == []
+        assert out["missing_d_certificate_count"] == out["live_admitted_capability_count"]
+        assert out["d_finality_coverage_complete"] is False
