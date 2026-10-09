@@ -1,0 +1,87 @@
+{
+  "schema": "PROJECT_BRAIN_R2_CROSS_DOCUMENT_PARTIAL_EFFECT_PRUNING_V9_VERIFY_V1",
+  "date": "2026-10-09",
+  "branch": "crossdoc-prune-live-v9",
+  "route_id": "DIRECT_ADEQUACY::CROSS_DOCUMENT_SEMANTIC_REGISTRY_V3_LATTICE_V8",
+  "capability": "DECISION_RELATIVE_PARTIAL_EFFECT_PRUNING_OVER_SOURCE_PROVED_FIELD_LATTICE",
+  "status": "VERIFIED_ISOLATED_CHANGED_AND_ADJACENT_DYNAMIC_SURFACE__20_OF_20_PASS",
+  "exact_blobs": {
+    "canonical/runtime/partial_effect_query_irrelevance_v1.py": "d6c9f3bef194743bf2015f8cefd9f2de8f238098",
+    "canonical/runtime/cross_document_effect_semantic_lattice_v9.py": "9649b5f100184c709180bbd1ec27e416dae42eb3",
+    "canonical/runtime/cross_document_effect_semantic_lattice_verify_v9.py": "3b78a436c7c9249c503314e47257768969644e84",
+    "canonical/runtime/cross_document_effect_semantic_lattice_verify_v8.py": "c1ecc631f4c5ccc6cedb8dfe554b177f2e6e08d9",
+    "canonical/runtime/r2_cross_document_semantic_registry_v3_lattice_direct_adequacy_v1.py": "55dfa30fe57dd1c4a98d7a53c3d57f7dfcf510e4",
+    "canonical/tests/test_cross_document_effect_semantic_lattice_v9.py": "71ae24c9117c34a9d0ea630b11730d69b6628bff",
+    "canonical/tests/test_r2_cross_document_partial_pruning_dynamic_route_v1.py": "296434c3fce24187dfaee1c8b3af440348ea9bf9",
+    "canonical/tests/test_r2_domain_mapping_dynamic_admission_v1.py": "d895ab8faedee0c1e3986ad24ce738abfc3f0f76"
+  },
+  "theorem": {
+    "calculus_order": "TARGET_FILTER_THEN_APPLICABILITY_VALID_TIME_AND_CONDITIONS_THEN_SUPERSESSION",
+    "sound_pruning_cases": [
+      "EXACT_VALID_FROM_AFTER_QUERY_AS_OF",
+      "EXACT_VALID_UNTIL_AT_OR_BEFORE_QUERY_AS_OF",
+      "EXACT_CONDITION_WITH_MISSING_OR_DIFFERENT_QUERY_CONTEXT_VALUE"
+    ],
+    "forbidden_pruning": [
+      "UNKNOWN_EFFECT_CLASS",
+      "UNKNOWN_VALUE",
+      "UNKNOWN_SUPERSEDES",
+      "EMPTY_CONDITIONS",
+      "ANY_PARTIAL_EFFECT_NOT_ALREADY_PROVED_INAPPLICABLE"
+    ],
+    "preservation_law": "NON_PRUNED_TOP_FIELDS_REMAIN_TOP_AND_DYNAMIC_SEMANTIC_OPEN_REMAINS_FAIL_CLOSED"
+  },
+  "inherited_verifier_repair": {
+    "path": "canonical/runtime/cross_document_effect_semantic_lattice_verify_v8.py",
+    "defect": "V8_VERIFIER_DROPPED_ALL_EXACT_EFFECTS_FROM_A_DOCUMENT_WHEN_ANY_SIBLING_EFFECT_REMAINED_PARTIAL_TOP",
+    "consequence": "VALID_MIXED_EXACT_PLUS_PARTIAL_PRODUCER_STATE_FAILED_EXACT_EFFECTS_BY_DOCUMENT_COMPARISON",
+    "repair": "PRESERVE_INDEPENDENTLY_EXACT_SIBLING_EFFECTS_IN_EXPECTED_VERIFIER_STATE_WHILE_OPEN_ATOMS_STILL_BLOCK_TERMINAL_CLOSURE",
+    "authority_change": false
+  },
+  "isolated_verification": {
+    "carrier": "brain-r2-grounded-frontier-verify-20261008",
+    "sprite_id": "sprite-87368f21-5869-452d-b326-b420f5e99347",
+    "workspace": "/home/sprite/crossdoc_pr3481_verify",
+    "lattice_and_pruning_kernel": {
+      "passed": 8,
+      "failed": 0
+    },
+    "upgraded_route_transactions": {
+      "passed": 4,
+      "failed": 0
+    },
+    "inherited_dynamic_domain_mapping_and_live_selection": {
+      "passed": 8,
+      "failed": 0
+    },
+    "total_passed": 20,
+    "total_failed": 0,
+    "py_compile": "PASS"
+  },
+  "proved": [
+    "V8_OPEN_CASE_CAN_CLOSE_WITHOUT_PROVING_IRRELEVANT_FIELDS_WHEN_EXACT_APPLICABILITY_COORDINATES_PROVE_THE_PARTIAL_EFFECT_CANNOT_APPLY",
+    "FUTURE_DATED_PARTIAL_EFFECT_IS_PRUNED_ONLY_FOR_EARLIER_QUERY_DATE",
+    "EXPIRED_PARTIAL_EFFECT_IS_PRUNED_ONLY_FOR_AT_OR_AFTER_VALID_UNTIL_QUERY_DATE",
+    "EXACT_CONDITION_MISMATCH_PRUNES_EFFECT_FOR_EXACT_QUERY_CONTEXT",
+    "PARTIAL_EFFECT_THAT_MAY_APPLY_REMAINS_TOP",
+    "EMPTY_CONDITIONS_DO_NOT_PRUNE",
+    "V9_VERIFIER_REVERIFIES_V8_INDEPENDENTLY_THEN_RECOMPUTES_PRUNING_AND_FINITE_WORLDSET",
+    "PREFLIGHT_REMAINS_PURE",
+    "POSTWRITE_VERIFIER_FAILURE_ROLLS_BACK",
+    "EXISTING_DOMAIN_MAPPING_EDGE_ROUTE_BEHAVIOR_AND_DYNAMIC_LIVE_SELECTION_REMAIN_GREEN"
+  ],
+  "hard_nonclaims": [
+    "NO_ARBITRARY_NATURAL_LANGUAGE_COMPLETENESS",
+    "NO_PRUNING_FROM_UNKNOWN_VALUE_CLASS_OR_SUPERSESSION",
+    "NO_NEW_SEMANTIC_TRUTH_AUTHORITY",
+    "NO_GLOBAL_FINANCE_SEMANTIC_TAIL_CLOSURE",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "semantic_truth_authority": false,
+  "terminal_authority": false
+}
