@@ -23,6 +23,7 @@ from copy import deepcopy
 from typing import Any, Mapping
 
 from canonical.runtime.semantic_information_frontier_v1 import solve as solve_frontier
+from canonical.runtime.semantic_hypothesis_completeness_v1 import compile_universe
 
 SCHEMA = "PROJECT_BRAIN_SEMANTIC_AMBIGUITY_CONTROL_V1"
 
@@ -63,11 +64,34 @@ def decide(problem: Mapping[str, Any]) -> dict[str, Any]:
             reason="AMBIGUITY_OWNER_INVALID",
         )
 
-    frontier_problem = {
-        "hypothesis_set_complete": problem.get("hypothesis_set_complete"),
-        "worlds": deepcopy(problem.get("worlds")),
-        "observations": deepcopy(problem.get("observations")),
-    }
+    manifest = problem.get("closed_hypothesis_universe")
+    if manifest is not None:
+        if any(k in problem for k in ("hypothesis_set_complete", "worlds", "observations")):
+            return _base(
+                "FAIL_CLOSED__AMBIGUITY_COMPLETENESS_AUTHORITY_CONFLICT",
+                passed=False,
+                reason="DIRECT_AND_MANIFEST_HYPOTHESIS_AUTHORITIES_BOTH_PRESENT",
+                ambiguity_owner=owner,
+            )
+        compiled = compile_universe(
+            manifest,
+            expected_manifest_sha256=str(problem.get("expected_manifest_sha256") or ""),
+        )
+        if compiled.get("pass") is not True:
+            return _base(
+                "FAIL_CLOSED__AMBIGUITY_HYPOTHESIS_MANIFEST_INVALID",
+                passed=False,
+                reason=compiled.get("reason"),
+                ambiguity_owner=owner,
+                hypothesis_compilation=compiled,
+            )
+        frontier_problem = deepcopy(compiled["frontier_problem"])
+    else:
+        frontier_problem = {
+            "hypothesis_set_complete": problem.get("hypothesis_set_complete"),
+            "worlds": deepcopy(problem.get("worlds")),
+            "observations": deepcopy(problem.get("observations")),
+        }
     frontier = solve_frontier(frontier_problem)
 
     if frontier.get("pass") is True:
