@@ -89,7 +89,7 @@
   },
   "hidden_audit": {
     "path": "canonical/verification/CURSORBENCH_REACT_LEAD_FORM_INDEPENDENT_HIDDEN_AUDIT_SUMMARY_20261009_V1.json",
-    "git_blob_sha": "499e4081450f8af08d321d9f19de8864cbeacbe7",
+    "git_blob_sha": "69a5bb21ab48681de676baa8c8f44342e7287d8d",
     "frozen_model_mutated_after_hidden_reveal": false
   },
   "p3_composition": {
