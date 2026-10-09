@@ -147,6 +147,7 @@ def _request_payload(prompt: str) -> dict[str, Any]:
         "tool_choice": "required",
         "parallel_tool_calls": False,
         "temperature": 0,
+        "chat_template_kwargs": {"enable_thinking": False},
         "max_tokens": MAX_TOOL_COMPLETION_TOKENS,
         "stream": False,
     }
