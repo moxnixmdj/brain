@@ -98,5 +98,6 @@
     "terminal_credit_delta": 0
   },
   "promotion_authority": false,
-  "terminal_authority": false
+  "terminal_authority": false,
+  "condition_sha256": "58db2b27d05e73a710d8559fe9949efe867a3632450b97d8ca956d71262cc8ec"
 }
