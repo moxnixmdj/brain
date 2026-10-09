@@ -149,8 +149,8 @@ def preflight(request:Mapping[str,Any],*,repo_root=None)->dict[str,Any]:
             "query_relative_effect_semantics_finite":True,
             "raw_acceptance_obligation_ids":ids,
             "semantic_scope":(
-                "QUERY_RELATIVE_MONOTONE_EFFECT_SEMANTIC_LATTICE_REFINED_BY_"
-                "SOURCE_ALIGNED_V7_V8_PROOFS_TO_FINITE_VERIFIED_EFFECT_WORLDS"
+                "QUERY_RELATIVE_MONOTONE_EFFECT_FIELD_LATTICE_REFINED_BY_"
+                "SOURCE_ALIGNED_V7_V8_V9_PROOFS_TO_FINITE_VERIFIED_EFFECT_WORLDS"
             ),
             "preflight_execution_authority":False,
             "preflight_verification":deepcopy(checked),
@@ -230,7 +230,7 @@ def run(request:Mapping[str,Any],*,repo_root=None)->dict[str,Any]:
             "retry_by_other_route_authorized":False,
             "source_immutability_verified":True,
             "authority_boundary":(
-                "DIRECT_ROUTE_REQUIRES_QUERY_RELEVANT_EFFECT_LATTICE_TO_BE_"
+                "DIRECT_ROUTE_REQUIRES_QUERY_RELEVANT_EFFECT_FIELD_LATTICE_TO_BE_"
                 "FINITE_FROM_SOURCE_ALIGNED_PROOFS_AND_FINITE_WORLDSET_TO_CLOSE"
             ),
         }
