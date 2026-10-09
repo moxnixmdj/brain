@@ -195,6 +195,27 @@ class SemanticEffectKernelBehaviorTests(unittest.TestCase):
         out = K.discharge_effect(value, "E-profit", cert)
         self.assertEqual(K.active_effect_ids(out), ["E-kind"])
 
+    def test_same_effect_id_with_different_semantics_is_rejected_after_discharge(self):
+        problem = ambiguity_problem(same_terminal_result=True)
+        e1 = self.effect("E-collision", "profit_related(m17)", problem)
+        e2 = self.effect("E-collision", "collateral_related(m17)", problem)
+        v1 = K.make_value("a", context_version="ctx-v1", effects=[e1])
+        v2 = K.make_value("b", context_version="ctx-v1", effects=[e2])
+        c1 = K.issue_discharge_certificate(
+            e1,
+            proof_kind="AMBIGUITY_TERMINALLY_IRRELEVANT_V1",
+            proof_problem=problem,
+        )
+        c2 = K.issue_discharge_certificate(
+            e2,
+            proof_kind="AMBIGUITY_TERMINALLY_IRRELEVANT_V1",
+            proof_problem=problem,
+        )
+        d1 = K.discharge_effect(v1, e1["effect_id"], c1)
+        d2 = K.discharge_effect(v2, e2["effect_id"], c2)
+        with self.assertRaises(K.SemanticEffectError):
+            K.compose_value("combined", inputs=[d1, d2])
+
     def test_invalidating_certificate_reintroduces_effect(self):
         problem = ambiguity_problem(same_terminal_result=True)
         effect = self.effect(problem=problem)
