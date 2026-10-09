@@ -14,6 +14,9 @@ from canonical.runtime.certificate_gated_selected_route_runtime_entrypoint_v2 im
     payload_digest,
     preflight,
 )
+from canonical.runtime.executable_refinement_receipt_guard_v1 import (
+    SCHEMA as REFINEMENT_RECEIPT_SCHEMA,
+)
 
 CANARY_CONTEXT = {"kind": "ROUTER_DEPLOYMENT_CANARY_V1"}
 CANARY_PAYLOAD = {"probe": 7, "text": "deterministic"}
@@ -175,18 +178,48 @@ def _creditable_registry(
     refinement_certificate = _write(
         tmp_path,
         "canonical/governance/refinement.json",
-        json.dumps({"subject_id": "route"}) + "\n",
+        json.dumps(
+            {
+                "subject_id": "route",
+                "transition_refinement": {
+                    "classes": [{"case_id": "PASS", "kind": "PASS"}]
+                },
+            }
+        )
+        + "\n",
     )
     cert_blob = entrypoint.git_blob_sha(refinement_certificate)
+    proof_artifact = _write(
+        tmp_path,
+        "canonical/verification/refinement-proof.json",
+        json.dumps(
+            {
+                "pass": True,
+                "subject_id": "route",
+                "terminal_credit_delta": 0,
+            }
+        )
+        + "\n",
+    )
     refinement_receipt = _write(
         tmp_path,
         "canonical/verification/refinement-receipt.json",
         json.dumps(
             {
+                "schema": REFINEMENT_RECEIPT_SCHEMA,
                 "subject_id": receipt_subject,
                 "refinement_verified": receipt_verified,
                 "certificate_git_blob_sha": cert_blob,
                 "concrete_route_git_blob_sha": route_binding or route_blob,
+                "verification_method": "EXHAUSTIVE_FINITE_TRANSITION_CHECK",
+                "verified_transition_case_ids": ["PASS"],
+                "proof_artifact": {
+                    "path": "canonical/verification/refinement-proof.json",
+                    "git_blob_sha": entrypoint.git_blob_sha(proof_artifact),
+                },
+                "verification_authority_mutated": False,
+                "execution_authority": False,
+                "terminal_authority": False,
                 "terminal_credit_delta": 0,
             }
         )
@@ -258,7 +291,7 @@ def test_creditable_route_unverified_refinement_receipt_fails_closed(
     monkeypatch.setattr(entrypoint, "ROOT", tmp_path)
     with pytest.raises(
         RuntimeBindingFailClosed,
-        match="REFINEMENT_RECEIPT_NOT_VERIFIED:0",
+        match="REFINEMENT_RECEIPT_INVALID:0:RECEIPT_NOT_REFINEMENT_VERIFIED",
     ):
         entrypoint._verified_rows(registry)
 
@@ -270,7 +303,7 @@ def test_creditable_route_refinement_subject_mismatch_fails_closed(
     monkeypatch.setattr(entrypoint, "ROOT", tmp_path)
     with pytest.raises(
         RuntimeBindingFailClosed,
-        match="REFINEMENT_RECEIPT_SUBJECT_MISMATCH:0",
+        match="REFINEMENT_RECEIPT_INVALID:0:RECEIPT_SUBJECT_MISMATCH",
     ):
         entrypoint._verified_rows(registry)
 
@@ -282,7 +315,7 @@ def test_creditable_route_refinement_route_binding_mismatch_fails_closed(
     monkeypatch.setattr(entrypoint, "ROOT", tmp_path)
     with pytest.raises(
         RuntimeBindingFailClosed,
-        match="REFINEMENT_RECEIPT_ROUTE_BINDING_MISMATCH:0",
+        match="REFINEMENT_RECEIPT_INVALID:0:RECEIPT_ROUTE_BINDING_MISMATCH",
     ):
         entrypoint._verified_rows(registry)
 
