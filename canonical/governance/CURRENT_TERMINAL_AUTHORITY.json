@@ -1013,6 +1013,15 @@
       "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261009_V24.json",
       "git_blob_sha": "3186b033e6338e5381cd78702e2ec208d33cf1a9",
       "role": "CURRENT_TB_SCIENCE_SLOT_LEDGER__14_CONSUMED__RANK15_UNREAD_UNSTARTED__PUBLIC_FINAL_V4_RESEAL_PENDING"
+    },
+    "cursorbench_first_authenticated_positive_adequacy_region_20261009_v1": {
+      "path": "canonical/governance/CURSORBENCH_TYPED_ACCEPTANCE_PLAN_POLICY_ADEQUACY_CERTIFICATE_20261009_V1.json",
+      "git_blob_sha": "09d4ac9e2134842fa6d07ace238f2adcc47b4133",
+      "independent_verification": {
+        "path": "canonical/verification/CURSORBENCH_TYPED_ACCEPTANCE_PLAN_POLICY_ADEQUACY_INDEPENDENT_VERIFICATION_20261009_V1.json",
+        "git_blob_sha": "8645dca87c5c57d3a6d63299732b32839bcf42d9"
+      },
+      "note": "FIRST_AUTHENTICATED_CONDITIONAL_POSITIVE_ADEQUACY_REGION_ONLY__MEMBERSHIP_NOT_SELF_CERTIFIED__WHOLE_COVER_DOMINANCE_SCORE_ACCEPTANCE_AND_TERMINAL_CREDIT_REMAIN_OPEN"
     }
   },
   "live_truth": {
@@ -1575,7 +1584,7 @@
     "cursorbench_absence_of_bound_v5_failure_is_adequacy_proof": false,
     "cursorbench_one_v5_pass_is_scope_complete_adequacy_proof": false,
     "cursorbench_selector_work_authorized_now": false,
-    "cursorbench_next_proof_object": "CODING_V5_AUTHENTICATED_POSITIVE_ADEQUACY_CERTIFICATE_V1",
+    "cursorbench_next_proof_object": "CURSORBENCH_TYPED_ACCEPTANCE_PLAN_REGION_MEMBERSHIP_OR_ADDITIONAL_AUTHENTICATED_ADEQUACY_REGION",
     "r2_sec_standard_xbrl_companyconcept_source_native_semantics_bound": true,
     "r2_sec_standard_xbrl_source_native_policy_adequacy_claimed": false,
     "cursorbench_advanced_coding_canonical_residual_count": 4,
@@ -1619,7 +1628,14 @@
     "tb_science_rank15_benchmark_trials_consumed": 0,
     "tb_science_current_slot_ledger_v24_blob": "3186b033e6338e5381cd78702e2ec208d33cf1a9",
     "tb_science_rank15_authority_v8_active": true,
-    "tb_science_rank15_authority_v8_blob": "e50cbb22ec94b6166402fee352150d9f0dc0c62d"
+    "tb_science_rank15_authority_v8_blob": "e50cbb22ec94b6166402fee352150d9f0dc0c62d",
+    "cursorbench_authenticated_positive_adequacy_region_count": 1,
+    "cursorbench_first_authenticated_positive_adequacy_region_proved": true,
+    "cursorbench_first_authenticated_positive_adequacy_region_id": "CURSORBENCH_TYPED_ACCEPTANCE_PLAN_REGION_V1",
+    "cursorbench_first_authenticated_positive_adequacy_policy_id": "BRAIN_INDEPENDENT_ACCEPTANCE_MODEL_TYPED_PLAN_V1",
+    "cursorbench_first_authenticated_positive_adequacy_behavior_id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+    "cursorbench_first_positive_region_membership_self_certified": false,
+    "cursorbench_first_positive_region_hidden_task_membership_proved": false
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -2319,7 +2335,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 76,
+  "pointer_revision": 77,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
@@ -2946,6 +2962,20 @@
     "authoritative_source_scheduler_git_blob_sha": "eba5d37c4ac9bd359f745b04b0691113bd200a70",
     "current_r2_pointer_git_blob_sha": "128dd602e8b0935098a4f851fab9055efd778622",
     "terminal_remains_false": true,
+    "terminal_credit_delta": 0
+  },
+  "cursorbench_first_positive_adequacy_region_reconciliation_20261009_v1": {
+    "source": {
+      "path": "canonical/governance/CURSORBENCH_TYPED_ACCEPTANCE_PLAN_POLICY_ADEQUACY_CERTIFICATE_20261009_V1.json",
+      "git_blob_sha": "09d4ac9e2134842fa6d07ace238f2adcc47b4133"
+    },
+    "verification": {
+      "path": "canonical/verification/CURSORBENCH_TYPED_ACCEPTANCE_PLAN_POLICY_ADEQUACY_INDEPENDENT_VERIFICATION_20261009_V1.json",
+      "git_blob_sha": "8645dca87c5c57d3a6d63299732b32839bcf42d9"
+    },
+    "result": "FIRST_AUTHENTICATED_CONDITIONAL_POSITIVE_ADEQUACY_REGION_BOUND__WHOLE_COVER_REMAINS_OPEN",
+    "region_count": 1,
+    "acceptance_credit_delta": 0,
     "terminal_credit_delta": 0
   }
 }
