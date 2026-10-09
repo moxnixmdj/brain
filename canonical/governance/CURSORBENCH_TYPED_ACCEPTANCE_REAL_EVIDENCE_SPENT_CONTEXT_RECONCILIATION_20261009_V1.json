@@ -135,5 +135,17 @@
   "scheduling_authority": true,
   "execution_authority": false,
   "promotion_authority": false,
-  "terminal_authority": false
+  "terminal_authority": false,
+  "current_main_runtime_replay": {
+    "path": "canonical/verification/CURSORBENCH_REACT_LEAD_FORM_CURRENT_MAIN_RUNTIME_REPLAY_20261009_V1.json",
+    "git_blob_sha": "e5206e46c9227cb111df64309e4751e8335d1257",
+    "all_atom_gates_pass": true,
+    "p3_pass": true,
+    "selected_policy_id": "BRAIN_INDEPENDENT_ACCEPTANCE_MODEL_TYPED_PLAN_V1",
+    "policy_adequacy_authority": true,
+    "source_authorization_verified": false,
+    "db_admission_authority": false,
+    "u_subtraction_authority": false,
+    "terminal_authority": false
+  }
 }
