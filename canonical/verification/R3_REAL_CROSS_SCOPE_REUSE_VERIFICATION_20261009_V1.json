@@ -91,9 +91,12 @@
   },
   "github_actions": {
     "focused_workflow_run_id": 37905958488,
-    "conclusion": "failure",
-    "steps": null,
-    "classification": "PRE_RUNNER_INFRASTRUCTURE_FAILURE__NOT_A_TEST_FAILURE"
+    "focused_conclusion": "failure",
+    "focused_steps": null,
+    "canonical_r3_workflow_run_id": 37908367585,
+    "canonical_conclusion": "failure",
+    "canonical_steps": null,
+    "classification": "TWO_PRE_RUNNER_INFRASTRUCTURE_FAILURES__NOT_TEST_FAILURES"
   },
   "claim": "A_REAL_NON_EFFECTFUL_VERIFIED_SKILL_WAS_PROMOTED_FROM_TWO_DISTINCT_SOURCE_SCOPES_TO_INDEPENDENTLY_VERIFIED_PROVEN_SUPERSET_STRUCTURAL_MATCH_V1_AND_THEN_SUCCESSFULLY_REUSED_FIRST_IN_A_FRESH_THIRD_SCOPE_WITHOUT_FALLBACK.",
   "hard_nonclaims": [
