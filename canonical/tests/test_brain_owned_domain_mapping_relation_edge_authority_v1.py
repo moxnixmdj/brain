@@ -6,6 +6,8 @@ from canonical.runtime import brain_owned_domain_mapping_relation_edge_authority
 from canonical.runtime import brain_owned_semantic_relation_edge_registry_v3 as registry
 from canonical.runtime.semantic_relation_entailment_dag_v1 import RECEIPT_SCHEMA
 from canonical.runtime import brain_owned_semantic_relation_edge_authority_v1 as identity
+from canonical.runtime import brain_owned_source_implication_closure_edge_authority_v1 as implication
+from canonical.runtime import brain_owned_bounded_semantic_relation_edge_authority_v1 as bounded
 
 RAW="loss-absorbing cushion"
 SCOPE="finance:regulatory-capital:2026"
@@ -143,6 +145,56 @@ class RegistryV3Tests(unittest.TestCase):
         out=registry.verify(row)
         self.assertFalse(out["pass"])
         self.assertEqual(out["reason"],"PROOF_CLASS_UNSUPPORTED")
+
+
+    def test_not_entails_is_not_in_authority_surface(self):
+        row=raw()
+        row["relation"]="NOT_ENTAILS"
+        out=domain.verify(row)
+        self.assertFalse(out["pass"])
+        self.assertEqual(out["reason"],"ONLY_POSITIVE_ENTAILS_SUPPORTED")
+
+    def test_registry_preserves_source_implication_closure(self):
+        text="\n".join([
+            "In scope s, a entails b.",
+            "In scope s, b entails c.",
+        ])
+        evidence={
+            "schema":implication.SCHEMA,
+            "proof_class":implication.PROOF_CLASS,
+            "scope_id":"s",
+            "source_id":"a",
+            "target_id":"c",
+            "relation":"ENTAILS",
+            "implication_source":{
+                "source_id":"decl",
+                "source_text":text,
+            },
+        }
+        out=registry.verify(evidence)
+        self.assertTrue(out["pass"],out)
+        self.assertEqual(out["proof_class"],implication.PROOF_CLASS)
+
+    def test_registry_preserves_bounded_extension(self):
+        text="\n".join([
+            'Semantic universe: {"members":["a","b"],"scope_id":"s"}',
+            'Semantic extension: {"concept_id":"L","members":["a"],"scope_id":"s"}',
+            'Semantic extension: {"concept_id":"R","members":["a","b"],"scope_id":"s"}',
+        ])
+        evidence={
+            "schema":bounded.SCHEMA,
+            "proof_class":bounded.PROOF_CLASS,
+            "scope_id":"s",
+            "source_id":"L",
+            "target_id":"R",
+            "relation":"ENTAILS",
+            "bounded_extension_source":{
+                "source_id":"decl","scope_id":"s","source_text":text,
+            },
+        }
+        out=registry.verify(evidence)
+        self.assertTrue(out["pass"],out)
+        self.assertEqual(out["proof_class"],bounded.PROOF_CLASS)
 
 if __name__=="__main__":
     unittest.main()
