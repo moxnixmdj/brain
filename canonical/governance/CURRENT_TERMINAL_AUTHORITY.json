@@ -1240,8 +1240,8 @@
     },
     "coverage_completeness_root_theorem_r1_r4": {
       "path": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_THEOREM_LIVE_BINDING_V1.json",
-      "git_blob_sha": "ef9bc78cb6ffeaebfe7d45ac413f9a42fa0e98fb",
-      "note": "CCRT_R1_R4_META_CONTROL_BOUND_TO_CURRENT_REAL_MISSION__EXPLICIT_ROOT_NAMESPACE__FROZEN_CLAIM_SCOPE__MISSION_SUFFICIENT_SEMANTIC_CARRIER__R4_FAIL_CLOSED__ZERO_CREDIT",
+      "git_blob_sha": "149891188b32fd7e52460b1536c6a52cb4bf5919",
+      "note": "CCRT_R1_R4_META_CONTROL_BOUND_TO_CURRENT_REAL_MISSION__EXPLICIT_ROOT_NAMESPACE__FROZEN_CLAIM_SCOPE__MISSION_SUFFICIENT_SEMANTIC_CARRIER__CLAIM_SCOPED_ROOT_CERTIFICATE_REGISTRY__R4_FAIL_CLOSED__ZERO_CREDIT",
       "semantic_carrier_precondition": {
         "path": "canonical/governance/MISSION_SUFFICIENT_SEMANTIC_CARRIER_V1.json",
         "git_blob_sha": "3c8da3adfcea2134dadae18634fc4dd7b14b19e7",
@@ -1259,7 +1259,7 @@
     },
     "coverage_completeness_claim_scope": {
       "path": "canonical/governance/COVERAGE_COMPLETENESS_CLAIM_SCOPE_V1.json",
-      "git_blob_sha": "907c2935f7a6aeaf69e9288219fd94b36f58e8b2",
+      "git_blob_sha": "05b555f4f9a0227ee0b3e6121246172078857279",
       "guard_path": "canonical/runtime/coverage_claim_scope_guard_v1.py",
       "guard_git_blob_sha": "d1de61aa9bc00a184772a50f7ec9d5ee2853d747",
       "tests_path": "canonical/tests/test_coverage_claim_scope_guard_v1.py",
@@ -2986,7 +2986,7 @@
   "checkpoint_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "objective_precedence": {
     "authoritative_path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
-    "authoritative_git_blob_sha": "2b37b3185e03b55678d7d394c8d29202a4b3ab48",
+    "authoritative_git_blob_sha": "7ad5f82d8434966781bf97c725d482e10133fc7c",
     "real_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
     "mission_terminality": "OPEN_ENDED_CAPABILITY_OPTIMIZATION",
     "opus_5_5_role": "FIRST_FRONTIER_CHECKPOINT_NOT_TERMINAL_OBJECTIVE",
@@ -3010,7 +3010,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 120,
+  "pointer_revision": 121,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
@@ -4286,10 +4286,15 @@
     "terminal_credit_delta": 0
   },
   "r4_live_binding_currentness": {
-    "status": "VERIFIED_CURRENT_BYTES_PENDING_FINAL_MERGE",
-    "live_binding_sha": "ef9bc78cb6ffeaebfe7d45ac413f9a42fa0e98fb",
-    "mission_sha": "2b37b3185e03b55678d7d394c8d29202a4b3ab48",
-    "claim_scope_sha": "907c2935f7a6aeaf69e9288219fd94b36f58e8b2",
+    "status": "REFRESHED_CURRENT_BYTES_WITH_CLAIM_SCOPED_ROOT_REGISTRY__ZERO_CREDIT",
+    "live_binding_sha": "149891188b32fd7e52460b1536c6a52cb4bf5919",
+    "mission_sha": "7ad5f82d8434966781bf97c725d482e10133fc7c",
+    "claim_scope_sha": "05b555f4f9a0227ee0b3e6121246172078857279",
+    "root_registry_sha": "fa395c54a9f5c7d93eff01dd8ccf28575c0a0361",
+    "current_root_certificate_pointer_sha": "b5ecc5a30abd046fb4f034e9ac1972ebdcf73c66",
+    "active_claim": null,
+    "registry_guard_sha": "508df599e111e9aec47cbd175ce4f760299da786",
+    "registry_tests_sha": "7944f9c4fa46de905f7f6976b9dd2968f174733c",
     "terminal_credit_delta": 0
   },
   "r2_v61_sec_issuer_extension_cross_filing_reconciliation_20261009_v1": {
@@ -4493,7 +4498,7 @@
     "terminal_credit_delta": 0
   },
   "r2_v66_semantic_wake_reconciliation_20261009_v1": {
-    "status": "RECONCILED__CURRENT_R2_V66_ROOT2_V61__TERMINAL_FALSE__ZERO_CREDIT",
+    "status": "RECONCILED__CURRENT_R2_V66_ROOT2_V61__LATEST_UNRELATED_TERMINAL_STATE_PRESERVED__TERMINAL_FALSE__ZERO_CREDIT",
     "current_r2_pointer_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
     "current_r2_git_blob_sha": "bf2fc9b2748cf40eef873156aa17eba559cdd51f",
     "scheduler_cut_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V61.json",
@@ -4503,9 +4508,9 @@
     "dynamic_admission_count": 3,
     "mrel_runtime_git_blob_sha": "10d91e251c76695368dc77d3370c30e61f31f09d",
     "shared_signature_guard_git_blob_sha": "97d5572df0c4387c8ca461ccb900ec1a503530b5",
-    "finance_tail_closed": false,
-    "terminal_credit_delta": 0,
     "oewn_decision_manifest_lattice_git_blob_sha": "c6ebfa794b9c71cd1f26a596dd9fc77f79fd8c29",
-    "oewn_decision_manifest_verification_git_blob_sha": "6a42d85a71f1419f64ebc1d61cbaefdc035953a6"
+    "oewn_decision_manifest_verification_git_blob_sha": "6a42d85a71f1419f64ebc1d61cbaefdc035953a6",
+    "finance_tail_closed": false,
+    "terminal_credit_delta": 0
   }
 }
