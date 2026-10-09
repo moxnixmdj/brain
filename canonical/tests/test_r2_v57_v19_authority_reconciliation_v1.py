@@ -54,5 +54,5 @@ class R2V57V19AuthorityReconciliationTests(unittest.TestCase):
   self.assertEqual(t["live_truth"]["r2_direct_adequacy_route_count"],39)
   self.assertEqual(t["live_truth"]["r2_direct_adequacy_bounded_family_count"],36)
   self.assertEqual(t["r2_scheduler_precedence"]["current_scheduler_git_blob_sha"],blob(p))
-  self.assertIn("CURRENT_R2_V57",t["status"])
+  self.assertIn("CURRENT_R2_V58",t["status"])
 if __name__=="__main__": unittest.main(verbosity=2)
