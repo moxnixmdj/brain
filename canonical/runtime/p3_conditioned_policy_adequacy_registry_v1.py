@@ -114,7 +114,7 @@ _REGISTRY = {
             "canonical/governance/"
             "CODING_ROBUST_FINITE_MULTI_INTERPRETATION_POLICY_ADEQUACY_BINDING_20261009_V1.json"
         ),
-        "binding_blob_sha": "e0ad6e10b3c538baaf59439e23d7db84383edcee",
+        "binding_blob_sha": "d0b7f819e38d10009082cc695976ad00b6ab6228",
     }
 
 }
