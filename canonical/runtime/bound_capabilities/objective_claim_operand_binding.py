@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import importlib.util
 import pathlib
+from canonical.runtime import d_finality_execution_epoch_v1 as d_finality
 import re
 
 SCHEMA="PROJECT_BRAIN_OBJECTIVE_CLAIM_SPEC_OPERAND_BINDING_V1"
@@ -249,6 +250,7 @@ def _choose_pair(left_binding,right_binding):
 
 def _load_evaluator():
     path=pathlib.Path(__file__).resolve().with_name("generic_evidence_claim_relation.py")
+    d_finality.require_material_file_if_active(path)
     spec=importlib.util.spec_from_file_location("project_brain_verified_generic_claim_relation",path)
     if spec is None or spec.loader is None:
         raise RuntimeError("VERIFIED_CLAIM_RELATION_LOAD_FAILED")
