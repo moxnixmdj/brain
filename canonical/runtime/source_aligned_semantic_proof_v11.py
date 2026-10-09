@@ -24,6 +24,10 @@ from canonical.runtime.source_aligned_semantic_proof_v10 import (
 from canonical.runtime.certified_document_effect_field_edge_v1 import (
     prove_field,
 )
+from canonical.runtime.brain_owned_semantic_relation_edge_authority_v1 import (
+    supports as brain_edge_supports,
+    verify as brain_edge_verify,
+)
 
 SCHEMA="BRAIN_SOURCE_ALIGNED_SEMANTIC_PROOF_V11"
 EDGE_KIND="CERTIFIED_DOCUMENT_EFFECT_FIELD_EDGE"
@@ -155,6 +159,23 @@ def verify_proof(
             })
             continue
 
+        effective_relation_verifier=relation_verifier
+        if not callable(effective_relation_verifier):
+            dag_evidence=claim.get("dag_evidence")
+            rows=[]
+            if isinstance(dag_evidence,Mapping):
+                ent=dag_evidence.get("entailment_receipts")
+                cnt=dag_evidence.get("counterexample_receipts")
+                if (
+                    isinstance(ent,Sequence)
+                    and not isinstance(ent,(str,bytes))
+                    and isinstance(cnt,Sequence)
+                    and not isinstance(cnt,(str,bytes))
+                ):
+                    rows=list(ent)+list(cnt)
+            if rows and all(brain_edge_supports(row) for row in rows):
+                effective_relation_verifier=brain_edge_verify
+
         out=prove_field(
             source_id=source_id,
             raw_span=raw_span,
@@ -166,7 +187,7 @@ def verify_proof(
             expected_dag_sha256=str(
                 claim.get("expected_dag_sha256") or ""
             ),
-            relation_verifier=relation_verifier,
+            relation_verifier=effective_relation_verifier,
         )
         if out.get("status")=="FAIL_CLOSED":
             return _fail(
@@ -266,6 +287,9 @@ def verify_proof(
             "V11_ADDS_ONLY_SOURCE_SPAN_BOUND_EFFECT_FIELDS_PROVED_BY_AN_"
             "INDEPENDENTLY_RECOMPUTED_SCOPED_SEMANTIC_ENTAILMENT_DAG;"
             "MISSING_RELATION_VERIFIER_OR_UNPROVED_EDGE_LEAVES_THE_FIELD_UNPROVED;"
+            "BRAIN_OWNED_EXPLICIT_SOURCE_IDENTITY_EDGE_AUTHORITY_IS_USED_"
+            "ONLY_WHEN_EVERY_DAG_RECEIPT_IS_A_SUPPORTED_INTERNAL_PROOF_CLASS;"
+            "UNSUPPORTED_EVIDENCE_WITHOUT_CALLER_VERIFIER_REMAINS_TOP;"
             "NO_GENERAL_RAW_LANGUAGE_EXTRACTION_CLOSURE"
         ),
     }
