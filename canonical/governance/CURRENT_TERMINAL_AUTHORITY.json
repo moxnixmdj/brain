@@ -887,10 +887,10 @@
     "current_r2_decision_intelligence": {
       "path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
       "scheduler_cut": {
-        "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V37.json",
-        "git_blob_sha": "3c409ea62f6004701c4cd5062c1116078d5ae6d9"
+        "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V40.json",
+        "git_blob_sha": "1ee507948a71e5672ae68927dffd75c894a81d22"
       },
-      "status": "ACTIVE_CURRENT_R2_AUTHORITY__V37__TWENTY_SEVEN_DIRECT_ROUTES__TWENTY_FOUR_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_AFTER_NINE_VERIFIED_SUBREGIONS",
+      "status": "ACTIVE_CURRENT_R2_AUTHORITY__V40__TWENTY_EIGHT_DIRECT_ROUTES__TWENTY_FIVE_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL__DECISION_RELATIVE_SEMANTIC_RELATION_AND_BOUNDED_CONCEPT_UNIVERSE_CONTROL_BOUND__AFTER_TEN_VERIFIED_SUBREGIONS",
       "pointer_semantics": "MUTABLE_CURRENT_POINTER__PATH_IDENTITY_AUTHORITATIVE__IMMUTABLE_SCHEDULER_CUT_HASH_BOUND_BELOW",
       "mutable_pointer_blob_is_not_load_bearing": true
     },
@@ -1398,7 +1398,7 @@
     "gdpval_owner_layer_wake_authority": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V9.json",
     "opus_5_5_is_global_terminal_objective": false,
     "opus_5_5_is_frontier_checkpoint": true,
-    "current_r2_scheduler_cut": "ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V37",
+    "current_r2_scheduler_cut": "ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V40",
     "historical_root2_scheduler_fields_currently_authoritative": false,
     "r2_general_control_mechanism_closed_as_adequacy_or_abstain": true,
     "r2_open_world_positive_action_coverage_complete": false,
@@ -1412,10 +1412,10 @@
     "direct_main_write_load_bearing_admission_enforced": false,
     "primary_pr_admission_trusted_base_validation_defined": true,
     "primary_pr_admission_required_status_check_enforced": false,
-    "r2_direct_adequacy_route_count": 27,
+    "r2_direct_adequacy_route_count": 28,
     "r2_direct_adequacy_exact_cell_count": 3,
-    "r2_direct_adequacy_bounded_family_count": 24,
-    "r2_verified_finance_positive_subregion_count": 9,
+    "r2_direct_adequacy_bounded_family_count": 25,
+    "r2_verified_finance_positive_subregion_count": 10,
     "r2_primary_internal_unsolved_count": 1,
     "r2_primary_internal_unsolved_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "r2_dormant_alternative_route_count": 1,
@@ -1440,8 +1440,10 @@
     "decision_relative_semantic_relation_control_verification": "19_OF_19_FOCUSED_PLUS_21_OF_21_ADJACENT_PASS",
     "global_inferred_synonymy_required_as_terminal_capability": false,
     "global_inferred_synonymy_closed": false,
-    "semantic_relation_current_rule": "PROVE_ONLY_THE_WEAKEST_SOUND_RELATION_WHOSE_TRUTH_CAN_CHANGE_THE_CURRENT_ACTION__EXACT_SOURCE_DECLARATION_OR_COMPLETE_TERMINAL_SIGNATURE_SUBSTITUTION_WHEN_AVAILABLE__OTHERWISE_ACQUIRE_ONLY_MINIMUM_SOURCE_ALIGNED_ENTAILMENT_ONTOLOGY_OR_WORD_SENSE_EVIDENCE",
-    "semantic_relation_terminal_credit_delta": 0
+    "semantic_relation_current_rule": "PROVE_ONLY_THE_WEAKEST_SOUND_RELATION_WHOSE_TRUTH_CAN_CHANGE_THE_CURRENT_ACTION__EXACT_SOURCE_DECLARATION_OR_COMPLETE_TERMINAL_SIGNATURE_SUBSTITUTION_WHEN_AVAILABLE__IF_A_SCOPE_COMPLETE_AUTHENTICATED_BOUNDED_CONCEPT_REGISTRY_EXISTS_COMPILE_IT_TO_A_COMPLETE_HYPOTHESIS_SET_AND_REUSE_EXACT_MINIMAX_DISCRIMINATION__OTHERWISE_ACQUIRE_ONLY_MINIMUM_SOURCE_ALIGNED_ENTAILMENT_WORD_SENSE_ONTOLOGY_OR_AUTHORITY_EVIDENCE",
+    "semantic_relation_terminal_credit_delta": 0,
+    "bounded_authenticated_concept_universe_control_bound": true,
+    "bounded_authenticated_concept_universe_verification": "19_OF_19_FOCUSED_PLUS_ADJACENT_PASS"
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -2119,19 +2121,19 @@
   },
   "r2_scheduler_precedence": {
     "current_authority_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
-    "current_scheduler_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V39.json",
-    "current_scheduler_git_blob_sha": "a3de442ce7838ba43bc5550b596ad2aade446f13",
+    "current_scheduler_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V40.json",
+    "current_scheduler_git_blob_sha": "1ee507948a71e5672ae68927dffd75c894a81d22",
     "single_live_primitive": "ESCAPE_POLICY_ADEQUACY",
     "general_mechanism_missing": false,
     "enumerated_active_zero_reality_cell_count": 0,
     "enumerated_external_required_sleep_cell_count": 0,
     "historical_root2_scheduler_fields_authoritative_for_current_r2": false,
-    "rule": "CURRENT_R2_POINTER_AND_V39_CONTENT_ADDRESSED_SCHEDULER_HAVE_PRECEDENCE__TEN_VERIFIED_FINANCE_SUBREGIONS__GLOBAL_SYNONYMY_TARGET_REPLACED_BY_WEAKEST_SUFFICIENT_DECISION_RELATION_CONTROL__REMAINING_RESIDUAL_IS_AMBIGUOUS_OR_IMPLICIT_COREFERENCE_BEYOND_VERIFIED_STRUCTURAL_FORMS__DECISION_RELEVANT_NONEXPLICIT_SOURCE_ALIGNED_ENTAILMENT_OR_AUTHENTICATED_ONTOLOGY_IDENTITY__CONTEXT_WORD_SENSE__GENERAL_CROSS_DOCUMENT_OR_STRONGER_EXTERNAL_FACT_AUTHENTICATION__GDPVAL_DORMANT",
+    "rule": "CURRENT_R2_POINTER_AND_V40_CONTENT_ADDRESSED_SCHEDULER_HAVE_PRECEDENCE__TEN_VERIFIED_FINANCE_SUBREGIONS__DECISION_RELATION_AND_BOUNDED_CONCEPT_UNIVERSE_CONTROL_BOUND__REMAINING_RESIDUAL_IS_AMBIGUOUS_OR_IMPLICIT_COREFERENCE_BEYOND_VERIFIED_STRUCTURAL_FORMS__NONEXPLICIT_DECISION_RELEVANT_RELATION_PROOF__CONTEXT_WORD_SENSE__AUTHENTICATE_BOUNDED_REGISTRY_WHERE_AVAILABLE_OR_KEEP_OPEN_WORLD_ONTOLOGY_MAPPING_INTERNAL_UNSOLVED__GENERAL_CROSS_DOCUMENT_OR_STRONGER_EXTERNAL_FACT_AUTHENTICATION__GDPVAL_DORMANT",
     "current_authority_pointer_mutable": true,
     "current_authority_pointer_blob_is_not_load_bearing": true,
     "binding_law": "CURRENT_POINTERS_BIND_BY_CANONICAL_PATH_IDENTITY__IMMUTABLE_VERSIONED_AUTHORITY_ARTIFACTS_BIND_BY_GIT_BLOB_SHA",
     "primary_internal_unsolved_pending_acquisition_or_experiment_cell_count": 1,
-    "dormant_alternative_route_cell_count": 1,
+    "dormant_alternative_route_count": 1,
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
@@ -2218,7 +2220,7 @@
     "pending_improvement_count": 0,
     "r3_is_current_terminal_blocker": false,
     "primary_terminal_scheduler_object": "PROVE_ONE_SOUND_TERMINAL_ACCEPTANCE_ROUTE",
-    "current_r2_remaining_problem_class": "AMBIGUOUS_OR_IMPLICIT_COREFERENCE_BEYOND_VERIFIED_STRUCTURAL_FORMS__INFERRED_SYNONYMY__CONTEXT_WORD_SENSE__ONTOLOGY_DOMAIN_MAPPING__GENERAL_CROSS_DOCUMENT_OR_STRONGER_EXTERNAL_FACT_AUTHENTICATION",
+    "current_r2_remaining_problem_class": "AMBIGUOUS_OR_IMPLICIT_COREFERENCE_BEYOND_VERIFIED_STRUCTURAL_FORMS__DECISION_RELEVANT_NONEXPLICIT_SEMANTIC_RELATION_PROOF__CONTEXT_WORD_SENSE__AUTHENTICATED_BOUNDED_REGISTRY_ACQUISITION_OR_OPEN_WORLD_ONTOLOGY_MAPPING__GENERAL_CROSS_DOCUMENT_OR_STRONGER_EXTERNAL_FACT_AUTHENTICATION",
     "terminal_remains_false": true,
     "terminal_credit_delta": 0
   },
@@ -2449,6 +2451,26 @@
     "incremental_spend_usd": 0,
     "execution_authority": false,
     "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "r2_v40_concept_universe_reconciliation": {
+    "status": "RECONCILED__CURRENT_R2_AND_TERMINAL_PRECEDENCE_BIND_V40__TERMINAL_STILL_FALSE",
+    "current_r2_pointer_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+    "current_r2_candidate_git_blob_sha": "268b17003c176eaca9fa89bb7bd8305dd2125b5c",
+    "scheduler_cut_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V40.json",
+    "scheduler_cut_git_blob_sha": "1ee507948a71e5672ae68927dffd75c894a81d22",
+    "bounded_concept_runtime_path": "canonical/runtime/bounded_authenticated_concept_universe_v1.py",
+    "bounded_concept_runtime_git_blob_sha": "2af90250d6d042646c997cf8c0b49ed7b627ebb7",
+    "bounded_concept_verification_path": "canonical/verification/BOUNDED_AUTHENTICATED_CONCEPT_UNIVERSE_REMOTE_VERIFY_20261009_V1.json",
+    "bounded_concept_verification": "19_OF_19_FOCUSED_PLUS_ADJACENT_PASS",
+    "route_count": 28,
+    "exact_cell_count": 3,
+    "bounded_family_count": 25,
+    "verified_finance_positive_subregion_count": 10,
+    "primary_remaining_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
+    "general_ontology_mapping_closed": false,
+    "authenticated_bounded_registry_available_for_arbitrary_domain": false,
+    "terminal_remains_false": true,
     "terminal_credit_delta": 0
   }
 }
