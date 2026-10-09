@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_REGRESSION_CC_R3_OPEN_ACCEPTANCE_COUNTEREXAMPLE_V1",
+  "date": "2026-10-09",
+  "status": "PERMANENT_FAIL_CLOSED_REGRESSION",
+  "invariant": "UNDER_THE_ACTIVE_CLAIM_SEMANTICS_ANY_OPEN_MANDATORY_ACCEPTANCE_PREDICATE_PREVENTS_U_EMPTY_AND_CC_R3_CLOSURE",
+  "claim_id": "fda1409a94d983f61888f08f3df99cad50dc36edc3f5feb01b6df20e31156eaa",
+  "forbidden": [
+    "OPEN_ACCEPTANCE_TREATED_AS_PASS",
+    "UNKNOWN_ACCEPTANCE_REMOVED_FROM_B_PLUS",
+    "ALL_PASS_SAMPLE_TREATED_AS_UNIVERSAL_U_EMPTY_WITHOUT_COMPLEMENT_PROOF",
+    "CC_R3_PROMOTED_WHILE_CURRENT_COUNTEREXAMPLE_EXISTS",
+    "R3_COUNTEREXAMPLE_MISREPORTED_AS_REAL_SYSTEM_FAILURE",
+    "COUNTEREXAMPLE_TRANSPORTED_TO_DIFFERENT_CLAIM"
+  ],
+  "mutations": [
+    {
+      "id": "ONE_OPEN_FAMILY",
+      "expect": "CC_R3_COUNTEREXAMPLE_CURRENT_EPISTEMIC_ENVELOPE"
+    },
+    {
+      "id": "ALL_PASS_WITHOUT_COMPLEMENT_PROOF",
+      "expect": "NO_R3_COUNTEREXAMPLE_FROM_FROZEN_ACCEPTANCE_STATES__U_EMPTY_NOT_PROVED"
+    },
+    {
+      "id": "CLAIM_SCOPE_DRIFT",
+      "expect": "FAIL_CLOSED"
+    },
+    {
+      "id": "FAMILY_UNIVERSE_DRIFT",
+      "expect": "FAIL_CLOSED"
+    }
+  ],
+  "runtime": "canonical/runtime/cc_r3_counterexample_v1.py",
+  "tests": "canonical/tests/test_cc_r3_counterexample_v1.py",
+  "terminal_credit_delta": 0
+}

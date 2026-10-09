@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_COVERAGE_COMPLETENESS_ROOT_CERTIFICATE_REGISTRY_V1",
   "date": "2026-10-09",
-  "status": "ACTIVE_OPEN_REGISTRY__SINGLE_FROZEN_CLAIM_REQUIRED_BEFORE_ANY_PROVED_SLOT__THREE_ROOT_CERTIFICATE_OBLIGATIONS__ZERO_PROVED__ZERO_CREDIT",
+  "status": "ACTIVE_FROZEN_CLAIM_BOUND__THREE_ROOT_CERTIFICATE_OBLIGATIONS__ZERO_PROVED__ZERO_CREDIT",
   "namespace": "PROJECT_BRAIN_COVERAGE_COMPLETENESS_ROOTS_V1",
   "mission_binding": {
     "pointer_path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
@@ -72,7 +72,17 @@
     "terminal_credit_delta": 0
   },
   "registry_scope": "SINGLE_ACTIVE_FROZEN_CERTIFICATION_CLAIM_AT_A_TIME",
-  "active_claim": null,
+  "active_claim": {
+    "claim_kind": "CHECKPOINT_ACCEPTANCE",
+    "mission_blob_sha": "7ad5f82d8434966781bf97c725d482e10133fc7c",
+    "scope_sha256": "e7461e484491196b40ebf88b7840fe17fb464be83f7a74d13363cd0427c665c9",
+    "target_predicate_sha256": "24820adb64697831d6ef7b13ea471c6f23a6fc1b995a7f15deb3f65963b8c0ba",
+    "semantics_sha256": "19fe42d190497e96546799cbdaa269c09f2505f0b76fa735d3f8c10e9e5eac3c",
+    "epoch": "2026-10-09-CCRT-R3-CLAIM-V1",
+    "authority_id": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_CHECKPOINT_OBJECTIVE",
+    "terminal_credit_delta": 0,
+    "claim_id": "fda1409a94d983f61888f08f3df99cad50dc36edc3f5feb01b6df20e31156eaa"
+  },
   "claim_binding_policy": {
     "claim_scope_law": "canonical/governance/COVERAGE_COMPLETENESS_CLAIM_SCOPE_V1.json",
     "claim_guard": "canonical/runtime/coverage_claim_scope_guard_v1.py",
@@ -92,5 +102,19 @@
     "no_cross_claim_root_certificate_transport": true,
     "no_global_open_ended_mission_claim": true
   },
-  "next": "FREEZE_ONE_VALID_CERTIFICATION_CLAIM__THEN_PROVE_OR_FALSIFY_CC_R3_CC_R1_CC_R2_FOR_THAT_EXACT_CLAIM__NO_GLOBAL_OR_CROSS_CLAIM_PROMOTION"
+  "next": "RESOLVE_ACTIVE_CC_R3_COUNTEREXAMPLE_FRONTIER__SHRINK_B_PLUS_OR_SOUNDLY_EXPAND_G_MINUS_UNTIL_U_EMPTY_OR_NEW_COUNTEREXAMPLE__DO_NOT_PROMOTE_R3",
+  "active_claim_descriptor": {
+    "path": "canonical/governance/CC_ACTIVE_FROZEN_CLAIM_20261009_V1.json",
+    "git_blob_sha": "9a6141373b9ef087ee7a12413d1afe8cfaefa262"
+  },
+  "current_root_falsifications": {
+    "CC_R3_TERMINAL_CLOSURE_V1": {
+      "status": "FALSIFIED_CURRENT_EPISTEMIC_ENVELOPE",
+      "claim_id": "fda1409a94d983f61888f08f3df99cad50dc36edc3f5feb01b6df20e31156eaa",
+      "path": "canonical/verification/CC_R3_COUNTEREXAMPLE_20261009_V1.json",
+      "git_blob_sha": "e707b115609dd475d258514eac26cbdb070870ac",
+      "u_empty": false,
+      "terminal_credit_delta": 0
+    }
+  }
 }

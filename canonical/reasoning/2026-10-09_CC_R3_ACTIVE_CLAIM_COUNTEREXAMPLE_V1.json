@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_DURABLE_REASONING_RECEIPT_V1",
+  "date": "2026-10-09",
+  "status": "COMPLETED_CC_R3_FALSIFICATION__ZERO_CREDIT",
+  "claim_id": "fda1409a94d983f61888f08f3df99cad50dc36edc3f5feb01b6df20e31156eaa",
+  "objective": "Decide claim-scoped CC_R3 by U-empty proof or counterexample.",
+  "result": {
+    "frozen_families": 19,
+    "open_acceptance_families": 12,
+    "witness": "ADVANCED_AGENTIC_CODING",
+    "u_empty": false,
+    "cc_r3": "FALSIFIED_CURRENT_EPISTEMIC_ENVELOPE",
+    "r4_closed": false
+  },
+  "semantics": [
+    "OPEN_OR_UNKNOWN_ACCEPTANCE_RETAINS_FAIL_COMPLETION_IN_B_PLUS",
+    "G_MINUS_REQUIRES_ALL_MANDATORY_TERMINAL_PREDICATES_SATISFIED",
+    "COUNTEREXAMPLE_IS_NOT_REAL_SYSTEM_FAILURE"
+  ],
+  "evidence": [
+    "canonical/governance/CC_ACTIVE_FROZEN_CLAIM_20261009_V1.json",
+    "canonical/verification/CC_R3_COUNTEREXAMPLE_20261009_V1.json",
+    "canonical/verification/CC_R3_ACTIVE_CLAIM_COUNTEREXAMPLE_VERIFY_20261009_V1.json"
+  ],
+  "next": "RESOLVE_R3_WITNESS_FRONTIER_BEFORE_R1_R2_TERMINAL_SUCCESS_WORK",
+  "accounting": {
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}

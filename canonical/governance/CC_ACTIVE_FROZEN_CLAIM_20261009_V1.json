@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_CC_FROZEN_CERTIFICATION_CLAIM_V1",
+  "date": "2026-10-09",
+  "status": "FROZEN_CHECKPOINT_ACCEPTANCE_CLAIM__ZERO_CREDIT",
+  "claim": {
+    "claim_kind": "CHECKPOINT_ACCEPTANCE",
+    "mission_blob_sha": "7ad5f82d8434966781bf97c725d482e10133fc7c",
+    "scope_sha256": "e7461e484491196b40ebf88b7840fe17fb464be83f7a74d13363cd0427c665c9",
+    "target_predicate_sha256": "24820adb64697831d6ef7b13ea471c6f23a6fc1b995a7f15deb3f65963b8c0ba",
+    "semantics_sha256": "19fe42d190497e96546799cbdaa269c09f2505f0b76fa735d3f8c10e9e5eac3c",
+    "epoch": "2026-10-09-CCRT-R3-CLAIM-V1",
+    "authority_id": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_CHECKPOINT_OBJECTIVE",
+    "claim_id": "fda1409a94d983f61888f08f3df99cad50dc36edc3f5feb01b6df20e31156eaa",
+    "terminal_credit_delta": 0
+  },
+  "scope_descriptor": {
+    "checkpoint_id": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+    "checkpoint_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+    "terminal_closure_manifest": {
+      "path": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
+      "git_blob_sha": "b2aae1b51c445ae466e04737e06806801cdc711e",
+      "expected_family_count": 19
+    },
+    "target_envelope": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+      "git_blob_sha": "661a57f839101fbf54c7e4edc76166c65ce9327d"
+    },
+    "ownership_matrix": {
+      "path": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
+      "git_blob_sha": "a69bf9668eb7ae5499df38a6be08ecbca060aa9c"
+    },
+    "global_terminal_universe": {
+      "path": "canonical/governance/GLOBAL_TERMINAL_UNIVERSE_V1.json",
+      "git_blob_sha": "ff97ffee7c9b25a491ff5ee231919ea4964f09e3"
+    },
+    "global_terminal_obligation_graph": {
+      "path": "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAPH_V1.json",
+      "git_blob_sha": "eebdeb6de3b3cfaed30a3bc991dae0548d25e7f5"
+    }
+  },
+  "target_descriptor": {
+    "predicate": "TERMINAL_CLOSURE_REDUCER_ACHIEVED_TRUE",
+    "reducer": {
+      "path": "canonical/runtime/terminal_closure_reducer.py",
+      "git_blob_sha": "27b51e53db5063756ff3046f978c0087fd4a9256"
+    }
+  },
+  "semantics_descriptor": {
+    "root_claim": "CC_R3_TERMINAL_CLOSURE_V1: B_plus[C] SUBSETEQ G_minus[C]",
+    "carrier_requirement": "MISSION_SUFFICIENT_CLAIM_SCOPED_CARRIER__NO_CROSS_CLAIM_TRANSPORT",
+    "terminal_authority": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+      "git_blob_sha": "9cd5e967241a3a7cd7f5ddd6283c9f8ce90dfd69"
+    },
+    "terminal_predicate": "TERMINAL_CLOSURE_REDUCER_ACHIEVED_TRUE",
+    "b_plus_rule": "OPEN_OR_UNKNOWN_FROZEN_ACCEPTANCE_PREDICATE_RETAINS_BOTH_PASS_AND_FAIL_COMPLETIONS_UNTIL_PROVED",
+    "g_minus_rule": "ONLY_COMPLETIONS_SATISFYING_ALL_MANDATORY_TERMINAL_PREDICATES_ARE_DEFINITELY_GOOD",
+    "unknown_policy": "UNKNOWN_FAILS_CLOSED",
+    "global_open_ended_mission_completion_derivable": false,
+    "authority_provenance_refresh": {
+      "previous_blob_sha": "3b05b142f1991c7d9d2ab9e90c265ed3d3896486",
+      "current_blob_sha": "9cd5e967241a3a7cd7f5ddd6283c9f8ce90dfd69",
+      "checkpoint_objective_unchanged": true,
+      "terminal_semantics_unchanged": true,
+      "claim_core_unchanged": true
+    }
+  }
+}
