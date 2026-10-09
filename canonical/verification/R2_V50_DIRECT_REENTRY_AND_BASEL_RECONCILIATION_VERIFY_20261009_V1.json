@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_R2_V50_DIRECT_REENTRY_AND_BASEL_RECONCILIATION_VERIFY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__LIVE_V50_AUTHORITY_CHAIN_CONSISTENT__DIRECT_REENTRY_28_OF_28__V13_ROUTER_3_OF_3__BASEL_AUTHORITY_BOUND_WITHOUT_IDENTITY_CREDIT__ZERO_TERMINAL_CREDIT",
+  "base_main_sha": "0eeb08c382a13f31ce74241e6f22277d3b73c3c9",
+  "exact_blobs": {
+    "fixed_point_runtime": "2f0ac068357869279ab3362c80d6fae976ce38b3",
+    "fixed_point_tests": "2e21d466007a7725e2d10b9c7fff31feaedab712",
+    "direct_reentry_verification": "08a13d9c8f7e39ac36116532616764f1f1371623",
+    "scheduler_v50": "33bd5f6352803425e082ef7477d7aff6f3ff597b",
+    "current_r2_v50": "13dff90776b62852dbf0b5c58af64a2b6d9b67cb",
+    "current_terminal_authority": "401373c5be304e7575254e92aa920a8ef692d691",
+    "fibo_basel_reconciliation": "fc3c11720b35a4de56430b66cd1f1b1c24e36f5f",
+    "fibo_basel_verification": "101ae642a20adff27c4ac956caf79d83a3ab46fa",
+    "direct_activation_v26": "9bbb2b604fdf31c16679c9b71ccd47996e018cb1",
+    "direct_runtime_v13": "6784e7274d640c7f75659d4dab9237188ea784d1"
+  },
+  "invariants": {
+    "direct_reentry_runtime_exact_verified": true,
+    "scheduler_binds_exact_direct_reentry_runtime": true,
+    "scheduler_counts_33_routes_30_bounded_families": true,
+    "scheduler_preserves_one_primary_finance_residual": true,
+    "scheduler_binds_exact_basel_authority_and_verification": true,
+    "generic_finance_source_wake_refined_to_exclude_core7_and_basel_fragment": true,
+    "old_core7_only_wake_removed": true,
+    "basel_surface_to_contextual_identity_authority_false": true,
+    "current_r2_binds_exact_v50_scheduler": true,
+    "current_r2_binds_exact_direct_reentry_runtime": true,
+    "terminal_binds_exact_v50_scheduler": true,
+    "terminal_binds_exact_current_r2_v50": true,
+    "terminal_binds_exact_direct_reentry_runtime": true,
+    "terminal_remains_false": true,
+    "direct_activation_route_count_unchanged_33": true,
+    "v13_direct_runtime_unchanged": true
+  },
+  "behavioral_verification": {
+    "py_compile": "PASS",
+    "fixed_point_cleanroom": "28_OF_28_PASS",
+    "v13_router": "3_OF_3_PASS",
+    "fibo_basel_existing_verification": "TWO_CARRIER_7_OF_7_EACH_PLUS_ADJACENT_SEMANTIC_28_OF_28_PASS"
+  },
+  "nonclaims": [
+    "NO_NEW_DIRECT_ROUTE_FROM_BASEL_SOURCE_AUTHORITY",
+    "NO_CONTEXTUAL_IDENTITY_FROM_BASEL_SURFACE_LABELS",
+    "NO_OPEN_WORLD_FINANCE_ONTOLOGY_COMPLETENESS",
+    "NO_FINANCE_SEMANTIC_TAIL_CLOSURE",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "direct_route_count_delta": 0,
+    "bounded_family_count_delta": 0,
+    "primary_unsolved_cell_count_delta": 0,
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
