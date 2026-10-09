@@ -356,12 +356,25 @@ def compile_gap_contract(
         or residual.get("irreducible_external_information_proved") is True
     )
 
+    pending_acquisition = (
+        residual.get("pending_acquisition_or_experiment_required") is True
+    )
+    externality_guard = (
+        "EXTERNALITY_NOT_PROVED__CONTINUE_INTERNAL_SEARCH_SYNTHESIS_OR_BYPASS"
+    )
+    constructive_internal = [
+        item for item in internal if item != externality_guard
+    ]
+
     if row.get("pass") is True and not internal:
         if external_proved:
             gap_class = "PROVEN_INFORMATION_THEORETICALLY_EXTERNAL"
         else:
             gap_class = "NONE"
         required_action = "NONE"
+    elif pending_acquisition and evidence and not constructive_internal:
+        gap_class = "PENDING_ACQUISITION_OR_EXPERIMENT"
+        required_action = "SEARCH_SIMULATE_EXPERIMENT_OR_ACQUIRE_MINIMUM_NEEDED_EVIDENCE"
     elif internal:
         gap_class = "CONSTRUCTIVE_CAPABILITY_GAP"
         required_action = "SYNTHESIZE_OR_ACQUIRE_VERIFIABLE_CAPABILITY"
@@ -386,9 +399,8 @@ def compile_gap_contract(
             residual.get("information_theoretic_externality_proved") is True
         ),
         "internal_unsolved": residual.get("internal_unsolved") is True,
-        "pending_acquisition_or_experiment_required": (
-            residual.get("pending_acquisition_or_experiment_required") is True
-        ),
+        "pending_acquisition_or_experiment_required": pending_acquisition,
+        "constructive_internal_blockers": constructive_internal,
     }
     semantic_work = [deepcopy(dict(x)) for x in pending_work]
     constructive_contracts = _constructive_capability_contracts(semantic_work)
