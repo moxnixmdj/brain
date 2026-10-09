@@ -1,0 +1,95 @@
+{
+  "schema": "PROJECT_BRAIN_R2_BOUNDED_NATURAL_EFFECT_LATTICE_V16_VERIFY_V1",
+  "date": "2026-10-09",
+  "branch": "r2-natural-effect-clauses-v16-current2",
+  "capability": "BOUNDED_NATURAL_EFFECT_CLAUSE_TO_QUERY_RELATIVE_FIELD_LATTICE",
+  "status": "VERIFIED_ISOLATED_CHANGED_AND_INHERITED_SURFACE__68_OF_68_PASS",
+  "theorem": {
+    "natural_language_scope": "BOUNDED_UNAMBIGUOUS_SENTENCE_GRAMMAR_ONLY",
+    "supported_positive_clauses": [
+      "ONLY_EFFECTS_ON_TARGET_INVENTORY",
+      "ONLY_EFFECT_TARGETS_SCOPE",
+      "DEFINE_TARGET_VALUE",
+      "REPLACE_TARGET_VALUE",
+      "OVERRIDE_TARGET_VALUE",
+      "EXCEPTION_TARGET_VALUE",
+      "UNCONDITIONAL_OR_EXPLICIT_JSON_CONDITIONS",
+      "VALID_FROM_OR_NO_START_DATE",
+      "VALID_UNTIL_OR_NO_END_DATE",
+      "SUPERSEDES_IDS_OR_NOTHING"
+    ],
+    "proof_law": "CLAUSE_SEMANTICS_HAVE_ZERO_AUTHORITY_UNTIL_SOURCE_ALIGNED_V10_RECOMPUTES_THE_EXACT_CLAUSE",
+    "autofill_law": "AUTOFILL_V3_FILLS_ONLY_UNOWNED_SEMANTIC_SLOTS_AND_CANNOT_REPLACE_CALLER_CLAIMS",
+    "lattice_law": "UNRECOGNIZED_OR_OMITTED_FIELDS_REMAIN_TOP;ONLY_PROVED_FIELDS_REFINE_THE_V3_LATTICE",
+    "execution_law": "FINITE_EFFECT_WORLDS_ARE_ADMITTED_ONLY_AFTER_ALL_QUERY_RELEVANT_FIELDS_ARE_EXACT_AND_CROSS_FIELD_VALID"
+  },
+  "exact_changed_blobs": {
+    "canonical/runtime/certified_bounded_natural_effect_clause_v1.py": "6ac0e177341f3298b33405c087567a6701634965",
+    "canonical/runtime/source_aligned_semantic_proof_v10.py": "369dfafaa5e4ab07b138142f6ce7a26f3bb8e7da",
+    "canonical/runtime/source_semantic_claim_autofill_v3.py": "06911d2201f8cc7598546fef3d980d3f3319be3d",
+    "canonical/runtime/cross_document_effect_semantic_lattice_v3.py": "22679e6317563e0faa1792ba01d6fc915fc00a23",
+    "canonical/runtime/cross_document_effect_semantic_lattice_verify_v3.py": "327643b5ace304990d69abdb9c903695335eb963",
+    "canonical/runtime/r2_cross_document_natural_effect_lattice_direct_adequacy_v1.py": "7bff4ab4f91aa246dbd16f5b71c9723269755664",
+    "canonical/runtime/r2_direct_end_to_end_adequacy_v16.py": "c47632a43e6c0e8d2d869ca9a885e96ff606681e",
+    "canonical/runtime/general_adequate_decision_fixed_point_v2.py": "e1d8e3bf628e69eda95905db01e0e22145946d79",
+    "canonical/tests/test_bounded_natural_effect_lattice_v3.py": "75a2dd98323126aaaf0e07a4c15ade0c82e683e0",
+    "canonical/tests/test_r2_cross_document_natural_effect_lattice_v16.py": "e780f8237c3e4edfdd0439dfe679f81f697242df"
+  },
+  "isolated_verification": {
+    "sprite": "brain-r2-grounded-frontier-verify-20261008",
+    "source_aligned_v9_regression": {
+      "passed": 8,
+      "failed": 0
+    },
+    "field_lattice_v2_regression": {
+      "passed": 12,
+      "failed": 0
+    },
+    "bounded_natural_parser_v10_autofill_v3_lattice_v3": {
+      "passed": 12,
+      "failed": 0
+    },
+    "v16_direct_route_and_router": {
+      "passed": 7,
+      "failed": 0
+    },
+    "fixed_point_v16": {
+      "passed": 29,
+      "failed": 0
+    },
+    "total_passed": 68,
+    "total_failed": 0
+  },
+  "cleanroom_boundaries": {
+    "v16_route_harness": "REAL_V16_AND_REAL_NATURAL_LATTICE_ROUTE;V15_STUBBED_ONLY_AS_DELEGATED_FALLBACK_BECAUSE_VERIFIER_SPRITE_PREDATES_V15",
+    "fixed_point_harness": "REAL_V16_LOADED;V15_DELEGATED_FALLBACK_STUBBED;CONTROLLER_AND_REPAIR_SURFACES_STUBBED_AS_IN_EXISTING_UNIT_PATTERN"
+  },
+  "current_main_nonoverlap_lease": {
+    "merge_base": "4b7cc30ca4b4c6711c2db58dcd3b7fe99327b2b3",
+    "newer_main_files": [
+      "canonical/evidence/CURSORBENCH_4_0_CURRENT_ACCURACY_METRIC_IDENTITY_EVIDENCE_20261009_V1.json",
+      "canonical/governance/CURSORBENCH_ROUTE_A_4_0_METRIC_IDENTITY_REDUCTION_20261009_V1.json",
+      "canonical/tests/test_cursorbench_route_a_4_0_metric_identity_reduction_v1.py",
+      "canonical/verification/CURSORBENCH_ROUTE_A_4_0_METRIC_IDENTITY_INDEPENDENT_VERIFICATION_20261009_V1.json"
+    ],
+    "overlap_with_v16_runtime_router_fixed_point_or_tests": false
+  },
+  "nonclaims": [
+    "NO_GENERAL_ARBITRARY_ENGLISH_UNDERSTANDING",
+    "NO_UNRECOGNIZED_PROSE_EFFECT_SEMANTICS",
+    "NO_IMPLICIT_PRECEDENCE_INFERENCE",
+    "NO_EXTERNAL_WORLD_TRUTH",
+    "NO_TERMINAL_CREDIT_FROM_TEST_PASS_COUNT"
+  ],
+  "architectural_result": [
+    "ORDINARY_LOOKING_BOUNDED_PROSE_CAN_NOW_CLOSE_EFFECT_FIELDS_WITHOUT_MANUAL_SEMANTIC_CLAIMS",
+    "UNRECOGNIZED_PROSE_REMAINS_TOP",
+    "CALLER_CONTRADICTIONS_CANNOT_BE_AUTOFILLED_AWAY",
+    "V16_PREPENDS_THE_NEW_ROUTE_WITH_V15_UNCHANGED_AS_FALLBACK"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
