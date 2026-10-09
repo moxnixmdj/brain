@@ -30,7 +30,7 @@ def manifest():
         "max_concurrency": 16,
         "obligations": [{"id": x, "status": "OPEN"} for x in OPEN],
         "blockers": [],
-        "routes": [{"id": "SCOPE_COMPLETE_UNIVERSAL_COVER", "status": "OPEN", "can_discharge": OPEN}],
+        "routes": [{"id": "SCOPE_COMPLETE_UNIVERSAL_COVER", "status": "OPEN", "can_discharge": OPEN, "proof_cost_bound": True, "estimated_wall_clock_units": 1.0}],
         "active_jobs": [],
     }
 
@@ -95,9 +95,10 @@ class TerminalAutopilotTests(unittest.TestCase):
             }
             self.assertIn("SCOPE_COMPLETE_UNIVERSAL_COVER", routes)
             self.assertIn("OBJECTIVE_ACCEPTANCE_COMMON_LAW", routes)
-            self.assertIn("CODING_TRIAD_SCOPE_COMPLETE_COVER", routes)
-            self.assertIn("FINANCE_MYSTERY_COMMON_POLICY_COVER", routes)
-            self.assertIn("PROFESSIONAL_QUALITATIVE_ROBUST_DOMINANCE", routes)
+            self.assertNotIn("CODING_TRIAD_SCOPE_COMPLETE_COVER", routes)
+            self.assertNotIn("FINANCE_MYSTERY_COMMON_POLICY_COVER", routes)
+            self.assertNotIn("PROFESSIONAL_QUALITATIVE_ROBUST_DOMINANCE", routes)
+            self.assertNotIn("GDPVAL_FINITE_PUBLIC_ACCEPTANCE_COVER", routes)
             self.assertLessEqual(len(direct), 12)
 
 
@@ -285,6 +286,28 @@ class TerminalAutopilotTests(unittest.TestCase):
                 self.assertFalse(route["promotion_authority"])
                 self.assertFalse(route["terminal_credit"])
                 self.assertTrue(set(route["can_discharge"]).issubset(set(OPEN)))
+
+            rankable = {
+                rid for rid, row in by_id.items()
+                if row["proof_cost_bound"] is True
+            }
+            self.assertEqual(
+                rankable,
+                {
+                    "SCOPE_COMPLETE_UNIVERSAL_COVER",
+                    "OBJECTIVE_ACCEPTANCE_COMMON_LAW",
+                },
+            )
+            for rid in {
+                "PROFESSIONAL_QUALITATIVE_ROBUST_DOMINANCE",
+                "CODING_TRIAD_SCOPE_COMPLETE_COVER",
+                "FINANCE_MYSTERY_COMMON_POLICY_COVER",
+                "GDPVAL_FINITE_PUBLIC_ACCEPTANCE_COVER",
+            }:
+                self.assertEqual(
+                    by_id[rid]["proof_cost_status"],
+                    "UNBOUND__NOT_RANKABLE",
+                )
 
 
 if __name__ == "__main__":
