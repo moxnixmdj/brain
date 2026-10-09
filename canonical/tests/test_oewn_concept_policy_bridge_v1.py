@@ -295,7 +295,10 @@ class OEWNConceptPolicyBridgeV1Tests(unittest.TestCase):
             "OPEN__OEWN_RELEASE_RELATIVE_ABSENCE__AUTHENTICATED_DOMAIN_UNIVERSE_REQUIRED",
         )
         self.assertTrue(out["oewn_candidate_set_complete"])
-        self.assertIn("NOT_OPEN_WORLD", out["reason"].replace("IS_", "IS_NOT_" ) if False else "NOT_OPEN_WORLD")
+        self.assertEqual(
+            out["reason"],
+            "OEWN_RELEASE_RELATIVE_ABSENCE_IS_NOT_OPEN_WORLD_SEMANTIC_ABSENCE",
+        )
         self.assertFalse(out["terminal_authority"])
 
     def test_multiple_senses_may_map_to_same_authenticated_concept_without_guessing(self):
