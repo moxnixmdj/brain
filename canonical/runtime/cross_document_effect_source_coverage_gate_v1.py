@@ -23,6 +23,7 @@ from typing import Any, Mapping, Sequence
 
 from canonical.runtime import cross_document_effect_hypothesis_worldset_v1 as worldset
 from canonical.runtime import cross_document_effect_hypothesis_worldset_verify_v1 as worldset_verify
+from canonical.runtime import certified_raw_effect_sentence_v1 as raw_effect_sentence
 
 SCHEMA="PROJECT_BRAIN_CROSS_DOCUMENT_EFFECT_SOURCE_COVERAGE_GATE_V1"
 MAX_DOCUMENTS=32
@@ -32,6 +33,7 @@ MAX_SOURCE_BYTES=2_000_000
 _MODES={
     "WHITESPACE_NO_EFFECT",
     "CANONICAL_EFFECT_SLOT_JSON",
+    "CERTIFIED_EFFECT_SENTENCE",
     "OPEN_UNKNOWN_EFFECT",
 }
 
@@ -199,7 +201,7 @@ def evaluate(capsule:Mapping[str,Any])->dict[str,Any]:
                         "end":end,
                         "text_sha256":_sha_bytes(part),
                     })
-                else:
+                elif mode=="CANONICAL_EFFECT_SLOT_JSON":
                     sid=_token(slot_id,"SLOT_ID")
                     key=(did,sid)
                     if key not in slot_index:
@@ -209,6 +211,30 @@ def evaluate(capsule:Mapping[str,Any])->dict[str,Any]:
                     parsed=_parse_slot_region(part)
                     if parsed!=slot_index[key]:
                         raise ValueError("SOURCE_SLOT_WORLDSET_MISMATCH:"+did+":"+sid)
+                    bound_slots.add(key)
+                else:
+                    sid=_token(slot_id,"SLOT_ID")
+                    key=(did,sid)
+                    if key not in slot_index:
+                        raise ValueError("COVERAGE_SLOT_NOT_IN_WORLDSET:"+did+":"+sid)
+                    if key in bound_slots:
+                        raise ValueError("COVERAGE_SLOT_BOUND_TWICE:"+did+":"+sid)
+                    try:
+                        sentence=part.decode("utf-8")
+                    except UnicodeDecodeError as exc:
+                        raise ValueError("CERTIFIED_EFFECT_SENTENCE_UTF8_INVALID:"+rid) from exc
+                    compiled=raw_effect_sentence.compile_sentence(
+                        sentence,
+                        document_id=did,
+                        slot_id=sid,
+                    )
+                    if compiled.get("pass") is not True:
+                        raise ValueError(
+                            "CERTIFIED_EFFECT_SENTENCE_NOT_PROVED:"
+                            + str(compiled.get("status") or compiled.get("reason"))
+                        )
+                    if compiled.get("slot")!=slot_index[key]:
+                        raise ValueError("CERTIFIED_EFFECT_SENTENCE_WORLDSET_MISMATCH:"+did+":"+sid)
                     bound_slots.add(key)
 
             if expected_start!=len(raw):
