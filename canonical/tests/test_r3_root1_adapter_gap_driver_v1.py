@@ -50,7 +50,7 @@ class R3Root1AdapterGapDriverV1Tests(unittest.TestCase):
             )
             self.assertEqual(
                 blocker["blocker"],
-                "ROOT1_CONSTRUCTIVE_R3_ADAPTER_AUTHORING_GAP__NO_BOUND_ACQUISITION_ROUTE",
+                "ROOT1_CONSTRUCTIVE_R3_VERIFICATION_FRONTIER_GAP__NO_BOUND_ACQUISITION_ROUTE",
             )
             self.assertTrue(blocker["root1_positive_gap_established"])
             gap = blocker["root1_gap_witness"]
@@ -209,7 +209,7 @@ class R3Root1AdapterGapDriverV1Tests(unittest.TestCase):
             )
             self.assertEqual(
                 blocker["blocker"],
-                "ROOT1_CONSTRUCTIVE_R3_ADAPTER_AUTHORING_GAP__NO_BOUND_ACQUISITION_ROUTE",
+                "ROOT1_CONSTRUCTIVE_R3_VERIFICATION_FRONTIER_GAP__NO_BOUND_ACQUISITION_ROUTE",
             )
             self.assertTrue(blocker["root1_positive_gap_established"])
 
