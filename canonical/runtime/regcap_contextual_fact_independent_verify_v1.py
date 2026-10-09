@@ -28,19 +28,19 @@ ATOM_RESOLUTION = "REGIME::RESOLUTION"
 ATOM_GSIB = "SCOPE::G_SIB"
 
 _CCOB = re.compile(
-    r"(?is)\\b2\\.5\\s*%.{0,160}\\b(?:common\\s+equity\\s+tier\\s+1|cet1)\\b"
-    r".{0,160}\\babove\\s+(?:the\\s+)?regulatory\\s+minimum(?:\\s+capital\\s+requirement)?\\b"
+    r"(?is)\b2\.5\s*%.{0,160}\b(?:common\s+equity\s+tier\s+1|cet1)\b"
+    r".{0,160}\babove\s+(?:the\s+)?regulatory\s+minimum(?:\s+capital\s+requirement)?\b"
 )
 _CCYB = re.compile(
-    r"(?is)\\breleased?\\s+when\\s+system[-\\s]wide\\s+risk\\s+"
-    r"(?:crystalli[sz]es(?:\\s+or\\s+dissipates)?|dissipates)\\b"
+    r"(?is)\breleased?\s+when\s+system[-\s]wide\s+risk\s+"
+    r"(?:crystalli[sz]es(?:\s+or\s+dissipates)?|dissipates)\b"
 )
 _TLAC = re.compile(
-    r"(?is)\\bloss[-\\s]absorbing\\s+and\\s+recapitali[sz]ation"
-    r"\\s+capacity\\b.{0,180}\\b(?:available\\s+)?in\\s+resolution\\b"
+    r"(?is)\bloss[-\s]absorbing\s+and\s+recapitali[sz]ation"
+    r"\s+capacity\b.{0,180}\b(?:available\s+)?in\s+resolution\b"
 )
 _GSIB = re.compile(
-    r"(?is)\\b(?:g[-\\s]?sib|global\\s+systemically\\s+important\\s+bank)s?\\b"
+    r"(?is)\b(?:g[-\s]?sib|global\s+systemically\s+important\s+bank)s?\b"
 )
 
 def derive(source_text: str) -> dict[str, Any]:
