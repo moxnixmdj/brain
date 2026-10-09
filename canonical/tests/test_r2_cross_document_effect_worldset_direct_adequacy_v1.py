@@ -31,6 +31,8 @@ def _case(*,small=True):
         "schema":w.SCHEMA,
         "case_id":"worldset-direct",
         "hypothesis_set_complete":True,
+        "compatibility_constraints_complete":True,
+        "incompatible_hypothesis_sets":[],
         "documents":[
             {"document_id":"A","effect_slots":[
                 _slot("A.effect",_e("A.t","threshold","DEFINE","10"))
