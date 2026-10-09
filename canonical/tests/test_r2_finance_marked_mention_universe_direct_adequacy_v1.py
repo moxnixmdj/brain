@@ -144,6 +144,26 @@ class MarkedMentionUniverseV1Tests(unittest.TestCase):
         checked = verifier.verify(source, result)
         self.assertFalse(checked["verified"], checked)
 
+    def test_preflight_is_pure_and_does_not_create_output(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            inp = root / "canonical" / "cases" / "marked.json"
+            outp = root / "canonical" / "out" / "decision.json"
+            inp.parent.mkdir(parents=True)
+            inp.write_text(json.dumps(self._source(), sort_keys=True), encoding="utf-8")
+            goal = (
+                "Using the structurally complete marked finance coreference source at "
+                "canonical/cases/marked.json, compute and independently verify the "
+                "decision-relevant ambiguity control and save it to "
+                "canonical/out/decision.json."
+            )
+            before = inp.read_bytes()
+            result = route.preflight({"task_id": "marked-coref-preflight", "goal": goal}, repo_root=root)
+            self.assertTrue(result["matched"], result)
+            self.assertEqual(result["status"], "DIRECT_ADEQUACY_ROUTE_MATCHED")
+            self.assertEqual(inp.read_bytes(), before)
+            self.assertFalse(outp.exists())
+
     def test_direct_route_transaction_succeeds(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
