@@ -1,0 +1,86 @@
+{
+  "schema": "PROJECT_BRAIN_EXECUTABLE_REFINEMENT_CURRENT_TRUTH_20261009_V1",
+  "date": "2026-10-09",
+  "status": "FRAMEWORK_BOUND__ANTI_BYPASS_LIVE_IN_FEATURE_BRANCH__MECHANICAL_REFINEMENT_PROOF_CLASS_OPEN__ZERO_CREDIT",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "source_bindings": {
+    "verifier": {
+      "path": "canonical/runtime/executable_refinement_verifier_v1.py",
+      "git_blob_sha": "13618667e6f87b29b1e56ceeb8947c51d64de683"
+    },
+    "creditable_route_gate": {
+      "path": "canonical/runtime/creditable_route_refinement_gate_v1.py",
+      "git_blob_sha": "58602558b3a6ef81e9c6dcaf28cbc61eb0b1d70d"
+    },
+    "dependency_graph_guard": {
+      "path": "canonical/runtime/terminal_dependency_graph_guard_v1.py",
+      "git_blob_sha": "7ee3988dc393965f83994fba70cd1903e7e2aa7c"
+    },
+    "terminal_dependency_falsifier": {
+      "path": "canonical/runtime/terminal_dependency_falsifier_v1.py",
+      "git_blob_sha": "0e540e2c76f5618593805a09ac0a4dd7ded354bb"
+    },
+    "dependency_graph": {
+      "path": "canonical/governance/CURRENT_TERMINAL_DEPENDENCY_GRAPH_V1.json",
+      "git_blob_sha": "769b2f277b41045f8a95ad3a2d0eb2cfaabcdb27"
+    },
+    "router_canary_binding": {
+      "path": "canonical/governance/ROUTER_DEPLOYMENT_CANARY_EXECUTABLE_REFINEMENT_20261009_V1.json",
+      "git_blob_sha": "d430de0c6ed47b1d18737a5261c345b7546896c9"
+    },
+    "semantic_edge_binding": {
+      "path": "canonical/governance/BRAIN_OWNED_SEMANTIC_EDGE_EXECUTABLE_REFINEMENT_20261009_V1.json",
+      "git_blob_sha": "c5f9b7af3b4c804ca0913789ab3acdb0b0f3eb4a"
+    },
+    "gated_entrypoint": {
+      "path": "canonical/runtime/certificate_gated_selected_route_runtime_entrypoint_v2.py",
+      "git_blob_sha": "c4f3ed3ea767a8930789f2426484fbce710d8f14"
+    }
+  },
+  "truth": {
+    "executable_refinement_framework_bound": true,
+    "creditable_route_gate_bound": true,
+    "declarative_refinement_boolean_is_promotion_authority": false,
+    "router_canary_structural_refinement_binding_bound": true,
+    "router_canary_refinement_verified": false,
+    "brain_owned_semantic_edge_structural_refinement_binding_bound": true,
+    "brain_owned_semantic_edge_bounded_refinement_verified": false,
+    "repository_wide_executable_refinement_closed": false,
+    "all_creditable_live_routes_refinement_verified": false,
+    "terminal_executable_refinement_gap_closed": false,
+    "executable_refinement_missing_is_external_impossibility": false
+  },
+  "frontier": {
+    "highest_dominance_open_leaf": "terminal-live-paths-executable-refinement",
+    "active_attack_families": [
+      "COMPOSITION_MISMATCH",
+      "VERSION_DRIFT",
+      "NOVEL_DIMENSION",
+      "IMPLEMENTATION_REFINEMENT_MISMATCH"
+    ],
+    "supported_proof_class_emitting_refinement_verified_true": false,
+    "open_world_closure": false,
+    "generator_coverage_proved": false
+  },
+  "promotion": {
+    "current_terminal_authority_pointer_modified": false,
+    "current_terminal_authority_projection_status": "DEFERRED_UNTIL_EXACT_BRANCH_FULL_REPO_VERIFICATION_AND_PROMOTION",
+    "reason": "CURRENT_TERMINAL_AUTHORITY_IS_A_HOT_CONCURRENT_POINTER__THIS_FEATURE_BRANCH_PRESERVES_IMMUTABLE_TRUTH_AND_DEFERS_THE_TINY_POINTER_PROJECTION_TO_PROMOTION_TIME"
+  },
+  "nonclaims": [
+    "NO_FULL_REPO_GREEN_CLAIM",
+    "NO_INDEPENDENT_REPLAY_CLAIM",
+    "NO_MECHANICALLY_CHECKED_EXECUTABLE_REFINEMENT_PROOF_CLASS",
+    "NO_REPOSITORY_WIDE_REFINEMENT_CLOSURE",
+    "NO_CURRENT_TERMINAL_POINTER_AUTHORITY",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
