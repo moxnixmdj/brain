@@ -29,6 +29,7 @@ PATHS = {
     "default_runtime": "canonical/governance/CURRENT_DEFAULT_RUNTIME_INTEGRATION.json",
     "live_wrapper": "canonical/runtime/r2_direct_live_admission_v1.py",
     "fixed_point": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
+    "v19": "canonical/runtime/r2_direct_end_to_end_adequacy_v19.py",
     "v21": "canonical/runtime/r2_direct_end_to_end_adequacy_v21.py",
     "dynamic_admissions_pointer": "canonical/governance/CURRENT_R2_DIRECT_ROUTE_ADMISSIONS.json",
     "dynamic_admissions_manifest": "canonical/governance/R2_DIRECT_ROUTE_DYNAMIC_ADMISSIONS_20261009_V1.json",
@@ -138,6 +139,11 @@ def _default_runtime_projection(
 ) -> tuple[dict[str, Any], list[str]]:
     errors: list[str] = []
 
+    if default_runtime.get("binding_semantics") != (
+        "MUTABLE_CURRENT_PATH_IDENTITY__IMMUTABLE_LOAD_BEARING_DESCENDANTS_GIT_BLOB_BOUND"
+    ):
+        errors.append("DEFAULT_RUNTIME_BINDING_SEMANTICS_INVALID")
+
     pointer_binding = pointer.get("default_runtime_integration")
     pointer_binding = pointer_binding if isinstance(pointer_binding, dict) else {}
     if pointer_binding.get("path") != PATHS["default_runtime"]:
@@ -165,6 +171,10 @@ def _default_runtime_projection(
         errors.append("DEFAULT_RUNTIME_BASELINE_POINTER_PATH_MISMATCH")
     if baseline.get("pointer_path_identity_authoritative") is not True:
         errors.append("DEFAULT_RUNTIME_BASELINE_POINTER_SEMANTICS_INVALID")
+    if baseline.get("runtime_path") != PATHS["v19"]:
+        errors.append("DEFAULT_RUNTIME_BASELINE_RUNTIME_PATH_MISMATCH")
+    if baseline.get("runtime_git_blob_sha") != actual["v19"]:
+        errors.append("DEFAULT_RUNTIME_BASELINE_RUNTIME_BLOB_MISMATCH")
     if baseline.get("role") != (
         "CURRENT_R2_SCHEDULER_AND_ACTIVATION_SNAPSHOT__NOT_DEFAULT_RUNTIME_SOURCE_SELECTOR"
     ):
@@ -187,6 +197,11 @@ def _default_runtime_projection(
         errors.append("DEFAULT_RUNTIME_DYNAMIC_POINTER_PATH_MISMATCH")
     if dynamic.get("pointer_path_identity_authoritative") is not True:
         errors.append("DEFAULT_RUNTIME_DYNAMIC_POINTER_SEMANTICS_INVALID")
+
+    if admissions_pointer.get("binding_semantics") != (
+        "MUTABLE_CURRENT_POINTER_PATH_IDENTITY__IMMUTABLE_TARGET_GIT_BLOB_BOUND"
+    ):
+        errors.append("DYNAMIC_ADMISSIONS_POINTER_BINDING_SEMANTICS_INVALID")
 
     target = admissions_pointer.get("target")
     target = target if isinstance(target, dict) else {}
@@ -213,6 +228,10 @@ def _default_runtime_projection(
         manifest_count = None
     if dynamic.get("current_dynamic_route_count") != manifest_count:
         errors.append("DEFAULT_RUNTIME_DYNAMIC_ROUTE_COUNT_MISMATCH")
+    if admissions_manifest.get("terminal_authority") is not False:
+        errors.append("DYNAMIC_ADMISSIONS_MANIFEST_TERMINAL_AUTHORITY_INVALID")
+    if admissions_manifest.get("terminal_credit_delta") != 0:
+        errors.append("DYNAMIC_ADMISSIONS_MANIFEST_TERMINAL_CREDIT_INVALID")
 
     if default_runtime.get("terminal_authority") is not False:
         errors.append("DEFAULT_RUNTIME_TERMINAL_AUTHORITY_INVALID")
