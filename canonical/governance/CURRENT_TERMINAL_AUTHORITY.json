@@ -13,7 +13,7 @@
       },
       "primitive_u_frontier": {
         "path": "canonical/governance/CURRENT_PRIMITIVE_U_FRONTIER_20261007_V1.json",
-        "git_blob_sha": "8ab5cd358f460ca649ec3b0ac8eea56e87d7f838"
+        "git_blob_sha": "8340829830dc81095abd4d643a8be6894a39f2f3"
       },
       "acceptance_regime_quotient": {
         "path": "canonical/governance/CURRENT_U_ACCEPTANCE_REGIME_QUOTIENT_20261007_V1.json",
@@ -881,7 +881,7 @@
     },
     "current_mission_objective": {
       "path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
-      "git_blob_sha": "07038a32598324c7aed88929a09c58bbe28b51a1",
+      "git_blob_sha": "2b37b3185e03b55678d7d394c8d29202a4b3ab48",
       "status": "ACTIVE_ULTIMATE_MISSION_OBJECTIVE_AUTHORITY"
     },
     "current_r2_decision_intelligence": {
@@ -2840,7 +2840,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 109,
+  "pointer_revision": 110,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
@@ -3983,11 +3983,11 @@
     "terminal_credit_delta": 0
   },
   "pointer_chain_reconciliation_20261009": {
-    "status": "ASSURANCE_TO_MISSION_TO_TERMINAL_CONTENT_ADDRESS_CHAIN_REBOUND__ZERO_CREDIT",
+    "status": "ASSURANCE_TO_MISSION_TO_TERMINAL_CONTENT_ADDRESS_CHAIN_REBOUND__CURRENTNESS_REFRESHED__ZERO_CREDIT",
     "current_assurance_path": "canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json",
-    "current_assurance_git_blob_sha": "5f9d04be11f7aff5737fd0c29d37d2d800358c8d",
+    "current_assurance_git_blob_sha": "a0daf031c41aa66675697818f2e02394f5e2c43e",
     "current_mission_path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
-    "current_mission_git_blob_sha": "07038a32598324c7aed88929a09c58bbe28b51a1",
+    "current_mission_git_blob_sha": "2b37b3185e03b55678d7d394c8d29202a4b3ab48",
     "terminal_authority": false,
     "terminal_credit_delta": 0
   },
@@ -4078,6 +4078,27 @@
     "current_git_blob_sha": "b20c5cd6965f7ea7e5ca019d1e828ac6eced042c",
     "contradictory_duplicate_path_count_before": 1,
     "contradictory_duplicate_path_count_after": 0,
+    "semantic_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "current_authority_chain_provenance_reconciliation_20261009_v1": {
+    "status": "PASS__CURRENT_ASSURANCE_TO_MISSION_TO_TERMINAL_AND_ACTIVE_U_FRONTIER_REBOUND__ZERO_CREDIT",
+    "current_assurance": {
+      "path": "canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json",
+      "prior_git_blob_sha": "5f9d04be11f7aff5737fd0c29d37d2d800358c8d",
+      "current_git_blob_sha": "a0daf031c41aa66675697818f2e02394f5e2c43e"
+    },
+    "current_mission": {
+      "path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
+      "prior_terminal_bound_git_blob_sha": "07038a32598324c7aed88929a09c58bbe28b51a1",
+      "current_git_blob_sha": "2b37b3185e03b55678d7d394c8d29202a4b3ab48"
+    },
+    "active_primitive_u_frontier": {
+      "path": "canonical/governance/CURRENT_PRIMITIVE_U_FRONTIER_20261007_V1.json",
+      "prior_git_blob_sha": "8ab5cd358f460ca649ec3b0ac8eea56e87d7f838",
+      "current_git_blob_sha": "8340829830dc81095abd4d643a8be6894a39f2f3"
+    },
     "semantic_credit_delta": 0,
     "acceptance_credit_delta": 0,
     "terminal_credit_delta": 0
