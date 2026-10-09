@@ -4,7 +4,7 @@
   "date": "2026-10-09",
   "status": "COMPLETED_PROOF_ONLY__VERIFIED_ARCHITECTURE_LOGIC__ZERO_FRESH_REALITY__ZERO_TERMINAL_CREDIT",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
-  "canonical_base_commit": "cf1bb9b70251d05883ada9a5c9689dffc2ca9201",
+  "canonical_base_commit": "0dac48cab2ae3334e6d00bf35d0c2a988b29aa42",
   "capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
   "action_kind": "TERMINAL_PROOF_ARCHITECTURE_CONSOLIDATION_AND_FALSIFICATION",
   "causal_blocker": "COVERAGE_COMPLETENESS_ARCHITECTURE_IS_DISTRIBUTED_ACROSS_MANY_MECHANISMS_WITHOUT_ONE_CURRENT_ROOT_THEOREM_ADMISSION_AND_FALSIFICATION_CONTROL",
@@ -114,7 +114,7 @@
     "critical_path_relation": "REDUCES_META_PROOF_DRIFT_AND_FUTURE_ARCHITECTURE_BRANCHING__NO_DIRECT_ACCEPTANCE_CREDIT"
   },
   "continuous_obs": {
-    "canonical_base_commit": "cf1bb9b70251d05883ada9a5c9689dffc2ca9201",
+    "canonical_base_commit": "0dac48cab2ae3334e6d00bf35d0c2a988b29aa42",
     "material_world_state_dependencies_complete": true,
     "unknown_material_dependencies": [],
     "information_boundary_complete": true,
