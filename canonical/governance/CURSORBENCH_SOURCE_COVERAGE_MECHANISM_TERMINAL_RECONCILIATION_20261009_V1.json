@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_CURSORBENCH_SOURCE_COVERAGE_MECHANISM_TERMINAL_RECONCILIATION_V1",
+  "date": "2026-10-09",
+  "status": "VERIFIED_MECHANISM_RECONCILED__REAL_TYPED_SEMANTICS_AND_FAILURE_COMPLETENESS_TRUTH_OPEN__ZERO_CREDIT",
+  "target_predicate": "CODING_CURSORBENCH_GE_57_8",
+  "activation": {
+    "path": "canonical/governance/CURSORBENCH_SOURCE_COVERAGE_ATOMS_ACTIVATION_20261009_V1.json",
+    "git_blob_sha": "2008028041450cdba9a8ad291d56d64c6a1429bf"
+  },
+  "independent_verification": {
+    "path": "canonical/verification/CURSORBENCH_SOURCE_COVERAGE_ATOMS_INDEPENDENT_VERIFICATION_20261009_V1.json",
+    "git_blob_sha": "cc0795464a18326643c11494bcc7a93144ccd9b9"
+  },
+  "effect": {
+    "source_coverage_mechanism_verified": true,
+    "typed_semantics_atom_mechanism_verified": true,
+    "failure_mode_completeness_atom_mechanism_verified": true,
+    "real_target_relevant_source_coverage_receipt_bound": false,
+    "typed_semantics_atom_truth_proved": false,
+    "failure_mode_completeness_atom_truth_proved": false,
+    "external_membership_atom_count_delta": 0,
+    "positive_adequacy_cover_closed": false,
+    "cursorbench_acceptance_closed": false
+  },
+  "scheduler": {
+    "do_not_rebuild_source_coverage_mechanism": true,
+    "next_route_b_object": "REAL_TARGET_RELEVANT_TYPED_ACCEPTANCE_MODEL_PLUS_LOSSLESS_RAW_TASK_CONTRACT_PLUS_INDEPENDENT_SOURCE_COVERAGE_RECEIPT",
+    "route_a_reactivation_rule": "EXACT_CURSORBENCH_4_0_SCORING_AUTHORITY_OR_EQUIVALENT_CONTENT_ADDRESSED_LOWER_BOUND"
+  },
+  "hard_nonclaims": [
+    "NO_REAL_TYPED_SEMANTICS_ATOM_TRUTH",
+    "NO_REAL_FAILURE_MODE_COMPLETENESS_ATOM_TRUTH",
+    "NO_HIDDEN_CURSORBENCH_TASK_MEMBERSHIP",
+    "NO_CURSORBENCH_SCORE_OR_ACCEPTANCE_CREDIT",
+    "NO_FAMILY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "promotion_authority": false,
+  "terminal_authority": false
+}
