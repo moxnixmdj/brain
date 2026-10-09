@@ -12,6 +12,8 @@ import json
 from pathlib import Path
 from typing import Any, Mapping
 
+from canonical.runtime.coverage_root_namespace_guard_v1 import validate_bridge_document
+
 
 def git_blob_sha(data: bytes) -> str:
     header = f"blob {len(data)}\0".encode("ascii")
@@ -35,9 +37,15 @@ def validate_documents(
     root_theorem_blob_sha: str,
     binding: Mapping[str, Any],
     binding_blob_sha: str,
+    namespace_bridge: Mapping[str, Any],
+    namespace_bridge_blob_sha: str,
     authority: Mapping[str, Any],
 ) -> dict[str, Any]:
     errors: list[str] = []
+
+    bridge_check = validate_bridge_document(namespace_bridge)
+    if not bridge_check.get("pass"):
+        errors.extend("ROOT_NAMESPACE_" + e for e in bridge_check.get("errors", []))
 
     real_objective = mission.get("real_objective")
     _fail(errors, "MISSION_REAL_OBJECTIVE_MISSING", isinstance(real_objective, str) and bool(real_objective))
@@ -111,6 +119,18 @@ def validate_documents(
         (binding.get("accounting") or {}).get("terminal_credit_delta") == 0,
     )
 
+    namespace_ref = binding.get("root_namespace_bridge") or {}
+    _fail(
+        errors,
+        "BINDING_ROOT_NAMESPACE_PATH_DRIFT",
+        namespace_ref.get("path") == "canonical/governance/COVERAGE_ROOT_NAMESPACE_BRIDGE_V1.json",
+    )
+    _fail(
+        errors,
+        "BINDING_ROOT_NAMESPACE_BLOB_STALE",
+        namespace_ref.get("git_blob_sha") == namespace_bridge_blob_sha,
+    )
+
     sources = authority.get("authoritative_sources") or {}
     live_ref = sources.get("coverage_completeness_root_theorem_r1_r4") or {}
     _fail(
@@ -123,6 +143,19 @@ def validate_documents(
         errors,
         "LIVE_AUTHORITY_ROOT_BINDING_BLOB_STALE",
         live_ref.get("git_blob_sha") == binding_blob_sha,
+    )
+
+    namespace_authority = sources.get("coverage_root_namespace_bridge") or {}
+    _fail(
+        errors,
+        "LIVE_AUTHORITY_ROOT_NAMESPACE_MISSING",
+        namespace_authority.get("path")
+        == "canonical/governance/COVERAGE_ROOT_NAMESPACE_BRIDGE_V1.json",
+    )
+    _fail(
+        errors,
+        "LIVE_AUTHORITY_ROOT_NAMESPACE_BLOB_STALE",
+        namespace_authority.get("git_blob_sha") == namespace_bridge_blob_sha,
     )
 
     return {
@@ -138,11 +171,13 @@ def validate_repo(root: Path) -> dict[str, Any]:
     mission_path = root / "canonical/governance/CURRENT_MISSION_OBJECTIVE.json"
     theorem_path = root / "canonical/governance/COVERAGE_COMPLETENESS_ROOT_THEOREM_V1.json"
     binding_path = root / "canonical/governance/COVERAGE_COMPLETENESS_ROOT_THEOREM_LIVE_BINDING_V1.json"
+    namespace_bridge_path = root / "canonical/governance/COVERAGE_ROOT_NAMESPACE_BRIDGE_V1.json"
     authority_path = root / "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json"
 
     mission_bytes = mission_path.read_bytes()
     theorem_bytes = theorem_path.read_bytes()
     binding_bytes = binding_path.read_bytes()
+    namespace_bridge_bytes = namespace_bridge_path.read_bytes()
 
     return validate_documents(
         mission=load_json(mission_path),
@@ -151,5 +186,7 @@ def validate_repo(root: Path) -> dict[str, Any]:
         root_theorem_blob_sha=git_blob_sha(theorem_bytes),
         binding=load_json(binding_path),
         binding_blob_sha=git_blob_sha(binding_bytes),
+        namespace_bridge=load_json(namespace_bridge_path),
+        namespace_bridge_blob_sha=git_blob_sha(namespace_bridge_bytes),
         authority=load_json(authority_path),
     )

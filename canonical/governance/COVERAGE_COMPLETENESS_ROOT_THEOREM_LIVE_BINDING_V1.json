@@ -23,9 +23,9 @@
   },
   "live_binding_validator": {
     "path": "canonical/runtime/root_theorem_live_binding_v1.py",
-    "git_blob_sha": "f7f54ea111fe79644a0f42a7b43434854f8f4d49",
+    "git_blob_sha": "6065139cb7f4a4b84b5c15db9ee129115a4b435f",
     "tests_path": "canonical/tests/test_root_theorem_live_binding_v1.py",
-    "tests_git_blob_sha": "c819926be272c1d21fa987906336e88461a93de1"
+    "tests_git_blob_sha": "f4484a867d57a41f178c0fa51f073403edbc0cfa"
   },
   "terminal_authority": {
     "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
@@ -47,7 +47,9 @@
     "BOOLEAN_ROOT_ASSERTIONS_ARE_NOT_SELF_AUTHENTICATING",
     "FALSE_SUCCESS_REOPENS_R4_AND_SEMANTIC_BINDINGS_BEFORE_ANY_NEW_ROOT",
     "MISSION_POINTER_DRIFT_IS_R4_FAILURE",
-    "ROOT_THEOREM_ARTIFACT_DRIFT_IS_R4_FAILURE"
+    "ROOT_THEOREM_ARTIFACT_DRIFT_IS_R4_FAILURE",
+    "LEGACY_ROOT_LABEL_IDENTITY_HAS_ZERO_CCRT_EQUIVALENCE_AUTHORITY",
+    "ROOT_NAMESPACE_DRIFT_IS_R4_FAILURE"
   ],
   "accounting": {
     "fresh_reality_units_consumed": 0,
@@ -55,5 +57,13 @@
     "terminal_credit_delta": 0,
     "acceptance_credit_delta": 0,
     "ownership_credit_delta": 0
+  },
+  "root_namespace_bridge": {
+    "path": "canonical/governance/COVERAGE_ROOT_NAMESPACE_BRIDGE_V1.json",
+    "git_blob_sha": "fd45e0fcfdd238cdae022fc58ce418c9151186f1",
+    "guard_path": "canonical/runtime/coverage_root_namespace_guard_v1.py",
+    "guard_git_blob_sha": "cea99ed2c7fe34aa1c99312baed0b852751af546",
+    "tests_path": "canonical/tests/test_coverage_root_namespace_guard_v1.py",
+    "tests_git_blob_sha": "1aae3a34dfce681ece0bccaf5c3604f38d3711f8"
   }
 }
