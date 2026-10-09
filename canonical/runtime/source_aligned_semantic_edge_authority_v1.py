@@ -39,6 +39,10 @@ from canonical.runtime.bounded_concept_formula_authority_v1 import (
     CLAIM_SCHEMA as BOUNDED_CONCEPT_FORMULA_CLAIM_SCHEMA,
     verify_claim as verify_bounded_concept_formula_claim,
 )
+from canonical.runtime.source_aligned_participial_disposition_proof_v1 import (
+    KIND as PARTICIPIAL_DISPOSITION_KIND,
+    verify_proof as verify_participial_disposition_proof,
+)
 
 SCHEMA = "PROJECT_BRAIN_SOURCE_ALIGNED_SEMANTIC_EDGE_AUTHORITY_V1"
 EVIDENCE_SCHEMA = "PROJECT_BRAIN_SOURCE_ALIGNED_SEMANTIC_EDGE_EVIDENCE_V1"
@@ -255,7 +259,7 @@ def prove(
     source_completeness_verifier: Callable[
         [Mapping[str, Any]], Mapping[str, Any] | None
     ] | None = None,
-    source_proof_verifier: Callable[..., Mapping[str, Any]] = verify_source_proof,
+    source_proof_verifier: Callable[..., Mapping[str, Any]] | None = None,
 ) -> dict[str, Any]:
     """Prove one scoped semantic entailment edge.
 
@@ -288,10 +292,22 @@ def prove(
             return _base("FAIL_CLOSED", reason="SOURCE_CLAIMS_INVALID")
         if not isinstance(target_formula, Mapping):
             return _base("FAIL_CLOSED", reason="TARGET_FORMULA_INVALID")
-        if not callable(source_proof_verifier):
-            return _base("FAIL_CLOSED", reason="SOURCE_PROOF_VERIFIER_REQUIRED")
+        effective_source_proof_verifier=source_proof_verifier
+        if not callable(effective_source_proof_verifier):
+            claim_rows=list(source_claims)
+            if (
+                claim_rows
+                and all(
+                    isinstance(row,Mapping)
+                    and row.get("kind")==PARTICIPIAL_DISPOSITION_KIND
+                    for row in claim_rows
+                )
+            ):
+                effective_source_proof_verifier=verify_participial_disposition_proof
+            else:
+                effective_source_proof_verifier=verify_source_proof
 
-        source_proof = source_proof_verifier(
+        source_proof = effective_source_proof_verifier(
             raw_span,
             source_id=source_id,
             claims=deepcopy(list(source_claims)),
@@ -496,7 +512,7 @@ def evaluate_edge_evidence(
     source_completeness_verifier: Callable[
         [Mapping[str, Any]], Mapping[str, Any] | None
     ] | None = None,
-    source_proof_verifier: Callable[..., Mapping[str, Any]] = verify_source_proof,
+    source_proof_verifier: Callable[..., Mapping[str, Any]] | None = None,
 ) -> dict[str, Any]:
     """Recompute one edge from a proof envelope.
 
@@ -566,7 +582,7 @@ def verify_edge_evidence(
     source_completeness_verifier: Callable[
         [Mapping[str, Any]], Mapping[str, Any] | None
     ] | None = None,
-    source_proof_verifier: Callable[..., Mapping[str, Any]] = verify_source_proof,
+    source_proof_verifier: Callable[..., Mapping[str, Any]] | None = None,
 ) -> Mapping[str, Any] | None:
     """Return only a recomputed canonical DAG edge receipt, or None."""
     result = evaluate_edge_evidence(
