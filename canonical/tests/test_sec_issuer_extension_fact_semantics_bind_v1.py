@@ -2,6 +2,7 @@ from __future__ import annotations
 import json
 import pytest
 from canonical.runtime import sec_issuer_extension_fact_semantics_bind_v1 as b
+from canonical.runtime import sec_issuer_extension_fact_semantics_bind_verify_v1 as bv
 
 INSTANCE_SCHEMA="PROJECT_BRAIN_SEC_EXTRACTED_XBRL_INSTANCE_SOURCE_NATIVE_V1"
 CONCEPT_SCHEMA="PROJECT_BRAIN_SEC_ISSUER_EXTENSION_CONCEPT_SEMANTICS_V1"
@@ -59,7 +60,7 @@ def write(root,i=None,c=None):
     (root/"concept.json").write_text(json.dumps(c or concept()))
 
 def run(root):
-    return b.run({"instance_semantic_path":"instance.json","concept_semantic_path":"concept.json","fact_ordinal":7},root)
+    return b.run({"instance_semantic_path":"instance.json","concept_semantic_path":"concept.json","fact_ordinal":7,"semantic_output_path":"bound.json"},root)
 
 def test_exact_qname_same_filing_binds(tmp_path):
     write(tmp_path)
@@ -115,3 +116,11 @@ def test_missing_hash_fails_closed(tmp_path):
     write(tmp_path,c=c)
     out=run(tmp_path)
     assert out["reason"]=="UPSTREAM_CONTENT_ADDRESS_REQUIRED"
+
+def test_independent_binding_verifier_rederives(tmp_path):
+    write(tmp_path)
+    out=run(tmp_path)
+    assert out["pass"] is True
+    got=bv.verify(root=tmp_path,instance_semantic_path="instance.json",concept_semantic_path="concept.json",binding_semantic_path="bound.json")
+    assert got["verified"] is True,got
+    assert got["producer_independent"] is True
