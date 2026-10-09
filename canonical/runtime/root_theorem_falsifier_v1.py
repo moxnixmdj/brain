@@ -93,6 +93,40 @@ def evaluate_canonical_registry_authority() -> Dict[str, Any]:
         registry,
         current_mission_blob_sha=mission_sha,
     )
+    if checked["pass"]:
+        for slot in registry.get("certificate_slots", []):
+            if slot.get("status") != "PROVED_CURRENT":
+                continue
+            for field in ("certificate", "independent_verification"):
+                ref = slot.get(field) or {}
+                rel = ref.get("path")
+                claimed_sha = ref.get("git_blob_sha")
+                if (
+                    not isinstance(rel, str)
+                    or rel.startswith("/")
+                    or ".." in Path(rel).parts
+                    or not isinstance(claimed_sha, str)
+                ):
+                    checked["errors"].append(
+                        f"PROVED_SLOT_{field.upper()}_PATH_OR_SHA_INVALID:{slot.get('root_id')}"
+                    )
+                    continue
+                target = REPO_ROOT / rel
+                try:
+                    actual_sha = _git_blob_sha(target)
+                except OSError:
+                    checked["errors"].append(
+                        f"PROVED_SLOT_{field.upper()}_FILE_MISSING:{slot.get('root_id')}"
+                    )
+                    continue
+                if actual_sha != claimed_sha:
+                    checked["errors"].append(
+                        f"PROVED_SLOT_{field.upper()}_CONTENT_ADDRESS_MISMATCH:{slot.get('root_id')}"
+                    )
+        if checked["errors"]:
+            checked["pass"] = False
+            checked["status"] = "FAIL_CLOSED"
+            checked["r4_proof_closure"] = False
     if not checked["pass"]:
         return {
             "status": "R4_CANONICAL_REGISTRY_INVALID",
