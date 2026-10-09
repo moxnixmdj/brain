@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V36",
   "date": "2026-10-09",
-  "status": "ACTIVE_FAIL_CLOSED_REAL_MISSION_BOUND__STRICT_EXTERNALITY_RECONCILED__R3_ZERO_RESIDUAL_RECONCILED__OPUS_5_5_CHECKPOINT_TERMINAL_FALSE__CURRENT_R2_V53_AND_CODING_V3_PROJECTION_BOUND",
+  "status": "ACTIVE_FAIL_CLOSED_REAL_MISSION_BOUND__STRICT_EXTERNALITY_RECONCILED__R3_ZERO_RESIDUAL_RECONCILED__OPUS_5_5_CHECKPOINT_TERMINAL_FALSE__CURRENT_R2_V53_AND_CODING_V3_PROJECTION_BOUND__EXECUTABLE_REFINEMENT_STRUCTURAL_ANTI_BYPASS_TERMINAL_FALSE",
   "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "authoritative_sources": {
     "universal_escape_resolver_v2_active_planning_overlay": {
@@ -1206,6 +1206,21 @@
         "git_blob_sha": "d9b1b08ebc882a8d9c21a062dc07e027cb530679"
       },
       "note": "CURRENT_TYPED_SPECIALIST_COVERS_EXACTLY_ONE_OF_THIRTY_TWO_UNCONSTRAINED_FIVE_ATOM_VALUATIONS__BRANCH_LOCAL_ONLY__ZERO_CREDIT"
+    },
+    "executable_refinement_terminal_dependency_graph": {
+      "path": "canonical/governance/CURRENT_TERMINAL_DEPENDENCY_GRAPH_V1.json",
+      "git_blob_sha": "1ff7fa8fa83b0092b661c3ff7328a84386fe145e",
+      "note": "BRANCH_LOCAL_STRUCTURAL_DEPENDENCY_INVENTORY__GRAPH_COMPLETENESS_NOT_SELF_PROVED__ZERO_TERMINAL_CREDIT"
+    },
+    "executable_refinement_structural_verifier": {
+      "path": "canonical/runtime/executable_refinement_verifier_v1.py",
+      "git_blob_sha": "65569581716d5378929a900fa0a2045e1785fabf",
+      "note": "DECLARATIVE_BINDING_VERIFIER_ONLY__DOES_NOT_SELF_CERTIFY_SEMANTIC_REFINEMENT"
+    },
+    "creditable_route_refinement_admission_guard": {
+      "path": "canonical/runtime/certificate_gated_selected_route_runtime_entrypoint_v2.py",
+      "git_blob_sha": "e6cce56b50bea1261fb3473389a28e8263417930",
+      "note": "CREDITABLE_ROUTE_ROWS_REQUIRE_CONTENT_ADDRESSED_REFINEMENT_CERTIFICATE_AND_VERIFIED_RECEIPT_BEFORE_CANDIDATE_ADMISSION"
     }
   },
   "live_truth": {
@@ -1951,7 +1966,19 @@
     "r2_regcap_candidate_ambiguity_minimum_information_control_bound": true,
     "r2_regcap_global_loss_cushion_identity_closed": false,
     "r2_regcap_open_world_ontology_closed": false,
-    "r2_regcap_missing_context_is_external_impossibility": false
+    "r2_regcap_missing_context_is_external_impossibility": false,
+    "executable_refinement_structural_binding_framework_present": true,
+    "executable_refinement_framework_execution_verified": false,
+    "creditable_route_refinement_receipt_required_by_candidate_admission": true,
+    "router_canary_structural_refinement_binding_bound": true,
+    "router_canary_refinement_verified": false,
+    "brain_owned_semantic_edge_structural_refinement_binding_bound": true,
+    "brain_owned_semantic_edge_bounded_refinement_verified": false,
+    "repository_wide_executable_refinement_closed": false,
+    "all_creditable_live_routes_refinement_verified": false,
+    "terminal_executable_refinement_gap_closed": false,
+    "executable_refinement_missing_is_external_impossibility": false,
+    "executable_refinement_current_classification": "INTERNAL_UNRESOLVED__STRUCTURAL_BINDINGS_AND_ANTI_BYPASS_IMPLEMENTED__EXECUTION_VERIFICATION_PENDING"
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -2112,7 +2139,12 @@
     "NO_CLAIM_EXACT_BOUNDED_DENOTATION_RELATION_PROOF_SOLVES_GENERAL_INFERRED_SYNONYMY_WORD_SENSE_OR_OPEN_WORLD_ONTOLOGY_MAPPING.",
     "NO_CLAIM_CONTEXT_REGISTRY_OR_DENOTATION_EVIDENCE_SELF_AUTHENTICATES_SOURCE_SCOPE_OR_COMPLETENESS.",
     "NO_CLAIM_SOURCE_LOCAL_REGCAP_IDENTITY_CLOSES_GLOBAL_FINANCE_SEMANTICS.",
-    "NO_CLAIM_LOSS_ABSORBING_CUSHION_IS_GLOBALLY_IDENTICAL_TO_CCOB_CCYB_OR_TLAC."
+    "NO_CLAIM_LOSS_ABSORBING_CUSHION_IS_GLOBALLY_IDENTICAL_TO_CCOB_CCYB_OR_TLAC.",
+    "NO_CLAIM_DECLARATIVE_EXECUTABLE_REFINEMENT_CERTIFICATES_SELF_PROVE_REFINEMENT.",
+    "NO_CLAIM_BRANCH_WITNESS_TESTS_PROVE_ALL_CONCRETE_EXECUTABLE_BEHAVIORS.",
+    "NO_CLAIM_ROUTER_CANARY_EXECUTABLE_REFINEMENT_IS VERIFIED.",
+    "NO_CLAIM_BRAIN_OWNED_SEMANTIC_EDGE_EXECUTABLE_REFINEMENT_IS VERIFIED.",
+    "NO_CLAIM_REPOSITORY_WIDE_OR_ALL_CREDITABLE_LIVE_ROUTE_EXECUTABLE_REFINEMENT_IS CLOSED."
   ],
   "accounting": {
     "incremental_spend_usd": 0,
@@ -2653,7 +2685,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 93,
+  "pointer_revision": 94,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
@@ -3621,6 +3653,21 @@
     "finance_semantic_tail_closed": false,
     "global_phrase_identity_claimed": false,
     "open_world_ontology_complete": false,
+    "terminal_credit_delta": 0
+  },
+  "executable_refinement_terminal_closure_reconciliation_20261009_v1": {
+    "state": "INTERNAL_UNRESOLVED",
+    "structural_verifier_bound": true,
+    "terminal_dependency_graph_bound": true,
+    "creditable_route_anti_bypass_guard_implemented": true,
+    "execution_tests_run": false,
+    "independent_replay_run": false,
+    "router_canary_refinement_verified": false,
+    "brain_owned_semantic_edge_refinement_verified": false,
+    "all_creditable_live_routes_refinement_verified": false,
+    "repository_wide_refinement_closed": false,
+    "external_impossibility_claimed": false,
+    "incremental_spend_usd": 0,
     "terminal_credit_delta": 0
   }
 }
