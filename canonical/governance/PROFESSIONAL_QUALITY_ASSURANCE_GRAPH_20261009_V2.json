@@ -25,7 +25,9 @@
       "defeated_by": [
         "C01_GOAL_SUBSTITUTION",
         "C02_DECISION_RELEVANT_SPEC_AMBIGUITY",
-        "C03_AGENDA_OMISSION"
+        "C03_AGENDA_OMISSION",
+        "C72_UNGROUNDED_RISK_TOLERANCE",
+        "C78_CONTEXT_TRUNCATION_OBLIGATION_DROP"
       ],
       "contract": "Freeze objective, audience, hard constraints, plausible interpretations, target construct and claim scope; block goal substitution and unresolved decision-relevant ambiguity."
     },
@@ -68,7 +70,8 @@
         "C09_MULTISCALE_LOCAL_PASS_GLOBAL_FAIL",
         "C10_SUBJECT_SWAP_AFTER_CERTIFICATION",
         "C42_SELECTIVE_OUTCOME_CENSORING",
-        "C57_EVALUATION_AWARE_BEHAVIOR"
+        "C57_EVALUATION_AWARE_BEHAVIOR",
+        "C78_CONTEXT_TRUNCATION_OBLIGATION_DROP"
       ],
       "contract": "Bind every quality claim to exact artifact/system bytes, delivery environment, experienced realization and sufficient observation channels; block render, hidden-surface, multiscale and TOCTOU substitution failures."
     },
@@ -123,7 +126,9 @@
         "C67_STAKES_SIGNALING_JUDGE_LENIENCY",
         "C68_SELF_PREFERENCE_JUDGE_BIAS",
         "C69_CROSS_MODEL_CALIBRATION_SIGN_REVERSAL",
-        "C70_STYLE_BIAS_DOMINATES_CONTENT"
+        "C70_STYLE_BIAS_DOMINATES_CONTENT",
+        "C73_BASE_RATE_PRECISION_LAUNDERING",
+        "C79_FALLBACK_EVALUATOR_SCOPE_WEAKENING"
       ],
       "contract": "Qualify evaluators and references locally by criterion, artifact class, difficulty, state and relevant provenance; preserve disagreement and treat reference standards as fallible evidence rather than truth."
     },
@@ -148,7 +153,14 @@
         "C27_HIDDEN_PREMISE_INFERENCE",
         "C61_HIDDEN_ASSUMPTION_CYCLE",
         "C68_SELF_PREFERENCE_JUDGE_BIAS",
-        "C69_CROSS_MODEL_CALIBRATION_SIGN_REVERSAL"
+        "C69_CROSS_MODEL_CALIBRATION_SIGN_REVERSAL",
+        "C71_JOINT_ASSURANCE_MULTIPLICITY",
+        "C74_EXECUTION_FAILURE_FAIL_OPEN",
+        "C75_STALE_CERT_AFTER_DEPENDENCY_CHANGE",
+        "C76_SELECTIVE_EVIDENCE_PACKET",
+        "C77_PROVENANCE_OR_RECEIPT_FORGERY",
+        "C79_FALLBACK_EVALUATOR_SCOPE_WEAKENING",
+        "C80_OPTIONAL_STOPPING_OR_REPEATED_TESTING"
       ],
       "contract": "Admit typed evidence with provenance, grounding, independence/common-cause accounting, freshness and uncertainty semantics; forbid circular meta-evaluation and type laundering."
     },
@@ -197,7 +209,8 @@
         "C37_STRATEGIC_PREFERENCE_REPORT",
         "C38_ELICITATION_PERFORMATIVITY",
         "C39_MEASUREMENT_REACTIVITY_RANK_REVERSAL",
-        "C42_SELECTIVE_OUTCOME_CENSORING"
+        "C42_SELECTIVE_OUTCOME_CENSORING",
+        "C73_BASE_RATE_PRECISION_LAUNDERING"
       ],
       "contract": "Bind claims to the correct constituency, subgroup, evaluator assignment, presenter/operator, context and protocol; account for representation, invariance, social influence, strategic reporting and reactivity."
     },
@@ -225,7 +238,9 @@
         "C45_DEPLOYMENT_SUPPORT_SHIFT",
         "C46_PERFORMATIVE_SELF_CONFIRMATION",
         "C47_BAD_EQUILIBRIUM_PATH",
-        "C57_EVALUATION_AWARE_BEHAVIOR"
+        "C57_EVALUATION_AWARE_BEHAVIOR",
+        "C73_BASE_RATE_PRECISION_LAUNDERING",
+        "C75_STALE_CERT_AFTER_DEPENDENCY_CHANGE"
       ],
       "contract": "Bind quality to target horizons and deployment dynamics; account for drift, carryover, missing outcomes, rare failures, distribution tails, transport, performativity and path-dependent equilibria."
     },
@@ -255,7 +270,11 @@
         "C50_BASELINE_LAUNDERED_EXCELLENCE",
         "C51_MODEL_MULTIPLICITY_DECISION_SENSITIVE",
         "C52_RISK_POLICY_POST_HOC",
-        "C69_CROSS_MODEL_CALIBRATION_SIGN_REVERSAL"
+        "C69_CROSS_MODEL_CALIBRATION_SIGN_REVERSAL",
+        "C71_JOINT_ASSURANCE_MULTIPLICITY",
+        "C72_UNGROUNDED_RISK_TOLERANCE",
+        "C76_SELECTIVE_EVIDENCE_PACKET",
+        "C80_OPTIONAL_STOPPING_OR_REPEATED_TESTING"
       ],
       "contract": "Freeze or robustify admissible analysis, aggregation, compensation, risk and normative policy; preserve Pareto/incomparability structure and model multiplicity rather than selecting convenient scalarizations after outcomes are known."
     },
@@ -282,7 +301,11 @@
         "C57_EVALUATION_AWARE_BEHAVIOR",
         "C58_HARNESS_TAMPERING_OR_REWARD_GAMING",
         "C59_META_ROUTER_SELECTION_OVERFIT",
-        "C67_STAKES_SIGNALING_JUDGE_LENIENCY"
+        "C67_STAKES_SIGNALING_JUDGE_LENIENCY",
+        "C74_EXECUTION_FAILURE_FAIL_OPEN",
+        "C76_SELECTIVE_EVIDENCE_PACKET",
+        "C77_PROVENANCE_OR_RECEIPT_FORGERY",
+        "C80_OPTIONAL_STOPPING_OR_REPEATED_TESTING"
       ],
       "contract": "Protect development, selection and certification boundaries against adaptive optimization, leakage, acquired contamination, evaluation awareness, prompt/control-plane attacks, holdout reuse and evaluator-policy selection bias."
     },
@@ -308,7 +331,12 @@
         "C63_PROOF_SEARCH_FALSE_NEGATIVE",
         "C64_META_CONTROLLER_FALSE_IRRELEVANCE",
         "C65_UNMAPPED_DEFEATER",
-        "C66_ALWAYS_ABSTAIN_VACUITY"
+        "C66_ALWAYS_ABSTAIN_VACUITY",
+        "C71_JOINT_ASSURANCE_MULTIPLICITY",
+        "C74_EXECUTION_FAILURE_FAIL_OPEN",
+        "C75_STALE_CERT_AFTER_DEPENDENCY_CHANGE",
+        "C78_CONTEXT_TRUNCATION_OBLIGATION_DROP",
+        "C79_FALLBACK_EVALUATOR_SCOPE_WEAKENING"
       ],
       "contract": "Require assumption-guarantee composition, same-subject root conjunction, abstraction soundness, independent defeater search, coverage accounting, proof-search honesty, meta-controller falsification and nonvacuity."
     },
@@ -1116,6 +1144,134 @@
         "R5_EVALUATOR_REFERENCE"
       ],
       "attack": "Evaluator preference is driven by stylistic presentation more strongly than the target content-quality construct."
+    },
+    {
+      "id": "C71_JOINT_ASSURANCE_MULTIPLICITY",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+        "R10_ANALYSIS_DECISION",
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "attack": "Each branch has an apparently acceptable marginal uncertainty or error guarantee, but the conjunction is certified without controlling root-level multiplicity, dependence or simultaneous false-certification risk."
+    },
+    {
+      "id": "C72_UNGROUNDED_RISK_TOLERANCE",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R1_TARGET_SPECIFICATION",
+        "R10_ANALYSIS_DECISION"
+      ],
+      "attack": "The system invents a false-certification tolerance, loss ordering or decision threshold without target-authorized grounding, making an arbitrary risk appetite appear objective."
+    },
+    {
+      "id": "C73_BASE_RATE_PRECISION_LAUNDERING",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R5_EVALUATOR_REFERENCE",
+        "R8_POPULATION_CONTEXT_OPERATOR",
+        "R9_TEMPORAL_DEPLOYMENT"
+      ],
+      "attack": "Benchmark precision, PPV or calibration is transplanted to the release population despite materially different excellence prevalence, selection stage or difficulty spectrum."
+    },
+    {
+      "id": "C74_EXECUTION_FAILURE_FAIL_OPEN",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+        "R11_ADAPTIVE_INTEGRITY_SECURITY",
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "attack": "A verifier, evidence acquisition, renderer or evaluation run crashes, times out or never executes, and absence of a result is treated as a pass, stale evidence is reused, or authority falls back to a weaker route."
+    },
+    {
+      "id": "C75_STALE_CERT_AFTER_DEPENDENCY_CHANGE",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+        "R9_TEMPORAL_DEPLOYMENT",
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "attack": "Artifact, evaluator, reference, policy, dependency or environment changes after certification but descendant claims are not invalidated and reopened."
+    },
+    {
+      "id": "C76_SELECTIVE_EVIDENCE_PACKET",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+        "R10_ANALYSIS_DECISION",
+        "R11_ADAPTIVE_INTEGRITY_SECURITY"
+      ],
+      "attack": "The evaluator receives a selectively chosen subset of available admissible evidence because it favors the incumbent, while omitted unfavorable evidence would change the decision."
+    },
+    {
+      "id": "C77_PROVENANCE_OR_RECEIPT_FORGERY",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+        "R11_ADAPTIVE_INTEGRITY_SECURITY"
+      ],
+      "attack": "Fabricated or spoofed source metadata, evaluator identity, artifact binding, provenance receipt or evidence record is admitted as terminal support."
+    },
+    {
+      "id": "C78_CONTEXT_TRUNCATION_OBLIGATION_DROP",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R1_TARGET_SPECIFICATION",
+        "R3_REALIZATION_OBSERVATION",
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "attack": "Context-window, parser, extraction or transport truncation silently drops a material requirement or artifact region and the remaining partial view is certified as complete."
+    },
+    {
+      "id": "C79_FALLBACK_EVALUATOR_SCOPE_WEAKENING",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R5_EVALUATOR_REFERENCE",
+        "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "attack": "The primary qualified evaluator is unavailable and an out-of-scope or weaker fallback is silently substituted while preserving the same certification authority."
+    },
+    {
+      "id": "C80_OPTIONAL_STOPPING_OR_REPEATED_TESTING",
+      "type": "DEFEATER",
+      "status": "OPEN",
+      "depends_on": [],
+      "defeated_by": [],
+      "target_root_ids": [
+        "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+        "R10_ANALYSIS_DECISION",
+        "R11_ADAPTIVE_INTEGRITY_SECURITY"
+      ],
+      "attack": "Fresh or repeated evaluations are sampled or peeked at until a favorable threshold is crossed while fixed-sample uncertainty or error guarantees are reported as though only one test occurred."
     }
   ],
   "domain": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
