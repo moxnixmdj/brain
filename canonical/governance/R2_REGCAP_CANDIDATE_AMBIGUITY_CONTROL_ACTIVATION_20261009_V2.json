@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_R2_REGCAP_CANDIDATE_AMBIGUITY_CONTROL_ACTIVATION_20261009_V2",
+  "date": "2026-10-09",
+  "status": "ACTIVE_CANDIDATE__VERIFIED_BOUND_THREE_RIVAL_ONE_STEP_DISCRIMINATOR_POLICY__ZERO_TERMINAL_CREDIT",
+  "supersedes": "canonical/governance/R2_REGCAP_CANDIDATE_AMBIGUITY_CONTROL_ACTIVATION_20261009_V1.json",
+  "runtime": {
+    "path": "canonical/runtime/regcap_candidate_ambiguity_control_v1.py",
+    "git_blob_sha": "72a670a8a417afeccfa6fca8a50917265b00bc5c"
+  },
+  "matrix_authority": {
+    "path": "canonical/runtime/regcap_contrastive_discriminator_matrix_v1.py",
+    "git_blob_sha": "0e19ea34990cfab822adb8ba59fe9b4272dbedc3",
+    "verification_path": "canonical/verification/REGCAP_CONTRASTIVE_DISCRIMINATOR_MATRIX_VERIFY_20261009_V1.json"
+  },
+  "composition_verification": {
+    "path": "canonical/verification/R2_REGCAP_MATRIX_DISCRIMINATOR_COMPOSITION_VERIFY_20261009_V1.json",
+    "git_blob_sha": "a62293bccdbdf02f8adb1822a421ae195705dc5b",
+    "status": "PASS__EXACT_COMPOSED_BYTES__48_OF_48__PYCOMPILE_PASS__ZERO_TERMINAL_CREDIT"
+  },
+  "bounded_policy": {
+    "mapping_scope_kind": "BOUND_REGCAP_RIVAL_SET",
+    "candidate_ids": [
+      "REGCAP::CCOB",
+      "REGCAP::CCYB",
+      "REGCAP::TLAC"
+    ],
+    "separately_authenticated_scope_completeness_required": true,
+    "authenticated_one_step_discriminator": "RELEASABILITY_CLASS",
+    "minimum_observation_count": 1,
+    "discriminator_outcomes": {
+      "REGCAP::CCOB": "BASEL_BUFFER_NOT_DESIGNATED_RELEASABLE",
+      "REGCAP::CCYB": "BASEL_DESIGNATED_RELEASABLE_BUFFER",
+      "REGCAP::TLAC": "OUTSIDE_BASEL_CAPITAL_BUFFER_FRAMEWORK"
+    },
+    "observation_truth_must_be_acquired_from_user_or_authenticated_source": true,
+    "concept_identity_before_observation": false,
+    "open_world_candidate_completeness": false
+  },
+  "routing_precedence": [
+    "EXACT_AUTHENTICATED_SOURCE_BOUND_IDENTITY",
+    "EXACT_AUTHENTICATED_LOCAL_APPOSITIVE_IDENTITY",
+    "AUTHENTICATED_ONE_STEP_DISCRIMINATOR_IF_BOUND_THREE_RIVAL_SCOPE_IS_COMPLETE",
+    "GENERIC_MINIMUM_INFORMATION_AMBIGUITY_CONTROL",
+    "ACQUIRE_ONLY_MINIMUM_POLICY_CHANGING_INFORMATION_OR_CLARIFICATION"
+  ],
+  "r2_truth_delta": {
+    "primary_internal_unsolved_count_delta": 0,
+    "primary_internal_unsolved_cell_remains": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
+    "bounded_information_policy_expanded": true,
+    "finance_semantic_tail_closed": false
+  },
+  "strict_externality": {
+    "missing_discriminator_observation_classification": "INTERNAL_UNSOLVED__PENDING_ACQUISITION_OR_EXPERIMENT",
+    "information_theoretic_externality_proved": false,
+    "externality_certificate_created": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_CCOB_CCYB_TLAC_EXHAUST_ARBITRARY_LANGUAGE_MEANINGS",
+    "NO_CLAIM_RELEASABILITY_CLASS_IS_KNOWN_FOR_AN_UNRESOLVED_PHRASE_WITHOUT_OBSERVATION",
+    "NO_GLOBAL_LOSS_ABSORBING_CUSHION_IDENTITY",
+    "NO_FINANCE_FAMILY_CLOSURE",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "semantic_truth_authority": false,
+  "policy_adequacy_authority": false,
+  "terminal_authority": false
+}
