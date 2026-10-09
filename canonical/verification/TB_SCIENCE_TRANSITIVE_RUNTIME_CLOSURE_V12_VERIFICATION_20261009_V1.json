@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_TRANSITIVE_RUNTIME_CLOSURE_V12_VERIFICATION_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__V12_15_FILE_TRANSITIVE_CLOSURE_EXACT__ONE_FILE_FROZEN_REQUIREMENTS_DELTA__SCIENCE_AGENT_26_OF_26__ZERO_EXPOSURE",
+  "manifest": {
+    "path": "canonical/governance/TB_SCIENCE_TRANSITIVE_RUNTIME_CLOSURE_MANIFEST_20261009_V12.json",
+    "git_blob_sha": "8008b1e2382c1235e3b788e0f8d4ab9a48487409"
+  },
+  "exact_current_head_base": "bd791a661d64ed9b9c493e141856dab4a3680edb",
+  "closure_file_count": 15,
+  "exact_blob_matches": 15,
+  "mismatches": 0,
+  "predecessor_delta": {
+    "unchanged_files": 14,
+    "changed_files": 1,
+    "changed_path": "canonical/runtime/harbor_science_agent_v1.py",
+    "old_git_blob_sha": "d397324f411d002bdbdca348aaad708b5b40c9c2",
+    "new_git_blob_sha": "e7e258f567499bd7356c0276d6293aa30dbd338c"
+  },
+  "repair_verification": {
+    "path": "canonical/verification/SCIENCE_FROZEN_REQUIREMENTS_REPAIR_VERIFY_20261009_V1.json",
+    "git_blob_sha": "d60c84676de7dfa090810b3b65132d324ac49f38",
+    "py_compile": "PASS",
+    "science_agent_suite": "26_OF_26_PASS"
+  },
+  "imports_changed": false,
+  "unresolved_dynamic_imports": [],
+  "benchmark_task_exposure": 0,
+  "benchmark_trials_executed": 0,
+  "execution_authority": false,
+  "acceptance_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
