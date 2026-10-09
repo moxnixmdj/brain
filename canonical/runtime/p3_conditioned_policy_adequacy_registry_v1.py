@@ -32,6 +32,17 @@ _REGISTRY = {
         ),
         "binding_blob_sha": "7d2322ff8205e98752c4cd2674215f93c145305c",
     },
+    "BRAIN_INDEPENDENT_ACCEPTANCE_MODEL_TYPED_PLAN_V1": {
+        "condition": {
+            "op": "ATOM",
+            "id": "CURSORBENCH_TYPED_ACCEPTANCE_PLAN_REGION_V1",
+        },
+        "binding_path": (
+            "canonical/governance/"
+            "CURSORBENCH_TYPED_ACCEPTANCE_PLAN_POLICY_ADEQUACY_BINDING_20261009_V1.json"
+        ),
+        "binding_blob_sha": "f37bcf8f1a53a828e68b43a149057cbba67c0e0f",
+    },
 }
 
 _BINDING_KEYS = (
