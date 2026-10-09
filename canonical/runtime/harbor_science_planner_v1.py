@@ -15,6 +15,7 @@ import urllib.request
 from typing import Any
 
 from canonical.runtime.harbor_command_policy import MAX_COMMAND_CHARS
+from canonical.runtime.harbor_environment_transport import MAX_EXEC_TIMEOUT_S
 
 ENDPOINT = "http://127.0.0.1:8080/v1/chat/completions"
 TOKEN_COUNT_ENDPOINT = "http://127.0.0.1:8080/v1/chat/completions/input_tokens"
@@ -22,6 +23,7 @@ MODEL = "brain-qwen3.5-9b"
 TOOL_NAME = "submit_science_proposal"
 MAX_RESPONSE_BYTES = 100_000
 MAX_TOOL_COMPLETION_TOKENS = 4096
+SERVER_CONTEXT_TOKENS = 16384
 MAX_CANDIDATES_PER_PROPOSAL = 4
 MIN_TIMEOUT_S = 300
 MAX_TIMEOUT_S = 900
@@ -103,7 +105,7 @@ TOOL = {
                                 "maxItems": MAX_CANDIDATES_PER_PROPOSAL,
                                 "items": {"type": "string", "minLength": 1, "maxLength": 64},
                             },
-                            "timeout_sec": {"type": "integer", "minimum": 1, "maximum": 7200},
+                            "timeout_sec": {"type": "integer", "minimum": 1, "maximum": MAX_EXEC_TIMEOUT_S},
                             "verify_timeout_sec": {"type": "integer", "minimum": 1, "maximum": 3600},
                             "command": {"type": "string"},
                             "verify_command": {"type": "string"},
@@ -162,6 +164,23 @@ def _request_payload(prompt: str) -> dict[str, Any]:
         "max_tokens": MAX_TOOL_COMPLETION_TOKENS,
         "stream": False,
     }
+
+
+def context_headroom_tokens(input_tokens: int) -> int:
+    if (
+        not isinstance(input_tokens, int)
+        or isinstance(input_tokens, bool)
+        or input_tokens < 1
+    ):
+        raise SciencePlannerError("SCIENCE_PLANNER_INPUT_TOKEN_COUNT_INVALID")
+    headroom = SERVER_CONTEXT_TOKENS - input_tokens - MAX_TOOL_COMPLETION_TOKENS
+    if headroom < 0:
+        raise SciencePlannerError(
+            "SCIENCE_PLANNER_CONTEXT_ENVELOPE_EXCEEDED:"
+            f"input={input_tokens}:reserved={MAX_TOOL_COMPLETION_TOKENS}:"
+            f"context={SERVER_CONTEXT_TOKENS}:deficit={-headroom}"
+        )
+    return headroom
 
 
 def count_input_tokens(payload: dict[str, Any]) -> int:
@@ -276,6 +295,7 @@ def plan(prompt: str, *, timeout_s: int = 180) -> dict[str, Any]:
         raise SciencePlannerError("SCIENCE_PLANNER_PROMPT_REQUIRED")
     payload = _request_payload(prompt)
     input_tokens = count_input_tokens(payload)
+    context_headroom = context_headroom_tokens(input_tokens)
     timeout_s = effective_timeout_s(input_tokens, timeout_s)
 
     body = json.dumps(payload).encode("utf-8")
@@ -322,6 +342,9 @@ def plan(prompt: str, *, timeout_s: int = 180) -> dict[str, Any]:
             "model": str(data.get("model") or MODEL),
             "duration_s": round(time.monotonic() - started, 3),
             "input_tokens": input_tokens,
+        "server_context_tokens": SERVER_CONTEXT_TOKENS,
+        "reserved_completion_tokens": MAX_TOOL_COMPLETION_TOKENS,
+        "context_headroom_tokens": context_headroom,
             "effective_timeout_s": timeout_s,
             "errors": [],
             "transport": "PINNED_LOCAL_QWEN_LLAMA_CPP_TOOL_CALL__EXACT_SERVER_TOKEN_COUNT",
