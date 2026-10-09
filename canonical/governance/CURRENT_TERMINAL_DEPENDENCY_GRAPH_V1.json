@@ -106,13 +106,26 @@
     {
       "id": "EXECUTABLE_REFINEMENT_SEMANTIC_PROOF_ROUTE",
       "kind": "LEAF",
-      "status": "UNRESOLVED",
-      "note": "STRUCTURAL_CERTIFICATE_BINDING_DOES_NOT_ESTABLISH_BEHAVIORAL_REFINEMENT__SEMANTIC_PROOF_CHECKING_ROUTE_NOT_YET_CLOSED",
+      "status": "PROVED",
+      "note": "SCOPED_PROOF_ROUTE_EXISTS_FOR_EXACT_EXHAUSTIVE_CLOSED_FINITE_INPUT_DOMAINS__INDEPENDENT_SPRITE_EXECUTION_12_OF_12_PASS__DOES_NOT_PROVE_OPEN_WORLD_ARBITRARY_PROGRAM_REFINEMENT",
       "attack_families": [
         "COMPOSITION_MISMATCH",
         "IMPLEMENTATION_REFINEMENT_MISMATCH",
         "NOVEL_DIMENSION"
-      ]
+      ],
+      "proof": {
+        "checker": {
+          "path": "canonical/runtime/finite_exhaustive_refinement_checker_v1.py",
+          "git_blob_sha": "3f8082f94144489aebcc607e6373baaffff4d46e"
+        },
+        "verification": {
+          "path": "canonical/verification/FINITE_EXHAUSTIVE_REFINEMENT_CHECKER_SPRITE_VERIFICATION_20261009_V1.json",
+          "git_blob_sha": "5562af00848068d331fbd48c03486030a22635d4"
+        },
+        "scope": "EXACT_DECLARED_FINITE_INPUT_DOMAIN",
+        "liveness_refinement_verified": false,
+        "open_world_program_equivalence": false
+      }
     },
     {
       "id": "EXECUTABLE_REFINEMENT_STRUCTURAL_RESOURCE_BOUND",
