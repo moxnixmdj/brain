@@ -95,13 +95,13 @@
           "discovery_status": "REUSABLE_CANDIDATE__ZERO_CREDIT"
         }
       ],
-      "campaign_next_action": "Factor reusable planning/state/tool-control primitives from browser agents; no credit until donor-independent multi-tool tasks pass.",
+      "campaign_next_action": "PRESERVE_VERIFIED_AGENCY_OWNERSHIP__NO_REPLAY__REOPEN_ONLY_ON_CONTENT_ADDRESSED_COUNTEREVIDENCE_OR_SCOPE_DRIFT",
       "postwave_terminal_behavioral_status": "PASS",
       "postwave_opus55_acceptance_status": "PASS",
       "postwave_ownership_credit": "VERIFIED_OWNED_EQUAL_OR_BETTER",
       "postwave_acceptance_evidence": "canonical/verification/AGENCY_SIX_DIMENSION_ABSOLUTE_TOP_LAW_WOLFRAM_VERIFICATION_20261007_V1.json",
-      "current_behavioral_scope_state": "P1_WHOLE_SCOPE_QUARANTINED__PROVISIONAL_BEHAVIORAL_FAMILY_PASS_RETRACTED",
-      "current_behavioral_scope_evidence": "canonical/verification/TERMINAL_SCOPE_QUARANTINE_PROPAGATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "current_behavioral_scope_state": "P1_SCOPE_RESTORED__WHOLE_SCOPE_PASS",
+      "current_behavioral_scope_evidence": "canonical/verification/P1_UNIVERSAL_SCOPE_RESTORATION_V9_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
       "verified_route": {
         "path": "canonical/runtime/matched_agency_stateful_case_v2.py",
         "git_blob_sha": "eb0af8b01f25bcd38885fde71ebe1eccde793e85",
@@ -747,32 +747,36 @@
     "rule": "ROW_MECHANISM_STATUS_IS_HISTORICAL_ROUTE_CONTEXT__CURRENT_BEHAVIORAL_SCOPE_CREDIT_OBEYS_INDEPENDENT_P1_QUARANTINE_PROPAGATION__CURRENT_OPUS55_ACCEPTANCE_OBEYS_SCOPE_COMPLETE_ACCEPTANCE_AUTHORITY"
   },
   "postwave_acceptance_summary": {
-    "calibrated_family_count": 5,
-    "verified_owned_family_count": 6,
-    "pending_acceptance_family_count": 14,
+    "calibrated_family_count": 7,
+    "verified_owned_family_count": 7,
+    "pending_acceptance_family_count": 12,
     "calibrated_families": [
+      "COMPLEX_MULTI_TOOL_AGENCY",
       "EXACT_SYMBOLIC_COMPUTATION",
+      "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
       "LONG_HORIZON_MEMORY_AND_CONTINUITY",
-      "SUBAGENT_DELEGATION_AND_COORDINATION",
       "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "SUBAGENT_DELEGATION_AND_COORDINATION",
       "TOOL_DISCOVERY_SELECTION_AND_LEARNING"
     ],
     "reopened_scope_incomplete_families": [],
-    "authority": "canonical/verification/TOOL_DISCOVERY_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "authority": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V3.json",
     "atomic_acceptance": {
-      "proved": 14,
-      "unresolved": 24,
+      "proved": 18,
+      "unresolved": 20,
       "total": 38,
-      "current_ledger": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
-      "current_ledger_git_blob_sha": "a3fd20e58fdbd9b86278b7de0c245de3063dce27",
+      "current_ledger": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V3.json",
+      "current_ledger_git_blob_sha": "89307bdebc2bf87cb16925f65364d7cc31cdaab0",
       "latest_closed_atoms": [
-        "LIVEBENCH_IF_GE_65_7",
-        "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT"
+        "IF_SCOPE_BOUNDARY_NONINFERIOR",
+        "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+        "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+        "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION"
       ],
       "terminal": false
     },
     "promotion_authority": false,
-    "rule": "CURRENT_ACCEPTANCE_REQUIRES_SCOPE_COMPLETE_PROTOCOL_EVIDENCE__TOOL_DISCOVERY_CLOSED_BY_INDEPENDENT_ABSOLUTE_CEILING_PLUS_UNIVERSAL_FORMAL_SCOPE_PROOF__OWNERSHIP_SEPARATE"
+    "rule": "CURRENT_ACCEPTANCE_DERIVED_FROM_FROZEN_38_PREDICATE_REGISTRY_PLUS_SCOPE_COMPLETE_V3_EVIDENCE__OWNERSHIP_REMAINS_ROUTE_SPECIFIC"
   },
   "postwave_scope_quarantine_reconciliation": {
     "evidence": "canonical/verification/TERMINAL_SCOPE_QUARANTINE_PROPAGATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",

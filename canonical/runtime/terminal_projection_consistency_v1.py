@@ -21,7 +21,7 @@ PATHS={
     "authority":"canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
     "closure":"canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
     "matrix":"canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
-    "atomic_bindings":"canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+    "atomic_bindings":"canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V3.json",
     "predicate_registry":"canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
     "target_envelope":"canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
 }
