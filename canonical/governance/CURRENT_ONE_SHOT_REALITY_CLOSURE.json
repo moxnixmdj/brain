@@ -25,6 +25,12 @@
       "path": "canonical/verification/CLOSURE_INFRASTRUCTURE_FAILCLOSED_REMOTE_VERIFY_20261009_V1.json",
       "git_blob_sha": "306a6f5458c8f410712d4a4dea8c68cd157fc494",
       "status": "PASS__PY_COMPILE__FOCUSED_V2_23_OF_23__INFRA_FAILURES_INTERNAL_AND_RETRYABLE__ZERO_CREDIT"
+    },
+    "latest_strict_terminal_closure_current_main": {
+      "path": "canonical/verification/STRICT_TERMINAL_CLOSURE_CURRENT_MAIN_REPLAY_20261009_V1.json",
+      "git_blob_sha": "de138d810d774c6640b3dbe5dd40699c1c33a787",
+      "status": "PASS__CURRENT_MAIN_STRICT_TERMINAL_CLOSURE__45_OF_45_FOCUSED__8_OF_8_ADJACENT__ZERO_CREDIT",
+      "source_main_head": "cbf5d0fa2c70b05072e2607946f9f7e139f67abd"
     }
   },
   "authority": {
@@ -112,7 +118,9 @@
       "self_asserted_conjunct_allowed": false
     },
     "terminal_credit_requires_final_cleanroom_gate": true,
-    "cleanroom_may_create_terminal_candidate": false
+    "cleanroom_may_create_terminal_candidate": false,
+    "strict_terminal_closure_current_main_replay_verified": true,
+    "strict_terminal_closure_current_main_source_head": "cbf5d0fa2c70b05072e2607946f9f7e139f67abd"
   },
   "next_load_bearing_roots": [
     "FOLLOW_CURRENT_TERMINAL_AUTHORITY__R3_NOT_CURRENT_BLOCKER__PROVE_ONE_SOUND_TERMINAL_ACCEPTANCE_ROUTE",
