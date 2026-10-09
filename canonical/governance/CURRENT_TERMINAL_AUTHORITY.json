@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V36",
   "date": "2026-10-09",
-  "status": "ACTIVE_FAIL_CLOSED_REAL_MISSION_BOUND__STRICT_EXTERNALITY_RECONCILED__R3_ZERO_RESIDUAL_RECONCILED__OPUS_5_5_CHECKPOINT_TERMINAL_FALSE__CURRENT_R2_V57_AND_CODING_V3_PROJECTION_BOUND__COVERAGE_R1_R4_LIVE_BINDING_REPAIRED__CLAIM_SCOPED_COMPLETENESS_THEOREM_BOUND",
+  "status": "ACTIVE_FAIL_CLOSED_REAL_MISSION_BOUND__STRICT_EXTERNALITY_RECONCILED__R3_ZERO_RESIDUAL_RECONCILED__OPUS_5_5_CHECKPOINT_TERMINAL_FALSE__CURRENT_R2_V58_AND_CODING_V3_PROJECTION_BOUND__COVERAGE_R1_R4_LIVE_BINDING_REPAIRED__CLAIM_SCOPED_COMPLETENESS_THEOREM_BOUND",
   "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "authoritative_sources": {
     "universal_escape_resolver_v2_active_planning_overlay": {
@@ -1874,8 +1874,8 @@
     "cursorbench_first_authenticated_positive_adequacy_behavior_id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
     "cursorbench_first_positive_region_membership_self_certified": false,
     "cursorbench_first_positive_region_hidden_task_membership_proved": false,
-    "current_r2_semantic_revision": "V57_V19_LIVE_RUNTIME_AND_AUTHORITY_RECONCILED__FOUR_VERIFIED_SUCCESSOR_ROUTES_BOUND__FIBO_OEWN_SEC_WAKES_PRESERVED",
-    "current_r2_pointer_git_blob_sha": "0c1fff400af9182ba0dbd1a304c93ecdc048eb4b",
+    "current_r2_semantic_revision": "V58_V19_LIVE_RUNTIME_AND_AUTHORITY_RECONCILED__REGCAP_CONTEXTUAL_RELATIVE_SELECTION_AND_SOURCE_FACTS_BOUND__FOUR_VERIFIED_SUCCESSOR_ROUTES_BOUND__FIBO_OEWN_SEC_WAKES_PRESERVED",
+    "current_r2_pointer_git_blob_sha": "d45b5cdc0e0bbbfb44d88c37a5761776afbcf5fd",
     "r2_source_explicit_semantic_autofill_bound": true,
     "r2_source_explicit_autofill_replaces_caller_claims": false,
     "r2_unrecognized_prose_remains_semantic_top": true,
@@ -2757,7 +2757,7 @@
     "enumerated_active_zero_reality_cell_count": 0,
     "enumerated_external_required_sleep_cell_count": 0,
     "historical_root2_scheduler_fields_authoritative_for_current_r2": false,
-    "rule": "CURRENT_R2_V57_POINTER_OVERLAYS_THE_IMMUTABLE_V55_SCHEDULER__LIVE_V19_DIRECT_RUNTIME_AND_V28_THIRTY_NINE_ROUTE_ACTIVATION_RECONCILED__FIBO_OEWN_SEC_WAKES_PRESERVED__ONE_GENUINE_FINANCE_SEMANTIC_RESIDUAL_REMAINS_INTERNAL_UNSOLVED",
+    "rule": "CURRENT_R2_V58_POINTER_OVERLAYS_THE_IMMUTABLE_V55_SCHEDULER__LIVE_V19_DIRECT_RUNTIME_AND_V28_THIRTY_NINE_ROUTE_ACTIVATION_RECONCILED__FIBO_OEWN_SEC_WAKES_PRESERVED__ONE_GENUINE_FINANCE_SEMANTIC_RESIDUAL_REMAINS_INTERNAL_UNSOLVED",
     "current_authority_pointer_mutable": true,
     "current_authority_pointer_blob_is_not_load_bearing": true,
     "binding_law": "CURRENT_POINTERS_BIND_BY_CANONICAL_PATH_IDENTITY__IMMUTABLE_VERSIONED_AUTHORITY_ARTIFACTS_BIND_BY_GIT_BLOB_SHA",
@@ -2766,7 +2766,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 102,
+  "pointer_revision": 103,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
@@ -3887,6 +3887,24 @@
     "exact_escape_class_count": 3,
     "route_b_impossible_claimed": false,
     "route_b_closed_claimed": false,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "r2_v58_regcap_contextual_grounding_reconciliation_20261009_v1": {
+    "status": "RECONCILED__CURRENT_R2_V58_REGCAP_CONTEXTUAL_TRUTH_BOUND__TERMINAL_FALSE__ZERO_CREDIT",
+    "current_r2_pointer_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+    "current_r2_pointer_git_blob_sha": "d45b5cdc0e0bbbfb44d88c37a5761776afbcf5fd",
+    "scheduler_cut_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V55.json",
+    "scheduler_cut_git_blob_sha": "a7c04b0ceb3b28deacfa078c11e70e7841445d78",
+    "direct_route_count": 39,
+    "bounded_family_count": 36,
+    "primary_internal_unsolved_count": 1,
+    "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
+    "regcap_context_v3_verification": "canonical/verification/LOSS_CUSHION_CONTEXT_V3_SEMANTIC_TRUTH_VERIFY_20261009_V1.json",
+    "regcap_contextual_facts_verification": "canonical/verification/REGCAP_CONTEXTUAL_FACTS_VERIFY_20261009_V1.json",
+    "semantic_identity_added": false,
+    "candidate_universe_completeness_added": false,
+    "terminal_remains_false": true,
     "acceptance_credit_delta": 0,
     "terminal_credit_delta": 0
   }
