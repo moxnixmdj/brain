@@ -132,6 +132,29 @@ class PlainGoalBoundGroundingTests(unittest.TestCase):
         self.assertFalse(ok)
         self.assertTrue(reason.startswith("CANDIDATE_NOT_VERIFIED:"),reason)
 
+    def test_run_returns_durable_output_sha256(self):
+        import json
+        import pathlib
+        import tempfile
+        root=pathlib.Path(__file__).resolve().parents[2]
+        with tempfile.TemporaryDirectory(dir=root/"canonical"/"astra_runtime"/"tmp") as td:
+            target=pathlib.Path(td)/"grounding.json"
+            rel=target.relative_to(root).as_posix()
+            result=grounding.run({
+                "goal":"Calibrate the neutrino interferometer phase drift.",
+                "output_path":rel,
+            },root)
+            self.assertTrue(result["output_verified"],result)
+            self.assertEqual(
+                result["output_sha256"],
+                __import__("hashlib").sha256(target.read_bytes()).hexdigest(),
+            )
+            persisted=json.loads(target.read_text(encoding="utf-8"))
+            self.assertEqual(
+                persisted["goal_sha256"],
+                result["goal_sha256"],
+            )
+
     def test_grounding_is_deterministic(self):
         goal="Choose a binary serialization route and independently verify the decision."
         a=grounding.ground(goal,self.registry())
