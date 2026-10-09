@@ -140,7 +140,7 @@ Lemma dc_poly_correct x ps u v :
   dc_val (poly2_eval R x u v)
     (map (fun p => poly2_eval R p u v) ps).
 Proof.
-  exact: dc_poly_n_correct.
+  by rewrite /dc_poly /dc_val size_map dc_poly_n_correct.
 Qed.
 
 Lemma dc_val_pos x s :
