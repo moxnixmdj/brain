@@ -18,6 +18,8 @@ from canonical.runtime import autonomous_verified_self_improvement_v1 as self_im
 from canonical.runtime import certificate_gated_selected_route_runtime_entrypoint_v2 as certified_route
 from canonical.runtime import h100_verified_capability_registry_v8 as h100
 from canonical.runtime.verified_bound_capability_execution_adapter_v1 import execute as execute_bound
+from canonical.runtime import d_finality_execution_epoch_v1 as d_epoch
+from canonical.runtime import d_final_bound_stdlib_provider_v1 as d_stdlib_provider
 from canonical.runtime import d_finality_execution_epoch_v1 as d_finality
 
 SCHEMA = "PROJECT_BRAIN_LIVE_CAPABILITY_INVOKER_V1"
@@ -285,7 +287,12 @@ def _invoke_impl(
         }
 
     if kind == "BOUND_CAPABILITY":
-        out = execute_bound(local_id, inputs=dict(payload))
+        active_d = _active_d_epoch_or_none()
+        out = (
+            _invoke_bound_under_d_epoch(capability_id, local_id, payload)
+            if active_d is not None
+            else execute_bound(local_id, inputs=dict(payload))
+        )
         return {
             "schema": SCHEMA,
             "status": "PASS__EXACT_BOUND_CAPABILITY_DISPATCHED"
@@ -324,6 +331,73 @@ def _invoke_impl(
         }
 
     raise LiveCapabilityInvocationError("CAPABILITY_KIND_UNIMPLEMENTED:" + kind)
+
+
+D_FINAL_STDLIB_PROVIDER_CLOSURE = (
+    "canonical/runtime/d_final_bound_stdlib_provider_v1.py",
+    "canonical/runtime/bound_capability_execution_verifier_v1.py",
+    "canonical/runtime/capability_planner.py",
+    "canonical/runtime/capability_execution_trace_capsule_v1.py",
+    "canonical/runtime/composition_state_capsule_v1.py",
+    "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+)
+
+
+def _active_d_epoch_or_none():
+    try:
+        return d_epoch.current_epoch()
+    except d_epoch.DFinalityError as exc:
+        if str(exc) == "NO_ACTIVE_D_FINALITY_EPOCH":
+            return None
+        raise
+
+
+def _invoke_bound_under_d_epoch(
+    capability_id: str,
+    local_id: str,
+    payload: Mapping[str, Any],
+) -> dict[str, Any]:
+    epoch = d_epoch.require_capability(capability_id)
+    for rel in D_FINAL_STDLIB_PROVIDER_CLOSURE:
+        d_epoch.require_material(rel, repo_root=ROOT)
+
+    registry_path = ROOT / "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
+    inspected = d_stdlib_provider.inspect(
+        local_id,
+        registry_path=registry_path,
+    )
+    if inspected["registry_entry_sha256"] != epoch.capability_contract_sha256:
+        raise LiveCapabilityInvocationError(
+            "D_EPOCH_CAPABILITY_CONTRACT_MISMATCH:" + capability_id
+        )
+
+    entry = inspected["entry"]
+    source = entry.get("source") or {}
+    adapter_rel = str(source.get("adapter_path") or "").strip()
+    if not adapter_rel:
+        module_name = str(entry.get("adapter_module") or "").strip()
+        if not module_name:
+            raise LiveCapabilityInvocationError("D_EPOCH_ADAPTER_IDENTITY_MISSING")
+        adapter_rel = "canonical/runtime/bound_capabilities/" + module_name + ".py"
+    d_epoch.require_material(adapter_rel, repo_root=ROOT)
+    expected_blob = dict(epoch.material_bindings).get(adapter_rel)
+    if expected_blob is None:
+        raise LiveCapabilityInvocationError("D_EPOCH_ADAPTER_NOT_BOUND:" + adapter_rel)
+
+    out = d_stdlib_provider.execute(
+        local_id,
+        inputs=dict(payload),
+        repo_root=ROOT,
+        registry_path=registry_path,
+        adapter_path=ROOT / adapter_rel,
+        expected_adapter_git_blob_sha=expected_blob,
+        expected_registry_entry_sha256=epoch.capability_contract_sha256,
+    )
+    if out.get("pass") is not True:
+        raise LiveCapabilityInvocationError(
+            "D_FINAL_BOUND_PROVIDER_FAILED:" + ";".join(out.get("errors") or [])
+        )
+    return out
 
 
 def invoke(
