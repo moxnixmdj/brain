@@ -203,13 +203,47 @@ def _current_frontier_repair_reduction(
             "reason": "FRONTIER_EXPANSION_PAYLOAD_INVALID",
         }
     observation_id = str(payload.get("observation_id") or "").strip()
-    if not observation_id:
+    blocked_id = str(payload.get("blocked_success_work_id") or "").strip()
+    wid = str(work.get("work_id") or "").strip()
+    if not observation_id or not blocked_id or not wid:
         return {
             "pass": False,
             "status": "FRONTIER_REPAIR_REDUCTION_UNAVAILABLE",
-            "reason": "SUCCESS_OBSERVATION_ID_REQUIRED",
+            "reason": "FRONTIER_HANDOFF_IDENTITY_INCOMPLETE",
         }
     try:
+        state = learning.load_state(state_path)
+        queue = state.get("improvement_queue")
+        observations = state.get("observations")
+        if not isinstance(queue, Mapping) or not isinstance(observations, Mapping):
+            raise ImprovementDriverError("R3_STATE_INVALID")
+        canonical = queue.get(wid)
+        if (
+            not isinstance(canonical, Mapping)
+            or canonical.get("kind") != FRONTIER_EXPANSION_KIND
+            or canonical.get("status") != "PENDING"
+            or canonical.get("payload") != payload
+        ):
+            raise ImprovementDriverError("FRONTIER_HANDOFF_NOT_CURRENT_PENDING_WORK")
+        blocked = queue.get(blocked_id)
+        if (
+            not isinstance(blocked, Mapping)
+            or blocked.get("kind") != "ADAPT_SUCCESS_TO_VERIFIABLE_EPISODE"
+            or blocked.get("status") != "PARKED"
+            or blocked.get("frontier_expansion_work_id") != wid
+            or blocked.get("parked_reason") != "NO_CURRENT_OWNED_VERIFICATION_PATH"
+        ):
+            raise ImprovementDriverError("BLOCKED_SUCCESS_WORK_NOT_CURRENT_PARKED_ADAPTER_GAP")
+        observation = observations.get(observation_id)
+        if (
+            not isinstance(observation, Mapping)
+            or observation.get("observation_id") != observation_id
+            or observation.get("learning_disposition_reason")
+            != "OWNED_SUCCESS_ADAPTER_RETURNED_NO_CANDIDATE"
+            or observation.get("frontier_expansion_work_id") != wid
+        ):
+            raise ImprovementDriverError("SUCCESS_OBSERVATION_NOT_PROVEN_ADAPTER_FRONTIER_MISS")
+
         from canonical.runtime import r3_success_adapter_author_context_v1 as author_context
         from canonical.runtime import r3_verification_frontier_repair_reducer_v1 as repair_reducer
 
@@ -246,13 +280,21 @@ def _current_frontier_repair_reduction(
         )
         stored_adapter = str(payload.get("adapter_frontier_sha256") or "")
         stored_authority = str(payload.get("verification_authority_sha256") or "")
-        if stored_adapter and stored_adapter != current_adapter:
+        if (
+            stored_adapter != current_adapter
+            or str(blocked.get("adapter_frontier_sha256") or "") != current_adapter
+            or str(observation.get("adapter_frontier_sha256") or "") != current_adapter
+        ):
             return {
                 "pass": False,
                 "status": "FRONTIER_REPAIR_REDUCTION_UNAVAILABLE",
                 "reason": "SUCCESS_ADAPTER_FRONTIER_CHANGED",
             }
-        if stored_authority and stored_authority != current_authority:
+        if (
+            stored_authority != current_authority
+            or str(blocked.get("verification_authority_sha256") or "") != current_authority
+            or str(observation.get("verification_authority_sha256") or "") != current_authority
+        ):
             return {
                 "pass": False,
                 "status": "FRONTIER_REPAIR_REDUCTION_UNAVAILABLE",
