@@ -144,12 +144,10 @@ def _auto_mode(payload: Mapping[str, Any], options: Mapping[str, Any]) -> str:
     """Select only structurally unambiguous fabric routes; otherwise fail closed."""
     keys = set(payload)
 
-    if {
-        "ambiguity_owner",
-        "hypothesis_set_complete",
-        "worlds",
-        "observations",
-    } <= keys:
+    if (
+        {"ambiguity_owner", "hypothesis_set_complete", "worlds", "observations"} <= keys
+        or {"ambiguity_owner", "closed_hypothesis_universe", "expected_manifest_sha256"} <= keys
+    ):
         return "SEMANTIC_AMBIGUITY"
 
     if isinstance(payload.get("composition_steps"), list):
