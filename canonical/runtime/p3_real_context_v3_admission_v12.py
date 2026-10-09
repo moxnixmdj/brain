@@ -47,7 +47,12 @@ def _fail(reason:str, **detail:Any)->dict[str,Any]:
     return out
 
 
-def evaluate(payload:Mapping[str,Any], *, repo_root:str|Path|None=None)->dict[str,Any]:
+def evaluate(
+    payload:Mapping[str,Any],
+    *,
+    repo_root:str|Path|None=None,
+    relation_edge_verifier=None,
+)->dict[str,Any]:
     if not isinstance(payload,Mapping):
         return _fail("PAYLOAD_MAPPING_REQUIRED")
     extra=set(payload)-_ALLOWED
@@ -94,6 +99,7 @@ def evaluate(payload:Mapping[str,Any], *, repo_root:str|Path|None=None)->dict[st
             **dict(loop_cfg),
         },
         repo_root=repo_root,
+        relation_edge_verifier=relation_edge_verifier,
     )
     if candidate.get("pass") is not True:
         return _fail(
