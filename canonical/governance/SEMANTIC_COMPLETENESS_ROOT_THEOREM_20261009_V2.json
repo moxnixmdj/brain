@@ -13,16 +13,22 @@
     "conclusion": "B_REAL_SUBSET_G_REAL"
   },
   "uvck_v2_binding": {
+    "current_pointer_path": "canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json",
+    "current_pointer_git_blob_sha": "2adee7bb282cd01ce7b62f69c8f093268a891753",
     "governance_path": "canonical/governance/UVCK_V2_ASSURANCE_CLOSURE_COMPILER_20261009_V1.json",
-    "governance_git_blob_sha": "e45d6acb3d9726f8a36623337a6f1586dd2641d3",
+    "governance_git_blob_sha": "b7197be29b49c55c81e1a18572cd22020510fa5e",
     "runtime_path": "canonical/runtime/assurance_closure_compiler_v1.py",
-    "runtime_git_blob_sha": "135eeff03e33083f8140a29a62efd67271ebfb6b",
-    "role": "ASSURANCE_COMPILER_BELOW_SEMANTIC_ROOT_THEOREM"
+    "runtime_git_blob_sha": "a52d62d63aeb50a6bbb613c37ec76d1c86327b12",
+    "test_path": "canonical/tests/test_assurance_closure_compiler_v1.py",
+    "test_git_blob_sha": "0f89c895f8e0f275de2d64cf33f60c8ff09abd4e",
+    "role": "HARDENED_ASSURANCE_COMPILER_BELOW_SEMANTIC_ROOT_THEOREM__GENERIC_GRAPH_CANNOT_SELF_CERTIFY_EXECUTION_OR_ADVERSARIAL_CLOSURE"
   },
   "novelty_law": {
     "uvck_new_primitive_is_new_semantic_root": false,
     "proof_search_failure_is_falsehood": false,
-    "default": "MAP_TO_EXISTING_SEMANTIC_ROOT_OR_CAPABILITY_CLOSURE"
+    "default": "MAP_TO_EXISTING_SEMANTIC_ROOT_OR_CAPABILITY_CLOSURE",
+    "uvck_new_primitive_required_means": "ASSURANCE_REPRESENTATION_EXTENSION_REQUIRED",
+    "new_semantic_root_requires": "CHECKED_FOUNDATIONAL_COUNTERMODEL_OR_PROOF_CURRENT_SEMANTIC_ROOT_DEFINITIONS_ARE_ILL_FORMED"
   },
   "mechanism_admission": {
     "requires_root_delta_or_material_proof_cost_reduction": true,
