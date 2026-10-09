@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261009_V29",
+  "date": "2026-10-09",
+  "status": "CURRENT_POST_RANK15_FINAL_ZERO__15_CONSUMED__RANK16_UNTOUCHED__ZERO_CREDIT",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "predecessor": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261009_V28.json",
+    "git_blob_sha": "d5bcd21a6a8ab977f72a1a0e10b364ead61ceb3e"
+  },
+  "rank15_result": {
+    "path": "canonical/verification/TB_SCIENCE_RANK15_V6_IRREVERSIBLE_RESULT_TRUTH_20261009_V1.json",
+    "git_blob_sha": "2bdc13dd440b4b7bae9fd2dd7e9290f411696fa2",
+    "reward": 0,
+    "final_zero": true,
+    "consumed": true
+  },
+  "current_counts": {
+    "consumed_slots": 15,
+    "consumed_successes": 0,
+    "consumed_final_failures": 15,
+    "remaining_slots": 195,
+    "required_successes_remaining": 124,
+    "failures_until_fail_lock": 72,
+    "required_success_rate_over_remaining": 0.6358974358974359,
+    "pass_still_mathematically_reachable": true
+  },
+  "next_untouched_slot": {
+    "ledger_schedule_rank": 16,
+    "frozen_manifest_schedule_order": 15,
+    "attempt_index": 0,
+    "task_rank": 15,
+    "slot_id": "terminal-bench-science/sparse-network-assimilation::trial-0",
+    "task_digest": "sha256:52ba7089dc32952df08c478af76b732fa82468c125431388adbf9798d869826f",
+    "task_read": false,
+    "task_started": false
+  },
+  "controls": {
+    "rank15_rerun": false,
+    "rank15_replacement": false,
+    "rank16_execution_authority": false,
+    "rank16_task_read_authority": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_trials_consumed_delta": 1,
+    "consumed_successes_delta": 0,
+    "consumed_final_failures_delta": 1,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
