@@ -3716,5 +3716,22 @@
     "finance_acceptance_route_split_preserved": true,
     "terminal_remains_false": true,
     "terminal_credit_delta": 0
+  },
+  "tb_science_rank16_preexecution_repair_reconciliation": {
+    "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK16_PREEXECUTION_REPAIR_PROJECTION_V1",
+    "source_path": "canonical/governance/TB_SCIENCE_RANK16_PREEXECUTION_REPAIR_RECONCILIATION_20261009_V1.json",
+    "source_git_blob_sha": "56b7bc8e0c1eb821d0b71788fce4a2e9eda4794e",
+    "ledger_v29_git_blob_sha": "0c97c84d98ef3ce97025ea6672971f188d5fc566",
+    "repaired_controller_git_blob_sha": "b7c821bc63523d21ed56665fae4d88e10ee148d5",
+    "independent_verification_git_blob_sha": "5070f37f6d6364efbd572f41c942c326b1cd0265",
+    "controller_repair_prerequisite_satisfied": true,
+    "next_rank": 16,
+    "next_slot_id": "terminal-bench-science/sparse-network-assimilation::trial-0",
+    "rank16_task_read": false,
+    "rank16_task_started": false,
+    "rank16_execution_authority": false,
+    "next_required_transition": "FRESH_ZERO_EXPOSURE_CARRIER_QUALIFICATION_THEN_CONTENT_ADDRESSED_ONE_SLOT_AUTHORITY",
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
   }
 }
