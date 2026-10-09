@@ -22,7 +22,7 @@ the universal solver must still authenticate that mapping separately.
 from __future__ import annotations
 
 from copy import deepcopy
-from hashlib import sha256
+from hashlib import sha1, sha256
 import json
 import importlib.util
 from pathlib import Path
@@ -155,6 +155,92 @@ def prepare(
         "execution_authority": False,
         "terminal_authority": False,
     }
+
+
+
+def _git_blob_sha(raw: bytes) -> str:
+    return sha1(
+        b"blob " + str(len(raw)).encode("ascii") + b"\0" + raw
+    ).hexdigest()
+
+
+def _invoke_frozen_bound_capability(
+    entry: Mapping[str, Any],
+    args: Mapping[str, Any],
+    *,
+    expected_adapter_git_blob_sha: str | None = None,
+) -> tuple[dict[str, Any], str]:
+    """Invoke from one frozen registry entry and one frozen adapter byte buffer."""
+    if not isinstance(entry, Mapping):
+        raise BoundExecutionError("FROZEN_ENTRY_NOT_OBJECT")
+    source = entry.get("source") or {}
+    if not isinstance(source, Mapping):
+        raise BoundExecutionError("FROZEN_ENTRY_SOURCE_INVALID")
+
+    call_args = dict(args)
+    call_args.pop("capability_id", None)
+    dependency = None
+    source_type = str(source.get("type") or "").strip()
+    if source_type == "pypi":
+        dependency = astra_runtime._ensure_pypi_dependency(source)
+    elif source_type == "npm":
+        dependency = astra_runtime._ensure_npm_dependency(source)
+        call_args["_package_root"] = dependency.get("package_root")
+    elif source_type == "apt":
+        dependency = astra_runtime._ensure_apt_dependencies(source)
+    elif source_type == "git_source_tree":
+        dependency = astra_runtime._ensure_git_source_tree_dependency(source)
+        call_args["_source_root"] = dependency.get("source_root")
+    elif source_type in {"python_stdlib", "system_tool"}:
+        dependency = astra_runtime._ensure_local_dependency(source)
+    elif source_type:
+        raise BoundExecutionError("BOUND_CAPABILITY_SOURCE_UNSUPPORTED:" + source_type)
+
+    module_name = str(entry.get("adapter_module") or "")
+    if (
+        not module_name
+        or any(
+            ch not in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_"
+            for ch in module_name
+        )
+    ):
+        raise BoundExecutionError("BOUND_CAPABILITY_ADAPTER_INVALID")
+    source_path = (
+        ROOT / "canonical" / "runtime" / "bound_capabilities" / (module_name + ".py")
+    )
+    if not source_path.is_file():
+        raise BoundExecutionError("BOUND_CAPABILITY_ADAPTER_MISSING")
+
+    raw = source_path.read_bytes()
+    adapter_git_blob_sha = _git_blob_sha(raw)
+    if (
+        expected_adapter_git_blob_sha is not None
+        and adapter_git_blob_sha != str(expected_adapter_git_blob_sha).lower()
+    ):
+        raise BoundExecutionError("BOUND_CAPABILITY_ADAPTER_BLOB_MISMATCH")
+
+    with tempfile.TemporaryDirectory(prefix="brain-bound-adapter-") as td:
+        frozen_path = Path(td) / (module_name + ".py")
+        frozen_path.write_bytes(raw)
+        if _git_blob_sha(frozen_path.read_bytes()) != adapter_git_blob_sha:
+            raise BoundExecutionError("BOUND_CAPABILITY_ADAPTER_FROZEN_COPY_MISMATCH")
+        full_name = "project_brain_frozen_bound_" + module_name
+        spec = importlib.util.spec_from_file_location(full_name, frozen_path)
+        if spec is None or spec.loader is None:
+            raise BoundExecutionError("BOUND_CAPABILITY_ADAPTER_LOAD_FAILED")
+        module = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = module
+        spec.loader.exec_module(module)
+        fn = getattr(module, str(entry.get("entrypoint") or "run"), None)
+        if not callable(fn):
+            raise BoundExecutionError("BOUND_CAPABILITY_ENTRYPOINT_MISSING")
+        result = fn(call_args, ROOT)
+
+    if not isinstance(result, dict):
+        raise BoundExecutionError("BOUND_CAPABILITY_RESULT_INVALID")
+    result.setdefault("capability_id", str(args.get("capability_id") or ""))
+    result["dependency"] = dependency
+    return result, adapter_git_blob_sha
 
 
 def execute(
