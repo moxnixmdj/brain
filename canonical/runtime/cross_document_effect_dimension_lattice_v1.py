@@ -21,13 +21,14 @@ import json
 from typing import Any, Mapping, Sequence
 
 from canonical.runtime.source_aligned_semantic_proof_v9 import verify_proof
+from canonical.runtime.source_explicit_semantic_claim_autofill_v2 import synthesize_missing_claims
 from canonical.runtime import cross_document_effect_hypothesis_worldset_v1 as worldset
 from canonical.runtime import cross_document_effect_hypothesis_worldset_verify_v1 as worldset_verify
 from canonical.runtime import cross_document_effect_calculus_v1 as calculus
 
 SCHEMA="PROJECT_BRAIN_CROSS_DOCUMENT_EFFECT_DIMENSION_LATTICE_V1"
 MAX_DOCUMENTS=32
-MAX_CLAIMS_PER_DOCUMENT=384
+MAX_CLAIMS_PER_DOCUMENT=256
 DIMENSIONS=(
     "target","effect_class","value","conditions",
     "valid_from","valid_until","supersedes",
@@ -170,10 +171,24 @@ def evaluate(problem:Mapping[str,Any])->dict[str,Any]:
         refinement_count=0
 
         for doc in documents:
+            autofill=synthesize_missing_claims(
+                doc["source_text"],
+                source_id=doc["source_id"],
+                existing_claims=doc["claims"],
+            )
+            if autofill.get("pass") is not True:
+                raise ValueError(
+                    "SOURCE_EXPLICIT_AUTOFILL_FAIL_CLOSED:"
+                    +doc["document_id"]+":"
+                    +str(autofill.get("reason") or "UNKNOWN")
+                )
+            proof_claims=list(doc["claims"])+list(
+                autofill.get("synthesized_claims") or []
+            )
             proof=verify_proof(
                 doc["source_text"],
                 source_id=doc["source_id"],
-                claims=doc["claims"],
+                claims=proof_claims,
             )
             if proof.get("status")=="FAIL_CLOSED":
                 raise ValueError(
@@ -242,6 +257,10 @@ def evaluate(problem:Mapping[str,Any])->dict[str,Any]:
                 "query_effect_id_inventory":{"kind":"TOP"},
                 "effect_states":{},
                 "query_status":None,
+                "provided_claim_count":len(doc["claims"]),
+                "synthesized_claim_count":len(
+                    autofill.get("synthesized_claims") or []
+                ),
                 "accepted_claim_count":len(accepted),
                 "rejected_claim_count":len(proof.get("rejected_claims") or []),
             }
