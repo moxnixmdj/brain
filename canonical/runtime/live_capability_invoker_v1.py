@@ -19,6 +19,7 @@ from canonical.runtime import certificate_gated_selected_route_runtime_entrypoin
 from canonical.runtime import h100_verified_capability_registry_v8 as h100
 from canonical.runtime.verified_bound_capability_execution_adapter_v1 import execute as execute_bound
 from canonical.runtime import d_final_live_bound_bridge_v1 as d_bound_bridge
+from canonical.runtime import d_finality_live_registry_v1 as d_live_registry
 from canonical.runtime import d_finality_execution_epoch_v1 as d_finality
 
 SCHEMA = "PROJECT_BRAIN_LIVE_CAPABILITY_INVOKER_V1"
@@ -287,16 +288,28 @@ def _invoke_impl(
 
     if kind == "BOUND_CAPABILITY":
         active_d = d_bound_bridge.active_epoch_or_none()
-        out = (
-            d_bound_bridge.invoke(
+        if active_d is not None:
+            out = d_bound_bridge.invoke(
                 capability_id,
                 local_id,
                 payload,
                 repo_root=ROOT,
             )["result"]
-            if active_d is not None
-            else execute_bound(local_id, inputs=dict(payload))
-        )
+        else:
+            with d_live_registry.activate_if_current(
+                capability_id,
+                repo_root=ROOT,
+            ) as auto_epoch:
+                out = (
+                    d_bound_bridge.invoke(
+                        capability_id,
+                        local_id,
+                        payload,
+                        repo_root=ROOT,
+                    )["result"]
+                    if auto_epoch is not None
+                    else execute_bound(local_id, inputs=dict(payload))
+                )
         return {
             "schema": SCHEMA,
             "status": "PASS__EXACT_BOUND_CAPABILITY_DISPATCHED"
