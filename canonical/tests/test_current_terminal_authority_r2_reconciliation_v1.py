@@ -150,24 +150,37 @@ class CurrentTerminalAuthorityR2ReconciliationV1Tests(unittest.TestCase):
         self.assertTrue(terminal["live_truth"]["opus_5_5_is_frontier_checkpoint"])
         self.assertFalse(terminal["live_truth"]["current_escape_policy_adequacy_closed"])
 
-    def test_r2_v53_regcap_routing_precedence_and_nonclaims(self):
+    def test_current_regcap_routing_precedence_and_nonclaims(self):
         terminal = self.load(TERMINAL)
         r2 = self.load(R2)
         activation = self.load(REGCAP_ACTIVATION)
 
-        self.assertIn("__V53__", r2["status"])
-        rec = r2["r2_v53_regcap_semantic_routing_reconciliation"]
+        self.assertIn("__V56__", r2["status"])
+        rec = r2["r2_v56_regcap_contextual_selection_reconciliation"]
         self.assertEqual(
-            rec["precedence"][:3],
+            rec["precedence"][:4],
             [
                 "EXACT_AUTHENTICATED_SOURCE_BOUND_IDENTITY_WHEN_SOURCE_CONTRACT_MATCHES",
                 "EXACT_AUTHENTICATED_LOCAL_APPOSITIVE_IDENTITY_WHEN_SOURCE_SPAN_CONTRACT_MATCHES",
+                "VERIFIED_SAME_SENTENCE_CONTEXT_SIGNATURE_SELECTION_RELATIVE_TO_BOUND_CCOB_CCYB_TLAC_RIVALS",
                 "VERIFIED_PROPERTY_CANDIDATE_DISCOVERY_PLUS_MINIMUM_INFORMATION_AMBIGUITY_CONTROL",
             ],
         )
+        self.assertFalse(rec["relative_selection_is_global_identity"])
+        self.assertFalse(rec["candidate_universe_complete"])
         self.assertFalse(rec["finance_semantic_tail_closed"])
         self.assertEqual(rec["primary_internal_unsolved_count_before"], 1)
         self.assertEqual(rec["primary_internal_unsolved_count_after"], 1)
+
+        ctx = r2["regcap_contextual_relative_selection"]
+        self.assertTrue(ctx["relative_selection_authority"])
+        self.assertFalse(ctx["semantic_identity_authority"])
+        self.assertFalse(ctx["global_phrase_identity_authority"])
+        self.assertFalse(ctx["candidate_universe_complete"])
+        self.assertFalse(ctx["open_world_ontology_complete"])
+        self.assertTrue(ctx["p3_semantic_truth_dispatch_bound"])
+        self.assertEqual(ctx["terminal_credit_delta"], 0)
+
         self.assertFalse(
             r2["regcap_loss_cushion_source_bound_identity"]["global_phrase_identity_authority"]
         )
@@ -193,7 +206,14 @@ class CurrentTerminalAuthorityR2ReconciliationV1Tests(unittest.TestCase):
         truth = terminal["live_truth"]
         self.assertTrue(truth["r2_regcap_nyfed_loss_cushion_ccob_identity_bound"])
         self.assertTrue(truth["r2_regcap_local_appositive_identity_bound"])
-        self.assertTrue(truth["r2_regcap_candidate_ambiguity_minimum_information_control_bound"])
+        self.assertTrue(truth["r2_regcap_contextual_relative_selection_bound"])
+        self.assertFalse(
+            truth["r2_regcap_contextual_relative_selection_is_global_identity"]
+        )
+        self.assertFalse(truth["r2_regcap_contextual_candidate_universe_complete"])
+        self.assertTrue(
+            truth["r2_regcap_candidate_ambiguity_minimum_information_control_bound"]
+        )
         self.assertFalse(truth["r2_regcap_global_loss_cushion_identity_closed"])
         self.assertFalse(truth["r2_regcap_open_world_ontology_closed"])
         self.assertFalse(truth["r2_regcap_missing_context_is_external_impossibility"])
@@ -202,12 +222,12 @@ class CurrentTerminalAuthorityR2ReconciliationV1Tests(unittest.TestCase):
             truth["r2_primary_internal_unsolved_cell"],
             "FINANCE_SEMANTIC_ADEQUACY_TAIL",
         )
-        self.assertIn("CURRENT_R2_V53", terminal["status"])
+        self.assertIn("CURRENT_R2_V56", terminal["status"])
         self.assertIn("TERMINAL_FALSE", terminal["status"])
         self.assertEqual(
-            terminal["r2_v53_regcap_semantic_routing_reconciliation_20261009_v1"][
-                "terminal_credit_delta"
-            ],
+            terminal[
+                "r2_v56_regcap_contextual_selection_reconciliation_20261009_v1"
+            ]["terminal_credit_delta"],
             0,
         )
 
