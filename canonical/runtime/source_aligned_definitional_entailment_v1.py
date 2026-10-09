@@ -33,6 +33,9 @@ CONCEPT_DEFINITION_AUTHORITY_SCHEMA = (
 SOURCE_COMPLETENESS_AUTHORITY_SCHEMA = (
     "PROJECT_BRAIN_SOURCE_CONJUNCTIVE_COMPLETENESS_AUTHORITY_RECEIPT_V1"
 )
+RELATION_EDGE_AUTHORITY_SCHEMA = (
+    "PROJECT_BRAIN_SEMANTIC_RELATION_EDGE_AUTHORITY_RECEIPT_V1"
+)
 _SHA256 = re.compile(r"^[0-9a-f]{64}$")
 
 
@@ -446,3 +449,121 @@ def prove(
             passed=False,
             reason=type(exc).__name__ + ":" + str(exc),
         )
+
+
+def verify_relation_edge(
+    receipt: Mapping[str, Any],
+    *,
+    source_atom_verifier: Callable[[Mapping[str, Any]], Mapping[str, Any] | None],
+    concept_definition_verifier: Callable[[Mapping[str, Any]], Mapping[str, Any] | None],
+    source_completeness_verifier: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
+) -> dict[str, Any]:
+    """Verify one ENTAILS/NOT_ENTAILS edge for the existing entailment DAG.
+
+    V1 supports the source-mention -> concept-definition orientation only.
+    """
+    if not isinstance(receipt, Mapping):
+        return {
+            "pass": False,
+            "schema": RELATION_EDGE_AUTHORITY_SCHEMA,
+            "reason": "RELATION_EDGE_RECEIPT_NOT_OBJECT",
+        }
+
+    allowed = {
+        "relation",
+        "source_id",
+        "target_id",
+        "scope_id",
+        "raw_span",
+        "raw_source_id",
+        "source_atom_receipts",
+        "concept_definition_receipt",
+        "source_completeness_receipt",
+    }
+    extra = set(receipt) - allowed
+    if extra:
+        return {
+            "pass": False,
+            "schema": RELATION_EDGE_AUTHORITY_SCHEMA,
+            "reason": "RELATION_EDGE_UNMODELED_FIELDS:" + ",".join(sorted(extra)),
+        }
+
+    relation = str(receipt.get("relation") or "").strip().upper()
+    if relation not in {"ENTAILS", "NOT_ENTAILS"}:
+        return {
+            "pass": False,
+            "schema": RELATION_EDGE_AUTHORITY_SCHEMA,
+            "reason": "RELATION_EDGE_KIND_INVALID",
+        }
+
+    source_id = str(receipt.get("source_id") or "").strip()
+    target_id = str(receipt.get("target_id") or "").strip()
+    scope_id = str(receipt.get("scope_id") or "").strip()
+    raw_span = receipt.get("raw_span")
+    raw_source_id = str(receipt.get("raw_source_id") or "").strip()
+    if not source_id or not target_id or source_id == target_id:
+        return {
+            "pass": False,
+            "schema": RELATION_EDGE_AUTHORITY_SCHEMA,
+            "reason": "RELATION_EDGE_DISTINCT_ENDPOINTS_REQUIRED",
+        }
+    if not scope_id or not isinstance(raw_span, str) or not raw_span.strip() or not raw_source_id:
+        return {
+            "pass": False,
+            "schema": RELATION_EDGE_AUTHORITY_SCHEMA,
+            "reason": "RELATION_EDGE_SOURCE_BINDING_INCOMPLETE",
+        }
+
+    result = prove(
+        raw_span=raw_span,
+        source_id=raw_source_id,
+        scope_id=scope_id,
+        left_id=source_id,
+        right_id=target_id,
+        source_atom_receipts=receipt.get("source_atom_receipts", ()),
+        source_atom_verifier=source_atom_verifier,
+        concept_definition_receipt=receipt.get("concept_definition_receipt"),
+        concept_definition_verifier=concept_definition_verifier,
+        source_completeness_receipt=receipt.get("source_completeness_receipt"),
+        source_completeness_verifier=source_completeness_verifier,
+    )
+    if result.get("pass") is not True:
+        return {
+            "pass": False,
+            "schema": RELATION_EDGE_AUTHORITY_SCHEMA,
+            "reason": "DEFINITIONAL_ENTAILMENT_FAIL_CLOSED",
+            "proof_result": result,
+        }
+
+    proved = (
+        result.get("left_entails_right") is True
+        if relation == "ENTAILS"
+        else result.get("left_entails_right_disproved") is True
+    )
+    if not proved:
+        return {
+            "pass": False,
+            "schema": RELATION_EDGE_AUTHORITY_SCHEMA,
+            "reason": "RELATION_NOT_PROVED:" + relation,
+            "proof_result": result,
+        }
+
+    evidence_sha = _sha(deepcopy(dict(receipt)))
+    body = {
+        "pass": True,
+        "schema": RELATION_EDGE_AUTHORITY_SCHEMA,
+        "scope_id": scope_id,
+        "relation": relation,
+        "source_id": source_id,
+        "target_id": target_id,
+        "evidence_sha256": evidence_sha,
+        "source_semantics_authenticated": True,
+        "target_semantics_authenticated": True,
+        "relation_semantics_authenticated": True,
+        "verification_authority_mutated": False,
+        "proof_result": result,
+    }
+    return {
+        **body,
+        "receipt_sha256": _sha(body),
+    }
