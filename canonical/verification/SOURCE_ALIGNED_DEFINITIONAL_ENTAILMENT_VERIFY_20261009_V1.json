@@ -1,13 +1,15 @@
 {
   "schema": "PROJECT_BRAIN_SOURCE_ALIGNED_DEFINITIONAL_ENTAILMENT_VERIFY_20261009_V1",
   "date": "2026-10-09",
-  "status": "PASS__BOUNDED_NONEXPLICIT_DEFINITIONAL_ENTAILMENT__12_OF_12_CORE__42_OF_42_ADJACENT__PY_COMPILE_PASS__ZERO_TERMINAL_CREDIT",
+  "status": "PASS__BOUNDED_NONEXPLICIT_DOMAIN_MAPPING_CHAIN__21_OF_21_NEW_CORE__42_OF_42_ADJACENT__63_OF_63_TOTAL__PY_COMPILE_PASS__ZERO_TERMINAL_CREDIT",
   "subject": {
     "repository": "moxnixmdj/brain",
     "branch": "source-aligned-definitional-entailment-v1-20261009",
     "exact_blobs": {
       "canonical/runtime/source_aligned_definitional_entailment_v1.py": "2ea871b9422ca77f7f7889f73422ddadf6026ff9",
-      "canonical/tests/test_source_aligned_definitional_entailment_v1.py": "3aa392629a5640ff118c1b898c359c7a3405baff"
+      "canonical/tests/test_source_aligned_definitional_entailment_v1.py": "3aa392629a5640ff118c1b898c359c7a3405baff",
+      "canonical/runtime/authenticated_source_phrase_atom_bridge_v1.py": "9d5ed5c14fc9ca3a59dcb77624c92c039ba0a9aa",
+      "canonical/tests/test_authenticated_source_phrase_atom_bridge_v1.py": "215294f2ce3c58f645e084d2e322aea7c132d165"
     }
   },
   "remote_carrier": {
@@ -38,16 +40,25 @@
       "checks": 12
     },
     "total_focused_checks": {
-      "passed": 54,
+      "passed": 63,
       "failed": 0
     },
     "py_compile": {
       "result": "PASS",
       "files": [
+        "canonical/runtime/authenticated_source_phrase_atom_bridge_v1.py",
         "canonical/runtime/source_aligned_definitional_entailment_v1.py",
         "canonical/runtime/semantic_relation_entailment_dag_v1.py",
         "canonical/runtime/semantic_relation_control_v1.py"
       ]
+    },
+    "authenticated_source_phrase_atom_bridge": {
+      "result": "PASS",
+      "checks": 9
+    },
+    "total_new_core_checks": {
+      "passed": 21,
+      "failed": 0
     }
   },
   "tdd_falsification": {
@@ -62,7 +73,10 @@
     "AUTHENTICATED_SOURCE_COMPLETENESS_CANNOT_CLAIM_UNPROVED_ATOMS",
     "THE_PROOF_CAN_EMIT_ENTAILS_OR_NOT_ENTAILS_RECEIPTS_COMPATIBLE_WITH_THE_EXISTING_SCOPED_SEMANTIC_ENTAILMENT_DAG",
     "THE_EXISTING_SEMANTIC_RELATION_CONTROLLER_ACCEPTS_THE_BOUNDED_DEFINITIONAL_EDGE_FOR_LEFT_ENTAILS_RIGHT",
-    "NO_EXECUTION_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY_IS_ADDED"
+    "NO_EXECUTION_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY_IS_ADDED",
+    "AN_INDEPENDENTLY_AUTHENTICATED_BOUNDED_PHRASE_TO_ATOM_LEXICON_CAN_BIND_EXACT_TOKEN_BOUNDARY_SOURCE_PHRASES_TO_SOURCE_SEMANTIC_ATOM_RECEIPTS_WITHOUT_FUZZY_OR_MODEL_AUTHORITY",
+    "RAW_SOURCE_PHRASES_CAN_FLOW_THROUGH_AUTHENTICATED_ATOMS_TO_NONEXPLICIT_DEFINITIONAL_ENTAILMENT_AND_THEN_THROUGH_THE_EXISTING_SEMANTIC_RELATION_CONTROLLER",
+    "NO_PHRASE_MATCH_NEVER_PROVES_A_NEGATIVE_ATOM"
   ],
   "hard_nonclaims": [
     "NO_GENERAL_NATURAL_LANGUAGE_PARSER",
@@ -71,7 +85,9 @@
     "NO_GENERAL_WORD_SENSE_CLOSURE",
     "NO_INFERRED_SYNONYMY_WITHOUT_AUTHENTICATED_PREMISES",
     "NO_CLAIM_FULL_REPOSITORY_TEST_SUITE_WAS_RUN",
-    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT",
+    "NO_CLAIM_THE_PHRASE_LEXICON_AUTHENTICATES_ITSELF",
+    "NO_CLAIM_ARBITRARY_PARAPHRASES_MAP_WITHOUT_AN_AUTHENTICATED_SURFACE_TO_ATOM_BINDING"
   ],
   "accounting": {
     "incremental_spend_usd": 0,
