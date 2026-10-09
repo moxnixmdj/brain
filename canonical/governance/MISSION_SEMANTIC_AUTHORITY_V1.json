@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_MISSION_SEMANTIC_AUTHORITY_V1",
+  "date": "2026-10-09",
+  "status": "ACTIVE_STABLE_MISSION_SEMANTIC_AUTHORITY__ZERO_CREDIT",
+  "authoritative_source": {
+    "path": "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+    "git_blob_sha": "13c470645b037bbb46245c687dd35197b420d51a"
+  },
+  "semantic_fields": [
+    "real_objective",
+    "optimization_objective",
+    "compounding_requirement",
+    "knowledge_policy",
+    "opus_5_5_role",
+    "benchmark_role",
+    "checkpoint_rule",
+    "correctness_rule",
+    "spend_rule",
+    "mission_terminality",
+    "option_preservation_requirement",
+    "future_technology_compatibility"
+  ],
+  "mission_semantics_sha256": "4d3d7866ad8ee54606a11791f53519eef15a80700bd5dcc221ec0da676ceb942",
+  "pointer_policy": {
+    "path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
+    "role": "CURRENT_LOCATOR_AND_OPERATIONAL_OVERLAY",
+    "exact_pointer_blob_is_semantic_authority": false,
+    "required_consistency": [
+      "authoritative_source.path",
+      "real_objective",
+      "opus_5_5_role"
+    ],
+    "incidental_pointer_fields_may_change_without_semantic_epoch_change": true
+  },
+  "runtime": "canonical/runtime/mission_semantic_authority_v1.py",
+  "tests": "canonical/tests/test_mission_semantic_authority_v1.py",
+  "hard_rules": [
+    "SEMANTIC_DIGEST_CHANGES_ONLY_WHEN_A_LOAD_BEARING_MISSION_FIELD_CHANGES",
+    "AUXILIARY_POINTER_CHANGES_DO_NOT_BY_THEMSELVES_INVALIDATE_CCRT_R4",
+    "AUTHORITATIVE_MISSION_SOURCE_BLOB_DRIFT_REQUIRES_EXPLICIT_REBIND",
+    "POINTER_SOURCE_PATH_OR_MISSION_TEXT_DRIFT_FAILS_CLOSED"
+  ],
+  "accounting": {
+    "fresh_reality_units_consumed": 0,
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
