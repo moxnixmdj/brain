@@ -62,6 +62,32 @@ class R3Root1AdapterGapDriverV1Tests(unittest.TestCase):
             self.assertTrue(
                 reduction["must_acquire_new_distinguishing_evidence"]
             )
+            evidence_request = blocker["distinguishing_evidence_request"]
+            self.assertTrue(evidence_request["pass"], evidence_request)
+            self.assertEqual(
+                evidence_request["minimum_missing_obligation_count"],
+                3,
+            )
+            self.assertEqual(
+                evidence_request["candidate_evidence_bundles"],
+                [
+                    {
+                        "route": "CHECKPOINTED_VERIFIED_EXECUTION",
+                        "missing_obligations": [
+                            "EXECUTION_COUNT_MATCHES_SELECTED_PLAN_AND_NONZERO",
+                            "ALL_EXECUTION_ROWS_PASS",
+                            "COMPOSITION_DIGEST_PRESENT_FOR_EVERY_EXECUTION_ROW",
+                        ],
+                        "missing_obligation_count": 3,
+                        "completion_claim": (
+                            "STRUCTURAL_ROUTE_PREMISES_ONLY__DOWNSTREAM_INDEPENDENT_"
+                            "REAUTHENTICATION_AND_NORMAL_VERIFICATION_REMAIN_MANDATORY"
+                        ),
+                    }
+                ],
+            )
+            self.assertFalse(evidence_request["acquisition_authority"])
+            self.assertFalse(evidence_request["provider_truth_authority"])
 
             state = learning.load_state(state_path)
             parked = state["improvement_queue"][observed["improvement_work_id"]]
