@@ -1,0 +1,683 @@
+"""Proof-carrying semantic dependency transport kernel V1.
+
+This module does not infer word senses. Existing semantic controllers own that
+work. It enforces a narrower systems invariant: an unresolved semantic
+dependency that is still active on an input cannot silently disappear from a
+derived value. Removal requires a self-verifying formal discharge certificate.
+
+V1 grants no discharge from caller-declared semantic completeness or caller-
+supplied interpretation-consistency flags. A discharge is admitted only when a
+supported proof route can be replayed against independently authenticated
+context and concept semantics.
+
+V1 supports two authority-bound routes through
+authenticated_context_concept_bridge_v1:
+1. one uniquely bound authenticated concept; or
+2. multiple surviving authenticated concepts that are terminally equivalent in
+   the authenticated bounded scope.
+
+The certificate remains valid only while the named host authority verifiers can
+replay the proof.
+"""
+from __future__ import annotations
+
+from copy import deepcopy
+import hashlib
+import json
+from typing import Any, Callable, Mapping, Sequence
+
+EFFECT_SCHEMA = "PROJECT_BRAIN_SEMANTIC_EFFECT_V1"
+VALUE_SCHEMA = "PROJECT_BRAIN_SEMANTIC_EFFECT_VALUE_V1"
+CERTIFICATE_SCHEMA = "PROJECT_BRAIN_SEMANTIC_DISCHARGE_CERTIFICATE_V1"
+TRANSPORT_SCHEMA = "PROJECT_BRAIN_SEMANTIC_EFFECT_TRANSPORT_VERDICT_V1"
+
+PROOF_AUTHENTICATED_CONTEXT_CONCEPT = "AUTHENTICATED_CONTEXT_CONCEPT_V1"
+PROOF_AUTHENTICATED_CONTEXT_TERMINAL_INVARIANCE = "AUTHENTICATED_CONTEXT_TERMINAL_INVARIANCE_V1"
+GUARANTEE_AUTHORITY_REPLAY = "FORMAL__AUTHORITY_VERIFIER_REPLAY_REQUIRED"
+
+
+class SemanticEffectError(ValueError):
+    pass
+
+
+def _canon(value: Any) -> str:
+    try:
+        return json.dumps(
+            value,
+            sort_keys=True,
+            separators=(",", ":"),
+            ensure_ascii=False,
+            allow_nan=False,
+        )
+    except Exception as exc:
+        raise SemanticEffectError("VALUE_NOT_CANONICAL_JSON") from exc
+
+
+def _sha(value: Any) -> str:
+    return hashlib.sha256(_canon(value).encode("utf-8")).hexdigest()
+
+
+def _token(value: Any, label: str) -> str:
+    if not isinstance(value, str) or not value.strip() or "\x00" in value:
+        raise SemanticEffectError(label + "_INVALID")
+    return value.strip()
+
+
+def _seq(value: Any, label: str) -> Sequence[Any]:
+    if not isinstance(value, Sequence) or isinstance(value, (str, bytes)):
+        raise SemanticEffectError(label + "_NOT_SEQUENCE")
+    return value
+
+
+def _validate_effect(effect: Mapping[str, Any]) -> dict[str, Any]:
+    if not isinstance(effect, Mapping):
+        raise SemanticEffectError("EFFECT_NOT_OBJECT")
+    if effect.get("schema") != EFFECT_SCHEMA:
+        raise SemanticEffectError("EFFECT_SCHEMA_INVALID")
+    required = {
+        "schema",
+        "effect_id",
+        "semvar_id",
+        "property_name",
+        "source_ref",
+        "context_version",
+        "proof_obligation_sha256",
+        "semantic_truth_authority",
+        "terminal_authority",
+    }
+    if set(effect) != required:
+        raise SemanticEffectError("EFFECT_FIELDS_INVALID")
+    out = dict(effect)
+    for key in ("effect_id", "semvar_id", "property_name", "source_ref", "context_version"):
+        out[key] = _token(out.get(key), key.upper())
+    obligation = out.get("proof_obligation_sha256")
+    if obligation is not None:
+        obligation = _token(obligation, "PROOF_OBLIGATION_SHA256")
+        if len(obligation) != 64:
+            raise SemanticEffectError("PROOF_OBLIGATION_SHA256_INVALID")
+    out["proof_obligation_sha256"] = obligation
+    if out.get("semantic_truth_authority") is not False or out.get("terminal_authority") is not False:
+        raise SemanticEffectError("EFFECT_MUST_NOT_GRANT_AUTHORITY")
+    return out
+
+
+def _effect_map(effects: Sequence[Mapping[str, Any]]) -> dict[str, dict[str, Any]]:
+    out: dict[str, dict[str, Any]] = {}
+    for raw in _seq(effects, "EFFECTS"):
+        effect = _validate_effect(raw)
+        eid = effect["effect_id"]
+        if eid in out and out[eid] != effect:
+            raise SemanticEffectError("EFFECT_ID_CONTENT_CONFLICT:" + eid)
+        out[eid] = effect
+    return out
+
+
+def make_effect(
+    *,
+    effect_id: str,
+    semvar_id: str,
+    property_name: str,
+    source_ref: str,
+    context_version: str,
+    proof_obligation: Mapping[str, Any] | None = None,
+) -> dict[str, Any]:
+    obligation_sha = None
+    if proof_obligation is not None:
+        if not isinstance(proof_obligation, Mapping):
+            raise SemanticEffectError("PROOF_OBLIGATION_NOT_OBJECT")
+        obligation_sha = _sha(dict(proof_obligation))
+    effect = {
+        "schema": EFFECT_SCHEMA,
+        "effect_id": _token(effect_id, "EFFECT_ID"),
+        "semvar_id": _token(semvar_id, "SEMVAR_ID"),
+        "property_name": _token(property_name, "PROPERTY_NAME"),
+        "source_ref": _token(source_ref, "SOURCE_REF"),
+        "context_version": _token(context_version, "CONTEXT_VERSION"),
+        "proof_obligation_sha256": obligation_sha,
+        "semantic_truth_authority": False,
+        "terminal_authority": False,
+    }
+    return _validate_effect(effect)
+
+
+def _validate_discharge_record(
+    record: Mapping[str, Any],
+    *,
+    reverify: bool,
+    authority_verifiers: Mapping[str, Callable[[Mapping[str, Any]], Mapping[str, Any] | None]] | None = None,
+) -> dict[str, Any]:
+    if not isinstance(record, Mapping) or set(record) != {"effect", "certificate"}:
+        raise SemanticEffectError("DISCHARGE_RECORD_INVALID")
+    effect = _validate_effect(record["effect"])
+    cert = dict(record["certificate"]) if isinstance(record["certificate"], Mapping) else None
+    if cert is None:
+        raise SemanticEffectError("CERTIFICATE_NOT_OBJECT")
+    if reverify:
+        _verify_certificate(effect, cert, authority_verifiers=authority_verifiers)
+    return {"effect": effect, "certificate": cert}
+
+
+def _validate_value(
+    value: Mapping[str, Any],
+    *,
+    reverify_discharges: bool = False,
+    authority_verifiers: Mapping[str, Callable[[Mapping[str, Any]], Mapping[str, Any] | None]] | None = None,
+) -> dict[str, Any]:
+    if not isinstance(value, Mapping):
+        raise SemanticEffectError("VALUE_NOT_OBJECT")
+    required = {
+        "schema",
+        "payload",
+        "context_version",
+        "active_effects",
+        "discharged_effects",
+        "semantic_truth_authority",
+        "terminal_authority",
+    }
+    if set(value) != required or value.get("schema") != VALUE_SCHEMA:
+        raise SemanticEffectError("VALUE_SCHEMA_OR_FIELDS_INVALID")
+    context = _token(value.get("context_version"), "CONTEXT_VERSION")
+    active = _effect_map(_seq(value.get("active_effects"), "ACTIVE_EFFECTS"))
+    for effect in active.values():
+        if effect["context_version"] != context:
+            raise SemanticEffectError("ACTIVE_EFFECT_CONTEXT_MISMATCH:" + effect["effect_id"])
+    discharged = []
+    for raw in _seq(value.get("discharged_effects"), "DISCHARGED_EFFECTS"):
+        row = _validate_discharge_record(
+            raw,
+            reverify=reverify_discharges,
+            authority_verifiers=authority_verifiers,
+        )
+        if row["effect"]["context_version"] != context:
+            raise SemanticEffectError("DISCHARGED_EFFECT_CONTEXT_MISMATCH:" + row["effect"]["effect_id"])
+        discharged.append(row)
+    if value.get("semantic_truth_authority") is not False or value.get("terminal_authority") is not False:
+        raise SemanticEffectError("VALUE_MUST_NOT_GRANT_AUTHORITY")
+    return {
+        "schema": VALUE_SCHEMA,
+        "payload": deepcopy(value.get("payload")),
+        "context_version": context,
+        "active_effects": [deepcopy(active[k]) for k in sorted(active)],
+        "discharged_effects": deepcopy(discharged),
+        "semantic_truth_authority": False,
+        "terminal_authority": False,
+    }
+
+
+def make_value(
+    payload: Any,
+    *,
+    context_version: str,
+    effects: Sequence[Mapping[str, Any]] = (),
+) -> dict[str, Any]:
+    context = _token(context_version, "CONTEXT_VERSION")
+    active = _effect_map(_seq(effects, "EFFECTS"))
+    for effect in active.values():
+        if effect["context_version"] != context:
+            raise SemanticEffectError("EFFECT_CONTEXT_MISMATCH:" + effect["effect_id"])
+    value = {
+        "schema": VALUE_SCHEMA,
+        "payload": deepcopy(payload),
+        "context_version": context,
+        "active_effects": [deepcopy(active[k]) for k in sorted(active)],
+        "discharged_effects": [],
+        "semantic_truth_authority": False,
+        "terminal_authority": False,
+    }
+    return _validate_value(value)
+
+
+def active_effect_ids(value: Mapping[str, Any]) -> list[str]:
+    checked = _validate_value(value)
+    return [e["effect_id"] for e in checked["active_effects"]]
+
+
+def material_slice(
+    value: Mapping[str, Any],
+    *,
+    required_properties: Sequence[str],
+) -> list[dict[str, Any]]:
+    checked = _validate_value(value)
+    props = {_token(x, "REQUIRED_PROPERTY") for x in _seq(required_properties, "REQUIRED_PROPERTIES")}
+    return [
+        deepcopy(effect)
+        for effect in checked["active_effects"]
+        if effect["property_name"] in props
+    ]
+
+
+def _run_proof(
+    proof_kind: str,
+    proof_problem: Mapping[str, Any],
+    *,
+    effect: Mapping[str, Any],
+    authority_verifiers: Mapping[str, Callable[[Mapping[str, Any]], Mapping[str, Any] | None]] | None = None,
+) -> dict[str, Any]:
+    kind = _token(proof_kind, "PROOF_KIND")
+    if not isinstance(proof_problem, Mapping):
+        raise SemanticEffectError("PROOF_PROBLEM_NOT_OBJECT")
+    if kind not in {
+        PROOF_AUTHENTICATED_CONTEXT_CONCEPT,
+        PROOF_AUTHENTICATED_CONTEXT_TERMINAL_INVARIANCE,
+    }:
+        raise SemanticEffectError("PROOF_KIND_UNSUPPORTED:" + kind)
+
+    from canonical.runtime.authenticated_context_concept_bridge_v1 import resolve
+
+    base_fields = {
+        "registry",
+        "raw_context_source",
+        "context_source_id",
+        "scope_id",
+        "registry_authority_receipt",
+        "context_authority_receipt",
+        "registry_authority_verifier_id",
+        "context_authority_verifier_id",
+        "ambiguity_owner",
+    }
+    expected_fields = set(base_fields)
+    if kind == PROOF_AUTHENTICATED_CONTEXT_CONCEPT:
+        expected_fields.add("required_concept_id")
+    if set(proof_problem) != expected_fields:
+        raise SemanticEffectError("AUTHENTICATED_CONTEXT_PROOF_FIELDS_INVALID")
+    if not isinstance(authority_verifiers, Mapping):
+        raise SemanticEffectError("AUTHORITY_VERIFIERS_REQUIRED")
+
+    registry_verifier_id = _token(
+        proof_problem.get("registry_authority_verifier_id"),
+        "REGISTRY_AUTHORITY_VERIFIER_ID",
+    )
+    context_verifier_id = _token(
+        proof_problem.get("context_authority_verifier_id"),
+        "CONTEXT_AUTHORITY_VERIFIER_ID",
+    )
+    registry_verifier = authority_verifiers.get(registry_verifier_id)
+    context_verifier = authority_verifiers.get(context_verifier_id)
+    if not callable(registry_verifier):
+        raise SemanticEffectError("REGISTRY_AUTHORITY_VERIFIER_UNAVAILABLE")
+    if not callable(context_verifier):
+        raise SemanticEffectError("CONTEXT_AUTHORITY_VERIFIER_UNAVAILABLE")
+
+    scope_id = _token(proof_problem.get("scope_id"), "SCOPE_ID")
+    verdict = resolve(
+        registry=deepcopy(proof_problem.get("registry")),
+        raw_context_source=proof_problem.get("raw_context_source"),
+        context_source_id=proof_problem.get("context_source_id"),
+        scope_id=scope_id,
+        registry_authority_receipt=deepcopy(proof_problem.get("registry_authority_receipt")),
+        registry_authority_verifier=registry_verifier,
+        context_authority_receipt=deepcopy(proof_problem.get("context_authority_receipt")),
+        context_authority_verifier=context_verifier,
+        ambiguity_owner=str(proof_problem.get("ambiguity_owner") or "SYSTEM_MODEL"),
+    )
+    if (
+        verdict.get("pass") is not True
+        or verdict.get("context_source_authorized") is not True
+        or verdict.get("context_field_semantics_authenticated") is not True
+        or verdict.get("registry_scope_authenticated") is not True
+    ):
+        raise SemanticEffectError("AUTHENTICATED_CONTEXT_PROOF_NOT_ESTABLISHED")
+
+    if kind == PROOF_AUTHENTICATED_CONTEXT_CONCEPT:
+        required_concept_id = _token(
+            proof_problem.get("required_concept_id"),
+            "REQUIRED_CONCEPT_ID",
+        )
+        expected_property = f"concept({effect['semvar_id']})={required_concept_id}"
+        if effect["property_name"] != expected_property:
+            raise SemanticEffectError("AUTHENTICATED_CONCEPT_PROPERTY_BINDING_MISMATCH")
+        if (
+            verdict.get("status") != "PASS__AUTHENTICATED_CONTEXT_BINDS_UNIQUE_CONCEPT"
+            or verdict.get("concept_binding_proved") is not True
+            or verdict.get("concept_id") != required_concept_id
+        ):
+            raise SemanticEffectError("AUTHENTICATED_CONTEXT_CONCEPT_NOT_PROVED")
+        return dict(verdict)
+
+    expected_property = f"terminal_invariant({effect['semvar_id']})@{scope_id}"
+    if effect["property_name"] != expected_property:
+        raise SemanticEffectError("AUTHENTICATED_TERMINAL_INVARIANCE_PROPERTY_BINDING_MISMATCH")
+    if (
+        verdict.get("status")
+        != "PASS__AUTHENTICATED_CONTEXT_TERMINALLY_EQUIVALENT_CONCEPTS"
+        or verdict.get("concept_binding_proved") is not False
+        or verdict.get("does_not_require_global_word_sense_identity") is not True
+    ):
+        raise SemanticEffectError("AUTHENTICATED_TERMINAL_INVARIANCE_NOT_PROVED")
+    return dict(verdict)
+
+def _certificate_id(effect: Mapping[str, Any], proof_kind: str, problem_sha: str, proof_digest: str) -> str:
+    return "SEM-CERT-" + _sha({
+        "effect_sha256": _sha(effect),
+        "proof_kind": proof_kind,
+        "proof_problem_sha256": problem_sha,
+        "proof_digest": proof_digest,
+    })[:24]
+
+
+def issue_discharge_certificate(
+    effect: Mapping[str, Any],
+    *,
+    proof_kind: str,
+    proof_problem: Mapping[str, Any],
+    authority_verifiers: Mapping[str, Callable[[Mapping[str, Any]], Mapping[str, Any] | None]] | None = None,
+) -> dict[str, Any]:
+    checked = _validate_effect(effect)
+    if checked["proof_obligation_sha256"] is None:
+        raise SemanticEffectError("EFFECT_HAS_NO_BOUND_PROOF_OBLIGATION")
+    problem = deepcopy(dict(proof_problem)) if isinstance(proof_problem, Mapping) else proof_problem
+    problem_sha = _sha(problem)
+    if problem_sha != checked["proof_obligation_sha256"]:
+        raise SemanticEffectError("PROOF_PROBLEM_NOT_BOUND_TO_EFFECT")
+    verdict = _run_proof(
+        proof_kind,
+        problem,
+        effect=checked,
+        authority_verifiers=authority_verifiers,
+    )
+    proof_digest = _sha(verdict)
+    cert = {
+        "schema": CERTIFICATE_SCHEMA,
+        "certificate_id": _certificate_id(checked, proof_kind, problem_sha, proof_digest),
+        "effect_id": checked["effect_id"],
+        "semvar_id": checked["semvar_id"],
+        "property_name": checked["property_name"],
+        "context_version": checked["context_version"],
+        "guarantee": GUARANTEE_AUTHORITY_REPLAY,
+        "proof_kind": _token(proof_kind, "PROOF_KIND"),
+        "proof_problem": problem,
+        "proof_problem_sha256": problem_sha,
+        "verifier_schema": _token(verdict.get("schema"), "VERIFIER_SCHEMA"),
+        "verifier_status": _token(verdict.get("status"), "VERIFIER_STATUS"),
+        "proof_digest": proof_digest,
+        "semantic_truth_authority": False,
+        "terminal_authority": False,
+    }
+    _verify_certificate(checked, cert, authority_verifiers=authority_verifiers)
+    return cert
+
+
+def _verify_certificate(
+    effect: Mapping[str, Any],
+    certificate: Mapping[str, Any],
+    *,
+    authority_verifiers: Mapping[str, Callable[[Mapping[str, Any]], Mapping[str, Any] | None]] | None = None,
+) -> None:
+    checked = _validate_effect(effect)
+    if not isinstance(certificate, Mapping):
+        raise SemanticEffectError("CERTIFICATE_NOT_OBJECT")
+    required = {
+        "schema",
+        "certificate_id",
+        "effect_id",
+        "semvar_id",
+        "property_name",
+        "context_version",
+        "guarantee",
+        "proof_kind",
+        "proof_problem",
+        "proof_problem_sha256",
+        "verifier_schema",
+        "verifier_status",
+        "proof_digest",
+        "semantic_truth_authority",
+        "terminal_authority",
+    }
+    if set(certificate) != required or certificate.get("schema") != CERTIFICATE_SCHEMA:
+        raise SemanticEffectError("CERTIFICATE_SCHEMA_OR_FIELDS_INVALID")
+    if certificate.get("guarantee") != GUARANTEE_AUTHORITY_REPLAY:
+        raise SemanticEffectError("AUTHORITY_REPLAY_GUARANTEE_REQUIRED")
+    for key in ("effect_id", "semvar_id", "property_name", "context_version"):
+        if certificate.get(key) != checked[key]:
+            raise SemanticEffectError("CERTIFICATE_EFFECT_BINDING_MISMATCH:" + key)
+    if certificate.get("semantic_truth_authority") is not False or certificate.get("terminal_authority") is not False:
+        raise SemanticEffectError("CERTIFICATE_MUST_NOT_GRANT_AUTHORITY")
+    problem = certificate.get("proof_problem")
+    if not isinstance(problem, Mapping):
+        raise SemanticEffectError("CERTIFICATE_PROOF_PROBLEM_INVALID")
+    problem_sha = _sha(dict(problem))
+    if certificate.get("proof_problem_sha256") != problem_sha:
+        raise SemanticEffectError("CERTIFICATE_PROOF_PROBLEM_DIGEST_MISMATCH")
+    if checked["proof_obligation_sha256"] != problem_sha:
+        raise SemanticEffectError("CERTIFICATE_PROOF_PROBLEM_NOT_BOUND_TO_EFFECT")
+    verdict = _run_proof(
+        certificate.get("proof_kind"),
+        dict(problem),
+        effect=checked,
+        authority_verifiers=authority_verifiers,
+    )
+    proof_digest = _sha(verdict)
+    if certificate.get("proof_digest") != proof_digest:
+        raise SemanticEffectError("CERTIFICATE_PROOF_DIGEST_MISMATCH")
+    if certificate.get("verifier_schema") != verdict.get("schema"):
+        raise SemanticEffectError("CERTIFICATE_VERIFIER_SCHEMA_MISMATCH")
+    if certificate.get("verifier_status") != verdict.get("status"):
+        raise SemanticEffectError("CERTIFICATE_VERIFIER_STATUS_MISMATCH")
+    expected_id = _certificate_id(checked, certificate["proof_kind"], problem_sha, proof_digest)
+    if certificate.get("certificate_id") != expected_id:
+        raise SemanticEffectError("CERTIFICATE_ID_MISMATCH")
+
+
+def discharge_effect(
+    value: Mapping[str, Any],
+    effect_id: str,
+    certificate: Mapping[str, Any],
+    *,
+    authority_verifiers: Mapping[str, Callable[[Mapping[str, Any]], Mapping[str, Any] | None]] | None = None,
+) -> dict[str, Any]:
+    checked = _validate_value(value)
+    eid = _token(effect_id, "EFFECT_ID")
+    active = {e["effect_id"]: e for e in checked["active_effects"]}
+    if eid not in active:
+        raise SemanticEffectError("ACTIVE_EFFECT_NOT_FOUND:" + eid)
+    effect = active[eid]
+    _verify_certificate(effect, certificate, authority_verifiers=authority_verifiers)
+    del active[eid]
+    discharged = list(checked["discharged_effects"])
+    discharged.append({"effect": deepcopy(effect), "certificate": deepcopy(dict(certificate))})
+    discharged.sort(key=lambda row: (row["effect"]["effect_id"], row["certificate"]["certificate_id"]))
+    return {
+        **checked,
+        "active_effects": [deepcopy(active[k]) for k in sorted(active)],
+        "discharged_effects": discharged,
+    }
+
+
+def invalidate_certificates(
+    value: Mapping[str, Any],
+    certificate_ids: Sequence[str],
+) -> dict[str, Any]:
+    checked = _validate_value(value)
+    ids = {_token(x, "CERTIFICATE_ID") for x in _seq(certificate_ids, "CERTIFICATE_IDS")}
+    active = {e["effect_id"]: e for e in checked["active_effects"]}
+    kept = []
+    removed_effects: dict[str, dict[str, Any]] = {}
+    for row in checked["discharged_effects"]:
+        cid = _token(row["certificate"].get("certificate_id"), "CERTIFICATE_ID")
+        if cid in ids:
+            effect = row["effect"]
+            removed_effects[effect["effect_id"]] = effect
+        else:
+            kept.append(row)
+    still_discharged_ids = {row["effect"]["effect_id"] for row in kept}
+    for eid, effect in removed_effects.items():
+        if eid not in still_discharged_ids:
+            existing = active.get(eid)
+            if existing is not None and existing != effect:
+                raise SemanticEffectError("REACTIVATED_EFFECT_CONTENT_CONFLICT:" + eid)
+            active[eid] = effect
+    return {
+        **checked,
+        "active_effects": [deepcopy(active[k]) for k in sorted(active)],
+        "discharged_effects": deepcopy(kept),
+    }
+
+
+def compose_value(
+    payload: Any,
+    *,
+    inputs: Sequence[Mapping[str, Any]],
+    introduced_effects: Sequence[Mapping[str, Any]] = (),
+    authority_verifiers: Mapping[str, Callable[[Mapping[str, Any]], Mapping[str, Any] | None]] | None = None,
+) -> dict[str, Any]:
+    rows = [
+        _validate_value(
+            x,
+            reverify_discharges=True,
+            authority_verifiers=authority_verifiers,
+        )
+        for x in _seq(inputs, "INPUTS")
+    ]
+    if not rows:
+        raise SemanticEffectError("AT_LEAST_ONE_INPUT_REQUIRED")
+    contexts = {x["context_version"] for x in rows}
+    if len(contexts) != 1:
+        raise SemanticEffectError("INPUT_CONTEXT_VERSION_MISMATCH")
+    context = next(iter(contexts))
+    active: dict[str, dict[str, Any]] = {}
+    discharged_by_cert: dict[str, dict[str, Any]] = {}
+    seen_effects: dict[str, dict[str, Any]] = {}
+
+    def register_effect(effect: Mapping[str, Any]) -> None:
+        eid = effect["effect_id"]
+        prior = seen_effects.get(eid)
+        if prior is not None and prior != effect:
+            raise SemanticEffectError("EFFECT_ID_CONTENT_CONFLICT:" + eid)
+        seen_effects[eid] = dict(effect)
+
+    for value in rows:
+        for effect in value["active_effects"]:
+            register_effect(effect)
+            active[effect["effect_id"]] = effect
+        for record in value["discharged_effects"]:
+            effect = record["effect"]
+            register_effect(effect)
+            cid = record["certificate"]["certificate_id"]
+            prior_record = discharged_by_cert.get(cid)
+            if prior_record is not None and prior_record != record:
+                raise SemanticEffectError("CERTIFICATE_ID_CONTENT_CONFLICT:" + cid)
+            discharged_by_cert[cid] = record
+    for effect in _effect_map(_seq(introduced_effects, "INTRODUCED_EFFECTS")).values():
+        if effect["context_version"] != context:
+            raise SemanticEffectError("INTRODUCED_EFFECT_CONTEXT_MISMATCH:" + effect["effect_id"])
+        register_effect(effect)
+        active[effect["effect_id"]] = effect
+    if active:
+        discharged_by_cert = {
+            cid: row
+            for cid, row in discharged_by_cert.items()
+            if row["effect"]["effect_id"] not in active
+        }
+    return {
+        "schema": VALUE_SCHEMA,
+        "payload": deepcopy(payload),
+        "context_version": context,
+        "active_effects": [deepcopy(active[k]) for k in sorted(active)],
+        "discharged_effects": [
+            deepcopy(discharged_by_cert[k]) for k in sorted(discharged_by_cert)
+        ],
+        "semantic_truth_authority": False,
+        "terminal_authority": False,
+    }
+
+
+def verify_transport(
+    *,
+    inputs: Sequence[Mapping[str, Any]],
+    output: Mapping[str, Any],
+    authority_verifiers: Mapping[str, Callable[[Mapping[str, Any]], Mapping[str, Any] | None]] | None = None,
+) -> dict[str, Any]:
+    try:
+        in_rows = [
+            _validate_value(
+                x,
+                reverify_discharges=True,
+                authority_verifiers=authority_verifiers,
+            )
+            for x in _seq(inputs, "INPUTS")
+        ]
+        out = _validate_value(
+            output,
+            reverify_discharges=True,
+            authority_verifiers=authority_verifiers,
+        )
+    except SemanticEffectError as exc:
+        return {
+            "schema": TRANSPORT_SCHEMA,
+            "pass": False,
+            "status": "FAIL_CLOSED__INVALID_DISCHARGE_HISTORY",
+            "reason": str(exc),
+            "missing_effect_ids": [],
+            "missing_discharge_history_certificate_ids": [],
+            "semantic_truth_authority": False,
+            "terminal_authority": False,
+        }
+    if not in_rows:
+        raise SemanticEffectError("AT_LEAST_ONE_INPUT_REQUIRED")
+    contexts = {x["context_version"] for x in in_rows} | {out["context_version"]}
+    if len(contexts) != 1:
+        return {
+            "schema": TRANSPORT_SCHEMA,
+            "pass": False,
+            "status": "FAIL_CLOSED__CONTEXT_VERSION_MISMATCH",
+            "missing_effect_ids": [],
+            "missing_discharge_history_certificate_ids": [],
+            "terminal_authority": False,
+        }
+
+    required_active: dict[str, dict[str, Any]] = {}
+    required_history: dict[str, dict[str, Any]] = {}
+    for value in in_rows:
+        for effect in value["active_effects"]:
+            required_active[effect["effect_id"]] = effect
+        for row in value["discharged_effects"]:
+            required_history[row["certificate"]["certificate_id"]] = row
+
+    out_active = {e["effect_id"]: e for e in out["active_effects"]}
+    out_history_by_effect: dict[str, list[dict[str, Any]]] = {}
+    out_history_by_cert: dict[str, dict[str, Any]] = {}
+    for row in out["discharged_effects"]:
+        out_history_by_effect.setdefault(row["effect"]["effect_id"], []).append(row)
+        out_history_by_cert[row["certificate"]["certificate_id"]] = row
+
+    missing = []
+    for eid, effect in sorted(required_active.items()):
+        if out_active.get(eid) == effect:
+            continue
+        valid_discharge = False
+        for row in out_history_by_effect.get(eid, []):
+            try:
+                _verify_certificate(
+                    effect,
+                    row["certificate"],
+                    authority_verifiers=authority_verifiers,
+                )
+                valid_discharge = True
+                break
+            except SemanticEffectError:
+                continue
+        if not valid_discharge:
+            missing.append(eid)
+
+    missing_history = []
+    for cid, row in sorted(required_history.items()):
+        eid = row["effect"]["effect_id"]
+        if eid in out_active:
+            continue
+        if cid not in out_history_by_cert:
+            missing_history.append(cid)
+
+    passed = not missing and not missing_history
+    return {
+        "schema": TRANSPORT_SCHEMA,
+        "pass": passed,
+        "status": (
+            "PASS__NO_SILENT_SEMANTIC_EFFECT_LOSS"
+            if passed
+            else "FAIL_CLOSED__SEMANTIC_EFFECT_OR_HISTORY_LOSS"
+        ),
+        "missing_effect_ids": missing,
+        "missing_discharge_history_certificate_ids": missing_history,
+        "semantic_truth_authority": False,
+        "terminal_authority": False,
+    }
