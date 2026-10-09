@@ -111,6 +111,18 @@ class R2DirectRouteRegistryCurrentV2Tests(unittest.TestCase):
         self.assertEqual(out["route_id"], NATURAL)
         self.assertEqual(calls, [NATURAL])
 
+    def test_v17_verified_component_is_not_live_default_without_admission(self):
+        state = registry_router.effective_state()
+        self.assertNotIn(
+            "DIRECT_ADEQUACY::CROSS_DOCUMENT_SEMANTIC_EDGE_LATTICE_V4",
+            state["deployable_route_ids"],
+        )
+        registry = registry_router.load_registry()
+        self.assertNotIn(
+            "DIRECT_ADEQUACY::CROSS_DOCUMENT_SEMANTIC_EDGE_LATTICE_V4",
+            [row["route_id"] for row in registry["routes"]],
+        )
+
     def test_fixed_point_uses_stable_dispatcher_not_any_version_chain(self):
         source = FIXED_POINT.read_text(encoding="utf-8")
         self.assertIn(
