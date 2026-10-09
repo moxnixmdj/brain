@@ -2,7 +2,7 @@
   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
   "action_id": "R4_ROOT_CERTIFICATE_REGISTRY_20261009_V1",
   "date": "2026-10-09",
-  "status": "IN_PROGRESS__BRANCH_IMPLEMENTED__REMOTE_REPLAY_REQUIRED__ZERO_CREDIT",
+  "status": "COMPLETED_BRANCH_VERIFIED__REMOTE_EXACT_BYTE_REPLAY_PASS__ZERO_CREDIT",
   "canonical_base_commit": "199957e2f5b39ccbd3113bedcde53afb6190b597",
   "action_kind": "R4_ROOT_CERTIFICATE_REGISTRY_AND_ASSURANCE_PROJECTION_REFINEMENT",
   "causal_blocker": "R4_PROOF_CLOSURE_CANNOT_DISTINGUISH_MISSING_REGISTRY_FROM_MISSING_EXACT_ROOT_PROOFS",
@@ -17,5 +17,24 @@
     "incremental_spend_usd": 0,
     "fresh_reality_units_consumed": 0,
     "terminal_credit_delta": 0
+  },
+  "outputs": {
+    "root_registry": "canonical/governance/COVERAGE_ROOT_CERTIFICATE_REGISTRY_20261009_V1.json",
+    "registry_validator": "canonical/runtime/root_certificate_registry_v1.py",
+    "r4_projection_v2": "canonical/governance/COVERAGE_COMPLETENESS_R4_ASSURANCE_PROJECTION_V2.json",
+    "projection_runtime": "canonical/runtime/root_theorem_r4_assurance_projection_v2.py",
+    "verification": "canonical/verification/R4_ROOT_CERTIFICATE_REGISTRY_REMOTE_VERIFY_20261009_V1.json"
+  },
+  "result": {
+    "registry_bound": true,
+    "root_status_vector": [
+      "UNKNOWN",
+      "UNKNOWN",
+      "UNKNOWN"
+    ],
+    "prior_missing_registry_residual_deleted": true,
+    "proof_closure": false,
+    "r4_closed": false,
+    "next_required_edge": "PROVE_OR_FALSIFY_EXACT_R1_R2_R3_ROOT_SET_CLAIMS"
   }
 }
