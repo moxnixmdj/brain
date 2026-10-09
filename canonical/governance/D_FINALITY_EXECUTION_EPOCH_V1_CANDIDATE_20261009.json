@@ -91,5 +91,28 @@
     "incremental_spend_usd": 0,
     "ownership_credit_delta": 0,
     "terminal_credit_delta": 0
+  },
+  "bound_provider_executor_theorem": {
+    "status": "TWO_CARRIER_PASS",
+    "exact_blobs": {
+      "astra_runtime": "dc61f199c064980d475c7a086cd30a4bddef1f60",
+      "promoted_executor": "bf9d686521bdc3a2d18775d42b64adb287ed8e3a",
+      "d_epoch": "60cbc536215571fbd7e41b5ce28239ce370120c3",
+      "hostile_tests": "71c223770b2c70b4399e355c7cd9d26bbd73427f"
+    },
+    "proved": [
+      "REGISTRY_DRIFT_ABORTS_BEFORE_INVOCATION",
+      "PUBLIC_BOUND_WRAPPER_LOADS_REGISTRY_ONCE",
+      "FROZEN_ENTRY_PASSED_TO_EXECUTOR",
+      "ACTIVE_D_EPOCH_EXECUTES_HASH_CHECKED_ADAPTER_BYTES_WITHOUT_PATH_REREAD",
+      "ADAPTER_BLOB_MISMATCH_FAILS_BEFORE_EXECUTION"
+    ],
+    "independent_carriers": [
+      "brain-live-runtime-v1-verify-20261008",
+      "brain-r3-root1-gap-verify-20261008"
+    ],
+    "member_material_certificate_still_required": true,
+    "member_registry_entry_binding_still_required": true,
+    "ownership_credit_delta": 0
   }
 }
