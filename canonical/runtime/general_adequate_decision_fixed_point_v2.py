@@ -21,7 +21,7 @@ from typing import Any, Callable, Mapping
 from canonical.runtime.general_adequate_decision_controller_v1 import (
     run as run_controller,
 )
-from canonical.runtime import r2_direct_end_to_end_adequacy_v10 as direct_adequacy
+from canonical.runtime import r2_direct_end_to_end_adequacy_v11 as direct_adequacy
 from canonical.runtime.r2_existing_policy_adequacy_repair_v1 import (
     repair as repair_existing_adequacy,
 )
@@ -327,6 +327,12 @@ def run(
                 direct_preflight.get("possible_outcomes") or []
             ),
             "world_count": direct_preflight.get("world_count"),
+            "blocking_residual_document_ids": deepcopy(
+                direct_preflight.get("blocking_residual_document_ids") or []
+            ),
+            "next_proof_obligations": deepcopy(
+                direct_preflight.get("next_proof_obligations") or []
+            ),
             "semantic_truth_authority": False,
             "execution_authority": False,
             "acceptance_authority": False,
