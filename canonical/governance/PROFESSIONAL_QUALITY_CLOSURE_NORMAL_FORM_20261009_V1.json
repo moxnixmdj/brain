@@ -1,0 +1,130 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_CLOSURE_NORMAL_FORM_V1",
+  "date": "2026-10-09",
+  "status": "CANDIDATE_ZERO_REALITY_NORMAL_FORM__STRUCTURAL_VERIFICATION_ONLY__PROFESSIONAL_QUALITY_NOT_CLOSED__ZERO_CREDIT",
+  "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+  "objective": "Prevent false certification of professional excellence while minimizing evaluation cost and wall-clock through relevance-gated escalation.",
+  "source_bindings": {
+    "behavioral_contract": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    },
+    "p2_binding": {
+      "path": "canonical/governance/P2_PROFESSIONAL_QUALITY_T1_MULTIPLEX_TERMINAL_BINDING_V1.json",
+      "git_blob_sha": "8d5888a8299d1b8addd629be01fe9a6dc46b1a7d"
+    },
+    "professional_residual": {
+      "path": "canonical/governance/ARTIFACT_PROFESSIONAL_RESIDUAL_REDUCTION_20261007_V1.json",
+      "git_blob_sha": "afaf6e9c4dfe13873b732d49a468329fc9510ffe"
+    },
+    "information_firewall": {
+      "path": "canonical/governance/EVALUATION_INFORMATION_FIREWALL_V1.json",
+      "git_blob_sha": "902c19851629bfb2342eea29e73f4a7ab5d212c5"
+    }
+  },
+  "false_certification_event": "BRAIN_ISSUES_A_PROFESSIONAL_EXCELLENCE_OR_DOMINANCE_CLAIM_OUTSIDE_THE_SCOPE_JUSTIFIED_BY_THE_EXACT_EVIDENCE_AND_DECISION_POLICY",
+  "roots": [
+    {
+      "id": "R1_TARGET_SPECIFICATION",
+      "contract": "Freeze objective, audience, hard constraints, plausible interpretations, target construct and claim scope; block goal substitution and decision-relevant ambiguity."
+    },
+    {
+      "id": "R2_CANDIDATE_SEARCH",
+      "contract": "Ensure the candidate/search space is sufficiently diverse and search closure is separated from artifact acceptance; block best-of-mediocre and local-fixation failures."
+    },
+    {
+      "id": "R3_REALIZATION_OBSERVATION",
+      "contract": "Bind claims to exact artifact bytes, delivery environment, experienced artifact and sufficient observation channels; block render, capture, hidden-surface and multiscale loss."
+    },
+    {
+      "id": "R4_MEASUREMENT_CONSTRUCT",
+      "contract": "Establish construct validity, absolute quality floors, criterion ontology, scale/resolution and outcome-task transfer; block proxy, rubric and measurement gaming."
+    },
+    {
+      "id": "R5_EVALUATOR_REFERENCE",
+      "contract": "Qualify judges and reference standards locally by criterion, population, difficulty and state; preserve disagreement, ambiguity and reference fallibility."
+    },
+    {
+      "id": "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+      "contract": "Admit typed evidence with provenance, independence/common-cause accounting, grounding reachability and correct uncertainty semantics."
+    },
+    {
+      "id": "R7_CAUSAL_PRESCRIPTIVE",
+      "contract": "Separate ranking from causal explanation and edit prescription; require intervention fidelity, effect scope and post-edit verification before generalized design rules."
+    },
+    {
+      "id": "R8_POPULATION_CONTEXT_OPERATOR",
+      "contract": "Bind claims to target constituency, operator/presenter, context and deployment envelope; account for representation, measurement invariance, interaction and reactivity."
+    },
+    {
+      "id": "R9_TEMPORAL_DEPLOYMENT",
+      "contract": "Bind claims to target time horizons, temporal drift, delayed outcomes, carryover, censoring, rare events and performative/equilibrium effects where material."
+    },
+    {
+      "id": "R10_ANALYSIS_DECISION",
+      "contract": "Freeze or robustify defensible analysis, aggregation, compensation, threshold and risk policy; block cherry-picking, ontology/scale reversal and unjustified scalarization."
+    },
+    {
+      "id": "R11_ADAPTIVE_INTEGRITY_SECURITY",
+      "contract": "Protect dev/selection/cert separation, hidden holdouts, evaluator control plane, selection pressure and Goodhart attack surfaces; consume exposed evidence."
+    },
+    {
+      "id": "R12_META_COMPOSITION_CLOSURE",
+      "contract": "Require assumption-guarantee composition, joint root satisfaction on the same artifact, defeater search, challenge coverage, nonvacuity and explicit residual unknowns."
+    }
+  ],
+  "p1_default_profile": {
+    "level": "P1_ORDINARY_PROFESSIONAL_QUALITY",
+    "principle": "USE_CHEAP_SOUND_CHECKS_FIRST__ESCALATE_ONLY_ON_DECISION_RELEVANT_TRIGGER",
+    "steps": [
+      "COMPILE_TARGET_SPEC_AND_HARD_CONSTRAINTS",
+      "GENERATE_DIVERSE_CANDIDATE_BRANCHES_WITH_INCUMBENT_PRESERVATION",
+      "RUN_DETERMINISTIC_FACT_STRUCTURE_FORMAT_AND_GROUNDING_CHECKS",
+      "RENDER_EXACT_AUDIENCE_VIEW_AND_BIND_OBSERVATION_CHANNELS",
+      "RUN_CRITERION_SPECIFIC_PLUS_HOLISTIC_COMPARATIVE_EVALUATION",
+      "ATTACK_FINALISTS_WITH_RELEVANT_INVARIANCE_DEFEATER_AND_HIDDEN_CHANNEL_PROBES",
+      "FREEZE_WINNER_AND_USE_FRESH_OR_SELECTION_AWARE_TERMINAL_EVIDENCE",
+      "ISSUE_SCOPED_CERTIFICATE_OR_ABSTAIN_WITH_MINIMUM_BLOCKING_CUT"
+    ],
+    "escalation_triggers": [
+      "NEAR_DECISION_BOUNDARY",
+      "QUALIFIED_JUDGE_DISAGREEMENT",
+      "NOVEL_OR_OOD_ARTIFACT",
+      "HEAVY_OPTIMIZATION_AGAINST_DEVELOPMENT_JUDGE",
+      "MATERIAL_INVARIANCE_FAILURE",
+      "REFERENCE_AMBIGUITY",
+      "MODEL_OR_ANALYSIS_MULTIPLICITY_DECISION_SENSITIVE",
+      "HIGH_CONSEQUENCE_OR_VETO_DIMENSION",
+      "UNOBSERVED_OR_HIDDEN_CHANNEL",
+      "POPULATION_CONTEXT_OR_TIME_TRANSPORT_GAP"
+    ],
+    "forbidden_default": "RUN_ALL_DEEP_ASSURANCE_MACHINERY_ON_EVERY_ARTIFACT"
+  },
+  "closure_rule": {
+    "necessary": [
+      "ALL_LOAD_BEARING_ROOT_CONTRACTS_CLOSED_OR_EXPLICITLY_DECISION_NULL",
+      "SAME_EXACT_ARTIFACT_OR_DECLARED_SYSTEM_SATISFIES_ALL_ROOT_CLAIMS",
+      "NO_UNRESOLVED_FATAL_DEFEATER",
+      "ADVERSARIAL_CHALLENGE_COVERAGE_HAS_NO_UNMAPPED_MATERIAL_FALSE_CERTIFICATION_CLASS",
+      "TERMINAL_EVIDENCE_CONTAMINATION_AND_SELECTION_ACCOUNTED_FOR",
+      "RESIDUAL_UNKNOWN_DOES_NOT_CHANGE_THE_AUTHORIZED_DECISION"
+    ],
+    "current_result": "NOT_PROVED",
+    "uncovered_set_status": "OPEN_UNTIL_END_TO_END_CHALLENGE_AND_COVERAGE_FALSIFICATION"
+  },
+  "runtime_binding": "canonical/runtime/professional_quality_closure_normal_form_v1.py",
+  "challenge_matrix": "canonical/governance/PROFESSIONAL_QUALITY_ADVERSARIAL_CHALLENGE_MATRIX_20261009_V1.json",
+  "hard_nonclaims": [
+    "NO_COMPLETENESS_PROOF",
+    "NO_TERMINAL_PASS",
+    "NO_OPUS55_NONINFERIORITY",
+    "NO_FRESH_EVIDENCE",
+    "NO_CAPABILITY_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0,
+    "capability_credit_delta": 0
+  }
+}
