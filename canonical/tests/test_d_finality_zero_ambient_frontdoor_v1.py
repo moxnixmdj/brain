@@ -53,6 +53,21 @@ def stage(root: Path, *, physical_profile=frontdoor.PROFILE, effect_channels=())
         materials.append({"path":rel,"git_blob_sha":d.git_blob_sha_file(p)})
 
     cid="engine:TEST"
+    row_contract={
+      "capability_id":cid,
+      "physical_profile":physical_profile,
+      "physical_dispatch_kind":"UNIFIED_FABRIC_V1",
+      "dynamic_input_policy":{
+        "schema":frontdoor.DYNAMIC_INPUT_SCHEMA,
+        "allowed_prefixes":[],
+        "allowed_extensions":[],
+        "max_files":0,
+        "max_total_bytes":0,
+        "max_file_bytes":0,
+      },
+      "allowed_request_keys":["mode","payload"],
+      "request_path_fields":[],
+    }
     policy={
       "schema":d.POLICY_SCHEMA,"status":"ACTIVE_FAIL_CLOSED",
       "semantic_version":"physical-frontdoor-test-v1",
@@ -63,7 +78,9 @@ def stage(root: Path, *, physical_profile=frontdoor.PROFILE, effect_channels=())
     cert={
       "schema":d.CERT_SCHEMA,"status":"VERIFIED_D_FINAL",
       "capability_id":cid,
-      "capability_contract_sha256":d.sha256_json({"capability_id":cid}),
+      "capability_contract_sha256":d.sha256_json(
+          frontdoor.capability_contract(cid,row_contract)
+      ),
       "policy_sha256":policy["policy_sha256"],
       "registry_snapshot_root":d.sha256_json({"registry":"sealed"}),
       "state_snapshot_root":d.sha256_json({"state":"sealed"}),
@@ -86,7 +103,7 @@ def stage(root: Path, *, physical_profile=frontdoor.PROFILE, effect_channels=())
 
     child=root/frontdoor.CHILD_PATH
     row={
-      "capability_id":cid,
+      **row_contract,
       "status":"VERIFIED_D_FINAL_CURRENT",
       "d_certificate_sha256":cert["certificate_sha256"],
       "material_certificate_sha256":"a"*64,
@@ -102,7 +119,6 @@ def stage(root: Path, *, physical_profile=frontdoor.PROFILE, effect_channels=())
       "policy_path":"canonical/governance/d_policy.json",
       "certificate_git_blob_sha":d.git_blob_sha_file(cp),
       "policy_git_blob_sha":d.git_blob_sha_file(pp),
-      "physical_profile":physical_profile,
       "zero_ambient_launcher_git_blob_sha":d.git_blob_sha_file(Path(zero_ambient.__file__)),
       "zero_ambient_child_git_blob_sha":d.git_blob_sha_file(child),
     }
@@ -168,6 +184,39 @@ class PhysicalFrontdoorTests(unittest.TestCase):
             write_json(reg_path,reg)
             with self.assertRaisesRegex(frontdoor.ZeroAmbientDFinalError,"ZERO_AMBIENT_CHILD_BLOB_MISMATCH"):
                 frontdoor.run({"mode":"TEST","payload":{}},capability_id=cid,repo_root=root)
+
+
+    def test_request_shape_widening_is_rejected(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td)
+            cid,row,cert=stage(root)
+            with self.assertRaisesRegex(
+                frontdoor.ZeroAmbientDFinalError,
+                "REQUEST_KEYS_OUTSIDE_CERTIFIED_CONTRACT",
+            ):
+                frontdoor.run(
+                    {"mode":"TEST","payload":{},"extra":"not-certified"},
+                    capability_id=cid,
+                    repo_root=root,
+                )
+
+    def test_registry_request_contract_mutation_invalidates_certificate(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td)
+            cid,row,cert=stage(root)
+            reg_path=root/resolver.DEFAULT_REGISTRY
+            reg=json.loads(reg_path.read_text())
+            reg["rows"][0]["allowed_request_keys"]=["mode","payload","extra"]
+            write_json(reg_path,reg)
+            with self.assertRaisesRegex(
+                frontdoor.ZeroAmbientDFinalError,
+                "CAPABILITY_CONTRACT_HASH_MISMATCH",
+            ):
+                frontdoor.run(
+                    {"mode":"TEST","payload":{},"extra":"x"},
+                    capability_id=cid,
+                    repo_root=root,
+                )
 
 
 if __name__=="__main__":
