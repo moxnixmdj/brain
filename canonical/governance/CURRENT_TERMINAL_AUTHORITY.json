@@ -1232,6 +1232,11 @@
         "git_blob_sha": "8c492e919163eab748f884b37d0ea84b3b22edac"
       },
       "note": "FIRST_REAL_THREE_BUNDLE_SAME_MODEL_EVIDENCE_STACK_EXISTS_ON_ONE_FROZEN_SPENT_TERMINAL_BENCH_CODING_CONTEXT__HISTORICAL_CANDIDATE_REWARD_0__NO_CURSORBENCH_MEMBERSHIP_OR_SCORE_CREDIT"
+    },
+    "cursorbench_4_0_information_boundary_public_search_saturation_20261009_v1": {
+      "path": "canonical/governance/CURSORBENCH_4_0_INFORMATION_BOUNDARY_PUBLIC_SEARCH_SATURATION_20261009_V1.json",
+      "git_blob_sha": "953b68f5bdc09f9a4c7c7e47b09864628e172d3f",
+      "note": "CURRENT_PUBLIC_OWNER_SEARCH_BOUNDEDLY_SATURATED__ONE_4_0_PROTOCOL_CONTINUITY_FACT_REMAINS_UNBOUND__ZERO_CREDIT"
     }
   },
   "live_truth": {
@@ -1794,7 +1799,7 @@
     "cursorbench_absence_of_bound_v5_failure_is_adequacy_proof": false,
     "cursorbench_one_v5_pass_is_scope_complete_adequacy_proof": false,
     "cursorbench_selector_work_authorized_now": false,
-    "cursorbench_next_proof_object": "BIND_AN_ACTUAL_CURSORBENCH_V5_TARGET_CONTEXT_TO_THE_ALREADY_REALIZED_FIVE_ATOM_TYPED_ACCEPTANCE_REGION_OR_PROVE_A_SOUND_SCOPE_COMPLETE_TRANSFER__DO_NOT_REBUILD_THE_THREE_EVIDENCE_MECHANISMS__DO_NOT_TREAT_SPENT_TERMINAL_BENCH_MEMBERSHIP_AS_CURSORBENCH_MEMBERSHIP",
+    "cursorbench_next_proof_object": "FORMALIZE_AND_VERIFY_SOUND_NONVACUOUS_CURSORBENCH_TARGET_RELEVANCE_OR_SCOPE_COMPLETE_TRANSFER__WAL_AND_TERMINAL_BENCH_CONTEXTS_MUST_NOT_TRANSFER_BY_ANALOGY__REACTIVATE_OWNER_PROTOCOL_SEARCH_ONLY_ON_SOURCE_DELTA",
     "r2_sec_standard_xbrl_companyconcept_source_native_semantics_bound": true,
     "r2_sec_standard_xbrl_source_native_policy_adequacy_claimed": false,
     "cursorbench_advanced_coding_canonical_residual_count": 4,
@@ -2014,7 +2019,12 @@
       "SOURCE_COVERAGE_BINDING_FOR_TYPED_SEMANTICS_PLUS_FAILURE_MODE_COMPLETENESS",
       "DEPENDENCY_PROVENANCE_BINDING_FOR_EXACT_MODEL",
       "PREVERIFIER_INFORMATION_BOUNDARY_BINDING_FOR_EXACT_MODEL"
-    ]
+    ],
+    "cursorbench_preverifier_information_boundary_public_search_saturated": true,
+    "cursorbench_preverifier_information_boundary_public_search_scope": "LISTED_CURRENT_PUBLIC_FIRST_PARTY_SURFACES_ONLY__NOT_GLOBAL_NONEXISTENCE",
+    "cursorbench_preverifier_information_boundary_owner_fact_state": "OPEN_DORMANT_UNTIL_OWNER_SOURCE_DELTA",
+    "cursorbench_public_exact_4_0_task_member_found": false,
+    "cursorbench_public_exact_4_0_task_member_search_state": "BOUNDEDLY_SATURATED_ON_CURRENT_PUBLIC_SOURCES"
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -3795,6 +3805,17 @@
     "task_started": false,
     "benchmark_trials_consumed": 0,
     "public_final_reseal_pending": true,
+    "terminal_credit_delta": 0
+  },
+  "cursorbench_information_boundary_public_search_saturation_reconciliation_20261009_v1": {
+    "source": {
+      "path": "canonical/governance/CURSORBENCH_4_0_INFORMATION_BOUNDARY_PUBLIC_SEARCH_SATURATION_20261009_V1.json",
+      "git_blob_sha": "953b68f5bdc09f9a4c7c7e47b09864628e172d3f"
+    },
+    "result": "ONE_OWNER_PROTOCOL_CONTINUITY_FACT_REMAINS__STATIC_PUBLIC_SEARCH_DORMANT__INTERNAL_TARGET_RELEVANCE_ROUTE_ACTIVE",
+    "atom_truth_delta": 0,
+    "cursorbench_membership_delta": 0,
+    "acceptance_credit_delta": 0,
     "terminal_credit_delta": 0
   }
 }
