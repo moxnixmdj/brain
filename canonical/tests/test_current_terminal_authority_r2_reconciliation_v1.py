@@ -229,6 +229,15 @@ class CurrentTerminalAuthorityR2ReconciliationV1Tests(unittest.TestCase):
             ROOT
             / "canonical/runtime/certificate_gated_selected_route_runtime_entrypoint_v2.py"
         )
+        receipt_guard_path = (
+            ROOT / "canonical/runtime/executable_refinement_receipt_guard_v1.py"
+        )
+        graph_guard_path = (
+            ROOT / "canonical/runtime/terminal_dependency_graph_guard_v1.py"
+        )
+        falsifier_path = (
+            ROOT / "canonical/runtime/terminal_dependency_falsifier_v1.py"
+        )
 
         graph_binding = terminal["authoritative_sources"][
             "executable_refinement_terminal_dependency_graph"
@@ -239,10 +248,28 @@ class CurrentTerminalAuthorityR2ReconciliationV1Tests(unittest.TestCase):
         runtime_binding = terminal["authoritative_sources"][
             "creditable_route_refinement_admission_guard"
         ]
+        receipt_guard_binding = terminal["authoritative_sources"][
+            "executable_refinement_receipt_guard"
+        ]
+        graph_guard_binding = terminal["authoritative_sources"][
+            "terminal_dependency_graph_guard"
+        ]
+        falsifier_binding = terminal["authoritative_sources"][
+            "terminal_dependency_falsifier"
+        ]
 
         self.assertEqual(graph_binding["git_blob_sha"], blob_sha(graph_path))
         self.assertEqual(verifier_binding["git_blob_sha"], blob_sha(verifier_path))
         self.assertEqual(runtime_binding["git_blob_sha"], blob_sha(runtime_path))
+        self.assertEqual(
+            receipt_guard_binding["git_blob_sha"], blob_sha(receipt_guard_path)
+        )
+        self.assertEqual(
+            graph_guard_binding["git_blob_sha"], blob_sha(graph_guard_path)
+        )
+        self.assertEqual(
+            falsifier_binding["git_blob_sha"], blob_sha(falsifier_path)
+        )
 
         self.assertTrue(
             truth["executable_refinement_structural_binding_framework_present"]
@@ -271,6 +298,20 @@ class CurrentTerminalAuthorityR2ReconciliationV1Tests(unittest.TestCase):
         self.assertFalse(
             truth["executable_refinement_missing_is_external_impossibility"]
         )
+        self.assertTrue(truth["executable_refinement_receipt_guard_bound"])
+        self.assertTrue(
+            truth["executable_refinement_receipt_requires_exact_proof_artifact"]
+        )
+        self.assertTrue(
+            truth[
+                "executable_refinement_receipt_requires_complete_declared_transition_coverage"
+            ]
+        )
+        self.assertTrue(truth["terminal_dependency_graph_guard_bound"])
+        self.assertTrue(truth["terminal_dependency_falsifier_bound"])
+        self.assertFalse(
+            truth["terminal_dependency_falsifier_generator_coverage_proved"]
+        )
         self.assertTrue(
             truth["executable_refinement_current_classification"].startswith(
                 "INTERNAL_UNRESOLVED"
@@ -283,6 +324,16 @@ class CurrentTerminalAuthorityR2ReconciliationV1Tests(unittest.TestCase):
         )
         self.assertFalse(reconciliation["execution_tests_run"])
         self.assertFalse(reconciliation["independent_replay_run"])
+        self.assertTrue(
+            reconciliation["strict_refinement_receipt_guard_implemented"]
+        )
+        self.assertFalse(
+            reconciliation["receipt_boolean_self_assertion_sufficient"]
+        )
+        self.assertTrue(reconciliation["systematic_falsifier_bound"])
+        self.assertFalse(
+            reconciliation["systematic_falsifier_generator_coverage_proved"]
+        )
         self.assertFalse(reconciliation["repository_wide_refinement_closed"])
         self.assertFalse(reconciliation["external_impossibility_claimed"])
         self.assertEqual(reconciliation["terminal_credit_delta"], 0)
@@ -293,6 +344,8 @@ class CurrentTerminalAuthorityR2ReconciliationV1Tests(unittest.TestCase):
             "NO_CLAIM_ROUTER_CANARY_EXECUTABLE_REFINEMENT_IS_VERIFIED.",
             "NO_CLAIM_BRAIN_OWNED_SEMANTIC_EDGE_EXECUTABLE_REFINEMENT_IS_VERIFIED.",
             "NO_CLAIM_REPOSITORY_WIDE_OR_ALL_CREDITABLE_LIVE_ROUTE_EXECUTABLE_REFINEMENT_IS_CLOSED.",
+            "NO_CLAIM_REFINEMENT_VERIFIED_BOOLEAN_ALONE_IS_A_VALID_REFINEMENT_PROOF.",
+            "NO_CLAIM_TERMINAL_DEPENDENCY_FALSIFIER_ENUMERATION_PROVES_GENERATOR_OR_OPEN_WORLD_COVERAGE.",
         }
         self.assertTrue(required_nonclaims.issubset(set(terminal["hard_nonclaims"])))
 
