@@ -1,0 +1,15 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_CERTIFICATE_GATED_SELECTED_ROUTE_REGISTRY_POINTER_V1",
+  "date": "2026-10-09",
+  "status": "ACTIVE_CURRENT_CERTIFICATE_GATED_SELECTED_ROUTE_REGISTRY",
+  "binding_semantics": "MUTABLE_CURRENT_POINTER_PATH_IDENTITY__IMMUTABLE_TARGET_GIT_BLOB_BOUND",
+  "target": {
+    "path": "canonical/governance/CERTIFICATE_GATED_SELECTED_ROUTE_RUNTIME_REGISTRY_V3.json",
+    "git_blob_sha": "469c55594a4acf40d7261966580b75ece467a863",
+    "schema": "PROJECT_BRAIN_CERTIFICATE_GATED_SELECTED_ROUTE_RUNTIME_REGISTRY_V3"
+  },
+  "selection_rule": "UNIQUE_MATCH_REQUIRED__ANY_OVERLAP_FAILS_CLOSED",
+  "incremental_spend_usd": 0,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0
+}
