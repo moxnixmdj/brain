@@ -6,7 +6,29 @@ from canonical.runtime.root_theorem_falsifier_v1 import (
 )
 
 
+def exact_binding(**overrides):
+    value = {
+        "claim_id": "a" * 64,
+        "scope_sha256": "b" * 64,
+        "semantics_sha256": "c" * 64,
+        "carrier_schema_id": "CARRIER_V1",
+        "mission_id": "MISSION_V1",
+        "epoch_id": "E1",
+        "canonical_generation": "GEN1",
+    }
+    value.update(overrides)
+    return value
+
+
+def exact_root_proofs(binding):
+    return {
+        root: {"status": "PROVED", "binding": dict(binding)}
+        for root in ("R1", "R2", "R3")
+    }
+
+
 def false_success_base():
+    binding = exact_binding()
     return {
         "terminal_success_claimed": True,
         "real_behavior": True,
@@ -14,6 +36,8 @@ def false_success_base():
         "in_good_lower": True,
         "real_good": False,
         "proof_chain_trustworthy": True,
+        "root_proofs": exact_root_proofs(binding),
+        "expected_binding": binding,
     }
 
 
@@ -66,9 +90,23 @@ def test_unknown_fails_closed():
 
 
 def test_four_roots_closed_still_grants_zero_credit():
-    out = evaluate_root_closure({"R1": True, "R2": True, "R3": True, "R4": True})
+    binding = exact_binding()
+    out = evaluate_root_closure({
+        "R1": True,
+        "R2": True,
+        "R3": True,
+        "R4": True,
+        "root_proofs": exact_root_proofs(binding),
+        "expected_binding": binding,
+    })
     assert out["status"] == "FOUR_ROOT_PRECONDITIONS_CLOSED"
     assert out["terminal_credit"] == 0
+
+
+def test_four_roots_without_exact_binding_refine():
+    out = evaluate_root_closure({"R1": True, "R2": True, "R3": True, "R4": True})
+    assert out["status"] == "REFINE"
+    assert out["roots"]["R4"] is None
 
 
 def test_root_unknown_returns_refine():

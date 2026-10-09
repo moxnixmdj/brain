@@ -17,6 +17,62 @@ from typing import Any, Dict, Iterable, Mapping, Optional
 
 ROOTS = ("R1", "R2", "R3", "R4")
 
+BINDING_FIELDS = (
+    "claim_id", "scope_sha256", "semantics_sha256", "carrier_schema_id",
+    "mission_id", "epoch_id", "canonical_generation",
+)
+HASH_FIELDS = ("claim_id", "scope_sha256", "semantics_sha256")
+
+
+def _binding_key(value: Any) -> Optional[tuple[str, ...]]:
+    if not isinstance(value, Mapping):
+        return None
+    if any(not isinstance(value.get(k), str) or not value.get(k) for k in BINDING_FIELDS):
+        return None
+    if any(
+        len(value[k]) != 64 or any(c not in "0123456789abcdef" for c in value[k])
+        for k in HASH_FIELDS
+    ):
+        return None
+    return tuple(value[k] for k in BINDING_FIELDS)
+
+
+def evaluate_binding_coherence(data: Mapping[str, Any]) -> Dict[str, Any]:
+    expected = _binding_key(data.get("expected_binding"))
+    proofs = data.get("root_proofs")
+    if expected is None or not isinstance(proofs, Mapping):
+        return {"status": "UNKNOWN_FAIL_CLOSED", "coherent": None, "terminal_credit": 0}
+    keys = []
+    for root in ("R1", "R2", "R3"):
+        proof = proofs.get(root)
+        if not isinstance(proof, Mapping):
+            return {"status": "UNKNOWN_FAIL_CLOSED", "coherent": None, "terminal_credit": 0}
+        status = proof.get("status", "UNKNOWN")
+        if status == "FALSIFIED":
+            return {"status": "R4_ROOT_PROOF_NOT_PROVED", "coherent": False, "terminal_credit": 0}
+        if status != "PROVED":
+            return {"status": "UNKNOWN_FAIL_CLOSED", "coherent": None, "terminal_credit": 0}
+        key = _binding_key(proof.get("binding"))
+        if key is None:
+            return {"status": "R4_BINDING_INVALID", "coherent": False, "terminal_credit": 0}
+        keys.append(key)
+    if len(set(keys)) != 1:
+        return {"status": "R4_BINDING_MISMATCH", "coherent": False, "terminal_credit": 0}
+    if keys[0] != expected:
+        return {"status": "R4_STALE_OR_FOREIGN_BINDING", "coherent": False, "terminal_credit": 0}
+    return {"status": "PASS_EXACT_BINDING_COHERENCE", "coherent": True, "terminal_credit": 0}
+
+
+def _effective_r4(value: Any, data: Mapping[str, Any]) -> Optional[bool]:
+    trust = _tri(value)
+    coherent = evaluate_binding_coherence(data)["coherent"]
+    if trust is False or coherent is False:
+        return False
+    if trust is None or coherent is None:
+        return None
+    return True
+
+
 
 def _tri(value: Any) -> Optional[bool]:
     if value is True or value is False:
@@ -42,7 +98,7 @@ def _root_statuses(data: Mapping[str, Any]) -> Dict[str, Optional[bool]]:
             return True
         return None
 
-    return {"R1": impl(r, p), "R2": impl(g, a), "R3": impl(p, g), "R4": t}
+    return {"R1": impl(r, p), "R2": impl(g, a), "R3": impl(p, g), "R4": _effective_r4(t, data)}
 
 
 def classify_false_success(data: Mapping[str, Any]) -> Dict[str, Any]:
@@ -97,7 +153,8 @@ def classify_false_success(data: Mapping[str, Any]) -> Dict[str, Any]:
 
 
 def evaluate_root_closure(data: Mapping[str, Any]) -> Dict[str, Any]:
-    statuses = {root: _tri(data.get(root, "UNKNOWN")) for root in ROOTS}
+    statuses = {root: _tri(data.get(root, "UNKNOWN")) for root in ("R1", "R2", "R3")}
+    statuses["R4"] = _effective_r4(data.get("R4", "UNKNOWN"), data)
     failed = [r for r, v in statuses.items() if v is False]
     unknown = [r for r, v in statuses.items() if v is None]
     if failed:

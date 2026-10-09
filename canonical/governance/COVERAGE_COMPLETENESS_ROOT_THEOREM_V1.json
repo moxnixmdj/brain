@@ -161,6 +161,18 @@
       {
         "id": "M_META_CATEGORY_WITH_ZERO_ROOT_DELTA",
         "expected": "REJECT_REDUNDANT_META_MECHANISM"
+      },
+      {
+        "id": "M_R4_CROSS_BINDING_COMPOSITION",
+        "expected": "R4_BINDING_MISMATCH"
+      },
+      {
+        "id": "M_R4_STALE_EXPECTED_GENERATION",
+        "expected": "R4_STALE_OR_FOREIGN_BINDING"
+      },
+      {
+        "id": "M_R4_MISSING_BINDING",
+        "expected": "UNKNOWN_FAIL_CLOSED"
       }
     ],
     "mutation_score_semantics": "DIAGNOSTIC_ONLY__NEVER_UNIVERSAL_COMPLETENESS_PROOF"
@@ -170,9 +182,11 @@
     "pure_boolean_valuations_checked": 16,
     "counterexamples_with_R1_R2_R3": 0,
     "each_of_R1_R2_R3_individually_load_bearing": true,
-    "local_test_count": 11,
+    "local_test_count": 20,
     "local_test_failures": 0,
-    "scope": "ARCHITECTURE_LOGIC_ONLY__NOT_CURRENT_MISSION_CLOSURE"
+    "scope": "ARCHITECTURE_LOGIC_ONLY__NOT_CURRENT_MISSION_CLOSURE",
+    "r4_cross_binding_counterexample_count": 3,
+    "r4_cross_binding_symbolic_engine": "WOLFRAM_LANGUAGE"
   },
   "reconciliation": {
     "current_base_commit": "0dac48cab2ae3334e6d00bf35d0c2a988b29aa42",
@@ -183,7 +197,7 @@
       "status": "CLOSED_AS_SUPERSEDED_LIVE_INTEGRATION_VEHICLE",
       "preserve_evidence": true
     },
-    "active_pr": 3693
+    "active_pr": 3768
   },
   "accounting": {
     "incremental_spend_usd": 0,
@@ -233,5 +247,34 @@
       "semantics_sha256"
     ],
     "global_open_ended_mission_completion_derivable": false
+  },
+  "r4_binding_coherence": {
+    "status": "REQUIRED_FOR_FOUR_ROOT_CLOSURE",
+    "validator": "canonical/runtime/root_theorem_falsifier_v1.py#evaluate_binding_coherence",
+    "required_root_proofs": [
+      "R1",
+      "R2",
+      "R3"
+    ],
+    "exact_binding_fields": [
+      "claim_id",
+      "scope_sha256",
+      "semantics_sha256",
+      "carrier_schema_id",
+      "mission_id",
+      "epoch_id",
+      "canonical_generation"
+    ],
+    "content_addressed_fields": [
+      "claim_id",
+      "scope_sha256",
+      "semantics_sha256"
+    ],
+    "rule": "ALL_THREE_ROOT_PROOFS_MUST_BE_PROVED_AND_SHARE_ONE_EXACT_BINDING_EQUAL_TO_EXPECTED_CURRENT_BINDING",
+    "missing_binding": "UNKNOWN_FAIL_CLOSED",
+    "mismatched_binding": "R4_BINDING_MISMATCH",
+    "stale_or_foreign_binding": "R4_STALE_OR_FOREIGN_BINDING",
+    "naked_boolean_trust_sufficient": false,
+    "cross_binding_composition_forbidden": true
   }
 }
