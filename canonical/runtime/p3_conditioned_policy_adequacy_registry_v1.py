@@ -7,11 +7,11 @@ current decision basis.
 
 Presence in this registry never proves a condition true. P3 still evaluates
 all surviving models, so false-condition worlds remain uncovered unless an
-accepted source-backed refinement proves the membership condition. One narrow
-exception is structural rather than semantic: when the caller supplies the exact
-current typed acceptance model, this registry may recompute the independently
-verified supported-transform proof and introduce only that one proved atom as a
-formal source constraint plus matching refinement.
+accepted source-backed refinement proves the membership condition. Two narrow
+proof-carrying refinements are allowed without caller semantic authority:
+(1) the supported-transform atom may be recomputed from the exact typed model;
+(2) the no-hidden-verifier atom may be recomputed only from the exact frozen
+specification-acceptance prewave binding and its existing verifier.
 """
 from __future__ import annotations
 
@@ -24,6 +24,10 @@ from typing import Any, Mapping
 from canonical.runtime.cursorbench_typed_acceptance_supported_transform_atom_v1 import (
     ATOM_ID as SUPPORTED_TRANSFORM_ATOM_ID,
     verify as verify_supported_transform_atom,
+)
+from canonical.runtime.cursorbench_typed_acceptance_no_hidden_verifier_atom_v1 import (
+    ATOM_ID as NO_HIDDEN_VERIFIER_ATOM_ID,
+    verify as verify_no_hidden_verifier_atom,
 )
 
 SCHEMA = "PROJECT_BRAIN_P3_CONDITIONED_POLICY_ADEQUACY_REGISTRY_V1"
@@ -192,7 +196,9 @@ def augment_problem(
     ):
         return _fail("DECISION_BASIS_INVALID")
 
+    root = Path(repo_root) if repo_root is not None else ROOT
     structural_atom_proofs: list[dict[str, Any]] = []
+    source_bound_atom_proofs: list[dict[str, Any]] = []
     typed_model = working.get("typed_acceptance_model")
     if typed_model is not None:
         proof = verify_supported_transform_atom(typed_model)
@@ -215,7 +221,34 @@ def augment_problem(
                     rows.append(deepcopy(atom))
                 working[key] = rows
 
-    root = Path(repo_root) if repo_root is not None else ROOT
+    boundary_ref = working.get("typed_acceptance_information_boundary_binding")
+    if boundary_ref is not None:
+        proof = verify_no_hidden_verifier_atom(boundary_ref, repo_root=root)
+        source_bound_atom_proofs.append(deepcopy(proof))
+        if proof.get("pass") is not True or proof.get("atom_truth_authorized") is not True:
+            return _fail(
+                "SOURCE_BOUND_ATOM_PROOF_FAILED",
+                atom_id=NO_HIDDEN_VERIFIER_ATOM_ID,
+                proof=proof,
+            )
+        atom = {"op": "ATOM", "id": NO_HIDDEN_VERIFIER_ATOM_ID}
+        basis = list(basis)
+        if NO_HIDDEN_VERIFIER_ATOM_ID not in basis:
+            basis.append(NO_HIDDEN_VERIFIER_ATOM_ID)
+        working["decision_basis"] = basis
+        for key in ("formal_source_constraints", "proposed_refinements"):
+            rows = working.get(key, [])
+            if not isinstance(rows, list):
+                return _fail(
+                    "SOURCE_BOUND_ATOM_REFINEMENT_TARGET_NOT_LIST",
+                    atom_id=NO_HIDDEN_VERIFIER_ATOM_ID,
+                    field=key,
+                )
+            rows = deepcopy(rows)
+            if atom not in rows:
+                rows.append(deepcopy(atom))
+            working[key] = rows
+
     policies = working.get("policy_conditions", {})
     bindings = working.get("policy_adequacy_bindings", {})
     if not isinstance(policies, Mapping):
@@ -297,6 +330,12 @@ def augment_problem(
             for row in structural_atom_proofs
             if row.get("pass") is True and row.get("atom_truth_authorized") is True
         }),
+        "source_bound_atom_proofs": source_bound_atom_proofs,
+        "source_bound_proved_atom_ids": sorted({
+            str(row.get("atom_id"))
+            for row in source_bound_atom_proofs
+            if row.get("pass") is True and row.get("atom_truth_authorized") is True
+        }),
         "basis_eligible_policy_count": len(injected) + len(reused),
         "injected_policy_ids": injected,
         "reused_policy_ids": reused,
@@ -308,8 +347,10 @@ def augment_problem(
         "boundary": (
             "COMPLEMENTS_R2_SELF_AUTHENTICATING_RAW_SOURCE_REGISTRY;"
             "SEMANTIC_CONDITION_ATOMS_MUST_ALREADY_EXIST_IN_DECISION_BASIS;"
-            "ONLY_THE_EXACT_SUPPORTED_TRANSFORM_STRUCTURAL_ATOM_MAY_BE_RECOMPUTED;"
-            "REGISTRY_NEVER_PROVES_OTHER_CONDITION_TRUTH;"
+            "THE_SUPPORTED_TRANSFORM_ATOM_MAY_BE_RECOMPUTED_FROM_EXACT_MODEL_STRUCTURE;"
+            "THE_NO_HIDDEN_VERIFIER_ATOM_MAY_BE_RECOMPUTED_ONLY_FROM_THE_EXACT_"
+            "CONTENT_ADDRESSED_PREWAVE_INFORMATION_BOUNDARY;"
+            "REGISTRY_NEVER_PROVES_THE_OTHER_THREE_CONDITION_ATOMS;"
             "P3_STILL_REQUIRES_SOURCE_AUTHORIZED_REFINEMENT_TO_REMOVE_FALSE_WORLDS"
         ),
     }
