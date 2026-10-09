@@ -120,7 +120,7 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
         "required_relation",
         "candidate_concepts",
         "evidence",
-        "proved_semantic_atoms",
+        "candidate_semantic_atoms",
         "relation_problems",
     }
     extra = set(payload) - allowed
@@ -196,7 +196,7 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
         scope_id=scope_id,
         candidate_concepts=candidates,
         evidence=payload.get("evidence", ()),
-        proved_semantic_atoms=payload.get("proved_semantic_atoms", ()),
+        candidate_semantic_atoms=payload.get("candidate_semantic_atoms", ()),
         relation_problems=relation_problems,
     )
     if result.get("status") == "FAIL_CLOSED":
