@@ -1,0 +1,76 @@
+{
+  "schema": "PROJECT_BRAIN_R2_FINANCE_MARKED_MENTION_UNIVERSE_DYNAMIC_ADMISSION_ACTIVATION_VERIFY_V1",
+  "date": "2026-10-09",
+  "status": "PASS__EXACT_DYNAMIC_ADMISSION_CHAIN_VALIDATED__FRESH_ISOLATED_CARRIER__ZERO_TERMINAL_CREDIT",
+  "route_id": "DIRECT_ADEQUACY::FINANCE_MARKED_MENTION_UNIVERSE_AMBIGUITY_CONTROL_V1",
+  "capability_id": "finance.coreference.marked_mention_universe.stdlib",
+  "exact_bindings": {
+    "route_runtime_git_blob_sha": "2b3c57f04237c6b0dc66a27b8dfd92c479e70cc7",
+    "route_verification_git_blob_sha": "1198d40e2a51c60c54008e77bef1c9c52444d8ba",
+    "deployment_candidate_git_blob_sha": "5cbba21f9fb44c91eec87a6c9044e55a576debe3",
+    "independent_deployment_receipt_git_blob_sha": "40b9db187a7fe70133605b96a80717ab252968ef",
+    "dynamic_manifest_path": "canonical/governance/R2_DIRECT_ROUTE_DYNAMIC_ADMISSIONS_20261009_V3.json",
+    "dynamic_manifest_git_blob_sha": "360b60346e57ec1b70d0802ffe7b8fcbf72fabbc",
+    "current_pointer_path": "canonical/governance/CURRENT_R2_DIRECT_ROUTE_ADMISSIONS.json",
+    "current_pointer_git_blob_sha": "c585019f51b7d13c49ec03d058b5aad8c937c5e9"
+  },
+  "independent_execution": {
+    "carrier": {
+      "name": "brain-finance-admission-verify-20261009-sol",
+      "sprite_id": "sprite-410d8399-d628-4a83-90b0-b3e1cdaad598",
+      "workspace": "/home/sprite/admission-finance-v3",
+      "role": "FRESH_ISOLATED_DYNAMIC_ADMISSION_VALIDATION_CARRIER"
+    },
+    "admission_validator": {
+      "result": "PASS",
+      "target_path": "canonical/governance/R2_DIRECT_ROUTE_DYNAMIC_ADMISSIONS_20261009_V3.json",
+      "target_git_blob_sha": "360b60346e57ec1b70d0802ffe7b8fcbf72fabbc",
+      "admission_count": 2,
+      "route_ids": [
+        "DIRECT_ADEQUACY::CROSS_DOCUMENT_SEMANTIC_REGISTRY_V3_LATTICE_V8",
+        "DIRECT_ADEQUACY::FINANCE_MARKED_MENTION_UNIVERSE_AMBIGUITY_CONTROL_V1"
+      ]
+    }
+  },
+  "inherited_route_verification": {
+    "path": "canonical/verification/R2_FINANCE_MARKED_MENTION_UNIVERSE_DIRECT_ADEQUACY_VERIFY_20261009_V1.json",
+    "result": "PASS__MARKED_MENTION_UNIVERSE_DIRECT_ADEQUACY__FOCUSED_11_OF_11__ADJACENT_COREFERENCE_7_OF_7__PYCOMPILE_PASS__ZERO_TERMINAL_CREDIT",
+    "combined": "18_OF_18_PASS",
+    "exact_runtime_blob_bound": true
+  },
+  "inherited_deployment_receipt": {
+    "path": "canonical/verification/R2_DIRECT_ROUTE_DEPLOYMENT_RECEIPT_FINANCE_MARKED_MENTION_UNIVERSE_20261009_V1.json",
+    "result": "INDEPENDENT_PASS__R2_DIRECT_ROUTE_DEPLOYMENT",
+    "deployment_eligible": true,
+    "preflight_pure_no_effect": true,
+    "matched_route_failure_no_fallthrough": true,
+    "producer_independent_acceptance": true,
+    "exact_raw_obligation_acceptance": true,
+    "verification_authority_mutated": false
+  },
+  "live_safety": {
+    "selection_class": "UNIQUE_MATCH_REQUIRED",
+    "collision_policy": "FAIL_CLOSED_ON_ANY_OTHER_DYNAMIC_OR_LEGACY_MATCH",
+    "dynamic_manifest_exact_content_addressed": true,
+    "candidate_and_receipt_exact_content_addressed": true,
+    "verification_authority_mutated": false,
+    "terminal_authority": false
+  },
+  "coverage_delta": {
+    "newly_live_positive_subregion": "FINANCE_COREFERENCE_OVER_STRUCTURALLY_COMPLETE_TYPED_MARKED_MENTION_UNIVERSES_WITH_COMPLETE_CANDIDATE_TERMINAL_SIGNATURES_AND_DECLARED_OBSERVATION_MAPS",
+    "removes_manual_requirement": "CALLER_MANUALLY_ENUMERATES_SOURCE_SPANS_AND_ASSERTS_MENTION_UNIVERSE_COMPLETE",
+    "general_finance_semantic_tail_closed": false
+  },
+  "hard_nonclaims": [
+    "NO_GENERAL_PLAIN_TEXT_COREFERENCE_RESOLUTION",
+    "NO_OPEN_WORLD_MENTION_UNIVERSE_COMPLETENESS",
+    "NO_GENERAL_FINANCE_SEMANTIC_TAIL_CLOSURE",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
