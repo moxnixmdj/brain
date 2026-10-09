@@ -734,5 +734,50 @@ class GeneralAdequateDecisionFixedPointV2Tests(unittest.TestCase):
         self.assertFalse(hint["semantic_truth_authority"])
 
 
+    @patch.object(fixed.direct_adequacy, "preflight")
+    @patch.object(fixed, "run_controller")
+    def test_residual_top_proof_obligations_reach_resolver_without_authority(
+        self, controller, preflight
+    ):
+        obligation = {
+            "kind": "PROVE_EFFECT_TARGET_SCOPE_OR_QUERY_EFFECT_ID_INVENTORY",
+            "document_id": "A",
+            "query_target_id": "reporting.threshold",
+        }
+        preflight.return_value = {
+            "matched": False,
+            "pass": False,
+            "status": "NOT_APPLICABLE__SOURCE_BACKED_CROSS_DOCUMENT_SEMANTICS_OPEN",
+            "direct_route_semantic_open": True,
+            "route_id": "DIRECT_ADEQUACY::CROSS_DOCUMENT_RESIDUAL_EFFECT_FRONTIER_V1",
+            "effect_status": "OPEN__RESIDUAL_TOP_EFFECT_MAY_CHANGE_QUERY",
+            "blocking_residual_document_ids": ["A"],
+            "next_proof_obligations": [obligation],
+            "minimum_discriminator_slots": [],
+            "possible_outcomes": [],
+            "world_count": 1,
+        }
+        controller.side_effect = [self._open(), self._pass()]
+        provider = Mock(
+            return_value={
+                "request_patch": {
+                    "decision_payload": {"context_id": "residual-proof-resolved"}
+                }
+            }
+        )
+
+        out = fixed.run(self._request(), proposal_provider=provider)
+
+        self.assertTrue(out["pass"], out)
+        packet = provider.call_args.args[0]
+        hint = packet["direct_preflight_hint"]
+        self.assertEqual(hint["blocking_residual_document_ids"], ["A"])
+        self.assertEqual(hint["next_proof_obligations"], [obligation])
+        self.assertFalse(hint["semantic_truth_authority"])
+        self.assertFalse(hint["execution_authority"])
+        self.assertFalse(hint["acceptance_authority"])
+        self.assertFalse(hint["terminal_authority"])
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
