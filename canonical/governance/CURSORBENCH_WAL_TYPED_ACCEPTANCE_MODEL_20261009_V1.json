@@ -81,6 +81,7 @@
         "R_WAL"
       ],
       "detects": [
+        "ordering_precedence",
         "idempotence",
         "failure_recovery",
         "recovery_semantics",
