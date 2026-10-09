@@ -106,6 +106,7 @@ class PlannerTests(unittest.TestCase):
         self.assertEqual(body["tool_choice"],"required")
         self.assertFalse(body["parallel_tool_calls"])
         self.assertEqual(body["temperature"],0)
+        self.assertEqual(body["chat_template_kwargs"],{"enable_thinking":False})
         self.assertEqual(body["max_tokens"],p.MAX_TOOL_COMPLETION_TOKENS)
         self.assertFalse(body["stream"])
         self.assertEqual(len(body["tools"]),1)
@@ -115,6 +116,13 @@ class PlannerTests(unittest.TestCase):
         self.assertNotIn("maxLength",candidate_schema["command"])
         self.assertNotIn("maxLength",candidate_schema["verify_command"])
         self.assertGreaterEqual(p.MAX_TOOL_COMPLETION_TOKENS,4096)
+
+    def test_request_disables_model_thinking_at_chat_template_boundary(self):
+        payload=p._request_payload("synthetic")
+        self.assertEqual(
+            payload["chat_template_kwargs"],
+            {"enable_thinking":False},
+        )
 
     def test_exact_token_count_endpoint_uses_full_chat_payload(self):
         payload=p._request_payload("synthetic")
