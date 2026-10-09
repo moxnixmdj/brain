@@ -1799,7 +1799,7 @@
     "cursorbench_absence_of_bound_v5_failure_is_adequacy_proof": false,
     "cursorbench_one_v5_pass_is_scope_complete_adequacy_proof": false,
     "cursorbench_selector_work_authorized_now": false,
-    "cursorbench_next_proof_object": "FORMALIZE_AND_VERIFY_SOUND_NONVACUOUS_CURSORBENCH_TARGET_RELEVANCE_OR_SCOPE_COMPLETE_TRANSFER__WAL_AND_TERMINAL_BENCH_CONTEXTS_MUST_NOT_TRANSFER_BY_ANALOGY__REACTIVATE_OWNER_PROTOCOL_SEARCH_ONLY_ON_SOURCE_DELTA",
+    "cursorbench_next_proof_object": "CODING_SPEC_SCOPE_COMPLETE_AUTHENTICATED_POLICY_ADEQUACY_COVER__ACTUAL_CURSORBENCH_TARGET_MEMBERSHIP_EVENT_DRIVEN_ON_OWNER_SOURCE_DELTA__PREEMPT_IF_ROUTE_A_SCORING_AUTHORITY_APPEARS",
     "r2_sec_standard_xbrl_companyconcept_source_native_semantics_bound": true,
     "r2_sec_standard_xbrl_source_native_policy_adequacy_claimed": false,
     "cursorbench_advanced_coding_canonical_residual_count": 4,
@@ -2024,7 +2024,11 @@
     "cursorbench_preverifier_information_boundary_public_search_scope": "LISTED_CURRENT_PUBLIC_FIRST_PARTY_SURFACES_ONLY__NOT_GLOBAL_NONEXISTENCE",
     "cursorbench_preverifier_information_boundary_owner_fact_state": "OPEN_DORMANT_UNTIL_OWNER_SOURCE_DELTA",
     "cursorbench_public_exact_4_0_task_member_found": false,
-    "cursorbench_public_exact_4_0_task_member_search_state": "BOUNDEDLY_SATURATED_ON_CURRENT_PUBLIC_SOURCES"
+    "cursorbench_public_exact_4_0_task_member_search_state": "BOUNDEDLY_SATURATED_ON_CURRENT_PUBLIC_SOURCES",
+    "cursorbench_typed_specialist_public_metadata_transfer_falsified": true,
+    "cursorbench_actual_private_target_membership_route": "EVENT_DRIVEN_ONLY_UNDER_CURRENT_OWNER_POLICY",
+    "cursorbench_public_task_prompt_repository_search_authorized_now": false,
+    "cursorbench_scope_complete_transfer_from_public_metadata_proved": false
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -2726,7 +2730,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 98,
+  "pointer_revision": 99,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
@@ -3815,6 +3819,22 @@
     "result": "ONE_OWNER_PROTOCOL_CONTINUITY_FACT_REMAINS__STATIC_PUBLIC_SEARCH_DORMANT__INTERNAL_TARGET_RELEVANCE_ROUTE_ACTIVE",
     "atom_truth_delta": 0,
     "cursorbench_membership_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "cursorbench_typed_specialist_target_membership_transfer_falsification_reconciliation_20261009_v1": {
+    "source": {
+      "path": "canonical/governance/CURSORBENCH_TYPED_SPECIALIST_TARGET_MEMBERSHIP_TRANSFER_FALSIFICATION_20261009_V1.json",
+      "git_blob_sha": "d3f9801a9ef130ed0140a558cd37e0815e80693f"
+    },
+    "verification": {
+      "path": "canonical/verification/CURSORBENCH_TYPED_SPECIALIST_TARGET_MEMBERSHIP_TRANSFER_FALSIFICATION_INDEPENDENT_VERIFICATION_20261009_V1.json",
+      "git_blob_sha": "620ed7c5447797a60dfcacc23c2531c96518df54"
+    },
+    "reconciliation": {
+      "path": "canonical/governance/CURSORBENCH_TYPED_SPECIALIST_TARGET_MEMBERSHIP_TRANSFER_TERMINAL_RECONCILIATION_20261009_V1.json"
+    },
+    "result": "PUBLIC_METADATA_TRANSFER_TO_FIVE_ATOM_REGION_FALSIFIED__PRIVATE_TARGET_MEMBERSHIP_EVENT_DRIVEN__INTERNAL_SUCCESSOR_SCOPE_COMPLETE_POLICY_ADEQUACY_COVER",
     "acceptance_credit_delta": 0,
     "terminal_credit_delta": 0
   }
