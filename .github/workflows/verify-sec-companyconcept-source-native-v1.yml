@@ -1,0 +1,27 @@
+name: Verify SEC CompanyConcept source-native semantics
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/runtime/bound_capabilities/sec_companyconcept_source_native.py
+      - canonical/runtime/sec_companyconcept_source_native_verify_v1.py
+      - canonical/tests/test_sec_companyconcept_source_native_v1.py
+      - .github/workflows/verify-sec-companyconcept-source-native-v1.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Run source-native semantic falsification suite
+        run: |
+          set -o pipefail
+          python3 -m unittest -v canonical.tests.test_sec_companyconcept_source_native_v1
