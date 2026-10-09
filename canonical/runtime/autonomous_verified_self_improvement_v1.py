@@ -818,7 +818,10 @@ def record_owned_direct_success_observation(
             "DIRECT_SUCCESS_OBSERVATION_REQUIRES_PASSING_OUTPUT"
         )
     name = _s(surface)
-    if not name.startswith("UNIFIED_FABRIC_DIRECT_"):
+    if not (
+        name.startswith("UNIFIED_FABRIC_DIRECT_")
+        or name == "ADEQUATE_DECISION_DIRECT_SUCCESS"
+    ):
         raise SelfImprovementError("DIRECT_SUCCESS_SURFACE_NOT_CANONICAL_DIRECT")
 
     core = {
