@@ -6,8 +6,8 @@ from canonical.runtime.d_finality_coverage_gate_v1 import (
 )
 
 H = "a" * 64
-I = "b" * 64
-J = "c" * 64
+I = "b" * 40
+J = "c" * 40
 K = "d" * 64
 L = "e" * 64
 M = "f" * 64
@@ -18,8 +18,8 @@ def row(capability_id, *, provider=J, material=I, cert=H, policy=K, epoch=L, clo
         "capability_id": capability_id,
         "status": "VERIFIED_D_FINAL_CURRENT",
         "d_certificate_sha256": cert,
-        "material_certificate_sha256": material,
-        "provider_theorem_sha256": provider,
+        "member_material_theorem_git_blob_sha": material,
+        "provider_theorem_git_blob_sha": provider,
         "policy_sha256": policy,
         "execution_epoch_sha256": epoch,
         "material_closure_root": closure,
@@ -50,8 +50,8 @@ class CoverageTests(unittest.TestCase):
         out = evaluate(
             ["engine:A", "bound:B"],
             registry([
-                row("engine:A", provider="1" * 64, material="2" * 64, cert="3" * 64),
-                row("bound:B", provider="4" * 64, material="5" * 64, cert="6" * 64),
+                row("engine:A", provider="1" * 40, material="2" * 40, cert="3" * 64),
+                row("bound:B", provider="4" * 40, material="5" * 40, cert="6" * 64),
             ]),
         )
         self.assertTrue(out["pass"])
@@ -59,12 +59,12 @@ class CoverageTests(unittest.TestCase):
         self.assertEqual(out["missing_d_certificate_count"], 0)
 
     def test_provider_theorem_can_be_shared_but_material_certificate_remains_per_member(self):
-        shared = "1" * 64
+        shared = "1" * 40
         out = evaluate(
             ["bound:A", "bound:B"],
             registry([
-                row("bound:A", provider=shared, material="2" * 64, cert="3" * 64),
-                row("bound:B", provider=shared, material="4" * 64, cert="5" * 64),
+                row("bound:A", provider=shared, material="2" * 40, cert="3" * 64),
+                row("bound:B", provider=shared, material="4" * 40, cert="5" * 64),
             ]),
         )
         self.assertTrue(out["pass"])
