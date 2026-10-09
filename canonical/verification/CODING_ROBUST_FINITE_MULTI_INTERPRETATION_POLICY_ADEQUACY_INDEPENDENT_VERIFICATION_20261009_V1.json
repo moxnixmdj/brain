@@ -4,7 +4,7 @@
   "policy_id": "BRAIN_ROBUST_FINITE_MULTI_INTERPRETATION_SOLVER_V1",
   "subject_git_blob_sha": "7924c5a4d5e38e1d417d56c8be08575587ed66fd",
   "pass": true,
-  "status": "PASS__INDEPENDENT_REMOTE_EXACT_BLOB_ROBUST_CONSTRUCTIVE_LIVENESS_VERIFICATION__ZERO_CREDIT",
+  "status": "PASS__INDEPENDENT_REMOTE_FINAL_EXACT_BRANCH_ROBUST_CONSTRUCTIVE_LIVENESS_AND_P3_INTEGRATION__ZERO_CREDIT",
   "evidence": {
     "exact_policy": {
       "path": "canonical/runtime/coding_robust_finite_multi_interpretation_solver_v1.py",
@@ -27,11 +27,14 @@
     "provider": "SPRITES",
     "sprite_name": "brain-abstract-cover-lift-verify-20261008-v1",
     "sprite_id": "sprite-c6d765e0-f383-49a0-b78b-7863d8d4793d",
-    "working_directory": "/home/sprite/verify-robust-finite-multi-interpretation-v1",
+    "working_directory": "/home/sprite/verify-robust-finite-multi-interpretation-final-v1",
     "py_compile_pass": true,
-    "test_functions_run": 7,
-    "test_functions_passed": 7,
+    "focused_test_functions_run": 10,
+    "focused_test_functions_passed": 10,
     "exhaustive_boolean_matrices_checked": 682,
+    "p3_all_seven_atoms_common_policy_pass": true,
+    "p3_missing_each_single_atom_fail_closed": true,
+    "registry_binding_authenticated": true,
     "package_install_performed": false,
     "incremental_spend_usd": 0
   },
@@ -47,7 +50,10 @@
     "WITH_A_SOUND_COMPLETE_INTERPRETATION_SET_AND_PER_INTERPRETATION_SOUND_COMPLETE_CHECKER__A_CANDIDATE_ACCEPTED_UNDER_ALL_DECLARED_INTERPRETATIONS_IS_CORRECT_UNDER_EVERY_SOUND_SOURCE_CONSISTENT_INTERPRETATION.",
     "WITH_EXISTENCE_OF_A_COMMON_VALID_MEMBER__THE_POLICY_EVENTUALLY_RETURNS_A_ROBUST_CORRECT_CANDIDATE.",
     "THE_SINGLE_INTERPRETATION_CASE_REDUCES_TO_THE_EXISTING_FINITE_EXACT_ORACLE_CONSTRUCTIVE_SHAPE.",
-    "THE_THEOREM_IS_CONDITIONAL_ON_ALL_SEVEN_PREEXECUTION_ATOMS_AND_CREATES_NO_CURSORBENCH_MEMBERSHIP_OR_WHOLE_SCOPE_COVER."
+    "THE_FINAL_THEOREM_BYTES_INCLUDE_THE_BOUND_SEVEN_ATOM_CONDITION_DIGEST.",
+    "P3_CERTIFIES_THE_REGISTERED_ROBUST_POLICY_WHEN_ALL_SEVEN_ATOMS_ARE_SOURCE_AUTHORIZED.",
+    "P3_FAILS_CLOSED_WITH_AUTHENTICATED_POLICY_COVER_INCOMPLETE_WHEN_ANY_ONE_OF_THE_SEVEN_ATOMS_IS_NOT_SOURCE_AUTHORIZED.",
+    "THE_THEOREM_AND_REGISTRY_CREATE_NO_CURSORBENCH_MEMBERSHIP_OR_WHOLE_SCOPE_COVER."
   ],
   "hard_nonclaims": [
     "NO_CONDITION_ATOM_TRUTH",
