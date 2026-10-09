@@ -1,0 +1,74 @@
+{
+  "schema": "PROJECT_BRAIN_R2_V58_REGCAP_CONTEXT_TRUTH_AUTHORITY_COHERENCE_VERIFY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__R2_V58_REGCAP_CONTEXT_TRUTH_AUTHORITY_COHERENT__24_OF_24_ASSERTIONS__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "r2-v58-regcap-context-truth-authority-20261009-sol",
+    "exact_blobs": {
+      "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json": "1abd381804c5011d82b2250c9e8a90bc862a76bf",
+      "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json": "6a42e825792f5041c29aac23de8c72d30d4268d3",
+      "canonical/governance/R2_REGCAP_CONTEXT_ATOM_TRUTH_DISPATCH_RECONCILIATION_20261009_V1.json": "569ca5dd849e5a5571065ad34fcea3744330ee79",
+      "canonical/verification/REGCAP_CONTEXT_ATOM_TRUTH_DISPATCH_VERIFY_20261009_V1.json": "644a4397e74ffd5f1bcfabdbc34a1197ecc2d8e7",
+      "canonical/runtime/regcap_context_atom_truth_certificate_v1.py": "3e35f67ee88f7337569774835890efc54cdc734d",
+      "canonical/runtime/semantic_truth_dispatch_v1.py": "70dffa9e5719ad1ec01ab6ea5d8ad88a57ddcc88"
+    }
+  },
+  "independent_carrier": {
+    "name": "brain-live-integrated-v1-run-20261008",
+    "sprite_id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "workspace": "/home/sprite/brain"
+  },
+  "verification": {
+    "method": "EXACT_GIT_BLOB_RECOMPUTATION_PLUS_R2_TERMINAL_POINTER_STRUCTURAL_ASSERTIONS",
+    "assertions_passed": 24,
+    "assertions_failed": 0,
+    "checks": [
+      "R2_STATUS_V58",
+      "R2_STILL_ONE_PRIMARY_FINANCE_RESIDUAL",
+      "GENERIC_WAKE_PRESERVED",
+      "BOUNDED_WAKE_ROW_UNIQUE",
+      "BOUNDED_WAKE_NOT_GLOBAL",
+      "R2_NEW_TRUTH_PATH_BOUND",
+      "NO_NEGATIVE_FROM_ABSENCE",
+      "NO_CONCEPT_IDENTITY",
+      "NO_POLICY_ADEQUACY",
+      "TERMINAL_STATUS_V58",
+      "TERMINAL_STILL_FALSE",
+      "TERMINAL_R2_STATUS_MATCH",
+      "SCHEDULER_PATH_MATCH",
+      "SCHEDULER_HASH_MATCH",
+      "PRIMARY_UNSOLVED_COUNT_STILL_ONE",
+      "PRIMARY_UNSOLVED_CELL_FINANCE",
+      "TERMINAL_CONTEXT_DISPATCH_BOUND",
+      "VERIFY_RECEIPT_PASS",
+      "RECON_ZERO_TERMINAL",
+      "VERIFY_ZERO_TERMINAL",
+      "IMMUTABLE_RECONCILIATION_BLOB_MATCH",
+      "IMMUTABLE_VERIFICATION_BLOB_MATCH",
+      "IMMUTABLE_CONTEXT_CERTIFICATE_BLOB_MATCH",
+      "IMMUTABLE_DISPATCHER_BLOB_MATCH"
+    ]
+  },
+  "proved": [
+    "CURRENT_R2_MUTABLE_POINTER_CAN_BIND_THE_NEW_BOUNDED_REGCAP_CONTEXT_TRUTH_PATH_WITHOUT_CHANGING_THE_V55_SINGLE_PRIMITIVE_SCHEDULER_CUT",
+    "THE_GENERIC_CONTEXT_OR_RELATION_WAKE_REMAINS_ACTIVE_OUTSIDE_THE_BOUND_REGCAP_SCOPE",
+    "THE_FINANCE_SEMANTIC_ADEQUACY_TAIL_REMAINS_THE_SINGLE_PRIMARY_INTERNAL_UNSOLVED_R2_CELL",
+    "CURRENT_TERMINAL_AUTHORITY_PROJECTS_R2_V58_COHERENTLY_WHILE_TERMINAL_REMAINS_FALSE",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT_IS_CREATED_BY_THE_BOUNDED_SEMANTIC_TRUTH_EXTENSION"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_FINANCE_SEMANTIC_ADEQUACY_TAIL_CLOSED",
+    "NO_CLAIM_U_EMPTY",
+    "NO_CLAIM_CC_R3_TERMINAL_CLOSURE_PROVED",
+    "NO_CLAIM_GLOBAL_WORD_SENSE_OR_ONTOLOGY_MAPPING_CLOSED",
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0
+  },
+  "terminal_authority": false
+}
