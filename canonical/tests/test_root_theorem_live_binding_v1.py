@@ -88,6 +88,20 @@ def docs():
             "path": CLAIM_SCOPE_PATH,
             "git_blob_sha": "claim-scope-sha",
         },
+        "falsifier": {
+            "path": "canonical/runtime/root_theorem_falsifier_v1.py",
+            "git_blob_sha": "falsifier-sha",
+            "tests_path": "canonical/tests/test_root_theorem_falsifier_v1.py",
+            "tests_git_blob_sha": "falsifier-tests-sha",
+            "r4_binding_tests_path": "canonical/tests/test_root_theorem_r4_binding_coherence_v1.py",
+            "r4_binding_tests_git_blob_sha": "r4-tests-sha",
+        },
+        "live_binding_validator": {
+            "path": "canonical/runtime/root_theorem_live_binding_v1.py",
+            "git_blob_sha": "live-validator-sha",
+            "tests_path": "canonical/tests/test_root_theorem_live_binding_v1.py",
+            "tests_git_blob_sha": "live-validator-tests-sha",
+        },
         "accounting": {"terminal_credit_delta": 0},
     }
     authority = {
@@ -132,6 +146,11 @@ def check(mission, theorem, binding, namespace_bridge, authority, carrier, claim
         carrier_tests_blob_sha="carrier-tests-sha",
         claim_scope=claim_scope,
         claim_scope_blob_sha="claim-scope-sha",
+        falsifier_blob_sha="falsifier-sha",
+        falsifier_tests_blob_sha="falsifier-tests-sha",
+        r4_binding_tests_blob_sha="r4-tests-sha",
+        live_validator_blob_sha="live-validator-sha",
+        live_validator_tests_blob_sha="live-validator-tests-sha",
     )
 
 
@@ -248,6 +267,34 @@ def test_live_authority_claim_scope_binding_drift_fails():
     authority["authoritative_sources"]["coverage_completeness_claim_scope"]["git_blob_sha"] = "stale"
     out = check(mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope)
     assert "LIVE_AUTHORITY_CLAIM_SCOPE_BLOB_STALE" in out["errors"]
+
+
+def test_stale_falsifier_blob_fails():
+    mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope = docs()
+    binding["falsifier"]["git_blob_sha"] = "stale"
+    out = check(mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope)
+    assert "BINDING_FALSIFIER_BLOB_STALE" in out["errors"]
+
+
+def test_stale_r4_binding_tests_blob_fails():
+    mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope = docs()
+    binding["falsifier"]["r4_binding_tests_git_blob_sha"] = "stale"
+    out = check(mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope)
+    assert "BINDING_R4_TESTS_BLOB_STALE" in out["errors"]
+
+
+def test_stale_live_validator_blob_fails():
+    mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope = docs()
+    binding["live_binding_validator"]["git_blob_sha"] = "stale"
+    out = check(mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope)
+    assert "BINDING_LIVE_VALIDATOR_BLOB_STALE" in out["errors"]
+
+
+def test_stale_live_validator_tests_blob_fails():
+    mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope = docs()
+    binding["live_binding_validator"]["tests_git_blob_sha"] = "stale"
+    out = check(mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope)
+    assert "BINDING_LIVE_VALIDATOR_TESTS_BLOB_STALE" in out["errors"]
 
 
 def test_git_blob_sha():
