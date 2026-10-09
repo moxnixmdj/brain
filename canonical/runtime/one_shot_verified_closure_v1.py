@@ -30,6 +30,7 @@ SCHEMA = "PROJECT_BRAIN_ONE_SHOT_VERIFIED_CLOSURE_V1"
 LOAD_BEARING_PATHS = (
     "canonical/runtime/autonomous_verified_self_improvement_v1.py",
     "canonical/runtime/r3_improvement_queue_driver_v1.py",
+    "canonical/runtime/information_theoretic_externality_gate_v1.py",
     "canonical/runtime/live_brain_runtime_v1.py",
     "canonical/runtime/unified_cognitive_fabric_v1.py",
     "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
