@@ -17,7 +17,12 @@ CERTIFICATE_ROOT_IDS = tuple(x[0] for x in ROOTS[:3])
 ALLOWED_SLOT_STATUSES = frozenset({"OPEN_NO_GLOBAL_CERTIFICATE_BOUND", "PROVED_CURRENT"})
 
 
-def validate(registry: Mapping[str, Any], *, current_mission_blob_sha: str) -> dict[str, Any]:
+def validate(
+    registry: Mapping[str, Any],
+    *,
+    current_mission_pointer: Mapping[str, Any],
+    current_mission_authority_blob_sha: str,
+) -> dict[str, Any]:
     errors: list[str] = []
     if not isinstance(registry, Mapping):
         return {"pass": False, "status": "FAIL_CLOSED", "errors": ["REGISTRY_NOT_OBJECT"], "terminal_credit_delta": 0}
@@ -28,10 +33,15 @@ def validate(registry: Mapping[str, Any], *, current_mission_blob_sha: str) -> d
         errors.append("NAMESPACE_DRIFT")
 
     mission = registry.get("mission_binding") or {}
-    if mission.get("path") != "canonical/governance/CURRENT_MISSION_OBJECTIVE.json":
-        errors.append("MISSION_PATH_DRIFT")
-    if mission.get("git_blob_sha") != current_mission_blob_sha:
-        errors.append("MISSION_BLOB_STALE")
+    if mission.get("pointer_path") != "canonical/governance/CURRENT_MISSION_OBJECTIVE.json":
+        errors.append("MISSION_POINTER_PATH_DRIFT")
+    authority = current_mission_pointer.get("authoritative_source") or {}
+    if mission.get("authority_path") != authority.get("path"):
+        errors.append("MISSION_AUTHORITY_PATH_DRIFT")
+    if mission.get("authority_git_blob_sha") != current_mission_authority_blob_sha:
+        errors.append("MISSION_AUTHORITY_BLOB_STALE")
+    if mission.get("real_objective") != current_mission_pointer.get("real_objective"):
+        errors.append("MISSION_OBJECTIVE_DRIFT")
 
     identities = registry.get("root_identities")
     if not isinstance(identities, list) or len(identities) != 4:
@@ -100,8 +110,8 @@ def validate(registry: Mapping[str, Any], *, current_mission_blob_sha: str) -> d
             else:
                 if cert.get("root_id") != root_id:
                     errors.append(f"PROVED_SLOT_ROOT_ID_MISMATCH:{root_id}")
-                if cert.get("mission_blob_sha") != current_mission_blob_sha:
-                    errors.append(f"PROVED_SLOT_MISSION_DRIFT:{root_id}")
+                if cert.get("mission_authority_blob_sha") != current_mission_authority_blob_sha:
+                    errors.append(f"PROVED_SLOT_MISSION_AUTHORITY_DRIFT:{root_id}")
                 if not isinstance(cert.get("path"), str) or not isinstance(cert.get("git_blob_sha"), str):
                     errors.append(f"PROVED_SLOT_CONTENT_ADDRESS_MISSING:{root_id}")
             if not isinstance(verify, Mapping) or not isinstance(verify.get("path"), str) or not isinstance(verify.get("git_blob_sha"), str):

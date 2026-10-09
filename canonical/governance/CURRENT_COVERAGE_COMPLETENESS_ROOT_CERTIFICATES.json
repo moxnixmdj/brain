@@ -3,20 +3,22 @@
   "date": "2026-10-09",
   "status": "ACTIVE__THREE_OPEN_CC_ROOT_CERTIFICATE_OBLIGATIONS__ZERO_PROVED__ZERO_CREDIT",
   "mission_binding": {
-    "path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
-    "git_blob_sha": "52b98f8019938fa7d8164e6a47e359ffb0faeb6a"
+    "pointer_path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
+    "authority_path": "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+    "authority_git_blob_sha": "13c470645b037bbb46245c687dd35197b420d51a",
+    "real_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE"
   },
   "registry": {
     "path": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_CERTIFICATE_REGISTRY_V1.json",
-    "git_blob_sha": "87d154877fd195d4726db46db8a607a02e4dcc31"
+    "git_blob_sha": "19c62ecd1d60066b79ad143c3a8ef877b7cd80d3"
   },
   "guard": {
     "path": "canonical/runtime/coverage_root_certificate_registry_guard_v1.py",
-    "git_blob_sha": "99fcc3dfb8b62266442bd8c596821b74b9b3a777"
+    "git_blob_sha": "cb08524f6703b00567e1bfb41cf32321d0b46258"
   },
   "tests": {
     "path": "canonical/tests/test_coverage_root_certificate_registry_guard_v1.py",
-    "git_blob_sha": "7299c578d59c4ce133508eafb329406751dc6078"
+    "git_blob_sha": "06569b7e607ef812e2ae67d6a7a80d28e7d4c1e6"
   },
   "canonical_root_ids": [
     "CC_R1_REALITY_CONTAINMENT_V1",
@@ -32,5 +34,11 @@
   "open": 3,
   "r4_proof_closure": false,
   "next": "PROVE_OR_FALSIFY_CC_R1_CC_R2_CC_R3_USING_CONTENT_ADDRESSED_MISSION_BOUND_CERTIFICATES__NO_SHORT_LABEL_INHERITANCE",
-  "terminal_credit_delta": 0
+  "terminal_credit_delta": 0,
+  "root_theorem_falsifier": {
+    "path": "canonical/runtime/root_theorem_falsifier_v1.py",
+    "git_blob_sha": "1f6ea3530e42530480a2d5416d82f04496fcd17e",
+    "authoritative_registry_required": true
+  },
+  "r4_authority_rule": "LOCAL_ROOT_RECEIPTS_CANNOT_CLOSE_R4_UNLESS_THE_CANONICAL_ROOT_CERTIFICATE_REGISTRY_VALIDATES_AND_ALL_THREE_CANONICAL_ROOT_SLOTS_ARE_PROVED_CURRENT"
 }

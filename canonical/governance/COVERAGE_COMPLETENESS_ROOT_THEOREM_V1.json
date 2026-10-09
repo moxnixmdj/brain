@@ -123,7 +123,11 @@
     "FINITE_NO_COUNTEREXAMPLE_IS_NOT_UNIVERSAL_CARRIER_FACTORIZATION_PROOF",
     "CARRIER_ALIASING_IS_R4_AND_R1_DEFECT_NOT_NEW_ROOT",
     "CARRIER_FACTORIZATION_CERTIFICATES_ARE_FROZEN_CLAIM_SCOPED",
-    "CROSS_CLAIM_CARRIER_TRANSPORT_REQUIRES_EXPLICIT_SCOPE_AND_SEMANTICS_PRESERVATION_PROOF"
+    "CROSS_CLAIM_CARRIER_TRANSPORT_REQUIRES_EXPLICIT_SCOPE_AND_SEMANTICS_PRESERVATION_PROOF",
+    "R4_REQUIRES_CANONICAL_ROOT_CERTIFICATE_REGISTRY_AUTHORITY",
+    "LOCAL_PROVED_STATUS_HAS_ZERO_AUTHORITY_WITHOUT_CANONICAL_REGISTRY",
+    "ROOT_CERTIFICATE_AND_INDEPENDENT_VERIFICATION_BYTES_MUST_MATCH_CLAIMED_GIT_BLOB_IDS",
+    "MISSION_BINDING_USES_AUTHORITATIVE_MISSION_SOURCE_NOT_INCIDENTAL_POINTER_CHURN"
   ],
   "new_e_admission": {
     "default": "REJECT_AS_PEER_ARCHITECTURE",
@@ -173,6 +177,14 @@
       {
         "id": "M_R4_MISSING_BINDING",
         "expected": "UNKNOWN_FAIL_CLOSED"
+      },
+      {
+        "id": "M_R4_SYNTHETIC_LOCAL_PROVED_RECEIPTS_WITH_OPEN_CANONICAL_REGISTRY",
+        "expected": "R4_NOT_CLOSED"
+      },
+      {
+        "id": "M_R4_ROOT_CERTIFICATE_CONTENT_ADDRESS_MISMATCH",
+        "expected": "R4_CANONICAL_REGISTRY_INVALID"
       }
     ],
     "mutation_score_semantics": "DIAGNOSTIC_ONLY__NEVER_UNIVERSAL_COMPLETENESS_PROOF"
@@ -182,11 +194,12 @@
     "pure_boolean_valuations_checked": 16,
     "counterexamples_with_R1_R2_R3": 0,
     "each_of_R1_R2_R3_individually_load_bearing": true,
-    "local_test_count": 20,
+    "local_test_count": 28,
     "local_test_failures": 0,
     "scope": "ARCHITECTURE_LOGIC_ONLY__NOT_CURRENT_MISSION_CLOSURE",
     "r4_cross_binding_counterexample_count": 3,
-    "r4_cross_binding_symbolic_engine": "WOLFRAM_LANGUAGE"
+    "r4_cross_binding_symbolic_engine": "WOLFRAM_LANGUAGE",
+    "current_registry_state": "PASS__0_PROVED__3_OPEN__R4_PROOF_CLOSURE_FALSE"
   },
   "reconciliation": {
     "current_base_commit": "b1e19d7a45f96a40aadba95c17b712e406af0965",
@@ -197,7 +210,7 @@
       "status": "CLOSED_AS_SUPERSEDED_LIVE_INTEGRATION_VEHICLE",
       "preserve_evidence": true
     },
-    "active_pr": 3786
+    "active_pr": 3816
   },
   "accounting": {
     "incremental_spend_usd": 0,
@@ -283,5 +296,28 @@
     "verification_path": "canonical/verification/R4_LIVE_BINDING_CURRENTNESS_REPAIR_VERIFY_20261009_V1.json",
     "rule": "ALL_CONTENT_ADDRESSED_R4_DEPENDENCIES_MUST_MATCH_CURRENT_REPO_BYTES",
     "zero_credit": true
+  },
+  "r4_canonical_certificate_authority": {
+    "status": "REQUIRED_FOR_FOUR_ROOT_CLOSURE",
+    "registry_path": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_CERTIFICATE_REGISTRY_V1.json",
+    "registry_git_blob_sha": "19c62ecd1d60066b79ad143c3a8ef877b7cd80d3",
+    "guard_path": "canonical/runtime/coverage_root_certificate_registry_guard_v1.py",
+    "guard_git_blob_sha": "cb08524f6703b00567e1bfb41cf32321d0b46258",
+    "current_authority_manifest": "canonical/governance/CURRENT_COVERAGE_COMPLETENESS_ROOT_CERTIFICATES.json",
+    "canonical_root_ids": [
+      "CC_R1_REALITY_CONTAINMENT_V1",
+      "CC_R2_MISSION_SOUNDNESS_V1",
+      "CC_R3_TERMINAL_CLOSURE_V1"
+    ],
+    "current_proved": 0,
+    "current_open": 3,
+    "current_r4_proof_closure": false,
+    "local_status_proved_is_authority": false,
+    "content_address_verification_required": true,
+    "mission_binding": {
+      "pointer_path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
+      "authority_path": "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "authority_git_blob_sha": "13c470645b037bbb46245c687dd35197b420d51a"
+    }
   }
 }
