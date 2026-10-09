@@ -104,6 +104,22 @@ class RealityClosureV2Tests(unittest.TestCase):
             "PENDING_ACQUISITION_OR_EXPERIMENT",
         )
 
+    def test_externality_guard_does_not_misroute_evidence_to_synthesis(self):
+        row = closure(
+            status="OPEN__INTERNAL_UNSOLVED__PENDING_ACQUISITION_OR_EXPERIMENT",
+            internal=("EXTERNALITY_NOT_PROVED__CONTINUE_INTERNAL_SEARCH_SYNTHESIS_OR_BYPASS",),
+            evidence=("NEW_EXPERIENCE_REQUIRED__HISTORICAL_FAILURE_REPLAY_CAPSULE_MISSING",),
+            external=False,
+        )
+        row["residual"]["pending_acquisition_or_experiment_required"] = True
+        row["residual"]["internal_unsolved"] = True
+        out = v2.compile_gap_contract(row)
+        self.assertEqual(
+            out["gap_class"],
+            "PENDING_ACQUISITION_OR_EXPERIMENT",
+        )
+        self.assertEqual(out["basis"]["constructive_internal_blockers"], [])
+
     def test_pending_acquisition_provider_then_verified_closure(self):
         first = closure(
             status="OPEN",
