@@ -887,10 +887,10 @@
     "current_r2_decision_intelligence": {
       "path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
       "scheduler_cut": {
-        "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V46.json",
-        "git_blob_sha": "4245cdb3797012ac0308d27d703189fe71bba77e"
+        "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V47.json",
+        "git_blob_sha": "d9170e11c2f396aac5798db5dd3d6a1454c12b26"
       },
-      "status": "ACTIVE_CURRENT_R2_AUTHORITY__V46__THIRTY_ONE_DIRECT_ROUTES__TWENTY_EIGHT_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__SCOPED_PROOF_CARRYING_DOMAIN_MAPPING_BOUND__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_REMAINS",
+      "status": "ACTIVE_CURRENT_R2_AUTHORITY__V47__THIRTY_ONE_DIRECT_ROUTES__TWENTY_EIGHT_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__SCOPED_PROOF_CARRYING_DOMAIN_MAPPING_AND_SEC_STANDARD_XBRL_SOURCE_NATIVE_SEMANTICS_BOUND__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_REMAINS",
       "pointer_semantics": "MUTABLE_CURRENT_POINTER__PATH_IDENTITY_AUTHORITATIVE__IMMUTABLE_SCHEDULER_CUT_HASH_BOUND_BELOW",
       "mutable_pointer_blob_is_not_load_bearing": true
     },
@@ -1459,7 +1459,7 @@
     "gdpval_owner_layer_wake_authority": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V9.json",
     "opus_5_5_is_global_terminal_objective": false,
     "opus_5_5_is_frontier_checkpoint": true,
-    "current_r2_scheduler_cut": "ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V46",
+    "current_r2_scheduler_cut": "ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V47",
     "historical_root2_scheduler_fields_currently_authoritative": false,
     "r2_general_control_mechanism_closed_as_adequacy_or_abstain": true,
     "r2_open_world_positive_action_coverage_complete": false,
@@ -1524,7 +1524,9 @@
     "cursorbench_absence_of_bound_v5_failure_is_adequacy_proof": false,
     "cursorbench_one_v5_pass_is_scope_complete_adequacy_proof": false,
     "cursorbench_selector_work_authorized_now": false,
-    "cursorbench_next_proof_object": "CURSORBENCH_V5_TARGET_RELEVANT_POLICY_ADEQUACY_REGION_V1"
+    "cursorbench_next_proof_object": "CURSORBENCH_V5_TARGET_RELEVANT_POLICY_ADEQUACY_REGION_V1",
+    "r2_sec_standard_xbrl_companyconcept_source_native_semantics_bound": true,
+    "r2_sec_standard_xbrl_source_native_policy_adequacy_claimed": false
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -2208,14 +2210,14 @@
   },
   "r2_scheduler_precedence": {
     "current_authority_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
-    "current_scheduler_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V46.json",
-    "current_scheduler_git_blob_sha": "4245cdb3797012ac0308d27d703189fe71bba77e",
+    "current_scheduler_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V47.json",
+    "current_scheduler_git_blob_sha": "d9170e11c2f396aac5798db5dd3d6a1454c12b26",
     "single_live_primitive": "ESCAPE_POLICY_ADEQUACY",
     "general_mechanism_missing": false,
     "enumerated_active_zero_reality_cell_count": 0,
     "enumerated_external_required_sleep_cell_count": 0,
     "historical_root2_scheduler_fields_authoritative_for_current_r2": false,
-    "rule": "CURRENT_R2_POINTER_AND_V46_CONTENT_ADDRESSED_SCHEDULER_HAVE_PRECEDENCE__THIRTY_ONE_DIRECT_ROUTES__TWENTY_EIGHT_BOUNDED_FAMILIES__TEN_VERIFIED_FINANCE_SUBREGIONS__SCOPED_PROOF_CARRYING_DOMAIN_MAPPING_BOUND__ONE_GENUINE_FINANCE_SEMANTIC_RESIDUAL_REMAINS_INTERNAL_UNSOLVED__GDPVAL_DORMANT",
+    "rule": "CURRENT_R2_POINTER_AND_V47_CONTENT_ADDRESSED_SCHEDULER_HAVE_PRECEDENCE__THIRTY_ONE_DIRECT_ROUTES__TWENTY_EIGHT_BOUNDED_FAMILIES__TEN_VERIFIED_FINANCE_DIRECT_SUBREGIONS__SCOPED_PROOF_CARRYING_DOMAIN_MAPPING_AND_VERIFIED_STANDARD_SEC_XBRL_COMPANYCONCEPT_SOURCE_NATIVE_SEMANTICS_BOUND__ONE_GENUINE_FINANCE_SEMANTIC_RESIDUAL_REMAINS_INTERNAL_UNSOLVED__GDPVAL_DORMANT",
     "current_authority_pointer_mutable": true,
     "current_authority_pointer_blob_is_not_load_bearing": true,
     "binding_law": "CURRENT_POINTERS_BIND_BY_CANONICAL_PATH_IDENTITY__IMMUTABLE_VERSIONED_AUTHORITY_ARTIFACTS_BIND_BY_GIT_BLOB_SHA",
@@ -2420,7 +2422,7 @@
     "terminal_remains_false": true,
     "terminal_credit_delta": 0
   },
-  "live_scheduler": "ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V46",
+  "live_scheduler": "ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V47",
   "r2_v35_live_projection_reconciliation": {
     "status": "RECONCILED__CURRENT_R2_AND_TERMINAL_LIVE_PROJECTIONS_BIND_V35",
     "current_r2_blob_sha": "70cfd4ea77cd54ed321edac7f59abe1aa2ff49ff",
@@ -2714,6 +2716,27 @@
     "scheduler_cut_git_blob_sha": "4245cdb3797012ac0308d27d703189fe71bba77e",
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "scoped_proof_carrying_domain_mapping_bound": true,
+    "terminal_credit_delta": 0
+  },
+  "r2_v47_sec_source_native_reconciliation": {
+    "status": "RECONCILED__CURRENT_R2_AND_TERMINAL_LIVE_PROJECTIONS_BIND_V47__TERMINAL_STILL_FALSE",
+    "current_r2_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+    "current_r2_git_blob_sha": "0bdeadf7147e879c642fb2ae1b8e0f972ff0630a",
+    "current_r2_status": "ACTIVE_CURRENT_R2_AUTHORITY__V47__THIRTY_ONE_DIRECT_ROUTES__TWENTY_EIGHT_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__SCOPED_PROOF_CARRYING_DOMAIN_MAPPING_AND_SEC_STANDARD_XBRL_SOURCE_NATIVE_SEMANTICS_BOUND__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_REMAINS",
+    "scheduler_cut_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V47.json",
+    "scheduler_cut_git_blob_sha": "d9170e11c2f396aac5798db5dd3d6a1454c12b26",
+    "verification_path": "canonical/verification/R2_V47_SEC_SOURCE_NATIVE_RECONCILIATION_VERIFY_20261009_V1.json",
+    "verification_git_blob_sha": "7769524679268aadc597e30090b1a2d32fdcb155",
+    "sec_source_native_producer_blob_sha": "679ab4ccf981445f7149082d91df7343be5eef57",
+    "sec_source_native_verifier_blob_sha": "4281bf1212b518e08e5224625693d389810691bd",
+    "sec_public_replay_blob_sha": "65ded4111b60cb812a1344c48bfe65360698a1e6",
+    "direct_route_count": 31,
+    "exact_cell_count": 3,
+    "bounded_family_count": 28,
+    "primary_remaining_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
+    "generic_context_field_semantics_wake_refined_outside_sec_standard_xbrl_scope": true,
+    "terminal_remains_false": true,
+    "acceptance_credit_delta": 0,
     "terminal_credit_delta": 0
   }
 }
