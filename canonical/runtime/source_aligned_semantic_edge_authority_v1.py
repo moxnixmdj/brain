@@ -37,6 +37,7 @@ from canonical.runtime.semantic_relation_entailment_dag_v1 import (
 )
 
 SCHEMA = "PROJECT_BRAIN_SOURCE_ALIGNED_SEMANTIC_EDGE_AUTHORITY_V1"
+EVIDENCE_SCHEMA = "PROJECT_BRAIN_SOURCE_ALIGNED_SEMANTIC_EDGE_EVIDENCE_V1"
 CONCEPT_SEMANTICS_RECEIPT_SCHEMA = (
     "PROJECT_BRAIN_CONCEPT_SEMANTICS_AUTHORITY_RECEIPT_V1"
 )
@@ -468,3 +469,98 @@ def prove(
             "FAIL_CLOSED",
             reason=type(exc).__name__ + ":" + str(exc),
         )
+
+
+
+def evaluate_edge_evidence(
+    payload: Mapping[str, Any],
+    *,
+    concept_semantics_verifier: Callable[
+        [Mapping[str, Any]], Mapping[str, Any] | None
+    ] | None,
+    source_completeness_verifier: Callable[
+        [Mapping[str, Any]], Mapping[str, Any] | None
+    ] | None = None,
+    source_proof_verifier: Callable[..., Mapping[str, Any]] = verify_source_proof,
+) -> dict[str, Any]:
+    """Recompute one edge from a proof envelope.
+
+    The envelope is proposal/evidence material, never authority by itself.
+    This function is the intended bridge for semantic_relation_entailment_dag_v1:
+    the DAG may pass an envelope to a relation verifier, and this checker returns
+    a canonical edge only if every load-bearing component recomputes.
+    """
+    if not isinstance(payload, Mapping):
+        return _base("FAIL_CLOSED", reason="EDGE_EVIDENCE_NOT_OBJECT")
+    allowed = {
+        "schema",
+        "raw_span",
+        "source_id",
+        "scope_id",
+        "target_concept_id",
+        "direction",
+        "source_claims",
+        "target_formula",
+        "concept_semantics_receipt",
+        "typed_context",
+        "expected_typed_context_sha256",
+        "fact_source",
+        "fact_source_id",
+        "source_completeness_receipt",
+    }
+    extra = set(payload) - allowed
+    if extra:
+        return _base(
+            "FAIL_CLOSED",
+            reason="UNMODELED_EDGE_EVIDENCE_FIELDS:"
+            + ",".join(sorted(str(x) for x in extra)),
+        )
+    if payload.get("schema") != EVIDENCE_SCHEMA:
+        return _base("FAIL_CLOSED", reason="EDGE_EVIDENCE_SCHEMA_INVALID")
+
+    return prove(
+        payload.get("raw_span"),
+        source_id=payload.get("source_id"),
+        scope_id=payload.get("scope_id"),
+        target_concept_id=payload.get("target_concept_id"),
+        direction=payload.get("direction"),
+        source_claims=payload.get("source_claims", ()),
+        target_formula=payload.get("target_formula"),
+        concept_semantics_receipt=payload.get("concept_semantics_receipt"),
+        concept_semantics_verifier=concept_semantics_verifier,
+        typed_context=payload.get("typed_context"),
+        expected_typed_context_sha256=payload.get(
+            "expected_typed_context_sha256"
+        ),
+        fact_source=payload.get("fact_source"),
+        fact_source_id=payload.get("fact_source_id"),
+        source_completeness_receipt=payload.get(
+            "source_completeness_receipt"
+        ),
+        source_completeness_verifier=source_completeness_verifier,
+        source_proof_verifier=source_proof_verifier,
+    )
+
+
+def verify_edge_evidence(
+    payload: Mapping[str, Any],
+    *,
+    concept_semantics_verifier: Callable[
+        [Mapping[str, Any]], Mapping[str, Any] | None
+    ] | None,
+    source_completeness_verifier: Callable[
+        [Mapping[str, Any]], Mapping[str, Any] | None
+    ] | None = None,
+    source_proof_verifier: Callable[..., Mapping[str, Any]] = verify_source_proof,
+) -> Mapping[str, Any] | None:
+    """Return only a recomputed canonical DAG edge receipt, or None."""
+    result = evaluate_edge_evidence(
+        payload,
+        concept_semantics_verifier=concept_semantics_verifier,
+        source_completeness_verifier=source_completeness_verifier,
+        source_proof_verifier=source_proof_verifier,
+    )
+    receipt = result.get("edge_receipt") if isinstance(result, Mapping) else None
+    if result.get("pass") is not True or not isinstance(receipt, Mapping):
+        return None
+    return deepcopy(dict(receipt))
