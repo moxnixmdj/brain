@@ -1,0 +1,76 @@
+{
+  "schema": "PROJECT_BRAIN_R2_ROR_AUTHORITY_IDENTITY_DIRECT_ADEQUACY_VERIFY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__EXACT_ROR_AUTHORITY_IDENTITY__BRANCH_REGRESSION_23_OF_23__REAL_WORLDBANK_ROR_CONVERGENCE_PASS__ZERO_CREDIT",
+  "subject": {
+    "family_runtime": {
+      "path": "canonical/runtime/r2_ror_authority_identity_direct_adequacy_v1.py",
+      "git_blob_sha": "30a661044f4c18ff14c2f15cdc46187c3be184f5"
+    },
+    "direct_router": {
+      "path": "canonical/runtime/r2_direct_end_to_end_adequacy_v1.py",
+      "git_blob_sha": "bb854d7a51820dcbc7f3f47f37c3de89f839573e"
+    },
+    "family_tests": {
+      "path": "canonical/tests/test_r2_ror_authority_identity_direct_adequacy_v1.py",
+      "git_blob_sha": "fc7a129563fce34f58596a27814e766de575695f"
+    },
+    "integration_tests": {
+      "path": "canonical/tests/test_r2_ror_authority_identity_direct_integration_v1.py",
+      "git_blob_sha": "929ff964f3bb70849ae1025934577e6dfbbc238c"
+    }
+  },
+  "admitted_semantics": {
+    "input": "ONE_REPOSITORY_LOCAL_JSON_ENVELOPE_WITH_EXACTLY_ONE_CANDIDATE_OBJECT",
+    "producer_capability_id": "source.authority.identity.ror",
+    "producer_adapter": "source_authority_binding_ror",
+    "independent_verifier": "curl+ROR_v2_exact_active_domain_binding",
+    "acceptance": "ONE_ACTIVE_EXACT_DOMAIN_BINDING_WITH_IDENTICAL_ROR_ID_ORGANIZATION_NAME_AND_MATCHED_DOMAIN",
+    "input_immutability_required": true,
+    "transactional_output": true,
+    "network_effect_class": "READ_ONLY_ROR_V2_QUERY"
+  },
+  "focused_replay": {
+    "carrier": "brain-live-integrated-v1-run-20261008",
+    "family_plus_integration_plus_direct_router": "23_OF_23_PASS",
+    "multi_candidate_envelope_negative": "PASS_FAIL_CLOSED",
+    "independent_identity_mismatch_negative": "PASS_ROLLBACK"
+  },
+  "real_public_replay": {
+    "candidate_host": "worldbank.org",
+    "producer_status": "AUTHORITY_IDENTITY_VERIFIED",
+    "independent_status": "VERIFIED",
+    "ror_id": "https://ror.org/02md09461",
+    "organization_name": "World Bank Group",
+    "producer_independent_convergence": true
+  },
+  "inherited_producer_qualification": {
+    "capability_receipt": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_ROR_SOURCE_AUTHORITY_IDENTITY_PROMOTION_20260930_V1.json",
+    "exact_producer_blob": "9396ff7169b274af9bbfbe736e004587631e3b05",
+    "public_run_id": 36676947006,
+    "independent_remote_verification": "PASS"
+  },
+  "proved": [
+    "RAW_GOAL_EXACTLY_BINDS_ONE_LOCAL_SINGLE_CANDIDATE_ENVELOPE_AND_ONE_LOCAL_OUTPUT",
+    "NO_NETWORK_READ_OCCURS_DURING_PREFLIGHT",
+    "SUCCESS_REQUIRES_ONE_ACTIVE_EXACT_ROR_DOMAIN_BINDING",
+    "SUCCESS_REQUIRES_PRODUCER_AND_INDEPENDENT_ROR_READ_TO_AGREE_ON_ROR_ID_ORGANIZATION_NAME_AND_MATCHED_DOMAIN",
+    "INPUT_BYTES_MUST_REMAIN_IMMUTABLE",
+    "MATCHED_FAILURE_ROLLS_BACK_OUTPUT",
+    "MATCHED_FAILURE_CANNOT_FALL_THROUGH_TO_ANOTHER_DIRECT_ROUTE"
+  ],
+  "hard_nonclaims": [
+    "NO_PRIMARY_SOURCE_STATUS_AUTHORITY",
+    "NO_OBJECTIVE_RELEVANCE_AUTHORITY",
+    "NO_FACTUAL_CORRECTNESS_OR_CLAIM_ENDORSEMENT_AUTHORITY",
+    "NO_EVIDENCE_SUFFICIENCY_AUTHORITY",
+    "NO_ORGANIZATIONAL_INDEPENDENCE_AUTHORITY_YET",
+    "NO_PARENT_DOMAIN_INFERENCE_OR_FUZZY_IDENTITY_MATCHING",
+    "NO_CLAIM_OPEN_WORLD_R2_COVERAGE_IS_COMPLETE",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
