@@ -1,0 +1,139 @@
+{
+  "requirements": [
+    {
+      "id": "R_SOURCE",
+      "critical": true,
+      "transform_kinds": [],
+      "must_detect_failure_modes": [
+        "source_identity_drift"
+      ],
+      "builder_dependencies": [
+        "raw:task",
+        "builder:v5"
+      ]
+    },
+    {
+      "id": "R_WAL",
+      "critical": true,
+      "transform_kinds": [
+        "state_transition"
+      ],
+      "must_detect_failure_modes": [
+        "recovery_semantics",
+        "durability_visibility",
+        "schema_detachment",
+        "concurrency_ordering"
+      ],
+      "builder_dependencies": [
+        "raw:task",
+        "builder:v5"
+      ]
+    },
+    {
+      "id": "R_ARTIFACT",
+      "critical": true,
+      "transform_kinds": [
+        "artifact"
+      ],
+      "must_detect_failure_modes": [
+        "forbidden_ops",
+        "dependency_closure",
+        "performance_budget",
+        "structure_preservation"
+      ],
+      "builder_dependencies": [
+        "raw:task",
+        "builder:v5"
+      ]
+    },
+    {
+      "id": "R_BOUNDARY",
+      "critical": true,
+      "transform_kinds": [],
+      "must_detect_failure_modes": [
+        "preterminal_information_violation"
+      ],
+      "builder_dependencies": [
+        "raw:task",
+        "builder:v5"
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "id": "C_SOURCE",
+      "covers": [
+        "R_SOURCE"
+      ],
+      "detects": [
+        "source_identity_drift"
+      ],
+      "dependencies": [
+        "raw:task",
+        "checker:git"
+      ],
+      "provenance": "independent_runtime_oracle",
+      "derived_from_builder_output": false
+    },
+    {
+      "id": "C_WAL",
+      "covers": [
+        "R_WAL"
+      ],
+      "detects": [
+        "idempotence",
+        "failure_recovery",
+        "recovery_semantics",
+        "durability_visibility",
+        "schema_detachment",
+        "concurrency_ordering"
+      ],
+      "dependencies": [
+        "raw:task",
+        "observation:runtime",
+        "checker:python"
+      ],
+      "provenance": "independent_runtime_oracle",
+      "derived_from_builder_output": false
+    },
+    {
+      "id": "C_ARTIFACT",
+      "covers": [
+        "R_ARTIFACT"
+      ],
+      "detects": [
+        "existence",
+        "schema",
+        "roundtrip_or_parse",
+        "forbidden_ops",
+        "dependency_closure",
+        "performance_budget",
+        "structure_preservation"
+      ],
+      "dependencies": [
+        "raw:task",
+        "observation:bytes",
+        "observation:runtime",
+        "checker:ast",
+        "checker:clean_runtime"
+      ],
+      "provenance": "independent_runtime_oracle",
+      "derived_from_builder_output": false
+    },
+    {
+      "id": "C_BOUNDARY",
+      "covers": [
+        "R_BOUNDARY"
+      ],
+      "detects": [
+        "preterminal_information_violation"
+      ],
+      "dependencies": [
+        "raw:task",
+        "checker:boundary"
+      ],
+      "provenance": "independent_runtime_oracle",
+      "derived_from_builder_output": false
+    }
+  ]
+}
