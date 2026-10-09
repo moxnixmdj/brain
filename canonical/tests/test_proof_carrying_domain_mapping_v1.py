@@ -138,10 +138,10 @@ class Tests(unittest.TestCase):
             source_id="doc:A",
             scope_id=SCOPE,
             candidate_concepts=candidates(),
-            proved_semantic_atoms=["function.loss_absorption"],
+            candidate_semantic_atoms=["function.loss_absorption"],
         )
         self.assertFalse(out["pass"], out)
-        self.assertEqual(out["status"], "COMPOSED")
+        self.assertEqual(out["status"], "UNRESOLVED")
         self.assertTrue(out["opaque_remainder_required"])
         self.assertFalse(out["fully_semantically_bound"])
         self.assertEqual(set(out["surviving_candidates"]), {"CCOB", "TLAC"})
@@ -226,13 +226,13 @@ class Tests(unittest.TestCase):
             source_id="doc:A",
             scope_id=SCOPE,
             candidate_concepts=candidates(),
-            proved_semantic_atoms=[
+            candidate_semantic_atoms=[
                 "embedding.nearest=CCOB",
                 "model.guess=CCOB",
             ],
         )
         self.assertFalse(out["pass"])
-        self.assertEqual(out["status"], "COMPOSED")
+        self.assertEqual(out["status"], "UNRESOLVED")
         self.assertFalse(out["semantic_truth_authority"])
         self.assertFalse(out["candidate_relations_are_authority"])
 
@@ -314,7 +314,7 @@ class Tests(unittest.TestCase):
         )
         self.assertTrue(out["opaque_remainder_required"])
 
-    def test_required_atom_refutation_rejects_only_that_candidate(self):
+    def test_unverified_evidence_cannot_delete_candidate(self):
         out = resolve(
             RAW,
             source_id="doc:A",
@@ -324,15 +324,14 @@ class Tests(unittest.TestCase):
                 {"atom": "regime.resolution", "state": "REFUTED"},
             ],
         )
-        self.assertNotIn("TLAC", out["surviving_candidates"])
+        self.assertIn("TLAC", out["surviving_candidates"])
         self.assertIn("CCOB", out["surviving_candidates"])
-        self.assertTrue(
-            any(
-                row["concept_id"] == "TLAC"
-                and row["reason"] == "EVIDENCE_CONTRACT_REFUTED"
-                for row in out["rejected_candidates"]
-            )
+        self.assertFalse(out["evidence_contracts_are_authority"])
+        tlac = next(
+            row for row in out["candidate_evaluations"]
+            if row["concept_id"] == "TLAC"
         )
+        self.assertTrue(tlac["contract"]["contract_refuted"])
 
     def test_fail_closed_on_relation_scope_rebinding_attempt(self):
         out = resolve(
@@ -350,6 +349,33 @@ class Tests(unittest.TestCase):
         self.assertFalse(out["pass"])
         self.assertEqual(out["status"], "FAIL_CLOSED")
         self.assertIn("RELATION_SCOPE_MISMATCH", out["reason"])
+
+    def test_verified_mapping_emits_only_verifier_generated_proved_atom(self):
+        out = resolve(
+            RAW,
+            source_id="doc:A",
+            scope_id=SCOPE,
+            candidate_concepts=candidates(),
+            candidate_semantic_atoms=["model.guess=CCOB"],
+            relation_problems={
+                "CCOB": {
+                    "required_relation": "SEMANTIC_IDENTITY",
+                    "explicit_definition_sources": [
+                        {
+                            "source_id": "doc:A",
+                            "scope_id": SCOPE,
+                            "source_text": (
+                                "Loss-absorbing cushion means capital conservation buffer."
+                            ),
+                        }
+                    ],
+                }
+            },
+        )
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(out["candidate_semantic_atoms"], ["model.guess=CCOB"])
+        self.assertEqual(len(out["proved_semantic_atoms"]), 1)
+        self.assertTrue(out["proved_semantic_atoms"][0].startswith("domain-relation-sha256:"))
 
     def test_no_terminal_authority_even_for_verified_mapping(self):
         out = resolve(
