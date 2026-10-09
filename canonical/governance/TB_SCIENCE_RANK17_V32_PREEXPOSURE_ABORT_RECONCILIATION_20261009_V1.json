@@ -8,19 +8,19 @@
   },
   "repair_verification": {
     "path": "canonical/verification/TB_SCIENCE_RANK17_RAW_TASK_PUNCTUATION_REPAIR_VERIFY_20261009_V1.json",
-    "git_blob_sha": "43890776ca25284e8f7db33952ec1af6e07e577d"
+    "git_blob_sha": "28ec71862357908bd2c868ca6494a9d89439a223"
   },
   "ledger": {
     "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261009_V32.json",
-    "git_blob_sha": "646e14081867ba2b394ba920d1133b92938851fb"
+    "git_blob_sha": "9c2f95b2d7946e374811321cde58d11f53704fd2"
   },
   "authority": {
     "path": "canonical/governance/TB_SCIENCE_RANK17_ONE_SLOT_EXECUTION_AUTHORITY_20261009_V4.json",
-    "git_blob_sha": "ebbe7b3d4707509bde94dd05f54dede77b8f152f"
+    "git_blob_sha": "1f0e1e7739eeaff67cac8ca5781a94c0f6ea8cf9"
   },
   "authority_verification": {
     "path": "canonical/verification/TB_SCIENCE_RANK17_ONE_SLOT_AUTHORITY_VERIFY_20261009_V4.json",
-    "git_blob_sha": "e7dfc2585669869a385838ece348a010534e6863"
+    "git_blob_sha": "d41a4f2e32f7ba94ea5dcc78aad8bc0a73394826"
   },
   "current_truth": {
     "consumed_slots": 16,
