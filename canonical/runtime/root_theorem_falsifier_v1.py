@@ -13,9 +13,17 @@ from __future__ import annotations
 import argparse
 import itertools
 import json
+from hashlib import sha1
+from pathlib import Path
 from typing import Any, Dict, Iterable, Mapping, Optional
 
 ROOTS = ("R1", "R2", "R3", "R4")
+
+from canonical.runtime.coverage_root_certificate_registry_guard_v1 import validate as validate_root_registry
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
+ROOT_REGISTRY_PATH = REPO_ROOT / "canonical/governance/COVERAGE_COMPLETENESS_ROOT_CERTIFICATE_REGISTRY_V1.json"
+MISSION_PATH = REPO_ROOT / "canonical/governance/CURRENT_MISSION_OBJECTIVE.json"
 
 BINDING_FIELDS = (
     "claim_id", "scope_sha256", "semantics_sha256", "carrier_schema_id",
@@ -63,12 +71,57 @@ def evaluate_binding_coherence(data: Mapping[str, Any]) -> Dict[str, Any]:
     return {"status": "PASS_EXACT_BINDING_COHERENCE", "coherent": True, "terminal_credit": 0}
 
 
+def _git_blob_sha(path: Path) -> str:
+    payload = path.read_bytes()
+    header = f"blob {len(payload)}\0".encode("ascii")
+    return sha1(header + payload).hexdigest()
+
+
+def evaluate_canonical_registry_authority() -> Dict[str, Any]:
+    try:
+        registry = json.loads(ROOT_REGISTRY_PATH.read_text(encoding="utf-8"))
+        mission_sha = _git_blob_sha(MISSION_PATH)
+    except (OSError, json.JSONDecodeError) as exc:
+        return {
+            "status": "UNKNOWN_FAIL_CLOSED",
+            "authorized": None,
+            "error": type(exc).__name__,
+            "terminal_credit": 0,
+        }
+
+    checked = validate_root_registry(
+        registry,
+        current_mission_blob_sha=mission_sha,
+    )
+    if not checked["pass"]:
+        return {
+            "status": "R4_CANONICAL_REGISTRY_INVALID",
+            "authorized": False,
+            "registry": checked,
+            "terminal_credit": 0,
+        }
+    if not checked["r4_proof_closure"]:
+        return {
+            "status": "R4_CANONICAL_ROOT_CERTIFICATES_OPEN",
+            "authorized": False,
+            "registry": checked,
+            "terminal_credit": 0,
+        }
+    return {
+        "status": "PASS_CANONICAL_ROOT_CERTIFICATE_AUTHORITY",
+        "authorized": True,
+        "registry": checked,
+        "terminal_credit": 0,
+    }
+
+
 def _effective_r4(value: Any, data: Mapping[str, Any]) -> Optional[bool]:
     trust = _tri(value)
     coherent = evaluate_binding_coherence(data)["coherent"]
-    if trust is False or coherent is False:
+    registry = evaluate_canonical_registry_authority()["authorized"]
+    if trust is False or coherent is False or registry is False:
         return False
-    if trust is None or coherent is None:
+    if trust is None or coherent is None or registry is None:
         return None
     return True
 
