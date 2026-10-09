@@ -21,4 +21,17 @@ jobs:
           python-version: "3.12"
       - run: python --version
       - run: python -m py_compile canonical/runtime/assurance_closure_compiler_v1.py canonical/tests/test_assurance_closure_compiler_v1.py
-      - run: python -m unittest canonical.tests.test_assurance_closure_compiler_v1 -v
+      - name: Run UVCK tests with durable summary
+        shell: bash
+        run: |
+          set +e
+          python -m unittest canonical.tests.test_assurance_closure_compiler_v1 -v > uvck-test.log 2>&1
+          rc=$?
+          cat uvck-test.log
+          {
+            echo '### UVCK unittest output'
+            echo '```text'
+            tail -n 200 uvck-test.log
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          exit "$rc"
