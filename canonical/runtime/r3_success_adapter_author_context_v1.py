@@ -62,6 +62,12 @@ def _digest(value: Any) -> str:
     return "sha256:" + sha256(_canon(value).encode("utf-8")).hexdigest()
 
 
+def context_sha256(value: Mapping[str, Any]) -> str:
+    base = dict(value)
+    base.pop("context_sha256", None)
+    return _digest(base)
+
+
 def _symbol(value: Any) -> str | None:
     raw = str(value or "").strip()
     if not raw:
@@ -229,5 +235,5 @@ def compile_context(
         "promotion_authority": False,
         "terminal_authority": False,
     }
-    out["context_sha256"] = _digest(out)
+    out["context_sha256"] = context_sha256(out)
     return out
