@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_V50_LIVE_PROJECTION_TRUTH_REPAIR_VERIFY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__EXACT_GITHUB_BYTES__CURRENT_V50_PATH_HASH_REPAIRED__ONE_SHOT_CURRENT_R2_RECONCILED__TERMINAL_FALSE__ZERO_CREDIT",
+  "branch": "truth-v50-live-projection-repair-20261009",
+  "tested_branch_head": "72683459bffbbc9a66b48f52bcc1a8d64cd37e49",
+  "exact_blobs": {
+    "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V50.json": "eba5d37c4ac9bd359f745b04b0691113bd200a70",
+    "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json": "128dd602e8b0935098a4f851fab9055efd778622",
+    "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json": "6b1949c127a632f19bda21f535668958d8d8ba2b",
+    "canonical/governance/CURRENT_ONE_SHOT_REALITY_CLOSURE.json": "24526adaafb4b078fe185a2cdfdc581022e4feb1"
+  },
+  "defect_repairs": [
+    {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+      "defect": "CURRENT_R2_V50_SCHEDULER_PATH_WAS_PAIRED_WITH_V48_SCHEDULER_GIT_BLOB_SHA",
+      "prior_git_blob_sha": "989d5ed04f1b706cf1f2105d518d768114f68fb7",
+      "repaired_git_blob_sha": "eba5d37c4ac9bd359f745b04b0691113bd200a70"
+    },
+    {
+      "path": "canonical/governance/CURRENT_ONE_SHOT_REALITY_CLOSURE.json",
+      "defect": "CURRENT_R2_PROJECTION_STILL_REFERENCED_V45_AND_V46_AFTER_CANONICAL_R2_REACHED_V50",
+      "repaired_current_r2_version": "V50",
+      "repaired_scheduler_git_blob_sha": "eba5d37c4ac9bd359f745b04b0691113bd200a70"
+    }
+  ],
+  "independent_exact_byte_verification": {
+    "carrier": "brain-live-integrated-v1-run-20261008",
+    "status": "PASS__CURRENT_V50_LIVE_PROJECTION_TRUTH_REPAIR",
+    "log_sha256": "9ec6981f30a8d5dd0cd450d627e4e6eccc772abbf1eb9358c167d797e2984842",
+    "terminal_pointer_revision": 75,
+    "active_wake_count": 11,
+    "primary_internal_unsolved_count": 1,
+    "direct_route_count": 33,
+    "bounded_family_count": 30,
+    "terminal": false,
+    "terminal_credit_delta": 0
+  },
+  "preserved_truth": {
+    "full_fibo_q2_2026_bounded_authority": true,
+    "fixed_point_direct_reentry_bound": true,
+    "current_primary_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
+    "current_primary_cell_state": "INTERNAL_UNSOLVED__PENDING_ACQUISITION_OR_EXPERIMENT",
+    "information_theoretic_externality_proved": false,
+    "r3_current_internal_unsolved": false,
+    "terminal": false
+  },
+  "accounting": {
+    "capability_credit_delta": 0,
+    "direct_route_count_delta": 0,
+    "bounded_family_count_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
