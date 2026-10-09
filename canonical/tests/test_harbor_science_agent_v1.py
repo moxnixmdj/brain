@@ -293,18 +293,74 @@ class ScienceAgentTests(unittest.TestCase):
             {"material_requirements":["R2"],"candidates":[{"action_id":"b","covers":["R2"],"command":"echo bad","verify_command":"echo verify"}]},
         ]
         with patch.object(s.science_planner, "plan", planner(outputs)):
-            with self.assertRaisesRegex(RuntimeError,"COVERAGE_OUTSIDE_CONTRACT"):
-                asyncio.run(s.run_science_goal("goal",env,max_cycles=2))
+            result=asyncio.run(s.run_science_goal("goal",env,max_cycles=2))
+        self.assertEqual(result["material_requirements"],["R1"])
+        self.assertEqual(result["resolved_requirements"],[])
+        self.assertEqual(result["status"],"BLOCKED_MAX_CYCLES_NO_BRAIN_AUTHORIZED_FINISH")
+        self.assertNotIn("echo bad",env.commands)
+        rejected=[
+            row for row in result["trace"]
+            if row.get("kind")=="BRAIN_CANDIDATE_REJECTED"
+        ]
+        self.assertEqual(len(rejected),1)
+        self.assertEqual(rejected[0]["action_id"],"b")
+        self.assertEqual(rejected[0]["reason"],"SCIENCE_COVERAGE_OUTSIDE_CONTRACT")
+        self.assertEqual(rejected[0]["unknown_covers"],["R2"])
+        self.assertFalse(rejected[0]["executed"])
+        self.assertFalse(rejected[0]["coverage_promoted"])
+
+    def test_invalid_cover_candidate_does_not_kill_valid_sibling(self):
+        env,result=self.run_goal([{
+            "material_requirements":["R1"],
+            "candidates":[
+                {"action_id":"bad","covers":["R2"],"command":"echo must-not-run","verify_command":"echo verify"},
+                {"action_id":"good","covers":["R1"],"command":"echo good","verify_command":"echo verify"},
+            ],
+        }])
+        self.assertIn("echo good",env.commands)
+        self.assertNotIn("echo must-not-run",env.commands)
+        self.assertEqual(result["status"],"SUBMISSION_READY__RAW_TASK_ACCEPTANCE_PENDING_EXTERNAL_INDEPENDENT_VERIFIER")
+        self.assertEqual(result["resolved_requirements"],["R1"])
+        rejected=[
+            row for row in result["trace"]
+            if row.get("kind")=="BRAIN_CANDIDATE_REJECTED"
+        ]
+        self.assertEqual(len(rejected),1)
+        self.assertEqual(rejected[0]["action_id"],"bad")
+        self.assertEqual(rejected[0]["unknown_covers"],["R2"])
+
+    def test_dependency_on_rejected_candidate_is_rejected_transitively(self):
+        env,result=self.run_goal([{
+            "material_requirements":["R1"],
+            "candidates":[
+                {"action_id":"bad","covers":["R2"],"command":"echo bad","verify_command":"echo verify"},
+                {"action_id":"dependent","covers":["R1"],"depends_on":["bad"],"command":"echo dependent","verify_command":"echo verify"},
+            ],
+        }])
+        self.assertNotIn("echo bad",env.commands)
+        self.assertNotIn("echo dependent",env.commands)
+        self.assertEqual(result["resolved_requirements"],[])
+        rejected={
+            row.get("action_id"):row.get("reason")
+            for row in result["trace"]
+            if row.get("kind")=="BRAIN_CANDIDATE_REJECTED"
+        }
+        self.assertEqual(rejected["bad"],"SCIENCE_COVERAGE_OUTSIDE_CONTRACT")
+        self.assertEqual(
+            rejected["dependent"],
+            "SCIENCE_DEPENDS_ON_REJECTED_OR_UNKNOWN_ACTION",
+        )
 
     def test_malformed_later_requirement_redeclaration_is_ignored(self):
         frozen=["R1","BRAIN_DELIVERABLE_01"]
         raw={"material_requirements":{"not":"a list"},"finish_summary":"descriptive"}
-        requirements,candidates,summary=s._extract_contract(
+        requirements,candidates,summary,rejections=s._extract_contract(
             raw,frozen,mandatory_requirements=["BRAIN_DELIVERABLE_01"]
         )
         self.assertEqual(requirements,frozen)
         self.assertEqual(candidates,[])
         self.assertEqual(summary,"descriptive")
+        self.assertEqual(rejections,[])
 
     def test_command_policy_rejects_network_acquisition(self):
         env=Env()
