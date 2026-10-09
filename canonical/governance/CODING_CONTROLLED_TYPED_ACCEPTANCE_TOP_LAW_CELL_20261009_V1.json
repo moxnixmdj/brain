@@ -1,0 +1,35 @@
+{
+ "schema":"PROJECT_BRAIN_CODING_CONTROLLED_TYPED_ACCEPTANCE_TOP_LAW_CELL_V1",
+ "date":"2026-10-09",
+ "status":"CANDIDATE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+ "behavior_id":"SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+ "policy_id":"CODING_CONTROLLED_TYPED_ACCEPTANCE_MODEL_POLICY_V1",
+ "policy_condition":{"op":"ATOM","id":"CODING_CONTROLLED_TYPED_ACCEPTANCE_SINGLE_CONSTRAINT_CELL_V1"},
+ "selected_cell":{
+  "membership_self_certified":false,
+  "requires_independent_source_and_field_schema_membership_proof":true,
+  "operative_requirements":"SUPPORTED_CONTROLLED_GRAMMAR_ONLY",
+  "ignored_source_units_must_be_proved_nonoperative":true,
+  "field_types":["number","boolean"],
+  "requirements_per_field":1
+ },
+ "exact_policy":{"path":"canonical/runtime/coding_controlled_typed_acceptance_policy_v1.py","git_blob_sha":"53532d1ef42034aeb3dbb864eab4181564806b14"},
+ "policy_tests":{"path":"canonical/tests/test_coding_controlled_typed_acceptance_policy_v1.py","git_blob_sha":"ffe3db082d210ec9cda12412b29adb5af89af509"},
+ "theorem":{
+  "statement":"IF_CELL_MEMBERSHIP_IS_INDEPENDENTLY_PROVED__THE_POLICY_COMPILES_EVERY_OPERATIVE_REQUIREMENT__LIVE_REVERIFIES_ONE_ACCEPTED_BASELINE__AND_LIVE_REVERIFIES_ONE_SINGLE_FIELD_REJECTED_FALSIFIER_PER_REQUIREMENT__SO_THE_ACCEPTANCE_MODEL_AND_DISCRIMINATING_COUNTEREXAMPLES_ARE_COMPLETE_FOR_THIS_SELECTED_CELL.",
+  "objective_upper_bound":1,
+  "brain_lower_bound_if_verified":1,
+  "empirical_generalization_used":false
+ },
+ "hard_nonclaims":[
+  "NO_CONTEXT_MEMBERSHIP_SELF_CERTIFICATION",
+  "NO_ARBITRARY_NATURAL_LANGUAGE_CLAIM",
+  "NO_SOFTWARE_IMPLEMENTATION_CORRECTNESS_CLAIM",
+  "NO_HIDDEN_CURSORBENCH_MEMBERSHIP_CLAIM",
+  "NO_BENCHMARK_OR_TERMINAL_CREDIT"
+ ],
+ "accounting":{"incremental_spend_usd":0,"acceptance_credit_delta":0,"family_credit_delta":0,"capability_credit_delta":0,"ownership_credit_delta":0,"terminal_credit_delta":0},
+ "promotion_authority":false,
+ "terminal_authority":false,
+ "independent_verification_required":true
+}
