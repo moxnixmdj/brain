@@ -251,6 +251,131 @@ def evaluate_permanent_deletion(
     }
 
 
+
+def select_effective_for_scope(
+    candidates: Sequence[Mapping[str, Any]],
+    *,
+    default_capability_id: str,
+    cost_model_id: str = "CURRENT",
+    override: Mapping[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Select the best verified default frontier while preserving scoped user choice.
+
+    Global behavior is monotonic with respect to proved current-cost dominance:
+    an objectively dominated incumbent leaves the hot frontier. Preserved verified
+    implementations remain addressable for explicit, bounded user-requested replay.
+
+    A scoped override never mutates the global frontier, never promotes itself,
+    and never survives the named scope. This function grants no execution authority;
+    downstream capability and safety gates still apply.
+    """
+    rows = [_require_candidate(row) for row in candidates]
+    ids = [_s(row["capability_id"]) for row in rows]
+    if len(ids) != len(set(ids)):
+        raise OptionPreservationError("CAPABILITY_ID_DUPLICATE")
+
+    default_id = _s(default_capability_id)
+    if not default_id or default_id not in set(ids):
+        raise OptionPreservationError("DEFAULT_CAPABILITY_ID_INVALID")
+
+    by_id = {_s(row["capability_id"]): row for row in rows}
+    incumbent = by_id[default_id]
+    semantic = _s(incumbent["semantic_contract_sha256"])
+    family = [
+        row for row in rows
+        if _s(row["semantic_contract_sha256"]) == semantic
+    ]
+    frontier = select_active_frontier(family, cost_model_id=cost_model_id)
+    active_ids = list(frontier["active_capability_ids"])
+
+    incumbent_is_active = default_id in set(active_ids)
+    if incumbent_is_active:
+        preferred_default = default_id
+        default_transition = "INCUMBENT_REMAINS_NONDOMINATED"
+    elif len(active_ids) == 1:
+        preferred_default = active_ids[0]
+        default_transition = "OBJECTIVELY_DOMINATED_INCUMBENT_REPLACED"
+    else:
+        preferred_default = None
+        default_transition = (
+            "DOMINATED_INCUMBENT_REMOVED__MULTIPLE_NONDOMINATED_REPLACEMENTS"
+        )
+
+    base = {
+        "schema": SCHEMA,
+        "status": (
+            "OPTION_PRESERVING_DEFAULT_SELECTED"
+            if preferred_default is not None
+            else "OPEN__TASK_PREFERENCE_REQUIRED_ACROSS_NONDOMINATED_FRONTIER"
+        ),
+        "pass": preferred_default is not None,
+        "semantic_contract_sha256": semantic,
+        "cost_model_id": _s(cost_model_id) or "CURRENT",
+        "prior_default_capability_id": default_id,
+        "global_active_capability_ids": active_ids,
+        "global_preferred_default_capability_id": preferred_default,
+        "default_transition": default_transition,
+        "retired": frontier["retired"],
+        "override_active": False,
+        "effective_capability_id": preferred_default,
+        "global_frontier_mutated_by_override": False,
+        "override_persists_after_scope": False,
+        "promotion_authority": False,
+        "execution_authority": False,
+        "physical_deletion_authority": False,
+        "terminal_authority": False,
+        "terminal_credit_delta": 0,
+    }
+
+    if override is None:
+        return base
+    if not isinstance(override, Mapping):
+        raise OptionPreservationError("OVERRIDE_NOT_OBJECT")
+    allowed = {
+        "requested_capability_id",
+        "scope_id",
+        "explicit_user_request",
+        "restore_after_scope",
+    }
+    extra = set(override) - allowed
+    if extra:
+        raise OptionPreservationError(
+            "UNMODELED_OVERRIDE_FIELDS:" + ",".join(sorted(extra))
+        )
+
+    requested = _s(override.get("requested_capability_id"))
+    scope_id = _s(override.get("scope_id"))
+    if override.get("explicit_user_request") is not True:
+        raise OptionPreservationError("EXPLICIT_USER_OVERRIDE_REQUIRED")
+    if override.get("restore_after_scope") is not True:
+        raise OptionPreservationError("OVERRIDE_MUST_RESTORE_AFTER_SCOPE")
+    if not requested or requested not in by_id:
+        raise OptionPreservationError("REQUESTED_OVERRIDE_CAPABILITY_INVALID")
+    if not scope_id:
+        raise OptionPreservationError("OVERRIDE_SCOPE_ID_REQUIRED")
+    if _s(by_id[requested]["semantic_contract_sha256"]) != semantic:
+        raise OptionPreservationError("OVERRIDE_SEMANTIC_CONTRACT_MISMATCH")
+
+    return {
+        **base,
+        "status": "SCOPED_VERIFIED_CAPABILITY_OVERRIDE_SELECTED",
+        "pass": True,
+        "override_active": True,
+        "override_scope_id": scope_id,
+        "effective_capability_id": requested,
+        "requested_capability_was_globally_active": requested in set(active_ids),
+        "requested_capability_was_preserved_retired": requested not in set(active_ids),
+        "global_frontier_mutated_by_override": False,
+        "override_persists_after_scope": False,
+        "override_can_self_promote": False,
+        "override_can_delete_replacement": False,
+        "rule": (
+            "EXPLICIT_SCOPED_USER_SELECTION_MAY_REPLAY_A_PRESERVED_VERIFIED_"
+            "IMPLEMENTATION_WITHOUT_REVERTING_GLOBAL_DEFAULTS"
+        ),
+    }
+
+
 def reextract_on_cost_model_change(
     candidates: Sequence[Mapping[str, Any]],
     *,
