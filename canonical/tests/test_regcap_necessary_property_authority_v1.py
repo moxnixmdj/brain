@@ -42,7 +42,7 @@ def fake_source_result(source_pack):
 
 class Tests(unittest.TestCase):
     def test_ccob_loss_absorption_is_one_way_authenticated_property(self):
-        with patch.object(regcap, "verify_pack", side_effect=fake_source_result):
+        with patch.object(regcap, "verify_projection_pack", side_effect=fake_source_result):
             out = regcap.verify_property_request(
                 request(regcap.CCOB, "FUNCTION::LOSS_ABSORPTION"),
                 repo_root=ROOT,
@@ -58,7 +58,7 @@ class Tests(unittest.TestCase):
         self.assertFalse(out["exact_concept_identity_authority"])
 
     def test_ccob_cet1_and_above_minimum_are_authenticated(self):
-        with patch.object(regcap, "verify_pack", side_effect=fake_source_result):
+        with patch.object(regcap, "verify_projection_pack", side_effect=fake_source_result):
             cet1 = regcap.verify_property_request(
                 request(regcap.CCOB, "COMPOSITION::CET1"),
                 repo_root=ROOT,
@@ -78,7 +78,7 @@ class Tests(unittest.TestCase):
             "COMPOSITION::CET1",
             "RELATION::EXTENDS_CCOB",
         ]
-        with patch.object(regcap, "verify_pack", side_effect=fake_source_result):
+        with patch.object(regcap, "verify_projection_pack", side_effect=fake_source_result):
             results = [
                 regcap.verify_property_request(
                     request(regcap.CCYB, prop),
@@ -95,7 +95,7 @@ class Tests(unittest.TestCase):
             "FUNCTION::RECAPITALISATION",
             "REGIME::RESOLUTION",
         ]
-        with patch.object(regcap, "verify_pack", side_effect=fake_source_result):
+        with patch.object(regcap, "verify_projection_pack", side_effect=fake_source_result):
             results = [
                 regcap.verify_property_request(
                     request(regcap.TLAC, prop),
@@ -105,8 +105,26 @@ class Tests(unittest.TestCase):
             ]
         self.assertTrue(all(x["pass"] for x in results), results)
 
+    def test_all_three_rivals_entail_same_dispositional_loss_absorption_atom(self):
+        with patch.object(regcap, "verify_projection_pack", side_effect=fake_source_result):
+            results = [
+                regcap.verify_property_request(
+                    request(concept, "DISPOSITION::LOSS_ABSORPTION"),
+                    repo_root=ROOT,
+                )
+                for concept in (regcap.CCOB, regcap.CCYB, regcap.TLAC)
+            ]
+        self.assertTrue(all(x["pass"] for x in results), results)
+        self.assertEqual(
+            {x["edge_receipt"]["target_id"] for x in results},
+            {"DISPOSITION::LOSS_ABSORPTION"},
+        )
+        self.assertTrue(
+            all(x["reverse_inference_authorized"] is False for x in results)
+        )
+
     def test_loss_absorption_property_does_not_reverse_classify_to_tlac(self):
-        with patch.object(regcap, "verify_pack", side_effect=fake_source_result):
+        with patch.object(regcap, "verify_projection_pack", side_effect=fake_source_result):
             out = regcap.verify_property_request(
                 request(
                     "FUNCTION::LOSS_ABSORPTION",
@@ -123,7 +141,7 @@ class Tests(unittest.TestCase):
         self.assertFalse(out["absence_means_false"])
 
     def test_unlisted_property_is_unknown_not_false(self):
-        with patch.object(regcap, "verify_pack", side_effect=fake_source_result):
+        with patch.object(regcap, "verify_projection_pack", side_effect=fake_source_result):
             out = regcap.verify_property_request(
                 request(regcap.CCOB, "REGIME::RESOLUTION"),
                 repo_root=ROOT,
@@ -185,7 +203,7 @@ class Tests(unittest.TestCase):
         self.assertIn("PACK_GIT_BLOB_DRIFT", out["reason"])
 
     def test_authority_never_grants_terminal_credit(self):
-        with patch.object(regcap, "verify_pack", side_effect=fake_source_result):
+        with patch.object(regcap, "verify_projection_pack", side_effect=fake_source_result):
             out = regcap.verify_property_request(
                 request(regcap.TLAC, "REGIME::RESOLUTION"),
                 repo_root=ROOT,
