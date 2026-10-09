@@ -272,8 +272,8 @@ def make_provider(
         raise ValueError("INDEPENDENT_VERIFIER_CALLABLE_REQUIRED")
     if not callable(frontier_committer):
         raise ValueError("FRONTIER_COMMITTER_CALLABLE_REQUIRED")
-    if existing_receipt_lookup is not None and not callable(existing_receipt_lookup):
-        raise ValueError("EXISTING_RECEIPT_LOOKUP_MUST_BE_CALLABLE")
+    if not callable(existing_receipt_lookup):
+        raise ValueError("EXISTING_RECEIPT_LOOKUP_CALLABLE_REQUIRED")
     if not isinstance(discovery_delegated, bool):
         raise ValueError("DISCOVERY_DELEGATED_BOOLEAN_REQUIRED")
     if isinstance(max_backend_actions, bool) or not isinstance(max_backend_actions, int):
@@ -311,43 +311,42 @@ def make_provider(
             if not request_id:
                 raise EvidenceAcquisitionProviderError("REQUEST_ID_REQUIRED")
 
-            if existing_receipt_lookup is not None:
-                lookup_attempted = True
-                existing = _existing_rows(existing_receipt_lookup(deepcopy(request)))
+            lookup_attempted = True
+            existing = _existing_rows(existing_receipt_lookup(deepcopy(request)))
+            trace.append({
+                "request_id": request_id,
+                "stage": "EXISTING_CONTENT_ADDRESSED_RECEIPT_LOOKUP",
+                "candidate_count": len(existing),
+            })
+            for row in existing:
+                verified = _verify_evidence(
+                    independent_verifier,
+                    request=request,
+                    evidence=row,
+                    source_kind="EXISTING_CONTENT_ADDRESSED_RECEIPT",
+                    source_surface=_text(row.get("source_surface")) or "EXISTING_RECEIPT",
+                )
+                if verified is None:
+                    continue
+                commit = _commit_verified_evidence(
+                    frontier_committer,
+                    request=request,
+                    verified=verified,
+                )
                 trace.append({
                     "request_id": request_id,
-                    "stage": "EXISTING_CONTENT_ADDRESSED_RECEIPT_LOOKUP",
-                    "candidate_count": len(existing),
+                    "stage": "EXISTING_RECEIPT_VERIFIED_AND_COMMITTED",
+                    "witness_id": verified.get("witness_id"),
+                    "commit_receipt_sha256": commit.get("commit_receipt_sha256"),
                 })
-                for row in existing:
-                    verified = _verify_evidence(
-                        independent_verifier,
-                        request=request,
-                        evidence=row,
-                        source_kind="EXISTING_CONTENT_ADDRESSED_RECEIPT",
-                        source_surface=_text(row.get("source_surface")) or "EXISTING_RECEIPT",
-                    )
-                    if verified is None:
-                        continue
-                    commit = _commit_verified_evidence(
-                        frontier_committer,
-                        request=request,
-                        verified=verified,
-                    )
-                    trace.append({
-                        "request_id": request_id,
-                        "stage": "EXISTING_RECEIPT_VERIFIED_AND_COMMITTED",
-                        "witness_id": verified.get("witness_id"),
-                        "commit_receipt_sha256": commit.get("commit_receipt_sha256"),
-                    })
-                    return _success_receipt(
-                        request=request,
-                        verified=verified,
-                        commit=commit,
-                        trace=trace,
-                        existing_reuse=True,
-                        acquisition_attempted=False,
-                    )
+                return _success_receipt(
+                    request=request,
+                    verified=verified,
+                    commit=commit,
+                    trace=trace,
+                    existing_reuse=True,
+                    acquisition_attempted=False,
+                )
 
             origin_result = origin.route({
                 "decision_relevant": True,
@@ -367,10 +366,15 @@ def make_provider(
             })
             if origin_result.get("pass") is not True:
                 continue
-            if origin_result.get("action") not in {
-                "RESEARCH_MINIMUM_AUTHENTICATED_FACT",
-                "OBSERVE_BOUND_SOURCE_ONLY",
-            }:
+            if origin_result.get("action") == "OBSERVE_BOUND_SOURCE_ONLY":
+                trace.append({
+                    "request_id": request_id,
+                    "stage": "BOUND_SOURCE_OBSERVATION_NOT_GLOBALLY_EXPANDED",
+                    "source_id": origin_result.get("source_id"),
+                    "status": "OPEN__DEDICATED_BOUND_SOURCE_PROVIDER_REQUIRED",
+                })
+                continue
+            if origin_result.get("action") != "RESEARCH_MINIMUM_AUTHENTICATED_FACT":
                 continue
 
             residual = _request_to_residual(request)
