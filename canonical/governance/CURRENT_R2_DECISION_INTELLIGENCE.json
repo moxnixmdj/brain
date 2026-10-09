@@ -12,7 +12,7 @@
     "path": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
     "authority_kernel": "canonical/runtime/general_adequate_decision_controller_v1.py",
     "authority_kernel_git_blob_sha": "29872fc55a5ec577feea769cc919dc889899c2bd",
-    "fixed_point_git_blob_sha": "f8e99fd92dbea95116f8153d450bb53d290a883c",
+    "fixed_point_git_blob_sha": "a3a8af0872ccb6f69b0f154aed02b2471d9ddf7c",
     "fixed_point_native_control_policy_total": true,
     "fixed_point_regression_test_path": "canonical/tests/test_general_adequate_decision_fixed_point_v2.py",
     "fixed_point_regression_test_git_blob_sha": "46333fedc0a91113d83e8c32184fb37cafb9bccd"
