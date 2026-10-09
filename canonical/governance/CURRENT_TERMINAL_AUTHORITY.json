@@ -1435,7 +1435,13 @@
     "frontiercode_accepted_harness_or_adapter_bound": false,
     "frontiercode_zero_cost_terms_bound": false,
     "frontiercode_execution_authority": false,
-    "frontiercode_acquisition_state": "INTERNAL_UNSOLVED__PENDING_OWNER_INFORMATION"
+    "frontiercode_acquisition_state": "INTERNAL_UNSOLVED__PENDING_OWNER_INFORMATION",
+    "decision_relative_semantic_relation_control_bound": true,
+    "decision_relative_semantic_relation_control_verification": "19_OF_19_FOCUSED_PLUS_21_OF_21_ADJACENT_PASS",
+    "global_inferred_synonymy_required_as_terminal_capability": false,
+    "global_inferred_synonymy_closed": false,
+    "semantic_relation_current_rule": "PROVE_ONLY_THE_WEAKEST_SOUND_RELATION_WHOSE_TRUTH_CAN_CHANGE_THE_CURRENT_ACTION__EXACT_SOURCE_DECLARATION_OR_COMPLETE_TERMINAL_SIGNATURE_SUBSTITUTION_WHEN_AVAILABLE__OTHERWISE_ACQUIRE_ONLY_MINIMUM_SOURCE_ALIGNED_ENTAILMENT_ONTOLOGY_OR_WORD_SENSE_EVIDENCE",
+    "semantic_relation_terminal_credit_delta": 0
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -2113,14 +2119,14 @@
   },
   "r2_scheduler_precedence": {
     "current_authority_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
-    "current_scheduler_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V38.json",
-    "current_scheduler_git_blob_sha": "3da601384b017f2e6ac63e74e3e31dce26bfb1df",
+    "current_scheduler_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V39.json",
+    "current_scheduler_git_blob_sha": "a3de442ce7838ba43bc5550b596ad2aade446f13",
     "single_live_primitive": "ESCAPE_POLICY_ADEQUACY",
     "general_mechanism_missing": false,
     "enumerated_active_zero_reality_cell_count": 0,
     "enumerated_external_required_sleep_cell_count": 0,
     "historical_root2_scheduler_fields_authoritative_for_current_r2": false,
-    "rule": "CURRENT_R2_POINTER_AND_V38_CONTENT_ADDRESSED_SCHEDULER_HAVE_PRECEDENCE__TEN_VERIFIED_FINANCE_SUBREGIONS__REMAINING_RESIDUAL_IS_AMBIGUOUS_OR_IMPLICIT_COREFERENCE_BEYOND_VERIFIED_STRUCTURAL_FORMS__INFERRED_SYNONYMY__WORD_SENSE__ONTOLOGY__GENERAL_CROSS_DOCUMENT_OR_STRONGER_EXTERNAL_FACT_AUTHENTICATION__GDPVAL_DORMANT",
+    "rule": "CURRENT_R2_POINTER_AND_V39_CONTENT_ADDRESSED_SCHEDULER_HAVE_PRECEDENCE__TEN_VERIFIED_FINANCE_SUBREGIONS__GLOBAL_SYNONYMY_TARGET_REPLACED_BY_WEAKEST_SUFFICIENT_DECISION_RELATION_CONTROL__REMAINING_RESIDUAL_IS_AMBIGUOUS_OR_IMPLICIT_COREFERENCE_BEYOND_VERIFIED_STRUCTURAL_FORMS__DECISION_RELEVANT_NONEXPLICIT_SOURCE_ALIGNED_ENTAILMENT_OR_AUTHENTICATED_ONTOLOGY_IDENTITY__CONTEXT_WORD_SENSE__GENERAL_CROSS_DOCUMENT_OR_STRONGER_EXTERNAL_FACT_AUTHENTICATION__GDPVAL_DORMANT",
     "current_authority_pointer_mutable": true,
     "current_authority_pointer_blob_is_not_load_bearing": true,
     "binding_law": "CURRENT_POINTERS_BIND_BY_CANONICAL_PATH_IDENTITY__IMMUTABLE_VERSIONED_AUTHORITY_ARTIFACTS_BIND_BY_GIT_BLOB_SHA",
