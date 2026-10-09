@@ -2304,7 +2304,7 @@
   "r2_scheduler_precedence": {
     "current_authority_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
     "current_scheduler_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V50.json",
-    "current_scheduler_git_blob_sha": "989d5ed04f1b706cf1f2105d518d768114f68fb7",
+    "current_scheduler_git_blob_sha": "eba5d37c4ac9bd359f745b04b0691113bd200a70",
     "single_live_primitive": "ESCAPE_POLICY_ADEQUACY",
     "general_mechanism_missing": false,
     "enumerated_active_zero_reality_cell_count": 0,
@@ -2319,7 +2319,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 75,
+  "pointer_revision": 76,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
@@ -2935,6 +2935,17 @@
     "task_read": false,
     "task_started": false,
     "public_final_v4_reseal_pending": true,
+    "terminal_credit_delta": 0
+  },
+  "r2_v50_live_projection_truth_repair": {
+    "status": "REPAIRED__CURRENT_V50_SCHEDULER_PATH_AND_CONTENT_HASH_RECONCILED__TERMINAL_FALSE",
+    "defect": "CURRENT_R2_V50_SCHEDULER_PATH_WAS_PAIRED_WITH_HISTORICAL_V48_GIT_BLOB_SHA_IN_R2_SCHEDULER_PRECEDENCE",
+    "prior_scheduler_git_blob_sha": "989d5ed04f1b706cf1f2105d518d768114f68fb7",
+    "current_scheduler_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V50.json",
+    "current_scheduler_git_blob_sha": "eba5d37c4ac9bd359f745b04b0691113bd200a70",
+    "authoritative_source_scheduler_git_blob_sha": "eba5d37c4ac9bd359f745b04b0691113bd200a70",
+    "current_r2_pointer_git_blob_sha": "128dd602e8b0935098a4f851fab9055efd778622",
+    "terminal_remains_false": true,
     "terminal_credit_delta": 0
   }
 }
