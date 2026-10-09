@@ -97,6 +97,9 @@ class PlannerTests(unittest.TestCase):
         self.assertEqual(out["transport"],"PINNED_LOCAL_QWEN_LLAMA_CPP_TOOL_CALL__EXACT_SERVER_TOKEN_COUNT")
         self.assertEqual(out["model"],"brain-qwen3.5-9b")
         self.assertEqual(out["input_tokens"],1000)
+        self.assertEqual(out["server_context_tokens"],p.SERVER_CONTEXT_TOKENS)
+        self.assertEqual(out["reserved_completion_tokens"],p.MAX_TOOL_COMPLETION_TOKENS)
+        self.assertEqual(out["context_headroom_tokens"],p.SERVER_CONTEXT_TOKENS-1000-p.MAX_TOOL_COMPLETION_TOKENS)
         self.assertEqual(out["effective_timeout_s"],300)
         self.assertEqual(out["token_count_endpoint"],p.TOKEN_COUNT_ENDPOINT)
         self.assertEqual(p.extract_json_object(out["text"]),args)
@@ -162,8 +165,8 @@ class PlannerTests(unittest.TestCase):
         self.assertEqual(p.effective_timeout_s(8192,300),727)
         self.assertEqual(p.effective_timeout_s(8193,300),1265)
         self.assertEqual(p.effective_timeout_s(10000,300),1490)
-        max_input_with_reserved_completion=16384-p.MAX_TOOL_COMPLETION_TOKENS-1
-        self.assertEqual(max_input_with_reserved_completion,12287)
+        max_input_with_reserved_completion=p.SERVER_CONTEXT_TOKENS-p.MAX_TOOL_COMPLETION_TOKENS
+        self.assertEqual(max_input_with_reserved_completion,12288)
         self.assertEqual(p.effective_timeout_s(max_input_with_reserved_completion,300),1776)
         self.assertLessEqual(
             p.effective_timeout_s(max_input_with_reserved_completion,300),
@@ -197,6 +200,37 @@ class PlannerTests(unittest.TestCase):
         self.assertEqual(seen,[expected])
         self.assertEqual(out["input_tokens"],7142)
         self.assertEqual(out["effective_timeout_s"],expected)
+
+    def test_context_envelope_exact_boundary_is_accepted(self):
+        self.mock_count_input_tokens.return_value = p.SERVER_CONTEXT_TOKENS - p.MAX_TOOL_COMPLETION_TOKENS
+        args={
+            "material_requirements":["R1"],
+            "candidates":[{
+                "action_id":"A1",
+                "covers":["R1"],
+                "command":"echo x",
+                "verify_command":"test true",
+            }],
+        }
+        with patch.object(p.urllib.request,"urlopen",return_value=Response(tool_response(args))) as opened:
+            out=p.plan("synthetic",timeout_s=300)
+        self.assertEqual(out["context_headroom_tokens"],0)
+        self.assertEqual(opened.call_count,1)
+
+    def test_context_overflow_fails_before_inference(self):
+        self.mock_count_input_tokens.return_value = (
+            p.SERVER_CONTEXT_TOKENS - p.MAX_TOOL_COMPLETION_TOKENS + 1
+        )
+        with patch.object(p.urllib.request,"urlopen") as opened:
+            with self.assertRaisesRegex(Exception,"CONTEXT_ENVELOPE_EXCEEDED"):
+                p.plan("synthetic",timeout_s=300)
+        opened.assert_not_called()
+
+    def test_context_headroom_rejects_invalid_counts(self):
+        for value in (0,-1,True,1.5):
+            with self.subTest(value=value):
+                with self.assertRaisesRegex(Exception,"INPUT_TOKEN_COUNT_INVALID"):
+                    p.context_headroom_tokens(value)
 
     def test_decoded_command_length_is_enforced_after_transport(self):
         args={
@@ -282,8 +316,9 @@ class PlannerTests(unittest.TestCase):
         self.assertEqual(schema["maxItems"],p.MAX_CANDIDATES_PER_PROPOSAL)
         props=schema["items"]["properties"]
         self.assertIn("depends_on",props)
-        self.assertEqual(props["timeout_sec"]["maximum"],7200)
-        self.assertEqual(props["verify_timeout_sec"]["maximum"],3600)
+        self.assertEqual(props["timeout_sec"]["maximum"],p.MAX_EXEC_TIMEOUT_S)
+        self.assertEqual(props["verify_timeout_sec"]["maximum"],p.MAX_EXEC_TIMEOUT_S)
+        self.assertEqual(p.MAX_EXEC_TIMEOUT_S,3600)
 
     def test_plan_accepts_four_bounded_candidates(self):
         args={
