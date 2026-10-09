@@ -1,0 +1,89 @@
+{
+  "schema": "PROJECT_BRAIN_R2_GENERAL_CROSS_DOCUMENT_EFFECT_COMPOSITION_VERIFY_V1",
+  "date": "2026-10-09",
+  "branch": "r2-general-cross-document-effects-v1-current",
+  "pull_request": 3481,
+  "capability": "GENERAL_PROOF_CARRYING_CROSS_DOCUMENT_EFFECT_COMPOSITION",
+  "status": "VERIFIED_ISOLATED_COMPOSITION_AND_R2_INTEGRATION__FULL_CURRENT_TREE_CARRIER_NOT_EXECUTED",
+  "exact_scope": {
+    "input": "TYPED_CONTENT_ADDRESSED_DOCUMENT_EFFECTS",
+    "effect_classes": [
+      "DEFINE",
+      "REPLACE",
+      "EXCEPTION",
+      "OVERRIDE"
+    ],
+    "semantics": [
+      "EXPLICIT_CONDITIONS",
+      "VALID_TIME",
+      "EXPLICIT_SUPERSESSION_DAG"
+    ],
+    "success_condition": "ONE_COMMON_EFFECTIVE_VALUE_ACROSS_SURVIVING_MAXIMAL_EFFECTS",
+    "unresolved_policy": "INCOMPARABLE_DIFFERENT_VALUES_REMAIN_OPEN_AND_FALL_THROUGH_TO_GENERAL_R2"
+  },
+  "exact_pr_blobs": {
+    "canonical/runtime/cross_document_effect_calculus_v1.py": "b2629a5edb01d8ad09c88dfbab4441486b80ad65",
+    "canonical/runtime/cross_document_effect_calculus_verify_v1.py": "ad3b70f17be4e61d1fb1b639600d14bcebbcf729",
+    "canonical/runtime/r2_cross_document_effect_direct_adequacy_v1.py": "0377f5b533fba3966f4ba9b9eb53acf49a38b4a0",
+    "canonical/runtime/r2_direct_end_to_end_adequacy_v9.py": "41bd95b1fd275d797b900636cf88c8b0ecbbc03e",
+    "canonical/runtime/general_adequate_decision_fixed_point_v2.py": "a3a8af0872ccb6f69b0f154aed02b2471d9ddf7c",
+    "canonical/tests/test_cross_document_effect_calculus_v1.py": "9c9329640bd75f2169345a9e0331b2daceb9172e",
+    "canonical/tests/test_r2_cross_document_effect_direct_adequacy_v1.py": "f20b3da61e83c9f87870f8d51c17de871b177bc8"
+  },
+  "verification": {
+    "sprite": "brain-r2-grounded-frontier-verify-20261008",
+    "checkpoint": "v9",
+    "core_effect_calculus": {
+      "passed": 6,
+      "failed": 0
+    },
+    "direct_transactional_route": {
+      "passed": 4,
+      "failed": 0
+    },
+    "fixed_point_cleanroom": {
+      "passed": 18,
+      "failed": 0,
+      "real_modules": [
+        "r2_direct_end_to_end_adequacy_v9",
+        "r2_cross_document_effect_direct_adequacy_v1"
+      ],
+      "stubbed_surfaces": [
+        "general_adequate_decision_controller_v1",
+        "r2_existing_policy_adequacy_repair_v1",
+        "r2_basis_discriminator_repair_v1",
+        "r2_direct_end_to_end_adequacy_v8"
+      ],
+      "reason": "THE_EXISTING_FIXED_POINT_TEST_SUITE_PATCHES_THE_CONTROLLER_AND_REPAIR_SURFACES;V8_WAS_STUBBED_ONLY_AS_DELEGATED_FALLBACK_TO_AVOID_RECONSTRUCTING_UNRELATED_HISTORICAL_ROUTER_CHAIN"
+    },
+    "v9_routing_integration": {
+      "passed": 1,
+      "failed": 0,
+      "proved": [
+        "V9_SELECTS_CROSS_DOCUMENT_ROUTE_BEFORE_V8_FALLBACK",
+        "A_DEFINE_10_B_REPLACE_12_C_EXCEPTION_8_RETURNS_8",
+        "UNRELATED_REQUEST_DELEGATES_TO_V8_FALLBACK"
+      ]
+    },
+    "total_successful_checks": 29,
+    "behavioral_failures": 0
+  },
+  "github_actions": {
+    "run_id": 37893288298,
+    "attempts": 2,
+    "conclusion": "FAILURE_BEFORE_ANY_STEP_EXECUTED",
+    "runner_id": 0,
+    "steps": [],
+    "classification": "VERIFICATION_CARRIER_FAILURE_NOT_PYTHON_TEST_FAILURE"
+  },
+  "nonclaims": [
+    "NO_ARBITRARY_RAW_LANGUAGE_EFFECT_EXTRACTION",
+    "NO_IMPLICIT_PRECEDENCE_INFERENCE",
+    "NO_EXTERNAL_WORLD_TRUTH",
+    "NO_OPEN_WORLD_DOCUMENT_SEMANTIC_COMPLETENESS",
+    "NO_FULL_CURRENT_TREE_BROAD_SUITE_EXECUTION"
+  ],
+  "architectural_result": "CROSS_DOCUMENT_INTERACTION_REDUCED_FROM_PAIRWISE_HANDLERS_TO_GENERIC_COMPOSITION_OF_PROOF_CARRYING_EFFECTS",
+  "terminal_authority": false,
+  "terminal_credit_delta": 0
+}
