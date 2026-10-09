@@ -3,6 +3,7 @@ import json
 import unittest
 
 from canonical.runtime import cross_document_effect_semantic_lattice_v1 as l
+from canonical.runtime import cross_document_effect_semantic_lattice_verify_v1 as lv
 from canonical.runtime.certified_document_effect_relation_v1 import parse_effect_relations
 
 
@@ -99,6 +100,9 @@ class CrossDocumentEffectSemanticLatticeV1Tests(unittest.TestCase):
         atom=out["open_lattice_atoms"][0]
         self.assertEqual(atom["dimension"],"EFFECT_ID_INVENTORY")
         self.assertEqual(atom["state"],"TOP")
+        self.assertTrue(lv.verify(_problem({
+            "document_id":"A","source_id":"A",
+            "source_text":"The threshold might change.","claims":[]}),out)["verified"])
 
     def test_scope_exclusion_discharge_is_query_relative(self):
         doc=_doc("X",target="other",effect_ids=["X.o"],
@@ -140,6 +144,7 @@ class CrossDocumentEffectSemanticLatticeV1Tests(unittest.TestCase):
         self.assertTrue(out["pass"],out)
         self.assertEqual(out["effective_value"],"10")
         self.assertTrue(out["query_relative_effect_semantics_finite"])
+        self.assertTrue(lv.verify(_problem(doc),out)["verified"])
         self.assertEqual(out["open_lattice_atoms"],[])
 
     def test_define_then_replace_composes(self):
@@ -203,6 +208,7 @@ class CrossDocumentEffectSemanticLatticeV1Tests(unittest.TestCase):
         )
         self.assertEqual(set(out["possible_outcomes"]),{"10","11"})
         self.assertTrue(out["query_relative_effect_semantics_finite"])
+        self.assertTrue(lv.verify(_problem(a,b),out)["verified"])
 
 
 if __name__=="__main__":
