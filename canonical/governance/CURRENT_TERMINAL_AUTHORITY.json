@@ -1147,6 +1147,11 @@
       "path": "canonical/governance/CURSORBENCH_DEPENDENCY_PROVENANCE_MINCUT_20261009_V1.json",
       "git_blob_sha": "ea7da27bf6a6af958f6497ba9a296a18a6241079",
       "note": "ZERO_CURSOR_SPECIFIC_EXTERNAL_FACTS__ONE_BRAIN_CONTROLLED_PER_MODEL_AUDIT_REQUIRED__ATOM_TRUTH_STILL_OPEN__ZERO_CREDIT"
+    },
+    "cursorbench_route_b_information_mincut_20261009_v1": {
+      "path": "canonical/governance/CURSORBENCH_ROUTE_B_INFORMATION_MINCUT_20261009_V1.json",
+      "git_blob_sha": "71f23f774c6341170dbceff929da6308e59f7c3f",
+      "note": "THREE_IRREDUCIBLE_EXTERNAL_OR_SEMANTIC_TRUTH_OBJECTS_ACROSS_THREE_VERIFIER_BUNDLES__ZERO_CREDIT"
     }
   },
   "live_truth": {
@@ -1709,7 +1714,7 @@
     "cursorbench_absence_of_bound_v5_failure_is_adequacy_proof": false,
     "cursorbench_one_v5_pass_is_scope_complete_adequacy_proof": false,
     "cursorbench_selector_work_authorized_now": false,
-    "cursorbench_next_proof_object": "ACQUIRE_THREE_REAL_SAME_MODEL_TARGET_RELEVANT_EVIDENCE_BUNDLES__SOURCE_COVERAGE__DEPENDENCY_PROVENANCE__PREVERIFIER_INFORMATION_BOUNDARY__DO_NOT_REPEAT_ROUTE_A_STATIC_PUBLIC_SEARCH_ABSENT_SOURCE_DELTA",
+    "cursorbench_next_proof_object": "PARALLEL_ROUTE_B_INFORMATION_MINCUT__PROVE_TWO_SOURCE_SEMANTIC_OBJECTS_PLUS_ONE_CURRENT_4_0_PRETERMINAL_BOUNDARY_CONTINUITY_FACT__ON_FIRST_REAL_TARGET_CONTEXT_EXECUTE_ALL_BRAIN_CONTROLLED_CAPTURE_AND_AUDIT_WORK",
     "r2_sec_standard_xbrl_companyconcept_source_native_semantics_bound": true,
     "r2_sec_standard_xbrl_source_native_policy_adequacy_claimed": false,
     "cursorbench_advanced_coding_canonical_residual_count": 4,
@@ -1856,7 +1861,17 @@
     "cursorbench_dependency_provenance_external_cursor_specific_unknown_count": 0,
     "cursorbench_dependency_provenance_per_model_internal_audit_count": 1,
     "cursorbench_dependency_provenance_bundle_brain_controlled": true,
-    "cursorbench_dependency_provenance_bundle_blocked_on_cursor_owner_disclosure": false
+    "cursorbench_dependency_provenance_bundle_blocked_on_cursor_owner_disclosure": false,
+    "cursorbench_route_b_irreducible_truth_object_count": 3,
+    "cursorbench_route_b_irreducible_truth_objects": [
+      "RB_SC_SEMANTIC_MAPPING_AND_TERMINAL_MEANING",
+      "RB_SC_FAILURE_UNIVERSE_COMPLETENESS",
+      "RB_CURRENT_4_0_PRETERMINAL_BOUNDARY_CONTINUITY"
+    ],
+    "cursorbench_route_b_cursor_specific_external_owner_fact_count": 1,
+    "cursorbench_route_b_semantic_proof_object_count": 2,
+    "cursorbench_route_b_dependency_provenance_cursor_specific_external_fact_count": 0,
+    "cursorbench_route_b_brain_controlled_context_work_count": 6
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -2556,7 +2571,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 89,
+  "pointer_revision": 90,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
@@ -3390,6 +3405,18 @@
     "atom_truth_delta": 0,
     "route_b_real_bundle_count_unchanged": 3,
     "external_cursor_specific_unknown_count": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "cursorbench_route_b_information_mincut_reconciliation_20261009_v1": {
+    "source": {
+      "path": "canonical/governance/CURSORBENCH_ROUTE_B_INFORMATION_MINCUT_20261009_V1.json",
+      "git_blob_sha": "71f23f774c6341170dbceff929da6308e59f7c3f"
+    },
+    "result": "THREE_VERIFIER_BUNDLES_QUOTIENTED_TO_THREE_IRREDUCIBLE_TRUTH_OBJECTS",
+    "verifier_bundle_count": 3,
+    "irreducible_truth_object_count": 3,
+    "atom_truth_delta": 0,
     "acceptance_credit_delta": 0,
     "terminal_credit_delta": 0
   }
