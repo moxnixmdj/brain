@@ -121,31 +121,90 @@ def main() -> int:
         # ambient third-party site-packages are not admitted by default.
         sys.path.insert(0,str(work_root))
         from canonical.runtime import d_finality_execution_epoch_v1 as d_epoch
-        from canonical.runtime import unified_cognitive_fabric_v1 as fabric
 
         cert=authority.get("certificate")
         policy=authority.get("policy")
         cid=str(manifest.get("capability_id") or "").strip()
+        dispatch_kind=str(manifest.get("physical_dispatch_kind") or "").strip()
         if not isinstance(cert,Mapping) or not isinstance(policy,Mapping) or not cid:
             raise ChildError("AUTHORITY_INCOMPLETE")
+        if dispatch_kind not in {
+            "UNIFIED_FABRIC_V1",
+            "D_FINAL_STDLIB_BOUND_EXECUTOR_V1",
+        }:
+            raise ChildError("PHYSICAL_DISPATCH_KIND_UNSUPPORTED:"+dispatch_kind)
 
         with d_epoch.activate(cert,policy=policy,repo_root=work_root) as epoch:
             if epoch.root_capability_id!=cid:
                 raise ChildError("ROOT_CAPABILITY_ID_MISMATCH")
-            result=fabric.run(request)
+            if str(manifest.get("execution_epoch_sha256") or "")!=epoch.epoch_sha256:
+                raise ChildError("MANIFEST_EXECUTION_EPOCH_MISMATCH")
+            if str(manifest.get("material_closure_root") or "")!=epoch.material_closure_root:
+                raise ChildError("MANIFEST_MATERIAL_CLOSURE_MISMATCH")
+            d_epoch.require_capability(cid)
+
+            if dispatch_kind=="UNIFIED_FABRIC_V1":
+                from canonical.runtime import unified_cognitive_fabric_v1 as fabric
+                result=fabric.run(request)
+            else:
+                if not cid.startswith("bound:") or not cid[6:]:
+                    raise ChildError("STDLIB_BOUND_CAPABILITY_ID_REQUIRED")
+                from canonical.runtime import d_final_stdlib_bound_executor_v1 as executor
+                operative=cid[6:]
+                prepared=executor.prepare(operative,inputs=request)
+                result=executor.execute(
+                    operative,
+                    inputs=request,
+                    expected_registry_file_sha256=prepared["registry_file_sha256"],
+                    expected_registry_entry_sha256=prepared["registry_entry_sha256"],
+                    expected_rendered_action_sha256=prepared["rendered_action_sha256"],
+                )
+                if result.get("pass") is not True:
+                    raise ChildError(
+                        "STDLIB_BOUND_EXECUTION_FAILED:"
+                        +"|".join(str(x) for x in result.get("errors") or ["UNKNOWN"])
+                    )
 
         if not isinstance(result,Mapping):
-            raise ChildError("FABRIC_RESULT_NOT_OBJECT")
+            raise ChildError("DISPATCH_RESULT_NOT_OBJECT")
+
+        # The authority set may not mutate itself during the epoch. Re-hash every
+        # certified material and every staged dynamic input after execution.
+        post_material_checks=[]
+        for row in copied:
+            rel=row["path"]
+            expected=row["git_blob_sha"]
+            path=work_root/pathlib.PurePosixPath(rel)
+            actual=_git_blob(path.read_bytes()) if path.is_file() else None
+            if actual!=expected:
+                raise ChildError("MATERIAL_CHANGED_DURING_EXECUTION:"+rel)
+            post_material_checks.append({"path":rel,"git_blob_sha":actual})
+
+        post_dynamic_checks=[]
+        for row in dynamic_receipts:
+            rel=row["path"]
+            expected=row["sha256"]
+            path=work_root/pathlib.PurePosixPath(rel)
+            actual=hashlib.sha256(path.read_bytes()).hexdigest() if path.is_file() else None
+            if actual!=expected:
+                raise ChildError("DYNAMIC_INPUT_CHANGED_DURING_EXECUTION:"+rel)
+            post_dynamic_checks.append({"path":rel,"sha256":actual})
+
         receipt={
           "schema":SCHEMA,
           "status":"PASS__ZERO_AMBIENT_D_FINAL_DISPATCH_COMPLETE",
           "pass":True,
           "capability_id":cid,
+          "physical_dispatch_kind":dispatch_kind,
           "execution_epoch_sha256":epoch.epoch_sha256,
           "material_closure_root":epoch.material_closure_root,
           "copied_material_count":len(copied),
           "dynamic_input_count":len(dynamic_receipts),
           "dynamic_inputs":dynamic_receipts,
+          "post_execution_material_rehash_pass":True,
+          "post_execution_materials":post_material_checks,
+          "post_execution_dynamic_input_rehash_pass":True,
+          "post_execution_dynamic_inputs":post_dynamic_checks,
           "result":dict(result),
         }
         _emit(receipt)
