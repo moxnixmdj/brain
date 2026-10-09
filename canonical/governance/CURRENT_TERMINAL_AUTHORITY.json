@@ -901,6 +901,16 @@
     "frontiercode_owner_intake_routing_inquiry_20261009_v1": {
       "path": "canonical/action_intents/FRONTIERCODE_OWNER_INTAKE_ROUTING_INQUIRY_20261009_V1.json",
       "git_blob_sha": "e8f3b3d2aa334e002e4258c10b95ec15f569d90b"
+    },
+    "frontiercode_owner_inquiry_dedup_reconciliation_20261009_v1": {
+      "path": "canonical/governance/FRONTIERCODE_OWNER_INQUIRY_DEDUP_RECONCILIATION_20261009_V1.json",
+      "git_blob_sha": "0dec53e402fb9c628763f2d9c5dc3b82e5079113"
+    },
+    "external_side_effect_admission_v1": {
+      "path": "canonical/runtime/external_side_effect_admission_v1.py",
+      "git_blob_sha": "c06ea48da65f6b22cf04d5300ba73212825b2b76",
+      "regression_path": "canonical/regressions/2026-10-09_DUPLICATE_EXTERNAL_OWNER_INQUIRY.json",
+      "regression_git_blob_sha": "62d4d352e5e87df704b10d8c6851f06907a4ff95"
     }
   },
   "live_truth": {
@@ -1435,7 +1445,18 @@
     "frontiercode_accepted_harness_or_adapter_bound": false,
     "frontiercode_zero_cost_terms_bound": false,
     "frontiercode_execution_authority": false,
-    "frontiercode_acquisition_state": "INTERNAL_UNSOLVED__PENDING_OWNER_INFORMATION"
+    "frontiercode_acquisition_state": "INTERNAL_UNSOLVED__PENDING_OWNER_EVENT_OR_STRONGER_INTERNAL_PROOF",
+    "frontiercode_owner_outbound_inquiry_count": 3,
+    "frontiercode_owner_reply_count_observed": 0,
+    "frontiercode_owner_route_event_wait_only": true,
+    "frontiercode_no_more_unchanged_followups": true,
+    "frontiercode_october09_duplicate_action_class_detected": true,
+    "frontiercode_october09_message_mostly_redundant": true,
+    "frontiercode_october09_message_added_explicit_intake_routing_question": true,
+    "frontiercode_search_before_external_action_violation_20261009": true,
+    "external_side_effect_admission_guard_bound": true,
+    "external_side_effect_duplicate_pending_acquisition_forbidden": true,
+    "external_side_effect_exact_minimum_reality_cut_required": true
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -2442,6 +2463,29 @@
     "score_bearing_evaluation_requested": false,
     "incremental_spend_usd": 0,
     "execution_authority": false,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "frontiercode_owner_inquiry_dedup_reconciliation_20261009_v1": {
+    "source": {
+      "path": "canonical/governance/FRONTIERCODE_OWNER_INQUIRY_DEDUP_RECONCILIATION_20261009_V1.json",
+      "git_blob_sha": "0dec53e402fb9c628763f2d9c5dc3b82e5079113"
+    },
+    "prior_fixed_point": "canonical/governance/FRONTIERCODE_HOSTED_EVALUATION_INQUIRY_FIXED_POINT_20261008_V1.json",
+    "current_outbound_count": 3,
+    "current_reply_count": 0,
+    "current_owner_route_state": "EVENT_WAIT_ONLY",
+    "another_unchanged_followup_admissible": false,
+    "active_internal_action": "SYNTHESIZE_OR_FALSIFY_PROOF_CARRYING_FRONTIERCODE_SCOPE_SUPERSET_CERTIFICATE_PREMISES__START_WITH_HIDDEN_SCOPE_UPPER_BOUND_AND_EVALUATOR_RELATION",
+    "repaired_guard": {
+      "path": "canonical/runtime/external_side_effect_admission_v1.py",
+      "git_blob_sha": "c06ea48da65f6b22cf04d5300ba73212825b2b76",
+      "regression_path": "canonical/regressions/2026-10-09_DUPLICATE_EXTERNAL_OWNER_INQUIRY.json",
+      "regression_git_blob_sha": "62d4d352e5e87df704b10d8c6851f06907a4ff95"
+    },
+    "externality_proved": false,
+    "execution_authority": false,
+    "incremental_spend_usd": 0,
     "acceptance_credit_delta": 0,
     "terminal_credit_delta": 0
   }
