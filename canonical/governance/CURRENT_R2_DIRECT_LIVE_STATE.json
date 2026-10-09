@@ -4,8 +4,8 @@
   "status": "ACTIVE_CURRENT_R2_DIRECT_LIVE_STATE_POINTER",
   "binding_semantics": "MUTABLE_CURRENT_POINTER_PATH_IDENTITY__IMMUTABLE_TARGET_GIT_BLOB_BOUND",
   "target": {
-    "path": "canonical/governance/R2_DIRECT_LIVE_STATE_20261009_V1.json",
-    "git_blob_sha": "98db0f0e1b7949cae815cef355eb9d79001aaf32",
+    "path": "canonical/governance/R2_DIRECT_LIVE_STATE_20261009_V2.json",
+    "git_blob_sha": "5d7bd4f482e3b06f7d844754ed52fefb6aa8a36c",
     "schema": "PROJECT_BRAIN_R2_DIRECT_LIVE_STATE_V1"
   },
   "incremental_spend_usd": 0,
