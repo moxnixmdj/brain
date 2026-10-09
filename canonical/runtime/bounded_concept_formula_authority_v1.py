@@ -17,6 +17,10 @@ import re
 from typing import Any, Callable, Mapping
 
 from canonical.runtime import bounded_authenticated_concept_universe_v1 as universe
+from canonical.runtime.source_declared_bounded_concept_registry_authority_v1 import (
+    supports as source_registry_authority_supports,
+    verify as source_registry_authority_verify,
+)
 CONCEPT_SEMANTICS_RECEIPT_SCHEMA = (
     "PROJECT_BRAIN_CONCEPT_SEMANTICS_AUTHORITY_RECEIPT_V1"
 )
@@ -197,11 +201,19 @@ def verify_claim(
         if claim.get("definition_relation") != authoritative_relation:
             return _fail("DEFINITION_RELATION_MISMATCH")
 
+        effective_authority_verifier=authority_verifier
+        authority_receipt=claim.get("authority_receipt")
+        if (
+            not callable(effective_authority_verifier)
+            and source_registry_authority_supports(authority_receipt)
+        ):
+            effective_authority_verifier=source_registry_authority_verify
+
         auth = universe.resolve(
             registry,
             {"required_attributes": {}},
-            authority_receipt=claim.get("authority_receipt"),
-            authority_verifier=authority_verifier,
+            authority_receipt=authority_receipt,
+            authority_verifier=effective_authority_verifier,
         )
         authority_result = auth.get("authority_result")
         if (
