@@ -1,0 +1,28 @@
+{
+  "schema": "PROJECT_BRAIN_POLICY_ADEQUACY_BINDING_V1",
+  "date": "2026-10-09",
+  "policy_id": "BRAIN_INDEPENDENT_ACCEPTANCE_MODEL_TYPED_PLAN_V1",
+  "policy_condition": {
+    "op": "AND",
+    "args": [
+      {"op": "ATOM", "id": "SPEC_ACCEPT_TYPED_SEMANTICS_BOUND_V1"},
+      {"op": "ATOM", "id": "SPEC_ACCEPT_SUPPORTED_TRANSFORM_KINDS_ONLY_V1"},
+      {"op": "ATOM", "id": "SPEC_ACCEPT_FAILURE_MODE_COMPLETENESS_V1"},
+      {"op": "ATOM", "id": "SPEC_ACCEPT_DEPENDENCY_PROVENANCE_TRUTH_V1"},
+      {"op": "ATOM", "id": "SPEC_ACCEPT_NO_HIDDEN_VERIFIER_ACCESS_V1"}
+    ]
+  },
+  "adequacy_certificate_path": "canonical/governance/CURSORBENCH_TYPED_ACCEPTANCE_PLAN_POLICY_ADEQUACY_CERTIFICATE_20261009_V2.json",
+  "adequacy_certificate_blob_sha": "ea269ac0eb56f4ead1b4f614b1b1f0544baa25d1",
+  "independent_verification_path": "canonical/verification/CURSORBENCH_TYPED_ACCEPTANCE_PLAN_POLICY_ADEQUACY_V2_INDEPENDENT_VERIFICATION_20261009_V1.json",
+  "independent_verification_blob_sha": "df7ff07e3428b0c88111c1fdd7a242a00597958a",
+  "membership_self_certified": false,
+  "terminal_authority": false,
+  "hard_nonclaims": [
+    "NO_CONDITION_ATOM_TRUTH_CREATED_BY_REGISTRY_BINDING",
+    "NO_HIDDEN_CURSORBENCH_TASK_MEMBERSHIP",
+    "NO_WHOLE_SPECIFICATION_RESIDUAL_CLOSURE",
+    "NO_V5_COMMON_POLICY_ADEQUACY_CLAIM",
+    "NO_CURSORBENCH_SCORE_OR_TERMINAL_CREDIT"
+  ]
+}
