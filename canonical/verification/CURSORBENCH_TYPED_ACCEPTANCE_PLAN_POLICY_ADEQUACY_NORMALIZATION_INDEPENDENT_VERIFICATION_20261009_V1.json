@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_POLICY_ADEQUACY_INDEPENDENT_VERIFICATION_V1",
+  "date": "2026-10-09",
+  "policy_id": "BRAIN_INDEPENDENT_ACCEPTANCE_MODEL_TYPED_PLAN_V1",
+  "subject_git_blob_sha": "97b136d38a5007618fdb1cbef944997977cfe812",
+  "pass": true,
+  "status": "NORMALIZATION_VERIFIED_FROM_EXISTING_INDEPENDENT_REGION_REPLAY__MEMBERSHIP_EXTERNAL__ZERO_CREDIT",
+  "evidence": {
+    "source_certificate": {
+      "path": "canonical/governance/CURSORBENCH_TYPED_ACCEPTANCE_PLAN_POLICY_ADEQUACY_CERTIFICATE_20261009_V1.json",
+      "git_blob_sha": "09d4ac9e2134842fa6d07ace238f2adcc47b4133"
+    },
+    "source_independent_verification": {
+      "path": "canonical/verification/CURSORBENCH_TYPED_ACCEPTANCE_PLAN_POLICY_ADEQUACY_INDEPENDENT_VERIFICATION_20261009_V1.json",
+      "git_blob_sha": "8645dca87c5c57d3a6d63299732b32839bcf42d9"
+    },
+    "exact_policy": {
+      "path": "canonical/runtime/independent_acceptance_model.py",
+      "git_blob_sha": "710298c5d7154b5a3c2a4a1700420c40cb2fa55a"
+    },
+    "normalization_test": {
+      "path": "canonical/tests/test_cursorbench_typed_acceptance_plan_policy_adequacy_normalized_v1.py",
+      "git_blob_sha": "c1b71032bdd0bfe374d5ce443527bf9e6f4d525c"
+    },
+    "independent_carrier": {
+      "provider": "SPRITES",
+      "sprite_name": "brain-live-runtime-v1-verify-20261008",
+      "sprite_id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13",
+      "working_directory": "/tmp/cursorbench_typed_norm",
+      "result": "PASS__TYPED_ACCEPTANCE_NORMALIZATION_EXACT"
+    }
+  },
+  "verified": [
+    "THE_NORMALIZED_CERTIFICATE_BINDS_THE_EXACT_POLICY_BYTES_FROM_THE_EXISTING_INDEPENDENTLY_REPLAYED_REGION.",
+    "THE_SINGLE_LOGICAL_ATOM_IS_AN_EXACT_ALIAS_FOR_THE_SOURCE_CERTIFICATE_FIVE_REQUIREMENT_CONJUNCTION.",
+    "THE_ATOM_DOES_NOT_SELF_CERTIFY_MEMBERSHIP.",
+    "WHOLE_CURSORBENCH_ADEQUACY_AND_HIDDEN_TASK_MEMBERSHIP_REMAIN_FALSE."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
