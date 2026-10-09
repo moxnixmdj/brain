@@ -115,6 +115,25 @@ _REGISTRY = {
             "CODING_ROBUST_FINITE_MULTI_INTERPRETATION_POLICY_ADEQUACY_BINDING_20261009_V1.json"
         ),
         "binding_blob_sha": "d0b7f819e38d10009082cc695976ad00b6ab6228",
+    },
+    "BRAIN_VISIBLE_COMPLETE_ACCEPTANCE_CONTRACT_V1": {
+        "condition": {
+            "op": "AND",
+            "args": [
+                {"op": "ATOM", "id": "CODING_VISIBLE_ACCEPTANCE_CONTRACT_FINITE_V1"},
+                {"op": "ATOM", "id": "CODING_VISIBLE_ACCEPTANCE_CHECKERS_TOTAL_V1"},
+                {"op": "ATOM", "id": "CODING_VISIBLE_ACCEPTANCE_CONJUNCTION_SOUND_COMPLETE_V1"},
+                {"op": "ATOM", "id": "CODING_VISIBLE_ACCEPTANCE_SOURCE_AUTHORIZED_V1"},
+                {"op": "ATOM", "id": "CODING_VISIBLE_ACCEPTANCE_BUILDER_INDEPENDENT_V1"},
+                {"op": "ATOM", "id": "CODING_VISIBLE_ACCEPTANCE_CHECK_BUDGET_SUFFICIENT_V1"},
+                {"op": "ATOM", "id": "CODING_VISIBLE_ACCEPTANCE_PRETERMINAL_ADMISSIBLE_V1"},
+            ],
+        },
+        "binding_path": (
+            "canonical/governance/"
+            "CODING_VISIBLE_COMPLETE_ACCEPTANCE_CONTRACT_POLICY_ADEQUACY_BINDING_20261009_V1.json"
+        ),
+        "binding_blob_sha": "c8a1fff64da2bff4e8972c71c040b1920271fee6",
     }
 
 }
