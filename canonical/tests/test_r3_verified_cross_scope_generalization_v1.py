@@ -7,6 +7,7 @@ from unittest import mock
 from canonical.runtime import autonomous_verified_self_improvement_v1 as loop
 from canonical.runtime import executable_skill_program_v7 as skill_program
 from canonical.runtime import executable_skill_verification_authenticator_v1 as authenticator
+from canonical.runtime import r3_independent_learning_verifier_v1 as independent
 
 
 class VerifiedCrossScopeGeneralizationTests(unittest.TestCase):
@@ -174,6 +175,98 @@ class VerifiedCrossScopeGeneralizationTests(unittest.TestCase):
         )
         self.assertEqual(loop._skill_pareto_row("skill:u", unbound)["generalization"], 1)
         self.assertEqual(loop._skill_pareto_row("skill:b", bound)["generalization"], 2)
+
+    @mock.patch.object(independent, "resolve_receipt_bytes")
+    def test_generalization_admits_non_effectful_source_proof(self, resolve):
+        resolve.return_value = {
+            "document": {
+                "independent_verifier_id": independent.INDEPENDENT_VERIFIER_ID,
+                "verification_basis": independent.NON_EFFECTFUL_VERIFICATION_BASIS,
+                "non_effectful_trace": True,
+            }
+        }
+        out = independent._assert_generalizable_source_proof(
+            {"verification_binding": {"verification": {}}},
+            repo_root=Path("."),
+        )
+        self.assertEqual(out, "NON_EFFECTFUL")
+
+    @mock.patch.object(independent, "resolve_receipt_bytes")
+    def test_generalization_admits_reverified_bound_carrier_effectful_source(self, resolve):
+        resolve.return_value = {
+            "document": {
+                "independent_verifier_id": independent.INDEPENDENT_VERIFIER_ID,
+                "verification_basis": independent.BOUND_CARRIER_VERIFICATION_BASIS,
+                "bound_carrier_effectful_trace": True,
+                "effect_outcomes_reverified": True,
+                "trace_reverified": True,
+                "state_lineage_reverified": True,
+                "behavior_verified": True,
+                "exact_byte_bound": True,
+                "non_effectful_trace": False,
+            }
+        }
+        out = independent._assert_generalizable_source_proof(
+            {"verification_binding": {"verification": {}}},
+            repo_root=Path("."),
+        )
+        self.assertEqual(out, "BOUND_CARRIER_EFFECTFUL")
+
+    @mock.patch.object(independent, "resolve_receipt_bytes")
+    def test_generalization_rejects_generic_effectful_readback_source(self, resolve):
+        resolve.return_value = {
+            "document": {
+                "independent_verifier_id": independent.INDEPENDENT_VERIFIER_ID,
+                "verification_basis": independent.EFFECTFUL_READBACK_VERIFICATION_BASIS,
+                "bound_carrier_effectful_trace": False,
+                "effect_outcomes_reverified": True,
+                "trace_reverified": True,
+                "state_lineage_reverified": True,
+                "behavior_verified": True,
+                "exact_byte_bound": True,
+                "non_effectful_trace": False,
+            }
+        }
+        with self.assertRaisesRegex(
+            independent.R3IndependentVerificationError,
+            "GENERALIZATION_SOURCE_PROOF_CLASS_NOT_ADMITTED",
+        ):
+            independent._assert_generalizable_source_proof(
+                {"verification_binding": {"verification": {}}},
+                repo_root=Path("."),
+            )
+
+    @mock.patch.object(independent, "resolve_receipt_bytes")
+    def test_generalization_rejects_incomplete_bound_carrier_proof(self, resolve):
+        base = {
+            "independent_verifier_id": independent.INDEPENDENT_VERIFIER_ID,
+            "verification_basis": independent.BOUND_CARRIER_VERIFICATION_BASIS,
+            "bound_carrier_effectful_trace": True,
+            "effect_outcomes_reverified": True,
+            "trace_reverified": True,
+            "state_lineage_reverified": True,
+            "behavior_verified": True,
+            "exact_byte_bound": True,
+            "non_effectful_trace": False,
+        }
+        for missing in (
+            "effect_outcomes_reverified",
+            "trace_reverified",
+            "state_lineage_reverified",
+            "behavior_verified",
+            "exact_byte_bound",
+        ):
+            row = dict(base)
+            row[missing] = False
+            resolve.return_value = {"document": row}
+            with self.assertRaisesRegex(
+                independent.R3IndependentVerificationError,
+                "GENERALIZATION_SOURCE_PROOF_CLASS_NOT_ADMITTED",
+            ):
+                independent._assert_generalizable_source_proof(
+                    {"verification_binding": {"verification": {}}},
+                    repo_root=Path("."),
+                )
 
     @mock.patch(
         "canonical.runtime.executable_skill_verification_authenticator_v1.resolve_receipt_bytes"
