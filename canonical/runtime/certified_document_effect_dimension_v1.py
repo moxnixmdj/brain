@@ -32,7 +32,7 @@ _PATTERNS=[
     ("conditions",re.compile(rf"^Effect\s+(?P<eid>{_ID})\s+conditions JSON:\s*(?P<value>.+)\.$")),
     ("valid_from",re.compile(rf"^Effect\s+(?P<eid>{_ID})\s+valid from:\s*(?P<value>[^.]+)\.$")),
     ("valid_until",re.compile(rf"^Effect\s+(?P<eid>{_ID})\s+valid until:\s*(?P<value>[^.]+)\.$")),
-    ("supersedes",re.compile(rf"^Effect\s+(?P<eid>{_ID})\s+supersedes:\s*(?P<value>[^.]+)\.$")),
+    ("supersedes",re.compile(rf"^Effect\s+(?P<eid>{_ID})\s+supersedes:\s*(?P<value>.+)\.$")),
 ]
 
 
