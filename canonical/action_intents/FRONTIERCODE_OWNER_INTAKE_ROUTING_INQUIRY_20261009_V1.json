@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_FRONTIERCODE_OWNER_INTAKE_ROUTING_INQUIRY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "SENT__NONCOMMITTING_INFORMATION_REQUEST__OWNER_RESPONSE_PENDING__ZERO_SPEND__ZERO_CREDIT",
+  "target_predicate": "CODING_FRONTIERCODE_GE_54_4",
+  "recipient": "info@cognition.ai",
+  "recipient_basis": {
+    "source": "https://cognition.com/blog/sept-24-product-update",
+    "classification": "FIRST_PARTY_GENERAL_COGNITION_CONTACT__NOT_PRECLASSIFIED_AS_FRONTIERCODE_INTAKE"
+  },
+  "purpose": "ROUTE_TO_CORRECT_FRONTIERCODE_EVALUATION_INTAKE_AND_BIND_MINIMUM_OWNER_FACTS",
+  "requested_facts": [
+    "CORRECT_FRONTIERCODE_EVALUATION_REQUEST_OR_INTAKE_CHANNEL",
+    "CONFIGURED_CODING_AGENT_OR_SYSTEM_ELIGIBILITY",
+    "ACCEPTED_INTERFACE_OR_HARNESS_CONTRACT",
+    "ZERO_CHARGE_AVAILABILITY_OR_ANY_FEE_BEFORE_SCHEDULING"
+  ],
+  "safeguards": [
+    "INFORMATION_REQUEST_ONLY",
+    "NO_SCORE_BEARING_EVALUATION_REQUESTED",
+    "NO_PAID_COMMITMENT_AUTHORIZED",
+    "EXPLICITLY_REQUESTED_NO_EVALUATION_START_OR_CHARGE",
+    "NO_PROPRIETARY_BRAIN_IMPLEMENTATION_DETAILS_DISCLOSED",
+    "GMAIL_PROVIDER_PRIVATE_MESSAGE_IDENTIFIERS_NOT_COMMITTED_TO_CANONICAL_REPO"
+  ],
+  "current_state": {
+    "routing_inquiry_sent": true,
+    "owner_response_pending": true,
+    "exact_frontiercode_intake_channel_bound": false,
+    "brain_eligibility_bound": false,
+    "accepted_harness_or_adapter_bound": false,
+    "zero_incremental_cost_terms_bound": false,
+    "execution_authority": false,
+    "classification": "INTERNAL_UNSOLVED__PENDING_OWNER_INFORMATION"
+  },
+  "next": "ON_OWNER_RESPONSE__VERIFY_SENDER_AND_CONTENT__BIND_ONLY_EXACT_REPLIED_FACTS__IF_ZERO_COST_ELIGIBILITY_AND_INTERFACE_ALL_PASS_THEN_CONSTRUCT_NONPAYING_EVALUATION_ACTION_INTENT__OTHERWISE_REMAIN_INTERNAL_UNSOLVED_OR_USE_STRONGER_PROOF_ROUTE",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
