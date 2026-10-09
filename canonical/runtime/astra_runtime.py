@@ -1112,13 +1112,13 @@ def _ensure_apt_dependencies(source):
             raise Blocker("BOUND_APT_INSTALLED_VERSION_MISMATCH:"+name+":"+str(observed or ""))
     return {"status":"INSTALLED_VERIFIED","origin":source.get("origin"),"packages":evidence}
 
-def _invoke_bound_capability(args):
+def _invoke_bound_capability_entry(args, entry):
+    """Invoke one already-frozen registry entry without re-reading registry state."""
     cid=str(args.get("capability_id") or "").strip()
     if not cid:
         raise Blocker("BOUND_CAPABILITY_ID_REQUIRED")
-    entry=_load_bound_capability_registry().get(cid)
     if not isinstance(entry,dict):
-        raise Blocker("BOUND_CAPABILITY_UNKNOWN:"+cid)
+        raise Blocker("BOUND_CAPABILITY_ENTRY_INVALID:"+cid)
     if float(entry.get("incremental_spend_usd",0))!=0:
         raise Blocker("BOUND_CAPABILITY_NONZERO_COST_REJECTED:"+cid)
     source=entry.get("source") or {}
@@ -1145,13 +1145,31 @@ def _invoke_bound_capability(args):
     path=ROOT/"canonical"/"runtime"/"bound_capabilities"/(module_name+".py")
     if not path.is_file():
         raise Blocker("BOUND_CAPABILITY_ADAPTER_MISSING")
-    d_finality.require_material_file_if_active(path,repo_root=ROOT)
-    spec=importlib.util.spec_from_file_location("project_brain_bound_"+module_name,path)
-    if spec is None or spec.loader is None:
-        raise Blocker("BOUND_CAPABILITY_ADAPTER_LOAD_FAILED")
-    module=importlib.util.module_from_spec(spec)
-    sys.modules[spec.name]=module
-    spec.loader.exec_module(module)
+
+    module_name_runtime="project_brain_bound_"+module_name
+    if d_finality.has_active_epoch():
+        # Read once, verify those exact bytes against the active epoch, then
+        # compile/execute those bytes. Do not hash-check a path and let an
+        # import loader reopen a potentially changed file afterward.
+        d_finality.require_material_file_if_active(path,repo_root=ROOT)
+        raw=path.read_bytes()
+        rel=path.resolve().relative_to(ROOT.resolve()).as_posix()
+        expected=dict(d_finality.current_epoch().material_bindings).get(rel)
+        if expected is None or d_finality.git_blob_sha_bytes(raw)!=expected:
+            raise Blocker("BOUND_CAPABILITY_ADAPTER_CHANGED_AFTER_EPOCH_CHECK:"+rel)
+        module=type(sys)(module_name_runtime)
+        module.__file__=str(path)
+        module.__package__=""
+        sys.modules[module_name_runtime]=module
+        exec(compile(raw,str(path),"exec"),module.__dict__)
+    else:
+        spec=importlib.util.spec_from_file_location(module_name_runtime,path)
+        if spec is None or spec.loader is None:
+            raise Blocker("BOUND_CAPABILITY_ADAPTER_LOAD_FAILED")
+        module=importlib.util.module_from_spec(spec)
+        sys.modules[spec.name]=module
+        spec.loader.exec_module(module)
+
     fn=getattr(module,str(entry.get("entrypoint") or "run"),None)
     if not callable(fn):
         raise Blocker("BOUND_CAPABILITY_ENTRYPOINT_MISSING")
@@ -1161,6 +1179,15 @@ def _invoke_bound_capability(args):
     result.setdefault("capability_id",cid)
     result["dependency"]=dependency
     return result
+
+def _invoke_bound_capability(args):
+    cid=str(args.get("capability_id") or "").strip()
+    if not cid:
+        raise Blocker("BOUND_CAPABILITY_ID_REQUIRED")
+    entry=_load_bound_capability_registry().get(cid)
+    if not isinstance(entry,dict):
+        raise Blocker("BOUND_CAPABILITY_UNKNOWN:"+cid)
+    return _invoke_bound_capability_entry(args,entry)
 
 def _bounded_failure_result(result,max_chars=2400):
     if not isinstance(result,dict):
