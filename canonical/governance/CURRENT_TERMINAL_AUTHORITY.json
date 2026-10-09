@@ -3775,5 +3775,26 @@
     "cursorbench_membership_delta": 0,
     "acceptance_credit_delta": 0,
     "terminal_credit_delta": 0
+  },
+  "tb_science_v30_rank16_authority_reconciliation": {
+    "schema": "PROJECT_BRAIN_TB_SCIENCE_V30_RANK16_AUTHORITY_RECONCILIATION_V1",
+    "current_authority_path": "canonical/governance/TB_SCIENCE_RANK16_ONE_SLOT_EXECUTION_AUTHORITY_20261009_V1.json",
+    "current_authority_git_blob_sha": "20ebbe8ed593a7ead08b27a1c57864ede429cb46",
+    "current_ledger_path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261009_V30.json",
+    "current_ledger_git_blob_sha": "7e46f2a5c0c418a4d3be4360c8a85b7be7611abb",
+    "qualification_path": "canonical/verification/TB_SCIENCE_RANK16_AGENT_V9_ZERO_EXPOSURE_QUALIFICATION_20261009_V1.json",
+    "qualification_git_blob_sha": "999f4adc79bba0e4477126ccb34139f9292c46ce",
+    "verification_path": "canonical/verification/TB_SCIENCE_RANK16_V1_AUTHORITY_VERIFY_20261009_V1.json",
+    "verification_git_blob_sha": "3e050dd5c451263abfbebf280166b20d5796bd9e",
+    "consumed_slots": 15,
+    "next_rank": 16,
+    "next_slot_id": "terminal-bench-science/sparse-network-assimilation::trial-0",
+    "execution_authority": true,
+    "task_read_authority": false,
+    "task_read": false,
+    "task_started": false,
+    "benchmark_trials_consumed": 0,
+    "public_final_reseal_pending": true,
+    "terminal_credit_delta": 0
   }
 }
