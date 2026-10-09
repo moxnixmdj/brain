@@ -5,6 +5,7 @@ import unittest
 from canonical.runtime import minimum_information_origin_policy_v1 as origin
 from canonical.runtime import regcap_candidate_ambiguity_control_v1 as control
 from canonical.runtime import regcap_property_candidate_discovery_v1 as discovery
+from canonical.runtime import regcap_contrastive_discriminator_matrix_v1 as contrast
 
 
 IDS = ["REGCAP::CCOB", "REGCAP::CCYB", "REGCAP::TLAC"]
@@ -46,13 +47,45 @@ def bounded_scope():
     }
 
 
+def authenticated_matrix():
+    return {
+        "schema": contrast.SCHEMA,
+        "pass": True,
+        "source_authority": True,
+        "semantic_truth_authority": True,
+        "candidate_domain": list(IDS),
+        "outcome_maps_complete_relative_to_matrix_domain": True,
+        "candidate_universe_complete": False,
+        "open_world_ontology_complete": False,
+        "matrix_sha256": "m" * 64,
+        "observations": [
+            {
+                "observation_id": "FRAMEWORK_CLASS",
+                "outcomes": {
+                    "REGCAP::CCOB": "BASEL_BUFFER",
+                    "REGCAP::CCYB": "BASEL_BUFFER",
+                    "REGCAP::TLAC": "SEPARATE_TLAC_REQUIREMENT",
+                },
+            },
+            {
+                "observation_id": "RELEASABILITY_CLASS",
+                "outcomes": {
+                    "REGCAP::CCOB": "NOT_DESIGNATED_RELEASABLE",
+                    "REGCAP::CCYB": "DESIGNATED_RELEASABLE",
+                    "REGCAP::TLAC": "OUTSIDE_BASEL_BUFFER_FRAMEWORK",
+                },
+            },
+        ],
+    }
+
+
 class Tests(unittest.TestCase):
     def test_open_world_candidate_set_never_becomes_identity(self):
         out = control.plan(
             candidates(),
             mapping_scope={"kind": "OPEN_WORLD", "scope_complete": False},
             observation_set_complete=False,
-            information_owner=origin.USER_SPECIFICATION,
+            information_owner="USER_INTENT",
         )
         self.assertFalse(out["pass"])
         self.assertEqual(
@@ -173,6 +206,81 @@ class Tests(unittest.TestCase):
         self.assertEqual(out["grounding_source_id"], "doc:A")
         self.assertIsNone(out["mapped_concept_id"])
         self.assertFalse(out["semantic_identity_authority"])
+
+    def test_authenticated_matrix_yields_exact_one_step_discriminator_not_identity(self):
+        out = control.plan_from_authenticated_matrix(
+            candidates(),
+            authenticated_matrix(),
+            mapping_scope=bounded_scope(),
+            information_owner="USER_INTENT",
+        )
+        self.assertFalse(out["pass"])
+        self.assertEqual(
+            out["status"],
+            "OPEN__AUTHENTICATED_ONE_STEP_POLICY_CHANGING_DISCRIMINATOR_READY",
+        )
+        self.assertEqual(out["next_observation_id"], "RELEASABILITY_CLASS")
+        self.assertEqual(out["minimum_observation_count"], 1)
+        self.assertEqual(out["action"], "ASK_USER_MINIMUM_CLARIFICATION")
+        self.assertFalse(out["observation_truth_bound"])
+        self.assertFalse(out["concept_identity_bound"])
+        self.assertIsNone(out["mapped_concept_id"])
+        self.assertFalse(out["matrix_candidate_universe_complete"])
+
+    def test_authenticated_matrix_bound_external_source_stays_source_scoped(self):
+        out = control.plan_from_authenticated_matrix(
+            candidates(),
+            authenticated_matrix(),
+            mapping_scope=bounded_scope(),
+            information_owner=origin.EXTERNAL_WORLD,
+            source_scope={"kind": origin.BOUND_SOURCE, "source_id": "doc:A"},
+            discovery_delegated=True,
+        )
+        self.assertEqual(out["next_observation_id"], "RELEASABILITY_CLASS")
+        self.assertEqual(out["action"], "OBSERVE_BOUND_SOURCE_ONLY")
+        self.assertTrue(out["minimum_information_route"]["bound_source_only"])
+        self.assertFalse(
+            out["minimum_information_route"]["external_research_authorized"]
+        )
+
+    def test_matrix_never_supplies_open_world_candidate_completeness(self):
+        out = control.plan_from_authenticated_matrix(
+            candidates(),
+            authenticated_matrix(),
+            mapping_scope={"kind": "OPEN_WORLD", "scope_complete": False},
+            information_owner="USER_INTENT",
+        )
+        self.assertEqual(
+            out["status"],
+            "OPEN__OPEN_WORLD_MAPPING_REQUIRES_MINIMUM_ADDITIONAL_INFORMATION",
+        )
+        self.assertEqual(out["action"], "ASK_USER_MINIMUM_CLARIFICATION")
+        self.assertFalse(out["open_world_candidate_set_complete"])
+        self.assertIsNone(out["mapped_concept_id"])
+
+    def test_unauthenticated_matrix_fails_closed(self):
+        matrix = authenticated_matrix()
+        matrix["source_authority"] = False
+        out = control.plan_from_authenticated_matrix(
+            candidates(),
+            matrix,
+            mapping_scope=bounded_scope(),
+            information_owner="USER_INTENT",
+        )
+        self.assertEqual(out["status"], "FAIL_CLOSED")
+        self.assertEqual(out["reason"], "CONTRASTIVE_MATRIX_NOT_AUTHENTICATED")
+
+    def test_matrix_domain_mismatch_fails_closed(self):
+        matrix = authenticated_matrix()
+        matrix["candidate_domain"] = IDS[:-1]
+        out = control.plan_from_authenticated_matrix(
+            candidates(),
+            matrix,
+            mapping_scope=bounded_scope(),
+            information_owner="USER_INTENT",
+        )
+        self.assertEqual(out["status"], "FAIL_CLOSED")
+        self.assertEqual(out["reason"], "CONTRASTIVE_MATRIX_DOMAIN_MISMATCH")
 
     def test_scope_mismatch_fails_closed(self):
         scope = bounded_scope()
