@@ -52,6 +52,7 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
         self.assertIn("SEMANTIC_RELATION", c["engines"])
         self.assertIn("SEMANTIC_RELATION", c["engines"])
         self.assertIn("SEMANTIC_RELATION", c["engines"])
+        self.assertIn("SEMANTIC_RELATION", c["engines"])
         self.assertGreater(c["brain_owned_transitive_file_count"], 1)
         self.assertGreater(c["brain_owned_transitive_source_bytes"], 0)
         self.assertIn(
@@ -426,6 +427,102 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
             out["result"]["reason"],
             "UNSAFE_SIMILARITY_EVIDENCE_CANNOT_GRANT_SEMANTIC_RELATION",
         )
+
+
+    def test_auto_semantic_relation_exact_equivalence(self):
+        scope = "1" * 64
+        receipt = {
+            "verified": True,
+            "relation": "EXACT_EQUIVALENT",
+            "source_kind": "EXPLICIT_SOURCE_DEFINITION",
+            "verifier_id": "verifier:test",
+            "evidence_sha256": "e" * 64,
+            "scope_sha256": scope,
+        }
+        out = run({
+            "payload": {
+                "expression_a": "reserve buffer",
+                "expression_b": "liquidity cushion",
+                "required_relation": "BIDIRECTIONAL_EQUIVALENCE",
+                "scope_sha256": scope,
+                "evidence": {"explicit_source_equivalence": receipt},
+            },
+        })
+        self.assertTrue(out["auto_routed"])
+        self.assertEqual(out["mode"], "SEMANTIC_RELATION")
+        self.assertTrue(out["inner_pass"], out)
+        self.assertEqual(
+            out["result"]["strongest_proved_relation"],
+            "EXACT_EQUIVALENT",
+        )
+
+    def test_auto_semantic_relation_preserves_one_way_entailment(self):
+        scope = "2" * 64
+        receipt = {
+            "verified": True,
+            "relation": "A_ENTAILS_B",
+            "source_kind": "CHECKED_PROOF_DAG",
+            "verifier_id": "verifier:test",
+            "evidence_sha256": "f" * 64,
+            "scope_sha256": scope,
+        }
+        out = run({
+            "payload": {
+                "expression_a": "CET1 capital",
+                "expression_b": "regulatory capital",
+                "required_relation": "BIDIRECTIONAL_EQUIVALENCE",
+                "scope_sha256": scope,
+                "evidence": {"entailment_a_to_b": receipt},
+            },
+        })
+        self.assertTrue(out["auto_routed"])
+        self.assertEqual(out["mode"], "SEMANTIC_RELATION")
+        self.assertFalse(out["inner_pass"])
+        self.assertEqual(
+            out["result"]["strongest_proved_relation"],
+            "A_ENTAILS_B",
+        )
+
+    def test_auto_semantic_relation_allows_task_equivalence_without_global_synonymy(self):
+        scope = "3" * 64
+        completeness = {
+            "verified": True,
+            "relation": "TASK_TERMINAL_SIGNATURES_COMPLETE",
+            "source_kind": "CHECKED_PROOF_DAG",
+            "verifier_id": "verifier:test",
+            "evidence_sha256": "a" * 64,
+            "scope_sha256": scope,
+        }
+        out = run({
+            "payload": {
+                "expression_a": "reserve buffer",
+                "expression_b": "liquidity cushion",
+                "required_relation": "TASK_EQUIVALENCE",
+                "scope_sha256": scope,
+                "evidence": {},
+                "task_terminal_signature_completeness_receipt": completeness,
+                "task_terminal_rows": [
+                    {
+                        "raw_id": "A",
+                        "signature_complete": True,
+                        "terminal_signature": {"action": "REDUCE"},
+                    },
+                    {
+                        "raw_id": "B",
+                        "signature_complete": True,
+                        "terminal_signature": {"action": "REDUCE"},
+                    },
+                ],
+            },
+        })
+        self.assertTrue(out["auto_routed"])
+        self.assertEqual(out["mode"], "SEMANTIC_RELATION")
+        self.assertTrue(out["inner_pass"], out)
+        self.assertEqual(
+            out["result"]["strongest_proved_relation"],
+            "TASK_EQUIVALENT",
+        )
+        self.assertTrue(out["result"]["task_equivalent"])
 
     def test_capability_scheduler_is_inside_fabric(self):
         out = run({
