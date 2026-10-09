@@ -184,6 +184,14 @@ def _scope_lock(policy: Mapping[str, Any], evidence: Mapping[str, Any]) -> tuple
         return "UNKNOWN", f"SCOPE_COVER_NOT_PROVED:{suffix}"
     if cover_result.get("predicate_id") != policy.get("predicate_id"):
         return "UNKNOWN", "SCOPE_COVER_PREDICATE_MISMATCH"
+    frozen_identity = policy.get("frozen_identity")
+    frozen_benchmark = (
+        frozen_identity.get("benchmark_id")
+        if isinstance(frozen_identity, Mapping)
+        else None
+    )
+    if cover_result.get("benchmark_id") != frozen_benchmark:
+        return "UNKNOWN", "SCOPE_COVER_BENCHMARK_ID_MISMATCH"
     return "PASS", "PROOF_CARRYING_SCOPE_SUPERSET"
 
 def _provenance_lock(policy: Mapping[str, Any], evidence: Mapping[str, Any]) -> tuple[str, str]:
