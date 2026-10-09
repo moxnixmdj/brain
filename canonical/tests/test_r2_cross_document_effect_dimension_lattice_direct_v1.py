@@ -37,6 +37,15 @@ class Direct(unittest.TestCase):
             root=Path(td); write(root,case())
             out=d.run({"task_id":"x","goal":goal()},repo_root=root)
             self.assertTrue(out["pass"],out); self.assertEqual(out["effective_value"],"10")
+    def test_source_explicit_autofill_runs_without_caller_claims(self):
+        obj=case()
+        obj["source_documents"][0]["claims"]=[]
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td); write(root,obj)
+            out=d.run({"task_id":"x","goal":goal()},repo_root=root)
+            self.assertTrue(out["pass"],out)
+            self.assertEqual(out["effective_value"],"10")
+
     def test_partial_case_returns_exact_top_dimension(self):
         with tempfile.TemporaryDirectory() as td:
             root=Path(td); write(root,case(partial=True))
