@@ -21,15 +21,15 @@ def onto(entries):
 class Tests(unittest.TestCase):
     def test_unique_alt_label_proves_identity(self):
         o=onto([
-            {"concept_id":"CET1","preferred_label":"Common Equity Tier 1 capital","alt_labels":["loss-absorbing cushion"]},
+            {"concept_id":"CAPITAL_BUFFER_A","preferred_label":"Primary capital buffer","alt_labels":["core capital cushion"]},
             {"concept_id":"LCR","preferred_label":"liquidity coverage ratio","alt_labels":["liquidity buffer"]},
         ])
         out=resolve({
-            "mention_id":"m1","mention_surface":"Loss-absorbing cushion","scope_id":SCOPE,
+            "mention_id":"m1","mention_surface":"Core capital cushion","scope_id":SCOPE,
             "ontology":o,"expected_ontology_sha256":ontology_sha256(o),
         })
         self.assertTrue(out["pass"],out)
-        self.assertEqual(out["concept_id"],"CET1")
+        self.assertEqual(out["concept_id"],"CAPITAL_BUFFER_A")
         self.assertEqual(out["identity_basis"],"UNIQUE_EXACT_ONTOLOGY_LABEL_OR_ALT_LABEL")
 
     def test_ambiguous_surface_disambiguates_with_sufficient_fact(self):
