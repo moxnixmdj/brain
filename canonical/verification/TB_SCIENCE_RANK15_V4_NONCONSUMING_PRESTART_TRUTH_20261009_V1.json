@@ -1,0 +1,85 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK15_V4_NONCONSUMING_PRESTART_TRUTH_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PRESTART_TASK_READ_OCCURRED__START_CAS_NOT_ACQUIRED__TASK_NOT_STARTED__ZERO_TRIAL_CONSUMPTION__V6_SUCCESSOR_REMAINS_AVAILABLE",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "slot": {
+    "id": "terminal-bench-science/protein-active-learning::trial-0",
+    "ledger_schedule_rank": 15,
+    "frozen_manifest_schedule_order": 14,
+    "task_rank": 14,
+    "digest": "sha256:d7e16b7c468551b468364cf2a86dba2383b007f3f2f01c6d2ce01d99ff30d48f"
+  },
+  "public_execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2511,
+    "workflow_run_id": 37930615754,
+    "workflow_job_id": 113820110815,
+    "artifact_id": 11616930252,
+    "activation_head_sha": "cf3ee31242943fd51894289f1c15bbaf0bef1ce1",
+    "run_attempt": 1,
+    "workflow_conclusion": "failure",
+    "zero_exposure_carrier_workflow_run_id": 37930615752,
+    "zero_exposure_carrier_conclusion": "success"
+  },
+  "observed_prestart_truth": {
+    "task_read": true,
+    "task_started": false,
+    "start_cas_absent_check_passed": true,
+    "start_cas_acquired": false,
+    "start_cas_status": "FAIL_CLOSED__START_CAS_ERROR",
+    "start_cas_error": "START_RESERVATION_UNCONFIRMED__NO_START",
+    "harbor_execution_step": "skipped",
+    "receipt_status": "PREEXPOSURE_ABORT_NONCONSUMING",
+    "benchmark_trials_consumed": 0,
+    "execution_authority_consumed": false,
+    "consumed_successes_delta": 0,
+    "consumed_final_failures_delta": 0,
+    "reward": null,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "prestart_guard": {
+    "status": "PASS__RANK15_V3_EXACT_TASK_READ__MAXIMAL_RESERVED_CYCLE0_CORE_FITS__TASK_NOT_STARTED",
+    "input_tokens": 2882,
+    "reserved_completion_tokens": 4096,
+    "server_context_tokens": 16384,
+    "context_headroom_tokens": 9406,
+    "raw_task_obligation_count": 78,
+    "instruction_sha256": "85c97d56cb097325f86659cfdd61afb3fb650d74949de90d7a8441719048e7b6",
+    "first_cycle_prompt_sha256": "0df7076cdf0fc27f9b08fec4010a61c857dfcf733cabc803fb7e1a419e50f003",
+    "logical_attempt_id": "67169d025d61869dc2028d67cc5023744cc76c938a21c4115d13f8759079cee4"
+  },
+  "interpretation": {
+    "historical_task_exposure_must_be_recorded": true,
+    "benchmark_attempt_consumed": false,
+    "reason": "The V4 workflow read the exact digest-pinned task and passed prestart validation, but durable start CAS acquisition failed. The benchmark execution step was skipped. Under the authority contract, irreversible task start and trial consumption occur only after durable CAS acquisition.",
+    "v6_successor_reexecution_authority_preserved": true,
+    "v6_may_read_same_exact_digest_again": true,
+    "v6_task_start_still_requires_agent_ready_and_durable_cas": true
+  },
+  "evidence_basis": {
+    "github_workflow_job_steps": true,
+    "github_workflow_job_logs": true,
+    "uploaded_finalizer_artifact_present": true,
+    "no_inference_of_success_from_workflow_conclusion": true
+  },
+  "hard_nonclaims": [
+    "NO_RANK15_BENCHMARK_TRIAL_WAS_CONSUMED",
+    "NO_RANK15_TASK_START_OCCURRED",
+    "NO_RANK15_SUCCESS_OR_FAILURE_CREDIT",
+    "NO_V4_RETRY_AUTHORITY",
+    "NO_CLAIM_TASK_WAS_UNREAD",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_trials_consumed_delta": 0,
+    "consumed_successes_delta": 0,
+    "consumed_final_failures_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
