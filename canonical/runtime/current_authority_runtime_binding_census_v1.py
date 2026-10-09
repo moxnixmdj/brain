@@ -13,7 +13,7 @@ import re
 from typing import Any, Mapping
 
 SCHEMA = "PROJECT_BRAIN_CURRENT_AUTHORITY_RUNTIME_BINDING_CENSUS_V1"
-RUNTIME_PATH_RE = re.compile(r"^canonical/runtime/[^\\\"'\\s]+\\.py$")
+RUNTIME_PATH_RE = re.compile(r"^canonical/runtime/[A-Za-z0-9_./-]+\\.py$")
 _HEX = set("0123456789abcdef")
 
 
