@@ -1,0 +1,74 @@
+{
+  "schema": "PROJECT_BRAIN_R2_FINANCE_CROSS_DOCUMENT_JSON_DIRECT_ADEQUACY_VERIFY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__CROSS_DOCUMENT_FINANCE_JSON_DIRECT_ADEQUACY__28_OF_28_EXACT_BLOB_BEHAVIORAL_CHECKS__ZERO_CREDIT",
+  "branch": "r2-v34-crossdoc-rebased",
+  "exact_blobs": {
+    "canonical/runtime/finance_cross_document_binding_v1.py": "cf629024c1b81b103b509b79291c7342093d1133",
+    "canonical/runtime/finance_cross_document_binding_verify_v1.py": "7781c9396e1ae40ec2dffc42b87bc0352ba603b0",
+    "canonical/runtime/r2_finance_cross_document_json_direct_adequacy_v1.py": "8a4616e140409f40bcf8645d1e4b3416fc7bfcc7",
+    "canonical/runtime/r2_direct_end_to_end_adequacy_v4.py": "67a46d379500366179860f51afdea720e1a47ac2",
+    "canonical/runtime/general_adequate_decision_fixed_point_v2.py": "9b2978c54712eabd0c7d55919be12be22937a81d",
+    "canonical/tests/test_r2_finance_cross_document_json_direct_adequacy_v1.py": "4082f91eca78b33d1572ce7193fd5e90760b48a9"
+  },
+  "verification": {
+    "exact_git_blob_hash_match": {
+      "producer": true,
+      "independent_verifier": true,
+      "direct_route": true,
+      "router_v4": true
+    },
+    "isolated_python_exact_blob_harness": {
+      "producer_and_independent_verifier_checks": "11_OF_11_PASS",
+      "direct_route_checks": "11_OF_11_PASS",
+      "router_v4_checks": "6_OF_6_PASS",
+      "total": "28_OF_28_PASS"
+    },
+    "fixed_point_patch": {
+      "status": "STATIC_SINGLE_IMPORT_LINE_ONLY",
+      "from": "r2_direct_end_to_end_adequacy_v3",
+      "to": "r2_direct_end_to_end_adequacy_v4",
+      "collateral_runtime_edits": 0
+    },
+    "covered": [
+      "EQUAL_DECIMAL_FACTS_SELECT_EQUAL_ACTION",
+      "UNEQUAL_DECIMAL_FACTS_SELECT_UNEQUAL_ACTION",
+      "PRODUCER_INDEPENDENT_FULL_BINDING_RECOMPUTATION",
+      "OUTPUT_TAMPER_REJECTED",
+      "REFERENCE_ID_MISMATCH_FAILS_CLOSED",
+      "CONTENT_ADDRESS_DRIFT_FAILS_CLOSED",
+      "INVALID_DECIMAL_FAILS_CLOSED",
+      "MISSING_JSON_PATH_FAILS_CLOSED",
+      "IDENTICAL_ACTIONS_FAIL_CLOSED",
+      "UNKNOWN_CASE_FIELDS_FAIL_CLOSED",
+      "PREFLIGHT_SIDE_EFFECT_FREE",
+      "POST_WRITE_VERIFIER_FAILURE_ROLLS_BACK",
+      "NONMATCHING_GOAL_CLAIMS_NO_SCOPE",
+      "V4_MATCHED_ROUTE_EXECUTES_CROSS_DOCUMENT_FAMILY",
+      "V4_NONMATCHING_PREFLIGHT_AND_RUN_DELEGATE_TO_V3",
+      "V4_ROUTE_INVENTORY_IS_V3_PLUS_ONE"
+    ],
+    "remote_carrier_replay_claimed": false,
+    "note": "REMOTE_SPRITE_FILE_OR_GIT_DISCOVERY_WAS_BLOCKED_BY_CONNECTOR_SAFETY_LAYER_DURING_THIS_PASS__NO_REMOTE_CARRIER_CLAIM_IS_MADE"
+  },
+  "proves": [
+    "EXACT_CONTENT_ADDRESSED_LOCAL_JSON_SOURCE_REFERENCE_ID_BINDS_TO_EXACT_TARGET_DOCUMENT_ID",
+    "EXACT_DECLARED_DECIMAL_FACTS_CAN_BE_INDEPENDENTLY_EXTRACTED_AND_COMPARED_ACROSS_TWO_DOCUMENTS",
+    "EXPLICIT_TWO_ACTION_POLICY_IS_SELECTED_FROM_THE_VERIFIED_CROSS_DOCUMENT_EQUALITY_RESULT",
+    "SOURCE_TARGET_AND_CASE_BYTES_ARE_REQUIRED_IMMUTABLE_DURING_DIRECT_ROUTE_EXECUTION",
+    "V4_ADDS_ONE_BOUNDED_ROUTE_AND_PRESERVES_V3_FALLBACK"
+  ],
+  "boundary": [
+    "DOCUMENTS_ARE_TASK_BOUND_INPUTS_NOT_EXTERNAL_WORLD_TRUTH",
+    "ONLY_EXACT_JSON_KEY_PATHS_REFERENCE_IDS_AND_DECIMAL_EQUALITY",
+    "NO_SYNONYMY_CONTEXT_DEPENDENT_WORD_SENSE_OR_ONTOLOGY_INFERENCE",
+    "NO_GENERAL_CROSS_DOCUMENT_SEMANTIC_BINDING",
+    "NO_EXTERNAL_FACT_AUTHENTICATION",
+    "NO_FINANCE_FAMILY_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
