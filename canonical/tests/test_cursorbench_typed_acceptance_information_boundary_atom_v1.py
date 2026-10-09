@@ -44,6 +44,7 @@ def write_binding(root: Path, m, *, receipt_mut=None, verify_mut=None):
     receipt = {
         "schema": RECEIPT_SCHEMA,
         "boundary_id": "boundary:clean-1",
+        "producer_id": "brain-producer",
         "subject_model_sha256": model_sha256(m),
         "declared_visible_input_sha256": visible,
         "preterminal_information_sources_complete": True,
@@ -62,6 +63,9 @@ def write_binding(root: Path, m, *, receipt_mut=None, verify_mut=None):
         "subject_git_blob_sha": git_blob_sha(receipt_path),
         "subject_model_sha256": model_sha256(m),
         "boundary_id": receipt.get("boundary_id"),
+        "producer_id": "brain-producer",
+        "independent_verifier_id": "independent-sprite",
+        "verification_method": "INDEPENDENT_REPLAY",
         "declared_visible_input_sha256": visible,
         "pass": True,
         "independent_verified": True,
@@ -197,3 +201,17 @@ def test_symlink_escape_is_rejected(tmp_path):
     out = verify(m, binding, repo_root=tmp_path)
     assert out["pass"] is False
     assert "BOUND_SYMLINK_FORBIDDEN" in out["errors"][0]
+
+
+def test_verification_must_be_producer_independent(tmp_path):
+    m = model()
+    binding = write_binding(
+        tmp_path,
+        m,
+        verify_mut=lambda v: v.__setitem__(
+            "independent_verifier_id", "brain-producer"
+        ),
+    )
+    out = verify(m, binding, repo_root=tmp_path)
+    assert out["pass"] is False
+    assert "VERIFICATION_NOT_PRODUCER_INDEPENDENT" in out["errors"][0]
