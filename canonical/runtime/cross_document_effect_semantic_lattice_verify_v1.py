@@ -5,6 +5,9 @@ from copy import deepcopy
 from typing import Any, Mapping, Sequence
 
 from canonical.runtime.source_aligned_semantic_proof_v8 import verify_proof
+from canonical.runtime.certified_effect_target_scope_v1 import parse_effect_target_scope
+from canonical.runtime.certified_effect_id_inventory_v1 import parse_effect_id_inventories
+from canonical.runtime.certified_document_effect_relation_v1 import parse_effect_relations
 from canonical.runtime import cross_document_effect_hypothesis_worldset_v1 as worldset
 from canonical.runtime import cross_document_effect_hypothesis_worldset_verify_v1 as worldset_verify
 
@@ -71,6 +74,99 @@ def _dedupe(rows,keyfn):
     return [out[k] for k in sorted(out,key=lambda x:str(x))]
 
 
+def _independent_missing_source_claims(doc:Mapping[str,Any])->list[dict[str,Any]]:
+    """Reconstruct only omitted V7/V8 source-explicit claim slots.
+
+    This intentionally does not import the producer-side autofill module.
+    Existing claims own their semantic slot even when malformed or wrong, so this
+    verifier never repairs contradictory caller evidence.
+    """
+    claims=list(doc["claims"])
+    existing_ids={
+        str(row.get("claim_id"))
+        for row in claims
+        if isinstance(row,Mapping) and isinstance(row.get("claim_id"),str)
+    }
+    scope_present=False
+    inventory_targets=set()
+    relation_ids=set()
+    block_inventory=False
+    block_relation=False
+    for row in claims:
+        if not isinstance(row,Mapping):
+            continue
+        kind=row.get("kind")
+        if kind=="CERTIFIED_EFFECT_TARGET_SCOPE":
+            scope_present=True
+        elif kind=="CERTIFIED_EFFECT_ID_INVENTORY":
+            target=row.get("target_id")
+            if isinstance(target,str) and target.strip():
+                inventory_targets.add(target.strip())
+            else:
+                block_inventory=True
+        elif kind=="CERTIFIED_DOCUMENT_EFFECT_RELATION":
+            effect=row.get("effect")
+            eid=effect.get("effect_id") if isinstance(effect,Mapping) else None
+            if isinstance(eid,str) and eid.strip():
+                relation_ids.add(eid.strip())
+            else:
+                block_relation=True
+
+    out=[]
+    counter=0
+    def fresh(kind:str)->str:
+        nonlocal counter
+        while True:
+            counter+=1
+            cid=f"VERIFY_SOURCE_AUTOFILL::{kind}::{counter}"
+            if cid not in existing_ids:
+                existing_ids.add(cid)
+                return cid
+
+    scope=parse_effect_target_scope(doc["source_text"],source=doc["source_id"])
+    if not scope_present and scope.get("status")=="PARSED":
+        out.append({
+            "claim_id":fresh("scope"),
+            "kind":"CERTIFIED_EFFECT_TARGET_SCOPE",
+            "target_ids":list(scope["parse"]["target_ids"]),
+        })
+
+    inventories=parse_effect_id_inventories(
+        doc["source_text"],source=doc["source_id"]
+    )
+    if not block_inventory and inventories.get("status")=="PARSED":
+        for parsed in inventories.get("inventories") or []:
+            target=str(parsed.get("target_id") or "")
+            if target and target not in inventory_targets:
+                out.append({
+                    "claim_id":fresh("inventory"),
+                    "kind":"CERTIFIED_EFFECT_ID_INVENTORY",
+                    "target_id":target,
+                    "effect_ids":list(parsed.get("effect_ids") or []),
+                })
+
+    relations=parse_effect_relations(doc["source_text"],source=doc["source_id"])
+    if not block_relation and relations.get("status")=="PARSED":
+        for parsed in relations.get("relations") or []:
+            effect=parsed.get("effect")
+            if not isinstance(effect,Mapping):
+                continue
+            eid=str(effect.get("effect_id") or "")
+            if not eid or eid in relation_ids:
+                continue
+            out.append({
+                "claim_id":fresh("relation"),
+                "kind":"CERTIFIED_DOCUMENT_EFFECT_RELATION",
+                "effect":{
+                    k:v for k,v in effect.items() if k!="source_locator"
+                },
+            })
+
+    if len(claims)+len(out)>MAX_CLAIMS_PER_DOCUMENT:
+        raise ValueError("COMBINED_CLAIM_COUNT_EXCEEDS_BOUND")
+    return out
+
+
 def _recompute(problem:Mapping[str,Any])->dict[str,Any]:
     if not isinstance(problem,Mapping) or problem.get("schema")!=PROBLEM_SCHEMA:
         raise ValueError("PROBLEM_SCHEMA_INVALID")
@@ -84,10 +180,11 @@ def _recompute(problem:Mapping[str,Any])->dict[str,Any]:
     states=[]; open_atoms=[]; exact_by_doc={}
 
     for doc in docs:
+        synthesized=_independent_missing_source_claims(doc)
         proof=verify_proof(
             doc["source_text"],
             source_id=doc["source_id"],
-            claims=doc["claims"],
+            claims=list(doc["claims"])+synthesized,
         )
         if proof.get("status")=="FAIL_CLOSED":
             raise ValueError("SOURCE_PROOF_FAIL_CLOSED:"+doc["document_id"])
@@ -143,6 +240,8 @@ def _recompute(problem:Mapping[str,Any])->dict[str,Any]:
             "query_effect_id_inventory":{"kind":"TOP"},
             "relation_states":{},
             "query_status":None,
+            "provided_claim_count":len(doc["claims"]),
+            "synthesized_claim_count":len(synthesized),
             "accepted_claim_count":len(accepted),
             "rejected_claim_count":len(proof.get("rejected_claims") or []),
         }

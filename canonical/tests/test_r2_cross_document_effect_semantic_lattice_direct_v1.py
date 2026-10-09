@@ -33,6 +33,26 @@ class Direct(unittest.TestCase):
             out=d.run({"task_id":"x","goal":goal()},repo_root=root)
             self.assertTrue(out["pass"],out); self.assertEqual(out["effective_value"],"10")
 
+    def test_source_explicit_without_claim_objects_closes(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td)
+            effect=define("A.t","10")
+            source="\n".join([
+                "Effect IDs only for threshold: A.t.",
+                rel(effect),
+            ])
+            write(root,case({
+                "document_id":"A",
+                "source_id":"A",
+                "source_text":source,
+                "claims":[],
+            }))
+            pf=d.preflight({"task_id":"x","goal":goal()},repo_root=root)
+            self.assertTrue(pf["matched"],pf)
+            out=d.run({"task_id":"x","goal":goal()},repo_root=root)
+            self.assertTrue(out["pass"],out)
+            self.assertEqual(out["effective_value"],"10")
+
     def test_inventory_top(self):
         with tempfile.TemporaryDirectory() as td:
             root=Path(td); write(root,case(doc("A",None,[])))

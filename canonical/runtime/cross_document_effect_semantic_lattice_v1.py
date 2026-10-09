@@ -22,6 +22,7 @@ from copy import deepcopy
 from typing import Any, Mapping, Sequence
 
 from canonical.runtime.source_aligned_semantic_proof_v8 import verify_proof
+from canonical.runtime.source_explicit_semantic_claim_autofill_v1 import synthesize_missing_claims
 from canonical.runtime import cross_document_effect_hypothesis_worldset_v1 as worldset
 from canonical.runtime import cross_document_effect_hypothesis_worldset_verify_v1 as worldset_verify
 
@@ -111,10 +112,24 @@ def evaluate(problem:Mapping[str,Any])->dict[str,Any]:
         refinement_count=0
 
         for doc in documents:
+            autofill=synthesize_missing_claims(
+                doc["source_text"],
+                source_id=doc["source_id"],
+                existing_claims=doc["claims"],
+            )
+            if autofill.get("pass") is not True:
+                raise ValueError(
+                    "SOURCE_EXPLICIT_AUTOFILL_FAIL_CLOSED:"
+                    +doc["document_id"]+":"
+                    +str(autofill.get("reason") or "UNKNOWN")
+                )
+            proof_claims=list(doc["claims"])+list(
+                autofill.get("synthesized_claims") or []
+            )
             proof=verify_proof(
                 doc["source_text"],
                 source_id=doc["source_id"],
-                claims=doc["claims"],
+                claims=proof_claims,
             )
             if proof.get("status")=="FAIL_CLOSED":
                 raise ValueError(
@@ -186,6 +201,10 @@ def evaluate(problem:Mapping[str,Any])->dict[str,Any]:
                 "query_effect_id_inventory":{"kind":"TOP"},
                 "relation_states":{},
                 "query_status":None,
+                "provided_claim_count":len(doc["claims"]),
+                "synthesized_claim_count":len(
+                    autofill.get("synthesized_claims") or []
+                ),
                 "accepted_claim_count":len(accepted),
                 "rejected_claim_count":len(proof.get("rejected_claims") or []),
             }
