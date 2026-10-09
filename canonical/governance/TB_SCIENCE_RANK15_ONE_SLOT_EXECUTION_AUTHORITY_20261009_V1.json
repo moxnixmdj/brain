@@ -1,0 +1,94 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK15_ONE_SLOT_EXECUTION_AUTHORITY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "ACTIVE_ONE_SLOT_BRAIN_AUTHORITY__FROZEN_REQUIREMENTS_REPAIR_BOUND__FRESH_PUBLIC_LEASE_REQUIRED",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "slot": {
+    "id": "terminal-bench-science/protein-active-learning::trial-0",
+    "ledger_schedule_rank": 15,
+    "frozen_manifest_schedule_order": 14,
+    "task_rank": 14,
+    "digest": "sha256:d7e16b7c468551b468364cf2a86dba2383b007f3f2f01c6d2ce01d99ff30d48f"
+  },
+  "intent": {
+    "path": "canonical/action_intents/ACTION_INTENT_TB_SCIENCE_RANK15_20261009_V1.json",
+    "git_blob_sha": "ce2c7aeb17c450e17b02a3b616ce8a8374edabe4"
+  },
+  "candidate": {
+    "path": "canonical/governance/TB_SCIENCE_RANK15_ONE_SLOT_EXECUTION_AUTHORITY_CANDIDATE_20261009_V1.json",
+    "git_blob_sha": "88ffb2b0117a9fb7f8885118171b53b187bc581d"
+  },
+  "candidate_verification": {
+    "path": "canonical/verification/TB_SCIENCE_RANK15_AUTHORITY_CANDIDATE_PUBLIC_VERIFICATION_20261009_V1.json",
+    "git_blob_sha": "75f2ca9b52e256e13551977e99784dca868c11a7",
+    "public_workflow_run_id": 37888284764,
+    "public_workflow_job_id": 113683148385,
+    "artifact_id": 11596963685,
+    "artifact_zip_sha256": "38c8204db4a2c01f31184e129181df37ce98dea7a40b7b020680db5a3fd10612"
+  },
+  "current_ledger": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261009_V19.json",
+    "git_blob_sha": "c9b887ac4fb57046be666492748d25ca96056378"
+  },
+  "predecessor_result": {
+    "path": "canonical/verification/TB_SCIENCE_RANK14_V3_IRREVERSIBLE_RESULT_TRUTH_20261009_V1.json",
+    "git_blob_sha": "d5e5412b086c4e23d853dadcf5c70f07f7344e4d",
+    "rerun_authority": false
+  },
+  "exact_route": {
+    "agent_blob": "e7e258f567499bd7356c0276d6293aa30dbd338c",
+    "planner_blob": "58964dc8d6b5eed5c202081cd800035c791eeb1d",
+    "command_policy_blob": "a525773417291c7a4841bf35e1baff5370350d0d",
+    "frozen_requirements_repair_verification_blob": "d60c84676de7dfa090810b3b65132d324ac49f38",
+    "carrier_closure_blob": "8008b1e2382c1235e3b788e0f8d4ab9a48487409",
+    "carrier_closure_verification_blob": "2f604985baa7f88c61b23958d59dc2ecd4c0990b",
+    "qwen_model_sha256": "f41c0a0c0e43bf721fb2da29374cd1a97271bac0bab08a9dc42964525e82350c",
+    "llama_cpp_commit": "bec4772f6a2527d371557b5d2032641e5ff7619c",
+    "server_context_tokens": 16384,
+    "reserved_completion_tokens": 4096
+  },
+  "controls": {
+    "attempts_authorized": 1,
+    "retries_authorized": 0,
+    "replacement_allowed": false,
+    "fresh_public_execution_claim_required": true,
+    "fresh_epoch_required": true,
+    "fresh_activation_pr_required": true,
+    "exact_public_epoch_required": true,
+    "exact_runtime_blob_identity_required": true,
+    "prestart_exact_planner_token_budget_gate": true,
+    "token_budget_rule": "INPUT_TOKENS_PLUS_4096_MUST_BE_LE_16384",
+    "precheck_failure_consumes_slot": false,
+    "post_start_result_irreversible": true,
+    "final_non_success_after_start_counts_zero": true,
+    "frozen_requirements_after_first_cycle": true,
+    "later_substrate_requirement_redeclaration_authority": false,
+    "candidate_covers_outside_frozen_set_fail_closed": true
+  },
+  "state": {
+    "public_execution_lease_published": false,
+    "public_activation_armed": false,
+    "task_read": false,
+    "task_started": false,
+    "result_present": false,
+    "authority_consumed": false,
+    "benchmark_trials_consumed": 0
+  },
+  "execution_authority": true,
+  "task_read_authority": false,
+  "fresh_reality_authority": true,
+  "promotion_authority": false,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "hard_nonclaims": [
+    "NO_FRESH_PUBLIC_EXECUTION_LEASE_YET",
+    "NO_RANK15_TASK_READ",
+    "NO_RANK15_TASK_START",
+    "NO_RANK15_RESULT",
+    "NO_CLAIM_RANK15_EXACT_PROMPT_FITS_16K_YET",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ]
+}

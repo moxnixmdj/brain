@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_TB_SCIENCE_RANK15_20261009_V1",
+  "date": "2026-10-09",
+  "action_id": "TB_SCIENCE_RANK15_PROTEIN_ACTIVE_LEARNING_ONE_SHOT_V1",
+  "status": "ACTIVE_INTENT__ZERO_EXPOSURE_AUTHORITY_BUILD__FRESH_TOKEN_GUARD_THEN_ONE_SLOT_ONLY_IF_FIT",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "target_obligation": "TB_SCIENCE_GE_58_7",
+  "exact_slot": {
+    "id": "terminal-bench-science/protein-active-learning::trial-0",
+    "ledger_schedule_rank": 15,
+    "frozen_manifest_schedule_order": 14,
+    "task_rank": 14,
+    "digest": "sha256:d7e16b7c468551b468364cf2a86dba2383b007f3f2f01c6d2ce01d99ff30d48f"
+  },
+  "current_truth": {
+    "ledger_v19_blob": "c9b887ac4fb57046be666492748d25ca96056378",
+    "consumed_slots": 14,
+    "successes": 0,
+    "final_failures": 14,
+    "rank14_rerun_authority": false,
+    "rank15_task_started": false,
+    "rank15_execution_authority_consumed": false,
+    "rank15_benchmark_trials_consumed": 0
+  },
+  "repaired_route": {
+    "agent_blob": "e7e258f567499bd7356c0276d6293aa30dbd338c",
+    "planner_blob": "58964dc8d6b5eed5c202081cd800035c791eeb1d",
+    "command_policy_blob": "a525773417291c7a4841bf35e1baff5370350d0d",
+    "frozen_requirements_repair_verification_blob": "d60c84676de7dfa090810b3b65132d324ac49f38",
+    "v12_closure_blob": "8008b1e2382c1235e3b788e0f8d4ab9a48487409",
+    "v12_closure_verification_blob": "2f604985baa7f88c61b23958d59dc2ecd4c0990b",
+    "qwen_model_sha256": "f41c0a0c0e43bf721fb2da29374cd1a97271bac0bab08a9dc42964525e82350c",
+    "llama_cpp_commit": "bec4772f6a2527d371557b5d2032641e5ff7619c",
+    "server_context_tokens": 16384,
+    "reserved_completion_tokens": 4096
+  },
+  "law": [
+    "PUBLIC_STATIC_AUTHORITY_VERIFICATION_BEFORE_ACTIVATION",
+    "FRESH_PUBLIC_EPOCH_AND_EXECUTION_CLAIM_REQUIRED",
+    "EXACT_DIGEST_PINNED_RANK15_TASK_READ_ONLY_UNDER_FRESH_PUBLIC_LEASE",
+    "TASK_START_ONLY_IF_EXACT_INPUT_TOKENS_PLUS_4096_LE_16384",
+    "ANY_PRESTART_FAILURE_IS_NONCONSUMING",
+    "AFTER_TASK_START_RESULT_IS_IRREVERSIBLE_AND_NO_RETRY",
+    "BRAIN_FROZEN_REQUIREMENTS_REMAIN_IMMUTABLE_AFTER_FIRST_CYCLE"
+  ],
+  "benchmark_task_exposure_delta": 0,
+  "benchmark_trials_consumed_delta": 0,
+  "execution_authority": false,
+  "acceptance_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd_max": 0
+}
