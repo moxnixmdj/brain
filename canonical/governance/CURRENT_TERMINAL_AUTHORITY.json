@@ -2082,7 +2082,7 @@
   "r2_scheduler_precedence": {
     "current_authority_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
     "current_scheduler_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V33.json",
-    "current_scheduler_git_blob_sha": "43ce7e6ecd08798ae92985f310431edd3137b8fa",
+    "current_scheduler_git_blob_sha": "52a3af5046761bac2f5aff1c583d6d0241647a7d",
     "single_live_primitive": "ESCAPE_POLICY_ADEQUACY",
     "general_mechanism_missing": false,
     "enumerated_active_zero_reality_cell_count": 0,
@@ -2234,9 +2234,9 @@
   "r2_v33_finance_reference_reconciliation": {
     "status": "VERIFIED_BOUNDED_POSITIVE_ADEQUACY_EXPANSION_AND_GOVERNANCE_RECONCILIATION__TERMINAL_STILL_OPEN",
     "scheduler_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V33.json",
-    "scheduler_git_blob_sha": "43ce7e6ecd08798ae92985f310431edd3137b8fa",
+    "scheduler_git_blob_sha": "52a3af5046761bac2f5aff1c583d6d0241647a7d",
     "direct_activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V19.json",
-    "direct_activation_git_blob_sha": "c29fa1a8480bf2deaca7b3d818f48b6797f419d0",
+    "direct_activation_git_blob_sha": "a62cfd2f117cd334febdbe9e447401b0f03e0327",
     "source_universe_verification_path": "canonical/verification/R2_FINANCE_NORMALIZED_SOURCE_UNIVERSE_DIRECT_ADEQUACY_VERIFY_20261009_V2.json",
     "source_universe_verification_git_blob_sha": "f3a340593a17a849381bde9ef0cc3633ce006a43",
     "explicit_definition_verification_path": "canonical/verification/R2_FINANCE_EXPLICIT_DEFINITION_UNLESS_DIRECT_ADEQUACY_VERIFY_20261009_V1.json",
