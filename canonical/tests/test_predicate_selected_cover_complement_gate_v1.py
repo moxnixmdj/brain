@@ -1,3 +1,5 @@
+from unittest.mock import patch
+
 from canonical.runtime.predicate_selected_cover_complement_gate_v1 import evaluate, predicate_set_digest
 
 SCOPE="scope://opus55/observable-trace"
@@ -107,3 +109,67 @@ def test_self_asserted_receipt_flags_and_plausible_hashes_never_close_abc():
     assert out["u_empty_authorized"] is False
     assert out["abc_closed_authorized"] is False
     assert out["reason"] == "INDEPENDENT_PROOF_REPLAY_NOT_PERFORMED"
+
+
+def expected_selected_cover_claim(p):
+    return {
+        "kind":"SELECTED_COVER_SCOPE_COMPLETE",
+        "scope_id":SCOPE,
+        "predicate_set_sha256":predicate_set_digest(SCOPE,p["routes"]),
+        "residual_definition":"S_TRACE_AND_NOT_ANY_SOUND_ADMISSION_PREDICATE",
+        "admission_soundness_required":True,
+        "conclusion":"UNSAT_COMPLEMENT",
+    }
+
+
+def test_unallowlisted_replay_kernel_cannot_close_cover():
+    p=payload()
+    claim=expected_selected_cover_claim(p)
+    p["proof_replay_request"]={
+        "kernel_id":"FAKE_SELECTED_COVER_PROVER",
+        "kernel_path":"canonical/runtime/fake.py",
+        "kernel_git_blob_sha":"a"*40,
+        "input":{},
+        "input_sha256":"sha256:"+"b"*64,
+        "expected_claim":claim,
+    }
+    out=evaluate(p)
+    assert out["pass"] is False
+    assert out["reason"]=="TRUSTED_PROOF_REPLAY_FAILED"
+    assert out["detail"]["replay_reason"]=="KERNEL_NOT_ALLOWLISTED"
+    assert out["u_empty_authorized"] is False
+    assert out["abc_closed_authorized"] is False
+
+
+def test_replay_request_cannot_target_a_different_claim():
+    p=payload()
+    p["proof_replay_request"]={"expected_claim":{"kind":"SOMETHING_ELSE"}}
+    out=evaluate(p)
+    assert out["pass"] is False
+    assert out["reason"]=="PROOF_REPLAY_EXPECTED_CLAIM_MISMATCH"
+
+
+def test_only_exact_trusted_replayed_selected_cover_claim_reaches_abc_seam():
+    p=payload()
+    claim=expected_selected_cover_claim(p)
+    p["proof_replay_request"]={"expected_claim":claim}
+    replayed={
+        "pass":True,
+        "status":"PASS__TRUSTED_EXACT_BYTE_KERNEL_REPLAY",
+        "independent_proof_replay_performed":True,
+        "verification_authority_mutated":False,
+        "proved_claim":claim,
+        "replay_receipt_sha256":"sha256:"+"c"*64,
+    }
+    with patch(
+        "canonical.runtime.predicate_selected_cover_complement_gate_v1.trusted_replay.replay",
+        return_value=replayed,
+    ):
+        out=evaluate(p)
+    assert out["pass"] is True
+    assert out["selected_cover_complete_authorized"] is True
+    assert out["u_empty_authorized"] is True
+    assert out["abc_closed_authorized"] is True
+    assert out["d_finality_required"] is True
+    assert out["terminal_authority"] is False
+    assert out["terminal_credit_delta"] == 0
