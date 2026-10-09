@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V36",
   "date": "2026-10-09",
-  "status": "ACTIVE_FAIL_CLOSED_REAL_MISSION_BOUND__STRICT_EXTERNALITY_RECONCILED__R3_ZERO_RESIDUAL_RECONCILED__OPUS_5_5_CHECKPOINT_TERMINAL_FALSE__CURRENT_R2_V60_AND_CODING_V3_PROJECTION_BOUND__COVERAGE_R1_R4_LIVE_BINDING_REPAIRED__CLAIM_SCOPED_COMPLETENESS_THEOREM_BOUND__ROOT_NAMESPACE_COLLISION_GUARDED",
+  "status": "ACTIVE_FAIL_CLOSED_REAL_MISSION_BOUND__STRICT_EXTERNALITY_RECONCILED__R3_ZERO_RESIDUAL_RECONCILED__OPUS_5_5_CHECKPOINT_TERMINAL_FALSE__CURRENT_R2_V60_AND_CODING_V3_PROJECTION_BOUND__COVERAGE_R1_R4_LIVE_BINDING_REPAIRED__CLAIM_SCOPED_COMPLETENESS_THEOREM_BOUND__ROOT_NAMESPACE_COLLISION_GUARDED__EXECUTABLE_REFINEMENT_STRUCTURAL_ANTI_BYPASS__RUNTIME_REBIND_CENSUS_PENDING",
   "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "authoritative_sources": {
     "universal_escape_resolver_v2_active_planning_overlay": {
@@ -253,7 +253,10 @@
       "independent_verification": {
         "path": "canonical/verification/CREDITABLE_ROUTER_CONTEXT_PAYLOAD_BINDING_SPRITE_VERIFICATION_20261007_V1.json",
         "git_blob_sha": "e3b02317645d9ca508b2fb9d6cec8d7276eac083"
-      }
+      },
+      "status": "SUPERSEDED_RUNTIME_BINDING__EVIDENCE_RETAINED",
+      "superseded_by": "creditable_route_refinement_admission_guard",
+      "note": "HISTORICAL_CONTEXT_PAYLOAD_BINDING_VERIFICATION_ONLY__DOES_NOT_DEFINE_CURRENT_RUNTIME_BLOB"
     },
     "predicate_argument_source_proof": {
       "path": "canonical/governance/SOURCE_ALIGNED_PREDICATE_ARGUMENT_PROOF_20261007_V1.json",
@@ -591,7 +594,8 @@
     },
     "terminal_candidate_donor_independence_audit": {
       "path": "canonical/runtime/terminal_candidate_donor_independence_audit_v1.py",
-      "git_blob_sha": "0ed69641693538f15b7e1658f5ac5e80031afb26"
+      "git_blob_sha": "7b3713267d32f9b4ae7e2ca56ea17c5859bdec71",
+      "current_byte_binding_status": "BOUND_BY_CURRENT_RUNTIME_BYTE_REBIND_PROOF__MONOTONE_AUDIT_COVERAGE_STRENGTHENING"
     },
     "adaptive_positive_cover_fixed_point_v2": {
       "path": "canonical/governance/ADAPTIVE_ABSTRACT_POSITIVE_COVER_FIXED_POINT_THEOREM_20261007_V2.json"
@@ -770,13 +774,14 @@
       },
       "runtime": {
         "path": "canonical/runtime/terminal_autopilot_executor_v1.py",
-        "git_blob_sha": "657a94d00833ad91403070132ef4e1f0d7337336"
+        "git_blob_sha": "6f828ce5631db582ea4d4a3d73c59b08f232abf0"
       },
       "planner": {
         "path": "canonical/runtime/terminal_autopilot_v1.py",
-        "git_blob_sha": "bb72c160f3be00efedbd5d111b77d956bed2cb11"
+        "git_blob_sha": "78fa2cbabf8ed5e70de8b3ed987b510ca033076b"
       },
-      "role": "ACTIVE_GATED_CONCURRENT_EXECUTOR__REVERSIBLE_ZERO_REALITY_AND_INDEPENDENT_VERIFY__PER_TASK_CONTENT_BOUND_PROMOTION__NO_IRREVERSIBLE_BENCHMARK_AUTOEXECUTION"
+      "role": "ACTIVE_GATED_CONCURRENT_EXECUTOR__REVERSIBLE_ZERO_REALITY_AND_INDEPENDENT_VERIFY__PER_TASK_CONTENT_BOUND_PROMOTION__NO_IRREVERSIBLE_BENCHMARK_AUTOEXECUTION",
+      "current_byte_binding_status": "BOUND_BY_CURRENT_RUNTIME_BYTE_REBIND_PROOF__EXECUTOR_FAIL_CLOSED_AND_PLANNER_AUTHORITY_NONBROADENING"
     },
     "gdpval_public_220_composed_semantic_localization_public_execution": {
       "path": "canonical/evidence/GDPVAL_PUBLIC_220_COMPOSED_SEMANTIC_LOCALIZATION_PUBLIC_EXECUTION_RECEIPT_20261007_V1.json",
@@ -1319,6 +1324,40 @@
         "git_blob_sha": "a19d683f86b01fdf3ed174d35c4e2cc96f8f71fa"
       },
       "note": "SECOND_AUTHENTICATED_CONSTRUCTIVE_CODING_REGION__FORMAL_ALL_MEMBERS_LIVENESS_UNDER_SIX_PREEXECUTION_ATOMS__NO_PRIVATE_CURSORBENCH_MEMBERSHIP_OR_WHOLE_COVER"
+    },
+    "creditable_route_refinement_admission_guard": {
+      "path": "canonical/runtime/certificate_gated_selected_route_runtime_entrypoint_v2.py",
+      "git_blob_sha": "e6cce56b50bea1261fb3473389a28e8263417930",
+      "structural_verification": {
+        "path": "canonical/verification/EXECUTABLE_REFINEMENT_STRUCTURAL_FRAMEWORK_SPRITE_VERIFICATION_20261009_V1.json",
+        "git_blob_sha": "81984fda2a10856c55cc46ce6a85e7d4fcaa54e2"
+      },
+      "note": "CREDITABLE_ROUTE_ROWS_REQUIRE_CONTENT_ADDRESSED_REFINEMENT_CERTIFICATE_AND_SEPARATE_VERIFIED_REFINEMENT_RECEIPT_BEFORE_CANDIDATE_ADMISSION"
+    },
+    "executable_refinement_terminal_dependency_graph": {
+      "path": "canonical/governance/CURRENT_TERMINAL_DEPENDENCY_GRAPH_V1.json",
+      "git_blob_sha": "230ce131bd171f13c9cf9af539f9d373fe8748aa",
+      "note": "STRUCTURAL_DEPENDENCY_INVENTORY__GRAPH_COMPLETENESS_NOT_SELF_PROVED__ZERO_TERMINAL_CREDIT"
+    },
+    "executable_refinement_structural_verifier": {
+      "path": "canonical/runtime/executable_refinement_verifier_v1.py",
+      "git_blob_sha": "65569581716d5378929a900fa0a2045e1785fabf",
+      "note": "DECLARATIVE_BINDING_VERIFIER_ONLY__DOES_NOT_SELF_CERTIFY_SEMANTIC_REFINEMENT"
+    },
+    "executable_refinement_structural_framework_independent_verification": {
+      "path": "canonical/verification/EXECUTABLE_REFINEMENT_STRUCTURAL_FRAMEWORK_SPRITE_VERIFICATION_20261009_V1.json",
+      "git_blob_sha": "81984fda2a10856c55cc46ce6a85e7d4fcaa54e2",
+      "note": "INDEPENDENT_SPRITE_EXECUTION__31_FOCUSED_BEHAVIOR_CHECKS__SEMANTIC_REFINEMENT_OPEN"
+    },
+    "current_authority_runtime_binding_census_verifier": {
+      "path": "canonical/runtime/current_authority_runtime_binding_census_v1.py",
+      "git_blob_sha": "e8746d141989f5279c66931d9cc9167504034b98",
+      "note": "FAIL_CLOSED_CURRENT_VS_SUPERSEDED_RUNTIME_BYTE_BINDING_CENSUS"
+    },
+    "current_runtime_byte_rebind_proof": {
+      "path": "canonical/verification/CURRENT_RUNTIME_BYTE_REBIND_PROOF_20261009_V1.json",
+      "git_blob_sha": "f6392c5bef845e4f97a94cd5754afac88c4a34c7",
+      "note": "EXACT_OLD_TO_CURRENT_RUNTIME_BINDING_JUSTIFICATION__BYTE_COHERENCE_ONLY__ZERO_TERMINAL_CREDIT"
     }
   },
   "live_truth": {
@@ -2134,7 +2173,19 @@
     "coding_specification_authenticated_constructive_region_policy_ids": [
       "BRAIN_INDEPENDENT_ACCEPTANCE_MODEL_TYPED_PLAN_V1",
       "BRAIN_FINITE_CANDIDATE_EXACT_ORACLE_SOLVER_V1"
-    ]
+    ],
+    "executable_refinement_structural_binding_framework_present": true,
+    "executable_refinement_framework_execution_verified": true,
+    "creditable_route_refinement_receipt_required_by_candidate_admission": true,
+    "creditable_selected_route_refinement_admission_enforced": true,
+    "repository_wide_executable_refinement_closed": false,
+    "non_selected_runtime_executable_refinement_coverage_closed": false,
+    "executable_refinement_semantic_proof_route_closed": false,
+    "executable_refinement_missing_is_external_impossibility": false,
+    "current_authority_runtime_byte_binding_coherence": false,
+    "current_authority_runtime_binding_classification": "INTERNAL_RECHECK_REQUIRED__JUSTIFIED_REBINDS_APPLIED__EXACT_TREE_CENSUS_PENDING",
+    "current_authority_runtime_drift_is_external_impossibility": false,
+    "r1_current_byte_drift_lock_valid": false
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -2299,7 +2350,12 @@
     "NO_CLAIM_R1_R2_R3_OR_R4_IS_GLOBALLY_CLOSED_BY_THE_LIVE_BINDING_REPAIR.",
     "NO_CLAIM_THE_R1_R4_META_CONTROL_GRANTS_TERMINAL_ACCEPTANCE_CAPABILITY_OR_OWNERSHIP_CREDIT.",
     "NO_CLAIM_A_SOUND_FROZEN_CHECKPOINT_OR_SUBGOAL_CERTIFICATE_IMPLIES_THE_OPEN_ENDED_GLOBAL_MISSION_IS_COMPLETE.",
-    "NO_CLAIM_THE_R1_R4_ROOT_THEOREM_BY_ITSELF_PROVES_GLOBAL_OPTIMALITY_OR_MAXIMUM_CAPABILITY."
+    "NO_CLAIM_THE_R1_R4_ROOT_THEOREM_BY_ITSELF_PROVES_GLOBAL_OPTIMALITY_OR_MAXIMUM_CAPABILITY.",
+    "NO_CLAIM_DECLARATIVE_EXECUTABLE_REFINEMENT_CERTIFICATES_SELF_PROVE_REFINEMENT.",
+    "NO_CLAIM_STRUCTURAL_FRAMEWORK_REPLAY_PROVES_SEMANTIC_EXECUTABLE_REFINEMENT.",
+    "NO_CLAIM_RUNTIME_BYTE_REBIND_PROVES_RUNTIME_SEMANTICS_OR_TERMINALITY.",
+    "NO_CLAIM_CURRENT_UNIFIED_FABRIC_DEFAULT_RUNTIME_REPLAY_REPROVES_FULL_R1_LIFECYCLE_CLOSURE.",
+    "NO_CLAIM_BYTE_BINDING_COHERENCE_IS_TRUE_UNTIL_POST_REBIND_TREE_CENSUS_PASSES."
   ],
   "accounting": {
     "incremental_spend_usd": 0,
@@ -2367,7 +2423,7 @@
     "git_blob_sha": "e70f662d27e0b917eaf6ef8ba9da3bebc5ab7ee0",
     "runtime_gate": {
       "path": "canonical/runtime/terminal_root_decision_gate_v1.py",
-      "git_blob_sha": "7c7e0c34cc599c7114fb83421307db2433e2b269"
+      "git_blob_sha": "6f546f657900405c628c1eb3575bc1e4ac220aeb"
     },
     "tests": {
       "path": "canonical/tests/test_terminal_root_decision_gate_v1.py",
@@ -2379,7 +2435,8 @@
       "git_blob_sha": "4cb8e472dd4f8a8f65abd278cada8508d4ba47d0",
       "tests_path": "canonical/tests/test_exact_sound_db_admission_convergence_v1.py",
       "tests_git_blob_sha": "e4130b4e3401d382e27e233a02c2447e6c07d459"
-    }
+    },
+    "current_runtime_gate_binding_status": "BOUND_BY_CURRENT_RUNTIME_BYTE_REBIND_PROOF__EXACT_BYTE_REPLAY_8_OF_8"
   },
   "zero_bureaucracy_truth_reconciliation_20261007_v1": {
     "status": "BOUND_EXISTING_PROOF_INTO_LIVE_AUTHORITY__NO_TERMINAL_CREDIT",
@@ -2665,7 +2722,7 @@
     },
     "unified_fabric": {
       "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-      "git_blob_sha": "5badd256e18ab4bad58be862c69ef9e272bf7eb1"
+      "git_blob_sha": "5eaea605c4e441ef33180bd76a951a9f973dc40f"
     },
     "verification": {
       "path": "canonical/verification/LIVE_CAPABILITY_OWNERSHIP_UNIVERSAL_INVOCATION_V1_SOURCE_REPLAY_20261008_V1.json",
@@ -2708,7 +2765,7 @@
       "git_blob_sha": "9becd33679c2f839df854c48fb14ead568128646",
       "status": "PASS__R1_CURRENT_BYTE_ARCHITECTURE_RESEALED__9_OF_9_FOCUSED_REGRESSION"
     },
-    "r1_drift_locked": true,
+    "r1_drift_locked": false,
     "verification_status": "PASS__R1_CURRENT_BYTE_ARCHITECTURE_RESEALED__9_OF_9_FOCUSED_REGRESSION",
     "live_composition": {
       "path": "canonical/runtime/live_capability_composition_v1.py",
@@ -2729,7 +2786,9 @@
       "learnable": true,
       "reusable": true
     },
-    "capability_lifecycle_complete": true
+    "capability_lifecycle_complete": true,
+    "r1_structural_closure_current_byte_verified": false,
+    "current_byte_binding_status": "CURRENT_UNIFIED_FABRIC_BLOB_INDEPENDENTLY_VERIFIED_FOR_DEFAULT_RUNTIME_SCOPE__R1_FULL_LIFECYCLE_REPLAY_NOT_RERUN"
   },
   "r1_universal_live_capability_invocation_20261008_v1": {
     "status": "ACTIVE_FAIL_CLOSED_UNIVERSAL_LIVE_CAPABILITY_INVOCATION__V3_FRONT_DOOR_BOUND",
@@ -2739,7 +2798,7 @@
     },
     "unified_fabric": {
       "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-      "git_blob_sha": "5badd256e18ab4bad58be862c69ef9e272bf7eb1"
+      "git_blob_sha": "5eaea605c4e441ef33180bd76a951a9f973dc40f"
     },
     "regression": {
       "path": "canonical/tests/test_live_capability_invoker_v1.py",
@@ -2793,7 +2852,9 @@
       "learnable": true,
       "reusable": true
     },
-    "capability_lifecycle_complete": true
+    "capability_lifecycle_complete": true,
+    "current_byte_invocation_closure_verified": false,
+    "current_byte_binding_status": "CURRENT_UNIFIED_FABRIC_BLOB_INDEPENDENTLY_VERIFIED_FOR_DEFAULT_RUNTIME_SCOPE__R1_INVOCATION_CLOSURE_REPLAY_NOT_RERUN"
   },
   "current_option_preserving_optimization_20261008_v1": {
     "status": "ACTIVE_FAIL_CLOSED_OPTION_PRESERVATION_LAW",
@@ -2804,14 +2865,17 @@
       "path": "canonical/governance/OPTION_PRESERVING_CAPABILITY_OPTIMIZATION_20261008_V1.json"
     },
     "runtime": {
-      "path": "canonical/runtime/option_preserving_capability_optimizer_v1.py"
+      "path": "canonical/runtime/option_preserving_capability_optimizer_v1.py",
+      "git_blob_sha": "367478e71b015fb2f4b7cc40dad34f88a7f47238"
     },
     "physical_deletion_requires_separate_proof": true,
     "terminal_credit_delta": 0,
     "verification": {
       "path": "canonical/verification/OPTION_PRESERVING_CAPABILITY_OPTIMIZER_INDEPENDENT_VERIFICATION_20261008_V1.json",
       "status": "PASS__OPTION_PRESERVING_OPTIMIZER_AND_SCHEDULER_REGRESSION__16_OF_16__GOVERNANCE_PASS"
-    }
+    },
+    "current_runtime_blob_binding_verified": true,
+    "current_runtime_blob_binding_status": "PASS__EXACT_CURRENT_RUNTIME_BLOB_REMOTE_BEHAVIORAL_REPLAY_12_OF_12"
   },
   "checkpoint_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "objective_precedence": {
@@ -2840,7 +2904,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 109,
+  "pointer_revision": 110,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
@@ -4080,6 +4144,21 @@
     "contradictory_duplicate_path_count_after": 0,
     "semantic_credit_delta": 0,
     "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "executable_refinement_terminal_closure_reconciliation_20261009_v1": {
+    "state": "INTERNAL_UNRESOLVED",
+    "structural_verifier_bound": true,
+    "terminal_dependency_graph_bound": true,
+    "creditable_route_anti_bypass_guard_implemented": true,
+    "structural_framework_execution_verified": true,
+    "semantic_proof_route_closed": false,
+    "non_selected_runtime_refinement_coverage_closed": false,
+    "runtime_byte_rebind_proof_bound": true,
+    "current_authority_runtime_byte_binding_coherence": false,
+    "current_authority_runtime_binding_census_pending": true,
+    "external_impossibility_claimed": false,
+    "incremental_spend_usd": 0,
     "terminal_credit_delta": 0
   }
 }
