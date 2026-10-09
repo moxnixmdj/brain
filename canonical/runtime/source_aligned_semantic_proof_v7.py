@@ -17,6 +17,7 @@ from typing import Any, Mapping, Sequence
 
 from canonical.runtime.source_aligned_semantic_proof_v6 import verify_proof as verify_v6
 from canonical.runtime.certified_effect_target_scope_v1 import parse_effect_target_scope
+from canonical.runtime.certified_effect_id_inventory_v1 import parse_effect_id_inventories
 
 SCHEMA="BRAIN_SOURCE_ALIGNED_SEMANTIC_PROOF_V7"
 
@@ -29,6 +30,24 @@ def _scope_atom(source_id:str,scope_id:str,target_ids:Sequence[str])->str:
         + scope_id
         + "::"
         + ",".join(target_ids)
+    )
+
+
+def _inventory_atom(
+    source_id:str,
+    inventory_id:str,
+    target_id:str,
+    effect_ids:Sequence[str],
+)->str:
+    return (
+        "EFFECT_ID_INVENTORY::"
+        + source_id
+        + "::"
+        + inventory_id
+        + "::"
+        + target_id
+        + "::"
+        + ",".join(effect_ids)
     )
 
 
@@ -52,6 +71,7 @@ def verify_proof(
 
     base_claims=[]
     scope_claims=[]
+    inventory_claims=[]
     seen=set()
     errors=[]
     for i,claim in enumerate(claims):
@@ -68,6 +88,8 @@ def verify_proof(
         seen.add(cid)
         if claim.get("kind")=="CERTIFIED_EFFECT_TARGET_SCOPE":
             scope_claims.append(claim)
+        elif claim.get("kind")=="CERTIFIED_EFFECT_ID_INVENTORY":
+            inventory_claims.append(claim)
         else:
             base_claims.append(claim)
 
@@ -102,6 +124,12 @@ def verify_proof(
     proved=list(base.get("proved_constraints") or [])
 
     parsed=parse_effect_target_scope(source_text,source=source_id)
+    parsed_inventories=parse_effect_id_inventories(source_text,source=source_id)
+    inventory_by_target={
+        row["target_id"]:row
+        for row in (parsed_inventories.get("inventories") or [])
+        if isinstance(row,Mapping)
+    }
 
     for claim in scope_claims:
         cid=str(claim["claim_id"])
@@ -160,6 +188,75 @@ def verify_proof(
         })
         proved.append(constraint)
 
+    for claim in inventory_claims:
+        cid=str(claim["claim_id"])
+        target=str(claim.get("target_id") or "").strip()
+        if not target:
+            rejected.append({
+                "claim_id":cid,
+                "reason":"TARGET_ID_INVALID",
+            })
+            continue
+        row=inventory_by_target.get(target)
+        if row is None:
+            rejected.append({
+                "claim_id":cid,
+                "reason":"EFFECT_ID_INVENTORY_NOT_CERTIFIABLY_PARSED",
+                "target_id":target,
+                "inventory_status":parsed_inventories.get("status"),
+                "inventory_reason":parsed_inventories.get("reason"),
+            })
+            continue
+
+        raw=claim.get("effect_ids")
+        if (
+            not isinstance(raw,Sequence)
+            or isinstance(raw,(str,bytes))
+            or any(not isinstance(x,str) or not x.strip() for x in raw)
+        ):
+            rejected.append({
+                "claim_id":cid,
+                "reason":"EFFECT_IDS_INVALID",
+            })
+            continue
+        claimed=sorted(x.strip() for x in raw)
+        if len(claimed)!=len(set(claimed)):
+            rejected.append({
+                "claim_id":cid,
+                "reason":"EFFECT_IDS_DUPLICATE",
+            })
+            continue
+        expected=list(row["effect_ids"])
+        if claimed!=expected:
+            rejected.append({
+                "claim_id":cid,
+                "reason":"EFFECT_ID_INVENTORY_MISMATCH",
+                "expected":expected,
+                "claimed":claimed,
+            })
+            continue
+
+        constraint={
+            "op":"ATOM",
+            "id":_inventory_atom(
+                source_id,
+                str(row["inventory_id"]),
+                target,
+                expected,
+            ),
+        }
+        accepted.append({
+            "claim_id":cid,
+            "kind":"CERTIFIED_EFFECT_ID_INVENTORY",
+            "inventory_id":row["inventory_id"],
+            "target_id":target,
+            "effect_ids":expected,
+            "source_span":list(row["source_span"]),
+            "source_text_sha256":row["source_text_sha256"],
+            "constraint":constraint,
+        })
+        proved.append(constraint)
+
     return {
         "schema":SCHEMA,
         "status":"PROOF_CHECKED" if not rejected else "PROOF_CHECKED_WITH_REJECTIONS",
@@ -169,7 +266,7 @@ def verify_proof(
         "proved_constraints":proved,
         "terminal_authority":False,
         "soundness_boundary":(
-            "V7_CERTIFIES_ONLY_AN_EXPLICIT_DECLARED_EFFECT_TARGET_SET;"
-            "SPECIFIC_EFFECTS_ON_INCLUDED_TARGETS_AND_RAW_LANGUAGE_COMPLETENESS_REMAIN_UNPROVED"
+            "V7_CERTIFIES_ONLY_EXPLICIT_DECLARED_EFFECT_TARGET_SETS_AND_EFFECT_ID_INVENTORIES;"
+            "EFFECT_VALUES_CLASSES_CONDITIONS_AND_UNSTRUCTURED_RAW_LANGUAGE_COMPLETENESS_REMAIN_UNPROVED"
         ),
     }
