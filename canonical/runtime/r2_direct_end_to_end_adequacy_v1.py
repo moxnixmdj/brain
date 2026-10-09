@@ -33,6 +33,7 @@ from canonical.runtime import r2_explicit_numeric_comparison_direct_adequacy_v1 
 from canonical.runtime import r2_unit_normalized_numeric_comparison_direct_adequacy_v1 as unit_normalized_comparison_adequacy
 from canonical.runtime import r2_knowledge_consistency_direct_adequacy_v1 as knowledge_consistency_adequacy
 from canonical.runtime import r2_ror_authority_identity_direct_adequacy_v1 as ror_authority_adequacy
+from canonical.runtime import r2_finance_normalized_unless_direct_adequacy_v1 as finance_unless_adequacy
 
 SCHEMA = "PROJECT_BRAIN_R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_V1"
 
@@ -55,6 +56,7 @@ NUMERIC_COMPARISON_ROUTE_ID = "DIRECT_ADEQUACY::EXPLICIT_GROUNDED_NUMERIC_COMPAR
 UNIT_NORMALIZED_COMPARISON_ROUTE_ID = "DIRECT_ADEQUACY::UNIT_NORMALIZED_GROUNDED_NUMERIC_COMPARISON_FAMILY_V1"
 KNOWLEDGE_CONSISTENCY_ROUTE_ID = "DIRECT_ADEQUACY::PROVENANCE_KNOWLEDGE_CONSISTENCY_FAMILY_V1"
 ROR_AUTHORITY_ROUTE_ID = "DIRECT_ADEQUACY::EXACT_ROR_AUTHORITY_IDENTITY_FAMILY_V1"
+FINANCE_NORMALIZED_UNLESS_ROUTE_ID = "DIRECT_ADEQUACY::FINANCE_NORMALIZED_UNLESS_BRANCH_FAMILY_V1"
 
 ROUTES = {
     ARCHIVE_ROUTE_ID: {
@@ -168,6 +170,13 @@ ROUTES = {
         "preflight": "r2_ror_authority_identity_direct_adequacy_v1.preflight",
         "executor": "r2_ror_authority_identity_direct_adequacy_v1.run",
         "acceptance": "PRODUCER_ROR_BINDING_PLUS_PRODUCER_INDEPENDENT_CURL_ROR_V2_EXACT_ACTIVE_DOMAIN_RECOMPUTATION",
+    },
+    FINANCE_NORMALIZED_UNLESS_ROUTE_ID: {
+        "capability_id": "finance.normalized_unless.branch.stdlib",
+        "scope": "EXACT_NORMALIZED_SUPERVISORY_FINANCE_SINGLE_UNLESS_WITH_EXPLICIT_TYPED_EXCEPTION_TRUTH",
+        "preflight": "r2_finance_normalized_unless_direct_adequacy_v1.preflight",
+        "executor": "r2_finance_normalized_unless_direct_adequacy_v1.run",
+        "acceptance": "SEPARATE_STDLIB_UNLESS_REPARSE_PLUS_FULL_BRANCH_AND_HASH_RECOMPUTATION",
     },
     VISUAL_CODE_ROUTE_ID: {
         "capability_id": "DYNAMIC_VERIFIED_BOUND_VISUAL_CODE_PRODUCER",
@@ -486,6 +495,31 @@ def preflight(request: Mapping[str, Any]) -> dict[str, Any]:
             "payload_sha256": visual_code.get("payload_sha256"),
             "output_path": visual_code.get("output_path"),
             "semantic_scope": ROUTES[VISUAL_CODE_ROUTE_ID]["scope"],
+            "preflight_execution_authority": False,
+        }
+
+    finance_unless = finance_unless_adequacy.preflight(request)
+    if finance_unless.get("matched") is True:
+        if finance_unless.get("status") == "FAIL_CLOSED":
+            return {
+                **_base("FAIL_CLOSED", passed=False),
+                "matched": True,
+                "route_id": FINANCE_NORMALIZED_UNLESS_ROUTE_ID,
+                "reason": finance_unless.get("reason"),
+            }
+        return {
+            **_base("DIRECT_ADEQUACY_ROUTE_MATCHED", passed=False),
+            "matched": True,
+            "route_id": FINANCE_NORMALIZED_UNLESS_ROUTE_ID,
+            "capability_id": finance_unless.get("capability_id"),
+            "policy_id": finance_unless.get("policy_id"),
+            "goal_sha256": finance_unless.get("goal_sha256"),
+            "input_path": finance_unless.get("input_path"),
+            "input_sha256": finance_unless.get("input_sha256"),
+            "output_path": finance_unless.get("output_path"),
+            "source_text_sha256": finance_unless.get("source_text_sha256"),
+            "scope_id": finance_unless.get("scope_id"),
+            "semantic_scope": ROUTES[FINANCE_NORMALIZED_UNLESS_ROUTE_ID]["scope"],
             "preflight_execution_authority": False,
         }
 
@@ -1068,6 +1102,52 @@ def run(request: Mapping[str, Any]) -> dict[str, Any]:
             "execution_attempted": True,
             "retry_by_other_route_authorized": False,
             "authority_boundary": visual_result.get("authority_boundary"),
+        }
+
+    if pf["route_id"] == FINANCE_NORMALIZED_UNLESS_ROUTE_ID:
+        finance_result = finance_unless_adequacy.run(request)
+        if finance_result.get("pass") is not True:
+            return {
+                **_base(
+                    str(
+                        finance_result.get("status")
+                        or "OPEN__DIRECT_ADEQUACY_ROUTE_DID_NOT_VERIFY"
+                    ),
+                    passed=False,
+                ),
+                "matched": True,
+                "route_id": pf["route_id"],
+                "capability_id": pf.get("capability_id"),
+                "goal_sha256": pf.get("goal_sha256"),
+                "execution_attempted": True,
+                "retry_by_other_route_authorized": False,
+                "finance_normalized_unless_adequacy": deepcopy(dict(finance_result)),
+                "reason": finance_result.get("reason"),
+            }
+        return {
+            **_base("PASS__DIRECT_END_TO_END_ADEQUACY_VERIFIED", passed=True),
+            "matched": True,
+            "route_id": pf["route_id"],
+            "capability_id": finance_result.get("capability_id"),
+            "selected_policy_id": finance_result.get("selected_policy_id"),
+            "goal_sha256": finance_result.get("goal_sha256"),
+            "semantic_scope": pf["semantic_scope"],
+            "semantic_acceptance_complete": True,
+            "actual_goal_satisfaction_verified": True,
+            "direct_adequacy_authority": True,
+            "accepted_raw_obligation_ids": list(
+                finance_result.get("accepted_raw_obligation_ids") or []
+            ),
+            "raw_acceptance_obligation_count": finance_result.get(
+                "raw_acceptance_obligation_count"
+            ),
+            "acceptance_receipt": deepcopy(
+                dict(finance_result.get("acceptance_receipt") or {})
+            ),
+            "raw_result": deepcopy(dict(finance_result)),
+            "execution_attempted": True,
+            "retry_by_other_route_authorized": False,
+            "authority_boundary": finance_result.get("authority_boundary"),
         }
 
     if pf["route_id"] == TYPED_DECISION_ROUTE_ID:
