@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_FIBO_Q2_2026_PROD_TBOX_SCOPE_CONNECTOR_VERIFY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__UPSTREAM_EXACT_GIT_RECOMPUTATION__106_OF_106_PRODUCTION_TBOX_IMPORTS_CONTENT_ADDRESSED__ZERO_SEMANTIC_MAPPING_AUTHORITY",
+  "upstream": {
+    "repository": "edmcouncil/fibo",
+    "tag_ref": "refs/tags/master_2026Q2",
+    "tag_object_type": "commit",
+    "tag_object_sha": "f59157fe156e3d91b1c045222d0a7dc06b7d78a2",
+    "commit_sha": "f59157fe156e3d91b1c045222d0a7dc06b7d78a2",
+    "commit_tree_sha": "82d3273e1e93a98152b730538761b9e3264a37ea",
+    "commit_signature_verified": true,
+    "commit_signature_reason": "valid",
+    "loader_git_blob_sha": "69b9b10debbd5ad37e62a302d04e37ecbc063cc0",
+    "catalog_git_blob_sha": "40dfc76ba525503852a58757fb93992ff89b28b3",
+    "recursive_tree_truncated": false
+  },
+  "recomputation": {
+    "loader_import_count": 106,
+    "unique_loader_import_count": 106,
+    "catalog_resolved_count": 106,
+    "tree_blob_resolved_count": 106,
+    "missing_catalog_count": 0,
+    "missing_tree_blob_count": 0,
+    "total_source_bytes": 3452615,
+    "domain_counts": {
+      "BE": 16,
+      "CAE": 1,
+      "DER": 15,
+      "FBC": 15,
+      "FND": 31,
+      "IND": 5,
+      "LOAN": 7,
+      "SEC": 16
+    }
+  },
+  "proved": [
+    "THE_EXACT_TAG_REF_RESOLVES_DIRECTLY_TO_THE_EXACT_SIGNED_RELEASE_COMMIT",
+    "THE_RELEASE_COMMIT_SIGNATURE_IS_VERIFIED_BY_GITHUB",
+    "THE_EXACT_RELEASE_LOADER_DECLARES_106_UNIQUE_PRODUCTION_TBOX_IMPORTS",
+    "EVERY_DECLARED_IMPORT_RESOLVES_THROUGH_THE_EXACT_RELEASE_CATALOG",
+    "EVERY_RESOLVED_PATH_EXISTS_AS_ONE_BLOB_IN_THE_EXACT_RELEASE_TREE",
+    "THE_BOUND_SCOPE_CONTAINS_NO_EXMP_PATH_AND_NO_METADATA_OR_ALL_LOAD_FILE_PATH",
+    "THE_BOUND_SCOPE_IS_COMPLETE_RELATIVE_TO_THE_UPSTREAM_PRODUCTION_TBOX_LOADER_ONLY"
+  ],
+  "wake_condition": {
+    "id": "NEW_CONTENT_ADDRESSED_COMPLETE_FINANCE_SOURCE_OR_CONVENTION_SCOPE_BOUND",
+    "satisfied": true,
+    "scope": "FIBO_Q2_2026_PRODUCTION_TBOX_RELEASE_RELATIVE_CONVENTION_SCOPE",
+    "global_finance_semantics_closed": false
+  },
+  "authority_boundary": {
+    "source_scope_authentication_only": true,
+    "context_to_concept_mapping_authority": false,
+    "semantic_truth_authority": false,
+    "external_dependency_semantics_bound": false,
+    "factual_world_truth_authority": false,
+    "policy_adequacy_authority": false,
+    "terminal_authority": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
