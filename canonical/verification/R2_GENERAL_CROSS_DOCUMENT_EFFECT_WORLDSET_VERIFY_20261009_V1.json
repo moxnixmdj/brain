@@ -1,0 +1,122 @@
+{
+  "schema": "PROJECT_BRAIN_R2_GENERAL_CROSS_DOCUMENT_EFFECT_WORLDSET_VERIFY_V1",
+  "date": "2026-10-09",
+  "branch": "r2-general-cross-document-effects-v1-current3",
+  "pull_request": 3501,
+  "code_head_sha": "7eb89e90b78064e71d637980ff3da792a9b1cd40",
+  "base_main_sha_at_pr_creation": "ce46c7eba587a813a8da65e7370fab5a350f4f7d",
+  "one_main_commit_outside_dependency_cone": {
+    "commit_range": [
+      "cdaf34390044be78b0ef8ec34112089976a7fa4e",
+      "ce46c7eba587a813a8da65e7370fab5a350f4f7d"
+    ],
+    "files": [
+      "canonical/runtime/terminal_autopilot_v1.py",
+      "canonical/tests/test_terminal_autopilot_v1.py"
+    ],
+    "r2_fixed_point_or_router_reference_found": false
+  },
+  "capability": "GENERAL_PROOF_CARRYING_CROSS_DOCUMENT_EFFECT_COMPOSITION_WITH_CORRELATED_AMBIGUITY_WORLDS",
+  "status": "VERIFIED_ISOLATED_CHANGED_SURFACE__GITHUB_ACTIONS_CARRIER_FAILED_PRE_EXECUTION",
+  "exact_scope": {
+    "typed_effect_classes": [
+      "DEFINE",
+      "REPLACE",
+      "EXCEPTION",
+      "OVERRIDE"
+    ],
+    "supports_no_effect_hypothesis": true,
+    "supports_correlated_hypotheses": true,
+    "compatibility_model": "DECLARED_COMPLETE_INCOMPATIBLE_HYPOTHESIS_SETS",
+    "value_semantics": [
+      "EXPLICIT_CONDITIONS",
+      "VALID_TIME",
+      "EXPLICIT_SUPERSESSION_DAG"
+    ],
+    "closed_success_condition": "ONE_COMMON_EFFECTIVE_VALUE_ACROSS_ALL_ADMISSIBLE_DECLARED_WORLDS",
+    "open_behavior": "RETURN_MINIMUM_EFFECT_SLOT_SET_SEPARATING_TERMINALLY_DISTINCT_WORLDS",
+    "resolver_handoff": "NON_AUTHORITATIVE_DIRECT_PREFLIGHT_HINT_REVERIFIED_BY_EXISTING_V1_CONTROLLER"
+  },
+  "exact_blobs": {
+    "canonical/runtime/cross_document_effect_calculus_v1.py": "b2629a5edb01d8ad09c88dfbab4441486b80ad65",
+    "canonical/runtime/cross_document_effect_calculus_verify_v1.py": "ad3b70f17be4e61d1fb1b639600d14bcebbcf729",
+    "canonical/runtime/cross_document_effect_hypothesis_worldset_v1.py": "4738174c5f7e2c1a9218f19c72622fcbbde54272",
+    "canonical/runtime/cross_document_effect_hypothesis_worldset_verify_v1.py": "ccd87bbded38b00bf09e19e855ad89154a740a2a",
+    "canonical/runtime/r2_cross_document_effect_direct_adequacy_v1.py": "0377f5b533fba3966f4ba9b9eb53acf49a38b4a0",
+    "canonical/runtime/r2_cross_document_effect_worldset_direct_adequacy_v1.py": "a6c8f965cedda0d42e47b0d71667af5f2c9cf8df",
+    "canonical/runtime/r2_direct_end_to_end_adequacy_v9.py": "41bd95b1fd275d797b900636cf88c8b0ecbbc03e",
+    "canonical/runtime/r2_direct_end_to_end_adequacy_v10.py": "1a78930ab5536a8db35097eb7e924284b0a0de73",
+    "canonical/runtime/general_adequate_decision_fixed_point_v2.py": "ab353c85511e357bb01d0a282b6bc587928e927b",
+    "canonical/tests/test_cross_document_effect_calculus_v1.py": "9c9329640bd75f2169345a9e0331b2daceb9172e",
+    "canonical/tests/test_cross_document_effect_hypothesis_worldset_v1.py": "79ea1da7f3651dbf3b591b95aafe8b42c9364915",
+    "canonical/tests/test_r2_cross_document_effect_direct_adequacy_v1.py": "f20b3da61e83c9f87870f8d51c17de871b177bc8",
+    "canonical/tests/test_r2_cross_document_effect_worldset_direct_adequacy_v1.py": "61b4acc8cf0b29af61da1c82c545c248bc48b133",
+    "canonical/tests/test_general_adequate_decision_fixed_point_v2.py": "6edb2d9a5b325de647df630eed8063b3397a4de9"
+  },
+  "verification": {
+    "sprite": "brain-r2-grounded-frontier-verify-20261008",
+    "checkpoint_before_replay": "v9",
+    "core_effect_calculus": {
+      "passed": 6,
+      "failed": 0
+    },
+    "typed_direct_transaction": {
+      "passed": 4,
+      "failed": 0
+    },
+    "correlated_effect_worldset": {
+      "passed": 11,
+      "failed": 0
+    },
+    "v10_worldset_routing": {
+      "passed": 7,
+      "failed": 0
+    },
+    "fixed_point_cleanroom": {
+      "passed": 22,
+      "failed": 0
+    },
+    "total_passed": 50,
+    "total_failed": 0,
+    "cleanroom_notes": {
+      "real_modules": [
+        "cross_document_effect_calculus_v1",
+        "cross_document_effect_hypothesis_worldset_v1",
+        "cross_document_effect_hypothesis_worldset_verify_v1",
+        "r2_cross_document_effect_worldset_direct_adequacy_v1",
+        "r2_direct_end_to_end_adequacy_v10",
+        "general_adequate_decision_fixed_point_v2"
+      ],
+      "stubbed_only_for_unrelated_or_already_mocked_surfaces": [
+        "r2_direct_end_to_end_adequacy_v9 delegated fallback",
+        "general_adequate_decision_controller_v1 in fixed-point unit harness",
+        "r2_existing_policy_adequacy_repair_v1 in fixed-point unit harness",
+        "r2_basis_discriminator_repair_v1 in fixed-point unit harness"
+      ]
+    }
+  },
+  "github_actions": {
+    "run_id": 37898054745,
+    "job_id": 113713870387,
+    "conclusion": "FAILURE_BEFORE_ANY_STEP_EXECUTED",
+    "runner_id": 0,
+    "steps": [],
+    "classification": "VERIFICATION_CARRIER_FAILURE_NOT_PYTHON_TEST_FAILURE"
+  },
+  "nonclaims": [
+    "NO_ARBITRARY_RAW_LANGUAGE_EFFECT_HYPOTHESIS_COMPLETENESS",
+    "NO_IMPLICIT_PRECEDENCE_INFERENCE",
+    "NO_EXTERNAL_WORLD_TRUTH",
+    "NO_OPEN_WORLD_SEMANTIC_COMPLETENESS",
+    "NO_GITHUB_ACTIONS_PYTHON_EXECUTION"
+  ],
+  "architectural_result": [
+    "PAIRWISE_CROSS_DOCUMENT_HANDLERS_REPLACED_BY_GENERIC_EFFECT_COMPOSITION",
+    "UNIQUE_DOCUMENT_INTERPRETATION_NOT_REQUIRED_WHEN_ALL_ADMISSIBLE_WORLDS_AGREE",
+    "CORRELATED_INTERPRETATIONS_AND_NO_EFFECT_ARE_FIRST_CLASS",
+    "OUTCOME_CHANGING_AMBIGUITY_LOCALIZED_TO_MINIMUM_DISCRIMINATOR_SLOTS",
+    "DISCRIMINATOR_HINT_REACHES_EXISTING_R2_RESOLVER_WITH_ZERO_AUTHORITY"
+  ],
+  "terminal_authority": false,
+  "terminal_credit_delta": 0
+}
