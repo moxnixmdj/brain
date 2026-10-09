@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_R2_DECISION_INTELLIGENCE_POINTER_V1",
   "date": "2026-10-09",
-  "status": "ACTIVE_CURRENT_R2_AUTHORITY__STRICT_EXTERNALITY_RECONCILED__V27__EIGHTEEN_DIRECT_ROUTES__FIFTEEN_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__COVERAGE_AND_OBSERVABILITY_FRONTIER_INTERNAL_UNSOLVED",
+  "status": "ACTIVE_CURRENT_R2_AUTHORITY__V28__GDPVAL_OWNER_LAYER_DEMOTED_FROM_FIXED_BAR_CRITICAL_PATH__EIGHTEEN_DIRECT_ROUTES__FIFTEEN_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__ONE_PRIMARY_KNOWN_INTERNAL_UNSOLVED_CELL",
   "mission_objective": {
     "path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json"
   },
@@ -18,8 +18,8 @@
     "fixed_point_regression_test_git_blob_sha": "46333fedc0a91113d83e8c32184fb37cafb9bccd"
   },
   "scheduler_cut": {
-    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V27.json",
-    "git_blob_sha": "7e50346423136376c8ba5714dcb10cb4568f36be"
+    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V28.json",
+    "git_blob_sha": "8a6adb0984b2791b78f7a463671bf2d7cd2a45fd"
   },
   "direct_adequacy": {
     "activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V14.json",
@@ -126,7 +126,7 @@
     "path": "canonical/governance/R2_BRAIN_OWNED_ADVISORY_JUDGMENT_POLICY_20261008_V1.json"
   },
   "primary_primitive": "ESCAPE_POLICY_ADEQUACY_COVERAGE",
-  "primary_primitive_state": "OPEN__ADEQUACY_COVERAGE_AND_OBSERVABILITY_ONLY__TWO_CURRENT_CELLS_INTERNAL_UNSOLVED_PENDING_ACQUISITION_OR_EXPERIMENT__VERIFIED_CAPABILITY_ESCAPE_LIVE",
+  "primary_primitive_state": "OPEN__ADEQUACY_COVERAGE_AND_OBSERVABILITY_ONLY__ONE_PRIMARY_KNOWN_INTERNAL_UNSOLVED_FINANCE_CELL__GDPVAL_OWNER_RELATION_DORMANT_FOR_CURRENT_FIXED_BAR_ROUTE__VERIFIED_CAPABILITY_ESCAPE_LIVE",
   "general_mechanism_missing": false,
   "learned_judgment_role": "ADVISORY_GENERATION_RANKING_AND_SEARCH_ACCELERATION_ONLY",
   "authority": "AUTHENTICATED_POLICY_COVER_MINIMUM_POLICY_CHANGING_INFORMATION_AND_INDEPENDENT_GOAL_ACCEPTANCE",
@@ -193,7 +193,8 @@
     "merged_commit": "2c5d65ccab53f5e8cafbc7356d62aaf60fc1a642",
     "two_distinct_sprite_replays": "4_OF_4_EACH",
     "historical_root2_scheduler_authority_revoked": true,
-    "gdpval_owner_layer_state": "INTERNAL_UNSOLVED__PENDING_ACQUISITION_OR_EXPERIMENT"
+    "gdpval_owner_layer_state": "DORMANT_ALTERNATIVE_DIRECT_COMPARISON_ROUTE__NOT_REQUIRED_BY_CURRENT_FIXED_BAR_E1",
+    "finance_semantic_tail_state": "INTERNAL_UNSOLVED__PENDING_ACQUISITION_OR_EXPERIMENT"
   },
   "policy_cover_existing_observation_reuse": {
     "activation_path": "canonical/governance/R2_EXISTING_POLICY_COVER_OBSERVATION_REUSE_ACTIVATION_20261008_V1.json",
@@ -232,7 +233,7 @@
     "positive_adequacy_coverage_credit_delta": 0
   },
   "control_mechanism_status": "CLOSED__TOTAL_FAIL_CLOSED_ADEQUACY_OR_ABSTAIN_CONTROL",
-  "remaining_problem_class": "POSITIVE_ADEQUACY_COVERAGE_AND_POLICY_CHANGING_OBSERVABILITY__NO_UNPROVED_EXTERNAL_SLEEP",
+  "remaining_problem_class": "POSITIVE_ADEQUACY_COVERAGE_AND_POLICY_CHANGING_OBSERVABILITY__ONE_PRIMARY_KNOWN_FINANCE_CELL__OPEN_WORLD_NOT_CLOSED",
   "control_law_totalizer": {
     "path": "canonical/runtime/general_adequate_decision_totalized_v1.py",
     "git_blob_sha": "675d1d4a3df3fcff4c8eb14947610389832103ea",
@@ -552,6 +553,15 @@
     "verification_git_blob_sha": "8919cd98397586027bbf711cfced58c8c3d62e45",
     "unproved_external_sleep_reclassified_count": 2,
     "information_theoretic_externality_proved_count": 0,
-    "rule": "ONLY_PROOF_CARRYING_EXTERNALITY_CERTIFICATE_MAY_GRANT_TERMINAL_EXTERNAL_CLASSIFICATION"
+    "rule": "ONLY_PROOF_CARRYING_EXTERNALITY_CERTIFICATE_MAY_GRANT_TERMINAL_EXTERNAL_CLASSIFICATION",
+    "current_primary_internal_unsolved_count": 1,
+    "current_dormant_alternative_route_count": 1
+  },
+  "gdpval_fixed_bar_owner_pairwise_nonnecessity": {
+    "governance_path": "canonical/governance/GDPVAL_FIXED_BAR_OWNER_PAIRWISE_NONNECESSITY_20261009_V1.json",
+    "verification_path": "canonical/verification/GDPVAL_FIXED_BAR_OWNER_PAIRWISE_NONNECESSITY_VERIFICATION_20261009_V1.json",
+    "current_fixed_bar_owner_pairwise_semantics_required": false,
+    "direct_comparison_route_preserved": true,
+    "gdpval_acceptance_credit_delta": 0
   }
 }
