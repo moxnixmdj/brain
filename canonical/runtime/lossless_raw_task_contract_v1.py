@@ -49,22 +49,47 @@ def _sha(value: Any) -> str:
 
 def _segments(text: str) -> list[tuple[int, int, str]]:
     out: list[tuple[int, int, str]] = []
-    # Preserve punctuation and line boundaries. Whitespace-only spans are not
-    # independent obligations, but all non-whitespace bytes belong to one.
-    for m in re.finditer(r"[^.!?\n]+(?:[.!?]+|\n|$)", text):
-        s, e = m.span()
-        while s < e and text[s].isspace():
-            s += 1
-        while e > s and text[e - 1].isspace():
-            e -= 1
-        if s < e and text[s:e].strip():
-            out.append((s, e, text[s:e]))
+
+    def emit(start: int, end: int) -> None:
+        # Whitespace itself is not an acceptance obligation, but every
+        # non-whitespace source character must belong to exactly one span.
+        while start < end and text[start].isspace():
+            start += 1
+        while end > start and text[end - 1].isspace():
+            end -= 1
+        if start < end and text[start:end].strip():
+            out.append((start, end, text[start:end]))
+
+    # Construct sentence/line boundaries directly. The previous regex required
+    # at least one non-.!? character before a punctuation boundary, which could
+    # omit punctuation-only runs such as "...", "!!!", or "???" entirely.
+    cursor = 0
+    i = 0
+    n = len(text)
+    while i < n:
+        ch = text[i]
+        if ch == "\n":
+            emit(cursor, i + 1)
+            cursor = i + 1
+            i += 1
+            continue
+        if ch in ".!?":
+            j = i + 1
+            while j < n and text[j] in ".!?":
+                j += 1
+            emit(cursor, j)
+            cursor = j
+            i = j
+            continue
+        i += 1
+
+    emit(cursor, n)
+
     if not out and text.strip():
         s = next(i for i, ch in enumerate(text) if not ch.isspace())
         e = len(text.rstrip())
         out.append((s, e, text[s:e]))
     return out
-
 
 def _normalize_effects(values: Any) -> list[str]:
     if not isinstance(values, Sequence) or isinstance(values, (str, bytes)):
