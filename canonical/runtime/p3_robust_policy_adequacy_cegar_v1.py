@@ -493,6 +493,12 @@ def solve(problem: Mapping[str, Any]) -> dict[str, Any]:
         "information_boundary_proved_atom_ids": list(
             registry.get("information_boundary_proved_atom_ids") or []
         ),
+        "dependency_provenance_atom_proofs": list(
+            registry.get("dependency_provenance_atom_proofs") or []
+        ),
+        "dependency_provenance_proved_atom_ids": list(
+            registry.get("dependency_provenance_proved_atom_ids") or []
+        ),
         "proved_condition_atom_ids": list(
             registry.get("proved_condition_atom_ids") or []
         ),

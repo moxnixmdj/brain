@@ -9,14 +9,16 @@ Presence in this registry never proves a condition true. P3 still evaluates
 all surviving models, so false-condition worlds remain uncovered unless an
 accepted source-backed refinement proves the membership condition.
 
-Two narrow proof-carrying refinements are supported for the typed acceptance
+Three narrow proof-carrying refinements are supported for the typed acceptance
 specialist:
-1. exact model structure may prove the supported-transform atom; and
+1. exact model structure may prove the supported-transform atom;
 2. a content-addressed independently verified pre-verifier information-boundary
    receipt may prove the no-hidden-verifier-access atom for those exact model
-   bytes.
+   bytes; and
+3. a content-addressed producer-independent dependency/provenance audit may prove
+   the dependency/provenance-truth atom for those exact model bytes.
 
-Neither route proves any other condition atom or whole policy membership.
+None of these routes proves any other condition atom or whole policy membership.
 """
 from __future__ import annotations
 
@@ -33,6 +35,10 @@ from canonical.runtime.cursorbench_typed_acceptance_supported_transform_atom_v1 
 from canonical.runtime.cursorbench_typed_acceptance_information_boundary_atom_v1 import (
     ATOM_ID as NO_HIDDEN_VERIFIER_ATOM_ID,
     verify as verify_information_boundary_atom,
+)
+from canonical.runtime.cursorbench_typed_acceptance_dependency_provenance_atom_v1 import (
+    ATOM_ID as DEPENDENCY_PROVENANCE_ATOM_ID,
+    verify as verify_dependency_provenance_atom,
 )
 
 SCHEMA = "PROJECT_BRAIN_P3_CONDITIONED_POLICY_ADEQUACY_REGISTRY_V1"
@@ -204,6 +210,7 @@ def augment_problem(
     root = Path(repo_root) if repo_root is not None else ROOT
     structural_atom_proofs: list[dict[str, Any]] = []
     information_boundary_atom_proofs: list[dict[str, Any]] = []
+    dependency_provenance_atom_proofs: list[dict[str, Any]] = []
     typed_model = working.get("typed_acceptance_model")
     if typed_model is not None:
         proof = verify_supported_transform_atom(typed_model)
@@ -255,6 +262,42 @@ def augment_problem(
             if not isinstance(rows, list):
                 return _fail(
                     "INFORMATION_BOUNDARY_REFINEMENT_TARGET_NOT_LIST",
+                    field=key,
+                )
+            rows = deepcopy(rows)
+            if atom not in rows:
+                rows.append(deepcopy(atom))
+            working[key] = rows
+
+    dependency_provenance_binding = working.get(
+        "typed_acceptance_dependency_provenance_binding"
+    )
+    if dependency_provenance_binding is not None:
+        if typed_model is None:
+            return _fail(
+                "DEPENDENCY_PROVENANCE_BINDING_REQUIRES_TYPED_ACCEPTANCE_MODEL"
+            )
+        proof = verify_dependency_provenance_atom(
+            typed_model,
+            dependency_provenance_binding,
+            repo_root=root,
+        )
+        dependency_provenance_atom_proofs.append(deepcopy(proof))
+        if proof.get("pass") is not True or proof.get("atom_truth_authorized") is not True:
+            return _fail(
+                "DEPENDENCY_PROVENANCE_ATOM_BINDING_INVALID",
+                dependency_provenance_atom_proof=proof,
+            )
+        atom = {"op": "ATOM", "id": DEPENDENCY_PROVENANCE_ATOM_ID}
+        basis = list(basis)
+        if DEPENDENCY_PROVENANCE_ATOM_ID not in basis:
+            basis.append(DEPENDENCY_PROVENANCE_ATOM_ID)
+        working["decision_basis"] = basis
+        for key in ("formal_source_constraints", "proposed_refinements"):
+            rows = working.get(key, [])
+            if not isinstance(rows, list):
+                return _fail(
+                    "DEPENDENCY_PROVENANCE_REFINEMENT_TARGET_NOT_LIST",
                     field=key,
                 )
             rows = deepcopy(rows)
@@ -349,9 +392,19 @@ def augment_problem(
             for row in information_boundary_atom_proofs
             if row.get("pass") is True and row.get("atom_truth_authorized") is True
         }),
+        "dependency_provenance_atom_proofs": dependency_provenance_atom_proofs,
+        "dependency_provenance_proved_atom_ids": sorted({
+            str(row.get("atom_id"))
+            for row in dependency_provenance_atom_proofs
+            if row.get("pass") is True and row.get("atom_truth_authorized") is True
+        }),
         "proved_condition_atom_ids": sorted({
             str(row.get("atom_id"))
-            for row in [*structural_atom_proofs, *information_boundary_atom_proofs]
+            for row in [
+                *structural_atom_proofs,
+                *information_boundary_atom_proofs,
+                *dependency_provenance_atom_proofs,
+            ]
             if row.get("pass") is True and row.get("atom_truth_authorized") is True
         }),
         "basis_eligible_policy_count": len(injected) + len(reused),
@@ -368,6 +421,8 @@ def augment_problem(
             "ONLY_THE_EXACT_SUPPORTED_TRANSFORM_STRUCTURAL_ATOM_MAY_BE_RECOMPUTED;"
             "THE_NO_HIDDEN_VERIFIER_ATOM_REQUIRES_A_CONTENT_ADDRESSED_INDEPENDENT_"
             "PREVERIFIER_INFORMATION_BOUNDARY_RECEIPT;"
+            "THE_DEPENDENCY_PROVENANCE_ATOM_REQUIRES_A_CONTENT_ADDRESSED_PRODUCER_"
+            "INDEPENDENT_DEPENDENCY_PROVENANCE_AUDIT;"
             "REGISTRY_NEVER_PROVES_OTHER_CONDITION_TRUTH;"
             "P3_STILL_REQUIRES_SOURCE_AUTHORIZED_REFINEMENT_TO_REMOVE_FALSE_WORLDS"
         ),
