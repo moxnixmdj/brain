@@ -4,7 +4,7 @@
   "action_id": "TB_SCIENCE_RANK13_IRREVERSIBLE_RESULT_AND_LEDGER_V15_RECONCILIATION",
   "status": "ACTIVE_INTENT__BIND_EXISTING_IRREVERSIBLE_RESULT__NO_NEW_BENCHMARK_EXECUTION",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
-  "canonical_base_commit": "b89b3395fa916c6ff61238a4f5d30f6b1d085ce4",
+  "canonical_base_commit": "a6a36761f549a742ce8aa3c1584ac4b1e0bfd1df",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
   "capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
@@ -60,7 +60,7 @@
   },
   "recursive_obs": {
     "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
-    "canonical_base_commit": "b89b3395fa916c6ff61238a4f5d30f6b1d085ce4",
+    "canonical_base_commit": "a6a36761f549a742ce8aa3c1584ac4b1e0bfd1df",
     "real_outcome": "MAKE_THE_IRREVERSIBLE_RANK13_EXTERNAL_RESULT_CAUSALLY_TRUE_INSIDE_BRAIN_AND_MOVE_ONLY_TO_THE_NEXT_UNTOUCHED_SLOT",
     "required_capability": "EXACT_RESULT_RECONCILIATION_AND_MINIMUM_CAUSAL_LOCALIZATION",
     "obs_goal": {
