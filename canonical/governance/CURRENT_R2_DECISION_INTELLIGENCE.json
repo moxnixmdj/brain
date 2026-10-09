@@ -23,14 +23,14 @@
     "status": "ACTIVE__GENERAL_CONTROL_MECHANISM_CLOSED__THIRTY_THREE_DIRECT_ROUTES__THIRTY_BOUNDED_FAMILIES__FIXED_POINT_DIRECT_REENTRY_BOUND__FULL_FIBO_Q2_2026_BOUNDED_AUTHORITY_BOUND__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL__ZERO_TERMINAL_CREDIT"
   },
   "direct_adequacy": {
-    "activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V27.json",
-    "activation_git_blob_sha": "66db37b49be68ac36b16c49538270606f774e0d1",
+    "activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V28.json",
+    "activation_git_blob_sha": "d8e432e0904c88a9188679e3a36e0e0c0757e615",
     "exact_cell_count": 3,
     "bounded_family_count": 31,
     "current_route_count": 34,
     "current_activation_status": "THREE_EXACT_CELLS_PLUS_THIRTY_ONE_BOUNDED_FAMILIES__V14_FIELD_LATTICE_BOUND",
     "direct_runtime_path": "canonical/runtime/r2_direct_live_dispatcher_v1.py",
-    "direct_runtime_git_blob_sha": "1732527ed4945245b758c4007c31b3bb1b6188ac",
+    "direct_runtime_git_blob_sha": "ac922deb68a070d747b803809032ae016de931b3",
     "coverage_verifications": [
       {
         "path": "canonical/verification/R2_DOCX_JSON_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
@@ -144,13 +144,15 @@
     "fixed_point_controller_path": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
     "fixed_point_controller_git_blob_sha": "13e2e175c9546853601aef6aaed08892711e8b32",
     "current_direct_live_state_pointer": "canonical/governance/CURRENT_R2_DIRECT_LIVE_STATE.json",
-    "current_direct_live_state_target": "canonical/governance/R2_DIRECT_LIVE_STATE_20261009_V1.json",
-    "current_direct_live_state_target_git_blob_sha": "98db0f0e1b7949cae815cef355eb9d79001aaf32",
+    "current_direct_live_state_target": "canonical/governance/R2_DIRECT_LIVE_STATE_20261009_V2.json",
+    "current_direct_live_state_target_git_blob_sha": "5d7bd4f482e3b06f7d844754ed52fefb6aa8a36c",
     "future_route_source_edit_required": false,
     "future_fixed_point_edit_required": false,
     "legacy_version_chain_load_bearing": false,
     "selection_semantics": "EXACT_V14_BASELINE_DELEGATION__DYNAMIC_EXACT_BYTE_ADMISSION__ANY_BASELINE_DYNAMIC_OR_MULTI_DYNAMIC_OVERLAP_FAIL_CLOSED",
-    "default_live_integration_verification_status": "PENDING_EXECUTABLE_REPLAY_ON_CANDIDATE_BYTES"
+    "default_live_integration_verification_status": "PENDING_EXECUTABLE_REPLAY_ON_CLOSURE_BOUND_CANDIDATE_BYTES",
+    "baseline_transitive_router_closure_bound": true,
+    "activation_route_set_load_bearing": true
   },
   "fixed_point_information_policy": {
     "minimum_policy_changing_information": true,
@@ -1317,16 +1319,16 @@
     "terminal_credit_delta": 0
   },
   "default_live_integration": {
-    "status": "CANDIDATE__EXECUTABLE_REPLAY_PENDING",
+    "status": "CANDIDATE__CLOSURE_BOUND__EXECUTABLE_REPLAY_PENDING",
     "stable_dispatcher_path": "canonical/runtime/r2_direct_live_dispatcher_v1.py",
-    "stable_dispatcher_git_blob_sha": "1732527ed4945245b758c4007c31b3bb1b6188ac",
+    "stable_dispatcher_git_blob_sha": "ac922deb68a070d747b803809032ae016de931b3",
     "fixed_point_controller_path": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
     "fixed_point_controller_git_blob_sha": "13e2e175c9546853601aef6aaed08892711e8b32",
     "current_state_pointer_path": "canonical/governance/CURRENT_R2_DIRECT_LIVE_STATE.json",
-    "immutable_state_path": "canonical/governance/R2_DIRECT_LIVE_STATE_20261009_V1.json",
-    "immutable_state_git_blob_sha": "98db0f0e1b7949cae815cef355eb9d79001aaf32",
-    "baseline_activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V27.json",
-    "baseline_activation_git_blob_sha": "66db37b49be68ac36b16c49538270606f774e0d1",
+    "immutable_state_path": "canonical/governance/R2_DIRECT_LIVE_STATE_20261009_V2.json",
+    "immutable_state_git_blob_sha": "5d7bd4f482e3b06f7d844754ed52fefb6aa8a36c",
+    "baseline_activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V28.json",
+    "baseline_activation_git_blob_sha": "d8e432e0904c88a9188679e3a36e0e0c0757e615",
     "baseline_runtime_path": "canonical/runtime/r2_direct_end_to_end_adequacy_v14.py",
     "baseline_runtime_git_blob_sha": "cf7c391c92264675d2082693e9161e7229225ba8",
     "baseline_route_count": 34,
@@ -1339,6 +1341,8 @@
     "dynamic_collision_policy": "FAIL_CLOSED",
     "open_world_completion_claimed": false,
     "terminal_authority": false,
-    "terminal_credit_delta": 0
+    "terminal_credit_delta": 0,
+    "transitive_router_closure_bound": true,
+    "activation_route_set_load_bearing": true
   }
 }
