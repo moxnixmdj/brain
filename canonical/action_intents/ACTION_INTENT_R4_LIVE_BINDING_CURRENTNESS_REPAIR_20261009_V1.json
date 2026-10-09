@@ -4,7 +4,7 @@
   "date": "2026-10-09",
   "status": "COMPLETED_PROOF_ONLY__EXACT_REBASED_BRANCH_BINDING_GRAPH_PASS__ZERO_FRESH_REALITY__ZERO_TERMINAL_CREDIT",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
-  "canonical_base_commit": "b1e19d7a45f96a40aadba95c17b712e406af0965",
+  "canonical_base_commit": "461c30bde072db63b946b4671e61eafaaa3c8276",
   "capability_target": "COVERAGE_COMPLETENESS_ROOT_THEOREM",
   "action_kind": "R4_CONTENT_ADDRESSED_LIVE_BINDING_REPAIR",
   "causal_blocker": "LIVE_R4_BINDING_POINTS_TO_STALE_MISSION_ROOT_THEOREM_FALSIFIER_TEST_AND_CLAIM_SCOPE_BLOBS",
@@ -26,7 +26,8 @@
     "current_claim_scope_blob": "df3f64759dd1bbf230a40de0695ef514f270f677",
     "duplicate_open_prs": 0,
     "selected_route": "REPAIR_EXISTING_CONTENT_ADDRESSED_CHAIN__NO_NEW_SUBSYSTEM",
-    "rebased_to_latest_main": true
+    "rebased_to_latest_main": true,
+    "latest_main_authority_reconciled": true
   },
   "behavioral_contract": {
     "behavior_id": "R4_LIVE_BINDING_CURRENTNESS_V1",
@@ -74,7 +75,7 @@
     "pull_request": 3786
   },
   "verification": {
-    "exact_branch_blob_graph": "PASS_ZERO_ERRORS_AFTER_REBASE",
+    "exact_branch_blob_graph": "PASS_ZERO_ERRORS_AFTER_LATEST_AUTHORITY_REBASE",
     "validator_hardened_for_falsifier_and_self_binding": true,
     "verification_path": "canonical/verification/R4_LIVE_BINDING_CURRENTNESS_REPAIR_VERIFY_20261009_V1.json",
     "terminal_credit_delta": 0
