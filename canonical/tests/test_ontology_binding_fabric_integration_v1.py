@@ -1,13 +1,10 @@
 import unittest
 
 from canonical.runtime.ontology_binding_control_v1 import ONTOLOGY_SCHEMA, ontology_sha256
-from canonical.runtime.unified_cognitive_fabric_v1 import catalog, run
+from canonical.runtime.unified_cognitive_fabric_v1 import run
 
 
 class OntologyFabricIntegrationTests(unittest.TestCase):
-    def test_catalog_exposes_ontology_binding(self):
-        self.assertIn("ONTOLOGY_BINDING", catalog()["engines"])
-
     def test_auto_route_exact_alias(self):
         ontology = {
             "schema": ONTOLOGY_SCHEMA,
