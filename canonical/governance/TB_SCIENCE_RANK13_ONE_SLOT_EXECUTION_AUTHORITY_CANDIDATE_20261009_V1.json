@@ -34,6 +34,14 @@
     "execution_envelope_v8_verification": {
       "path": "canonical/verification/TB_SCIENCE_EXECUTION_ENVELOPE_V8_TWO_SPRITE_VERIFICATION_20261008_V1.json",
       "git_blob_sha": "ab4531a5efb4dd0034f499eeeb5bbcd226f7ebb5"
+    },
+    "current_v8_transitive_closure": {
+      "path": "canonical/governance/TB_SCIENCE_TRANSITIVE_RUNTIME_CLOSURE_MANIFEST_20261009_V8.json",
+      "git_blob_sha": "99240debf7233f97f88deaf76e98f3e01434b799"
+    },
+    "current_v8_transitive_closure_verification": {
+      "path": "canonical/verification/TB_SCIENCE_TRANSITIVE_RUNTIME_CLOSURE_V8_SPRITE_VERIFICATION_20261009_V1.json",
+      "git_blob_sha": "53dfb7bce0424da1b333aca8ce793ad42071eb3b"
     }
   },
   "exact_route": {
@@ -42,7 +50,8 @@
     "command_policy_blob": "a525773417291c7a4841bf35e1baff5370350d0d",
     "multi_action_preflight_blob": "a1d641e74cfcc331e8340e253744506aec09f0b8",
     "qwen_model_sha256": "f41c0a0c0e43bf721fb2da29374cd1a97271bac0bab08a9dc42964525e82350c",
-    "llama_cpp_commit": "bec4772f6a2527d371557b5d2032641e5ff7619c"
+    "llama_cpp_commit": "bec4772f6a2527d371557b5d2032641e5ff7619c",
+    "transitive_runtime_file_count": 15
   },
   "verified_preconditions": {
     "next_untouched_rank_is_13": true,
@@ -54,7 +63,8 @@
     "failures_before_fail_lock": 75,
     "pass_still_mathematically_reachable": true,
     "v8_two_sprite_tests": "44_OF_44_ON_EACH__88_TOTAL",
-    "benchmark_task_exposure": 0
+    "benchmark_task_exposure": 0,
+    "current_v8_transitive_closure": "15_FILES__0_MISSING__0_MISMATCHED"
   },
   "fresh_live_v8_gate": {
     "repository": "moxnixmdj/verification-capsule-runner",
