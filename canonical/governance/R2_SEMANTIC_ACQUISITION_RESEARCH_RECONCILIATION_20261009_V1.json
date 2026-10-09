@@ -174,5 +174,18 @@
     "NO_NEW_EXECUTION_ACCEPTANCE_OR_TERMINAL_AUTHORITY",
     "NO_INFORMATION_THEORETIC_EXTERNALITY_CLAIM"
   ],
-  "rebased_from": "7f42173835fa275a9c13b3de8963d2d8e41aca75"
+  "rebased_from": "7f42173835fa275a9c13b3de8963d2d8e41aca75",
+  "rebased_on_main_sha": "aaee23df2ddc657ce25b0cbc3f04d8c8fa504d9f",
+  "post_reconciliation_owned_delta": {
+    "runtime": "canonical/runtime/source_aligned_semantic_edge_authority_v1.py",
+    "verification": "canonical/verification/SOURCE_ALIGNED_SEMANTIC_EDGE_AUTHORITY_VERIFY_20261009_V1.json",
+    "result": "SCOPED_SOURCE_TO_TARGET_ENTAILMENT_EDGE_OWNED__REVERSE_REQUIRES_EXACT_SOURCE_COMPLETENESS__27_OF_27_PASS",
+    "effect": "DELETE_SECOND_GENERIC_SOURCE_TO_CONCEPT_EDGE_ENGINE_FROM_FUTURE_WORK"
+  },
+  "durable_completion": {
+    "full_reasoning_handoff": "canonical/reasoning/2026-10-09_CONTEXT_DEPENDENT_MEANING_RESEARCH_HANDOFF_V1.json",
+    "live_positive_coverage_action_intent": "canonical/action_intents/ACTION_INTENT_CONTEXT_DEPENDENT_MEANING_POSITIVE_COVERAGE_20261009_V1.json",
+    "relation": "THE_RECONCILIATION_FILE_IS_THE_COMPACT_TRUTH_RECORD__THE_REASONING_HANDOFF_PRESERVES_RESEARCH_LINEAGE_AND_DEMOTED_IDEAS__THE_ACTION_INTENT_PRESERVES_ONLY_CURRENT_EXECUTION_PRIORITIES",
+    "no_hidden_chat_dependency_after_merge": true
+  }
 }
