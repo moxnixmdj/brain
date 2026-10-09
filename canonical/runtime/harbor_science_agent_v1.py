@@ -6,6 +6,7 @@ coverage state, and finish authority. No benchmark-specific task content lives h
 """
 from __future__ import annotations
 
+import hashlib
 import json
 import re
 import shlex
@@ -238,6 +239,99 @@ def _compile_lossless_task_scope(goal: str) -> tuple[dict[str, Any], dict[str, A
         })
     return contract, localization, prompt_rows
 
+def _planner_raw_task_manifest_summary(
+    goal: str,
+    contract: dict[str, Any],
+    localization: dict[str, Any],
+    prompt_rows: list[dict[str, Any]],
+) -> dict[str, Any]:
+    """Compress planner-only metadata without weakening Brain-owned acceptance.
+
+    The exact Goal text remains in the planner prompt. The full per-segment
+    acceptance contract remains in Brain state and still requires an independent
+    receipt for every original obligation. The optional cognition substrate gets
+    only a content-addressed summary because individual RAWREQ IDs/hashes are
+    routing/accounting metadata, not task semantics or finish authority.
+    """
+    acceptance = contract.get("acceptance_contract") or {}
+    required = acceptance.get("required_obligation_ids") or []
+    obligations = acceptance.get("obligations") or []
+    localized_rows = localization.get("obligations") or []
+    if (
+        not isinstance(required, list)
+        or not required
+        or not isinstance(obligations, list)
+        or len(obligations) != len(required)
+        or not isinstance(prompt_rows, list)
+        or len(prompt_rows) != len(required)
+        or not isinstance(localized_rows, list)
+        or len(localized_rows) != len(required)
+    ):
+        raise RuntimeError("SCIENCE_RAW_TASK_PROMPT_SUMMARY_CARDINALITY_INVALID")
+
+    ordered_rows: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    previous_end = -1
+    for index, row in enumerate(prompt_rows):
+        if not isinstance(row, dict):
+            raise RuntimeError("SCIENCE_RAW_TASK_PROMPT_SUMMARY_ROW_INVALID")
+        oid = row.get("obligation_id")
+        span = row.get("span")
+        segment_sha = row.get("segment_sha256")
+        if oid != required[index] or not isinstance(oid, str) or not oid or oid in seen:
+            raise RuntimeError("SCIENCE_RAW_TASK_PROMPT_SUMMARY_IDENTITY_INVALID")
+        seen.add(oid)
+        if (
+            not isinstance(span, list)
+            or len(span) != 2
+            or any(isinstance(x, bool) or not isinstance(x, int) for x in span)
+        ):
+            raise RuntimeError("SCIENCE_RAW_TASK_PROMPT_SUMMARY_SPAN_INVALID")
+        start, end = span
+        if start < 0 or end <= start or end > len(goal) or start < previous_end:
+            raise RuntimeError("SCIENCE_RAW_TASK_PROMPT_SUMMARY_SPAN_ORDER_INVALID")
+        if not isinstance(segment_sha, str) or len(segment_sha) != 64:
+            raise RuntimeError("SCIENCE_RAW_TASK_PROMPT_SUMMARY_HASH_INVALID")
+        if hashlib.sha256(goal[start:end].encode("utf-8")).hexdigest() != segment_sha:
+            raise RuntimeError("SCIENCE_RAW_TASK_PROMPT_SUMMARY_SOURCE_HASH_MISMATCH")
+        if row.get("acceptance_receipt_required") is not True:
+            raise RuntimeError("SCIENCE_RAW_TASK_PROMPT_SUMMARY_RECEIPT_DISABLED")
+        previous_end = end
+        ordered_rows.append({
+            "obligation_id": oid,
+            "segment_sha256": segment_sha,
+            "segment_index": row.get("segment_index"),
+            "span": span,
+            "acceptance_route_status": row.get("acceptance_route_status"),
+            "acceptance_receipt_required": True,
+        })
+
+    manifest_bytes = json.dumps(
+        ordered_rows,
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=False,
+    ).encode("utf-8")
+    objective_count = int(localization.get("objective_route_obligation_count") or 0)
+    residual_count = int(localization.get("semantic_residual_obligation_count") or 0)
+    if objective_count + residual_count != len(required):
+        raise RuntimeError("SCIENCE_RAW_TASK_PROMPT_SUMMARY_PARTITION_INVALID")
+
+    return {
+        "schema": "PROJECT_BRAIN_SCIENCE_RAW_TASK_PLANNER_MANIFEST_SUMMARY_V1",
+        "task_contract_sha256": contract.get("task_contract_sha256"),
+        "required_obligation_count": len(required),
+        "objective_route_obligation_count": objective_count,
+        "semantic_residual_obligation_count": residual_count,
+        "ordered_manifest_sha256": hashlib.sha256(manifest_bytes).hexdigest(),
+        "source_task_sha256": contract.get("task_sha256"),
+        "raw_goal_is_authoritative_planner_semantic_source": True,
+        "brain_retains_full_per_obligation_acceptance_contract": True,
+        "every_original_obligation_still_requires_independent_acceptance": True,
+        "planner_acceptance_or_finish_authority": False,
+        "individual_content_address_rows_omitted_from_prompt_metadata_only": True,
+    }
+
 def _nonempty_strings(value: Any, *, maximum: int, field: str) -> list[str]:
     if not isinstance(value, list) or not value or len(value) > maximum:
         raise RuntimeError(f"SCIENCE_{field}_INVALID")
@@ -358,6 +452,9 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
         raise ValueError("SCIENCE_GOAL_REQUIRED")
     max_cycles = max(1, min(int(max_cycles), MAX_CYCLES))
     raw_task_contract, raw_task_localization, raw_task_obligations = _compile_lossless_task_scope(goal)
+    raw_task_prompt_summary = _planner_raw_task_manifest_summary(
+        goal, raw_task_contract, raw_task_localization, raw_task_obligations
+    )
     brain_deliverables = _brain_mandated_deliverables(goal)
     mandatory_requirement_ids = list(brain_deliverables)
     requirements: list[str] | None = None
@@ -388,10 +485,10 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
             "independent verification resolves every frozen material requirement. finish_summary is optional "
             "descriptive metadata only and never execution or finish authority. "
             f"Goal: {goal}\nFrozen requirements: {requirements!r}\nUnresolved: {unresolved!r}\n"
-            "Brain lossless raw-task obligation quotient (non-droppable; exact text is the Goal span above): "
-            + json.dumps(raw_task_obligations, sort_keys=True)
-            + "\nEvery raw obligation remains acceptance-pending until exact candidate-bound independent acceptance exists. "
-            "Use Goal[span[0]:span[1]] as the authoritative obligation text; IDs and covers are routing metadata only.\n"
+            "Brain lossless raw-task acceptance manifest summary (non-droppable; exact task semantics are the Goal text above): "
+            + json.dumps(raw_task_prompt_summary, sort_keys=True)
+            + "\nEvery original raw obligation remains separately acceptance-pending in Brain state until exact candidate-bound independent acceptance exists. "
+            "The optional planner has no acceptance or finish authority; omitted per-obligation IDs/hashes are metadata only.\n"
             "Brain-declared authoritative local inputs: "
             + json.dumps(declared_inputs, sort_keys=True)
             + "\nBrain-mandated explicit deliverables (requirement ID -> path): "
@@ -442,6 +539,7 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
                     "finish_authority": "RAW_TASK_ACCEPTANCE_V1_REQUIRED",
                     "raw_task_contract_sha256": raw_task_contract.get("task_contract_sha256"),
                     "raw_task_required_obligation_count": len(raw_task_obligations),
+                    "raw_task_prompt_manifest_sha256": raw_task_prompt_summary["ordered_manifest_sha256"],
                     "raw_task_objective_route_obligation_count": raw_task_localization.get("objective_route_obligation_count"),
                     "raw_task_semantic_residual_obligation_count": raw_task_localization.get("semantic_residual_obligation_count"),
                     "raw_task_acceptance_receipts_present": False,
@@ -591,6 +689,7 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
                 "finish_authority": "RAW_TASK_ACCEPTANCE_V1_REQUIRED",
                 "raw_task_contract_sha256": raw_task_contract.get("task_contract_sha256"),
                 "raw_task_required_obligation_count": len(raw_task_obligations),
+                "raw_task_prompt_manifest_sha256": raw_task_prompt_summary["ordered_manifest_sha256"],
                 "raw_task_objective_route_obligation_count": raw_task_localization.get("objective_route_obligation_count"),
                 "raw_task_semantic_residual_obligation_count": raw_task_localization.get("semantic_residual_obligation_count"),
                 "raw_task_acceptance_receipts_present": False,
@@ -617,6 +716,7 @@ async def run_science_goal(goal: str, environment: BaseEnvironment, *, max_cycle
         "finish_authority": "RAW_TASK_ACCEPTANCE_V1_REQUIRED",
         "raw_task_contract_sha256": raw_task_contract.get("task_contract_sha256"),
         "raw_task_required_obligation_count": len(raw_task_obligations),
+        "raw_task_prompt_manifest_sha256": raw_task_prompt_summary["ordered_manifest_sha256"],
         "raw_task_acceptance_receipts_present": False,
         "summary": "",
     }
