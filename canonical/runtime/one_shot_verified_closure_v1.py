@@ -45,6 +45,7 @@ INTERNAL_ROOT1_BLOCKERS = {
 
 EXTERNAL_OR_NEW_EVIDENCE_BLOCKERS = {
     "WAITING_FOR_NEW_INDEPENDENTLY_VERIFIED_EXPERIENCE",
+    "R3_VERIFICATION_FRONTIER_NEW_DISTINGUISHING_EVIDENCE_REQUIRED",
 }
 
 
@@ -303,6 +304,11 @@ def _extract_blockers(actions: list[Mapping[str, Any]]) -> list[dict[str, Any]]:
                 "root1_positive_gap_established": (
                     raw.get("root1_positive_gap_established") is True
                 ),
+                "evidence_acquisition_request": (
+                    deepcopy(dict(raw["evidence_acquisition_request"]))
+                    if isinstance(raw.get("evidence_acquisition_request"), Mapping)
+                    else None
+                ),
             }
             key = _sha(row)
             if key not in seen:
@@ -329,6 +335,8 @@ def classify_residual(
                     "UNCLASSIFIED_UNRESOLVED_WORK_WITHOUT_BLOCKER_CERTIFICATE"
                 ],
                 "evidence_blockers": [],
+                "r3_acquisition_requests": [],
+                "r3_acquisition_request_count": 0,
             }
         return {
             "class": "NONE",
@@ -339,6 +347,8 @@ def classify_residual(
             "pending_acquisition_or_experiment_required": False,
             "internal_blockers": [],
             "evidence_blockers": [],
+            "r3_acquisition_requests": [],
+            "r3_acquisition_request_count": 0,
         }
 
     pending_by_id = {
@@ -348,6 +358,7 @@ def classify_residual(
     }
     internal: set[str] = set()
     evidence: set[str] = set()
+    r3_acquisition_requests: list[dict[str, Any]] = []
 
     for blocker_row in blockers:
         blocker = str(blocker_row.get("blocker") or "")
@@ -363,6 +374,15 @@ def classify_residual(
             continue
         if blocker in EXTERNAL_OR_NEW_EVIDENCE_BLOCKERS:
             evidence.add(blocker)
+            request = blocker_row.get("evidence_acquisition_request")
+            if isinstance(request, Mapping):
+                request_row = deepcopy(dict(request))
+                request_sha = str(request_row.get("request_sha256") or "")
+                if request_sha and all(
+                    str(row.get("request_sha256") or "") != request_sha
+                    for row in r3_acquisition_requests
+                ):
+                    r3_acquisition_requests.append(request_row)
             continue
         if blocker == "FRONTIER_ACQUISITION_ALREADY_ATTEMPTED_FOR_CURRENT_PROVIDER_AND_FRONTIER":
             internal.add("ROOT1_ACQUISITION_EXHAUSTED_ON_CURRENT_PROVIDER_FRONTIER")
@@ -433,6 +453,11 @@ def classify_residual(
         "irreducible_external_information_proved": False,
         "internal_blockers": sorted(internal),
         "evidence_blockers": sorted(evidence),
+        "r3_acquisition_requests": sorted(
+            r3_acquisition_requests,
+            key=lambda row: str(row.get("request_sha256") or ""),
+        ),
+        "r3_acquisition_request_count": len(r3_acquisition_requests),
     }
 
 
