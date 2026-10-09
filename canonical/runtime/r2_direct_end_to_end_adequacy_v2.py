@@ -25,15 +25,23 @@ ROUTES[FINANCE_NORMALIZED_IF_ROUTE_ID] = {
 }
 
 
-def preflight(request: Mapping[str, Any]) -> dict[str, Any]:
-    candidate = finance_if.preflight(request)
+def preflight(
+    request: Mapping[str, Any],
+    *,
+    repo_root=None,
+) -> dict[str, Any]:
+    candidate = finance_if.preflight(request, repo_root=repo_root)
     if candidate.get("matched") is True:
         return candidate
     return v1.preflight(request)
 
 
-def run(request: Mapping[str, Any]) -> dict[str, Any]:
-    candidate = finance_if.preflight(request)
+def run(
+    request: Mapping[str, Any],
+    *,
+    repo_root=None,
+) -> dict[str, Any]:
+    candidate = finance_if.preflight(request, repo_root=repo_root)
     if candidate.get("matched") is True:
-        return finance_if.run(request)
+        return finance_if.run(request, repo_root=repo_root)
     return v1.run(request)
