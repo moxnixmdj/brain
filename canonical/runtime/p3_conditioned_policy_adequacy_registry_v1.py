@@ -25,6 +25,10 @@ from canonical.runtime.cursorbench_typed_acceptance_supported_transform_atom_v1 
     ATOM_ID as SUPPORTED_TRANSFORM_ATOM_ID,
     verify as verify_supported_transform_atom,
 )
+from canonical.runtime.cursorbench_typed_acceptance_information_boundary_atom_v1 import (
+    ATOM_ID as NO_HIDDEN_VERIFIER_ATOM_ID,
+    verify as verify_information_boundary_atom,
+)
 
 SCHEMA = "PROJECT_BRAIN_P3_CONDITIONED_POLICY_ADEQUACY_REGISTRY_V1"
 ROOT = Path(__file__).resolve().parents[2]
@@ -192,7 +196,9 @@ def augment_problem(
     ):
         return _fail("DECISION_BASIS_INVALID")
 
+    root = Path(repo_root) if repo_root is not None else ROOT
     structural_atom_proofs: list[dict[str, Any]] = []
+    information_boundary_atom_proofs: list[dict[str, Any]] = []
     typed_model = working.get("typed_acceptance_model")
     if typed_model is not None:
         proof = verify_supported_transform_atom(typed_model)
@@ -215,7 +221,42 @@ def augment_problem(
                     rows.append(deepcopy(atom))
                 working[key] = rows
 
-    root = Path(repo_root) if repo_root is not None else ROOT
+    information_boundary_binding = working.get(
+        "typed_acceptance_information_boundary_binding"
+    )
+    if information_boundary_binding is not None:
+        if typed_model is None:
+            return _fail(
+                "INFORMATION_BOUNDARY_BINDING_REQUIRES_TYPED_ACCEPTANCE_MODEL"
+            )
+        proof = verify_information_boundary_atom(
+            typed_model,
+            information_boundary_binding,
+            repo_root=root,
+        )
+        information_boundary_atom_proofs.append(deepcopy(proof))
+        if proof.get("pass") is not True or proof.get("atom_truth_authorized") is not True:
+            return _fail(
+                "INFORMATION_BOUNDARY_ATOM_BINDING_INVALID",
+                information_boundary_atom_proof=proof,
+            )
+        atom = {"op": "ATOM", "id": NO_HIDDEN_VERIFIER_ATOM_ID}
+        basis = list(basis)
+        if NO_HIDDEN_VERIFIER_ATOM_ID not in basis:
+            basis.append(NO_HIDDEN_VERIFIER_ATOM_ID)
+        working["decision_basis"] = basis
+        for key in ("formal_source_constraints", "proposed_refinements"):
+            rows = working.get(key, [])
+            if not isinstance(rows, list):
+                return _fail(
+                    "INFORMATION_BOUNDARY_REFINEMENT_TARGET_NOT_LIST",
+                    field=key,
+                )
+            rows = deepcopy(rows)
+            if atom not in rows:
+                rows.append(deepcopy(atom))
+            working[key] = rows
+
     policies = working.get("policy_conditions", {})
     bindings = working.get("policy_adequacy_bindings", {})
     if not isinstance(policies, Mapping):
@@ -297,6 +338,17 @@ def augment_problem(
             for row in structural_atom_proofs
             if row.get("pass") is True and row.get("atom_truth_authorized") is True
         }),
+        "information_boundary_atom_proofs": information_boundary_atom_proofs,
+        "information_boundary_proved_atom_ids": sorted({
+            str(row.get("atom_id"))
+            for row in information_boundary_atom_proofs
+            if row.get("pass") is True and row.get("atom_truth_authorized") is True
+        }),
+        "proved_condition_atom_ids": sorted({
+            str(row.get("atom_id"))
+            for row in [*structural_atom_proofs, *information_boundary_atom_proofs]
+            if row.get("pass") is True and row.get("atom_truth_authorized") is True
+        }),
         "basis_eligible_policy_count": len(injected) + len(reused),
         "injected_policy_ids": injected,
         "reused_policy_ids": reused,
@@ -309,6 +361,8 @@ def augment_problem(
             "COMPLEMENTS_R2_SELF_AUTHENTICATING_RAW_SOURCE_REGISTRY;"
             "SEMANTIC_CONDITION_ATOMS_MUST_ALREADY_EXIST_IN_DECISION_BASIS;"
             "ONLY_THE_EXACT_SUPPORTED_TRANSFORM_STRUCTURAL_ATOM_MAY_BE_RECOMPUTED;"
+            "THE_NO_HIDDEN_VERIFIER_ATOM_REQUIRES_A_CONTENT_ADDRESSED_INDEPENDENT_"
+            "PREVERIFIER_INFORMATION_BOUNDARY_RECEIPT;"
             "REGISTRY_NEVER_PROVES_OTHER_CONDITION_TRUTH;"
             "P3_STILL_REQUIRES_SOURCE_AUTHORIZED_REFINEMENT_TO_REMOVE_FALSE_WORLDS"
         ),
