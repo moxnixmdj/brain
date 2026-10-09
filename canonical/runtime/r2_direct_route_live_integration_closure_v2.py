@@ -55,15 +55,25 @@ def evaluate(*, repo_root: str | Path = ROOT) -> dict[str, Any]:
         direct.get("direct_runtime_path") == EXPECTED_DISPATCHER
         and direct.get("direct_runtime_git_blob_sha") == _blob(dispatcher_path)
     )
+    fixed_blob = _blob(fixed_path)
     fixed_binding_ok = (
-        direct.get("fixed_point_controller_git_blob_sha") == _blob(fixed_path)
+        direct.get("fixed_point_controller_git_blob_sha") == fixed_blob
+    )
+    controller = current.get("controller")
+    controller_fixed_binding_ok = (
+        isinstance(controller, Mapping)
+        and controller.get("fixed_point_git_blob_sha") == fixed_blob
     )
     source = fixed_path.read_text(encoding="utf-8")
     stable_import = (
         "from canonical.runtime import r2_direct_route_registry_v1 as direct_adequacy"
         in source
     )
-    legacy_import = "r2_direct_end_to_end_adequacy_v10 as direct_adequacy" in source
+    legacy_import = (
+        "from canonical.runtime import r2_direct_end_to_end_adequacy_"
+        in source
+        and " as direct_adequacy" in source
+    )
 
     missing_execution = sorted(expected - effective)
     unauthorized_execution = sorted(effective - expected)
@@ -72,11 +82,12 @@ def evaluate(*, repo_root: str | Path = ROOT) -> dict[str, Any]:
         equality
         and runtime_binding_ok
         and fixed_binding_ok
+        and controller_fixed_binding_ok
         and stable_import
         and not legacy_import
         and direct.get("future_route_source_edit_required") is False
         and direct.get("future_route_registry_edit_required") is False
-        and direct.get("legacy_v1_to_v10_runtime_chain_load_bearing") is False
+        and direct.get("legacy_v1_to_v13_runtime_chain_load_bearing") is False
     )
     return {
         "schema": SCHEMA,
@@ -95,11 +106,12 @@ def evaluate(*, repo_root: str | Path = ROOT) -> dict[str, Any]:
         "unauthorized_execution": unauthorized_execution,
         "runtime_binding_ok": runtime_binding_ok,
         "fixed_point_binding_ok": fixed_binding_ok,
+        "controller_fixed_point_binding_ok": controller_fixed_binding_ok,
         "stable_dispatcher_import_live": stable_import,
-        "legacy_v10_import_live": legacy_import,
+        "legacy_versioned_direct_import_live": legacy_import,
         "future_route_source_edit_required": direct.get("future_route_source_edit_required"),
         "future_route_registry_edit_required": direct.get("future_route_registry_edit_required"),
-        "legacy_version_chain_load_bearing": direct.get("legacy_v1_to_v10_runtime_chain_load_bearing"),
+        "legacy_version_chain_load_bearing": direct.get("legacy_v1_to_v13_runtime_chain_load_bearing"),
         "open_world_semantic_coverage_claimed": False,
         "terminal_authority": False,
         "terminal_credit_delta": 0,
