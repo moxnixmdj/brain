@@ -20,7 +20,6 @@ SCHEMA = "PROJECT_BRAIN_REGCAP_CONTEXT_SIGNATURE_V1"
 EXACT_SURFACE = "loss-absorbing cushion"
 MAX_SENTENCE_CHARS = 800
 
-_SENTENCE = re.compile(r"[^.!?]+[.!?]?", re.S)
 _CCOB_FUNC = re.compile(
     r"\b(?:can\s+be\s+)?drawn\s+down\s+as\s+losses\s+are\s+incurred\b",
     re.I,
@@ -104,13 +103,38 @@ def _base(status: str, *, passed: bool = False, **extra: Any) -> dict[str, Any]:
     }
 
 
+def _sentence_spans(text: str):
+    start = 0
+    n = len(text)
+    for i, ch in enumerate(text):
+        boundary = ch in "!?";
+        if ch == ".":
+            decimal_point = (
+                i > 0
+                and i + 1 < n
+                and text[i - 1].isdigit()
+                and text[i + 1].isdigit()
+            )
+            boundary = not decimal_point
+        if not boundary:
+            continue
+        raw = text[start:i + 1]
+        left_trim = len(raw) - len(raw.lstrip())
+        right_trim = len(raw.rstrip())
+        if right_trim > left_trim:
+            yield start + left_trim, start + right_trim, raw[left_trim:right_trim]
+        start = i + 1
+    if start < n:
+        raw = text[start:]
+        left_trim = len(raw) - len(raw.lstrip())
+        right_trim = len(raw.rstrip())
+        if right_trim > left_trim:
+            yield start + left_trim, start + right_trim, raw[left_trim:right_trim]
+
+
 def _containing_sentence(text: str, start: int, end: int) -> tuple[int, int, str] | None:
-    for m in _SENTENCE.finditer(text):
-        raw = m.group(0)
-        left = m.start() + (len(raw) - len(raw.lstrip()))
-        right = m.start() + len(raw.rstrip())
+    for left, right, sentence in _sentence_spans(text):
         if left <= start and end <= right:
-            sentence = text[left:right]
             return left, right, sentence
     return None
 
