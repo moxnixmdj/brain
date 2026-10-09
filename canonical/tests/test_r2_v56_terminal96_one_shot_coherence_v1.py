@@ -11,39 +11,105 @@ SCHED=ROOT/"canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V54.js
 
 def git_blob(path):
     raw=path.read_bytes()
-    return hashlib.sha1(b"blob "+str(len(raw)).encode()+b"\0"+raw).hexdigest()
+    return hashlib.sha1(b"blob "+str(len(raw)).encode()+b"\\0"+raw).hexdigest()
 
-class TestR2V56Terminal96OneShotCoherence(unittest.TestCase):
+class TestR2V56CurrentProjectionCoherence(unittest.TestCase):
     def test_exact_pointer_chain_and_zero_credit(self):
         r2=json.loads(R2.read_text())
         term=json.loads(TERM.read_text())
         one=json.loads(ONE.read_text())
 
         self.assertIn("V56",r2["status"])
-        self.assertEqual(r2["scheduler_cut"]["path"],"canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V54.json")
+        self.assertEqual(
+            r2["scheduler_cut"]["path"],
+            "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V54.json",
+        )
         self.assertEqual(r2["scheduler_cut"]["git_blob_sha"],git_blob(SCHED))
 
-        self.assertGreaterEqual(term["pointer_revision"],97)
+        self.assertGreaterEqual(term["pointer_revision"],99)
         self.assertIn("CURRENT_R2_V56",term["status"])
         self.assertFalse(term["live_truth"]["terminal"])
         src=term["authoritative_sources"]["current_r2_decision_intelligence"]
         self.assertEqual(src["status"],r2["status"])
         self.assertEqual(src["scheduler_cut"]["path"],r2["scheduler_cut"]["path"])
-        self.assertEqual(src["scheduler_cut"]["git_blob_sha"],r2["scheduler_cut"]["git_blob_sha"])
-        self.assertEqual(term["live_truth"]["current_r2_scheduler_cut"],"ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V54")
-        self.assertTrue(term["r2_v56_projection_reconciliation_20261009_v2"]["finance_acceptance_route_split_preserved"])\n        self.assertTrue(term["live_truth"]["r2_regcap_contextual_relative_selection_bound"])\n        self.assertFalse(term["live_truth"]["r2_regcap_contextual_relative_selection_is_global_identity"])
+        self.assertEqual(
+            src["scheduler_cut"]["git_blob_sha"],
+            r2["scheduler_cut"]["git_blob_sha"],
+        )
+        self.assertEqual(
+            term["live_truth"]["current_r2_scheduler_cut"],
+            "ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V54",
+        )
+        self.assertTrue(
+            term["r2_v56_projection_reconciliation_20261009_v2"][
+                "finance_acceptance_route_split_preserved"
+            ]
+        )
+        self.assertTrue(
+            term["live_truth"]["r2_regcap_contextual_relative_selection_bound"]
+        )
+        self.assertFalse(
+            term["live_truth"][
+                "r2_regcap_contextual_relative_selection_is_global_identity"
+            ]
+        )
+        self.assertFalse(
+            term["live_truth"]["r2_regcap_contextual_candidate_universe_complete"]
+        )
+        self.assertEqual(term["live_truth"]["r2_primary_internal_unsolved_count"],1)
+        self.assertFalse(
+            term[
+                "r2_v56_regcap_contextual_selection_reconciliation_20261009_v1"
+            ]["terminal_remains_false"] is False
+        )
 
         self.assertIn("CURRENT_R2_V56",one["status"])
-        self.assertEqual(one["authority"]["current_r2_pointer_git_blob_sha"],git_blob(R2))
-        self.assertEqual(one["authority"]["current_terminal_authority_git_blob_sha"],git_blob(TERM))
-        self.assertEqual(one["authority"]["current_terminal_authority_pointer_revision"],term["pointer_revision"])
-        self.assertEqual(one["authority"]["current_r2_scheduler_cut_path"],r2["scheduler_cut"]["path"])
-        self.assertEqual(one["authority"]["current_r2_scheduler_cut_git_blob_sha"],r2["scheduler_cut"]["git_blob_sha"])
-        self.assertTrue(one["authority"]["dynamic_current_projection"]["authoritative_for_moving_r2_and_terminal"])
+        self.assertEqual(
+            one["authority"]["current_r2_pointer_git_blob_sha"],
+            git_blob(R2),
+        )
+        self.assertEqual(
+            one["authority"]["current_terminal_authority_git_blob_sha"],
+            git_blob(TERM),
+        )
+        self.assertEqual(
+            one["authority"]["current_terminal_authority_pointer_revision"],
+            term["pointer_revision"],
+        )
+        self.assertEqual(
+            one["authority"]["current_r2_scheduler_cut_path"],
+            r2["scheduler_cut"]["path"],
+        )
+        self.assertEqual(
+            one["authority"]["current_r2_scheduler_cut_git_blob_sha"],
+            r2["scheduler_cut"]["git_blob_sha"],
+        )
+        self.assertTrue(
+            one["authority"]["dynamic_current_projection"][
+                "authoritative_for_moving_r2_and_terminal"
+            ]
+        )
         self.assertFalse(one["authority"]["static_projection_snapshots_authoritative"])
         self.assertFalse(one["current_projection_refresh_20261009"]["snapshot_authoritative"])
-        self.assertTrue(one["current_main_v56_projection_reconciliation"]["finance_acceptance_route_split_preserved"])
-        self.assertTrue(one["current_main_v56_projection_reconciliation"]["terminal_remains_false"])\n        self.assertTrue(one["current_main_v56_projection_reconciliation"]["regcap_contextual_relative_selection_bound"])\n        self.assertFalse(one["current_main_v56_projection_reconciliation"]["regcap_contextual_selection_is_global_identity"])
+
+        rec=one["current_main_v56_projection_reconciliation"]
+        self.assertEqual(
+            rec["current_r2_pointer_git_blob_sha"],
+            git_blob(R2),
+        )
+        self.assertEqual(
+            rec["current_terminal_authority_git_blob_sha"],
+            git_blob(TERM),
+        )
+        self.assertEqual(
+            rec["current_terminal_authority_pointer_revision"],
+            term["pointer_revision"],
+        )
+        self.assertTrue(rec["regcap_contextual_relative_selection_bound"])
+        self.assertFalse(rec["regcap_contextual_selection_is_global_identity"])
+        self.assertTrue(rec["finance_acceptance_route_split_preserved"])
+        self.assertTrue(rec["terminal_remains_false"])
+        self.assertEqual(rec["r2_primary_internal_unsolved_count"],1)
         self.assertEqual(one["accounting"]["terminal_credit_delta"],0)
 
 if __name__=="__main__":
