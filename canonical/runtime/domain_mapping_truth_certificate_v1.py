@@ -20,6 +20,8 @@ from canonical.runtime.source_aligned_regcap_context_proof_v1 import (
     TLAC_KIND,
     verify_proof as verify_regcap_context_proof,
 )
+from canonical.runtime import regcap_bounded_rival_registry_authority_v1 as regcap_registry
+from canonical.runtime import regcap_context_signature_v1 as regcap_context_signature
 
 SCHEMA = "PROJECT_BRAIN_DOMAIN_MAPPING_TRUTH_CERTIFICATE_V1"
 TRUTH_KIND = "DOMAIN_MAPPING_RELATION"
@@ -156,6 +158,201 @@ def _contextual_refinement(raw_span: str, source_id: str) -> dict[str, Any]:
         }
 
 
+def _bounded_regcap_context_relation(
+    *,
+    raw_span: str,
+    source_id: str,
+    scope_id: str,
+    target_concept_id: str,
+    required_relation: str,
+    candidate_concepts: Sequence[Mapping[str, Any]],
+) -> dict[str, Any]:
+    """Prove only task-scoped identity inside the authenticated three-rival registry.
+
+    This path is deliberately unavailable to global SEMANTIC_IDENTITY.  The
+    exact scope id names a Brain-owned finite registry whose completeness and
+    discriminator semantics are independently reauthenticated.
+    """
+    if (
+        scope_id != regcap_registry.SCOPE_ID
+        or required_relation != "LOGICAL_EQUIVALENCE_IN_SCOPE"
+    ):
+        return {
+            "status": "NOT_APPLICABLE",
+            "pass": False,
+            "semantic_truth_authority": False,
+            "terminal_authority": False,
+        }
+
+    universe = regcap_registry.resolve_authenticated_registry()
+    if universe.get("status") == "FAIL_CLOSED":
+        return {
+            "status": "FAIL_CLOSED",
+            "pass": False,
+            "reason": "REGCAP_BOUNDED_REGISTRY_AUTHORITY_FAILED",
+            "registry_result": universe,
+            "semantic_truth_authority": False,
+            "terminal_authority": False,
+        }
+    if (
+        universe.get("authenticated_scope_completeness") is not True
+        or universe.get("hypothesis_set_complete") is not True
+    ):
+        return {
+            "status": "FAIL_CLOSED",
+            "pass": False,
+            "reason": "REGCAP_BOUNDED_REGISTRY_COMPLETENESS_UNPROVED",
+            "registry_result": universe,
+            "semantic_truth_authority": False,
+            "terminal_authority": False,
+        }
+
+    registry_ids = sorted(str(x) for x in universe.get("candidate_concept_ids") or [])
+    supplied_ids = []
+    for i, row in enumerate(candidate_concepts):
+        if not isinstance(row, Mapping):
+            return {
+                "status": "FAIL_CLOSED",
+                "pass": False,
+                "reason": "CANDIDATE_CONCEPT_NOT_OBJECT:" + str(i),
+                "registry_result": universe,
+                "semantic_truth_authority": False,
+                "terminal_authority": False,
+            }
+        cid = str(row.get("concept_id") or "").strip()
+        if not cid:
+            return {
+                "status": "FAIL_CLOSED",
+                "pass": False,
+                "reason": "CANDIDATE_CONCEPT_ID_REQUIRED:" + str(i),
+                "registry_result": universe,
+                "semantic_truth_authority": False,
+                "terminal_authority": False,
+            }
+        supplied_ids.append(cid)
+    if sorted(supplied_ids) != registry_ids:
+        return {
+            "status": "FAIL_CLOSED",
+            "pass": False,
+            "reason": "CANDIDATES_DO_NOT_MATCH_AUTHENTICATED_REGISTRY",
+            "registry_candidate_ids": registry_ids,
+            "supplied_candidate_ids": sorted(supplied_ids),
+            "semantic_truth_authority": False,
+            "terminal_authority": False,
+        }
+    if target_concept_id not in registry_ids:
+        return {
+            "status": "FAIL_CLOSED",
+            "pass": False,
+            "reason": "TARGET_OUTSIDE_AUTHENTICATED_REGISTRY",
+            "registry_candidate_ids": registry_ids,
+            "semantic_truth_authority": False,
+            "terminal_authority": False,
+        }
+
+    surface = regcap_context_signature.EXACT_SURFACE
+    folded = raw_span.casefold()
+    starts = []
+    cursor = 0
+    while True:
+        found = folded.find(surface, cursor)
+        if found < 0:
+            break
+        starts.append(found)
+        cursor = found + len(surface)
+    if len(starts) != 1:
+        return {
+            "status": "OPEN__EXACTLY_ONE_BOUND_DESCRIPTOR_OCCURRENCE_REQUIRED",
+            "pass": False,
+            "descriptor_occurrence_count": len(starts),
+            "registry_result": universe,
+            "semantic_truth_authority": False,
+            "terminal_authority": False,
+        }
+
+    authority = universe.get("authority_result")
+    matrix_result = (
+        authority.get("matrix_result")
+        if isinstance(authority, Mapping)
+        else None
+    )
+    source_results = (
+        matrix_result.get("source_results")
+        if isinstance(matrix_result, Mapping)
+        else None
+    )
+    if not isinstance(source_results, Mapping):
+        return {
+            "status": "FAIL_CLOSED",
+            "pass": False,
+            "reason": "AUTHENTICATED_MATRIX_SOURCE_RESULTS_MISSING",
+            "registry_result": universe,
+            "semantic_truth_authority": False,
+            "terminal_authority": False,
+        }
+
+    def cached_projection(pack: Mapping[str, Any]) -> Mapping[str, Any]:
+        sid = str(pack.get("source_id") or "")
+        row = source_results.get(sid)
+        return dict(row) if isinstance(row, Mapping) else {"pass": False}
+
+    start = starts[0]
+    end = start + len(surface)
+    resolved = regcap_context_signature.resolve_relative(
+        raw_span,
+        source_id=source_id,
+        start=start,
+        end=end,
+        candidate_concept_ids=registry_ids,
+        projection_verifier=cached_projection,
+    )
+    if resolved.get("status") == "FAIL_CLOSED":
+        return {
+            "status": "FAIL_CLOSED",
+            "pass": False,
+            "reason": "REGCAP_CONTEXT_SIGNATURE_FAIL_CLOSED",
+            "registry_result": universe,
+            "context_result": resolved,
+            "semantic_truth_authority": False,
+            "terminal_authority": False,
+        }
+    if (
+        resolved.get("pass") is not True
+        or resolved.get("relative_selection_authority") is not True
+        or not resolved.get("relative_selected_concept_id")
+    ):
+        return {
+            "status": "OPEN__BOUNDED_CONTEXT_RELATION_NOT_RESOLVED",
+            "pass": False,
+            "registry_result": universe,
+            "context_result": resolved,
+            "semantic_truth_authority": False,
+            "terminal_authority": False,
+        }
+
+    selected = str(resolved["relative_selected_concept_id"])
+    return {
+        "status": "PASS__AUTHENTICATED_BOUNDED_CONTEXT_RELATION",
+        "pass": True,
+        "predicate_truth": "TRUE" if selected == target_concept_id else "FALSE",
+        "selected_concept_id": selected,
+        "target_concept_id": target_concept_id,
+        "required_relation": required_relation,
+        "registry_scope_id": regcap_registry.SCOPE_ID,
+        "registry_candidate_ids": registry_ids,
+        "registry_result": universe,
+        "context_result": resolved,
+        "semantic_truth_authority": True,
+        "global_semantic_identity_authority": False,
+        "open_world_candidate_set_complete": False,
+        "terminal_authority": False,
+        "boundary": (
+            "LOGICAL_EQUIVALENCE_ONLY_INSIDE_THE_EXACT_AUTHENTICATED_THREE_RIVAL_"
+            "REGISTRY_SCOPE__NO_GLOBAL_SEMANTIC_IDENTITY_OR_OPEN_WORLD_COMPLETENESS"
+        ),
+    }
+
+
 def _unknown(
     *,
     checked_id: str,
@@ -250,8 +447,7 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
 
     contextual_refinement = _contextual_refinement(raw_span, source_id)
 
-    target_problem = relation_problems.get(target)
-    if not isinstance(target_problem, Mapping):
+    try:
         checked = checked_predicate_id(
             source_id=source_id,
             raw_span=raw_span,
@@ -259,6 +455,65 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
             target_concept_id=target,
             required_relation=required,
         )
+    except Exception as exc:
+        return _fail(type(exc).__name__ + ":" + str(exc))
+
+    bounded_context = _bounded_regcap_context_relation(
+        raw_span=raw_span,
+        source_id=source_id,
+        scope_id=scope_id,
+        target_concept_id=target,
+        required_relation=required,
+        candidate_concepts=candidates,
+    )
+    if bounded_context.get("status") == "FAIL_CLOSED":
+        return _fail(
+            "BOUNDED_REGCAP_CONTEXT_FAIL_CLOSED",
+            bounded_context=bounded_context,
+        )
+    if bounded_context.get("pass") is True:
+        truth = str(bounded_context.get("predicate_truth") or "")
+        if truth not in {"TRUE", "FALSE"}:
+            return _fail(
+                "BOUNDED_REGCAP_CONTEXT_TRUTH_INVALID",
+                bounded_context=bounded_context,
+            )
+        return {
+            "schema": SCHEMA,
+            "pass": True,
+            "status": (
+                "PASS__BOUNDED_REGCAP_CONTEXT_RELATION_PROVED_TRUE"
+                if truth == "TRUE"
+                else "PASS__BOUNDED_REGCAP_CONTEXT_RELATION_PROVED_FALSE"
+            ),
+            "predicate_id": checked,
+            "requested_predicate_id": requested_id,
+            "requested_predicate_id_authority": False,
+            "predicate_truth": truth,
+            "target_concept_id": target,
+            "required_relation": required,
+            "source_id": source_id,
+            "source_sha256": sha256(raw_span.encode("utf-8")).hexdigest(),
+            "scope_id": scope_id,
+            "mapping_result": {},
+            "authenticated_context_refinement": contextual_refinement,
+            "bounded_context_relation": bounded_context,
+            "truthful_precommitment_observation": True,
+            "semantic_truth_authority": True,
+            "policy_adequacy_authority": False,
+            "db_admission_authority": False,
+            "u_empty_authority": False,
+            "terminal_authority": False,
+            "terminal_credit_delta": 0,
+            "boundary": (
+                "AUTHENTICATED_THREE_RIVAL_REGISTRY_SCOPE_ONLY__"
+                "LOGICAL_EQUIVALENCE_IN_SCOPE_ONLY__NO_GLOBAL_SEMANTIC_IDENTITY__"
+                "NO_OPEN_WORLD_CANDIDATE_COMPLETENESS_OR_TERMINAL_AUTHORITY"
+            ),
+        }
+
+    target_problem = relation_problems.get(target)
+    if not isinstance(target_problem, Mapping):
         return _unknown(
             checked_id=checked,
             requested_id=requested_id,
@@ -272,17 +527,6 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
             target_required_relation=target_required,
             certificate_required_relation=required,
         )
-
-    try:
-        checked = checked_predicate_id(
-            source_id=source_id,
-            raw_span=raw_span,
-            scope_id=scope_id,
-            target_concept_id=target,
-            required_relation=required,
-        )
-    except Exception as exc:
-        return _fail(type(exc).__name__ + ":" + str(exc))
 
     result = resolve_mapping(
         raw_span,
