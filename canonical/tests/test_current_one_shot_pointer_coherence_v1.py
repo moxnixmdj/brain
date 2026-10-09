@@ -5,6 +5,8 @@ import json
 from pathlib import Path
 import unittest
 
+from canonical.runtime import current_one_shot_projection_v1 as projection
+
 ROOT = Path(__file__).resolve().parents[2]
 POINTER = ROOT / "canonical/governance/CURRENT_ONE_SHOT_REALITY_CLOSURE.json"
 
@@ -15,51 +17,53 @@ def git_blob_sha(path: Path) -> str:
 
 
 class CurrentOneShotPointerCoherenceV1Tests(unittest.TestCase):
-    def test_current_load_bearing_bytes_are_exact(self):
+    def test_stable_load_bearing_bytes_are_exact(self):
         pointer = json.loads(POINTER.read_text(encoding="utf-8"))
-        refresh = pointer["current_projection_refresh_20261009"]
-
-        targets = {
-            "one_shot_v1_runtime_git_blob_sha":
-                "canonical/runtime/one_shot_verified_closure_v1.py",
-            "one_shot_v2_runtime_git_blob_sha":
-                "canonical/runtime/one_shot_reality_closure_v2.py",
-            "current_r2_pointer_git_blob_sha":
-                "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
-            "current_terminal_authority_git_blob_sha":
-                "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
-        }
-        for field, rel in targets.items():
-            self.assertEqual(refresh[field], git_blob_sha(ROOT / rel), rel)
-
         self.assertEqual(
             pointer["predecessor"]["git_blob_sha"],
-            refresh["one_shot_v1_runtime_git_blob_sha"],
+            git_blob_sha(ROOT / "canonical/runtime/one_shot_verified_closure_v1.py"),
         )
         self.assertEqual(
             pointer["runtime"]["git_blob_sha"],
-            refresh["one_shot_v2_runtime_git_blob_sha"],
+            git_blob_sha(ROOT / "canonical/runtime/one_shot_reality_closure_v2.py"),
         )
+        dynamic = pointer["authority"]["dynamic_current_projection"]
+        self.assertEqual(dynamic["path"], projection.PATHS["self"])
         self.assertEqual(
-            pointer["authority"]["current_terminal_authority_git_blob_sha"],
-            refresh["current_terminal_authority_git_blob_sha"],
+            dynamic["git_blob_sha"],
+            git_blob_sha(ROOT / projection.PATHS["self"]),
         )
 
-    def test_current_terminal_revision_matches_pointer(self):
+    def test_moving_r2_and_terminal_truth_resolve_dynamically(self):
+        out = projection.evaluate(ROOT)
+        self.assertTrue(out["pass"], out)
+
+        r2_path = ROOT / projection.PATHS["r2"]
+        terminal_path = ROOT / projection.PATHS["terminal"]
+        terminal = json.loads(terminal_path.read_text(encoding="utf-8"))
+
+        self.assertEqual(out["current_r2"]["git_blob_sha"], git_blob_sha(r2_path))
+        self.assertEqual(
+            out["current_terminal_authority"]["git_blob_sha"],
+            git_blob_sha(terminal_path),
+        )
+        self.assertEqual(
+            out["current_terminal_authority"]["pointer_revision"],
+            terminal["pointer_revision"],
+        )
+
+    def test_static_projection_drift_is_observable_not_authoritative(self):
         pointer = json.loads(POINTER.read_text(encoding="utf-8"))
-        terminal = json.loads(
-            (ROOT / "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json")
-            .read_text(encoding="utf-8")
+        out = projection.evaluate(ROOT)
+        self.assertTrue(out["pass"], out)
+        self.assertFalse(
+            pointer["authority"]["static_projection_snapshots_authoritative"]
         )
-        self.assertEqual(
-            pointer["authority"]["current_terminal_authority_pointer_revision"],
-            terminal["pointer_revision"],
-        )
-        self.assertEqual(
-            pointer["current_projection_refresh_20261009"][
-                "current_terminal_authority_pointer_revision"
-            ],
-            terminal["pointer_revision"],
+        self.assertFalse(out["snapshot_drift"]["snapshot_is_authoritative"])
+        self.assertTrue(
+            out["snapshot_drift"]["r2_snapshot_differs_from_current"]
+            or out["snapshot_drift"]["terminal_snapshot_differs_from_current"],
+            out,
         )
 
     def test_latest_v1_truth_repair_binds_current_v1_bytes(self):
