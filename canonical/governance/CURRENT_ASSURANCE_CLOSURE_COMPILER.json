@@ -1,0 +1,29 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_ASSURANCE_CLOSURE_COMPILER_POINTER_V1",
+  "date": "2026-10-09",
+  "status": "CURRENT_UVCK_V2_CANDIDATE__IMPLEMENTED_ISOLATED_10_OF_10_PASS__NOT_LIVE_DEFAULT",
+  "governance": {
+    "path": "canonical/governance/UVCK_V2_ASSURANCE_CLOSURE_COMPILER_20261009_V1.json",
+    "git_blob_sha": "e45d6acb3d9726f8a36623337a6f1586dd2641d3"
+  },
+  "runtime": {
+    "path": "canonical/runtime/assurance_closure_compiler_v1.py",
+    "git_blob_sha": "135eeff03e33083f8140a29a62efd67271ebfb6b"
+  },
+  "tests": {
+    "path": "canonical/tests/test_assurance_closure_compiler_v1.py",
+    "git_blob_sha": "ddc04a95be15a765d269db326adc263db20c00e3",
+    "isolated_result": "10_OF_10_PASS"
+  },
+  "activation": {
+    "live_default": false,
+    "required_before_promotion": [
+      "FULL_CURRENT_MAIN_INTEGRATION_REPLAY",
+      "INDEPENDENT_ADVERSARIAL_DEFEATER_GENERATOR_BINDING",
+      "CURRENT_POINTER_COHERENCE_VERIFICATION"
+    ]
+  },
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
