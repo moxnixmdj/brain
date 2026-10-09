@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_R2_V38_PAIR_REFERENCE_VERIFY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__EXPLICIT_ORDERED_PAIR_REFERENCE__EXACT_CONTENT_ADDRESSED_13_OF_13__COMPILE_4_OF_4__ZERO_CREDIT",
+  "exact_blobs": {
+    "producer": "92e4029419ac21f0cf0a18247bee0aa191b9a205",
+    "independent_verifier": "8510d9db74a7e3f50480e0c0aa586d3333441569",
+    "direct_route": "c47cf50d69e24bc1490b9c6c1ce2e5683a03d68f",
+    "router_v8": "76abf119813d133bf05e19602ee375c8d5c5d7b6",
+    "fixed_point": "cbc37346e5838b761cbc124b956d6e4e04986594"
+  },
+  "verification": {
+    "producer_and_independent_verifier": "7_OF_7_PASS",
+    "direct_route": "3_OF_3_PASS",
+    "successor_router": "3_OF_3_PASS",
+    "compile": "4_OF_4_PASS",
+    "exact_git_blob_hash_match": true
+  },
+  "proved": [
+    "EXPLICIT_SOURCE_ORDERED_PAIR_BINDS_FORMER_TO_FIRST_AND_LATTER_TO_SECOND",
+    "INDEPENDENT_VERIFIER_RECOMPUTES_PAIR_AND_REFERENCE_SPANS",
+    "NONEXPLICIT_OR_DUPLICATE_PAIR_CASES_FAIL_CLOSED",
+    "DIRECT_ROUTE_ROLLS_BACK_ON_POSTWRITE_VERIFIER_FAILURE",
+    "V8_DELEGATES_NONMATCHING_REQUESTS_TO_V7"
+  ],
+  "hard_nonclaims": [
+    "NO_IMPLICIT_PAIR_INFERENCE",
+    "NO_GENERAL_COREFERENCE",
+    "NO_SYNONYMY_WORD_SENSE_ONTOLOGY_CROSS_DOCUMENT_OR_EXTERNAL_TRUTH",
+    "NO_REMOTE_SPRITE_REPLAY_CLAIM_FOR_V38",
+    "NO_FINANCE_FAMILY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
