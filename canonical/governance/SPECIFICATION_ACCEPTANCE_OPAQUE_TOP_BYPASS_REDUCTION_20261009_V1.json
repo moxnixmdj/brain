@@ -1,0 +1,80 @@
+{
+  "schema": "PROJECT_BRAIN_SPECIFICATION_ACCEPTANCE_OPAQUE_TOP_BYPASS_REDUCTION_20261009_V1",
+  "date": "2026-10-09",
+  "status": "CANDIDATE_TRUTH_REPAIR__EXPLICIT_R1_R2_MATERIALIZATION_NOT_SEPARATELY_NECESSARY__FINAL_ADEQUACY_OR_DIRECT_ACCEPTANCE_OPEN__ZERO_CREDIT",
+  "target_contract": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+  "sources": {
+    "old_minimum_residual": {
+      "path": "canonical/governance/SPECIFICATION_ACCEPTANCE_MODEL_MINIMUM_RESIDUAL_TOURNAMENT_20261007_V1.json",
+      "git_blob_sha": "18e818ee38e1958324a1319d6f5d24071466d44a"
+    },
+    "current_controller": {
+      "path": "canonical/runtime/general_adequate_decision_controller_v1.py",
+      "git_blob_sha": "b0cab3da36d89af202d6a95aa80701ad61372001"
+    },
+    "opaque_replay": {
+      "path": "canonical/verification/R2_OPAQUE_GOAL_BOOTSTRAP_VERIFY_20261008_V1.json",
+      "git_blob_sha": "6eb3b4f794a7617ab251afb80705e06c833ebda8",
+      "verified_runtime_blob": "42172c29270c25b36ffb4a0f5de4b6955143bd0d"
+    },
+    "raw_contract": {
+      "path": "canonical/runtime/lossless_raw_task_contract_v1.py",
+      "git_blob_sha": "d54d5a2f7efa76b653d288f4f53da4883644baa6"
+    },
+    "top_overapprox": {
+      "path": "canonical/governance/TOP_SEMANTIC_OVERAPPROXIMATION_SOUNDNESS_TRUTH_REPAIR_20261007_V1.json",
+      "git_blob_sha": "2e37860a0fb9d8212aa854c0d8c8749919c76204"
+    },
+    "extension_preservation": {
+      "path": "canonical/governance/DYNAMIC_ADEQUACY_EXTENSION_BASIS_TRUTH_REPAIR_20261007_V1.json",
+      "git_blob_sha": "602014867b9947b2579831400ad868f1de94e8d3"
+    },
+    "logic_kernel": {
+      "path": "canonical/runtime/specification_acceptance_opaque_bypass_v1.py",
+      "git_blob_sha": "880aee2ca2b768342cac8f4cf7cae337023971d0"
+    },
+    "logic_tests": {
+      "path": "canonical/tests/test_specification_acceptance_opaque_bypass_v1.py",
+      "git_blob_sha": "899f80f1b90e57a2439b279fb15297d02b5ff276"
+    }
+  },
+  "inheritance": {
+    "byte_identical_current_functions": [
+      "_opaque_goal_atom_id",
+      "_bootstrap_opaque_decision_context",
+      "_raw_obligation_ids"
+    ],
+    "scope": "ONLY_THE_PREVIOUSLY_VERIFIED_OPAQUE_BOOTSTRAP_MECHANISM"
+  },
+  "theorem": {
+    "old_R1_canary": "EXCLUDING_THE_TRUE_INTERPRETATION_IS_UNSAFE",
+    "repair": "NO_FALSE_EXCLUSION_DOES_NOT_REQUIRE_EXPLICIT_HYPOTHESIS_ENUMERATION",
+    "sufficient_shape": [
+      "PRESERVE_EVERY_RAW_ACCEPTANCE_OBLIGATION",
+      "START_UNRESOLVED_MEANING_AS_A_SOUND_OVERAPPROXIMATION",
+      "NARROW_ONLY_WITH_SOUND_BOUND_EVIDENCE",
+      "REQUIRE_SCOPE_SOUND_FINAL_ADEQUACY_OR_INDEPENDENT_DIRECT_ACCEPTANCE",
+      "FAIL_CLOSED_WHILE_UNRESOLVED"
+    ],
+    "explicit_complete_hypothesis_set_required": false,
+    "explicit_intermediate_consequence_model_required": false,
+    "surviving_residual": "SOURCE_BOUND_SCOPE_SOUND_POLICY_ADEQUACY_OR_DIRECT_END_TO_END_ACCEPTANCE"
+  },
+  "cursorbench_effect": {
+    "scope_complete": true,
+    "positive_adequacy_open": true,
+    "acceptance_open": true,
+    "next_work": "PROVE_ONE_TARGET_RELEVANT_SOURCE_BOUND_ADEQUACY_REGION_OR_DIRECT_ACCEPTANCE_CERTIFICATE__ACQUIRE_ONLY_FACTS_THAT_CAN_CHANGE_THIS_VERDICT"
+  },
+  "hard_nonclaims": [
+    "NO_GENERAL_SEMANTIC_INTERPRETATION_CLOSURE",
+    "NO_CURRENT_CURSORBENCH_POLICY_ADEQUACY",
+    "NO_SPECIFICATION_CONTRACT_DISCHARGE",
+    "NO_SCORE_ACCEPTANCE_FAMILY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
