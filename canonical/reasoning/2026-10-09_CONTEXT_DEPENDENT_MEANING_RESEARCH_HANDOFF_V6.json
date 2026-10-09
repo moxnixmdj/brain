@@ -23,7 +23,9 @@
     "semantic_reconciliation": "canonical/governance/R2_SEMANTIC_ACQUISITION_RESEARCH_RECONCILIATION_20261009_V5.json",
     "semantic_reconciliation_git_blob_sha": "40141c5f9e87ce7cb86d2101d0b179348e619ab5",
     "action_intent": "canonical/action_intents/ACTION_INTENT_CONTEXT_DEPENDENT_MEANING_POSITIVE_COVERAGE_20261009_V5.json",
-    "action_intent_git_blob_sha": "b4b77901cc9d93f41ab41e41a7e36b558d7e9796"
+    "action_intent_git_blob_sha": "b4b77901cc9d93f41ab41e41a7e36b558d7e9796",
+    "successor_execution_ledger": "canonical/reasoning/2026-10-09_CONTEXT_DEPENDENT_MEANING_SUCCESSOR_EXECUTION_LEDGER_V2.json",
+    "successor_execution_ledger_git_blob_sha": "097aa109d247d02abfd713488f37da13f1e25683"
   },
   "real_pair_evidence": {
     "issuer": "Apple Inc.",
@@ -55,8 +57,10 @@
     "source_export_git_blob_sha": "12e2ec181a3c8cb7bb28e617a5591e5e81f0c21e",
     "full_dossier": "canonical/reasoning/2026-10-09_CONTEXT_DEPENDENT_MEANING_FULL_RESEARCH_DOSSIER_V1.json",
     "full_dossier_git_blob_sha": "b154f2c01a0c4afc2b2adef3abe418dac8669748",
-    "successor_execution_ledger": "canonical/reasoning/2026-10-09_CONTEXT_DEPENDENT_MEANING_SUCCESSOR_EXECUTION_LEDGER_V1.json",
-    "successor_execution_ledger_git_blob_sha": "688bcfefaee9cf7ccef3b52934ea0fb4cc588942"
+    "successor_execution_ledger": "canonical/reasoning/2026-10-09_CONTEXT_DEPENDENT_MEANING_SUCCESSOR_EXECUTION_LEDGER_V2.json",
+    "successor_execution_ledger_git_blob_sha": "097aa109d247d02abfd713488f37da13f1e25683",
+    "prior_successor_execution_ledger": "canonical/reasoning/2026-10-09_CONTEXT_DEPENDENT_MEANING_SUCCESSOR_EXECUTION_LEDGER_V1.json",
+    "prior_successor_execution_ledger_git_blob_sha": "688bcfefaee9cf7ccef3b52934ea0fb4cc588942"
   },
   "recovery_order": [
     "READ_THIS_V6_CURRENT_COMPACT_HANDOFF",
