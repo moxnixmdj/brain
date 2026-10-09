@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_COVERAGE_COMPLETENESS_ROOT_CERTIFICATES_V1",
   "date": "2026-10-09",
-  "status": "ACTIVE__FROZEN_CLAIM_BOUND__THREE_OPEN_CC_ROOT_CERTIFICATE_OBLIGATIONS__ZERO_PROVED__ZERO_CREDIT",
+  "status": "ACTIVE__FROZEN_CLAIM_BOUND__CC_R3_COUNTEREXAMPLE_CURRENT__THREE_ROOT_CERTIFICATES_ZERO_PROVED__ZERO_CREDIT",
   "mission_binding": {
     "pointer_path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
     "authority_path": "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
@@ -10,7 +10,7 @@
   },
   "registry": {
     "path": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_CERTIFICATE_REGISTRY_V1.json",
-    "git_blob_sha": "77c5f8e2d1b63838c63baa1db9fb9954a02636f3"
+    "git_blob_sha": "65eeca96cdf48c0d4bc404efb3b705c348e7cd75"
   },
   "guard": {
     "path": "canonical/runtime/coverage_root_certificate_registry_guard_v1.py",
@@ -33,7 +33,7 @@
   "proved": 0,
   "open": 3,
   "r4_proof_closure": false,
-  "next": "ATTACK_CC_R3_FOR_ACTIVE_CLAIM__U_EMPTY_OR_CLAIM_BOUND_COUNTEREXAMPLE",
+  "next": "RESOLVE_ACTIVE_CC_R3_U_WITNESS_BEFORE_R1_R2_TERMINAL_SUCCESS_WORK",
   "terminal_credit_delta": 0,
   "root_theorem_falsifier": {
     "path": "canonical/runtime/root_theorem_falsifier_v1.py",
@@ -63,5 +63,13 @@
   "active_claim_descriptor": {
     "path": "canonical/governance/CC_ACTIVE_FROZEN_CLAIM_20261009_V1.json",
     "git_blob_sha": "d4f7068322c5417f806b38ff8b39fe530ccde4ba"
+  },
+  "current_root_falsifications": {
+    "CC_R3_TERMINAL_CLOSURE_V1": {
+      "status": "FALSIFIED_CURRENT_EPISTEMIC_ENVELOPE",
+      "claim_id": "fda1409a94d983f61888f08f3df99cad50dc36edc3f5feb01b6df20e31156eaa",
+      "path": "canonical/verification/CC_R3_COUNTEREXAMPLE_20261009_V1.json",
+      "git_blob_sha": "bf6e8ef01894350c5d51abe53038cea315984ea3"
+    }
   }
 }
