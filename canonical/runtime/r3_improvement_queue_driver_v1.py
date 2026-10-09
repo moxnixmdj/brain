@@ -1622,6 +1622,12 @@ def advance_once(
     verification_frontier_acquisition_provider_id: str = (
         "HOST_VERIFICATION_FRONTIER_ACQUISITION_PROVIDER"
     ),
+    distinguishing_evidence_provider: Callable[
+        [Mapping[str, Any]], Mapping[str, Any] | None
+    ] | None = None,
+    distinguishing_evidence_provider_id: str = (
+        "HOST_R3_DISTINGUISHING_EVIDENCE_PROVIDER"
+    ),
 ) -> dict[str, Any]:
     """Execute the highest-priority *actionable* pending improvement exactly once."""
     external_episode_verifier = episode_verification_provider is not None
@@ -2002,6 +2008,77 @@ def advance_once(
                         isinstance(evidence_request, Mapping)
                         and evidence_request.get("pass") is True
                     )
+                    if request_ready and distinguishing_evidence_provider is not None:
+                        if _frontier_acquisition_attempt_consumed(
+                            work,
+                            provider_id=distinguishing_evidence_provider_id,
+                            repo_root=repo_root,
+                        ):
+                            blockers.append({
+                                "work_id": wid,
+                                "kind": kind,
+                                "blocker": (
+                                    "DISTINGUISHING_EVIDENCE_ALREADY_ATTEMPTED_"
+                                    "FOR_CURRENT_PROVIDER_AND_FRONTIER"
+                                ),
+                            })
+                            continue
+                        from canonical.runtime import r3_distinguishing_evidence_acquisition_v1 as evidence_acquisition
+
+                        acquired = evidence_acquisition.acquire(
+                            evidence_request,
+                            observation_id=str(
+                                (payload or {}).get("observation_id") or ""
+                            ),
+                            state_path=state_path,
+                            provider=distinguishing_evidence_provider,
+                            provider_id=distinguishing_evidence_provider_id,
+                            improvement_work_id=wid,
+                            blocked_success_work_id=str(
+                                (payload or {}).get("blocked_success_work_id") or ""
+                            ),
+                        )
+                        if acquired.get("pass") is not True:
+                            status = str(
+                                acquired.get("status")
+                                or "DISTINGUISHING_EVIDENCE_ACQUISITION_FAILED"
+                            )
+                            _record_frontier_acquisition_attempt(
+                                wid,
+                                provider_id=distinguishing_evidence_provider_id,
+                                frontier_sha256=_owned_success_learning_frontier_sha256(
+                                    repo_root=repo_root
+                                ),
+                                status=status,
+                                reason=str(
+                                    acquired.get("reason") or status
+                                ),
+                                state_path=state_path,
+                            )
+                            return {
+                                **acquired,
+                                "progress": False,
+                                "attempt_backoff_recorded": True,
+                                "blockers_skipped": blockers,
+                            }
+                        new_observation_id = str(
+                            acquired.get("new_observation_id") or ""
+                        ).strip()
+                        _resolve_work(
+                            wid,
+                            resolved_by=(
+                                "DISTINGUISHING_EVIDENCE:"
+                                + new_observation_id
+                            ),
+                            state_path=state_path,
+                        )
+                        return {
+                            **acquired,
+                            "progress": True,
+                            "attempt_backoff_recorded": False,
+                            "blockers_skipped": blockers,
+                        }
+
                     blockers.append({
                         "work_id": wid,
                         "kind": kind,
@@ -2022,6 +2099,9 @@ def advance_once(
                             deepcopy(dict(evidence_request))
                             if isinstance(evidence_request, Mapping)
                             else None
+                        ),
+                        "distinguishing_evidence_provider_bound": (
+                            distinguishing_evidence_provider is not None
                         ),
                         "adapter_acquisition_provider_skipped": True,
                         "replay_original_success": False,
@@ -2150,6 +2230,12 @@ def drain(
     verification_frontier_acquisition_provider_id: str = (
         "HOST_VERIFICATION_FRONTIER_ACQUISITION_PROVIDER"
     ),
+    distinguishing_evidence_provider: Callable[
+        [Mapping[str, Any]], Mapping[str, Any] | None
+    ] | None = None,
+    distinguishing_evidence_provider_id: str = (
+        "HOST_R3_DISTINGUISHING_EVIDENCE_PROVIDER"
+    ),
     max_actions: int = 4,
 ) -> dict[str, Any]:
     if isinstance(max_actions, bool) or not isinstance(max_actions, int) or max_actions < 1 or max_actions > 32:
@@ -2169,6 +2255,8 @@ def drain(
             verification_frontier_acquisition_provider_id=(
                 verification_frontier_acquisition_provider_id
             ),
+            distinguishing_evidence_provider=distinguishing_evidence_provider,
+            distinguishing_evidence_provider_id=distinguishing_evidence_provider_id,
         )
         actions.append(result)
         if result.get("progress") is not True:
