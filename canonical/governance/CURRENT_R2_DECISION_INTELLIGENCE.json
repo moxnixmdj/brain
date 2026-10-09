@@ -19,7 +19,7 @@
   },
   "scheduler_cut": {
     "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V46.json",
-    "git_blob_sha": "cde552380afd3133c6f1026559904e63c98d969d"
+    "git_blob_sha": "4245cdb3797012ac0308d27d703189fe71bba77e"
   },
   "direct_adequacy": {
     "activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V25.json",
@@ -1028,7 +1028,7 @@
   "r2_v46_domain_mapping_reconciliation": {
     "status": "RECONCILED__CURRENT_R2_BINDS_V46_SCOPED_DOMAIN_MAPPING__TERMINAL_STILL_FALSE",
     "scheduler_cut_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V46.json",
-    "scheduler_cut_git_blob_sha": "cde552380afd3133c6f1026559904e63c98d969d",
+    "scheduler_cut_git_blob_sha": "4245cdb3797012ac0308d27d703189fe71bba77e",
     "reconciliation_path": "canonical/governance/R2_PROOF_CARRYING_DOMAIN_MAPPING_RECONCILIATION_20261009_V1.json",
     "primary_remaining_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "direct_route_count": 31,
