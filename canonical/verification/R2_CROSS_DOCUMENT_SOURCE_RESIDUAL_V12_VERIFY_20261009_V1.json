@@ -1,0 +1,105 @@
+{
+  "schema": "PROJECT_BRAIN_R2_CROSS_DOCUMENT_SOURCE_RESIDUAL_V12_VERIFY_V1",
+  "date": "2026-10-09",
+  "branch": "r2-cross-document-source-residual-v12",
+  "capability": "QUERY_RELATIVE_BYTE_COVERAGE_PLUS_SOURCE_RESIDUAL_TOP_CROSS_DOCUMENT_REASONING",
+  "status": "VERIFIED_ISOLATED_FULL_STACK__103_OF_103_PASS",
+  "theorem": {
+    "source_top_layers": [
+      "EXACT_BYTE_COVERAGE_TOP",
+      "SOURCE_BACKED_RESIDUAL_EFFECT_TOP",
+      "FINITE_CORRELATED_EFFECT_WORLDSET"
+    ],
+    "document_query_safety_rule": "SAFE_IF_ALL_SOURCE_BYTES_HAVE_CLOSED_EFFECT_SEMANTICS_OR_SOURCE_PROOF_EXCLUDES_QUERY_TARGET",
+    "inventory_rule": "EXACT_EFFECT_ID_INVENTORY_DOES_NOT_BY_ITSELF_DISCHARGE_UNKNOWN_SOURCE_BYTES_BECAUSE_VALUE_CLASS_CONDITION_OR_PRECEDENCE_OF_A_KNOWN_EFFECT_MAY_STILL_CHANGE",
+    "finite_world_rule": "AFTER_QUERY_RELATIVE_SOURCE_TOP_CLOSES_THE_FINITE_WORLDSET_MAY_CLOSE_ONLY_IF_ALL_ADMISSIBLE_WORLDS_HAVE_ONE_COMMON_VALUE",
+    "open_rule": "RETURN_EXACT_UNKNOWN_BYTE_REGIONS_SOURCE_PROOF_OBLIGATIONS_AND_MINIMUM_EFFECT_DISCRIMINATORS_WITH_ZERO_SEMANTIC_OR_TERMINAL_AUTHORITY"
+  },
+  "exact_changed_blobs": {
+    "canonical/runtime/cross_document_effect_source_coverage_gate_v1.py": "1706ba02de2c99cc2d4cba5b3303d09ea33f5882",
+    "canonical/runtime/cross_document_effect_source_coverage_gate_verify_v1.py": "a1aca78ae2f18bf558c87e656f195c87509800fa",
+    "canonical/runtime/cross_document_source_residual_frontier_v1.py": "bee55b69496dd7f6cdfa9aa44a6147696d48989a",
+    "canonical/runtime/cross_document_source_residual_frontier_verify_v1.py": "5421a47e95486031e37db55b46b4fc92ad6b7610",
+    "canonical/runtime/r2_cross_document_source_residual_direct_adequacy_v1.py": "cdb1e2be99456bca99b38892a6cdd27525c7b87e",
+    "canonical/runtime/r2_direct_end_to_end_adequacy_v12.py": "5414387d6a7950885beb955f86e4fa0241233d00",
+    "canonical/runtime/general_adequate_decision_fixed_point_v2.py": "ac575bf6eb29951dcf74f9626bbb7337ed9846a5",
+    "canonical/tests/test_cross_document_effect_source_coverage_gate_v1.py": "ef5219957f82cc9cb59d15f4617a6faacb99639b",
+    "canonical/tests/test_cross_document_source_residual_frontier_v1.py": "8886e9f7c62de6ed6aa641d7efbb691d6f3147fe",
+    "canonical/tests/test_r2_cross_document_source_residual_direct_adequacy_v1.py": "78eade898ae6e73591868d9938a9bc5fcca13ec3",
+    "canonical/tests/test_general_adequate_decision_fixed_point_v2.py": "d186b195755eb8de0970f729d93be147248ce33a"
+  },
+  "isolated_verification": {
+    "sprite": "brain-r2-grounded-frontier-verify-20261008",
+    "core_effect_calculus": {
+      "passed": 6,
+      "failed": 0
+    },
+    "typed_effect_direct_route": {
+      "passed": 4,
+      "failed": 0
+    },
+    "correlated_effect_worldset": {
+      "passed": 11,
+      "failed": 0
+    },
+    "v10_worldset_route": {
+      "passed": 7,
+      "failed": 0
+    },
+    "source_aligned_v7_scope_inventory": {
+      "passed": 10,
+      "failed": 0
+    },
+    "residual_top_frontier": {
+      "passed": 8,
+      "failed": 0
+    },
+    "v11_residual_route": {
+      "passed": 8,
+      "failed": 0
+    },
+    "byte_source_coverage_gate": {
+      "passed": 9,
+      "failed": 0
+    },
+    "combined_source_residual_frontier": {
+      "passed": 7,
+      "failed": 0
+    },
+    "v12_combined_route": {
+      "passed": 9,
+      "failed": 0
+    },
+    "fixed_point_v12": {
+      "passed": 24,
+      "failed": 0
+    },
+    "total_passed": 103,
+    "total_failed": 0
+  },
+  "reconciliation": {
+    "branch_merge_base": "371d06f3c47f15b48caaca5ac1c81a3665df9d20",
+    "newer_main_commits_observed": 9,
+    "newer_main_changed_areas": [
+      ".github/workflows/verify-unified-cognitive-fabric-v1.yml",
+      "finance_bounded_concept_registry_v1",
+      "semantic_relation_control_v1",
+      "semantic_relation_entailment_dag_v1",
+      "unified_cognitive_fabric_v1"
+    ],
+    "overlap_with_v12_or_fixed_point_files": false,
+    "unified_fabric_fixed_point_or_router_dependency_found": false
+  },
+  "nonclaims": [
+    "NO_GLOBAL_ARBITRARY_NATURAL_LANGUAGE_SEMANTIC_COMPLETENESS",
+    "NO_UNKNOWN_QUERY_RELEVANT_PROSE_DISCHARGED_BY_EFFECT_ID_INVENTORY_ALONE",
+    "NO_IMPLICIT_PRECEDENCE_INFERENCE",
+    "NO_EXTERNAL_WORLD_TRUTH",
+    "NO_TERMINAL_CREDIT_FROM_TEST_PASS_COUNT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
