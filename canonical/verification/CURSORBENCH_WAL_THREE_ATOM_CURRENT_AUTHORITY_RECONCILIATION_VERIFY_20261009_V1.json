@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_CURSORBENCH_WAL_THREE_ATOM_CURRENT_AUTHORITY_RECONCILIATION_VERIFY_V1",
+  "date": "2026-10-09",
+  "status": "PASS__EXACT_BRANCH_BYTES__LOCAL_WAL_EVIDENCE_BOUND__GLOBAL_CURSORBENCH_TRUTH_UNCHANGED__4_OF_4",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "cursorbench-wal-three-atom-reconcile-20261009",
+    "verified_head": "d33a7310bb493ee6405e9a56aa634f57530e7a73",
+    "current_terminal_authority": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+      "git_blob_sha": "9f18adec9a8b3695850569fe597bb4c1864d1431"
+    },
+    "current_atom_test": {
+      "path": "canonical/tests/test_current_terminal_cursorbench_all_atom_mechanisms_v1.py",
+      "git_blob_sha": "2ebb828775f005f5e7d8f379b8f70a8939f01456"
+    },
+    "wal_evidence_test": {
+      "path": "canonical/tests/test_cursorbench_wal_three_atom_evidence_v1.py",
+      "git_blob_sha": "710c0a7e03dc400267aaba126121071f54708e9a"
+    },
+    "reconciliation": {
+      "path": "canonical/governance/CURSORBENCH_WAL_RECOVERY_THREE_ATOM_EVIDENCE_RECONCILIATION_20261009_V1.json",
+      "git_blob_sha": "ed80bcbd499444a8cfd9a7940f02d2541e7e3bcd"
+    }
+  },
+  "carrier": {
+    "kind": "REMOTE_SPRITE",
+    "name": "brain-live-integrated-v1-run-20261008",
+    "sprite_id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "py_compile": "PASS",
+    "focused_tests": "PASS__4_OF_4"
+  },
+  "verified_invariants": [
+    "WAL_EXACT_MODEL_SOURCE_COVERAGE_PROVES_TYPED_SEMANTICS_AND_FAILURE_MODE_COMPLETENESS",
+    "WAL_EXACT_MODEL_DEPENDENCY_PROVENANCE_ATOM_PROVED",
+    "WAL_EXACT_MODEL_SUPPORTED_TRANSFORM_ATOM_PROVED",
+    "WAL_EXACT_MODEL_INFORMATION_BOUNDARY_REMAINS_OPEN",
+    "WAL_MODEL_REMAINS_FAIL_CLOSED_ON_R13_NO_TASK_SPECIFIC_CHEATING",
+    "GLOBAL_CURSORBENCH_FOUR_EXTERNAL_ATOMS_AND_THREE_REAL_BUNDLES_REMAIN_UNCHANGED",
+    "NO_CROSS_BENCHMARK_ATOM_TRUTH_TRANSFER"
+  ],
+  "hard_nonclaims": [
+    "NO_HIDDEN_CURSORBENCH_TASK_MEMBERSHIP",
+    "NO_INFORMATION_BOUNDARY_ATOM",
+    "NO_CURSORBENCH_SCORE_LOWER_BOUND",
+    "NO_CURSORBENCH_ACCEPTANCE_CLOSURE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_CHECKPOINT_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "checkpoint_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
