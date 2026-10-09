@@ -272,10 +272,16 @@ class Tests(unittest.TestCase):
             row for row in out["candidate_evaluations"]
             if row["concept_id"] == "CCOB"
         )["relation_result"]
-        self.assertEqual(
-            relation["strongest_proved_relation"],
-            "CURRENT_DECISION_SUBSTITUTION",
+        self.assertFalse(relation["pass"])
+        self.assertIn(
+            relation["status"],
+            {
+                "FAIL_CLOSED__TERMINAL_SIGNATURE_AUTHORITY_INVALID",
+                "OPEN__REQUIRED_RELATION_UNPROVED",
+            },
         )
+        self.assertIsNone(out["verified_mapping"])
+        self.assertFalse(out["semantic_truth_authority"])
 
     def test_authenticated_registry_preserves_all_ambiguous_candidates_and_discriminator(self):
         reg = registry()
