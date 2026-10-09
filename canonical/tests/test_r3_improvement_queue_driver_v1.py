@@ -172,6 +172,90 @@ class R3ImprovementQueueDriverTests(unittest.TestCase):
             "/private/effect-root",
         )
 
+    def test_context_free_failure_is_telemetry_not_repair_obligation(self):
+        path = self.temp_state()
+        out = learning.integrate_solver_output(
+            {
+                "pass": False,
+                "status": "FAIL_CLOSED",
+            },
+            state_path=path,
+        )
+        self.assertFalse(out["pass"], out)
+        self.assertEqual(
+            out["status"],
+            "FAILURE_DIAGNOSED__ORPHANED_TELEMETRY__NO_REPAIR_OBLIGATION_CREATED",
+        )
+        self.assertIsNone(out["improvement_work_id"])
+        self.assertFalse(out["terminal_obligation_established"])
+        state = learning.load_state(path)
+        self.assertEqual(state["stats"]["pending_improvement_count"], 0)
+        failure = next(iter(state["failures"].values()))
+        self.assertEqual(
+            failure["repairability"],
+            "ORPHANED_TELEMETRY__NO_REPLAY_CONTEXT",
+        )
+        self.assertFalse(failure["terminal_obligation_established"])
+        self.assertFalse(failure["original_failure_repaired"])
+
+    def test_legacy_orphan_failure_work_retires_without_repair_claim(self):
+        path = self.temp_state()
+        fid = "f" * 64
+        state = learning._empty_state()
+        state["failures"][fid] = {
+            "failure_fingerprint": fid,
+            "count": 2,
+            "status": "FAIL_CLOSED",
+            "reason": None,
+            "repair_class": "LOCALIZE_CAUSAL_FAILURE_AND_GENERATE_MINIMAL_REPAIR",
+            "attempts": [],
+            "counterexamples": [],
+            "falsified_capability_ids": [],
+            "deferred_capability_ids": [],
+            "next_required_edge": None,
+            "retry_capsules": {},
+            "last_retry_capsule_sha256": None,
+            "repair_receipts": {},
+        }
+        wid = learning._enqueue_improvement(
+            state,
+            kind="REPAIR_FAILURE_CLASS",
+            priority=30,
+            identity={
+                "failure_fingerprint": fid,
+                "retry_capsule_sha256": None,
+            },
+            payload={
+                "failure_fingerprint": fid,
+                "repair_class": "LOCALIZE_CAUSAL_FAILURE_AND_GENERATE_MINIMAL_REPAIR",
+                "status": "FAIL_CLOSED",
+                "reason": None,
+                "retry_capsule_sha256": None,
+            },
+        )
+        learning._refresh_stats(state)
+        learning._write_state(state, path)
+
+        out = driver.advance_once(state_path=path)
+        self.assertTrue(out["pass"], out)
+        self.assertTrue(out["progress"], out)
+        self.assertEqual(
+            out["status"],
+            "IMPROVEMENT_ADVANCED__ORPHANED_FAILURE_TELEMETRY_RETIRED",
+        )
+        self.assertFalse(out["original_failure_repaired"])
+
+        state = learning.load_state(path)
+        work = state["improvement_queue"][wid]
+        self.assertEqual(work["status"], "RESOLVED")
+        self.assertTrue(work["resolved_without_repair"])
+        self.assertFalse(work["terminal_obligation_established"])
+        self.assertFalse(work["original_failure_repaired"])
+        self.assertEqual(state["stats"]["pending_improvement_count"], 0)
+        failure = state["failures"][fid]
+        self.assertFalse(failure["terminal_obligation_established"])
+        self.assertFalse(failure["original_failure_repaired"])
+
     def test_repair_queue_uses_internal_verified_repair_cycle_without_injected_provider(self):
         path = self.temp_state()
         self.write_state(
