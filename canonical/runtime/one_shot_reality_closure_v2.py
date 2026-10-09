@@ -26,6 +26,7 @@ from pathlib import Path
 from typing import Any, Callable, Mapping, Sequence
 
 from canonical.runtime import one_shot_verified_closure_v1 as v1
+from canonical.runtime import promote_r2_direct_route_v1 as r2_direct_route_promoter
 
 SCHEMA = "PROJECT_BRAIN_ONE_SHOT_REALITY_CLOSURE_V2"
 GAP_SCHEMA = "PROJECT_BRAIN_PROOF_CARRYING_GAP_CONTRACT_V1"
@@ -673,6 +674,64 @@ def _validate_provider_receipt(
     return receipt
 
 
+def _maybe_promote_verified_r2_direct_route(
+    receipt: Mapping[str, Any],
+    *,
+    repo_root: str | Path,
+) -> dict[str, Any]:
+    """Promote an optional independently verified direct-route deployment.
+
+    The synthesis provider receives no deployment authority. It may only point to
+    a candidate and an independent deployment receipt. The Brain-owned promoter
+    revalidates both content-addressed files and updates the live admission pointer.
+    """
+    candidate_path = _s(receipt.get("r2_direct_route_candidate_path")).strip()
+    independent_receipt_path = _s(
+        receipt.get("r2_direct_route_independent_receipt_path")
+    ).strip()
+    if not candidate_path and not independent_receipt_path:
+        return {
+            "attempted": False,
+            "frontier_changed": False,
+            "already_live": False,
+            "verification_authority_mutated": False,
+        }
+    if not candidate_path or not independent_receipt_path:
+        raise RealityClosureError("R2_DIRECT_ROUTE_PROMOTION_BINDING_INCOMPLETE")
+
+    promoted = r2_direct_route_promoter.promote(
+        candidate_path=candidate_path,
+        receipt_path=independent_receipt_path,
+        repo_root=repo_root,
+    )
+    if not isinstance(promoted, Mapping) or promoted.get("pass") is not True:
+        reason = (
+            _s(promoted.get("reason") or promoted.get("status"))
+            if isinstance(promoted, Mapping)
+            else "PROMOTER_RETURNED_NO_RESULT"
+        )
+        raise RealityClosureError("R2_DIRECT_ROUTE_PROMOTION_FAILED:" + reason)
+    if promoted.get("verification_authority_mutated") is not False:
+        raise RealityClosureError("R2_DIRECT_ROUTE_PROMOTION_MUTATED_VERIFICATION_AUTHORITY")
+    changed = promoted.get("frontier_changed") is True
+    already_live = promoted.get("status") == "ALREADY_LIVE_EXACT_BINDING"
+    if not changed and not already_live:
+        raise RealityClosureError("R2_DIRECT_ROUTE_PROMOTION_NO_LIVE_FRONTIER_RESULT")
+    return {
+        "attempted": True,
+        "pass": True,
+        "status": promoted.get("status"),
+        "route_id": promoted.get("route_id"),
+        "frontier_changed": changed,
+        "already_live": already_live,
+        "current_manifest_git_blob_sha": promoted.get("new_manifest_git_blob_sha")
+        or promoted.get("current_manifest_git_blob_sha"),
+        "receipt_sha256": promoted.get("receipt_sha256"),
+        "verification_authority_mutated": False,
+        "terminal_authority": False,
+    }
+
+
 def _infrastructure_failure_result(
     *,
     stage: str,
@@ -880,6 +939,10 @@ def run(
                     }),
                     provider_kind="CAPABILITY_SYNTHESIS",
                 )
+                direct_route_promotion = _maybe_promote_verified_r2_direct_route(
+                    receipt,
+                    repo_root=repo_root,
+                )
             except Exception as exc:
                 if _attempt_infrastructure_repair(
                     infrastructure_repair_provider,
@@ -956,6 +1019,10 @@ def run(
         previous_frontier_after_provider = _s(closure.get("final_frontier_digest"))
         transcript[-1]["provider_receipt_sha256"] = receipt["receipt_sha256"]
         transcript[-1]["provider_kind"] = gap_class
+        if gap_class == "CONSTRUCTIVE_CAPABILITY_GAP":
+            transcript[-1]["r2_direct_route_promotion"] = deepcopy(
+                direct_route_promotion
+            )
 
     return {
         "schema": SCHEMA,
