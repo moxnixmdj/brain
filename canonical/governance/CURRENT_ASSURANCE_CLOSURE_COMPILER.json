@@ -96,5 +96,17 @@
     "domain_semantic_closure": false,
     "domain_execution_closure": false,
     "terminal_credit_delta": 0
+  },
+  "professional_quality_evidence_currentness": {
+    "runtime_path": "canonical/runtime/professional_quality_evidence_currentness_v1.py",
+    "runtime_git_blob_sha": "104ebb1294e12000221955211871ab3f06876793",
+    "tests_path": "canonical/tests/test_professional_quality_evidence_currentness_v1.py",
+    "tests_git_blob_sha": "d34e73e4a64d25a17fcb734506faedccb978e4d9",
+    "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_EVIDENCE_CURRENTNESS_VERIFY_20261009_V1.json",
+    "verification_git_blob_sha": "5f0d1606e041e429efc326eac981d1767edfad08",
+    "pinned_scan": "21_FRESH__3_STALE_MUTABLE__0_BROKEN",
+    "stale_reference_repair_complete": false,
+    "next_required_edge": "REBIND_3_STALE_MUTABLE_EVIDENCE_REFERENCES_AND_REVALIDATE_THEIR_SUPPORT_SCOPE",
+    "terminal_credit_delta": 0
   }
 }
