@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_CURSORBENCH_4_0_TARGET_TO_TRACE_SCOPE_RELATION_RECEIPT_V1",
+  "date": "2026-10-09",
+  "status": "TARGET_SCOPE_TO_VERIFIED_TRACE_SUPERDOMAIN_RELATION_BOUND__SCOPE_ONLY__ZERO_CREDIT",
+  "benchmark_id": "CURSORBENCH_4_0",
+  "predicate_id": "CODING_CURSORBENCH_GE_57_8",
+  "verified": true,
+  "independent": true,
+  "source_path": "canonical/verification/CURSORBENCH_4_0_OBSERVABLE_TRACE_SCOPE_LIFT_INDEPENDENT_VERIFICATION_20261009_V1.json",
+  "source_sha": "4da4b822e555f99f6063685ea2c0ca8dcef0a553",
+  "target_scope_id": "scope://cursorbench-4.0/actual-score-relevant-scope",
+  "stronger_scope_id": "scope://brain/observable-trace-superdomain/v1",
+  "target_subset_of_stronger_scope": true,
+  "target_scope_definition": "ALL_FROZEN_CURSORBENCH_4_0_TASK_CONTEXT_HARNESS_INTERACTION_RESOURCE_STATE_OUTPUT_VALIDITY_GRADER_AND_HIDDEN_TASK_SPECIFIC_ACCEPTANCE_CONDITIONS_THAT_CAN_CHANGE_THE_OFFICIAL_SCORE_OR_RUN_VALIDITY",
+  "stronger_scope_definition": "SOURCE_AGNOSTIC_OBSERVABLE_TRACE_SUPERDOMAIN_OVER_OBSERVATION_ACTION_EMISSION_RESOURCE_SAFETY_AUTHORITY_AND_STATE_TRANSITION_EVENTS_WITH_OPAQUE_SERIALIZABLE_PAYLOADS_PLUS_EXTERNALLY_MEASURABLE_OUTCOME_DISTRIBUTIONS",
+  "proof_basis": {
+    "scope_lift": {
+      "path": "canonical/governance/CURSORBENCH_4_0_OBSERVABLE_TRACE_SCOPE_LIFT_20261009_V1.json",
+      "git_blob_sha": "a7bd8397f0c5f7c36acc18fc20d56be76db92680"
+    },
+    "independent_verification": {
+      "path": "canonical/verification/CURSORBENCH_4_0_OBSERVABLE_TRACE_SCOPE_LIFT_INDEPENDENT_VERIFICATION_20261009_V1.json",
+      "git_blob_sha": "4da4b822e555f99f6063685ea2c0ca8dcef0a553"
+    },
+    "trace_theorem": {
+      "path": "canonical/governance/OPUS55_OBSERVABLE_TRACE_SCOPE_SUPERSET_THEOREM_20261006_V1.json",
+      "git_blob_sha": "333bdc8306a19f005a600a47b415a4bd9cf9868c"
+    }
+  },
+  "hard_nonclaims": [
+    "NO_EQUALITY_BETWEEN_CURSORBENCH_TARGET_SCOPE_AND_THE_TRACE_SUPERDOMAIN",
+    "NO_POLICY_ADEQUACY_OVER_EITHER_SCOPE",
+    "NO_CURSORBENCH_SCORE_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "acceptance_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
