@@ -70,5 +70,12 @@
     "fresh_reality_units_consumed": 0,
     "incremental_spend_usd": 0,
     "terminal_credit_delta": 0
+  },
+  "v2_supersession": {
+    "status": "SUPERSEDED_FOR_R4_AUTHORITY",
+    "authoritative_successor": "canonical/governance/CURRENT_COVERAGE_COMPLETENESS_CLAIM_CERTIFICATES.json",
+    "global_slot_r4_authority": false,
+    "historical_schema_preserved": true,
+    "reason": "ROOT_CERTIFICATE_AUTHORITY_REQUIRES_EXACT_FROZEN_CLAIM_BINDING"
   }
 }
