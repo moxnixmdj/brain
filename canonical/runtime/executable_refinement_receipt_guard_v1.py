@@ -137,7 +137,12 @@ def validate_receipt(
         "git_blob_sha",
     }:
         raise RefinementReceiptFailClosed("RECEIPT_PROOF_ARTIFACT_BINDING_INVALID")
-    proof_path = _repo_path(repo_root, proof.get("path"))
+    proof_rel = str(proof.get("path") or "")
+    if not proof_rel.startswith("canonical/verification/"):
+        raise RefinementReceiptFailClosed(
+            "RECEIPT_PROOF_ARTIFACT_OUTSIDE_VERIFICATION_SCOPE"
+        )
+    proof_path = _repo_path(repo_root, proof_rel)
     if proof.get("git_blob_sha") != git_blob_sha(proof_path):
         raise RefinementReceiptFailClosed("RECEIPT_PROOF_ARTIFACT_BLOB_DRIFT")
     try:
