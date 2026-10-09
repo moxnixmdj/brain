@@ -1414,6 +1414,29 @@
         "git_blob_sha": "0e6abf778d040932d556404c2e9852c1211563fe"
       },
       "note": "CURRENT_CODING_FRONTIER__SIX_REGISTERED_CONDITIONED_POLICIES__FIVE_AUTHENTICATED_CODING_CONSTRUCTIVE_REGIONS__34_DISTINCT_CONDITION_ATOMS__PRIVATE_MEMBERSHIP_AND_WHOLE_COVER_OPEN__ZERO_CREDIT"
+    },
+    "terminal_autopilot_adaptive_escape_progress_route_20261009_v1": {
+      "activation": {
+        "path": "canonical/governance/TERMINAL_AUTOPILOT_ADAPTIVE_ESCAPE_PROGRESS_ROUTE_ACTIVATION_20261009_V1.json",
+        "git_blob_sha": "77cfdfecc081ee5d9a79e6c64988c30dfbc801de"
+      },
+      "independent_verification": {
+        "path": "canonical/verification/TERMINAL_AUTOPILOT_ADAPTIVE_ESCAPE_PROGRESS_ROUTE_INDEPENDENT_VERIFICATION_20261009_V1.json",
+        "git_blob_sha": "ea677b38864c4bcc4334d6515d9bae414765b357"
+      },
+      "planner": {
+        "path": "canonical/runtime/terminal_autopilot_v1.py",
+        "git_blob_sha": "28a5959bd0989ec14bc666d4e92f8e75dfc6fede"
+      },
+      "conditional_theorem": {
+        "path": "canonical/governance/ADAPTIVE_ABSTRACT_POSITIVE_COVER_FIXED_POINT_THEOREM_20261007_V2.json",
+        "git_blob_sha": "2ac97a6677cf577a52c3fd6d01739ee29be1e9d8"
+      },
+      "conditional_theorem_verification": {
+        "path": "canonical/verification/ADAPTIVE_ABSTRACT_POSITIVE_COVER_FIXED_POINT_V2_WOLFRAM_VERIFICATION_20261007_V1.json",
+        "git_blob_sha": "5a10547706a1b46dcb11d32122490efd927d30b0"
+      },
+      "note": "CURRENT_HIGHEST_LEVERAGE_ALL_OPEN_ROUTE__13_OBLIGATIONS__ONE_REMAINING_VERIFIED_PREMISE_ESCAPE_PROGRESS_TOTALITY__ZERO_CREDIT"
     }
   },
   "live_truth": {
@@ -2270,7 +2293,18 @@
     "cursorbench_three_region_frontier_superseded_by_five_region": true,
     "r2_dynamic_direct_admission_count": 2,
     "r2_marked_finance_mention_universe_dynamic_route_bound": true,
-    "r2_marked_finance_mention_universe_open_world_plain_text_completeness": false
+    "r2_marked_finance_mention_universe_open_world_plain_text_completeness": false,
+    "terminal_autopilot_adaptive_escape_progress_route_active": true,
+    "terminal_autopilot_current_highest_leverage_route": "ADAPTIVE_ESCAPE_PROGRESS_TOTALITY",
+    "terminal_autopilot_adaptive_route_open_obligation_discharge_count": 13,
+    "terminal_autopilot_adaptive_route_missing_verified_premise_count": 1,
+    "terminal_autopilot_adaptive_route_missing_verified_premises": [
+      "current_escape_progress_totality_proved"
+    ],
+    "terminal_autopilot_adaptive_route_estimated_wall_clock_units_lower_bound": 1,
+    "terminal_autopilot_adaptive_route_leverage_lower_bound": 13,
+    "escape_progress_totality_is_current_single_adaptive_universal_premise": true,
+    "current_terminal_next_proof_object": "ESCAPE_PROGRESS_TOTALITY__EVERY_REACHED_NONTERMINAL_ESCAPE_STATE_HAS_COMMON_AUTHENTICATED_SAFE_ADEQUACY_OR_ONE_AUTHENTICATED_SAFE_TRUTH_PRESERVING_STRICTLY_POLICY_REGION_SHRINKING_SELECTED_DISCRIMINATOR"
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -2976,7 +3010,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 117,
+  "pointer_revision": 118,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
@@ -4421,6 +4455,17 @@
     "prior_v3_activation_reuse_authority": false,
     "acceptance_credit_delta": 0,
     "terminal_credit_delta": 0
+  },
+  "terminal_autopilot_adaptive_escape_progress_reconciliation_20261009_v1": {
+    "result": "ADAPTIVE_ONE_PREMISE_ALL_13_ROUTE_BOUND_AS_CURRENT_HIGHEST_LEVERAGE_SCHEDULER_ROUTE",
+    "activation_git_blob_sha": "77cfdfecc081ee5d9a79e6c64988c30dfbc801de",
+    "verification_git_blob_sha": "ea677b38864c4bcc4334d6515d9bae414765b357",
+    "planner_git_blob_sha": "28a5959bd0989ec14bc666d4e92f8e75dfc6fede",
+    "theorem_git_blob_sha": "2ac97a6677cf577a52c3fd6d01739ee29be1e9d8",
+    "theorem_verification_git_blob_sha": "5a10547706a1b46dcb11d32122490efd927d30b0",
+    "current_escape_progress_totality_proved": false,
+    "U_empty_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
   }
-
 }
