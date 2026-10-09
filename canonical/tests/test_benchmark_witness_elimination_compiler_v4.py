@@ -409,3 +409,44 @@ def test_adverse_evidence_is_monotone_non_improving():
 
     for case in mutations:
         assert evaluate_claim(case)["status"] != "PROVEN"
+
+def test_timezone_naive_freeze_is_rejected():
+    x = base()
+    x["policy"]["frozen_at"] = "2026-10-09T08:00:00"
+    out = evaluate_claim(x)
+    assert out["status"] == "UNKNOWN"
+    assert out["reason"] == "POLICY_OR_EVIDENCE_TIMEZONE_MISSING"
+
+
+def test_objective_mode_requires_independent_evaluator_evidence():
+    x = base()
+    x["policy"]["evaluator"] = {
+        "mode": "OBJECTIVE",
+        "objective_validator": True,
+    }
+    x["evidence"].pop("evaluator_records")
+    out = evaluate_claim(x)
+    assert out["status"] == "UNKNOWN"
+    assert out["reason"] == "OBJECTIVE_EVALUATOR_EVIDENCE_MISSING"
+
+    x["evidence"]["objective_evaluator"] = {
+        "binding": dict(RECEIPT),
+        "independent_verified": True,
+        "relation": "BRAIN_GE_TARGET",
+    }
+    assert evaluate_claim(x)["status"] == "PROVEN"
+
+
+def test_objective_counterevidence_disproves_claim():
+    x = base()
+    x["policy"]["evaluator"] = {
+        "mode": "OBJECTIVE",
+        "objective_validator": True,
+    }
+    x["evidence"].pop("evaluator_records")
+    x["evidence"]["objective_evaluator"] = {
+        "binding": dict(RECEIPT),
+        "independent_verified": True,
+        "relation": "TARGET_GT_BRAIN",
+    }
+    assert evaluate_claim(x)["status"] == "DISPROVEN"
