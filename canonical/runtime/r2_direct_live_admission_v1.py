@@ -1,11 +1,11 @@
-"""Stable default-live R2 direct-route admission wrapper over current V20.
+"""Stable default-live R2 direct-route admission wrapper over current V21.
 
-V20 remains the exact legacy precedence carrier for all currently admitted routes.
+V21 remains the exact legacy precedence carrier for all currently admitted routes.
 New independently verified routes may be admitted through the proof-carrying dynamic
 admission manifest without creating V20. Dynamic preflights are required to be pure.
 
 Selection law:
-- no dynamic admissions -> delegate exactly to V20;
+- no dynamic admissions -> delegate exactly to V21;
 - one dynamic match and no legacy match/open state -> execute the dynamic route;
 - multiple dynamic matches -> fail closed;
 - dynamic match plus any legacy match/semantic-open state -> fail closed;
@@ -21,12 +21,12 @@ import inspect
 from pathlib import Path
 from typing import Any, Mapping
 
-from canonical.runtime import r2_direct_end_to_end_adequacy_v20 as legacy
+from canonical.runtime import r2_direct_end_to_end_adequacy_v21 as legacy
 from canonical.runtime import r2_direct_route_dynamic_admission_v1 as admission
 
 SCHEMA = "PROJECT_BRAIN_R2_DIRECT_LIVE_ADMISSION_WRAPPER_V1"
 ROOT = Path(__file__).resolve().parents[2]
-LEGACY_RUNTIME = "canonical.runtime.r2_direct_end_to_end_adequacy_v20"
+LEGACY_RUNTIME = "canonical.runtime.r2_direct_end_to_end_adequacy_v21"
 DYNAMIC_SELECTION_CLASS = admission.SELECTION_CLASS
 
 # Compatibility snapshot only. Dynamic routes are current-state data, not source constants.
@@ -168,11 +168,11 @@ def preflight(
         if len(matches) == 1:
             row, dynamic_out = matches[0]
             if legacy_engaged:
-                legacy_id = str(legacy_out.get("route_id") or "LEGACY_V20")
+                legacy_id = str(legacy_out.get("route_id") or "LEGACY_V21")
                 return {
                     **_base("FAIL_CLOSED__DIRECT_ROUTE_COLLISION"),
                     "matched": True,
-                    "reason": "DYNAMIC_ROUTE_OVERLAPS_LEGACY_V20",
+                    "reason": "DYNAMIC_ROUTE_OVERLAPS_LEGACY_V21",
                     "matching_route_ids": sorted(
                         [str(row["route_id"]), legacy_id]
                     ),
@@ -231,7 +231,7 @@ def catalog(*, repo_root: str | Path | None = None) -> dict[str, Any]:
     dynamic = _dynamic_rows(root)
     return {
         "schema": SCHEMA,
-        "status": "PASS__V20_LEGACY_CARRIER_PLUS_DYNAMIC_DEFAULT_LIVE_ADMISSION",
+        "status": "PASS__V21_LEGACY_CARRIER_PLUS_DYNAMIC_DEFAULT_LIVE_ADMISSION",
         "pass": True,
         "legacy_runtime": LEGACY_RUNTIME,
         "legacy_route_count": len(legacy.ROUTES),
