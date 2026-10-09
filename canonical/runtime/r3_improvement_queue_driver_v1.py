@@ -1540,6 +1540,39 @@ def advance_once(
                 **stale_repark,
                 "blockers_skipped": blockers,
             }
+        if kind == "REPAIR_FAILURE_CLASS":
+            payload = work.get("payload") if isinstance(work.get("payload"), Mapping) else {}
+            identity = work.get("identity") if isinstance(work.get("identity"), Mapping) else {}
+            fingerprint = str(
+                payload.get("failure_fingerprint")
+                or identity.get("failure_fingerprint")
+                or ""
+            ).strip()
+            retry_sha = str(
+                payload.get("retry_capsule_sha256")
+                or identity.get("retry_capsule_sha256")
+                or ""
+            ).strip()
+            if fingerprint and not retry_sha:
+                retired = learning.retire_orphaned_failure_repair_work(
+                    fingerprint,
+                    state_path=state_path,
+                    work_id=wid,
+                )
+                if retired.get("pass") is True:
+                    return {
+                        "schema": SCHEMA,
+                        "status": "IMPROVEMENT_ADVANCED__ORPHANED_FAILURE_TELEMETRY_RETIRED",
+                        "pass": True,
+                        "progress": True,
+                        "work_id": wid,
+                        "repair": deepcopy(dict(retired)),
+                        "original_failure_repaired": False,
+                        "attempt_backoff_recorded": False,
+                        "blockers_skipped": blockers,
+                        "terminal_authority": False,
+                    }
+
         if _frontier_acquisition_attempt_consumed(
             work,
             provider_id=verification_frontier_acquisition_provider_id,
