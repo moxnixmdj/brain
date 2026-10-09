@@ -72,6 +72,92 @@ def _contract(goal:str)->dict[str,Any]:
         raise ValueError("RAW_TASK_CONTRACT_FAIL_CLOSED")
     return out
 
+def _evidence_overlay(
+    case:Mapping[str,Any],
+    request:Mapping[str,Any],
+)->tuple[dict[str,Any],str]:
+    rows=request.get("direct_route_evidence_bindings",[])
+    if rows is None:
+        rows=[]
+    if not isinstance(rows,list):
+        raise ValueError("DIRECT_ROUTE_EVIDENCE_BINDINGS_NOT_LIST")
+
+    materialized=deepcopy(dict(case))
+    source_docs=materialized.get("source_documents")
+    if not isinstance(source_docs,list):
+        raise ValueError("SOURCE_DOCUMENTS_INVALID")
+    by_document={}
+    for row in source_docs:
+        if not isinstance(row,dict):
+            raise ValueError("SOURCE_DOCUMENT_INVALID")
+        did=str(row.get("document_id") or "").strip()
+        if not did or did in by_document:
+            raise ValueError("SOURCE_DOCUMENT_ID_INVALID_OR_DUPLICATE")
+        by_document[did]=row
+
+    used=[]
+    for index,row in enumerate(rows):
+        if not isinstance(row,Mapping):
+            raise ValueError("DIRECT_ROUTE_EVIDENCE_BINDING_NOT_OBJECT:"+str(index))
+        if set(row)!={"route_id","document_id","claim"}:
+            raise ValueError("DIRECT_ROUTE_EVIDENCE_BINDING_FIELD_SET_INVALID:"+str(index))
+        if str(row.get("route_id") or "")!=ROUTE_ID:
+            continue
+        did=str(row.get("document_id") or "").strip()
+        doc=by_document.get(did)
+        if doc is None:
+            raise ValueError("DIRECT_ROUTE_EVIDENCE_UNKNOWN_DOCUMENT:"+did)
+        claim=row.get("claim")
+        if not isinstance(claim,Mapping):
+            raise ValueError("DIRECT_ROUTE_EVIDENCE_CLAIM_NOT_OBJECT:"+did)
+        clean=deepcopy(dict(claim))
+        cid=str(clean.get("claim_id") or "").strip()
+        kind=str(clean.get("kind") or "").strip()
+        if not cid:
+            raise ValueError("DIRECT_ROUTE_EVIDENCE_CLAIM_ID_REQUIRED:"+did)
+        if kind=="CERTIFIED_EFFECT_TARGET_SCOPE":
+            existing=doc.get("scope_claim")
+            if existing is not None and existing!=clean:
+                raise ValueError("DIRECT_ROUTE_SCOPE_CLAIM_MUTATION_FORBIDDEN:"+did)
+            doc["scope_claim"]=clean
+        elif kind=="CERTIFIED_EFFECT_ID_INVENTORY":
+            inventory=doc.get("inventory_claims")
+            if not isinstance(inventory,list):
+                raise ValueError("DIRECT_ROUTE_EXISTING_INVENTORY_CLAIMS_INVALID:"+did)
+            by_id={
+                str(x.get("claim_id") or ""):x
+                for x in inventory
+                if isinstance(x,Mapping)
+            }
+            if cid in by_id:
+                if by_id[cid]!=clean:
+                    raise ValueError(
+                        "DIRECT_ROUTE_INVENTORY_CLAIM_MUTATION_FORBIDDEN:"
+                        +did+"::"+cid
+                    )
+            else:
+                inventory.append(clean)
+                inventory.sort(key=lambda x:str(x.get("claim_id") or ""))
+        else:
+            raise ValueError("DIRECT_ROUTE_EVIDENCE_CLAIM_KIND_UNSUPPORTED:"+kind)
+        used.append({
+            "route_id":ROUTE_ID,
+            "document_id":did,
+            "claim":clean,
+        })
+
+    evidence_sha=sha256(
+        json.dumps(
+            used,
+            sort_keys=True,
+            separators=(",",":"),
+            ensure_ascii=False,
+            allow_nan=False,
+        ).encode("utf-8")
+    ).hexdigest()
+    return materialized,evidence_sha
+
+
 def _material(case:Mapping[str,Any])->tuple[dict[str,Any],dict[str,Any]]:
     result=producer.evaluate(case)
     if str(result.get("status") or "").startswith("FAIL_CLOSED"):
@@ -106,7 +192,8 @@ def preflight(request:Mapping[str,Any],*,repo_root=None)->dict[str,Any]:
         if ip==op:
             raise ValueError("INPUT_OUTPUT_COLLISION")
         raw,case=_load(ip)
-        result,checked=_material(case)
+        materialized,evidence_sha=_evidence_overlay(case,request)
+        result,checked=_material(materialized)
 
         if result.get("pass") is not True:
             return {
@@ -150,9 +237,13 @@ def preflight(request:Mapping[str,Any],*,repo_root=None)->dict[str,Any]:
             "capability_id":CAPABILITY_ID,
             "verifier_capability_id":VERIFIER_CAPABILITY_ID,
             "goal_sha256":gsha,
-            "policy_id":"R2_CROSS_DOCUMENT_RESIDUAL::"+gsha+"::"+case_sha,
+            "policy_id":(
+                "R2_CROSS_DOCUMENT_RESIDUAL::"
+                +gsha+"::"+case_sha+"::"+evidence_sha
+            ),
             "input_path":inp,
             "input_sha256":case_sha,
+            "direct_route_evidence_sha256":evidence_sha,
             "output_path":out,
             "effective_value":deepcopy(result.get("effective_value")),
             "world_count":finite.get("world_count"),
@@ -197,11 +288,14 @@ def run(request:Mapping[str,Any],*,repo_root=None)->dict[str,Any]:
         if sha256(before).hexdigest()!=pf["input_sha256"]:
             raise RuntimeError("CASE_DRIFT_BEFORE_EXECUTION")
         case=json.loads(before.decode("utf-8"))
+        materialized,evidence_sha=_evidence_overlay(case,request)
+        if evidence_sha!=pf["direct_route_evidence_sha256"]:
+            raise RuntimeError("DIRECT_ROUTE_EVIDENCE_DRIFT_BEFORE_EXECUTION")
 
-        result=producer.evaluate(case)
+        result=producer.evaluate(materialized)
         if result.get("pass") is not True:
             raise RuntimeError("RESIDUAL_FRONTIER_NO_LONGER_PROVES_COMMON_EFFECTIVE_VALUE")
-        checked=verifier.verify(case,result)
+        checked=verifier.verify(materialized,result)
         if checked.get("verified") is not True:
             raise RuntimeError(
                 "INDEPENDENT_RESIDUAL_FRONTIER_VERIFICATION_FAILED:"
@@ -216,7 +310,7 @@ def run(request:Mapping[str,Any],*,repo_root=None)->dict[str,Any]:
             encoding="utf-8",
         )
         reread=json.loads(op.read_text(encoding="utf-8"))
-        check2=verifier.verify(case,reread)
+        check2=verifier.verify(materialized,reread)
         if check2.get("verified") is not True:
             raise RuntimeError("OUTPUT_READBACK_VERIFICATION_FAILED")
 
@@ -236,6 +330,7 @@ def run(request:Mapping[str,Any],*,repo_root=None)->dict[str,Any]:
             "goal_sha256":pf["goal_sha256"],
             "input_path":pf["input_path"],
             "input_sha256":pf["input_sha256"],
+            "direct_route_evidence_sha256":pf["direct_route_evidence_sha256"],
             "output_path":pf["output_path"],
             "output_sha256":sha256(op.read_bytes()).hexdigest(),
             "effective_value":deepcopy(result["effective_value"]),
