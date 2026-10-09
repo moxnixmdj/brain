@@ -80,7 +80,8 @@ class CertifiedRawEffectSentenceV1Tests(unittest.TestCase):
         )
         self.assertFalse(out["pass"])
         self.assertEqual(out["status"],"FAIL_CLOSED")
-        self.assertIn("day is out of range",out["reason"])
+        self.assertIn("ValueError:",out["reason"])
+        self.assertIn("2026",out["reason"])
 
     def test_non_scalar_json_is_not_accepted(self):
         out=c.compile_sentence(
