@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_R2_DIRECT_ROUTE_DEPLOYMENT_INDEPENDENT_RECEIPT_V1",
+  "date": "2026-10-09",
+  "status": "INDEPENDENT_PASS__R2_DIRECT_ROUTE_DEPLOYMENT",
+  "candidate_path": "canonical/governance/R2_DIRECT_ROUTE_DEPLOYMENT_CANDIDATE_FINANCE_CANDIDATE_POLICY_TERMINAL_SIGNATURES_20261009_V1.json",
+  "candidate_git_blob_sha": "53e3ddb59a9c8cc001cf63df18820ad15b8a7899",
+  "route_id": "DIRECT_ADEQUACY::FINANCE_CANDIDATE_POLICY_TERMINAL_SIGNATURES_V1",
+  "runtime_path": "canonical/runtime/r2_finance_candidate_policy_terminal_signatures_direct_adequacy_v1.py",
+  "runtime_git_blob_sha": "c376488bffa0fff860152c6aeed509751ad8cb7c",
+  "route_verification_path": "canonical/verification/R2_FINANCE_CANDIDATE_POLICY_TERMINAL_SIGNATURES_DIRECT_ADEQUACY_VERIFY_20261009_V1.json",
+  "route_verification_git_blob_sha": "f5eb66b4cc78ff1d75bebea73f1cfad8d74990c8",
+  "selection_class": "UNIQUE_MATCH_REQUIRED",
+  "independent_verified": true,
+  "preflight_pure_no_effect": true,
+  "matched_route_failure_no_fallthrough": true,
+  "producer_independent_acceptance": true,
+  "exact_raw_obligation_acceptance": true,
+  "deployment_eligible": true,
+  "verification_authority_mutated": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "incremental_spend_usd": 0,
+  "evidence": {
+    "independent_carrier": "sprite-6e0179c2-a171-4378-bf57-db21fdf6bc5a",
+    "first_carrier": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13",
+    "exact_branch_bytes": true,
+    "compile": "PASS_ON_BOTH_CARRIERS",
+    "focused_suite_first": "9_OF_9_PASS",
+    "focused_suite_independent": "9_OF_9_PASS",
+    "candidate_validator": "PASS__CANDIDATE_VALIDATED",
+    "producer_independent_terminal_signature_verification": true,
+    "preflight_effect_free_test": true,
+    "matched_invalid_case_fail_closed_test": true
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_DECLARED_CANDIDATE_SET_IS_SEMANTICALLY_COMPLETE",
+    "NO_CLAIM_CANDIDATE_BOOLEAN_FACTS_ARE_INFERRED_FROM_REALITY",
+    "NO_GENERAL_COREFERENCE_OR_WORD_SENSE_CLOSURE",
+    "NO_GENERAL_FINANCE_SEMANTICS_CLOSURE",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ]
+}
