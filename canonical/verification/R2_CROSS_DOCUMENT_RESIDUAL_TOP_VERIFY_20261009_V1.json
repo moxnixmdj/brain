@@ -1,0 +1,106 @@
+{
+  "schema": "PROJECT_BRAIN_R2_CROSS_DOCUMENT_RESIDUAL_TOP_VERIFY_V1",
+  "date": "2026-10-09",
+  "branch": "r2-cross-document-residual-top-v1",
+  "tested_branch_head_sha": "989f9097d404ded24448e418cd68f464208ea403",
+  "main_sha_observed_after_testing": "5ad84c172003c5d55247e59f733b07859acc8054",
+  "capability": "SOURCE_BACKED_CROSS_DOCUMENT_RESIDUAL_TOP_EFFECT_FRONTIER_V1",
+  "status": "VERIFIED_ISOLATED_CHANGED_SURFACE__77_OF_77_PASS",
+  "theorem": {
+    "initial_abstraction": "EVERY_SOURCE_DOCUMENT_RETAINS_A_RESIDUAL_TOP_EFFECT_UNTIL_QUERY_RELEVANCE_IS_SOURCE_PROVED_AWAY",
+    "safe_incompleteness": "FINITE_EFFECT_HYPOTHESES_CANNOT_CLOSE_RAW_SOURCE_WHILE_AN_UNMODELED_EFFECT_MAY_STILL_TOUCH_THE_QUERY_TARGET",
+    "discharge_paths": [
+      "BRAIN_RECOMPUTED_EXPLICIT_EFFECT_TARGET_SCOPE_EXCLUDES_QUERY_TARGET",
+      "BRAIN_RECOMPUTED_EXACT_EFFECT_ID_INVENTORY_MATCHES_ALL_MODELED_EFFECT_IDS_FOR_QUERY_TARGET"
+    ],
+    "after_discharge": "VALUE_CLASS_CONDITION_AND_PRECEDENCE_AMBIGUITY_REMAINS_IN_EXISTING_CORRELATED_WORLDSET_ENGINE",
+    "open_path": "RETURN_EXACT_NEXT_PROOF_OBLIGATIONS_AND_MINIMUM_DISCRIMINATORS_WITH_ZERO_SEMANTIC_OR_TERMINAL_AUTHORITY"
+  },
+  "exact_tested_blobs": {
+    "canonical/runtime/certified_effect_target_scope_v1.py": "5a4371de5e8c1fec4e99477b39a6c1878ceb30d0",
+    "canonical/runtime/certified_effect_id_inventory_v1.py": "f5e6020708390f57a9fc76d7ddac5933c1ff6680",
+    "canonical/runtime/source_aligned_semantic_proof_v7.py": "b27e4d418573ca9b9f178a4d0c3ef9ff2b15af6f",
+    "canonical/runtime/cross_document_residual_effect_frontier_v1.py": "f5e4301e2e14a068dcffd16a44d3552d87c93913",
+    "canonical/runtime/cross_document_residual_effect_frontier_verify_v1.py": "758f65a48e7e0567b0bd716b1776d1201f9f2ad3",
+    "canonical/runtime/r2_cross_document_residual_effect_direct_adequacy_v1.py": "d1c95deb649e41d45dda2e58f27440c1cdd243db",
+    "canonical/runtime/r2_direct_end_to_end_adequacy_v11.py": "98fc03a33aa8f051245c8adbb9a0d8d896b0057b",
+    "canonical/runtime/general_adequate_decision_fixed_point_v2.py": "7c6585e800369331ad0f061afd23568fd0cb341b",
+    "canonical/tests/test_source_aligned_semantic_proof_v7.py": "8f514d5d5bd69784d230cbc387685c7141924966",
+    "canonical/tests/test_cross_document_residual_effect_frontier_v1.py": "56e6d24f0c6521c03837a02cabbde861f1412490",
+    "canonical/tests/test_r2_cross_document_residual_effect_direct_adequacy_v1.py": "bc693036c180f74b42776efc42181dc7497d5c23",
+    "canonical/tests/test_general_adequate_decision_fixed_point_v2.py": "934a04632483fd517cbfa34394b27c73038365e1"
+  },
+  "isolated_verification": {
+    "sprite": "brain-r2-grounded-frontier-verify-20261008",
+    "checkpoint_before_cross_document_replay": "v9",
+    "source_aligned_v7_and_scope_inventory": {
+      "passed": 10,
+      "failed": 0
+    },
+    "residual_frontier_independent_recomputation": {
+      "passed": 8,
+      "failed": 0
+    },
+    "source_backed_v11_route": {
+      "passed": 8,
+      "failed": 0
+    },
+    "fixed_point_v11_cleanroom": {
+      "passed": 23,
+      "failed": 0
+    },
+    "inherited_core_effect_calculus": {
+      "passed": 6,
+      "failed": 0
+    },
+    "inherited_typed_effect_direct_route": {
+      "passed": 4,
+      "failed": 0
+    },
+    "inherited_correlated_worldset": {
+      "passed": 11,
+      "failed": 0
+    },
+    "inherited_v10_worldset_route": {
+      "passed": 7,
+      "failed": 0
+    },
+    "total_passed": 77,
+    "total_failed": 0
+  },
+  "cleanroom_decomposition": {
+    "real_new_modules": [
+      "source_aligned_semantic_proof_v7",
+      "cross_document_residual_effect_frontier_v1",
+      "cross_document_residual_effect_frontier_verify_v1",
+      "r2_cross_document_residual_effect_direct_adequacy_v1",
+      "r2_direct_end_to_end_adequacy_v11",
+      "general_adequate_decision_fixed_point_v2"
+    ],
+    "stubbed_only_for_delegated_or_already_mocked_surfaces": [
+      "r2_direct_end_to_end_adequacy_v10 delegated fallback in V11 focused harness",
+      "general_adequate_decision_controller_v1 in fixed-point unit harness",
+      "r2_existing_policy_adequacy_repair_v1 in fixed-point unit harness",
+      "r2_basis_discriminator_repair_v1 in fixed-point unit harness"
+    ]
+  },
+  "bug_found_and_fixed": {
+    "issue": "CERTIFIED_IDENTIFIER_REGEX_SWALLOWED_SENTENCE_FINAL_PERIOD",
+    "consequence": "TARGET_OR_EFFECT_ID_COULD_INCORRECTLY_INCLUDE_TRAILING_DOT_AND_HIDE_DUPLICATES",
+    "fix": "IDENTIFIER_MUST_END_IN_ALNUM_OR_UNDERSCORE_WHILE_ALLOWING_INTERNAL_DOT_OR_HYPHEN",
+    "post_fix_source_proof_tests": "10_OF_10_PASS"
+  },
+  "nonclaims": [
+    "NO_ARBITRARY_RAW_LANGUAGE_EFFECT_VALUE_OR_CLASS_EXTRACTION",
+    "NO_GLOBAL_NATURAL_LANGUAGE_SEMANTIC_COMPLETENESS",
+    "NO_UNPROVED_EFFECT_ID_INVENTORY_COMPLETENESS",
+    "NO_IMPLICIT_PRECEDENCE_INFERENCE",
+    "NO_EXTERNAL_WORLD_TRUTH",
+    "NO_TERMINAL_CREDIT_FROM_THIS_VERIFICATION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
