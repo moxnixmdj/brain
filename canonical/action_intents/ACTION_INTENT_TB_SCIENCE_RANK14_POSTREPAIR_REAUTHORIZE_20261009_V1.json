@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_TB_SCIENCE_RANK14_POSTREPAIR_REAUTHORIZE_20261009_V1",
+  "date": "2026-10-09",
+  "action_id": "TB_SCIENCE_RANK14_POSTREPAIR_REAUTHORIZE",
+  "status": "ACTIVE_INTENT__REAUTHORIZE_UNCONSUMED_RANK14_ON_REPAIRED_V10_BYTES__ZERO_CREDIT",
+  "canonical_base_commit": "1e954e5be1052d118ca37980549b8f24193a747d",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "target_obligation": "TB_SCIENCE_GE_58_7",
+  "action_kind": "REAUTHORIZE_FRONTIER",
+  "causal_blocker": "PRIOR_RANK14_PUBLIC_ACTIVATION_READ_TASK_BUT_ABORTED_NONCONSUMING_ON_FALSE_64_OBLIGATION_CEILING__REPAIR_IS_VERIFIED__OLD_V1_AUTHORITY_AND_PUBLIC_LEASE_ARE_PINNED_TO_SUPERSEDED_AGENT_AND_V9_CLOSURE",
+  "highest_leverage_now": true,
+  "expected_parent_frontier_change": "FRESH_NONEXECUTABLE_RANK14_AUTHORITY_CANDIDATE_BINDS_REPAIRED_AGENT_AND_V10_CLOSURE__ENABLES_INDEPENDENT_ZERO_EXPOSURE_AUTHORITY_VERIFICATION",
+  "stop_condition": "V2_AUTHORITY_CANDIDATE_IS_INDEPENDENTLY_VERIFIED_ON_EXACT_CURRENT_BYTES_WITH_TASK_START_FALSE_AND_ZERO_TRIAL_CONSUMPTION",
+  "load_bearing_primary": {
+    "open_obligation_ids": [],
+    "constructive_gap_for_open_obligation_ids": [
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "scope_complete_discharge": false,
+    "expected_obligation_discharge_lcb": "0",
+    "expected_obligation_unlock_lcb": "1/13",
+    "success_probability_lcb": "1",
+    "wall_clock_cost_ub": "1"
+  },
+  "evidence": {
+    "prior_public_activation_run_id": 37880547075,
+    "prior_public_activation_artifact_id": 11594189159,
+    "prior_guard_status": "PREEXPOSURE_ABORT_NONCONSUMING__TOKEN_GUARD_ERROR",
+    "prior_exact_error": "SCIENCE_RAW_TASK_OBLIGATION_COUNT_INVALID",
+    "historical_task_read": true,
+    "task_started": false,
+    "execution_authority_consumed": false,
+    "repair_verification_path": "canonical/verification/TB_SCIENCE_RANK14_LOSSLESS_OBLIGATION_CAP_REPAIR_VERIFY_20261009_V1.json",
+    "repair_verification_git_blob_sha": "6e8e3938b00e3fe39e38ac4a1b38a21eeb25c96f",
+    "v10_closure_manifest_git_blob_sha": "ae37559320105277e017ff17af7c3dbeae2f9c27",
+    "v10_closure_public_verification_git_blob_sha": "d0000dd7cb3c866a42a4eb08632613ed53940fca"
+  },
+  "safety": {
+    "new_benchmark_task_read_authority": false,
+    "rank14_task_start_authority": false,
+    "benchmark_trials_consumed_delta": 0,
+    "retries_authorized": 0,
+    "replacement_allowed": false,
+    "incremental_spend_usd_max": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
