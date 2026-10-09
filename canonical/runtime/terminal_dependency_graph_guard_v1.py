@@ -21,6 +21,13 @@ ROUTE_LIFECYCLES = frozenset(
     {"SPECIFIED", "IMPLEMENTED", "REFINEMENT_VERIFIED", "VERIFIED_LIVE"}
 )
 
+
+def _attack_families(value: Any) -> bool:
+    if not isinstance(value, Sequence) or isinstance(value, (str, bytes)):
+        return False
+    rows = [str(x).strip() for x in value]
+    return bool(rows) and all(rows) and len(rows) == len(set(rows))
+
 _REQUIRED_FIELDS = frozenset(
     {
         "schema",
@@ -133,8 +140,10 @@ def validate_graph(
         kind = str(node.get("kind") or "").strip()
 
         if kind == "LEAF":
-            if set(node) != {"id", "kind", "status", "note"}:
+            if set(node) != {"id", "kind", "status", "attack_families", "note"}:
                 return _fail("LEAF_FIELD_SET_INVALID", node_id=node_id)
+            if not _attack_families(node.get("attack_families")):
+                return _fail("ATTACK_FAMILIES_INVALID", node_id=node_id)
             status = node.get("status")
             if status not in LEAF_STATUSES:
                 return _fail("LEAF_STATUS_INVALID", node_id=node_id)
@@ -154,10 +163,14 @@ def validate_graph(
             "implementation",
             "refinement",
             "live_authority_status",
+            "attack_families",
             "note",
         }
         if set(node) != required:
             return _fail("ROUTE_FIELD_SET_INVALID", node_id=node_id)
+
+        if not _attack_families(node.get("attack_families")):
+            return _fail("ATTACK_FAMILIES_INVALID", node_id=node_id)
 
         lifecycle = node.get("lifecycle")
         if lifecycle not in ROUTE_LIFECYCLES:
