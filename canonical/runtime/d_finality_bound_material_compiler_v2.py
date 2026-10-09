@@ -88,6 +88,47 @@ def _row_for(path: Path, root: Path) -> dict[str, str]:
     }
 
 
+def _module_path_if_present(root: Path, module: str) -> Path | None:
+    p = root.joinpath(*module.split("."))
+    py = p.with_suffix(".py")
+    init = p / "__init__.py"
+    if py.is_file():
+        return py.resolve()
+    if init.is_file():
+        return init.resolve()
+    return None
+
+
+def _canonical_from_import_children(path: Path, root: Path) -> list[Path]:
+    """Resolve package-child modules missed by the legacy closure census.
+
+    Example:
+        from canonical.runtime.bound_capabilities import leaf
+
+    The legacy census records the package __init__.py but not leaf.py. For a
+    material proof that omission is unsound, so V2 explicitly admits only child
+    modules whose exact canonical path exists.
+    """
+    source = path.read_text(encoding="utf-8")
+    tree = ast.parse(source)
+    out: set[Path] = set()
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.ImportFrom):
+            continue
+        module = str(node.module or "")
+        if not (module == "canonical" or module.startswith("canonical.")):
+            continue
+        for alias in node.names:
+            if alias.name == "*":
+                continue
+            candidate = _module_path_if_present(
+                root, module + "." + str(alias.name)
+            )
+            if candidate is not None:
+                out.add(candidate)
+    return sorted(out, key=lambda p: p.as_posix())
+
+
 def _literal_sibling_loads(path: Path) -> tuple[list[Path], list[str]]:
     """Find fixed sibling .py loads and unresolved dynamic loader surfaces.
 
@@ -224,6 +265,14 @@ def _member_closure(
             if p in provider_set:
                 continue
             full = _safe_file(root, p)
+
+            # Recover concrete package-child imports omitted by the legacy
+            # census, then recurse through those exact files too.
+            for child in _canonical_from_import_children(full, root):
+                child_rel = child.relative_to(root).as_posix()
+                if child_rel not in scanned_roots:
+                    queue.append(child_rel)
+
             targets, opens = _literal_sibling_loads(full)
             for item in opens:
                 unresolved.add(p + ":" + item)
