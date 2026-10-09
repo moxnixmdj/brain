@@ -2088,14 +2088,14 @@
   },
   "r2_scheduler_precedence": {
     "current_authority_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
-    "current_scheduler_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V35.json",
-    "current_scheduler_git_blob_sha": "892141ec5c7efcfaa89c8d4f3c7cf323efee1d8e",
+    "current_scheduler_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V37.json",
+    "current_scheduler_git_blob_sha": "3c409ea62f6004701c4cd5062c1116078d5ae6d9",
     "single_live_primitive": "ESCAPE_POLICY_ADEQUACY",
     "general_mechanism_missing": false,
     "enumerated_active_zero_reality_cell_count": 0,
     "enumerated_external_required_sleep_cell_count": 0,
     "historical_root2_scheduler_fields_authoritative_for_current_r2": false,
-    "rule": "CURRENT_R2_POINTER_AND_V34_CONTENT_ADDRESSED_SCHEDULER_HAVE_PRECEDENCE__SIX_VERIFIED_FINANCE_POSITIVE_SUBREGIONS__CURRENT_V4_ROUTE_INVENTORY_24_TOTAL_21_BOUNDED__REMAINING_FINANCE_RESIDUAL_IS_IMPLICIT_OR_AMBIGUOUS_REFERENCE_SYNONYMY_CONTEXT_DEPENDENT_WORD_SENSE_ONTOLOGY_DOMAIN_MAPPING_GENERAL_CROSS_DOCUMENT_SEMANTIC_BINDING_OR_EXTERNAL_FACT_AUTHENTICATION__GDPVAL_DORMANT",
+    "rule": "CURRENT_R2_POINTER_AND_V37_CONTENT_ADDRESSED_SCHEDULER_HAVE_PRECEDENCE__NINE_VERIFIED_FINANCE_SUBREGIONS__REMAINING_RESIDUAL_IS_AMBIGUOUS_COREFERENCE_INFERRED_SYNONYMY_WORD_SENSE_ONTOLOGY_GENERAL_CROSS_DOCUMENT_OR_STRONGER_EXTERNAL_FACT_AUTHENTICATION__GDPVAL_DORMANT",
     "current_authority_pointer_mutable": true,
     "current_authority_pointer_blob_is_not_load_bearing": true,
     "binding_law": "CURRENT_POINTERS_BIND_BY_CANONICAL_PATH_IDENTITY__IMMUTABLE_VERSIONED_AUTHORITY_ARTIFACTS_BIND_BY_GIT_BLOB_SHA",
@@ -2104,7 +2104,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 61,
+  "pointer_revision": 62,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
@@ -2182,12 +2182,12 @@
   "r3_zero_residual_terminal_reconciliation": {
     "path": "canonical/governance/R3_ZERO_RESIDUAL_TERMINAL_TRUTH_RECONCILIATION_20261009_V1.json",
     "git_blob_sha": "28ca3e3e120388bf4d8c05690c153499738026c5",
-    "status": "RECONCILED__R3_NOT_CURRENT_TERMINAL_BLOCKER__CURRENT_R2_V34_FINANCE_RESIDUAL_AFTER_SIX_VERIFIED_POSITIVE_SUBREGIONS__TERMINAL_OPEN",
+    "status": "RECONCILED__R3_NOT_CURRENT_TERMINAL_BLOCKER__CURRENT_R2_V37_ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_AFTER_NINE_VERIFIED_SUBREGIONS__TERMINAL_OPEN",
     "live_r3_internal_residual_zero": true,
     "pending_improvement_count": 0,
     "r3_is_current_terminal_blocker": false,
     "primary_terminal_scheduler_object": "PROVE_ONE_SOUND_TERMINAL_ACCEPTANCE_ROUTE",
-    "current_r2_remaining_problem_class": "POSITIVE_ADEQUACY_COVERAGE_AND_POLICY_CHANGING_OBSERVABILITY__FINANCE_RESIDUAL_LIMITED_TO_IMPLICIT_OR_AMBIGUOUS_REFERENCE_SYNONYMY_CONTEXT_DEPENDENT_WORD_SENSE_ONTOLOGY_DOMAIN_MAPPING_GENERAL_CROSS_DOCUMENT_SEMANTIC_BINDING_OR_EXTERNAL_FACT_AUTHENTICATION__OPEN_WORLD_NOT_CLOSED",
+    "current_r2_remaining_problem_class": "AMBIGUOUS_COREFERENCE_INFERRED_SYNONYMY_CONTEXT_WORD_SENSE_ONTOLOGY_GENERAL_CROSS_DOCUMENT_OR_STRONGER_EXTERNAL_FACT_AUTHENTICATION",
     "terminal_remains_false": true,
     "terminal_credit_delta": 0
   },
@@ -2309,6 +2309,24 @@
     "exact_cell_count": 3,
     "bounded_family_count": 22,
     "verified_finance_positive_subregion_count": 7,
+    "terminal_credit_delta": 0
+  },
+  "r2_v37_semantic_coverage": {
+    "status": "VERIFIED_BOUNDED_POSITIVE_ADEQUACY_EXPANSION__TERMINAL_STILL_OPEN",
+    "scheduler_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V37.json",
+    "scheduler_git_blob_sha": "3c409ea62f6004701c4cd5062c1116078d5ae6d9",
+    "direct_activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V22.json",
+    "direct_activation_git_blob_sha": "fddafe92f65ff990aa0718edfbad722828667e0e",
+    "external_json_verification_path": "canonical/verification/R2_FINANCE_EXTERNAL_JSON_POLICY_DIRECT_ADEQUACY_VERIFY_20261009_V1.json",
+    "external_json_verification_git_blob_sha": "031b989adfd1d009328a887eb28f61102cb5a8b1",
+    "contextual_reference_verification_path": "canonical/verification/R2_V37_CONTEXTUAL_REFERENCE_VERIFY_20261009_V1.json",
+    "contextual_reference_verification_git_blob_sha": "cb3cf706a9be08d4561168ee8103b15d4d831c9e",
+    "verified_finance_positive_subregion_count": 9,
+    "route_count": 27,
+    "bounded_family_count": 24,
+    "remaining_finance_semantic_residual_closed": false,
+    "finance_family_closed": false,
+    "terminal_remains_false": true,
     "terminal_credit_delta": 0
   }
 }
