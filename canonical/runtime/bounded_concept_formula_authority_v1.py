@@ -230,6 +230,15 @@ def verify_claim(
                 "receipt_sha256"
             ),
             "open_world_ontology_complete": False,
+            "concept_semantics_authority": True,
+            "semantic_truth_authority": False,
+            "source_authority": False,
+            "policy_adequacy_authority": False,
+            "execution_authority": False,
+            "acceptance_authority": False,
+            "promotion_authority": False,
+            "terminal_authority": False,
+            "terminal_credit_delta": 0,
         }
         if _SHA256.fullmatch(
             str(receipt_core["registry_authority_receipt_sha256"] or "")
