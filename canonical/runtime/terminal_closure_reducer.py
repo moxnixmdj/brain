@@ -120,6 +120,44 @@ def _load_bound_json(
     return payload, None
 
 
+def _target_family_identity_failures(
+    manifest_family_ids: list[str],
+    target_envelope: dict[str, Any],
+) -> list[str]:
+    failures: list[str] = []
+    target_families = target_envelope.get("families")
+    target_count = target_envelope.get("target_family_count")
+    if not isinstance(target_families, list):
+        return ["TARGET_ENVELOPE_FAMILIES_NOT_LIST"]
+
+    target_ids: list[str] = []
+    for index, family in enumerate(target_families):
+        if not isinstance(family, dict):
+            failures.append(f"TARGET_ENVELOPE_FAMILY_{index}_MALFORMED")
+            continue
+        fid = family.get("id")
+        if not isinstance(fid, str) or not fid.strip():
+            failures.append(f"TARGET_ENVELOPE_FAMILY_{index}_ID_INVALID")
+            continue
+        target_ids.append(fid)
+
+    if type(target_count) is not int or target_count != len(target_families):
+        failures.append("TARGET_ENVELOPE_DECLARED_COUNT_MISMATCH")
+    if len(target_ids) != len(set(target_ids)):
+        failures.append("TARGET_ENVELOPE_DUPLICATE_FAMILY_ID")
+    if target_count != REQUIRED_FAMILY_COUNT:
+        failures.append("TARGET_ENVELOPE_COUNT_NOT_19")
+
+    manifest_set = set(manifest_family_ids)
+    target_set = set(target_ids)
+    if manifest_set != target_set:
+        for fid in sorted(target_set - manifest_set):
+            failures.append(f"REQUIRED_FAMILY_ID_MISSING:{fid}")
+        for fid in sorted(manifest_set - target_set):
+            failures.append(f"UNRECOGNIZED_FAMILY_ID:{fid}")
+    return failures
+
+
 def _evaluate_universal_cover_proof(
     manifest: dict[str, Any],
     repo_root: Path | None = None,
@@ -247,6 +285,15 @@ def evaluate_manifest(
         failures.append("DUPLICATE_FAMILY_ID")
     if manifest.get("actual_family_count") != len(families):
         failures.append("DECLARED_ACTUAL_FAMILY_COUNT_MISMATCH")
+
+    target_binding = manifest.get("target_envelope_binding")
+    target_envelope, target_error = _load_bound_json(target_binding, repo_root)
+    if target_error is not None:
+        failures.append(f"TARGET_ENVELOPE_UNBOUND:{target_error}")
+    else:
+        if manifest.get("target_envelope") != target_binding.get("path"):
+            failures.append("TARGET_ENVELOPE_PATH_BINDING_MISMATCH")
+        failures.extend(_target_family_identity_failures(ids, target_envelope))
 
     counters = manifest.get("counters")
     if not isinstance(counters, dict):
