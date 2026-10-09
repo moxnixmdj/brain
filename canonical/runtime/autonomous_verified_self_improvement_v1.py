@@ -169,6 +169,7 @@ def _make_success_proof_capsule(out: Mapping[str, Any]) -> dict[str, Any] | None
         "source_status": _s(out.get("status")) or None,
         "task_id": _s(out.get("task_id")) or None,
         "selected_plan": [_s(x) for x in selected_plan if _s(x)],
+        "verified_initial_facts": _items(out.get("verified_initial_facts")),
         "verified_target_effects": _items(out.get("verified_target_effects")),
         "controller_checkpoint": {
             "path": checkpoint_path,
