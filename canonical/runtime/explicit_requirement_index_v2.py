@@ -17,13 +17,48 @@ SCHEMA="BRAIN_EXPLICIT_REQUIREMENT_INDEX_V2"
 def _canon(x:Any)->str:
     return json.dumps(x,sort_keys=True,separators=(",",":"),ensure_ascii=False)
 
-def _segments(text:str)->list[tuple[int,int,str]]:
-    out=[]
-    for m in re.finditer(r"[^.!?\n]+(?:[.!?]+|\n|$)",text):
-        s,e=m.span()
-        while s<e and text[s].isspace():s+=1
-        while e>s and text[e-1].isspace():e-=1
-        if s<e:out.append((s,e,text[s:e]))
+def _segments(text: str) -> list[tuple[int, int, str]]:
+    out: list[tuple[int, int, str]] = []
+
+    def emit(start: int, end: int) -> None:
+        # Whitespace itself is not an acceptance obligation, but every
+        # non-whitespace source character must belong to exactly one span.
+        while start < end and text[start].isspace():
+            start += 1
+        while end > start and text[end - 1].isspace():
+            end -= 1
+        if start < end and text[start:end].strip():
+            out.append((start, end, text[start:end]))
+
+    # Construct sentence/line boundaries directly. The previous regex required
+    # at least one non-.!? character before a punctuation boundary, which could
+    # omit punctuation-only runs such as "...", "!!!", or "???" entirely.
+    cursor = 0
+    i = 0
+    n = len(text)
+    while i < n:
+        ch = text[i]
+        if ch == "\n":
+            emit(cursor, i + 1)
+            cursor = i + 1
+            i += 1
+            continue
+        if ch in ".!?":
+            j = i + 1
+            while j < n and text[j] in ".!?":
+                j += 1
+            emit(cursor, j)
+            cursor = j
+            i = j
+            continue
+        i += 1
+
+    emit(cursor, n)
+
+    if not out and text.strip():
+        s = next(i for i, ch in enumerate(text) if not ch.isspace())
+        e = len(text.rstrip())
+        out.append((s, e, text[s:e]))
     return out
 
 def _shift(span:Sequence[int],offset:int)->list[int]:

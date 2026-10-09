@@ -2976,7 +2976,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 116,
+  "pointer_revision": 117,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
@@ -4394,5 +4394,33 @@
     "terminal": false,
     "acceptance_credit_delta": 0,
     "terminal_credit_delta": 0
+  },
+  "tb_science_rank17_v32_preexposure_abort_reconciliation_20261009_v1": {
+    "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK17_V32_PREEXPOSURE_ABORT_RECONCILIATION_V1",
+    "status": "RECONCILED__RANK17_PREEXPOSURE_ABORT_NONCONSUMING__V32_CURRENT__V4_AUTHORITY_ACTIVE__TASK_READ_WITHHELD_PENDING_PUBLIC_RESEAL__ZERO_CREDIT",
+    "reconciliation_path": "canonical/governance/TB_SCIENCE_RANK17_V32_PREEXPOSURE_ABORT_RECONCILIATION_20261009_V1.json",
+    "reconciliation_git_blob_sha": "34fabe3894af24ed99da12f9c176bfd32fa3a997",
+    "authority_path": "canonical/governance/TB_SCIENCE_RANK17_ONE_SLOT_EXECUTION_AUTHORITY_20261009_V4.json",
+    "authority_git_blob_sha": "1f0e1e7739eeaff67cac8ca5781a94c0f6ea8cf9",
+    "verification_path": "canonical/verification/TB_SCIENCE_RANK17_ONE_SLOT_AUTHORITY_VERIFY_20261009_V4.json",
+    "verification_git_blob_sha": "d41a4f2e32f7ba94ea5dcc78aad8bc0a73394826",
+    "ledger_path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261009_V32.json",
+    "ledger_git_blob_sha": "9c2f95b2d7946e374811321cde58d11f53704fd2",
+    "result_truth_path": "canonical/verification/TB_SCIENCE_RANK17_V6_PREEXPOSURE_ABORT_TRUTH_20261009_V1.json",
+    "result_truth_git_blob_sha": "7bb8e234fbe4458c9a1e97c82aba2becfa1c895e",
+    "repair_verification_path": "canonical/verification/TB_SCIENCE_RANK17_RAW_TASK_PUNCTUATION_REPAIR_VERIFY_20261009_V1.json",
+    "repair_verification_git_blob_sha": "28ec71862357908bd2c868ca6494a9d89439a223",
+    "consumed_slots": 16,
+    "next_rank": 17,
+    "task_read_history": true,
+    "task_started": false,
+    "benchmark_trials_consumed": 0,
+    "execution_authority": true,
+    "task_read_authority": false,
+    "public_v4_reseal_required": true,
+    "prior_v3_activation_reuse_authority": false,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
   }
+
 }
