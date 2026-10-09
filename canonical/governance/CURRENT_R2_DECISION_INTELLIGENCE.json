@@ -12,7 +12,7 @@
     "path": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
     "authority_kernel": "canonical/runtime/general_adequate_decision_controller_v1.py",
     "authority_kernel_git_blob_sha": "29872fc55a5ec577feea769cc919dc889899c2bd",
-    "fixed_point_git_blob_sha": "7c6b28754fa8851f220395df1615dd6afe193b3a",
+    "fixed_point_git_blob_sha": "cabe3bd1ec3748a595f3a959718c38accdacfb2f",
     "fixed_point_native_control_policy_total": true,
     "fixed_point_regression_test_path": "canonical/tests/test_general_adequate_decision_fixed_point_v2.py",
     "fixed_point_regression_test_git_blob_sha": "934a04632483fd517cbfa34394b27c73038365e1"
@@ -172,7 +172,20 @@
     "latest_verification_git_blob_sha": "00dc359634d2798cabcf3ba3d6074b5cc18e8423",
     "latest_verification_status": "PASS__EXACT_NEW_ROUTE_AND_V19_SEAM__LIVE_NYFED_TWO_FETCH_REPLAY__FULL_HISTORICAL_FIXED_POINT_SUITE_UNEXECUTED__ZERO_TERMINAL_CREDIT",
     "fixed_point_controller_path": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
-    "fixed_point_controller_git_blob_sha": "7c6b28754fa8851f220395df1615dd6afe193b3a"
+    "fixed_point_controller_git_blob_sha": "cabe3bd1ec3748a595f3a959718c38accdacfb2f",
+    "current_route_count_role": "FROZEN_V57_ACTIVATION_AND_SCHEDULER_BASELINE_ONLY",
+    "default_runtime_integration": {
+      "path": "canonical/governance/CURRENT_DEFAULT_RUNTIME_INTEGRATION.json",
+      "pointer_semantics": "MUTABLE_CURRENT_PATH_IDENTITY_AUTHORITATIVE",
+      "stable_wrapper_path": "canonical/runtime/r2_direct_live_admission_v1.py",
+      "stable_wrapper_git_blob_sha": "c995e4cad77e68268e18b059c97f00936283e6b6",
+      "verified_static_backend_path": "canonical/runtime/r2_direct_end_to_end_adequacy_v20.py",
+      "verified_static_backend_git_blob_sha": "3a52b91efbfc9ca3c54fb6ffcb3b0cc270ab4699",
+      "static_default_route_count_before_dynamic": 40,
+      "dynamic_admission_pointer_path": "canonical/governance/CURRENT_R2_DIRECT_ROUTE_ADMISSIONS.json",
+      "dynamic_route_count": 0,
+      "future_route_source_version_edit_required": false
+    }
   },
   "fixed_point_information_policy": {
     "minimum_policy_changing_information": true,
