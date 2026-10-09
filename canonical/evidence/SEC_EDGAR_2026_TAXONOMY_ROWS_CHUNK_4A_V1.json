@@ -1,0 +1,86 @@
+{
+  "schema": "PROJECT_BRAIN_SEC_EDGAR_2026_TAXONOMY_ROWS_CHUNK_V1",
+  "chunk_index": "4A",
+  "rows": [
+    {
+      "family": "SPAC",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/spac/2026/spac-reg-2026.xsd",
+      "code": "SCH",
+      "role": "Entry Point",
+      "allowed": "0",
+      "namespace_id": "xbrl.sec.gov/spac-reg/2026"
+    },
+    {
+      "family": "SRO",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/sro/2026/sro-17ad27-2026.xsd",
+      "code": "SCH",
+      "role": "Entry Point",
+      "allowed": "0",
+      "namespace_id": "xbrl.sec.gov/sro-17ad27/2026"
+    },
+    {
+      "family": "SRO",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/sro/2026/sro-2026.xsd",
+      "code": "SCH",
+      "role": "Schema",
+      "allowed": "1",
+      "namespace_id": "xbrl.sec.gov/sro/2026"
+    },
+    {
+      "family": "STPR",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/stpr/2026/stpr-2026.xsd",
+      "code": "SCH",
+      "role": "Schema",
+      "allowed": "1",
+      "namespace_id": "xbrl.sec.gov/stpr/2026"
+    },
+    {
+      "family": "VIP",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/vip/2026/vip-2026.xsd",
+      "code": "SCH",
+      "role": "Schema",
+      "allowed": "1",
+      "namespace_id": "xbrl.sec.gov/vip/2026"
+    },
+    {
+      "family": "VIP",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/vip/2026/vip-n3-2026.xsd",
+      "code": "SCH",
+      "role": "Entry Point",
+      "allowed": "0",
+      "namespace_id": "xbrl.sec.gov/vip-n3/2026"
+    },
+    {
+      "family": "VIP",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/vip/2026/vip-n4-2026.xsd",
+      "code": "SCH",
+      "role": "Entry Point",
+      "allowed": "0",
+      "namespace_id": "xbrl.sec.gov/vip-n4/2026"
+    },
+    {
+      "family": "VIP",
+      "version": "2026",
+      "origin": "SEC_XBRL",
+      "path": "/vip/2026/vip-n6-2026.xsd",
+      "code": "SCH",
+      "role": "Entry Point",
+      "allowed": "0",
+      "namespace_id": "xbrl.sec.gov/vip-n6/2026"
+    }
+  ]
+}
