@@ -34,12 +34,16 @@
     },
     "latest_v1_post_replay_shape_fix": {
       "path": "canonical/verification/STRICT_TERMINAL_CLOSURE_V1_POST_REPLAY_SHAPE_FIX_20261009_V2.json",
-      "status": "PENDING_PR_REPLAY__CURRENT_MAIN_REBASED__EXACT_DELTA_AUDITED__TARGETED_REGRESSION_ADDED",
+      "status": "PASS__INDEPENDENT_EXACT_BYTE_REPLAY__COMPILE_PASS__39_OF_39_FOCUSED_PASS__ZERO_CREDIT",
       "prior_verified_v1_git_blob_sha": "826d9bae80ed2c1f37be0e830f5e4807b262fb14",
       "current_v1_git_blob_sha": "117d85bec1e5fb49428271aa9883e89d0ef1aa0a",
       "semantic_delta": "PRESERVE_SCALAR_REMAINING_HARD_FRONTIER_AS_ONE_LIST_ITEM_INSTEAD_OF_SPLITTING_TO_CHARACTERS",
       "externality_control_law_touched": false,
-      "terminal_credit_delta": 0
+      "terminal_credit_delta": 0,
+      "verification_git_blob_sha": "ca9c219c7a7e23466c562723ddaf7c7cd0059e67",
+      "execution_log_sha256": "d581e5f0798b4eea143892c718ae86ee7dee4dea4a847f1accc2c3581b23854d",
+      "tests_run": 39,
+      "tests_passed": 39
     }
   },
   "authority": {
