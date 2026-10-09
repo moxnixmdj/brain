@@ -8,7 +8,7 @@
   },
   "certificate_pointer": {
     "path": "canonical/governance/CURRENT_COVERAGE_COMPLETENESS_ROOT_CERTIFICATES.json",
-    "git_blob_sha": "188f8b17fdc3fea0bc3dfd28f0ed2f31bc727800"
+    "git_blob_sha": "1d708672ee29a9fac2ea1b043f0ed5cb3b29b570"
   },
   "gates": {
     "representation_closure": {
@@ -28,7 +28,7 @@
       "current_counterexample": {
         "root_id": "CC_R3_TERMINAL_CLOSURE_V1",
         "path": "canonical/verification/CC_R3_COUNTEREXAMPLE_20261009_V1.json",
-        "git_blob_sha": "bf6e8ef01894350c5d51abe53038cea315984ea3",
+        "git_blob_sha": "e707b115609dd475d258514eac26cbdb070870ac",
         "u_empty": false
       }
     },
