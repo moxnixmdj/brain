@@ -40,5 +40,49 @@ class InformationTheoreticExternalityGateV1Tests(unittest.TestCase):
         )
 
 
+    def test_complete_proof_carrying_certificate_passes(self):
+        def proof(seed):
+            return {
+                "verified": True,
+                "source_kind": "INDEPENDENT_VERIFIER",
+                "verifier_id": "V:" + seed,
+                "receipt_sha256": "a" * 64,
+            }
+
+        cert = {
+            "schema": gate.CERTIFICATE_SCHEMA,
+            "status": "PROVED_INFORMATION_THEORETICALLY_EXTERNAL",
+            "obligation_ids": ["w1"],
+            "exact_missing_information_sha256": "2" * 64,
+            "world_pair": {
+                "world_1": {
+                    "world_id": "W1",
+                    "accessible_observation_sha256": "1" * 64,
+                    "required_action_sha256": "3" * 64,
+                },
+                "world_2": {
+                    "world_id": "W2",
+                    "accessible_observation_sha256": "1" * 64,
+                    "required_action_sha256": "4" * 64,
+                },
+            },
+            "indistinguishability_proof": proof("indistinguishability"),
+            "action_separation_proof": proof("action-separation"),
+            "internal_constructive_gap_exhaustion_proof": proof("internal-exhaustion"),
+            "bypass_falsification": [
+                {
+                    "bypass_class": name,
+                    "verdict": "FALSIFIED",
+                    "proof": proof(name),
+                }
+                for name in gate.REQUIRED_BYPASS_CLASSES
+            ],
+            "externality_verification_authority": proof("authority"),
+        }
+        out = gate.verify_certificate(cert, pending=[{"work_id": "w1"}])
+        self.assertTrue(out["pass"], out)
+        self.assertTrue(out["irreducible_external_information_proved"])
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
