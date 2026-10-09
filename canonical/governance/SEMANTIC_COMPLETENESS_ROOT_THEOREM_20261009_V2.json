@@ -14,14 +14,14 @@
   },
   "uvck_v2_binding": {
     "current_pointer_path": "canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json",
-    "current_pointer_git_blob_sha": "2adee7bb282cd01ce7b62f69c8f093268a891753",
     "governance_path": "canonical/governance/UVCK_V2_ASSURANCE_CLOSURE_COMPILER_20261009_V1.json",
     "governance_git_blob_sha": "b7197be29b49c55c81e1a18572cd22020510fa5e",
     "runtime_path": "canonical/runtime/assurance_closure_compiler_v1.py",
     "runtime_git_blob_sha": "a52d62d63aeb50a6bbb613c37ec76d1c86327b12",
     "test_path": "canonical/tests/test_assurance_closure_compiler_v1.py",
     "test_git_blob_sha": "0f89c895f8e0f275de2d64cf33f60c8ff09abd4e",
-    "role": "HARDENED_ASSURANCE_COMPILER_BELOW_SEMANTIC_ROOT_THEOREM__GENERIC_GRAPH_CANNOT_SELF_CERTIFY_EXECUTION_OR_ADVERSARIAL_CLOSURE"
+    "role": "HARDENED_ASSURANCE_COMPILER_BELOW_SEMANTIC_ROOT_THEOREM__GENERIC_GRAPH_CANNOT_SELF_CERTIFY_EXECUTION_OR_ADVERSARIAL_CLOSURE",
+    "current_pointer_binding": "MUTABLE_POINTER_BY_PATH_ONLY"
   },
   "novelty_law": {
     "uvck_new_primitive_is_new_semantic_root": false,
