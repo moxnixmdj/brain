@@ -29,8 +29,9 @@ MAX_DOCUMENTS = 32
 MAX_SLOTS = 16
 MAX_HYPOTHESES_PER_SLOT = 16
 MAX_WORLDS = 4096
+MAX_INCOMPATIBILITY_CONSTRAINTS = 256
 
-_NO_VALUE = "__NO_APPLICABLE_EFFECT__"
+_NO_VALUE = {"kind": "NO_APPLICABLE_EFFECT"}
 
 
 def _canon(value: Any) -> str:
@@ -53,7 +54,9 @@ def _token(value: Any, name: str) -> str:
     return value.strip()
 
 
-def _effect_row(value: Any) -> dict[str, Any]:
+def _effect_row(value: Any) -> dict[str, Any] | None:
+    if value is None:
+        return None
     if not isinstance(value, Mapping):
         raise ValueError("EFFECT_HYPOTHESIS_NOT_OBJECT")
     allowed = {
@@ -74,19 +77,23 @@ def _effect_row(value: Any) -> dict[str, Any]:
     return calculus._validate_effect(value)
 
 
-def _parse_problem(problem: Mapping[str, Any]) -> tuple[str, list[dict[str, Any]], dict[str, Any]]:
+def _parse_problem(problem: Mapping[str, Any]) -> tuple[str, list[dict[str, Any]], dict[str, Any], list[frozenset[str]]]:
     if not isinstance(problem, Mapping) or problem.get("schema") != SCHEMA:
         raise ValueError("PROBLEM_SCHEMA_INVALID")
     if set(problem) != {
         "schema",
         "case_id",
         "hypothesis_set_complete",
+        "compatibility_constraints_complete",
+        "incompatible_hypothesis_sets",
         "documents",
         "query",
     }:
         raise ValueError("PROBLEM_FIELD_SET_NOT_EXACT")
     if problem.get("hypothesis_set_complete") is not True:
         raise ValueError("HYPOTHESIS_SET_NOT_DECLARED_COMPLETE")
+    if problem.get("compatibility_constraints_complete") is not True:
+        raise ValueError("COMPATIBILITY_CONSTRAINTS_NOT_DECLARED_COMPLETE")
 
     case_id = _token(problem.get("case_id"), "CASE_ID")
     documents = problem.get("documents")
@@ -101,6 +108,7 @@ def _parse_problem(problem: Mapping[str, Any]) -> tuple[str, list[dict[str, Any]
     clean_docs: list[dict[str, Any]] = []
     doc_ids: set[str] = set()
     slot_ids: set[str] = set()
+    all_hypothesis_ids: set[str] = set()
     slot_count = 0
     world_count = 1
 
@@ -156,7 +164,10 @@ def _parse_problem(problem: Mapping[str, Any]) -> tuple[str, list[dict[str, Any]
                 hid = _token(hyp.get("hypothesis_id"), "HYPOTHESIS_ID")
                 if hid in seen_hypotheses:
                     raise ValueError("HYPOTHESIS_ID_DUPLICATE:" + slot_id + ":" + hid)
+                if hid in all_hypothesis_ids:
+                    raise ValueError("HYPOTHESIS_ID_NOT_GLOBALLY_UNIQUE:" + hid)
                 seen_hypotheses.add(hid)
+                all_hypothesis_ids.add(hid)
                 effect = _effect_row(hyp.get("effect"))
                 ce = _canon(effect)
                 if ce in canonical_effects:
@@ -183,6 +194,38 @@ def _parse_problem(problem: Mapping[str, Any]) -> tuple[str, list[dict[str, Any]
             "effect_slots": clean_slots,
         })
 
+    raw_constraints = problem.get("incompatible_hypothesis_sets")
+    if (
+        not isinstance(raw_constraints, Sequence)
+        or isinstance(raw_constraints, (str, bytes))
+        or len(raw_constraints) > MAX_INCOMPATIBILITY_CONSTRAINTS
+    ):
+        raise ValueError("INCOMPATIBLE_HYPOTHESIS_SETS_INVALID_OR_TOO_LARGE")
+
+    incompatible: list[frozenset[str]] = []
+    seen_constraints: set[tuple[str, ...]] = set()
+    for index, row in enumerate(raw_constraints):
+        if (
+            not isinstance(row, Sequence)
+            or isinstance(row, (str, bytes))
+            or len(row) < 2
+        ):
+            raise ValueError("INCOMPATIBILITY_CONSTRAINT_INVALID:" + str(index))
+        ids = [_token(x, "INCOMPATIBLE_HYPOTHESIS_ID") for x in row]
+        if len(ids) != len(set(ids)):
+            raise ValueError("INCOMPATIBILITY_CONSTRAINT_DUPLICATE_ID:" + str(index))
+        unknown = sorted(set(ids) - all_hypothesis_ids)
+        if unknown:
+            raise ValueError(
+                "INCOMPATIBILITY_CONSTRAINT_UNKNOWN_HYPOTHESIS:"
+                + ",".join(unknown)
+            )
+        key = tuple(sorted(ids))
+        if key in seen_constraints:
+            raise ValueError("INCOMPATIBILITY_CONSTRAINT_DUPLICATE")
+        seen_constraints.add(key)
+        incompatible.append(frozenset(ids))
+
     query = problem.get("query")
     if not isinstance(query, Mapping) or set(query) != {"target_id", "as_of", "context"}:
         raise ValueError("QUERY_INVALID")
@@ -193,7 +236,8 @@ def _parse_problem(problem: Mapping[str, Any]) -> tuple[str, list[dict[str, Any]
     _canon(query)
 
     clean_docs.sort(key=lambda x: x["document_id"])
-    return case_id, clean_docs, dict(query)
+    incompatible.sort(key=lambda x: tuple(sorted(x)))
+    return case_id, clean_docs, dict(query), incompatible
 
 
 def _outcomes(result: Mapping[str, Any]) -> list[str]:
@@ -245,7 +289,7 @@ def _minimum_discriminator_slots(worlds: Sequence[Mapping[str, Any]]) -> list[st
 
 def evaluate(problem: Mapping[str, Any]) -> dict[str, Any]:
     try:
-        case_id, documents, query = _parse_problem(problem)
+        case_id, documents, query, incompatible = _parse_problem(problem)
 
         slot_rows: list[tuple[str, str, list[dict[str, Any]]]] = []
         for doc in documents:
@@ -257,10 +301,16 @@ def evaluate(problem: Mapping[str, Any]) -> dict[str, Any]:
                 ))
 
         domains = [row[2] for row in slot_rows]
+        raw_cartesian_world_count = 1
+        for domain in domains:
+            raw_cartesian_world_count *= len(domain)
         worlds = []
         union_outcomes: dict[str, Any] = {}
 
         for selected in product(*domains):
+            selected_ids = {hyp["hypothesis_id"] for hyp in selected}
+            if any(constraint.issubset(selected_ids) for constraint in incompatible):
+                continue
             selection = {
                 slot_id: hyp["hypothesis_id"]
                 for (_, slot_id, _), hyp in zip(slot_rows, selected)
@@ -269,11 +319,14 @@ def evaluate(problem: Mapping[str, Any]) -> dict[str, Any]:
                 doc["document_id"]: [] for doc in documents
             }
             for (document_id, _slot_id, _), hyp in zip(slot_rows, selected):
-                effects_by_doc[document_id].append(dict(hyp["effect"]))
+                if hyp["effect"] is not None:
+                    effects_by_doc[document_id].append(dict(hyp["effect"]))
 
             compiled_docs: dict[str, dict[str, Any]] = {}
             specs = []
             for document_id in sorted(effects_by_doc):
+                if not effects_by_doc[document_id]:
+                    continue
                 path = "compiled/" + document_id + ".json"
                 typed_doc = {
                     "schema": calculus.DOC_SCHEMA,
@@ -293,7 +346,14 @@ def evaluate(problem: Mapping[str, Any]) -> dict[str, Any]:
                 "query": query,
             }
             try:
-                result = calculus.compute(case, compiled_docs)
+                if specs:
+                    result = calculus.compute(case, compiled_docs)
+                else:
+                    result = {
+                        "pass": False,
+                        "status": "OPEN__NO_APPLICABLE_EFFECT",
+                        "surviving_effect_ids": [],
+                    }
             except Exception as exc:
                 return {
                     "schema": SCHEMA,
@@ -328,6 +388,17 @@ def evaluate(problem: Mapping[str, Any]) -> dict[str, Any]:
                 **world_payload,
             })
 
+        if not worlds:
+            return {
+                "schema": SCHEMA,
+                "status": "FAIL_CLOSED__NO_ADMISSIBLE_HYPOTHESIS_WORLD",
+                "pass": False,
+                "case_id": case_id,
+                "reason": "ALL_CARTESIAN_WORLDS_EXCLUDED_BY_COMPATIBILITY_CONSTRAINTS",
+                "semantic_truth_authority": False,
+                "terminal_authority": False,
+            }
+
         worlds.sort(key=lambda x: x["world_id"])
         outcome_keys = sorted(union_outcomes)
 
@@ -339,16 +410,20 @@ def evaluate(problem: Mapping[str, Any]) -> dict[str, Any]:
                 "pass": True,
                 "case_id": case_id,
                 "world_count": len(worlds),
+                "raw_cartesian_world_count": raw_cartesian_world_count,
+                "incompatibility_constraint_count": len(incompatible),
                 "effective_value": effective_value,
                 "worlds": worlds,
                 "minimum_discriminator_slots": [],
                 "hypothesis_set_complete_relative_to_declared_universe": True,
+                "compatibility_constraints_complete_relative_to_declared_universe": True,
                 "does_not_require_unique_effect_interpretation": True,
                 "semantic_truth_authority": False,
                 "terminal_authority": False,
                 "boundary": (
                     "OUTCOME_INVARIANCE_OVER_DECLARED_COMPLETE_FINITE_TYPED_EFFECT_"
-                    "HYPOTHESIS_UNIVERSE__NO_RAW_LANGUAGE_HYPOTHESIS_COMPLETENESS_AUTHORITY"
+                    "HYPOTHESIS_UNIVERSE_AND_DECLARED_COMPLETE_COMPATIBILITY_CONSTRAINTS__"
+                    "NO_RAW_LANGUAGE_HYPOTHESIS_COMPLETENESS_AUTHORITY"
                 ),
             }
 
@@ -359,16 +434,19 @@ def evaluate(problem: Mapping[str, Any]) -> dict[str, Any]:
             "pass": False,
             "case_id": case_id,
             "world_count": len(worlds),
+            "raw_cartesian_world_count": raw_cartesian_world_count,
+            "incompatibility_constraint_count": len(incompatible),
             "possible_outcomes": [union_outcomes[k] for k in outcome_keys],
             "worlds": worlds,
             "minimum_discriminator_slots": minimum_slots,
             "hypothesis_set_complete_relative_to_declared_universe": True,
+            "compatibility_constraints_complete_relative_to_declared_universe": True,
             "additional_semantic_information_required": True,
             "semantic_truth_authority": False,
             "terminal_authority": False,
             "boundary": (
                 "MINIMUM_DISCRIMINATOR_IS_RELATIVE_TO_DECLARED_COMPLETE_FINITE_"
-                "TYPED_EFFECT_HYPOTHESIS_UNIVERSE"
+                "TYPED_EFFECT_HYPOTHESIS_UNIVERSE_AND_COMPLETE_COMPATIBILITY_CONSTRAINTS"
             ),
         }
     except Exception as exc:
