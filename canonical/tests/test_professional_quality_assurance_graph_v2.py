@@ -112,6 +112,19 @@ class TestProfessionalQualityAssuranceGraphV2(unittest.TestCase):
         }
         self.assertTrue(required.issubset(ids))
 
+    def test_every_known_defeater_counterproves_when_activated(self):
+        graph, catalog = load()
+        for row in catalog["challenges"]:
+            g = copy.deepcopy(graph)
+            nodes = {n["id"]: n for n in g["nodes"]}
+            nodes[row["id"]]["status"] = "SUPPORTED"
+            out = kernel.evaluate(g)
+            self.assertEqual(out["status"], "COUNTERPROVED", row["id"])
+            self.assertIn(row["id"], out["active_defeater_ids"], row["id"])
+            self.assertFalse(out["pass"], row["id"])
+            self.assertFalse(out["terminal_authority"], row["id"])
+            self.assertEqual(out["terminal_credit_delta"], 0, row["id"])
+
     def test_existing_evidence_reuse_map_is_scoped_and_nonpromotional(self):
         _, catalog = load()
         reuse = json.loads(REUSE.read_text())
