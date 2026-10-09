@@ -120,5 +120,41 @@ class Tests(unittest.TestCase):
         self.assertNotEqual(a, c)
 
 
+    def test_unknown_mapping_exposes_minimum_proof_request(self):
+        out = evaluate({
+            "predicate_id": "guess",
+            "raw_span": RAW,
+            "source_id": "doc:A",
+            "scope_id": SCOPE,
+            "target_concept_id": "CCOB",
+            "required_relation": "SEMANTIC_IDENTITY",
+            "candidate_concepts": [candidate()],
+            "relation_problems": {
+                "CCOB": {
+                    "required_relation": "SEMANTIC_IDENTITY",
+                    "candidate_relations": [{
+                        "relation": "SIMILAR",
+                        "score": 0.999,
+                        "source": "embedding",
+                    }],
+                }
+            },
+        })
+        self.assertFalse(out["pass"])
+        request = out["minimum_proof_request"]
+        self.assertEqual(request["truth_kind"], "DOMAIN_MAPPING_RELATION")
+        self.assertEqual(request["raw_span"], RAW)
+        self.assertEqual(request["source_id"], "doc:A")
+        self.assertEqual(request["scope_id"], SCOPE)
+        self.assertEqual(request["target_concept_id"], "CCOB")
+        self.assertEqual(request["required_relation"], "SEMANTIC_IDENTITY")
+        self.assertIn(
+            "AUTHENTICATED_SHARED_CONCEPT_IDENTITY",
+            request["next_proof_targets"],
+        )
+        self.assertFalse(request["semantic_truth_authority"])
+        self.assertFalse(request["terminal_authority"])
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
