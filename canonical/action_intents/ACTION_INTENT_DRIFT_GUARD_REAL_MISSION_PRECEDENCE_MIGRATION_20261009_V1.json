@@ -1,0 +1,162 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "DRIFT_GUARD_REAL_MISSION_PRECEDENCE_MIGRATION_20261009_V1",
+  "date": "2026-10-09",
+  "status": "CURRENT_MAIN_REBASED__EXACT_VERIFIED_GUARD_AND_TEST_BLOBS__ZERO_CREDIT",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "5cfae120d8c8b6b5837cb9b5a069996f944ad0a5",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "terminal_objective_role": "PREDECESSOR_DRIFT_GUARD_BOOTSTRAP_COMPATIBILITY_ONLY__NOT_REAL_MISSION",
+  "real_terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
+  "capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+  "action_kind": "GOVERNANCE_GUARD",
+  "governance_change": true,
+  "user_authorized_governance_change": true,
+  "explicit_user_authorization": "User instructed: do everything u should do perfectly.",
+  "weakens_existing_guard": false,
+  "causal_blocker": "DRIFT_GUARD_DERIVES_ULTIMATE_TERMINAL_OBJECTIVE_FROM_LEGACY_CANONICAL_POINTER_OPUS_CHECKPOINT_INSTEAD_OF_CURRENT_MISSION_OBJECTIVE",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1::DRIFT_GUARD_DERIVES_ULTIMATE_TERMINAL_OBJECTIVE_FROM_LEGACY_CANONICAL_POINTER_OPUS_CHECKPOINT_INSTEAD_OF_CURRENT_MISSION_OBJECTIVE",
+  "highest_leverage_now": true,
+  "expected_parent_frontier_change": "DRIFT_GUARD_USES_CURRENT_REAL_MISSION_AS_ULTIMATE_OBJECTIVE_WHILE_PRESERVING_LEGACY_OPUS_HIERARCHY_ONLY_AS_EXPLICIT_CHECKPOINT_SCOPE",
+  "stop_condition": "EXACT_GUARD_AND_TEST_BLOBS_PASS_PYCOMPILE_AND_5_OF_5__REAL_MISSION_INTENT_ACCEPTED__LEGACY_CHECKPOINT_INTENT_REJECTED__NO_GUARD_WEAKENING",
+  "load_bearing_primary": {
+    "open_obligation_ids": [],
+    "constructive_gap_for_open_obligation_ids": [
+      "PROWORK_GDPVAL_GE_1846"
+    ],
+    "scope_complete_discharge": false,
+    "expected_obligation_discharge_lcb": "0",
+    "expected_obligation_unlock_lcb": "1",
+    "success_probability_lcb": "1",
+    "wall_clock_cost_ub": "1",
+    "interpretation": "ONE_GOVERNANCE_CURRENTNESS_GAP_UNLOCK__NO_TERMINAL_DISCHARGE"
+  },
+  "v22_prewrite_admission": {
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "currentness": {
+      "accepted_families": 5,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "unresolved_atomic": 22,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "meta_envelope_open_count": 8,
+      "total_open_truth_obligations": 30,
+      "terminal": false
+    },
+    "mode": "ACTIVE_INTERFACE",
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "target_truth_obligations": [
+      "PROWORK_GDPVAL_GE_1846"
+    ],
+    "proof_state_reachability": "MISSION_CURRENTNESS_GUARD_MUST_NOT_DRIFT_LOAD_BEARING_ASSURANCE_WORK_BACK_TO_A_SUPERSEDED_TERMINAL_OBJECTIVE",
+    "fresh_reality_authority": false,
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "proposal_id": "REAL_MISSION_PRECEDENCE_GUARD_V1",
+      "falsifier_id": "LEGACY_CHECKPOINT_AS_NEW_INTENT_TERMINAL_OBJECTIVE",
+      "decisive_question": "CAN_A_NEW_INTENT_STILL_TREAT_OPUS_5_5_AS_ULTIMATE_TERMINAL_OBJECTIVE_AFTER_CURRENT_MISSION_OVERRIDE",
+      "known_counterexamples_checked": true,
+      "counterexample_receipts": [],
+      "no_known_counterexample_reason": "FOCUSED_TESTS_DIRECTLY_FALSIFY_LEGACY_CHECKPOINT_AS_NEW_INTENT_TERMINAL_OBJECTIVE"
+    }
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "5cfae120d8c8b6b5837cb9b5a069996f944ad0a5",
+    "real_outcome": "MAKE_DRIFT_GUARD_MISSION_SOURCE_MATCH_CURRENT_CANONICAL_MISSION_AUTHORITY",
+    "required_capability": "MISSION_CURRENTNESS_FAIL_CLOSED_GOVERNANCE",
+    "obs_goal": {
+      "real_outcome": "REAL_MISSION_PRECEDENCE",
+      "proxy_goals_deleted": [
+        "MAKE_OLD_GUARD_GREEN_BY_GOAL_SUBSTITUTION"
+      ],
+      "surviving_necessity": "NEW_INTENTS_MUST_BIND_REAL_MISSION"
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "CURRENT_MISSION_OBJECTIVE",
+        "LEGACY_CANONICAL_POINTER",
+        "DRIFT_GUARD"
+      ],
+      "external_existing_routes_checked": [],
+      "capability_work_deleted": [
+        "REWRITE_ALL_CHECKPOINT_HIERARCHY_NOW"
+      ],
+      "surviving_gap": "ONE_STALE_MISSION_SOURCE_IN_GUARD"
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "PATH_SPECIFIC_GOVERNANCE_CURRENTNESS_DEFECT",
+      "delete_bypass_substitute_options": [
+        "SOURCE_REAL_MISSION_POINTER",
+        "PRESERVE_LEGACY_HIERARCHY_AS_CHECKPOINT"
+      ],
+      "surviving_causal_blocker": "GUARD_READS_LEGACY_CHECKPOINT_TERMINAL_FIELD_AS_ULTIMATE_MISSION"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "SOURCE_CURRENT_MISSION_POINTER_AND_SCOPE_LEGACY_HIERARCHY_AS_CHECKPOINT"
+      ],
+      "losing_routes_reason": "REWRITING_ALL_CHECKPOINT_STATE_IS_UNNECESSARY_AND_RISKIER",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "FOCUSED_MISSION_PRECEDENCE_UNIT_TESTS"
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "LEGACY_TERMINAL_OBJECTIVE_ENFORCEMENT_FOR_NEW_INTENTS"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "CURRENT_MISSION_OBJECTIVE_PRECEDENCE"
+      ],
+      "fresh_reuse_plan": "ALL_FUTURE_FRONTIER_SENSITIVE_PRS_USE_REAL_MISSION_OBJECTIVE"
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "NO_GLOBAL_CHECKPOINT_DATA_REWRITE"
+      ],
+      "search_stop_decision": "EXACT_STALE_READ_SITE_LOCALIZED_AND_MINIMAL_PRECEDENCE_RULE_VERIFIED",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "SOURCE_CURRENT_MISSION_POINTER",
+      "REWRITE_ALL_LEGACY_CHECKPOINT_HIERARCHY"
+    ],
+    "deleted_or_bypassed_paths": [
+      "REWRITE_ALL_LEGACY_CHECKPOINT_HIERARCHY"
+    ],
+    "selected_surviving_route": "SOURCE_CURRENT_MISSION_POINTER",
+    "why_selected_route_is_fastest_sufficient": "CURRENT_MISSION_POINTER_ALREADY_DEFINES_PRECEDENCE_AND_CHECKPOINT_ROLE_EXPLICITLY",
+    "expected_parent_level_state_change": "DRIFT_GUARD_USES_CURRENT_REAL_MISSION_AS_ULTIMATE_OBJECTIVE_WHILE_PRESERVING_LEGACY_OPUS_HIERARCHY_ONLY_AS_EXPLICIT_CHECKPOINT_SCOPE",
+    "stop_condition": "EXACT_GUARD_AND_TEST_BLOBS_PASS_PYCOMPILE_AND_5_OF_5__REAL_MISSION_INTENT_ACCEPTED__LEGACY_CHECKPOINT_INTENT_REJECTED__NO_GUARD_WEAKENING",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "GOVERNANCE_GUARD_CURRENTNESS_REPAIR_REUSES_CANONICAL_MISSION_POINTER"
+    }
+  },
+  "hard_nonclaims": [
+    "NO_GUARD_WEAKENING",
+    "NO_CHECKPOINT_DELETION",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
