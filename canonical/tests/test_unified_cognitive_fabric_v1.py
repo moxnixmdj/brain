@@ -50,6 +50,7 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
         self.assertIn("SEMANTIC_RELATION", c["engines"])
         self.assertIn("SEMANTIC_RELATION", c["engines"])
         self.assertIn("SEMANTIC_RELATION", c["engines"])
+        self.assertIn("SEMANTIC_RELATION", c["engines"])
         self.assertGreater(c["brain_owned_transitive_file_count"], 1)
         self.assertGreater(c["brain_owned_transitive_source_bytes"], 0)
         self.assertIn(
@@ -124,6 +125,73 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
         self.assertFalse(out["pass"])
         self.assertIn("AUTO_ROUTE_AMBIGUOUS_OR_UNMODELED", out["reason"])
 
+
+
+    def test_auto_semantic_relation_proves_scoped_exact_equivalence(self):
+        scope = "1" * 64
+        out = run({
+            "payload": {
+                "expression_a": "reserve buffer",
+                "expression_b": "liquidity cushion",
+                "required_relation": "BIDIRECTIONAL_EQUIVALENCE",
+                "scope_sha256": scope,
+                "evidence": {
+                    "explicit_source_equivalence": {
+                        "verified": True,
+                        "relation": "EXACT_EQUIVALENT",
+                        "source_kind": "EXPLICIT_SOURCE_DEFINITION",
+                        "verifier_id": "verifier:source-definition",
+                        "evidence_sha256": "e" * 64,
+                        "scope_sha256": scope,
+                    }
+                },
+            },
+        })
+        self.assertTrue(out["auto_routed"])
+        self.assertEqual(out["mode"], "SEMANTIC_RELATION")
+        self.assertTrue(out["inner_pass"], out)
+        self.assertEqual(
+            out["result"]["strongest_proved_relation"],
+            "EXACT_EQUIVALENT",
+        )
+
+    def test_auto_semantic_relation_can_stop_at_task_equivalence(self):
+        scope = "2" * 64
+        out = run({
+            "payload": {
+                "expression_a": "reserve buffer",
+                "expression_b": "liquidity cushion",
+                "required_relation": "TASK_EQUIVALENCE",
+                "scope_sha256": scope,
+                "evidence": {},
+                "task_terminal_rows": [
+                    {
+                        "raw_id": "A",
+                        "signature_complete": True,
+                        "terminal_signature": {
+                            "threshold": 10,
+                            "action": "REDUCE",
+                        },
+                    },
+                    {
+                        "raw_id": "B",
+                        "signature_complete": True,
+                        "terminal_signature": {
+                            "threshold": 10,
+                            "action": "REDUCE",
+                        },
+                    },
+                ],
+            },
+        })
+        self.assertTrue(out["auto_routed"])
+        self.assertEqual(out["mode"], "SEMANTIC_RELATION")
+        self.assertTrue(out["inner_pass"], out)
+        self.assertEqual(
+            out["result"]["strongest_proved_relation"],
+            "TASK_EQUIVALENT",
+        )
+        self.assertTrue(out["result"]["task_equivalent"])
 
     def test_auto_semantic_ambiguity_skips_irrelevant_identity_question(self):
         out = run({
