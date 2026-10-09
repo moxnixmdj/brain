@@ -1,12 +1,13 @@
 """Certificate-gated selected-route runtime entrypoint v2.
 
-V2 preserves v1 selection mechanics and adds a mandatory content-addressed
-payload-admission validator for every creditable real route. Non-creditable
-deployment canaries may remain context-only.
+V2 preserves v1 selection mechanics and adds mandatory content-addressed
+payload admission plus executable-refinement evidence for every creditable real
+route. Non-creditable deployment canaries may remain context-only.
 
-A creditable route cannot execute until the validator attests the exact cell,
-context digest, and canonical payload digest. The entrypoint recomputes all
-digests itself and rejects any mismatch.
+A creditable route cannot enter the executable candidate set until the runtime
+has verified exact route/certificate bindings and a separate refinement receipt
+that binds the route blob and declares semantic refinement verified. Payload
+membership is then checked against the exact context and payload digests.
 """
 from __future__ import annotations
 
@@ -175,12 +176,12 @@ def _verified_rows(
             raise RuntimeBindingFailClosed(f"ADMISSION_CREDITABLE_MISMATCH:{index}")
 
         if row.get("creditable") is True:
-            required = (
+            payload_required = (
                 "payload_validator_path",
                 "payload_validator_blob_sha",
                 "payload_validator_callable",
             )
-            if any(not row.get(k) for k in required):
+            if any(not row.get(k) for k in payload_required):
                 raise RuntimeBindingFailClosed(
                     f"CREDITABLE_PAYLOAD_VALIDATOR_BINDING_MISSING:{index}"
                 )
@@ -192,11 +193,74 @@ def _verified_rows(
                 raise RuntimeBindingFailClosed(
                     f"PAYLOAD_VALIDATOR_BLOB_DRIFT:{index}"
                 )
-            for key in required:
+            for key in payload_required:
                 if admission.get(key) != row.get(key):
                     raise RuntimeBindingFailClosed(
                         f"ADMISSION_PAYLOAD_VALIDATOR_BINDING_MISMATCH:{index}:{key}"
                     )
+
+            refinement_required = (
+                "refinement_certificate_path",
+                "refinement_certificate_blob_sha",
+                "refinement_receipt_path",
+                "refinement_receipt_blob_sha",
+            )
+            if any(not row.get(k) for k in refinement_required):
+                raise RuntimeBindingFailClosed(
+                    f"CREDITABLE_REFINEMENT_BINDING_MISSING:{index}"
+                )
+
+            refinement_certificate_path = _canonical_path(
+                row.get("refinement_certificate_path"),
+                prefixes=("canonical/governance/", "canonical/verification/"),
+            )
+            refinement_receipt_path = _canonical_path(
+                row.get("refinement_receipt_path"),
+                prefixes=("canonical/verification/",),
+            )
+            if row.get("refinement_certificate_blob_sha") != git_blob_sha(
+                refinement_certificate_path
+            ):
+                raise RuntimeBindingFailClosed(
+                    f"REFINEMENT_CERTIFICATE_BLOB_DRIFT:{index}"
+                )
+            if row.get("refinement_receipt_blob_sha") != git_blob_sha(
+                refinement_receipt_path
+            ):
+                raise RuntimeBindingFailClosed(
+                    f"REFINEMENT_RECEIPT_BLOB_DRIFT:{index}"
+                )
+
+            refinement_certificate = _load_json(refinement_certificate_path)
+            refinement_receipt = _load_json(refinement_receipt_path)
+            route_id = str(row.get("route_id") or "")
+            route_blob = str(row.get("route_blob_sha") or "")
+            if refinement_certificate.get("subject_id") != route_id:
+                raise RuntimeBindingFailClosed(
+                    f"REFINEMENT_CERTIFICATE_SUBJECT_MISMATCH:{index}"
+                )
+            if refinement_receipt.get("subject_id") != route_id:
+                raise RuntimeBindingFailClosed(
+                    f"REFINEMENT_RECEIPT_SUBJECT_MISMATCH:{index}"
+                )
+            if refinement_receipt.get("refinement_verified") is not True:
+                raise RuntimeBindingFailClosed(
+                    f"REFINEMENT_RECEIPT_NOT_VERIFIED:{index}"
+                )
+            if refinement_receipt.get("certificate_git_blob_sha") != str(
+                row.get("refinement_certificate_blob_sha") or ""
+            ):
+                raise RuntimeBindingFailClosed(
+                    f"REFINEMENT_RECEIPT_CERTIFICATE_BINDING_MISMATCH:{index}"
+                )
+            if refinement_receipt.get("concrete_route_git_blob_sha") != route_blob:
+                raise RuntimeBindingFailClosed(
+                    f"REFINEMENT_RECEIPT_ROUTE_BINDING_MISMATCH:{index}"
+                )
+            if refinement_receipt.get("terminal_credit_delta") != 0:
+                raise RuntimeBindingFailClosed(
+                    f"REFINEMENT_RECEIPT_NONZERO_TERMINAL_CREDIT:{index}"
+                )
 
         receipt = AdmissionReceipt(
             context_digest=str(row.get("context_digest") or ""),
@@ -357,6 +421,6 @@ def dispatch(context: Mapping[str, Any], payload: Mapping[str, Any]) -> dict[str
         "terminal_credit_delta": 0,
         "rule": (
             "NO_CREDITABLE_ROUTE_EXECUTION_BEFORE_CONTENT_ADDRESSED_SELECTION_"
-            "AND_CONTEXT_PAYLOAD_MEMBERSHIP_ATTESTATION"
+            "EXECUTABLE_REFINEMENT_PROOF_AND_CONTEXT_PAYLOAD_MEMBERSHIP_ATTESTATION"
         ),
     }
