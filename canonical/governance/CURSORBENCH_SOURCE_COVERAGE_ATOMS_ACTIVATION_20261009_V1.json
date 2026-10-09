@@ -19,7 +19,8 @@
       "git_blob_sha": "f262ee591c3c2f01c0bace5fdb4ff2cf5acbba67"
     },
     "independent_verification": {
-      "path": "canonical/verification/CURSORBENCH_SOURCE_COVERAGE_ATOMS_INDEPENDENT_VERIFICATION_20261009_V1.json"
+      "path": "canonical/verification/CURSORBENCH_SOURCE_COVERAGE_ATOMS_INDEPENDENT_VERIFICATION_20261009_V1.json",
+      "git_blob_sha": "cc0795464a18326643c11494bcc7a93144ccd9b9"
     }
   },
   "admission_contract": {
