@@ -1,0 +1,81 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK16_FINAL_EXECUTION_VERIFY_V1",
+  "date": "2026-10-09",
+  "status": "PASS__RANK16_FINAL_ZERO_BOUND_TO_PUBLIC_RECEIPT_AND_CAUSAL_JOURNAL__V10_REPAIR_ZERO_EXPOSURE_VERIFIED",
+  "subject": {
+    "path": "canonical/governance/TB_SCIENCE_RANK16_FINAL_EXECUTION_RECONCILIATION_20261009_V1.json",
+    "git_blob_sha": "92e610734b70921bbcbd78557208be0af23b8744"
+  },
+  "public_evidence": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "workflow_run_id": 37948159650,
+    "workflow_run_conclusion": "success",
+    "job_conclusion": "success",
+    "final_receipt_schema": "PROJECT_BRAIN_TB_SCIENCE_TERMINAL_SLOT_RECEIPT_RANK16_V6",
+    "final_receipt_status": "FINAL_ZERO",
+    "reward": 0,
+    "benchmark_trials_consumed": 1,
+    "consumed_final_failures_delta": 1,
+    "rerun_credit": false,
+    "terminal_credit_delta": 0,
+    "artifact_id": 11627643266,
+    "artifact_zip_sha256": "03217d7a98a01f9f6c49cd3b3c7af77bc9d2a81d216d7699068815b558825f3"
+  },
+  "causal_journal_replay": {
+    "namespace": "terminal-journal-v1",
+    "latest_verified_sequence": 29,
+    "sequences_26_to_29_compared": true,
+    "exact_repeat_observed": true,
+    "repeated_action_id": "load_data",
+    "same_command_sha256": true,
+    "both_returncode_2": true,
+    "same_stdout_sha256": true,
+    "both_coverage_promoted_false": true,
+    "conclusion": "CROSS_CYCLE_IDENTICAL_NONPROMOTED_EFFECT_REPEAT_CONFIRMED"
+  },
+  "successor_repair_verification": {
+    "public_repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2530,
+    "merge_commit": "efc5409027e69e2c523b63a90de09a12094af58d",
+    "verified_blobs": {
+      "agent_v10": "0e5b3ee96cbe7560ab62287573e40e6f79bc147b",
+      "planner_v5": "050bbae7c38900023fc4110070a48e8e50c161ee",
+      "evidence_store_v1": "57373f94e4f8ad64f071a2e55ff04d49074d39d5"
+    },
+    "verification_runs": {
+      "lossless_evidence": {
+        "run_id": 37956859376,
+        "conclusion": "success"
+      },
+      "execution_ratchet": {
+        "run_id": 37956859847,
+        "conclusion": "success"
+      },
+      "zero_exposure_carrier": {
+        "run_id": 37956860338,
+        "conclusion": "success"
+      },
+      "robust_reseal": {
+        "run_id": 37956860715,
+        "conclusion": "success"
+      }
+    },
+    "benchmark_trials_consumed": 0
+  },
+  "verified": [
+    "GITHUB_WORKFLOW_SUCCESS_WAS_SEPARATED_FROM_BENCHMARK_REWARD",
+    "RANK16_RECEIPT_IS_IRREVERSIBLE_FINAL_ZERO",
+    "EXACTLY_ONE_RANK16_TRIAL_WAS_CONSUMED",
+    "NO_RERUN_OR_REPLACEMENT_AUTHORITY_EXISTS",
+    "TRANSPORT_AND_DURABILITY_GATES_COMPLETED_WITH_VALID_START_IDENTITY",
+    "CAUSAL_JOURNAL_LOCALIZES_A_CROSS_CYCLE_IDENTICAL_NONPROMOTED_EFFECT_REPEAT",
+    "V10_SUCCESSOR_REPAIR_IS_MERGED_AND_ZERO_EXPOSURE_CHECKS_PASS"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_RANK16_SUCCEEDED",
+    "NO_CLAIM_V10_PROVES_FUTURE_BENCHMARK_SUCCESS",
+    "NO_CLAIM_RANK17_IS_AUTHORIZED_OR_READ",
+    "NO_TERMINAL_ACCEPTANCE_FAMILY_OR_CAPABILITY_CREDIT"
+  ],
+  "pass": true
+}
