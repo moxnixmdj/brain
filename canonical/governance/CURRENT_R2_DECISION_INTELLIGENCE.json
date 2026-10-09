@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_R2_DECISION_INTELLIGENCE_POINTER_V1",
   "date": "2026-10-09",
-  "status": "ACTIVE_CURRENT_R2_AUTHORITY__V50__THIRTY_THREE_DIRECT_ROUTES__THIRTY_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__FIXED_POINT_DIRECT_REENTRY_BOUND__FULL_FIBO_Q2_2026_BOUNDED_AUTHORITY_BOUND__V12_SOURCE_RESIDUAL_AND_V13_MONOTONE_EFFECT_LATTICE_BOUND__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_REMAINS",
+  "status": "ACTIVE_CURRENT_R2_AUTHORITY__V51__THIRTY_THREE_DIRECT_ROUTES__THIRTY_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__FIXED_POINT_DIRECT_REENTRY_BOUND__SOURCE_EXPLICIT_SEMANTIC_AUTOFILL_BOUND__FULL_FIBO_Q2_2026_BOUNDED_AUTHORITY_BOUND__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_REMAINS",
   "mission_objective": {
     "path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json"
   },
@@ -138,9 +138,9 @@
         "status": "PASS__SOURCE_ALIGNED_V7_RESIDUAL_TOP_V11_AND_FULL_CROSS_DOCUMENT_REGRESSION__77_OF_77"
       }
     ],
-    "latest_verification_path": "canonical/verification/R2_CROSS_DOCUMENT_EFFECT_SEMANTIC_LATTICE_V13_VERIFY_20261009_V1.json",
-    "latest_verification_git_blob_sha": "27e5feb2242aba01c014f6433f904a9f1e8d671d",
-    "latest_verification_status": "VERIFIED_ISOLATED_FULL_STACK__133_OF_133_PASS",
+    "latest_verification_path": "canonical/verification/R2_V51_SOURCE_EXPLICIT_AUTOFILL_VERIFY_20261009_V1.json",
+    "latest_verification_git_blob_sha": "7e4ea72a141c92b70867e133c55a85b01a66e999",
+    "latest_verification_status": "PASS__RUNTIME_REPLAY_AND_INDEPENDENT_SMOKES__ZERO_TERMINAL_CREDIT",
     "fixed_point_controller_path": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
     "fixed_point_controller_git_blob_sha": "2f0ac068357869279ab3362c80d6fae976ce38b3"
   },
@@ -167,7 +167,10 @@
     "source_backed_cross_document_residual_top": true,
     "residual_top_proof_obligations_exposed_to_resolver": true,
     "residual_top_hints_have_semantic_truth_authority": false,
-    "residual_top_hints_have_terminal_authority": false
+    "residual_top_hints_have_terminal_authority": false,
+    "source_explicit_parser_explicit_omissions_auto_filled": true,
+    "source_explicit_autofill_replaces_caller_claims": false,
+    "unrecognized_prose_remains_semantic_top": true
   },
   "judgment_model_policy": {
     "path": "canonical/governance/R2_BRAIN_OWNED_ADVISORY_JUDGMENT_POLICY_20261008_V1.json"
@@ -221,13 +224,18 @@
   },
   "condition_bound_adequacy_reuse": {
     "runtime_path": "canonical/runtime/p3_conditioned_policy_adequacy_registry_v1.py",
-    "runtime_git_blob_sha": "7dd0897bec985f294e29b854a32d85df51ddbc77",
+    "runtime_git_blob_sha": "034e0bd9463740c2175796b43392989018d319ba",
     "p3_kernel_git_blob_sha": "805f9508ed98b57dd092415879e6e38860a02ac0",
     "verification_path": "canonical/verification/R2_CONDITION_BOUND_P3_ADEQUACY_REUSE_VERIFY_20261008_V1.json",
     "verification_git_blob_sha": "e34058fd780377f2a6b841db0631d73a930e3a29",
     "two_distinct_sprite_replays": "18_OF_18_EACH",
     "merged_commit": "6669bb5cbf498246fdc7741dd7cea1f70ed4b06d",
-    "registered_policy_count": 1
+    "registered_policy_count": 2,
+    "registered_coding_specialist_policy_count": 1,
+    "registered_coding_specialist_policy_ids": [
+      "BRAIN_INDEPENDENT_ACCEPTANCE_MODEL_TYPED_PLAN_V1"
+    ],
+    "specialist_membership_self_certified": false
   },
   "terminal_authority_reconciliation": {
     "current_terminal_authority_path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
@@ -1263,6 +1271,39 @@
     "exact_labels_candidate_only": true,
     "missing_path_remains_unknown": true,
     "open_world_finance_ontology_complete": false,
+    "terminal_credit_delta": 0
+  },
+  "r2_v51_source_explicit_semantic_autofill_reconciliation": {
+    "status": "RECONCILED__V51_SOURCE_EXPLICIT_AUTOFILL_BOUND_OVER_V50_SCHEDULER_CUT__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_REMAINS",
+    "scheduler_cut_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V50.json",
+    "scheduler_cut_git_blob_sha": "eba5d37c4ac9bd359f745b04b0691113bd200a70",
+    "autofill_runtime_path": "canonical/runtime/source_explicit_semantic_claim_autofill_v1.py",
+    "autofill_runtime_git_blob_sha": "d0351f85756fd519bd7181952671af4e3767bd26",
+    "semantic_lattice_runtime_path": "canonical/runtime/cross_document_effect_semantic_lattice_v1.py",
+    "semantic_lattice_runtime_git_blob_sha": "3be06a17ab83e43b97e0d9a34aa05467a904943e",
+    "independent_verifier_git_blob_sha": "f5c5e71d43621f344f81e8f8ab0e30e14c9d4ac0",
+    "verification_path": "canonical/verification/R2_V51_SOURCE_EXPLICIT_AUTOFILL_VERIFY_20261009_V1.json",
+    "verification_git_blob_sha": "7e4ea72a141c92b70867e133c55a85b01a66e999",
+    "fills_parser_explicit_omissions_only": true,
+    "replaces_existing_same_slot_claim": false,
+    "unrecognized_prose_remains_open": true,
+    "primary_internal_unsolved_count": 1,
+    "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
+    "terminal_credit_delta": 0
+  },
+  "coding_conditioned_policy_registry_projection": {
+    "status": "RECONCILED__CURRENT_REGISTRY_TWO_POLICIES__ONE_CODING_SPECIALIST__MEMBERSHIP_NOT_SELF_CERTIFIED",
+    "runtime_path": "canonical/runtime/p3_conditioned_policy_adequacy_registry_v1.py",
+    "runtime_git_blob_sha": "034e0bd9463740c2175796b43392989018d319ba",
+    "coding_successor_path": "canonical/governance/CODING_SHARED_SPECIFICATION_COVERAGE_ONLY_SUCCESSOR_20261009_V3.json",
+    "coding_successor_git_blob_sha": "8c6db7aa24e9e535fd3502234975250ef4bfb9cb",
+    "verification_path": "canonical/verification/CODING_SHARED_SPECIFICATION_COVERAGE_ONLY_SUCCESSOR_V3_INDEPENDENT_VERIFICATION_20261009_V1.json",
+    "verification_git_blob_sha": "718b2e77dd2549cba0f95f79a33d8dc3255c4952",
+    "registered_conditioned_policy_count": 2,
+    "registered_coding_specialist_policy_count": 1,
+    "local_specialist_reuse_ready_if_condition_truth_is_source_authorized": true,
+    "v5_common_policy_certificate_registered": false,
+    "whole_specification_residual_closed": false,
     "terminal_credit_delta": 0
   }
 }
