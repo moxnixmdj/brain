@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_ASSURANCE_CLOSURE_COMPILER_POINTER_V1",
   "date": "2026-10-09",
-  "status": "CURRENT_UVCK_V2_CANDIDATE__HARDENED__PRIMARY_10_OF_10__INDEPENDENT_STRUCTURAL_11_OF_11__DOMAIN_REPRESENTABILITY_16_OF_16__NOT_LIVE_DEFAULT",
+  "status": "CURRENT_UVCK_V2_CANDIDATE__PRIMARY_10_OF_10__INDEPENDENT_STRUCTURAL_11_OF_11__DOMAIN_REPRESENTABILITY_16_OF_16__R2_FIXED_POINT_29_OF_29__R2_SHADOW_22_OF_22__NOT_LIVE_DEFAULT",
   "governance": {
     "path": "canonical/governance/UVCK_V2_ASSURANCE_CLOSURE_COMPILER_20261009_V1.json",
     "git_blob_sha": "b7197be29b49c55c81e1a18572cd22020510fa5e"
@@ -35,6 +35,22 @@
     "semantic_truth_closed": false,
     "execution_closed": false
   },
+  "r2_fixed_point_focused_replay": {
+    "verification_path": "canonical/verification/UVCK_V2_R2_FIXED_POINT_FOCUSED_REPLAY_20261009_V1.json",
+    "verification_git_blob_sha": "f40576c826a9750f742fb6d6f81e1bbe381f5d6a",
+    "result": "29_OF_29_PASS",
+    "full_private_repo_replay": false
+  },
+  "r2_shadow_integration": {
+    "runtime_path": "canonical/runtime/r2_assurance_shadow_v1.py",
+    "runtime_git_blob_sha": "410bdc7b4af900c39d8df6ab42596b1c654138eb",
+    "tests_path": "canonical/tests/test_r2_assurance_shadow_v1.py",
+    "tests_git_blob_sha": "1e7f41c27e03ce719d72be00c317661df0c1abe8",
+    "verification_path": "canonical/verification/UVCK_V2_R2_SHADOW_INTEGRATION_VERIFY_20261009_V1.json",
+    "verification_git_blob_sha": "b71ee8a0e401c5fe26771aa09285cc134623f8fb",
+    "result": "22_OF_22_PASS",
+    "shadow_authority": false
+  },
   "verification": {
     "path": "canonical/verification/UVCK_V2_ASSURANCE_CLOSURE_VERIFY_20261009_V1.json",
     "git_blob_sha": "3f2e92a842f3f709eb2ebc9fabaf869206c80a66"
@@ -42,8 +58,8 @@
   "activation": {
     "live_default": false,
     "required_before_promotion": [
-      "FULL_PRIVATE_CURRENT_MAIN_INTEGRATION_REPLAY",
-      "DOMAIN_SEMANTIC_AND_EXECUTION_CHALLENGE_BINDING"
+      "FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION",
+      "DOMAIN_SEMANTIC_AND_EXECUTION_EVIDENCE_BINDING"
     ]
   },
   "terminal_authority": false,
