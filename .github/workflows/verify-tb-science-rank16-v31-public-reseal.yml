@@ -1,0 +1,104 @@
+name: Verify TB-Science Rank16 V31 public reseal
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/verification/TB_SCIENCE_RANK16_V1_PUBLIC_RESEAL_VERIFICATION_20261009_V1.json"
+      - "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261009_V31.json"
+      - "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json"
+      - ".github/workflows/verify-tb-science-rank16-v31-public-reseal.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify exact V31 authority graph and zero exposure
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib, json, pathlib
+          R=pathlib.Path(".")
+          def blob(rel):
+              p=R/rel
+              raw=p.read_bytes()
+              return hashlib.sha1(b"blob "+str(len(raw)).encode()+b"\0"+raw).hexdigest()
+          def load(rel): return json.loads((R/rel).read_text())
+
+          v30p="canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261009_V30.json"
+          v31p="canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261009_V31.json"
+          authp="canonical/governance/TB_SCIENCE_RANK16_ONE_SLOT_EXECUTION_AUTHORITY_20261009_V1.json"
+          qualp="canonical/verification/TB_SCIENCE_RANK16_AGENT_V9_ZERO_EXPOSURE_QUALIFICATION_20261009_V1.json"
+          resealp="canonical/verification/TB_SCIENCE_RANK16_V1_PUBLIC_RESEAL_VERIFICATION_20261009_V1.json"
+          ctap="canonical/governance/CURRENT_TERMINAL_AUTHORITY.json"
+
+          assert blob(v30p)=="7e46f2a5c0c418a4d3be4360c8a85b7be7611abb"
+          assert blob(v31p)=="3bd23136716ca87ab3b7b1b271b2600b437ad593"
+          assert blob(authp)=="20ebbe8ed593a7ead08b27a1c57864ede429cb46"
+          assert blob(qualp)=="999f4adc79bba0e4477126ccb34139f9292c46ce"
+          assert blob(resealp)=="a292af3e40379ab22241706cea1b6cbecf448f26"
+
+          v31=load(v31p)
+          reseal=load(resealp)
+          cta=load(ctap)
+
+          assert v31["current_counts"]["consumed_slots"]==15
+          assert v31["current_counts"]["consumed_successes"]==0
+          assert v31["current_counts"]["consumed_final_failures"]==15
+          r16=v31["rank16"]
+          assert r16["slot_id"]=="terminal-bench-science/sparse-network-assimilation::trial-0"
+          assert r16["task_digest"]=="sha256:52ba7089dc32952df08c478af76b732fa82468c125431388adbf9798d869826f"
+          assert r16["public_surface_resealed"] is True
+          assert r16["activation_armed"] is False
+          assert r16["task_read"] is False
+          assert r16["task_started"] is False
+          assert r16["benchmark_trials_consumed"]==0
+          assert r16["direct_task_read_authority"] is False
+          assert r16["conditional_task_read_authority"] is True
+          assert r16["retries_authorized"]==0
+          assert r16["replacement_allowed"] is False
+
+          assert reseal["public_reseal"]["reseal_merge_commit"]=="eba00b63ba9ee9a5081ed43fb5daa8b51a5a2ea2"
+          assert reseal["public_reseal"]["activation_present_on_merged_base"] is False
+          assert reseal["public_reseal"]["files"]["current_surface"]["git_blob_sha"]=="df4a7158e717ee64a4b42c70d39ff19423d545dc"
+          assert reseal["public_reseal"]["files"]["agent_v9"]["git_blob_sha"]=="c3b9bbc93e070b9974598636ebbb2fd3156581cb"
+          assert len(reseal["verification_runs"])==3
+          assert all(x["conclusion"]=="success" for x in reseal["verification_runs"])
+          assert {x["id"] for x in reseal["verification_runs"]}=={37947489639,37947490473,37947490102}
+          assert reseal["state"]["task_read"] is False
+          assert reseal["state"]["task_started"] is False
+          assert reseal["state"]["benchmark_trials_consumed"]==0
+
+          x=cta["tb_science_v31_rank16_public_reseal_reconciliation"]
+          assert x["current_ledger_git_blob_sha"]==blob(v31p)
+          assert x["rank16_authority_git_blob_sha"]==blob(authp)
+          assert x["public_reseal_verification_git_blob_sha"]==blob(resealp)
+          assert x["public_reseal_merge_commit"]=="eba00b63ba9ee9a5081ed43fb5daa8b51a5a2ea2"
+          assert x["public_current_surface_git_blob_sha"]=="df4a7158e717ee64a4b42c70d39ff19423d545dc"
+          assert x["public_agent_v9_git_blob_sha"]=="c3b9bbc93e070b9974598636ebbb2fd3156581cb"
+          assert x["public_final_reseal_verified"] is True
+          assert x["activation_armed"] is False
+          assert x["task_read"] is False
+          assert x["task_started"] is False
+          assert x["benchmark_trials_consumed"]==0
+          assert x["activation_head_branch"]=="execute/tb-science-rank16-20261009-v1"
+          assert x["activation_changed_path"]=="capsules/tb_science_rank16_20261009_v1/ACTIVATE_RANK16_V1_PR.json"
+          assert x["retries_authorized"]==0 and x["replacement_allowed"] is False
+          assert x["rank15_replay_authority"] is False and x["rank15_replacement_authority"] is False
+          assert x["acceptance_credit_delta"]==0 and x["terminal_credit_delta"]==0
+
+          s=cta["authoritative_sources"]
+          assert s["tb_science_current_slot_ledger_v31"]["git_blob_sha"]==blob(v31p)
+          assert s["tb_science_rank16_v1_public_reseal_verification"]["git_blob_sha"]==blob(resealp)
+          print("PASS__TB_SCIENCE_RANK16_V31_PUBLIC_RESEAL__ONE_FILE_ACTIVATION_NEXT__ZERO_EXPOSURE")
+          PY
