@@ -26,7 +26,10 @@ def _attack_families(value: Any) -> bool:
     if not isinstance(value, Sequence) or isinstance(value, (str, bytes)):
         return False
     rows = [str(x).strip() for x in value]
-    return bool(rows) and all(rows) and len(rows) == len(set(rows))
+    # An empty list is a valid explicit representation of unknown applicability.
+    # The caller records it as an unresolved terminal obligation rather than
+    # silently treating it as covered.
+    return all(rows) and len(rows) == len(set(rows))
 
 _REQUIRED_FIELDS = frozenset(
     {
@@ -147,6 +150,8 @@ def validate_graph(
             status = node.get("status")
             if status not in LEAF_STATUSES:
                 return _fail("LEAF_STATUS_INVALID", node_id=node_id)
+            if not node.get("attack_families"):
+                unresolved.append(node_id + "::ATTACK_APPLICABILITY")
             if status == "UNRESOLVED":
                 unresolved.append(node_id)
             continue
@@ -241,6 +246,8 @@ def validate_graph(
         if node.get("terminal_authority") is True and lifecycle != "VERIFIED_LIVE":
             return _fail("TERMINAL_AUTHORITY_REQUIRES_VERIFIED_LIVE", node_id=node_id)
 
+        if not node.get("attack_families"):
+            unresolved.append(node_id + "::ATTACK_APPLICABILITY")
         if refinement_status == "UNRESOLVED":
             unresolved.append(node_id + "::EXECUTABLE_REFINEMENT")
         if node.get("live_authority_status") == "UNRESOLVED":
