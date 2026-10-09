@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_R4_ROOT_CERTIFICATE_REGISTRY_REMOTE_VERIFY_V1",
+  "date": "2026-10-09",
+  "status": "PASS__EXACT_BRANCH_BYTES__5_OF_5_ASSERTIONS__PY_COMPILE_PASS__DRIFT_FAILS_CLOSED__ZERO_CREDIT",
+  "base_main_commit": "199957e2f5b39ccbd3113bedcde53afb6190b597",
+  "subject_branch": "r4-root-certificate-registry-v1-20261009",
+  "exact_git_blobs": {
+    "canonical/governance/COVERAGE_ROOT_CERTIFICATE_REGISTRY_20261009_V1.json": "b40675927669ca6fdb51a7db9a6f38b08c2a82b7",
+    "canonical/runtime/root_certificate_registry_v1.py": "83a0ba09262ccb55e2b59778452951c277b7f560",
+    "canonical/tests/test_root_certificate_registry_v1.py": "ccb2f0d8f828d4f862a59c1ae929a5fbd13333c8",
+    "canonical/governance/COVERAGE_COMPLETENESS_R4_ASSURANCE_PROJECTION_V2.json": "b74e024a2719d3419232e6d5f2eb3b389181e69b",
+    "canonical/runtime/root_theorem_r4_assurance_projection_v2.py": "c2431479e377e9356ba756232ae573e4ddb28adc",
+    "canonical/tests/test_root_theorem_r4_assurance_projection_v2.py": "22090c2d1d3bdd69619444130d4c5b71858e31e2"
+  },
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-live-integrated-v1-run-20261008",
+    "sprite_id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "workspace": "/home/sprite/r4-root-registry-v1"
+  },
+  "verification": {
+    "registry_direct_result": "PASS__ROOT_CERTIFICATE_REGISTRY_BOUND__ROOT_STATUS_PRESERVED",
+    "registry_root_status_vector": ["UNKNOWN", "UNKNOWN", "UNKNOWN"],
+    "registry_proof_closure_ready": false,
+    "projection_direct_result": "OPEN__R4_ROOT_REGISTRY_BOUND__EXACT_ROOT_PROOFS_AND_TRUST_TAIL_OPEN",
+    "assertions_run": 5,
+    "assertions_passed": 5,
+    "assertions_failed": 0,
+    "py_compile": "PASS",
+    "drift_mutation": "PASS__R2_SOURCE_BYTE_DRIFT_REJECTED"
+  },
+  "proved": [
+    "THE_DECLARED_R1_R2_R3_ROOT_REGISTRY_NOW_EXISTS_AND_IS_CONTENT_ADDRESSED",
+    "ALL_THREE_EXACT_ROOT_PROPOSITIONS_REMAIN_UNKNOWN",
+    "R1_LIFECYCLE_R2_CONTROL_AND_R3_ZERO_QUEUE_EVIDENCE_ARE_EXPLICITLY_NOT_PROMOTED_TO_DIFFERENT_ROOT_PROPOSITIONS",
+    "SOURCE_BYTE_DRIFT_FAILS_CLOSED",
+    "R4_REPRESENTATION_GATE_REMAINS_CLOSED_ON_THE_CURRENT_DECLARED_REGISTRY",
+    "THE_PRIOR_NO_CANONICAL_ROOT_REGISTRY_RESIDUAL_IS_DELETED",
+    "THE_REMAINING_PROOF_RESIDUAL_IS_LOCALIZED_TO_EXACT_R1_R2_R3_ROOT_PROPOSITIONS",
+    "R4_EXECUTION_AND_INDEPENDENT_ADVERSARIAL_GATES_REMAIN_OPEN"
+  ],
+  "hard_nonclaims": [
+    "NO_R1_ROOT_CLOSURE",
+    "NO_R2_ROOT_CLOSURE",
+    "NO_R3_ROOT_CLOSURE",
+    "NO_R4_GLOBAL_CLOSURE",
+    "NO_UVCK_LIVE_DEFAULT_PROMOTION",
+    "NO_TERMINAL_ACCEPTANCE_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "terminal_authority": false
+}
