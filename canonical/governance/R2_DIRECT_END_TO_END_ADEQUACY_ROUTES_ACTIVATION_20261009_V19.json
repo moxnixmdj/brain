@@ -438,22 +438,6 @@
       }
     },
     {
-      "route_id": "DIRECT_ADEQUACY::FINANCE_NORMALIZED_SOURCE_UNIVERSE_FAMILY_V1",
-      "capability_id": "finance.normalized_source_universe.decision.stdlib",
-      "runtime": "canonical/runtime/r2_finance_normalized_source_universe_direct_adequacy_v1.py",
-      "runtime_git_blob_sha": "7530b3717eda4429a7903bf5d317384d727b8de7",
-      "preflight": "EXACT_COMPLETE_NORMALIZED_TYPED_FINANCE_PACKAGE_WITH_COMPLETE_ROLE_PARTITION_AND_RECONCILIATION_BINDINGS",
-      "acceptance": "EXACT_PACKAGE_FIELD_COVERAGE_PLUS_COMPLETE_FINANCE_ROLE_PARTITION_PLUS_RECONCILIATION_CHECKS_PLUS_PRODUCER_INDEPENDENT_TYPED_DECISION_RECOMPUTATION",
-      "scope": "COMPLETE_TYPED_FINANCE_PACKAGE_SOURCE_UNIVERSE_TO_INDEPENDENTLY_RECOMPUTED_DECISION",
-      "verification": {
-        "path": "canonical/verification/R2_FINANCE_NORMALIZED_SOURCE_UNIVERSE_DIRECT_ADEQUACY_VERIFY_20261009_V2.json",
-        "git_blob_sha": "f3a340593a17a849381bde9ef0cc3633ce006a43",
-        "behavioral": "28_OF_28_PASS",
-        "compile": "3_OF_3_PASS",
-        "verified_route_inventory_after_patch": 22
-      }
-    },
-    {
       "route_id": "DIRECT_ADEQUACY::FINANCE_EXPLICIT_DEFINITION_UNLESS_FAMILY_V1",
       "capability_id": "finance.explicit_definition_unless.branch.stdlib",
       "runtime": "canonical/runtime/r2_finance_explicit_definition_unless_direct_adequacy_v1.py",
