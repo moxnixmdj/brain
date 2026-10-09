@@ -882,6 +882,16 @@
           "semantic_identity_authority": false,
           "candidate_universe_complete": false,
           "finance_tail_closed": false
+        },
+        {
+          "id": "SEC_SAME_FILING_ISSUER_EXTENSION_DOCUMENTATION_AND_EXACT_QNAME_FACT_BINDING",
+          "state": "CLOSED_FOR_EXACT_SAME_FILING_ISSUER_EXTENSION_XSD_LABEL_DOCUMENTATION_PLUS_EXACT_QNAME_INSTANCE_FACT",
+          "verification": "canonical/verification/SEC_ISSUER_EXTENSION_CUSTOM_CONCEPT_SEMANTICS_REBASE_VERIFY_20261009_V2.json",
+          "direct_adequacy_route": false,
+          "cross_filing_semantic_stability": false,
+          "standard_taxonomy_equivalence": false,
+          "semantic_truth_authority": false,
+          "policy_adequacy_authority": false
         }
       ],
       "decision_relative_sense_control": {
@@ -965,6 +975,16 @@
           "status": "SATISFIED__BOUNDED_SEC_INLINE_XBRL_STANDARD_FASB_SCOPE__GENERIC_WAKE_REFINED_NOT_GLOBALLY_DELETED",
           "scope": "SEC_INLINE_XBRL_FACT_OCCURRENCE_QNAME_IDENTITY_PLUS_EXACT_STANDARD_US_GAAP_FASB_RELEASE_METADATA",
           "reconciliation_path": "canonical/governance/R2_SEC_INLINE_XBRL_FIELD_SEMANTICS_WAKE_RECONCILIATION_20261009_V1.json",
+          "global_finance_semantic_tail_closed": false
+        },
+        {
+          "condition": "NEW_AUTHENTICATED_CONTEXT_SOURCE_AND_FIELD_SEMANTICS_BINDING_OUTSIDE_VERIFIED_SEC_COMPANYCONCEPT_AND_SEC_INLINE_XBRL_STANDARD_FASB_SCOPES",
+          "status": "SATISFIED__BOUNDED_SEC_SAME_FILING_ISSUER_EXTENSION_DOCUMENTATION_SCOPE__GENERIC_WAKE_REFINED_NOT_GLOBALLY_DELETED",
+          "scope": "SEC_EXTRACTED_INSTANCE_FACT_PLUS_SAME_FILING_ISSUER_EXTENSION_XSD_AND_LABEL_LINKBASE__EXACT_QNAME_MATCH",
+          "reconciliation_path": "canonical/governance/R2_SEC_ISSUER_EXTENSION_FIELD_SEMANTICS_WAKE_RECONCILIATION_20261009_V1.json",
+          "reconciliation_git_blob_sha": "4c43bbe62e616d1adc88b2a044a583c25c4b68d3",
+          "verification_path": "canonical/verification/SEC_ISSUER_EXTENSION_CUSTOM_CONCEPT_SEMANTICS_REBASE_VERIFY_20261009_V2.json",
+          "verification_git_blob_sha": "2cf097140d8381959bd36fd078a06bbd187ae94e",
           "global_finance_semantic_tail_closed": false
         }
       ],
@@ -1628,6 +1648,34 @@
     "primary_internal_unsolved_count": 1,
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "semantic_relation_truth_authority_added": false,
+    "semantic_identity_added": false,
+    "candidate_universe_completeness_added": false,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "sec_issuer_extension_field_semantics_wake_reconciliation": {
+    "path": "canonical/governance/R2_SEC_ISSUER_EXTENSION_FIELD_SEMANTICS_WAKE_RECONCILIATION_20261009_V1.json",
+    "reconciliation_git_blob_sha": "4c43bbe62e616d1adc88b2a044a583c25c4b68d3",
+    "verification_path": "canonical/verification/SEC_ISSUER_EXTENSION_CUSTOM_CONCEPT_SEMANTICS_VERIFY_20261009_V1.json",
+    "verification_git_blob_sha": "caf4fa82213e6cdc17881134aaed78f5e13d2d81",
+    "rebase_verification_path": "canonical/verification/SEC_ISSUER_EXTENSION_CUSTOM_CONCEPT_SEMANTICS_REBASE_VERIFY_20261009_V2.json",
+    "rebase_verification_git_blob_sha": "2cf097140d8381959bd36fd078a06bbd187ae94e",
+    "wake_refined_from": "NEW_AUTHENTICATED_CONTEXT_SOURCE_AND_FIELD_SEMANTICS_BINDING_OUTSIDE_VERIFIED_SEC_COMPANYCONCEPT_AND_SEC_INLINE_XBRL_STANDARD_FASB_SCOPES",
+    "wake_refined_to": "NEW_AUTHENTICATED_CONTEXT_SOURCE_AND_FIELD_SEMANTICS_BINDING_OUTSIDE_VERIFIED_SEC_COMPANYCONCEPT_SEC_INLINE_XBRL_STANDARD_FASB_AND_SAME_FILING_ISSUER_EXTENSION_DOCUMENTATION_SCOPES",
+    "primary_unsolved_count_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "r2_v60_sec_issuer_extension_reconciliation": {
+    "status": "RECONCILED__SAME_FILING_ISSUER_EXTENSION_DOCUMENTATION_AND_EXACT_QNAME_FACT_BINDING_BOUND__GENERIC_SEC_FIELD_WAKE_REFINED__FINANCE_TAIL_REMAINS_OPEN",
+    "prior_r2_version": "V59",
+    "scheduler_cut_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V56.json",
+    "scheduler_cut_git_blob_sha": "b2a815c4da2d612a211a1032f8c2f5562742e2c1",
+    "direct_route_count": 39,
+    "bounded_family_count": 36,
+    "primary_internal_unsolved_count": 1,
+    "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
+    "cross_filing_semantic_stability_added": false,
+    "standard_taxonomy_equivalence_added": false,
     "semantic_identity_added": false,
     "candidate_universe_completeness_added": false,
     "acceptance_credit_delta": 0,
