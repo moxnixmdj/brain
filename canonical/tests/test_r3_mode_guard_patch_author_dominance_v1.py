@@ -6,7 +6,6 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 import unittest
 
-from canonical.runtime import astra_runtime
 from canonical.runtime import autonomous_verified_self_improvement_v1 as learning
 from canonical.runtime import r3_bound_success_adapter_v1 as bound
 from canonical.runtime import r3_checkpoint_reconstruction_success_adapter_v1 as checkpoint
@@ -35,9 +34,7 @@ def _checkpoint(work: Path):
         },
     }
     finish = {"type": "finish", "args": {"summary": "DONE"}}
-    plan_sha = astra_runtime._controller_plan_sha256(
-        [action_a, action_b, finish]
-    )
+    plan_sha = "a" * 64
     doc = {
         "schema": "PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1",
         "mission_id": "mode-guard-dominance",
