@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_CURSORBENCH_FIVE_REGION_HOTPOINTER_INDEPENDENT_VERIFICATION_V1",
+  "date": "2026-10-09",
+  "status": "PASS__INDEPENDENT_EXACT_BYTE_FIVE_REGION_HOTPOINTER_REPLAY__ZERO_CREDIT",
+  "subjects": {
+    "terminal_authority": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+      "git_blob_sha": "9502d9f56b1e214cb13980940df807ed758c2a1e"
+    },
+    "projection": {
+      "path": "canonical/governance/CODING_SHARED_SPECIFICATION_COVERAGE_ONLY_SUCCESSOR_20261009_V4.json",
+      "git_blob_sha": "36b0ead6db10f6aabb6ac8f873cceefbff16ca46"
+    },
+    "complement": {
+      "path": "canonical/governance/CURSORBENCH_FIVE_REGION_COMPLEMENT_NONIDENTIFIABILITY_20261009_V1.json",
+      "git_blob_sha": "ef09eb272c9a3380574734ff244b22314b43fafd"
+    },
+    "complement_verification": {
+      "path": "canonical/verification/CURSORBENCH_FIVE_REGION_COMPLEMENT_NONIDENTIFIABILITY_INDEPENDENT_VERIFICATION_20261009_V1.json",
+      "git_blob_sha": "cf93e68182a48cbf629f6c39a127b3c804b08d80"
+    },
+    "test": {
+      "path": "canonical/tests/test_current_terminal_cursorbench_five_region_hotpointer_v1.py",
+      "git_blob_sha": "2a2040b88db3b471f97e2a132166207a71242485"
+    }
+  },
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-cursorbench-evidence-audit-20261009",
+    "sprite_id": "sprite-6e0179c2-a171-4378-bf57-db21fdf6bc5a",
+    "working_directory": "/home/sprite/cursorbench_five_hotpointer_verify",
+    "package_install_performed": false,
+    "incremental_spend_usd": 0
+  },
+  "result": {
+    "py_compile_pass": true,
+    "tests_run": 1,
+    "tests_passed": 1,
+    "tests_failed": 0,
+    "constructive_region_count": 5,
+    "distinct_condition_atom_count": 34,
+    "five_region_complement_nonidentifiability_preserved": true,
+    "private_cursorbench_membership_proved": false,
+    "whole_cursorbench_positive_cover_proved": false,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "promotion_authority": false,
+  "terminal_authority": false
+}
