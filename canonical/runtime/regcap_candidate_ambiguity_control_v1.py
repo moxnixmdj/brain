@@ -17,6 +17,7 @@ from typing import Any, Mapping, Sequence
 from canonical.runtime import minimum_information_origin_policy_v1 as origin
 from canonical.runtime import semantic_ambiguity_control_v1 as ambiguity
 from canonical.runtime import regcap_property_candidate_discovery_v1 as discovery
+from canonical.runtime import regcap_contrastive_discriminator_matrix_v1 as contrast
 
 SCHEMA = "PROJECT_BRAIN_REGCAP_CANDIDATE_AMBIGUITY_CONTROL_V1"
 BOUND_SCOPE = "BOUND_REGCAP_RIVAL_SET"
@@ -38,6 +39,22 @@ def _base(status: str, *, passed: bool = False, **extra: Any) -> dict[str, Any]:
         "terminal_credit_delta": 0,
         **extra,
     }
+
+
+def _origin_owner(value: Any) -> str:
+    text = str(value or "").strip().upper()
+    if text in {"USER_INTENT", origin.USER_SPECIFICATION}:
+        return origin.USER_SPECIFICATION
+    if text == origin.EXTERNAL_WORLD:
+        return origin.EXTERNAL_WORLD
+    return origin.UNKNOWN
+
+
+def _ambiguity_owner(value: Any) -> str:
+    text = str(value or "").strip().upper()
+    if text == origin.USER_SPECIFICATION:
+        return "USER_INTENT"
+    return text
 
 
 def _validate_candidate_result(value: Any) -> tuple[dict[str, Any] | None, str | None]:
@@ -85,6 +102,167 @@ def plan_from_grounding(
     return out
 
 
+def plan_from_authenticated_matrix(
+    candidate_result: Mapping[str, Any],
+    matrix_result: Mapping[str, Any],
+    *,
+    mapping_scope: Mapping[str, Any],
+    information_owner: str,
+    source_scope: Mapping[str, Any] | None = None,
+    discovery_delegated: bool = False,
+    clarification_key: str = "regulatory_capital_mapping_context",
+) -> dict[str, Any]:
+    """Compile an authenticated contrastive matrix into a one-step request.
+
+    The matrix supplies relative outcome semantics only.  The separately
+    authenticated mapping scope must prove that the current task is restricted
+    to exactly the candidate set.  Otherwise the open-world fallback remains
+    load-bearing.
+    """
+    row, error = _validate_candidate_result(candidate_result)
+    if error:
+        return _base("FAIL_CLOSED", reason=error)
+    assert row is not None
+
+    ids = list(row["candidate_concept_ids"])
+    if (
+        not isinstance(mapping_scope, Mapping)
+        or mapping_scope.get("kind") != BOUND_SCOPE
+        or mapping_scope.get("scope_complete") is not True
+    ):
+        return plan(
+            row,
+            mapping_scope=mapping_scope,
+            observations=(),
+            observation_set_complete=False,
+            information_owner=information_owner,
+            source_scope=source_scope,
+            discovery_delegated=discovery_delegated,
+            clarification_key=clarification_key,
+        )
+
+    scope_ids = mapping_scope.get("candidate_ids")
+    if (
+        not isinstance(scope_ids, list)
+        or sorted(scope_ids) != sorted(ids)
+        or row.get("candidate_set_complete_relative_to_bound_rivals") is not True
+    ):
+        return _base(
+            "FAIL_CLOSED",
+            reason="BOUND_RIVAL_SCOPE_DOES_NOT_MATCH_AUTHENTICATED_CANDIDATE_SET",
+            candidate_concept_ids=ids,
+        )
+
+    if not isinstance(matrix_result, Mapping):
+        return _base("FAIL_CLOSED", reason="CONTRASTIVE_MATRIX_RESULT_REQUIRED")
+    matrix = deepcopy(dict(matrix_result))
+    if matrix.get("schema") != contrast.SCHEMA:
+        return _base("FAIL_CLOSED", reason="CONTRASTIVE_MATRIX_SCHEMA_INVALID")
+    if (
+        matrix.get("pass") is not True
+        or matrix.get("source_authority") is not True
+        or matrix.get("semantic_truth_authority") is not True
+        or matrix.get("outcome_maps_complete_relative_to_matrix_domain") is not True
+    ):
+        return _base("FAIL_CLOSED", reason="CONTRASTIVE_MATRIX_NOT_AUTHENTICATED")
+    domain = matrix.get("candidate_domain")
+    if not isinstance(domain, list) or sorted(domain) != sorted(ids):
+        return _base(
+            "FAIL_CLOSED",
+            reason="CONTRASTIVE_MATRIX_DOMAIN_MISMATCH",
+            candidate_concept_ids=ids,
+            matrix_candidate_domain=domain,
+        )
+
+    observations = matrix.get("observations")
+    if not isinstance(observations, list) or not observations:
+        return _base("FAIL_CLOSED", reason="CONTRASTIVE_MATRIX_OBSERVATIONS_REQUIRED")
+
+    one_step = []
+    for raw in observations:
+        if not isinstance(raw, Mapping):
+            return _base("FAIL_CLOSED", reason="CONTRASTIVE_MATRIX_OBSERVATION_INVALID")
+        outcomes = raw.get("outcomes")
+        oid = raw.get("observation_id")
+        if (
+            not isinstance(oid, str)
+            or not oid
+            or not isinstance(outcomes, Mapping)
+            or set(outcomes) != set(ids)
+        ):
+            return _base(
+                "FAIL_CLOSED",
+                reason="CONTRASTIVE_MATRIX_OUTCOME_MAP_INVALID",
+            )
+        selected = {cid: outcomes[cid] for cid in ids}
+        if len({repr(v) for v in selected.values()}) == len(ids):
+            one_step.append({
+                "observation_id": oid,
+                "outcomes": selected,
+            })
+
+    if not one_step:
+        return _base(
+            "OPEN__NO_AUTHENTICATED_ONE_STEP_DISCRIMINATOR",
+            action="USE_GENERAL_MINIMAX_WITH_AUTHENTICATED_COMPLETE_OBSERVATION_MODEL",
+            candidate_concept_ids=ids,
+            matrix_sha256=matrix.get("matrix_sha256"),
+            minimum_observation_count_lower_bound=2,
+            reason=(
+                "NO_SINGLE_AUTHENTICATED_MATRIX_OBSERVATION_SEPARATES_ALL_"
+                "CURRENT_BOUNDED_RIVALS"
+            ),
+        )
+
+    if len(one_step) != 1:
+        return _base(
+            "OPEN__MULTIPLE_AUTHENTICATED_ONE_STEP_DISCRIMINATORS_REQUIRE_COST_OR_SOURCE_SELECTION",
+            candidate_concept_ids=ids,
+            one_step_discriminators=one_step,
+            matrix_sha256=matrix.get("matrix_sha256"),
+            reason="NO_ACQUISITION_COST_ORDER_IS_AUTHENTICATED",
+        )
+
+    selected = one_step[0]
+    route = origin.route({
+        "decision_relevant": True,
+        "context_value_bound": False,
+        "information_owner": _origin_owner(information_owner),
+        "source_scope": deepcopy(source_scope) if source_scope is not None else None,
+        "discovery_delegated": discovery_delegated,
+        "clarification_key": clarification_key,
+    })
+    if route.get("pass") is not True:
+        return _base(
+            "FAIL_CLOSED",
+            reason="MINIMUM_INFORMATION_ORIGIN_ROUTING_FAILED",
+            minimum_information_route=route,
+        )
+
+    return _base(
+        "OPEN__AUTHENTICATED_ONE_STEP_POLICY_CHANGING_DISCRIMINATOR_READY",
+        action=route.get("action"),
+        candidate_concept_ids=ids,
+        next_observation_id=selected["observation_id"],
+        authenticated_outcome_map=selected["outcomes"],
+        minimum_observation_count=1,
+        observation_truth_bound=False,
+        concept_identity_bound=False,
+        matrix_sha256=matrix.get("matrix_sha256"),
+        matrix_candidate_universe_complete=bool(
+            matrix.get("candidate_universe_complete")
+        ),
+        matrix_open_world_ontology_complete=bool(
+            matrix.get("open_world_ontology_complete")
+        ),
+        minimum_information_route=route,
+        theorem_boundary=(
+            "ONE_STEP_MINIMUM_ONLY_INSIDE_THE_SEPARATELY_AUTHENTICATED_BOUND_"
+            "RIVAL_SET__MATRIX_DOES_NOT_SUPPLY_OPEN_WORLD_CANDIDATE_COMPLETENESS"
+        ),
+    )
+
+
 def plan(
     candidate_result: Mapping[str, Any],
     *,
@@ -126,7 +304,7 @@ def plan(
         route = origin.route({
             "decision_relevant": True,
             "context_value_bound": False,
-            "information_owner": information_owner,
+            "information_owner": _origin_owner(information_owner),
             "source_scope": deepcopy(source_scope) if source_scope is not None else None,
             "discovery_delegated": discovery_delegated,
             "clarification_key": clarification_key,
@@ -178,7 +356,7 @@ def plan(
         for cid in ids
     ]
     control = ambiguity.decide({
-        "ambiguity_owner": information_owner,
+        "ambiguity_owner": _ambiguity_owner(information_owner),
         "hypothesis_set_complete": True,
         "worlds": worlds,
         "observations": [deepcopy(dict(x)) for x in observations],
@@ -223,7 +401,7 @@ def plan(
         route = origin.route({
             "decision_relevant": True,
             "context_value_bound": False,
-            "information_owner": information_owner,
+            "information_owner": _origin_owner(information_owner),
             "source_scope": deepcopy(source_scope) if source_scope is not None else None,
             "discovery_delegated": discovery_delegated,
             "clarification_key": clarification_key,
