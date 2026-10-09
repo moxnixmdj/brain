@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V36",
   "date": "2026-10-09",
-  "status": "ACTIVE_FAIL_CLOSED_REAL_MISSION_BOUND__STRICT_EXTERNALITY_RECONCILED__R3_ZERO_RESIDUAL_RECONCILED__OPUS_5_5_CHECKPOINT_TERMINAL_FALSE__CURRENT_R2_V60_AND_CODING_V3_PROJECTION_BOUND__COVERAGE_R1_R4_LIVE_BINDING_REPAIRED__CLAIM_SCOPED_COMPLETENESS_THEOREM_BOUND__ROOT_NAMESPACE_COLLISION_GUARDED",
+  "status": "ACTIVE_FAIL_CLOSED_REAL_MISSION_BOUND__STRICT_EXTERNALITY_RECONCILED__R3_ZERO_RESIDUAL_RECONCILED__OPUS_5_5_CHECKPOINT_TERMINAL_FALSE__CURRENT_R2_V61_AND_CODING_V3_PROJECTION_BOUND__COVERAGE_R1_R4_LIVE_BINDING_REPAIRED__CLAIM_SCOPED_COMPLETENESS_THEOREM_BOUND__ROOT_NAMESPACE_COLLISION_GUARDED",
   "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "authoritative_sources": {
     "universal_escape_resolver_v2_active_planning_overlay": {
@@ -1975,8 +1975,8 @@
     "cursorbench_first_authenticated_positive_adequacy_behavior_id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
     "cursorbench_first_positive_region_membership_self_certified": false,
     "cursorbench_first_positive_region_hidden_task_membership_proved": false,
-    "current_r2_semantic_revision": "V60_V19_LIVE_RUNTIME_AND_AUTHORITY_RECONCILED__SAME_FILING_SEC_ISSUER_EXTENSION_DOCUMENTATION_AND_EXACT_QNAME_FACT_BINDING_BOUND__GENERIC_SEC_FIELD_WAKE_REFINED__REGCAP_ENTRY_SURFACES_PRESERVED__ONE_FINANCE_RESIDUAL_REMAINS",
-    "current_r2_pointer_git_blob_sha": "19ad1fda2b6acf762971a3b9061beba4e3395103",
+    "current_r2_semantic_revision": "V61_V19_BASELINE_PLUS_EFFECTIVE_DEFAULT_RUNTIME_PROJECTION__PAIRWISE_SAME_ISSUER_CROSS_FILING_EXTENSION_SEMANTIC_CONTRACT_STABILITY_BOUND__GENERAL_CROSS_FILING_CUSTOM_CONCEPT_STABILITY_STANDARD_TAXONOMY_EQUIVALENCE_AND_FINANCE_TAIL_REMAIN_OPEN",
+    "current_r2_pointer_git_blob_sha": "d8bafc91fac8f1224eb41a38b6d6917a8c27a6c9",
     "r2_source_explicit_semantic_autofill_bound": true,
     "r2_source_explicit_autofill_replaces_caller_claims": false,
     "r2_unrecognized_prose_remains_semantic_top": true,
@@ -2886,14 +2886,14 @@
   },
   "r2_scheduler_precedence": {
     "current_authority_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
-    "current_scheduler_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V56.json",
-    "current_scheduler_git_blob_sha": "b2a815c4da2d612a211a1032f8c2f5562742e2c1",
+    "current_scheduler_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V57.json",
+    "current_scheduler_git_blob_sha": "445212769c794c630719380119b1f1837a3f7041",
     "single_live_primitive": "ESCAPE_POLICY_ADEQUACY",
     "general_mechanism_missing": false,
     "enumerated_active_zero_reality_cell_count": 0,
     "enumerated_external_required_sleep_cell_count": 0,
     "historical_root2_scheduler_fields_authoritative_for_current_r2": false,
-    "rule": "CURRENT_R2_V60_POINTER_OVERLAYS_THE_IMMUTABLE_V56_SCHEDULER__LIVE_V19_AND_V28_39_ROUTE_36_FAMILY_STATE_PRESERVED__SAME_FILING_SEC_ISSUER_EXTENSION_DOCUMENTATION_AND_EXACT_QNAME_FACT_BINDING_SUBTRACTED_FROM_THE_GENERIC_SEC_FIELD_WAKE__ONE_GENUINE_FINANCE_SEMANTIC_RESIDUAL_REMAINS_INTERNAL_UNSOLVED",
+    "rule": "CURRENT_R2_V61_POINTER_OVERLAYS_THE_IMMUTABLE_V57_SCHEDULER__LIVE_39_ROUTE_36_FAMILY_BASELINE_PRESERVED__PAIRWISE_SAME_ISSUER_CROSS_FILING_EXTENSION_SEMANTIC_CONTRACT_STABILITY_SUBTRACTED_ONLY_FROM_THE_GENERIC_FINANCE_SEMANTIC_WAKE__ONE_GENUINE_FINANCE_SEMANTIC_RESIDUAL_REMAINS_INTERNAL_UNSOLVED",
     "current_authority_pointer_mutable": true,
     "current_authority_pointer_blob_is_not_load_bearing": true,
     "binding_law": "CURRENT_POINTERS_BIND_BY_CANONICAL_PATH_IDENTITY__IMMUTABLE_VERSIONED_AUTHORITY_ARTIFACTS_BIND_BY_GIT_BLOB_SHA",
@@ -4182,6 +4182,27 @@
     "live_binding_sha": "ef9bc78cb6ffeaebfe7d45ac413f9a42fa0e98fb",
     "mission_sha": "2b37b3185e03b55678d7d394c8d29202a4b3ab48",
     "claim_scope_sha": "907c2935f7a6aeaf69e9288219fd94b36f58e8b2",
+    "terminal_credit_delta": 0
+  },
+  "r2_v61_sec_issuer_extension_cross_filing_reconciliation_20261009_v1": {
+    "status": "RECONCILED__CURRENT_R2_V61_PAIRWISE_CROSS_FILING_EXTENSION_CONTRACT_STABILITY_WAKE_REFINED__TERMINAL_FALSE__ZERO_CREDIT",
+    "current_r2_pointer_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+    "current_r2_pointer_git_blob_sha": "d8bafc91fac8f1224eb41a38b6d6917a8c27a6c9",
+    "scheduler_cut_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V57.json",
+    "scheduler_cut_git_blob_sha": "445212769c794c630719380119b1f1837a3f7041",
+    "reconciliation_path": "canonical/governance/R2_SEC_ISSUER_EXTENSION_CROSS_FILING_STABILITY_WAKE_RECONCILIATION_20261009_V1.json",
+    "reconciliation_git_blob_sha": "69148658263d308e24ed0e266d56c5fa67f068a8",
+    "verification_path": "canonical/verification/CONTEXT_DEPENDENT_MEANING_V61_RECONCILIATION_VERIFY_20261009_V1.json",
+    "capability_verification_path": "canonical/verification/SEC_ISSUER_EXTENSION_CROSS_FILING_STABILITY_VERIFY_20261009_V1.json",
+    "direct_route_count": 39,
+    "bounded_family_count": 36,
+    "primary_internal_unsolved_count": 1,
+    "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
+    "global_cross_filing_custom_concept_stability_claimed": false,
+    "standard_taxonomy_equivalence_claimed": false,
+    "finance_tail_closed": false,
+    "terminal_remains_false": true,
+    "acceptance_credit_delta": 0,
     "terminal_credit_delta": 0
   }
 }
