@@ -1,0 +1,78 @@
+{
+  "schema": "PROJECT_BRAIN_D_FINALITY_CURRENT_V2_SPRITE_VERIFICATION_20261009_V1",
+  "date": "2026-10-09",
+  "status": "INDEPENDENT_SUCCESSOR_EXACT_BYTE_REPLAY_PASS__27_OF_27_D_TESTS__PY_COMPILE_PASS__STDLIB_SHADOW_AND_MID_EPOCH_DRIFT_ATTACKS_PASS__ZERO_D_CREDIT",
+  "subject_branch": "d-finality-current-v2-20261009",
+  "branch_head_at_receipt": "3c4b23acc3e04696d0d860443bd66c6bef661021",
+  "exact_blobs": {
+    "d_epoch": "60cbc536215571fbd7e41b5ce28239ce370120c3",
+    "d_coverage": "3974b89b4d614c9a39c5c71eeb3b1774b21f8e91",
+    "d_material_compiler": "e29722c0ad2869c25ffb148b9fe79603314d5f54",
+    "d_fabric_guard": "e3bf117a7e6499b5383a53603c0bb4b90ab4e427",
+    "live_invoker": "d48b0a0267e247c5b63326144047f431ba19d0dd",
+    "live_ownership": "eea3f38defa450c6f7d1f5837828a8018f5007c2",
+    "unified_fabric": "e61cd151101ba0ca12529f79f5d195c044f0d602",
+    "astra_runtime": "aa63c156a394d6b221cf8e2b578b5380c05d135a",
+    "epoch_tests": "57108ea04ffc9034e31e166fd873eae0bd0d6d36",
+    "coverage_tests": "7bc274baaf0fb79b621517f039af2510e76d2681",
+    "material_compiler_tests": "a3a399e96df7024156300430e1ded933bab3f02a",
+    "fabric_guard_tests": "9128f64406639375372a582fbf2fdb48c886d119"
+  },
+  "carrier": {
+    "provider": "SPRITES",
+    "name": "brain-live-runtime-v1-verify-20261008",
+    "id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13",
+    "workspace": "/tmp/d-finality-current-v2-verify",
+    "materialization": "EXACT_GITHUB_CONNECTOR_BYTES_OVER_EXISTING_ISOLATED_VERIFIER_COPY"
+  },
+  "test_suite": {
+    "command": "python3 -m unittest canonical.tests.test_d_finality_execution_epoch_v1 canonical.tests.test_d_finality_coverage_gate_v1 canonical.tests.test_d_finality_bound_material_compiler_v1 canonical.tests.test_d_finality_fabric_guard_v1 -v",
+    "tests_run": 27,
+    "failures": 0,
+    "errors": 0,
+    "result": "PASS"
+  },
+  "compile": {
+    "result": "PASS",
+    "scope": "ALL_D_FINALITY_PRIMITIVES_PLUS_LIVE_INVOKER_UNIFIED_FABRIC_ASTRA_RUNTIME_AND_FOUR_DYNAMIC_BOUND_ADAPTERS"
+  },
+  "hostile_loader_attacks": {
+    "verified_stdlib_real_json": "PASS",
+    "forged_stdlib_origin_tmp_json": "REJECTED__BOUND_PYTHON_STDLIB_ORIGIN_OUTSIDE_STDLIB",
+    "registry_mutated_after_epoch_activation": "REJECTED__MATERIAL_CHANGED_DURING_EPOCH_BEFORE_LOAD"
+  },
+  "exact_invoker_microreplay": {
+    "invoker_blob_sha": "d48b0a0267e247c5b63326144047f431ba19d0dd",
+    "result": "PASS__ALLOWED_ENGINE_EXECUTED_ONCE__NONMEMBER_ENGINE_REJECTED_BEFORE_DISPATCH",
+    "note": "DEPENDENCY_STUBBED_REPLAY_USED_TO_ISOLATE_CHANGED_INVOKER_CONTRACT_WITH_EXACT_INVOKER_AND_D_EPOCH_BYTES"
+  },
+  "verified_properties": [
+    "SPATIAL_CHILD_AUTHORITY_CAN_ONLY_SHRINK",
+    "SAME_EPOCH_NEW_CAPABILITY_HAS_ZERO_D_FINAL_AUTHORITY",
+    "CLOSURE_RELATIVE_CERTIFICATES_IGNORE_UNRELATED_FILE_DRIFT",
+    "LOAD_BEARING_BYTE_DRIFT_FAILS_BEFORE_OR_AT_POINT_OF_USE",
+    "TARGETED_REVOCATION_DOES_NOT_REHASH_SEMANTIC_POLICY",
+    "PROVIDER_THEOREM_REUSE_DOES_NOT_REMOVE_MEMBER_MATERIAL_CERTIFICATE_REQUIREMENT",
+    "DIRECT_ENGINE_DISPATCH_REQUIRES_D_IDENTITY",
+    "BOUND_CARRIER_CHECKS_MEMBER_IDENTITY",
+    "H100_AND_CERTIFIED_ROUTE_IDENTITY_BYPASS_CARRIERS_FORBIDDEN_INSIDE_D_EPOCH",
+    "MUTABLE_META_AND_SELF_IMPROVEMENT_MODES_FORBIDDEN_UNTIL_SNAPSHOT_EFFECT_BOUND",
+    "IMPLICIT_LEARNING_AND_BACKGROUND_COMPOUNDING_SUPPRESSED_DURING_D_EPOCH"
+  ],
+  "github_actions": {
+    "status": "REPEATED_ZERO_STEP_CARRIER_FAILURE",
+    "proof_accounting": "EXCLUDED__NO_TEST_STEPS_EXECUTED"
+  },
+  "hard_nonclaims": [
+    "NO_MEMBER_CAPABILITY_D_CERTIFICATE_PROMOTED",
+    "NO_CURRENT_GLOBAL_DONOR_DELETION_CLEANROOM_PASS",
+    "NO_WORLD_IO_NONSMUGGLING_MEMBER_REPLAY_COMPLETED",
+    "NO_D_FINAL_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
