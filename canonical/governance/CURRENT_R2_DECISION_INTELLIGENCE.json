@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_R2_DECISION_INTELLIGENCE_POINTER_V1",
   "date": "2026-10-09",
-  "status": "ACTIVE_CURRENT_R2_AUTHORITY__V46__THIRTY_ONE_DIRECT_ROUTES__TWENTY_EIGHT_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__SCOPED_PROOF_CARRYING_DOMAIN_MAPPING_BOUND__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_REMAINS",
+  "status": "ACTIVE_CURRENT_R2_AUTHORITY__V47__THIRTY_ONE_DIRECT_ROUTES__TWENTY_EIGHT_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__SCOPED_PROOF_CARRYING_DOMAIN_MAPPING_BOUND__STANDARDIZED_SEC_COMPANYCONCEPT_SOURCE_NATIVE_SEMANTICS_BOUND__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_REMAINS",
   "mission_objective": {
     "path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json"
   },
@@ -719,7 +719,7 @@
       "prior_state": "EXTERNAL_REQUIRED_SLEEP",
       "information_theoretic_externality_proved": false,
       "externality_certificate": null,
-      "required_action": "REUSE_ALL_VERIFIED_FINANCE_SUBREGIONS__REUSE_VERIFIED_BOUNDED_CONCEPT_REGISTRY__TRY_SCOPED_PROOF_CARRYING_DOMAIN_MAPPING_WHEN_VERIFIER_BACKED_RELATION_EVIDENCE_AND_REQUIRED_SEMANTIC_COMPLETENESS_EXIST__THEN_REUSE_SCOPED_ENTAILMENT_DAG_CROSS_DOCUMENT_AND_OEWN_CONTROLS__ACQUIRE_ONLY_MINIMUM_POLICY_CHANGING_EVIDENCE_FOR_GENUINELY_UNBOUND_CASES",
+      "required_action": "REUSE_ALL_VERIFIED_FINANCE_SUBREGIONS__REUSE_STANDARDIZED_SEC_COMPANYCONCEPT_SOURCE_NATIVE_SEMANTICS_FOR_EXACT_CIK_TAXONOMY_TAG_SCOPE__REUSE_VERIFIED_BOUNDED_CONCEPT_REGISTRY__TRY_SCOPED_PROOF_CARRYING_DOMAIN_MAPPING_WHEN_VERIFIER_BACKED_RELATION_EVIDENCE_AND_REQUIRED_SEMANTIC_COMPLETENESS_EXIST__THEN_REUSE_SCOPED_ENTAILMENT_DAG_CROSS_DOCUMENT_AND_OEWN_CONTROLS__ACQUIRE_ONLY_MINIMUM_POLICY_CHANGING_EVIDENCE_FOR_GENUINELY_UNBOUND_CASES",
       "remaining_boundary": "FINANCE_CONTEXTS_REQUIRING_AMBIGUOUS_OR_IMPLICIT_COREFERENCE_BEYOND_VERIFIED_STRUCTURAL_FORMS__OEWN_SENSE_CASES_WITHOUT_COMPLETE_AUTHENTICATED_SENSE_TO_TERMINAL_SIGNATURE_OR_OBSERVATION_OUTCOME_BINDINGS__TERMS_OR_DOMAIN_CONCEPTS_WITHOUT_VERIFIER_BACKED_SCOPED_DOMAIN_MAPPING_OR_PROVED_COMPLETE_BOUNDED_UNIVERSE__NONEXPLICIT_SEMANTIC_RELATIONS_WHEN_NO_VERIFIER_BACKED_DOMAIN_MAPPING_AUTHENTICATED_SCOPED_ENTAILMENT_DAG_COMPLETE_BOUNDED_DENOTATION_OR_PROVABLE_SET_RELATION_EVIDENCE_IS_AVAILABLE__OPEN_WORLD_ONTOLOGY_MAPPING_WITHOUT_AUTHENTICATED_BOUNDED_AUTHORITY__CROSS_DOCUMENT_CASES_WITH_UNDECLARED_OR_UNPROVED_HYPOTHESIS_COMPLETENESS_OR_IMPLICIT_PRECEDENCE__STRONGER_EXTERNAL_FACT_AUTHENTICATION_BEYOND_BOUND_OBSERVATION_CHANNELS",
       "verified_positive_subregions": [
         {
@@ -777,6 +777,15 @@
           "state": "CLOSED_FOR_EXACT_VERIFIER_BACKED_SCOPED_RELATION_CASES",
           "verification": "canonical/verification/PROOF_CARRYING_DOMAIN_MAPPING_VERIFY_20261009_V1.json",
           "direct_adequacy_route": false
+        },
+        {
+          "id": "STANDARDIZED_SEC_XBRL_COMPANYCONCEPT_SOURCE_NATIVE_IDENTITY_AND_FACT_SEMANTICS",
+          "state": "CLOSED_FOR_EXACT_STANDARDIZED_SEC_COMPANYCONCEPT_SOURCE_NATIVE_SCOPE__NOT_DIRECT_POLICY_ADEQUACY",
+          "verification": "canonical/verification/R2_SEC_COMPANYCONCEPT_SOURCE_NATIVE_VERIFY_20261009_V1.json",
+          "producer": "canonical/runtime/bound_capabilities/sec_companyconcept_source_native.py",
+          "independent_verifier": "canonical/runtime/sec_companyconcept_source_native_verify_v1.py",
+          "scope": "ONE_COMPANY_ONE_CONCEPT_PER_REQUEST__US_GAAP_IFRS_FULL_DEI_SRT",
+          "direct_adequacy_route": false
         }
       ],
       "decision_relative_sense_control": {
@@ -796,6 +805,14 @@
           "verification_path": "canonical/verification/R2_FINANCE_BOUNDED_CONCEPT_REGISTRY_VERIFY_20261009_V2.json",
           "verification_git_blob_sha": "9236b1e14cf8ff3434a8a55b6b31b03e29b20b36",
           "global_finance_semantic_tail_closed": false
+        },
+        {
+          "condition": "NEW_AUTHENTICATED_CONTEXT_SOURCE_AND_FIELD_SEMANTICS_BINDING",
+          "status": "SATISFIED_WITHIN_STANDARDIZED_SEC_COMPANYCONCEPT_BOUND_ONLY__GLOBAL_CONDITION_REMAINS_OPEN_OUTSIDE_SCOPE",
+          "scope": "EXACT_CIK_PLUS_STANDARDIZED_TAXONOMY_PLUS_TAG_ON_SEC_DATA_GOV_COMPANYCONCEPT__US_GAAP_IFRS_FULL_DEI_SRT",
+          "verification_path": "canonical/verification/R2_SEC_COMPANYCONCEPT_SOURCE_NATIVE_VERIFY_20261009_V1.json",
+          "verification_git_blob_sha": "dbccbb21c40414ab18f6de71df98d97f5b0fcd72",
+          "global_finance_semantic_tail_closed": false
         }
       ],
       "proof_carrying_domain_mapping": {
@@ -803,7 +820,10 @@
         "verification": "canonical/verification/PROOF_CARRYING_DOMAIN_MAPPING_VERIFY_20261009_V1.json",
         "opaque_remainder_without_completeness": true,
         "open_world_ontology_closed": false
-      }
+      },
+      "bounded_boundary_subtractions": [
+        "STANDARDIZED_SEC_XBRL_COMPANYCONCEPT_SOURCE_NATIVE_IDENTITY_AND_FACT_SEMANTICS__EXACT_CIK_TAXONOMY_TAG_SCOPE"
+      ]
     }
   },
   "scheduler_result": {
@@ -814,8 +834,8 @@
     "dormant_alternative_route_cell_count": 1,
     "primary_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER",
-    "state": "GENERAL_CONTROL_MECHANISM_CLOSED__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL__THIRTY_ONE_DIRECT_ROUTES__TWENTY_EIGHT_BOUNDED_FAMILIES__SCOPED_PROOF_CARRYING_DOMAIN_MAPPING_BOUND__GDPVAL_OWNER_RELATION_DORMANT",
-    "rule": "REUSE_VERIFIED_FINANCE_COVERAGE__USE_SCOPED_PROOF_CARRYING_DOMAIN_MAPPING_BEFORE_NEW_SEMANTIC_ACQUISITION_WHEN_VERIFIER_BACKED_RELATION_EVIDENCE_EXISTS__PRESERVE_OPEN_WORLD_RESIDUALS__ACQUIRE_ONLY_MINIMUM_POLICY_CHANGING_EVIDENCE",
+    "state": "GENERAL_CONTROL_MECHANISM_CLOSED__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL__THIRTY_ONE_DIRECT_ROUTES__TWENTY_EIGHT_BOUNDED_FAMILIES__SCOPED_PROOF_CARRYING_DOMAIN_MAPPING_BOUND__STANDARDIZED_SEC_COMPANYCONCEPT_SOURCE_NATIVE_SEMANTICS_BOUND__GDPVAL_OWNER_RELATION_DORMANT",
+    "rule": "REUSE_VERIFIED_FINANCE_COVERAGE__REUSE_STANDARDIZED_SEC_COMPANYCONCEPT_SOURCE_NATIVE_SEMANTICS_WHEN_EXACT_CIK_TAXONOMY_TAG_SCOPE_APPLIES__USE_SCOPED_PROOF_CARRYING_DOMAIN_MAPPING_BEFORE_NEW_SEMANTIC_ACQUISITION_WHEN_VERIFIER_BACKED_RELATION_EVIDENCE_EXISTS__PRESERVE_OPEN_WORLD_RESIDUALS__ACQUIRE_ONLY_MINIMUM_POLICY_CHANGING_EVIDENCE",
     "direct_route_count": 31,
     "bounded_family_count": 28
   },
@@ -1034,6 +1054,36 @@
     "direct_route_count": 31,
     "bounded_family_count": 28,
     "open_world_ontology_mapping_closed": false,
+    "terminal_credit_delta": 0
+  },
+  "sec_companyconcept_source_native_frontier": {
+    "status": "BOUND__VERIFIED_SOURCE_NATIVE_SEMANTIC_ACQUISITION__ZERO_POLICY_AUTHORITY",
+    "producer_path": "canonical/runtime/bound_capabilities/sec_companyconcept_source_native.py",
+    "producer_git_blob_sha": "679ab4ccf981445f7149082d91df7343be5eef57",
+    "verifier_path": "canonical/runtime/sec_companyconcept_source_native_verify_v1.py",
+    "verifier_git_blob_sha": "4281bf1212b518e08e5224625693d389810691bd",
+    "verification_path": "canonical/verification/R2_SEC_COMPANYCONCEPT_SOURCE_NATIVE_VERIFY_20261009_V1.json",
+    "verification_git_blob_sha": "dbccbb21c40414ab18f6de71df98d97f5b0fcd72",
+    "exact_source_replay": {
+      "source_sha256": "1297419c2611393837d03a4fb5e1533e56b484dd4ff942ebb3bb68b5656d961f",
+      "source_bytes": 50867,
+      "concept_qname": "us-gaap:GrossProfit",
+      "fact_row_count": 338,
+      "independent_full_contract_rederivation": true
+    },
+    "direct_route_count_delta": 0,
+    "bounded_family_count_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "r2_v47_sec_source_native_reconciliation": {
+    "status": "RECONCILED__STANDARDIZED_SEC_COMPANYCONCEPT_SOURCE_NATIVE_SEMANTICS_BOUND__ONE_INTERNAL_FINANCE_CELL_REMAINS",
+    "verification_path": "canonical/verification/R2_SEC_COMPANYCONCEPT_SOURCE_NATIVE_VERIFY_20261009_V1.json",
+    "verification_git_blob_sha": "dbccbb21c40414ab18f6de71df98d97f5b0fcd72",
+    "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
+    "primary_internal_unsolved_count": 1,
+    "global_wake_condition_removed": false,
+    "direct_route_count": 31,
+    "bounded_family_count": 28,
     "terminal_credit_delta": 0
   }
 }
