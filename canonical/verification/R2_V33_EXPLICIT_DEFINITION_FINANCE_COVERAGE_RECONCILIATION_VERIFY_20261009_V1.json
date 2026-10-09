@@ -1,0 +1,83 @@
+{
+  "schema": "PROJECT_BRAIN_R2_V33_EXPLICIT_DEFINITION_FINANCE_COVERAGE_RECONCILIATION_VERIFY_V1",
+  "date": "2026-10-09",
+  "status": "PASS__EXPLICIT_DEFINITION_BOUNDED_COVERAGE_PROMOTABLE__ROUTE_ACCOUNTING_REPAIRED__TERMINAL_STILL_OPEN__ZERO_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "r2-v33-explicit-definition-reconcile-20261009",
+    "purpose": "Promote only the already independently verified explicit named-definition Finance UNLESS slice and reconcile stale route/scheduler accounting."
+  },
+  "exact_current_bytes": {
+    "canonical/runtime/finance_explicit_definition_unless_branch_v1.py": "8f5450a727060c5fddc708b2a9e45520a287aa87",
+    "canonical/runtime/finance_explicit_definition_unless_verify_v1.py": "e7e5cc3cac06e9d204d726286ef00a55771f97ae",
+    "canonical/runtime/r2_finance_explicit_definition_unless_direct_adequacy_v1.py": "ece0f13678afddfd2f93ffe375f6483f5f0ebb4f",
+    "canonical/runtime/r2_direct_end_to_end_adequacy_v3.py": "0f461952b61249c1e038e942eafe8f3e776f85f7",
+    "canonical/runtime/general_adequate_decision_fixed_point_v2.py": "b0626e0b901579f72c449882444b0b59aa3b6983",
+    "canonical/tests/test_r2_finance_explicit_definition_unless_direct_adequacy_v1.py": "b68461fc61e9f679c276cbb09a1897cff4780b72",
+    "canonical/runtime/explicit_definition_reference_graph.py": "950f073b35b9d7f42c76c518711462f00e89b262",
+    "canonical/runtime/certified_typed_unless_condition_v1.py": "bf861d5f12e71460c002f8ca729fe8caada26b79",
+    "canonical/runtime/source_aligned_semantic_proof_v3.py": "e6e529608afb561482778daad89d4b3e7fb9df8c"
+  },
+  "inherited_verification": {
+    "path": "canonical/verification/R2_FINANCE_EXPLICIT_DEFINITION_UNLESS_DIRECT_ADEQUACY_VERIFY_20261009_V1.json",
+    "git_blob_sha": "3f628acd089b42420bf00d4a787655f999a3d2d2",
+    "status": "PASS__EXPLICIT_DEFINITION_FINANCE_UNLESS_DIRECT_ADEQUACY__FOCUSED_13_OF_13__PY_COMPILE_5_OF_5__V2_FALLBACK_EQUIVALENCE_2_OF_2__ZERO_CREDIT",
+    "focused_assertions": "13_OF_13_PASS",
+    "py_compile": "5_OF_5_PASS",
+    "v3_to_v2_fallback_equivalence": "2_OF_2_PASS"
+  },
+  "drift_reconciliation": {
+    "matched_route_producer_verifier_router_controller_and_test_bytes_unchanged": true,
+    "source_aligned_semantic_proof_v3_unchanged": true,
+    "v2_fallback_changed": true,
+    "v2_change_class": "MONOTONE_ADD_SEPARATELY_VERIFIED_FINANCE_NORMALIZED_SOURCE_UNIVERSE_ROUTE",
+    "matched_explicit_definition_route_executes_before_v2_fallback": true,
+    "explicit_definition_matched_scope_semantics_affected_by_v2_change": false,
+    "source_universe_verification": {
+      "path": "canonical/verification/R2_FINANCE_NORMALIZED_SOURCE_UNIVERSE_DIRECT_ADEQUACY_VERIFY_20261009_V2.json",
+      "git_blob_sha": "f3a340593a17a849381bde9ef0cc3633ce006a43"
+    }
+  },
+  "accounting_repair": {
+    "predecessor_activation": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V18.json",
+    "predecessor_list_actual_route_count": 22,
+    "predecessor_numeric_route_count": 21,
+    "predecessor_numeric_bounded_family_count": 18,
+    "corrected_activation": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V19.json",
+    "corrected_activation_git_blob_sha": "a8beb09bcc2d8e3826b51560d1f6315386298606",
+    "corrected_route_count": 23,
+    "exact_cell_count": 3,
+    "bounded_family_count": 20,
+    "current_runtime": "canonical/runtime/r2_direct_end_to_end_adequacy_v3.py"
+  },
+  "scheduler_reconciliation": {
+    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V33.json",
+    "git_blob_sha": "f1c130ceffc8eb2058744c4dece38207012e612e",
+    "verified_positive_finance_subregion_count": 5,
+    "primary_internal_unsolved_cell_count": 1,
+    "primary_internal_unsolved_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
+    "remaining_boundary": "IMPLICIT_OR_AMBIGUOUS_REFERENCE__SYNONYMY__CONTEXT_DEPENDENT_WORD_SENSE__ONTOLOGY_OR_DOMAIN_MAPPING__CROSS_DOCUMENT_FACT_BINDING__EXTERNAL_FACT_AUTHENTICATION"
+  },
+  "promotion_scope": {
+    "removed_slice": "EXPLICIT_NAMED_DEFINITION_TO_EXACT_LATER_NAMED_REFERENCE_WHERE_DEFINITION_IS_LITERAL_TYPED_BOOLEAN_OR_DECIMAL_CONDITION",
+    "authority_added": "BOUNDED_DIRECT_ADEQUACY_ONLY",
+    "general_reference_resolution_claimed": false,
+    "general_coreference_claimed": false,
+    "synonymy_claimed": false,
+    "ontology_or_domain_mapping_claimed": false,
+    "cross_document_binding_claimed": false,
+    "external_fact_authentication_claimed": false
+  },
+  "terminal_truth": {
+    "terminal": false,
+    "terminal_acceptance_closed": false,
+    "open_world_positive_adequacy_closed": false,
+    "next_primary_root": "CONTINUE_FINANCE_SEMANTIC_ADEQUACY_TAIL_ON_REMAINING_BOUNDARY_ONLY"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0
+  }
+}
