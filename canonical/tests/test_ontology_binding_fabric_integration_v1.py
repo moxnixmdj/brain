@@ -13,9 +13,9 @@ class OntologyFabricIntegrationTests(unittest.TestCase):
             "scope_id": "finance:regulatory-capital:2026",
             "entries": [
                 {
-                    "concept_id": "CET1",
-                    "preferred_label": "Common Equity Tier 1 capital",
-                    "alt_labels": ["capital cushion"],
+                    "concept_id": "CAPITAL_BUFFER_A",
+                    "preferred_label": "Primary capital buffer",
+                    "alt_labels": ["core capital cushion"],
                 },
                 {
                     "concept_id": "LCR",
@@ -27,7 +27,7 @@ class OntologyFabricIntegrationTests(unittest.TestCase):
         out = run({
             "payload": {
                 "mention_id": "m1",
-                "mention_surface": "capital cushion",
+                "mention_surface": "core capital cushion",
                 "scope_id": "finance:regulatory-capital:2026",
                 "ontology": ontology,
                 "expected_ontology_sha256": ontology_sha256(ontology),
@@ -36,7 +36,7 @@ class OntologyFabricIntegrationTests(unittest.TestCase):
         self.assertTrue(out["auto_routed"], out)
         self.assertEqual(out["mode"], "ONTOLOGY_BINDING")
         self.assertTrue(out["inner_pass"], out)
-        self.assertEqual(out["result"]["concept_id"], "CET1")
+        self.assertEqual(out["result"]["concept_id"], "CAPITAL_BUFFER_A")
         self.assertFalse(out["result"]["semantic_truth_authority"])
 
 
