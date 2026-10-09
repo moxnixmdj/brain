@@ -59,3 +59,7 @@ def test_exact_current_typed_specialist_cover_is_one_of_32():
     assert doc["deduction"]["p3_common_policy_can_close_on_current_unconstrained_typed_lattice"] is False
     assert doc["accounting"]["acceptance_credit_delta"] == 0
     assert doc["accounting"]["terminal_credit_delta"] == 0
+
+if __name__ == "__main__":
+    test_exact_current_typed_specialist_cover_is_one_of_32()
+    print("PASS 1/1")
