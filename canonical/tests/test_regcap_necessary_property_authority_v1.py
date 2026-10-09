@@ -67,8 +67,13 @@ class Tests(unittest.TestCase):
                 request(regcap.CCOB, "POSITION::ABOVE_REGULATORY_MINIMUM"),
                 repo_root=ROOT,
             )
+            amount = regcap.verify_property_request(
+                request(regcap.CCOB, "AMOUNT::2.5_PERCENT"),
+                repo_root=ROOT,
+            )
         self.assertTrue(cet1["pass"], cet1)
         self.assertTrue(above["pass"], above)
+        self.assertTrue(amount["pass"], amount)
 
     def test_ccyb_macroprudential_discriminators_are_authenticated(self):
         properties = [
