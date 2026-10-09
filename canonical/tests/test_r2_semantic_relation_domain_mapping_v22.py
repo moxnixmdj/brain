@@ -7,7 +7,7 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
-from canonical.runtime import cross_document_effect_semantic_lattice_v7 as l
+from canonical.runtime import cross_document_effect_semantic_lattice_v8 as l
 from canonical.runtime.certified_document_effect_field_edge_v1 import field_concept_id
 from canonical.runtime.semantic_relation_entailment_dag_v1 import (
     EVIDENCE_SCHEMA,
