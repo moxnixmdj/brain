@@ -1,0 +1,74 @@
+{
+  "schema": "PROJECT_BRAIN_R3_ZERO_RESIDUAL_TERMINAL_TRUTH_RECONCILIATION_V1",
+  "date": "2026-10-09",
+  "status": "RECONCILED__R3_NOT_CURRENT_TERMINAL_BLOCKER__TERMINAL_FRONTIER_UNCHANGED_OPEN",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "base_main_head": "b6aa4951ae007059ad2d39bcefd6d1f0e93656bb"
+  },
+  "exact_sources": {
+    "current_one_shot_reality_closure": {
+      "path": "canonical/governance/CURRENT_ONE_SHOT_REALITY_CLOSURE.json",
+      "git_blob_sha": "a83fae79967c4f277528a79c71152c205077c4e7"
+    },
+    "live_r3_provenance_deployment": {
+      "path": "canonical/verification/LIVE_R3_PROVENANCE_DEPLOYMENT_20261009_V1.json",
+      "git_blob_sha": "0e62ad2535fc163c708d3a9dedb7c79850a59596"
+    },
+    "current_r2_decision_intelligence": {
+      "path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+      "git_blob_sha": "02a031d0f2d6ce73cd13c5dcd341909ac54f0f5f"
+    },
+    "current_terminal_authority": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+      "git_blob_sha": "3ed1ac0effcbeff37fd5206b1d46649166f3b71f"
+    }
+  },
+  "proved_current_r3_state": {
+    "live_r3_internal_residual_zero": true,
+    "pending_improvement_count": 0,
+    "internal_unsolved": false,
+    "closure_status": "PASS__PROOF_CARRYING_REALITY_CLOSURE_FIXED_POINT",
+    "v1_status": "VERIFIED_INTERNAL_FIXED_POINT__IMPROVEMENT_QUEUE_EMPTY",
+    "residual_class": "NONE",
+    "historical_failure_retained_as_orphaned_telemetry": true,
+    "original_historical_failure_repaired": false,
+    "historical_failure_is_terminal_obligation": false
+  },
+  "terminal_reconciliation": {
+    "r3_is_current_terminal_blocker": false,
+    "r3_repair_or_recompute_is_primary_scheduler_job": false,
+    "current_primary_terminal_scheduler_object": "PROVE_ONE_SOUND_TERMINAL_ACCEPTANCE_ROUTE",
+    "current_r2_general_control_mechanism_closed": true,
+    "current_r2_remaining_problem_class": "POSITIVE_ADEQUACY_COVERAGE_AND_POLICY_CHANGING_OBSERVABILITY__NO_UNPROVED_EXTERNAL_SLEEP",
+    "terminal_remains_false": true,
+    "terminal_credit_delta": 0,
+    "checkpoint_credit_delta": 0,
+    "acceptance_credit_delta": 0
+  },
+  "scheduling_effect": {
+    "retire_stale_next_root": "RECOMPUTE_CURRENT_TERMINAL_TRUTH_FRONTIER_FROM_ACTUAL_LIVE_R3_ZERO_RESIDUAL_STATE",
+    "preserve": [
+      "STRICT_EXTERNALITY_PROOF_GATE",
+      "REPLAY_PROVENANCE_INVARIANT",
+      "DECISION_SUFFICIENT_CONTRACT_BEFORE_SYNTHESIS",
+      "MINIMUM_POLICY_CHANGING_INFORMATION_BEFORE_ACQUISITION"
+    ],
+    "next_primary_root": "FOLLOW_CURRENT_TERMINAL_AUTHORITY__PROVE_ONE_SOUND_TERMINAL_ACCEPTANCE_ROUTE"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_TERMINAL_TRUE",
+    "NO_CLAIM_R2_POSITIVE_ADEQUACY_COVERAGE_COMPLETE",
+    "NO_CLAIM_OPEN_ACCEPTANCE_OBLIGATIONS_CLOSED",
+    "NO_CLAIM_ORPHANED_HISTORICAL_FAILURE_WAS_REPAIRED",
+    "NO_TERMINAL_CREDIT",
+    "NO_CHECKPOINT_CREDIT",
+    "NO_ACCEPTANCE_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0,
+    "checkpoint_credit_delta": 0,
+    "acceptance_credit_delta": 0
+  }
+}
