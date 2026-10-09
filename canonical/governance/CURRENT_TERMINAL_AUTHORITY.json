@@ -1976,7 +1976,7 @@
     "cursorbench_absence_of_bound_v5_failure_is_adequacy_proof": false,
     "cursorbench_one_v5_pass_is_scope_complete_adequacy_proof": false,
     "cursorbench_selector_work_authorized_now": false,
-    "cursorbench_next_proof_object": "AUTHENTICATE_A_GENUINELY_BROADER_CONSTRUCTIVE_REGION_OR_ACQUIRE_TARGET_MEMBERSHIP_EVIDENCE_OR_ROUTE_A_SCORE_AUTHORITY__DO_NOT_REPEAT_STATIC_THREE_REGION_COMPLEMENT_ELIMINATION",
+    "cursorbench_next_proof_object": "ACQUIRE_TARGET_RELEVANT_MEMBERSHIP_OWNER_GRADER_OR_SCORE_AUTHORITY_FOR_THE_FIVE_EXISTING_REGIONS__ONLY_AUTHENTICATE_A_SIXTH_REGION_IF_IT_STRICTLY_ADDS_HIGH_YIELD_ADEQUACY_INFORMATION",
     "r2_sec_standard_xbrl_companyconcept_source_native_semantics_bound": true,
     "r2_sec_standard_xbrl_source_native_policy_adequacy_claimed": false,
     "cursorbench_advanced_coding_canonical_residual_count": 4,
@@ -2246,8 +2246,8 @@
       "BRAIN_FINITE_CANDIDATE_EXACT_ORACLE_SOLVER_V1",
       "BRAIN_ROBUST_FINITE_MULTI_INTERPRETATION_SOLVER_V1"
     ],
-    "cursorbench_current_constructive_region_union_count": 3,
-    "cursorbench_current_constructive_region_union_distinct_condition_atom_count": 18,
+    "cursorbench_current_constructive_region_union_count": 5,
+    "cursorbench_current_constructive_region_union_distinct_condition_atom_count": 34,
     "cursorbench_three_region_complement_nonidentifiability_proved": true,
     "cursorbench_current_static_evidence_identifies_three_region_complement_emptiness": false,
     "cursorbench_actual_three_region_complement_empty_claimed": false,
@@ -2266,7 +2266,8 @@
     "cursorbench_five_region_complement_emptiness_identified": false,
     "cursorbench_five_region_complement_nonemptiness_identified": false,
     "coding_v5_common_policy_certificate_ready": false,
-    "coding_whole_specification_cover_closed": false
+    "coding_whole_specification_cover_closed": false,
+    "cursorbench_three_region_frontier_superseded_by_five_region": true
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -2972,7 +2973,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 114,
+  "pointer_revision": 115,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
@@ -4336,6 +4337,35 @@
     "private_cursorbench_membership_delta": 0,
     "whole_cursorbench_cover_closed": false,
     "terminal_remains_false": true,
+    "terminal_credit_delta": 0
+  },
+  "cursorbench_legacy_current_region_alias_reconciliation_20261009_v1": {
+    "basis": {
+      "five_region_terminal_binding_commit": "2850a54e5c424633868303e12c242180827b3355",
+      "projection_path": "canonical/governance/CODING_SHARED_SPECIFICATION_COVERAGE_ONLY_SUCCESSOR_20261009_V4.json",
+      "projection_git_blob_sha": "36b0ead6db10f6aabb6ac8f873cceefbff16ca46",
+      "five_region_reconciliation_path": "canonical/governance/CURSORBENCH_FIVE_REGION_TERMINAL_RECONCILIATION_20261009_V1.json",
+      "five_region_reconciliation_git_blob_sha": "b47efd8db7ad799e503545ff4c41cb1890e52309"
+    },
+    "repaired_legacy_aliases": [
+      "live_truth.cursorbench_current_constructive_region_union_count",
+      "live_truth.cursorbench_current_constructive_region_union_distinct_condition_atom_count",
+      "live_truth.cursorbench_next_proof_object"
+    ],
+    "prior_values": {
+      "rev": 114,
+      "count": 3,
+      "atoms": 18,
+      "next": "AUTHENTICATE_A_GENUINELY_BROADER_CONSTRUCTIVE_REGION_OR_ACQUIRE_TARGET_MEMBERSHIP_EVIDENCE_OR_ROUTE_A_SCORE_AUTHORITY__DO_NOT_REPEAT_STATIC_THREE_REGION_COMPLEMENT_ELIMINATION"
+    },
+    "current_values": {
+      "count": 5,
+      "atoms": 34,
+      "next": "ACQUIRE_TARGET_RELEVANT_MEMBERSHIP_OWNER_GRADER_OR_SCORE_AUTHORITY_FOR_THE_FIVE_EXISTING_REGIONS__ONLY_AUTHENTICATE_A_SIXTH_REGION_IF_IT_STRICTLY_ADDS_HIGH_YIELD_ADEQUACY_INFORMATION"
+    },
+    "private_cursorbench_membership_delta": 0,
+    "whole_positive_cover_delta": 0,
+    "acceptance_credit_delta": 0,
     "terminal_credit_delta": 0
   }
 }
