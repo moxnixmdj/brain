@@ -1,0 +1,167 @@
+{
+  "schema": "PROJECT_BRAIN_CURSORBENCH_TYPED_ACCEPTANCE_MEMBERSHIP_MECHANISM_COMPLETE_RECONCILIATION_V1",
+  "date": "2026-10-09",
+  "status": "MECHANISM_COMPLETE__FIVE_ATOM_SPECIALIST_MEMBERSHIP_HAS_NO_REMAINING_IMPLEMENTATION_GAP__REAL_TARGET_RELEVANT_EVIDENCE_STILL_OPEN__ZERO_CREDIT",
+  "target_predicate": "CODING_CURSORBENCH_GE_57_8",
+  "behavior_id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+  "policy_id": "BRAIN_INDEPENDENT_ACCEPTANCE_MODEL_TYPED_PLAN_V1",
+  "policy": {
+    "certificate": {
+      "path": "canonical/governance/CURSORBENCH_TYPED_ACCEPTANCE_PLAN_POLICY_ADEQUACY_CERTIFICATE_20261009_V2.json",
+      "git_blob_sha": "bddb8f51f6dc91f98759c5c3b92c1257ca8b9577"
+    },
+    "binding": {
+      "path": "canonical/governance/CURSORBENCH_TYPED_ACCEPTANCE_PLAN_POLICY_ADEQUACY_BINDING_20261009_V1.json",
+      "git_blob_sha": "f385b555064e546e90c04c285053c9717014fa8a"
+    },
+    "condition_atom_count": 5,
+    "membership_self_certified": false,
+    "whole_behavior_adequacy": false,
+    "whole_cursorbench_adequacy": false
+  },
+  "atom_mechanisms": {
+    "SPEC_ACCEPT_SUPPORTED_TRANSFORM_KINDS_ONLY_V1": {
+      "mode": "EXACT_MODEL_STRUCTURAL_PROOF",
+      "activation": {
+        "path": "canonical/governance/CURSORBENCH_SUPPORTED_TRANSFORM_STRUCTURAL_AUTO_REFINEMENT_ACTIVATION_20261009_V1.json",
+        "git_blob_sha": "f52447f2941736f81aea304568ab15c9af475833"
+      },
+      "verification": {
+        "path": "canonical/verification/CURSORBENCH_SUPPORTED_TRANSFORM_STRUCTURAL_AUTO_REFINEMENT_INDEPENDENT_VERIFICATION_20261009_V1.json",
+        "git_blob_sha": "98e15b25d380dff0bcb2fea5b915c4d3b2d602f7"
+      },
+      "real_external_receipt_required_after_exact_model_exists": false
+    },
+    "SPEC_ACCEPT_TYPED_SEMANTICS_BOUND_V1": {
+      "mode": "LOSSLESS_SOURCE_TO_MODEL_COVERAGE_AUDIT",
+      "shared_mechanism_with": ["SPEC_ACCEPT_FAILURE_MODE_COMPLETENESS_V1"],
+      "activation": {
+        "path": "canonical/governance/CURSORBENCH_SOURCE_COVERAGE_ATOMS_ACTIVATION_20261009_V1.json",
+        "git_blob_sha": "2008028041450cdba9a8ad291d56d64c6a1429bf"
+      },
+      "verification": {
+        "path": "canonical/verification/CURSORBENCH_SOURCE_COVERAGE_ATOMS_INDEPENDENT_VERIFICATION_20261009_V1.json",
+        "git_blob_sha": "cc0795464a18326643c11494bcc7a93144ccd9b9"
+      },
+      "real_target_relevant_receipt_bound": false
+    },
+    "SPEC_ACCEPT_FAILURE_MODE_COMPLETENESS_V1": {
+      "mode": "LOSSLESS_SOURCE_TO_MODEL_COVERAGE_AUDIT",
+      "shared_mechanism_with": ["SPEC_ACCEPT_TYPED_SEMANTICS_BOUND_V1"],
+      "activation": {
+        "path": "canonical/governance/CURSORBENCH_SOURCE_COVERAGE_ATOMS_ACTIVATION_20261009_V1.json",
+        "git_blob_sha": "2008028041450cdba9a8ad291d56d64c6a1429bf"
+      },
+      "verification": {
+        "path": "canonical/verification/CURSORBENCH_SOURCE_COVERAGE_ATOMS_INDEPENDENT_VERIFICATION_20261009_V1.json",
+        "git_blob_sha": "cc0795464a18326643c11494bcc7a93144ccd9b9"
+      },
+      "real_target_relevant_receipt_bound": false
+    },
+    "SPEC_ACCEPT_DEPENDENCY_PROVENANCE_TRUTH_V1": {
+      "mode": "CONTENT_ADDRESSED_PRODUCER_INDEPENDENT_DEPENDENCY_PROVENANCE_AUDIT",
+      "activation": {
+        "path": "canonical/governance/CURSORBENCH_DEPENDENCY_PROVENANCE_ATOM_ACTIVATION_20261009_V1.json",
+        "git_blob_sha": "3691f7e499146b6e42c9608fe585d1c7a5779f55"
+      },
+      "verification": {
+        "path": "canonical/verification/CURSORBENCH_DEPENDENCY_PROVENANCE_ATOM_INDEPENDENT_VERIFICATION_20261009_V1.json",
+        "git_blob_sha": "59daf292a30f83557dfb05dcf1f72670a1d3b85d"
+      },
+      "real_target_relevant_receipt_bound": false
+    },
+    "SPEC_ACCEPT_NO_HIDDEN_VERIFIER_ACCESS_V1": {
+      "mode": "CONTENT_ADDRESSED_PREVERIFIER_INFORMATION_BOUNDARY_AUDIT",
+      "activation": {
+        "path": "canonical/governance/CURSORBENCH_PREVERIFIER_INFORMATION_BOUNDARY_ATOM_ACTIVATION_20261009_V1.json",
+        "git_blob_sha": "821b3714c444992177eec6ef8e1cc69630a2efaf"
+      },
+      "verification": {
+        "path": "canonical/verification/CURSORBENCH_PREVERIFIER_INFORMATION_BOUNDARY_ATOM_INDEPENDENT_VERIFICATION_20261009_V1.json",
+        "git_blob_sha": "8a9f85f2a18e7c861bca950ba8b6e3f18c63d94f"
+      },
+      "real_target_relevant_receipt_bound": false
+    }
+  },
+  "composition": {
+    "conditioned_registry": {
+      "path": "canonical/runtime/p3_conditioned_policy_adequacy_registry_v1.py",
+      "git_blob_sha": "f262ee591c3c2f01c0bace5fdb4ff2cf5acbba67"
+    },
+    "p3_front_door": {
+      "path": "canonical/runtime/p3_robust_policy_adequacy_cegar_v1.py",
+      "git_blob_sha": "6976c0d79d3c9ff56f387353ea2ab443b3a40e9e"
+    },
+    "end_to_end_test": {
+      "path": "canonical/tests/test_cursorbench_route_b_end_to_end_membership_composition_v1.py",
+      "git_blob_sha": "638479e301306a92a95ae86bfd09dda811d021f7"
+    },
+    "proved": [
+      "A_COMPLETE_SYNTHETIC_EVIDENCE_BUNDLE_PROVES_ALL_FIVE_ATOMS_THROUGH_THE_REAL_REGISTRY_PATH",
+      "THE_EXISTING_REGISTERED_SPECIALIST_IS_SELECTED_BY_THE_REAL_P3_FRONT_DOOR",
+      "REMOVING_ONE_REAL_EVIDENCE_BUNDLE_PREVENTS_SPECIALIST_SELECTION",
+      "CORRUPTING_ONE_REAL_EVIDENCE_BUNDLE_FAILS_CLOSED_BEFORE_POLICY_SELECTION",
+      "NO_NEW_ADEQUACY_POLICY_OR_SELECTOR_IS_REQUIRED_AFTER_THE_FIVE_ATOMS_ARE_AUTHENTICATED"
+    ],
+    "p3_common_policy_status": "COMMON_POLICY_CERTIFIED_ACROSS_ALL_SURVIVING_MODELS",
+    "selected_policy_id": "BRAIN_INDEPENDENT_ACCEPTANCE_MODEL_TYPED_PLAN_V1",
+    "terminal_authority": false
+  },
+  "mechanism_accounting": {
+    "condition_atom_count": 5,
+    "distinct_proof_mechanism_count": 4,
+    "structurally_provable_atom_count_after_exact_model_exists": 1,
+    "real_evidence_gated_atom_count": 4,
+    "real_evidence_bundle_count_for_four_atoms": 3,
+    "missing_implementation_mechanism_count": 0
+  },
+  "exact_next_real_evidence_object": {
+    "id": "CURSORBENCH_TARGET_RELEVANT_TYPED_ACCEPTANCE_EVIDENCE_BUNDLE_V1",
+    "components": [
+      "ONE_EXACT_TARGET_RELEVANT_TYPED_ACCEPTANCE_MODEL",
+      "ONE_CONTENT_ADDRESSED_LOSSLESS_RAW_TASK_CONTRACT_FOR_THE_SAME_CONTEXT",
+      "ONE_INDEPENDENT_SOURCE_TO_MODEL_COVERAGE_AUDIT_PROVING_TYPED_SEMANTICS_AND_FAILURE_MODE_COMPLETENESS",
+      "ONE_PRODUCER_INDEPENDENT_DEPENDENCY_PROVENANCE_AUDIT_FOR_THE_EXACT_MODEL",
+      "ONE_PREVERIFIER_INFORMATION_BOUNDARY_RECEIPT_AND_INDEPENDENT_VERIFICATION_FOR_THE_EXACT_MODEL"
+    ],
+    "automatic_after_components_exist": [
+      "SUPPORTED_TRANSFORM_ATOM_RECOMPUTES_FROM_EXACT_MODEL_STRUCTURE",
+      "REGISTRY_ADDS_ALL_FIVE_PROVED_ATOMS_TO_THE_DECISION_BASIS",
+      "P3_REUSES_THE_EXISTING_AUTHENTICATED_SPECIALIST_POLICY_WITHOUT_NEW_ADEQUACY_SYNTHESIS"
+    ],
+    "does_not_by_itself_prove": [
+      "WHOLE_CURSORBENCH_SCOPE_POSITIVE_COVER",
+      "CURSORBENCH_SCORE_GE_57_8",
+      "ADVANCED_AGENTIC_CODING_FAMILY_OWNERSHIP",
+      "TERMINAL_GOAL"
+    ]
+  },
+  "scheduler": [
+    "DELETE_ALL_FURTHER_TYPED_ACCEPTANCE_MEMBERSHIP_MECHANISM_IMPLEMENTATION_WORK.",
+    "DO_NOT_BUILD_A_NEW_SELECTOR_GENERAL_SEMANTIC_PARSER_OR_DUPLICATE_ADEQUACY_POLICY_FOR_THIS_SPECIALIST.",
+    "WORK_ONLY_ON_REAL_TARGET_RELEVANT_EVIDENCE_ACQUISITION_FOR_THE_THREE_EVIDENCE_BUNDLES_OR_ON_A_STRONGER_COMMON_V5_POLICY_PROOF.",
+    "IF_EXACT_CURSORBENCH_4_0_SCORING_AUTHORITY_APPEARS_RECOMPUTE_ROUTE_A_IMMEDIATELY.",
+    "AFTER_ONE_REAL_SPECIALIST_REGION_IS_AUTHENTICATED_RECOMPUTE_THE_REMAINING_SCOPE_COVER_BEFORE_CREATING_MORE_REGIONS."
+  ],
+  "hard_nonclaims": [
+    "NO_REAL_HIDDEN_CURSORBENCH_TASK_IS_PROVED_TO_SATISFY_THE_FIVE_ATOM_CONDITION.",
+    "NO_REAL_TARGET_RELEVANT_THREE_BUNDLE_EVIDENCE_OBJECT_EXISTS_YET.",
+    "NO_WHOLE_SPECIFICATION_RESIDUAL_CLOSURE.",
+    "NO_WHOLE_CURSORBENCH_POSITIVE_ADEQUACY_OR_DOMINANCE.",
+    "NO_CURSORBENCH_SCORE_ACCEPTANCE_FAMILY_OWNERSHIP_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
