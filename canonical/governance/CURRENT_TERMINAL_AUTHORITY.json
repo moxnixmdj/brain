@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V36",
   "date": "2026-10-09",
-  "status": "ACTIVE_FAIL_CLOSED_REAL_MISSION_BOUND__STRICT_EXTERNALITY_RECONCILED__R3_ZERO_RESIDUAL_RECONCILED__OPUS_5_5_CHECKPOINT_TERMINAL_FALSE__CURRENT_R2_V60_AND_CODING_V3_PROJECTION_BOUND__COVERAGE_R1_R4_LIVE_BINDING_REPAIRED__CLAIM_SCOPED_COMPLETENESS_THEOREM_BOUND__ROOT_NAMESPACE_COLLISION_GUARDED__EXECUTABLE_REFINEMENT_STRUCTURAL_ANTI_BYPASS__RUNTIME_REBIND_CENSUS_PENDING",
+  "status": "ACTIVE_FAIL_CLOSED_REAL_MISSION_BOUND__STRICT_EXTERNALITY_RECONCILED__R3_ZERO_RESIDUAL_RECONCILED__OPUS_5_5_CHECKPOINT_TERMINAL_FALSE__CURRENT_R2_V60_AND_CODING_V3_PROJECTION_BOUND__COVERAGE_R1_R4_LIVE_BINDING_REPAIRED__CLAIM_SCOPED_COMPLETENESS_THEOREM_BOUND__ROOT_NAMESPACE_COLLISION_GUARDED__EXECUTABLE_REFINEMENT_STRUCTURAL_ANTI_BYPASS__RUNTIME_BYTE_BINDING_COHERENT__EXECUTABLE_REFINEMENT_SEMANTIC_CLOSURE_OPEN",
   "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "authoritative_sources": {
     "universal_escape_resolver_v2_active_planning_overlay": {
@@ -1336,7 +1336,7 @@
     },
     "executable_refinement_terminal_dependency_graph": {
       "path": "canonical/governance/CURRENT_TERMINAL_DEPENDENCY_GRAPH_V1.json",
-      "git_blob_sha": "230ce131bd171f13c9cf9af539f9d373fe8748aa",
+      "git_blob_sha": "531b9a395f59c37a105a47252182de34d55825ec",
       "note": "STRUCTURAL_DEPENDENCY_INVENTORY__GRAPH_COMPLETENESS_NOT_SELF_PROVED__ZERO_TERMINAL_CREDIT"
     },
     "executable_refinement_structural_verifier": {
@@ -1358,6 +1358,11 @@
       "path": "canonical/verification/CURRENT_RUNTIME_BYTE_REBIND_PROOF_20261009_V1.json",
       "git_blob_sha": "f6392c5bef845e4f97a94cd5754afac88c4a34c7",
       "note": "EXACT_OLD_TO_CURRENT_RUNTIME_BINDING_JUSTIFICATION__BYTE_COHERENCE_ONLY__ZERO_TERMINAL_CREDIT"
+    },
+    "current_authority_runtime_binding_census_result": {
+      "path": "canonical/verification/CURRENT_AUTHORITY_RUNTIME_BINDING_CENSUS_REBASED_VERIFY_20261009_V1.json",
+      "git_blob_sha": "b51d107ce4230a60db2866a3e519a3d9c840eb59",
+      "note": "EXACT_REBASED_GIT_TREE_CENSUS__ZERO_DRIFT_ZERO_MISSING_ZERO_CONFLICTS__BYTE_COHERENCE_ONLY"
     }
   },
   "live_truth": {
@@ -2182,10 +2187,19 @@
     "non_selected_runtime_executable_refinement_coverage_closed": false,
     "executable_refinement_semantic_proof_route_closed": false,
     "executable_refinement_missing_is_external_impossibility": false,
-    "current_authority_runtime_byte_binding_coherence": false,
-    "current_authority_runtime_binding_classification": "INTERNAL_RECHECK_REQUIRED__JUSTIFIED_REBINDS_APPLIED__EXACT_TREE_CENSUS_PENDING",
+    "current_authority_runtime_byte_binding_coherence": true,
+    "current_authority_runtime_binding_classification": "PASS__CURRENT_RUNTIME_BYTE_BINDINGS_COHERENT__SEMANTIC_REFINEMENT_AND_R1_FULL_LIFECYCLE_REPLAY_SEPARATE",
     "current_authority_runtime_drift_is_external_impossibility": false,
-    "r1_current_byte_drift_lock_valid": false
+    "r1_current_byte_drift_lock_valid": false,
+    "current_authority_runtime_binding_reference_count": 50,
+    "current_authority_runtime_current_binding_count": 48,
+    "current_authority_runtime_superseded_binding_count": 2,
+    "current_authority_runtime_unique_path_count": 42,
+    "current_authority_runtime_drift_reference_count": 0,
+    "current_authority_runtime_drift_unique_path_count": 0,
+    "current_authority_runtime_missing_blob_binding_count": 0,
+    "current_authority_runtime_missing_file_count": 0,
+    "current_authority_runtime_conflicting_path_count": 0
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -2904,7 +2918,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 110,
+  "pointer_revision": 111,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
@@ -4155,10 +4169,14 @@
     "semantic_proof_route_closed": false,
     "non_selected_runtime_refinement_coverage_closed": false,
     "runtime_byte_rebind_proof_bound": true,
-    "current_authority_runtime_byte_binding_coherence": false,
-    "current_authority_runtime_binding_census_pending": true,
+    "current_authority_runtime_byte_binding_coherence": true,
+    "current_authority_runtime_binding_census_pending": false,
     "external_impossibility_claimed": false,
     "incremental_spend_usd": 0,
-    "terminal_credit_delta": 0
+    "terminal_credit_delta": 0,
+    "current_authority_runtime_binding_census_verified": true,
+    "current_authority_runtime_drift_reference_count": 0,
+    "current_authority_runtime_missing_blob_binding_count": 0,
+    "current_authority_runtime_conflicting_path_count": 0
   }
 }
