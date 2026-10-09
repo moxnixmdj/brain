@@ -150,6 +150,86 @@ def _unwrap_live_runtime(wrapper: Mapping[str, Any], inner_key: str) -> dict[str
     return out
 
 
+AUTO_ONE_SHOT_R2_META_ACTIONS = frozenset({
+    "REPAIR_OR_EXPAND_VERIFIABLE_ADEQUACY_COVER",
+})
+
+
+def _auto_one_shot_gate(
+    *,
+    auto_routed: bool,
+    mode: str,
+    out: Mapping[str, Any] | None,
+    options: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Require a current-task durable retry binding before automatic one-shot."""
+    if options.get("auto_one_shot", True) is False:
+        return {"eligible": False, "reason": "DISABLED_BY_REQUEST"}
+    if not auto_routed:
+        return {"eligible": False, "reason": "AUTO_ROUTE_REQUIRED"}
+    if mode != "ADEQUATE_DECISION":
+        return {"eligible": False, "reason": "ADEQUATE_DECISION_REQUIRED"}
+    if not isinstance(out, Mapping) or out.get("pass") is True:
+        return {"eligible": False, "reason": "UNRESOLVED_DECISION_REQUIRED"}
+    if out.get("r2_meta_action") not in AUTO_ONE_SHOT_R2_META_ACTIONS:
+        return {"eligible": False, "reason": "R2_INTERNAL_REPAIR_META_ACTION_REQUIRED"}
+
+    runtime = out.get("_live_runtime")
+    learning = runtime.get("learning") if isinstance(runtime, Mapping) else None
+    diagnosis = learning.get("diagnosis") if isinstance(learning, Mapping) else None
+    fingerprint = (
+        str(diagnosis.get("failure_fingerprint") or "").strip()
+        if isinstance(diagnosis, Mapping)
+        else ""
+    )
+    retry_sha = (
+        str(learning.get("retry_capsule_sha256") or "").strip()
+        if isinstance(learning, Mapping)
+        else ""
+    )
+    if (
+        not isinstance(learning, Mapping)
+        or learning.get("pass") is not False
+        or not fingerprint
+        or not retry_sha
+    ):
+        return {
+            "eligible": False,
+            "reason": "CURRENT_TASK_DURABLE_RETRY_BINDING_REQUIRED",
+        }
+    return {
+        "eligible": True,
+        "reason": "CURRENT_TASK_INTERNAL_REPAIR_GAP_WITH_DURABLE_RETRY",
+        "failure_fingerprint": fingerprint,
+        "retry_capsule_sha256": retry_sha,
+        "improvement_work_id": learning.get("improvement_work_id"),
+    }
+
+
+def _verified_decision_replay_from_repairs(
+    receipts: list[dict[str, Any]],
+) -> dict[str, Any] | None:
+    """Accept only a repair-cycle replay that independently re-verifies the task."""
+    for receipt in reversed(receipts):
+        if (
+            receipt.get("pass") is not True
+            or receipt.get("status") != "REPAIR_VERIFIED_BY_ORIGINAL_OBLIGATION_REPLAY"
+        ):
+            continue
+        replay = receipt.get("original_replay")
+        if not isinstance(replay, Mapping) or replay.get("pass") is not True:
+            continue
+        decision = replay.get("decision_output")
+        if (
+            not isinstance(decision, Mapping)
+            or decision.get("pass") is not True
+            or decision.get("actual_goal_satisfaction_verified") is not True
+        ):
+            continue
+        return _unwrap_live_runtime(replay, "decision_output")
+    return None
+
+
 def _auto_mode(payload: Mapping[str, Any], options: Mapping[str, Any]) -> str:
     """Select only structurally unambiguous fabric routes; otherwise fail closed."""
     keys = set(payload)
@@ -827,13 +907,25 @@ def run(
             except Exception as exc:
                 direct_learning_error = type(exc).__name__ + ":" + str(exc)
 
+        auto_one_shot_gate = _auto_one_shot_gate(
+            auto_routed=auto_routed,
+            mode=mode,
+            out=out if isinstance(out, Mapping) else None,
+            options=options,
+        )
+        repair_replay_receipts: list[dict[str, Any]] = []
+
         autonomous_failure_repair_provider = None
-        if capability_expander is not None or bool(options.get("repair_components")):
+        if (
+            capability_expander is not None
+            or bool(options.get("repair_components"))
+            or auto_one_shot_gate.get("eligible") is True
+        ):
             def _autonomous_repair_pending(work: Mapping[str, Any]) -> Mapping[str, Any]:
                 payload_row = work.get("payload")
                 if not isinstance(payload_row, Mapping):
                     raise CognitiveFabricError("R3_REPAIR_WORK_PAYLOAD_INVALID")
-                return live_runtime.execute_failure_repair_cycle(
+                repaired = live_runtime.execute_failure_repair_cycle(
                     {
                         "failure_fingerprint": payload_row.get("failure_fingerprint"),
                         "retry_capsule_sha256": payload_row.get("retry_capsule_sha256"),
@@ -850,6 +942,9 @@ def run(
                     proposal_provider=proposal_provider,
                     capability_expander=capability_expander,
                 )
+                if isinstance(repaired, Mapping):
+                    repair_replay_receipts.append(deepcopy(dict(repaired)))
+                return repaired
 
             autonomous_failure_repair_provider = _autonomous_repair_pending
 
@@ -884,6 +979,64 @@ def run(
             else None
         )
 
+        auto_one_shot = {
+            "eligible": auto_one_shot_gate.get("eligible") is True,
+            "attempted": False,
+            "reason": auto_one_shot_gate.get("reason"),
+            "recovered_by_original_replay": False,
+            "terminal_authority": False,
+        }
+
+        recovered = _verified_decision_replay_from_repairs(repair_replay_receipts)
+        if recovered is not None:
+            out = recovered
+            auto_one_shot["reason"] = "NORMAL_REPAIR_REPLAY_CLOSED"
+            auto_one_shot["recovered_by_original_replay"] = True
+        elif (
+            auto_one_shot_gate.get("eligible") is True
+            and isinstance(out, Mapping)
+            and out.get("pass") is not True
+        ):
+            closure = one_shot_reality_closure.run(
+                repo_root=ROOT,
+                state_path=options.get("state_path"),
+                verification_frontier_acquisition_provider=(
+                    verification_frontier_acquisition_provider
+                ),
+                verification_frontier_acquisition_provider_id=(
+                    verification_frontier_acquisition_provider_id
+                ),
+                failure_repair_provider=autonomous_failure_repair_provider,
+                externality_certificate_provider=(
+                    one_shot_externality_certificate_provider
+                ),
+                capability_synthesis_provider=(
+                    one_shot_capability_synthesis_provider
+                ),
+                evidence_acquisition_provider=(
+                    one_shot_evidence_acquisition_provider
+                ),
+                max_repair_rounds=int(options.get("one_shot_max_repair_rounds", 8)),
+                v1_max_rounds=int(options.get("one_shot_v1_max_rounds", 64)),
+                v1_max_actions_per_round=int(
+                    options.get("one_shot_v1_max_actions_per_round", 32)
+                ),
+            )
+            auto_one_shot.update({
+                "attempted": True,
+                "reason": "PROOF_CARRYING_ONE_SHOT_EXECUTED",
+                "closure_status": closure.get("status"),
+                "closure_pass": closure.get("pass") is True,
+                "closure_fixed_point": closure.get("fixed_point") is True,
+                "closure": deepcopy(dict(closure)),
+            })
+            recovered = _verified_decision_replay_from_repairs(
+                repair_replay_receipts
+            )
+            if recovered is not None:
+                out = recovered
+                auto_one_shot["recovered_by_original_replay"] = True
+
         return {
             "schema": SCHEMA,
             "status": "FABRIC_DISPATCH_COMPLETE",
@@ -901,6 +1054,7 @@ def run(
             ),
             "compounding_tick": deepcopy(compounding_tick),
             "episode_compounding_tick": deepcopy(episode_compounding_tick),
+            "auto_one_shot": deepcopy(auto_one_shot),
             "single_front_door": True,
             "terminal_authority": False,
             "terminal_credit_delta": 0,
