@@ -651,8 +651,8 @@
     },
     "frozen_19_acceptance_proof_shape_quotient": {
       "path": "canonical/governance/FROZEN_19_ACCEPTANCE_PROOF_SHAPE_QUOTIENT_20261007_V1.json",
-      "git_blob_sha": "8a644570e5f02852da253abf1c0e8012b87af34e",
-      "note": "13_INDEPENDENT_OPEN_EVIDENCE_OBLIGATIONS__CURRENT_AA_BRIEFCASE_1807_AND_GDPVAL_AA_1866_MATCHED_EPOCH_TARGETS_BOUND__HISTORICAL_PREDICATE_IDS_PRESERVED"
+      "git_blob_sha": "b20c5cd6965f7ea7e5ca019d1e828ac6eced042c",
+      "note": "13_INDEPENDENT_OPEN_EVIDENCE_OBLIGATIONS__CURRENT_AA_BRIEFCASE_1807__GDPVAL_AA_1866__FRONTIERCODE_54_64_AND_HARNESS_COMPARABILITY_BOUND__HISTORICAL_PREDICATE_IDS_PRESERVED"
     },
     "load_bearing_acceptance_truth_basis_reconciliation": {
       "path": "canonical/governance/FROZEN_19_LOAD_BEARING_ACCEPTANCE_TRUTH_BASIS_RECONCILIATION_20261007_V1.json",
@@ -2840,7 +2840,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 107,
+  "pointer_revision": 108,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
@@ -4049,6 +4049,24 @@
     "authenticated_constructive_region_count_after": 2,
     "private_cursorbench_membership_delta": 0,
     "whole_cursorbench_cover_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "acceptance_quotient_provenance_reconciliation_20261009_v1": {
+    "status": "EXACT_CURRENT_QUOTIENT_BLOB_REBOUND__SEMANTICS_UNCHANGED__ZERO_CREDIT",
+    "path": "canonical/governance/FROZEN_19_ACCEPTANCE_PROOF_SHAPE_QUOTIENT_20261007_V1.json",
+    "prior_bound_git_blob_sha": "8a644570e5f02852da253abf1c0e8012b87af34e",
+    "current_git_blob_sha": "b20c5cd6965f7ea7e5ca019d1e828ac6eced042c",
+    "reason": "LIVE_TERMINAL_AUTHORITY_BOUND_AN_OLDER_QUOTIENT_GENERATION_AFTER_FRONTIERCODE_HARNESS_COMPARABILITY_TRUTH_REPAIR_CHANGED_THE_CURRENT_QUOTIENT_BYTES",
+    "current_truth": {
+      "independent_open_evidence_obligations": 13,
+      "accepted_family_count": 7,
+      "acceptance_open_family_count": 12,
+      "frontiercode_current_owner_target_percent": 54.64,
+      "frontiercode_literal_same_harness_required": false,
+      "frontiercode_brain_harness_requirement": "OWNER_ADMISSIBLE_OR_SEPARATELY_PROVED_PROTOCOL_EQUIVALENT"
+    },
+    "semantic_credit_delta": 0,
     "acceptance_credit_delta": 0,
     "terminal_credit_delta": 0
   }
