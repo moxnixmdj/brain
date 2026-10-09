@@ -29,7 +29,7 @@ def condition():
 
 
 class P3VisibleAcceptanceContractRegistryV1Tests(unittest.TestCase):
-    def test_catalog_binds_verified_fifth_region(self):
+    def test_catalog_binds_verified_sixth_region(self):
         out = registry.catalog()
         self.assertEqual(out["policy_count"], 6)
         by_id = {row["policy_id"]: row for row in out["policies"]}
