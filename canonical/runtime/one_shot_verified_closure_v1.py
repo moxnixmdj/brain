@@ -79,6 +79,53 @@ def _safe_file_digest(root: Path, relative: str) -> dict[str, Any]:
     }
 
 
+def _r2_authority_snapshot(root: Path) -> dict[str, Any]:
+    relative = "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json"
+    target = (root / relative).resolve(strict=True)
+    target.relative_to(root)
+    raw = target.read_bytes()
+    doc = json.loads(raw.decode("utf-8"))
+    if not isinstance(doc, Mapping):
+        raise OneShotClosureError("CURRENT_R2_AUTHORITY_NOT_OBJECT")
+    cells = doc.get("current_cell_classifications")
+    residuals: list[dict[str, Any]] = []
+    if isinstance(cells, Mapping):
+        for cell_id, row in cells.items():
+            if not isinstance(row, Mapping):
+                continue
+            state = str(row.get("state") or "")
+            if (
+                "INTERNAL_UNSOLVED" not in state
+                and "PENDING_ACQUISITION_OR_EXPERIMENT" not in state
+            ):
+                continue
+            positive = row.get("verified_positive_subregions")
+            positive_ids = []
+            if isinstance(positive, list):
+                positive_ids = sorted(
+                    str(x.get("id") or "")
+                    for x in positive
+                    if isinstance(x, Mapping) and str(x.get("id") or "")
+                )
+            residuals.append({
+                "cell_id": str(cell_id),
+                "state": state,
+                "required_action": row.get("required_action"),
+                "remaining_boundary": row.get("remaining_boundary"),
+                "wake_on": deepcopy(list(row.get("wake_on") or [])),
+                "verified_positive_subregion_ids": positive_ids,
+            })
+    residuals.sort(key=lambda x: x["cell_id"])
+    return {
+        "path": relative,
+        "current_r2_sha256": sha256(raw).hexdigest(),
+        "status": doc.get("status"),
+        "scheduler_cut": deepcopy(doc.get("scheduler_cut")),
+        "internal_residuals": residuals,
+        "residual_digest": _sha(residuals),
+    }
+
+
 def frontier_snapshot(
     *,
     repo_root: str | Path,
@@ -143,6 +190,7 @@ def frontier_snapshot(
         "files": files,
         "pending": sorted(pending, key=lambda x: (x["kind"], x["work_id"])),
         "stats": deepcopy(state.get("stats", {})),
+        "r2_authority": _r2_authority_snapshot(root),
     }
     return {
         "schema": SCHEMA,
@@ -319,6 +367,10 @@ def run(
     failure_repair_provider: Callable[
         [Mapping[str, Any]], Mapping[str, Any]
     ] | None = None,
+    r2_coverage_provider: Callable[
+        [Mapping[str, Any]], Mapping[str, Any] | None
+    ] | None = None,
+    r2_coverage_provider_id: str = "ONE_SHOT_R2_COVERAGE_PROVIDER",
     externality_certificate_provider: Callable[
         [Mapping[str, Any]], Mapping[str, Any] | None
     ] | None = None,
@@ -344,6 +396,7 @@ def run(
     initial = frontier_snapshot(repo_root=repo_root, state_path=state_path)
     final = initial
     final_blockers: list[dict[str, Any]] = []
+    attempted_r2_frontiers: set[str] = set()
 
     for round_index in range(max_rounds):
         before = frontier_snapshot(repo_root=repo_root, state_path=state_path)
@@ -397,6 +450,101 @@ def run(
         final_blockers = blockers
 
         pending = after["payload"]["pending"]
+        r2_authority = after["payload"].get("r2_authority") or {}
+        r2_residuals = list(r2_authority.get("internal_residuals") or [])
+        if not pending and r2_residuals:
+            attempt_key = _sha({
+                "provider_id": r2_coverage_provider_id,
+                "current_r2_sha256": r2_authority.get("current_r2_sha256"),
+                "residual_digest": r2_authority.get("residual_digest"),
+            })
+            if (
+                r2_coverage_provider is None
+                or attempt_key in attempted_r2_frontiers
+            ):
+                return {
+                    "schema": SCHEMA,
+                    "status": "OPEN__R2_INTERNAL_UNSOLVED_GAP_REMAINS",
+                    "pass": False,
+                    "fixed_point": True,
+                    "closure_class": "R2_INTERNAL_UNSOLVED__COVERAGE_OR_OBSERVABILITY",
+                    "initial_frontier_digest": initial["digest"],
+                    "final_frontier_digest": after["digest"],
+                    "final_state_sha256": after["state_sha256"],
+                    "rounds_executed": round_index + 1,
+                    "transcript": transcript,
+                    "r2_authority": deepcopy(r2_authority),
+                    "residual": {
+                        "class": "R2_INTERNAL_UNSOLVED__COVERAGE_OR_OBSERVABILITY",
+                        "internally_solvable_gap_remaining": True,
+                        "internal_unsolved": True,
+                        "r2_internal_residuals": deepcopy(r2_residuals),
+                    },
+                    "verified_goal_satisfied_or_irreducible_external_only": False,
+                    "internal_improvement_queue_closed": True,
+                    "irreducible_external_information_proved": False,
+                    "terminal_authority": False,
+                }
+            attempted_r2_frontiers.add(attempt_key)
+            request = {
+                "schema": SCHEMA,
+                "request": "EXPAND_OR_REPAIR_CANONICAL_R2_ADEQUACY_COVERAGE",
+                "provider_id": r2_coverage_provider_id,
+                "r2_authority": deepcopy(r2_authority),
+                "candidate_generation_authority": False,
+                "semantic_truth_authority": False,
+                "promotion_authority": False,
+                "terminal_authority": False,
+            }
+            provider_error = None
+            try:
+                provider_result = r2_coverage_provider(deepcopy(request))
+            except Exception as exc:
+                provider_result = None
+                provider_error = type(exc).__name__ + ":" + str(exc)
+            post = frontier_snapshot(repo_root=repo_root, state_path=state_path)
+            post_r2 = post["payload"].get("r2_authority") or {}
+            authority_changed = (
+                post_r2.get("current_r2_sha256")
+                != r2_authority.get("current_r2_sha256")
+            )
+            residual_changed = (
+                post_r2.get("residual_digest")
+                != r2_authority.get("residual_digest")
+            )
+            transcript.append({
+                "round": round_index,
+                "action": "R2_COVERAGE_PROVIDER",
+                "provider_id": r2_coverage_provider_id,
+                "authority_changed": authority_changed,
+                "residual_changed": residual_changed,
+                "provider_result": (
+                    deepcopy(dict(provider_result))
+                    if isinstance(provider_result, Mapping) else None
+                ),
+                "provider_error": provider_error,
+            })
+            if not authority_changed or not residual_changed:
+                return {
+                    "schema": SCHEMA,
+                    "status": "OPEN__R2_COVERAGE_PROVIDER_DID_NOT_ADVANCE_CANONICAL_RESIDUAL",
+                    "pass": False,
+                    "fixed_point": True,
+                    "closure_class": "R2_INTERNAL_UNSOLVED__COVERAGE_PROVIDER_NO_VERIFIED_PROGRESS",
+                    "initial_frontier_digest": initial["digest"],
+                    "final_frontier_digest": post["digest"],
+                    "final_state_sha256": post["state_sha256"],
+                    "rounds_executed": round_index + 1,
+                    "transcript": transcript,
+                    "r2_authority_before": deepcopy(r2_authority),
+                    "r2_authority_after": deepcopy(post_r2),
+                    "verified_goal_satisfied_or_irreducible_external_only": False,
+                    "internal_improvement_queue_closed": True,
+                    "irreducible_external_information_proved": False,
+                    "terminal_authority": False,
+                }
+            final = post
+            continue
         if not pending:
             return {
                 "schema": SCHEMA,
@@ -412,6 +560,7 @@ def run(
                 "residual": classify_residual([], pending=[]),
                 "verified_goal_satisfied_or_irreducible_external_only": False,
                 "internal_improvement_queue_closed": True,
+                "r2_internal_residual_count": 0,
                 "irreducible_external_information_proved": False,
                 "terminal_authority": False,
             }
