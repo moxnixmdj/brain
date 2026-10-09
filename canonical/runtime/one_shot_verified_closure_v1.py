@@ -79,6 +79,74 @@ def _safe_file_digest(root: Path, relative: str) -> dict[str, Any]:
     }
 
 
+def _canonical_r2_residual(root: Path) -> dict[str, Any]:
+    """Read current canonical R2 truth without inventing closure from an empty R3 queue."""
+    target = (root / "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json").resolve(strict=True)
+    target.relative_to(root)
+    raw = target.read_bytes()
+    doc = json.loads(raw.decode("utf-8"))
+    if not isinstance(doc, Mapping):
+        raise OneShotClosureError("CURRENT_R2_AUTHORITY_NOT_OBJECT")
+
+    cells = doc.get("current_cell_classifications")
+    open_cells: list[dict[str, Any]] = []
+    if isinstance(cells, Mapping):
+        for cell_id, row in cells.items():
+            if not isinstance(row, Mapping):
+                continue
+            state = str(row.get("state") or "")
+            if not state.startswith("INTERNAL_UNSOLVED"):
+                continue
+            open_cells.append({
+                "cell_id": str(cell_id),
+                "state": state,
+                "required_action": row.get("required_action"),
+                "wake_on": deepcopy(list(row.get("wake_on") or [])),
+            })
+
+    mechanism = doc.get("mechanism_closure")
+    positive_coverage_closed = (
+        isinstance(mechanism, Mapping)
+        and mechanism.get("universal_positive_action_coverage_closed") is True
+    )
+    return {
+        "authority_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+        "authority_sha256": sha256(raw).hexdigest(),
+        "status": doc.get("status"),
+        "primary_primitive": doc.get("primary_primitive"),
+        "primary_primitive_state": doc.get("primary_primitive_state"),
+        "remaining_problem_class": doc.get("remaining_problem_class"),
+        "remaining_hard_frontier": deepcopy(list(doc.get("remaining_hard_frontier") or [])),
+        "universal_positive_action_coverage_closed": positive_coverage_closed,
+        "current_internal_unsolved_cells": sorted(
+            open_cells, key=lambda row: row["cell_id"]
+        ),
+        "current_internal_unsolved_count": len(open_cells),
+    }
+
+
+def _terminal_checkpoint_snapshot(root: Path) -> dict[str, Any]:
+    """Retain checkpoint evidence debt as measurement, not automatic capability debt."""
+    target = (root / "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json").resolve(strict=True)
+    target.relative_to(root)
+    raw = target.read_bytes()
+    doc = json.loads(raw.decode("utf-8"))
+    if not isinstance(doc, Mapping):
+        raise OneShotClosureError("CURRENT_TERMINAL_AUTHORITY_NOT_OBJECT")
+    live = doc.get("live_truth")
+    live = live if isinstance(live, Mapping) else {}
+    return {
+        "authority_path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+        "authority_sha256": sha256(raw).hexdigest(),
+        "terminal": live.get("terminal"),
+        "family_pass": live.get("frozen_terminal_family_pass_count"),
+        "family_open": live.get("frozen_terminal_family_open_count"),
+        "atoms_proved": live.get("frozen_atomic_predicates_proved"),
+        "atoms_unresolved": live.get("frozen_atomic_predicates_unresolved"),
+        "role": "MEASUREMENT_DEBT_ONLY__NOT_AUTOMATIC_CAPABILITY_GAP",
+    }
+
+
 def frontier_snapshot(
     *,
     repo_root: str | Path,
@@ -143,6 +211,8 @@ def frontier_snapshot(
         "files": files,
         "pending": sorted(pending, key=lambda x: (x["kind"], x["work_id"])),
         "stats": deepcopy(state.get("stats", {})),
+        "r2_residual": _canonical_r2_residual(root),
+        "terminal_checkpoint": _terminal_checkpoint_snapshot(root),
     }
     return {
         "schema": SCHEMA,
@@ -398,6 +468,49 @@ def run(
 
         pending = after["payload"]["pending"]
         if not pending:
+            r2_residual = after["payload"].get("r2_residual")
+            r2_residual = (
+                r2_residual if isinstance(r2_residual, Mapping) else {}
+            )
+            open_r2 = list(
+                r2_residual.get("current_internal_unsolved_cells") or []
+            )
+            if open_r2:
+                residual = classify_residual([], pending=[])
+                residual.update({
+                    "class": "INTERNAL_SOLVABLE_OR_CONSTRUCTIVE_GAP",
+                    "internally_solvable_gap_remaining": True,
+                    "internal_unsolved": True,
+                    "pending_acquisition_or_experiment_required": any(
+                        "PENDING_ACQUISITION_OR_EXPERIMENT"
+                        in str(row.get("state") or "")
+                        for row in open_r2
+                        if isinstance(row, Mapping)
+                    ),
+                    "internal_blockers": [
+                        "R2_CURRENT_INTERNAL_UNSOLVED:" + str(row.get("cell_id") or "")
+                        for row in open_r2
+                        if isinstance(row, Mapping)
+                    ],
+                    "r2_residual": deepcopy(r2_residual),
+                })
+                return {
+                    "schema": SCHEMA,
+                    "status": "OPEN__INTERNAL_UNSOLVED_R2_GAP_REMAINS",
+                    "pass": False,
+                    "fixed_point": True,
+                    "closure_class": residual["class"],
+                    "initial_frontier_digest": initial["digest"],
+                    "final_frontier_digest": after["digest"],
+                    "final_state_sha256": after["state_sha256"],
+                    "rounds_executed": round_index + 1,
+                    "transcript": transcript,
+                    "residual": residual,
+                    "verified_goal_satisfied_or_irreducible_external_only": False,
+                    "internal_improvement_queue_closed": True,
+                    "irreducible_external_information_proved": False,
+                    "terminal_authority": False,
+                }
             return {
                 "schema": SCHEMA,
                 "status": "VERIFIED_INTERNAL_FIXED_POINT__IMPROVEMENT_QUEUE_EMPTY",
