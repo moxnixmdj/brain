@@ -1388,12 +1388,12 @@ def run(
             origin = deepcopy(dict(origin)) if isinstance(origin, Mapping) else {}
             origin_problem = {
                 "decision_relevant": True,
-                "context_value_bound": bool(origin.get("context_value_bound", False)),
+                "context_value_bound": origin.get("context_value_bound", False),
                 "information_owner": origin.get("information_owner", "UNKNOWN"),
                 "source_scope": deepcopy(
                     origin.get("source_scope", {"kind": "UNBOUND_SOURCE"})
                 ),
-                "discovery_delegated": bool(origin.get("discovery_delegated", False)),
+                "discovery_delegated": origin.get("discovery_delegated", False),
                 "context_binding_id": origin.get("context_binding_id"),
                 "clarification_key": origin.get("clarification_key"),
             }
