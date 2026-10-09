@@ -28,17 +28,18 @@ def closed_graph():
             },
             evidence(),
         ],
-        "execution_closure_proved": True,
-        "adversarial_closure_proved": True,
     }
 
 
 class AssuranceClosureCompilerV1Tests(unittest.TestCase):
-    def test_all_four_gates_close(self):
+    def test_generic_graph_cannot_self_certify_execution_or_adversary(self):
         out = c.evaluate(closed_graph())
-        self.assertTrue(out["pass"], out)
-        self.assertEqual(out["status"], "CLOSED__ALL_FOUR_ASSURANCE_GATES")
-        self.assertEqual(out["open_residual_ids"], [])
+        self.assertFalse(out["pass"], out)
+        self.assertEqual(out["status"], "OPEN__EXECUTION_CLOSURE_REQUIRED")
+        self.assertTrue(out["closure_gates"]["representation_closure"])
+        self.assertTrue(out["closure_gates"]["proof_closure"])
+        self.assertFalse(out["closure_gates"]["execution_closure"])
+        self.assertFalse(out["closure_gates"]["adversarial_closure"])
         self.assertFalse(out["terminal_authority"])
 
     def test_open_obligation_is_residual_not_new_primitive(self):
@@ -101,17 +102,11 @@ class AssuranceClosureCompilerV1Tests(unittest.TestCase):
             "schema": c.GRAPH_SCHEMA,
             "root_ids": ["a"],
             "nodes": [
-                {
-                    "id": "a", "type": "CLAIM", "status": "SUPPORTED",
-                    "depends_on": ["b"], "defeated_by": [],
-                },
-                {
-                    "id": "b", "type": "DEPENDENCY", "status": "SUPPORTED",
-                    "depends_on": ["a"], "defeated_by": [],
-                },
+                {"id": "a", "type": "CLAIM", "status": "SUPPORTED",
+                 "depends_on": ["b"], "defeated_by": []},
+                {"id": "b", "type": "DEPENDENCY", "status": "SUPPORTED",
+                 "depends_on": ["a"], "defeated_by": []},
             ],
-            "execution_closure_proved": True,
-            "adversarial_closure_proved": True,
         }
         out = c.evaluate(g)
         self.assertEqual(out["status"], "FAIL_CLOSED")
