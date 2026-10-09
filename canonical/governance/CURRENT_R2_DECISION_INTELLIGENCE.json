@@ -159,8 +159,17 @@
       "independent_receipt_path": "canonical/verification/R2_CROSS_DOCUMENT_SOURCE_RESIDUAL_DIRECT_ROUTE_DEPLOYMENT_INDEPENDENT_RECEIPT_20261009_V1.json",
       "route_verification_path": "canonical/verification/R2_CROSS_DOCUMENT_SOURCE_RESIDUAL_V12_VERIFY_20261009_V1.json",
       "selection_class": "UNIQUE_MATCH_REQUIRED",
-      "automatic_live_admission": true
-    }
+      "automatic_live_admission": true,
+      "candidate_git_blob_sha": "3f20407a5b2718d96288ea002c4ceb1b94e87ebd",
+      "independent_receipt_git_blob_sha": "6b3a175ef1b4ace4ad5e4dcfac47d5d4b1b62b11",
+      "dynamic_manifest_git_blob_sha": "6ca1b9b9395805f00634cd24220425466d4b1c95",
+      "semantic_open_stops_fallback": true
+    },
+    "dynamic_admission_contract_path": "canonical/runtime/r2_direct_route_dynamic_admission_v1.py",
+    "dynamic_admission_contract_git_blob_sha": "d5dcc13df5e70ba9e4681f19816432457e0c1dc4",
+    "dynamic_admission_manifest_path": "canonical/governance/R2_DIRECT_ROUTE_DYNAMIC_ADMISSIONS_20261009_V1.json",
+    "dynamic_admission_manifest_git_blob_sha": "6ca1b9b9395805f00634cd24220425466d4b1c95",
+    "dynamic_admission_pointer_path": "canonical/governance/CURRENT_R2_DIRECT_ROUTE_ADMISSIONS.json"
   },
   "fixed_point_information_policy": {
     "minimum_policy_changing_information": true,
