@@ -1,0 +1,17 @@
+{
+  "schema": "PROJECT_BRAIN_D_FINAL_CERTIFIED_ROUTE_ADEQUACY_V1",
+  "status": "PASS__D_FINAL_DECISION_VERIFY_ROUTE_ADEQUATE",
+  "date": "2026-10-09",
+  "cell_id": "D_FINAL_BOUND_DECISION_VERIFY_LIVE_V1",
+  "route_id": "d-final-decision-verify-live-v1",
+  "route_path": "canonical/runtime/d_final_decision_verify_certified_route_v1.py",
+  "route_blob_sha": "3430eea0f0313b8d6ac6871a0f3c931f5cb616b1",
+  "creditable": true,
+  "adequacy": {
+    "fixed_capability_identity": true,
+    "live_d_final_gate_required": true,
+    "payload_membership_validator_required": true,
+    "independent_live_canary_passed": true
+  },
+  "terminal_authority": false
+}
