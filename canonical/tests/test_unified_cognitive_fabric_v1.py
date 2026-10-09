@@ -47,6 +47,7 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
         self.assertIn("TERMINAL_CLOSURE", c["engines"])
         self.assertIn("OWNERSHIP_CATALOG", c["engines"])
         self.assertIn("SEMANTIC_AMBIGUITY", c["engines"])
+        self.assertIn("SEMANTIC_RELATION", c["engines"])
         self.assertGreater(c["brain_owned_transitive_file_count"], 1)
         self.assertGreater(c["brain_owned_transitive_source_bytes"], 0)
         self.assertIn(
@@ -179,6 +180,37 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
             out["result"]["action"],
             "ASK_USER_MINIMUM_CLARIFICATION",
         )
+
+
+    def test_auto_semantic_relation_uses_task_equivalence_without_claiming_identity(self):
+        out = run({
+            "payload": {
+                "left_id": "reserve-buffer",
+                "right_id": "liquidity-cushion",
+                "scope_id": "finance:policy:2026",
+                "required_relation": "CURRENT_DECISION_SUBSTITUTION",
+                "terminal_signature_rows": [
+                    {
+                        "raw_id": "reserve-buffer",
+                        "signature_complete": True,
+                        "terminal_signature": {"action": "REDUCE"},
+                    },
+                    {
+                        "raw_id": "liquidity-cushion",
+                        "signature_complete": True,
+                        "terminal_signature": {"action": "REDUCE"},
+                    },
+                ],
+            },
+        })
+        self.assertTrue(out["auto_routed"])
+        self.assertEqual(out["mode"], "SEMANTIC_RELATION")
+        self.assertTrue(out["inner_pass"], out)
+        self.assertEqual(
+            out["result"]["strongest_proved_relation"],
+            "CURRENT_DECISION_SUBSTITUTION",
+        )
+        self.assertFalse(out["result"]["proved_facts"]["semantic_identity"])
 
     def test_capability_scheduler_is_inside_fabric(self):
         out = run({
