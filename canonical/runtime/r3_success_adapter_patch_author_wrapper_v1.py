@@ -187,10 +187,17 @@ def validate_author_output(
         base = packet.get("base_sha256_by_path")
         if not isinstance(base, Mapping):
             return _fail("AUTHOR_PACKET_BASE_BINDINGS_MISSING")
+        touched, _ = firewall._parse_patch(patch_text)
+        touched_base = {}
+        for path in touched:
+            value = base.get(path)
+            if not isinstance(value, str) or len(value) != 64:
+                return _fail("AUTHOR_PACKET_BASE_BINDING_MISSING:" + path)
+            touched_base[path] = value
         verdict = firewall.evaluate(
             {
                 "patch_text": patch_text,
-                "base_sha256_by_path": deepcopy(dict(base)),
+                "base_sha256_by_path": touched_base,
             },
             repo_root=repo_root,
         )
@@ -207,7 +214,7 @@ def validate_author_output(
             "witness_id": packet.get("witness_id"),
             "patch_sha256": verdict.get("patch_sha256"),
             "touched_paths": deepcopy(verdict.get("touched_paths") or []),
-            "base_sha256_by_path": deepcopy(dict(base)),
+            "base_sha256_by_path": deepcopy(touched_base),
             "firewall_result": deepcopy(dict(verdict)),
             "patch_text": patch_text,
             "patch_application_authority": False,
