@@ -238,6 +238,13 @@ class R3ThirdFamilyDecisionCompoundingCycleV1Tests(unittest.TestCase):
             )
             first_obs = self._record_wrapped_success(first, state_path=state_path)
             self.assertTrue(first_obs["proof_available"], first_obs)
+            first_proof = learning.get_success_proof_context(
+                first_obs["observation_id"], state_path=state_path
+            )
+            self.assertEqual(
+                first_proof["material"]["verified_initial_facts"],
+                [PRECONDITION],
+            )
 
             parked = driver.advance_once(state_path=state_path, repo_root=ROOT)
             self.assertEqual(
