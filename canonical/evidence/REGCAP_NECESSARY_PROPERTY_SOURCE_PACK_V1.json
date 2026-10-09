@@ -1,60 +1,64 @@
 {
-  "schema":"PROJECT_BRAIN_REGCAP_NECESSARY_PROPERTY_SOURCE_PACK_V1",
-  "scope_id":"REGCAP_BIS_RBC30_2027_AND_FSB_TLAC_2015_V1",
-  "sources":[
+  "schema": "PROJECT_BRAIN_REGCAP_NECESSARY_PROPERTY_SOURCE_PACK_V1",
+  "scope_id": "REGCAP_BIS_RBC30_2027_AND_FSB_TLAC_2015_V1",
+  "sources": [
     {
-      "schema":"PROJECT_BRAIN_PINNED_HTTPS_SOURCE_FRAGMENT_PACK_V1",
-      "source_id":"BIS_BASEL_RBC30_2023_11_08_EFFECTIVE_2027_01_01",
-      "url":"https://www.bis.org/committees/bcbs/basel-framework/standard/rbc/30/inforce/2027-01-01/published/2023-11-08",
-      "expected_raw_sha256":"945ceafac5c8a2df93efbe98343ffad3408a56b026b17441c3bfb97c521de9ba",
-      "expected_byte_count":344156,
-      "retrieval_user_agent":"ProjectBrainSourceVerifier/1.0",
-      "fragments":[
+      "schema": "PROJECT_BRAIN_PINNED_HTTPS_SOURCE_FRAGMENT_PACK_V1",
+      "source_id": "BIS_BASEL_RBC30_2023_11_08_EFFECTIVE_2027_01_01",
+      "url": "https://www.bis.org/committees/bcbs/basel-framework/standard/rbc/30/inforce/2027-01-01/published/2023-11-08",
+      "expected_raw_sha256": "945ceafac5c8a2df93efbe98343ffad3408a56b026b17441c3bfb97c521de9ba",
+      "expected_byte_count": 344156,
+      "retrieval_user_agent": "ProjectBrainSourceVerifier/1.0",
+      "fragments": [
         {
-          "fragment_id":"CCOB_LOSS_DRAWDOWN",
-          "text":"designed to ensure that banks build up capital buffers outside periods of stress which can be drawn down as losses are incurred."
+          "fragment_id": "CCOB_LOSS_DRAWDOWN",
+          "text": "designed to ensure that banks build up capital buffers outside periods of stress which can be drawn down as losses are incurred."
         },
         {
-          "fragment_id":"CCOB_CET1_ABOVE_MINIMUM",
-          "text":"capital conservation buffer of 2.5%, comprised of Common Equity Tier 1 (CET1), is established above the regulatory minimum capital requirement."
+          "fragment_id": "CCOB_CET1_ABOVE_MINIMUM",
+          "text": "capital conservation buffer of 2.5%, comprised of Common Equity Tier 1 (CET1), is established above the regulatory minimum capital requirement."
         },
         {
-          "fragment_id":"CCYB_MACRO_FINANCIAL",
-          "text":"countercyclical buffer aims to ensure that banking sector capital requirements take account of the macro-financial environment in which banks operate."
+          "fragment_id": "CCYB_MACRO_FINANCIAL",
+          "text": "countercyclical buffer aims to ensure that banking sector capital requirements take account of the macro-financial environment in which banks operate."
         },
         {
-          "fragment_id":"CCYB_SYSTEM_RISK_TRIGGER",
-          "text":"excess aggregate credit growth is judged to be associated with a build-up of system-wide risk"
+          "fragment_id": "CCYB_SYSTEM_RISK_TRIGGER",
+          "text": "excess aggregate credit growth is judged to be associated with a build-up of system-wide risk"
         },
         {
-          "fragment_id":"CCYB_RELEASE",
-          "text":"released when system-wide risk crystallises or dissipates."
+          "fragment_id": "CCYB_RELEASE",
+          "text": "released when system-wide risk crystallises or dissipates."
         },
         {
-          "fragment_id":"CCYB_CET1",
-          "text":"Banks must meet this buffer with CET1"
+          "fragment_id": "CCYB_CET1",
+          "text": "Banks must meet this buffer with CET1"
         },
         {
-          "fragment_id":"CCYB_EXTENDS_CCOB",
-          "text":"countercyclical buffer requirement to which a bank is subject will extend the size of the capital conservation buffer."
+          "fragment_id": "CCYB_EXTENDS_CCOB",
+          "text": "countercyclical buffer requirement to which a bank is subject will extend the size of the capital conservation buffer."
+        },
+        {
+          "fragment_id": "CCYB_FULLY_LOSS_ABSORBING_CAPITAL",
+          "text": "Common Equity Tier 1 (including other fully loss absorbing capital)"
         }
       ]
     },
     {
-      "schema":"PROJECT_BRAIN_PINNED_HTTPS_SOURCE_FRAGMENT_PACK_V1",
-      "source_id":"FSB_TLAC_2015_11_09",
-      "url":"https://www.fsb.org/2015/11/total-loss-absorbing-capacity-tlac-principles-and-term-sheet/",
-      "expected_raw_sha256":"84b440dbf594bee9a0c05b04dc6fbee432eefbd077a298fcd9996949a047c4c2",
-      "expected_byte_count":409451,
-      "retrieval_user_agent":"ProjectBrainSourceVerifier/1.0",
-      "fragments":[
+      "schema": "PROJECT_BRAIN_PINNED_HTTPS_SOURCE_FRAGMENT_PACK_V1",
+      "source_id": "FSB_TLAC_2015_11_09",
+      "url": "https://www.fsb.org/2015/11/total-loss-absorbing-capacity-tlac-principles-and-term-sheet/",
+      "expected_raw_sha256": "84b440dbf594bee9a0c05b04dc6fbee432eefbd077a298fcd9996949a047c4c2",
+      "expected_byte_count": 409451,
+      "retrieval_user_agent": "ProjectBrainSourceVerifier/1.0",
+      "fragments": [
         {
-          "fragment_id":"TLAC_GSIB_SCOPE",
-          "text":"an international standard for Total Loss-Absorbing Capacity (TLAC) to be applied to global systemically important banks (G-SIBs)."
+          "fragment_id": "TLAC_GSIB_SCOPE",
+          "text": "an international standard for Total Loss-Absorbing Capacity (TLAC) to be applied to global systemically important banks (G-SIBs)."
         },
         {
-          "fragment_id":"TLAC_LOSS_RECAP_RESOLUTION",
-          "text":"The TLAC standard is designed to ensure that if a G-SIB fails it has sufficient loss-absorbing and recapitalisation capacity available in resolution"
+          "fragment_id": "TLAC_LOSS_RECAP_RESOLUTION",
+          "text": "The TLAC standard is designed to ensure that if a G-SIB fails it has sufficient loss-absorbing and recapitalisation capacity available in resolution"
         }
       ]
     }
