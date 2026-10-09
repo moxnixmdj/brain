@@ -79,14 +79,69 @@ def checked_predicate_id(
     return "domain-mapping-sha256:" + sha256(material).hexdigest()
 
 
+def _minimum_proof_request(
+    *,
+    raw_span: str,
+    source_id: str,
+    scope_id: str,
+    target_concept_id: str,
+    required_relation: str,
+    candidate_concepts: Sequence[Mapping[str, Any]],
+    relation_result: Mapping[str, Any] | None = None,
+    fallback_target: str | None = None,
+) -> dict[str, Any]:
+    candidate_ids = []
+    target_surface = None
+    for row in candidate_concepts:
+        if not isinstance(row, Mapping):
+            continue
+        cid = str(row.get("concept_id") or "").strip()
+        if cid and cid not in candidate_ids:
+            candidate_ids.append(cid)
+        if cid == target_concept_id:
+            surface = str(row.get("surface") or "").strip()
+            target_surface = surface or None
+
+    next_targets = []
+    if isinstance(relation_result, Mapping):
+        raw_targets = relation_result.get("next_proof_targets")
+        if isinstance(raw_targets, Sequence) and not isinstance(raw_targets, (str, bytes)):
+            next_targets = [
+                str(x).strip() for x in raw_targets
+                if isinstance(x, str) and x.strip()
+            ]
+    if not next_targets and isinstance(fallback_target, str) and fallback_target:
+        next_targets = [fallback_target]
+
+    return {
+        "schema": "PROJECT_BRAIN_DOMAIN_MAPPING_MINIMUM_PROOF_REQUEST_V1",
+        "truth_kind": TRUTH_KIND,
+        "raw_span": raw_span,
+        "raw_span_sha256": sha256(raw_span.encode("utf-8")).hexdigest(),
+        "source_id": source_id,
+        "scope_id": scope_id,
+        "target_concept_id": target_concept_id,
+        "target_surface": target_surface,
+        "required_relation": required_relation,
+        "candidate_concept_ids": sorted(candidate_ids),
+        "next_proof_targets": next_targets,
+        "information_authority": False,
+        "semantic_truth_authority": False,
+        "acceptance_authority": False,
+        "terminal_authority": False,
+        "terminal_credit_delta": 0,
+    }
+
+
 def _unknown(
     *,
     checked_id: str,
     requested_id: str,
     reason: str,
     mapping_result: Mapping[str, Any] | None = None,
+    minimum_proof_request: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
-    return {
+    out = {
         "schema": SCHEMA,
         "pass": False,
         "status": "UNKNOWN__DOMAIN_MAPPING_RELATION_NOT_PROVED",
@@ -104,6 +159,9 @@ def _unknown(
         "terminal_authority": False,
         "terminal_credit_delta": 0,
     }
+    if isinstance(minimum_proof_request, Mapping):
+        out["minimum_proof_request"] = dict(minimum_proof_request)
+    return out
 
 
 def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
@@ -170,6 +228,15 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
             checked_id=checked,
             requested_id=requested_id,
             reason="TARGET_RELATION_PROBLEM_REQUIRED",
+            minimum_proof_request=_minimum_proof_request(
+                raw_span=raw_span,
+                source_id=source_id,
+                scope_id=scope_id,
+                target_concept_id=target,
+                required_relation=required,
+                candidate_concepts=candidates,
+                fallback_target="TARGET_RELATION_PROBLEM_REQUIRED",
+            ),
         )
     target_required = str(target_problem.get("required_relation") or required).strip().upper()
     if target_required != required:
@@ -217,6 +284,15 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
             requested_id=requested_id,
             reason="TARGET_CONCEPT_NOT_SURVIVING_FOR_RELATION_EVALUATION",
             mapping_result=result,
+            minimum_proof_request=_minimum_proof_request(
+                raw_span=raw_span,
+                source_id=source_id,
+                scope_id=scope_id,
+                target_concept_id=target,
+                required_relation=required,
+                candidate_concepts=candidates,
+                fallback_target="TARGET_CONCEPT_SURVIVAL_OR_CONTRADICTION_PROOF",
+            ),
         )
 
     relation = target_eval.get("relation_result")
@@ -226,6 +302,15 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
             requested_id=requested_id,
             reason="TARGET_RELATION_RESULT_UNAVAILABLE",
             mapping_result=result,
+            minimum_proof_request=_minimum_proof_request(
+                raw_span=raw_span,
+                source_id=source_id,
+                scope_id=scope_id,
+                target_concept_id=target,
+                required_relation=required,
+                candidate_concepts=candidates,
+                fallback_target="TARGET_RELATION_RESULT_REQUIRED",
+            ),
         )
 
     if (
@@ -250,6 +335,16 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
                 or "TARGET_RELATION_NOT_PROVED"
             ),
             mapping_result=result,
+            minimum_proof_request=_minimum_proof_request(
+                raw_span=raw_span,
+                source_id=source_id,
+                scope_id=scope_id,
+                target_concept_id=target,
+                required_relation=required,
+                candidate_concepts=candidates,
+                relation_result=relation,
+                fallback_target="SOURCE_ALIGNED_RELATION_PROOF",
+            ),
         )
 
     return {
