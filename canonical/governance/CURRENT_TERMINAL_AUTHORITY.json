@@ -887,10 +887,10 @@
     "current_r2_decision_intelligence": {
       "path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
       "scheduler_cut": {
-        "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V47.json",
-        "git_blob_sha": "d9170e11c2f396aac5798db5dd3d6a1454c12b26"
+        "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V48.json",
+        "git_blob_sha": "49e90f7a55bde8c960fb448a2301c15976fce72e"
       },
-      "status": "ACTIVE_CURRENT_R2_AUTHORITY__V47__THIRTY_ONE_DIRECT_ROUTES__TWENTY_EIGHT_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__SCOPED_PROOF_CARRYING_DOMAIN_MAPPING_AND_SEC_STANDARD_XBRL_SOURCE_NATIVE_SEMANTICS_BOUND__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_REMAINS",
+      "status": "ACTIVE_CURRENT_R2_AUTHORITY__V48__THIRTY_ONE_DIRECT_ROUTES__TWENTY_EIGHT_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__SCOPED_PROOF_CARRYING_DOMAIN_MAPPING__SEC_STANDARD_XBRL_AND_FIBO_Q2_2026_BOUNDED_SOURCE_SEMANTICS_BOUND__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_REMAINS",
       "pointer_semantics": "MUTABLE_CURRENT_POINTER__PATH_IDENTITY_AUTHORITATIVE__IMMUTABLE_SCHEDULER_CUT_HASH_BOUND_BELOW",
       "mutable_pointer_blob_is_not_load_bearing": true
     },
@@ -1459,7 +1459,7 @@
     "gdpval_owner_layer_wake_authority": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V9.json",
     "opus_5_5_is_global_terminal_objective": false,
     "opus_5_5_is_frontier_checkpoint": true,
-    "current_r2_scheduler_cut": "ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V47",
+    "current_r2_scheduler_cut": "ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V48",
     "historical_root2_scheduler_fields_currently_authoritative": false,
     "r2_general_control_mechanism_closed_as_adequacy_or_abstain": true,
     "r2_open_world_positive_action_coverage_complete": false,
@@ -2210,14 +2210,14 @@
   },
   "r2_scheduler_precedence": {
     "current_authority_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
-    "current_scheduler_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V47.json",
-    "current_scheduler_git_blob_sha": "d9170e11c2f396aac5798db5dd3d6a1454c12b26",
+    "current_scheduler_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V48.json",
+    "current_scheduler_git_blob_sha": "49e90f7a55bde8c960fb448a2301c15976fce72e",
     "single_live_primitive": "ESCAPE_POLICY_ADEQUACY",
     "general_mechanism_missing": false,
     "enumerated_active_zero_reality_cell_count": 0,
     "enumerated_external_required_sleep_cell_count": 0,
     "historical_root2_scheduler_fields_authoritative_for_current_r2": false,
-    "rule": "CURRENT_R2_POINTER_AND_V47_CONTENT_ADDRESSED_SCHEDULER_HAVE_PRECEDENCE__THIRTY_ONE_DIRECT_ROUTES__TWENTY_EIGHT_BOUNDED_FAMILIES__TEN_VERIFIED_FINANCE_DIRECT_SUBREGIONS__SCOPED_PROOF_CARRYING_DOMAIN_MAPPING_AND_VERIFIED_STANDARD_SEC_XBRL_COMPANYCONCEPT_SOURCE_NATIVE_SEMANTICS_BOUND__ONE_GENUINE_FINANCE_SEMANTIC_RESIDUAL_REMAINS_INTERNAL_UNSOLVED__GDPVAL_DORMANT",
+    "rule": "CURRENT_R2_POINTER_AND_V48_CONTENT_ADDRESSED_SCHEDULER_HAVE_PRECEDENCE__THIRTY_ONE_DIRECT_ROUTES__TWENTY_EIGHT_BOUNDED_FAMILIES__TEN_VERIFIED_FINANCE_DIRECT_SUBREGIONS__SCOPED_PROOF_CARRYING_DOMAIN_MAPPING__VERIFIED_STANDARD_SEC_XBRL_AND_PINNED_FIBO_Q2_2026_CORE7_SOURCE_SEMANTICS_BOUND__ONE_GENUINE_FINANCE_SEMANTIC_RESIDUAL_REMAINS_INTERNAL_UNSOLVED__GDPVAL_DORMANT",
     "current_authority_pointer_mutable": true,
     "current_authority_pointer_blob_is_not_load_bearing": true,
     "binding_law": "CURRENT_POINTERS_BIND_BY_CANONICAL_PATH_IDENTITY__IMMUTABLE_VERSIONED_AUTHORITY_ARTIFACTS_BIND_BY_GIT_BLOB_SHA",
@@ -2226,7 +2226,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 70,
+  "pointer_revision": 71,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
@@ -2422,7 +2422,7 @@
     "terminal_remains_false": true,
     "terminal_credit_delta": 0
   },
-  "live_scheduler": "ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V47",
+  "live_scheduler": "ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V48",
   "r2_v35_live_projection_reconciliation": {
     "status": "RECONCILED__CURRENT_R2_AND_TERMINAL_LIVE_PROJECTIONS_BIND_V35",
     "current_r2_blob_sha": "70cfd4ea77cd54ed321edac7f59abe1aa2ff49ff",
@@ -2737,6 +2737,19 @@
     "generic_context_field_semantics_wake_refined_outside_sec_standard_xbrl_scope": true,
     "terminal_remains_false": true,
     "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "r2_v48_fibo_bounded_source_projection_reconciliation": {
+    "status": "RECONCILED__CURRENT_TERMINAL_LIVE_R2_PROJECTION_BINDS_V48__FIBO_CORE7_BOUNDED_SOURCE_WAKE_REFINED__TERMINAL_STILL_FALSE",
+    "current_r2_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+    "current_r2_git_blob_sha": "5dc90c120069cffbc6b3f013aeedcaba3efbecf5",
+    "scheduler_cut_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V48.json",
+    "scheduler_cut_git_blob_sha": "49e90f7a55bde8c960fb448a2301c15976fce72e",
+    "activation_path": "canonical/governance/R2_FIBO_Q2_2026_BOUNDED_FINANCE_SOURCE_ACTIVATION_20261009_V1.json",
+    "activation_git_blob_sha": "4b7e08d786ae5c7753238bfdd9c4c337aef0e68d",
+    "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
+    "active_wake_count": 11,
+    "one_primary_finance_residual_remains": true,
     "terminal_credit_delta": 0
   }
 }
