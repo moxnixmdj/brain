@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK14_PLANNER_MANIFEST_SUMMARY_PUBLIC_VERIFICATION_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__87_OF_87_ACCEPTANCE_PRESERVED__PLANNER_METADATA_35_601X_SMALLER__RAWREQ_ROW_DUMP_REMOVED__ZERO_EXPOSURE",
+  "repaired_agent": {
+    "path": "canonical/runtime/harbor_science_agent_v1.py",
+    "git_blob_sha": "d397324f411d002bdbdca348aaad708b5b40c9c2"
+  },
+  "tests": {
+    "path": "canonical/tests/test_harbor_science_planner_manifest_summary_v1.py",
+    "git_blob_sha": "62e697e6b3061a8ea0bdb4ff5e7a0d7dcf5b347f"
+  },
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify-tbscience-r14-planner-manifest-summary-v1",
+    "head_sha": "a04962f4a80c27cd318267d5c2a83ed3e9dc4560",
+    "workflow_run_id": 37883778330,
+    "workflow_job_id": 113669113476,
+    "artifact_id": 11595511248,
+    "artifact_zip_sha256": "adce498fa0d1a4842756ea7910bafd8052235f1e1de737d8e1ccde14a7a67c15",
+    "conclusion": "success"
+  },
+  "independent_results": {
+    "synthetic_obligation_count": 87,
+    "required_obligations_preserved": 87,
+    "accounted_obligations_preserved": 87,
+    "old_model_facing_metadata_bytes": 27840,
+    "new_model_facing_metadata_bytes": 782,
+    "metadata_reduction_ratio": 35.60102301790281,
+    "exact_goal_retained_in_live_prompt": true,
+    "rawreq_individual_row_dump_absent": true,
+    "content_addressed_ordered_manifest": true,
+    "tampered_source_hash_fails_closed": true,
+    "brain_full_acceptance_contract_retained": true,
+    "planner_acceptance_or_finish_authority": false
+  },
+  "proves": [
+    "THE_FALSE_5212_TOKEN_BLOCKER_IS_CAUSED_IN_PART_BY_DUPLICATED_MODEL_FACING_ROUTING_METADATA_THAT_CAN_BE_REMOVED_WITHOUT_WEAKENING_ACCEPTANCE",
+    "THE_REPAIR_PRESERVES_ALL_87_BRAIN_OWNED_ACCEPTANCE_OBLIGATIONS_ON_AN_87_SEGMENT_SYNTHETIC_REPLAY",
+    "THE_EXACT_GOAL_TEXT_REMAINS_IN_THE_LIVE_PLANNER_PROMPT",
+    "THE_FULL_ORDERED_PER_OBLIGATION_METADATA_IS_CONTENT_ADDRESSED_BY_ONE_MANIFEST_DIGEST",
+    "THE_OPTIONAL_PLANNER_GAINS_NO_ACCEPTANCE_OR_FINISH_AUTHORITY"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_EXACT_RANK14_FIRST_CYCLE_PROMPT_NOW_FITS_16384",
+    "NO_NEW_RANK14_TASK_READ_AUTHORITY",
+    "NO_RANK14_TASK_START",
+    "NO_RANK14_RESULT",
+    "NO_TB_SCIENCE_ACCEPTANCE_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "next_required_proof": "REBUILD_EXACT_TRANSITIVE_RUNTIME_CLOSURE_ON_REPAIRED_AGENT_BYTES__THEN_FRESH_ZERO_EXPOSURE_AUTHORITY__THEN_FRESH_EXACT_RANK14_PRESTART_TOKEN_COUNT__START_ONLY_IF_INPUT_PLUS_4096_LE_16384",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_task_exposure_delta": 0,
+    "benchmark_trials_consumed_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
