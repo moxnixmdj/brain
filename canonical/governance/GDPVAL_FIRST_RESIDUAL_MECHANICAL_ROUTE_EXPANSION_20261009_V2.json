@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_FIRST_RESIDUAL_MECHANICAL_ROUTE_EXPANSION_20261009_V2",
+  "date": "2026-10-09",
+  "status": "VERIFIED_ROUTE_AVAILABILITY_EXPANSION__92_OF_220_CURRENT_FIRST_RESIDUALS_MACHINE_COMPILABLE__64_NEW__ZERO_ACCEPTANCE_CREDIT",
+  "target_obligation": "PROWORK_GDPVAL_GE_1846",
+  "source_population": {
+    "task_count": 220,
+    "public_revision": "11e7900cdcac61bc4daf59e65feb238acda98fbf",
+    "prior_first_residual_evidence": "canonical/evidence/GDPVAL_PUBLIC_220_OBJECTIVE_ARTIFACT_CRITERIA_EXECUTION_20261007_V1.json",
+    "prior_evidence_git_blob_sha": "d8a51c74816a7712dde1bfeb032c7205859a1616"
+  },
+  "current_route": {
+    "compiler": "canonical/runtime/gdpval_objective_artifact_criteria_v2.py",
+    "compiler_git_blob_sha": "41a2281f41446ef2e18054db2b93e2bcf29010e5",
+    "replay": "canonical/evidence/GDPVAL_PUBLIC_220_FIRST_RESIDUAL_MECHANICAL_REPLAY_20261009_V2.json",
+    "replay_git_blob_sha": "3a103984bca92270be3f9ab9459b87d0a9d3182a",
+    "verification": "canonical/verification/GDPVAL_OBJECTIVE_ARTIFACT_CRITERIA_V2_VERIFY_20261009_V1.json"
+  },
+  "measured_effect": {
+    "prior_current_v1_compilable_first_residuals": 28,
+    "v2_compilable_first_residuals": 92,
+    "newly_compilable_first_residuals": 64,
+    "remaining_unresolved_first_residuals": 128,
+    "current_first_residual_compilable_fraction": 0.41818181818181815
+  },
+  "theorem_boundary": {
+    "statement": "FOR_92_OF_220_FROZEN_CURRENT_FIRST_RESIDUAL_CRITERIA_A_SOUND_MACHINE_VERIFIER_PROGRAM_CAN_NOW_BE_COMPILED_FROM_THE_EXACT_CRITERION_TEXT;THIS_IS_ROUTE_AVAILABILITY_NOT_CRITERION_SATISFACTION.",
+    "one_sided_subset_rule": "WHEN_A_CRITERION_ALLOWS_MULTIPLE_LEGACY_FORMATS_V2_MAY_PROVE_A_STRONGER_VERIFIED_SUBSET_SUCH_AS_DOCX;FAILURE_OF_THE_SUBSET_CHECK_DOES_NOT_FALSIFY_THE_ORIGINAL_CRITERION.",
+    "semantic_roles_remain_unresolved": true,
+    "mixed_mechanical_semantic_conjuncts_remain_unresolved": true
+  },
+  "scheduler_effect": [
+    "DO_NOT_TREAT_THESE_92_ROWS_AS_ACCEPTED_WITHOUT_CANDIDATE_BOUND_VERIFIER_RECEIPTS.",
+    "WHEN_A_GDPVAL_CANDIDATE_OR_SCOPE_COMPLETE_CONSTRUCTIVE_PROOF_IS_AVAILABLE_EXECUTE_THE_COMPILED_MECHANICAL_VERIFIER_FIRST_AND_ADVANCE_EACH_PASSING_TASK_TO_ITS_NEXT_RESIDUAL.",
+    "KEEP_THE_128_UNCOMPILED_FIRST_RESIDUALS_OPEN;LOCALIZE_STRONGER_EXISTING_BRAIN_ROUTES_BEFORE_ANY_OWNER_OR_TARGET_QUERY.",
+    "PREFER_SCOPE_COMPLETE_REUSABLE_CRITERION_FAMILIES_OVER_TASK_SPECIFIC_REGEX_PATCHES."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "gdpval_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_GDPVAL_SCORE_CREDIT",
+    "NO_TASK_FULL_COVERAGE_CLAIM",
+    "NO_OWNER_PAIRWISE_SEMANTICS_CLAIM",
+    "NO_TERMINAL_CREDIT"
+  ]
+}
