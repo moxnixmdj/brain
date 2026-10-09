@@ -12,7 +12,7 @@ TMP = ROOT / "canonical" / "astra_runtime" / "tmp"
 
 
 class RealityClosureV2IntegrationTests(unittest.TestCase):
-    def test_real_v1_cleanroom_empty_state_reaches_v2_fixed_point(self):
+    def test_empty_r3_state_does_not_hide_current_r2_internal_gap(self):
         TMP.mkdir(parents=True, exist_ok=True)
         with TemporaryDirectory(dir=TMP) as td:
             state_path = Path(td) / "state.json"
@@ -25,18 +25,28 @@ class RealityClosureV2IntegrationTests(unittest.TestCase):
                 max_repair_rounds=1,
             )
 
-            self.assertTrue(out["pass"], out)
-            self.assertTrue(out["fixed_point"], out)
+            self.assertFalse(out["pass"], out)
             self.assertEqual(
                 out["status"],
-                "PASS__PROOF_CARRYING_REALITY_CLOSURE_FIXED_POINT",
+                "OPEN__CAPABILITY_SYNTHESIS_PROVIDER_REQUIRED",
             )
-            self.assertEqual(out["repair_rounds_executed"], 0)
             self.assertEqual(
-                out["final_closure"]["status"],
-                "VERIFIED_INTERNAL_FIXED_POINT__IMPROVEMENT_QUEUE_EMPTY",
+                out["gap_contract"]["gap_class"],
+                "CONSTRUCTIVE_CAPABILITY_GAP",
             )
-            self.assertEqual(out["transcript"][0]["gap_class"], "NONE")
+            self.assertEqual(
+                out["transcript"][0]["closure_status"],
+                "OPEN__INTERNAL_UNSOLVED_R2_GAP_REMAINS",
+            )
+            internal = out["gap_contract"]["basis"]["internal_blockers"]
+            self.assertTrue(
+                any(
+                    str(blocker).startswith("R2_CURRENT_INTERNAL_UNSOLVED:")
+                    for blocker in internal
+                ),
+                out,
+            )
+            self.assertFalse(out["terminal_authority"])
 
 
 if __name__ == "__main__":
