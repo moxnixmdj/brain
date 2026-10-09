@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK14_PUBLIC_EXECUTION_LEASE_VERIFICATION_V1",
+  "date": "2026-10-09",
+  "status": "PASS__EXACT_PUBLIC_PR_LEASE_AND_ARM_BLOB_BOUND__RUN_ATTEMPT_1_ACTIVE__PREEXPOSURE_GATE_PASS__ZERO_RESULT_CREDIT",
+  "verified": {
+    "public_repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2451,
+    "pull_request_state": "open",
+    "pull_request_merged": false,
+    "base_ref": "terminal-execution-v1",
+    "base_sha": "f9f2628d6482074001b83240e01ee546de3e2b8e",
+    "head_ref": "execute/tb-science-rank14-20261009-v1",
+    "head_sha": "7cc859c52477fe2a48aa83616278cd9094db909a",
+    "activation_git_blob_sha": "21346a4d022e606e755a047dadc377ac50a78fe5",
+    "workflow_run_id": 37880547075,
+    "workflow_job_id": 113659002581,
+    "run_attempt": 1,
+    "preexposure_authority_lease_v9_repair_and_carrier_closure": "PASS",
+    "exact_llama_cpp_clean_build": "PASS"
+  },
+  "proves": [
+    "RANK14_PUBLIC_EXECUTION_LEASE_IS_PUBLISHED_ON_THE_EXACT_REQUIRED_HEAD_BRANCH",
+    "THE_ACTIVATION_FILE_IS_THE_EXACT_CONTENT_ADDRESSED_ARM_BLOB",
+    "WORKFLOW_ATTEMPT_1_ENTERED_AND_PASSED_THE_PREEXPOSURE_AUTHORITY_LEASE_RUNTIME_AND_CLOSURE_GATE",
+    "THE_EXACT_PINNED_LLAMA_CPP_RUNTIME_BUILD_COMPLETED"
+  ],
+  "does_not_prove": [
+    "TASK_READ",
+    "PRESTART_TOKEN_BUDGET_PASS",
+    "TASK_START",
+    "VERIFIER_RESULT",
+    "TB_SCIENCE_ACCEPTANCE",
+    "TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
