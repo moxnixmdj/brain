@@ -19,7 +19,7 @@ from typing import Any, Mapping
 SCHEMA = "PROJECT_BRAIN_SEC_COMPANYCONCEPT_SOURCE_NATIVE_SEMANTICS_V1"
 _ALLOWED_TAXONOMIES = {"us-gaap", "ifrs-full", "dei", "srt"}
 _TAG_RE = re.compile(r"^[A-Za-z_][A-Za-z0-9_.-]{0,255}$")
-_EMAIL_RE = re.compile(r"^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$")
+_EMAIL_RE = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
 MAX_BYTES = 4_000_000
 
 
