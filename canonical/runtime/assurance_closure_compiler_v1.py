@@ -16,29 +16,49 @@ from __future__ import annotations
 from copy import deepcopy
 from hashlib import sha256
 import json
-from typing import Any, Mapping
+from typing import Any, Mapping, Sequence
 
 SCHEMA = "PROJECT_BRAIN_ASSURANCE_CLOSURE_COMPILER_V1"
 GRAPH_SCHEMA = "PROJECT_BRAIN_ASSURANCE_CLOSURE_GRAPH_V1"
 
 PRIMITIVE_TYPES = frozenset({
-    "CLAIM", "OBLIGATION", "ASSUMPTION", "EVIDENCE", "DEPENDENCY",
-    "DEFEATER", "EFFECT", "AUTHORITY", "RESOURCE", "MONITOR", "EPOCH",
+    "CLAIM",
+    "OBLIGATION",
+    "ASSUMPTION",
+    "EVIDENCE",
+    "DEPENDENCY",
+    "DEFEATER",
+    "EFFECT",
+    "AUTHORITY",
+    "RESOURCE",
+    "MONITOR",
+    "EPOCH",
     "TRANSITION",
 })
+
 TERMINAL_LEAF_TYPES = frozenset({"EVIDENCE", "ASSUMPTION", "EPOCH"})
 NODE_STATUSES = frozenset({
-    "SUPPORTED", "OPEN", "STALE", "PROVEN_IRRELEVANT", "REJECTED",
+    "SUPPORTED",
+    "OPEN",
+    "STALE",
+    "PROVEN_IRRELEVANT",
+    "REJECTED",
 })
+
 FOUR_GATES = (
-    "representation_closure", "proof_closure",
-    "execution_closure", "adversarial_closure",
+    "representation_closure",
+    "proof_closure",
+    "execution_closure",
+    "adversarial_closure",
 )
 
 
 def _canon(value: Any) -> bytes:
     return json.dumps(
-        value, sort_keys=True, separators=(",", ":"), ensure_ascii=False,
+        value,
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=False,
         allow_nan=False,
     ).encode("utf-8")
 
@@ -49,7 +69,9 @@ def digest(value: Any) -> str:
 
 def _base(status: str, *, passed: bool) -> dict[str, Any]:
     return {
-        "schema": SCHEMA, "status": status, "pass": passed,
+        "schema": SCHEMA,
+        "status": status,
+        "pass": passed,
         "semantic_truth_authority": False,
         "policy_adequacy_authority": False,
         "execution_authority": False,
@@ -61,7 +83,11 @@ def _base(status: str, *, passed: bool) -> dict[str, Any]:
 
 
 def _fail(reason: str, **extra: Any) -> dict[str, Any]:
-    return {**_base("FAIL_CLOSED", passed=False), "reason": reason, **extra}
+    return {
+        **_base("FAIL_CLOSED", passed=False),
+        "reason": reason,
+        **extra,
+    }
 
 
 def _as_ids(value: Any, field: str) -> tuple[list[str] | None, str | None]:
@@ -80,14 +106,24 @@ def _as_ids(value: Any, field: str) -> tuple[list[str] | None, str | None]:
 
 
 def evaluate(graph: Mapping[str, Any]) -> dict[str, Any]:
-    """Evaluate one explicit assurance graph, conservatively and fail-closed."""
+    """Evaluate one explicit assurance graph.
+
+    The compiler is intentionally conservative:
+    * unknown primitive types => representation gap / new primitive candidate;
+    * dangling references or dependency cycles => fail closed;
+    * OPEN/STALE support or unresolved defeaters => OPEN residual;
+    * a supported defeater against a root => COUNTERPROVED;
+    * full closure requires all four gates.
+    """
     if not isinstance(graph, Mapping):
         return _fail("GRAPH_NOT_OBJECT")
     if graph.get("schema") != GRAPH_SCHEMA:
         return _fail("GRAPH_SCHEMA_INVALID")
+
     raw_nodes = graph.get("nodes")
     if not isinstance(raw_nodes, list):
         return _fail("NODES_NOT_LIST")
+
     roots, error = _as_ids(graph.get("root_ids"), "ROOT_IDS")
     if error is not None or not roots:
         return _fail(error or "ROOT_IDS_REQUIRED")
@@ -95,11 +131,14 @@ def evaluate(graph: Mapping[str, Any]) -> dict[str, Any]:
     nodes: dict[str, dict[str, Any]] = {}
     unsupported_types: set[str] = set()
     malformed: list[str] = []
+
     for raw in raw_nodes:
         if not isinstance(raw, Mapping):
             malformed.append("NODE_NOT_OBJECT")
             continue
-        node_id, node_type, status = raw.get("id"), raw.get("type"), raw.get("status")
+        node_id = raw.get("id")
+        node_type = raw.get("type")
+        status = raw.get("status")
         if not isinstance(node_id, str) or not node_id.strip() or node_id != node_id.strip():
             malformed.append("NODE_ID_INVALID")
             continue
@@ -119,14 +158,17 @@ def evaluate(graph: Mapping[str, Any]) -> dict[str, Any]:
             malformed.append(dep_error or defeater_error or "NODE_REFERENCE_INVALID")
             continue
         node = deepcopy(dict(raw))
-        node["depends_on"], node["defeated_by"] = deps, defeaters
+        node["depends_on"] = deps
+        node["defeated_by"] = defeaters
         nodes[node_id] = node
+
     if malformed:
         return _fail("MALFORMED_NODE_SET", errors=sorted(malformed))
 
     missing_roots = sorted(set(roots) - set(nodes))
     if missing_roots:
         return _fail("ROOT_NODE_MISSING", missing_root_ids=missing_roots)
+
     refs: set[str] = set()
     for node in nodes.values():
         refs.update(node["depends_on"])
@@ -135,17 +177,21 @@ def evaluate(graph: Mapping[str, Any]) -> dict[str, Any]:
     if dangling:
         return _fail("DANGLING_NODE_REFERENCE", dangling_ids=dangling)
 
+    # Dependency cycles are not allowed to self-certify. A future cycle proof
+    # must be represented as an explicit admitted evidence/foundation node,
+    # not by circular graph support.
     color: dict[str, int] = {}
     stack: list[str] = []
     cycles: list[list[str]] = []
+
     def visit(node_id: str) -> None:
         state = color.get(node_id, 0)
         if state == 2:
             return
         if state == 1:
             if node_id in stack:
-                i = stack.index(node_id)
-                cycles.append(stack[i:] + [node_id])
+                start = stack.index(node_id)
+                cycles.append(stack[start:] + [node_id])
             return
         color[node_id] = 1
         stack.append(node_id)
@@ -153,11 +199,14 @@ def evaluate(graph: Mapping[str, Any]) -> dict[str, Any]:
             visit(dep)
         stack.pop()
         color[node_id] = 2
+
     for root_id in roots:
         visit(root_id)
+
     if cycles:
         return _fail(
-            "UNSUPPORTED_DEPENDENCY_CYCLE", cycles=cycles,
+            "UNSUPPORTED_DEPENDENCY_CYCLE",
+            cycles=cycles,
             representation_closure=(not unsupported_types),
             new_primitive_required=bool(unsupported_types),
             unsupported_primitive_types=sorted(unsupported_types),
@@ -176,18 +225,31 @@ def evaluate(graph: Mapping[str, Any]) -> dict[str, Any]:
             return memo[node_id]
         node = nodes[node_id]
         status = node["status"]
+
         if status == "PROVEN_IRRELEVANT":
             proved_irrelevant.add(node_id)
             memo[node_id] = True
             return True
-        if status in {"OPEN", "STALE", "REJECTED"}:
-            if status == "STALE":
-                stale_ids.add(node_id)
+        if status == "OPEN":
             open_residuals.add(node_id)
             for dep in node["depends_on"]:
                 closed(dep)
             memo[node_id] = False
             return False
+        if status == "STALE":
+            stale_ids.add(node_id)
+            open_residuals.add(node_id)
+            for dep in node["depends_on"]:
+                closed(dep)
+            memo[node_id] = False
+            return False
+        if status == "REJECTED":
+            open_residuals.add(node_id)
+            for dep in node["depends_on"]:
+                closed(dep)
+            memo[node_id] = False
+            return False
+
         for defeater_id in node["defeated_by"]:
             defeater = nodes[defeater_id]
             if defeater["status"] == "SUPPORTED":
@@ -199,6 +261,7 @@ def evaluate(graph: Mapping[str, Any]) -> dict[str, Any]:
                 open_residuals.add(defeater_id)
                 memo[node_id] = False
                 return False
+
         deps = node["depends_on"]
         if not deps:
             if node["type"] in TERMINAL_LEAF_TYPES and node.get("authoritative_leaf") is True:
@@ -208,19 +271,22 @@ def evaluate(graph: Mapping[str, Any]) -> dict[str, Any]:
             open_residuals.add(node_id)
             memo[node_id] = False
             return False
+
         ok = all(closed(dep) for dep in deps)
         memo[node_id] = ok
         return ok
 
     root_closed = {root_id: closed(root_id) for root_id in roots}
+
     representation_closure = not unsupported_types
-    proof_closure = (
-        all(root_closed.values()) and
-        not active_defeaters and
-        not unresolved_defeaters
-    )
-    execution_closure = graph.get("execution_closure_proved") is True
-    adversarial_closure = graph.get("adversarial_closure_proved") is True
+    proof_closure = all(root_closed.values()) and not active_defeaters and not unresolved_defeaters
+
+    # Generic graph input cannot self-certify execution or independent
+    # adversarial closure. Those gates must be derived by a trusted adapter or
+    # verifier entrypoint, never by caller booleans embedded in the graph.
+    execution_closure = False
+    adversarial_closure = False
+
     gates = {
         "representation_closure": representation_closure,
         "proof_closure": proof_closure,
@@ -229,19 +295,26 @@ def evaluate(graph: Mapping[str, Any]) -> dict[str, Any]:
     }
 
     if active_defeaters:
-        status, passed = "COUNTERPROVED", False
+        status = "COUNTERPROVED"
+        passed = False
     elif unsupported_types:
-        status, passed = "OPEN__NEW_PRIMITIVE_REPRESENTATION_REQUIRED", False
+        status = "OPEN__NEW_PRIMITIVE_REPRESENTATION_REQUIRED"
+        passed = False
     elif not proof_closure:
-        status, passed = "OPEN__ASSURANCE_RESIDUAL", False
+        status = "OPEN__ASSURANCE_RESIDUAL"
+        passed = False
     elif not execution_closure:
-        status, passed = "OPEN__EXECUTION_CLOSURE_REQUIRED", False
+        status = "OPEN__EXECUTION_CLOSURE_REQUIRED"
+        passed = False
     elif not adversarial_closure:
-        status, passed = "OPEN__ADVERSARIAL_CLOSURE_REQUIRED", False
+        status = "OPEN__ADVERSARIAL_CLOSURE_REQUIRED"
+        passed = False
     else:
-        status, passed = "CLOSED__ALL_FOUR_ASSURANCE_GATES", True
+        status = "CLOSED__ALL_FOUR_ASSURANCE_GATES"
+        passed = True
 
     residual = sorted(open_residuals | unresolved_defeaters | unsupported_leaf_ids)
+
     return {
         **_base(status, passed=passed),
         "graph_sha256": digest(graph),
@@ -264,53 +337,61 @@ def evaluate(graph: Mapping[str, Any]) -> dict[str, Any]:
 
 
 def compile_controller_result(result: Mapping[str, Any]) -> dict[str, Any]:
-    """Compile an existing R2 result without granting it any new authority."""
+    """Compile the existing R2 fixed-point result into a V2 closure graph.
+
+    This adapter deliberately grants no additional authority. Existing PASS
+    results can establish the execution gate only when the existing controller
+    already says semantic acceptance and actual goal satisfaction are verified.
+    Integrated adversarial closure remains a separate obligation.
+    """
     if not isinstance(result, Mapping):
         raise TypeError("RESULT_NOT_OBJECT")
+
     passed = result.get("pass") is True
+    root_status = "SUPPORTED" if passed else "OPEN"
     nodes: list[dict[str, Any]] = []
+
     if passed:
         evidence_id = "controller:verified-goal-satisfaction"
-        nodes.extend([
-            {
-                "id": evidence_id, "type": "EVIDENCE", "status": "SUPPORTED",
-                "authoritative_leaf": True,
-                "source_schema": result.get("schema"),
-                "source_status": result.get("status"),
-            },
-            {
-                "id": "root:goal", "type": "CLAIM", "status": "SUPPORTED",
-                "depends_on": [evidence_id], "defeated_by": [],
-            },
-        ])
+        nodes.append({
+            "id": evidence_id,
+            "type": "EVIDENCE",
+            "status": "SUPPORTED",
+            "authoritative_leaf": True,
+            "source_schema": result.get("schema"),
+            "source_status": result.get("status"),
+        })
+        nodes.append({
+            "id": "root:goal",
+            "type": "CLAIM",
+            "status": root_status,
+            "depends_on": [evidence_id],
+            "defeated_by": [],
+        })
     else:
-        nodes.extend([
-            {
-                "id": "root:goal", "type": "CLAIM", "status": "OPEN",
-                "depends_on": ["obligation:next-edge"], "defeated_by": [],
-            },
-            {
-                "id": "obligation:next-edge", "type": "OBLIGATION",
-                "status": "OPEN",
-                "required_edge": (
-                    result.get("next_required_edge")
-                    or result.get("next_required_effect")
-                    or result.get("status")
-                    or "UNSPECIFIED_OPEN_EDGE"
-                ),
-            },
-        ])
-    execution_closed = bool(
-        passed
-        and result.get("semantic_acceptance_complete") is True
-        and result.get("actual_goal_satisfaction_verified") is True
-    )
+        nodes.append({
+            "id": "root:goal",
+            "type": "CLAIM",
+            "status": "OPEN",
+            "depends_on": ["obligation:next-edge"],
+            "defeated_by": [],
+        })
+        nodes.append({
+            "id": "obligation:next-edge",
+            "type": "OBLIGATION",
+            "status": "OPEN",
+            "required_edge": (
+                result.get("next_required_edge")
+                or result.get("next_required_effect")
+                or result.get("status")
+                or "UNSPECIFIED_OPEN_EDGE"
+            ),
+        })
+
     return {
         "schema": GRAPH_SCHEMA,
         "root_ids": ["root:goal"],
         "nodes": nodes,
-        "execution_closure_proved": execution_closed,
-        "adversarial_closure_proved": False,
         "source_result_sha256": digest(dict(result)),
         "source_terminal_authority": result.get("terminal_authority") is True,
     }
@@ -319,6 +400,20 @@ def compile_controller_result(result: Mapping[str, Any]) -> dict[str, Any]:
 def evaluate_controller_result(result: Mapping[str, Any]) -> dict[str, Any]:
     graph = compile_controller_result(result)
     out = evaluate(graph)
+    execution_closed = bool(
+        result.get("pass") is True
+        and result.get("semantic_acceptance_complete") is True
+        and result.get("actual_goal_satisfaction_verified") is True
+    )
+    out["closure_gates"]["execution_closure"] = execution_closed
+    out["closure_gates"]["adversarial_closure"] = False
+    if (
+        out["closure_gates"]["representation_closure"]
+        and out["closure_gates"]["proof_closure"]
+        and execution_closed
+    ):
+        out["status"] = "OPEN__ADVERSARIAL_CLOSURE_REQUIRED"
+    out["pass"] = False
     out["compiled_from_controller_result"] = True
     out["source_result_sha256"] = graph["source_result_sha256"]
     return out
