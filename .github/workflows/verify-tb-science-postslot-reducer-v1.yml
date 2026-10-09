@@ -1,0 +1,30 @@
+# stdlib-only focused verifier
+name: Verify TB-Science post-slot reducer v1
+
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/tb_science_postslot_reducer_v1.py"
+      - "canonical/tests/test_tb_science_postslot_reducer_v1.py"
+      - "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json"
+      - "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_*.json"
+      - ".github/workflows/verify-tb-science-postslot-reducer-v1.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Compile reducer
+        run: python -m py_compile canonical/runtime/tb_science_postslot_reducer_v1.py
+      - name: Run focused reducer tests
+        run: python canonical/tests/test_tb_science_postslot_reducer_v1.py
