@@ -1,0 +1,77 @@
+{
+  "schema": "PROJECT_BRAIN_FINITE_EXHAUSTIVE_REFINEMENT_CHECKER_SPRITE_VERIFICATION_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__FINITE_EXHAUSTIVE_SEMANTIC_REFINEMENT_CHECKER__12_OF_12__ZERO_TERMINAL_CREDIT",
+  "scope": "EXACT_DECLARED_FINITE_INPUT_DOMAIN_SEMANTIC_REFINEMENT_CHECKER",
+  "repository": "moxnixmdj/brain",
+  "branch": "impl-executable-refinement-terminal-closure-rebased-20261009",
+  "exact_blobs": {
+    "runtime": {
+      "path": "canonical/runtime/finite_exhaustive_refinement_checker_v1.py",
+      "git_blob_sha": "3f8082f94144489aebcc607e6373baaffff4d46e"
+    },
+    "tests": {
+      "path": "canonical/tests/test_finite_exhaustive_refinement_checker_v1.py",
+      "git_blob_sha": "fdde9e5385fc9a1b3a4647310c560198db63f73d"
+    }
+  },
+  "carrier": {
+    "kind": "SPRITE",
+    "name": "brain-root3-current-byte-replay-20261007-v1",
+    "id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+    "organization": "mohammad-sadek",
+    "existing_carrier_reused": true,
+    "incremental_spend_usd": 0,
+    "workspace": "/home/sprite/executable-refinement-semantic-verify"
+  },
+  "transfer_verification": {
+    "runtime_remote_git_blob_sha": "3f8082f94144489aebcc607e6373baaffff4d46e",
+    "test_remote_git_blob_sha": "fdde9e5385fc9a1b3a4647310c560198db63f73d",
+    "exact_source_bytes_matched": true
+  },
+  "execution": {
+    "py_compile": "PASS",
+    "first_direct_file_invocation": {
+      "result": "NO_TESTS_EXECUTED__PACKAGE_IMPORT_ROOT_MISSING",
+      "classification": "CARRIER_INVOCATION_ERROR__NO_CODE_CREDIT",
+      "error": "ModuleNotFoundError: No module named 'canonical'"
+    },
+    "corrected_module_invocation": "python3 -m canonical.tests.test_finite_exhaustive_refinement_checker_v1",
+    "tests_run": 12,
+    "failures": 0,
+    "errors": 0,
+    "result": "PASS"
+  },
+  "verified_properties": [
+    "UNKNOWN_PROOF_SCHEMA_FAILS_CLOSED",
+    "CONCRETE_BLOB_DRIFT_FAILS_CLOSED",
+    "TRACE_BLOB_DRIFT_FAILS_CLOSED",
+    "OPEN_OR_UNBOUNDED_DOMAIN_FAILS_CLOSED",
+    "MISSING_TRACE_CASE_FAILS_CLOSED",
+    "EXTRA_TRACE_CASE_FAILS_CLOSED",
+    "DUPLICATE_TRACE_INPUT_FAILS_CLOSED",
+    "TRACE_CONCRETE_BLOB_BINDING_MUST_MATCH",
+    "SEMANTIC_OUTPUT_MISMATCH_FAILS_CLOSED",
+    "NONINDEPENDENT_EXECUTION_TRACE_FAILS_CLOSED",
+    "NONZERO_TERMINAL_CREDIT_FAILS_CLOSED",
+    "EXHAUSTIVE_FINITE_CLOSED_DOMAIN_EXACT_TRACE_MINTS_REFINEMENT_VERIFIED_RECEIPT"
+  ],
+  "theorem_boundary": {
+    "semantic_refinement_route_exists": true,
+    "proof_class": "EXHAUSTIVE_FINITE_DOMAIN_TRACE_REFINEMENT",
+    "assurance_level": "EXACT_DECLARED_FINITE_INPUT_DOMAIN",
+    "liveness_refinement_verified": false,
+    "open_world_program_equivalence": false,
+    "arbitrary_input_domain_refinement": false,
+    "repository_wide_refinement": false
+  },
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "hard_nonclaims": [
+    "NO_CLAIM_OUTSIDE_DECLARED_FINITE_DOMAIN.",
+    "NO_CLAIM_LIVENESS_OR_TERMINATION_FOR_UNEXECUTED_INPUTS.",
+    "NO_CLAIM_OPEN_WORLD_PROGRAM_EQUIVALENCE.",
+    "NO_CLAIM_REPOSITORY_WIDE_EXECUTABLE_REFINEMENT.",
+    "NO_TERMINAL_OR_CAPABILITY_CREDIT."
+  ]
+}
