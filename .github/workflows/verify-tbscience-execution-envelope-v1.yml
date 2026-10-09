@@ -1,0 +1,76 @@
+name: Verify TB-Science execution envelope V1
+
+on:
+  push:
+    branches: [tbscience-execution-envelope-v1]
+    paths:
+      - "canonical/runtime/harbor_science_planner_v1.py"
+      - "canonical/runtime/harbor_science_agent_v1.py"
+      - "canonical/runtime/harbor_environment_transport.py"
+      - "canonical/tests/test_harbor_science_planner_v1.py"
+      - "canonical/tests/test_harbor_science_agent_v1.py"
+      - "canonical/tests/test_harbor_environment_transport.py"
+      - ".github/workflows/verify-tbscience-execution-envelope-v1.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Compile exact runtime
+        run: |
+          set -euo pipefail
+          python -m py_compile             canonical/runtime/harbor_science_planner_v1.py             canonical/runtime/harbor_science_agent_v1.py             canonical/runtime/harbor_environment_transport.py
+      - name: Run focused adversarial suite
+        run: |
+          set -euo pipefail
+          python -m unittest -v             canonical.tests.test_harbor_science_planner_v1             canonical.tests.test_harbor_environment_transport             canonical.tests.test_harbor_science_agent_v1
+      - name: Bind zero-exposure verification receipt
+        run: |
+          python - <<'PY'
+          import hashlib,json,pathlib,subprocess,os
+          files=[
+            "canonical/runtime/harbor_science_planner_v1.py",
+            "canonical/runtime/harbor_science_agent_v1.py",
+            "canonical/runtime/harbor_environment_transport.py",
+            "canonical/tests/test_harbor_science_planner_v1.py",
+            "canonical/tests/test_harbor_science_agent_v1.py",
+            "canonical/tests/test_harbor_environment_transport.py",
+          ]
+          blobs={
+            p:subprocess.check_output(["git","hash-object",p],text=True).strip()
+            for p in files
+          }
+          out={
+            "schema":"PROJECT_BRAIN_TB_SCIENCE_EXECUTION_ENVELOPE_VERIFICATION_V1",
+            "status":"PASS__FOCUSED_CONTEXT_AND_TIMEOUT_ENVELOPE__ZERO_BENCHMARK_EXPOSURE",
+            "github_sha":os.environ["GITHUB_SHA"],
+            "git_blobs":blobs,
+            "server_context_tokens":16384,
+            "reserved_completion_tokens":4096,
+            "max_input_tokens":12288,
+            "max_environment_exec_timeout_s":3600,
+            "benchmark_task_exposure":0,
+            "benchmark_trials_executed":0,
+            "incremental_spend_usd":0,
+            "terminal_credit_delta":0,
+          }
+          pathlib.Path("TBSCIENCE_EXECUTION_ENVELOPE_VERIFY_V1.json").write_text(
+            json.dumps(out,indent=2,sort_keys=True)+"\n"
+          )
+          print(json.dumps(out,sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tbscience-execution-envelope-v1
+          path: TBSCIENCE_EXECUTION_ENVELOPE_VERIFY_V1.json
+          retention-days: 7
