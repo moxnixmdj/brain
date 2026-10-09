@@ -110,6 +110,8 @@ def prove_subclass_path(
         nodes=0
         while queue and nodes<max_nodes:
             qid,path,depth=queue.popleft()
+            if depth>=max_depth:
+                continue
             raw,final,status=fetch(qid,timeout)
             parents,receipt=_parse_entity(qid,raw,final,status)
             receipts[qid]=receipt
@@ -137,8 +139,6 @@ def prove_subclass_path(
                     "terminal_authority":False,
                     "terminal_credit_delta":0,
                 }
-            if depth>=max_depth:
-                continue
             for parent in parents:
                 if parent not in seen:
                     seen.add(parent)
