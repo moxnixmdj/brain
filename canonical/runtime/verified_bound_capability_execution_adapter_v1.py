@@ -22,9 +22,12 @@ the universal solver must still authenticate that mapping separately.
 from __future__ import annotations
 
 from copy import deepcopy
-from hashlib import sha256
+from hashlib import sha1, sha256
 import json
+import importlib.util
 from pathlib import Path
+import sys
+import tempfile
 from typing import Any, Mapping
 
 from canonical.runtime import astra_runtime
@@ -52,6 +55,10 @@ def _canon(value: Any) -> str:
 
 def _sha(value: Any) -> str:
     return sha256(_canon(value).encode("utf-8")).hexdigest()
+
+
+def _git_blob_sha(raw: bytes) -> str:
+    return sha1(b"blob " + str(len(raw)).encode("ascii") + b"\\0" + raw).hexdigest()
 
 
 def _load_registry() -> tuple[bytes, Mapping[str, Any], Mapping[str, Any]]:
@@ -95,6 +102,7 @@ def inspect(capability_id: str) -> dict[str, Any]:
         "entry": deepcopy(dict(entry)),
         "registry_file_sha256": sha256(raw).hexdigest(),
         "registry_entry_sha256": _sha(entry),
+        "adapter_git_blob_sha": _git_blob_sha((ROOT / "canonical" / "runtime" / "bound_capabilities" / (str(entry.get("adapter_module")) + ".py")).read_bytes()),
     }
 
 
@@ -145,12 +153,53 @@ def prepare(
         "inputs_sha256": _sha(inputs),
         "registry_file_sha256": inspected["registry_file_sha256"],
         "registry_entry_sha256": inspected["registry_entry_sha256"],
+        "adapter_git_blob_sha": inspected["adapter_git_blob_sha"],
+        "_frozen_entry": deepcopy(dict(entry)),
         "rendered_action": deepcopy(dict(rendered)),
         "rendered_action_sha256": _sha(rendered),
         "incremental_spend_usd": 0,
         "execution_authority": False,
         "terminal_authority": False,
     }
+
+
+def _invoke_frozen_bound_capability(entry: Mapping[str, Any], args: Mapping[str, Any], *, expected_adapter_git_blob_sha: str) -> tuple[dict[str, Any], str]:
+    source = entry.get("source") or {}
+    call_args = dict(args)
+    call_args.pop("capability_id", None)
+    dependency = None
+    typ = str(source.get("type") or "")
+    if typ == "pypi":
+        dependency = astra_runtime._ensure_pypi_dependency(source)
+    elif typ == "npm":
+        dependency = astra_runtime._ensure_npm_dependency(source); call_args["_package_root"] = dependency.get("package_root")
+    elif typ == "apt":
+        dependency = astra_runtime._ensure_apt_dependencies(source)
+    elif typ == "git_source_tree":
+        dependency = astra_runtime._ensure_git_source_tree_dependency(source); call_args["_source_root"] = dependency.get("source_root")
+    elif typ in {"python_stdlib", "system_tool"}:
+        dependency = astra_runtime._ensure_local_dependency(source)
+    elif typ:
+        raise BoundExecutionError("BOUND_CAPABILITY_SOURCE_UNSUPPORTED:" + typ)
+    module_name = str(entry.get("adapter_module") or "")
+    path = ROOT / "canonical" / "runtime" / "bound_capabilities" / (module_name + ".py")
+    raw = path.read_bytes()
+    observed = _git_blob_sha(raw)
+    if observed != expected_adapter_git_blob_sha:
+        raise BoundExecutionError("BOUND_CAPABILITY_ADAPTER_BLOB_MISMATCH")
+    with tempfile.TemporaryDirectory(prefix="brain-bound-adapter-") as td:
+        frozen = Path(td) / (module_name + ".py")
+        frozen.write_bytes(raw)
+        spec = importlib.util.spec_from_file_location("project_brain_frozen_bound_" + module_name, frozen)
+        if spec is None or spec.loader is None:
+            raise BoundExecutionError("BOUND_CAPABILITY_ADAPTER_LOAD_FAILED")
+        module = importlib.util.module_from_spec(spec); sys.modules[spec.name] = module; spec.loader.exec_module(module)
+        fn = getattr(module, str(entry.get("entrypoint") or "run"), None)
+        if not callable(fn): raise BoundExecutionError("BOUND_CAPABILITY_ENTRYPOINT_MISSING")
+        result = fn(call_args, ROOT)
+    if not isinstance(result, dict): raise BoundExecutionError("BOUND_CAPABILITY_RESULT_INVALID")
+    result.setdefault("capability_id", str(args.get("capability_id") or "")); result["dependency"] = dependency
+    return result, observed
 
 
 def execute(
@@ -164,6 +213,7 @@ def execute(
     expected_registry_file_sha256: str | None = None,
     expected_registry_entry_sha256: str | None = None,
     expected_rendered_action_sha256: str | None = None,
+    expected_adapter_git_blob_sha: str | None = None,
 ) -> dict[str, Any]:
     try:
         prepared = prepare(
@@ -175,8 +225,7 @@ def execute(
             result_fields=result_fields,
         )
         cid = prepared["capability_id"]
-        inspected = inspect(cid)
-        entry = inspected["entry"]
+        entry = prepared["_frozen_entry"]
         rendered = prepared["rendered_action"]
         args = rendered["args"]
 
@@ -196,8 +245,7 @@ def execute(
         ):
             raise BoundExecutionError("RENDERED_ACTION_CHANGED_AFTER_PREPARATION")
 
-        result = astra_runtime._invoke_bound_capability(dict(args))
-        if not isinstance(result, Mapping):
+        if expected_adapter_git_blob_sha is not None and prepared["adapter_git_blob_sha"] != str(expected_adapter_git_blob_sha).lower():\n            raise BoundExecutionError("ADAPTER_CHANGED_AFTER_PREPARATION")\n        result, adapter_git_blob_sha = _invoke_frozen_bound_capability(entry, dict(args), expected_adapter_git_blob_sha=prepared["adapter_git_blob_sha"])\n        if not isinstance(result, Mapping):
             raise BoundExecutionError("BOUND_CAPABILITY_RESULT_INVALID")
         astra_runtime._verify_action_expectation(rendered, result)
 
@@ -256,6 +304,7 @@ def execute(
             "registry_file_sha256": prepared["registry_file_sha256"],
             "registry_entry_sha256": prepared["registry_entry_sha256"],
             "rendered_action_sha256": prepared["rendered_action_sha256"],
+            "adapter_git_blob_sha": adapter_git_blob_sha,
             "rendered_action": deepcopy(dict(rendered)),
             "result_sha256": _sha(result),
             "result": deepcopy(dict(result)),
