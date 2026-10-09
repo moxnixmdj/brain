@@ -14,6 +14,11 @@ on:
       - "canonical/runtime/bound_capability_execution_verifier_v1.py"
       - "canonical/tests/test_bound_capability_execution_verifier_v1.py"
       - "canonical/runtime/r3_bound_success_adapter_v1.py"
+      - "canonical/runtime/r3_structural_bound_success_adapter_v1.py"
+      - "canonical/runtime/r3_structural_bound_rule_acquisition_v1.py"
+      - "canonical/runtime/R3_STRUCTURAL_BOUND_ADAPTER_RULES_V1.json"
+      - "canonical/runtime/live_integrated_brain_v1.py"
+      - "canonical/tests/test_r3_structural_bound_acquisition_v1.py"
       - "canonical/runtime/r3_bound_success_checkpoint_verifier_v1.py"
       - "canonical/tests/test_r3_independent_learning_verifier_v1.py"
       - "canonical/tests/test_r3_bound_success_readonly_learning_v1.py"
@@ -58,6 +63,11 @@ on:
       - "canonical/runtime/bound_capability_execution_verifier_v1.py"
       - "canonical/tests/test_bound_capability_execution_verifier_v1.py"
       - "canonical/runtime/r3_bound_success_adapter_v1.py"
+      - "canonical/runtime/r3_structural_bound_success_adapter_v1.py"
+      - "canonical/runtime/r3_structural_bound_rule_acquisition_v1.py"
+      - "canonical/runtime/R3_STRUCTURAL_BOUND_ADAPTER_RULES_V1.json"
+      - "canonical/runtime/live_integrated_brain_v1.py"
+      - "canonical/tests/test_r3_structural_bound_acquisition_v1.py"
       - "canonical/runtime/r3_bound_success_checkpoint_verifier_v1.py"
       - "canonical/tests/test_r3_independent_learning_verifier_v1.py"
       - "canonical/tests/test_r3_bound_success_readonly_learning_v1.py"
@@ -105,6 +115,9 @@ jobs:
           canonical/runtime/universal_bound_capability_carrier_v1.py
           canonical/runtime/bound_capability_execution_verifier_v1.py
           canonical/runtime/r3_bound_success_adapter_v1.py
+          canonical/runtime/r3_structural_bound_success_adapter_v1.py
+          canonical/runtime/r3_structural_bound_rule_acquisition_v1.py
+          canonical/runtime/live_integrated_brain_v1.py
           canonical/runtime/r3_bound_success_checkpoint_verifier_v1.py
           canonical/runtime/executable_skill_program_v7.py
           canonical/runtime/executable_skill_verification_authenticator_v1.py
@@ -149,6 +162,8 @@ jobs:
           PY
       - name: Run R3 bound-success read-only learning suite
         run: python -m unittest canonical.tests.test_r3_bound_success_readonly_learning_v1 -v
+      - name: Run R3 structural bound acquisition suite
+        run: python -m unittest canonical.tests.test_r3_structural_bound_acquisition_v1 -v
       - name: Run R3 repair replay regression suite
         run: python -m unittest canonical.tests.test_verified_repair_replay_loop_v1 -v
       - name: Run R3 live runtime regression suite
