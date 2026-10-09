@@ -3650,5 +3650,27 @@
     "result": "FORMAL_GATE_ONLY_ROUTE_INVALID__WAL_SINGLETON_COMPLETENESS_RECOVERED__TARGET_RELEVANCE_UNPROVED",
     "acceptance_credit_delta": 0,
     "terminal_credit_delta": 0
+  },
+  "tb_science_v29_rank15_irreversible_result_reconciliation": {
+    "schema": "PROJECT_BRAIN_TB_SCIENCE_V29_RANK15_IRREVERSIBLE_RESULT_RECONCILIATION_V1",
+    "result_truth_path": "canonical/verification/TB_SCIENCE_RANK15_V6_IRREVERSIBLE_RESULT_TRUTH_20261009_V1.json",
+    "result_truth_git_blob_sha": "a585c98a3acebd51198bc8c2ac4638ef13e98adc",
+    "current_ledger_path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261009_V29.json",
+    "current_ledger_git_blob_sha": "0c97c84d98ef3ce97025ea6672971f188d5fc566",
+    "prior_ledger_v28_git_blob_sha": "d5bcd21a6a8ab977f72a1a0e10b364ead61ceb3e",
+    "consumed_slots": 15,
+    "consumed_successes": 0,
+    "consumed_final_failures": 15,
+    "rank15_result": "FINAL_ZERO",
+    "rank15_reward": 0,
+    "rank15_rerun_authority": false,
+    "next_rank": 16,
+    "next_slot_id": "terminal-bench-science/sparse-network-assimilation::trial-0",
+    "next_task_digest": "sha256:52ba7089dc32952df08c478af76b732fa82468c125431388adbf9798d869826f",
+    "rank16_task_read": false,
+    "rank16_task_started": false,
+    "required_repair": "CANDIDATE_LOCAL_FAIL_CLOSED_REJECTION_FOR_COVERAGE_OUTSIDE_FROZEN_CONTRACT",
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
   }
 }
