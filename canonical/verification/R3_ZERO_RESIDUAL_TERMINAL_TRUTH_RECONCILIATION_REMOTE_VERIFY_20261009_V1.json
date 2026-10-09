@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_R3_ZERO_RESIDUAL_TERMINAL_TRUTH_RECONCILIATION_REMOTE_VERIFY_V1",
+  "date": "2026-10-09",
+  "status": "PASS__22_OF_22__EXACT_SOURCE_BLOBS__R3_NOT_TERMINAL_BLOCKER__ZERO_CREDIT",
+  "carrier": {
+    "provider": "SPRITES",
+    "name": "brain-live-integrated-v1-run-20261008",
+    "id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "workspace": "/home/sprite/verify-r3-terminal-reconcile"
+  },
+  "subject": {
+    "reconciliation_path": "canonical/governance/R3_ZERO_RESIDUAL_TERMINAL_TRUTH_RECONCILIATION_20261009_V1.json",
+    "reconciliation_git_blob_sha": "0c62b690139c1b58c76485101bb10e74941afff5",
+    "terminal_pointer_path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+    "terminal_pointer_git_blob_sha": "7238409b9350207a58f5240d6d2f01f429c104f6",
+    "one_shot_pointer_path": "canonical/governance/CURRENT_ONE_SHOT_REALITY_CLOSURE.json",
+    "one_shot_pointer_git_blob_sha": "7ba615a8f793fff8fe633680b65b723ffb2c0168"
+  },
+  "verification": {
+    "check_count": 22,
+    "pass_count": 22,
+    "failed": [],
+    "exact_source_blob_binding": true,
+    "live_r3_internal_residual_zero": true,
+    "live_r3_pending_improvement_count_zero": true,
+    "terminal_r3_blocker_false": true,
+    "stale_recompute_root_retired": true,
+    "primary_terminal_scheduler_object_preserved": true,
+    "terminal_remains_false": true,
+    "r2_general_mechanism_closed": true,
+    "r2_positive_action_coverage_still_open": true,
+    "information_theoretic_externality_proved_count": 0,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_TERMINAL_TRUE",
+    "NO_CLAIM_R2_POSITIVE_ADEQUACY_COVERAGE_COMPLETE",
+    "NO_CLAIM_ALL_FROZEN_ACCEPTANCE_OBLIGATIONS_CLOSED",
+    "NO_CLAIM_ORPHANED_HISTORICAL_FAILURE_WAS_REPAIRED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0,
+    "checkpoint_credit_delta": 0,
+    "acceptance_credit_delta": 0
+  }
+}
