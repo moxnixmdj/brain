@@ -24,7 +24,10 @@ from __future__ import annotations
 from copy import deepcopy
 from hashlib import sha256
 import json
+import importlib.util
 from pathlib import Path
+import sys
+import tempfile
 from typing import Any, Mapping
 
 from canonical.runtime import astra_runtime
@@ -145,6 +148,7 @@ def prepare(
         "inputs_sha256": _sha(inputs),
         "registry_file_sha256": inspected["registry_file_sha256"],
         "registry_entry_sha256": inspected["registry_entry_sha256"],
+        "_frozen_entry": deepcopy(dict(entry)),
         "rendered_action": deepcopy(dict(rendered)),
         "rendered_action_sha256": _sha(rendered),
         "incremental_spend_usd": 0,
