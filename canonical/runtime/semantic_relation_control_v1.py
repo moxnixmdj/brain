@@ -37,6 +37,9 @@ from canonical.runtime.terminal_semantic_quotient_v1 import (
 from canonical.runtime.bounded_semantic_relation_proof_v1 import (
     prove as prove_bounded_relation,
 )
+from canonical.runtime.semantic_relation_entailment_dag_v1 import (
+    prove as prove_entailment_dag,
+)
 
 SCHEMA = "PROJECT_BRAIN_DECISION_RELATIVE_SEMANTIC_RELATION_CONTROL_V1"
 CONCEPT_IDENTITY_AUTHORITY_SCHEMA = "PROJECT_BRAIN_SHARED_CONCEPT_IDENTITY_AUTHORITY_RECEIPT_V1"
@@ -436,6 +439,7 @@ def resolve(
     *,
     concept_identity_verifier: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
     terminal_signature_verifier: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
+    relation_edge_verifier: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
 ) -> dict[str, Any]:
     if not isinstance(problem, Mapping):
         return {
@@ -461,6 +465,8 @@ def resolve(
         "bounded_extension_evidence",
         "expected_bounded_extension_sha256",
         "shared_concept_identity_receipt",
+        "entailment_dag_evidence",
+        "expected_entailment_dag_sha256",
     }
     extra = set(problem) - allowed
     if extra:
@@ -596,6 +602,54 @@ def resolve(
                 "terminal_credit_delta": 0,
             }
 
+    entailment_dag = {
+        "available": False,
+        "pass": False,
+        "reason": "NO_ENTAILMENT_DAG_EVIDENCE",
+    }
+    dag_evidence = problem.get("entailment_dag_evidence")
+    dag_expected_sha = problem.get("expected_entailment_dag_sha256")
+    if dag_evidence is not None or dag_expected_sha is not None:
+        if not isinstance(dag_evidence, Mapping):
+            return {
+                "schema": SCHEMA,
+                "pass": False,
+                "status": "FAIL_CLOSED__ENTAILMENT_DAG_EVIDENCE_INVALID",
+                "reason": "ENTAILMENT_DAG_EVIDENCE_NOT_OBJECT",
+                "terminal_authority": False,
+                "terminal_credit_delta": 0,
+            }
+        entailment_dag = prove_entailment_dag(
+            dag_evidence,
+            expected_evidence_sha256=str(dag_expected_sha or ""),
+            relation_verifier=relation_edge_verifier,
+        )
+        entailment_dag = {"available": True, **entailment_dag}
+        if entailment_dag.get("pass") is not True:
+            return {
+                "schema": SCHEMA,
+                "pass": False,
+                "status": "FAIL_CLOSED__ENTAILMENT_DAG_EVIDENCE_INVALID",
+                "reason": entailment_dag.get("reason"),
+                "entailment_dag_proof": entailment_dag,
+                "terminal_authority": False,
+                "terminal_credit_delta": 0,
+            }
+        if (
+            entailment_dag.get("scope_id") != scope_id
+            or entailment_dag.get("left_id") != left_id
+            or entailment_dag.get("right_id") != right_id
+        ):
+            return {
+                "schema": SCHEMA,
+                "pass": False,
+                "status": "FAIL_CLOSED__ENTAILMENT_DAG_BINDING_MISMATCH",
+                "reason": "SCOPE_OR_EXPRESSION_IDENTITY_MISMATCH",
+                "entailment_dag_proof": entailment_dag,
+                "terminal_authority": False,
+                "terminal_credit_delta": 0,
+            }
+
     if explicit.get("reason") == "EXPLICIT_SOURCE_EVIDENCE_FAIL_CLOSED":
         return {
             "schema": SCHEMA,
@@ -629,12 +683,25 @@ def resolve(
         and bounded.get("right_entails_left") is True
     )
 
+    dag_equivalent = (
+        entailment_dag.get("available") is True
+        and entailment_dag.get("logical_equivalence_in_scope") is True
+    )
+    dag_left_entails = (
+        entailment_dag.get("available") is True
+        and entailment_dag.get("left_entails_right") is True
+    )
+    dag_right_entails = (
+        entailment_dag.get("available") is True
+        and entailment_dag.get("right_entails_left") is True
+    )
+
     # Candidate lexical/model output remains non-authoritative. Directional
     # relations become load-bearing here only when recomputed by the bounded
     # exact proof kernel (or implied by exact source identity).
-    left_entails_right = semantic_identity or bounded_left_entails
-    right_entails_left = semantic_identity or bounded_right_entails
-    logical_equivalence = semantic_identity or bounded_equivalent
+    left_entails_right = semantic_identity or bounded_left_entails or dag_left_entails
+    right_entails_left = semantic_identity or bounded_right_entails or dag_right_entails
+    logical_equivalence = semantic_identity or bounded_equivalent or dag_equivalent
 
     if semantic_identity:
         strongest = "SEMANTIC_IDENTITY"
@@ -652,26 +719,26 @@ def resolve(
     if required == "SEMANTIC_IDENTITY":
         satisfied = semantic_identity
         disproved = (
-            bounded.get("available") is True
-            and bounded.get("logical_equivalence_disproved") is True
+            (bounded.get("available") is True and bounded.get("logical_equivalence_disproved") is True)
+            or (entailment_dag.get("available") is True and entailment_dag.get("logical_equivalence_disproved") is True)
         )
     elif required == "LOGICAL_EQUIVALENCE_IN_SCOPE":
         satisfied = logical_equivalence
         disproved = (
-            bounded.get("available") is True
-            and bounded.get("logical_equivalence_disproved") is True
+            (bounded.get("available") is True and bounded.get("logical_equivalence_disproved") is True)
+            or (entailment_dag.get("available") is True and entailment_dag.get("logical_equivalence_disproved") is True)
         )
     elif required == "LEFT_ENTAILS_RIGHT":
         satisfied = left_entails_right
         disproved = (
-            bounded.get("available") is True
-            and bounded.get("left_entails_right_disproved") is True
+            (bounded.get("available") is True and bounded.get("left_entails_right_disproved") is True)
+            or (entailment_dag.get("available") is True and entailment_dag.get("left_entails_right_disproved") is True)
         )
     elif required == "RIGHT_ENTAILS_LEFT":
         satisfied = right_entails_left
         disproved = (
-            bounded.get("available") is True
-            and bounded.get("right_entails_left_disproved") is True
+            (bounded.get("available") is True and bounded.get("right_entails_left_disproved") is True)
+            or (entailment_dag.get("available") is True and entailment_dag.get("right_entails_left_disproved") is True)
         )
     else:
         satisfied = semantic_identity or logical_equivalence or task_equivalent
@@ -721,6 +788,7 @@ def resolve(
         "shared_concept_identity": shared_concept,
         "terminal_equivalence": terminal,
         "bounded_extension_proof": bounded,
+        "entailment_dag_proof": entailment_dag,
         "required_relation_disproved": disproved,
         "next_proof_targets": next_targets,
         "counterexample_first": not satisfied,
