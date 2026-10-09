@@ -480,8 +480,23 @@ def verify_transport(
     inputs: Sequence[Mapping[str, Any]],
     output: Mapping[str, Any],
 ) -> dict[str, Any]:
-    in_rows = [_validate_value(x) for x in _seq(inputs, "INPUTS")]
-    out = _validate_value(output)
+    try:
+        in_rows = [
+            _validate_value(x, reverify_discharges=True)
+            for x in _seq(inputs, "INPUTS")
+        ]
+        out = _validate_value(output, reverify_discharges=True)
+    except SemanticEffectError as exc:
+        return {
+            "schema": TRANSPORT_SCHEMA,
+            "pass": False,
+            "status": "FAIL_CLOSED__INVALID_DISCHARGE_HISTORY",
+            "reason": str(exc),
+            "missing_effect_ids": [],
+            "missing_discharge_history_certificate_ids": [],
+            "semantic_truth_authority": False,
+            "terminal_authority": False,
+        }
     if not in_rows:
         raise SemanticEffectError("AT_LEAST_ONE_INPUT_REQUIRED")
     contexts = {x["context_version"] for x in in_rows} | {out["context_version"]}
