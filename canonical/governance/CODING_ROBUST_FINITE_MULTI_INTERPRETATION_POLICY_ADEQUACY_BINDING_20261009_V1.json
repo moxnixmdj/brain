@@ -38,7 +38,7 @@
   "adequacy_certificate_path": "canonical/governance/CODING_ROBUST_FINITE_MULTI_INTERPRETATION_POLICY_ADEQUACY_CERTIFICATE_20261009_V1.json",
   "adequacy_certificate_blob_sha": "7924c5a4d5e38e1d417d56c8be08575587ed66fd",
   "independent_verification_path": "canonical/verification/CODING_ROBUST_FINITE_MULTI_INTERPRETATION_POLICY_ADEQUACY_INDEPENDENT_VERIFICATION_20261009_V1.json",
-  "independent_verification_blob_sha": "87eb5913acbfb7688f8673f5c6a563a2e69ed840",
+  "independent_verification_blob_sha": "aab059467a92aee05db25bfd8fb077a7db55c319",
   "membership_self_certified": false,
   "terminal_authority": false,
   "hard_nonclaims": [
