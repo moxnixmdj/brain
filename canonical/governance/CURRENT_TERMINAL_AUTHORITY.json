@@ -1036,6 +1036,15 @@
         "git_blob_sha": "718b2e77dd2549cba0f95f79a33d8dc3255c4952"
       },
       "note": "ONE_REGISTERED_CODING_SPECIALIST_EDGE__V5_COMMON_POLICY_AND_WHOLE_COVER_REMAIN_OPEN__ZERO_CREDIT"
+    },
+    "cursorbench_supported_transform_structural_auto_refinement_20261009_v1": {
+      "path": "canonical/governance/CURSORBENCH_SUPPORTED_TRANSFORM_STRUCTURAL_AUTO_REFINEMENT_ACTIVATION_20261009_V1.json",
+      "git_blob_sha": "f52447f2941736f81aea304568ab15c9af475833",
+      "independent_verification": {
+        "path": "canonical/verification/CURSORBENCH_SUPPORTED_TRANSFORM_STRUCTURAL_AUTO_REFINEMENT_INDEPENDENT_VERIFICATION_20261009_V1.json",
+        "git_blob_sha": "98e15b25d380dff0bcb2fea5b915c4d3b2d602f7"
+      },
+      "note": "ONE_OF_FIVE_TYPED_ACCEPTANCE_MEMBERSHIP_ATOMS_INTERNALIZED_STRUCTURALLY_WHEN_EXACT_TYPED_MODEL_PASSES__FOUR_EXTERNAL_ATOMS_REMAIN__ZERO_BENCHMARK_CREDIT"
     }
   },
   "live_truth": {
@@ -1598,7 +1607,7 @@
     "cursorbench_absence_of_bound_v5_failure_is_adequacy_proof": false,
     "cursorbench_one_v5_pass_is_scope_complete_adequacy_proof": false,
     "cursorbench_selector_work_authorized_now": false,
-    "cursorbench_next_proof_object": "CODING_V5_AUTHENTICATED_POSITIVE_ADEQUACY_CERTIFICATE_V1",
+    "cursorbench_next_proof_object": "PROVE_OR_INTERNALIZE_ONE_OF_FOUR_REMAINING_TYPED_ACCEPTANCE_MEMBERSHIP_ATOMS_OR_PROVE_STRONGER_WHOLE_COVER",
     "r2_sec_standard_xbrl_companyconcept_source_native_semantics_bound": true,
     "r2_sec_standard_xbrl_source_native_policy_adequacy_claimed": false,
     "cursorbench_advanced_coding_canonical_residual_count": 4,
@@ -1659,7 +1668,19 @@
     "coding_specification_registered_coding_specialist_policy_id": "BRAIN_INDEPENDENT_ACCEPTANCE_MODEL_TYPED_PLAN_V1",
     "coding_specification_specialist_membership_self_certified": false,
     "cursorbench_secondary_zero_synthesis_route": "PROVE_SOURCE_AUTHORIZED_TRUTH_OF_ALL_FIVE_TYPED_ACCEPTANCE_SPECIALIST_ATOMS_FOR_A_REACHED_TARGET_RELEVANT_CONTEXT__THEN_REUSE_EXISTING_REGISTERED_SPECIALIST",
-    "cursorbench_global_selector_work_authorized_now": false
+    "cursorbench_global_selector_work_authorized_now": false,
+    "cursorbench_supported_transform_structural_auto_refinement_verified": true,
+    "cursorbench_supported_transform_structural_atom_id": "SPEC_ACCEPT_SUPPORTED_TRANSFORM_KINDS_ONLY_V1",
+    "cursorbench_supported_transform_structural_atom_external_truth_required_when_exact_model_passes": false,
+    "cursorbench_typed_acceptance_membership_atom_count_total": 5,
+    "cursorbench_typed_acceptance_membership_atom_count_structurally_internalized": 1,
+    "cursorbench_typed_acceptance_membership_atom_count_external_when_exact_model_passes": 4,
+    "cursorbench_typed_acceptance_remaining_external_membership_atoms": [
+      "SPEC_ACCEPT_TYPED_SEMANTICS_BOUND_V1",
+      "SPEC_ACCEPT_FAILURE_MODE_COMPLETENESS_V1",
+      "SPEC_ACCEPT_DEPENDENCY_PROVENANCE_TRUTH_V1",
+      "SPEC_ACCEPT_NO_HIDDEN_VERIFIER_ACCESS_V1"
+    ]
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -2359,7 +2380,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 78,
+  "pointer_revision": 79,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
@@ -3021,6 +3042,21 @@
     "coding_whole_specification_cover_closed": false,
     "cursorbench_whole_positive_cover_closed": false,
     "terminal_remains_false": true,
+    "terminal_credit_delta": 0
+  },
+  "cursorbench_supported_transform_structural_auto_refinement_reconciliation_20261009_v1": {
+    "source": {
+      "path": "canonical/governance/CURSORBENCH_SUPPORTED_TRANSFORM_STRUCTURAL_AUTO_REFINEMENT_ACTIVATION_20261009_V1.json",
+      "git_blob_sha": "f52447f2941736f81aea304568ab15c9af475833"
+    },
+    "verification": {
+      "path": "canonical/verification/CURSORBENCH_SUPPORTED_TRANSFORM_STRUCTURAL_AUTO_REFINEMENT_INDEPENDENT_VERIFICATION_20261009_V1.json",
+      "git_blob_sha": "98e15b25d380dff0bcb2fea5b915c4d3b2d602f7"
+    },
+    "result": "ONE_MEMBERSHIP_ATOM_STRUCTURALLY_INTERNALIZED__EXTERNAL_MEMBERSHIP_BURDEN_5_TO_4_WHEN_EXACT_TYPED_MODEL_PASSES",
+    "prior_external_membership_atom_count": 5,
+    "current_external_membership_atom_count": 4,
+    "acceptance_credit_delta": 0,
     "terminal_credit_delta": 0
   }
 }
