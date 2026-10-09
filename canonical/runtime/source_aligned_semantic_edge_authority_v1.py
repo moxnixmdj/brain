@@ -35,6 +35,10 @@ from canonical.runtime.source_aligned_semantic_proof_v8 import (
 from canonical.runtime.semantic_relation_entailment_dag_v1 import (
     RECEIPT_SCHEMA as EDGE_RECEIPT_SCHEMA,
 )
+from canonical.runtime.bounded_concept_formula_authority_v1 import (
+    CLAIM_SCHEMA as BOUNDED_CONCEPT_FORMULA_CLAIM_SCHEMA,
+    verify_claim as verify_bounded_concept_formula_claim,
+)
 
 SCHEMA = "PROJECT_BRAIN_SOURCE_ALIGNED_SEMANTIC_EDGE_AUTHORITY_V1"
 EVIDENCE_SCHEMA = "PROJECT_BRAIN_SOURCE_ALIGNED_SEMANTIC_EDGE_EVIDENCE_V1"
@@ -128,9 +132,20 @@ def _verify_concept_semantics(
     receipt: Mapping[str, Any] | None,
     verifier: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None,
 ) -> tuple[dict[str, Any] | None, str | None]:
-    if not isinstance(receipt, Mapping) or not callable(verifier):
+    if not isinstance(receipt, Mapping):
         return None, "CONCEPT_SEMANTICS_RECEIPT_AND_VERIFIER_REQUIRED"
-    out = verifier(deepcopy(dict(receipt)))
+    effective_verifier=verifier
+    if (
+        not callable(effective_verifier)
+        and receipt.get("schema")==BOUNDED_CONCEPT_FORMULA_CLAIM_SCHEMA
+    ):
+        effective_verifier=lambda value: verify_bounded_concept_formula_claim(
+            value,
+            authority_verifier=None,
+        )
+    if not callable(effective_verifier):
+        return None, "CONCEPT_SEMANTICS_RECEIPT_AND_VERIFIER_REQUIRED"
+    out = effective_verifier(deepcopy(dict(receipt)))
     if not isinstance(out, Mapping):
         return None, "CONCEPT_SEMANTICS_VERIFIER_RETURNED_NO_RECEIPT"
     out = deepcopy(dict(out))
