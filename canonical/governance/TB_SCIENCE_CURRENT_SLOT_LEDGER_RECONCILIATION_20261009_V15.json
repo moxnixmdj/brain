@@ -11,7 +11,8 @@
     "path": "canonical/verification/TB_SCIENCE_RANK13_IRREVERSIBLE_RESULT_TRUTH_20261009_V1.json",
     "status": "FINAL_ZERO__REQUEST_CONTEXT_9202_GT_SERVER_CONTEXT_8192__NO_VERIFIER_RESULT",
     "workflow_run_id": 37870603497,
-    "artifact_id": 11590457344
+    "artifact_id": 11590457344,
+    "git_blob_sha": "14527391610235e78a99d6148545a4098dfbd148"
   },
   "frozen_manifest": {
     "path": "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json",
