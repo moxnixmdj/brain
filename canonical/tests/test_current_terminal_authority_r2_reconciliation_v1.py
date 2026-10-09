@@ -212,5 +212,83 @@ class CurrentTerminalAuthorityR2ReconciliationV1Tests(unittest.TestCase):
         )
 
 
+    def test_executable_refinement_truth_is_bound_without_false_closure(self):
+        terminal = self.load(TERMINAL)
+        truth = terminal["live_truth"]
+        reconciliation = terminal[
+            "executable_refinement_terminal_closure_reconciliation_20261009_v1"
+        ]
+        graph_path = ROOT / "canonical/governance/CURRENT_TERMINAL_DEPENDENCY_GRAPH_V1.json"
+        verifier_path = ROOT / "canonical/runtime/executable_refinement_verifier_v1.py"
+        runtime_path = (
+            ROOT
+            / "canonical/runtime/certificate_gated_selected_route_runtime_entrypoint_v2.py"
+        )
+
+        graph_binding = terminal["authoritative_sources"][
+            "executable_refinement_terminal_dependency_graph"
+        ]
+        verifier_binding = terminal["authoritative_sources"][
+            "executable_refinement_structural_verifier"
+        ]
+        runtime_binding = terminal["authoritative_sources"][
+            "creditable_route_refinement_admission_guard"
+        ]
+
+        self.assertEqual(graph_binding["git_blob_sha"], blob_sha(graph_path))
+        self.assertEqual(verifier_binding["git_blob_sha"], blob_sha(verifier_path))
+        self.assertEqual(runtime_binding["git_blob_sha"], blob_sha(runtime_path))
+
+        self.assertTrue(
+            truth["executable_refinement_structural_binding_framework_present"]
+        )
+        self.assertFalse(
+            truth["executable_refinement_framework_execution_verified"]
+        )
+        self.assertTrue(
+            truth["creditable_route_refinement_receipt_required_by_candidate_admission"]
+        )
+        self.assertTrue(truth["router_canary_structural_refinement_binding_bound"])
+        self.assertFalse(truth["router_canary_refinement_verified"])
+        self.assertTrue(
+            truth["brain_owned_semantic_edge_structural_refinement_binding_bound"]
+        )
+        self.assertFalse(
+            truth["brain_owned_semantic_edge_bounded_refinement_verified"]
+        )
+        self.assertFalse(truth["repository_wide_executable_refinement_closed"])
+        self.assertFalse(
+            truth["all_creditable_live_routes_refinement_verified"]
+        )
+        self.assertFalse(truth["terminal_executable_refinement_gap_closed"])
+        self.assertFalse(
+            truth["executable_refinement_missing_is_external_impossibility"]
+        )
+        self.assertTrue(
+            truth["executable_refinement_current_classification"].startswith(
+                "INTERNAL_UNRESOLVED"
+            )
+        )
+
+        self.assertEqual(reconciliation["state"], "INTERNAL_UNRESOLVED")
+        self.assertTrue(
+            reconciliation["creditable_route_anti_bypass_guard_implemented"]
+        )
+        self.assertFalse(reconciliation["execution_tests_run"])
+        self.assertFalse(reconciliation["independent_replay_run"])
+        self.assertFalse(reconciliation["repository_wide_refinement_closed"])
+        self.assertFalse(reconciliation["external_impossibility_claimed"])
+        self.assertEqual(reconciliation["terminal_credit_delta"], 0)
+
+        required_nonclaims = {
+            "NO_CLAIM_DECLARATIVE_EXECUTABLE_REFINEMENT_CERTIFICATES_SELF_PROVE_REFINEMENT.",
+            "NO_CLAIM_BRANCH_WITNESS_TESTS_PROVE_ALL_CONCRETE_EXECUTABLE_BEHAVIORS.",
+            "NO_CLAIM_ROUTER_CANARY_EXECUTABLE_REFINEMENT_IS_VERIFIED.",
+            "NO_CLAIM_BRAIN_OWNED_SEMANTIC_EDGE_EXECUTABLE_REFINEMENT_IS_VERIFIED.",
+            "NO_CLAIM_REPOSITORY_WIDE_OR_ALL_CREDITABLE_LIVE_ROUTE_EXECUTABLE_REFINEMENT_IS_CLOSED.",
+        }
+        self.assertTrue(required_nonclaims.issubset(set(terminal["hard_nonclaims"])))
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
