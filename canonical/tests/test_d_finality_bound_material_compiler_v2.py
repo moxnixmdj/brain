@@ -184,6 +184,49 @@ class BoundMaterialCompilerV2Tests(unittest.TestCase):
         finally:
             td.cleanup()
 
+    def test_fixed_sibling_and_runtime_dir_loader_patterns_are_bound(self):
+        td, root = self._repo()
+        try:
+            self._registry(root, "loader_patterns")
+            for name in (
+                "helper_a.py",
+                "helper_b.py",
+                "helper_c.py",
+            ):
+                (root / "canonical/runtime" / name).write_text(
+                    "VALUE=1\n", encoding="utf-8"
+                )
+            (root / "canonical/runtime/bound_capabilities/loader_patterns.py").write_text(
+                "import importlib.util\n"
+                "from pathlib import Path\n"
+                "def _load_sibling_runtime_module(filename, module_name):\n"
+                "    path=Path(__file__).resolve().parents[1]/filename\n"
+                "    return importlib.util.spec_from_file_location(module_name,path)\n"
+                "def _load_from_runtime_dir(runtime_dir):\n"
+                "    path=Path(runtime_dir)/'helper_c.py'\n"
+                "    return importlib.util.spec_from_file_location('c',path)\n"
+                "def run(args, root):\n"
+                "    _load_sibling_runtime_module('helper_a.py','a')\n"
+                "    _load_sibling_runtime_module('helper_b.py','b')\n"
+                "    return _load_from_runtime_dir(str(Path(root)/'canonical'/'runtime'))\n",
+                encoding="utf-8",
+            )
+            out = compile_candidate("cap.test", repo_root=root)
+            self.assertEqual(
+                out["status"],
+                "MEMBER_MATERIAL_CLOSURE_CANDIDATE_COMPILED",
+            )
+            targets = set(out["member"]["dynamic_literal_targets"])
+            self.assertTrue(
+                {
+                    "canonical/runtime/helper_a.py",
+                    "canonical/runtime/helper_b.py",
+                    "canonical/runtime/helper_c.py",
+                }.issubset(targets)
+            )
+        finally:
+            td.cleanup()
+
     def test_source_obligation_stays_member_specific(self):
         td, root = self._repo()
         try:
