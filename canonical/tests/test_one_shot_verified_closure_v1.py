@@ -1,28 +1,7 @@
 from __future__ import annotations
 
-import sys
-import types
 import unittest
-from pathlib import Path
 from unittest.mock import patch
-
-fake_learning = types.ModuleType(
-    "canonical.runtime.autonomous_verified_self_improvement_v1"
-)
-fake_learning.DEFAULT_STATE_PATH = Path("state.json")
-fake_learning.load_state = lambda path: {"improvement_queue": {}, "stats": {}}
-sys.modules[
-    "canonical.runtime.autonomous_verified_self_improvement_v1"
-] = fake_learning
-
-fake_r3 = types.ModuleType("canonical.runtime.r3_improvement_queue_driver_v1")
-fake_r3.drain = lambda **kwargs: {
-    "status": "IMPROVEMENT_QUEUE_STABLE",
-    "pass": True,
-    "progress_count": 0,
-    "actions": [],
-}
-sys.modules["canonical.runtime.r3_improvement_queue_driver_v1"] = fake_r3
 
 from canonical.runtime import one_shot_verified_closure_v1 as closure
 
