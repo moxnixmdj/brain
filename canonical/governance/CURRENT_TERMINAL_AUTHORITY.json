@@ -1231,8 +1231,23 @@
     },
     "creditable_route_refinement_admission_guard": {
       "path": "canonical/runtime/certificate_gated_selected_route_runtime_entrypoint_v2.py",
-      "git_blob_sha": "e6cce56b50bea1261fb3473389a28e8263417930",
-      "note": "CREDITABLE_ROUTE_ROWS_REQUIRE_CONTENT_ADDRESSED_REFINEMENT_CERTIFICATE_AND_VERIFIED_RECEIPT_BEFORE_CANDIDATE_ADMISSION"
+      "git_blob_sha": "4c31dd60afc8ad76d1e1e964650455feae1733bc",
+      "note": "CREDITABLE_ROUTE_ROWS_REQUIRE_CONTENT_ADDRESSED_REFINEMENT_CERTIFICATE_STRICT_VERIFIED_RECEIPT_AND_PAYLOAD_ADMISSION"
+    },
+    "executable_refinement_receipt_guard": {
+      "path": "canonical/runtime/executable_refinement_receipt_guard_v1.py",
+      "git_blob_sha": "d99585bab00913a1a48f98d6a416ef722b30b720",
+      "note": "STRICT_RECEIPT_SCHEMA__EXACT_CERTIFICATE_AND_ROUTE_BINDING__FULL_DECLARED_CASE_COVERAGE__EXACT_PASSING_PROOF_ARTIFACT__ZERO_AUTHORITY_LEAKAGE"
+    },
+    "terminal_dependency_graph_guard": {
+      "path": "canonical/runtime/terminal_dependency_graph_guard_v1.py",
+      "git_blob_sha": "b6c940dc843b4e531e8243f0b8c29878f6d7154b",
+      "note": "FAIL_CLOSED_LIFECYCLE_ANTI_BYPASS__GRAPH_COMPLETENESS_NOT_SELF_PROVED"
+    },
+    "terminal_dependency_falsifier": {
+      "path": "canonical/runtime/terminal_dependency_falsifier_v1.py",
+      "git_blob_sha": "1bd1f2ff822e52989e3a57399d6cb42404a33733",
+      "note": "SYSTEMATIC_ATTACK_FRONTIER_ENUMERATOR_ONLY__UNKNOWN_APPLICABILITY_STAYS_UNKNOWN__CANNOT_PROVE_CLOSURE"
     }
   },
   "live_truth": {
@@ -1998,7 +2013,13 @@
     "all_creditable_live_routes_refinement_verified": false,
     "terminal_executable_refinement_gap_closed": false,
     "executable_refinement_missing_is_external_impossibility": false,
-    "executable_refinement_current_classification": "INTERNAL_UNRESOLVED__STRUCTURAL_BINDINGS_AND_ANTI_BYPASS_IMPLEMENTED__EXECUTION_VERIFICATION_PENDING"
+    "executable_refinement_current_classification": "INTERNAL_UNRESOLVED__STRUCTURAL_BINDINGS_AND_ANTI_BYPASS_IMPLEMENTED__EXECUTION_VERIFICATION_PENDING",
+    "executable_refinement_receipt_guard_bound": true,
+    "executable_refinement_receipt_requires_exact_proof_artifact": true,
+    "executable_refinement_receipt_requires_complete_declared_transition_coverage": true,
+    "terminal_dependency_graph_guard_bound": true,
+    "terminal_dependency_falsifier_bound": true,
+    "terminal_dependency_falsifier_generator_coverage_proved": false
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -2164,7 +2185,9 @@
     "NO_CLAIM_BRANCH_WITNESS_TESTS_PROVE_ALL_CONCRETE_EXECUTABLE_BEHAVIORS.",
     "NO_CLAIM_ROUTER_CANARY_EXECUTABLE_REFINEMENT_IS_VERIFIED.",
     "NO_CLAIM_BRAIN_OWNED_SEMANTIC_EDGE_EXECUTABLE_REFINEMENT_IS_VERIFIED.",
-    "NO_CLAIM_REPOSITORY_WIDE_OR_ALL_CREDITABLE_LIVE_ROUTE_EXECUTABLE_REFINEMENT_IS_CLOSED."
+    "NO_CLAIM_REPOSITORY_WIDE_OR_ALL_CREDITABLE_LIVE_ROUTE_EXECUTABLE_REFINEMENT_IS_CLOSED.",
+    "NO_CLAIM_REFINEMENT_VERIFIED_BOOLEAN_ALONE_IS_A_VALID_REFINEMENT_PROOF.",
+    "NO_CLAIM_TERMINAL_DEPENDENCY_FALSIFIER_ENUMERATION_PROVES_GENERATOR_OR_OPEN_WORLD_COVERAGE."
   ],
   "accounting": {
     "incremental_spend_usd": 0,
@@ -2705,7 +2728,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 95,
+  "pointer_revision": 96,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
@@ -3718,6 +3741,10 @@
     "repository_wide_refinement_closed": false,
     "external_impossibility_claimed": false,
     "incremental_spend_usd": 0,
-    "terminal_credit_delta": 0
+    "terminal_credit_delta": 0,
+    "strict_refinement_receipt_guard_implemented": true,
+    "receipt_boolean_self_assertion_sufficient": false,
+    "systematic_falsifier_bound": true,
+    "systematic_falsifier_generator_coverage_proved": false
   }
 }
