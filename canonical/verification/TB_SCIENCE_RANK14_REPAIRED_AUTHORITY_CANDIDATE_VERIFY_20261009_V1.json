@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK14_REPAIRED_AUTHORITY_CANDIDATE_VERIFICATION_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__REPAIRED_RANK14_AUTHORITY_CANDIDATE_INDEPENDENTLY_VERIFIED__V17_LEDGER__V10_CLOSURE__PUBLIC_CAUSAL_RUNS__ZERO_CREDIT",
+  "candidate_path": "canonical/governance/TB_SCIENCE_RANK14_REPAIRED_ONE_SLOT_EXECUTION_AUTHORITY_CANDIDATE_20261009_V2.json",
+  "candidate_git_blob_sha": "e57e8588048b58c7fad5f273608f463bc586be9e",
+  "ledger_path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261009_V17.json",
+  "ledger_git_blob_sha": "c8e9720e3f53c0eb483552c902b7841821f335b0",
+  "repair_verification_path": "canonical/verification/TB_SCIENCE_RANK14_LOSSLESS_OBLIGATION_CAP_REPAIR_VERIFY_20261009_V1.json",
+  "repair_verification_git_blob_sha": "6e8e3938b00e3fe39e38ac4a1b38a21eeb25c96f",
+  "v10_closure_path": "canonical/governance/TB_SCIENCE_TRANSITIVE_RUNTIME_CLOSURE_MANIFEST_20261009_V10.json",
+  "v10_closure_git_blob_sha": "ae37559320105277e017ff17af7c3dbeae2f9c27",
+  "independent_public_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify-tbscience-r14-repaired-authority-v2",
+    "head_sha": "542ac22e4a6ed382584cd7530686e4f36bea5033",
+    "workflow_run_id": 37882441831,
+    "workflow_job_id": 113664917940,
+    "conclusion": "success",
+    "artifact_id": 11594917906,
+    "artifact_zip_sha256": "5b2637d043a82909405ee6c0bf4270da545dd4e177c9517b06225ed08eef3052",
+    "verified_public_runs": [
+      37880547075,
+      37881878913
+    ],
+    "errors": []
+  },
+  "proves": [
+    "RANK14_REMAINS_UNCONSUMED_AFTER_THE_PRESTART_ABORT",
+    "THE_FALSE_64_OBLIGATION_CEILING_IS_REPAIRED",
+    "THE_REPAIRED_AGENT_BLOB_IS_INSIDE_AN_EXACT_15_FILE_V10_TRANSITIVE_RUNTIME_CLOSURE",
+    "THE_V10_CLOSURE_HAS_ZERO_MISSING_MISMATCHED_OR_UNRESOLVED_DYNAMIC_IMPORTS",
+    "THE_REPAIRED_AUTHORITY_CANDIDATE_BINDS_THE_EXACT_V17_LEDGER_REPAIR_AND_V10_BYTES",
+    "THE_OLD_V9_BOUND_AUTHORITY_MUST_NOT_BE_REUSED"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_REPAIRED_FIRST_CYCLE_PROMPT_FITS_16K_YET",
+    "NO_PUBLIC_EXECUTION_LEASE_FROM_THIS_RECEIPT",
+    "NO_RANK14_TASK_START",
+    "NO_RANK14_RESULT",
+    "NO_TB_SCIENCE_ACCEPTANCE_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_trials_consumed_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
