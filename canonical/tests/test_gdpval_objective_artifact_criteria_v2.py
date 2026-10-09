@@ -11,12 +11,18 @@ from canonical.runtime.gdpval_first_residual_mechanical_replay_v2 import replay
 def test_v1_admissions_are_preserved():
     for criterion in [
         "Submission is a single-page PDF",
-        "Provides an Excel .xlsx workbook with exactly four worksheets (tabs).",
         "The delivered file is a WAV file and not a compressed format (e.g., MP3/AAC).",
     ]:
         out = m.compile_criterion(criterion)
         assert out["status"] == "COMPILED_OBJECTIVE_CHECK", criterion
         assert out["compiler_origin"] == "V1_PRESERVED"
+
+
+def test_word_number_sheet_count_repairs_current_v1_digit_only_gap():
+    out = m.compile_criterion("Provides an Excel .xlsx workbook with exactly four worksheets (tabs).")
+    assert out["status"] == "COMPILED_OBJECTIVE_CHECK"
+    assert out["compiler_origin"] == "V2"
+    assert out["checks"] == [{"kind": "SINGLE_XLSX_SHEET_COUNT", "args": {"sheet_count": 4}}]
 
 
 def test_new_generic_mechanical_forms_compile():
