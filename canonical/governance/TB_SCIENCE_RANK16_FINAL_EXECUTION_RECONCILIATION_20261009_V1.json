@@ -1,0 +1,113 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK16_FINAL_EXECUTION_RECONCILIATION_V1",
+  "date": "2026-10-09",
+  "status": "FINAL_ZERO__ONE_SLOT_CONSUMED__NO_REPLAY__CAUSAL_REPEAT_DEFECT_LOCALIZED__V10_SUCCESSOR_REPAIR_MERGED__ZERO_TERMINAL_CREDIT",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "predecessor": {
+    "live_reconciliation_path": "canonical/governance/TB_SCIENCE_RANK16_LIVE_EXECUTION_RECONCILIATION_20261009_V1.json",
+    "live_reconciliation_git_blob_sha": "a700141e485d4a04cc5b48c69927bda5bdf4ebe4",
+    "ledger_path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261009_V30.json",
+    "ledger_git_blob_sha": "7e46f2a5c0c418a4d3be4360c8a85b7be7611abb"
+  },
+  "slot": {
+    "ledger_schedule_rank": 16,
+    "frozen_manifest_schedule_order": 15,
+    "task_rank": 15,
+    "slot_id": "terminal-bench-science/sparse-network-assimilation::trial-0",
+    "task_digest": "sha256:52ba7089dc32952df08c478af76b732fa82468c125431388adbf9798d869826f"
+  },
+  "public_execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "activation_pr": 2524,
+    "workflow_run_id": 37948159650,
+    "workflow_run_conclusion": "success",
+    "workflow_success_semantics": "HARNESS_AND_FINALIZER_COMPLETED__NOT_BENCHMARK_ACCEPTANCE",
+    "merge_ref_sha": "77978ebaf0f03e24d3607f2ce65a09b5c6d7230a",
+    "logical_attempt_id": "c7feaa1fac90c9bde92480bf3fddfa858069b08267d7a35f01b919e864c5fb8e",
+    "runtime_identity_sha256": "56e5e5a1f5aee7ac9ac1c327eff9a0173e99e0250f113d286376cd827d466687",
+    "artifact_id": 11627643266,
+    "artifact_name": "tb-science-sparse-network-assimilation-trial-0-rank16-v1",
+    "artifact_zip_sha256": "03217d7a98a01f9f6c49cd3b3c7af77bc9d2a81d216d7699068815b558825f3"
+  },
+  "terminal_receipt": {
+    "schema": "PROJECT_BRAIN_TB_SCIENCE_TERMINAL_SLOT_RECEIPT_RANK16_V6",
+    "status": "FINAL_ZERO",
+    "reward": 0,
+    "benchmark_trials_consumed": 1,
+    "consumed_successes_delta": 0,
+    "consumed_final_failures_delta": 1,
+    "execution_authority_consumed": true,
+    "task_read": true,
+    "task_started": true,
+    "start_cas_acquired": true,
+    "replay_authority": false,
+    "replacement_carrier_authority": false,
+    "rerun_credit": false,
+    "promotion_authority": false,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0,
+    "result_hashes": {
+      "outer": "628d5e642a46d24d7d2fd6fec6872bb794207c8dfec70451870ee192ec708bd7",
+      "nested": "9ac021cef73a02ddc6e785f49b631c3f7d06d47ad760266cff2547c8b4546d51"
+    }
+  },
+  "execution_substrate_result": {
+    "carrier_ready": true,
+    "prestart_guard_pass": true,
+    "prestart_input_tokens": 2939,
+    "reserved_completion_tokens": 4096,
+    "server_context_tokens": 16384,
+    "context_headroom_tokens": 9349,
+    "start_identity_valid": true,
+    "uncertain_effect_replay_observed": false,
+    "conclusion": "TRANSPORT_AND_DURABILITY_PATH_COMPLETED_CORRECTLY__FAILURE_LOCALIZED_TO_PROBLEM_SOLVING_TRAJECTORY"
+  },
+  "causal_diagnostic": {
+    "latest_verified_journal_sequence": 29,
+    "resolved_requirement_ids": [],
+    "coverage_promoted_at_terminal": false,
+    "repeat_counterexample": {
+      "first_intent_sequence": 26,
+      "first_state_sequence": 27,
+      "repeated_intent_sequence": 28,
+      "repeated_state_sequence": 29,
+      "action_id": "load_data",
+      "identical_command_sha256": true,
+      "first_returncode": 2,
+      "repeated_returncode": 2,
+      "identical_stdout_sha256": true,
+      "first_coverage_promoted": false,
+      "repeated_coverage_promoted": false,
+      "classification": "IDENTICAL_KNOWN_NONPROMOTED_EFFECT_REEXECUTED_ACROSS_PLANNER_CYCLES"
+    }
+  },
+  "successor_repair": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2530,
+    "merge_commit": "efc5409027e69e2c523b63a90de09a12094af58d",
+    "agent_v10_git_blob_sha": "0e5b3ee96cbe7560ab62287573e40e6f79bc147b",
+    "planner_v5_git_blob_sha": "050bbae7c38900023fc4110070a48e8e50c161ee",
+    "evidence_store_v1_git_blob_sha": "57373f94e4f8ad64f071a2e55ff04d49074d39d5",
+    "exact_candidate_verification_runs": {
+      "lossless_evidence": 37956859376,
+      "execution_ratchet": 37956859847,
+      "zero_exposure_carrier": 37956860338,
+      "robust_reseal": 37956860715
+    },
+    "repaired": [
+      "OMITTED_OBSERVATIONS_REMAIN_CONTENT_ADDRESSED_AND_EXACTLY_RETRIEVABLE",
+      "FULL_ACTION_AND_VERIFICATION_RECEIPTS_ARE_PRESERVED_BEFORE_PROMPT_COMPACTION",
+      "IDENTICAL_EXECUTED_BUT_NONPROMOTED_EFFECTS_ARE_REJECTED_ACROSS_CYCLES_UNTIL_INDEPENDENTLY_VERIFIED_PROMOTION_CHANGES_STATE"
+    ],
+    "benchmark_trials_consumed_by_repair": 0,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_RANK16_ACCEPTANCE",
+    "NO_CLAIM_WORKFLOW_SUCCESS_IMPLIES_BENCHMARK_SUCCESS",
+    "NO_RANK16_RERUN_OR_REPLACEMENT_AUTHORITY",
+    "NO_CLAIM_V10_RETROACTIVELY_CHANGES_RANK16_RESULT",
+    "NO_CLAIM_RANK17_EXECUTION_AUTHORITY_EXISTS_YET",
+    "NO_TERMINAL_OR_ACCEPTANCE_CREDIT"
+  ]
+}
