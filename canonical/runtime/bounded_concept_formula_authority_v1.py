@@ -17,8 +17,8 @@ import re
 from typing import Any, Callable, Mapping
 
 from canonical.runtime import bounded_authenticated_concept_universe_v1 as universe
-from canonical.runtime.source_aligned_semantic_edge_authority_v1 import (
-    CONCEPT_SEMANTICS_RECEIPT_SCHEMA,
+CONCEPT_SEMANTICS_RECEIPT_SCHEMA = (
+    "PROJECT_BRAIN_CONCEPT_SEMANTICS_AUTHORITY_RECEIPT_V1"
 )
 
 SCHEMA = "PROJECT_BRAIN_BOUNDED_CONCEPT_FORMULA_AUTHORITY_V1"
