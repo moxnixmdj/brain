@@ -13,8 +13,8 @@
   },
   "current_assurance_closure_compiler": {
     "path": "canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json",
-    "git_blob_sha": "d4285aee8fe2a150bafde601c9947b5e505f74a2",
-    "status": "CURRENT_UVCK_V2_CANDIDATE__HARDENED__PRIMARY_10_OF_10__INDEPENDENT_STRUCTURAL_11_OF_11__NOT_LIVE_DEFAULT",
+    "git_blob_sha": "5f9d04be11f7aff5737fd0c29d37d2d800358c8d",
+    "status": "CURRENT_UVCK_V2_CANDIDATE__DEFEATER_ORDER_SOUNDNESS_REPAIRED__PROFESSIONAL_QUALITY_80_KNOWN_DEFEATERS_BOUND__DOMAIN_SEMANTIC_AND_EXECUTION_CLOSURE_STILL_OPEN__NOT_LIVE_DEFAULT",
     "terminal_authority": false
   },
   "current_option_preserving_optimization": {
