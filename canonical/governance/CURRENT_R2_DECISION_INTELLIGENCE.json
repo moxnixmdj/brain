@@ -12,7 +12,7 @@
     "path": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
     "authority_kernel": "canonical/runtime/general_adequate_decision_controller_v1.py",
     "authority_kernel_git_blob_sha": "29872fc55a5ec577feea769cc919dc889899c2bd",
-    "fixed_point_git_blob_sha": "7c6585e800369331ad0f061afd23568fd0cb341b",
+    "fixed_point_git_blob_sha": "45194b88129822ee788cc3a422de52c07d1d691a",
     "fixed_point_native_control_policy_total": true,
     "fixed_point_regression_test_path": "canonical/tests/test_general_adequate_decision_fixed_point_v2.py",
     "fixed_point_regression_test_git_blob_sha": "934a04632483fd517cbfa34394b27c73038365e1"
@@ -29,8 +29,8 @@
     "bounded_family_count": 28,
     "current_route_count": 31,
     "current_activation_status": "THREE_EXACT_CELLS_PLUS_TWENTY_EIGHT_BOUNDED_FAMILIES",
-    "direct_runtime_path": "canonical/runtime/r2_direct_end_to_end_adequacy_v11.py",
-    "direct_runtime_git_blob_sha": "98fc03a33aa8f051245c8adbb9a0d8d896b0057b",
+    "direct_runtime_path": "canonical/runtime/r2_direct_route_registry_v1.py",
+    "direct_runtime_git_blob_sha": "d0bd1af8c2e0ebb51e65bf400920892accb9542e",
     "coverage_verifications": [
       {
         "path": "canonical/verification/R2_DOCX_JSON_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
@@ -142,7 +142,25 @@
     "latest_verification_git_blob_sha": "2a175a4190335f407d035cfe676c3caff544d484",
     "latest_verification_status": "PASS__SOURCE_ALIGNED_V7_RESIDUAL_TOP_V11_AND_FULL_CROSS_DOCUMENT_REGRESSION__77_OF_77",
     "fixed_point_controller_path": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
-    "fixed_point_controller_git_blob_sha": "7c6585e800369331ad0f061afd23568fd0cb341b"
+    "fixed_point_controller_git_blob_sha": "45194b88129822ee788cc3a422de52c07d1d691a",
+    "current_route_selection_metadata_pointer": "canonical/governance/CURRENT_R2_DIRECT_ROUTE_REGISTRY.json",
+    "current_dynamic_admissions_pointer": "canonical/governance/CURRENT_R2_DIRECT_ROUTE_ADMISSIONS.json",
+    "baseline_activation_route_count": 31,
+    "dynamic_admission_route_count": 1,
+    "default_live_route_count": 32,
+    "future_route_source_edit_required": false,
+    "future_route_registry_edit_required": false,
+    "legacy_v1_to_v12_runtime_chain_load_bearing": false,
+    "selection_semantics": "V11_BASELINE_PRECEDENCE_PRESERVED_BY_CONTENT_ADDRESSED_METADATA__VERIFIED_V12_ROUTE_PROOF_CARRYING_DYNAMIC_ADMISSION__FUTURE_ROUTES_UNIQUE_MATCH_FAIL_CLOSED",
+    "dynamic_route_collision_policy": "FAIL_CLOSED_ON_ANY_OTHER_DYNAMIC_OR_LEGACY_MATCH_UNLESS_FUTURE_EXPLICIT_EQUIVALENCE_OR_DOMINANCE_AUTHORITY",
+    "verified_v12_dynamic_admission": {
+      "route_id": "DIRECT_ADEQUACY::CROSS_DOCUMENT_SOURCE_RESIDUAL_FRONTIER_V1",
+      "candidate_path": "canonical/governance/R2_CROSS_DOCUMENT_SOURCE_RESIDUAL_DIRECT_ROUTE_DEPLOYMENT_CANDIDATE_20261009_V1.json",
+      "independent_receipt_path": "canonical/verification/R2_CROSS_DOCUMENT_SOURCE_RESIDUAL_DIRECT_ROUTE_DEPLOYMENT_INDEPENDENT_RECEIPT_20261009_V1.json",
+      "route_verification_path": "canonical/verification/R2_CROSS_DOCUMENT_SOURCE_RESIDUAL_V12_VERIFY_20261009_V1.json",
+      "selection_class": "UNIQUE_MATCH_REQUIRED",
+      "automatic_live_admission": true
+    }
   },
   "fixed_point_information_policy": {
     "minimum_policy_changing_information": true,
