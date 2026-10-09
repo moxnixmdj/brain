@@ -1,8 +1,8 @@
 {
   "schema": "PROJECT_BRAIN_R2_CROSS_DOCUMENT_EFFECT_BEHAVIORAL_V20_VERIFY_V1",
   "date": "2026-10-09",
-  "branch": "r2-effect-behavior-v20-current2",
-  "base_main_sha": "22a4b031352acc4e55b0ede72ae53af82bcceb60",
+  "branch": "r2-effect-behavior-v20-current3",
+  "base_main_sha": "0e7899926a61ca41c866e95debbf801cac69cd64",
   "capability": "DECISION_RELATIVE_FINITE_BEHAVIORAL_ABSTRACTION_OVER_PARTIAL_CROSS_DOCUMENT_EFFECT_SEMANTICS",
   "status": "VERIFIED_ISOLATED_CHANGED_SURFACE__44_OF_44_PASS",
   "theorem": {
@@ -81,5 +81,11 @@
     "incremental_spend_usd": 0,
     "terminal_credit_delta": 0
   },
-  "terminal_authority": false
+  "terminal_authority": false,
+  "ancestry_at_promotion_candidate": {
+    "ahead_by": 9,
+    "behind_by": 0,
+    "merge_base": "0e7899926a61ca41c866e95debbf801cac69cd64"
+  },
+  "replay_note": "CURRENT3_REPLAY_IS_BYTE_IDENTICAL_TO_THE_EXACT_44_OF_44_TESTED_RUNTIME_AND_TEST_BLOBS;ONLY_BRANCH_BASE_AND_VERIFICATION_RECORD_METADATA_CHANGED"
 }
