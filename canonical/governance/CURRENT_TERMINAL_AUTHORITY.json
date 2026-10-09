@@ -887,10 +887,10 @@
     "current_r2_decision_intelligence": {
       "path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
       "scheduler_cut": {
-        "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V35.json",
-        "git_blob_sha": "892141ec5c7efcfaa89c8d4f3c7cf323efee1d8e"
+        "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V37.json",
+        "git_blob_sha": "3c409ea62f6004701c4cd5062c1116078d5ae6d9"
       },
-      "status": "ACTIVE_CURRENT_R2_AUTHORITY__V35__TWENTY_FIVE_DIRECT_ROUTES__TWENTY_TWO_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_AFTER_SEVEN_VERIFIED_SUBREGIONS",
+      "status": "ACTIVE_CURRENT_R2_AUTHORITY__V37__TWENTY_SEVEN_DIRECT_ROUTES__TWENTY_FOUR_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_AFTER_NINE_VERIFIED_SUBREGIONS",
       "pointer_semantics": "MUTABLE_CURRENT_POINTER__PATH_IDENTITY_AUTHORITATIVE__IMMUTABLE_SCHEDULER_CUT_HASH_BOUND_BELOW",
       "mutable_pointer_blob_is_not_load_bearing": true
     }
@@ -1390,7 +1390,7 @@
     "gdpval_owner_layer_wake_authority": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V9.json",
     "opus_5_5_is_global_terminal_objective": false,
     "opus_5_5_is_frontier_checkpoint": true,
-    "current_r2_scheduler_cut": "ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V35",
+    "current_r2_scheduler_cut": "ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V37",
     "historical_root2_scheduler_fields_currently_authoritative": false,
     "r2_general_control_mechanism_closed_as_adequacy_or_abstain": true,
     "r2_open_world_positive_action_coverage_complete": false,
@@ -1404,10 +1404,10 @@
     "direct_main_write_load_bearing_admission_enforced": false,
     "primary_pr_admission_trusted_base_validation_defined": true,
     "primary_pr_admission_required_status_check_enforced": false,
-    "r2_direct_adequacy_route_count": 25,
+    "r2_direct_adequacy_route_count": 27,
     "r2_direct_adequacy_exact_cell_count": 3,
-    "r2_direct_adequacy_bounded_family_count": 22,
-    "r2_verified_finance_positive_subregion_count": 7,
+    "r2_direct_adequacy_bounded_family_count": 24,
+    "r2_verified_finance_positive_subregion_count": 9,
     "r2_primary_internal_unsolved_count": 1,
     "r2_primary_internal_unsolved_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "r2_dormant_alternative_route_count": 1
@@ -2104,7 +2104,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 62,
+  "pointer_revision": 63,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
@@ -2300,7 +2300,7 @@
     "terminal_remains_false": true,
     "terminal_credit_delta": 0
   },
-  "live_scheduler": "ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V35",
+  "live_scheduler": "ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V37",
   "r2_v35_live_projection_reconciliation": {
     "status": "RECONCILED__CURRENT_R2_AND_TERMINAL_LIVE_PROJECTIONS_BIND_V35",
     "current_r2_blob_sha": "70cfd4ea77cd54ed321edac7f59abe1aa2ff49ff",
@@ -2328,5 +2328,25 @@
     "finance_family_closed": false,
     "terminal_remains_false": true,
     "terminal_credit_delta": 0
+  },
+  "r2_v37_live_projection_reconciliation": {
+    "status": "RECONCILED__CURRENT_R2_AND_TERMINAL_LIVE_PROJECTIONS_BIND_V37__TERMINAL_STILL_FALSE",
+    "current_r2_blob_sha": "c93bac6f8443cc947e511ff60194358844804631",
+    "scheduler_cut_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V37.json",
+    "scheduler_cut_git_blob_sha": "3c409ea62f6004701c4cd5062c1116078d5ae6d9",
+    "direct_activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V22.json",
+    "direct_activation_git_blob_sha": "fddafe92f65ff990aa0718edfbad722828667e0e",
+    "direct_runtime_path": "canonical/runtime/r2_direct_end_to_end_adequacy_v7.py",
+    "direct_runtime_git_blob_sha": "3afc0cb17288ebf4e1e29689a7af241bf73eb708",
+    "fixed_point_controller_path": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
+    "fixed_point_controller_git_blob_sha": "af19739e4c058d5cb9e54697f61032475edce567",
+    "route_count": 27,
+    "exact_cell_count": 3,
+    "bounded_family_count": 24,
+    "verified_finance_positive_subregion_count": 9,
+    "primary_remaining_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
+    "remaining_boundary": "FINANCE_CONTEXTS_REQUIRING_IMPLICIT_OR_AMBIGUOUS_REFERENCE_BEYOND_MODAL_IT_THEY_UNIQUE_THAT_MODE_ELLIPSIS_OR_RESPECTIVELY__INFERRED_SYNONYMY_BEYOND_EXPLICIT_ALIASES__CONTEXT_DEPENDENT_WORD_SENSE__ONTOLOGY_OR_DOMAIN_MAPPING__GENERAL_CROSS_DOCUMENT_BINDING_BEYOND_EXACT_LOCAL_JSON_REFERENCE_IDS__OR_EXTERNAL_FACT_AUTHENTICATION_BEYOND_STATE_KEYED_INDEPENDENTLY_REFETCHED_HTTPS_JSON_EXACT_PATH_POLICY",
+    "terminal_credit_delta": 0,
+    "terminal_remains_false": true
   }
 }
