@@ -97,13 +97,21 @@ class CurrentOneShotPointerCoherenceV1Tests(unittest.TestCase):
         self.assertEqual(latest["git_blob_sha"], git_blob_sha(verify_path))
 
         receipt = json.loads(verify_path.read_text(encoding="utf-8"))
-        self.assertIn("26_OF_26", receipt["status"])
+        self.assertTrue(str(receipt.get("status") or "").startswith("PASS__"))
+        subject = receipt.get("subject")
+        self.assertIsInstance(subject, dict)
         self.assertEqual(
-            receipt["exact_changed_blobs"][
-                "canonical/runtime/one_shot_verified_closure_v1.py"
-            ],
+            subject.get("runtime_path"),
+            "canonical/runtime/one_shot_verified_closure_v1.py",
+        )
+        self.assertEqual(
+            subject.get("runtime_git_blob_sha"),
             pointer["predecessor"]["git_blob_sha"],
         )
+        result = receipt.get("result")
+        self.assertIsInstance(result, dict)
+        self.assertEqual(result.get("failures"), 0)
+        self.assertEqual(result.get("errors"), 0)
 
     def test_current_v54_snapshot_matches_dynamic_sources(self):
         pointer = json.loads(POINTER.read_text(encoding="utf-8"))
