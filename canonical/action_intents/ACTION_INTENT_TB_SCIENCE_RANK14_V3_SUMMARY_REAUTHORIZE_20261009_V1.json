@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_TB_SCIENCE_RANK14_V3_SUMMARY_REAUTHORIZE_20261009_V1",
+  "date": "2026-10-09",
+  "action_id": "TB_SCIENCE_RANK14_V3_SUMMARY_REAUTHORIZE",
+  "status": "ACTIVE_INTENT__REAUTHORIZE_UNCONSUMED_RANK14_FOR_ONE_FRESH_POST_SUMMARY_PRESTART_MEASUREMENT__ZERO_CREDIT",
+  "canonical_base_commit": "63cc326a293a980d93170c03b7ae0ed01a4489b3",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "target_obligation": "TB_SCIENCE_GE_58_7",
+  "action_kind": "REAUTHORIZE_FRONTIER",
+  "causal_blocker": "V2_MEASURED_17500_INPUT_TOKENS_AND_ABORTED_NONCONSUMING__MERGED_MANIFEST_SUMMARY_REPAIR_REMOVES_DUPLICATED_MODEL_FACING_RAWREQ_ROWS__EXACT_POSTREPAIR_RANK14_TOKEN_COUNT_STILL_UNKNOWN",
+  "highest_leverage_now": true,
+  "expected_parent_frontier_change": "AUTHORIZE_EXACTLY_ONE_FRESH_DIGEST_PINNED_RANK14_PRESTART_READ_ON_D397_SUMMARY_AGENT_AND_V11_CLOSURE__START_ONLY_IF_INPUT_PLUS_4096_LE_16384",
+  "stop_condition": "FRESH_V3_PRESTART_RECEIPT_BINDS_EXACT_POST_SUMMARY_INPUT_TOKENS_AND_EITHER_ABORTS_NONCONSUMING_OR_PERMITS_ONE_IRREVERSIBLE_TASK_START",
+  "source_evidence": {
+    "ledger_v18_blob": "566a3756392ee2d4cc41947b66617acbc6f6ce92",
+    "v2_result_truth_blob": "d284f4824f7f448b25e5e6f1aa810aa99d05f69f",
+    "manifest_summary_verification_blob": "721c78aabac58565afa37d734705d652073d99ae",
+    "v11_closure_blob": "9df92fb7aa649c057bb967900e1ef9a7f066cfa1",
+    "v11_closure_verification_blob": "f03b0c3a4b9776d7acdfc711768d1bdf230c5421",
+    "repaired_agent_blob": "d397324f411d002bdbdca348aaad708b5b40c9c2",
+    "planner_blob": "58964dc8d6b5eed5c202081cd800035c791eeb1d",
+    "prestart_guard_v2_public_blob": "be94a01cecaab2377491a27704e188b9ac8f37c0"
+  },
+  "historical_state": {
+    "v1_task_read": true,
+    "v2_task_read": true,
+    "task_started": false,
+    "execution_authority_consumed": false,
+    "benchmark_trials_consumed": 0
+  },
+  "load_bearing_primary": {
+    "open_obligation_ids": [],
+    "constructive_gap_for_open_obligation_ids": [
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "scope_complete_discharge": false,
+    "expected_obligation_discharge_lcb": "0",
+    "expected_obligation_unlock_lcb": "1/13",
+    "success_probability_lcb": "0.9",
+    "wall_clock_cost_ub": "1"
+  },
+  "safety": {
+    "benchmark_task_start_authority": false,
+    "benchmark_trials_consumed_delta": 0,
+    "retries_authorized": 0,
+    "replacement_allowed": false,
+    "incremental_spend_usd_max": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

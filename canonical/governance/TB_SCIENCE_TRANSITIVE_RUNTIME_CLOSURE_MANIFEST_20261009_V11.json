@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TB_SCIENCE_TRANSITIVE_RUNTIME_CLOSURE_MANIFEST_V11",
   "date": "2026-10-09",
-  "status": "CURRENT_15_FILE_CLOSURE__RANK14_PLANNER_MANIFEST_SUMMARY_REPAIR__ZERO_BENCHMARK_TRIAL_CONSUMPTION__ZERO_CREDIT",
+  "status": "CURRENT_15_FILE_CLOSURE__PLANNER_MANIFEST_SUMMARY_AGENT_REPAIRED__ZERO_BENCHMARK_TRIAL_CONSUMPTION__ZERO_CREDIT",
   "target_family": "AGENTIC_SCIENTIFIC_RESEARCH",
   "target_predicate": "TB_SCIENCE_GE_58_7",
   "predecessor": {
@@ -15,7 +15,7 @@
       "old_git_blob_sha": "16e8ab7918c4f8d052698282dddf674b54a23016",
       "new_git_blob_sha": "d397324f411d002bdbdca348aaad708b5b40c9c2"
     },
-    "reason": "PRESERVE_EXACT_GOAL_AND_ALL_RAW_ACCEPTANCE_OBLIGATIONS_WHILE_REPLACING_DUPLICATE_MODEL_FACING_RAWREQ_ROW_DUMP_WITH_ONE_CONTENT_ADDRESSED_MANIFEST_SUMMARY"
+    "reason": "REPLACE_DUPLICATED_MODEL_FACING_87_ROW_RAWREQ_METADATA_WITH_CONTENT_ADDRESSED_MANIFEST_SUMMARY_WHILE_KEEPING_EXACT_GOAL_AND_FULL_BRAIN_OWNED_PER_OBLIGATION_ACCEPTANCE_CONTRACT"
   },
   "roots": [
     "canonical/runtime/harbor_science_agent_v1.py",
@@ -99,20 +99,24 @@
   "incremental_spend_usd": 0,
   "independent_verification": {
     "pending": false,
-    "public_runner_branch": "verify-tbscience-r14-planner-manifest-summary-v1",
-    "head_sha": "1a32e99ac747da46a1da4b6e94b5bc2f019d529a",
-    "workflow_run_id": 37884076260,
-    "workflow_job_id": 113670044897,
-    "artifact_id": 11595895805,
-    "artifact_zip_sha256": "68655709b0d110895138ae50e6b33463a90f5569fa0ced5f59f506a5d90ae5f0",
-    "result": "PASS__V11_15_FILE_TRANSITIVE_CLOSURE_EXACT__PLANNER_MANIFEST_SUMMARY_REPAIR__ZERO_EXPOSURE",
+    "public_runner_repository": "moxnixmdj/verification-capsule-runner",
+    "public_runner_branch": "verify-tbscience-rank14-v11-summary-closure-20261009",
+    "public_runner_head_sha": "532168c2a77af5f6299f984db2a5f077448f6714",
+    "workflow_run_id": 37884318220,
+    "workflow_job_id": 113670781670,
+    "artifact_id": 11595750899,
+    "artifact_zip_sha256": "3d690a09ae5da9cf16888db4f1015bb5019c34953f4e2448005804014d04c0ee",
+    "closure_result_sha256": "c19004a86bb8bb5ba93aa44300bdafd066a2429d786894aea41f685343f97de9",
+    "verification_receipt_sha256": "5aedf9006bb59a321664608045e00a2173a0d6fff71888ab677e22ea9ad14071",
+    "status": "PASS__15_FILE_TRANSITIVE_CLOSURE__SUMMARY_AGENT_EXACT__ZERO_EXPOSURE",
     "benchmark_task_exposure": 0,
     "benchmark_trials_executed": 0
   },
   "hard_nonclaims": [
+    "NO_CLAIM_THE_EXACT_RANK14_FIRST_CYCLE_PROMPT_NOW_FITS_16384_BEFORE_A_FRESH_DIGEST_PINNED_PRESTART_MEASUREMENT",
+    "NO_NEW_RANK14_TASK_READ_AUTHORITY_FROM_CLOSURE_ALONE",
     "NO_RANK14_TASK_START",
     "NO_RANK14_SLOT_CONSUMPTION",
-    "NO_CLAIM_V11_CLOSURE_PROVES_THE_EXACT_RANK14_PLANNER_PROMPT_FITS_16K",
     "NO_TB_SCIENCE_ACCEPTANCE_CREDIT",
     "NO_TERMINAL_CREDIT"
   ]
