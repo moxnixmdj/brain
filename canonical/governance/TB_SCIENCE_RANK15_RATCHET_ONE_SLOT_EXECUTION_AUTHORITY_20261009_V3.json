@@ -1,0 +1,102 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK15_RATCHET_ONE_SLOT_EXECUTION_AUTHORITY_20261009_V3",
+  "date": "2026-10-09",
+  "status": "ACTIVE_BRAIN_ONE_SLOT_AUTHORITY__MERGED_V2_RATCHET_VERIFIED__PUBLIC_EXECUTION_SURFACE_RESEAL_REQUIRED_BEFORE_TASK_READ",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "slot": {
+    "id": "terminal-bench-science/protein-active-learning::trial-0",
+    "ledger_schedule_rank": 15,
+    "frozen_manifest_schedule_order": 14,
+    "task_rank": 14,
+    "digest": "sha256:d7e16b7c468551b468364cf2a86dba2383b007f3f2f01c6d2ce01d99ff30d48f"
+  },
+  "supersedes": {
+    "path": "canonical/governance/TB_SCIENCE_RANK15_PORTABLE_ONE_SLOT_EXECUTION_AUTHORITY_20261009_V2.json",
+    "git_blob_sha": "52a5ccf4f44f40a84b6f2477e3e1f6859ac43bee",
+    "reason": "PUBLIC_RANK15_EXECUTION_SURFACE_WAS_RATCHETED_TO_V2_RUNTIME_WORKFLOW_AND_ADMISSION_GUARD"
+  },
+  "candidate": {
+    "path": "canonical/governance/TB_SCIENCE_RANK15_RATCHET_ONE_SLOT_EXECUTION_AUTHORITY_CANDIDATE_20261009_V3.json",
+    "git_blob_sha": "e350f87bc9813a453714438267cb625711d95883"
+  },
+  "verification": {
+    "path": "canonical/verification/TB_SCIENCE_RANK15_RATCHET_AUTHORITY_CANDIDATE_VERIFICATION_20261009_V1.json",
+    "git_blob_sha": "87250e14dc83ad792671d5087adc7de99dc367d5",
+    "status": "PASS__PUBLIC_INDEPENDENT_RATCHET_VERIFICATION__CANDIDATE_FAIL_CLOSED__ZERO_TASK_EXPOSURE"
+  },
+  "public_execution_surface": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "base": "terminal-execution-v1",
+    "base_commit": "a3e98b048d674a6cdf54b68f8a9ff9afb5eb9d16",
+    "ratchet_pr": 2475,
+    "workflow_path": ".github/workflows/execute-tb-science-rank15-20261009-v2.yml",
+    "workflow_git_blob_sha": "13d9e4a402b10f43d22b7c8cdbc80ec9e75dffb9",
+    "current_surface_path": "execution_guard/CURRENT_TERMINAL_EXECUTION_SURFACE_V1.json",
+    "staged_surface_git_blob_sha": "c8370ce8cec2cc087f26f9f3d6d8bc7a61509908",
+    "staged_surface_execution_authority": false,
+    "behavior_git_blob_sha": "5caedddb7b5714fe74c4ba5709a43391e66dcf3a",
+    "invariant_registry_git_blob_sha": "3d156b5b3274ea7fe6542206137ddc7c782903b5",
+    "admission_guard_git_blob_sha": "84d1186b012d51fa5faafa37cf52e87467e80857",
+    "runtime_semantic_verification_git_blob_sha": "30b854d096e597a332cf183394a8b67c84a30e53",
+    "runtime_blobs": {
+      "planner_v2": "92161f95f211377ed40c11a38e641046bb45bd26",
+      "agent_v2": "fb4d8202192ca7a7ff03b36b9ba31be48f19dfa4",
+      "prestart_guard_v2": "b296e442535d4cf7770f7c1464da441c80fc65a1",
+      "zero_exposure_tests": "d1398ad85d6ea6ac6690fb232866eda5de6e58e8",
+      "transport": "ec46f648214a37bb16025d5ef2593efdf59f0d79"
+    }
+  },
+  "public_evidence": {
+    "zero_exposure_carrier_run_id": 37903406778,
+    "zero_exposure_carrier_job_id": 113731003150,
+    "execution_ratchet_run_id": 37903405723,
+    "execution_ratchet_job_id": 113730999992,
+    "execution_ratchet_artifact_id": 11603292177,
+    "execution_ratchet_artifact_zip_sha256": "e90bfc91037830261459ea5deb4f79044a79026b612b5effad6f0eb3a572217b"
+  },
+  "required_public_reseal": {
+    "authority_binding_must_reference_this_brain_authority": true,
+    "public_surface_execution_authority_must_be_true": true,
+    "execution_branch": "execute/tb-science-rank15-20261009-v2",
+    "activation_filename": "ACTIVATE_RANK15_V2_PR.json",
+    "fresh_v2_epoch_required": true,
+    "fresh_v2_execution_claim_required": true,
+    "preflight_must_bind_exact_epoch_claim_and_this_authority": true,
+    "finalizer_must_bind_exact_epoch_claim_and_this_authority": true,
+    "one_fresh_activation_pr_required": true
+  },
+  "controls": {
+    "attempts_authorized": 1,
+    "retries_authorized": 0,
+    "replacement_allowed": false,
+    "incremental_spend_usd_max": 0,
+    "task_read_only_after_live_carrier_qualification": true,
+    "task_start_requires_exact_prestart_guard_pass": true,
+    "precheck_failure_consumes_slot": false,
+    "post_start_result_irreversible": true,
+    "final_non_success_after_start_counts_zero": true,
+    "frozen_requirements_after_first_cycle": true,
+    "later_substrate_requirement_redeclaration_authority": false,
+    "candidate_covers_outside_frozen_set_fail_closed": true
+  },
+  "state": {
+    "public_surface_resealed": false,
+    "public_v2_epoch_published": false,
+    "public_v2_execution_claim_published": false,
+    "public_v2_activation_armed": false,
+    "task_read": false,
+    "task_started": false,
+    "benchmark_trials_consumed": 0,
+    "authority_consumed": false,
+    "result_present": false
+  },
+  "execution_authority": true,
+  "task_read_authority": false,
+  "fresh_reality_authority": true,
+  "promotion_authority": false,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
