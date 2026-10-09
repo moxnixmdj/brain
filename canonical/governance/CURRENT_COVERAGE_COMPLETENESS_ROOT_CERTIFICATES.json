@@ -40,5 +40,12 @@
     "git_blob_sha": "1f6ea3530e42530480a2d5416d82f04496fcd17e",
     "authoritative_registry_required": true
   },
-  "r4_authority_rule": "LOCAL_ROOT_RECEIPTS_CANNOT_CLOSE_R4_UNLESS_THE_CANONICAL_ROOT_CERTIFICATE_REGISTRY_VALIDATES_AND_ALL_THREE_CANONICAL_ROOT_SLOTS_ARE_PROVED_CURRENT"
+  "r4_authority_rule": "LOCAL_ROOT_RECEIPTS_CANNOT_CLOSE_R4_UNLESS_THE_CANONICAL_ROOT_CERTIFICATE_REGISTRY_VALIDATES_AND_ALL_THREE_CANONICAL_ROOT_SLOTS_ARE_PROVED_CURRENT",
+  "v2_supersession": {
+    "status": "SUPERSEDED_FOR_R4_AUTHORITY",
+    "authoritative_successor": "canonical/governance/CURRENT_COVERAGE_COMPLETENESS_CLAIM_CERTIFICATES.json",
+    "global_slot_r4_authority": false,
+    "historical_schema_preserved": true,
+    "reason": "ROOT_CERTIFICATE_AUTHORITY_REQUIRES_EXACT_FROZEN_CLAIM_BINDING"
+  }
 }
