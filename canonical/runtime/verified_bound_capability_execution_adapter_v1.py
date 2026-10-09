@@ -93,11 +93,27 @@ def inspect(capability_id: str) -> dict[str, Any]:
     action_template = entry.get("action_template")
     if not isinstance(action_template, Mapping) or action_template.get("type") != "invoke_capability":
         raise BoundExecutionError("BOUND_CAPABILITY_ACTION_TEMPLATE_INVALID:" + cid)
+    module_name = str(entry.get("adapter_module") or "")
+    if (
+        not module_name
+        or any(
+            ch not in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_"
+            for ch in module_name
+        )
+    ):
+        raise BoundExecutionError("BOUND_CAPABILITY_ADAPTER_INVALID:" + cid)
+    adapter_path = (
+        ROOT / "canonical" / "runtime" / "bound_capabilities" / (module_name + ".py")
+    )
+    if not adapter_path.is_file():
+        raise BoundExecutionError("BOUND_CAPABILITY_ADAPTER_MISSING:" + cid)
+    adapter_git_blob_sha = _git_blob_sha(adapter_path.read_bytes())
     return {
         "capability_id": cid,
         "entry": deepcopy(dict(entry)),
         "registry_file_sha256": sha256(raw).hexdigest(),
         "registry_entry_sha256": _sha(entry),
+        "adapter_git_blob_sha": adapter_git_blob_sha,
     }
 
 
@@ -148,6 +164,7 @@ def prepare(
         "inputs_sha256": _sha(inputs),
         "registry_file_sha256": inspected["registry_file_sha256"],
         "registry_entry_sha256": inspected["registry_entry_sha256"],
+        "adapter_git_blob_sha": inspected["adapter_git_blob_sha"],
         "_frozen_entry": deepcopy(dict(entry)),
         "rendered_action": deepcopy(dict(rendered)),
         "rendered_action_sha256": _sha(rendered),
@@ -285,11 +302,16 @@ def execute(
             and prepared["rendered_action_sha256"] != expected_rendered_action_sha256
         ):
             raise BoundExecutionError("RENDERED_ACTION_CHANGED_AFTER_PREPARATION")
+        if (
+            expected_adapter_git_blob_sha is not None
+            and prepared["adapter_git_blob_sha"] != str(expected_adapter_git_blob_sha).lower()
+        ):
+            raise BoundExecutionError("ADAPTER_CHANGED_AFTER_PREPARATION")
 
         result, adapter_git_blob_sha = _invoke_frozen_bound_capability(
             entry,
             dict(args),
-            expected_adapter_git_blob_sha=expected_adapter_git_blob_sha,
+            expected_adapter_git_blob_sha=prepared["adapter_git_blob_sha"],
         )
         if not isinstance(result, Mapping):
             raise BoundExecutionError("BOUND_CAPABILITY_RESULT_INVALID")
