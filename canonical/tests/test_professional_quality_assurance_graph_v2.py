@@ -88,11 +88,28 @@ class TestProfessionalQualityAssuranceGraphV2(unittest.TestCase):
         self.assertFalse(out["terminal_authority"], out)
         self.assertEqual(out["terminal_credit_delta"], 0)
 
-    def test_all_70_known_attack_classes_bind_to_existing_roots(self):
+    def test_all_80_known_attack_classes_bind_to_existing_roots(self):
         graph, catalog = load()
-        self.assertEqual(catalog["challenge_count"], 70)
-        self.assertEqual(len(catalog["challenges"]), 70)
+        self.assertEqual(catalog["challenge_count"], 80)
+        self.assertEqual(len(catalog["challenges"]), 80)
         self.assertEqual(catalog_errors(graph, catalog), [])
+
+    def test_cross_layer_assurance_failures_are_explicit(self):
+        _, catalog = load()
+        ids = {row["id"] for row in catalog["challenges"]}
+        required = {
+            "C71_JOINT_ASSURANCE_MULTIPLICITY",
+            "C72_UNGROUNDED_RISK_TOLERANCE",
+            "C73_BASE_RATE_PRECISION_LAUNDERING",
+            "C74_EXECUTION_FAILURE_FAIL_OPEN",
+            "C75_STALE_CERT_AFTER_DEPENDENCY_CHANGE",
+            "C76_SELECTIVE_EVIDENCE_PACKET",
+            "C77_PROVENANCE_OR_RECEIPT_FORGERY",
+            "C78_CONTEXT_TRUNCATION_OBLIGATION_DROP",
+            "C79_FALLBACK_EVALUATOR_SCOPE_WEAKENING",
+            "C80_OPTIONAL_STOPPING_OR_REPEATED_TESTING",
+        }
+        self.assertTrue(required.issubset(ids))
 
     def test_unknown_primitive_is_the_new_architecture_trigger(self):
         graph, _ = load()
