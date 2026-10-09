@@ -615,6 +615,7 @@ def _safe_repo_mutation_path(raw):
 
 def _load_bound_capability_registry():
     path=ROOT/"canonical"/"runtime"/"BOUND_CAPABILITY_REGISTRY_V1.json"
+    d_finality.require_material_file_if_active(path,repo_root=ROOT)
     data=readj(path)
     if data.get("schema")!="PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1":
         raise Blocker("BOUND_CAPABILITY_REGISTRY_INVALID")
