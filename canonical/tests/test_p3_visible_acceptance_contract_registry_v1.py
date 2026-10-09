@@ -1,11 +1,15 @@
 from __future__ import annotations
 
 import copy
+import hashlib
+import json
 import unittest
+from pathlib import Path
 
 from canonical.runtime import p3_conditioned_policy_adequacy_registry_v1 as registry
 
 POLICY = "BRAIN_VISIBLE_COMPLETE_ACCEPTANCE_CONTRACT_V1"
+ROOT = Path(__file__).resolve().parents[2]
 ATOMS = [
     "CODING_VISIBLE_ACCEPTANCE_CONTRACT_FINITE_V1",
     "CODING_VISIBLE_ACCEPTANCE_CHECKERS_TOTAL_V1",
@@ -89,6 +93,39 @@ class P3VisibleAcceptanceContractRegistryV1Tests(unittest.TestCase):
         self.assertFalse(out["membership_self_certified"])
         self.assertFalse(out["terminal_authority"])
         self.assertEqual(out["terminal_credit_delta"], 0)
+
+    def test_binding_references_exact_certificate_and_verification_blobs(self):
+        binding_path = (
+            ROOT / "canonical/governance/"
+            "CODING_VISIBLE_COMPLETE_ACCEPTANCE_CONTRACT_POLICY_ADEQUACY_BINDING_20261009_V1.json"
+        )
+        binding = json.loads(binding_path.read_text(encoding="utf-8"))
+
+        def blob(path: Path) -> str:
+            data = path.read_bytes()
+            h = hashlib.sha1()
+            h.update(b"blob " + str(len(data)).encode("ascii") + b"\0" + data)
+            return h.hexdigest()
+
+        cert_path = ROOT / binding["adequacy_certificate_path"]
+        verify_path = ROOT / binding["independent_verification_path"]
+        self.assertEqual(blob(binding_path), "c8a1fff64da2bff4e8972c71c040b1920271fee6")
+        self.assertEqual(
+            blob(cert_path),
+            binding["adequacy_certificate_blob_sha"],
+        )
+        self.assertEqual(
+            blob(verify_path),
+            binding["independent_verification_blob_sha"],
+        )
+        self.assertEqual(
+            binding["adequacy_certificate_blob_sha"],
+            "74aaced12d62b61d3266a4705a022350a9c7103f",
+        )
+        self.assertEqual(
+            binding["independent_verification_blob_sha"],
+            "18f6f017b3e0daf98dfbbff221e74661c8edb616",
+        )
 
     def test_binding_drift_fails_closed(self):
         mutated = copy.deepcopy(registry._REGISTRY)
