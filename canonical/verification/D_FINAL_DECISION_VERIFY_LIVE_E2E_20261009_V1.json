@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_D_FINAL_DECISION_VERIFY_LIVE_E2E_V1",
+  "date": "2026-10-09",
+  "status": "PASS__CANONICAL_REGISTRY_TO_ZERO_AMBIENT_VERIFIED_RESULT",
+  "capability_id": "bound:decision.synthesis.verify.stdlib",
+  "certificate_sha256": "32593f39385c171c75c86c8d28be73b1648dd24b082d1bbed8dca81c8d0f2752",
+  "certificate_git_blob_sha": "de1bcb0af1474b5558535cef04ae141c6f70b14d",
+  "policy_git_blob_sha": "bb166030e2d397884a036912f88683fd1ce3e921",
+  "policy_sha256": "a39902b2a0c49b2dde625e513e87bb2400e7bd3306017686a9ee8df8ab61a359",
+  "execution_epoch_sha256": "4becc3c04a43c58527931a9b544f3d2c9288ba6a2aba3155cf52f6e3c4a04592",
+  "material_closure_root": "907d4d2dae7e2f9f7aa3663421c2d621860b9c673e290213cf1f5ebd0cb7588d",
+  "chain": [
+    "D_FINALITY_CERTIFICATE_REGISTRY_V1",
+    "D_FINALITY_LIVE_REGISTRY_V1",
+    "D_FINALITY_POLICY_V1",
+    "D_FINALITY_EXECUTION_EPOCH_V1",
+    "D_FINAL_LIVE_BOUND_BRIDGE_V1",
+    "D_FINAL_PURE_STDLIB_CONFINED_RUNNER_V1",
+    "ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+    "D_FINAL_BOUND_STDLIB_PROVIDER_V1",
+    "EVIDENCE_DECISION_VERIFY",
+    "BOUND_CAPABILITY_EXECUTION_VERIFIER_V1"
+  ],
+  "replay": {
+    "carrier": {
+      "provider": "SPRITES",
+      "name": "brain-live-runtime-v1-verify-20261008",
+      "id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13"
+    },
+    "fresh_nonce_sha256": "d4f2b84465bc8334726f4c842c97b4154831747fe1f1c758bf13e3c20f629784",
+    "outer_status": "PASS__D_FINAL_LIVE_BOUND_BRIDGE",
+    "inner_runner_status": "PASS__PURE_STDLIB_EXECUTED_ZERO_AMBIENT",
+    "inner_provider_pass": true,
+    "inner_adapter_verified": true,
+    "material_effects_committed": 0
+  },
+  "conclusions": [
+    "CANONICAL_CURRENT_ROW_ACTIVATES_EXACT_D_CERTIFICATE",
+    "CERTIFICATE_ACTIVATES_EXPECTED_D_EPOCH",
+    "ACTIVE_EPOCH_BINDS_CAPABILITY_CONTRACT_AND_LOAD_BEARING_BYTES",
+    "LIVE_BRIDGE_EXECUTES_SELECTED_CAPABILITY_INSIDE_ZERO_AMBIENT_NAMESPACE",
+    "FRESH_DECISION_VERIFICATION_RESULT_PASSES",
+    "ZERO_HOST_MATERIAL_EFFECTS_COMMITTED"
+  ],
+  "hard_nonclaims": [
+    "NO_GLOBAL_89_CAPABILITY_D_FINALITY",
+    "NO_EFFECTFUL_BOUND_ROUTE_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
