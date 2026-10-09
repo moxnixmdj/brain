@@ -20,14 +20,12 @@ from canonical.runtime import live_integrated_brain_v1 as live_brain
 from canonical.runtime import autonomous_verified_self_improvement_v1 as self_improvement
 from canonical.runtime import h100_verified_capability_registry_v8 as h100_registry
 from canonical.runtime import certificate_gated_selected_route_runtime_entrypoint_v2 as certified_route
-from canonical.runtime import d_finality_coverage_gate_v1 as d_finality
 from canonical.runtime import d_finality_coverage_gate_v1 as d_finality_coverage
 
 SCHEMA = "PROJECT_BRAIN_LIVE_CAPABILITY_OWNERSHIP_V1"
 MANIFEST_SCHEMA = "PROJECT_BRAIN_LIVE_CAPABILITY_OWNERSHIP_MANIFEST_V1"
 ROOT = Path(__file__).resolve().parents[2]
 MANIFEST_PATH = ROOT / "canonical/governance/LIVE_CAPABILITY_OWNERSHIP_MANIFEST_V1.json"
-D_FINALITY_REGISTRY_PATH = ROOT / "canonical/governance/D_FINALITY_CERTIFICATE_REGISTRY_V1.json"
 D_FINALITY_REGISTRY_PATH = ROOT / "canonical/governance/D_FINALITY_CERTIFICATE_REGISTRY_V1.json"
 
 EXPECTED_PROVIDERS = (
@@ -221,7 +219,7 @@ def evaluate(
     ids = [row["capability_id"] for row in admitted]
     duplicates = sorted({cid for cid in ids if ids.count(cid) > 1})
     if duplicates:
-        raise LiveOwnershipError("LIVE_OWNERSHIP_ID_COLLISION:" + ",".join(duplicates))
+        raise LiveOwnershipError("LIVE_ADMISSION_ID_COLLISION:" + ",".join(duplicates))
 
     missing_carriers = sorted({
         str(row["carrier_mode"])
@@ -233,55 +231,79 @@ def evaluate(
         for row in admitted
         if str(row["carrier_mode"]) in modes
     )
-    owned_ids = sorted(ids)
-    equality = not missing_carriers and discoverable == owned_ids
+    admitted_ids = sorted(ids)
+    admission_equality = not missing_carriers and discoverable == admitted_ids
 
-    d_registry_path = Path(d_finality_registry_path)
-    if not d_registry_path.is_file():
+    d_path = Path(d_finality_registry_path)
+    if not d_path.is_file():
         raise LiveOwnershipError("D_FINALITY_REGISTRY_MISSING")
     try:
-        d_registry = json.loads(d_registry_path.read_text(encoding="utf-8"))
+        d_registry = json.loads(d_path.read_text(encoding="utf-8"))
     except Exception as exc:
-        raise LiveOwnershipError("D_FINALITY_REGISTRY_INVALID_JSON") from exc
+        raise LiveOwnershipError(
+            "D_FINALITY_REGISTRY_INVALID_JSON:" + type(exc).__name__ + ":" + str(exc)
+        ) from exc
     if not isinstance(d_registry, Mapping):
         raise LiveOwnershipError("D_FINALITY_REGISTRY_NOT_OBJECT")
     try:
-        d_coverage = d_finality_coverage.evaluate(owned_ids, d_registry)
-    except d_finality_coverage.DFinalityCoverageError as exc:
-        raise LiveOwnershipError("D_FINALITY_COVERAGE_INVALID:" + str(exc)) from exc
+        d_coverage = d_finality_coverage.evaluate(admitted_ids, d_registry)
+    except Exception as exc:
+        raise LiveOwnershipError(
+            "D_FINALITY_COVERAGE_INVALID:" + type(exc).__name__ + ":" + str(exc)
+        ) from exc
+
+    missing_d = {
+        str(x) for x in d_coverage.get("missing_d_certificate_ids", [])
+    }
+    d_final_owned_ids = sorted(
+        cid for cid in admitted_ids if cid not in missing_d
+    )
+    d_final_complete = (
+        d_coverage.get("pass") is True
+        and len(d_final_owned_ids) == len(admitted_ids)
+    )
+    ownership_equality = (
+        admission_equality
+        and d_final_complete
+        and d_final_owned_ids == discoverable
+    )
 
     return {
         "schema": SCHEMA,
         "status": (
             "PASS__LIVE_ADMITTED_AND_D_FINAL_OWNERSHIP_CLOSED"
-            if admission_equality and d_final_complete
+            if ownership_equality
             else "FAIL_CLOSED__D_FINAL_OWNERSHIP_INCOMPLETE"
         ),
-        "pass": bool(admission_equality and d_final_complete),
+        "pass": ownership_equality,
         "manifest_status": manifest["status"],
         "ownership_default": manifest["default"],
         "provider_count": len(EXPECTED_PROVIDERS),
         "providers": provider_rows,
-        "live_owned_capability_count": len(owned_ids),
-        "live_owned_capability_ids": owned_ids,
-        "live_admitted_capability_count": len(owned_ids),
-        "live_admitted_capability_ids": owned_ids,
-        "live_d_final_owned_capability_count": d_coverage["d_final_owned_capability_count"],
-        "live_d_final_owned_capability_ids": d_coverage["d_final_owned_capability_ids"],
-        "missing_d_certificate_count": d_coverage["missing_d_certificate_count"],
-        "missing_d_certificate_ids": d_coverage["missing_d_certificate_ids"],
-        "d_finality_coverage_complete": d_coverage["pass"],
-        "d_finality_coverage": d_coverage,
+        "live_admitted_capability_count": len(admitted_ids),
+        "live_admitted_capability_ids": admitted_ids,
+        "live_owned_capability_count": len(d_final_owned_ids),
+        "live_owned_capability_ids": d_final_owned_ids,
         "fabric_reachable_capability_count": len(discoverable),
         "fabric_reachable_capability_ids": discoverable,
         "missing_carrier_modes": missing_carriers,
-        "live_owned_equals_fabric_reachable": equality,
-        "provider_coverage_complete": equality,
+        "structurally_admitted_equals_fabric_reachable": admission_equality,
+        "live_owned_equals_fabric_reachable": ownership_equality,
+        "provider_coverage_complete": admission_equality,
+        "d_finality_coverage": deepcopy(dict(d_coverage)),
+        "d_final_coverage_complete": d_final_complete,
+        "d_final_missing_capability_count": int(
+            d_coverage.get("missing_d_certificate_count", -1)
+        ),
+        "d_final_missing_capability_ids": list(
+            d_coverage.get("missing_d_certificate_ids", [])
+        ),
+        "experimental_execution_without_ownership_permitted": True,
         "unregistered_repository_code_live_owned": False,
         "historical_repository_capability_completeness_proved": False,
         "arbitrary_raw_language_route_selection_proved": False,
         "r1_admission_structural_closure": admission_equality,
-        "r1_structural_closure": bool(admission_equality and d_final_complete),
+        "r1_structural_closure": ownership_equality,
         "terminal_authority": False,
         "capability_credit_delta": 0,
         "ownership_credit_delta": 0,
