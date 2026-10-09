@@ -345,3 +345,12 @@ After this written spec is reviewed:
 6. promote zero-credit bounded authority;
 7. run systematic terminal-graph falsification;
 8. only then decide whether the next step is broader refinement coverage or a different higher-dominance unresolved leaf.
+
+
+## Implementation correction: no declarative self-certification
+
+During TDD, the first verifier design exposed a self-certification flaw: caller-supplied fields such as `proved: true` cannot establish executable refinement. The implemented V1 verifier therefore treats `DECLARATIVE_BOUNDING` as **structural binding only** and emits `refinement_verified: false`.
+
+A route may reach `REFINEMENT_VERIFIED` or `VERIFIED_LIVE` only when a future supported proof class is mechanically checked by the trusted verifier and emits `refinement_verified: true`. Differential tests, source hashes, declarations, and attestation remain evidence but are not refinement proof.
+
+This correction strengthens the design. The current highest-dominance unresolved leaf is `terminal-live-paths-executable-refinement`, not a falsely closed bounded route.
