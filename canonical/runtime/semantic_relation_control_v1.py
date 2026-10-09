@@ -11,7 +11,9 @@ Authoritative relation admission in V1 is recomputed only from:
 2. equality of COMPLETE terminal-relevant signatures via the existing semantic
    quotient compiler, and
 3. exact set-theoretic relation proofs over a content-addressed COMPLETE bounded
-   semantic universe and COMPLETE left/right denotations.
+   semantic universe and COMPLETE left/right denotations, and
+4. checked transitive entailment proofs over exact content-addressed source spans
+   in a deliberately small source-aligned relation grammar.
 
 Embeddings, LLM judgments, lexical databases, string similarity, and model
 consensus may appear only as candidate relations/search hints. They cannot
@@ -34,6 +36,9 @@ from canonical.runtime.terminal_semantic_quotient_v1 import (
 )
 from canonical.runtime.bounded_semantic_relation_proof_v1 import (
     prove as prove_bounded_relation,
+)
+from canonical.runtime.source_aligned_semantic_entailment_v1 import (
+    prove as prove_source_entailment,
 )
 
 SCHEMA = "PROJECT_BRAIN_DECISION_RELATIVE_SEMANTIC_RELATION_CONTROL_V1"
@@ -266,6 +271,7 @@ def resolve(problem: Mapping[str, Any]) -> dict[str, Any]:
         "candidate_relations",
         "bounded_extension_evidence",
         "expected_bounded_extension_sha256",
+        "source_entailment_spans",
     }
     extra = set(problem) - allowed
     if extra:
@@ -362,6 +368,40 @@ def resolve(problem: Mapping[str, Any]) -> dict[str, Any]:
                 "terminal_credit_delta": 0,
             }
 
+    source_entailment = {
+        "available": False,
+        "pass": False,
+        "status": "NOT_REQUESTED",
+        "proved_facts": {
+            "left_entails_right": False,
+            "right_entails_left": False,
+            "logical_equivalence_in_scope": False,
+            "left_entails_right_disproved": False,
+            "right_entails_left_disproved": False,
+        },
+    }
+    if problem.get("source_entailment_spans") is not None:
+        source_entailment = prove_source_entailment({
+            "left_surface": left_surface,
+            "right_surface": right_surface,
+            "scope_id": scope_id,
+            "required_relation": "ANY_DIRECTIONAL_RELATION",
+            "source_spans": problem.get("source_entailment_spans"),
+        })
+        source_entailment = {"available": True, **source_entailment}
+        if str(source_entailment.get("status") or "").startswith("FAIL_CLOSED"):
+            return {
+                "schema": SCHEMA,
+                "pass": False,
+                "status": "FAIL_CLOSED__SOURCE_ALIGNED_ENTAILMENT_INVALID",
+                "reason": source_entailment.get("reason")
+                or source_entailment.get("conflicts")
+                or source_entailment.get("status"),
+                "source_entailment_proof": source_entailment,
+                "terminal_authority": False,
+                "terminal_credit_delta": 0,
+            }
+
     if explicit.get("reason") == "EXPLICIT_SOURCE_EVIDENCE_FAIL_CLOSED":
         return {
             "schema": SCHEMA,
@@ -390,13 +430,60 @@ def resolve(problem: Mapping[str, Any]) -> dict[str, Any]:
         bounded.get("available") is True
         and bounded.get("right_entails_left") is True
     )
+    bounded_left_disproved = (
+        bounded.get("available") is True
+        and bounded.get("left_entails_right_disproved") is True
+    )
+    bounded_right_disproved = (
+        bounded.get("available") is True
+        and bounded.get("right_entails_left_disproved") is True
+    )
+
+    source_facts = (
+        source_entailment.get("proved_facts")
+        if isinstance(source_entailment.get("proved_facts"), Mapping)
+        else {}
+    )
+    source_left_entails = source_facts.get("left_entails_right") is True
+    source_right_entails = source_facts.get("right_entails_left") is True
+    source_left_disproved = source_facts.get("left_entails_right_disproved") is True
+    source_right_disproved = source_facts.get("right_entails_left_disproved") is True
+
+    channel_conflicts = []
+    if (semantic_identity or bounded_left_entails) and source_left_disproved:
+        channel_conflicts.append("LEFT_TO_RIGHT_PROVED_BUT_SOURCE_COUNTEREXAMPLE")
+    if source_left_entails and bounded_left_disproved:
+        channel_conflicts.append("LEFT_TO_RIGHT_SOURCE_PROOF_BUT_BOUNDED_COUNTEREXAMPLE")
+    if (semantic_identity or bounded_right_entails) and source_right_disproved:
+        channel_conflicts.append("RIGHT_TO_LEFT_PROVED_BUT_SOURCE_COUNTEREXAMPLE")
+    if source_right_entails and bounded_right_disproved:
+        channel_conflicts.append("RIGHT_TO_LEFT_SOURCE_PROOF_BUT_BOUNDED_COUNTEREXAMPLE")
+    if channel_conflicts:
+        return {
+            "schema": SCHEMA,
+            "pass": False,
+            "status": "FAIL_CLOSED__SEMANTIC_EVIDENCE_CHANNEL_CONFLICT",
+            "reason": sorted(channel_conflicts),
+            "bounded_extension_proof": bounded,
+            "source_entailment_proof": source_entailment,
+            "terminal_authority": False,
+            "terminal_credit_delta": 0,
+        }
 
     # Candidate lexical/model output remains non-authoritative. Directional
-    # relations become load-bearing here only when recomputed by the bounded
-    # exact proof kernel (or implied by exact source identity).
-    left_entails_right = semantic_identity or bounded_left_entails
-    right_entails_left = semantic_identity or bounded_right_entails
-    logical_equivalence = semantic_identity or bounded_equivalent
+    # relations become load-bearing only when recomputed by an exact bounded
+    # extension proof, a checked source-aligned proof, or exact source identity.
+    left_entails_right = (
+        semantic_identity or bounded_left_entails or source_left_entails
+    )
+    right_entails_left = (
+        semantic_identity or bounded_right_entails or source_right_entails
+    )
+    logical_equivalence = (
+        semantic_identity
+        or bounded_equivalent
+        or (left_entails_right and right_entails_left)
+    )
 
     if semantic_identity:
         strongest = "SEMANTIC_IDENTITY"
@@ -414,26 +501,26 @@ def resolve(problem: Mapping[str, Any]) -> dict[str, Any]:
     if required == "SEMANTIC_IDENTITY":
         satisfied = semantic_identity
         disproved = (
-            bounded.get("available") is True
-            and bounded.get("logical_equivalence_disproved") is True
+            (bounded.get("available") is True and bounded.get("logical_equivalence_disproved") is True)
+            or source_left_disproved
+            or source_right_disproved
         )
     elif required == "LOGICAL_EQUIVALENCE_IN_SCOPE":
         satisfied = logical_equivalence
         disproved = (
-            bounded.get("available") is True
-            and bounded.get("logical_equivalence_disproved") is True
+            (bounded.get("available") is True and bounded.get("logical_equivalence_disproved") is True)
+            or source_left_disproved
+            or source_right_disproved
         )
     elif required == "LEFT_ENTAILS_RIGHT":
         satisfied = left_entails_right
         disproved = (
-            bounded.get("available") is True
-            and bounded.get("left_entails_right_disproved") is True
+            bounded_left_disproved or source_left_disproved
         )
     elif required == "RIGHT_ENTAILS_LEFT":
         satisfied = right_entails_left
         disproved = (
-            bounded.get("available") is True
-            and bounded.get("right_entails_left_disproved") is True
+            bounded_right_disproved or source_right_disproved
         )
     else:
         satisfied = semantic_identity or logical_equivalence or task_equivalent
@@ -482,6 +569,7 @@ def resolve(problem: Mapping[str, Any]) -> dict[str, Any]:
         "explicit_equivalence": explicit,
         "terminal_equivalence": terminal,
         "bounded_extension_proof": bounded,
+        "source_entailment_proof": source_entailment,
         "required_relation_disproved": disproved,
         "next_proof_targets": next_targets,
         "counterexample_first": not satisfied,
