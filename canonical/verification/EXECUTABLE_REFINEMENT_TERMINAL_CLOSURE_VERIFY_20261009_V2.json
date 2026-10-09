@@ -1,0 +1,110 @@
+{
+  "schema": "PROJECT_BRAIN_EXECUTABLE_REFINEMENT_TERMINAL_CLOSURE_VERIFY_20261009_V2",
+  "date": "2026-10-09",
+  "status": "PARTIAL_PASS__BASE_LOCKED_FEATURE__SELF_CONTAINED_REPRODUCED_CONE_29_OF_29__IMMUTABLE_TRUTH_BOUND__FULL_REPO_AND_INDEPENDENT_REPLAY_NOT_RUN__MECHANICAL_REFINEMENT_STILL_OPEN__ZERO_TERMINAL_CREDIT",
+  "branch": "executable-refinement-terminal-closure-20261009-v3",
+  "base_lock": {
+    "main_commit": "0e7899926a61ca41c866e95debbf801cac69cd64",
+    "current_terminal_pointer_modified": false,
+    "promotion_model": "IMMUTABLE_TRUTH_FRAGMENT_THEN_MINIMAL_CURRENT_MAIN_POINTER_PROJECTION_AFTER_VERIFICATION"
+  },
+  "exact_subject_blobs": {
+    "canonical/runtime/executable_refinement_verifier_v1.py": "13618667e6f87b29b1e56ceeb8947c51d64de683",
+    "canonical/runtime/creditable_route_refinement_gate_v1.py": "58602558b3a6ef81e9c6dcaf28cbc61eb0b1d70d",
+    "canonical/runtime/terminal_dependency_graph_guard_v1.py": "7ee3988dc393965f83994fba70cd1903e7e2aa7c",
+    "canonical/runtime/terminal_dependency_falsifier_v1.py": "0e540e2c76f5618593805a09ac0a4dd7ded354bb",
+    "canonical/governance/CURRENT_TERMINAL_DEPENDENCY_GRAPH_V1.json": "769b2f277b41045f8a95ad3a2d0eb2cfaabcdb27",
+    "canonical/runtime/certificate_gated_selected_route_runtime_entrypoint_v2.py": "c4f3ed3ea767a8930789f2426484fbce710d8f14",
+    "canonical/governance/ROUTER_DEPLOYMENT_CANARY_EXECUTABLE_REFINEMENT_20261009_V1.json": "d430de0c6ed47b1d18737a5261c345b7546896c9",
+    "canonical/governance/BRAIN_OWNED_SEMANTIC_EDGE_EXECUTABLE_REFINEMENT_20261009_V1.json": "c5f9b7af3b4c804ca0913789ab3acdb0b0f3eb4a",
+    "canonical/governance/EXECUTABLE_REFINEMENT_CURRENT_TRUTH_20261009_V1.json": "bb7a764e2169e8cddd63972df170c17f9d4e710d",
+    "canonical/tests/test_executable_refinement_current_truth_v1.py": "767a12343d09f08750aea29c65cc3b0da50c66e0"
+  },
+  "executed_verification": {
+    "carrier": "OPENAI_CONTAINER_RECONSTRUCTED_SELF_CONTAINED_HARNESS",
+    "repository_checkout": false,
+    "tests_run": 29,
+    "tests_passed": 29,
+    "tests_failed": 0,
+    "suites": [
+      {
+        "name": "test_executable_refinement_verifier_v1",
+        "tests": 9,
+        "status": "PASS"
+      },
+      {
+        "name": "test_router_deployment_canary_executable_refinement_v1",
+        "tests": 5,
+        "status": "PASS"
+      },
+      {
+        "name": "test_terminal_dependency_graph_guard_v1",
+        "tests": 6,
+        "status": "PASS"
+      },
+      {
+        "name": "test_creditable_route_refinement_gate_v1",
+        "tests": 5,
+        "status": "PASS"
+      },
+      {
+        "name": "test_terminal_dependency_falsifier_v1",
+        "tests": 4,
+        "status": "PASS"
+      }
+    ],
+    "red_green_observed": {
+      "initial_missing_verifier_import": "RED__MODULE_NOT_FOUND",
+      "implemented_verifier": "GREEN__8_OF_8",
+      "anti_self_certification_revision": "GREEN__9_OF_9",
+      "expanded_self_contained_cone": "GREEN__29_OF_29"
+    }
+  },
+  "not_executed": [
+    "FULL_PRIVATE_REPOSITORY_PYTEST_CONE",
+    "PY_COMPILE_ON_EXACT_REPOSITORY_BRANCH",
+    "EXISTING_SEMANTIC_EDGE_REGRESSION_ON_EXACT_BRANCH",
+    "SELECTED_ROUTE_ENTRYPOINT_FULL_INTEGRATION_ON_EXACT_BRANCH",
+    "IMMUTABLE_TRUTH_FRAGMENT_TEST_ON_EXACT_PRIVATE_CHECKOUT",
+    "INDEPENDENT_SECOND_CARRIER_REPLAY"
+  ],
+  "falsification_frontier": {
+    "graph_sha": "769b2f277b41045f8a95ad3a2d0eb2cfaabcdb27",
+    "highest_dominance_unresolved_leaf": "terminal-live-paths-executable-refinement",
+    "score": 111,
+    "terminal_load_bearing": true,
+    "active_attack_families": [
+      "COMPOSITION_MISMATCH",
+      "VERSION_DRIFT",
+      "NOVEL_DIMENSION",
+      "IMPLEMENTATION_REFINEMENT_MISMATCH"
+    ],
+    "open_world_closure": false,
+    "generator_coverage_proved": false
+  },
+  "proved_by_this_receipt": [
+    "SELF_CONTAINED_VERIFIER_GATE_GRAPH_AND_FALSIFIER_TEST_HARNESS_PASSES_29_OF_29",
+    "DECLARATIVE_PROVED_TRUE_FIELDS_DO_NOT_SELF_CERTIFY_EXECUTABLE_REFINEMENT",
+    "CREDITABLE_ROUTE_GATE_REQUIRES_REFINEMENT_VERIFIED_TRUE",
+    "TERMINAL_GRAPH_REJECTS_REFINEMENT_VERIFIED_OR_VERIFIED_LIVE_PROMOTION_FROM_STRUCTURAL_ONLY_CERTIFICATE",
+    "IMMUTABLE_TRUTH_FRAGMENT_BINDS_CURRENT_FEATURE_ARTIFACTS_BY_EXACT_BLOB",
+    "CURRENT_GRAPH_IDENTIFIES_TERMINAL_LIVE_PATHS_EXECUTABLE_REFINEMENT_AS_HIGHEST_DOMINANCE_UNRESOLVED_LEAF"
+  ],
+  "nonclaims": [
+    "NO_FULL_REPO_GREEN_CLAIM",
+    "NO_INDEPENDENT_REPLAY_CLAIM",
+    "NO_MECHANICALLY_CHECKED_EXECUTABLE_REFINEMENT_PROOF_CLASS",
+    "NO_REPOSITORY_WIDE_REFINEMENT_CLOSURE",
+    "NO_CURRENT_TERMINAL_POINTER_PROJECTION",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_OR_TERMINAL_CREDIT",
+    "NO_MERGE_READINESS_CLAIM_BEFORE_EXACT_BRANCH_VERIFICATION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
