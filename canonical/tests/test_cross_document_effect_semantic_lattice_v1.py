@@ -211,5 +211,74 @@ class CrossDocumentEffectSemanticLatticeV1Tests(unittest.TestCase):
         self.assertTrue(lv.verify(_problem(a,b),out)["verified"])
 
 
+    def test_source_explicit_omissions_autofill_to_closed_value(self):
+        effect=_define("A.t","10")
+        source="\n".join([
+            "Effect IDs only for threshold: A.t.",
+            _relation(effect),
+        ])
+        problem=_problem({
+            "document_id":"A",
+            "source_id":"A",
+            "source_text":source,
+            "claims":[],
+        })
+        out=l.evaluate(problem)
+        self.assertTrue(out["pass"],out)
+        self.assertEqual(out["effective_value"],"10")
+        self.assertEqual(out["lattice_documents"][0]["provided_claim_count"],0)
+        self.assertEqual(out["lattice_documents"][0]["synthesized_claim_count"],2)
+        self.assertTrue(lv.verify(problem,out)["verified"])
+
+    def test_source_explicit_scope_omission_autofills_query_exclusion(self):
+        problem=_problem({
+            "document_id":"X",
+            "source_id":"X",
+            "source_text":"Effect targets only: other.",
+            "claims":[],
+        })
+        out=l.evaluate(problem)
+        self.assertFalse(out["pass"],out)
+        self.assertEqual(out["status"],"OPEN__NO_QUERY_EFFECT_RELATION_PROVED")
+        self.assertEqual(
+            out["lattice_documents"][0]["query_status"],
+            "PROVED_QUERY_IRRELEVANT",
+        )
+        self.assertEqual(out["lattice_documents"][0]["synthesized_claim_count"],1)
+        self.assertTrue(lv.verify(problem,out)["verified"])
+
+    def test_wrong_existing_relation_blocks_autofill_replacement(self):
+        effect=_define("A.t","10")
+        source="\n".join([
+            "Effect IDs only for threshold: A.t.",
+            _relation(effect),
+        ])
+        wrong=dict(effect); wrong["value"]="99"
+        problem=_problem({
+            "document_id":"A",
+            "source_id":"A",
+            "source_text":source,
+            "claims":[{
+                "claim_id":"A.bad",
+                "kind":"CERTIFIED_DOCUMENT_EFFECT_RELATION",
+                "effect":wrong,
+            }],
+        })
+        out=l.evaluate(problem)
+        self.assertFalse(out["pass"],out)
+        self.assertEqual(
+            out["lattice_documents"][0]["relation_states"]["A.t"],
+            {"kind":"TOP"},
+        )
+        self.assertEqual(
+            out["lattice_documents"][0]["synthesized_claim_count"],
+            1,
+        )
+        self.assertGreater(
+            out["lattice_documents"][0]["rejected_claim_count"],0
+        )
+        self.assertTrue(lv.verify(problem,out)["verified"])
+
+
 if __name__=="__main__":
     unittest.main()
