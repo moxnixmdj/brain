@@ -156,6 +156,47 @@ class SecCompanyConceptSourceNativeTests(unittest.TestCase):
         self.assertFalse(check["verified"], check)
         self.assertIn("SEMANTIC_FIELD_MISMATCH:concept_qname", check["errors"])
 
+    def test_verifier_rejects_inner_fact_value_tamper(self):
+        self._write_config()
+        with mock.patch.object(p, "_fetch", _fake_fetch()):
+            p.run(_args(), self.root)
+        semantic_path = self.root / _args()["semantic_output_path"]
+        semantic = json.loads(semantic_path.read_text(encoding="utf-8"))
+        for fact in semantic["semantic_contract"]["facts"]:
+            if fact.get("predicate") == "val":
+                fact["object"] = 999999
+                break
+        semantic_path.write_text(json.dumps(semantic), encoding="utf-8")
+        check = v.verify(
+            root=self.root,
+            raw_path=_args()["raw_output_path"],
+            semantic_path=_args()["semantic_output_path"],
+        )
+        self.assertFalse(check["verified"], check)
+        self.assertIn(
+            "SEMANTIC_CONTRACT_NOT_EXACTLY_DERIVED_FROM_SOURCE_BYTES",
+            check["errors"],
+        )
+
+    def test_verifier_rejects_relation_deletion(self):
+        self._write_config()
+        with mock.patch.object(p, "_fetch", _fake_fetch()):
+            p.run(_args(), self.root)
+        semantic_path = self.root / _args()["semantic_output_path"]
+        semantic = json.loads(semantic_path.read_text(encoding="utf-8"))
+        semantic["semantic_contract"]["relations"].pop()
+        semantic_path.write_text(json.dumps(semantic), encoding="utf-8")
+        check = v.verify(
+            root=self.root,
+            raw_path=_args()["raw_output_path"],
+            semantic_path=_args()["semantic_output_path"],
+        )
+        self.assertFalse(check["verified"], check)
+        self.assertIn(
+            "SEMANTIC_CONTRACT_NOT_EXACTLY_DERIVED_FROM_SOURCE_BYTES",
+            check["errors"],
+        )
+
     def test_verifier_rejects_raw_byte_tamper(self):
         self._write_config()
         with mock.patch.object(p, "_fetch", _fake_fetch()):
