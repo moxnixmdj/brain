@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_BRAIN_OWNED_SEMANTIC_EDGE_ABSTRACT_SPEC_V1",
+  "date": "2026-10-09",
+  "subject_id": "brain-owned-semantic-relation-edge-authority-v1",
+  "scope": "BOUNDED_WRAPPER_BEHAVIOR_AROUND_EXPLICIT_SOURCE_IDENTITY",
+  "accepted_proof_class": "EXPLICIT_SOURCE_IDENTITY",
+  "transition_partition": [
+    "EVIDENCE_NOT_OBJECT",
+    "EVIDENCE_FIELD_SET_INVALID",
+    "EVIDENCE_SCHEMA_INVALID",
+    "PROOF_CLASS_UNSUPPORTED",
+    "SCOPE_ID_REQUIRED",
+    "DISTINCT_SOURCE_TARGET_IDS_REQUIRED",
+    "SOURCE_TARGET_SURFACES_REQUIRED",
+    "RELATION_UNSUPPORTED",
+    "EXPLICIT_DEFINITION_SOURCES_REQUIRED",
+    "DEFINITION_SOURCE_NOT_OBJECT",
+    "DEFINITION_SOURCE_FIELD_SET_INVALID",
+    "DEFINITION_SOURCE_BINDING_INVALID",
+    "SEMANTIC_IDENTITY_NOT_PROVED",
+    "NOT_ENTAILS_NOT_DERIVABLE_FROM_SEMANTIC_IDENTITY_PROOF",
+    "ENTAILS_RECEIPT"
+  ],
+  "success_contract": {
+    "pass": true,
+    "relation": "ENTAILS",
+    "source_semantics_authenticated": true,
+    "target_semantics_authenticated": true,
+    "relation_semantics_authenticated": true,
+    "verification_authority_mutated": false,
+    "semantic_truth_authority": false,
+    "execution_authority": false,
+    "acceptance_authority": false,
+    "terminal_authority": false
+  },
+  "dependency_semantics": {
+    "semantic_relation_control": "BOUND_DEPENDENCY__ITS_INTERNAL_SEMANTICS_ARE_NOT_REPROVED_BY_THIS_WRAPPER_SPEC"
+  },
+  "nonclaims": [
+    "THIS_ABSTRACT_SPEC_DOES_NOT_PROVE_PYTHON_IMPLEMENTATION_REFINEMENT",
+    "THIS_DOES_NOT_PROVE_GENERAL_LANGUAGE_SEMANTIC_COMPLETENESS",
+    "THIS_DOES_NOT_PROVE_NOT_ENTAILS_FROM_ABSENCE",
+    "THIS_DOES_NOT_GRANT_EXECUTION_ACCEPTANCE_OR_TERMINAL_AUTHORITY"
+  ],
+  "terminal_credit_delta": 0
+}
