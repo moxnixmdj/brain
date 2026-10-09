@@ -519,6 +519,8 @@ def run(args,root):
             raise GroundingError("OUTPUT_PATH_OUTSIDE_REPOSITORY")
         path.parent.mkdir(parents=True,exist_ok=True)
         path.write_text(json.dumps(result,indent=2,sort_keys=True)+"\n",encoding="utf-8")
+        raw_output=path.read_bytes()
         result["output_path"]=str(path.relative_to(root)).replace("\\","/")
+        result["output_sha256"]=hashlib.sha256(raw_output).hexdigest()
         result["output_verified"]=True
     return result
