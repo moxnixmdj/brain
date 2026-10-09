@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_R2_PROOF_CARRYING_DOMAIN_MAPPING_RECONCILIATION_20261009_V1",
+  "date": "2026-10-09",
+  "status": "RECONCILED__SCOPED_PROOF_CARRYING_DOMAIN_MAPPING_IS_A_SOUND_FINANCE_SEMANTIC_ESCAPE_ROUTE__OPEN_WORLD_ONTOLOGY_REMAINS_OPEN__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "base_main": "782aeebda78977255d1d58315e963306a96965af"
+  },
+  "exact_verified_route": {
+    "producer": {
+      "path": "canonical/runtime/proof_carrying_domain_mapping_v1.py",
+      "git_blob_sha": "4323549e0a7b9da688474d63af7fe3cec0134326"
+    },
+    "truth_certificate": {
+      "path": "canonical/runtime/domain_mapping_truth_certificate_v1.py",
+      "git_blob_sha": "971387d7594506cf0346e4714e4e79112fbb6f0f"
+    },
+    "semantic_truth_dispatch": {
+      "path": "canonical/runtime/semantic_truth_dispatch_v1.py",
+      "git_blob_sha": "3154ec74cda0814008fd65e81d03a9794b772856"
+    },
+    "p3_consumer": {
+      "path": "canonical/runtime/p3_bound_relevance_cegar_loop_v1.py",
+      "git_blob_sha": "45bc68989699a1318d2190b7c162268970548bfe"
+    },
+    "independent_verification": {
+      "path": "canonical/verification/PROOF_CARRYING_DOMAIN_MAPPING_VERIFY_20261009_V1.json",
+      "git_blob_sha": "ef407cec0aa7f0fa039c1f46cb9e099010cab95c",
+      "focused_checks": "62_OF_62_PASS"
+    }
+  },
+  "coverage_delta": {
+    "positive_subregion_id": "SCOPED_PROOF_CARRYING_DOMAIN_MAPPING_WITH_INDEPENDENT_DECISION_RELEVANT_SEMANTIC_COMPLETENESS",
+    "scope": "ONE_EXACT_SOURCE_SPAN_AND_SCOPE_ID_WITH_VERIFIER_BACKED_REQUIRED_RELATION_AND_ANY_REQUIRED_INDEPENDENT_DECISION_RELEVANT_SOURCE_SEMANTICS_COMPLETENESS",
+    "p3_truth_route": "DOMAIN_MAPPING_RELATION",
+    "candidate_or_model_hint_authority": false,
+    "opaque_remainder_preserved_without_semantic_completeness": true,
+    "wake_condition_locally_satisfied": "NEW_SCOPE_COMPLETE_SOUND_FINANCE_INTERPRETATION_OR_CONSTRAINT_BOUND",
+    "global_wake_condition_satisfied": false,
+    "direct_adequacy_route_count_delta": 0,
+    "bounded_direct_family_count_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "remaining_boundary": [
+    "AMBIGUOUS_OR_IMPLICIT_COREFERENCE_BEYOND_VERIFIED_STRUCTURAL_FORMS",
+    "OEWN_SENSE_CASES_WITHOUT_COMPLETE_AUTHENTICATED_SENSE_TO_TERMINAL_SIGNATURE_OR_OBSERVATION_BINDINGS",
+    "TERMS_OR_DOMAIN_CONCEPTS_WITHOUT_VERIFIER_BACKED_SCOPED_MAPPING_OR_PROVED_COMPLETE_BOUNDED_UNIVERSE",
+    "NONEXPLICIT_SEMANTIC_RELATIONS_WITHOUT_SOURCE_ALIGNED_PROOF",
+    "OPEN_WORLD_ONTOLOGY_MAPPING_WITHOUT_AUTHENTICATED_BOUNDED_AUTHORITY",
+    "CROSS_DOCUMENT_RAW_PROSE_WITHOUT_PROVED_HYPOTHESIS_COMPLETENESS_OR_IMPLICIT_PRECEDENCE",
+    "STRONGER_EXTERNAL_FACT_AUTHENTICATION_BEYOND_BOUND_OBSERVATION_CHANNELS"
+  ],
+  "hard_nonclaims": [
+    "NO_OPEN_WORLD_ONTOLOGY_COMPLETENESS",
+    "NO_GLOBAL_FINANCE_SEMANTIC_CLOSURE",
+    "NO_GENERAL_WORD_SENSE_CLOSURE",
+    "NO_INFERRED_SYNONYMY_FROM_SIMILARITY_OR_MODEL_CONSENSUS",
+    "NO_POLICY_ADEQUACY_FROM_DOMAIN_MAPPING_ALONE",
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_TERMINAL_AUTHORITY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
