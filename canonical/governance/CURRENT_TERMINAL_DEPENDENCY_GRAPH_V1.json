@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_DEPENDENCY_GRAPH_V1",
+  "date": "2026-10-09",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "nodes": [
+    {
+      "id": "EXECUTABLE_REFINEMENT_FRAMEWORK",
+      "kind": "LEAF",
+      "status": "UNRESOLVED",
+      "note": "STRUCTURAL_BINDING_VERIFIER_AND_ANTI_BYPASS_DESIGN_PRESENT__EXECUTION_VERIFICATION_AND_SEMANTIC_REFINEMENT_AUTHORITY_NOT_YET_PROMOTED"
+    },
+    {
+      "id": "router-deployment-canary",
+      "kind": "ROUTE",
+      "lifecycle": "IMPLEMENTED",
+      "creditable": false,
+      "terminal_authority": false,
+      "implementation": {
+        "path": "canonical/runtime/router_deployment_canary_v1.py",
+        "git_blob_sha": "de71202a17071c8af88ec7ac6e1f241fb42854c2"
+      },
+      "refinement": {
+        "status": "UNRESOLVED",
+        "certificate": {
+          "path": "canonical/governance/ROUTER_DEPLOYMENT_CANARY_EXECUTABLE_REFINEMENT_20261009_V1.json",
+          "git_blob_sha": "620385303adacb594694f46b0c42dd694eb680fc"
+        },
+        "verification_receipt": null
+      },
+      "live_authority_status": "UNRESOLVED",
+      "note": "NONCREDITABLE_CANARY__STRUCTURAL_BINDING_ONLY__NO_REFINEMENT_OR_TERMINAL_CREDIT"
+    },
+    {
+      "id": "brain-owned-semantic-edge-authority",
+      "kind": "ROUTE",
+      "lifecycle": "IMPLEMENTED",
+      "creditable": false,
+      "terminal_authority": false,
+      "implementation": {
+        "path": "canonical/runtime/brain_owned_semantic_relation_edge_authority_v1.py",
+        "git_blob_sha": "01305c41e79189e3ea13f1a6343427ee31eda566"
+      },
+      "refinement": {
+        "status": "UNRESOLVED",
+        "certificate": {
+          "path": "canonical/governance/BRAIN_OWNED_SEMANTIC_EDGE_EXECUTABLE_REFINEMENT_20261009_V1.json",
+          "git_blob_sha": "e0e9c04a3d016b71ea5188f02735eb5fc26458f2"
+        },
+        "verification_receipt": null
+      },
+      "live_authority_status": "UNRESOLVED",
+      "note": "DECLARED_BRANCH_PARTITION_AND_WITNESS_TESTS_EXIST__NO_INDEPENDENT_EXECUTABLE_REFINEMENT_RECEIPT__ZERO_TERMINAL_CREDIT"
+    },
+    {
+      "id": "ALL_CREDITABLE_LIVE_ROUTES_EXECUTABLE_REFINEMENT",
+      "kind": "LEAF",
+      "status": "UNRESOLVED",
+      "note": "GENERAL_LIVE_ROUTE_REFINEMENT_COVERAGE_NOT_PROVED"
+    },
+    {
+      "id": "TERMINAL_DEPENDENCY_GRAPH_GENERATOR_COVERAGE",
+      "kind": "LEAF",
+      "status": "UNRESOLVED",
+      "note": "GRAPH_ENUMERATION_DOES_NOT_PROVE_OPEN_WORLD_COMPLETENESS"
+    }
+  ],
+  "terminal_closure": false,
+  "terminal_credit_delta": 0
+}
