@@ -254,6 +254,7 @@ def execute(
     expected_registry_file_sha256: str | None = None,
     expected_registry_entry_sha256: str | None = None,
     expected_rendered_action_sha256: str | None = None,
+    expected_adapter_git_blob_sha: str | None = None,
 ) -> dict[str, Any]:
     try:
         prepared = prepare(
@@ -265,8 +266,7 @@ def execute(
             result_fields=result_fields,
         )
         cid = prepared["capability_id"]
-        inspected = inspect(cid)
-        entry = inspected["entry"]
+        entry = prepared["_frozen_entry"]
         rendered = prepared["rendered_action"]
         args = rendered["args"]
 
@@ -286,7 +286,11 @@ def execute(
         ):
             raise BoundExecutionError("RENDERED_ACTION_CHANGED_AFTER_PREPARATION")
 
-        result = astra_runtime._invoke_bound_capability(dict(args))
+        result, adapter_git_blob_sha = _invoke_frozen_bound_capability(
+            entry,
+            dict(args),
+            expected_adapter_git_blob_sha=expected_adapter_git_blob_sha,
+        )
         if not isinstance(result, Mapping):
             raise BoundExecutionError("BOUND_CAPABILITY_RESULT_INVALID")
         astra_runtime._verify_action_expectation(rendered, result)
@@ -346,6 +350,7 @@ def execute(
             "registry_file_sha256": prepared["registry_file_sha256"],
             "registry_entry_sha256": prepared["registry_entry_sha256"],
             "rendered_action_sha256": prepared["rendered_action_sha256"],
+            "adapter_git_blob_sha": adapter_git_blob_sha,
             "rendered_action": deepcopy(dict(rendered)),
             "result_sha256": _sha(result),
             "result": deepcopy(dict(result)),
