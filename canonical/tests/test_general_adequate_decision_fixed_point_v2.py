@@ -779,5 +779,61 @@ class GeneralAdequateDecisionFixedPointV2Tests(unittest.TestCase):
         self.assertFalse(hint["terminal_authority"])
 
 
+    @patch.object(fixed.direct_adequacy, "preflight")
+    @patch.object(fixed, "run_controller")
+    def test_combined_source_top_hint_reaches_resolver_without_authority(
+        self, controller, preflight
+    ):
+        region = {
+            "document_id": "A",
+            "region_id": "A.unknown",
+            "start": 290,
+            "end": 305,
+            "text_sha256": "b" * 64,
+        }
+        obligation = {
+            "kind": "CLOSE_QUERY_RELEVANT_UNKNOWN_SOURCE_REGIONS_OR_PROVE_QUERY_TARGET_EXCLUDED",
+            "document_id": "A",
+            "open_unknown_region_ids": ["A.unknown"],
+            "residual_state": "TOP_EFFECT_MAY_AFFECT_QUERY",
+        }
+        preflight.return_value = {
+            "matched": False,
+            "pass": False,
+            "status": "NOT_APPLICABLE__COMBINED_SOURCE_SEMANTICS_OPEN",
+            "direct_route_semantic_open": True,
+            "route_id": "DIRECT_ADEQUACY::CROSS_DOCUMENT_SOURCE_RESIDUAL_FRONTIER_V1",
+            "effect_status": "OPEN__QUERY_RELEVANT_SOURCE_TOP_REMAINS",
+            "blocking_document_ids": ["A"],
+            "blocking_unknown_regions": [region],
+            "next_proof_obligations": [obligation],
+            "minimum_discriminator_slots": [],
+            "possible_outcomes": [],
+            "world_count": 1,
+            "query_relative_source_completeness_proved": False,
+        }
+        controller.side_effect = [self._open(), self._pass()]
+        provider = Mock(
+            return_value={
+                "request_patch": {
+                    "decision_payload": {"context_id": "combined-source-resolved"}
+                }
+            }
+        )
+
+        out = fixed.run(self._request(), proposal_provider=provider)
+
+        self.assertTrue(out["pass"], out)
+        hint = provider.call_args.args[0]["direct_preflight_hint"]
+        self.assertEqual(hint["blocking_document_ids"], ["A"])
+        self.assertEqual(hint["blocking_unknown_regions"], [region])
+        self.assertEqual(hint["next_proof_obligations"], [obligation])
+        self.assertFalse(hint["query_relative_source_completeness_proved"])
+        self.assertFalse(hint["semantic_truth_authority"])
+        self.assertFalse(hint["execution_authority"])
+        self.assertFalse(hint["acceptance_authority"])
+        self.assertFalse(hint["terminal_authority"])
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
