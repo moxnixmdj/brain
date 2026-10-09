@@ -253,7 +253,10 @@
       "independent_verification": {
         "path": "canonical/verification/CREDITABLE_ROUTER_CONTEXT_PAYLOAD_BINDING_SPRITE_VERIFICATION_20261007_V1.json",
         "git_blob_sha": "e3b02317645d9ca508b2fb9d6cec8d7276eac083"
-      }
+      },
+      "status": "SUPERSEDED_RUNTIME_BINDING__EVIDENCE_RETAINED",
+      "superseded_by": "creditable_route_refinement_admission_guard",
+      "note": "HISTORICAL_CONTEXT_PAYLOAD_BINDING_VERIFICATION_ONLY__DOES_NOT_DEFINE_CURRENT_RUNTIME_BLOB"
     },
     "predicate_argument_source_proof": {
       "path": "canonical/governance/SOURCE_ALIGNED_PREDICATE_ARGUMENT_PROOF_20261007_V1.json",
@@ -1978,7 +1981,12 @@
     "all_creditable_live_routes_refinement_verified": false,
     "terminal_executable_refinement_gap_closed": false,
     "executable_refinement_missing_is_external_impossibility": false,
-    "executable_refinement_current_classification": "INTERNAL_UNRESOLVED__STRUCTURAL_BINDINGS_AND_ANTI_BYPASS_IMPLEMENTED__EXECUTION_VERIFICATION_PENDING"
+    "executable_refinement_current_classification": "INTERNAL_UNRESOLVED__SELECTED_ROUTE_ADMISSION_ENFORCED__NON_SELECTED_RUNTIME_REFINEMENT_COVERAGE_OPEN",
+    "creditable_selected_route_refinement_admission_enforced": true,
+    "current_selected_route_registry_creditable_row_count": 0,
+    "all_current_creditable_selected_routes_refinement_requirement_satisfied": true,
+    "non_selected_runtime_executable_refinement_coverage_closed": false,
+    "runtime_binding_precedence_reconciled": true
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -3668,6 +3676,11 @@
     "repository_wide_refinement_closed": false,
     "external_impossibility_claimed": false,
     "incremental_spend_usd": 0,
-    "terminal_credit_delta": 0
+    "terminal_credit_delta": 0,
+    "creditable_selected_route_refinement_admission_enforced": true,
+    "current_selected_route_registry_creditable_row_count": 0,
+    "all_current_creditable_selected_routes_refinement_requirement_satisfied": true,
+    "non_selected_runtime_refinement_coverage_closed": false,
+    "runtime_binding_precedence_reconciled": true
   }
 }
