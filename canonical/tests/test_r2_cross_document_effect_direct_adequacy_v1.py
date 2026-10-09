@@ -87,7 +87,7 @@ class R2CrossDocumentEffectDirectAdequacyV1Tests(unittest.TestCase):
             calls={"n":0}
             def injected(case,docs,result):
                 calls["n"]+=1
-                if calls["n"]>=4:
+                if calls["n"]>=3:
                     return {"verified":False,"errors":["forced"]}
                 return original(case,docs,result)
             with patch.object(d.verifier,"verify",side_effect=injected):
