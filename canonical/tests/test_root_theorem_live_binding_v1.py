@@ -12,6 +12,8 @@ THEOREM_PATH = "canonical/governance/COVERAGE_COMPLETENESS_ROOT_THEOREM_V1.json"
 CARRIER_PATH = "canonical/governance/MISSION_SUFFICIENT_SEMANTIC_CARRIER_V1.json"
 CLAIM_SCOPE_PATH = "canonical/governance/COVERAGE_COMPLETENESS_CLAIM_SCOPE_V1.json"
 NAMESPACE_PATH = "canonical/governance/COVERAGE_ROOT_NAMESPACE_BRIDGE_V1.json"
+CLAIM_ROOT_POINTER_PATH = "canonical/governance/CURRENT_COVERAGE_COMPLETENESS_ROOT_CERTIFICATES.json"
+CLAIM_ROOT_REGISTRY_PATH = "canonical/governance/COVERAGE_COMPLETENESS_CLAIM_ROOT_CERTIFICATE_REGISTRY_V1.json"
 
 
 def docs():
@@ -52,6 +54,35 @@ def docs():
             "global_open_ended_mission_completion_derivable": False,
         },
     }
+    claim_root_registry = {
+        "schema": "PROJECT_BRAIN_COVERAGE_COMPLETENESS_CLAIM_ROOT_CERTIFICATE_REGISTRY_V1",
+        "namespace": "PROJECT_BRAIN_COVERAGE_COMPLETENESS_ROOTS_V1",
+        "mission_binding": {"path": MISSION_PATH, "git_blob_sha": "mission-sha"},
+        "claim_scope_binding": {"path": CLAIM_SCOPE_PATH, "git_blob_sha": "claim-scope-sha"},
+        "claim_instances": [],
+        "registered_claim_count": 0,
+        "currently_open_root_certificates": 0,
+        "currently_proved_root_certificates": 0,
+        "claim_proof_closure_count": 0,
+        "checkpoint_completion": False,
+        "global_root_closure": False,
+        "global_open_ended_mission_completion": False,
+        "accounting": {"terminal_credit_delta": 0},
+    }
+    claim_root_pointer = {
+        "registry": {"path": CLAIM_ROOT_REGISTRY_PATH, "git_blob_sha": "claim-root-registry-sha"},
+        "guard": {
+            "path": "canonical/runtime/coverage_claim_root_certificate_registry_guard_v1.py",
+            "git_blob_sha": "claim-root-guard-sha",
+        },
+        "tests": {
+            "path": "canonical/tests/test_coverage_claim_root_certificate_registry_guard_v1.py",
+            "git_blob_sha": "claim-root-tests-sha",
+        },
+        "proved": 0,
+        "open": 0,
+        "r4_proof_closure": False,
+    }
     namespace_bridge = {
         "theorem_namespace": {
             "id": "CCRT",
@@ -88,6 +119,14 @@ def docs():
             "path": CLAIM_SCOPE_PATH,
             "git_blob_sha": "claim-scope-sha",
         },
+        "claim_root_certificate_authority": {
+            "path": CLAIM_ROOT_POINTER_PATH,
+            "git_blob_sha": "claim-root-pointer-sha",
+            "registry": {
+                "path": CLAIM_ROOT_REGISTRY_PATH,
+                "git_blob_sha": "claim-root-registry-sha",
+            },
+        },
         "accounting": {"terminal_credit_delta": 0},
     }
     authority = {
@@ -110,12 +149,20 @@ def docs():
                 "path": CLAIM_SCOPE_PATH,
                 "git_blob_sha": "claim-scope-sha",
             },
+            "coverage_claim_root_certificate_registry": {
+                "path": CLAIM_ROOT_POINTER_PATH,
+                "git_blob_sha": "claim-root-pointer-sha",
+                "registry": {
+                    "path": CLAIM_ROOT_REGISTRY_PATH,
+                    "git_blob_sha": "claim-root-registry-sha",
+                },
+            },
         },
     }
-    return mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope
+    return mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope, claim_root_pointer, claim_root_registry
 
 
-def check(mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope):
+def check(mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope, claim_root_pointer, claim_root_registry):
     return validate_documents(
         mission=mission,
         mission_blob_sha="mission-sha",
@@ -132,6 +179,12 @@ def check(mission, theorem, binding, namespace_bridge, authority, carrier, claim
         carrier_tests_blob_sha="carrier-tests-sha",
         claim_scope=claim_scope,
         claim_scope_blob_sha="claim-scope-sha",
+        claim_root_pointer=claim_root_pointer,
+        claim_root_pointer_blob_sha="claim-root-pointer-sha",
+        claim_root_registry=claim_root_registry,
+        claim_root_registry_blob_sha="claim-root-registry-sha",
+        claim_root_guard_blob_sha="claim-root-guard-sha",
+        claim_root_tests_blob_sha="claim-root-tests-sha",
     )
 
 
@@ -146,108 +199,137 @@ def test_valid_binding_passes_zero_credit():
 
 
 def test_stale_mission_blob_fails():
-    mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope = docs()
+    mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope, claim_root_pointer, claim_root_registry = docs()
     authority["objective_precedence"]["authoritative_git_blob_sha"] = "stale"
-    out = check(mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope)
+    out = check(mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope, claim_root_pointer, claim_root_registry)
     assert "TERMINAL_AUTHORITY_MISSION_BLOB_STALE" in out["errors"]
 
 
 def test_old_root_blob_fails():
-    mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope = docs()
+    mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope, claim_root_pointer, claim_root_registry = docs()
     binding["root_theorem"]["git_blob_sha"] = "old"
-    out = check(mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope)
+    out = check(mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope, claim_root_pointer, claim_root_registry)
     assert "BINDING_ROOT_BLOB_STALE" in out["errors"]
 
 
 def test_zero_credit_is_required():
-    mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope = docs()
+    mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope, claim_root_pointer, claim_root_registry = docs()
     binding["accounting"]["terminal_credit_delta"] = 1
-    out = check(mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope)
+    out = check(mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope, claim_root_pointer, claim_root_registry)
     assert "BINDING_ZERO_CREDIT_VIOLATION" in out["errors"]
 
 
 def test_missing_namespace_ref_fails():
-    mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope = docs()
+    mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope, claim_root_pointer, claim_root_registry = docs()
     binding.pop("root_namespace_bridge")
-    out = check(mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope)
+    out = check(mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope, claim_root_pointer, claim_root_registry)
     assert "BINDING_ROOT_NAMESPACE_PATH_DRIFT" in out["errors"]
 
 
 def test_missing_namespace_authority_fails():
-    mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope = docs()
+    mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope, claim_root_pointer, claim_root_registry = docs()
     authority["authoritative_sources"].pop("coverage_root_namespace_bridge")
-    out = check(mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope)
+    out = check(mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope, claim_root_pointer, claim_root_registry)
     assert "LIVE_AUTHORITY_ROOT_NAMESPACE_MISSING" in out["errors"]
 
 
 def test_legacy_equivalence_fails():
-    mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope = docs()
+    mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope, claim_root_pointer, claim_root_registry = docs()
     namespace_bridge["legacy_namespaces"]["LEGACY_ESCAPE_POLICY_ADEQUACY"]["equivalent_to_ccrt_roots"] = ["R2"]
-    out = check(mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope)
+    out = check(mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope, claim_root_pointer, claim_root_registry)
     assert "ROOT_NAMESPACE_LEGACY_ESCAPE_POLICY_ADEQUACY_EQUIVALENCE_FORBIDDEN" in out["errors"]
 
 
 def test_carrier_formula_drift_fails():
-    mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope = docs()
+    mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope, claim_root_pointer, claim_root_registry = docs()
     theorem["semantic_carrier_precondition"]["formula"] = "WEAKER_FORMULA"
-    out = check(mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope)
+    out = check(mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope, claim_root_pointer, claim_root_registry)
     assert "ROOT_THEOREM_CARRIER_FORMULA_DRIFT" in out["errors"]
 
 
 def test_carrier_must_be_claim_indexed():
-    mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope = docs()
+    mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope, claim_root_pointer, claim_root_registry = docs()
     theorem["semantic_carrier_precondition"]["claim_indexed"] = False
-    out = check(mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope)
+    out = check(mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope, claim_root_pointer, claim_root_registry)
     assert "ROOT_THEOREM_CARRIER_NOT_CLAIM_INDEXED" in out["errors"]
 
 
 def test_carrier_blob_drift_fails():
-    mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope = docs()
+    mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope, claim_root_pointer, claim_root_registry = docs()
     binding["semantic_carrier_precondition"]["git_blob_sha"] = "old-carrier"
-    out = check(mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope)
+    out = check(mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope, claim_root_pointer, claim_root_registry)
     assert "BINDING_CARRIER_BLOB_STALE" in out["errors"]
 
 
 def test_carrier_runtime_blob_drift_fails():
-    mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope = docs()
+    mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope, claim_root_pointer, claim_root_registry = docs()
     binding["semantic_carrier_precondition"]["runtime"]["git_blob_sha"] = "old-runtime"
-    out = check(mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope)
+    out = check(mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope, claim_root_pointer, claim_root_registry)
     assert "BINDING_CARRIER_RUNTIME_BLOB_STALE" in out["errors"]
 
 
 def test_carrier_tests_blob_drift_fails():
-    mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope = docs()
+    mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope, claim_root_pointer, claim_root_registry = docs()
     binding["semantic_carrier_precondition"]["tests"]["git_blob_sha"] = "old-tests"
-    out = check(mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope)
+    out = check(mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope, claim_root_pointer, claim_root_registry)
     assert "BINDING_CARRIER_TESTS_BLOB_STALE" in out["errors"]
 
 
 def test_carrier_cannot_request_new_root():
-    mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope = docs()
+    mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope, claim_root_pointer, claim_root_registry = docs()
     carrier["root_effect"]["new_semantic_root_required"] = True
-    out = check(mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope)
+    out = check(mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope, claim_root_pointer, claim_root_registry)
     assert "CARRIER_NEW_ROOT_VIOLATION" in out["errors"]
 
 
 def test_claim_scope_root_blob_drift_fails():
-    mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope = docs()
+    mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope, claim_root_pointer, claim_root_registry = docs()
     claim_scope["root_theorem"]["git_blob_sha"] = "stale-root"
-    out = check(mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope)
+    out = check(mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope, claim_root_pointer, claim_root_registry)
     assert "CLAIM_SCOPE_ROOT_BLOB_STALE" in out["errors"]
 
 
 def test_claim_scope_carrier_blob_drift_fails():
-    mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope = docs()
+    mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope, claim_root_pointer, claim_root_registry = docs()
     claim_scope["carrier_factorization"]["carrier_governance_git_blob_sha"] = "stale-carrier"
-    out = check(mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope)
+    out = check(mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope, claim_root_pointer, claim_root_registry)
     assert "CLAIM_SCOPE_CARRIER_BLOB_STALE" in out["errors"]
 
 
 def test_live_authority_claim_scope_binding_drift_fails():
-    mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope = docs()
+    mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope, claim_root_pointer, claim_root_registry = docs()
     authority["authoritative_sources"]["coverage_completeness_claim_scope"]["git_blob_sha"] = "stale"
-    out = check(mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope)
+    out = check(mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope, claim_root_pointer, claim_root_registry)
     assert "LIVE_AUTHORITY_CLAIM_SCOPE_BLOB_STALE" in out["errors"]
+
+
+
+def test_claim_root_pointer_blob_drift_fails():
+    mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope, claim_root_pointer, claim_root_registry = docs()
+    binding["claim_root_certificate_authority"]["git_blob_sha"] = "stale"
+    out = check(mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope, claim_root_pointer, claim_root_registry)
+    assert "BINDING_CLAIM_ROOT_POINTER_BLOB_STALE" in out["errors"]
+
+
+def test_claim_root_registry_claim_scope_drift_fails():
+    mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope, claim_root_pointer, claim_root_registry = docs()
+    claim_root_registry["claim_scope_binding"]["git_blob_sha"] = "stale"
+    out = check(mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope, claim_root_pointer, claim_root_registry)
+    assert "CLAIM_ROOT_REGISTRY_CLAIM_SCOPE_BLOB_STALE" in out["errors"]
+
+
+def test_claim_root_guard_blob_drift_fails():
+    mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope, claim_root_pointer, claim_root_registry = docs()
+    claim_root_pointer["guard"]["git_blob_sha"] = "stale"
+    out = check(mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope, claim_root_pointer, claim_root_registry)
+    assert "CLAIM_ROOT_POINTER_GUARD_BLOB_STALE" in out["errors"]
+
+
+def test_missing_live_claim_root_authority_fails():
+    mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope, claim_root_pointer, claim_root_registry = docs()
+    authority["authoritative_sources"].pop("coverage_claim_root_certificate_registry")
+    out = check(mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope, claim_root_pointer, claim_root_registry)
+    assert "LIVE_AUTHORITY_CLAIM_ROOT_POINTER_MISSING" in out["errors"]
 
 
 def test_git_blob_sha():
