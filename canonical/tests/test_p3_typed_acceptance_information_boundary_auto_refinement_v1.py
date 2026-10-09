@@ -50,6 +50,7 @@ def binding(root: Path, m, *, corrupt_verify=False):
     receipt = {
         "schema": RECEIPT_SCHEMA,
         "boundary_id": "boundary:integration",
+        "producer_id": "brain-producer",
         "subject_model_sha256": model_sha256(m),
         "declared_visible_input_sha256": visible,
         "preterminal_information_sources_complete": True,
@@ -66,6 +67,9 @@ def binding(root: Path, m, *, corrupt_verify=False):
         "subject_git_blob_sha": git_blob_sha(rp),
         "subject_model_sha256": model_sha256(m),
         "boundary_id": "boundary:integration",
+        "producer_id": "brain-producer",
+        "independent_verifier_id": "independent-sprite",
+        "verification_method": "INDEPENDENT_REPLAY",
         "declared_visible_input_sha256": visible,
         "pass": True,
         "independent_verified": True,
