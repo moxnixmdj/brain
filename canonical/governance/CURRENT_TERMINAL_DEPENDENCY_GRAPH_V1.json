@@ -10,7 +10,13 @@
       "binding": {
         "path": "canonical/runtime/router_deployment_canary_v1.py",
         "git_blob_sha": "de71202a17071c8af88ec7ac6e1f241fb42854c2"
-      }
+      },
+      "kind": "IMPLEMENTATION_IDENTITY",
+      "failure_families": [
+        "VERSION_DRIFT",
+        "ROLLBACK_FORK",
+        "IMPLEMENTATION_REFINEMENT_MISMATCH"
+      ]
     },
     {
       "id": "router-canary-executable-refinement",
@@ -19,7 +25,42 @@
         "path": "canonical/governance/ROUTER_DEPLOYMENT_CANARY_EXECUTABLE_REFINEMENT_20261009_V1.json",
         "git_blob_sha": "d430de0c6ed47b1d18737a5261c345b7546896c9"
       },
-      "reason": "STRUCTURAL_BINDING_ONLY__NO_MECHANICALLY_CHECKED_REFINEMENT_PROOF_CLASS"
+      "reason": "STRUCTURAL_BINDING_ONLY__NO_MECHANICALLY_CHECKED_REFINEMENT_PROOF_CLASS",
+      "kind": "EXECUTABLE_REFINEMENT",
+      "failure_families": [
+        "COMPOSITION_MISMATCH",
+        "NOVEL_DIMENSION",
+        "IMPLEMENTATION_REFINEMENT_MISMATCH"
+      ]
+    },
+    {
+      "id": "semantic-edge-implementation",
+      "kind": "IMPLEMENTATION_IDENTITY",
+      "status": "PROVED",
+      "binding": {
+        "path": "canonical/runtime/brain_owned_semantic_relation_edge_authority_v1.py",
+        "git_blob_sha": "01305c41e79189e3ea13f1a6343427ee31eda566"
+      },
+      "failure_families": [
+        "VERSION_DRIFT",
+        "IMPLEMENTATION_REFINEMENT_MISMATCH"
+      ]
+    },
+    {
+      "id": "semantic-edge-executable-refinement",
+      "kind": "EXECUTABLE_REFINEMENT",
+      "status": "UNRESOLVED",
+      "binding": {
+        "path": "canonical/governance/BRAIN_OWNED_SEMANTIC_EDGE_EXECUTABLE_REFINEMENT_20261009_V1.json",
+        "git_blob_sha": "c5f9b7af3b4c804ca0913789ab3acdb0b0f3eb4a"
+      },
+      "failure_families": [
+        "COMPOSITION_MISMATCH",
+        "HIDDEN_STATE",
+        "NOVEL_DIMENSION",
+        "IMPLEMENTATION_REFINEMENT_MISMATCH"
+      ],
+      "reason": "DECLARED_TRANSITION_PARTITION_AND_TEST_BINDING_EXIST__NO_MECHANICALLY_CHECKED_REFINEMENT_PROOF_CLASS"
     }
   ],
   "routes": [
@@ -33,6 +74,18 @@
         "router-canary-executable-refinement"
       ],
       "executable_refinement_leaf_id": "router-canary-executable-refinement",
+      "deployment_identity_leaf_id": null
+    },
+    {
+      "id": "brain-owned-semantic-relation-edge-authority-v1",
+      "lifecycle": "IMPLEMENTED",
+      "creditable": false,
+      "terminal_load_bearing": false,
+      "dependency_leaf_ids": [
+        "semantic-edge-implementation",
+        "semantic-edge-executable-refinement"
+      ],
+      "executable_refinement_leaf_id": "semantic-edge-executable-refinement",
       "deployment_identity_leaf_id": null
     }
   ],
