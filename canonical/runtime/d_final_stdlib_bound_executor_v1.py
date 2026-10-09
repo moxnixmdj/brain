@@ -30,6 +30,7 @@ from typing import Any, Mapping
 
 from canonical.runtime.bound_capability_execution_verifier_v1 import verify as verify_execution
 from canonical.runtime.capability_planner import plan_actions
+from canonical.runtime import d_finality_execution_epoch_v1 as d_finality
 
 SCHEMA = "PROJECT_BRAIN_D_FINAL_STDLIB_BOUND_EXECUTOR_V1"
 ROOT = Path(__file__).resolve().parents[2]
@@ -219,12 +220,28 @@ def _load_adapter(entry: Mapping[str, Any]):
     path = ROOT / "canonical/runtime/bound_capabilities" / (module_name + ".py")
     if not path.is_file():
         raise DFinalStdlibBoundError("BOUND_CAPABILITY_ADAPTER_MISSING")
-    spec = importlib.util.spec_from_file_location("project_brain_d_final_bound_" + module_name, path)
-    if spec is None or spec.loader is None:
-        raise DFinalStdlibBoundError("BOUND_CAPABILITY_ADAPTER_LOAD_FAILED")
-    module = importlib.util.module_from_spec(spec)
-    sys.modules[spec.name] = module
-    spec.loader.exec_module(module)
+    runtime_name = "project_brain_d_final_bound_" + module_name
+    if d_finality.has_active_epoch():
+        d_finality.require_material_file_if_active(path, repo_root=ROOT)
+        raw = path.read_bytes()
+        rel = path.resolve().relative_to(ROOT.resolve()).as_posix()
+        expected = dict(d_finality.current_epoch().material_bindings).get(rel)
+        if expected is None or d_finality.git_blob_sha_bytes(raw) != expected:
+            raise DFinalStdlibBoundError(
+                "BOUND_CAPABILITY_ADAPTER_CHANGED_AFTER_EPOCH_CHECK:" + rel
+            )
+        module = type(sys)(runtime_name)
+        module.__file__ = str(path)
+        module.__package__ = ""
+        sys.modules[runtime_name] = module
+        exec(compile(raw, str(path), "exec"), module.__dict__)
+    else:
+        spec = importlib.util.spec_from_file_location(runtime_name, path)
+        if spec is None or spec.loader is None:
+            raise DFinalStdlibBoundError("BOUND_CAPABILITY_ADAPTER_LOAD_FAILED")
+        module = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = module
+        spec.loader.exec_module(module)
     fn = getattr(module, str(entry.get("entrypoint") or "run"), None)
     if not callable(fn):
         raise DFinalStdlibBoundError("BOUND_CAPABILITY_ENTRYPOINT_MISSING")
@@ -276,6 +293,10 @@ def execute(
             result_fields=result_fields,
         )
         inspected = inspect(prepared["capability_id"])
+        if inspected["registry_file_sha256"] != prepared["registry_file_sha256"]:
+            raise DFinalStdlibBoundError("REGISTRY_FILE_CHANGED_AFTER_PREPARATION")
+        if inspected["registry_entry_sha256"] != prepared["registry_entry_sha256"]:
+            raise DFinalStdlibBoundError("REGISTRY_ENTRY_CHANGED_AFTER_PREPARATION")
         entry = inspected["entry"]
         if (
             expected_registry_file_sha256 is not None
