@@ -22,7 +22,7 @@ def dyn_row(route_id="DYNAMIC_X"):
 
 
 class R2DirectLiveAdmissionV1Tests(unittest.TestCase):
-    def test_empty_dynamic_frontier_is_exact_v20_preflight_delegation(self):
+    def test_empty_dynamic_frontier_is_exact_v21_preflight_delegation(self):
         expected = {"matched": True, "route_id": "LEGACY", "status": "LEGACY"}
         with patch.object(live.admission, "load_current_admissions", return_value={"admissions": []}), \
              patch.object(live.legacy, "preflight", return_value=expected) as legacy:
@@ -30,7 +30,7 @@ class R2DirectLiveAdmissionV1Tests(unittest.TestCase):
         self.assertEqual(out, expected)
         legacy.assert_called_once()
 
-    def test_empty_dynamic_frontier_is_exact_v20_run_delegation(self):
+    def test_empty_dynamic_frontier_is_exact_v21_run_delegation(self):
         expected = {"pass": True, "route_id": "LEGACY", "status": "PASS_LEGACY"}
         with patch.object(live.admission, "load_current_admissions", return_value={"admissions": []}), \
              patch.object(live.legacy, "preflight", return_value={"matched": True, "route_id": "LEGACY"}), \
@@ -55,7 +55,7 @@ class R2DirectLiveAdmissionV1Tests(unittest.TestCase):
              patch.object(live.legacy, "preflight", return_value={"matched": True, "route_id": "LEGACY_Y"}):
             out = live.preflight({"task_id": "t", "goal": "g"})
         self.assertEqual(out["status"], "FAIL_CLOSED__DIRECT_ROUTE_COLLISION")
-        self.assertEqual(out["reason"], "DYNAMIC_ROUTE_OVERLAPS_LEGACY_V20")
+        self.assertEqual(out["reason"], "DYNAMIC_ROUTE_OVERLAPS_LEGACY_V21")
         self.assertEqual(out["matching_route_ids"], ["DYNAMIC_X", "LEGACY_Y"])
 
     def test_dynamic_overlap_with_legacy_semantic_open_fails_closed(self):
@@ -101,7 +101,7 @@ class R2DirectLiveAdmissionV1Tests(unittest.TestCase):
         )
         legacy.assert_not_called()
 
-    def test_dynamic_selected_run_executes_dynamic_not_v20(self):
+    def test_dynamic_selected_run_executes_dynamic_not_v21(self):
         row = dyn_row()
         runner = Mock(return_value={"pass": True, "route_id": "DYNAMIC_X", "status": "PASS_DYNAMIC"})
         with patch.object(live, "preflight", return_value={"matched": True, "route_id": "DYNAMIC_X"}), \
@@ -117,7 +117,7 @@ class R2DirectLiveAdmissionV1Tests(unittest.TestCase):
         with patch.object(live.admission, "load_current_admissions", return_value={"admissions": []}):
             out = live.catalog()
         self.assertTrue(out["pass"])
-        self.assertEqual(out["legacy_runtime"], "canonical.runtime.r2_direct_end_to_end_adequacy_v20")
+        self.assertEqual(out["legacy_runtime"], "canonical.runtime.r2_direct_end_to_end_adequacy_v21")
         self.assertFalse(out["future_verified_route_requires_new_vN_source"])
         self.assertFalse(out["legacy_precedence_reencoded"])
 
