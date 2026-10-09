@@ -673,6 +673,84 @@ def _validate_provider_receipt(
     return receipt
 
 
+def _infrastructure_failure_result(
+    *,
+    stage: str,
+    repair_round: int,
+    exc: BaseException,
+    transcript: Sequence[Mapping[str, Any]],
+    gap_contract: Mapping[str, Any] | None = None,
+) -> dict[str, Any]:
+    failure = {
+        "stage": stage,
+        "exception_type": type(exc).__name__,
+        "reason": str(exc),
+        "classification": "INTERNAL_INFRASTRUCTURE_OR_PROVIDER_BUG",
+        "externality_proved": False,
+    }
+    out = {
+        "schema": SCHEMA,
+        "status": "OPEN__INTERNAL_UNSOLVED__INFRASTRUCTURE_OR_PROVIDER_FAILURE",
+        "pass": False,
+        "fixed_point": False,
+        "repair_round": repair_round,
+        "internal_unsolved": True,
+        "failure": failure,
+        "transcript": [deepcopy(dict(x)) for x in transcript],
+        "terminal_authority": False,
+    }
+    if gap_contract is not None:
+        out["gap_contract"] = deepcopy(dict(gap_contract))
+    return out
+
+
+def _attempt_infrastructure_repair(
+    provider: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None,
+    *,
+    stage: str,
+    repair_round: int,
+    exc: BaseException,
+    transcript: list[dict[str, Any]],
+    gap_contract: Mapping[str, Any] | None = None,
+) -> bool:
+    if provider is None:
+        return False
+    request = {
+        "schema": "PROJECT_BRAIN_INFRASTRUCTURE_REPAIR_REQUEST_V1",
+        "stage": stage,
+        "repair_round": repair_round,
+        "exception_type": type(exc).__name__,
+        "reason": str(exc),
+        "classification": "INTERNAL_INFRASTRUCTURE_OR_PROVIDER_BUG",
+        "gap_contract": deepcopy(dict(gap_contract)) if gap_contract is not None else None,
+        "verification_authority_mutation_allowed": False,
+        "terminal_credit": False,
+    }
+    try:
+        raw = provider(deepcopy(request))
+    except Exception:
+        return False
+    if not isinstance(raw, Mapping):
+        return False
+    receipt = deepcopy(dict(raw))
+    if receipt.get("pass") is not True:
+        return False
+    if receipt.get("infrastructure_repaired") is not True:
+        return False
+    if receipt.get("verification_authority_mutated") is not False:
+        return False
+    if not _valid_sha256(receipt.get("receipt_sha256")):
+        return False
+    transcript.append({
+        "repair_round": repair_round,
+        "stage": stage,
+        "status": "INFRASTRUCTURE_REPAIR_RECEIPT_ACCEPTED__RETRY_CLOSURE_LOOP",
+        "receipt_sha256": receipt["receipt_sha256"],
+        "terminal_credit": False,
+    })
+    return True
+
+
 def run(
     *,
     repo_root,
@@ -684,6 +762,7 @@ def run(
     capability_synthesis_provider: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
     evidence_acquisition_provider: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
     reality_acquisition_provider: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
+    infrastructure_repair_provider: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
     max_repair_rounds: int = 8,
     v1_max_rounds: int = 64,
     v1_max_actions_per_round: int = 32,
@@ -716,7 +795,23 @@ def run(
         }
         if state_path is not None:
             kwargs["state_path"] = state_path
-        closure = v1.run(**kwargs)
+        try:
+            closure = v1.run(**kwargs)
+        except Exception as exc:
+            if _attempt_infrastructure_repair(
+                infrastructure_repair_provider,
+                stage="V1_CLOSURE_ENGINE",
+                repair_round=repair_round,
+                exc=exc,
+                transcript=transcript,
+            ):
+                continue
+            return _infrastructure_failure_result(
+                stage="V1_CLOSURE_ENGINE",
+                repair_round=repair_round,
+                exc=exc,
+                transcript=transcript,
+            )
 
         current_initial = _s(closure.get("initial_frontier_digest"))
         if (
@@ -777,13 +872,31 @@ def run(
                     "transcript": transcript,
                     "terminal_authority": False,
                 }
-            receipt = _validate_provider_receipt(
-                capability_synthesis_provider({
-                    **deepcopy(contract),
-                    "decision_sufficient_contract": deepcopy(decision_contract),
-                }),
-                provider_kind="CAPABILITY_SYNTHESIS",
-            )
+            try:
+                receipt = _validate_provider_receipt(
+                    capability_synthesis_provider({
+                        **deepcopy(contract),
+                        "decision_sufficient_contract": deepcopy(decision_contract),
+                    }),
+                    provider_kind="CAPABILITY_SYNTHESIS",
+                )
+            except Exception as exc:
+                if _attempt_infrastructure_repair(
+                    infrastructure_repair_provider,
+                    stage="CAPABILITY_SYNTHESIS_PROVIDER",
+                    repair_round=repair_round,
+                    exc=exc,
+                    transcript=transcript,
+                    gap_contract=contract,
+                ):
+                    continue
+                return _infrastructure_failure_result(
+                    stage="CAPABILITY_SYNTHESIS_PROVIDER",
+                    repair_round=repair_round,
+                    exc=exc,
+                    transcript=transcript,
+                    gap_contract=contract,
+                )
         elif gap_class == "PENDING_ACQUISITION_OR_EXPERIMENT":
             if evidence_acquisition_provider is None:
                 return {
@@ -794,14 +907,32 @@ def run(
                     "transcript": transcript,
                     "terminal_authority": False,
                 }
-            receipt = _validate_provider_receipt(
-                evidence_acquisition_provider({
-                    **deepcopy(contract),
-                    "decision_sufficient_contract": deepcopy(decision_contract),
-                    "minimum_information_contract": deepcopy(minimum_information_contract),
-                }),
-                provider_kind="EVIDENCE_ACQUISITION",
-            )
+            try:
+                receipt = _validate_provider_receipt(
+                    evidence_acquisition_provider({
+                        **deepcopy(contract),
+                        "decision_sufficient_contract": deepcopy(decision_contract),
+                        "minimum_information_contract": deepcopy(minimum_information_contract),
+                    }),
+                    provider_kind="EVIDENCE_ACQUISITION",
+                )
+            except Exception as exc:
+                if _attempt_infrastructure_repair(
+                    infrastructure_repair_provider,
+                    stage="EVIDENCE_ACQUISITION_PROVIDER",
+                    repair_round=repair_round,
+                    exc=exc,
+                    transcript=transcript,
+                    gap_contract=contract,
+                ):
+                    continue
+                return _infrastructure_failure_result(
+                    stage="EVIDENCE_ACQUISITION_PROVIDER",
+                    repair_round=repair_round,
+                    exc=exc,
+                    transcript=transcript,
+                    gap_contract=contract,
+                )
         elif gap_class == "PROVEN_INFORMATION_THEORETICALLY_EXTERNAL":
             return {
                 "schema": SCHEMA,
