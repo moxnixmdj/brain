@@ -72,12 +72,11 @@ class R3RepairReductionSchedulerV1Tests(unittest.TestCase):
         self.assertEqual(blocker["repair_class_reduction"], reduction)
         provider.assert_not_called()
 
-    def test_noncanonical_frontier_identity_cannot_prune_adapter_provider(self):
+    def test_noncanonical_frontier_identity_cannot_produce_pruning_verdict(self):
         path = self._state()
         state = learning.load_state(path)
         state["improvement_queue"]["frontier"]["payload"]["adapter_frontier_sha256"] = ""
         learning._write_state(state, path)
-        provider = mock.Mock(return_value={"pass": True})
         with mock.patch.object(
             driver,
             "_owned_success_adapter_frontier_sha256",
@@ -94,10 +93,13 @@ class R3RepairReductionSchedulerV1Tests(unittest.TestCase):
             )
         self.assertFalse(reduction["pass"], reduction)
         self.assertEqual(
-            reduction["reason"],
-            "SUCCESS_ADAPTER_FRONTIER_CHANGED",
+            reduction["status"],
+            "FRONTIER_REPAIR_REDUCTION_UNAVAILABLE",
         )
-        provider.assert_not_called()
+        self.assertNotIn(
+            "admissible_repair_classes",
+            reduction,
+        )
 
     def test_adapter_admissible_reduction_is_forwarded_to_provider_request(self):
         path = self._state()
