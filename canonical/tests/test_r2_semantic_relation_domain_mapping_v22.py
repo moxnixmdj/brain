@@ -140,7 +140,7 @@ def case(*,model_only=False):
 
 def goal():
     return (
-        "Using the semantic-edge cross-document effect lattice case at "
+        "Using the domain-mapped semantic-edge cross-document effect lattice case at "
         "canonical/tmp/case.json, compute and independently verify the effective "
         "value and save it to canonical/tmp/out.json."
     )
