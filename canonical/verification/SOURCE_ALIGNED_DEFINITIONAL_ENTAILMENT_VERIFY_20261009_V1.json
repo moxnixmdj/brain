@@ -1,0 +1,80 @@
+{
+  "schema": "PROJECT_BRAIN_SOURCE_ALIGNED_DEFINITIONAL_ENTAILMENT_VERIFY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__BOUNDED_NONEXPLICIT_DEFINITIONAL_ENTAILMENT__12_OF_12_CORE__42_OF_42_ADJACENT__PY_COMPILE_PASS__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "source-aligned-definitional-entailment-v1-20261009",
+    "exact_blobs": {
+      "canonical/runtime/source_aligned_definitional_entailment_v1.py": "2ea871b9422ca77f7f7889f73422ddadf6026ff9",
+      "canonical/tests/test_source_aligned_definitional_entailment_v1.py": "3aa392629a5640ff118c1b898c359c7a3405baff"
+    }
+  },
+  "remote_carrier": {
+    "name": "brain-live-integrated-v1-run-20261008",
+    "sprite_id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "workspace": "/home/sprite/domain-map-scratch",
+    "branch_files_materialized_from_github": true
+  },
+  "verification": {
+    "core_definitional_entailment": {
+      "result": "PASS",
+      "checks": 12
+    },
+    "adjacent_semantic_relation_entailment_dag": {
+      "result": "PASS",
+      "checks": 8
+    },
+    "adjacent_semantic_relation_control_entailment_dag": {
+      "result": "PASS",
+      "checks": 5
+    },
+    "adjacent_semantic_relation_control": {
+      "result": "PASS",
+      "checks": 17
+    },
+    "adjacent_proof_carrying_domain_mapping": {
+      "result": "PASS",
+      "checks": 12
+    },
+    "total_focused_checks": {
+      "passed": 54,
+      "failed": 0
+    },
+    "py_compile": {
+      "result": "PASS",
+      "files": [
+        "canonical/runtime/source_aligned_definitional_entailment_v1.py",
+        "canonical/runtime/semantic_relation_entailment_dag_v1.py",
+        "canonical/runtime/semantic_relation_control_v1.py"
+      ]
+    }
+  },
+  "tdd_falsification": {
+    "observed_red_before_implementation": "ModuleNotFoundError: source_aligned_definitional_entailment_v1",
+    "observed_red_before_dag_adapter": "ImportError: RELATION_EDGE_AUTHORITY_SCHEMA missing",
+    "repaired_and_replayed": true
+  },
+  "proved": [
+    "INDEPENDENTLY_AUTHENTICATED_SOURCE_ATOMS_THAT_COVER_AN_INDEPENDENTLY_AUTHENTICATED_EXACT_CONJUNCTIVE_CONCEPT_DEFINITION_PROVE_SOURCE_TO_CONCEPT_ENTAILMENT_WITHOUT_EXPLICIT_CONCEPT_NAMING",
+    "MISSING_REQUIRED_SOURCE_ATOMS_REMAIN_UNKNOWN_UNLESS_EXACT_SOURCE_CONJUNCTIVE_COMPLETENESS_IS_INDEPENDENTLY_AUTHENTICATED",
+    "REVERSE_ENTAILMENT_AND_SCOPED_LOGICAL_EQUIVALENCE_REQUIRE_EXACT_SOURCE_CONJUNCTIVE_COMPLETENESS",
+    "AUTHENTICATED_SOURCE_COMPLETENESS_CANNOT_CLAIM_UNPROVED_ATOMS",
+    "THE_PROOF_CAN_EMIT_ENTAILS_OR_NOT_ENTAILS_RECEIPTS_COMPATIBLE_WITH_THE_EXISTING_SCOPED_SEMANTIC_ENTAILMENT_DAG",
+    "THE_EXISTING_SEMANTIC_RELATION_CONTROLLER_ACCEPTS_THE_BOUNDED_DEFINITIONAL_EDGE_FOR_LEFT_ENTAILS_RIGHT",
+    "NO_EXECUTION_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY_IS_ADDED"
+  ],
+  "hard_nonclaims": [
+    "NO_GENERAL_NATURAL_LANGUAGE_PARSER",
+    "NO_AUTOMATIC_SOURCE_SEMANTIC_ATOM_ACQUISITION",
+    "NO_OPEN_WORLD_ONTOLOGY_COMPLETENESS",
+    "NO_GENERAL_WORD_SENSE_CLOSURE",
+    "NO_INFERRED_SYNONYMY_WITHOUT_AUTHENTICATED_PREMISES",
+    "NO_CLAIM_FULL_REPOSITORY_TEST_SUITE_WAS_RUN",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
