@@ -50,7 +50,8 @@
       "conclusion": "ANY_THEOREM_DERIVED_ONLY_FROM_THE_FAIL_CLOSED_TERMINAL_RULES_IS_INSUFFICIENT_TO_PROVE_EVENTUAL_SUCCESS_FOR_EVERY_CELL_MEMBER"
     },
     "machine_checkable_boolean_core": "SOUND_SUBMISSION_RULE_CAN_HOLD_WHILE_EVENTUAL_SUCCESS_IS_FALSE",
-    "consequence": "FORMAL_ALL_MEMBERS_MODE_REQUIRES_AN_ADDITIONAL_CONSTRUCTIVE_LIVENESS_OR_TOTAL_CORRECTNESS_PREMISE_NOT_PRESENT_IN_THE_CURRENT_V5_COMPLETION_CONTRACT"
+    "consequence": "FORMAL_ALL_MEMBERS_MODE_REQUIRES_AN_ADDITIONAL_CONSTRUCTIVE_LIVENESS_OR_TOTAL_CORRECTNESS_PREMISE_NOT_PRESENT_IN_THE_CURRENT_V5_COMPLETION_CONTRACT",
+    "source_binding_note": "THE_EXACT_V5_OVERLAY_BUILDER_TEXT_BINDS TERMINAL_AND_VERIFICATION_GATES_BUT NO EXHAUSTIVE_CANDIDATE_ENUMERATOR_OR EVENTUAL_SUCCESS_INVARIANT"
   },
   "current_route_implication": {
     "formal_all_members_from_completion_contract_alone": "INVALID",
@@ -83,5 +84,11 @@
   },
   "scheduling_authority": true,
   "promotion_authority": false,
-  "terminal_authority": false
+  "terminal_authority": false,
+  "exact_overlay_builder": {
+    "path": "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/build_overlay.py",
+    "git_blob_sha": "cfbb58a31eebb15c224462f26864519406310fcc",
+    "observed_role": "ASSEMBLES_PINNED_HARNESS_AND_SKILL_PROMPT_PLUS_FAIL_CLOSED_COMPLETION_CONTRACT_V5",
+    "constructive_total_search_added_by_builder": false
+  }
 }
