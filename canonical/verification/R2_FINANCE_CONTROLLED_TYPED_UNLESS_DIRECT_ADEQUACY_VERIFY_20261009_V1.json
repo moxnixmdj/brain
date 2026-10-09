@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_R2_FINANCE_CONTROLLED_TYPED_UNLESS_DIRECT_ADEQUACY_VERIFY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__CONTROLLED_TYPED_FINANCE_UNLESS_DIRECT_ADEQUACY__21_OF_21_REMOTE_CHECKS__ZERO_CREDIT",
+  "branch": "r2-finance-controlled-typed-unless-v30-20261009",
+  "tested_head": "4b40b94ce1cce896bd0ee5b336a2c5dbd9f3799e",
+  "load_bearing_blobs": {
+    "canonical/runtime/certified_typed_unless_condition_v1.py": "bf861d5f12e71460c002f8ca729fe8caada26b79",
+    "canonical/runtime/finance_controlled_typed_unless_branch_v1.py": "d8e55fbae6303ef2ec8a06c7ff66d9474e567ad7",
+    "canonical/runtime/finance_controlled_typed_unless_verify_v1.py": "bdd726c08f31821706849ee0aa83a6ff7dfdb1e2",
+    "canonical/runtime/r2_finance_controlled_typed_unless_direct_adequacy_v1.py": "77ce6472a8a923a805d21e09b7bc40fc0e8ba6e3",
+    "canonical/runtime/r2_direct_end_to_end_adequacy_v1.py": "ee0f2e786bb58d6547dff98840c9ff8afa5f0b50",
+    "canonical/tests/test_certified_typed_unless_condition_v1.py": "1f8c9f0847ec2e0d35f5797d05645c94c83ddeb5",
+    "canonical/tests/test_r2_finance_controlled_typed_unless_direct_adequacy_v1.py": "f5d97269943268a8d8210d56db1db812be1a43e1"
+  },
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite": "brain-live-integrated-v1-run-20261008",
+    "sprite_id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34"
+  },
+  "verification": {
+    "compile_rc": 0,
+    "isolated_checks_passed": 15,
+    "router_checks_passed": 6,
+    "boolean_true_and_false": "PASS",
+    "decimal_boundary_and_below": "PASS",
+    "digest_mismatch_negative": "PASS",
+    "missing_field_negative": "PASS",
+    "uncontrolled_language_negative": "PASS",
+    "tamper_negative": "PASS",
+    "rollback_negative": "PASS",
+    "route_count_20": "PASS",
+    "v29_normalized_route_regression": "PASS"
+  },
+  "proves": [
+    "CONTROLLED_SINGLE_UNLESS_LITERAL_FIELD_CONDITIONS_CAN_BE_BOUND_TO_TASK_BOUND_CONTENT_ADDRESSED_TYPED_CONTEXT",
+    "BOOLEAN_AND_EXACT_DECIMAL_CONDITIONS_ARE_RECOMPUTED_WITHOUT_MODEL_DEPENDENCY",
+    "INDEPENDENT_VERIFIER_REPARSES_OPERATOR_ID_SCOPE_ID_TYPED_CONTEXT_CONDITION_ATOM_AND_SELECTED_BRANCH_WITHOUT_IMPORTING_PRODUCER_OR_CERTIFIED_CONDITION_ENGINE",
+    "R2_FRONT_DOOR_EXECUTES_CONTROLLED_TYPED_FINANCE_ROUTE_AND_PRESERVES_V29_NORMALIZED_ROUTE"
+  ],
+  "boundary": [
+    "TASK_BOUND_TYPED_CONTEXT_IS_NOT_CLAIMED_TO_BE_EXTERNAL_WORLD_TRUTH",
+    "ONLY_LITERAL_FIELD_NAMES_AND_DECLARED_BOOLEAN_OR_DECIMAL_GRAMMAR",
+    "NO_SYNONYMY_REFERENCE_RESOLUTION_ONTOLOGY_OR_GENERAL_FINANCE_SEMANTICS",
+    "NO_FINANCE_FAMILY_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}

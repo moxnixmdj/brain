@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_R2_DECISION_INTELLIGENCE_POINTER_V1",
   "date": "2026-10-09",
-  "status": "ACTIVE_CURRENT_R2_AUTHORITY__V29__NINETEEN_DIRECT_ROUTES__SIXTEEN_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__ONE_PRIMARY_RAW_FINANCE_TAIL__NORMALIZED_FINANCE_UNLESS_POSITIVE_SUBREGION_VERIFIED",
+  "status": "ACTIVE_CURRENT_R2_AUTHORITY__V30__TWENTY_DIRECT_ROUTES__SEVENTEEN_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_AFTER_TWO_VERIFIED_SUBREGIONS",
   "mission_objective": {
     "path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json"
   },
@@ -18,18 +18,18 @@
     "fixed_point_regression_test_git_blob_sha": "46333fedc0a91113d83e8c32184fb37cafb9bccd"
   },
   "scheduler_cut": {
-    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V29.json",
-    "git_blob_sha": "b7d3eb7c3ebb551069fa4a48a20d7dab3a16fd32"
+    "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V30.json",
+    "git_blob_sha": "1dbc29af4da36a1d1dba83938c9950458f56d01e"
   },
   "direct_adequacy": {
-    "activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V15.json",
-    "activation_git_blob_sha": "66c27edfd703f24194c840bf1a9da3eaddcd8159",
+    "activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V16.json",
+    "activation_git_blob_sha": "84ed669325e82cf7cb007d71f5ce66799dd55058",
     "exact_cell_count": 3,
-    "bounded_family_count": 16,
-    "current_route_count": 19,
-    "current_activation_status": "THREE_EXACT_CELLS_PLUS_SIXTEEN_BOUNDED_FAMILIES",
+    "bounded_family_count": 17,
+    "current_route_count": 20,
+    "current_activation_status": "THREE_EXACT_CELLS_PLUS_SEVENTEEN_BOUNDED_FAMILIES",
     "direct_runtime_path": "canonical/runtime/r2_direct_end_to_end_adequacy_v1.py",
-    "direct_runtime_git_blob_sha": "ab12a8d28991d30e7cd3c8aa9b2255c20bc6f1bf",
+    "direct_runtime_git_blob_sha": "ee0f2e786bb58d6547dff98840c9ff8afa5f0b50",
     "coverage_verifications": [
       {
         "path": "canonical/verification/R2_DOCX_JSON_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
@@ -100,11 +100,16 @@
         "path": "canonical/verification/R2_FINANCE_NORMALIZED_UNLESS_DIRECT_ADEQUACY_VERIFY_20261009_V1.json",
         "git_blob_sha": "218ad506472fa413314e6a3ff2015445d5b962c9",
         "status": "PASS__NORMALIZED_FINANCE_UNLESS_DIRECT_ADEQUACY__15_OF_15_STDLIB_AND_ROUTER_CHECKS__ZERO_CREDIT"
+      },
+      {
+        "path": "canonical/verification/R2_FINANCE_CONTROLLED_TYPED_UNLESS_DIRECT_ADEQUACY_VERIFY_20261009_V1.json",
+        "git_blob_sha": "aa9643827c602dd774695c7f5659d0059accef05",
+        "status": "PASS__CONTROLLED_TYPED_FINANCE_UNLESS_DIRECT_ADEQUACY__21_OF_21_REMOTE_CHECKS__ZERO_CREDIT"
       }
     ],
-    "latest_verification_path": "canonical/verification/R2_FINANCE_NORMALIZED_UNLESS_DIRECT_ADEQUACY_VERIFY_20261009_V1.json",
-    "latest_verification_git_blob_sha": "218ad506472fa413314e6a3ff2015445d5b962c9",
-    "latest_verification_status": "PASS__NORMALIZED_FINANCE_UNLESS_DIRECT_ADEQUACY__15_OF_15_STDLIB_AND_ROUTER_CHECKS__ZERO_CREDIT"
+    "latest_verification_path": "canonical/verification/R2_FINANCE_CONTROLLED_TYPED_UNLESS_DIRECT_ADEQUACY_VERIFY_20261009_V1.json",
+    "latest_verification_git_blob_sha": "aa9643827c602dd774695c7f5659d0059accef05",
+    "latest_verification_status": "PASS__CONTROLLED_TYPED_FINANCE_UNLESS_DIRECT_ADEQUACY__21_OF_21_REMOTE_CHECKS__ZERO_CREDIT"
   },
   "fixed_point_information_policy": {
     "minimum_policy_changing_information": true,
@@ -131,7 +136,7 @@
     "path": "canonical/governance/R2_BRAIN_OWNED_ADVISORY_JUDGMENT_POLICY_20261008_V1.json"
   },
   "primary_primitive": "ESCAPE_POLICY_ADEQUACY_COVERAGE",
-  "primary_primitive_state": "OPEN__ADEQUACY_COVERAGE_AND_OBSERVABILITY_ONLY__ONE_PRIMARY_RAW_OR_UNSTRUCTURED_FINANCE_TAIL__NORMALIZED_FINANCE_UNLESS_TYPED_SUBREGION_CLOSED__GDPVAL_OWNER_RELATION_DORMANT__VERIFIED_CAPABILITY_ESCAPE_LIVE",
+  "primary_primitive_state": "OPEN__ADEQUACY_COVERAGE_AND_OBSERVABILITY_ONLY__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL__NORMALIZED_AND_CONTROLLED_TYPED_UNLESS_SUBREGIONS_CLOSED__GDPVAL_DORMANT",
   "general_mechanism_missing": false,
   "learned_judgment_role": "ADVISORY_GENERATION_RANKING_AND_SEARCH_ACCELERATION_ONLY",
   "authority": "AUTHENTICATED_POLICY_COVER_MINIMUM_POLICY_CHANGING_INFORMATION_AND_INDEPENDENT_GOAL_ACCEPTANCE",
@@ -238,7 +243,7 @@
     "positive_adequacy_coverage_credit_delta": 0
   },
   "control_mechanism_status": "CLOSED__TOTAL_FAIL_CLOSED_ADEQUACY_OR_ABSTAIN_CONTROL",
-  "remaining_problem_class": "POSITIVE_ADEQUACY_COVERAGE_AND_POLICY_CHANGING_OBSERVABILITY__NORMALIZED_FINANCE_TYPED_SUBREGION_CLOSED__RAW_FINANCE_SEMANTIC_TAIL_REMAINS_INTERNAL_UNSOLVED__OPEN_WORLD_NOT_CLOSED",
+  "remaining_problem_class": "POSITIVE_ADEQUACY_COVERAGE_AND_POLICY_CHANGING_OBSERVABILITY__FINANCE_RESIDUAL_NOW_LIMITED_TO_REFERENCE_ONTOLOGY_CROSS_DOCUMENT_OR_EXTERNAL_FACT_BINDING_BEYOND_TASK_BOUND_TYPED_CONTEXT__OPEN_WORLD_NOT_CLOSED",
   "control_law_totalizer": {
     "path": "canonical/runtime/general_adequate_decision_totalized_v1.py",
     "git_blob_sha": "675d1d4a3df3fcff4c8eb14947610389832103ea",
@@ -578,6 +583,18 @@
     "authority_added": "BOUNDED_DIRECT_ADEQUACY_ONLY",
     "policy_changing_fact": "EXPLICIT_TYPED_EXCEPTION_APPLIES",
     "raw_finance_semantic_tail_closed": false,
+    "global_open_world_closure_claimed": false
+  },
+  "finance_controlled_typed_unless_direct_adequacy": {
+    "route_id": "DIRECT_ADEQUACY::FINANCE_CONTROLLED_TYPED_UNLESS_FAMILY_V1",
+    "activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V16.json",
+    "activation_git_blob_sha": "84ed669325e82cf7cb007d71f5ce66799dd55058",
+    "verification_path": "canonical/verification/R2_FINANCE_CONTROLLED_TYPED_UNLESS_DIRECT_ADEQUACY_VERIFY_20261009_V1.json",
+    "verification_git_blob_sha": "aa9643827c602dd774695c7f5659d0059accef05",
+    "authority_added": "BOUNDED_DIRECT_ADEQUACY_ONLY",
+    "task_bound_typed_context": true,
+    "external_world_truth_claimed": false,
+    "remaining_finance_semantic_residual_closed": false,
     "global_open_world_closure_claimed": false
   }
 }
