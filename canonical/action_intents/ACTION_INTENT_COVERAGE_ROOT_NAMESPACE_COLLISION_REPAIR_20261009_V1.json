@@ -4,7 +4,7 @@
   "date": "2026-10-09",
   "status": "COMPLETED_PROOF_ONLY__R4_NAMESPACE_COLLISION_GUARDED__ZERO_TERMINAL_CREDIT",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
-  "canonical_base_commit": "8abfe6cd0a9b63a1ede047c56ad808cebefdf61d",
+  "canonical_base_commit": "cd4894c5c311b1974a09b7d370399789e74e3608",
   "capability_target": "REAL_MISSION_COVERAGE_COMPLETENESS_ROOT_THEOREM",
   "action_kind": "R4_SEMANTIC_BINDING_REPAIR",
   "causal_blocker": "LEGACY_ROOT2_ROOT3_LABELS_HAVE_DIFFERENT_SEMANTICS_FROM_COVERAGE_ROOT_THEOREM_R2_R3_AND_CAN_BE_FALSELY_READ_AS_CURRENT_ROOT_CLOSURE",
@@ -73,5 +73,13 @@
     "focused_tests_passed": 16,
     "focused_tests_failed": 0,
     "branch_hash_chain_pass": true
+  },
+  "rebase_reconciliation": {
+    "parent_main_commit": "cd4894c5c311b1974a09b7d370399789e74e3608",
+    "semantic_authorities_unchanged": true,
+    "mission_blob_sha": "52b98f8019938fa7d8164e6a47e359ffb0faeb6a",
+    "theorem_blob_sha": "9204ccd694141f9bb61abf9f50e5480590ca3757",
+    "pre_repair_live_binding_blob_sha": "65deb3d2e80237f15854dce19d212df9ba262db9",
+    "pre_repair_terminal_authority_blob_sha": "f89820db00f443cfe4ae2fa603bf7ed5bf4289c3"
   }
 }
