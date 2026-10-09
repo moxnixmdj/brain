@@ -13,8 +13,8 @@
   },
   "counts": {
     "live_admitted_identity_count": 89,
-    "verified_d_final_current_count": 0,
-    "pending_d_final_certificate_count": 89,
+    "verified_d_final_current_count": 1,
+    "pending_d_final_certificate_count": 88,
     "by_provider": {
       "FABRIC_ENGINES": 24,
       "VERIFIED_BOUND_CAPABILITIES": 43,
@@ -28,7 +28,7 @@
     "verified_d_final_route_candidate_count": 1,
     "bound_provider_executor_theorem_bound_count": 43,
     "provider_theorem_bound_member_count": 2,
-    "ready_for_d_epoch_and_live_binding_count": 2
+    "ready_for_d_epoch_and_live_binding_count": 1
   },
   "rows": [
     {
@@ -168,7 +168,7 @@
     {
       "capability_id": "bound:decision.synthesis.verify.stdlib",
       "provider": "VERIFIED_BOUND_CAPABILITIES",
-      "status": "READY_FOR_D_EPOCH_AND_LIVE_BINDING",
+      "status": "VERIFIED_D_FINAL_CURRENT",
       "candidate_proof_class": "STDLIB_SIMPLE_LOCAL",
       "adapter_git_blob_sha": "63cf325320c7b91bf48ea2f2769c999c5a090929",
       "member_material_theorem": {
@@ -214,7 +214,18 @@
         "provider_git_blob_sha": "e2d0992f84da629358ae1ee5406c23d5f21c26c2",
         "registry_git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85",
         "zero_ambient_launcher_git_blob_sha": "6e687527e9c4da82fb5d974a729aaa263ee73ea8"
-      }
+      },
+      "certificate_path": "canonical/governance/d_final_certificates/DECISION_SYNTHESIS_VERIFY_STDLIB_V1.json",
+      "d_certificate_sha256": "32593f39385c171c75c86c8d28be73b1648dd24b082d1bbed8dca81c8d0f2752",
+      "member_material_theorem_git_blob_sha": "d770e2aaa988bab70c196e2bbd436891ed17008a",
+      "provider_theorem_git_blob_sha": "137c13a6d35f6f248be7d4fa7cf21bb3390a3722",
+      "policy_sha256": "a39902b2a0c49b2dde625e513e87bb2400e7bd3306017686a9ee8df8ab61a359",
+      "execution_epoch_sha256": "4becc3c04a43c58527931a9b544f3d2c9288ba6a2aba3155cf52f6e3c4a04592",
+      "material_closure_root": "907d4d2dae7e2f9f7aa3663421c2d621860b9c673e290213cf1f5ebd0cb7588d",
+      "fresh_replay_pass": true,
+      "independent_replay_pass": true,
+      "donor_authority_zero": true,
+      "undeclared_dependency_count": 0
     },
     {
       "capability_id": "bound:document.convert.markdown_pdf.pandoc_weasyprint",
