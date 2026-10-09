@@ -1,0 +1,37 @@
+{
+  "schema": "PROJECT_BRAIN_D_FINALITY_GLOBAL_COVERAGE_20261009_V1",
+  "date": "2026-10-09",
+  "status": "FAIL_CLOSED__1_OF_89_D_FINAL__88_MISSING",
+  "exact_blobs": {
+    "coverage_reducer": {
+      "path": "canonical/runtime/d_finality_coverage_gate_v1.py",
+      "git_blob_sha": "ee43cf9e96ab6681bc271b96c016c660ab0d3f32"
+    },
+    "certificate_registry": {
+      "path": "canonical/governance/D_FINALITY_CERTIFICATE_REGISTRY_V1.json",
+      "git_blob_sha": "ea164ed03fd4151ebb6bcae6c16075284eadc475"
+    }
+  },
+  "result": {
+    "live_admitted_capability_count": 89,
+    "d_final_owned_capability_count": 1,
+    "d_final_owned_capability_ids": [
+      "bound:decision.synthesis.verify.stdlib"
+    ],
+    "missing_d_certificate_count": 88,
+    "provider_theorem_count": 1,
+    "stale_nonlive_certificate_count": 0,
+    "pass": false
+  },
+  "ownership_equation": "LIVE_D_FINAL_OWNED = LIVE_ADMITTED INTERSECT CURRENT_D_FINAL_CERTIFIED",
+  "hard_nonclaims": [
+    "NO_CLAIM_88_PENDING_CAPABILITIES_ARE_OWNED",
+    "NO_GLOBAL_D_FINAL_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
