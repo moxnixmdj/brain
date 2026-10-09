@@ -49,6 +49,7 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
         self.assertIn("SEMANTIC_AMBIGUITY", c["engines"])
         self.assertIn("SEMANTIC_RELATION", c["engines"])
         self.assertIn("SEMANTIC_RELATION", c["engines"])
+        self.assertIn("SEMANTIC_RELATION", c["engines"])
         self.assertGreater(c["brain_owned_transitive_file_count"], 1)
         self.assertGreater(c["brain_owned_transitive_source_bytes"], 0)
         self.assertIn(
@@ -249,6 +250,55 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
                 "expression_a": "reserve buffer",
                 "expression_b": "liquidity cushion",
                 "required_relation": "BIDIRECTIONAL_EQUIVALENCE",
+                "evidence": {"embedding_similarity": 0.999},
+            },
+        })
+        self.assertTrue(out["auto_routed"])
+        self.assertEqual(out["mode"], "SEMANTIC_RELATION")
+        self.assertFalse(out["inner_pass"])
+        self.assertEqual(
+            out["result"]["reason"],
+            "UNSAFE_SIMILARITY_EVIDENCE_CANNOT_GRANT_SEMANTIC_RELATION",
+        )
+
+
+    def test_auto_semantic_relation_uses_task_equivalence_without_global_synonymy(self):
+        out = run({
+            "payload": {
+                "expression_a": "reserve buffer",
+                "expression_b": "liquidity cushion",
+                "required_relation": "TASK_EQUIVALENCE",
+                "scope_sha256": "1" * 64,
+                "evidence": {},
+                "task_terminal_rows": [
+                    {
+                        "raw_id": "A",
+                        "signature_complete": True,
+                        "terminal_signature": {"action": "REDUCE"},
+                    },
+                    {
+                        "raw_id": "B",
+                        "signature_complete": True,
+                        "terminal_signature": {"action": "REDUCE"},
+                    },
+                ],
+            },
+        })
+        self.assertTrue(out["auto_routed"])
+        self.assertEqual(out["mode"], "SEMANTIC_RELATION")
+        self.assertTrue(out["inner_pass"], out)
+        self.assertEqual(
+            out["result"]["strongest_proved_relation"],
+            "TASK_EQUIVALENT",
+        )
+
+    def test_auto_semantic_relation_similarity_never_becomes_authority(self):
+        out = run({
+            "payload": {
+                "expression_a": "reserve buffer",
+                "expression_b": "liquidity cushion",
+                "required_relation": "BIDIRECTIONAL_EQUIVALENCE",
+                "scope_sha256": "1" * 64,
                 "evidence": {"embedding_similarity": 0.999},
             },
         })
