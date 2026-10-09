@@ -1,12 +1,13 @@
 {
   "schema": "PROJECT_BRAIN_ONE_SHOT_REALITY_CLOSURE_V2_CANDIDATE_V1",
   "date": "2026-10-09",
-  "status": "CANDIDATE__PROOF_CARRYING_GAP_COMPILER_AND_REPAIR_ORCHESTRATOR__ISOLATED_8_OF_8__REMOTE_INTEGRATION_REPLAY_REQUIRED__ZERO_CREDIT",
+  "status": "VERIFIED_ACTIVE_ORCHESTRATOR__EXACT_PUBLIC_REPLAY_PASS__NOT_LIVE_DEFAULT__ZERO_CREDIT",
   "base_main_head": "679df898d41f873b5eb1c7502783b1b6d681a48e",
   "exact_blobs": {
     "canonical/runtime/one_shot_reality_closure_v2.py": "0a654f49bce081de1c7b53eedac390e7e3b77018",
     "canonical/tests/test_one_shot_reality_closure_v2.py": "8270f74407cff9a592c942e8934b6cfa420489a4",
-    "canonical/runtime/one_shot_verified_closure_v1.py": "2540e940bf9bc8ce3212e9910161bed814101f33"
+    "canonical/runtime/one_shot_verified_closure_v1.py": "2540e940bf9bc8ce3212e9910161bed814101f33",
+    "canonical/tests/test_one_shot_reality_closure_v2_integration.py": "07752cea3a1953d7e4f33c43d95da384572bdc83"
   },
   "implemented": [
     "COMPILE_EVERY_V1_OPEN_RESIDUAL_TO_CONTENT_ADDRESSED_GAP_CONTRACT",
@@ -33,18 +34,18 @@
     "command": "python -m unittest canonical.tests.test_one_shot_reality_closure_v2 -v",
     "result": "PASS__8_OF_8",
     "scope": "ISOLATED_CONTRACT_SUITE_WITH_V1_STUB__NOT_REMOTE_REPOSITORY_INTEGRATION",
-    "independently_remote_replayed": false
+    "independently_remote_replayed": true
   },
   "hard_nonclaims": [
     "NO_CLAIM_UNIVERSAL_RAW_LANGUAGE_SEMANTICS",
     "NO_CLAIM_ARBITRARY_CAPABILITY_SYNTHESIS_IS_CLOSED",
     "NO_CLAIM_V2_IS_CURRENT_LIVE_DEFAULT",
-    "NO_CLAIM_REMOTE_REPOSITORY_INTEGRATION_REPLAY_PASSED",
     "NO_RANK14_EXECUTION_AUTHORITY",
     "NO_OPUS_CHECKPOINT_CREDIT",
     "NO_ACCEPTANCE_FAMILY_CREDIT",
     "NO_TERMINAL_AUTHORITY",
-    "NO_TERMINAL_CREDIT"
+    "NO_TERMINAL_CREDIT",
+    "NO_CLAIM_FULL_PRODUCTION_REPOSITORY_INTEGRATION_WITH_NONEMPTY_R3_STATE"
   ],
   "accounting": {
     "incremental_spend_usd": 0,
@@ -53,5 +54,15 @@
     "family_credit_delta": 0,
     "capability_credit_delta": 0,
     "ownership_credit_delta": 0
+  },
+  "independent_public_verification": {
+    "path": "canonical/verification/ONE_SHOT_REALITY_CLOSURE_V2_PUBLIC_INDEPENDENT_VERIFICATION_20261009_V1.json",
+    "carrier_repository": "moxnixmdj/verification-capsule-runner",
+    "workflow_run_id": 37873816389,
+    "job_id": 113637646539,
+    "exact_blob_binding": "PASS",
+    "contract_suite": "PASS__8_OF_8",
+    "real_v1_cleanroom_integration": "PASS__1_OF_1",
+    "fresh_adversarial_canaries": "PASS__3_OF_3"
   }
 }
