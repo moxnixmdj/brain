@@ -1118,5 +1118,58 @@ class GeneralAdequateDecisionFixedPointV2Tests(unittest.TestCase):
         self.assertFalse(hint["terminal_authority"])
 
 
+    @patch.object(fixed.direct_adequacy, "preflight")
+    @patch.object(fixed, "run_controller")
+    def test_behavioral_relevance_hint_reaches_resolver_without_authority(
+        self, controller, preflight
+    ):
+        obligation = {
+            "kind": "PROVE_EFFECT_VALUE",
+            "document_id": "B",
+            "effect_id": "B.t",
+            "field": "value",
+        }
+        ignored = {
+            "document_id": "B",
+            "effect_id": "B.t",
+            "field": "effect_class",
+            "reason": "EXECUTION_CALCULUS_EFFECTIVE_VALUE_IS_CLASS_INVARIANT_AFTER_VALIDATION",
+        }
+        preflight.return_value = {
+            "matched": False,
+            "pass": False,
+            "status": "NOT_APPLICABLE__BEHAVIORAL_SEMANTICS_OPEN",
+            "direct_route_semantic_open": True,
+            "route_id": "DIRECT_ADEQUACY::CROSS_DOCUMENT_EFFECT_BEHAVIORAL_ABSTRACTION_V1",
+            "effect_status": "OPEN__BEHAVIORAL_COMPLETIONS_HAVE_DISTINCT_OUTCOMES",
+            "behavioral_world_count": 2,
+            "behavioral_outcome_signatures": ["EXACT::10", "TOP_VALUE::B.t"],
+            "minimum_behavioral_discriminator_variables": [],
+            "top_value_surviving_effect_ids": ["B.t"],
+            "ignored_top_fields": [ignored],
+            "next_behavioral_obligations": [obligation],
+            "behavioral_world_universe_complete_relative_to_v5_abstraction": True,
+        }
+        controller.side_effect = [self._open(), self._pass()]
+        provider = Mock(return_value={
+            "request_patch": {"decision_payload": {"context_id": "value-proved"}}
+        })
+
+        out = fixed.run(self._request(), proposal_provider=provider)
+
+        self.assertTrue(out["pass"], out)
+        hint = provider.call_args.args[0]["direct_preflight_hint"]
+        self.assertEqual(hint["next_behavioral_obligations"], [obligation])
+        self.assertEqual(hint["ignored_top_fields"], [ignored])
+        self.assertEqual(hint["behavioral_world_count"], 2)
+        self.assertTrue(
+            hint["behavioral_world_universe_complete_relative_to_v5_abstraction"]
+        )
+        self.assertFalse(hint["semantic_truth_authority"])
+        self.assertFalse(hint["execution_authority"])
+        self.assertFalse(hint["acceptance_authority"])
+        self.assertFalse(hint["terminal_authority"])
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
