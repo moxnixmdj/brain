@@ -266,6 +266,7 @@ def run(request: Mapping[str, Any]) -> dict[str, Any]:
             "controller_checkpoint": controller.get("controller_checkpoint"),
             "cognition_dependency_class": controller.get("cognition_dependency_class"),
             "model_dependency_count": controller.get("model_dependency_count"),
+            "verified_initial_facts": sorted(initial),
             "verified_target_effects": sorted(targets),
             "elapsed_ns": perf_counter_ns() - started,
             "incremental_spend_usd": 0,
