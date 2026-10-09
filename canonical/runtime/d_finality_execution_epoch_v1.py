@@ -311,6 +311,32 @@ def require_material(path: str, *, repo_root: str | Path) -> DExecutionEpoch:
     return epoch
 
 
+def require_material_file_if_active(
+    path: str | Path,
+    *,
+    repo_root: str | Path | None = None,
+) -> DExecutionEpoch | None:
+    """Point-of-use material guard for loaders.
+
+    Outside a D epoch this is a no-op so experimental runtime behavior is
+    preserved. Inside one, the exact repository-relative file must already be
+    part of the certified material closure and its bytes must still match.
+    """
+    if not has_active_epoch():
+        return None
+    root = (
+        Path(repo_root).resolve()
+        if repo_root is not None
+        else Path(__file__).resolve().parents[2]
+    )
+    full = Path(path).resolve()
+    try:
+        rel = full.relative_to(root).as_posix()
+    except ValueError as exc:
+        raise DFinalityError("MATERIAL_PATH_OUTSIDE_REPO") from exc
+    return require_material(rel, repo_root=root)
+
+
 @contextlib.contextmanager
 def activate(
     certificate: Mapping[str, Any],
