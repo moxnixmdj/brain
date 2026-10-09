@@ -19,6 +19,7 @@ from typing import Any, Mapping
 
 from canonical.runtime import d_finality_execution_epoch_v1 as d_epoch
 from canonical.runtime import d_final_bound_stdlib_provider_v1 as provider
+from canonical.runtime import d_final_pure_stdlib_confined_runner_v1 as confined_runner
 
 SCHEMA="PROJECT_BRAIN_D_FINAL_LIVE_BOUND_BRIDGE_V1"
 
@@ -29,7 +30,13 @@ PROVIDER_CLOSURE=(
     "canonical/runtime/capability_execution_trace_capsule_v1.py",
     "canonical/runtime/composition_state_capsule_v1.py",
     "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+    "canonical/runtime/d_final_pure_stdlib_confined_runner_v1.py",
+    "canonical/runtime/zero_ambient_namespace_launcher_v1.py",
 )
+
+PURE_FILE_INPUT_FIELDS={
+    "decision.synthesis.verify.stdlib":("input_path","result_path"),
+}
 
 
 class DFinalLiveBoundBridgeError(ValueError):
@@ -79,19 +86,29 @@ def invoke(
     if expected_blob is None:
         raise DFinalLiveBoundBridgeError("D_EPOCH_ADAPTER_NOT_BOUND:"+adapter_rel)
 
-    out=provider.execute(
-        local_capability_id,
-        inputs=dict(payload),
+    fields=PURE_FILE_INPUT_FIELDS.get(local_capability_id)
+    if fields is None:
+        raise DFinalLiveBoundBridgeError(
+            "D_FINAL_LIVE_CAPABILITY_NOT_PURE_CONFINED_YET:"+local_capability_id
+        )
+    task_input_paths=[]
+    for field in fields:
+        value=payload.get(field)
+        if not isinstance(value,str) or not value.strip():
+            raise DFinalLiveBoundBridgeError("D_FINAL_TASK_INPUT_PATH_MISSING:"+field)
+        task_input_paths.append(value.strip())
+
+    out=confined_runner.run(
+        local_capability_id=local_capability_id,
+        payload=dict(payload),
         repo_root=root,
-        registry_path=registry_path,
-        adapter_path=root/adapter_rel,
+        adapter_rel=adapter_rel,
         expected_adapter_git_blob_sha=expected_blob,
         expected_registry_entry_sha256=epoch.capability_contract_sha256,
+        task_input_paths=task_input_paths,
     )
     if out.get("pass") is not True:
-        raise DFinalLiveBoundBridgeError(
-            "D_FINAL_BOUND_PROVIDER_FAILED:"+";".join(out.get("errors") or [])
-        )
+        raise DFinalLiveBoundBridgeError("D_FINAL_CONFINED_RUNNER_FAILED")
     return {
         "schema":SCHEMA,
         "status":"PASS__D_FINAL_LIVE_BOUND_BRIDGE",
