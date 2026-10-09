@@ -80,10 +80,20 @@ def _receipt(value: Any, *, relation: str, scope_sha256: str) -> bool:
     )
 
 
-def _task_equivalence(problem: Mapping[str, Any]) -> dict[str, Any]:
+def _task_equivalence(problem: Mapping[str, Any], *, scope_sha256: str) -> dict[str, Any]:
     rows = problem.get("task_terminal_rows")
     if rows is None:
         return {"proved": False, "reason": "NO_TASK_TERMINAL_ROWS"}
+    completeness = problem.get("task_terminal_signature_completeness_receipt")
+    if not _receipt(
+        completeness,
+        relation="TASK_TERMINAL_SIGNATURES_COMPLETE",
+        scope_sha256=scope_sha256,
+    ):
+        return {
+            "proved": False,
+            "reason": "TASK_TERMINAL_SIGNATURE_COMPLETENESS_RECEIPT_REQUIRED",
+        }
     if not isinstance(rows, list) or len(rows) != 2:
         return {"proved": False, "reason": "TASK_TERMINAL_ROWS_MUST_HAVE_TWO_ROWS"}
     ids = [row.get("raw_id") if isinstance(row, Mapping) else None for row in rows]
@@ -215,7 +225,7 @@ def prove(problem: Mapping[str, Any]) -> dict[str, Any]:
         if counter_b_to_a:
             basis.append("COUNTEREXAMPLE_B_FOR_A")
 
-    task = _task_equivalence(problem)
+    task = _task_equivalence(problem, scope_sha256=scope_sha256)
     task_eq = task.get("proved") is True
     if relation == REL_UNKNOWN and task_eq:
         relation = REL_TASK_EQUIVALENT
