@@ -81,7 +81,8 @@ class SecCompanyConceptSourceNativeTests(unittest.TestCase):
         self._write_config()
         with mock.patch.object(p, "_fetch", _fake_fetch()):
             out = p.run(_args(), self.root)
-        self.assertTrue(out["output_verified"])
+        self.assertFalse(out["output_verified"])
+        self.assertTrue(out["independent_verification_required"])
         self.assertEqual(out["concept_qname"], "us-gaap:GrossProfit")
         self.assertTrue(out["source_native_identity_extracted"])
         self.assertFalse(out["semantic_authority_claimed"])
