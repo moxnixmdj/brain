@@ -1,6 +1,9 @@
 from __future__ import annotations
 
+import json
 import unittest
+from pathlib import Path
+from tempfile import TemporaryDirectory
 from unittest.mock import patch
 
 from canonical.runtime import one_shot_verified_closure_v1 as closure
@@ -23,6 +26,47 @@ class OneShotClosureTests(unittest.TestCase):
                 "stats": {},
             },
         }
+
+    def test_scalar_remaining_hard_frontier_is_preserved_as_one_item(self):
+        with TemporaryDirectory() as td:
+            root = Path(td)
+            target = root / "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json"
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_text(json.dumps({
+                "status": "ACTIVE_TEST_R2",
+                "primary_primitive": "ESCAPE_POLICY_ADEQUACY_COVERAGE",
+                "primary_primitive_state": "INTERNAL_UNSOLVED",
+                "remaining_problem_class": "TEST_PROBLEM",
+                "remaining_hard_frontier": "ONE_SCALAR_FRONTIER",
+                "current_cell_classifications": {},
+                "mechanism_closure": {
+                    "universal_positive_action_coverage_closed": False,
+                },
+            }), encoding="utf-8")
+            out = closure._canonical_r2_residual(root)
+        self.assertEqual(
+            out["remaining_hard_frontier"],
+            ["ONE_SCALAR_FRONTIER"],
+        )
+
+    def test_list_remaining_hard_frontier_preserves_items(self):
+        with TemporaryDirectory() as td:
+            root = Path(td)
+            target = root / "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json"
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_text(json.dumps({
+                "status": "ACTIVE_TEST_R2",
+                "primary_primitive": "ESCAPE_POLICY_ADEQUACY_COVERAGE",
+                "primary_primitive_state": "INTERNAL_UNSOLVED",
+                "remaining_problem_class": "TEST_PROBLEM",
+                "remaining_hard_frontier": ["A", "B"],
+                "current_cell_classifications": {},
+                "mechanism_closure": {
+                    "universal_positive_action_coverage_closed": False,
+                },
+            }), encoding="utf-8")
+            out = closure._canonical_r2_residual(root)
+        self.assertEqual(out["remaining_hard_frontier"], ["A", "B"])
 
     def test_empty_queue_is_verified_internal_fixed_point(self):
         snaps = [
