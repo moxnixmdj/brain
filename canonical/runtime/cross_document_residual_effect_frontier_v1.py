@@ -44,7 +44,7 @@ def _source_docs(problem:Mapping[str,Any])->list[dict[str,Any]]:
     seen=set()
     for i,row in enumerate(docs):
         if not isinstance(row,Mapping) or set(row)!={
-            "document_id","source_id","source_text","scope_claim"
+            "document_id","source_id","source_text","scope_claim","inventory_claims"
         }:
             raise ValueError("SOURCE_DOCUMENT_INVALID:"+str(i))
         did=_token(row.get("document_id"),"DOCUMENT_ID")
@@ -58,11 +58,19 @@ def _source_docs(problem:Mapping[str,Any])->list[dict[str,Any]]:
         claim=row.get("scope_claim")
         if claim is not None and not isinstance(claim,Mapping):
             raise ValueError("SCOPE_CLAIM_INVALID:"+did)
+        inventories=row.get("inventory_claims")
+        if (
+            not isinstance(inventories,Sequence)
+            or isinstance(inventories,(str,bytes))
+            or any(not isinstance(x,Mapping) for x in inventories)
+        ):
+            raise ValueError("INVENTORY_CLAIMS_INVALID:"+did)
         out.append({
             "document_id":did,
             "source_id":sid,
             "source_text":text,
             "scope_claim":deepcopy(dict(claim)) if isinstance(claim,Mapping) else None,
+            "inventory_claims":[deepcopy(dict(x)) for x in inventories],
         })
     out.sort(key=lambda x:x["document_id"])
     return out
@@ -98,42 +106,78 @@ def _concrete_targets_for_doc(problem:Mapping[str,Any],document_id:str)->set[str
     return out
 
 
-def _scope_for_document(row:Mapping[str,Any])->dict[str,Any]:
-    claim=row.get("scope_claim")
-    if not isinstance(claim,Mapping):
+def _concrete_effect_ids_for_doc_target(
+    problem:Mapping[str,Any],
+    document_id:str,
+    target_id:str,
+)->set[str]:
+    out=set()
+    for doc in problem.get("documents") or []:
+        if doc.get("document_id")!=document_id:
+            continue
+        for slot in doc.get("effect_slots") or []:
+            for hyp in slot.get("hypotheses") or []:
+                effect=hyp.get("effect")
+                if (
+                    isinstance(effect,Mapping)
+                    and effect.get("target_id")==target_id
+                    and isinstance(effect.get("effect_id"),str)
+                    and effect.get("effect_id")
+                ):
+                    out.add(effect["effect_id"])
+    return out
+
+
+def _proofs_for_document(row:Mapping[str,Any])->dict[str,Any]:
+    claims=[]
+    scope_claim=row.get("scope_claim")
+    if isinstance(scope_claim,Mapping):
+        claims.append(scope_claim)
+    claims.extend(row.get("inventory_claims") or [])
+
+    if not claims:
         return {
-            "proved":False,
             "status":"UNPROVED",
-            "reason":"NO_SOURCE_ALIGNED_SCOPE_CLAIM",
-            "target_ids":[],
             "proof":None,
+            "scope":None,
+            "inventories":{},
         }
+
     checked=verify_proof(
         row["source_text"],
         source_id=row["source_id"],
-        claims=[claim],
+        claims=claims,
     )
     accepted=[
         x for x in checked.get("accepted_claims") or []
         if isinstance(x,Mapping)
-        and x.get("kind")=="CERTIFIED_EFFECT_TARGET_SCOPE"
-        and x.get("claim_id")==claim.get("claim_id")
     ]
-    if len(accepted)!=1:
-        return {
-            "proved":False,
-            "status":checked.get("status"),
-            "reason":"CERTIFIED_EFFECT_TARGET_SCOPE_NOT_ACCEPTED",
-            "target_ids":[],
-            "proof":checked,
-        }
+
+    scope=None
+    if isinstance(scope_claim,Mapping):
+        matches=[
+            x for x in accepted
+            if x.get("kind")=="CERTIFIED_EFFECT_TARGET_SCOPE"
+            and x.get("claim_id")==scope_claim.get("claim_id")
+        ]
+        if len(matches)==1:
+            scope=deepcopy(dict(matches[0]))
+
+    inventories={}
+    for claim in row.get("inventory_claims") or []:
+        matches=[
+            x for x in accepted
+            if x.get("kind")=="CERTIFIED_EFFECT_ID_INVENTORY"
+            and x.get("claim_id")==claim.get("claim_id")
+        ]
+        if len(matches)==1:
+            inventories[str(matches[0]["target_id"])]=deepcopy(dict(matches[0]))
+
     return {
-        "proved":True,
         "status":checked.get("status"),
-        "reason":None,
-        "target_ids":list(accepted[0].get("target_ids") or []),
         "proof":checked,
-        "accepted_claim":deepcopy(dict(accepted[0])),
+        "scope":scope,
+        "inventories":inventories,
     }
 
 
@@ -166,11 +210,17 @@ def evaluate(problem:Mapping[str,Any])->dict[str,Any]:
         blocking=[]
         scope_consistency_errors=[]
         for row in source_docs:
-            scope=_scope_for_document(row)
+            proofs=_proofs_for_document(row)
+            scope=proofs.get("scope")
+            inventories=proofs.get("inventories") or {}
             modeled_targets=_concrete_targets_for_doc(ws,row["document_id"])
+            modeled_query_effect_ids=_concrete_effect_ids_for_doc_target(
+                ws,row["document_id"],target
+            )
 
-            if scope["proved"]:
-                allowed=set(scope["target_ids"])
+            scope_target_ids=list(scope.get("target_ids") or []) if isinstance(scope,Mapping) else []
+            if isinstance(scope,Mapping):
+                allowed=set(scope_target_ids)
                 outside=sorted(modeled_targets-allowed)
                 if outside:
                     scope_consistency_errors.append({
@@ -181,23 +231,42 @@ def evaluate(problem:Mapping[str,Any])->dict[str,Any]:
             else:
                 query_excluded=False
 
+            inventory=inventories.get(target)
+            inventory_ids=set(inventory.get("effect_ids") or []) if isinstance(inventory,Mapping) else set()
+            inventory_matches=(
+                isinstance(inventory,Mapping)
+                and inventory_ids==modeled_query_effect_ids
+            )
+            if isinstance(inventory,Mapping) and not inventory_matches:
+                scope_consistency_errors.append({
+                    "document_id":row["document_id"],
+                    "query_target_id":target,
+                    "proved_inventory_effect_ids":sorted(inventory_ids),
+                    "modeled_effect_ids":sorted(modeled_query_effect_ids),
+                    "reason":"MODELED_EFFECT_ID_INVENTORY_MISMATCH",
+                })
+
             if query_excluded:
                 state="PROVED_QUERY_IRRELEVANT"
                 next_obligation=None
+            elif inventory_matches:
+                state="PROVED_QUERY_EFFECT_ID_INVENTORY_EXHAUSTIVE"
+                next_obligation=None
             else:
                 state="TOP_EFFECT_MAY_AFFECT_QUERY"
-                if not scope["proved"]:
+                if not isinstance(scope,Mapping) and not isinstance(inventory,Mapping):
                     next_obligation={
-                        "kind":"PROVE_EFFECT_TARGET_SCOPE_OR_QUERY_EXCLUSION",
+                        "kind":"PROVE_EFFECT_TARGET_SCOPE_OR_QUERY_EFFECT_ID_INVENTORY",
                         "document_id":row["document_id"],
                         "query_target_id":target,
                     }
                 else:
                     next_obligation={
-                        "kind":"PROVE_QUERY_TARGET_EFFECT_INVENTORY_EXHAUSTIVE",
+                        "kind":"PROVE_QUERY_TARGET_EFFECT_ID_INVENTORY_EXHAUSTIVE",
                         "document_id":row["document_id"],
                         "query_target_id":target,
-                        "proved_scope_target_ids":list(scope["target_ids"]),
+                        "modeled_effect_ids":sorted(modeled_query_effect_ids),
+                        "proved_scope_target_ids":scope_target_ids,
                     }
                 blocking.append(row["document_id"])
 
@@ -206,11 +275,12 @@ def evaluate(problem:Mapping[str,Any])->dict[str,Any]:
                 "document_id":row["document_id"],
                 "state":state,
                 "query_target_id":target,
-                "proved_scope_target_ids":list(scope["target_ids"]),
-                "scope_proved":scope["proved"],
-                "scope_proof_status":scope["status"],
-                "scope_proof_reason":scope["reason"],
-                "scope_accepted_claim":deepcopy(scope.get("accepted_claim")),
+                "proved_scope_target_ids":scope_target_ids,
+                "scope_proved":isinstance(scope,Mapping),
+                "scope_accepted_claim":deepcopy(scope),
+                "proved_query_effect_id_inventory":deepcopy(inventory),
+                "modeled_query_effect_ids":sorted(modeled_query_effect_ids),
+                "source_proof_status":proofs.get("status"),
                 "next_proof_obligation":next_obligation,
             })
 
@@ -273,8 +343,8 @@ def evaluate(problem:Mapping[str,Any])->dict[str,Any]:
             "terminal_authority":False,
             "boundary":(
                 "RESIDUAL_TOP_IS_CLOSED_ONLY_BY_BRAIN_RECOMPUTED_EXPLICIT_"
-                "EFFECT_TARGET_SCOPE_EXCLUSION__QUERY_TARGET_EFFECT_INVENTORY_"
-                "EXHAUSTIVENESS_REMAINS_UNPROVED_WHEN_TARGET_IS_INCLUDED"
+                "QUERY_TARGET_EXCLUSION_OR_EXACT_EFFECT_ID_INVENTORY_MATCH;"
+                "EFFECT_VALUE_CLASS_CONDITION_INTERPRETATIONS_REMAIN_WITH_THE_WORLDSET_ENGINE"
             ),
         }
     except Exception as exc:
