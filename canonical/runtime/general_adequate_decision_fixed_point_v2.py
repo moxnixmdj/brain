@@ -46,6 +46,7 @@ MUTABLE_REQUEST_FIELDS = frozenset(
         "max_information_rounds",
         "episode_id",
         "scope_id",
+        "direct_route_evidence_bindings",
     }
 )
 IMMUTABLE_REQUEST_FIELDS = frozenset({"task_id", "goal"})
@@ -232,6 +233,98 @@ def _edge_request(
     }
 
 
+def _direct_hint(preflight: Mapping[str, Any]) -> dict[str, Any] | None:
+    if preflight.get("direct_route_semantic_open") is not True:
+        return None
+    return {
+        "schema": "PROJECT_BRAIN_R2_DIRECT_SEMANTIC_OPEN_HINT_V1",
+        "route_id": preflight.get("route_id"),
+        "status": preflight.get("status"),
+        "effect_status": preflight.get("effect_status"),
+        "minimum_discriminator_slots": deepcopy(
+            preflight.get("minimum_discriminator_slots") or []
+        ),
+        "possible_outcomes": deepcopy(
+            preflight.get("possible_outcomes") or []
+        ),
+        "world_count": preflight.get("world_count"),
+        "blocking_residual_document_ids": deepcopy(
+            preflight.get("blocking_residual_document_ids") or []
+        ),
+        "next_proof_obligations": deepcopy(
+            preflight.get("next_proof_obligations") or []
+        ),
+        "semantic_truth_authority": False,
+        "execution_authority": False,
+        "acceptance_authority": False,
+        "terminal_authority": False,
+    }
+
+
+def _merge_direct_evidence(
+    prior: Any,
+    patch: Any,
+) -> tuple[list[dict[str, Any]] | None, str | None]:
+    if prior is None:
+        prior = []
+    if (
+        not isinstance(prior, list)
+        or not isinstance(patch, list)
+    ):
+        return None, "DIRECT_ROUTE_EVIDENCE_BINDINGS_MUST_BE_LISTS"
+
+    combined = [deepcopy(x) for x in prior]
+    by_key: dict[tuple[str, str, str], dict[str, Any]] = {}
+
+    def normalize(row: Any) -> tuple[tuple[str, str, str] | None, dict[str, Any] | None, str | None]:
+        if not isinstance(row, Mapping):
+            return None, None, "DIRECT_ROUTE_EVIDENCE_BINDING_NOT_OBJECT"
+        if set(row) != {"route_id", "document_id", "claim"}:
+            return None, None, "DIRECT_ROUTE_EVIDENCE_BINDING_FIELD_SET_INVALID"
+        route_id = str(row.get("route_id") or "").strip()
+        document_id = str(row.get("document_id") or "").strip()
+        claim = row.get("claim")
+        if not route_id or not document_id or not isinstance(claim, Mapping):
+            return None, None, "DIRECT_ROUTE_EVIDENCE_BINDING_INVALID"
+        claim_id = str(claim.get("claim_id") or "").strip()
+        if not claim_id:
+            return None, None, "DIRECT_ROUTE_EVIDENCE_CLAIM_ID_REQUIRED"
+        clean = {
+            "route_id": route_id,
+            "document_id": document_id,
+            "claim": deepcopy(dict(claim)),
+        }
+        return (route_id, document_id, claim_id), clean, None
+
+    for row in combined:
+        key, clean, error = normalize(row)
+        if error is not None or key is None or clean is None:
+            return None, "EXISTING_" + str(error)
+        if key in by_key and by_key[key] != clean:
+            return None, "EXISTING_DIRECT_ROUTE_EVIDENCE_CONFLICT:" + "::".join(key)
+        by_key[key] = clean
+
+    for row in patch:
+        key, clean, error = normalize(row)
+        if error is not None or key is None or clean is None:
+            return None, error
+        if key in by_key:
+            if by_key[key] != clean:
+                return None, "DIRECT_ROUTE_EVIDENCE_MUTATION_FORBIDDEN:" + "::".join(key)
+            continue
+        by_key[key] = clean
+        combined.append(clean)
+
+    combined.sort(
+        key=lambda row: (
+            row["route_id"],
+            row["document_id"],
+            str(row["claim"]["claim_id"]),
+        )
+    )
+    return combined, None
+
+
 def _merge_candidate(
     current: Mapping[str, Any],
     candidate: Mapping[str, Any],
@@ -247,6 +340,15 @@ def _merge_candidate(
 
     merged = deepcopy(dict(current))
     for key, value in patch.items():
+        if key == "direct_route_evidence_bindings":
+            combined, error = _merge_direct_evidence(
+                merged.get(key),
+                value,
+            )
+            if error is not None or combined is None:
+                return None, error
+            merged[key] = combined
+            continue
         if key == "policy_cover_observation_bindings":
             if not isinstance(value, Mapping):
                 return None, "POLICY_COVER_OBSERVATION_BINDINGS_PATCH_NOT_OBJECT"
@@ -313,31 +415,7 @@ def run(
     prior_candidates: list[dict[str, Any]] = []
 
     direct_preflight = direct_adequacy.preflight(current, repo_root=repo_root)
-    direct_semantic_hint: dict[str, Any] | None = None
-    if direct_preflight.get("direct_route_semantic_open") is True:
-        direct_semantic_hint = {
-            "schema": "PROJECT_BRAIN_R2_DIRECT_SEMANTIC_OPEN_HINT_V1",
-            "route_id": direct_preflight.get("route_id"),
-            "status": direct_preflight.get("status"),
-            "effect_status": direct_preflight.get("effect_status"),
-            "minimum_discriminator_slots": deepcopy(
-                direct_preflight.get("minimum_discriminator_slots") or []
-            ),
-            "possible_outcomes": deepcopy(
-                direct_preflight.get("possible_outcomes") or []
-            ),
-            "world_count": direct_preflight.get("world_count"),
-            "blocking_residual_document_ids": deepcopy(
-                direct_preflight.get("blocking_residual_document_ids") or []
-            ),
-            "next_proof_obligations": deepcopy(
-                direct_preflight.get("next_proof_obligations") or []
-            ),
-            "semantic_truth_authority": False,
-            "execution_authority": False,
-            "acceptance_authority": False,
-            "terminal_authority": False,
-        }
+    direct_semantic_hint = _direct_hint(direct_preflight)
     if direct_preflight.get("matched") is True:
         direct_result = direct_adequacy.run(current, repo_root=repo_root)
         trace.append(
@@ -362,6 +440,40 @@ def run(
         )
 
     for step in range(max_fixed_point_steps + 1):
+        if step > 0:
+            direct_preflight = direct_adequacy.preflight(
+                current,
+                repo_root=repo_root,
+            )
+            direct_semantic_hint = _direct_hint(direct_preflight)
+            if direct_preflight.get("matched") is True:
+                direct_result = direct_adequacy.run(
+                    current,
+                    repo_root=repo_root,
+                )
+                trace.append(
+                    {
+                        "step": step,
+                        "kind": "DIRECT_END_TO_END_ADEQUACY_RECHECK",
+                        "route_id": direct_preflight.get("route_id"),
+                        "status": direct_result.get("status"),
+                        "pass": direct_result.get("pass") is True,
+                        "execution_attempted": (
+                            direct_result.get("execution_attempted") is True
+                        ),
+                    }
+                )
+                return _decorate(
+                    direct_result,
+                    fixed_point_status=(
+                        "PASS__R2_DIRECT_END_TO_END_ADEQUACY_CLOSED_AFTER_REPAIR"
+                        if direct_result.get("pass") is True
+                        else "OPEN__R2_MATCHED_DIRECT_ROUTE_DID_NOT_VERIFY_AFTER_REPAIR"
+                    ),
+                    steps=step,
+                    trace=trace,
+                )
+
         result = run_controller(
             current,
             repo_root=repo_root,
