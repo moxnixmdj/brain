@@ -704,6 +704,174 @@ def _infrastructure_failure_result(
     return out
 
 
+def _record_infrastructure_failure_learning(
+    *,
+    stage: str,
+    exc: BaseException,
+    repo_root: Any,
+    state_path: Any,
+    gap_contract: Mapping[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Route a closure transport failure into the existing R3 repair ledger."""
+    learning = getattr(v1, "learning", None)
+    if learning is None or not hasattr(learning, "integrate_solver_output"):
+        return {
+            "pass": False,
+            "status": "LEARNING_HANDOFF_UNAVAILABLE",
+            "internal_learning_debt": True,
+        }
+    resolved_state = (
+        state_path
+        if state_path is not None
+        else getattr(learning, "DEFAULT_STATE_PATH", None)
+    )
+    if resolved_state is None:
+        return {
+            "pass": False,
+            "status": "LEARNING_STATE_PATH_UNAVAILABLE",
+            "internal_learning_debt": True,
+        }
+
+    gap_digest = (
+        _sha(dict(gap_contract))
+        if isinstance(gap_contract, Mapping)
+        else None
+    )
+    signature = {
+        "stage": stage,
+        "exception_type": type(exc).__name__,
+        "reason": str(exc),
+        "gap_contract_digest": gap_digest,
+    }
+    failure_out = {
+        "schema": "PROJECT_BRAIN_ONE_SHOT_INFRASTRUCTURE_FAILURE_V1",
+        "status": "FAIL_CLOSED__INFRASTRUCTURE_OR_PROVIDER_FAILURE",
+        "pass": False,
+        "reason": stage + ":" + type(exc).__name__ + ":" + str(exc),
+        "next_required_edge": "REPAIR_INFRASTRUCTURE_AND_REPLAY_STAGE",
+        "effect_may_have_occurred": False,
+    }
+    retry_context = {
+        "mode": "one_shot_infrastructure",
+        "stage": stage,
+        "failure_signature_sha256": _sha(signature),
+        "gap_contract_digest": gap_digest,
+    }
+    try:
+        integrated = learning.integrate_solver_output(
+            failure_out,
+            state_path=resolved_state,
+            repo_root=repo_root,
+            retry_context=retry_context,
+        )
+        diagnosis = integrated.get("diagnosis")
+        diagnosis = diagnosis if isinstance(diagnosis, Mapping) else {}
+        fid = _s(diagnosis.get("failure_fingerprint"))
+        retry_sha = _s(integrated.get("retry_capsule_sha256"))
+        if not fid or not retry_sha:
+            return {
+                "pass": False,
+                "status": "LEARNING_HANDOFF_DID_NOT_BIND_FAILURE_AND_RETRY",
+                "internal_learning_debt": True,
+                "integration": deepcopy(dict(integrated)),
+            }
+        state = learning.load_state(resolved_state)
+        failure = state.get("failures", {}).get(fid)
+        receipts = (
+            failure.get("repair_receipts")
+            if isinstance(failure, Mapping)
+            else {}
+        )
+        verified_prior = {}
+        if isinstance(receipts, Mapping):
+            verified_prior = {
+                _s(sha): deepcopy(dict(raw))
+                for sha, raw in receipts.items()
+                if isinstance(raw, Mapping)
+                and raw.get("original_replay_pass") is True
+            }
+        return {
+            "pass": True,
+            "status": "INFRASTRUCTURE_FAILURE_QUEUED_IN_R3_REPAIR_LEDGER",
+            "failure_fingerprint": fid,
+            "retry_capsule_sha256": retry_sha,
+            "improvement_work_id": integrated.get("improvement_work_id"),
+            "prior_verified_repair_receipts": verified_prior,
+            "reuse_first_required": bool(verified_prior),
+            "state_path": str(resolved_state),
+            "internal_learning_debt": True,
+        }
+    except Exception as learning_exc:
+        return {
+            "pass": False,
+            "status": "LEARNING_HANDOFF_EXCEPTION",
+            "reason": type(learning_exc).__name__ + ":" + str(learning_exc),
+            "internal_learning_debt": True,
+        }
+
+
+def _resolve_infrastructure_repair_learning(
+    pending: dict[str, dict[str, Any]],
+    *,
+    stage: str,
+    transcript: list[dict[str, Any]],
+) -> None:
+    row = pending.pop(stage, None)
+    if not isinstance(row, Mapping):
+        return
+    learning = getattr(v1, "learning", None)
+    context = row.get("learning")
+    receipt = row.get("receipt")
+    if (
+        learning is None
+        or not hasattr(learning, "record_repair_outcome")
+        or not isinstance(context, Mapping)
+        or context.get("pass") is not True
+        or not isinstance(receipt, Mapping)
+    ):
+        transcript.append({
+            "stage": stage,
+            "status": "INFRASTRUCTURE_REPAIR_LEARNING_RESOLUTION_UNAVAILABLE",
+            "internal_learning_debt": True,
+            "terminal_credit": False,
+        })
+        return
+    try:
+        resolved = learning.record_repair_outcome(
+            _s(context.get("failure_fingerprint")),
+            retry_capsule_sha256=_s(context.get("retry_capsule_sha256")),
+            repair_record={
+                "repair_mode": "ONE_SHOT_INFRASTRUCTURE_REPAIR_PROVIDER",
+                "stage": stage,
+                "provider_receipt_sha256": receipt.get("receipt_sha256"),
+                "reuse_first_required": context.get("reuse_first_required") is True,
+                "reuse_first_attempted": receipt.get("reuse_first_attempted") is True,
+                "reused_repair_receipt_sha256": receipt.get(
+                    "reused_repair_receipt_sha256"
+                ),
+            },
+            original_replay_pass=True,
+            state_path=context.get("state_path"),
+        )
+        transcript.append({
+            "stage": stage,
+            "status": "INFRASTRUCTURE_REPAIR_REPLAY_VERIFIED__R3_REPAIR_LEDGER_RESOLVED",
+            "failure_fingerprint": context.get("failure_fingerprint"),
+            "repair_receipt_sha256": resolved.get("repair_receipt_sha256"),
+            "retry_instance_resolved": resolved.get("retry_instance_resolved") is True,
+            "internal_learning_debt": False,
+            "terminal_credit": False,
+        })
+    except Exception as learning_exc:
+        transcript.append({
+            "stage": stage,
+            "status": "INFRASTRUCTURE_REPAIR_REPLAY_SUCCEEDED__R3_LEARNING_RESOLUTION_FAILED",
+            "reason": type(learning_exc).__name__ + ":" + str(learning_exc),
+            "internal_learning_debt": True,
+            "terminal_credit": False,
+        })
+
+
 def _attempt_infrastructure_repair(
     provider: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None,
     *,
@@ -711,10 +879,16 @@ def _attempt_infrastructure_repair(
     repair_round: int,
     exc: BaseException,
     transcript: list[dict[str, Any]],
+    learning_context: Mapping[str, Any] | None = None,
     gap_contract: Mapping[str, Any] | None = None,
-) -> bool:
+) -> dict[str, Any] | None:
     if provider is None:
-        return False
+        return None
+    prior_verified = (
+        deepcopy(dict(learning_context.get("prior_verified_repair_receipts") or {}))
+        if isinstance(learning_context, Mapping)
+        else {}
+    )
     request = {
         "schema": "PROJECT_BRAIN_INFRASTRUCTURE_REPAIR_REQUEST_V1",
         "stage": stage,
@@ -723,13 +897,25 @@ def _attempt_infrastructure_repair(
         "reason": str(exc),
         "classification": "INTERNAL_INFRASTRUCTURE_OR_PROVIDER_BUG",
         "gap_contract": deepcopy(dict(gap_contract)) if gap_contract is not None else None,
+        "learning_failure_fingerprint": (
+            learning_context.get("failure_fingerprint")
+            if isinstance(learning_context, Mapping)
+            else None
+        ),
+        "learning_retry_capsule_sha256": (
+            learning_context.get("retry_capsule_sha256")
+            if isinstance(learning_context, Mapping)
+            else None
+        ),
+        "prior_verified_repair_receipts": prior_verified,
+        "reuse_first_required": bool(prior_verified),
         "verification_authority_mutation_allowed": False,
         "terminal_credit": False,
     }
     try:
         raw = provider(deepcopy(request))
     except Exception:
-        return False
+        return None
     if not isinstance(raw, Mapping):
         return False
     receipt = deepcopy(dict(raw))
@@ -740,15 +926,33 @@ def _attempt_infrastructure_repair(
     if receipt.get("verification_authority_mutated") is not False:
         return False
     if not _valid_sha256(receipt.get("receipt_sha256")):
-        return False
+        return None
+    if prior_verified and receipt.get("reuse_first_attempted") is not True:
+        return None
+    reused_sha = _s(receipt.get("reused_repair_receipt_sha256"))
+    if reused_sha and reused_sha not in prior_verified:
+        return None
     transcript.append({
         "repair_round": repair_round,
         "stage": stage,
         "status": "INFRASTRUCTURE_REPAIR_RECEIPT_ACCEPTED__RETRY_CLOSURE_LOOP",
         "receipt_sha256": receipt["receipt_sha256"],
+        "reuse_first_required": bool(prior_verified),
+        "reuse_first_attempted": receipt.get("reuse_first_attempted") is True,
+        "reused_repair_receipt_sha256": reused_sha or None,
+        "learning_failure_fingerprint": (
+            learning_context.get("failure_fingerprint")
+            if isinstance(learning_context, Mapping)
+            else None
+        ),
         "terminal_credit": False,
     })
-    return True
+    return {
+        "receipt": receipt,
+        "learning": deepcopy(dict(learning_context))
+        if isinstance(learning_context, Mapping)
+        else None,
+    }
 
 
 def run(
@@ -776,6 +980,7 @@ def run(
     rounds = _positive_int("MAX_REPAIR_ROUNDS", max_repair_rounds)
     previous_frontier_after_provider: str | None = None
     transcript: list[dict[str, Any]] = []
+    pending_infrastructure_repairs: dict[str, dict[str, Any]] = {}
 
     for repair_round in range(rounds):
         kwargs = {
@@ -798,20 +1003,37 @@ def run(
         try:
             closure = v1.run(**kwargs)
         except Exception as exc:
-            if _attempt_infrastructure_repair(
+            learning_context = _record_infrastructure_failure_learning(
+                stage="V1_CLOSURE_ENGINE",
+                exc=exc,
+                repo_root=repo_root,
+                state_path=state_path,
+            )
+            repaired = _attempt_infrastructure_repair(
                 infrastructure_repair_provider,
                 stage="V1_CLOSURE_ENGINE",
                 repair_round=repair_round,
                 exc=exc,
                 transcript=transcript,
-            ):
+                learning_context=learning_context,
+            )
+            if repaired is not None:
+                pending_infrastructure_repairs["V1_CLOSURE_ENGINE"] = repaired
                 continue
-            return _infrastructure_failure_result(
+            out = _infrastructure_failure_result(
                 stage="V1_CLOSURE_ENGINE",
                 repair_round=repair_round,
                 exc=exc,
                 transcript=transcript,
             )
+            out["learning_obligation"] = learning_context
+            return out
+
+        _resolve_infrastructure_repair_learning(
+            pending_infrastructure_repairs,
+            stage="V1_CLOSURE_ENGINE",
+            transcript=transcript,
+        )
 
         current_initial = _s(closure.get("initial_frontier_digest"))
         if (
@@ -881,22 +1103,39 @@ def run(
                     provider_kind="CAPABILITY_SYNTHESIS",
                 )
             except Exception as exc:
-                if _attempt_infrastructure_repair(
+                learning_context = _record_infrastructure_failure_learning(
+                    stage="CAPABILITY_SYNTHESIS_PROVIDER",
+                    exc=exc,
+                    repo_root=repo_root,
+                    state_path=state_path,
+                    gap_contract=contract,
+                )
+                repaired = _attempt_infrastructure_repair(
                     infrastructure_repair_provider,
                     stage="CAPABILITY_SYNTHESIS_PROVIDER",
                     repair_round=repair_round,
                     exc=exc,
                     transcript=transcript,
+                    learning_context=learning_context,
                     gap_contract=contract,
-                ):
+                )
+                if repaired is not None:
+                    pending_infrastructure_repairs["CAPABILITY_SYNTHESIS_PROVIDER"] = repaired
                     continue
-                return _infrastructure_failure_result(
+                out = _infrastructure_failure_result(
                     stage="CAPABILITY_SYNTHESIS_PROVIDER",
                     repair_round=repair_round,
                     exc=exc,
                     transcript=transcript,
                     gap_contract=contract,
                 )
+                out["learning_obligation"] = learning_context
+                return out
+            _resolve_infrastructure_repair_learning(
+                pending_infrastructure_repairs,
+                stage="CAPABILITY_SYNTHESIS_PROVIDER",
+                transcript=transcript,
+            )
         elif gap_class == "PENDING_ACQUISITION_OR_EXPERIMENT":
             if evidence_acquisition_provider is None:
                 return {
@@ -917,22 +1156,39 @@ def run(
                     provider_kind="EVIDENCE_ACQUISITION",
                 )
             except Exception as exc:
-                if _attempt_infrastructure_repair(
+                learning_context = _record_infrastructure_failure_learning(
+                    stage="EVIDENCE_ACQUISITION_PROVIDER",
+                    exc=exc,
+                    repo_root=repo_root,
+                    state_path=state_path,
+                    gap_contract=contract,
+                )
+                repaired = _attempt_infrastructure_repair(
                     infrastructure_repair_provider,
                     stage="EVIDENCE_ACQUISITION_PROVIDER",
                     repair_round=repair_round,
                     exc=exc,
                     transcript=transcript,
+                    learning_context=learning_context,
                     gap_contract=contract,
-                ):
+                )
+                if repaired is not None:
+                    pending_infrastructure_repairs["EVIDENCE_ACQUISITION_PROVIDER"] = repaired
                     continue
-                return _infrastructure_failure_result(
+                out = _infrastructure_failure_result(
                     stage="EVIDENCE_ACQUISITION_PROVIDER",
                     repair_round=repair_round,
                     exc=exc,
                     transcript=transcript,
                     gap_contract=contract,
                 )
+                out["learning_obligation"] = learning_context
+                return out
+            _resolve_infrastructure_repair_learning(
+                pending_infrastructure_repairs,
+                stage="EVIDENCE_ACQUISITION_PROVIDER",
+                transcript=transcript,
+            )
         elif gap_class == "PROVEN_INFORMATION_THEORETICALLY_EXTERNAL":
             return {
                 "schema": SCHEMA,
