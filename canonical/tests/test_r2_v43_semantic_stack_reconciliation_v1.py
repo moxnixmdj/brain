@@ -37,6 +37,22 @@ class Tests(unittest.TestCase):
             term["r2_scheduler_precedence"]["current_scheduler_path"],
             "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V43.json",
         )
+        self.assertEqual(
+            term["authoritative_sources"]["current_r2_decision_intelligence"]["scheduler_cut"]["git_blob_sha"],
+            sha,
+        )
+        self.assertEqual(
+            term["authoritative_sources"]["current_r2_decision_intelligence"]["scheduler_cut"]["path"],
+            "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V43.json",
+        )
+        self.assertIn(
+            "__V43__",
+            term["authoritative_sources"]["current_r2_decision_intelligence"]["status"],
+        )
+        self.assertEqual(
+            term["live_truth"]["current_r2_scheduler_cut"],
+            "ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V43",
+        )
 
     def test_all_three_semantic_layers_are_bound(self):
         sched = load(SCHED)
