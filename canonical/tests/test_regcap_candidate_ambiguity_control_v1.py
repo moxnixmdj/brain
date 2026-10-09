@@ -147,6 +147,33 @@ class Tests(unittest.TestCase):
         )
         self.assertFalse(out["semantic_truth_authority"])
 
+    def test_verified_grounding_hands_off_without_identity_invention(self):
+        grounding = {
+            "schema": control.GROUNDING_SCHEMA,
+            "pass": True,
+            "status": "OPEN__COMPOSED_SOURCE_MEANING_WITH_NON_UNIQUE_REGCAP_CANDIDATES",
+            "source_constraint_proved": True,
+            "source_id": "doc:A",
+            "source_span": [0, 22],
+            "raw_span": "loss-absorbing cushion",
+            "candidate_discovery": candidates(),
+        }
+        out = control.plan_from_grounding(
+            grounding,
+            mapping_scope={"kind": "OPEN_WORLD", "scope_complete": False},
+            observation_set_complete=False,
+            information_owner=origin.USER_SPECIFICATION,
+        )
+        self.assertFalse(out["pass"])
+        self.assertEqual(
+            out["status"],
+            "OPEN__OPEN_WORLD_MAPPING_REQUIRES_MINIMUM_ADDITIONAL_INFORMATION",
+        )
+        self.assertEqual(out["grounding_raw_span"], "loss-absorbing cushion")
+        self.assertEqual(out["grounding_source_id"], "doc:A")
+        self.assertIsNone(out["mapped_concept_id"])
+        self.assertFalse(out["semantic_identity_authority"])
+
     def test_scope_mismatch_fails_closed(self):
         scope = bounded_scope()
         scope["candidate_ids"] = IDS[:-1]
