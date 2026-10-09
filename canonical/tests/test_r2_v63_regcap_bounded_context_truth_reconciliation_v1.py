@@ -117,7 +117,7 @@ class Tests(unittest.TestCase):
         self.assertTrue(live["r2_regcap_authenticated_bounded_context_truth_bound"])
         self.assertFalse(live["r2_regcap_bounded_context_truth_global_semantic_identity_authority"])
         self.assertFalse(live["r2_regcap_bounded_context_truth_open_world_candidate_universe_complete"])
-        self.assertFalse(self.term["r2_v63_regcap_bounded_context_truth_reconciliation"]["terminal_remains_false"])
+        self.assertTrue(self.term["r2_v63_regcap_bounded_context_truth_reconciliation"]["terminal_remains_false"])
 
     def test_reconciliation_is_content_addressed_and_zero_credit(self):
         self.assertEqual(self.rec["successor"]["current_r2_blob_sha"], git_blob(R2))
