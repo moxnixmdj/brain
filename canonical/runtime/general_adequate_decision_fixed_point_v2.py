@@ -189,6 +189,7 @@ def _edge_request(
     unresolved: Mapping[str, Any],
     *,
     step: int,
+    direct_preflight_hint: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     return {
         "schema": "PROJECT_BRAIN_R2_UNRESOLVED_EDGE_ACQUISITION_REQUEST_V1",
@@ -214,6 +215,11 @@ def _edge_request(
             unresolved.get("next_policy_request")
         ),
         "unresolved_output": deepcopy(dict(unresolved)),
+        "direct_preflight_hint": (
+            deepcopy(dict(direct_preflight_hint))
+            if isinstance(direct_preflight_hint, Mapping)
+            else None
+        ),
         "allowed_request_patch_fields": sorted(MUTABLE_REQUEST_FIELDS),
         "immutable_request_fields": sorted(IMMUTABLE_REQUEST_FIELDS),
         "required_response_shape": {
@@ -307,6 +313,25 @@ def run(
     prior_candidates: list[dict[str, Any]] = []
 
     direct_preflight = direct_adequacy.preflight(current, repo_root=repo_root)
+    direct_semantic_hint: dict[str, Any] | None = None
+    if direct_preflight.get("direct_route_semantic_open") is True:
+        direct_semantic_hint = {
+            "schema": "PROJECT_BRAIN_R2_DIRECT_SEMANTIC_OPEN_HINT_V1",
+            "route_id": direct_preflight.get("route_id"),
+            "status": direct_preflight.get("status"),
+            "effect_status": direct_preflight.get("effect_status"),
+            "minimum_discriminator_slots": deepcopy(
+                direct_preflight.get("minimum_discriminator_slots") or []
+            ),
+            "possible_outcomes": deepcopy(
+                direct_preflight.get("possible_outcomes") or []
+            ),
+            "world_count": direct_preflight.get("world_count"),
+            "semantic_truth_authority": False,
+            "execution_authority": False,
+            "acceptance_authority": False,
+            "terminal_authority": False,
+        }
     if direct_preflight.get("matched") is True:
         direct_result = direct_adequacy.run(current, repo_root=repo_root)
         trace.append(
@@ -350,6 +375,7 @@ def run(
                 "status": result.get("status"),
                 "pass": result.get("pass") is True,
                 "next_required_edge": result.get("next_required_edge"),
+                "direct_preflight_hint": deepcopy(direct_semantic_hint),
             }
         )
         if result.get("pass") is True:
@@ -561,7 +587,12 @@ def run(
                 trace=trace,
             )
 
-        packet = _edge_request(current, result, step=step)
+        packet = _edge_request(
+            current,
+            result,
+            step=step,
+            direct_preflight_hint=direct_semantic_hint,
+        )
         attempts: list[dict[str, Any]] = []
         progressive: dict[str, Any] | None = None
         progressive_digest: str | None = None
