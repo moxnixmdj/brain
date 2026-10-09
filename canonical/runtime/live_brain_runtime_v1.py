@@ -333,6 +333,25 @@ def _replay_retry_context(
     mode = str(context.get("mode") or "")
     if mode in {"repair_synthesis", "repair_cycle"}:
         return _fail("RETRY_CONTEXT_REPAIR_RECURSION_FORBIDDEN")
+    if mode == "fabric_direct":
+        fabric_request = context.get("request")
+        if not isinstance(fabric_request, Mapping):
+            return _fail("FABRIC_DIRECT_RETRY_REQUEST_NOT_OBJECT")
+        from canonical.runtime import unified_cognitive_fabric_v1 as fabric
+        replay_request = deepcopy(dict(fabric_request))
+        options = replay_request.get("options")
+        options = deepcopy(dict(options)) if isinstance(options, Mapping) else {}
+        options["learn"] = False
+        if state_path is not None:
+            options["state_path"] = str(state_path)
+        replay_request["options"] = options
+        return fabric.run(
+            replay_request,
+            information_provider=information_provider,
+            proposal_provider=proposal_provider,
+            capability_expander=capability_expander,
+        )
+
     replay_context = deepcopy(dict(context))
     replay_context.pop("policy_repair_context", None)
     replay_context["auto_repair"] = False
@@ -1216,6 +1235,7 @@ def observe_runtime_outcome(
     state_path: str | Path | None = None,
     learn: bool = True,
     surface: str = "LIVE_RUNTIME",
+    retry_context: Mapping[str, Any] | None = None,
 ) -> dict[str, Any] | None:
     """Public fail-closed observation bridge for canonical fabric surfaces.
 
@@ -1246,7 +1266,7 @@ def observe_runtime_outcome(
         out,
         state_path=state_path,
         learn=learn,
-        retry_context=None,
+        retry_context=retry_context,
         surface=surface,
     )
 
