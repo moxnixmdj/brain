@@ -1906,6 +1906,12 @@ def advance_once(
     verification_frontier_acquisition_provider_id: str = (
         "HOST_VERIFICATION_FRONTIER_ACQUISITION_PROVIDER"
     ),
+    distinguishing_evidence_acquisition_provider: Callable[
+        [Mapping[str, Any]], Mapping[str, Any] | None
+    ] | None = None,
+    distinguishing_evidence_acquisition_provider_id: str = (
+        "HOST_R3_DISTINGUISHING_EVIDENCE_ACQUISITION_PROVIDER"
+    ),
 ) -> dict[str, Any]:
     """Execute the highest-priority *actionable* pending improvement exactly once."""
     external_episode_verifier = episode_verification_provider is not None
@@ -2286,6 +2292,27 @@ def advance_once(
                         isinstance(evidence_request, Mapping)
                         and evidence_request.get("pass") is True
                     )
+                    if (
+                        request_ready
+                        and distinguishing_evidence_acquisition_provider is not None
+                    ):
+                        evidence_out = _execute_distinguishing_evidence_acquisition(
+                            work,
+                            state_path=state_path,
+                            repo_root=repo_root,
+                            provider=distinguishing_evidence_acquisition_provider,
+                            provider_id=distinguishing_evidence_acquisition_provider_id,
+                            repair_reduction=repair_reduction,
+                        )
+                        return {
+                            **evidence_out,
+                            "blockers_skipped": blockers,
+                            "provider_truth_authority": False,
+                            "provider_verification_authority": False,
+                            "provider_promotion_authority": False,
+                            "provider_acceptance_authority": False,
+                            "terminal_authority": False,
+                        }
                     blockers.append({
                         "work_id": wid,
                         "kind": kind,
@@ -2306,6 +2333,9 @@ def advance_once(
                             deepcopy(dict(evidence_request))
                             if isinstance(evidence_request, Mapping)
                             else None
+                        ),
+                        "distinguishing_evidence_provider_bound": (
+                            distinguishing_evidence_acquisition_provider is not None
                         ),
                         "adapter_acquisition_provider_skipped": True,
                         "replay_original_success": False,
@@ -2434,6 +2464,12 @@ def drain(
     verification_frontier_acquisition_provider_id: str = (
         "HOST_VERIFICATION_FRONTIER_ACQUISITION_PROVIDER"
     ),
+    distinguishing_evidence_acquisition_provider: Callable[
+        [Mapping[str, Any]], Mapping[str, Any] | None
+    ] | None = None,
+    distinguishing_evidence_acquisition_provider_id: str = (
+        "HOST_R3_DISTINGUISHING_EVIDENCE_ACQUISITION_PROVIDER"
+    ),
     max_actions: int = 4,
 ) -> dict[str, Any]:
     if isinstance(max_actions, bool) or not isinstance(max_actions, int) or max_actions < 1 or max_actions > 32:
@@ -2452,6 +2488,12 @@ def drain(
             ),
             verification_frontier_acquisition_provider_id=(
                 verification_frontier_acquisition_provider_id
+            ),
+            distinguishing_evidence_acquisition_provider=(
+                distinguishing_evidence_acquisition_provider
+            ),
+            distinguishing_evidence_acquisition_provider_id=(
+                distinguishing_evidence_acquisition_provider_id
             ),
         )
         actions.append(result)
