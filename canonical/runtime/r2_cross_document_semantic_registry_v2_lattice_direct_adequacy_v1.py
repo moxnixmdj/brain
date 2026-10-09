@@ -9,12 +9,11 @@ import re
 from typing import Any, Mapping
 
 from canonical.runtime.lossless_raw_task_contract_v1 import compile_contract
-from canonical.runtime import cross_document_effect_semantic_lattice_v5 as producer
-from canonical.runtime import cross_document_effect_semantic_lattice_verify_v5 as verifier
-from canonical.runtime import brain_owned_semantic_relation_edge_registry_v2 as relation_registry
+from canonical.runtime import cross_document_effect_semantic_lattice_v6 as producer
+from canonical.runtime import cross_document_effect_semantic_lattice_verify_v6 as verifier
 
 SCHEMA="PROJECT_BRAIN_R2_CROSS_DOCUMENT_SEMANTIC_REGISTRY_V2_LATTICE_DIRECT_ADEQUACY_V1"
-ROUTE_ID="DIRECT_ADEQUACY::CROSS_DOCUMENT_SEMANTIC_REGISTRY_V2_LATTICE_V5"
+ROUTE_ID="DIRECT_ADEQUACY::CROSS_DOCUMENT_SEMANTIC_REGISTRY_V2_LATTICE_V6"
 CAPABILITY_ID="cross_document.semantic_registry_v2_lattice.stdlib"
 VERIFIER_CAPABILITY_ID="cross_document.semantic_registry_v2_lattice.verify.stdlib"
 ROOT=Path(__file__).resolve().parents[2]
@@ -73,13 +72,13 @@ def _contract(goal:str)->dict[str,Any]:
 
 
 def _material(problem:Mapping[str,Any])->tuple[dict[str,Any],dict[str,Any]]:
-    result=producer.evaluate(problem,relation_verifier=relation_registry.verify)
+    result=producer.evaluate(problem)
     if result.get("status")=="FAIL_CLOSED":
         raise ValueError(
             "SEMANTIC_EDGE_LATTICE_PRODUCER_FAIL_CLOSED:"
             +str(result.get("reason") or "UNKNOWN")
         )
-    checked=verifier.verify(problem,result,relation_verifier=relation_registry.verify)
+    checked=verifier.verify(problem,result)
     if checked.get("verified") is not True:
         raise ValueError(
             "PREFLIGHT_INDEPENDENT_SEMANTIC_EDGE_LATTICE_RECOMPUTATION_FAILED:"
@@ -183,10 +182,10 @@ def run(request:Mapping[str,Any],*,repo_root=None)->dict[str,Any]:
         if sha256(before).hexdigest()!=pf["input_sha256"]:
             raise RuntimeError("CASE_DRIFT_BEFORE_EXECUTION")
         problem=json.loads(before.decode("utf-8"))
-        result=producer.evaluate(problem,relation_verifier=relation_registry.verify)
+        result=producer.evaluate(problem)
         if result.get("pass") is not True:
             raise RuntimeError("SEMANTIC_EDGE_LATTICE_NO_LONGER_PROVES_COMMON_VALUE")
-        checked=verifier.verify(problem,result,relation_verifier=relation_registry.verify)
+        checked=verifier.verify(problem,result)
         if checked.get("verified") is not True:
             raise RuntimeError(
                 "INDEPENDENT_SEMANTIC_EDGE_LATTICE_VERIFICATION_FAILED:"
@@ -198,7 +197,7 @@ def run(request:Mapping[str,Any],*,repo_root=None)->dict[str,Any]:
         op.parent.mkdir(parents=True,exist_ok=True)
         op.write_text(json.dumps(result,indent=2,sort_keys=True)+"\n",encoding="utf-8")
         reread=json.loads(op.read_text(encoding="utf-8"))
-        check2=verifier.verify(problem,reread,relation_verifier=relation_registry.verify)
+        check2=verifier.verify(problem,reread)
         if check2.get("verified") is not True:
             raise RuntimeError("OUTPUT_READBACK_VERIFICATION_FAILED")
 
