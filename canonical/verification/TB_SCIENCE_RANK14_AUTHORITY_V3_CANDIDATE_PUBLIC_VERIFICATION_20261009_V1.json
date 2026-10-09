@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK14_AUTHORITY_V3_CANDIDATE_PUBLIC_VERIFICATION_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__RANK14_V3_CANDIDATE__V18_LEDGER__V11_CLOSURE__PROMPT_SUMMARY_REPAIR__ZERO_EXPOSURE",
+  "candidate": {
+    "path": "canonical/governance/TB_SCIENCE_RANK14_ONE_SLOT_EXECUTION_AUTHORITY_CANDIDATE_20261009_V3.json",
+    "git_blob_sha": "c740f16395328edad175c234bb7b52b011a2b89f"
+  },
+  "intent": {
+    "path": "canonical/action_intents/ACTION_INTENT_TB_SCIENCE_RANK14_POST_PROMPT_SUMMARY_REAUTHORIZE_20261009_V1.json",
+    "git_blob_sha": "70dc5962595a464e4df0b1cfb8f6c49fc160470d"
+  },
+  "current_ledger_v18_git_blob_sha": "566a3756392ee2d4cc41947b66617acbc6f6ce92",
+  "v11_closure_git_blob_sha": "1172b57ac436d64027d06fb4897878ae274febb1",
+  "v11_closure_verification_git_blob_sha": "d1b3bc55c2ead9137a2368337eb58d96e9b44a17",
+  "planner_manifest_summary_verification_git_blob_sha": "721c78aabac58565afa37d734705d652073d99ae",
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify-tbscience-r14-authority-v3-summary-20261009",
+    "head_sha": "3fb55668738d07ac4e2c4f084f2bb6c9f764f026",
+    "workflow_run_id": 37884425748,
+    "workflow_job_id": 113671109544,
+    "artifact_id": 11595966348,
+    "artifact_zip_sha256": "9adc653c48e0c0252ad9e718bc643918011aa45df3bda23ac38e7b51c8beea27",
+    "conclusion": "success",
+    "errors": []
+  },
+  "verified_state": {
+    "candidate_execution_authority": false,
+    "candidate_task_read_authority": false,
+    "slot_unconsumed": true,
+    "v2_task_started": false,
+    "v2_benchmark_trials_consumed": 0,
+    "v11_file_count": 15,
+    "v11_missing_paths": 0,
+    "v11_mismatched_paths": 0,
+    "v11_unresolved_dynamic_imports": 0,
+    "prompt_repair_87_of_87_preserved": true,
+    "prompt_repair_planner_authority": false
+  },
+  "benchmark_task_exposure": 0,
+  "benchmark_trials_executed": 0,
+  "acceptance_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
