@@ -1,0 +1,390 @@
+name: r4-descendant-mission-binding-repair
+
+on:
+  push:
+    branches:
+      - r4-mission-binding-descendant-repair-20261009
+    paths:
+      - .github/workflows/r4-descendant-mission-binding-repair.yml
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: r4-mission-binding-descendant-repair-20261009
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Patch descendant bindings and R4 validator
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib, json
+
+          ROOT = Path(".")
+          OLD_MISSION = "0fb2d4e5f369ef937946d7ad8815764b439c1d11"
+          NEW_MISSION = "52b98f8019938fa7d8164e6a47e359ffb0faeb6a"
+          OLD_SCHED_PATH = "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V55.json"
+          NEW_SCHED_PATH = "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V56.json"
+          OLD_SCHED_SHA = "a7c04b0ceb3b28deacfa078c11e70e7841445d78"
+
+          def blob_sha(path):
+              data = Path(path).read_bytes()
+              return hashlib.sha1(b"blob " + str(len(data)).encode() + b"\0" + data).hexdigest()
+
+          new_sched_sha = blob_sha(NEW_SCHED_PATH)
+
+          # Advance current R2 pointer without reformatting the large JSON.
+          p = Path("canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json")
+          s = p.read_text()
+          assert OLD_SCHED_PATH in s and OLD_SCHED_SHA in s
+          s = s.replace(OLD_SCHED_PATH, NEW_SCHED_PATH)
+          s = s.replace(OLD_SCHED_SHA, new_sched_sha)
+          s = s.replace(
+              "ACTIVE_CURRENT_R2_AUTHORITY__V57__",
+              "ACTIVE_CURRENT_R2_AUTHORITY__V58__R4_MISSION_BINDING_REPAIRED__",
+              1,
+          )
+          p.write_text(s)
+
+          # Extend R4 validator with both missed descendant checks.
+          p = Path("canonical/runtime/root_theorem_live_binding_v1.py")
+          s = p.read_text()
+          anchor = '''    sources = authority.get("authoritative_sources") or {}
+          live_ref = sources.get("coverage_completeness_root_theorem_r1_r4") or {}
+          '''
+          insert = '''    sources = authority.get("authoritative_sources") or {}
+          mission_ref = sources.get("current_mission_objective") or {}
+          _fail(
+              errors,
+              "LIVE_AUTHORITY_CURRENT_MISSION_SOURCE_MISSING",
+              mission_ref.get("path") == "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
+          )
+          _fail(
+              errors,
+              "LIVE_AUTHORITY_CURRENT_MISSION_SOURCE_BLOB_STALE",
+              mission_ref.get("git_blob_sha") == mission_blob_sha,
+          )
+
+          live_ref = sources.get("coverage_completeness_root_theorem_r1_r4") or {}
+          '''
+          assert anchor in s
+          s = s.replace(anchor, insert, 1)
+
+          old_validate_repo = '''def validate_repo(root: Path) -> dict[str, Any]:
+              mission_path = root / "canonical/governance/CURRENT_MISSION_OBJECTIVE.json"
+              theorem_path = root / "canonical/governance/COVERAGE_COMPLETENESS_ROOT_THEOREM_V1.json"
+              binding_path = root / "canonical/governance/COVERAGE_COMPLETENESS_ROOT_THEOREM_LIVE_BINDING_V1.json"
+              authority_path = root / "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json"
+
+              mission_bytes = mission_path.read_bytes()
+              theorem_bytes = theorem_path.read_bytes()
+              binding_bytes = binding_path.read_bytes()
+
+              return validate_documents(
+                  mission=load_json(mission_path),
+                  mission_blob_sha=git_blob_sha(mission_bytes),
+                  root_theorem=load_json(theorem_path),
+                  root_theorem_blob_sha=git_blob_sha(theorem_bytes),
+                  binding=load_json(binding_path),
+                  binding_blob_sha=git_blob_sha(binding_bytes),
+                  authority=load_json(authority_path),
+              )
+          '''
+          new_validate_repo = '''def validate_r2_scheduler_documents(
+              *,
+              mission_blob_sha: str,
+              r2_pointer: Mapping[str, Any],
+              scheduler_path: str,
+              scheduler: Mapping[str, Any],
+              scheduler_blob_sha: str,
+              authority: Mapping[str, Any],
+          ) -> dict[str, Any]:
+              errors: list[str] = []
+              pointer_ref = r2_pointer.get("scheduler_cut") or {}
+              _fail(
+                  errors,
+                  "R2_POINTER_SCHEDULER_PATH_DRIFT",
+                  pointer_ref.get("path") == scheduler_path,
+              )
+              _fail(
+                  errors,
+                  "R2_POINTER_SCHEDULER_BLOB_STALE",
+                  pointer_ref.get("git_blob_sha") == scheduler_blob_sha,
+              )
+              _fail(
+                  errors,
+                  "R2_SCHEDULER_MISSION_BLOB_STALE",
+                  (scheduler.get("mission_objective") or {}).get("git_blob_sha")
+                  == mission_blob_sha,
+              )
+
+              sources = authority.get("authoritative_sources") or {}
+              current_r2 = sources.get("current_r2_decision_intelligence") or {}
+              authority_ref = current_r2.get("scheduler_cut") or {}
+              _fail(
+                  errors,
+                  "TERMINAL_AUTHORITY_R2_SCHEDULER_PATH_DRIFT",
+                  authority_ref.get("path") == scheduler_path,
+              )
+              _fail(
+                  errors,
+                  "TERMINAL_AUTHORITY_R2_SCHEDULER_BLOB_STALE",
+                  authority_ref.get("git_blob_sha") == scheduler_blob_sha,
+              )
+
+              precedence = authority.get("r2_scheduler_precedence") or {}
+              _fail(
+                  errors,
+                  "TERMINAL_R2_PRECEDENCE_SCHEDULER_PATH_DRIFT",
+                  precedence.get("current_scheduler_path") == scheduler_path,
+              )
+              _fail(
+                  errors,
+                  "TERMINAL_R2_PRECEDENCE_SCHEDULER_BLOB_STALE",
+                  precedence.get("current_scheduler_git_blob_sha") == scheduler_blob_sha,
+              )
+              return {"pass": not errors, "errors": errors}
+
+
+          def validate_repo(root: Path) -> dict[str, Any]:
+              mission_path = root / "canonical/governance/CURRENT_MISSION_OBJECTIVE.json"
+              theorem_path = root / "canonical/governance/COVERAGE_COMPLETENESS_ROOT_THEOREM_V1.json"
+              binding_path = root / "canonical/governance/COVERAGE_COMPLETENESS_ROOT_THEOREM_LIVE_BINDING_V1.json"
+              authority_path = root / "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json"
+              r2_pointer_path = root / "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json"
+
+              mission_bytes = mission_path.read_bytes()
+              theorem_bytes = theorem_path.read_bytes()
+              binding_bytes = binding_path.read_bytes()
+              authority = load_json(authority_path)
+              r2_pointer = load_json(r2_pointer_path)
+
+              base = validate_documents(
+                  mission=load_json(mission_path),
+                  mission_blob_sha=git_blob_sha(mission_bytes),
+                  root_theorem=load_json(theorem_path),
+                  root_theorem_blob_sha=git_blob_sha(theorem_bytes),
+                  binding=load_json(binding_path),
+                  binding_blob_sha=git_blob_sha(binding_bytes),
+                  authority=authority,
+              )
+
+              scheduler_rel = (r2_pointer.get("scheduler_cut") or {}).get("path")
+              descendant_errors: list[str] = []
+              if (
+                  not isinstance(scheduler_rel, str)
+                  or not scheduler_rel.startswith("canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_")
+                  or ".." in Path(scheduler_rel).parts
+              ):
+                  descendant_errors.append("R2_POINTER_SCHEDULER_PATH_INVALID")
+              else:
+                  scheduler_path = root / scheduler_rel
+                  if not scheduler_path.is_file():
+                      descendant_errors.append("R2_POINTER_SCHEDULER_MISSING")
+                  else:
+                      descendant = validate_r2_scheduler_documents(
+                          mission_blob_sha=git_blob_sha(mission_bytes),
+                          r2_pointer=r2_pointer,
+                          scheduler_path=scheduler_rel,
+                          scheduler=load_json(scheduler_path),
+                          scheduler_blob_sha=git_blob_sha(scheduler_path.read_bytes()),
+                          authority=authority,
+                      )
+                      descendant_errors.extend(descendant["errors"])
+
+              errors = list(base["errors"]) + descendant_errors
+              return {
+                  "pass": not errors,
+                  "status": "PASS__R4_LIVE_BINDING_CURRENT" if not errors else "FAIL_CLOSED__R4_LIVE_BINDING_DRIFT",
+                  "errors": errors,
+                  "terminal_credit_delta": 0,
+                  "root_closed_claimed": False,
+              }
+          '''
+          assert old_validate_repo in s
+          s = s.replace(old_validate_repo, new_validate_repo, 1)
+          p.write_text(s)
+
+          # Extend focused tests.
+          p = Path("canonical/tests/test_root_theorem_live_binding_v1.py")
+          s = p.read_text()
+          s = s.replace(
+              "    git_blob_sha,\n    validate_documents,\n    validate_repo,\n)",
+              "    git_blob_sha,\n    validate_documents,\n    validate_r2_scheduler_documents,\n    validate_repo,\n)",
+              1,
+          )
+          old_sources = '''        "authoritative_sources": {
+              "coverage_completeness_root_theorem_r1_r4": {
+                  "path": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_THEOREM_LIVE_BINDING_V1.json",
+                  "git_blob_sha": "binding-sha",
+              }
+          },
+          '''
+          new_sources = '''        "authoritative_sources": {
+              "current_mission_objective": {
+                  "path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
+                  "git_blob_sha": "mission-sha",
+              },
+              "coverage_completeness_root_theorem_r1_r4": {
+                  "path": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_THEOREM_LIVE_BINDING_V1.json",
+                  "git_blob_sha": "binding-sha",
+              }
+          },
+          '''
+          assert old_sources in s
+          s = s.replace(old_sources, new_sources, 1)
+          append = '''
+
+          def test_stale_authoritative_source_mission_blob_is_r4_failure():
+              mission, theorem, binding, authority = docs()
+              authority["authoritative_sources"]["current_mission_objective"]["git_blob_sha"] = "stale"
+              out = check(mission, theorem, binding, authority)
+              assert "LIVE_AUTHORITY_CURRENT_MISSION_SOURCE_BLOB_STALE" in out["errors"]
+
+
+          def test_stale_r2_scheduler_mission_blob_is_r4_failure():
+              mission, theorem, binding, authority = docs()
+              scheduler_path = "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_TEST.json"
+              scheduler = {"mission_objective": {"git_blob_sha": "stale"}}
+              r2_pointer = {
+                  "scheduler_cut": {
+                      "path": scheduler_path,
+                      "git_blob_sha": "scheduler-sha",
+                  }
+              }
+              authority["authoritative_sources"]["current_r2_decision_intelligence"] = {
+                  "scheduler_cut": {
+                      "path": scheduler_path,
+                      "git_blob_sha": "scheduler-sha",
+                  }
+              }
+              authority["r2_scheduler_precedence"] = {
+                  "current_scheduler_path": scheduler_path,
+                  "current_scheduler_git_blob_sha": "scheduler-sha",
+              }
+              out = validate_r2_scheduler_documents(
+                  mission_blob_sha="mission-sha",
+                  r2_pointer=r2_pointer,
+                  scheduler_path=scheduler_path,
+                  scheduler=scheduler,
+                  scheduler_blob_sha="scheduler-sha",
+                  authority=authority,
+              )
+              assert out["pass"] is False
+              assert "R2_SCHEDULER_MISSION_BLOB_STALE" in out["errors"]
+          '''
+          if "test_stale_r2_scheduler_mission_blob_is_r4_failure" not in s:
+              s += append
+          p.write_text(s)
+
+          # Refresh live binding validator/test hashes.
+          binding_path = Path("canonical/governance/COVERAGE_COMPLETENESS_ROOT_THEOREM_LIVE_BINDING_V1.json")
+          binding = json.loads(binding_path.read_text())
+          binding["live_binding_validator"]["git_blob_sha"] = blob_sha(
+              "canonical/runtime/root_theorem_live_binding_v1.py"
+          )
+          binding["live_binding_validator"]["tests_git_blob_sha"] = blob_sha(
+              "canonical/tests/test_root_theorem_live_binding_v1.py"
+          )
+          binding_path.write_text(json.dumps(binding, indent=2) + "\n")
+          new_binding_sha = blob_sha(binding_path)
+
+          # Reconcile the huge terminal pointer without wholesale semantic reformatting.
+          p = Path("canonical/governance/CURRENT_TERMINAL_AUTHORITY.json")
+          s = p.read_text()
+          assert s.count(OLD_MISSION) == 1
+          s = s.replace(OLD_MISSION, NEW_MISSION)
+          s = s.replace(OLD_SCHED_PATH, NEW_SCHED_PATH)
+          s = s.replace(OLD_SCHED_SHA, new_sched_sha)
+          s = s.replace(
+              "65deb3d2e80237f15854dce19d212df9ba262db9",
+              new_binding_sha,
+          )
+          s = s.replace('"pointer_revision": 100', '"pointer_revision": 101', 1)
+          p.write_text(s)
+
+          # Verification receipt.
+          verification = {
+              "schema": "PROJECT_BRAIN_R4_DESCENDANT_MISSION_BINDING_REPAIR_VERIFY_20261009_V1",
+              "date": "2026-10-09",
+              "status": "CANDIDATE__TESTS_PENDING",
+              "mission_blob_sha": NEW_MISSION,
+              "r2_scheduler": {
+                  "path": NEW_SCHED_PATH,
+                  "git_blob_sha": new_sched_sha,
+              },
+              "current_r2_pointer_blob_sha": blob_sha(
+                  "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json"
+              ),
+              "root_binding_blob_sha": new_binding_sha,
+              "terminal_authority_blob_sha": blob_sha(
+                  "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json"
+              ),
+              "validator_blob_sha": blob_sha(
+                  "canonical/runtime/root_theorem_live_binding_v1.py"
+              ),
+              "tests_blob_sha": blob_sha(
+                  "canonical/tests/test_root_theorem_live_binding_v1.py"
+              ),
+              "repairs": [
+                  "STALE_TERMINAL_AUTHORITATIVE_SOURCE_MISSION_BLOB",
+                  "STALE_IMMUTABLE_R2_SCHEDULER_MISSION_BLOB",
+                  "STALE_TERMINAL_R2_SCHEDULER_BINDINGS",
+                  "R4_VALIDATOR_DESCENDANT_BINDING_COVERAGE_GAP",
+              ],
+              "hard_nonclaims": [
+                  "NO_R1_R2_R3_R4_GLOBAL_CLOSURE",
+                  "NO_TERMINAL_ACCEPTANCE_CAPABILITY_OR_OWNERSHIP_CREDIT",
+                  "NO_SEMANTIC_OR_POLICY_COVERAGE_CHANGE",
+              ],
+              "accounting": {
+                  "incremental_spend_usd": 0,
+                  "terminal_credit_delta": 0,
+              },
+          }
+          vp = Path("canonical/verification/R4_DESCENDANT_MISSION_BINDING_REPAIR_VERIFY_20261009_V1.json")
+          vp.write_text(json.dumps(verification, indent=2) + "\n")
+          PY
+
+      - name: Run focused R4 binding tests
+        run: |
+          python -m pytest -q canonical/tests/test_root_theorem_live_binding_v1.py
+          python - <<'PY'
+          from pathlib import Path
+          from canonical.runtime.root_theorem_live_binding_v1 import validate_repo
+          out = validate_repo(Path("."))
+          assert out["pass"] is True, out
+          print(out)
+          PY
+
+      - name: Seal verification receipt
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path("canonical/verification/R4_DESCENDANT_MISSION_BINDING_REPAIR_VERIFY_20261009_V1.json")
+          d = json.loads(p.read_text())
+          d["status"] = "PASS__FOCUSED_R4_DESCENDANT_BINDING_REPLAY__ZERO_CREDIT"
+          d["focused_tests"] = "PASS"
+          d["live_repo_validation"] = "PASS"
+          p.write_text(json.dumps(d, indent=2) + "\n")
+          PY
+
+      - name: Commit repair and remove one-shot workflow
+        run: |
+          git config user.name "project-brain-r4-repair"
+          git config user.email "project-brain-r4-repair@users.noreply.github.com"
+          git rm .github/workflows/r4-descendant-mission-binding-repair.yml
+          git add canonical/
+          git commit -m "R4: repair descendant mission binding chain"
+          git push origin HEAD:r4-mission-binding-descendant-repair-20261009
