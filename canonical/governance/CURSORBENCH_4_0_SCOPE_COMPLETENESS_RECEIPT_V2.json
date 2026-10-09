@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_CURSORBENCH_4_0_SCOPE_COMPLETENESS_RECEIPT_V2",
+  "date": "2026-10-09",
+  "status": "SCOPE_COMPLETE__TARGET_IDENTITY_SEPARATED_FROM_TRACE_SUPERDOMAIN_WITNESS__ADEQUACY_OPEN__ZERO_CREDIT",
+  "supersedes": {
+    "path": "canonical/governance/CURSORBENCH_4_0_SCOPE_COMPLETENESS_RECEIPT_V1.json",
+    "git_blob_sha": "7401589da3b30954104145dc4959e534ab8cd641",
+    "repair": "V1_USED_THE_WITNESS_SUPERDOMAIN_AS_SCOPE_ID__V2_BINDS_THE_ACTUAL_TARGET_SCOPE_ID_SEPARATELY"
+  },
+  "benchmark_id": "CURSORBENCH_4_0",
+  "predicate_id": "CODING_CURSORBENCH_GE_57_8",
+  "scope_id": "scope://cursorbench-4.0/actual-score-relevant-scope",
+  "verified": true,
+  "independent": true,
+  "source_path": "canonical/verification/CURSORBENCH_4_0_OBSERVABLE_TRACE_SCOPE_LIFT_INDEPENDENT_VERIFICATION_20261009_V1.json",
+  "source_sha": "4da4b822e555f99f6063685ea2c0ca8dcef0a553",
+  "basis": "UNIVERSAL_FORMAL_SCOPE_PROOF",
+  "all_admissible_target_inputs_proved": true,
+  "formal_completeness": true,
+  "scope_complete": true,
+  "scope_witness": {
+    "relation_receipt_path": "canonical/governance/CURSORBENCH_4_0_TARGET_TO_TRACE_SCOPE_RELATION_RECEIPT_20261009_V1.json",
+    "stronger_scope_id": "scope://brain/observable-trace-superdomain/v1",
+    "relation": "TARGET_SUBSET_OF_STRONGER_SCOPE"
+  },
+  "target_scope_equals_witness_superdomain": false,
+  "public_taxonomy_completeness_required": false,
+  "hidden_task_enumeration_required": false,
+  "positive_adequacy_cover_closed": false,
+  "dominance_closed": false,
+  "acceptance_state": "OPEN",
+  "cover_rule": [
+    "AN_EXACT_COVER_MUST_BIND_TO_scope://cursorbench-4.0/actual-score-relevant-scope",
+    "A_STRONGER_COVER_MUST_BIND_ITS_OWN_SCOPE_ID_AND_AN_INDEPENDENT_RELATION_RECEIPT_PROVING_THE_CURSORBENCH_TARGET_SCOPE_IS_A_SUBSET",
+    "THE_OBSERVABLE_TRACE_SUPERDOMAIN_IS_A_VALID_STRONGER_SCOPE_WITNESS_BUT_IS_NOT_IDENTICAL_TO_THE_TARGET_SCOPE"
+  ],
+  "proof_chain": [
+    {
+      "path": "canonical/governance/OPUS55_OBSERVABLE_TRACE_SCOPE_SUPERSET_THEOREM_20261006_V1.json",
+      "git_blob_sha": "333bdc8306a19f005a600a47b415a4bd9cf9868c"
+    },
+    {
+      "path": "canonical/verification/OPUS55_OBSERVABLE_TRACE_SCOPE_SUPERSET_SPRITE_VERIFICATION_20261006_V1.json",
+      "git_blob_sha": "954ed383aa79fd8838249e58b0c848e338ea44de"
+    },
+    {
+      "path": "canonical/governance/CURSORBENCH_4_0_OBSERVABLE_TRACE_SCOPE_LIFT_20261009_V1.json",
+      "git_blob_sha": "a7bd8397f0c5f7c36acc18fc20d56be76db92680"
+    },
+    {
+      "path": "canonical/verification/CURSORBENCH_4_0_OBSERVABLE_TRACE_SCOPE_LIFT_INDEPENDENT_VERIFICATION_20261009_V1.json",
+      "git_blob_sha": "4da4b822e555f99f6063685ea2c0ca8dcef0a553"
+    }
+  ],
+  "rule": "THIS_RECEIPT_DISCHARGES_TARGET_SCOPE_COMPLETENESS_ONLY__THE_TRACE_SUPERDOMAIN_IS_THE_FORMAL_SCOPE_WITNESS_NOT_THE_EXACT_TARGET_DOMAIN__POLICY_ADEQUACY_EVALUATOR_RELATION_SCORE_AND_ACCEPTANCE_REMAIN_OPEN",
+  "promotion_authority": false,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
