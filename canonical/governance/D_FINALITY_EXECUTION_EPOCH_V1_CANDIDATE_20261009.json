@@ -1,41 +1,62 @@
 {
   "schema": "PROJECT_BRAIN_D_FINALITY_EXECUTION_EPOCH_V1_CANDIDATE",
   "date": "2026-10-09",
-  "status": "CANDIDATE_IMPLEMENTED__CONTENT_ADDRESSED_EXECUTION_EPOCH_PRIMITIVE__HOSTILE_SUITE_BOUND__LIVE_FRONT_DOOR_INTEGRATION_NOT_YET_AUTHORIZED__ZERO_CREDIT",
+  "status": "CANDIDATE_IMPLEMENTED__CURRENT_SUCCESSOR_EXACT_BYTE_ENFORCEMENT_PRIMITIVES_INDEPENDENTLY_REPLAYED__MEMBER_D_CERTIFICATES_STILL_ZERO__ZERO_CREDIT",
   "objective": "Make D-final ownership authority depend on an immutable load-bearing execution closure and monotonically non-widening descendant authority, without invalidating certificates for unrelated repository drift.",
   "branch": {
-    "name": "d-finality-epoch-v1-20261009",
-    "base_main_commit": "5ad84c172003c5d55247e59f733b07859acc8054"
+    "name": "d-finality-current-v2-20261009",
+    "base_main_commit": "9f932cf27be05f86b8ffd0342b0d268363182ea7",
+    "current_successor_verification": "canonical/verification/D_FINALITY_CURRENT_V2_SPRITE_VERIFICATION_20261009_V1.json"
   },
   "exact_blobs": {
-    "runtime": {
+    "d_execution_epoch": {
       "path": "canonical/runtime/d_finality_execution_epoch_v1.py",
-      "git_blob_sha": "2dc7e2e02830750df31ca9799f9c688952f62e1a"
+      "git_blob_sha": "60cbc536215571fbd7e41b5ce28239ce370120c3"
     },
-    "tests": {
-      "path": "canonical/tests/test_d_finality_execution_epoch_v1.py",
-      "git_blob_sha": "57108ea04ffc9034e31e166fd873eae0bd0d6d36"
+    "d_coverage_gate": {
+      "path": "canonical/runtime/d_finality_coverage_gate_v1.py",
+      "git_blob_sha": "3974b89b4d614c9a39c5c71eeb3b1774b21f8e91"
     },
-    "workflow": {
-      "path": ".github/workflows/verify-d-finality-execution-epoch-v1.yml",
-      "git_blob_sha": "c8dcde621ae14ef21c9e4dd46d5c37d47723f740"
+    "d_bound_material_compiler": {
+      "path": "canonical/runtime/d_finality_bound_material_compiler_v1.py",
+      "git_blob_sha": "e29722c0ad2869c25ffb148b9fe79603314d5f54"
+    },
+    "d_fabric_guard": {
+      "path": "canonical/runtime/d_finality_fabric_guard_v1.py",
+      "git_blob_sha": "e3bf117a7e6499b5383a53603c0bb4b90ab4e427"
+    },
+    "live_invoker": {
+      "path": "canonical/runtime/live_capability_invoker_v1.py",
+      "git_blob_sha": "d48b0a0267e247c5b63326144047f431ba19d0dd"
+    },
+    "live_ownership": {
+      "path": "canonical/runtime/live_capability_ownership_v1.py",
+      "git_blob_sha": "eea3f38defa450c6f7d1f5837828a8018f5007c2"
+    },
+    "unified_fabric": {
+      "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
+      "git_blob_sha": "e61cd151101ba0ca12529f79f5d195c044f0d602"
+    },
+    "astra_runtime": {
+      "path": "canonical/runtime/astra_runtime.py",
+      "git_blob_sha": "aa63c156a394d6b221cf8e2b578b5380c05d135a"
     }
   },
   "implemented": [
     "D_FINAL_CERTIFICATE_SELF_DIGEST_BINDING",
     "SEMANTIC_POLICY_ROOT_BINDING_WITH_TARGETED_REVOCATION_SEPARATED_FROM_POLICY_HASH",
     "LOAD_BEARING_MATERIAL_CLOSURE_ROOT_OVER_EXACT_GIT_BLOBS",
-    "CLOSURE_RELATIVE_VALIDITY_SO_UNRELATED_REPOSITORY_MUTATION_DOES_NOT_INVALIDATE_CERTIFICATE",
-    "REGISTRY_AND_STATE_SNAPSHOT_ROOT_BINDINGS",
-    "DONOR_AUTHORITY_ZERO_REQUIRED",
-    "FRESH_REPLAY_PASS_REQUIRED",
-    "INDEPENDENT_REPLAY_PASS_REQUIRED",
-    "KNOWLEDGE_CAPABILITY_NONSMUGGLING_PASS_REQUIRED",
-    "UNDECLARED_DEPENDENCY_COUNT_ZERO_REQUIRED",
+    "CLOSURE_RELATIVE_VALIDITY",
     "PROCESS_LOCAL_IMMUTABLE_D_EXECUTION_EPOCH_CONTEXT",
-    "DESCENDANT_CAPABILITY_KNOWLEDGE_AND_EFFECT_AUTHORITY_MAY_ONLY_SHRINK",
-    "NEW_CAPABILITY_CREATED_DURING_EPOCH_HAS_ZERO_D_FINAL_AUTHORITY",
-    "POINT_OF_USE_MATERIAL_RECHECK_DETECTS_MID_EPOCH_BYTE_DRIFT"
+    "DESCENDANT_AUTHORITY_MAY_ONLY_SHRINK",
+    "SAME_EPOCH_NEW_CAPABILITY_HAS_ZERO_D_FINAL_AUTHORITY",
+    "POINT_OF_USE_MATERIAL_RECHECK",
+    "CANONICAL_FRONT_DOOR_DIRECT_ENGINE_IDENTITY_GUARD",
+    "IDENTITY_BYPASS_H100_AND_CERTIFIED_ROUTE_CARRIERS_DENIED_INSIDE_D_EPOCH",
+    "IMPLICIT_DIRECT_AND_COMPOSITION_LEARNING_SUPPRESSED_INSIDE_D_EPOCH",
+    "BACKGROUND_COMPOUNDING_SUPPRESSED_INSIDE_D_EPOCH",
+    "BOUND_REGISTRY_ADAPTER_AND_DYNAMIC_SIBLING_POINT_OF_USE_GUARDS",
+    "PYTHON_STDLIB_ORIGIN_HARDENING"
   ],
   "hostile_tests": [
     "VALID_ROOT_EPOCH_AND_CHILD_SCOPE_SHRINK",
@@ -63,22 +84,18 @@
     "DESIGNED_TO_COMPOSE_WITH_EXISTING_DONOR_DELETION_PROTOCOL_AND_EFFECT_BROKER"
   ],
   "next_required_before_live_ownership_authority": [
-    "INDEPENDENTLY_REPLAY_HOSTILE_SUITE_ON_EXACT_PR_HEAD",
-    "BUILD_D_FINALITY_CERTIFICATE_REGISTRY_FOR_CURRENT_OPERATIVE_PROVIDER_CLOSURE_CLASSES",
-    "PROVE_PROVIDER_LEVEL_CLOSURE_REUSE_ONLY_WHERE_EXECUTOR_SEMANTICS_AND_ROW_MATERIAL_CLOSURE_ARE_EXACTLY_BOUND",
-    "THREAD_D_EXECUTION_EPOCH_THROUGH_LIVE_CAPABILITY_INVOCATION_AND_COMPOSITION",
-    "SEPARATE_LIVE_ADMITTED_FROM_LIVE_D_FINAL_OWNED_IN_OWNERSHIP_ONTOLOGY",
-    "ATOMically_SWITCH_OWNERSHIP_AUTHORITATIVE_FRONT_DOOR_TO_REQUIRE_ACTIVE_CURRENT_D_EPOCH",
-    "RUN_CURRENT_BYTE_DONOR_DELETION_CLEANROOM_AND_INDEPENDENT_REPLAY",
-    "ONLY_THEN_SET_D_CREDIT_OR_OWNERSHIP_CREDIT"
+    "COMPILE_AND_VERIFY_MEMBER_MATERIAL_CLOSURES",
+    "RUN_FRESH_MEMBER_REPLAYS_UNDER_DONOR_CUT",
+    "ISSUE_EXACT_MEMBER_D_CERTIFICATES",
+    "CLOSE_WORLD_IO_WITH_TYPED_BROKER_NONSMUGGLING_TRANSCRIPT_REPLAY",
+    "RUN_CURRENT_BYTE_GLOBAL_DONOR_DELETION_CLEANROOM",
+    "REQUIRE_ZERO_MISSING_D_CERTIFICATES_BEFORE_OWNERSHIP_AUTHORITATIVE_SWITCH"
   ],
   "hard_nonclaims": [
-    "NO_CLAIM_CURRENT_LIVE_FRONT_DOOR_ALREADY_ENFORCES_D_EPOCH",
-    "NO_CLAIM_CURRENT_84_LIVE_OWNERSHIP_IDENTITIES_ARE_D_FINAL_ON_CURRENT_BYTES",
-    "NO_CLAIM_POINT_OF_USE_REHASH_ALONE_REPLACES_PROCESS_OR_NAMESPACE_CONFINEMENT",
-    "NO_CLAIM_ALL_TRANSITIVE_NATIVE_OR_EXTERNAL_EFFECTS_ARE_CLOSED",
-    "NO_D_CREDIT",
-    "NO_OWNERSHIP_CREDIT",
+    "NO_MEMBER_D_CERTIFICATE_PROMOTED",
+    "NO_CLAIM_89_LIVE_ADMITTED_IDENTITIES_ARE_D_FINAL",
+    "NO_CURRENT_GLOBAL_DONOR_DELETION_CLEANROOM_PASS",
+    "NO_D_FINAL_OWNERSHIP_CREDIT",
     "NO_TERMINAL_CREDIT"
   ],
   "authority": {
@@ -91,5 +108,12 @@
     "incremental_spend_usd": 0,
     "ownership_credit_delta": 0,
     "terminal_credit_delta": 0
+  },
+  "independent_verification": {
+    "receipt": "canonical/verification/D_FINALITY_CURRENT_V2_SPRITE_VERIFICATION_20261009_V1.json",
+    "combined_tests": "PASS_27_OF_27",
+    "py_compile": "PASS",
+    "stdlib_shadow_attack": "PASS",
+    "mid_epoch_registry_drift_attack": "PASS"
   }
 }
