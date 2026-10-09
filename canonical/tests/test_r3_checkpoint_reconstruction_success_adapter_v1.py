@@ -114,7 +114,6 @@ def _request(work: Path, *, targets):
         "observation": observation,
         "replay_context": {
             "mode": "specialized",
-            "request": {"task_id": "checkpoint-reconstruct"},
         },
         "authority_requested": "CANDIDATE_ONLY",
     }
