@@ -20,6 +20,7 @@ from canonical.runtime import gdpval_objective_artifact_criteria_v1 as v1
 
 SCHEMA = "PROJECT_BRAIN_GDPVAL_OBJECTIVE_ARTIFACT_CRITERIA_V2"
 V1_SCHEMA = v1.SCHEMA
+_NUMBER_WORDS = {"one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6, "seven": 7, "eight": 8, "nine": 9, "ten": 10}
 
 
 def _norm(value: Any) -> str:
@@ -221,6 +222,12 @@ def compile_criterion(criterion: str, *, criterion_id: str | None = None) -> dic
         return _single_ext(base, ".pptx", subset=True)
     if _matches(text, _PPTX_EXISTS):
         return _at_least_ext(base, ".pptx")
+
+    m = re.fullmatch(r"Provides an Excel \\.xlsx workbook with exactly (\\d+|one|two|three|four|five|six|seven|eight|nine|ten) worksheets? \\(tabs\\)[.]?", text, re.I)
+    if m:
+        token = m.group(1).lower()
+        count = int(token) if token.isdigit() else _NUMBER_WORDS[token]
+        return _compiled(base, kind="SINGLE_XLSX_SHEET_COUNT", args={"sheet_count": count})
 
     if _matches(text, _MP4_SINGLE):
         return _single_ext(base, ".mp4")
