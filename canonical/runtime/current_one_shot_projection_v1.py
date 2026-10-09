@@ -235,7 +235,11 @@ def _default_runtime_projection(
 
     if default_runtime.get("terminal_authority") is not False:
         errors.append("DEFAULT_RUNTIME_TERMINAL_AUTHORITY_INVALID")
-    if default_runtime.get("terminal_credit_delta") != 0:
+    default_accounting = default_runtime.get("accounting")
+    default_accounting = (
+        default_accounting if isinstance(default_accounting, dict) else {}
+    )
+    if default_accounting.get("terminal_credit_delta") != 0:
         errors.append("DEFAULT_RUNTIME_TERMINAL_CREDIT_INVALID")
 
     effective_count = (
