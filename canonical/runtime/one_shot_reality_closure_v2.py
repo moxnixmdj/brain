@@ -403,6 +403,7 @@ def run(
     failure_repair_provider=None,
     capability_synthesis_provider: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
     reality_acquisition_provider: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
+    externality_certificate_provider: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
     max_repair_rounds: int = 8,
     v1_max_rounds: int = 64,
     v1_max_actions_per_round: int = 32,
@@ -427,6 +428,7 @@ def run(
                 verification_frontier_acquisition_provider_id
             ),
             "failure_repair_provider": failure_repair_provider,
+            "externality_certificate_provider": externality_certificate_provider,
             "max_rounds": v1_max_rounds,
             "max_actions_per_round": v1_max_actions_per_round,
         }
