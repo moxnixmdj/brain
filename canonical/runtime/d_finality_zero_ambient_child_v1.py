@@ -86,6 +86,37 @@ def main() -> int:
                 raise ChildError("MATERIAL_COPY_BLOB_MISMATCH:"+str(rel))
             copied.append({"path":str(rel),"git_blob_sha":expected})
 
+        dynamic=manifest.get("dynamic_inputs") or []
+        if not isinstance(dynamic,list):
+            raise ChildError("DYNAMIC_INPUTS_INVALID")
+        material_paths={row["path"] for row in copied}
+        dynamic_receipts=[]
+        for row in dynamic:
+            if not isinstance(row,Mapping):
+                raise ChildError("DYNAMIC_INPUT_ROW_INVALID")
+            rel=_safe_rel(row.get("path"))
+            rel_text=str(rel)
+            if rel_text in material_paths:
+                raise ChildError("DYNAMIC_INPUT_COLLIDES_WITH_MATERIAL:"+rel_text)
+            expected=str(row.get("sha256") or "").lower()
+            src=input_root/"dynamic"/pathlib.Path(*rel.parts)
+            dst=work_root/pathlib.Path(*rel.parts)
+            if not src.is_file():
+                raise ChildError("DYNAMIC_INPUT_SOURCE_MISSING:"+rel_text)
+            raw=src.read_bytes()
+            actual=hashlib.sha256(raw).hexdigest()
+            if actual!=expected:
+                raise ChildError("DYNAMIC_INPUT_HASH_MISMATCH:"+rel_text)
+            dst.parent.mkdir(parents=True,exist_ok=True)
+            dst.write_bytes(raw)
+            if hashlib.sha256(dst.read_bytes()).hexdigest()!=expected:
+                raise ChildError("DYNAMIC_INPUT_COPY_HASH_MISMATCH:"+rel_text)
+            dynamic_receipts.append({
+                "path":rel_text,
+                "sha256":expected,
+                "bytes":len(raw),
+            })
+
         # Certified code wins import precedence. Python is launched with -S, so
         # ambient third-party site-packages are not admitted by default.
         sys.path.insert(0,str(work_root))
@@ -113,6 +144,8 @@ def main() -> int:
           "execution_epoch_sha256":epoch.epoch_sha256,
           "material_closure_root":epoch.material_closure_root,
           "copied_material_count":len(copied),
+          "dynamic_input_count":len(dynamic_receipts),
+          "dynamic_inputs":dynamic_receipts,
           "result":dict(result),
         }
         _emit(receipt)
