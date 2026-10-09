@@ -97,7 +97,11 @@ class OneShotHistoricalEvidenceCertificateTests(unittest.TestCase):
         self.assertFalse(out["irreducible_external_information_proved"])
         self.assertEqual(
             out["status"],
-            "OPEN__NEW_INFORMATION_OR_EXPERIENCE_REQUIRED__IRREDUCIBILITY_NOT_PROVED",
+            "OPEN__INTERNAL_UNSOLVED__PENDING_ACQUISITION_OR_EXPERIMENT",
+        )
+        self.assertTrue(out["residual"]["internal_unsolved"])
+        self.assertTrue(
+            out["residual"]["pending_acquisition_or_experiment_required"]
         )
         self.assertTrue(out["residual"]["current_evidence_irreducibility_proved"])
         self.assertTrue(out["bounded_historical_evidence_certificate"]["pass"])
