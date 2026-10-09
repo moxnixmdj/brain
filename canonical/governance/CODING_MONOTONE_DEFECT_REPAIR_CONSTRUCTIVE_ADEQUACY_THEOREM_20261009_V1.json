@@ -1,0 +1,102 @@
+{
+  "schema": "PROJECT_BRAIN_CODING_MONOTONE_DEFECT_REPAIR_CONSTRUCTIVE_ADEQUACY_THEOREM_V1",
+  "date": "2026-10-09",
+  "status": "FORMAL_ALL_MEMBERS_CONDITIONAL_CELL__FINITE_DEFECT_RANK_CONSTRUCTIVE_LIVENESS__TARGET_MEMBERSHIP_SEPARATE__ZERO_CREDIT",
+  "behavior_id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+  "family": "ADVANCED_AGENTIC_CODING",
+  "policy_id": "BRAIN_MONOTONE_DEFECT_REPAIR_SOLVER_V1",
+  "exact_policy": {
+    "path": "canonical/runtime/coding_monotone_defect_repair_solver_v1.py",
+    "git_blob_sha": "1cda1187f159e6cacd100aaf2966f01ebf82fb27"
+  },
+  "condition": {
+    "op": "AND",
+    "args": [
+      {
+        "op": "ATOM",
+        "id": "CODING_REPAIR_DEFECT_UNIVERSE_FINITE_COMPLETE_V1"
+      },
+      {
+        "op": "ATOM",
+        "id": "CODING_REPAIR_VERIFIER_TOTAL_EXACT_DEFECT_SET_V1"
+      },
+      {
+        "op": "ATOM",
+        "id": "CODING_REPAIR_OPERATOR_TOTAL_STRICT_MONOTONE_V1"
+      },
+      {
+        "op": "ATOM",
+        "id": "CODING_REPAIR_INITIAL_CANDIDATE_AVAILABLE_V1"
+      },
+      {
+        "op": "ATOM",
+        "id": "CODING_REPAIR_BUDGET_SUFFICIENT_FOR_DEFECT_RANK_V1"
+      },
+      {
+        "op": "ATOM",
+        "id": "CODING_REPAIR_PRETERMINAL_INFORMATION_ADMISSIBLE_V1"
+      }
+    ]
+  },
+  "atom_semantics": {
+    "CODING_REPAIR_DEFECT_UNIVERSE_FINITE_COMPLETE_V1": "A_FINITE_DECLARED_DEFECT_UNIVERSE_CONTAINS_EVERY_MATERIAL_CORRECTNESS_DEFECT_THAT_CAN_BE_PRESENT_IN_ANY_CANDIDATE_REACHED_BY_THE_POLICY",
+    "CODING_REPAIR_VERIFIER_TOTAL_EXACT_DEFECT_SET_V1": "FOR_EVERY_REACHED_CANDIDATE_THE_PRETERMINAL_VERIFIER_TERMINATES_AND_RETURNS_EXACTLY_ITS_TRUE_MATERIAL_DEFECT_SET__PASS_IFF_THAT_SET_IS_EMPTY",
+    "CODING_REPAIR_OPERATOR_TOTAL_STRICT_MONOTONE_V1": "FOR_EVERY_REACHED_FAILED_CANDIDATE_AND_SELECTED_REPORTED_DEFECT__REPAIR_TERMINATES_AND_PRODUCES_A_CANDIDATE_WHOSE_TRUE_DEFECT_SET_IS_A_STRICT_SUBSET_OF_THE_PREVIOUS_TRUE_DEFECT_SET",
+    "CODING_REPAIR_INITIAL_CANDIDATE_AVAILABLE_V1": "A_WELL_FORMED_INITIAL_CANDIDATE_IS_AVAILABLE_BEFORE_THE_REPAIR_LOOP",
+    "CODING_REPAIR_BUDGET_SUFFICIENT_FOR_DEFECT_RANK_V1": "AUTHORIZED_RESOURCES_ALLOW_AT_LEAST_K_REPAIRS_AND_K_PLUS_ONE_VERIFIER_CALLS_WHERE_K_IS_THE_DECLARED_DEFECT_UNIVERSE_SIZE",
+    "CODING_REPAIR_PRETERMINAL_INFORMATION_ADMISSIBLE_V1": "THE_VERIFIER_AND_REPAIR_OPERATORS_USE_ONLY_ALLOWED_PRETERMINAL_INFORMATION_AND_NEITHER_HIDDEN_VERIFIER_LOGIC_NOR_TASK_SPECIFIC_SOLUTION_INFORMATION"
+  },
+  "proof": {
+    "ranking_function": "R_C_EQUALS_CARDINALITY_OF_THE_TRUE_DEFECT_SET_OF_C",
+    "lower_bound": "R_C_IS_A_NONNEGATIVE_INTEGER",
+    "initial_bound": "FINITE_COMPLETE_DEFECT_UNIVERSE_IMPLIES_R_INITIAL_LESS_THAN_OR_EQUAL_TO_K",
+    "strict_progress": "EACH_FAILED_REPAIR_STEP_PRODUCES_R_NEXT_STRICTLY_LESS_THAN_R_CURRENT",
+    "termination": "A_STRICTLY_DESCENDING_NONNEGATIVE_INTEGER_SEQUENCE_STARTING_AT_MOST_K_HAS_AT_MOST_K_DESCENTS",
+    "correctness": "EXACT_VERIFIER_PASS_IFF_TRUE_DEFECT_SET_EMPTY__AND_DEFECT_UNIVERSE_COMPLETENESS_MAKES_EMPTY_DEFECT_SET_EQUIVALENT_TO_THE_BOUND_CORRECTNESS_PREDICATE",
+    "resource_reachability": "K_REPAIR_AND_K_PLUS_ONE_VERIFIER_BUDGET_COVERS_THE_WORST_CASE_DESCENT_TO_ZERO_AND_FINAL_PASS_CHECK",
+    "conclusion": "FOR_EVERY_CONTEXT_SATISFYING_ALL_SIX_PREEXECUTION_ATOMS__THE_POLICY_TERMINATES_WITH_A_CORRECT_CANDIDATE_AFTER_AT_MOST_K_REPAIRS_AND_K_PLUS_ONE_VERIFIER_CALLS"
+  },
+  "adequacy": {
+    "adequate_for_every_member": true,
+    "membership_rule_total_for_declared_cell": true,
+    "constructive_liveness": true,
+    "adaptive_candidate_generation": true,
+    "predeclared_finite_candidate_set_required": false,
+    "preexisting_valid_candidate_witness_required": false,
+    "empirical_generalization_used": false,
+    "hidden_verifier_required": false
+  },
+  "relation_to_existing_regions": {
+    "finite_candidate_regions": "STRUCTURALLY_DIFFERENT__THIS_REGION_PROVES_LIVENESS_BY_STRICT_DEFECT_RANK_DESCENT_INSTEAD_OF_ENUMERATING_A_PREDECLARED_CANDIDATE_SET",
+    "typed_acceptance_region": "COMPLEMENTARY__THE_DEFECT_UNIVERSE_AND_EXACT_VERIFIER_MAY_BE_SOURCE_AUTHORIZED_WITHOUT_REQUIRING_THE_EXISTING_TYPED_ACCEPTANCE_TRANSFORM_ONTOLOGY"
+  },
+  "boundary": {
+    "defect_universe_completeness_self_certified": false,
+    "verifier_exactness_self_certified": false,
+    "repair_monotonicity_self_certified": false,
+    "condition_truth_requires_separate_source_authority": true,
+    "target_membership_self_certified": false,
+    "arbitrary_cursorbench_membership_proved": false,
+    "whole_cursorbench_cover_proved": false,
+    "whole_specification_residual_closed": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_ALL_CURSORBENCH_TASKS_HAVE_FINITE_COMPLETE_DEFECT_UNIVERSES",
+    "NO_CLAIM_ALL_CURSORBENCH_TASKS_HAVE_VISIBLE_TOTAL_EXACT_DEFECT_VERIFIERS",
+    "NO_CLAIM_ALL_REPAIR_OPERATORS_ARE_STRICTLY_MONOTONE",
+    "NO_CLAIM_THE_SIX_ATOMS_ARE_TRUE_FOR_ANY_HIDDEN_CURSORBENCH_TASK",
+    "NO_WHOLE_CURSORBENCH_SCORE_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "promotion_authority": false,
+  "terminal_authority": false
+}
