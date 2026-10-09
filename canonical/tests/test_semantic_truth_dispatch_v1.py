@@ -60,6 +60,24 @@ class Tests(unittest.TestCase):
         self.assertFalse(out["policy_adequacy_authority"])
         self.assertFalse(out["terminal_authority"])
 
+    def test_finance_margin_context_atom_end_to_end_dispatch(self):
+        text = "The margin is added to the specified index rate."
+        out = evaluate({
+            "truth_kind": "FINANCE_MARGIN_CONTEXT_ATOM",
+            "predicate_id": "caller-label",
+            "source_text": text,
+            "source_id": "doc:margin",
+            "start": 0,
+            "end": len(text),
+            "target_atom_id": "FINANCE_MARGIN_CONTEXT::INDEX_RATE_ADD_ON",
+        })
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(out["predicate_truth"], "TRUE")
+        self.assertTrue(out["semantic_truth_authority"])
+        self.assertFalse(out["semantic_identity_authority"])
+        self.assertFalse(out["policy_adequacy_authority"])
+        self.assertFalse(out["terminal_authority"])
+
     def test_absent_kind_preserves_legacy_path(self):
         with patch(
             "canonical.runtime.semantic_truth_dispatch_v1.evaluate_legacy",
