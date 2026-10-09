@@ -214,8 +214,17 @@ class RealityClosureV2Tests(unittest.TestCase):
             "receipt_sha256": "f" * 64,
         }
         with patch.object(v2.v1, "run", return_value=first):
-            with self.assertRaises(v2.RealityClosureError):
-                v2.run(repo_root=".", capability_synthesis_provider=provider)
+            out = v2.run(repo_root=".", capability_synthesis_provider=provider)
+        self.assertFalse(out["pass"])
+        self.assertTrue(out["internal_unsolved"])
+        self.assertEqual(
+            out["status"],
+            "OPEN__INTERNAL_UNSOLVED__INFRASTRUCTURE_OR_PROVIDER_FAILURE",
+        )
+        self.assertEqual(
+            out["failure"]["stage"],
+            "CAPABILITY_SYNTHESIS_PROVIDER",
+        )
 
     def test_new_code_requires_pre_code_search_minimality_and_verifier(self):
         first = closure(status="OPEN", internal=("ROOT1_GAP",))
@@ -232,11 +241,71 @@ class RealityClosureV2Tests(unittest.TestCase):
             "verifier_passed": True,
         }
         with patch.object(v2.v1, "run", return_value=first):
-            with self.assertRaisesRegex(
-                v2.RealityClosureError,
-                "PRE_CODE_SEARCH_NOT_EXHAUSTED",
-            ):
-                v2.run(repo_root=".", capability_synthesis_provider=provider)
+            out = v2.run(repo_root=".", capability_synthesis_provider=provider)
+        self.assertFalse(out["pass"])
+        self.assertTrue(out["internal_unsolved"])
+        self.assertIn(
+            "PRE_CODE_SEARCH_NOT_EXHAUSTED",
+            out["failure"]["reason"],
+        )
+
+    def test_v1_exception_is_internal_infrastructure_failure(self):
+        with patch.object(
+            v2.v1,
+            "run",
+            side_effect=RuntimeError("runner unavailable"),
+        ):
+            out = v2.run(repo_root=".")
+        self.assertFalse(out["pass"])
+        self.assertTrue(out["internal_unsolved"])
+        self.assertFalse(out["failure"]["externality_proved"])
+        self.assertEqual(out["failure"]["stage"], "V1_CLOSURE_ENGINE")
+
+    def test_provider_exception_is_internal_not_external(self):
+        first = closure(status="OPEN", internal=("ROOT1_GAP",))
+        def provider(contract):
+            raise RuntimeError("transport died")
+        with patch.object(v2.v1, "run", return_value=first):
+            out = v2.run(repo_root=".", capability_synthesis_provider=provider)
+        self.assertFalse(out["pass"])
+        self.assertTrue(out["internal_unsolved"])
+        self.assertFalse(out["failure"]["externality_proved"])
+        self.assertEqual(
+            out["failure"]["stage"],
+            "CAPABILITY_SYNTHESIS_PROVIDER",
+        )
+
+    def test_infrastructure_repair_provider_repairs_then_retries(self):
+        solved = closure(
+            status="PASS",
+            passed=True,
+            initial="i1",
+            final="f1",
+        )
+        repair_calls = []
+        def repair(request):
+            repair_calls.append(request)
+            return {
+                "pass": True,
+                "infrastructure_repaired": True,
+                "verification_authority_mutated": False,
+                "receipt_sha256": "7" * 64,
+            }
+        with patch.object(
+            v2.v1,
+            "run",
+            side_effect=[RuntimeError("runner unavailable"), solved],
+        ):
+            out = v2.run(
+                repo_root=".",
+                infrastructure_repair_provider=repair,
+            )
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(len(repair_calls), 1)
+        self.assertEqual(
+            out["transcript"][0]["status"],
+            "INFRASTRUCTURE_REPAIR_RECEIPT_ACCEPTED__RETRY_CLOSURE_LOOP",
+        )
 
     def test_shared_cause_candidates_collapse_multiple_obligations(self):
         pending = []
