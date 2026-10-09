@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_CONTEXT_DEPENDENT_MEANING_SUCCESSOR_EXECUTION_LEDGER_20261009_V6",
+  "date": "2026-10-09",
+  "status": "DURABLE_SUCCESSOR_EXECUTION_DELTA_LEDGER__R2_V66_ROOT2_V61__ZERO_TERMINAL_CREDIT",
+  "extends": "canonical/reasoning/2026-10-09_CONTEXT_DEPENDENT_MEANING_SUCCESSOR_EXECUTION_LEDGER_V5.json",
+  "events": [
+    {
+      "order": 25,
+      "event": "OBSERVE_R2_V65_DERIVED_TERMINAL_PROMOTION",
+      "result": "Independent worker reconciled live derived typed-terminal route into current R2 as route 40 while preserving one finance residual and zero credit."
+    },
+    {
+      "order": 26,
+      "event": "PROJECT_MREL_ONE_WAY_AUTHORITY_INTO_ROOT2_V61",
+      "result": "Current scheduler now reuses authenticated MREL necessary-property entailments and preserves reverse classification as forbidden."
+    },
+    {
+      "order": 27,
+      "event": "PROJECT_TLAC_MREL_NONSEPARATION_INTO_ROOT2_V61",
+      "result": "Shared loss-absorption, recapitalisation, and resolution signature is explicitly nonseparating; identity-specific evidence remains required."
+    },
+    {
+      "order": 28,
+      "event": "ADVANCE_CURRENT_R2_TO_V66_AND_TERMINAL_PROJECTION",
+      "result": "Preserved V65 route40, reconciled dynamic admission subrecord to count3, bound ROOT2 V61, and advanced terminal projection from stale V64 to V66.",
+      "verification": "canonical/verification/R2_V66_SEMANTIC_WAKE_RECONCILIATION_VERIFY_20261009_V1.json"
+    }
+  ],
+  "next_execution_rule": "READ_V66_V61_AND_ACTION_INTENT_V9__SELECT_ONE_SURVIVING_CASE__ACQUIRE_ONLY_MINIMUM_POLICY_CHANGING_AUTHENTICATED_FACT",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
