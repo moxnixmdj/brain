@@ -28,5 +28,9 @@
     "incremental_spend_usd": 0,
     "fresh_target_reality_units_consumed": 0,
     "terminal_credit_delta": 0
+  },
+  "full_save_probe": {
+    "saved_from_chat": true,
+    "note": "Preservation test only; no authority or credit."
   }
 }
