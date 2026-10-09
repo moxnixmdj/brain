@@ -4,10 +4,12 @@ on:
     branches: [main]
     paths:
       - canonical/governance/CURRENT_TERMINAL_AUTHORITY.json
-      - canonical/governance/CURRENT_MISSION_OBJECTIVE.json
       - canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json
-      - canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V5.json
-      - canonical/tests/test_current_terminal_authority_r2_reconciliation_v1.py
+      - canonical/governance/CURRENT_ONE_SHOT_REALITY_CLOSURE.json
+      - canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V27.json
+      - canonical/governance/CURRENT_MAIN_V52_COREFERENCE_PROJECTION_RECONCILIATION_20261009_V1.json
+      - canonical/verification/R2_FINANCE_COREFERENCE_AMBIGUITY_CONTROL_VERIFY_20261009_V2.json
+      - canonical/tests/test_current_main_v52_coreference_projection_reconciliation.py
       - .github/workflows/verify-r2-terminal-authority-reconciliation-v1.yml
   workflow_dispatch:
 permissions:
@@ -20,5 +22,5 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Run R2 terminal authority reconciliation test
-        run: python -m unittest -v canonical.tests.test_current_terminal_authority_r2_reconciliation_v1
+      - name: Run current R2 V52 terminal authority reconciliation test
+        run: python -m unittest -v canonical.tests.test_current_main_v52_coreference_projection_reconciliation
