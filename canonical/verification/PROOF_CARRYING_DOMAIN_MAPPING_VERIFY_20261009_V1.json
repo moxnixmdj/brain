@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_PROOF_CARRYING_DOMAIN_MAPPING_VERIFY_20261009_V1",
   "date": "2026-10-09",
-  "status": "PASS__LATEST_MAIN_ANCESTRY__DOMAIN_MAPPING_20_OF_20__SEMANTIC_COMPAT_23_OF_23__P3_V21_REPLAY_19_OF_19__PY_COMPILE_PASS__ZERO_TERMINAL_CREDIT",
+  "status": "PASS__VERIFIED_BASE_PLUS_PROVED_NONOVERLAP_NEWER_MAIN__DOMAIN_MAPPING_20_OF_20__SEMANTIC_COMPAT_23_OF_23__P3_V21_REPLAY_19_OF_19__PY_COMPILE_PASS__ZERO_TERMINAL_CREDIT",
   "subject": {
     "repository": "moxnixmdj/brain",
     "branch": "proof-carrying-domain-mapping-v1-rebased3-20261009",
@@ -89,5 +89,14 @@
   "accounting": {
     "incremental_spend_usd": 0,
     "terminal_credit_delta": 0
+  },
+  "reconciliation": {
+    "verified_base_main_sha": "37ec59519cb5a4db4d9383995cbe307a60fa5a0b",
+    "newer_main_sha": "5f0ae9fa467c9b2a3936160f732efa3c0e29ef47",
+    "newer_main_title": "Merge benchmark proof v4 successor certification",
+    "overlap_with_domain_mapping_changed_files": false,
+    "overlap_with_domain_mapping_runtime_dependency_cone": false,
+    "newer_main_changed_area": "BENCHMARK_PROOF_V4_POLICY_ADAPTER_TESTS_WORKFLOW_AND_GOVERNANCE_ONLY",
+    "merge_strategy_safe": "THREE_WAY_MERGE_WITH_EXACT_HEAD_LEASE"
   }
 }
