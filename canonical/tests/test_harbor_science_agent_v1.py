@@ -354,13 +354,31 @@ class ScienceAgentTests(unittest.TestCase):
     def test_malformed_later_requirement_redeclaration_is_ignored(self):
         frozen=["R1","BRAIN_DELIVERABLE_01"]
         raw={"material_requirements":{"not":"a list"},"finish_summary":"descriptive"}
-        requirements,candidates,summary,rejections=s._extract_contract(
+        requirements,candidates,summary=s._extract_contract(
             raw,frozen,mandatory_requirements=["BRAIN_DELIVERABLE_01"]
         )
         self.assertEqual(requirements,frozen)
         self.assertEqual(candidates,[])
         self.assertEqual(summary,"descriptive")
-        self.assertEqual(rejections,[])
+
+    def test_extract_contract_can_return_candidate_rejections_explicitly(self):
+        frozen=["R1"]
+        raw={
+            "material_requirements":["ignored"],
+            "candidates":[
+                {"action_id":"bad","covers":["R2"],"command":"echo bad","verify_command":"echo verify"}
+            ],
+        }
+        requirements,candidates,summary,rejections=s._extract_contract(
+            raw,
+            frozen,
+            include_candidate_rejections=True,
+        )
+        self.assertEqual(requirements,frozen)
+        self.assertEqual(candidates,[])
+        self.assertIsNone(summary)
+        self.assertEqual(rejections[0]["reason"],"SCIENCE_COVERAGE_OUTSIDE_CONTRACT")
+        self.assertFalse(rejections[0]["executed"])
 
     def test_command_policy_rejects_network_acquisition(self):
         env=Env()
