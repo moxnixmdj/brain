@@ -18,8 +18,8 @@ class FiboBoundedFinanceAuthorityTests(unittest.TestCase):
     def test_exact_pack_authenticates(self):
         out = fibo.load_pack(repo_root=ROOT)
         self.assertTrue(out["pass"])
-        self.assertEqual(out["concept_count"], 241)
-        self.assertEqual(out["edge_count"], 164)
+        self.assertEqual(out["concept_count"], 253)
+        self.assertEqual(out["edge_count"], 177)
         self.assertFalse(out["open_world_finance_ontology_complete"])
         self.assertFalse(out["terminal_authority"])
 
