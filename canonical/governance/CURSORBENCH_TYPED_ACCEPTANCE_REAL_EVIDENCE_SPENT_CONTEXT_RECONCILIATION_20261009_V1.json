@@ -21,7 +21,7 @@
     },
     "historical_canonical_result": {
       "path": "canonical/capabilities/opus55/REACT_LEAD_FORM_VERIFIER_RESULT_20260930_V1.json",
-      "git_blob_sha": "1a2f0c712d9d795e263608d6d05f8be20ab997b3",
+      "git_blob_sha": "fc03cd92ad4d494d6d8d80a1f5fd0b0e81643c37",
       "source_commit": "ae2e373c4d557d9a473e1b584e1460b0318f66bc"
     }
   },
