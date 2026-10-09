@@ -33,6 +33,8 @@ from canonical.runtime.verified_bound_capability_execution_adapter_v1 import exe
 from canonical.runtime import semantic_ambiguity_control_v1 as semantic_ambiguity
 from canonical.runtime import semantic_relation_control_v1 as semantic_relation
 from canonical.runtime import oewn_decision_sense_control_v1 as oewn_decision_sense
+from canonical.runtime import d_finality_execution_epoch_v1 as d_finality
+from canonical.runtime import d_finality_canonical_resolver_v1 as d_finality_resolver
 
 SCHEMA = "PROJECT_BRAIN_UNIFIED_COGNITIVE_FABRIC_V1"
 ROOT = Path(__file__).resolve().parents[2]
@@ -118,6 +120,42 @@ SUBORDINATE_RUNTIME_ENTRYPOINT = "canonical.runtime.live_brain_runtime_v1.run"
 
 class CognitiveFabricError(ValueError):
     pass
+
+
+D_OWNERSHIP_MODES = frozenset({"EXPERIMENTAL", "D_CERTIFIED_CONTEXT", "D_FINAL"})
+D_CONTEXT_MUTATING_MODES = frozenset({"LEARNING_EPISODE", "IMPROVEMENT_CYCLE", "REPAIR_CYCLE"})
+
+
+def _d_root_capability_id(mode: str, payload: Mapping[str, Any]) -> str:
+    if mode == "LIVE_CAPABILITY":
+        cid = str(payload.get("capability_id") or "").strip()
+        if not cid:
+            raise CognitiveFabricError("LIVE_CAPABILITY_ID_REQUIRED")
+        return cid
+    if mode == "BOUND_CAPABILITY":
+        cid = str(payload.get("capability_id") or "").strip()
+        if not cid:
+            raise CognitiveFabricError("CAPABILITY_ID_REQUIRED")
+        return "bound:" + cid
+    return "engine:" + mode
+
+
+def _reject_caller_d_authority(value: Mapping[str, Any], label: str) -> None:
+    forbidden = {
+        "d_finality_certificate",
+        "d_finality_policy",
+        "d_execution_epoch",
+        "d_certificate",
+        "d_policy",
+    }
+    bad = sorted(
+        str(k) for k in value
+        if str(k) in forbidden or str(k).startswith("__d_finality")
+    )
+    if bad:
+        raise CognitiveFabricError(
+            "CALLER_SUPPLIED_D_AUTHORITY_FORBIDDEN:" + label + ":" + ",".join(bad)
+        )
 
 
 def _unwrap_live_runtime(wrapper: Mapping[str, Any], inner_key: str) -> dict[str, Any]:
@@ -318,8 +356,17 @@ def run(
     try:
         if not isinstance(request, Mapping):
             raise CognitiveFabricError("REQUEST_NOT_OBJECT")
+        _reject_caller_d_authority(request, "REQUEST")
+        ownership_mode = str(
+            request.get("ownership_mode") or "EXPERIMENTAL"
+        ).strip().upper()
+        if ownership_mode not in D_OWNERSHIP_MODES:
+            raise CognitiveFabricError("OWNERSHIP_MODE_INVALID:" + ownership_mode)
+
         requested_mode = str(request.get("mode") or "").strip().upper()
         if requested_mode == "CATALOG":
+            if ownership_mode != "EXPERIMENTAL":
+                raise CognitiveFabricError("CATALOG_OWNERSHIP_MODE_MUST_BE_EXPERIMENTAL")
             return catalog()
 
         payload = request.get("payload")
@@ -328,6 +375,8 @@ def run(
         options = request.get("options") or {}
         if not isinstance(options, Mapping):
             raise CognitiveFabricError("OPTIONS_NOT_OBJECT")
+        _reject_caller_d_authority(options, "OPTIONS")
+        options = dict(options)
 
         auto_routed = requested_mode in {"", "AUTO"}
         mode = _auto_mode(payload, options) if auto_routed else requested_mode
@@ -342,6 +391,66 @@ def run(
             mode = "LEARNING_EPISODE"
         if mode not in ENGINE_DESCRIPTORS:
             raise CognitiveFabricError("MODE_INVALID:" + mode)
+
+        d_root_capability_id = _d_root_capability_id(mode, payload)
+        if d_finality.has_active_epoch():
+            d_finality.require_capability(d_root_capability_id)
+            if mode in D_CONTEXT_MUTATING_MODES:
+                raise CognitiveFabricError(
+                    "D_CONTEXT_MUTATING_MODE_NOT_YET_EFFECT_TOTAL:"
+                    + mode
+                )
+            options["learn"] = False
+        elif ownership_mode == "D_FINAL":
+            raise CognitiveFabricError(
+                "D_FINAL_PHYSICAL_ZERO_AMBIENT_MEMBRANE_NOT_LIVE"
+            )
+        elif ownership_mode == "D_CERTIFIED_CONTEXT":
+            authority = d_finality_resolver.resolve_for_capability(
+                d_root_capability_id,
+                repo_root=ROOT,
+            )
+            nested_request = deepcopy(dict(request))
+            nested_request.pop("ownership_mode", None)
+            nested_request["mode"] = mode
+            nested_options = dict(options)
+            nested_options["learn"] = False
+            nested_request["options"] = nested_options
+            with d_finality.activate(
+                authority["certificate"],
+                policy=authority["policy"],
+                repo_root=ROOT,
+            ) as epoch:
+                nested = run(
+                    nested_request,
+                    information_provider=information_provider,
+                    proposal_provider=proposal_provider,
+                    capability_expander=capability_expander,
+                    episode_verification_provider=episode_verification_provider,
+                    skill_verification_provider=skill_verification_provider,
+                    success_episode_adapter_provider=success_episode_adapter_provider,
+                    semantic_authority_verifier=semantic_authority_verifier,
+                    semantic_evidence_verifier=semantic_evidence_verifier,
+                    verification_frontier_acquisition_provider=(
+                        verification_frontier_acquisition_provider
+                    ),
+                    verification_frontier_acquisition_provider_id=(
+                        verification_frontier_acquisition_provider_id
+                    ),
+                )
+            if not isinstance(nested, Mapping):
+                raise CognitiveFabricError("D_CONTEXT_NESTED_RESULT_NOT_OBJECT")
+            wrapped = deepcopy(dict(nested))
+            wrapped["d_finality"] = {
+                "mode": "D_CERTIFIED_CONTEXT",
+                "logical_epoch_active_during_dispatch": True,
+                "physical_zero_ambient_enforced": False,
+                "capability_id": d_root_capability_id,
+                "certificate_sha256": authority["certificate_sha256"],
+                "policy_sha256": authority["policy_sha256"],
+                "execution_epoch_sha256": epoch.epoch_sha256,
+            }
+            return wrapped
 
         if mode == "RAW_GOAL":
             wrapped = live_runtime.run(
@@ -740,6 +849,7 @@ def run(
             mode in R3_DIRECT_EXPERIENCE_MODES
             and isinstance(out, Mapping)
             and options.get("learn", True) is not False
+            and not d_finality.has_active_epoch()
         ):
             try:
                 direct_learning = live_runtime.observe_runtime_outcome(
@@ -787,7 +897,7 @@ def run(
             autonomous_failure_repair_provider = _autonomous_repair_pending
 
         compounding_tick = None
-        if mode != "IMPROVEMENT_CYCLE":
+        if mode != "IMPROVEMENT_CYCLE" and not d_finality.has_active_epoch():
             compounding_tick = improvement_driver.drain(
                 state_path=options.get(
                     "state_path",
