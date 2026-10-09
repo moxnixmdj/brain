@@ -1,0 +1,27 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_TB_SCIENCE_RANK13_AUTHORITY_CANDIDATE_20261009_V1",
+  "date": "2026-10-09",
+  "action_id": "TB_SCIENCE_RANK13_AUTHORITY_CANDIDATE_V1",
+  "action_kind": "CONSTRUCT_AND_INDEPENDENTLY_VERIFY_ONE_SLOT_AUTHORITY",
+  "highest_leverage_now": true,
+  "target_obligation": "TB_SCIENCE_GE_58_7",
+  "stop_condition": "RANK13_NONEXECUTABLE_CANDIDATE_BINDS_CURRENT_LEDGER_V14_CURRENT_V8_RUNTIME_AND_A_FRESH_ZERO_EXPOSURE_LIVE_MULTI_ACTION_TRANSPORT_PASS",
+  "load_bearing_primary": {
+    "open_obligation_ids": [],
+    "constructive_gap_for_open_obligation_ids": [
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "scope_complete_discharge": false,
+    "expected_obligation_discharge_lcb": "0",
+    "expected_obligation_unlock_lcb": "1/13",
+    "success_probability_lcb": "4/5",
+    "wall_clock_cost_ub": "1"
+  },
+  "safety": {
+    "benchmark_task_exposure_authorized": false,
+    "benchmark_trials_consumed": 0,
+    "incremental_spend_usd_max": 0,
+    "promotion_authority": false,
+    "terminal_credit_delta": 0
+  }
+}
