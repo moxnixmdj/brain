@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_ONE_SHOT_V1_HARD_FRONTIER_SHAPE_REPAIR_VERIFY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__EXACT_V1_BYTES__10_OF_10__PYCOMPILE_PASS__SCALAR_AND_LIST_HARD_FRONTIER_SHAPE_LOCKED__ZERO_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "r2-regcap-matrix-discriminator-compose-20261009",
+    "runtime_path": "canonical/runtime/one_shot_verified_closure_v1.py",
+    "runtime_git_blob_sha": "117d85bec1e5fb49428271aa9883e89d0ef1aa0a",
+    "test_path": "canonical/tests/test_one_shot_verified_closure_v1.py",
+    "test_git_blob_sha": "6bc42ae1a10c1ceb8acee4de7072ae72b8403d92"
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "name": "brain-live-integrated-v1-run-20261008",
+    "sprite_id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "workspace": "/home/sprite/verify-strict-3411-hardened",
+    "log_sha256": "b3b6395267288bc493bac3b036ab0da844d4249755f34e5b6bbad21cbe970db6"
+  },
+  "result": {
+    "py_compile": "PASS",
+    "tests_run": 10,
+    "failures": 0,
+    "errors": 0,
+    "overall_rc": 0
+  },
+  "proved": [
+    "SCALAR_R2_REMAINING_HARD_FRONTIER_IS_PRESERVED_AS_EXACTLY_ONE_FRONTIER_ITEM",
+    "LIST_R2_REMAINING_HARD_FRONTIER_PRESERVES_ITEM_BOUNDARIES",
+    "EMPTY_R3_QUEUE_STILL_DOES_NOT_HIDE_CURRENT_R2_INTERNAL_GAP",
+    "STRICT_EXTERNALITY_AND_FALSE_PROGRESS_FAIL_CLOSED_REGRESSIONS_REMAIN_GREEN"
+  ],
+  "regression_root_cause": "GENERIC_LIST_COERCION_OF_A_SCALAR_STRING_SPLIT_ONE_SEMANTIC_FRONTIER_ITEM_INTO_CHARACTERS",
+  "authority_delta": "NONE",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
