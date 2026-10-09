@@ -29,6 +29,7 @@ def test_v2_accepts_evidence_fulfillment_event():
     event = journal.make_event(
         logical_attempt_id=_attempt(),
         sequence=0,
+        predecessor_sha256=None,
         kind="PLANNER_EVIDENCE_REQUEST_FULFILLED",
         payload={"cycle": 2, "fulfilled_chunk_count": 1},
     )
@@ -39,6 +40,7 @@ def test_v2_accepts_candidate_rejection_event():
     event = journal.make_event(
         logical_attempt_id=_attempt(),
         sequence=0,
+        predecessor_sha256=None,
         kind="PLANNER_CANDIDATE_REJECTED",
         payload={"cycle": 3, "reason": "KNOWN_NONPROMOTED_REPEAT"},
     )
@@ -49,6 +51,7 @@ def test_v2_filebridge_round_trip_for_new_kind():
     event = journal.make_event(
         logical_attempt_id=_attempt(),
         sequence=0,
+        predecessor_sha256=None,
         kind="PLANNER_EVIDENCE_REQUEST_FULFILLED",
         payload={"cycle": 1, "fulfilled_chunk_count": 2},
     )
@@ -59,8 +62,8 @@ def test_v2_filebridge_round_trip_for_new_kind():
         assert ack["event_sha256"] == event["event_sha256"]
         assert Path(ack_path).exists()
         observed = bridge.wait_for_ack(
-            ack_path,
-            expected_event_sha256=event["event_sha256"],
+            td,
+            event,
             timeout_s=1.0,
             poll_s=0.01,
         )
@@ -70,3 +73,21 @@ def test_v2_filebridge_round_trip_for_new_kind():
 def test_v1_namespace_and_wire_schema_are_preserved():
     assert journal.NAMESPACE == "terminal-journal-v1"
     assert journal.SCHEMA == "PROJECT_BRAIN_TERMINAL_CAUSAL_JOURNAL_EVENT_V1"
+
+
+def test_v2_new_kinds_preserve_predecessor_chain():
+    first = journal.make_event(
+        logical_attempt_id=_attempt(),
+        sequence=0,
+        predecessor_sha256=None,
+        kind="PLANNER_EVIDENCE_REQUEST_FULFILLED",
+        payload={"cycle": 0, "fulfilled_chunk_count": 1},
+    )
+    second = journal.make_event(
+        logical_attempt_id=_attempt(),
+        sequence=1,
+        predecessor_sha256=first["event_sha256"],
+        kind="PLANNER_CANDIDATE_REJECTED",
+        payload={"cycle": 1, "reason": "KNOWN_NONPROMOTED_REPEAT"},
+    )
+    assert journal.validate_event(second)["predecessor_sha256"] == first["event_sha256"]
