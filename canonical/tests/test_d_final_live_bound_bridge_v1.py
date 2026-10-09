@@ -75,14 +75,18 @@ class BridgeTests(unittest.TestCase):
                      "entry":{"source":{"adapter_path":self.adapter_rel}},
                  },
              ), \
-             mock.patch.object(b.provider,"execute",return_value={"pass":True,"status":"OK"}) as exe:
-            out=b.invoke("bound:x","x",{"v":1},repo_root=self.root)
+             mock.patch.object(b.confined_runner,"run",return_value={"pass":True,"status":"OK"}) as exe, \
+             mock.patch.dict(b.PURE_FILE_INPUT_FIELDS,{"x":("input_path",)}):
+            input_file=self.root/"task.json"
+            input_file.write_text("{}",encoding="utf-8")
+            out=b.invoke("bound:x","x",{"input_path":"task.json"},repo_root=self.root)
         self.assertTrue(out["pass"])
         required=[call.args[0] for call in req.call_args_list]
         self.assertEqual(required[:-1],list(b.PROVIDER_CLOSURE))
         self.assertEqual(required[-1],self.adapter_rel)
         self.assertEqual(exe.call_args.kwargs["expected_adapter_git_blob_sha"],"b"*40)
         self.assertEqual(exe.call_args.kwargs["expected_registry_entry_sha256"],contract)
+        self.assertEqual(exe.call_args.kwargs["task_input_paths"],["task.json"])
 
     def test_provider_failure_is_not_returned_as_success(self):
         contract="a"*64
@@ -99,9 +103,34 @@ class BridgeTests(unittest.TestCase):
                      "entry":{"source":{"adapter_path":self.adapter_rel}},
                  },
              ), \
-             mock.patch.object(b.provider,"execute",return_value={"pass":False,"errors":["boom"]}):
-            with self.assertRaisesRegex(b.DFinalLiveBoundBridgeError,"D_FINAL_BOUND_PROVIDER_FAILED:boom"):
-                b.invoke("bound:x","x",{},repo_root=self.root)
+             mock.patch.object(b.confined_runner,"run",return_value={"pass":False,"errors":["boom"]}), \
+             mock.patch.dict(b.PURE_FILE_INPUT_FIELDS,{"x":("input_path",)}):
+            input_file=self.root/"task.json"
+            input_file.write_text("{}",encoding="utf-8")
+            with self.assertRaisesRegex(b.DFinalLiveBoundBridgeError,"D_FINAL_CONFINED_RUNNER_FAILED"):
+                b.invoke("bound:x","x",{"input_path":"task.json"},repo_root=self.root)
+
+
+    def test_effectful_or_unclassified_capability_fails_closed(self):
+        contract="a"*64
+        epoch=SimpleNamespace(
+            capability_contract_sha256=contract,
+            material_bindings=((self.adapter_rel,"b"*40),),
+        )
+        with mock.patch.object(b.d_epoch,"require_capability",return_value=epoch), \
+             mock.patch.object(b.d_epoch,"require_material",return_value=None), \
+             mock.patch.object(
+                 b.provider,"inspect",
+                 return_value={
+                     "registry_entry_sha256":contract,
+                     "entry":{"source":{"adapter_path":self.adapter_rel}},
+                 },
+             ):
+            with self.assertRaisesRegex(
+                b.DFinalLiveBoundBridgeError,
+                "D_FINAL_LIVE_CAPABILITY_NOT_PURE_CONFINED_YET",
+            ):
+                b.invoke("bound:archive.tar_gz.create_from_manifest","archive.tar_gz.create_from_manifest",{},repo_root=self.root)
 
 
 if __name__=="__main__":
