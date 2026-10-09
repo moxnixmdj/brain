@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_ONE_SHOT_REALITY_CLOSURE_POINTER_V1",
   "date": "2026-10-09",
-  "status": "ACTIVE_VERIFIED_ORCHESTRATOR__CANONICAL_FRONTDOOR_META_MODE_LIVE__STRICT_EXTERNALITY_LAW_VERIFIED__ACTUAL_LIVE_R3_INTERNAL_FIXED_POINT__NO_RESIDUAL__CURRENT_R2_V52_AND_CODING_V3_PROJECTION_BOUND__INFRASTRUCTURE_FAILURES_INTERNAL_AND_RETRYABLE__DYNAMIC_CURRENT_PROJECTION__NOT_AUTO_DEFAULT",
+  "status": "ACTIVE_VERIFIED_ORCHESTRATOR__CANONICAL_FRONTDOOR_META_MODE_LIVE__STRICT_EXTERNALITY_LAW_VERIFIED__ACTUAL_LIVE_R3_INTERNAL_FIXED_POINT__NO_RESIDUAL__CURRENT_R2_V52_AND_CODING_V3_PROJECTION_BOUND__INFRASTRUCTURE_FAILURES_INTERNAL_AND_RETRYABLE__DYNAMIC_CURRENT_PROJECTION__FINAL_CLEANROOM_GATE_BOUND__NOT_AUTO_DEFAULT",
   "runtime": {
     "path": "canonical/runtime/one_shot_reality_closure_v2.py",
     "git_blob_sha": "e4eb89ab3872a79837afd0e2a4bbc3f777b7a807"
@@ -94,7 +94,25 @@
       "snapshot_drift_is_observable_not_failure": true
     },
     "current_terminal_authority_git_blob_sha_role": "LAST_VERIFIED_SNAPSHOT_ONLY__DYNAMIC_CURRENT_PROJECTION_IS_CURRENT_AUTHORITY",
-    "current_terminal_authority_pointer_revision_role": "LAST_VERIFIED_SNAPSHOT_ONLY__DYNAMIC_CURRENT_PROJECTION_IS_CURRENT_AUTHORITY"
+    "current_terminal_authority_pointer_revision_role": "LAST_VERIFIED_SNAPSHOT_ONLY__DYNAMIC_CURRENT_PROJECTION_IS_CURRENT_AUTHORITY",
+    "final_terminal_cleanroom_gate": {
+      "path": "canonical/runtime/final_terminal_cleanroom_gate_v1.py",
+      "git_blob_sha": "1055f4dc1c59e5c0d49af0be3b0262f151af477e",
+      "required_for_terminal_credit": true,
+      "required_conjuncts": [
+        "coverage",
+        "adequacy",
+        "ownership",
+        "reliability",
+        "resource_constraints",
+        "donor_independence_cleanroom"
+      ],
+      "may_run_to_pass_before_current_terminal_predicate_true": false,
+      "stale_receipt_allowed": false,
+      "self_asserted_conjunct_allowed": false
+    },
+    "terminal_credit_requires_final_cleanroom_gate": true,
+    "cleanroom_may_create_terminal_candidate": false
   },
   "next_load_bearing_roots": [
     "FOLLOW_CURRENT_TERMINAL_AUTHORITY__R3_NOT_CURRENT_BLOCKER__PROVE_ONE_SOUND_TERMINAL_ACCEPTANCE_ROUTE",
