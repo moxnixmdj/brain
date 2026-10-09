@@ -7,9 +7,11 @@ It answers a smaller, sounder question:
 and do the currently authenticated/recomputable facts prove it?"
 
 Authoritative relation admission in V1 is recomputed only from:
-1. exact source-declared definitions in raw source bytes, and
+1. exact source-declared definitions in raw source bytes,
 2. equality of COMPLETE terminal-relevant signatures via the existing semantic
-   quotient compiler.
+   quotient compiler, and
+3. exact set-theoretic relation proofs over a content-addressed COMPLETE bounded
+   semantic universe and COMPLETE left/right denotations.
 
 Embeddings, LLM judgments, lexical databases, string similarity, and model
 consensus may appear only as candidate relations/search hints. They cannot
@@ -29,6 +31,9 @@ from canonical.runtime.explicit_definition_reference_graph import (
 )
 from canonical.runtime.terminal_semantic_quotient_v1 import (
     compile_minimal_quotient,
+)
+from canonical.runtime.bounded_semantic_relation_proof_v1 import (
+    prove as prove_bounded_relation,
 )
 
 SCHEMA = "PROJECT_BRAIN_DECISION_RELATIVE_SEMANTIC_RELATION_CONTROL_V1"
@@ -259,6 +264,8 @@ def resolve(problem: Mapping[str, Any]) -> dict[str, Any]:
         "explicit_definition_sources",
         "terminal_signature_rows",
         "candidate_relations",
+        "bounded_extension_evidence",
+        "expected_bounded_extension_sha256",
     }
     extra = set(problem) - allowed
     if extra:
@@ -308,6 +315,53 @@ def resolve(problem: Mapping[str, Any]) -> dict[str, Any]:
         problem.get("terminal_signature_rows"),
     )
 
+    bounded = {
+        "available": False,
+        "pass": False,
+        "reason": "NO_BOUNDED_EXTENSION_EVIDENCE",
+    }
+    bounded_evidence = problem.get("bounded_extension_evidence")
+    bounded_expected_sha = problem.get("expected_bounded_extension_sha256")
+    if bounded_evidence is not None or bounded_expected_sha is not None:
+        if not isinstance(bounded_evidence, Mapping):
+            return {
+                "schema": SCHEMA,
+                "pass": False,
+                "status": "FAIL_CLOSED__BOUNDED_EXTENSION_EVIDENCE_INVALID",
+                "reason": "BOUNDED_EXTENSION_EVIDENCE_NOT_OBJECT",
+                "terminal_authority": False,
+                "terminal_credit_delta": 0,
+            }
+        bounded = prove_bounded_relation(
+            bounded_evidence,
+            expected_evidence_sha256=str(bounded_expected_sha or ""),
+        )
+        bounded = {"available": True, **bounded}
+        if bounded.get("pass") is not True:
+            return {
+                "schema": SCHEMA,
+                "pass": False,
+                "status": "FAIL_CLOSED__BOUNDED_EXTENSION_EVIDENCE_INVALID",
+                "reason": bounded.get("reason"),
+                "bounded_extension_proof": bounded,
+                "terminal_authority": False,
+                "terminal_credit_delta": 0,
+            }
+        if (
+            bounded.get("scope_id") != scope_id
+            or bounded.get("left_id") != left_id
+            or bounded.get("right_id") != right_id
+        ):
+            return {
+                "schema": SCHEMA,
+                "pass": False,
+                "status": "FAIL_CLOSED__BOUNDED_EXTENSION_BINDING_MISMATCH",
+                "reason": "SCOPE_OR_EXPRESSION_IDENTITY_MISMATCH",
+                "bounded_extension_proof": bounded,
+                "terminal_authority": False,
+                "terminal_credit_delta": 0,
+            }
+
     if explicit.get("reason") == "EXPLICIT_SOURCE_EVIDENCE_FAIL_CLOSED":
         return {
             "schema": SCHEMA,
@@ -324,14 +378,34 @@ def resolve(problem: Mapping[str, Any]) -> dict[str, Any]:
     semantic_identity = explicit.get("proved") is True
     task_equivalent = terminal.get("proved") is True
 
-    # V1 intentionally does not promote candidate lexical/ontology/model output
-    # into directional entailment. Those need a source-aligned checker.
-    left_entails_right = semantic_identity
-    right_entails_left = semantic_identity
-    logical_equivalence = semantic_identity
+    bounded_equivalent = (
+        bounded.get("available") is True
+        and bounded.get("logical_equivalence_in_scope") is True
+    )
+    bounded_left_entails = (
+        bounded.get("available") is True
+        and bounded.get("left_entails_right") is True
+    )
+    bounded_right_entails = (
+        bounded.get("available") is True
+        and bounded.get("right_entails_left") is True
+    )
+
+    # Candidate lexical/model output remains non-authoritative. Directional
+    # relations become load-bearing here only when recomputed by the bounded
+    # exact proof kernel (or implied by exact source identity).
+    left_entails_right = semantic_identity or bounded_left_entails
+    right_entails_left = semantic_identity or bounded_right_entails
+    logical_equivalence = semantic_identity or bounded_equivalent
 
     if semantic_identity:
         strongest = "SEMANTIC_IDENTITY"
+    elif logical_equivalence:
+        strongest = "LOGICAL_EQUIVALENCE_IN_SCOPE"
+    elif left_entails_right:
+        strongest = "LEFT_ENTAILS_RIGHT"
+    elif right_entails_left:
+        strongest = "RIGHT_ENTAILS_LEFT"
     elif task_equivalent:
         strongest = "CURRENT_DECISION_SUBSTITUTION"
     else:
@@ -339,16 +413,36 @@ def resolve(problem: Mapping[str, Any]) -> dict[str, Any]:
 
     if required == "SEMANTIC_IDENTITY":
         satisfied = semantic_identity
+        disproved = (
+            bounded.get("available") is True
+            and bounded.get("logical_equivalence_disproved") is True
+        )
     elif required == "LOGICAL_EQUIVALENCE_IN_SCOPE":
         satisfied = logical_equivalence
+        disproved = (
+            bounded.get("available") is True
+            and bounded.get("logical_equivalence_disproved") is True
+        )
     elif required == "LEFT_ENTAILS_RIGHT":
         satisfied = left_entails_right
+        disproved = (
+            bounded.get("available") is True
+            and bounded.get("left_entails_right_disproved") is True
+        )
     elif required == "RIGHT_ENTAILS_LEFT":
         satisfied = right_entails_left
+        disproved = (
+            bounded.get("available") is True
+            and bounded.get("right_entails_left_disproved") is True
+        )
     else:
         satisfied = semantic_identity or logical_equivalence or task_equivalent
+        disproved = (
+            terminal.get("available") is True
+            and terminal.get("reason") == "COMPLETE_TERMINAL_SIGNATURES_DIFFER"
+        )
 
-    next_targets = [] if satisfied else _next_targets(required)
+    next_targets = [] if (satisfied or disproved) else _next_targets(required)
 
     return {
         "schema": SCHEMA,
@@ -356,12 +450,20 @@ def resolve(problem: Mapping[str, Any]) -> dict[str, Any]:
         "status": (
             "PASS__REQUIRED_SEMANTIC_RELATION_RECOMPUTED"
             if satisfied
-            else "OPEN__REQUIRED_SEMANTIC_RELATION_NOT_PROVED"
+            else (
+                "PROVED__REQUIRED_SEMANTIC_RELATION_FALSE_IN_BOUND_SCOPE"
+                if disproved
+                else "OPEN__REQUIRED_SEMANTIC_RELATION_NOT_PROVED"
+            )
         ),
         "action": (
             "USE_PROVED_RELATION_WITHIN_BOUND_SCOPE"
             if satisfied
-            else "PRESERVE_DISTINCT_MEANINGS_AND_ACQUIRE_ONLY_DECISION_RELEVANT_EVIDENCE"
+            else (
+                "PRESERVE_DISTINCT_MEANINGS__COUNTEREXAMPLE_BOUND"
+                if disproved
+                else "PRESERVE_DISTINCT_MEANINGS_AND_ACQUIRE_ONLY_DECISION_RELEVANT_EVIDENCE"
+            )
         ),
         "left_id": left_id,
         "right_id": right_id,
@@ -379,6 +481,8 @@ def resolve(problem: Mapping[str, Any]) -> dict[str, Any]:
         },
         "explicit_equivalence": explicit,
         "terminal_equivalence": terminal,
+        "bounded_extension_proof": bounded,
+        "required_relation_disproved": disproved,
         "next_proof_targets": next_targets,
         "counterexample_first": not satisfied,
         "candidate_relation_count": len(candidate_snapshot),
