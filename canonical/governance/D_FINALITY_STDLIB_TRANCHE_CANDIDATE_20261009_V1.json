@@ -1,12 +1,15 @@
 {
   "schema": "PROJECT_BRAIN_D_FINALITY_STDLIB_TRANCHE_CANDIDATE_20261009_V1",
   "date": "2026-10-09",
-  "status": "CANDIDATE_CLASSIFICATION__19_STDLIB_BOUND_ROWS__ZERO_D_CREDIT",
+  "status": "CANDIDATE_CLASSIFICATION__19_STDLIB_BOUND_ROWS__CURRENT_SUCCESSOR_BYTES_REBOUND__ENFORCEMENT_REPLAYED__ZERO_D_CREDIT",
   "source_bindings": {
     "bound_registry_git_blob_sha": "b9b2132b8b6ccf67ed10ee6e296462e1646d1c85",
-    "astra_runtime_hardened_branch_blob_sha": "d6b13e959a20dcd1d6b4128946865ae428c2db5a",
-    "universal_invoker_d_epoch_branch_blob_sha": "d48b0a0267e247c5b63326144047f431ba19d0dd",
-    "d_epoch_blob_sha": "0511ca26811e0c4358927174efc0fcea886badac"
+    "astra_runtime_hardened_git_blob_sha": "aa63c156a394d6b221cf8e2b578b5380c05d135a",
+    "universal_invoker_d_epoch_git_blob_sha": "d48b0a0267e247c5b63326144047f431ba19d0dd",
+    "d_fabric_guard_git_blob_sha": "e3bf117a7e6499b5383a53603c0bb4b90ab4e427",
+    "unified_fabric_git_blob_sha": "e61cd151101ba0ca12529f79f5d195c044f0d602",
+    "d_epoch_git_blob_sha": "60cbc536215571fbd7e41b5ce28239ce370120c3",
+    "material_compiler_git_blob_sha": "e29722c0ad2869c25ffb148b9fe79603314d5f54"
   },
   "counts": {
     "total": 19,
@@ -79,25 +82,25 @@
       "rows": [
         {
           "capability_id": "bound:docx.document.verify.intent_ooxml",
-          "adapter_git_blob_sha": "937944128257c10d95038b99dd3d120cd3104ae1",
+          "adapter_git_blob_sha": "e1f7bfca2204b3668617cbe2222d6b6be7320c8d",
           "candidate_proof_class": "STDLIB_DYNAMIC_LOCAL",
           "status": "PENDING_D_FINAL_CERTIFICATE"
         },
         {
           "capability_id": "bound:plain_goal.bound_capability.grounding.stdlib",
-          "adapter_git_blob_sha": "f2d96dd40c01cde214443108fe5f9f372cf04444",
+          "adapter_git_blob_sha": "cd9857f6329e099cf89a4a14ff29e98d542447e0",
           "candidate_proof_class": "STDLIB_DYNAMIC_LOCAL",
           "status": "PENDING_D_FINAL_CERTIFICATE"
         },
         {
           "capability_id": "bound:source.objective_relevance.rank.bm25",
-          "adapter_git_blob_sha": "380e08142841fbc1e641f017b91f4c0fe5fb5680",
+          "adapter_git_blob_sha": "479f9cff2b70211071e484df8c5885f9f2e001ba",
           "candidate_proof_class": "STDLIB_DYNAMIC_LOCAL",
           "status": "PENDING_D_FINAL_CERTIFICATE"
         },
         {
           "capability_id": "bound:evidence.claim_spec.bind.explicit_comparison.stdlib",
-          "adapter_git_blob_sha": "48fd058430d8d361fc75beced567c7b6d1166531",
+          "adapter_git_blob_sha": "2d4f9d8ef27ecb52081e56f4b1603430ba440413",
           "candidate_proof_class": "STDLIB_DYNAMIC_LOCAL",
           "status": "PENDING_D_FINAL_CERTIFICATE"
         }
@@ -152,16 +155,19 @@
     }
   },
   "stdlib_hardening": {
-    "change": "PYTHON_STDLIB_MODULE_RESOLUTION_NOW_REQUIRES_TOP_LEVEL_DECLARED_STDLIB_AND_RESOLVED_ORIGIN_OUTSIDE_SITE_PACKAGES",
-    "independent_focused_replay": "PASS_2_OF_2",
-    "shadow_attack": "FORGED_/tmp/json.py_REJECTED"
+    "change": "PYTHON_STDLIB_MODULE_RESOLUTION_REQUIRES_DECLARED_STDLIB_TOPLEVEL_AND_RESOLVED_ORIGIN_OUTSIDE_SITE_PACKAGES",
+    "independent_successor_replay": "PASS__COMBINED_D_SUITE_27_OF_27_PLUS_PY_COMPILE",
+    "shadow_attack": "PASS__FORGED_/tmp/json.py_REJECTED",
+    "mid_epoch_registry_drift_attack": "PASS__MUTATION_REJECTED_BEFORE_LOAD",
+    "point_of_use_dynamic_sibling_guards": true
   },
   "rules": [
     "SOURCE_TYPE_PYTHON_STDLIB_DOES_NOT_IMPLY_NO_WORLD_IO",
     "NO_CLASSIFICATION_ROW_RECEIVES_D_FINAL_CREDIT",
-    "DYNAMIC_LOAD_REQUIRES_EXACT_TARGET_CLOSURE",
-    "SUBPROCESS_REQUIRES_DESCENDANT_AUTHORITY_NONWIDENING",
-    "WORLD_IO_IS_ALLOWED_ONLY_AS_TYPED_KNOWLEDGE_OR_EFFECT_NOT_AS_HIDDEN_COGNITION"
+    "DYNAMIC_LOAD_REQUIRES_EXACT_TARGET_CLOSURE_AND_POINT_OF_USE_RECHECK",
+    "SUBPROCESS_REQUIRES_DESCENDANT_AUTHORITY_NONWIDENING_AND_INTERPRETER_BINDING",
+    "WORLD_IO_IS_ALLOWED_ONLY_AS_TYPED_KNOWLEDGE_OR_EFFECT_NOT_AS_HIDDEN_COGNITION",
+    "ENFORCEMENT_REPLAY_DOES_NOT_SUBSTITUTE_FOR_MEMBER_FRESH_REPLAY"
   ],
   "accounting": {
     "incremental_spend_usd": 0,
