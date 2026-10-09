@@ -31,6 +31,8 @@ SCHEMA = "PROJECT_BRAIN_ONE_SHOT_REALITY_CLOSURE_V2"
 GAP_SCHEMA = "PROJECT_BRAIN_PROOF_CARRYING_GAP_CONTRACT_V1"
 CONTEXT_GATE_SCHEMA = "PROJECT_BRAIN_CONTEXT_CAPACITY_REPAIR_GATE_V1"
 SEMANTIC_WORK_SCHEMA = "PROJECT_BRAIN_CONSTRUCTIVE_SEMANTIC_WORK_CONTRACT_V1"
+DECISION_SUFFICIENT_SCHEMA = "PROJECT_BRAIN_DECISION_SUFFICIENT_GAP_CONTRACT_V1"
+MINIMUM_INFORMATION_SCHEMA = "PROJECT_BRAIN_MINIMUM_POLICY_CHANGING_INFORMATION_CONTRACT_V1"
 
 REQUIRED_ATTEMPT_ORDER = (
     "REUSE_EXISTING_CAPABILITY",
@@ -426,6 +428,119 @@ def compile_gap_contract(
     }
 
 
+def compile_decision_sufficient_contract(
+    gap_contract: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Compile a gap into a lossless decision-sufficient representation.
+
+    The built-in baseline drops nothing. This is intentionally stronger than an
+    unverified semantic summary: every source bit remains committed by digest.
+    Future compressors may replace the identity representation only with an
+    independently verified omission certificate proving that omitted evidence
+    cannot change the required action under the frozen acceptance contract.
+    """
+    source = deepcopy(dict(gap_contract))
+    basis = source.get("basis")
+    basis = deepcopy(dict(basis)) if isinstance(basis, Mapping) else {}
+    constructive = source.get("constructive_capability_contracts")
+    constructive = (
+        [deepcopy(dict(x)) for x in constructive if isinstance(x, Mapping)]
+        if isinstance(constructive, Sequence) and not isinstance(constructive, (str, bytes))
+        else []
+    )
+    policy_requirements: list[dict[str, Any]] = []
+    for item in basis.get("constructive_internal_blockers", []) or []:
+        if _s(item):
+            policy_requirements.append({"kind": "INTERNAL_BLOCKER", "value": _s(item)})
+    for item in basis.get("evidence_blockers", []) or []:
+        if _s(item):
+            policy_requirements.append({"kind": "EVIDENCE_BLOCKER", "value": _s(item)})
+    for contract in constructive:
+        cbasis = contract.get("basis")
+        cbasis = cbasis if isinstance(cbasis, Mapping) else {}
+        policy_requirements.append({
+            "kind": "CONSTRUCTIVE_CONTRACT",
+            "contract_id": contract.get("contract_id"),
+            "required_result": cbasis.get("required_result"),
+            "repair_class": cbasis.get("repair_class"),
+            "acceptance_condition": cbasis.get("acceptance_condition"),
+            "verification_authority_sha256": cbasis.get("verification_authority_sha256"),
+        })
+
+    source_digest = _sha(source)
+    representation = {
+        "gap_class": source.get("gap_class"),
+        "required_action": source.get("required_action"),
+        "basis_digest": source.get("basis_digest"),
+        "pending_semantic_work_digest": source.get("pending_semantic_work_digest"),
+        "policy_changing_requirements": policy_requirements,
+        "source_contract_sha256": source_digest,
+    }
+    return {
+        "schema": DECISION_SUFFICIENT_SCHEMA,
+        "scope": "EXACT_CURRENT_GAP_CONTRACT_ONLY",
+        "status": "PASS__LOSSLESS_IDENTITY_DECISION_SUFFICIENT_BASELINE",
+        "pass": True,
+        "representation": representation,
+        "representation_sha256": _sha(representation),
+        "source_contract_sha256": source_digest,
+        "reduction_mode": "LOSSLESS_IDENTITY__NO_UNVERIFIED_OMISSION",
+        "omitted_evidence": [],
+        "omission_certificate_required_for_future_compression": True,
+        "verification_authority_mutation_allowed": False,
+        "terminal_credit": False,
+    }
+
+
+def compile_minimum_information_contract(
+    gap_contract: Mapping[str, Any],
+    decision_contract: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Compile evidence acquisition to the smallest currently justified requests.
+
+    One request is emitted per unique evidence blocker. The compiler does not
+    claim that a blocker requires a full benchmark or broad crawl. Providers must
+    first attempt proof/reuse and then acquire only an observation whose value can
+    change the current decision.
+    """
+    gap = deepcopy(dict(gap_contract))
+    decision = deepcopy(dict(decision_contract))
+    basis = gap.get("basis")
+    basis = basis if isinstance(basis, Mapping) else {}
+    blockers = sorted({_s(x) for x in basis.get("evidence_blockers", []) or [] if _s(x)})
+    requests = []
+    for blocker in blockers:
+        row = {
+            "blocker": blocker,
+            "required_property": "OBSERVATION_MUST_BE_CAPABLE_OF_CHANGING_CURRENT_POLICY_OR_CLOSING_EXACT_OBLIGATION",
+            "proof_or_existing_receipt_precedes_new_reality": True,
+            "broad_acquisition_forbidden_without_minimality_proof": True,
+        }
+        requests.append({
+            **row,
+            "request_id": "minimum-info:" + _sha(row),
+        })
+    payload = {
+        "schema": MINIMUM_INFORMATION_SCHEMA,
+        "source_gap_contract_sha256": _sha(gap),
+        "decision_contract_sha256": _sha(decision),
+        "requests": requests,
+        "request_count": len(requests),
+        "acquisition_objective": "MINIMIZE_NEW_INFORMATION_SUBJECT_TO_CLOSING_OR_CHANGING_THE_EXACT_CURRENT_DECISION",
+        "proof_precedence": [
+            "FORMAL_IMPLICATION",
+            "EXISTING_CONTENT_ADDRESSED_RECEIPT",
+            "DETERMINISTIC_SCOPE_OR_DOMINANCE_CERTIFICATE",
+            "MINIMUM_POLICY_CHANGING_OBSERVATION",
+            "FULL_EMPIRICAL_EVALUATION_LAST",
+        ],
+        "verification_authority_mutation_allowed": False,
+        "terminal_credit": False,
+    }
+    payload["digest"] = _sha(payload)
+    return payload
+
+
 def conservative_leverage_score(candidate: Mapping[str, Any]) -> float:
     """Rank actions using lower-bound success probability, never invented midpoint."""
     p = candidate.get("success_probability_interval")
@@ -561,6 +676,10 @@ def run(
 
         pending_work = _pending_semantic_work(state_path=state_path)
         contract = compile_gap_contract(closure, pending_work=pending_work)
+        decision_contract = compile_decision_sufficient_contract(contract)
+        minimum_information_contract = compile_minimum_information_contract(
+            contract, decision_contract
+        )
         transcript.append(
             {
                 "repair_round": repair_round,
@@ -570,6 +689,8 @@ def run(
                 "basis_digest": contract["basis_digest"],
                 "pending_semantic_work_digest": contract["pending_semantic_work_digest"],
                 "constructive_capability_contract_count": contract["constructive_capability_contract_count"],
+                "decision_sufficient_contract_sha256": decision_contract["representation_sha256"],
+                "minimum_information_contract_sha256": minimum_information_contract["digest"],
             }
         )
 
@@ -597,7 +718,10 @@ def run(
                     "terminal_authority": False,
                 }
             receipt = _validate_provider_receipt(
-                capability_synthesis_provider(deepcopy(contract)),
+                capability_synthesis_provider({
+                    **deepcopy(contract),
+                    "decision_sufficient_contract": deepcopy(decision_contract),
+                }),
                 provider_kind="CAPABILITY_SYNTHESIS",
             )
         elif gap_class == "PENDING_ACQUISITION_OR_EXPERIMENT":
@@ -611,7 +735,11 @@ def run(
                     "terminal_authority": False,
                 }
             receipt = _validate_provider_receipt(
-                evidence_acquisition_provider(deepcopy(contract)),
+                evidence_acquisition_provider({
+                    **deepcopy(contract),
+                    "decision_sufficient_contract": deepcopy(decision_contract),
+                    "minimum_information_contract": deepcopy(minimum_information_contract),
+                }),
                 provider_kind="EVIDENCE_ACQUISITION",
             )
         elif gap_class == "PROVEN_INFORMATION_THEORETICALLY_EXTERNAL":
