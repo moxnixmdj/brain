@@ -10,6 +10,7 @@ from canonical.runtime import autonomous_verified_self_improvement_v1 as learnin
 from canonical.runtime import r3_bound_success_adapter_v1 as bound_adapter
 from canonical.runtime import r3_raw_success_adapter_v1 as raw_adapter
 from canonical.runtime import r3_structural_bound_success_adapter_v1 as structural_adapter
+from canonical.runtime import r3_success_adapter_author_context_v1 as author_context
 from canonical.runtime import root1_acquisition_closure_controller_v3 as root1
 
 SCHEMA = "PROJECT_BRAIN_R3_ROOT1_ADAPTER_GAP_WITNESS_V1"
@@ -165,6 +166,12 @@ def compile_gap(
             observation_id,
             state_path=state_path,
         )
+        redacted_author_context = author_context.compile_context(proof, replay)
+        if redacted_author_context.get("pass") is not True:
+            return _fail(
+                "ADAPTER_AUTHOR_CONTEXT_COMPILATION_FAILED",
+                adapter_author_context=redacted_author_context,
+            )
 
         adapter_sha = _frontier_sha256(
             SUCCESS_ADAPTER_FRONTIER_PATHS,
@@ -258,6 +265,9 @@ def compile_gap(
             "output_sha256": observation.get("output_sha256"),
             "proof_capsule_sha256": proof.get("proof_capsule_sha256"),
             "replay_capsule_sha256": replay.get("replay_capsule_sha256"),
+            "adapter_author_context_sha256": redacted_author_context.get(
+                "context_sha256"
+            ),
             "adapter_frontier_sha256": adapter_sha,
             "verification_authority_sha256": authority_sha,
             "bound_capability_registry_sha256": hashlib.sha256(
@@ -328,6 +338,7 @@ def compile_gap(
             "witness_id": witness_id,
             "witness": witness_core,
             "gap_evidence": gap_evidence,
+            "adapter_author_context": redacted_author_context,
             "root1_transaction": transaction,
             "adapter_frontier_sha256": adapter_sha,
             "verification_authority_sha256": authority_sha,

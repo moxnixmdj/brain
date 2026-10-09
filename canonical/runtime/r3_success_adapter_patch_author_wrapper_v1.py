@@ -16,6 +16,7 @@ from pathlib import Path
 from typing import Any, Callable, Mapping
 
 from canonical.runtime import r3_root1_adapter_gap_witness_v1 as gap_witness
+from canonical.runtime import r3_success_adapter_author_context_v1 as author_context
 from canonical.runtime import r3_success_adapter_patch_firewall_v1 as firewall
 
 SCHEMA = "PROJECT_BRAIN_R3_SUCCESS_ADAPTER_PATCH_AUTHOR_WRAPPER_V1"
@@ -109,10 +110,25 @@ def build_author_packet(
         witness_id = str(compiled_gap.get("witness_id") or "").strip()
         witness = compiled_gap.get("witness")
         gap_evidence = compiled_gap.get("gap_evidence")
+        redacted_context = compiled_gap.get("adapter_author_context")
         if not witness_id or not isinstance(witness, Mapping):
             return _fail("COMPILED_GAP_WITNESS_INCOMPLETE")
         if not isinstance(gap_evidence, Mapping):
             return _fail("COMPILED_GAP_EVIDENCE_MISSING")
+        if (
+            not isinstance(redacted_context, Mapping)
+            or redacted_context.get("schema") != author_context.SCHEMA
+            or redacted_context.get("pass") is not True
+            or redacted_context.get("candidate_generation_authority") is not True
+        ):
+            return _fail("COMPILED_GAP_AUTHOR_CONTEXT_MISSING_OR_INVALID")
+        context_sha = str(redacted_context.get("context_sha256") or "").strip()
+        if not context_sha.startswith("sha256:") or len(context_sha) != 71:
+            return _fail("COMPILED_GAP_AUTHOR_CONTEXT_DIGEST_INVALID")
+        if author_context.context_sha256(redacted_context) != context_sha:
+            return _fail("COMPILED_GAP_AUTHOR_CONTEXT_DIGEST_MISMATCH")
+        if witness.get("adapter_author_context_sha256") != context_sha:
+            return _fail("COMPILED_GAP_AUTHOR_CONTEXT_WITNESS_MISMATCH")
 
         packet = {
             "schema": AUTHOR_PACKET_SCHEMA,
@@ -120,6 +136,8 @@ def build_author_packet(
             "witness_id": witness_id,
             "required_primitive": gap_witness.REQUIRED_PRIMITIVE,
             "required_behavior": str(gap_evidence.get("required_behavior") or ""),
+            "adapter_author_context": deepcopy(dict(redacted_context)),
+            "adapter_author_context_sha256": context_sha,
             "mutable_sources": mutable,
             "base_sha256_by_path": base,
             "mutable_paths": list(firewall.MUTABLE_ADAPTER_PATHS),
