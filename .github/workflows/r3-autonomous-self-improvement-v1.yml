@@ -26,7 +26,8 @@ on:
       - "canonical/runtime/capability_first_scheduler_v1.py"
       - "canonical/tests/test_autonomous_verified_self_improvement_v1.py"
       - "canonical/tests/test_r3_integrator_disposition_totality_v1.py"
-      - "canonical/tests/test_r3_improvement_queue_driver_v1.py"\n      - "canonical/tests/test_r3_direct_owned_no_delta_v1.py"
+      - "canonical/tests/test_r3_improvement_queue_driver_v1.py"
+      - "canonical/tests/test_r3_direct_owned_no_delta_v1.py"
       - "canonical/tests/test_r3_queue_kind_totality_v1.py"
       - "canonical/tests/test_r3_quarantine_recovery_v1.py"
       - "canonical/tests/test_r3_verified_cross_scope_generalization_v1.py"
@@ -36,6 +37,7 @@ on:
       - "canonical/tests/test_unified_cognitive_fabric_v1.py"
       - "canonical/tests/test_r3_improvement_cycle_fabric_v1.py"
       - "canonical/tests/test_r2_r3_durable_policy_repair_context_v2.py"
+      - "canonical/tests/test_r3_real_sqlite_compounding_cycle_v1.py"
       - ".github/workflows/r3-autonomous-self-improvement-v1.yml"
   push:
     branches:
@@ -63,7 +65,8 @@ on:
       - "canonical/runtime/capability_first_scheduler_v1.py"
       - "canonical/tests/test_autonomous_verified_self_improvement_v1.py"
       - "canonical/tests/test_r3_integrator_disposition_totality_v1.py"
-      - "canonical/tests/test_r3_improvement_queue_driver_v1.py"\n      - "canonical/tests/test_r3_direct_owned_no_delta_v1.py"
+      - "canonical/tests/test_r3_improvement_queue_driver_v1.py"
+      - "canonical/tests/test_r3_direct_owned_no_delta_v1.py"
       - "canonical/tests/test_r3_queue_kind_totality_v1.py"
       - "canonical/tests/test_r3_quarantine_recovery_v1.py"
       - "canonical/tests/test_r3_verified_cross_scope_generalization_v1.py"
@@ -73,6 +76,7 @@ on:
       - "canonical/tests/test_unified_cognitive_fabric_v1.py"
       - "canonical/tests/test_r3_improvement_cycle_fabric_v1.py"
       - "canonical/tests/test_r2_r3_durable_policy_repair_context_v2.py"
+      - "canonical/tests/test_r3_real_sqlite_compounding_cycle_v1.py"
       - ".github/workflows/r3-autonomous-self-improvement-v1.yml"
 
 jobs:
@@ -149,3 +153,5 @@ jobs:
         run: python -m unittest canonical.tests.test_r3_improvement_cycle_fabric_v1 -v
       - name: Run R2/R3 durable policy repair context suite
         run: python -m unittest canonical.tests.test_r2_r3_durable_policy_repair_context_v2 -v
+      - name: Run R3 real SQLite compounding cycle
+        run: python -m unittest canonical.tests.test_r3_real_sqlite_compounding_cycle_v1 -v
