@@ -52,6 +52,8 @@ on:
       - "canonical/tests/test_r3_success_adapter_author_context_v1.py"
       - "canonical/tests/test_r3_success_adapter_patch_author_wrapper_v1.py"
       - "canonical/tests/test_r3_deterministic_mode_guard_patch_author_v1.py"
+      - "canonical/runtime/r3_deterministic_mapping_guard_patch_author_v1.py"
+      - "canonical/tests/test_r3_deterministic_mapping_guard_patch_author_v1.py"
       - "canonical/tests/test_r3_mode_guard_patch_author_dominance_v1.py"
       - "canonical/governance/R3_MODE_GUARD_PATCH_AUTHOR_DOMINANCE_TRUTH_REPAIR_20261009_V1.json"
       - ".github/workflows/r3-autonomous-self-improvement-v1.yml"
@@ -107,6 +109,8 @@ on:
       - "canonical/tests/test_r3_success_adapter_author_context_v1.py"
       - "canonical/tests/test_r3_success_adapter_patch_author_wrapper_v1.py"
       - "canonical/tests/test_r3_deterministic_mode_guard_patch_author_v1.py"
+      - "canonical/runtime/r3_deterministic_mapping_guard_patch_author_v1.py"
+      - "canonical/tests/test_r3_deterministic_mapping_guard_patch_author_v1.py"
       - "canonical/tests/test_r3_mode_guard_patch_author_dominance_v1.py"
       - "canonical/governance/R3_MODE_GUARD_PATCH_AUTHOR_DOMINANCE_TRUTH_REPAIR_20261009_V1.json"
       - ".github/workflows/r3-autonomous-self-improvement-v1.yml"
@@ -206,5 +210,7 @@ jobs:
         run: python -m unittest canonical.tests.test_r3_success_adapter_patch_author_wrapper_v1 -v
       - name: Run R3 deterministic mode-guard patch-author suite
         run: python -m unittest canonical.tests.test_r3_deterministic_mode_guard_patch_author_v1 -v
+      - name: Run R3 deterministic mapping-guard patch-author suite
+        run: python -m unittest canonical.tests.test_r3_deterministic_mapping_guard_patch_author_v1 -v
       - name: Run R3 mode-guard author dominance truth-repair suite
         run: python -m unittest canonical.tests.test_r3_mode_guard_patch_author_dominance_v1 -v
