@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_SEMANTIC_AUTHORITY_RECEIPT_VERIFIER_REMOTE_VERIFY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__EXACT_BYTES_3_OF_3__7_OF_7__EMPTY_PRODUCTION_ADMISSION_SET",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "semantic-authority-capability-transport-20261009",
+    "base_main": "208eb360339c9ee9726447d34f714090994c4db4"
+  },
+  "exact_blobs": {
+    "canonical/runtime/bound_capabilities/semantic_authority_receipt_verify_v1.py": "be6cc30939d27bf5bd62c8f5994a342dde164d79",
+    "canonical/tests/test_semantic_authority_receipt_verify_v1.py": "0f0603cd8c0ab227fb7918aa726a527dd639fee1",
+    "canonical/governance/SEMANTIC_AUTHORITY_ADMISSION_REGISTRY_V1.json": "5afd9f66ad006b51844fcb9cfdcc15e33d1ed6be"
+  },
+  "independent_carrier": {
+    "name": "brain-live-integrated-v1-run-20261008",
+    "sprite_id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "isolated_root": "/home/sprite/verify-semantic-authority-transport"
+  },
+  "verification": {
+    "exact_blob_binding": "PASS__3_OF_3",
+    "py_compile": "PASS",
+    "tests": "PASS__7_OF_7",
+    "independent_verifier_passed": true,
+    "verification_authority_mutated": false,
+    "production_admission_count": 0,
+    "production_empty_registry_mints_authority": false
+  },
+  "verified_contract": [
+    "EXACT_RECEIPT_CANONICAL_SHA256_ROLE_AND_SCHEMA_REQUIRED",
+    "EXACT_REPOSITORY_VERIFICATION_ARTIFACT_GIT_BLOB_REQUIRED",
+    "VERIFICATION_ARTIFACT_MUST_BIND_EXACT_RECEIPT_SHA256",
+    "INDEPENDENT_VERIFIER_PASS_AND_UNMUTATED_VERIFICATION_AUTHORITY_REQUIRED",
+    "RECEIPT_MUTATION_ROLE_MISMATCH_AND_ARTIFACT_DRIFT_FAIL_CLOSED",
+    "VERIFIER_RETURNS_ONLY_PREVIOUSLY_ADMITTED_RECEIPT_FIELDS_PLUS_ADMISSION_METADATA"
+  ],
+  "hard_nonclaims": [
+    "NO_SEMANTIC_RECEIPT_IS_ADMITTED_BY_THIS_VERIFICATION",
+    "NO_SEMANTIC_TRUTH_IS_INFERRED",
+    "NO_OEWN_FINANCE_COVERAGE_CREDIT",
+    "NO_ACCEPTANCE_AUTHORITY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
