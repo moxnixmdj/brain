@@ -20,12 +20,12 @@
   ],
   "final_branch_state": {
     "exact_blob_graph_pass": true,
-    "parent_main": "b1e19d7a45f96a40aadba95c17b712e406af0965",
+    "parent_main": "461c30bde072db63b946b4671e61eafaaa3c8276",
     "mission_sha": "2b37b3185e03b55678d7d394c8d29202a4b3ab48",
     "live_binding_sha": "ef9bc78cb6ffeaebfe7d45ac413f9a42fa0e98fb",
     "claim_scope_sha": "907c2935f7a6aeaf69e9288219fd94b36f58e8b2",
     "root_theorem_sha": "4e2a77fc661a386f1affb4297ec9739a583872eb",
-    "authority_sha": "af118cbe3692a4e8628ee8f200e60544865e13eb"
+    "authority_sha": "2c23cab9def45ad8e36b7c07f657b022b820b959"
   },
   "nonclaims": [
     "R1_R2_R3_REMAIN_SEPARATE",
@@ -38,5 +38,5 @@
     "incremental_spend_usd": 0,
     "terminal_credit_delta": 0
   },
-  "rebase_reconciliation": "LATEST_MAIN_MISSION_POINTER_CHANGE_REBOUND_AND_NEWER_AUTHORITY_STATE_PRESERVED"
+  "rebase_reconciliation": "LATEST_MAIN_AUTHORITY_CHANGE_PRESERVED_AND_R4_REFERENCES_REAPPLIED"
 }
