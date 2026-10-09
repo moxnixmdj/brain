@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_SOURCE_ALIGNED_SEMANTIC_ENTAILMENT_REMOTE_VERIFY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__24_OF_24_REMOTE_FOCUSED_AND_V39_INTEGRATION_TESTS__EXACT_V41_REBASE_BYTES__ZERO_TERMINAL_CREDIT",
+  "subject_branch": "fix/r2-v41-source-aligned-entailment-20261009",
+  "carrier": {
+    "name": "brain-live-integrated-v1-run-20261008",
+    "id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "workspace": "/home/sprite/source-entailment-verify"
+  },
+  "exact_blobs": {
+    "canonical/runtime/source_aligned_semantic_entailment_v1.py": "855f7d6cff2333bdaf19ca01317a164e81b98534",
+    "canonical/runtime/semantic_relation_control_v1.py": "e06d9ecc244eae188060762b662a2d41a0157e75",
+    "canonical/tests/test_source_aligned_semantic_entailment_v1.py": "b85befa7b226ad82e1fc8f57c00356eee7d8fc4a",
+    "canonical/tests/test_semantic_relation_control_v1.py": "d1f1b4381b2892e3bbe0afd1bb3acb7ded41fb35"
+  },
+  "replay": {
+    "tests_run": 24,
+    "failures": 0,
+    "errors": 0,
+    "result": "PASS"
+  },
+  "proved": [
+    "DIRECT_CHECKED_CLASS_INCLUSION",
+    "TRANSITIVE_CROSS_SOURCE_ENTAILMENT_COMPOSITION",
+    "MUTUAL_CHECKED_DIRECTIONS_YIELD_SCOPED_LOGICAL_EQUIVALENCE",
+    "ONE_WAY_ENTAILMENT_DOES_NOT_BECOME_EQUIVALENCE",
+    "EXACT_DEFINITION_IS_BIDIRECTIONAL",
+    "CONTENT_HASH_AND_SCOPE_MISMATCH_FAIL_CLOSED",
+    "UNSUPPORTED_RELATION_LANGUAGE_FAILS_CLOSED",
+    "COUNTEREXAMPLE_DISPROVES_DIRECTION",
+    "PROOF_COUNTEREXAMPLE_CONFLICT_FAILS_CLOSED",
+    "V39_SEMANTIC_RELATION_CONTROL_CONSUMES_CHECKED_ENTAILMENT"
+  ],
+  "hard_nonclaims": [
+    "NO_GENERAL_NATURAL_LANGUAGE_ENTAILMENT_CLAIM",
+    "NO_OPEN_WORLD_SYNONYMY_CLAIM",
+    "NO_SOURCE_FACTUAL_AUTHORITY_CLAIM",
+    "NO_NEW_DIRECT_ROUTE_OR_FINANCE_SUBREGION_COUNT_CREDIT",
+    "NO_TERMINAL_OR_CHECKPOINT_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
