@@ -13,7 +13,7 @@
   },
   "predecessor_ledger": {
     "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261009_V31.json",
-    "git_blob_sha": "d5e194323099e73d4658252e29064ed7292176c2",
+    "git_blob_sha": "c22a87838e172a7415f567f76dd793d01721a507",
     "consumed_slots": 16,
     "consumed_successes": 0,
     "consumed_final_failures": 16
