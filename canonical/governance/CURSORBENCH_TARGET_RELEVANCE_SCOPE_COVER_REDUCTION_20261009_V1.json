@@ -1,0 +1,90 @@
+{
+  "schema": "PROJECT_BRAIN_CURSORBENCH_TARGET_RELEVANCE_SCOPE_COVER_REDUCTION_V1",
+  "date": "2026-10-09",
+  "status": "TARGET_RELEVANCE_REDUCED_TO_TARGET_INTERSECTION_OR_PROVED_SCOPE_INCLUSION__NON_TARGET_SINGLETON_TRANSFER_REJECTED__ZERO_CREDIT",
+  "target_predicate": "CODING_CURSORBENCH_GE_57_8",
+  "reused_scope_kernel": {
+    "path": "canonical/runtime/proof_carrying_scope_cover_v1.py",
+    "git_blob_sha": "3143bd707d51d4d66b2171396b3d596c9a26adf8",
+    "rule": "COMPLETE_TARGET_SCOPE_PLUS_COMPLETE_COVER_PLUS_WHOLE_CELL_POSITIVE_ADEQUACY"
+  },
+  "reduction": {
+    "finite_complete_cell": {
+      "target_contribution_rule": "ONLY_MEMBERS_IN_TARGET_INTERSECTION_CONTRIBUTE_TO_TARGET_ADEQUACY",
+      "sufficient_target_relevance_witnesses": [
+        "EXACT_TARGET_MEMBER_BINDING_FOR_AT_LEAST_ONE_CELL_MEMBER",
+        "INDEPENDENT_NONEMPTY_TARGET_INTERSECTION_PROOF"
+      ],
+      "benchmark_label_similarity_sufficient": false,
+      "behavioral_analogy_sufficient": false
+    },
+    "formal_all_members": {
+      "transfer_rule": "TARGET_SCOPE_MUST_BE_INDEPENDENTLY_PROVED_SUBSET_OF_THE_THEOREM_DOMAIN_OR_COVERED_BY_EXACT_TARGET_DEFINED_CELLS",
+      "stronger_superset_mode_reuses": "PROOF_CARRYING_SUPERSET",
+      "theorem_on_unrelated_benchmark_population_sufficient": false
+    }
+  },
+  "current_candidates": {
+    "wal_recovery_ordering": {
+      "benchmark": "TERMINAL_BENCH_4",
+      "exact_v5_success": true,
+      "singleton_cell_complete": true,
+      "cursorbench_target_member_proved": false,
+      "target_intersection_proved_nonempty": false,
+      "cursorbench_target_contribution": false,
+      "source": {
+        "path": "canonical/governance/CODING_V5_WAL_SINGLETON_FINITE_CELL_REDUCTION_20261009_V1.json",
+        "git_blob_sha": "11c8997961bef45c415d16e6d1a0e47d5fa8e21d"
+      }
+    },
+    "react_lead_form": {
+      "benchmark": "TERMINAL_BENCH_4",
+      "all_five_typed_atoms_proved_on_spent_context": true,
+      "historical_candidate_reward": 0,
+      "cursorbench_target_member_proved": false,
+      "target_intersection_proved_nonempty": false,
+      "cursorbench_target_contribution": false,
+      "source": {
+        "path": "canonical/governance/CURSORBENCH_TYPED_ACCEPTANCE_REAL_EVIDENCE_SPENT_CONTEXT_RECONCILIATION_20261009_V1.json",
+        "git_blob_sha": "06c6df3be8b065b106038da32de4e268be9a7521"
+      }
+    }
+  },
+  "independent_logic_check": {
+    "provider": "WOLFRAM_LANGUAGE",
+    "result": [
+      true,
+      true,
+      true,
+      false
+    ],
+    "interpretation": [
+      "NON_TARGET_MEMBER_CANNOT_FORM_TARGET_SUCCESS_WITNESS_EVEN_IF_SUCCESS_TRUE",
+      "TARGET_INTERSECTION_IS_LOAD_BEARING_FOR_FINITE_CELL_RELEVANCE",
+      "TARGET_SCOPE_INCLUSION_IS_LOAD_BEARING_FOR_FORMAL_TRANSFER",
+      "CONTRADICTION_NOT_TARGET_AND_TARGET_MEMBER_IS_UNSATISFIABLE"
+    ]
+  },
+  "deduction": {
+    "wal_direct_cursorbench_finite_cell_route_closed": false,
+    "wal_direct_cursorbench_finite_cell_route_state": "REJECTED__NO_TARGET_MEMBERSHIP_OR_INTERSECTION_PROOF",
+    "react_direct_cursorbench_finite_cell_route_state": "REJECTED__NO_TARGET_MEMBERSHIP_OR_INTERSECTION_PROOF",
+    "separate_target_relevance_verifier_needed": false,
+    "existing_scope_cover_kernel_is_canonical_relation_mechanism": true,
+    "next_sound_route": "PROVE_A_TARGET_DEFINED_OR_PROOF_CARRYING_SUPERSET_ADEQUACY_REGION_THAT_ACTUALLY_COVERS_CURSORBENCH_SCOPE__OR_BIND_A_REAL_CURSORBENCH_TARGET_MEMBER"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_WAL_OR_REACT_LEAD_FORM_IS_CURSORBENCH",
+    "NO_CLAIM_BEHAVIORAL_SIMILARITY_ESTABLISHES_BENCHMARK_MEMBERSHIP",
+    "NO_CLAIM_ONE_TARGET_MEMBER_WOULD_CLOSE_WHOLE_CURSORBENCH_SCOPE",
+    "NO_CURSORBENCH_SCORE_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "promotion_authority": false,
+  "terminal_authority": false
+}
