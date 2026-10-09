@@ -1,4 +1,5 @@
 from __future__ import annotations
+from copy import deepcopy
 from hashlib import sha256
 import json
 from pathlib import Path
@@ -178,6 +179,51 @@ class DynamicLiveTests(unittest.TestCase):
                 "FAIL_CLOSED__DYNAMIC_SEMANTIC_OPEN_REQUIRES_PRECEDENCE_AUTHORITY",
             )
             legacy.assert_not_called()
+
+
+    def test_preflight_is_pure_no_output(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td); write_case(root,case())
+            out_path=root/"canonical/tmp/out.json"
+            self.assertFalse(out_path.exists())
+            pf=direct.preflight({"task_id":"x","goal":goal()},repo_root=root)
+            self.assertTrue(pf["matched"],pf)
+            self.assertFalse(out_path.exists())
+
+    def test_raw_acceptance_drift_rolls_back(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td); write_case(root,case())
+            op=root/"canonical/tmp/out.json"; op.write_text('{"old":true}\\n')
+            old=op.read_bytes()
+            first=direct._contract(goal())
+            second=deepcopy(first)
+            second["acceptance_contract"]["required_obligation_ids"]=list(
+                second["acceptance_contract"]["required_obligation_ids"]
+            )+["FAKE-DRIFT"]
+            with patch.object(direct,"_contract",side_effect=[first,second]):
+                out=direct.run({"task_id":"x","goal":goal()},repo_root=root)
+            self.assertFalse(out["pass"],out)
+            self.assertIn("RAW_ACCEPTANCE_SET_DRIFT",out["reason"])
+            self.assertTrue(out["rollback_complete"])
+            self.assertEqual(op.read_bytes(),old)
+
+    def test_matched_dynamic_failure_never_falls_through_to_legacy(self):
+        row=dyn_row()
+        failure={
+            "pass":False,
+            "matched":True,
+            "route_id":direct.ROUTE_ID,
+            "status":"OPEN__DIRECT_ADEQUACY_ROUTE_DID_NOT_VERIFY",
+        }
+        with patch.object(live,"preflight",return_value={
+                 "matched":True,"route_id":direct.ROUTE_ID,"status":"MATCHED"
+             }), \
+             patch.object(live,"_dynamic_rows",return_value=[row]), \
+             patch.object(live,"_resolve_callable",return_value=lambda *a,**k: failure), \
+             patch.object(live.legacy,"run") as legacy:
+            out=live.run({"task_id":"x","goal":goal()})
+        self.assertEqual(out,failure)
+        legacy.assert_not_called()
 
 if __name__=="__main__":
     unittest.main()
