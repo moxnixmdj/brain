@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_CURSORBENCH_TYPED_ACCEPTANCE_SPENT_VALIDATION_CASE_SELECTION_CORRECTION_V3",
+  "date": "2026-10-09",
+  "status": "REACT_FROZEN_MODEL_FALSIFIED_ON_LOSSLESS_SOURCE_COVERAGE__ADVANCE_TO_NEW_PRECOMMITTED_SPENT_CASE__ZERO_CREDIT",
+  "predecessor": {
+    "path": "canonical/governance/CURSORBENCH_TYPED_ACCEPTANCE_SPENT_VALIDATION_CASE_SELECTION_CORRECTION_20261009_V2.json",
+    "git_blob_sha": "23714c00e0bf75c558597003f4cdb05761c500ae"
+  },
+  "react_result": {
+    "task": "react-lead-form",
+    "frozen_model_path": "canonical/governance/CURSORBENCH_REACT_LEAD_FORM_TYPED_ACCEPTANCE_MODEL_20261009_V1.json",
+    "frozen_model_sha256": "5fa4d820a629fee579dccf5befa9ed371595967a2fa2adb7771aaf057436a19f",
+    "frozen_before_oracle_disclosure": true,
+    "historical_hidden_verifier_reward": 1,
+    "source_coverage_verdict": "FALSIFIED__TWO_RAW_SOURCE_OBLIGATION_CLASSES_NOT_EXPLICITLY_REPRESENTED",
+    "omitted_obligation_classes": [
+      "EXECUTION_TIME_BUDGET_28800_SECONDS",
+      "NO_ONLINE_TASK_SPECIFIC_SOLUTIONS_OR_HINTS"
+    ],
+    "same_case_patch_and_recount_forbidden": true,
+    "preverifier_information_boundary_atom_proved": false,
+    "reason_information_boundary_unproved": "HISTORICAL_SESSION_HAS_NO_TERMINAL_AUTHORIZATION_ARTIFACT_REQUIRED_BY_CURRENT_BOUNDARY_SCHEMA"
+  },
+  "new_case_selection": {
+    "source": "EXISTING_VERIFICATION_CAPSULE_RUNNER_BRANCH_INVENTORY",
+    "candidate_rule": [
+      "BRANCH_PREFIX_bridge/session-mini-swe-",
+      "EXCLUDE_BRANCH_NAMES_CONTAINING_-dev-",
+      "EXCLUDE_TASK_FAMILIES_ALREADY_INSPECTED_OR_CONTAMINATED_IN_THIS_SUCCESSOR_ANALYSIS",
+      "EXCLUDE_TASK_FAMILIES_WITH_OUTCOME_DETAILS_ALREADY_EXPOSED_IN_CURRENT_CONTEXT",
+      "COLLAPSE_MULTIPLE_BRANCHES_PER_TASK_FAMILY",
+      "SORT_REMAINING_TASK_FAMILIES_LEXICOGRAPHICALLY",
+      "SELECT_FIRST"
+    ],
+    "selected_task_family": "layout-config-recreation2",
+    "selected_session_branch": "bridge/session-mini-swe-layout-config-recreation2-20261002-v1",
+    "selected_case_task_instruction_read_before_this_freeze": false,
+    "selected_case_session_artifacts_read_before_this_freeze": false,
+    "selected_case_reward_or_verifier_details_read_before_this_freeze": false
+  },
+  "cross_case_learning_authorized": [
+    "EVERY_RAW_SOURCE_OBLIGATION_MUST_MAP_TO_AT_LEAST_ONE_EXPLICIT_TYPED_REQUIREMENT",
+    "EXECUTION_TIME_BUDGET_IS_A_LOAD_BEARING_SOURCE_CONSTRAINT_WHEN_PRESENT",
+    "NO_TASK_SPECIFIC_ONLINE_HINTS_IS_A_LOAD_BEARING_INFORMATION_BOUNDARY_CONSTRAINT_WHEN_PRESENT",
+    "HIDDEN_VERIFIER_PASS_DOES_NOT_RESCUE_AN_INCOMPLETE_FROZEN_ACCEPTANCE_MODEL"
+  ],
+  "producer_read_policy_until_next_model_freeze": [
+    "READ_ONLY_SELECTED_SESSION_METADATA_NEEDED_TO_BIND_TASK_ID_AND_BENCHMARK_REF",
+    "READ_ONLY_AGENT_VISIBLE_INSTRUCTION_MD_AT_THE_BOUND_BENCHMARK_REF",
+    "DO_NOT_READ_TASK_TOML",
+    "DO_NOT_READ_SESSION_COMMANDS_OR_OBSERVATIONS",
+    "DO_NOT_READ_OBSERVATION_BRANCH",
+    "DO_NOT_READ_TERMINAL_AUTHORIZATION",
+    "DO_NOT_READ_FINAL_VERIFICATION",
+    "DO_NOT_BROAD_SEARCH_SELECTED_TASK_NAME"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "promotion_authority": false,
+  "terminal_authority": false
+}
