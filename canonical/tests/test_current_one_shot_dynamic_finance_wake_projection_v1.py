@@ -91,6 +91,12 @@ def test_dynamic_projection_exposes_exact_default_runtime_separately_from_r2_bas
     )
     live = out["default_runtime_integration"]
     assert live["scheduler_baseline"]["activation_route_count"] == 39
+    assert live["scheduler_baseline"]["runtime_path"] == (
+        "canonical/runtime/r2_direct_end_to_end_adequacy_v19.py"
+    )
+    assert live["scheduler_baseline"]["runtime_git_blob_sha"] == projection._blob(
+        ROOT / projection.PATHS["v19"]
+    )
     assert live["scheduler_baseline"]["is_default_runtime_source_selector"] is False
     assert live["effective_static_backend"]["runtime_path"] == (
         "canonical/runtime/r2_direct_end_to_end_adequacy_v21.py"
