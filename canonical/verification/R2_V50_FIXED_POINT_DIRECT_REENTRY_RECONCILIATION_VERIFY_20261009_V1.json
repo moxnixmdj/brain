@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_R2_V50_FIXED_POINT_DIRECT_REENTRY_RECONCILIATION_VERIFY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__LIVE_V50_AUTHORITY_CHAIN_BINDS_ONE_FIXED_POINT_RUNTIME__HISTORICAL_V38_PROVENANCE_PRESERVED__ZERO_TERMINAL_CREDIT",
+  "exact_live_blobs": {
+    "fixed_point_runtime": "2f0ac068357869279ab3362c80d6fae976ce38b3",
+    "fixed_point_tests": "2e21d466007a7725e2d10b9c7fff31feaedab712",
+    "direct_reentry_verification": "08a13d9c8f7e39ac36116532616764f1f1371623",
+    "scheduler_v50": "6ecc0a0360de4a966c0c2cf62aea3d7d273f0955",
+    "current_r2_v50": "abf75e14016396da83f50ae8d24e64818c34cfad",
+    "current_terminal_authority": "85b263366aa8daa28655f173ac1523f218a21897",
+    "direct_activation_v26": "9bbb2b604fdf31c16679c9b71ccd47996e018cb1",
+    "direct_runtime_v13": "6784e7274d640c7f75659d4dab9237188ea784d1"
+  },
+  "live_invariants": {
+    "runtime_matches_verified_direct_reentry_blob": true,
+    "scheduler_v50_binds_runtime": true,
+    "scheduler_counts_33_routes_30_bounded_families": true,
+    "scheduler_preserves_one_primary_finance_residual": true,
+    "current_r2_binds_exact_v50_scheduler": true,
+    "current_r2_binds_new_fixed_point_runtime": true,
+    "current_terminal_binds_exact_v50_scheduler": true,
+    "current_terminal_binds_exact_current_r2_v50_pointer": true,
+    "current_terminal_binds_new_fixed_point_runtime": true,
+    "activation_remains_33_routes_30_bounded_families": true,
+    "direct_runtime_v13_unchanged": true,
+    "terminal_remains_false": true,
+    "no_stale_fixed_point_blob_in_live_v50_scheduler": true,
+    "no_stale_fixed_point_blob_in_current_r2_v50": true,
+    "no_stale_fixed_point_blob_in_current_terminal_v50_reconciliation": true
+  },
+  "historical_provenance_preserved": [
+    {
+      "path": "CURRENT_TERMINAL_AUTHORITY.r2_v38_semantic_coverage.fixed_point_controller_git_blob_sha",
+      "git_blob_sha": "cbc37346e5838b761cbc124b956d6e4e04986594",
+      "classification": "HISTORICAL_V38_PROVENANCE__NOT_CURRENT_RUNTIME_AUTHORITY"
+    },
+    {
+      "path": "CURRENT_TERMINAL_AUTHORITY.r2_v38_live_projection_reconciliation.fixed_point_controller_git_blob_sha",
+      "git_blob_sha": "cbc37346e5838b761cbc124b956d6e4e04986594",
+      "classification": "HISTORICAL_V38_PROVENANCE__NOT_CURRENT_RUNTIME_AUTHORITY"
+    }
+  ],
+  "behavioral_verification": {
+    "py_compile": "PASS",
+    "fixed_point_suite": "28_OF_28_PASS",
+    "v13_router_suite": "3_OF_3_PASS"
+  },
+  "accounting": {
+    "direct_route_count_delta": 0,
+    "bounded_family_count_delta": 0,
+    "primary_unsolved_cell_count_delta": 0,
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "nonclaims": [
+    "NO_HISTORICAL_PROVENANCE_REWRITE",
+    "NO_NEW_SEMANTIC_TRUTH_AUTHORITY",
+    "NO_FINANCE_RESIDUAL_CLOSURE",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "terminal_authority": false
+}
