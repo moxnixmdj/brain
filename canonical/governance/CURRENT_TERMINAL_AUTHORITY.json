@@ -1219,6 +1219,11 @@
       "path": "canonical/governance/CODING_V5_WAL_SINGLETON_FINITE_CELL_REDUCTION_20261009_V1.json",
       "git_blob_sha": "11c8997961bef45c415d16e6d1a0e47d5fa8e21d"
     },
+    "finance_acceptance_route_split_20261009_v1": {
+      "path": "canonical/governance/FINANCE_ACCEPTANCE_ROUTE_SPLIT_20261009_V1.json",
+      "git_blob_sha": "09ff2c5368fc9643fd1f1e64f37a1687a3f338f2",
+      "note": "FINANCE_INDEX_AND_FINANCE_AGENT_V2_HAVE_DISTINCT_PROOF_SHAPES__ZERO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+    },
     "executable_refinement_framework_20261009_v1": {
       "verifier": {
         "path": "canonical/runtime/executable_refinement_verifier_v1.py",
@@ -2007,6 +2012,20 @@
     "coding_v5_wal_singleton_exact_v5_success_bound": true,
     "coding_v5_wal_singleton_target_relevance_to_cursorbench_proved": false,
     "coding_v5_wal_singleton_target_relevance_to_frontiercode_proved": false,
+    "finance_acceptance_predicates_share_one_mandatory_serial_semantic_tail": false,
+    "finance_index_fixed_bar_state": "OPEN_BLOCKED__COMPONENT_NORMALIZATION_AND_OR_LOWER_BOUND_RECEIPTS_REQUIRED",
+    "finance_index_general_finance_semantic_tail_serial_prerequisite": false,
+    "finance_index_separate_index_execution_required": false,
+    "finance_index_direct_threshold_sufficient_condition": "SUM_WEIGHTED_VERIFIED_NORMALIZED_BRAIN_COMPONENT_LOWER_BOUNDS_GE_61",
+    "finance_index_current_component_count": 6,
+    "finance_index_reusable_checkpoint_dependency_count": 4,
+    "finance_index_owner_component_breakdown_publicly_available": false,
+    "finance_index_inner_component_normalization_publicly_bound": false,
+    "finance_agent_v2_state": "DORMANT_ON_CURRENT_PUBLIC_SCOPE_CUT",
+    "finance_agent_v2_public_contract_superset_route_admissible": false,
+    "finance_agent_v2_private_scored_population_publicly_complete": false,
+    "finance_agent_v2_next_wake": "EXACT_RESULT_OR_PRIVATE_CONVENTION_SCOPE_BIND_OR_STRONGER_SCOPE_COMPLETE_CERTIFICATE",
+    "finance_acceptance_next_proof_object": "FINANCE_INDEX__SATURATE_EXISTING_CONTENT_ADDRESSED_COMPONENT_LOWER_BOUND_AND_NORMALIZATION_EVIDENCE__FINANCE_AGENT_V2__SLEEP_UNTIL_WAKE",
     "executable_refinement_framework_bound": true,
     "router_canary_structural_refinement_binding_bound": true,
     "router_canary_refinement_verified": false,
@@ -2718,7 +2737,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 94,
+  "pointer_revision": 95,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
@@ -3715,6 +3734,17 @@
     "rank16_task_read": false,
     "rank16_task_started": false,
     "required_repair": "CANDIDATE_LOCAL_FAIL_CLOSED_REJECTION_FOR_COVERAGE_OUTSIDE_FROZEN_CONTRACT",
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "finance_acceptance_route_split_reconciliation_20261009_v1": {
+    "source": {
+      "path": "canonical/governance/FINANCE_ACCEPTANCE_ROUTE_SPLIT_20261009_V1.json",
+      "git_blob_sha": "09ff2c5368fc9643fd1f1e64f37a1687a3f338f2"
+    },
+    "result": "FINANCE_INDEX_WEIGHTED_COMPONENT_ROUTE_ACTIVE_SEPARATELY__FINANCE_AGENT_PUBLIC_SCOPE_SHORTCUT_DORMANT",
+    "acceptance_obligation_count_delta": 0,
+    "proved_predicate_count_delta": 0,
     "acceptance_credit_delta": 0,
     "terminal_credit_delta": 0
   },
