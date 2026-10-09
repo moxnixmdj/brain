@@ -38,3 +38,10 @@ def test_distinct_witness(tmp_path):
  assert out["expanded_capability_ids"]==["new-route"]
  w=json.loads(DISTINCT.read_text())["witness"]
  assert w["region_truth"]=={"A":True,"T":False,"F":False,"R":False,"S":False,"V":False}
+
+if __name__ == "__main__":
+    import tempfile
+    test_certificate()
+    with tempfile.TemporaryDirectory() as td:
+        test_distinct_witness(Path(td))
+    print("PASS 2/2 adaptive sixth region")
