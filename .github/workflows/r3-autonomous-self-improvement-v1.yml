@@ -5,7 +5,12 @@ on:
     paths:
       - "canonical/runtime/autonomous_verified_self_improvement_v1.py"
       - "canonical/runtime/r3_improvement_queue_driver_v1.py"
+      - "canonical/runtime/one_shot_verified_closure_v1.py"
+      - "canonical/runtime/one_shot_reality_closure_v2.py"
       - "canonical/tests/test_r3_root1_adapter_gap_driver_v1.py"
+      - "canonical/tests/test_r3_evidence_only_acquisition_routing_v1.py"
+      - "canonical/tests/test_one_shot_verified_closure_v1.py"
+      - "canonical/tests/test_one_shot_reality_closure_v2.py"
       - "canonical/tests/test_r3_root1_adapter_gap_witness_v1.py"
       - "canonical/tests/test_r3_verification_frontier_repair_reducer_v1.py"
       - "canonical/runtime/r3_root1_adapter_gap_witness_v1.py"
@@ -59,7 +64,12 @@ on:
     paths:
       - "canonical/runtime/autonomous_verified_self_improvement_v1.py"
       - "canonical/runtime/r3_improvement_queue_driver_v1.py"
+      - "canonical/runtime/one_shot_verified_closure_v1.py"
+      - "canonical/runtime/one_shot_reality_closure_v2.py"
       - "canonical/tests/test_r3_root1_adapter_gap_driver_v1.py"
+      - "canonical/tests/test_r3_evidence_only_acquisition_routing_v1.py"
+      - "canonical/tests/test_one_shot_verified_closure_v1.py"
+      - "canonical/tests/test_one_shot_reality_closure_v2.py"
       - "canonical/tests/test_r3_root1_adapter_gap_witness_v1.py"
       - "canonical/tests/test_r3_verification_frontier_repair_reducer_v1.py"
       - "canonical/runtime/r3_root1_adapter_gap_witness_v1.py"
@@ -119,6 +129,8 @@ jobs:
           python -m py_compile
           canonical/runtime/autonomous_verified_self_improvement_v1.py
           canonical/runtime/r3_improvement_queue_driver_v1.py
+          canonical/runtime/one_shot_verified_closure_v1.py
+          canonical/runtime/one_shot_reality_closure_v2.py
           canonical/runtime/r3_root1_adapter_gap_witness_v1.py
           canonical/runtime/r3_verification_frontier_repair_reducer_v1.py
           canonical/runtime/r3_quarantine_recovery_v1.py
@@ -151,6 +163,12 @@ jobs:
         run: python -m unittest canonical.tests.test_r3_verification_frontier_repair_reducer_v1 -v
       - name: Run R3/Root1 adapter-gap queue integration suite
         run: python -m unittest canonical.tests.test_r3_root1_adapter_gap_driver_v1 -v
+      - name: Run R3 evidence-only acquisition routing suite
+        run: python -m unittest canonical.tests.test_r3_evidence_only_acquisition_routing_v1 -v
+      - name: Run one-shot verified closure regression suite
+        run: python -m unittest canonical.tests.test_one_shot_verified_closure_v1 -v
+      - name: Run one-shot reality closure regression suite
+        run: python -m unittest canonical.tests.test_one_shot_reality_closure_v2 -v
       - name: Run R3 durable queue-kind totality suite
         run: python -m unittest canonical.tests.test_r3_queue_kind_totality_v1 -v
       - name: Run R3 quarantine recovery regression suite
