@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import tempfile
 import unittest
@@ -150,6 +151,39 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
             "CONTINUE_WITHOUT_DISAMBIGUATION",
         )
         self.assertFalse(out["result"]["ask_user_required"])
+
+    def test_auto_semantic_closed_universe_manifest_is_content_addressed(self):
+        universe = {
+            "schema": "PROJECT_BRAIN_CLOSED_SEMANTIC_HYPOTHESIS_UNIVERSE_V1",
+            "universe_id": "u1",
+            "scope_id": "finance:bounded-source",
+            "closure_statement": "EXACTLY_THESE_INTERPRETATIONS_ARE_ADMISSIBLE_WITHIN_SCOPE",
+            "terminal_signature_keys": ["action"],
+            "interpretations": [
+                {"world_id": "a", "terminal_signature": {"action": "SAME"}},
+                {"world_id": "b", "terminal_signature": {"action": "SAME"}},
+            ],
+            "observations": [],
+        }
+        digest = hashlib.sha256(
+            json.dumps(
+                universe,
+                sort_keys=True,
+                separators=(",", ":"),
+                ensure_ascii=False,
+            ).encode("utf-8")
+        ).hexdigest()
+        out = run({
+            "payload": {
+                "ambiguity_owner": "USER_INTENT",
+                "closed_hypothesis_universe": universe,
+                "expected_manifest_sha256": digest,
+            },
+        })
+        self.assertTrue(out["auto_routed"], out)
+        self.assertEqual(out["mode"], "SEMANTIC_AMBIGUITY")
+        self.assertTrue(out["inner_pass"], out)
+        self.assertEqual(out["result"]["action"], "CONTINUE_WITHOUT_DISAMBIGUATION")
 
     def test_auto_semantic_underdetermination_asks_only_when_action_differs(self):
         out = run({
