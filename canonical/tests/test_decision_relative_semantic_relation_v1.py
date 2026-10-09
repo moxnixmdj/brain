@@ -112,6 +112,9 @@ class Tests(unittest.TestCase):
             "required_relation": "TASK_EQUIVALENCE",
             "scope_sha256": SCOPE,
             "evidence": {},
+            "task_terminal_signature_completeness_receipt": receipt(
+                "TASK_TERMINAL_SIGNATURES_COMPLETE"
+            ),
             "task_terminal_rows": terminal_rows(
                 {"threshold": 10, "action": "REDUCE"},
                 {"threshold": 10, "action": "REDUCE"},
@@ -128,12 +131,28 @@ class Tests(unittest.TestCase):
             "required_relation": "TASK_EQUIVALENCE",
             "scope_sha256": SCOPE,
             "evidence": {},
+            "task_terminal_signature_completeness_receipt": receipt(
+                "TASK_TERMINAL_SIGNATURES_COMPLETE"
+            ),
             "task_terminal_rows": terminal_rows(
                 {"action": "REDUCE"},
                 {"action": "HOLD"},
             ),
         })
         self.assertFalse(out["pass"])
+        self.assertEqual(out["strongest_proved_relation"], "UNKNOWN")
+
+    def test_task_equivalence_requires_authenticated_signature_completeness(self):
+        out = prove({
+            "expression_a": "A",
+            "expression_b": "B",
+            "required_relation": "TASK_EQUIVALENCE",
+            "scope_sha256": SCOPE,
+            "evidence": {},
+            "task_terminal_rows": terminal_rows({"action": "X"}, {"action": "X"}),
+        })
+        self.assertFalse(out["pass"])
+        self.assertFalse(out["task_equivalent"])
         self.assertEqual(out["strongest_proved_relation"], "UNKNOWN")
 
     def test_bare_verified_boolean_is_not_semantic_proof(self):
@@ -185,6 +204,9 @@ class Tests(unittest.TestCase):
             "required_relation": "TASK_EQUIVALENCE",
             "scope_sha256": SCOPE,
             "evidence": {"entailment_a_to_b": receipt("A_ENTAILS_B")},
+            "task_terminal_signature_completeness_receipt": receipt(
+                "TASK_TERMINAL_SIGNATURES_COMPLETE"
+            ),
             "task_terminal_rows": terminal_rows({"action": "X"}, {"action": "X"}),
         })
         self.assertTrue(out["pass"])
