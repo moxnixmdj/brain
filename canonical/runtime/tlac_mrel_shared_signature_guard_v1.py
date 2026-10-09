@@ -1,12 +1,12 @@
 """Authenticated TLAC/MREL shared-signature guard V1.
 
-This guard proves one narrow negative fact about discrimination:
-the shared source-property bundle
+This guard proves one narrow discrimination fact: the shared source-property
+bundle
 
   loss absorption + recapitalisation + resolution
 
 cannot distinguish TLAC from MREL because both concepts independently entail
-those properties in their separately authenticated source scopes.
+those properties through their existing source-authenticated authorities.
 
 It does NOT prove concept equivalence, coextension, disjointness, or candidate-
 universe completeness. It prevents reverse-classification from a non-separating
@@ -14,7 +14,7 @@ property bundle.
 """
 from __future__ import annotations
 
-from typing import Any, Mapping
+from typing import Any
 
 from canonical.runtime import regcap_necessary_property_authority_v1 as regcap
 from canonical.runtime import mrel_necessary_property_authority_v1 as mrel
@@ -52,12 +52,10 @@ def verify_shared_signature(
     *,
     regcap_repo_root=None,
     mrel_repo_root=None,
-    regcap_projection_verifier=regcap.verify_projection_pack,
-    mrel_projection_verifier=mrel.verify_projection_pack,
 ) -> dict[str, Any]:
     try:
-        tlac = {}
-        mr = {}
+        tlac_results = {}
+        mrel_results = {}
         for prop in SHARED_PROPERTIES:
             tlac_out = regcap.verify_property_request(
                 {
@@ -68,22 +66,6 @@ def verify_shared_signature(
                 },
                 repo_root=regcap_repo_root,
             )
-            if regcap_projection_verifier is not regcap.verify_projection_pack:
-                original = regcap.verify_projection_pack
-                try:
-                    regcap.verify_projection_pack = regcap_projection_verifier
-                    tlac_out = regcap.verify_property_request(
-                        {
-                            "schema": regcap.REQUEST_SCHEMA,
-                            "scope_id": regcap.SCOPE_ID,
-                            "concept_id": regcap.TLAC,
-                            "property_id": prop,
-                        },
-                        repo_root=regcap_repo_root,
-                    )
-                finally:
-                    regcap.verify_projection_pack = original
-
             mrel_out = mrel.verify_property_request(
                 {
                     "schema": mrel.REQUEST_SCHEMA,
@@ -92,9 +74,7 @@ def verify_shared_signature(
                     "property_id": prop,
                 },
                 repo_root=mrel_repo_root,
-                projection_verifier=mrel_projection_verifier,
             )
-
             if tlac_out.get("pass") is not True:
                 return _base(
                     "FAIL_CLOSED",
@@ -107,8 +87,8 @@ def verify_shared_signature(
                     reason="MREL_PROPERTY_AUTHORITY_FAILED:" + prop,
                     mrel_result=mrel_out,
                 )
-            tlac[prop] = tlac_out
-            mr[prop] = mrel_out
+            tlac_results[prop] = tlac_out
+            mrel_results[prop] = mrel_out
 
         return _base(
             "PASS__TLAC_MREL_SHARED_SIGNATURE_AUTHENTICATED",
@@ -120,12 +100,12 @@ def verify_shared_signature(
             property_bundle_separates_pair=False,
             reverse_classification_from_shared_bundle_authorized=False,
             identity_discriminator_required=True,
-            tlac_results=tlac,
-            mrel_results=mr,
+            tlac_results=tlac_results,
+            mrel_results=mrel_results,
             theorem_boundary=(
-                "ONLY_PROVES_THAT_THE_DECLARED_SHARED_PROPERTY_BUNDLE_HAS_THE_SAME_"
-                "PREDICTED_VALUE_FOR_TLAC_AND_MREL__NO_EQUIVALENCE_DISJOINTNESS_"
-                "COEXTENSION_OR_COMPLETE_CANDIDATE_UNIVERSE_CLAIM"
+                "ONLY_PROVES_THAT_THE_DECLARED_SHARED_PROPERTY_BUNDLE_IS_ENTAILED_"
+                "BY_BOTH_TLAC_AND_MREL__NO_EQUIVALENCE_DISJOINTNESS_COEXTENSION_"
+                "OR_COMPLETE_CANDIDATE_UNIVERSE_CLAIM"
             ),
         )
     except Exception as exc:
