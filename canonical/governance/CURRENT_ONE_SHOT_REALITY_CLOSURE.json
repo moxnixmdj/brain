@@ -349,6 +349,16 @@
     "verification_authority_mutation_allowed": false,
     "fixed_point_reentry_required": true,
     "exact_task_replay_required": true,
-    "externality_is_not_task_success": true
+    "externality_is_not_task_success": true,
+    "verification": {
+      "path": "canonical/verification/ONE_SHOT_AUTO_DIRECT_ROUTE_PROMOTION_VERIFY_20261009_V1.json",
+      "git_blob_sha": "262ed9e698de54526a97249c2e91697c571bba9b",
+      "status": "PASS__PROOF_CARRYING_SYNTHESIS_ROUTE_AUTO_PROMOTION__REAL_DYNAMIC_POINTER_TRANSACTION__32_OF_32_PASS__ZERO_TERMINAL_CREDIT",
+      "isolated_provider": "SPRITES",
+      "tests_passed": 32,
+      "real_promoter_transaction": true,
+      "verification_authority_mutated": false,
+      "terminal_credit_delta": 0
+    }
   }
 }
