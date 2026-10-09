@@ -17,7 +17,12 @@ CERTIFICATE_ROOT_IDS = tuple(x[0] for x in ROOTS[:3])
 ALLOWED_SLOT_STATUSES = frozenset({"OPEN_NO_GLOBAL_CERTIFICATE_BOUND", "PROVED_CURRENT"})
 
 
-def validate(\n    registry: Mapping[str, Any],\n    *,\n    current_mission_pointer: Mapping[str, Any],\n    current_mission_authority_blob_sha: str,\n) -> dict[str, Any]:
+def validate(
+    registry: Mapping[str, Any],
+    *,
+    current_mission_pointer: Mapping[str, Any],
+    current_mission_authority_blob_sha: str,
+) -> dict[str, Any]:
     errors: list[str] = []
     if not isinstance(registry, Mapping):
         return {"pass": False, "status": "FAIL_CLOSED", "errors": ["REGISTRY_NOT_OBJECT"], "terminal_credit_delta": 0}
