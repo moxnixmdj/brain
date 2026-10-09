@@ -8,7 +8,7 @@
   },
   "predecessor": {
     "path": "canonical/runtime/one_shot_verified_closure_v1.py",
-    "git_blob_sha": "826d9bae80ed2c1f37be0e830f5e4807b262fb14",
+    "git_blob_sha": "117d85bec1e5fb49428271aa9883e89d0ef1aa0a",
     "role": "LOAD_BEARING_INNER_FIXED_POINT__STRICT_EXTERNALITY__STRUCTURED_R2_HANDOFF__GENERALIZED_R3_VERIFICATION_FRONTIER_GAP_CLASSIFICATION"
   },
   "verification": {
@@ -17,9 +17,9 @@
     "status": "PASS__V1_8_OF_8__V2_20_OF_20__LIVE_V44_STRUCTURED_HANDOFF_PASS__POINTER_COHERENCE_18_OF_18__ZERO_TERMINAL_CREDIT",
     "preserves_live_r3_fixed_point_verification": "canonical/verification/LIVE_R3_PROVENANCE_DEPLOYMENT_20261009_V1.json",
     "latest_v1_truth_repair": {
-      "path": "canonical/verification/R3_VERIFICATION_FRONTIER_GAP_TRUTH_REPAIR_VERIFY_20261009_V1.json",
-      "git_blob_sha": "31fb5b9d0610990e03c10c798e1045987b06c3f2",
-      "status": "PASS__EXACT_CURRENT_V1_BYTES__SCOPED_REMOTE_REPLAY_26_OF_26__ZERO_CREDIT"
+      "path": "canonical/verification/ONE_SHOT_V1_HARD_FRONTIER_SHAPE_REPAIR_VERIFY_20261009_V1.json",
+      "git_blob_sha": "8a26c568e89a6be033ade2e33a10503c952c3ecb",
+      "status": "PASS__EXACT_V1_BYTES__10_OF_10__PYCOMPILE_PASS__SCALAR_AND_LIST_HARD_FRONTIER_SHAPE_LOCKED__ZERO_CREDIT"
     },
     "latest_infrastructure_failclosed": {
       "path": "canonical/verification/CLOSURE_INFRASTRUCTURE_FAILCLOSED_REMOTE_VERIFY_20261009_V1.json",
@@ -277,6 +277,14 @@
     "r3_current_internal_unsolved": false,
     "regcap_one_step_discriminator_id": "RELEASABILITY_CLASS",
     "regcap_discriminator_observation_truth_currently_bound": false,
+    "terminal_credit_delta": 0
+  },
+  "one_shot_v1_hard_frontier_shape_repair": {
+    "status": "BOUND__SCALAR_FRONTIER_PRESERVED_AS_ONE_ITEM__LIST_FRONTIER_PRESERVED_ITEMWISE__ZERO_CREDIT",
+    "runtime_git_blob_sha": "117d85bec1e5fb49428271aa9883e89d0ef1aa0a",
+    "verification_path": "canonical/verification/ONE_SHOT_V1_HARD_FRONTIER_SHAPE_REPAIR_VERIFY_20261009_V1.json",
+    "verification_git_blob_sha": "8a26c568e89a6be033ade2e33a10503c952c3ecb",
+    "authority_delta": "NONE",
     "terminal_credit_delta": 0
   }
 }
