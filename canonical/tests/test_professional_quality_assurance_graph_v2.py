@@ -9,6 +9,7 @@ from canonical.runtime import assurance_closure_compiler_v1 as kernel
 ROOT = Path(__file__).resolve().parents[2]
 GRAPH = ROOT / "canonical/governance/PROFESSIONAL_QUALITY_ASSURANCE_GRAPH_20261009_V2.json"
 CATALOG = ROOT / "canonical/governance/PROFESSIONAL_QUALITY_DOMAIN_DEFEATER_CATALOG_20261009_V2.json"
+REUSE = ROOT / "canonical/governance/PROFESSIONAL_QUALITY_EXISTING_EVIDENCE_REUSE_MATRIX_20261009_V1.json"
 
 EXPECTED_ROOTS = {
     "R1_TARGET_SPECIFICATION",
@@ -110,6 +111,26 @@ class TestProfessionalQualityAssuranceGraphV2(unittest.TestCase):
             "C80_OPTIONAL_STOPPING_OR_REPEATED_TESTING",
         }
         self.assertTrue(required.issubset(ids))
+
+    def test_existing_evidence_reuse_map_is_scoped_and_nonpromotional(self):
+        _, catalog = load()
+        reuse = json.loads(REUSE.read_text())
+        rows = reuse["roots"]
+        self.assertEqual(reuse["root_count"], 12)
+        self.assertEqual({row["id"] for row in rows}, EXPECTED_ROOTS)
+        self.assertEqual(reuse["conclusions"]["closed_root_count"], 0)
+        self.assertEqual(reuse["conclusions"]["reusable_partial_evidence_root_count"], 12)
+        self.assertFalse(reuse["conclusions"]["terminal_authority"])
+        self.assertEqual(reuse["accounting"]["terminal_credit_delta"], 0)
+        for row in rows:
+            self.assertNotIn("CLOSED", row["state"])
+            self.assertTrue(row["evidence"])
+            self.assertTrue(row["residual"])
+            for ev in row["evidence"]:
+                self.assertTrue(ev["path"].startswith("canonical/"))
+                self.assertRegex(ev["git_blob_sha"], r"^[0-9a-f]{40}$")
+                self.assertTrue(ev["status"])
+                self.assertTrue(ev["supports"])
 
     def test_unknown_primitive_is_the_new_architecture_trigger(self):
         graph, _ = load()
