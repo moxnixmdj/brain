@@ -339,3 +339,73 @@ def test_manifest_counts_all_four_truth_states():
     assert out["unknown_count"] == 1
     assert out["disproved_count"] == 1
     assert out["promotion_authority"] is False
+
+def test_stronger_scope_cover_for_different_benchmark_is_rejected():
+    x = base()
+    x["policy"]["scope"] = {"mode": "PROOF_CARRYING_SUPERSET"}
+    x["evidence"].pop("scope_records")
+    x["evidence"]["scope_cover"] = {
+        "benchmark_id": "SOME_OTHER_BENCHMARK",
+        "predicate_id": "CODING_CURSORBENCH_GE_57_8",
+        "scope_completeness": {
+            "verified": True,
+            "independent": True,
+            "source_path": "canonical/verification/scope.json",
+            "source_sha": SHA,
+            "basis": "UNIVERSAL_FORMAL_SCOPE_PROOF",
+            "all_admissible_target_inputs_proved": True,
+            "formal_completeness": True,
+        },
+        "cover_completeness": {
+            "verified": True,
+            "independent": True,
+            "source_path": "canonical/verification/cover.json",
+            "source_sha": SHA,
+            "covers_entire_scope": True,
+        },
+        "cells": [{
+            "cell_id": "ALL",
+            "scope_relation": "PROVEN_STRONGER",
+            "policy_id": "P",
+            "brain_owned_policy": True,
+            "deployable": True,
+            "resource_admissible": True,
+            "external_target_capability_provider": False,
+            "adequacy_certificate": {
+                "verified": True,
+                "independent": True,
+                "source_path": "canonical/verification/adequacy.json",
+                "source_sha": SHA,
+                "adequate_for_entire_cell": True,
+            },
+        }],
+    }
+    out = evaluate_claim(x)
+    assert out["status"] == "UNKNOWN"
+    assert out["reason"] == "SCOPE_COVER_BENCHMARK_ID_MISMATCH"
+
+
+def test_adverse_evidence_is_monotone_non_improving():
+    baseline = evaluate_claim(base())
+    assert baseline["status"] == "PROVEN"
+
+    mutations = []
+
+    contaminated = base()
+    contaminated["evidence"]["provenance"]["status"] = "CONTAMINATED"
+    mutations.append(contaminated)
+
+    missing_scope = base()
+    missing_scope["evidence"]["scope_records"].pop()
+    mutations.append(missing_scope)
+
+    unstable_judge = base()
+    unstable_judge["evidence"]["evaluator_records"][0]["stable_under_declared_perturbations"] = False
+    mutations.append(unstable_judge)
+
+    counterevidence = base()
+    counterevidence["evidence"]["evaluator_records"][0]["relation"] = "TARGET_GT_BRAIN"
+    mutations.append(counterevidence)
+
+    for case in mutations:
+        assert evaluate_claim(case)["status"] != "PROVEN"
