@@ -23,6 +23,10 @@ from canonical.runtime.certificate_gated_selected_route_router_v1 import (
     RouterFailClosed,
     select_certified_route,
 )
+from canonical.runtime.executable_refinement_receipt_guard_v1 import (
+    RefinementReceiptFailClosed,
+    validate_receipt as validate_refinement_receipt,
+)
 
 ROOT = Path(__file__).resolve().parents[2]
 REGISTRY_PATH = ROOT / "canonical/governance/CERTIFICATE_GATED_SELECTED_ROUTE_RUNTIME_REGISTRY_V1.json"
@@ -235,32 +239,21 @@ def _verified_rows(
             refinement_receipt = _load_json(refinement_receipt_path)
             route_id = str(row.get("route_id") or "")
             route_blob = str(row.get("route_blob_sha") or "")
-            if refinement_certificate.get("subject_id") != route_id:
-                raise RuntimeBindingFailClosed(
-                    f"REFINEMENT_CERTIFICATE_SUBJECT_MISMATCH:{index}"
+            try:
+                validate_refinement_receipt(
+                    refinement_receipt,
+                    certificate=refinement_certificate,
+                    expected_certificate_git_blob_sha=str(
+                        row.get("refinement_certificate_blob_sha") or ""
+                    ),
+                    expected_concrete_route_git_blob_sha=route_blob,
+                    expected_subject_id=route_id,
+                    repo_root=ROOT,
                 )
-            if refinement_receipt.get("subject_id") != route_id:
+            except RefinementReceiptFailClosed as exc:
                 raise RuntimeBindingFailClosed(
-                    f"REFINEMENT_RECEIPT_SUBJECT_MISMATCH:{index}"
-                )
-            if refinement_receipt.get("refinement_verified") is not True:
-                raise RuntimeBindingFailClosed(
-                    f"REFINEMENT_RECEIPT_NOT_VERIFIED:{index}"
-                )
-            if refinement_receipt.get("certificate_git_blob_sha") != str(
-                row.get("refinement_certificate_blob_sha") or ""
-            ):
-                raise RuntimeBindingFailClosed(
-                    f"REFINEMENT_RECEIPT_CERTIFICATE_BINDING_MISMATCH:{index}"
-                )
-            if refinement_receipt.get("concrete_route_git_blob_sha") != route_blob:
-                raise RuntimeBindingFailClosed(
-                    f"REFINEMENT_RECEIPT_ROUTE_BINDING_MISMATCH:{index}"
-                )
-            if refinement_receipt.get("terminal_credit_delta") != 0:
-                raise RuntimeBindingFailClosed(
-                    f"REFINEMENT_RECEIPT_NONZERO_TERMINAL_CREDIT:{index}"
-                )
+                    f"REFINEMENT_RECEIPT_INVALID:{index}:{exc}"
+                ) from exc
 
         receipt = AdmissionReceipt(
             context_digest=str(row.get("context_digest") or ""),
