@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import json
+import tempfile
 import unittest
 from pathlib import Path
 from unittest import mock
@@ -267,6 +269,144 @@ class VerifiedCrossScopeGeneralizationTests(unittest.TestCase):
                     {"verification_binding": {"verification": {}}},
                     repo_root=Path("."),
                 )
+
+    def test_full_generalization_verifier_and_authenticator_accept_two_bound_carrier_sources(self):
+        steps = [
+            {
+                "index": 0,
+                "op": "cap.demo",
+                "inputs": ["A"],
+                "outputs": ["B"],
+            }
+        ]
+
+        def episode(eid, scope, receipt_id):
+            program = skill_program.program_digest(
+                steps=steps,
+                preconditions=["A"],
+                postconditions=["B"],
+                invalidators=[],
+            )
+            return {
+                "episode_id": eid,
+                "scope_id": scope,
+                "steps": steps,
+                "preconditions": ["A"],
+                "postconditions": ["B"],
+                "invalidators": [],
+                "program_sha256": program,
+                "verification_receipt": {
+                    "independent_verified": True,
+                    "exact_byte_bound": True,
+                    "conclusion": "success",
+                    "behavior_verified": True,
+                    "episode_id": eid,
+                    "scope_id": scope,
+                    "program_sha256": program,
+                    "receipt_id": receipt_id,
+                },
+            }
+
+        ep1 = episode("e1", "scope-a", "ER:e1")
+        ep2 = episode("e2", "scope-b", "ER:e2")
+        candidate = skill_program.induce_candidate([ep1, ep2])
+        raw1 = {
+            "episode_id": "e1",
+            "verification_binding": {"verification": {"path": "v1"}},
+        }
+        raw2 = {
+            "episode_id": "e2",
+            "verification_binding": {"verification": {"path": "v2"}},
+        }
+        bound_doc = {
+            "independent_verifier_id": independent.INDEPENDENT_VERIFIER_ID,
+            "verification_basis": independent.BOUND_CARRIER_VERIFICATION_BASIS,
+            "bound_carrier_effectful_trace": True,
+            "effect_outcomes_reverified": True,
+            "trace_reverified": True,
+            "state_lineage_reverified": True,
+            "behavior_verified": True,
+            "exact_byte_bound": True,
+            "non_effectful_trace": False,
+        }
+
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            state_path = root / "state.json"
+            state_path.write_text(
+                json.dumps(
+                    {
+                        "episodes": {
+                            "episode:e1": raw1,
+                            "episode:e2": raw2,
+                        }
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            def reauth(raw, *, repo_root):
+                eid = raw["episode_id"]
+                return {
+                    "pass": True,
+                    "authenticated_episode": ep1 if eid == "e1" else ep2,
+                }
+
+            with mock.patch.object(
+                independent,
+                "reauthenticate_episode_record",
+                side_effect=reauth,
+            ), mock.patch.object(
+                independent,
+                "resolve_receipt_bytes",
+                return_value={"document": bound_doc},
+            ):
+                binding = independent.verify_skill_request(
+                    {
+                        "kind": "SKILL_SCOPE_GENERALIZATION_VERIFICATION",
+                        "candidate": candidate,
+                        "requested_scope_relation": "PROVEN_SUPERSET",
+                        "requested_scope_predicate": (
+                            independent.STRUCTURAL_MATCH_SCOPE_PREDICATE
+                        ),
+                        "supported_scope_predicates": [
+                            independent.STRUCTURAL_MATCH_SCOPE_PREDICATE
+                        ],
+                    },
+                    repo_root=root,
+                    state_path=state_path,
+                    receipt_dir="receipts",
+                )
+
+            self.assertIsInstance(binding, dict)
+            receipt = json.loads(
+                (root / binding["receipt"]["path"]).read_text(encoding="utf-8")
+            )
+            verification = json.loads(
+                (root / binding["verification"]["path"]).read_text(encoding="utf-8")
+            )
+            self.assertEqual(receipt["scope_relation"], "PROVEN_SUPERSET")
+            self.assertEqual(
+                receipt["scope_predicate"],
+                independent.STRUCTURAL_MATCH_SCOPE_PREDICATE,
+            )
+            self.assertEqual(
+                verification["generalization_source_proof_classes"],
+                ["BOUND_CARRIER_EFFECTFUL", "BOUND_CARRIER_EFFECTFUL"],
+            )
+            authenticated = authenticator.authenticate_and_verify(
+                candidate,
+                binding,
+                repo_root=root,
+            )
+            self.assertTrue(authenticated["pass"], authenticated)
+            skill = authenticated["verified_skill"]
+            self.assertTrue(skill["reuse_authorized"])
+            self.assertEqual(skill["scope_relation"], "PROVEN_SUPERSET")
+            self.assertEqual(
+                skill["scope_predicate"],
+                independent.STRUCTURAL_MATCH_SCOPE_PREDICATE,
+            )
 
     @mock.patch(
         "canonical.runtime.executable_skill_verification_authenticator_v1.resolve_receipt_bytes"
