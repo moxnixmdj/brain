@@ -372,6 +372,11 @@ def compile_gap_contract(
         for x in (residual.get("r2_acquisition_requests") or [])
         if isinstance(x, Mapping)
     ]
+    r3_acquisition_requests = [
+        deepcopy(dict(x))
+        for x in (residual.get("r3_acquisition_requests") or [])
+        if isinstance(x, Mapping)
+    ]
 
     if row.get("pass") is True and not internal:
         if external_proved:
@@ -410,9 +415,15 @@ def compile_gap_contract(
         "constructive_internal_blockers": constructive_internal,
         "r2_acquisition_requests": r2_acquisition_requests,
         "r2_acquisition_request_count": len(r2_acquisition_requests),
+        "r3_acquisition_requests": r3_acquisition_requests,
+        "r3_acquisition_request_count": len(r3_acquisition_requests),
     }
     semantic_work = [deepcopy(dict(x)) for x in pending_work]
-    constructive_contracts = _constructive_capability_contracts(semantic_work)
+    constructive_contracts = (
+        _constructive_capability_contracts(semantic_work)
+        if gap_class == "CONSTRUCTIVE_CAPABILITY_GAP"
+        else []
+    )
     shared_causes = _shared_cause_candidates(constructive_contracts)
     return {
         "schema": GAP_SCHEMA,
@@ -473,6 +484,19 @@ def compile_decision_sufficient_contract(
             "remaining_boundary": request.get("remaining_boundary"),
             "wake_conditions": deepcopy(list(request.get("wake_conditions") or [])),
         })
+    for request in basis.get("r3_acquisition_requests", []) or []:
+        if not isinstance(request, Mapping):
+            continue
+        policy_requirements.append({
+            "kind": "R3_STRUCTURED_DISTINGUISHING_EVIDENCE_REQUEST",
+            "work_id": request.get("work_id"),
+            "observation_id": request.get("observation_id"),
+            "witness_id": request.get("witness_id"),
+            "request_sha256": request.get("request_sha256"),
+            "required_action": request.get("required_action"),
+            "required_property": request.get("required_property"),
+            "retained_proof_class": request.get("retained_proof_class"),
+        })
     for contract in constructive:
         cbasis = contract.get("basis")
         cbasis = cbasis if isinstance(cbasis, Mapping) else {}
@@ -531,6 +555,11 @@ def compile_minimum_information_contract(
         for x in (basis.get("r2_acquisition_requests") or [])
         if isinstance(x, Mapping)
     ]
+    structured_r3 = [
+        deepcopy(dict(x))
+        for x in (basis.get("r3_acquisition_requests") or [])
+        if isinstance(x, Mapping)
+    ]
     requests = []
     structured_blockers: set[str] = set()
     for request in sorted(
@@ -562,6 +591,42 @@ def compile_minimum_information_contract(
             **row,
             "request_id": "minimum-info:r2:" + _sha(row),
         })
+    for request in sorted(
+        structured_r3,
+        key=lambda row: (
+            _s(row.get("work_id")),
+            _s(row.get("request_sha256")),
+        ),
+    ):
+        blocker = "R3_VERIFICATION_FRONTIER_NEW_DISTINGUISHING_EVIDENCE_REQUIRED"
+        structured_blockers.add(blocker)
+        row = {
+            "kind": "R3_STRUCTURED_DISTINGUISHING_EVIDENCE_ACQUISITION",
+            "blocker": blocker,
+            "r3_work_id": request.get("work_id"),
+            "r3_observation_id": request.get("observation_id"),
+            "r3_witness_id": request.get("witness_id"),
+            "source_request_sha256": request.get("request_sha256"),
+            "proof_capsule_sha256": request.get("proof_capsule_sha256"),
+            "replay_capsule_sha256": request.get("replay_capsule_sha256"),
+            "adapter_author_context_sha256": request.get(
+                "adapter_author_context_sha256"
+            ),
+            "adapter_frontier_sha256": request.get("adapter_frontier_sha256"),
+            "verification_authority_sha256": request.get(
+                "verification_authority_sha256"
+            ),
+            "retained_proof_class": request.get("retained_proof_class"),
+            "required_action": request.get("required_action"),
+            "required_property": request.get("required_property"),
+            "proof_or_existing_receipt_precedes_new_reality": True,
+            "broad_acquisition_forbidden_without_minimality_proof": True,
+            "full_benchmark_default": False,
+        }
+        requests.append({
+            **row,
+            "request_id": "minimum-info:r3:" + _sha(row),
+        })
     for blocker in blockers:
         if blocker in structured_blockers:
             continue
@@ -584,6 +649,11 @@ def compile_minimum_information_contract(
         "request_count": len(requests),
         "structured_r2_request_count": sum(
             row.get("kind") == "R2_STRUCTURED_POLICY_CHANGING_ACQUISITION"
+            for row in requests
+        ),
+        "structured_r3_request_count": sum(
+            row.get("kind")
+            == "R3_STRUCTURED_DISTINGUISHING_EVIDENCE_ACQUISITION"
             for row in requests
         ),
         "acquisition_objective": "MINIMIZE_NEW_INFORMATION_SUBJECT_TO_CLOSING_OR_CHANGING_THE_EXACT_CURRENT_DECISION",
