@@ -37,6 +37,7 @@ jobs:
       - name: Verify closure controller and externality barrier
         run: |
           python -m unittest \
+            canonical.tests.test_information_theoretic_externality_gate_v1 \
             canonical.tests.test_r3_historical_failure_irreducibility_v1 \
             canonical.tests.test_one_shot_verified_closure_v1 \
             canonical.tests.test_one_shot_reality_closure_v2 \
