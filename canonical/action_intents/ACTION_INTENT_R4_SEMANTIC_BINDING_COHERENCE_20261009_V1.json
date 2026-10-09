@@ -4,7 +4,7 @@
   "date": "2026-10-09",
   "status": "COMPLETED_PROOF_ONLY__VERIFIED_R4_BINDING_REPAIR__ZERO_FRESH_REALITY__ZERO_TERMINAL_CREDIT",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
-  "canonical_base_commit": "3f835e6cf8fdde3395bbaa36474fe791e1ceb3de",
+  "canonical_base_commit": "2c3afc4ae5f240533cb3ef18da207583f98fe149",
   "capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
   "action_kind": "R4_SEMANTIC_BINDING_FALSIFICATION_AND_EXECUTABLE_COHERENCE_GUARD",
   "causal_blocker": "ROOT_THEOREM_FALSIFIER_ACCEPTS_NAKED_R4_BOOLEAN_WITHOUT_STRUCTURALLY_BINDING_R1_R2_R3_TO_ONE_CLAIM_SCOPE_SEMANTICS_CARRIER_AND_EPOCH",
@@ -108,5 +108,15 @@
     "exact_branch_tests": "20_PASSED__0_FAILED",
     "independent_symbolic_cross_binding_false_success_witnesses": 3,
     "terminal_credit_delta": 0
+  },
+  "rebase_reconciliation": {
+    "status": "REBASING_COMPLETE__TARGET_FILES_AND_LIVE_AUTHORITY_UNCHANGED",
+    "rebased_parent": "2c3afc4ae5f240533cb3ef18da207583f98fe149",
+    "live_authority_shas": {
+      "canonical_pointer": "9a9debe3466d25e743feff44c083b2b75ba2f839",
+      "terminal_authority": "959908dde4c539d3f04870476fae65d1f2abf094",
+      "goal_gate_v11": "797411f55a84d599651fa4d47874ad1538c4399d",
+      "critical_path_gate_v11": "7f13af51f07d8a9ddd9c9a43a29042e29c862054"
+    }
   }
 }
