@@ -2,9 +2,9 @@
   "schema": "PROJECT_BRAIN_ACTION_INTENT_PROFESSIONAL_QUALITY_CLOSURE_NORMAL_FORM_20261009_V1",
   "action_id": "PROFESSIONAL-QUALITY-CLOSURE-NORMAL-FORM-20261009-V1",
   "date": "2026-10-09",
-  "status": "ZERO_REALITY_INTEGRATION_INTENT__NO_EXECUTION_PROMOTION_OR_TERMINAL_AUTHORITY__ZERO_CREDIT",
+  "status": "ZERO_REALITY_INTEGRATION_INTENT__PR_BASE_RECONCILED__NO_EXECUTION_PROMOTION_OR_TERMINAL_AUTHORITY__ZERO_CREDIT",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
-  "canonical_base_commit": "8ee970fa0fe1a4ff5135332978fb7248772ddbb9",
+  "canonical_base_commit": "f0050b964829324ceabefe145ecf3d0578eb00c8",
   "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
   "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
@@ -72,5 +72,10 @@
   },
   "execution_authority": false,
   "promotion_authority": false,
-  "fresh_target_reality_authority": false
+  "fresh_target_reality_authority": false,
+  "base_reconciliation": {
+    "branch_origin_base": "8ee970fa0fe1a4ff5135332978fb7248772ddbb9",
+    "trusted_pr_base_commit": "f0050b964829324ceabefe145ecf3d0578eb00c8",
+    "reason": "MAIN_ADVANCED_DURING_ZERO_REALITY_INTEGRATION__NO_TARGET_EVIDENCE_OR_SEMANTIC_INPUT_CHANGED"
+  }
 }
