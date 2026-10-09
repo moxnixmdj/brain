@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V36",
   "date": "2026-10-09",
-  "status": "ACTIVE_FAIL_CLOSED_REAL_MISSION_BOUND__STRICT_EXTERNALITY_RECONCILED__R3_ZERO_RESIDUAL_RECONCILED__OPUS_5_5_CHECKPOINT_TERMINAL_FALSE__CURRENT_R2_V63_AND_CODING_V3_PROJECTION_BOUND__COVERAGE_R1_R4_LIVE_BINDING_REPAIRED__CLAIM_SCOPED_COMPLETENESS_THEOREM_BOUND__ROOT_NAMESPACE_COLLISION_GUARDED",
+  "status": "ACTIVE_FAIL_CLOSED_REAL_MISSION_BOUND__STRICT_EXTERNALITY_RECONCILED__R3_ZERO_RESIDUAL_RECONCILED__OPUS_5_5_CHECKPOINT_TERMINAL_FALSE__CURRENT_R2_V63_AND_CODING_V4_FIVE_REGION_PROJECTION_BOUND__COVERAGE_R1_R4_LIVE_BINDING_REPAIRED__CLAIM_SCOPED_COMPLETENESS_THEOREM_BOUND__ROOT_NAMESPACE_COLLISION_GUARDED",
   "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "authoritative_sources": {
     "universal_escape_resolver_v2_active_planning_overlay": {
@@ -1385,6 +1385,35 @@
       "global_semantic_identity_authority": false,
       "open_world_ontology_complete": false,
       "terminal_credit_delta": 0
+    },
+    "cursorbench_five_region_frontier_20261009_v1": {
+      "path": "canonical/governance/CURSORBENCH_FIVE_REGION_TERMINAL_RECONCILIATION_20261009_V1.json",
+      "git_blob_sha": "b47efd8db7ad799e503545ff4c41cb1890e52309",
+      "coding_projection": {
+        "path": "canonical/governance/CODING_SHARED_SPECIFICATION_COVERAGE_ONLY_SUCCESSOR_20261009_V4.json",
+        "git_blob_sha": "36b0ead6db10f6aabb6ac8f873cceefbff16ca46"
+      },
+      "visible_region_nonsubsumption": {
+        "path": "canonical/governance/CODING_VISIBLE_ACCEPTANCE_REGION_NONSUBSUMPTION_20261009_V1.json",
+        "git_blob_sha": "75a0fa69e351a1b33cd8c7f271453f3e972d5708",
+        "independent_verification": {
+          "path": "canonical/verification/CODING_VISIBLE_ACCEPTANCE_REGION_NONSUBSUMPTION_INDEPENDENT_VERIFICATION_20261009_V1.json",
+          "git_blob_sha": "da21e907b94e3d1393cb7a2e3d4f6b81b344f845"
+        }
+      },
+      "five_region_complement": {
+        "path": "canonical/governance/CURSORBENCH_FIVE_REGION_COMPLEMENT_NONIDENTIFIABILITY_20261009_V1.json",
+        "git_blob_sha": "ef09eb272c9a3380574734ff244b22314b43fafd",
+        "independent_verification": {
+          "path": "canonical/verification/CURSORBENCH_FIVE_REGION_COMPLEMENT_NONIDENTIFIABILITY_INDEPENDENT_VERIFICATION_20261009_V1.json",
+          "git_blob_sha": "cf93e68182a48cbf629f6c39a127b3c804b08d80"
+        }
+      },
+      "registry": {
+        "path": "canonical/runtime/p3_conditioned_policy_adequacy_registry_v1.py",
+        "git_blob_sha": "0e6abf778d040932d556404c2e9852c1211563fe"
+      },
+      "note": "CURRENT_CODING_FRONTIER__SIX_REGISTERED_CONDITIONED_POLICIES__FIVE_AUTHENTICATED_CODING_CONSTRUCTIVE_REGIONS__34_DISTINCT_CONDITION_ATOMS__PRIVATE_MEMBERSHIP_AND_WHOLE_COVER_OPEN__ZERO_CREDIT"
     }
   },
   "live_truth": {
@@ -2196,11 +2225,13 @@
     "coding_finite_exact_oracle_target_membership_self_certified": false,
     "coding_finite_exact_oracle_private_cursorbench_membership_proved": false,
     "coding_finite_exact_oracle_whole_cursorbench_cover_proved": false,
-    "coding_specification_authenticated_constructive_region_count": 3,
+    "coding_specification_authenticated_constructive_region_count": 5,
     "coding_specification_authenticated_constructive_region_policy_ids": [
       "BRAIN_INDEPENDENT_ACCEPTANCE_MODEL_TYPED_PLAN_V1",
       "BRAIN_FINITE_CANDIDATE_EXACT_ORACLE_SOLVER_V1",
-      "BRAIN_ROBUST_FINITE_MULTI_INTERPRETATION_SOLVER_V1"
+      "BRAIN_ROBUST_FINITE_MULTI_INTERPRETATION_SOLVER_V1",
+      "BRAIN_STATIC_VERIFIED_CAPABILITY_ROUTE_SOLVER_V1",
+      "BRAIN_VISIBLE_COMPLETE_ACCEPTANCE_CONTRACT_V1"
     ],
     "coding_robust_finite_multi_interpretation_constructive_region_verified": true,
     "coding_robust_finite_multi_interpretation_policy_id": "BRAIN_ROBUST_FINITE_MULTI_INTERPRETATION_SOLVER_V1",
@@ -2223,7 +2254,19 @@
     "cursorbench_actual_three_region_complement_nonempty_claimed": false,
     "r2_regcap_authenticated_bounded_context_truth_bound": true,
     "r2_regcap_bounded_context_truth_global_semantic_identity_authority": false,
-    "r2_regcap_bounded_context_truth_open_world_candidate_universe_complete": false
+    "r2_regcap_bounded_context_truth_open_world_candidate_universe_complete": false,
+    "coding_registered_conditioned_policy_count": 6,
+    "coding_registered_coding_constructive_policy_count": 5,
+    "coding_visible_complete_acceptance_constructive_region_verified": true,
+    "coding_visible_complete_acceptance_policy_id": "BRAIN_VISIBLE_COMPLETE_ACCEPTANCE_CONTRACT_V1",
+    "coding_visible_complete_acceptance_condition_atom_count": 7,
+    "coding_visible_complete_acceptance_private_cursorbench_membership_proved": false,
+    "coding_five_region_distinct_condition_atom_count": 34,
+    "cursorbench_five_region_complement_nonidentifiability_proved": true,
+    "cursorbench_five_region_complement_emptiness_identified": false,
+    "cursorbench_five_region_complement_nonemptiness_identified": false,
+    "coding_v5_common_policy_certificate_ready": false,
+    "coding_whole_specification_cover_closed": false
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -2929,7 +2972,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 113,
+  "pointer_revision": 114,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
@@ -4280,6 +4323,19 @@
     "primary_internal_unsolved_count": 1,
     "terminal_remains_false": true,
     "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "cursorbench_five_region_terminal_reconciliation_20261009_v1": {
+    "path": "canonical/governance/CURSORBENCH_FIVE_REGION_TERMINAL_RECONCILIATION_20261009_V1.json",
+    "git_blob_sha": "b47efd8db7ad799e503545ff4c41cb1890e52309",
+    "coding_projection_path": "canonical/governance/CODING_SHARED_SPECIFICATION_COVERAGE_ONLY_SUCCESSOR_20261009_V4.json",
+    "coding_projection_git_blob_sha": "36b0ead6db10f6aabb6ac8f873cceefbff16ca46",
+    "registered_conditioned_policy_count": 6,
+    "authenticated_coding_constructive_region_count": 5,
+    "distinct_condition_atom_count": 34,
+    "private_cursorbench_membership_delta": 0,
+    "whole_cursorbench_cover_closed": false,
+    "terminal_remains_false": true,
     "terminal_credit_delta": 0
   }
 }
