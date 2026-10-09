@@ -2226,7 +2226,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 70,
+  "pointer_revision": 71,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
@@ -2737,6 +2737,28 @@
     "generic_context_field_semantics_wake_refined_outside_sec_standard_xbrl_scope": true,
     "terminal_remains_false": true,
     "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "r2_v47_sec_source_native_projection_reconciliation": {
+    "status": "RECONCILED__CURRENT_TERMINAL_R2_PROJECTION_BINDS_V47_SEC_SOURCE_NATIVE_SEMANTICS__TERMINAL_STILL_FALSE",
+    "current_r2_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+    "current_r2_git_blob_sha": "0bdeadf7147e879c642fb2ae1b8e0f972ff0630a",
+    "scheduler_cut_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V47.json",
+    "scheduler_cut_git_blob_sha": "d9170e11c2f396aac5798db5dd3d6a1454c12b26",
+    "reconciliation_verification_path": "canonical/verification/R2_V47_SEC_SOURCE_NATIVE_RECONCILIATION_VERIFY_20261009_V1.json",
+    "reconciliation_verification_git_blob_sha": "7769524679268aadc597e30090b1a2d32fdcb155",
+    "public_replay_path": "canonical/verification/SEC_COMPANYCONCEPT_SOURCE_NATIVE_PUBLIC_INDEPENDENT_REPLAY_20261009_V1.json",
+    "public_replay_git_blob_sha": "65ded4111b60cb812a1344c48bfe65360698a1e6",
+    "public_run_id": 37909902109,
+    "public_job_id": 113752278492,
+    "public_conclusion": "success",
+    "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
+    "primary_internal_unsolved_count": 1,
+    "direct_route_count": 31,
+    "bounded_family_count": 28,
+    "information_theoretic_externality_proved": false,
+    "global_finance_semantic_tail_closed": false,
+    "terminal_remains_false": true,
     "terminal_credit_delta": 0
   }
 }
