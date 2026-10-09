@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "R4_ROOT_CERTIFICATE_REGISTRY_20261009_V1",
+  "date": "2026-10-09",
+  "status": "IN_PROGRESS__BRANCH_IMPLEMENTED__REMOTE_REPLAY_REQUIRED__ZERO_CREDIT",
+  "canonical_base_commit": "199957e2f5b39ccbd3113bedcde53afb6190b597",
+  "action_kind": "R4_ROOT_CERTIFICATE_REGISTRY_AND_ASSURANCE_PROJECTION_REFINEMENT",
+  "causal_blocker": "R4_PROOF_CLOSURE_CANNOT_DISTINGUISH_MISSING_REGISTRY_FROM_MISSING_EXACT_ROOT_PROOFS",
+  "selected_route": "BIND_EXACT_CURRENT_R1_R2_R3_ROOT_STATUS_REGISTRY__PRESERVE_UNKNOWN__REPROJECT_R4",
+  "expected_root_delta": "DELETE_NO_CANONICAL_ROOT_REGISTRY_RESIDUAL__LOCALIZE_TO_EXACT_R1_R2_R3_SET_CLAIMS",
+  "hard_nonclaims": [
+    "NO_R1_R2_R3_OR_R4_CLOSURE",
+    "NO_TERMINAL_OR_ACCEPTANCE_CREDIT",
+    "NO_UNKNOWN_TO_PROVED_PROMOTION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
