@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK14_ACTIVE_AUTHORITY_VERIFICATION_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__RANK14_BRAIN_SIDE_ONE_SLOT_AUTHORITY_ACTIVE__18_OF_18__TASK_UNREAD_UNSTARTED__ZERO_CREDIT",
+  "subject": {
+    "authority_path": "canonical/governance/TB_SCIENCE_RANK14_ONE_SLOT_EXECUTION_AUTHORITY_20261009_V1.json",
+    "authority_git_blob_sha": "208f86419377dfe46059fa5b7b99aaec2f36a6f1",
+    "candidate_git_blob_sha": "aa31ecf115c47cbd0d3dcc79e121e7588c2c5fba",
+    "static_verification_git_blob_sha": "b2442f912821b7fb1701ab688f86204d2b2b74cf",
+    "intent_git_blob_sha": "1deaeeeb9e9c1a176a2c7ab7b875a2aade38139e"
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "name": "brain-live-integrated-v1-run-20261008",
+    "id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34"
+  },
+  "verification": {
+    "check_count": 18,
+    "pass": true
+  },
+  "authority_state": {
+    "execution_authority": true,
+    "task_read_authority": false,
+    "public_execution_lease_published": false,
+    "public_activation_armed": false,
+    "task_read": false,
+    "task_started": false,
+    "result_present": false,
+    "authority_consumed": false,
+    "attempts_authorized": 1,
+    "retries_authorized": 0,
+    "replacement_allowed": false
+  },
+  "exact_route": {
+    "planner_blob": "58964dc8d6b5eed5c202081cd800035c791eeb1d",
+    "runtime_closure_blob": "0ee0a9a3a9dd2bf6ffeaf3c2702ebc4648d950ab",
+    "runtime_closure_verification_blob": "5520ff26ae3067f7334e59642217e102adf11ec3",
+    "context_repair_blob": "8b8cdc3fc112bd0a253af795fb79c0f641b8b3b4",
+    "qwen_model_sha256": "f41c0a0c0e43bf721fb2da29374cd1a97271bac0bab08a9dc42964525e82350c",
+    "llama_cpp_commit": "bec4772f6a2527d371557b5d2032641e5ff7619c"
+  },
+  "benchmark_task_exposure": 0,
+  "benchmark_trials_executed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "hard_nonclaims": [
+    "NO_RANK14_TASK_CONTENT_READ",
+    "NO_PUBLIC_RANK14_EXECUTION_LEASE_YET",
+    "NO_RANK14_TASK_START",
+    "NO_RANK14_RESULT",
+    "NO_TB_SCIENCE_ACCEPTANCE_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ]
+}

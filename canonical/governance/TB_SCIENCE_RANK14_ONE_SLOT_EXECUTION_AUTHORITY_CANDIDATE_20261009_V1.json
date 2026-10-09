@@ -1,0 +1,94 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK14_ONE_SLOT_AUTHORITY_CANDIDATE_V1",
+  "date": "2026-10-09",
+  "status": "NONEXECUTABLE_CANDIDATE__V16_REPAIR_AND_V9_CARRIER_BOUND__ZERO_TASK_EXPOSURE__ZERO_CREDIT",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "slot": {
+    "id": "terminal-bench-science/inverse-lithography::trial-0",
+    "ledger_schedule_rank": 14,
+    "frozen_manifest_schedule_order": 13,
+    "digest": "sha256:8c4da4b5b3a00283335e83dda92584aaf9293ff773bc43f2bf95eb0e2c0f8530"
+  },
+  "source_bindings": {
+    "intent": {
+      "path": "canonical/action_intents/ACTION_INTENT_TB_SCIENCE_RANK14_AUTHORITY_CANDIDATE_20261009_V1.json",
+      "git_blob_sha": "1deaeeeb9e9c1a176a2c7ab7b875a2aade38139e"
+    },
+    "ledger": {
+      "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261009_V16.json",
+      "git_blob_sha": "748232e21b081083d353e4f901b8607a32c32b55"
+    },
+    "runtime_closure": {
+      "path": "canonical/governance/TB_SCIENCE_TRANSITIVE_RUNTIME_CLOSURE_MANIFEST_20261009_V9.json",
+      "git_blob_sha": "0ee0a9a3a9dd2bf6ffeaf3c2702ebc4648d950ab"
+    },
+    "runtime_closure_verification": {
+      "path": "canonical/verification/TB_SCIENCE_TRANSITIVE_RUNTIME_CLOSURE_V9_SPRITE_VERIFICATION_20261009_V1.json",
+      "git_blob_sha": "5520ff26ae3067f7334e59642217e102adf11ec3"
+    },
+    "context_repair": {
+      "path": "canonical/verification/TB_SCIENCE_CONTEXT16K_SCOPED_TIMEOUT_REPAIR_FINAL_VERIFICATION_20261009_V2.json",
+      "git_blob_sha": "8b8cdc3fc112bd0a253af795fb79c0f641b8b3b4"
+    },
+    "terminal_manifest": {
+      "path": "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json",
+      "git_blob_sha": "6dfa880b1f68881531afbba6ca211681801fd19b"
+    }
+  },
+  "exact_route": {
+    "agent_blob": "5e851d884b9784c6dc6fc9f83c08c502e41c3bdc",
+    "planner_blob": "58964dc8d6b5eed5c202081cd800035c791eeb1d",
+    "command_policy_blob": "a525773417291c7a4841bf35e1baff5370350d0d",
+    "qwen_model_sha256": "f41c0a0c0e43bf721fb2da29374cd1a97271bac0bab08a9dc42964525e82350c",
+    "llama_cpp_commit": "bec4772f6a2527d371557b5d2032641e5ff7619c",
+    "server_context_tokens": 16384,
+    "reserved_max_output_tokens": 4096,
+    "transitive_runtime_file_count": 15
+  },
+  "verified_preconditions": {
+    "next_untouched_rank_is_14": true,
+    "prior_consumed_slots": 13,
+    "prior_successes": 0,
+    "prior_final_failures": 13,
+    "successes_still_needed": 124,
+    "remaining_slots": 197,
+    "failures_before_fail_lock": 74,
+    "pass_still_mathematically_reachable": true,
+    "context_repair_gate_passed": true,
+    "zero_benchmark_exposure": true,
+    "current_v9_transitive_closure": "15_FILES__0_MISSING__0_MISMATCHED__0_UNRESOLVED_DYNAMIC_IMPORTS"
+  },
+  "controls": {
+    "exact_slot_count": 1,
+    "attempts": 1,
+    "retries": 0,
+    "replacement_allowed": false,
+    "incremental_spend_usd_max": 0,
+    "public_execution_claim_required": true,
+    "exact_public_epoch_required": true,
+    "exact_runtime_blob_identity_required": true,
+    "current_epoch_recheck_required_immediately_before_task_start": true,
+    "task_read_authority_required_before_read": true,
+    "exact_planner_token_budget_gate_required_after_read_before_start": true,
+    "token_budget_rule": "INPUT_TOKENS_PLUS_4096_MUST_BE_LE_16384",
+    "precheck_failure_consumes_slot": false,
+    "after_task_start_result_is_irreversible": true,
+    "after_task_start_missing_or_zero_verifier_result_counts_as_final_zero": true
+  },
+  "execution_authority": false,
+  "task_read_authority": false,
+  "fresh_reality_authority": false,
+  "promotion_authority": false,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "hard_nonclaims": [
+    "NO_RANK14_TASK_CONTENT_READ",
+    "NO_RANK14_TASK_START",
+    "NO_RANK14_EXECUTION_AUTHORITY",
+    "NO_TB_SCIENCE_ACCEPTANCE_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ]
+}

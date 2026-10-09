@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_TB_SCIENCE_RANK14_AUTHORITY_CANDIDATE_20261009_V1",
+  "date": "2026-10-09",
+  "action_id": "TB_SCIENCE_RANK14_ONE_SLOT_AUTHORITY_CANDIDATE_V1",
+  "status": "ACTIVE_INTENT__PRESTART_ONLY__ZERO_TASK_EXPOSURE__ZERO_CREDIT",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "target_obligation": "TB_SCIENCE_GE_58_7",
+  "action_kind": "RECONCILE_FRONTIER",
+  "causal_blocker": "RANK14_IS_NEXT_UNTOUCHED_SLOT__V16_16K_REPAIR_GATE_SATISFIED__SEPARATE_ONE_SLOT_AUTHORITY_NOT_YET_BOUND",
+  "expected_parent_frontier_change": "RANK14_PRESTART_AUTHORITY_BOUND__TASK_REMAINS_UNREAD_AND_UNSTARTED",
+  "stop_condition": "EXACT_RANK14_CANDIDATE_STATIC_VERIFICATION_AND_ACTIVE_AUTHORITY_BIND_V16_LEDGER_V9_CARRIER_AND_16K_REPAIR__ZERO_TASK_EXPOSURE",
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "expected_obligation_discharge_lcb": "0",
+    "expected_obligation_unlock_lcb": "1/13",
+    "wall_clock_priority": "HIGH"
+  },
+  "route": {
+    "ledger": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261009_V16.json",
+    "runtime_closure": "canonical/governance/TB_SCIENCE_TRANSITIVE_RUNTIME_CLOSURE_MANIFEST_20261009_V9.json",
+    "context_repair": "canonical/verification/TB_SCIENCE_CONTEXT16K_SCOPED_TIMEOUT_REPAIR_FINAL_VERIFICATION_20261009_V2.json",
+    "selected": "REUSE_VERIFIED_V16_REPAIR_AND_V9_CURRENT_RUNTIME__CREATE_ONE_EXACT_RANK14_PRESTART_AUTHORITY"
+  },
+  "safety": {
+    "benchmark_task_exposure_authorized": false,
+    "benchmark_trials_consumed": 0,
+    "task_read_authority": false,
+    "task_start_authority": false,
+    "retries_authorized": 0,
+    "incremental_spend_usd_max": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "prestart_budget_law": "AFTER_SEPARATE_PUBLIC_TASK_READ_AUTHORITY__BEFORE_HARBOR_TASK_START__COUNT_EXACT_PLANNER_INPUT_TOKENS_AND_REQUIRE_INPUT_PLUS_4096_LE_16384__ELSE_ABORT_NONCONSUMING",
+  "promotion_authority": false,
+  "terminal_authority": false
+}
