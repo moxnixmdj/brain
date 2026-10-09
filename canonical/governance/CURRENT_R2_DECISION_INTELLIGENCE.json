@@ -23,14 +23,14 @@
     "status": "ACTIVE__GENERAL_CONTROL_MECHANISM_CLOSED__THIRTY_FIVE_DIRECT_ROUTES__THIRTY_TWO_BOUNDED_FAMILIES__V14_FIELD_LATTICE_AND_V15_BOUNDED_COREFERENCE_CONTROL_BOUND__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL__ZERO_TERMINAL_CREDIT"
   },
   "direct_adequacy": {
-    "activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V27.json",
-    "activation_git_blob_sha": "f4adbb31589c297a2a93a8ca589c6869c83a09fc",
+    "activation_path": "canonical/governance/R2_DIRECT_END_TO_END_ADEQUACY_ROUTES_ACTIVATION_20261009_V28.json",
+    "activation_git_blob_sha": "669979cbdd2bc26cc63fe7d62fd04cbe868cedb9",
     "exact_cell_count": 3,
-    "bounded_family_count": 32,
-    "current_route_count": 35,
-    "current_activation_status": "THREE_EXACT_CELLS_PLUS_THIRTY_TWO_BOUNDED_FAMILIES",
-    "direct_runtime_path": "canonical/runtime/r2_direct_end_to_end_adequacy_v15.py",
-    "direct_runtime_git_blob_sha": "7ef033b93b34dc65a6910cf393e7be3589fd03ea",
+    "bounded_family_count": 33,
+    "current_route_count": 36,
+    "current_activation_status": "THREE_EXACT_CELLS_PLUS_THIRTY_THREE_BOUNDED_FAMILIES__V16_NATURAL_EFFECT_LATTICE_RECONCILED",
+    "direct_runtime_path": "canonical/runtime/r2_direct_route_registry_v1.py",
+    "direct_runtime_git_blob_sha": "151641160bb6623a89e2584f2b3cd5cb62050bd4",
     "coverage_verifications": [
       {
         "path": "canonical/verification/R2_DOCX_JSON_DIRECT_ADEQUACY_VERIFY_20261008_V1.json",
@@ -146,13 +146,26 @@
         "path": "canonical/verification/R2_FINANCE_COREFERENCE_AMBIGUITY_CONTROL_VERIFY_20261009_V2.json",
         "git_blob_sha": "dec5f52893f4e26b8135408f7969390020fc861b",
         "status": "PASS__REBASING_PRESERVES_EXACT_TESTED_BLOBS__FOCUSED_8_OF_8__ADJACENT_12_OF_12__SUCCESSOR_WRAPPER_3_OF_3__PYCOMPILE_PASS__ZERO_TERMINAL_CREDIT"
+      },
+      {
+        "path": "canonical/verification/R2_BOUNDED_NATURAL_EFFECT_LATTICE_V16_VERIFY_20261009_V1.json",
+        "git_blob_sha": "e48faaf4864bd09b30984be7725bbcda5e7f044a",
+        "status": "VERIFIED_ISOLATED_CHANGED_AND_INHERITED_SURFACE__68_OF_68_PASS"
       }
     ],
-    "latest_verification_path": "canonical/verification/R2_FINANCE_COREFERENCE_AMBIGUITY_CONTROL_VERIFY_20261009_V2.json",
-    "latest_verification_git_blob_sha": "dec5f52893f4e26b8135408f7969390020fc861b",
-    "latest_verification_status": "PASS__BOUNDED_COMPLETE_MENTION_UNIVERSE_COREFERENCE_AMBIGUITY_CONTROL__ZERO_TERMINAL_CREDIT",
+    "latest_verification_path": "canonical/verification/R2_BOUNDED_NATURAL_EFFECT_LATTICE_V16_VERIFY_20261009_V1.json",
+    "latest_verification_git_blob_sha": "e48faaf4864bd09b30984be7725bbcda5e7f044a",
+    "latest_verification_status": "VERIFIED_ISOLATED_CHANGED_AND_INHERITED_SURFACE__68_OF_68_PASS",
     "fixed_point_controller_path": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
-    "fixed_point_controller_git_blob_sha": "0319dbf0c09c87dfdeec318071f36f8e5d26d442"
+    "fixed_point_controller_git_blob_sha": "fbb8d2f694054a71012348a1617c14084c492bab",
+    "current_route_selection_metadata_pointer": "canonical/governance/CURRENT_R2_DIRECT_ROUTE_REGISTRY.json",
+    "current_dynamic_admissions_pointer": "canonical/governance/CURRENT_R2_DIRECT_ROUTE_ADMISSIONS.json",
+    "future_route_source_edit_required": false,
+    "future_route_registry_edit_required": false,
+    "legacy_version_chain_load_bearing": false,
+    "legacy_v1_to_v16_runtime_chain_load_bearing": false,
+    "selection_semantics": "V16_CURRENT_THIRTY_SIX_ROUTE_PRECEDENCE_PRESERVED_BY_CONTENT_ADDRESSED_METADATA__FUTURE_PROOF_CARRYING_ROUTES_UNIQUE_MATCH_FAIL_CLOSED",
+    "dynamic_route_collision_policy": "FAIL_CLOSED_UNLESS_EXPLICIT_EQUIVALENCE_OR_DOMINANCE_AUTHORITY"
   },
   "fixed_point_information_policy": {
     "minimum_policy_changing_information": true,
