@@ -278,6 +278,7 @@ class Tests(unittest.TestCase):
             {
                 "FAIL_CLOSED__TERMINAL_SIGNATURE_AUTHORITY_INVALID",
                 "OPEN__REQUIRED_RELATION_UNPROVED",
+                "OPEN__REQUIRED_SEMANTIC_RELATION_NOT_PROVED",
             },
         )
         self.assertIsNone(out["verified_mapping"])
