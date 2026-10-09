@@ -5,6 +5,7 @@ import math
 import shutil
 import tempfile
 import unittest
+import uuid
 from pathlib import Path
 
 from canonical.runtime import unified_cognitive_fabric_v1 as fabric
@@ -96,7 +97,7 @@ class LiveBrainRealTaskProbeV1(unittest.TestCase):
         )
         cid = "archive.tar_gz.create_from_manifest"
         out = self.call({
-            "task_id": "probe-archive",
+            "task_id": "probe-archive-" + uuid.uuid4().hex,
             "initial_facts": ["manifest.json.available"],
             "target_effects": [cid],
             "capability_inputs": {
