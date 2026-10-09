@@ -250,17 +250,30 @@ def evaluate(graph: Mapping[str, Any]) -> dict[str, Any]:
             memo[node_id] = False
             return False
 
-        for defeater_id in node["defeated_by"]:
-            defeater = nodes[defeater_id]
-            if defeater["status"] == "SUPPORTED":
-                active_defeaters.add(defeater_id)
-                memo[node_id] = False
-                return False
-            if defeater["status"] in {"OPEN", "STALE"}:
-                unresolved_defeaters.add(defeater_id)
-                open_residuals.add(defeater_id)
-                memo[node_id] = False
-                return False
+        # Defeater semantics are order-independent. Any SUPPORTED defeater
+        # counterproves the node even when an earlier defeater is unresolved.
+        # Only when no active defeater exists may OPEN/STALE defeaters classify
+        # the node as an unresolved assurance residual.
+        supported_defeaters = [
+            defeater_id
+            for defeater_id in node["defeated_by"]
+            if nodes[defeater_id]["status"] == "SUPPORTED"
+        ]
+        if supported_defeaters:
+            active_defeaters.update(supported_defeaters)
+            memo[node_id] = False
+            return False
+
+        unresolved_here = [
+            defeater_id
+            for defeater_id in node["defeated_by"]
+            if nodes[defeater_id]["status"] in {"OPEN", "STALE"}
+        ]
+        if unresolved_here:
+            unresolved_defeaters.update(unresolved_here)
+            open_residuals.update(unresolved_here)
+            memo[node_id] = False
+            return False
 
         deps = node["depends_on"]
         if not deps:
