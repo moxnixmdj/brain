@@ -1,0 +1,85 @@
+{
+  "schema": "PROJECT_BRAIN_R2_CROSS_DOCUMENT_EFFECT_BEHAVIORAL_V20_VERIFY_V1",
+  "date": "2026-10-09",
+  "branch": "r2-effect-behavior-v20-current2",
+  "base_main_sha": "22a4b031352acc4e55b0ede72ae53af82bcceb60",
+  "capability": "DECISION_RELATIVE_FINITE_BEHAVIORAL_ABSTRACTION_OVER_PARTIAL_CROSS_DOCUMENT_EFFECT_SEMANTICS",
+  "status": "VERIFIED_ISOLATED_CHANGED_SURFACE__44_OF_44_PASS",
+  "theorem": {
+    "source_semantics_base": "V5_SOURCE_PROVED_PARTIAL_EFFECT_FIELD_LATTICE",
+    "applicability_abstraction": "UNRESOLVED_CONDITIONS_OR_VALIDITY_OVERAPPROXIMATE_TO_FALSE_OR_TRUE_UNLESS_EXACT_PROVED_FIELDS_FORCE_ONE_SIDE",
+    "supersession_abstraction": "UNRESOLVED_SUPERSEDES_ENUMERATES_EVERY_VALID_SUBSET_OF_THE_FINITE_SOURCE_PROVED_QUERY_EFFECT_ID_UNIVERSE_SUBJECT_TO_EXACT_CLASS_CONSTRAINTS_AND_DAG_ACYCLICITY",
+    "value_abstraction": "UNRESOLVED_VALUE_BECOMES_A_STABLE_OPAQUE_DISTINCT_SYMBOL_AND_CAN_NEVER_BE_RETURNED_AS_A_VERIFIED_VALUE",
+    "class_noninterference": "EFFECT_CLASS_IS_IGNORED_FOR_EFFECTIVE_VALUE_BEHAVIOR_AFTER_VALIDATION_BECAUSE_CURRENT_CALCULUS_APPLICABILITY_AND_DOMINANCE_DO_NOT_DEPEND_ON_CLASS",
+    "pass_law": "PASS_ONLY_IF_EVERY_VALID_BEHAVIORAL_COMPLETION_RETURNS_THE_SAME_ONE_EXACT_SOURCE_PROVED_VALUE",
+    "open_law": "DISTINCT_BEHAVIORAL_OUTCOMES_RETURN_ONLY_BEHAVIORALLY_LOAD_BEARING_OBLIGATIONS_AND_EXPLICITLY_MARK_NONINTERFERING_TOP_FIELDS",
+    "bound_law": "ENUMERATION_ABSTAINS_WHEN_EFFECT_COUNT_OR_BEHAVIORAL_WORLD_BOUND_IS_EXCEEDED"
+  },
+  "exact_changed_blobs": {
+    "canonical/runtime/cross_document_effect_behavioral_abstraction_v1.py": "4a2fd274d719e3af1e346a1495064a2d88f7db9b",
+    "canonical/runtime/cross_document_effect_behavioral_abstraction_verify_v1.py": "059997a5ba6ebdbcf6c7160273ef643c67779f93",
+    "canonical/runtime/r2_cross_document_effect_behavioral_direct_adequacy_v1.py": "1183a8b93aaf260801b48710d97d7632edf43750",
+    "canonical/runtime/r2_direct_end_to_end_adequacy_v20.py": "93d08e04aa595452af508a57ba2cbf6fde42f533",
+    "canonical/runtime/general_adequate_decision_fixed_point_v2.py": "822df347ef327af1196ac30e1ebdaaeec0cc3e5f",
+    "canonical/tests/test_cross_document_effect_behavioral_abstraction_v1.py": "948fef43fc5f125ee8d4faf929c1b0a1fa67447f",
+    "canonical/tests/test_r2_cross_document_effect_behavioral_v20.py": "63e3ddec522aac625320e433e614cef75d268877",
+    "canonical/tests/test_general_adequate_decision_fixed_point_v2.py": "7294f4b7f806d3034e113773f6b476d0c0b428e4"
+  },
+  "exact_dependency_blobs_executed_in_replay": {
+    "canonical/runtime/cross_document_effect_semantic_lattice_v5.py": "eecc6e26d4d92d2d0587d9690fe92e38f3fab126",
+    "canonical/runtime/source_aligned_semantic_proof_v12.py": "56639ead3485918fd0482f4f4cf0e6c584886105",
+    "canonical/runtime/source_semantic_claim_autofill_v3.py": "06911d2201f8cc7598546fef3d980d3f3319be3d",
+    "canonical/runtime/brain_owned_semantic_relation_edge_registry_v1.py": "c51f82976d4aa1e9317bae04482914fd711d12f3",
+    "canonical/runtime/cross_document_effect_calculus_v1.py": "b2629a5edb01d8ad09c88dfbab4441486b80ad65",
+    "canonical/runtime/cross_document_effect_hypothesis_worldset_v1.py": "4738174c5f7e2c1a9218f19c72622fcbbde54272",
+    "canonical/runtime/cross_document_effect_hypothesis_worldset_verify_v1.py": "ccd87bbded38b00bf09e19e855ad89154a740a2a"
+  },
+  "isolated_verification": {
+    "sprite": "brain-r2-grounded-frontier-verify-20261008",
+    "behavioral_producer_and_independent_verifier": {
+      "passed": 8,
+      "failed": 0
+    },
+    "v20_direct_route_and_router": {
+      "passed": 6,
+      "failed": 0
+    },
+    "fixed_point_v20": {
+      "passed": 30,
+      "failed": 0
+    },
+    "total_passed": 44,
+    "total_failed": 0
+  },
+  "inherited_v19_fallback": {
+    "verification_record": "canonical/verification/R2_SOURCE_BOUND_REGCAP_DIRECT_ADEQUACY_VERIFY_20261009_V1.json",
+    "verification_record_blob": "00dc359634d2798cabcf3ba3d6074b5cc18e8423",
+    "v19_router_blob": "39e7a6b7298b17d55e7bda551d6125c1f1c4000e",
+    "inherited_result": "V19_SEAM_3_OF_3_AND_CORE_ROUTE_5_OF_5_PASS",
+    "unchanged_by_v20": true,
+    "inherited_counts_not_added_to_44": true
+  },
+  "proved_examples": [
+    "UNKNOWN_EFFECT_CLASS_ALONE_NO_LONGER_BLOCKS_EFFECTIVE_VALUE",
+    "A_TOTALLY_UNKNOWN_WEAKER_EFFECT_CAN_BE_IGNORED_WHEN_AN_EXACT_APPLICABLE_EFFECT_DOMINATES_IT_IN_EVERY_VALID_COMPLETION",
+    "SAME_EXACT_VALUES_CLOSE_EVEN_WHEN_OTHER_APPLICABILITY_OR_SUPERSESSION_FIELDS_REMAIN_TOP",
+    "UNKNOWN_SURVIVING_VALUE_STAYS_OPEN",
+    "UNKNOWN_APPLICABILITY_STAYS_OPEN_WHEN_IT_CAN_REMOVE_THE_ONLY_EFFECT",
+    "UNKNOWN_SUPERSESSION_STAYS_OPEN_WHEN_IT_CAN_CHANGE_THE_WINNER",
+    "BEHAVIORAL_ENUMERATION_BOUND_EXCEEDANCE_ABSTAINS"
+  ],
+  "nonclaims": [
+    "NO_GENERAL_ARBITRARY_LANGUAGE_SEMANTIC_COMPLETENESS",
+    "NO_SEMANTIC_TRUTH_FROM_BEHAVIORAL_EQUIVALENCE",
+    "NO_UNKNOWN_VALUE_EQUALITY_INFERENCE",
+    "NO_BEHAVIORAL_ENUMERATION_BEYOND_DECLARED_EFFECT_AND_WORLD_BOUNDS",
+    "NO_IMPLICIT_PRECEDENCE_INFERENCE",
+    "NO_EXTERNAL_WORLD_TRUTH",
+    "NO_TERMINAL_CREDIT_FROM_TEST_PASS_COUNT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
