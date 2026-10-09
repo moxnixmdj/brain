@@ -82,9 +82,13 @@ def verify_proof(
         relation_verifier=relation_verifier,
     )
     if base.get("status")=="FAIL_CLOSED":
+        inherited=[
+            str(x) for x in (base.get("errors") or [])
+            if isinstance(x,str) and x
+        ]
         return {
             "schema":SCHEMA,"status":"FAIL_CLOSED",
-            "errors":["V12_PRIMITIVE_CHECK_FAIL_CLOSED"],
+            "errors":sorted(set(["V12_PRIMITIVE_CHECK_FAIL_CLOSED"]+inherited)),
             "base_proof":base,"terminal_authority":False,
         }
 
