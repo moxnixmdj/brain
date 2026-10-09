@@ -1484,5 +1484,13 @@
     "wake_refined_to": "NEW_AUTHENTICATED_CONTEXT_SOURCE_AND_FIELD_SEMANTICS_BINDING_OUTSIDE_VERIFIED_SEC_COMPANYCONCEPT_AND_SEC_INLINE_XBRL_STANDARD_FASB_SCOPES",
     "finance_primary_unsolved_count_delta": 0,
     "terminal_credit_delta": 0
+  },
+  "semantic_research_synthesis": {
+    "path": "canonical/governance/R2_OPEN_WORLD_SOURCE_NATIVE_SEMANTIC_REFINEMENT_SYNTHESIS_20261009_V1.json",
+    "role": "NON_LOAD_BEARING_DURABLE_RESEARCH_AND_SCHEDULER_GUIDANCE",
+    "semantic_truth_authority": false,
+    "policy_adequacy_authority": false,
+    "acceptance_authority": false,
+    "terminal_authority": false
   }
 }
