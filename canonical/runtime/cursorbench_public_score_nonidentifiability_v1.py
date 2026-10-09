@@ -182,7 +182,7 @@ def verify_current() -> dict[str, Any]:
 
     if frontier.get("current_opus_5_5_credit", 0) != 0:
         errors.append("CODING_FRONTIER_CREDIT_UNEXPECTED")
-    if "benchmark score pending" not in str(frontier.get("status", "")).lower():
+    if "BENCHMARK_SCORE_PENDING" not in str(frontier.get("status", "")).upper():
         errors.append("FRONTIER_SCORE_PENDING_STATUS_MISSING")
 
     stage3 = None
