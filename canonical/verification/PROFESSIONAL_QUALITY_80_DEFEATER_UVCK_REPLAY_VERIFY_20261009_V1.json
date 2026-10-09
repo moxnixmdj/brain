@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_80_DEFEATER_UVCK_REPLAY_VERIFY_V1",
+  "date": "2026-10-09",
+  "status": "PASS__EXACT_DOMAIN_BYTES__REPAIRED_UVCK__PYCOMPILE__7_OF_7__80_OF_80_KNOWN_DEFEATERS_BOUND__ZERO_CREDIT",
+  "uvck_runtime_git_blob_sha": "b4274a48edbe626a9ae9fd33da2f2227ca4dd5e8",
+  "domain_graph_git_blob_sha": "03530e29d70206b46b690b33a04c66765ff86ad7",
+  "defeater_catalog_git_blob_sha": "8b92e5cf76f767054f55414b87014e03d43460b8",
+  "reuse_matrix_git_blob_sha": "ded969ce9045b80c51b9c0dee9ab7242d99c0b5c",
+  "tests_git_blob_sha": "087ee28525723d2be09ce2592024da2ff4b2fe0f",
+  "replay": {
+    "carrier_id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "py_compile": "PASS",
+    "tests_run": 7,
+    "failures": 0,
+    "errors": 0
+  },
+  "proved": [
+    "ALL_80_DECLARED_KNOWN_ATTACK_CLASSES_BIND_TO_EXISTING_12_ROOT_ASSURANCE_ONTOLOGY",
+    "EACH_DECLARED_DEFEATER_COUNTERPROVES_WHEN_ACTIVATED_UNDER_ORDER_INDEPENDENT_UVCK",
+    "UNMAPPED_CHALLENGES_FAIL_CLOSED",
+    "KNOWN_ATTACK_SET_REQUIRES_NO_NEW_UVCK_PRIMITIVE"
+  ],
+  "hard_nonclaims": [
+    "NO_DOMAIN_PROOF_CLOSURE",
+    "NO_DOMAIN_EXECUTION_CLOSURE",
+    "NO_ADVERSARIAL_COMPLETENESS_OF_UNKNOWN_ATTACKS",
+    "NO_OPUS_NONINFERIORITY",
+    "NO_UVCK_LIVE_DEFAULT_PROMOTION",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
