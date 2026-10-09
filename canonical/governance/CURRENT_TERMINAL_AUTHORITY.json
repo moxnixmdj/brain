@@ -1064,6 +1064,15 @@
         "git_blob_sha": "8387e09408c80460f5c088435f74ac6732fc2962"
       },
       "note": "THRESHOLD_ROUTE_SUFFICIENT_BUT_BLOCKED_ON_EXACT_SCORING_SEMANTICS__SCOPE_COMPLETE_STRONGER_PROOF_REMAINS_ACTIVE_INTERNAL_LANE__ZERO_CREDIT"
+    },
+    "cursorbench_route_a_public_scoring_blocker_reduction_20261009_v1": {
+      "path": "canonical/governance/CURSORBENCH_ROUTE_A_PUBLIC_SCORING_BLOCKER_REDUCTION_20261009_V1.json",
+      "git_blob_sha": "a0531e80b17461e576f743d02f5f207b14bd0b24",
+      "independent_verification": {
+        "path": "canonical/verification/CURSORBENCH_ROUTE_A_PUBLIC_SCORING_BLOCKER_REDUCTION_INDEPENDENT_VERIFICATION_20261009_V1.json",
+        "git_blob_sha": "42af77afd9203978a970601a9802a267f98b93ed"
+      },
+      "note": "PUBLIC_METRIC_FAMILY_BOUND__EXACT_4_0_DECOMPOSITION_CONTINUITY_PER_TASK_CONTRIBUTION_AND_DENOMINATOR_OR_WEIGHTS_REMAIN_UNBOUND__ZERO_CREDIT"
     }
   },
   "live_truth": {
@@ -1626,7 +1635,7 @@
     "cursorbench_absence_of_bound_v5_failure_is_adequacy_proof": false,
     "cursorbench_one_v5_pass_is_scope_complete_adequacy_proof": false,
     "cursorbench_selector_work_authorized_now": false,
-    "cursorbench_next_proof_object": "PROVE_OR_INTERNALIZE_ONE_OF_FOUR_REMAINING_TYPED_ACCEPTANCE_MEMBERSHIP_ATOMS_OR_PROVE_A_LARGER_COMMON_V5_ADEQUACY_REGION__PREEMPT_IF_THRESHOLD_SCORING_AUTHORITY_APPEARS",
+    "cursorbench_next_proof_object": "BIND_CURSORBENCH_4_0_METRIC_CONTINUITY_PER_TASK_SCORE_CONTRIBUTION_AND_AGGREGATION_DENOMINATOR_OR_EQUIVALENT_LOWER_BOUND_AUTHORITY__OTHERWISE_CONTINUE_ROUTE_B",
     "r2_sec_standard_xbrl_companyconcept_source_native_semantics_bound": true,
     "r2_sec_standard_xbrl_source_native_policy_adequacy_claimed": false,
     "cursorbench_advanced_coding_canonical_residual_count": 4,
@@ -1707,10 +1716,20 @@
     "cursorbench_threshold_lower_bound_route_sufficient": true,
     "cursorbench_threshold_lower_bound_route_whole_scope_adequacy_required": false,
     "cursorbench_threshold_lower_bound_route_state": "OPEN_BLOCKED",
-    "cursorbench_threshold_lower_bound_route_blocker": "EXACT_CURSORBENCH_4_0_SCORE_DECOMPOSITION_OR_EQUIVALENT_CONTENT_ADDRESSED_SCORE_LOWER_BOUND_NOT_BOUND",
+    "cursorbench_threshold_lower_bound_route_blocker": "THREE_EXACT_4_0_SCORING_FACTS_REMAIN_UNBOUND",
     "cursorbench_stronger_scope_complete_route_state": "OPEN_INTERNAL",
     "cursorbench_current_active_lane": "ROUTE_B_SCOPE_COMPLETE_STRONGER_PROOF",
-    "cursorbench_threshold_route_reactivation_trigger": "EXACT_FROZEN_SCORING_SEMANTICS_OR_EQUIVALENT_OWNER_OR_INDEPENDENT_LOWER_BOUND_AUTHORITY_BECOMES_AVAILABLE"
+    "cursorbench_threshold_route_reactivation_trigger": "EXACT_FROZEN_SCORING_SEMANTICS_OR_EQUIVALENT_OWNER_OR_INDEPENDENT_LOWER_BOUND_AUTHORITY_BECOMES_AVAILABLE",
+    "cursorbench_public_scoring_metric_family_bound": true,
+    "cursorbench_public_scoring_metric_family": "SOLUTION_CORRECTNESS_ACCURACY_AGGREGATED_OVER_TASKS_WITH_MULTIPLE_EVALUATION_PASSES",
+    "cursorbench_exact_4_0_scoring_decomposition_bound": false,
+    "cursorbench_exact_4_0_metric_continuity_from_3_x_proved": false,
+    "cursorbench_threshold_lower_bound_route_remaining_blockers": [
+      "PROVE_4_0_CONTINUITY_OF_THE_ACCURACY_AGGREGATION_SEMANTICS_OR_OBTAIN_A_4_0_SPECIFIC_EQUIVALENT",
+      "BIND_PER_TASK_GRADER_SCORE_DOMAIN_AND_CONTRIBUTION_RULE",
+      "BIND_AGGREGATION_DENOMINATOR_AND_ANY_WEIGHTING_OR_OBTAIN_EQUIVALENT_CONTENT_ADDRESSED_LOWER_BOUND_AUTHORITY"
+    ],
+    "cursorbench_threshold_lower_bound_route_remaining_blocker_count": 3
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -2410,7 +2429,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 80,
+  "pointer_revision": 81,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
@@ -3117,6 +3136,21 @@
     "current_active_lane": "ROUTE_B_SCOPE_COMPLETE_STRONGER_PROOF",
     "threshold_lane": "OPEN_BLOCKED",
     "stronger_proof_lane": "OPEN_INTERNAL",
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "cursorbench_route_a_public_scoring_blocker_reduction_reconciliation_20261009_v1": {
+    "source": {
+      "path": "canonical/governance/CURSORBENCH_ROUTE_A_PUBLIC_SCORING_BLOCKER_REDUCTION_20261009_V1.json",
+      "git_blob_sha": "a0531e80b17461e576f743d02f5f207b14bd0b24"
+    },
+    "verification": {
+      "path": "canonical/verification/CURSORBENCH_ROUTE_A_PUBLIC_SCORING_BLOCKER_REDUCTION_INDEPENDENT_VERIFICATION_20261009_V1.json",
+      "git_blob_sha": "42af77afd9203978a970601a9802a267f98b93ed"
+    },
+    "result": "METRIC_FAMILY_BOUND__ROUTE_A_REMAINS_OPEN_BLOCKED_ON_THREE_EXACT_4_0_SCORING_FACTS",
+    "prior_blocker": "EXACT_CURSORBENCH_4_0_SCORE_DECOMPOSITION_OR_EQUIVALENT_CONTENT_ADDRESSED_SCORE_LOWER_BOUND_NOT_BOUND",
+    "current_blocker_count": 3,
     "acceptance_credit_delta": 0,
     "terminal_credit_delta": 0
   }
