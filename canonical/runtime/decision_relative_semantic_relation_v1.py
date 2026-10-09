@@ -15,6 +15,7 @@ supply already-authenticated evidence receipts/claims.
 from __future__ import annotations
 
 from typing import Any, Mapping
+import re
 
 from canonical.runtime.terminal_semantic_quotient_v1 import compile_minimal_quotient
 
@@ -30,8 +31,8 @@ REL_DISTINCT = "DISTINCT_OR_NONINTERCHANGEABLE"
 REQUIREMENTS = {
     "ANY_SOUND_RELATION",
     "BIDIRECTIONAL_EQUIVALENCE",
-    "A_SUBSTITUTABLE_FOR_B",
-    "B_SUBSTITUTABLE_FOR_A",
+    "A_ENTAILS_B_REQUIRED",
+    "B_ENTAILS_A_REQUIRED",
     "TASK_EQUIVALENCE",
 }
 
@@ -53,8 +54,29 @@ def _fail(reason: str, **extra: Any) -> dict[str, Any]:
     }
 
 
-def _verified(value: Any) -> bool:
-    return isinstance(value, Mapping) and value.get("verified") is True
+_SHA256 = re.compile(r"^[0-9a-f]{64}$")
+
+
+def _receipt(value: Any, *, relation: str) -> bool:
+    if not isinstance(value, Mapping) or value.get("verified") is not True:
+        return False
+    if value.get("relation") != relation:
+        return False
+    if value.get("source_kind") not in {
+        "EXPLICIT_SOURCE_DEFINITION",
+        "AUTHENTICATED_ONTOLOGY",
+        "CHECKED_PROOF_DAG",
+        "CHECKED_COUNTEREXAMPLE",
+    }:
+        return False
+    verifier = str(value.get("verifier_id") or "").strip()
+    evidence_sha = str(value.get("evidence_sha256") or "")
+    scope_sha = str(value.get("scope_sha256") or "")
+    return bool(
+        verifier
+        and _SHA256.fullmatch(evidence_sha)
+        and _SHA256.fullmatch(scope_sha)
+    )
 
 
 def _task_equivalence(problem: Mapping[str, Any]) -> dict[str, Any]:
@@ -82,9 +104,9 @@ def _requirement_satisfied(requirement: str, relation: str, *, task_equivalent: 
         return relation != REL_UNKNOWN
     if requirement == "BIDIRECTIONAL_EQUIVALENCE":
         return relation == REL_EQUIVALENT
-    if requirement == "A_SUBSTITUTABLE_FOR_B":
+    if requirement == "A_ENTAILS_B_REQUIRED":
         return relation in {REL_EQUIVALENT, REL_A_ENTAILS_B}
-    if requirement == "B_SUBSTITUTABLE_FOR_A":
+    if requirement == "B_ENTAILS_A_REQUIRED":
         return relation in {REL_EQUIVALENT, REL_B_ENTAILS_A}
     if requirement == "TASK_EQUIVALENCE":
         return relation == REL_EQUIVALENT or task_equivalent
@@ -120,20 +142,29 @@ def prove(problem: Mapping[str, Any]) -> dict[str, Any]:
 
     # Negative evidence is checked first. A verified substitutability
     # counterexample defeats that direction regardless of weaker positive cues.
-    counter_a_to_b = _verified(evidence.get("counterexample_a_substituted_for_b"))
-    counter_b_to_a = _verified(evidence.get("counterexample_b_substituted_for_a"))
+    counter_a_to_b = _receipt(
+        evidence.get("counterexample_a_substituted_for_b"),
+        relation="COUNTEREXAMPLE_A_FOR_B",
+    )
+    counter_b_to_a = _receipt(
+        evidence.get("counterexample_b_substituted_for_a"),
+        relation="COUNTEREXAMPLE_B_FOR_A",
+    )
 
-    explicit_eq = _verified(evidence.get("explicit_source_equivalence"))
+    explicit_eq = _receipt(
+        evidence.get("explicit_source_equivalence"),
+        relation=REL_EQUIVALENT,
+    )
     concept = evidence.get("authenticated_concept_binding")
     same_concept = (
         isinstance(concept, Mapping)
-        and concept.get("verified") is True
+        and _receipt(concept, relation=REL_EQUIVALENT)
         and isinstance(concept.get("a_concept_id"), str)
         and concept.get("a_concept_id")
         and concept.get("a_concept_id") == concept.get("b_concept_id")
     )
-    a_to_b = _verified(evidence.get("entailment_a_to_b"))
-    b_to_a = _verified(evidence.get("entailment_b_to_a"))
+    a_to_b = _receipt(evidence.get("entailment_a_to_b"), relation=REL_A_ENTAILS_B)
+    b_to_a = _receipt(evidence.get("entailment_b_to_a"), relation=REL_B_ENTAILS_A)
 
     positive_exact = explicit_eq or same_concept or (a_to_b and b_to_a)
 
@@ -209,9 +240,10 @@ def prove(problem: Mapping[str, Any]) -> dict[str, Any]:
         "acceptance_authority": False,
         "terminal_authority": False,
         "terminal_credit_delta": 0,
-        "hard_nonclaim": (
-            "THIS_PROVES_ONLY_THE_RELATION_SUPPORTED_BY_THE_SUPPLIED_AUTHENTICATED_"
-            "EVIDENCE_AND_COMPLETE_TASK_SIGNATURES__IT_DOES_NOT_PROVE_OPEN_WORLD_"
-            "LINGUISTIC_SYNONYMY"
-        ),
+        "hard_nonclaims": [
+            "THIS_PROVES_ONLY_THE_RELATION_SUPPORTED_BY_TYPED_CONTENT_ADDRESSED_RECEIPTS_AND_COMPLETE_TASK_SIGNATURES",
+            "RECEIPT_STRUCTURE_DOES_NOT_BY_ITSELF_AUTHENTICATE_THE_UPSTREAM_VERIFIER_OR_SOURCE",
+            "DIRECTIONAL_ENTAILMENT_IS_NOT_UNRESTRICTED_SUBSTITUTABILITY__POLARITY_AND_COMPOSITION_RULES_REMAIN_LOAD_BEARING",
+            "NO_OPEN_WORLD_LINGUISTIC_SYNONYMY_CLAIM",
+        ],
     }
