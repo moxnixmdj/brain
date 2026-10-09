@@ -66,6 +66,8 @@ def _problem(*,small=True,add_irrelevant=False):
         "schema":w.SCHEMA,
         "case_id":"worldset",
         "hypothesis_set_complete":True,
+        "compatibility_constraints_complete":True,
+        "incompatible_hypothesis_sets":[],
         "documents":docs,
         "query":{
             "target_id":"threshold",
@@ -127,6 +129,101 @@ class CrossDocumentEffectHypothesisWorldsetV1Tests(unittest.TestCase):
         out=w.evaluate(problem)
         self.assertFalse(out["pass"])
         self.assertIn("SEMANTICALLY_DUPLICATE_HYPOTHESIS",out["reason"])
+
+
+    def test_correlated_no_effect_hypotheses_exclude_impossible_worlds(self):
+        problem={
+            "schema":w.SCHEMA,
+            "case_id":"correlated",
+            "hypothesis_set_complete":True,
+            "compatibility_constraints_complete":True,
+            "incompatible_hypothesis_sets":[
+                ["B.effect.h1","C.effect.h2"],
+                ["B.effect.h2","C.effect.h1"],
+            ],
+            "documents":[
+                {"document_id":"A","effect_slots":[
+                    _slot("A.effect",_e("A.t","threshold","DEFINE","10")),
+                ]},
+                {"document_id":"B","effect_slots":[
+                    _slot(
+                        "B.effect",
+                        _e("B.t","threshold","REPLACE","12",start="2026-07-01",sup=["A.t"]),
+                        None,
+                    ),
+                ]},
+                {"document_id":"C","effect_slots":[
+                    _slot(
+                        "C.effect",
+                        _e("C.t1","threshold","EXCEPTION","8",cond={"small":True},start="2026-07-01",sup=["B.t"]),
+                        _e("C.t2","threshold","EXCEPTION","8",cond={"small":True},start="2026-07-01",sup=["A.t"]),
+                    ),
+                ]},
+            ],
+            "query":{
+                "target_id":"threshold",
+                "as_of":"2026-08-01",
+                "context":{"small":True},
+            },
+        }
+        out=w.evaluate(problem)
+        self.assertTrue(out["pass"],out)
+        self.assertEqual(out["effective_value"],"8")
+        self.assertEqual(out["raw_cartesian_world_count"],4)
+        self.assertEqual(out["world_count"],2)
+        self.assertEqual(out["incompatibility_constraint_count"],2)
+        self.assertTrue(
+            out["compatibility_constraints_complete_relative_to_declared_universe"]
+        )
+        self.assertTrue(verify.verify(problem,out)["verified"])
+
+        problem["query"]["context"]["small"]=False
+        opened=w.evaluate(problem)
+        self.assertFalse(opened["pass"],opened)
+        self.assertEqual(set(opened["possible_outcomes"]),{"10","12"})
+        self.assertEqual(opened["minimum_discriminator_slots"],["B.effect"])
+        self.assertTrue(verify.verify(problem,opened)["verified"])
+
+    def test_incomplete_compatibility_constraints_fail_closed(self):
+        problem=_problem()
+        problem["compatibility_constraints_complete"]=False
+        out=w.evaluate(problem)
+        self.assertFalse(out["pass"])
+        self.assertIn("COMPATIBILITY_CONSTRAINTS_NOT_DECLARED_COMPLETE",out["reason"])
+
+    def test_all_worlds_excluded_by_constraints_fail_closed(self):
+        problem={
+            "schema":w.SCHEMA,
+            "case_id":"none",
+            "hypothesis_set_complete":True,
+            "compatibility_constraints_complete":True,
+            "incompatible_hypothesis_sets":[
+                ["B.effect.h1","C.effect.h1"],
+                ["B.effect.h1","C.effect.h2"],
+                ["B.effect.h2","C.effect.h1"],
+                ["B.effect.h2","C.effect.h2"],
+            ],
+            "documents":[
+                {"document_id":"B","effect_slots":[
+                    _slot(
+                        "B.effect",
+                        _e("B.1","threshold","DEFINE","1"),
+                        _e("B.2","threshold","DEFINE","2"),
+                    ),
+                ]},
+                {"document_id":"C","effect_slots":[
+                    _slot(
+                        "C.effect",
+                        _e("C.1","other","DEFINE","1"),
+                        _e("C.2","other","DEFINE","2"),
+                    ),
+                ]},
+            ],
+            "query":{"target_id":"threshold","as_of":"2026-08-01","context":{}},
+        }
+        out=w.evaluate(problem)
+        self.assertFalse(out["pass"])
+        self.assertEqual(out["status"],"FAIL_CLOSED__NO_ADMISSIBLE_HYPOTHESIS_WORLD")
 
     def test_world_bound_fails_closed(self):
         problem=_problem()
