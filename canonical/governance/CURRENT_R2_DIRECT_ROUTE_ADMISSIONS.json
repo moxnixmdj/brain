@@ -5,8 +5,8 @@
   "schema": "PROJECT_BRAIN_CURRENT_R2_DIRECT_ROUTE_DYNAMIC_ADMISSIONS_POINTER_V1",
   "status": "ACTIVE_CURRENT_R2_DYNAMIC_ADMISSIONS_POINTER",
   "target": {
-    "git_blob_sha": "8e2418aecd87bbeaece8025d6bbb6c03f52c8b8e",
-    "path": "canonical/governance/R2_DIRECT_ROUTE_DYNAMIC_ADMISSIONS_8e2418aecd87bbea.json",
+    "git_blob_sha": "4b1e16a2f20130c8463a7ed1031524814a2f834e",
+    "path": "canonical/governance/R2_DIRECT_ROUTE_DYNAMIC_ADMISSIONS_4b1e16a2f20130c8.json",
     "schema": "PROJECT_BRAIN_R2_DIRECT_ROUTE_DYNAMIC_ADMISSIONS_V1"
   },
   "terminal_authority": false,
