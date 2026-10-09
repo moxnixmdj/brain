@@ -11,8 +11,19 @@
     "terminal_bench_ref": "452bf305c6daa62fc59061d22133a7cbc7c1572e",
     "spent_context": true,
     "fresh_target_reality_units_consumed": 0,
-    "historical_independent_verifier_reward": "1",
-    "exact_cursorbench_task": false
+    "historical_independent_verifier_reward": "0",
+    "exact_cursorbench_task": false,
+    "historical_independent_verifier_pass": false,
+    "historical_independent_verifier_tests": {
+      "total": 11,
+      "passed": 9,
+      "failed": 2
+    },
+    "historical_canonical_result": {
+      "path": "canonical/capabilities/opus55/REACT_LEAD_FORM_VERIFIER_RESULT_20260930_V1.json",
+      "git_blob_sha": "1a2f0c712d9d795e263608d6d05f8be20ab997b3",
+      "source_commit": "ae2e373c4d557d9a473e1b584e1460b0318f66bc"
+    }
   },
   "frozen_model": {
     "path": "canonical/evidence/CURSORBENCH_REACT_LEAD_FORM_TYPED_ACCEPTANCE_MODEL_20261009_V1.json",
@@ -78,7 +89,7 @@
   },
   "hidden_audit": {
     "path": "canonical/verification/CURSORBENCH_REACT_LEAD_FORM_INDEPENDENT_HIDDEN_AUDIT_SUMMARY_20261009_V1.json",
-    "git_blob_sha": "2abf80161e07c5eaba35960beb2421644b840324",
+    "git_blob_sha": "499e4081450f8af08d321d9f19de8864cbeacbe7",
     "frozen_model_mutated_after_hidden_reveal": false
   },
   "p3_composition": {
@@ -112,7 +123,10 @@
     "hidden_cursorbench_task_membership_proved": false,
     "transfer_from_this_terminal_bench_context_to_all_cursorbench_v5_contexts_proved": false,
     "cursorbench_positive_adequacy_cover_closed": false,
-    "cursorbench_threshold_met": false
+    "cursorbench_threshold_met": false,
+    "historical_candidate_passed": false,
+    "frozen_model_hidden_failure_semantics_represented": true,
+    "real_evidence_stack_requires_historical_candidate_success": false
   },
   "next_proof_object": "BIND_AN_ACTUAL_CURSORBENCH_V5_TARGET_CONTEXT_TO_THE_FIVE_ATOM_TYPED_ACCEPTANCE_REGION_OR_PROVE_A_SOUND_SCOPE_COMPLETE_TRANSFER__DO_NOT_REBUILD_THE_THREE_ATOM_MECHANISMS",
   "hard_nonclaims": [
@@ -120,7 +134,9 @@
     "NO_CLAIM_ONE_TERMINAL_BENCH_CONTEXT_PROVES_HIDDEN_CURSORBENCH_MEMBERSHIP",
     "NO_CLAIM_WHOLE_SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001_IS_CLOSED",
     "NO_CLAIM_CURSORBENCH_V5_COMMON_POLICY_COVERAGE",
-    "NO_CURSORBENCH_SCORE_ACCEPTANCE_FAMILY_OWNERSHIP_OR_TERMINAL_CREDIT"
+    "NO_CURSORBENCH_SCORE_ACCEPTANCE_FAMILY_OWNERSHIP_OR_TERMINAL_CREDIT",
+    "NO_CLAIM_THE_HISTORICAL_REACT_LEAD_FORM_CANDIDATE_PASSED__CANONICAL_REWARD_IS_0",
+    "NO_CONVERSION_OF_A_FAILED_TERMINAL_BENCH_RESULT_INTO_POSITIVE_BENCHMARK_CREDIT"
   ],
   "accounting": {
     "incremental_spend_usd": 0,
