@@ -219,5 +219,19 @@ class Tests(unittest.TestCase):
         )
 
 
+    def test_current_terminal_preserves_coding_v5_reconciliation(self):
+        term = load(CURRENT_TERMINAL_PATH)
+        self.assertEqual(
+            term["coding_v5_positive_adequacy_gate_reconciliation_20261009_v1"],
+            {
+                "result": "GATE_VERIFIED__CURRENT_CERTIFICATE_NOT_READY__NEXT_EVIDENCE_CLASS_BOUND",
+                "gate_blob_sha": "c777c4a2c9e34cb3e37ae8ed75565c5a3aefa390",
+                "verification_blob_sha": "ec006e826547d810aa3fe61e77871ed0dc35e131",
+                "boundary_blob_sha": "ab28e64d73392bd7810a579ce5a1ed346c9e2925",
+                "acceptance_credit_delta": 0,
+                "terminal_credit_delta": 0,
+            },
+        )
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
