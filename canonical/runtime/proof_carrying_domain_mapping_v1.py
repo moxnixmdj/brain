@@ -15,6 +15,7 @@ from __future__ import annotations
 
 from copy import deepcopy
 from hashlib import sha256
+import json
 from typing import Any, Callable, Mapping, Sequence
 
 from canonical.runtime import bounded_authenticated_concept_universe_v1 as concept_universe
@@ -44,6 +45,7 @@ def _base(status: str, *, passed: bool = False, **extra: Any) -> dict[str, Any]:
         "schema": SCHEMA,
         "status": status,
         "pass": passed,
+        "candidate_semantic_atoms": [],
         "proved_semantic_atoms": [],
         "fully_semantically_bound": False,
         "opaque_remainder_required": True,
@@ -181,7 +183,7 @@ def resolve(
     scope_id: str,
     candidate_concepts: Sequence[Mapping[str, Any]],
     evidence: Sequence[Mapping[str, Any]] = (),
-    proved_semantic_atoms: Sequence[str] = (),
+    candidate_semantic_atoms: Sequence[str] = (),
     relation_problems: Mapping[str, Mapping[str, Any]] | None = None,
     registry: Mapping[str, Any] | None = None,
     registry_query: Mapping[str, Any] | None = None,
@@ -212,13 +214,13 @@ def resolve(
         candidates = _candidate_rows(candidate_concepts)
         evidence_by_atom = _evidence_index(evidence)
 
-        atoms: list[str] = []
-        for atom in proved_semantic_atoms:
+        candidate_atoms: list[str] = []
+        for atom in candidate_semantic_atoms:
             if not isinstance(atom, str) or not atom.strip():
-                raise DomainMappingError("PROVED_SEMANTIC_ATOM_INVALID")
+                raise DomainMappingError("CANDIDATE_SEMANTIC_ATOM_INVALID")
             value = atom.strip()
-            if value not in atoms:
-                atoms.append(value)
+            if value not in candidate_atoms:
+                candidate_atoms.append(value)
 
         registry_result = None
         registry_allowed: set[str] | None = None
@@ -260,14 +262,10 @@ def resolve(
                 continue
 
             contract = _evaluate_contract(candidate, evidence_by_atom)
-            if contract["contract_refuted"]:
-                rejected.append({
-                    "concept_id": cid,
-                    "reason": "EVIDENCE_CONTRACT_REFUTED",
-                    "refutations": contract["refutations"],
-                })
-                continue
 
+            # Evidence rows in V1 are proposal-side diagnostics only. They may
+            # highlight a possible contradiction, but they cannot delete an
+            # authenticated-registry candidate or mint semantic truth.
             relation_problem = relation_map.get(cid)
             relation_result = None
             if relation_problem is not None:
@@ -322,8 +320,6 @@ def resolve(
             status = "UNRESOLVED__MULTIPLE_VERIFIED_RELATIONS"
         elif unique_verified is not None:
             status = unique_verified["status"]
-        elif atoms:
-            status = "COMPOSED"
         else:
             status = "UNRESOLVED"
 
@@ -340,6 +336,25 @@ def resolve(
             rivals = sorted(x for x in viable if x != unique_verified["concept_id"])
             strongest_rival = rivals[0] if rivals else None
 
+        proved_atoms: list[str] = []
+        if unique_verified is not None:
+            relation_atom_payload = {
+                "source_id": source_id,
+                "raw_span_sha256": _raw_span_sha256(raw_span),
+                "scope_id": scope_id,
+                "concept_id": unique_verified["concept_id"],
+                "relation": unique_verified["relation"],
+            }
+            material = json.dumps(
+                relation_atom_payload,
+                sort_keys=True,
+                separators=(",", ":"),
+                ensure_ascii=False,
+            ).encode("utf-8")
+            proved_atoms.append(
+                "domain-relation-sha256:" + sha256(material).hexdigest()
+            )
+
         next_discriminator = None
         if registry_result is not None:
             ambiguity = registry_result.get("ambiguity_decision")
@@ -353,7 +368,8 @@ def resolve(
             source_id=source_id,
             scope_id=scope_id,
             mention_id=mention_id,
-            proved_semantic_atoms=sorted(atoms),
+            candidate_semantic_atoms=sorted(candidate_atoms),
+            proved_semantic_atoms=proved_atoms,
             fully_semantically_bound=fully_bound,
             opaque_remainder_required=not fully_bound,
             semantic_truth_authority=semantic_authority,
@@ -367,7 +383,8 @@ def resolve(
             registry_result=registry_result,
             source_semantics_completeness=completeness,
             candidate_relations_are_authority=False,
-            mapping_contracts_can_refute_but_cannot_mint_synonymy=True,
+            evidence_contracts_are_authority=False,
+            mapping_contracts_are_authority=False,
             boundary=(
                 "V1_REUSES_EXISTING_RELATION_AUTHORITY_AND_OPTIONAL_AUTHENTICATED_FINITE_REGISTRY;"
                 "GENERAL_WORD_SENSE_INFERENCE_AND_OPEN_WORLD_ONTOLOGY_COMPLETENESS_REMAIN_UNCLAIMED"
