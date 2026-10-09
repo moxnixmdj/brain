@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_ONE_SHOT_REALITY_CLOSURE_POINTER_V1",
   "date": "2026-10-09",
-  "status": "ACTIVE_VERIFIED_ORCHESTRATOR__STRICT_EXTERNALITY_LAW_VERIFIED__R3_INTERNAL_FIXED_POINT__NO_RESIDUAL__NOT_LIVE_DEFAULT",
+  "status": "ACTIVE_VERIFIED_ORCHESTRATOR__STRICT_EXTERNALITY_LAW_VERIFIED__ACTUAL_LIVE_R3_INTERNAL_FIXED_POINT__NO_RESIDUAL__NOT_LIVE_DEFAULT",
   "runtime": {
     "path": "canonical/runtime/one_shot_reality_closure_v2.py",
     "git_blob_sha": "b304e9f5857044d2e1e28a3d5122140d38dc1069"
@@ -12,9 +12,8 @@
     "role": "LOAD_BEARING_INNER_FIXED_POINT__HISTORICAL_STATE_INSUFFICIENCY_ONLY__INFORMATION_THEORETIC_EXTERNALITY_REQUIRES_SEPARATE_PROOF"
   },
   "verification": {
-    "path": "canonical/verification/R3_REPLAY_PROVENANCE_REPAIR_20261009_V1.json",
-    "git_blob_sha": "54cd12f1736d49c67a031c3aba401ea0d2491216",
-    "status": "PASS__R3_ORPHAN_REPAIR_OBLIGATION_ELIMINATED_WITHOUT_FALSE_REPAIR_CLAIM"
+    "path": "canonical/verification/LIVE_R3_PROVENANCE_DEPLOYMENT_20261009_V1.json",
+    "status": "PASS__ACTUAL_LIVE_RUNTIME_AND_STATE__R3_INTERNAL_RESIDUAL_ZERO"
   },
   "authority": {
     "callable_as_verified_orchestrator": true,
@@ -30,12 +29,14 @@
     "historical_replay_absence_is_terminal_externality": false,
     "pending_acquisition_is_not_external_impossibility": true,
     "orphan_failure_telemetry_is_not_terminal_obligation": true,
-    "current_r3_internal_unsolved": false
+    "current_r3_internal_unsolved": false,
+    "actual_live_runtime_deployment_verified": true,
+    "actual_live_state_migrated_and_verified": true
   },
   "next_load_bearing_roots": [
-    "RECOMPUTE_CURRENT_TERMINAL_TRUTH_FRONTIER_AFTER_R3_RESIDUAL_ELIMINATION",
-    "PRODUCE_EXACT_IDENTITY_ZERO_EXPOSURE_16384_CONTEXT_CAPACITY_RECEIPT_BEFORE_TB_SCIENCE_RANK14_ONLY_IF_STILL_ON_CURRENT_TERMINAL_FRONTIER",
+    "RECOMPUTE_CURRENT_TERMINAL_TRUTH_FRONTIER_FROM_ACTUAL_LIVE_R3_ZERO_RESIDUAL_STATE",
     "CONTINUE_ONLY_CURRENT_LOAD_BEARING_R2_OR_TERMINAL_TRUTH_CLOSURE",
+    "PRODUCE_EXACT_IDENTITY_ZERO_EXPOSURE_16384_CONTEXT_CAPACITY_RECEIPT_BEFORE_TB_SCIENCE_RANK14_ONLY_IF_STILL_ON_CURRENT_TERMINAL_FRONTIER",
     "KEEP_STRICT_EXTERNALITY_PROOF_GATE_AND_REPLAY_PROVENANCE_INVARIANT_LOAD_BEARING"
   ],
   "accounting": {
@@ -43,10 +44,10 @@
     "terminal_credit_delta": 0
   },
   "live_r3_fixed_point": {
-    "path": "canonical/verification/R3_REPLAY_PROVENANCE_REPAIR_20261009_V1.json",
-    "git_blob_sha": "54cd12f1736d49c67a031c3aba401ea0d2491216",
-    "status": "PASS__R3_ORPHAN_REPAIR_OBLIGATION_ELIMINATED_WITHOUT_FALSE_REPAIR_CLAIM",
-    "result_sha256": "25bc366c08d730f6e0c35599b8fcfa2cb215e4b88a4f733acce06377d50c3293",
+    "path": "canonical/verification/LIVE_R3_PROVENANCE_DEPLOYMENT_20261009_V1.json",
+    "status": "PASS__ACTUAL_LIVE_RUNTIME_AND_STATE__R3_INTERNAL_RESIDUAL_ZERO",
+    "closure_output_sha256": "932f7b0a0cae59aeeb26543e174e974bb9c3fb954d9896680c2d46a50fd99202",
+    "live_state_sha256_after": "c116275adeb9197395abbb8be8a02b70a6abf7b16f56593d55efd0e03619a510",
     "closure_status": "PASS__PROOF_CARRYING_REALITY_CLOSURE_FIXED_POINT",
     "v1_status": "VERIFIED_INTERNAL_FIXED_POINT__IMPROVEMENT_QUEUE_EMPTY",
     "residual_class": "NONE",
