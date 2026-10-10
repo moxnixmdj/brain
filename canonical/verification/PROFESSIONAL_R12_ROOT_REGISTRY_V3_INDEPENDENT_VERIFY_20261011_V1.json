@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_R12_ROOT_REGISTRY_V3_INDEPENDENT_VERIFY_V1",
+  "date": "2026-10-11",
+  "status": "PASS__SECOND_INDEPENDENT_SPRITE__7_OF_7_ROOT_REGISTRY__31_OF_31_COMBINED_R12_TRUTH_REPAIR_AND_ROOT_CLOSURE__ZERO_PROPERTY_OR_TERMINAL_CREDIT",
+  "repository": "moxnixmdj/brain",
+  "branch": "successor/r12-universal-ccr3-integration-20261011-v1",
+  "subject": {
+    "registry": {
+      "path": "canonical/governance/COVERAGE_ROOT_REGISTRY_PROFESSIONAL_R12_SEMANTIC_20261011_V3.json",
+      "git_blob_sha": "d312c84dc9ccf9583d8098f71953467aee6e26f2"
+    },
+    "verifier": {
+      "path": "canonical/runtime/professional_r12_root_registry_verify_v3.py",
+      "git_blob_sha": "c113d6f458f69d56ad7bb60f2c218f791d1beacf"
+    },
+    "tests": {
+      "path": "canonical/tests/test_professional_r12_root_registry_verify_v3.py",
+      "git_blob_sha": "afd5f9190bb71304411e8b13f5adefa16988ce6e"
+    }
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/v9-real-witness-second",
+    "root_registry_tests_run": 7,
+    "root_registry_tests_passed": 7,
+    "root_registry_tests_failed": 0,
+    "root_registry_transcript_sha256": "29b792119b93b16516b3a55d19f314f32d8a0f78eb8197c3d2ddc5d7cd2aac8d",
+    "root_registry_transcript_bytes": 1253,
+    "combined_current_main_tests_run": 31,
+    "combined_current_main_tests_passed": 31,
+    "combined_current_main_tests_failed": 0
+  },
+  "truth": {
+    "proved_root_ids": [
+      "CC_R1_REALITY_CONTAINMENT_V1",
+      "CC_R2_MISSION_SOUNDNESS_V1",
+      "CC_R3_TERMINAL_CLOSURE_V1"
+    ],
+    "proved_root_count": 3,
+    "open_root_count": 0,
+    "r4_proof_closure": true,
+    "semantic_property_truth_authority": false,
+    "terminal_authority": false
+  },
+  "hard_nonclaims": [
+    "NO_AUTOMATIC_R12_SEMANTIC_PROPERTY_TRUTH_FROM_R4",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
