@@ -1,0 +1,101 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_CORE_PROFILE_SUCCESSOR_EXECUTION_V1",
+  "status": "FRESH_SUCCESSOR_EXECUTION__CORE_FUNCTION_GRANULAR_PRUNE__ZERO_PROMOTION_CREDIT",
+  "recorded_at": "2026-10-10",
+  "predecessor": {
+    "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_PROFILE_PRUNED_REPAIRED_SUCCESSOR_EXECUTION_20261010_V1.json",
+    "package_raw_python_source_bytes": 2251793,
+    "B_exec_raw_python_source_bytes": 2254553,
+    "archive_bytes": 336148,
+    "fresh_qualification": "6440/6440",
+    "manifest_sha256": "9dc4ad75c82f466c197b070d99935828bb6c62bf278fa864d57e3c420e2c14ed"
+  },
+  "method": {
+    "id": "CORE_FUNCTION_GRANULAR_PROFILE_PRUNE_V18",
+    "rationale": "Replace selected whole-core-module retention with fail-closed function-granular retention using executed-line evidence from a spent-seed workload, then require full spent NEXT20 and fresh NEXT21 qualification.",
+    "initial_candidate": {
+      "raw_python_source_bytes": 2220098,
+      "attempted_stubbed_functions": 24,
+      "spent_NEXT20_result": "6437/6440",
+      "falsified_function": "count_ops",
+      "failures": "3 quartic-root cases reached simplify(measure=count_ops)"
+    },
+    "repaired_candidate": {
+      "restored_only": "count_ops",
+      "stubbed_function_bodies": 23,
+      "selected_function_source_bytes_before_rewrite": 32308,
+      "raw_python_source_bytes": 2224347,
+      "raw_reduction_bytes": 27446,
+      "module_graph_unchanged": true
+    },
+    "lesson": "Finite profile non-use is evidence only; rarer quartic simplification reached count_ops and forced a single-function rescue."
+  },
+  "measured_candidate": {
+    "status": "PHYSICALLY_REWRITTEN_RESEARCH_CANDIDATE__NOT_PROMOTED",
+    "python_files": 277,
+    "package_raw_python_source_bytes": 2224347,
+    "router_raw_python_source_bytes": 2760,
+    "B_exec_raw_python_source_bytes": 2227107,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "manifest_sha256": "74a2c8eb3caf941c1efc80beb39018e4577565ae40e5b9c952cc52491a453e6d",
+    "raw_improvement_vs_immediate_predecessor_bytes": 27446,
+    "archive_bytes": 335396,
+    "archive_sha256": "325ac7468bbcec2e547a311bdebdca2f28833b1c6983d454823aa9da2f495908",
+    "ustar_bytes": 2498560,
+    "ustar_sha256": "77f31741dd6ec3508852502ad7261bc87fa93ee8b9654768acf596b403b87a2d"
+  },
+  "qualification": {
+    "spent_NEXT20": {
+      "id": "QUAL_SUCCESSOR_NEXT20_20261010_V1",
+      "cases": 6440,
+      "corpus_sha256": "dbd9e4bc73e5b595f6207633bea42c2d933ec66da558ca4c174669020291e292",
+      "repaired_candidate": "6440/6440 by complete operation-block replay",
+      "spent": true
+    },
+    "fresh_NEXT21": {
+      "id": "QUAL_SUCCESSOR_NEXT21_20261010_V1",
+      "seed": 4582576,
+      "per_operation_budget": 580,
+      "cases": 6670,
+      "corpus_sha256": "91f7409c6f377db62c6ee1c2e3ebd858ce34145df58b8c74f62692912fc6fa71",
+      "stock_donor": "6670/6670 by complete operation-block replay",
+      "candidate": "6670/6670 by complete operation-block replay",
+      "independent_copy": "6670/6670",
+      "archive_replay": "6670/6670",
+      "spent": true
+    }
+  },
+  "reproducibility": {
+    "predecessor_reconstruction": "canonical/research/bytes/tools/rebuild_candidate_v17.py",
+    "transform": "canonical/research/bytes/tools/core_profile_prune_v18.py",
+    "transform_sha256": "ac6d86f0c5c9f6e9ccc7dfa12611cd986c5ded1a0c76cc518f45871d1de18a8f",
+    "successor_reconstruction": "canonical/research/bytes/tools/rebuild_candidate_v18.py",
+    "route": "canonical/research/bytes/tools/exact_symbolic_route_v1.py",
+    "semantic_digest": "canonical/research/bytes/tools/semantic_digest_v1.py",
+    "qualification_generator": "canonical/research/bytes/tools/generate_qualification_v1.py"
+  },
+  "durable_artifact": {
+    "library_status": "PERSISTED_IN_CHATGPT_LIBRARY",
+    "library_file_id": "libfile_aca987944d608191a6b299466bd06d83",
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_CORE_PROFILE_SUCCESSOR_20261010_V1.tar.xz",
+    "bytes": 335396,
+    "sha256": "325ac7468bbcec2e547a311bdebdca2f28833b1c6983d454823aa9da2f495908"
+  },
+  "next_frozen_qualification": {
+    "id": "QUAL_SUCCESSOR_NEXT22_20261010_V1",
+    "seed": 4690416,
+    "per_operation_budget": 600,
+    "cases": 6900,
+    "corpus_sha256": "7917ed4310c2cd5a66ae324c88e9ea51f7061af35d387c425df872b7ff34b1ce",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT"
+  },
+  "truth_boundary": [
+    "MEASURED: exact V18 bytes pass fresh NEXT21 6,670/6,670 on stock donor, candidate, independent copy, and extracted archive.",
+    "MEASURED: an overaggressive 24-function variant failed 3 spent NEXT20 quartic-root cases because count_ops remained causally required; only count_ops was restored.",
+    "MEASURED: V18 is 27,446 raw Python-source bytes smaller than V17 with the same 277-file graph.",
+    "INFERRED: the remaining 23 stubbed function bodies are outside the bounded route for the tested scope; this is not universal non-use proof.",
+    "NOT CLAIMED: universal SymPy correctness, absolute minimum, out-of-scope behavior preservation, or Opus-family promotion.",
+    "PROMOTION CREDIT: 0."
+  ],
+  "next_action": "Continue function-granular refinement of the retained whole-module exemptions using spent NEXT21 only; core remains the first target unless reranking shows otherwise. Do not execute NEXT22 before a new physical cut."
+}
