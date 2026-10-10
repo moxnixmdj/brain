@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_FIRST_RUNTIME_AUTHORITY_V3_FOCUSED_VERIFICATION_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS",
+  "pr": 3872,
+  "branch": "successor/capability-first-runtime-authority-20261010-v2",
+  "purpose": "Independently verify the exact changed capability-first scheduler and subordinate terminal-autopilot bytes after GitHub Actions failed before executing any steps.",
+  "exact_git_blobs": {
+    "canonical/runtime/capability_first_scheduler_v1.py": "7408e4d012dd5afad65d37a471edc27c740510c9",
+    "canonical/runtime/terminal_autopilot_v1.py": "d37e0377bc0c009957a89dd18597d5482e37ff4f",
+    "canonical/tests/test_capability_first_scheduler_v1.py": "4cf380a8197f2e1aa956d42cd27201791496f269",
+    "canonical/tests/test_terminal_autopilot_v1.py": "2f1f38b5484e7a9e26788b7b86b6a7d4f291331f",
+    "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V3.json": "472c98a195c4b98d340e9bb397fa8766e3b47928",
+    "canonical/governance/CURRENT_DEVELOPMENT_SCHEDULER.json": "e5ddb927e6c8dd8692fe12901272819fd86d4e2f",
+    "canonical/governance/CURRENT_MISSION_OBJECTIVE.json": "6ab2147306a138f9ea327d8e19cb4a5bc76e89df",
+    "canonical/governance/TERMINAL_AUTOPILOT_CAPABILITY_FIRST_SUBORDINATION_20261010_V1.json": "e8d9cca5891139540d822eff743cb3fc3746c4b6"
+  },
+  "independent_carrier": {
+    "provider": "Sprites",
+    "sprite": "brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "isolated_root": "/tmp/capv3",
+    "command": "PYTHONPATH=/tmp/capv3 python3 -m unittest -v canonical.tests.test_capability_first_scheduler_v1 canonical.tests.test_terminal_autopilot_v1",
+    "tests_run": 25,
+    "failures": 0,
+    "errors": 0,
+    "conclusion": "PASS"
+  },
+  "github_actions": {
+    "conclusion": "INFRASTRUCTURE_FAILURE_ONLY__ZERO_CODE_EXECUTION_CREDIT",
+    "runs": [
+      38026533993,
+      38026533587,
+      38026533547,
+      38026533561
+    ],
+    "observed_job_steps": null,
+    "note": "All four jobs completed failure with steps=null; no test command executed."
+  },
+  "verified_properties": [
+    "OPEN_OPUS_CHECKPOINT_OBLIGATIONS_DO_NOT_HARD_DEMOTE_GENERAL_REUSABLE_CAPABILITY_WORK",
+    "CAPABILITY_RESOURCE_PARETO_LEVERAGE_IS_PRIMARY",
+    "CHECKPOINT_LEVERAGE_IS_SECONDARY_AUDIT_TIE_BREAK",
+    "BENCHMARK_BOOKKEEPING_REMAINS_DEMOTED",
+    "TERMINAL_AUTOPILOT_NEW_DISPATCH_PARKS_WITHOUT_EXPLICIT_CAPABILITY_FIRST_ADMISSION",
+    "EXISTING_RESULT_VERIFICATION_AND_PROMOTION_HANDOFFS_REMAIN_AVAILABLE",
+    "NO_SCHEDULER_OR_ADMISSION_TERMINAL_CAPABILITY_ACCEPTANCE_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
