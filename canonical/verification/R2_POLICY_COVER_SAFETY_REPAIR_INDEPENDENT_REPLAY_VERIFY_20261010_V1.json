@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_R2_POLICY_COVER_SAFETY_REPAIR_INDEPENDENT_REPLAY_VERIFY_V1",
   "date": "2026-10-10",
-  "status": "PASS__EXACT_BRANCH_BYTES__32_OF_32_FOCUSED_TESTS__PYCOMPILE_PASS__GITHUB_CI_ZERO_STEP_NONAUTHORITATIVE__ZERO_TERMINAL_CREDIT",
+  "status": "PASS__EXACT_REBASED_BRANCH_BYTES__32_OF_32_FOCUSED_TESTS__PYCOMPILE_PASS__ZERO_TERMINAL_CREDIT",
   "defect": {
     "theorem_path": "canonical/governance/OBSERVATIONAL_EQUIVALENCE_POLICY_COVER_TOTALITY_THEOREM_20261007_V1.json",
     "theorem_git_blob_sha": "416c36e9109f5ce773997842ef620d7fa52b4eae",
@@ -91,7 +91,7 @@
     "NO_ACCEPTANCE_OR_OWNERSHIP_CREDIT",
     "NO_TERMINAL_AUTHORITY_OR_TERMINAL_CREDIT",
     "NO_CLAIM_ZERO_STEP_GITHUB_ACTIONS_ARE_TEST_PASSES",
-    "NO_MERGE_CURRENTNESS_CLAIM_UNTIL_REPLAYED_ON_CURRENT_MAIN"
+    "NO_CLAIM_FUTURE_MAIN_COMMITS_CANNOT_REQUIRE_RECONCILIATION_BEFORE_MERGE"
   ],
   "accounting": {
     "incremental_spend_usd": 0,
@@ -99,5 +99,32 @@
     "capability_credit_delta": 0,
     "ownership_credit_delta": 0,
     "terminal_credit_delta": 0
+  },
+  "rebased_currentness": {
+    "base_main_commit": "23638d2f5c44212a57bbf8c4537f2d3bff7efe39",
+    "branch": "successor/r2-cover-contract-v3",
+    "replayed_branch_head_before_receipt_update": "c7a571bacbd5f9e1a987431a119d66c51b901060",
+    "overlapping_upstream_file_changes_since_v2": false,
+    "exact_runtime_and_test_blobs_unchanged_from_first_verified_branch": true,
+    "policy_cover_function_tests": {
+      "passed": 23,
+      "failed": 0
+    },
+    "r2_controller_integration": {
+      "passed": 9,
+      "failed": 0
+    },
+    "total": {
+      "passed": 32,
+      "failed": 0
+    },
+    "py_compile": {
+      "passed": true,
+      "file_count": 9
+    },
+    "independent_carrier": "Sprites",
+    "sprite": "brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/r2-cover-v3-verify"
   }
 }
