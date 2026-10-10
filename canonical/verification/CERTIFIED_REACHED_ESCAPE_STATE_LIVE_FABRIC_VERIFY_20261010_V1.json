@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_CERTIFIED_REACHED_ESCAPE_STATE_LIVE_FABRIC_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__SOURCE_ROUTE_4_OF_4__CONSTRUCTOR_BEHAVIOR_6_OF_6__FULL_FABRIC_IMPORT_REPLAY_PENDING_PR_CARRIER__ZERO_CREDIT",
+  "branch": "successor/certified-reached-state-live-20261010-v1",
+  "base_commit": "28f4c13419fce9b0ed8162253ed5452e4f16f58d",
+  "exact_blobs": {
+    "unified_fabric": "992099c1b052912f0c55cbf2117d626e2f71f3f3",
+    "source_route_tests": "c7ae820d8a664c49a13b0551ad55870d9a1fea8e",
+    "full_fabric_behavior_tests": "6282ea3a956dc45404efc5d8599e5a0b578ac458",
+    "certified_constructor": "5cfce3cd753877ecd37d37082f2acd3e4883bfbf",
+    "constructor_tests": "318cf37347992502e2edf591a68d934713c4368c",
+    "action_intent": "9997f489b26e3f2695296f8f66d20564b20b664d",
+    "reached_state_kernel": "b1435d90f039bd1d809ff364c325c3d0858d3afd",
+    "finite_totality_certificate": "85487335b7e774ac9084b34c60e0175842771036"
+  },
+  "independent_replay": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "py_compile_pass": true,
+    "source_route_assertions": {
+      "run": 4,
+      "pass": 4,
+      "fail": 0
+    },
+    "exact_constructor_adversarial_tests": {
+      "run": 6,
+      "pass": 6,
+      "fail": 0
+    },
+    "total_verified_assertions": 10,
+    "full_fabric_import_behavior_test": "PENDING_COMPLETE_REPOSITORY_PR_CARRIER__NOT_CLAIMED_LOCAL"
+  },
+  "proved": [
+    "UNIFIED_FABRIC_STATICALLY_IMPORTS_CERTIFIED_REACHED_ESCAPE_STATE_CONSTRUCTOR",
+    "REACHED_ESCAPE_STATE_ENGINE_DESCRIPTOR_POINTS_TO_CERTIFIED_CONSTRUCTOR",
+    "REACHED_ESCAPE_STATE_DISPATCH_CALLS_CERTIFIED_CONSTRUCTOR",
+    "RAW_REACHED_ESCAPE_STATE_KERNEL_IMPORT_AND_DIRECT_DISPATCH_ARE_ABSENT_FROM_FABRIC",
+    "CERTIFIABLE_REACHED_STATE_IS_ADMITTED_BY_EXACT_CONSTRUCTOR",
+    "UNSPLITTABLE_NO_COMMON_POLICY_COUNTEREXAMPLE_IS_REJECTED_WITH_DETERMINISTIC_REPAIR",
+    "UNCOVERED_REGION_IS_REJECTED_WITH_POLICY_REPAIR",
+    "UNTRUSTED_INPUT_FAILS_CLOSED"
+  ],
+  "remaining_verification": [
+    "RUN_FULL_FABRIC_BEHAVIOR_TEST_IN_COMPLETE_REPOSITORY_CARRIER",
+    "RUN_DRIFT_IMMUNITY_GUARD_AGAINST_CURRENT_BASE",
+    "POST_MERGE_CURRENTNESS_REPLAY"
+  ],
+  "hard_nonclaims": [
+    "NO_GLOBAL_REPAIR_PROVIDER_TOTALITY",
+    "NO_GLOBAL_ESCAPE_PROGRESS_TOTALITY",
+    "NO_CC_R3",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
