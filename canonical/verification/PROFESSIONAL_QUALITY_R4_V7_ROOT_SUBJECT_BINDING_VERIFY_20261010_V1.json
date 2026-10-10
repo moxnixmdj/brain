@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R4_V7_ROOT_SUBJECT_BINDING_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_SPRITE_6_OF_6__R4_BOUND_TO_EXACT_V7_SUBJECT_WITH_PROOF_BOUND_DETERMINISTIC_CHECK_STEP_AND_TYPED_MECHANICAL_MEASUREMENT_SCOPE__ZERO_QUALITY_OR_TERMINAL_CREDIT",
+  "root_id": "R4_MEASUREMENT_CONSTRUCT",
+  "exact_blobs": {
+    "binding": "5a99d72d8a6c8fe01241e8a611cceb528fb8c512",
+    "verifier": "db6e251fe843d70b079a9ff2f9e7eac44e6fc988",
+    "tests": "c4702ca800e1f9ae1eabacf9b53079d6241cb490",
+    "subject": "1d598bc8757017ceb34928d0df9f5fce859ef868",
+    "execution_profile": "f7e89eafbb691c16d1bdf5b8d295a468d5e3bec5",
+    "proof_bound_step_verification": "b7a9df36780513ad73fd14c6a2756c8474d8434d",
+    "r4_semantic_scope": "a5b3e1984da25b09a5cb503b615806acdbf88e81",
+    "r4_semantic_verification": "c91074f2f187834936c0b7297579a6b8ba125fae",
+    "measurement_binding": "a174825b4c10fefa06c3a7ba09eb68c0d40af14a",
+    "measurement_verification": "34c64ed759d2e70df48a76d7a254047ac5fe9e2b"
+  },
+  "subject": {
+    "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+    "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e"
+  },
+  "replay": {
+    "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/pq-r4-v7-binding-verify",
+    "tests_run": 6,
+    "tests_passed": 6,
+    "tests_failed": 0
+  },
+  "falsification_tests": [
+    "WRONG_SUBJECT_TUPLE_FAILS_CLOSED",
+    "MEASUREMENT_STEP_NOT_PROOF_BOUND_FAILS_CLOSED",
+    "HOLISTIC_SCOPE_WIDENING_FAILS_CLOSED",
+    "MEASUREMENT_KIND_DRIFT_FAILS_CLOSED",
+    "CANDIDATE_SELF_AUTHORIZATION_FAILS_CLOSED"
+  ],
+  "proves": [
+    "R4_BINDING_USES_EXACT_FROZEN_V7_SUBJECT_TUPLE",
+    "V7_DETERMINISTIC_CHECK_STEP_REQUIRES_CONTENT_ADDRESSED_INDEPENDENT_STEP_BINDING",
+    "R4_SUPPORT_IS_LIMITED_TO_EXISTING_TYPED_MECHANICAL_MEASUREMENT_SCOPE",
+    "CANDIDATE_VALUES_DERIVE_FROM_EXACT_ARTIFACT_BYTES",
+    "HOLISTIC_OR_VISUAL_QUALITY_REMAINS_OUTSIDE_R4_BINDING",
+    "ACTUAL_TASK_EXECUTION_STILL_REQUIRES_FRESH_RUN_CONTEXT_BOUND_STEP_RECEIPT"
+  ],
+  "hard_nonclaims": [
+    "NO_REAL_TASK_DETERMINISTIC_CHECK_STEP_RECEIPT",
+    "NO_AUTOMATIC_FIELD_TO_RUBRIC_SEMANTIC_ALIGNMENT",
+    "NO_HOLISTIC_OR_VISUAL_QUALITY_MEASUREMENT",
+    "NO_OPEN_WORLD_MEASUREMENT_COMPLETENESS",
+    "NO_GLOBAL_R4_ROOT_CLOSURE",
+    "NO_SAME_SUBJECT_COMPOSITION_PASS",
+    "NO_LIVE_DEFAULT_PROMOTION",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "root_subject_binding_authority": true,
+  "semantic_truth_authority": false,
+  "execution_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
