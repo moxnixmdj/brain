@@ -248,6 +248,28 @@ class Tests(unittest.TestCase):
         self.assertFalse(out["semantic_truth_authority"], out)
         self.assertEqual(out["accepted_claims"], [])
 
+    def test_unsafe_context_cannot_trigger_relative_selection(self):
+        text = (
+            'The analyst said "the loss-absorbing cushion can be drawn down '
+            'as losses are incurred."'
+        )
+        phrase = "loss-absorbing cushion"
+        start = text.index(phrase)
+        out = signature.resolve_relative(
+            text,
+            source_id="doc:quoted-selection",
+            start=start,
+            end=start + len(phrase),
+            candidate_concept_ids=[
+                "REGCAP::CCOB",
+                "REGCAP::CCYB",
+                "REGCAP::TLAC",
+            ],
+        )
+        self.assertFalse(out["pass"], out)
+        self.assertFalse(out["relative_selection_authority"])
+        self.assertFalse(out["semantic_truth_authority"])
+
     def test_guard_never_grants_terminal_authority(self):
         out = check_direct_assertion(
             DIRECT,
