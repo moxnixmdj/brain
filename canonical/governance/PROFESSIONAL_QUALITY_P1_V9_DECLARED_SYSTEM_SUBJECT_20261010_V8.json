@@ -1,8 +1,8 @@
 {
   "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_DECLARED_SYSTEM_SUBJECT_V2",
   "date": "2026-10-10",
-  "status": "CONTENT_ADDRESSED_DECLARED_SYSTEM_SUBJECT__V9_EXECUTABLE_R12_TOTALITY_SEMANTIC_AUTHORITY__27_COMPONENTS__CANDIDATE__NOT_LIVE_DEFAULT__ZERO_QUALITY_AUTHORITY",
-  "source_main_commit": "ac397ea41997bac1002c7dfcf723192e1da08fe9",
+  "status": "CONTENT_ADDRESSED_DECLARED_SYSTEM_SUBJECT__V9_EXECUTABLE_R12_TOTALITY_SEMANTIC_AUTHORITY__27_COMPONENTS__REBASED_CURRENT__NOT_LIVE_DEFAULT__ZERO_QUALITY_AUTHORITY",
+  "source_main_commit": "00440f640ff48476f39c6e7e33f8639064d232ed",
   "subject_kind": "DECLARED_SYSTEM",
   "subject_id": "PROFESSIONAL_QUALITY_P1_V9_EXECUTABLE_TOTALITY_SEMANTICS_SYSTEM_20261010_V8",
   "subject_sha256": "adf7f09e1913526e460b7350c02cd148c2cd14de90eed33fa7fae84d395d9912",
@@ -166,5 +166,20 @@
   ],
   "terminal_authority": false,
   "terminal_credit_delta": 0,
-  "incremental_spend_usd": 0
+  "incremental_spend_usd": 0,
+  "rebase_currentness": {
+    "compared_from": "ac397ea41997bac1002c7dfcf723192e1da08fe9",
+    "compared_to": "00440f640ff48476f39c6e7e33f8639064d232ed",
+    "changed_load_bearing_component_count": 0,
+    "subject_material_unchanged": true,
+    "changed_paths_outside_subject": [
+      "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
+      "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
+      "canonical/governance/PROFESSIONAL_V8_R12_REUSE_CLOSURE_20261010_V1.json",
+      "canonical/runtime/professional_v8_r12_reuse_closure_v1.py",
+      "canonical/tests/test_professional_v8_r12_reuse_closure_v1.py",
+      "canonical/verification/PROFESSIONAL_V8_R12_REUSE_CLOSURE_INDEPENDENT_VERIFY_20261010_V1.json"
+    ],
+    "terminal_credit_delta": 0
+  }
 }
