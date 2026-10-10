@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_SEMANTIC_ROOT_BATCH_CERTIFICATE_V1",
+  "date": "2026-10-11",
+  "status": "CANDIDATE_SHARED_PROOF_COMPRESSION_CERTIFICATE__12_EXACT_CLAIMS__CC_R1_CC_R2_CC_R3__PER_CLAIM_R4_REQUIRED__ZERO_PROPERTY_OR_TERMINAL_CREDIT",
+  "proof_mode": "FORMAL_REDUCTION",
+  "root_namespace": "PROJECT_BRAIN_COVERAGE_COMPLETENESS_ROOTS_V1",
+  "supported_root_ids": [
+    "CC_R1_REALITY_CONTAINMENT_V1",
+    "CC_R2_MISSION_SOUNDNESS_V1",
+    "CC_R3_TERMINAL_CLOSURE_V1"
+  ],
+  "semantic_claim_count": 12,
+  "batch_prover": {
+    "path": "canonical/runtime/professional_semantic_root_batch_prover_v1.py",
+    "git_blob_sha": "1bf669f2adb5ebcfea9e2bf78c4fea9e93d329a9"
+  },
+  "independent_verification": {
+    "path": "canonical/verification/PROFESSIONAL_SEMANTIC_ROOT_BATCH_INDEPENDENT_VERIFY_20261011_V1.json",
+    "git_blob_sha": "fafc9c4686904544fe6608e51aa51b878e985dd5",
+    "result_sha256": "430b888c3499f08a8fd1be294dbbfb643f3047707fc7502db882d6a6ca5b696e",
+    "rows_sha256": "48e65ef2958cd023bdaf8397f49206310460cf44c98146bc4aaaca8615ce18b9"
+  },
+  "theorem": {
+    "cc_r1": "FOR_EACH_CURRENT_FROZEN_SEMANTIC_CLAIM_C__EXACT_WHOLE_LEAF_SCOPE_PLUS_UNIVERSAL_LOSSLESS_IDENTITY_CARRIER_PROVES_B_REAL_C_SUBSETEQ_B_PLUS_C",
+    "cc_r2": "FOR_EACH_CURRENT_FROZEN_SEMANTIC_CLAIM_C__THE_EXACT_SHARED_SEMANTIC_ACCEPTANCE_IS_A_SOUND_SUBSET_OF_THE_CANONICAL_FAIL_CLOSED_VERIFIED_PROGRESS_RULE__G_MINUS_C_SUBSETEQ_G_REAL_C",
+    "cc_r3": "FOR_EACH_CURRENT_FROZEN_SEMANTIC_CLAIM_C__EVERY_V11_POSITIVE_ROUTE_REQUIRES_FIXED_TRUSTED_EXACT_RUN_LOCAL_TOTALITY_FOR_C__UNRESOLVED_C_FAILS_CLOSED__B_PLUS_C_SUBSETEQ_G_MINUS_C",
+    "proof_compression_not_cross_claim_transport": true,
+    "active_claim_selection_required": true,
+    "r4_required_per_claim": true
+  },
+  "hard_nonclaims": [
+    "NO_ROOT_AUTHORITY_WITHOUT_ACTIVE_CLAIM_REGISTRY_SLOT",
+    "NO_CROSS_CLAIM_CERTIFICATE_TRANSPORT",
+    "NO_R4_FROM_THIS_CERTIFICATE_ALONE",
+    "NO_PROPERTY_TRUTH_FROM_THIS_CERTIFICATE_ALONE",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "semantic_truth_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "accounting": {
+    "fresh_reality_units_consumed": 0,
+    "incremental_spend_usd": 0,
+    "property_truth_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
