@@ -54,7 +54,7 @@
       "id": "PROFESSIONAL_WHOLE_LEAF_READINESS_AUDIT",
       "truth": "INDEPENDENT_REPLAY_PASS__0_OF_24_ADMISSIBLE_SCOPE_CERTIFICATES__24_OF_24_REQUIRE_TOTALITY_OR_CERTIFIED_COMPLETE_UNION__ZERO_CREDIT",
       "source": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_CERTIFICATE_READINESS_AUDIT_VERIFY_20261010_V1.json",
-      "git_blob_sha": "f2b28c0d9f367e91e9d9bf2384079743ac1f39e2",
+      "git_blob_sha": "cea7f55a4794e33c484977072c30fae0169217c8",
       "dynamic_current_pointer_follow": false
     }
   ],
@@ -105,7 +105,7 @@
         "shared_certificate_gate_verification_git_blob_sha": "d6c161a6f2735a9a384d8d07d778334c7d9389da",
         "property_truth_separate": true,
         "readiness_audit_verification": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_CERTIFICATE_READINESS_AUDIT_VERIFY_20261010_V1.json",
-        "readiness_audit_verification_git_blob_sha": "f2b28c0d9f367e91e9d9bf2384079743ac1f39e2",
+        "readiness_audit_verification_git_blob_sha": "cea7f55a4794e33c484977072c30fae0169217c8",
         "admissible_scope_certificate_count": 0,
         "partition_or_totality_required_count": 24,
         "candidate_rejected_or_ambiguous_count": 0,
