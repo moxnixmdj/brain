@@ -1,5 +1,27 @@
 {
   "schema": "PROJECT_BRAIN_ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_V2",
   "date": "2026-10-10",
-  "status": "CANDIDATE__ZERO_CREDIT"
+  "status": "ACTIVE_CANDIDATE__V1_PROVENANCE_PLUS_CURRENT_TB_OVERRIDE_PLUS_SHARED_REPAIR_REDUCTION__CC_R3_OPEN__ZERO_CREDIT",
+  "base_manifest": {
+    "path": "canonical/governance/ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_20261010_V1.json",
+    "git_blob_sha": "4ebe25308bf9816d4eeaea415b37b9ec152604c0"
+  },
+  "frozen_claim": {
+    "path": "canonical/governance/ESCAPE_PROGRESS_TOTALITY_FROZEN_13_CLAIM_20261010_V3.json",
+    "git_blob_sha": "e534dfb56e8e3cde66a260de299627662965e079",
+    "claim_id": "d8dec5e454c4cbae50de7a0b23f0cf220e4caeb1c1b620e40dd53c267da1ae28"
+  },
+  "shared_progress_reduction": {
+    "path": "canonical/governance/REACHED_ESCAPE_REPAIR_POTENTIAL_ACTIVATION_20261010_V2.json",
+    "git_blob_sha": "274ad8abef39dc199affeacfbb762d23e5d17e7a",
+    "generic_well_founded_measure_proved": true,
+    "specific_internal_action_bindings_proved": 0,
+    "global_repair_acquirability_proved": false,
+    "global_escape_progress_totality_proved": false,
+    "cc_r3_proved": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
 }
