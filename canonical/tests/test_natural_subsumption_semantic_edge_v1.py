@@ -15,7 +15,7 @@ from canonical.runtime.semantic_relation_entailment_dag_v1 import (
 from canonical.runtime.certified_document_effect_field_edge_v1 import (
     field_concept_id,
 )
-from canonical.runtime.source_aligned_semantic_proof_v15_registry_base import (
+from canonical.runtime.source_aligned_semantic_proof_v16_registry_base import (
     verify_proof,
 )
 
