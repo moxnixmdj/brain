@@ -1,0 +1,83 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_COMPACT_FAILCLOSED_SUCCESSOR_EXECUTION_V1",
+  "status": "FRESH_SUCCESSOR_EXECUTION__COMPACT_FAILCLOSED_REPRESENTATION_FRONTIER__ZERO_PROMOTION_CREDIT",
+  "recorded_at": "2026-10-10",
+  "mission": "Minimum resource-feasible executable description conditional on already-owned Brain substrate.",
+  "predecessor": {
+    "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_FAILCLOSED_TRIM_SUCCESSOR_EXECUTION_20261010_V1.json",
+    "package_raw_python_source_bytes": 5883319,
+    "B_exec_raw_python_source_bytes": 5886079,
+    "python_files": 277,
+    "archive_bytes": 1029488,
+    "fresh_qualification": "4830/4830"
+  },
+  "representation_cut": {
+    "id": "COMPACT_FAILCLOSED_STUB_ENCODING_V11",
+    "principle": "Preserve all 1,006 fail-closed dead-surface functions/methods but encode each as a one-line fail-closed definition with minimal argument identifiers and no redundant error message.",
+    "stub_count": 1006,
+    "files_changed": 20,
+    "semantics": "UNSUPPORTED_PATH_STILL_RAISES_NOTIMPLEMENTEDERROR",
+    "raw_reduction_bytes": 58214,
+    "deleted_capability_files": 0,
+    "tool": "canonical/research/bytes/tools/compact_failclosed_stubs_v11.py",
+    "tool_sha256": "96b056044d3bafa9a3acef474287aba476a42260f6fdcf55c8c2aecd02de6bdb",
+    "reconstruction": "canonical/research/bytes/tools/rebuild_candidate_v11.py",
+    "reconstruction_sha256": "3d18ea5df3b19f18f59f31e985e4639bcb635eb149e1a3b8c13d9a6114e68ff3"
+  },
+  "measured_candidate": {
+    "status": "PHYSICALLY_TRIMMED_RESEARCH_CANDIDATE__NOT_PROMOTED",
+    "python_files": 277,
+    "package_raw_python_source_bytes": 5825105,
+    "router_raw_python_source_bytes": 2760,
+    "B_exec_raw_python_source_bytes": 5827865,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "package_manifest_sha256": "b301f36a5594ad77e27387ba3597adc70ee410f952e74f4a5a34c43f5b150c31",
+    "raw_improvement_vs_immediate_predecessor_bytes": 58214,
+    "polys_loaded_trace_raw_python_source_bytes": 730694,
+    "comparable_source_archive_bytes": 1028832,
+    "comparable_source_archive_sha256": "1b6cf35a0eaeaa0957576bcd4a3961cf273798872cd4cb4577d30b5aa6a7d06a",
+    "comparable_archive_improvement_bytes": 656
+  },
+  "qualification": {
+    "spent_NEXT13_precheck": "4830/4830",
+    "fresh_NEXT14": {
+      "id": "QUAL_SUCCESSOR_NEXT14_20261010_V1",
+      "seed": 3741657,
+      "per_operation_budget": 440,
+      "cases": 5060,
+      "corpus_sha256": "acd117d92c2ec91279ff9e58d4460c816fa4a34f957485e705f0482d07df43be",
+      "stock_donor_positive_control": "5060/5060",
+      "physical_candidate": "5060/5060",
+      "independent_copy_replay": "5060/5060",
+      "extracted_archive_replay": "5060/5060",
+      "status": "SPENT_ONCE_AS_FRESH_FINAL_CANDIDATE_QUALIFICATION"
+    }
+  },
+  "next_frozen_qualification": {
+    "id": "QUAL_SUCCESSOR_NEXT15_20261010_V1",
+    "seed": 3872983,
+    "per_operation_budget": 460,
+    "cases": 5290,
+    "corpus_sha256": "c7362ef99abfbe2eddc37c0bb623ecf3d3a22fc261ef30594bb5976bcacda168",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT"
+  },
+  "durable_artifact_persistence": {
+    "canonical_evidence_and_reconstruction_tools": "PERSISTED_IN_GITHUB",
+    "exact_qualified_archive": {
+      "library_status": "PERSISTED_IN_CHATGPT_LIBRARY",
+      "library_file_id": "libfile_15b0fc554a3c81918a14e387c4064eb0",
+      "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_COMPACT_FAILCLOSED_SUCCESSOR_20261010_V1.tar.xz",
+      "bytes": 1028832,
+      "sha256": "1b6cf35a0eaeaa0957576bcd4a3961cf273798872cd4cb4577d30b5aa6a7d06a",
+      "extracted_replay": "5060/5060"
+    }
+  },
+  "truth_boundary": [
+    "MEASURED: the 5,825,105-byte package passes fresh NEXT14 5,060/5,060 on donor, candidate, independent copy, and extracted archive.",
+    "MEASURED: representation-only compaction removes 58,214 raw bytes without changing the unsupported-path exception class.",
+    "INFERRED: removed error-message and argument-name bytes are not capability information for this bounded route.",
+    "NOT CLAIMED: universal API compatibility for introspection of unsupported stubs, universal SymPy correctness, absolute minimum, or Opus-family promotion.",
+    "PROMOTION CREDIT: 0."
+  ],
+  "next_action": "Using spent NEXT14 only, test shared fail-closed implementation aliases for undecorated dead API shells. Freeze a new exact physical candidate before touching NEXT15."
+}
