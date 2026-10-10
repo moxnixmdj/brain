@@ -78,12 +78,12 @@
     "still_valid_for_original_v1_manifest": true
   },
   "successor_executable_audit": {
-    "status": "INDEPENDENTLY_VERIFIED_DYNAMIC_CURRENT_BINDING__21_OF_21__PYCOMPILE_PASS",
+    "status": "INDEPENDENTLY_VERIFIED_DYNAMIC_CURRENT_BINDING__21_OF_21_BASE_PLUS_EXACT_STACK_TRIPWIRE_PENDING_FINAL_REPLAY__PYCOMPILE_PASS",
     "path": "canonical/runtime/escape_progress_shared_gap_audit_v3.py",
     "git_blob_sha": "e556880aa216673e0e316e11fc6f4ab25d644ce6",
     "tests": {
       "path": "canonical/tests/test_escape_progress_shared_gap_audit_v3.py",
-      "git_blob_sha": "1b8506671480f54313cdd20f13c411844e0e3fb3"
+      "git_blob_sha": "3f4b38f0847d0562f1a02d25d77ff6a702eb54ba"
     },
     "verification": {
       "path": "canonical/verification/ESCAPE_V3_DYNAMIC_CURRENT_BINDING_REPAIR_VERIFY_20261010_V1.json",
