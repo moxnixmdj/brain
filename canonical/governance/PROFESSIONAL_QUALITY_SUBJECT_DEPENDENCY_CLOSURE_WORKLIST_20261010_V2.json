@@ -1,12 +1,12 @@
 {
   "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_SUBJECT_DEPENDENCY_CLOSURE_WORKLIST_V2",
   "date": "2026-10-10",
-  "status": "CANDIDATE_FINAL_SUBJECT_V4__DEPENDENCIES_CLASSIFIED_12_OF_12__FIVE_MISSING_V3_COMPONENTS_ADDED__INDEPENDENT_CURRENT_BRANCH_CLOSURE_REPLAY_REQUIRED",
+  "status": "CANDIDATE_FINAL_SUBJECT_V4__DEPENDENCIES_CLASSIFIED_12_OF_12__EXACT_19_COMPONENT_CLOSURE__INITIAL_18_COMPONENT_CANDIDATE_FALSIFIED__INDEPENDENT_CURRENT_BRANCH_REPLAY_REQUIRED",
   "candidate_subject": {
     "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V4_DECLARED_SYSTEM_SUBJECT_20261010_V4.json",
     "subject_id": "PROFESSIONAL_QUALITY_P1_V4_TARGET_BOUND_SYSTEM_20261010_V4",
-    "subject_sha256": "4dc798df7a13792ed000700ca2473f68baf20395b383c7908ea8db804ba1d2f5",
-    "component_count": 18,
+    "subject_sha256": "1b3fd164a617ae91c7d6caa26d6fdaba3300a64ab2677ff585da3482fc166e79",
+    "component_count": 19,
     "finalized_for_all_roots": false
   },
   "classification_basis": {
@@ -30,8 +30,16 @@
       "git_blob_sha": "a01ef78846ce22996128cc2a5858341d8418074c"
     },
     {
+      "path": "canonical/runtime/goal_to_decision_binding_authority_v1.py",
+      "git_blob_sha": "5b4573475437e9fc83338b900556b5c4f31c8d65"
+    },
+    {
       "path": "canonical/runtime/professional_quality_p1_router_v2.py",
       "git_blob_sha": "bdbbc53ab1e50743869ec515a019bfc17218f126"
+    },
+    {
+      "path": "canonical/runtime/professional_quality_p1_router_v6.py",
+      "git_blob_sha": "88644e0517d472d9fbef8d5bc6cf3495f2b50005"
     },
     {
       "path": "canonical/runtime/professional_quality_scoped_evidence_v1.py",
@@ -89,7 +97,7 @@
     "roots_dependency_unclassified": 0,
     "roots_bound_on_final_v4": 0,
     "prior_bindings_requiring_reverification": 1,
-    "candidate_subject_components": 18
+    "candidate_subject_components": 19
   },
   "next_required_edge": "INDEPENDENTLY_VERIFY_V4_SUBJECT_CURRENTNESS_AND_ZERO_MISSING_DEPENDENCIES__THEN_FREEZE_V4_AS_FINAL_DEPENDENCY_CLOSED_SUBJECT__REVERIFY_R1__BIND_REMAINING_11_ROOTS_WITHOUT_FURTHER_SUBJECT_DRIFT",
   "hard_nonclaims": [
@@ -105,5 +113,11 @@
     "capability_credit_delta": 0,
     "acceptance_credit_delta": 0,
     "terminal_credit_delta": 0
+  },
+  "initial_candidate_falsification": {
+    "falsified_subject_sha256": "4dc798df7a13792ed000700ca2473f68baf20395b383c7908ea8db804ba1d2f5",
+    "falsified_component_count": 18,
+    "reason": "INDEPENDENT_CARRIER_CLOSURE_MATERIAL_DERIVED_19_LOAD_BEARING_COMPONENTS",
+    "corrected_subject_sha256": "1b3fd164a617ae91c7d6caa26d6fdaba3300a64ab2677ff585da3482fc166e79"
   }
 }
