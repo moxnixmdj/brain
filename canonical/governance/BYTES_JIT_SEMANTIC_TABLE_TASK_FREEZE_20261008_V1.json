@@ -1,0 +1,11 @@
+{
+  "schema":"PROJECT_BRAIN_BYTES_JIT_SEMANTIC_TABLE_TASK_FREEZE_V1",
+  "date":"2026-10-08",
+  "scope_lock":"BYTES_RESEARCH_ONLY",
+  "status":"TASKS_FROZEN_BEFORE_EVIDENTIARY_EXECUTION",
+  "kernel":{"path":"canonical/runtime/bytes_jit_semantic_table_core_v1.py","git_blob_sha":"dea993ab43994c5f847c5390c7566730cb785b80","sha256":"499e40e9c9b5d6c42417b67c8eea47e229f68e58c011e46883f2fd0c979cab2d","freeze_commit_sha":"711446e1ec0e5f4f386dcf29a9bb2e5d3540634e"},
+  "generator":{"path":"canonical/verification/bytes_jit_semantic_table_task_generator_v1.py","commit_sha":"9c54c6e43d31644d1567f95d49b01c4cec8dc37d"},
+  "tasks":{"path":"canonical/verification/BYTES_JIT_SEMANTIC_TABLE_TASKS_20261008_V1.json","commit_sha":"f2cd2ebfe39931e7c7ccafd140bcc17bc9bdcf8b","git_blob_sha":"b4f63d36b5baacd830fc37f503b1991f621855a6","raw_bytes":4653,"sha256":"b896105cced27e6ad0604ce55c8191ed80aee4d9c95d314759dc77f88c45e4ad","task_count":24},
+  "ordering":["KERNEL_COMMITTED","GENERATOR_COMMITTED","TASK_BYTES_GENERATED_AND_COMMITTED","EVIDENTIARY_EXECUTION_NOT_YET_COUNTED"],
+  "hard_nonclaims":["TASK_EVIDENCE_BYTES_ARE_PERSISTENT_EVIDENCE_NOT_OPERATIVE_CAPABILITY","NO_EXECUTION_RESULT_CLAIM_IN_THIS_FREEZE_RECORD"]
+}
