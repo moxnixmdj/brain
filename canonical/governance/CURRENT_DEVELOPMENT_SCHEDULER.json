@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_DEVELOPMENT_SCHEDULER_POINTER_V1",
   "date": "2026-10-10",
-  "status": "ACTIVE__POST_COMPOSITION_V14__PROFESSIONAL_24_OF_24_SCOPE_COMPLETE__PROPERTY_TRUTH_0_OF_24__R10_EXECUTION_PROBE_ACTIVE__PARALLEL_EVIDENCE_READY__FULL_EXECUTION_FAILS_CLOSED_WITHOUT_VECTOR_OR_SEPARATE_AUTHORITY",
+  "status": "ACTIVE__POST_COMPOSITION_V15__PROFESSIONAL_24_OF_24_SCOPE_COMPLETE__PROPERTY_TRUTH_0_OF_24__R10_STRUCTURAL_GUARD_VERIFIED__DETECTION_COMPLETENESS_NEXT__BYTES_V27_CURRENT__PARALLEL_EVIDENCE_READY__FULL_EXECUTION_FAILS_CLOSED_WITHOUT_VECTOR_OR_SEPARATE_AUTHORITY",
   "authoritative_activation": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V13.json",
   "runtime": "canonical/runtime/capability_parallel_frontier_post_composition_v1.py",
   "primary_entrypoint": "canonical.runtime.capability_parallel_frontier_post_composition_v1.plan_current_post_composition_frontier",
@@ -27,8 +27,8 @@
   "planning_entrypoint": "canonical.runtime.capability_first_scheduler_v1.rank_work",
   "current_live_work_frontier": {
     "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
-    "git_blob_sha": "a06d1c66f705f9583e4fd36a20a044e3f6093a03",
-    "status": "CURRENT_POST_COMPOSITION_FRONTIER__PROFESSIONAL_24_OF_24_SCOPE_COMPLETE__PROPERTY_TRUTH_0_OF_24__R10_EXECUTION_PROPERTY_PROBE_ACTIVE",
+    "git_blob_sha": "0ef5208fd43131dc1f84908462b054264c54e63d",
+    "status": "CURRENT_POST_COMPOSITION_FRONTIER__PROFESSIONAL_24_OF_24_SCOPE_COMPLETE__PROPERTY_TRUTH_0_OF_24__R10_STRUCTURAL_GUARD_INDEPENDENTLY_VERIFIED__DETECTION_COMPLETENESS_OPEN__GAP_A_AND_TWO_GAP_B_ROWS_READY__BYTES_V27__READ_ONLY_EVIDENCE_PRIMARY__ZERO_CREDIT",
     "professional_verified_root_subject_binding_count": 12,
     "professional_same_subject_composition_admissible": true,
     "professional_whole_leaf_scope_complete_count": 24,
@@ -64,18 +64,15 @@
     "status": "PASS__PYCOMPILE__35_OF_35_COMBINED_CORE_AND_PARALLEL_SCHEDULER_TESTS__CURRENT_FRONTIER_REPLAY__SIX_SAFE_READ_ONLY_LANES__ZERO_FULL_EXECUTION"
   },
   "whole_leaf_residual_control": {
-    "path": "canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_RESIDUAL_LEDGER_20261010_V1.json",
-    "git_blob_sha": "ae5503829ad340cccef287f37ff70e4ab9288d33",
-    "status": "24_EXPECTED__0_V2_CHAINS_ADMITTED__CLAIM_SCOPE_FACTORIZATION_AND_WHOLE_DOMAIN_EQUIVALENCE_REQUIRED",
-    "certificate_gate_activation": "canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_CERTIFICATE_GATE_ACTIVATION_20261010_V2.json",
-    "certificate_gate_activation_git_blob_sha": "34fdaf7f4a91d0e28d446a9d554c3aa0fbec8222",
-    "certificate_gate_verification": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_CLAIM_SCOPE_GATE_V2_VERIFY_20261010_V1.json",
-    "certificate_gate_verification_git_blob_sha": "cb91d94dd89ec7c67aae54db3cd5319612cd43d5",
-    "readiness_verification": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_CERTIFICATE_READINESS_AUDIT_V2_VERIFY_20261010_V1.json",
-    "readiness_verification_git_blob_sha": "2d28d932d08753fdf14c56aa24011e625518a4ef",
-    "admitted_v2_chain_count": 0,
-    "claim_scope_construction_required_count": 24,
-    "property_truth_ready_count": 0
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_SCOPE_BATCH_ACTIVATION_20261010_V1.json",
+    "git_blob_sha": "d40188f87818d9c6a4507a043380a753ca563e18",
+    "status": "24_OF_24_WHOLE_DOMAIN_EQUIVALENCE_AND_SCOPE_COMPLETE__PROPERTY_TRUTH_0_OF_24",
+    "verification": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_SCOPE_BATCH_VERIFY_20261010_V1.json",
+    "verification_git_blob_sha": "4c2d40a262f18f34bb35f94b59660d60972d45ef",
+    "admitted_v2_chain_count": 24,
+    "claim_scope_construction_required_count": 0,
+    "property_truth_ready_count": 24,
+    "property_truth_closed_count": 0
   },
   "v12_activation": {
     "path": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V12.json",
@@ -93,7 +90,15 @@
     "professional_scope_construction_complete": true,
     "professional_scope_complete_count": 24,
     "professional_property_truth_closed_count": 0,
-    "current_primary_professional_edge": "R10_EXECUTION_EXACT_BYTE_PROPERTY_TRUTH_FALSIFICATION_PROBE",
-    "full_current_main_regression_open": true
+    "current_primary_professional_edge": "R10_UPSTREAM_DEFEATER_DETECTION_AND_UNDERLYING_FACT_TRUTH_COMPLETENESS",
+    "full_current_main_regression_open": true,
+    "r10_structural_guard_verification": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R10_STRUCTURAL_GUARD_INDEPENDENT_VERIFY_20261010_V1.json",
+      "git_blob_sha": "1fab18d1ffc51ee674f3ebc9f0971c8eef0df23c",
+      "structural_slot_checks": "16_OF_16_PASS",
+      "integrated_guard_checks": "30_OF_30_PASS",
+      "detection_completeness_proved": false,
+      "whole_leaf_property_truth_proved": false
+    }
   }
 }
