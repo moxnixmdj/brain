@@ -11,7 +11,7 @@ def test_selected_observation_routes_to_only_covering_policy():
         ],
         "discriminators":[{"discriminator_id":"d","outcomes":{"w0":"a","w1":"b"}}],
     }
-    tree={"pass":True,"bound_state_totality_proved":True,
+    tree={"pass":True,"bound_state_totality_proved":True,"policy_safety_coverage_proved":True,
           "decision_tree":{"discriminator_id":"d","outcome_partitions":[
               {"world_ids":["w0"],"next":{"terminal_policy_id":"p0"}},
               {"world_ids":["w1"],"next":{"terminal_policy_id":"p1"}},
@@ -27,5 +27,24 @@ def test_selected_observation_routes_to_only_covering_policy():
     assert out["selected_policy_id"]=="p1"
     assert out["surviving_world_ids"]==["w1"]
     assert out["selected_policy_adequacy_verified"] is True
+    assert out["selected_policy_safety_verified"] is True
     assert out["actual_goal_satisfaction_verified"] is False
     assert out["terminal_authority"] is False
+
+
+def test_cover_pass_without_policy_safety_proof_fails_closed():
+    problem={
+        "state_id":"S",
+        "worlds":[{"world_id":"w0"}],
+        "policies":[{"policy_id":"p0","adequate_world_ids":["w0"]}],
+        "discriminators":[],
+    }
+    tree={"pass":True,"bound_state_totality_proved":True,
+          "policy_safety_coverage_proved":False,
+          "decision_tree":{"terminal_policy_id":"p0"}}
+    with patch.object(ex,"_authenticate_cover_binding",return_value={"pass":True}), \
+         patch.object(ex,"evaluate_cover",return_value=tree):
+        out=ex.evaluate({"problem":problem})
+    assert out["pass"] is False
+    assert out["reason"]=="POLICY_COVER_GATE_PASS_WITHOUT_POLICY_SAFETY"
+    assert out["selected_policy_safety_verified"] is False
