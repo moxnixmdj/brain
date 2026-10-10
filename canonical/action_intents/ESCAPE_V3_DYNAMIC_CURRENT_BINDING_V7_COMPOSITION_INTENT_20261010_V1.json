@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_ESCAPE_V3_DYNAMIC_CURRENT_BINDING_V7_COMPOSITION_INTENT_20261010_V1",
+  "date": "2026-10-10",
+  "status": "ACTIVE_SINGLE_COMPOSITION_REPAIR_INTENT__ZERO_CREDIT",
+  "objective": "COMPOSE_MAIN_V6_GAP_A_POLICY_COVER_ADAPTER_WITH_DYNAMIC_CURRENT_ESCAPE_AUDIT_BINDING_WITHOUT_WEAKENING_OR_DUPLICATING_EITHER_CAPABILITY",
+  "current_main_base": "ee8666d727f1eedded29954bf88dd2ca551b3aae",
+  "inherited_capability": {
+    "binding_path": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V6.json",
+    "binding_git_blob_sha": "a6fe5eda7b596d5a24cf75bc9b046bf53f4fe7be",
+    "adapter_activation_path": "canonical/governance/ESCAPE_GAP_A_POLICY_COVER_ADAPTER_ACTIVATION_20261010_V1.json",
+    "adapter_activation_git_blob_sha": "7eaa5c0a403cfd9e6d131cecdc7cb9a243843872",
+    "adapter_runtime_path": "canonical/runtime/escape_gap_a_policy_cover_adapter_v1.py",
+    "adapter_runtime_git_blob_sha": "19b0bdf00eb9b8d76cbf7f1a615e1ce6e89ffbf8"
+  },
+  "defect": {
+    "audit_path": "canonical/runtime/escape_progress_shared_gap_audit_v3.py",
+    "old_audit_git_blob_sha": "14adf2c1a431285a542340a740e27e764edb1ce5",
+    "statement": "AUDIT_REPO_HARDCODES_A_HISTORICAL_SHARED_GAP_BINDING_INSTEAD_OF_RESOLVING_CURRENT_CLASSIFIER_AUTHORITY"
+  },
+  "composition_rules": [
+    "PRESERVE_MAIN_V6_GAP_A_POLICY_COVER_ADAPTER_RUNTIME_AND_VERIFIED_PROOF_SEMANTICS",
+    "PRESERVE_GAP_A_AND_GAP_B_ROW_PROOF_SCHEMAS",
+    "CHANGE_ONLY_CURRENT_BINDING_RESOLUTION_AND_CURRENTNESS_CONTENT_ADDRESSES",
+    "REQUIRE_GAP_A_AND_GAP_B_TO_SELECT_ONE_IDENTICAL_CURRENT_BINDING",
+    "FAIL_CLOSED_ON_PATH_ESCAPE_SYMLINK_NONFILE_OR_CLASSIFIER_DIVERGENCE",
+    "ADAPTER_IMPORT_SURFACE_FROM_AUDIT_MUST_REMAIN_EXACTLY_GAP_A_WITH_IDENTICAL_VALUE"
+  ],
+  "load_bearing_binding": {
+    "residuals": [
+      "ESCAPE_GAP_A_ACQUISITION_TOTALITY",
+      "ESCAPE_GAP_B_INTERNAL_ROUTE_STRICT_PROGRESS"
+    ],
+    "effect": "PREVENT_STALE_PROOF_CONTRACT_VALIDATION_ACROSS_ALL_13_CURRENT_ESCAPE_ROWS",
+    "row_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_GAP_A_ROW_PROOF",
+    "NO_GAP_B_ROW_PROOF",
+    "NO_CC_R3_CREDIT",
+    "NO_O_OR_Q_ACCEPTANCE_LAW_CREDIT",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "row_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
