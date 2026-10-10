@@ -1,0 +1,87 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_SECONDARY_PROFILE_V24_SUCCESSOR_EXECUTION_V1",
+  "status": "FRESH_SUCCESSOR_EXECUTION__SECONDARY_SPENT_NEXT28_ZERO_HIT_PRUNE__ZERO_PROMOTION_CREDIT",
+  "recorded_at": "2026-10-10",
+  "predecessor": {
+    "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_CONSERVATIVE_PROFILE_V23_SUCCESSOR_EXECUTION_20261010_V1.json",
+    "package_raw_python_source_bytes": 2045561,
+    "B_exec_raw_python_source_bytes": 2048321,
+    "archive_bytes": 303072,
+    "fresh_qualification": "8280/8280",
+    "manifest_sha256": "0566f7127b810bfb1e379ccbbd2901255d13fb372063de8df72b7a2a70635223"
+  },
+  "selection": {
+    "id": "SECONDARY_SPENT_NEXT28_ZERO_HIT_PROFILE_V24",
+    "corpus": "QUAL_SUCCESSOR_NEXT28_20261010_V1",
+    "spent_cases": 8280,
+    "method": "Targeted local monitoring of the largest surviving V23 function bodies across all 12 operation classes; series_coeff profiled separately over the zero-hit remainder.",
+    "selected_function_bodies": 26,
+    "safety_filter": "Excluded unresolved targets and low-level core/numeric/evalf/conversion bodies with known latent rare-path risk."
+  },
+  "measured_candidate": {
+    "status": "PHYSICALLY_REWRITTEN_RESEARCH_CANDIDATE__NOT_PROMOTED",
+    "python_files": 277,
+    "package_raw_python_source_bytes": 2007446,
+    "router_raw_python_source_bytes": 2760,
+    "B_exec_raw_python_source_bytes": 2010206,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "manifest_sha256": "eb71ab231a6281de6133082c59eb9732864e68af42daf4cfb6c6f258c3dea1f9",
+    "raw_improvement_vs_V23_bytes": 38115,
+    "archive_bytes": 297952,
+    "archive_sha256": "4ec32995774f9886f9726490188bb77d300c8aef628c66896559f59e34f4a0ee",
+    "archive_improvement_vs_V23_bytes": 5120
+  },
+  "qualification": {
+    "spent_NEXT28": {
+      "id": "QUAL_SUCCESSOR_NEXT28_20261010_V1",
+      "cases": 8280,
+      "candidate": "8280/8280",
+      "spent": true
+    },
+    "fresh_NEXT29": {
+      "id": "QUAL_SUCCESSOR_NEXT29_20261010_V1",
+      "seed": 5385164,
+      "per_operation_budget": 740,
+      "cases": 8510,
+      "corpus_sha256": "44bdcb92e5692b09fa07cb5f5ce615b9dbc94d7543f4e580fcebbcd76771de11",
+      "stock_donor": "8510/8510",
+      "candidate": "8510/8510",
+      "independent_copy": "8510/8510",
+      "archive_replay": "8510/8510",
+      "spent": true
+    }
+  },
+  "reproducibility": {
+    "predecessor_reconstruction": "canonical/research/bytes/tools/rebuild_candidate_v23.py",
+    "transform": "canonical/research/bytes/tools/secondary_profile_prune_v24.py",
+    "successor_reconstruction": "canonical/research/bytes/tools/rebuild_candidate_v24.py",
+    "route": "canonical/research/bytes/tools/exact_symbolic_route_v1.py",
+    "semantic_digest": "canonical/research/bytes/tools/semantic_digest_v1.py",
+    "qualification_generator": "canonical/research/bytes/tools/generate_qualification_v1.py"
+  },
+  "durable_artifact": {
+    "library_status": "PERSISTED_IN_CHATGPT_LIBRARY",
+    "library_file_id": "libfile_bcdaf2c7b41c8191b2adb8cc92c03b51",
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V24_SUCCESSOR_20261010_V1.tar.xz",
+    "bytes": 297952,
+    "sha256": "4ec32995774f9886f9726490188bb77d300c8aef628c66896559f59e34f4a0ee"
+  },
+  "next_frozen_qualification": {
+    "id": "QUAL_SUCCESSOR_NEXT30_20261010_V1",
+    "seed": 5477225,
+    "per_operation_budget": 760,
+    "cases": 8740,
+    "corpus_sha256": "4859272e27dc150cf91807f69d2850342856befe05e04ac0405966f71740764c",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT"
+  },
+  "truth_boundary": [
+    "MEASURED: exact 2,007,446-byte V24 passes spent NEXT28 8,280/8,280.",
+    "MEASURED: exact V24 passes previously untouched NEXT29 8,510/8,510 on stock donor, candidate, independent copy, and extracted archive.",
+    "MEASURED: V24 is 38,115 raw Python-source bytes smaller than V23 and its archive is 5,120 bytes smaller.",
+    "INFERRED: selected V24 bodies are outside the tested bounded route; finite non-use remains non-universal.",
+    "NOT CLAIMED: universal SymPy correctness, absolute information-theoretic minimum, out-of-scope behavior preservation, or Opus-family promotion.",
+    "PROMOTION CREDIT: 0."
+  ],
+  "next_action": "Rerank exact V24 using spent NEXT29 only. Keep NEXT30 untouched until a new physical cut is frozen.",
+  "promotion_credit": 0
+}
