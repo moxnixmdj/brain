@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_R12_UNIVERSAL_POSITIVE_GATE_TOTALITY_INDEPENDENT_VERIFY_V1",
+  "date": "2026-10-11",
+  "status": "PASS__INDEPENDENT_SPRITE__PYCOMPILE__7_OF_7__UNIVERSAL_POSITIVE_GATE_FORMAL_REDUCTION__ZERO_CC_R3_PROPERTY_OR_TERMINAL_CREDIT",
+  "base_main_commit": "607b0e97bacf43e12405374daef788ba27244472",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/professional_r12_universal_positive_gate_totality_v1.py",
+      "git_blob_sha": "d1030eaf687110f5ca34de24c37e595973a596ac"
+    },
+    "tests": {
+      "path": "canonical/tests/test_professional_r12_universal_positive_gate_totality_v1.py",
+      "git_blob_sha": "5efd27bfa4e7a8738033ca25a1b775bf5802dc03"
+    },
+    "claim_id": "11870f850b46bcfcc31094f764fc4f45c911aaac413979ceb62679ff19a53162",
+    "scope_claim_id": "05b74983836dd1f6a13a0db72443246fb74f99548f0d982a769a6a7e572e9e85",
+    "obligation": "ALL_ROOT_RELEVANT_MATERIAL_DEFEATERS_RESOLVED_OR_PROVED_DECISION_NULL_BEFORE_POSITIVE_CERTIFICATION"
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-professional-hard-defect-verify-20261010",
+    "carrier_id": "sprite-1bbb86ed-1f7c-409f-8397-fadc4de7a62a",
+    "workspace": "/home/sprite/r12-universal-positive-gate-v1",
+    "py_compile": "PASS",
+    "tests_run": 7,
+    "tests_passed": 7,
+    "tests_failed": 0,
+    "transcript_sha256": "9d1b57d31cb687b1bdcb292cbf0c5020a6b6e7776a1f228c226252e68f85e669",
+    "transcript_bytes": 1371
+  },
+  "truth": {
+    "universal_positive_gate_totality_candidate_proved": true,
+    "proof_basis": "UNIVERSAL_FORMAL_SCOPE_PROOF",
+    "whole_domain_identity_carrier_bound": true,
+    "positive_route_requires_executable_totality_semantics": true,
+    "stable_c8_nonvacuity_separate_and_proved": true,
+    "finite_catalog_only": false,
+    "eight_clause_count_only": false,
+    "cross_subject_property_authority_transport": false,
+    "independent_verified": true,
+    "cc_r3_terminal_closure_proved_by_this_receipt_alone": false
+  },
+  "exact_next": "BIND_THIS_INDEPENDENTLY_VERIFIED_UNIVERSAL_FORMAL_SCOPE_PROOF_THROUGH_EXISTING_R12_GENERATOR_CLOSURE__THEN_MINT_CC_R3_CERTIFICATE_AND_RERUN_R4",
+  "hard_nonclaims": [
+    "NO_CC_R3_ROOT_CREDIT_FROM_REPLAY_RECEIPT_ALONE",
+    "NO_SEMANTIC_PROPERTY_TRUTH_FROM_REPLAY_RECEIPT_ALONE",
+    "NO_R4_PROOF_REALIZATION_AUTHORITY",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
