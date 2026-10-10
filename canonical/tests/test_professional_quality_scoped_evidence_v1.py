@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-from copy import deepcopy
 import json
 from pathlib import Path
 import tempfile
@@ -10,10 +9,10 @@ from canonical.runtime import professional_quality_scoped_evidence_v1 as scoped
 
 
 class ProfessionalQualityScopedEvidenceV1Tests(unittest.TestCase):
-    def test_current_r7_single_edit_scope_is_admitted_without_global_credit(self):
+    def test_current_r7_and_r3_scopes_are_admitted_without_global_credit(self):
         out = scoped.evaluate()
         self.assertTrue(out["pass"], out)
-        self.assertEqual(out["admitted_scope_count"], 1, out)
+        self.assertEqual(out["admitted_scope_count"], 2, out)
         self.assertEqual(out["rejected_scope_count"], 0, out)
         self.assertFalse(out["global_leaf_closure"])
         self.assertFalse(out["global_root_closure"])
@@ -60,14 +59,17 @@ class ProfessionalQualityScopedEvidenceV1Tests(unittest.TestCase):
             out = scoped.evaluate(registry_path=p)
         self.assertFalse(out["pass"], out)
         self.assertIn(
-            "R7_LEAF_BINDING_INVALID",
+            "LEAF_BINDING_INVALID",
             out["rejected_scopes"][0]["errors"],
             out,
         )
 
-    def test_scoped_result_preserves_exact_claim_kind(self):
+    def test_r7_scope_preserves_exact_single_edit_claim_kind(self):
         out = scoped.evaluate()
-        row = out["admitted_scopes"][0]
+        row = next(
+            x for x in out["admitted_scopes"]
+            if x["root_id"] == "R7_CAUSAL_PRESCRIPTIVE"
+        )
         self.assertEqual(
             row["claim_scope"]["kind"],
             "EXACT_SINGLE_EDIT_PROFESSIONAL_CODE_INTERVENTION_INSTANCE",
@@ -81,6 +83,45 @@ class ProfessionalQualityScopedEvidenceV1Tests(unittest.TestCase):
         )
         self.assertFalse(row["global_leaf_credit"])
         self.assertFalse(row["global_root_credit"])
+
+    def test_r3_scope_is_execution_only_and_preserves_limitations(self):
+        out = scoped.evaluate()
+        row = next(
+            x for x in out["admitted_scopes"]
+            if x["root_id"] == "R3_REALIZATION_OBSERVATION"
+        )
+        self.assertEqual(
+            row["claim_scope"]["kind"],
+            "BOUNDED_GENERATED_EXPLICIT_LOW_LEVEL_TEXT_EDIT_RENDER_PRESERVATION",
+        )
+        self.assertEqual(
+            row["contributes_to_leaf_ids"],
+            ["PQ::R3_REALIZATION_OBSERVATION::EXECUTION"],
+        )
+        self.assertIn(
+            "NO_ARBITRARY_SEMANTIC_TARGET_SELECTION",
+            row["claim_scope"]["limitations"],
+        )
+        self.assertFalse(row["semantic_leaf_credit"])
+        self.assertFalse(row["execution_leaf_credit"])
+
+    def test_r3_registry_cannot_promote_execution_leaf_credit(self):
+        registry = json.loads(scoped.REGISTRY.read_text())
+        r3 = next(
+            x for x in registry["entries"]
+            if x["root_id"] == "R3_REALIZATION_OBSERVATION"
+        )
+        r3["execution_leaf_credit"] = True
+        with tempfile.TemporaryDirectory() as td:
+            p = Path(td) / "registry.json"
+            p.write_text(json.dumps(registry, indent=2) + "\n")
+            out = scoped.evaluate(registry_path=p)
+        self.assertFalse(out["pass"], out)
+        r3_result = next(
+            x for x in out["rejected_scopes"]
+            if x["root_id"] == "R3_REALIZATION_OBSERVATION"
+        )
+        self.assertIn("EXECUTION_LEAF_CREDIT_FORBIDDEN", r3_result["errors"])
 
 
 if __name__ == "__main__":
