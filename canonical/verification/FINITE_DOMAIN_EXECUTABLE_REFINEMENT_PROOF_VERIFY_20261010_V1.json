@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_FINITE_DOMAIN_EXECUTABLE_REFINEMENT_PROOF_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__SEMANTIC_REFINEMENT_PROOF_ROUTE_EXECUTED",
+  "checker": {
+    "path": "canonical/runtime/finite_domain_executable_refinement_checker_v1.py",
+    "git_blob_sha": "782d395094a73d1c51ba0090faf47cdd919ac685"
+  },
+  "checker_tests": {
+    "path": "canonical/tests/test_finite_domain_executable_refinement_checker_v1.py",
+    "git_blob_sha": "141d5b21f33f977af8f8c8b63fa73a60b88e8252",
+    "run": 6,
+    "passed": 6,
+    "failed": 0
+  },
+  "proof": {
+    "path": "canonical/governance/FINITE_DOMAIN_REFINEMENT_PROBE_PROOF_20261010_V1.json",
+    "git_blob_sha": "0a37c3436841b88a3800af04a29f5a9e52e84938"
+  },
+  "abstract_spec": {
+    "path": "canonical/governance/FINITE_DOMAIN_REFINEMENT_PROBE_ABSTRACT_SPEC_20261010_V1.json",
+    "git_blob_sha": "4d88ba124404c22b84e3e239040c65c7ae3f28b4"
+  },
+  "concrete_implementation": {
+    "path": "canonical/runtime/finite_domain_refinement_probe_v1.py",
+    "git_blob_sha": "c1fa473e173350798bea93d964109adefdd95aeb"
+  },
+  "execution": {
+    "pass": true,
+    "refinement_verified": true,
+    "assurance_level": "EXHAUSTIVE_FINITE_DOMAIN",
+    "domain_case_count": 3,
+    "receipt_sha256": "6d70668f08f1ddeb4fccc68bdf053ea2b5d6050c82ddd8db2f7b6356fbeff82e"
+  },
+  "scope": "PROVES_ONE_REAL_SEMANTIC_PROOF_CLASS_AND_SUBJECT__DOES_NOT_DISCHARGE_OTHER_RUNTIME_OBLIGATIONS",
+  "terminal_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "acceptance_credit_delta": 0
+}
