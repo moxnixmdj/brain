@@ -2,7 +2,7 @@
   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V12_INSTANCE",
   "action_id": "R4_SEMANTIC_EXECUTION_INTEGRATION_REGRESSION_20261010_V1",
   "date": "2026-10-10",
-  "status": "ACTIVE_PROOF_ONLY__ZERO_FRESH_REALITY__ZERO_TERMINAL_CREDIT",
+  "status": "COMPLETED_TEST_ONLY__REMOTE_EXACT_BYTE_PASS__ZERO_FRESH_REALITY__ZERO_TERMINAL_CREDIT",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "canonical_base_commit": "ec6a9288ff7d9da29251011a12869b8f777131fe",
   "action_kind": "R4_INTEGRATION_REGRESSION_ONLY",
@@ -32,6 +32,16 @@
   "accounting": {
     "incremental_spend_usd": 0,
     "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  },
+  "outputs": {
+    "test": "canonical/tests/test_root_theorem_semantic_execution_integration_v1.py",
+    "verification": "canonical/verification/R4_SEMANTIC_EXECUTION_INTEGRATION_VERIFICATION_20261010_V1.json",
+    "regression": "canonical/regressions/2026-10-10_R4_SEMANTIC_EXECUTION_INTEGRATION.json",
+    "pull_request": 3891
+  },
+  "verification": {
+    "remote_exact_byte_replay": "3_PASSED__0_FAILED",
     "terminal_credit_delta": 0
   }
 }
