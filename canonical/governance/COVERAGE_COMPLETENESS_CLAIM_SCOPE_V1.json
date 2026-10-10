@@ -10,7 +10,7 @@
   },
   "root_theorem": {
     "path": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_THEOREM_V1.json",
-    "git_blob_sha": "f7a824a60b91c914af37b1a911d3f0ee7d6f52a8"
+    "git_blob_sha": "2a4327fe5db9b498fe87d2c4fb38ccbd88c976ef"
   },
   "claim_semantics": {
     "quantification": "FOR_EACH_FROZEN_CERTIFICATION_CLAIM_C",
@@ -70,8 +70,8 @@
     "global_open_ended_mission_completion_derivable": false
   },
   "currentness_repair": {
-    "status": "BOUND_TO_CURRENT_MISSION_ROOT_THEOREM_AND_CLAIM_SCOPED_ROOT_REGISTRY",
-    "pr": 3845,
+    "status": "BOUND_TO_CURRENT_MISSION_ROOT_THEOREM_ROOT_REGISTRY_AND_EXECUTABLE_SEMANTIC_VERIFICATION",
+    "pr": 3870,
     "terminal_credit_delta": 0
   }
 }
