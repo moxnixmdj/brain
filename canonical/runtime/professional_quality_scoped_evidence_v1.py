@@ -1,8 +1,9 @@
 """Claim-scoped professional-quality evidence registry validator.
 
 Admits reusable bounded domain capability evidence without allowing it to close
-the global semantic/execution leaves. This is the bookkeeping bridge between
-verified claim-scoped capability and the still-open universal domain root.
+the global semantic/execution leaves. Supported handlers are intentionally
+explicit; unknown claim kinds fail closed instead of inheriting authority by
+similarity.
 """
 from __future__ import annotations
 
@@ -16,14 +17,21 @@ REGISTRY = ROOT / "canonical/governance/PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_REG
 
 SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_VALIDATOR_V1"
 REGISTRY_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_REGISTRY_V1"
-SOURCE_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R7_SINGLE_EDIT_CAUSAL_INSTANCE_VERIFY_V1"
-COMPILER_VERIFY_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_EDIT_CAUSAL_CERTIFICATE_VERIFY_V1"
+
+R7_KIND = "EXACT_SINGLE_EDIT_PROFESSIONAL_CODE_INTERVENTION_INSTANCE"
 R7_ROOT = "R7_CAUSAL_PRESCRIPTIVE"
 R7_LEAVES = {
     "PQ::R7_CAUSAL_PRESCRIPTIVE::SEMANTIC",
     "PQ::R7_CAUSAL_PRESCRIPTIVE::EXECUTION",
 }
-CLAIM_KIND = "EXACT_SINGLE_EDIT_PROFESSIONAL_CODE_INTERVENTION_INSTANCE"
+R7_SOURCE_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R7_SINGLE_EDIT_CAUSAL_INSTANCE_VERIFY_V1"
+R7_COMPILER_VERIFY_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_EDIT_CAUSAL_CERTIFICATE_VERIFY_V1"
+
+R3_KIND = "BOUNDED_GENERATED_EXPLICIT_LOW_LEVEL_TEXT_EDIT_RENDER_PRESERVATION"
+R3_ROOT = "R3_REALIZATION_OBSERVATION"
+R3_LEAVES = {"PQ::R3_REALIZATION_OBSERVATION::EXECUTION"}
+R3_SOURCE_SCHEMA = "PROJECT_BRAIN_NATIVE_ARTIFACT_RENDER_PRESERVATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1"
+R3_PREFLIGHT_SCHEMA = "PROJECT_BRAIN_NATIVE_ARTIFACT_RENDER_PRESERVATION_PREFLIGHT_V1"
 
 
 def git_blob_sha(path: Path) -> str:
@@ -46,7 +54,6 @@ def _read_bound(
     binding: Any,
     label: str,
 ) -> tuple[dict[str, Any] | None, list[str]]:
-    errors: list[str] = []
     if not isinstance(binding, dict):
         return None, [f"{label}_BINDING_INVALID"]
     path = _resolve(repo_root, binding.get("path"))
@@ -57,70 +64,51 @@ def _read_bound(
         return None, [f"{label}_MISSING"]
     actual = git_blob_sha(path)
     if actual != declared:
-        errors.append(f"{label}_STALE")
-        return None, errors
+        return None, [f"{label}_STALE"]
     try:
-        return _load(path), errors
+        return _load(path), []
     except Exception:
         return None, [f"{label}_JSON_INVALID"]
 
 
-def validate_entry(entry: dict[str, Any], *, repo_root: Path = ROOT) -> dict[str, Any]:
+def _common_checks(entry: dict[str, Any], expected_root: str, expected_leaves: set[str]) -> list[str]:
     errors: list[str] = []
-    if not isinstance(entry, dict):
-        return {"admitted": False, "errors": ["ENTRY_INVALID"]}
-
-    scope_id = entry.get("scope_id")
-    root_id = entry.get("root_id")
-    leaf_ids = entry.get("contributes_to_leaf_ids")
-    if not isinstance(scope_id, str) or not scope_id:
-        errors.append("SCOPE_ID_INVALID")
-    if root_id != R7_ROOT:
+    if entry.get("root_id") != expected_root:
         errors.append("ROOT_ID_INVALID")
-    if not isinstance(leaf_ids, list) or set(leaf_ids) != R7_LEAVES:
-        errors.append("R7_LEAF_BINDING_INVALID")
-    if entry.get("claim_kind") != CLAIM_KIND:
-        errors.append("CLAIM_KIND_INVALID")
+    leaf_ids = entry.get("contributes_to_leaf_ids")
+    if not isinstance(leaf_ids, list) or set(leaf_ids) != expected_leaves:
+        errors.append("LEAF_BINDING_INVALID")
     if entry.get("global_leaf_closure") is not False:
         errors.append("GLOBAL_LEAF_CLOSURE_FORBIDDEN")
     if entry.get("global_root_closure") is not False:
         errors.append("GLOBAL_ROOT_CLOSURE_FORBIDDEN")
+    if entry.get("semantic_leaf_credit") is True:
+        errors.append("SEMANTIC_LEAF_CREDIT_FORBIDDEN")
+    if entry.get("execution_leaf_credit") is True:
+        errors.append("EXECUTION_LEAF_CREDIT_FORBIDDEN")
     if entry.get("terminal_credit_delta") != 0:
         errors.append("TERMINAL_CREDIT_FORBIDDEN")
+    return errors
 
-    source, e = _read_bound(repo_root, entry.get("source_receipt"), "SOURCE_RECEIPT")
-    errors.extend(e)
-    compiler_verify, e = _read_bound(
-        repo_root, entry.get("compiler_verification"), "COMPILER_VERIFICATION"
-    )
-    errors.extend(e)
-    compiler_path = _resolve(
-        repo_root,
-        (entry.get("reusable_compiler") or {}).get("path")
-        if isinstance(entry.get("reusable_compiler"), dict)
-        else None,
-    )
-    compiler_declared = (
-        (entry.get("reusable_compiler") or {}).get("git_blob_sha")
-        if isinstance(entry.get("reusable_compiler"), dict)
-        else None
-    )
-    if compiler_path is None:
-        errors.append("COMPILER_PATH_INVALID")
-    elif not compiler_path.exists():
-        errors.append("COMPILER_MISSING")
-    elif git_blob_sha(compiler_path) != compiler_declared:
-        errors.append("COMPILER_STALE")
 
+def _validate_r7(
+    entry: dict[str, Any],
+    source: dict[str, Any] | None,
+    compiler_verify: dict[str, Any] | None,
+    compiler_declared: Any,
+) -> tuple[list[str], Any]:
+    errors = _common_checks(entry, R7_ROOT, R7_LEAVES)
+    claim_scope = None
     if source is not None:
-        if source.get("schema") != SOURCE_SCHEMA:
+        if source.get("schema") != R7_SOURCE_SCHEMA:
             errors.append("SOURCE_SCHEMA_INVALID")
         if source.get("root_id") != R7_ROOT:
             errors.append("SOURCE_ROOT_INVALID")
         scope = source.get("claim_scope")
         conclusions = source.get("conclusions")
         dispositions = source.get("r7_defeater_disposition")
-        if not isinstance(scope, dict) or scope.get("kind") != CLAIM_KIND:
+        claim_scope = scope
+        if not isinstance(scope, dict) or scope.get("kind") != R7_KIND:
             errors.append("SOURCE_CLAIM_SCOPE_INVALID")
         if not isinstance(conclusions, dict):
             errors.append("SOURCE_CONCLUSIONS_INVALID")
@@ -152,7 +140,7 @@ def validate_entry(entry: dict[str, Any], *, repo_root: Path = ROOT) -> dict[str
                     errors.append("SOURCE_DEFEATER_STATE_INVALID:" + defeater_id)
 
     if compiler_verify is not None:
-        if compiler_verify.get("schema") != COMPILER_VERIFY_SCHEMA:
+        if compiler_verify.get("schema") != R7_COMPILER_VERIFY_SCHEMA:
             errors.append("COMPILER_VERIFY_SCHEMA_INVALID")
         if not str(compiler_verify.get("status") or "").startswith("PASS__"):
             errors.append("COMPILER_VERIFY_NOT_PASS")
@@ -171,31 +159,135 @@ def validate_entry(entry: dict[str, Any], *, repo_root: Path = ROOT) -> dict[str
                 errors.append("COMPILER_VERIFY_SOURCE_MISMATCH")
         if "GLOBAL_R7_ROOT_CLOSURE" not in (compiler_verify.get("not_proved") or []):
             errors.append("COMPILER_VERIFY_GLOBAL_NONCLAIM_MISSING")
+    return errors, claim_scope
 
-    admitted = not errors
-    claim_scope = source.get("claim_scope") if isinstance(source, dict) else None
+
+def _validate_r3(
+    entry: dict[str, Any],
+    source: dict[str, Any] | None,
+    preflight: dict[str, Any] | None,
+    compiler_declared: Any,
+) -> tuple[list[str], Any]:
+    errors = _common_checks(entry, R3_ROOT, R3_LEAVES)
+    claim_scope: dict[str, Any] | None = None
+    if source is not None:
+        if source.get("schema") != R3_SOURCE_SCHEMA:
+            errors.append("SOURCE_SCHEMA_INVALID")
+        if source.get("status") != "INDEPENDENT_BOUNDED_RENDER_PRESERVATION_PREFLIGHT_PASS__ZERO_TERMINAL_CREDIT":
+            errors.append("SOURCE_STATUS_NOT_ADMITTED")
+        blobs = source.get("exact_brain_blobs")
+        if not isinstance(blobs, dict):
+            errors.append("SOURCE_EXACT_BLOBS_INVALID")
+        elif blobs.get("canonical/runtime/native_artifact_render_preservation_proof_v1.py") != compiler_declared:
+            errors.append("SOURCE_RUNTIME_MISMATCH")
+        required_verified = {
+            "SOURCE_AND_OUTPUT_PAGE_COUNTS_EQUAL",
+            "SOURCE_AND_OUTPUT_PAGE_PIXEL_DIMENSIONS_EQUAL",
+            "AT_LEAST_ONE_PAGE_MUST_VISIBLY_CHANGE",
+            "CHANGED_PIXELS_AND_BOUNDING_BOX_MUST_REMAIN_WITHIN_FROZEN_LOCALIZATION_BOUNDS",
+            "UNCHANGED_WHOLE_OUTPUT_IS_REJECTED",
+            "STRUCTURAL_HIDDEN_ORACLE_MUST_PASS_BEFORE_RENDER_ACCEPTANCE",
+            "EXACT_BRAIN_BLOBS_VERIFIED_BY_PUBLIC_CAPSULE",
+        }
+        verified = set(source.get("verified") or [])
+        if not required_verified <= verified:
+            errors.append("SOURCE_REQUIRED_RENDER_ASSERTIONS_MISSING")
+        limitations = set(source.get("limitations") or [])
+        required_limits = {
+            "BOUNDED_GENERATED_EXPLICIT_LOW_LEVEL_TEXT_EDITS_ONLY",
+            "NO_ARBITRARY_SEMANTIC_TARGET_SELECTION",
+            "NO_WHOLE_OPEN_ENDED_NATIVE_ARTIFACT_CONTRACT_SCOPE_EQUIVALENCE",
+            "NO_TERMINAL_ACCEPTANCE_OR_CAPABILITY_CREDIT",
+        }
+        if not required_limits <= limitations:
+            errors.append("SOURCE_SCOPE_LIMITATIONS_MISSING")
+        claim_scope = {
+            "kind": R3_KIND,
+            "formats": ["docx", "xlsx", "pptx", "pdf"],
+            "behavior_id": source.get("behavior_id"),
+            "limitations": sorted(limitations),
+        }
+
+    if preflight is not None:
+        if preflight.get("schema") != R3_PREFLIGHT_SCHEMA:
+            errors.append("PREFLIGHT_SCHEMA_INVALID")
+        if preflight.get("status") != "INDEPENDENT_PUBLIC_RUNNER_PASS__BOUNDED_RENDER_PRESERVATION_ONLY__ZERO_TERMINAL_AUTHORITY":
+            errors.append("PREFLIGHT_STATUS_NOT_ADMITTED")
+        if preflight.get("render_oracle") != "canonical/runtime/native_artifact_render_preservation_proof_v1.py":
+            errors.append("PREFLIGHT_RENDER_ORACLE_MISMATCH")
+        limitation = str(preflight.get("scope_limitation") or "")
+        if "NO_ARBITRARY_SEMANTIC_TARGET_SELECTION" not in limitation:
+            errors.append("PREFLIGHT_SEMANTIC_SCOPE_LIMIT_MISSING")
+        if "NO_WHOLE_CONTRACT_SCOPE_EQUIVALENCE" not in limitation:
+            errors.append("PREFLIGHT_WHOLE_CONTRACT_SCOPE_LIMIT_MISSING")
+        if preflight.get("execution_authority") is not False:
+            errors.append("PREFLIGHT_EXECUTION_AUTHORITY_INVALID")
+    return errors, claim_scope
+
+
+def validate_entry(entry: dict[str, Any], *, repo_root: Path = ROOT) -> dict[str, Any]:
+    errors: list[str] = []
+    if not isinstance(entry, dict):
+        return {"admitted": False, "errors": ["ENTRY_INVALID"]}
+    scope_id = entry.get("scope_id")
+    if not isinstance(scope_id, str) or not scope_id:
+        errors.append("SCOPE_ID_INVALID")
+
+    source, e = _read_bound(repo_root, entry.get("source_receipt"), "SOURCE_RECEIPT")
+    errors.extend(e)
+    verifier, e = _read_bound(repo_root, entry.get("compiler_verification"), "COMPILER_VERIFICATION")
+    errors.extend(e)
+
+    compiler_binding = entry.get("reusable_compiler")
+    compiler_path = _resolve(
+        repo_root,
+        compiler_binding.get("path") if isinstance(compiler_binding, dict) else None,
+    )
+    compiler_declared = (
+        compiler_binding.get("git_blob_sha") if isinstance(compiler_binding, dict) else None
+    )
+    if compiler_path is None:
+        errors.append("COMPILER_PATH_INVALID")
+    elif not compiler_path.exists():
+        errors.append("COMPILER_MISSING")
+    elif git_blob_sha(compiler_path) != compiler_declared:
+        errors.append("COMPILER_STALE")
+
+    kind = entry.get("claim_kind")
+    if kind == R7_KIND:
+        handler_errors, claim_scope = _validate_r7(entry, source, verifier, compiler_declared)
+    elif kind == R3_KIND:
+        handler_errors, claim_scope = _validate_r3(entry, source, verifier, compiler_declared)
+    else:
+        handler_errors, claim_scope = ["CLAIM_KIND_UNSUPPORTED"], None
+    errors.extend(handler_errors)
+
+    leaf_ids = entry.get("contributes_to_leaf_ids")
     return {
         "scope_id": scope_id,
-        "root_id": root_id,
-        "admitted": admitted,
+        "root_id": entry.get("root_id"),
+        "claim_kind": kind,
+        "admitted": not errors,
         "errors": sorted(set(errors)),
         "claim_scope": claim_scope,
         "contributes_to_leaf_ids": sorted(leaf_ids) if isinstance(leaf_ids, list) else [],
         "global_leaf_credit": False,
         "global_root_credit": False,
+        "semantic_leaf_credit": False,
+        "execution_leaf_credit": False,
         "terminal_credit_delta": 0,
     }
 
 
 def evaluate(*, registry_path: Path = REGISTRY, repo_root: Path = ROOT) -> dict[str, Any]:
     registry = _load(registry_path)
-    errors: list[str] = []
+    structural_errors: list[str] = []
     if registry.get("schema") != REGISTRY_SCHEMA:
-        errors.append("REGISTRY_SCHEMA_INVALID")
+        structural_errors.append("REGISTRY_SCHEMA_INVALID")
     entries = registry.get("entries")
     if not isinstance(entries, list):
         entries = []
-        errors.append("REGISTRY_ENTRIES_INVALID")
+        structural_errors.append("REGISTRY_ENTRIES_INVALID")
 
     results = [
         validate_entry(entry, repo_root=repo_root)
@@ -204,7 +296,7 @@ def evaluate(*, registry_path: Path = REGISTRY, repo_root: Path = ROOT) -> dict[
     ]
     scope_ids = [x.get("scope_id") for x in results]
     if len(scope_ids) != len(set(scope_ids)):
-        errors.append("DUPLICATE_SCOPE_ID")
+        structural_errors.append("DUPLICATE_SCOPE_ID")
 
     admitted = [x for x in results if x.get("admitted") is True]
     rejected = [x for x in results if x.get("admitted") is not True]
@@ -212,11 +304,11 @@ def evaluate(*, registry_path: Path = REGISTRY, repo_root: Path = ROOT) -> dict[
         "schema": SCHEMA,
         "status": (
             "PASS__SCOPED_CAPABILITIES_ADMITTED_WITH_ZERO_GLOBAL_LEAF_CREDIT"
-            if not errors and not rejected
+            if not structural_errors and not rejected
             else "OPEN__SCOPED_EVIDENCE_REGISTRY_ERRORS"
         ),
-        "pass": not errors and not rejected,
-        "structural_errors": sorted(set(errors)),
+        "pass": not structural_errors and not rejected,
+        "structural_errors": sorted(set(structural_errors)),
         "admitted_scope_count": len(admitted),
         "rejected_scope_count": len(rejected),
         "admitted_scopes": admitted,
