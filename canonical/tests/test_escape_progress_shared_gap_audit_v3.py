@@ -271,7 +271,25 @@ def test_v2_audit_and_v3_binding_history_remain_byte_identical():
 
 
 def test_audit_repo_resolves_current_binding_from_live_classifier():
-    expected = ROOT / "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V5.json"
+    classifier = json.loads(
+        (ROOT / "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json").read_text()
+    )
+    current = {
+        row["residual_id"]: row["existing_binding"]
+        for row in classifier["classifications"]
+        if row.get("residual_id")
+        in {
+            "ESCAPE_GAP_A_ACQUISITION_TOTALITY",
+            "ESCAPE_GAP_B_INTERNAL_ROUTE_STRICT_PROGRESS",
+        }
+    }
+    assert set(current) == {
+        "ESCAPE_GAP_A_ACQUISITION_TOTALITY",
+        "ESCAPE_GAP_B_INTERNAL_ROUTE_STRICT_PROGRESS",
+    }
+    assert len(set(current.values())) == 1
+    expected_rel = next(iter(current.values()))
+    expected = ROOT / expected_rel
     resolved = _current_binding_path(ROOT)
     assert resolved == expected.resolve()
     result = audit_repo(ROOT)
@@ -279,7 +297,7 @@ def test_audit_repo_resolves_current_binding_from_live_classifier():
     assert result["cc_r3_proved"] is False
     assert result["gap_a_count"] == 10
     assert result["gap_b_count"] == 3
-    assert result["current_binding_path"] == expected.relative_to(ROOT).as_posix()
+    assert result["current_binding_path"] == expected_rel
 
 
 def test_current_binding_gap_a_gap_b_divergence_fails_closed():
