@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V3",
+  "date": "2026-10-10",
+  "status": "ACTIVE_PRIMARY_CAPABILITY_FIRST_DEVELOPMENT_SCHEDULER",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "terminal_milestone": "OPUS_5_5_FIRST_FRONTIER_CHECKPOINT__NOT_TERMINAL_OBJECTIVE",
+  "scheduler_runtime": "canonical/runtime/capability_first_scheduler_v1.py",
+  "canonical_primary_entrypoint": "rank_live_work",
+  "supersedes": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261008_V2.json",
+  "reason": "V2 accidentally made open Opus acceptance obligations a hard primary-work gate, reversing the capability-first correction. V3 restores the real mission as the primary optimization target and retains Opus obligations only as a secondary audit signal.",
+  "primary_work_rule": {
+    "objective": "MAXIMIZE_REUSABLE_VERIFIED_CAPABILITY_GENERALIZATION_RELIABILITY_AND_EFFICIENCY_PER_RESOURCE",
+    "checkpoint_obligations_are_primary_gate": false,
+    "checkpoint_signal_role": "SECONDARY_TIE_BREAK_AND_PERIODIC_AUDIT",
+    "generic_reusable_capability_work_is_demoted_while_checkpoint_open": false,
+    "benchmark_bookkeeping_without_allowed_role": "DEMOTED",
+    "allowed_benchmark_roles": [
+      "CAPABILITY_DEFECT_LOCALIZATION",
+      "NEW_CAPABILITY_VALIDATION",
+      "CAPABILITY_CLAIM_FALSIFICATION",
+      "MILESTONE_CERTIFICATION"
+    ]
+  },
+  "terminal_autopilot_policy": {
+    "role": "SUBORDINATE_CHECKPOINT_AUDITOR",
+    "new_dispatch_requires_explicit_capability_first_checkpoint_admission": true,
+    "verification_of_already_present_results_may_continue": true,
+    "promotion_remains_separately_authorized": true,
+    "default_repo_mode_new_dispatch": "PARKED"
+  },
+  "canonical_learning_loop": [
+    "SOLVE",
+    "VERIFY",
+    "EXTRACT_MECHANISM",
+    "GENERALIZE",
+    "COMPRESS",
+    "PRESERVE_OPTIONS",
+    "REUSE_CHEAPER"
+  ],
+  "r3_state": {
+    "status": "SUFFICIENT_CONTROL_LOOP_CLOSURE_UNDER_AVAILABLE_EVIDENCE",
+    "observability_boundary_policy": "PARK_AND_REOPEN_ON_NEW_EFFECT_DISTINGUISHING_EVIDENCE"
+  },
+  "hard_nonclaims": [
+    "NO_TERMINAL_CREDIT_FROM_PRIORITY_SCORE",
+    "NO_ACCEPTANCE_CREDIT_FROM_CHECKPOINT_AUDIT_SCORE",
+    "NO_BENCHMARK_PASS_IS_REUSABLE_CAPABILITY_BY_ITSELF",
+    "NO_TERMINAL_AUTOPILOT_NEW_DISPATCH_WITHOUT_CAPABILITY_FIRST_ADMISSION",
+    "OPUS_5_5_REMAINS_A_FRONTIER_CHECKPOINT_NOT_THE_GLOBAL_OBJECTIVE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
