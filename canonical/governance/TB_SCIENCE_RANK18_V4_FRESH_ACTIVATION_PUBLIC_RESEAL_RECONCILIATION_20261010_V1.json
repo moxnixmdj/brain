@@ -1,0 +1,77 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK18_V4_FRESH_ACTIVATION_PUBLIC_RESEAL_RECONCILIATION_20261010_V1",
+  "date": "2026-10-10",
+  "status": "RECONCILED__PUBLIC_V4_FRESH_ACTIVATION_RESEAL_VERIFIED__BRAIN_V3_PROMOTABLE_EFFECTIVE_BY_CURRENT_POINTER__V2_ACTIVATION_NOT_ARMED__ZERO_CREDIT",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "authority": {
+    "path": "canonical/governance/TB_SCIENCE_RANK18_ONE_SLOT_EXECUTION_AUTHORITY_20261010_V3.json",
+    "git_blob_sha": "7ab3d1d294d82192462c735ff7cb7e0dc3abc06f",
+    "promotion_semantics": "THE_STAGED_V3_AUTHORITY_BECOMES_EFFECTIVE_ONLY_BY_THIS_RECONCILIATION_BEING_PROMOTED_IN_CURRENT_TERMINAL_AUTHORITY_AFTER_PUBLIC_V4_RESEAL_PROOF"
+  },
+  "ledger": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V35.json",
+    "git_blob_sha": "73ad3e6e2b9cb9e1f3b72c3f08d6842814ca1940"
+  },
+  "verification": {
+    "path": "canonical/verification/TB_SCIENCE_RANK18_V4_FRESH_ACTIVATION_PUBLIC_RESEAL_VERIFY_20261010_V1.json",
+    "git_blob_sha": "484ba98f3222d2123605741184473d5ddd1f8189",
+    "pass": true
+  },
+  "public_surface": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "merge_commit_sha": "91d3acb2f7d8e8ebf79eedff13ce1cbb800fa9df",
+    "surface_git_blob_sha": "001c3d3a40e52aa57a8f775faf31e43d63bfbc93",
+    "workflow_path": ".github/workflows/execute-tb-science-rank18-20261010-v2.yml",
+    "workflow_git_blob_sha": "969a9a735d5dfdf371a9a5c82aa972fe6ad85549",
+    "fresh_execution_branch": "execute/tb-science-rank18-20261010-v2",
+    "fresh_activation_filename": "ACTIVATE_RANK18_V2_PR.json",
+    "fresh_execution_branch_observed_absent": true,
+    "activation_file_observed_absent": true,
+    "retired_execution_branch": "execute/tb-science-rank18-20261010-v1",
+    "retired_execution_branch_authority": false
+  },
+  "state": {
+    "consumed_slots": 17,
+    "consumed_successes": 0,
+    "consumed_final_failures": 17,
+    "next_rank": 18,
+    "slot_id": "terminal-bench-science/longitudinal-clinical-agent::trial-0",
+    "task_digest": "sha256:e9a166b2173f7014d4f1559505397b221f94bc446eab031f94791b35e0e5f1c9",
+    "logical_attempt_id": "a02ee7de469f953679fb593ab152a9f67eb1ebe8c364f8c748f18cd8a81eab8d",
+    "task_read_history": true,
+    "task_started": false,
+    "durable_start_cas_acquired": false,
+    "benchmark_trials_consumed": 0,
+    "result_present": false,
+    "activation_armed": false
+  },
+  "effective_controls": {
+    "execution_authority": true,
+    "task_rematerialization_authority": true,
+    "task_read_authority_scope": "ONLY_ON_FRESH_EXECUTE_TB_SCIENCE_RANK18_20261010_V2_BRANCH_AFTER_LIVE_CARRIER_QUALIFICATION_AND_DURABLE_START_CAS_ABSENCE_CHECK",
+    "logical_attempts_authorized_total": 1,
+    "new_logical_attempt_forbidden": true,
+    "retries_authorized": 0,
+    "replacement_allowed": false,
+    "child_github_credentials_forbidden": true,
+    "action_effect_requires_durable_intent_ack": true,
+    "next_action_requires_durable_state_commit_ack": true,
+    "uncertain_effect_replay_authority": false,
+    "post_start_result_irreversible": true,
+    "incremental_spend_usd_max": 0
+  },
+  "next": "CREATE_EXACTLY_ONE_FRESH_EXECUTE_TB_SCIENCE_RANK18_20261010_V2_BRANCH_FROM_CURRENT_PUBLIC_BASE__ADD_ONLY_ACTIVATE_RANK18_V2_PR_JSON__VERIFY_FIRST_RUN_ATTEMPT_AND_CAS_ABSENCE__THEN_EXECUTE_SAME_LOGICAL_ATTEMPT",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_trials_consumed_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "execution_authority": true,
+  "task_read_authority": true,
+  "activation_armed": false,
+  "fresh_reality_authority": true,
+  "promotion_authority": true
+}
