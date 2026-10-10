@@ -2,7 +2,7 @@
   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V12_INSTANCE",
   "action_id": "R4_REGISTRY_CLAIM_SPLICE_CLOSURE_20261010_V1",
   "date": "2026-10-10",
-  "status": "ACTIVE_PROOF_ONLY__ZERO_FRESH_REALITY__ZERO_TERMINAL_CREDIT",
+  "status": "COMPLETED_PROOF_ONLY__VERIFIED_R4_REGISTRY_CLAIM_SPLICE_REPAIR__ZERO_FRESH_REALITY__ZERO_TERMINAL_CREDIT",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "canonical_base_commit": "6a9f7ab13f43e219a11abe8e7c3ccb7a631de331",
   "action_kind": "R4_CANONICAL_REGISTRY_AND_LOCAL_BINDING_COHERENCE_REPAIR",
@@ -56,5 +56,21 @@
     "terminal_credit_delta": 0,
     "acceptance_credit_delta": 0,
     "ownership_credit_delta": 0
+  },
+  "outputs": {
+    "law": "canonical/laws/COVERAGE_COMPLETENESS_ROOT_THEOREM_LAW_V1.md",
+    "governance": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_THEOREM_V1.json",
+    "runtime": "canonical/runtime/root_theorem_falsifier_v1.py",
+    "tests": "canonical/tests/test_root_theorem_registry_claim_alignment_v1.py",
+    "verification": "canonical/verification/R4_REGISTRY_CLAIM_SPLICE_VERIFICATION_20261010_V1.json",
+    "regression": "canonical/regressions/2026-10-10_R4_REGISTRY_CLAIM_SPLICE.json",
+    "reasoning": "canonical/reasoning/2026-10-10_R4_REGISTRY_CLAIM_SPLICE_V1.json",
+    "pull_request": 3857
+  },
+  "verification": {
+    "remote_exact_byte_replay": "31_PASSED__0_FAILED",
+    "current_registry_proved_roots": 0,
+    "current_r4_proof_closure": false,
+    "terminal_credit_delta": 0
   }
 }
