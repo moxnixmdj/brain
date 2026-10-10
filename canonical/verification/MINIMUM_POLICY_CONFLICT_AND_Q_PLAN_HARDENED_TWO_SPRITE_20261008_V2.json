@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_MINIMUM_Q_CAUSAL_OBSTRUCTION_HARDENED_V2",
+  "date": "2026-10-08",
+  "source_commit": "bb398c0e4f67a3825b5f71c48773b0ee185e1681",
+  "status": "TWO_REMOTE_FOCUSED_REPLAYS_25_OF_25_PASS_EACH__ZERO_TERMINAL_CREDIT",
+  "blobs": {
+    "canonical/runtime/finite_observational_obstruction_reducer_v1.py": "ab7436701255eb5e69ff49670c1e2519e876af9e",
+    "canonical/tests/test_finite_observational_obstruction_reducer_v1.py": "f5de8048226134d7069719c94a1c380e75cfefb7",
+    "canonical/runtime/finite_identifiability.py": "c2bf32dd1e22f00a2fa08b043aa8275a07c05bed",
+    "canonical/runtime/effect_broker_receipt_resolver_v2.py": "7f4eeeb19def420d0014631b99c5e2dc3a30592e"
+  },
+  "verified": {
+    "minimum_common_policy_conflict_core": "Exact minimum cardinality with budgeted BFS; irreducible-only fallback if cap reached",
+    "minimum_discriminators": "Exact smallest Q subset over finite declared H, P, Q for at most 12 Q elements",
+    "input_integrity": "No ignored top-level requirements or discriminator fields; nonstring region IDs rejected",
+    "proof_semantics": "Byte-bound certificate identity only, not independent policy adequacy"
+  },
+  "tests": [
+    {
+      "sprite": "brain-abstract-cover-lift-verify-20261008-v1",
+      "passed": 25,
+      "failed": 0
+    },
+    {
+      "sprite": "brain-trace-parametricity-v1-verify",
+      "passed": 25,
+      "failed": 0
+    }
+  ],
+  "differential_oracles": {
+    "minimum_core_models": 140,
+    "minimum_discriminator_models": 110,
+    "seed": 20261008,
+    "failures": 0
+  },
+  "example": {
+    "candidate_observations": 8,
+    "minimum_observations": 1,
+    "avoided": 7,
+    "scope": "Constructed finite model only"
+  },
+  "hard_limits": {
+    "real_target_scope_complete": false,
+    "policy_adequacy_semantics_proved": false,
+    "independent_target_match_verified": false,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "u_empty_proved": false
+  },
+  "next": "Authenticate the actual covered target scope and independent semantic adequacy evidence. Do not infer terminal progress from model-local structural proofs."
+}

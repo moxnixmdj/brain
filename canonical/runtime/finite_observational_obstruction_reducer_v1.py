@@ -15,6 +15,8 @@ separate premises.
 """
 from __future__ import annotations
 
+from collections import deque
+from itertools import combinations
 from collections.abc import Mapping, Sequence
 from pathlib import Path
 from typing import Any
@@ -48,10 +50,142 @@ def _fail(reason: str, **detail: Any) -> dict[str, Any]:
 def _ids(values: Sequence[str], *, label: str) -> tuple[str, ...]:
     if not isinstance(values, Sequence) or isinstance(values, (str, bytes)) or not values:
         raise ValueError(label + "_INVALID_OR_EMPTY")
-    out = tuple(str(v) for v in values)
+    if any(not isinstance(v, str) for v in values):
+        raise ValueError(label + "_MUST_BE_STRINGS")
+    out = tuple(values)
     if any(not v for v in out) or len(set(out)) != len(out):
         raise ValueError(label + "_INVALID_OR_DUPLICATE")
     return out
+
+
+
+MAX_CORE_SEARCH_STATES = 8192
+MAX_EXACT_Q_DISCRIMINATORS = 12
+
+
+def _smallest_conflict_core(
+    members: Sequence[str], policies: Mapping[str, Mapping[str, Any]]
+) -> dict[str, Any]:
+    """Find minimum-cardinality H subset with no shared declared policy.
+
+    BFS explores intersections of policy-support sets, retaining the shortest
+    route to each distinct intersection. On a state-budget hit, deletion
+    reduction still gives a verified 1-minimal core, never a fake exact minimum.
+    No content/adequacy receipt is authenticated by this structural algorithm.
+    """
+    policy_ids = sorted(policies)
+    full = (1 << len(policy_ids)) - 1
+    region_masks = {
+        r: sum(1 << i for i, pid in enumerate(policy_ids)
+               if r in policies[pid]["regions"])
+        for r in sorted(members)
+    }
+    frontier = deque([(full, ())])
+    seen = {full}
+    exhausted = False
+    while frontier and not exhausted:
+        mask, chosen = frontier.popleft()
+        for region in sorted(members):
+            if region in chosen:
+                continue
+            next_mask = mask & region_masks[region]
+            if next_mask == mask:
+                continue
+            path = chosen + (region,)
+            if next_mask == 0:
+                return {
+                    "region_ids": list(path),
+                    "minimum_cardinality_proved": True,
+                    "irreducible_proved": True,
+                    "checked_intersection_states": len(seen),
+                }
+            if next_mask not in seen:
+                if len(seen) >= MAX_CORE_SEARCH_STATES:
+                    exhausted = True
+                    break
+                seen.add(next_mask)
+                frontier.append((next_mask, path))
+
+    # Monotonic intersection means each remaining region is necessary after
+    # one deletion pass. This is 1-minimal, not necessarily globally minimum.
+    core = sorted(members)
+    for region in list(core):
+        other = [r for r in core if r != region]
+        intersection = full
+        for r in other:
+            intersection &= region_masks[r]
+        if intersection == 0:
+            core.remove(region)
+    remaining = full
+    for region in core:
+        remaining &= region_masks[region]
+    if remaining != 0:
+        raise ValueError("CONFLICT_CORE_INVARIANT_FAILED")
+    for region in core:
+        without = full
+        for other in core:
+            if other != region:
+                without &= region_masks[other]
+        if without == 0:
+            raise ValueError("CONFLICT_CORE_NOT_IRREDUCIBLE")
+    return {
+        "region_ids": core,
+        "minimum_cardinality_proved": False,
+        "irreducible_proved": True,
+        "checked_intersection_states": len(seen),
+        "search_budget_exceeded": exhausted,
+    }
+
+
+
+def _minimal_observation_plan(
+    regions: Sequence[str],
+    experiments: Sequence[Experiment],
+    policies: Mapping[str, Mapping[str, Any]],
+) -> dict[str, Any]:
+    """Exact minimum-count subset of declared Q sufficient for common policies.
+
+    Enumerates subsets in cardinality order, including the no-observation
+    common-policy case. Does not claim receipt semantics or global Q completeness.
+    """
+    qs = sorted(experiments, key=lambda x: x.experiment_id)
+    if len(qs) > MAX_EXACT_Q_DISCRIMINATORS:
+        return {
+            "status": "UNPROVED_TOO_MANY_DECLARED_DISCRIMINATORS",
+            "minimum_proved": False,
+            "searched_subsets": 0,
+            "max_exact_q_count": MAX_EXACT_Q_DISCRIMINATORS,
+        }
+    tested = 0
+    for count in range(len(qs) + 1):
+        for subset in combinations(qs, count):
+            tested += 1
+            classes = equivalence_classes(regions, subset)
+            chosen_policies = []
+            for members in classes:
+                common = sorted(
+                    pid for pid, p in policies.items()
+                    if set(members) <= p["regions"]
+                )
+                if not common:
+                    break
+                chosen_policies.append({
+                    "region_ids": members,
+                    "common_declared_policy_id": common[0],
+                })
+            else:
+                return {
+                    "status": "PASS__EXACT_MINIMUM_Q_SUBSET_OVER_DECLARED_H_P_Q",
+                    "minimum_proved": True,
+                    "selected_discriminator_ids": [e.experiment_id for e in subset],
+                    "observation_count": count,
+                    "full_declared_q_count": len(qs),
+                    "avoided_declared_observations": len(qs) - count,
+                    "policy_by_observation_class": chosen_policies,
+                    "searched_subsets": tested,
+                    "bound": "DECLARED_FINITE_H_P_Q_ONLY__ADEQUACY_SEMANTICS_AND_Q_COMPLETENESS_UNPROVED",
+                }
+    raise ValueError("OBSERVATION_PLANNER_INVARIANT_FAILED")
 
 
 def reduce_obstruction(
@@ -62,6 +196,8 @@ def reduce_obstruction(
     try:
         if not isinstance(payload, Mapping):
             return _fail("PAYLOAD_MAPPING_REQUIRED")
+        if set(payload) != {"region_ids", "discriminators", "policies"}:
+            return _fail("UNMODELED_OBSTRUCTION_INPUT_FIELDS")
         root = Path(repo_root).resolve(strict=True)
 
         regions = _ids(payload.get("region_ids"), label="REGION_IDS")
@@ -75,6 +211,8 @@ def reduce_obstruction(
         for i, row in enumerate(q_rows):
             if not isinstance(row, Mapping):
                 return _fail("DISCRIMINATOR_NOT_OBJECT", index=i)
+            if set(row) != {"discriminator_id", "outcomes"}:
+                return _fail("UNMODELED_DISCRIMINATOR_FIELDS", index=i)
             qid = row.get("discriminator_id")
             outcomes = row.get("outcomes")
             if not isinstance(qid, str) or not qid or qid in q_ids:
@@ -150,9 +288,21 @@ def reduce_obstruction(
                 "common_declared_policy_ids": common,
                 "structurally_covered": bool(common),
             }
-            detailed.append(item)
             if not common:
+                core = _smallest_conflict_core(members, policies)
+                without_policy = sorted(
+                    r for r in members
+                    if not any(r in row["regions"] for row in policies.values())
+                )
+                item["smallest_verified_conflict_core"] = core
+                item["regions_with_no_declared_adequate_policy"] = without_policy
+                item["minimum_missing_decision_relevant_primitive"] = (
+                    "PROVE_OR_BUILD_ADEQUATE_POLICY"
+                    if without_policy
+                    else "ADD_TRUTHFUL_DISCRIMINATOR_OR_PROVE_COMMON_ADEQUATE_POLICY"
+                )
                 bad.append(item)
+            detailed.append(item)
 
         base = {
             "schema": SCHEMA,
@@ -160,7 +310,9 @@ def reduce_obstruction(
             "discriminator_count": len(experiments),
             "policy_count": len(policies),
             "final_class_count": len(classes),
-            "declared_q_complete_on_h": True,
+            "declared_q_complete_on_h": False,
+                "declared_q_outcome_domain_total_on_h": True,
+                "q_information_library_complete_proved": False,
             "policy_certificate_bytes_bound": True,
             "policy_adequacy_semantics_verified": False,
             "global_q_scope_complete": False,
@@ -170,7 +322,14 @@ def reduce_obstruction(
         }
 
         if bad:
-            witness = sorted(bad, key=lambda x: (len(x["region_ids"]), x["region_ids"]))[0]
+            witness = min(
+                bad,
+                key=lambda x: (
+                    len(x["smallest_verified_conflict_core"]["region_ids"]),
+                    len(x["region_ids"]),
+                    x["region_ids"],
+                ),
+            )
             return {
                 **base,
                 "pass": False,
@@ -190,6 +349,7 @@ def reduce_obstruction(
             "pass": True,
             "status": "PASS__ALL_DECLARED_FINAL_OBSERVATIONAL_CLASSES_STRUCTURALLY_COVERED",
             "classes": detailed,
+            "minimum_declared_observation_plan": _minimal_observation_plan(regions, experiments, policies),
             "all_final_observational_classes_structurally_covered": True,
             "boundary": (
                 "EXACT_ONLY_OVER_DECLARED_FINITE_H_P_Q;"
