@@ -111,9 +111,17 @@ def _rank_work(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
     return rank_work(rows)
 
 
-def _reached_escape_state(payload: Mapping[str, Any]) -> dict[str, Any]:
-    from canonical.runtime.certified_reached_escape_state_constructor_v1 import construct
-    return construct(payload)
+def _reached_escape_state(
+    payload: Mapping[str, Any],
+    *,
+    authority_verifier=None,
+) -> dict[str, Any]:
+    from canonical.runtime import certified_reached_escape_state_constructor_v2 as constructor
+    return constructor.construct(
+        payload,
+        policy_authority_verifier=authority_verifier,
+        discriminator_authority_verifier=authority_verifier,
+    )
 
 
 def _causal_synthesize(manifest: Mapping[str, Any]) -> dict[str, Any]:
@@ -1122,6 +1130,7 @@ def _run_learning_episode(
     capability_expander: Callable[..., Mapping[str, Any] | None] | None = None,
     episode_verification_provider=None,
     skill_verification_provider=None,
+    reached_escape_authority_verifier=None,
 ) -> dict[str, Any]:
     """Execute through R3 so verified learned routes can control the live path."""
     learning = _learning_module()
@@ -1865,7 +1874,10 @@ def run(
         payload = nested if isinstance(nested, Mapping) else request.get("state")
         if not isinstance(payload, Mapping):
             return _fail("REACHED_ESCAPE_STATE_REQUIRED")
-        return _reached_escape_state(payload)
+        return _reached_escape_state(
+            payload,
+            authority_verifier=reached_escape_authority_verifier,
+        )
 
     if mode == "repair_synthesis":
         nested = request.get("request")
