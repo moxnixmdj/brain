@@ -59,7 +59,7 @@
   "claim_scope": {
     "policy": "SINGLE_ACTIVE_FROZEN_CERTIFICATION_CLAIM_AT_A_TIME",
     "claim_scope_path": "canonical/governance/COVERAGE_COMPLETENESS_CLAIM_SCOPE_V1.json",
-    "claim_scope_git_blob_sha": "f396439258a45f15ff352e65b2032663c45bbb30",
+    "claim_scope_git_blob_sha": "34b6e725efff42536e3c78b3c24543c32cbc02a9",
     "mission_pointer_blob_sha": "6ab2147306a138f9ea327d8e19cb4a5bc76e89df",
     "proved_slot_without_active_claim_forbidden": true,
     "cross_claim_certificate_transport_forbidden": true
@@ -140,6 +140,7 @@
     "status": "BOUND_TO_CURRENT_CLAIM_SCOPE_MISSION_REGISTRY_AND_ACTIVE_PROPERTY_CLAIM__ZERO_CREDIT",
     "predecessor_pr": 3920,
     "repair_branch": "successor/r4-live-binding-currentness-20261010-v1",
-    "terminal_credit_delta": 0
+    "terminal_credit_delta": 0,
+    "claim_scope_git_blob_sha": "34b6e725efff42536e3c78b3c24543c32cbc02a9"
   }
 }
