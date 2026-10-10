@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_ESCAPE_PROGRESS_13_ROUTE_MANIFEST_CONNECTOR_REPLAY_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_GITHUB_OBJECT_REPLAY__13_OF_13_EVIDENCE_BINDINGS_CURRENT__TWO_SHARED_GAPS__CC_R3_OPEN__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_20261010_V1.json",
+    "git_blob_sha": "4ebe25308bf9816d4eeaea415b37b9ec152604c0"
+  },
+  "claim": {
+    "path": "canonical/governance/ESCAPE_PROGRESS_TOTALITY_FROZEN_13_CLAIM_20261010_V3.json",
+    "git_blob_sha": "e534dfb56e8e3cde66a260de299627662965e079",
+    "claim_id": "d8dec5e454c4cbae50de7a0b23f0cf220e4caeb1c1b620e40dd53c267da1ae28"
+  },
+  "method": "INDEPENDENT_CONNECTOR_IMPLEMENTATION__RELOAD_MANIFEST_AND_CLAIM__RELOAD_ALL_13_EVIDENCE_OBJECTS__CHECK_GIT_BLOB_IDENTITIES_SUPPORT_STRINGS_ORDER_AND_9_4_COUNTS",
+  "checks": {
+    "manifest_json_parse": true,
+    "frozen_claim_json_parse": true,
+    "exact_claim_order_match": true,
+    "row_count": 13,
+    "evidence_blob_matches": 13,
+    "support_string_checks": 39,
+    "missing_support_strings": 0,
+    "gap_a_acquisition_totality_rows": 9,
+    "gap_b_internal_route_strict_progress_rows": 4,
+    "strict_progress_witness_bound_count": 0,
+    "externality_proved_count": 0,
+    "cc_r3_proved": false
+  },
+  "limitation": "THIS_PROVES_ROUTE_MANIFEST_CURRENTNESS_AND_CLASSIFICATION_INVARIANTS_ONLY__IT_DOES_NOT_PROVE_EITHER_SHARED_GAP_OR_CC_R3",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
