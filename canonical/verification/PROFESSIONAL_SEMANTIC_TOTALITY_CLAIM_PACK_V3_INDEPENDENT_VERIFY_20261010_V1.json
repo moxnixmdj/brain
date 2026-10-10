@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_SEMANTIC_TOTALITY_CLAIM_PACK_V3_INDEPENDENT_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_SPRITE__PYCOMPILE__4_OF_4__TWELVE_STABLE_MISSION_AUTHORITY_BOUND_SEMANTIC_CLAIMS__ZERO_PROPERTY_OR_TERMINAL_CREDIT",
+  "repository": "moxnixmdj/brain",
+  "verification_base_main_commit": "35216a13f908978f350cb692800e9d6fc7c1802f",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/professional_semantic_totality_claim_pack_v3.py",
+      "git_blob_sha": "803bda772beaa11318ebaafb7f47e45512150e0b"
+    },
+    "tests": {
+      "path": "canonical/tests/test_professional_semantic_totality_claim_pack_v3.py",
+      "git_blob_sha": "90fd42c6f935a10c89e2da4f854cde4bad501852"
+    },
+    "repair_contract": {
+      "path": "canonical/governance/PROFESSIONAL_SEMANTIC_MISSION_BINDING_REPAIR_20261010_V1.json",
+      "git_blob_sha": "221a4b1554e9ddd1589585eadaa470c84d5d42a8"
+    },
+    "mission_authority": {
+      "path": "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "git_blob_sha": "13c470645b037bbb46245c687dd35197b420d51a"
+    },
+    "observed_current_mission_pointer": {
+      "path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
+      "git_blob_sha": "afb55399f54fdf79bf5e4253950527233b64fb41"
+    }
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/brain",
+    "exact_current_dependencies_overlaid_from_canonical_github_bytes": true,
+    "py_compile": "PASS",
+    "tests_run": 4,
+    "tests_passed": 4,
+    "tests_failed": 0,
+    "transcript_sha256": "f920b4f7735026da99936462050f32d447c7a0d76d84115ff696a799c49b8ee2",
+    "transcript_bytes": 39740
+  },
+  "observed": {
+    "pass": true,
+    "semantic_claim_count": 12,
+    "unique_claim_id_count": 12,
+    "mission_blob_sha": "13c470645b037bbb46245c687dd35197b420d51a",
+    "r12_claim_id": "11870f850b46bcfcc31094f764fc4f45c911aaac413979ceb62679ff19a53162",
+    "semantic_truth_authority": false,
+    "terminal_authority": false
+  },
+  "proves": [
+    "MUTABLE_MISSION_POINTER_BOOKKEEPING_DRIFT_NO_LONGER_CHANGES_SEMANTIC_CLAIM_IDENTITY_WHEN_THE_BOUND_REAL_MISSION_AUTHORITY_IS_UNCHANGED",
+    "CURRENT_POINTER_AUTHORITY_PATH_OBJECTIVE_AND_OPUS_ROLE_DRIFT_FAIL_CLOSED",
+    "TWELVE_CURRENT_PROFESSIONAL_SEMANTIC_CLAIMS_FREEZE_UNIQUELY_UNDER_THE_IMMUTABLE_REAL_MISSION_AUTHORITY",
+    "CURRENT_STABLE_R12_SEMANTIC_CLAIM_ID_IS_11870F850B46BCFCC31094F764FC4F45C911AAAC413979CEB62679FF19A53162"
+  ],
+  "hard_nonclaims": [
+    "NO_SEMANTIC_LEAF_PROPERTY_TRUTH",
+    "NO_CC_R1_CC_R2_CC_R3_OR_R4_ROOT_CLOSURE_FROM_THIS_RECEIPT",
+    "NO_CROSS_CLAIM_CERTIFICATE_TRANSPORT",
+    "NO_PROFESSIONAL_QUALITY_CLOSURE",
+    "NO_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "property_truth_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
