@@ -3,7 +3,10 @@ from __future__ import annotations
 from copy import deepcopy
 from pathlib import Path
 import ast
+import importlib.util
 import json
+import sys
+import types
 import unittest
 
 from canonical.runtime import open_world_semantic_control_v1 as control
@@ -221,6 +224,100 @@ class ResidualSemanticControlTests(unittest.TestCase):
         self.assertTrue(any("MINIMUM_INFORMATION_ACQUISITION_CONTROL_ACTION" in row for row in law))
         self.assertFalse(intent["exact_margin_instance"]["semantic_identity_selected"])
         self.assertIn("ACQUIRE_MINIMUM_POLICY_CHANGING_INFORMATION", intent["exact_margin_instance"]["safe_next_class"])
+
+    def _load_fabric_v2_with_stub_v1(self):
+        import canonical.runtime as runtime_package
+
+        stub = types.ModuleType("canonical.runtime.unified_cognitive_fabric_v1")
+        stub.catalog = lambda: {"schema": "STUB_V1", "engines": {"P3": "stub"}}
+        stub.run = lambda request, **providers: {
+            "schema": "STUB_V1",
+            "status": "DELEGATED",
+            "request": deepcopy(dict(request)),
+        }
+        stub._bounded_r3_direct_observation = lambda mode, out: {
+            "schema": "STUB_OBSERVATION",
+            "source_mode": mode,
+            "pass": out.get("pass") is True,
+            "status": out.get("status"),
+        }
+
+        class StubLiveRuntime:
+            @staticmethod
+            def observe_runtime_outcome(observation, **kwargs):
+                return {
+                    "pass": True,
+                    "status": "STUB_OBSERVED",
+                    "observation": deepcopy(dict(observation)),
+                }
+
+        stub.live_runtime = StubLiveRuntime()
+        module_name = "canonical.runtime.unified_cognitive_fabric_v2_test_instance"
+        old_sys = sys.modules.get("canonical.runtime.unified_cognitive_fabric_v1")
+        sentinel = object()
+        old_attr = getattr(runtime_package, "unified_cognitive_fabric_v1", sentinel)
+        sys.modules["canonical.runtime.unified_cognitive_fabric_v1"] = stub
+        setattr(runtime_package, "unified_cognitive_fabric_v1", stub)
+        try:
+            path = ROOT / "canonical/runtime/unified_cognitive_fabric_v2.py"
+            spec = importlib.util.spec_from_file_location(module_name, path)
+            self.assertIsNotNone(spec)
+            self.assertIsNotNone(spec.loader)
+            module = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(module)
+        finally:
+            if old_sys is None:
+                sys.modules.pop("canonical.runtime.unified_cognitive_fabric_v1", None)
+            else:
+                sys.modules["canonical.runtime.unified_cognitive_fabric_v1"] = old_sys
+            if old_attr is sentinel:
+                delattr(runtime_package, "unified_cognitive_fabric_v1")
+            else:
+                setattr(runtime_package, "unified_cognitive_fabric_v1", old_attr)
+        return module
+
+    def test_fabric_v2_executes_explicit_control_route(self):
+        fabric_v2 = self._load_fabric_v2_with_stub_v1()
+        out = fabric_v2.run({
+            "mode": "OPEN_WORLD_SEMANTIC_CONTROL",
+            "payload": problem(),
+            "options": {"learn": False},
+        })
+        self.assertEqual(out["mode"], "OPEN_WORLD_SEMANTIC_CONTROL")
+        self.assertTrue(out["inner_pass"], out)
+        self.assertTrue(out["result"]["control_sufficient"])
+        self.assertFalse(out["result"]["semantic_decision_sufficient"])
+
+    def test_fabric_v2_auto_routes_control_surface(self):
+        fabric_v2 = self._load_fabric_v2_with_stub_v1()
+        out = fabric_v2.run({
+            "mode": "AUTO",
+            "payload": problem(),
+            "options": {"learn": False},
+        })
+        self.assertTrue(out["auto_routed"])
+        self.assertEqual(out["mode"], "OPEN_WORLD_SEMANTIC_CONTROL")
+        self.assertEqual(out["result"]["action"], "ASK_USER_MINIMUM_CLARIFICATION")
+
+    def test_fabric_v2_delegates_existing_surfaces_unchanged(self):
+        fabric_v2 = self._load_fabric_v2_with_stub_v1()
+        out = fabric_v2.run({
+            "mode": "P3",
+            "payload": {"anything": "existing-v1-surface"},
+        })
+        self.assertEqual(out["schema"], "STUB_V1")
+        self.assertEqual(out["status"], "DELEGATED")
+
+    def test_fabric_v2_observes_new_surface_for_r3_learning(self):
+        fabric_v2 = self._load_fabric_v2_with_stub_v1()
+        out = fabric_v2.run({
+            "mode": "OPEN_WORLD_SEMANTIC_CONTROL",
+            "payload": problem(),
+            "options": {"learn": True},
+        })
+        self.assertTrue(out["direct_experience_observed"], out)
+        self.assertEqual(out["direct_learning"]["status"], "STUB_OBSERVED")
+        self.assertFalse(out["terminal_authority"])
 
 
 if __name__ == "__main__":
