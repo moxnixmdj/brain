@@ -1,0 +1,86 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_SEMANTIC_IDENTITY_CARRIER_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_SPRITE__PYCOMPILE__8_OF_8__12_OF_12_SEMANTIC_CLAIMS_UNIVERSAL_IDENTITY_FACTORIZATION__ZERO_PROPERTY_TRUTH_CREDIT",
+  "base_main_commit": "6ffeae5244fddf4b7909d58e4dca162d94be588f",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/professional_semantic_identity_carrier_v1.py",
+      "git_blob_sha": "3a8a27b6fdd0a397b83b94f2daaf185996e9ad62"
+    },
+    "tests": {
+      "path": "canonical/tests/test_professional_semantic_identity_carrier_v1.py",
+      "git_blob_sha": "e7ff0c3a83db743e788d89b447c319492a551df3"
+    },
+    "leaf_manifest": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_LEAF_BINDING_MANIFEST_20261010_V1.json",
+      "git_blob_sha": "a7cad32c9fd969ff2c3857bb924c7bd746237ec2"
+    },
+    "domain_runtime": {
+      "path": "canonical/runtime/professional_quality_whole_leaf_domain_equivalence_v1.py",
+      "git_blob_sha": "76bf7e1a6f26ff3664ed8c355dff8a688b074159"
+    },
+    "domain_verification": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_DOMAIN_EQUIVALENCE_V1_INDEPENDENT_VERIFY_20261010_V1.json",
+      "git_blob_sha": "b6b826d1658d8a2c88ea80260ee667e86ae99394"
+    },
+    "scope_batch_verification": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_SCOPE_BATCH_VERIFY_20261010_V1.json",
+      "git_blob_sha": "4c2d40a262f18f34bb35f94b59660d60972d45ef"
+    },
+    "carrier_governance": {
+      "path": "canonical/governance/MISSION_SUFFICIENT_SEMANTIC_CARRIER_V1.json",
+      "git_blob_sha": "3c8da3adfcea2134dadae18634fc4dd7b14b19e7"
+    },
+    "claim_guard": {
+      "path": "canonical/runtime/coverage_claim_scope_guard_v1.py",
+      "git_blob_sha": "d1de61aa9bc00a184772a50f7ec9d5ee2853d747"
+    },
+    "mission_authority": {
+      "path": "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "git_blob_sha": "13c470645b037bbb46245c687dd35197b420d51a"
+    }
+  },
+  "theorem": {
+    "carrier": "OMEGA_C_EQUALS_W_C",
+    "projection": "PI_C_IS_IDENTITY_ON_COMPLETE_FROZEN_CLAIM_WORLD_STATE",
+    "factorization": "FOR_ALL_w1_w2_IN_W_C__pi_C(w1)=pi_C(w2)_IMPLIES_M_C(w1)=M_C(w2)",
+    "proof": "IDENTITY_EQUALITY_IMPLIES_W1_EQUALS_W2__FUNCTION_CONGRUENCE_THEN_IMPLIES_M_C_W1_EQUALS_M_C_W2",
+    "finite_witness_set_used": false,
+    "semantic_information_loss": false
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-professional-hard-defect-verify-20261010",
+    "carrier_id": "sprite-1bbb86ed-1f7c-409f-8397-fadc4de7a62a",
+    "workspace": "/home/sprite/pq-identity-carrier-v1",
+    "py_compile": "PASS",
+    "tests_run": 8,
+    "tests_passed": 8,
+    "tests_failed": 0,
+    "semantic_leaf_count": 12,
+    "factorization_pass_count": 12,
+    "unique_claim_id_count": 12,
+    "r12_claim_id": "05b74983836dd1f6a13a0db72443246fb74f99548f0d982a769a6a7e572e9e85"
+  },
+  "proved": [
+    "ALL_12_CURRENT_PROFESSIONAL_SEMANTIC_CLAIMS_HAVE_A_CLAIM_SCOPED_LOSSLESS_IDENTITY_CARRIER",
+    "IDENTITY_CARRIER_FACTORIZATION_IS_UNIVERSAL_BY_FORMAL_REDUCTION_NOT_FINITE_SAMPLING",
+    "PROJECTION_IS_TOTAL_AND_INJECTIVE_AND_ERASES_ZERO_SEMANTIC_INFORMATION",
+    "SCOPE_NARROWING_CLAIM_SUBSTITUTION_STALE_MISSION_AND_LOSSY_OR_NONIDENTITY_CARRIER_FAIL_CLOSED",
+    "R12_BATCH_CLAIM_ID_MATCHES_THE_VERIFIED_24_LEAF_BATCH_EPOCH"
+  ],
+  "hard_nonclaims": [
+    "NO_SEMANTIC_LEAF_PROPERTY_TRUTH",
+    "NO_COVERAGE_ROOT_CERTIFICATE_PROVED",
+    "NO_PROFESSIONAL_QUALITY_CLOSURE",
+    "NO_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY",
+    "NO_CARRIER_COMPRESSION_OR_EFFICIENCY_CLAIM"
+  ],
+  "semantic_leaf_count": 12,
+  "universal_factorization_proved_count": 12,
+  "property_truth_count_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "next": "REMOVE_MISSION_CARRIER_FACTORIZATION_FROM_THE_12_SEMANTIC_CLAIM_CUT__INSTANTIATE_CLAIM_SCOPED_CC_R1_CC_R2_CC_R3_AND_R4_FOR_THE_SMALLEST_RESIDUAL_LEAF"
+}
