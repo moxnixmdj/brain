@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_SEMANTIC_TOTALITY_CLAIM_PACK_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_SPRITE__PYCOMPILE__6_OF_6__TWELVE_DISTINCT_FROZEN_SEMANTIC_TOTALITY_CLAIMS__ZERO_PROPERTY_TRUTH_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "professional-semantic-totality-claim-pack-v1-20261010",
+    "exact_blobs": {
+      "runtime": "6f58d47a0f43be7d42385e58eb0ece282450615d",
+      "tests": "40f83e505f78603e49435a59eacdbb16e82ada76",
+      "frozen_claim_pack": "79113469ecc29271d43af82794dbb016c7c22dad",
+      "scope_batch_verification": "4c2d40a262f18f34bb35f94b59660d60972d45ef",
+      "claim_guard": "d1de61aa9bc00a184772a50f7ec9d5ee2853d747",
+      "semantic_reduction": "ab7e1c6ac1aad3b6bd3f32dfc959cefc903cbb6d"
+    }
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/pq-scope-batch-v1",
+    "py_compile": "PASS",
+    "tests_run": 6,
+    "tests_passed": 6,
+    "failures": 0,
+    "errors": 0
+  },
+  "frozen_claims": {
+    "semantic_claim_count": 12,
+    "unique_claim_id_count": 12,
+    "claim_id_set_sha256": "08a1778435a4eee9a54659c99c9d29db92fdf4f7e498900efe9103e41ce5c37b",
+    "single_active_claim_policy_preserved": true,
+    "cross_claim_root_transport_authorized": false,
+    "root_proved_claim_count": 0,
+    "property_truth_claim_count": 0
+  },
+  "proved": [
+    "ALL_TWELVE_CURRENT_PROFESSIONAL_SEMANTIC_LEAVES_HAVE_DISTINCT_CONTENT_ADDRESSED_PROPERTY_CLAIMS",
+    "CLAIM_IDS_BIND_CURRENT_MISSION_SCOPE_TARGET_PREDICATE_AND_SEMANTICS",
+    "MISSING_SEMANTIC_LEAF_FAILS_CLOSED",
+    "BOUNDED_WITNESS_GLOBAL_SELF_PROMOTION_FAILS_CLOSED",
+    "WHOLE_LEAF_SCOPE_INCOMPLETENESS_FAILS_CLOSED",
+    "MISSION_CHANGE_CHANGES_CLAIM_IDENTITIES",
+    "BOUNDED_WITNESS_CHANGE_CHANGES_ONLY_AFFECTED_CLAIM_IDENTITY"
+  ],
+  "hard_nonclaims": [
+    "NO_MISSION_SUFFICIENT_CARRIER_FACTORIZATION_PROVED",
+    "NO_CC_R1_CC_R2_OR_CC_R3_ROOT_PROOF",
+    "NO_R4_PROOF_CLOSURE",
+    "NO_SEMANTIC_PROPERTY_TRUTH_CREDIT",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY",
+    "NO_CROSS_CLAIM_ROOT_CERTIFICATE_TRANSPORT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
