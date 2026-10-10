@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_COVERAGE_COMPLETENESS_R4_ASSURANCE_PROJECTION_V3",
+  "date": "2026-10-10",
+  "status": "ACTIVE_CLAIM_FROZEN__CC_R3_FIRST_ROOT_OPEN__THREE_ROOT_CERTIFICATES_OPEN__EXECUTION_AND_ADVERSARIAL_TAIL_OPEN__ZERO_CREDIT",
+  "predecessor": {
+    "path": "canonical/governance/COVERAGE_COMPLETENESS_R4_ASSURANCE_PROJECTION_V2.json"
+  },
+  "active_claim": {
+    "path": "canonical/governance/COVERAGE_COMPLETENESS_FROZEN_CLAIM_R3_PROMOTION_SAFETY_20261010_V1.json",
+    "git_blob_sha": "a7e73285646f7d2e74fbecb9e62029896d09195c",
+    "claim_id": "65d4159e34d2f7dd7c43fdfc9480e3a58bf594e64d4005f4ced0280dcb5e4187",
+    "claim_kind": "PROPERTY_CERTIFICATE",
+    "epoch": "R4_R3_PROMOTION_SAFETY_EPOCH_20261010_V1",
+    "claim_scope": "BOUNDED_CURRENT_GENERATION_R3_PROMOTION_SAFETY_ONLY"
+  },
+  "certificate_pointer": {
+    "path": "canonical/governance/CURRENT_COVERAGE_COMPLETENESS_ROOT_CERTIFICATES.json",
+    "git_blob_sha": "79e780eb311778bb7b22d2b1c5fbb50ac26534c3"
+  },
+  "gates": {
+    "representation_closure": {
+      "status": "PROVED_CURRENT_DECLARED_REGISTRY_ONLY",
+      "closed": true
+    },
+    "claim_freeze": {
+      "status": "CLOSED__ONE_VALID_ACTIVE_FROZEN_CLAIM_BOUND",
+      "closed": true
+    },
+    "proof_closure": {
+      "status": "OPEN__EXACT_THREE_CERTIFICATE_SLOTS__CC_R3_FIRST",
+      "closed": false,
+      "open_root_ids": [
+        "CC_R3_TERMINAL_CLOSURE_V1",
+        "CC_R1_REALITY_CONTAINMENT_V1",
+        "CC_R2_MISSION_SOUNDNESS_V1"
+      ],
+      "active_claim_id": "65d4159e34d2f7dd7c43fdfc9480e3a58bf594e64d4005f4ced0280dcb5e4187",
+      "forbidden_inference": "FROZEN_CLAIM_IS_NOT_A_PROVED_ROOT_CERTIFICATE_AND_CANNOT_GRANT_TERMINAL_OR_CHECKPOINT_CREDIT"
+    },
+    "execution_closure": {
+      "status": "OPEN",
+      "closed": false,
+      "residual": "ROOT_CERTIFICATES_MUST_BIND_CURRENT_REALIZED_SYSTEM_BYTES_TO_THE_SAME_ACTIVE_CLAIM_AND_EXECUTABLE_SEMANTIC_VERIFIERS"
+    },
+    "adversarial_closure": {
+      "status": "OPEN",
+      "closed": false,
+      "residual": "INDEPENDENT_DOMAIN_LEVEL_DEFEATER_CLOSURE_REQUIRED_AFTER_ALL_THREE_SAME_CLAIM_ROOT_CERTIFICATES_EXIST"
+    }
+  },
+  "r4_closed": false,
+  "exact_next_order": [
+    "ATTACK_CC_R3_TERMINAL_CLOSURE_V1_FOR_ACTIVE_CLAIM_WITH_U_EMPTY_OR_COUNTEREXAMPLE_PROOF_AND_EXECUTABLE_SEMANTIC_VERIFIER",
+    "ATTACK_CC_R1_REALITY_CONTAINMENT_V1_FOR_SAME_ACTIVE_CLAIM",
+    "ATTACK_CC_R2_MISSION_SOUNDNESS_V1_FOR_SAME_ACTIVE_CLAIM",
+    "ONLY_AFTER_ALL_THREE_SAME_CLAIM_ROOT_CERTIFICATES_EXIST_BIND_PROOF_TO_CURRENT_REALIZATION",
+    "THEN_RUN_INDEPENDENT_ADVERSARIAL_CLOSURE"
+  ],
+  "hard_nonclaims": [
+    "NO_CC_ROOT_CERTIFICATE_PROVED_BY_CLAIM_FREEZE",
+    "NO_R4_PROOF_CLOSURE",
+    "NO_GLOBAL_MISSION_COMPLETION",
+    "NO_OPUS_CHECKPOINT_COMPLETION",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "fresh_reality_units_consumed": 0,
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
