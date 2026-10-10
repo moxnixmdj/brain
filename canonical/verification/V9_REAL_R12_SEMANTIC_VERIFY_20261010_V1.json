@@ -1,0 +1,23 @@
+{
+  "certificate": {
+    "git_blob_sha": "20a2eef7757e585f6d2fa161a6c2ee94e2c715fb",
+    "path": "canonical/evidence/v9_real_r12/V9_REAL_R12_MATERIAL_TOTALITY_CERTIFICATE_20261010_V1.json"
+  },
+  "errors": [],
+  "independent": true,
+  "pass": true,
+  "proof_mode": "INDEPENDENT_REPLAY",
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_R12_TOTALITY_SEMANTIC_INDEPENDENT_VERIFY_V1",
+  "semantic_claim_verified": true,
+  "semantic_obligation": "ALL_ROOT_RELEVANT_MATERIAL_DEFEATERS_RESOLVED_OR_PROVED_DECISION_NULL_BEFORE_POSITIVE_CERTIFICATION",
+  "semantic_property_claim_id": "11870f850b46bcfcc31094f764fc4f45c911aaac413979ceb62679ff19a53162",
+  "semantic_scope_claim_id": "05b74983836dd1f6a13a0db72443246fb74f99548f0d982a769a6a7e572e9e85",
+  "semantic_verifier": {
+    "git_blob_sha": "d11bc2335a0b24eb003cb809b5128d627f1302d4",
+    "path": "canonical/runtime/professional_r12_v9_real_docx_semantic_verifier_v1.py"
+  },
+  "target_scope_semantics": "ALL_ROOT_RELEVANT_MATERIAL_DEFEATERS_FOR_EXACT_RUN_CONTEXT_AND_EVIDENCE",
+  "terminal_credit_delta": 0,
+  "verifier_protocol": "PROFESSIONAL_R12_TOTALITY_SEMANTIC_VERIFIER_V1",
+  "verifier_result_sha256": "906a39d31ac94cec6d68221c6045c523a77ea14520c14142cdd400594d3ada33"
+}
