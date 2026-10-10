@@ -1,0 +1,10 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_RECEIPT_V1",
+  "date": "2026-10-10",
+  "status": "VERIFIED_MINIMAL_LIVE_REPAIR",
+  "problem": "The authenticated V4 audit superseded V3 as the live row-proof authority but still hardcoded V6 in audit_repo, so a future binding advance could silently replay stale shared-gap semantics.",
+  "minimal_repair": "KEEP_V3_V6_ADAPTER_O11_Q2_AND_V4_AUTHENTICATION_SEMANTICS_UNCHANGED__MAKE_ONLY_V4_AUDIT_REPO_BINDING_SELECTION_CLASSIFIER_DRIVEN_AND_FAIL_CLOSED",
+  "supersedes_unmerged_experiment": "V7_WAS_NO_LONGER_NEEDED_ONCE_LIVE_V4_WAS_IDENTIFIED__DO_NOT_MERGE_SUPERSEDED_V7_BRANCHES",
+  "verification": "canonical/verification/ESCAPE_V4_DYNAMIC_CURRENT_BINDING_VERIFY_20261010_V2.json",
+  "terminal_credit_delta": 0
+}
