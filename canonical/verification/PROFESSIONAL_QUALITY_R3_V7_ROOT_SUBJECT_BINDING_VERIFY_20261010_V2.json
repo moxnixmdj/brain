@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R3_V7_ROOT_SUBJECT_BINDING_VERIFY_20261010_V2",
+  "date": "2026-10-10",
+  "status": "PASS__REALIZATION_BOUND_R3_V2__ACTUAL_V7_RENDER_STEP_RECEIPT__DURABLE_ARTIFACT_AND_AUDIENCE_BYTES__INDEPENDENT_SPRITE_REPLAY__ZERO_QUALITY_OR_TERMINAL_AUTHORITY",
+  "root_id": "R3_REALIZATION_OBSERVATION",
+  "exact_blobs": {
+    "binding": "6d8c51e4baf6e81c66f561b62eb779b44addc0ff",
+    "verifier": "4500b9e99f0eb4e18d38d944a7efc893870d3f83",
+    "authority": "dfad0df56afb9293cc459fdb13d027423e6a9dcd",
+    "durable_evidence": "f18329cac5c702f3503863819b5e3c92cb16d382",
+    "render_step_receipt": "276ffbda0ecc68aa65228386d9ca19b3a0bc6c9b",
+    "render_step_independent_verification": "250b610205c42b8ced3c5c3eb8963dc5d770b07c",
+    "subject": "1d598bc8757017ceb34928d0df9f5fce859ef868"
+  },
+  "independent_replay": {
+    "provider": "Sprites",
+    "sprite": "brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/pq-r3-v7-materialized",
+    "py_compile": "PASS",
+    "verifier_pass": true,
+    "verifier_status": "PASS__R3_ROOT_BOUND_TO_EXACT_V7_SUBJECT_WITH_DURABLE_ARTIFACT_AND_AUDIENCE_REALIZATION"
+  },
+  "supersedes": {
+    "binding_path": "canonical/governance/PROFESSIONAL_QUALITY_R3_ROOT_SUBJECT_BINDING_20261010_V1.json",
+    "binding_git_blob_sha": "c49c120a61620d400e372884266b63ec34a054d2",
+    "reason": "V1_GRANTED_BOUNDED_ROOT_BINDING_WHILE_EXPLICITLY_LEAVING_REAL_TASK_STEP_RECEIPT_UNPROVED__V2_BINDS_ONE_ACTUAL_CONTENT_ADDRESSED_INDEPENDENTLY_VERIFIED_V7_RENDER_RECEIPT"
+  },
+  "truth_boundary": {
+    "actual_v7_render_step_receipt_proved": true,
+    "one_exact_realization_instance_proved": true,
+    "exact_artifact_bytes_proved": true,
+    "exact_audience_view_bytes_proved": true,
+    "global_r3_realization_completeness": false,
+    "arbitrary_semantic_target_selection_proved": false
+  },
+  "authority": {
+    "root_subject_binding_authority": true,
+    "global_subject_identity_authority": false,
+    "quality_authority": false,
+    "acceptance_authority": false,
+    "promotion_authority": false,
+    "terminal_authority": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "next": "ADVANCE_CURRENT_R3_BINDING_FROM_PROOF_REQUIREMENT_TO_ACTUAL_RECEIPT_PROVED__KEEP_ROOT_COUNT_3__R4_NEXT"
+}
