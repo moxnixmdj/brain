@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V13",
+  "date": "2026-10-10",
+  "status": "ACTIVE_POST_COMPOSITION_V13__PROFESSIONAL_WHOLE_LEAF_CLAIM_SCOPE_V2_BOUND__READ_ONLY_ONLY__ZERO_CREDIT",
+  "supersedes": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V12.json",
+  "runtime": {
+    "path": "canonical/runtime/capability_parallel_frontier_post_composition_v1.py",
+    "git_blob_sha": "249b08767cdf4f940ba98ea3e8fe3aff0601e349",
+    "entrypoint": "plan_current_post_composition_frontier"
+  },
+  "frontier": {
+    "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
+    "git_blob_sha": "f27b08785af220dceb5c4bcf8b32b7dd283abccb",
+    "frontier_id": "LIVE_WORK_FRONTIER_20261010_PROF12_WHOLE_LEAF_CLAIM_V2_V14"
+  },
+  "professional_whole_leaf_v2": {
+    "gate_activation_path": "canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_CERTIFICATE_GATE_ACTIVATION_20261010_V2.json",
+    "gate_activation_git_blob_sha": "34fdaf7f4a91d0e28d446a9d554c3aa0fbec8222",
+    "gate_runtime_path": "canonical/runtime/professional_quality_whole_leaf_claim_scope_gate_v2.py",
+    "gate_runtime_git_blob_sha": "d76b922e8d5c86f10568a3582759f8c23e69b2e0",
+    "gate_verification_path": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_CLAIM_SCOPE_GATE_V2_VERIFY_20261010_V1.json",
+    "gate_verification_git_blob_sha": "cb91d94dd89ec7c67aae54db3cd5319612cd43d5",
+    "readiness_verification_path": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_CERTIFICATE_READINESS_AUDIT_V2_VERIFY_20261010_V1.json",
+    "readiness_verification_git_blob_sha": "2d28d932d08753fdf14c56aa24011e625518a4ef",
+    "leaf_count": 24,
+    "admissible_v2_chain_count": 0,
+    "claim_scope_construction_required_count": 24,
+    "property_truth_ready_count": 0,
+    "domain_equivalence_required": true,
+    "scope_cover_required_after_domain_equivalence": true
+  },
+  "independent_plan_replay": {
+    "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "plan_sha256": "8b49532adefbc859843cf473b1208eac44d291dfd8c92937d2ccf714993711fe",
+    "plan_bytes": 2275,
+    "status": "PARALLEL_FRONTIER_PLAN_READY",
+    "parallel_read_only_evidence_work_ids": [
+      "BYTES_EXACT_SYMBOLIC_V24_NEXT_PHYSICAL_CUT",
+      "ESCAPE_GAP_A_AUTHENTICATED_ROW_PROOFS",
+      "ESCAPE_GAP_B_STRICT_PROGRESS_ROW_PROOFS",
+      "PROFESSIONAL_QUALITY_V7_WHOLE_LEAF_DOMAIN_EVIDENCE",
+      "TB_SCIENCE_RANK20_V3_ACTIVATION_PRESTART_EVIDENCE"
+    ],
+    "parallel_full_execution_work_ids": []
+  },
+  "authority": {
+    "read_only_evidence_plan": true,
+    "full_execution": false,
+    "promotion": false,
+    "terminal": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
