@@ -213,7 +213,12 @@ def evaluate(payload: Mapping[str, Any], *, repo_root: str | Path | None = None)
         if error is not None:
             return _fail(error, root_id=root_id)
         assert binding is not None and binding_blob is not None
-        if binding.get("schema") != v1.BINDING_SCHEMA or binding.get("root_id") != root_id:
+        expected_binding_schema = (
+            "PROJECT_BRAIN_PROFESSIONAL_QUALITY_ROOT_SUBJECT_BINDING_V2"
+            if root_id == "R3_REALIZATION_OBSERVATION"
+            else v1.BINDING_SCHEMA
+        )
+        if binding.get("schema") != expected_binding_schema or binding.get("root_id") != root_id:
             return _fail("SUBJECT_BINDING_IDENTITY_INVALID", root_id=root_id)
         subject_kind = binding.get("subject_kind")
         subject_id = binding.get("subject_id")
