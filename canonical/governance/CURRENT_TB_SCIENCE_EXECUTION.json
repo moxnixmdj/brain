@@ -1,14 +1,14 @@
 {
-  "schema": "PROJECT_BRAIN_CURRENT_TB_SCIENCE_EXECUTION_POINTER_V2",
+  "schema": "PROJECT_BRAIN_CURRENT_TB_SCIENCE_EXECUTION_POINTER_V3",
   "date": "2026-10-10",
-  "status": "RANK18_V6_FINAL_ZERO__EIGHTEEN_TRIALS_CONSUMED__EIGHTEEN_FINAL_FAILURES__NO_PENDING__RANK19_EXECUTION_FROZEN_PENDING_ZERO_EXPOSURE_PLANNER_REPAIR",
+  "status": "PLANNER_V7_V13_ZERO_EXPOSURE_REPAIR_VERIFIED__EIGHTEEN_TRIALS_CONSUMED__RANK19_UNEXPOSED_UNARMED_PENDING_FRESH_V13_PUBLIC_SURFACE_RESEAL",
   "current_result": {
     "path": "canonical/verification/TB_SCIENCE_RANK18_V6_IRREVERSIBLE_RESULT_TRUTH_20261010_V1.json",
     "git_blob_sha": "2459d821057d6f7178ffea440fb19966e56a3d89"
   },
   "current_ledger": {
-    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V37.json",
-    "git_blob_sha": "1f44e46869055cc046da9c53fcae485615f239f9"
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V38.json",
+    "git_blob_sha": "254f91dd9791c7e978917bfcac636289f2c64d0b"
   },
   "verification": {
     "path": "canonical/verification/TB_SCIENCE_RANK18_CROSS_COMMIT_CAS_AUTHORITY_CORRECTION_20261010_V1.json",
@@ -29,7 +29,7 @@
   },
   "acceptance_credit_delta": 0,
   "terminal_credit_delta": 0,
-  "next": "ZERO_EXPOSURE_DIAGNOSE_AND_VERIFY_GENERIC_SCIENCE_PLANNER_PRE_ACTION_FAILURE__DO_NOT_ARM_RANK19_EXECUTION",
+  "next": "BUILD_AND_VERIFY_FRESH_V13_PROOF_CARRYING_PUBLIC_EXECUTION_SURFACE_FOR_RANK19__DO_NOT_READ_TASK_BEFORE_RESEAL_AND_ACTIVATION",
   "finalized_rank18": {
     "ledger_schedule_rank": 18,
     "slot_id": "terminal-bench-science/longitudinal-clinical-agent::trial-0",
@@ -47,5 +47,27 @@
     "failure_root_class": "PLANNER_CONTROLLER_FAILURE_BEFORE_FIRST_ACTION",
     "retry_authority": false,
     "replacement_authority": false
+  },
+  "runtime_guard": {
+    "path": "canonical/governance/CURRENT_TB_SCIENCE_RUNTIME_GUARD.json",
+    "git_blob_sha": "cdc639c418c6c5a3ee5a1538f4c328e243883261"
+  },
+  "planner_repair_verification": {
+    "path": "canonical/verification/TB_SCIENCE_PLANNER_V7_ZERO_EXPOSURE_VERIFICATION_20261010_V1.json",
+    "git_blob_sha": "9797cc625e3e33bb905cf23fa6c79f66dc9794db",
+    "zero_exposure_verified": true,
+    "rank19_execution_authority": false
+  },
+  "rank19": {
+    "ledger_schedule_rank": 19,
+    "frozen_manifest_schedule_order": 18,
+    "slot_id": "terminal-bench-science/diag-chipseq::trial-0",
+    "task_digest": "sha256:437bfacaebda9ce9905d54bdfe7247aec9649038206512c64547021f42e3950b",
+    "task_read": false,
+    "task_started": false,
+    "benchmark_trials_consumed": 0,
+    "task_read_authority": false,
+    "execution_authority": false,
+    "blocker": "FRESH_PROOF_CARRYING_PUBLIC_EXECUTION_SURFACE_RESEAL_REQUIRED_FOR_V13"
   }
 }
