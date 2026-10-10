@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_R2_DECISION_INTELLIGENCE_POINTER_V1",
-  "date": "2026-10-09",
-  "status": "ACTIVE_CURRENT_R2_AUTHORITY__V66__FORTY_DIRECT_ROUTES__THIRTY_SIX_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__DERIVED_TYPED_TERMINAL_SIGNATURES_ROUTE_BOUND__MREL_NECESSARY_PROPERTY_AUTHORITY_BOUND__TLAC_MREL_SHARED_SIGNATURE_NONSEPARATION_GUARD_BOUND__OEWN_DECISION_MANIFEST_LATTICE_BOUND__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_REMAINS",
+  "date": "2026-10-10",
+  "status": "ACTIVE_CURRENT_R2_AUTHORITY__V67__FORTY_DIRECT_ROUTES__THIRTY_SIX_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__DERIVED_TYPED_TERMINAL_SIGNATURES_ROUTE_BOUND__MREL_NECESSARY_PROPERTY_AUTHORITY_BOUND__TLAC_MREL_SHARED_SIGNATURE_NONSEPARATION_GUARD_BOUND__OEWN_DECISION_MANIFEST_LATTICE_LIVE_DYNAMIC_ROUTE_BOUND__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_REMAINS",
   "mission_objective": {
     "path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json"
   },
@@ -175,14 +175,15 @@
     "fixed_point_controller_git_blob_sha": "7c6b28754fa8851f220395df1615dd6afe193b3a",
     "dynamic_admissions": {
       "pointer_path": "canonical/governance/CURRENT_R2_DIRECT_ROUTE_ADMISSIONS.json",
-      "pointer_git_blob_sha": "8d8a5cf09a433c2df9f578bb689e5743971346a0",
-      "manifest_path": "canonical/governance/R2_DIRECT_ROUTE_DYNAMIC_ADMISSIONS_4b1e16a2f20130c8.json",
-      "manifest_git_blob_sha": "4b1e16a2f20130c8463a7ed1031524814a2f834e",
-      "admission_count": 3,
+      "pointer_git_blob_sha": "598faf4bdb709a40bc8062226b539a68d341217a",
+      "manifest_path": "canonical/governance/R2_DIRECT_ROUTE_DYNAMIC_ADMISSIONS_450e876dd4258304.json",
+      "manifest_git_blob_sha": "450e876dd4258304846b96daff30b542a50d7e79",
+      "admission_count": 4,
       "route_ids": [
         "DIRECT_ADEQUACY::CROSS_DOCUMENT_SEMANTIC_REGISTRY_V3_LATTICE_V8",
         "DIRECT_ADEQUACY::FINANCE_MARKED_COREFERENCE_DERIVED_TYPED_TERMINALS_V1",
-        "DIRECT_ADEQUACY::FINANCE_MARKED_MENTION_UNIVERSE_AMBIGUITY_CONTROL_V1"
+        "DIRECT_ADEQUACY::FINANCE_MARKED_MENTION_UNIVERSE_AMBIGUITY_CONTROL_V1",
+        "DIRECT_ADEQUACY::OEWN_DECISION_MANIFEST_LATTICE_V1"
       ],
       "legacy_activation_route_count_unchanged": 39,
       "verification_authority_mutated": false,
@@ -1007,9 +1008,16 @@
           "distinct_terminal_senses_require_complete_separating_observation_or_remain_open": true,
           "unrecognized_prose_to_sense_inference_authority": false,
           "direct_route_implementation_verified": true,
-          "current_dynamic_route_admitted": false,
+          "current_dynamic_route_admitted": true,
           "semantic_truth_authority_for_exact_source_clauses": true,
-          "terminal_authority": false
+          "terminal_authority": false,
+          "dynamic_candidate_path": "canonical/governance/R2_DIRECT_ROUTE_DEPLOYMENT_CANDIDATE_OEWN_DECISION_MANIFEST_LATTICE_20261010_V1.json",
+          "dynamic_candidate_git_blob_sha": "9faae3a199dae1c6eae7d63d29a1f6c55e3e96b3",
+          "dynamic_independent_receipt_path": "canonical/verification/R2_DIRECT_ROUTE_DEPLOYMENT_RECEIPT_OEWN_DECISION_MANIFEST_LATTICE_20261010_V1.json",
+          "dynamic_independent_receipt_git_blob_sha": "a33d71c46d3ef1609cbe16146056b0a95e07d141",
+          "dynamic_promotion_verification_path": "canonical/verification/R2_OEWN_DECISION_MANIFEST_LATTICE_DYNAMIC_ADMISSION_PROMOTION_VERIFY_20261010_V1.json",
+          "dynamic_manifest_path": "canonical/governance/R2_DIRECT_ROUTE_DYNAMIC_ADMISSIONS_450e876dd4258304.json",
+          "dynamic_manifest_git_blob_sha": "450e876dd4258304846b96daff30b542a50d7e79"
         }
       ],
       "decision_relative_sense_control": {
@@ -2079,8 +2087,36 @@
     "distinct_terminal_senses_require_complete_separating_observation_or_remain_open": true,
     "unrecognized_prose_to_sense_inference_authority": false,
     "direct_route_implementation_verified": true,
-    "current_dynamic_route_admitted": false,
+    "current_dynamic_route_admitted": true,
     "semantic_truth_authority_for_exact_source_clauses": true,
-    "terminal_authority": false
+    "terminal_authority": false,
+    "dynamic_candidate_path": "canonical/governance/R2_DIRECT_ROUTE_DEPLOYMENT_CANDIDATE_OEWN_DECISION_MANIFEST_LATTICE_20261010_V1.json",
+    "dynamic_candidate_git_blob_sha": "9faae3a199dae1c6eae7d63d29a1f6c55e3e96b3",
+    "dynamic_independent_receipt_path": "canonical/verification/R2_DIRECT_ROUTE_DEPLOYMENT_RECEIPT_OEWN_DECISION_MANIFEST_LATTICE_20261010_V1.json",
+    "dynamic_independent_receipt_git_blob_sha": "a33d71c46d3ef1609cbe16146056b0a95e07d141",
+    "dynamic_promotion_verification_path": "canonical/verification/R2_OEWN_DECISION_MANIFEST_LATTICE_DYNAMIC_ADMISSION_PROMOTION_VERIFY_20261010_V1.json",
+    "dynamic_manifest_path": "canonical/governance/R2_DIRECT_ROUTE_DYNAMIC_ADMISSIONS_450e876dd4258304.json",
+    "dynamic_manifest_git_blob_sha": "450e876dd4258304846b96daff30b542a50d7e79"
+  },
+  "r2_v67_oewn_dynamic_admission_reconciliation": {
+    "status": "RECONCILED__V66_SEMANTIC_AUTHORITY_PRESERVED__OEWN_CLOSED_LATTICE_ROUTE_NOW_LIVE_DYNAMIC__ONE_PRIMARY_RESIDUAL_UNCHANGED__ZERO_CREDIT",
+    "prior_version": "V66",
+    "current_version": "V67",
+    "scheduler_cut_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V61.json",
+    "scheduler_cut_git_blob_sha": "aeea6e38637d0fe8642847f446de730724e40120",
+    "dynamic_pointer_path": "canonical/governance/CURRENT_R2_DIRECT_ROUTE_ADMISSIONS.json",
+    "dynamic_pointer_git_blob_sha": "598faf4bdb709a40bc8062226b539a68d341217a",
+    "dynamic_manifest_path": "canonical/governance/R2_DIRECT_ROUTE_DYNAMIC_ADMISSIONS_450e876dd4258304.json",
+    "dynamic_manifest_git_blob_sha": "450e876dd4258304846b96daff30b542a50d7e79",
+    "dynamic_admission_count": 4,
+    "route_id": "DIRECT_ADEQUACY::OEWN_DECISION_MANIFEST_LATTICE_V1",
+    "candidate_path": "canonical/governance/R2_DIRECT_ROUTE_DEPLOYMENT_CANDIDATE_OEWN_DECISION_MANIFEST_LATTICE_20261010_V1.json",
+    "independent_receipt_path": "canonical/verification/R2_DIRECT_ROUTE_DEPLOYMENT_RECEIPT_OEWN_DECISION_MANIFEST_LATTICE_20261010_V1.json",
+    "promotion_verification_path": "canonical/verification/R2_OEWN_DECISION_MANIFEST_LATTICE_DYNAMIC_ADMISSION_PROMOTION_VERIFY_20261010_V1.json",
+    "semantic_authority_delta": 0,
+    "primary_unsolved_count_delta": 0,
+    "finance_tail_closed": false,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
   }
 }
