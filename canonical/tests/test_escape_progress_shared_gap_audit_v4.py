@@ -10,7 +10,7 @@ from canonical.runtime import escape_progress_shared_gap_audit_v4 as v4
 
 ROOT=Path(__file__).resolve().parents[2]
 M=json.loads((ROOT/"canonical/governance/ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_20261010_V2.json").read_text())
-B=json.loads((ROOT/"canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V5.json").read_text())
+B=json.loads((ROOT/"canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V6.json").read_text())
 
 def _blob(data):
     return hashlib.sha1(b"blob "+str(len(data)).encode()+bytes([0])+data).hexdigest()
