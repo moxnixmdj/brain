@@ -187,5 +187,26 @@
     "subsystem": "polys",
     "fresh_loaded_raw_python_source_bytes": 1517336,
     "note": "After the new cuts, polys remains the largest retained source concentration. Continue with operation-level decomposition of factor/coefficient/exact roots degree <=4, prioritizing import-only generic polynomial machinery and preserving fail-closed scope."
+  },
+  "next_frozen_qualification": {
+    "id": "QUAL8",
+    "status": "FROZEN_BEFORE_ANY_POST_FRONTIER_PRUNING",
+    "cases": 2640,
+    "corpus_sha256": "640f06e78cd3394e00713084ec6a3aafbd7b1ba0f0dcaa17140c74bb920b79fc",
+    "generator_sha256": "de6cf261f4e78b010c2454347409a309880066e18f89f7953bb477a7502f59e4",
+    "spent": false
+  },
+  "execution_bundle": {
+    "local_bundle_bytes": 1299848,
+    "local_bundle_sha256": "77bf99bc0293dcdd78da48a4429e4b7dca4a7552df350e9ac8712233038bfd76",
+    "library_persistence_status": "FAILED__CONTAINER_SESSION_EXPIRED",
+    "canonical_reconstruction_recipe_status": "LOCALLY_VERIFIED__GITHUB_UPLOAD_BLOCKED_BY_CONNECTOR_SAFETY_CHECK",
+    "reconstruction_verification": {
+      "manifest_sha256": "ebecc222feb7ec428e7ac9e667319d41f943358a454df6d288efae0c10ac940c",
+      "files": 316,
+      "raw_python_source_bytes": 6828853,
+      "qualification_replay": "2520/2520"
+    },
+    "rule": "Do not claim the binary bundle or reconstruction recipe is durably stored in Brain until a supported persistence path succeeds."
   }
 }
