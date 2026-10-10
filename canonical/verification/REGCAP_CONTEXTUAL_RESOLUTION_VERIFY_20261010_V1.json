@@ -1,0 +1,88 @@
+{
+  "schema": "PROJECT_BRAIN_REGCAP_CONTEXTUAL_RESOLUTION_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_BRANCH_BYTES__43_OF_43_FOCUSED_TESTS__LIVE_BIS_FSB_END_TO_END_REPLAY_PASS__PYCOMPILE_PASS__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "regcap-contextual-observation-compiler-v1-20261010-sol",
+    "exact_blobs": {
+      "canonical/runtime/regcap_contextual_observation_compiler_v1.py": "fe531b0a9923511d0b5bec1a450c917c0e03b042",
+      "canonical/runtime/regcap_contextual_resolution_v1.py": "44153b1ea99b5e1f456df83b784e1d6a0e82abc5",
+      "canonical/tests/test_regcap_contextual_observation_compiler_v1.py": "d5b971896c4fd4056e25310624d1712506f4c94f",
+      "canonical/tests/test_regcap_contextual_resolution_v1.py": "c5fed15691d87da66266ddbfdc5d6378f1a93b7c"
+    }
+  },
+  "independent_carrier": {
+    "name": "participial-disposition-verify-20261009-sol",
+    "sprite_id": "sprite-72f2a31b-c09c-49e0-bfe0-279786ee2d56",
+    "workspace": "/home/sprite/contextual_resolution_verify",
+    "assembly": "EXACT_CURRENT_MAIN_DEPENDENCY_BYTES_PLUS_EXACT_BRANCH_SUBJECT_BYTES"
+  },
+  "verification": {
+    "py_compile": "PASS",
+    "contextual_observation_suite": {
+      "tests_run": 16,
+      "failures": 0,
+      "errors": 0
+    },
+    "contextual_resolution_suite": {
+      "tests_run": 15,
+      "failures": 0,
+      "errors": 0
+    },
+    "current_matrix_suite": {
+      "tests_run": 12,
+      "failures": 0,
+      "errors": 0
+    },
+    "total_focused_tests": 43,
+    "live_https_end_to_end_replay": {
+      "result": "PASS",
+      "matrix_sha256": "41ec084f976e57b4bf5b51b5f824724b5b6ab9842df06012604313659405f283",
+      "cases": {
+        "CCOB": {
+          "input_class": "2.5_PERCENT_CET1_ABOVE_REGULATORY_MINIMUM",
+          "observation_id": "STRUCTURAL_SIGNATURE_CLASS",
+          "selected_concept_id": "REGCAP::CCOB"
+        },
+        "CCYB": {
+          "input_class": "RELEASE_WHEN_SYSTEM_WIDE_RISK_CRYSTALLISES_OR_DISSIPATES",
+          "observation_id": "FUNCTIONAL_SIGNATURE_CLASS",
+          "selected_concept_id": "REGCAP::CCYB"
+        },
+        "TLAC": {
+          "input_class": "G_SIB_LOSS_ABSORPTION_RECAPITALISATION_IN_RESOLUTION",
+          "observation_id": "FUNCTIONAL_SIGNATURE_CLASS",
+          "selected_concept_id": "REGCAP::TLAC"
+        }
+      },
+      "candidate_completeness": "INDEPENDENT_TASK_SCOPE_RECEIPT_STUB_ONLY__NOT_PRODUCED_BY_THIS_PR"
+    }
+  },
+  "proved": [
+    "EXACT_CONTROLLED_CONTEXT_SPANS_CAN_COMPILE_TO_AUTHENTICATED_REGCAP_MATRIX_OBSERVATION_OUTCOMES",
+    "CCOB_FUNCTIONAL_AND_STRUCTURAL_SIGNATURES_ARE_SUPPORTED",
+    "CCYB_FUNCTIONAL_STRUCTURAL_AND_RELEASABILITY_SIGNATURES_ARE_SUPPORTED",
+    "TLAC_FUNCTIONAL_AND_FRAMEWORK_SIGNATURES_ARE_SUPPORTED",
+    "PARTIAL_OR_SUGGESTIVE_CONTEXTS_REMAIN_UNRESOLVED",
+    "CONTEXT_OBSERVATIONS_DO_NOT_MINT_CONCEPT_IDENTITY",
+    "CONCEPT_SELECTION_REQUIRES_SEPARATE_INDEPENDENT_TASK_CANDIDATE_SET_COMPLETENESS",
+    "WITHOUT_CANDIDATE_SET_COMPLETENESS_EVEN_A_UNIQUE_MATRIX_MATCH_DOES_NOT_RESOLVE",
+    "WITH_AUTHENTICATED_COMPLETE_CANDIDATE_SET_AND_UNIQUE_MATRIX_MATCH_THE_BOUNDED_CONCEPT_CAN_BE_RESOLVED",
+    "THREE_WAY_FRAMEWORK_CLASS_REMAINS_AMBIGUOUS_WHEN_CCOB_AND_CCYB_SHARE_THE_OUTCOME",
+    "OUTSIDE_MATRIX_CANDIDATES_FAIL_CLOSED",
+    "NO_POLICY_ADEQUACY_EXECUTION_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "hard_nonclaims": [
+    "NO_GLOBAL_REGCAP_CANDIDATE_UNIVERSE_COMPLETENESS",
+    "NO_AUTOMATIC_CANDIDATE_SET_COMPLETENESS_PRODUCTION",
+    "NO_GENERAL_NATURAL_LANGUAGE_SEMANTIC_PARSER",
+    "NO_UNBOUNDED_SYNONYMY_WORD_SENSE_OR_ONTOLOGY_MAPPING",
+    "NO_SELECTION_FROM_PARTIAL_CONTEXT_OR_PROPERTY_CORRELATION",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
