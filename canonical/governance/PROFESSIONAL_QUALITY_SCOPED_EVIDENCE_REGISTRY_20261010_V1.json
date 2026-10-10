@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_REGISTRY_V1",
   "date": "2026-10-10",
-  "status": "ACTIVE__FIFTEEN_CLAIM_SCOPED_CAPABILITIES__R1_R6_R7_R10_R11_R12_BOUNDED_SEMANTIC_EVIDENCE__ZERO_GLOBAL_LEAF_CREDIT",
+  "status": "ACTIVE__SIXTEEN_CLAIM_SCOPED_CAPABILITIES__R1_R6_R7_R8_R10_R11_R12_BOUNDED_SEMANTIC_EVIDENCE__ZERO_GLOBAL_LEAF_CREDIT",
   "entries": [
     {
       "scope_id": "PQ::R7::SINGLE_EDIT::UVCK_DEFEATER_ORDER_REPAIR",
@@ -416,6 +416,35 @@
       "scope_governance": {
         "path": "canonical/governance/PROFESSIONAL_QUALITY_R10_DECISION_SEMANTIC_SCOPE_20261010_V1.json",
         "git_blob_sha": "40149db88374c054fd974cc121ee464a3d3996fd"
+      },
+      "global_leaf_closure": false,
+      "global_root_closure": false,
+      "semantic_leaf_credit": false,
+      "execution_leaf_credit": false,
+      "terminal_credit_delta": 0
+    },
+    {
+      "scope_id": "PQ::R8::POPULATION_SEMANTICS::FROZEN_512",
+      "root_id": "R8_POPULATION_CONTEXT_OPERATOR",
+      "contributes_to_leaf_ids": [
+        "PQ::R8_POPULATION_CONTEXT_OPERATOR::SEMANTIC"
+      ],
+      "claim_kind": "FROZEN_512_CASE_DELEGATION_POPULATION_SEMANTICS",
+      "source_receipt": {
+        "path": "canonical/verification/PROFESSIONAL_QUALITY_R8_POPULATION_SEMANTIC_VERIFY_20261010_V1.json",
+        "git_blob_sha": "e47503a3b1f61bbb9effa04edccbf158b8b28e96"
+      },
+      "reusable_compiler": {
+        "path": "canonical/runtime/professional_r8_population_semantic_certificate_v1.py",
+        "git_blob_sha": "f8335409ccc105f5b96b76672047f2d323156189"
+      },
+      "compiler_verification": {
+        "path": "canonical/verification/PROFESSIONAL_QUALITY_R8_POPULATION_SEMANTIC_VERIFY_20261010_V1.json",
+        "git_blob_sha": "e47503a3b1f61bbb9effa04edccbf158b8b28e96"
+      },
+      "scope_governance": {
+        "path": "canonical/governance/PROFESSIONAL_QUALITY_R8_POPULATION_SEMANTIC_SCOPE_20261010_V1.json",
+        "git_blob_sha": "5bdcf0f7f46daf9abc2cca90524e702c9b601007"
       },
       "global_leaf_closure": false,
       "global_root_closure": false,
