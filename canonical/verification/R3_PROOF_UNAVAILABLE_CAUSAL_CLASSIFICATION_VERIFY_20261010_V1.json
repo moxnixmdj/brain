@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_R3_PROOF_UNAVAILABLE_CAUSAL_CLASSIFICATION_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__FOCUSED_6_OF_6__REAL_DURABLE_STATE_REPLAY_CAUSALLY_CORRECTED__ZERO_TERMINAL_CREDIT",
+  "subject_branch": "brain/proof-gap-classify-20261010",
+  "base_main_sha": "7f09b66eee44e1997c7c28638e2617f667150c29",
+  "exact_git_blobs": {
+    "canonical/runtime/r3_structural_adapter_rule_acquisition_provider_v1.py": "b224f2e5f56140930ac3750a79e097429b81e081",
+    "canonical/runtime/one_shot_verified_closure_v1.py": "605fe5a36e26aef51f93c4a5b3e43483abea2c19",
+    "canonical/tests/test_r3_structural_adapter_rule_acquisition_provider_v1.py": "70c6971805b8eec15a4b972f2639d91d523a3a58",
+    "canonical/tests/test_one_shot_verified_closure_v1.py": "2a85759d3c52447e13ce1a624148008982e9cfd8"
+  },
+  "focused_remote_verification": {
+    "carrier": {
+      "name": "brain-r3-structural-provider-verify-20261010",
+      "sprite_id": "sprite-4c7dc4a8-ac7d-44a7-b49d-0fdf1f321004"
+    },
+    "result": "6_OF_6_PASS",
+    "proved": [
+      "MISSING_RETAINED_PROOF_RETURNS_TYPED_EVIDENCE_REQUIREMENT",
+      "MISSING_RETAINED_PROOF_DOES_NOT_MUTATE_ADAPTER_FRONTIER",
+      "PROVED_STRUCTURAL_PROFILE_STILL_INSTALLS_RULE",
+      "NO_PROVED_PROFILE_STILL_FAILS_WITHOUT_MUTATION",
+      "VERIFICATION_AUTHORITY_REWRITE_STILL_REJECTED",
+      "ONE_SHOT_CLASSIFIES_PROOF_UNAVAILABLE_FRONTIER_RETRY_AS_EVIDENCE_GAP"
+    ]
+  },
+  "real_durable_state_replay": {
+    "carrier": {
+      "name": "brain-live-runtime-v1-verify-20261008",
+      "sprite_id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13"
+    },
+    "source_state": "/home/sprite/unified-current-byte-verify/canonical/runtime/SELF_IMPROVEMENT_STATE_V1.json",
+    "executed_on_copy": true,
+    "source_state_mutated": false,
+    "observed_success_surfaces": [
+      "SPECIALIZED:P3_REAL_CONTEXT_V12",
+      "LIVE_RUNTIME"
+    ],
+    "retained_proof_available": false,
+    "prior_incorrect_residual": "ROOT1_ACQUISITION_EXHAUSTED_ON_CURRENT_PROVIDER_FRONTIER",
+    "corrected_evidence_residual": "NEW_PROOF_BEARING_EXPERIENCE_REQUIRED__SUCCESS_PROOF_UNAVAILABLE",
+    "final_one_shot_status": "OPEN__INTERNAL_UNSOLVED__PENDING_ACQUISITION_OR_EXPERIMENT",
+    "frontier_progress_claimed": false,
+    "verification_authority_changed": false,
+    "terminal_credit_delta": 0
+  },
+  "causal_interpretation": {
+    "provider_route_exists": true,
+    "provider_was_exercised": true,
+    "current_two_historical_successes_are_not_proof_bearing": true,
+    "therefore_current_blocker_for_those_episodes": "NEW_PROOF_BEARING_EXPERIENCE_OR_EQUIVALENT_RETAINED_PROOF_REQUIRED",
+    "root1_provider_exhaustion_for_those_episodes": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_TWO_HISTORICAL_SUCCESSES_BECAME_LEARNABLE",
+    "NO_CLAIM_EFFECT_SAFE_REPLAY_OF_THE_HISTORICAL_SUCCESSES",
+    "NO_CLAIM_ALL_SUCCESS_ADAPTER_AUTHORSHIP_IS_CLOSED",
+    "NO_FULL_REPOSITORY_SUITE_REPLAY",
+    "NO_TERMINAL_AUTHORITY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0
+}
