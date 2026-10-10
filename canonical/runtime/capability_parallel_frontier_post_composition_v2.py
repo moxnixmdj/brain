@@ -10,6 +10,12 @@ PROF="canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json"
 ASSURANCE="canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json"
 BYTES="canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json"
 R2="canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json"
+RESIDUAL="canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json"
+RESIDUAL_SCHEMA="PROJECT_BRAIN_CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1"
+GAP_A_WORK="ESCAPE_GAP_A_AUTHENTICATED_ROW_PROOFS"
+GAP_B_WORK="ESCAPE_GAP_B_STRICT_PROGRESS_ROW_PROOFS"
+OQ_WORK="ESCAPE_OQ_SCOPE_COMPLETE_ACCEPTANCE_INSTANTIATION"
+PARKED_TB=["TB_SCIENCE_GE_58_7"]
 PROF_WORK="PROFESSIONAL_QUALITY_V7_PROPERTY_TRUTH_DEPLETION"
 ASSURANCE_WORK="ASSURANCE_UVCK_V2_PROMOTION_GATES"
 R2_WORK="R2_FINANCE_SEMANTIC_ADEQUACY_TAIL"
@@ -93,12 +99,40 @@ def _r2(f:dict,root:Path):
  ev=dict(row.get("read_only_evidence") or {}); ev.update({"source":R2,"source_git_blob_sha":sha,"general_mechanism_closed":True,"finance_tail_closed":False,"wake_gate":False,"vector_bounds_complete":False,"dynamic_current_pointer_follow":True}); row["read_only_evidence"]=ev
  return {"git_blob_sha":sha,"version":ver}
 
+def _class(d:Mapping[str,Any],rid:str):
+ rows=d.get("classifications")
+ if not isinstance(rows,list): raise PostCompositionFrontierV2Error("RESIDUAL_CLASSIFICATIONS")
+ hit=[x for x in rows if isinstance(x,Mapping) and x.get("residual_id")==rid]
+ if len(hit)!=1: raise PostCompositionFrontierV2Error("RESIDUAL_CLASS_CARDINALITY:"+rid)
+ return hit[0]
+
+def _residual(f:dict,root:Path):
+ d,sha=_load(root,RESIDUAL)
+ if d.get("schema")!=RESIDUAL_SCHEMA: raise PostCompositionFrontierV2Error("RESIDUAL_SCHEMA")
+ a=_class(d,"ESCAPE_GAP_A_ACQUISITION_TOTALITY"); b=_class(d,"ESCAPE_GAP_B_INTERNAL_ROUTE_STRICT_PROGRESS"); oq=_class(d,"ESCAPE_OQ_SHARED_ACCEPTANCE_LAWS")
+ if a.get("active_gap_a_count")!=12 or a.get("parked_unresolved_count")!=1 or a.get("parked_unresolved_rows")!=PARKED_TB: raise PostCompositionFrontierV2Error("RESIDUAL_GAP_A_TOPOLOGY")
+ latest=a.get("latest_causal_reclassification"); bridge=a.get("gap_a_policy_cover_adapter")
+ if not isinstance(latest,Mapping) or (latest.get("effective_gap_a_active_count"),latest.get("effective_gap_b_active_count"),latest.get("parked_unresolved_count"))!=(12,0,1): raise PostCompositionFrontierV2Error("RESIDUAL_CAUSAL_TOPOLOGY")
+ if not isinstance(bridge,Mapping) or bridge.get("real_row_proofs")!=0: raise PostCompositionFrontierV2Error("RESIDUAL_GAP_A_PROOF_STATE")
+ if b.get("active_gap_b_count")!=0 or b.get("parked_unresolved_count")!=1 or b.get("parked_rows")!=PARKED_TB: raise PostCompositionFrontierV2Error("RESIDUAL_GAP_B_TOPOLOGY")
+ laws=oq.get("shared_laws_bound")
+ if not isinstance(laws,Mapping) or laws.get("objective_acceptance") is not True or laws.get("qualitative_acceptance") is not True or oq.get("current_row_acceptance_closed")!={"O":0,"Q":0}: raise PostCompositionFrontierV2Error("RESIDUAL_OQ_TOPOLOGY")
+ rows={GAP_A_WORK:"READY_EVIDENCE",GAP_B_WORK:"PARKED",OQ_WORK:"AUDIT_ONLY"}
+ for wid,state in rows.items():
+  row=_cand_id(f,wid)
+  if row.get("source")!=RESIDUAL or row.get("scheduler_state")!=state: raise PostCompositionFrontierV2Error("RESIDUAL_CANDIDATE_STATE:"+wid)
+  ev=row.get("read_only_evidence")
+  if isinstance(ev,Mapping):
+   ev=dict(ev); ev.update({"source":RESIDUAL,"source_git_blob_sha":sha,"dynamic_current_pointer_follow":True}); row["read_only_evidence"]=ev
+ _source(f,RESIDUAL)["git_blob_sha"]=sha
+ return {"git_blob_sha":sha,"active_gap_a_count":12,"active_gap_b_count":0,"parked_unresolved_count":1}
+
 def refresh_post_composition_currentness(frontier:Mapping[str,Any],*,root:Path=core.ROOT):
- f=json.loads(json.dumps(frontier)); p=_prof(f,root); a=_assurance(f,p,root); b=_bytes(f,root); r=_r2(f,root)
+ f=json.loads(json.dumps(frontier)); p=_prof(f,root); a=_assurance(f,p,root); b=_bytes(f,root); r=_r2(f,root); q=_residual(f,root)
  for row in f.get("candidates",[]):
   if isinstance(row,dict) and row.get("scheduler_state")=="PARKED":
    row["original_scheduler_state"]="PARKED"; row["scheduler_state"]="BLOCKED"
- f["dynamic_currentness"]={"professional_pointer_follow":True,"assurance_pointer_follow":True,"bytes_pointer_follow":True,"r2_pointer_follow":True,"parked_normalized_to_nonprimary":True,"professional":p,"assurance":a,"bytes":b,"r2":r,"other_source_families_dynamic_follow":False}
+ f["dynamic_currentness"]={"professional_pointer_follow":True,"assurance_pointer_follow":True,"bytes_pointer_follow":True,"r2_pointer_follow":True,"residual_pointer_follow":True,"parked_normalized_to_nonprimary":True,"professional":p,"assurance":a,"bytes":b,"r2":r,"residual":q,"other_source_families_dynamic_follow":False}
  return f
 
 def plan_current_post_composition_frontier():
