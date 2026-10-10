@@ -20,7 +20,7 @@
   },
   "scheduler_cut": {
     "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261010_V66.json",
-    "git_blob_sha": "466d514a193adfaf7a0bc78a56df10195e414928",
+    "git_blob_sha": "97e40427e90c4e3cc95ec829859b8de31d1c8531",
     "status": "ACTIVE__GENERAL_CONTROL_MECHANISM_CLOSED__FORTY_DIRECT_ROUTES__THIRTY_SIX_BOUNDED_FAMILIES__FOUR_WAY_SHARED_LOSS_ABSORPTION_NONSEPARATION_BOUND__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL__GDPVAL_DORMANT__ZERO_TERMINAL_CREDIT"
   },
   "direct_adequacy": {
@@ -1158,27 +1158,6 @@
           "open_world_candidate_universe_complete": false,
           "policy_adequacy_authority": false,
           "terminal_authority": false
-        },
-        {
-          "id": "REGCAP_FOUR_WAY_SHARED_LOSS_ABSORPTION_NONSEPARATION_GUARD",
-          "state": "CLOSED_FOR_EXACT_DECLARED_FOUR_CONCEPT_BOUND_FRONTIER__PROPERTY_PROVED_NONSEPARATING",
-          "runtime": "canonical/runtime/regcap_four_way_loss_absorption_nonseparation_guard_v1.py",
-          "runtime_git_blob_sha": "5100f2a217236a74b337c506381fda95dd6003b5",
-          "verification": "canonical/verification/REGCAP_FOUR_WAY_LOSS_ABSORPTION_NONSEPARATION_VERIFY_20261010_V1.json",
-          "verification_git_blob_sha": "d4fe09e0d7045443a5625c9f6d2af62523c5c8e9",
-          "shared_property": "DISPOSITION::LOSS_ABSORPTION",
-          "candidate_concept_ids": [
-            "REGCAP::CCOB",
-            "REGCAP::CCYB",
-            "REGCAP::TLAC",
-            "REGCAP::MREL"
-          ],
-          "property_separates_any_candidate": false,
-          "reverse_classification_authorized": false,
-          "additional_authenticated_discriminator_required": true,
-          "candidate_universe_complete": false,
-          "global_semantic_identity_authority": false,
-          "terminal_authority": false
         }
       ],
       "decision_relative_sense_control": {
@@ -1384,7 +1363,27 @@
         "verification": "canonical/verification/PROOF_CARRYING_DOMAIN_MAPPING_VERIFY_20261009_V1.json",
         "opaque_remainder_without_completeness": true,
         "open_world_ontology_closed": false
-      }
+      },
+      "verified_negative_controls": [
+        {
+          "id": "REGCAP_FOUR_WAY_SHARED_LOSS_ABSORPTION_NONSEPARATION_GUARD",
+          "state": "CLOSED_NEGATIVE_CONTROL__EXACT_DECLARED_FOUR_CONCEPT_BOUND_FRONTIER__PROPERTY_PROVED_NONSEPARATING",
+          "runtime": "canonical/runtime/regcap_four_way_loss_absorption_nonseparation_guard_v1.py",
+          "runtime_git_blob_sha": "5100f2a217236a74b337c506381fda95dd6003b5",
+          "verification": "canonical/verification/REGCAP_FOUR_WAY_LOSS_ABSORPTION_NONSEPARATION_VERIFY_20261010_V1.json",
+          "verification_git_blob_sha": "d4fe09e0d7045443a5625c9f6d2af62523c5c8e9",
+          "shared_property": "DISPOSITION::LOSS_ABSORPTION",
+          "candidate_concept_ids": [
+            "REGCAP::CCOB",
+            "REGCAP::CCYB",
+            "REGCAP::TLAC",
+            "REGCAP::MREL"
+          ],
+          "reverse_classification_authorized": false,
+          "additional_authenticated_discriminator_required": true,
+          "terminal_authority": false
+        }
+      ]
     }
   },
   "scheduler_result": {
@@ -2584,7 +2583,7 @@
     "verification_path": "canonical/verification/REGCAP_FOUR_WAY_LOSS_ABSORPTION_NONSEPARATION_VERIFY_20261010_V1.json",
     "verification_git_blob_sha": "d4fe09e0d7045443a5625c9f6d2af62523c5c8e9",
     "scheduler_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261010_V66.json",
-    "scheduler_git_blob_sha": "466d514a193adfaf7a0bc78a56df10195e414928",
+    "scheduler_git_blob_sha": "97e40427e90c4e3cc95ec829859b8de31d1c8531",
     "finance_tail_closed": false,
     "terminal_credit_delta": 0
   }
