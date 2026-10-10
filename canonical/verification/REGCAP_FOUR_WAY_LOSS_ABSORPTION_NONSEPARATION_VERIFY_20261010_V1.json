@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_REGCAP_FOUR_WAY_LOSS_ABSORPTION_NONSEPARATION_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__CURRENT_MAIN_REBASE__31_OF_31_FOCUSED_AND_ADJACENT__PYCOMPILE_PASS__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "brain/regcap-four-way-loss-absorption-nonseparation-20261010-v2",
+    "base_main": "febd09d7ad55242b7da59e1c414bc23247141c12",
+    "code_head_before_receipt": "fbdb8a6c582e04efad3c4f467f3f5f7d0f8aa395",
+    "exact_blobs": {
+      "canonical/runtime/regcap_four_way_loss_absorption_nonseparation_guard_v1.py": "5100f2a217236a74b337c506381fda95dd6003b5",
+      "canonical/tests/test_regcap_four_way_loss_absorption_nonseparation_guard_v1.py": "96a1293e442fd0fa6029e6b99c9db92f7c151654",
+      "canonical/runtime/loss_absorbing_cushion_regcap_grounding_v6.py": "0c08cf025ab45b9e2af982ef2abf454f939d2c1e",
+      "canonical/tests/test_loss_absorbing_cushion_regcap_grounding_v6.py": "ef13b9aafd78313fbf9cb93e3f0f65cf04fd9e64"
+    }
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "name": "participial-disposition-verify-20261009-sol",
+    "sprite_id": "sprite-72f2a31b-c09c-49e0-bfe0-279786ee2d56",
+    "workspace": "/home/sprite/loss_cushion_pair_compose_verify"
+  },
+  "verification": {
+    "new_guard": "5_OF_5_PASS",
+    "grounding_v6": "10_OF_10_PASS",
+    "tlac_mrel_shared_signature_adjacent": "4_OF_4_PASS",
+    "regcap_mrel_pair_discriminator_adjacent": "12_OF_12_PASS",
+    "total_tests": 31,
+    "total_passed": 31,
+    "total_failed": 0,
+    "py_compile": "PASS"
+  },
+  "proved": [
+    "BOUND_AUTHENTICATED_CCOB_ENTAILS_DISPOSITION_LOSS_ABSORPTION",
+    "BOUND_AUTHENTICATED_CCYB_ENTAILS_DISPOSITION_LOSS_ABSORPTION",
+    "BOUND_AUTHENTICATED_TLAC_ENTAILS_DISPOSITION_LOSS_ABSORPTION",
+    "BOUND_AUTHENTICATED_MREL_ENTAILS_DISPOSITION_LOSS_ABSORPTION",
+    "DISPOSITION_LOSS_ABSORPTION_ALONE_IS_NONSEPARATING_OVER_THE_DECLARED_FOUR_CONCEPT_BOUND_FRONTIER",
+    "REVERSE_CLASSIFICATION_FROM_SHARED_LOSS_ABSORPTION_ALONE_IS_FORBIDDEN",
+    "AN_ADDITIONAL_AUTHENTICATED_DISCRIMINATOR_IS_REQUIRED_WHEN_NO_STRONGER_SOURCE_LOCAL_OR_PAIR_SPECIFIC_BINDING_EXISTS",
+    "EXISTING_SOURCE_LOCAL_IDENTITY_AND_PAIR_SPECIFIC_POSITIVE_DISCRIMINATORS_REMAIN_PRESERVED"
+  ],
+  "hard_nonclaims": [
+    "NO_OPEN_WORLD_CANDIDATE_UNIVERSE_COMPLETENESS",
+    "NO_GLOBAL_CONCEPT_IDENTITY",
+    "NO_CONCEPT_EQUIVALENCE_OR_DISJOINTNESS",
+    "NO_POLICY_ADEQUACY_AUTHORITY",
+    "NO_EXECUTION_ACCEPTANCE_OR_PROMOTION_AUTHORITY",
+    "NO_FINANCE_TAIL_CLOSURE",
+    "NO_TERMINAL_AUTHORITY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
