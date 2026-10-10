@@ -19,7 +19,7 @@
     "status": "ACTIVE_LIVE_DERIVED_FROM_CURRENT_R2_AUTHORITY",
     "scheduler_rule": "PRIMARY_CAPABILITY_RESOURCE_SCORE_FIRST__SHARED_CAUSE_FANOUT_SECONDARY_TIE_BREAK__OPUS_CHECKPOINT_AUDIT_TERTIARY"
   },
-  "authoritative_activation_git_blob_sha": "03596d15b6a12a96398ab6171c9d51d641b8389c",
+  "authoritative_activation_git_blob_sha": "b815b4025caacc7d7623e1ccc36ebccc0ee50547",
   "runtime_git_blob_sha": "e3cf20670e5e0bf79050ec2e7e28224ab126cf05",
   "residual_policy": "SEARCH_REUSE_MINIMAL_ADAPTATION_VERIFY_GENERALIZE_PROMOTE_FALSIFY_BEFORE_NEW_PRIMITIVE_INVENTION",
   "reuse_first_residual_policy_path": "canonical/governance/REUSE_FIRST_RESIDUAL_EXECUTION_POLICY_20261010_V1.json",
