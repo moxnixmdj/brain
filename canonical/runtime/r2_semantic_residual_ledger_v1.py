@@ -280,4 +280,3 @@ def cause_fanout_index(ledger: Mapping[str, Any]) -> dict[str, int]:
                 raise R2SemanticResidualLedgerError("CAUSE_FANOUT_CONFLICT:" + cause_id)
             out[cause_id] = count
     return out
-}
