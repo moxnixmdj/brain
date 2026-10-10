@@ -32,6 +32,7 @@ from canonical.runtime import terminal_closure_reducer as terminal_closure
 from canonical.runtime.verified_bound_capability_execution_adapter_v1 import execute as execute_bound
 from canonical.runtime import semantic_ambiguity_control_v1 as semantic_ambiguity
 from canonical.runtime import semantic_relation_control_v2 as semantic_relation
+from canonical.runtime import open_world_semantic_control_v1 as open_world_semantic_control
 from canonical.runtime import oewn_decision_sense_control_v1 as oewn_decision_sense
 from canonical.runtime import finance_bounded_concept_registry_verify_v1 as finance_concept_verify
 from canonical.runtime import one_shot_reality_closure_v2 as one_shot_reality_closure
@@ -65,6 +66,7 @@ ENGINE_DESCRIPTORS = {
     "SEMANTIC_AMBIGUITY": "semantic_ambiguity_control_v1.decide",
     "SEMANTIC_RELATION": "semantic_relation_control_v2.resolve",
     "OEWN_DECISION_SENSE": "oewn_decision_sense_control_v1.resolve",
+    "OPEN_WORLD_SEMANTIC_CONTROL": "open_world_semantic_control_v1.resolve",
 }
 
 META_ORCHESTRATORS = {
@@ -86,6 +88,7 @@ R3_DIRECT_EXPERIENCE_MODES = frozenset({
     "CERTIFIED_ROUTE",
     "LIVE_CAPABILITY",
     "BOUND_CAPABILITY",
+    "OPEN_WORLD_SEMANTIC_CONTROL",
 })
 
 
@@ -154,6 +157,15 @@ def _unwrap_live_runtime(wrapper: Mapping[str, Any], inner_key: str) -> dict[str
 def _auto_mode(payload: Mapping[str, Any], options: Mapping[str, Any]) -> str:
     """Select only structurally unambiguous fabric routes; otherwise fail closed."""
     keys = set(payload)
+
+    if {
+        "environment_id",
+        "goal_id",
+        "semantic_state",
+        "decision_relevant",
+        "information_origin",
+    } <= keys:
+        return "OPEN_WORLD_SEMANTIC_CONTROL"
 
     if {"sense_universe", "decision_manifest"} <= keys:
         return "OEWN_DECISION_SENSE"
@@ -590,6 +602,11 @@ def run(
                 evidence_receipts=payload.get("evidence_receipts"),
                 evidence_verifier=semantic_evidence_verifier,
                 ambiguity_owner=str(payload.get("ambiguity_owner") or "SYSTEM_MODEL"),
+            )
+        elif mode == "OPEN_WORLD_SEMANTIC_CONTROL":
+            out = open_world_semantic_control.resolve(
+                payload,
+                repo_root=ROOT,
             )
         elif mode == "CAPABILITY_SCHEDULER":
             work = payload.get("work")
