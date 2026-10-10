@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_AGENT_V12_ARTIFACT_BINDING_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_PUBLIC_REPLAY__FRESH_RESEAL_REQUIRED__ZERO_CREDIT",
+  "private_pr": 3865,
+  "blobs": {
+    "binder": "07df410198a3d7138fbc2823a5f90cf9f27c5a00",
+    "agent_v12": "129681ad469bc1f47da51c61195189237949e69f",
+    "binder_tests": "2bcfe7dd9abc505203cb375b427ea04c1b8082f7",
+    "v12_tests": "ecd6ea23c77fed1e860e17b74d2d42dc9c353b74",
+    "agent_v11": "124d13a7449281c9781c39df8f02c2e8f74226b4"
+  },
+  "public": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 2542,
+    "head": "dcaa9c11b08ac968966f5baed6e94fc3b196db4b",
+    "runs": {
+      "v12_exact": 38025880758,
+      "v11_regression": 38025880717,
+      "ratchet": 38025880686,
+      "robust": 38025880661
+    }
+  },
+  "pass": true,
+  "rank18_task_read": false,
+  "rank18_execution_authority": false,
+  "fresh_reseal_required": true,
+  "acceptance_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
