@@ -1,0 +1,421 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_P1_V3_SAME_SUBJECT_ROOT_BINDING_WORKLIST_V2",
+  "date": "2026-10-10",
+  "status": "ACTIVE_CURRENT_SAME_SUBJECT_BINDING_FRONTIER__21_SCOPED_CAPABILITIES_ACROSS_12_ROOTS__24_OF_24_LEAVES_BOUNDED__0_OF_12_ROOT_SUBJECT_BINDINGS_VERIFIED__ZERO_CREDIT",
+  "supersedes": "canonical/governance/PROFESSIONAL_QUALITY_P1_V3_SAME_SUBJECT_ROOT_BINDING_WORKLIST_20261010_V1.json",
+  "subject": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V3_DECLARED_SYSTEM_SUBJECT_20261010_V2.json",
+    "git_blob_sha": "d758083973ca040f6b6426e5729e297e283b1e0c",
+    "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_DECLARED_SYSTEM_SUBJECT_V2_VERIFY_20261010_V1.json",
+    "verification_git_blob_sha": "f5d5a304a4f1df4cd97e738175916d3723aeb039",
+    "subject_kind": "DECLARED_SYSTEM",
+    "subject_id": "PROFESSIONAL_QUALITY_P1_V3_INTEGRATED_SYSTEM_20261010_V2",
+    "subject_sha256": "934b90e941d23396525a594a21a3335deb8c5cbbb7797724334f54a42d80e751"
+  },
+  "scoped_registry": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_REGISTRY_20261010_V1.json",
+    "git_blob_sha": "e8b013d4b10915104ec4f0744b03e5d36c7d87dd",
+    "admitted_scope_count": 21,
+    "required_root_count": 12,
+    "bounded_leaf_count": 24,
+    "no_scoped_evidence_leaf_count": 0
+  },
+  "same_subject_gate": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_SAME_SUBJECT_COMPOSITION_GATE_20261010_V2.json",
+    "git_blob_sha": "19287a6057166262bb7ce7218652093960128d53",
+    "rule": "ALL_TWELVE_INDEPENDENT_VERIFIED_ROOT_SUBJECT_BINDINGS_MUST_HAVE_IDENTICAL_SUBJECT_TUPLE"
+  },
+  "root_binding_count": 12,
+  "verified_root_subject_binding_count": 0,
+  "roots": [
+    {
+      "root_id": "R1_TARGET_SPECIFICATION",
+      "root_contract": "Freeze objective, audience, hard constraints, plausible interpretations, target construct and claim scope; block goal substitution and decision-relevant ambiguity.",
+      "semantic_scoped_support": true,
+      "execution_scoped_support": true,
+      "same_subject_binding_status": "OPEN__NO_INDEPENDENT_ROOT_SUBJECT_BINDING_RECEIPT",
+      "minimum_bridge": "BIND_ONE_CONTENT_ADDRESSED_TARGET_CONTRACT_INSTANCE_FOR_THE_DECLARED_SYSTEM_AND_VERIFY_P1_V3_TARGET_COMPILATION_PRESERVES_OBJECTIVE_AUDIENCE_HARD_CONSTRAINTS_INTERPRETATIONS_CONSTRUCT_AND_CLAIM_SCOPE",
+      "new_primitive_required": false,
+      "current_scoped_support": [
+        {
+          "scope_id": "PQ::R1::TARGET_CONTRACT::STRUCTURAL_COMPLETENESS_GATE",
+          "claim_kind": "CONTENT_ADDRESSED_BEHAVIORAL_CONTRACT_STRUCTURAL_COMPLETENESS_GATE",
+          "contributes_to_leaf_ids": [
+            "PQ::R1_TARGET_SPECIFICATION::EXECUTION"
+          ],
+          "source_receipt": {
+            "path": "canonical/verification/PROFESSIONAL_QUALITY_R1_STRUCTURAL_TARGET_VERIFY_20261010_V1.json",
+            "git_blob_sha": "dcee55ba17d15154117100de6aebd34716ad3e3e"
+          }
+        },
+        {
+          "scope_id": "PQ::R1::TARGET_SEMANTICS::PROFESSIONAL_ARTIFACT_PLAN",
+          "claim_kind": "EXACT_PARAMETERIZED_PROFESSIONAL_ARTIFACT_TARGET_SEMANTICS",
+          "contributes_to_leaf_ids": [
+            "PQ::R1_TARGET_SPECIFICATION::SEMANTIC"
+          ],
+          "source_receipt": {
+            "path": "canonical/verification/PROFESSIONAL_QUALITY_R1_TARGET_SEMANTIC_VERIFY_20261010_V1.json",
+            "git_blob_sha": "dfffdd6eff129ce7498c4e4aa8a822cd4a5cda22"
+          }
+        }
+      ]
+    },
+    {
+      "root_id": "R10_ANALYSIS_DECISION",
+      "root_contract": "Freeze or robustify defensible analysis, aggregation, compensation, threshold and risk policy; block cherry-picking, ontology/scale reversal and unjustified scalarization.",
+      "semantic_scoped_support": true,
+      "execution_scoped_support": true,
+      "same_subject_binding_status": "OPEN__NO_INDEPENDENT_ROOT_SUBJECT_BINDING_RECEIPT",
+      "minimum_bridge": "BIND_THE_EXACT_AGGREGATION_THRESHOLD_COMPENSATION_AND_RISK_POLICY_FOR_THE_SAME_SUBJECT_AND VERIFY_MINIMUM_POLICY_CHANGING_INFORMATION_ROUTING",
+      "new_primitive_required": false,
+      "current_scoped_support": [
+        {
+          "scope_id": "PQ::R10::DECISION_SUFFICIENCY::LOSSLESS_MINIMUM_INFORMATION",
+          "claim_kind": "LOSSLESS_DECISION_SUFFICIENT_GAP_REPRESENTATION_AND_MINIMUM_POLICY_CHANGING_INFORMATION_ROUTING",
+          "contributes_to_leaf_ids": [
+            "PQ::R10_ANALYSIS_DECISION::EXECUTION"
+          ],
+          "source_receipt": {
+            "path": "canonical/verification/PROFESSIONAL_QUALITY_R10_DECISION_SUFFICIENCY_SCOPED_VERIFY_20261010_V1.json",
+            "git_blob_sha": "18574110321eb1bacc18db46cbd0673bf6a0a0ac"
+          }
+        },
+        {
+          "scope_id": "PQ::R10::DECISION_SUFFICIENCY_SEMANTICS::LOSSLESS_MINIMUM_INFORMATION",
+          "claim_kind": "LOSSLESS_MINIMUM_INFORMATION_DECISION_SUFFICIENCY_SEMANTICS",
+          "contributes_to_leaf_ids": [
+            "PQ::R10_ANALYSIS_DECISION::SEMANTIC"
+          ],
+          "source_receipt": {
+            "path": "canonical/verification/PROFESSIONAL_QUALITY_R10_DECISION_SEMANTIC_VERIFY_20261010_V1.json",
+            "git_blob_sha": "c298b2510e352d876c1abacc069e915447e97823"
+          }
+        }
+      ]
+    },
+    {
+      "root_id": "R11_ADAPTIVE_INTEGRITY_SECURITY",
+      "root_contract": "Protect dev/selection/cert separation, hidden holdouts, evaluator control plane, selection pressure and Goodhart attack surfaces; consume exposed evidence.",
+      "semantic_scoped_support": true,
+      "execution_scoped_support": true,
+      "same_subject_binding_status": "OPEN__NO_INDEPENDENT_ROOT_SUBJECT_BINDING_RECEIPT",
+      "minimum_bridge": "BIND_THE_SAME_SUBJECT_TO_A_CLEAN_DEV_SELECTION_CERTIFICATION_LANE_AND_VERIFY_HOLDOUT_EVALUATOR_CONTROL_AND_EXPOSURE_REVOCATION_SEMANTICS",
+      "new_primitive_required": false,
+      "current_scoped_support": [
+        {
+          "scope_id": "PQ::R11::EVAL_FIREWALL::POST_IDENTITY_DISCOVERY_REVOCATION",
+          "claim_kind": "CLEAN_EVALUATION_LANE_POST_IDENTITY_DISCOVERY_REVOCATION",
+          "contributes_to_leaf_ids": [
+            "PQ::R11_ADAPTIVE_INTEGRITY_SECURITY::EXECUTION"
+          ],
+          "source_receipt": {
+            "path": "canonical/verification/PROFESSIONAL_QUALITY_R11_EVALUATION_FIREWALL_SCOPED_VERIFY_20261010_V1.json",
+            "git_blob_sha": "346d369a811aa77af02be901a5b04458fb528667"
+          }
+        },
+        {
+          "scope_id": "PQ::R11::FIREWALL_SEMANTICS::POST_IDENTITY_REVOCATION",
+          "claim_kind": "CLEAN_EVALUATION_LANE_POST_IDENTITY_REVOCATION_SEMANTICS",
+          "contributes_to_leaf_ids": [
+            "PQ::R11_ADAPTIVE_INTEGRITY_SECURITY::SEMANTIC"
+          ],
+          "source_receipt": {
+            "path": "canonical/verification/PROFESSIONAL_QUALITY_R11_FIREWALL_SEMANTIC_VERIFY_20261010_V1.json",
+            "git_blob_sha": "7f0468c4abae22504d71ef627efeaf57e85f02a6"
+          }
+        }
+      ]
+    },
+    {
+      "root_id": "R12_META_COMPOSITION_CLOSURE",
+      "root_contract": "Require assumption-guarantee composition, joint root satisfaction on the same artifact, defeater search, challenge coverage, nonvacuity and explicit residual unknowns.",
+      "semantic_scoped_support": true,
+      "execution_scoped_support": true,
+      "same_subject_binding_status": "OPEN__NO_INDEPENDENT_ROOT_SUBJECT_BINDING_RECEIPT",
+      "minimum_bridge": "BIND_THE_SAME_SUBJECT_ASSUMPTION_GUARANTEE_GRAPH_AND_VERIFY_ALL_OTHER_ROOT_BINDINGS_COMPOSE_WITH_NO_FATAL_DEFEATER_OR_UNMAPPED_MATERIAL_FALSE_CERTIFICATION_CLASS",
+      "new_primitive_required": false,
+      "current_scoped_support": [
+        {
+          "scope_id": "PQ::R12::UVCK::FAIL_CLOSED_META_COMPOSITION",
+          "claim_kind": "FAIL_CLOSED_ASSURANCE_GRAPH_META_COMPOSITION_AND_ORDER_INDEPENDENT_DEFEATER_ROUTING",
+          "contributes_to_leaf_ids": [
+            "PQ::R12_META_COMPOSITION_CLOSURE::SEMANTIC",
+            "PQ::R12_META_COMPOSITION_CLOSURE::EXECUTION"
+          ],
+          "source_receipt": {
+            "path": "canonical/verification/UVCK_V2_CURRENT_GENERATION_INDEPENDENT_REPLAY_VERIFY_20261009_V1.json",
+            "git_blob_sha": "81f7f070233b6aa1c4b491949a4c3e7aedfafd10"
+          }
+        }
+      ]
+    },
+    {
+      "root_id": "R2_CANDIDATE_SEARCH",
+      "root_contract": "Ensure the candidate/search space is sufficiently diverse and search closure is separated from artifact acceptance; block best-of-mediocre and local-fixation failures.",
+      "semantic_scoped_support": true,
+      "execution_scoped_support": true,
+      "same_subject_binding_status": "OPEN__NO_INDEPENDENT_ROOT_SUBJECT_BINDING_RECEIPT",
+      "minimum_bridge": "BIND_ONE_DECLARED_CANDIDATE_UNIVERSE_OR_VERIFIED_GENERATOR_BASIS_FOR_THE_SAME_SYSTEM_AND_PROVE_SEARCH_CLOSURE_OR_MINIMUM_DISCRIMINATOR_RELATIVE_TO_THAT_SCOPE",
+      "new_primitive_required": false,
+      "current_scoped_support": [
+        {
+          "scope_id": "PQ::R2::FINITE_REGION_SEARCH::COMMON_POLICY_OR_MINIMAX_DISCRIMINATOR",
+          "claim_kind": "FINITE_SCOPE_COMPLETE_COMMON_POLICY_OR_MINIMUM_TRUTHFUL_DISCRIMINATOR_SEARCH",
+          "contributes_to_leaf_ids": [
+            "PQ::R2_CANDIDATE_SEARCH::EXECUTION"
+          ],
+          "source_receipt": {
+            "path": "canonical/verification/PROFESSIONAL_QUALITY_R2_SCOPE_COMPLETE_SEARCH_VERIFY_20261010_V1.json",
+            "git_blob_sha": "b66115513d1dde4527a65e5eda1ddea300138aca"
+          }
+        },
+        {
+          "scope_id": "PQ::R2::SEARCH_SEMANTICS::FINITE_SCOPE",
+          "claim_kind": "FINITE_SCOPE_COMPLETE_CANDIDATE_SEARCH_SEMANTICS",
+          "contributes_to_leaf_ids": [
+            "PQ::R2_CANDIDATE_SEARCH::SEMANTIC"
+          ],
+          "source_receipt": {
+            "path": "canonical/verification/PROFESSIONAL_QUALITY_R2_SEARCH_SEMANTIC_VERIFY_20261010_V1.json",
+            "git_blob_sha": "06da6b94712ec844a56c0f663cce67f059b7ba8d"
+          }
+        }
+      ]
+    },
+    {
+      "root_id": "R3_REALIZATION_OBSERVATION",
+      "root_contract": "Bind claims to exact artifact bytes, delivery environment, experienced artifact and sufficient observation channels; block render, capture, hidden-surface and multiscale loss.",
+      "semantic_scoped_support": true,
+      "execution_scoped_support": true,
+      "same_subject_binding_status": "OPEN__NO_INDEPENDENT_ROOT_SUBJECT_BINDING_RECEIPT",
+      "minimum_bridge": "BIND_EXACT_PROFESSIONAL_ARTIFACT_BYTES_AND_AUDIENCE_VIEW_PRODUCED_BY_THE_DECLARED_SYSTEM_AND_VERIFY_OBSERVATION_CHANNEL_SUFFICIENCY_AND_RENDER_PRESERVATION",
+      "new_primitive_required": false,
+      "current_scoped_support": [
+        {
+          "scope_id": "PQ::R3::NATIVE_ARTIFACT::BOUNDED_RENDER_PRESERVATION",
+          "claim_kind": "BOUNDED_GENERATED_EXPLICIT_LOW_LEVEL_TEXT_EDIT_RENDER_PRESERVATION",
+          "contributes_to_leaf_ids": [
+            "PQ::R3_REALIZATION_OBSERVATION::EXECUTION"
+          ],
+          "source_receipt": {
+            "path": "canonical/verification/NATIVE_ARTIFACT_RENDER_PRESERVATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+            "git_blob_sha": "1a0b4ca6627aaf28eb25f6990682e87319d14d6d"
+          }
+        },
+        {
+          "scope_id": "PQ::R3::REALIZATION_SEMANTICS::PINNED_NATIVE_RENDER",
+          "claim_kind": "PINNED_NATIVE_ARTIFACT_RENDER_REALIZATION_SEMANTICS",
+          "contributes_to_leaf_ids": [
+            "PQ::R3_REALIZATION_OBSERVATION::SEMANTIC"
+          ],
+          "source_receipt": {
+            "path": "canonical/verification/PROFESSIONAL_QUALITY_R3_REALIZATION_SEMANTIC_VERIFY_20261010_V1.json",
+            "git_blob_sha": "3c9a6f03c9dfb7597cdb7c5ca01e9eaf66a596e0"
+          }
+        }
+      ]
+    },
+    {
+      "root_id": "R4_MEASUREMENT_CONSTRUCT",
+      "root_contract": "Establish construct validity, absolute quality floors, criterion ontology, scale/resolution and outcome-task transfer; block proxy, rubric and measurement gaming.",
+      "semantic_scoped_support": true,
+      "execution_scoped_support": true,
+      "same_subject_binding_status": "OPEN__NO_INDEPENDENT_ROOT_SUBJECT_BINDING_RECEIPT",
+      "minimum_bridge": "BIND_THE_EXACT_CRITERION_ONTOLOGY_MEASUREMENT_PROGRAM_SCALE_AND_ACCEPTANCE_FLOORS_USED_FOR_THE_SAME_SUBJECT_AND_VERIFY_CONSTRUCT_VALIDITY_IN_SCOPE",
+      "new_primitive_required": false,
+      "current_scoped_support": [
+        {
+          "scope_id": "PQ::R4::MECHANICAL_ARTIFACT_MEASUREMENT::CONTENT_ADDRESSED_TYPED_ACCEPTANCE",
+          "claim_kind": "CONTENT_ADDRESSED_TYPED_MECHANICAL_ARTIFACT_MEASUREMENT_AND_ACCEPTANCE",
+          "contributes_to_leaf_ids": [
+            "PQ::R4_MEASUREMENT_CONSTRUCT::EXECUTION"
+          ],
+          "source_receipt": {
+            "path": "canonical/verification/ARTIFACT_MEASUREMENT_VERIFY_20261007_V1.json",
+            "git_blob_sha": "34c64ed759d2e70df48a76d7a254047ac5fe9e2b"
+          }
+        },
+        {
+          "scope_id": "PQ::R4::MEASUREMENT_SEMANTICS::CONTENT_ADDRESSED_TYPED_MECHANICAL",
+          "claim_kind": "CONTENT_ADDRESSED_TYPED_MECHANICAL_MEASUREMENT_SEMANTICS",
+          "contributes_to_leaf_ids": [
+            "PQ::R4_MEASUREMENT_CONSTRUCT::SEMANTIC"
+          ],
+          "source_receipt": {
+            "path": "canonical/verification/PROFESSIONAL_QUALITY_R4_MEASUREMENT_SEMANTIC_VERIFY_20261010_V1.json",
+            "git_blob_sha": "44a9e9e31e43404d1aed0a9547502e5f5dee772f"
+          }
+        }
+      ]
+    },
+    {
+      "root_id": "R5_EVALUATOR_REFERENCE",
+      "root_contract": "Qualify judges and reference standards locally by criterion, population, difficulty and state; preserve disagreement, ambiguity and reference fallibility.",
+      "semantic_scoped_support": true,
+      "execution_scoped_support": true,
+      "same_subject_binding_status": "OPEN__NO_INDEPENDENT_ROOT_SUBJECT_BINDING_RECEIPT",
+      "minimum_bridge": "BIND_THE_EXACT_JUDGE_OR_REFERENCE_SET_USED_FOR_THE_SAME_SUBJECT_AND_VERIFY_LOCAL_QUALIFICATION_DISAGREEMENT_AND_REFERENCE_UNCERTAINTY_HANDLING",
+      "new_primitive_required": false,
+      "current_scoped_support": [
+        {
+          "scope_id": "PQ::R5::EVALUATOR_UNCERTAINTY::CONDITIONAL_ROBUST_MARGIN",
+          "claim_kind": "CONDITIONAL_EVALUATOR_UNCERTAINTY_ROBUST_MARGIN_CERTIFICATE",
+          "contributes_to_leaf_ids": [
+            "PQ::R5_EVALUATOR_REFERENCE::EXECUTION"
+          ],
+          "source_receipt": {
+            "path": "canonical/verification/GDPVAL_HYBRID_EVALUATOR_UNCERTAINTY_SPRITE_VERIFICATION_20261008_V1.json",
+            "git_blob_sha": "e852c4fbc14147c17469f1a4ede4e274d768bbf7"
+          }
+        },
+        {
+          "scope_id": "PQ::R5::EVALUATOR_SEMANTICS::CONDITIONAL_ROBUSTNESS",
+          "claim_kind": "CONDITIONAL_EVALUATOR_REFERENCE_ROBUSTNESS_SEMANTICS",
+          "contributes_to_leaf_ids": [
+            "PQ::R5_EVALUATOR_REFERENCE::SEMANTIC"
+          ],
+          "source_receipt": {
+            "path": "canonical/verification/PROFESSIONAL_QUALITY_R5_EVALUATOR_SEMANTIC_VERIFY_20261010_V1.json",
+            "git_blob_sha": "33d5e8c11e07e4a153edf3970503c6753c5343d2"
+          }
+        }
+      ]
+    },
+    {
+      "root_id": "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+      "root_contract": "Admit typed evidence with provenance, independence/common-cause accounting, grounding reachability and correct uncertainty semantics.",
+      "semantic_scoped_support": true,
+      "execution_scoped_support": true,
+      "same_subject_binding_status": "OPEN__NO_INDEPENDENT_ROOT_SUBJECT_BINDING_RECEIPT",
+      "minimum_bridge": "BIND_ALL_LOAD_BEARING_EVIDENCE_FOR_THE_SAME_SUBJECT_THROUGH_CONTENT_ADDRESSED_SCOPE_MATCHED_ADMISSION_AND_VERIFY_DEPENDENCE_GROUNDING_AND_UNCERTAINTY_SEMANTICS",
+      "new_primitive_required": false,
+      "current_scoped_support": [
+        {
+          "scope_id": "PQ::R6::LEAF_EVIDENCE::CONTENT_ADDRESSED_SCOPE_MATCHED_ADMISSION",
+          "claim_kind": "CONTENT_ADDRESSED_SCOPE_MATCHED_LEAF_EVIDENCE_ADMISSION_WITH_STATUS_NONAUTHORITY",
+          "contributes_to_leaf_ids": [
+            "PQ::R6_EVIDENCE_GROUNDING_DEPENDENCE::SEMANTIC",
+            "PQ::R6_EVIDENCE_GROUNDING_DEPENDENCE::EXECUTION"
+          ],
+          "source_receipt": {
+            "path": "canonical/verification/PROFESSIONAL_QUALITY_LEAF_BINDER_V2_VERIFY_20261010_V1.json",
+            "git_blob_sha": "b65a67e8edaee925338fe3f2d61dad6b0f52d129"
+          }
+        }
+      ]
+    },
+    {
+      "root_id": "R7_CAUSAL_PRESCRIPTIVE",
+      "root_contract": "Separate ranking from causal explanation and edit prescription; require intervention fidelity, effect scope and post-edit verification before generalized design rules.",
+      "semantic_scoped_support": true,
+      "execution_scoped_support": true,
+      "same_subject_binding_status": "OPEN__NO_INDEPENDENT_ROOT_SUBJECT_BINDING_RECEIPT",
+      "minimum_bridge": "BIND_AT_LEAST_ONE_SAME_SUBJECT_INTERVENTION_OR_PROVE_CAUSAL_PRESCRIPTIVE_ROOT_DECISION_NULL_FOR_THE_AUTHORIZED_CLAIM__VERIFY_EFFECT_SCOPE_AND_POST_EDIT_OUTCOME",
+      "new_primitive_required": false,
+      "current_scoped_support": [
+        {
+          "scope_id": "PQ::R7::SINGLE_EDIT::UVCK_DEFEATER_ORDER_REPAIR",
+          "claim_kind": "EXACT_SINGLE_EDIT_PROFESSIONAL_CODE_INTERVENTION_INSTANCE",
+          "contributes_to_leaf_ids": [
+            "PQ::R7_CAUSAL_PRESCRIPTIVE::SEMANTIC",
+            "PQ::R7_CAUSAL_PRESCRIPTIVE::EXECUTION"
+          ],
+          "source_receipt": {
+            "path": "canonical/verification/PROFESSIONAL_QUALITY_R7_SINGLE_EDIT_CAUSAL_INSTANCE_VERIFY_20261009_V1.json",
+            "git_blob_sha": "0c692f55dedb6a8523bcd78541d4cb77ef06d610"
+          }
+        }
+      ]
+    },
+    {
+      "root_id": "R8_POPULATION_CONTEXT_OPERATOR",
+      "root_contract": "Bind claims to target constituency, operator/presenter, context and deployment envelope; account for representation, measurement invariance, interaction and reactivity.",
+      "semantic_scoped_support": true,
+      "execution_scoped_support": true,
+      "same_subject_binding_status": "OPEN__NO_INDEPENDENT_ROOT_SUBJECT_BINDING_RECEIPT",
+      "minimum_bridge": "BIND_THE_TARGET_CONSTITUENCY_OPERATOR_CONTEXT_AND_DEPLOYMENT_ENVELOPE_FOR_THE_SAME_SUBJECT_AND_VERIFY_POPULATION_TRANSPORT_OR_DECISION_NULLITY",
+      "new_primitive_required": false,
+      "current_scoped_support": [
+        {
+          "scope_id": "PQ::R8::DELEGATION_POPULATION::FROZEN_512_CASE_PRE_BEACON_BINDING",
+          "claim_kind": "FROZEN_512_CASE_PRE_BEACON_DELEGATION_POPULATION_BINDING",
+          "contributes_to_leaf_ids": [
+            "PQ::R8_POPULATION_CONTEXT_OPERATOR::EXECUTION"
+          ],
+          "source_receipt": {
+            "path": "canonical/verification/DELEGATION_TERMINAL_POPULATION_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+            "git_blob_sha": "3965db684d7104c5829ce1fcfa8ee08d2cd42cfc"
+          }
+        },
+        {
+          "scope_id": "PQ::R8::POPULATION_SEMANTICS::FROZEN_512",
+          "claim_kind": "FROZEN_512_CASE_DELEGATION_POPULATION_SEMANTICS",
+          "contributes_to_leaf_ids": [
+            "PQ::R8_POPULATION_CONTEXT_OPERATOR::SEMANTIC"
+          ],
+          "source_receipt": {
+            "path": "canonical/verification/PROFESSIONAL_QUALITY_R8_POPULATION_SEMANTIC_VERIFY_20261010_V1.json",
+            "git_blob_sha": "e47503a3b1f61bbb9effa04edccbf158b8b28e96"
+          }
+        }
+      ]
+    },
+    {
+      "root_id": "R9_TEMPORAL_DEPLOYMENT",
+      "root_contract": "Bind claims to target time horizons, temporal drift, delayed outcomes, carryover, censoring, rare events and performative/equilibrium effects where material.",
+      "semantic_scoped_support": true,
+      "execution_scoped_support": true,
+      "same_subject_binding_status": "OPEN__NO_INDEPENDENT_ROOT_SUBJECT_BINDING_RECEIPT",
+      "minimum_bridge": "BIND_TIME_HORIZON_DRIFT_CENSORING_DELAYED_OUTCOME_AND_RARE_EVENT_POLICY_FOR_THE_SAME_SUBJECT_OR_PROVE_EACH_IS_DECISION_NULL",
+      "new_primitive_required": false,
+      "current_scoped_support": [
+        {
+          "scope_id": "PQ::R9::CENSORING::FIXED_DENOMINATOR_CONSERVATIVE_ACCOUNTING",
+          "claim_kind": "FROZEN_POPULATION_CONSERVATIVE_CENSORING_AND_EARLY_FAILURE_ACCOUNTING",
+          "contributes_to_leaf_ids": [
+            "PQ::R9_TEMPORAL_DEPLOYMENT::EXECUTION"
+          ],
+          "source_receipt": {
+            "path": "canonical/verification/PROFESSIONAL_QUALITY_R9_CONSERVATIVE_CENSORING_VERIFY_20261010_V1.json",
+            "git_blob_sha": "7081a52621a1bb8f1ad07d1da23b40c8e57e16c2"
+          }
+        },
+        {
+          "scope_id": "PQ::R9::TEMPORAL_SEMANTICS::FROZEN_CONSERVATIVE_CENSORING",
+          "claim_kind": "FROZEN_POPULATION_CONSERVATIVE_CENSORING_SEMANTICS",
+          "contributes_to_leaf_ids": [
+            "PQ::R9_TEMPORAL_DEPLOYMENT::SEMANTIC"
+          ],
+          "source_receipt": {
+            "path": "canonical/verification/PROFESSIONAL_QUALITY_R9_TEMPORAL_SEMANTIC_VERIFY_20261010_V1.json",
+            "git_blob_sha": "e4527631fbf6e95cb20381d60eb4fe4b978c176f"
+          }
+        }
+      ]
+    }
+  ],
+  "execution_order": [
+    "FOR_EACH_ROOT_REUSE_CURRENT_SCOPED_CAPABILITIES_AND_PROVE_THEIR_REQUIRED_BEHAVIOR_ON_THE_EXACT_DECLARED_SYSTEM_SUBJECT",
+    "PRODUCE_PROJECT_BRAIN_PROFESSIONAL_QUALITY_ROOT_SUBJECT_BINDING_V1_ONLY_FROM_EFFECT_DISTINGUISHING_SYSTEM_EVIDENCE",
+    "INDEPENDENTLY_VERIFY_EACH_BINDING_WITH_PROJECT_BRAIN_PROFESSIONAL_QUALITY_ROOT_SUBJECT_BINDING_VERIFY_V1",
+    "DO_NOT_GRANT_BINDING_AUTHORITY_FROM_COMPONENT_MEMBERSHIP_OR_REGISTRY_PRESENCE",
+    "RUN_MULTISCOPE_SAME_SUBJECT_COMPOSITION_GATE_ONLY_AFTER_12_OF_12_VERIFIED",
+    "THEN_ATTACK_WHOLE_LEAF_SCOPE_TRANSPORT_AND_DOMAIN_LEVEL_CHALLENGES"
+  ],
+  "global_rule": "ALL_24_LEAVES_NOW_HAVE_BOUNDED_SCOPED_EVIDENCE__THIS_REMOVES_SEMANTIC_EVIDENCE_ABSENCE_AS_A_BLOCKER_BUT_DOES_NOT_TRANSPORT_ANY_SCOPE_TO_THE_DECLARED_SYSTEM",
+  "hard_nonclaims": [
+    "NO_ROOT_SUBJECT_BINDING_VERIFIED_BY_THIS_WORKLIST",
+    "NO_SAME_SUBJECT_COMPOSITION_PASS",
+    "NO_GLOBAL_LEAF_OR_ROOT_CLOSURE",
+    "NO_DOMAIN_SEMANTIC_OR_EXECUTION_CLOSURE",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
