@@ -105,7 +105,7 @@ class ProfessionalQualityScopedEvidenceV1Tests(unittest.TestCase):
         self.assertFalse(row["semantic_leaf_credit"])
         self.assertFalse(row["execution_leaf_credit"])
 
-    def test_r6_scope_is_execution_only_and_preserves_grounding_limits(self):
+    def test_r6_scope_projects_bounded_semantic_and_execution_grounding_evidence(self):
         out = scoped.evaluate()
         row = next(
             x for x in out["admitted_scopes"]
@@ -116,8 +116,11 @@ class ProfessionalQualityScopedEvidenceV1Tests(unittest.TestCase):
             "CONTENT_ADDRESSED_SCOPE_MATCHED_LEAF_EVIDENCE_ADMISSION_WITH_STATUS_NONAUTHORITY",
         )
         self.assertEqual(
-            row["contributes_to_leaf_ids"],
-            ["PQ::R6_EVIDENCE_GROUNDING_DEPENDENCE::EXECUTION"],
+            set(row["contributes_to_leaf_ids"]),
+            {
+                "PQ::R6_EVIDENCE_GROUNDING_DEPENDENCE::SEMANTIC",
+                "PQ::R6_EVIDENCE_GROUNDING_DEPENDENCE::EXECUTION",
+            },
         )
         self.assertIn(
             "NO_GENERAL_EVIDENCE_TRUTH_CLOSURE",
