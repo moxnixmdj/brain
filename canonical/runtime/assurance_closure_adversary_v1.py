@@ -69,6 +69,19 @@ def challenge_corpus()->list[tuple[str,dict[str,Any]]]:
     g["nodes"][0]["defeated_by"]=["d"]
     out.append(("OPEN_DEFEATER",g))
 
+    for order, case_id in (
+        (["open_d","active_d"], "MIXED_DEFEATER_OPEN_THEN_ACTIVE"),
+        (["active_d","open_d"], "MIXED_DEFEATER_ACTIVE_THEN_OPEN"),
+    ):
+        g=deepcopy(_base())
+        g["nodes"].extend([
+            {"id":"open_d","type":"DEFEATER","status":"OPEN"},
+            {"id":"active_d","type":"DEFEATER","status":"SUPPORTED","depends_on":["de"],"defeated_by":[]},
+            {"id":"de","type":"EVIDENCE","status":"SUPPORTED","authoritative_leaf":True},
+        ])
+        g["nodes"][0]["defeated_by"]=order
+        out.append((case_id,g))
+
     g=deepcopy(_base())
     g["nodes"].append({"id":"alien","type":"UNMODELED_MAGIC","status":"OPEN"})
     g["nodes"][0]["depends_on"]=["alien"]
