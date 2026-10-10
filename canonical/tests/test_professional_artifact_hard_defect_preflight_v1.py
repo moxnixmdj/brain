@@ -1,4 +1,6 @@
 from pathlib import Path
+import hashlib
+import json
 import tempfile
 import zipfile
 
@@ -146,3 +148,27 @@ def test_caller_cannot_inject_custom_check_selection():
         })
         assert out["pass"] is False
         assert "UNSUPPORTED_CALLER_FIELDS" in out["errors"]
+
+
+def test_public_profiles_bind_exact_current_manifest_and_declared_subgates():
+    root=Path(__file__).resolve().parents[2]
+    path=root/"canonical/evidence/AA_BRIEFCASE_LITE_PRESENTATION_PAIRWISE_CONTRACT_MANIFEST_20261007_V1.json"
+    data=path.read_bytes()
+    h=hashlib.sha1()
+    h.update(b"blob "+str(len(data)).encode("ascii")+b"\0"+data)
+    blob=h.hexdigest()
+    assert blob=="42920315a5ecb9a1c8fe96a1a441dfd4a2f3b4e8"
+
+    doc=json.loads(data.decode("utf-8"))
+    by={x["check_id"]:x for x in doc["checks"]}
+    t2=by["W1-T2-P-01"]["check_description"]
+    t3=by["W1-T3-P-01"]["check_description"]
+    assert "no error values (#REF!, #DIV/0!, #VALUE!, #NAME?, #N/A)" in t2
+    assert "no zero-width columns hiding content" in t2
+    assert "no text overflow off slide edges" in t3
+
+    p2=m.PROFILES["AA_BRIEFCASE_LITE_W1_T2_XLSX_HARD_SUBGATE_V1"]
+    p3=m.PROFILES["AA_BRIEFCASE_LITE_W1_T3_PPTX_HARD_SUBGATE_V1"]
+    for p in (p2,p3):
+        assert p["source_git_blob_sha"]==blob
+        assert p["public_target_example_only"] is True
