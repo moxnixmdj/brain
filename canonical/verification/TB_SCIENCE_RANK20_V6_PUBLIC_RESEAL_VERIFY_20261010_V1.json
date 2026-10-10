@@ -1,0 +1,81 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK20_V6_PUBLIC_RESEAL_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__PUBLIC_V6_STAGED_RESEAL_EXACT_OBJECT_REPLAY__ZERO_EXPOSURE__NO_EFFECTIVE_AUTHORITY",
+  "public_repository": "moxnixmdj/verification-capsule-runner",
+  "public_base_branch": "terminal-execution-v1",
+  "public_merge_commit_sha": "7c340fa3c6c9bfd03323a535f7cbb6be1c2e7c00",
+  "exact_public_blobs": {
+    "surface": "e8c722f87e1f260dea23766c48e18e41f8d73731",
+    "authority": "3e9db0937d8570ae79f8e51e0479c5ff8bc8dbca",
+    "ledger": "6a89dcda00b3bb60fca085b545bdea647cac0e00",
+    "epoch": "1d56aeed831d2dd16832f5c82988972154f4bbf7",
+    "execution_claim": "9c21f6544a0143a800b009473ae376df7d817006",
+    "logical_attempt_claim_binding": "ea13cc707c685f43a61a990d851fee2bbcb23f3f",
+    "behavior_v4": "e0c43d4771a73679f2ac45fa5164aeab9760d1b6",
+    "start_cas": "0476919d1619c34168b25df98bcd93f6c64585ce",
+    "start_cas_import_regression": "db16ce3f5440bb3ad8fc1c271d152a08fde1d0e7",
+    "behavior_refinement_verifier": "58b016e6785538830c0aa90a03d657aaecbe9c4b"
+  },
+  "canonical_inputs": {
+    "claim_binding": {
+      "path": "canonical/governance/TB_SCIENCE_RANK20_LOGICAL_ATTEMPT_CLAIM_BINDING_20261010_V6.json",
+      "git_blob_sha": "ea13cc707c685f43a61a990d851fee2bbcb23f3f"
+    },
+    "authority": {
+      "path": "canonical/governance/TB_SCIENCE_RANK20_ONE_SLOT_EXECUTION_AUTHORITY_20261010_V6.json",
+      "git_blob_sha": "0475ca6aa61b135a87fc818d147d475d0e3c31d2"
+    },
+    "ledger": {
+      "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V51.json",
+      "git_blob_sha": "e9edbd032cc851c50c92dafdb7b114a5d2f7eaaf"
+    },
+    "repair_verification": {
+      "path": "canonical/verification/TB_SCIENCE_RANK20_V4_START_CAS_IMPORT_REPAIR_VERIFY_20261010_V1.json",
+      "git_blob_sha": "c318d153a08f4132186fee0ac483b5a3414ce4ec"
+    }
+  },
+  "independent_replay": {
+    "carrier": "sprite-89883d05-d41d-4a47-9173-6ab982e1a8ce",
+    "checkout_head": "915fb88fa909097f374b52d411322710807fe9e3",
+    "execution_preflight_allow_staged": {
+      "pass": true,
+      "error_count": 0,
+      "task_read": false,
+      "task_started": false,
+      "benchmark_trials_consumed": 0
+    },
+    "legacy_zero_exposure_reseal_test": {
+      "pass": true
+    },
+    "behavior_v4_refinement": {
+      "pass": true
+    },
+    "direct_pythonpath_unset_import_test": {
+      "tests_run": 1,
+      "tests_passed": 1
+    }
+  },
+  "verified_properties": [
+    "PUBLIC_GRAPH_BINDS_CANONICAL_CLAIM_V6_AUTHORITY_V6_LEDGER_V51",
+    "PUBLIC_GRAPH_BINDS_BEHAVIOR_V4_AND_REPAIRED_START_CAS",
+    "CLAIM_BOUND_LOGICAL_ATTEMPT_IDENTITY_REDERIVES",
+    "ALL_CONTENT_BINDINGS_PASS_PREFLIGHT",
+    "TASK_UNREAD",
+    "TASK_UNSTARTED",
+    "DURABLE_START_NOT_ACQUIRED",
+    "BENCHMARK_TRIALS_CONSUMED_ZERO",
+    "ACTIVATION_ABSENT",
+    "EXECUTION_AUTHORITY_INEFFECTIVE",
+    "TASK_READ_AUTHORITY_INEFFECTIVE"
+  ],
+  "promotion_boundary": "THIS_RECEIPT_MAY_AUTHORIZE_A_SEPARATE_PREACTIVATION_EFFECTIVE_AUTHORITY_PROMOTION_RATCHET__IT_DOES_NOT_AUTHORIZE_ACTIVATION_OR_TASK_READ_BY_ITSELF",
+  "pass": true,
+  "execution_authority": false,
+  "task_read_authority": false,
+  "activation_authority": false,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
