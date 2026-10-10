@@ -1,8 +1,8 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_DEVELOPMENT_SCHEDULER_POINTER_V1",
   "date": "2026-10-10",
-  "status": "ACTIVE__LIVE_SELECTION_FAILS_CLOSED_UNTIL_CALIBRATED_COMPLETE_FRONTIER",
-  "authoritative_activation": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V7.json",
+  "status": "ACTIVE__LIVE_SCALAR_SELECTION_FAILS_CLOSED_UNTIL_CALIBRATED_COMPLETE_FRONTIER__STRUCTURAL_DEPENDENCY_CUT_ALLOWED",
+  "authoritative_activation": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V8.json",
   "runtime": "canonical/runtime/capability_first_scheduler_v1.py",
   "primary_entrypoint": "canonical.runtime.capability_first_live_scheduler_v1.rank_live_work",
   "objective": "MAXIMIZE_REUSABLE_VERIFIED_CAPABILITY_GENERALIZATION_RELIABILITY_AND_EFFICIENCY_PER_RESOURCE",
@@ -20,15 +20,15 @@
   },
   "reuse_first_policy": {
     "path": "canonical/governance/REUSE_FIRST_RESIDUAL_EXECUTION_POLICY_20261010_V1.json",
-    "status": "ACTIVE_LOAD_BEARING_MECHANICALLY_ENFORCED_THROUGH_CAPABILITY_FIRST_SCHEDULER_V7",
+    "status": "ACTIVE_LOAD_BEARING_MECHANICALLY_ENFORCED_THROUGH_CAPABILITY_FIRST_SCHEDULER_V8",
     "scheduler_rule": "EXPLICIT_NEW_PRIMITIVE_CLAIMS_REQUIRE_ALL_SIX_REUSE_EXHAUSTION_AND_FALSIFICATION_OBLIGATIONS__OTHERWISE_DEMOTED"
   },
   "live_runtime": "canonical/runtime/capability_first_live_scheduler_v1.py",
   "planning_entrypoint": "canonical.runtime.capability_first_scheduler_v1.rank_work",
   "current_live_work_frontier": {
     "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
-    "git_blob_sha": "00dac12b83774e4e0f96b74e5bc52cd1ffb97476",
-    "status": "CURRENT_CANDIDATE_INVENTORY_BOUND__BASE_C6826060__SCORE_CALIBRATION_OPEN__NO_LIVE_RANK_ONE_AUTHORITY"
+    "git_blob_sha": "1b68c003247002d2a647961e38f9de9089623626",
+    "status": "CURRENT_CANDIDATE_INVENTORY_BOUND__BASE_C906F3E__ESCAPE_V5_CURRENTNESS_BOUND__R6_STRUCTURAL_PREDECESSOR_AUTHORIZED__SCALAR_CALIBRATION_OPEN"
   },
   "live_score_contract": {
     "path": "canonical/governance/LIVE_WORK_SCORE_CALIBRATION_CONTRACT_20261010_V1.json",
@@ -40,5 +40,11 @@
     "path": "canonical/verification/CAPABILITY_FIRST_LIVE_SCHEDULER_V7_INDEPENDENT_VERIFY_20261010_V1.json",
     "git_blob_sha": "9b6a17d38a9285db63a6a760648a0567aa8a47ef",
     "status": "PYCOMPILE_PASS__11_OF_11_FOCUSED_AND_COMPATIBILITY_TESTS_PASS__CURRENTNESS_COMPLETENESS_AND_REUSE_FIRST_FAIL_CLOSED"
+  },
+  "structural_dependency_selection": {
+    "authorized": true,
+    "selected_cut": "PROFESSIONAL_QUALITY_V7_R6_EVIDENCE_GROUNDING_BINDING",
+    "authority": "canonical/governance/PROFESSIONAL_QUALITY_P1_V7_SAME_SUBJECT_ROOT_BINDING_WORKLIST_20261010_V11.json",
+    "semantics": "FROZEN_DEPENDENCY_PREDECESSOR_ONLY__NOT_GLOBAL_SCALAR_RANK_ONE"
   }
 }
