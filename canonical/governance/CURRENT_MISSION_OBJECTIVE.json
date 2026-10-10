@@ -28,8 +28,8 @@
     "primary_runtime": "canonical/runtime/capability_parallel_frontier_post_composition_v1.py",
     "primary_entrypoint": "plan_current_post_composition_frontier",
     "scalar_fallback_runtime": "canonical/runtime/capability_first_live_scheduler_v1.py",
-    "status": "ACTIVE_POST_COMPOSITION_V16__PROPERTY_TRUTH_1_OF_24__R10_SEMANTIC_NEXT",
-    "observed_git_blob_sha": "72fc919c4b2b90366c1b87ae890b0298e923a489"
+    "status": "ACTIVE_POST_COMPOSITION_V17__PROPERTY_TRUTH_1_OF_24__R10_SEMANTIC_NEXT__BYTES_V28_CURRENT",
+    "observed_git_blob_sha": "e2b6ce8aed00a40c21d9564969360ecd9bc5e953"
   },
   "scheduler_precedence": "REAL_MISSION_CAPABILITY_RESOURCE_PARETO_LEVERAGE_IS_PRIMARY__SAFE_NONCONFLICTING_PARALLELISM_MINIMIZES_WALL_CLOCK__CURRENTNESS_AND_DEPENDENCY_GATES_PRECEDE_SELECTION__DIMENSIONWISE_PARETO_DOMINANCE_PRECEDES_ANY_SCALAR_TRADEOFF__SCALARIZATION_REQUIRES_PROVED_TRADEOFF_CONTRACT__CURRENT_R2_SHARED_CAUSE_FANOUT_IS_SECONDARY_DISCRIMINATION_SIGNAL__OPUS_5_5_CHECKPOINT_WORK_IS_TERTIARY_AUDIT__EXPLICIT_NEW_PRIMITIVE_CLAIMS_REQUIRE_REUSE_FIRST_EXHAUSTION_PROOF",
   "current_professional_quality_execution": {
@@ -46,8 +46,8 @@
   },
   "current_parallel_frontier_control": {
     "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
-    "observed_git_blob_sha": "e3a030acb41c2ed6ca2fcad945c746b2aba5833a",
-    "status": "POST_COMPOSITION_V16__PROPERTY_TRUTH_1_OF_24__R10_EXECUTION_CLOSED__R10_SEMANTIC_NEXT__PARALLEL_EVIDENCE",
+    "observed_git_blob_sha": "5c553644117a508d9052f3ce2a1e5ac4f1dd56c1",
+    "status": "POST_COMPOSITION_V17__PROPERTY_TRUTH_1_OF_24__R10_EXECUTION_CLOSED__R10_SEMANTIC_NEXT__BYTES_V28_CURRENT__PARALLEL_EVIDENCE",
     "binding": "MUTABLE_CURRENT_PATH_IDENTITY__STALE_SOURCE_BYTES_FAIL_CLOSED_AT_CALL_TIME"
   },
   "current_residual_reuse_classification": {
