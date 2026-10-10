@@ -1,12 +1,13 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_R2_DECISION_INTELLIGENCE_POINTER_V1",
   "date": "2026-10-10",
-  "status": "ACTIVE_CURRENT_R2_AUTHORITY__V69__FORTY_DIRECT_ROUTES__THIRTY_SIX_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__DERIVED_TYPED_TERMINAL_SIGNATURES_ROUTE_BOUND__MREL_NECESSARY_PROPERTY_AUTHORITY_BOUND__TLAC_MREL_SHARED_SIGNATURE_NONSEPARATION_AND_BOUNDED_IDENTITY_DISCRIMINATOR_BOUND__OEWN_DECISION_MANIFEST_LATTICE_LIVE_DYNAMIC_ROUTE_BOUND__REGCAP_NO_DESCRIPTOR_DIRECT_SIGNATURE_CONTEXT_BOUND__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_REMAINS",
+  "status": "ACTIVE_CURRENT_R2_AUTHORITY__V70__FORTY_DIRECT_ROUTES__THIRTY_SIX_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__DERIVED_TYPED_TERMINAL_SIGNATURES_ROUTE_BOUND__MREL_NECESSARY_PROPERTY_AUTHORITY_BOUND__TLAC_MREL_SHARED_SIGNATURE_NONSEPARATION_AND_BOUNDED_IDENTITY_DISCRIMINATOR_BOUND__OEWN_DECISION_MANIFEST_LATTICE_LIVE_DYNAMIC_ROUTE_BOUND__REGCAP_NO_DESCRIPTOR_DIRECT_SIGNATURE_CONTEXT_BOUND__SCOPED_DOMAIN_EQUIVALENCE_INTERNALIZED__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_REMAINS",
   "mission_objective": {
     "path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json"
   },
   "live_front_door": {
-    "path": "canonical/runtime/unified_cognitive_fabric_v1.py"
+    "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
+    "git_blob_sha": "e6713badf2a240daa019ab7d3eb4cfabeea76485"
   },
   "controller": {
     "path": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
@@ -2218,6 +2219,23 @@
     "dynamic_admission_count": 4,
     "semantic_authority_delta": "BOUNDED_PAIR_SCOPE_ONLY",
     "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "scoped_domain_equivalence_internalization": {
+    "status": "LIVE_FRONT_DOOR_BOUND__FOCUSED_SEMANTIC_STACK_11_OF_11_PASS__OPEN_WORLD_RESIDUAL_PRESERVED",
+    "reconciliation_path": "canonical/governance/R2_SCOPED_DOMAIN_EQUIVALENCE_INTERNALIZATION_20261010_V1.json",
+    "scoped_edge_authority_path": "canonical/runtime/brain_owned_scoped_domain_mapping_relation_edge_authority_v1.py",
+    "scoped_edge_authority_git_blob_sha": "f4d61044e7cdd6bfb5abecc8aeba734ad520be39",
+    "relation_registry_path": "canonical/runtime/brain_owned_semantic_relation_edge_registry_v4.py",
+    "relation_registry_git_blob_sha": "bcef056c77a7ac5784fec70afe5e1b6a9d5af425",
+    "semantic_relation_controller_path": "canonical/runtime/semantic_relation_control_v2.py",
+    "semantic_relation_controller_git_blob_sha": "68166c216a1ca81cd9e017f32bf3d53dc057a105",
+    "live_front_door_git_blob_sha": "e6713badf2a240daa019ab7d3eb4cfabeea76485",
+    "automatic_owned_registry_rule": "USE_REGISTRY_V4_ONLY_WHEN_EVERY_LOAD_BEARING_DAG_ROW_CAN_PROVE",
+    "host_verifier_precedence_preserved": true,
+    "model_similarity_authority": false,
+    "open_world_semantic_completion_claimed": false,
+    "primary_finance_semantic_residual_closed": false,
     "terminal_credit_delta": 0
   }
 }
