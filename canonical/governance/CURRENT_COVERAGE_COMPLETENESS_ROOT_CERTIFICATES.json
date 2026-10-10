@@ -10,7 +10,7 @@
   },
   "registry": {
     "path": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_CERTIFICATE_REGISTRY_V1.json",
-    "git_blob_sha": "57213f68fd1724209845ad0e08da5e7a8f59d54c"
+    "git_blob_sha": "f75712f7757d7eee3afc7167f5bbdaea65ce9a67"
   },
   "guard": {
     "path": "canonical/runtime/coverage_root_certificate_registry_guard_v1.py",
