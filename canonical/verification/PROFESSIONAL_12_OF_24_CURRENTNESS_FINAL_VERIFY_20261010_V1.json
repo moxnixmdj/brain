@@ -5,31 +5,31 @@
   "subject": {
     "professional": {
       "path": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
-      "sha": "baa5e04e066b98838cb610ea1fad941c713ca57a"
+      "git_blob_sha": "baa5e04e066b98838cb610ea1fad941c713ca57a"
     },
     "assurance": {
       "path": "canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json",
-      "sha": "df8f3bb7cf92df516c896c783bbf41fa5cc5f1c0"
+      "git_blob_sha": "df8f3bb7cf92df516c896c783bbf41fa5cc5f1c0"
     },
     "frontier": {
       "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
-      "sha": "1fcf9a88a7c4b67b95ed0b1718de530f350f04f4"
+      "git_blob_sha": "1fcf9a88a7c4b67b95ed0b1718de530f350f04f4"
     },
     "residual": {
       "path": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
-      "sha": "75ab56c432085eb9ebcfb41251101d8ec854f257"
+      "git_blob_sha": "75ab56c432085eb9ebcfb41251101d8ec854f257"
     },
     "currentness": {
       "path": "canonical/governance/CAPABILITY_FRONTIER_CURRENTNESS_RECONCILIATION_20261010_V1.json",
-      "sha": "67b92a5e7a8de039afec0db8a7962b2a0d7f5f20"
+      "git_blob_sha": "67b92a5e7a8de039afec0db8a7962b2a0d7f5f20"
     },
     "scheduler": {
       "path": "canonical/governance/CURRENT_DEVELOPMENT_SCHEDULER.json",
-      "sha": "cb866eef2e0a86cec834428cae77b1c30703bf3f"
+      "git_blob_sha": "cb866eef2e0a86cec834428cae77b1c30703bf3f"
     },
     "mission": {
       "path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
-      "sha": "9e038a948656d9df45a4b38538cbef0793ad0e5f"
+      "git_blob_sha": "9e038a948656d9df45a4b38538cbef0793ad0e5f"
     }
   },
   "checks": {
@@ -40,7 +40,8 @@
     "currentness_source_bindings_match": true,
     "mission_current_bindings_match": true,
     "promotion_authority": false,
-    "terminal_authority": false
+    "terminal_authority": false,
+    "content_addressed_subject_bindings": true
   },
   "proved": [
     "CURRENT_PROFESSIONAL_ASSURANCE_FRONTIER_RESIDUAL_CURRENTNESS_SCHEDULER_AND_MISSION_SURFACES_ARE_COHERENT",
