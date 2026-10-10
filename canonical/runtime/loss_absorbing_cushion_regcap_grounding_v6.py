@@ -19,6 +19,7 @@ from canonical.runtime import loss_absorbing_cushion_regcap_grounding_v5 as v5
 from canonical.runtime import regcap_necessary_property_authority_v1 as regcap
 from canonical.runtime import mrel_necessary_property_authority_v1 as mrel
 from canonical.runtime import regcap_mrel_pair_discriminator_v1 as pair
+from canonical.runtime import regcap_four_way_loss_absorption_nonseparation_guard_v1 as nonsep
 
 SCHEMA = "PROJECT_BRAIN_LOSS_ABSORBING_CUSHION_REGCAP_GROUNDING_V6"
 FOUR = tuple(sorted((regcap.CCOB, regcap.CCYB, regcap.TLAC, mrel.MREL)))
@@ -94,12 +95,31 @@ def ground(
         })
         return out
 
+    shared_nonseparation = nonsep.verify_shared_loss_absorption(
+        regcap_repo_root=repo_root,
+        mrel_repo_root=repo_root,
+    )
+    out["four_way_loss_absorption_nonseparation"] = shared_nonseparation
+    out["shared_loss_absorption_nonseparation_proved"] = (
+        shared_nonseparation.get("pass") is True
+    )
+    out["reverse_classification_from_loss_absorption_authorized"] = False
+    out["additional_authenticated_discriminator_required"] = (
+        shared_nonseparation.get("pass") is True
+    )
+
     anchor, reason = _eligible_anchor_pair(base)
     if anchor is None:
         out.update({
             "anchor_mrel_revalidation_attempted": False,
             "anchor_mrel_revalidation_reason": reason,
         })
+        if shared_nonseparation.get("pass") is True:
+            out["boundary"] = (
+                str(out.get("boundary") or "")
+                + "__FOUR_WAY_LOSS_ABSORPTION_PROPERTY_AUTHENTICATED_"
+                "NONSEPARATING__ADDITIONAL_AUTHENTICATED_DISCRIMINATOR_REQUIRED"
+            ).strip("_")
         return out
 
     pair_id = pair.CCOB_MREL if anchor == regcap.CCOB else pair.CCYB_MREL
