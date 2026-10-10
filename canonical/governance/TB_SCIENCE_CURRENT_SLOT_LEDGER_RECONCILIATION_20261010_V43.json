@@ -1,0 +1,70 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V43",
+  "date": "2026-10-10",
+  "status": "CURRENT_POST_RANK19_NONCONSUMING__EIGHTEEN_CONSUMED__RANK20_STAGED_UNREAD_UNSTARTED__CLAIM_EPOCH_V3__CURRENT_INVARIANT_COMPLETE__PUBLIC_SURFACE_RESEAL_PENDING",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "predecessor": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V42.json",
+    "git_blob_sha": "1e7b6eb23667c5c86d79bd438f25856b74366ff3"
+  },
+  "rank20_authority": {
+    "path": "canonical/governance/TB_SCIENCE_RANK20_ONE_SLOT_EXECUTION_AUTHORITY_20261010_V2.json",
+    "git_blob_sha": "a6016f92ec074835af7cae7383f30699e5c584b3"
+  },
+  "logical_attempt_claim_binding": {
+    "path": "canonical/governance/TB_SCIENCE_RANK20_LOGICAL_ATTEMPT_CLAIM_BINDING_20261010_V3.json",
+    "git_blob_sha": "59fa5616f1754f90ded1c3b30cb53c98b4348cee",
+    "canonical_sha256": "ad74fd461333c1673b76ec0b439aba98c35bf6a0691796b24a5847209873adba"
+  },
+  "capability_first_admission": {
+    "path": "canonical/governance/TB_SCIENCE_RANK20_CAPABILITY_FIRST_CHECKPOINT_ADMISSION_20261010_V1.json",
+    "git_blob_sha": "b03861813f9b9a730659e6e0b6e7301a45061b04",
+    "verification_git_blob_sha": "d12c7c1f9e1259eaf3950689556fd0e6a37ba705"
+  },
+  "runtime_verification": {
+    "path": "canonical/verification/AGENT_V13_IDENTITY_V2_REPAIR_VERIFY_20261010_V1.json",
+    "git_blob_sha": "ec982a8cde737669d42abfb62a9f3cbdf0752434"
+  },
+  "counts": {
+    "benchmark_trials_consumed": 18,
+    "consumed_successes_final": 0,
+    "consumed_failures_final": 18,
+    "started_result_pending": 0,
+    "finalized_slots": 18,
+    "active_in_flight_slot_count": 0
+  },
+  "next_slot": {
+    "ledger_schedule_rank": 20,
+    "frozen_manifest_schedule_order": 19,
+    "task_rank": 19,
+    "slot_id": "terminal-bench-science/hysteretic-aquifer-control::trial-0",
+    "task_digest": "sha256:681df0c3b2ada03a933ac4d2e11f07983676f87a9f26b61e416987904b880289",
+    "logical_attempt_id": "62bbf27ddcc679f431c5569244cf0c54fb1b13181e83076e2c019764f0b747e2",
+    "logical_attempt_identity_basis": "SLOT_ID_PLUS_TASK_DIGEST_PLUS_EXECUTION_CLAIM_BINDING_DIGEST",
+    "execution_claim_binding_digest": "sha256:ad74fd461333c1673b76ec0b439aba98c35bf6a0691796b24a5847209873adba",
+    "task_read_history": false,
+    "task_started": false,
+    "start_cas_acquired": false,
+    "benchmark_trials_consumed": 0
+  },
+  "scheduler": {
+    "frozen": true,
+    "reason": "RANK20_PUBLIC_CLAIM_EPOCH_V3_EXECUTION_SURFACE_RESEAL_NOT_YET_VERIFIED",
+    "rank20_execution_authority_effective": false,
+    "only_authorized_transition": "BUILD_EXACT_V3_PUBLIC_SURFACE_AND_ZERO_EXPOSURE_VERIFY_BEFORE_ANY_TASK_READ"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_trials_consumed_delta": 0,
+    "consumed_successes_delta": 0,
+    "consumed_final_failures_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "execution_authority": false,
+  "finalization_authority": false,
+  "repair_authority": false,
+  "reseal_authority": "ZERO_EXPOSURE_ONLY"
+}
