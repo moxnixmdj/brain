@@ -1,0 +1,100 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_ARTIFACT_HARD_DEFECT_PREFLIGHT_BINDING_V1",
+  "date": "2026-10-10",
+  "status": "VERIFIED_BRAIN_OWNED_BOUNDED_HARD_DEFECT_PREFLIGHT__PUBLIC_EXAMPLE_SUBGATES_BOUND__ZERO_TARGET_SCORE_CREDIT",
+  "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+  "capability": {
+    "id": "PROFESSIONAL_ARTIFACT_HARD_DEFECT_PREFLIGHT_V1",
+    "runtime": {
+      "path": "canonical/runtime/professional_artifact_hard_defect_preflight_v1.py",
+      "git_blob_sha": "1921ef67ec36ac1847243e99c49f638bf7cc170a"
+    },
+    "tests": {
+      "path": "canonical/tests/test_professional_artifact_hard_defect_preflight_v1.py",
+      "git_blob_sha": "1b22b143339fd10ee245c808fb4a087adebbf110"
+    },
+    "verification": {
+      "path": "canonical/verification/PROFESSIONAL_ARTIFACT_HARD_DEFECT_PREFLIGHT_INDEPENDENT_VERIFICATION_20261010_V1.json",
+      "git_blob_sha": "feae7fe5217e0d71910b2ea9408c98b2a10c0c03",
+      "result": "11_OF_11_PASS"
+    }
+  },
+  "profile_authority": {
+    "brain_general_profile": {
+      "profile_id": "BRAIN_PROFESSIONAL_OOXML_SANITY_V1",
+      "authority": "BRAIN_OWNED_QA_POLICY",
+      "target_preference_authority": false
+    },
+    "aa_briefcase_lite_xlsx_public_example": {
+      "profile_id": "AA_BRIEFCASE_LITE_W1_T2_XLSX_HARD_SUBGATE_V1",
+      "source": {
+        "path": "canonical/evidence/AA_BRIEFCASE_LITE_PRESENTATION_PAIRWISE_CONTRACT_MANIFEST_20261007_V1.json",
+        "git_blob_sha": "42920315a5ecb9a1c8fe96a1a441dfd4a2f3b4e8",
+        "check_id": "W1-T2-P-01"
+      },
+      "proves_only": [
+        "NO_XLSX_ERROR_CELL_ON_THE_IMPLEMENTED_BYTE_DERIVED_CHECK",
+        "NO_ZERO_WIDTH_COLUMN_ON_THE_IMPLEMENTED_BYTE_DERIVED_CHECK"
+      ],
+      "official_private_AA_briefcase_credit": false
+    },
+    "aa_briefcase_lite_pptx_public_example": {
+      "profile_id": "AA_BRIEFCASE_LITE_W1_T3_PPTX_HARD_SUBGATE_V1",
+      "source": {
+        "path": "canonical/evidence/AA_BRIEFCASE_LITE_PRESENTATION_PAIRWISE_CONTRACT_MANIFEST_20261007_V1.json",
+        "git_blob_sha": "42920315a5ecb9a1c8fe96a1a441dfd4a2f3b4e8",
+        "check_id": "W1-T3-P-01"
+      },
+      "proves_only": [
+        "NO_TOP_LEVEL_TEXT_OBJECT_EXTENDS_OUTSIDE_SLIDE_BOUNDS_ON_THE_IMPLEMENTED_BYTE_DERIVED_CHECK"
+      ],
+      "official_private_AA_briefcase_credit": false
+    }
+  },
+  "professional_quality_effect": {
+    "closes_internal_gap": "SOURCE_OR_POLICY_BOUND_HARD_DEFECT_PREFLIGHT_FOR_SUPPORTED_OOXML_SUBGATES",
+    "roots_strengthened": [
+      "R3_REALIZATION_OBSERVATION",
+      "R4_MEASUREMENT_CONSTRUCT",
+      "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+      "R12_META_COMPOSITION_CLOSURE"
+    ],
+    "roots_closed": [],
+    "shared_presentation_frontier_effect": "ADDS_REUSABLE_HARD_DEFECT_FALSIFICATION_PRIMITIVE__DOES_NOT_DEFINE_COMPLETE_PRESENTATION_ORDER",
+    "gdpval_shared_style_138_task_adequacy_delta": false,
+    "aa_briefcase_private_presentation_adequacy_delta": false
+  },
+  "execution_rule": [
+    "RUN_ONLY_A_FROZEN_PROFILE; CALLER_SELECTED_CHECK_LISTS_ARE_REJECTED.",
+    "PACKAGE_OR_PARSE_FAILURE_FAILS_CLOSED.",
+    "PROFILE_REQUIRED_HARD_DEFECTS_BLOCK_DOWNSTREAM_QUALITY_CERTIFICATION.",
+    "UNSELECTED_OBSERVATIONS_HAVE_ZERO_VETO_AUTHORITY.",
+    "A_CLEAN_PREFLIGHT_ONLY_PERMITS_FURTHER_QUALITY_JUDGMENT; IT_IS_NOT_A_STYLE_OR_PREFERENCE_PASS."
+  ],
+  "next_high_leverage_use": [
+    "WIRE_THE_BRAIN_GENERAL_PROFILE_INTO_PROFESSIONAL_ARTIFACT_P1_AS_A_PRE_JUDGMENT_FALSIFICATION_STEP.",
+    "ADD_NEW_TARGET_LINKED_PROFILES_ONLY_WHEN_EXACT_SOURCE_AUTHORITY_MAKES_THE_CHECK_LOAD_BEARING.",
+    "KEEP_COMPLETE_PRESENTATION_ORDER_AND_GDPVAL_OR_PRIVATE_AA_TARGET_RELATION_AS_THE_SHARED_OPEN_FRONTIER."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_HARD_DEFECT_ABSENCE_IMPLIES_PROFESSIONAL_EXCELLENCE",
+    "NO_COMPLETE_PRESENTATION_DIMENSION_SET",
+    "NO_GDPVAL_138_TASK_STYLE_ADEQUACY",
+    "NO_PRIVATE_AA_BRIEFCASE_PRESENTATION_MEMBERSHIP_OR_SCORE",
+    "NO_OPUS_5_5_NONINFERIORITY",
+    "NO_ACCEPTANCE_FAMILY_OWNERSHIP_U_DELETION_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "execution_authority": true,
+  "scheduling_authority": true,
+  "promotion_authority": false,
+  "terminal_authority": false
+}
