@@ -68,7 +68,10 @@ def effective_timeout_s(input_tokens: int, requested_timeout_s: int) -> int:\n  
         margin_s = GENERATION_AND_TRANSPORT_MARGIN_S
         effective_cap_s = MAX_TIMEOUT_S
     prompt_floor = math.ceil(input_tokens / prefill_floor)
-    required = prompt_floor + margin_s
+    generation_floor = math.ceil(
+        MAX_TOOL_COMPLETION_TOKENS / GENERATION_TOKENS_PER_SECOND_FLOOR
+    )
+    required = prompt_floor + generation_floor + margin_s
     return min(effective_cap_s, max(MIN_TIMEOUT_S, requested_timeout_s, required))
 
 TOOL = {
