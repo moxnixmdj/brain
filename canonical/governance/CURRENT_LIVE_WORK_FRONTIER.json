@@ -9,15 +9,15 @@
     "source_set": [
       {
         "path": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
-        "git_blob_sha": "b163ce56e0d6750ad57a73065ad16cbde3fd25e0"
+        "git_blob_sha": "06b58989ac040f82554a28400ae8da38de96e4bc"
       },
       {
         "path": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
-        "git_blob_sha": "36c8a0f94077a54b49efca2be377478b38cc1aaa"
+        "git_blob_sha": "c6bf0e57d0660e0a804ae0ab31d3bae8b51eed59"
       },
       {
         "path": "canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json",
-        "git_blob_sha": "86330422a4b19bd8af48b969989ffc64b6841da5"
+        "git_blob_sha": "b4518eef557abf9d4a6572bf26ad2f413c3b86d9"
       },
       {
         "path": "canonical/governance/CURRENT_TB_SCIENCE_EXECUTION.json",
@@ -90,7 +90,7 @@
       "vector_evidence": {},
       "read_only_evidence": {
         "source": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
-        "source_git_blob_sha": "36c8a0f94077a54b49efca2be377478b38cc1aaa",
+        "source_git_blob_sha": "c6bf0e57d0660e0a804ae0ab31d3bae8b51eed59",
         "whole_leaf_scope_complete_count": 24,
         "property_truth_closed_count": 2,
         "verified_property_truth_leaf_ids": [
@@ -101,7 +101,12 @@
         "open_semantic_leaf_count": 12,
         "semantic_shared_acceptance": true,
         "current_defeater_catalog_completeness_claim": false,
-        "vector_bounds_complete": false
+        "vector_bounds_complete": false,
+        "semantic_shared_blocker_verification_path": "canonical/verification/PROFESSIONAL_QUALITY_SEMANTIC_SHARED_BLOCKER_INDEPENDENT_VERIFY_20261010_V1.json",
+        "semantic_shared_blocker_verification_git_blob_sha": "d5218f612e282f1b9339b5b3e84b5c74282b7042",
+        "semantic_shared_blocker_independently_verified": true,
+        "semantic_catalog_alone_can_close": false,
+        "semantic_new_primitive_required": false
       }
     },
     {
