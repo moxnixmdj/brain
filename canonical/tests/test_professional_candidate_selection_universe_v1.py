@@ -110,3 +110,13 @@ def test_unknown_fields_fail_closed():
     out=u.freeze(p)
     assert out["pass"] is False
     assert out["reason"]=="CANDIDATE_UNMODELED_FIELDS"
+
+def test_forged_pass_object_is_revalidated_not_trusted():
+    frozen=u.freeze(payload())
+    forged=deepcopy(frozen)
+    forged["manifest"]["candidates"][1]["generator_trace_sha256"]=None
+    forged["candidate_universe_sha256"]=u._digest(forged["manifest"])
+    out=u.validate_frozen(forged)
+    assert out["pass"] is False
+    assert out["reason"]=="FROZEN_MANIFEST_REVALIDATION_FAILED"
+    assert out["revalidation_reason"]=="GENERATED_CANDIDATE_TRACE_SHA256_REQUIRED"
