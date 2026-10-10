@@ -161,7 +161,7 @@ class DocumentEffectFieldProofDiscoveryV1Tests(unittest.TestCase):
         self.assertEqual(out["proved_candidate_count"],2)
 
     def test_invalid_candidate_value_does_not_gain_authority(self):
-        problem=discovery_case(values=({"not":"serializable? no":object()},),evidence=[])
+        problem=discovery_case(values=(object(),),evidence=[])
         out=discover(problem)
         self.assertFalse(out["pass"])
         self.assertEqual(out["status"],"FAIL_CLOSED")
