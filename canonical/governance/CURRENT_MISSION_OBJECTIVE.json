@@ -36,8 +36,8 @@
   "current_professional_quality_execution": {
     "path": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
     "binding": "MUTABLE_CURRENT_POINTER_PATH_IDENTITY__OBSERVED_BLOB_IS_CURRENTNESS_EVIDENCE_NOT_IMMUTABLE_AUTHORITY",
-    "observed_git_blob_sha": "c4d2259cf89cc29f47292648dfa67382747c7659",
-    "status": "P1_V3_LIVE_UNCHANGED__V7_12_OF_12_COMPOSED__24_OF_24_SCOPE_VERIFIED__PROPERTY_TRUTH_9_OF_24__R1_R2_R3_R4_R6_R7_R8_R10_R12_EXECUTION_VERIFIED__12_SEMANTIC_LEAVES_REDUCED_TO_CLAIM_SCOPED_TOTALITY_REUSE__3_OTHER_EXECUTION_LEAVES_OPEN__NOT_LIVE_DEFAULT",
+    "observed_git_blob_sha": "91161517b00078f50c17ead7276a8f54e213d45c",
+    "status": "P1_V3_LIVE_UNCHANGED__V7_12_OF_12_COMPOSED__24_OF_24_SCOPE_VERIFIED__PROPERTY_TRUTH_12_OF_24__ALL_12_EXECUTION_LEAVES_VERIFIED__12_SEMANTIC_LEAVES_REDUCED_TO_CLAIM_SCOPED_TOTALITY_REUSE__NOT_LIVE_DEFAULT",
     "terminal_authority": false,
     "observed_snapshot_is_non_authoritative_for_v15_runtime": true
   },
@@ -66,9 +66,13 @@
     "leaf_count": 24,
     "admitted_v2_chain_count": 24,
     "claim_scope_construction_required_count": 0,
-    "property_truth_ready_count": 15,
-    "property_truth_closed_count": 9,
-    "next": "DEPLET_R5_R9_R11_EXECUTION_PROPERTY_TRUTH__IN_PARALLEL_INSTANTIATE_SEMANTIC_CLAIM_SCOPED_TOTALITY__RUN_FULL_CURRENT_MAIN_REGRESSION"
+    "property_truth_ready_count": 12,
+    "property_truth_closed_count": 12,
+    "next": "INSTANTIATE_SEMANTIC_CLAIM_SCOPED_TOTALITY_FOR_TWELVE_LEAVES__RUN_FULL_CURRENT_MAIN_REGRESSION",
+    "registry_verification_v9": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_LEAF_REGISTRY_PROPERTY_TRUTH_VERIFY_20261010_V9.json",
+      "git_blob_sha": "0650125baac22d5c424021915fef51c170dd1e4c"
+    }
   },
   "professional_scope_reconciliation": {
     "path": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_SCOPE_BATCH_VERIFY_20261010_V1.json",
@@ -91,18 +95,21 @@
     "status": "PASS__R10_EXECUTION_LEAF_ONLY__38_CASE_EXACT_BOUND_ACCEPTANCE__DETECTION_COMPLETENESS_SEMANTIC_ROOT_AND_GLOBAL_CLOSURE_OPEN"
   },
   "property_truth_reconciliation": {
-    "verified_leaf_count": 9,
+    "verified_leaf_count": 12,
     "total_leaf_count": 24,
     "verified_leaf_ids": [
+      "PQ::R10_ANALYSIS_DECISION::EXECUTION",
+      "PQ::R11_ADAPTIVE_INTEGRITY_SECURITY::EXECUTION",
+      "PQ::R12_META_COMPOSITION_CLOSURE::EXECUTION",
       "PQ::R1_TARGET_SPECIFICATION::EXECUTION",
       "PQ::R2_CANDIDATE_SEARCH::EXECUTION",
       "PQ::R3_REALIZATION_OBSERVATION::EXECUTION",
       "PQ::R4_MEASUREMENT_CONSTRUCT::EXECUTION",
+      "PQ::R5_EVALUATOR_REFERENCE::EXECUTION",
       "PQ::R6_EVIDENCE_GROUNDING_DEPENDENCE::EXECUTION",
       "PQ::R7_CAUSAL_PRESCRIPTIVE::EXECUTION",
       "PQ::R8_POPULATION_CONTEXT_OPERATOR::EXECUTION",
-      "PQ::R10_ANALYSIS_DECISION::EXECUTION",
-      "PQ::R12_META_COMPOSITION_CLOSURE::EXECUTION"
+      "PQ::R9_TEMPORAL_DEPLOYMENT::EXECUTION"
     ],
     "r10_verification": {
       "path": "canonical/verification/PROFESSIONAL_QUALITY_R10_EXECUTION_PROPERTY_TRUTH_INDEPENDENT_VERIFY_20261010_V1.json",
@@ -112,7 +119,7 @@
       "path": "canonical/verification/PROFESSIONAL_QUALITY_R7_EXECUTION_PROPERTY_TRUTH_INDEPENDENT_VERIFY_20261010_V1.json",
       "git_blob_sha": "de713f29b4b615a181a67c8595fc3a895f949fe7"
     },
-    "shared_semantic_blocker": "ALL_12_SEMANTIC_LEAVES_SHARE_IDENTICAL_ACCEPTANCE__CURRENT_DEFEATER_CATALOG_EXPLICITLY_DISCLAIMS_COMPLETENESS",
+    "shared_semantic_blocker": "ALL_12_SEMANTIC_LEAVES_REQUIRE_CLAIM_SCOPED_CC_R1_CC_R2_CC_R3_R4_TOTALITY_EVIDENCE__CURRENT_CATALOG_ALONE_IS_NOT_COMPLETENESS_AUTHORITY",
     "r1_verification": {
       "path": "canonical/verification/PROFESSIONAL_QUALITY_R1_EXECUTION_PROPERTY_TRUTH_INDEPENDENT_VERIFY_20261010_V1.json",
       "git_blob_sha": "c7831ee5157fcddc48c44034bca19a57d9ce314b"
@@ -166,6 +173,16 @@
     "r8_verification": {
       "path": "canonical/verification/PROFESSIONAL_QUALITY_R8_EXECUTION_PROPERTY_TRUTH_INDEPENDENT_VERIFY_20261010_V1.json",
       "git_blob_sha": "3963345904280f53cb2810313514491f7f6cae97"
+    },
+    "open_execution_leaf_count": 0,
+    "open_semantic_leaf_count": 12,
+    "registry_verification_v9": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_LEAF_REGISTRY_PROPERTY_TRUTH_VERIFY_20261010_V9.json",
+      "git_blob_sha": "0650125baac22d5c424021915fef51c170dd1e4c"
+    },
+    "r5_verification": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R5_EXECUTION_PROPERTY_TRUTH_INDEPENDENT_VERIFY_20261010_V1.json",
+      "git_blob_sha": "0e2e02313594563118498cbe41c23e4251208d6f"
     }
   },
   "semantic_shared_blocker_reconciliation": {
