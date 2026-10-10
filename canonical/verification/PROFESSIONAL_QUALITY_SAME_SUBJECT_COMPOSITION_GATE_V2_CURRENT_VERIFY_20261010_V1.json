@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_SAME_SUBJECT_COMPOSITION_GATE_V2_CURRENT_VERIFY_V1",
   "date": "2026-10-10",
-  "status": "PASS__CURRENT_21_SCOPE_OVERLAY__12_ROOT_SET__9_OF_9_GATE_FALSIFICATION__ZERO_QUALITY_OR_TERMINAL_CREDIT",
+  "status": "PASS__CURRENT_21_SCOPE_OVERLAY__12_ROOT_SET__9_OF_9_GATE_FALSIFICATION__5_OF_5_CURRENTNESS_AND_POINTER__ZERO_QUALITY_OR_TERMINAL_CREDIT",
   "branch": "successor/pq-same-subject-v2-currentness-20261010",
   "subject": {
     "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V3_DECLARED_SYSTEM_SUBJECT_20261010_V2.json",
@@ -14,7 +14,9 @@
     "gate_tests": "c2a4ac767660671800d2c7acec5b8d3c806475b4",
     "scoped_overlay": "19c11df8b011fa2c72c755f421edcd38a89f0a07",
     "scoped_registry": "b9ddf7cbe7fbfad0e81fe068a0c19b48703b5aba",
-    "root_binding_worklist": "0b81540430b57ea144bb3751077a261d64f626dd"
+    "root_binding_worklist": "0b81540430b57ea144bb3751077a261d64f626dd",
+    "pointer_regression": "84cac701bfd7e8c08baeefeb097cf041d2cbf7d2",
+    "currentness_regression": "d9b6e58cb68012301fa6483e34c4031bcdc5bd5f"
   },
   "independent_replay": {
     "carrier": "Sprites",
@@ -26,7 +28,11 @@
     "overlay_distinct_root_count": 12,
     "gate_tests_run": 9,
     "gate_tests_passed": 9,
-    "gate_tests_failed": 0
+    "gate_tests_failed": 0,
+    "direct_currentness_functions_run": 5,
+    "direct_currentness_functions_passed": 5,
+    "direct_currentness_functions_failed": 0,
+    "total_executed_checks": 14
   },
   "proved": [
     "CURRENT_MULTI_SCOPE_REGISTRY_IS_VALID_UNDER_OVERLAY",
