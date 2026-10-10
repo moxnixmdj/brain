@@ -257,3 +257,33 @@ def test_no_success_path_claims_global_totality_or_terminal_authority():
     assert out["acceptance_authority"] is False
     assert out["terminal_authority"] is False
     assert out["terminal_credit_delta"] == 0
+
+
+def test_verified_delta_kind_must_match_selected_alternative():
+    def verifier(req):
+        delta = {
+            "kind": "ADD_POLICY",
+            "row": policy("p_common", ("r1", "r2")),
+        }
+        return {
+            "schema": e.VERIFICATION_SCHEMA,
+            "pass": True,
+            "receipt_sha256": "b" * 64,
+            "candidate_delta_sha256": req["candidate_delta_sha256"],
+            "alternative_id": req["alternative"]["alternative_id"],
+            "verified_delta": delta,
+            "verified_delta_sha256": e._sha(delta),
+            "verification_authority_mutated": False,
+        }
+
+    out = e.execute(
+        state(policies=[policy("p1", ("r1",)), policy("p2", ("r2",))]),
+        evidence_acquisition_provider=provider_for("EVIDENCE_ACQUISITION"),
+        candidate_verifier=verifier,
+    )
+    assert out["pass"] is False
+    assert any(
+        "VERIFIED_DELTA_KIND_MISMATCH_WITH_EVIDENCE_ALTERNATIVE"
+        in x.get("reason", "")
+        for x in out["attempts"]
+    )
