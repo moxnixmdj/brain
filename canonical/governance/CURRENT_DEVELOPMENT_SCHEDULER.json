@@ -1,10 +1,10 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_DEVELOPMENT_SCHEDULER_POINTER_V1",
   "date": "2026-10-10",
-  "status": "ACTIVE",
-  "authoritative_activation": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V6.json",
+  "status": "ACTIVE__LIVE_SELECTION_FAILS_CLOSED_UNTIL_CALIBRATED_COMPLETE_FRONTIER",
+  "authoritative_activation": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V7.json",
   "runtime": "canonical/runtime/capability_first_scheduler_v1.py",
-  "primary_entrypoint": "rank_live_work",
+  "primary_entrypoint": "canonical.runtime.capability_first_live_scheduler_v1.rank_live_work",
   "objective": "MAXIMIZE_REUSABLE_VERIFIED_CAPABILITY_GENERALIZATION_RELIABILITY_AND_EFFICIENCY_PER_RESOURCE",
   "checkpoint_policy": "OPUS_5_5_IS_SECONDARY_FRONTIER_AUDIT__NOT_PRIMARY_DEVELOPMENT_GATE",
   "terminal_autopilot_policy": "NEW_CHECKPOINT_DISPATCH_REQUIRES_EXPLICIT_CAPABILITY_FIRST_ADMISSION",
@@ -20,7 +20,20 @@
   },
   "reuse_first_policy": {
     "path": "canonical/governance/REUSE_FIRST_RESIDUAL_EXECUTION_POLICY_20261010_V1.json",
-    "status": "ACTIVE_LOAD_BEARING_MECHANICALLY_ENFORCED_THROUGH_CAPABILITY_FIRST_SCHEDULER_V6",
+    "status": "ACTIVE_LOAD_BEARING_MECHANICALLY_ENFORCED_THROUGH_CAPABILITY_FIRST_SCHEDULER_V7",
     "scheduler_rule": "EXPLICIT_NEW_PRIMITIVE_CLAIMS_REQUIRE_ALL_SIX_REUSE_EXHAUSTION_AND_FALSIFICATION_OBLIGATIONS__OTHERWISE_DEMOTED"
-  }
+  },
+  "live_runtime": "canonical/runtime/capability_first_live_scheduler_v1.py",
+  "planning_entrypoint": "canonical.runtime.capability_first_scheduler_v1.rank_work",
+  "current_live_work_frontier": {
+    "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
+    "git_blob_sha": "3929428b28ef8f922fe8d25cbdaa316248081cae",
+    "status": "CURRENT_CANDIDATE_INVENTORY_BOUND__REBASED_A8CBE3FF__SCORE_CALIBRATION_OPEN__NO_LIVE_RANK_ONE_AUTHORITY"
+  },
+  "live_score_contract": {
+    "path": "canonical/governance/LIVE_WORK_SCORE_CALIBRATION_CONTRACT_20261010_V1.json",
+    "git_blob_sha": "2446bc1f551326eb78cc9b94a418d4ce65971c8c",
+    "status": "ACTIVE_FAIL_CLOSED_CONTRACT__NO_CALIBRATED_COMPLETE_FRONTIER_BOUND_YET"
+  },
+  "live_selection_rule": "NO_LIVE_RANKING_FROM_RAW_HETEROGENEOUS_OR_UNPROVEN_SCORE_NUMBERS__COMPLETE_CURRENT_FRONTIER_PLUS_COMMON_DIMENSIONLESS_CALIBRATION_PLUS_PER_METRIC_EVIDENCE_PLUS_INDEPENDENT_VERIFICATION_REQUIRED"
 }
