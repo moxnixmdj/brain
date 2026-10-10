@@ -112,7 +112,7 @@
     "runtime_path": "canonical/runtime/professional_quality_same_subject_composition_gate_v2.py",
     "runtime_git_blob_sha": "184b4287bb3be66fced2dfbd05b7c7e2fd91d783",
     "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_SAME_SUBJECT_COMPOSITION_GATE_V2_CURRENT_VERIFY_20261010_V1.json",
-    "verification_git_blob_sha": "9e2064e65be2ffa4846ae645126eca1afeed85d5",
+    "verification_git_blob_sha": "54405ab55d7b0abe3e44d862121c7ac73e257d67",
     "structural_gate_verified": true,
     "current_multi_scope_registry_supported": true,
     "real_all_root_subject_bound": false,
