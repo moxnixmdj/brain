@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_ASSURANCE_CLOSURE_COMPILER_POINTER_V1",
   "date": "2026-10-09",
-  "status": "CURRENT_UVCK_V2_CANDIDATE__PROFESSIONAL_V7_PROOF_BOUND_EXECUTION_SUBJECT_FROZEN__R1_R2_R3_R4_R5_R6_V7_BINDINGS_VERIFIED__6_OF_12_CURRENT_ROOT_SUBJECT_BINDINGS__R7_CAUSAL_PRESCRIPTIVE_NEXT__NOT_LIVE_DEFAULT",
+  "status": "CURRENT_UVCK_V2_CANDIDATE__PROFESSIONAL_V7_PROOF_BOUND_EXECUTION_SUBJECT_FROZEN__R1_R2_R3_R4_R5_R6_R7_V7_BINDINGS_VERIFIED__7_OF_12_CURRENT_ROOT_SUBJECT_BINDINGS__R8_POPULATION_CONTEXT_NEXT__NOT_LIVE_DEFAULT",
   "governance": {
     "path": "canonical/governance/UVCK_V2_ASSURANCE_CLOSURE_COMPILER_20261009_V1.json",
     "git_blob_sha": "b7197be29b49c55c81e1a18572cd22020510fa5e"
@@ -234,7 +234,7 @@
   },
   "professional_quality_same_subject_frontier": {
     "current_professional_execution_path": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
-    "current_professional_execution_git_blob_sha": "81e4070cba1e432bfc6b8eb74e60097ca86306b5",
+    "current_professional_execution_git_blob_sha": "dc2c698a52382bf49d0e38b64dd83b488e56c41b",
     "declared_system_subject": {
       "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V7_DECLARED_SYSTEM_SUBJECT_20261010_V6.json",
       "git_blob_sha": "1d598bc8757017ceb34928d0df9f5fce859ef868",
@@ -246,10 +246,10 @@
       "verification_git_blob_sha": "9bca985bfcef8f5cc6d62b42a51ccc72a6abfd2c"
     },
     "root_binding_worklist": {
-      "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V7_SAME_SUBJECT_ROOT_BINDING_WORKLIST_20261010_V12.json",
-      "git_blob_sha": "3915d96b6852173b8d1e2fb19d2fdc48bf5e13f4",
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V7_SAME_SUBJECT_ROOT_BINDING_WORKLIST_20261010_V13.json",
+      "git_blob_sha": "65e4ff82cc97e66155f01361cafdb8da8e17323c",
       "required_root_count": 12,
-      "verified_root_subject_binding_count": 6,
+      "verified_root_subject_binding_count": 7,
       "composition_admissible": false
     },
     "v7_profile_step_provenance": {
@@ -291,10 +291,28 @@
         "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_R5_V7_ROOT_SUBJECT_BINDING_VERIFY_20261010_V1.json",
         "verification_git_blob_sha": "d4dc698d89738470cf3b41fe860b8c3f666a56a9",
         "true_owner_evaluator_containment_proved": false
+      },
+      "R6_EVIDENCE_GROUNDING_DEPENDENCE": {
+        "binding_path": "canonical/governance/PROFESSIONAL_QUALITY_R6_ROOT_SUBJECT_BINDING_20261010_V1.json",
+        "binding_git_blob_sha": "0a6626c3378b471bff70de0ae3ea53e1e784276e",
+        "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_R6_V7_ROOT_SUBJECT_BINDING_VERIFY_20261010_V1.json",
+        "verification_git_blob_sha": "abb4a251345e2701dc42578a1695f5e59f4bb665",
+        "global_evidence_completeness_proved": false,
+        "global_r6_root_closed": false
+      },
+      "R7_CAUSAL_PRESCRIPTIVE": {
+        "binding_path": "canonical/governance/PROFESSIONAL_QUALITY_R7_ROOT_SUBJECT_BINDING_20261010_V1.json",
+        "binding_git_blob_sha": "d1b4af80e94048ec4093192d2b8203d47eff56ed",
+        "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_R7_V7_ROOT_SUBJECT_BINDING_VERIFY_20261010_V1.json",
+        "verification_git_blob_sha": "26e0e3f6570ae08057d868b0300386b34de7881f",
+        "global_r7_root_closed": false,
+        "multi_edit_attribution_proved": false,
+        "sequence_invariance_proved": false,
+        "treatment_generalization_proved": false
       }
     },
-    "status": "V7_PROOF_BOUND_EXECUTION_SUBJECT_FROZEN__R1_R2_R3_R4_R5_VERIFIED__5_OF_12_CURRENT_BINDINGS__R6_NEXT",
-    "assurance_effect": "R1_R5_CURRENT_BINDING_CREDIT_EXISTS_ON_V7__R6_R12_REMAIN_OPEN__R3_HAS_ONE_EXACT_REAL_TASK_RECEIPT_WITHOUT_GLOBAL_CLOSURE"
+    "status": "V7_PROOF_BOUND_EXECUTION_SUBJECT_FROZEN__R1_R2_R3_R4_R5_R6_R7_VERIFIED__7_OF_12_CURRENT_BINDINGS__R8_NEXT",
+    "assurance_effect": "R1_R7_CURRENT_BINDING_CREDIT_EXISTS_ON_V7__R8_R12_REMAIN_OPEN__GLOBAL_DOMAIN_SEMANTIC_AND_EXECUTION_CLOSURE_REMAIN_FALSE"
   },
   "hard_nonclaims": [
     "NO_PROFESSIONAL_SAME_SUBJECT_COMPOSITION_PASS",
