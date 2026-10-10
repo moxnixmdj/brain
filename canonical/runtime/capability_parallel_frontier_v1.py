@@ -236,6 +236,12 @@ def _components(
     return result
 
 
+def plan_current_parallel_frontier() -> dict[str, Any]:
+    """Canonical current-frontier planning entrypoint."""
+    return plan_parallel_frontier(load_current_frontier())
+
+
+
 def plan_parallel_frontier(
     frontier: Mapping[str, Any],
     *,
