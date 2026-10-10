@@ -157,7 +157,8 @@ def verify(*,repo_root:str|Path|None=None):
 
  sem=docs["r3_realization_semantic_scope"]
  limits=set(sem.get("limitations") or [])
- if "NO_ARBITRARY_SEMANTIC_TARGET_CORRECTNESS" not in limits or "NO_GLOBAL_R3_ROOT_CLOSURE" not in limits:return _fail("R3_SEMANTIC_SCOPE_TOO_BROAD")
+ if "NO_ARBITRARY_SEMANTIC_TARGET_SELECTION" not in limits or "NO_GLOBAL_R3_ROOT_CLOSURE" not in limits:return _fail("R3_SEMANTIC_SCOPE_TOO_BROAD")
+ if sem.get("global_root_closure") is not False or sem.get("terminal_authority") is not False:return _fail("R3_SEMANTIC_SCOPE_AUTHORITY_OVERCLAIM")
  sv=docs["r3_realization_semantic_verification"]
  if not str(sv.get("status") or "").startswith("PASS__"):return _fail("R3_SEMANTIC_VERIFY_NOT_PASS")
  si=docs["r3_scoped_integration_verification"]
