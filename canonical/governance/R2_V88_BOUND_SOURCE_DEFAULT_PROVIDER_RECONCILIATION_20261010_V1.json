@@ -1,0 +1,22 @@
+{
+  "schema": "PROJECT_BRAIN_R2_V88_BOUND_SOURCE_DEFAULT_PROVIDER_RECONCILIATION_V1",
+  "status": "RECONCILED__V87_CHECKER_OWNED_INGESTION_PRESERVED__EXACT_ALREADY_BOUND_SOURCE_ACQUISITION_NOW_DEFAULT_AUTONOMOUS__ONE_PRIMARY_FINANCE_RESIDUAL_REMAINS__ZERO_CREDIT",
+  "prior_version": "V87",
+  "current_version": "V88",
+  "verification_path": "canonical/verification/R2_BOUND_SOURCE_DEFAULT_PROVIDER_VERIFY_20261010_V1.json",
+  "verification_git_blob_sha": "1082a537906c336f3eb8d12d819c1cc072ec0620",
+  "provider_runtime_path": "canonical/runtime/r2_bound_source_information_provider_v1.py",
+  "provider_runtime_git_blob_sha": "c1d1864df799cb1b5803eed9387dfe9999fe1cb3",
+  "controller_runtime_path": "canonical/runtime/general_adequate_decision_controller_v1.py",
+  "controller_runtime_git_blob_sha": "00b6c373bbb0f367435705ce4492bf2c249e1b0e",
+  "closed_subcase": "EXTERNAL_WORLD__BOUND_SOURCE__OBSERVE_BOUND_SOURCE_ONLY__EXACT_HTTPS_URLS_PLUS_EXPECTED_SHA256_DIGESTS",
+  "provider_truth_authority": false,
+  "checker_owned_truth_recomputation_required": true,
+  "custom_information_provider_override_preserved": true,
+  "unbound_external_discovery_closed": false,
+  "retrieval_candidate_to_checker_materialization_closed": false,
+  "finance_tail_closed": false,
+  "global_open_world_closure_delta": false,
+  "acceptance_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
