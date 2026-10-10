@@ -1,0 +1,275 @@
+{
+  "schema": "PROJECT_BRAIN_R2_RUNTIME_IMPORT_CLOSURE_V1",
+  "root_runtime_path": "canonical/runtime/r2_cross_document_semantic_registry_v3_lattice_direct_adequacy_v1.py",
+  "file_count": 67,
+  "files": [
+    {
+      "path": "canonical/runtime/authoritative_typed_context_compiler_v1.py",
+      "git_blob_sha": "3f2751424076a69168bd0b1cb22e9c2d42920a01"
+    },
+    {
+      "path": "canonical/runtime/bounded_authenticated_concept_universe_v1.py",
+      "git_blob_sha": "f9317ab926b10e2951947f76d6cb5f3828378554"
+    },
+    {
+      "path": "canonical/runtime/bounded_imperative_directive_semantics_v1.py",
+      "git_blob_sha": "3f08b2703723537e5a146346eead6a387424687f"
+    },
+    {
+      "path": "canonical/runtime/bounded_predicate_argument_semantics.py",
+      "git_blob_sha": "c7f190927e31fa2ab32f129b43402e98ea836498"
+    },
+    {
+      "path": "canonical/runtime/bounded_semantic_relation_proof_v1.py",
+      "git_blob_sha": "d2a1dc140535cf6430e3ee79605ddff3cd561db6"
+    },
+    {
+      "path": "canonical/runtime/bounded_task_directive_semantics_v1.py",
+      "git_blob_sha": "e3a4c01cc08e7a569692a5d6f03a6feec69934bf"
+    },
+    {
+      "path": "canonical/runtime/brain_owned_bounded_semantic_relation_edge_authority_v1.py",
+      "git_blob_sha": "66caa4c070ad55223674f901cb719f06c3d2f0f9"
+    },
+    {
+      "path": "canonical/runtime/brain_owned_domain_mapping_relation_edge_authority_v1.py",
+      "git_blob_sha": "5a6d231da4004834363d13909efb5844abe3e3f0"
+    },
+    {
+      "path": "canonical/runtime/brain_owned_semantic_relation_edge_authority_v1.py",
+      "git_blob_sha": "01305c41e79189e3ea13f1a6343427ee31eda566"
+    },
+    {
+      "path": "canonical/runtime/brain_owned_semantic_relation_edge_registry_v3.py",
+      "git_blob_sha": "606d15b7a1ce8c5d70f4ba845467b560a9c8daf9"
+    },
+    {
+      "path": "canonical/runtime/brain_owned_source_implication_closure_edge_authority_v1.py",
+      "git_blob_sha": "899e098d73c3d61dcf39bd6a5be54ba4f5b8c6e6"
+    },
+    {
+      "path": "canonical/runtime/certified_bounded_natural_effect_clause_v1.py",
+      "git_blob_sha": "6ac0e177341f3298b33405c087567a6701634965"
+    },
+    {
+      "path": "canonical/runtime/certified_bounded_semantic_extension_source_v1.py",
+      "git_blob_sha": "40477b9e0b89b6d7b7b9e55390b32a8806536104"
+    },
+    {
+      "path": "canonical/runtime/certified_compositional_natural_effect_clause_v1.py",
+      "git_blob_sha": "ba66d4d26254073b64aa0d460eaab3c10747d22d"
+    },
+    {
+      "path": "canonical/runtime/certified_defined_term_raw_typed_condition_v2.py",
+      "git_blob_sha": "1a9eef8dff77ef36f29c97509b2eedc7df2186b3"
+    },
+    {
+      "path": "canonical/runtime/certified_defined_term_typed_condition_v1.py",
+      "git_blob_sha": "b35a8e56f302a904993dc2e3ef85195e9db2f129"
+    },
+    {
+      "path": "canonical/runtime/certified_document_effect_field_edge_v1.py",
+      "git_blob_sha": "63ab39387c98b41237980060d52b4d0e9b88b967"
+    },
+    {
+      "path": "canonical/runtime/certified_document_effect_field_v1.py",
+      "git_blob_sha": "b6823b61cede03fa90d39fe1a0d9c65efbc1843f"
+    },
+    {
+      "path": "canonical/runtime/certified_document_effect_relation_v1.py",
+      "git_blob_sha": "944033c65c183975e347990bcd3d3b9720981d32"
+    },
+    {
+      "path": "canonical/runtime/certified_effect_id_inventory_v1.py",
+      "git_blob_sha": "f5e6020708390f57a9fc76d7ddac5933c1ff6680"
+    },
+    {
+      "path": "canonical/runtime/certified_effect_target_scope_v1.py",
+      "git_blob_sha": "5a4371de5e8c1fec4e99477b39a6c1878ceb30d0"
+    },
+    {
+      "path": "canonical/runtime/certified_scope_fragment_v1.py",
+      "git_blob_sha": "daad64c3854a4820f59236c1e1e2beca633d5f01"
+    },
+    {
+      "path": "canonical/runtime/certified_semantic_implication_source_v1.py",
+      "git_blob_sha": "05e85230f7c558d029945529d7f7650e40ed0db8"
+    },
+    {
+      "path": "canonical/runtime/certified_typed_unless_condition_v1.py",
+      "git_blob_sha": "bf861d5f12e71460c002f8ca729fe8caada26b79"
+    },
+    {
+      "path": "canonical/runtime/cross_document_effect_calculus_v1.py",
+      "git_blob_sha": "b2629a5edb01d8ad09c88dfbab4441486b80ad65"
+    },
+    {
+      "path": "canonical/runtime/cross_document_effect_hypothesis_worldset_v1.py",
+      "git_blob_sha": "4738174c5f7e2c1a9218f19c72622fcbbde54272"
+    },
+    {
+      "path": "canonical/runtime/cross_document_effect_hypothesis_worldset_verify_v1.py",
+      "git_blob_sha": "ccd87bbded38b00bf09e19e855ad89154a740a2a"
+    },
+    {
+      "path": "canonical/runtime/cross_document_effect_semantic_lattice_v8.py",
+      "git_blob_sha": "34f9a710424ba2aa5f3beeddb1cfd3978e549d15"
+    },
+    {
+      "path": "canonical/runtime/cross_document_effect_semantic_lattice_verify_v8.py",
+      "git_blob_sha": "5b186b03711092aa4e69e218887688aadcd1faf6"
+    },
+    {
+      "path": "canonical/runtime/domain_mapping_truth_certificate_v1.py",
+      "git_blob_sha": "ca380f69d52f59e4cd0144a918e29b560477833d"
+    },
+    {
+      "path": "canonical/runtime/explicit_definition_reference_graph.py",
+      "git_blob_sha": "950f073b35b9d7f42c76c518711462f00e89b262"
+    },
+    {
+      "path": "canonical/runtime/explicit_requirement_index_v2.py",
+      "git_blob_sha": "525fac941302254a47710aaae30b0174fab2cb40"
+    },
+    {
+      "path": "canonical/runtime/https_source_fragment_projection_authority_v2.py",
+      "git_blob_sha": "08ef858981acaa9f5a350d696086fb01cec31a93"
+    },
+    {
+      "path": "canonical/runtime/instruction_constraint_compiler_v1.py",
+      "git_blob_sha": "a4a3f87f827bd6f0f85fe70c77a1de5aa3237c6f"
+    },
+    {
+      "path": "canonical/runtime/lossless_raw_task_contract_v1.py",
+      "git_blob_sha": "53a440fccf91aa08f18abfff4f283e5fd18d9fcd"
+    },
+    {
+      "path": "canonical/runtime/proof_carrying_domain_mapping_v1.py",
+      "git_blob_sha": "4323549e0a7b9da688474d63af7fe3cec0134326"
+    },
+    {
+      "path": "canonical/runtime/r2_cross_document_semantic_registry_v3_lattice_direct_adequacy_v1.py",
+      "git_blob_sha": "c7ff0ba7be07eb8449ff1834b758e00f1b00059a"
+    },
+    {
+      "path": "canonical/runtime/regcap_bounded_rival_registry_authority_v1.py",
+      "git_blob_sha": "f9cdd44e2ff395a87428615c831ecd5f88881257"
+    },
+    {
+      "path": "canonical/runtime/regcap_context_signature_v1.py",
+      "git_blob_sha": "3f13e690148c44e00ed266d583ce561f01694793"
+    },
+    {
+      "path": "canonical/runtime/regcap_contextual_observation_compiler_v1.py",
+      "git_blob_sha": "fe531b0a9923511d0b5bec1a450c917c0e03b042"
+    },
+    {
+      "path": "canonical/runtime/regcap_contextual_resolution_v1.py",
+      "git_blob_sha": "4e7661fb508ddb58fcf0ea154af21a73eda2467d"
+    },
+    {
+      "path": "canonical/runtime/regcap_contrastive_discriminator_matrix_v1.py",
+      "git_blob_sha": "0dc36525ffea46f9f0401579fa33dc0d8c1780b4"
+    },
+    {
+      "path": "canonical/runtime/regcap_necessary_property_authority_v1.py",
+      "git_blob_sha": "609d2ea525ccb485c01ac76220b503ed22fee2e9"
+    },
+    {
+      "path": "canonical/runtime/semantic_ambiguity_control_v1.py",
+      "git_blob_sha": "d9a29eb161a0f3b7e14334857f548e416bb460a0"
+    },
+    {
+      "path": "canonical/runtime/semantic_information_frontier_v1.py",
+      "git_blob_sha": "b16e2c40dec3030868c37adad880b8601f565e46"
+    },
+    {
+      "path": "canonical/runtime/semantic_operator_counterfactuals.py",
+      "git_blob_sha": "652155bb3bb46512dc43804e5ec24b22f19e3709"
+    },
+    {
+      "path": "canonical/runtime/semantic_relation_control_v1.py",
+      "git_blob_sha": "13aa27ea19cefd8ce6059f037ff5491402d9fa68"
+    },
+    {
+      "path": "canonical/runtime/semantic_relation_entailment_dag_v1.py",
+      "git_blob_sha": "3e092ba1581f674c1302288b2800771a81b5bb02"
+    },
+    {
+      "path": "canonical/runtime/source_aligned_regcap_context_proof_v1.py",
+      "git_blob_sha": "f3839d74edc305606caa692f1a8a75588c160921"
+    },
+    {
+      "path": "canonical/runtime/source_aligned_semantic_proof_v1.py",
+      "git_blob_sha": "05713f7ba08bcf6f090b37016394f8442ef5cda2"
+    },
+    {
+      "path": "canonical/runtime/source_aligned_semantic_proof_v10.py",
+      "git_blob_sha": "369dfafaa5e4ab07b138142f6ce7a26f3bb8e7da"
+    },
+    {
+      "path": "canonical/runtime/source_aligned_semantic_proof_v15.py",
+      "git_blob_sha": "aa334ed3ff106161ccbafb227473dcc4d302a89c"
+    },
+    {
+      "path": "canonical/runtime/source_aligned_semantic_proof_v15_registry_base.py",
+      "git_blob_sha": "b969323faa4b775524883e981e660fe4cebb237a"
+    },
+    {
+      "path": "canonical/runtime/source_aligned_semantic_proof_v2.py",
+      "git_blob_sha": "1a5f3a174dc73c509582695b9c0ad3b16d79b2bc"
+    },
+    {
+      "path": "canonical/runtime/source_aligned_semantic_proof_v3.py",
+      "git_blob_sha": "e6e529608afb561482778daad89d4b3e7fb9df8c"
+    },
+    {
+      "path": "canonical/runtime/source_aligned_semantic_proof_v4.py",
+      "git_blob_sha": "c2dcbbd127c435b765fa872acf27984f96d49f3c"
+    },
+    {
+      "path": "canonical/runtime/source_aligned_semantic_proof_v5.py",
+      "git_blob_sha": "6aa256e4ce140e6d556ca1be8800b7cb3e9073e5"
+    },
+    {
+      "path": "canonical/runtime/source_aligned_semantic_proof_v6.py",
+      "git_blob_sha": "d82bffda32c1e493e79dfe824ebc1e080b991d9c"
+    },
+    {
+      "path": "canonical/runtime/source_aligned_semantic_proof_v7.py",
+      "git_blob_sha": "b27e4d418573ca9b9f178a4d0c3ef9ff2b15af6f"
+    },
+    {
+      "path": "canonical/runtime/source_aligned_semantic_proof_v8.py",
+      "git_blob_sha": "d6987bfcaf2dcfb4bcbb95862dd5f5cbf877b568"
+    },
+    {
+      "path": "canonical/runtime/source_aligned_semantic_proof_v9.py",
+      "git_blob_sha": "a97ef4118070dec517b829b457e93bd64df2bce9"
+    },
+    {
+      "path": "canonical/runtime/source_explicit_semantic_claim_autofill_v1.py",
+      "git_blob_sha": "d0351f85756fd519bd7181952671af4e3767bd26"
+    },
+    {
+      "path": "canonical/runtime/source_explicit_semantic_claim_autofill_v2.py",
+      "git_blob_sha": "7cba497279a646e3ccefee6138b4a87066ce0db7"
+    },
+    {
+      "path": "canonical/runtime/source_semantic_claim_autofill_v3.py",
+      "git_blob_sha": "06911d2201f8cc7598546fef3d980d3f3319be3d"
+    },
+    {
+      "path": "canonical/runtime/source_semantic_claim_autofill_v4.py",
+      "git_blob_sha": "181e724d48e04363be41cabc9638cad5ee78b568"
+    },
+    {
+      "path": "canonical/runtime/terminal_semantic_quotient_v1.py",
+      "git_blob_sha": "eda1043099b54a695854a923a540a38362ebedd5"
+    },
+    {
+      "path": "canonical/runtime/tlac_mrel_identity_discriminator_v1.py",
+      "git_blob_sha": "cc658256abe2b7958c62ae6bc2b55a8872fac147"
+    }
+  ]
+}
