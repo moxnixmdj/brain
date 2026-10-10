@@ -1,0 +1,74 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R10_EXECUTION_PROPERTY_TRUTH_INDEPENDENT_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_SPRITE__PYCOMPILE__5_OF_5_FALSIFICATION_TESTS__38_CASE_R10_EXECUTION_ACCEPTANCE__ONE_LEAF_PROPERTY_TRUTH_ONLY__ZERO_ROOT_QUALITY_OR_TERMINAL_CREDIT",
+  "repository": "moxnixmdj/brain",
+  "verification_branch": "successor/r10-execution-property-truth-20261010-v1",
+  "subject": {
+    "leaf_id": "PQ::R10_ANALYSIS_DECISION::EXECUTION",
+    "root_id": "R10_ANALYSIS_DECISION",
+    "claim_id": "205a864e7d7a56a14a46bb75923cc9b11126d479676d26d88803831da1197294",
+    "manifest_acceptance": "RUN_ROOT_RELEVANT_POSITIVE_NEAR_MISS_AND_ADVERSARIAL_CASES_ON_EXACT_ARTIFACT_OR_RUNTIME_BYTES_AND_BIND_OBSERVED_OUTCOMES_TO_THE_ROOT_CONTRACT"
+  },
+  "exact_blobs": {
+    "property_verifier_runtime": "21fc794513f38c72b7a335d6fab6bb2500add40b",
+    "property_verifier_tests": "0033a61c426f729ca4b40b94324ff9fd7a16e9e5",
+    "execution_guard_runtime": "83ae7bc81660bd4be7f66b9454de5d007c0db959",
+    "proof_slot_runtime": "04957e2e385f8169e7d8aff5b0e1f2009e848666",
+    "leaf_manifest": "a7cad32c9fd969ff2c3857bb924c7bd746237ec2",
+    "execution_profile": "f7e89eafbb691c16d1bdf5b8d295a468d5e3bec5",
+    "defeater_catalog": "8b92e5cf76f767054f55414b87014e03d43460b8",
+    "decision_constitution": "a087db2645b03e589965d50eb51d32a3049dc2fe",
+    "whole_leaf_v2_gate_verification": "afeeac2ffcdf2f858b5560299396fe450193e5df"
+  },
+  "independent_replay": {
+    "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/r10-execution-property-truth-v1",
+    "exact_files_copied_from_github": true,
+    "py_compile": "PASS",
+    "falsification_tests_run": 5,
+    "falsification_tests_passed": 5,
+    "observed_case_counts": {
+      "positive": 1,
+      "known_adversarial": 17,
+      "near_miss": 5,
+      "unknown_detected": 1,
+      "unmapped_material": 1,
+      "missing_structural_slots": 9,
+      "unsafe_contract_variants": 4,
+      "total": 38
+    },
+    "transcript_sha256": "b4ddd93179f1f99b3c66ec438f0fc9846e18ba3f22179dbae93a844d2010ae8f",
+    "transcript_bytes": 3449
+  },
+  "proves": [
+    "THE_EXACT_R10_EXECUTION_MANIFEST_ACCEPTANCE_IS_SATISFIED_BY_OBSERVED_POSITIVE_NEAR_MISS_AND_ADVERSARIAL_OUTCOMES_ON_THE_BOUND_CURRENT_RUNTIME_BEHAVIOR",
+    "ALL_17_DECLARED_KNOWN_R10_DEFEATERS_BLOCK_THE_ORDINARY_CERTIFICATE_PATH_WHEN_DETECTED",
+    "ALL_5_DECLARED_R10_NEAR_MISS_CLASSES_ESCALATE",
+    "UNKNOWN_DETECTED_AND_UNMAPPED_MATERIAL_FALSE_CERTIFICATION_SIGNALS_ESCALATE",
+    "ALL_9_STRUCTURAL_PROOF_SLOTS_FAIL_CLOSED_WHEN_THE_REQUIRED_EVIDENCE_IS_MISSING",
+    "LOSSY_DECISION_OMITTED_EVIDENCE_BROAD_ACQUISITION_WEAKENING_AND_CLAIM_SUBSTITUTION_FAIL_CLOSED",
+    "R10_EXECUTION_LEAF_PROPERTY_TRUTH_AUTHORITY_ONLY"
+  ],
+  "hard_nonclaims": [
+    "NO_DEFEATER_DETECTION_COMPLETENESS",
+    "NO_R10_SEMANTIC_LEAF_CLOSURE",
+    "NO_R10_ROOT_CLOSURE",
+    "NO_GLOBAL_PROFESSIONAL_PROPERTY_TRUTH",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "leaf_property_truth_authority": true,
+  "detection_completeness_proved": false,
+  "r10_semantic_leaf_closed": false,
+  "r10_root_closed": false,
+  "semantic_truth_authority": false,
+  "execution_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "next": "VERIFY_CURRENT_MAIN_DEPENDENCY_BYTES__MERGE_IF_UNCHANGED__THEN_PROJECT_PROPERTY_TRUTH_1_OF_24_AND_ATTACK_R10_SEMANTIC_OR_NEXT_SHARED_PROPERTY_TRUTH_CUT"
+}
