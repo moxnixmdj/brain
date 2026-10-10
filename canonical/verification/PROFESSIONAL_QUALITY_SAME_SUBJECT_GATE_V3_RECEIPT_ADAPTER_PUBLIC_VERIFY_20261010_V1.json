@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_PQ_SAME_SUBJECT_GATE_V3_RECEIPT_ADAPTER_PUBLIC_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_2_BLOB_BINDING__PYCOMPILE_PASS__8_OF_8_RECEIPT_NORMALIZER_TESTS_PASS__ZERO_QUALITY_OR_TERMINAL_CREDIT",
+  "runtime": {
+    "path": "canonical/runtime/professional_quality_same_subject_composition_gate_v3.py",
+    "git_blob_sha": "ddbe6ec92fef405b8909a161ef9acd685ec7317b"
+  },
+  "tests": {
+    "path": "canonical/tests/test_professional_quality_same_subject_receipt_normalizer_v1.py",
+    "git_blob_sha": "3c4a280a987f4d97f04c69edc45452e4cc7b1f12",
+    "tests_run": 8,
+    "tests_passed": 8,
+    "tests_failed": 0
+  },
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2624,
+    "pull_request_head_sha": "81dfa31fee9b81e11a7780bdd773cd8b1e0b7697",
+    "merge_commit": "1139316a1d7a2c7c29cc6b2fbfb4b9070ae42a35",
+    "workflow_name": "Verify PQ same-subject gate V3 receipts",
+    "workflow_run_id": 38057289481,
+    "workflow_job_id": 114228255529,
+    "conclusion": "success",
+    "exact_blob_binding_step": "success",
+    "py_compile_step": "success",
+    "receipt_normalizer_tests_step": "success"
+  },
+  "proves": [
+    "LEGACY_GENERIC_VERIFICATION_RECEIPT_REMAINS_ADMISSIBLE_WHEN_EXACTLY_VALID",
+    "R1_NESTED_INDEPENDENT_RECEIPT_SHAPE_NORMALIZES",
+    "R2_NESTED_INDEPENDENT_RECEIPT_SHAPE_NORMALIZES",
+    "R3_R10_TOP_LEVEL_ROOT_SPECIFIC_RECEIPT_SHAPE_NORMALIZES",
+    "R11_PUBLIC_RUNNER_RECEIPT_SHAPE_NORMALIZES",
+    "BINDING_HASH_MISMATCH_FAILS_CLOSED",
+    "PUBLIC_RUNNER_FAILURE_FAILS_CLOSED",
+    "TERMINAL_SELF_AUTHORITY_FAILS_CLOSED"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_ALL_CURRENT_R1_R11_REAL_RECEIPTS_WERE_EXECUTED_IN_THIS_PUBLIC_CAPSULE",
+    "NO_R12_ROOT_SUBJECT_BINDING",
+    "NO_12_OF_12_COMPOSITION_PASS",
+    "NO_PROFESSIONAL_QUALITY_CLOSURE",
+    "NO_LIVE_DEFAULT_PROMOTION",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "composition_admissibility_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
