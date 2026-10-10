@@ -50,6 +50,34 @@ def _pair_id(value: Any) -> str:
     return pid
 
 
+def _sentence_spans(text: str):
+    start = 0
+    n = len(text)
+    for i, ch in enumerate(text):
+        boundary = ch in "!?";
+        if ch == ".":
+            decimal = (
+                i > 0 and i + 1 < n
+                and text[i - 1].isdigit()
+                and text[i + 1].isdigit()
+            )
+            boundary = not decimal
+        if not boundary:
+            continue
+        raw = text[start:i + 1]
+        left = len(raw) - len(raw.lstrip())
+        right = len(raw.rstrip())
+        if right > left:
+            yield start + left, start + right
+        start = i + 1
+    if start < n:
+        raw = text[start:]
+        left = len(raw) - len(raw.lstrip())
+        right = len(raw.rstrip())
+        if right > left:
+            yield start + left, start + right
+
+
 def compile_context(
     source_text: str,
     *,
@@ -66,23 +94,31 @@ def compile_context(
 
         anchor_candidate = pair.PAIR_DOMAIN[pid][0]
 
-        anchor = context.compile_span(
-            source_text,
-            start=0,
-            end=len(source_text),
-        )
+        anchor_rows = []
+        for s0, s1 in _sentence_spans(source_text):
+            row = context.compile_span(source_text, start=s0, end=s1)
+            if row.get("status") == "FAIL_CLOSED":
+                return _base(
+                    "FAIL_CLOSED",
+                    reason="NO_DESCRIPTOR_CONTEXT_COMPILER_FAIL_CLOSED",
+                    pair_id=pid,
+                    context_result=row,
+                )
+            if row.get("pass") is True:
+                anchor_rows.append(row)
+
         anchor_match = False
-        if anchor.get("pass") is True:
+        for anchor in anchor_rows:
             oid = str(anchor.get("observation_id") or "")
             outcome = str(anchor.get("outcome") or "")
             if pid == pair.CCOB_MREL:
-                anchor_match = (
+                anchor_match = anchor_match or (
                     oid == "STRUCTURAL_SIGNATURE_CLASS"
                     and outcome
                     == "TWO_POINT_FIVE_PERCENT_CET1_ABOVE_REGULATORY_MINIMUM"
                 )
             else:
-                anchor_match = (
+                anchor_match = anchor_match or (
                     oid == "FUNCTIONAL_SIGNATURE_CLASS"
                     and outcome
                     == "RELEASE_WHEN_SYSTEM_WIDE_RISK_CRYSTALLISES_OR_DISSIPATES"
@@ -105,7 +141,7 @@ def compile_context(
                 "FAIL_CLOSED",
                 reason="CONFLICTING_NO_DESCRIPTOR_PAIR_CONTEXT_SIGNATURES",
                 pair_id=pid,
-                anchor_context=anchor,
+                anchor_contexts=anchor_rows,
                 mrel_context=mrel_context,
             )
 
@@ -114,7 +150,7 @@ def compile_context(
                 "OPEN__NO_BOUND_NO_DESCRIPTOR_PAIR_CONTEXT_SIGNATURE",
                 pair_id=pid,
                 source_id=source_id,
-                anchor_context=anchor,
+                anchor_contexts=anchor_rows,
                 mrel_context=mrel_context,
             )
 
