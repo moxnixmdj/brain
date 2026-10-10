@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_TLAC_MREL_IDENTITY_DISCRIMINATOR_SOURCE_PACK_V1",
+  "scope_id": "REGCAP_TLAC_MREL_BOUNDED_RIVAL_TASK_V1",
+  "sources": [
+    {
+      "schema": "PROJECT_BRAIN_HTTPS_SOURCE_FRAGMENT_PROJECTION_PACK_V2",
+      "source_id": "EBA_MREL_CASE_BY_CASE_2015",
+      "url": "https://www.eba.europa.eu/publications-and-media/press-releases/eba-publishes-final-technical-standards-ensure-effective-0",
+      "retrieval_user_agent": "ProjectBrainSourceProjectionVerifier/2.0",
+      "fragments": [
+        {
+          "fragment_id": "MREL_NOT_FIXED_FIGURE",
+          "section_anchor": "MREL",
+          "text": "the MREL is not a fixed figure.",
+          "max_chars_after_anchor": 12000
+        },
+        {
+          "fragment_id": "MREL_CASE_BY_CASE_RESOLUTION_AUTHORITY",
+          "section_anchor": "MREL",
+          "text": "Instead, it must be set by resolution authorities on a case-by-case basis for each institution to ensure it is sufficient to implement their resolution plans.",
+          "max_chars_after_anchor": 12000
+        }
+      ]
+    },
+    {
+      "schema": "PROJECT_BRAIN_HTTPS_SOURCE_FRAGMENT_PROJECTION_PACK_V2",
+      "source_id": "FSB_TLAC_PRESS_RELEASE_2015",
+      "url": "https://www.fsb.org/2015/11/tlac-press-release/",
+      "retrieval_user_agent": "ProjectBrainSourceProjectionVerifier/2.0",
+      "fragments": [
+        {
+          "fragment_id": "TLAC_FSB_GSIB_STANDARD",
+          "section_anchor": "FSB issues final Total Loss-Absorbing Capacity standard for global systemically important banks",
+          "text": "The Financial Stability Board (FSB) today issued the final Total Loss-Absorbing Capacity (TLAC) standard for global systemically important banks (G-SIBs).",
+          "max_chars_after_anchor": 5000
+        },
+        {
+          "fragment_id": "TLAC_ALONGSIDE_BASEL_MINIMUMS",
+          "section_anchor": "FSB issues final Total Loss-Absorbing Capacity standard for global systemically important banks",
+          "text": "G-SIBs will be required to meet the TLAC requirement alongside the minimum regulatory requirements set out in the Basel III framework.",
+          "max_chars_after_anchor": 8000
+        }
+      ]
+    }
+  ]
+}
