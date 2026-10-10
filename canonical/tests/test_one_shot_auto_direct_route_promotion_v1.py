@@ -159,6 +159,10 @@ class OneShotAutoDirectRoutePromotionV1Tests(unittest.TestCase):
             governance.mkdir(parents=True)
             verification.mkdir(parents=True)
             runtime.mkdir(parents=True)
+            (runtime / "r2_direct_live_admission_v1.py").write_text(
+                "# synthetic live wrapper for exact noninterference binding\n",
+                encoding="utf-8",
+            )
 
             route_runtime_rel = "canonical/runtime/test_direct_route_v1.py"
             route_runtime = root / route_runtime_rel
@@ -237,6 +241,42 @@ class OneShotAutoDirectRoutePromotionV1Tests(unittest.TestCase):
             )
             candidate_sha = admission.git_blob_sha(candidate_path)
 
+            current = admission.load_current_admissions(repo_root=root)
+            noninterference_rel = (
+                "canonical/verification/TEST_DIRECT_ROUTE_NONINTERFERENCE.json"
+            )
+            noninterference_path = root / noninterference_rel
+            noninterference = {
+                "schema": admission.NONINTERFERENCE_SCHEMA,
+                "status": "INDEPENDENT_PASS__R2_DIRECT_ROUTE_NONINTERFERENCE",
+                "candidate_path": candidate_rel,
+                "candidate_git_blob_sha": candidate_sha,
+                "route_id": candidate["route_id"],
+                "runtime_path": candidate["runtime_path"],
+                "runtime_git_blob_sha": candidate["runtime_git_blob_sha"],
+                "baseline_live_wrapper_path": admission.LIVE_WRAPPER_PATH,
+                "baseline_live_wrapper_git_blob_sha": admission.git_blob_sha(
+                    root / admission.LIVE_WRAPPER_PATH
+                ),
+                "baseline_dynamic_manifest_git_blob_sha": current[
+                    "target_git_blob_sha"
+                ],
+                "baseline_dynamic_route_ids": [],
+                "proof_class": admission.NONINTERFERENCE_PROOF_CLASS,
+                "legacy_overlap_absent_verified": True,
+                "dynamic_overlap_absent_verified": True,
+                "scope_complete_for_candidate_match_domain": True,
+                "independent_verified": True,
+                "verification_authority_mutated": False,
+                "promotion_authority": False,
+                "terminal_authority": False,
+                "incremental_spend_usd": 0,
+            }
+            noninterference_path.write_text(
+                json.dumps(noninterference, indent=2, sort_keys=True) + "\n",
+                encoding="utf-8",
+            )
+
             independent_rel = "canonical/verification/TEST_DIRECT_ROUTE_DEPLOYMENT_RECEIPT.json"
             independent = {
                 "schema": admission.RECEIPT_SCHEMA,
@@ -259,6 +299,10 @@ class OneShotAutoDirectRoutePromotionV1Tests(unittest.TestCase):
                 "promotion_authority": False,
                 "terminal_authority": False,
                 "incremental_spend_usd": 0,
+                "noninterference_verification_path": noninterference_rel,
+                "noninterference_verification_git_blob_sha": admission.git_blob_sha(
+                    noninterference_path
+                ),
             }
             independent_path = root / independent_rel
             independent_path.write_text(
