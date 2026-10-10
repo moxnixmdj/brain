@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_FINITE_DOMAIN_REFINEMENT_ABSTRACT_SPEC_V1",
+  "date": "2026-10-10",
+  "subject_id": "finite-domain-refinement-probe-v1",
+  "scope": "EXACT_ENUMERATED_INPUT_DOMAIN_ONLY",
+  "finite_domain_cases": [
+    {
+      "input": "A",
+      "expected_output": {
+        "schema": "PROJECT_BRAIN_FINITE_DOMAIN_REFINEMENT_PROBE_V1",
+        "status": "PASS_A",
+        "value": 1,
+        "terminal_authority": false
+      }
+    },
+    {
+      "input": "B",
+      "expected_output": {
+        "schema": "PROJECT_BRAIN_FINITE_DOMAIN_REFINEMENT_PROBE_V1",
+        "status": "PASS_B",
+        "value": 2,
+        "terminal_authority": false
+      }
+    },
+    {
+      "input": "C",
+      "expected_output": {
+        "schema": "PROJECT_BRAIN_FINITE_DOMAIN_REFINEMENT_PROBE_V1",
+        "status": "FAIL_CLOSED",
+        "value": null,
+        "terminal_authority": false
+      }
+    }
+  ],
+  "nonclaims": [
+    "NO_INPUT_OUTSIDE_A_B_C",
+    "NO_TERMINAL_AUTHORITY",
+    "NO_GENERAL_PYTHON_REFINEMENT"
+  ],
+  "terminal_credit_delta": 0
+}
