@@ -1,0 +1,136 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_CONSERVATIVE_PROFILE_V28_SUCCESSOR_EXECUTION_V1",
+  "status": "FRESH_SUCCESSOR_EXECUTION__CONSERVATIVE_SPENT_NEXT32_PROFILE_V28__ZERO_CAPABILITY_CREDIT",
+  "recorded_at": "2026-10-10",
+  "predecessor": {
+    "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_CONSERVATIVE_PROFILE_V27_SUCCESSOR_EXECUTION_20261010_V1.json",
+    "package_raw_python_source_bytes": 1937005,
+    "B_exec_raw_python_source_bytes": 1939765,
+    "manifest_sha256": "44e43221928b763c60eacd0a39c50e067ded82c66151886829d7cc58d037b3b9",
+    "fresh_qualification": "9200/9200"
+  },
+  "selection": {
+    "id": "CONSERVATIVE_SPENT_NEXT32_INVERSE_SPECIAL_DOMAIN_EXCLUSION_PROFILE_V28",
+    "corpus": "QUAL_SUCCESSOR_NEXT32_20261010_V1",
+    "spent_cases": 9200,
+    "method": "Profile the 240 largest surviving bodies on exact V27; retain all core numeric/root/limit/polynomial machinery and prune only inverse-trig/hyperbolic asymptotic, polylog, and partition helper branches outside generated bounded inputs.",
+    "profiled_function_bodies": 240,
+    "profiled_body_bytes": 467781,
+    "zero_hit_function_bodies": 41,
+    "zero_hit_body_bytes": 46593,
+    "selected_function_bodies": [
+      [
+        "sympy/functions/elementary/trigonometric.py",
+        "acot._eval_nseries"
+      ],
+      [
+        "sympy/functions/elementary/trigonometric.py",
+        "acot._eval_as_leading_term"
+      ],
+      [
+        "sympy/functions/elementary/hyperbolic.py",
+        "acoth.eval"
+      ],
+      [
+        "sympy/functions/elementary/hyperbolic.py",
+        "asech.eval"
+      ],
+      [
+        "sympy/utilities/iterables.py",
+        "binary_partitions"
+      ],
+      [
+        "sympy/functions/elementary/trigonometric.py",
+        "atan._eval_as_leading_term"
+      ],
+      [
+        "sympy/functions/elementary/trigonometric.py",
+        "acsc._eval_as_leading_term"
+      ],
+      [
+        "sympy/functions/special/zeta_functions.py",
+        "polylog.eval"
+      ],
+      [
+        "sympy/functions/elementary/hyperbolic.py",
+        "acsch.eval"
+      ]
+    ],
+    "explicit_safety_exclusions": [
+      "mpf_pow_int, integer_log, Number.__divmod__, AlgebraicNumber and evalf numeric paths",
+      "root isolation/refinement, polynomial gcd/lcm/interval/reduced/nthroot",
+      "gruntz limit and leading-term machinery",
+      "matrix unification and low-level mpmath conversion"
+    ],
+    "spent_profile_replay": "9200/9200"
+  },
+  "measured_candidate": {
+    "status": "PHYSICALLY_REWRITTEN_RESEARCH_CANDIDATE__NOT_OPUS_PROMOTED",
+    "python_files": 277,
+    "package_raw_python_source_bytes": 1930030,
+    "router_raw_python_source_bytes": 2760,
+    "B_exec_raw_python_source_bytes": 1932790,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "raw_improvement_vs_v27_bytes": 6975,
+    "manifest_sha256": "6b7eee6f8a15670189e06ffda61d9149ea5e5a58ec158ce23f396ac50edf34eb",
+    "durable_source_archive_bytes": 289100,
+    "durable_source_archive_sha256": "f4328b807ff837cc5a8badb063a9124545635f65d3d0e4a70cbc39fcd0117ede",
+    "archive_improvement_vs_v27_bytes": 3816
+  },
+  "qualification": {
+    "spent_NEXT32": {
+      "id": "QUAL_SUCCESSOR_NEXT32_20261010_V1",
+      "cases": 9200,
+      "corpus_sha256": "eee5966b50fddebd36bf7d1578985925fcb5950c73d7e68e5c64c7e43aa6c866",
+      "candidate": "9200/9200",
+      "spent": true
+    },
+    "fresh_NEXT33": {
+      "id": "QUAL_SUCCESSOR_NEXT33_20261010_V1",
+      "seed": 5744562,
+      "per_operation_budget": 820,
+      "cases": 9430,
+      "corpus_sha256": "996721b61f1a6b6257d8595b85bc9df6bb2fc1c6e5257f80efcba276375285e8",
+      "candidate": "9430/9430",
+      "independent_copy": "9430/9430",
+      "extracted_archive_replay": "9430/9430",
+      "spent": true
+    }
+  },
+  "reproducibility": {
+    "predecessor_reconstruction": "canonical/research/bytes/tools/rebuild_candidate_v27.py",
+    "transform": "canonical/research/bytes/tools/conservative_profile_prune_v28.py",
+    "successor_reconstruction": "canonical/research/bytes/tools/rebuild_candidate_v28.py",
+    "route": "canonical/research/bytes/tools/exact_symbolic_route_v1.py",
+    "semantic_digest": "canonical/research/bytes/tools/semantic_digest_v1.py",
+    "qualification_generator": "canonical/research/bytes/tools/generate_qualification_v1.py"
+  },
+  "durable_artifact": {
+    "library_status": "PERSISTED_IN_CHATGPT_LIBRARY",
+    "library_file_id": "libfile_35174a0ce0008191b9435cda29405ba5",
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V28_SUCCESSOR_20261010_V1.tar.xz",
+    "bytes": 289100,
+    "sha256": "f4328b807ff837cc5a8badb063a9124545635f65d3d0e4a70cbc39fcd0117ede",
+    "extracted_source_identity": "278/278 files"
+  },
+  "next_frozen_qualification": {
+    "id": "QUAL_SUCCESSOR_NEXT34_20261010_V1",
+    "seed": 5830951,
+    "per_operation_budget": 840,
+    "cases": 9660,
+    "corpus_sha256": "9a2d5eaa036c21d39c8340a7e59cd3bfe29c1030abe18f3b5ac83803fd82dfe6",
+    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT34_20261010_V1.jsonl",
+    "library_file_id": "libfile_8edabc44fa908191a6be90679b7b77c5",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT"
+  },
+  "truth_boundary": [
+    "MEASURED: exact V28 is 6,975 raw Python-source bytes smaller than V27.",
+    "MEASURED: exact V28 passes spent NEXT32 9,200/9,200.",
+    "MEASURED: exact V28 passes fresh NEXT33 9,430/9,430 on candidate, independent copy, and extracted archive.",
+    "INFERRED: selected V28 branches are outside the tested bounded route and generated input domains; finite non-use remains non-universal.",
+    "NOT CLAIMED: out-of-scope behavior preservation, universal SymPy correctness, absolute information-theoretic minimum, or Opus-family promotion.",
+    "PROMOTION CREDIT: 0."
+  ],
+  "next_action": "Rerank exact V28 using spent NEXT33 only. Keep NEXT34 untouched until a new physical cut is frozen.",
+  "promotion_credit": 0
+}
