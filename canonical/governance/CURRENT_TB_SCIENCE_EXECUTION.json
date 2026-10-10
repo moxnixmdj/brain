@@ -1,14 +1,14 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_TB_SCIENCE_EXECUTION_POINTER_V2",
   "date": "2026-10-10",
-  "status": "RANK19_EXACT_ONE_FILE_ACTIVATION_PR_LIVE__WORKFLOW_IN_PROGRESS__LAST_OBSERVED_PRE_TASK_READ__ZERO_TRIALS_AT_LAST_OBSERVATION",
+  "status": "RANK19_V1_PRESTART_ABORT_NONCONSUMING__TASK_READ_TRUE__UNSTARTED__ZERO_RANK19_TRIALS__AGENT_V13_IDENTITY_WIRING_REPAIR_REQUIRED",
   "current_result": {
     "path": "canonical/verification/TB_SCIENCE_RANK18_V6_IRREVERSIBLE_RESULT_TRUTH_20261010_V1.json",
     "git_blob_sha": "2459d821057d6f7178ffea440fb19966e56a3d89"
   },
   "current_ledger": {
-    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V40.json",
-    "git_blob_sha": "2bb3967dfe894d1dd0e11e190a956faf1fdfcc46"
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V41.json",
+    "git_blob_sha": "264287ac60874d49e708b074cb06e0dabc57f6bd"
   },
   "verification": {
     "path": "canonical/verification/TB_SCIENCE_RANK19_V14_FINAL_PUBLIC_RESEAL_VERIFICATION_20261010_V2.json",
@@ -29,7 +29,7 @@
   },
   "acceptance_credit_delta": 0,
   "terminal_credit_delta": 0,
-  "next": "RE_DERIVE_LIVE_RANK19_RUN_38038077030__BIND_FINAL_RESULT_OR_PRESTART_FAILURE__NO_RETRY_OR_REPLACEMENT",
+  "next": "REPAIR_AGENT_V13_IDENTITY_VALIDATOR_TO_CLAIM_BOUND_V2__ADD_SOURCE_WIRING_INVARIANT__ZERO_EXPOSURE_VERIFY__RESEAL__THEN_AUTHORIZE_SAME_LOGICAL_ATTEMPT_CONTINUATION",
   "finalized_rank18": {
     "ledger_schedule_rank": 18,
     "slot_id": "terminal-bench-science/longitudinal-clinical-agent::trial-0",
@@ -55,12 +55,12 @@
     "slot_id": "terminal-bench-science/diag-chipseq::trial-0",
     "task_digest": "sha256:437bfacaebda9ce9905d54bdfe7247aec9649038206512c64547021f42e3950b",
     "logical_attempt_id": "a3672b9d77c8fa0b7d3f0610ac2c008d2888e566d8a75ac92aa7078c1523abe6",
-    "task_read": false,
+    "task_read": true,
     "task_started": false,
     "benchmark_trials_consumed": 0,
-    "execution_authority_effective": true,
+    "execution_authority_effective": false,
     "task_read_authority_effective": false,
-    "activation_authority": true,
+    "activation_authority": false,
     "public_surface_promotion_authority": false,
     "logical_attempt_identity_basis": "SLOT_ID_PLUS_TASK_DIGEST_PLUS_EXECUTION_CLAIM_BINDING_DIGEST",
     "execution_claim_binding_digest": "sha256:4e9cae8c879a8122f11fe6ae7eea775fcc4fb0ae62b3a87e208a95d28ea4d05f",
@@ -73,12 +73,17 @@
     "public_task_read_authority_bound": true,
     "public_activation_present": true,
     "public_surface_promotion_complete": true,
-    "activation_pr_live": true,
+    "activation_pr_live": false,
     "execution_branch": "execute/tb-science-rank19-20261010-v1",
     "activation_pull_request": 2593,
     "workflow_run_id": 38038077030,
     "workflow_job_id": 114172615158,
-    "live_observation_semantics": "LAST_OBSERVED_ONLY__MUST_REDERIVE_BEFORE_RESULT_OR_CREDIT_CLAIM"
+    "live_observation_semantics": "LAST_OBSERVED_ONLY__MUST_REDERIVE_BEFORE_RESULT_OR_CREDIT_CLAIM",
+    "task_read_history": true,
+    "repair_authority": true,
+    "retry_authority": false,
+    "replacement_authority": false,
+    "prior_model_reasoning_samples": 0
   },
   "capability_first_checkpoint_admission": {
     "path": "canonical/governance/TB_SCIENCE_RANK19_CAPABILITY_FIRST_CHECKPOINT_ADMISSION_20261010_V1.json",
@@ -90,8 +95,10 @@
     "benchmark_role": "NEW_CAPABILITY_VALIDATION"
   },
   "hard_nonclaims": [
-    "NO_CLAIM_CURRENT_LIVE_RUN_REMAINS_PRE_TASK_READ_AFTER_LAST_OBSERVATION",
-    "NO_BENCHMARK_RESULT_YET",
+    "NO_DURABLE_START",
+    "NO_RANK19_TRIAL_CONSUMED",
+    "NO_MODEL_REASONING_SAMPLE",
+    "NO_ACTION_EFFECT",
     "NO_RETRY_OR_REPLACEMENT_AUTHORITY",
     "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
   ],
@@ -122,5 +129,12 @@
     "last_observed_durable_start_cas_acquired": false,
     "last_observed_benchmark_trials_consumed": 0,
     "live_state_must_be_rederived": true
+  },
+  "prestart_abort_truth": {
+    "path": "canonical/verification/TB_SCIENCE_RANK19_V1_PRESTART_ABORT_TRUTH_20261010_V1.json",
+    "git_blob_sha": "e174bf785427b4fc8b6e4737f2f59629b8f27094",
+    "workflow_run_id": 38038077030,
+    "workflow_job_id": 114172615158,
+    "artifact_id": 11663834627
   }
 }

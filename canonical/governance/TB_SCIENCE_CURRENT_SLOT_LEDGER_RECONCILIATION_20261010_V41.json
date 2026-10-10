@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V41",
+  "date": "2026-10-10",
+  "status": "RANK19_PRESTART_ABORT_NONCONSUMING__TASK_READ_HISTORY_TRUE__DURABLE_START_FALSE__ZERO_RANK19_TRIALS__IDENTITY_WIRING_REPAIR_REQUIRED",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "predecessor": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V40.json",
+    "git_blob_sha": "2bb3967dfe894d1dd0e11e190a956faf1fdfcc46"
+  },
+  "prestart_abort_truth": {
+    "path": "canonical/verification/TB_SCIENCE_RANK19_V1_PRESTART_ABORT_TRUTH_20261010_V1.json",
+    "git_blob_sha": "e174bf785427b4fc8b6e4737f2f59629b8f27094"
+  },
+  "counts": {
+    "benchmark_trials_consumed": 18,
+    "consumed_successes_final": 0,
+    "consumed_failures_final": 18,
+    "started_result_pending": 0,
+    "finalized_slots": 18,
+    "active_in_flight_slot_count": 0
+  },
+  "next_slot": {
+    "ledger_schedule_rank": 19,
+    "slot_id": "terminal-bench-science/diag-chipseq::trial-0",
+    "task_digest": "sha256:437bfacaebda9ce9905d54bdfe7247aec9649038206512c64547021f42e3950b",
+    "logical_attempt_id": "a3672b9d77c8fa0b7d3f0610ac2c008d2888e566d8a75ac92aa7078c1523abe6",
+    "execution_claim_binding_digest": "sha256:4e9cae8c879a8122f11fe6ae7eea775fcc4fb0ae62b3a87e208a95d28ea4d05f",
+    "task_read_history": true,
+    "task_started": false,
+    "start_cas_acquired": false,
+    "benchmark_trials_consumed": 0,
+    "prior_model_reasoning_samples": 0
+  },
+  "scheduler": {
+    "frozen": true,
+    "reason": "RANK19_PRESTART_IDENTITY_VALIDATOR_VERSION_SKEW",
+    "execution_authority": false,
+    "task_read_authority": false,
+    "activation_authority": false,
+    "repair_authority": true,
+    "only_authorized_transition": "ZERO_EXPOSURE_AGENT_V14_IDENTITY_WIRING_REPAIR_AND_PUBLIC_RESEAL"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_trials_consumed_delta": 0,
+    "consumed_successes_delta": 0,
+    "consumed_final_failures_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "execution_authority": false,
+  "finalization_authority": false,
+  "repair_authority": true,
+  "activation_authority": false,
+  "retry_authority": false,
+  "replacement_authority": false
+}
