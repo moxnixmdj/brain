@@ -17,6 +17,7 @@ from typing import Any, Mapping, Sequence
 from canonical.runtime import minimum_information_origin_policy_v1 as origin
 from canonical.runtime import semantic_ambiguity_control_v1 as ambiguity
 from canonical.runtime import regcap_property_candidate_discovery_v1 as discovery
+from canonical.runtime import regcap_mrel_property_candidate_discovery_v1 as discovery4
 
 SCHEMA = "PROJECT_BRAIN_REGCAP_CANDIDATE_AMBIGUITY_CONTROL_V1"
 BOUND_SCOPE = "BOUND_REGCAP_RIVAL_SET"
@@ -44,7 +45,7 @@ def _validate_candidate_result(value: Any) -> tuple[dict[str, Any] | None, str |
     if not isinstance(value, Mapping):
         return None, "CANDIDATE_RESULT_REQUIRED"
     row = deepcopy(dict(value))
-    if row.get("schema") != discovery.SCHEMA:
+    if row.get("schema") not in {discovery.SCHEMA, discovery4.SCHEMA}:
         return None, "CANDIDATE_RESULT_SCHEMA_INVALID"
     if row.get("status") == "FAIL_CLOSED":
         return None, "CANDIDATE_DISCOVERY_FAILED"
@@ -158,11 +159,24 @@ def plan(
             candidate_concept_ids=ids,
         )
     if observation_set_complete is not True:
+        route = origin.route({
+            "decision_relevant": True,
+            "context_value_bound": False,
+            "information_owner": information_owner,
+            "source_scope": deepcopy(source_scope) if source_scope is not None else None,
+            "discovery_delegated": discovery_delegated,
+            "clarification_key": clarification_key,
+        })
         return _base(
             "OPEN__OBSERVATION_MODEL_COMPLETENESS_REQUIRED",
+            action=route.get("action"),
+            minimum_information_route=route,
             candidate_concept_ids=ids,
             search_hints_by_candidate=hints,
-            reason="MINIMAX_DISCRIMINATOR_REQUIRES_DECLARED_COMPLETE_OBSERVATION_MODEL",
+            reason=(
+                "MINIMAX_DISCRIMINATOR_REQUIRES_DECLARED_COMPLETE_OBSERVATION_MODEL__"
+                "ROUTE_ONLY_THE_MINIMUM_AUTHENTIC_INFORMATION_NEEDED_TO_COMPLETE_IT"
+            ),
         )
     if not isinstance(observations, Sequence) or isinstance(
         observations, (str, bytes, bytearray)
