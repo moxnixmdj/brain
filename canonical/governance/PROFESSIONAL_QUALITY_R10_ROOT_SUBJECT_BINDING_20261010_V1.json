@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_ROOT_SUBJECT_BINDING_V1",
+  "date": "2026-10-10",
+  "status": "CANDIDATE_R10_V7_ROOT_SUBJECT_BINDING__DECISION_SENSITIVE_ESCALATION_PLUS_SCOPED_CERTIFICATE_OR_MINIMUM_BLOCKING_CUT__AWAITING_INDEPENDENT_VERIFICATION__ZERO_QUALITY_OR_TERMINAL_AUTHORITY",
+  "root_id": "R10_ANALYSIS_DECISION",
+  "subject_kind": "DECLARED_SYSTEM",
+  "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+  "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+  "subject": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V7_DECLARED_SYSTEM_SUBJECT_20261010_V6.json",
+    "git_blob_sha": "1d598bc8757017ceb34928d0df9f5fce859ef868"
+  },
+  "bridge_evidence": {
+    "execution_profile": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_EXECUTION_PROFILE_20261010_V3.json",
+      "git_blob_sha": "f7e89eafbb691c16d1bdf5b8d295a468d5e3bec5"
+    },
+    "decision_scope": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_R10_DECISION_SEMANTIC_SCOPE_20261010_V1.json",
+      "git_blob_sha": "40149db88374c054fd974cc121ee464a3d3996fd"
+    },
+    "decision_semantic_verification": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R10_DECISION_SEMANTIC_VERIFY_20261010_V1.json",
+      "git_blob_sha": "c298b2510e352d876c1abacc069e915447e97823"
+    },
+    "decision_sufficiency_verification": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R10_DECISION_SUFFICIENCY_SCOPED_VERIFY_20261010_V1.json",
+      "git_blob_sha": "18574110321eb1bacc18db46cbd0673bf6a0a0ac"
+    }
+  },
+  "binding_scope": {
+    "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+    "claim": "FOR_THE_EXACT_V7_SUBJECT__DECISION_SENSITIVE_MODEL_OR_ANALYSIS_MULTIPLICITY_TRIGGERS_ESCALATION__AND_THE_FINAL_PROFILE_STEP_REQUIRES_SCOPED_CERTIFICATE_OR_ABSTENTION_WITH_A_MINIMUM_BLOCKING_CUT__WHILE_R10_SUPPORT_BINDS_LOSSLESS_DECISION_STATE_AND_MINIMUM_POLICY_CHANGING_INFORMATION_ROUTING",
+    "guarantees": [
+      "EXACT_V7_SUBJECT_TUPLE_BOUND",
+      "V7_PROFILE_DECLARES_MODEL_OR_ANALYSIS_MULTIPLICITY_DECISION_SENSITIVE_ESCALATION",
+      "V7_PROFILE_DECLARES_ISSUE_SCOPED_CERTIFICATE_OR_ABSTAIN_WITH_MINIMUM_BLOCKING_CUT",
+      "DECISION_SUFFICIENT_BASELINE_IS_LOSSLESS_IDENTITY_AND_CONTENT_ADDRESSED",
+      "NO_EVIDENCE_IS_OMITTED_WITHOUT_A_FUTURE_OMISSION_CERTIFICATE",
+      "MINIMUM_INFORMATION_REQUESTS_DEDUPLICATE_EVIDENCE_BLOCKERS",
+      "BROAD_ACQUISITION_IS_FORBIDDEN_WITHOUT_MINIMALITY_PROOF",
+      "PROVIDERS_CANNOT_MUTATE_VERIFICATION_AUTHORITY",
+      "FALSE_PROGRESS_WITH_UNCHANGED_FRONTIER_FAILS_CLOSED",
+      "STRUCTURED_R2_ACQUISITION_SURVIVES_MINIMUM_INFORMATION_COMPILATION"
+    ],
+    "limitations": [
+      "NO_GENERAL_PROFESSIONAL_RISK_POLICY_CLOSURE",
+      "NO_NORMATIVE_AGGREGATION_CLOSURE",
+      "NO_MODEL_MULTIPLICITY_DECISION_CLOSURE",
+      "NO_GENERAL_SEMANTIC_COMPRESSION_CLAIM",
+      "NO_GLOBAL_R10_LEAF_OR_ROOT_CLOSURE",
+      "NO_DOMAIN_SEMANTIC_OR_EXECUTION_CLOSURE",
+      "NO_SAME_SUBJECT_COMPOSITION_PASS",
+      "NO_LIVE_DEFAULT_PROMOTION"
+    ]
+  },
+  "minimum_information_decision_support": true,
+  "normative_aggregation_closure_proved": false,
+  "model_multiplicity_decision_closure_proved": false,
+  "general_risk_policy_closure_proved": false,
+  "global_subject_identity_authority": false,
+  "root_subject_binding_authority": false,
+  "semantic_truth_authority": false,
+  "execution_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}

@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R10_V7_ROOT_SUBJECT_BINDING_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_SPRITE_5_OF_5__R10_BOUND_TO_EXACT_V7_SUBJECT_THROUGH_LOSSLESS_MINIMUM_INFORMATION_DECISION_SCOPE__ZERO_QUALITY_OR_TERMINAL_AUTHORITY",
+  "root_id": "R10_ANALYSIS_DECISION",
+  "exact_blobs": {
+    "binding": "6d8cc56e9273f15f199a624c4a11f1482c76e039",
+    "verifier": "734112f2a6c071138f5a9297a9b1950cf5704b21",
+    "tests": "b458c45e0e2b370a35004b491c5c6c22489c5bd6",
+    "subject": "1d598bc8757017ceb34928d0df9f5fce859ef868",
+    "execution_profile": "f7e89eafbb691c16d1bdf5b8d295a468d5e3bec5",
+    "decision_scope": "40149db88374c054fd974cc121ee464a3d3996fd",
+    "decision_semantic_verification": "c298b2510e352d876c1abacc069e915447e97823",
+    "decision_sufficiency_verification": "18574110321eb1bacc18db46cbd0673bf6a0a0ac"
+  },
+  "replay": {
+    "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/pq-r10-v7-binding-independent-verify",
+    "py_compile": "PASS",
+    "tests_run": 5,
+    "tests_passed": 5,
+    "tests_failed": 0,
+    "verifier_pass": true,
+    "verifier_status": "PASS__R10_BOUND_TO_V7_LOSSLESS_MINIMUM_INFORMATION_DECISION_SCOPE"
+  },
+  "hard_nonclaims": [
+    "NO_GENERAL_PROFESSIONAL_RISK_POLICY_CLOSURE",
+    "NO_NORMATIVE_AGGREGATION_CLOSURE",
+    "NO_MODEL_MULTIPLICITY_DECISION_CLOSURE",
+    "NO_GENERAL_SEMANTIC_COMPRESSION_CLAIM",
+    "NO_GLOBAL_R10_ROOT_CLOSURE",
+    "NO_DOMAIN_SEMANTIC_OR_EXECUTION_CLOSURE",
+    "NO_SAME_SUBJECT_COMPOSITION_PASS",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "root_subject_binding_authority": true,
+  "minimum_information_decision_support": true,
+  "normative_aggregation_closure_proved": false,
+  "model_multiplicity_decision_closure_proved": false,
+  "general_risk_policy_closure_proved": false,
+  "global_r10_root_closed": false,
+  "quality_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "next": "PROMOTE_R10_V7_ROOT_BINDING__ADVANCE_SAME_SUBJECT_FRONTIER_TO_10_OF_12__R11_NEXT"
+}
