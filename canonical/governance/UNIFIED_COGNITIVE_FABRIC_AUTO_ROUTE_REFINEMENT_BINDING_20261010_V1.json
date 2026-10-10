@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_EXECUTABLE_REFINEMENT_BINDING_V1",
+  "date": "2026-10-10",
+  "subject_id": "CURRENT_UNIFIED_COGNITIVE_FABRIC_AUTO_ROUTE_CLASSIFIER",
+  "status": "REFINEMENT_VERIFIED",
+  "scope": "ONLY__UNIFIED_COGNITIVE_FABRIC_V1__AUTO_MODE_STRUCTURAL_CLASSIFIER",
+  "refinement_certificate": {
+    "path": "canonical/governance/UNIFIED_COGNITIVE_FABRIC_AUTO_ROUTE_REFINEMENT_CERTIFICATE_20261010_V1.json",
+    "git_blob_sha": "1f12def91f51890d915656fd6de2a3add4e8ae91"
+  },
+  "semantic_verifier": {
+    "path": "canonical/runtime/unified_cognitive_fabric_auto_route_refinement_v1.py",
+    "git_blob_sha": "7d457d877ed1f6e5dacfb36e4495b13a201706bb"
+  },
+  "independent_verification": {
+    "path": "canonical/verification/UNIFIED_COGNITIVE_FABRIC_AUTO_ROUTE_REFINEMENT_SPRITE_VERIFY_20261010_V1.json",
+    "git_blob_sha": "4a3fdeec6b559caf1d326c6d92161a4557660f0e"
+  },
+  "liveness_required": false,
+  "nonclaims": [
+    "DOES_NOT_PROVE_FULL_UNIFIED_FABRIC_RUN_DISPATCH",
+    "DOES_NOT_PROVE_TRANSITIVE_ENGINE_CORRECTNESS",
+    "DOES_NOT_PROVE_REACHED_ESCAPE_REPAIR_SEMANTICS",
+    "DOES_NOT_GRANT_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
