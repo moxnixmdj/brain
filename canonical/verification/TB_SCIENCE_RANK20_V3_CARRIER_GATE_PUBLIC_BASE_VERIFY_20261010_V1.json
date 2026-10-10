@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK20_V3_CARRIER_GATE_PUBLIC_BASE_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__FRESH_V3_OUTER_WORKFLOW_AND_GENERATION_NEUTRAL_V8_GATES_ON_PUBLIC_BASE__ZERO_EXPOSURE",
+  "public_repository": "moxnixmdj/verification-capsule-runner",
+  "public_pull_request": 2616,
+  "public_merge_commit_sha": "55d8eefd0c666befe3c8f2e7fa28cdc96dcfd9a5",
+  "exact_public_blobs": {
+    "workflow": "344dcef48c7ae176aa0851c7e8e80bc80579868e",
+    "preflight_v8": "3cc62699388993a053969b03d09343c0e8a4d659",
+    "start_cas_v8": "99d81c7d1316d1767c688e12c2c05790c69662f3",
+    "behavior_v5": "b4d3360a7653f8cf16e30032bb9bee1683544d9e",
+    "generation_neutral_gate_regression": "c861fd98542ab91177cc1eeba72feae675056353",
+    "predecessor_surface": "3ce814e1a46887fbc0909f1a39c7c51b97568cb2"
+  },
+  "verified_properties": {
+    "workflow_contains_retired_v2_identity": false,
+    "workflow_fresh_v3_trigger_head_and_diff": true,
+    "workflow_invokes_preflight_v8": true,
+    "workflow_invokes_start_cas_v8": true,
+    "inner_gates_contain_retired_v2_identity": false,
+    "behavior_stale_claim_binding_removed": true,
+    "regression_covers_outer_workflow": true,
+    "activation_v2_present": false,
+    "activation_v3_present": false
+  },
+  "consequence": "PRIOR_V8_CLAIM_AND_V9_EFFECTIVE_AUTHORITY_ARE_NOT_VALID_FOR_ACTIVATION_AFTER_CARRIER_BYTE_CHANGE__FRESH_CLAIM_REMINT_REQUIRED",
+  "task_read": false,
+  "task_started": false,
+  "durable_start_cas_acquired": false,
+  "benchmark_trials_consumed": 0,
+  "activation_present": false,
+  "execution_authority_effective": false,
+  "task_read_authority_effective": false,
+  "activation_authority": false,
+  "pass": true,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
