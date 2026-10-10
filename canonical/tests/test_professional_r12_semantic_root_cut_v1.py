@@ -75,7 +75,7 @@ class R12SemanticRootCutV1Tests(unittest.TestCase):
     def test_scope_batch_property_self_promotion_fails(self):
         d = docs()
         d["scope"] = copy.deepcopy(d["scope"])
-        d["scope"]["property_truth_count"] = 1
+        d["scope"]["independent_replay"]["property_truth_count"] = 1
         out = self.evaluate(d)
         self.assertFalse(out["pass"])
         self.assertEqual(out["reason"], "SCOPE_BATCH_PROPERTY_SELF_PROMOTION")
