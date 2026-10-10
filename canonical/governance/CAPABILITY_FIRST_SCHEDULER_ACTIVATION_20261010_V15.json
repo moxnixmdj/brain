@@ -1,0 +1,75 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V15",
+  "date": "2026-10-10",
+  "status": "ACTIVE_POST_COMPOSITION_V15__INVARIANT_GATED_DYNAMIC_CURRENTNESS__PROFESSIONAL_ASSURANCE_BYTES_R2_PATH_FOLLOW__UNMODELED_DRIFT_FAILS_CLOSED__READ_ONLY_ONLY__ZERO_CREDIT",
+  "supersedes_effective": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V13.json",
+  "historical_noncurrent_v14": {
+    "path": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V14.json",
+    "git_blob_sha": "154494b50b652d2244d4155f276e84ab4b453d09",
+    "note": "PRESENT_HISTORICALLY_BUT_NOT_CURRENTLY_BOUND_BY_CURRENT_DEVELOPMENT_SCHEDULER_AT_V15_CREATION"
+  },
+  "runtime": {
+    "path": "canonical/runtime/capability_parallel_frontier_post_composition_v2.py",
+    "git_blob_sha": "b8a86551545a3ecfe8ba8d6fa44d2347703aa42d",
+    "entrypoint": "plan_current_post_composition_frontier"
+  },
+  "core_runtime": {
+    "path": "canonical/runtime/capability_parallel_frontier_v2.py",
+    "git_blob_sha": "209d8d11494645432354636a3dc17e7b515abaf8"
+  },
+  "frontier": {
+    "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
+    "binding": "MUTABLE_CURRENT_PATH_IDENTITY__SUPPORTED_MOVING_SOURCE_PROJECTIONS_REFRESHED_IN_MEMORY_BEFORE_CORE_CURRENTNESS_CHECK",
+    "activation_observed_git_blob_sha": "e83d7f5c7eda4447f8f65136516f233f51124001",
+    "activation_observed_blob_is_immutable_authority": false
+  },
+  "dynamic_currentness": {
+    "supported_current_families": [
+      "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
+      "canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json",
+      "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
+      "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json"
+    ],
+    "family_rule": "FOLLOW_CURRENT_BYTES_ONLY_AFTER_FAMILY_SPECIFIC_INVARIANTS_PASS__REPROJECT_ONLY_THE_BOUND_CANDIDATE_FIELDS__THEN_RUN_CORE_EXACT_CURRENTNESS_CHECK",
+    "exact_hash_fail_closed_families": [
+      "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
+      "canonical/governance/CURRENT_TB_SCIENCE_EXECUTION.json",
+      "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+      "ANY_OTHER_UNMODELED_SOURCE"
+    ],
+    "parked_semantics": "PARKED_REMAINS_NONPRIMARY__LOCAL_ADAPTER_NORMALIZATION_TO_BLOCKED_ONLY_FOR_CORE_VALIDATION",
+    "no_blind_pointer_follow": true
+  },
+  "verification": {
+    "path": "canonical/verification/CAPABILITY_PARALLEL_POST_COMPOSITION_V2_VERIFY_20261010_V1.json",
+    "git_blob_sha": "e14810a95bd2cfdeecc3fc1737a26c1dd738449d",
+    "runtime_test_path": "canonical/tests/test_capability_parallel_frontier_post_composition_v2.py",
+    "runtime_test_git_blob_sha": "16c46ce3c7f812d7cb9814a07a4683c1b5e5cca3",
+    "primary_isolated_result": "PYCOMPILE_PASS__21_OF_21_COMBINED_CORE_AND_V2_TESTS_PASS",
+    "second_carrier_result": "SAME_EXACT_RUNTIME_AND_TEST_BLOBS__PYCOMPILE_PASS__RUNTIME_REPLAY_NOT_CLAIMED_DUE_STALE_DEPENDENCY_SNAPSHOT"
+  },
+  "authority": {
+    "planning": true,
+    "read_only_evidence_plan": true,
+    "full_execution": false,
+    "promotion": false,
+    "acceptance": false,
+    "capability": false,
+    "ownership": false,
+    "terminal": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_FULL_PRIVATE_REPOSITORY_REGRESSION_EXECUTED",
+    "NO_FULL_EXECUTION_OR_PROMOTION_AUTHORITY",
+    "NO_DYNAMIC_FOLLOW_FOR_RESIDUAL_REUSE_TB_SCIENCE_OR_TERMINAL_AUTHORITY",
+    "NO_SECOND_CARRIER_RUNTIME_REPLAY_PASS_CLAIM",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ]
+}
