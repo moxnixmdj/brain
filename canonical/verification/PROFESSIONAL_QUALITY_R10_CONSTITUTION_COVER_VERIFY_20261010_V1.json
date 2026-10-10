@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R10_CONSTITUTION_COVER_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_BRANCH_BYTES__8_OF_8__ALL_11_CONSTITUTION_LAWS_MAPPED__ALL_9_PROOF_SLOTS_JUSTIFIED__ALL_17_CANONICAL_R10_DEFEATERS_ENFORCED_WHEN_DETECTED__ZERO_PROPERTY_CREDIT",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/professional_quality_r10_constitution_cover_v1.py",
+      "git_blob_sha": "20f9274af1feace53590e41a10b57869f42f27ce"
+    },
+    "tests": {
+      "path": "canonical/tests/test_professional_quality_r10_constitution_cover_v1.py",
+      "git_blob_sha": "1db7e4a5351e61a439bbaead6363190e455f6407"
+    }
+  },
+  "exact_dependencies": {
+    "constitution": "a087db2645b03e589965d50eb51d32a3049dc2fe",
+    "proof_slot_verifier": "04957e2e385f8169e7d8aff5b0e1f2009e848666",
+    "execution_guard": "0a88d49211e0a34e32b9d96f58927ccfaedf6487",
+    "leaf_manifest": "a7cad32c9fd969ff2c3857bb924c7bd746237ec2",
+    "defeater_catalog": "8b92e5cf76f767054f55414b87014e03d43460b8"
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "py_compile": "PASS",
+    "tests_run": 8,
+    "tests_passed": 8,
+    "tests_failed": 0,
+    "transcript_sha256": "b0c3cdfeeb97bd3a316c499e07280498e588d6c0a682ff2677b975a93e606dd9"
+  },
+  "proves": [
+    "ALL_11_CURRENT_R10_CONSTITUTION_LAWS_HAVE_EXPLICIT_EXECUTABLE_MECHANISM_MAPPING",
+    "ALL_9_STRUCTURAL_PROOF_SLOTS_ARE_JUSTIFIED_BY_AT_LEAST_ONE_CONSTITUTION_LAW",
+    "NO_IMPLEMENTED_PROOF_SLOT_IS_ORPHANED_FROM_THE_CONSTITUTION",
+    "ALL_17_CURRENT_CANONICAL_R10_DEFEATER_IDS_MATCH_THE_DETECTED_DEFEATER_ENFORCEMENT_GUARD",
+    "NEW_CONSTITUTION_LAWS_NEW_PROOF_SLOTS_OR_NEW_CANONICAL_DEFEATERS_FAIL_CLOSED_UNTIL_EXPLICITLY_MAPPED"
+  ],
+  "open_residual": {
+    "blocker": "UNDERLYING_SLOT_EVIDENCE_TRUTH_AND_CROSS_ROOT_DETECTOR_COMPLETENESS",
+    "underlying_fact_truth_authority": false,
+    "detection_completeness_proved": false,
+    "whole_leaf_property_truth_proved": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
