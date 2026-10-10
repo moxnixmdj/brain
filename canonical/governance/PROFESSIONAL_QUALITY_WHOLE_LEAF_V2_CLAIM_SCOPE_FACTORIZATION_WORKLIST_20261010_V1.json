@@ -1,0 +1,1086 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_WHOLE_LEAF_V2_CLAIM_SCOPE_FACTORIZATION_WORKLIST_20261010_V1",
+  "date": "2026-10-10",
+  "status": "FACTORIZED_24_OF_24_EXACT_LEAF_CLAIMS__ZERO_DOMAIN_EQUIVALENCE_PROVED__ZERO_SCOPE_OR_PROPERTY_CREDIT",
+  "objective": "ELIMINATE_MANUAL_24_WAY_CLAIM_SCOPE_DRIFT__FREEZE_EXACT_CLAIM_MATERIAL_AND_MISSING_WHOLE_DOMAIN_OBLIGATION_PER_LEAF__SEARCH_REUSE_BEFORE_ANY_CERTIFICATE_CONSTRUCTION",
+  "inputs": {
+    "leaf_manifest": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_LEAF_BINDING_MANIFEST_20261010_V1.json",
+      "git_blob_sha": "a7cad32c9fd969ff2c3857bb924c7bd746237ec2"
+    },
+    "whole_leaf_residual_ledger": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_RESIDUAL_LEDGER_20261010_V1.json",
+      "git_blob_sha": "ae5503829ad340cccef287f37ff70e4ab9288d33"
+    },
+    "uncovered_partition_worklist": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_UNCOVERED_PARTITION_WORKLIST_20261010_V1.json",
+      "git_blob_sha": "07dee32099a252cad07e5630504dcb2fc252180f"
+    },
+    "v2_readiness_verification": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_CERTIFICATE_READINESS_AUDIT_V2_VERIFY_20261010_V1.json",
+      "git_blob_sha": "2d28d932d08753fdf14c56aa24011e625518a4ef"
+    },
+    "v2_claim_scope_gate": {
+      "path": "canonical/runtime/professional_quality_whole_leaf_claim_scope_gate_v2.py",
+      "git_blob_sha": "d76b922e8d5c86f10568a3582759f8c23e69b2e0"
+    },
+    "declared_subject": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V7_DECLARED_SYSTEM_SUBJECT_20261010_V6.json",
+      "git_blob_sha": "1d598bc8757017ceb34928d0df9f5fce859ef868"
+    },
+    "mission_authority": {
+      "path": "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "git_blob_sha": "13c470645b037bbb46245c687dd35197b420d51a"
+    },
+    "claim_guard": {
+      "path": "canonical/runtime/coverage_claim_scope_guard_v1.py",
+      "git_blob_sha": "d1de61aa9bc00a184772a50f7ec9d5ee2853d747"
+    }
+  },
+  "leaf_count": 24,
+  "exact_claim_material_factorized_count": 24,
+  "domain_equivalence_proved_count": 0,
+  "v2_chain_admitted_count": 0,
+  "property_truth_ready_count": 0,
+  "rows": [
+    {
+      "leaf_id": "PQ::R1_TARGET_SPECIFICATION::EXECUTION",
+      "root_id": "R1_TARGET_SPECIFICATION",
+      "kind": "EXECUTION",
+      "frozen_claim_material": {
+        "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+        "subject_kind": "DECLARED_SYSTEM",
+        "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+        "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+        "leaf_contract": "Freeze objective, audience, hard constraints, plausible interpretations, target construct and claim scope; block goal substitution and unresolved decision-relevant ambiguity.",
+        "leaf_obligation": "VERIFY_DOMAIN_EXECUTION_FOR_R1_TARGET_SPECIFICATION",
+        "leaf_acceptance": "RUN_ROOT_RELEVANT_POSITIVE_NEAR_MISS_AND_ADVERSARIAL_CASES_ON_EXACT_ARTIFACT_OR_RUNTIME_BYTES_AND_BIND_OBSERVED_OUTCOMES_TO_THE_ROOT_CONTRACT"
+      },
+      "already_proved_bounded_scopes": [
+        "PQ::R1::TARGET_CONTRACT::STRUCTURAL_COMPLETENESS_GATE"
+      ],
+      "bounded_witness_receipts": [
+        {
+          "path": "canonical/verification/PROFESSIONAL_QUALITY_R1_STRUCTURAL_TARGET_VERIFY_20261010_V1.json",
+          "git_blob_sha": "dcee55ba17d15154117100de6aebd34716ad3e3e"
+        }
+      ],
+      "unproved_complement_partition_id": "PQ::R1_TARGET_SPECIFICATION::EXECUTION::UNPROVED_COMPLEMENT",
+      "scope_definition_required": {
+        "domain_schema_id": null,
+        "entire_admissible_leaf_domain": false,
+        "domain_definition": null
+      },
+      "domain_equivalence_status": "UNPROVED__INDEPENDENT_WHOLE_DOMAIN_EQUIVALENCE_REQUIRED",
+      "claim_scope_status": "NOT_CONSTRUCTIBLE_UNTIL_DOMAIN_DEFINITION_IS_FROZEN",
+      "claim_specific_scope_cover_status": "BLOCKED_BY_DOMAIN_EQUIVALENCE",
+      "property_truth_status": "BLOCKED_BY_V2_CHAIN_ADMISSION",
+      "admissible_closure_bases": [
+        "UNIVERSAL_FORMAL_SCOPE_PROOF",
+        "EXACT_COMPLETE_TARGET_CASE_UNIVERSE",
+        "EXHAUSTIVE_FINITE_SUPERSET",
+        "LOSSLESS_DECOMPOSITION"
+      ],
+      "whole_leaf_domain_equivalence_proved": false,
+      "whole_leaf_scope_complete": false,
+      "property_truth_authority": false
+    },
+    {
+      "leaf_id": "PQ::R1_TARGET_SPECIFICATION::SEMANTIC",
+      "root_id": "R1_TARGET_SPECIFICATION",
+      "kind": "SEMANTIC",
+      "frozen_claim_material": {
+        "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+        "subject_kind": "DECLARED_SYSTEM",
+        "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+        "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+        "leaf_contract": "Freeze objective, audience, hard constraints, plausible interpretations, target construct and claim scope; block goal substitution and unresolved decision-relevant ambiguity.",
+        "leaf_obligation": "PROVE_DOMAIN_SEMANTIC_SUFFICIENCY_FOR_R1_TARGET_SPECIFICATION",
+        "leaf_acceptance": "DOMAIN_SPECIFIC_CLAIM_SEMANTICS_GROUNDING_SCOPE_UNCERTAINTY_AND_ALL_ROOT_RELEVANT_DEFEATERS_RESOLVED_WITH_TYPED_EVIDENCE"
+      },
+      "already_proved_bounded_scopes": [
+        "PQ::R1::TARGET_SEMANTICS::PROFESSIONAL_ARTIFACT_PLAN"
+      ],
+      "bounded_witness_receipts": [
+        {
+          "path": "canonical/verification/PROFESSIONAL_QUALITY_R1_TARGET_SEMANTIC_VERIFY_20261010_V1.json",
+          "git_blob_sha": "dfffdd6eff129ce7498c4e4aa8a822cd4a5cda22"
+        }
+      ],
+      "unproved_complement_partition_id": "PQ::R1_TARGET_SPECIFICATION::SEMANTIC::UNPROVED_COMPLEMENT",
+      "scope_definition_required": {
+        "domain_schema_id": null,
+        "entire_admissible_leaf_domain": false,
+        "domain_definition": null
+      },
+      "domain_equivalence_status": "UNPROVED__INDEPENDENT_WHOLE_DOMAIN_EQUIVALENCE_REQUIRED",
+      "claim_scope_status": "NOT_CONSTRUCTIBLE_UNTIL_DOMAIN_DEFINITION_IS_FROZEN",
+      "claim_specific_scope_cover_status": "BLOCKED_BY_DOMAIN_EQUIVALENCE",
+      "property_truth_status": "BLOCKED_BY_V2_CHAIN_ADMISSION",
+      "admissible_closure_bases": [
+        "UNIVERSAL_FORMAL_SCOPE_PROOF",
+        "EXACT_COMPLETE_TARGET_CASE_UNIVERSE",
+        "EXHAUSTIVE_FINITE_SUPERSET",
+        "LOSSLESS_DECOMPOSITION"
+      ],
+      "whole_leaf_domain_equivalence_proved": false,
+      "whole_leaf_scope_complete": false,
+      "property_truth_authority": false
+    },
+    {
+      "leaf_id": "PQ::R10_ANALYSIS_DECISION::EXECUTION",
+      "root_id": "R10_ANALYSIS_DECISION",
+      "kind": "EXECUTION",
+      "frozen_claim_material": {
+        "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+        "subject_kind": "DECLARED_SYSTEM",
+        "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+        "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+        "leaf_contract": "Freeze or robustify admissible analysis, aggregation, compensation, risk and normative policy; preserve Pareto/incomparability structure and model multiplicity rather than selecting convenient scalarizations after outcomes are known.",
+        "leaf_obligation": "VERIFY_DOMAIN_EXECUTION_FOR_R10_ANALYSIS_DECISION",
+        "leaf_acceptance": "RUN_ROOT_RELEVANT_POSITIVE_NEAR_MISS_AND_ADVERSARIAL_CASES_ON_EXACT_ARTIFACT_OR_RUNTIME_BYTES_AND_BIND_OBSERVED_OUTCOMES_TO_THE_ROOT_CONTRACT"
+      },
+      "already_proved_bounded_scopes": [
+        "PQ::R10::DECISION_SUFFICIENCY::LOSSLESS_MINIMUM_INFORMATION"
+      ],
+      "bounded_witness_receipts": [
+        {
+          "path": "canonical/verification/PROFESSIONAL_QUALITY_R10_DECISION_SUFFICIENCY_SCOPED_VERIFY_20261010_V1.json",
+          "git_blob_sha": "18574110321eb1bacc18db46cbd0673bf6a0a0ac"
+        }
+      ],
+      "unproved_complement_partition_id": "PQ::R10_ANALYSIS_DECISION::EXECUTION::UNPROVED_COMPLEMENT",
+      "scope_definition_required": {
+        "domain_schema_id": null,
+        "entire_admissible_leaf_domain": false,
+        "domain_definition": null
+      },
+      "domain_equivalence_status": "UNPROVED__INDEPENDENT_WHOLE_DOMAIN_EQUIVALENCE_REQUIRED",
+      "claim_scope_status": "NOT_CONSTRUCTIBLE_UNTIL_DOMAIN_DEFINITION_IS_FROZEN",
+      "claim_specific_scope_cover_status": "BLOCKED_BY_DOMAIN_EQUIVALENCE",
+      "property_truth_status": "BLOCKED_BY_V2_CHAIN_ADMISSION",
+      "admissible_closure_bases": [
+        "UNIVERSAL_FORMAL_SCOPE_PROOF",
+        "EXACT_COMPLETE_TARGET_CASE_UNIVERSE",
+        "EXHAUSTIVE_FINITE_SUPERSET",
+        "LOSSLESS_DECOMPOSITION"
+      ],
+      "whole_leaf_domain_equivalence_proved": false,
+      "whole_leaf_scope_complete": false,
+      "property_truth_authority": false
+    },
+    {
+      "leaf_id": "PQ::R10_ANALYSIS_DECISION::SEMANTIC",
+      "root_id": "R10_ANALYSIS_DECISION",
+      "kind": "SEMANTIC",
+      "frozen_claim_material": {
+        "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+        "subject_kind": "DECLARED_SYSTEM",
+        "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+        "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+        "leaf_contract": "Freeze or robustify admissible analysis, aggregation, compensation, risk and normative policy; preserve Pareto/incomparability structure and model multiplicity rather than selecting convenient scalarizations after outcomes are known.",
+        "leaf_obligation": "PROVE_DOMAIN_SEMANTIC_SUFFICIENCY_FOR_R10_ANALYSIS_DECISION",
+        "leaf_acceptance": "DOMAIN_SPECIFIC_CLAIM_SEMANTICS_GROUNDING_SCOPE_UNCERTAINTY_AND_ALL_ROOT_RELEVANT_DEFEATERS_RESOLVED_WITH_TYPED_EVIDENCE"
+      },
+      "already_proved_bounded_scopes": [
+        "PQ::R10::DECISION_SUFFICIENCY_SEMANTICS::LOSSLESS_MINIMUM_INFORMATION"
+      ],
+      "bounded_witness_receipts": [
+        {
+          "path": "canonical/verification/PROFESSIONAL_QUALITY_R10_DECISION_SEMANTIC_VERIFY_20261010_V1.json",
+          "git_blob_sha": "c298b2510e352d876c1abacc069e915447e97823"
+        }
+      ],
+      "unproved_complement_partition_id": "PQ::R10_ANALYSIS_DECISION::SEMANTIC::UNPROVED_COMPLEMENT",
+      "scope_definition_required": {
+        "domain_schema_id": null,
+        "entire_admissible_leaf_domain": false,
+        "domain_definition": null
+      },
+      "domain_equivalence_status": "UNPROVED__INDEPENDENT_WHOLE_DOMAIN_EQUIVALENCE_REQUIRED",
+      "claim_scope_status": "NOT_CONSTRUCTIBLE_UNTIL_DOMAIN_DEFINITION_IS_FROZEN",
+      "claim_specific_scope_cover_status": "BLOCKED_BY_DOMAIN_EQUIVALENCE",
+      "property_truth_status": "BLOCKED_BY_V2_CHAIN_ADMISSION",
+      "admissible_closure_bases": [
+        "UNIVERSAL_FORMAL_SCOPE_PROOF",
+        "EXACT_COMPLETE_TARGET_CASE_UNIVERSE",
+        "EXHAUSTIVE_FINITE_SUPERSET",
+        "LOSSLESS_DECOMPOSITION"
+      ],
+      "whole_leaf_domain_equivalence_proved": false,
+      "whole_leaf_scope_complete": false,
+      "property_truth_authority": false
+    },
+    {
+      "leaf_id": "PQ::R11_ADAPTIVE_INTEGRITY_SECURITY::EXECUTION",
+      "root_id": "R11_ADAPTIVE_INTEGRITY_SECURITY",
+      "kind": "EXECUTION",
+      "frozen_claim_material": {
+        "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+        "subject_kind": "DECLARED_SYSTEM",
+        "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+        "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+        "leaf_contract": "Protect development, selection and certification boundaries against adaptive optimization, leakage, acquired contamination, evaluation awareness, prompt/control-plane attacks, holdout reuse and evaluator-policy selection bias.",
+        "leaf_obligation": "VERIFY_DOMAIN_EXECUTION_FOR_R11_ADAPTIVE_INTEGRITY_SECURITY",
+        "leaf_acceptance": "RUN_ROOT_RELEVANT_POSITIVE_NEAR_MISS_AND_ADVERSARIAL_CASES_ON_EXACT_ARTIFACT_OR_RUNTIME_BYTES_AND_BIND_OBSERVED_OUTCOMES_TO_THE_ROOT_CONTRACT"
+      },
+      "already_proved_bounded_scopes": [
+        "PQ::R11::EVAL_FIREWALL::POST_IDENTITY_DISCOVERY_REVOCATION"
+      ],
+      "bounded_witness_receipts": [
+        {
+          "path": "canonical/verification/PROFESSIONAL_QUALITY_R11_EVALUATION_FIREWALL_SCOPED_VERIFY_20261010_V1.json",
+          "git_blob_sha": "346d369a811aa77af02be901a5b04458fb528667"
+        }
+      ],
+      "unproved_complement_partition_id": "PQ::R11_ADAPTIVE_INTEGRITY_SECURITY::EXECUTION::UNPROVED_COMPLEMENT",
+      "scope_definition_required": {
+        "domain_schema_id": null,
+        "entire_admissible_leaf_domain": false,
+        "domain_definition": null
+      },
+      "domain_equivalence_status": "UNPROVED__INDEPENDENT_WHOLE_DOMAIN_EQUIVALENCE_REQUIRED",
+      "claim_scope_status": "NOT_CONSTRUCTIBLE_UNTIL_DOMAIN_DEFINITION_IS_FROZEN",
+      "claim_specific_scope_cover_status": "BLOCKED_BY_DOMAIN_EQUIVALENCE",
+      "property_truth_status": "BLOCKED_BY_V2_CHAIN_ADMISSION",
+      "admissible_closure_bases": [
+        "UNIVERSAL_FORMAL_SCOPE_PROOF",
+        "EXACT_COMPLETE_TARGET_CASE_UNIVERSE",
+        "EXHAUSTIVE_FINITE_SUPERSET",
+        "LOSSLESS_DECOMPOSITION"
+      ],
+      "whole_leaf_domain_equivalence_proved": false,
+      "whole_leaf_scope_complete": false,
+      "property_truth_authority": false
+    },
+    {
+      "leaf_id": "PQ::R11_ADAPTIVE_INTEGRITY_SECURITY::SEMANTIC",
+      "root_id": "R11_ADAPTIVE_INTEGRITY_SECURITY",
+      "kind": "SEMANTIC",
+      "frozen_claim_material": {
+        "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+        "subject_kind": "DECLARED_SYSTEM",
+        "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+        "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+        "leaf_contract": "Protect development, selection and certification boundaries against adaptive optimization, leakage, acquired contamination, evaluation awareness, prompt/control-plane attacks, holdout reuse and evaluator-policy selection bias.",
+        "leaf_obligation": "PROVE_DOMAIN_SEMANTIC_SUFFICIENCY_FOR_R11_ADAPTIVE_INTEGRITY_SECURITY",
+        "leaf_acceptance": "DOMAIN_SPECIFIC_CLAIM_SEMANTICS_GROUNDING_SCOPE_UNCERTAINTY_AND_ALL_ROOT_RELEVANT_DEFEATERS_RESOLVED_WITH_TYPED_EVIDENCE"
+      },
+      "already_proved_bounded_scopes": [
+        "PQ::R11::FIREWALL_SEMANTICS::POST_IDENTITY_REVOCATION"
+      ],
+      "bounded_witness_receipts": [
+        {
+          "path": "canonical/verification/PROFESSIONAL_QUALITY_R11_FIREWALL_SEMANTIC_VERIFY_20261010_V1.json",
+          "git_blob_sha": "7f0468c4abae22504d71ef627efeaf57e85f02a6"
+        }
+      ],
+      "unproved_complement_partition_id": "PQ::R11_ADAPTIVE_INTEGRITY_SECURITY::SEMANTIC::UNPROVED_COMPLEMENT",
+      "scope_definition_required": {
+        "domain_schema_id": null,
+        "entire_admissible_leaf_domain": false,
+        "domain_definition": null
+      },
+      "domain_equivalence_status": "UNPROVED__INDEPENDENT_WHOLE_DOMAIN_EQUIVALENCE_REQUIRED",
+      "claim_scope_status": "NOT_CONSTRUCTIBLE_UNTIL_DOMAIN_DEFINITION_IS_FROZEN",
+      "claim_specific_scope_cover_status": "BLOCKED_BY_DOMAIN_EQUIVALENCE",
+      "property_truth_status": "BLOCKED_BY_V2_CHAIN_ADMISSION",
+      "admissible_closure_bases": [
+        "UNIVERSAL_FORMAL_SCOPE_PROOF",
+        "EXACT_COMPLETE_TARGET_CASE_UNIVERSE",
+        "EXHAUSTIVE_FINITE_SUPERSET",
+        "LOSSLESS_DECOMPOSITION"
+      ],
+      "whole_leaf_domain_equivalence_proved": false,
+      "whole_leaf_scope_complete": false,
+      "property_truth_authority": false
+    },
+    {
+      "leaf_id": "PQ::R12_META_COMPOSITION_CLOSURE::EXECUTION",
+      "root_id": "R12_META_COMPOSITION_CLOSURE",
+      "kind": "EXECUTION",
+      "frozen_claim_material": {
+        "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+        "subject_kind": "DECLARED_SYSTEM",
+        "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+        "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+        "leaf_contract": "Require assumption-guarantee composition, same-subject root conjunction, abstraction soundness, independent defeater search, coverage accounting, proof-search honesty, meta-controller falsification and nonvacuity.",
+        "leaf_obligation": "VERIFY_DOMAIN_EXECUTION_FOR_R12_META_COMPOSITION_CLOSURE",
+        "leaf_acceptance": "RUN_ROOT_RELEVANT_POSITIVE_NEAR_MISS_AND_ADVERSARIAL_CASES_ON_EXACT_ARTIFACT_OR_RUNTIME_BYTES_AND_BIND_OBSERVED_OUTCOMES_TO_THE_ROOT_CONTRACT"
+      },
+      "already_proved_bounded_scopes": [
+        "PQ::R12::UVCK::FAIL_CLOSED_META_COMPOSITION"
+      ],
+      "bounded_witness_receipts": [
+        {
+          "path": "canonical/verification/UVCK_V2_CURRENT_GENERATION_INDEPENDENT_REPLAY_VERIFY_20261009_V1.json",
+          "git_blob_sha": "81f7f070233b6aa1c4b491949a4c3e7aedfafd10"
+        }
+      ],
+      "unproved_complement_partition_id": "PQ::R12_META_COMPOSITION_CLOSURE::EXECUTION::UNPROVED_COMPLEMENT",
+      "scope_definition_required": {
+        "domain_schema_id": null,
+        "entire_admissible_leaf_domain": false,
+        "domain_definition": null
+      },
+      "domain_equivalence_status": "UNPROVED__INDEPENDENT_WHOLE_DOMAIN_EQUIVALENCE_REQUIRED",
+      "claim_scope_status": "NOT_CONSTRUCTIBLE_UNTIL_DOMAIN_DEFINITION_IS_FROZEN",
+      "claim_specific_scope_cover_status": "BLOCKED_BY_DOMAIN_EQUIVALENCE",
+      "property_truth_status": "BLOCKED_BY_V2_CHAIN_ADMISSION",
+      "admissible_closure_bases": [
+        "UNIVERSAL_FORMAL_SCOPE_PROOF",
+        "EXACT_COMPLETE_TARGET_CASE_UNIVERSE",
+        "EXHAUSTIVE_FINITE_SUPERSET",
+        "LOSSLESS_DECOMPOSITION"
+      ],
+      "whole_leaf_domain_equivalence_proved": false,
+      "whole_leaf_scope_complete": false,
+      "property_truth_authority": false
+    },
+    {
+      "leaf_id": "PQ::R12_META_COMPOSITION_CLOSURE::SEMANTIC",
+      "root_id": "R12_META_COMPOSITION_CLOSURE",
+      "kind": "SEMANTIC",
+      "frozen_claim_material": {
+        "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+        "subject_kind": "DECLARED_SYSTEM",
+        "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+        "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+        "leaf_contract": "Require assumption-guarantee composition, same-subject root conjunction, abstraction soundness, independent defeater search, coverage accounting, proof-search honesty, meta-controller falsification and nonvacuity.",
+        "leaf_obligation": "PROVE_DOMAIN_SEMANTIC_SUFFICIENCY_FOR_R12_META_COMPOSITION_CLOSURE",
+        "leaf_acceptance": "DOMAIN_SPECIFIC_CLAIM_SEMANTICS_GROUNDING_SCOPE_UNCERTAINTY_AND_ALL_ROOT_RELEVANT_DEFEATERS_RESOLVED_WITH_TYPED_EVIDENCE"
+      },
+      "already_proved_bounded_scopes": [
+        "PQ::R12::UVCK::FAIL_CLOSED_META_COMPOSITION"
+      ],
+      "bounded_witness_receipts": [
+        {
+          "path": "canonical/verification/UVCK_V2_CURRENT_GENERATION_INDEPENDENT_REPLAY_VERIFY_20261009_V1.json",
+          "git_blob_sha": "81f7f070233b6aa1c4b491949a4c3e7aedfafd10"
+        }
+      ],
+      "unproved_complement_partition_id": "PQ::R12_META_COMPOSITION_CLOSURE::SEMANTIC::UNPROVED_COMPLEMENT",
+      "scope_definition_required": {
+        "domain_schema_id": null,
+        "entire_admissible_leaf_domain": false,
+        "domain_definition": null
+      },
+      "domain_equivalence_status": "UNPROVED__INDEPENDENT_WHOLE_DOMAIN_EQUIVALENCE_REQUIRED",
+      "claim_scope_status": "NOT_CONSTRUCTIBLE_UNTIL_DOMAIN_DEFINITION_IS_FROZEN",
+      "claim_specific_scope_cover_status": "BLOCKED_BY_DOMAIN_EQUIVALENCE",
+      "property_truth_status": "BLOCKED_BY_V2_CHAIN_ADMISSION",
+      "admissible_closure_bases": [
+        "UNIVERSAL_FORMAL_SCOPE_PROOF",
+        "EXACT_COMPLETE_TARGET_CASE_UNIVERSE",
+        "EXHAUSTIVE_FINITE_SUPERSET",
+        "LOSSLESS_DECOMPOSITION"
+      ],
+      "whole_leaf_domain_equivalence_proved": false,
+      "whole_leaf_scope_complete": false,
+      "property_truth_authority": false
+    },
+    {
+      "leaf_id": "PQ::R2_CANDIDATE_SEARCH::EXECUTION",
+      "root_id": "R2_CANDIDATE_SEARCH",
+      "kind": "EXECUTION",
+      "frozen_claim_material": {
+        "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+        "subject_kind": "DECLARED_SYSTEM",
+        "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+        "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+        "leaf_contract": "Separate artifact acceptance from search closure; require sufficient candidate diversity, anti-fixation search and novelty-safe escape before claiming no materially better candidate remains.",
+        "leaf_obligation": "VERIFY_DOMAIN_EXECUTION_FOR_R2_CANDIDATE_SEARCH",
+        "leaf_acceptance": "RUN_ROOT_RELEVANT_POSITIVE_NEAR_MISS_AND_ADVERSARIAL_CASES_ON_EXACT_ARTIFACT_OR_RUNTIME_BYTES_AND_BIND_OBSERVED_OUTCOMES_TO_THE_ROOT_CONTRACT"
+      },
+      "already_proved_bounded_scopes": [
+        "PQ::R2::FINITE_REGION_SEARCH::COMMON_POLICY_OR_MINIMAX_DISCRIMINATOR"
+      ],
+      "bounded_witness_receipts": [
+        {
+          "path": "canonical/verification/PROFESSIONAL_QUALITY_R2_SCOPE_COMPLETE_SEARCH_VERIFY_20261010_V1.json",
+          "git_blob_sha": "b66115513d1dde4527a65e5eda1ddea300138aca"
+        }
+      ],
+      "unproved_complement_partition_id": "PQ::R2_CANDIDATE_SEARCH::EXECUTION::UNPROVED_COMPLEMENT",
+      "scope_definition_required": {
+        "domain_schema_id": null,
+        "entire_admissible_leaf_domain": false,
+        "domain_definition": null
+      },
+      "domain_equivalence_status": "UNPROVED__INDEPENDENT_WHOLE_DOMAIN_EQUIVALENCE_REQUIRED",
+      "claim_scope_status": "NOT_CONSTRUCTIBLE_UNTIL_DOMAIN_DEFINITION_IS_FROZEN",
+      "claim_specific_scope_cover_status": "BLOCKED_BY_DOMAIN_EQUIVALENCE",
+      "property_truth_status": "BLOCKED_BY_V2_CHAIN_ADMISSION",
+      "admissible_closure_bases": [
+        "UNIVERSAL_FORMAL_SCOPE_PROOF",
+        "EXACT_COMPLETE_TARGET_CASE_UNIVERSE",
+        "EXHAUSTIVE_FINITE_SUPERSET",
+        "LOSSLESS_DECOMPOSITION"
+      ],
+      "whole_leaf_domain_equivalence_proved": false,
+      "whole_leaf_scope_complete": false,
+      "property_truth_authority": false
+    },
+    {
+      "leaf_id": "PQ::R2_CANDIDATE_SEARCH::SEMANTIC",
+      "root_id": "R2_CANDIDATE_SEARCH",
+      "kind": "SEMANTIC",
+      "frozen_claim_material": {
+        "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+        "subject_kind": "DECLARED_SYSTEM",
+        "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+        "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+        "leaf_contract": "Separate artifact acceptance from search closure; require sufficient candidate diversity, anti-fixation search and novelty-safe escape before claiming no materially better candidate remains.",
+        "leaf_obligation": "PROVE_DOMAIN_SEMANTIC_SUFFICIENCY_FOR_R2_CANDIDATE_SEARCH",
+        "leaf_acceptance": "DOMAIN_SPECIFIC_CLAIM_SEMANTICS_GROUNDING_SCOPE_UNCERTAINTY_AND_ALL_ROOT_RELEVANT_DEFEATERS_RESOLVED_WITH_TYPED_EVIDENCE"
+      },
+      "already_proved_bounded_scopes": [
+        "PQ::R2::SEARCH_SEMANTICS::FINITE_SCOPE"
+      ],
+      "bounded_witness_receipts": [
+        {
+          "path": "canonical/verification/PROFESSIONAL_QUALITY_R2_SEARCH_SEMANTIC_VERIFY_20261010_V1.json",
+          "git_blob_sha": "06da6b94712ec844a56c0f663cce67f059b7ba8d"
+        }
+      ],
+      "unproved_complement_partition_id": "PQ::R2_CANDIDATE_SEARCH::SEMANTIC::UNPROVED_COMPLEMENT",
+      "scope_definition_required": {
+        "domain_schema_id": null,
+        "entire_admissible_leaf_domain": false,
+        "domain_definition": null
+      },
+      "domain_equivalence_status": "UNPROVED__INDEPENDENT_WHOLE_DOMAIN_EQUIVALENCE_REQUIRED",
+      "claim_scope_status": "NOT_CONSTRUCTIBLE_UNTIL_DOMAIN_DEFINITION_IS_FROZEN",
+      "claim_specific_scope_cover_status": "BLOCKED_BY_DOMAIN_EQUIVALENCE",
+      "property_truth_status": "BLOCKED_BY_V2_CHAIN_ADMISSION",
+      "admissible_closure_bases": [
+        "UNIVERSAL_FORMAL_SCOPE_PROOF",
+        "EXACT_COMPLETE_TARGET_CASE_UNIVERSE",
+        "EXHAUSTIVE_FINITE_SUPERSET",
+        "LOSSLESS_DECOMPOSITION"
+      ],
+      "whole_leaf_domain_equivalence_proved": false,
+      "whole_leaf_scope_complete": false,
+      "property_truth_authority": false
+    },
+    {
+      "leaf_id": "PQ::R3_REALIZATION_OBSERVATION::EXECUTION",
+      "root_id": "R3_REALIZATION_OBSERVATION",
+      "kind": "EXECUTION",
+      "frozen_claim_material": {
+        "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+        "subject_kind": "DECLARED_SYSTEM",
+        "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+        "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+        "leaf_contract": "Bind every quality claim to exact artifact/system bytes, delivery environment, experienced realization and sufficient observation channels; block render, hidden-surface, multiscale and TOCTOU substitution failures.",
+        "leaf_obligation": "VERIFY_DOMAIN_EXECUTION_FOR_R3_REALIZATION_OBSERVATION",
+        "leaf_acceptance": "RUN_ROOT_RELEVANT_POSITIVE_NEAR_MISS_AND_ADVERSARIAL_CASES_ON_EXACT_ARTIFACT_OR_RUNTIME_BYTES_AND_BIND_OBSERVED_OUTCOMES_TO_THE_ROOT_CONTRACT"
+      },
+      "already_proved_bounded_scopes": [
+        "PQ::R3::NATIVE_ARTIFACT::BOUNDED_RENDER_PRESERVATION"
+      ],
+      "bounded_witness_receipts": [
+        {
+          "path": "canonical/verification/NATIVE_ARTIFACT_RENDER_PRESERVATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+          "git_blob_sha": "1a0b4ca6627aaf28eb25f6990682e87319d14d6d"
+        }
+      ],
+      "unproved_complement_partition_id": "PQ::R3_REALIZATION_OBSERVATION::EXECUTION::UNPROVED_COMPLEMENT",
+      "scope_definition_required": {
+        "domain_schema_id": null,
+        "entire_admissible_leaf_domain": false,
+        "domain_definition": null
+      },
+      "domain_equivalence_status": "UNPROVED__INDEPENDENT_WHOLE_DOMAIN_EQUIVALENCE_REQUIRED",
+      "claim_scope_status": "NOT_CONSTRUCTIBLE_UNTIL_DOMAIN_DEFINITION_IS_FROZEN",
+      "claim_specific_scope_cover_status": "BLOCKED_BY_DOMAIN_EQUIVALENCE",
+      "property_truth_status": "BLOCKED_BY_V2_CHAIN_ADMISSION",
+      "admissible_closure_bases": [
+        "UNIVERSAL_FORMAL_SCOPE_PROOF",
+        "EXACT_COMPLETE_TARGET_CASE_UNIVERSE",
+        "EXHAUSTIVE_FINITE_SUPERSET",
+        "LOSSLESS_DECOMPOSITION"
+      ],
+      "whole_leaf_domain_equivalence_proved": false,
+      "whole_leaf_scope_complete": false,
+      "property_truth_authority": false
+    },
+    {
+      "leaf_id": "PQ::R3_REALIZATION_OBSERVATION::SEMANTIC",
+      "root_id": "R3_REALIZATION_OBSERVATION",
+      "kind": "SEMANTIC",
+      "frozen_claim_material": {
+        "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+        "subject_kind": "DECLARED_SYSTEM",
+        "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+        "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+        "leaf_contract": "Bind every quality claim to exact artifact/system bytes, delivery environment, experienced realization and sufficient observation channels; block render, hidden-surface, multiscale and TOCTOU substitution failures.",
+        "leaf_obligation": "PROVE_DOMAIN_SEMANTIC_SUFFICIENCY_FOR_R3_REALIZATION_OBSERVATION",
+        "leaf_acceptance": "DOMAIN_SPECIFIC_CLAIM_SEMANTICS_GROUNDING_SCOPE_UNCERTAINTY_AND_ALL_ROOT_RELEVANT_DEFEATERS_RESOLVED_WITH_TYPED_EVIDENCE"
+      },
+      "already_proved_bounded_scopes": [
+        "PQ::R3::REALIZATION_SEMANTICS::PINNED_NATIVE_RENDER"
+      ],
+      "bounded_witness_receipts": [
+        {
+          "path": "canonical/verification/PROFESSIONAL_QUALITY_R3_REALIZATION_SEMANTIC_VERIFY_20261010_V1.json",
+          "git_blob_sha": "3c9a6f03c9dfb7597cdb7c5ca01e9eaf66a596e0"
+        }
+      ],
+      "unproved_complement_partition_id": "PQ::R3_REALIZATION_OBSERVATION::SEMANTIC::UNPROVED_COMPLEMENT",
+      "scope_definition_required": {
+        "domain_schema_id": null,
+        "entire_admissible_leaf_domain": false,
+        "domain_definition": null
+      },
+      "domain_equivalence_status": "UNPROVED__INDEPENDENT_WHOLE_DOMAIN_EQUIVALENCE_REQUIRED",
+      "claim_scope_status": "NOT_CONSTRUCTIBLE_UNTIL_DOMAIN_DEFINITION_IS_FROZEN",
+      "claim_specific_scope_cover_status": "BLOCKED_BY_DOMAIN_EQUIVALENCE",
+      "property_truth_status": "BLOCKED_BY_V2_CHAIN_ADMISSION",
+      "admissible_closure_bases": [
+        "UNIVERSAL_FORMAL_SCOPE_PROOF",
+        "EXACT_COMPLETE_TARGET_CASE_UNIVERSE",
+        "EXHAUSTIVE_FINITE_SUPERSET",
+        "LOSSLESS_DECOMPOSITION"
+      ],
+      "whole_leaf_domain_equivalence_proved": false,
+      "whole_leaf_scope_complete": false,
+      "property_truth_authority": false
+    },
+    {
+      "leaf_id": "PQ::R4_MEASUREMENT_CONSTRUCT::EXECUTION",
+      "root_id": "R4_MEASUREMENT_CONSTRUCT",
+      "kind": "EXECUTION",
+      "frozen_claim_material": {
+        "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+        "subject_kind": "DECLARED_SYSTEM",
+        "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+        "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+        "leaf_contract": "Establish construct validity, criterion ontology, absolute professional floor, decision resolution and challenge validity; block rubric, scale, normalization and proxy gaming.",
+        "leaf_obligation": "VERIFY_DOMAIN_EXECUTION_FOR_R4_MEASUREMENT_CONSTRUCT",
+        "leaf_acceptance": "RUN_ROOT_RELEVANT_POSITIVE_NEAR_MISS_AND_ADVERSARIAL_CASES_ON_EXACT_ARTIFACT_OR_RUNTIME_BYTES_AND_BIND_OBSERVED_OUTCOMES_TO_THE_ROOT_CONTRACT"
+      },
+      "already_proved_bounded_scopes": [
+        "PQ::R4::MECHANICAL_ARTIFACT_MEASUREMENT::CONTENT_ADDRESSED_TYPED_ACCEPTANCE"
+      ],
+      "bounded_witness_receipts": [
+        {
+          "path": "canonical/verification/ARTIFACT_MEASUREMENT_VERIFY_20261007_V1.json",
+          "git_blob_sha": "34c64ed759d2e70df48a76d7a254047ac5fe9e2b"
+        }
+      ],
+      "unproved_complement_partition_id": "PQ::R4_MEASUREMENT_CONSTRUCT::EXECUTION::UNPROVED_COMPLEMENT",
+      "scope_definition_required": {
+        "domain_schema_id": null,
+        "entire_admissible_leaf_domain": false,
+        "domain_definition": null
+      },
+      "domain_equivalence_status": "UNPROVED__INDEPENDENT_WHOLE_DOMAIN_EQUIVALENCE_REQUIRED",
+      "claim_scope_status": "NOT_CONSTRUCTIBLE_UNTIL_DOMAIN_DEFINITION_IS_FROZEN",
+      "claim_specific_scope_cover_status": "BLOCKED_BY_DOMAIN_EQUIVALENCE",
+      "property_truth_status": "BLOCKED_BY_V2_CHAIN_ADMISSION",
+      "admissible_closure_bases": [
+        "UNIVERSAL_FORMAL_SCOPE_PROOF",
+        "EXACT_COMPLETE_TARGET_CASE_UNIVERSE",
+        "EXHAUSTIVE_FINITE_SUPERSET",
+        "LOSSLESS_DECOMPOSITION"
+      ],
+      "whole_leaf_domain_equivalence_proved": false,
+      "whole_leaf_scope_complete": false,
+      "property_truth_authority": false
+    },
+    {
+      "leaf_id": "PQ::R4_MEASUREMENT_CONSTRUCT::SEMANTIC",
+      "root_id": "R4_MEASUREMENT_CONSTRUCT",
+      "kind": "SEMANTIC",
+      "frozen_claim_material": {
+        "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+        "subject_kind": "DECLARED_SYSTEM",
+        "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+        "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+        "leaf_contract": "Establish construct validity, criterion ontology, absolute professional floor, decision resolution and challenge validity; block rubric, scale, normalization and proxy gaming.",
+        "leaf_obligation": "PROVE_DOMAIN_SEMANTIC_SUFFICIENCY_FOR_R4_MEASUREMENT_CONSTRUCT",
+        "leaf_acceptance": "DOMAIN_SPECIFIC_CLAIM_SEMANTICS_GROUNDING_SCOPE_UNCERTAINTY_AND_ALL_ROOT_RELEVANT_DEFEATERS_RESOLVED_WITH_TYPED_EVIDENCE"
+      },
+      "already_proved_bounded_scopes": [
+        "PQ::R4::MEASUREMENT_SEMANTICS::CONTENT_ADDRESSED_TYPED_MECHANICAL"
+      ],
+      "bounded_witness_receipts": [
+        {
+          "path": "canonical/verification/PROFESSIONAL_QUALITY_R4_MEASUREMENT_SEMANTIC_VERIFY_20261010_V1.json",
+          "git_blob_sha": "c91074f2f187834936c0b7297579a6b8ba125fae"
+        }
+      ],
+      "unproved_complement_partition_id": "PQ::R4_MEASUREMENT_CONSTRUCT::SEMANTIC::UNPROVED_COMPLEMENT",
+      "scope_definition_required": {
+        "domain_schema_id": null,
+        "entire_admissible_leaf_domain": false,
+        "domain_definition": null
+      },
+      "domain_equivalence_status": "UNPROVED__INDEPENDENT_WHOLE_DOMAIN_EQUIVALENCE_REQUIRED",
+      "claim_scope_status": "NOT_CONSTRUCTIBLE_UNTIL_DOMAIN_DEFINITION_IS_FROZEN",
+      "claim_specific_scope_cover_status": "BLOCKED_BY_DOMAIN_EQUIVALENCE",
+      "property_truth_status": "BLOCKED_BY_V2_CHAIN_ADMISSION",
+      "admissible_closure_bases": [
+        "UNIVERSAL_FORMAL_SCOPE_PROOF",
+        "EXACT_COMPLETE_TARGET_CASE_UNIVERSE",
+        "EXHAUSTIVE_FINITE_SUPERSET",
+        "LOSSLESS_DECOMPOSITION"
+      ],
+      "whole_leaf_domain_equivalence_proved": false,
+      "whole_leaf_scope_complete": false,
+      "property_truth_authority": false
+    },
+    {
+      "leaf_id": "PQ::R5_EVALUATOR_REFERENCE::EXECUTION",
+      "root_id": "R5_EVALUATOR_REFERENCE",
+      "kind": "EXECUTION",
+      "frozen_claim_material": {
+        "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+        "subject_kind": "DECLARED_SYSTEM",
+        "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+        "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+        "leaf_contract": "Qualify evaluators and references locally by criterion, artifact class, difficulty, state and relevant provenance; preserve disagreement and treat reference standards as fallible evidence rather than truth.",
+        "leaf_obligation": "VERIFY_DOMAIN_EXECUTION_FOR_R5_EVALUATOR_REFERENCE",
+        "leaf_acceptance": "RUN_ROOT_RELEVANT_POSITIVE_NEAR_MISS_AND_ADVERSARIAL_CASES_ON_EXACT_ARTIFACT_OR_RUNTIME_BYTES_AND_BIND_OBSERVED_OUTCOMES_TO_THE_ROOT_CONTRACT"
+      },
+      "already_proved_bounded_scopes": [
+        "PQ::R5::EVALUATOR_UNCERTAINTY::CONDITIONAL_ROBUST_MARGIN"
+      ],
+      "bounded_witness_receipts": [
+        {
+          "path": "canonical/verification/GDPVAL_HYBRID_EVALUATOR_UNCERTAINTY_SPRITE_VERIFICATION_20261008_V1.json",
+          "git_blob_sha": "e852c4fbc14147c17469f1a4ede4e274d768bbf7"
+        }
+      ],
+      "unproved_complement_partition_id": "PQ::R5_EVALUATOR_REFERENCE::EXECUTION::UNPROVED_COMPLEMENT",
+      "scope_definition_required": {
+        "domain_schema_id": null,
+        "entire_admissible_leaf_domain": false,
+        "domain_definition": null
+      },
+      "domain_equivalence_status": "UNPROVED__INDEPENDENT_WHOLE_DOMAIN_EQUIVALENCE_REQUIRED",
+      "claim_scope_status": "NOT_CONSTRUCTIBLE_UNTIL_DOMAIN_DEFINITION_IS_FROZEN",
+      "claim_specific_scope_cover_status": "BLOCKED_BY_DOMAIN_EQUIVALENCE",
+      "property_truth_status": "BLOCKED_BY_V2_CHAIN_ADMISSION",
+      "admissible_closure_bases": [
+        "UNIVERSAL_FORMAL_SCOPE_PROOF",
+        "EXACT_COMPLETE_TARGET_CASE_UNIVERSE",
+        "EXHAUSTIVE_FINITE_SUPERSET",
+        "LOSSLESS_DECOMPOSITION"
+      ],
+      "whole_leaf_domain_equivalence_proved": false,
+      "whole_leaf_scope_complete": false,
+      "property_truth_authority": false
+    },
+    {
+      "leaf_id": "PQ::R5_EVALUATOR_REFERENCE::SEMANTIC",
+      "root_id": "R5_EVALUATOR_REFERENCE",
+      "kind": "SEMANTIC",
+      "frozen_claim_material": {
+        "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+        "subject_kind": "DECLARED_SYSTEM",
+        "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+        "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+        "leaf_contract": "Qualify evaluators and references locally by criterion, artifact class, difficulty, state and relevant provenance; preserve disagreement and treat reference standards as fallible evidence rather than truth.",
+        "leaf_obligation": "PROVE_DOMAIN_SEMANTIC_SUFFICIENCY_FOR_R5_EVALUATOR_REFERENCE",
+        "leaf_acceptance": "DOMAIN_SPECIFIC_CLAIM_SEMANTICS_GROUNDING_SCOPE_UNCERTAINTY_AND_ALL_ROOT_RELEVANT_DEFEATERS_RESOLVED_WITH_TYPED_EVIDENCE"
+      },
+      "already_proved_bounded_scopes": [
+        "PQ::R5::EVALUATOR_SEMANTICS::CONDITIONAL_ROBUSTNESS"
+      ],
+      "bounded_witness_receipts": [
+        {
+          "path": "canonical/verification/PROFESSIONAL_QUALITY_R5_EVALUATOR_SEMANTIC_VERIFY_20261010_V1.json",
+          "git_blob_sha": "33d5e8c11e07e4a153edf3970503c6753c5343d2"
+        }
+      ],
+      "unproved_complement_partition_id": "PQ::R5_EVALUATOR_REFERENCE::SEMANTIC::UNPROVED_COMPLEMENT",
+      "scope_definition_required": {
+        "domain_schema_id": null,
+        "entire_admissible_leaf_domain": false,
+        "domain_definition": null
+      },
+      "domain_equivalence_status": "UNPROVED__INDEPENDENT_WHOLE_DOMAIN_EQUIVALENCE_REQUIRED",
+      "claim_scope_status": "NOT_CONSTRUCTIBLE_UNTIL_DOMAIN_DEFINITION_IS_FROZEN",
+      "claim_specific_scope_cover_status": "BLOCKED_BY_DOMAIN_EQUIVALENCE",
+      "property_truth_status": "BLOCKED_BY_V2_CHAIN_ADMISSION",
+      "admissible_closure_bases": [
+        "UNIVERSAL_FORMAL_SCOPE_PROOF",
+        "EXACT_COMPLETE_TARGET_CASE_UNIVERSE",
+        "EXHAUSTIVE_FINITE_SUPERSET",
+        "LOSSLESS_DECOMPOSITION"
+      ],
+      "whole_leaf_domain_equivalence_proved": false,
+      "whole_leaf_scope_complete": false,
+      "property_truth_authority": false
+    },
+    {
+      "leaf_id": "PQ::R6_EVIDENCE_GROUNDING_DEPENDENCE::EXECUTION",
+      "root_id": "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+      "kind": "EXECUTION",
+      "frozen_claim_material": {
+        "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+        "subject_kind": "DECLARED_SYSTEM",
+        "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+        "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+        "leaf_contract": "Admit typed evidence with provenance, grounding, independence/common-cause accounting, freshness and uncertainty semantics; forbid circular meta-evaluation and type laundering.",
+        "leaf_obligation": "VERIFY_DOMAIN_EXECUTION_FOR_R6_EVIDENCE_GROUNDING_DEPENDENCE",
+        "leaf_acceptance": "RUN_ROOT_RELEVANT_POSITIVE_NEAR_MISS_AND_ADVERSARIAL_CASES_ON_EXACT_ARTIFACT_OR_RUNTIME_BYTES_AND_BIND_OBSERVED_OUTCOMES_TO_THE_ROOT_CONTRACT"
+      },
+      "already_proved_bounded_scopes": [
+        "PQ::R6::LEAF_EVIDENCE::CONTENT_ADDRESSED_SCOPE_MATCHED_ADMISSION"
+      ],
+      "bounded_witness_receipts": [
+        {
+          "path": "canonical/verification/PROFESSIONAL_QUALITY_LEAF_BINDER_V2_VERIFY_20261010_V1.json",
+          "git_blob_sha": "b65a67e8edaee925338fe3f2d61dad6b0f52d129"
+        }
+      ],
+      "unproved_complement_partition_id": "PQ::R6_EVIDENCE_GROUNDING_DEPENDENCE::EXECUTION::UNPROVED_COMPLEMENT",
+      "scope_definition_required": {
+        "domain_schema_id": null,
+        "entire_admissible_leaf_domain": false,
+        "domain_definition": null
+      },
+      "domain_equivalence_status": "UNPROVED__INDEPENDENT_WHOLE_DOMAIN_EQUIVALENCE_REQUIRED",
+      "claim_scope_status": "NOT_CONSTRUCTIBLE_UNTIL_DOMAIN_DEFINITION_IS_FROZEN",
+      "claim_specific_scope_cover_status": "BLOCKED_BY_DOMAIN_EQUIVALENCE",
+      "property_truth_status": "BLOCKED_BY_V2_CHAIN_ADMISSION",
+      "admissible_closure_bases": [
+        "UNIVERSAL_FORMAL_SCOPE_PROOF",
+        "EXACT_COMPLETE_TARGET_CASE_UNIVERSE",
+        "EXHAUSTIVE_FINITE_SUPERSET",
+        "LOSSLESS_DECOMPOSITION"
+      ],
+      "whole_leaf_domain_equivalence_proved": false,
+      "whole_leaf_scope_complete": false,
+      "property_truth_authority": false
+    },
+    {
+      "leaf_id": "PQ::R6_EVIDENCE_GROUNDING_DEPENDENCE::SEMANTIC",
+      "root_id": "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+      "kind": "SEMANTIC",
+      "frozen_claim_material": {
+        "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+        "subject_kind": "DECLARED_SYSTEM",
+        "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+        "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+        "leaf_contract": "Admit typed evidence with provenance, grounding, independence/common-cause accounting, freshness and uncertainty semantics; forbid circular meta-evaluation and type laundering.",
+        "leaf_obligation": "PROVE_DOMAIN_SEMANTIC_SUFFICIENCY_FOR_R6_EVIDENCE_GROUNDING_DEPENDENCE",
+        "leaf_acceptance": "DOMAIN_SPECIFIC_CLAIM_SEMANTICS_GROUNDING_SCOPE_UNCERTAINTY_AND_ALL_ROOT_RELEVANT_DEFEATERS_RESOLVED_WITH_TYPED_EVIDENCE"
+      },
+      "already_proved_bounded_scopes": [
+        "PQ::R6::LEAF_EVIDENCE::CONTENT_ADDRESSED_SCOPE_MATCHED_ADMISSION"
+      ],
+      "bounded_witness_receipts": [
+        {
+          "path": "canonical/verification/PROFESSIONAL_QUALITY_LEAF_BINDER_V2_VERIFY_20261010_V1.json",
+          "git_blob_sha": "b65a67e8edaee925338fe3f2d61dad6b0f52d129"
+        }
+      ],
+      "unproved_complement_partition_id": "PQ::R6_EVIDENCE_GROUNDING_DEPENDENCE::SEMANTIC::UNPROVED_COMPLEMENT",
+      "scope_definition_required": {
+        "domain_schema_id": null,
+        "entire_admissible_leaf_domain": false,
+        "domain_definition": null
+      },
+      "domain_equivalence_status": "UNPROVED__INDEPENDENT_WHOLE_DOMAIN_EQUIVALENCE_REQUIRED",
+      "claim_scope_status": "NOT_CONSTRUCTIBLE_UNTIL_DOMAIN_DEFINITION_IS_FROZEN",
+      "claim_specific_scope_cover_status": "BLOCKED_BY_DOMAIN_EQUIVALENCE",
+      "property_truth_status": "BLOCKED_BY_V2_CHAIN_ADMISSION",
+      "admissible_closure_bases": [
+        "UNIVERSAL_FORMAL_SCOPE_PROOF",
+        "EXACT_COMPLETE_TARGET_CASE_UNIVERSE",
+        "EXHAUSTIVE_FINITE_SUPERSET",
+        "LOSSLESS_DECOMPOSITION"
+      ],
+      "whole_leaf_domain_equivalence_proved": false,
+      "whole_leaf_scope_complete": false,
+      "property_truth_authority": false
+    },
+    {
+      "leaf_id": "PQ::R7_CAUSAL_PRESCRIPTIVE::EXECUTION",
+      "root_id": "R7_CAUSAL_PRESCRIPTIVE",
+      "kind": "EXECUTION",
+      "frozen_claim_material": {
+        "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+        "subject_kind": "DECLARED_SYSTEM",
+        "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+        "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+        "leaf_contract": "Separate quality prediction from causal explanation and edit prescription; require intervention fidelity, causal attribution, version/dose scope and post-edit regression checks before promoting reusable design rules.",
+        "leaf_obligation": "VERIFY_DOMAIN_EXECUTION_FOR_R7_CAUSAL_PRESCRIPTIVE",
+        "leaf_acceptance": "RUN_ROOT_RELEVANT_POSITIVE_NEAR_MISS_AND_ADVERSARIAL_CASES_ON_EXACT_ARTIFACT_OR_RUNTIME_BYTES_AND_BIND_OBSERVED_OUTCOMES_TO_THE_ROOT_CONTRACT"
+      },
+      "already_proved_bounded_scopes": [
+        "PQ::R7::SINGLE_EDIT::UVCK_DEFEATER_ORDER_REPAIR"
+      ],
+      "bounded_witness_receipts": [
+        {
+          "path": "canonical/verification/PROFESSIONAL_QUALITY_R7_SINGLE_EDIT_CAUSAL_INSTANCE_VERIFY_20261009_V1.json",
+          "git_blob_sha": "0c692f55dedb6a8523bcd78541d4cb77ef06d610"
+        }
+      ],
+      "unproved_complement_partition_id": "PQ::R7_CAUSAL_PRESCRIPTIVE::EXECUTION::UNPROVED_COMPLEMENT",
+      "scope_definition_required": {
+        "domain_schema_id": null,
+        "entire_admissible_leaf_domain": false,
+        "domain_definition": null
+      },
+      "domain_equivalence_status": "UNPROVED__INDEPENDENT_WHOLE_DOMAIN_EQUIVALENCE_REQUIRED",
+      "claim_scope_status": "NOT_CONSTRUCTIBLE_UNTIL_DOMAIN_DEFINITION_IS_FROZEN",
+      "claim_specific_scope_cover_status": "BLOCKED_BY_DOMAIN_EQUIVALENCE",
+      "property_truth_status": "BLOCKED_BY_V2_CHAIN_ADMISSION",
+      "admissible_closure_bases": [
+        "UNIVERSAL_FORMAL_SCOPE_PROOF",
+        "EXACT_COMPLETE_TARGET_CASE_UNIVERSE",
+        "EXHAUSTIVE_FINITE_SUPERSET",
+        "LOSSLESS_DECOMPOSITION"
+      ],
+      "whole_leaf_domain_equivalence_proved": false,
+      "whole_leaf_scope_complete": false,
+      "property_truth_authority": false
+    },
+    {
+      "leaf_id": "PQ::R7_CAUSAL_PRESCRIPTIVE::SEMANTIC",
+      "root_id": "R7_CAUSAL_PRESCRIPTIVE",
+      "kind": "SEMANTIC",
+      "frozen_claim_material": {
+        "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+        "subject_kind": "DECLARED_SYSTEM",
+        "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+        "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+        "leaf_contract": "Separate quality prediction from causal explanation and edit prescription; require intervention fidelity, causal attribution, version/dose scope and post-edit regression checks before promoting reusable design rules.",
+        "leaf_obligation": "PROVE_DOMAIN_SEMANTIC_SUFFICIENCY_FOR_R7_CAUSAL_PRESCRIPTIVE",
+        "leaf_acceptance": "DOMAIN_SPECIFIC_CLAIM_SEMANTICS_GROUNDING_SCOPE_UNCERTAINTY_AND_ALL_ROOT_RELEVANT_DEFEATERS_RESOLVED_WITH_TYPED_EVIDENCE"
+      },
+      "already_proved_bounded_scopes": [
+        "PQ::R7::SINGLE_EDIT::UVCK_DEFEATER_ORDER_REPAIR"
+      ],
+      "bounded_witness_receipts": [
+        {
+          "path": "canonical/verification/PROFESSIONAL_QUALITY_R7_SINGLE_EDIT_CAUSAL_INSTANCE_VERIFY_20261009_V1.json",
+          "git_blob_sha": "0c692f55dedb6a8523bcd78541d4cb77ef06d610"
+        }
+      ],
+      "unproved_complement_partition_id": "PQ::R7_CAUSAL_PRESCRIPTIVE::SEMANTIC::UNPROVED_COMPLEMENT",
+      "scope_definition_required": {
+        "domain_schema_id": null,
+        "entire_admissible_leaf_domain": false,
+        "domain_definition": null
+      },
+      "domain_equivalence_status": "UNPROVED__INDEPENDENT_WHOLE_DOMAIN_EQUIVALENCE_REQUIRED",
+      "claim_scope_status": "NOT_CONSTRUCTIBLE_UNTIL_DOMAIN_DEFINITION_IS_FROZEN",
+      "claim_specific_scope_cover_status": "BLOCKED_BY_DOMAIN_EQUIVALENCE",
+      "property_truth_status": "BLOCKED_BY_V2_CHAIN_ADMISSION",
+      "admissible_closure_bases": [
+        "UNIVERSAL_FORMAL_SCOPE_PROOF",
+        "EXACT_COMPLETE_TARGET_CASE_UNIVERSE",
+        "EXHAUSTIVE_FINITE_SUPERSET",
+        "LOSSLESS_DECOMPOSITION"
+      ],
+      "whole_leaf_domain_equivalence_proved": false,
+      "whole_leaf_scope_complete": false,
+      "property_truth_authority": false
+    },
+    {
+      "leaf_id": "PQ::R8_POPULATION_CONTEXT_OPERATOR::EXECUTION",
+      "root_id": "R8_POPULATION_CONTEXT_OPERATOR",
+      "kind": "EXECUTION",
+      "frozen_claim_material": {
+        "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+        "subject_kind": "DECLARED_SYSTEM",
+        "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+        "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+        "leaf_contract": "Bind claims to the correct constituency, subgroup, evaluator assignment, presenter/operator, context and protocol; account for representation, invariance, social influence, strategic reporting and reactivity.",
+        "leaf_obligation": "VERIFY_DOMAIN_EXECUTION_FOR_R8_POPULATION_CONTEXT_OPERATOR",
+        "leaf_acceptance": "RUN_ROOT_RELEVANT_POSITIVE_NEAR_MISS_AND_ADVERSARIAL_CASES_ON_EXACT_ARTIFACT_OR_RUNTIME_BYTES_AND_BIND_OBSERVED_OUTCOMES_TO_THE_ROOT_CONTRACT"
+      },
+      "already_proved_bounded_scopes": [
+        "PQ::R8::DELEGATION_POPULATION::FROZEN_512_CASE_PRE_BEACON_BINDING"
+      ],
+      "bounded_witness_receipts": [
+        {
+          "path": "canonical/verification/DELEGATION_TERMINAL_POPULATION_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+          "git_blob_sha": "3965db684d7104c5829ce1fcfa8ee08d2cd42cfc"
+        }
+      ],
+      "unproved_complement_partition_id": "PQ::R8_POPULATION_CONTEXT_OPERATOR::EXECUTION::UNPROVED_COMPLEMENT",
+      "scope_definition_required": {
+        "domain_schema_id": null,
+        "entire_admissible_leaf_domain": false,
+        "domain_definition": null
+      },
+      "domain_equivalence_status": "UNPROVED__INDEPENDENT_WHOLE_DOMAIN_EQUIVALENCE_REQUIRED",
+      "claim_scope_status": "NOT_CONSTRUCTIBLE_UNTIL_DOMAIN_DEFINITION_IS_FROZEN",
+      "claim_specific_scope_cover_status": "BLOCKED_BY_DOMAIN_EQUIVALENCE",
+      "property_truth_status": "BLOCKED_BY_V2_CHAIN_ADMISSION",
+      "admissible_closure_bases": [
+        "UNIVERSAL_FORMAL_SCOPE_PROOF",
+        "EXACT_COMPLETE_TARGET_CASE_UNIVERSE",
+        "EXHAUSTIVE_FINITE_SUPERSET",
+        "LOSSLESS_DECOMPOSITION"
+      ],
+      "whole_leaf_domain_equivalence_proved": false,
+      "whole_leaf_scope_complete": false,
+      "property_truth_authority": false
+    },
+    {
+      "leaf_id": "PQ::R8_POPULATION_CONTEXT_OPERATOR::SEMANTIC",
+      "root_id": "R8_POPULATION_CONTEXT_OPERATOR",
+      "kind": "SEMANTIC",
+      "frozen_claim_material": {
+        "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+        "subject_kind": "DECLARED_SYSTEM",
+        "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+        "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+        "leaf_contract": "Bind claims to the correct constituency, subgroup, evaluator assignment, presenter/operator, context and protocol; account for representation, invariance, social influence, strategic reporting and reactivity.",
+        "leaf_obligation": "PROVE_DOMAIN_SEMANTIC_SUFFICIENCY_FOR_R8_POPULATION_CONTEXT_OPERATOR",
+        "leaf_acceptance": "DOMAIN_SPECIFIC_CLAIM_SEMANTICS_GROUNDING_SCOPE_UNCERTAINTY_AND_ALL_ROOT_RELEVANT_DEFEATERS_RESOLVED_WITH_TYPED_EVIDENCE"
+      },
+      "already_proved_bounded_scopes": [
+        "PQ::R8::POPULATION_SEMANTICS::FROZEN_512"
+      ],
+      "bounded_witness_receipts": [
+        {
+          "path": "canonical/verification/PROFESSIONAL_QUALITY_R8_POPULATION_SEMANTIC_VERIFY_20261010_V1.json",
+          "git_blob_sha": "e47503a3b1f61bbb9effa04edccbf158b8b28e96"
+        }
+      ],
+      "unproved_complement_partition_id": "PQ::R8_POPULATION_CONTEXT_OPERATOR::SEMANTIC::UNPROVED_COMPLEMENT",
+      "scope_definition_required": {
+        "domain_schema_id": null,
+        "entire_admissible_leaf_domain": false,
+        "domain_definition": null
+      },
+      "domain_equivalence_status": "UNPROVED__INDEPENDENT_WHOLE_DOMAIN_EQUIVALENCE_REQUIRED",
+      "claim_scope_status": "NOT_CONSTRUCTIBLE_UNTIL_DOMAIN_DEFINITION_IS_FROZEN",
+      "claim_specific_scope_cover_status": "BLOCKED_BY_DOMAIN_EQUIVALENCE",
+      "property_truth_status": "BLOCKED_BY_V2_CHAIN_ADMISSION",
+      "admissible_closure_bases": [
+        "UNIVERSAL_FORMAL_SCOPE_PROOF",
+        "EXACT_COMPLETE_TARGET_CASE_UNIVERSE",
+        "EXHAUSTIVE_FINITE_SUPERSET",
+        "LOSSLESS_DECOMPOSITION"
+      ],
+      "whole_leaf_domain_equivalence_proved": false,
+      "whole_leaf_scope_complete": false,
+      "property_truth_authority": false
+    },
+    {
+      "leaf_id": "PQ::R9_TEMPORAL_DEPLOYMENT::EXECUTION",
+      "root_id": "R9_TEMPORAL_DEPLOYMENT",
+      "kind": "EXECUTION",
+      "frozen_claim_material": {
+        "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+        "subject_kind": "DECLARED_SYSTEM",
+        "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+        "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+        "leaf_contract": "Bind quality to target horizons and deployment dynamics; account for drift, carryover, missing outcomes, rare failures, distribution tails, transport, performativity and path-dependent equilibria.",
+        "leaf_obligation": "VERIFY_DOMAIN_EXECUTION_FOR_R9_TEMPORAL_DEPLOYMENT",
+        "leaf_acceptance": "RUN_ROOT_RELEVANT_POSITIVE_NEAR_MISS_AND_ADVERSARIAL_CASES_ON_EXACT_ARTIFACT_OR_RUNTIME_BYTES_AND_BIND_OBSERVED_OUTCOMES_TO_THE_ROOT_CONTRACT"
+      },
+      "already_proved_bounded_scopes": [
+        "PQ::R9::CENSORING::FIXED_DENOMINATOR_CONSERVATIVE_ACCOUNTING"
+      ],
+      "bounded_witness_receipts": [
+        {
+          "path": "canonical/verification/PROFESSIONAL_QUALITY_R9_CONSERVATIVE_CENSORING_VERIFY_20261010_V1.json",
+          "git_blob_sha": "7081a52621a1bb8f1ad07d1da23b40c8e57e16c2"
+        }
+      ],
+      "unproved_complement_partition_id": "PQ::R9_TEMPORAL_DEPLOYMENT::EXECUTION::UNPROVED_COMPLEMENT",
+      "scope_definition_required": {
+        "domain_schema_id": null,
+        "entire_admissible_leaf_domain": false,
+        "domain_definition": null
+      },
+      "domain_equivalence_status": "UNPROVED__INDEPENDENT_WHOLE_DOMAIN_EQUIVALENCE_REQUIRED",
+      "claim_scope_status": "NOT_CONSTRUCTIBLE_UNTIL_DOMAIN_DEFINITION_IS_FROZEN",
+      "claim_specific_scope_cover_status": "BLOCKED_BY_DOMAIN_EQUIVALENCE",
+      "property_truth_status": "BLOCKED_BY_V2_CHAIN_ADMISSION",
+      "admissible_closure_bases": [
+        "UNIVERSAL_FORMAL_SCOPE_PROOF",
+        "EXACT_COMPLETE_TARGET_CASE_UNIVERSE",
+        "EXHAUSTIVE_FINITE_SUPERSET",
+        "LOSSLESS_DECOMPOSITION"
+      ],
+      "whole_leaf_domain_equivalence_proved": false,
+      "whole_leaf_scope_complete": false,
+      "property_truth_authority": false
+    },
+    {
+      "leaf_id": "PQ::R9_TEMPORAL_DEPLOYMENT::SEMANTIC",
+      "root_id": "R9_TEMPORAL_DEPLOYMENT",
+      "kind": "SEMANTIC",
+      "frozen_claim_material": {
+        "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+        "subject_kind": "DECLARED_SYSTEM",
+        "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+        "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+        "leaf_contract": "Bind quality to target horizons and deployment dynamics; account for drift, carryover, missing outcomes, rare failures, distribution tails, transport, performativity and path-dependent equilibria.",
+        "leaf_obligation": "PROVE_DOMAIN_SEMANTIC_SUFFICIENCY_FOR_R9_TEMPORAL_DEPLOYMENT",
+        "leaf_acceptance": "DOMAIN_SPECIFIC_CLAIM_SEMANTICS_GROUNDING_SCOPE_UNCERTAINTY_AND_ALL_ROOT_RELEVANT_DEFEATERS_RESOLVED_WITH_TYPED_EVIDENCE"
+      },
+      "already_proved_bounded_scopes": [
+        "PQ::R9::TEMPORAL_SEMANTICS::FROZEN_CONSERVATIVE_CENSORING"
+      ],
+      "bounded_witness_receipts": [
+        {
+          "path": "canonical/verification/PROFESSIONAL_QUALITY_R9_TEMPORAL_SEMANTIC_VERIFY_20261010_V1.json",
+          "git_blob_sha": "e4527631fbf6e95cb20381d60eb4fe4b978c176f"
+        }
+      ],
+      "unproved_complement_partition_id": "PQ::R9_TEMPORAL_DEPLOYMENT::SEMANTIC::UNPROVED_COMPLEMENT",
+      "scope_definition_required": {
+        "domain_schema_id": null,
+        "entire_admissible_leaf_domain": false,
+        "domain_definition": null
+      },
+      "domain_equivalence_status": "UNPROVED__INDEPENDENT_WHOLE_DOMAIN_EQUIVALENCE_REQUIRED",
+      "claim_scope_status": "NOT_CONSTRUCTIBLE_UNTIL_DOMAIN_DEFINITION_IS_FROZEN",
+      "claim_specific_scope_cover_status": "BLOCKED_BY_DOMAIN_EQUIVALENCE",
+      "property_truth_status": "BLOCKED_BY_V2_CHAIN_ADMISSION",
+      "admissible_closure_bases": [
+        "UNIVERSAL_FORMAL_SCOPE_PROOF",
+        "EXACT_COMPLETE_TARGET_CASE_UNIVERSE",
+        "EXHAUSTIVE_FINITE_SUPERSET",
+        "LOSSLESS_DECOMPOSITION"
+      ],
+      "whole_leaf_domain_equivalence_proved": false,
+      "whole_leaf_scope_complete": false,
+      "property_truth_authority": false
+    }
+  ],
+  "scheduler_policy": {
+    "parallel_read_only_search": true,
+    "allowed_work": [
+      "SEARCH_EXISTING_FORMAL_WHOLE_DOMAIN_DEFINITIONS_AND_EQUIVALENCE_PROOFS",
+      "SEARCH_EXISTING_EXACT_COMPLETE_UNIVERSES_OR_EXHAUSTIVE_SUPERSETS",
+      "SEARCH_EXISTING_LOSSLESS_DECOMPOSITIONS",
+      "FALSIFY_CANDIDATE_DOMAIN_DEFINITIONS_WITH_COUNTEREXAMPLES"
+    ],
+    "forbidden_work": [
+      "ASSERT_ENTIRE_ADMISSIBLE_LEAF_DOMAIN_WITHOUT_INDEPENDENT_EQUIVALENCE",
+      "PROMOTE_BOUNDED_WITNESS_TO_GLOBAL_SCOPE",
+      "RUN_PROPERTY_TRUTH_BEFORE_V2_CHAIN_ADMISSION",
+      "INVENT_24_BESPOKE_SCOPE_GATES"
+    ],
+    "first_success_rule": "FIRST_LEAF_WITH_INDEPENDENT_WHOLE_DOMAIN_EQUIVALENCE_MOVES_TO_CLAIM_SPECIFIC_SCOPE_COVER__OTHERS_REMAIN_READ_ONLY"
+  },
+  "hard_nonclaims": [
+    "NO_WHOLE_LEAF_DOMAIN_EQUIVALENCE_PROVED",
+    "NO_V2_CHAIN_ADMITTED",
+    "NO_WHOLE_LEAF_SCOPE_CLOSURE",
+    "NO_PROPERTY_TRUTH",
+    "NO_DOMAIN_SEMANTIC_OR_EXECUTION_CLOSURE",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
