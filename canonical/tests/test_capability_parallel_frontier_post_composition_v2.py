@@ -11,7 +11,7 @@ from canonical.runtime import capability_parallel_frontier_v2 as core
 ROOT=Path(__file__).resolve().parents[2]
 
 def _copy_sources(tmp:Path):
- for rel in (p.PROF,p.ASSURANCE,p.BYTES,p.R2):
+ for rel in (p.PROF,p.ASSURANCE,p.BYTES,p.R2,p.RESIDUAL):
   src=ROOT/rel; dst=tmp/rel; dst.parent.mkdir(parents=True,exist_ok=True); dst.write_bytes(src.read_bytes())
 
 class PostCompositionFrontierV2Tests(unittest.TestCase):
@@ -22,6 +22,7 @@ class PostCompositionFrontierV2Tests(unittest.TestCase):
   self.assertTrue(out["dynamic_currentness"]["assurance_pointer_follow"])
   self.assertTrue(out["dynamic_currentness"]["bytes_pointer_follow"])
   self.assertTrue(out["dynamic_currentness"]["r2_pointer_follow"])
+  self.assertTrue(out["dynamic_currentness"]["residual_pointer_follow"])
   self.assertTrue(out["dynamic_currentness"]["parked_normalized_to_nonprimary"])
   self.assertFalse(out["execution_authority"])
   self.assertFalse(out["promotion_authority"])
@@ -30,7 +31,7 @@ class PostCompositionFrontierV2Tests(unittest.TestCase):
  def test_refresh_binds_exact_current_four_source_hashes(self):
   f=p.refresh_post_composition_currentness(core.load_current_frontier())
   bound={x["path"]:x["git_blob_sha"] for x in f["scope"]["source_set"]}
-  for rel in (p.PROF,p.ASSURANCE,p.BYTES,p.R2):
+  for rel in (p.PROF,p.ASSURANCE,p.BYTES,p.R2,p.RESIDUAL):
    self.assertEqual(bound[rel],p._git_blob_sha(ROOT/rel),rel)
   prow=next(x for x in f["candidates"] if x.get("work_id")==p.PROF_WORK)
   arow=next(x for x in f["candidates"] if x.get("work_id")==p.ASSURANCE_WORK)
@@ -80,6 +81,15 @@ class PostCompositionFrontierV2Tests(unittest.TestCase):
    root=Path(td); _copy_sources(root)
    q=root/p.R2; d=json.loads(q.read_text()); d["scheduler_result"]["primary_cell"]="OTHER"; q.write_text(json.dumps(d))
    with self.assertRaisesRegex(p.PostCompositionFrontierV2Error,"R2_SCHEDULER"):
+    p.refresh_post_composition_currentness(core.load_current_frontier(),root=root)
+
+ def test_residual_topology_change_fails_closed(self):
+  with tempfile.TemporaryDirectory() as td:
+   root=Path(td); _copy_sources(root)
+   q=root/p.RESIDUAL; d=json.loads(q.read_text())
+   row=next(x for x in d["classifications"] if x.get("residual_id")=="ESCAPE_GAP_A_ACQUISITION_TOTALITY")
+   row["active_gap_a_count"]=11; q.write_text(json.dumps(d))
+   with self.assertRaisesRegex(p.PostCompositionFrontierV2Error,"RESIDUAL_GAP_A_TOPOLOGY"):
     p.refresh_post_composition_currentness(core.load_current_frontier(),root=root)
 
  def test_unrelated_source_drift_still_fails_closed(self):
