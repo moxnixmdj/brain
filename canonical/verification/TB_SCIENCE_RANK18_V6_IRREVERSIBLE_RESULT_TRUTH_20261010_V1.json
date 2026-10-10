@@ -1,0 +1,164 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK18_V6_IRREVERSIBLE_RESULT_TRUTH_20261010_V1",
+  "date": "2026-10-10",
+  "status": "FINAL_ZERO__PLANNER_CONTROLLER_FAULT_BEFORE_FIRST_ACTION__EXECUTION_ROBUSTNESS_HELD__RANK18_IRREVERSIBLY_CONSUMED__ZERO_ACCEPTANCE_CREDIT",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "slot": {
+    "ledger_schedule_rank": 18,
+    "frozen_manifest_schedule_order": 17,
+    "task_rank": 17,
+    "id": "terminal-bench-science/longitudinal-clinical-agent::trial-0",
+    "task_name": "terminal-bench-science/longitudinal-clinical-agent",
+    "digest": "sha256:e9a166b2173f7014d4f1559505397b221f94bc446eab031f94791b35e0e5f1c9",
+    "logical_attempt_id": "a02ee7de469f953679fb593ab152a9f67eb1ebe8c364f8c748f18cd8a81eab8d"
+  },
+  "public_execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "activation_pull_request": 2556,
+    "workflow_run_id": 38030021656,
+    "workflow_job_id": 114148806597,
+    "workflow_run_attempt": 1,
+    "workflow_conclusion": "success",
+    "harbor_step_outcome": "success",
+    "execution_branch": "execute/tb-science-rank18-20261010-v2",
+    "head_sha": "dfae55402c628449ab80dc84bcae9f30b63934af",
+    "merge_ref_sha": "517a7b12d4600829059b24d1c5417c0f6da75b46",
+    "artifact_id": 11662290897,
+    "artifact_name": "tb-science-longitudinal-clinical-agent-trial-0-rank18-v2",
+    "artifact_zip_sha256": "2f578551d9105f8ffa5e81145db97f68ca66748c3cca4f8442c2591c693eacad",
+    "incremental_spend_usd": 0
+  },
+  "prestart_measurement": {
+    "guard_pass": true,
+    "guard_status": "PASS__RANK18_V1_V12_SLOT_BOUND_IDENTITY__MAXIMAL_RESERVED_CYCLE0_CORE_FITS__TASK_NOT_STARTED",
+    "input_tokens": 2948,
+    "reserved_completion_tokens": 4096,
+    "server_context_tokens": 16384,
+    "context_headroom_tokens": 9340,
+    "instruction_sha256": "ebfa849d6a8355cafe56b2ed03ae7411cf757508a6631c483483e59363fe4428",
+    "first_cycle_prompt_sha256": "9eacbc21d9a55dfb68341ffe8473a83366b38737016007f022a448548eadba5c",
+    "request_identity_sha256": "91a71cea6429449f78a320b3e316954e52369679488714dd4e6e33d315ce50a3",
+    "raw_task_obligation_count": 27
+  },
+  "durable_start_truth": {
+    "source_path": "canonical/verification/TB_SCIENCE_RANK18_V2_DURABLE_START_COMMIT_TRUTH_20261010_V1.json",
+    "source_git_blob_sha": "f7970981283de33ffb421d1ba610532fe6cb9f5d",
+    "start_cas_acquired": true,
+    "start_status": "PASS__AGENT_READY_BOUND_START_COMMITTED__IRREVERSIBLE_SLOT_START",
+    "durable_record_sha256": "b662fc9a7f578d00725420c02e9f97b40146df09c4fd88fb078674083d739934",
+    "runtime_identity_sha256": "e5867cdc0dbda5feb8b252c43e73df5734ede35d95c79f169c92953d258806a8",
+    "task_started": true,
+    "benchmark_trials_consumed": 1,
+    "replay_authority": false,
+    "replacement_carrier_authority": false
+  },
+  "execution_truth": {
+    "task_read": true,
+    "task_started": true,
+    "execution_authority_consumed": true,
+    "benchmark_trials_consumed": 1,
+    "reward": 0.0,
+    "receipt_status": "FINAL_ZERO",
+    "slot_receipt_sha256": "d77a8a4a51fc36bf8a43947765948d28d8978af40430944037ba4bddce747e15",
+    "result_hashes": {
+      "nested_result_json": "f14582e60999e25f7dcfa2c1e6f83dd6d724fe56ddf7d1eeb97e53ca57fe37b2",
+      "trial_result_json": "7cf284bb80c144ffddf0ac5045fa8941e6c15cd5f5bfb0bc0fd862b898b18e30"
+    },
+    "rerun_authority": false,
+    "replacement_authority": false,
+    "promotion_authority": false
+  },
+  "causal_journal": {
+    "event_count": 1,
+    "sequence_min": 0,
+    "sequence_max": 0,
+    "final_durable_event_kind": "FAULT",
+    "final_durable_event_sha256": "86af8ee9268f36f7a37007f4b694c8bd768298f8b613a6bbc8f3e5b1a3118e82",
+    "request_file_sha256": "624028b8bc9969bac000981db4268053ca3f949e4e23a326940b7a508d56df11",
+    "ack_file_sha256": "06598631b245b4c2c5cf9fff7e20eb2b7cf07e1193d990fc192d7a020f53e442",
+    "append_status": "COMMITTED",
+    "fault": {
+      "stage": "CONTROLLER_EXCEPTION",
+      "action_id": "CONTROLLER",
+      "cycle": -1,
+      "error_type": "SciencePlannerError",
+      "error_sha256": "abe6bbdc4215f25a0e65b71228d821de2ec5f04f20aede403088eeb2bd8f4c78",
+      "effect_replayed": false,
+      "verification_replayed": false
+    },
+    "action_intent_event_observed": false,
+    "effect_event_observed": false,
+    "verification_event_observed": false
+  },
+  "runner_truth": {
+    "receipt_sha256": "d6b794c3633b53b8cd50dfa5a62d6fa73f07d5f2829bb4027ce980660a7d87c8",
+    "agent_ready": true,
+    "agent_released": true,
+    "harbor_launched": true,
+    "harbor_returncode": 0,
+    "journal_request_files": 1,
+    "journal_ack_files": 1,
+    "journal_requests_committed": 1,
+    "github_credentials_exposed_to_harbor": false
+  },
+  "failure": {
+    "root_class": "PLANNER_CONTROLLER_FAILURE_BEFORE_FIRST_ACTION",
+    "proved": [
+      "THE_SLOT_REACHED_A_VALID_DURABLE_START_BOUNDARY",
+      "THE_ONLY_DURABLE_CAUSAL_EVENT_IS_A_COMMITTED_CONTROLLER_FAULT_AT_CYCLE_MINUS_ONE",
+      "THE_FAULT_TYPE_IS_SCIENCE_PLANNER_ERROR",
+      "NO_ACTION_INTENT_EFFECT_OR_VERIFICATION_EVENT_WAS_DURABLY_OBSERVED",
+      "THE_FINAL_INDEPENDENT_SLOT_RECEIPT_REPORTS_REWARD_ZERO_AND_FINAL_ZERO",
+      "START_CAS_IDENTITY_JOURNAL_CREDENTIAL_ISOLATION_AND_NO_REPLAY_CONTROLS_HELD"
+    ],
+    "exact_planner_exception_text_observed": false,
+    "diagnostic_hypothesis": {
+      "classification": "LIKELY_EXACT_REQUEST_TIMEOUT_EXHAUSTION__NOT_YET_PROMOTED_AS_PROVED_ROOT_CAUSE",
+      "basis": [
+        "V6_SHORT_CONTEXT_EFFECTIVE_TIMEOUT_FLOOR_IS_300_SECONDS",
+        "THE_RANK18_PROMPT_USED_2948_INPUT_TOKENS",
+        "LIVE_SERVER_LOGS_SHOW_LONG_PLANNER_GENERATIONS_EXTENDING_TO_APPROXIMATELY_THE_CLIENT_TIMEOUT_WINDOW",
+        "V6_RETRIES_THE_EXACT_SEEDED_SIDE_EFFECT_FREE_PLANNER_REQUEST_ON_TIMEOUT_CLASS_TRANSPORT_FAILURE"
+      ]
+    },
+    "execution_robustness_failure": false,
+    "carrier_failure": false,
+    "effect_journal_failure": false,
+    "effect_replay_failure": false
+  },
+  "exact_repair_requirement": {
+    "invariant": "NO_FRESH_TB_SCIENCE_SLOT_MAY_START_UNTIL_THE_PRE_ACTION_SCIENCE_PLANNER_FAILURE_CLASS_IS_CAUSALLY_DIAGNOSED_AND_ZERO_EXPOSURE_VERIFIED",
+    "required_behavior": [
+      "PRESERVE_SLOT_BOUND_LOGICAL_IDENTITY_DURABLE_START_CAS_CAUSAL_JOURNAL_CREDENTIAL_ISOLATION_AND_NO_UNPROVED_REPLAY",
+      "REPRODUCE_OR_FALSIFY_THE_PLANNER_TIMEOUT_HYPOTHESIS_WITH_ZERO_BENCHMARK_EXECUTION",
+      "IF_TIMEOUT_IS_CAUSAL__MAKE_PLANNER_TIMEOUT_ACCOUNT_FOR_BOUNDED_GENERATION_TIME_OR_OTHERWISE_PROVE_COMPLETION_WITHIN_THE_BOUND",
+      "VERIFY_THE_EXACT_REPAIRED_REQUEST_PATH_WITH SYNTHETIC_OR_NON_BENCHMARK_INPUT_BEFORE_ANY_RANK19_TASK_READ",
+      "ONLY_THEN_ISSUE_FRESH_RANK19_AUTHORITY"
+    ],
+    "forbidden_repair": [
+      "DO_NOT_RERUN_RANK18",
+      "DO_NOT_GRANT_RANK18_REPLAY_OR_REPLACEMENT_AUTHORITY",
+      "DO_NOT_TREAT_GITHUB_WORKFLOW_SUCCESS_AS_BENCHMARK_SUCCESS",
+      "DO_NOT_ADVANCE_TO_RANK19_EXECUTION_BEFORE_ZERO_EXPOSURE_PLANNER_REPAIR_VERIFICATION",
+      "DO_NOT_WEAKEN_START_CAS_OR_CAUSAL_JOURNAL_GATES"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_TB_SCIENCE_SUCCESS_CREDIT",
+    "NO_ACCEPTANCE_FAMILY_OR_TERMINAL_CREDIT",
+    "NO_CLAIM_THE_EXACT_SCIENCE_PLANNER_ERROR_TEXT_WAS_RECOVERED",
+    "NO_CLAIM_TIMEOUT_EXHAUSTION_IS_YET_PROVED_AS_THE_ROOT_CAUSE",
+    "NO_RANK18_RETRY_OR_REPLACEMENT_AUTHORITY",
+    "NO_RANK19_EXECUTION_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_trials_consumed_delta": 0,
+    "consumed_successes_delta": 0,
+    "consumed_final_failures_delta": 1,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "pass": true
+}
