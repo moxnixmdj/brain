@@ -73,6 +73,11 @@ R1_LEAVES = {"PQ::R1_TARGET_SPECIFICATION::EXECUTION"}
 R1_SOURCE_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R1_STRUCTURAL_TARGET_VERIFY_V1"
 R1_GOVERNANCE_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R1_STRUCTURAL_TARGET_SCOPE_V1"
 
+R1_SEMANTIC_KIND = "EXACT_PARAMETERIZED_PROFESSIONAL_ARTIFACT_TARGET_SEMANTICS"
+R1_SEMANTIC_LEAVES = {"PQ::R1_TARGET_SPECIFICATION::SEMANTIC"}
+R1_SEMANTIC_SOURCE_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R1_TARGET_SEMANTIC_VERIFY_V1"
+R1_SEMANTIC_SCOPE_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R1_TARGET_SEMANTIC_SCOPE_V1"
+
 R2_KIND = "FINITE_SCOPE_COMPLETE_COMMON_POLICY_OR_MINIMUM_TRUTHFUL_DISCRIMINATOR_SEARCH"
 R2_ROOT = "R2_CANDIDATE_SEARCH"
 R2_LEAVES = {"PQ::R2_CANDIDATE_SEARCH::EXECUTION"}
@@ -686,6 +691,99 @@ def _validate_r5(
     return errors, claim_scope
 
 
+def _validate_r1_semantic(
+    entry: dict[str, Any],
+    source: dict[str, Any] | None,
+    verifier: dict[str, Any] | None,
+    compiler_declared: Any,
+    repo_root: Path,
+) -> tuple[list[str], Any]:
+    errors = _common_checks(entry, R1_ROOT, R1_SEMANTIC_LEAVES)
+    claim_scope = None
+    scope, e = _read_bound(repo_root, entry.get("scope_governance"), "SCOPE_GOVERNANCE")
+    errors.extend(e)
+
+    expected_guarantees = {
+        "OBJECTIVE_AUDIENCE_EVIDENCE_ARTIFACT_TYPE_CONSTRAINTS_AND_CURRENT_DRAFT_ARE_EXPLICIT_RUNTIME_PARAMETERS",
+        "SUCCESS_FAILURE_TARGET_CONSTRUCT_SCOPE_AND_EVIDENCE_BOUNDARY_ARE_BOUND_TO_EXACT_CONTRACT_FIELDS",
+        "CONTRACT_TARGET_DRIFT_FAILS_CLOSED_BY_CONTENT_DIGEST",
+        "UNIQUE_OPTIMUM_IS_NOT_INFERRED_FROM_NONUNIQUE_SUCCESS_SEMANTICS",
+        "UNRESOLVED_RUNTIME_TASK_AMBIGUITY_REMAINS_OPEN",
+    }
+    expected_limits = {
+        "NO_ARBITRARY_USER_PROMPT_SEMANTIC_COMPLETENESS",
+        "NO_SOURCE_EXTRACTION_COMPLETENESS",
+        "NO_UNIQUE_BEST_PLAN",
+        "NO_GLOBAL_R1_SEMANTIC_LEAF_CLOSURE",
+        "NO_GLOBAL_R1_ROOT_CLOSURE",
+    }
+
+    if source is not None:
+        if source.get("schema") != R1_SEMANTIC_SOURCE_SCHEMA:
+            errors.append("SOURCE_SCHEMA_INVALID")
+        if source.get("status") != "PASS__PINNED_EXACT_BYTES__PYCOMPILE__5_OF_5__BOUNDED_R1_TARGET_SEMANTICS__ZERO_GLOBAL_LEAF_CREDIT":
+            errors.append("SOURCE_STATUS_NOT_ADMITTED")
+        blobs = source.get("exact_blobs")
+        if not isinstance(blobs, dict) or blobs.get("runtime") != compiler_declared:
+            errors.append("SOURCE_RUNTIME_MISMATCH")
+        replay = source.get("replay")
+        if not isinstance(replay, dict) or replay.get("tests_run") != 5 or replay.get("tests_passed") != 5 or replay.get("tests_failed") != 0:
+            errors.append("SOURCE_REPLAY_INVALID")
+        cscope = source.get("claim_scope")
+        claim_scope = cscope
+        if not isinstance(cscope, dict) or cscope.get("kind") != R1_SEMANTIC_KIND:
+            errors.append("SOURCE_CLAIM_SCOPE_INVALID")
+        else:
+            if cscope.get("behavior_id") != "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001":
+                errors.append("SOURCE_BEHAVIOR_ID_INVALID")
+            if not expected_guarantees <= set(cscope.get("guarantees") or []):
+                errors.append("SOURCE_REQUIRED_GUARANTEES_MISSING")
+            if not expected_limits <= set(cscope.get("limitations") or []):
+                errors.append("SOURCE_REQUIRED_LIMITATIONS_MISSING")
+        if source.get("semantic_leaf_credit") is not False:
+            errors.append("SOURCE_SEMANTIC_LEAF_CREDIT_FORBIDDEN")
+        if source.get("global_leaf_closure") is not False:
+            errors.append("SOURCE_GLOBAL_LEAF_CLOSURE_FORBIDDEN")
+
+    if verifier is not None:
+        if verifier.get("schema") != R1_SEMANTIC_SOURCE_SCHEMA:
+            errors.append("VERIFIER_SCHEMA_INVALID")
+        exact = verifier.get("exact_blobs")
+        if not isinstance(exact, dict) or exact.get("runtime") != compiler_declared:
+            errors.append("VERIFIER_RUNTIME_MISMATCH")
+
+    if scope is not None:
+        if scope.get("schema") != R1_SEMANTIC_SCOPE_SCHEMA:
+            errors.append("SCOPE_SCHEMA_INVALID")
+        if scope.get("status") != "ACTIVE_SCOPED_EXACT_PARAMETERIZED_PROFESSIONAL_ARTIFACT_TARGET_SEMANTICS__5_OF_5_INDEPENDENT_REPLAY__ZERO_GLOBAL_LEAF_CREDIT":
+            errors.append("SCOPE_STATUS_INVALID")
+        if scope.get("behavior_id") != "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001":
+            errors.append("SCOPE_BEHAVIOR_ID_INVALID")
+        components = scope.get("exact_components")
+        if not isinstance(components, dict):
+            errors.append("SCOPE_COMPONENTS_INVALID")
+        else:
+            runtime = components.get("runtime")
+            verification = components.get("verification")
+            if not isinstance(runtime, dict) or runtime.get("git_blob_sha") != compiler_declared:
+                errors.append("SCOPE_RUNTIME_MISMATCH")
+            source_declared = (entry.get("source_receipt") or {}).get("git_blob_sha") if isinstance(entry.get("source_receipt"), dict) else None
+            if not isinstance(verification, dict) or verification.get("git_blob_sha") != source_declared:
+                errors.append("SCOPE_VERIFICATION_MISMATCH")
+        if not expected_guarantees <= set(scope.get("guarantees") or []):
+            errors.append("SCOPE_REQUIRED_GUARANTEES_MISSING")
+        if not expected_limits <= set(scope.get("limitations") or []):
+            errors.append("SCOPE_REQUIRED_LIMITATIONS_MISSING")
+        if claim_scope is None:
+            claim_scope = {
+                "kind": R1_SEMANTIC_KIND,
+                "behavior_id": scope.get("behavior_id"),
+                "guarantees": sorted(expected_guarantees),
+                "limitations": sorted(expected_limits),
+            }
+    return errors, claim_scope
+
+
 def _validate_r1(
     entry: dict[str, Any],
     source: dict[str, Any] | None,
@@ -1228,6 +1326,10 @@ def validate_entry(entry: dict[str, Any], *, repo_root: Path = ROOT) -> dict[str
         )
     elif kind == R5_KIND:
         handler_errors, claim_scope = _validate_r5(entry, source, verifier, compiler_declared)
+    elif kind == R1_SEMANTIC_KIND:
+        handler_errors, claim_scope = _validate_r1_semantic(
+            entry, source, verifier, compiler_declared, repo_root
+        )
     elif kind == R1_KIND:
         handler_errors, claim_scope = _validate_r1(
             entry, source, verifier, compiler_declared, repo_root
