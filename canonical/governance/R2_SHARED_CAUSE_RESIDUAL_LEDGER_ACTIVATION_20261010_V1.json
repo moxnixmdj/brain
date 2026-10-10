@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_R2_SHARED_CAUSE_RESIDUAL_LEDGER_ACTIVATION_20261010_V1",
+  "date": "2026-10-10",
+  "status": "ACTIVE_CURRENT_AUTHORITY_DERIVED_SHARED_CAUSE_LEDGER__ZERO_AUTHORITY_ZERO_CREDIT",
+  "objective": "DECOMPOSE_CURRENT_R2_SEMANTIC_RESIDUALS_INTO_MACHINE_READABLE_FINE_CAUSES_AND_SHARED_PARENT_CAUSES_WITHOUT_REOPENING_CLOSED_GENERAL_MECHANISMS",
+  "source_authority": {
+    "path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+    "binding": "MUTABLE_CURRENT_AUTHORITY_PATH_IDENTITY__DERIVE_AT_RUNTIME__DO_NOT_PIN_STALE_VERSION"
+  },
+  "runtime": {
+    "path": "canonical/runtime/r2_semantic_residual_ledger_v1.py",
+    "git_blob_sha": "8c3766656789a7ff5c3dc11cfede36fbb1a6e7d4"
+  },
+  "tests": {
+    "path": "canonical/tests/test_r2_semantic_residual_ledger_v1.py",
+    "git_blob_sha": "5b07dd3a452fea3a051940aef3d0421ad740f099"
+  },
+  "semantics": {
+    "general_r2_mechanism_is_not_reopened_by_residual_existence": true,
+    "every_current_boundary_clause_must_classify_or_ledger_fails_closed": true,
+    "fine_causes_may_overlap_on_one_source_clause": true,
+    "shared_parent_fanout_counts_distinct_source_clauses": true,
+    "global_open_world_residual_is_wake_gated": true,
+    "wake_requires_task_local_counterexample_or_verified_capability_defect": true,
+    "no_semantic_truth_from_classification": true
+  },
+  "scheduler_binding": {
+    "runtime": "canonical/runtime/capability_first_scheduler_v1.py",
+    "runtime_git_blob_sha": "63be50dacedec96809b9f3b40faaeab411741c39",
+    "rule": "PRIMARY_CAPABILITY_RESOURCE_SCORE_FIRST__SHARED_CAUSE_FANOUT_SECONDARY_TIE_BREAK__OPUS_CHECKPOINT_AUDIT_TERTIARY",
+    "shared_cause_fanout_can_wake_open_world_frontier": false,
+    "unknown_shared_cause_id_fails_closed": true
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_OPEN_WORLD_SEMANTICS_ARE_CLOSED",
+    "NO_CLAIM_HIGHEST_FANOUT_CAUSE_IS_ALWAYS_THE_GLOBALLY_OPTIMAL_TASK",
+    "NO_EXECUTION_OR_SEMANTIC_TRUTH_AUTHORITY_FROM_LEDGER_CLASSIFICATION",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
