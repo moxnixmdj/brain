@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_DECLARED_DEPENDENCY_GENERATOR_COVERAGE_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXPLICIT_DECLARED_DEPENDENCY_COVERAGE_COMPLETE__IMPLICIT_CHANNELS_OPEN",
+  "authority": {
+    "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+    "git_blob_sha": "b3d053e1451c053af2bf75ad9f31a091b101be39",
+    "pointer_revision": 95
+  },
+  "generator": {
+    "path": "canonical/runtime/terminal_declared_dependency_generator_v1.py",
+    "git_blob_sha": "cdb7c353fa82bd2ed04780f8c25951947c47937d"
+  },
+  "tests": {
+    "path": "canonical/tests/test_terminal_declared_dependency_generator_v1.py",
+    "git_blob_sha": "96a6dda37fc12d81499548fb625cbacbd51acbba",
+    "run": 7,
+    "passed": 7,
+    "failed": 0
+  },
+  "independent_connector_census": {
+    "declared_reference_count": 480,
+    "current_reference_count": 474,
+    "superseded_reference_count": 6,
+    "current_unique_artifact_count": 365,
+    "current_content_addressed_reference_count": 450,
+    "current_path_bound_reference_count": 24
+  },
+  "claims": {
+    "every_explicit_canonical_artifact_reference_captured": true,
+    "declared_dependency_coverage_complete": true,
+    "implicit_dependency_channel_coverage_proved": false
+  },
+  "open_implicit_channels": [
+    "ENVIRONMENT",
+    "NETWORK_OR_REMOTE_SERVICE",
+    "DYNAMIC_LOADING_OR_REFLECTION",
+    "HIDDEN_PROCESS_STATE",
+    "UNDECLARED_EXTERNAL_RESOURCE",
+    "OTHER"
+  ],
+  "terminal_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "acceptance_credit_delta": 0
+}
