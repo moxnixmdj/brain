@@ -1,0 +1,27 @@
+{
+  "schema": "PROJECT_BRAIN_DRIFT_GUARD_REAL_MISSION_PRECEDENCE_VERIFY_V1",
+  "date": "2026-10-09",
+  "status": "PASS__EXACT_BLOBS__PYCOMPILE__5_OF_5__ZERO_CREDIT",
+  "guard_git_blob_sha": "df8a7bf132542289791a3431be030b196d23c0a1",
+  "tests_git_blob_sha": "0720043450e1f55ce3c00ea6577cbbc3d6d0d600",
+  "replay": {
+    "carrier_id": "sprite-d16c7eaa-8234-45f3-af6a-3751e0749c34",
+    "py_compile": "PASS",
+    "tests_run": 5,
+    "failures": 0,
+    "errors": 0
+  },
+  "proved": [
+    "CURRENT_MISSION_OBJECTIVE_REAL_OBJECTIVE_IS_ULTIMATE_TERMINAL_OBJECTIVE_FOR_DRIFT_GUARD",
+    "LEGACY_OPUS_HIERARCHY_IS_ALLOWED_ONLY_WHEN_EXPLICITLY_DECLARED_FIRST_FRONTIER_CHECKPOINT_NOT_TERMINAL_OBJECTIVE",
+    "LEGACY_OPUS_OBJECTIVE_IS_REJECTED_AS_NEW_INTENT_TERMINAL_OBJECTIVE",
+    "ARBITRARY_HIERARCHY_OBJECTIVE_FAILS_CLOSED"
+  ],
+  "hard_nonclaims": [
+    "NO_GUARD_WEAKENING",
+    "NO_CHECKPOINT_DELETION",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
