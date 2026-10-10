@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R1_TARGET_SEMANTIC_SCOPE_V1",
+  "date": "2026-10-10",
+  "status": "ACTIVE_SCOPED_EXACT_PARAMETERIZED_PROFESSIONAL_ARTIFACT_TARGET_SEMANTICS__5_OF_5_INDEPENDENT_REPLAY__ZERO_GLOBAL_LEAF_CREDIT",
+  "root_id": "R1_TARGET_SPECIFICATION",
+  "claim_kind": "EXACT_PARAMETERIZED_PROFESSIONAL_ARTIFACT_TARGET_SEMANTICS",
+  "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+  "exact_components": {
+    "runtime": {
+      "path": "canonical/runtime/professional_target_semantic_certificate_v1.py",
+      "git_blob_sha": "583612b0e2226053ac758683087b5c5d0f510996"
+    },
+    "contract_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V2.json",
+      "git_blob_sha": "ae250d5bc5da73b23600670be354ffba31e65e53"
+    },
+    "verification": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R1_TARGET_SEMANTIC_VERIFY_20261010_V1.json",
+      "git_blob_sha": "dfffdd6eff129ce7498c4e4aa8a822cd4a5cda22"
+    }
+  },
+  "guarantees": [
+    "OBJECTIVE_AUDIENCE_EVIDENCE_ARTIFACT_TYPE_CONSTRAINTS_AND_CURRENT_DRAFT_ARE_EXPLICIT_RUNTIME_PARAMETERS",
+    "SUCCESS_FAILURE_TARGET_CONSTRUCT_SCOPE_AND_EVIDENCE_BOUNDARY_ARE_BOUND_TO_EXACT_CONTRACT_FIELDS",
+    "CONTRACT_TARGET_DRIFT_FAILS_CLOSED_BY_CONTENT_DIGEST",
+    "UNIQUE_OPTIMUM_IS_NOT_INFERRED_FROM_NONUNIQUE_SUCCESS_SEMANTICS",
+    "UNRESOLVED_RUNTIME_TASK_AMBIGUITY_REMAINS_OPEN"
+  ],
+  "limitations": [
+    "NO_ARBITRARY_USER_PROMPT_SEMANTIC_COMPLETENESS",
+    "NO_SOURCE_EXTRACTION_COMPLETENESS",
+    "NO_UNIQUE_BEST_PLAN",
+    "NO_GLOBAL_R1_SEMANTIC_LEAF_CLOSURE",
+    "NO_GLOBAL_R1_ROOT_CLOSURE",
+    "NO_DOMAIN_SEMANTIC_CLOSURE",
+    "NO_DOMAIN_EXECUTION_CLOSURE"
+  ],
+  "global_leaf_closure": false,
+  "global_root_closure": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
