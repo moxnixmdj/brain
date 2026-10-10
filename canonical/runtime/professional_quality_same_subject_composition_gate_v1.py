@@ -17,7 +17,7 @@ import json
 from pathlib import Path
 from typing import Any, Mapping
 
-from canonical.runtime import professional_quality_scoped_evidence_v1 as scoped
+from canonical.runtime import professional_quality_scoped_evidence_overlay_v1 as scoped
 
 ROOT = Path(__file__).resolve().parents[2]
 SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_SAME_SUBJECT_COMPOSITION_GATE_V1"
@@ -158,10 +158,11 @@ def evaluate(
         for row in admitted
         if isinstance(row, Mapping)
     }
-    if admitted_roots != EXPECTED_ROOTS or len(admitted) != len(EXPECTED_ROOTS):
+    if admitted_roots != EXPECTED_ROOTS:
         return _fail(
             "SCOPED_EVIDENCE_ROOT_COVER_INCOMPLETE",
             admitted_root_ids=sorted(admitted_roots),
+            admitted_scope_count=len(admitted),
         )
 
     rows = payload.get("root_subject_bindings")
@@ -172,6 +173,7 @@ def evaluate(
             "OPEN__SAME_SUBJECT_BINDINGS_REQUIRED",
             normal_form=normal_record,
             scoped_root_count=len(admitted_roots),
+            admitted_scope_count=len(admitted),
             missing_root_ids=sorted(EXPECTED_ROOTS),
         )
 
@@ -273,6 +275,7 @@ def evaluate(
             "OPEN__ROOT_SUBJECT_BINDINGS_NOT_IDENTICAL",
             normal_form=normal_record,
             scoped_root_count=len(admitted_roots),
+            admitted_scope_count=len(admitted),
             distinct_subject_count=len(subject_keys),
             verified_bindings=verified_bindings,
         )
@@ -283,6 +286,7 @@ def evaluate(
         passed=True,
         normal_form=normal_record,
         scoped_root_count=len(admitted_roots),
+        admitted_scope_count=len(admitted),
         verified_root_subject_binding_count=len(verified_bindings),
         composed_subject={
             "subject_kind": subject_kind,
