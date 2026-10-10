@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_ESCAPE_V3_DYNAMIC_CURRENT_BINDING_STACK_SEAL_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__FINAL_EXACT_BRANCH_BYTES__PYCOMPILE_PASS__22_OF_22__ZERO_CREDIT",
+  "branch": "repair/escape-v3-dynamic-current-binding-20261010-v1",
+  "base_commit": "e79aa2ba5d163a5964fb56f1d550075c4dfbe5d9",
+  "defect_closed": "STALE_VERSIONED_BINDING_HARDCODE_IN_CANONICAL_ESCAPE_V3_AUDIT",
+  "exact_subjects": {
+    "runtime": {
+      "path": "canonical/runtime/escape_progress_shared_gap_audit_v3.py",
+      "git_blob_sha": "e556880aa216673e0e316e11fc6f4ab25d644ce6"
+    },
+    "tests": {
+      "path": "canonical/tests/test_escape_progress_shared_gap_audit_v3.py",
+      "git_blob_sha": "47b8d310e6cb63edd7fd7440d389dc328c2d2adb"
+    },
+    "manifest": {
+      "path": "canonical/governance/ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_20261010_V2.json",
+      "git_blob_sha": "f3a566a982dcd867c583eafd24c6f5dd3baa0530"
+    },
+    "classifier": {
+      "path": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
+      "binding": "MUTABLE_CURRENT_PATH_IDENTITY__BLOB_DIAGNOSTIC_ONLY"
+    },
+    "current_binding": {
+      "path": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V6.json",
+      "binding": "VERSIONED_CURRENT_CONTRACT__THIS_RECEIPT_IS_CONTENT_ADDRESSED_BY_BINDING__NO_REVERSE_HASH_EDGE"
+    },
+    "precursor_verification": {
+      "path": "canonical/verification/ESCAPE_V3_DYNAMIC_CURRENT_BINDING_REPAIR_VERIFY_20261010_V1.json",
+      "git_blob_sha": "6d094a88fcfc95c984b55f3808c41ffd61e1b863"
+    }
+  },
+  "independent_replay": {
+    "environment": "SPRITE__brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "python_compile": "PASS",
+    "test_runner": "STANDARD_LIBRARY_RUNPY__ALL_ZERO_ARG_TEST_FUNCTIONS",
+    "tests_discovered": 22,
+    "tests_passed": 22,
+    "tests_failed": 0,
+    "tests_skipped": 0,
+    "receipt_agnostic_stack_tripwire": true,
+    "final_replay_after_tripwire_fix": "22_OF_22_PASS"
+  },
+  "proved": [
+    "CURRENT_CLASSIFIER_SELECTS_ONE_IDENTICAL_VERSIONED_BINDING_FOR_GAP_A_AND_GAP_B",
+    "AUDIT_REPO_LOADS_THAT_CURRENT_BINDING_NOT_A_HARDCODED_PREDECESSOR",
+    "PATH_TRAVERSAL_AND_GAP_BINDING_DIVERGENCE_FAIL_CLOSED",
+    "CURRENT_BINDING_CONTENT_ADDRESSES_THE_LIVE_AUDIT_RUNTIME_TESTS_AND_VERIFICATION_RECEIPT",
+    "13_ROW_10_A_3_B_PROOF_GATE_SEMANTICS_PRESERVED",
+    "HISTORICAL_V1_V2_AUDIT_AND_V1_V3_BINDING_BYTES_PRESERVED"
+  ],
+  "nonclaims": [
+    "NO_GAP_A_ROW_PROOF",
+    "NO_GAP_B_ROW_PROOF",
+    "NO_CC_R3_CERTIFICATE",
+    "NO_GLOBAL_ESCAPE_PROGRESS_TOTALITY",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
