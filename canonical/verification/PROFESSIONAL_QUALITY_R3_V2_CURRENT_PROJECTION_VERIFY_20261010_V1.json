@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R3_V2_CURRENT_PROJECTION_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__RECEIPT_BACKED_R3_V2_CURRENTNESS_COHERENT__3_OF_12__R4_NEXT__ZERO_CREDIT",
+  "exact_blobs": {
+    "worklist_v10": "fba2e32793684ae8614e87c8bb8807d7cc0edb10",
+    "current_professional": "f1bdae824706437a879aef219a0f08613d9117a7",
+    "current_assurance": "f4c5a399f3c59ac28ca0e919e7ee5db226dd5380",
+    "current_mission": "0c113100e6dc5540ddd240941f535d1a2f128a96",
+    "current_residual": "8e4589a18bab13622e7e4b88759b491518385f57",
+    "r3_binding_v2": "6d8c51e4baf6e81c66f561b62eb779b44addc0ff",
+    "r3_verification_v2": "1085ba16bdae32f3d2b7b9ec9e8ca60417882da0"
+  },
+  "checks": {
+    "verified_root_subject_binding_count": 3,
+    "r3_actual_v7_step_receipt_proved": true,
+    "r3_one_exact_realization_instance_proved": true,
+    "r3_global_realization_completeness": false,
+    "current_professional_to_worklist_exact": true,
+    "assurance_to_professional_and_worklist_exact": true,
+    "mission_to_professional_and_assurance_exact": true,
+    "residual_to_worklist_exact": true,
+    "next_root": "R4_MEASUREMENT_CONSTRUCT"
+  },
+  "authority": {
+    "quality_authority": false,
+    "acceptance_authority": false,
+    "promotion_authority": false,
+    "terminal_authority": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
