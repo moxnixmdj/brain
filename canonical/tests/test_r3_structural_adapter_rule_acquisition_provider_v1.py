@@ -163,6 +163,35 @@ class StructuralAdapterRuleAcquisitionProviderTests(unittest.TestCase):
         self.assertFalse(rule["promotion_authority"])
         self.assertFalse(rule["terminal_authority"])
 
+
+    def test_missing_retained_proof_is_typed_and_does_not_mutate_frontier(self):
+        root, state_path, state, request = self._fixture()
+        callable_provider = provider.make_provider(
+            repo_root=root,
+            state_path=state_path,
+        )
+        before = (root / provider.RULES_PATH).read_bytes()
+        with (
+            mock.patch.object(provider.learning, "load_state", return_value=state),
+            mock.patch.object(
+                provider.learning,
+                "get_success_proof_context",
+                side_effect=provider.learning.SelfImprovementError(
+                    "SUCCESS_OBSERVATION_PROOF_UNAVAILABLE:observation-1"
+                ),
+            ),
+        ):
+            out = callable_provider(request)
+
+        self.assertFalse(out["pass"], out)
+        self.assertEqual(
+            out["reason"],
+            "RETAINED_SUCCESS_PROOF_UNAVAILABLE__"
+            "NEW_PROOF_BEARING_EXPERIENCE_REQUIRED",
+        )
+        self.assertEqual(before, (root / provider.RULES_PATH).read_bytes())
+
+
     def test_no_proved_profile_does_not_mutate_frontier(self):
         root, state_path, state, request = self._fixture()
         callable_provider = provider.make_provider(
