@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_REACHED_ESCAPE_STATE_KERNEL_V1_PUBLIC_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__PUBLIC_EXACT_BYTE_REPLAY__PY_COMPILE__11_OF_11_PASS__ZERO_REALITY_ZERO_CREDIT",
+  "subjects": {
+    "runtime": {
+      "path": "canonical/runtime/reached_escape_state_kernel_v1.py",
+      "git_blob_sha": "b1435d90f039bd1d809ff364c325c3d0858d3afd"
+    },
+    "tests": {
+      "path": "canonical/tests/test_reached_escape_state_kernel_v1.py",
+      "git_blob_sha": "2ecce2e2d981bc20f1be0f96b156d621ba5eac6e"
+    }
+  },
+  "public_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2546,
+    "verified_head_sha": "b92e2fea6033be230087e2acacd9fb2cd7613c44",
+    "workflow_run_id": 38027810159,
+    "workflow_job_id": 114142280822,
+    "conclusion": "success",
+    "merge_commit": "4952d9ea9e1c9ac4e2af9d398220d200259b8e59",
+    "exact_blob_identity": true,
+    "py_compile": true,
+    "tests_run": 11,
+    "tests_passed": 11
+  },
+  "verified_properties": [
+    "COMMON_AUTHENTICATED_SAFE_ADEQUATE_POLICY_TERMINALIZES_REACHED_STATE",
+    "NONCONSTANT_AUTHENTICATED_SAFE_TRUTHFUL_COMPLETE_DISCRIMINATOR_STRICTLY_SHRINKS_EVERY_BRANCH",
+    "MINIMAX_SPLITTER_SELECTION_IS_DETERMINISTIC",
+    "UNSPLITTABLE_POLICY_CONFLICT_IS_CONTENT_ADDRESSED",
+    "REPAIR_REQUEST_IS_CONTENT_ADDRESSED",
+    "UNTRUSTED_OR_INCOMPLETE_INPUT_FAILS_CLOSED",
+    "ADDING_COMMON_POLICY_OR_SPLITTER_REOPENS_CONSTRUCTIVE_PROGRESS",
+    "NO_OUTCOME_CLAIMS_GLOBAL_OPEN_ENDED_TERMINALITY"
+  ],
+  "hard_nonclaims": [
+    "NO_GLOBAL_ESCAPE_PROGRESS_TOTALITY_PROOF",
+    "NO_CLAIM_EVERY_REPAIR_REQUEST_IS_ACQUIRABLE",
+    "NO_EXTERNAL_TRUTH_AUTHORITY",
+    "NO_PROMOTION_ACCEPTANCE_OR_TERMINAL_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_reads": 0,
+    "benchmark_trials_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}

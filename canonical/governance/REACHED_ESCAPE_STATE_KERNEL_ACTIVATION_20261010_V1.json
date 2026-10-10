@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_REACHED_ESCAPE_STATE_KERNEL_ACTIVATION_20261010_V1",
+  "date": "2026-10-10",
+  "status": "ACTIVE_REACHED_STATE_ONLY__DETERMINISTIC_TERMINALIZE_SPLIT_OR_TYPED_REPAIR__GLOBAL_TOTALITY_UNCLAIMED",
+  "mission_scope": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "runtime": {
+    "path": "canonical/runtime/reached_escape_state_kernel_v1.py",
+    "git_blob_sha": "b1435d90f039bd1d809ff364c325c3d0858d3afd"
+  },
+  "verification": {
+    "path": "canonical/verification/REACHED_ESCAPE_STATE_KERNEL_V1_PUBLIC_VERIFY_20261010_V1.json",
+    "git_blob_sha": "88df7c715b428682e764713f65a5c0d25fca4246"
+  },
+  "semantics": {
+    "input_scope": "ONE_ACTUALLY_REACHED_FINITE_REGION_WITH_AUTHENTICATED_SAFE_POLICY_ADEQUACY_AND_AUTHENTICATED_SAFE_TRUTHFUL_COMPLETE_DISCRIMINATORS",
+    "constructive_outcomes": [
+      "TERMINALIZE_WITH_COMMON_POLICY",
+      "STRICT_PROGRESS_WITH_DISCRIMINATOR",
+      "UNSPLITTABLE_POLICY_CONFLICT"
+    ],
+    "unsplittable_repair_classes": [
+      "ACQUIRE_TRUTHFUL_DISTINGUISHING_OBSERVATION",
+      "ACQUIRE_OR_SYNTHESIZE_COMMON_ADEQUATE_POLICY"
+    ],
+    "preferred_existing_evidence_bridge": "R3_DISTINGUISHING_EVIDENCE_ACQUISITION",
+    "preferred_existing_policy_bridge": "R2_POLICY_ADEQUACY_CAPABILITY_EXPANSION_OR_ROOT1_ACQUISITION",
+    "bridge_selection_authority": false,
+    "global_escape_progress_totality_proved": false,
+    "open_ended_mission_terminal_proved": false
+  },
+  "authority_boundaries": {
+    "truth_authority": false,
+    "execution_authority": false,
+    "acquisition_authority": false,
+    "promotion_authority": false,
+    "acceptance_authority": false,
+    "terminal_authority": false
+  },
+  "terminal_credit_delta": 0
+}
