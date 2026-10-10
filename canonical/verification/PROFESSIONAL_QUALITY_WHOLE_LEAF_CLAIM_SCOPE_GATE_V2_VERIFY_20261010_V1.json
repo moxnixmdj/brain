@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_WHOLE_LEAF_CLAIM_SCOPE_GATE_V2_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_SPRITE_PYCOMPILE__16_OF_16_DOMAIN_SUBSTITUTION_AND_AUTHORITY_TESTS__ZERO_PROPERTY_QUALITY_OR_TERMINAL_AUTHORITY",
+  "repository": "moxnixmdj/brain",
+  "branch": "successor/professional-whole-leaf-claim-scope-v2-20261010",
+  "exact_blobs": {
+    "runtime": "d76b922e8d5c86f10568a3582759f8c23e69b2e0",
+    "tests": "dba858e5a67ecf210f3777c8c18a29dcfe6c0961",
+    "claim_scope_guard": "d1de61aa9bc00a184772a50f7ec9d5ee2853d747",
+    "universal_scope_compiler": "b208255789b14e44e86c82c196e06b5c41b3d039",
+    "leaf_manifest": "a7cad32c9fd969ff2c3857bb924c7bd746237ec2",
+    "v7_subject": "1d598bc8757017ceb34928d0df9f5fce859ef868",
+    "mission_authority": "13c470645b037bbb46245c687dd35197b420d51a"
+  },
+  "independent_carrier": {
+    "provider": "Sprites",
+    "sprite": "brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/pq-whole-leaf-claim-v2"
+  },
+  "replay": {
+    "py_compile": "PASS",
+    "tests_run": 16,
+    "tests_passed": 16,
+    "tests_failed": 0,
+    "transcript_sha256": "7cd141597bfcb56fe8fe6b2b9b6189cae497b1c0b5264a3283c5afb27c14ac09",
+    "transcript_bytes": 3601
+  },
+  "proves": [
+    "WHOLE_LEAF_CERTIFICATE_MUST_BIND_AN_EXACT_CONTENT_ADDRESSED_CLAIM_SCOPE",
+    "CLAIM_SCOPE_MUST_BIND_THE_CANONICAL_MISSION_AUTHORITY_EXACT_V7_SUBJECT_EXACT_LEAF_ACCEPTANCE_AND_NONEMPTY_DOMAIN_DEFINITION",
+    "WHOLE_ADMISSIBLE_LEAF_DOMAIN_EQUIVALENCE_REQUIRES_DISTINCT_INDEPENDENT_SEMANTIC_VERIFICATION",
+    "CERTIFICATE_SCOPE_ID_IS_CLAIM_SPECIFIC_NOT_MERELY_LEAF_NAMED",
+    "DOMAIN_SHRINKAGE_ACCEPTANCE_DRIFT_SUBJECT_DRIFT_CLAIM_ID_SUBSTITUTION_AND_SCOPE_BLOB_SUBSTITUTION_FAIL_CLOSED",
+    "UNIVERSAL_SCOPE_COMPILER_COVERAGE_REMAINS_SEPARATE_FROM_DOMAIN_EQUIVALENCE",
+    "PROPERTY_TRUTH_QUALITY_ACCEPTANCE_PROMOTION_AND_TERMINAL_AUTHORITY_REMAIN_SEPARATE"
+  ],
+  "hard_nonclaims": [
+    "NO_PROFESSIONAL_LEAF_SCOPE_CERTIFICATE_INSTANTIATED_BY_GATE_EXISTENCE",
+    "NO_WHOLE_LEAF_PROPERTY_TRUTH_PROVED",
+    "NO_DOMAIN_SEMANTIC_OR_EXECUTION_CLOSURE",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "whole_leaf_claim_scope_gate_verified": true,
+  "admitted_scope_certificate_count_delta": 0,
+  "property_truth_closed_count_delta": 0,
+  "semantic_truth_authority": false,
+  "execution_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "next": "FREEZE_ONE_EXACT_LEAF_CLAIM_SCOPE_ONLY_WHEN_THE_ENTIRE_ADMISSIBLE_LEAF_DOMAIN_CAN_BE_SEMANTICALLY_FACTORIZED_AND_INDEPENDENTLY_VERIFIED__THEN_INSTANTIATE_SCOPE_COVER_CERTIFICATE"
+}
