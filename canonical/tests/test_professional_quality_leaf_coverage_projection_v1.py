@@ -13,12 +13,12 @@ class ProfessionalQualityLeafCoverageProjectionV1Tests(unittest.TestCase):
     def test_current_twelve_scopes_project_without_global_leaf_credit(self):
         out = cover.project()
         self.assertTrue(out["pass"], out)
-        self.assertEqual(out["admitted_scoped_capability_count"], 15)
+        self.assertEqual(out["admitted_scoped_capability_count"], 16)
         self.assertEqual(out["expected_leaf_count"], 24)
-        self.assertEqual(out["partial_coverage_leaf_count"], 18)
-        self.assertEqual(out["semantic_partial_coverage_leaf_count"], 6)
+        self.assertEqual(out["partial_coverage_leaf_count"], 19)
+        self.assertEqual(out["semantic_partial_coverage_leaf_count"], 7)
         self.assertEqual(out["execution_partial_coverage_leaf_count"], 12)
-        self.assertEqual(out["no_scoped_evidence_leaf_count"], 6)
+        self.assertEqual(out["no_scoped_evidence_leaf_count"], 5)
         self.assertEqual(out["verified_global_leaf_count"], 0)
         self.assertEqual(out["open_global_leaf_count"], 24)
         self.assertFalse(out["global_leaf_closure"])
@@ -26,7 +26,7 @@ class ProfessionalQualityLeafCoverageProjectionV1Tests(unittest.TestCase):
         self.assertFalse(out["domain_execution_closure"])
         self.assertFalse(out["terminal_authority"])
 
-    def test_r1_r6_r7_r10_r11_and_r12_semantic_leaves_have_bounded_semantic_contributions(self):
+    def test_r1_r6_r7_r8_r10_r11_and_r12_semantic_leaves_have_bounded_semantic_contributions(self):
         out = cover.project()
         self.assertEqual(
             out["semantic_partial_coverage_leaf_ids"],
@@ -37,6 +37,7 @@ class ProfessionalQualityLeafCoverageProjectionV1Tests(unittest.TestCase):
                 "PQ::R1_TARGET_SPECIFICATION::SEMANTIC",
                 "PQ::R6_EVIDENCE_GROUNDING_DEPENDENCE::SEMANTIC",
                 "PQ::R7_CAUSAL_PRESCRIPTIVE::SEMANTIC",
+                "PQ::R8_POPULATION_CONTEXT_OPERATOR::SEMANTIC",
             ],
         )
 
