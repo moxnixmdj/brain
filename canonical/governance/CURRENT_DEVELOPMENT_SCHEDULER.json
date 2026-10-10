@@ -1,8 +1,8 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_DEVELOPMENT_SCHEDULER_POINTER_V1",
   "date": "2026-10-10",
-  "status": "ACTIVE__PARALLEL_FRONTIER_PRIMARY__READ_ONLY_EVIDENCE_PARALLELISM_READY__FULL_EXECUTION_FAILS_CLOSED_UNTIL_VECTOR_EVIDENCE_OR_SEPARATE_AUTHORITY",
-  "authoritative_activation": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V10.json",
+  "status": "ACTIVE__POST_COMPOSITION_V11__WHOLE_LEAF_RESIDUAL_CURRENTNESS_BOUND__READ_ONLY_EVIDENCE_READY__FULL_EXECUTION_FAILS_CLOSED",
+  "authoritative_activation": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V11.json",
   "runtime": "canonical/runtime/capability_parallel_frontier_post_composition_v1.py",
   "primary_entrypoint": "canonical.runtime.capability_parallel_frontier_post_composition_v1.plan_current_post_composition_frontier",
   "objective": "MAXIMIZE_REUSABLE_VERIFIED_CAPABILITY_GENERALIZATION_RELIABILITY_AND_EFFICIENCY_PER_RESOURCE_AND_MINIMIZE_WALL_CLOCK_THROUGH_SAFE_PARALLELISM",
@@ -60,5 +60,10 @@
     "path": "canonical/verification/CAPABILITY_PARALLEL_FRONTIER_V9_INDEPENDENT_VERIFY_20261010_V1.json",
     "git_blob_sha": "4c82c96fcacb78ca4d7df8f22bb6ddd639a424e9",
     "status": "PASS__PYCOMPILE__35_OF_35_COMBINED_CORE_AND_PARALLEL_SCHEDULER_TESTS__CURRENT_FRONTIER_REPLAY__SIX_SAFE_READ_ONLY_LANES__ZERO_FULL_EXECUTION"
+  },
+  "whole_leaf_residual_control": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_RESIDUAL_LEDGER_20261010_V1.json",
+    "git_blob_sha": "ae5503829ad340cccef287f37ff70e4ab9288d33",
+    "status": "24_EXPECTED__0_WHOLE_LEAVES_CLOSED__TOTALITY_OR_CERTIFIED_COMPLETE_UNION_REQUIRED"
   }
 }
