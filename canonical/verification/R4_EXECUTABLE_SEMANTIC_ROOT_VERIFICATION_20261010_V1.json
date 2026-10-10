@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_R4_EXECUTABLE_SEMANTIC_ROOT_VERIFICATION_V1",
+  "date": "2026-10-10",
+  "status": "PASS_PROOF_ARCHITECTURE_ONLY__ZERO_TERMINAL_CREDIT",
+  "subject": "execute canonical semantic verifier for every PROVED_CURRENT root certificate",
+  "remote_exact_byte_replay": {
+    "verifier": "brain-live-runtime-v1-verify-20261008",
+    "result": "36_PASSED__0_FAILED",
+    "method": "ZERO_DEPENDENCY_FUNCTION_HARNESS_OVER_EXACT_BRANCH_BYTES"
+  },
+  "verified": [
+    "ZERO_PROVED_OPEN_REGISTRY_REMAINS_VALID_AND_OPEN",
+    "EVERY_PROVED_SLOT_INVOKES_CANONICAL_SEMANTIC_VALIDATOR",
+    "SEMANTIC_REJECTION_BLOCKS_R4",
+    "PROVED_SLOT_WITHOUT_ACTIVE_CLAIM_FAILS_CLOSED",
+    "EXISTING_R1_R2_R3_R4_BINDING_AND_REGISTRY_REGRESSIONS_STILL_PASS"
+  ],
+  "nonclaims": [
+    "DOES_NOT_PROVE_CURRENT_R1",
+    "DOES_NOT_PROVE_CURRENT_R2",
+    "DOES_NOT_PROVE_CURRENT_R3",
+    "DOES_NOT_CLOSE_CURRENT_R4",
+    "DOES_NOT_CHANGE_TERMINAL_ACCEPTANCE_OR_OWNERSHIP_COUNTS"
+  ],
+  "accounting": {
+    "fresh_reality_units_consumed": 0,
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
