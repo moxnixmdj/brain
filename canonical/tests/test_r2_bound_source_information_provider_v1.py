@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from hashlib import sha256
+import unittest
 
 from canonical.runtime import r2_bound_source_information_provider_v1 as p
 
@@ -31,7 +32,8 @@ def _request():
     }
 
 
-def test_bound_source_provider_emits_raw_material_without_truth_authority():
+class Tests(unittest.TestCase):
+ def test_bound_source_provider_emits_raw_material_without_truth_authority(self):
     calls = []
     blobs = {
         "https://evidence.example/policy.txt": POLICY,
@@ -53,7 +55,7 @@ def test_bound_source_provider_emits_raw_material_without_truth_authority():
     assert len(calls) == 2
 
 
-def test_bound_source_provider_rejects_hash_drift_and_non_https():
+ def test_bound_source_provider_rejects_hash_drift_and_non_https(self):
     req = _request()
     req["source_scope"]["policy_sha256"] = "0" * 64
 
@@ -71,7 +73,7 @@ def test_bound_source_provider_rejects_hash_drift_and_non_https():
     assert "MUST_BE_HTTPS" in out["reason"]
 
 
-def test_bound_source_provider_refuses_unbound_or_research_requests():
+ def test_bound_source_provider_refuses_unbound_or_research_requests(self):
     req = _request()
     req["acquisition_plan"]["action"] = "RESEARCH_MINIMUM_AUTHENTICATED_FACT"
     assert p.provide(req, fetcher=lambda *a, **k: POLICY) is None
@@ -79,3 +81,7 @@ def test_bound_source_provider_refuses_unbound_or_research_requests():
     req = _request()
     req["source_scope"]["kind"] = "UNBOUND_SOURCE"
     assert p.provide(req, fetcher=lambda *a, **k: POLICY) is None
+
+
+if __name__ == "__main__":
+    unittest.main(verbosity=2)
