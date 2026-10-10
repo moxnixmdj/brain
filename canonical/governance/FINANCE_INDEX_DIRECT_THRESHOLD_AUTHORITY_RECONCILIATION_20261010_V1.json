@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_FINANCE_INDEX_DIRECT_THRESHOLD_AUTHORITY_RECONCILIATION_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__DIRECT_THRESHOLD_THEOREM_INDEPENDENTLY_VERIFIED__SIX_COMPONENT_RECEIPTS_REMAIN_OPEN__ZERO_CREDIT",
+  "target_predicate": "FINANCE_ACCOUNTING_INDEX_GE_61",
+  "theorem": {
+    "path": "canonical/governance/FINANCE_INDEX_DIRECT_THRESHOLD_THEOREM_V1.json",
+    "git_blob_sha": "37f47143f62fe2f59e56d8eca4a64bae18a1ce8b",
+    "statement": "IF_VERIFIED_NORMALIZED_BRAIN_LOWER_BOUNDS_L_i_SATISFY_SUM_i(w_i*L_i)>=61_THEN_FINANCE_ACCOUNTING_INDEX_GE_61"
+  },
+  "independent_verification": {
+    "path": "canonical/verification/FINANCE_INDEX_DIRECT_THRESHOLD_THEOREM_INDEPENDENT_VERIFY_20261010_V1.json",
+    "git_blob_sha": "c61d9a325aa74f31ea7afbbf6190803386be2c58",
+    "result": "PASS__6_OF_6__EXACT_RATIONAL_THRESHOLD_KERNEL"
+  },
+  "authority": {
+    "mathematical_sufficiency_rule_verified": true,
+    "exact_rational_arithmetic_verified": true,
+    "componentwise_opus_noninferiority_required": false,
+    "compensation_across_components_allowed": true,
+    "every_component_lower_bound_requires_receipt": true,
+    "default_component_floor_allowed": false,
+    "component_semantic_authority": false,
+    "component_normalization_authority": false,
+    "acceptance_authority": false,
+    "terminal_authority": false
+  },
+  "current_frontier": {
+    "verified_threshold_kernel": true,
+    "normalized_component_receipts_required": 6,
+    "current_verified_component_receipt_count": 0,
+    "finance_index_acceptance_closed": false,
+    "next": "SATURATE_EXISTING_CONTENT_ADDRESSED_EVIDENCE_FOR_THE_SIX_NORMALIZED_COMPONENT_LOWER_BOUNDS_AND_EXACT_NORMALIZATION_BINDINGS"
+  },
+  "hard_nonclaims": [
+    "NO_COMPONENT_LOWER_BOUND_CREATED",
+    "NO_COMPONENT_NORMALIZATION_CREATED",
+    "NO_FINANCE_INDEX_SCORE_CREATED",
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
