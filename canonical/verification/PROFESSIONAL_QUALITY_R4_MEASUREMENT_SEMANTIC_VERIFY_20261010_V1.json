@@ -1,0 +1,78 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R4_MEASUREMENT_SEMANTIC_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__PINNED_EXACT_BYTES__UNITTEST_8_OF_8__BOUNDED_R4_MECHANICAL_MEASUREMENT_SEMANTICS__ZERO_GLOBAL_LEAF_CREDIT",
+  "carrier": {
+    "name": "oq-verify-20261010",
+    "id": "sprite-f5cbeee2-cf40-428b-b1f0-dfda7d3bd5a2",
+    "workspace": "/home/sprite/pq-r4-current",
+    "dependency_installation": false
+  },
+  "exact_blobs": {
+    "runtime": "349afbd3f5b118bc7da56b5d04c7fdba761b77ec",
+    "tests": "f76976962ff42bb1ee19e5592eba1ee724e63efb",
+    "source_governance": "a174825b4c10fefa06c3a7ba09eb68c0d40af14a",
+    "source_execution_verification": "34c64ed759d2e70df48a76d7a254047ac5fe9e2b",
+    "measurement_runtime": "4da88dc71e85874b6445988b792951fb3c36d62f",
+    "measured_acceptance_runtime": "7cb47bbefa807e93007e13e84607b41e27245f62"
+  },
+  "claim_scope": {
+    "kind": "CONTENT_ADDRESSED_TYPED_MECHANICAL_MEASUREMENT_SEMANTICS",
+    "measurement_kinds": [
+      "DOCX_PARAGRAPH_COUNT",
+      "DOCX_TABLE_COUNT",
+      "DOCX_TEXT_CONTAINS",
+      "FILE_BASENAME",
+      "FILE_SIZE_BYTES",
+      "FILE_SUFFIX",
+      "OOXML_MEMBER_EXISTS",
+      "PPTX_SLIDE_COUNT",
+      "PPTX_TEXT_CONTAINS",
+      "XLSX_SHEET_COUNT",
+      "XLSX_SHEET_EXISTS"
+    ],
+    "guarantees": [
+      "MEASUREMENT_VALUES_ARE_DERIVED_FROM_CONTENT_ADDRESSED_ARTIFACT_BYTES",
+      "EACH_MEASUREMENT_REQUEST_IS_CONTENT_ADDRESSED_AND_TYPED",
+      "THE_MEASURED_FIELD_SET_AND_TYPES_MUST_MATCH_THE_TYPED_ACCEPTANCE_PROGRAM_EXACTLY",
+      "ARTIFACT_PATH_ESCAPE_FAILS_CLOSED",
+      "PROPOSAL_SUPPLIED_CANDIDATE_VALUES_DO_NOT_DEFINE_ARTIFACT_FACTS",
+      "A_FAILED_MEASURED_PROPERTY_CAN_FALSIFY_TYPED_ACCEPTANCE"
+    ],
+    "limitations": [
+      "NO_AUTOMATIC_FIELD_TO_RUBRIC_OR_CONSTRUCT_SEMANTIC_ALIGNMENT",
+      "NO_HOLISTIC_OR_VISUAL_QUALITY_MEASUREMENT",
+      "NO_UNSUPPORTED_MEASUREMENT_KIND_SEMANTICS",
+      "NO_GLOBAL_R4_SEMANTIC_LEAF_CLOSURE",
+      "NO_GLOBAL_R4_ROOT_CLOSURE"
+    ]
+  },
+  "replay": {
+    "runner": "PYTHON_UNITTEST",
+    "tests_run": 8,
+    "tests_passed": 8,
+    "tests_failed": 0
+  },
+  "proved": [
+    "EXACT_SUPPORTED_MECHANICAL_MEASUREMENT_SEMANTICS_ARE_BOUND",
+    "MEASUREMENT_AND_ACCEPTANCE_RUNTIME_HASH_DRIFT_FAILS_CLOSED",
+    "RUBRIC_CONSTRUCT_ALIGNMENT_IS_NOT_INFERRED",
+    "HOLISTIC_VISUAL_QUALITY_IS_NOT_INFERRED",
+    "PROPOSAL_SUPPLIED_VALUES_CANNOT_BECOME_ARTIFACT_FACTS"
+  ],
+  "not_proved": [
+    "TASK_OR_RUBRIC_CONSTRUCT_ALIGNMENT",
+    "HOLISTIC_OR_VISUAL_QUALITY",
+    "UNSUPPORTED_MEASUREMENT_KIND_SEMANTICS",
+    "GLOBAL_R4_SEMANTIC_LEAF_OR_ROOT_CLOSURE",
+    "QUALITY_ACCEPTANCE",
+    "TERMINAL_AUTHORITY"
+  ],
+  "semantic_leaf_credit": false,
+  "global_leaf_closure": false,
+  "quality_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "pass": true
+}
