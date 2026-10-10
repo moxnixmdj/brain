@@ -1,0 +1,23 @@
+name: Verify post-composition planner
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/runtime/capability_parallel_frontier_post_composition_v1.py
+      - canonical/tests/test_capability_parallel_frontier_post_composition_v1.py
+      - canonical/runtime/capability_parallel_frontier_v2.py
+      - canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json
+      - .github/workflows/verify-post-composition-planner.yml
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m py_compile canonical/runtime/capability_parallel_frontier_post_composition_v1.py canonical/runtime/capability_parallel_frontier_v2.py
+      - run: python -m unittest -v canonical.tests.test_capability_parallel_frontier_post_composition_v1
