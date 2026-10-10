@@ -120,8 +120,21 @@ def verify(*,repo_root:str|Path|None=None)->dict[str,Any]:
         subject=_read(root,SUBJECT_PATH,SUBJECT_BLOB)
         if subject.get("subject_id")!=SUBJECT_ID or subject.get("subject_sha256")!=SUBJECT_SHA256:
             return _fail("SUBJECT_DOCUMENT_IDENTITY_MISMATCH")
-        if subject.get("dependency_closure_complete") is not True:
-            return _fail("SUBJECT_DEPENDENCY_CLOSURE_UNPROVED")
+        material=(subject.get("system_material") or {}).get("components")
+        if not isinstance(material,list) or len(material)!=22:
+            return _fail("SUBJECT_COMPONENT_CLOSURE_INVALID")
+        closure=subject.get("dependency_closure")
+        if not isinstance(closure,Mapping):
+            return _fail("SUBJECT_DEPENDENCY_CLOSURE_MISSING")
+        v7_closure=closure.get("v7_proof_bound_profile_execution")
+        if not isinstance(v7_closure,Mapping):
+            return _fail("SUBJECT_V7_PROOF_BOUND_CLOSURE_MISSING")
+        if (
+            v7_closure.get("proof_bound_step_count")!=7
+            or v7_closure.get("caller_step_results_allowed") is not False
+            or v7_closure.get("all_profile_step_success_requires_noncaller_authority") is not True
+        ):
+            return _fail("SUBJECT_V7_PROOF_BOUND_CLOSURE_INVALID")
 
         bridge=binding.get("bridge_evidence")
         if not isinstance(bridge,Mapping):
