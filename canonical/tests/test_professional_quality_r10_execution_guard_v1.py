@@ -11,6 +11,7 @@ from canonical.runtime import professional_quality_r10_execution_guard_v1 as gua
 ROOT = Path(__file__).resolve().parents[2]
 PROFILE_PATH = ROOT / "canonical/governance/PROFESSIONAL_QUALITY_P1_EXECUTION_PROFILE_20261010_V3.json"
 CATALOG_PATH = ROOT / "canonical/governance/PROFESSIONAL_QUALITY_DOMAIN_DEFEATER_CATALOG_20261009_V2.json"
+CONSTITUTION_PATH = ROOT / "canonical/governance/PROFESSIONAL_QUALITY_R10_DECISION_CONSTITUTION_20261010_V1.json"
 
 
 def closure(*, evidence=("MISSING_FACT",), internal=()):
@@ -32,8 +33,46 @@ def closure(*, evidence=("MISSING_FACT",), internal=()):
     }
 
 
-def proof_slots():
-    return {slot: True for slot in guard.REQUIRED_PROOF_SLOTS}
+def clean_context():
+    return {
+        "target": {
+            "target_spec_sha256": "1" * 64,
+            "hard_constraints_sha256": "2" * 64,
+            "freeze_receipt_sha256": "3" * 64,
+        },
+        "uncertainty_claims": [
+            {
+                "id": "u1",
+                "type": "MODEL_UNCERTAINTY",
+                "source_type": "MODEL_UNCERTAINTY",
+            }
+        ],
+        "decision_policy": {
+            "aggregation_mode": "PARETO_ONLY",
+            "risk_threshold_required": False,
+            "precommit_receipt_sha256": "4" * 64,
+        },
+        "veto_constraints": [
+            {"id": "hard-no-fabrication", "noncompensatory": True, "satisfied": True}
+        ],
+        "analysis_models": [
+            {"id": "m1", "decision": "candidate-a"},
+            {"id": "m2", "decision": "candidate-a"},
+        ],
+        "evidence_packet": {
+            "declared_evidence_ids": ["e1", "e2"],
+            "included_evidence_ids": ["e1", "e2"],
+            "omissions": [],
+            "packet_sha256": "5" * 64,
+            "declared_basis_sha256": "6" * 64,
+        },
+        "stopping_rule": {
+            "rule_sha256": "7" * 64,
+            "precommit_receipt_sha256": "8" * 64,
+            "frozen_before_outcome_reveal": True,
+        },
+        "quality_claim": {"claim_level": "RELATIVE_OR_SCOPED"},
+    }
 
 
 class R10ExecutionGuardV1Tests(unittest.TestCase):
@@ -41,6 +80,7 @@ class R10ExecutionGuardV1Tests(unittest.TestCase):
     def setUpClass(cls):
         cls.profile = json.loads(PROFILE_PATH.read_text())
         cls.catalog = json.loads(CATALOG_PATH.read_text())
+        cls.constitution = json.loads(CONSTITUTION_PATH.read_text())
 
     def contracts(self):
         gap = one_shot.compile_gap_contract(closure())
@@ -63,7 +103,8 @@ class R10ExecutionGuardV1Tests(unittest.TestCase):
             "defeater_catalog": deepcopy(self.catalog),
             "detected_defeater_ids": (),
             "near_miss_signals": {},
-            "proof_slots": proof_slots(),
+            "constitution": deepcopy(self.constitution),
+            "case_context": clean_context(),
             "unmapped_material_false_certification_defeater": False,
         }
         args.update(overrides)
@@ -77,6 +118,7 @@ class R10ExecutionGuardV1Tests(unittest.TestCase):
             "PASS__R10_EXECUTION_GUARD_ELIGIBLE_FOR_SCOPED_CERTIFICATE_VERIFICATION",
         )
         self.assertTrue(out["ordinary_certificate_path_allowed"])
+        self.assertEqual(len(out["proof_slots_satisfied"]), 9)
         self.assertFalse(out["detection_completeness_proved"])
         self.assertFalse(out["whole_leaf_property_truth_proved"])
         self.assertFalse(out["quality_authority"])
@@ -119,13 +161,18 @@ class R10ExecutionGuardV1Tests(unittest.TestCase):
             "ESCALATE__UNMAPPED_MATERIAL_FALSE_CERTIFICATION_DEFEATER",
         )
 
-    def test_missing_proof_slot_keeps_property_open(self):
-        slots = proof_slots()
-        slots["stopping_rule_precommitted"] = False
-        out = self.evaluate(proof_slots=slots)
+    def test_missing_structural_proof_slot_keeps_property_open(self):
+        context = clean_context()
+        context["stopping_rule"]["precommit_receipt_sha256"] = None
+        out = self.evaluate(case_context=context)
         self.assertFalse(out["pass"])
         self.assertEqual(out["status"], "OPEN__R10_EXECUTION_PROOF_SLOT_REQUIRED")
-        self.assertEqual(out["missing_proof_slots"], ["stopping_rule_precommitted"])
+        self.assertIn("stopping_rule_precommitted", out["missing_proof_slots"])
+        self.assertFalse(out["ordinary_certificate_path_allowed"])
+
+    def test_caller_cannot_supply_legacy_boolean_proof_slots(self):
+        with self.assertRaises(TypeError):
+            self.evaluate(proof_slots={"stopping_rule_precommitted": True})
 
     def test_lossy_decision_contract_fails_closed(self):
         decision, minimum = self.contracts()
@@ -137,7 +184,8 @@ class R10ExecutionGuardV1Tests(unittest.TestCase):
             minimum_information_contract=minimum,
             execution_profile=self.profile,
             defeater_catalog=self.catalog,
-            proof_slots=proof_slots(),
+            constitution=self.constitution,
+            case_context=clean_context(),
         )
         self.assertEqual(out["reason"], "DECISION_CONTRACT_NOT_LOSSLESS")
 
@@ -151,7 +199,8 @@ class R10ExecutionGuardV1Tests(unittest.TestCase):
             minimum_information_contract=minimum,
             execution_profile=self.profile,
             defeater_catalog=self.catalog,
-            proof_slots=proof_slots(),
+            constitution=self.constitution,
+            case_context=clean_context(),
         )
         self.assertEqual(out["reason"], "DECISION_CONTRACT_OMITS_EVIDENCE")
 
@@ -168,7 +217,8 @@ class R10ExecutionGuardV1Tests(unittest.TestCase):
             minimum_information_contract=minimum,
             execution_profile=self.profile,
             defeater_catalog=self.catalog,
-            proof_slots=proof_slots(),
+            constitution=self.constitution,
+            case_context=clean_context(),
         )
         self.assertEqual(
             out["reason"],
@@ -191,11 +241,7 @@ class R10ExecutionGuardV1Tests(unittest.TestCase):
             or catalog.get("nodes")
             or catalog.get("challenges")
         )
-        target = next(
-            row
-            for row in rows
-            if row.get("id") == "C48_ANALYSIS_CHERRY_PICK"
-        )
+        target = next(row for row in rows if row.get("id") == "C48_ANALYSIS_CHERRY_PICK")
         field = "root_ids" if isinstance(target.get("root_ids"), list) else "target_root_ids"
         target[field] = [x for x in target[field] if x != guard.ROOT_ID]
         out = self.evaluate(defeater_catalog=catalog)
