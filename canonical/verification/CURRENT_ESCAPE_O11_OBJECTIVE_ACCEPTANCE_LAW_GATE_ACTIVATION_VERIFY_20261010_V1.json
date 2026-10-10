@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_ESCAPE_O11_OBJECTIVE_ACCEPTANCE_LAW_GATE_ACTIVATION_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__CURRENT_MAIN_BINDINGS__5_OF_5__TOTAL_O11_PACKAGE_69_CHECKS_PASS__ZERO_CREDIT",
+  "subject": {
+    "activation": [
+      "canonical/governance/CURRENT_ESCAPE_O11_OBJECTIVE_ACCEPTANCE_LAW_GATE_ACTIVATION_20261010_V1.json",
+      "e89d87fafc4f5e727aa367ad5ec635b8d4e02e0c"
+    ],
+    "activation_tests": [
+      "canonical/tests/test_current_escape_o11_objective_acceptance_law_gate_activation_v1.py",
+      "5d856160fc9a7aa68049ed03e427ca150ebec9c1"
+    ],
+    "behavioral_verification": [
+      "canonical/verification/CURRENT_ESCAPE_O11_OBJECTIVE_ACCEPTANCE_LAW_GATE_VERIFY_20261010_V1.json",
+      "602da8e2e43d81b5e94a4b8502d5a8e791fe4872"
+    ],
+    "current_oq": [
+      "canonical/governance/CURRENT_ESCAPE_OQ_FRONTIER_REDUCTION_20261010_V1.json",
+      "e355f3c168429c96ff0dfa142428ada6c97c47e9"
+    ]
+  },
+  "independent_verification": {
+    "carrier": "Sprites",
+    "sprite": "brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "activation_suite": {
+      "tests_run": 5,
+      "failures": 0,
+      "errors": 0
+    },
+    "prior_behavioral_and_seam_checks": 64,
+    "total_checks_passed": 69
+  },
+  "proved": [
+    "EXACT_ACTIVATION_RUNTIME_TEST_AND_VERIFICATION_BINDINGS_MATCH",
+    "CURRENT_OQ_FRONTIER_BINDING_IS_EXACT_11_2",
+    "REUSED_V4_V3_AND_SCOPE_COVER_KERNEL_HASHES_MATCH",
+    "CURRENT_IDENTITY_RULE_AND_STRENGTHENED_MYSTERY_PREDICATE_RULE_ARE_PRESERVED",
+    "REAL_O_ROW_PROOFS_REMAIN_ZERO_OF_ELEVEN_AND_ALL_CREDIT_DELTAS_ZERO"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
