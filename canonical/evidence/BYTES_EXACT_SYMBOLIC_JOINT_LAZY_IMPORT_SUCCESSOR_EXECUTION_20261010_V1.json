@@ -1,0 +1,157 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_JOINT_LAZY_IMPORT_SUCCESSOR_EXECUTION_V1",
+  "status": "FRESH_SUCCESSOR_EXECUTION__NEW_JOINT_LAZY_IMPORT_BYTE_FRONTIER__ZERO_PROMOTION_CREDIT",
+  "recorded_at": "2026-10-10",
+  "mission": "Minimum resource-feasible executable description conditional on already-owned Brain substrate.",
+  "governing_laws": [
+    "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V1.md",
+    "canonical/laws/BYTES_RESOURCE_BOUNDED_MINIMUM_MECHANISM_LAW_V1.md"
+  ],
+  "predecessor": {
+    "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_LAZY_MINPOLY_SUCCESSOR_EXECUTION_20261010_V1.json",
+    "package_raw_python_source_bytes": 6380604,
+    "B_exec_raw_python_source_bytes": 6383364,
+    "python_files": 288,
+    "polys_loaded_trace_raw_python_source_bytes": 1286441,
+    "comparable_archive_bytes": 1108544,
+    "comparable_archive_sha256": "4d6e74a80959b65461980164b5aed32e39c1f62d42ae6142c0023f72055bc30a",
+    "fresh_qualification": "3910/3910"
+  },
+  "rejected_cut_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_NEXT10_EXPRESSIONDOMAIN_FALSIFICATION_20261010_V1.json",
+  "structural_bundle": {
+    "id": "JOINT_ZERO_EXECUTION_BRANCH_LOCAL_IMPORT_BUNDLE_V9",
+    "principle": "Retain donor code; defer only dependencies until exact branches or input classes require them.",
+    "accepted_edges": [
+      "summations -> partfrac.apart only in rational summation branches",
+      "combinatorial numbers -> appellseqs only in explicit Bernoulli/Euler/Genocchi polynomial rewrites",
+      "rootoftools -> polyfuncs only in ComplexRootOf rational transformation",
+      "hyperexpand -> apart only in partial-fraction branch",
+      "polytools -> FiniteField only in set_modulus",
+      "constructor/domain conversion -> RealField/ComplexField only for float-like inputs",
+      "constructor -> EX only in expression-domain fallback",
+      "rings -> heuristicgcd only in ZZ gcd branch",
+      "rings -> PolynomialRing only after polynomial-ring family predicate",
+      "repmatrix -> GF only in inv_mod",
+      "polyutils -> ModularInteger only for actual modular-integer factors",
+      "polyroots -> EX only in Gaussian-domain conversion",
+      "matrices/eigen -> EX and polynomial eigenvector implementation only inside _eigenvects_DOM"
+    ],
+    "removed_from_physical_closure": [
+      [
+        "sympy/polys/partfrac.py",
+        14695
+      ],
+      [
+        "sympy/polys/domains/finitefield.py",
+        10654
+      ],
+      [
+        "sympy/polys/polyfuncs.py",
+        8584
+      ],
+      [
+        "sympy/polys/appellseqs.py",
+        8305
+      ],
+      [
+        "sympy/polys/domains/realfield.py",
+        6456
+      ],
+      [
+        "sympy/polys/domains/polynomialring.py",
+        6223
+      ],
+      [
+        "sympy/polys/domains/complexfield.py",
+        6159
+      ],
+      [
+        "sympy/polys/domains/modularinteger.py",
+        6042
+      ],
+      [
+        "sympy/polys/heuristicgcd.py",
+        3732
+      ],
+      [
+        "sympy/polys/matrices/eigen.py",
+        3027
+      ],
+      [
+        "sympy/polys/domains/compositedomain.py",
+        1642
+      ]
+    ],
+    "removed_file_source_bytes": 75519,
+    "net_package_reduction_bytes": 74344,
+    "polys_loaded_source_reduction_bytes": 74592
+  },
+  "measured_candidate": {
+    "status": "PHYSICALLY_DELETED_RESEARCH_CANDIDATE__NOT_PROMOTED",
+    "python_files": 277,
+    "package_raw_python_source_bytes": 6306260,
+    "router_raw_python_source_bytes": 2760,
+    "B_exec_raw_python_source_bytes": 6309020,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "package_manifest_sha256": "2e5c1207f9877341f9cc5fc775fac472d478668d887761ee12a034487220bfb6",
+    "raw_improvement_vs_immediate_predecessor_bytes": 74344,
+    "polys_loaded_trace_raw_python_source_bytes": 1211849
+  },
+  "qualification": {
+    "spent_NEXT9_precheck": "3910/3910",
+    "spent_NEXT10_after_rejected_expressiondomain_probe": "4140/4140",
+    "fresh_NEXT11": {
+      "id": "QUAL_SUCCESSOR_NEXT11_20261010_V1",
+      "seed": 3316624,
+      "per_operation_budget": 380,
+      "cases": 4370,
+      "corpus_sha256": "f44a55f6c82ebfba6c20fb9f2982360dbdf4fb72a78151f40db753b7963273d3",
+      "stock_donor_positive_control": "4370/4370",
+      "physical_candidate": "4370/4370",
+      "independent_copy_replay": "4370/4370",
+      "extracted_archive_replay": "4370/4370",
+      "status": "SPENT_ONCE_AS_FRESH_CANDIDATE_QUALIFICATION"
+    }
+  },
+  "comparable_storage_measurement": {
+    "recipe": "tar --sort=name --mtime='@0' --owner=0 --group=0 --numeric-owner --exclude='__pycache__' --exclude='*.pyc' -C <dir> -cf - . | xz -6e -T1",
+    "predecessor_same_recipe_bytes": 1108544,
+    "predecessor_same_recipe_sha256": "4d6e74a80959b65461980164b5aed32e39c1f62d42ae6142c0023f72055bc30a",
+    "predecessor_recipe_matches_canonical_exactly": true,
+    "successor_same_recipe_bytes": 1096200,
+    "successor_sha256": "e9ed3086ad678a8e3c17f2dfabd1b3e39fa6a44d93e57a651a9bef38a1da6ac9",
+    "improvement_bytes": 12344
+  },
+  "reproducibility": {
+    "predecessor_reconstruction": "canonical/research/bytes/tools/rebuild_candidate_v8.py",
+    "successor_reconstruction": "canonical/research/bytes/tools/rebuild_candidate_v9.py",
+    "route": "canonical/research/bytes/tools/exact_symbolic_route_v1.py",
+    "semantic_digest": "canonical/research/bytes/tools/semantic_digest_v1.py",
+    "qualification_generator": "canonical/research/bytes/tools/generate_qualification_v1.py",
+    "loaded_trace_tool": "canonical/research/bytes/tools/trace_loaded_v1.py",
+    "physical_slice_tool": "canonical/research/bytes/tools/build_physical_slice_v1.py",
+    "qualification_runner": "canonical/research/bytes/tools/run_qualification_v1.py"
+  },
+  "rejected_during_search": [
+    "expressiondomain deletion: rejected by NEXT10, four quartic-root failures",
+    "orthopolys deletion/lazy Bessel edge: rejected because in-scope sin-even-integral path genuinely reaches orthopoly/Chebyshev machinery",
+    "domain-constructor lazy probes that did not alter physical closure: zero byte credit"
+  ],
+  "next_frozen_qualification": {
+    "id": "QUAL_SUCCESSOR_NEXT12_20261010_V1",
+    "seed": 3464101,
+    "per_operation_budget": 400,
+    "cases": 4600,
+    "corpus_sha256": "d092726e2c648f73172799cdd71b162ecdded3d6e0044ee1155476bf8cdab124",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_STRUCTURAL_CUT"
+  },
+  "truth_boundary": [
+    "MEASURED: the 6,306,260-byte physical package passes fresh NEXT11 4,370/4,370 on stock donor, candidate, independent copy replay, and extracted archive replay.",
+    "MEASURED: same-procedure compressed source storage falls from 1,108,544 to 1,096,200 bytes.",
+    "MEASURED: NEXT10 rejects deletion of ExpressionDomain for the bounded roots<=4 contract.",
+    "INFERRED: the accepted lazy-import bundle removes packaging/compatibility dependencies not causally reached by the bounded route over fresh qualification.",
+    "NOT CLAIMED: universal SymPy correctness, all exact-symbolic capability, absolute information-theoretic minimality, or Opus-family promotion.",
+    "PROMOTION CREDIT: 0."
+  ],
+  "next_action": "Use NEXT10/NEXT11 and other spent corpora only to profile the remaining polys closure at function/import-edge granularity. Freeze a new physical cut before touching NEXT12."
+}
