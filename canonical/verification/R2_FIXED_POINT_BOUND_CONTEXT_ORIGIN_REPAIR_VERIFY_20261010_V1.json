@@ -1,0 +1,27 @@
+{
+  "schema": "PROJECT_BRAIN_R2_FIXED_POINT_BOUND_CONTEXT_ORIGIN_REPAIR_VERIFY_V1",
+  "status": "PASS__FIXED_POINT_CAN_ADD_MONOTONIC_BOUND_TRUTH_ORIGINS_FOR_REVERIFICATION",
+  "merge_commit": "77e7957c64eb9ac00dd00cdde0bf5699fef3c54c",
+  "exact_blob_shas": {
+    "canonical/runtime/general_adequate_decision_fixed_point_v2.py": "34d62b109b99f38e62995544871460b266d2c7df",
+    "canonical/tests/test_general_adequate_decision_fixed_point_v2.py": "157f1497c171bc6ea42f77a16b4a042a6f0d3bde"
+  },
+  "verified_behavior": {
+    "information_origin_by_predicate_id_is_mutable_only_monotonically": true,
+    "new_bound_truth_origin_can_be_added": true,
+    "existing_predicate_origin_binding_mutation_forbidden": true,
+    "multiple_distinct_predicate_origins_accumulate": true,
+    "patched_request_reenters_controller_for_reverification": true,
+    "proposal_provider_is_semantic_truth_authority": false,
+    "terminal_authority": false
+  },
+  "execution_receipts": {
+    "general_adequate_decision_fixed_point_v2_suite": "PASS__32_OF_32",
+    "python_compile": "PASS__RUNTIME_AND_TEST"
+  },
+  "credit": {
+    "finance_semantic_tail_closed": false,
+    "global_open_world_closure_delta": false,
+    "terminal_credit_delta": 0
+  }
+}
