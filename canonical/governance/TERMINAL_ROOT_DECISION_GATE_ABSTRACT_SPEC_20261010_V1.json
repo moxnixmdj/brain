@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_ROOT_DECISION_GATE_ABSTRACT_SPEC_V1",
+  "date": "2026-10-10",
+  "subject_id": "terminal-root-decision-gate-v1",
+  "semantic_version": "TERMINAL_ROOT_DECISION_GATE_ABSTRACT_V1",
+  "scope": "CONTENT_ADDRESSED_TERMINAL_ROOT_PROOF_ADMISSION_ONLY",
+  "bound_runtime": {
+    "path": "canonical/runtime/terminal_root_decision_gate_v1.py",
+    "git_blob_sha": "6f546f657900405c628c1eb3575bc1e4ac220aeb"
+  },
+  "legal_success_routes": {
+    "FULL_SCOPE_DB_COVER": [
+      "s_trace_subset_db"
+    ],
+    "TARGET_ESCAPE_NONOCCUPANCY": [
+      "u_intersection_escape_empty"
+    ],
+    "GENERATOR_CLOSURE_SCOPE_COMPLETE": [
+      "generator_basis_complete",
+      "all_generators_covered",
+      "all_transforms_abc_preserving",
+      "all_useful_contexts_reachable"
+    ],
+    "SELECTED_COVER_COMPLEMENT_UNSAT": [
+      "every_admission_sound",
+      "residual_complement_unsat"
+    ]
+  },
+  "invariants": [
+    "PROOF_AND_VERIFIER_MUST_BE_EXACT_CONTENT_ADDRESSED_JSON_ARTIFACTS",
+    "VERIFIER_MUST_BE_INDEPENDENT_VERIFIED_AND_EXACT_BYTE_BOUND",
+    "VERIFIER_MUST_BIND_EXACT_PROOF_ARTIFACT",
+    "DECLARATION_FIELDS_CANNOT_OVERRIDE_BOUND_PROOF",
+    "ONLY_FOUR_DECLARED_PROOF_KINDS_CAN_SUCCEED",
+    "SUCCESS_REQUIRES_SCOPE_OPUS55_OBSERVABLE_TRACE",
+    "SUCCESS_ALWAYS_SETS_X_FALSE_U_EMPTY_TRUE_ABC_CLOSED_TRUE",
+    "SUCCESS_ALWAYS_PRESERVES_D_FINALITY_REQUIRED_TRUE",
+    "SUCCESS_NEVER_SETS_TERMINAL_TRUE",
+    "SUCCESS_NEVER_GRANTS_TERMINAL_CREDIT"
+  ],
+  "nonclaims": [
+    "DOES_NOT_PROVE_THE_BOUND_PROOF_ARTIFACTS_CORRECT_BY_ITSELF",
+    "DOES_NOT_PROVE_D_FINALITY",
+    "DOES_NOT_SET_GLOBAL_TERMINAL_TRUE",
+    "DOES_NOT_GRANT_CAPABILITY_OR_TERMINAL_CREDIT"
+  ],
+  "terminal_credit_delta": 0
+}
