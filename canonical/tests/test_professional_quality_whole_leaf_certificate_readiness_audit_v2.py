@@ -23,13 +23,27 @@ def write_fixed(root: Path):
     return lp,ap
 
 class ReadinessV2Tests(unittest.TestCase):
-    def test_current_real_repository_reports_zero_admissible_chains(self):
+    def test_current_real_repository_partitions_all_leaves_and_admits_r10_execution(self):
         out=audit.audit()
         self.assertTrue(out["pass"],out)
         self.assertEqual(out["leaf_count"],24)
-        self.assertEqual(out["admissible_chain_count"],0)
-        self.assertEqual(out["claim_scope_construction_required_count"],24)
-        self.assertEqual(out["property_truth_ready_count"],0)
+        self.assertEqual(
+            out["admissible_chain_count"]
+            + out["claim_scope_construction_required_count"]
+            + out["incomplete_or_ambiguous_chain_count"],
+            24,
+        )
+        self.assertEqual(
+            out["property_truth_ready_count"],
+            out["admissible_chain_count"],
+        )
+        self.assertFalse(out["new_primitive_required"])
+        row=next(
+            x for x in out["leaves"]
+            if x["leaf_id"]=="PQ::R10_ANALYSIS_DECISION::EXECUTION"
+        )
+        self.assertEqual(row["state"],"ADMISSIBLE_V2_WHOLE_LEAF_SCOPE_CHAIN")
+        self.assertTrue(row["property_truth_ready"])
 
     def test_incomplete_quartet_fails_closed_per_leaf(self):
         with tempfile.TemporaryDirectory() as td:
