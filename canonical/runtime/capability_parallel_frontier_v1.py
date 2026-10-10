@@ -231,8 +231,11 @@ def _validate_assurance_professional_mirror(
     status = _s(assurance.get("status"))
     if f"__{verified}_OF_{root_count}_CURRENT_ROOT_SUBJECT_BINDINGS" not in status:
         raise ParallelFrontierError("CURRENT_ASSURANCE_TOP_LEVEL_COUNT_DRIFT")
-    if next_index != 13 and f"__R{next_index}_{next_name}_NEXT" not in status:
-        raise ParallelFrontierError("CURRENT_ASSURANCE_TOP_LEVEL_NEXT_DRIFT")
+    if next_index != 13:
+        next_marker = f"__R{next_index}"
+        marker_pos = status.find(next_marker)
+        if marker_pos < 0 or "_NEXT" not in status[marker_pos:]:
+            raise ParallelFrontierError("CURRENT_ASSURANCE_TOP_LEVEL_NEXT_DRIFT")
 
     return {
         "verified_root_subject_binding_count": verified,
