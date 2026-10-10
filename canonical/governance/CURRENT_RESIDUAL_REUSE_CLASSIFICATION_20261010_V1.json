@@ -159,11 +159,11 @@
         "ACQUIRE_EVIDENCE",
         "ADAPT_EXISTING"
       ],
-      "existing_binding": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V5.json",
-      "exact_remaining_class": "10_INFORMATION_DEPENDENT_ROWS__V3_TERMINAL_COMMON_POLICY_OR_STRICT_DISCRIMINATOR_GATE_INDEPENDENTLY_VERIFIED__REAL_ROW_PROOFS_0_OF_10__FIRST_TRY_SCOPE_COMPLETE_TARGET_FREE_TERMINAL_CERTIFICATES",
+      "existing_binding": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V7.json",
+      "exact_remaining_class": "10_INFORMATION_DEPENDENT_ROWS__GAP_A_POLICY_COVER_ADAPTER_LIVE__PRIMARY_SHARED_RESEARCH_COMPRESSED_TO_O_Q_ACCEPTANCE_LAWS__REAL_ROW_PROOFS_0_OF_10__ROW_CURRENT_AVAILABILITY_OR_ACQUIRABILITY_PREMISES_OPEN",
       "new_primitive_status": "NOT_ESTABLISHED",
       "executable_audit": "canonical/runtime/escape_progress_shared_gap_audit_v3.py",
-      "current_gate_status": "SUCCESSOR_AUDIT_V3_VERIFIED_18_OF_18__TERMINAL_COMMON_POLICY_OR_STRICT_DISCRIMINATOR__REAL_ROW_PROOFS_0_OF_10__GAP_A_TOTALITY_OPEN",
+      "current_gate_status": "V7_PRESEAL__DYNAMIC_CURRENT_BINDING_COMPOSED_WITH_MAIN_V6_GAP_A_POLICY_COVER_ADAPTER__REAL_ROW_PROOFS_0_OF_10__GAP_A_TOTALITY_OPEN",
       "causal_reclassification": {
         "path": "canonical/governance/ESCAPE_PROGRESS_FINANCE_INDEX_CAUSAL_RECLASSIFICATION_20261010_V1.json",
         "git_blob_sha": "ea256418ec1f8048c7566c6ecc74206d9d1ac529",
@@ -173,9 +173,16 @@
       "successor_audit_intent": "canonical/action_intents/ESCAPE_PROGRESS_V2_SUCCESSOR_AUDIT_IMPLEMENTATION_INTENT_20261010_V1.json",
       "shared_route_reduction": "canonical/governance/ESCAPE_PROGRESS_SUCCESSOR_SHARED_ROUTE_REDUCTION_20261010_V1.json",
       "reached_state_v2_reuse": "canonical/governance/ESCAPE_PROGRESS_REACHED_STATE_V2_REUSE_RECONCILIATION_20261010_V1.json",
-      "executable_audit_git_blob_sha": "14adf2c1a431285a542340a740e27e764edb1ce5",
+      "executable_audit_git_blob_sha": "e556880aa216673e0e316e11fc6f4ab25d644ce6",
       "audit_verification": "canonical/verification/ESCAPE_PROGRESS_SHARED_GAP_EXECUTABLE_AUDIT_V3_VERIFY_20261010_V1.json",
-      "audit_verification_git_blob_sha": "4156e6c9a1c27913120568d8e505f0f154907015"
+      "audit_verification_git_blob_sha": "4156e6c9a1c27913120568d8e505f0f154907015",
+      "audit_current_binding_mode": "MUTABLE_CURRENT_CLASSIFIER_PATH_IDENTITY__GAP_A_B_BINDING_CONSENSUS_REQUIRED",
+      "gap_a_policy_cover_adapter": {
+        "activation_path": "canonical/governance/ESCAPE_GAP_A_POLICY_COVER_ADAPTER_ACTIVATION_20261010_V1.json",
+        "activation_git_blob_sha": "7eaa5c0a403cfd9e6d131cecdc7cb9a243843872",
+        "runtime_git_blob_sha": "19b0bdf00eb9b8d76cbf7f1a615e1ce6e89ffbf8",
+        "real_row_proofs": 0
+      }
     },
     {
       "residual_id": "ESCAPE_GAP_B_INTERNAL_ROUTE_STRICT_PROGRESS",
@@ -183,11 +190,11 @@
         "ADAPT_EXISTING",
         "VERIFY_EXISTING"
       ],
-      "existing_binding": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V5.json",
+      "existing_binding": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V7.json",
       "exact_remaining_class": "3_CURRENT_INTERNAL_ROWS__GENERIC_REPAIR_VERIFICATION_RECERTIFICATION_AND_LIVE_REENTRY_SOLVED__REMAINING_IS_CURRENT_EXECUTABLE_VERIFIED_ACTION_PLUS_WELL_FOUNDED_ACCEPTANCE_RELEVANT_MEASURE_AND_ALL_OUTCOME_STRICT_PROGRESS",
       "new_primitive_status": "NOT_ESTABLISHED",
       "executable_audit": "canonical/runtime/escape_progress_shared_gap_audit_v3.py",
-      "current_gate_status": "SUCCESSOR_AUDIT_V3_VERIFIED_18_OF_18__GAP_B_PROGRESS_GATE_PRESERVED__REAL_ROW_PROOFS_0_OF_3__GAP_B_TOTALITY_OPEN",
+      "current_gate_status": "V7_PRESEAL__DYNAMIC_CURRENT_BINDING_COMPOSED__GAP_B_PROGRESS_GATE_PRESERVED__REAL_ROW_PROOFS_0_OF_3__GAP_B_TOTALITY_OPEN",
       "causal_reclassification": {
         "path": "canonical/governance/ESCAPE_PROGRESS_FINANCE_INDEX_CAUSAL_RECLASSIFICATION_20261010_V1.json",
         "git_blob_sha": "ea256418ec1f8048c7566c6ecc74206d9d1ac529",
@@ -197,9 +204,10 @@
       "successor_audit_intent": "canonical/action_intents/ESCAPE_PROGRESS_V2_SUCCESSOR_AUDIT_IMPLEMENTATION_INTENT_20261010_V1.json",
       "shared_route_reduction": "canonical/governance/ESCAPE_PROGRESS_SUCCESSOR_SHARED_ROUTE_REDUCTION_20261010_V1.json",
       "reached_state_v2_reuse": "canonical/governance/ESCAPE_PROGRESS_REACHED_STATE_V2_REUSE_RECONCILIATION_20261010_V1.json",
-      "executable_audit_git_blob_sha": "14adf2c1a431285a542340a740e27e764edb1ce5",
+      "executable_audit_git_blob_sha": "e556880aa216673e0e316e11fc6f4ab25d644ce6",
       "audit_verification": "canonical/verification/ESCAPE_PROGRESS_SHARED_GAP_EXECUTABLE_AUDIT_V3_VERIFY_20261010_V1.json",
-      "audit_verification_git_blob_sha": "4156e6c9a1c27913120568d8e505f0f154907015"
+      "audit_verification_git_blob_sha": "4156e6c9a1c27913120568d8e505f0f154907015",
+      "audit_current_binding_mode": "MUTABLE_CURRENT_CLASSIFIER_PATH_IDENTITY__GAP_A_B_BINDING_CONSENSUS_REQUIRED"
     },
     {
       "residual_id": "ASSURANCE_CLOSURE_COMPILER_NOT_LIVE_DEFAULT",
@@ -322,7 +330,7 @@
   ],
   "global_rule": "NO_RESIDUAL_ABOVE_MAY_BE_SCHEDULED_AS_NEW_PRIMITIVE_INVENTION_SOLELY_BECAUSE_ITS_EXACT_CASE_OR_PROOF_IS_OPEN__APPLY_REUSE_FIRST_POLICY_AND_REQUIRE_VERIFIED_REUSE_EXHAUSTION",
   "next_shared_execution_cut": [
-    "ATTACK_10_GAP_A_ROWS_THROUGH_SHARED_TARGET_FREE_SCOPE_COMPLETE_CERTIFICATE_ROUTE_BEFORE_PRIVATE_ACQUISITION",
+    "ATTACK_SHARED_O_AND_Q_ACCEPTANCE_LAWS_FIRST_PER_CURRENT_ESCAPE_OQ_FRONTIER_REDUCTION__REUSE_VERIFIED_GAP_A_POLICY_COVER_ADAPTER_AS_REALIZATION_BRIDGE",
     "BIND_CURRENT_EXECUTABLE_ACTION_AND_WELL_FOUNDED_ACCEPTANCE_RELEVANT_PROGRESS_FOR_THE_3_GAP_B_ROWS",
     "BIND_AND_INDEPENDENTLY_VERIFY_12_PROFESSIONAL_ROOTS_TO_THE_EXACT_DECLARED_P1_V3_SYSTEM_SUBJECT",
     "PROJECT_ALREADY_VERIFIED_R1_TARGET_SEMANTICS_ONLY_AFTER_SCOPED_REGISTRY_AND_LEAF_REGRESSION_PASS",
@@ -346,7 +354,7 @@
     "terminal_credit_delta": 0
   },
   "reconciliation": {
-    "status": "CURRENTNESS_ARCHITECTURE_REPAIRED__MUTABLE_POINTERS_PATH_BOUND__SUCCESSOR_ESCAPE_AUDIT_V2_PROJECTED__ZERO_NEW_CREDIT",
+    "status": "CURRENTNESS_ARCHITECTURE_REPAIRED__MAIN_V6_GAP_A_ADAPTER_PRESERVED__SUCCESSOR_ESCAPE_V7_DYNAMIC_CURRENT_BINDING_PROJECTED__ZERO_NEW_CREDIT",
     "frozen_main_commit": "5b668966898d3b12a628921d5151167a4d37daab",
     "corrected": [
       "ASSURANCE_PROFESSIONAL_TB_AND_LEAF_SOURCE_PINS",
@@ -358,7 +366,9 @@
     "mutable_current_source_binding_repaired": true,
     "successor_escape_audit_v2_projected": true,
     "successor_escape_audit_v3_projected": true,
-    "successor_escape_binding_v5": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V5.json"
+    "successor_escape_binding_v5": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V5.json",
+    "successor_escape_binding_v7": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V7.json",
+    "escape_v3_dynamic_current_binding_composed_with_gap_a_adapter": true
   },
   "current_source_binding_law": {
     "mutable_current_authorities": "CANONICAL_PATH_IDENTITY_AUTHORITATIVE__OBSERVED_BLOB_IS_DIAGNOSTIC_ONLY__RECHECK_CURRENT_BYTES_BEFORE_SCHEDULING_OR_TRUTH_CLAIM",
