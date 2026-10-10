@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_NEXT25_FALSIFICATION_V1",
+  "status": "FRESH_FALSIFICATION__TWO_LATENT_QUARTIC_ROOT_PATH_HOLES__REPAIRED_IN_V21",
+  "recorded_at": "2026-10-10",
+  "fresh_corpus": {
+    "id": "QUAL_SUCCESSOR_NEXT25_20261010_V1",
+    "seed": 5000000,
+    "per_operation_budget": 660,
+    "cases": 7590,
+    "corpus_sha256": "61c30aa8823b3a33e4762905ba3708d710e5d8118521c083d57269cd76b65b87",
+    "status": "SPENT"
+  },
+  "results": {
+    "accepted_V20": "7588/7590",
+    "attempted_V21_pre_repair": "7588/7590",
+    "same_two_failures_on_both": true,
+    "failures": [
+      {
+        "global_case_index_1_based": 2111,
+        "roots_block_index_1_based": 131,
+        "operation": "roots",
+        "parameters": [
+          1,
+          4,
+          6,
+          -4,
+          1
+        ],
+        "result": "MISMATCH",
+        "causal_attribution": "Stubbed mpmath.libmp.libmpc.mpc_square prevented the complex numeric evalf used by canonical root ordering; the root set survived but structural ordering diverged."
+      },
+      {
+        "global_case_index_1_based": 2635,
+        "roots_block_index_1_based": 655,
+        "operation": "roots",
+        "parameters": [
+          -2,
+          -4,
+          -3,
+          -1,
+          -2
+        ],
+        "result": "NotImplementedError",
+        "causal_attribution": "A valid quartic decomposition reached previously stubbed Number.__divmod__, then num_digits, then integer_log."
+      }
+    ]
+  },
+  "minimal_causal_repair": {
+    "restored": [
+      "mpmath.libmp.libmpc.mpc_square",
+      "sympy.core.numbers.Number.__divmod__",
+      "sympy.core.intfunc.num_digits",
+      "sympy.core.intfunc.integer_log"
+    ],
+    "broad_subsystem_restored": false,
+    "repaired_clean_V21_spent_NEXT25": "7590/7590"
+  },
+  "interpretation": "NEXT25 falsified the accepted V20 frontier itself. The attempted noncore V21 cut was not causal for either failure. V20 remains historical measured evidence but is superseded as a sound current bounded frontier.",
+  "truth_boundary": [
+    "MEASURED: exact V20 and pre-repair V21 each fail the same two NEXT25 root cases.",
+    "MEASURED: minimal donor-derived restoration of four exact functions closes both spent failures.",
+    "NOT CLAIMED: the spent repaired NEXT25 result is fresh qualification credit for V21.",
+    "PROMOTION CREDIT: 0."
+  ],
+  "promotion_credit": 0
+}
