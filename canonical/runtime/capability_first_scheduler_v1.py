@@ -129,15 +129,9 @@ def _eligible(
     if work_type not in WORK_TYPES:
         raise CapabilityFirstSchedulerError("WORK_TYPE_INVALID")
 
-    if checkpoint_open_obligation_count > 0:
-        lane = _s(raw.get("scheduling_lane"))
-        if lane != LOAD_BEARING_PRIMARY_LANE:
-            return False, "DEMOTED_NON_LOAD_BEARING_WHILE_OPEN_OBLIGATIONS"
-        if not _has_load_bearing_path(raw):
-            return False, "DEMOTED_NO_CAUSAL_PATH_TO_OPEN_OBLIGATION"
-        if _load_bearing_score(raw) <= 0:
-            return False, "DEMOTED_ZERO_EXPECTED_LOAD_BEARING_YIELD"
-
+    # Opus/terminal bookkeeping is instrumentation. Open checkpoint obligations
+    # may add an audit signal, but they never turn the checkpoint into the
+    # optimization target or demote unrelated reusable capability work.
     if work_type != "BENCHMARK_INSTRUMENTATION":
         return True, "ELIGIBLE"
     role = _s(raw.get("benchmark_role"))
@@ -189,15 +183,17 @@ def rank_work(
         if work_id in seen:
             raise CapabilityFirstSchedulerError("WORK_ID_DUPLICATE:" + work_id)
         seen.add(work_id)
+
         eligible, eligibility = _eligible(raw, checkpoint_open_obligation_count)
-        if eligible:
-            score = (
-                _load_bearing_score(raw)
-                if checkpoint_open_obligation_count > 0
-                else _score(raw)
-            )
-        else:
-            score = Fraction(0)
+        capability_score = _score(raw) if eligible else Fraction(0)
+        checkpoint_score = Fraction(0)
+        if (
+            eligible
+            and checkpoint_open_obligation_count > 0
+            and _has_load_bearing_path(raw)
+        ):
+            checkpoint_score = _load_bearing_score(raw)
+
         rows.append(
             {
                 "work_id": work_id,
@@ -210,35 +206,44 @@ def rank_work(
                 ),
                 "scope_complete_discharge": raw.get("scope_complete_discharge") is True,
                 "eligibility": eligibility,
-                "priority_score_fraction": score,
+                "capability_priority_score_fraction": capability_score,
+                "checkpoint_audit_score_fraction": checkpoint_score,
             }
         )
+
+    # The real mission is lexicographically primary. Checkpoint/audit leverage is
+    # only a secondary tie-breaker among work with equal capability/resource
+    # leverage. This prevents an open milestone ledger from hijacking development.
     rows.sort(
         key=lambda x: (
             0 if x["eligibility"] == "ELIGIBLE" else 1,
-            -x["priority_score_fraction"],
+            -x["capability_priority_score_fraction"],
+            -x["checkpoint_audit_score_fraction"],
             x["work_id"],
         )
     )
-    gate_active = checkpoint_open_obligation_count > 0
+    audit_active = checkpoint_open_obligation_count > 0
     return {
         "schema": SCHEMA,
         "status": (
-            "LOAD_BEARING_PRIMARY_RANKING"
-            if gate_active
+            "CAPABILITY_FIRST_RANKING_WITH_CHECKPOINT_AUDIT"
+            if audit_active
             else "CAPABILITY_FIRST_RANKING"
         ),
-        "objective": (
-            "MAXIMIZE_EXPECTED_INDEPENDENT_LOAD_BEARING_OBLIGATION_DISCHARGE_OR_UNLOCK_PER_WALL_CLOCK"
-            if gate_active
-            else "MAXIMIZE_REUSABLE_VERIFIED_CAPABILITY_GENERALIZATION_RELIABILITY_AND_EFFICIENCY_PER_RESOURCE"
-        ),
+        "objective": "MAXIMIZE_REUSABLE_VERIFIED_CAPABILITY_GENERALIZATION_RELIABILITY_AND_EFFICIENCY_PER_RESOURCE",
         "mission_objective": MISSION_OBJECTIVE,
         "milestone": MILESTONE,
         "checkpoint_open_obligation_count": checkpoint_open_obligation_count,
-        "load_bearing_primary_gate_active": gate_active,
+        "load_bearing_primary_gate_active": False,
+        "checkpoint_audit_active": audit_active,
         "primary_admission_rule": (
-            "WHILE_OPEN_OBLIGATIONS_EXIST__PRIMARY_WORK_REQUIRES_EXPLICIT_CAUSAL_PATH_TO_OPEN_OBLIGATION_AND_POSITIVE_EXPECTED_LOAD_BEARING_YIELD"
+            "REUSABLE_CAPABILITY_RESOURCE_LEVERAGE_IS_PRIMARY__"
+            "OPUS_CHECKPOINT_LEVERAGE_IS_SECONDARY_AUDIT_SIGNAL__"
+            "BENCHMARK_BOOKKEEPING_REMAINS_DEMOTED"
+        ),
+        "checkpoint_policy": (
+            "OPEN_CHECKPOINT_OBLIGATIONS_DO_NOT_DEMOTE_GENERAL_CAPABILITY_WORK__"
+            "CHECKPOINT_SCORE_BREAKS_TIES_ONLY"
         ),
         "option_preservation_policy": OPTION_PRESERVATION_POLICY,
         "optimization_rule": "OPTIMIZE_IMPLEMENTATIONS_NOT_POSSIBILITIES",
@@ -256,7 +261,8 @@ def rank_work(
                 ],
                 "scope_complete_discharge": row["scope_complete_discharge"],
                 "eligibility": row["eligibility"],
-                "priority_score": str(row["priority_score_fraction"]),
+                "priority_score": str(row["capability_priority_score_fraction"]),
+                "checkpoint_audit_score": str(row["checkpoint_audit_score_fraction"]),
             }
             for i, row in enumerate(rows)
         ],
