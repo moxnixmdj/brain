@@ -216,7 +216,9 @@ def _validate_r9(entry: dict[str, Any], root: Path) -> dict[str, Any]:
             semantic = r9c.certify(source_scope, source_verify, binding)
             if semantic.get("pass") is not True:
                 errors.append("SEMANTIC_REPLAY_FAILED")
-            if source is not None and source.get("claim_scope") != semantic.get("claim_scope"):
+            if source is not None and not _claim_scope_equivalent(
+                source.get("claim_scope"), semantic.get("claim_scope")
+            ):
                 errors.append("CLAIM_SCOPE_MISMATCH")
 
     return _result(entry, errors, semantic)
