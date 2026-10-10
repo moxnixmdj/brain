@@ -4,21 +4,21 @@
   "sources": [
     {
       "schema": "PROJECT_BRAIN_HTTPS_SOURCE_FRAGMENT_PROJECTION_PACK_V2",
-      "source_id": "EURLEX_BRRD_2026_MREL_ARTICLE_45C",
-      "url": "https://eur-lex.europa.eu/eli/dir/2014/59/2026-05-11/eng",
+      "source_id": "EBA_MREL_CASE_BY_CASE_2015",
+      "url": "https://www.eba.europa.eu/publications-and-media/press-releases/eba-publishes-final-technical-standards-ensure-effective-0",
       "retrieval_user_agent": "ProjectBrainSourceProjectionVerifier/2.0",
       "fragments": [
         {
-          "fragment_id": "MREL_ARTICLE_45C_TITLE",
-          "section_anchor": "Article 45c",
-          "text": "Determination of the minimum requirement for own funds and eligible liabilities",
-          "max_chars_after_anchor": 3000
+          "fragment_id": "MREL_NOT_FIXED_FIGURE",
+          "section_anchor": "MREL",
+          "text": "the MREL is not a fixed figure.",
+          "max_chars_after_anchor": 12000
         },
         {
-          "fragment_id": "MREL_DETERMINED_BY_RESOLUTION_AUTHORITY",
-          "section_anchor": "Article 45c",
-          "text": "The requirement referred to in Article 45(1) shall be determined by the resolution authority, after consulting the competent authority, on the basis of the following criteria:",
-          "max_chars_after_anchor": 5000
+          "fragment_id": "MREL_CASE_BY_CASE_RESOLUTION_AUTHORITY",
+          "section_anchor": "MREL",
+          "text": "Instead, it must be set by resolution authorities on a case-by-case basis for each institution to ensure it is sufficient to implement their resolution plans.",
+          "max_chars_after_anchor": 12000
         }
       ]
     },
