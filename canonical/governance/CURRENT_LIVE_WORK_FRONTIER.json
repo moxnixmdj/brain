@@ -1,23 +1,23 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_LIVE_WORK_FRONTIER_V1",
   "date": "2026-10-10",
-  "status": "CURRENT_POST_COMPOSITION_FRONTIER__PROFESSIONAL_V2_CLAIMS_FACTORIZED_24_OF_24__ZERO_DOMAIN_EQUIVALENCE__TB_RANK20_PARKED__GAP_B_TWO_ACTIVE_ROWS__READ_ONLY_EVIDENCE_ONLY__FULL_EXECUTION_FAIL_CLOSED__ZERO_CREDIT",
-  "frontier_id": "LIVE_WORK_FRONTIER_20261010_PROF12_WHOLE_LEAF_CLAIM_V2_V16",
+  "status": "CURRENT_POST_COMPOSITION_FRONTIER__PROFESSIONAL_24_OF_24_SCOPE_COMPLETE__PROPERTY_TRUTH_0_OF_24__R10_EXECUTION_PROPERTY_PROBE_ACTIVE__GAP_A_AND_TWO_GAP_B_ROWS_READY__BYTES_V27__READ_ONLY_EVIDENCE_PRIMARY__ZERO_CREDIT",
+  "frontier_id": "LIVE_WORK_FRONTIER_20261010_PROF24_SCOPE_COMPLETE_PROPERTY_TRUTH_V14",
   "scope": {
-    "base_main_commit": "2b83205785ecb3bd69ac95943636be1dd7ba5c6a",
+    "base_main_commit": "100f0a26379b3a438cf88be0647b17654372aafb",
     "completeness_semantics": "COMPLETE_FOR_EXPLICIT_CURRENT_ACTIONABLE_OR_SCHEDULABLE_WORK_EXPOSED_BY_THE_BOUND_CURRENT_AUTHORITY_SOURCES__NOT_COMPLETE_FOR_UNKNOWN_FUTURE_WORK_OR_UNDISCOVERED_CAPABILITIES",
     "source_set": [
       {
         "path": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
-        "git_blob_sha": "d4a5283288e3477c117f1d75533d0f963abf076d"
+        "git_blob_sha": "875a6ce3d5f5928843cd23a76bb6c3379aa00116"
       },
       {
         "path": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
-        "git_blob_sha": "360ff610c5d2386fe47e4f36eb6f3246a4d826a4"
+        "git_blob_sha": "95aefaa6c8b611b5756fc8ceaf91493e0a0d9831"
       },
       {
         "path": "canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json",
-        "git_blob_sha": "ea8da1aaeff847f9bb8604242f079e6bdfabbef9"
+        "git_blob_sha": "f1d3aabf095525a465bb532d94e37e4dfdb16dbe"
       },
       {
         "path": "canonical/governance/CURRENT_TB_SCIENCE_EXECUTION.json",
@@ -40,13 +40,13 @@
   "currentness_findings": [
     {
       "id": "PROFESSIONAL_CURRENT",
-      "truth": "R1_R12_V7_BINDINGS_VERIFIED__12_OF_12__SAME_SUBJECT_COMPOSITION_ADMISSIBLE__WHOLE_LEAF_AND_DOMAIN_EVIDENCE_NEXT",
+      "truth": "12_OF_12_COMPOSED__24_OF_24_WHOLE_LEAF_DOMAIN_EQUIVALENCE_AND_SCOPE_COMPLETE__PROPERTY_TRUTH_0_OF_24__R10_EXECUTION_PROPERTY_PROBE_ACTIVE",
       "source": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
       "dynamic_current_pointer_follow": true
     },
     {
       "id": "ASSURANCE_CURRENT_PATH",
-      "truth": "UVCK_V2_COHERENT_WITH_PROFESSIONAL_12_OF_12_COMPOSITION__PROMOTION_BLOCKED_ONLY_BY_DOMAIN_SEMANTIC_EXECUTION_EVIDENCE_AND_FULL_CURRENT_MAIN_REGRESSION",
+      "truth": "UVCK_V2_BLOCKED_BY_PROFESSIONAL_PROPERTY_TRUTH_DOMAIN_EXECUTION_EVIDENCE_AND_FULL_CURRENT_MAIN_REGRESSION__NOT_BY_SCOPE_CONSTRUCTION",
       "source": "canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json",
       "dynamic_current_pointer_follow": true
     },
@@ -67,11 +67,11 @@
   ],
   "candidates": [
     {
-      "work_id": "PROFESSIONAL_QUALITY_V7_WHOLE_LEAF_DOMAIN_EVIDENCE",
+      "work_id": "PROFESSIONAL_QUALITY_V7_PROPERTY_TRUTH_DOMAIN_EXECUTION",
       "work_type": "RELIABILITY_IMPROVEMENT",
       "source": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
-      "causal_role": "EXACT_CLAIM_MATERIAL_FACTORIZED_FOR_ALL_24_LEAVES__NOW_SEARCH_REUSE_AND_FALSIFY_CANDIDATE_WHOLE_DOMAIN_DEFINITIONS__ONLY_AFTER_INDEPENDENT_DOMAIN_EQUIVALENCE_BUILD_CLAIM_BOUND_SCOPE_COVER__THEN_PROPERTY_TRUTH",
-      "readiness": "V2_READINESS_AUDIT_VERIFIED__24_OF_24_EXACT_CLAIM_MATERIAL_FACTORIZED__0_OF_24_WHOLE_DOMAIN_EQUIVALENCE_PROVED__PROPERTY_TRUTH_READY_0",
+      "causal_role": "AFTER_24_OF_24_WHOLE_LEAF_DOMAIN_AND_SCOPE_CLOSURE__RUN_ROOT_RELEVANT_POSITIVE_NEAR_MISS_AND_ADVERSARIAL_PROPERTY_TRUTH_CHALLENGES_ON_EXACT_BYTES__START_WITH_ACTIVE_R10_EXECUTION_PROBE__GENERALIZE_SHARED_PATTERNS",
+      "readiness": "24_OF_24_SCOPE_COMPLETE__PROPERTY_TRUTH_0_OF_24__R10_EXECUTION_GUARD_35_OF_35_PASS__STRUCTURAL_PROOF_SLOT_VERIFIER_BOUND__DETECTION_COMPLETENESS_AND_OBSERVED_OUTCOME_BINDING_OPEN",
       "claims_new_primitive": false,
       "score_state": "UNBOUND",
       "scheduler_state": "READY_EVIDENCE",
@@ -90,57 +90,24 @@
       "vector_evidence": {},
       "read_only_evidence": {
         "source": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
-        "source_git_blob_sha": "360ff610c5d2386fe47e4f36eb6f3246a4d826a4",
-        "verified_root_subject_binding_count": 12,
-        "required_root_count": 12,
-        "composition_admissible": true,
-        "bounded_partial_leaf_count": 24,
-        "verified_global_leaf_count": 0,
-        "open_global_leaf_count": 24,
-        "domain_semantic_closure": false,
-        "domain_execution_closure": false,
-        "vector_bounds_complete": false,
-        "shared_residual_class": "WHOLE_LEAF_INPUT_DOMAIN_TOTALITY_OR_INDEPENDENT_CERTIFIED_COMPLETE_UNION",
-        "whole_leaf_count": 24,
-        "whole_leaf_scope_certificates_admitted": 0,
-        "whole_leaf_property_truth_closed": 0,
-        "shared_certificate_gate_activation": "canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_CERTIFICATE_GATE_ACTIVATION_20261010_V2.json",
-        "shared_certificate_gate_activation_git_blob_sha": "34fdaf7f4a91d0e28d446a9d554c3aa0fbec8222",
-        "shared_certificate_gate_runtime": "canonical/runtime/professional_quality_whole_leaf_claim_scope_gate_v2.py",
-        "shared_certificate_gate_runtime_git_blob_sha": "d76b922e8d5c86f10568a3582759f8c23e69b2e0",
-        "shared_certificate_gate_verification": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_CLAIM_SCOPE_GATE_V2_VERIFY_20261010_V1.json",
-        "shared_certificate_gate_verification_git_blob_sha": "cb91d94dd89ec7c67aae54db3cd5319612cd43d5",
-        "property_truth_separate": true,
-        "readiness_audit_verification": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_CERTIFICATE_READINESS_AUDIT_V2_VERIFY_20261010_V1.json",
-        "readiness_audit_verification_git_blob_sha": "2d28d932d08753fdf14c56aa24011e625518a4ef",
-        "admissible_scope_certificate_count": 0,
-        "partition_or_totality_required_count": 24,
-        "candidate_rejected_or_ambiguous_count": 0,
-        "property_truth_work_blocked_until_scope_admission": true,
-        "admissible_v2_chain_count": 0,
-        "claim_scope_construction_required_count": 24,
-        "property_truth_ready_count": 0,
-        "domain_equivalence_required": true,
-        "claim_specific_scope_cover_required": true,
-        "claim_scope_factorization_worklist": {
-          "path": "canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_V2_CLAIM_SCOPE_FACTORIZATION_WORKLIST_20261010_V1.json",
-          "git_blob_sha": "17c806459261213f92da2a373bad12188104f9f0"
-        },
-        "factorization_structural_verification": {
-          "path": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_V2_FACTORIZATION_STRUCTURAL_VERIFY_20261010_V1.json",
-          "git_blob_sha": "74de50212862e1d6c2a2b0a40171eed57f806579",
-          "independent": false,
-          "pass": true
-        },
-        "exact_claim_material_factorized_count": 24,
-        "domain_equivalence_proved_count": 0
+        "source_git_blob_sha": "95aefaa6c8b611b5756fc8ceaf91493e0a0d9831",
+        "scope_batch_verification_path": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_SCOPE_BATCH_VERIFY_20261010_V1.json",
+        "scope_batch_verification_git_blob_sha": "4c2d40a262f18f34bb35f94b59660d60972d45ef",
+        "whole_leaf_domain_equivalence_count": 24,
+        "whole_leaf_scope_complete_count": 24,
+        "property_truth_closed_count": 0,
+        "r10_execution_guard_verification_path": "canonical/verification/PROFESSIONAL_QUALITY_R10_EXECUTION_GUARD_VERIFY_20261010_V1.json",
+        "r10_execution_guard_verification_git_blob_sha": "7a29d67c77c8961b238e7f9b3bf74d278984452e",
+        "r10_guard_tests_passed": 35,
+        "r10_detection_completeness_proved": false,
+        "vector_bounds_complete": false
       }
     },
     {
       "work_id": "ASSURANCE_UVCK_V2_PROMOTION_GATES",
       "work_type": "RELIABILITY_IMPROVEMENT",
       "source": "canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json",
-      "causal_role": "PROMOTE_EXISTING_ASSURANCE_COMPILER_ONLY_AFTER_DOMAIN_SEMANTIC_AND_EXECUTION_EVIDENCE_BINDING_PLUS_FULL_CURRENT_MAIN_REGRESSION",
+      "causal_role": "PROMOTE_ONLY_AFTER_PROPERTY_TRUTH_AND_DOMAIN_SEMANTIC_EXECUTION_EVIDENCE_BINDING_PLUS_FULL_CURRENT_MAIN_REGRESSION",
       "readiness": "PARTIALLY_BLOCKED_BY_PROFESSIONAL_DOMAIN_EVIDENCE_AND_FULL_REGRESSION",
       "claims_new_primitive": false,
       "score_state": "UNBOUND",
@@ -174,10 +141,11 @@
         "professional_current_git_blob_sha": "360ff610c5d2386fe47e4f36eb6f3246a4d826a4",
         "professional_next": "WHOLE_LEAF_DOMAIN_EVIDENCE_AND_FULL_CURRENT_MAIN_REGRESSION",
         "dynamic_current_pointer_follow": true
-      }
+      },
+      "ready": "BLOCKED_BY_PROFESSIONAL_PROPERTY_TRUTH_DOMAIN_EXECUTION_EVIDENCE_AND_FULL_CURRENT_MAIN_REGRESSION"
     },
     {
-      "work_id": "BYTES_EXACT_SYMBOLIC_V24_NEXT_PHYSICAL_CUT",
+      "work_id": "BYTES_EXACT_SYMBOLIC_V27_NEXT_PHYSICAL_CUT",
       "work_type": "EFFICIENCY_IMPROVEMENT",
       "source": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
       "causal_role": "CONTINUE_RESOURCE_REDUCTION_FROM_2007446_RAW_PYTHON_BYTES_USING_SPENT_NEXT29_BEFORE_TOUCHING_FROZEN_NEXT30",
@@ -207,7 +175,8 @@
         "next_action": "SPENT_NEXT29_PHYSICAL_CUT_BEFORE_FROZEN_NEXT30",
         "next_gain_lcb_bytes": 0,
         "vector_bounds_complete": false
-      }
+      },
+      "ready": "V27_CURRENT_AT_1937_KB_FRONTIER__CONTINUE_ONLY_NONCONFLICTING_RESOURCE_PARETO_CUT"
     },
     {
       "work_id": "R2_FINANCE_SEMANTIC_ADEQUACY_TAIL",
@@ -428,7 +397,9 @@
     "PROFESSIONAL_QUALITY_V7_R11_ADAPTIVE_INTEGRITY_SECURITY_BINDING__CLOSED",
     "PROFESSIONAL_QUALITY_V7_R12_META_COMPOSITION_BINDING__CLOSED",
     "PROFESSIONAL_QUALITY_V7_12_OF_12_SAME_SUBJECT_COMPOSITION__CLOSED_AS_COMPOSITION_ADMISSIBILITY",
-    "TB_SCIENCE_RANK20_V3__RETIRED_NONCONSUMING__GENERAL_REPAIR_PROMOTED__PARKED"
+    "TB_SCIENCE_RANK20_V3__RETIRED_NONCONSUMING__GENERAL_REPAIR_PROMOTED__PARKED",
+    "PROFESSIONAL_WHOLE_LEAF_DOMAIN_EQUIVALENCE_CONSTRUCTION__CLOSED_24_OF_24",
+    "PROFESSIONAL_WHOLE_LEAF_SCOPE_COVER_CONSTRUCTION__CLOSED_24_OF_24"
   ],
   "score_contract": {
     "path": "canonical/governance/LIVE_WORK_SCORE_CALIBRATION_CONTRACT_20261010_V1.json",
@@ -437,8 +408,8 @@
   },
   "live_selection": {
     "authorized": false,
-    "reason": "NO_COMPLETE_COMMON_CALIBRATED_VECTOR__TB_RANK20_RETIRED_AND_PARKED__PROFESSIONAL_V2_DOMAIN_EQUIVALENCE_AND_SCOPE_COVER_READINESS_BOUND__READ_ONLY_EVIDENCE_ONLY",
-    "exact_next": "SEARCH_REUSE_AND_FALSIFY_WHOLE_DOMAIN_DEFINITIONS_FOR_FACTORIZED_PROFESSIONAL_LEAVES__WORK_TWO_ACTIVE_GAP_B_ROWS_AND_GAP_A_IN_PARALLEL__KEEP_TB_PARKED__RERUN_PARETO_AFTER_NEW_EVIDENCE"
+    "reason": "NO_COMPLETE_COMMON_CALIBRATED_VECTOR__PROFESSIONAL_SCOPE_CONSTRUCTION_IS_CLOSED__PROPERTY_TRUTH_R10_GAP_A_GAP_B_AND_BYTES_EVIDENCE_LANES_REMAIN_PARTIALLY_CALIBRATED",
+    "exact_next": "RUN_R10_EXACT_BYTE_PROPERTY_TRUTH_FALSIFICATION_PROBE__CONTINUE_GAP_A_GAP_B_AND_BYTES_NONCONFLICTING_EVIDENCE__IN_PARALLEL_BIND_REMOTE_FULL_REGRESSION_CARRIER__RERUN_PARETO_AFTER_NEW_EVIDENCE"
   },
   "hard_nonclaims": [
     "NO_GLOBAL_UNKNOWN_WORK_COMPLETENESS_CLAIM",
