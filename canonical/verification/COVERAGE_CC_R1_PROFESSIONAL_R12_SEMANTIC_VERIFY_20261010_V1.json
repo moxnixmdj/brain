@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_COVERAGE_CC_R1_PROFESSIONAL_R12_SEMANTIC_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_SPRITE__PYCOMPILE__5_OF_5_FALSIFICATION_TESTS__CC_R1_R12_SEMANTIC_REALITY_CONTAINMENT_ONLY__ZERO_PROPERTY_OR_TERMINAL_CREDIT",
+  "repository": "moxnixmdj/brain",
+  "subject": {
+    "root_id": "CC_R1_REALITY_CONTAINMENT_V1",
+    "leaf_id": "PQ::R12_META_COMPOSITION_CLOSURE::SEMANTIC",
+    "claim_id": "05b74983836dd1f6a13a0db72443246fb74f99548f0d982a769a6a7e572e9e85"
+  },
+  "exact_blobs": {
+    "certificate": "ef80ca6edf867ee20e4363cdf01e965f1c12d3b1",
+    "verifier_runtime": "7090b3360056b38f3b8cf96f6fbe14711c59870c",
+    "verifier_tests": "3051d8f59d72fd1e9f9ad316586c036e48b16284",
+    "frozen_claim": "5e7c198da31b901bb4f53c4fc15cee7d6298c114",
+    "whole_domain_equivalence": "b6b826d1658d8a2c88ea80260ee667e86ae99394",
+    "scope_batch": "4c2d40a262f18f34bb35f94b59660d60972d45ef",
+    "identity_carrier": "35a3ccf9ad454aa0318a4ed10edc065830c3874d"
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/r12-cc-r1-v1",
+    "py_compile": "PASS",
+    "tests_run": 5,
+    "tests_passed": 5,
+    "tests_failed": 0,
+    "runtime_status": "PASS__CC_R1_R12_SEMANTIC_FORMAL_DEFINITIONAL_REALITY_CONTAINMENT",
+    "transcript_sha256": "6a3ecdeeaef3ab069bdf49df6fce0cc8d8c91d9542f360e7f5311f36d157ab35",
+    "transcript_bytes": 1877
+  },
+  "proves": [
+    "EXACT_R12_SEMANTIC_CLAIM_SCOPE_IS_THE_WHOLE_ADMISSIBLE_LEAF_DOMAIN_WITHOUT_FILTERS_OR_EXCLUSIONS",
+    "THE_BOUND_SEMANTIC_CARRIER_IS_THE_TOTAL_INJECTIVE_IDENTITY_ON_THE_EXACT_COMPLETE_FROZEN_CLAIM_WORLD_STATE",
+    "THEREFORE_EVERY_REAL_IN_SCOPE_R12_SEMANTIC_WORLD_STATE_IS_CONTAINED_IN_B_PLUS_C_EQUALS_W_C"
+  ],
+  "hard_nonclaims": [
+    "NO_R12_SEMANTIC_PROPERTY_TRUTH",
+    "NO_CC_R3_TERMINAL_CLOSURE",
+    "NO_R4_PROOF_AUTHORITY",
+    "NO_R12_ROOT_CLOSURE",
+    "NO_GLOBAL_PROFESSIONAL_QUALITY_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "cc_r1_reality_containment_proved": true,
+  "b_real_subseteq_b_plus": true,
+  "leaf_property_truth_authority": false,
+  "semantic_truth_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "next": "PROVE_CC_R3_R12_SEMANTIC_TERMINAL_CLOSURE__THEN_BIND_R4_SAME_CLAIM_AUTHORITY"
+}
