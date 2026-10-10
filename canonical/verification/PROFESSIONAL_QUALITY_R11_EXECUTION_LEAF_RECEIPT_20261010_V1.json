@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_LEAF_VERIFICATION_RECEIPT_V1",
+  "date": "2026-10-10",
+  "leaf_id": "PQ::R11_ADAPTIVE_INTEGRITY_SECURITY::EXECUTION",
+  "root_id": "R11_ADAPTIVE_INTEGRITY_SECURITY",
+  "leaf_kind": "EXECUTION",
+  "verdict": "PASS",
+  "closure_scope": "EXACT_LEAF",
+  "acceptance_sha256": "fae7b1ccf4f94a91a1fb4caa4a634e6883538a28382991d97c69278e574b67ce",
+  "root_contract_sha256": "7ca2d962cf2541ad5c27548c878d243c46bffccaa45b51490978f21aa2322b71",
+  "manifest_git_blob_sha": "a7cad32c9fd969ff2c3857bb924c7bd746237ec2",
+  "leaf_execution_satisfied": true,
+  "leaf_semantic_satisfied": false,
+  "property_truth_basis": "TWO_REMOTE_ENVIRONMENT_REPLAY__44_CASE_R11_EXECUTION_ACCEPTANCE_ON_EXACT_FIREWALL_AND_FAIL_CLOSED_SECURITY_GUARD",
+  "verification_basis": [
+    {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R11_EXECUTION_PROPERTY_TRUTH_INDEPENDENT_VERIFY_20261010_V1.json",
+      "git_blob_sha": "934a13fb13c70f5cf6e38da2e64bb9fe0eeecbf7"
+    },
+    {
+      "path": "canonical/runtime/professional_quality_r11_execution_property_truth_verify_v1.py",
+      "git_blob_sha": "12e58ac593e6c6c5ddabbda99d4d35e6124caa85"
+    },
+    {
+      "path": "canonical/runtime/professional_quality_r11_execution_guard_v1.py",
+      "git_blob_sha": "055402eea98861a57287dde25e2a28cdc2b692b1"
+    },
+    {
+      "path": "canonical/tests/test_professional_quality_r11_execution_property_truth_verify_v1.py",
+      "git_blob_sha": "aadf3112f0c5132a2f89e4f128b00097ff3efa38"
+    },
+    {
+      "path": "canonical/tests/test_professional_quality_r11_execution_guard_v1.py",
+      "git_blob_sha": "127ea6557a4b52395b6273ac3ffc9f91c0fafdca"
+    },
+    {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R11_EVALUATION_FIREWALL_SCOPED_VERIFY_20261010_V1.json",
+      "git_blob_sha": "346d369a811aa77af02be901a5b04458fb528667"
+    },
+    {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_SCOPE_BATCH_VERIFY_20261010_V1.json",
+      "git_blob_sha": "4c2d40a262f18f34bb35f94b59660d60972d45ef"
+    }
+  ],
+  "detection_completeness_proved": false,
+  "general_prompt_injection_closure_proved": false,
+  "general_goodhart_closure_proved": false,
+  "holdout_lifecycle_closure_proved": false,
+  "cross_lane_security_generalization_proved": false,
+  "semantic_leaf_closed": false,
+  "root_closed": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "hard_nonclaims": [
+    "NO_DEFEATER_DETECTION_COMPLETENESS",
+    "NO_GENERAL_PROMPT_INJECTION_CLOSURE",
+    "NO_GENERAL_GOODHART_CLOSURE",
+    "NO_HOLDOUT_LIFECYCLE_CLOSURE",
+    "NO_CROSS_LANE_SECURITY_GENERALIZATION",
+    "NO_R11_SEMANTIC_LEAF_CLOSURE",
+    "NO_R11_ROOT_CLOSURE",
+    "NO_GLOBAL_PROFESSIONAL_PROPERTY_TRUTH",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ]
+}
