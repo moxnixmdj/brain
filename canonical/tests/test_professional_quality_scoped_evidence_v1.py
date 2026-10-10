@@ -458,7 +458,7 @@ class ProfessionalQualityScopedEvidenceV1Tests(unittest.TestCase):
         self.assertFalse(row["semantic_leaf_credit"])
         self.assertFalse(row["execution_leaf_credit"])
 
-    def test_r12_scope_is_execution_only_and_preserves_meta_limits(self):
+    def test_r12_scope_projects_bounded_semantic_and_execution_meta_evidence(self):
         out = scoped.evaluate()
         row = next(
             x for x in out["admitted_scopes"]
