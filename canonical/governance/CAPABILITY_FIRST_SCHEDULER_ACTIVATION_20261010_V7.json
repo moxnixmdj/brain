@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V7",
+  "date": "2026-10-10",
+  "status": "ACTIVE_PRIMARY_CAPABILITY_FIRST_DEVELOPMENT_SCHEDULER__REUSE_FIRST_ENFORCED__LIVE_SCORE_PROVENANCE_GATE_ADDED__ZERO_CREDIT",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "terminal_milestone": "OPUS_5_5_FIRST_FRONTIER_CHECKPOINT__NOT_TERMINAL_OBJECTIVE",
+  "supersedes": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V6.json",
+  "core_scheduler": {
+    "path": "canonical/runtime/capability_first_scheduler_v1.py",
+    "git_blob_sha": "6d2091cc1581b9aa1fd2c74e8a76519a41d9d957",
+    "role": "VERIFIED_PLANNING_SCORING_CORE__UNCHANGED"
+  },
+  "live_scheduler": {
+    "path": "canonical/runtime/capability_first_live_scheduler_v1.py",
+    "git_blob_sha": "4d4936d7fa75afd533e09804f728bfa54f473b87",
+    "primary_entrypoint": "rank_live_work",
+    "score_contract_path": "canonical/governance/LIVE_WORK_SCORE_CALIBRATION_CONTRACT_20261010_V1.json",
+    "score_contract_git_blob_sha": "2446bc1f551326eb78cc9b94a418d4ce65971c8c",
+    "current_frontier_path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
+    "current_frontier_git_blob_sha": "4707babde570d9599e0738a707126fd613732b78",
+    "fail_closed_without_complete_common_calibration": true
+  },
+  "primary_work_rule": {
+    "objective": "MAXIMIZE_REUSABLE_VERIFIED_CAPABILITY_GENERALIZATION_RELIABILITY_AND_EFFICIENCY_PER_RESOURCE",
+    "primary_score": "CAPABILITY_RESOURCE_LEVERAGE",
+    "secondary_equal_primary_tie_break": "CURRENT_R2_SHARED_CAUSE_DISTINCT_CLAUSE_FANOUT",
+    "tertiary_equal_primary_and_fanout_tie_break": "OPUS_CHECKPOINT_AUDIT_LEVERAGE",
+    "checkpoint_obligations_are_primary_gate": false,
+    "generic_reusable_capability_work_is_demoted_while_checkpoint_open": false,
+    "shared_cause_fanout_can_wake_open_world_frontier": false,
+    "benchmark_bookkeeping_without_allowed_role": "DEMOTED",
+    "new_primitive_claim_without_reuse_exhaustion_proof": "DEMOTED_UNPROVED_NEW_PRIMITIVE_CLAIM"
+  },
+  "live_score_rule": {
+    "raw_heterogeneous_units_may_be_added": false,
+    "hand_entered_unproven_scores_may_rank_live_work": false,
+    "complete_current_frontier_required": true,
+    "one_common_dimensionless_calibration_required": true,
+    "per_metric_evidence_required": true,
+    "independent_verification_required": true,
+    "current_live_selection_authorized": false,
+    "current_reason": "CURRENT_FRONTIER_BOUND_BUT_COMMON_CALIBRATION_AND_ALL_METRIC_EVIDENCE_ARE_NOT_YET_BOUND"
+  },
+  "reuse_first_residual_admission": {
+    "policy_path": "canonical/governance/REUSE_FIRST_RESIDUAL_EXECUTION_POLICY_20261010_V1.json",
+    "policy_git_blob_sha": "e230e9c243ac79b7909dac86071b5cad536f1666",
+    "scheduler_runtime_enforcement": "CORE_V1_MECHANICALLY_ENFORCES_NEW_PRIMITIVE_GATE__LIVE_V1_WRAPPER_ADDS_SCORE_PROVENANCE_AND_FRONTIER_COMPLETENESS_GATE"
+  },
+  "hard_nonclaims": [
+    "NO_RANK_ONE_CLAIM_UNTIL_LIVE_SCORE_CONTRACT_CLOSES",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT_FROM_SCHEDULING",
+    "NO_CLAIM_THE_CURRENT_FRONTIER_COVERS_UNKNOWN_FUTURE_WORK",
+    "NO_CLAIM_SCALAR_UTILITY_IS_VALUE_FREE_OR_GLOBALLY_FINAL"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
