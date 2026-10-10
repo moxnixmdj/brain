@@ -20,7 +20,7 @@ def evaluate_regcap_loss_cushion(payload: Mapping[str, Any]) -> dict[str, Any]:
 
 
 def evaluate_regcap_context_atom(payload: Mapping[str, Any]) -> dict[str, Any]:
-    from canonical.runtime.regcap_context_atom_truth_certificate_v1 import evaluate
+    from canonical.runtime.regcap_context_atom_truth_certificate_v2 import evaluate
     return evaluate(payload)
 
 
