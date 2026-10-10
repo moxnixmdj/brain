@@ -594,9 +594,9 @@
     },
     "terminal_candidate_donor_independence_audit": {
       "path": "canonical/runtime/terminal_candidate_donor_independence_audit_v1.py",
-      "git_blob_sha": "0ed69641693538f15b7e1658f5ac5e80031afb26",
-      "current_byte_binding_verified": false,
-      "current_byte_status": "OPEN__BYTE_DRIFT_FROM_BOUND_AUTHORITY"
+      "git_blob_sha": "7b3713267d32f9b4ae7e2ca56ea17c5859bdec71",
+      "current_byte_binding_verified": true,
+      "current_byte_status": "PASS__CURRENT_EXACT_BYTES"
     },
     "adaptive_positive_cover_fixed_point_v2": {
       "path": "canonical/governance/ADAPTIVE_ABSTRACT_POSITIVE_COVER_FIXED_POINT_THEOREM_20261007_V2.json"
@@ -775,15 +775,15 @@
       },
       "runtime": {
         "path": "canonical/runtime/terminal_autopilot_executor_v1.py",
-        "git_blob_sha": "657a94d00833ad91403070132ef4e1f0d7337336"
+        "git_blob_sha": "6f828ce5631db582ea4d4a3d73c59b08f232abf0"
       },
       "planner": {
         "path": "canonical/runtime/terminal_autopilot_v1.py",
-        "git_blob_sha": "bb72c160f3be00efedbd5d111b77d956bed2cb11"
+        "git_blob_sha": "78fa2cbabf8ed5e70de8b3ed987b510ca033076b"
       },
       "role": "ACTIVE_GATED_CONCURRENT_EXECUTOR__REVERSIBLE_ZERO_REALITY_AND_INDEPENDENT_VERIFY__PER_TASK_CONTENT_BOUND_PROMOTION__NO_IRREVERSIBLE_BENCHMARK_AUTOEXECUTION",
-      "current_byte_binding_verified": false,
-      "current_byte_status": "OPEN__PLANNER_AND_EXECUTOR_BYTES_DRIFT_FROM_ACTIVATION"
+      "current_byte_binding_verified": true,
+      "current_byte_status": "PASS__CURRENT_EXACT_BYTES"
     },
     "gdpval_public_220_composed_semantic_localization_public_execution": {
       "path": "canonical/evidence/GDPVAL_PUBLIC_220_COMPOSED_SEMANTIC_LOCALIZATION_PUBLIC_EXECUTION_RECEIPT_20261007_V1.json",
@@ -2260,11 +2260,11 @@
     "git_blob_sha": "e70f662d27e0b917eaf6ef8ba9da3bebc5ab7ee0",
     "runtime_gate": {
       "path": "canonical/runtime/terminal_root_decision_gate_v1.py",
-      "git_blob_sha": "7c7e0c34cc599c7114fb83421307db2433e2b269"
+      "git_blob_sha": "6f546f657900405c628c1eb3575bc1e4ac220aeb"
     },
     "tests": {
       "path": "canonical/tests/test_terminal_root_decision_gate_v1.py",
-      "git_blob_sha": "7f51131ad6ee5f26cf752fde853e69cb2abdbf6c"
+      "git_blob_sha": "4d8a4aae55562e772730bb71d37ef08bf0385c6e"
     },
     "rule": "COEQUAL_SCOPE_COMPLETE_UNIVERSAL_COVER_ROUTE__ONE_LIVE_PRE_ABC_PRIMITIVE_ESCAPE_POLICY_ADEQUACY__NONEXHAUSTIVE_SEVENTEEN_REGION_DB_BINDING_COMPILATION_DEMOTED_FROM_SERIAL_PREREQUISITE__FROZEN_19_REMAINS_DIRECT_WITNESS_ROUTE",
     "exact_sound_db_admission_convergence_gate": {
@@ -2273,8 +2273,8 @@
       "tests_path": "canonical/tests/test_exact_sound_db_admission_convergence_v1.py",
       "tests_git_blob_sha": "e4130b4e3401d382e27e233a02c2447e6c07d459"
     },
-    "current_runtime_gate_binding_verified": false,
-    "current_runtime_gate_status": "OPEN__RUNTIME_GATE_BYTE_DRIFT"
+    "current_runtime_gate_binding_verified": true,
+    "current_runtime_gate_status": "PASS__CURRENT_EXACT_BYTES"
   },
   "zero_bureaucracy_truth_reconciliation_20261007_v1": {
     "status": "BOUND_EXISTING_PROOF_INTO_LIVE_AUTHORITY__NO_TERMINAL_CREDIT",
@@ -2560,7 +2560,7 @@
     },
     "unified_fabric": {
       "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-      "git_blob_sha": "5badd256e18ab4bad58be862c69ef9e272bf7eb1"
+      "git_blob_sha": "31b9a227dba79f069045e915e416bcc370900af6"
     },
     "verification": {
       "path": "canonical/verification/LIVE_CAPABILITY_OWNERSHIP_UNIVERSAL_INVOCATION_V1_SOURCE_REPLAY_20261008_V1.json",
@@ -2636,7 +2636,7 @@
     },
     "unified_fabric": {
       "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-      "git_blob_sha": "5badd256e18ab4bad58be862c69ef9e272bf7eb1"
+      "git_blob_sha": "31b9a227dba79f069045e915e416bcc370900af6"
     },
     "regression": {
       "path": "canonical/tests/test_live_capability_invoker_v1.py",
@@ -2703,7 +2703,8 @@
       "path": "canonical/governance/OPTION_PRESERVING_CAPABILITY_OPTIMIZATION_20261008_V1.json"
     },
     "runtime": {
-      "path": "canonical/runtime/option_preserving_capability_optimizer_v1.py"
+      "path": "canonical/runtime/option_preserving_capability_optimizer_v1.py",
+      "git_blob_sha": "367478e71b015fb2f4b7cc40dad34f88a7f47238"
     },
     "physical_deletion_requires_separate_proof": true,
     "terminal_credit_delta": 0,
@@ -2711,8 +2712,8 @@
       "path": "canonical/verification/OPTION_PRESERVING_CAPABILITY_OPTIMIZER_INDEPENDENT_VERIFICATION_20261008_V1.json",
       "status": "PASS__OPTION_PRESERVING_OPTIMIZER_AND_SCHEDULER_REGRESSION__16_OF_16__GOVERNANCE_PASS"
     },
-    "current_runtime_blob_binding_verified": false,
-    "current_runtime_blob_binding_status": "OPEN__CURRENT_RUNTIME_SHA_NOT_BOUND"
+    "current_runtime_blob_binding_verified": true,
+    "current_runtime_blob_binding_status": "PASS__CURRENT_EXACT_BYTES"
   },
   "checkpoint_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
   "objective_precedence": {
@@ -2741,7 +2742,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 94,
+  "pointer_revision": 95,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
@@ -3733,10 +3734,14 @@
     "structural_framework_execution_verified": true,
     "semantic_proof_route_closed": false,
     "structural_resource_bound_closed": false,
-    "current_authority_runtime_byte_binding_coherence": false,
-    "current_authority_runtime_drift_reference_count": 6,
-    "current_authority_runtime_drift_unique_path_count": 5,
-    "current_authority_runtime_missing_blob_binding_count": 1,
-    "current_authority_runtime_binding_census_verified": true
+    "current_authority_runtime_byte_binding_coherence": true,
+    "current_authority_runtime_drift_reference_count": 0,
+    "current_authority_runtime_drift_unique_path_count": 0,
+    "current_authority_runtime_missing_blob_binding_count": 0,
+    "current_authority_runtime_binding_census_verified": true,
+    "current_authority_runtime_byte_verification": {
+      "path": "canonical/verification/CURRENT_RUNTIME_BYTE_COHERENCE_SPRITE_VERIFICATION_20261010_V1.json",
+      "git_blob_sha": "52de2370122ca2eb1e934425c963a918ea72a24f"
+    }
   }
 }
