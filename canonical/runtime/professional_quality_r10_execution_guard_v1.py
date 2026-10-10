@@ -14,6 +14,8 @@ from __future__ import annotations
 
 from typing import Any, Mapping, Sequence
 
+from canonical.runtime import professional_quality_r10_proof_slot_verifier_v1 as proof_slot_verifier
+
 CLAIM_ID = "205a864e7d7a56a14a46bb75923cc9b11126d479676d26d88803831da1197294"
 LEAF_ID = "PQ::R10_ANALYSIS_DECISION::EXECUTION"
 ROOT_ID = "R10_ANALYSIS_DECISION"
@@ -50,18 +52,6 @@ NEAR_MISS_TO_TRIGGER = {
     "population_context_operator_or_time_transport_gap":
         "POPULATION_CONTEXT_OPERATOR_OR_TIME_TRANSPORT_GAP",
 }
-
-REQUIRED_PROOF_SLOTS = frozenset({
-    "target_and_hard_constraints_frozen",
-    "decision_state_lossless",
-    "uncertainty_semantics_typed",
-    "aggregation_and_risk_policy_precommitted",
-    "veto_constraints_preserved",
-    "model_or_analysis_multiplicity_resolved_or_escalated",
-    "evidence_packet_complete",
-    "stopping_rule_precommitted",
-    "absolute_floor_not_inferred_from_weak_baseline",
-})
 
 
 def _base(status: str, *, passed: bool) -> dict[str, Any]:
@@ -126,7 +116,8 @@ def evaluate(
     defeater_catalog: Mapping[str, Any],
     detected_defeater_ids: Sequence[str] = (),
     near_miss_signals: Mapping[str, bool] | None = None,
-    proof_slots: Mapping[str, bool] | None = None,
+    constitution: Mapping[str, Any],
+    case_context: Mapping[str, Any],
     unmapped_material_false_certification_defeater: bool = False,
 ) -> dict[str, Any]:
     if claim_id != CLAIM_ID:
@@ -204,14 +195,18 @@ def evaluate(
             "ordinary_certificate_path_allowed": False,
         }
 
-    slots = proof_slots or {}
-    missing_slots = sorted(
-        slot for slot in REQUIRED_PROOF_SLOTS if slots.get(slot) is not True
+    slot_verdict = proof_slot_verifier.evaluate(
+        claim_id=claim_id,
+        constitution=constitution,
+        decision_contract=decision_contract,
+        minimum_information_contract=minimum_information_contract,
+        case_context=case_context,
     )
-    if missing_slots:
+    if slot_verdict.get("pass") is not True:
         return {
             **_base("OPEN__R10_EXECUTION_PROOF_SLOT_REQUIRED", passed=False),
-            "missing_proof_slots": missing_slots,
+            "proof_slot_verdict": slot_verdict,
+            "missing_proof_slots": slot_verdict.get("missing_slots", []),
             "ordinary_certificate_path_allowed": False,
         }
 
@@ -219,10 +214,15 @@ def evaluate(
         **_base("PASS__R10_EXECUTION_GUARD_ELIGIBLE_FOR_SCOPED_CERTIFICATE_VERIFICATION", passed=True),
         "detected_defeater_ids": [],
         "active_escalation_triggers": [],
-        "proof_slots_satisfied": sorted(REQUIRED_PROOF_SLOTS),
+        "proof_slot_verdict": slot_verdict,
+        "proof_slots_satisfied": sorted(
+            key
+            for key, value in (slot_verdict.get("slot_results") or {}).items()
+            if value is True
+        ),
         "ordinary_certificate_path_allowed": True,
         "property_scope": (
-            "DETECTION_TO_ENFORCEMENT_AND_DECLARED_PROOF_SLOT_GATE_ONLY__"
-            "DEFEATER_DETECTION_COMPLETENESS_SEPARATE"
+            "DETECTION_TO_ENFORCEMENT_PLUS_STRUCTURAL_POLICY_COMPLIANCE_ONLY__"
+            "UNDERLYING_FACT_TRUTH_AND_DEFEATER_DETECTION_COMPLETENESS_SEPARATE"
         ),
     }
