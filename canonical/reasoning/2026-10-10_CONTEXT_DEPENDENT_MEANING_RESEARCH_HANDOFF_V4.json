@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_CONTEXT_DEPENDENT_MEANING_RESEARCH_HANDOFF_20261010_V4",
+  "date": "2026-10-10",
+  "status": "CURRENT_SUCCESSOR_HANDOFF__R2_V73__PAIRWISE_NONIDENTIFIABILITY_PLUS_OPEN_WORLD_CONTROL_PROGRESS__SEMANTIC_RESIDUAL_PRESERVED__ZERO_CREDIT",
+  "supersedes": "canonical/reasoning/2026-10-10_CONTEXT_DEPENDENT_MEANING_RESEARCH_HANDOFF_V3.json",
+  "authoritative_state": {
+    "r2_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+    "r2_git_blob_sha": "84563042f96f7f5fffd2240956fbec985dfe7a40",
+    "live_front_door": "canonical/runtime/unified_cognitive_fabric_v2.py",
+    "live_front_door_git_blob_sha": "afb8b5c30957168dd8ba8684afb94b31c9118ed5",
+    "one_primary_finance_semantic_residual_remains": true,
+    "r2_version": "V73"
+  },
+  "composed_capability": {
+    "negative_semantic_proof": "PAIRWISE_NONIDENTIFIABILITY_CAN_PROVE_SOURCE_ALONE_CANNOT_UNIQUELY_IDENTIFY_MEANING",
+    "control_progress": "WHEN_INFORMATION_ORIGIN_IS_CLASSIFIABLE_THE_NEXT_INFORMATION_ACQUISITION_ACTION_CAN_BE_VERIFIED_WITHOUT_SEMANTIC_IDENTITY",
+    "control_scope": "NEXT_INFORMATION_ACQUISITION_CONTROL_ONLY",
+    "semantic_truth_authority": false,
+    "final_domain_action_authority": false
+  },
+  "exact_margin_truth": {
+    "source": "Margin increased.",
+    "unique_identity_from_source_alone": false,
+    "true_identity_selected": false,
+    "safe_progress": "ACQUIRE_MINIMUM_POLICY_CHANGING_INFORMATION_OR_ABSTAIN"
+  },
+  "next_move": "SELECT_A_CONCRETE_CONTEXT_RICH_POLICY_MATERIAL_AMBIGUITY__TEST_PAIRWISE_NONIDENTIFIABILITY_FIRST__THEN_ROUTE_MINIMUM_INFORMATION_ACQUISITION__REVERIFY_AFTER_NEW_INFORMATION",
+  "hard_nonclaims": [
+    "NO_GLOBAL_WORD_SENSE_CLOSURE",
+    "NO_FINANCE_SEMANTIC_TAIL_CLOSURE",
+    "NO_FINAL_DOMAIN_ACTION_FROM_CONTROL_PROGRESS",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "r2_reconciliation_path": "canonical/governance/R2_OPEN_WORLD_SEMANTIC_CONTROL_AUTHORITY_RECONCILIATION_20261010_V1.json",
+  "r2_reconciliation_git_blob_sha": "61c9c86f7301eb4484e9a84fc1c8c9835a4cfc97"
+}
