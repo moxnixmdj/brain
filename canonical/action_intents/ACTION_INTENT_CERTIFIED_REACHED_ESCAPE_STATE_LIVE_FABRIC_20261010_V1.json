@@ -1,0 +1,219 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V12_INSTANCE",
+  "action_id": "CERTIFIED_REACHED_ESCAPE_STATE_LIVE_FABRIC_20261010_V1",
+  "date": "2026-10-10",
+  "status": "BRANCH_VERIFIED__LIVE_FABRIC_INTEGRATION_PENDING_MERGE__ZERO_CREDIT",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "canonical_base_commit": "28f4c13419fce9b0ed8162253ed5452e4f16f58d",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
+  "capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+  "action_kind": "RECONCILE_FRONTIER",
+  "causal_blocker": "RAW_REACHED_ESCAPE_STATE_FABRIC_BYPASSES_CERTIFIED_CONSTRUCTOR",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1::RAW_REACHED_ESCAPE_STATE_FABRIC_BYPASSES_CERTIFIED_CONSTRUCTOR",
+  "highest_leverage_now": true,
+  "expected_parent_frontier_change": "LIVE_FABRIC_REJECTS_UNCERTIFIED_REACHED_ESCAPE_STATES_AND_RETURNS_EXACT_REPAIR_OBLIGATION_BEFORE_CERTIFIED_REACHED_STATE_ADMISSION",
+  "stop_condition": "EXACT_PATCHED_FABRIC_SOURCE_INVARIANTS_PASS__EXACT_CONSTRUCTOR_ADVERSARIAL_REPLAY_PASSES__UNCERTIFIED_COUNTEREXAMPLE_FAILS_CLOSED__NO_TERMINAL_ACCEPTANCE_OR_OWNERSHIP_CREDIT",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "theory_invariants": {
+    "reuse_existing_verified_constructor": true,
+    "underlying_capability_invention": false,
+    "integration_glue_only": true,
+    "no_fresh_target_reality": true,
+    "hard_zero_incremental_spend": true,
+    "global_repair_acquirability_still_open": true,
+    "global_escape_progress_totality_still_open": true,
+    "zero_terminal_credit": true
+  },
+  "ownership_tests": {
+    "applies": false,
+    "reason": "NO_CAPABILITY_OR_OWNERSHIP_PROMOTION__LIVE_ROUTING_TRUTH_REPAIR_ONLY"
+  },
+  "load_bearing_primary": {
+    "open_obligation_ids": [],
+    "constructive_gap_for_open_obligation_ids": [
+      "PROWORK_GDPVAL_GE_1846"
+    ],
+    "scope_complete_discharge": false,
+    "expected_obligation_discharge_lcb": "0",
+    "expected_obligation_unlock_lcb": "1",
+    "success_probability_lcb": "1",
+    "wall_clock_cost_ub": "1",
+    "interpretation": "SHARED_ESCAPE_PROGRESS_CONSTRUCTOR_BYPASS_REMOVAL__NO_TERMINAL_DISCHARGE"
+  },
+  "v22_prewrite_admission": {
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "currentness": {
+      "accepted_families": 5,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "unresolved_atomic": 22,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "meta_envelope_open_count": 8,
+      "total_open_truth_obligations": 30,
+      "terminal": false
+    },
+    "mode": "ACTIVE_INTERFACE",
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "target_truth_obligations": [
+      "PROWORK_GDPVAL_GE_1846"
+    ],
+    "proof_state_reachability": "LIVE_PROOF_CARRYING_REACHED_STATE_ADMISSION_REMOVES_A_SHARED_ROOT3_BYPASS_AND_MAKES_UNCERTIFIABLE_STATES_EXPLICIT_REPAIR_OBLIGATIONS",
+    "fresh_reality_authority": false,
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "proposal_id": "CERTIFIED_REACHED_ESCAPE_STATE_LIVE_FABRIC_V1",
+      "falsifier_id": "UNSPLITTABLE_TWO_REGION_NO_COMMON_POLICY_COUNTEREXAMPLE",
+      "decisive_question": "CAN_THE_LIVE_REACHED_ESCAPE_STATE_FRONT_DOOR_ADMIT_A_STATE_THAT_THE_VERIFIED_CONSTRUCTOR_REJECTS",
+      "known_counterexamples_checked": true,
+      "counterexample_receipts": [
+        {
+          "path": "canonical/verification/REACHED_ESCAPE_CONSTRUCTION_INVARIANT_BOUNDARY_SPRITE_VERIFY_20261010_V1.json",
+          "git_blob_sha": "8525ec9f9795e417cda95bd6d6d56421c4184674"
+        }
+      ]
+    }
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "canonical_base_commit": "28f4c13419fce9b0ed8162253ed5452e4f16f58d",
+    "real_outcome": "MAKE_CERTIFIED_REACHED_STATE_CONSTRUCTION_THE_ONLY_LIVE_REACHED_ESCAPE_STATE_ADMISSION_PATH",
+    "required_capability": "FAIL_CLOSED_PROOF_CARRYING_REACHED_STATE_ADMISSION",
+    "obs_goal": {
+      "real_outcome": "UNCERTIFIABLE_REACHED_STATES_NEVER_ENTER_LIVE_FABRIC_AS_CERTIFIED_STATES",
+      "proxy_goals_deleted": [
+        "NEW_ESCAPE_KERNEL",
+        "NEW_STATE_THEOREM",
+        "BENCHMARK_EXECUTION"
+      ],
+      "surviving_necessity": "REMOVE_RAW_KERNEL_BYPASS_AT_CANONICAL_FRONT_DOOR"
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "CERTIFIED_REACHED_ESCAPE_STATE_CONSTRUCTOR_V1",
+        "REACHED_ESCAPE_FINITE_TOTALITY_CERTIFICATE_V1",
+        "UNIFIED_COGNITIVE_FABRIC_V1"
+      ],
+      "external_existing_routes_checked": [],
+      "capability_work_deleted": [
+        "NEW_CONSTRUCTOR",
+        "NEW_TOTALITY_KERNEL",
+        "FRESH_REALITY_QUERY"
+      ],
+      "surviving_gap": "ONE_LIVE_DISPATCH_EDGE_STILL_POINTS_TO_RAW_KERNEL"
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "PATH_SPECIFIC_INTEGRATION_DEFECT",
+      "delete_bypass_substitute_options": [
+        "REUSE_VERIFIED_CONSTRUCTOR",
+        "REPLACE_RAW_DISPATCH_EDGE"
+      ],
+      "surviving_causal_blocker": "RAW_REACHED_ESCAPE_STATE_FABRIC_BYPASSES_CERTIFIED_CONSTRUCTOR"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "REUSE_VERIFIED_CONSTRUCTOR_AT_EXISTING_MODE",
+        "ADD_PARALLEL_NEW_MODE_REJECTED",
+        "BUILD_NEW_STATE_ENGINE_REJECTED"
+      ],
+      "losing_routes_reason": "PARALLEL_MODE_PRESERVES_BYPASS__NEW_ENGINE_DUPLICATES_VERIFIED_CONSTRUCTOR",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "SOURCE_DISPATCH_INVARIANT_PLUS_EXACT_CONSTRUCTOR_COUNTEREXAMPLE_REPLAY"
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "RAW_REACHED_ESCAPE_STATE_FABRIC_ADMISSION"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "FINITE_REACHED_STATE_TOTALITY_CERTIFICATE",
+        "PROOF_CARRYING_REPAIR_OBLIGATION_CONSTRUCTION"
+      ],
+      "fresh_reuse_plan": "LIVE_FABRIC_ROUTE_REUSES_EXISTING_VERIFIED_CONSTRUCTOR_WITH_NO_NEW_SEMANTICS"
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "NO_NEW_CONSTRUCTOR_RESEARCH",
+        "NO_REPEAT_STATE_COUNTEREXAMPLE_DISCOVERY"
+      ],
+      "search_stop_decision": "EXACT_BYPASS_LOCALIZED_AND_VERIFIED_CONSTRUCTOR_ALREADY_EXISTS",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "ROUTE_EXISTING_MODE_THROUGH_VERIFIED_CONSTRUCTOR",
+      "ADD_NEW_CERTIFIED_MODE_AND_KEEP_RAW_MODE",
+      "BUILD_NEW_CONSTRUCTOR"
+    ],
+    "deleted_or_bypassed_paths": [
+      "ADD_NEW_CERTIFIED_MODE_AND_KEEP_RAW_MODE",
+      "BUILD_NEW_CONSTRUCTOR"
+    ],
+    "selected_surviving_route": "ROUTE_EXISTING_MODE_THROUGH_VERIFIED_CONSTRUCTOR",
+    "why_selected_route_is_fastest_sufficient": "ONE_STATIC_IMPORT_ONE_DESCRIPTOR_EDGE_ONE_DISPATCH_EDGE_REUSES_THE_ALREADY_VERIFIED_CONSTRUCTOR_AND_DELETES_THE_BYPASS",
+    "expected_parent_level_state_change": "LIVE_FABRIC_REJECTS_UNCERTIFIED_REACHED_ESCAPE_STATES_AND_RETURNS_EXACT_REPAIR_OBLIGATION_BEFORE_CERTIFIED_REACHED_STATE_ADMISSION",
+    "stop_condition": "EXACT_PATCHED_FABRIC_SOURCE_INVARIANTS_PASS__EXACT_CONSTRUCTOR_ADVERSARIAL_REPLAY_PASSES__UNCERTIFIED_COUNTEREXAMPLE_FAILS_CLOSED__NO_TERMINAL_ACCEPTANCE_OR_OWNERSHIP_CREDIT",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "RECONCILE_FRONTIER_REUSES_AN_ALREADY_VERIFIED_BRAIN_OWNED_CONSTRUCTOR_AND_REPAIRS_ONE_LOCALIZED_LIVE_DISPATCH_BYPASS"
+    }
+  },
+  "behavioral_contract": {
+    "behavior_id": "LIVE_CERTIFIED_REACHED_ESCAPE_STATE_ADMISSION_V1",
+    "required_output_or_action": "REACHED_ESCAPE_STATE_MODE_MUST_ROUTE_THROUGH_CERTIFIED_CONSTRUCTOR",
+    "success_condition": "CERTIFIABLE_STATE_ADMITTED__UNCERTIFIABLE_STATE_REJECTED_WITH_EXACT_REPAIR_REQUEST",
+    "failure_condition": "RAW_KERNEL_PATH_CAN_ADMIT_A_STATE_WITHOUT_CONSTRUCTOR_CERTIFICATION",
+    "verification_route": "SOURCE_INVARIANT_PLUS_CONSTRUCTOR_ADVERSARIAL_REPLAY",
+    "scope": "UNIFIED_COGNITIVE_FABRIC_REACHED_ESCAPE_STATE_MODE_ONLY"
+  },
+  "prequalification_controls": {
+    "fresh_reality_required": false,
+    "untouched_task_read": false
+  },
+  "qualification_stage": "ZERO_REALITY_INTEGRATION_REPLAY",
+  "terminal_proof_control": {
+    "terminal_credit_delta": 0,
+    "cc_r3_proved": false
+  },
+  "continuous_obs": {
+    "material_world_state_dependency": false,
+    "post_merge_currentness_recheck_required": true
+  },
+  "reality_query_admission": {
+    "admission_verdict": "NO_REALITY_QUERY_REQUIRED"
+  },
+  "global_terminal_proof_cut": {
+    "new_terminal_observation": false
+  },
+  "hard_nonclaims": [
+    "NO_GLOBAL_REPAIR_PROVIDER_TOTALITY",
+    "NO_GLOBAL_ESCAPE_PROGRESS_TOTALITY",
+    "NO_CC_R3_PROMOTION",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
