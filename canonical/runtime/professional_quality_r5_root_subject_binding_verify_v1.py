@@ -112,7 +112,7 @@ def evaluate_documents(binding:Mapping[str,Any],subject:Mapping[str,Any],docs:Ma
  ev=docs["evaluator_uncertainty_verification"]
  if (ev.get("replay") or {}).get("tests_passed")!=11:return _fail("EVALUATOR_RUNTIME_REPLAY_INSUFFICIENT")
  if (ev.get("subject") or {}).get("runtime",{}).get("git_blob_sha")!=RUNTIME_BLOB:return _fail("EVALUATOR_RUNTIME_BLOB_DRIFT")
- boundary=" ".join(ev.get("verification_boundary") or [])
+ boundary=" ".join(ev.get("verification_boundary") or []).replace("_"," ")
  if "DOES NOT PROVE THE TRUE CURRENT GDPVAL OWNER EVALUATOR" not in boundary:return _fail("EVALUATOR_VERIFICATION_BOUNDARY_MISSING")
 
  bs=binding.get("binding_scope") or {}
