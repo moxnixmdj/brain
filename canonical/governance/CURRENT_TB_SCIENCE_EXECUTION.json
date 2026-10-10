@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_TB_SCIENCE_EXECUTION_POINTER_V2",
   "date": "2026-10-10",
-  "status": "RANK17_FINAL_ZERO__SEVENTEEN_CONSUMED__RANK18_BLOCKED_PENDING_GENERIC_ARTIFACT_FINISH_GATE_REPAIR",
+  "status": "RANK17_FINAL_ZERO__RANK18_V1_V12_BRAIN_AUTHORITY_ACTIVE__TASK_UNREAD_UNSTARTED__PUBLIC_RESEAL_REQUIRED",
   "current_result": {
     "path": "canonical/verification/TB_SCIENCE_RANK17_V6_IRREVERSIBLE_RESULT_TRUTH_20261010_V1.json",
     "git_blob_sha": "3d7a0339ccf320f256834fcbde6427c8c62d473b"
@@ -13,17 +13,6 @@
   "verification": {
     "path": "canonical/verification/TB_SCIENCE_RANK17_V6_RESULT_LEDGER_V33_RECONCILIATION_VERIFY_20261010_V1.json",
     "git_blob_sha": "b85046e9a2e2194d9caa251b48f7d58739b47695"
-  },
-  "rank17": {
-    "slot_id": "terminal-bench-science/variable-star-vetting::trial-0",
-    "workflow_run_id": 38024152007,
-    "artifact_id": 11659272369,
-    "reward": 0,
-    "result": "FINAL_ZERO",
-    "controller_status": "SUBMISSION_READY__RAW_TASK_ACCEPTANCE_PENDING_EXTERNAL_INDEPENDENT_VERIFIER",
-    "benchmark_trials_consumed": 1,
-    "rerun_authority": false,
-    "replacement_carrier_authority": false
   },
   "counts": {
     "consumed_slots": 17,
@@ -42,12 +31,17 @@
     "task_digest": "sha256:e9a166b2173f7014d4f1559505397b221f94bc446eab031f94791b35e0e5f1c9",
     "task_read": false,
     "task_started": false,
-    "execution_authority": false,
+    "execution_authority": true,
     "task_read_authority": false,
+    "authority_path": "canonical/governance/TB_SCIENCE_RANK18_ONE_SLOT_EXECUTION_AUTHORITY_20261010_V1.json",
+    "authority_git_blob_sha": "0cbf7ffb571c0f411a5ba44c751b1c833059c83c",
+    "authority_verification_path": "canonical/verification/TB_SCIENCE_RANK18_ONE_SLOT_AUTHORITY_VERIFY_20261010_V1.json",
+    "authority_verification_git_blob_sha": "4c829d9e5dc878fd0ef002221f9b27170c853aa5",
+    "runtime_version": "V12",
     "public_surface_resealed": false,
     "activation_armed": false
   },
   "acceptance_credit_delta": 0,
   "terminal_credit_delta": 0,
-  "next": "REPAIR_GENERIC_AUTHORITATIVE_TASK_ARTIFACT_BINDING_AND_FINISH_GATE_ON_SPENT_OR_SYNTHETIC_CONTEXTS__INDEPENDENTLY_VERIFY_EXACT_RUNTIME_BYTES__ONLY_THEN_BUILD_FRESH_RANK18_ZERO_EXPOSURE_AUTHORITY_AND_PUBLIC_RESEAL"
+  "next": "BUILD_FRESH_RANK18_PUBLIC_V12_RESEAL_BOUND_TO_V1_AUTHORITY_AND_V33_LEDGER__PROVE_TRUSTED_PARENT_ARTIFACT_METADATA_INJECTION_AND_ZERO_EXPOSURE_RUNTIME_COMPOSITION__ONLY_THEN_ENABLE_TASK_READ"
 }
