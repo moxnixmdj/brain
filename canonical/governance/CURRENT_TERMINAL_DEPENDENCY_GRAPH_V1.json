@@ -176,8 +176,8 @@
     {
       "id": "CURRENT_AUTHORITY_RUNTIME_BYTE_BINDING_COHERENCE",
       "kind": "LEAF",
-      "status": "UNRESOLVED",
-      "note": "FIVE_CURRENT_RUNTIME_PATHS_HAVE_FRESH_EXACT_BYTE_SPRITE_EXECUTION_RECEIPT__42_BEHAVIORAL_CHECKS_PLUS_12_PY_COMPILE_CHECKS__ZERO_FAILURES__UNIFIED_COGNITIVE_FABRIC_CURRENT_BYTE_EXECUTION_REMAINS_OPEN_BECAUSE_RECONSTRUCTED_CARRIER_IMPORT_CLOSURE_IS_INCOMPLETE__NO_BEHAVIORAL_FAILURE_OBSERVED",
+      "status": "PROVED",
+      "note": "CURRENT_AUTHORITY_RUNTIME_BYTE_BINDINGS_ARE_CONTENT_COHERENT_ACROSS_ALL_40_UNIQUE_CURRENT_RUNTIME_PATHS__46_CURRENT_REFERENCES__0_DRIFT__0_MISSING_BINDINGS__0_CONFLICTS__FIVE_FORMERLY_OPEN_PATHS_AND_UNIFIED_FABRIC_HAVE_FRESH_BOUNDED_CURRENT_BYTE_EXECUTION_EVIDENCE__SEMANTIC_REFINEMENT_REMAINS_SEPARATELY_OPEN",
       "attack_families": [
         "VERSION_DRIFT",
         "COMPOSITION_MISMATCH",
@@ -205,13 +205,20 @@
         },
         {
           "id": "UNIFIED_COGNITIVE_FABRIC_CURRENT_BYTE_VERIFICATION",
-          "status": "UNRESOLVED",
+          "status": "PROVED",
           "paths": [
             "canonical/runtime/unified_cognitive_fabric_v1.py"
           ],
           "current_git_blob_sha": "31b9a227dba79f069045e915e416bcc370900af6",
-          "reason": "CURRENT_BYTE_SUITE_NOT_YET_RUNNABLE_ON_RECONSTRUCTED_CARRIER__IMPORT_CLOSURE_MATERIALIZATION_IN_PROGRESS__NO_BEHAVIORAL_FAILURE_OBSERVED",
-          "requirement": "COMPLETE_CURRENT_IMPORT_CLOSURE__RUN_FOCUSED_UNIFIED_FABRIC_SUITE__ISSUE_CONTENT_BOUND_RECEIPT"
+          "evidence": {
+            "path": "canonical/verification/UNIFIED_FABRIC_CURRENT_BYTE_EXECUTION_SPRITE_VERIFICATION_20261010_V1.json",
+            "git_blob_sha": "baad0b6515c57da331d1bae704261d28c69a4621"
+          },
+          "unified_fabric_tests_passed": 25,
+          "live_brain_runtime_tests_passed": 31,
+          "package_import_regression_tests_passed": 4,
+          "r1_drift_locked": true,
+          "terminal_credit_delta": 0
         }
       ],
       "verification": {
@@ -221,7 +228,28 @@
       "verification_receipt": {
         "path": "canonical/verification/CURRENT_RUNTIME_FIVE_PATH_CURRENT_BYTE_RESEAL_SPRITE_VERIFICATION_20261010_V1.json",
         "git_blob_sha": "09f6736d7aff26a08f7dc97e05eb548988d5b49f"
-      }
+      },
+      "byte_binding_verification": {
+        "path": "canonical/verification/CURRENT_AUTHORITY_RUNTIME_BINDING_CONNECTOR_CENSUS_20261010_V1.json",
+        "git_blob_sha": "d7c39b9190d6efc1e401b303552789d8b9c94066",
+        "current_unique_runtime_path_count": 40,
+        "current_binding_count": 46,
+        "drift_count": 0,
+        "missing_blob_binding_count": 0,
+        "conflicting_current_path_count": 0
+      },
+      "execution_verification_receipts": [
+        {
+          "path": "canonical/verification/CURRENT_RUNTIME_FIVE_PATH_CURRENT_BYTE_RESEAL_SPRITE_VERIFICATION_20261010_V1.json",
+          "git_blob_sha": "09f6736d7aff26a08f7dc97e05eb548988d5b49f"
+        },
+        {
+          "path": "canonical/verification/UNIFIED_FABRIC_CURRENT_BYTE_EXECUTION_SPRITE_VERIFICATION_20261010_V1.json",
+          "git_blob_sha": "baad0b6515c57da331d1bae704261d28c69a4621"
+        }
+      ],
+      "semantic_refinement_proved": false,
+      "terminal_credit_delta": 0
     }
   ],
   "terminal_closure": false,
