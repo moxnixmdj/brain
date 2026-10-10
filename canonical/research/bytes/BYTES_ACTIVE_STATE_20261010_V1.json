@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_ACTIVE_STATE_V1",
+  "status": "ACTIVE_RESEARCH__SUCCESSOR_READY",
+  "date": "2026-10-10",
+  "mission_lock": "Find the minimum resource-feasible executable description of the required capability set conditional on already-owned Brain substrate.",
+  "governing_laws": [
+    "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V1.md",
+    "canonical/laws/BYTES_RESOURCE_BOUNDED_MINIMUM_MECHANISM_LAW_V1.md"
+  ],
+  "source_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_DONOR_SLICE_CHECKPOINT_20261010_V1.json",
+  "exact_symbolic_state": {
+    "raw_python_source_bytes": 7044219,
+    "persistent_xz_bytes": 1207652,
+    "calibration": "397/397",
+    "post_freeze_qualification": "1854/1854",
+    "promotion_credit_from_this_record": 0
+  },
+  "current_bottleneck": {
+    "subsystem": "polys",
+    "approximate_compressed_bytes": 329000,
+    "required_surface": [
+      "factor",
+      "coefficient",
+      "exact roots degree <= 4"
+    ],
+    "next_action": "Freeze untouched operation-class qualification; bind verifier to exact candidate identity; map and prune the causal polynomial dependency closure one structural cluster at a time; rerank after every accepted cut."
+  },
+  "rejected_do_not_reopen_without_new_evidence": [
+    "parameter count as terminal metric",
+    "hidden giant base behind small adapter",
+    "independent per-capability minimization as terminal objective",
+    "EDL or latent-information signal treated as literal deployed byte proof",
+    "dynamic trace alone treated as scope-complete proof",
+    "13.3 KB newly constructed symbolic kernel promoted under the current donor-harvest rule",
+    "as_leading_term substitution when it saves no meaningful bytes and worsens runtime",
+    "qualification without exact candidate identity binding"
+  ],
+  "mandatory_result_labels": [
+    "MEASURED",
+    "INFERRED",
+    "HYPOTHESIS",
+    "REJECTED",
+    "PROMOTED"
+  ],
+  "completion_boundary": "Do not claim universal minimum. Claim exact optimum only over an exhaustively searched finite discovered mechanism library, or a verified upper bound otherwise."
+}
