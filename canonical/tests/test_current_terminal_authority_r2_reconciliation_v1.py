@@ -144,18 +144,18 @@ class CurrentTerminalAuthorityR2ReconciliationV1Tests(unittest.TestCase):
             precedence["dormant_alternative_route_count"],
             result["dormant_alternative_route_cell_count"],
         )
-        self.assertEqual(result["direct_route_count"], 39)
+        self.assertEqual(result["direct_route_count"], 40)
         self.assertEqual(result["bounded_family_count"], 36)
         self.assertFalse(terminal["live_truth"]["opus_5_5_is_global_terminal_objective"])
         self.assertTrue(terminal["live_truth"]["opus_5_5_is_frontier_checkpoint"])
         self.assertFalse(terminal["live_truth"]["current_escape_policy_adequacy_closed"])
 
-    def test_r2_v53_regcap_routing_precedence_and_nonclaims(self):
+    def test_current_r2_v81_preserves_regcap_routing_nonclaims(self):
         terminal = self.load(TERMINAL)
         r2 = self.load(R2)
         activation = self.load(REGCAP_ACTIVATION)
 
-        self.assertIn("__V57__", r2["status"])
+        self.assertIn("__V81__", r2["status"])
         rec = r2["r2_v53_regcap_semantic_routing_reconciliation"]
         self.assertEqual(
             rec["precedence"][:3],
@@ -202,7 +202,7 @@ class CurrentTerminalAuthorityR2ReconciliationV1Tests(unittest.TestCase):
             truth["r2_primary_internal_unsolved_cell"],
             "FINANCE_SEMANTIC_ADEQUACY_TAIL",
         )
-        self.assertIn("CURRENT_R2_V57", terminal["status"])
+        self.assertIn("CURRENT_R2_V81", terminal["status"])
         self.assertIn("TERMINAL_FALSE", terminal["status"])
         self.assertEqual(
             terminal["r2_v53_regcap_semantic_routing_reconciliation_20261009_v1"][
