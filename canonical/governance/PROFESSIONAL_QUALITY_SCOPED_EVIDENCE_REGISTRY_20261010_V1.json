@@ -85,12 +85,12 @@
       ],
       "claim_kind": "LOSSLESS_DECISION_SUFFICIENT_GAP_REPRESENTATION_AND_MINIMUM_POLICY_CHANGING_INFORMATION_ROUTING",
       "source_receipt": {
-        "path": "canonical/verification/PROFESSIONAL_QUALITY_R10_DECISION_SUFFICIENCY_SCOPED_VERIFY_20261010_V1.json",
-        "git_blob_sha": "18574110321eb1bacc18db46cbd0673bf6a0a0ac"
+        "path": "canonical/verification/PROFESSIONAL_QUALITY_R10_DECISION_SUFFICIENCY_KERNEL_VERIFY_20261010_V1.json",
+        "git_blob_sha": "0022ab01d1eb67af9acf1f9861092c2a85e86536"
       },
       "reusable_compiler": {
-        "path": "canonical/runtime/one_shot_reality_closure_v2.py",
-        "git_blob_sha": "b8347a3993f96aa5e6fa2f1fe68d7c8afccb8bec"
+        "path": "canonical/runtime/professional_r10_decision_sufficiency_kernel_v1.py",
+        "git_blob_sha": "77551fa262a8bbedb0ef59ce60fddc56e60e437a"
       },
       "compiler_verification": {
         "path": "canonical/verification/ONE_SHOT_DECISION_SUFFICIENT_GATE_VERIFY_20261009_V2.json",
@@ -100,7 +100,13 @@
       "global_root_closure": false,
       "semantic_leaf_credit": false,
       "execution_leaf_credit": false,
-      "terminal_credit_delta": 0
+      "terminal_credit_delta": 0,
+      "factored_from": {
+        "path": "canonical/runtime/one_shot_reality_closure_v2.py",
+        "git_blob_sha": "b8347a3993f96aa5e6fa2f1fe68d7c8afccb8bec",
+        "equivalence_verified": true,
+        "reason": "REMOVE_UNRELATED_ONE_SHOT_LIVE_BRAIN_DEPENDENCY_CONE_FROM_BOUNDED_PROFESSIONAL_R10_SUBJECT_MATERIAL_WITHOUT_CHANGING_CLAIM_SEMANTICS"
+      }
     },
     {
       "scope_id": "PQ::R6::LEAF_EVIDENCE::CONTENT_ADDRESSED_SCOPE_MATCHED_ADMISSION",
