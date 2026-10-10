@@ -31,7 +31,9 @@
     "exact_component_set_frozen": true,
     "global_subject_identity_authority": false,
     "new_positive_behavior_added": false,
-    "strict_fail_closed_refinement_of_v9": true
+    "strict_fail_closed_refinement_of_v9": true,
+    "scoped_evidence_inclusion_does_not_transport_scope": true,
+    "root_subject_binding_requires_independent_verification": true
   },
   "incremental_spend_usd": 0,
   "intended_use": "V10_PROOF_BOUND_EXECUTION_WITH_PREEXECUTION_EXACT_R12_TOTALITY_VERIFIER_PIN",
