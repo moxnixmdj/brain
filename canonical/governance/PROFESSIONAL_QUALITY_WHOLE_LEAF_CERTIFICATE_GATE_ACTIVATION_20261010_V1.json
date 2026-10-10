@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_WHOLE_LEAF_CERTIFICATE_GATE_ACTIVATION_20261010_V1",
+  "date": "2026-10-10",
+  "status": "ACTIVE_CANDIDATE__INDEPENDENTLY_VERIFIED_SHARED_WHOLE_LEAF_SCOPE_ADMISSION_GATE__ZERO_LEAF_PROPERTY_OR_TERMINAL_CREDIT",
+  "objective": "REPLACE_24_BESPOKE_SCOPE_COMPLETENESS_ADMISSION_PATHS_WITH_ONE_CLAIM_SCOPED_CONTENT_ADDRESSED_GATE_WHILE_PRESERVING_PROPERTY_TRUTH_AS_A_SEPARATE_OBLIGATION",
+  "runtime": {
+    "path": "canonical/runtime/professional_quality_whole_leaf_certificate_gate_v1.py",
+    "git_blob_sha": "19715b5be4267343dfa07e90e5b1fb73787c3ce6"
+  },
+  "tests": {
+    "path": "canonical/tests/test_professional_quality_whole_leaf_certificate_gate_v1.py",
+    "git_blob_sha": "a32bc168466c35f4e258c61230301b031c404316"
+  },
+  "verification": {
+    "path": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_CERTIFICATE_GATE_VERIFY_20261010_V1.json",
+    "git_blob_sha": "d6c161a6f2735a9a384d8d07d778334c7d9389da",
+    "result": "PYCOMPILE_PASS__12_OF_12_PASS"
+  },
+  "reused_scope_compiler": {
+    "path": "canonical/runtime/universal_scope_closure_compiler_v1.py",
+    "git_blob_sha": "b208255789b14e44e86c82c196e06b5c41b3d039"
+  },
+  "current_whole_leaf_ledger": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_RESIDUAL_LEDGER_20261010_V1.json",
+    "git_blob_sha": "ae5503829ad340cccef287f37ff70e4ab9288d33",
+    "leaf_count": 24,
+    "closed_leaf_count": 0,
+    "shared_residual_class": "WHOLE_LEAF_INPUT_DOMAIN_TOTALITY_OR_INDEPENDENT_CERTIFIED_COMPLETE_UNION"
+  },
+  "admitted_certificate_bases": [
+    "UNIVERSAL_FORMAL_SCOPE_PROOF",
+    "EXACT_COMPLETE_TARGET_CASE_UNIVERSE",
+    "EXHAUSTIVE_FINITE_SUPERSET",
+    "LOSSLESS_DECOMPOSITION"
+  ],
+  "scheduling_effect": {
+    "delete": "DESIGN_24_SEPARATE_SCOPE_COMPLETENESS_VERIFIERS",
+    "activate": "INSTANTIATE_ONE_SHARED_CERTIFICATE_SCHEMA_PER_LEAF_WITH_EXACT_CLAIM_SCOPE_AND_INDEPENDENT_SEMANTIC_VERIFICATION",
+    "next_order": [
+      "SEARCH_EXISTING_CLAIM_SCOPED_TOTALITY_OR_COMPLETE_UNION_CERTIFICATES",
+      "REUSE_EXISTING_BOUNDED_WITNESS_RECEIPTS_ONLY_WITHIN_PROVED_SCOPE",
+      "DEFINE_ONLY_THE_UNCOVERED_ADMISSIBLE_INPUT_PARTITIONS",
+      "PRODUCE_CONTENT_ADDRESSED_CERTIFICATE_AND_INDEPENDENT_SEMANTIC_VERIFICATION",
+      "KEEP_PROPERTY_TRUTH_AND_QUALITY_PROMOTION_SEPARATE"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_PROFESSIONAL_LEAF_CLOSED_BY_ACTIVATION",
+    "NO_WHOLE_LEAF_PROPERTY_TRUTH",
+    "NO_DOMAIN_SEMANTIC_OR_EXECUTION_CLOSURE",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "closed_leaf_count_delta": 0,
+  "semantic_truth_authority": false,
+  "execution_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
