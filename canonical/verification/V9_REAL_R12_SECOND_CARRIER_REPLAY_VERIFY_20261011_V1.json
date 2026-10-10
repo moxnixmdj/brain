@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_V9_REAL_R12_SECOND_CARRIER_REPLAY_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__SECOND_INDEPENDENT_SPRITE__EXACT_ARCHIVE_REPLAY__REAL_V9_POSITIVE_ROUTE_AND_RUN_SCOPED_CC_R3_REPRODUCED__NO_GLOBAL_CC_R3_OR_PROPERTY_CREDIT",
+  "producer_carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-professional-hard-defect-verify-20261010",
+    "sprite_id": "sprite-1bbb86ed-1f7c-409f-8397-fadc4de7a62a",
+    "workspace": "/home/sprite/v9-real-witness"
+  },
+  "independent_replay_carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/v9-real-witness-second",
+    "producer_carrier_distinct": true
+  },
+  "transport": {
+    "archive_sha256": "d9b83f0bc24e586150dc3e1e2145683e56118d0beceb46d624c9ea48b4523740",
+    "archive_bytes": 933631,
+    "verify_script_sha256": "2f04f77b8c4592eff8f866f61de71f0761b12fa673b12e6f830a11335df4d827"
+  },
+  "exact_replayed_artifacts": {
+    "source_docx_sha256": "1db684b36a66b59f5a8a748036f21a9b7b4e4ff83db6904adfa34137089eb94e",
+    "output_docx_sha256": "41f2d30471a671d77cecf885b5f8c20409ca736616925221ec371761cfa21777",
+    "result_json_sha256": "37727147fb1d62db2caf8d6c011a1169416810ef05c80757ef0cdde013fcca76"
+  },
+  "reproduced_result": {
+    "pass": "ROUTE__P1_ORDINARY",
+    "final_step_outcome": "POSITIVE_CERTIFICATE",
+    "positive_certification_authorized": true,
+    "material_totality_proved": true,
+    "v9_executable_r12_totality_semantics_verified": true,
+    "run_scoped_cc_r3_terminal_closure_proved": true,
+    "run_context_sha256": "sha256:103249e3cca5a0166b810752f44f265ed5fdafa4ead23b8a87c77768362638ca",
+    "evidence_sha256": "2cb97029578a3c1f5544c568ab064cbc1dd6c081f1e1664f667badbe0d48d57c",
+    "policy_cover_problem_sha256": "b15b57cb2b6cf150b7ec3fb7623e11139a1324be20554cdd45aea52592c41f76",
+    "world_count": 1,
+    "errors": null,
+    "reason": null
+  },
+  "durable_raw_source": {
+    "canonical_evidence_path": "canonical/evidence/PROFESSIONAL_QUALITY_R3_V7_EXACT_REALIZATION_INSTANCE_20261010_V1.json",
+    "canonical_evidence_git_blob_sha": "13e7e58b3621b3cabb7abdebe23689f3a72678d2",
+    "library_path": "/Brain Evidence/Professional Quality/R3/PQ_R3_V7_REALIZATION_INSTANCE_20261010_V1.zip",
+    "library_file_id": "libfile_297071cc89788191a6ee1b3984f952c7",
+    "bundle_sha256": "d617dc6a3dc28ebaa89c16ee1928eebc525143bf8e6f820d3fa13a24424b8978",
+    "bundle_bytes": 256875
+  },
+  "truth": {
+    "real_v9_positive_execution_observed": true,
+    "v9_c8_nonvacuity_proved": true,
+    "run_scoped_material_defeater_totality_proved": true,
+    "run_scoped_cc_r3_proved": true,
+    "whole_leaf_universal_cc_r3_proved": false,
+    "r4_proof_realization_authority": false,
+    "r12_semantic_property_truth_authority": false
+  },
+  "scope_boundary": "THIS_REPLAY_PROVES_EXISTENCE_AND_EXACT_RUN_SCOPED_TOTALITY_ONLY__THE_FROZEN_R12_PROPERTY_QUANTIFIES_FOR_ALL_ADMISSIBLE_INPUTS_IN_THE_VERIFIED_WHOLE_LEAF_SCOPE__ONE_RUN_CANNOT_CLOSE_THAT_UNIVERSAL_CC_R3_SLOT",
+  "exact_next": "PROVE_ONE_CLAIM_WIDE_UNIVERSAL_FORMAL_SCOPE_PROOF_OR_INDEPENDENTLY_CERTIFIED_COMPLETE_UNION_WITH_EMPTY_MATERIAL_DEFEATER_COMPLEMENT__THEN_BIND_CC_R3_ROOT_SLOT_AND_RERUN_R4",
+  "hard_nonclaims": [
+    "NO_WHOLE_LEAF_CC_R3_FROM_ONE_EXACT_RUN",
+    "NO_R12_SEMANTIC_PROPERTY_TRUTH_FROM_NONVACUITY",
+    "NO_R4_PROOF_CLOSURE",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "property_truth_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
