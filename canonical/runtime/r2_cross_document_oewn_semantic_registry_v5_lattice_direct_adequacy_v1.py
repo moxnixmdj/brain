@@ -149,8 +149,8 @@ def preflight(request:Mapping[str,Any],*,repo_root=None)->dict[str,Any]:
             "query_relative_effect_semantics_finite":True,
             "raw_acceptance_obligation_ids":ids,
             "semantic_scope":(
-                "QUERY_RELATIVE_EFFECT_FIELD_LATTICE_WITH_COMPOSITIONAL_V14_SOURCE_PROOF_"
-                "AND_BRAIN_OWNED_REGISTRY_V3_WITH_DOMAIN_MAPPING_RELATION_AUTHORITY_AND_V15_ADMISSIBILITY_GATE"
+                "QUERY_RELATIVE_EFFECT_FIELD_LATTICE_WITH_V16_SOURCE_PROOF_"
+                "AND_BRAIN_OWNED_REGISTRY_V5_OEWN_DECISION_RELATION_AUTHORITY"
             ),
             "preflight_execution_authority":False,
             "preflight_verification":deepcopy(checked),
@@ -230,8 +230,9 @@ def run(request:Mapping[str,Any],*,repo_root=None)->dict[str,Any]:
             "retry_by_other_route_authorized":False,
             "source_immutability_verified":True,
             "authority_boundary":(
-                "DIRECT_ROUTE_USES_ONLY_SOURCE_ALIGNED_FIELDS_AND_BRAIN_OWNED_"
-                "REGISTERED_SEMANTIC_EDGE_AUTHORITIES;UNSUPPORTED_EDGES_REMAIN_TOP"
+                "DIRECT_ROUTE_USES_V16_SOURCE_ALIGNED_FIELDS_AND_BRAIN_OWNED_"
+                "REGISTRY_V5_OEWN_DECISION_RELATION_AUTHORITY;ACTION_CHANGING_OR_"
+                "UNSUPPORTED_LEXICAL_EDGES_REMAIN_TOP"
             ),
         }
     except Exception as exc:
