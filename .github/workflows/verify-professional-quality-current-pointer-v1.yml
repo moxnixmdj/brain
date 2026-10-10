@@ -1,0 +1,25 @@
+name: verify-professional-quality-current-pointer-v1
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json
+      - canonical/governance/PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_REGISTRY_20261010_V1.json
+      - canonical/runtime/professional_quality_scoped_evidence_overlay_v1.py
+      - canonical/tests/test_professional_quality_scoped_evidence_overlay_v1.py
+      - canonical/tests/test_current_professional_quality_pointer_v1.py
+      - .github/workflows/verify-professional-quality-current-pointer-v1.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Run professional-quality current pointer integration
+        run: |
+          python -m unittest             canonical.tests.test_professional_quality_scoped_evidence_overlay_v1             canonical.tests.test_current_professional_quality_pointer_v1             -v
