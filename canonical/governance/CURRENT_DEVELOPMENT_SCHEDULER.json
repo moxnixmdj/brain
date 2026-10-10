@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_DEVELOPMENT_SCHEDULER_POINTER_V1",
   "date": "2026-10-10",
-  "status": "ACTIVE__POST_COMPOSITION_V18__PROFESSIONAL_SCOPE_24_OF_24__PROPERTY_TRUTH_2_OF_24__TEN_EXECUTION_LEAVES_OPEN__ONE_SHARED_SEMANTIC_COMPLETENESS_BLOCKER__PARALLEL_EVIDENCE_READY__FULL_EXECUTION_FAILS_CLOSED_WITHOUT_VECTOR_OR_SEPARATE_AUTHORITY",
+  "status": "ACTIVE__POST_COMPOSITION_V19__PROFESSIONAL_SCOPE_24_OF_24__PROPERTY_TRUTH_4_OF_24__EIGHT_EXECUTION_LEAVES_OPEN__TWELVE_SEMANTIC_LEAVES_REDUCED_TO_SHARED_TOTALITY_REUSE__PARALLEL_EVIDENCE_READY__FULL_EXECUTION_FAILS_CLOSED_WITHOUT_VECTOR_OR_SEPARATE_AUTHORITY",
   "authoritative_activation": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V13.json",
   "runtime": "canonical/runtime/capability_parallel_frontier_post_composition_v1.py",
   "primary_entrypoint": "canonical.runtime.capability_parallel_frontier_post_composition_v1.plan_current_post_composition_frontier",
@@ -66,13 +66,15 @@
   "whole_leaf_residual_control": {
     "path": "canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_SCOPE_BATCH_ACTIVATION_20261010_V1.json",
     "git_blob_sha": "d40188f87818d9c6a4507a043380a753ca563e18",
-    "status": "24_OF_24_WHOLE_DOMAIN_EQUIVALENCE_AND_SCOPE_COMPLETE__PROPERTY_TRUTH_0_OF_24",
+    "status": "24_OF_24_SCOPE_COMPLETE__PROPERTY_TRUTH_4_OF_24__8_EXECUTION_AND_12_SEMANTIC_OPEN",
     "verification": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_SCOPE_BATCH_VERIFY_20261010_V1.json",
     "verification_git_blob_sha": "4c2d40a262f18f34bb35f94b59660d60972d45ef",
     "admitted_v2_chain_count": 24,
     "claim_scope_construction_required_count": 0,
-    "property_truth_ready_count": 24,
-    "property_truth_closed_count": 0
+    "property_truth_ready_count": 20,
+    "property_truth_closed_count": 4,
+    "registry_verification_v2": "canonical/verification/PROFESSIONAL_QUALITY_LEAF_REGISTRY_PROPERTY_TRUTH_VERIFY_20261010_V2.json",
+    "registry_verification_v2_git_blob_sha": "bdde7b52793272623773b07bf774c0a74c6be7af"
   },
   "v12_activation": {
     "path": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V12.json",
