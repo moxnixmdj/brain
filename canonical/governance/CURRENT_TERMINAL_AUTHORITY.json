@@ -1,7 +1,7 @@
 {
-  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V38",
+  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V39",
   "date": "2026-10-10",
-  "status": "ACTIVE_FAIL_CLOSED_REAL_MISSION_BOUND__STRICT_EXTERNALITY_RECONCILED__R3_ZERO_RESIDUAL_RECONCILED__OPUS_5_5_CHECKPOINT_TERMINAL_FALSE__CURRENT_R2_V69_AND_CODING_V4_FIVE_REGION_PROJECTION_BOUND__COVERAGE_R1_R4_LIVE_BINDING_REPAIRED__CLAIM_SCOPED_COMPLETENESS_THEOREM_BOUND__ROOT_NAMESPACE_COLLISION_GUARDED__TB_SCIENCE_RANK18_V3_SAME_ATTEMPT_RESEAL_VERIFIED__ACTIVATION_READY__TB_SCIENCE_RANK18_V4_FRESH_ACTIVATION_RESEAL_VERIFIED__BRAIN_V3_EFFECTIVE__V2_ACTIVATION_NOT_ARMED__TB_SCIENCE_RANK18_V2_DURABLE_START_COMMITTED__RESULT_PENDING__SCHEDULER_FROZEN",
+  "status": "ACTIVE_FAIL_CLOSED_REAL_MISSION_BOUND__STRICT_EXTERNALITY_RECONCILED__R3_ZERO_RESIDUAL_RECONCILED__OPUS_5_5_CHECKPOINT_TERMINAL_FALSE__CURRENT_R2_V69_AND_CODING_V4_FIVE_REGION_PROJECTION_BOUND__COVERAGE_R1_R4_LIVE_BINDING_REPAIRED__CLAIM_SCOPED_COMPLETENESS_THEOREM_BOUND__ROOT_NAMESPACE_COLLISION_GUARDED__TB_SCIENCE_RANK18_V3_SAME_ATTEMPT_RESEAL_VERIFIED__ACTIVATION_READY__TB_SCIENCE_RANK18_V4_FRESH_ACTIVATION_RESEAL_VERIFIED__BRAIN_V3_EFFECTIVE__V2_ACTIVATION_NOT_ARMED__TB_SCIENCE_RANK18_V6_FINAL_ZERO__PLANNER_CONTROLLER_FAULT_BEFORE_FIRST_ACTION__RANK19_EXECUTION_FROZEN_PENDING_ZERO_EXPOSURE_PLANNER_REPAIR",
   "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "authoritative_sources": {
     "universal_escape_resolver_v2_active_planning_overlay": {
@@ -4872,7 +4872,9 @@
     "scheduler_frozen": true,
     "finalization_authority": true,
     "acceptance_credit_delta": 0,
-    "terminal_credit_delta": 0
+    "terminal_credit_delta": 0,
+    "current": false,
+    "superseded_by": "tb_science_rank18_v6_irreversible_result_truth_20261010_v1"
   },
   "r4_live_binding_currentness_reconciliation_20261010_v1": {
     "status": "RECONCILED__ACYCLIC_R4_CURRENTNESS_CHAIN__ZERO_CREDIT",
@@ -4883,5 +4885,33 @@
     "terminal_credit_delta": 0,
     "acceptance_credit_delta": 0,
     "ownership_credit_delta": 0
+  },
+  "tb_science_rank18_v6_irreversible_result_truth_20261010_v1": {
+    "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK18_V6_IRREVERSIBLE_RESULT_TERMINAL_PROJECTION_V1",
+    "status": "CURRENT__FINAL_ZERO__PLANNER_CONTROLLER_FAULT_BEFORE_FIRST_ACTION__EXECUTION_ROBUSTNESS_HELD__RANK18_IRREVERSIBLY_CONSUMED__RANK19_EXECUTION_FROZEN_PENDING_ZERO_EXPOSURE_PLANNER_REPAIR",
+    "truth_path": "canonical/verification/TB_SCIENCE_RANK18_V6_IRREVERSIBLE_RESULT_TRUTH_20261010_V1.json",
+    "truth_git_blob_sha": "2459d821057d6f7178ffea440fb19966e56a3d89",
+    "ledger_path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V37.json",
+    "ledger_git_blob_sha": "1f44e46869055cc046da9c53fcae485615f239f9",
+    "current_execution_pointer_path": "canonical/governance/CURRENT_TB_SCIENCE_EXECUTION.json",
+    "current_execution_pointer_git_blob_sha": "999db25cb0a339eac146130fac884e879ab1c88f",
+    "workflow_run_id": 38030021656,
+    "workflow_job_id": 114148806597,
+    "artifact_id": 11662290897,
+    "artifact_zip_sha256": "2f578551d9105f8ffa5e81145db97f68ca66748c3cca4f8442c2591c693eacad",
+    "logical_attempt_id": "a02ee7de469f953679fb593ab152a9f67eb1ebe8c364f8c748f18cd8a81eab8d",
+    "benchmark_trials_consumed": 1,
+    "reward": 0,
+    "final_classification": "FINAL_ZERO",
+    "planner_error_type": "SciencePlannerError",
+    "planner_error_sha256": "abe6bbdc4215f25a0e65b71228d821de2ec5f04f20aede403088eeb2bd8f4c78",
+    "first_durable_event_kind": "FAULT",
+    "action_effect_observed": false,
+    "rank18_retry_authority": false,
+    "rank18_replacement_authority": false,
+    "rank19_execution_authority": false,
+    "zero_exposure_planner_repair_required": true,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
   }
 }
