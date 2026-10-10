@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_PLANNER_V6_GENERATION_AWARE_TIMEOUT_ZERO_EXPOSURE_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__ZERO_EXPOSURE_GENERATION_AWARE_TIMEOUT_PATCH__PY_COMPILE__5_OF_5_FOCUSED__NO_BENCHMARK_TASK_EXECUTION__NO_RANK19_AUTHORITY",
+  "subject": {
+    "planner_path": "canonical/runtime/harbor_science_planner_v6.py",
+    "planner_git_blob_sha": "8783a70d73b7ae844c6501bbae77b713a5b9be0c",
+    "test_path": "canonical/tests/test_harbor_science_planner_v6_generation_timeout.py",
+    "test_git_blob_sha": "94033d5cd8e16cc11c27f77ce2c6ba3cf6a96b82",
+    "branch": "repair/tb-science-generation-aware-timeout-20261010-v1"
+  },
+  "causal_scope": {
+    "observed_rank18_input_tokens": 2948,
+    "max_tool_completion_tokens": 4096,
+    "prior_effective_timeout_s": 300,
+    "repaired_effective_timeout_s": 889,
+    "claim": "THE_PRIOR_TIMEOUT_FORMULA_DID_NOT_ACCOUNT_EXPLICITLY_FOR_BOUNDED_COMPLETION_GENERATION_TIME__THE_PATCH_ADDS_A_RESERVED_COMPLETION_GENERATION_TERM_WITH_FAIL_CLOSED_CAPS",
+    "exact_rank18_timeout_cause_proved": false,
+    "timeout_underbudget_condition_repaired": true
+  },
+  "repaired_formula": "min(cap, max(minimum, requested, ceil(input_tokens/prefill_floor) + ceil(MAX_TOOL_COMPLETION_TOKENS/completion_floor) + transport_margin))",
+  "verification": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-terminal-autopilot-20261010",
+    "sprite_id": "sprite-0d965d58-d2ab-4ac2-970f-9fa18d65e52f",
+    "workspace": "/home/sprite/repo",
+    "py_compile_pass": true,
+    "focused_tests_run": 5,
+    "focused_tests_passed": 5,
+    "focused_tests_failed": 0,
+    "dependency_materialized_for_detached_tree": "canonical/runtime/harbor_command_policy.py",
+    "benchmark_task_read": false,
+    "benchmark_trials_consumed": 0,
+    "incremental_spend_usd": 0
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_TIMEOUT_WAS_THE_ONLY_OR_EXACT_RANK18_ROOT_CAUSE",
+    "NO_RANK18_RETRY_OR_REPLACEMENT_AUTHORITY",
+    "NO_RANK19_EXECUTION_AUTHORITY",
+    "NO_ACCEPTANCE_FAMILY_OR_TERMINAL_CREDIT",
+    "NO_FULL_V12_AGENT_PATH_REPLAY_YET"
+  ],
+  "next": "RUN_ZERO_EXPOSURE_V12_SYNTHETIC_AGENT_PATH_REPLAY_WITH_THE_PATCH__ONLY_IF_PASS_RECONCILE_RANK19_EXECUTION_AUTHORITY",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_trials_consumed_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false
+}
