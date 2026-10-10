@@ -1,0 +1,17 @@
+{
+  "schema": "PROJECT_BRAIN_R2_DIRECT_ROUTE_DEPLOYMENT_CANDIDATE_V1",
+  "date": "2026-10-10",
+  "route_id": "DIRECT_ADEQUACY::CROSS_DOCUMENT_OEWN_SEMANTIC_REGISTRY_V5_LATTICE_V9",
+  "capability_id": "cross_document.semantic_registry_v5_oewn_lattice.stdlib",
+  "deployment_requested": true,
+  "selection_class": "UNIQUE_MATCH_REQUIRED",
+  "runtime_path": "canonical/runtime/r2_cross_document_oewn_semantic_registry_v5_lattice_direct_adequacy_v1.py",
+  "runtime_git_blob_sha": "4a570b3743964b6ac0fd5108353406ba135b1745",
+  "preflight_callable": "preflight",
+  "run_callable": "run",
+  "route_verification_path": "canonical/verification/R2_OEWN_EFFECT_FIELD_EDGE_VERIFY_20261010_V1.json",
+  "route_verification_git_blob_sha": "40e7885fc07e050a31d4c36c108a9f84436182a1",
+  "scope": "QUERY_RELATIVE_EFFECT_FIELD_LATTICE_WITH_OEWN_RELEASE_RELATIVE_DECISION_SUFFICIENT_LEXICAL_RELATION_AUTHORITY",
+  "incremental_spend_usd": 0,
+  "terminal_authority": false
+}
