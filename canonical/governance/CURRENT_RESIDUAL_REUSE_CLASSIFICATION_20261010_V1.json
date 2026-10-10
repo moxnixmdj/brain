@@ -361,9 +361,9 @@
         "PROFESSIONAL_WHOLE_LEAF_CLAIM_SCOPE_GATE_V2",
         "PROFESSIONAL_WHOLE_LEAF_READINESS_AUDIT_V2"
       ],
-      "exact_remaining_class": "TEN_EXECUTION_LEAF_PROPERTY_TRUTH_CHALLENGES__ONE_SHARED_SEMANTIC_DEFEATER_COMPLETENESS_AND_TYPED_EVIDENCE_PROBLEM__FULL_CURRENT_MAIN_REGRESSION__THEN_PROMOTION",
-      "new_primitive_status": "NOT_ESTABLISHED__TWO_EXECUTION_LEAVES_CLOSED_BY_REUSE__SEMANTIC_BLOCKER_IS_COMPLETENESS_EVIDENCE_NOT_YET_ARCHITECTURE_DEFECT",
-      "current_truth": "24_OF_24_SCOPE_COMPLETE__PROPERTY_TRUTH_2_OF_24__R10_AND_R7_EXECUTION_LEAVES_VERIFIED__10_EXECUTION_LEAVES_OPEN__12_SEMANTIC_LEAVES_SHARE_DEFEATER_COMPLETENESS_TYPED_EVIDENCE_BLOCKER",
+      "exact_remaining_class": "EIGHT_EXECUTION_LEAF_PROPERTY_TRUTH_CHALLENGES__TWELVE_SEMANTIC_LEAVES_HAVE_VERIFIED_CLAIM_SCOPED_IDENTITY_CARRIER_AND_REQUIRE_CLAIM_SPECIFIC_CC_R1_CC_R2_CC_R3_R4_TOTALITY_CLOSURE__FULL_CURRENT_MAIN_REGRESSION__THEN_PROMOTION",
+      "new_primitive_status": "NOT_ESTABLISHED__FOUR_EXECUTION_LEAVES_CLOSED_BY_REUSE_PROMOTION__SEMANTIC_CARRIER_FACTORIZATION_SOLVED_12_OF_12__REMAINING_SEMANTIC_WORK_IS_CLAIM_SCOPED_COVERAGE_CERTIFICATION",
+      "current_truth": "24_OF_24_SCOPE_COMPLETE__PROPERTY_TRUTH_4_OF_24__R1_R7_R10_R12_EXECUTION_LEAVES_VERIFIED__8_EXECUTION_LEAVES_OPEN__12_SEMANTIC_LEAVES_IDENTITY_CARRIER_FACTORIZATION_VERIFIED__0_SEMANTIC_PROPERTY_TRUTH_CLOSED",
       "source_current_path": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
       "observed_summary_is_load_bearing": false,
       "current_binding_frontier": {
@@ -414,15 +414,20 @@
         "property_truth_closed_count": 0
       },
       "property_truth_frontier": {
-        "verified_leaf_count": 2,
+        "verified_leaf_count": 4,
         "total_leaf_count": 24,
         "verified_leaf_ids": [
+          "PQ::R1_TARGET_SPECIFICATION::EXECUTION",
+          "PQ::R7_CAUSAL_PRESCRIPTIVE::EXECUTION",
           "PQ::R10_ANALYSIS_DECISION::EXECUTION",
-          "PQ::R7_CAUSAL_PRESCRIPTIVE::EXECUTION"
+          "PQ::R12_META_COMPOSITION_CLOSURE::EXECUTION"
         ],
-        "open_execution_leaf_count": 10,
+        "open_execution_leaf_count": 8,
         "open_semantic_leaf_count": 12,
-        "shared_semantic_blocker": "CURRENT_DEFEATER_CATALOG_EXPLICITLY_DISCLAIMS_COMPLETENESS"
+        "registry_path": "canonical/governance/PROFESSIONAL_QUALITY_LEAF_EVIDENCE_REGISTRY_20261010_V1.json",
+        "registry_git_blob_sha": "71863cfbb47f9951eaf34e4e89692aee5c540560",
+        "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_LEAF_REGISTRY_PROPERTY_TRUTH_VERIFY_20261010_V2.json",
+        "verification_git_blob_sha": "bdde7b52793272623773b07bf774c0a74c6be7af"
       },
       "semantic_shared_blocker_verification": {
         "path": "canonical/verification/PROFESSIONAL_QUALITY_SEMANTIC_SHARED_BLOCKER_INDEPENDENT_VERIFY_20261010_V1.json",
@@ -431,6 +436,23 @@
         "semantic_leaf_count": 12,
         "catalog_completeness_proved": false,
         "new_primitive_required": false
+      },
+      "semantic_totality_reuse": {
+        "reduction_path": "canonical/governance/PROFESSIONAL_SEMANTIC_TOTALITY_REUSE_REDUCTION_20261010_V1.json",
+        "reduction_git_blob_sha": "ab7e1c6ac1aad3b6bd3f32dfc959cefc903cbb6d",
+        "identity_carrier_activation_path": "canonical/governance/PROFESSIONAL_SEMANTIC_IDENTITY_CARRIER_ACTIVATION_20261010_V1.json",
+        "identity_carrier_activation_git_blob_sha": "3e99ddbf25cd8e392c5a22a5c14ae5fea5dc3138",
+        "identity_carrier_verification_path": "canonical/verification/PROFESSIONAL_SEMANTIC_IDENTITY_CARRIER_VERIFY_20261010_V1.json",
+        "identity_carrier_verification_git_blob_sha": "35a3ccf9ad454aa0318a4ed10edc065830c3874d",
+        "semantic_leaf_count": 12,
+        "carrier_factorization_verified_count": 12,
+        "coverage_roots_required_per_leaf": [
+          "CC_R1_REALITY_CONTAINMENT_V1",
+          "CC_R2_MISSION_SOUNDNESS_V1",
+          "CC_R3_TERMINAL_CLOSURE_V1",
+          "CC_R4_PROOF_AUTHORITY_V1"
+        ],
+        "semantic_property_truth_closed_count": 0
       }
     },
     {
