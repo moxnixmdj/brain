@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_ESCAPE_TB_SCIENCE_CURRENT_ROUTE_RECLASSIFICATION_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "INDEPENDENT_PASS__12_CURRENT_ROUTE_SEMANTICS_ASSERTIONS__STRICT_PROGRESS_NOT_CLAIMED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/CURRENT_TB_SCIENCE_EXECUTION.json",
+    "git_blob_sha": "7aec52d3575710d630a4e8376286723fd5c0a353",
+    "byte_sha256": "13abdb9efbec773d6bc1cfa9c0a6a88a7128b473b69f90195d30cb486a86c39d"
+  },
+  "reclassification": {
+    "path": "canonical/governance/ESCAPE_TB_SCIENCE_CURRENT_ROUTE_RECLASSIFICATION_20261010_V1.json",
+    "git_blob_sha": "d7bc90a0a524a58d3cb4f9ca1978da19fae598fd"
+  },
+  "independent_verifier": {
+    "name": "brain-r3-structural-provider-verify-20261010",
+    "sprite_id": "sprite-4c7dc4a8-ac7d-44a7-b49d-0fdf1f321004",
+    "result": "12_OF_12_PASS"
+  },
+  "conclusions": {
+    "stale_rank19_interpretation_retired": true,
+    "rank20_v3_prestart_route_current": true,
+    "current_route_semantics_verified": true,
+    "strict_progress_witness_bound": false,
+    "gap_b_row_credit": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
