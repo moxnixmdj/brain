@@ -236,6 +236,13 @@ def resolve_authenticated_regcap_scope(
             candidate_ids=list(candidate_ids) if isinstance(candidate_ids, Sequence) else [],
         )
 
+    observation = compile_span(source_text, start=start, end=end)
+    if observation.get("pass") is not True:
+        return _base(
+            observation.get("status") or "UNRESOLVED",
+            observation=observation,
+        )
+
     universe = (
         regcap_registry.resolve_authenticated_registry(
             repo_root=repo_root,
@@ -268,14 +275,6 @@ def resolve_authenticated_regcap_scope(
             reason="CANDIDATES_DO_NOT_MATCH_AUTHENTICATED_REGISTRY",
             registry_candidate_ids=registry_ids,
             supplied_candidate_ids=sorted(supplied_ids),
-            registry_result=universe,
-        )
-
-    observation = compile_span(source_text, start=start, end=end)
-    if observation.get("pass") is not True:
-        return _base(
-            observation.get("status") or "UNRESOLVED",
-            observation=observation,
             registry_result=universe,
         )
 
