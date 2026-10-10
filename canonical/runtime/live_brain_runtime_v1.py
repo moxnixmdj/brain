@@ -36,7 +36,7 @@ SURFACES = (
     "CAPABILITY_FIRST_SCHEDULER_V1",
     "COUNTEREXAMPLE_GUIDED_CAUSAL_ARCHITECTURE_SYNTHESIZER_V1",
     "VERIFIED_REPAIR_REPLAY_LOOP_V1",
-    "REACHED_ESCAPE_STATE_KERNEL_V1",
+    "REACHED_ESCAPE_STATE_CONSTRUCTION_AUDIT_V1",
 )
 
 
@@ -112,8 +112,8 @@ def _rank_work(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
 
 
 def _reached_escape_state(payload: Mapping[str, Any]) -> dict[str, Any]:
-    from canonical.runtime.reached_escape_state_kernel_v1 import evaluate
-    return evaluate(payload)
+    from canonical.runtime.reached_escape_state_construction_audit_v1 import audit
+    return audit(payload)
 
 
 def _causal_synthesize(manifest: Mapping[str, Any]) -> dict[str, Any]:
