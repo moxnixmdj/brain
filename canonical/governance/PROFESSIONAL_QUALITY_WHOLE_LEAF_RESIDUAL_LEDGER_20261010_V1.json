@@ -1,0 +1,485 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_WHOLE_LEAF_RESIDUAL_LEDGER_20261010_V1",
+  "date": "2026-10-10",
+  "status": "DERIVED_CURRENT__24_OF_24_LEAVES_HAVE_BOUNDED_WITNESS_SCOPE__0_OF_24_WHOLE_LEAVES_CLOSED__ONE_SHARED_QUANTIFIER_SHAPE__ZERO_CREDIT",
+  "subject": {
+    "professional_current_path": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
+    "professional_current_git_blob_sha": "360ff610c5d2386fe47e4f36eb6f3246a4d826a4",
+    "scoped_registry_path": "canonical/governance/PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_REGISTRY_20261010_V1.json",
+    "scoped_registry_git_blob_sha": "b9ddf7cbe7fbfad0e81fe068a0c19b48703b5aba",
+    "compiler_path": "canonical/runtime/professional_quality_whole_leaf_residual_compiler_v1.py"
+  },
+  "quantifier_guard": {
+    "source": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_REUSE_OVEREXTENSION_QUARANTINE_20261005_V1.json",
+    "git_blob_sha": "c1b2d488dfd38c27b533f98424036be874d5e829",
+    "rule": "BOUNDED_PREDICATE_OR_SCOPE_WITNESS_DOES_NOT_ENTAIL_TOTALITY_OVER_THE_WHOLE_BEHAVIOR_INPUT_DOMAIN"
+  },
+  "counts": {
+    "expected_leaf_count": 24,
+    "observed_leaf_count": 24,
+    "closed_leaf_count": 0,
+    "open_leaf_count": 24,
+    "scoped_registry_entry_count": 21
+  },
+  "shared_residual_class": "WHOLE_LEAF_INPUT_DOMAIN_TOTALITY_OR_INDEPENDENT_CERTIFIED_COMPLETE_UNION",
+  "leaves": [
+    {
+      "leaf_id": "PQ::R10_ANALYSIS_DECISION::EXECUTION",
+      "bounded_witness_scope_count": 1,
+      "bounded_witnesses": [
+        {
+          "scope_id": "PQ::R10::DECISION_SUFFICIENCY::LOSSLESS_MINIMUM_INFORMATION",
+          "root_id": "R10_ANALYSIS_DECISION",
+          "claim_kind": "LOSSLESS_DECISION_SUFFICIENT_GAP_REPRESENTATION_AND_MINIMUM_POLICY_CHANGING_INFORMATION_ROUTING",
+          "source_receipt": {
+            "path": "canonical/verification/PROFESSIONAL_QUALITY_R10_DECISION_SUFFICIENCY_SCOPED_VERIFY_20261010_V1.json",
+            "git_blob_sha": "18574110321eb1bacc18db46cbd0673bf6a0a0ac"
+          },
+          "global_leaf_closure": false
+        }
+      ],
+      "whole_leaf_closed": false,
+      "residual": "PROVE_TOTALITY_OVER_ALL_ADMISSIBLE_LEAF_INPUTS_OR_BIND_INDEPENDENT_CERTIFIED_COMPLETE_UNION"
+    },
+    {
+      "leaf_id": "PQ::R10_ANALYSIS_DECISION::SEMANTIC",
+      "bounded_witness_scope_count": 1,
+      "bounded_witnesses": [
+        {
+          "scope_id": "PQ::R10::DECISION_SUFFICIENCY_SEMANTICS::LOSSLESS_MINIMUM_INFORMATION",
+          "root_id": "R10_ANALYSIS_DECISION",
+          "claim_kind": "LOSSLESS_MINIMUM_INFORMATION_DECISION_SUFFICIENCY_SEMANTICS",
+          "source_receipt": {
+            "path": "canonical/verification/PROFESSIONAL_QUALITY_R10_DECISION_SEMANTIC_VERIFY_20261010_V1.json",
+            "git_blob_sha": "c298b2510e352d876c1abacc069e915447e97823"
+          },
+          "global_leaf_closure": false
+        }
+      ],
+      "whole_leaf_closed": false,
+      "residual": "PROVE_TOTALITY_OVER_ALL_ADMISSIBLE_LEAF_INPUTS_OR_BIND_INDEPENDENT_CERTIFIED_COMPLETE_UNION"
+    },
+    {
+      "leaf_id": "PQ::R11_ADAPTIVE_INTEGRITY_SECURITY::EXECUTION",
+      "bounded_witness_scope_count": 1,
+      "bounded_witnesses": [
+        {
+          "scope_id": "PQ::R11::EVAL_FIREWALL::POST_IDENTITY_DISCOVERY_REVOCATION",
+          "root_id": "R11_ADAPTIVE_INTEGRITY_SECURITY",
+          "claim_kind": "CLEAN_EVALUATION_LANE_POST_IDENTITY_DISCOVERY_REVOCATION",
+          "source_receipt": {
+            "path": "canonical/verification/PROFESSIONAL_QUALITY_R11_EVALUATION_FIREWALL_SCOPED_VERIFY_20261010_V1.json",
+            "git_blob_sha": "346d369a811aa77af02be901a5b04458fb528667"
+          },
+          "global_leaf_closure": false
+        }
+      ],
+      "whole_leaf_closed": false,
+      "residual": "PROVE_TOTALITY_OVER_ALL_ADMISSIBLE_LEAF_INPUTS_OR_BIND_INDEPENDENT_CERTIFIED_COMPLETE_UNION"
+    },
+    {
+      "leaf_id": "PQ::R11_ADAPTIVE_INTEGRITY_SECURITY::SEMANTIC",
+      "bounded_witness_scope_count": 1,
+      "bounded_witnesses": [
+        {
+          "scope_id": "PQ::R11::FIREWALL_SEMANTICS::POST_IDENTITY_REVOCATION",
+          "root_id": "R11_ADAPTIVE_INTEGRITY_SECURITY",
+          "claim_kind": "CLEAN_EVALUATION_LANE_POST_IDENTITY_REVOCATION_SEMANTICS",
+          "source_receipt": {
+            "path": "canonical/verification/PROFESSIONAL_QUALITY_R11_FIREWALL_SEMANTIC_VERIFY_20261010_V1.json",
+            "git_blob_sha": "7f0468c4abae22504d71ef627efeaf57e85f02a6"
+          },
+          "global_leaf_closure": false
+        }
+      ],
+      "whole_leaf_closed": false,
+      "residual": "PROVE_TOTALITY_OVER_ALL_ADMISSIBLE_LEAF_INPUTS_OR_BIND_INDEPENDENT_CERTIFIED_COMPLETE_UNION"
+    },
+    {
+      "leaf_id": "PQ::R12_META_COMPOSITION_CLOSURE::EXECUTION",
+      "bounded_witness_scope_count": 1,
+      "bounded_witnesses": [
+        {
+          "scope_id": "PQ::R12::UVCK::FAIL_CLOSED_META_COMPOSITION",
+          "root_id": "R12_META_COMPOSITION_CLOSURE",
+          "claim_kind": "FAIL_CLOSED_ASSURANCE_GRAPH_META_COMPOSITION_AND_ORDER_INDEPENDENT_DEFEATER_ROUTING",
+          "source_receipt": {
+            "path": "canonical/verification/UVCK_V2_CURRENT_GENERATION_INDEPENDENT_REPLAY_VERIFY_20261009_V1.json",
+            "git_blob_sha": "81f7f070233b6aa1c4b491949a4c3e7aedfafd10"
+          },
+          "global_leaf_closure": false
+        }
+      ],
+      "whole_leaf_closed": false,
+      "residual": "PROVE_TOTALITY_OVER_ALL_ADMISSIBLE_LEAF_INPUTS_OR_BIND_INDEPENDENT_CERTIFIED_COMPLETE_UNION"
+    },
+    {
+      "leaf_id": "PQ::R12_META_COMPOSITION_CLOSURE::SEMANTIC",
+      "bounded_witness_scope_count": 1,
+      "bounded_witnesses": [
+        {
+          "scope_id": "PQ::R12::UVCK::FAIL_CLOSED_META_COMPOSITION",
+          "root_id": "R12_META_COMPOSITION_CLOSURE",
+          "claim_kind": "FAIL_CLOSED_ASSURANCE_GRAPH_META_COMPOSITION_AND_ORDER_INDEPENDENT_DEFEATER_ROUTING",
+          "source_receipt": {
+            "path": "canonical/verification/UVCK_V2_CURRENT_GENERATION_INDEPENDENT_REPLAY_VERIFY_20261009_V1.json",
+            "git_blob_sha": "81f7f070233b6aa1c4b491949a4c3e7aedfafd10"
+          },
+          "global_leaf_closure": false
+        }
+      ],
+      "whole_leaf_closed": false,
+      "residual": "PROVE_TOTALITY_OVER_ALL_ADMISSIBLE_LEAF_INPUTS_OR_BIND_INDEPENDENT_CERTIFIED_COMPLETE_UNION"
+    },
+    {
+      "leaf_id": "PQ::R1_TARGET_SPECIFICATION::EXECUTION",
+      "bounded_witness_scope_count": 1,
+      "bounded_witnesses": [
+        {
+          "scope_id": "PQ::R1::TARGET_CONTRACT::STRUCTURAL_COMPLETENESS_GATE",
+          "root_id": "R1_TARGET_SPECIFICATION",
+          "claim_kind": "CONTENT_ADDRESSED_BEHAVIORAL_CONTRACT_STRUCTURAL_COMPLETENESS_GATE",
+          "source_receipt": {
+            "path": "canonical/verification/PROFESSIONAL_QUALITY_R1_STRUCTURAL_TARGET_VERIFY_20261010_V1.json",
+            "git_blob_sha": "dcee55ba17d15154117100de6aebd34716ad3e3e"
+          },
+          "global_leaf_closure": false
+        }
+      ],
+      "whole_leaf_closed": false,
+      "residual": "PROVE_TOTALITY_OVER_ALL_ADMISSIBLE_LEAF_INPUTS_OR_BIND_INDEPENDENT_CERTIFIED_COMPLETE_UNION"
+    },
+    {
+      "leaf_id": "PQ::R1_TARGET_SPECIFICATION::SEMANTIC",
+      "bounded_witness_scope_count": 1,
+      "bounded_witnesses": [
+        {
+          "scope_id": "PQ::R1::TARGET_SEMANTICS::PROFESSIONAL_ARTIFACT_PLAN",
+          "root_id": "R1_TARGET_SPECIFICATION",
+          "claim_kind": "EXACT_PARAMETERIZED_PROFESSIONAL_ARTIFACT_TARGET_SEMANTICS",
+          "source_receipt": {
+            "path": "canonical/verification/PROFESSIONAL_QUALITY_R1_TARGET_SEMANTIC_VERIFY_20261010_V1.json",
+            "git_blob_sha": "dfffdd6eff129ce7498c4e4aa8a822cd4a5cda22"
+          },
+          "global_leaf_closure": false
+        }
+      ],
+      "whole_leaf_closed": false,
+      "residual": "PROVE_TOTALITY_OVER_ALL_ADMISSIBLE_LEAF_INPUTS_OR_BIND_INDEPENDENT_CERTIFIED_COMPLETE_UNION"
+    },
+    {
+      "leaf_id": "PQ::R2_CANDIDATE_SEARCH::EXECUTION",
+      "bounded_witness_scope_count": 1,
+      "bounded_witnesses": [
+        {
+          "scope_id": "PQ::R2::FINITE_REGION_SEARCH::COMMON_POLICY_OR_MINIMAX_DISCRIMINATOR",
+          "root_id": "R2_CANDIDATE_SEARCH",
+          "claim_kind": "FINITE_SCOPE_COMPLETE_COMMON_POLICY_OR_MINIMUM_TRUTHFUL_DISCRIMINATOR_SEARCH",
+          "source_receipt": {
+            "path": "canonical/verification/PROFESSIONAL_QUALITY_R2_SCOPE_COMPLETE_SEARCH_VERIFY_20261010_V1.json",
+            "git_blob_sha": "b66115513d1dde4527a65e5eda1ddea300138aca"
+          },
+          "global_leaf_closure": false
+        }
+      ],
+      "whole_leaf_closed": false,
+      "residual": "PROVE_TOTALITY_OVER_ALL_ADMISSIBLE_LEAF_INPUTS_OR_BIND_INDEPENDENT_CERTIFIED_COMPLETE_UNION"
+    },
+    {
+      "leaf_id": "PQ::R2_CANDIDATE_SEARCH::SEMANTIC",
+      "bounded_witness_scope_count": 1,
+      "bounded_witnesses": [
+        {
+          "scope_id": "PQ::R2::SEARCH_SEMANTICS::FINITE_SCOPE",
+          "root_id": "R2_CANDIDATE_SEARCH",
+          "claim_kind": "FINITE_SCOPE_COMPLETE_CANDIDATE_SEARCH_SEMANTICS",
+          "source_receipt": {
+            "path": "canonical/verification/PROFESSIONAL_QUALITY_R2_SEARCH_SEMANTIC_VERIFY_20261010_V1.json",
+            "git_blob_sha": "06da6b94712ec844a56c0f663cce67f059b7ba8d"
+          },
+          "global_leaf_closure": false
+        }
+      ],
+      "whole_leaf_closed": false,
+      "residual": "PROVE_TOTALITY_OVER_ALL_ADMISSIBLE_LEAF_INPUTS_OR_BIND_INDEPENDENT_CERTIFIED_COMPLETE_UNION"
+    },
+    {
+      "leaf_id": "PQ::R3_REALIZATION_OBSERVATION::EXECUTION",
+      "bounded_witness_scope_count": 1,
+      "bounded_witnesses": [
+        {
+          "scope_id": "PQ::R3::NATIVE_ARTIFACT::BOUNDED_RENDER_PRESERVATION",
+          "root_id": "R3_REALIZATION_OBSERVATION",
+          "claim_kind": "BOUNDED_GENERATED_EXPLICIT_LOW_LEVEL_TEXT_EDIT_RENDER_PRESERVATION",
+          "source_receipt": {
+            "path": "canonical/verification/NATIVE_ARTIFACT_RENDER_PRESERVATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+            "git_blob_sha": "1a0b4ca6627aaf28eb25f6990682e87319d14d6d"
+          },
+          "global_leaf_closure": false
+        }
+      ],
+      "whole_leaf_closed": false,
+      "residual": "PROVE_TOTALITY_OVER_ALL_ADMISSIBLE_LEAF_INPUTS_OR_BIND_INDEPENDENT_CERTIFIED_COMPLETE_UNION"
+    },
+    {
+      "leaf_id": "PQ::R3_REALIZATION_OBSERVATION::SEMANTIC",
+      "bounded_witness_scope_count": 1,
+      "bounded_witnesses": [
+        {
+          "scope_id": "PQ::R3::REALIZATION_SEMANTICS::PINNED_NATIVE_RENDER",
+          "root_id": "R3_REALIZATION_OBSERVATION",
+          "claim_kind": "PINNED_NATIVE_ARTIFACT_RENDER_REALIZATION_SEMANTICS",
+          "source_receipt": {
+            "path": "canonical/verification/PROFESSIONAL_QUALITY_R3_REALIZATION_SEMANTIC_VERIFY_20261010_V1.json",
+            "git_blob_sha": "3c9a6f03c9dfb7597cdb7c5ca01e9eaf66a596e0"
+          },
+          "global_leaf_closure": false
+        }
+      ],
+      "whole_leaf_closed": false,
+      "residual": "PROVE_TOTALITY_OVER_ALL_ADMISSIBLE_LEAF_INPUTS_OR_BIND_INDEPENDENT_CERTIFIED_COMPLETE_UNION"
+    },
+    {
+      "leaf_id": "PQ::R4_MEASUREMENT_CONSTRUCT::EXECUTION",
+      "bounded_witness_scope_count": 1,
+      "bounded_witnesses": [
+        {
+          "scope_id": "PQ::R4::MECHANICAL_ARTIFACT_MEASUREMENT::CONTENT_ADDRESSED_TYPED_ACCEPTANCE",
+          "root_id": "R4_MEASUREMENT_CONSTRUCT",
+          "claim_kind": "CONTENT_ADDRESSED_TYPED_MECHANICAL_ARTIFACT_MEASUREMENT_AND_ACCEPTANCE",
+          "source_receipt": {
+            "path": "canonical/verification/ARTIFACT_MEASUREMENT_VERIFY_20261007_V1.json",
+            "git_blob_sha": "34c64ed759d2e70df48a76d7a254047ac5fe9e2b"
+          },
+          "global_leaf_closure": false
+        }
+      ],
+      "whole_leaf_closed": false,
+      "residual": "PROVE_TOTALITY_OVER_ALL_ADMISSIBLE_LEAF_INPUTS_OR_BIND_INDEPENDENT_CERTIFIED_COMPLETE_UNION"
+    },
+    {
+      "leaf_id": "PQ::R4_MEASUREMENT_CONSTRUCT::SEMANTIC",
+      "bounded_witness_scope_count": 1,
+      "bounded_witnesses": [
+        {
+          "scope_id": "PQ::R4::MEASUREMENT_SEMANTICS::CONTENT_ADDRESSED_TYPED_MECHANICAL",
+          "root_id": "R4_MEASUREMENT_CONSTRUCT",
+          "claim_kind": "CONTENT_ADDRESSED_TYPED_MECHANICAL_MEASUREMENT_SEMANTICS",
+          "source_receipt": {
+            "path": "canonical/verification/PROFESSIONAL_QUALITY_R4_MEASUREMENT_SEMANTIC_VERIFY_20261010_V1.json",
+            "git_blob_sha": "c91074f2f187834936c0b7297579a6b8ba125fae"
+          },
+          "global_leaf_closure": false
+        }
+      ],
+      "whole_leaf_closed": false,
+      "residual": "PROVE_TOTALITY_OVER_ALL_ADMISSIBLE_LEAF_INPUTS_OR_BIND_INDEPENDENT_CERTIFIED_COMPLETE_UNION"
+    },
+    {
+      "leaf_id": "PQ::R5_EVALUATOR_REFERENCE::EXECUTION",
+      "bounded_witness_scope_count": 1,
+      "bounded_witnesses": [
+        {
+          "scope_id": "PQ::R5::EVALUATOR_UNCERTAINTY::CONDITIONAL_ROBUST_MARGIN",
+          "root_id": "R5_EVALUATOR_REFERENCE",
+          "claim_kind": "CONDITIONAL_EVALUATOR_UNCERTAINTY_ROBUST_MARGIN_CERTIFICATE",
+          "source_receipt": {
+            "path": "canonical/verification/GDPVAL_HYBRID_EVALUATOR_UNCERTAINTY_SPRITE_VERIFICATION_20261008_V1.json",
+            "git_blob_sha": "e852c4fbc14147c17469f1a4ede4e274d768bbf7"
+          },
+          "global_leaf_closure": false
+        }
+      ],
+      "whole_leaf_closed": false,
+      "residual": "PROVE_TOTALITY_OVER_ALL_ADMISSIBLE_LEAF_INPUTS_OR_BIND_INDEPENDENT_CERTIFIED_COMPLETE_UNION"
+    },
+    {
+      "leaf_id": "PQ::R5_EVALUATOR_REFERENCE::SEMANTIC",
+      "bounded_witness_scope_count": 1,
+      "bounded_witnesses": [
+        {
+          "scope_id": "PQ::R5::EVALUATOR_SEMANTICS::CONDITIONAL_ROBUSTNESS",
+          "root_id": "R5_EVALUATOR_REFERENCE",
+          "claim_kind": "CONDITIONAL_EVALUATOR_REFERENCE_ROBUSTNESS_SEMANTICS",
+          "source_receipt": {
+            "path": "canonical/verification/PROFESSIONAL_QUALITY_R5_EVALUATOR_SEMANTIC_VERIFY_20261010_V1.json",
+            "git_blob_sha": "33d5e8c11e07e4a153edf3970503c6753c5343d2"
+          },
+          "global_leaf_closure": false
+        }
+      ],
+      "whole_leaf_closed": false,
+      "residual": "PROVE_TOTALITY_OVER_ALL_ADMISSIBLE_LEAF_INPUTS_OR_BIND_INDEPENDENT_CERTIFIED_COMPLETE_UNION"
+    },
+    {
+      "leaf_id": "PQ::R6_EVIDENCE_GROUNDING_DEPENDENCE::EXECUTION",
+      "bounded_witness_scope_count": 1,
+      "bounded_witnesses": [
+        {
+          "scope_id": "PQ::R6::LEAF_EVIDENCE::CONTENT_ADDRESSED_SCOPE_MATCHED_ADMISSION",
+          "root_id": "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+          "claim_kind": "CONTENT_ADDRESSED_SCOPE_MATCHED_LEAF_EVIDENCE_ADMISSION_WITH_STATUS_NONAUTHORITY",
+          "source_receipt": {
+            "path": "canonical/verification/PROFESSIONAL_QUALITY_LEAF_BINDER_V2_VERIFY_20261010_V1.json",
+            "git_blob_sha": "b65a67e8edaee925338fe3f2d61dad6b0f52d129"
+          },
+          "global_leaf_closure": false
+        }
+      ],
+      "whole_leaf_closed": false,
+      "residual": "PROVE_TOTALITY_OVER_ALL_ADMISSIBLE_LEAF_INPUTS_OR_BIND_INDEPENDENT_CERTIFIED_COMPLETE_UNION"
+    },
+    {
+      "leaf_id": "PQ::R6_EVIDENCE_GROUNDING_DEPENDENCE::SEMANTIC",
+      "bounded_witness_scope_count": 1,
+      "bounded_witnesses": [
+        {
+          "scope_id": "PQ::R6::LEAF_EVIDENCE::CONTENT_ADDRESSED_SCOPE_MATCHED_ADMISSION",
+          "root_id": "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+          "claim_kind": "CONTENT_ADDRESSED_SCOPE_MATCHED_LEAF_EVIDENCE_ADMISSION_WITH_STATUS_NONAUTHORITY",
+          "source_receipt": {
+            "path": "canonical/verification/PROFESSIONAL_QUALITY_LEAF_BINDER_V2_VERIFY_20261010_V1.json",
+            "git_blob_sha": "b65a67e8edaee925338fe3f2d61dad6b0f52d129"
+          },
+          "global_leaf_closure": false
+        }
+      ],
+      "whole_leaf_closed": false,
+      "residual": "PROVE_TOTALITY_OVER_ALL_ADMISSIBLE_LEAF_INPUTS_OR_BIND_INDEPENDENT_CERTIFIED_COMPLETE_UNION"
+    },
+    {
+      "leaf_id": "PQ::R7_CAUSAL_PRESCRIPTIVE::EXECUTION",
+      "bounded_witness_scope_count": 1,
+      "bounded_witnesses": [
+        {
+          "scope_id": "PQ::R7::SINGLE_EDIT::UVCK_DEFEATER_ORDER_REPAIR",
+          "root_id": "R7_CAUSAL_PRESCRIPTIVE",
+          "claim_kind": "EXACT_SINGLE_EDIT_PROFESSIONAL_CODE_INTERVENTION_INSTANCE",
+          "source_receipt": {
+            "path": "canonical/verification/PROFESSIONAL_QUALITY_R7_SINGLE_EDIT_CAUSAL_INSTANCE_VERIFY_20261009_V1.json",
+            "git_blob_sha": "0c692f55dedb6a8523bcd78541d4cb77ef06d610"
+          },
+          "global_leaf_closure": false
+        }
+      ],
+      "whole_leaf_closed": false,
+      "residual": "PROVE_TOTALITY_OVER_ALL_ADMISSIBLE_LEAF_INPUTS_OR_BIND_INDEPENDENT_CERTIFIED_COMPLETE_UNION"
+    },
+    {
+      "leaf_id": "PQ::R7_CAUSAL_PRESCRIPTIVE::SEMANTIC",
+      "bounded_witness_scope_count": 1,
+      "bounded_witnesses": [
+        {
+          "scope_id": "PQ::R7::SINGLE_EDIT::UVCK_DEFEATER_ORDER_REPAIR",
+          "root_id": "R7_CAUSAL_PRESCRIPTIVE",
+          "claim_kind": "EXACT_SINGLE_EDIT_PROFESSIONAL_CODE_INTERVENTION_INSTANCE",
+          "source_receipt": {
+            "path": "canonical/verification/PROFESSIONAL_QUALITY_R7_SINGLE_EDIT_CAUSAL_INSTANCE_VERIFY_20261009_V1.json",
+            "git_blob_sha": "0c692f55dedb6a8523bcd78541d4cb77ef06d610"
+          },
+          "global_leaf_closure": false
+        }
+      ],
+      "whole_leaf_closed": false,
+      "residual": "PROVE_TOTALITY_OVER_ALL_ADMISSIBLE_LEAF_INPUTS_OR_BIND_INDEPENDENT_CERTIFIED_COMPLETE_UNION"
+    },
+    {
+      "leaf_id": "PQ::R8_POPULATION_CONTEXT_OPERATOR::EXECUTION",
+      "bounded_witness_scope_count": 1,
+      "bounded_witnesses": [
+        {
+          "scope_id": "PQ::R8::DELEGATION_POPULATION::FROZEN_512_CASE_PRE_BEACON_BINDING",
+          "root_id": "R8_POPULATION_CONTEXT_OPERATOR",
+          "claim_kind": "FROZEN_512_CASE_PRE_BEACON_DELEGATION_POPULATION_BINDING",
+          "source_receipt": {
+            "path": "canonical/verification/DELEGATION_TERMINAL_POPULATION_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+            "git_blob_sha": "3965db684d7104c5829ce1fcfa8ee08d2cd42cfc"
+          },
+          "global_leaf_closure": false
+        }
+      ],
+      "whole_leaf_closed": false,
+      "residual": "PROVE_TOTALITY_OVER_ALL_ADMISSIBLE_LEAF_INPUTS_OR_BIND_INDEPENDENT_CERTIFIED_COMPLETE_UNION"
+    },
+    {
+      "leaf_id": "PQ::R8_POPULATION_CONTEXT_OPERATOR::SEMANTIC",
+      "bounded_witness_scope_count": 1,
+      "bounded_witnesses": [
+        {
+          "scope_id": "PQ::R8::POPULATION_SEMANTICS::FROZEN_512",
+          "root_id": "R8_POPULATION_CONTEXT_OPERATOR",
+          "claim_kind": "FROZEN_512_CASE_DELEGATION_POPULATION_SEMANTICS",
+          "source_receipt": {
+            "path": "canonical/verification/PROFESSIONAL_QUALITY_R8_POPULATION_SEMANTIC_VERIFY_20261010_V1.json",
+            "git_blob_sha": "e47503a3b1f61bbb9effa04edccbf158b8b28e96"
+          },
+          "global_leaf_closure": false
+        }
+      ],
+      "whole_leaf_closed": false,
+      "residual": "PROVE_TOTALITY_OVER_ALL_ADMISSIBLE_LEAF_INPUTS_OR_BIND_INDEPENDENT_CERTIFIED_COMPLETE_UNION"
+    },
+    {
+      "leaf_id": "PQ::R9_TEMPORAL_DEPLOYMENT::EXECUTION",
+      "bounded_witness_scope_count": 1,
+      "bounded_witnesses": [
+        {
+          "scope_id": "PQ::R9::CENSORING::FIXED_DENOMINATOR_CONSERVATIVE_ACCOUNTING",
+          "root_id": "R9_TEMPORAL_DEPLOYMENT",
+          "claim_kind": "FROZEN_POPULATION_CONSERVATIVE_CENSORING_AND_EARLY_FAILURE_ACCOUNTING",
+          "source_receipt": {
+            "path": "canonical/verification/PROFESSIONAL_QUALITY_R9_CONSERVATIVE_CENSORING_VERIFY_20261010_V1.json",
+            "git_blob_sha": "7081a52621a1bb8f1ad07d1da23b40c8e57e16c2"
+          },
+          "global_leaf_closure": false
+        }
+      ],
+      "whole_leaf_closed": false,
+      "residual": "PROVE_TOTALITY_OVER_ALL_ADMISSIBLE_LEAF_INPUTS_OR_BIND_INDEPENDENT_CERTIFIED_COMPLETE_UNION"
+    },
+    {
+      "leaf_id": "PQ::R9_TEMPORAL_DEPLOYMENT::SEMANTIC",
+      "bounded_witness_scope_count": 1,
+      "bounded_witnesses": [
+        {
+          "scope_id": "PQ::R9::TEMPORAL_SEMANTICS::FROZEN_CONSERVATIVE_CENSORING",
+          "root_id": "R9_TEMPORAL_DEPLOYMENT",
+          "claim_kind": "FROZEN_POPULATION_CONSERVATIVE_CENSORING_SEMANTICS",
+          "source_receipt": {
+            "path": "canonical/verification/PROFESSIONAL_QUALITY_R9_TEMPORAL_SEMANTIC_VERIFY_20261010_V1.json",
+            "git_blob_sha": "e4527631fbf6e95cb20381d60eb4fe4b978c176f"
+          },
+          "global_leaf_closure": false
+        }
+      ],
+      "whole_leaf_closed": false,
+      "residual": "PROVE_TOTALITY_OVER_ALL_ADMISSIBLE_LEAF_INPUTS_OR_BIND_INDEPENDENT_CERTIFIED_COMPLETE_UNION"
+    }
+  ],
+  "scheduler_effect": {
+    "collapse": "DO_NOT_SCHEDULE_24_UNRELATED_MYSTERY_LEAF_PROGRAMS",
+    "activate": "ONE_SHARED_WHOLE_LEAF_TOTALITY_OR_COMPLETE_UNION_PROOF_PATTERN_INSTANTIATED_PER_LEAF",
+    "preferred_sequence": [
+      "SEARCH_EXISTING_TOTALITY_AND_COMPLETE_UNION_CERTIFICATES_BY_EXACT_LEAF",
+      "REUSE_BOUND_WITNESSES_ONLY_WITHIN_THEIR_PROVED_SCOPE",
+      "PARTITION_UNCOVERED_ADMISSIBLE_INPUT_CLASSES",
+      "CLOSE_ONLY_PARTITIONS_WITH_INDEPENDENT_EVIDENCE",
+      "PROMOTE_LEAF_ONLY_WHEN_UNION_COVERS_ALL_ADMISSIBLE_INPUTS"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_GLOBAL_LEAF_CLOSURE",
+    "NO_DOMAIN_SEMANTIC_CLOSURE",
+    "NO_DOMAIN_EXECUTION_CLOSURE",
+    "NO_QUALITY_AUTHORITY",
+    "NO_PROMOTION_AUTHORITY",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
