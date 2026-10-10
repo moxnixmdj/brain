@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_SELECTED_ROUTE_EXECUTABLE_REFINEMENT_CURRENT_MAIN_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-10",
+  "status": "PASS__CURRENT_MAIN_SELECTED_ROUTE_REFINEMENT_ANTI_BYPASS__6_OF_6",
+  "subject_branch": "integrate-executable-refinement-current-main-20261010",
+  "subject_commit": "4056886cd8a880ce0bf44d59274473a3ba9afa01",
+  "execution_carrier": {
+    "sprite": "brain-live-runtime-v1-verify-20261008",
+    "incremental_spend_usd": 0
+  },
+  "bound_artifacts": {
+    "runtime": {
+      "path": "canonical/runtime/certificate_gated_selected_route_runtime_entrypoint_v2.py",
+      "git_blob_sha": "e6cce56b50bea1261fb3473389a28e8263417930"
+    },
+    "router": {
+      "path": "canonical/runtime/certificate_gated_selected_route_router_v1.py",
+      "git_blob_sha": "4b99ef1e95e033badfb21ab7af7355122933224a"
+    },
+    "registry": {
+      "path": "canonical/governance/CERTIFICATE_GATED_SELECTED_ROUTE_RUNTIME_REGISTRY_V1.json",
+      "git_blob_sha": "78ef7174fd7cdebb24f97882e8c325a5164f18cb"
+    },
+    "canary_route": {
+      "path": "canonical/runtime/router_deployment_canary_v1.py",
+      "git_blob_sha": "de71202a17071c8af88ec7ac6e1f241fb42854c2"
+    },
+    "adequacy": {
+      "path": "canonical/verification/ROUTER_DEPLOYMENT_CANARY_ADEQUACY_CERTIFICATE_20261007_V1.json",
+      "git_blob_sha": "e521f7b75123bca5cc9704340283a727bb45e957"
+    },
+    "admission": {
+      "path": "canonical/verification/ROUTER_DEPLOYMENT_CANARY_ADMISSION_CERTIFICATE_20261007_V1.json",
+      "git_blob_sha": "1b2f97e7d46877b8782ea211fd15f679e6bfb5b0"
+    }
+  },
+  "checks": [
+    "CURRENT_CANARY_PREFLIGHT_PASS",
+    "CURRENT_CANARY_DISPATCH_PASS",
+    "SYNTHETIC_CREDITABLE_VERIFIED_REFINEMENT_ADMITTED",
+    "MISSING_REFINEMENT_BINDING_FAILS_CLOSED",
+    "STALE_REFINEMENT_RECEIPT_FAILS_CLOSED",
+    "UNVERIFIED_REFINEMENT_RECEIPT_FAILS_CLOSED"
+  ],
+  "check_count": 6,
+  "creditable_route_count_current_registry": 0,
+  "executable_refinement_anti_bypass_verified": true,
+  "semantic_refinement_proved": false,
+  "repository_wide_refinement_closed": false,
+  "terminal_credit_delta": 0
+}
