@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_P1_HARD_DEFECT_BINDING_INDEPENDENT_VERIFICATION_V1",
+  "date": "2026-10-10",
+  "status": "PASS__FRESH_ISOLATED_SPRITE_EXACT_BYTE_P1_BINDING_REPLAY__1_OF_1__ZERO_ACCEPTANCE_CREDIT",
+  "subjects": {
+    "p1_profile": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_EXECUTION_PROFILE_20261010_V2.json",
+      "git_blob_sha": "845321bebb7992d6226a91278200e67320f92e4e"
+    },
+    "binding": {
+      "path": "canonical/governance/PROFESSIONAL_ARTIFACT_HARD_DEFECT_PREFLIGHT_BINDING_20261010_V1.json",
+      "git_blob_sha": "8e3f606a0258ef7eb274e3ca72ac78aa3100f57b"
+    },
+    "runtime": {
+      "path": "canonical/runtime/professional_artifact_hard_defect_preflight_v1.py",
+      "git_blob_sha": "1921ef67ec36ac1847243e99c49f638bf7cc170a"
+    },
+    "test": {
+      "path": "canonical/tests/test_professional_quality_p1_execution_profile_v2.py",
+      "git_blob_sha": "e510e289f56c4a49e4db035b9a2a1d61d130bfc1"
+    }
+  },
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-professional-hard-defect-verify-20261010",
+    "sprite_id": "sprite-1bbb86ed-1f7c-409f-8397-fadc4de7a62a",
+    "workspace": "/home/sprite/work",
+    "incremental_spend_usd": 0
+  },
+  "result": {
+    "py_compile_pass": true,
+    "tests_run": 1,
+    "tests_passed": 1,
+    "tests_failed": 0,
+    "exact_binding_blob_match": true,
+    "exact_runtime_blob_match": true,
+    "preflight_runs_before_holistic_judgment": true,
+    "preflight_quality_equivalence_false": true,
+    "preflight_professional_excellence_authority_false": true,
+    "zero_acceptance_credit": true,
+    "zero_terminal_credit": true
+  },
+  "upstream_runtime_verification": {
+    "path": "canonical/verification/PROFESSIONAL_ARTIFACT_HARD_DEFECT_PREFLIGHT_INDEPENDENT_VERIFICATION_20261010_V1.json",
+    "git_blob_sha": "feae7fe5217e0d71910b2ea9408c98b2a10c0c03",
+    "result": "11_OF_11_PASS"
+  },
+  "hard_nonclaims": [
+    "NO_COMPLETE_PRESENTATION_ORDER",
+    "NO_GDPVAL_138_TASK_STYLE_ADEQUACY",
+    "NO_PRIVATE_AA_BRIEFCASE_PRESENTATION_ADEQUACY",
+    "NO_OPUS_5_5_NONINFERIORITY",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "promotion_authority": false,
+  "terminal_authority": false
+}
