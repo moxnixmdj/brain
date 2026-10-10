@@ -12,7 +12,11 @@ class Tests(unittest.TestCase):
   self.assertEqual(c.normalize({"exact_blobs":{"binding":"b","v2_binding":"c"}})["reason"],"CONFLICTING_VERSIONED_BINDING_ALIAS")
  def test_ambiguous_versioned_aliases_fail(self):
   self.assertEqual(c.normalize({"exact_blobs":{"v2_binding":"b","v3_binding":"c"}})["reason"],"AMBIGUOUS_VERSIONED_BINDING_ALIASES")
+ def test_package_execution_plus_verifier_status_normalizes_pass(self):
+  o=c.normalize({"replay":{"package_execution":"PASS","verifier_status":"PASS__BOUND"}});self.assertTrue(o["pass"]);self.assertTrue(o["replay_pass_normalized"]);self.assertTrue(o["verification"]["replay"]["verifier_pass"])
+ def test_status_alone_does_not_normalize_pass(self):
+  o=c.normalize({"replay":{"verifier_status":"PASS__BOUND"}});self.assertFalse(o["replay_pass_normalized"]);self.assertNotIn("verifier_pass",o["verification"]["replay"])
  def test_input_not_mutated(self):
-  d={"exact_blobs":{"v2_binding":"b"}};c.normalize(d);self.assertNotIn("binding",d["exact_blobs"])
+  d={"exact_blobs":{"v2_binding":"b"},"replay":{"package_execution":"PASS","verifier_status":"PASS__BOUND"}};c.normalize(d);self.assertNotIn("binding",d["exact_blobs"]);self.assertNotIn("verifier_pass",d["replay"])
 
 if __name__=="__main__":unittest.main(verbosity=2)
