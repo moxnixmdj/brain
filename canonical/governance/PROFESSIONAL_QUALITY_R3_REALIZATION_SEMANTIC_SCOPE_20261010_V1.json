@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R3_REALIZATION_SEMANTIC_SCOPE_V1",
+  "date": "2026-10-10",
+  "status": "ACTIVE_SCOPED_PINNED_NATIVE_ARTIFACT_RENDER_REALIZATION_SEMANTICS__8_OF_8_REPLAY__ZERO_GLOBAL_LEAF_CREDIT",
+  "root_id": "R3_REALIZATION_OBSERVATION",
+  "claim_kind": "PINNED_NATIVE_ARTIFACT_RENDER_REALIZATION_SEMANTICS",
+  "exact_components": {
+    "runtime": {
+      "path": "canonical/runtime/professional_r3_realization_semantic_certificate_v1.py",
+      "git_blob_sha": "eb3c5e6537d48640078b52a525a8f1791d88386b"
+    },
+    "source_preflight": {
+      "path": "canonical/governance/NATIVE_ARTIFACT_RENDER_PRESERVATION_PREFLIGHT_V1.json",
+      "git_blob_sha": "b5ddc896811875b59840959e27dbb515265fc9f8"
+    },
+    "source_verification": {
+      "path": "canonical/verification/NATIVE_ARTIFACT_RENDER_PRESERVATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "1a0b4ca6627aaf28eb25f6990682e87319d14d6d"
+    },
+    "semantic_verification": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R3_REALIZATION_SEMANTIC_VERIFY_20261010_V1.json",
+      "git_blob_sha": "3c9a6f03c9dfb7597cdb7c5ca01e9eaf66a596e0"
+    }
+  },
+  "formats": [
+    "docx",
+    "xlsx",
+    "pptx",
+    "pdf"
+  ],
+  "guarantees": [
+    "THE_REALIZATION_STACK_IS_THE_PINNED_LIBREOFFICE_AND_POPPLER_PIPELINE",
+    "SOURCE_AND_OUTPUT_PAGE_COUNTS_AND_PIXEL_DIMENSIONS_MATCH",
+    "UNCHANGED_PAGES_ARE_VALID_PRESERVATION",
+    "AT_LEAST_ONE_PAGE_MUST_CHANGE_VISIBLY",
+    "EVERY_CHANGED_PAGE_STAYS_WITHIN_THE_FROZEN_PIXEL_AND_BOUNDING_BOX_LIMITS",
+    "THE_HIDDEN_STRUCTURAL_ORACLE_PASSES_BEFORE_RENDER_ACCEPTANCE",
+    "UNCHANGED_WHOLE_OUTPUT_AND_LARGE_PAGE_GEOMETRY_MUTATION_ARE_REJECTED"
+  ],
+  "limitations": [
+    "BOUNDED_GENERATED_EXPLICIT_LOW_LEVEL_TEXT_EDITS_ONLY",
+    "NO_ALL_RENDERER_OR_ENVIRONMENT_INVARIANCE",
+    "NO_ARBITRARY_SEMANTIC_TARGET_SELECTION",
+    "NO_GLOBAL_R3_ROOT_CLOSURE",
+    "NO_GLOBAL_R3_SEMANTIC_LEAF_CLOSURE",
+    "NO_TERMINAL_ACCEPTANCE_OR_CAPABILITY_CREDIT",
+    "NO_WHOLE_OPEN_ENDED_NATIVE_ARTIFACT_CONTRACT_SCOPE_EQUIVALENCE",
+    "NO_DOMAIN_SEMANTIC_CLOSURE",
+    "NO_DOMAIN_EXECUTION_CLOSURE"
+  ],
+  "global_leaf_closure": false,
+  "global_root_closure": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
