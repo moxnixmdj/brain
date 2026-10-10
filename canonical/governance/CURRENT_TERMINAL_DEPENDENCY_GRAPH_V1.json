@@ -176,8 +176,8 @@
     {
       "id": "CURRENT_AUTHORITY_RUNTIME_BYTE_BINDING_COHERENCE",
       "kind": "LEAF",
-      "status": "PROVED",
-      "note": "BOUNDED_CURRENT_TARGET_BYTE_COHERENCE_RESEALED__SIX_DECLARED_CURRENT_RUNTIME_BLOBS_EXECUTED_ON_SPRITE__67_TESTS__0_FAILURES__0_ERRORS__CURRENT_AUTHORITY_POINTER_REPORTS_ZERO_STALE_OR_MISSING_RUNTIME_BINDINGS__DOES_NOT_PROVE_TRANSITIVE_DEPENDENCY_CONE_OR_EXECUTABLE_REFINEMENT",
+      "status": "UNRESOLVED",
+      "note": "FIVE_CURRENT_RUNTIME_PATHS_HAVE_FRESH_EXACT_BYTE_SPRITE_EXECUTION_RECEIPT__42_BEHAVIORAL_CHECKS_PLUS_12_PY_COMPILE_CHECKS__ZERO_FAILURES__UNIFIED_COGNITIVE_FABRIC_CURRENT_BYTE_EXECUTION_REMAINS_OPEN_BECAUSE_RECONSTRUCTED_CARRIER_IMPORT_CLOSURE_IS_INCOMPLETE__NO_BEHAVIORAL_FAILURE_OBSERVED",
       "attack_families": [
         "VERSION_DRIFT",
         "COMPOSITION_MISMATCH",
@@ -186,24 +186,41 @@
       ],
       "subobligations": [
         {
-          "id": "CURRENT_BYTE_REEXECUTE_TEST_BACKED_RUNTIME_PATHS",
+          "id": "FIVE_CURRENT_RUNTIME_PATHS_CURRENT_BYTE_RESEAL",
           "status": "PROVED",
-          "verification_path": "canonical/verification/CURRENT_RUNTIME_BYTE_COHERENCE_SPRITE_VERIFICATION_20261010_V1.json",
-          "exact_target_count": 5,
-          "scope": "BOUNDED_COMPONENT_BEHAVIOR_SURFACES_ONLY"
+          "paths": [
+            "canonical/runtime/terminal_candidate_donor_independence_audit_v1.py",
+            "canonical/runtime/terminal_autopilot_executor_v1.py",
+            "canonical/runtime/terminal_autopilot_v1.py",
+            "canonical/runtime/terminal_root_decision_gate_v1.py",
+            "canonical/runtime/option_preserving_capability_optimizer_v1.py"
+          ],
+          "evidence": {
+            "path": "canonical/verification/CURRENT_RUNTIME_FIVE_PATH_CURRENT_BYTE_RESEAL_SPRITE_VERIFICATION_20261010_V1.json",
+            "git_blob_sha": "09f6736d7aff26a08f7dc97e05eb548988d5b49f"
+          },
+          "behavioral_tests_passed": 42,
+          "syntax_checks_passed": 12,
+          "terminal_credit_delta": 0
         },
         {
-          "id": "DONOR_INDEPENDENCE_AUDIT_CURRENT_BYTE_VERIFICATION",
-          "status": "PROVED",
-          "verification_path": "canonical/verification/CURRENT_RUNTIME_BYTE_COHERENCE_SPRITE_VERIFICATION_20261010_V1.json",
-          "exact_target_count": 1,
-          "test_path": "canonical/tests/test_terminal_candidate_donor_independence_audit_v1.py",
-          "test_git_blob_sha": "1b70c9494993e894d45605f8fecffa3781ea1541"
+          "id": "UNIFIED_COGNITIVE_FABRIC_CURRENT_BYTE_VERIFICATION",
+          "status": "UNRESOLVED",
+          "paths": [
+            "canonical/runtime/unified_cognitive_fabric_v1.py"
+          ],
+          "current_git_blob_sha": "31b9a227dba79f069045e915e416bcc370900af6",
+          "reason": "CURRENT_BYTE_SUITE_NOT_YET_RUNNABLE_ON_RECONSTRUCTED_CARRIER__IMPORT_CLOSURE_MATERIALIZATION_IN_PROGRESS__NO_BEHAVIORAL_FAILURE_OBSERVED",
+          "requirement": "COMPLETE_CURRENT_IMPORT_CLOSURE__RUN_FOCUSED_UNIFIED_FABRIC_SUITE__ISSUE_CONTENT_BOUND_RECEIPT"
         }
       ],
       "verification": {
         "path": "canonical/verification/CURRENT_RUNTIME_BYTE_COHERENCE_SPRITE_VERIFICATION_20261010_V1.json",
         "git_blob_sha": "52de2370122ca2eb1e934425c963a918ea72a24f"
+      },
+      "verification_receipt": {
+        "path": "canonical/verification/CURRENT_RUNTIME_FIVE_PATH_CURRENT_BYTE_RESEAL_SPRITE_VERIFICATION_20261010_V1.json",
+        "git_blob_sha": "09f6736d7aff26a08f7dc97e05eb548988d5b49f"
       }
     }
   ],
