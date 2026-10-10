@@ -25,16 +25,22 @@ def run(d=None):
 class CutTests(unittest.TestCase):
  def test_current_cut(self):
   out=run();self.assertTrue(out["pass"],out)
-  self.assertEqual(out["verified_clause_count"],6)
-  self.assertEqual(out["partial_clause_count"],2)
+  self.assertEqual(out["verified_clause_count"],5)
+  self.assertEqual(out["partial_clause_count"],3)
   self.assertEqual(out["open_clause_count"],0)
   self.assertFalse(out["cc_r3_terminal_closure"])
   self.assertFalse(out["semantic_property_truth_authority"])
   self.assertEqual(
    [x["clause_id"] for x in out["clauses"] if x["state"]=="PARTIAL_EXISTING_EVIDENCE"],
-   ["R12C1_ASSUMPTION_GUARANTEE_COMPOSITION","R12C3_ABSTRACTION_SOUNDNESS"],
+   ["R12C1_ASSUMPTION_GUARANTEE_COMPOSITION","R12C3_ABSTRACTION_SOUNDNESS","R12C8_NONVACUITY"],
   )
   self.assertEqual(out["stronger_target_residual"]["state"],"OPEN")
+ def test_cc_r2_soundness_rule_does_not_prove_nonvacuity_existence(self):
+  out=run();self.assertTrue(out["pass"],out)
+  rows={x["clause_id"]:x for x in out["clauses"]}
+  self.assertEqual(rows["R12C8_NONVACUITY"]["state"],"PARTIAL_EXISTING_EVIDENCE")
+  self.assertIn("REAL_SUPPORTED_POSITIVE_R12_SEMANTIC_CERTIFICATION_ROUTE",rows["R12C8_NONVACUITY"]["remaining"])
+  self.assertFalse(out["cc_r3_terminal_closure"])
  def test_known_defeaters_cannot_self_promote_to_completeness(self):
   d=docs();d["defeater_replay"]=copy.deepcopy(d["defeater_replay"])
   d["defeater_replay"]["hard_nonclaims"]=[x for x in d["defeater_replay"]["hard_nonclaims"] if x!="NO_ADVERSARIAL_COMPLETENESS_OF_UNKNOWN_ATTACKS"]

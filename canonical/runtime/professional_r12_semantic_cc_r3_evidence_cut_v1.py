@@ -126,9 +126,13 @@ def analyze(
   and str(r12_execution_verify.get("status") or "").startswith("PASS__")
  )
 
- # C8: CC_R2 explicitly makes nonvacuity load-bearing.
+ # C8 partial only. CC_R2 proves the *soundness rule* that abstention cannot
+ # be relabeled as positive property truth and that any positive certificate
+ # must use a real supported route. It does not prove existential nonvacuity.
+ # Countermodel: G_minus = empty set satisfies G_minus subseteq G_real
+ # vacuously while no positive supported route exists.
  r2p=set(cc_r2_verify.get("proves") or [])
- c8=(
+ c8_partial=(
   str(cc_r2_verify.get("status") or "").startswith("PASS__")
   and "NONVACUITY_IS_LOAD_BEARING__ABSTENTION_CANNOT_BE_RELABELED_AS_POSITIVE_PROPERTY_TRUTH" in r2p
   and cc_r2_verify.get("cc_r2_mission_soundness_proved") is True
@@ -156,8 +160,9 @@ def analyze(
    "basis":["UNKNOWN_NEVER_EQUALS_PROVED","NOT_PROVED_NEVER_EQUALS_FALSE","TIMEOUT_NEVER_EQUALS_UNSAT","R12_PROOF_SEARCH_FALSE_NEGATIVE_COUNTERPROOF"] if c6 else []},
   {"clause_id":EXPECTED_CLAUSES[6],"state":"VERIFIED_EXISTING" if c7 else "OPEN",
    "basis":["R12_META_CONTROLLER_FALSE_IRRELEVANCE_COUNTERPROOF"] if c7 else []},
-  {"clause_id":EXPECTED_CLAUSES[7],"state":"VERIFIED_EXISTING" if c8 else "OPEN",
-   "basis":["CC_R2_NONVACUITY_LOAD_BEARING"] if c8 else []},
+  {"clause_id":EXPECTED_CLAUSES[7],"state":"PARTIAL_EXISTING_EVIDENCE" if c8_partial else "OPEN",
+   "basis":["CC_R2_NONVACUITY_LOAD_BEARING_RULE"] if c8_partial else [],
+   "remaining":"BIND_ONE_REAL_SUPPORTED_POSITIVE_R12_SEMANTIC_CERTIFICATION_ROUTE__MISSION_SOUNDNESS_ALONE_IS_VACUOUSLY_TRUE_WHEN_THE_POSITIVE_SET_IS_EMPTY"},
  ]
  vc=sum(r["state"]=="VERIFIED_EXISTING" for r in rows)
  pc=sum(r["state"]=="PARTIAL_EXISTING_EVIDENCE" for r in rows)
@@ -185,6 +190,7 @@ def analyze(
   "exact_next":[
    "PROVE_C1_ASSUMPTION_GUARANTEE_INTERFACE_DISCHARGE",
    "PROVE_C3_COMPONENT_ABSTRACTION_SOUNDNESS",
+   "PROVE_C8_REAL_SUPPORTED_POSITIVE_SEMANTIC_ROUTE_NONVACUITY",
    "PROVE_STRONGER_MATERIAL_DEFEATER_TOTALITY_OR_SCOPE_COMPLETE_EQUIVALENT"
   ],
   "cc_r3_terminal_closure":False,
