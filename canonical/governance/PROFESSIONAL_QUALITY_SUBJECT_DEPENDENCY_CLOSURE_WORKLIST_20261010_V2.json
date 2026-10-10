@@ -1,0 +1,109 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_SUBJECT_DEPENDENCY_CLOSURE_WORKLIST_V2",
+  "date": "2026-10-10",
+  "status": "CANDIDATE_FINAL_SUBJECT_V4__DEPENDENCIES_CLASSIFIED_12_OF_12__FIVE_MISSING_V3_COMPONENTS_ADDED__INDEPENDENT_CURRENT_BRANCH_CLOSURE_REPLAY_REQUIRED",
+  "candidate_subject": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V4_DECLARED_SYSTEM_SUBJECT_20261010_V4.json",
+    "subject_id": "PROFESSIONAL_QUALITY_P1_V4_TARGET_BOUND_SYSTEM_20261010_V4",
+    "subject_sha256": "4dc798df7a13792ed000700ca2473f68baf20395b383c7908ea8db804ba1d2f5",
+    "component_count": 18,
+    "finalized_for_all_roots": false
+  },
+  "classification_basis": {
+    "path": "canonical/verification/PROFESSIONAL_QUALITY_SUBJECT_DEPENDENCY_CLOSURE_V2_INDEPENDENT_VERIFY_20261010_V1.json",
+    "git_blob_sha": "526c6d2dcf00ed0dcfe5e0dafd628e105381cc1e",
+    "roots_dependency_classified": 12,
+    "roots_total": 12,
+    "missing_component_count_on_v3": 5
+  },
+  "added_system_material": [
+    {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_ASSURANCE_GRAPH_20261009_V2.json",
+      "git_blob_sha": "03530e29d70206b46b690b33a04c66765ff86ad7"
+    },
+    {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_LEAF_EVIDENCE_REGISTRY_20261010_V1.json",
+      "git_blob_sha": "d25cb6fe746eef992f71b138446dc999c0f2a307"
+    },
+    {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_EXECUTION_PROFILE_20261010_V1.json",
+      "git_blob_sha": "a01ef78846ce22996128cc2a5858341d8418074c"
+    },
+    {
+      "path": "canonical/runtime/professional_quality_p1_router_v2.py",
+      "git_blob_sha": "bdbbc53ab1e50743869ec515a019bfc17218f126"
+    },
+    {
+      "path": "canonical/runtime/professional_quality_scoped_evidence_v1.py",
+      "git_blob_sha": "940fc381fa10559bf7ec8f59048562809f1031c0"
+    }
+  ],
+  "laws": [
+    "COMPONENT_MEMBERSHIP_DOES_NOT_PROVE_ROOT_SATISFACTION",
+    "RUNTIME_OR_CONFIGURATION_FILE_WHOSE_CONTENT_CAN_CHANGE_ROOT_MECHANISM_BEHAVIOR_IS_LOAD_BEARING_SYSTEM_MATERIAL",
+    "EXTERNAL_OBSERVATION_OR_VERIFICATION_RECEIPT_MAY_REMAIN_OUTSIDE_SUBJECT_ONLY_WHEN_SYSTEM_BEHAVIOR_DOES_NOT_DEPEND_ON_ITS_CONTENT_AS_CONFIGURATION",
+    "SUBJECT_REFRESH_INVALIDATES_EXISTING_ROOT_BINDINGS_AND_REQUIRES_REVERIFICATION",
+    "NO_NEW_ROOT_BINDING_CREDIT_UNTIL_FINAL_SUBJECT_CURRENTNESS_AND_DEPENDENCY_CLOSURE_REPLAY_PASS"
+  ],
+  "roots": {
+    "R1_TARGET_SPECIFICATION": {
+      "classification_status": "DEPENDENCY_CLASSIFIED__PRIOR_V3_BINDING_INVALIDATED_BY_V4_SUBJECT_REFRESH__REVERIFY_REQUIRED"
+    },
+    "R2_CANDIDATE_SEARCH": {
+      "classification_status": "DEPENDENCY_CLASSIFIED__ROOT_SUBJECT_BINDING_PENDING_FINAL_V4_VERIFICATION"
+    },
+    "R3_REALIZATION_OBSERVATION": {
+      "classification_status": "DEPENDENCY_CLASSIFIED__ROOT_SUBJECT_BINDING_PENDING_FINAL_V4_VERIFICATION"
+    },
+    "R4_MEASUREMENT_CONSTRUCT": {
+      "classification_status": "DEPENDENCY_CLASSIFIED__ROOT_SUBJECT_BINDING_PENDING_FINAL_V4_VERIFICATION"
+    },
+    "R5_EVALUATOR_REFERENCE": {
+      "classification_status": "DEPENDENCY_CLASSIFIED__ROOT_SUBJECT_BINDING_PENDING_FINAL_V4_VERIFICATION"
+    },
+    "R6_EVIDENCE_GROUNDING_DEPENDENCE": {
+      "classification_status": "DEPENDENCY_CLASSIFIED__ROOT_SUBJECT_BINDING_PENDING_FINAL_V4_VERIFICATION"
+    },
+    "R7_CAUSAL_PRESCRIPTIVE": {
+      "classification_status": "DEPENDENCY_CLASSIFIED__ROOT_SUBJECT_BINDING_PENDING_FINAL_V4_VERIFICATION"
+    },
+    "R8_POPULATION_CONTEXT_OPERATOR": {
+      "classification_status": "DEPENDENCY_CLASSIFIED__ROOT_SUBJECT_BINDING_PENDING_FINAL_V4_VERIFICATION"
+    },
+    "R9_TEMPORAL_DEPLOYMENT": {
+      "classification_status": "DEPENDENCY_CLASSIFIED__ROOT_SUBJECT_BINDING_PENDING_FINAL_V4_VERIFICATION"
+    },
+    "R10_ANALYSIS_DECISION": {
+      "classification_status": "DEPENDENCY_CLASSIFIED__ROOT_SUBJECT_BINDING_PENDING_FINAL_V4_VERIFICATION"
+    },
+    "R11_ADAPTIVE_INTEGRITY_SECURITY": {
+      "classification_status": "DEPENDENCY_CLASSIFIED__ROOT_SUBJECT_BINDING_PENDING_FINAL_V4_VERIFICATION"
+    },
+    "R12_META_COMPOSITION_CLOSURE": {
+      "classification_status": "DEPENDENCY_CLASSIFIED__ROOT_SUBJECT_BINDING_PENDING_FINAL_V4_VERIFICATION"
+    }
+  },
+  "current_counts": {
+    "roots_total": 12,
+    "roots_dependency_classified": 12,
+    "roots_dependency_unclassified": 0,
+    "roots_bound_on_final_v4": 0,
+    "prior_bindings_requiring_reverification": 1,
+    "candidate_subject_components": 18
+  },
+  "next_required_edge": "INDEPENDENTLY_VERIFY_V4_SUBJECT_CURRENTNESS_AND_ZERO_MISSING_DEPENDENCIES__THEN_FREEZE_V4_AS_FINAL_DEPENDENCY_CLOSED_SUBJECT__REVERIFY_R1__BIND_REMAINING_11_ROOTS_WITHOUT_FURTHER_SUBJECT_DRIFT",
+  "hard_nonclaims": [
+    "NO_FINAL_SUBJECT_AUTHORITY_BEFORE_INDEPENDENT_REPLAY",
+    "NO_R1_BINDING_TRANSPORT_FROM_V3",
+    "NO_SAME_SUBJECT_COMPOSITION_PASS",
+    "NO_PROFESSIONAL_QUALITY_CLOSURE",
+    "NO_LIVE_DEFAULT_PROMOTION",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
