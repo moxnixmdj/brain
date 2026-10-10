@@ -5,10 +5,10 @@
   "supersedes_for_current_state": "canonical/governance/R2_SEMANTIC_ACQUISITION_RESEARCH_RECONCILIATION_20261009_V9.json",
   "load_bearing": {
     "r2_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
-    "r2_git_blob_sha": "bf2fc9b2748cf40eef873156aa17eba559cdd51f",
+    "r2_git_blob_sha": "cc2162c262c9052e5d57f97ae20266a85c14ea87",
     "r2_version": "V67",
-    "root2_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V61.json",
-    "root2_git_blob_sha": "aeea6e38637d0fe8642847f446de730724e40120",
+    "root2_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261010_V62.json",
+    "root2_git_blob_sha": "e7a97ad818144e02594223e4b01fed76d18d0bbe",
     "direct_route_count": 40,
     "bounded_family_count": 36,
     "dynamic_admission_count": 3,
