@@ -1,0 +1,25 @@
+name: verify-reached-escape-no-bypass
+
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/**"
+      - "canonical/tests/test_reached_escape_live_no_bypass_guard_v1.py"
+      - ".github/workflows/verify-reached-escape-no-bypass.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Run repository-local reached-state census
+        run: python canonical/runtime/reached_escape_live_no_bypass_guard_v1.py
+      - name: Run no-bypass regression suite
+        run: python -m unittest -v canonical.tests.test_reached_escape_live_no_bypass_guard_v1
