@@ -259,6 +259,118 @@ class GeneralAdequateDecisionFixedPointV2Tests(unittest.TestCase):
             "POLICY_COVER_OBSERVATION_BINDING_MUTATION_FORBIDDEN:d1",
         )
 
+    @patch.object(fixed, "run_controller")
+    def test_bound_truth_origin_can_be_added_and_reverified(self, controller):
+        predicate_id = "source-condition-sha256:critical"
+        opened = {
+            **self._open("OPEN__USER_MINIMUM_CLARIFICATION_REQUIRED"),
+            "next_required_edge": "REGCAP_LOSS_CUSHION_MINIMUM_POLICY_CHANGING_INFORMATION",
+            "next_information_request": {
+                "schema": "PROJECT_BRAIN_MINIMUM_POLICY_CHANGING_INFORMATION_REQUEST_V1",
+                "predicate_id": predicate_id,
+                "truth_next_information_request": {
+                    "request_kind": "ACQUIRE_ONE_AUTHENTICATED_GOVERNING_REQUIREMENT_OBSERVATION",
+                    "minimum_observation_count": 1,
+                },
+                "information_authority": False,
+                "semantic_truth_authority": False,
+            },
+        }
+        controller.side_effect = [opened, self._pass()]
+        truth_payload = {
+            "truth_kind": "TEST_TRUTH_KIND",
+            "predicate_id": predicate_id,
+            "source_text": "bound evidence",
+        }
+        provider = Mock(return_value={
+            "request_patch": {
+                "information_origin_by_predicate_id": {
+                    predicate_id: {
+                        "context_value_bound": True,
+                        "context_binding_id": "binding:critical",
+                        "bound_truth_payload": truth_payload,
+                    }
+                }
+            }
+        })
+
+        out = fixed.run(self._request(), proposal_provider=provider)
+
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(controller.call_count, 2)
+        packet = provider.call_args.args[0]
+        self.assertIn(
+            "information_origin_by_predicate_id",
+            packet["allowed_request_patch_fields"],
+        )
+        second = controller.call_args_list[1].args[0]
+        bound = second["information_origin_by_predicate_id"][predicate_id]
+        self.assertEqual(bound["context_binding_id"], "binding:critical")
+        self.assertEqual(bound["bound_truth_payload"], truth_payload)
+
+    def test_existing_information_origin_binding_cannot_be_rewritten(self):
+        predicate_id = "source-condition-sha256:critical"
+        current = {
+            **self._request(),
+            "information_origin_by_predicate_id": {
+                predicate_id: {
+                    "context_value_bound": True,
+                    "context_binding_id": "binding:old",
+                    "bound_truth_payload": {"truth_kind": "OLD"},
+                }
+            },
+        }
+        candidate = {
+            "request_patch": {
+                "information_origin_by_predicate_id": {
+                    predicate_id: {
+                        "context_value_bound": True,
+                        "context_binding_id": "binding:new",
+                        "bound_truth_payload": {"truth_kind": "NEW"},
+                    }
+                }
+            }
+        }
+        merged, error = fixed._merge_candidate(current, candidate)
+        self.assertIsNone(merged)
+        self.assertEqual(
+            error,
+            "INFORMATION_ORIGIN_BINDING_MUTATION_FORBIDDEN:" + predicate_id,
+        )
+
+    def test_information_origin_bindings_accumulate_monotonically(self):
+        p1 = "source-condition-sha256:p1"
+        p2 = "source-condition-sha256:p2"
+        current = {
+            **self._request(),
+            "information_origin_by_predicate_id": {
+                p1: {
+                    "context_value_bound": True,
+                    "context_binding_id": "binding:p1",
+                    "bound_truth_payload": {"truth_kind": "T1"},
+                }
+            },
+        }
+        candidate = {
+            "request_patch": {
+                "information_origin_by_predicate_id": {
+                    p2: {
+                        "context_value_bound": True,
+                        "context_binding_id": "binding:p2",
+                        "bound_truth_payload": {"truth_kind": "T2"},
+                    }
+                }
+            }
+        }
+        merged, error = fixed._merge_candidate(current, candidate)
+        self.assertIsNone(error)
+        self.assertIsNotNone(merged)
+        self.assertEqual(
+            set(merged["information_origin_by_predicate_id"]),
+            {p1, p2},
+        )
+
+
     @patch.object(fixed, "repair_existing_adequacy")
     @patch.object(fixed, "run_controller")
     def test_existing_adequacy_evidence_is_reused_without_external_provider(
