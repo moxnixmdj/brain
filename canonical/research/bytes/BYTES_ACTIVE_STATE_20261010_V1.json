@@ -42,5 +42,11 @@
     "REJECTED",
     "PROMOTED"
   ],
-  "completion_boundary": "Do not claim universal minimum. Claim exact optimum only over an exhaustively searched finite discovered mechanism library, or a verified upper bound otherwise."
+  "completion_boundary": "Do not claim universal minimum. Claim exact optimum only over an exhaustively searched finite discovered mechanism library, or a verified upper bound otherwise.",
+  "drive_evidence_mirror": {
+    "status": "CREATED_AND_POPULATED__LOCATION_MOVE_BLOCKED_BY_CONNECTOR_SAFETY_GUARD",
+    "file_id": "1iSGwawxceR81ssMCfAmkXJNLoFlLaEfda8QiggnOnq4",
+    "url": "https://docs.google.com/document/d/1iSGwawxceR81ssMCfAmkXJNLoFlLaEfda8QiggnOnq4/edit?usp=drivesdk",
+    "authority": "NONCANONICAL_EVIDENCE_MIRROR__GITHUB_REMAINS_CANONICAL"
+  }
 }
