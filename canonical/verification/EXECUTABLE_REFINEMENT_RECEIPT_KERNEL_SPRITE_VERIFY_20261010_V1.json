@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_EXECUTABLE_REFINEMENT_RECEIPT_KERNEL_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_SUCCESSOR_BYTES__10_OF_10_FALSIFICATION_TESTS__ZERO_CREDIT",
+  "branch": "successor-executable-refinement-current-main-20261010-v1",
+  "base_note": "FRESH_SUCCESSOR_BRANCH_FROM_CURRENT_MAIN__OLD_PR_3717_IS_STALE_DONOR_ONLY",
+  "subject": "generic executable-refinement receipt verifier",
+  "exact_blobs": {
+    "runtime": {
+      "path": "canonical/runtime/executable_refinement_receipt_v1.py",
+      "git_blob_sha": "282c1109b339c6d2ece7c597972b2023225cdcdc"
+    },
+    "tests": {
+      "path": "canonical/tests/test_executable_refinement_receipt_v1.py",
+      "git_blob_sha": "d24a11bb2fb7f7bfa7942607287ed0ee03e0a096"
+    }
+  },
+  "remote_verifier": {
+    "sprite": "brain-live-runtime-v1-verify-20261008",
+    "sprite_id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13",
+    "working_directory": "/home/sprite/executable-refinement-successor-v1",
+    "py_compile": "PASS",
+    "tests_passed": 10,
+    "tests_failed": 0,
+    "pytest_installed": false,
+    "method": "DIRECT_ZERO_ARGUMENT_TEST_FUNCTION_HARNESS"
+  },
+  "verified_invariants": [
+    "CONTENT_ADDRESSED_CERTIFICATE_REQUIRED",
+    "CONTENT_ADDRESSED_SEMANTIC_VERIFIER_REQUIRED",
+    "SEMANTIC_VERIFIER_RERUN_REQUIRED",
+    "STORED_PASS_CANNOT_OVERRIDE_RERUN_REJECTION",
+    "RECEIPT_BINDS_EXACT_RERUN_RESULT",
+    "SUBJECT_BINDING_REQUIRED",
+    "LIVENESS_REQUIREMENT_MUST_BE_PROVED_BY_EXECUTABLE_RERUN",
+    "NONZERO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT_REJECTED"
+  ],
+  "nonclaims": [
+    "DOES_NOT_PROVE_ANY_CURRENT_RUNTIME_SUBJECT_BY_ITSELF",
+    "DOES_NOT_CLOSE_REPOSITORY_WIDE_EXECUTABLE_REFINEMENT",
+    "DOES_NOT_GRANT_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
