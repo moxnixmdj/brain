@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_ESCAPE_PROGRESS_SHARED_GAP_EXECUTABLE_AUDIT_V4_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "INDEPENDENT_SPRITE_PASS__EXACT_BRANCH_BYTES__4_OF_4_REGRESSION_PASS__PYCOMPILE_PASS__ZERO_CREDIT",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/escape_progress_shared_gap_audit_v4.py",
+      "git_blob_sha": "f92a557d39bb33cfebc7701b275dba1a4bf442c5"
+    },
+    "tests": {
+      "path": "canonical/tests/test_escape_progress_shared_gap_audit_v4.py",
+      "git_blob_sha": "5de9d4f12bc8f18a90075e46b192706bd91e721b"
+    },
+    "structural_predecessor": {
+      "path": "canonical/runtime/escape_progress_shared_gap_audit_v3.py",
+      "git_blob_sha": "14adf2c1a431285a542340a740e27e764edb1ce5"
+    },
+    "byte_resolver": {
+      "path": "canonical/runtime/effect_broker_receipt_resolver_v2.py",
+      "git_blob_sha": "7f4eeeb19def420d0014631b99c5e2dc3a30592e"
+    }
+  },
+  "independent_execution": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-live-runtime-v1-verify-20261008",
+    "sprite_id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13",
+    "workspace": "/home/sprite/escape-progress-v4-auth-verify",
+    "package_install_performed": false,
+    "incremental_spend_usd": 0,
+    "py_compile": "PASS",
+    "committed_tests_run": 4,
+    "committed_tests_passed": 4,
+    "committed_tests_failed": 0
+  },
+  "verified_properties": [
+    "MISSING_OR_RAW_IN_MEMORY_ROW_PROOFS_HAVE_ZERO_CC_R3_AUTHORITY",
+    "EXACT_CANONICAL_PROOF_GIT_BLOB_BINDING_REQUIRED",
+    "SEPARATE_CANONICAL_INDEPENDENT_VERIFICATION_GIT_BLOB_BINDING_REQUIRED",
+    "VERIFICATION_BINDS_EXACT_PROOF_PATH_GIT_BLOB_AND_BYTE_SHA256",
+    "PRODUCER_AND_INDEPENDENT_VERIFIER_IDENTITIES_MUST_DIFFER",
+    "SEMANTIC_PROOF_AND_EVIDENCE_BINDINGS_MUST_BE_EXPLICITLY_INDEPENDENTLY_VERIFIED",
+    "POST_VERIFICATION_PROOF_BYTE_DRIFT_FAILS_CLOSED",
+    "AUTHENTICATION_DOES_NOT_REPLACE_V3_STRUCTURAL_THEOREM"
+  ],
+  "hard_nonclaims": [
+    "NO_GAP_A_OR_GAP_B_ROW_IS_CLOSED_BY_THIS_GATE",
+    "NO_CC_R3_CERTIFICATE_CREATED",
+    "NO_GLOBAL_ESCAPE_PROGRESS_TOTALITY",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "promotion_authority": false,
+  "terminal_authority": false
+}
