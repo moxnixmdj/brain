@@ -34,7 +34,7 @@ class Tests(unittest.TestCase):
         claim,mrow=current()
         return binder.validate_semantic_receipt(
             receipt,
-            claim,
+            claim["claim_scope"],
             leaf_id=LEAF_ID,
             root_id=ROOT_ID,
             acceptance=mrow["semantic_leaf"]["acceptance"],
