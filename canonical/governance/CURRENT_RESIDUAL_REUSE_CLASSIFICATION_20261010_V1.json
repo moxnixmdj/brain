@@ -75,6 +75,14 @@
     {
       "path": "canonical/verification/TB_SCIENCE_AGENT_V14_CLAIM_BOUND_IDENTITY_REPAIR_VERIFY_20261010_V1.json",
       "git_blob_sha": "4c7223e09ee68a60382604394ab7f0d07c058d08"
+    },
+    {
+      "path": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V3.json",
+      "git_blob_sha": "f38058d2343163075296ff3f2140225c181c1de8"
+    },
+    {
+      "path": "canonical/action_intents/ESCAPE_PROGRESS_V2_SUCCESSOR_AUDIT_IMPLEMENTATION_INTENT_20261010_V1.json",
+      "git_blob_sha": "d4d9c46b7501ea9527212998fba06c08f0df394a"
     }
   ],
   "classifications": [
@@ -108,7 +116,7 @@
         "ACQUIRE_EVIDENCE",
         "ADAPT_EXISTING"
       ],
-      "existing_binding": "canonical/governance/ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_20261010_V2.json",
+      "existing_binding": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V3.json",
       "exact_remaining_class": "EFFECTIVE_SUCCESSOR_CLASSIFICATION_HAS_10_INFORMATION_DEPENDENT_ROWS__EACH_REQUIRES_CURRENT_ACQUIRABILITY_FINITE_COMPLETE_OUTCOMES_TRUTH_PRESERVATION_SAFETY_AND_STRICT_REGION_SHRINK",
       "new_primitive_status": "NOT_ESTABLISHED",
       "executable_audit": "canonical/runtime/escape_progress_shared_gap_audit_v1.py",
@@ -118,7 +126,8 @@
         "git_blob_sha": "ea256418ec1f8048c7566c6ecc74206d9d1ac529",
         "effective_gap_a_count": 10
       },
-      "successor_count": 10
+      "successor_count": 10,
+      "successor_audit_intent": "canonical/action_intents/ESCAPE_PROGRESS_V2_SUCCESSOR_AUDIT_IMPLEMENTATION_INTENT_20261010_V1.json"
     },
     {
       "residual_id": "ESCAPE_GAP_B_INTERNAL_ROUTE_STRICT_PROGRESS",
@@ -126,7 +135,7 @@
         "ADAPT_EXISTING",
         "VERIFY_EXISTING"
       ],
-      "existing_binding": "canonical/governance/ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_20261010_V2.json",
+      "existing_binding": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V3.json",
       "exact_remaining_class": "EFFECTIVE_SUCCESSOR_CLASSIFICATION_HAS_3_CURRENT_INTERNAL_ROWS__EACH_REQUIRES_EXECUTABLE_VERIFIED_ACTION_WELL_FOUNDED_MEASURE_AND_ALL_OUTCOME_TERMINAL_OR_STRICT_DECREASE_PROOF",
       "new_primitive_status": "NOT_ESTABLISHED",
       "executable_audit": "canonical/runtime/escape_progress_shared_gap_audit_v1.py",
@@ -136,7 +145,8 @@
         "git_blob_sha": "ea256418ec1f8048c7566c6ecc74206d9d1ac529",
         "effective_gap_b_count": 3
       },
-      "successor_count": 3
+      "successor_count": 3,
+      "successor_audit_intent": "canonical/action_intents/ESCAPE_PROGRESS_V2_SUCCESSOR_AUDIT_IMPLEMENTATION_INTENT_20261010_V1.json"
     },
     {
       "residual_id": "ASSURANCE_CLOSURE_COMPILER_NOT_LIVE_DEFAULT",
