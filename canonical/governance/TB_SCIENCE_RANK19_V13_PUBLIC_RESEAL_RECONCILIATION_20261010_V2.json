@@ -1,0 +1,101 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK19_V13_PUBLIC_RESEAL_RECONCILIATION_20261010_V2",
+  "date": "2026-10-10",
+  "status": "RECONCILED__RANK19_V13_PUBLIC_RESEAL_V2_VERIFIED__CAPABILITY_FIRST_ADMISSION_V2_EXACTLY_BOUND__READY_FOR_CANONICAL_PROMOTION__UNREAD_UNSTARTED__ZERO_TRIALS__ZERO_CREDIT",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "authority": {
+    "path": "canonical/governance/TB_SCIENCE_RANK19_ONE_SLOT_EXECUTION_AUTHORITY_20261010_V2.json",
+    "git_blob_sha": "54b4b41872cce41ed1bdc6181d857484a2f21b22",
+    "promotion_semantics": "STAGED_V2_AUTHORITY_BECOMES_EFFECTIVE_ONLY_WHEN_THIS_EXACT_RECONCILIATION_AND_ITS_VERIFICATION_ARE_PROMOTED_BY_CURRENT_TERMINAL_AUTHORITY"
+  },
+  "ledger": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V38.json",
+    "git_blob_sha": "137a2f61d911321365bd80613e3806a77dbe7eca"
+  },
+  "capability_first_admission": {
+    "path": "canonical/governance/TB_SCIENCE_RANK19_CAPABILITY_FIRST_CHECKPOINT_ADMISSION_20261010_V1.json",
+    "git_blob_sha": "49e4f9c232f876546b2c72fb32ba19a3e487e1c9",
+    "verification_path": "canonical/verification/TB_SCIENCE_RANK19_CAPABILITY_FIRST_ADMISSION_INDEPENDENT_VERIFICATION_20261010_V2.json",
+    "verification_git_blob_sha": "7ba01fca8338d966a40f25a8c74f6e1366b29f2e",
+    "authorized": true,
+    "decision": "ADMIT_CHECKPOINT_AUDIT_EXECUTION",
+    "benchmark_role": "NEW_CAPABILITY_VALIDATION"
+  },
+  "verification": {
+    "path": "canonical/verification/TB_SCIENCE_RANK19_V13_PUBLIC_RESEAL_VERIFY_20261010_V2.json",
+    "git_blob_sha": "99bef972045adbd73063840a1d582ed905a76079",
+    "pass": true
+  },
+  "public_surface": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2576,
+    "merge_commit_sha": "09dbcf82a3646792012bfae15b664534a14db748",
+    "surface_git_blob_sha": "443b1d50fad13b6f73c7bf32341ecf3d2dd4ca0b",
+    "workflow_path": ".github/workflows/execute-tb-science-rank19-20261010-v1.yml",
+    "workflow_git_blob_sha": "73d30930712396e056187de130551cae2bea00a6",
+    "behavior_git_blob_sha": "407108656d1640397e0aa0e982d766ca54e9356d",
+    "public_authority_git_blob_sha": "783be7b81ab7a17d33d99f45321e843ec8c90ccd",
+    "public_ledger_git_blob_sha": "357bbd1a26be73200b6076e6751c58e23d95f325",
+    "epoch_git_blob_sha": "e1921971d984eb6f7d4a10c471a8f0b94ffc3a1a",
+    "execution_claim_git_blob_sha": "42e3c5b5ecfdbb4afe1b5bdedc294bfd79c0bb8a",
+    "start_cas_git_blob_sha": "b8fe83055d3cd10487f2dbebe236890fc8428fb5",
+    "trusted_verifier_git_blob_sha": "24831304a994dd2a6ecd97f452aeb7e5887cbf6b",
+    "trusted_verification_run_id": 38035553318,
+    "trusted_verification_job_id": 114165109080,
+    "activation_branch": "execute/tb-science-rank19-20261010-v1",
+    "activation_filename": "ACTIVATE_RANK19_V1_PR.json",
+    "activation_present": false
+  },
+  "state": {
+    "consumed_slots": 18,
+    "consumed_successes": 0,
+    "consumed_final_failures": 18,
+    "next_rank": 19,
+    "slot_id": "terminal-bench-science/diag-chipseq::trial-0",
+    "task_digest": "sha256:437bfacaebda9ce9905d54bdfe7247aec9649038206512c64547021f42e3950b",
+    "logical_attempt_id": "def7e2921acf58d4ef03e3183512996c718a5a13069482cb825464c0c963a8b4",
+    "task_read_history": false,
+    "task_started": false,
+    "durable_start_cas_acquired": false,
+    "benchmark_trials_consumed": 0,
+    "result_present": false,
+    "activation_armed": false
+  },
+  "effective_controls_after_canonical_promotion": {
+    "execution_authority": true,
+    "task_rematerialization_authority": true,
+    "task_read_authority_scope": "ONLY_ON_EXACT_FRESH_EXECUTE_TB_SCIENCE_RANK19_20261010_V1_BRANCH_AFTER_LIVE_CARRIER_QUALIFICATION_AND_DURABLE_START_CAS_ABSENCE_CHECK",
+    "logical_attempts_authorized_total": 1,
+    "new_logical_attempt_forbidden": true,
+    "retries_authorized": 0,
+    "replacement_allowed": false,
+    "child_github_credentials_forbidden": true,
+    "action_effect_requires_durable_intent_ack": true,
+    "next_action_requires_durable_state_commit_ack": true,
+    "uncertain_effect_replay_authority": false,
+    "post_start_result_irreversible": true,
+    "incremental_spend_usd_max": 0
+  },
+  "next": "PROMOTE_THIS_EXACT_V2_RECONCILIATION_IN_CURRENT_TERMINAL_AUTHORITY__THEN_CREATE_EXACT_ONE_FILE_ACTIVATION_BRANCH_AND_VERIFY_CAS_ABSENCE_BEFORE_ANY_TASK_READ",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_trials_consumed_delta": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "execution_authority": true,
+  "task_read_authority": true,
+  "activation_armed": false,
+  "fresh_reality_authority": true,
+  "promotion_authority": true,
+  "hard_nonclaims": [
+    "NO_TASK_READ",
+    "NO_TASK_START",
+    "NO_RESULT",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT",
+    "NO_ACTIVATION_BEFORE_CANONICAL_POINTER_PROMOTION"
+  ]
+}
