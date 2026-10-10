@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK20_V13_PUBLIC_PROMOTION_PROGRESS_V1",
+  "date": "2026-10-10",
+  "status": "PARTIAL__PROMOTED_LEDGER_PERSISTED__PROMOTED_PUBLIC_AUTHORITY_WRITE_BLOCKED__NO_ACTIVATION",
+  "canonical_authority": {
+    "path": "canonical/governance/TB_SCIENCE_RANK20_ONE_SLOT_EXECUTION_AUTHORITY_20261010_V13.json",
+    "git_blob_sha": "c9346c09a963c080a90ed54eb26847b65d208f15"
+  },
+  "canonical_ledger": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V60.json",
+    "git_blob_sha": "8e24f2352ab34da06b486922c55985894f6a5f29"
+  },
+  "public_reseal_verification": {
+    "path": "canonical/verification/TB_SCIENCE_RANK20_V12_PUBLIC_RESEAL_VERIFY_20261010_V1.json",
+    "git_blob_sha": "68ad6e384e10833a2e97e47e6d4af37d820277ca"
+  },
+  "public_repository": "moxnixmdj/verification-capsule-runner",
+  "promotion_branch": "promote/rank20-v12-effective-authority-20261010",
+  "promotion_base_commit": "b42c5948b1d11ce82dc5fc76ec03697153d8afd5",
+  "persisted_public_ledger": {
+    "path": "capsules/tb_science_rank20_20261010_v1/RANK20_PUBLIC_LEDGER_BINDING_V61.json",
+    "git_blob_sha": "919d93263713eeabe70e7220df9df3e88363ec32"
+  },
+  "required_remaining_public_objects": [
+    "RANK20_PUBLIC_AUTHORITY_BINDING_V15",
+    "RANK20_EPOCH_V6_PROMOTED_V14",
+    "RANK20_EXECUTION_CLAIM_V6_PROMOTED_V14",
+    "RANK20_V12_PROMOTED_PRE_ACTIVATION_VERIFICATION",
+    "CURRENT_TERMINAL_EXECUTION_SURFACE_V1_PROMOTED"
+  ],
+  "immutable_identity": {
+    "logical_attempt_id": "aeadf4a998d2392b4aa277f1fdd6d31f057a81305dd98f9038f3a8b8bb14be68",
+    "execution_claim_binding_digest": "sha256:bc4522cfc367a3fd250ce53d0812b8a856f575dcf7eb00e8104781cfe0d29a15",
+    "claim_binding_git_blob_sha": "c081d1a7ece49e2d5313503548be19a00ef8a274"
+  },
+  "public_surface_current": {
+    "merge_commit": "b42c5948b1d11ce82dc5fc76ec03697153d8afd5",
+    "surface_git_blob_sha": "f47db9a816e6b8c3176f02b125af1b134a190d3f",
+    "staged_execution_authority": false,
+    "staged_task_read_authority": false
+  },
+  "task_read": false,
+  "task_started": false,
+  "benchmark_trials_consumed": 0,
+  "activation_authority": false,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "next": "PERSIST_PROMOTED_PUBLIC_AUTHORITY_CHAIN__UPDATE_SURFACE_EFFECTIVE__RUN_GENERIC_RATCHET__NO_ACTIVATION"
+}
