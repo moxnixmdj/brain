@@ -111,9 +111,12 @@ def _dynamic_preflight(
             "DYNAMIC_PREFLIGHT_RESULT_NOT_OBJECT:" + str(row.get("route_id") or "")
         )
     result = dict(out)
-    if result.get("matched") is True:
+    expected = str(row.get("route_id") or "")
+    if (
+        result.get("matched") is True
+        or result.get("direct_route_semantic_open") is True
+    ):
         observed = str(result.get("route_id") or "")
-        expected = str(row.get("route_id") or "")
         if observed != expected:
             raise DirectLiveAdmissionError(
                 "DYNAMIC_PREFLIGHT_ROUTE_ID_MISMATCH:" + expected + "!=" + observed
@@ -144,12 +147,39 @@ def preflight(
                 matches.append((row, out))
 
         if semantic_open:
-            return {
+            out = {
                 **_base("FAIL_CLOSED__DYNAMIC_SEMANTIC_OPEN_REQUIRES_PRECEDENCE_AUTHORITY"),
                 "matched": False,
                 "reason": "DYNAMIC_SEMANTIC_OPEN_CANNOT_DEFINE_LEGACY_PRECEDENCE",
                 "route_ids": sorted(str(row["route_id"]) for row, _ in semantic_open),
             }
+            # Preserve one uniquely bound semantic-open state as zero-authority
+            # resolver metadata while keeping routing fail-closed. This does not
+            # select or execute the dynamic route and does not define precedence.
+            if len(semantic_open) == 1 and not matches:
+                row, opened = semantic_open[0]
+                out["direct_route_semantic_open"] = True
+                out["route_id"] = str(row["route_id"])
+                out["dynamic_semantic_open_status"] = opened.get("status")
+                for field in (
+                    "effect_status",
+                    "open_lattice_atoms",
+                    "next_proof_obligations",
+                    "minimum_discriminator_slots",
+                    "possible_outcomes",
+                    "world_count",
+                    "blocking_residual_document_ids",
+                    "blocking_document_ids",
+                    "blocking_unknown_regions",
+                    "query_relative_source_completeness_proved",
+                    "query_relative_effect_semantics_finite",
+                    "open_status",
+                    "next_observation_id",
+                ):
+                    if field in opened:
+                        out[field] = deepcopy(opened.get(field))
+                out["dynamic_semantic_open_hint_authority"] = False
+            return out
 
         if len(matches) > 1:
             return {
