@@ -1,0 +1,22 @@
+name: Verify Professional R10 execution property challenge
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/runtime/professional_quality_r10_execution_property_challenge_v1.py
+      - canonical/tests/test_professional_quality_r10_execution_property_challenge_v1.py
+      - .github/workflows/verify-professional-r10-execution-property-challenge.yml
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m py_compile canonical/runtime/professional_quality_r10_execution_property_challenge_v1.py
+      - run: python -m unittest -v canonical.tests.test_professional_quality_r10_execution_property_challenge_v1
+      - run: python canonical/runtime/professional_quality_r10_execution_property_challenge_v1.py
