@@ -64,6 +64,12 @@ class ReachedEscapeConstructionInvariantBoundaryV1Tests(unittest.TestCase):
             out,
         )
         self.assertFalse(out["result"]["certified_reached_state_admitted"], out)
+        self.assertTrue(out["result"]["repair_dispatch_contract"]["pass"], out)
+        self.assertEqual(
+            out["result"]["repair_dispatch_sha256"],
+            out["result"]["repair_dispatch_contract"]["dispatch_sha256"],
+            out,
+        )
         self.assertEqual(
             out["result"]["repair_request"]["kind"],
             "UNSPLITTABLE_EQUIVALENCE_CLASS_REPAIR",
@@ -164,10 +170,18 @@ class ReachedEscapeConstructionInvariantBoundaryV1Tests(unittest.TestCase):
         state = counterexample_state()
 
         def capability_expander(request):
+            alternatives = [
+                row
+                for row in request["alternatives"]
+                if row["basis"]["provider_kind"] == "EVIDENCE_ACQUISITION"
+            ]
+            self.assertEqual(len(alternatives), 1, alternatives)
             return {
                 "schema": repair_cycle.CANDIDATE_SCHEMA,
                 "pass": True,
                 "repair_sha256": request["repair_sha256"],
+                "repair_dispatch_sha256": request["repair_dispatch_sha256"],
+                "alternative_id": alternatives[0]["alternative_id"],
                 "candidate_kind": "DISCRIMINATOR",
                 "candidate": {
                     "discriminator_id": "d_verified",
@@ -186,6 +200,8 @@ class ReachedEscapeConstructionInvariantBoundaryV1Tests(unittest.TestCase):
                 "pass": True,
                 "state_sha256": request["state_sha256"],
                 "repair_sha256": request["repair_sha256"],
+                "repair_dispatch_sha256": request["repair_dispatch_sha256"],
+                "alternative_id": request["alternative_id"],
                 "candidate_sha256": request["candidate_sha256"],
                 "candidate_kind": request["candidate_kind"],
                 "verified_properties": [request["required_verified_property"]],
