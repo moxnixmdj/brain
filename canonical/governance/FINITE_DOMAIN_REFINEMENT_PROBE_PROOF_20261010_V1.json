@@ -7,7 +7,7 @@
   },
   "concrete_implementation": {
     "path": "canonical/runtime/finite_domain_refinement_probe_v1.py",
-    "git_blob_sha": "9850d128df4f5e6e768fe7d8b0d372f0a3275e2c"
+    "git_blob_sha": "c1fa473e173350798bea93d964109adefdd95aeb"
   },
   "callable": "run",
   "terminal_credit_delta": 0
