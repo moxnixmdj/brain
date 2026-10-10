@@ -16,7 +16,6 @@ import json
 from typing import Any, Callable, Mapping, Sequence
 
 from canonical.runtime import certified_reached_escape_state_constructor_v1 as constructor
-from canonical.runtime import reached_escape_state_kernel_v1 as kernel
 
 SCHEMA = "PROJECT_BRAIN_REACHED_ESCAPE_REPAIR_CYCLE_V1"
 CANDIDATE_SCHEMA = "PROJECT_BRAIN_REACHED_ESCAPE_REPAIR_CANDIDATE_V1"
@@ -174,7 +173,7 @@ def _validate_candidate_structure(
     candidate_kind: str,
     candidate: Mapping[str, Any],
 ) -> tuple[bool, str | None]:
-    normalized = kernel._normalize(state)
+    normalized = constructor.normalize_state_structure(state)
     region_ids = {row["region_id"] for row in normalized["regions"]}
 
     if candidate_kind == "DISCRIMINATOR":
