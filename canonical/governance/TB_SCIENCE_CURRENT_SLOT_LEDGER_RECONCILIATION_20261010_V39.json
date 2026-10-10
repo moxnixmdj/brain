@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V39",
+  "date": "2026-10-10",
+  "status": "CURRENT_POST_RANK18_FINAL_ZERO__EIGHTEEN_CONSUMED__RANK19_STAGED_UNREAD_UNSTARTED__CLAIM_BOUND_LOGICAL_IDENTITY_V1__PUBLIC_SURFACE_RESEAL_PENDING",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "predecessor": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V38.json",
+    "git_blob_sha": "137a2f61d911321365bd80613e3806a77dbe7eca"
+  },
+  "rank19_authority": {
+    "path": "canonical/governance/TB_SCIENCE_RANK19_ONE_SLOT_EXECUTION_AUTHORITY_20261010_V3.json",
+    "git_blob_sha": "0630b5d1e8e9aebbd58adf63567b61f0036887ca"
+  },
+  "logical_attempt_claim_binding": {
+    "path": "canonical/governance/TB_SCIENCE_RANK19_LOGICAL_ATTEMPT_CLAIM_BINDING_20261010_V1.json",
+    "git_blob_sha": "ecccf062b79894fcc2b06ecdf0413676a3a9ac2f",
+    "canonical_sha256": "4e9cae8c879a8122f11fe6ae7eea775fcc4fb0ae62b3a87e208a95d28ea4d05f"
+  },
+  "runtime_verification": {
+    "path": "canonical/verification/TB_SCIENCE_PLANNER_V7_ZERO_EXPOSURE_VERIFICATION_20261010_V1.json",
+    "git_blob_sha": "9797cc625e3e33bb905cf23fa6c79f66dc9794db"
+  },
+  "counts": {
+    "benchmark_trials_consumed": 18,
+    "consumed_successes_final": 0,
+    "consumed_failures_final": 18,
+    "started_result_pending": 0,
+    "finalized_slots": 18,
+    "active_in_flight_slot_count": 0
+  },
+  "next_slot": {
+    "ledger_schedule_rank": 19,
+    "frozen_manifest_schedule_order": 18,
+    "task_rank": 18,
+    "slot_id": "terminal-bench-science/diag-chipseq::trial-0",
+    "task_digest": "sha256:437bfacaebda9ce9905d54bdfe7247aec9649038206512c64547021f42e3950b",
+    "logical_attempt_id": "a3672b9d77c8fa0b7d3f0610ac2c008d2888e566d8a75ac92aa7078c1523abe6",
+    "logical_attempt_identity_basis": "SLOT_ID_PLUS_TASK_DIGEST_PLUS_EXECUTION_CLAIM_BINDING_DIGEST",
+    "execution_claim_binding_digest": "sha256:4e9cae8c879a8122f11fe6ae7eea775fcc4fb0ae62b3a87e208a95d28ea4d05f",
+    "task_read_history": false,
+    "task_started": false,
+    "start_cas_acquired": false,
+    "benchmark_trials_consumed": 0
+  },
+  "scheduler": {
+    "frozen": true,
+    "reason": "RANK19_PUBLIC_CLAIM_BOUND_IDENTITY_EXECUTION_SURFACE_RESEAL_NOT_YET_VERIFIED",
+    "rank19_execution_authority_effective": false,
+    "only_authorized_transition": "BUILD_AND_ZERO_EXPOSURE_VERIFY_PUBLIC_RANK19_CLAIM_BOUND_IDENTITY_EXECUTION_SURFACE"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_trials_consumed_delta": 0,
+    "consumed_successes_delta": 0,
+    "consumed_final_failures_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "execution_authority": false,
+  "finalization_authority": false,
+  "repair_authority": false,
+  "reseal_authority": "ZERO_EXPOSURE_ONLY"
+}
