@@ -387,6 +387,9 @@ def run(
     one_shot_externality_certificate_provider: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
     one_shot_capability_synthesis_provider: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
     one_shot_evidence_acquisition_provider: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
+    escape_repair_capability_synthesis_provider: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
+    escape_repair_evidence_acquisition_provider: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
+    escape_repair_candidate_verifier: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
 ) -> dict[str, Any]:
     try:
         if not isinstance(request, Mapping):
@@ -616,6 +619,35 @@ def run(
         elif mode == "REACHED_ESCAPE_STATE":
             from canonical.runtime import certified_reached_escape_state_constructor_v1 as reached_escape_state
             out = reached_escape_state.construct(payload)
+            if (
+                out.get("pass") is not True
+                and isinstance(out.get("repair_dispatch_contract"), Mapping)
+                and escape_repair_candidate_verifier is not None
+                and (
+                    escape_repair_capability_synthesis_provider is not None
+                    or escape_repair_evidence_acquisition_provider is not None
+                )
+                and options.get("auto_escape_repair", True) is not False
+            ):
+                from canonical.runtime import certified_reached_escape_repair_executor_v1 as escape_repair
+                repaired = escape_repair.execute(
+                    payload,
+                    capability_synthesis_provider=(
+                        escape_repair_capability_synthesis_provider
+                    ),
+                    evidence_acquisition_provider=(
+                        escape_repair_evidence_acquisition_provider
+                    ),
+                    candidate_verifier=escape_repair_candidate_verifier,
+                )
+                if repaired.get("pass") is True:
+                    out = repaired
+                else:
+                    out = {
+                        **out,
+                        "automatic_escape_repair_attempted": True,
+                        "automatic_escape_repair": repaired,
+                    }
         elif mode == "CERTIFIED_ROUTE":
             operation = str(payload.get("operation") or "").strip().upper()
             if operation == "PREFLIGHT":
