@@ -51,6 +51,8 @@ def _open(status:str, *, reason:str, trace:list[dict[str,Any]], **detail:Any)->d
         "next_information_request",
         "next_required_edge",
         "next_information_request_candidates",
+        "checker_materialization_template",
+        "checker_materialization_template_candidates",
     ):
         if key in detail:
             control[key]=deepcopy(detail.pop(key))
@@ -281,10 +283,16 @@ def evaluate(payload:Mapping[str,Any], *, repo_root:str|Path|None=None)->dict[st
             attempts=[]
             actionable_requests=[]
             actionable_edges=[]
+            materialization_templates=[]
             for candidate_payload in candidates:
                 truth=evaluate_truth(candidate_payload)
                 request=truth.get("next_information_request")
                 edge=truth.get("next_required_edge")
+                template=truth.get("checker_materialization_template")
+                if isinstance(template,Mapping):
+                    template_copy=deepcopy(dict(template))
+                    if not any(existing==template_copy for existing in materialization_templates):
+                        materialization_templates.append(template_copy)
                 if isinstance(request,Mapping):
                     request_copy=deepcopy(dict(request))
                     if not any(existing==request_copy for existing in actionable_requests):
@@ -297,6 +305,7 @@ def evaluate(payload:Mapping[str,Any], *, repo_root:str|Path|None=None)->dict[st
                     "predicate_id":truth.get("predicate_id"),
                     "predicate_truth":truth.get("predicate_truth"),
                     "actionable_information_request":isinstance(request,Mapping),
+                    "checker_materialization_template":isinstance(template,Mapping),
                 })
                 if truth.get("pass") is not True or truth.get("truthful_precommitment_observation") is not True:
                     continue
@@ -320,6 +329,7 @@ def evaluate(payload:Mapping[str,Any], *, repo_root:str|Path|None=None)->dict[st
                     "attempts":attempts,
                     "result":"UNKNOWN",
                     "actionable_information_request_count":len(actionable_requests),
+                    "checker_materialization_template_count":len(materialization_templates),
                 })
                 control={}
                 if len(actionable_requests)==1:
@@ -334,6 +344,10 @@ def evaluate(payload:Mapping[str,Any], *, repo_root:str|Path|None=None)->dict[st
                     control["next_required_edge"]=(
                         "DISAMBIGUATE_SELECTED_PREDICATE_INFORMATION_REQUEST"
                     )
+                if len(materialization_templates)==1:
+                    control["checker_materialization_template"]=materialization_templates[0]
+                elif len(materialization_templates)>1:
+                    control["checker_materialization_template_candidates"]=materialization_templates
                 return None,_open(
                     "OPEN__SELECTED_PREDICATE_PROOF_COVERAGE_REQUIRED",
                     reason="SELECTED_SEMANTIC_TRUTH_CERTIFICATE_RETURNED_UNKNOWN_OR_FAILED",
