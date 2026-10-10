@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_ROOT_SUBJECT_BINDING_V1",
+  "date": "2026-10-10",
+  "status": "CANDIDATE__R1_BOUND_TO_EXACT_DECLARED_SYSTEM__REQUIRES_INDEPENDENT_VERIFICATION__ZERO_QUALITY_OR_TERMINAL_CREDIT",
+  "root_id": "R1_TARGET_SPECIFICATION",
+  "subject_kind": "DECLARED_SYSTEM",
+  "subject_id": "PROFESSIONAL_QUALITY_P1_V4_TARGET_BOUND_SYSTEM_20261010_V3",
+  "subject_sha256": "e7292fbe697c2dcd06fc2c4346fc3e3bb231428a6511a88d575c655dd0f0c53a",
+  "subject": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V4_DECLARED_SYSTEM_SUBJECT_20261010_V3.json",
+    "git_blob_sha": "ad6867e59b4279e34a3e0058cf539ee94f8d094c"
+  },
+  "scoped_registry": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_REGISTRY_20261010_V1.json",
+    "git_blob_sha": "b9ddf7cbe7fbfad0e81fe068a0c19b48703b5aba"
+  },
+  "semantic_scope_id": "PQ::R1::TARGET_SEMANTICS::PROFESSIONAL_ARTIFACT_PLAN",
+  "execution_scope_id": "PQ::R1::TARGET_CONTRACT::STRUCTURAL_COMPLETENESS_GATE",
+  "bridge": {
+    "kind": "R1_TARGET_BOUND_ROUTER_V4",
+    "target_binding_verification": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_P1_ROUTER_V4_TARGET_BINDING_VERIFY_20261010_V1.json",
+      "git_blob_sha": "e1ee601dfbf8283f541ba9023a5476dc015bd997"
+    },
+    "inherited_regression_verification": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_P1_ROUTER_V4_INHERITED_REGRESSION_VERIFY_20261010_V1.json",
+      "git_blob_sha": "19c287a8424ded099713263f016a23aeb5fc64b3"
+    },
+    "semantic_claim": "THE_EXACT_DECLARED_SYSTEM_CONTAINS_THE_VERIFIED_TARGET_BOUND_ROUTER_AND_TARGET_SEMANTIC_CERTIFICATE_AND_PRESERVES_TARGET_INSTANCE_BINDING_BEFORE_V3_DELEGATION",
+    "scope_transport": "ONLY_TO_THE_EXACT_CONTENT_ADDRESSED_DECLARED_SYSTEM_SUBJECT_AND_THE_EXISTING_BOUNDED_R1_SEMANTIC_AND_EXECUTION_SCOPES"
+  },
+  "root_subject_binding_authority": false,
+  "global_subject_identity_authority": false,
+  "semantic_truth_authority": false,
+  "execution_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "hard_nonclaims": [
+    "NO_GLOBAL_R1_ROOT_CLOSURE",
+    "NO_GLOBAL_PROFESSIONAL_QUALITY_CLOSURE",
+    "NO_DOMAIN_SEMANTIC_OR_EXECUTION_CLOSURE",
+    "NO_LIVE_DEFAULT_PROMOTION",
+    "NO_TERMINAL_AUTHORITY"
+  ]
+}
