@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_COVERAGE_ROOT_SEMANTIC_VERIFICATION_V1",
+  "status": "PASS__INDEPENDENT_SEMANTIC_VERIFICATION__CC_R1_PROFESSIONAL_R12_STABLE_CLAIM",
+  "pass": true,
+  "verifier_protocol": "COVERAGE_ROOT_SEMANTIC_VERIFIER_V1",
+  "independent": true,
+  "semantic_claim_verified": true,
+  "root_id": "CC_R1_REALITY_CONTAINMENT_V1",
+  "claim_id": "11870f850b46bcfcc31094f764fc4f45c911aaac413979ceb62679ff19a53162",
+  "proof_mode": "FORMAL_REDUCTION",
+  "certificate": {
+    "path": "canonical/governance/COVERAGE_CC_R1_PROFESSIONAL_R12_SEMANTIC_CERTIFICATE_20261010_V2.json",
+    "git_blob_sha": "f7182bc43bfc48f4e019a0186534e14bd5374419"
+  },
+  "semantic_verifier": {
+    "path": "canonical/runtime/coverage_cc_r1_professional_r12_semantic_verify_v2.py",
+    "git_blob_sha": "f164d640f28c04f5c8cedfb66250906fef52e40b"
+  },
+  "verifier_result_sha256": "2b97d47544375aa59684fa6a5222d3262d88519dfe480103f7e771a9669cba47",
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/pq-v7-proof-bound-verify",
+    "package_install_performed": false,
+    "incremental_spend_usd": 0
+  },
+  "result": {
+    "b_real_subseteq_b_plus": true,
+    "whole_leaf_domain_scope_complete": true,
+    "identity_carrier_total_injective": true,
+    "property_truth_implied": false
+  },
+  "errors": [],
+  "terminal_credit_delta": 0
+}
