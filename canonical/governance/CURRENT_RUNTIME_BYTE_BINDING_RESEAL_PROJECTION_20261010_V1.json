@@ -1,0 +1,70 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_RUNTIME_BYTE_BINDING_RESEAL_PROJECTION_V1",
+  "date": "2026-10-10",
+  "status": "READY_TO_APPLY__CURRENT_AUTHORITY_MUTATION_PENDING",
+  "target": {
+    "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+    "expected_git_blob_sha": "7a8458d51aa703e2103b89ca741276fecfae1338",
+    "expected_pointer_revision": 94,
+    "next_pointer_revision": 95
+  },
+  "verification": {
+    "path": "canonical/verification/CURRENT_RUNTIME_BYTE_COHERENCE_SPRITE_VERIFICATION_20261010_V1.json",
+    "git_blob_sha": "52de2370122ca2eb1e934425c963a918ea72a24f",
+    "tests_run": 67,
+    "failures": 0,
+    "errors": 0
+  },
+  "replacements": [
+    {
+      "json_path": "authoritative_sources.terminal_candidate_donor_independence_audit.git_blob_sha",
+      "expected": "0ed69641693538f15b7e1658f5ac5e80031afb26",
+      "value": "7b3713267d32f9b4ae7e2ca56ea17c5859bdec71"
+    },
+    {
+      "json_path": "authoritative_sources.terminal_autopilot_executor_v1.runtime.git_blob_sha",
+      "expected": "657a94d00833ad91403070132ef4e1f0d7337336",
+      "value": "6f828ce5631db582ea4d4a3d73c59b08f232abf0"
+    },
+    {
+      "json_path": "authoritative_sources.terminal_autopilot_executor_v1.planner.git_blob_sha",
+      "expected": "bb72c160f3be00efedbd5d111b77d956bed2cb11",
+      "value": "78fa2cbabf8ed5e70de8b3ed987b510ca033076b"
+    },
+    {
+      "json_path": "terminal_execution_root.runtime_gate.git_blob_sha",
+      "expected": "7c7e0c34cc599c7114fb83421307db2433e2b269",
+      "value": "6f546f657900405c628c1eb3575bc1e4ac220aeb"
+    },
+    {
+      "json_path": "terminal_execution_root.tests.git_blob_sha",
+      "expected": "7f51131ad6ee5f26cf752fde853e69cb2abdbf6c",
+      "value": "4d8a4aae55562e772730bb71d37ef08bf0385c6e"
+    },
+    {
+      "json_path": "live_capability_ownership_20261008_v1.unified_fabric.git_blob_sha",
+      "expected": "5badd256e18ab4bad58be862c69ef9e272bf7eb1",
+      "value": "31b9a227dba79f069045e915e416bcc370900af6"
+    },
+    {
+      "json_path": "r1_universal_live_capability_invocation_20261008_v1.unified_fabric.git_blob_sha",
+      "expected": "5badd256e18ab4bad58be862c69ef9e272bf7eb1",
+      "value": "31b9a227dba79f069045e915e416bcc370900af6"
+    }
+  ],
+  "additions": [
+    {
+      "json_path": "current_option_preserving_optimization_20261008_v1.runtime.git_blob_sha",
+      "value": "367478e71b015fb2f4b7cc40dad34f88a7f47238"
+    }
+  ],
+  "status_projection": {
+    "current_authority_runtime_byte_binding_coherence": true,
+    "current_authority_runtime_drift_reference_count": 0,
+    "current_authority_runtime_drift_unique_path_count": 0,
+    "current_authority_runtime_missing_blob_binding_count": 0,
+    "terminal_credit_delta": 0
+  },
+  "application_rule": "APPLY_ONLY_IF_TARGET_BLOB_AND_ALL_EXPECTED_OLD_VALUES_MATCH__OTHERWISE_FAIL_CLOSED",
+  "terminal_credit_delta": 0
+}
