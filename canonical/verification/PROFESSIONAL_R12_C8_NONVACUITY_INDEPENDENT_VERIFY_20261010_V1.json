@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_R12_C8_NONVACUITY_INDEPENDENT_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__SECOND_SPRITE__PYCOMPILE__6_OF_6__TWO_REAL_SUPPORTED_POSITIVE_R12_ROUTES__C8_NONVACUITY_ONLY__STRONGER_TOTALITY_OPEN",
+  "repository": "moxnixmdj/brain",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/professional_r12_c8_nonvacuity_v1.py",
+      "git_blob_sha": "01d00f1588a7117392e207053438c7c207c84801"
+    },
+    "tests": {
+      "path": "canonical/tests/test_professional_r12_c8_nonvacuity_v1.py",
+      "git_blob_sha": "5643aafc0d12942ffe39d2a64196ebfe69b14148"
+    },
+    "scoped_registry": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_REGISTRY_20261010_V1.json",
+      "git_blob_sha": "b9ddf7cbe7fbfad0e81fe068a0c19b48703b5aba"
+    },
+    "r12_scope": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_R12_META_COMPOSITION_SCOPE_20261010_V1.json",
+      "git_blob_sha": "4c69313ae31905f6aa379361d515dffdfb41efae"
+    },
+    "r12_execution_verify": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R12_EXECUTION_PROPERTY_TRUTH_INDEPENDENT_VERIFY_20261010_V1.json",
+      "git_blob_sha": "b2b9365ad4e7d34628d74f328507eecf01a13804"
+    }
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-professional-hard-defect-verify-20261010",
+    "carrier_id": "sprite-1bbb86ed-1f7c-409f-8397-fadc4de7a62a",
+    "workspace": "/home/sprite/v3-current-replay",
+    "py_compile": "PASS",
+    "tests_run": 6,
+    "tests_passed": 6,
+    "tests_failed": 0,
+    "transcript_sha256": "99ad33928c0227835ecaa8e8e07848c248591b9848e91d756685234ad87a0492",
+    "transcript_bytes": 2136
+  },
+  "truth": {
+    "root_id": "R12_META_COMPOSITION_CLOSURE",
+    "scope_id": "PQ::R12::UVCK::FAIL_CLOSED_META_COMPOSITION",
+    "shared_scope_binds_semantic_and_execution_leaves": true,
+    "independently_observed_positive_route_count": 2,
+    "c8_nonvacuity_proved": true,
+    "stronger_material_defeater_totality_proved": false,
+    "cc_r3_terminal_closure_proved": false,
+    "semantic_property_truth_authority": false
+  },
+  "proves": [
+    "THE_SAME_CONTENT_ADDRESSED_SCOPED_UVCK_CAPABILITY_IS_BOUND_TO_BOTH_R12_SEMANTIC_AND_EXECUTION_LEAVES",
+    "TWO_POSITIVE_R12_META_COMPOSITION_PATHS_WERE_INDEPENDENTLY_OBSERVED_ON_THE_EXACT_SCOPED_RUNTIME",
+    "R12_C8_NONVACUITY_EXISTENCE_IS_PROVED_WITHOUT_USING_MISSION_SOUNDNESS_VACUOUSLY"
+  ],
+  "hard_nonclaims": [
+    "NO_UNKNOWN_OR_MATERIAL_DEFEATER_TOTALITY",
+    "NO_CC_R3_TERMINAL_CLOSURE",
+    "NO_R12_SEMANTIC_PROPERTY_TRUTH",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "property_truth_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
