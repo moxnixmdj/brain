@@ -65,10 +65,15 @@
     "readiness_verification": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_CERTIFICATE_READINESS_AUDIT_V2_VERIFY_20261010_V1.json",
     "readiness_verification_git_blob_sha": "2d28d932d08753fdf14c56aa24011e625518a4ef",
     "leaf_count": 24,
-    "admitted_v2_chain_count": 0,
-    "claim_scope_construction_required_count": 24,
-    "property_truth_ready_count": 0,
-    "next": "FREEZE_ONE_EXACT_WHOLE_LEAF_CLAIM_SCOPE_ONLY_WHEN_WHOLE_DOMAIN_EQUIVALENCE_CAN_BE_INDEPENDENTLY_PROVED__THEN_CLAIM_BOUND_SCOPE_COVER__PROPERTY_TRUTH_SEPARATE"
+    "admitted_v2_chain_count": 24,
+    "claim_scope_construction_required_count": 0,
+    "property_truth_ready_count": 24,
+    "next": "RUN_PROPERTY_TRUTH_VERIFICATION_ON_24_SCOPE_COMPLETE_CLAIMS__DO_NOT_REOPEN_SCOPE_CONSTRUCTION_UNLESS_CONTENT_DRIFT_INVALIDATES_THE_BATCH__RUN_FULL_CURRENT_MAIN_REGRESSION_BEFORE_PROMOTION",
+    "property_truth_closed_count": 0,
+    "scope_batch_activation": "canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_SCOPE_BATCH_ACTIVATION_20261010_V1.json",
+    "scope_batch_activation_git_blob_sha": "d40188f87818d9c6a4507a043380a753ca563e18",
+    "scope_batch_verification": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_SCOPE_BATCH_VERIFY_20261010_V1.json",
+    "scope_batch_verification_git_blob_sha": "4c2d40a262f18f34bb35f94b59660d60972d45ef"
   },
   "professional_scope_reconciliation": {
     "path": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_SCOPE_BATCH_VERIFY_20261010_V1.json",
