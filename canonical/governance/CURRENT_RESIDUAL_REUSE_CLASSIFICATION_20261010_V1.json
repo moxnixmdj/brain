@@ -1,0 +1,207 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1",
+  "date": "2026-10-10",
+  "status": "DERIVED_CURRENT_CLASSIFICATION__REUSE_ADAPTATION_PROMOTION_AND_EVIDENCE_FIRST__NO_VERIFIED_NEW_PRIMITIVE_CURRENTLY_ESTABLISHED_BY_THESE_RESIDUALS__ZERO_CREDIT",
+  "purpose": "COLLAPSE_APPARENT_BLOCKERS_ONTO_EXISTING_BRAIN_MACHINERY_AND_PREVENT_OPEN_CASE_EQUALS_MISSING_CAPABILITY_CONFUSION",
+  "sources": [
+    {
+      "path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+      "git_blob_sha": "310fd3e6f29fa353a37de5fdce67a400351a56d1"
+    },
+    {
+      "path": "canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json",
+      "git_blob_sha": "c8b542f21099ba45503643809d45959fc8640842"
+    },
+    {
+      "path": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
+      "git_blob_sha": "18f4f0d31525fb88bd79629e6833a4b2e4cbb26d"
+    },
+    {
+      "path": "canonical/governance/CURRENT_COVERAGE_COMPLETENESS_ROOT_CERTIFICATES.json",
+      "git_blob_sha": "8199d0d5a992c0ab4876af95349396bcc62a81fe"
+    },
+    {
+      "path": "canonical/governance/CURRENT_DEFAULT_RUNTIME_INTEGRATION.json",
+      "git_blob_sha": "f9e5953a58332012df51bd013090030635931746"
+    },
+    {
+      "path": "canonical/governance/CURRENT_ONE_SHOT_REALITY_CLOSURE.json",
+      "git_blob_sha": "0c23dde687c6facd5e0f13ddee08b37d69b63d2c"
+    },
+    {
+      "path": "canonical/governance/CURRENT_TB_SCIENCE_EXECUTION.json",
+      "git_blob_sha": "7be3b464a069ff8cf5b5568b1420c79a1e68aaf6"
+    },
+    {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+      "git_blob_sha": "75b736ca05ef055d0508af93ba14019a37e84ec4"
+    },
+    {
+      "path": "canonical/governance/REUSE_FIRST_RESIDUAL_EXECUTION_POLICY_20261010_V1.json",
+      "git_blob_sha": "e230e9c243ac79b7909dac86071b5cad536f1666"
+    },
+    {
+      "path": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V1.json",
+      "git_blob_sha": "28602e7f3c945695259c1cf589e4146e6af96d83"
+    }
+  ],
+  "classifications": [
+    {
+      "residual_id": "R2_PRIMARY_FINANCE_SEMANTIC_TAIL",
+      "source_truth": "ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_REMAINS__GENERAL_MECHANISM_CLOSED",
+      "default_resolution_modes": [
+        "ADAPT_EXISTING",
+        "ACQUIRE_EVIDENCE"
+      ],
+      "existing_mechanisms": [
+        "BOUNDED_COREFERENCE_AMBIGUITY_CONTROL",
+        "DERIVED_TYPED_TERMINAL_SIGNATURES",
+        "MREL_NECESSARY_PROPERTY_AUTHORITY",
+        "TLAC_MREL_BOUNDED_IDENTITY_DISCRIMINATOR",
+        "OEWN_DECISION_MANIFEST_LATTICE",
+        "SCOPED_DOMAIN_MAPPING",
+        "CROSS_DOCUMENT_FIELD_LATTICE",
+        "MARGIN_CONTEXT_IDENTITY",
+        "REGCAP_FACET_ROLE",
+        "DEFINITE_BUFFER_REFERENCE",
+        "SPREAD_RELATION_IDENTITY",
+        "MINIMUM_POLICY_CHANGING_EVIDENCE_ROUTING"
+      ],
+      "exact_remaining_class": "UNPROVED_COMPLETE_MENTION_OR_TERMINAL_SIGNATURE_OR_DECISIVE_OBSERVATION_OR_OTHER_OPEN_WORLD_SOURCE_BOUND_SEMANTIC_CASE",
+      "new_primitive_status": "NOT_ESTABLISHED"
+    },
+    {
+      "residual_id": "ESCAPE_GAP_A_ACQUISITION_TOTALITY",
+      "default_resolution_modes": [
+        "ACQUIRE_EVIDENCE",
+        "ADAPT_EXISTING"
+      ],
+      "existing_binding": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V1.json",
+      "exact_remaining_class": "PER_REACHED_INFORMATION_DEPENDENT_ROW_ACQUIRABILITY_AND_STRICT_DECISION_REGION_SHRINK_PROOF",
+      "new_primitive_status": "NOT_ESTABLISHED"
+    },
+    {
+      "residual_id": "ESCAPE_GAP_B_INTERNAL_ROUTE_STRICT_PROGRESS",
+      "default_resolution_modes": [
+        "ADAPT_EXISTING",
+        "VERIFY_EXISTING"
+      ],
+      "existing_binding": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V1.json",
+      "exact_remaining_class": "PER_REACHED_INTERNAL_ROW_EXECUTABLE_ACTION_PLUS_WELL_FOUNDED_PROGRESS_MEASURE",
+      "new_primitive_status": "NOT_ESTABLISHED"
+    },
+    {
+      "residual_id": "ASSURANCE_CLOSURE_COMPILER_NOT_LIVE_DEFAULT",
+      "default_resolution_modes": [
+        "VERIFY_EXISTING",
+        "PROMOTE_EXISTING",
+        "ADAPT_EXISTING"
+      ],
+      "existing_mechanisms": [
+        "UVCK_V2_ASSURANCE_CLOSURE_COMPILER",
+        "DOMAIN_CHALLENGE_REGISTRY",
+        "R2_ASSURANCE_SHADOW",
+        "DEFEATER_ORDER_REPAIR"
+      ],
+      "exact_remaining_class": "DOMAIN_SEMANTIC_AND_EXECUTION_EVIDENCE_BINDING_PLUS_FULL_CURRENT_MAIN_REGRESSION_BEFORE_PROMOTION",
+      "new_primitive_status": "NOT_ESTABLISHED"
+    },
+    {
+      "residual_id": "PROFESSIONAL_QUALITY_BROAD_EXECUTION",
+      "default_resolution_modes": [
+        "VERIFY_EXISTING",
+        "PROMOTE_EXISTING",
+        "ADAPT_EXISTING"
+      ],
+      "existing_mechanisms": [
+        "P1_ROUTER_CANDIDATE",
+        "SCOPED_EVIDENCE",
+        "PROFESSIONAL_EDIT_CAUSAL_CERTIFICATES",
+        "KNOWN_DEFEATER_BINDING"
+      ],
+      "exact_remaining_class": "INDEPENDENT_REPLAY_LIVE_DEFAULT_PROMOTION_AND_BROADER_DOMAIN_SEMANTIC_EXECUTION_EVIDENCE",
+      "new_primitive_status": "NOT_ESTABLISHED__MAY_REOPEN_ONLY_ON_EFFECT_DISTINGUISHING_COUNTEREXAMPLE"
+    },
+    {
+      "residual_id": "COVERAGE_COMPLETENESS_NEXT_CLAIM",
+      "default_resolution_modes": [
+        "REUSE_EXISTING_CERTIFICATE_MACHINERY"
+      ],
+      "existing_mechanisms": [
+        "CC_R1_REALITY_CONTAINMENT",
+        "CC_R2_MISSION_SOUNDNESS",
+        "CC_R3_TERMINAL_CLOSURE",
+        "ROOT_THEOREM_FALSIFIER",
+        "CONTENT_ADDRESSED_SEMANTIC_RECEIPTS"
+      ],
+      "exact_remaining_class": "INSTANTIATE_THE_PROVED_ROOT_CERTIFICATE_METHOD_ON_THE_NEXT_FROZEN_HIGH_LEVERAGE_CLAIM",
+      "new_primitive_status": "NOT_ESTABLISHED"
+    },
+    {
+      "residual_id": "DEFAULT_RUNTIME_AND_R3_CONTROL_LOOP",
+      "default_resolution_modes": [
+        "REUSE_EXISTING"
+      ],
+      "existing_mechanisms": [
+        "UNIFIED_COGNITIVE_FABRIC",
+        "ONE_SHOT_REALITY_CLOSURE",
+        "DYNAMIC_ROUTE_ADMISSION",
+        "PROOF_CARRYING_AUTO_PROMOTION",
+        "EXACT_DECISION_REPLAY"
+      ],
+      "exact_remaining_class": "NO_GENERAL_CONTROL_RESIDUAL_IN_CURRENT_ONE_SHOT_FIXED_POINT__DO_NOT_REOPEN_WITHOUT_NEW_COUNTEREVIDENCE",
+      "new_primitive_status": "CLOSED_AS_GENERAL_CONTROL_MECHANISM_UNDER_CURRENT_EVIDENCE"
+    },
+    {
+      "residual_id": "TB_SCIENCE_RANK19",
+      "default_resolution_modes": [
+        "VERIFY_EXISTING",
+        "EXECUTION_SURFACE_RESEAL"
+      ],
+      "existing_mechanisms": [
+        "V13_RUNTIME_REPAIR",
+        "CAPABILITY_FIRST_ADMISSION_V2",
+        "CLAIM_BOUND_LOGICAL_ATTEMPT_IDENTITY"
+      ],
+      "exact_remaining_class": "PUBLIC_CLAIM_BOUND_EXECUTION_SURFACE_RESEAL_WITH_ZERO_TASK_EXPOSURE_BEFORE_ANY_IRREVERSIBLE_START",
+      "new_primitive_status": "NOT_ESTABLISHED",
+      "current_truth": "UNREAD_UNSTARTED_UNCONSUMED__NO_EFFECTIVE_EXECUTION_AUTHORITY"
+    },
+    {
+      "residual_id": "OPUS_FRONTIER_CHECKPOINT_OPEN_FAMILIES",
+      "default_resolution_modes": [
+        "AUDIT",
+        "VERIFY_EXISTING",
+        "OWNERSHIP_PROOF",
+        "TARGETED_CAPABILITY_REPAIR_ONLY_WHEN_CAUSAL_DEFECT_IS_LOCALIZED"
+      ],
+      "existing_mechanisms": [
+        "CURRENT_TERMINAL_AUTHORITY",
+        "CAPABILITY_FIRST_SCHEDULER",
+        "COVERAGE_PARTITION",
+        "DONOR_REMOVAL_CLEAN_ROOM_FINALITY"
+      ],
+      "exact_remaining_class": "CHECKPOINT_ACCEPTANCE_AND_OWNERSHIP_EVIDENCE__NOT_AUTOMATICALLY_GENERAL_CAPABILITY_GAPS",
+      "new_primitive_status": "NOT_INFERABLE_FROM_CHECKPOINT_OPENNESS"
+    }
+  ],
+  "global_rule": "NO_RESIDUAL_ABOVE_MAY_BE_SCHEDULED_AS_NEW_PRIMITIVE_INVENTION_SOLELY_BECAUSE_ITS_EXACT_CASE_OR_PROOF_IS_OPEN__APPLY_REUSE_FIRST_POLICY_AND_REQUIRE_VERIFIED_REUSE_EXHAUSTION",
+  "next_shared_execution_cut": [
+    "GAP_A_ACQUISITION_TOTALITY",
+    "GAP_B_INTERNAL_ROUTE_STRICT_PROGRESS",
+    "TASK_LOCAL_EFFECT_DISTINGUISHING_COUNTEREXAMPLES_THAT_FALSIFY_EXISTING_MECHANISMS"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_ALL_FUTURE_RESIDUALS_HAVE_EXISTING_SOLUTIONS",
+    "NO_CLAIM_ALL_CURRENT_EXACT_CASES_ARE_CLOSED",
+    "NO_GLOBAL_ESCAPE_PROGRESS_TOTALITY_CREDIT",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
