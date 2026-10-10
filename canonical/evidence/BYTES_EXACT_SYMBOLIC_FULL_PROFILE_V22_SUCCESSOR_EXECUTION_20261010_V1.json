@@ -1,0 +1,118 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_FULL_PROFILE_V22_SUCCESSOR_EXECUTION_V1",
+  "status": "FRESH_SUCCESSOR_EXECUTION__FULL_SPENT_NEXT26_PROFILE_PRUNE__ZERO_PROMOTION_CREDIT",
+  "recorded_at": "2026-10-10",
+  "predecessor": {
+    "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_NONCORE_REPAIRED_V21_SUCCESSOR_EXECUTION_20261010_V1.json",
+    "package_raw_python_source_bytes": 2122982,
+    "B_exec_raw_python_source_bytes": 2125742,
+    "archive_bytes": 317236,
+    "fresh_qualification": "7820/7820",
+    "manifest_sha256": "0fa7fd19f6a674e493954d48f7438285dbab4fd9eefe559a3d537ca9834c6022"
+  },
+  "selection": {
+    "id": "FULL_SPENT_NEXT26_ZERO_HIT_PROFILE_V22",
+    "corpus": "QUAL_SUCCESSOR_NEXT26_20261010_V1",
+    "spent_cases": 7820,
+    "method": "Whole-route Python-start profiling over 11 operation classes plus target-resolved local monitoring for series_coeff; every selected function was monitored and had zero starts.",
+    "selected_function_bodies": 22,
+    "finite_nonuse_rule": "Selection signal only; no universal dead-code claim."
+  },
+  "structural_cut": {
+    "id": "FULL_SPENT_NEXT26_ZERO_HIT_FUNCTION_PRUNE_V22",
+    "selected": [
+      "sympy.matrices.sparse.SparseRepMatrix._handle_creation_inputs",
+      "sympy.simplify.simplify.besselsimp",
+      "sympy.simplify.hyperexpand.devise_plan",
+      "sympy.simplify.hyperexpand.Formula.find_instantiations",
+      "sympy.simplify.hyperexpand.devise_plan_meijer",
+      "sympy.simplify.hyperexpand.build_hypergeometric_formula",
+      "sympy.functions.special.elliptic_integrals.elliptic_pi.eval",
+      "sympy.functions.special.bessel.besseli.eval",
+      "sympy.functions.special.bessel.besselj.eval",
+      "sympy.utilities.iterables.multiset_partitions",
+      "sympy.utilities.iterables.random_derangement",
+      "sympy.utilities.iterables.partitions",
+      "sympy.utilities.iterables.ordered_partitions",
+      "sympy.utilities.iterables.multiset_combinations",
+      "sympy.utilities.iterables.generate_bell",
+      "sympy.utilities.iterables.kbins",
+      "sympy.printing.str.StrPrinter._print_Poly",
+      "sympy.printing.str.StrPrinter._print_Permutation",
+      "sympy.functions.combinatorial.numbers.mobius.eval",
+      "sympy.ntheory.factor_.smoothness_p",
+      "sympy.ntheory.factor_.multiplicity",
+      "sympy.ntheory.generate.composite"
+    ],
+    "module_graph_unchanged": true,
+    "spent_NEXT26_before_fresh_gate": "7820/7820"
+  },
+  "measured_candidate": {
+    "status": "PHYSICALLY_REWRITTEN_RESEARCH_CANDIDATE__NOT_PROMOTED",
+    "python_files": 277,
+    "package_raw_python_source_bytes": 2089068,
+    "router_raw_python_source_bytes": 2760,
+    "B_exec_raw_python_source_bytes": 2091828,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "manifest_sha256": "84a4947df1815c9dd5e9a82ba25670ee051f6a7bb3e05f904e17445fe8abd6e4",
+    "raw_improvement_vs_V21_bytes": 33914,
+    "archive_bytes": 311496,
+    "archive_sha256": "a9b60efb8f12cadbd42a72a173b533ed291e4183f3cb80a41111ae959a5323f3",
+    "archive_improvement_vs_V21_bytes": 5740
+  },
+  "qualification": {
+    "spent_NEXT26": {
+      "id": "QUAL_SUCCESSOR_NEXT26_20261010_V1",
+      "cases": 7820,
+      "corpus_sha256": "537684c7693774cee934b3a36399f891c1b28a0747eea7721bdcf98ef93ff9b1",
+      "candidate": "7820/7820",
+      "spent": true
+    },
+    "fresh_NEXT27": {
+      "id": "QUAL_SUCCESSOR_NEXT27_20261010_V1",
+      "seed": 5196152,
+      "per_operation_budget": 700,
+      "cases": 8050,
+      "corpus_sha256": "bac8ef513a82f91c59ae2afb503703df2fc23cfcacefb5c36c414f2ae6405702",
+      "stock_donor": "8050/8050",
+      "candidate": "8050/8050",
+      "independent_copy": "8050/8050",
+      "archive_replay": "8050/8050",
+      "spent": true
+    }
+  },
+  "reproducibility": {
+    "predecessor_reconstruction": "canonical/research/bytes/tools/rebuild_candidate_v21.py",
+    "transform": "canonical/research/bytes/tools/profile_prune_v22.py",
+    "transform_sha256": "a579a24810a570792f9d1d639f1464d142dd48f1e948d33f9fc9b873e0b78dfd",
+    "successor_reconstruction": "canonical/research/bytes/tools/rebuild_candidate_v22.py",
+    "rebuild_sha256": "b34113710239249d9d6f162246f872fae39f57b9c7e23e4c1a91603840b8d8d8",
+    "route": "canonical/research/bytes/tools/exact_symbolic_route_v1.py",
+    "semantic_digest": "canonical/research/bytes/tools/semantic_digest_v1.py",
+    "qualification_generator": "canonical/research/bytes/tools/generate_qualification_v1.py"
+  },
+  "durable_artifact": {
+    "library_status": "PERSISTED_IN_CHATGPT_LIBRARY",
+    "library_file_id": "libfile_f53468713a74819196bace3c801167a5",
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V22_SUCCESSOR_20261010_V1.tar.xz",
+    "bytes": 311496,
+    "sha256": "a9b60efb8f12cadbd42a72a173b533ed291e4183f3cb80a41111ae959a5323f3"
+  },
+  "next_frozen_qualification": {
+    "id": "QUAL_SUCCESSOR_NEXT28_20261010_V1",
+    "seed": 5291502,
+    "per_operation_budget": 720,
+    "cases": 8280,
+    "corpus_sha256": "6b6841e6a62185bfaa397358f14af68474c5d9a9be6290b166ec09b6ab890549",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT"
+  },
+  "truth_boundary": [
+    "MEASURED: exact 2,089,068-byte V22 passes fresh NEXT27 8,050/8,050 on stock donor, candidate, independent reconstruction, and extracted archive.",
+    "MEASURED: V22 is 33,914 raw Python-source bytes smaller than V21 and its source archive is 5,740 bytes smaller.",
+    "INFERRED: the 22 V22 stubs are outside the tested bounded route; complete finite profiling remains non-universal.",
+    "NOT CLAIMED: universal SymPy correctness, absolute information-theoretic minimum, out-of-scope behavior preservation, or Opus-family promotion.",
+    "PROMOTION CREDIT: 0."
+  ],
+  "next_action": "Rerank exact V22 using spent NEXT27 only. Do not execute NEXT28 before a new physical cut.",
+  "promotion_credit": 0
+}
