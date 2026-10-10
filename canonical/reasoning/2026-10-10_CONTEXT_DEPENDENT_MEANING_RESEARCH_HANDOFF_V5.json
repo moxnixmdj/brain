@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_CONTEXT_DEPENDENT_MEANING_RESEARCH_HANDOFF_20261010_V5",
+  "date": "2026-10-10",
+  "status": "CURRENT_SUCCESSOR_HANDOFF__R2_V73__CONTEXTUAL_TERM_IDENTITY_PLUS_PAIRWISE_NONIDENTIFIABILITY_PLUS_OPEN_WORLD_CONTROL_PROGRESS__SEMANTIC_RESIDUAL_PRESERVED__ZERO_CREDIT",
+  "supersedes": "canonical/reasoning/2026-10-10_CONTEXT_DEPENDENT_MEANING_RESEARCH_HANDOFF_V4.json",
+  "authoritative_state": {
+    "r2_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+    "r2_git_blob_sha": "84563042f96f7f5fffd2240956fbec985dfe7a40",
+    "r2_version": "V73",
+    "root2_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261010_V64.json",
+    "root2_git_blob_sha": "88d62359c8e3cd4c4c6c775355e4370c63ea251b",
+    "one_primary_finance_semantic_residual_remains": true
+  },
+  "composed_capability": {
+    "stage_1_contextual_identity": {
+      "runtime": "canonical/runtime/margin_contextual_term_identity_v1.py",
+      "git_blob_sha": "655e46be6e9a31d0df210609152794f70caf1b63",
+      "verification_git_blob_sha": "b606447bf298f83ea4644c24723ed1e67396b0b8",
+      "rule": "REUSE_EXACT_AUTHENTICATED_SOURCE_NATIVE_OR_LONGER_MULTIWORD_TERM_IDENTITY_BEFORE_BARE_HEADWORD_WSD"
+    },
+    "stage_2_negative_identification": {
+      "runtime": "canonical/runtime/semantic_pair_nonidentifiability_v1.py",
+      "git_blob_sha": "e358eeecc45868c91d22009cc57c624e9a210037",
+      "verification_git_blob_sha": "2e5f81c929025f4df7b5c2589ccc37f6147cdee6",
+      "rule": "TWO_AUTHENTICATED_DISTINCT_SOURCE_COMPATIBLE_INTERPRETATIONS_REFUTE_UNIQUE_SOURCE_ONLY_IDENTITY"
+    },
+    "stage_3_control_progress": {
+      "runtime": "canonical/runtime/open_world_semantic_control_v1.py",
+      "git_blob_sha": "cea865ac319eb420977b60378de213fc11be9090",
+      "live_front_door": "canonical/runtime/unified_cognitive_fabric_v2.py",
+      "live_front_door_git_blob_sha": "afb8b5c30957168dd8ba8684afb94b31c9118ed5",
+      "rule": "WHEN_IDENTITY_REMAINS_OPEN__ROUTE_ONLY_THE_MINIMUM_INFORMATION_ACQUISITION_ACTION_WITHOUT_CONSULTING_UNKNOWN_IDENTITY"
+    },
+    "stage_4": "REVERIFY_SEMANTICS_AND_POLICY_AFTER_NEW_INFORMATION"
+  },
+  "exact_margin_truth": {
+    "bare_source": "Margin increased.",
+    "bare_unique_identity_from_source_alone": false,
+    "bare_true_identity_selected": false,
+    "contextual_positive_subregions": [
+      "net interest margin",
+      "initial margin"
+    ],
+    "safe_bare_progress": "ACQUIRE_MINIMUM_POLICY_CHANGING_INFORMATION_OR_ABSTAIN"
+  },
+  "next_move": "SELECT_ANOTHER_CONCRETE_CONTEXT_RICH_POLICY_MATERIAL_FINANCE_AMBIGUITY__LONGEST_AUTHENTICATED_TERM_OR_SOURCE_IDENTITY_FIRST__PAIRWISE_NONIDENTIFIABILITY_SECOND__MINIMUM_INFORMATION_CONTROL_THIRD__REVERIFY_AFTER_ACQUISITION",
+  "hard_nonclaims": [
+    "NO_GLOBAL_WORD_SENSE_CLOSURE",
+    "NO_FINANCE_SEMANTIC_TAIL_CLOSURE",
+    "NO_TRUE_SENSE_FOR_BARE_MARGIN",
+    "NO_CLAIM_THE_TWO_CONTEXTUAL_MARGIN_TERMS_EXHAUST_MARGIN_MEANINGS",
+    "NO_FINAL_DOMAIN_ACTION_FROM_CONTROL_PROGRESS",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
