@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_UNIVERSAL_ESCAPE_OBSTRUCTION_REDUCTION_TWO_SPRITE_VERIFICATION_V2",
+  "date": "2026-10-08",
+  "status": "PASS_2_OF_2_ON_TWO_INDEPENDENT_SPRITES__EXACT_BYTE_UNIVERSAL_FRONTIER_REDUCTION__ZERO_TERMINAL_CREDIT",
+  "branch": "research/universal-escape-obstruction-20261008-v2",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/universal_escape_obstruction_reduction_v2.py",
+      "git_blob_sha": "dbda734a38a9329ebed728a8bc4cdd319ec9cd35"
+    },
+    "tests": {
+      "path": "canonical/tests/test_universal_escape_obstruction_reduction_v2.py",
+      "git_blob_sha": "862c3f1e3dfc64a9f3bc3e639557fc5584298439"
+    }
+  },
+  "exact_source_bindings": {
+    "current_terminal_authority_repaired": "3d73433cd177afa603b6e96f93bdbc8cf708f132",
+    "u_single_primitive": "f0776f0f900962228e8924aaf602d98973f5eddb",
+    "escape_catchall_total_abstraction": "3bd081e9253a5d7dff32c213c1c11b6e03834308",
+    "observational_quotient_obstruction": "57eeba3e14fc042f690d7a75d575993ac68a4246",
+    "current_primitive_u_frontier": "8340829830dc81095abd4d643a8be6894a39f2f3",
+    "p3_robust_policy_adequacy_cegar": "d31c083392134b51d3bb094689e1c7bdfa6f7d68",
+    "gdpval_evaluation_law_information_cut": "7bf8b2ffc8186e14380da080e5a9832a2fd9a2a8",
+    "gdpval_evaluator_facing_quotient_route": "0ca5160b40d9d378688b480b2972a7ee334a1655",
+    "acceptance_relation_top_reduction": "478f38e9a746e9db99767dd03376481834decd51",
+    "p3_real_db_seed_verification": "25d4129ac679360e0a9f5c69e12b625dcad66b6b"
+  },
+  "verification": [
+    {
+      "provider": "Sprites",
+      "sprite": "brain-abstract-cover-lift-verify-20261008-v1",
+      "sprite_id": "sprite-c6d765e0-f383-49a0-b78b-7863d8d4793d",
+      "tests_run": 2,
+      "tests_passed": 2,
+      "result": "PASS"
+    },
+    {
+      "provider": "Sprites",
+      "sprite": "brain-trace-parametricity-v1-verify",
+      "sprite_id": "sprite-077f9cab-5fc0-4387-88b1-ceaf2010ddf4",
+      "exact_branch_runtime_and_test_blobs_reloaded": true,
+      "tests_run": 2,
+      "tests_passed": 2,
+      "result": "PASS"
+    }
+  ],
+  "proved": [
+    "CURRENT_EXACT_SOURCE_COMPOSITION_REDUCES_THE_LIVE_UNIVERSAL_FRONTIER_TO_TARGET_SUPPORTED_REACHABLE_UNSPLITTABLE_POLICY_CONFLICT_CLASSES",
+    "SERIAL_ENUMERATION_OF_THE_NONEXHAUSTIVE_D_B_CACHE_IS_NOT_A_LOAD_BEARING_PREREQUISITE_FOR_POSITIVE_UNIVERSAL_COVER",
+    "COMPLETE_DISCRIMINATOR_LIBRARY_IS_NOT_REQUIRED_FOR_A_POSITIVE_COVER",
+    "EXACT_TRUE_WORLD_ENUMERATION_IS_NOT_REQUIRED_FOR_A_POSITIVE_COVER",
+    "THE_EXISTING_P3_REAL_REGION_RESIDUAL_IS_VALID_MONOTONE_ESCAPE_SHRINKING_EVIDENCE_BUT_NOT_A_SERIAL_GLOBAL_COVER_PLAN",
+    "GDPVAL_HIDDEN_EVALUATOR_RELATION_REMAINS_A_CONSTRUCTIVE_OPEN_WITNESS_FAMILY",
+    "FORGED_LOAD_BEARING_SOURCE_BLOB_BINDING_FAILS_CLOSED"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_REACHABLE_TARGET_SUPPORTED_OBSTRUCTION_UNION_IS_EMPTY",
+    "NO_CLAIM_GDPVAL_IS_CLOSED",
+    "NO_CLAIM_ONE_COMMON_POLICY_CURRENTLY_COVERS_EVERY_ESCAPE_CLASS",
+    "NO_U_EMPTY",
+    "NO_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
