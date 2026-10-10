@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "date": "2026-10-10",
+  "action_id": "PROFESSIONAL_QUALITY_SUBJECT_DEPENDENCY_CLOSURE_V2_20261010",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "PROFESSIONAL_QUALITY_FINAL_SUBJECT_COMPONENT_SET_NOT_DEPENDENCY_CLOSED__MORE_ROOT_BINDINGS_WOULD_SELF_INVALIDATE_ON_SUBJECT_REFRESH",
+  "selected_route": "REUSE_PYTHON_TRANSITIVE_RUNTIME_CLOSURE_V1_PLUS_EXACT_DEPENDENCY_RELEVANCE_BOUNDARY__SEED_FROM_DECLARED_SYSTEM_NOT_EXTERNAL_VERIFIER_TOOLING",
+  "prior_work_reused": [
+    "canonical/runtime/python_transitive_runtime_closure_v1.py",
+    "canonical/runtime/p3_exact_dependency_relevance_cell_v1.py",
+    "canonical/runtime/goal_dependency_delta_v4.py",
+    "canonical/governance/PROFESSIONAL_QUALITY_SUBJECT_DEPENDENCY_CLOSURE_WORKLIST_20261010_V1.json"
+  ],
+  "falsification_condition": "DECLARED_SYSTEM_DEPENDENCY_CONE_CANNOT_BE_SOUNDLY_CLASSIFIED_WITH_EXISTING_RUNTIME_CLOSURE_AND_SYSTEM_VS_EVIDENCE_BOUNDARY",
+  "expected_parent_change": "CLASSIFY_FINAL_SYSTEM_MATERIAL_ONCE__ENABLE_ONE_FINAL_SUBJECT_FREEZE_AND_STABLE_REMAINING_ROOT_BINDINGS",
+  "benchmark_or_family_rank_authority": false,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "terminal_credit_delta": 0
+}\n
