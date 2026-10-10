@@ -27,7 +27,7 @@ def test_gap_b_reclassification_is_source_entailed_and_structurally_sound():
 
     assert g["measured_effect"]["v2_compilable_first_residuals"]==92
     assert g["measured_effect"]["remaining_unresolved_first_residuals"]==128
-    assert "route availability" in g["theorem_boundary"]["statement"].lower()
+    assert "ROUTE_AVAILABILITY" in g["theorem_boundary"]["statement"]
     effects=" ".join(g["scheduler_effect"])
     assert "GDPVAL_CANDIDATE_OR_SCOPE_COMPLETE_CONSTRUCTIVE_PROOF" in effects
 
