@@ -1,0 +1,107 @@
+{
+  "schema": "PROJECT_BRAIN_REGCAP_MREL_PAIR_REVALIDATION_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_BRANCH_BYTES__90_OF_90_FOCUSED_TESTS__LIVE_BIS_EBA_PAIR_AUTHORITY_PASS__LIVE_V6_3_OF_3__LIVE_TRUTH_DISPATCH_3_OF_3_EXPECTED__PYCOMPILE_PASS__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "regcap-mrel-pair-discriminators-v1-20261010-sol",
+    "exact_blobs": {
+      "canonical/runtime/regcap_mrel_pair_discriminator_v1.py": "ba0c06771c183baf14bfe42d28285d9327675e50",
+      "canonical/runtime/loss_absorbing_cushion_regcap_grounding_v6.py": "2065d4343b6c15dd536a9a6d6f5c552432a5c9cc",
+      "canonical/runtime/regcap_loss_cushion_truth_certificate_v4.py": "4fb3e62ad6412601d3eb738f25c8f70e18f6dec8",
+      "canonical/runtime/semantic_truth_dispatch_v1.py": "0909f8b5cbeca124af0cfa6ea24759d8d8ac018f",
+      "canonical/tests/test_regcap_mrel_pair_discriminator_v1.py": "24a8e5a463a247d06a7d137c36c9f5b6d9a7c184",
+      "canonical/tests/test_loss_absorbing_cushion_regcap_grounding_v6.py": "fd7ce360478978ec0ba6bd3f3ec83e7227a9f82b",
+      "canonical/tests/test_regcap_loss_cushion_truth_certificate_v4.py": "242669f12863073902ea73e0eb0790e64e6377fc",
+      "canonical/tests/test_semantic_truth_dispatch_regcap_loss_v4.py": "81e1809cdcd78914888c21ddd5a3855ea59ad4d3",
+      "canonical/tests/test_semantic_truth_dispatch_regcap_loss_v3.py": "853a7367e12aeffec6bbee7466b9315cffe05ac4"
+    }
+  },
+  "independent_carrier": {
+    "name": "participial-disposition-verify-20261009-sol",
+    "sprite_id": "sprite-72f2a31b-c09c-49e0-bfe0-279786ee2d56",
+    "workspace": "/home/sprite/regcap_mrel_pair_verify",
+    "assembly": "EXACT_CURRENT_MAIN_DEPENDENCY_BYTES_PLUS_EXACT_BRANCH_SUBJECT_BYTES"
+  },
+  "verification": {
+    "py_compile": "PASS",
+    "new_and_directly_affected_branch_cone": {
+      "tests_run": 41,
+      "failures": 0,
+      "errors": 0,
+      "suites": {
+        "regcap_mrel_pair_discriminator_v1": 12,
+        "loss_absorbing_cushion_regcap_grounding_v6": 9,
+        "regcap_loss_cushion_truth_certificate_v4": 5,
+        "semantic_truth_dispatch_regcap_loss_v4": 2,
+        "loss_absorbing_cushion_regcap_grounding_v5": 6,
+        "regcap_loss_cushion_truth_certificate_v3": 5,
+        "semantic_truth_dispatch_regcap_loss_v3": 2
+      }
+    },
+    "adjacent_semantic_and_source_cone": {
+      "tests_run": 49,
+      "failures": 0,
+      "errors": 0,
+      "suites": {
+        "regcap_necessary_property_authority_v1": 11,
+        "mrel_necessary_property_authority_v1": 12,
+        "tlac_mrel_identity_discriminator_v1": 10,
+        "loss_absorbing_cushion_context_v3": 16
+      }
+    },
+    "total_focused_tests": 90,
+    "live_pair_authority": {
+      "CCOB_MREL": {
+        "result": "PASS",
+        "authority_sha256": "ac613f278da059f5df4329ace834fea53ec4fcc8310da0f0fca88e5b6e35b62b",
+        "BIS": "PASS__HTTPS_SOURCE_FRAGMENT_PROJECTION_AUTHENTICATED",
+        "EBA": "PASS__HTTPS_SOURCE_FRAGMENT_PROJECTION_AUTHENTICATED"
+      },
+      "CCYB_MREL": {
+        "result": "PASS",
+        "authority_sha256": "21685a89cd8cf85cd18d615cb9a682ec1bc01e96e0aafaba2af9460deb66f1b4",
+        "BIS": "PASS__HTTPS_SOURCE_FRAGMENT_PROJECTION_AUTHENTICATED",
+        "EBA": "PASS__HTTPS_SOURCE_FRAGMENT_PROJECTION_AUTHENTICATED"
+      }
+    },
+    "live_v6_grounding": {
+      "CCOB_STRUCTURAL": "PASS__SELECTED_REGCAP_CCOB_RELATIVE_TO_FOUR",
+      "CCYB_RELEASE": "PASS__SELECTED_REGCAP_CCYB_RELATIVE_TO_FOUR",
+      "CCOB_WEAK": "PASS__REMAINS_OPEN_CCOB_MREL"
+    },
+    "live_semantic_truth_dispatch": {
+      "CCOB_TRUE": "PASS__TRUE",
+      "CCYB_TRUE": "PASS__TRUE",
+      "WEAK_UNKNOWN": "PASS__UNKNOWN",
+      "terminal_authority": false
+    }
+  },
+  "proved": [
+    "THE_CURRENT_FOUR_CONCEPT_LOSS_CUSHION_FRONTIER_CAN_REVALIDATE_CCOB_AGAINST_MREL_WHEN_THE_BOUNDED_2_5_PERCENT_CET1_ABOVE_MINIMUM_MARKER_IS_PRESENT",
+    "THE_CURRENT_FOUR_CONCEPT_LOSS_CUSHION_FRONTIER_CAN_REVALIDATE_CCYB_AGAINST_MREL_WHEN_THE_BOUNDED_SYSTEM_WIDE_RISK_RELEASE_OR_EXTENDS_CCOB_CET1_MARKER_IS_PRESENT",
+    "MREL_GOVERNING_REQUIREMENT_MARKERS_ARE_AUTHENTICATED_FROM_THE_EXISTING_EBA_CASE_BY_CASE_RESOLUTION_AUTHORITY_SOURCE",
+    "PAIR_COMPLETENESS_IS_ONLY_BY_CONSTRUCTION_FOR_THE_EXACT_CCOB_MREL_OR_CCYB_MREL_TASK_SCOPE",
+    "WEAKER_CCOB_DRAWDOWN_CONTEXT_DOES_NOT_ELIMINATE_MREL",
+    "MIXED_PAIR_MARKERS_FAIL_CLOSED",
+    "V5_TLAC_MREL_REVALIDATION_REMAINS_PRESERVED",
+    "SOURCE_LOCAL_IDENTITY_REMAINS_STRONGER_THAN_RELATIVE_SELECTION",
+    "SEMANTIC_TRUTH_DISPATCH_NOW_RECOMPUTES_AGAINST_V6_THROUGH_CERTIFICATE_V4",
+    "HISTORICAL_V3_CERTIFICATE_REMAINS_AVAILABLE_AS_A_DIRECT_SURFACE",
+    "NO_GLOBAL_CONCEPT_IDENTITY_OR_OPEN_WORLD_CANDIDATE_COMPLETENESS_IS_GRANTED",
+    "NO_POLICY_ADEQUACY_EXECUTION_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "hard_nonclaims": [
+    "NO_GLOBAL_CCOB_MREL_OR_CCYB_MREL_DISJOINTNESS",
+    "NO_OPEN_WORLD_REGULATORY_CAPITAL_ONTOLOGY_COMPLETENESS",
+    "NO_CLAIM_ALL_CCOB_CONTEXTS_OR_ALL_CCYB_CONTEXTS_NOW_RESOLVE_AGAINST_MREL",
+    "NO_REVERSE_INFERENCE_FROM_GENERIC_LOSS_ABSORPTION_TO_ANY_CONCEPT_IDENTITY",
+    "NO_FINANCE_SEMANTIC_TAIL_CLOSURE",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
