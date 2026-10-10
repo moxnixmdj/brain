@@ -70,8 +70,8 @@ def evaluate(registry:Mapping[str,Any],*,repo_root:Path)->dict[str,Any]:
  if proved!=EXPECTED_PROVED:errors.append("PROVED_ROOT_SET_DRIFT")
  if opened!=EXPECTED_OPEN:errors.append("OPEN_ROOT_SET_DRIFT")
  if base.get("r4_proof_closure") is not True:errors.append("R4_NOT_CLOSED_AFTER_ALL_THREE_ROOTS")
- if registry.get("exact_remaining_root")!="CC_R3_TERMINAL_CLOSURE_V1":errors.append("REMAINING_ROOT_DRIFT")
- if registry.get("exact_remaining_obligation")!="ALL_ROOT_RELEVANT_MATERIAL_DEFEATERS_RESOLVED_OR_PROVED_DECISION_NULL_BEFORE_POSITIVE_CERTIFICATION":errors.append("REMAINING_OBLIGATION_DRIFT")
+ if registry.get("exact_remaining_root") is not None:errors.append("REMAINING_ROOT_NOT_NULL")
+ if registry.get("exact_remaining_obligation") is not None:errors.append("REMAINING_OBLIGATION_NOT_NULL")
  if errors:return _fail(*errors,semantic_root_results=semantic_results)
  return {"schema":SCHEMA,"pass":True,
   "status":"PASS__STABLE_R12_ROOT_REGISTRY__CC_R1_CC_R2_CC_R3_PROVED_CURRENT__R4_PROOF_CLOSURE_TRUE__ZERO_TERMINAL_CREDIT",
