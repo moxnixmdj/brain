@@ -27,7 +27,7 @@ from canonical.runtime.https_source_fragment_projection_authority_v2 import (
 SCHEMA = "PROJECT_BRAIN_TLAC_MREL_IDENTITY_DISCRIMINATOR_V1"
 PACK_SCHEMA = "PROJECT_BRAIN_TLAC_MREL_IDENTITY_DISCRIMINATOR_SOURCE_PACK_V1"
 PACK_PATH = "canonical/evidence/TLAC_MREL_IDENTITY_DISCRIMINATOR_SOURCE_PACK_V1.json"
-PACK_GIT_BLOB_SHA = "88953236ae9201bf368e282d2026cf64f0f6fe76"
+PACK_GIT_BLOB_SHA = "5fee8efbd4ca57013400bfbc53051df292057cd4"
 SCOPE_ID = "REGCAP_TLAC_MREL_BOUNDED_RIVAL_TASK_V1"
 
 TLAC = "REGCAP::TLAC"
@@ -133,7 +133,7 @@ def load_pack(*, repo_root: str | Path | None = None) -> dict[str, Any]:
             raise ValueError("PACK_SOURCE_ID_INVALID_OR_DUPLICATE")
         by_id[sid] = dict(row)
     required = {
-        "EURLEX_BRRD_2026_MREL_ARTICLE_45C",
+        "EBA_MREL_CASE_BY_CASE_2015",
         "FSB_TLAC_STANDARD_2015",
     }
     if set(by_id) != required:
@@ -155,8 +155,8 @@ def verify_authority(
         source_results = {}
         required_fragments = {
             "EURLEX_BRRD_2026_MREL_ARTICLE_45C": {
-                "MREL_ARTICLE_45C_TITLE",
-                "MREL_DETERMINED_BY_RESOLUTION_AUTHORITY",
+                "MREL_NOT_FIXED_FIGURE",
+                "MREL_CASE_BY_CASE_RESOLUTION_AUTHORITY",
             },
             "FSB_TLAC_STANDARD_2015": {
                 "TLAC_FSB_GSIB_SCOPE",
