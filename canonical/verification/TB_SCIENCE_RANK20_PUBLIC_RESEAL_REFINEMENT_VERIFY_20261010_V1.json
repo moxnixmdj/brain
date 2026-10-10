@@ -1,0 +1,78 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK20_PUBLIC_RESEAL_REFINEMENT_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__PUBLIC_CLAIM_V3_RESEAL__PROOF_ONLY_BEHAVIOR_REFINEMENT__ZERO_EXPOSURE",
+  "slot_id": "terminal-bench-science/hysteretic-aquifer-control::trial-0",
+  "task_digest": "sha256:681df0c3b2ada03a933ac4d2e11f07983676f87a9f26b61e416987904b880289",
+  "logical_attempt_id": "62bbf27ddcc679f431c5569244cf0c54fb1b13181e83076e2c019764f0b747e2",
+  "execution_claim_binding_digest": "sha256:ad74fd461333c1673b76ec0b439aba98c35bf6a0691796b24a5847209873adba",
+  "claim_epoch_id": "RANK20_V13_CLAIM_BOUND_IDENTITY_20261010_V3",
+  "canonical_inputs": {
+    "authority_v2": {
+      "path": "canonical/governance/TB_SCIENCE_RANK20_ONE_SLOT_EXECUTION_AUTHORITY_20261010_V2.json",
+      "git_blob_sha": "a6016f92ec074835af7cae7383f30699e5c584b3"
+    },
+    "ledger_v43": {
+      "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V43.json",
+      "git_blob_sha": "810e414b9740cf02f8fceeb5ddc00689ab46e66e"
+    },
+    "claim_v3": {
+      "path": "canonical/governance/TB_SCIENCE_RANK20_LOGICAL_ATTEMPT_CLAIM_BINDING_20261010_V3.json",
+      "git_blob_sha": "59fa5616f1754f90ded1c3b30cb53c98b4348cee"
+    }
+  },
+  "public": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2599,
+    "merge_commit_sha": "73db1b05ab8e08b84d2076e2b36f4e376b90091c",
+    "surface_git_blob_sha": "31cef695b88e9f13c14167a4e0e7dac27b4de620",
+    "workflow_git_blob_sha": "19a12ff77ebdedb3177f05281e116dee69d915ea",
+    "claim_seed_behavior_git_blob_sha": "9012d4bf1c84e157cdfa27ec04fd1a5afd7c78c7",
+    "effective_behavior_git_blob_sha": "dc20b4ef740eaeb6741c834d9c74634653c69193",
+    "behavior_refinement_verifier_git_blob_sha": "b15a9d9ba3a717a9758f56aef75e5e14764d9221",
+    "public_authority_git_blob_sha": "a5186b7e46e47f7f391f8d9d39485a95d83a3824",
+    "epoch_git_blob_sha": "31882225445bd8a8e2db306bb4ec5d90c02403bf",
+    "execution_claim_git_blob_sha": "241148ab473702b82deedcf75b4ae160885e9f16",
+    "zero_exposure_test_git_blob_sha": "b93af6baee042ac09f352b1a12c84fc03123c55d",
+    "agent_v13_git_blob_sha": "470bfe079aeffaa07a3b92975b4edea17c9a20e1",
+    "invariant_registry_git_blob_sha": "b9fbb776ed5cf0888f34809c94f78638d3d915c1",
+    "ratchet_workflow_run_id": 38042586150,
+    "ratchet_workflow_job_id": 114185617635,
+    "ratchet_artifact_digest": "sha256:2dcbd260f1cc55c63231c85df464e94d2166a1072b28ac555529ecb82f44128c",
+    "ratchet_conclusion": "success"
+  },
+  "independent_replay": {
+    "provider": "Sprites",
+    "sprite_name": "rank20-73db-immutable-verify",
+    "sprite_id": "sprite-f6ef4632-8e54-44cd-8eed-2f504b36165f",
+    "exact_merge_commit": "73db1b05ab8e08b84d2076e2b36f4e376b90091c",
+    "behavior_refinement_pass": true,
+    "zero_exposure_reseal_pass": true,
+    "staged_admission_pass": true,
+    "staged_preflight_pass": true,
+    "activation_gate_closed": true
+  },
+  "refinement_proof": {
+    "claim_seed_behavior_preserved": true,
+    "effective_behavior_facts_identical": true,
+    "preexisting_runtime_bindings_identical": true,
+    "added_runtime_bindings": [
+      "logical_attempt_claim_binding",
+      "logical_attempt_binding_helper"
+    ],
+    "added_bindings_proof_plane_only": true,
+    "executable_runtime_semantics_changed": false,
+    "logical_attempt_reauthorization_required": false
+  },
+  "state": {
+    "activation_present": false,
+    "task_read": false,
+    "task_started": false,
+    "benchmark_trials_consumed": 0
+  },
+  "pass": true,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
