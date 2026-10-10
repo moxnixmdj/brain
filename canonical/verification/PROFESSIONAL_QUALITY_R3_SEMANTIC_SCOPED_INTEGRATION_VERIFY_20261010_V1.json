@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R3_SEMANTIC_SCOPED_INTEGRATION_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__PINNED_EXACT_BYTES__PYCOMPILE__19_OF_19__R3_SEMANTIC_ADMITTED__LEAF_FRONTIER_22_OF_24_PARTIAL__ZERO_GLOBAL_LEAF_CREDIT",
+  "repository": "moxnixmdj/brain",
+  "pinned_main_commit": "f0942f29d737f164e988d11a316c92cc6d7cfbf6",
+  "carrier": {
+    "name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/pq-r3-semantic-integration-final"
+  },
+  "exact_blobs": {
+    "registry": "f862131430822dfa0b76fe6093f31701b6dca7fe",
+    "scoped_overlay": "17f5472868aafcb45e75c72b744bcd8ad45a7049",
+    "semantic_runtime": "eb3c5e6537d48640078b52a525a8f1791d88386b",
+    "semantic_tests": "64ab1dd62c36be813b1b88fb8b0bd5e86ea40d37",
+    "semantic_scope": "1edbd92b4e7b01591162d692f1d4c9b785b4c102",
+    "semantic_source_verification": "3c9a6f03c9dfb7597cdb7c5ca01e9eaf66a596e0",
+    "source_preflight": "b5ddc896811875b59840959e27dbb515265fc9f8",
+    "source_public_verification": "1a0b4ca6627aaf28eb25f6990682e87319d14d6d",
+    "leaf_projection_v2": "b316d103d7134e58b8b5b838627ba7946742b2c4",
+    "overlay_tests": "f434254ad7dd659537f2deab34d9cc70c7391584",
+    "projection_v2_tests": "678e22f28ba5126244d671fddf8588dedac75054"
+  },
+  "replay": {
+    "py_compile": "PASS",
+    "tests_run": 19,
+    "tests_passed": 19,
+    "tests_failed": 0,
+    "transcript_digest_status": "INTERACTIVE_REPLAY_OBSERVED__NO_SEPARATE_LOG_HASH_REQUIRED"
+  },
+  "result": {
+    "admitted_scoped_capability_count": 19,
+    "partial_coverage_leaf_count": 22,
+    "semantic_partial_coverage_leaf_count": 10,
+    "execution_partial_coverage_leaf_count": 12,
+    "no_scoped_evidence_leaf_count": 2,
+    "no_scoped_evidence_leaf_ids": [
+      "PQ::R4_MEASUREMENT_CONSTRUCT::SEMANTIC",
+      "PQ::R5_EVALUATOR_REFERENCE::SEMANTIC"
+    ],
+    "verified_global_leaf_count": 0,
+    "open_global_leaf_count": 24,
+    "global_leaf_closure": false,
+    "domain_semantic_closure": false,
+    "domain_execution_closure": false
+  },
+  "proved": [
+    "R3_PINNED_NATIVE_ARTIFACT_RENDER_REALIZATION_SEMANTICS_ARE_ADMITTED",
+    "RENDER_PRESERVATION_MEANING_IS_BOUND_WITHOUT_SEMANTIC_TARGET_PROMOTION",
+    "WHOLE_CONTRACT_TERMINAL_AND_RENDERER_INVARIANCE_OVERCLAIMS_FAIL_CLOSED",
+    "LEAF_PROJECTION_ADVANCES_TO_22_OF_24_BOUNDED_PARTIAL_WITH_ZERO_GLOBAL_CREDIT"
+  ],
+  "not_proved": [
+    "ARBITRARY_SEMANTIC_TARGET_CORRECTNESS",
+    "WHOLE_OPEN_ENDED_NATIVE_ARTIFACT_CONTRACT_SCOPE_EQUIVALENCE",
+    "ALL_RENDERER_OR_ENVIRONMENT_INVARIANCE",
+    "GLOBAL_R3_SEMANTIC_LEAF_CLOSURE",
+    "GLOBAL_R3_ROOT_CLOSURE",
+    "DOMAIN_SEMANTIC_CLOSURE",
+    "DOMAIN_EXECUTION_CLOSURE",
+    "LIVE_DEFAULT_PROMOTION",
+    "TERMINAL_AUTHORITY"
+  ],
+  "next_required_edge": "BIND_BOUNDED_SEMANTIC_EVIDENCE_FOR_R4_OR_R5_OR_BIND_EXACT_SAME_SUBJECT_ROOT_RECEIPTS",
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
