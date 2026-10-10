@@ -150,7 +150,7 @@ def preflight(request:Mapping[str,Any],*,repo_root=None)->dict[str,Any]:
             "raw_acceptance_obligation_ids":ids,
             "semantic_scope":(
                 "QUERY_RELATIVE_EFFECT_FIELD_LATTICE_WITH_COMPOSITIONAL_V14_SOURCE_PROOF_"
-                "AND_BRAIN_OWNED_REGISTRY_V3_WITH_DOMAIN_MAPPING_RELATION_AUTHORITY_AND_V15_ADMISSIBILITY_GATE"
+                "AND_BRAIN_OWNED_REGISTRY_V5_WITH_NATURAL_SUBSUMPTION_CLOSURE_DOMAIN_MAPPING_RELATION_AUTHORITY_AND_V15_ADMISSIBILITY_GATE"
             ),
             "preflight_execution_authority":False,
             "preflight_verification":deepcopy(checked),
