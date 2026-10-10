@@ -127,7 +127,7 @@
       "id": "CURRENT_AUTHORITY_RUNTIME_BYTE_BINDING_COHERENCE",
       "kind": "LEAF",
       "status": "UNRESOLVED",
-      "note": "EXACT_BRANCH_CENSUS FOUND SIX STALE REFERENCES ACROSS FIVE RUNTIME PATHS PLUS ONE CURRENT RUNTIME WITHOUT BLOB BINDING. ALL SIX NOW HAVE BOUNDED TEST SURFACES OR EXISTING COMPONENT TESTS. NO EXISTING SPRITE SNAPSHOT CONTAINS THE FULL CURRENT SIX-PATH CONE. DO NOT RESEAL UNTIL FRESH CURRENT-BYTE EXECUTION.",
+      "note": "CURRENT_MAIN_EXACT_GIT_TREE_CENSUS_FOUND_17_BINDING_ERRORS__16_DRIFT_PLUS_1_MISSING__2_CONFLICTING_PATH_BINDINGS__FIVE_CURRENT_RUNTIME_PATHS_NOW_HAVE_EXACT_BYTE_EXECUTION EVIDENCE AND ARE ELIGIBLE FOR RESEAL__EIGHT_UNIQUE_RUNTIME_PATHS REMAIN UNVERIFIED",
       "attack_families": [
         "VERSION_DRIFT",
         "COMPOSITION_MISMATCH",
@@ -136,30 +136,55 @@
       ],
       "subobligations": [
         {
-          "id": "CURRENT_BYTE_REEXECUTE_TEST_BACKED_RUNTIME_PATHS",
-          "status": "UNRESOLVED",
+          "id": "CURRENT_BYTE_VERIFIED_RESEAL_SUBSET",
+          "status": "PROVED",
           "paths": [
+            "canonical/runtime/certificate_gated_selected_route_runtime_entrypoint_v2.py",
+            "canonical/runtime/terminal_candidate_donor_independence_audit_v1.py",
             "canonical/runtime/terminal_autopilot_executor_v1.py",
-            "canonical/runtime/terminal_autopilot_v1.py",
             "canonical/runtime/terminal_root_decision_gate_v1.py",
-            "canonical/runtime/unified_cognitive_fabric_v1.py",
             "canonical/runtime/option_preserving_capability_optimizer_v1.py"
           ],
-          "evidence_available": "COMPONENT_TEST_SURFACES_PRESENT",
-          "requirement": "FRESH_CURRENT_BYTE_EXECUTION_AND_CONTENT_BOUND_RECEIPT"
+          "evidence": [
+            {
+              "path": "canonical/verification/SELECTED_ROUTE_EXECUTABLE_REFINEMENT_CURRENT_MAIN_SPRITE_VERIFICATION_20261010_V1.json",
+              "git_blob_sha": "1ecd3c71d645fe09f7f240d83f1ed1794f9d04d2"
+            },
+            {
+              "path": "canonical/verification/CURRENT_MAIN_RUNTIME_VERIFIED_BYTE_SUBSET_SPRITE_20261010_V1.json",
+              "git_blob_sha": "88524c9872e38fef8a434a87a1fe6f615dc28c44"
+            }
+          ],
+          "terminal_credit_delta": 0
         },
         {
-          "id": "DONOR_INDEPENDENCE_AUDIT_CURRENT_BYTE_VERIFICATION",
+          "id": "CURRENT_BYTE_UNVERIFIED_REMAINING_RUNTIME_PATHS",
           "status": "UNRESOLVED",
           "paths": [
-            "canonical/runtime/terminal_candidate_donor_independence_audit_v1.py"
+            "canonical/runtime/terminal_autopilot_v1.py",
+            "canonical/runtime/p3_conditioned_policy_adequacy_registry_v1.py",
+            "canonical/runtime/domain_mapping_truth_certificate_v1.py",
+            "canonical/runtime/live_capability_ownership_v1.py",
+            "canonical/runtime/live_capability_invoker_v1.py",
+            "canonical/runtime/unified_cognitive_fabric_v1.py",
+            "canonical/runtime/live_brain_runtime_v1.py",
+            "canonical/runtime/capability_first_scheduler_v1.py"
           ],
-          "evidence_available": "DEDICATED_BOUNDED_TEST_SURFACE_ADDED__NOT_YET_EXECUTED_ON_CURRENT_BYTES",
-          "requirement": "FRESH_CURRENT_BYTE_EXECUTION_AND_CONTENT_BOUND_RECEIPT",
-          "test_path": "canonical/tests/test_terminal_candidate_donor_independence_audit_v1.py",
-          "test_git_blob_sha": "1b70c9494993e894d45605f8fecffa3781ea1541"
+          "conflicting_paths": [
+            "canonical/runtime/terminal_autopilot_v1.py",
+            "canonical/runtime/p3_conditioned_policy_adequacy_registry_v1.py"
+          ],
+          "requirement": "FRESH_EXACT_CURRENT_BYTE_EXECUTION_AND_CONTENT_BOUND_RECEIPTS_BEFORE_RESEAL"
         }
-      ]
+      ],
+      "census": {
+        "path": "canonical/verification/CURRENT_AUTHORITY_RUNTIME_BINDING_CONNECTOR_CENSUS_20261010_V2.json",
+        "git_blob_sha": "797b37d297166eb56c3da4a7d518677eb12a1207",
+        "initial_error_count": 17,
+        "initial_drift_count": 16,
+        "initial_missing_blob_binding_count": 1,
+        "initial_conflicting_current_path_count": 2
+      }
     }
   ],
   "terminal_closure": false,
