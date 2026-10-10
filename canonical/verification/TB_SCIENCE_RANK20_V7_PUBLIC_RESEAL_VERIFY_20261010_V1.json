@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK20_V7_PUBLIC_RESEAL_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__PUBLIC_V7_STRONG_REPAIR_STAGED_RESEAL__ZERO_EXPOSURE__RATCHET_GREEN__NO_EFFECTIVE_AUTHORITY",
+  "public_repository": "moxnixmdj/verification-capsule-runner",
+  "public_pull_request": 2613,
+  "public_merge_commit_sha": "66ca9268aacad504c8895829ec62d01adcb4fc42",
+  "exact_public_blobs": {
+    "surface": "9debe4efbecc4639d5ac5d9eecb060575de950ae",
+    "authority": "d411c19d57ca8af56647ab24f5bf27179f6fb7c4",
+    "ledger": "68ac2b8ca01b939a3ea8e922b4446fa66ff4cb84",
+    "epoch": "f4a9b502879393f6aae41faa88399a967bfbb05f",
+    "execution_claim": "e358ab15b7ebed825d4471267af1f50884e9f8ca",
+    "logical_attempt_claim_binding": "e58921cf2e2e3b2b6afbc5b776ed708f4710543c",
+    "behavior_v4": "7c3975e0ac9206e7e33e16115741290efd5d16c2",
+    "start_cas": "50602966063a7e2c58761faa4798f5ec4f2eb0e3",
+    "preflight": "e6e6a8fa27f8f4def629b43612933c17f95053f6",
+    "behavior_refinement_verifier": "4f2fc8642407d9726abaea7a4d66bab1989660e6",
+    "import_regression": "db16ce3f5440bb3ad8fc1c271d152a08fde1d0e7",
+    "adversarial_import_regression": "a956c4581f4a88503195b98d466257b268de0537"
+  },
+  "canonical_inputs": {
+    "claim_binding": {
+      "path": "canonical/governance/TB_SCIENCE_RANK20_LOGICAL_ATTEMPT_CLAIM_BINDING_20261010_V7.json",
+      "git_blob_sha": "e58921cf2e2e3b2b6afbc5b776ed708f4710543c"
+    },
+    "authority": {
+      "path": "canonical/governance/TB_SCIENCE_RANK20_ONE_SLOT_EXECUTION_AUTHORITY_20261010_V7.json",
+      "git_blob_sha": "d05ad30c5c75abc0f757885a5ea770b4cb6b2077"
+    },
+    "ledger": {
+      "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V53.json",
+      "git_blob_sha": "54af1555f579cd33f7f61dd43b6974af4fba8386"
+    },
+    "strong_repair_verification": {
+      "path": "canonical/verification/TB_SCIENCE_RANK20_V4_STRONG_REPAIR_VERIFY_20261010_V2.json",
+      "git_blob_sha": "314102c91da76ab2ac7ddbbb95b10d45306f1674"
+    }
+  },
+  "independent_replay": {
+    "carrier": "sprite-93d373e8-d2f6-4abd-a546-cf9257957d65",
+    "production_shape_import_pass": true,
+    "adversarial_bootstrap_pass": true,
+    "behavior_refinement_pass": true,
+    "staged_preflight_pass": true,
+    "staged_preflight_error_count": 0
+  },
+  "github_ratchet": {
+    "workflow_run_id": 38048128330,
+    "workflow_job_id": 114201682531,
+    "conclusion": "success"
+  },
+  "logical_attempt_id": "35882bb248aa1486fb845e9028bc40297c040cb002262ad629ca71c332df1ff0",
+  "execution_claim_binding_digest": "sha256:d237cb57191aeb030d0f5f4d8732f9ac8c8bf6e163e6db984850877f3ba47d51",
+  "task_read": false,
+  "task_started": false,
+  "durable_start_cas_acquired": false,
+  "benchmark_trials_consumed": 0,
+  "activation_present": false,
+  "execution_authority": false,
+  "task_read_authority": false,
+  "activation_authority": false,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "pass": true,
+  "next": "PROMOTE_RANK20_V7_EFFECTIVE_AUTHORITY_ZERO_EXPOSURE_ONLY"
+}
