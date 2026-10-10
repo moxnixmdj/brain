@@ -60,6 +60,16 @@ class O11ActivationTests(unittest.TestCase):
         self.assertIn("REMAINS_ITS_OWN_PREDICATE",law["mysterymechanism"])
         self.assertIn("NO_ALIAS",law["mysterymechanism"])
 
+
+    def test_shared_o_law_authority_is_exact_and_precedes_row_gate(self):
+        row=self.a["shared_o_law_authority"]
+        self.assertEqual(blob(ROOT/row["activation_path"]),row["activation_git_blob_sha"])
+        self.assertEqual(blob(ROOT/row["runtime_path"]),row["runtime_git_blob_sha"])
+        self.assertEqual(blob(ROOT/row["frozen_theorem_path"]),row["frozen_theorem_git_blob_sha"])
+        self.assertIn("ROW_INSTANTIATIONS_STILL_OPEN",row["role"])
+        self.assertTrue(self.a["current_frontier"]["shared_o_law_bound"])
+        self.assertEqual(self.a["current_frontier"]["current_o_row_acceptance_closed_count"],0)
+
     def test_activation_grants_zero_row_or_terminal_credit(self):
         self.assertEqual(self.a["current_frontier_effect"]["real_o_row_proofs"],0)
         self.assertEqual(self.a["current_frontier_effect"]["real_o_rows"],11)
