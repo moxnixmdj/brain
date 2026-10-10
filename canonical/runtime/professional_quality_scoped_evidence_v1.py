@@ -67,8 +67,8 @@ R5_GOVERNANCE_SCHEMA = "PROJECT_BRAIN_GDPVAL_HYBRID_EVALUATOR_UNCERTAINTY_V1"
 R1_KIND = "CONTENT_ADDRESSED_BEHAVIORAL_CONTRACT_STRUCTURAL_COMPLETENESS_GATE"
 R1_ROOT = "R1_TARGET_SPECIFICATION"
 R1_LEAVES = {"PQ::R1_TARGET_SPECIFICATION::EXECUTION"}
-R1_SOURCE_SCHEMA = "PROJECT_BRAIN_ADEQUACY_BASIS_STRUCTURAL_COMPLETENESS_INDEPENDENT_VERIFICATION_V1"
-R1_GOVERNANCE_SCHEMA = "PROJECT_BRAIN_ADEQUACY_BASIS_STRUCTURAL_COMPLETENESS_REDUCTION_V1"
+R1_SOURCE_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R1_STRUCTURAL_TARGET_VERIFY_V1"
+R1_GOVERNANCE_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R1_STRUCTURAL_TARGET_SCOPE_V1"
 
 
 def git_blob_sha(path: Path) -> str:
@@ -676,110 +676,124 @@ def _validate_r1(
             return None, declared
         if not path.exists():
             errors.append(label + "_MISSING")
-            return str(path), declared
+            return str(binding.get("path")), declared
         if git_blob_sha(path) != declared:
             errors.append(label + "_STALE")
         return str(binding.get("path")), declared
 
     schema_path, schema_declared = _bound_file(entry.get("contract_schema"), "CONTRACT_SCHEMA")
     registry_path, registry_declared = _bound_file(entry.get("contract_registry"), "CONTRACT_REGISTRY")
+    static_path, static_declared = _bound_file(
+        entry.get("registry_extension_runtime"), "REGISTRY_EXTENSION_RUNTIME"
+    )
+    dynamic_path, dynamic_declared = _bound_file(
+        entry.get("dynamic_extension_runtime"), "DYNAMIC_EXTENSION_RUNTIME"
+    )
 
     if source is not None:
         if source.get("schema") != R1_SOURCE_SCHEMA:
             errors.append("SOURCE_SCHEMA_INVALID")
-        if source.get("status") != "INDEPENDENT_ZERO_COST_SPRITE_REPLAY_PASS_10_OF_10__WOLFRAM_STRUCTURAL_LOGIC_PASS__ZERO_TERMINAL_CREDIT":
+        if source.get("status") != "PASS__PINNED_EXACT_BYTES__PYCOMPILE__21_OF_21__THREE_LAYER_STRUCTURAL_TARGET_COVER__ZERO_GLOBAL_LEAF_CREDIT":
             errors.append("SOURCE_STATUS_NOT_ADMITTED")
-        exact = source.get("exact_sources")
+        exact = source.get("exact_blobs")
         if not isinstance(exact, dict):
-            errors.append("SOURCE_EXACT_SOURCES_INVALID")
+            errors.append("SOURCE_EXACT_BLOBS_INVALID")
         else:
-            runtime = exact.get("runtime")
-            if not isinstance(runtime, dict) or runtime.get("git_blob_sha") != compiler_declared:
-                errors.append("SOURCE_RUNTIME_MISMATCH")
-            schema = exact.get("contract_schema")
-            if not isinstance(schema, dict) or schema.get("path") != schema_path or schema.get("git_blob_sha") != schema_declared:
+            if exact.get("base_runtime") != compiler_declared:
+                errors.append("SOURCE_BASE_RUNTIME_MISMATCH")
+            if exact.get("current_registry_extension_runtime") != static_declared:
+                errors.append("SOURCE_REGISTRY_EXTENSION_RUNTIME_MISMATCH")
+            if exact.get("dynamic_extension_runtime") != dynamic_declared:
+                errors.append("SOURCE_DYNAMIC_EXTENSION_RUNTIME_MISMATCH")
+            if exact.get("contract_schema") != schema_declared:
                 errors.append("SOURCE_CONTRACT_SCHEMA_MISMATCH")
-            registry = exact.get("contract_registry")
-            if not isinstance(registry, dict) or registry.get("path") != registry_path or registry.get("git_blob_sha") != registry_declared:
+            if exact.get("contract_registry") != registry_declared:
                 errors.append("SOURCE_CONTRACT_REGISTRY_MISMATCH")
-        carrier = source.get("independent_carrier")
-        if not isinstance(carrier, dict) or carrier.get("result") != "PASS_10_OF_10":
+        replay = source.get("replay")
+        if (
+            not isinstance(replay, dict)
+            or replay.get("tests_run") != 21
+            or replay.get("tests_passed") != 21
+            or replay.get("tests_failed") != 0
+        ):
             errors.append("SOURCE_REPLAY_INVALID")
-        required_verified = {
-            "ALL_13_CANONICAL_REGISTRY_CONTRACTS_COMPILE_ALL_REQUIRED_BASE_FIELDS",
-            "MISSING_POLICY_BASIS_OBLIGATION_FAILS_CLOSED",
-            "MISSING_MEMBERSHIP_SCOPE_FAILS_CLOSED",
-            "MISSING_CANDIDATE_POLICY_SET_COMPLETENESS_REFERENCE_FAILS_CLOSED",
-            "REQUIRED_CONTRACT_FIELD_OMISSION_FAILS_CLOSED",
-            "UNKNOWN_POLICY_ATOM_FAILS_CLOSED",
-            "POLICY_CONDITION_ATOM_OUTSIDE_DECLARED_BASIS_FAILS_CLOSED",
+        required_proved = {
+            "ALL_13_CURRENT_BEHAVIORAL_CONTRACTS_COMPILE_ALL_REQUIRED_CANONICAL_BASE_FIELDS",
+            "REQUIRED_CANONICAL_FIELD_OMISSION_FAILS_CLOSED",
+            "POSITIVE_POLICY_COVER_DOES_NOT_REQUIRE_CANDIDATE_POLICY_SET_COMPLETENESS",
+            "ALL_CURRENT_REGISTRY_NONBASE_EXTENSION_FIELDS_ARE_ROLE_CLASSIFIED",
+            "UNKNOWN_CURRENT_REGISTRY_EXTENSION_FIELDS_FAIL_CLOSED",
+            "DECLARED_NONSCHEMA_REQUIREMENTS_CAN_BE_PRESERVED_AS_OPAQUE_CONTENT_ADDRESSED_EXTENSION_ATOMS",
+            "UNBOUND_OR_IGNORED_DYNAMIC_EXTENSION_ATOMS_FAIL_CLOSED",
         }
-        if not required_verified <= set(source.get("verified_tests") or []):
-            errors.append("SOURCE_REQUIRED_STRUCTURAL_TESTS_MISSING")
-        required_remaining = {
-            "CERTIFICATE_TRUTH",
-            "CANDIDATE_POLICY_SET_COMPLETENESS_TRUTH",
-            "ONE_SIDED_SOURCE_GROUNDED_ENTAILMENT_POWER",
-            "LOAD_BEARING_EXTENSION_FIELDS_OUTSIDE_THE_CANONICAL_REQUIRED_BASE_SCHEMA",
-        }
-        if not required_remaining <= set(source.get("remaining") or []):
-            errors.append("SOURCE_REMAINING_BOUNDARY_MISSING")
+        if not required_proved <= set(source.get("proved") or []):
+            errors.append("SOURCE_REQUIRED_STRUCTURAL_PROPERTIES_MISSING")
         required_nonclaims = {
-            "NO_SEMANTIC_TRUTH_CREDIT",
-            "NO_POLICY_ADEQUACY_CREDIT",
-            "NO_POLICY_SET_COMPLETENESS_CREDIT",
-            "NO_ABC_D_OR_TERMINAL_CREDIT",
+            "OPAQUE_FIELD_OR_EXTENSION_SEMANTIC_TRUTH",
+            "CERTIFICATE_TRUTH",
+            "SOURCE_EXTRACTION_COMPLETENESS",
+            "POLICY_ADEQUACY",
+            "NEGATIVE_POLICY_ABSENCE_OR_GLOBAL_MINIMALITY",
+            "GLOBAL_R1_SEMANTIC_OR_EXECUTION_LEAF_CLOSURE",
         }
-        if not required_nonclaims <= set(source.get("hard_nonclaims") or []):
+        if not required_nonclaims <= set(source.get("not_proved") or []):
             errors.append("SOURCE_SCOPE_NONCLAIMS_MISSING")
+        truth = source.get("current_truth")
+        if not isinstance(truth, dict):
+            errors.append("SOURCE_CURRENT_TRUTH_INVALID")
+        else:
+            if truth.get("semantic_truth_closed") is not False:
+                errors.append("SOURCE_SEMANTIC_TRUTH_OVERCLAIM")
+            if truth.get("global_r1_root_closed") is not False:
+                errors.append("SOURCE_GLOBAL_R1_OVERCLAIM")
 
     if governance is not None:
         if governance.get("schema") != R1_GOVERNANCE_SCHEMA:
             errors.append("R1_GOVERNANCE_SCHEMA_INVALID")
-        if governance.get("status") != "CANDIDATE_SHARED_SAFETY_REDUCTION__CANONICAL_REQUIRED_BEHAVIORAL_CONTRACT_FIELDS_CANNOT_SILENTLY_DISAPPEAR_FROM_POLICY_ADEQUACY_BASIS__ZERO_CREDIT":
+        if governance.get("status") != "ACTIVE_SCOPED_STRUCTURAL_TARGET_CONTRACT__21_OF_21_INDEPENDENT_REPLAY__ZERO_GLOBAL_LEAF_CREDIT":
             errors.append("R1_GOVERNANCE_STATUS_INVALID")
-        sources = governance.get("sources")
-        if not isinstance(sources, dict):
-            errors.append("R1_GOVERNANCE_SOURCES_INVALID")
+        components = governance.get("exact_components")
+        if not isinstance(components, dict):
+            errors.append("R1_GOVERNANCE_COMPONENTS_INVALID")
         else:
-            runtime = sources.get("runtime")
-            if not isinstance(runtime, dict) or runtime.get("git_blob_sha") != compiler_declared:
-                errors.append("R1_GOVERNANCE_RUNTIME_MISMATCH")
-            schema = sources.get("contract_schema")
-            if not isinstance(schema, dict) or schema.get("git_blob_sha") != schema_declared:
-                errors.append("R1_GOVERNANCE_SCHEMA_BINDING_MISMATCH")
-            registry = sources.get("contract_registry")
-            if not isinstance(registry, dict) or registry.get("git_blob_sha") != registry_declared:
-                errors.append("R1_GOVERNANCE_REGISTRY_BINDING_MISMATCH")
-        theorem = governance.get("theorem")
-        if not isinstance(theorem, dict) or theorem.get("semantic_world_reconstruction_required") is not False:
-            errors.append("R1_GOVERNANCE_THEOREM_BOUNDARY_INVALID")
-        nonclaims = set(governance.get("hard_nonclaims") or [])
-        required_nonclaims = {
-            "NO_CLAIM_CERTIFICATE_REFERENCES_ARE_TRUE",
-            "NO_CLAIM_CANDIDATE_POLICY_SET_IS_COMPLETE",
-            "NO_CLAIM_OPAQUE_FIELD_TEXT_HAS_BEEN_SEMANTICALLY_INTERPRETED",
-            "NO_CLAIM_NONSCHEMA_EXTENSION_FIELDS_ARE_NON_LOAD_BEARING",
+            checks = (
+                ("base_runtime", compiler_declared),
+                ("current_registry_extension_runtime", static_declared),
+                ("dynamic_extension_runtime", dynamic_declared),
+                ("contract_schema", schema_declared),
+                ("contract_registry", registry_declared),
+            )
+            for label, expected in checks:
+                row = components.get(label)
+                if not isinstance(row, dict) or row.get("git_blob_sha") != expected:
+                    errors.append("R1_GOVERNANCE_COMPONENT_MISMATCH:" + label)
+        limitations = set(governance.get("limitations") or [])
+        required_limits = {
+            "NO_OPAQUE_FIELD_OR_EXTENSION_SEMANTIC_INTERPRETATION",
+            "NO_CERTIFICATE_TRUTH_SELF_VERIFICATION",
+            "NO_SOURCE_EXTRACTION_COMPLETENESS_CLAIM",
+            "NO_POLICY_ADEQUACY_FROM_STRUCTURAL_PRESERVATION_ALONE",
+            "NO_NEGATIVE_POLICY_ABSENCE_OR_GLOBAL_MINIMALITY_WITHOUT_SEPARATE_COMPLETENESS_PROOF",
+            "NO_GLOBAL_R1_SEMANTIC_OR_EXECUTION_LEAF_CLOSURE",
+            "NO_GLOBAL_R1_ROOT_CLOSURE",
         }
-        if not required_nonclaims <= nonclaims:
-            errors.append("R1_GOVERNANCE_SCOPE_NONCLAIMS_MISSING")
+        if not required_limits <= limitations:
+            errors.append("R1_GOVERNANCE_SCOPE_LIMITATIONS_MISSING")
         claim_scope = {
             "kind": R1_KIND,
             "guarantees": [
                 "CANONICAL_REQUIRED_BEHAVIORAL_CONTRACT_FIELDS_ARE_CONTENT_ADDRESSED_AS_OBLIGATIONS",
-                "MEMBERSHIP_POLICY_EVIDENCE_AUTHORITY_AND_TERMINAL_ACCOUNTING_LAYERS_CANNOT_SILENTLY_OMIT_REQUIRED_FIELDS",
-                "POLICY_CONDITION_ATOMS_CANNOT_LIVE_OUTSIDE_DECLARED_BASIS",
-                "REQUIRED_FIELD_OMISSION_FAILS_CLOSED",
+                "REQUIRED_BASE_FIELDS_CANNOT_SILENTLY_DISAPPEAR_FROM_ASSIGNED_ASSURANCE_LAYERS",
+                "POSITIVE_POLICY_COVER_DOES_NOT_REQUIRE_COMPLETE_POLICY_SET_ENUMERATION",
+                "CURRENT_REGISTRY_NONBASE_FIELDS_REQUIRE_EXPLICIT_ROLE_CLASSIFICATION",
+                "UNKNOWN_REGISTRY_EXTENSIONS_FAIL_CLOSED",
+                "DECLARED_NONSCHEMA_REQUIREMENTS_CAN_BE_PRESERVED_AS_OPAQUE_EXTENSION_ATOMS",
+                "POLICIES_CANNOT_IGNORE_REQUIRED_EXTENSION_ATOMS_WITHOUT_CERTIFICATE_BOUND_DISCHARGE",
             ],
-            "limitations": [
-                "NO_OPAQUE_FIELD_PROSE_SEMANTIC_INTERPRETATION",
-                "NO_CERTIFICATE_TRUTH_SELF_VERIFICATION",
-                "NO_CANDIDATE_POLICY_SET_COMPLETENESS_TRUTH",
-                "NO_NONSCHEMA_EXTENSION_COMPLETENESS",
-                "NO_GLOBAL_R1_LEAF_OR_ROOT_CLOSURE",
-            ],
+            "limitations": sorted(required_limits),
         }
     return errors, claim_scope
+
 
 def validate_entry(entry: dict[str, Any], *, repo_root: Path = ROOT) -> dict[str, Any]:
     errors: list[str] = []
