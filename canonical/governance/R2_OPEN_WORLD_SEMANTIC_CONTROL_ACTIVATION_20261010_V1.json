@@ -5,8 +5,8 @@
   "mission_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "capability": "OPEN_WORLD_UNRESOLVED_SEMANTICS_TO_VERIFIED_MINIMUM_INFORMATION_CONTROL_ACTION",
   "live_surface": {
-    "front_door_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "front_door_git_blob_sha": "251aa4ec657af2306ba282e71d3dd6f6295dd388",
+    "front_door_path": "canonical/runtime/unified_cognitive_fabric_v2.py",
+    "front_door_git_blob_sha": "afb8b5c30957168dd8ba8684afb94b31c9118ed5",
     "mode": "OPEN_WORLD_SEMANTIC_CONTROL",
     "auto_route": true
   },
