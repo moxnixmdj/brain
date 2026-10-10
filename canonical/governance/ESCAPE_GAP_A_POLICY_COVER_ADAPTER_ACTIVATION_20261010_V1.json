@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_ESCAPE_GAP_A_POLICY_COVER_ADAPTER_ACTIVATION_20261010_V1",
+  "date": "2026-10-10",
+  "status": "ACTIVE_REUSABLE_GAP_A_PROOF_ADAPTER__INDEPENDENTLY_VERIFIED__ZERO_REAL_ROW_CREDIT",
+  "objective": "REUSE_EXISTING_AUTHENTICATED_OBSERVABLE_POLICY_COVER_TOTALITY_TO_EMIT_EXISTING_GAP_A_ROW_PROOF_FORMAT_ONLY_WHEN_CURRENT_ROW_PREMISES_ARE_INDEPENDENTLY_BOUND",
+  "runtime": {
+    "path": "canonical/runtime/escape_gap_a_policy_cover_adapter_v1.py",
+    "git_blob_sha": "19b0bdf00eb9b8d76cbf7f1a615e1ce6e89ffbf8"
+  },
+  "tests": {
+    "path": "canonical/tests/test_escape_gap_a_policy_cover_adapter_v1.py",
+    "git_blob_sha": "8415c50f23ed38da22ba8af17d07ff4f5b110127"
+  },
+  "verification": {
+    "path": "canonical/verification/ESCAPE_GAP_A_POLICY_COVER_ADAPTER_VERIFY_20261010_V1.json",
+    "git_blob_sha": "4c1ad0d785d4a4d354c01a4d09e412d294304195",
+    "result": "PYCOMPILE_PASS__11_OF_11_ADAPTER__41_OF_41_EXISTING_SEAM_REGRESSIONS"
+  },
+  "reused_authorities": {
+    "policy_cover_totality_gate": {
+      "path": "canonical/runtime/observable_policy_cover_totality_gate_v1.py",
+      "git_blob_sha": "2b09c856297e506fb6dc303c0f2cca2b6e89c07b"
+    },
+    "authenticated_policy_cover_executor": {
+      "path": "canonical/runtime/observable_policy_cover_executor_v1.py",
+      "git_blob_sha": "89f25a163e9fe663f49e6c5e9d66d41d911cd8a3"
+    },
+    "gap_a_audit": {
+      "path": "canonical/runtime/escape_progress_shared_gap_audit_v3.py",
+      "git_blob_sha": "14adf2c1a431285a542340a740e27e764edb1ce5"
+    }
+  },
+  "admitted_proof_modes": {
+    "TERMINAL_COMMON_POLICY": [
+      "CONTENT_ADDRESSED_INDEPENDENT_POLICY_COVER_INPUT_AUTHENTICATION",
+      "RECOMPUTED_BOUND_STATE_TOTALITY",
+      "REGION_WIDE_POLICY_SAFETY",
+      "INDEPENDENT_CURRENT_POLICY_AVAILABILITY",
+      "INDEPENDENT_RESOURCE_ADMISSIBILITY"
+    ],
+    "STRICT_DISCRIMINATOR": [
+      "CONTENT_ADDRESSED_INDEPENDENT_POLICY_COVER_INPUT_AUTHENTICATION",
+      "RECOMPUTED_BOUND_STATE_TOTALITY",
+      "ROOT_STRICT_PARTITION",
+      "INDEPENDENT_CURRENT_DISCRIMINATOR_ACQUIRABILITY"
+    ]
+  },
+  "current_frontier_effect": {
+    "gap_a_rows": 10,
+    "real_row_proofs_before": 0,
+    "real_row_proofs_after": 0,
+    "shared_adapter_missing": false,
+    "remaining_shared_predicate": "FOR_EACH_ROW__BIND_REAL_CONTENT_ADDRESSED_POLICY_COVER_INPUTS_AND_CURRENT_AVAILABILITY_OR_ACQUIRABILITY_EVIDENCE",
+    "private_acquisition_authorized_by_adapter": false
+  },
+  "hard_nonclaims": [
+    "NO_ROW_CREDIT_FROM_ADAPTER_EXISTENCE",
+    "NO_CALLER_ASSERTED_AUTHORITY",
+    "NO_RESOURCE_ADMISSIBILITY_FROM_RESOURCE_BOUND_ALONE",
+    "NO_CC_R3_OR_GLOBAL_ESCAPE_TOTALITY",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "row_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
