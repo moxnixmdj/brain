@@ -1,0 +1,75 @@
+{
+  "schema": "PROJECT_BRAIN_REGCAP_CONTEXTUAL_SINGLE_AUTHORITY_SUPERSESSION_20261010_V2",
+  "date": "2026-10-10",
+  "status": "CANDIDATE_CURRENTNESS_REPAIR__POST_SUPERSESSION_REINTRODUCTION_DOMINANCE_DELETION__ZERO_CREDIT_PENDING_INDEPENDENT_VERIFY",
+  "supersedes_governance": {
+    "path": "canonical/governance/REGCAP_CONTEXTUAL_FACT_COMPILER_SUPERSESSION_20261010_V1.json",
+    "git_blob_sha": "75534239e24f043dc7f8a2afe7b0547234085c9f"
+  },
+  "causal_regression": {
+    "commit": "d66aa6247c249c46956f939d18786cc0c74f9086",
+    "description": "REINTRODUCED_A_SUPERSEDED_PARALLEL_FACT_COMPILER_AND_A_RELATIVE_ONLY_DISCRIMINATOR_BINDER_AFTER_SINGLE_AUTHORITY_CLEANUP",
+    "risk": [
+      "DUPLICATE_SEMANTIC_LANGUAGE_PATH",
+      "WEAKER_RELATIVE_ONLY_SELECTION_SURFACE_EXISTS_BESIDE_CANDIDATE_COMPLETE_CANONICAL_RESOLVER",
+      "CURRENT_MAIN_SEARCH_OR_FUTURE_ROUTING_CAN_ACCIDENTALLY_BIND_THE_WRONG_PARSER"
+    ]
+  },
+  "dominance_result": {
+    "delete_runtime_paths": [
+      "canonical/runtime/regcap_contextual_fact_compiler_v1.py",
+      "canonical/runtime/regcap_contextual_discriminator_binding_v1.py"
+    ],
+    "delete_live_test_paths": [
+      "canonical/tests/test_regcap_contextual_fact_compiler_v1.py",
+      "canonical/tests/test_regcap_contextual_discriminator_binding_v1.py"
+    ],
+    "preserve_historical_evidence": [
+      "canonical/verification/REGCAP_CONTEXTUAL_FACT_BINDING_VERIFY_20261010_V1.json",
+      "canonical/verification/REGCAP_CONTEXTUAL_FACT_COMPILER_VERIFY_20261010_V1.json"
+    ],
+    "reason": "THE_EXISTING_CANONICAL_PATH_ALREADY_OWNS_THE_SAFE_SURFACE_DELTA_AND_ENFORCES_STRONGER_ASSERTION_OWNERSHIP_AND_CANDIDATE_COMPLETENESS_BOUNDARIES"
+  },
+  "canonical_authority_path": {
+    "observation_compiler": {
+      "path": "canonical/runtime/regcap_contextual_observation_compiler_v1.py",
+      "observed_git_blob_sha": "4ae999c1f6805d46d6d18c10c115ebb09c306516"
+    },
+    "candidate_complete_resolver": {
+      "path": "canonical/runtime/regcap_contextual_resolution_v1.py",
+      "git_blob_sha": "4e7661fb508ddb58fcf0ea154af21a73eda2467d"
+    },
+    "live_r2_atom_projection": {
+      "path": "canonical/runtime/regcap_context_atom_truth_certificate_v2.py",
+      "git_blob_sha": "22490d1d61807aafdb94a6617ee64c4912ecc46f"
+    },
+    "existing_verification": [
+      "canonical/verification/REGCAP_NO_DESCRIPTOR_CONTEXT_TRUTH_VERIFY_20261010_V2.json",
+      "canonical/verification/R2_REGCAP_CONTEXT_ATOM_V2_CANONICAL_INDEPENDENT_VERIFY_20261010_V1.json"
+    ]
+  },
+  "currentness_law": "REGCAP_CONTEXT_LANGUAGE_TRUTH_MUST_HAVE_ONE_CANONICAL_LIVE_COMPILER_PATH__ALTERNATE_EXPERIMENTS_MAY_RETAIN_RECEIPTS_BUT_MUST_NOT_REMAIN_IMPORTABLE_AS_PARALLEL_TRUTH_AUTHORITY_AFTER_SUPERSESSION",
+  "safe_surface_invariants": [
+    "THIS_DETERMINER_FOR_ALREADY_OWNED_DIRECT_ASSERTION_PATTERNS",
+    "CRYSTALLISES_AND_CRYSTALLIZES_EQUIVALENCE",
+    "RECAPITALISATION_AND_RECAPITALIZATION_EQUIVALENCE"
+  ],
+  "must_remain_unresolved": [
+    "BARE_2_5_PERCENT_CET1_NOUN_PHRASE",
+    "BARE_LOSS_ABSORBING_RECAPITALISATION_RESOLUTION_NOUN_PHRASE",
+    "SYSTEM_WIDE_RISK_DISSIPATES_ONLY_AS_FULL_CCYB_DISCRIMINATOR",
+    "RELATIVE_CANDIDATE_SELECTION_WITHOUT_AUTHENTICATED_TASK_SCOPE_COMPLETENESS"
+  ],
+  "hard_nonclaims": [
+    "NO_FINANCE_SEMANTIC_TAIL_CLOSURE",
+    "NO_GLOBAL_ONTOLOGY_COMPLETENESS",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT",
+    "NO_CAPABILITY_CREDIT_UNTIL_INDEPENDENT_CURRENT_BRANCH_VERIFICATION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
