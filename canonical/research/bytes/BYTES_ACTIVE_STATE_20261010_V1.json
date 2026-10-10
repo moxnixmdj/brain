@@ -1,41 +1,42 @@
 {
   "schema": "PROJECT_BRAIN_BYTES_ACTIVE_STATE_V1",
-  "status": "ACTIVE_RESEARCH__NEW_SUCCESSOR_FRONTIER__SUCCESSOR_READY",
+  "status": "ACTIVE_RESEARCH__NEW_POLYS_SUCCESSOR_FRONTIER__SUCCESSOR_READY",
   "date": "2026-10-10",
   "mission_lock": "Find the minimum resource-feasible executable description of the required capability set conditional on already-owned Brain substrate.",
   "governing_laws": [
     "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V1.md",
     "canonical/laws/BYTES_RESOURCE_BOUNDED_MINIMUM_MECHANISM_LAW_V1.md"
   ],
-  "source_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_SUCCESSOR_EXECUTION_20261010_V1.json",
+  "source_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_POLYS_SUCCESSOR_EXECUTION_20261010_V1.json",
   "exact_symbolic_state": {
-    "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_SUCCESSOR_EXECUTION_20261010_V1.json",
+    "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_POLYS_SUCCESSOR_EXECUTION_20261010_V1.json",
     "status": "FRESH_MEASURED_PHYSICAL_RESEARCH_CANDIDATE__NOT_PROMOTED",
-    "raw_python_source_bytes": 6743077,
-    "B_exec_raw_python_source_bytes": 6745837,
-    "persistent_xz_bytes": 1147192,
-    "full_exec_xz_bytes": 1147796,
-    "python_files": 305,
-    "final_untouched_qualification": "3450/3450",
-    "stock_donor_positive_control": "3450/3450",
-    "clean_room_replay": "3450/3450",
-    "manifest_sha256": "d002d42ff677ae9d6c481f7cf9e1312728daba39158c2d053f228ee563a5a22b",
-    "deterministic_xz_sha256": "8712e0be012535741954429e58c38dcb7cdcb6eb3b27616b4c2683bb66b3070f",
-    "full_exec_xz_sha256": "16f61b951428a041a930267a2f0bdfa1a8c433fe5e2716492417c999403dea21",
-    "raw_improvement_vs_previous_frontier_bytes": 85776,
-    "raw_improvement_vs_previous_frontier_fraction": 0.012560820975352669,
+    "raw_python_source_bytes": 6653321,
+    "B_exec_raw_python_source_bytes": 6656081,
+    "persistent_xz_bytes": 1133884,
+    "full_exec_xz_bytes": 1134488,
+    "python_files": 300,
+    "final_untouched_qualification": "2070/2070",
+    "stock_donor_positive_control": "2070/2070",
+    "clean_room_execution": "2070/2070",
+    "manifest_sha256": "a66deebf626390b49d6891d946308a41fc7407587c1f13d78efdf7d25481fdd3",
+    "deterministic_xz_sha256": "9e0c7cebdd6e8c5e1be5fa077329d1be7e7fef67ca0f49fad45bbf062051b570",
+    "full_exec_xz_sha256": "5ce543f187e1324d4086fd4bac509ab3ebb28c422cf2971e08a16ca2372c8ecd",
+    "raw_improvement_vs_previous_frontier_bytes": 89756,
+    "xz_improvement_vs_previous_frontier_bytes": 13308,
     "promotion_credit_from_this_record": 0
   },
   "current_bottleneck": {
     "subsystem": "polys",
-    "successor_trace_raw_python_source_bytes": 1649240,
+    "successor_trace_raw_python_source_bytes": 1559484,
+    "previous_trace_raw_python_source_bytes": 1649240,
+    "last_structural_cut": "POLYS_MATRIX_EIGEN_FINITE_EXTENSION_LAZY_BOUNDARY__AGCA_CLOSURE_REMOVED",
     "required_surface": [
       "factor",
       "coefficient",
       "exact roots degree <= 4"
     ],
-    "next_action": "Use only the frozen unspent successor qualification after making the next operation-level polys structural cut. Prioritize import-only generic machinery around factor/coefficient/exact-roots<=4, physically delete the accepted cut, spend the frozen corpus once, then rerank.",
-    "note": "The successor reduced total B_exec primarily by deleting mpmath/documentation/matrix compatibility baggage; polys remains the primary byte bottleneck."
+    "next_action": "Make one new operation-level polys structural cut before touching QUAL_SUCCESSOR_NEXT2_20261010_V1. Physically delete the resulting closure, spend that frozen corpus once, rerank, and preserve fail-closed scope."
   },
   "rejected_do_not_reopen_without_new_evidence": [
     "parameter count as terminal metric",
@@ -66,15 +67,15 @@
   "fresh_local_donor_evidence": "canonical/evidence/BYTES_SYMPY_1_14_DEPENDENCY_CENSUS_20261010_V1.json",
   "execution_reconciliation": {
     "stock_donor_available_in_current_runtime": "SymPy 1.14.0 plus mpmath 1.3.0",
-    "predecessor_6828853_byte_candidate_superseded": true,
-    "fresh_candidate_raw_python_source_bytes": 6743077,
-    "fresh_candidate_B_exec_raw_python_source_bytes": 6745837,
-    "fresh_candidate_persistent_xz_bytes": 1147192,
-    "untouched_qualification": "3450/3450",
-    "stock_donor_positive_control": "3450/3450",
-    "clean_room_replay": "3450/3450",
-    "action_taken": "Removed non-executable mpmath documentation metadata, replaced the eager broad mpmath facade with a bounded low-level fail-closed compatibility surface, removed out-of-contract mpmath-matrix conversion coupling, physically sliced the calibrated reachable closure, and passed a fresh untouched donor-equivalence corpus in an isolated replay.",
-    "physical_next_step": "Continue from the 6,743,077-byte physical candidate. Attack polys only; do not reopen the removed mpmath/compatibility baggage without new evidence."
+    "predecessor_6743077_byte_candidate_superseded": true,
+    "fresh_candidate_raw_python_source_bytes": 6653321,
+    "fresh_candidate_B_exec_raw_python_source_bytes": 6656081,
+    "fresh_candidate_persistent_xz_bytes": 1133884,
+    "untouched_qualification": "2070/2070",
+    "stock_donor_positive_control": "2070/2070",
+    "clean_room_execution": "2070/2070",
+    "action_taken": "Moved FiniteExtension import in sympy.polys.matrices.eigen to the algebraic-eigenvector branch, physically deleted the now-unreachable AGCA closure, and passed the previously frozen successor corpus in a stripped python -S environment.",
+    "physical_next_step": "Continue from the 6,653,321-byte physical candidate and attack polys only. Do not reopen the removed AGCA closure without evidence that the bounded contract reaches algebraic eigenvector construction."
   },
   "historical_reported_predecessor": {
     "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_DONOR_SLICE_CHECKPOINT_20261010_V1.json",
@@ -83,27 +84,30 @@
     "qualification": "1854/1854",
     "provenance": "USER_SUPPLIED_TRANSCRIPT_CHECKPOINT"
   },
-  "fresh_execution_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_SUCCESSOR_EXECUTION_20261010_V1.json",
+  "fresh_execution_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_POLYS_SUCCESSOR_EXECUTION_20261010_V1.json",
   "next_frozen_qualification": {
-    "id": "QUAL_SUCCESSOR_NEXT_20261010_V1",
-    "cases": 2070,
-    "seed": 2718281,
-    "per_operation_budget": 180,
-    "corpus_sha256": "f07f672bc48cfe20d5f9f3076d2ba2dc1f48a4683e7be937a4be8001b384adff",
+    "id": "QUAL_SUCCESSOR_NEXT2_20261010_V1",
+    "cases": 2300,
+    "seed": 3141592,
+    "per_operation_budget": 200,
+    "corpus_sha256": "491ba6d19abca5b04c5cfa851e4e1e2e4c61641518ec8b4f33c2f3dd638becb9",
     "generator": "canonical/research/bytes/tools/generate_qualification_v1.py",
-    "status": "FROZEN_UNSPENT__RECONSTRUCTABLE_FROM_CANONICAL_GENERATOR__DO_NOT_EXECUTE_BEFORE_NEXT_POLYS_CUT",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_POLYS_CUT",
     "spent": false
   },
   "durable_artifact_persistence": {
     "candidate_manifest_and_measurements": "PERSISTED_IN_CANONICAL_GITHUB_EVIDENCE",
-    "reconstruction_tools": "PERSISTED_IN_CANONICAL_GITHUB",
+    "reconstruction_tools": [
+      "canonical/research/bytes/tools/rebuild_candidate_v1.py",
+      "canonical/research/bytes/tools/rebuild_candidate_v2.py",
+      "canonical/research/bytes/tools/build_physical_slice_v1.py"
+    ],
     "exact_route": "canonical/research/bytes/tools/exact_symbolic_route_v1.py",
     "qualification_generator": "canonical/research/bytes/tools/generate_qualification_v1.py",
-    "reconstruction_recipe": "canonical/research/bytes/tools/rebuild_candidate_v1.py",
-    "binary_execution_bundle": "NOT_DURABLY_SAVED__LIBRARY_UPLOAD_FAILED_CONTAINER_SESSION_EXPIRED",
-    "binary_execution_bundle_sha256": "16f61b951428a041a930267a2f0bdfa1a8c433fe5e2716492417c999403dea21",
-    "binary_execution_bundle_bytes": 1147796,
-    "rule": "Do not claim the binary bundle is durable. Canonical reconstruction tooling, hashes, measurements, and evidence are durable; promotion credit remains zero."
+    "binary_execution_bundle": "NOT_DURABLY_SAVED__LIBRARY_UPLOAD_CHANNEL_PREVIOUSLY_FAILED_CONTAINER_SESSION_EXPIRED",
+    "binary_execution_bundle_sha256": "5ce543f187e1324d4086fd4bac509ab3ebb28c422cf2971e08a16ca2372c8ecd",
+    "binary_execution_bundle_bytes": 1134488,
+    "rule": "Do not claim binary durability. Canonical reconstruction tooling, hashes, measurements, and evidence are durable; promotion credit remains zero."
   },
   "predecessor_fresh_execution_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_RECOVERY_EXECUTION_20261010_V1.json",
   "reserved_predecessor_qualification_qual8": {
@@ -112,5 +116,14 @@
     "corpus_sha256": "640f06e78cd3394e00713084ec6a3aafbd7b1ba0f0dcaa17140c74bb920b79fc",
     "generator_sha256": "de6cf261f4e78b010c2454347409a309880066e18f89f7953bb477a7502f59e4",
     "spent": false
+  },
+  "previous_fresh_execution_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_SUCCESSOR_EXECUTION_20261010_V1.json",
+  "spent_successor_qualification": {
+    "id": "QUAL_SUCCESSOR_NEXT_20261010_V1",
+    "cases": 2070,
+    "corpus_sha256": "f07f672bc48cfe20d5f9f3076d2ba2dc1f48a4683e7be937a4be8001b384adff",
+    "candidate_result": "2070/2070",
+    "stock_donor_replay": "2070/2070",
+    "spent": true
   }
 }
