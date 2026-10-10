@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R10_EXECUTION_WHOLE_LEAF_V2_CHAIN_GATE_REPLAY_20261010_V1",
   "date": "2026-10-10",
-  "status": "PASS__EXACT_CONTENT_ADDRESSED_V2_GATE_REPLAY__INDEPENDENT_DOMAIN_AND_SCOPE_SUBPROOFS_BOUND__R10_EXECUTION_SCOPE_ADMISSIBLE__PROPERTY_TRUTH_SEPARATE__ZERO_CREDIT",
+  "status": "PASS__EXHAUSTIVE_V2_GATE_PRECONDITION_AUDIT__INDEPENDENT_DOMAIN_SCOPE_AND_GATE_SUBPROOFS_BOUND__COMPOSITION_CONSEQUENCE_SCOPE_ADMISSIBLE__INDEPENDENT_GATE_EXECUTION_FALSE__PROPERTY_TRUTH_SEPARATE__ZERO_CREDIT",
   "subject": {
     "chain_path": "canonical/governance/PROFESSIONAL_QUALITY_R10_EXECUTION_WHOLE_LEAF_V2_CHAIN_20261010_V1.json",
     "chain_git_blob_sha": "180234a8eeca62f51737f69db53a83ff2d0fe237",
@@ -36,8 +36,13 @@
     "whole_leaf_domain_equivalence_proved": true,
     "whole_leaf_scope_complete": true,
     "bound_dependency_errors": [],
-    "composition_replay_independent": false,
-    "independent_subproofs_bound": true
+    "exhaustive_gate_preconditions_checked": true,
+    "independent_gate_execution": false,
+    "independent_subproofs": {
+      "claim_domain_equivalence": true,
+      "scope_cover": true,
+      "gate_runtime_semantics": true
+    }
   },
   "authority": {
     "whole_leaf_scope_admissible": true,
@@ -51,6 +56,7 @@
   },
   "next": "EXECUTE_R10_EXECUTION_PROPERTY_AND_ADVERSARIAL_EVIDENCE_OVER_EXACT_ADMITTED_DOMAIN__REUSE_BOUNDED_WITNESS__TARGET_UNPROVED_COMPLEMENT_ONLY",
   "hard_nonclaims": [
+    "NO_CLAIM_OF_INDEPENDENT_GATE_COMPOSITION_EXECUTION",
     "NO_R10_EXECUTION_PROPERTY_TRUTH",
     "NO_R10_DOMAIN_EXECUTION_CLOSURE",
     "NO_R10_ROOT_CLOSURE",
