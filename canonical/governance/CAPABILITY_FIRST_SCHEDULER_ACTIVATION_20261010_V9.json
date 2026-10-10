@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V9",
+  "date": "2026-10-10",
+  "status": "ACTIVE_PRIMARY_CAPABILITY_FIRST_PARALLEL_FRONTIER_SCHEDULER__PARETO_FIRST__CONFLICT_AWARE__PROFESSIONAL_AND_ASSURANCE_DYNAMIC_CURRENTNESS_VERIFIED__READ_ONLY_EVIDENCE_PARALLELISM_VERIFIED__FULL_EXECUTION_FAIL_CLOSED__ZERO_CREDIT",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "terminal_milestone": "OPUS_5_5_FIRST_FRONTIER_CHECKPOINT__NOT_TERMINAL_OBJECTIVE",
+  "supersedes": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V8.json",
+  "primary_parallel_frontier": {
+    "path": "canonical/runtime/capability_parallel_frontier_v1.py",
+    "git_blob_sha": "ba1efcc4cc6ad96181af7ca13aa3be139756cb8d",
+    "primary_entrypoint": "plan_current_parallel_frontier",
+    "frontier_path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
+    "frontier_git_blob_sha": "a417d4af803fa1fb654f8f164ba819b55e4e8441",
+    "dynamic_current_pointer_follow": {
+      "supported_families": [
+        "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
+        "canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json"
+      ],
+      "rule": "PROFESSIONAL_MAY_FOLLOW_ONLY_MECHANICALLY_SEQUENTIAL_ROOT_FRONTIER__ASSURANCE_MAY_FOLLOW_ONLY_WHEN_SUBJECT_IDENTITY_ROOT_COUNT_NEXT_EDGE_AUTHORITY_BOUNDARY_AND_PROMOTION_BLOCKERS_MATCH_CURRENT_PROFESSIONAL__ALL_OTHER_SOURCE_FAMILY_DRIFT_FAILS_CLOSED"
+    }
+  },
+  "scalar_fallback": {
+    "core_path": "canonical/runtime/capability_first_scheduler_v1.py",
+    "core_git_blob_sha": "6d2091cc1581b9aa1fd2c74e8a76519a41d9d957",
+    "live_wrapper_path": "canonical/runtime/capability_first_live_scheduler_v1.py",
+    "live_wrapper_git_blob_sha": "a45740441a8bfbbab315ed07c39ca54079ef0779",
+    "rule": "USE_ONLY_WHEN_A_PROVED_COMMON_TRADEOFF_CALIBRATION_EXISTS"
+  },
+  "independent_verification": {
+    "path": "canonical/verification/CAPABILITY_PARALLEL_FRONTIER_V9_INDEPENDENT_VERIFY_20261010_V1.json",
+    "git_blob_sha": "b5612189f6138a579c43eba4a5805cb18bdf134e",
+    "status": "PASS__PYCOMPILE__12_OF_12_ADVERSARIAL_TESTS__CURRENT_18E3B07D_FRONTIER_REPLAY__SIX_READ_ONLY_LANES__ZERO_FULL_EXECUTION__ZERO_CREDIT"
+  },
+  "current_control_state": {
+    "full_execution_plan_authorized": false,
+    "read_only_evidence_plan_authorized": true,
+    "current_parallel_read_only_lane_count": 6,
+    "current_parallel_full_execution_lane_count": 0,
+    "current_professional_frontier": "11_OF_12__R12_NEXT",
+    "current_assurance_projection": "COHERENT_WITH_PROFESSIONAL_11_OF_12__R12_NEXT__PROMOTION_BLOCKED",
+    "reason": "SIX_READY_PRIMARY_CANDIDATES_REMAIN_VECTOR_INCOMPLETE__READ_ONLY_EVIDENCE_ACQUISITION_IS_CONFLICT_FREE__PROFESSIONAL_AND_ASSURANCE_CURRENTNESS_ARE_MECHANICALLY_RECONCILED"
+  },
+  "scheduling_law": "CURRENTNESS_AND_DEPENDENCY_FIRST__PARETO_DOMINANCE_WITH_COMPLETE_PER_DIMENSION_EVIDENCE__SAFE_NONCONFLICTING_PARALLELISM__INCOMPLETE_VECTORS_READ_ONLY_EVIDENCE_ONLY__CONFLICTING_INCOMPARABLE_WORK_REQUIRES_MINIMUM_DISCRIMINATING_EVIDENCE__NO_INVENTED_SCALAR_WEIGHTS",
+  "hard_nonclaims": [
+    "NO_FULL_EXECUTION_AUTHORITY_FROM_SCHEDULER_PLANNING",
+    "NO_UNIQUE_RANK_ONE_CLAIM",
+    "NO_COMPLETE_VECTOR_EVIDENCE_CLAIM",
+    "NO_SCALAR_UTILITY_CALIBRATION_CLAIM",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT_FROM_SCHEDULING"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
