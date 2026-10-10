@@ -393,7 +393,7 @@
     "promoter_git_blob_sha": "6a1a200da6e049553b6c7bca80d2012eaa13c86e",
     "concurrency_verification": {
       "path": "canonical/verification/R2_DIRECT_ROUTE_PROMOTION_CONCURRENCY_VERIFY_20261010_V1.json",
-      "git_blob_sha": "122378077080f69d1eca0d41c2c76fb851497d48",
+      "git_blob_sha": "a4b19cba7532ba5753316f95c0e704a1ad795e51",
       "status": "PASS__EXACT_BLOBS__PUBLIC_ISOLATED_3_OF_3__NONBLOCKING_PROMOTION_LEASE__SERIAL_COMPOSITION_NO_LOST_UPDATE__ZERO_CREDIT",
       "public_run_id": 38027061270,
       "tests_passed": 3,
