@@ -320,10 +320,10 @@
     "cases": 6
   },
   "bytes_minimization_control": {
-    "status": "ACTIVE__FRESH_MEASURED_BYTE_FRONTIER__ZERO_CAPABILITY_CREDIT_FROM_RESEARCH_CHECKPOINT_ALONE",
+    "status": "ACTIVE__NEW_SUCCESSOR_BYTE_FRONTIER__ZERO_CAPABILITY_CREDIT_FROM_RESEARCH_CHECKPOINT_ALONE",
     "law": "canonical/laws/BYTES_RESOURCE_BOUNDED_MINIMUM_MECHANISM_LAW_V1.md",
     "white_box_law": "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V1.md",
-    "current_research_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_RECOVERY_EXECUTION_20261010_V1.json",
+    "current_research_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_SUCCESSOR_EXECUTION_20261010_V1.json",
     "objective": "MINIMUM_RESOURCE_FEASIBLE_EXECUTABLE_DESCRIPTION_CONDITIONAL_ON_ALREADY_OWNED_BRAIN_SUBSTRATE",
     "accounting": [
       "B_EXEC",
@@ -339,21 +339,36 @@
       "LARGER_MODULE_ONLY_IF_REQUIRED"
     ],
     "global_rule": "OPTIMIZE_JOINT_DEPENDENCY_CLOSED_MECHANISM_COVER__COUNT_SHARED_SUBSTRATE_ONCE",
-    "current_exact_symbolic_bottleneck": "POLYS__FRESH_LOADED_RAW_1517336__FACTOR__COEFFICIENT__EXACT_ROOTS_DEGREE_LE_4",
-    "truth_boundary": "FRESH_BYTE_FRONTIER_AND_QUALIFICATION_ARE_MEASURED__NO_OPUS_FAMILY_PROMOTION_CREDIT_WITHOUT_FULL_PROMOTION_GATES__NO_UNIVERSAL_MINIMUM_CLAIM",
+    "current_exact_symbolic_bottleneck": "POLYS__SUCCESSOR_TRACE_RAW_1649240__FACTOR__COEFFICIENT__EXACT_ROOTS_DEGREE_LE_4",
+    "truth_boundary": "NEW_PHYSICAL_BYTE_FRONTIER_AND_BOUNDED_DONOR_EQUIVALENCE_ARE_MEASURED__NO_OPUS_FAMILY_PROMOTION_CREDIT__NO_UNIVERSAL_MINIMUM_CLAIM",
     "current_fresh_exact_symbolic_candidate": {
+      "package_raw_python_source_bytes": 6743077,
+      "B_exec_raw_python_source_bytes": 6745837,
+      "persistent_xz_bytes": 1147192,
+      "full_exec_xz_bytes": 1147796,
+      "qualification": "3450/3450",
+      "stock_donor_positive_control": "3450/3450",
+      "clean_room_replay": "3450/3450",
+      "manifest_sha256": "d002d42ff677ae9d6c481f7cf9e1312728daba39158c2d053f228ee563a5a22b",
+      "deterministic_xz_sha256": "8712e0be012535741954429e58c38dcb7cdcb6eb3b27616b4c2683bb66b3070f",
+      "full_exec_xz_sha256": "16f61b951428a041a930267a2f0bdfa1a8c433fe5e2716492417c999403dea21",
+      "promotion_credit": 0
+    },
+    "previous_fresh_frontier": {
       "raw_python_source_bytes": 6828853,
       "persistent_xz_bytes": 1179804,
-      "qualification": "2520/2520",
-      "clean_room_replay": "2520/2520",
-      "manifest_sha256": "ebecc222feb7ec428e7ac9e667319d41f943358a454df6d288efae0c10ac940c",
-      "deterministic_xz_sha256": "7656418768655ffc67889bb5b9cafc27a7fb59320b0ce7b86efcc012cb30dcfc",
-      "promotion_credit": 0
+      "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_RECOVERY_EXECUTION_20261010_V1.json"
     },
     "historical_reported_predecessor": {
       "raw_python_source_bytes": 7044219,
       "persistent_xz_bytes": 1207652,
       "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_DONOR_SLICE_CHECKPOINT_20261010_V1.json"
+    },
+    "next_frozen_qualification": {
+      "id": "QUAL_SUCCESSOR_NEXT_20261010_V1",
+      "cases": 2070,
+      "corpus_sha256": "f07f672bc48cfe20d5f9f3076d2ba2dc1f48a4683e7be937a4be8001b384adff",
+      "spent": false
     }
   }
 }
