@@ -17,7 +17,7 @@ import json
 from pathlib import Path
 from typing import Any, Mapping
 
-from canonical.runtime import professional_quality_scoped_evidence_v1 as scoped
+from canonical.runtime import professional_quality_scoped_evidence_overlay_v1 as scoped
 
 ROOT = Path(__file__).resolve().parents[2]
 SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_SAME_SUBJECT_COMPOSITION_GATE_V1"
@@ -158,10 +158,40 @@ def evaluate(
         for row in admitted
         if isinstance(row, Mapping)
     }
-    if admitted_roots != EXPECTED_ROOTS or len(admitted) != len(EXPECTED_ROOTS):
+    if admitted_roots != EXPECTED_ROOTS:
         return _fail(
             "SCOPED_EVIDENCE_ROOT_COVER_INCOMPLETE",
             admitted_root_ids=sorted(admitted_roots),
+            admitted_scope_count=len(admitted),
+        )
+
+    root_leaf_kinds: dict[str, set[str]] = {root_id: set() for root_id in EXPECTED_ROOTS}
+    for row in admitted:
+        if not isinstance(row, Mapping):
+            continue
+        root_id = str(row.get("root_id") or "")
+        if root_id not in root_leaf_kinds:
+            continue
+        for leaf_id in row.get("contributes_to_leaf_ids") or []:
+            if not isinstance(leaf_id, str):
+                continue
+            if leaf_id.endswith("::SEMANTIC"):
+                root_leaf_kinds[root_id].add("SEMANTIC")
+            if leaf_id.endswith("::EXECUTION"):
+                root_leaf_kinds[root_id].add("EXECUTION")
+    missing_semantic = sorted(
+        root_id for root_id, kinds in root_leaf_kinds.items() if "SEMANTIC" not in kinds
+    )
+    missing_execution = sorted(
+        root_id for root_id, kinds in root_leaf_kinds.items() if "EXECUTION" not in kinds
+    )
+    if missing_semantic or missing_execution:
+        return _fail(
+            "SCOPED_EVIDENCE_ROOT_LEAF_COVER_INCOMPLETE",
+            admitted_root_ids=sorted(admitted_roots),
+            admitted_scope_count=len(admitted),
+            missing_semantic_root_ids=missing_semantic,
+            missing_execution_root_ids=missing_execution,
         )
 
     rows = payload.get("root_subject_bindings")
@@ -172,6 +202,7 @@ def evaluate(
             "OPEN__SAME_SUBJECT_BINDINGS_REQUIRED",
             normal_form=normal_record,
             scoped_root_count=len(admitted_roots),
+            scoped_capability_count=len(admitted),
             missing_root_ids=sorted(EXPECTED_ROOTS),
         )
 
@@ -273,6 +304,7 @@ def evaluate(
             "OPEN__ROOT_SUBJECT_BINDINGS_NOT_IDENTICAL",
             normal_form=normal_record,
             scoped_root_count=len(admitted_roots),
+            scoped_capability_count=len(admitted),
             distinct_subject_count=len(subject_keys),
             verified_bindings=verified_bindings,
         )
@@ -283,6 +315,7 @@ def evaluate(
         passed=True,
         normal_form=normal_record,
         scoped_root_count=len(admitted_roots),
+        scoped_capability_count=len(admitted),
         verified_root_subject_binding_count=len(verified_bindings),
         composed_subject={
             "subject_kind": subject_kind,
