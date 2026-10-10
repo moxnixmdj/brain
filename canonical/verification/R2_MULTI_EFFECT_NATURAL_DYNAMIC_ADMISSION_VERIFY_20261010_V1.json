@@ -1,0 +1,31 @@
+{
+  "schema": "PROJECT_BRAIN_R2_MULTI_EFFECT_NATURAL_DYNAMIC_ADMISSION_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__DEPLOYMENT_PACKAGE_VALID__FIVE_ROUTE_MANIFEST__UNIQUE_LIVE_SELECTION",
+  "route_id": "DIRECT_ADEQUACY::CROSS_DOCUMENT_MULTI_EFFECT_NATURAL_LATTICE_V9",
+  "verification": {
+    "candidate_and_receipt_validate_with_r2_dynamic_admission_contract": true,
+    "full_five_route_manifest_load_current_admissions_pass": true,
+    "admission_count": 5,
+    "preexisting_four_rows_preserved_exactly": true,
+    "live_wrapper_unique_dynamic_selection_pass": true,
+    "live_wrapper_effective_value": "8",
+    "unrelated_request_delegates_to_legacy": true,
+    "exact_goal_prefix_collision_with_five_live_top_level_routes": false
+  },
+  "bindings": {
+    "manifest_path": "canonical/governance/R2_DIRECT_ROUTE_DYNAMIC_ADMISSIONS_MULTI_EFFECT_20261010_V1.json",
+    "manifest_git_blob_sha": "3869376dba57bc207af004089309d206b2302ca2",
+    "current_pointer_git_blob_sha": "30a72a67cb7509252538ad61d3316a9ba3ef056d",
+    "route_candidate_path": "canonical/governance/R2_DIRECT_ROUTE_DEPLOYMENT_CANDIDATE_MULTI_EFFECT_NATURAL_20261010_V1.json",
+    "route_receipt_path": "canonical/verification/R2_DIRECT_ROUTE_DEPLOYMENT_RECEIPT_MULTI_EFFECT_NATURAL_20261010_V1.json"
+  },
+  "nonclaims": [
+    "NO_GENERAL_ARBITRARY_ENGLISH_UNDERSTANDING",
+    "NO_DYNAMIC_SEMANTIC_OPEN_PRECEDENCE_AUTHORITY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0
+}
