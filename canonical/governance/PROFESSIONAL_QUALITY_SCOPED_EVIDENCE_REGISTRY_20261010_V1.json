@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_REGISTRY_V1",
   "date": "2026-10-10",
-  "status": "ACTIVE__NINE_CLAIM_SCOPED_CAPABILITIES__ZERO_GLOBAL_LEAF_CREDIT",
+  "status": "ACTIVE__TEN_CLAIM_SCOPED_CAPABILITIES__ZERO_GLOBAL_LEAF_CREDIT",
   "entries": [
     {
       "scope_id": "PQ::R7::SINGLE_EDIT::UVCK_DEFEATER_ORDER_REPAIR",
@@ -250,12 +250,37 @@
       "semantic_leaf_credit": false,
       "execution_leaf_credit": false,
       "terminal_credit_delta": 0
+    },
+    {
+      "scope_id": "PQ::R9::CENSORING::FIXED_DENOMINATOR_CONSERVATIVE_ACCOUNTING",
+      "root_id": "R9_TEMPORAL_DEPLOYMENT",
+      "contributes_to_leaf_ids": [
+        "PQ::R9_TEMPORAL_DEPLOYMENT::EXECUTION"
+      ],
+      "claim_kind": "FROZEN_POPULATION_CONSERVATIVE_CENSORING_AND_EARLY_FAILURE_ACCOUNTING",
+      "source_receipt": {
+        "path": "canonical/verification/PROFESSIONAL_QUALITY_R9_CONSERVATIVE_CENSORING_VERIFY_20261010_V1.json",
+        "git_blob_sha": "7081a52621a1bb8f1ad07d1da23b40c8e57e16c2"
+      },
+      "reusable_compiler": {
+        "path": "canonical/runtime/tb_science_conservative_censoring_reducer_v1.py",
+        "git_blob_sha": "3b48ea534d606cf47a8321b56427353066393577"
+      },
+      "compiler_verification": {
+        "path": "canonical/governance/PROFESSIONAL_QUALITY_R9_CONSERVATIVE_CENSORING_SCOPE_20261010_V1.json",
+        "git_blob_sha": "7755bc709169abe0db35a6418fd8568ed14131b7"
+      },
+      "global_leaf_closure": false,
+      "global_root_closure": false,
+      "semantic_leaf_credit": false,
+      "execution_leaf_credit": false,
+      "terminal_credit_delta": 0
     }
   ],
   "admission_law": "CLAIM_SCOPED_EVIDENCE_MAY_BE_REUSED_ONLY_INSIDE_ITS_PROVED_SCOPE_AND_NEVER_COUNTS_AS_GLOBAL_LEAF_OR_ROOT_CLOSURE",
   "hard_nonclaims": [
-    "NO_GLOBAL_R1_R2_R3_R4_R5_R6_R7_R10_OR_R11_LEAF_CLOSURE",
-    "NO_GLOBAL_R1_R2_R3_R4_R5_R6_R7_R10_OR_R11_ROOT_CLOSURE",
+    "NO_GLOBAL_R1_R2_R3_R4_R5_R6_R7_R9_R10_OR_R11_LEAF_CLOSURE",
+    "NO_GLOBAL_R1_R2_R3_R4_R5_R6_R7_R9_R10_OR_R11_ROOT_CLOSURE",
     "NO_DOMAIN_SEMANTIC_CLOSURE",
     "NO_DOMAIN_EXECUTION_CLOSURE",
     "NO_TERMINAL_CREDIT"
