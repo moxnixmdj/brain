@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_P1_ROUTER_V7_PROOF_BOUND_STEP_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_V7_STEP_BINDING_BYTES__PYCOMPILE__15_OF_15__CALLER_STEP_RESULTS_FORBIDDEN__ZERO_QUALITY_OR_TERMINAL_CREDIT",
+  "pinned_commit": "91615351690a8934b6d0c251d49bbfed5fe79c92",
+  "exact_blobs": {
+    "step_binding_kernel": "27f3c137dae7f00925083a0824d008c2b4d10f0a",
+    "step_binding_tests": "11eec64dc6be27e304c6507461d4fa3c91af6122",
+    "router_v7": "765b5994c2fcb5eb669b5fd0d989cc79c1609908",
+    "router_v7_tests": "15c53b29e11da560e3202f0bcf214b1361d65310"
+  },
+  "inherited_exact_blobs": {
+    "router_v6": "88644e0517d472d9fbef8d5bc6cf3495f2b50005",
+    "goal_binding_kernel": "5b4573475437e9fc83338b900556b5c4f31c8d65",
+    "router_v4": "8e5d473b5606251752c4968dfd35290e9b991f16",
+    "router_v3": "cdb6716ac6d562d1ab222242d07aeecc5cdfac78",
+    "router_v2": "bdbbc53ab1e50743869ec515a019bfc17218f126",
+    "target_semantics": "583612b0e2226053ac758683087b5c5d0f510996",
+    "hard_defect_preflight": "1921ef67ec36ac1847243e99c49f638bf7cc170a",
+    "subject_verifier": "2936df1590077f4e97c82adaf79046a1221cef99"
+  },
+  "replay": {
+    "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/pq-v7-proof-bound-verify",
+    "py_compile": "PASS",
+    "tests_run": 15,
+    "tests_passed": 15,
+    "tests_failed": 0,
+    "log_sha256": "ec9f9279112c2cd265ac4002bb61ef321a8d6be05a370ac38e31821849c888a6"
+  },
+  "formerly_self_attested_steps": [
+    "GENERATE_DIVERSE_CANDIDATE_BRANCHES_WITH_INCUMBENT_PRESERVATION",
+    "RUN_DETERMINISTIC_FACT_STRUCTURE_FORMAT_AND_GROUNDING_CHECKS",
+    "RENDER_EXACT_AUDIENCE_VIEW_AND_BIND_OBSERVATION_CHANNELS",
+    "RUN_CRITERION_SPECIFIC_PLUS_HOLISTIC_COMPARATIVE_EVALUATION",
+    "ATTACK_FINALISTS_WITH_RELEVANT_INVARIANCE_DEFEATER_HIDDEN_CHANNEL_AND_COUNTEREXAMPLE_PROBES",
+    "FREEZE_WINNER_AND_USE_FRESH_OR_SELECTION_AWARE_TERMINAL_EVIDENCE",
+    "ISSUE_SCOPED_CERTIFICATE_OR_ABSTAIN_WITH_MINIMUM_BLOCKING_CUT"
+  ],
+  "proves": [
+    "CALLER_SUPPLIED_STEP_RESULTS_HAVE_ZERO_AUTHORITY_AT_V7_ENTRY",
+    "ALL_SEVEN_PREVIOUSLY_UNBOUND_LOAD_BEARING_PROFILE_STEPS_REQUIRE_CONTENT_ADDRESSED_STEP_BINDINGS",
+    "STEP_BINDINGS_ARE_BOUND_TO_EXACT_BEHAVIOR_SUBJECT_RUN_CONTEXT_STEP_RESULT_AND_EVIDENCE_DIGEST",
+    "STEP_PRODUCER_AND_INDEPENDENT_VERIFIER_IDENTITIES_MUST_BE_DISTINCT",
+    "MISSING_STEP_RECEIPTS_ABSTAIN_AND_INVALID_RECEIPTS_FAIL_CLOSED",
+    "ONLY_AFTER_ALL_SEVEN_AUTHENTICATE_ARE_INTERNAL_PASS_VALUES_DERIVED_FOR_THE_EXISTING_V6_V4_V3_CHAIN"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_SEVEN_PROFESSIONAL_STEPS_HAVE_BEEN_EXECUTED_FOR_ANY_REAL_TASK",
+    "NO_CANDIDATE_GENERATION_COMPLETENESS",
+    "NO_DOMAIN_SEMANTIC_OR_EXECUTION_CLOSURE",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY",
+    "NO_LIVE_DEFAULT_PROMOTION"
+  ],
+  "semantic_truth_authority": false,
+  "execution_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
