@@ -1,1 +1,0 @@
-run=2\nhidden_candidate_touched=false\nfixture=large-pixel-text\n

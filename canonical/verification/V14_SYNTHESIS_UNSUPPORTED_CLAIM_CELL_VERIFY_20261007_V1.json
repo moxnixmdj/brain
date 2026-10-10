@@ -1,8 +1,0 @@
-{
-  "schema":"PROJECT_BRAIN_V14_SYNTHESIS_UNSUPPORTED_CLAIM_CELL_VERIFY_V1",
-  "date":"2026-10-07",
-  "status":"INDEPENDENT_SYMBOLIC_AND_SOURCE_BOUND_PASS__ZERO_CREDIT",
-  "subject":{"b":"eece175e4aae05e34cdc7f44a25c12af94853228","v":"1f768a4d85da7ee9e22c4360ecb97d60bafb7c2c","t":"8b8c68b82b0f92f933c76d9565750163e3768d45"},
-  "verified":{"boolean_pass_is_top":true,"matched_quality_not_implied":true,"family_closure_not_implied":true},
-  "terminal_credit_delta":0
-}

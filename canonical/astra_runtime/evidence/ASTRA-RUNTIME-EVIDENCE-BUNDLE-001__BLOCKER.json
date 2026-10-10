@@ -1,9 +1,0 @@
-{
-  "adapter": "goal",
-  "error": "Blocker:BOUND_CAPABILITY_SOURCE_UNSUPPORTED:python_stdlib",
-  "mission_id": "ASTRA-RUNTIME-EVIDENCE-BUNDLE-001",
-  "observed_at_utc": "2026-09-25T00:29:11.995583+00:00",
-  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
-  "step_id": "execute-evidence-bundle",
-  "step_index": 0
-}
