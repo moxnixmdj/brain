@@ -36,6 +36,7 @@ SURFACES = (
     "CAPABILITY_FIRST_SCHEDULER_V1",
     "COUNTEREXAMPLE_GUIDED_CAUSAL_ARCHITECTURE_SYNTHESIZER_V1",
     "VERIFIED_REPAIR_REPLAY_LOOP_V1",
+    "REACHED_ESCAPE_STATE_KERNEL_V1",
 )
 
 
@@ -108,6 +109,11 @@ def _p3(payload: Mapping[str, Any], repo_root: str | Path) -> dict[str, Any]:
 def _rank_work(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
     from canonical.runtime.capability_first_scheduler_v1 import rank_work
     return rank_work(rows)
+
+
+def _reached_escape_state(payload: Mapping[str, Any]) -> dict[str, Any]:
+    from canonical.runtime.reached_escape_state_kernel_v1 import evaluate
+    return evaluate(payload)
 
 
 def _causal_synthesize(manifest: Mapping[str, Any]) -> dict[str, Any]:
@@ -1853,6 +1859,13 @@ def run(
             proposal_provider=proposal_provider,
             capability_expander=capability_expander,
         )
+
+    if mode == "reached_escape_state":
+        nested = request.get("request")
+        payload = nested if isinstance(nested, Mapping) else request.get("state")
+        if not isinstance(payload, Mapping):
+            return _fail("REACHED_ESCAPE_STATE_REQUIRED")
+        return _reached_escape_state(payload)
 
     if mode == "repair_synthesis":
         nested = request.get("request")
