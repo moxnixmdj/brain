@@ -28,8 +28,8 @@
   },
   "independent_verification": {
     "path": "canonical/verification/CAPABILITY_PARALLEL_FRONTIER_V9_INDEPENDENT_VERIFY_20261010_V1.json",
-    "git_blob_sha": "b5612189f6138a579c43eba4a5805cb18bdf134e",
-    "status": "PASS__PYCOMPILE__12_OF_12_ADVERSARIAL_TESTS__CURRENT_18E3B07D_FRONTIER_REPLAY__SIX_READ_ONLY_LANES__ZERO_FULL_EXECUTION__ZERO_CREDIT"
+    "git_blob_sha": "4c82c96fcacb78ca4d7df8f22bb6ddd639a424e9",
+    "status": "PASS__PYCOMPILE__35_OF_35_COMBINED_CORE_AND_PARALLEL_SCHEDULER_TESTS__CURRENT_FRONTIER_REPLAY__SIX_READ_ONLY_LANES__ZERO_FULL_EXECUTION__ZERO_CREDIT"
   },
   "current_control_state": {
     "full_execution_plan_authorized": false,
