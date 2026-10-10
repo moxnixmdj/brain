@@ -179,6 +179,29 @@ def compile_context(
                 sentence_span=[s0, s1],
             )
 
+        ownership = check_direct_assertion(
+            source_text,
+            start=s0,
+            end=s1,
+            require_selected_span_is_complete_sentence=True,
+        )
+        if ownership.get("pass") is not True:
+            if ownership.get("status") == "FAIL_CLOSED":
+                return _base(
+                    "FAIL_CLOSED",
+                    reason="ASSERTION_OWNERSHIP_GUARD_FAIL_CLOSED",
+                    assertion_ownership=ownership,
+                )
+            return _base(
+                "OPEN__ASSERTION_OWNERSHIP_NOT_PROVED",
+                assertion_ownership=ownership,
+                source_id=source_id,
+                source_text_sha256=_sha(source_text),
+                descriptor_span=[start, end],
+                sentence_span=[s0, s1],
+                sentence=sentence,
+            )
+
         observed: list[dict[str, Any]] = []
 
         if _CCOB_FUNC.search(sentence):
