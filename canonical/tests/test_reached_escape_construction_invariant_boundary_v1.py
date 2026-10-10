@@ -34,7 +34,7 @@ def counterexample_state():
 
 
 class ReachedEscapeConstructionInvariantBoundaryV1Tests(unittest.TestCase):
-    def test_live_fabric_reaches_valid_state_outside_finite_totality_preconditions(self):
+    def test_live_fabric_rejects_uncertified_state_with_exact_repair(self):
         state = counterexample_state()
         with patch.object(
             fabric.improvement_driver,
@@ -56,13 +56,18 @@ class ReachedEscapeConstructionInvariantBoundaryV1Tests(unittest.TestCase):
 
         self.assertEqual(out["status"], "FABRIC_DISPATCH_COMPLETE", out)
         self.assertEqual(out["mode"], "REACHED_ESCAPE_STATE", out)
-        self.assertTrue(out["inner_pass"], out)
+        self.assertFalse(out["inner_pass"], out)
         self.assertEqual(
             out["result"]["status"],
-            "UNSPLITTABLE_POLICY_CONFLICT",
+            "REPAIR_REQUIRED__UNCERTIFIED_REACHED_STATE_REJECTED",
             out,
         )
-        self.assertFalse(out["result"]["reached_state_progress_proved"], out)
+        self.assertFalse(out["result"]["certified_reached_state_admitted"], out)
+        self.assertEqual(
+            out["result"]["repair_request"]["kind"],
+            "UNSPLITTABLE_EQUIVALENCE_CLASS_REPAIR",
+            out,
+        )
         self.assertFalse(out["result"]["terminal_authority"], out)
 
         cert = certificate.certify(state)
@@ -74,6 +79,50 @@ class ReachedEscapeConstructionInvariantBoundaryV1Tests(unittest.TestCase):
         )
         self.assertFalse(cert["reached_state_future_outcome_totality_proved"], cert)
         self.assertFalse(cert["global_escape_progress_totality_proved"], cert)
+
+    def test_live_fabric_admits_certified_state_and_preserves_kernel_result(self):
+        state = counterexample_state()
+        state["discriminators"] = [
+            {
+                "discriminator_id": "d1",
+                "authenticated": True,
+                "safe": True,
+                "truthful": True,
+                "complete": True,
+                "outcomes": {"r1": "A", "r2": "B"},
+            }
+        ]
+        with patch.object(
+            fabric.improvement_driver,
+            "drain",
+            return_value={
+                "status": "IMPROVEMENT_QUEUE_STABLE",
+                "pass": True,
+                "progress_count": 0,
+                "actions": [],
+            },
+        ):
+            out = fabric.run(
+                {
+                    "mode": "REACHED_ESCAPE_STATE",
+                    "payload": state,
+                    "options": {"learn": False},
+                }
+            )
+
+        self.assertEqual(out["status"], "FABRIC_DISPATCH_COMPLETE", out)
+        self.assertTrue(out["inner_pass"], out)
+        self.assertTrue(out["result"]["certified_reached_state_admitted"], out)
+        self.assertTrue(
+            out["result"]["reached_state_future_outcome_totality_proved"], out
+        )
+        self.assertEqual(
+            out["result"]["kernel_result"]["status"],
+            "STRICT_PROGRESS_WITH_DISCRIMINATOR",
+            out,
+        )
+        self.assertFalse(out["result"]["terminal_authority"], out)
+
 
     def test_counterexample_is_repaired_by_exact_two_allowed_mechanism_classes(self):
         state = counterexample_state()
