@@ -1,15 +1,15 @@
 {
   "schema": "PROJECT_BRAIN_CAPABILITY_FRONTIER_CURRENTNESS_RECONCILIATION_20261010_V1",
   "date": "2026-10-10",
-  "status": "CURRENTNESS_RECONCILED__PROFESSIONAL_11_OF_24__R5_ONLY_EXECUTION_OPEN__TWELVE_SEMANTIC_TOTALITY_REUSE__BYTES_V32__R2_V87_WAKE_GATED__TB_PARKED__ZERO_CREDIT",
+  "status": "CURRENTNESS_RECONCILED__PROFESSIONAL_12_OF_24__ALL_12_EXECUTION_LEAVES_CLOSED__TWELVE_SEMANTIC_TOTALITY_REUSE__BYTES_V32__R2_V87_WAKE_GATED__TB_PARKED__ZERO_CREDIT",
   "sources": {
     "professional": {
       "path": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
-      "git_blob_sha": "505c19df5063b4eb0be297e22c443ed52ffa5a6a"
+      "git_blob_sha": "91161517b00078f50c17ead7276a8f54e213d45c"
     },
     "assurance": {
       "path": "canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json",
-      "git_blob_sha": "34fa800832a5a08417915d91d8a9786e3b31f75d"
+      "git_blob_sha": "eb18bb08b36b6b58a57cf6d08cf3b761597b9850"
     },
     "bytes": {
       "path": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
@@ -30,7 +30,6 @@
   },
   "frontier": {
     "primary_ready": [
-      "PROFESSIONAL_R5_EXECUTION_PROPERTY_TRUTH",
       "PROFESSIONAL_TWELVE_SEMANTIC_CLAIM_SCOPED_TOTALITY_REUSE"
     ],
     "safe_parallel_ready": [
@@ -48,10 +47,8 @@
   },
   "professional": {
     "scope_complete": 24,
-    "property_truth_closed": 11,
-    "open_execution_leaf_ids": [
-      "PQ::R5_EVALUATOR_REFERENCE::EXECUTION"
-    ],
+    "property_truth_closed": 12,
+    "open_execution_leaf_ids": [],
     "semantic_totality_reuse_leaf_count": 12
   },
   "authority": {
@@ -61,7 +58,7 @@
     "acceptance": false,
     "terminal": false
   },
-  "next": "DEPLET_R5_EXECUTION_PROPERTY_TRUTH_AND_INSTANTIATE_SHARED_SEMANTIC_TOTALITY_REUSE__PARALLELIZE_BYTES_V32_ONLY_IF_NONCONFLICTING__THEN_FULL_CURRENT_MAIN_REGRESSION",
+  "next": "INSTANTIATE_CURRENT_MISSION_BOUND_SHARED_SEMANTIC_TOTALITY_PROOFS__PARALLELIZE_NONCONFLICTING_RESOURCE_WORK__RUN_FULL_CURRENT_MAIN_REGRESSION__THEN_REEVALUATE_PROMOTION",
   "acceptance_credit_delta": 0,
   "capability_credit_delta": 0,
   "terminal_credit_delta": 0
