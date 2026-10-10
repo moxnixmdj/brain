@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK20_V5_PUBLIC_RESEAL_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__RANK20_V5_PUBLIC_ZERO_EXPOSURE_RESEAL__STAGED_AUTHORITY_ONLY__ACTIVATION_ABSENT",
+  "slot_id": "terminal-bench-science/hysteretic-aquifer-control::trial-0",
+  "task_digest": "sha256:681df0c3b2ada03a933ac4d2e11f07983676f87a9f26b61e416987904b880289",
+  "logical_attempt_id": "c7a02ecc6b11f4338120f05cd922370d361ce79e104549f95b656df3b51cb2bb",
+  "execution_claim_binding_digest": "sha256:aa0d91d18bb597319414b7385a92248992c093e14bf9c8f5677b72c05cb09beb",
+  "canonical_authority": {
+    "path": "canonical/governance/TB_SCIENCE_RANK20_ONE_SLOT_EXECUTION_AUTHORITY_20261010_V5.json",
+    "git_blob_sha": "d50b123ed0df77fbd772e00331f278835d4bf35b"
+  },
+  "canonical_ledger": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V47.json",
+    "git_blob_sha": "3f561524395e85ffb20f86cd5e6ec60c20a45d8b"
+  },
+  "public": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2604,
+    "merge_commit_sha": "06c1695ed9964226c8c106afb1d07232e6470bab",
+    "surface_git_blob_sha": "c206747c6db760ff523e1b5a269b966c7fd0440c",
+    "workflow_git_blob_sha": "e4cb372e501790fd9ed5aa72193d18109a599102",
+    "behavior_git_blob_sha": "8c3d285161f356c9256375c9168e88cdaadd58e5",
+    "authority_git_blob_sha": "808d00885bfbc4348006c28f3b51fcfa450f6bf9",
+    "ledger_git_blob_sha": "3dad0171b52a2ce548958a05a2da224bf4912ba7",
+    "epoch_git_blob_sha": "aeef3e2d7a63c5c2a31e2b17ef004604e4980acd",
+    "execution_claim_git_blob_sha": "fb94b21faa86db17d5e543684f1852f9fbbd7958",
+    "claim_binding_git_blob_sha": "7d94ac0b86053a31fd711dcb0652370041671e44",
+    "behavior_refinement_verifier_git_blob_sha": "71143dd544ea956e7d4a535eb16c9a863793481f"
+  },
+  "ratchet": {
+    "workflow_run_id": 38045221027,
+    "workflow_job_id": 114193274474,
+    "conclusion": "success",
+    "artifact_id": 11666672590,
+    "artifact_digest": "sha256:7f336c18a342f0968bdf2057191ca3783a63e835e45b04318a000b2715430ad4",
+    "staged_surface_pass": true,
+    "staged_admission_pass": true,
+    "activation_gate_closed": true
+  },
+  "accounting": {
+    "task_read": false,
+    "task_started": false,
+    "start_cas_acquired": false,
+    "benchmark_trials_consumed": 0,
+    "consumed_slots_total": 18,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0,
+    "incremental_spend_usd": 0
+  },
+  "execution_authority_effective": false,
+  "task_read_authority_effective": false,
+  "activation_authority": false,
+  "pass": true
+}
