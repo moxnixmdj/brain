@@ -27,8 +27,8 @@
   "planning_entrypoint": "canonical.runtime.capability_first_scheduler_v1.rank_work",
   "current_live_work_frontier": {
     "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
-    "git_blob_sha": "8bba2421b077837243beb969fe92898c19409ae8",
-    "status": "CURRENT_POST_COMPOSITION_FRONTIER__V9_EXECUTABLE_R12_TOTALITY_SEMANTIC_SUCCESSOR_VERIFIED__V8_TO_V9_POSITIVE_ROUTE_REFINEMENT_VERIFIED__REAL_V9_POLICY_COVER_WITNESS_OPEN__PROPERTY_TRUTH_12_OF_24__ALL_12_EXECUTION_LEAVES_CLOSED__ZERO_GLOBAL_CREDIT",
+    "git_blob_sha": "a780243b06e57757d644c38636e7798dcd29624a",
+    "status": "CURRENT_POST_COMPOSITION_FRONTIER__R12_REAL_V9_NONVACUITY_PROVED__WHOLE_LEAF_CC_R3_ONLY_ROOT_OPEN__PROPERTY_TRUTH_12_OF_24__ALL_12_EXECUTION_LEAVES_CLOSED__ZERO_GLOBAL_CREDIT",
     "professional_verified_root_subject_binding_count": 12,
     "professional_same_subject_composition_admissible": true,
     "professional_whole_leaf_scope_complete_count": 24,
@@ -107,7 +107,7 @@
     "professional_scope_construction_complete": true,
     "professional_scope_complete_count": 24,
     "professional_property_truth_closed_count": 12,
-    "current_primary_professional_edge": "REVERIFY_C1_TO_C7_ON_EXACT_V9_SUBJECT__BIND_ONE_REAL_V9_POLICY_COVER_AND_EXECUTABLE_TOTALITY_SEMANTIC_WITNESS_FOR_C8_CC_R3__THEN_R4__PARALLEL_REMAINING_SEMANTIC_REUSE",
+    "current_primary_professional_edge": "PROVE_WHOLE_LEAF_R12_CC_R3_BY_UNIVERSAL_FORMAL_SCOPE_OR_LOSSLESS_GENERATOR_OR_INDEPENDENT_COMPLETE_UNION__THEN_BIND_CC_R3_SLOT__RERUN_R4__PARALLEL_NONCONFLICTING_WORK_ONLY",
     "full_current_main_regression_open": true,
     "r10_structural_guard_verification": {
       "path": "canonical/verification/PROFESSIONAL_QUALITY_R10_STRUCTURAL_GUARD_INDEPENDENT_VERIFY_20261010_V1.json",
@@ -173,6 +173,26 @@
     "real_v9_policy_cover_bound": false,
     "exact_next": "REAL_V9_POLICY_COVER__EXECUTABLE_SEMANTIC_WITNESS__C8_CC_R3__R4",
     "wake_new_primitive_only_on": "EFFECT_DISTINGUISHING_COUNTEREXAMPLE_PLUS_VERIFIED_REUSE_EXHAUSTION",
+    "terminal_credit_delta": 0
+  },
+  "r12_v9_real_witness": {
+    "replay_path": "canonical/verification/V9_REAL_R12_SECOND_CARRIER_REPLAY_VERIFY_20261011_V1.json",
+    "real_v9_positive_execution_observed": true,
+    "c8_nonvacuity_proved": true,
+    "exact_run_material_totality_proved": true,
+    "whole_leaf_cc_r3_proved": false,
+    "scheduler_class": "COMPLETED_EVIDENCE_CUT__DO_NOT_REPEAT",
+    "terminal_credit_delta": 0
+  },
+  "r12_cc_r3_current_cut": {
+    "class": "UNIVERSAL_OR_COMPLETE_UNION_PROOF_INSTANTIATION__NOT_NEW_PRIMITIVE",
+    "exact_obligation": "ALL_ROOT_RELEVANT_MATERIAL_DEFEATERS_RESOLVED_OR_PROVED_DECISION_NULL_BEFORE_POSITIVE_CERTIFICATION",
+    "resolution_modes": [
+      "UNIVERSAL_FORMAL_SCOPE_PROOF",
+      "LOSSLESS_GENERATOR_CLOSURE",
+      "INDEPENDENTLY_CERTIFIED_COMPLETE_UNION"
+    ],
+    "new_primitive_required": false,
     "terminal_credit_delta": 0
   }
 }
