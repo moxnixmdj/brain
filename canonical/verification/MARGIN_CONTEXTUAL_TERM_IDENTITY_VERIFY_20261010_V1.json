@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_MARGIN_CONTEXTUAL_TERM_IDENTITY_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_BRANCH_BYTES__11_OF_11_TESTS__2_OF_2_LIVE_PRIMARY_SOURCE_REPLAY__PYCOMPILE_PASS__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "margin-contextual-term-identity-v1-20261010-sol",
+    "exact_blobs": {
+      "canonical/evidence/MARGIN_CONTEXTUAL_TERM_SOURCE_PACK_V1.json": "c54a16aae1d96e1beb0a55c9bd7ff87adffcca14",
+      "canonical/runtime/margin_contextual_term_identity_v1.py": "655e46be6e9a31d0df210609152794f70caf1b63",
+      "canonical/tests/test_margin_contextual_term_identity_v1.py": "223330ee404f695111fd9e65d738c081fb461c6f"
+    }
+  },
+  "independent_carrier": {
+    "name": "margin-contextual-term-verify-20261010-sol",
+    "sprite_id": "sprite-31532afd-5e73-4d53-8584-5ea1f2656622",
+    "workspace": "/home/sprite/work"
+  },
+  "verification": {
+    "py_compile": "PASS",
+    "focused_tests": {"tests_run": 11, "failures": 0, "errors": 0},
+    "live_primary_source_replay": {
+      "result": "PASS",
+      "cases": {
+        "NET_INTEREST_MARGIN": {
+          "concept_id": "FINANCE::BANK_NET_INTEREST_MARGIN",
+          "source_status": "PASS__HTTPS_SOURCE_FRAGMENT_PROJECTION_AUTHENTICATED"
+        },
+        "INITIAL_MARGIN": {
+          "concept_id": "FINANCE::DERIVATIVES_INITIAL_MARGIN",
+          "source_status": "PASS__HTTPS_SOURCE_FRAGMENT_PROJECTION_AUTHENTICATED"
+        }
+      }
+    }
+  },
+  "proved": [
+    "EXACT_net_interest_margin_OCCURRENCE_CAN_BE_BOUND_TO_A_BANKING_NET_INTEREST_MARGIN_CONCEPT_FROM_AN_AUTHENTICATED_FEDERAL_RESERVE_DEFINITION",
+    "EXACT_initial_margin_OCCURRENCE_CAN_BE_BOUND_TO_A_DERIVATIVES_FUTURES_INITIAL_MARGIN_CONCEPT_FROM_AN_AUTHENTICATED_CFTC_DEFINITION",
+    "THE_MARGIN_HEAD_SPAN_IS_BOUND_INSIDE_THE_EXACT_MULTIWORD_TERM",
+    "BARE_Margin_REMAINS_UNRESOLVED",
+    "interest_margin_AND_gross_margin_REMAIN_OUTSIDE_SCOPE",
+    "WRONG_SOURCE_SPANS_DO_NOT_INHERIT_NEARBY_CONTEXT",
+    "THE_TWO_CONTEXT_RICH_MARGIN_TERMS_RESOLVE_TO_DISTINCT_OCCURRENCE_CONCEPTS",
+    "SOURCE_FRAGMENT_FAILURE_OR_PACK_DRIFT_FAILS_CLOSED",
+    "NO_GLOBAL_BARE_MARGIN_SENSE_AUTHORITY",
+    "NO_OPEN_WORLD_FINANCE_SEMANTIC_COMPLETENESS",
+    "NO_POLICY_ADEQUACY_EXECUTION_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_BARE_WORD_margin_HAS_A_UNIQUE_SENSE",
+    "NO_CLAIM_THE_TWO_TERMS_EXHAUST_MARGIN_MEANINGS",
+    "NO_GENERAL_MULTIWORD_EXPRESSION_PARSER",
+    "NO_GLOBAL_WORD_SENSE_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
