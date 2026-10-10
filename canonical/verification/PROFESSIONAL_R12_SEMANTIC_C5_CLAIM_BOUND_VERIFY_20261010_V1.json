@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_R12_SEMANTIC_C5_CLAIM_BOUND_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_SPRITE__PYCOMPILE__6_OF_6__R12_SEMANTIC_C5_EXACT_CLAIM_COVERAGE_ACCOUNTING__ZERO_PROPERTY_OR_TERMINAL_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "r12-semantic-cc-r3-claim-bound-reuse-v1-20261010",
+    "claim_id": "05b74983836dd1f6a13a0db72443246fb74f99548f0d982a769a6a7e572e9e85",
+    "leaf_id": "PQ::R12_META_COMPOSITION_CLOSURE::SEMANTIC",
+    "exact_blobs": {
+      "certificate": "aa3d60c59af28e938ab3d8840371a701931b3ae4",
+      "verifier": "07d8176056e1052e9ff94e32f54d67a714ddf74f",
+      "tests": "04f3c900eb91fb828af4655b4a67537718c86821",
+      "frozen_claim": "5e7c198da31b901bb4f53c4fc15cee7d6298c114",
+      "whole_domain_verify": "b6b826d1658d8a2c88ea80260ee667e86ae99394",
+      "scope_batch_verify": "4c2d40a262f18f34bb35f94b59660d60972d45ef"
+    }
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/pq-scope-batch-v1",
+    "py_compile": "PASS",
+    "tests_run": 6,
+    "tests_passed": 6,
+    "failures": 0,
+    "errors": 0
+  },
+  "proves": [
+    "EXACT_R12_SEMANTIC_CLAIM_DOMAIN_IS_THE_ENTIRE_ADMISSIBLE_LEAF_DOMAIN",
+    "R12_SEMANTIC_SCOPE_HAS_NO_FILTERS_OR_EXCLUSIONS",
+    "R12_SEMANTIC_EXACT_CLAIM_ROW_IS_UNIVERSALLY_SCOPE_COMPLETE",
+    "R12C5_COVERAGE_ACCOUNTING_IS_PROVED_FOR_THE_EXACT_FROZEN_CLAIM",
+    "SCOPE_NARROWING_CLAIM_DRIFT_BATCH_INCOMPLETENESS_TOTALITY_SMUGGLING_AND_CREDIT_SELF_GRANT_FAIL_CLOSED"
+  ],
+  "hard_nonclaims": [
+    "NO_CC_R3_TERMINAL_CLOSURE",
+    "NO_R12_SEMANTIC_PROPERTY_TRUTH",
+    "NO_MATERIAL_DEFEATER_TOTALITY",
+    "NO_C1_C4_C6_C7_OR_C8_CREDIT",
+    "NO_R12_ROOT_OR_GLOBAL_PROFESSIONAL_QUALITY_CLOSURE",
+    "NO_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "property_truth_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
