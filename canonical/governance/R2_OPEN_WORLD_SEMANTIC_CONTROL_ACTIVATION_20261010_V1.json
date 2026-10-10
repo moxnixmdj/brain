@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_R2_OPEN_WORLD_SEMANTIC_CONTROL_ACTIVATION_20261010_V1",
+  "date": "2026-10-10",
+  "status": "ACTIVE_LIVE_OPEN_WORLD_SEMANTIC_CONTROL_PROGRESS_ROUTE",
+  "mission_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "capability": "OPEN_WORLD_UNRESOLVED_SEMANTICS_TO_VERIFIED_MINIMUM_INFORMATION_CONTROL_ACTION",
+  "live_surface": {
+    "front_door_path": "canonical/runtime/unified_cognitive_fabric_v2.py",
+    "front_door_git_blob_sha": "afb8b5c30957168dd8ba8684afb94b31c9118ed5",
+    "mode": "OPEN_WORLD_SEMANTIC_CONTROL",
+    "auto_route": true
+  },
+  "runtime": {
+    "control_path": "canonical/runtime/open_world_semantic_control_v1.py",
+    "control_git_blob_sha": "cea865ac319eb420977b60378de213fc11be9090",
+    "candidate_path": "canonical/runtime/residual_semantic_control_invariance_v1.py",
+    "candidate_git_blob_sha": "f2a19e925c331fc575f5b7129011b9b042452edd",
+    "verifier_path": "canonical/runtime/residual_semantic_control_invariance_verify_v1.py",
+    "verifier_git_blob_sha": "248d23cb86a9a277383ba4204f340ab17e137cc6",
+    "origin_policy_path": "canonical/runtime/minimum_information_origin_policy_v1.py",
+    "origin_policy_git_blob_sha": "8e5e7795268927ade207f8af92cfd77fe50d0275"
+  },
+  "verification": {
+    "path": "canonical/verification/R2_OPEN_WORLD_SEMANTIC_CONTROL_VERIFY_20261010_V1.json",
+    "git_blob_sha": "570f47951f7c329f61e356a65ee74dde884d3d22",
+    "result": "PASS__11_OF_11"
+  },
+  "scope": {
+    "semantic_state_required": "UNRESOLVED_OPEN_WORLD",
+    "decision_relevant_required": true,
+    "information_origin_must_be_classifiable": true,
+    "control_scope": "NEXT_INFORMATION_ACQUISITION_CONTROL_ONLY",
+    "allowed_actions": [
+      "ASK_USER_MINIMUM_CLARIFICATION",
+      "ASK_USER_SOURCE_OR_SCOPE",
+      "OBSERVE_BOUND_SOURCE_ONLY",
+      "RESEARCH_MINIMUM_AUTHENTICATED_FACT"
+    ]
+  },
+  "authority": {
+    "control_progress_closed_when_preconditions_hold": true,
+    "semantic_identity_closed": false,
+    "semantic_truth_authority": false,
+    "final_domain_action_authority": false,
+    "open_world_semantic_completeness_claimed": false,
+    "downstream_reverification_after_information_required": true,
+    "r3_direct_experience_observable": true,
+    "terminal_authority": false
+  },
+  "hard_nonclaims": [
+    "NO_WORD_SENSE_RESOLUTION_FROM_CONTROL_INVARIANCE",
+    "NO_FINANCE_SEMANTIC_TAIL_CLOSURE",
+    "NO_OPEN_WORLD_ONTOLOGY_COMPLETENESS",
+    "NO_FINAL_DOMAIN_ACTION_FROM_INFORMATION_ACQUISITION_CONTROL",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
