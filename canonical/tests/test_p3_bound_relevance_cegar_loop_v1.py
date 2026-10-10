@@ -167,6 +167,13 @@ def test_unknown_truth_preserves_single_actionable_information_request():
         "minimum_observation_count":1,
         "independent_verification_required":True,
     }
+    template={
+        "schema":"PROJECT_BRAIN_SEMANTIC_TRUTH_MATERIALIZATION_TEMPLATE_V1",
+        "truth_kind":"REGCAP_LOSS_CUSHION_GROUNDING",
+        "claim_kind":"RELATIVE_RIVAL_SELECTION",
+        "target_concept_id":"REGCAP::CCOB",
+        "provider_semantic_truth_authority":False,
+    }
     unknown={
         "pass":False,
         "status":"UNKNOWN__SELECTED_PREDICATE_NOT_PROVED",
@@ -174,6 +181,7 @@ def test_unknown_truth_preserves_single_actionable_information_request():
         "truthful_precommitment_observation":False,
         "next_information_request":request,
         "next_required_edge":"REGCAP_LOSS_CUSHION_MINIMUM_POLICY_CHANGING_INFORMATION",
+        "checker_materialization_template":template,
     }
     with patch("canonical.runtime.p3_bound_relevance_cegar_loop_v1.solve_cegar",return_value=selected()), patch(
         "canonical.runtime.p3_bound_relevance_cegar_loop_v1.evaluate_truth",return_value=unknown
@@ -182,7 +190,9 @@ def test_unknown_truth_preserves_single_actionable_information_request():
     assert out["status"]=="OPEN__SELECTED_PREDICATE_PROOF_COVERAGE_REQUIRED"
     assert out["next_information_request"]==request
     assert out["next_required_edge"]=="REGCAP_LOSS_CUSHION_MINIMUM_POLICY_CHANGING_INFORMATION"
+    assert out["checker_materialization_template"]==template
     assert "next_information_request" not in out.get("detail",{})
+    assert "checker_materialization_template" not in out.get("detail",{})
 
 
 def test_conflicting_actionable_truth_requests_remain_candidates():
