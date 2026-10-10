@@ -24,12 +24,14 @@ from canonical.runtime import r3_improvement_queue_driver_v1 as r3
 from canonical.runtime import r3_historical_evidence_irreducibility_v1 as historical_evidence
 from canonical.runtime import r3_historical_failure_irreducibility_v1 as historical_failure
 from canonical.runtime import information_theoretic_externality_gate_v1 as externality_gate
+from canonical.runtime import r3_structural_adapter_rule_acquisition_provider_v1 as root1_adapter_acquisition
 
 SCHEMA = "PROJECT_BRAIN_ONE_SHOT_VERIFIED_CLOSURE_V1"
 
 LOAD_BEARING_PATHS = (
     "canonical/runtime/autonomous_verified_self_improvement_v1.py",
     "canonical/runtime/r3_improvement_queue_driver_v1.py",
+    "canonical/runtime/r3_structural_adapter_rule_acquisition_provider_v1.py",
     "canonical/runtime/information_theoretic_externality_gate_v1.py",
     "canonical/runtime/live_brain_runtime_v1.py",
     "canonical/runtime/unified_cognitive_fabric_v1.py",
@@ -476,6 +478,17 @@ def run(
         or max_actions_per_round > 32
     ):
         raise OneShotClosureError("MAX_ACTIONS_PER_ROUND_INVALID")
+
+    if verification_frontier_acquisition_provider is None:
+        verification_frontier_acquisition_provider = (
+            root1_adapter_acquisition.make_provider(
+                repo_root=repo_root,
+                state_path=state_path,
+            )
+        )
+        verification_frontier_acquisition_provider_id = (
+            "ROOT1_STRUCTURAL_ADAPTER_RULE_ACQUISITION_PROVIDER_V1"
+        )
 
     transcript: list[dict[str, Any]] = []
     initial = frontier_snapshot(repo_root=repo_root, state_path=state_path)
