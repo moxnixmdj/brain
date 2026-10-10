@@ -1,10 +1,10 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_LIVE_WORK_FRONTIER_V1",
   "date": "2026-10-10",
-  "status": "CURRENT_CANDIDATE_INVENTORY_RECONCILED_AFTER_PROFESSIONAL_12_OF_12_COMPOSITION__PARALLEL_READ_ONLY_EVIDENCE_READY__FULL_EXECUTION_STILL_FAILS_CLOSED_WITHOUT_VECTOR_OR_SEPARATE_AUTHORITY__ZERO_CREDIT",
-  "frontier_id": "LIVE_WORK_FRONTIER_20261010_PROF12_COMPOSED_V10",
+  "status": "CURRENT_POST_COMPOSITION_FRONTIER__SOURCE_CURRENT__READ_ONLY_EVIDENCE_ONLY__FULL_EXECUTION_FAIL_CLOSED__ZERO_CREDIT",
+  "frontier_id": "LIVE_WORK_FRONTIER_20261010_PROF12_COMPOSED_V11",
   "scope": {
-    "base_main_commit": "7914364a2bfcbcfc7b6b6f3cfb4d5ce04b9c8b40",
+    "base_main_commit": "2842214d15e0f692f229385832ed95ebf3ea2c4f",
     "completeness_semantics": "COMPLETE_FOR_EXPLICIT_CURRENT_ACTIONABLE_OR_SCHEDULABLE_WORK_EXPOSED_BY_THE_BOUND_CURRENT_AUTHORITY_SOURCES__NOT_COMPLETE_FOR_UNKNOWN_FUTURE_WORK_OR_UNDISCOVERED_CAPABILITIES",
     "source_set": [
       {
@@ -21,7 +21,7 @@
       },
       {
         "path": "canonical/governance/CURRENT_TB_SCIENCE_EXECUTION.json",
-        "git_blob_sha": "50d05e419a7f4905fa85cbc8c26344cf3f736c67"
+        "git_blob_sha": "7aec52d3575710d630a4e8376286723fd5c0a353"
       },
       {
         "path": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
@@ -33,7 +33,7 @@
       },
       {
         "path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
-        "git_blob_sha": "e532cf950170c18767cac8392a5400de7387b682"
+        "git_blob_sha": "0866926253db7789872099a730419139cf99d653"
       }
     ]
   },
@@ -162,15 +162,15 @@
       }
     },
     {
-      "work_id": "TB_SCIENCE_RANK20_V13_PREACTIVATION_PROMOTION",
+      "work_id": "TB_SCIENCE_RANK20_V3_ACTIVATION_PRESTART_EVIDENCE",
       "work_type": "BENCHMARK_INSTRUMENTATION",
       "benchmark_role": "NEW_CAPABILITY_VALIDATION",
       "source": "canonical/governance/CURRENT_TB_SCIENCE_EXECUTION.json",
-      "causal_role": "PROMOTE_PUBLIC_V12_EFFECTIVE_AUTHORITY_PREACTIVATION__REQUIRE_GENERIC_RATCHET_PASS__ONLY_THEN_MINT_EXACT_ONE_FILE_V3_ACTIVATION_AUTHORITY",
-      "readiness": "ACTIONABLE_PREACTIVATION_ONLY",
+      "causal_role": "VALIDATE_EXACT_ONE_FILE_V3_ACTIVATION_PRESTART_TRANSITION_WITHOUT_TASK_READ_OR_START",
+      "readiness": "V3_ACTIVATION_AUTHORITY_READY__TASK_UNREAD_UNSTARTED__READ_ONLY_PRESTART_EVIDENCE_ONLY",
       "claims_new_primitive": false,
       "score_state": "UNBOUND",
-      "scheduler_state": "READY_PREACTIVATION",
+      "scheduler_state": "READY_EVIDENCE",
       "prerequisites_satisfied": true,
       "prerequisite_work_ids": [],
       "mutation_keys": [
@@ -187,13 +187,15 @@
       "vector_evidence": {},
       "read_only_evidence": {
         "source": "canonical/governance/CURRENT_TB_SCIENCE_EXECUTION.json",
-        "source_git_blob_sha": "50d05e419a7f4905fa85cbc8c26344cf3f736c67",
+        "source_git_blob_sha": "7aec52d3575710d630a4e8376286723fd5c0a353",
         "benchmark_trials_consumed": 18,
         "started_result_pending": 0,
-        "activation_authority": false,
-        "public_surface_promotion_pending": true,
-        "acceptance_credit_delta": 0,
-        "terminal_credit_delta": 0,
+        "execution_authority_effective": true,
+        "task_read_authority_effective": true,
+        "activation_authority": true,
+        "activation_present": false,
+        "task_read": false,
+        "task_started": false,
         "vector_bounds_complete": false
       }
     },
@@ -203,7 +205,7 @@
       "frontier_class": "OPEN_WORLD_EVIDENCE_FRONTIER",
       "source": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
       "causal_role": "ONE_PRIMARY_OPEN_WORLD_FINANCE_SEMANTIC_RESIDUAL",
-      "readiness": "DEMOTED_UNLESS_TASK_LOCAL_COUNTEREXAMPLE_OR_INDEPENDENTLY_VERIFIED_CAPABILITY_DEFECT_WAKES_IT",
+      "readiness": "SLEEPING_UNLESS_TASK_LOCAL_COUNTEREXAMPLE_OR_VERIFIED_DEFECT_WAKES_IT__V84_CONCRETE_TRUTH_REQUEST_PROPAGATES_THROUGH_P3_AND_CONTROLLER",
       "claims_new_primitive": false,
       "score_state": "INELIGIBLE_WHILE_WAKE_GATE_FALSE",
       "scheduler_state": "SLEEPING",
@@ -221,7 +223,17 @@
       "evidence_conflict_keys": [],
       "evidence_acquisition_mode": "NONE",
       "vector_evidence_state": "UNBOUND",
-      "vector_evidence": {}
+      "vector_evidence": {},
+      "read_only_evidence": {
+        "source": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+        "source_git_blob_sha": "0866926253db7789872099a730419139cf99d653",
+        "general_mechanism_closed": true,
+        "finance_tail_closed": false,
+        "concrete_truth_request_propagation_bound": true,
+        "minimum_authenticated_observation_count": 1,
+        "wake_gate": false,
+        "vector_bounds_complete": false
+      }
     },
     {
       "work_id": "ESCAPE_OQ_SCOPE_COMPLETE_ACCEPTANCE_INSTANTIATION",
@@ -286,10 +298,10 @@
       "work_type": "RELIABILITY_IMPROVEMENT",
       "source": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
       "causal_role": "THREE_INTERNAL_ROWS_REQUIRE_EXECUTABLE_VERIFIED_ACTION_PLUS_WELL_FOUNDED_ACCEPTANCE_RELEVANT_STRICT_PROGRESS",
-      "readiness": "ACTIONABLE_WITH_EXISTING_REPAIR_VERIFICATION_RECERTIFICATION_REENTRY_MACHINERY",
+      "readiness": "READ_ONLY_RECLASSIFICATION_REQUIRED_BEFORE_ROW_PROOF_EXECUTION__TB_ROW_MANIFEST_IS_STALE",
       "claims_new_primitive": false,
       "score_state": "UNBOUND",
-      "scheduler_state": "READY_EXECUTION",
+      "scheduler_state": "READY_EVIDENCE",
       "prerequisites_satisfied": true,
       "prerequisite_work_ids": [],
       "mutation_keys": [
@@ -310,7 +322,9 @@
         "real_authenticated_row_proofs": 0,
         "current_gate_status": "AUTHENTICATED_V4_GATE_VERIFIED__REAL_AUTHENTICATED_ROW_PROOFS_0_OF_3__GAP_B_TOTALITY_OPEN",
         "new_primitive_established": false,
-        "vector_bounds_complete": false
+        "vector_bounds_complete": false,
+        "tb_row_currentness_repair_required": true,
+        "current_tb_git_blob_sha": "7aec52d3575710d630a4e8376286723fd5c0a353"
       }
     },
     {
@@ -318,12 +332,14 @@
       "work_type": "RELIABILITY_IMPROVEMENT",
       "source": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
       "causal_role": "LOAD_BEARING_PR_VALIDATOR_EXISTS_BUT_REQUIRED_STATUS_CHECK_AND_BRANCH_PROTECTION_ARE_NOT_ENFORCED",
-      "readiness": "ACTIONABLE_ONLY_IF_REPOSITORY_SETTINGS_AUTHORITY_IS_AVAILABLE",
+      "readiness": "BLOCKED__CURRENT_CONNECTION_CANNOT_READ_BRANCH_PROTECTION_OR_RULESETS",
       "claims_new_primitive": false,
       "score_state": "UNBOUND",
-      "scheduler_state": "READY_EVIDENCE",
-      "prerequisites_satisfied": true,
-      "prerequisite_work_ids": [],
+      "scheduler_state": "BLOCKED",
+      "prerequisites_satisfied": false,
+      "prerequisite_work_ids": [
+        "REPOSITORY_SETTINGS_READ_OR_ADMIN_AUTHORITY"
+      ],
       "mutation_keys": [
         "github:repository-settings"
       ],
@@ -336,12 +352,10 @@
       "vector_evidence_state": "PARTIAL",
       "vector_evidence": {},
       "read_only_evidence": {
-        "source": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
-        "source_git_blob_sha": "50f0194142c2649d67bbaf6285b8e1dd8051ef43",
-        "pr_gate_status": "DEFINED_AND_EXACT_BYTE_VERIFIED__NOT_YET_MERGE_BLOCKING",
-        "required_status_check_enforced": false,
-        "branch_protection_enforced": false,
-        "settings_connector_direct_read_available": false,
+        "source": "FRESH_GITHUB_SETTINGS_READ_2026_10_10",
+        "rulesets_read_http_status": 403,
+        "branch_protection_read_http_status": 403,
+        "settings_authority_available": false,
         "vector_bounds_complete": false
       }
     },
@@ -395,7 +409,7 @@
   },
   "live_selection": {
     "authorized": false,
-    "reason": "FULL_EXECUTION_SELECTION_REQUIRES_EVIDENCE_COMPLETE_VECTOR_OR_SEPARATE_EXPLICIT_AUTHORITY__NO_SCALAR_WEIGHTS_MAY_BE_INVENTED",
+    "reason": "NO_COMPLETE_COMMON_CALIBRATED_VECTOR__POST_COMPOSITION_PLANNER_MUST_BYPASS_OBSOLETE_R1_R12_DYNAMIC_ADAPTER__READ_ONLY_EVIDENCE_ONLY",
     "exact_next": "RUN_PARALLEL_FRONTIER_CONTROLLER__CONTINUE_MINIMUM_DISCRIMINATING_VECTOR_EVIDENCE_ACQUISITION__RERUN_PARETO_AND_CONFLICT_PARTITION"
   },
   "hard_nonclaims": [
