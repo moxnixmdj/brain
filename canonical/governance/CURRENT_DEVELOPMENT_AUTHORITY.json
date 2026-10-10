@@ -12,8 +12,8 @@
     },
     "residual_reuse_source": {
       "path": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
-      "observed_git_blob_sha": "fa5355528c6104c1768499b9dc657ea0b895e3ee",
-      "role": "CURRENT_REUSE_FIRST_CLASSIFICATION"
+      "observed_git_blob_sha": "a7816c96df93b71a448ec28276a9940f99ef933f",
+      "role": "CURRENT_REUSE_FIRST_CLASSIFICATION__ESCAPE_CC_R3_AUTHORITY_REQUIRES_V4_AUTHENTICATED_ROW_PROOF_GATE"
     },
     "goal_gate": "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V12.json",
     "optimizer": "canonical/governance/EXECUTION_FIRST_SELF_PROVING_OPTIMIZER_V2.json"
