@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_24_SCOPE_1_PROPERTY_PROJECTION_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_SPRITE__6_OF_6__24_SCOPE_COMPLETE__1_PROPERTY_TRUTH_CLOSED__23_OPEN__NO_ROOT_QUALITY_OR_TERMINAL_LAUNDERING",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "fix-professional-nested-24-scope-1-property-20261010-v2",
+    "exact_blobs": {
+      "assurance": "8e50987a357c6a6ca261fbca35683454b5b057b0",
+      "scheduler": "642cacabcda6306baf2dff342347d1330962789c",
+      "mission": "ff49bb07634898b7b12c5b830318b113af61fca1",
+      "professional": "1cfbfdf48f1390a708af930455992b0c0c33d493",
+      "scope_verification": "4c2d40a262f18f34bb35f94b59660d60972d45ef",
+      "r10_property_verification": "cfa1f178e149dbd987a52e9825dc67960dbade4c",
+      "tests": "f63bd6f82e8f50a7c5cc0a06ddbcda8b80b7b3f3"
+    }
+  },
+  "independent_replay": {
+    "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/pq-24-scope-1-property-v2",
+    "tests_run": 6,
+    "tests_passed": 6,
+    "failures": 0,
+    "errors": 0
+  },
+  "proved": [
+    "ASSURANCE_NESTED_PROJECTION_EQUALS_24_SCOPE_1_PROPERTY",
+    "SCHEDULER_NESTED_PROJECTION_EQUALS_24_SCOPE_1_PROPERTY",
+    "MISSION_NESTED_PROJECTION_EQUALS_24_SCOPE_1_PROPERTY",
+    "R10_EXECUTION_IS_ONLY_VERIFIED_PROPERTY_TRUTH_LEAF",
+    "23_PROPERTY_TRUTH_LEAVES_REMAIN_OPEN",
+    "NO_PROPERTY_TO_R10_ROOT_QUALITY_OR_TERMINAL_AUTHORITY_LAUNDERING"
+  ],
+  "hard_nonclaims": [
+    "NO_R10_ROOT_CLOSURE",
+    "NO_PROFESSIONAL_QUALITY_CLOSURE",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
