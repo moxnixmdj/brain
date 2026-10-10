@@ -51,11 +51,12 @@
     "explicit_mutation_and_authority_conflicts": true,
     "read_only_incomplete_vector_parallelism": true,
     "full_execution_requires_complete_vector_or_separate_explicit_authority": true,
-    "scalarization_requires_proved_tradeoff_contract": true
+    "scalarization_requires_proved_tradeoff_contract": true,
+    "dynamic_current_pointer_follow": "PROFESSIONAL_SEQUENTIAL_ROOT_FRONTIER_ONLY__OTHER_SOURCE_DRIFT_FAILS_CLOSED"
   },
   "independent_parallel_frontier_verification": {
-    "path": "canonical/verification/CAPABILITY_PARALLEL_FRONTIER_V8_INDEPENDENT_VERIFY_20261010_V2.json",
-    "git_blob_sha": "a655b61356d08ac1cd0c4a840eb3f46fbd89a5d7",
-    "status": "PASS__PYCOMPILE__8_OF_8_ADVERSARIAL_TESTS__EXACT_R9_FRONTIER_REPLAY__SIX_SAFE_READ_ONLY_EVIDENCE_LANES"
+    "path": "canonical/verification/CAPABILITY_PARALLEL_FRONTIER_V8_INDEPENDENT_VERIFY_20261010_V3.json",
+    "git_blob_sha": "73124ce1b33ebc608756163f901cf44e758a4b16",
+    "status": "PASS__PYCOMPILE__10_OF_10_ADVERSARIAL_TESTS__BOUNDED_DYNAMIC_PROFESSIONAL_POINTER_FOLLOW_VERIFIED"
   }
 }
