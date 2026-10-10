@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_ESCAPE_TB_SCIENCE_CURRENT_ROUTE_RECLASSIFICATION_20261010_V1",
+  "date": "2026-10-10",
+  "status": "CURRENT_RANK20_ROUTE_RECLASSIFIED__STALE_RANK19_REPAIR_INTERPRETATION_RETIRED__STRICT_PROGRESS_WITNESS_OPEN__ZERO_CREDIT",
+  "obligation_id": "TB_SCIENCE_GE_58_7",
+  "route_group": "GAP_B_INTERNAL_ROUTE_STRICT_PROGRESS",
+  "historical_manifest_path": "canonical/governance/ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_20261010_V2.json",
+  "historical_route_class": "INTERNAL_PLANNER_CONTROLLER_REPAIR_BEFORE_NEXT_IRREVERSIBLE_TRIAL",
+  "current_evidence_subject": {
+    "path": "canonical/governance/CURRENT_TB_SCIENCE_EXECUTION.json",
+    "git_blob_sha": "7aec52d3575710d630a4e8376286723fd5c0a353",
+    "byte_sha256": "13abdb9efbec773d6bc1cfa9c0a6a88a7128b473b69f90195d30cb486a86c39d"
+  },
+  "current_route": {
+    "route_class": "RANK20_V3_ACTIVATION_PRESTART_TRANSITION",
+    "authority_state": "RANK20_V13_PUBLIC_EFFECTIVE_AUTHORITY_VERIFIED__ACTIVATION_AUTHORITY_V3_READY",
+    "executable_next": "CREATE_EXACT_ONE_FILE_RANK20_V3_ACTIVATION_PR_FROM_18ABCBF__OBSERVE_PRESTART__COMMIT_DURABLE_START_ONLY_AFTER_AGENT_READY",
+    "execution_authority_effective": true,
+    "task_read_authority_effective": true,
+    "activation_authority": true,
+    "activation_present": false,
+    "task_read": false,
+    "task_started": false,
+    "rank20_trials_consumed": 0
+  },
+  "current_route_semantics_verified": true,
+  "strict_progress": {
+    "witness_bound": false,
+    "reason": "CURRENT_ROUTE_IS_EXECUTABLE_AND_AUTHORIZED_BUT_NO_CANONICAL_FINITE_WELL_FOUNDED_ACCEPTANCE_RELEVANT_MEASURE_YET_PROVES_EVERY_ALLOWED_PRESTART_OUTCOME_TERMINALIZES_OR_STRICTLY_DECREASES",
+    "next_required_edge": "BIND_FINITE_WELL_FOUNDED_PRESTART_PROGRESS_MEASURE_AND_PROVE_EVERY_ALLOWED_V3_ACTIVATION_OUTCOME_TERMINAL_OR_STRICTLY_DECREASING"
+  },
+  "hard_nonclaims": [
+    "NO_TB_SCIENCE_ACCEPTANCE_CREDIT",
+    "NO_GAP_B_ROW_PROOF",
+    "NO_CC_R3_CREDIT",
+    "NO_TASK_READ_OR_START",
+    "NO_TRIAL_CONSUMPTION",
+    "NO_STRICT_PROGRESS_TOTALITY_CLAIM"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
