@@ -37,12 +37,31 @@ def _bound_receipt(root: Path, kind: str, **premises):
     verifier_path.write_text(json.dumps(verifier, sort_keys=True) + "\n", encoding="utf-8")
     verifier_binding = {"path": "verifier.json", "git_blob_sha": _git_blob_sha(verifier_path)}
 
+    authority_path = root / "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json"
+    authority_path.parent.mkdir(parents=True, exist_ok=True)
+    authority = {
+        "authoritative_sources": {
+            "fixture": {
+                **proof_binding,
+                "independent_verification": verifier_binding,
+            }
+        }
+    }
+    authority_path.write_text(
+        json.dumps(authority, sort_keys=True) + "\n", encoding="utf-8"
+    )
+    authority_binding = {
+        "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+        "git_blob_sha": _git_blob_sha(authority_path),
+    }
+
     return {
         "proof_kind": kind,
         "scope_id": SCOPE,
         "conclusion": "success",
         "proof_artifact": proof_binding,
         "verifier_receipt_artifact": verifier_binding,
+        "authority_pointer": authority_binding,
     }
 
 
@@ -160,3 +179,32 @@ def test_manifest_booleans_cannot_override_bound_proof():
         out = evaluate({"closure_receipt": r}, repo_root=root)
         assert out["pass"] is False
         assert out["reason"] == "FULL_SCOPE_DB_COVER_UNPROVED"
+
+
+def test_content_addressed_unadmitted_pair_cannot_self_certify_root():
+    with TemporaryDirectory() as td:
+        root = Path(td)
+        r = _bound_receipt(root, "FULL_SCOPE_DB_COVER", s_trace_subset_db=True)
+
+        authority_path = root / "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json"
+        authority_path.write_text(
+            json.dumps({"authoritative_sources": {}}, sort_keys=True) + "\n",
+            encoding="utf-8",
+        )
+        r["authority_pointer"]["git_blob_sha"] = _git_blob_sha(authority_path)
+
+        out = evaluate({"closure_receipt": r}, repo_root=root)
+        assert out["pass"] is False
+        assert out["reason"] == "CURRENT_AUTHORITY_PROOF_VERIFIER_ADMISSION_REQUIRED"
+
+
+def test_stale_current_authority_pointer_fails_closed():
+    with TemporaryDirectory() as td:
+        root = Path(td)
+        r = _bound_receipt(root, "FULL_SCOPE_DB_COVER", s_trace_subset_db=True)
+        authority_path = root / "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json"
+        authority_path.write_text("{}\n", encoding="utf-8")
+
+        out = evaluate({"closure_receipt": r}, repo_root=root)
+        assert out["pass"] is False
+        assert out["reason"] == "CURRENT_AUTHORITY_POINTER_INVALID"
