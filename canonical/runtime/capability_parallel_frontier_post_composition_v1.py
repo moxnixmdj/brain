@@ -31,6 +31,13 @@ def _assert_post_composition(frontier: Mapping[str,Any]) -> None:
         raise PostCompositionFrontierError("PROFESSIONAL_COMPOSITION_NOT_ADMISSIBLE")
     if rows[0].get("evidence_acquisition_mode")!="READ_ONLY":
         raise PostCompositionFrontierError("PROFESSIONAL_POST_COMPOSITION_NOT_READ_ONLY")
+    ledger_rel=ev.get("whole_leaf_residual_ledger_path")
+    ledger_sha=ev.get("whole_leaf_residual_ledger_git_blob_sha")
+    if not isinstance(ledger_rel,str) or not ledger_rel or not isinstance(ledger_sha,str) or not ledger_sha:
+        raise PostCompositionFrontierError("PROFESSIONAL_WHOLE_LEAF_LEDGER_BINDING_MISSING")
+    ledger_path=core.ROOT / ledger_rel
+    if not ledger_path.is_file() or core._git_blob_sha(ledger_path)!=ledger_sha:
+        raise PostCompositionFrontierError("PROFESSIONAL_WHOLE_LEAF_LEDGER_STALE")
 
 def plan_current_post_composition_frontier() -> dict[str,Any]:
     frontier=core.load_current_frontier()
