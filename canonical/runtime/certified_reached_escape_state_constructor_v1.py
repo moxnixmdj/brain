@@ -18,6 +18,7 @@ from typing import Any, Mapping
 
 from canonical.runtime import reached_escape_finite_totality_certificate_v1 as finite_totality
 from canonical.runtime import reached_escape_state_kernel_v1 as kernel
+from canonical.runtime import certified_reached_escape_repair_dispatch_v1 as repair_dispatch
 
 SCHEMA = "PROJECT_BRAIN_CERTIFIED_REACHED_ESCAPE_STATE_CONSTRUCTOR_V1"
 REPAIR_SCHEMA = "PROJECT_BRAIN_CERTIFIED_REACHED_ESCAPE_STATE_REPAIR_V1"
@@ -177,6 +178,10 @@ def construct(state: Mapping[str, Any]) -> dict[str, Any]:
         "OPEN__INDISTINGUISHABLE_CLASS_WITHOUT_COMMON_ADEQUATE_POLICY",
     }:
         repair = _repair_from_open_certificate(cert)
+        dispatch_contract = repair_dispatch.compile_repair(
+            state_sha256=str(cert.get("state_sha256") or ""),
+            repair_request=repair,
+        )
         return {
             **_base(
                 state_id=cert.get("state_id"),
@@ -187,6 +192,8 @@ def construct(state: Mapping[str, Any]) -> dict[str, Any]:
             "certificate_status": status,
             "repair_request": repair,
             "repair_sha256": repair["repair_sha256"],
+            "repair_dispatch_contract": dispatch_contract,
+            "repair_dispatch_sha256": dispatch_contract["dispatch_sha256"],
             "hard_nonclaim": "NO_CLAIM_THE_REQUIRED_REPAIR_IS_GLOBALLY_ACQUIRABLE",
         }
 
