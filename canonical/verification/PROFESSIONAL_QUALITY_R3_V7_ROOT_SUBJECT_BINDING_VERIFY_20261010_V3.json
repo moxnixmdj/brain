@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R3_V7_ROOT_SUBJECT_BINDING_VERIFY_20261010_V3",
+  "date": "2026-10-10",
+  "status": "PASS__R3_V3_EXPLICIT_NO_GLOBAL_SUBJECT_SELF_AUTHORITY__V2_EVIDENCE_PRESERVED__INDEPENDENT_SPRITE_REPLAY__ZERO_QUALITY_OR_TERMINAL_AUTHORITY",
+  "root_id": "R3_REALIZATION_OBSERVATION",
+  "subject_binding_git_blob_sha": "4cd196b91613a8c0952ae0ad352d46c449b2c057",
+  "exact_subject": {
+    "subject_kind": "DECLARED_SYSTEM",
+    "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+    "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+    "binding_git_blob_sha": "4cd196b91613a8c0952ae0ad352d46c449b2c057"
+  },
+  "exact_blobs": {
+    "v3_binding": "4cd196b91613a8c0952ae0ad352d46c449b2c057",
+    "v3_verifier": "5e54cb144b5612b2d2286af79d154b2fb4932a7f",
+    "v3_tests": "2dc27d3eb14716cebc22e4a4591c98a00d9a491c",
+    "predecessor_v2_verification": "870bb85fbd00d670ec36e86b4b0b510f5bb9225c",
+    "predecessor_v2_binding": "2fe91ecba3830641ed800d04b70279a3f84283bf"
+  },
+  "replay": {
+    "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/pq-r3-v2-strengthening-verify",
+    "py_compile": "PASS",
+    "verifier_pass": true,
+    "verifier_status": "PASS__R3_V3_EXPLICIT_NO_GLOBAL_SUBJECT_SELF_AUTHORITY__V2_EVIDENCE_PRESERVED",
+    "tests_run": 5,
+    "tests_passed": 5,
+    "tests_failed": 0
+  },
+  "proves": [
+    "R3_V2_FULL_VERIFIER_REPLAYS_PASS_BEFORE_V3_AUTHORITY",
+    "R3_V3_PRESERVES_V2_EXACT_INSTANCE_SCOPE_GUARANTEES_AND_LIMITATIONS",
+    "R3_V3_EXPLICITLY_FORBIDS_GLOBAL_SUBJECT_IDENTITY_SELF_AUTHORITY",
+    "ONE_EXACT_REAL_TASK_RENDER_STEP_RECEIPT_REMAINS_BOUND",
+    "GLOBAL_R3_ROOT_CLOSURE_REMAINS_FALSE"
+  ],
+  "hard_nonclaims": [
+    "NO_ADDITIONAL_R3_SCOPE_CREDIT",
+    "NO_GLOBAL_R3_ROOT_CLOSURE",
+    "NO_GENERIC_RENDERER_VERSION_TRANSPORT",
+    "NO_SAME_SUBJECT_COMPOSITION_PASS_FROM_R3_V3_ALONE",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "root_subject_binding_authority": true,
+  "real_task_render_step_receipt_bound": true,
+  "exact_real_task_receipt_count": 1,
+  "global_subject_identity_authority": false,
+  "global_r3_root_closed": false,
+  "semantic_truth_authority": false,
+  "execution_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
