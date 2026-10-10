@@ -1,9 +1,0 @@
-{
-  "adapter": "goal",
-  "error": "Blocker:MODEL_INDEPENDENT_CONTROLLER_ACTION_REJECTED:assert_json_fields_equal",
-  "mission_id": "ASTRA-RUNTIME-LIVE-PROVENANCE-AUDIT-001",
-  "observed_at_utc": "2026-09-25T00:44:03.621678+00:00",
-  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
-  "step_id": "execute-live-provenance-audit",
-  "step_index": 0
-}

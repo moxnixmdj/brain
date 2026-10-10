@@ -1,9 +1,0 @@
-{
-  "adapter": "goal",
-  "error": "Blocker:CAPABILITY_ACQUISITION_REQUIRED:{\"evidence_path\": \"canonical/astra_runtime/evidence/ASTRA-CAPABILITY-ACQUISITION-PDF-001__CAPABILITY_ACQUISITION_GAP.json\", \"top_candidates\": [{\"name\": \"ai.pdfassistant/pdfassistant\", \"score\": 15, \"zero_cost_eligible\": true}, {\"name\": \"app.docwand/pdf\", \"score\": 15, \"zero_cost_eligible\": true}, {\"name\": \"build.pdfs/pdfs-build\", \"score\": 15, \"zero_cost_eligible\": true}]}",
-  "mission_id": "ASTRA-CAPABILITY-ACQUISITION-PDF-001",
-  "observed_at_utc": "2026-09-24T21:11:39.367336+00:00",
-  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
-  "step_id": "detect-pdf-gap-and-discover-candidates",
-  "step_index": 1
-}

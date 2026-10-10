@@ -1,8 +1,0 @@
-{
-  "schema":"PROJECT_BRAIN_DIRECT_E2E_SELECTED_CELL_VERIFY_V1",
-  "date":"2026-10-07",
-  "status":"INDEPENDENT_SYMBOLIC_PASS__ZERO_CREDIT",
-  "subject":{"g":"ecb52ca25fa14a60b7c34206fea25d8d3cfdcf0d","r":"f31fc7c228b210e8bb2bdd0cb4ee8ad3ec2a03da","t":"8dcf3a0dd16d8bf5345d70281b0af69aa1a15c30"},
-  "verified":{"direct_e2e_suffices":true,"primitive_plus_local_c_still_suffices":true,"incomplete_semantics_fail":true,"route_drift_fails":true},
-  "terminal_credit_delta":0
-}

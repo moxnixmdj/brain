@@ -1,8 +1,0 @@
-{
-  "schema":"PROJECT_BRAIN_V13_ARTIFACT_CELL_VERIFY_V1",
-  "date":"2026-10-07",
-  "status":"PASS__ZERO_CREDIT",
-  "subject":{"b":"10b766b2983357081f592dc64e576a8cfdd5ad7b","v":"dd9c1e7587c9130bd32cbd06b862bda6862951a1","t":"571d70ce48ca23551f56a123b7cf67c01f659037"},
-  "verified":{"ceiling_implies_cell_dominance":true,"quality_not_implied":true,"global_abc_not_implied":true},
-  "terminal_credit_delta":0
-}

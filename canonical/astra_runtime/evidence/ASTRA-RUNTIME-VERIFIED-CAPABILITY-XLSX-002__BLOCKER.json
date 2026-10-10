@@ -1,9 +1,0 @@
-{
-  "adapter": "goal",
-  "error": "RuntimeError:XLSX_COLUMNS_UNRESOLVED",
-  "mission_id": "ASTRA-RUNTIME-VERIFIED-CAPABILITY-XLSX-002",
-  "observed_at_utc": "2026-09-25T01:46:30.403627+00:00",
-  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
-  "step_id": "execute-verified-capability-xlsx",
-  "step_index": 0
-}

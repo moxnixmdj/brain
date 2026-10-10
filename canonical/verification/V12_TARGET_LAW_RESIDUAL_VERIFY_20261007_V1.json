@@ -1,8 +1,0 @@
-{
-  "schema":"PROJECT_BRAIN_V12_TARGET_LAW_RESIDUAL_VERIFY_V1",
-  "date":"2026-10-07",
-  "status":"PASS__ZERO_CREDIT",
-  "subject":{"g":"014d7d5102093251789673dff0a191203663a90d","r":"68775bc941c8290d387f62a9c57b322272338f32","t":"779c1fb165fbf2302ca087eca70c5c5f30dae0c1"},
-  "verified":{"empty_iff_all_dominated":true,"mixed_reopens":true,"top_eliminates_information_need":true},
-  "terminal_credit_delta":0
-}

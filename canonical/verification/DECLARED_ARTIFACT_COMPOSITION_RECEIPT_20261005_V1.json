@@ -1,8 +1,0 @@
-{
-  "schema":"PROJECT_BRAIN_DECLARED_ARTIFACT_COMPOSITION_RECEIPT_V1",
-  "policy_id":"DECLARED_ARTIFACT_FINAL_OUTPUT_V1",
-  "descriptor_schema":"PROJECT_BRAIN_DECLARED_ARTIFACT_DESCRIPTOR_V1",
-  "state_and_provenance_invariants_hold":true,
-  "scope_complete":true,
-  "independent_or_objective":true
-}
