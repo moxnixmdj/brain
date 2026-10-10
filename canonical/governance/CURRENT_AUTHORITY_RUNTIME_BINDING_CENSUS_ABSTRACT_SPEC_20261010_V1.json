@@ -1,0 +1,313 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_AUTHORITY_RUNTIME_BINDING_CENSUS_ABSTRACT_SPEC_V1",
+  "date": "2026-10-10",
+  "subject": {
+    "path": "canonical/runtime/current_authority_runtime_binding_census_v1.py",
+    "git_blob_sha": "e8746d141989f5279c66931d9cc9167504034b98",
+    "function": "run"
+  },
+  "scope": "GOAL_RELEVANT_RUNTIME_BINDING_CLASSIFICATION_SURFACE_RELATIVE_TO_PYTHON_PATHLIB_JSON_SHA1_ROOT_SEMANTICS",
+  "expected_error_kinds": [
+    "CURRENT_RUNTIME_BLOB_BINDING_MISSING_OR_INVALID",
+    "CURRENT_RUNTIME_FILE_MISSING",
+    "RUNTIME_BLOB_DRIFT",
+    "CONFLICTING_CURRENT_RUNTIME_BINDINGS"
+  ],
+  "expected_exceptions": [
+    "AUTHORITY_POINTER_MISSING_OR_OUTSIDE_REPO",
+    "AUTHORITY_POINTER_NOT_OBJECT"
+  ],
+  "pass_status": "PASS__CURRENT_RUNTIME_BYTE_BINDINGS_COHERENT",
+  "fail_status": "OPEN__CURRENT_RUNTIME_BYTE_BINDING_DRIFT",
+  "projection_fields": [
+    "pass",
+    "status",
+    "runtime_binding_reference_count",
+    "current_binding_count",
+    "superseded_binding_count",
+    "current_unique_runtime_path_count",
+    "superseded_unique_runtime_path_count",
+    "drift_count",
+    "missing_blob_binding_count",
+    "missing_runtime_file_count",
+    "conflicting_current_path_count",
+    "byte_binding_coherence_proved",
+    "semantic_refinement_proved",
+    "runtime_reachability_proved",
+    "terminal_authority",
+    "terminal_credit_delta"
+  ],
+  "branch_cases": [
+    {
+      "id": "NO_RUNTIME_BINDINGS_PASS",
+      "expected": {
+        "pass": true,
+        "status": "PASS__CURRENT_RUNTIME_BYTE_BINDINGS_COHERENT",
+        "runtime_binding_reference_count": 0,
+        "current_binding_count": 0,
+        "superseded_binding_count": 0,
+        "current_unique_runtime_path_count": 0,
+        "superseded_unique_runtime_path_count": 0,
+        "drift_count": 0,
+        "missing_blob_binding_count": 0,
+        "missing_runtime_file_count": 0,
+        "conflicting_current_path_count": 0,
+        "byte_binding_coherence_proved": true,
+        "semantic_refinement_proved": false,
+        "runtime_reachability_proved": false,
+        "terminal_authority": false,
+        "terminal_credit_delta": 0
+      },
+      "error_kinds": []
+    },
+    {
+      "id": "EXACT_CURRENT_PASS",
+      "expected": {
+        "pass": true,
+        "status": "PASS__CURRENT_RUNTIME_BYTE_BINDINGS_COHERENT",
+        "runtime_binding_reference_count": 1,
+        "current_binding_count": 1,
+        "superseded_binding_count": 0,
+        "current_unique_runtime_path_count": 1,
+        "superseded_unique_runtime_path_count": 0,
+        "drift_count": 0,
+        "missing_blob_binding_count": 0,
+        "missing_runtime_file_count": 0,
+        "conflicting_current_path_count": 0,
+        "byte_binding_coherence_proved": true,
+        "semantic_refinement_proved": false,
+        "runtime_reachability_proved": false,
+        "terminal_authority": false,
+        "terminal_credit_delta": 0
+      },
+      "error_kinds": []
+    },
+    {
+      "id": "SUPERSEDED_STALE_IGNORED",
+      "expected": {
+        "pass": true,
+        "status": "PASS__CURRENT_RUNTIME_BYTE_BINDINGS_COHERENT",
+        "runtime_binding_reference_count": 2,
+        "current_binding_count": 1,
+        "superseded_binding_count": 1,
+        "current_unique_runtime_path_count": 1,
+        "superseded_unique_runtime_path_count": 1,
+        "drift_count": 0,
+        "missing_blob_binding_count": 0,
+        "missing_runtime_file_count": 0,
+        "conflicting_current_path_count": 0,
+        "byte_binding_coherence_proved": true,
+        "semantic_refinement_proved": false,
+        "runtime_reachability_proved": false,
+        "terminal_authority": false,
+        "terminal_credit_delta": 0
+      },
+      "error_kinds": []
+    },
+    {
+      "id": "STALE_CURRENT_DRIFT",
+      "expected": {
+        "pass": false,
+        "status": "OPEN__CURRENT_RUNTIME_BYTE_BINDING_DRIFT",
+        "runtime_binding_reference_count": 1,
+        "current_binding_count": 1,
+        "superseded_binding_count": 0,
+        "current_unique_runtime_path_count": 1,
+        "superseded_unique_runtime_path_count": 0,
+        "drift_count": 1,
+        "missing_blob_binding_count": 0,
+        "missing_runtime_file_count": 0,
+        "conflicting_current_path_count": 0,
+        "byte_binding_coherence_proved": false,
+        "semantic_refinement_proved": false,
+        "runtime_reachability_proved": false,
+        "terminal_authority": false,
+        "terminal_credit_delta": 0
+      },
+      "error_kinds": [
+        "RUNTIME_BLOB_DRIFT"
+      ]
+    },
+    {
+      "id": "MISSING_BLOB_BINDING",
+      "expected": {
+        "pass": false,
+        "status": "OPEN__CURRENT_RUNTIME_BYTE_BINDING_DRIFT",
+        "runtime_binding_reference_count": 1,
+        "current_binding_count": 1,
+        "superseded_binding_count": 0,
+        "current_unique_runtime_path_count": 1,
+        "superseded_unique_runtime_path_count": 0,
+        "drift_count": 0,
+        "missing_blob_binding_count": 1,
+        "missing_runtime_file_count": 0,
+        "conflicting_current_path_count": 0,
+        "byte_binding_coherence_proved": false,
+        "semantic_refinement_proved": false,
+        "runtime_reachability_proved": false,
+        "terminal_authority": false,
+        "terminal_credit_delta": 0
+      },
+      "error_kinds": [
+        "CURRENT_RUNTIME_BLOB_BINDING_MISSING_OR_INVALID"
+      ]
+    },
+    {
+      "id": "MISSING_RUNTIME_FILE",
+      "expected": {
+        "pass": false,
+        "status": "OPEN__CURRENT_RUNTIME_BYTE_BINDING_DRIFT",
+        "runtime_binding_reference_count": 1,
+        "current_binding_count": 1,
+        "superseded_binding_count": 0,
+        "current_unique_runtime_path_count": 1,
+        "superseded_unique_runtime_path_count": 0,
+        "drift_count": 0,
+        "missing_blob_binding_count": 0,
+        "missing_runtime_file_count": 1,
+        "conflicting_current_path_count": 0,
+        "byte_binding_coherence_proved": false,
+        "semantic_refinement_proved": false,
+        "runtime_reachability_proved": false,
+        "terminal_authority": false,
+        "terminal_credit_delta": 0
+      },
+      "error_kinds": [
+        "CURRENT_RUNTIME_FILE_MISSING"
+      ]
+    },
+    {
+      "id": "CONFLICTING_CURRENT_BINDINGS",
+      "expected": {
+        "pass": false,
+        "status": "OPEN__CURRENT_RUNTIME_BYTE_BINDING_DRIFT",
+        "runtime_binding_reference_count": 2,
+        "current_binding_count": 2,
+        "superseded_binding_count": 0,
+        "current_unique_runtime_path_count": 1,
+        "superseded_unique_runtime_path_count": 0,
+        "drift_count": 1,
+        "missing_blob_binding_count": 0,
+        "missing_runtime_file_count": 0,
+        "conflicting_current_path_count": 1,
+        "byte_binding_coherence_proved": false,
+        "semantic_refinement_proved": false,
+        "runtime_reachability_proved": false,
+        "terminal_authority": false,
+        "terminal_credit_delta": 0
+      },
+      "error_kinds": [
+        "RUNTIME_BLOB_DRIFT",
+        "CONFLICTING_CURRENT_RUNTIME_BINDINGS"
+      ]
+    },
+    {
+      "id": "DUPLICATE_IDENTICAL_BINDINGS_PASS",
+      "expected": {
+        "pass": true,
+        "status": "PASS__CURRENT_RUNTIME_BYTE_BINDINGS_COHERENT",
+        "runtime_binding_reference_count": 2,
+        "current_binding_count": 2,
+        "superseded_binding_count": 0,
+        "current_unique_runtime_path_count": 1,
+        "superseded_unique_runtime_path_count": 0,
+        "drift_count": 0,
+        "missing_blob_binding_count": 0,
+        "missing_runtime_file_count": 0,
+        "conflicting_current_path_count": 0,
+        "byte_binding_coherence_proved": true,
+        "semantic_refinement_proved": false,
+        "runtime_reachability_proved": false,
+        "terminal_authority": false,
+        "terminal_credit_delta": 0
+      },
+      "error_kinds": []
+    },
+    {
+      "id": "INHERITED_STATUS_SUPERSEDED",
+      "expected": {
+        "pass": true,
+        "status": "PASS__CURRENT_RUNTIME_BYTE_BINDINGS_COHERENT",
+        "runtime_binding_reference_count": 1,
+        "current_binding_count": 0,
+        "superseded_binding_count": 1,
+        "current_unique_runtime_path_count": 0,
+        "superseded_unique_runtime_path_count": 1,
+        "drift_count": 0,
+        "missing_blob_binding_count": 0,
+        "missing_runtime_file_count": 0,
+        "conflicting_current_path_count": 0,
+        "byte_binding_coherence_proved": true,
+        "semantic_refinement_proved": false,
+        "runtime_reachability_proved": false,
+        "terminal_authority": false,
+        "terminal_credit_delta": 0
+      },
+      "error_kinds": []
+    },
+    {
+      "id": "INHERITED_SUPERSEDED_BY",
+      "expected": {
+        "pass": true,
+        "status": "PASS__CURRENT_RUNTIME_BYTE_BINDINGS_COHERENT",
+        "runtime_binding_reference_count": 1,
+        "current_binding_count": 0,
+        "superseded_binding_count": 1,
+        "current_unique_runtime_path_count": 0,
+        "superseded_unique_runtime_path_count": 1,
+        "drift_count": 0,
+        "missing_blob_binding_count": 0,
+        "missing_runtime_file_count": 0,
+        "conflicting_current_path_count": 0,
+        "byte_binding_coherence_proved": true,
+        "semantic_refinement_proved": false,
+        "runtime_reachability_proved": false,
+        "terminal_authority": false,
+        "terminal_credit_delta": 0
+      },
+      "error_kinds": []
+    },
+    {
+      "id": "NON_RUNTIME_PATH_IGNORED",
+      "expected": {
+        "pass": true,
+        "status": "PASS__CURRENT_RUNTIME_BYTE_BINDINGS_COHERENT",
+        "runtime_binding_reference_count": 0,
+        "current_binding_count": 0,
+        "superseded_binding_count": 0,
+        "current_unique_runtime_path_count": 0,
+        "superseded_unique_runtime_path_count": 0,
+        "drift_count": 0,
+        "missing_blob_binding_count": 0,
+        "missing_runtime_file_count": 0,
+        "conflicting_current_path_count": 0,
+        "byte_binding_coherence_proved": true,
+        "semantic_refinement_proved": false,
+        "runtime_reachability_proved": false,
+        "terminal_authority": false,
+        "terminal_credit_delta": 0
+      },
+      "error_kinds": []
+    }
+  ],
+  "exception_cases": [
+    {
+      "id": "AUTHORITY_POINTER_MISSING",
+      "exception": "AUTHORITY_POINTER_MISSING_OR_OUTSIDE_REPO"
+    },
+    {
+      "id": "AUTHORITY_POINTER_NOT_OBJECT",
+      "exception": "AUTHORITY_POINTER_NOT_OBJECT"
+    }
+  ],
+  "root_assumptions": [
+    "CPYTHON_LANGUAGE_SEMANTICS",
+    "PATHLIB_RESOLVE_AND_FILE_READ_SEMANTICS",
+    "JSON_PARSER_SEMANTICS",
+    "SHA1_GIT_BLOB_IDENTITY_SEMANTICS"
+  ],
+  "claim": "BRANCH_SURFACE_SEMANTIC_REFINEMENT_ONLY",
+  "repository_wide_refinement": false,
+  "transitive_dependency_refinement": false,
+  "terminal_credit_delta": 0
+}
