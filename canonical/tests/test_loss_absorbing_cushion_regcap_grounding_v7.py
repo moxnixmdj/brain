@@ -28,6 +28,17 @@ def unresolved_v6():
     }
 
 
+def with_request(base):
+    out = dict(base)
+    out["minimum_policy_changing_information_request"] = {
+        "pass": True,
+        "status": "PASS__MINIMUM_FOUR_WAY_POLICY_CHANGING_INFORMATION_REQUEST",
+        "minimum_observation_count": 1,
+    }
+    out["minimum_policy_changing_information_request_available"] = True
+    return out
+
+
 def pair(selected=None, *, fail=False):
     if fail:
         return {"status": "FAIL_CLOSED", "pass": False, "reason": "SOURCE_DRIFT"}
@@ -49,7 +60,7 @@ def pair(selected=None, *, fail=False):
 
 class Tests(unittest.TestCase):
     def test_unanimous_mrel_across_all_three_pairs_lifts_to_four_way_relative_selection(self):
-        with patch.object(v7.v6, "ground", return_value=unresolved_v6()), patch.object(
+        with patch.object(v7.v6, "ground", return_value=with_request(unresolved_v6())), patch.object(
             v7.regpair, "resolve_relative", return_value=pair(mrel.MREL)
         ) as rp, patch.object(
             v7.tlacpair, "resolve_relative", return_value=pair(mrel.MREL)
@@ -66,6 +77,12 @@ class Tests(unittest.TestCase):
         self.assertFalse(out["terminal_authority"])
         self.assertEqual(rp.call_count, 2)
         tp.assert_called_once()
+        self.assertFalse(out["minimum_policy_changing_information_request_available"])
+        self.assertNotIn("minimum_policy_changing_information_request", out)
+        self.assertEqual(
+            out["minimum_policy_changing_information_request_superseded_by"],
+            "UNANIMOUS_THREE_PAIR_MREL_LIFT",
+        )
 
     def test_one_open_pair_preserves_four_way_ambiguity(self):
         def resolve(*args, **kwargs):
@@ -73,7 +90,7 @@ class Tests(unittest.TestCase):
                 return pair(None)
             return pair(mrel.MREL)
 
-        with patch.object(v7.v6, "ground", return_value=unresolved_v6()), patch.object(
+        with patch.object(v7.v6, "ground", return_value=with_request(unresolved_v6())), patch.object(
             v7.regpair, "resolve_relative", side_effect=resolve
         ), patch.object(v7.tlacpair, "resolve_relative", return_value=pair(mrel.MREL)):
             out = v7.ground("x", source_id="s", start=0, end=1)
@@ -85,6 +102,8 @@ class Tests(unittest.TestCase):
             "OPEN__FOUR_WAY_CONTEXT_REMAINS_UNRESOLVED_AFTER_ALL_PAIR_REPLAY",
         )
         self.assertEqual(out["bound_rival_surviving_concept_ids"], FOUR)
+        self.assertTrue(out["minimum_policy_changing_information_request_available"])
+        self.assertIn("minimum_policy_changing_information_request", out)
 
     def test_mixed_mrel_and_regcap_pair_selection_fails_closed(self):
         calls = iter([pair(regcap.CCOB), pair(mrel.MREL)])
@@ -98,7 +117,7 @@ class Tests(unittest.TestCase):
         self.assertEqual(out["reason"], "CONFLICTING_ALL_PAIR_CONTEXT_SELECTIONS")
 
     def test_any_pair_fail_closed_propagates_fail_closed(self):
-        with patch.object(v7.v6, "ground", return_value=unresolved_v6()), patch.object(
+        with patch.object(v7.v6, "ground", return_value=with_request(unresolved_v6())), patch.object(
             v7.regpair, "resolve_relative", side_effect=[pair(fail=True), pair(mrel.MREL)]
         ), patch.object(v7.tlacpair, "resolve_relative", return_value=pair(mrel.MREL)):
             out = v7.ground("x", source_id="s", start=0, end=1)
@@ -106,6 +125,12 @@ class Tests(unittest.TestCase):
         self.assertFalse(out["pass"])
         self.assertEqual(out["status"], "FAIL_CLOSED")
         self.assertIn("PAIR_REPLAY_FAIL_CLOSED", out["reason"])
+        self.assertFalse(out["minimum_policy_changing_information_request_available"])
+        self.assertNotIn("minimum_policy_changing_information_request", out)
+        self.assertEqual(
+            out["minimum_policy_changing_information_request_suppressed_by"],
+            "V7_FAIL_CLOSED",
+        )
 
     def test_existing_v6_relative_selection_bypasses_all_pair_lift(self):
         base = unresolved_v6()
