@@ -415,5 +415,12 @@
     "empty_or_foreign_receipt_authority": false,
     "stored_receipt_can_override_verifier_rejection": false,
     "terminal_credit_delta": 0
+  },
+  "r4_snapshot_coherence_guard": {
+    "status": "REQUIRED",
+    "rule": "ROOT_THEOREM_EMBEDDED_CURRENT_REGISTRY_AND_MISSION_SNAPSHOT_MUST_MATCH_LIVE_CANONICAL_FILES__PROPERTY_SCOPED_R4_CLOSURE_MUST_NOT_INFLATE_GLOBAL_TERMINAL_CREDIT",
+    "test_path": "canonical/tests/test_coverage_root_snapshot_coherence_v1.py",
+    "test_git_blob_sha": "3d11f63757426646544a8b42ec64dac3f3caa1bd",
+    "terminal_credit_delta": 0
   }
 }
