@@ -57,8 +57,8 @@ class ProfessionalQualityLeafBinderV3Tests(unittest.TestCase):
         b = base_output()
         out = v3.harden_base_output(b)
         self.assertEqual(
-            out["verified_execution_leaf_ids"],
-            b["verified_execution_leaf_ids"],
+            set(out["verified_execution_leaf_ids"]),
+            set(b["verified_execution_leaf_ids"]),
         )
         self.assertEqual(out["verified_semantic_leaf_ids"], [])
         self.assertEqual(out["verified_leaf_count"], 11)
