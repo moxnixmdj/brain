@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_FIRST_SCHEDULER_REUSE_FIRST_RUNTIME_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_BRANCH_BYTES__PYCOMPILE__30_OF_30__REUSE_FIRST_RUNTIME_ENFORCED__ZERO_CREDIT",
+  "branch": "successor/reuse-first-scheduler-runtime-enforcement-20261010-v1",
+  "base_commit": "9532fe217b629c6547241bb66bfe7002cdcaa235",
+  "exact_blobs": {
+    "scheduler_runtime": "e3cf20670e5e0bf79050ec2e7e28224ab126cf05",
+    "existing_scheduler_tests": "5ac60feb67c4d0424579b5a47902e86bca5a15b3",
+    "reuse_first_tests": "4ea4ae0630ed543e59b86c4075fe6129402c63d1",
+    "scheduler_activation_v6": "b815b4025caacc7d7623e1ccc36ebccc0ee50547",
+    "current_development_scheduler": "1d800d9a34c4433b5cfab8c2afe8ca5fb83a224d",
+    "current_mission_objective": "0a42bb6d77df92f296a9838628962c14efa67f02",
+    "r2_open_world_policy_v3": "49198323f13c93194f3a1703fa7bade5cea79a8b",
+    "reuse_first_policy": "e230e9c243ac79b7909dac86071b5cad536f1666",
+    "patch_spec": "ebf37f612f5f740f1d569f31418c8210a5fbdab5"
+  },
+  "independent_replay": {
+    "environment": "SPRITE__brain-reached-escape-boundary-verify-20261010",
+    "py_compile": "PASS",
+    "test_modules": [
+      "canonical.tests.test_capability_first_scheduler_v1",
+      "canonical.tests.test_capability_first_scheduler_reuse_first_v1"
+    ],
+    "tests_passed": 30,
+    "tests_failed": 0,
+    "test_errors": 0
+  },
+  "verified_behavior": [
+    "EXPLICIT_NEW_PRIMITIVE_WITHOUT_NEW_PRIMITIVE_MODE_IS_DEMOTED_AND_SCORES_ZERO",
+    "EXPLICIT_NEW_PRIMITIVE_WITHOUT_EXISTING_MECHANISM_SEARCH_IS_DEMOTED_AND_SCORES_ZERO",
+    "EACH_SEARCHED_MECHANISM_REQUIRES_MATCHING_NONEMPTY_SOUNDNESS_PRESERVING_REJECTION_RECORD",
+    "COMPLETE_VERIFIED_REUSE_EXHAUSTION_REMAINS_ELIGIBLE_SUBJECT_TO_EXISTING_GATES",
+    "LEGACY_GENERAL_CAPABILITY_ROWS_PRESERVE_EXISTING_BEHAVIOR",
+    "NON_NEW_PRIMITIVE_RESOLUTION_MODE_DOES_NOT_CREATE_NEW_GATE",
+    "COMPLETE_REUSE_RECEIPT_CANNOT_OVERRIDE_OPEN_WORLD_WAKE_GATE",
+    "BENCHMARK_BOOKKEEPING_REMAINS_DEMOTED",
+    "PRIMARY_CAPABILITY_RESOURCE_SCORE_ORDERING_UNCHANGED",
+    "SHARED_CAUSE_FANOUT_REMAINS_SECONDARY_TIE_BREAK",
+    "CHECKPOINT_AUDIT_REMAINS_TERTIARY",
+    "V6_PRESERVES_TERMINAL_AUTOPILOT_DISPATCH_CONTROL",
+    "CURRENT_POINTER_V6_RUNTIME_AND_R2_POLICY_CONTENT_ADDRESSES_MATCH_EXACT_BYTES",
+    "MISSION_POINTER_BINDS_V6_AND_EXACT_RUNTIME_BYTES"
+  ],
+  "currentness_repairs": [
+    "V5_GOVERNANCE_DEFINED_REUSE_FIRST_BUT_RUNTIME_ENFORCEMENT_WAS_NOT_MECHANICAL",
+    "CURRENT_DEVELOPMENT_SCHEDULER_AND_MISSION_HAD_DRIFTED_BACK_TO_V4",
+    "R2_OPEN_WORLD_POLICY_V2_HASHED_THE_OLD_SCHEDULER_RUNTIME_AND_WAS_SUPERSEDED_BY_V3"
+  ],
+  "nonclaims": [
+    "NO_EXECUTION_AUTHORITY",
+    "NO_PROMOTION_AUTHORITY",
+    "NO_CAPABILITY_ACCEPTANCE_OR_OWNERSHIP_CREDIT",
+    "NO_OPEN_WORLD_WAKE_GATE_OVERRIDE",
+    "NO_GLOBAL_ESCAPE_PROGRESS_TOTALITY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
