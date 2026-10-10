@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_COVERAGE_COMPLETENESS_ROOT_CERTIFICATE_REGISTRY_V1",
-  "date": "2026-10-09",
-  "status": "ACTIVE_OPEN_REGISTRY__SINGLE_FROZEN_CLAIM_REQUIRED_BEFORE_ANY_PROVED_SLOT__THREE_ROOT_CERTIFICATE_OBLIGATIONS__ZERO_PROVED__ZERO_CREDIT",
+  "date": "2026-10-10",
+  "status": "ACTIVE__FROZEN_R3_PROMOTION_SAFETY_CLAIM__THREE_OPEN_CC_ROOT_CERTIFICATE_OBLIGATIONS__ZERO_PROVED__ZERO_CREDIT",
   "namespace": "PROJECT_BRAIN_COVERAGE_COMPLETENESS_ROOTS_V1",
   "mission_binding": {
     "pointer_path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
@@ -75,7 +75,21 @@
     "terminal_credit_delta": 0
   },
   "registry_scope": "SINGLE_ACTIVE_FROZEN_CERTIFICATION_CLAIM_AT_A_TIME",
-  "active_claim": null,
+  "active_claim": {
+    "claim_id": "e1c519109c4b2c46a9225686fc2c5c5490564d1cc62d5c6ff3c6c436bfca4314",
+    "claim_kind": "PROPERTY_CERTIFICATE",
+    "mission_blob_sha": "6ab2147306a138f9ea327d8e19cb4a5bc76e89df",
+    "scope_sha256": "144e629c2e3315abe8e31eb10aaa8edd28ab7799796152484602f88ba0895e51",
+    "target_predicate_sha256": "2634d67900467b46dd6e5e8c0c6472d4215963a2467b7da2df5a4bc39e8a2755",
+    "semantics_sha256": "d08683f6df6d51ce4c3c37853c6bfc20ceec350a31e8a6d65421d83d203cdb9b",
+    "epoch": "R4_R3_PROMOTION_SAFETY_EPOCH_20261010_V1",
+    "authority_id": "PROJECT_BRAIN_R4_COVERAGE_COMPLETENESS_AUTHORITY_V1",
+    "claim_reference": {
+      "path": "canonical/governance/COVERAGE_COMPLETENESS_FROZEN_CLAIM_R3_PROMOTION_SAFETY_20261010_V1.json",
+      "git_blob_sha": "ace6ad8b44c3b571746f3f229ca76d68a88c3dab"
+    },
+    "terminal_credit_delta": 0
+  },
   "claim_binding_policy": {
     "claim_scope_law": "canonical/governance/COVERAGE_COMPLETENESS_CLAIM_SCOPE_V1.json",
     "claim_guard": "canonical/runtime/coverage_claim_scope_guard_v1.py",
@@ -99,5 +113,5 @@
     "semantic_verifier_must_be_executed_by_r4_authority_path": true,
     "independent_verification_must_bind_certificate_verifier_and_rerun_result": true
   },
-  "next": "FREEZE_ONE_VALID_CERTIFICATION_CLAIM__THEN_PROVE_OR_FALSIFY_CC_R3_CC_R1_CC_R2_WITH_EXECUTABLE_SEMANTIC_VERIFIERS_FOR_THAT_EXACT_CLAIM__NO_GLOBAL_OR_CROSS_CLAIM_PROMOTION"
+  "next": "PROVE_OR_FALSIFY_CC_R3_TERMINAL_CLOSURE_V1_FOR_ACTIVE_CLAIM_WITH_CONTENT_ADDRESSED_EXECUTABLE_SEMANTIC_VERIFIER__THEN_CC_R1__THEN_CC_R2__NO_GLOBAL_OR_CROSS_CLAIM_PROMOTION"
 }
