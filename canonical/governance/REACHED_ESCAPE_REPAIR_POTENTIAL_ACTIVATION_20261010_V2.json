@@ -1,0 +1,91 @@
+{
+  "schema": "PROJECT_BRAIN_REACHED_ESCAPE_REPAIR_POTENTIAL_ACTIVATION_20261010_V2",
+  "date": "2026-10-10",
+  "status": "ACTIVE_CANDIDATE__LIVE_CERTIFIED_CONSTRUCTOR_PLUS_SHARED_WELL_FOUNDED_REPAIR_DESCENT__GLOBAL_REPAIR_ACQUIRABILITY_OPEN__ZERO_CREDIT",
+  "mission_relation": "LOAD_BEARING_REDUCTION_FOR_ESCAPE_PROGRESS_TOTALITY",
+  "runtime": {
+    "path": "canonical/runtime/reached_escape_repair_potential_v1.py",
+    "git_blob_sha": "865848d3dd2b61e2385934868d6106e2b04dedcd"
+  },
+  "dependencies": {
+    "reached_state_kernel": {
+      "path": "canonical/runtime/reached_escape_state_kernel_v1.py",
+      "git_blob_sha": "b1435d90f039bd1d809ff364c325c3d0858d3afd"
+    },
+    "finite_totality_certificate": {
+      "path": "canonical/runtime/reached_escape_finite_totality_certificate_v1.py",
+      "git_blob_sha": "85487335b7e774ac9084b34c60e0175842771036"
+    },
+    "live_certified_constructor": {
+      "activation_path": "canonical/governance/CERTIFIED_REACHED_ESCAPE_STATE_FABRIC_ACTIVATION_20261010_V1.json",
+      "activation_git_blob_sha": "104bc68e1a35a7d26cf449023e6aae7fd77b8bbd",
+      "fabric_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
+      "fabric_git_blob_sha": "b1e68fc1627954706de686d2db297efee08dd6f8",
+      "constructor_path": "canonical/runtime/certified_reached_escape_state_constructor_v1.py",
+      "constructor_git_blob_sha": "5cfce3cd753877ecd37d37082f2acd3e4883bfbf"
+    }
+  },
+  "tests": {
+    "path": "canonical/tests/test_reached_escape_repair_potential_v1.py",
+    "git_blob_sha": "9cd5a3e93ef90e2d3afdb3f5a45048e7e4da7afa",
+    "current_replay": "11_OF_11_PASS"
+  },
+  "verification": {
+    "path": "canonical/verification/REACHED_ESCAPE_REPAIR_POTENTIAL_VERIFY_20261010_V2.json",
+    "git_blob_sha": "694f1ff6e3d453c488365510ad671b08eb635056"
+  },
+  "composed_reduction": {
+    "constructor_truth": "EVERY_LIVE_REACHED_ESCAPE_STATE_REQUEST_IS_EITHER_CERTIFIED_FOR_FINITE_FUTURE_TOTALITY_OR_REJECTED_WITH_A_DETERMINISTIC_CONTENT_ADDRESSED_REPAIR_OBLIGATION",
+    "progress_truth": "EVERY_ACCEPTED_MONOTONE_REPAIR_THAT_STRICTLY_DECREASES_THE_CANONICAL_POTENTIAL_IS_WELL_FOUNDED_AND_CAN_OCCUR_AT_MOST_INITIAL_POTENTIAL_TIMES_BEFORE_CERTIFICATE_ELIGIBILITY",
+    "surviving_global_premise": "FOR_EVERY_REPAIR_REQUIRED_STATE_ON_ACTUAL_MISSION_SUPPORT__A_SOUND_AUTHENTICATED_REPAIR_THAT_STRICTLY_DECREASES_POTENTIAL_IS_ACQUIRABLE__OR_THE_STATE_IS_PROVABLY_OUTSIDE_ACTUAL_TARGET_SUPPORT",
+    "prior_two_gap_story_collapsed": true,
+    "global_repair_acquirability_proved": false,
+    "global_escape_progress_totality_proved": false
+  },
+  "theorem": {
+    "potential": "U*(N+1)+SUM_CONFLICT_CLASSES(|C|-1)",
+    "definitions": {
+      "U": "COUNT_OF_REGIONS_WITH_NO_AUTHENTICATED_SAFE_ADEQUATE_POLICY",
+      "N": "FIXED_FINITE_REACHED_STATE_REGION_COUNT",
+      "C": "CURRENT_DISCRIMINATOR_EQUIVALENCE_CLASS_WITHOUT_A_COMMON_AUTHENTICATED_SAFE_ADEQUATE_POLICY"
+    },
+    "proved": [
+      "POTENTIAL_IS_NONNEGATIVE_INTEGER",
+      "POTENTIAL_ZERO_IFF_EXISTING_FINITE_REACHED_STATE_TOTALITY_CERTIFICATE_PASSES",
+      "MONOTONE_ADDITION_OF_AUTHENTICATED_SAFE_POLICIES_OR_AUTHENTICATED_SAFE_TRUTHFUL_COMPLETE_DISCRIMINATORS_NEVER_INCREASES_POTENTIAL",
+      "ANY_ACCEPTED_REPAIR_WITH_STRICT_POTENTIAL_DROP_IS_WELL_FOUNDED_PROGRESS",
+      "A_SEQUENCE_OF_STRICT_REPAIRS_REACHES_CERTIFICATE_ELIGIBILITY_IN_AT_MOST_INITIAL_POTENTIAL_STEPS"
+    ]
+  },
+  "scheduler_effect": {
+    "delete": [
+      "BUILD_FOUR_SEPARATE_ROW_SPECIFIC_WELL_FOUNDED_PROGRESS_MEASURES",
+      "REPROVE_FUTURE_OUTCOME_TOTALITY_AFTER_EACH_VALID_REPAIR",
+      "TREAT_REACHED_STATE_CONSTRUCTION_AND_PROGRESS_MEASURE_AS_TWO_INDEPENDENT_GLOBAL_GAPS"
+    ],
+    "preserve": [
+      "PROVE_OR_REFUTE_GLOBAL_AUTHENTICATED_REPAIR_ACQUIRABILITY_OR_SUPPORT_EXCLUSION",
+      "BIND_SPECIFIC_INTERNAL_ACTIONS_ONLY_WHERE_NEEDED_AS_PROVIDER_WITNESSES",
+      "CC_R3_AND_NORMAL_ACCEPTANCE_EXECUTION_AUTHORITY"
+    ],
+    "next": "ATTACK_GLOBAL_REPAIR_ACQUIRABILITY_BY_REPAIR_CLASS__TRUTHFUL_DISTINGUISHING_OBSERVATION__COMMON_ADEQUATE_POLICY__REGION_ADEQUATE_POLICY__WITH_SUPPORT_EXCLUSION_AS_THE_ONLY_SOUND_ALTERNATIVE"
+  },
+  "hard_nonclaims": [
+    "NO_GLOBAL_REPAIR_PROVIDER_TOTALITY",
+    "NO_GLOBAL_ESCAPE_PROGRESS_TOTALITY",
+    "NO_CC_R3_CERTIFICATE",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false
+}
