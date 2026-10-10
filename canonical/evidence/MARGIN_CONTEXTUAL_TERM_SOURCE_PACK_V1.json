@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_MARGIN_CONTEXTUAL_TERM_SOURCE_PACK_V1",
+  "scope_id": "FINANCE_MARGIN_CONTEXTUAL_TERM_IDENTITY_V1",
+  "sources": [
+    {
+      "schema": "PROJECT_BRAIN_HTTPS_SOURCE_FRAGMENT_PROJECTION_PACK_V2",
+      "source_id": "FED_2026_NET_INTEREST_MARGIN_TERMS",
+      "url": "https://www.federalreserve.gov/publications/2026-june-supervision-and-regulation-report-data-sources-terms.htm",
+      "retrieval_user_agent": "ProjectBrainSourceProjectionVerifier/2.0",
+      "fragments": [
+        {
+          "fragment_id": "FED_NET_INTEREST_MARGIN_DEFINITION",
+          "section_anchor": "Net Interest Margin",
+          "text": "Net interest margin measures a bank's yield on its interest-bearing assets after netting out interest expense.",
+          "max_chars_after_anchor": 2000
+        }
+      ]
+    },
+    {
+      "schema": "PROJECT_BRAIN_HTTPS_SOURCE_FRAGMENT_PROJECTION_PACK_V2",
+      "source_id": "CFTC_FUTURES_GLOSSARY_INITIAL_MARGIN",
+      "url": "https://www.cftc.gov/LearnAndProtect/AdvisoriesAndArticles/CFTCGlossary/index.htm",
+      "retrieval_user_agent": "ProjectBrainSourceProjectionVerifier/2.0",
+      "fragments": [
+        {
+          "fragment_id": "CFTC_INITIAL_MARGIN_DEFINITION",
+          "section_anchor": "Initial Margin",
+          "text": "Customers' funds put up as security for a guarantee of contract fulfillment at the time a futures market position is established. See Original Margin.",
+          "max_chars_after_anchor": 2000
+        }
+      ]
+    }
+  ]
+}
