@@ -1,0 +1,78 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_VERIFY_V11",
+  "date": "2026-10-10",
+  "status": "PASS__PINNED_EXACT_BYTES__PYCOMPILE__25_OF_25__TWELVE_SCOPED_CAPABILITIES__ZERO_GLOBAL_LEAF_CREDIT",
+  "pinned_main_commit": "1d866cda6334d50d5be23038d51f1dc3b64ba59e",
+  "carrier": {
+    "name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/pq-scoped12-1d866cda"
+  },
+  "exact_blobs": {
+    "runtime": "209dc1b14fc16109eb69983a9f01f46ccf885d82",
+    "tests": "3e0cd908c1c0a765fcbbd80fd3b9cc699b0833cc",
+    "registry": "58083361e2f56c7b7312f07fb5d9670eb78dc121",
+    "r8_scope": "b174a62c94d36474f0b102d37362ea9fc3adaa91",
+    "r12_scope": "4c69313ae31905f6aa379361d515dffdfb41efae",
+    "r8_runtime": "fae6d0bf2efbcb9b8fe2a2a627900889c5ec6cab",
+    "r8_source_receipt": "3965db684d7104c5829ce1fcfa8ee08d2cd42cfc",
+    "r12_runtime": "b4274a48edbe626a9ae9fd33da2f2227ca4dd5e8",
+    "r12_source_receipt": "81f7f070233b6aa1c4b491949a4c3e7aedfafd10",
+    "r12_order_verification": "1c3428b10a1205e928a87f41a7c16a8a3d17b7ca"
+  },
+  "replay": {
+    "py_compile": "PASS",
+    "tests_run": 25,
+    "tests_passed": 25,
+    "tests_failed": 0,
+    "execution_log_sha256": "3385248ea714c816a746efc7fa1ea8f5412e8814fbe1eb608bd062c306e9b9f6"
+  },
+  "admitted_scope_count": 12,
+  "admitted_roots": [
+    "R1_TARGET_SPECIFICATION",
+    "R2_CANDIDATE_SEARCH",
+    "R3_REALIZATION_OBSERVATION",
+    "R4_MEASUREMENT_CONSTRUCT",
+    "R5_EVALUATOR_REFERENCE",
+    "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+    "R7_CAUSAL_PRESCRIPTIVE",
+    "R8_POPULATION_CONTEXT_OPERATOR",
+    "R9_TEMPORAL_DEPLOYMENT",
+    "R10_ANALYSIS_DECISION",
+    "R11_ADAPTIVE_INTEGRITY_SECURITY",
+    "R12_META_COMPOSITION_CLOSURE"
+  ],
+  "new_scopes": {
+    "r8": {
+      "claim_kind": "FROZEN_512_CASE_PRE_BEACON_DELEGATION_POPULATION_BINDING",
+      "contributes_to": [
+        "PQ::R8_POPULATION_CONTEXT_OPERATOR::EXECUTION"
+      ],
+      "global_leaf_credit": false
+    },
+    "r12": {
+      "claim_kind": "FAIL_CLOSED_ASSURANCE_GRAPH_META_COMPOSITION_AND_ORDER_INDEPENDENT_DEFEATER_ROUTING",
+      "contributes_to": [
+        "PQ::R12_META_COMPOSITION_CLOSURE::EXECUTION"
+      ],
+      "global_leaf_credit": false
+    }
+  },
+  "proves": [
+    "ALL_12_PROFESSIONAL_QUALITY_ROOTS_HAVE_AT_LEAST_ONE_ADMITTED_BOUNDED_SCOPED_CAPABILITY",
+    "R8_SCOPED_POPULATION_BINDING_IS_CONTENT_ADDRESSED_AND_PREFLIGHT_BOUNDED",
+    "R12_SCOPED_META_COMPOSITION_IS_CONTENT_ADDRESSED_AND_NONAUTHORITATIVE",
+    "R8_AND_R12_STALE_SCOPE_GOVERNANCE_HASHES_FAIL_CLOSED",
+    "NO_SCOPED_CAPABILITY_AUTOMATICALLY_PROMOTES_GLOBAL_LEAF_OR_ROOT_CREDIT"
+  ],
+  "hard_nonclaims": [
+    "NO_GLOBAL_LEAF_CLOSURE",
+    "NO_GLOBAL_ROOT_CLOSURE",
+    "NO_DOMAIN_SEMANTIC_CLOSURE",
+    "NO_DOMAIN_EXECUTION_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
