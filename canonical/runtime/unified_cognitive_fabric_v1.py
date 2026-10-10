@@ -54,7 +54,7 @@ ENGINE_DESCRIPTORS = {
     "REPAIR_SYNTHESIS": "live_brain_runtime_v1.synthesize_failure_repair",
     "REPAIR_CYCLE": "live_brain_runtime_v1.execute_failure_repair_cycle",
     "UNIVERSAL_ESCAPE": "universal_escape_resolver_v1.resolve",
-    "REACHED_ESCAPE_STATE": "reached_escape_state_kernel_v1.evaluate",
+    "REACHED_ESCAPE_STATE": "certified_reached_escape_state_constructor_v1.construct",
     "CERTIFIED_ROUTE": "certificate_gated_selected_route_runtime_entrypoint_v5",
     "TERMINAL_AUTOPILOT": "terminal_autopilot_v1",
     "TERMINAL_ROOT": "terminal_root_decision_gate_v1.evaluate",
