@@ -59,7 +59,10 @@ class EscapeProgressAuditV5CurrentnessTests(unittest.TestCase):
             "git_blob_sha":"a"*40,
             "byte_sha256":"b"*64,
         }
-        verify={"current_evidence_subject":dict(current)}
+        verify={
+            "current_route_semantics_verified": True,
+            "current_evidence_subject":dict(current),
+        }
         self.assertEqual(v5._current_evidence_verification_errors(verify,current),[])
         verify["current_evidence_subject"]["git_blob_sha"]="c"*40
         self.assertIn(
