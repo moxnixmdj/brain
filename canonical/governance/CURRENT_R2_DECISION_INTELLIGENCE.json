@@ -2269,6 +2269,7 @@
     "primary_internal_unsolved_count_delta": 0,
     "finance_tail_closed": false,
     "acceptance_credit_delta": 0,
-    "terminal_credit_delta": 0
+    "terminal_credit_delta": 0,
+    "reconciliation_git_blob_sha": "68c0223695ce9c5f9770d10027525f90a16d227a"
   }
 }
