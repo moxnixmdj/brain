@@ -105,7 +105,13 @@ def preflight(request:Mapping[str,Any],*,repo_root=None)->dict[str,Any]:
         if ip==op: raise ValueError("INPUT_OUTPUT_COLLISION")
         raw,problem=_load(ip)
         psha=sha256(raw).hexdigest()
-        problem,overlay_meta=semantic_overlay.apply(\n            problem,request.get("semantic_claim_overlay"),input_sha256=psha\n        )\n        overlay_contract=semantic_overlay.contract(\n            problem,input_path=inp,input_sha256=psha\n        )\n        result,checked=_material(problem)
+        problem,overlay_meta=semantic_overlay.apply(
+            problem,request.get("semantic_claim_overlay"),input_sha256=psha
+        )
+        overlay_contract=semantic_overlay.contract(
+            problem,input_path=inp,input_sha256=psha
+        )
+        result,checked=_material(problem)
 
         if result.get("pass") is not True:
             return {
@@ -113,7 +119,12 @@ def preflight(request:Mapping[str,Any],*,repo_root=None)->dict[str,Any]:
                 "matched":False,
                 "route_id":ROUTE_ID,
                 "direct_route_semantic_open":True,
-                "effect_status":result.get("status"),\n                "input_path":inp,"input_sha256":psha,"output_path":out,\n                "semantic_claim_overlay_contract":deepcopy(overlay_contract),\n                "semantic_claim_overlay_result":deepcopy(overlay_meta),
+                "effect_status":result.get("status"),
+                "input_path":inp,"input_sha256":psha,"output_path":out,
+            "semantic_claim_overlay_contract":deepcopy(overlay_contract),
+            "semantic_claim_overlay_result":deepcopy(overlay_meta),
+                "semantic_claim_overlay_contract":deepcopy(overlay_contract),
+                "semantic_claim_overlay_result":deepcopy(overlay_meta),
                 "open_lattice_atoms":deepcopy(
                     result.get("open_lattice_atoms") or []
                 ),
@@ -137,14 +148,15 @@ def preflight(request:Mapping[str,Any],*,repo_root=None)->dict[str,Any]:
         ids=list((contract.get("acceptance_contract") or {}).get("required_obligation_ids") or [])
         if not ids: raise ValueError("RAW_ACCEPTANCE_OBLIGATIONS_MISSING")
         gsha=sha256(goal.encode("utf-8")).hexdigest()
-        psha=sha256(raw).hexdigest()\n        return {
+        psha=sha256(raw).hexdigest()
+        return {
             **_base("DIRECT_ADEQUACY_ROUTE_MATCHED"),
             "matched":True,"route_id":ROUTE_ID,
             "capability_id":CAPABILITY_ID,
             "verifier_capability_id":VERIFIER_CAPABILITY_ID,
             "goal_sha256":gsha,
             "policy_id":"R2_CROSS_DOCUMENT_SEMANTIC_EDGE_LATTICE::"+gsha+"::"+psha,
-            "input_path":inp,"input_sha256":psha,"output_path":out,\n            "semantic_claim_overlay_contract":deepcopy(overlay_contract),\n            "semantic_claim_overlay_result":deepcopy(overlay_meta),
+            "input_path":inp,"input_sha256":psha,"output_path":out,
             "effective_value":deepcopy(result.get("effective_value")),
             "world_count":result.get("world_count"),
             "query_relative_effect_semantics_finite":True,
@@ -182,7 +194,12 @@ def run(request:Mapping[str,Any],*,repo_root=None)->dict[str,Any]:
         before=ip.read_bytes()
         if sha256(before).hexdigest()!=pf["input_sha256"]:
             raise RuntimeError("CASE_DRIFT_BEFORE_EXECUTION")
-        problem=json.loads(before.decode("utf-8"))\n        problem,overlay_meta=semantic_overlay.apply(\n            problem,request.get("semantic_claim_overlay"),input_sha256=pf["input_sha256"]\n        )\n        result=producer.evaluate(problem)
+        problem=json.loads(before.decode("utf-8"))
+        problem,overlay_meta=semantic_overlay.apply(
+            problem,request.get("semantic_claim_overlay"),
+            input_sha256=pf["input_sha256"],
+        )
+        result=producer.evaluate(problem)
         if result.get("pass") is not True:
             raise RuntimeError("SEMANTIC_EDGE_LATTICE_NO_LONGER_PROVES_COMMON_VALUE")
         checked=verifier.verify(problem,result)
@@ -215,7 +232,9 @@ def run(request:Mapping[str,Any],*,repo_root=None)->dict[str,Any]:
             "goal_sha256":pf["goal_sha256"],
             "input_path":pf["input_path"],"input_sha256":pf["input_sha256"],
             "output_path":pf["output_path"],
-            "output_sha256":sha256(op.read_bytes()).hexdigest(),\n            "semantic_claim_overlay_result":deepcopy(overlay_meta),\n            "overlay_candidate_claims_were_authority":False,
+            "output_sha256":sha256(op.read_bytes()).hexdigest(),
+            "semantic_claim_overlay_result":deepcopy(overlay_meta),
+            "overlay_candidate_claims_were_authority":False,
             "effective_value":deepcopy(result["effective_value"]),
             "world_count":result["world_count"],
             "query_relative_effect_semantics_finite":True,
@@ -230,8 +249,10 @@ def run(request:Mapping[str,Any],*,repo_root=None)->dict[str,Any]:
             "retry_by_other_route_authorized":False,
             "source_immutability_verified":True,
             "authority_boundary":(
-                "DIRECT_ROUTE_USES_ONLY_SOURCE_ALIGNED_FIELDS_AND_BRAIN_OWNED_"\n                "REGISTERED_SEMANTIC_EDGE_AUTHORITIES;HASH_BOUND_ADDITIVE_OVERLAY_"\n                "CLAIMS_HAVE_ZERO_AUTHORITY_UNTIL_SOURCE_PROVED;UNSUPPORTED_EDGES_REMAIN_TOP;"\n                "SOURCE_BYTES_REMAIN_IMMUTABLE;"
-                "REGISTERED_SEMANTIC_EDGE_AUTHORITIES;UNSUPPORTED_EDGES_REMAIN_TOP"
+                "DIRECT_ROUTE_USES_ONLY_SOURCE_ALIGNED_FIELDS_AND_BRAIN_OWNED_"
+                "REGISTERED_SEMANTIC_EDGE_AUTHORITIES;HASH_BOUND_ADDITIVE_OVERLAY_"
+                "CLAIMS_HAVE_ZERO_AUTHORITY_UNTIL_SOURCE_PROVED;UNSUPPORTED_EDGES_"
+                "REMAIN_TOP;SOURCE_BYTES_REMAIN_IMMUTABLE"
             ),
         }
     except Exception as exc:
