@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_R12_C3_LOSSLESS_COMPOSITION_PROJECTION_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_SPRITE__PYCOMPILE__6_OF_6__R12_C3_ROOT_BINDING_COMPOSITION_PROJECTION_LOSSLESS_AND_SCOPE_PRESERVING__ZERO_PROPERTY_OR_TERMINAL_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "r12-c3-lossless-composition-projection-v1-20261010",
+    "claim_id": "05b74983836dd1f6a13a0db72443246fb74f99548f0d982a769a6a7e572e9e85",
+    "leaf_id": "PQ::R12_META_COMPOSITION_CLOSURE::SEMANTIC",
+    "clause_id": "R12C3_ABSTRACTION_SOUNDNESS",
+    "exact_blobs": {
+      "theorem": "7fb5750290626a046efe240126161cb25b1743cd",
+      "verifier": "94664d4e2982edd78433284886c268f243c60f98",
+      "tests": "4f8d4d9f281e91b8b457ea14557406eb1c5106eb",
+      "composition_input": "8063d124d6fbd239814380ef4fbc710350a1dea8",
+      "composition_gate_v4": "e1cc6200286c7b400fc7be70ef0789b85af7fe61",
+      "composition_independent_verification": "4ee02c41acf64b1f47ebadec55b6bb5453d676ba"
+    }
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/pq-v7-12of12-independent-verify",
+    "py_compile": "PASS",
+    "tests_run": 6,
+    "tests_passed": 6,
+    "failures": 0,
+    "errors": 0
+  },
+  "proves": [
+    "ALL_TWELVE_EXACT_V7_ROOT_BINDING_DOCUMENTS_RECOMPUTE_TO_THE_CONTENT_ADDRESSES_IN_THE_COMPOSITION_INPUT",
+    "EVERY_ROOT_BINDING_CONTAINS_AN_EXPLICIT_SCOPE_CLAIM_NONEMPTY_GUARANTEES_AND_NONEMPTY_LIMITATIONS",
+    "ALL_TWELVE_ROOT_VERIFICATION_RECEIPTS_ARE_PASSING_AND_THE_PINNED_INDEPENDENT_COMPOSITION_RECEIPT_PROVES_ROOT_BINDING_AUTHORITY_FOR_ALL_TWELVE",
+    "THE_EXACT_V4_COMPOSITION_GATE_PRESERVES_ROOT_ID_BINDING_SCHEMA_SUBJECT_TUPLE_AND_FULL_BINDING_GIT_BLOB_SHA_IN_EVERY_COMPACT_ROW",
+    "THE_COMPACT_PROJECTION_IS_INJECTIVE_AND_RECONSTRUCTIBLE_OVER_THE_FROZEN_TWELVE_ROOT_BINDING_SET",
+    "R12_COMPOSITION_INTRODUCES_NO_SCOPE_OR_AUTHORITY_WIDENING",
+    "R12C3_ABSTRACTION_SOUNDNESS_IS_PROVED_AT_THE_ROOT_BINDING_TO_SAME_SUBJECT_COMPOSITION_BOUNDARY"
+  ],
+  "hard_nonclaims": [
+    "NO_GLOBAL_SEMANTIC_COMPLETENESS_INSIDE_ANY_ROOT",
+    "NO_GLOBAL_ROOT_CLOSURE",
+    "NO_UNKNOWN_MATERIAL_DEFEATER_COMPLETENESS",
+    "NO_R12_CC_R3_TERMINAL_CLOSURE",
+    "NO_R12_SEMANTIC_PROPERTY_TRUTH",
+    "NO_PROFESSIONAL_QUALITY_CLOSURE",
+    "NO_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "property_truth_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
