@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_CC_R3_PROMOTION_SAFETY_CERTIFICATE_V1",
+  "date": "2026-10-10",
+  "status": "CANDIDATE__EXECUTABLE_SEMANTIC_VERIFIER_REQUIRED__ZERO_CREDIT",
+  "root_id": "CC_R3_TERMINAL_CLOSURE_V1",
+  "root_theorem": "B_plus[C] SUBSETEQ G_minus[C]",
+  "proof_mode": "DECISION_PROCEDURE",
+  "mission_authority_blob_sha": "13c470645b037bbb46245c687dd35197b420d51a",
+  "claim_binding": {
+    "claim_id": "e1c519109c4b2c46a9225686fc2c5c5490564d1cc62d5c6ff3c6c436bfca4314",
+    "claim_kind": "PROPERTY_CERTIFICATE",
+    "mission_blob_sha": "6ab2147306a138f9ea327d8e19cb4a5bc76e89df",
+    "scope_sha256": "144e629c2e3315abe8e31eb10aaa8edd28ab7799796152484602f88ba0895e51",
+    "target_predicate_sha256": "2634d67900467b46dd6e5e8c0c6472d4215963a2467b7da2df5a4bc39e8a2755",
+    "semantics_sha256": "d08683f6df6d51ce4c3c37853c6bfc20ceec350a31e8a6d65421d83d203cdb9b",
+    "epoch": "R4_R3_PROMOTION_SAFETY_EPOCH_20261010_V1",
+    "authority_id": "PROJECT_BRAIN_R4_COVERAGE_COMPLETENESS_AUTHORITY_V1"
+  },
+  "primary_subject_blobs": {
+    "canonical/runtime/autonomous_verified_self_improvement_v1.py": "665190356fca7e7c599db3abce0dfc800df9e0ff",
+    "canonical/runtime/r3_improvement_queue_driver_v1.py": "870cd665fffb5398e452b4ede81e54adbe2d9f0d",
+    "canonical/runtime/r3_independent_learning_verifier_v1.py": "b38b5315ef79a215976144866514cb2a95076c9e",
+    "canonical/runtime/r3_distinguishing_evidence_acquisition_v1.py": "81abd20f37b3a22bd6a7b97e3a71d6a1e81c6f76",
+    "canonical/runtime/r3_retained_distinguishing_evidence_provider_v1.py": "c713276a1dafa33b233982a4257167757a348a69"
+  },
+  "proof_dependency_blobs": {
+    "canonical/runtime/executable_skill_verification_authenticator_v1.py": "c0a9a991726294cc7e34a5453533ce92631f0e11",
+    "canonical/runtime/universal_solver_episode_verification_authenticator_v1.py": "6a2fc8f26d1908eb7a35006f3a550fe2cd55c171",
+    "canonical/runtime/r3_bound_success_checkpoint_verifier_v1.py": "dc1412451d3dbc6747fd51388137a3ac1bba0d4b",
+    "canonical/runtime/r3_raw_success_checkpoint_verifier_v1.py": "3afceda23369a23b2619aabdc8a06f4e749be6c5"
+  },
+  "proof_claim": "ON_EXACT_BOUND_BYTES_EVERY_DURABLE_EPISODE_OR_SKILL_PROMOTION_PATH_REQUIRES_INDEPENDENT_VERIFICATION_AND_REAUTHENTICATION; PROVIDER_AUTHORITY_ESCALATION_OR_VERIFIER_AUTHORITY_REWRITE_FAILS_CLOSED",
+  "terminal_credit_delta": 0
+}
