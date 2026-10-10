@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_DECLARED_SYSTEM_SUBJECT_V2_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "INDEPENDENT_SPRITE_PASS__10_OF_10_COMPONENT_BLOBS_CURRENT__SUBJECT_SHA256_MATCH__IDENTITY_ONLY__ZERO_QUALITY_AUTHORITY",
+  "subject": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V3_DECLARED_SYSTEM_SUBJECT_20261010_V2.json",
+    "git_blob_sha": "d758083973ca040f6b6426e5729e297e283b1e0c",
+    "subject_kind": "DECLARED_SYSTEM",
+    "subject_id": "PROFESSIONAL_QUALITY_P1_V3_INTEGRATED_SYSTEM_20261010_V2",
+    "subject_sha256": "934b90e941d23396525a594a21a3335deb8c5cbbb7797724334f54a42d80e751"
+  },
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "working_directory": "/home/sprite/r4-semantic-current-integration-verify-v1"
+  },
+  "replay": {
+    "verifier": "verify_subject_v2.py",
+    "component_count": 10,
+    "component_blob_mismatches": 0,
+    "missing_components": 0,
+    "recomputed_subject_sha256": "934b90e941d23396525a594a21a3335deb8c5cbbb7797724334f54a42d80e751",
+    "pass": true
+  },
+  "proved": [
+    "EVERY_DECLARED_SYSTEM_MATERIAL_COMPONENT_MATCHES_ITS_EXACT_GIT_BLOB_SHA",
+    "SUBJECT_SHA256_EQUALS_CANONICALIZED_SYSTEM_MATERIAL_SHA256",
+    "CURRENT_21_SCOPE_REGISTRY_IS_THE_BOUND_REGISTRY",
+    "MULTISCOPE_SAME_SUBJECT_GATE_V2_IS_THE_BOUND_COMPOSITION_GATE"
+  ],
+  "hard_nonclaims": [
+    "SYSTEM_MEMBERSHIP_DOES_NOT_PROVE_ANY_ROOT_SATISFIED",
+    "NO_ROOT_SUBJECT_BINDING_AUTHORITY",
+    "NO_GLOBAL_QUALITY_OR_LEAF_CLOSURE",
+    "NO_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
