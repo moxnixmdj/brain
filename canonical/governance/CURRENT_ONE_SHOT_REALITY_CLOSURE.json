@@ -47,7 +47,7 @@
     },
     "latest_dynamic_admission_pointer_follow": {
       "path": "canonical/verification/CURRENT_ONE_SHOT_DYNAMIC_ADMISSION_POINTER_FOLLOW_VERIFY_20261010_V1.json",
-      "git_blob_sha": "15c53dd68e8052e552c508423654c14bd3ebef8f",
+      "git_blob_sha": "35439b60d01c84427ed677998770ef93d9221149",
       "status": "PASS__EXACT_BLOBS__PUBLIC_ISOLATED_3_OF_3__DYNAMIC_POINTER_TARGET_FOLLOW__STALE_SNAPSHOT_NONAUTHORITATIVE__ZERO_CREDIT",
       "public_run_id": 38024724095,
       "tests_passed": 3,
@@ -140,7 +140,7 @@
       "dynamic_admission_target_namespace_fail_closed": true,
       "verification": {
         "path": "canonical/verification/CURRENT_ONE_SHOT_DYNAMIC_ADMISSION_POINTER_FOLLOW_VERIFY_20261010_V1.json",
-        "git_blob_sha": "15c53dd68e8052e552c508423654c14bd3ebef8f",
+        "git_blob_sha": "35439b60d01c84427ed677998770ef93d9221149",
         "status": "PASS__EXACT_BLOBS__PUBLIC_ISOLATED_3_OF_3__DYNAMIC_POINTER_TARGET_FOLLOW__STALE_SNAPSHOT_NONAUTHORITATIVE__ZERO_CREDIT",
         "public_run_id": 38024724095,
         "tests_passed": 3,
@@ -362,7 +362,7 @@
       "dynamic_admission_snapshot_drift_nonauthoritative": true,
       "verification": {
         "path": "canonical/verification/CURRENT_ONE_SHOT_DYNAMIC_ADMISSION_POINTER_FOLLOW_VERIFY_20261010_V1.json",
-        "git_blob_sha": "15c53dd68e8052e552c508423654c14bd3ebef8f",
+        "git_blob_sha": "35439b60d01c84427ed677998770ef93d9221149",
         "status": "PASS__EXACT_BLOBS__PUBLIC_ISOLATED_3_OF_3__DYNAMIC_POINTER_TARGET_FOLLOW__STALE_SNAPSHOT_NONAUTHORITATIVE__ZERO_CREDIT",
         "public_run_id": 38024724095,
         "tests_passed": 3,
