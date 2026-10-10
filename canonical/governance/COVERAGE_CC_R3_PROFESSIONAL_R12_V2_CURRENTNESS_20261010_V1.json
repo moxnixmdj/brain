@@ -1,0 +1,29 @@
+{
+  "schema": "PROJECT_BRAIN_CC_R3_STABLE_R12_V2_CURRENTNESS_V1",
+  "date": "2026-10-10",
+  "status": "CURRENT_V2_ADAPTER_VERIFIED__CC_R3_STILL_OPEN__ZERO_CREDIT",
+  "supersedes_for_integration": "canonical/governance/COVERAGE_CC_R3_PROFESSIONAL_R12_STABLE_ADAPTER_ACTIVATION_20261010_V1.json",
+  "v1_status": "HISTORICAL_MECHANISM_ONLY__NOT_V9_FINAL_STEP_SCHEMA_COMPATIBLE__NEVER_ROOT_BOUND",
+  "v2": {
+    "totality_verifier": [
+      "canonical/runtime/professional_r12_v9_policy_cover_totality_semantic_verify_v2.py",
+      "08ee0e1a82162032daadf002f6364b2b10a86ed3"
+    ],
+    "root_verifier": [
+      "canonical/runtime/coverage_cc_r3_professional_r12_semantic_verify_v2.py",
+      "164bd3d536e85f409c566b3edfc0de19aeb0e8b5"
+    ],
+    "exact_certificate_schema": "PROJECT_BRAIN_PROFESSIONAL_FINAL_STEP_LOCAL_TOTALITY_CERTIFICATE_V1",
+    "independent_replay": "PYCOMPILE_PASS__13_OF_13_V1_PLUS_V2"
+  },
+  "current_truth": {
+    "cc_r1": "PROVED_CURRENT",
+    "cc_r2": "PROVED_CURRENT",
+    "cc_r3": "OPEN_NO_GLOBAL_CERTIFICATE_BOUND",
+    "r4": false,
+    "policy_cover_bound": false,
+    "real_v9_positive_route_bound": false
+  },
+  "exact_next": "AUTHENTIC_CLAIM_WIDE_POLICY_COVER__SHARED_LOCAL_TOTALITY_CERTIFICATE__INDEPENDENT_V2_RERUN__REAL_V9_POSITIVE_ROUTE__CC_R3_CERT__R4",
+  "terminal_credit_delta": 0
+}
