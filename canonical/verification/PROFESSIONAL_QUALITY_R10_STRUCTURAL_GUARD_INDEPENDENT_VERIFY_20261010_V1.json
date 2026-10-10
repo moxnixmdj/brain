@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R10_STRUCTURAL_GUARD_INDEPENDENT_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_SPRITE__EXACT_BLOBS__STRUCTURAL_SLOT_16_OF_16__INTEGRATED_GUARD_30_OF_30__LEGACY_BOOLEAN_SELF_CERTIFICATION_REJECTED__DETECTION_COMPLETENESS_STILL_OPEN__ZERO_PROPERTY_CREDIT",
+  "carrier": {
+    "name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695"
+  },
+  "exact_blobs": {
+    "proof_slot_runtime": "04957e2e385f8169e7d8aff5b0e1f2009e848666",
+    "proof_slot_tests": "ee97b8b61ebd58a2e1614709717aec70063edb17",
+    "execution_guard_runtime": "83ae7bc81660bd4be7f66b9454de5d007c0db959",
+    "execution_guard_tests": "8dc92c6101001f36cee100c41c8c7e63c95aa347",
+    "constitution": "a087db2645b03e589965d50eb51d32a3049dc2fe",
+    "execution_profile": "f7e89eafbb691c16d1bdf5b8d295a468d5e3bec5",
+    "defeater_catalog": "8b92e5cf76f767054f55414b87014e03d43460b8"
+  },
+  "replay": {
+    "structural_slot_checks_run": 16,
+    "structural_slot_checks_passed": 16,
+    "structural_slot_transcript_sha256": "44ff9e8c0c443ddbee7c5e6e954eb58553fbc34eae9d2a365f4e8e96bf1fbed1",
+    "integrated_guard_checks_run": 30,
+    "integrated_guard_checks_passed": 30,
+    "integrated_guard_transcript_sha256": "6133439d3ca0db7530abf296d7e2f08c33de5a670e544ff0822ecbf4f5719d85"
+  },
+  "proves": [
+    "ALL_NINE_STRUCTURAL_R10_PROOF_SLOTS_ARE_EXECUTABLY_VERIFIABLE_FROM_CONTENT_ADDRESSED_CASE_CONTEXT",
+    "UNAUTHORIZED_AGGREGATION_RISK_UNCERTAINTY_VETO_MULTIPLICITY_EVIDENCE_STOPPING_AND_ABSOLUTE_FLOOR_CASES_FAIL_CLOSED",
+    "LEGACY_CALLER_SUPPLIED_BOOLEAN_PROOF_SLOTS_HAVE_ZERO_AUTHORITY",
+    "ALL_17_DECLARED_KNOWN_R10_DEFEATERS_BLOCK_ORDINARY_CERTIFICATION_WHEN_DETECTED",
+    "ALL_FIVE_DECLARED_NEAR_MISS_SIGNAL_CLASSES_ROUTE_TO_ESCALATION",
+    "UNKNOWN_OR_UNMAPPED_MATERIAL_FALSE_CERTIFICATION_SIGNALS_ROUTE_TO_ESCALATION",
+    "PROFILE_AND_DECISION_CONTRACT_WEAKENING_FAIL_CLOSED"
+  ],
+  "remaining_blocker": {
+    "blocker": "R10_UPSTREAM_DEFEATER_DETECTION_AND_UNDERLYING_FACT_TRUTH_COMPLETENESS_NOT_PROVED",
+    "detection_completeness_proved": false,
+    "underlying_fact_truth_authority": false,
+    "whole_leaf_property_truth_proved": false
+  },
+  "authority": {
+    "execution_authority": false,
+    "quality_authority": false,
+    "acceptance_authority": false,
+    "promotion_authority": false,
+    "terminal_authority": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "next": "SEARCH_REUSE_OR_CONSTRUCT_SCOPE_COMPLETE_R10_OBSERVATION_AND_DEFEATER_DETECTION_COVERAGE__DO_NOT_REPEAT_STRUCTURAL_PROOF_SLOT_OR_ENFORCEMENT_WORK"
+}
