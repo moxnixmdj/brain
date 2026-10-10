@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK20_V5_EFFECTIVE_AUTHORITY_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__RANK20_V5_EFFECTIVE_AUTHORITY_PROMOTED__PREACTIVATION_ZERO_EXPOSURE",
+  "slot_id": "terminal-bench-science/hysteretic-aquifer-control::trial-0",
+  "task_digest": "sha256:681df0c3b2ada03a933ac4d2e11f07983676f87a9f26b61e416987904b880289",
+  "logical_attempt_id": "c7a02ecc6b11f4338120f05cd922370d361ce79e104549f95b656df3b51cb2bb",
+  "execution_claim_binding_digest": "sha256:aa0d91d18bb597319414b7385a92248992c093e14bf9c8f5677b72c05cb09beb",
+  "promotion_authority": {
+    "path": "canonical/governance/TB_SCIENCE_RANK20_V5_EFFECTIVE_AUTHORITY_PROMOTION_20261010_V1.json",
+    "git_blob_sha": "eb8897191156aced387a220a247e3ca4276be73c"
+  },
+  "canonical_ledger": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V48.json",
+    "git_blob_sha": "2d8c04e85b4d611b2074a6fdcab71c031febe284"
+  },
+  "public": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2605,
+    "merge_commit_sha": "ee3436705ea801a45bfc08d6b5d77f0b199e6c9c",
+    "surface_git_blob_sha": "ddec26f44e4b97eb2b8f76029b889164648fd109",
+    "authority_git_blob_sha": "ed796d6bb51e14fcacdea9222124897321856ef8",
+    "ledger_git_blob_sha": "317b6997344d8fa588a20a73b3c7978bae2f2616",
+    "epoch_git_blob_sha": "e7446cbc8ef2b655a51fc59134dff12d6161052e",
+    "execution_claim_git_blob_sha": "5f3deca2d53910dba1622ec1e23d3b45e47af2b1",
+    "promotion_verifier_git_blob_sha": "f07db19277f883787d078db89247e6e24256b566"
+  },
+  "ratchet": {
+    "workflow_run_id": 38045628815,
+    "workflow_job_id": 114194459984,
+    "conclusion": "success",
+    "artifact_id": 11667751368,
+    "artifact_digest": "sha256:b09bf6476b824e9b0058cdfc7551aac4aba17f8edeee73bec95a9ed291c4ffa4"
+  },
+  "state": {
+    "execution_authority_effective": true,
+    "task_read_authority_effective": true,
+    "activation_present": false,
+    "task_read_history": false,
+    "task_started": false,
+    "benchmark_trials_consumed": 0
+  },
+  "accounting": {
+    "consumed_slots_total": 18,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0,
+    "incremental_spend_usd": 0
+  },
+  "pass": true
+}
