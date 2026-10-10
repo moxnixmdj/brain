@@ -13,15 +13,15 @@ EXPECTED_EXECUTION={
 
 
 class ProfessionalLeafRegistryPropertyTruthV1Tests(unittest.TestCase):
-    def test_current_registry_derives_exactly_four_execution_leaves(self):
+    def test_current_registry_derives_exactly_six_execution_leaves(self):
         out=binder.evaluate()
         self.assertTrue(out["existing_evidence_current"],out)
         self.assertEqual(out["structural_errors"],[])
         self.assertEqual(out["rejected_receipt_count"],0)
         self.assertEqual(set(out["verified_execution_leaf_ids"]),EXPECTED_EXECUTION)
         self.assertEqual(out["verified_semantic_leaf_ids"],[])
-        self.assertEqual(out["verified_leaf_count"],4)
-        self.assertEqual(out["open_leaf_count"],20)
+        self.assertEqual(out["verified_leaf_count"],6)
+        self.assertEqual(out["open_leaf_count"],18)
         self.assertFalse(out["promotion_ready"])
         self.assertFalse(out["pass"])
 
