@@ -2,7 +2,7 @@
   "schema": "PROJECT_BRAIN_ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_V1",
   "date": "2026-10-10",
   "canonical_base_commit": "8bbab859c4bc3116b2f7112bfddd22f4b4121121",
-  "status": "SCOPE_COMPLETE_13_ROW_ROUTE_CLASSIFICATION__CC_R3_NOT_PROVED__TWO_SHARED_PROOF_GAPS__ZERO_CREDIT",
+  "status": "SCOPE_COMPLETE_13_ROW_ROUTE_CLASSIFICATION__SHARED_WELL_FOUNDED_PROGRESS_MEASURE_BOUND__CC_R3_NOT_PROVED__TWO_PROVIDER_OR_ACTION_BINDING_GAPS__ZERO_CREDIT",
   "claim": {
     "path": "canonical/governance/ESCAPE_PROGRESS_TOTALITY_FROZEN_13_CLAIM_20261010_V3.json",
     "git_blob_sha": "e534dfb56e8e3cde66a260de299627662965e079",
@@ -18,7 +18,9 @@
     {
       "id": "GAP_B_INTERNAL_ROUTE_STRICT_PROGRESS",
       "obligation_count": 4,
-      "statement": "FOR_EVERY_INTERNAL_ROUTE_ROW__BIND_ONE EXECUTABLE VERIFIED ACTION TO A FINITE PROGRESS MEASURE AND PROVE EVERY ALLOWED OUTCOME TERMINALIZES OR STRICTLY DECREASES THAT MEASURE"
+      "statement": "SHARED_FINITE_WELL_FOUNDED_REPAIR_POTENTIAL_IS_PROVED__FOR_EACH_INTERNAL_ROUTE_ROW_BIND_ONE_EXECUTABLE_VERIFIED_ACTION_TO_A_MONOTONE_REACHED_STATE_EXTENSION_THAT_STRICTLY_DECREASES_THE_SHARED_POTENTIAL",
+      "generic_progress_measure_proved": true,
+      "specific_action_bindings_proved": 0
     }
   ],
   "rows": [
@@ -144,17 +146,17 @@
     {
       "obligation_id": "TB_SCIENCE_GE_58_7",
       "route_group": "GAP_B_INTERNAL_ROUTE_STRICT_PROGRESS",
-      "route_class": "INTERNAL_PLANNER_CONTROLLER_REPAIR_BEFORE_NEXT_IRREVERSIBLE_TRIAL",
+      "route_class": "INTERNAL_V13_PROOF_CARRYING_PUBLIC_SURFACE_RESEAL_AND_QUALIFICATION",
       "evidence": [
-        "canonical/governance/CURRENT_TB_SCIENCE_EXECUTION.json",
-        "999db25cb0a339eac146130fac884e879ab1c88f"
+        "canonical/governance/ESCAPE_PROGRESS_TB_SCIENCE_ROUTE_RECONCILIATION_20261010_V1.json",
+        "eafb7f92361414dfdc02872b7a5ead11f2b25000"
       ],
       "required_strings": [
-        "RANK19_EXECUTION_FROZEN_PENDING_ZERO_EXPOSURE_PLANNER_REPAIR",
-        "PLANNER_CONTROLLER_FAILURE_BEFORE_FIRST_ACTION",
-        "ZERO_EXPOSURE_DIAGNOSE_AND_VERIFY_GENERIC_SCIENCE_PLANNER_PRE_ACTION_FAILURE"
+        "PASS__PLANNER_V7_REPAIR_CLOSED__CURRENT_INTERNAL_ROUTE_IS_V13_PROOF_CARRYING_PUBLIC_SURFACE_RESEAL__STRICT_PROGRESS_BINDING_STILL_OPEN__ZERO_CREDIT",
+        "BUILD_AND_VERIFY_FRESH_V13_PROOF_CARRYING_PUBLIC_EXECUTION_SURFACE_FOR_RANK19__DO_NOT_READ_TASK_BEFORE_ACTIVATION_AND_LIVE_CARRIER_QUALIFICATION",
+        "INTERNAL_PUBLIC_SURFACE_RESEAL_AVAILABLE"
       ],
-      "current_route_available": "INTERNAL_REPAIR_AVAILABLE",
+      "current_route_available": "INTERNAL_PUBLIC_SURFACE_RESEAL_AVAILABLE",
       "strict_progress_witness_bound": false,
       "externality_proved": false
     },
@@ -251,7 +253,11 @@
     "externality_proved_count": 0,
     "strict_progress_witness_bound_count": 0,
     "cc_r3_proved": false,
-    "next_load_bearing_object": "PROVE_OR_REFUTE_GAP_A_ACQUISITION_TOTALITY_AND_GAP_B_INTERNAL_ROUTE_STRICT_PROGRESS__DO_NOT_BUILD_THIRTEEN_SEPARATE_SOLVERS"
+    "next_load_bearing_object": "BIND_FOUR_INTERNAL_GAP_B_ACTIONS_TO_SHARED_REPAIR_CONTRACT__AND_PROVE_OR_REFUTE_GAP_A_AUTHENTICATED_REPAIR_PROVIDER_TOTALITY__DO_NOT_BUILD_THIRTEEN_SEPARATE_SOLVERS",
+    "shared_well_founded_progress_measure_bound": true,
+    "gap_b_generic_measure_proved": true,
+    "gap_b_specific_action_bindings_proved": 0,
+    "provider_totality_proved": false
   },
   "hard_nonclaims": [
     "NO_CC_R3_CERTIFICATE",
@@ -259,11 +265,28 @@
     "NO_ESCAPE_PROGRESS_TOTALITY",
     "NO_INFORMATION_THEORETIC_EXTERNALITY_CLASSIFICATION",
     "NO_ACCEPTANCE_CREDIT",
-    "NO_TERMINAL_CREDIT"
+    "NO_TERMINAL_CREDIT",
+    "NO_GAP_B_ACTION_BINDING_CREDIT_FROM_SHARED_MEASURE"
   ],
   "accounting": {
     "incremental_spend_usd": 0,
     "acceptance_credit_delta": 0,
     "terminal_credit_delta": 0
+  },
+  "shared_progress_reduction": {
+    "evidence": [
+      "canonical/governance/REACHED_ESCAPE_REPAIR_POTENTIAL_ACTIVATION_20261010_V1.json",
+      "5bafe04ce1b55f92479b13d08dce88deb87327e9"
+    ],
+    "required_strings": [
+      "ACTIVE_SHARED_WELL_FOUNDED_PROGRESS_REDUCTION__GAP_B_GENERIC_MEASURE_PROVED__ACTION_BINDINGS_OPEN__ZERO_CREDIT",
+      "POTENTIAL_ZERO_IFF_EXISTING_FINITE_REACHED_STATE_TOTALITY_CERTIFICATE_PASSES",
+      "BIND_CURRENT_GAP_B_INTERNAL_ACTIONS_TO_SHARED_REPAIR_CONTRACT__IN_PARALLEL_KEEP_GAP_A_AS_THE_ONLY_GLOBAL_PROVIDER_EXISTENCE_QUESTION"
+    ],
+    "generic_well_founded_measure_proved": true,
+    "specific_internal_action_bindings_proved": 0,
+    "provider_totality_proved": false,
+    "gap_b_closed": false,
+    "cc_r3_proved": false
   }
 }
