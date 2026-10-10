@@ -12,7 +12,7 @@ on:
       - canonical/tests/test_professional_quality_v7_12_of_12_composition_verify_v1.py
       - canonical/governance/PROFESSIONAL_QUALITY_R12_ROOT_SUBJECT_BINDING_20261010_V1.json
       - canonical/verification/PROFESSIONAL_QUALITY_R12_V7_ROOT_SUBJECT_BINDING_PUBLIC_VERIFY_20261010_V1.json
-      - canonical/runtime/professional_quality_same_subject_composition_gate_v3.py
+      - canonical/runtime/professional_quality_same_subject_composition_gate_v4.py
       - .github/workflows/verify-professional-quality-closure-normal-form-v1.yml
 permissions:
   contents: read
