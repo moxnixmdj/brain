@@ -95,6 +95,7 @@ def adapt(request: Mapping[str, Any], *, repo_root) -> Mapping[str, Any] | None:
         if sha256(goal.encode("utf-8")).hexdigest() != goal_sha256:
             return None
 
+        proof_sha256 = _sha(dict(material))
         accepted_effect = "r2.direct_adequacy.accepted.sha256:" + goal_sha256
         steps = [{
             "index": 0,
@@ -107,7 +108,7 @@ def adapt(request: Mapping[str, Any], *, repo_root) -> Mapping[str, Any] | None:
                 "route_id": route_id,
                 "goal_sha256": goal_sha256,
                 "capability_id": capability_id,
-                "proof_sha256": material.get("proof_sha256"),
+                "proof_sha256": proof_sha256,
             })[:24],
             "scope_id": "r2-direct-goal-sha256:" + goal_sha256,
             "steps": steps,
@@ -128,7 +129,7 @@ def adapt(request: Mapping[str, Any], *, repo_root) -> Mapping[str, Any] | None:
             "selected_policy_id": policy_id or None,
             "goal_sha256": goal_sha256,
             "accepted_effect": accepted_effect,
-            "direct_proof_sha256": str(material.get("proof_sha256") or ""),
+            "direct_proof_sha256": str(proof_sha256 or ""),
         }]
         fact_head = _sha({
             "schema": "PROJECT_BRAIN_R3_DIRECT_ADEQUACY_FACT_LINEAGE_V1",
@@ -139,7 +140,7 @@ def adapt(request: Mapping[str, Any], *, repo_root) -> Mapping[str, Any] | None:
         })
         value_head = _sha({
             "schema": "PROJECT_BRAIN_R3_DIRECT_ADEQUACY_VALUE_LINEAGE_V1",
-            "direct_proof_sha256": material.get("proof_sha256"),
+            "direct_proof_sha256": proof_sha256,
             "accepted_raw_obligation_ids": material.get("accepted_raw_obligation_ids"),
             "raw_acceptance_obligation_count": material.get("raw_acceptance_obligation_count"),
         })
