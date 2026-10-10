@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from hashlib import sha1
 import unittest
 from pathlib import Path
 
@@ -8,6 +9,10 @@ from canonical.runtime import capability_first_scheduler_v1 as s
 
 
 ROOT = Path(__file__).resolve().parents[2]
+
+def _git_blob_sha(path: Path) -> str:
+    raw = path.read_bytes()
+    return sha1(b"blob " + str(len(raw)).encode("ascii") + b"\0" + raw).hexdigest()
 
 
 def capability_row(work_id: str, **overrides):
@@ -205,6 +210,90 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
         self.assertTrue(out["checkpoint_audit_active"])
         self.assertEqual(out["ranked"][0]["eligibility"], "ELIGIBLE")
         self.assertEqual(out["ranked"][0]["work_id"], "LIVE_GENERAL_CAPABILITY")
+
+    def test_unbound_open_world_frontier_is_demoted_even_with_large_claimed_gain(self):
+        frontier = capability_row(
+            "GLOBAL_FINANCE_SEMANTIC_COMPLETION",
+            frontier_class=s.OPEN_WORLD_EVIDENCE_FRONTIER,
+            expected_capability_gain_lcb=1000000,
+            expected_efficiency_gain_lcb=1000000,
+            expected_reliability_gain_lcb=1000000,
+            reuse_breadth_lcb=1000000,
+            generalization_lcb=1000000,
+            success_probability_lcb="1",
+            wall_clock_cost_ub=1,
+            compute_cost_ub=1,
+            memory_cost_ub=1,
+            complexity_cost_ub=1,
+        )
+        useful = capability_row("CONCRETE_GENERAL_CAPABILITY")
+        out = self.rank_general([frontier, useful])
+        self.assertEqual(out["ranked"][0]["work_id"], "CONCRETE_GENERAL_CAPABILITY")
+        self.assertEqual(
+            out["ranked"][1]["eligibility"],
+            "DEMOTED_OPEN_WORLD_EVIDENCE_FRONTIER_WITHOUT_CURRENT_CAPABILITY_DEFECT",
+        )
+        self.assertEqual(out["ranked"][1]["priority_score"], "0")
+
+    def test_open_world_frontier_wakes_on_task_local_counterexample(self):
+        row = capability_row(
+            "FINANCE_SEMANTIC_COUNTEREXAMPLE_REPAIR",
+            frontier_class=s.OPEN_WORLD_EVIDENCE_FRONTIER,
+            task_local_counterexample_ids=["task-case-1"],
+        )
+        out = self.rank_general([row])
+        self.assertEqual(out["ranked"][0]["eligibility"], "ELIGIBLE")
+        self.assertEqual(
+            out["ranked"][0]["task_local_counterexample_ids"],
+            ["task-case-1"],
+        )
+        self.assertNotEqual(out["ranked"][0]["priority_score"], "0")
+
+    def test_open_world_frontier_wakes_on_verified_capability_defect(self):
+        row = capability_row(
+            "GENERAL_SEMANTIC_DEFECT_REPAIR",
+            frontier_class=s.OPEN_WORLD_EVIDENCE_FRONTIER,
+            verified_capability_defect_ids=["verified-defect-1"],
+        )
+        out = self.rank_general([row])
+        self.assertEqual(out["ranked"][0]["eligibility"], "ELIGIBLE")
+        self.assertEqual(
+            out["ranked"][0]["verified_capability_defect_ids"],
+            ["verified-defect-1"],
+        )
+
+    def test_r2_mechanism_policy_is_content_bound_and_preserves_open_frontier_truth(self):
+        policy_path = (
+            ROOT
+            / "canonical/governance/R2_MECHANISM_CLOSURE_OPEN_WORLD_FRONTIER_POLICY_20261010_V1.json"
+        )
+        policy = json.loads(policy_path.read_text())
+        for row in policy["sources"].values():
+            source = ROOT / row["path"]
+            self.assertTrue(source.is_file(), row["path"])
+            self.assertEqual(_git_blob_sha(source), row["git_blob_sha"], row["path"])
+
+        r2 = json.loads(
+            (ROOT / "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json").read_text()
+        )
+        self.assertIn("GENERAL_MECHANISM_CLOSED", r2["status"])
+        finance = r2["current_cell_classifications"]["FINANCE_SEMANTIC_ADEQUACY_TAIL"]
+        self.assertEqual(
+            finance["state"],
+            "INTERNAL_UNSOLVED__PENDING_ACQUISITION_OR_EXPERIMENT",
+        )
+        self.assertFalse(finance["information_theoretic_externality_proved"])
+        self.assertEqual(
+            policy["classification"]["finance_global_residual"],
+            "OPEN_WORLD_EVIDENCE_FRONTIER__WAKE_GATED__NOT_GLOBAL_MECHANISM_FAILURE_BY_EXISTENCE_ALONE",
+        )
+        pointer = json.loads(
+            (ROOT / "canonical/governance/CURRENT_DEVELOPMENT_SCHEDULER.json").read_text()
+        )
+        self.assertEqual(
+            pointer["r2_mechanism_policy"]["path"],
+            "canonical/governance/R2_MECHANISM_CLOSURE_OPEN_WORLD_FRONTIER_POLICY_20261010_V1.json",
+        )
 
     def test_verified_reusable_candidate_enters_pareto_frontier(self):
         incumbent = {
