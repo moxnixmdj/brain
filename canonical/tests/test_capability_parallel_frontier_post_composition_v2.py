@@ -11,7 +11,8 @@ from canonical.runtime import capability_parallel_frontier_v2 as core
 ROOT=Path(__file__).resolve().parents[2]
 
 def _copy_sources(tmp:Path):
- for rel in (p.PROF,p.ASSURANCE,p.BYTES,p.R2):
+ rels=(p.RESIDUAL,p.PROF,p.ASSURANCE,p.BYTES,p.R2,"canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V7.json")
+ for rel in rels:
   src=ROOT/rel; dst=tmp/rel; dst.parent.mkdir(parents=True,exist_ok=True); dst.write_bytes(src.read_bytes())
 
 class PostCompositionFrontierV2Tests(unittest.TestCase):
@@ -89,6 +90,60 @@ class PostCompositionFrontierV2Tests(unittest.TestCase):
   f=p.refresh_post_composition_currentness(f)
   with self.assertRaisesRegex(core.ParallelFrontierError,"LIVE_WORK_FRONTIER_STALE"):
    core.plan_parallel_frontier(f)
+
+
+ def test_residual_reuse_current_pointer_is_followed_under_topology_invariants(self):
+  f=p.refresh_post_composition_currentness(core.load_current_frontier())
+  bound={x["path"]:x["git_blob_sha"] for x in f["scope"]["source_set"]}
+  self.assertEqual(bound[p.RESIDUAL],p._git_blob_sha(ROOT/p.RESIDUAL))
+  self.assertTrue(f["dynamic_currentness"]["residual_reuse_pointer_follow"])
+  rr=f["dynamic_currentness"]["residual_reuse"]
+  a=next(x for x in f["candidates"] if x.get("work_id")==p.GAP_A_WORK)
+  b=next(x for x in f["candidates"] if x.get("work_id")==p.GAP_B_WORK)
+  self.assertEqual(a["read_only_evidence"]["active_gap_a_count"],rr["active_gap_a_count"])
+  self.assertEqual(b["read_only_evidence"]["active_gap_b_count"],rr["active_gap_b_count"])
+  self.assertFalse(b["read_only_evidence"]["strict_progress_witness_required_now"])
+  self.assertEqual(b["original_scheduler_state"],"PARKED")
+
+ def test_residual_nonzero_credit_fails_closed(self):
+  with tempfile.TemporaryDirectory() as td:
+   root=Path(td)
+   for rel in (p.RESIDUAL,p.PROF,p.ASSURANCE,p.BYTES,p.R2):
+    src=ROOT/rel; dst=root/rel; dst.parent.mkdir(parents=True,exist_ok=True); dst.write_bytes(src.read_bytes())
+   bind="canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V7.json"
+   src=ROOT/bind; dst=root/bind; dst.parent.mkdir(parents=True,exist_ok=True); dst.write_bytes(src.read_bytes())
+   q=root/p.RESIDUAL; d=json.loads(q.read_text()); d["accounting"]["terminal_credit_delta"]=1; q.write_text(json.dumps(d))
+   with self.assertRaisesRegex(p.PostCompositionFrontierV2Error,"RESIDUAL_CREDIT"):
+    p.refresh_post_composition_currentness(core.load_current_frontier(),root=root)
+
+ def test_residual_parked_topology_mismatch_fails_closed(self):
+  with tempfile.TemporaryDirectory() as td:
+   root=Path(td)
+   for rel in (p.RESIDUAL,p.PROF,p.ASSURANCE,p.BYTES,p.R2):
+    src=ROOT/rel; dst=root/rel; dst.parent.mkdir(parents=True,exist_ok=True); dst.write_bytes(src.read_bytes())
+   bind="canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V7.json"
+   src=ROOT/bind; dst=root/bind; dst.parent.mkdir(parents=True,exist_ok=True); dst.write_bytes(src.read_bytes())
+   q=root/p.RESIDUAL; d=json.loads(q.read_text())
+   b=next(x for x in d["classifications"] if x["residual_id"]=="ESCAPE_GAP_B_INTERNAL_ROUTE_STRICT_PROGRESS")
+   b["parked_rows"]=[]
+   q.write_text(json.dumps(d))
+   with self.assertRaisesRegex(p.PostCompositionFrontierV2Error,"RESIDUAL_PARKED_ROWS"):
+    p.refresh_post_composition_currentness(core.load_current_frontier(),root=root)
+
+ def test_residual_binding_hash_mismatch_fails_closed(self):
+  with tempfile.TemporaryDirectory() as td:
+   root=Path(td)
+   for rel in (p.RESIDUAL,p.PROF,p.ASSURANCE,p.BYTES,p.R2):
+    src=ROOT/rel; dst=root/rel; dst.parent.mkdir(parents=True,exist_ok=True); dst.write_bytes(src.read_bytes())
+   bind="canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V7.json"
+   src=ROOT/bind; dst=root/bind; dst.parent.mkdir(parents=True,exist_ok=True); dst.write_bytes(src.read_bytes())
+   q=root/p.RESIDUAL; d=json.loads(q.read_text())
+   for rid in ("ESCAPE_GAP_A_ACQUISITION_TOTALITY","ESCAPE_GAP_B_INTERNAL_ROUTE_STRICT_PROGRESS"):
+    row=next(x for x in d["classifications"] if x["residual_id"]==rid)
+    row["binding_reconciliation"]["git_blob_sha"]="0"*40
+   q.write_text(json.dumps(d))
+   with self.assertRaisesRegex(p.PostCompositionFrontierV2Error,"RESIDUAL_BINDING_HASH"):
+    p.refresh_post_composition_currentness(core.load_current_frontier(),root=root)
 
 if __name__=="__main__":
  unittest.main(verbosity=2)
