@@ -76,6 +76,12 @@ R2_LEAVES = {"PQ::R2_CANDIDATE_SEARCH::EXECUTION"}
 R2_SOURCE_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R2_SCOPE_COMPLETE_SEARCH_VERIFY_V1"
 R2_GOVERNANCE_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R2_SCOPE_COMPLETE_SEARCH_SCOPE_V1"
 
+R9_KIND = "FROZEN_POPULATION_CONSERVATIVE_CENSORING_AND_EARLY_FAILURE_ACCOUNTING"
+R9_ROOT = "R9_TEMPORAL_DEPLOYMENT"
+R9_LEAVES = {"PQ::R9_TEMPORAL_DEPLOYMENT::EXECUTION"}
+R9_SOURCE_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R9_CONSERVATIVE_CENSORING_VERIFY_V1"
+R9_GOVERNANCE_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R9_CONSERVATIVE_CENSORING_SCOPE_V1"
+
 
 def git_blob_sha(path: Path) -> str:
     data = path.read_bytes()
@@ -907,6 +913,88 @@ def _validate_r2(
     return errors, claim_scope
 
 
+def _validate_r9(
+    entry: dict[str, Any],
+    source: dict[str, Any] | None,
+    governance: dict[str, Any] | None,
+    compiler_declared: Any,
+) -> tuple[list[str], Any]:
+    errors = _common_checks(entry, R9_ROOT, R9_LEAVES)
+    claim_scope = None
+    if source is not None:
+        if source.get("schema") != R9_SOURCE_SCHEMA:
+            errors.append("SOURCE_SCHEMA_INVALID")
+        if source.get("status") != "PASS__PINNED_EXACT_BYTES__PYCOMPILE__5_OF_5__211_OF_211_FINAL_SUCCESS_COUNTS__ZERO_GLOBAL_LEAF_CREDIT":
+            errors.append("SOURCE_STATUS_NOT_ADMITTED")
+        exact = source.get("exact_blobs")
+        if not isinstance(exact, dict) or exact.get("runtime") != compiler_declared:
+            errors.append("SOURCE_RUNTIME_MISMATCH")
+        replay = source.get("replay")
+        if (
+            not isinstance(replay, dict)
+            or replay.get("unit_tests_run") != 5
+            or replay.get("unit_tests_passed") != 5
+            or replay.get("exhaustive_final_success_counts_checked") != 211
+        ):
+            errors.append("SOURCE_REPLAY_INVALID")
+        required_proved = {
+            "FIXED_210_SLOT_DENOMINATOR_CANNOT_SHRINK",
+            "ONLY_EXACT_SUCCESS_COUNTS_POSITIVE",
+            "MISSING_OR_FINAL_NON_SUCCESS_COUNTS_ZERO_AT_FINALIZATION",
+            "RESOURCE_TIMEOUT_INFRA_AND_OTHER_FINAL_FAILURES_CREATE_ZERO_POSITIVE_CREDIT",
+            "FAILURE_LOCK_OCCURS_WHEN_MAXIMUM_POSSIBLE_SUCCESS_COUNT_DROPS_BELOW_TARGET",
+            "DUPLICATE_OR_OUT_OF_UNIVERSE_RECORDS_FAIL_CLOSED",
+            "PASS_BOUNDARY_IS_EXHAUSTIVELY_CORRECT_FOR_ALL_211_FINAL_SUCCESS_COUNTS",
+        }
+        if not required_proved <= set(source.get("proved") or []):
+            errors.append("SOURCE_REQUIRED_CENSORING_PROPERTIES_MISSING")
+        required_nonclaims = {
+            "MULTIHORIZON_DEPLOYMENT_VALIDITY",
+            "RARE_EVENT_COVERAGE",
+            "DISTRIBUTION_SHIFT_TRANSPORT",
+            "PERFORMATIVE_OR_EQUILIBRIUM_STABILITY",
+            "GLOBAL_R9_SEMANTIC_OR_EXECUTION_LEAF_CLOSURE",
+        }
+        if not required_nonclaims <= set(source.get("not_proved") or []):
+            errors.append("SOURCE_SCOPE_NONCLAIMS_MISSING")
+
+    if governance is not None:
+        if governance.get("schema") != R9_GOVERNANCE_SCHEMA:
+            errors.append("R9_GOVERNANCE_SCHEMA_INVALID")
+        if governance.get("status") != "ACTIVE_SCOPED_FIXED_DENOMINATOR_CONSERVATIVE_CENSORING__211_OF_211_BOUNDARY_REPLAY__ZERO_GLOBAL_LEAF_CREDIT":
+            errors.append("R9_GOVERNANCE_STATUS_INVALID")
+        components = governance.get("exact_components")
+        if not isinstance(components, dict):
+            errors.append("R9_GOVERNANCE_COMPONENTS_INVALID")
+        else:
+            row = components.get("runtime")
+            if not isinstance(row, dict) or row.get("git_blob_sha") != compiler_declared:
+                errors.append("R9_GOVERNANCE_RUNTIME_MISMATCH")
+        limitations = set(governance.get("limitations") or [])
+        required_limits = {
+            "NO_MULTIHORIZON_DEPLOYMENT_VALIDITY",
+            "NO_RARE_EVENT_COVERAGE_CLAIM",
+            "NO_DISTRIBUTION_SHIFT_TRANSPORT_CLAIM",
+            "NO_PERFORMATIVE_OR_EQUILIBRIUM_STABILITY",
+            "NO_GLOBAL_R9_SEMANTIC_OR_EXECUTION_LEAF_CLOSURE",
+            "NO_GLOBAL_R9_ROOT_CLOSURE",
+        }
+        if not required_limits <= limitations:
+            errors.append("R9_GOVERNANCE_SCOPE_LIMITATIONS_MISSING")
+        claim_scope = {
+            "kind": R9_KIND,
+            "guarantees": [
+                "FROZEN_DENOMINATOR_NEVER_SHRINKS",
+                "ONLY_EXACT_SUCCESS_COUNTS_POSITIVE",
+                "FINAL_MISSING_AND_NON_SUCCESS_OUTCOMES_COUNT_ZERO",
+                "DUPLICATE_OR_OUT_OF_UNIVERSE_RECORDS_FAIL_CLOSED",
+                "PASS_AND_FAIL_LOCKS_ARE_MONOTONE_WITH_REMAINING_POSSIBLE_SUCCESS",
+            ],
+            "limitations": sorted(required_limits),
+        }
+    return errors, claim_scope
+
+
 def validate_entry(entry: dict[str, Any], *, repo_root: Path = ROOT) -> dict[str, Any]:
     errors: list[str] = []
     if not isinstance(entry, dict):
@@ -959,6 +1047,10 @@ def validate_entry(entry: dict[str, Any], *, repo_root: Path = ROOT) -> dict[str
     elif kind == R2_KIND:
         handler_errors, claim_scope = _validate_r2(
             entry, source, verifier, compiler_declared, repo_root
+        )
+    elif kind == R9_KIND:
+        handler_errors, claim_scope = _validate_r9(
+            entry, source, verifier, compiler_declared
         )
     else:
         handler_errors, claim_scope = ["CLAIM_KIND_UNSUPPORTED"], None
