@@ -1,0 +1,173 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_FAILCLOSED_TRIM_SUCCESSOR_EXECUTION_V1",
+  "status": "FRESH_SUCCESSOR_EXECUTION__INTRA_MODULE_FAILCLOSED_TRIM_FRONTIER__ZERO_PROMOTION_CREDIT",
+  "recorded_at": "2026-10-10",
+  "mission": "Minimum resource-feasible executable description conditional on already-owned Brain substrate.",
+  "governing_laws": [
+    "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V1.md",
+    "canonical/laws/BYTES_RESOURCE_BOUNDED_MINIMUM_MECHANISM_LAW_V1.md"
+  ],
+  "predecessor": {
+    "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_JOINT_LAZY_IMPORT_SUCCESSOR_EXECUTION_20261010_V1.json",
+    "package_raw_python_source_bytes": 6306260,
+    "B_exec_raw_python_source_bytes": 6309020,
+    "python_files": 277,
+    "polys_loaded_trace_raw_python_source_bytes": 1211849,
+    "comparable_archive_bytes": 1096200,
+    "comparable_archive_sha256": "e9ed3086ad678a8e3c17f2dfabd1b3e39fa6a44d93e57a651a9bef38a1da6ac9",
+    "fresh_qualification": "4370/4370"
+  },
+  "structural_cut": {
+    "id": "INTRA_MODULE_CAUSAL_DEAD_WEIGHT_FAILCLOSED_TRIM_V10",
+    "principle": "After module-level reachability cuts, replace function/method bodies with fail-closed bounded-contract stubs only when their exact qualified predecessor bodies were never executed across the spent profiling corpus; bind every source and target file by SHA-256.",
+    "files_changed": 20,
+    "fail_closed_stub_targets": 1006,
+    "file_graph_deleted": 0,
+    "raw_package_reduction_bytes": 422941,
+    "polys_loaded_source_reduction_bytes": 422941,
+    "reconstructed_transform": {
+      "tool": "canonical/research/bytes/tools/intra_module_failclosed_trim_v10.py",
+      "tool_sha256": "5e9cf855e27f3c3f4faa7918ca6bdfa5dd65781467e90cdc69f66f9ce103898d",
+      "compressed_manifest_payload_sha256": "900c9a930167b319917853ba8b4adf03d35b3e5fa1bc18472df57b635f4a3fda",
+      "base_identity_policy": "FAIL_CLOSED_ON_ANY_SOURCE_SHA_MISMATCH",
+      "target_identity_policy": "FAIL_CLOSED_ON_ANY_RESULT_SHA_MISMATCH"
+    },
+    "changed_file_concentrations": [
+      [
+        "sympy/polys/polytools.py",
+        -85653
+      ],
+      [
+        "sympy/polys/matrices/domainmatrix.py",
+        -58058
+      ],
+      [
+        "sympy/polys/rings.py",
+        -43566
+      ],
+      [
+        "sympy/polys/polyclasses.py",
+        -29813
+      ],
+      [
+        "sympy/polys/euclidtools.py",
+        -29226
+      ],
+      [
+        "sympy/polys/rootisolation.py",
+        -27957
+      ],
+      [
+        "sympy/polys/galoistools.py",
+        -27843
+      ],
+      [
+        "sympy/polys/factortools.py",
+        -21777
+      ],
+      [
+        "sympy/polys/matrices/sdm.py",
+        -20149
+      ]
+    ]
+  },
+  "measured_candidate": {
+    "status": "PHYSICALLY_TRIMMED_RESEARCH_CANDIDATE__NOT_PROMOTED",
+    "python_files": 277,
+    "package_raw_python_source_bytes": 5883319,
+    "router_raw_python_source_bytes": 2760,
+    "B_exec_raw_python_source_bytes": 5886079,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "package_manifest_sha256": "181d7798bc5b9b0cdd182c8fc052d7620b9bd490ef74ff3e0e4920218410e5c4",
+    "raw_improvement_vs_immediate_predecessor_bytes": 422941,
+    "polys_loaded_trace_raw_python_source_bytes": 788908,
+    "comparable_source_archive_bytes": 1029488,
+    "comparable_source_archive_sha256": "90286e299618a07c68140aa9791e9399a3f944e2df19c558785da54853cb93f3",
+    "comparable_archive_improvement_bytes": 66712
+  },
+  "qualification": {
+    "spent_prechecks": [
+      {
+        "id": "QUAL_SUCCESSOR_NEXT9_20261010_V1",
+        "cases": 3910,
+        "result": "3910/3910"
+      },
+      {
+        "id": "QUAL_SUCCESSOR_NEXT10_20261010_V1",
+        "cases": 4140,
+        "result": "4140/4140"
+      },
+      {
+        "id": "QUAL_SUCCESSOR_NEXT11_20261010_V1",
+        "cases": 4370,
+        "result": "4370/4370"
+      },
+      {
+        "id": "QUAL_SUCCESSOR_NEXT12_20261010_V1",
+        "cases": 4600,
+        "result": "4600/4600"
+      }
+    ],
+    "fresh_NEXT13": {
+      "id": "QUAL_SUCCESSOR_NEXT13_20261010_V1",
+      "seed": 3605551,
+      "per_operation_budget": 420,
+      "cases": 4830,
+      "corpus_sha256": "46f03227e5ecad549326f21502a3761329a2939c2bd14d02db4a31f63aab8584",
+      "stock_donor_positive_control": "4830/4830",
+      "physical_candidate": "4830/4830",
+      "independent_copy_replay": "4830/4830",
+      "extracted_archive_replay": "4830/4830",
+      "status": "SPENT_ONCE_AS_FRESH_FINAL_CANDIDATE_QUALIFICATION"
+    }
+  },
+  "precursor": {
+    "id": "AD_HOC_INTRAMODULE_STUB_EXPERIMENT_V28",
+    "package_raw_python_source_bytes": 5878924,
+    "archive_bytes": 1032388,
+    "result": "Fresh NEXT12 4600/4600 plus copy/archive replay",
+    "role": "EXPERIMENTAL_PRECURSOR_ONLY__NOT_CANONICAL_FRONTIER",
+    "reason": "Slightly smaller raw candidate but ad-hoc body replacements lacked the compact exact hash-bound reconstruction law used by the accepted V10 identity."
+  },
+  "reproducibility": {
+    "predecessor_reconstruction": "canonical/research/bytes/tools/rebuild_candidate_v9.py",
+    "successor_reconstruction": "canonical/research/bytes/tools/rebuild_candidate_v10.py",
+    "successor_reconstruction_sha256": "6e9a8bdd56936802e47b5fb34f84c296cb17184d3b3aa8b17cd40b6495c6e339",
+    "intra_module_trim": "canonical/research/bytes/tools/intra_module_failclosed_trim_v10.py",
+    "route": "canonical/research/bytes/tools/exact_symbolic_route_v1.py",
+    "semantic_digest": "canonical/research/bytes/tools/semantic_digest_v1.py",
+    "qualification_generator": "canonical/research/bytes/tools/generate_qualification_v1.py",
+    "loaded_trace_tool": "canonical/research/bytes/tools/trace_loaded_v1.py",
+    "physical_slice_tool": "canonical/research/bytes/tools/build_physical_slice_v1.py",
+    "qualification_runner": "canonical/research/bytes/tools/run_qualification_v1.py"
+  },
+  "next_frozen_qualification": {
+    "id": "QUAL_SUCCESSOR_NEXT14_20261010_V1",
+    "seed": 3741657,
+    "per_operation_budget": 440,
+    "cases": 5060,
+    "corpus_sha256": "acd117d92c2ec91279ff9e58d4460c816fa4a34f957485e705f0482d07df43be",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT"
+  },
+  "durable_artifact_persistence": {
+    "canonical_evidence_and_reconstruction_tools": "PERSISTED_IN_GITHUB",
+    "exact_qualified_archive": {
+      "library_status": "PERSISTED_IN_CHATGPT_LIBRARY",
+      "library_file_id": "libfile_ce8d70e870908191995c6cbefd1d43d0",
+      "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_FAILCLOSED_TRIM_SUCCESSOR_20261010_V1.tar.xz",
+      "bytes": 1029488,
+      "sha256": "90286e299618a07c68140aa9791e9399a3f944e2df19c558785da54853cb93f3",
+      "extracted_replay": "4830/4830"
+    }
+  },
+  "truth_boundary": [
+    "MEASURED: the 5,883,319-byte physical package passes fresh NEXT13 4,830/4,830 on stock donor, candidate, independent copy replay, and extracted archive replay.",
+    "MEASURED: all 277 predecessor modules remain in the loaded closure; the reduction is intra-module and cuts 422,941 raw bytes from 1,006 function/method bodies across 20 files.",
+    "MEASURED: loaded polys source falls from 1,211,849 to 788,908 raw bytes.",
+    "MEASURED: exact reconstruction fails closed on predecessor file drift and verifies every generated target file hash.",
+    "INFERRED: the replaced bodies are outside this bounded qualified route, not universally unnecessary SymPy functionality.",
+    "NOT CLAIMED: universal SymPy correctness, universal safety of the stubs outside the bounded route, all exact-symbolic capability, absolute information-theoretic minimality, or Opus-family promotion.",
+    "PROMOTION CREDIT: 0."
+  ],
+  "next_action": "Profile the retained executing bodies and remaining import-time state using only spent NEXT12/NEXT13 evidence. Seek smaller branch/block-level or representation-level cuts. Do not touch NEXT14 until a new exact physical candidate is frozen."
+}
