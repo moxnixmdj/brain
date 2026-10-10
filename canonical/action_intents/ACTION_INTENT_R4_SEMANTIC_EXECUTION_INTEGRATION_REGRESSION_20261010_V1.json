@@ -1,0 +1,37 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V12_INSTANCE",
+  "action_id": "R4_SEMANTIC_EXECUTION_INTEGRATION_REGRESSION_20261010_V1",
+  "date": "2026-10-10",
+  "status": "ACTIVE_PROOF_ONLY__ZERO_FRESH_REALITY__ZERO_TERMINAL_CREDIT",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "canonical_base_commit": "ec6a9288ff7d9da29251011a12869b8f777131fe",
+  "action_kind": "R4_INTEGRATION_REGRESSION_ONLY",
+  "causal_blocker": "UNIT_TESTS_EXIST_FOR_SEMANTIC_ROOT_RECEIPT_BUT_NO_DIRECT_REGRESSION_PROVES_CANONICAL_ROOT_THEOREM_AUTHORITY_PATH_INVOKES_THEM",
+  "expected_parent_frontier_change": "NO_RUNTIME_CHANGE__ADD_DIRECT_LOAD_BEARING_INTEGRATION_REGRESSION",
+  "theory_invariants": {
+    "runtime_unchanged": true,
+    "root_theorem_unchanged": true,
+    "no_new_root": true,
+    "hard_zero_incremental_spend": true,
+    "no_fresh_target_reality": true,
+    "zero_terminal_credit": true
+  },
+  "recursive_obs": {
+    "live_canonical_refreshed": true,
+    "stale_pr_3883_closed_as_superseded": true,
+    "selected_route": "TEST_ONLY_EXTRACTION_ON_CURRENT_MAIN"
+  },
+  "behavioral_contract": {
+    "behavior_id": "R4_SEMANTIC_EXECUTION_INTEGRATION_REGRESSION_V1",
+    "required_output_or_action": "DIRECTLY_TEST_CANONICAL_R4_PATH_REJECTS_A_PROVED_CURRENT_SLOT_WHEN_SEMANTIC_VALIDATOR_REJECTS",
+    "success_condition": "CENTRAL_PATH_REGRESSION_FAILS_IF_SEMANTIC_RERUN_IS_REMOVED_OR_IGNORED",
+    "failure_condition": "SEMANTIC_RECEIPT_UNIT_TESTS_PASS_WHILE_ROOT_THEOREM_CAN_SKIP_SEMANTIC_EXECUTION",
+    "verification_route": "REMOTE_EXACT_BYTE_REPLAY",
+    "scope": "TEST_ONLY"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
