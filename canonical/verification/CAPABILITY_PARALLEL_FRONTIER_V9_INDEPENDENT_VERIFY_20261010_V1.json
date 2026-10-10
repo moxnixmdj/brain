@@ -1,0 +1,77 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_PARALLEL_FRONTIER_V9_INDEPENDENT_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__PYCOMPILE__12_OF_12_ADVERSARIAL_TESTS__CURRENT_18E3B07D_FRONTIER_REPLAY__SIX_READ_ONLY_LANES__ZERO_FULL_EXECUTION__ZERO_CREDIT",
+  "carrier": {
+    "type": "SPRITE",
+    "name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "role": "INDEPENDENT_EXECUTION_CARRIER__NO_SEMANTIC_PROMOTION_OR_TERMINAL_AUTHORITY"
+  },
+  "exact_subject": {
+    "runtime_path": "canonical/runtime/capability_parallel_frontier_v1.py",
+    "runtime_git_blob_sha": "ba1efcc4cc6ad96181af7ca13aa3be139756cb8d",
+    "tests_path": "canonical/tests/test_capability_parallel_frontier_v1.py",
+    "tests_git_blob_sha": "254ede46b030ece01a94eefda505ccef0f71de54",
+    "frontier_path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
+    "frontier_git_blob_sha": "a417d4af803fa1fb654f8f164ba819b55e4e8441",
+    "assurance_path": "canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json",
+    "assurance_git_blob_sha": "6934692f76a7fcada460b5dd895a0b5eda79fb44",
+    "professional_path": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
+    "professional_git_blob_sha": "56afab9ee8ad927d07e7f939a357896d6295ba4c"
+  },
+  "execution": {
+    "py_compile": "PASS",
+    "unittest_module": "canonical.tests.test_capability_parallel_frontier_v1",
+    "tests_run": 12,
+    "failures": 0,
+    "errors": 0,
+    "result": "OK",
+    "current_frontier_replay": "PASS"
+  },
+  "verified_properties": [
+    "STALE_UNMODELED_SOURCE_DRIFT_FAILS_CLOSED",
+    "PROFESSIONAL_DYNAMIC_POINTER_FOLLOW_REKEYS_ONLY_COHERENT_SEQUENTIAL_ROOT",
+    "ASSURANCE_DYNAMIC_POINTER_FOLLOW_RUNS_EVEN_WHEN_PROFESSIONAL_BYTES_ARE_UNCHANGED",
+    "ASSURANCE_MUST_MATCH_CURRENT_PROFESSIONAL_SUBJECT_IDENTITY_ROOT_COUNT_AND_NEXT_EDGE",
+    "ASSURANCE_PROMOTION_BLOCKERS_AND_AUTHORITY_BOUNDARY_MUST_REMAIN_UNCHANGED",
+    "INCOMPLETE_MUTATING_WORK_DOES_NOT_DISPATCH",
+    "INCOMPLETE_READ_ONLY_EVIDENCE_WORK_MAY_PARALLELIZE_WHEN_NONCONFLICTING",
+    "DIMENSIONWISE_PARETO_DOMINANCE_PRUNES_WITHOUT_SCALARIZATION",
+    "NONCONFLICTING_COMPLETE_WORK_MAY_RUN_IN_PARALLEL",
+    "CONFLICTING_INCOMPARABLE_WORK_REMAINS_UNRESOLVED",
+    "SLEEPING_AND_AUDIT_ONLY_WORK_IS_NOT_PRIMARY",
+    "READY_WORK_REQUIRES_SATISFIED_PREREQUISITES"
+  ],
+  "current_plan": {
+    "frontier_id": "LIVE_WORK_FRONTIER_20261010_18E3B07D_V8",
+    "status": "PARALLEL_FRONTIER_PLAN_READY",
+    "parallel_read_only_evidence_work_ids": [
+      "BYTES_EXACT_SYMBOLIC_V24_NEXT_PHYSICAL_CUT",
+      "ESCAPE_GAP_A_AUTHENTICATED_ROW_PROOFS",
+      "ESCAPE_GAP_B_STRICT_PROGRESS_ROW_PROOFS",
+      "PROFESSIONAL_QUALITY_V7_R12_META_COMPOSITION_CLOSURE_BINDING",
+      "REPOSITORY_PROMOTION_ENFORCEMENT",
+      "TB_SCIENCE_RANK20_V13_PREACTIVATION_PROMOTION"
+    ],
+    "parallel_full_execution_work_ids": [],
+    "vector_complete_candidate_ids": [],
+    "vector_incomplete_candidate_count": 6,
+    "unresolved_evidence_conflict_components": [],
+    "unresolved_full_execution_conflict_components": []
+  },
+  "hard_nonclaims": [
+    "NO_FULL_EXECUTION_DISPATCH_AUTHORITY",
+    "NO_COMPLETE_VECTOR_EVIDENCE",
+    "NO_SCALAR_TRADEOFF_CALIBRATION",
+    "NO_CLAIM_ALL_FUTURE_SOURCE_FAMILIES_ARE_DYNAMICALLY_SAFE",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
