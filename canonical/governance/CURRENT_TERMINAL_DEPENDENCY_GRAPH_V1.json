@@ -152,7 +152,7 @@
       "id": "CURRENT_RUNTIME_SEMANTIC_REFINEMENT_COMPLETION",
       "kind": "LEAF",
       "status": "UNRESOLVED",
-      "note": "SEMANTIC_PROOF_MECHANISM_EXISTS_BUT_CURRENT_AUTHORITY_REVISION_95_HAS_40_UNIQUE_CURRENT_RUNTIME_REFINEMENT_OBLIGATIONS__NONE_MAY_INHERIT THE FINITE-DOMAIN PROBE PROOF WITHOUT SUBJECT-SPECIFIC PROOF",
+      "note": "ONE_OF_40_CURRENT_RUNTIME_SUBJECTS_NOW_HAS_SUBJECT_SPECIFIC_SEMANTIC_REFINEMENT__TERMINAL_ROOT_DECISION_GATE CLOSED BY STATIC AST BRANCH CENSUS PLUS 21 WITNESS EXECUTION__39 CURRENT RUNTIME OBLIGATIONS REMAIN",
       "current_runtime_obligation_count": 40,
       "obligation_snapshot": {
         "path": "canonical/governance/CURRENT_AUTHORITY_RUNTIME_REFINEMENT_OBLIGATION_SNAPSHOT_20261010_V1.json",
@@ -162,6 +162,18 @@
         "COMPOSITION_MISMATCH",
         "IMPLEMENTATION_REFINEMENT_MISMATCH",
         "NOVEL_DIMENSION"
+      ],
+      "proved_runtime_obligation_count": 1,
+      "unresolved_runtime_obligation_count": 39,
+      "proved_subjects": [
+        {
+          "path": "canonical/runtime/terminal_root_decision_gate_v1.py",
+          "git_blob_sha": "40a6f984013d0d701edba498c2a122edcb9a8103",
+          "verification": {
+            "path": "canonical/verification/TERMINAL_ROOT_DECISION_GATE_EXECUTABLE_REFINEMENT_VERIFY_20261010_V1.json",
+            "git_blob_sha": "5f4411c9b321d20b7c520b7a7c7453006bfe2f21"
+          }
+        }
       ]
     },
     {
