@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_R12_ROOT_REGISTRY_INDEPENDENT_VERIFY_V3",
+  "date": "2026-10-11",
+  "status": "PASS__INDEPENDENT_SPRITE__STABLE_R12_THREE_OF_THREE_ROOTS_EXECUTABLE__R4_PROOF_CLOSURE_TRUE__ZERO_PROPERTY_OR_TERMINAL_CREDIT",
+  "base_main_commit": "607b0e97bacf43e12405374daef788ba27244472",
+  "subject": {
+    "registry": {
+      "path": "canonical/governance/COVERAGE_ROOT_REGISTRY_PROFESSIONAL_R12_SEMANTIC_20261011_V3.json",
+      "git_blob_sha": "f14486629e31420d639c7769e9b96ab44f3d31c8"
+    },
+    "runtime": {
+      "path": "canonical/runtime/professional_r12_root_registry_verify_v3.py",
+      "git_blob_sha": "c113d6f458f69d56ad7bb60f2c218f791d1beacf"
+    },
+    "tests": {
+      "path": "canonical/tests/test_professional_r12_root_registry_verify_v3.py",
+      "git_blob_sha": "afd5f9190bb71304411e8b13f5adefa16988ce6e"
+    },
+    "stable_claim": {
+      "path": "canonical/governance/COVERAGE_COMPLETENESS_FROZEN_CLAIM_PROFESSIONAL_R12_SEMANTIC_20261010_V2.json",
+      "git_blob_sha": "7b26ddba501358d42d6fa342efd27d389bb30654"
+    }
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-professional-hard-defect-verify-20261010",
+    "carrier_id": "sprite-1bbb86ed-1f7c-409f-8397-fadc4de7a62a",
+    "workspace": "/home/sprite/r12-universal-positive-gate-v1",
+    "exact_branch_bytes_overlaid": true,
+    "py_compile": "PASS",
+    "tests_run": 7,
+    "tests_passed": 7,
+    "tests_failed": 0,
+    "transcript_sha256": "cc20bc324af844d919543aa3796f28ecadffaa21881921d5a916a5702143d353",
+    "transcript_bytes": 1253,
+    "verifier_result_sha256": "fe6a4861f2eac35b91e669e65cf88514727965082a2ff8b694bd42ee392403ca"
+  },
+  "truth": {
+    "claim_id": "11870f850b46bcfcc31094f764fc4f45c911aaac413979ceb62679ff19a53162",
+    "stable_mission_authority_binding": true,
+    "proved_root_ids": [
+      "CC_R1_REALITY_CONTAINMENT_V1",
+      "CC_R2_MISSION_SOUNDNESS_V1",
+      "CC_R3_TERMINAL_CLOSURE_V1"
+    ],
+    "open_root_ids": [],
+    "proved_root_count": 3,
+    "open_root_count": 0,
+    "r4_proof_closure": true,
+    "semantic_property_truth_authority": false
+  },
+  "hard_nonclaims": [
+    "NO_R12_SEMANTIC_PROPERTY_TRUTH_FROM_R4_REGISTRY_CLOSURE_ALONE",
+    "NO_CROSS_CLAIM_ROOT_TRANSPORT",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
