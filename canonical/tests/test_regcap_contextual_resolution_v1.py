@@ -203,6 +203,98 @@ class Tests(unittest.TestCase):
             "UNRESOLVED__NO_CERTIFIED_CONTEXTUAL_OBSERVATION",
         )
 
+
+    def test_ccob_functional_signature_selects_ccob_in_complete_three_way_task(self):
+        text = "The buffer can be drawn down as losses are incurred."
+        candidates = [regcap.CCOB, regcap.CCYB, regcap.TLAC]
+        out = resolver.resolve(
+            text,
+            start=0,
+            end=len(text),
+            task_scope_id="task:ccob-functional",
+            candidate_ids=candidates,
+            candidate_completeness_receipt={"candidate": True},
+            candidate_completeness_verifier=completeness_verifier(
+                "task:ccob-functional", candidates
+            ),
+            projection_verifier=fake_projection,
+        )
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(out["selected_concept_id"], regcap.CCOB)
+
+    def test_ccyb_functional_signature_selects_ccyb_in_complete_three_way_task(self):
+        text = "The cushion is released when system-wide risk crystallises or dissipates."
+        candidates = [regcap.CCOB, regcap.CCYB, regcap.TLAC]
+        out = resolver.resolve(
+            text,
+            start=0,
+            end=len(text),
+            task_scope_id="task:ccyb-functional",
+            candidate_ids=candidates,
+            candidate_completeness_receipt={"candidate": True},
+            candidate_completeness_verifier=completeness_verifier(
+                "task:ccyb-functional", candidates
+            ),
+            projection_verifier=fake_projection,
+        )
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(out["selected_concept_id"], regcap.CCYB)
+
+    def test_tlac_functional_signature_selects_tlac_in_complete_three_way_task(self):
+        text = (
+            "The capacity provides loss-absorbing and recapitalisation capacity "
+            "available in resolution for a failing G-SIB."
+        )
+        candidates = [regcap.CCOB, regcap.CCYB, regcap.TLAC]
+        out = resolver.resolve(
+            text,
+            start=0,
+            end=len(text),
+            task_scope_id="task:tlac-functional",
+            candidate_ids=candidates,
+            candidate_completeness_receipt={"candidate": True},
+            candidate_completeness_verifier=completeness_verifier(
+                "task:tlac-functional", candidates
+            ),
+            projection_verifier=fake_projection,
+        )
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(out["selected_concept_id"], regcap.TLAC)
+
+    def test_ccob_structural_signature_selects_ccob_in_complete_three_way_task(self):
+        text = "The cushion is 2.5% CET1 above the regulatory minimum."
+        candidates = [regcap.CCOB, regcap.CCYB, regcap.TLAC]
+        out = resolver.resolve(
+            text,
+            start=0,
+            end=len(text),
+            task_scope_id="task:ccob-structural",
+            candidate_ids=candidates,
+            candidate_completeness_receipt={"candidate": True},
+            candidate_completeness_verifier=completeness_verifier(
+                "task:ccob-structural", candidates
+            ),
+            projection_verifier=fake_projection,
+        )
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(out["selected_concept_id"], regcap.CCOB)
+
+    def test_signature_still_does_not_select_without_candidate_completeness(self):
+        text = "The cushion is 2.5% CET1 above the regulatory minimum."
+        candidates = [regcap.CCOB, regcap.CCYB, regcap.TLAC]
+        out = resolver.resolve(
+            text,
+            start=0,
+            end=len(text),
+            task_scope_id="task:no-completeness",
+            candidate_ids=candidates,
+            projection_verifier=fake_projection,
+        )
+        self.assertFalse(out["pass"])
+        self.assertEqual(out["status"], "OPEN__CANDIDATE_SET_COMPLETENESS_REQUIRED")
+        self.assertEqual(out["matching_candidates"], [regcap.CCOB])
+        self.assertFalse(out["concept_identity_authority"])
+
     def test_no_terminal_authority_even_when_concept_resolved(self):
         text = "The cushion is the only designated releasable buffer in the Basel Framework."
         candidates = [regcap.CCOB, regcap.CCYB, regcap.TLAC]
