@@ -236,7 +236,7 @@
         "ACQUIRE_EVIDENCE",
         "ADAPT_EXISTING"
       ],
-      "existing_binding": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V6.json",
+      "existing_binding": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V7.json",
       "exact_remaining_class": "12_ACTIVE_ACQUISITION_EVIDENCE_ROWS__GDPVAL_AND_CHARTOGRAPHY_RECLASSIFIED_FROM_STALE_GAP_B_AFTER_CAUSAL_FALSIFICATION__SHARED_CONTENT_AUTHENTICATED_POLICY_COVER_REALIZATION_ADAPTER_LIVE_AND_VERIFIED__REAL_AUTHENTICATED_ROW_PROOFS_REMAIN_OPEN__PLUS_1_SEPARATELY_PARKED_TB_ROW_OUTSIDE_ACTIVE_GAP_A",
       "new_primitive_status": "NOT_ESTABLISHED",
       "executable_audit": "canonical/runtime/escape_progress_shared_gap_audit_v5.py",
@@ -280,7 +280,12 @@
         "parked_unresolved_count": 1
       },
       "historical_successor_manifest_gap_a_count": 10,
-      "successor_count_is_current_topology_authority": false
+      "successor_count_is_current_topology_authority": false,
+      "binding_reconciliation": {
+        "path": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V7.json",
+        "git_blob_sha": "2119d0bc2b5c06399da49adb5a86b4e9faf7e08f",
+        "reason": "CURRENT_TOPOLOGY_12_ACQUISITION_1_PARKED_TB__ZERO_ACTIVE_GAP_B"
+      }
     },
     {
       "residual_id": "ESCAPE_GAP_B_INTERNAL_ROUTE_STRICT_PROGRESS",
@@ -288,7 +293,7 @@
         "ADAPT_EXISTING",
         "VERIFY_EXISTING"
       ],
-      "existing_binding": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V6.json",
+      "existing_binding": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V7.json",
       "exact_remaining_class": "0_ACTIVE_GAP_B_ROWS__GDPVAL_AND_CHARTOGRAPHY_CAUSALLY_RECLASSIFIED_TO_ACQUISITION_EVIDENCE_FRONTIER__1_PARKED_UNRESOLVED_TB_ROW_OUTSIDE_ACTIVE_GAP_B__NO_STRICT_PROGRESS_WITNESS_SCHEDULED_NOW",
       "new_primitive_status": "NOT_ESTABLISHED",
       "executable_audit": "canonical/runtime/escape_progress_shared_gap_audit_v5.py",
@@ -345,7 +350,12 @@
         "parked_unresolved_count": 1
       },
       "historical_successor_manifest_gap_b_count": 3,
-      "successor_count_is_current_topology_authority": false
+      "successor_count_is_current_topology_authority": false,
+      "binding_reconciliation": {
+        "path": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V7.json",
+        "git_blob_sha": "2119d0bc2b5c06399da49adb5a86b4e9faf7e08f",
+        "reason": "CURRENT_TOPOLOGY_12_ACQUISITION_1_PARKED_TB__ZERO_ACTIVE_GAP_B"
+      }
     },
     {
       "residual_id": "ASSURANCE_CLOSURE_COMPILER_NOT_LIVE_DEFAULT",
@@ -650,6 +660,8 @@
     "source": "canonical/governance/ESCAPE_ACTIVE_GAP_B_CAUSAL_RECLASSIFICATION_20261010_V1.json",
     "source_git_blob_sha": "c793b7f57b13a936646a2825cd67f26c28bf3744",
     "row_credit_delta": 0,
-    "terminal_credit_delta": 0
+    "terminal_credit_delta": 0,
+    "active_binding_path": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V7.json",
+    "active_binding_git_blob_sha": "2119d0bc2b5c06399da49adb5a86b4e9faf7e08f"
   }
 }
