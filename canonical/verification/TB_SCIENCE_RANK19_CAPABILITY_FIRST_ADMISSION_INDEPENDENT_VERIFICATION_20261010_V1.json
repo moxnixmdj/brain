@@ -1,28 +1,63 @@
 {
   "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK19_CAPABILITY_FIRST_ADMISSION_INDEPENDENT_VERIFICATION_V1",
   "date": "2026-10-10",
-  "status": "PASS__EXACT_BRANCH_BYTES__RANK19_NEW_CAPABILITY_VALIDATION_ADMISSION__ZERO_EXPOSURE_ZERO_CREDIT",
+  "status": "PASS__EXACT_BRANCH_BYTES__IMMUTABLE_LEDGER_BOUND__RANK19_NEW_CAPABILITY_VALIDATION_ADMISSION__ZERO_EXPOSURE_ZERO_CREDIT",
   "subject": {
     "branch": "successor/rank19-capability-first-admission-20261010-v1",
     "admission": {
       "path": "canonical/governance/TB_SCIENCE_RANK19_CAPABILITY_FIRST_CHECKPOINT_ADMISSION_20261010_V1.json",
-      "git_blob_sha": "24e287c18387d909162ab94375c3c7968bddc605"
+      "git_blob_sha": "9a0c426108e1c57052c07f39e2a75ebb9ca57346"
     },
     "verifier": {
       "path": "canonical/runtime/tb_science_rank19_capability_first_admission_v1.py",
-      "git_blob_sha": "6dad40931895d46bf56ac711b531379e82e51b14"
+      "git_blob_sha": "1e83aacf3b608734589635bf06d8349fc19b2220"
     },
     "regression_test": {
       "path": "canonical/tests/test_tb_science_rank19_capability_first_admission_v1.py",
       "git_blob_sha": "64fe1056b25d05e1fc557ce4a190fd2aadbfcd69"
     }
   },
-  "red_phase": {
-    "result": "EXPECTED_FAIL",
-    "failure": "ModuleNotFoundError: No module named 'canonical.runtime'",
-    "cause": "VERIFIER_NOT_YET_IMPLEMENTED",
-    "test_commit": "28ce214b5a20e4fc0a472e2a2d0234c89d6128c6"
-  },
+  "test_driven_history": [
+    {
+      "phase": "RED_1",
+      "result": "EXPECTED_FAIL",
+      "failure": "ModuleNotFoundError: No module named 'canonical.runtime'",
+      "cause": "VERIFIER_NOT_YET_IMPLEMENTED",
+      "commit": "28ce214b5a20e4fc0a472e2a2d0234c89d6128c6"
+    },
+    {
+      "phase": "GREEN_1",
+      "result": "PASS",
+      "note": "INITIAL_EXACT_BRANCH_REPLAY_BEFORE_POINTER_MUTATION"
+    },
+    {
+      "phase": "RED_2",
+      "result": "EXPECTED_FAIL",
+      "failure_classes": [
+        "SOURCE_DRIFT:current_tb_science_execution",
+        "CURRENT_RANK19_NEXT_STEP_DRIFT"
+      ],
+      "cause": "MUTABLE_CURRENT_POINTER_WAS_INCORRECTLY_BOUND_AS_ADMISSION_PREMISE",
+      "repair": "REPLACE_MUTABLE_POINTER_WITH_IMMUTABLE_V38_LEDGER"
+    },
+    {
+      "phase": "RED_3",
+      "result": "EXPECTED_FAIL",
+      "failure_classes": [
+        "RANK19_LEDGER_PREDECESSOR_COUNT_DRIFT",
+        "RANK19_LEDGER_ATTEMPT_DRIFT",
+        "RANK19_LEDGER_EXPOSURE_DRIFT",
+        "RANK19_LEDGER_CONSUMPTION_DRIFT"
+      ],
+      "cause": "VERIFIER_ASSUMED_PUBLIC_BINDING_FIELD_LAYOUT_INSTEAD_OF_CANONICAL_V38_SCHEMA",
+      "repair": "VERIFY_CANONICAL_COUNTS_NEXT_SLOT_AND_SCHEDULER_FIELDS_DIRECTLY"
+    },
+    {
+      "phase": "GREEN_FINAL",
+      "result": "PASS",
+      "note": "EXACT_CORRECTED_BRANCH_BYTES_REPLAYED_AGAINST_IMMUTABLE_V38_LEDGER_AFTER_CURRENT_POINTER_UPDATE"
+    }
+  ],
   "independent_carrier": {
     "provider": "Sprites",
     "sprite_name": "brain-capability-first-scheduler-verify-20261008-v1",
@@ -49,7 +84,7 @@
     "PLANNER_V7_REAL_LOCAL_QWEN_ZERO_EXPOSURE_VERIFICATION_PASSES",
     "CURRENT_SCHEDULER_EXPLICITLY_ALLOWS_NEW_CAPABILITY_VALIDATION",
     "RANK19_SLOT_DIGEST_AND_LOGICAL_ATTEMPT_MATCH_STAGED_ONE_SLOT_AUTHORITY",
-    "RANK19_REMAINS_UNREAD_UNSTARTED_UNCONSUMED",
+    "IMMUTABLE_V38_LEDGER_PROVES_RANK19_UNREAD_UNSTARTED_UNCONSUMED_AND_INEFFECTIVE",
     "ADMISSION_AUTHORIZES_CHECKPOINT_DISPATCH_ROLE_ONLY_AND_MINTS_NO_EXECUTION_AUTHORITY",
     "ONE_LOGICAL_ATTEMPT_ZERO_RETRY_ZERO_REPLACEMENT_CONTROLS_PRESERVED"
   ],
@@ -65,6 +100,7 @@
     "NO_PUBLIC_RANK19_EXECUTION_SURFACE_RESEAL_CREDIT_YET",
     "NO_RANK19_TASK_READ_OR_START",
     "NO_BENCHMARK_RESULT",
-    "NO_TERMINAL_OR_CAPABILITY_CREDIT"
+    "NO_TERMINAL_OR_CAPABILITY_CREDIT",
+    "NO_MUTABLE_CURRENT_POINTER_IS_AN_ADMISSION_PREMISE"
   ]
 }
