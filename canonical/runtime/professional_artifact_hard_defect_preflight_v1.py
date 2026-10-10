@@ -359,6 +359,7 @@ def inspect_artifact(path: str | Path) -> dict[str, Any]:
     except (OSError, ValueError) as exc:
         return {
             "path": str(p),
+            "suffix": suffix,
             "pass": False,
             "errors": [type(exc).__name__ + ":" + str(exc)],
             "hard_defects": [],
