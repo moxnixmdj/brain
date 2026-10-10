@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_DEFAULT_RUNTIME_INTEGRATION_V1",
   "date": "2026-10-09",
-  "status": "ACTIVE__CURRENT_R2_ACTIVATION_BASELINE_PLUS_VERIFIED_V21_BACKEND__STABLE_DYNAMIC_ROUTE_ADMISSION__AUTO_ONE_SHOT_FALLBACK__PROOF_CARRYING_SYNTHESIS_TO_LIVE_ROUTE_PROMOTION__ZERO_TERMINAL_CREDIT",
+  "status": "ACTIVE__CURRENT_R2_ACTIVATION_BASELINE_PLUS_VERIFIED_V21_BACKEND__STABLE_DYNAMIC_ROUTE_ADMISSION__AUTO_ONE_SHOT_FALLBACK__PROOF_CARRYING_SYNTHESIS_TO_LIVE_ROUTE_PROMOTION__ZERO_TERMINAL_CREDIT__STABLE_WRAPPER_POINTER_REBOUND__FOCUSED_COHERENCE_REGRESSION_BOUND",
   "binding_semantics": "MUTABLE_CURRENT_PATH_IDENTITY__IMMUTABLE_LOAD_BEARING_DESCENDANTS_GIT_BLOB_BOUND",
   "canonical_front_door": {
     "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
@@ -14,7 +14,7 @@
   },
   "r2_default_route_runtime": {
     "stable_wrapper_path": "canonical/runtime/r2_direct_live_admission_v1.py",
-    "stable_wrapper_git_blob_sha": "baf62086f6258d24ae933a900c43ae62c438c503",
+    "stable_wrapper_git_blob_sha": "57d64a2f22c0cb7b76eed7eb78c2eb6961e819a2",
     "fixed_point_controller_path": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
     "fixed_point_controller_git_blob_sha": "cabe3bd1ec3748a595f3a959718c38accdacfb2f",
     "current_r2_activation_baseline": {
@@ -57,7 +57,22 @@
       "static_default_route_count_before_dynamic": 41,
       "declared_live_route_slots_before_collision_checks": 43,
       "counting_semantics": "39_IS_CURRENT_R2_V63_SCHEDULER_SNAPSHOT__41_IS_VERIFIED_V21_STATIC_DEFAULT__2_IS_CURRENT_DYNAMIC_ADMISSION_COUNT__DYNAMIC_ADMISSION_DOES_NOT_MUTATE_THE_V63_SNAPSHOT"
-    }
+    },
+    "stable_wrapper_semantic_open_handoff_verification": {
+      "path": "canonical/verification/R2_DYNAMIC_SEMANTIC_OPEN_HANDOFF_VERIFY_20261010_V1.json",
+      "git_blob_sha": "a665ad09b4113c522f1f1b091c17749152f7dd0f",
+      "status": "VERIFIED_ISOLATED_CHANGED_AND_INTEGRATION_SURFACE__41_SUCCESSFUL_CHECKS",
+      "exact_wrapper_git_blob_sha": "57d64a2f22c0cb7b76eed7eb78c2eb6961e819a2",
+      "terminal_credit_delta": 0
+    },
+    "stable_wrapper_pointer_rebind_verification": {
+      "path": "canonical/verification/DEFAULT_WRAPPER_POINTER_REBIND_VERIFY_20261010_V1.json",
+      "git_blob_sha": "b8f32a269969f0ebe9074554261bee26b2f7c603",
+      "status": "PASS__TDD_RED_GREEN_STATIC_IDENTITY__SOURCE_RUNTIME_PREEXISTING_41_CHECK_VERIFICATION__FOCUSED_COHERENCE_ASSERTION_ADDED__ZERO_CREDIT",
+      "focused_test_git_blob_sha": "8c1df80285531162f61b8910e394174add71ec44",
+      "terminal_credit_delta": 0
+    },
+    "stable_wrapper_pointer_coherence_in_focused_suite": true
   },
   "one_shot_fallback": {
     "runtime_path": "canonical/runtime/one_shot_reality_closure_v2.py",
