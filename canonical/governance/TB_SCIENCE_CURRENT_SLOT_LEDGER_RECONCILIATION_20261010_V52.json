@@ -1,0 +1,97 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V52",
+  "date": "2026-10-10",
+  "status": "CURRENT_RANK20_V6_QUARANTINED_RETIRED_ACTIVATION_IDENTITY__V4_IMPORT_REPAIR_LANDED__EIGHTEEN_CONSUMED__NO_EXECUTION_AUTHORITY",
+  "predecessor": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V51.json",
+    "git_blob_sha": "e9edbd032cc851c50c92dafdb7b114a5d2f7eaaf"
+  },
+  "v6_rejection": {
+    "path": "canonical/verification/TB_SCIENCE_RANK20_V6_RETIRED_ACTIVATION_IDENTITY_REJECTION_20261010_V1.json",
+    "git_blob_sha": "c17dbc8b434665abed9fd86b0430e26ebed60b8a",
+    "pass": true
+  },
+  "import_repair_verification": {
+    "path": "canonical/verification/TB_SCIENCE_RANK20_V4_START_CAS_IMPORT_REPAIR_VERIFY_20261010_V1.json",
+    "git_blob_sha": "c318d153a08f4132186fee0ac483b5a3414ce4ec",
+    "pass": true,
+    "public_merge_commit": "563165d0c3310af24afb14d76a2ff9732dc6d027"
+  },
+  "quarantined_v6": {
+    "claim_binding_path": "canonical/governance/TB_SCIENCE_RANK20_LOGICAL_ATTEMPT_CLAIM_BINDING_20261010_V6.json",
+    "claim_binding_git_blob_sha": "ea13cc707c685f43a61a990d851fee2bbcb23f3f",
+    "authority_path": "canonical/governance/TB_SCIENCE_RANK20_ONE_SLOT_EXECUTION_AUTHORITY_20261010_V6.json",
+    "authority_git_blob_sha": "0475ca6aa61b135a87fc818d147d475d0e3c31d2",
+    "prior_ledger_path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V51.json",
+    "prior_ledger_git_blob_sha": "e9edbd032cc851c50c92dafdb7b114a5d2f7eaaf",
+    "logical_attempt_id": "c9d1a7cb834286ae63ec78d3fe471193760e5d404c5154c796c48c254b6fae5b",
+    "execution_claim_binding_digest": "sha256:bfb1d1f78efdda8a051d58178e21e8031e4e09c4e5e0dcd0fe20eaaeba68c3ea",
+    "execution_branch": "execute/tb-science-rank20-20261010-v2",
+    "activation_filename": "ACTIVATE_RANK20_V2_PR.json",
+    "promotable": false,
+    "execution_authority_effective": false,
+    "task_read_authority_effective": false,
+    "activation_authority": false
+  },
+  "quarantined_public_v6": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "base_branch": "terminal-execution-v1",
+    "merge_commit_sha": "7c340fa3c6c9bfd03323a535f7cbb6be1c2e7c00",
+    "surface_git_blob_sha": "e8c722f87e1f260dea23766c48e18e41f8d73731",
+    "public_authority_git_blob_sha": "3e9db0937d8570ae79f8e51e0479c5ff8bc8dbca",
+    "public_ledger_git_blob_sha": "6a89dcda00b3bb60fca085b545bdea647cac0e00",
+    "epoch_git_blob_sha": "1d56aeed831d2dd16832f5c82988972154f4bbf7",
+    "execution_claim_git_blob_sha": "9c21f6544a0143a800b009473ae376df7d817006",
+    "execution_authority_effective": false,
+    "task_read_authority_effective": false,
+    "activation_present": false,
+    "task_read": false,
+    "task_started": false,
+    "benchmark_trials_consumed": 0,
+    "promotion_forbidden": true
+  },
+  "counts": {
+    "benchmark_trials_consumed": 18,
+    "consumed_successes_final": 0,
+    "consumed_failures_final": 18,
+    "started_result_pending": 0,
+    "finalized_slots": 18,
+    "active_in_flight_slot_count": 0
+  },
+  "next_slot": {
+    "ledger_schedule_rank": 20,
+    "frozen_manifest_schedule_order": 19,
+    "task_rank": 19,
+    "slot_id": "terminal-bench-science/hysteretic-aquifer-control::trial-0",
+    "task_digest": "sha256:681df0c3b2ada03a933ac4d2e11f07983676f87a9f26b61e416987904b880289",
+    "task_read_history": false,
+    "task_started": false,
+    "start_cas_acquired": false,
+    "benchmark_trials_consumed": 0
+  },
+  "successor_design": {
+    "activation_generation": "V3",
+    "intended_execution_branch": "execute/tb-science-rank20-20261010-v3",
+    "intended_activation_filename": "ACTIVATE_RANK20_V3_PR.json",
+    "authority_derived_python_activation_identity": true,
+    "candidate_start_cas_git_blob_sha": "50602966063a7e2c58761faa4798f5ec4f2eb0e3",
+    "candidate_preflight_git_blob_sha": "e6e6a8fa27f8f4def629b43612933c17f95053f6",
+    "candidate_behavior_v5_git_blob_sha": "bb857ad31043600614a94a24bc528500775ce13a",
+    "candidate_refinement_verifier_git_blob_sha": "a49c0901eed9ac65f0c0843b0ae2d62497455a4e",
+    "note": "CANDIDATE_BYTES_MUST_BE_REBASED_AND_ZERO_EXPOSURE_VERIFIED_ON_CURRENT_PUBLIC_BASE_BEFORE_CLAIM_MINT"
+  },
+  "scheduler": {
+    "frozen": true,
+    "reason": "V6_REUSES_RETIRED_V2_ACTIVATION_IDENTITY",
+    "only_authorized_transition": "REBASE_AND_VERIFY_AUTHORITY_DERIVED_ACTIVATION_GATES_ZERO_EXPOSURE__THEN_MINT_FRESH_V7_CLAIM_WITH_V3_ACTIVATION_AND_RESEAL"
+  },
+  "execution_authority": false,
+  "task_read_authority": false,
+  "activation_authority": false,
+  "repair_authority": "ZERO_EXPOSURE_ONLY",
+  "finalization_authority": false,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
