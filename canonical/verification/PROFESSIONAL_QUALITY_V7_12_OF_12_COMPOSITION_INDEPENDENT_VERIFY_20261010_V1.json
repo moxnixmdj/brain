@@ -1,0 +1,103 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_V7_12_OF_12_COMPOSITION_INDEPENDENT_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_SPRITE_EXACT_V4_12_OF_12_SAME_SUBJECT_COMPOSITION__V4_SCHEMA_SEAM_5_OF_5__THREE_ADVERSARIAL_PROBES__ZERO_QUALITY_OR_TERMINAL_CREDIT",
+  "repository": "moxnixmdj/brain",
+  "verification_input_branch": "successor/professional-12of12-composition-20261010-v1",
+  "verification_input_head": "7d889f41d628bee1713f61a51fb80e686ded02cb",
+  "exact_blobs": {
+    "composition_input": "8063d124d6fbd239814380ef4fbc710350a1dea8",
+    "composition_gate_v4": "e1cc6200286c7b400fc7be70ef0789b85af7fe61",
+    "composition_verifier": "cc01b4191a5d6d98e73f5c694decad84fcc611d9",
+    "composition_tests": "8497a6841e0a7a635ddcd992a109693b52aaa556",
+    "gate_v4_schema_tests": "02f9cb10f2e6f9fed0f3ca884c100edffa8b8925",
+    "gate_v3_public_receipt_adapter_verification": "79910bf40700ddf000630a7169566fef91e6c939",
+    "scoped_evidence_registry": "b9ddf7cbe7fbfad0e81fe068a0c19b48703b5aba",
+    "scoped_evidence_integration_verification": "664c22bfdfc51ea4058e4e2d3c3efe9d8def907b",
+    "r12_public_root_binding_verification": "174bc362ff1f1b7935925c8d17e55d36288bdbad",
+    "r3_v2_binding": "2fe91ecba3830641ed800d04b70279a3f84283bf",
+    "r3_v1_binding": "c49c120a61620d400e372884266b63ec34a054d2",
+    "r3_v1_verification": "92cacbd5f7b37cb515db9ebbc3685c961fc9e34e"
+  },
+  "independent_carrier": {
+    "provider": "Sprites",
+    "sprite": "brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/pq-v7-12of12-independent-verify",
+    "exact_files_copied_from_github_branch": true
+  },
+  "replay": {
+    "py_compile": "PASS",
+    "gate_v4_schema_tests_run": 5,
+    "gate_v4_schema_tests_passed": 5,
+    "gate_v4_schema_tests_failed": 0,
+    "exact_root_binding_count": 12,
+    "exact_scoped_capability_count": 21,
+    "independent_adversarial_probes_run": 3,
+    "independent_adversarial_probes_passed": 3,
+    "composition_result": "PASS__INDEPENDENT_EXACT_V4_12_OF_12_SAME_SUBJECT_COMPOSITION_REPLAY",
+    "transcript_sha256": "83126d04a05e13b35cba6def48d2bdd9910d840b52582e70d59a61cc50d0609a",
+    "transcript_bytes": 2074
+  },
+  "repair_history": [
+    {
+      "stage": "GITHUB_ACTIONS",
+      "observation": "TWO_ATTEMPTS_FAILED_BEFORE_EXECUTION",
+      "workflow_run_id": 38058207400,
+      "attempt_1_job_id": 114230905446,
+      "attempt_2_job_id": 114231046149,
+      "runner_id": 0,
+      "executed_steps": 0,
+      "semantic_failure": false
+    },
+    {
+      "stage": "INDEPENDENT_V3_REPLAY",
+      "observation": "R3_CURRENT_BINDING_USES_INTENTIONAL_V2_SCHEMA_WHILE_V3_GATE_REQUIRED_V1_FOR_ALL_ROOTS",
+      "classification": "COMPOSITION_ADAPTER_DEFECT_NOT_R3_BINDING_DEFECT"
+    },
+    {
+      "stage": "INDEPENDENT_V4_REPLAY_1",
+      "observation": "R3_V2_OMITS_V1_ONLY_GLOBAL_SUBJECT_IDENTITY_AUTHORITY_FIELD",
+      "repair": "REQUIRE_EXACT_SUPERSEDED_V1_BINDING_AND_V1_VERIFICATION_WITH_EXPLICIT_GLOBAL_NONAUTHORITY__PLUS_EXACT_V2_RECEIPT_NORMALIZATION"
+    },
+    {
+      "stage": "INDEPENDENT_V4_REPLAY_FINAL",
+      "observation": "PASS",
+      "r3_schema_exception_exact_and_only": true
+    }
+  ],
+  "composed_subject": {
+    "subject_kind": "DECLARED_SYSTEM",
+    "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+    "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e"
+  },
+  "proves": [
+    "ALL_TWELVE_CURRENT_PROFESSIONAL_ROOT_BINDINGS_BIND_THE_IDENTICAL_FROZEN_V7_SUBJECT_TUPLE",
+    "ALL_TWELVE_ROOT_BINDINGS_HAVE_INDEPENDENT_ROOT_SUBJECT_BINDING_AUTHORITY",
+    "R3_V2_IS_ADMITTED_ONLY_THROUGH_THE_EXACT_VERIFIED_V1_NONAUTHORITY_CHAIN_AND_EXACT_V2_RECEIPT",
+    "ALL_OTHER_CURRENT_ROOT_BINDINGS_REMAIN_V1_SCHEMA",
+    "CURRENT_21_SCOPE_REGISTRY_COVERS_ALL_TWELVE_ROOTS_WITH_ZERO_GLOBAL_LEAF_OR_ROOT_CREDIT",
+    "SAME_SUBJECT_COMPOSITION_IS_STRUCTURALLY_ADMISSIBLE"
+  ],
+  "hard_nonclaims": [
+    "NO_PROFESSIONAL_QUALITY_COMPLETENESS_PROOF",
+    "NO_GLOBAL_LEAF_OR_ROOT_CLOSURE",
+    "NO_DOMAIN_SEMANTIC_CLOSURE",
+    "NO_DOMAIN_EXECUTION_CLOSURE",
+    "NO_FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION",
+    "NO_LIVE_DEFAULT_PROMOTION",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "verified_root_subject_binding_count": 12,
+  "composition_admissible": true,
+  "professional_quality_closed": false,
+  "semantic_truth_authority": false,
+  "execution_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "next": "MERGE_COMPOSITION_PROOF__ADVANCE_CURRENT_PROFESSIONAL_AND_ASSURANCE_POINTERS_TO_12_OF_12_COMPOSITION_ADMISSIBLE__THEN_RUN_WHOLE_LEAF_SCOPE_TRANSPORT_DOMAIN_CHALLENGES_AND_FULL_CURRENT_MAIN_REGRESSION"
+}
