@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R5_V7_ROOT_SUBJECT_BINDING_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_SPRITE_6_OF_6__R5_BOUND_TO_EXACT_V7_SUBJECT_WITH_PROOF_BOUND_COMPARATIVE_EVALUATION_AND_CONDITIONAL_EVALUATOR_REFERENCE_SCOPE__ZERO_QUALITY_OR_TERMINAL_CREDIT",
+  "root_id": "R5_EVALUATOR_REFERENCE",
+  "exact_blobs": {
+    "binding": "adad696b4ce4ed62063e871e42ad91300f4590e1",
+    "verifier": "0b30aed53df61519a066857b8e22b489c96a4a87",
+    "tests": "2c36dcdb2aa14388fd768e2844deaea145222a4d",
+    "subject": "1d598bc8757017ceb34928d0df9f5fce859ef868",
+    "execution_profile": "f7e89eafbb691c16d1bdf5b8d295a468d5e3bec5",
+    "proof_bound_step_verification": "b7a9df36780513ad73fd14c6a2756c8474d8434d",
+    "r5_semantic_scope": "dc10374849f5c26e354e9c396aa1f581b5f56d63",
+    "r5_semantic_verification": "33d5e8c11e07e4a153edf3970503c6753c5343d2",
+    "evaluator_uncertainty_governance": "1b61fa4eb98e0039a46f349d31da725bb02c16e0",
+    "evaluator_uncertainty_verification": "e852c4fbc14147c17469f1a4ede4e274d768bbf7"
+  },
+  "replay": {
+    "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/pq-r5-v7-binding-verify",
+    "py_compile": "PASS",
+    "tests_run": 6,
+    "tests_passed": 6,
+    "tests_failed": 0,
+    "transcript_sha256": "1de872fa209db2761e85c7a04f9f05c5a9891a9bf6e3aeeed6f56db1005162a2"
+  },
+  "falsification_tests": [
+    "WRONG_SUBJECT_TUPLE_FAILS_CLOSED",
+    "COMPARATIVE_EVALUATION_STEP_NOT_PROOF_BOUND_FAILS_CLOSED",
+    "OWNER_CONTAINMENT_SELF_CLAIM_FAILS_CLOSED",
+    "PUBLIC_RUBRIC_OWNER_AUTHORITY_FAILS_CLOSED",
+    "SCOPE_WIDENING_FAILS_CLOSED"
+  ],
+  "proves": [
+    "R5_BINDING_USES_EXACT_FROZEN_V7_SUBJECT_TUPLE",
+    "V7_COMPARATIVE_EVALUATION_STEP_REQUIRES_CONTENT_ADDRESSED_INDEPENDENT_STEP_BINDING",
+    "R5_SUPPORT_IS_CONDITIONAL_ON_AN_INDEPENDENTLY_AUTHENTICATED_EVALUATOR_OR_REFERENCE_OUTER_CLASS",
+    "PUBLIC_RUBRIC_ONLY_HAS_ZERO_OWNER_SEMANTIC_AUTHORITY",
+    "TRUE_OWNER_EVALUATOR_CONTAINMENT_REMAINS_UNPROVED",
+    "ACTUAL_TASK_EXECUTION_STILL_REQUIRES_FRESH_RUN_CONTEXT_BOUND_STEP_RECEIPT"
+  ],
+  "hard_nonclaims": [
+    "NO_REAL_TASK_COMPARATIVE_EVALUATION_STEP_RECEIPT",
+    "NO_TRUE_CURRENT_OWNER_EVALUATOR_CONTAINMENT_PROOF",
+    "NO_PUBLIC_RUBRIC_OWNER_MONOTONICITY_PROOF",
+    "NO_GLOBAL_R5_ROOT_CLOSURE",
+    "NO_SAME_SUBJECT_COMPOSITION_PASS",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "root_subject_binding_authority": true,
+  "true_owner_evaluator_containment_proved": false,
+  "public_rubric_owner_semantic_authority": false,
+  "semantic_truth_authority": false,
+  "execution_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "next": "PROMOTE_R5_V7_ROOT_BINDING__ADVANCE_SAME_SUBJECT_FRONTIER_TO_5_OF_12__R6_NEXT"
+}
