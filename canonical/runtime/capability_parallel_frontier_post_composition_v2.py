@@ -1,17 +1,24 @@
 from __future__ import annotations
 import json,re
+from hashlib import sha1
 from pathlib import Path
 from typing import Any,Mapping
 from canonical.runtime import capability_parallel_frontier_v2 as core
 
 SCHEMA="PROJECT_BRAIN_POST_COMPOSITION_PARALLEL_FRONTIER_V2"
 PROF="canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json"
+ASSURANCE="canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json"
 BYTES="canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json"
 R2="canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json"
 PROF_WORK="PROFESSIONAL_QUALITY_V7_PROPERTY_TRUTH_DEPLETION"
+ASSURANCE_WORK="ASSURANCE_UVCK_V2_PROMOTION_GATES"
 R2_WORK="R2_FINANCE_SEMANTIC_ADEQUACY_TAIL"
 
 class PostCompositionFrontierV2Error(ValueError): pass
+
+def _git_blob_sha(path:Path)->str:
+ raw=path.read_bytes()
+ return sha1(b"blob "+str(len(raw)).encode("ascii")+b"\0"+raw).hexdigest()
 
 def _load(root:Path,rel:str):
  p=root/rel
@@ -19,7 +26,7 @@ def _load(root:Path,rel:str):
  try:d=json.loads(p.read_text())
  except Exception as e: raise PostCompositionFrontierV2Error("SOURCE_INVALID:"+rel) from e
  if not isinstance(d,dict): raise PostCompositionFrontierV2Error("SOURCE_NOT_OBJECT:"+rel)
- return d,core._git_blob_sha(p)
+ return d,_git_blob_sha(p)
 
 def _source(f:dict,rel:str):
  rows=[x for x in f.get("scope",{}).get("source_set",[]) if isinstance(x,dict) and x.get("path")==rel]
@@ -51,8 +58,19 @@ def _prof(f:dict,root:Path):
  row=_cand_source(f,PROF); row["work_id"]=PROF_WORK; row["scheduler_state"]="READY_EVIDENCE"; row["evidence_acquisition_mode"]="READ_ONLY"
  row["readiness"]=f"PROPERTY_TRUTH_{v}_OF_24__{oe}_EXECUTION_LEAVES_OPEN__TWELVE_SEMANTIC_TOTALITY_REUSE"
  ev=dict(row.get("read_only_evidence") or {}); ev.update({"source":PROF,"source_git_blob_sha":sha,"whole_leaf_scope_complete_count":24,"property_truth_closed_count":v,"verified_property_truth_leaf_count":v,"verified_property_truth_leaf_ids":ids,"open_execution_leaf_count":oe,"open_semantic_leaf_count":os,"vector_bounds_complete":False,"dynamic_current_pointer_follow":True}); row["read_only_evidence"]=ev
- a=_cand_id(f,"ASSURANCE_UVCK_V2_PROMOTION_GATES"); ae=dict(a.get("read_only_evidence") or {}); ae.update({"professional_current_git_blob_sha":sha,"professional_property_truth_closed_count":v,"professional_open_execution_leaf_count":oe,"embedded_professional_snapshot_lags_live_frontier":True}); a["read_only_evidence"]=ae
  return {"git_blob_sha":sha,"property_truth_closed_count":v,"open_execution_leaf_count":oe}
+
+def _assurance(f:dict,prof:Mapping[str,Any],root:Path):
+ d,sha=_load(root,ASSURANCE)
+ if d.get("terminal_authority") is not False or d.get("live_default") is not False: raise PostCompositionFrontierV2Error("ASSURANCE_AUTHORITY_BOUNDARY")
+ act=d.get("activation")
+ if not isinstance(act,Mapping) or act.get("live_default") is not False: raise PostCompositionFrontierV2Error("ASSURANCE_ACTIVATION")
+ blockers=act.get("required_before_promotion")
+ if not isinstance(blockers,list) or "FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION" not in blockers: raise PostCompositionFrontierV2Error("ASSURANCE_BLOCKERS")
+ _source(f,ASSURANCE)["git_blob_sha"]=sha
+ row=_cand_id(f,ASSURANCE_WORK)
+ ev=dict(row.get("read_only_evidence") or {}); ev.update({"source":ASSURANCE,"source_git_blob_sha":sha,"professional_current_git_blob_sha":prof["git_blob_sha"],"professional_property_truth_closed_count":prof["property_truth_closed_count"],"professional_open_execution_leaf_count":prof["open_execution_leaf_count"],"embedded_professional_snapshot_lags_live_frontier":True,"dynamic_current_pointer_follow":True,"vector_bounds_complete":False}); row["read_only_evidence"]=ev
+ return {"git_blob_sha":sha}
 
 def _bytes(f:dict,root:Path):
  d,sha=_load(root,BYTES); m=re.search(r"_V(\d+)_FRONTIER",str(d.get("status") or ""))
@@ -76,11 +94,11 @@ def _r2(f:dict,root:Path):
  return {"git_blob_sha":sha,"version":ver}
 
 def refresh_post_composition_currentness(frontier:Mapping[str,Any],*,root:Path=core.ROOT):
- f=json.loads(json.dumps(frontier)); p=_prof(f,root); b=_bytes(f,root); r=_r2(f,root)
+ f=json.loads(json.dumps(frontier)); p=_prof(f,root); a=_assurance(f,p,root); b=_bytes(f,root); r=_r2(f,root)
  for row in f.get("candidates",[]):
   if isinstance(row,dict) and row.get("scheduler_state")=="PARKED":
    row["original_scheduler_state"]="PARKED"; row["scheduler_state"]="BLOCKED"
- f["dynamic_currentness"]={"professional_pointer_follow":True,"bytes_pointer_follow":True,"r2_pointer_follow":True,"parked_normalized_to_nonprimary":True,"professional":p,"bytes":b,"r2":r,"other_source_families_dynamic_follow":False}
+ f["dynamic_currentness"]={"professional_pointer_follow":True,"assurance_pointer_follow":True,"bytes_pointer_follow":True,"r2_pointer_follow":True,"parked_normalized_to_nonprimary":True,"professional":p,"assurance":a,"bytes":b,"r2":r,"other_source_families_dynamic_follow":False}
  return f
 
 def plan_current_post_composition_frontier():
