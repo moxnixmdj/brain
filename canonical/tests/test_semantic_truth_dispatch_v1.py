@@ -39,10 +39,7 @@ class Tests(unittest.TestCase):
         fn.assert_called_once()
 
     def test_regcap_context_atom_end_to_end_dispatch_is_source_bound(self):
-        text = (
-            "a 2.5% buffer comprised of Common Equity Tier 1 (CET1) "
-            "above the regulatory minimum capital requirement"
-        )
+        text = "This cushion is 2.5% CET1 above the regulatory minimum."
         out = evaluate({
             "truth_kind": "REGCAP_CONTEXT_ATOM",
             "predicate_id": "caller-label",
