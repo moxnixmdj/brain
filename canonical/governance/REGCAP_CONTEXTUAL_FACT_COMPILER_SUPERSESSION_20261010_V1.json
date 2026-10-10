@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_REGCAP_CONTEXTUAL_FACT_COMPILER_SUPERSESSION_20261010_V1",
+  "date": "2026-10-10",
+  "status": "SUPERSEDED__REDUNDANT_PARALLEL_PARSER_REMOVED__ZERO_FRONTIER_CREDIT",
+  "temporary_merge": {
+    "commit": "96e974c176b7d7a8423cdfff20db02bcc49ff9b5",
+    "historical_verification": "canonical/verification/REGCAP_CONTEXTUAL_FACT_COMPILER_VERIFY_20261010_V1.json",
+    "removed_runtime": "canonical/runtime/regcap_contextual_fact_compiler_v1.py",
+    "removed_test": "canonical/tests/test_regcap_contextual_fact_compiler_v1.py"
+  },
+  "reason": [
+    "THE_TEMPORARY_RUNTIME_OVERLAPPED_THE_EXISTING_V69_CANONICAL_REGCAP_CONTEXTUAL_OBSERVATION_AND_RESOLUTION_PATH",
+    "ITS_BARE_NOUN_PHRASE_FORMS_WERE_TOO_PERMISSIVE_FOR_TRUTH_AUTHORITY",
+    "ITS_SYSTEM_WIDE_RISK_DISSIPATES_ONLY_FACT_DID_NOT_LICENSE_THE_EXISTING_FULL_DISCRIMINATOR_OUTCOME",
+    "KEEPING_TWO_LIVE_PARSERS_WOULD_VIOLATE_THE_EXISTING_ANTI_DUPLICATION_RULE"
+  ],
+  "retained_in_canonical_path": [
+    "THIS_DETERMINER_FOR_ALREADY_OWNED_DIRECT_ASSERTION_PATTERNS",
+    "CRYSTALLISES_AND_CRYSTALLIZES_SPELLING_EQUIVALENCE",
+    "RECAPITALISATION_AND_RECAPITALIZATION_SPELLING_EQUIVALENCE"
+  ],
+  "rejected_from_canonical_truth_path": [
+    "BARE_2_5_PERCENT_CET1_NOUN_PHRASE",
+    "BARE_LOSS_ABSORBING_RECAPITALISATION_RESOLUTION_NOUN_PHRASE",
+    "SYSTEM_WIDE_RISK_DISSIPATES_ONLY_AS_FULL_CCYB_DISCRIMINATOR"
+  ],
+  "canonical_runtime": "canonical/runtime/regcap_contextual_observation_compiler_v1.py",
+  "canonical_verification": "canonical/verification/REGCAP_NO_DESCRIPTOR_CONTEXT_TRUTH_VERIFY_20261010_V2.json",
+  "semantic_delta": {
+    "new_relation_type": false,
+    "new_candidate_scope": false,
+    "safe_surface_coverage_extension": true,
+    "temporary_duplicate_frontier_credit": 0,
+    "finance_semantic_tail_closed": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
