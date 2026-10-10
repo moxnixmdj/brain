@@ -15,6 +15,7 @@ from hashlib import sha256
 from typing import Any, Mapping, Sequence
 
 from canonical.runtime import regcap_contrastive_discriminator_matrix_v1 as matrix
+from canonical.runtime import regcap_contextual_observation_compiler_v1 as observation
 from canonical.runtime.source_assertion_ownership_guard_v1 import check_direct_assertion
 
 SCHEMA = "PROJECT_BRAIN_REGCAP_CONTEXT_SIGNATURE_V1"
@@ -202,56 +203,50 @@ def compile_context(
                 sentence=sentence,
             )
 
-        observed: list[dict[str, Any]] = []
+        descriptor_left = start - s0
+        descriptor_right = end - s0
+        projected_sentence = (
+            sentence[:descriptor_left]
+            + "cushion"
+            + sentence[descriptor_right:]
+        )
+        canonical = observation.compile_span(
+            projected_sentence,
+            start=0,
+            end=len(projected_sentence),
+        )
+        if canonical.get("pass") is not True:
+            return _base(
+                "OPEN__NO_BOUND_CONTEXT_SIGNATURE",
+                source_id=source_id,
+                source_text_sha256=_sha(source_text),
+                descriptor_span=[start, end],
+                sentence_span=[s0, s1],
+                sentence=sentence,
+                canonical_projection=canonical,
+            )
 
-        if _CCOB_FUNC.search(sentence):
-            observed.append({
-                "observation_id": "FUNCTIONAL_SIGNATURE_CLASS",
-                "outcome": "DRAWDOWN_AS_LOSSES_ARE_INCURRED",
-                "relative_candidate_id": "REGCAP::CCOB",
-            })
-        if _CCYB_FUNC.search(sentence):
-            observed.append({
-                "observation_id": "FUNCTIONAL_SIGNATURE_CLASS",
-                "outcome": "RELEASE_WHEN_SYSTEM_WIDE_RISK_CRYSTALLISES_OR_DISSIPATES",
-                "relative_candidate_id": "REGCAP::CCYB",
-            })
-        if (
-            _TLAC_FUNC_RECAP.search(sentence)
-            and _TLAC_FUNC_RESOLUTION.search(sentence)
-            and _TLAC_FUNC_GSIB.search(sentence)
-        ):
-            observed.append({
-                "observation_id": "FUNCTIONAL_SIGNATURE_CLASS",
-                "outcome": "G_SIB_LOSS_ABSORPTION_RECAPITALISATION_IN_RESOLUTION",
-                "relative_candidate_id": "REGCAP::TLAC",
-            })
+        key = (
+            str(canonical.get("observation_id") or ""),
+            str(canonical.get("outcome") or ""),
+        )
+        candidate = _SIGNATURES.get(key)
+        if candidate is None:
+            return _base(
+                "OPEN__CANONICAL_OBSERVATION_OUTSIDE_DESCRIPTOR_SIGNATURE_SCOPE",
+                source_id=source_id,
+                source_text_sha256=_sha(source_text),
+                descriptor_span=[start, end],
+                sentence_span=[s0, s1],
+                sentence=sentence,
+                canonical_projection=canonical,
+            )
 
-        if (
-            _CCOB_STRUCT_PERCENT.search(sentence)
-            and _CCOB_STRUCT_CET1.search(sentence)
-            and _CCOB_STRUCT_ABOVE.search(sentence)
-        ):
-            observed.append({
-                "observation_id": "STRUCTURAL_SIGNATURE_CLASS",
-                "outcome": "TWO_POINT_FIVE_PERCENT_CET1_ABOVE_REGULATORY_MINIMUM",
-                "relative_candidate_id": "REGCAP::CCOB",
-            })
-        if (
-            _CCYB_STRUCT_EXTENDS.search(sentence)
-            and _CCYB_STRUCT_CET1.search(sentence)
-        ):
-            observed.append({
-                "observation_id": "STRUCTURAL_SIGNATURE_CLASS",
-                "outcome": "EXTENDS_CCOB_AND_MET_WITH_CET1",
-                "relative_candidate_id": "REGCAP::CCYB",
-            })
-        if _TLAC_STRUCT_MIN.search(sentence) and _TLAC_STRUCT_ALONGSIDE.search(sentence):
-            observed.append({
-                "observation_id": "STRUCTURAL_SIGNATURE_CLASS",
-                "outcome": "SEPARATE_MINIMUM_TLAC_REQUIREMENT",
-                "relative_candidate_id": "REGCAP::TLAC",
-            })
+        observed: list[dict[str, Any]] = [{
+            "observation_id": key[0],
+            "outcome": key[1],
+            "relative_candidate_id": candidate,
+        }]
 
         by_observation: dict[str, set[str]] = {}
         for row in observed:
@@ -305,7 +300,7 @@ def compile_context(
             relative_candidate_hint=candidate_ids[0],
             relative_selection_authority=False,
             boundary=(
-                "EXACT_DESCRIPTOR_PLUS_DIRECT_ASSERTION_COMPLETE_SENTENCE_BOUNDED_SIGNATURE_GRAMMAR_ONLY__"
+                "EXACT_DESCRIPTOR_PLUS_CANONICAL_ASSERTION_COMPLETE_OBSERVATION_PROJECTION_ONLY__"
                 "OBSERVATIONS_HAVE_SOURCE_ALIGNED_SEMANTIC_AUTHORITY__"
                 "CANDIDATE_ID_IS_A_HINT_UNTIL_AUTHENTICATED_MATRIX_REPLAY"
             ),
