@@ -1,10 +1,10 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_LIVE_WORK_FRONTIER_V1",
   "date": "2026-10-10",
-  "status": "CURRENT_POST_COMPOSITION_FRONTIER__SOURCE_CURRENT__READ_ONLY_EVIDENCE_ONLY__FULL_EXECUTION_FAIL_CLOSED__ZERO_CREDIT",
-  "frontier_id": "LIVE_WORK_FRONTIER_20261010_PROF12_COMPOSED_V11",
+  "status": "CURRENT_POST_COMPOSITION_FRONTIER__R2_V85_RESEALED__READ_ONLY_EVIDENCE_ONLY__FULL_EXECUTION_FAIL_CLOSED__ZERO_CREDIT",
+  "frontier_id": "LIVE_WORK_FRONTIER_20261010_PROF12_COMPOSED_V12",
   "scope": {
-    "base_main_commit": "2842214d15e0f692f229385832ed95ebf3ea2c4f",
+    "base_main_commit": "82b155b76826d61af96b007bdbe6660889d8df5a",
     "completeness_semantics": "COMPLETE_FOR_EXPLICIT_CURRENT_ACTIONABLE_OR_SCHEDULABLE_WORK_EXPOSED_BY_THE_BOUND_CURRENT_AUTHORITY_SOURCES__NOT_COMPLETE_FOR_UNKNOWN_FUTURE_WORK_OR_UNDISCOVERED_CAPABILITIES",
     "source_set": [
       {
@@ -33,7 +33,7 @@
       },
       {
         "path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
-        "git_blob_sha": "0866926253db7789872099a730419139cf99d653"
+        "git_blob_sha": "e0cba29996dfdff6eacf9c2897e8c990cc3770a3"
       }
     ]
   },
@@ -205,7 +205,7 @@
       "frontier_class": "OPEN_WORLD_EVIDENCE_FRONTIER",
       "source": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
       "causal_role": "ONE_PRIMARY_OPEN_WORLD_FINANCE_SEMANTIC_RESIDUAL",
-      "readiness": "SLEEPING_UNLESS_TASK_LOCAL_COUNTEREXAMPLE_OR_VERIFIED_DEFECT_WAKES_IT__V84_CONCRETE_TRUTH_REQUEST_PROPAGATES_THROUGH_P3_AND_CONTROLLER",
+      "readiness": "SLEEPING_UNLESS_TASK_LOCAL_COUNTEREXAMPLE_OR_VERIFIED_DEFECT_WAKES_IT__V85_CONCRETE_TRUTH_REQUEST_PLUS_MONOTONIC_BOUND_TRUTH_ORIGIN_REPAIR_AVAILABLE",
       "claims_new_primitive": false,
       "score_state": "INELIGIBLE_WHILE_WAKE_GATE_FALSE",
       "scheduler_state": "SLEEPING",
@@ -226,10 +226,13 @@
       "vector_evidence": {},
       "read_only_evidence": {
         "source": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
-        "source_git_blob_sha": "0866926253db7789872099a730419139cf99d653",
+        "source_git_blob_sha": "e0cba29996dfdff6eacf9c2897e8c990cc3770a3",
         "general_mechanism_closed": true,
         "finance_tail_closed": false,
         "concrete_truth_request_propagation_bound": true,
+        "monotonic_bound_truth_origin_repair_bound": true,
+        "existing_origin_mutation_forbidden": true,
+        "downstream_reverification_required": true,
         "minimum_authenticated_observation_count": 1,
         "wake_gate": false,
         "vector_bounds_complete": false
