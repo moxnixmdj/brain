@@ -1,0 +1,17 @@
+{
+  "schema": "PROJECT_BRAIN_R4_SEMANTIC_EXECUTION_INTEGRATION_VERIFICATION_V1",
+  "date": "2026-10-10",
+  "status": "PASS_TEST_ONLY__ZERO_TERMINAL_CREDIT",
+  "subject": "direct canonical R4 invocation of executable semantic root verification",
+  "remote_exact_byte_replay": {
+    "verifier": "brain-live-runtime-v1-verify-20261008",
+    "result": "3_PASSED__0_FAILED"
+  },
+  "verified": [
+    "SEMANTIC_REJECTION_BLOCKS_CANONICAL_R4_AUTHORITY",
+    "EVERY_PROVED_CURRENT_SLOT_IS_SEMANTICALLY_REEXECUTED",
+    "ZERO_PROVED_OPEN_REGISTRY_DOES_NOT_SPURIOUSLY_EXECUTE_SEMANTIC_VERIFIER"
+  ],
+  "runtime_changed": false,
+  "terminal_credit_delta": 0
+}
