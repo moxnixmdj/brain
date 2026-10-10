@@ -1,0 +1,49 @@
+name: Verify current post-composition frontier
+
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/capability_parallel_frontier_post_composition_v1.py"
+      - "canonical/tests/test_capability_parallel_frontier_post_composition_v1.py"
+      - "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json"
+      - "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json"
+      - "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json"
+      - "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json"
+      - ".github/workflows/verify-current-post-composition-frontier.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Compile planner
+        run: |
+          python -m py_compile \
+            canonical/runtime/capability_parallel_frontier_post_composition_v1.py \
+            canonical/runtime/capability_parallel_frontier_v2.py
+      - name: Run focused tests
+        run: |
+          python -m unittest -v \
+            canonical.tests.test_capability_parallel_frontier_post_composition_v1
+      - name: Replay current plan
+        run: |
+          python - <<'PY'
+          import json
+          from canonical.runtime.capability_parallel_frontier_post_composition_v1 import (
+              plan_current_post_composition_frontier,
+          )
+          out = plan_current_post_composition_frontier()
+          assert out["status"] == "PARALLEL_FRONTIER_PLAN_READY", out
+          assert out["parallel_full_execution_work_ids"] == [], out
+          assert out["execution_authority"] is False, out
+          assert out["promotion_authority"] is False, out
+          assert out["post_composition_phase_verified"] is True, out
+          print(json.dumps(out, sort_keys=True, indent=2))
+          PY
