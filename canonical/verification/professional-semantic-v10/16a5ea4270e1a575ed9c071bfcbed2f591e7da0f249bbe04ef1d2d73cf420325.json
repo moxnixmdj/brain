@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_SEMANTIC_V10_CLAIM_TOTALITY_VERIFY_V1",
+  "date": "2026-10-11",
+  "pass": true,
+  "independent_verified": true,
+  "leaf_id": "PQ::R4_MEASUREMENT_CONSTRUCT::SEMANTIC",
+  "root_id": "R4_MEASUREMENT_CONSTRUCT",
+  "semantic_claim_id": "16a5ea4270e1a575ed9c071bfcbed2f591e7da0f249bbe04ef1d2d73cf420325",
+  "semantic_scope_sha256": "2df4393971d590adeec30b0fdeff9b171337508e95e182092ddaf08f180c9443",
+  "semantic_target_predicate_sha256": "630ee7e848b2a7306f23bd995840d8613d76441919fc79d3ef7a0035201bcb88",
+  "semantic_semantics_sha256": "a625568bec830825131c0fcab91f320df315f0c2eceef04c19c984eddef003ad",
+  "claim_scoped_totality_proved": true,
+  "cc_r1_reality_containment_proved": true,
+  "cc_r2_mission_soundness_proved": true,
+  "cc_r3_terminal_closure_proved": true,
+  "r4_proof_realization_authority": true,
+  "positive_route_nonvacuity_proved": true,
+  "proof_engine": {
+    "runtime": "canonical/runtime/professional_semantic_v10_totality_basis_v1.py",
+    "git_blob_sha": "4efdee9692b978a40118761e168849309b6d7e1b",
+    "tests": "canonical/tests/test_professional_semantic_v10_totality_basis_v1.py",
+    "tests_git_blob_sha": "e523baf29406f7fea5bd64de609335a10385b4f2",
+    "independent_replay": {
+      "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+      "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+      "tests_run": 2,
+      "tests_passed": 2,
+      "tests_failed": 0
+    }
+  },
+  "nonvacuity_basis": {
+    "verification_path": "canonical/verification/PROFESSIONAL_SEMANTIC_V10_NONVACUITY_WITNESSES_INDEPENDENT_VERIFY_20261011_V1.json",
+    "verification_git_blob_sha": "d9845c6f8b9c998c32550b92788dc3aeabd5e4f4",
+    "witness_path": "canonical/verification/PROFESSIONAL_QUALITY_R4_MEASUREMENT_SEMANTIC_VERIFY_20261010_V1.json",
+    "witness_git_blob_sha": "c91074f2f187834936c0b7297579a6b8ba125fae"
+  },
+  "semantic_property_truth_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
