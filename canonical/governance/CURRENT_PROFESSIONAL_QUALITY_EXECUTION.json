@@ -577,9 +577,10 @@
     },
     "registry_verification": {
       "path": "canonical/verification/PROFESSIONAL_QUALITY_LEAF_REGISTRY_PROPERTY_TRUTH_VERIFY_20261010_V5.json",
-      "git_blob_sha": "f347e496395c84ca4cf79ec73cd25b5eaa9e55ca",
+      "git_blob_sha": "2beb411c133193fa39a9ab0aa1c20bface771fc9",
       "verified_leaf_count": 7,
-      "open_leaf_count": 17
+      "open_leaf_count": 17,
+      "registry_git_blob_sha": "a2c6e7eca4cb13a91d7dc26f22b5ebe49a90e036"
     },
     "r3_execution": {
       "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_R3_EXECUTION_PROPERTY_TRUTH_INDEPENDENT_VERIFY_20261010_V1.json",
