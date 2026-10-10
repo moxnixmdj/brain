@@ -1,16 +1,16 @@
 {
   "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_SUBJECT_DEPENDENCY_CLOSURE_WORKLIST_V1",
   "date": "2026-10-10",
-  "status": "CLOSED__FINAL_V6_SUBJECT_DEPENDENCY_CLASSIFIED_12_OF_12__ZERO_MISSING_COMPONENTS__FINAL_SUBJECT_FROZEN__ROOT_BINDINGS_REQUIRE_REVERIFICATION",
+  "status": "CLOSED__FINAL_V7_REPAIRED_SUBJECT_DEPENDENCY_CLASSIFIED_12_OF_12__ZERO_MISSING_COMPONENTS__FINAL_SUBJECT_FROZEN__ROOT_BINDINGS_REQUIRE_REVERIFICATION",
   "candidate_subject": {
-    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V6_DECLARED_SYSTEM_SUBJECT_20261010_V5.json",
-    "git_blob_sha": "994a6a6aef44b6bb33161f7179d1983a1b50b633",
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V7_DECLARED_SYSTEM_SUBJECT_20261010_V7.json",
+    "git_blob_sha": "5609e3ceafce91ff9cf4e7de6b0f208e46a22f33",
     "subject_kind": "DECLARED_SYSTEM",
-    "subject_id": "PROFESSIONAL_QUALITY_P1_V6_DEPENDENCY_CLOSED_AUTHENTICATED_TARGET_SYSTEM_20261010_V5",
-    "subject_sha256": "353978ba4866d1e35794390968a14500ee1d8a4f0bddfb8f081e9a1a71ba468d",
+    "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V7",
+    "subject_sha256": "7e2904f3205b283a3a0f9e7583b36599cc2da4a96fd31b1777c226ca5c16c9e4",
     "verification": {
-      "path": "canonical/verification/PROFESSIONAL_QUALITY_DECLARED_SYSTEM_SUBJECT_V5_VERIFY_20261010_V1.json",
-      "git_blob_sha": "3b4213f114ae8d6842f1e2b5ddccab61f4b91078"
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_V7_SUBJECT_DEPENDENCY_CLOSURE_REPAIR_VERIFY_20261010_V1.json",
+      "git_blob_sha": "ba976a82c6f914a887bcde5852ddd3161ede08ce"
     },
     "finalized_for_all_roots": true
   },
@@ -86,18 +86,19 @@
   },
   "current_counts": {
     "roots_total": 12,
-    "roots_subject_bound_on_final_v6": 0,
+    "roots_subject_bound_on_final_v7": 0,
     "roots_dependency_classified": 12,
     "roots_known_to_require_subject_expansion": 0,
     "roots_dependency_unclassified": 0
   },
-  "next_required_edge": "REVERIFY_R1_ON_FINAL_V6_SUBJECT__THEN_BIND_R2_R12_TO_IDENTICAL_FINAL_SUBJECT_WITHOUT_DRIFT__RUN_COMPOSITION_GATE_AT_12_OF_12",
+  "next_required_edge": "REVERIFY_R1_ON_FINAL_V7_REPAIRED_SUBJECT__THEN_BIND_R2_R12_WITHOUT_SUBJECT_DRIFT__RUN_SAME_SUBJECT_COMPOSITION_GATE_AT_12_OF_12",
   "hard_nonclaims": [
     "NO_CURRENT_ROOT_SUBJECT_BINDING_AFTER_FINAL_SUBJECT_REFRESH",
     "NO_SAME_SUBJECT_COMPOSITION_PASS",
     "NO_PROFESSIONAL_QUALITY_CLOSURE",
     "NO_LIVE_DEFAULT_PROMOTION",
-    "NO_TERMINAL_CREDIT"
+    "NO_TERMINAL_CREDIT",
+    "NO_CURRENT_ROOT_SUBJECT_BINDING_AFTER_REPAIRED_V7_SUBJECT_REFRESH"
   ],
   "accounting": {
     "incremental_spend_usd": 0,
