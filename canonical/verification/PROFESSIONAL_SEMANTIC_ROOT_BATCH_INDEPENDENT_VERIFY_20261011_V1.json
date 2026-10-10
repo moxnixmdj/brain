@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_SEMANTIC_ROOT_BATCH_INDEPENDENT_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__INDEPENDENT_SPRITE__12_OF_12_CC_R1_CC_R2_CC_R3__R4_PER_CLAIM_OPEN__ZERO_PROPERTY_OR_TERMINAL_CREDIT",
+  "repository": "moxnixmdj/brain",
+  "branch": "repair/r12-v9-local-vs-universal-totality-20261011-v1",
+  "base_main_commit": "06f5041ca1fa308540ee3e529e926b3d7d170c4c",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/professional_semantic_root_batch_prover_v1.py",
+      "git_blob_sha": "1bf669f2adb5ebcfea9e2bf78c4fea9e93d329a9"
+    },
+    "v11_subject": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V11_DECLARED_SYSTEM_SUBJECT_20261011_V1.json",
+      "git_blob_sha": "cc8070cbd7d14f143ede4619018764654d47a01d"
+    },
+    "v10_to_v11_refinement": {
+      "path": "canonical/runtime/professional_v10_to_v11_semantic_refinement_v1.py",
+      "git_blob_sha": "f2bbd0b1eeb429f6b5e49457d97a47069fd5013b"
+    },
+    "generic_local_verifier": {
+      "path": "canonical/runtime/professional_trusted_local_semantic_totality_verifier_v1.py",
+      "git_blob_sha": "5af2d599fffcad16e78d862ee50b2c7d9013be8f"
+    }
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/r9-registry-integration-v1",
+    "exact_branch_bytes_overlaid": true,
+    "result_sha256": "430b888c3499f08a8fd1be294dbbfb643f3047707fc7502db882d6a6ca5b696e",
+    "rows_sha256": "48e65ef2958cd023bdaf8397f49206310460cf44c98146bc4aaaca8615ce18b9",
+    "semantic_claim_count": 12,
+    "cc_r1_proved_count": 12,
+    "cc_r2_proved_count": 12,
+    "cc_r3_proved_count": 12,
+    "r4_proof_closure_count": 0
+  },
+  "truth": {
+    "proof_compression_not_cross_claim_transport": true,
+    "claim_specific_root_identity_preserved": true,
+    "new_primitive_required": false
+  },
+  "hard_nonclaims": [
+    "NO_R4_FROM_BATCH_PROOF_ALONE",
+    "NO_PROPERTY_TRUTH_FROM_BATCH_PROOF_ALONE",
+    "NO_CROSS_CLAIM_ROOT_CERTIFICATE_TRANSPORT",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "accounting": {
+    "fresh_reality_units_consumed": 0,
+    "incremental_spend_usd": 0,
+    "property_truth_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
