@@ -1,0 +1,99 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_CONSERVATIVE_ZETA_V31_SUCCESSOR_EXECUTION_V1",
+  "status": "FRESH_SUCCESSOR_EXECUTION__ZETA_SPECIAL_DOMAIN_EXCLUSION_V31__ZERO_CAPABILITY_CREDIT",
+  "recorded_at": "2026-10-10",
+  "predecessor": {
+    "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_CONSERVATIVE_HYPEREXPAND_V30_SUCCESSOR_EXECUTION_20261010_V1.json",
+    "package_raw_python_source_bytes": 1912465,
+    "B_exec_raw_python_source_bytes": 1915225,
+    "manifest_sha256": "9e8322e1034dd8ced3100b1c66503d0d7fd51f52ab43553672f1d36d19fe78b8",
+    "fresh_qualification": "9890/9890",
+    "durable_archive_bytes": 286100
+  },
+  "selection": {
+    "id": "CONSERVATIVE_SPENT_NEXT35_ZETA_DOMAIN_EXCLUSION_PROFILE_V31",
+    "corpus": "QUAL_SUCCESSOR_NEXT35_20261010_V1",
+    "spent_cases": 9890,
+    "method": "Replace five large zeta-family/special-function evaluation bodies with explicit fail-closed stubs while preserving module, class, symbol and dispatch surfaces.",
+    "selected_function_bodies": [
+      "zeta.eval",
+      "dirichlet_eta.eval",
+      "riemann_xi.eval",
+      "stieltjes.eval",
+      "_dilogtable"
+    ],
+    "selected_original_body_bytes": 2970,
+    "net_raw_reduction_bytes": 2559,
+    "module_graph_unchanged": true,
+    "spent_NEXT35_replay": "9890/9890"
+  },
+  "measured_candidate": {
+    "status": "PHYSICALLY_REWRITTEN_RESEARCH_CANDIDATE__NOT_OPUS_PROMOTED",
+    "python_files": 277,
+    "package_raw_python_source_bytes": 1909906,
+    "router_raw_python_source_bytes": 2760,
+    "B_exec_raw_python_source_bytes": 1912666,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "raw_improvement_vs_v30_bytes": 2559,
+    "manifest_sha256": "7378181385754faac46bef85dd647314ed2773e87e2b80b3888eb53ea9f2725a",
+    "durable_source_archive_bytes": 285480,
+    "durable_source_archive_sha256": "b30d58d0b1924d6d7cf853e1b7763cff6ec06804080fdd2f6318c03ef85af0da",
+    "archive_improvement_vs_v30_bytes": 620
+  },
+  "qualification": {
+    "spent_NEXT35": {
+      "id": "QUAL_SUCCESSOR_NEXT35_20261010_V1",
+      "cases": 9890,
+      "corpus_sha256": "82f9e5b695f4c54a7b87d91a90e96bf18ac631cfce39a268f7d40988b8adeb71",
+      "candidate": "9890/9890",
+      "spent": true
+    },
+    "fresh_NEXT36": {
+      "id": "QUAL_SUCCESSOR_NEXT36_20261010_V1",
+      "seed": 6000000,
+      "per_operation_budget": 880,
+      "cases": 10120,
+      "corpus_sha256": "df8c2d19f48522ceb532f1bf397dc23d599220cd8c43a7a8757d8a50ed0b0d87",
+      "candidate": "10120/10120",
+      "independent_copy": "10120/10120",
+      "extracted_archive_replay": "10120/10120",
+      "spent": true
+    }
+  },
+  "reproducibility": {
+    "predecessor_reconstruction": "canonical/research/bytes/tools/rebuild_candidate_v30.py",
+    "transform": "canonical/research/bytes/tools/conservative_zeta_prune_v31.py",
+    "successor_reconstruction": "canonical/research/bytes/tools/rebuild_candidate_v31.py",
+    "route": "canonical/research/bytes/tools/exact_symbolic_route_v1.py",
+    "semantic_digest": "canonical/research/bytes/tools/semantic_digest_v1.py",
+    "qualification_generator": "canonical/research/bytes/tools/generate_qualification_v1.py"
+  },
+  "durable_artifact": {
+    "library_status": "PERSISTED_IN_CHATGPT_LIBRARY",
+    "library_file_id": "libfile_30c1f1b95c40819196b27568c11a025d",
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V31_SUCCESSOR_20261010_V1.tar.xz",
+    "bytes": 285480,
+    "sha256": "b30d58d0b1924d6d7cf853e1b7763cff6ec06804080fdd2f6318c03ef85af0da",
+    "extracted_source_identity": "277/277 Python files; manifest 7378181385754faac46bef85dd647314ed2773e87e2b80b3888eb53ea9f2725a"
+  },
+  "next_frozen_qualification": {
+    "id": "QUAL_SUCCESSOR_NEXT37_20261010_V1",
+    "seed": 6082762,
+    "per_operation_budget": 900,
+    "cases": 10350,
+    "corpus_sha256": "3924da71e686ef91622401e0801b74639361e6d8d756a196e15324708ca9da4e",
+    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT37_20261010_V1.jsonl",
+    "library_file_id": "libfile_85bf92edeef08191927d6ad17d9257e9",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT"
+  },
+  "truth_boundary": [
+    "MEASURED: V31 is 2,559 raw Python-source bytes smaller than V30 and the durable archive is 620 bytes smaller.",
+    "MEASURED: V31 passes spent NEXT35 9,890/9,890.",
+    "MEASURED: exact V31 passes fresh NEXT36 10,120/10,120 on candidate, independent copy, and extracted archive.",
+    "INFERRED: selected zeta-family bodies are outside the tested bounded input domains; finite non-use remains non-universal.",
+    "NOT CLAIMED: out-of-scope behavior preservation, universal SymPy correctness, absolute information-theoretic minimum, or Opus-family promotion.",
+    "PROMOTION CREDIT: 0."
+  ],
+  "next_action": "Rerank exact V31 using spent NEXT36 only. Keep NEXT37 untouched until a new physical cut is frozen.",
+  "promotion_credit": 0
+}
