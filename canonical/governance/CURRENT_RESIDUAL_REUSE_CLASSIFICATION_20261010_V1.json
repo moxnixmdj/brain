@@ -413,7 +413,7 @@
       },
       "currentness_reconciliation": {
         "path": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
-        "observed_git_blob_sha": "59eced2dc3bdbba7da78734f86c8e674dbf29e1b",
+        "observed_git_blob_sha": "7ce7583eebec17a47d4d4e4da4ba7beda679b5eb",
         "observed_blob_is_load_bearing": false
       },
       "whole_leaf_certificate_gate": {
@@ -661,7 +661,22 @@
     "r4_execution_property_truth": "PASS__ONE_EXECUTION_LEAF_PROPERTY_TRUTH__DETECTION_CONSTRUCT_SEMANTIC_ROOT_AND_GLOBAL_CLOSURE_OPEN",
     "r4_execution_property_truth_verification": "canonical/verification/PROFESSIONAL_QUALITY_R4_EXECUTION_PROPERTY_TRUTH_INDEPENDENT_VERIFY_20261010_V1.json",
     "professional_property_truth_registry_v3": "PASS__5_OF_24__STALE_R4_RECEIPT_REJECTED__ZERO_PROMOTION_OR_TERMINAL_CREDIT",
-    "professional_property_truth_registry_v6": "PASS__8_OF_24__R1_R2_R3_R4_R6_R7_R10_R12_EXECUTION__R5_R8_R9_R11_OPEN__ZERO_PROMOTION_OR_TERMINAL_CREDIT"
+    "professional_property_truth_registry_v6": "PASS__8_OF_24__R1_R2_R3_R4_R6_R7_R10_R12_EXECUTION__R5_R8_R9_R11_OPEN__ZERO_PROMOTION_OR_TERMINAL_CREDIT",
+    "professional_r12_semantic_cc_r3_v2": {
+      "reconciliation_path": "canonical/governance/PROFESSIONAL_R12_SEMANTIC_CC_R3_TRUTH_RECONCILIATION_20261010_V1.json",
+      "reconciliation_git_blob_sha": "b469e2f13c318d57aaca71d8b29ad1930636507d",
+      "verification_path": "canonical/verification/PROFESSIONAL_R12_SEMANTIC_CC_R3_EVIDENCE_CUT_VERIFY_20261010_V2.json",
+      "verification_git_blob_sha": "d761b9a8018839ce89520046557a1059d5934e83",
+      "verified_clause_count": 5,
+      "partial_clause_count": 3,
+      "partial_clause_ids": [
+        "R12C1_ASSUMPTION_GUARANTEE_COMPOSITION",
+        "R12C3_ABSTRACTION_SOUNDNESS",
+        "R12C8_NONVACUITY"
+      ],
+      "property_truth_credit": false,
+      "terminal_credit_delta": 0
+    }
   },
   "current_source_binding_law": {
     "mutable_current_authorities": "CANONICAL_PATH_IDENTITY_AUTHORITATIVE__OBSERVED_BLOB_IS_DIAGNOSTIC_ONLY__RECHECK_CURRENT_BYTES_BEFORE_SCHEDULING_OR_TRUTH_CLAIM",
