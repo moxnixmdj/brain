@@ -79,7 +79,7 @@
     "still_valid_for_original_v1_manifest": true
   },
   "successor_executable_audit": {
-    "status": "INDEPENDENTLY_VERIFIED_DYNAMIC_CURRENT_BINDING_COMPOSED_WITH_MAIN_V6_ADAPTER__23_OF_23__PYCOMPILE_PASS",
+    "status": "INDEPENDENTLY_VERIFIED_DYNAMIC_CURRENT_BINDING_COMPOSED_WITH_LATEST_O11_Q2_CLASSIFIER__23_OF_23_PLUS_6_OF_6__PYCOMPILE_PASS",
     "path": "canonical/runtime/escape_progress_shared_gap_audit_v3.py",
     "git_blob_sha": "e556880aa216673e0e316e11fc6f4ab25d644ce6",
     "tests": {
@@ -87,8 +87,8 @@
       "git_blob_sha": "f89cfebb6ffd5d2ff09ac37ba6f2b38e7aa718ed"
     },
     "verification": {
-      "path": "canonical/verification/ESCAPE_V7_ADAPTER_CURRENTNESS_COMPOSITION_VERIFY_20261010_V1.json",
-      "git_blob_sha": "fadfa82045d6b226788a307f982a96509a5c5e2b"
+      "path": "canonical/verification/ESCAPE_V7_CURRENT_MAIN_COMPOSITION_VERIFY_20261010_V2.json",
+      "git_blob_sha": "4c58f7a165954629096c585ce2ced2e77253833a"
     },
     "required_property": "COUNT_GENERIC_MANIFEST_DERIVED_AND_GAP_A_MODE_EXACT__NO_HARDCODED_10_3_OR_TERMINALIZATION_AS_FAKE_SHRINK",
     "cc_r3_promotion_rule": "ONLY_IF_ALL_13_CURRENT_SUCCESSOR_ROWS_HAVE_VALID_CONTENT_ADDRESSED_PROOFS",
