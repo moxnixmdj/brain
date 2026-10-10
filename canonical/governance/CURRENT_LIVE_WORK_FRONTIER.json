@@ -1,10 +1,10 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_LIVE_WORK_FRONTIER_V1",
   "date": "2026-10-10",
-  "status": "CURRENT_CANDIDATE_INVENTORY_RECONCILED_AFTER_PROFESSIONAL_12_OF_12_COMPOSITION__PARALLEL_READ_ONLY_EVIDENCE_READY__FULL_EXECUTION_STILL_FAILS_CLOSED_WITHOUT_VECTOR_OR_SEPARATE_AUTHORITY__ZERO_CREDIT",
-  "frontier_id": "LIVE_WORK_FRONTIER_20261010_PROF12_COMPOSED_V10",
+  "status": "CURRENT_CANDIDATE_INVENTORY_POST_PROFESSIONAL_COMPOSITION__V10_INTERVAL_ROBUST_PARALLEL_READ_ONLY_EVIDENCE_READY__FULL_EXECUTION_FAIL_CLOSED__ZERO_CREDIT",
+  "frontier_id": "LIVE_WORK_FRONTIER_20261010_POSTCOMPOSE_05CB2F72_V10",
   "scope": {
-    "base_main_commit": "7914364a2bfcbcfc7b6b6f3cfb4d5ce04b9c8b40",
+    "base_main_commit": "05cb2f72b148f97165c344a04ef82e4eec98f9aa",
     "completeness_semantics": "COMPLETE_FOR_EXPLICIT_CURRENT_ACTIONABLE_OR_SCHEDULABLE_WORK_EXPOSED_BY_THE_BOUND_CURRENT_AUTHORITY_SOURCES__NOT_COMPLETE_FOR_UNKNOWN_FUTURE_WORK_OR_UNDISCOVERED_CAPABILITIES",
     "source_set": [
       {
@@ -21,7 +21,7 @@
       },
       {
         "path": "canonical/governance/CURRENT_TB_SCIENCE_EXECUTION.json",
-        "git_blob_sha": "50d05e419a7f4905fa85cbc8c26344cf3f736c67"
+        "git_blob_sha": "7aec52d3575710d630a4e8376286723fd5c0a353"
       },
       {
         "path": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
@@ -33,7 +33,7 @@
       },
       {
         "path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
-        "git_blob_sha": "e532cf950170c18767cac8392a5400de7387b682"
+        "git_blob_sha": "5e8ac3acad7f386b2d06ef016e5b3cb8d79ed4d0"
       }
     ]
   },
@@ -162,12 +162,12 @@
       }
     },
     {
-      "work_id": "TB_SCIENCE_RANK20_V13_PREACTIVATION_PROMOTION",
+      "work_id": "TB_SCIENCE_RANK20_V3_ACTIVATION_PRESTART",
       "work_type": "BENCHMARK_INSTRUMENTATION",
       "benchmark_role": "NEW_CAPABILITY_VALIDATION",
       "source": "canonical/governance/CURRENT_TB_SCIENCE_EXECUTION.json",
-      "causal_role": "PROMOTE_PUBLIC_V12_EFFECTIVE_AUTHORITY_PREACTIVATION__REQUIRE_GENERIC_RATCHET_PASS__ONLY_THEN_MINT_EXACT_ONE_FILE_V3_ACTIVATION_AUTHORITY",
-      "readiness": "ACTIONABLE_PREACTIVATION_ONLY",
+      "causal_role": "CREATE_EXACT_ONE_FILE_RANK20_V3_ACTIVATION_PR_FROM_18ABCBF__OBSERVE_PRESTART__COMMIT_DURABLE_START_ONLY_AFTER_AGENT_READY",
+      "readiness": "ACTIONABLE_ACTIVATION_PR_ONLY__RANK20_UNREAD_UNSTARTED__NO_DURABLE_START",
       "claims_new_primitive": false,
       "score_state": "UNBOUND",
       "scheduler_state": "READY_PREACTIVATION",
@@ -178,7 +178,7 @@
         "external:verification-capsule-runner"
       ],
       "authority_keys": [
-        "authority:tb-rank20-slot"
+        "authority:tb-rank20-slot-v3-activation"
       ],
       "explicit_conflict_work_ids": [],
       "evidence_conflict_keys": [],
@@ -187,13 +187,56 @@
       "vector_evidence": {},
       "read_only_evidence": {
         "source": "canonical/governance/CURRENT_TB_SCIENCE_EXECUTION.json",
-        "source_git_blob_sha": "50d05e419a7f4905fa85cbc8c26344cf3f736c67",
+        "source_git_blob_sha": "7aec52d3575710d630a4e8376286723fd5c0a353",
+        "status": "RANK20_V13_PUBLIC_EFFECTIVE_AUTHORITY_VERIFIED__ACTIVATION_AUTHORITY_V3_READY__EIGHTEEN_CONSUMED__UNREAD_UNSTARTED",
         "benchmark_trials_consumed": 18,
         "started_result_pending": 0,
-        "activation_authority": false,
-        "public_surface_promotion_pending": true,
-        "acceptance_credit_delta": 0,
-        "terminal_credit_delta": 0,
+        "public_execution_authority_effective": true,
+        "public_task_read_authority_effective": true,
+        "activation_generation": "V3",
+        "activation_present": false,
+        "task_read": false,
+        "task_started": false,
+        "durable_start_cas_acquired": false,
+        "next_action": "CREATE_EXACT_ONE_FILE_RANK20_V3_ACTIVATION_PR_FROM_18ABCBF__OBSERVE_PRESTART__COMMIT_DURABLE_START_ONLY_AFTER_AGENT_READY",
+        "vector_bounds_complete": false
+      }
+    },
+    {
+      "work_id": "R2_FINANCE_TYPED_NEXT_INFORMATION_REQUEST",
+      "work_type": "FALSIFICATION",
+      "source": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+      "causal_role": "CONSUME_SEMANTIC_TRUTH_NEXT_INFORMATION_REQUEST_AS_ACQUIRE_MINIMUM_DECISION_INFORMATION__BOUND_REGCAP_CCOB_CCYB_TLAC_MREL_TASK_ONLY__DO_NOT_WAKE_GENERIC_OPEN_WORLD_RESEARCH",
+      "readiness": "READY_READ_ONLY_TYPED_NEXT_INFORMATION_REQUEST",
+      "claims_new_primitive": false,
+      "score_state": "UNBOUND",
+      "scheduler_state": "READY_EVIDENCE",
+      "prerequisites_satisfied": true,
+      "prerequisite_work_ids": [],
+      "mutation_keys": [
+        "canonical:r2-finance-typed-next-information"
+      ],
+      "authority_keys": [
+        "authority:r2-truth-next-information-request"
+      ],
+      "explicit_conflict_work_ids": [],
+      "evidence_conflict_keys": [],
+      "evidence_acquisition_mode": "READ_ONLY",
+      "vector_evidence_state": "PARTIAL",
+      "vector_evidence": {},
+      "read_only_evidence": {
+        "source": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+        "source_git_blob_sha": "5e8ac3acad7f386b2d06ef016e5b3cb8d79ed4d0",
+        "verification_path": "canonical/verification/R2_TRUTH_NEXT_INFORMATION_REQUEST_VERIFY_20261010_V1.json",
+        "verification_git_blob_sha": "777b5733a8fd8bd5b5dd7b34347e5e9118c493a3",
+        "next_required_edge": "REGCAP_LOSS_CUSHION_MINIMUM_POLICY_CHANGING_INFORMATION",
+        "fixed_point_compatible_field_name": "next_information_request",
+        "underlying_bounded_scope": "REGCAP_CCOB_CCYB_TLAC_MREL_BOUND_TASK_ONLY",
+        "underlying_minimum_authenticated_observation_count": 1,
+        "semantic_truth_authority_granted_by_request": false,
+        "finance_semantic_tail_closed": false,
+        "global_open_world_closure_delta": false,
+        "terminal_authority": false,
         "vector_bounds_complete": false
       }
     },
@@ -203,7 +246,7 @@
       "frontier_class": "OPEN_WORLD_EVIDENCE_FRONTIER",
       "source": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
       "causal_role": "ONE_PRIMARY_OPEN_WORLD_FINANCE_SEMANTIC_RESIDUAL",
-      "readiness": "DEMOTED_UNLESS_TASK_LOCAL_COUNTEREXAMPLE_OR_INDEPENDENTLY_VERIFIED_CAPABILITY_DEFECT_WAKES_IT",
+      "readiness": "GENERIC_OPEN_WORLD_FRONTIER_REMAINS_SLEEPING__EXACT_TYPED_NEXT_INFORMATION_REQUEST_SCHEDULED_SEPARATELY",
       "claims_new_primitive": false,
       "score_state": "INELIGIBLE_WHILE_WAKE_GATE_FALSE",
       "scheduler_state": "SLEEPING",
@@ -395,15 +438,17 @@
   },
   "live_selection": {
     "authorized": false,
-    "reason": "FULL_EXECUTION_SELECTION_REQUIRES_EVIDENCE_COMPLETE_VECTOR_OR_SEPARATE_EXPLICIT_AUTHORITY__NO_SCALAR_WEIGHTS_MAY_BE_INVENTED",
-    "exact_next": "RUN_PARALLEL_FRONTIER_CONTROLLER__CONTINUE_MINIMUM_DISCRIMINATING_VECTOR_EVIDENCE_ACQUISITION__RERUN_PARETO_AND_CONFLICT_PARTITION"
+    "reason": "FULL_EXECUTION_SELECTION_REQUIRES_INTERVAL_COMPLETE_VECTOR_OR_SEPARATE_EXPLICIT_AUTHORITY__NO_POINT_ESTIMATE_OR_SCALAR_WEIGHTS_MAY_BE_INVENTED",
+    "exact_next": "RUN_V10_PARALLEL_FRONTIER_CONTROLLER__EXECUTE_SAFE_READ_ONLY_EVIDENCE_LANES__BIND_LOWER_AND_UPPER_VECTOR_INTERVALS__RERUN_ROBUST_PARETO_AND_CONFLICT_PARTITION"
   },
   "hard_nonclaims": [
     "NO_GLOBAL_UNKNOWN_WORK_COMPLETENESS_CLAIM",
     "NO_RANK_ONE_CLAIM",
     "NO_SCORE_INFERENCE_FROM_BENCHMARK_OPENNESS",
     "NO_NEW_PRIMITIVE_CLAIM",
-    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT",
+    "NO_DOMINANCE_FROM_LCB_VS_LCB_OR_UB_VS_UB_POINT_COMPARISONS",
+    "NO_GENERIC_R2_OPEN_WORLD_WAKE_FROM_BOUND_TYPED_NEXT_INFORMATION_REQUEST"
   ],
   "accounting": {
     "incremental_spend_usd": 0,
@@ -413,11 +458,11 @@
     "terminal_credit_delta": 0
   },
   "parallel_control": {
-    "runtime": "canonical/runtime/capability_parallel_frontier_v1.py",
+    "runtime": "canonical/runtime/capability_parallel_frontier_v2.py",
     "primary_entrypoint": "plan_current_parallel_frontier",
-    "policy": "PARETO_DOMINANCE_WITHOUT_SCALARIZATION__EXPLICIT_DEPENDENCY_AND_CONFLICT_KEYS__SAFE_PARALLEL_READ_ONLY_EVIDENCE_ACQUISITION_WHILE_VECTOR_BOUNDS_ARE_OPEN",
+    "policy": "INTERVAL_ROBUST_PARETO_DOMINANCE__EXPLICIT_DEPENDENCY_AND_CONFLICT_KEYS__SAFE_PARALLEL_READ_ONLY_EVIDENCE_ACQUISITION_WHILE_INTERVAL_BOUNDS_ARE_OPEN",
     "read_only_evidence_plan_authorized": true,
     "full_execution_plan_authorized": false,
-    "dynamic_current_pointer_follow": "PROFESSIONAL_SEQUENTIAL_ROOT_FRONTIER_AND_COHERENT_ASSURANCE_DEPENDENT_PROJECTION__OTHER_SOURCE_DRIFT_FAILS_CLOSED"
+    "dynamic_current_pointer_follow": "POST_COMPOSITION_PROFESSIONAL_AND_COHERENT_ASSURANCE_CURRENTNESS__OTHER_SOURCE_DRIFT_FAILS_CLOSED"
   }
 }
