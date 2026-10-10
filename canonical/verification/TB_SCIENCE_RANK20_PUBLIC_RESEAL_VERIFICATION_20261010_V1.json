@@ -1,0 +1,85 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK20_PUBLIC_RESEAL_VERIFICATION_V1",
+  "date": "2026-10-10",
+  "status": "PASS__RANK20_CLAIM_V3_PUBLIC_STAGED_SURFACE_MERGED__PROOF_ONLY_BEHAVIOR_REFINEMENT_CERTIFIED__ACTIVATION_GATE_CLOSED__ZERO_EXPOSURE",
+  "public_repository": "moxnixmdj/verification-capsule-runner",
+  "public_base_branch": "terminal-execution-v1",
+  "public_merge_commit_sha": "73db1b05ab8e08b84d2076e2b36f4e376b90091c",
+  "public_merge_tree_sha": "7e99351f836aa40e66d9bfe5c74f999a8b831aa2",
+  "public_execution_surface": {
+    "path": "execution_guard/CURRENT_TERMINAL_EXECUTION_SURFACE_V1.json",
+    "git_blob_sha": "31cef695b88e9f13c14167a4e0e7dac27b4de620"
+  },
+  "slot_id": "terminal-bench-science/hysteretic-aquifer-control::trial-0",
+  "task_digest": "sha256:681df0c3b2ada03a933ac4d2e11f07983676f87a9f26b61e416987904b880289",
+  "logical_attempt_id": "62bbf27ddcc679f431c5569244cf0c54fb1b13181e83076e2c019764f0b747e2",
+  "execution_claim_binding_digest": "sha256:ad74fd461333c1673b76ec0b439aba98c35bf6a0691796b24a5847209873adba",
+  "claim_epoch_id": "RANK20_V13_CLAIM_BOUND_IDENTITY_20261010_V3",
+  "public_bindings": {
+    "workflow_git_blob_sha": "19a12ff77ebdedb3177f05281e116dee69d915ea",
+    "claim_seed_behavior_git_blob_sha": "9012d4bf1c84e157cdfa27ec04fd1a5afd7c78c7",
+    "effective_behavior_git_blob_sha": "dc20b4ef740eaeb6741c834d9c74634653c69193",
+    "behavior_refinement_verifier_git_blob_sha": "b15a9d9ba3a717a9758f56aef75e5e14764d9221",
+    "public_authority_binding_v2_git_blob_sha": "a5186b7e46e47f7f391f8d9d39485a95d83a3824",
+    "public_ledger_binding_v1_git_blob_sha": "289f496bdc9c90a94a8ec488f28c7ecaf9db9f6d",
+    "logical_attempt_claim_binding_v3_git_blob_sha": "59fa5616f1754f90ded1c3b30cb53c98b4348cee",
+    "epoch_v6_v3_git_blob_sha": "31882225445bd8a8e2db306bb4ec5d90c02403bf",
+    "execution_claim_v6_v3_git_blob_sha": "241148ab473702b82deedcf75b4ae160885e9f16",
+    "preflight_v7_git_blob_sha": "27d6834cc4028f922c57da332a7ee3b2b0959338",
+    "finalizer_v7_git_blob_sha": "34a3e34db83a9cb19918b2b06626e41528b8077d",
+    "verified_invariant_registry_git_blob_sha": "b9fbb776ed5cf0888f34809c94f78638d3d915c1",
+    "admission_guard_v4_git_blob_sha": "bb7566c518af105dcf36b31db38ccfe2172f2e65"
+  },
+  "proof_only_behavior_refinement": {
+    "claim_seed_behavior_blob": "9012d4bf1c84e157cdfa27ec04fd1a5afd7c78c7",
+    "effective_behavior_blob": "dc20b4ef740eaeb6741c834d9c74634653c69193",
+    "semantic_behavior_facts_equal": true,
+    "existing_runtime_bindings_equal": true,
+    "added_runtime_bindings": [
+      "logical_attempt_claim_binding",
+      "logical_attempt_binding_helper"
+    ],
+    "classification": "PROOF_ONLY_NON_REAUTHORIZING_STRICT_REFINEMENT",
+    "logical_attempt_identity_preserved": true
+  },
+  "public_ci_verification": {
+    "pull_request": 2599,
+    "verified_head_sha": "969a1a7c2fa8908c46f07d8e1b2b41ca7f827ba2",
+    "workflow_run_id": 38042586150,
+    "workflow_job_id": 114185617635,
+    "conclusion": "success",
+    "observed_passes": [
+      "PASS__RANK20_CLAIM_V3_BEHAVIOR_PROOF_ONLY_REFINEMENT__NO_REAUTHORIZATION",
+      "PASS__TB_SCIENCE_RANK20_V2_V13_CLAIM_BOUND_PUBLIC_RESEAL__ZERO_EXPOSURE",
+      "PASS__CURRENT_PROOF_CARRYING_TB_SCIENCE_SURFACE__RATCHETED__ZERO_EXPOSURE",
+      "PROJECT_BRAIN_TERMINAL_EXECUTION_ADMISSION_V4__PASS",
+      "PROJECT_BRAIN_TB_SCIENCE_RANK20_EXECUTION_PREFLIGHT_V7__PASS",
+      "PASS__ACTIVATION_GATE_CLOSED"
+    ]
+  },
+  "post_merge_readback": {
+    "public_base_head_sha": "73db1b05ab8e08b84d2076e2b36f4e376b90091c",
+    "public_surface_git_blob_sha": "31cef695b88e9f13c14167a4e0e7dac27b4de620",
+    "activation_present": false,
+    "execution_authority": false,
+    "task_read_authority": false,
+    "task_read_history": false,
+    "task_started": false,
+    "benchmark_trials_consumed": 0
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_trials_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_RANK20_TASK_READ",
+    "NO_RANK20_TASK_START",
+    "NO_RANK20_DURABLE_START_CAS",
+    "NO_RANK20_ACTIVATION_FILE",
+    "NO_EFFECTIVE_RANK20_EXECUTION_AUTHORITY",
+    "NO_ACCEPTANCE_CAPABILITY_OR_TERMINAL_CREDIT"
+  ],
+  "next": "DERIVE_AND_VERIFY_PUBLIC_RANK20_EFFECTIVE_AUTHORITY_PROMOTION_FROM_THIS_EXACT_STAGED_SURFACE__NO_ACTIVATION"
+}
