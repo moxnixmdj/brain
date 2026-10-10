@@ -12,7 +12,7 @@ class ProfessionalQualityScopedEvidenceV1Tests(unittest.TestCase):
     def test_current_all_twelve_roots_have_bounded_scoped_capabilities_without_global_credit(self):
         out = scoped.evaluate()
         self.assertTrue(out["pass"], out)
-        self.assertEqual(out["admitted_scope_count"], 14, out)
+        self.assertEqual(out["admitted_scope_count"], 15, out)
         self.assertEqual(out["rejected_scope_count"], 0, out)
         self.assertFalse(out["global_leaf_closure"])
         self.assertFalse(out["global_root_closure"])
@@ -149,6 +149,30 @@ class ProfessionalQualityScopedEvidenceV1Tests(unittest.TestCase):
         self.assertIn("GLOBAL_ROOT_CLOSURE_FORBIDDEN", row["errors"])
         self.assertIn("EXECUTION_LEAF_CREDIT_FORBIDDEN", row["errors"])
 
+
+
+    def test_r10_decision_semantic_scope_is_bounded_and_nonpromotional(self):
+        out = scoped.evaluate()
+        row = next(
+            x for x in out["admitted_scopes"]
+            if x["claim_kind"] == "LOSSLESS_MINIMUM_INFORMATION_DECISION_SUFFICIENCY_SEMANTICS"
+        )
+        self.assertEqual(row["root_id"], "R10_ANALYSIS_DECISION")
+        self.assertEqual(
+            row["contributes_to_leaf_ids"],
+            ["PQ::R10_ANALYSIS_DECISION::SEMANTIC"],
+        )
+        self.assertIn(
+            "NO_EVIDENCE_IS_OMITTED_WITHOUT_A_FUTURE_OMISSION_CERTIFICATE",
+            row["claim_scope"]["guarantees"],
+        )
+        self.assertIn(
+            "NO_GENERAL_PROFESSIONAL_RISK_POLICY_CLOSURE",
+            row["claim_scope"]["limitations"],
+        )
+        self.assertFalse(row["semantic_leaf_credit"])
+        self.assertFalse(row["global_leaf_credit"])
+        self.assertFalse(row["global_root_credit"])
 
     def test_r10_scope_is_execution_only_and_preserves_decision_limits(self):
         out = scoped.evaluate()
