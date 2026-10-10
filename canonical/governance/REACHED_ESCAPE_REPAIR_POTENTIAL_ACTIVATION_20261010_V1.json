@@ -1,0 +1,90 @@
+{
+  "schema": "PROJECT_BRAIN_REACHED_ESCAPE_REPAIR_POTENTIAL_ACTIVATION_20261010_V1",
+  "date": "2026-10-10",
+  "status": "ACTIVE_SHARED_WELL_FOUNDED_PROGRESS_REDUCTION__GAP_B_GENERIC_MEASURE_PROVED__ACTION_BINDINGS_OPEN__ZERO_CREDIT",
+  "mission_relation": "LOAD_BEARING_SUBTHEOREM_FOR_ESCAPE_PROGRESS_TOTALITY_FROZEN_13",
+  "runtime": {
+    "path": "canonical/runtime/reached_escape_repair_potential_v1.py",
+    "git_blob_sha": "865848d3dd2b61e2385934868d6106e2b04dedcd"
+  },
+  "dependencies": {
+    "reached_state_kernel": {
+      "path": "canonical/runtime/reached_escape_state_kernel_v1.py",
+      "git_blob_sha": "b1435d90f039bd1d809ff364c325c3d0858d3afd"
+    },
+    "finite_totality_certificate": {
+      "path": "canonical/runtime/reached_escape_finite_totality_certificate_v1.py",
+      "git_blob_sha": "85487335b7e774ac9084b34c60e0175842771036"
+    }
+  },
+  "tests": {
+    "path": "canonical/tests/test_reached_escape_repair_potential_v1.py",
+    "git_blob_sha": "9cd5a3e93ef90e2d3afdb3f5a45048e7e4da7afa",
+    "focused_replay": "11_OF_11_PASS"
+  },
+  "verification": {
+    "path": "canonical/verification/REACHED_ESCAPE_REPAIR_POTENTIAL_VERIFY_20261010_V1.json",
+    "git_blob_sha": "3bcd7ae2a85743286447f744f8cb5912273af60d"
+  },
+  "theorem": {
+    "potential": "U*(N+1)+SUM_CONFLICT_CLASSES(|C|-1)",
+    "definitions": {
+      "U": "COUNT_OF_REGIONS_WITH_NO_AUTHENTICATED_SAFE_ADEQUATE_POLICY",
+      "N": "FIXED_FINITE_REACHED_STATE_REGION_COUNT",
+      "C": "CURRENT_DISCRIMINATOR_EQUIVALENCE_CLASS_WITHOUT_A_COMMON_AUTHENTICATED_SAFE_ADEQUATE_POLICY"
+    },
+    "proved": [
+      "POTENTIAL_IS_NONNEGATIVE_INTEGER",
+      "POTENTIAL_ZERO_IFF_EXISTING_FINITE_REACHED_STATE_TOTALITY_CERTIFICATE_PASSES",
+      "MONOTONE_ADDITION_OF_AUTHENTICATED_SAFE_POLICIES_OR_AUTHENTICATED_SAFE_TRUTHFUL_COMPLETE_DISCRIMINATORS_NEVER_INCREASES_POTENTIAL",
+      "ANY_ACCEPTED_REPAIR_WITH_STRICT_POTENTIAL_DROP_IS_WELL_FOUNDED_PROGRESS",
+      "A_SEQUENCE_OF_STRICT_REPAIRS_REACHES_CERTIFICATE_ELIGIBILITY_IN_AT_MOST_INITIAL_POTENTIAL_STEPS"
+    ]
+  },
+  "gap_b_effect": {
+    "prior_shared_gap": "FOR_EVERY_INTERNAL_ROUTE_ROW__INVENT_AND_PROVE_A_FINITE_PROGRESS_MEASURE",
+    "deleted_requirement": "ROW_SPECIFIC_PROGRESS_MEASURE_INVENTION",
+    "remaining_requirement": "FOR_EACH_OF_THE_FOUR_INTERNAL_ROUTE_ROWS__BIND_ONE_EXECUTABLE_VERIFIED_ACTION_TO_A_MONOTONE_REACHED_STATE_EXTENSION_ACCEPTED_BY_THE_SHARED_REPAIR_POTENTIAL_VERIFIER",
+    "current_internal_row_count": 4,
+    "generic_measure_proved": true,
+    "specific_action_bindings_proved": 0,
+    "gap_b_closed": false
+  },
+  "gap_a_relation": {
+    "statement": "WHEN_THE_KERNEL_RETURNS_AN_UNCOVERED_REGION_OR_UNSPLITTABLE_POLICY_CONFLICT__THE_ONLY_REMAINING_GLOBAL_PROGRESS_PREMISE_IS_EXISTENCE_OF_AN_AUTHENTICATED_ACQUIRABLE_REPAIR_THAT_PASSES_THE_SHARED_STRICT_DECREASE_CONTRACT",
+    "provider_totality_proved": false,
+    "gap_a_closed": false
+  },
+  "scheduler_effect": {
+    "delete": [
+      "BUILD_FOUR_SEPARATE_WELL_FOUNDED_PROGRESS_MEASURES",
+      "REPROVE_RECURSIVE_FUTURE_OUTCOME_TOTALITY_AFTER_EACH_VALID_REPAIR"
+    ],
+    "preserve": [
+      "BIND_FOUR_CURRENT_INTERNAL_ACTIONS_TO_THE_SHARED_REPAIR_CONTRACT",
+      "PROVE_OR_REFUTE_GLOBAL_AUTHENTICATED_REPAIR_PROVIDER_TOTALITY",
+      "CC_R3",
+      "NORMAL_EXECUTION_AND_ACCEPTANCE_AUTHORITY"
+    ],
+    "next": "BIND_CURRENT_GAP_B_INTERNAL_ACTIONS_TO_SHARED_REPAIR_CONTRACT__IN_PARALLEL_KEEP_GAP_A_AS_THE_ONLY_GLOBAL_PROVIDER_EXISTENCE_QUESTION"
+  },
+  "hard_nonclaims": [
+    "NO_SPECIFIC_INTERNAL_ACTION_BINDING",
+    "NO_GLOBAL_REPAIR_PROVIDER_TOTALITY",
+    "NO_ESCAPE_PROGRESS_TOTALITY",
+    "NO_CC_R3_CERTIFICATE",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false
+}
