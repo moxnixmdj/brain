@@ -1,0 +1,108 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_RUNTIME_BYTE_COHERENCE_COMPOSITE_VERIFY_V2",
+  "date": "2026-10-10",
+  "status": "PASS__CURRENT_SIX_RUNTIME_SUBJECTS_RESEALED_COMPOSITIONALLY",
+  "source_branch": "impl-executable-refinement-terminal-closure-20261009",
+  "observed_source_head_before_receipt_commit": "7b610b4731a613f9847a0e4b29f0a93478ae7e43",
+  "unchanged_subject_evidence": {
+    "receipt": {
+      "path": "canonical/verification/CURRENT_RUNTIME_BYTE_COHERENCE_SPRITE_VERIFICATION_20261010_V1.json",
+      "git_blob_sha": "52de2370122ca2eb1e934425c963a918ea72a24f"
+    },
+    "inherited_only_for_exact_unchanged_blobs": [
+      [
+        "canonical/runtime/terminal_candidate_donor_independence_audit_v1.py",
+        "7b3713267d32f9b4ae7e2ca56ea17c5859bdec71"
+      ],
+      [
+        "canonical/runtime/terminal_autopilot_executor_v1.py",
+        "6f828ce5631db582ea4d4a3d73c59b08f232abf0"
+      ],
+      [
+        "canonical/runtime/terminal_autopilot_v1.py",
+        "78fa2cbabf8ed5e70de8b3ed987b510ca033076b"
+      ],
+      [
+        "canonical/runtime/unified_cognitive_fabric_v1.py",
+        "31b9a227dba79f069045e915e416bcc370900af6"
+      ],
+      [
+        "canonical/runtime/option_preserving_capability_optimizer_v1.py",
+        "367478e71b015fb2f4b7cc40dad34f88a7f47238"
+      ]
+    ]
+  },
+  "drifted_subject_reseal": {
+    "path": "canonical/runtime/terminal_root_decision_gate_v1.py",
+    "git_blob_sha": "40a6f984013d0d701edba498c2a122edcb9a8103",
+    "carrier": "ISOLATED_LOCAL_CONTAINER_FROM_EXACT_SPRITE_MATERIALIZED_BYTES",
+    "exact_runtime_blob_hash_recomputed": true,
+    "current_test_semantics_reference": {
+      "path": "canonical/tests/test_terminal_root_decision_gate_v1.py",
+      "git_blob_sha": "0767251b2ad4df55f591d5761b0e9a3c01852c99",
+      "note": "EXACT_TEST_FILE_WAS_NOT_RELAYED_TO_CARRIER__CURRENT_TEN_TEST_SCENARIOS_WERE_REPLAYED_BY_EQUIVALENT_ASSERTION_HARNESS_AGAINST_EXACT_RUNTIME_BYTES"
+    },
+    "current_test_scenario_count": 10,
+    "explicit_assertion_checks": 11,
+    "failures": 0,
+    "errors": 0,
+    "checks": [
+      "FULL_SCOPE_DB_COVER_ACCEPTS_BOUND_ADMITTED_PROOF",
+      "TARGET_ESCAPE_NONOCCUPANCY_ACCEPTS_BOUND_ADMITTED_PROOF",
+      "GENERATOR_CLOSURE_ACCEPTS_ALL_PREMISES",
+      "GENERATOR_CLOSURE_REJECTS_FALSE_LOAD_BEARING_PREMISE",
+      "SELECTED_COVER_COMPLEMENT_ACCEPTS_SOUND_UNION_AND_UNSAT_COMPLEMENT",
+      "FAKE_HEX_BINDINGS_CANNOT_SELF_CERTIFY",
+      "PROOF_BYTE_DRIFT_FAILS_CLOSED",
+      "VERIFIER_MUST_BIND_EXACT_PROOF",
+      "MANIFEST_BOOLEANS_CANNOT_OVERRIDE_BOUND_PROOF",
+      "CONTENT_ADDRESSED_UNADMITTED_PAIR_CANNOT_SELF_CERTIFY",
+      "STALE_CURRENT_AUTHORITY_POINTER_FAILS_CLOSED"
+    ]
+  },
+  "current_target_blobs": [
+    [
+      "canonical/runtime/terminal_candidate_donor_independence_audit_v1.py",
+      "7b3713267d32f9b4ae7e2ca56ea17c5859bdec71"
+    ],
+    [
+      "canonical/runtime/terminal_autopilot_executor_v1.py",
+      "6f828ce5631db582ea4d4a3d73c59b08f232abf0"
+    ],
+    [
+      "canonical/runtime/terminal_autopilot_v1.py",
+      "78fa2cbabf8ed5e70de8b3ed987b510ca033076b"
+    ],
+    [
+      "canonical/runtime/terminal_root_decision_gate_v1.py",
+      "40a6f984013d0d701edba498c2a122edcb9a8103"
+    ],
+    [
+      "canonical/runtime/unified_cognitive_fabric_v1.py",
+      "31b9a227dba79f069045e915e416bcc370900af6"
+    ],
+    [
+      "canonical/runtime/option_preserving_capability_optimizer_v1.py",
+      "367478e71b015fb2f4b7cc40dad34f88a7f47238"
+    ]
+  ],
+  "claims": {
+    "current_six_subject_byte_behavior_evidence_coherent": true,
+    "semantic_refinement_proved": false,
+    "full_dependency_cone_current_byte_verified": false,
+    "repository_wide_refinement_verified": false,
+    "terminal_goal_closed": false
+  },
+  "accounting": {
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "nonclaims": [
+    "COMPOSITION_IS_VALID_ONLY_WHILE_THE_FIVE_INHERITED_RUNTIME_BLOBS_REMAIN_EXACTLY_UNCHANGED",
+    "ROOT_GATE_RESEAL_EXECUTED_EQUIVALENT_CURRENT_TEST_SEMANTICS_NOT_THE_EXACT_CURRENT_TEST_FILE_BYTES",
+    "THIS_DOES_NOT_PROVE_SEMANTIC_REFINEMENT_OF_ANY_RUNTIME SUBJECT",
+    "THIS_DOES_NOT_PROVE_TRANSITIVE_DEPENDENCY_CONE_COHERENCE"
+  ]
+}
