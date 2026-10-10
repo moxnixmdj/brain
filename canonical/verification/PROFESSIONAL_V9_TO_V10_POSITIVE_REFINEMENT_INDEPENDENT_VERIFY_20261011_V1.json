@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_V9_TO_V10_POSITIVE_REFINEMENT_INDEPENDENT_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__INDEPENDENT_SPRITE__PYCOMPILE__9_OF_9_COMBINED__V10_STRICT_FAIL_CLOSED_POSITIVE_SUBSET_OF_V9__29_OF_29_SUBJECT_CURRENT__ZERO_CREDIT",
+  "repository": "moxnixmdj/brain",
+  "subject": {
+    "v10_router": {
+      "path": "canonical/runtime/professional_quality_p1_router_v10.py",
+      "git_blob_sha": "5434dd4a4a7308262aeb9274c7211d1dfdc2f441"
+    },
+    "v10_tests": {
+      "path": "canonical/tests/test_professional_quality_p1_router_v10.py",
+      "git_blob_sha": "161bcec40f5f2ed327902b47460dab7bc13939c7"
+    },
+    "refinement_runtime": {
+      "path": "canonical/runtime/professional_v9_to_v10_positive_refinement_v1.py",
+      "git_blob_sha": "c541894219e7ce4b5886304e05c3b21ae3cff6c2"
+    },
+    "refinement_tests": {
+      "path": "canonical/tests/test_professional_v9_to_v10_positive_refinement_v1.py",
+      "git_blob_sha": "5872d50a1b546db5f64bc2e44489b12598de1846"
+    },
+    "declared_subject": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V10_DECLARED_SYSTEM_SUBJECT_20261011_V1.json",
+      "git_blob_sha": "ebb01def802dfde7fa9a0c04baff233984f4961d",
+      "subject_id": "PROFESSIONAL_QUALITY_P1_V10_EXACT_R12_TOTALITY_VERIFIER_PIN_SYSTEM_20261011_V1",
+      "subject_sha256": "5484934c051696d3a1d4fef68f75907bb851b5562d3a734f74da2a3f9fbe9675",
+      "component_count": 29
+    },
+    "approved_totality_verifier": {
+      "path": "canonical/runtime/professional_r12_v9_policy_cover_totality_semantic_verify_v2.py",
+      "git_blob_sha": "08ee0e1a82162032daadf002f6364b2b10a86ed3"
+    }
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-professional-hard-defect-verify-20261010",
+    "carrier_id": "sprite-1bbb86ed-1f7c-409f-8397-fadc4de7a62a",
+    "workspace": "/home/sprite/v10-verifier-pin-independent",
+    "py_compile": "PASS",
+    "refinement_tests_run": 4,
+    "refinement_tests_passed": 4,
+    "v10_tests_run": 5,
+    "v10_tests_passed": 5,
+    "combined_tests_run": 9,
+    "combined_tests_passed": 9,
+    "subject_component_count": 29,
+    "subject_component_current_count": 29
+  },
+  "truth": {
+    "positive_route_refinement_proved": true,
+    "accepted_v10_positive_is_v9_positive": true,
+    "new_positive_behavior_added": false,
+    "foreign_verifier_rejected_preexecution": true,
+    "exact_approved_verifier_pinned": true,
+    "cross_subject_property_authority_transport": false
+  },
+  "hard_nonclaims": [
+    "NO_R12_CC_R3_OR_R4_CLOSURE_FROM_THIS_REFINEMENT",
+    "NO_CLAIM_WIDE_MATERIAL_DEFEATER_TOTALITY_FROM_REFINEMENT_ALONE",
+    "NO_SEMANTIC_PROPERTY_TRUTH_OR_PROFESSIONAL_QUALITY_CLOSURE",
+    "NO_LIVE_DEFAULT_PROMOTION",
+    "NO_TERMINAL_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "property_truth_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
