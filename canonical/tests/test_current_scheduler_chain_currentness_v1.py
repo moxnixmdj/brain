@@ -1,33 +1,73 @@
-import hashlib,json,unittest
+import json,unittest
 from pathlib import Path
-from unittest.mock import patch
-from canonical.runtime import capability_parallel_frontier_post_composition_v1 as adapter
+
+from canonical.runtime import capability_parallel_frontier_post_composition_v2 as adapter
+from canonical.runtime import capability_parallel_frontier_v2 as core
 
 ROOT=Path(__file__).resolve().parents[2]
-def load(rel): return json.loads((ROOT/rel).read_text(encoding="utf-8"))
-def blob(rel):
- raw=(ROOT/rel).read_bytes()
- return hashlib.sha1(b"blob "+str(len(raw)).encode()+b"\0"+raw).hexdigest()
+
+def load(rel):
+ return json.loads((ROOT/rel).read_text(encoding="utf-8"))
 
 class T(unittest.TestCase):
- def test_current_scheduler_chain_is_coherent(self):
-  pp="canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json"
-  rp="canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json"
-  fp="canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json"
+ def test_current_scheduler_chain_uses_v15_dynamic_currentness(self):
   sp="canonical/governance/CURRENT_DEVELOPMENT_SCHEDULER.json"
   mp="canonical/governance/CURRENT_MISSION_OBJECTIVE.json"
-  p,r,f,s,m=map(load,[pp,rp,fp,sp,mp]); pf=p["property_truth_frontier"]
-  ids=pf["verified_leaf_ids"]; closed=pf["verified_leaf_count"]; oe=pf["open_execution_leaf_count"]; os=pf["open_semantic_leaf_count"]
-  rc=next(x for x in r["classifications"] if x["residual_id"]=="PROFESSIONAL_QUALITY_BROAD_EXECUTION")["property_truth_frontier"]
-  self.assertEqual((rc["verified_leaf_count"],rc["open_execution_leaf_count"],rc["open_semantic_leaf_count"],rc["verified_leaf_ids"]),(closed,oe,os,ids))
-  row=next(x for x in f["candidates"] if x.get("source")==pp and "canonical:professional-quality" in x.get("mutation_keys",[]))
-  ev=row["read_only_evidence"]
-  self.assertEqual((ev["property_truth_closed_count"],ev["open_execution_leaf_count"],ev["open_semantic_leaf_count"],ev["verified_property_truth_leaf_ids"]),(closed,oe,os,ids))
-  self.assertEqual(s["current_live_work_frontier"]["git_blob_sha"],blob(fp))
-  self.assertEqual(s["current_live_work_frontier"]["professional_property_truth_closed_count"],closed)
-  self.assertEqual(s["whole_leaf_residual_control"]["property_truth_closed_count"],closed)
-  pairs=[("current_assurance_closure_compiler","canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json"),("current_development_scheduler",sp),("current_professional_quality_execution",pp),("current_parallel_frontier_control",fp),("current_residual_reuse_classification",rp),("bytes_current_frontier","canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json")]
-  for key,path in pairs: self.assertEqual(m[key]["observed_git_blob_sha"],blob(path),key)
-  with patch.object(adapter.core,"ROOT",ROOT):
-   out=adapter._assert_post_composition(f)
-  self.assertEqual((out["property_truth_closed_count"],out["open_execution_leaf_count"],out["open_semantic_leaf_count"]),(closed,oe,os))
+  fp="canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json"
+  s,m,f=map(load,[sp,mp,fp])
+
+  self.assertEqual(
+   s["authoritative_activation"],
+   "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V15.json",
+  )
+  self.assertEqual(
+   s["runtime"],
+   "canonical/runtime/capability_parallel_frontier_post_composition_v2.py",
+  )
+  self.assertEqual(
+   s["primary_entrypoint"],
+   "canonical.runtime.capability_parallel_frontier_post_composition_v2.plan_current_post_composition_frontier",
+  )
+  self.assertEqual(
+   m["current_development_scheduler"]["activation"],
+   "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V15.json",
+  )
+  self.assertEqual(
+   m["current_development_scheduler"]["primary_runtime"],
+   "canonical/runtime/capability_parallel_frontier_post_composition_v2.py",
+  )
+
+  refreshed=adapter.refresh_post_composition_currentness(f,root=ROOT)
+  bound={x["path"]:x["git_blob_sha"] for x in refreshed["scope"]["source_set"]}
+  for rel in (adapter.PROF,adapter.ASSURANCE,adapter.BYTES,adapter.R2):
+   self.assertEqual(bound[rel],adapter._git_blob_sha(ROOT/rel),rel)
+
+  supported={adapter.PROF,adapter.ASSURANCE,adapter.BYTES,adapter.R2}
+  for row in refreshed["scope"]["source_set"]:
+   if row["path"] in supported:
+    continue
+   self.assertEqual(row["git_blob_sha"],adapter._git_blob_sha(ROOT/row["path"]),row["path"])
+
+  out=adapter.plan_current_post_composition_frontier()
+  self.assertTrue(out["frontier_currentness"]["currentness_verified"])
+  self.assertTrue(out["dynamic_currentness"]["professional_pointer_follow"])
+  self.assertTrue(out["dynamic_currentness"]["assurance_pointer_follow"])
+  self.assertTrue(out["dynamic_currentness"]["bytes_pointer_follow"])
+  self.assertTrue(out["dynamic_currentness"]["r2_pointer_follow"])
+  self.assertFalse(out["execution_authority"])
+  self.assertFalse(out["promotion_authority"])
+  self.assertEqual(out["terminal_credit_delta"],0)
+
+ def test_unmodeled_source_drift_is_not_silently_followed(self):
+  f=core.load_current_frontier()
+  row=next(
+   x for x in f["scope"]["source_set"]
+   if x["path"]=="canonical/governance/CURRENT_TERMINAL_AUTHORITY.json"
+  )
+  row["git_blob_sha"]="0"*40
+  refreshed=adapter.refresh_post_composition_currentness(f,root=ROOT)
+  with self.assertRaisesRegex(core.ParallelFrontierError,"LIVE_WORK_FRONTIER_STALE"):
+   core.plan_parallel_frontier(refreshed)
+
+if __name__=="__main__":
+ unittest.main(verbosity=2)
