@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_TB_SCIENCE_EXECUTION_POINTER_V2",
   "date": "2026-10-10",
-  "status": "RANK17_FINAL_ZERO__RANK18_V1_V12_BRAIN_AUTHORITY_ACTIVE__TASK_UNREAD_UNSTARTED__PUBLIC_RESEAL_REQUIRED",
+  "status": "RANK17_FINAL_ZERO__RANK18_V1_V12_PUBLIC_RESEAL_VERIFIED__TASK_UNREAD_UNSTARTED__TASK_READ_AUTHORITY_EFFECTIVE__ACTIVATION_NOT_ARMED",
   "current_result": {
     "path": "canonical/verification/TB_SCIENCE_RANK17_V6_IRREVERSIBLE_RESULT_TRUTH_20261010_V1.json",
     "git_blob_sha": "3d7a0339ccf320f256834fcbde6427c8c62d473b"
@@ -32,16 +32,29 @@
     "task_read": false,
     "task_started": false,
     "execution_authority": true,
-    "task_read_authority": false,
+    "task_read_authority": true,
     "authority_path": "canonical/governance/TB_SCIENCE_RANK18_ONE_SLOT_EXECUTION_AUTHORITY_20261010_V1.json",
     "authority_git_blob_sha": "0cbf7ffb571c0f411a5ba44c751b1c833059c83c",
     "authority_verification_path": "canonical/verification/TB_SCIENCE_RANK18_ONE_SLOT_AUTHORITY_VERIFY_20261010_V1.json",
     "authority_verification_git_blob_sha": "4c829d9e5dc878fd0ef002221f9b27170c853aa5",
     "runtime_version": "V12",
-    "public_surface_resealed": false,
+    "public_surface_resealed": true,
     "activation_armed": false
   },
   "acceptance_credit_delta": 0,
   "terminal_credit_delta": 0,
-  "next": "BUILD_FRESH_RANK18_PUBLIC_V12_RESEAL_BOUND_TO_V1_AUTHORITY_AND_V33_LEDGER__PROVE_TRUSTED_PARENT_ARTIFACT_METADATA_INJECTION_AND_ZERO_EXPOSURE_RUNTIME_COMPOSITION__ONLY_THEN_ENABLE_TASK_READ"
+  "next": "CREATE_EXACT_ONE_FILE_RANK18_V1_ACTIVATION_PR_FROM_VERIFIED_PUBLIC_RESEAL__LIVE_CARRIER_QUALIFICATION_AND_PRESTART_GATES_MUST_PASS_BEFORE_TASK_READ_OR_START",
+  "rank18_public_reseal": {
+    "reconciliation_path": "canonical/governance/TB_SCIENCE_RANK18_V1_PUBLIC_RESEAL_RECONCILIATION_20261010_V1.json",
+    "reconciliation_git_blob_sha": "43405b2f540fd8a8e3a6a07a1f7ccb431432590e",
+    "verification_path": "canonical/verification/TB_SCIENCE_RANK18_V1_PUBLIC_RESEAL_VERIFY_20261010_V1.json",
+    "verification_git_blob_sha": "329985ebb77c51091762d9003ab82acb24612495",
+    "public_repository": "moxnixmdj/verification-capsule-runner",
+    "public_merge_commit": "ff74920b8827243910da297420222c789e5b751c",
+    "task_read": false,
+    "task_started": false,
+    "benchmark_trials_consumed": 0,
+    "task_read_authority": true,
+    "activation_armed": false
+  }
 }
