@@ -1,0 +1,83 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_ROOT_SUBJECT_BINDING_V1",
+  "date": "2026-10-10",
+  "status": "CANDIDATE_R3_V7_ROOT_SUBJECT_BINDING_V2__ACTUAL_V7_RENDER_STEP_RECEIPT_AND_DURABLE_REALIZATION_BOUND__AWAITING_INDEPENDENT_VERIFICATION__ZERO_QUALITY_OR_TERMINAL_AUTHORITY",
+  "root_id": "R3_REALIZATION_OBSERVATION",
+  "subject_kind": "DECLARED_SYSTEM",
+  "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+  "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+  "subject": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V7_DECLARED_SYSTEM_SUBJECT_20261010_V6.json",
+    "git_blob_sha": "1d598bc8757017ceb34928d0df9f5fce859ef868"
+  },
+  "bridge_evidence": {
+    "realization_semantic_verification": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R3_REALIZATION_SEMANTIC_VERIFY_20261010_V1.json",
+      "git_blob_sha": "3c9a6f03c9dfb7597cdb7c5ca01e9eaf66a596e0"
+    },
+    "scoped_integration_verification": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R3_SEMANTIC_SCOPED_INTEGRATION_VERIFY_20261010_V1.json",
+      "git_blob_sha": "86efb5396f90a4182d90029b47868123226fa05c"
+    },
+    "native_render_public_verification": {
+      "path": "canonical/verification/NATIVE_ARTIFACT_RENDER_PRESERVATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "1a0b4ca6627aaf28eb25f6990682e87319d14d6d"
+    },
+    "proof_bound_v7_step_execution": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_P1_ROUTER_V7_PROOF_BOUND_STEP_VERIFY_20261010_V1.json",
+      "git_blob_sha": "b7a9df36780513ad73fd14c6a2756c8474d8434d"
+    },
+    "durable_realization_evidence": {
+      "path": "canonical/evidence/PROFESSIONAL_V7_R3_DURABLE_REALIZATION_EVIDENCE_20261010_V1.json",
+      "git_blob_sha": "f18329cac5c702f3503863819b5e3c92cb16d382"
+    },
+    "render_step_receipt": {
+      "path": "canonical/governance/PROFESSIONAL_V7_R3_RENDER_STEP_BINDING_20261010_V1.json",
+      "git_blob_sha": "276ffbda0ecc68aa65228386d9ca19b3a0bc6c9b"
+    },
+    "render_step_independent_verification": {
+      "path": "canonical/verification/PROFESSIONAL_V7_R3_RENDER_STEP_BINDING_INDEPENDENT_VERIFY_20261010_V1.json",
+      "git_blob_sha": "250b610205c42b8ced3c5c3eb8963dc5d770b07c"
+    }
+  },
+  "binding_scope": {
+    "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+    "claim": "FOR_THE_EXACT_V7_DECLARED_SYSTEM_SUBJECT__ONE_EXACT_BOUNDED_PDF_REALIZATION_INSTANCE_HAS_CONTENT_ADDRESSED_SOURCE_AND_OUTPUT_ARTIFACT_BYTES__EXACT_96_DPI_AUDIENCE_VIEW_BYTES__INDEPENDENT_STRUCTURAL_AND_RENDER_PRESERVATION_VERIFICATION__AND_ONE_AUTHENTICATED_V7_RENDER_STEP_RECEIPT_BOUND_TO_THE_SAME_RUN_CONTEXT__THEREFORE_THE_BOUNDED_R3_REALIZATION_OBSERVATION_SUPPORT_IS_BOUND_TO_THIS_SUBJECT_WITHOUT_GLOBALIZING_REALIZATION_COMPLETENESS",
+    "run_context_sha256": "sha256:0dc8d549586a7d53801b8d825ce86abdf708d6b60fc98c20f3486e3158a4b7a3",
+    "evidence_sha256": "176234b80f16f636c3573f50fe538a2b5208a8617755b8a18f5a2df825e0e20e",
+    "guarantees": [
+      "EXACT_V7_SUBJECT_TUPLE_BOUND",
+      "EXACT_SOURCE_AND_OUTPUT_ARTIFACT_BYTES_DURABLY_BOUND",
+      "EXACT_SOURCE_AND_OUTPUT_AUDIENCE_VIEW_BYTES_DURABLY_BOUND",
+      "INDEPENDENT_STRUCTURAL_PRESERVATION_VERIFIED",
+      "INDEPENDENT_PINNED_RENDER_OBSERVATION_VERIFIED",
+      "V7_RENDER_STEP_RECEIPT_CONTENT_ADDRESSED_AND_INDEPENDENTLY_VERIFIED",
+      "V7_RUN_CONTEXT_IDENTITY_BOUND",
+      "BOUNDED_R3_REALIZATION_SEMANTICS_REUSED_WITHOUT_SCOPE_EXPANSION"
+    ],
+    "limitations": [
+      "NO_GLOBAL_R3_REALIZATION_COMPLETENESS",
+      "NO_ARBITRARY_SEMANTIC_TARGET_SELECTION",
+      "NO_WHOLE_OPEN_ENDED_PROFESSIONAL_ARTIFACT_CONTRACT_EQUIVALENCE",
+      "NO_R4_THROUGH_R12_ROOT_SUBJECT_BINDING",
+      "NO_SAME_SUBJECT_COMPOSITION_PASS",
+      "NO_LIVE_DEFAULT_PROMOTION"
+    ]
+  },
+  "actual_v7_step_receipt_proved": true,
+  "global_subject_identity_authority": false,
+  "root_subject_binding_authority": false,
+  "semantic_truth_authority": false,
+  "execution_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "supersedes": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_R3_ROOT_SUBJECT_BINDING_20261010_V1.json",
+    "git_blob_sha": "c49c120a61620d400e372884266b63ec34a054d2",
+    "reason": "V1_BOUND_PROOF_REQUIREMENT_BUT_EXPLICITLY_LEFT_REAL_TASK_STEP_RECEIPT_UNPROVED__V2_BINDS_ONE_ACTUAL_INDEPENDENTLY_VERIFIED_V7_RENDER_RECEIPT_AND_DURABLE_ARTIFACT_AUDIENCE_BYTES"
+  }
+}
