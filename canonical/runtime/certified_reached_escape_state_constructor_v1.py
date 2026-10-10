@@ -25,6 +25,11 @@ REPAIR_SCHEMA = "PROJECT_BRAIN_CERTIFIED_REACHED_ESCAPE_STATE_REPAIR_V1"
 STATE_SCHEMA = kernel.STATE_SCHEMA
 
 
+def normalize_state_structure(state: Mapping[str, Any]) -> dict[str, Any]:
+    """Normalize reached-state structure through the trusted V1 kernel boundary."""
+    return kernel._normalize(state)
+
+
 def _canon(value: Any) -> str:
     return json.dumps(
         value,
