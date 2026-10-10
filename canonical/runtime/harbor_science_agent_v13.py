@@ -24,7 +24,7 @@ from canonical.runtime.harbor_environment_transport_v2 import (
 )
 from execution_guard import terminal_agent_start_barrier_v1 as start_barrier
 from execution_guard import terminal_causal_journal_filebridge_v2 as causal_bridge
-from execution_guard.logical_attempt_identity_v1 import logical_attempt_id as canonical_logical_attempt_id
+from execution_guard.logical_attempt_identity_v2 import logical_attempt_id as canonical_logical_attempt_id
 from canonical.runtime.lossless_raw_task_contract_v1 import compile_contract as compile_raw_task_contract
 from canonical.runtime.raw_task_acceptance_residual_localizer_v1 import localize as localize_raw_task_acceptance
 
@@ -750,13 +750,22 @@ def logical_attempt_id_for_goal(goal: str) -> str:
     slot_id = str(os.environ.get("BRAIN_SLOT_ID") or "").strip()
     task_digest = str(os.environ.get("BRAIN_TASK_DIGEST") or "").strip()
     carried = str(os.environ.get("BRAIN_LOGICAL_ATTEMPT_ID") or "").strip()
+    claim_digest = str(
+        os.environ.get("BRAIN_EXECUTION_CLAIM_BINDING_DIGEST") or ""
+    ).strip()
     if not slot_id:
         raise RuntimeError("BRAIN_SLOT_ID_REQUIRED")
     if not task_digest:
         raise RuntimeError("BRAIN_TASK_DIGEST_REQUIRED")
     if not carried:
         raise RuntimeError("BRAIN_LOGICAL_ATTEMPT_ID_REQUIRED")
-    expected = canonical_logical_attempt_id(slot_id=slot_id, task_digest=task_digest)
+    if not claim_digest:
+        raise RuntimeError("BRAIN_EXECUTION_CLAIM_BINDING_DIGEST_REQUIRED")
+    expected = canonical_logical_attempt_id(
+        slot_id=slot_id,
+        task_digest=task_digest,
+        execution_claim_binding_digest=claim_digest,
+    )
     if carried != expected:
         raise RuntimeError("BRAIN_LOGICAL_ATTEMPT_ID_MISMATCH")
     return carried
