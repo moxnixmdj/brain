@@ -646,10 +646,29 @@ def _extract_information_gap(decision: Mapping[str, Any]) -> dict[str, Any] | No
     )
     if not isinstance(predicate_id, str) or not predicate_id:
         return None
+    concrete_request=loop.get("next_information_request")
+    request_candidates=loop.get("next_information_request_candidates")
     return {
         "predicate_id": predicate_id,
         "loop_status": status,
         "loop_reason": loop.get("reason"),
+        "truth_next_information_request": (
+            deepcopy(dict(concrete_request))
+            if isinstance(concrete_request, Mapping)
+            else None
+        ),
+        "truth_next_information_request_candidates": (
+            deepcopy(list(request_candidates))
+            if isinstance(request_candidates, list)
+            and all(isinstance(x, Mapping) for x in request_candidates)
+            else []
+        ),
+        "truth_next_required_edge": (
+            loop.get("next_required_edge")
+            if isinstance(loop.get("next_required_edge"), str)
+            and loop.get("next_required_edge")
+            else None
+        ),
     }
 
 
@@ -1419,6 +1438,19 @@ def run(
                 "information_authority": False,
                 "semantic_truth_authority": False,
             }
+            if isinstance(gap.get("truth_next_information_request"), Mapping):
+                request_packet["truth_next_information_request"] = deepcopy(
+                    dict(gap["truth_next_information_request"])
+                )
+            candidates = gap.get("truth_next_information_request_candidates")
+            if isinstance(candidates, list) and candidates:
+                request_packet["truth_next_information_request_candidates"] = deepcopy(
+                    candidates
+                )
+            if isinstance(gap.get("truth_next_required_edge"), str):
+                request_packet["truth_next_required_edge"] = gap[
+                    "truth_next_required_edge"
+                ]
 
             if acquisition_plan.get("action") == "REUSE_BOUND_CONTEXT":
                 bound_truth_payload = origin.get("bound_truth_payload")
