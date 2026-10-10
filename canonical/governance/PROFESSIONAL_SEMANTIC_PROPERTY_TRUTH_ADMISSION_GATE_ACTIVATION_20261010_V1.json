@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_SEMANTIC_PROPERTY_TRUTH_ADMISSION_GATE_ACTIVATION_20261010_V1",
+  "date": "2026-10-10",
+  "status": "ACTIVE_CANDIDATE__INDEPENDENTLY_VERIFIED_FAIL_CLOSED_SEMANTIC_PROPERTY_TRUTH_ADMISSION__ZERO_PROPERTY_CREDIT",
+  "objective": "PREVENT_SCOPE_OR_SAFE_ABSTENTION_EVIDENCE_FROM_BEING_MISCLASSIFIED_AS_UNIVERSAL_SEMANTIC_LEAF_PROPERTY_TRUTH",
+  "runtime": {
+    "path": "canonical/runtime/professional_semantic_property_truth_admission_v1.py",
+    "git_blob_sha": "86c2d7d336d49979a2aed2d1b6d596fc2b93508b"
+  },
+  "tests": {
+    "path": "canonical/tests/test_professional_semantic_property_truth_admission_v1.py",
+    "git_blob_sha": "528fa7bf8d82a64bc4ea0185fb7ac3bc5ac2fc16"
+  },
+  "verification": {
+    "path": "canonical/verification/PROFESSIONAL_SEMANTIC_PROPERTY_TRUTH_ADMISSION_VERIFY_20261010_V1.json",
+    "git_blob_sha": "6a013a7cdd4153fc0e257512603c747f017c3129",
+    "status": "PASS__INDEPENDENT_SPRITE__8_OF_8"
+  },
+  "bound_current_claim_pack": {
+    "path": "canonical/governance/PROFESSIONAL_SEMANTIC_TOTALITY_FROZEN_CLAIM_PACK_20261010_V2.json",
+    "git_blob_sha": "f16aab3760d4f5958da986782632f3cb2bbd2646",
+    "semantic_claim_count": 12,
+    "current_claim_id_binding_required": true
+  },
+  "laws": [
+    "SEMANTIC_LEAF_PROPERTY_TRUTH_MUST_BIND_THE_CURRENT_SEMANTIC_TOTALITY_PROPERTY_CLAIM_NOT_A_WHOLE_LEAF_SCOPE_CLAIM",
+    "ALL_SHARED_SEMANTIC_ACCEPTANCE_ATOMS_REQUIRE_TOTALITY_PROOF",
+    "SAFE_ABSTENTION_IS_ZERO_POSITIVE_PROPERTY_CREDIT_UNLESS_THE_EXACT_TARGET_PREDICATE_ACCEPTS_IT_OR_THE_ABSTAINING_CASES_ARE_PROVED_OUTSIDE_CLAIM_SCOPE",
+    "ONE_OR_FINITE_POSITIVE_WITNESSES_DO_NOT_REPLACE_UNIVERSAL_POSITIVE_ISSUANCE_TOTALITY",
+    "CLAIM_SCOPED_ROOT_FACTORIZATION_OR_AN_INDEPENDENT_STRONGER_DIRECT_UNIVERSAL_PROOF_IS_REQUIRED",
+    "MISSION_POINTER_DRIFT_FAILS_CLOSED"
+  ],
+  "known_rejected_candidate_class": {
+    "id": "LEGACY_R10_SEMANTIC_PROPERTY_TRUTH_V1",
+    "reason": [
+      "USES_WHOLE_LEAF_SCOPE_CLAIM_ID_INSTEAD_OF_CURRENT_SEMANTIC_TOTALITY_CLAIM_ID",
+      "EXPLICITLY_LEAVES_DEFEATER_DETECTION_COMPLETENESS_FALSE",
+      "EXPLICITLY_LEAVES_UNDERLYING_FACT_TRUTH_COMPLETENESS_FALSE"
+    ],
+    "property_truth_credit": 0
+  },
+  "next": "BIND_THIS_GATE_INTO_THE_NEXT_LEAF_BINDER_GENERATION_BEFORE_ADMITTING_ANY_SEMANTIC_LEAF_RECEIPT",
+  "hard_nonclaims": [
+    "NO_SEMANTIC_LEAF_PROPERTY_TRUTH_PROVED",
+    "NO_CURRENT_SEMANTIC_CANDIDATE_ADMITTED",
+    "NO_ROOT_DOMAIN_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "semantic_truth_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
