@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_PLANNER_V7_STATIC_ZERO_EXPOSURE_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__PUBLIC_ISOLATED_10_OF_10__RANK18_TIMEOUT_UNDERBUDGET_CLOSED__ZERO_BENCHMARK_EXPOSURE__LIVE_CARRIER_GATE_STILL_REQUIRED",
+  "subject": {
+    "planner_path": "canonical/runtime/harbor_science_planner_v7.py",
+    "planner_git_blob_sha": "e5d6ab78b6cf5bacee568cd3701410a8745b9ce8",
+    "agent_path": "canonical/runtime/harbor_science_agent_v13.py",
+    "agent_git_blob_sha": "8deede8adb960b6ebf7ee747a5e9ff1016238b7e",
+    "causal_diagnosis_path": "canonical/verification/TB_SCIENCE_RANK18_PLANNER_TIMEOUT_CAUSAL_DIAGNOSIS_20261010_V1.json",
+    "causal_diagnosis_git_blob_sha": "d5d7a9b757a576528b322b96b8d3738d8949b63f"
+  },
+  "public_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2557,
+    "workflow_run_id": 38032428131,
+    "workflow_job_id": 114155984841,
+    "result": "PASS__10_OF_10",
+    "checked_merge_ref": "cedf70ff74fb98a30d1e6425147eec1009d719ce",
+    "candidate_head_at_verification": "310f36d2897507e851f683a5b2b64a88ff66370b"
+  },
+  "verified": [
+    "PLANNER_V7_AND_AGENT_V13_COMPILE",
+    "RANK18_387_SECOND_UNDERBUDGET_REGRESSION_CLOSED",
+    "FULL_4096_TOKEN_BOUNDED_COMPLETION_TIME_RESERVED",
+    "SHORT_CONTEXT_REQUIRED_DEADLINE_2093_SECONDS_FITS_2400_SECOND_CAP",
+    "LONG_PRODUCTION_ENVELOPE_REQUIRED_DEADLINE_3142_SECONDS_FITS_3600_SECOND_CAP",
+    "THREE_TOKEN_PER_SECOND_GENERATION_FLOOR_IS_BELOW_RANK18_OBSERVED_4_48_TO_4_61_TOKEN_PER_SECOND_RANGE",
+    "SEEDED_REQUEST_IDENTITY_REMAINS_DETERMINISTIC",
+    "NO_BENCHMARK_TASK_READ_OR_START"
+  ],
+  "remaining_gate": "PUBLIC_LIVE_PINNED_LLAMA_CPP_QWEN_SYNTHETIC_REQUEST_MUST_PASS_BEFORE_RANK19_EXECUTION_AUTHORITY",
+  "task_read": false,
+  "task_started": false,
+  "benchmark_trials_consumed": 0,
+  "rank19_execution_authority": false,
+  "acceptance_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
