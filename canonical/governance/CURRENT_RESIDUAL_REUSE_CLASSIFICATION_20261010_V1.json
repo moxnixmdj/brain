@@ -270,16 +270,16 @@
         "VERIFY_EXISTING"
       ],
       "existing_binding": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V6.json",
-      "exact_remaining_class": "2_CURRENT_INTERNAL_ROWS__GDPVAL_AND_CHARTOGRAPHY__TB_SCIENCE_RANK20_V3_RETIRED_NONCONSUMING_AND_PARKED_WITH_NO_RETRY_REPLACEMENT_OR_ACTIVATION_AUTHORITY__GENERIC_REPAIR_VERIFICATION_RECERTIFICATION_AND_LIVE_REENTRY_SOLVED__REMAINING_ACTIVE_ROWS_REQUIRE_EXECUTABLE_VERIFIED_ACTION_PLUS_WELL_FOUNDED_ACCEPTANCE_RELEVANT_MEASURE_AND_ALL_OUTCOME_STRICT_PROGRESS",
+      "exact_remaining_class": "2_CURRENT_EXECUTABLE_INTERNAL_ROWS_PLUS_1_PARKED_UNRESOLVED_TB_ROW__TB_RANK20_V3_RETIRED_NONCONSUMING__GENERAL_BOUND_RUNTIME_REPAIR_VERIFIED_AND_PROMOTED__TB_REQUIRES_FRESH_CAPABILITY_FIRST_ADMISSION_BEFORE_REENTERING_ACTIVE_GAP_B",
       "new_primitive_status": "NOT_ESTABLISHED",
       "executable_audit": "canonical/runtime/escape_progress_shared_gap_audit_v5.py",
-      "current_gate_status": "CURRENTNESS_AWARE_AUTHENTICATED_V5_GATE_VERIFIED__REAL_AUTHENTICATED_ROW_PROOFS_0_OF_2_ACTIVE_ROWS__ONE_TB_ROW_PARKED_UNRESOLVED__GAP_B_ACTIVE_TOTALITY_OPEN",
+      "current_gate_status": "CURRENTNESS_AWARE_AUTHENTICATED_V5_GATE_VERIFIED__ACTIVE_GAP_B_ROWS_2__REAL_AUTHENTICATED_ACTIVE_ROW_PROOFS_0_OF_2__TB_ROW_PARKED_UNRESOLVED",
       "causal_reclassification": {
         "path": "canonical/governance/ESCAPE_PROGRESS_FINANCE_INDEX_CAUSAL_RECLASSIFICATION_20261010_V1.json",
         "git_blob_sha": "ea256418ec1f8048c7566c6ecc74206d9d1ac529",
         "effective_gap_b_count": 3
       },
-      "successor_count": 2,
+      "successor_count": 3,
       "successor_audit_intent": "canonical/action_intents/ESCAPE_PROGRESS_V2_SUCCESSOR_AUDIT_IMPLEMENTATION_INTENT_20261010_V1.json",
       "shared_route_reduction": "canonical/governance/ESCAPE_PROGRESS_SUCCESSOR_SHARED_ROUTE_REDUCTION_20261010_V1.json",
       "reached_state_v2_reuse": "canonical/governance/ESCAPE_PROGRESS_REACHED_STATE_V2_REUSE_RECONCILIATION_20261010_V1.json",
@@ -296,12 +296,9 @@
       "tb_science_current_route_reclassification": {
         "path": "canonical/governance/ESCAPE_TB_SCIENCE_CURRENT_ROUTE_RECLASSIFICATION_20261010_V2.json",
         "git_blob_sha": "2639f4e58ef71502707ab6b2bb37efb592b1a234",
-        "verification_path": "canonical/verification/ESCAPE_TB_SCIENCE_CURRENT_ROUTE_RECLASSIFICATION_V2_VERIFY_20261010_V1.json",
-        "verification_git_blob_sha": "10c1c7ef2650e20d54d504e3c6363ef4febdea00",
-        "current_route_semantics_verified": true,
-        "scheduler_class": "PARKED_AUTHORITY_LIMITED__UNRESOLVED_TARGET__NO_CURRENT_EXECUTABLE_INTERNAL_ROUTE",
-        "strict_progress_witness_required_now": false,
-        "tb_target_closed": false
+        "current_scheduler_class": "PARKED_AUTHORITY_LIMITED__UNRESOLVED_TARGET__NO_CURRENT_EXECUTABLE_INTERNAL_ROUTE",
+        "active_gap_b_membership": false,
+        "wake_condition": "FRESH_EXPLICIT_CAPABILITY_FIRST_ADMISSION_AND_NEW_NONRETRY_EXECUTION_AUTHORITY_FOR_A_FUTURE_UNEXPOSED_VALIDATION_SUBJECT"
       },
       "historical_effective_gap_b_count": 3,
       "effective_gap_b_count": 2,
@@ -312,7 +309,18 @@
       ],
       "parked_unresolved_rows": [
         "TB_SCIENCE_GE_58_7"
-      ]
+      ],
+      "active_gap_b_count": 2,
+      "parked_unresolved_count": 1,
+      "parked_rows": [
+        "TB_SCIENCE_GE_58_7"
+      ],
+      "scheduling_effect": {
+        "active_gap_b_rows": 2,
+        "parked_unresolved_rows": 1,
+        "tb_strict_progress_witness_required_now": false,
+        "rule": "DO_NOT_SCHEDULE_PARKED_TB_AS_ACTIVE_GAP_B__RECHECK_CURRENT_TB_PATH_BEFORE_ANY_WAKE"
+      }
     },
     {
       "residual_id": "ASSURANCE_CLOSURE_COMPILER_NOT_LIVE_DEFAULT",
@@ -534,7 +542,11 @@
     "professional_whole_leaf_readiness_audit_verification": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_CERTIFICATE_READINESS_AUDIT_VERIFY_20261010_V1.json",
     "professional_whole_leaf_v2_gate": "INDEPENDENTLY_VERIFIED__16_OF_16__DOMAIN_EQUIVALENCE_AND_SCOPE_COVER_SEPARATED__ZERO_PROPERTY_OR_TERMINAL_CREDIT",
     "professional_whole_leaf_v2_readiness": "INDEPENDENTLY_VERIFIED__0_OF_24_ADMISSIBLE_CHAINS__24_OF_24_CLAIM_SCOPE_CONSTRUCTION_REQUIRED__PROPERTY_TRUTH_READY_0",
-    "tb_rank20_v3_reclassification": "VERIFIED_RETIRED_NONCONSUMING__GENERAL_CALLER_REPAIR_MERGED__PARKED_OUTSIDE_ACTIVE_GAP_B__ACTIVE_GAP_B_2__ZERO_CREDIT"
+    "tb_rank20_v3_reclassification": "VERIFIED_RETIRED_NONCONSUMING__GENERAL_CALLER_REPAIR_MERGED__PARKED_OUTSIDE_ACTIVE_GAP_B__ACTIVE_GAP_B_2__ZERO_CREDIT",
+    "tb_gap_b_v2_currentness_reconciled": true,
+    "tb_gap_b_active_count": 2,
+    "tb_parked_unresolved_count": 1,
+    "tb_reclassification_v2": "canonical/governance/ESCAPE_TB_SCIENCE_CURRENT_ROUTE_RECLASSIFICATION_20261010_V2.json"
   },
   "current_source_binding_law": {
     "mutable_current_authorities": "CANONICAL_PATH_IDENTITY_AUTHORITATIVE__OBSERVED_BLOB_IS_DIAGNOSTIC_ONLY__RECHECK_CURRENT_BYTES_BEFORE_SCHEDULING_OR_TRUTH_CLAIM",
