@@ -1,0 +1,37 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_DECLARED_SYSTEM_SUBJECT_V4_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__DEPENDENCY_CLOSED_SUBJECT_V4__36_OF_36_COMPONENT_BYTES_CURRENT__SHA256_RECOMPUTED__ZERO_ROOT_OR_QUALITY_AUTHORITY",
+  "pass": true,
+  "subject": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V4_DECLARED_SYSTEM_SUBJECT_20261010_V4.json",
+    "git_blob_sha": "9f51d02661c9ef25f65d64c0f40c934cf1094dc4",
+    "subject_kind": "DECLARED_SYSTEM",
+    "subject_id": "PROFESSIONAL_QUALITY_P1_V4_DEPENDENCY_CLOSED_SYSTEM_20261010_V4",
+    "subject_sha256": "9360acce10393cc766bd4cecb8dee7aa0cea812912a63e1625a6d9c2bc6ca29f"
+  },
+  "component_count": 36,
+  "component_currentness_verified": true,
+  "subject_identity_verified": true,
+  "required_static_root_mechanisms_present": 27,
+  "additional_core_components_present": 9,
+  "external_evidence_reference_count_excluded_from_subject_identity": 43,
+  "dependency_closure": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_SUBJECT_DEPENDENCY_CLOSURE_20261010_V1.json",
+    "git_blob_sha": "67b867f71037189c9ce9c2e136dc6ecd94dfe629",
+    "classification_complete": true
+  },
+  "independent_replay": {
+    "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "subject_hash_recomputed": "9360acce10393cc766bd4cecb8dee7aa0cea812912a63e1625a6d9c2bc6ca29f",
+    "component_count_recomputed": 36
+  },
+  "root_subject_binding_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
