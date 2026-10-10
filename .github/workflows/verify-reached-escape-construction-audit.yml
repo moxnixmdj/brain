@@ -1,0 +1,36 @@
+name: Verify reached escape construction audit
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/runtime/reached_escape_state_construction_audit_v1.py
+      - canonical/runtime/live_brain_runtime_v1.py
+      - canonical/runtime/unified_cognitive_fabric_v1.py
+      - canonical/tests/test_reached_escape_state_construction_audit_v1.py
+      - canonical/tests/test_reached_escape_state_live_gate_binding_v1.py
+      - canonical/governance/REACHED_ESCAPE_STATE_CONSTRUCTION_AUDIT_CUT_20261010_V1.json
+      - .github/workflows/verify-reached-escape-construction-audit.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile
+        run: |
+          python -m py_compile canonical/runtime/reached_escape_state_construction_audit_v1.py
+          python -m py_compile canonical/runtime/live_brain_runtime_v1.py
+          python -m py_compile canonical/runtime/unified_cognitive_fabric_v1.py
+          python -m py_compile canonical/tests/test_reached_escape_state_construction_audit_v1.py
+          python -m py_compile canonical/tests/test_reached_escape_state_live_gate_binding_v1.py
+      - name: Run focused tests
+        run: |
+          python -m pytest -q canonical/tests/test_reached_escape_state_construction_audit_v1.py canonical/tests/test_reached_escape_state_live_gate_binding_v1.py
