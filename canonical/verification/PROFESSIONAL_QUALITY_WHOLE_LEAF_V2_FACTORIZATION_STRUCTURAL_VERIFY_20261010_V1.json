@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_WHOLE_LEAF_V2_FACTORIZATION_STRUCTURAL_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__DETERMINISTIC_STRUCTURAL_REPLAY__24_OF_24_EXACT_CLAIM_MATERIAL__ZERO_DOMAIN_EQUIVALENCE_OR_SCOPE_CREDIT",
+  "subject": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_V2_CLAIM_SCOPE_FACTORIZATION_WORKLIST_20261010_V1.json",
+    "git_blob_sha": "17c806459261213f92da2a373bad12188104f9f0"
+  },
+  "inputs": {
+    "manifest_blob": "a7cad32c9fd969ff2c3857bb924c7bd746237ec2",
+    "residual_ledger_blob": "ae5503829ad340cccef287f37ff70e4ab9288d33",
+    "uncovered_partition_worklist_blob": "07dee32099a252cad07e5630504dcb2fc252180f",
+    "v2_gate_blob": "d76b922e8d5c86f10568a3582759f8c23e69b2e0",
+    "v2_readiness_verification_blob": "2d28d932d08753fdf14c56aa24011e625518a4ef"
+  },
+  "replay": {
+    "row_count": 24,
+    "unique_leaf_count": 24,
+    "exact_manifest_and_ledger_leaf_set": true,
+    "exact_claim_material_matches_manifest": true,
+    "exact_bounded_witness_scopes_match_partition_worklist": true,
+    "overclaim_count": 0,
+    "domain_equivalence_proved_count": 0,
+    "v2_chain_admitted_count": 0,
+    "property_truth_ready_count": 0
+  },
+  "independent": false,
+  "hard_nonclaims": [
+    "NOT_INDEPENDENT_SEMANTIC_DOMAIN_EQUIVALENCE_VERIFICATION",
+    "NO_WHOLE_LEAF_DOMAIN_EQUIVALENCE_PROVED",
+    "NO_V2_CHAIN_ADMITTED",
+    "NO_PROPERTY_TRUTH",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "pass": true,
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
