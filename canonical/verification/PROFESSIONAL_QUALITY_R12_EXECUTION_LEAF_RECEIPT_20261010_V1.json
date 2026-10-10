@@ -8,7 +8,7 @@
   "closure_scope": "EXACT_LEAF",
   "acceptance_sha256": "fae7b1ccf4f94a91a1fb4caa4a634e6883538a28382991d97c69278e574b67ce",
   "root_contract_sha256": "25eb91e82bc238444aa0df064b23ad23768e8213340ae5c3640b297020761b85",
-  "manifest_git_blob_sha": "a7cad32c9fd567cacc037e0803d3cc8565051485",
+  "manifest_git_blob_sha": "a7cad32c9fd969ff2c3857bb924c7bd746237ec2",
   "leaf_execution_satisfied": true,
   "leaf_semantic_satisfied": false,
   "property_truth_basis": "INDEPENDENTLY_REPLAYED_24_CASE_R12_EXECUTION_ACCEPTANCE_ON_EXACT_UVCK_META_ASSURANCE_BYTES",
