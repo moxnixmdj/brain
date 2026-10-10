@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_TB_SCIENCE_RUNTIME_GUARD_V1",
   "date": "2026-10-10",
-  "status": "V12_GENERIC_AUTHORITATIVE_ARTIFACT_FINISH_GATE_SPRITE_VERIFIED__RANK18_TASK_READ_STILL_PROHIBITED_PENDING_PUBLIC_RUNTIME_COMPOSITION_AND_FRESH_AUTHORITY",
+  "status": "V12_GENERIC_AUTHORITATIVE_ARTIFACT_FINISH_GATE_VERIFIED__PUBLIC_RUNTIME_COMPOSITION_VERIFIED__RANK18_TASK_READ_AUTHORITY_EFFECTIVE__ACTIVATION_NOT_ARMED",
   "rank17_result_truth": {
     "path": "canonical/verification/TB_SCIENCE_RANK17_V6_IRREVERSIBLE_RESULT_TRUTH_20261010_V1.json",
     "git_blob_sha": "3d7a0339ccf320f256834fcbde6427c8c62d473b"
@@ -38,8 +38,15 @@
     "task_read": false,
     "task_started": false,
     "benchmark_trials_consumed": 0,
-    "task_read_authority": false,
-    "execution_authority": false
+    "task_read_authority": true,
+    "execution_authority": true
   },
-  "next": "MIRROR_EXACT_V12_BYTES_TO_PUBLIC_RUNNER__ADD_TRUSTED_PARENT_TASK_METADATA_ARTIFACT_INJECTION__PROVE_ZERO_EXPOSURE_RUNTIME_COMPOSITION__CREATE_FRESH_RANK18_AUTHORITY_AND_PUBLIC_RESEAL__ONLY_THEN_ALLOW_TASK_READ"
+  "next": "ONLY_EXACT_ONE_FILE_RANK18_V1_ACTIVATION_MAY_ARM_EXECUTION__TASK_READ_REMAINS_GATED_BY_ACTIVATION_AND_LIVE_CARRIER_QUALIFICATION",
+  "public_reseal": {
+    "reconciliation_git_blob_sha": "43405b2f540fd8a8e3a6a07a1f7ccb431432590e",
+    "verification_git_blob_sha": "329985ebb77c51091762d9003ab82acb24612495",
+    "merge_commit": "ff74920b8827243910da297420222c789e5b751c",
+    "exact_surface_blob": "4f8c9bc50dc5e959c3f9f47253df214ae7c6a5da",
+    "zero_exposure_verified": true
+  }
 }
