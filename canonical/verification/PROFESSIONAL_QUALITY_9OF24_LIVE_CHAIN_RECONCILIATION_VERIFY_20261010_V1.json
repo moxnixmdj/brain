@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_9OF24_LIVE_CHAIN_RECONCILIATION_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_SPRITE__POST_COMPOSITION_AND_FULL_SCHEDULER_CHAIN_2_OF_2__PROFESSIONAL_9_OF_24__BYTES_V32__ZERO_NEW_CREDIT",
+  "repository": "moxnixmdj/brain",
+  "branch": "successor/professional-r8-9of24-live-reconcile-20261010-v1",
+  "exact_blobs": {
+    "current_professional": "c4d2259cf89cc29f47292648dfa67382747c7659",
+    "current_assurance": "c8a959ad5214c4ff7f2cd6e9875bfbc505072d2e",
+    "current_residual_reuse": "f55ecd671a890ac22ddabdc4e437a3f3363e58c2",
+    "current_live_frontier": "d29a0a8daf873db08b2986199e07a90b0fbb5a57",
+    "current_development_scheduler": "b8515532c395152635c93e8da07b7e1dff5c4c2b",
+    "current_mission_objective": "72a52afbe5dbfafeb8b2fe23ef18068527bc1fe2",
+    "bytes_active_state": "22bb42347a8c823f057dc1dcbe38e1e9b2d3c5b1",
+    "post_composition_adapter": "6ec260addbf211284ede29ffbb11fd1948353e83",
+    "parallel_frontier_v2": "209d8d11494645432354636a3dc17e7b515abaf8",
+    "post_composition_currentness_test": "65499917006a06b887c68752aeffc1a6213462fd",
+    "scheduler_chain_currentness_test": "4353137cffd0c57a070e2b66d6435728e38cfe3c",
+    "property_registry_verification_v7": "1a60d418d18149dc5bcc82f5655a08f4891d3901"
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/prof9-chain-v1",
+    "tests_run": 2,
+    "tests_passed": 2,
+    "tests_failed": 0,
+    "transcript_sha256": "e5fc39b005174780ed3f2ae2c95a67f9714143c07dc1271a75f990682ba84c93",
+    "transcript_bytes": 640,
+    "professional_verified_leaf_count": 9,
+    "professional_open_execution_leaf_count": 3,
+    "professional_open_semantic_leaf_count": 12,
+    "scheduler_frontier_blob": "d29a0a8daf873db08b2986199e07a90b0fbb5a57"
+  },
+  "proves": [
+    "PROFESSIONAL_CURRENT_RESIDUAL_FRONTIER_SCHEDULER_ASSURANCE_AND_MISSION_PROJECTIONS_AGREE_ON_EXACT_9_OF_24_PROPERTY_TRUTH",
+    "R5_R9_R11_ARE_THE_ONLY_OPEN_EXECUTION_LEAVES",
+    "TWELVE_SEMANTIC_LEAVES_REMAIN_OPEN",
+    "MISSION_OBSERVED_HASHES_MATCH_ASSURANCE_SCHEDULER_PROFESSIONAL_FRONTIER_RESIDUAL_AND_BYTES_V32",
+    "POST_COMPOSITION_PROFESSIONAL_CURRENTNESS_GUARD_ACCEPTS_EXACT_FRONTIER"
+  ],
+  "hard_nonclaims": [
+    "NO_SEMANTIC_LEAF_CLOSURE",
+    "NO_ROOT_CLOSURE",
+    "NO_GLOBAL_PROFESSIONAL_QUALITY_CLOSURE",
+    "NO_FULL_CURRENT_MAIN_REGRESSION",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
