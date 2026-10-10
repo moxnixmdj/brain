@@ -34,18 +34,25 @@ ATOM_GSIB = "SCOPE::G_SIB"
 _WS = re.compile(r"\s+")
 
 _CCOB_RE = re.compile(
-    r"(?is)\b2\.5\s*%.{0,160}\b(?:common\s+equity\s+tier\s+1|cet1)\b"
-    r".{0,160}\babove\s+(?:the\s+)?regulatory\s+minimum(?:\s+capital\s+requirement)?\b"
+    r"(?is)^\s*(?:(?:(?:the|this)\s+(?:buffer|cushion)\s+(?:is|was)\s+)|(?:a\s+))?"
+    r"2\.5\s*%\s+"
+    r"(?:(?:buffer\s+)?comprised\s+of\s+)?"
+    r"(?:common\s+equity\s+tier\s+1(?:\s*\(cet1\))?|cet1)"
+    r"(?:\s+buffer)?\s+above\s+(?:the\s+)?regulatory\s+minimum"
+    r"(?:\s+capital\s+requirement)?\s*[.]?\s*$"
 )
 
 _CCYB_RE = re.compile(
-    r"(?is)\breleased?\s+when\s+system[-\s]wide\s+risk\s+"
-    r"(?:crystalli[sz]es(?:\s+or\s+dissipates)?|dissipates)\b"
+    r"(?is)^\s*(?:(?:the|this)\s+(?:cushion|buffer)\s+(?:is|was)\s+)?"
+    r"released?\s+when\s+system[-\s]wide\s+risk\s+"
+    r"(?:crystalli[sz]es(?:\s+or\s+dissipates)?|dissipates)\s*[.]?\s*$"
 )
 
 _TLAC_RE = re.compile(
-    r"(?is)\bloss[-\s]absorbing\s+and\s+recapitali[sz]ation"
-    r"\s+capacity\b.{0,180}\b(?:available\s+)?in\s+resolution\b"
+    r"(?is)^\s*(?:(?:a\s+failing\s+)?(?:g[-\s]?sib|global\s+systemically\s+important\s+bank)"
+    r"\s+has\s+)?(?:sufficient\s+)?"
+    r"loss[-\s]absorbing\s+and\s+recapitali[sz]ation\s+capacity\s+"
+    r"(?:available\s+)?in\s+resolution\s*[.]?\s*$"
 )
 
 _GSIB_RE = re.compile(
@@ -76,17 +83,17 @@ def _fail(reason: str) -> dict[str, Any]:
 
 def _prove_kind(kind: str, surface: str) -> tuple[list[str], str | None]:
     if kind == CCOB_KIND:
-        if _CCOB_RE.search(surface) is None:
+        if _CCOB_RE.fullmatch(surface) is None:
             return [], "CCOB_STRUCTURE_CONTEXT_NOT_CERTIFIED"
         return [ATOM_2_5, ATOM_CET1, ATOM_ABOVE_MIN], None
 
     if kind == CCYB_KIND:
-        if _CCYB_RE.search(surface) is None:
+        if _CCYB_RE.fullmatch(surface) is None:
             return [], "CCYB_RELEASE_CONTEXT_NOT_CERTIFIED"
         return [ATOM_RELEASE], None
 
     if kind == TLAC_KIND:
-        if _TLAC_RE.search(surface) is None:
+        if _TLAC_RE.fullmatch(surface) is None:
             return [], "TLAC_RESOLUTION_CONTEXT_NOT_CERTIFIED"
         atoms = [ATOM_LOSS, ATOM_RECAP, ATOM_RESOLUTION]
         if _GSIB_RE.search(surface) is not None:
@@ -212,7 +219,7 @@ def verify_proof(
         "semantic_truth_authority": True if accepted else False,
         "terminal_authority": False,
         "soundness_boundary": (
-            "ASSERTION_COMPLETE_BOUNDED_REGCAP_CONTEXT_FACTS_ONLY__NO_CCOB_CCYB_TLAC_IDENTITY__"
+            "ASSERTION_COMPLETE_ANCHORED_BOUNDED_REGCAP_CONTEXT_FACTS_ONLY__NO_CCOB_CCYB_TLAC_IDENTITY__"
             "NO_REVERSE_NECESSARY_PROPERTY_CLASSIFICATION__NO_GENERAL_FINANCE_WSD"
         ),
     }
