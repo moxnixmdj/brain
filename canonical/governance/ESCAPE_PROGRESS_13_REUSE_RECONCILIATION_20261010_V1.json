@@ -1,0 +1,135 @@
+{
+  "schema": "PROJECT_BRAIN_ESCAPE_PROGRESS_13_REUSE_RECONCILIATION_20261010_V1",
+  "date": "2026-10-10",
+  "status": "CURRENT_REUSE_RECONCILIATION__13_IDS_PRESERVED__12_ACTIVE_ACQUISITION__0_ACTIVE_GAP_B__1_PARKED_TB__OSWORLD_IDENTITY_CLOSED__FINANCE_THRESHOLD_KERNEL_CLOSED__ZERO_ROW_OR_TERMINAL_CREDIT",
+  "objective": "DELETE_ALREADY_SOLVED_SUBWORK_FROM_THE_CURRENT_THIRTEEN_OBLIGATION_FRONTIER_WITHOUT_CHANGING_ANY_FROZEN_ACCEPTANCE_SEMANTICS",
+  "sources": {
+    "frozen_route_manifest_v2": {
+      "path": "canonical/governance/ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_20261010_V2.json",
+      "git_blob_sha": "f3a566a982dcd867c583eafd24c6f5dd3baa0530"
+    },
+    "current_shared_binding_v7": {
+      "path": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V7.json",
+      "git_blob_sha": "2119d0bc2b5c06399da49adb5a86b4e9faf7e08f"
+    },
+    "osworld_task_identity": {
+      "path": "canonical/governance/OSWORLD_V21_PINNED_TASK_UNIVERSE_IDENTITY_20261010_V1.json",
+      "git_blob_sha": "73ba2a1066388e7886b3360f445f3b18fbdbfa3d"
+    },
+    "osworld_task_identity_verification": {
+      "path": "canonical/verification/OSWORLD_V21_PINNED_TASK_UNIVERSE_IDENTITY_VERIFY_20261010_V1.json",
+      "git_blob_sha": "62fc9d970f95328392571e576d8e76d9d47e2d51"
+    },
+    "finance_threshold_authority": {
+      "path": "canonical/governance/FINANCE_INDEX_DIRECT_THRESHOLD_AUTHORITY_RECONCILIATION_20261010_V1.json",
+      "git_blob_sha": "f17cea66e32ac5b65dd5506fd49d7a319d2b3a5e"
+    },
+    "finance_threshold_verification": {
+      "path": "canonical/verification/FINANCE_INDEX_DIRECT_THRESHOLD_THEOREM_INDEPENDENT_VERIFY_20261010_V1.json",
+      "git_blob_sha": "c61d9a325aa74f31ea7afbbf6190803386be2c58"
+    },
+    "tb_science_current": {
+      "path": "canonical/governance/CURRENT_TB_SCIENCE_EXECUTION.json",
+      "git_blob_sha": "7678d9a56461b121ffd52dd4c9c8df464fda08d2"
+    }
+  },
+  "frozen_obligation_count": 13,
+  "frozen_obligation_ids_unchanged": true,
+  "effective_topology": {
+    "active_gap_a_acquisition_rows": 12,
+    "active_gap_b_strict_progress_rows": 0,
+    "parked_unresolved_rows": 1,
+    "parked_obligation_ids": ["TB_SCIENCE_GE_58_7"]
+  },
+  "reconciled_rows": {
+    "OSWORLD_2_1_PARTIAL_GE_81_8": {
+      "route_group": "GAP_A_ACQUISITION_TOTALITY",
+      "proved_now": [
+        "EXACT_PINNED_108_TASK_POPULATION_IDENTITY_CLOSED",
+        "EXACT_108_TASK_FILE_HASH_UNIVERSE_CLOSED",
+        "TASK_COUNT_AND_CONTIGUOUS_IDS_001_THROUGH_108_INDEPENDENTLY_REPLAYED"
+      ],
+      "deleted_subwork": [
+        "REPEAT_108_TASK_COUNT_DISCOVERY",
+        "REPEAT_TASK_IDENTITY_DISCOVERY",
+        "REPEAT_RELEASE_HASH_UNIVERSE_DISCOVERY"
+      ],
+      "remaining_blocker": "AUTHENTICATED_ACCESS_TO_THE_PINNED_TASK_CLASS_BYTES__THEN_BUILD_THE_108_TASK_UNION_SEMANTIC_COVERAGE_MATRIX__OR_PROVE_A_STRONGER_SCOPE_COMPLETE_CERTIFICATE_WITHOUT_TASK_BYTES",
+      "exact_next": "ACQUIRE_ONLY_PINNED_TASK_CLASS_SEMANTICS_OR_A_STRONGER_SCOPE_COMPLETE_PROOF__DO_NOT_REOPEN_TASK_UNIVERSE_IDENTITY",
+      "row_proved": false
+    },
+    "FINANCE_ACCOUNTING_INDEX_GE_61": {
+      "route_group": "GAP_A_ACQUISITION_TOTALITY",
+      "proved_now": [
+        "EXACT_SIX_COMPONENT_WEIGHTED_THRESHOLD_KERNEL_VERIFIED",
+        "CROSS_COMPONENT_COMPENSATION_ALLOWED",
+        "COMPONENTWISE_OPUS_NONINFERIORITY_NOT_REQUIRED",
+        "EXACT_RATIONAL_SUFFICIENCY_RULE_SUM_WI_LI_GE_61_VERIFIED"
+      ],
+      "deleted_subwork": [
+        "REPROVE_INDEX_WEIGHTED_THRESHOLD_MATHEMATICS",
+        "REQUIRE_COMPONENTWISE_OPUS_DOMINANCE",
+        "SEARCH_FOR_AN_OWNER_RECEIPT_WHEN_EXISTING_COMPONENT_LOWER_BOUNDS_CAN_ALREADY_CLOSE_THE_WEIGHTED_THRESHOLD"
+      ],
+      "remaining_blocker": "SIX_CONTENT_ADDRESSED_NORMALIZED_COMPONENT_LOWER_BOUND_RECEIPTS_AND_EXACT_NORMALIZATION_BINDINGS__OR_A_STRONGER_SCOPE_COMPLETE_PROOF",
+      "component_names": [
+        "BUSINESS_KNOWLEDGE",
+        "AGENTIC_KNOWLEDGE_WORK",
+        "REASONING",
+        "AGENTIC_TOOL_USE",
+        "LONG_CONTEXT",
+        "NON_HALLUCINATION"
+      ],
+      "exact_next": "SATURATE_EXISTING_CANONICAL_EVIDENCE_FOR_SIX_NORMALIZED_COMPONENT_LOWER_BOUNDS__ACQUIRE_ONLY_MISSING_NORMALIZATION_OR_COMPONENT_FACTS",
+      "row_proved": false
+    },
+    "TB_SCIENCE_GE_58_7": {
+      "route_group": "PARKED_AUTHORITY_LIMITED",
+      "proved_now": [
+        "GENERIC_CALLER_VERSION_SKEW_REPAIR_VERIFIED",
+        "RANK20_V3_ABORT_WAS_PREEXPOSURE_AND_NONCONSUMING",
+        "NO_DURABLE_START_OR_BENCHMARK_TRIAL_CONSUMPTION"
+      ],
+      "deleted_subwork": [
+        "REPAIR_GENERIC_CALLER_VERSION_SKEW_AGAIN",
+        "RETRY_RANK20_V3",
+        "REPLAY_RETIRED_ATTEMPT"
+      ],
+      "remaining_blocker": "FRESH_CAPABILITY_FIRST_ADMISSION_AND_NEW_NONRETRY_EXECUTION_AUTHORITY_FOR_A_FUTURE_UNEXPOSED_VALIDATION_SUBJECT",
+      "exact_next": "KEEP_PARKED_UNTIL_EXPLICIT_WAKE_AUTHORITY_EXISTS",
+      "row_proved": false
+    }
+  },
+  "unchanged_current_reclassifications": {
+    "PROWORK_GDPVAL_GE_1846": "GAP_A_ACQUISITION_TOTALITY",
+    "CHARTOGRAPHY_TOOLS_GE_89": "GAP_A_ACQUISITION_TOTALITY"
+  },
+  "scheduler_effect": [
+    "DO_NOT_RESEARCH_ANY_ACTIVE_GAP_B_ROW__THERE_ARE_ZERO",
+    "DO_NOT_REPEAT_OSWORLD_TASK_UNIVERSE_IDENTITY_WORK",
+    "DO_NOT_REPEAT_FINANCE_INDEX_THRESHOLD_KERNEL_WORK",
+    "DO_NOT_REPEAT_TB_SCIENCE_GENERIC_TRANSPORT_REPAIR",
+    "FOR_FINANCE_INDEX_REUSE_EXISTING_COMPONENT_EVIDENCE_FIRST_AND_PROVE_EXACT_NORMALIZATION_DELTA",
+    "FOR_OSWORLD_ACQUIRE_ONLY_THE_GATED_PINNED_TASK_SEMANTICS_OR_A_STRONGER_SCOPE_COMPLETE_PROOF",
+    "KEEP_TB_SCIENCE_PARKED",
+    "PREFER_ANY_SCOPE_COMPLETE_PROOF_THAT_DISCHARGES_MULTIPLE_OF_THE_TWELVE_ACTIVE_ROWS"
+  ],
+  "hard_nonclaims": [
+    "NO_OSWORLD_TASK_SEMANTIC_COVERAGE",
+    "NO_OSWORLD_SCORE_OR_ACCEPTANCE_CREDIT",
+    "NO_FINANCE_INDEX_COMPONENT_LOWER_BOUND_OR_NORMALIZATION_RECEIPT_CREATED",
+    "NO_FINANCE_INDEX_SCORE_OR_ACCEPTANCE_CREDIT",
+    "NO_TB_SCIENCE_ROW_PROOF_OR_RETRY_AUTHORITY",
+    "NO_CC_R3_OR_GLOBAL_ESCAPE_PROGRESS_TOTALITY",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "row_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
