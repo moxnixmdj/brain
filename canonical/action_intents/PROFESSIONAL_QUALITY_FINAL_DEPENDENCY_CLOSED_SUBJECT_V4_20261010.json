@@ -5,7 +5,7 @@
   "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "causal_blocker": "PROFESSIONAL_QUALITY_ROOT_BINDINGS_CANNOT_STABLY_COMPOSE_WHILE_THE_DECLARED_SYSTEM_SUBJECT_OMITS_LOAD_BEARING_RUNTIME_OR_CONFIGURATION_DEPENDENCIES",
-  "selected_route": "REUSE_VERIFIED_DEPENDENCY_CLOSURE_V2__ADD_EXACT_FIVE_DISCOVERED_COMPONENTS__VERIFY_CONTENT_ADDRESS_CURRENTNESS_AND_ZERO_MISSING_DEPENDENCIES__FREEZE_ONCE",
+  "selected_route": "REUSE_VERIFIED_DEPENDENCY_CLOSURE__DERIVE_EXACT_RUNTIME_CONFIGURATION_CLOSURE__FALSIFY_INITIAL_18_COMPONENT_GUESS__BIND_EXACT_19_COMPONENT_MATERIAL__VERIFY_CURRENTNESS_AND_ZERO_MISSING_DEPENDENCIES__FREEZE_ONCE",
   "prior_work_reused": [
     "canonical/runtime/professional_quality_subject_dependency_closure_v2.py",
     "canonical/runtime/professional_quality_declared_system_subject_verify_v1.py",
@@ -16,5 +16,8 @@
   "benchmark_or_family_rank_authority": false,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
-  "terminal_credit_delta": 0
+  "terminal_credit_delta": 0,
+  "falsification_observed": "INITIAL_18_COMPONENT_CANDIDATE_WAS_INCOMPLETE__INDEPENDENT_CARRIER_FOUND_19_COMPONENT_EXACT_CLOSURE",
+  "corrected_subject_sha256": "1b3fd164a617ae91c7d6caa26d6fdaba3300a64ab2677ff585da3482fc166e79",
+  "corrected_component_count": 19
 }
