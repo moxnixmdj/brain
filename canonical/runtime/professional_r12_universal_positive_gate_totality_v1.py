@@ -64,6 +64,16 @@ PINS = {
     V9_SUBJECT_PATH: V9_SUBJECT_BLOB,
     IDENTITY_PATH: IDENTITY_BLOB,
 }
+JSON_PATHS = (
+    CLAIM_PATH,
+    R1_PATH,
+    R2_PATH,
+    RECON_PATH,
+    C8_PATH,
+    V9_VERIFY_PATH,
+    V9_SUBJECT_PATH,
+    IDENTITY_PATH,
+)
 
 
 def _blob(path: Path) -> str:
@@ -98,13 +108,18 @@ def _fail(reason: str, **extra: Any) -> dict[str, Any]:
     }
 
 
-def _load(root: Path, rel: str, expected_blob: str) -> Mapping[str, Any]:
+def _pin(root: Path, rel: str, expected_blob: str) -> Path:
     path = root / rel
     if not path.is_file() or path.is_symlink():
         raise ValueError("PIN_MISSING:" + rel)
     got = _blob(path)
     if got != expected_blob:
         raise ValueError("PIN_BLOB_DRIFT:" + rel + ":" + got)
+    return path
+
+
+def _load(root: Path, rel: str, expected_blob: str) -> Mapping[str, Any]:
+    path = _pin(root, rel, expected_blob)
     value = json.loads(path.read_text(encoding="utf-8"))
     if not isinstance(value, Mapping):
         raise ValueError("PIN_NOT_OBJECT:" + rel)
@@ -114,7 +129,9 @@ def _load(root: Path, rel: str, expected_blob: str) -> Mapping[str, Any]:
 def verify(*, repo_root: str | Path | None = None) -> dict[str, Any]:
     root = Path(repo_root).resolve() if repo_root is not None else Path(__file__).resolve().parents[2]
     try:
-        docs = {rel: _load(root, rel, blob) for rel, blob in PINS.items()}
+        for rel, blob in PINS.items():
+            _pin(root, rel, blob)
+        docs = {rel: _load(root, rel, PINS[rel]) for rel in JSON_PATHS}
     except Exception as exc:
         return _fail(type(exc).__name__ + ":" + str(exc))
 
