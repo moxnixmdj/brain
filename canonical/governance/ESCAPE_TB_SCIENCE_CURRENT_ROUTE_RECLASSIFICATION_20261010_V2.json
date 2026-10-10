@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_ESCAPE_TB_SCIENCE_CURRENT_ROUTE_RECLASSIFICATION_20261010_V2",
+  "date": "2026-10-10",
+  "status": "CURRENT_RANK20_V3_RETIRED_NONCONSUMING__GENERAL_CALLER_REPAIR_VERIFIED__NO_AUTHORIZED_INTERNAL_ACTION__PARKED_OUTSIDE_ACTIVE_GAP_B__TARGET_UNRESOLVED__ZERO_CREDIT",
+  "obligation_id": "TB_SCIENCE_GE_58_7",
+  "prior_route_group": "GAP_B_INTERNAL_ROUTE_STRICT_PROGRESS",
+  "current_scheduler_class": "PARKED_AUTHORITY_LIMITED__UNRESOLVED_TARGET__NO_CURRENT_EXECUTABLE_INTERNAL_ROUTE",
+  "current_evidence_subject": {
+    "path": "canonical/governance/CURRENT_TB_SCIENCE_EXECUTION.json",
+    "git_blob_sha": "7678d9a56461b121ffd52dd4c9c8df464fda08d2"
+  },
+  "repair_verification": {
+    "path": "canonical/verification/TB_SCIENCE_BOUND_START_CAS_CALLER_REPAIR_VERIFY_20261010_V1.json",
+    "git_blob_sha": "bf5aa5cddf6c1272a9664320273d39725470b2e5"
+  },
+  "current_truth": {
+    "task_read": true,
+    "task_started": false,
+    "durable_start_cas_acquired": false,
+    "rank20_trials_consumed": 0,
+    "rank20_v3_retry_authority": false,
+    "rank20_v3_replacement_authority": false,
+    "rank20_v3_activation_authority": false,
+    "general_bound_runtime_caller_repair_verified": true,
+    "general_bound_runtime_caller_repair_public_base_promoted": true,
+    "current_executable_internal_action": false
+  },
+  "scheduling_effect": {
+    "remove_from_active_gap_b_internal_route_count": true,
+    "active_gap_b_rows_after_reclassification": 2,
+    "parked_unresolved_rows": 1,
+    "active_gap_b_rows": [
+      "PROWORK_GDPVAL_GE_1846",
+      "CHARTOGRAPHY_TOOLS_GE_89"
+    ],
+    "parked_row": "TB_SCIENCE_GE_58_7",
+    "wake_condition": "FRESH_EXPLICIT_CAPABILITY_FIRST_ADMISSION_AND_NEW_NONRETRY_EXECUTION_AUTHORITY_FOR_A_FUTURE_UNEXPOSED_VALIDATION_SUBJECT",
+    "strict_progress_witness_required_now": false
+  },
+  "rationale": "GAP_B_REQUIRES_A_CURRENT_EXECUTABLE_VERIFIED_INTERNAL_ACTION__RANK20_V3_IS_FINAL_NONCONSUMING_AND_HAS_NO_RETRY_REPLACEMENT_OR_ACTIVATION_AUTHORITY__THE_GENERAL_CALLER_DEFECT_IS_REPAIRED_BUT_REPAIR_DOES_NOT_REAUTHORIZE_THE_RETIRED_ATTEMPT",
+  "hard_nonclaims": [
+    "NO_TB_SCIENCE_TARGET_CLOSURE",
+    "NO_TB_SCIENCE_ACCEPTANCE_CREDIT",
+    "NO_GAP_B_ROW_PROOF",
+    "NO_RETRY_REPLAY_OR_REPLACEMENT_AUTHORITY",
+    "NO_FUTURE_RANK20_OR_OTHER_SLOT_EXECUTION_AUTHORITY_FROM_THIS_RECLASSIFICATION",
+    "NO_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
