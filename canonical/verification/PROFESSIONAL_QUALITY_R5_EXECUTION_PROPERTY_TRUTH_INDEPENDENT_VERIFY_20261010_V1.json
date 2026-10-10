@@ -1,0 +1,84 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R5_EXECUTION_PROPERTY_TRUTH_INDEPENDENT_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__SEPARATE_REMOTE_ENVIRONMENT__SYNTAX__12_OF_12_INDEPENDENT_FALSIFICATION_MATRIX__16_KNOWN_ATTACKS__16_NEAR_MISSES__R5_EXECUTION_LEAF_ONLY__ZERO_ROOT_QUALITY_OR_TERMINAL_CREDIT",
+  "repository": "moxnixmdj/brain",
+  "verification_branch": "successor/professional-r5-execution-property-truth-20261010-v1",
+  "candidate_head_before_receipt": "18caaa833fa5a513dca5c42da91f55fab73c0a91",
+  "current_main_at_replay": "6f02edf309a560dbdf16d32aba535f3fb909f97c",
+  "subject": {
+    "leaf_id": "PQ::R5_EVALUATOR_REFERENCE::EXECUTION",
+    "root_id": "R5_EVALUATOR_REFERENCE",
+    "manifest_acceptance": "RUN_ROOT_RELEVANT_POSITIVE_NEAR_MISS_AND_ADVERSARIAL_CASES_ON_EXACT_ARTIFACT_OR_RUNTIME_BYTES_AND_BIND_OBSERVED_OUTCOMES_TO_THE_ROOT_CONTRACT"
+  },
+  "exact_blobs": {
+    "guard_runtime": "f10fd198562d60105da123db3ee6c4d85402108c",
+    "property_verifier_runtime": "3663ade381349418ee1b8a1f25a8b92fe5452841",
+    "guard_tests": "af8383fbb5e874269b5c5b43ba36fc6cf07c6ef1",
+    "property_verifier_tests": "594afc522fbfc6db47488372b1b5e25fd91eefac",
+    "leaf_manifest": "a7cad32c9fd969ff2c3857bb924c7bd746237ec2",
+    "defeater_catalog": "8b92e5cf76f767054f55414b87014e03d43460b8",
+    "whole_leaf_scope_batch_verification": "4c2d40a262f18f34bb35f94b59660d60972d45ef",
+    "r5_root_binding_verification": "d4dc698d89738470cf3b41fe860b8c3f666a56a9",
+    "evaluator_uncertainty_verification": "e852c4fbc14147c17469f1a4ede4e274d768bbf7",
+    "evaluator_runtime": "7adf19997ec90913fb70e618eb4e3adda055deac"
+  },
+  "current_rebase_check": {
+    "all_load_bearing_dependency_blobs_match_current_main": true,
+    "candidate_files_additive_only": true
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-pq-p1-v2-independent-verify-20261010",
+    "carrier_id": "sprite-5fb5e414-e2f5-4a49-b424-3443341d9d09",
+    "workspace": "/home/sprite/r5-current-v1",
+    "guard_syntax_compile": "PASS",
+    "verifier_syntax_compile": "PASS",
+    "verifier_entrypoint": "PASS",
+    "test_harness": "INDEPENDENT_DIRECT_REEXECUTION_OF_BRANCH_TEST_INVARIANTS",
+    "tests_run": 12,
+    "tests_passed": 12,
+    "tests_failed": 0,
+    "observed": {
+      "positive_bound_evaluator_case": true,
+      "known_r5_defeater_count": 16,
+      "near_miss_class_count": 16,
+      "unknown_defeater_catchall": true,
+      "unmapped_material_defeater_catchall": true,
+      "failed_evaluator_preflight_catchall": true,
+      "failed_root_binding_catchall": true
+    }
+  },
+  "proves": [
+    "THE_EXACT_R5_EXECUTION_MANIFEST_ACCEPTANCE_IS_OBSERVED_ON_CURRENT_CONTENT_ADDRESSED_EVALUATOR_MECHANICS",
+    "ALL_16_DECLARED_R5_ROOT_ATTACK_CLASSES_BLOCK_THE_ORDINARY_ACCEPTANCE_PATH_WHEN_DETECTED",
+    "ALL_16_DECLARED_R5_NEAR_MISS_CLASSES_ESCALATE",
+    "UNKNOWN_OR_UNMAPPED_MATERIAL_R5_DEFEATERS_FAIL_CLOSED",
+    "FAILED_EVALUATOR_PREFLIGHT_OR_ROOT_BINDING_CANNOT_PASS",
+    "R5_EXECUTION_LEAF_PROPERTY_TRUTH_AUTHORITY_ONLY"
+  ],
+  "hard_nonclaims": [
+    "NO_R5_DEFEATER_DETECTION_COMPLETENESS",
+    "NO_TRUE_CURRENT_OWNER_EVALUATOR_CONTAINMENT",
+    "NO_GLOBAL_REFERENCE_CORRECTNESS",
+    "NO_CROSS_MODEL_CALIBRATION_CLOSURE",
+    "NO_REAL_TASK_COMPARATIVE_EVALUATION_STEP_RECEIPT_FROM_THIS_PROOF",
+    "NO_R5_SEMANTIC_LEAF_CLOSURE",
+    "NO_R5_ROOT_CLOSURE",
+    "NO_GLOBAL_PROFESSIONAL_PROPERTY_TRUTH",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "leaf_property_truth_authority": true,
+  "detection_completeness_proved": false,
+  "true_owner_evaluator_containment_proved": false,
+  "reference_correctness_proved": false,
+  "cross_model_calibration_proved": false,
+  "semantic_leaf_closed": false,
+  "root_closed": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
