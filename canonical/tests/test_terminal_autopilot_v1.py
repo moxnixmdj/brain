@@ -31,7 +31,14 @@ def manifest():
         "obligations": [{"id": x, "status": "OPEN"} for x in OPEN],
         "blockers": [],
         "routes": [{"id": "SCOPE_COMPLETE_UNIVERSAL_COVER", "status": "OPEN", "can_discharge": OPEN, "proof_cost_bound": True, "estimated_wall_clock_units": 1.0}],
-        "active_jobs": [],\n        "capability_first_checkpoint_admission": {\n            "schema": "PROJECT_BRAIN_CAPABILITY_FIRST_CHECKPOINT_ADMISSION_V1",\n            "authorized": True,\n            "source": "TEST_CAPABILITY_FIRST_SCHEDULER",\n        },\n    }\n
+        "active_jobs": [],
+        "capability_first_checkpoint_admission": {
+            "schema": "PROJECT_BRAIN_CAPABILITY_FIRST_CHECKPOINT_ADMISSION_V1",
+            "authorized": True,
+            "source": "TEST_CAPABILITY_FIRST_SCHEDULER",
+        },
+    }
+
 
 class TerminalAutopilotTests(unittest.TestCase):
     def test_new_checkpoint_dispatch_is_parked_without_capability_first_admission(self):
