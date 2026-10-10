@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_ESCAPE_PROGRESS_13_STORAGE_READBACK_V1",
+  "date": "2026-10-10",
+  "base_commit": "336c680b19cb3df3119cc6e49700b4f68baad1c0",
+  "status": "PASS__READBACK",
+  "files": [
+    [
+      "canonical/governance/ESCAPE_PROGRESS_TOTALITY_FROZEN_13_CLAIM_20261010_V2.json",
+      "138262b57df8a72c784096712cbcba19cd400689"
+    ],
+    [
+      "canonical/verification/ESCAPE_PROGRESS_FROZEN_13_CLAIM_V2_INDEPENDENT_VERIFICATION_20261010_V1.json",
+      "a08ec7464a2b4c66aba72897eac03def6804af4d"
+    ],
+    [
+      "canonical/governance/ESCAPE_PROGRESS_13_CURRENT_PROOF_FRONTIER_RECONCILIATION_20261010_V2.json",
+      "1207d37eafc3ab29e8e899e4cd71a87dbf19f242"
+    ],
+    [
+      "canonical/action_intents/ACTION_INTENT_ESCAPE_PROGRESS_13_CC_R3_CURRENT_20261010_V3.json",
+      "e16b369b2ae6f8b0b472b8c6cf788062273e4363"
+    ]
+  ],
+  "checks": {
+    "readback": true,
+    "json_parse": true,
+    "exact_source_files": true
+  },
+  "credit_delta": 0
+}
