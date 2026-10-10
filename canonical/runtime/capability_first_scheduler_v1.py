@@ -51,6 +51,28 @@ WORK_TYPES = frozenset(
 LOAD_BEARING_PRIMARY_LANE = "LOAD_BEARING_PRIMARY"
 SECONDARY_CAPABILITY_LANE = "SECONDARY_CAPABILITY"
 OPEN_WORLD_EVIDENCE_FRONTIER = "OPEN_WORLD_EVIDENCE_FRONTIER"
+REUSE_FIRST_RESOLUTION_MODES = frozenset(
+    {
+        "ADAPT_EXISTING",
+        "PROMOTE_EXISTING",
+        "VERIFY_EXISTING",
+        "ACQUIRE_EVIDENCE",
+        "NEW_PRIMITIVE",
+    }
+)
+NEW_PRIMITIVE_MODE = "NEW_PRIMITIVE"
+REUSE_FIRST_CLASSIFIER_FIELDS = frozenset(
+    {
+        "residual_resolution_mode",
+        "exact_unsatisfied_predicate",
+        "existing_mechanisms_searched",
+        "existing_mechanism_rejections",
+        "independent_missing_primitive_verification_id",
+        "minimum_new_primitive_scope",
+        "new_primitive_falsifier",
+        "new_primitive_promotion_criteria",
+    }
+)
 CURRENT_TERMINAL_AUTHORITY = (
     Path(__file__).resolve().parents[1] / "governance" / "CURRENT_TERMINAL_AUTHORITY.json"
 )
@@ -180,6 +202,112 @@ def _f(x: Any, name: str) -> Fraction:
     return out
 
 
+def _descriptor_present(value: Any) -> bool:
+    if isinstance(value, str):
+        return bool(_s(value))
+    if isinstance(value, Mapping):
+        return bool(value)
+    if isinstance(value, Sequence) and not isinstance(value, (str, bytes, bytearray)):
+        return len(value) > 0
+    return value is not None and value is not False
+
+
+def _reuse_first_admission(raw: Mapping[str, Any]) -> tuple[bool, str, dict[str, Any]]:
+    """Fail-close declared residual classifications before scheduler scoring.
+
+    Legacy rows with no reuse-first classifier fields preserve prior behavior.
+    Every declared residual must name a supported resolution mode and an exact
+    unsatisfied predicate. NEW_PRIMITIVE additionally requires a complete,
+    independently identified reuse-exhaustion receipt. This gate grants no
+    execution, promotion, capability, acceptance, ownership, or terminal
+    authority.
+    """
+    marker = raw.get("new_primitive_claim")
+    if marker is not None and not isinstance(marker, bool):
+        raise CapabilityFirstSchedulerError("NEW_PRIMITIVE_CLAIM_INVALID")
+
+    classifier_present = marker is not None or any(
+        key in raw for key in REUSE_FIRST_CLASSIFIER_FIELDS
+    )
+    mode = _s(raw.get("residual_resolution_mode"))
+    explicit_claim = marker is True or mode == NEW_PRIMITIVE_MODE
+    summary: dict[str, Any] = {
+        "residual_classification_declared": classifier_present,
+        "residual_resolution_mode": mode or None,
+        "new_primitive_claim": explicit_claim,
+        "existing_mechanism_count": 0,
+        "missing_requirements": [],
+        "verification_id": None,
+    }
+    if not classifier_present:
+        return True, "NOT_APPLICABLE__NO_RESIDUAL_CLASSIFICATION", summary
+
+    missing: list[str] = []
+    if not mode:
+        missing.append("RESIDUAL_RESOLUTION_MODE_REQUIRED")
+        if explicit_claim:
+            missing.append("RESIDUAL_RESOLUTION_MODE_NEW_PRIMITIVE_REQUIRED")
+    elif mode not in REUSE_FIRST_RESOLUTION_MODES:
+        missing.append("RESIDUAL_RESOLUTION_MODE_UNSUPPORTED:" + mode)
+    elif marker is True and mode != NEW_PRIMITIVE_MODE:
+        missing.append("RESIDUAL_RESOLUTION_MODE_NEW_PRIMITIVE_REQUIRED")
+
+    predicate = _s(raw.get("exact_unsatisfied_predicate"))
+    if not predicate:
+        missing.append("EXACT_UNSATISFIED_PREDICATE_REQUIRED")
+
+    if mode != NEW_PRIMITIVE_MODE:
+        summary["missing_requirements"] = sorted(set(missing))
+        if missing:
+            return False, "DEMOTED_REUSE_FIRST_CLASSIFICATION_INCOMPLETE", summary
+        return True, "CLASSIFIED_REUSE_FIRST_RESOLUTION__" + mode, summary
+
+    searched = _ids(raw, "existing_mechanisms_searched")
+    summary["existing_mechanism_count"] = len(searched)
+    if not searched:
+        missing.append("EXISTING_MECHANISMS_SEARCHED_REQUIRED")
+
+    rejections = raw.get("existing_mechanism_rejections")
+    rejection_map: dict[str, Any] = {}
+    if isinstance(rejections, Mapping):
+        for key, value in rejections.items():
+            normalized = _s(key)
+            if normalized:
+                rejection_map[normalized] = value
+    elif searched:
+        missing.append("EXISTING_MECHANISM_REJECTIONS_REQUIRED")
+
+    if searched:
+        if set(rejection_map) != set(searched):
+            missing.append("EXISTING_MECHANISM_REJECTION_SET_MUST_MATCH_SEARCHED_SET")
+        for mechanism_id in searched:
+            row = rejection_map.get(mechanism_id)
+            if not isinstance(row, Mapping):
+                missing.append("REJECTION_RECORD_REQUIRED:" + mechanism_id)
+                continue
+            if not _s(row.get("reason")):
+                missing.append("REJECTION_REASON_REQUIRED:" + mechanism_id)
+            if row.get("soundness_preserving") is not True:
+                missing.append("SOUNDNESS_PRESERVING_REJECTION_REQUIRED:" + mechanism_id)
+
+    verification_id = _s(raw.get("independent_missing_primitive_verification_id"))
+    summary["verification_id"] = verification_id or None
+    if not verification_id:
+        missing.append("INDEPENDENT_MISSING_PRIMITIVE_VERIFICATION_ID_REQUIRED")
+
+    if not _descriptor_present(raw.get("minimum_new_primitive_scope")):
+        missing.append("MINIMUM_NEW_PRIMITIVE_SCOPE_REQUIRED")
+    if not _descriptor_present(raw.get("new_primitive_falsifier")):
+        missing.append("NEW_PRIMITIVE_FALSIFIER_REQUIRED")
+    if not _descriptor_present(raw.get("new_primitive_promotion_criteria")):
+        missing.append("NEW_PRIMITIVE_PROMOTION_CRITERIA_REQUIRED")
+
+    summary["missing_requirements"] = sorted(set(missing))
+    if missing:
+        return False, "DEMOTED_NEW_PRIMITIVE_REUSE_EXHAUSTION_INCOMPLETE", summary
+    return True, "VERIFIED_REUSE_EXHAUSTION_BOUND", summary
+
+
 def _eligible(
     raw: Mapping[str, Any], checkpoint_open_obligation_count: int
 ) -> tuple[bool, str]:
@@ -201,6 +329,10 @@ def _eligible(
                 False,
                 "DEMOTED_OPEN_WORLD_EVIDENCE_FRONTIER_WITHOUT_CURRENT_CAPABILITY_DEFECT",
             )
+
+    reuse_ok, reuse_status, _reuse_summary = _reuse_first_admission(raw)
+    if not reuse_ok:
+        return False, reuse_status
 
     # Opus/terminal bookkeeping is instrumentation. Open checkpoint obligations
     # may add an audit signal, but they never turn the checkpoint into the
@@ -257,6 +389,7 @@ def rank_work(
             raise CapabilityFirstSchedulerError("WORK_ID_DUPLICATE:" + work_id)
         seen.add(work_id)
 
+        reuse_first_ok, reuse_first_status, reuse_first_summary = _reuse_first_admission(raw)
         eligible, eligibility = _eligible(raw, checkpoint_open_obligation_count)
         shared_residual_score, shared_residual_cause_ids = _shared_residual_fanout(raw)
         capability_score = _score(raw) if eligible else Fraction(0)
@@ -289,6 +422,15 @@ def rank_work(
                 ),
                 "scope_complete_discharge": raw.get("scope_complete_discharge") is True,
                 "shared_residual_cause_ids": shared_residual_cause_ids,
+                "residual_classification_declared": reuse_first_summary[
+                    "residual_classification_declared"
+                ],
+                "residual_resolution_mode": reuse_first_summary["residual_resolution_mode"],
+                "new_primitive_claim": reuse_first_summary["new_primitive_claim"],
+                "reuse_first_admission_status": reuse_first_status,
+                "reuse_first_existing_mechanism_count": reuse_first_summary["existing_mechanism_count"],
+                "reuse_first_missing_requirements": reuse_first_summary["missing_requirements"],
+                "reuse_first_verification_id": reuse_first_summary["verification_id"],
                 "eligibility": eligibility,
                 "capability_priority_score_fraction": capability_score,
                 "shared_residual_fanout_score_fraction": shared_residual_score,
@@ -337,6 +479,11 @@ def rank_work(
             "CAPABILITY_DEFECT__WAKE_ONLY_ON_TASK_LOCAL_COUNTEREXAMPLE_OR_"
             "INDEPENDENTLY_VERIFIED_CAPABILITY_DEFECT"
         ),
+        "reuse_first_residual_policy": (
+            "EXPLICIT_NEW_PRIMITIVE_CLAIM_REQUIRES_VERIFIED_REUSE_EXHAUSTION__"
+            "LEGACY_AND_NON_NEW_PRIMITIVE_ROWS_PRESERVE_EXISTING_BEHAVIOR"
+        ),
+        "new_primitive_claim_requires_verified_reuse_exhaustion": True,
         "option_preservation_policy": OPTION_PRESERVATION_POLICY,
         "optimization_rule": "OPTIMIZE_IMPLEMENTATIONS_NOT_POSSIBILITIES",
         "capability_learning_loop": list(CAPABILITY_LEARNING_LOOP),
@@ -360,6 +507,15 @@ def rank_work(
                 ],
                 "scope_complete_discharge": row["scope_complete_discharge"],
                 "shared_residual_cause_ids": row["shared_residual_cause_ids"],
+                "residual_classification_declared": row[
+                    "residual_classification_declared"
+                ],
+                "residual_resolution_mode": row["residual_resolution_mode"],
+                "new_primitive_claim": row["new_primitive_claim"],
+                "reuse_first_admission_status": row["reuse_first_admission_status"],
+                "reuse_first_existing_mechanism_count": row["reuse_first_existing_mechanism_count"],
+                "reuse_first_missing_requirements": row["reuse_first_missing_requirements"],
+                "reuse_first_verification_id": row["reuse_first_verification_id"],
                 "eligibility": row["eligibility"],
                 "priority_score": str(row["capability_priority_score_fraction"]),
                 "shared_residual_fanout_score": str(
