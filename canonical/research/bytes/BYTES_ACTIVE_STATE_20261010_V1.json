@@ -30,7 +30,7 @@
       "coefficient",
       "exact roots degree <= 4"
     ],
-    "next_action": "Before another deletion, freeze a new untouched qualification corpus. Then decompose remaining polys by actual operation-level use; prioritize generic import-only machinery and incidental coupling, physically delete accepted cuts, run untouched qualification, rerank, and preserve fail-closed scope."
+    "next_action": "QUAL8 is frozen and untouched (2,640 cases; SHA-256 640f06e78cd3394e00713084ec6a3aafbd7b1ba0f0dcaa17140c74bb920b79fc). Decompose remaining polys by factor/coefficient/exact-roots<=4 use, make one structural cut, physically delete it, spend QUAL8 once, then rerank."
   },
   "rejected_do_not_reopen_without_new_evidence": [
     "parameter count as terminal metric",
@@ -51,10 +51,12 @@
   ],
   "completion_boundary": "Do not claim universal minimum. Claim exact optimum only over an exhaustively searched finite discovered mechanism library, or a verified upper bound otherwise.",
   "drive_evidence_mirror": {
-    "status": "CREATED_AND_POPULATED__LOCATION_MOVE_BLOCKED_BY_CONNECTOR_SAFETY_GUARD",
+    "status": "UPDATED_WITH_FRESH_EXECUTION_FRONTIER__NONCANONICAL",
     "file_id": "1iSGwawxceR81ssMCfAmkXJNLoFlLaEfda8QiggnOnq4",
     "url": "https://docs.google.com/document/d/1iSGwawxceR81ssMCfAmkXJNLoFlLaEfda8QiggnOnq4/edit?usp=drivesdk",
-    "authority": "NONCANONICAL_EVIDENCE_MIRROR__GITHUB_REMAINS_CANONICAL"
+    "authority": "NONCANONICAL_EVIDENCE_MIRROR__GITHUB_REMAINS_CANONICAL",
+    "last_updated_revision_id": "AHj4eMQo_TclzV0S1Gco-rC8oV6hd8IQeO7hEUSMdUoz7x5nP7MyneVsdiBvcPVcmJ7YsUtpTwcxa7Ax3YRY0BHO3joRLW5x8k200icYnw",
+    "fresh_execution_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_RECOVERY_EXECUTION_20261010_V1.json"
   },
   "fresh_local_donor_evidence": "canonical/evidence/BYTES_SYMPY_1_14_DEPENDENCY_CENSUS_20261010_V1.json",
   "execution_reconciliation": {
@@ -75,5 +77,19 @@
     "qualification": "1854/1854",
     "provenance": "USER_SUPPLIED_TRANSCRIPT_CHECKPOINT"
   },
-  "fresh_execution_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_RECOVERY_EXECUTION_20261010_V1.json"
+  "fresh_execution_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_RECOVERY_EXECUTION_20261010_V1.json",
+  "next_frozen_qualification": {
+    "id": "QUAL8",
+    "cases": 2640,
+    "corpus_sha256": "640f06e78cd3394e00713084ec6a3aafbd7b1ba0f0dcaa17140c74bb920b79fc",
+    "generator_sha256": "de6cf261f4e78b010c2454347409a309880066e18f89f7953bb477a7502f59e4",
+    "spent": false
+  },
+  "durable_artifact_persistence": {
+    "candidate_manifest_and_measurements": "PERSISTED_IN_CANONICAL_GITHUB_EVIDENCE",
+    "binary_execution_bundle": "NOT_DURABLY_SAVED__LIBRARY_UPLOAD_FAILED_CONTAINER_SESSION_EXPIRED",
+    "exact_reconstruction_recipe": "LOCALLY_VERIFIED__GITHUB_UPLOAD_BLOCKED_BY_CONNECTOR_SAFETY_CHECK",
+    "incomplete_encoded_payload": "ORPHANED_NONAUTHORITATIVE_ARTIFACT__DELETE_ATTEMPT_BLOCKED_BY_CONNECTOR_SAFETY_CHECK",
+    "rule": "No successor may treat a blocked/failed persistence action as successful. Canonical measured state is durable; exact candidate bytes still require supported artifact persistence or reconstruction from this execution environment."
+  }
 }
