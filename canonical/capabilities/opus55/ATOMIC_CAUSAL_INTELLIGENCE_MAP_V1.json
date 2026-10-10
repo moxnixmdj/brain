@@ -369,7 +369,7 @@
     "next_frozen_qualification": {
       "id": "QUAL_SUCCESSOR_NEXT16_20261010_V1",
       "cases": 5520,
-      "corpus_sha256": "PENDING_FREEZE",
+      "corpus_sha256": "4764759bc7fbca314b300af7a07616f236bca94def7d320ff044d4bf93d6d5ac",
       "spent": false
     },
     "current_falsification_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_NEXT10_EXPRESSIONDOMAIN_FALSIFICATION_20261010_V1.json",
