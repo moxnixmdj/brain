@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R2_BOUNDED_SEMANTIC_SCOPE_V1",
+  "date": "2026-10-10",
+  "status": "ACTIVE_BOUNDED_CONDITIONAL_SEMANTIC_SCOPE__ZERO_GLOBAL_LEAF_CREDIT",
+  "root_id": "R2_CANDIDATE_SEARCH",
+  "semantic_leaf_id": "PQ::R2_CANDIDATE_SEARCH::SEMANTIC",
+  "claim_kind": "FINITE_SCOPE_COMPLETE_COMMON_POLICY_OR_MINIMUM_TRUTHFUL_DISCRIMINATOR_SEARCH",
+  "exact_scope": {
+    "decision_region": "FINITE_NONEMPTY_DECLARED_POLICY_ADEQUACY_REGION_SET",
+    "scope_complete_required": true,
+    "policy_adequacy_authenticated_required": true,
+    "selected_discriminator_truthful_required": true,
+    "selected_discriminator_outcome_map_complete_required": true
+  },
+  "semantic_theorem": {
+    "path": "canonical/governance/ADAPTIVE_ABSTRACT_POSITIVE_COVER_FIXED_POINT_THEOREM_20261007_V2.json",
+    "git_blob_sha": "2ac97a6677cf577a52c3fd6d01739ee29be1e9d8",
+    "verification_path": "canonical/verification/ADAPTIVE_ABSTRACT_POSITIVE_COVER_FIXED_POINT_V2_WOLFRAM_VERIFICATION_20261007_V1.json",
+    "verification_git_blob_sha": "5a10547706a1b46dcb11d32122490efd927d30b0"
+  },
+  "proved": [
+    "WITHIN_THE_DECLARED_FINITE_SCOPE_A_COMMON_AUTHENTICATED_ADEQUATE_SAFE_POLICY_IS_SEMANTICALLY_SUFFICIENT_TO_TERMINATE",
+    "WHEN_NO_COMMON_POLICY_EXISTS_A_TRUTHFUL_COMPLETE_DISCRIMINATOR_WITH_STRICT_SUCCESSOR_SUBSETS_GIVES_SOUND_SEMANTIC_REFINEMENT",
+    "STRICT_FINITE_REGION_SHRINK_IMPLIES_WELL_FOUNDED_TERMINATION_CONDITIONALLY_ON_ESCAPE_PROGRESS",
+    "UNRESOLVABLE_INCOMPATIBLE_REGIONS_FAIL_CLOSED_RATHER_THAN_FAKE_SEARCH_COMPLETENESS"
+  ],
+  "limitations": [
+    "NO_GLOBAL_CANDIDATE_SEARCH_COMPLETENESS",
+    "NO_ESCAPE_PROGRESS_TOTALITY",
+    "NO_OPEN_WORLD_HYPOTHESIS_COMPLETENESS",
+    "NO_POLICY_GENERATION_COMPLETENESS",
+    "NO_GLOBAL_R2_SEMANTIC_LEAF_CLOSURE",
+    "NO_GLOBAL_R2_ROOT_CLOSURE"
+  ],
+  "scope_relation_to_global_leaf": "BOUNDED_SUBSET_ONLY",
+  "semantic_leaf_credit": false,
+  "global_leaf_closure": false,
+  "global_root_closure": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
