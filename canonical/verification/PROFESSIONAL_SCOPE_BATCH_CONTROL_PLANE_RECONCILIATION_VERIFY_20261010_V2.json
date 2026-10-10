@@ -1,47 +1,53 @@
 {
-  "schema": "PROJECT_BRAIN_PROFESSIONAL_SCOPE_BATCH_CONTROL_PLANE_RECONCILIATION_VERIFY_V2",
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_SCOPE_BATCH_CONTROL_PLANE_RECONCILIATION_VERIFY_V3",
   "date": "2026-10-10",
-  "status": "PASS__REBASED_ON_CURRENT_R10_ENFORCEMENT_STATE__6_OF_6__24_OF_24_SCOPE_COMPLETE_PROJECTED__PROPERTY_TRUTH_0_OF_24_PRESERVED__ZERO_CREDIT",
+  "status": "PASS__FINAL_REBASED_STATE__7_OF_7__24_OF_24_SCOPE_COMPLETE_PROJECTED__R10_STRUCTURAL_SLOTS_13_OF_13_DIRECT_REPLAY_BOUND__PROPERTY_TRUTH_0_OF_24_PRESERVED__ZERO_CREDIT",
   "subject": {
     "repository": "moxnixmdj/brain",
     "branch": "professional-scope-batch-control-plane-v1-20261010",
-    "base_main_commit": "498488db49544a7e6271c8db60cea7da37ca3af0",
     "exact_blobs": {
-      "assurance": "b2bded72e6841c8e909bb207d8a0f0eb8ab9a808",
-      "residual_reuse": "906965ecc2cf83410fe0f601a395db6885fccadf",
-      "live_frontier": "cc09445367144b1f060c69cfc3387b89de6bae20",
-      "development_scheduler": "f65468cd649e51aa7b69c4b2e4f27e8a042e1238",
-      "mission": "908aed5d805ed03d0566a2a292a50b4d701613b3",
+      "assurance": "2b60895e154d85c07078800f651816c34f3fe898",
+      "residual_reuse": "2c7bfce95bc9bfc90c061c60df7fc705e43b8ce1",
+      "live_frontier": "20f7fe7c6af53972bca3103bd2a2af1a376d1322",
+      "development_scheduler": "ed4169ba5da25fb178db45cd17ac0fc317697fb4",
+      "mission": "5c0b29225126cc87f4b037dbea76de476016ee0b",
       "scope_batch_activation": "d40188f87818d9c6a4507a043380a753ca563e18",
       "scope_batch_verification": "4c2d40a262f18f34bb35f94b59660d60972d45ef",
-      "tests": "28abaa53391033c63994a30b4f8a2df3993d16b9"
+      "r10_structural_verification": "d7de9a123c02f46e26e182cd45d95e22eee2ee8c",
+      "tests": "2478f1aa631077d4ca89b799f61c229af0fdef08"
     }
   },
   "independent_replay": {
     "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
     "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
-    "workspace": "/home/sprite/pq-scope-control-reconcile-v1-rebased",
-    "tests_run": 6,
-    "tests_passed": 6,
+    "workspace": "/home/sprite/pq-scope-control-reconcile-final",
+    "tests_run": 7,
+    "tests_passed": 7,
     "failures": 0,
     "errors": 0
   },
-  "preserved_concurrent_state": [
-    "R10_EXECUTION_DETECTED_DEFEATER_ENFORCEMENT_VERIFIED",
-    "R10_DETECTION_COMPLETENESS_REMAINS_OPEN",
-    "R10_PROPERTY_TRUTH_REMAINS_OPEN"
-  ],
+  "r10_currentness": {
+    "structural_proof_slot_verification": "PASS__13_OF_13_DIRECT_ADVERSARIAL_REPLAY",
+    "structural_receipt_path": "canonical/verification/PROFESSIONAL_QUALITY_R10_PROOF_SLOT_DIRECT_VERIFY_20261010_V1.json",
+    "structural_receipt_git_blob_sha": "d7de9a123c02f46e26e182cd45d95e22eee2ee8c",
+    "historical_guard_verification_current_for_current_guard_bytes": false,
+    "underlying_fact_truth_authority": false,
+    "whole_leaf_property_truth_proved": false,
+    "detection_completeness_proved": false
+  },
   "proved": [
     "SCOPE_BATCH_RECEIPT_EXACT_AND_SCOPE_ONLY",
     "ASSURANCE_PROJECTS_24_SCOPE_COMPLETE_24_PROPERTY_READY_0_PROPERTY_CLOSED",
     "REUSE_CLASSIFICATION_DEMOTES_SCOPE_RESEARCH_AND_ADVANCES_TO_PROPERTY_TRUTH",
     "LIVE_FRONTIER_ADVANCES_TO_PROPERTY_TRUTH_LANE",
     "SCHEDULER_AND_MISSION_BIND_EXACT_RECONCILED_POINTER_BYTES",
-    "NO_SCOPE_COMPLETENESS_TO_PROPERTY_TRUTH_OR_GLOBAL_LEAF_LAUNDERING"
+    "CURRENT_R10_STRUCTURAL_SLOT_RECEIPT_BOUND_WITHOUT_STALE_GUARD_OVERCLAIM",
+    "NO_SCOPE_OR_STRUCTURAL_COMPLIANCE_TO_PROPERTY_TRUTH_OR_GLOBAL_LEAF_LAUNDERING"
   ],
   "hard_nonclaims": [
     "NO_LEAF_PROPERTY_TRUTH",
-    "NO_DEFEATER_DETECTION_COMPLETENESS_FROM_R10_ENFORCEMENT",
+    "NO_CURRENT_R10_GUARD_BEHAVIORAL_REVERIFICATION_CLAIM",
+    "NO_DEFEATER_DETECTION_COMPLETENESS",
     "NO_DOMAIN_SEMANTIC_OR_EXECUTION_PROPERTY_CLOSURE",
     "NO_ROOT_OR_PROFESSIONAL_QUALITY_CLOSURE",
     "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
