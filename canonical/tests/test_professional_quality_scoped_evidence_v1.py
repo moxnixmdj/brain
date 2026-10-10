@@ -334,7 +334,7 @@ class ProfessionalQualityScopedEvidenceV1Tests(unittest.TestCase):
             ["PQ::R1_TARGET_SPECIFICATION::EXECUTION"],
         )
         self.assertIn(
-            "NO_OPAQUE_FIELD_PROSE_SEMANTIC_INTERPRETATION",
+            "NO_OPAQUE_FIELD_OR_EXTENSION_SEMANTIC_INTERPRETATION",
             row["claim_scope"]["limitations"],
         )
         self.assertIn(
