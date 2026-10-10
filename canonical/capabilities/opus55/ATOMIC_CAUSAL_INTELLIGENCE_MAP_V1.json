@@ -320,10 +320,10 @@
     "cases": 6
   },
   "bytes_minimization_control": {
-    "status": "ACTIVE__ZERO_CAPABILITY_CREDIT_FROM_RESEARCH_CHECKPOINT_ALONE",
+    "status": "ACTIVE__FRESH_MEASURED_BYTE_FRONTIER__ZERO_CAPABILITY_CREDIT_FROM_RESEARCH_CHECKPOINT_ALONE",
     "law": "canonical/laws/BYTES_RESOURCE_BOUNDED_MINIMUM_MECHANISM_LAW_V1.md",
     "white_box_law": "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V1.md",
-    "current_research_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_DONOR_SLICE_CHECKPOINT_20261010_V1.json",
+    "current_research_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_RECOVERY_EXECUTION_20261010_V1.json",
     "objective": "MINIMUM_RESOURCE_FEASIBLE_EXECUTABLE_DESCRIPTION_CONDITIONAL_ON_ALREADY_OWNED_BRAIN_SUBSTRATE",
     "accounting": [
       "B_EXEC",
@@ -339,7 +339,21 @@
       "LARGER_MODULE_ONLY_IF_REQUIRED"
     ],
     "global_rule": "OPTIMIZE_JOINT_DEPENDENCY_CLOSED_MECHANISM_COVER__COUNT_SHARED_SUBSTRATE_ONCE",
-    "current_exact_symbolic_bottleneck": "POLYS__FACTOR__COEFFICIENT__EXACT_ROOTS_DEGREE_LE_4",
-    "truth_boundary": "CHECKPOINT_VALUES_ARE_PERSISTED_SOURCE_REPORTS__NO_NEW_PROMOTION_CREDIT_WITHOUT_INDEPENDENT_ROUTE_VERIFICATION"
+    "current_exact_symbolic_bottleneck": "POLYS__FRESH_LOADED_RAW_1517336__FACTOR__COEFFICIENT__EXACT_ROOTS_DEGREE_LE_4",
+    "truth_boundary": "FRESH_BYTE_FRONTIER_AND_QUALIFICATION_ARE_MEASURED__NO_OPUS_FAMILY_PROMOTION_CREDIT_WITHOUT_FULL_PROMOTION_GATES__NO_UNIVERSAL_MINIMUM_CLAIM",
+    "current_fresh_exact_symbolic_candidate": {
+      "raw_python_source_bytes": 6828853,
+      "persistent_xz_bytes": 1179804,
+      "qualification": "2520/2520",
+      "clean_room_replay": "2520/2520",
+      "manifest_sha256": "ebecc222feb7ec428e7ac9e667319d41f943358a454df6d288efae0c10ac940c",
+      "deterministic_xz_sha256": "7656418768655ffc67889bb5b9cafc27a7fb59320b0ce7b86efcc012cb30dcfc",
+      "promotion_credit": 0
+    },
+    "historical_reported_predecessor": {
+      "raw_python_source_bytes": 7044219,
+      "persistent_xz_bytes": 1207652,
+      "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_DONOR_SLICE_CHECKPOINT_20261010_V1.json"
+    }
   }
 }
