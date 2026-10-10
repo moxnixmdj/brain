@@ -1,0 +1,120 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_DEVELOPMENT_AUTHORITY_V1",
+  "date": "2026-10-10",
+  "status": "ACTIVE_FAIL_CLOSED__GENERAL_CAPABILITY_FIRST__BENCHMARKS_AUDIT_ONLY__REUSE_FIRST",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "authority": {
+    "mission_law": "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+    "terminal_truth_source": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+      "observed_git_blob_sha": "fa6c03de518765e483728196c2255eb7e69e9d50",
+      "role": "MILESTONE_AND_TERMINAL_TRUTH__NOT_PARENT_DEVELOPMENT_SCHEDULER"
+    },
+    "residual_reuse_source": {
+      "path": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
+      "observed_git_blob_sha": "fa5355528c6104c1768499b9dc657ea0b895e3ee",
+      "role": "CURRENT_REUSE_FIRST_CLASSIFICATION"
+    },
+    "goal_gate": "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V12.json",
+    "optimizer": "canonical/governance/EXECUTION_FIRST_SELF_PROVING_OPTIMIZER_V2.json"
+  },
+  "development_scheduler": {
+    "primary_object": "MAXIMIZE_VERIFIED_GENERAL_REUSABLE_RELIABLE_RESOURCE_EFFICIENT_PROBLEM_SOLVING_CAPABILITY",
+    "benchmark_rank_is_scheduling_authority": false,
+    "acceptance_family_red_state_is_scheduling_authority": false,
+    "score_delta_is_development_credit": false,
+    "priority_numerator": [
+      "EXPECTED_GENERAL_CAPABILITY_GAIN",
+      "REUSE_BREADTH",
+      "RELIABILITY_GAIN",
+      "CAUSAL_CONFIDENCE"
+    ],
+    "priority_denominator": [
+      "WALL_CLOCK",
+      "COMPUTE",
+      "MEMORY",
+      "INCREMENTAL_COST",
+      "COMPLEXITY",
+      "EVIDENCE_RISK"
+    ],
+    "hard_constraints": [
+      "CORRECTNESS_FIRST",
+      "FAIL_CLOSED_TRUTH",
+      "PROVENANCE",
+      "OWNERSHIP_WHERE_CLAIMED",
+      "NO_GOAL_SUBSTITUTION"
+    ]
+  },
+  "benchmark_policy": {
+    "role": [
+      "AUDIT",
+      "FALSIFIER",
+      "CALIBRATION_SURFACE",
+      "CAUSAL_PROBE"
+    ],
+    "may_authorize_development_only_if": [
+      "CAUSALLY_LOCALIZES_GENERAL_CAPABILITY_DEFECT",
+      "INDEPENDENTLY_AUDITS_GENERAL_CAPABILITY_CLAIM",
+      "CHEAPEST_NONDOMINATED_PROBE_FOR_UNRESOLVED_GENERAL_CAPABILITY_QUESTION"
+    ],
+    "forbidden": [
+      "BENCHMARK_AS_PARENT_OBJECTIVE",
+      "SCORE_CHASING_WITHOUT_GENERAL_CAUSAL_LINK",
+      "BENCHMARK_SPECIFIC_PATCH_PROMOTED_WITHOUT_TRANSFER",
+      "FAMILY_RED_STATE_AS_AUTOMATIC_JOB"
+    ],
+    "opus_5_5_role": "MILESTONE_CHECKPOINT_AND_CAPABILITY_SPECIMEN__NOT_ARCHITECTURAL_OPTIMIZATION_TARGET"
+  },
+  "route_order": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "ADAPT",
+    "SUBSTITUTE",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE",
+    "SYNTHESIZE_NEW_PRIMITIVE"
+  ],
+  "new_primitive_admission": {
+    "default_authorized": false,
+    "required": "SPECIFIC_FALSIFICATION_OR_PROOF_OF_INSUFFICIENCY_OF_RELEVANT_EXISTING_MECHANISMS_AND_TRANSFORMS",
+    "current_reuse_authority_status": "DERIVED_CURRENT_CLASSIFICATION__REUSE_ADAPTATION_PROMOTION_EVIDENCE_AND_VERIFIED_EXECUTION_FIRST__NO_VERIFIED_NEW_PRIMITIVE_CURRENTLY_ESTABLISHED__ZERO_CREDIT"
+  },
+  "development_loop": [
+    "UNDERSTAND",
+    "PLAN",
+    "COMPOSE",
+    "ACT",
+    "VERIFY",
+    "LEARN",
+    "GENERALIZE",
+    "COMPRESS",
+    "REUSE"
+  ],
+  "progress_credit": [
+    "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+    "VERIFIED_RELIABILITY_GENERALIZATION_OR_RESOURCE_EFFICIENCY_GAIN_WITHOUT_CAPABILITY_REGRESSION",
+    "VERIFIED_LIVE_INTEGRATION_OF_ALREADY_OWNED_CAPABILITY",
+    "INDEPENDENT_FALSIFICATION_THAT_REMOVES_FALSE_GENERAL_CLAIM_AND_NARROWS_CAUSAL_FRONTIER"
+  ],
+  "zero_credit": [
+    "BENCHMARK_SCORE_MOVEMENT_ALONE",
+    "ACCEPTANCE_ROW_CLOSURE_ALONE",
+    "ACTIVITY",
+    "UNCHANGED_BEHAVIOR_RECERTIFICATION",
+    "TASK_SPECIFIC_PATCH_WITHOUT_TRANSFER"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_ALL_BENCHMARK_WORK_IS_USELESS",
+    "NO_CLAIM_OPUS_5_5_AUDIT_IS_COMPLETE",
+    "NO_NEW_CAPABILITY_CREDIT_FROM_THIS_CONTROL_PLANE_CHANGE",
+    "NO_TERMINAL_GOAL_ACHIEVED_CLAIM"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
