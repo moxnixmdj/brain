@@ -1,0 +1,178 @@
+{
+  "abstract_spec_git_blob_sha": "5ec3678cec3316bbc3383b32db296227272c15b4",
+  "acceptance_authority": false,
+  "assurance_level": "FINITE_ABSTRACTION_CONTROLLER_REFINEMENT",
+  "certificate_git_blob_sha": "e0e9c04a3d016b71ea5188f02735eb5fc26458f2",
+  "concrete_route_git_blob_sha": "01305c41e79189e3ea13f1a6343427ee31eda566",
+  "declared_transition_case_count": 15,
+  "delegated_dependency_boundary_explicit": true,
+  "delegated_dependency_semantics_reproved": false,
+  "dynamic_case_receipts": [
+    {
+      "case_id": "EVIDENCE_NOT_OBJECT",
+      "dependency_call_count": 0,
+      "kind": "FAIL_CLOSED",
+      "pass": true,
+      "resolver_stub": null
+    },
+    {
+      "case_id": "EVIDENCE_FIELD_SET_INVALID",
+      "dependency_call_count": 0,
+      "kind": "FAIL_CLOSED",
+      "pass": true,
+      "resolver_stub": null
+    },
+    {
+      "case_id": "EVIDENCE_SCHEMA_INVALID",
+      "dependency_call_count": 0,
+      "kind": "FAIL_CLOSED",
+      "pass": true,
+      "resolver_stub": null
+    },
+    {
+      "case_id": "PROOF_CLASS_UNSUPPORTED",
+      "dependency_call_count": 0,
+      "kind": "FAIL_CLOSED",
+      "pass": true,
+      "resolver_stub": null
+    },
+    {
+      "case_id": "SCOPE_ID_REQUIRED",
+      "dependency_call_count": 0,
+      "kind": "FAIL_CLOSED",
+      "pass": true,
+      "resolver_stub": null
+    },
+    {
+      "case_id": "DISTINCT_SOURCE_TARGET_IDS_REQUIRED",
+      "dependency_call_count": 0,
+      "kind": "FAIL_CLOSED",
+      "pass": true,
+      "resolver_stub": null
+    },
+    {
+      "case_id": "SOURCE_TARGET_SURFACES_REQUIRED",
+      "dependency_call_count": 0,
+      "kind": "FAIL_CLOSED",
+      "pass": true,
+      "resolver_stub": null
+    },
+    {
+      "case_id": "RELATION_UNSUPPORTED",
+      "dependency_call_count": 0,
+      "kind": "FAIL_CLOSED",
+      "pass": true,
+      "resolver_stub": null
+    },
+    {
+      "case_id": "EXPLICIT_DEFINITION_SOURCES_REQUIRED",
+      "dependency_call_count": 0,
+      "kind": "FAIL_CLOSED",
+      "pass": true,
+      "resolver_stub": null
+    },
+    {
+      "case_id": "DEFINITION_SOURCE_NOT_OBJECT",
+      "dependency_call_count": 0,
+      "kind": "FAIL_CLOSED",
+      "pass": true,
+      "resolver_stub": null
+    },
+    {
+      "case_id": "DEFINITION_SOURCE_FIELD_SET_INVALID",
+      "dependency_call_count": 0,
+      "kind": "FAIL_CLOSED",
+      "pass": true,
+      "resolver_stub": null
+    },
+    {
+      "case_id": "DEFINITION_SOURCE_BINDING_INVALID",
+      "dependency_call_count": 0,
+      "kind": "FAIL_CLOSED",
+      "pass": true,
+      "resolver_stub": null
+    },
+    {
+      "case_id": "SEMANTIC_IDENTITY_NOT_PROVED",
+      "dependency_call_count": 1,
+      "kind": "FAIL_CLOSED",
+      "pass": true,
+      "resolver_stub": false
+    },
+    {
+      "case_id": "NOT_ENTAILS_NOT_DERIVABLE_FROM_SEMANTIC_IDENTITY_PROOF",
+      "dependency_call_count": 1,
+      "kind": "FAIL_CLOSED",
+      "pass": true,
+      "resolver_stub": true
+    },
+    {
+      "case_id": "ENTAILS_SUCCESS",
+      "dependency_call_count": 1,
+      "kind": "PASS",
+      "pass": true,
+      "resolver_stub": true
+    }
+  ],
+  "dynamic_transition_case_count": 15,
+  "execution_authority": false,
+  "pass": true,
+  "proof_dependencies": [
+    {
+      "git_blob_sha": "13aa27ea19cefd8ce6059f037ff5491402d9fa68",
+      "path": "canonical/runtime/semantic_relation_control_v1.py"
+    },
+    {
+      "git_blob_sha": "3e092ba1581f674c1302288b2800771a81b5bb02",
+      "path": "canonical/runtime/semantic_relation_entailment_dag_v1.py"
+    }
+  ],
+  "receipt_sha256": "d821e6e370b5425276c2ce3a7141055a5846a43c4c0280e1b243e1f676e3fd0c",
+  "refinement_verified": true,
+  "schema": "PROJECT_BRAIN_BOUNDED_CONTROLLER_SEMANTIC_REFINEMENT_RECEIPT_V1",
+  "semantic_truth_authority": false,
+  "static_fail_reason_space_exact": true,
+  "static_source_proof": {
+    "dynamic_fail_calls": 0,
+    "exact_receipt_schema_import": true,
+    "exact_resolve_import": true,
+    "expected_fail_reasons": [
+      "DEFINITION_SOURCE_BINDING_INVALID",
+      "DEFINITION_SOURCE_FIELD_SET_INVALID",
+      "DEFINITION_SOURCE_NOT_OBJECT",
+      "DISTINCT_SOURCE_TARGET_IDS_REQUIRED",
+      "EVIDENCE_FIELD_SET_INVALID",
+      "EVIDENCE_NOT_OBJECT",
+      "EVIDENCE_SCHEMA_INVALID",
+      "EXPLICIT_DEFINITION_SOURCES_REQUIRED",
+      "NOT_ENTAILS_NOT_DERIVABLE_FROM_SEMANTIC_IDENTITY_PROOF",
+      "PROOF_CLASS_UNSUPPORTED",
+      "RELATION_UNSUPPORTED",
+      "SCOPE_ID_REQUIRED",
+      "SEMANTIC_IDENTITY_NOT_PROVED",
+      "SOURCE_TARGET_SURFACES_REQUIRED"
+    ],
+    "fail_reasons": [
+      "DEFINITION_SOURCE_BINDING_INVALID",
+      "DEFINITION_SOURCE_FIELD_SET_INVALID",
+      "DEFINITION_SOURCE_NOT_OBJECT",
+      "DISTINCT_SOURCE_TARGET_IDS_REQUIRED",
+      "EVIDENCE_FIELD_SET_INVALID",
+      "EVIDENCE_NOT_OBJECT",
+      "EVIDENCE_SCHEMA_INVALID",
+      "EXPLICIT_DEFINITION_SOURCES_REQUIRED",
+      "NOT_ENTAILS_NOT_DERIVABLE_FROM_SEMANTIC_IDENTITY_PROOF",
+      "PROOF_CLASS_UNSUPPORTED",
+      "RELATION_UNSUPPORTED",
+      "SCOPE_ID_REQUIRED",
+      "SEMANTIC_IDENTITY_NOT_PROVED",
+      "SOURCE_TARGET_SURFACES_REQUIRED"
+    ],
+    "pass": true,
+    "resolve_call_count": 1
+  },
+  "status": "PASS__BOUNDED_CONTROLLER_SEMANTIC_REFINEMENT_VERIFIED",
+  "subject_id": "brain-owned-semantic-edge-authority",
+  "terminal_authority": false,
+  "terminal_credit_delta": 0
+}
