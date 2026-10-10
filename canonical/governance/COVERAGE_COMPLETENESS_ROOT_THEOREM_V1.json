@@ -131,7 +131,8 @@
     "PROVED_ROOT_REQUIRES_CONTENT_ADDRESSED_EXECUTABLE_SEMANTIC_VERIFIER",
     "BYTE_IDENTITY_ALONE_IS_NOT_PROOF_AUTHORITY",
     "STORED_PASS_RECEIPT_CANNOT_OVERRIDE_SEMANTIC_VERIFIER_REJECTION",
-    "R4_LIVE_BINDING_MUST_CONTENT_ADDRESS_ROOT_REGISTRY_GUARD_SEMANTIC_VERIFIER_AND_LOAD_BEARING_TESTS"
+    "R4_LIVE_BINDING_MUST_CONTENT_ADDRESS_ROOT_REGISTRY_GUARD_SEMANTIC_VERIFIER_AND_LOAD_BEARING_TESTS",
+    "NO_CONTENT_ADDRESS_CYCLE_BETWEEN_ROOT_THEOREM_CLAIM_SCOPE_AND_CURRENT_ROOT_POINTER"
   ],
   "new_e_admission": {
     "default": "REJECT_AS_PEER_ARCHITECTURE",
@@ -244,7 +245,13 @@
       "preserve_evidence": true
     },
     "active_pr": 3870,
-    "root_registry_snapshot_reconciled_at_base": "69bbf167542b786647b5db12391c2973f07fa258"
+    "root_registry_snapshot_reconciled_at_base": "69bbf167542b786647b5db12391c2973f07fa258",
+    "content_address_cycle_repair": {
+      "status": "REPAIRED_BY_REMOVING_REVERSE_THEOREM_TO_CURRENT_POINTER_HASH_EDGE",
+      "cycle": "ROOT_THEOREM_HASHES_CURRENT_POINTER__CURRENT_POINTER_HASHES_CLAIM_SCOPE__CLAIM_SCOPE_HASHES_ROOT_THEOREM",
+      "currentness_authority": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_THEOREM_LIVE_BINDING_V1.json",
+      "terminal_credit_delta": 0
+    }
   },
   "accounting": {
     "incremental_spend_usd": 0,
@@ -354,7 +361,6 @@
       "authority_path": "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
       "authority_git_blob_sha": "13c470645b037bbb46245c687dd35197b420d51a"
     },
-    "current_authority_manifest_git_blob_sha": "6bbf64e0ad5cb158e8edb6a561dceb7babaef116",
     "executable_semantic_verification_required": true,
     "semantic_receipt_verifier": {
       "path": "canonical/runtime/coverage_root_semantic_receipt_v1.py",
@@ -372,7 +378,9 @@
       "git_blob_sha": "d9ec8aee6cfbec538d49c65deb912121060cc6c5"
     },
     "active_claim_id": "e1c519109c4b2c46a9225686fc2c5c5490564d1cc62d5c6ff3c6c436bfca4314",
-    "scope_note": "CURRENT_COUNTS_AND_R4_CLOSURE_APPLY_ONLY_TO_THE_REGISTRY_ACTIVE_FROZEN_PROPERTY_CLAIM__NOT_GLOBAL_MISSION_COMPLETION"
+    "scope_note": "CURRENT_COUNTS_AND_R4_CLOSURE_APPLY_ONLY_TO_THE_REGISTRY_ACTIVE_FROZEN_PROPERTY_CLAIM__NOT_GLOBAL_MISSION_COMPLETION",
+    "current_authority_manifest_binding_mode": "PATH_ONLY_IN_STATIC_THEOREM__EXACT_CURRENT_BYTES_OWNED_BY_R4_LIVE_BINDING_MANIFEST",
+    "current_authority_manifest_currentness_rule": "DO_NOT_CONTENT_ADDRESS_MUTABLE_CURRENT_POINTER_FROM_STATIC_THEOREM_BECAUSE_POINTER_DEPENDS_ON_CLAIM_SCOPE_WHICH_DEPENDS_ON_THIS_THEOREM__LIVE_BINDING_MANIFEST_CONTENT_ADDRESSES_BOTH_ACYCLICALLY"
   },
   "root_certificate_registry": {
     "path": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_CERTIFICATE_REGISTRY_V1.json",
