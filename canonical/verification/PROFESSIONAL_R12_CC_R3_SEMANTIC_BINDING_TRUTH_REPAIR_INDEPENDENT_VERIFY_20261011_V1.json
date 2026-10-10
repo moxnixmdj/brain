@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_R12_CC_R3_SEMANTIC_BINDING_TRUTH_REPAIR_INDEPENDENT_VERIFY_V1",
+  "date": "2026-10-11",
+  "status": "PASS__INDEPENDENT_SPRITE__4_OF_4__SEMANTIC_NON_ENTAILMENT_PROVED__CORRECTED_REGISTRY_GUARD_PASS__2_PROVED_1_OPEN_R4_FALSE",
+  "subject": {
+    "guard": {
+      "path": "canonical/runtime/professional_r12_cc_r3_semantic_binding_guard_v1.py",
+      "git_blob_sha": "19daa449e027556ec7208a73fd3fbfad51cdd3ca"
+    },
+    "tests": {
+      "path": "canonical/tests/test_professional_r12_cc_r3_semantic_binding_guard_v1.py",
+      "git_blob_sha": "95188f874853465431738e12a0837e8d0bb6e3c2"
+    },
+    "corrected_registry": {
+      "path": "canonical/governance/COVERAGE_ROOT_REGISTRY_PROFESSIONAL_R12_SEMANTIC_20261011_V4.json",
+      "git_blob_sha": "b40b0776ae8883995df4e4761a9ca39e2620556c"
+    }
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-professional-hard-defect-verify-20261010",
+    "carrier_id": "sprite-1bbb86ed-1f7c-409f-8397-fadc4de7a62a",
+    "workspace": "/home/sprite/r12-universal-positive-gate-v1",
+    "guard_tests_run": 4,
+    "guard_tests_passed": 4,
+    "guard_tests_failed": 0,
+    "registry_guard_pass": true,
+    "proved_root_ids": [
+      "CC_R1_REALITY_CONTAINMENT_V1",
+      "CC_R2_MISSION_SOUNDNESS_V1"
+    ],
+    "open_root_ids": [
+      "CC_R3_TERMINAL_CLOSURE_V1"
+    ],
+    "r4_proof_closure": false
+  },
+  "truth": {
+    "universal_positive_gate_safety_retained": true,
+    "safety_implies_full_leaf_acceptance": false,
+    "cc_r3_set_inclusion_proved": false,
+    "authority_transport_allowed": false,
+    "r4_proof_closure": false,
+    "semantic_property_truth_authority": false
+  },
+  "hard_nonclaims": [
+    "NO_CC_R3_SET_INCLUSION",
+    "NO_R4_CLOSURE",
+    "NO_R12_SEMANTIC_PROPERTY_TRUTH",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
