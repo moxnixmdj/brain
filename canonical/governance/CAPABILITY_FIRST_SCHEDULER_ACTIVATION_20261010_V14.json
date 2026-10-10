@@ -33,7 +33,7 @@
     "residual_ledger_path": "canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_RESIDUAL_LEDGER_20261010_V1.json",
     "residual_ledger_git_blob_sha": "ae5503829ad340cccef287f37ff70e4ab9288d33",
     "uncovered_partition_worklist_path": "canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_UNCOVERED_PARTITION_WORKLIST_20261010_V1.json",
-    "uncovered_partition_worklist_git_blob_sha": "c2c412c6a14ba9de3e127177a362095a88cd14c5",
+    "uncovered_partition_worklist_git_blob_sha": "07dee32099a252cad07e5630504dcb2fc252180f",
     "claim_scope_gate_activation_path": "canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_CERTIFICATE_GATE_ACTIVATION_20261010_V2.json",
     "claim_scope_gate_activation_git_blob_sha": "34fdaf7f4a91d0e28d446a9d554c3aa0fbec8222",
     "admitted_v2_chain_count": 0,
