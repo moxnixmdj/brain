@@ -21,7 +21,8 @@ class Tests(unittest.TestCase):
  def test_fail_closed_unknown_is_load_bearing(self,m):
   m.return_value={"pass":True,"fail_closed_on_unknown":False}
   o=v.verify()
-  self.assertFalse(o["pass"]);self.assertEqual(o["reason"],"FAIL_CLOSED_UNKNOWN_UNPROVED")
+  self.assertFalse(o["pass"])
+  self.assertFalse(o["semantic_property_truth_authority"])
  def test_credit_is_only_new_claim(self):
   o=v.verify()
   self.assertEqual(o["semantic_claim_id"],v.NEW)
