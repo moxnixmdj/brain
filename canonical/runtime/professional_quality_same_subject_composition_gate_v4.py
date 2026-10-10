@@ -37,6 +37,43 @@ def _base(status:str,*,passed:bool=False,**extra:Any)->dict[str,Any]:
  "promotion_authority":False,"terminal_authority":False,"terminal_credit_delta":0,**extra}
 def _fail(reason:str,**extra:Any)->dict[str,Any]: return _base("FAIL_CLOSED",reason=reason,**extra)
 
+def _r3_v2_binding_boundary(root:Path,binding:Mapping[str,Any])->str|None:
+ sup=binding.get("supersedes")
+ base_verify=binding.get("base_v1_verification")
+ base,base_blob,error=v3._read_bound(root,sup,label="R3_BASE_V1_BINDING")
+ if error:return error
+ verify,_,error=v3._read_bound(root,base_verify,label="R3_BASE_V1_VERIFICATION")
+ if error:return error
+ assert base is not None and base_blob is not None and verify is not None
+ if base.get("schema")!="PROJECT_BRAIN_PROFESSIONAL_QUALITY_ROOT_SUBJECT_BINDING_V1":return "R3_BASE_V1_SCHEMA_INVALID"
+ if base.get("root_id")!="R3_REALIZATION_OBSERVATION":return "R3_BASE_V1_ROOT_INVALID"
+ if (base.get("subject_kind"),base.get("subject_id"),base.get("subject_sha256"))!=(binding.get("subject_kind"),binding.get("subject_id"),binding.get("subject_sha256")):
+  return "R3_BASE_V1_SUBJECT_DRIFT"
+ if base.get("global_subject_identity_authority") is not False:return "R3_BASE_V1_GLOBAL_AUTHORITY_FORBIDDEN"
+ if base.get("terminal_authority") is not False:return "R3_BASE_V1_TERMINAL_AUTHORITY_FORBIDDEN"
+ if verify.get("root_subject_binding_authority") is not True:return "R3_BASE_V1_VERIFICATION_AUTHORITY_REQUIRED"
+ if (verify.get("exact_blobs") or {}).get("binding")!=base_blob:return "R3_BASE_V1_VERIFICATION_BLOB_MISMATCH"
+ if verify.get("terminal_authority") is not False:return "R3_BASE_V1_VERIFY_TERMINAL_AUTHORITY_FORBIDDEN"
+ if binding.get("global_r3_root_closed") is not False:return "R3_V2_GLOBAL_ROOT_CLOSURE_FORBIDDEN"
+ for field in ("root_subject_binding_authority","semantic_truth_authority","execution_authority","quality_authority","acceptance_authority","promotion_authority","terminal_authority"):
+  if binding.get(field) is not False:return "R3_V2_SELF_AUTHORITY_FORBIDDEN:"+field
+ return None
+
+def _verification_receipt_error(*,root_id:str,verification:Mapping[str,Any],binding_blob:str,subject_kind:str,subject_id:str,subject_sha:str)->str|None:
+ if root_id=="R3_REALIZATION_OBSERVATION" and verification.get("schema")=="PROJECT_BRAIN_PROFESSIONAL_QUALITY_R3_V7_ROOT_SUBJECT_BINDING_VERIFY_20261010_V2":
+  if verification.get("root_id")!=root_id:return "SUBJECT_BINDING_VERIFY_ROOT_MISMATCH"
+  if (verification.get("exact_blobs") or {}).get("v2_binding")!=binding_blob:return "SUBJECT_BINDING_VERIFY_BLOB_MISMATCH"
+  status=str(verification.get("status") or "")
+  replay=verification.get("replay") or {}
+  if not status.startswith("PASS__") or replay.get("package_execution")!="PASS" or not str(replay.get("verifier_status") or "").startswith("PASS__"):
+   return "SUBJECT_BINDING_VERIFY_NOT_PASS"
+  if verification.get("root_subject_binding_authority") is not True:return "ROOT_SUBJECT_BINDING_AUTHORITY_REQUIRED"
+  if verification.get("global_r3_root_closed") is not False:return "R3_VERIFY_GLOBAL_ROOT_CLOSURE_FORBIDDEN"
+  if verification.get("terminal_authority") is not False:return "SUBJECT_BINDING_VERIFY_TERMINAL_AUTHORITY_FORBIDDEN"
+  if "NO_SAME_SUBJECT_COMPOSITION_PASS" not in set(verification.get("hard_nonclaims") or []):return "R3_VERIFY_COMPOSITION_NONCLAIM_REQUIRED"
+  return None
+ return v3._verification_receipt_error(root_id=root_id,verification=verification,binding_blob=binding_blob,subject_kind=subject_kind,subject_id=subject_id,subject_sha=subject_sha)
+
 def evaluate(payload:Mapping[str,Any],*,repo_root:str|Path|None=None)->dict[str,Any]:
  if not isinstance(payload,Mapping):return _fail("PAYLOAD_NOT_OBJECT")
  root=Path(repo_root).resolve() if repo_root is not None else ROOT
@@ -79,12 +116,16 @@ def evaluate(payload:Mapping[str,Any],*,repo_root:str|Path|None=None)->dict[str,
   kind,sid,sha=binding.get("subject_kind"),binding.get("subject_id"),binding.get("subject_sha256")
   if not isinstance(kind,str) or not isinstance(sid,str) or not isinstance(sha,str) or len(sha)!=64:
    return _fail("SUBJECT_IDENTITY_INVALID",root_id=rid)
-  if binding.get("global_subject_identity_authority") is not False:return _fail("GLOBAL_SUBJECT_AUTHORITY_FORBIDDEN",root_id=rid)
-  if binding.get("terminal_authority") is not False:return _fail("SUBJECT_BINDING_TERMINAL_AUTHORITY_FORBIDDEN",root_id=rid)
+  if rid=="R3_REALIZATION_OBSERVATION":
+   boundary_error=_r3_v2_binding_boundary(root,binding)
+   if boundary_error:return _fail(boundary_error,root_id=rid)
+  else:
+   if binding.get("global_subject_identity_authority") is not False:return _fail("GLOBAL_SUBJECT_AUTHORITY_FORBIDDEN",root_id=rid)
+   if binding.get("terminal_authority") is not False:return _fail("SUBJECT_BINDING_TERMINAL_AUTHORITY_FORBIDDEN",root_id=rid)
   verification,_,error=v3._read_bound(root,row.get("verification"),label="SUBJECT_BINDING_VERIFICATION")
   if error:return _fail(error,root_id=rid)
   assert verification is not None
-  receipt_error=v3._verification_receipt_error(root_id=rid,verification=verification,binding_blob=bblob,subject_kind=kind,subject_id=sid,subject_sha=sha)
+  receipt_error=_verification_receipt_error(root_id=rid,verification=verification,binding_blob=bblob,subject_kind=kind,subject_id=sid,subject_sha=sha)
   if receipt_error:return _fail(receipt_error,root_id=rid)
   subjects.add((kind,sid,sha))
   verified.append({"root_id":rid,"binding_schema":binding.get("schema"),"subject_kind":kind,"subject_id":sid,"subject_sha256":sha,"subject_binding_git_blob_sha":bblob})
