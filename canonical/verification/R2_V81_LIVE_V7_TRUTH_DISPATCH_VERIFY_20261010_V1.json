@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_R2_V81_LIVE_V7_TRUTH_DISPATCH_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_BRANCH_BYTES__61_OF_61__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "branch": "successor/r2-v81-live-v7-truth-dispatch-20261010-v2",
+    "base_commit": "61d761773e3fc51136b33141d2384e78c2d46a5d",
+    "exact_blobs": {
+      "canonical/runtime/regcap_loss_cushion_truth_certificate_v5.py": "78d6919ea239146d258cef54561f1cd678cf89cc",
+      "canonical/runtime/semantic_truth_dispatch_v1.py": "1c70deffb9657b067a70fade6051d269df43ab32",
+      "canonical/runtime/loss_absorbing_cushion_regcap_grounding_v7.py": "8b41bf17be9045158d77c1f2d30207c30ea81643",
+      "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json": "e532cf950170c18767cac8392a5400de7387b682",
+      "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json": "50f0194142c2649d67bbaf6285b8e1dd8051ef43",
+      "canonical/tests/test_r2_v81_live_v7_truth_dispatch_reconciliation.py": "f2983838d26fa3d0e4d8acc839f7929bf174eb22"
+    }
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "name": "participial-disposition-verify-20261009-sol",
+    "sprite_id": "sprite-72f2a31b-c09c-49e0-bfe0-279786ee2d56",
+    "workspace": "/home/sprite/loss_cushion_pair_compose_verify"
+  },
+  "verification": {
+    "total_tests": 61,
+    "total_passed": 61,
+    "total_failed": 0,
+    "live_dispatch_consumes_v7_four_way_mrel": true,
+    "historical_v4_reproducible": true
+  },
+  "proved": [
+    "LIVE_REGCAP_LOSS_CUSHION_TRUTH_KIND_DISPATCHES_TO_V5",
+    "V5_PREDICATE_IDENTITY_BINDS_V7_GROUNDING_SCHEMA",
+    "LIVE_DISPATCH_CAN_CONSUME_V7_FOUR_WAY_MREL_RELATIVE_SELECTION",
+    "HISTORICAL_V4_REMAINS_DIRECTLY_REPRODUCIBLE_BUT_IS_NOT_LIVE_DISPATCH_TARGET",
+    "NO_GLOBAL_IDENTITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY_CREATED",
+    "R2_V81_AND_TERMINAL_AUTHORITY_BIND_EXACT_LIVE_PATH_BYTES"
+  ],
+  "hard_nonclaims": [
+    "NO_FINANCE_TAIL_CLOSURE",
+    "NO_OPEN_WORLD_ONTOLOGY_COMPLETENESS",
+    "NO_DIRECT_ROUTE_COUNT_DELTA",
+    "NO_ACCEPTANCE_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
