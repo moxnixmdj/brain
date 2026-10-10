@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R2_V7_ROOT_SUBJECT_BINDING_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__R2_BOUND_TO_V7_SUBJECT_WITH_VERIFIED_FINITE_GENERATOR_AND_PROOF_BOUND_STEP_BOUNDARY__INDEPENDENT_SPRITE_REPLAY__ZERO_QUALITY_OR_TERMINAL_AUTHORITY",
+  "exact_subject": {
+    "binding_path": "canonical/governance/PROFESSIONAL_QUALITY_R2_ROOT_SUBJECT_BINDING_20261010_V2.json",
+    "binding_git_blob_sha": "d16ec4ce481880e7b3ca85dab64ba2ead744f088",
+    "verifier_path": "canonical/runtime/professional_quality_r2_root_subject_binding_verify_v2.py",
+    "verifier_git_blob_sha": "f1352066d481b2311ebf6768be2ddbb5af1d87bb",
+    "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+    "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e"
+  },
+  "carrier": {
+    "name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/pq-r2-v7-binding-verify"
+  },
+  "replay": {
+    "py_compile": "PASS",
+    "verifier_pass": true,
+    "verifier_status": "PASS__R2_BOUND_TO_V7_SUBJECT_WITH_VERIFIED_FINITE_GENERATOR_AND_PROOF_BOUND_STEP_BOUNDARY",
+    "log_sha256": "399a1a546a601a715d0492014773b814c310ab540391c08da2f3f020942392e9"
+  },
+  "authority": {
+    "root_subject_binding_authority": true,
+    "semantic_truth_authority": false,
+    "execution_authority": false,
+    "quality_authority": false,
+    "acceptance_authority": false,
+    "promotion_authority": false,
+    "terminal_authority": false
+  },
+  "truth_boundary": {
+    "global_candidate_search_complete": false,
+    "real_task_step_receipt_proved": false,
+    "policy_adequacy_from_generation": false,
+    "candidate_artifact_realization_complete": false
+  },
+  "proves": [
+    "EXACT_V7_SUBJECT_TUPLE_BOUND",
+    "VERIFIED_22_BRANCH_FINITE_GENERATOR_BASIS_BOUND",
+    "VERIFIED_FINITE_SCOPE_SEARCH_SEMANTICS_BOUND",
+    "CALLER_SUPPLIED_CANDIDATE_GENERATION_STEP_RESULT_HAS_ZERO_V7_AUTHORITY",
+    "ACTUAL_V7_CANDIDATE_GENERATION_EXECUTION_REMAINS_GATED_BY_INDEPENDENT_CONTENT_ADDRESSED_STEP_RECEIPT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "next": "PROMOTE_R2_V7_ROOT_BINDING__ADVANCE_SAME_SUBJECT_FRONTIER_TO_2_OF_12__R3_NEXT"
+}

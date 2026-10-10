@@ -1,0 +1,82 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_ROOT_SUBJECT_BINDING_V1",
+  "date": "2026-10-10",
+  "status": "CANDIDATE_R2_V7_ROOT_SUBJECT_BINDING__FINITE_VERIFIED_GENERATOR_BASIS_PLUS_PROOF_BOUND_EXECUTION_BOUNDARY__AWAITING_INDEPENDENT_VERIFICATION__ZERO_QUALITY_OR_TERMINAL_AUTHORITY",
+  "root_id": "R2_CANDIDATE_SEARCH",
+  "subject_kind": "DECLARED_SYSTEM",
+  "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+  "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+  "subject": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V7_DECLARED_SYSTEM_SUBJECT_20261010_V6.json",
+    "git_blob_sha": "1d598bc8757017ceb34928d0df9f5fce859ef868"
+  },
+  "bridge_evidence": {
+    "generator_basis": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_R2_V7_CANDIDATE_GENERATOR_BASIS_20261010_V1.json",
+      "git_blob_sha": "b472f2c181ebad16c03747e2089b8205360ff612"
+    },
+    "generator_verification": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R2_V7_CANDIDATE_BRANCH_BASIS_VERIFY_20261010_V1.json",
+      "git_blob_sha": "e2f0143891f10961a15d6fc1e7faf97a0b81d9e8"
+    },
+    "proof_bound_profile_execution": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_P1_ROUTER_V7_PROOF_BOUND_STEP_VERIFY_20261010_V1.json",
+      "git_blob_sha": "b7a9df36780513ad73fd14c6a2756c8474d8434d"
+    },
+    "search_semantics": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_R2_SEARCH_SEMANTIC_SCOPE_20261010_V1.json",
+      "git_blob_sha": "c12893656c0546aafa79135dec221f2e5f7e9774"
+    },
+    "search_execution": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_R2_SCOPE_COMPLETE_SEARCH_SCOPE_20261010_V1.json",
+      "git_blob_sha": "b074b6e260cf2d5b534a822c3684171b1cc95b2e"
+    },
+    "search_semantic_verification": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R2_SEARCH_SEMANTIC_VERIFY_20261010_V1.json",
+      "git_blob_sha": "06da6b94712ec844a56c0f663cce67f059b7ba8d"
+    },
+    "search_execution_verification": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R2_SCOPE_COMPLETE_SEARCH_VERIFY_20261010_V1.json",
+      "git_blob_sha": "b66115513d1dde4527a65e5eda1ddea300138aca"
+    }
+  },
+  "binding_scope": {
+    "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+    "claim": "FOR_THE_EXACT_V7_DECLARED_SYSTEM_SUBJECT__THE_VERIFIED_FINITE_PROFILE_DERIVED_GENERATOR_DEFINES_A_DETERMINISTIC_BOUNDED_CANDIDATE_BRANCH_BASIS_FOR_ONE_EXACT_TARGET_AND_INCUMBENT__THE_EXISTING_FINITE_SEARCH_SEMANTICS_APPLY_ONLY_INSIDE_THAT_BASIS__AND_ANY_ACTUAL_V7_CANDIDATE_GENERATION_STEP_RESULT_REQUIRES_THE_V7_CONTENT_ADDRESSED_INDEPENDENT_STEP_BINDING",
+    "guarantees": [
+      "EXACT_V7_SUBJECT_TUPLE_BOUND",
+      "EXACT_V3_EXECUTION_PROFILE_BOUND",
+      "FINITE_PROFILE_DERIVED_CANDIDATE_BASIS_DETERMINISTIC",
+      "REAL_PROFILE_BASIS_HAS_22_BRANCHES_WITH_INCUMBENT_PRESERVED_EXACTLY_ONCE",
+      "GENERATED_UNIVERSE_IDENTITY_DEPENDS_ON_EXACT_TARGET_AND_INCUMBENT",
+      "EXISTING_FINITE_SEARCH_SEMANTICS_REUSED_WITHOUT_GLOBALIZING_SCOPE",
+      "CALLER_SUPPLIED_CANDIDATE_GENERATION_STEP_RESULTS_HAVE_ZERO_V7_AUTHORITY",
+      "ACTUAL_V7_CANDIDATE_GENERATION_STEP_RESULT_REQUIRES_INDEPENDENT_CONTENT_ADDRESSED_STEP_BINDING",
+      "POLICY_ADEQUACY_AND_TRUTHFUL_OBSERVATION_PREMISES_REMAIN_INDEPENDENT"
+    ],
+    "limitations": [
+      "NO_GLOBAL_CANDIDATE_SEARCH_COMPLETENESS",
+      "NO_OPEN_WORLD_HYPOTHESIS_COMPLETENESS",
+      "NO_POLICY_GENERATION_COMPLETENESS",
+      "NO_CANDIDATE_ARTIFACT_REALIZATION_COMPLETENESS",
+      "NO_POLICY_ADEQUACY_FROM_GENERATION",
+      "NO_REAL_TASK_STEP_RECEIPT_FROM_THIS_BINDING",
+      "NO_GLOBAL_R2_ROOT_CLOSURE",
+      "NO_SAME_SUBJECT_COMPOSITION_PASS",
+      "NO_LIVE_DEFAULT_PROMOTION"
+    ]
+  },
+  "generator_is_external_root_support": true,
+  "candidate_generator_inside_subject_required": false,
+  "actual_v7_step_receipt_required_for_execution": true,
+  "global_subject_identity_authority": false,
+  "root_subject_binding_authority": false,
+  "semantic_truth_authority": false,
+  "execution_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
