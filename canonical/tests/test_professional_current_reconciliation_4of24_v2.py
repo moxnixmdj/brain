@@ -35,7 +35,7 @@ class Tests(unittest.TestCase):
         a=load("canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json")
         m=load("canonical/governance/CURRENT_MISSION_OBJECTIVE.json")
         self.assertIn("TWELVE_SEMANTIC_LEAVES_REDUCED_TO_CLAIM_SCOPED_TOTALITY",s["status"])
-        self.assertIn("NO_PROPERTY_TRUTH_CREDIT",s["status"])
+        self.assertIn("ZERO_PROPERTY_TRUTH_CREDIT",s["status"])
         self.assertEqual(p["semantic_totality_reduction"]["git_blob_sha"],blob("canonical/verification/PROFESSIONAL_SEMANTIC_TOTALITY_REDUCTION_VERIFY_20261010_V1.json"))
         self.assertEqual(a["semantic_totality_reduction"]["git_blob_sha"],blob("canonical/verification/PROFESSIONAL_SEMANTIC_TOTALITY_REDUCTION_VERIFY_20261010_V1.json"))
         self.assertEqual(m["semantic_totality_reduction_reconciliation"]["observed_git_blob_sha"],blob("canonical/verification/PROFESSIONAL_SEMANTIC_TOTALITY_REDUCTION_VERIFY_20261010_V1.json"))
