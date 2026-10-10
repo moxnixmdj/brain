@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_ARTIFACTCONFIG_MAIN_SERVICE_BRIDGE_REPAIR_20261010_V1",
+  "date": "2026-10-10",
+  "status": "VERIFIED_GENERIC_REPAIR__STRING_AND_ARTIFACTCONFIG_TABLE_FORMS__MAIN_SERVICE_ONLY_AGENT_BINDING__ZERO_CREDIT",
+  "root_cause_truth": {
+    "path": "canonical/verification/TB_SCIENCE_RANK18_V1_PRESTART_ABORT_TRUTH_20261010_V1.json",
+    "git_blob_sha": "fd53eecbf4d974e45c936d592005f5f7d518e87d",
+    "observed_error": "TASK_ARTIFACT_PATH_INVALID"
+  },
+  "runtime": {
+    "path": "canonical/runtime/task_artifact_authority_v1.py",
+    "git_blob_sha": "621efe77fe02c12ef4b6580daaeeaa313988698f"
+  },
+  "verification": {
+    "path": "canonical/verification/TASK_ARTIFACT_AUTHORITY_V1_PUBLIC_VERIFY_20261010_V1.json",
+    "git_blob_sha": "82bf3a955612aeac952663cbf0979229b84d6028"
+  },
+  "contract": {
+    "accepted_forms": [
+      "ABSOLUTE_PATH_STRING",
+      "MAPPING_WITH_SOURCE_AND_OPTIONAL_SERVICE"
+    ],
+    "legacy_string_service": "main",
+    "main_agent_injection_rule": "ONLY_ARTIFACT_ROWS_WHOSE_NORMALIZED_SERVICE_EQUALS_main",
+    "non_main_service_role": "PRESERVED_AS_TASK_METADATA_BUT_NOT_INJECTED_AS_MAIN_AGENT_FINISH_POSTCONDITION",
+    "malformed_config": "FAIL_CLOSED",
+    "traversal_or_unsafe_main_path": "FAIL_CLOSED"
+  },
+  "rank18_effect": {
+    "prior_activation_reusable": false,
+    "prior_authority_reusable": false,
+    "benchmark_trials_consumed_delta": 0,
+    "fresh_rank18_authority_may_be_issued_only_after_public_carrier_mirrors_exact_verified_runtime": true
+  },
+  "terminal_credit_delta": 0
+}
