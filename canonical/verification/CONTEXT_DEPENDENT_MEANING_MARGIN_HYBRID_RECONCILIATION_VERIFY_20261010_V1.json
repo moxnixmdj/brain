@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_CONTEXT_DEPENDENT_MEANING_MARGIN_HYBRID_RECONCILIATION_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_BRANCH_STATE_FILES__CURRENT_R2_ROOT2_BYTES_UNCHANGED__MARGIN_REMAINS_OPEN__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "context-meaning-margin-hybrid-reconcile-20261010-sol",
+    "exact_blobs": {
+      "canonical/action_intents/ACTION_INTENT_CONTEXT_DEPENDENT_MEANING_POSITIVE_COVERAGE_20261010_V1.json": "37e37c295360a9466ed5c44f583857d762141c57",
+      "canonical/reasoning/2026-10-10_CONTEXT_DEPENDENT_MEANING_RESEARCH_HANDOFF_V1.json": "5e3404e19983309fbd7e5740499b923556ff0e41",
+      "canonical/reasoning/2026-10-10_CONTEXT_DEPENDENT_MEANING_SUCCESSOR_EXECUTION_LEDGER_V1.json": "b6b99c15b244b490c67480bb1f1e3bde3ceaaa57"
+    }
+  },
+  "independent_carrier": {
+    "name": "participial-disposition-verify-20261009-sol",
+    "sprite_id": "sprite-72f2a31b-c09c-49e0-bfe0-279786ee2d56",
+    "workspace": "/home/sprite/context_handoff_verify"
+  },
+  "load_bearing_replay": {
+    "current_r2_git_blob_sha": "c94c84aaf3c759abd6827c1ff93181c04033b6a1",
+    "root2_v64_git_blob_sha": "88d62359c8e3cd4c4c6c775355e4370c63ea251b",
+    "hybrid_margin_verification_git_blob_sha": "a488cb134493bcc591b44e7d13b4804b6ffadd81",
+    "hybrid_margin_runtime_git_blob_sha": "9eb10dd4aaf9993d2bee6ca390f42d99b4fbe788",
+    "open_world_hypothesis_guard_v4_git_blob_sha": "03424b87b8f96dcba70847541b48be58ffe520f8",
+    "current_r2_unchanged_on_branch": true,
+    "root2_unchanged_on_branch": true
+  },
+  "checks": [
+    "ALL_THREE_SUCCESSOR_STATE_JSON_FILES_PARSE",
+    "RECORDED_R2_AND_ROOT2_GIT_BLOB_SHAS_MATCH_CURRENT_LOAD_BEARING_BYTES",
+    "R2_STILL_REPORTS_ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL",
+    "ROOT2_STILL_REPORTS_ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL",
+    "NAKED_MARGIN_CASE_IS_EXPLICITLY_UNRESOLVED",
+    "OPEN_WORLD_REMAINDER_IS_MANDATORY",
+    "OEWN_ONLY_MARGIN_FINANCE_COMPLETENESS_IS_EXPLICITLY_FORBIDDEN",
+    "SUCCESSOR_LEDGER_RECORDS_HYBRID_MARGIN_MERGE_AND_OPEN_WORLD_GUARD_REUSE",
+    "TERMINAL_CREDIT_DELTA_REMAINS_ZERO"
+  ],
+  "authority_changes": {
+    "current_r2_mutated": false,
+    "root2_mutated": false,
+    "terminal_authority_mutated": false,
+    "acceptance_authority_mutated": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_FINANCE_SEMANTIC_TAIL_CLOSURE",
+    "NO_MARGIN_SENSE_SELECTION_FOR_UNDERSPECIFIED_TEXT",
+    "NO_OPEN_WORLD_FINANCE_COMPLETENESS",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ]
+}
