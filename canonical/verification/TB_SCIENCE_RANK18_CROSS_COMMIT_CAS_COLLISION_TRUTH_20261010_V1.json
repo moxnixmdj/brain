@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK18_CROSS_COMMIT_CAS_COLLISION_TRUTH_20261010_V1",
+  "date": "2026-10-10",
+  "status": "CONFIRMED_PROTOCOL_DEFECT__FIRST_START_AUTHORITATIVE__SECOND_START_UNAUTHORIZED_DUPLICATE__ALL_FURTHER_RANK18_ACTIVATION_REVOKED",
+  "slot_id": "terminal-bench-science/longitudinal-clinical-agent::trial-0",
+  "task_digest": "sha256:e9a166b2173f7014d4f1559505397b221f94bc446eab031f94791b35e0e5f1c9",
+  "logical_attempt_id": "a02ee7de469f953679fb593ab152a9f67eb1ebe8c364f8c748f18cd8a81eab8d",
+  "root_cause": "GITHUB_STATUS_OBJECT_STORE_IS_COMMIT_SHA_SCOPED__SAME_SLOT_CAS_KEY_ON_DIFFERENT_PR_MERGE_COMMITS_DOES_NOT_SHARE_VISIBILITY",
+  "first_authoritative_start": {
+    "activation_pull_request": 2555,
+    "workflow_run_id": 38029667582,
+    "workflow_job_id": 114147765133,
+    "github_sha": "b3d03e27eeace12eb281caf5086c3effcf26b449",
+    "cas_namespace_hash": "5d0482903787",
+    "cas_key_hash": "ed788daa3e35aa390c5acdfd978082560c4c72c0917aba1bd3b2254194f1038a",
+    "cas_object_sha256": "30a923d02a30fbe7ca3ee588ad72573259062511b2f3d265f6d3d7d2ae0a0e00",
+    "manifest_committed_at": "2026-10-10T06:11:56Z",
+    "task_started": true,
+    "authorized": true
+  },
+  "unauthorized_duplicate_start": {
+    "activation_pull_request": 2556,
+    "workflow_run_id": 38030021656,
+    "workflow_job_id": 114148806597,
+    "github_sha": "517a7b12d4600829059b24d1c5417c0f6da75b46",
+    "cas_namespace_hash": "5d0482903787",
+    "cas_key_hash": "ed788daa3e35aa390c5acdfd978082560c4c72c0917aba1bd3b2254194f1038a",
+    "cas_object_sha256": "b662fc9a7f578d00725420c02e9f97b40146df09c4fd88fb078674083d739934",
+    "manifest_committed_at": "2026-10-10T06:16:24Z",
+    "task_started": true,
+    "authorized": false,
+    "pull_request_closed_unmerged": true,
+    "result_credit_authority": false
+  },
+  "accounting": {
+    "authorized_rank18_slot_consumptions": 1,
+    "physical_post_start_runs_observed": 2,
+    "consumed_slots_after_authorized_start": 18,
+    "duplicate_run_must_not_create_retry_replacement_or_acceptance_credit": true,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0,
+    "incremental_spend_usd": 0
+  },
+  "revocations": {
+    "rank18_v4_fresh_activation_authority": false,
+    "any_further_rank18_activation": false,
+    "replay_authority": false,
+    "replacement_carrier_authority": false
+  },
+  "required_repair": "MOVE_DURABLE_START_CAS_TO_SLOT_GLOBAL_STORAGE_OR_CROSS_COMMIT_CANONICAL_COORDINATE__PROVE_TWO_DISTINCT_PR_MERGE_SHAS_CONTEND_ON_ONE_ATOMIC_SLOT_KEY_BEFORE_ANY_NEXT_SLOT",
+  "first_result_pending": true,
+  "duplicate_result_must_be_quarantined": true
+}
