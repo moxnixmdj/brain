@@ -84,6 +84,6 @@ def test_current_professional_quality_projects_complete_bounded_root_semantics_w
     assert current["quality_authority"] is False
     assert current["terminal_authority"] is False
     assert current["terminal_credit_delta"] == 0
-    assert current["next"].startswith("BIND_REAL_SAME_SUBJECT_ROOT_RECEIPTS_FOR_ONE_EXACT_ARTIFACT_OR_SYSTEM")
+    assert current["next"].startswith("VERIFY_ACTUAL_V2_SYSTEM_INTEGRATION_PER_ROOT_AND_BIND_FIRST_REAL_ROOT_SUBJECT_RECEIPT")
     assert "NO_PROFESSIONAL_QUALITY_COMPLETENESS_PROOF" in current["hard_nonclaims"]
     assert "NO_REAL_ARTIFACT_OR_SYSTEM_BOUND_TO_ALL_TWELVE_ROOTS_YET" in current["hard_nonclaims"]
