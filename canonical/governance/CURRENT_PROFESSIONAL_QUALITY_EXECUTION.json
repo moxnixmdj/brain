@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_PROFESSIONAL_QUALITY_EXECUTION_POINTER_V1",
   "date": "2026-10-10",
-  "status": "P1_V3_LIVE_UNCHANGED__SHARED_SEMANTIC_CONTRACT_V2_REPAIRED__12_OF_12_SUCCESSOR_SEMANTIC_CLAIMS_GENERATED_AND_SCOPE_COMPLETE__PROPERTY_TRUTH_12_OF_24__ALL_12_EXECUTION_LEAVES_VERIFIED__NOT_LIVE_DEFAULT",
+  "status": "P1_V3_LIVE_UNCHANGED__SHARED_SEMANTIC_CONTRACT_V2_REPAIRED__12_OF_12_SUCCESSOR_SEMANTIC_CLAIMS_REBOUND_TO_EXACT_V9_AND_SCOPE_COMPLETE__PROPERTY_TRUTH_12_OF_24__ALL_12_EXECUTION_LEAVES_VERIFIED__NOT_LIVE_DEFAULT",
   "profile_path": "canonical/governance/PROFESSIONAL_QUALITY_P1_EXECUTION_PROFILE_20261010_V3.json",
   "profile_sha": "f7e89eafbb691c16d1bdf5b8d295a468d5e3bec5",
   "router_path": "canonical/runtime/professional_quality_p1_router_v3.py",
@@ -786,7 +786,7 @@
     "quality_authority": false,
     "terminal_authority": false
   },
-  "exact_next": "PROFESSIONAL:PROVE_PROPERTY_TRUTH_FOR_THE_12_V2_SUCCESSOR_SEMANTIC_CLAIMS__REUSE_SHARED_CERTIFY_OR_FAIL_CLOSED_TOTALITY__TYPED_EVIDENCE__LOSSLESS_GENERATOR__POLICY_COVER__AND_NONVACUITY_MACHINERY__DO_NOT_REOPEN_CLAIM_OR_SCOPE_CONSTRUCTION__KEEP_PROPERTY_TRUTH_12_OF_24_UNCHANGED_UNTIL_INDEPENDENT_RECEIPTS_PASS",
+  "exact_next": "PROFESSIONAL:PROVE_PROPERTY_TRUTH_FOR_THE_12_EXACT_V9_V2_SUCCESSOR_SEMANTIC_CLAIMS__REUSE_HARDENED_CERTIFY_OR_FAIL_CLOSED_ADMISSION__TYPED_EVIDENCE__LOSSLESS_GENERATOR__POLICY_COVER__AND_NONVACUITY__DO_NOT_REOPEN_CLAIM_OR_SCOPE_CONSTRUCTION__KEEP_PROPERTY_TRUTH_12_OF_24_UNCHANGED_UNTIL_INDEPENDENT_RECEIPTS_PASS",
   "r12_v8_reuse_closure_current": {
     "path": "canonical/governance/PROFESSIONAL_V8_R12_REUSE_CLOSURE_20261010_V1.json",
     "git_blob_sha": "5ee3d7405ac9a16e6d872b3e05a147ec10abd419",
@@ -907,5 +907,17 @@
     "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
     "new_primitive_required": false,
     "terminal_credit_delta": 0
+  },
+  "semantic_v2_v9_claim_batch_current": {
+    "runtime_path": "canonical/runtime/professional_semantic_v2_v9_claim_batch_v1.py",
+    "runtime_git_blob_sha": "d65f58b8b4988b96590619d8eb86d3343095e66d",
+    "domain_runtime_path": "canonical/runtime/professional_quality_whole_leaf_domain_equivalence_v2.py",
+    "domain_runtime_git_blob_sha": "8e99e973fbed969abbbb9128bce966681cad9312",
+    "verification_path": "canonical/verification/PROFESSIONAL_SEMANTIC_V2_V9_CLAIM_BATCH_INDEPENDENT_VERIFY_20261011_V1.json",
+    "claim_count": 12,
+    "scope_complete_count": 12,
+    "property_truth_count": 0,
+    "subject_id": "PROFESSIONAL_QUALITY_P1_V9_EXECUTABLE_TOTALITY_SEMANTICS_SYSTEM_20261010_V8",
+    "subject_sha256": "adf7f09e1913526e460b7350c02cd148c2cd14de90eed33fa7fae84d395d9912"
   }
 }
