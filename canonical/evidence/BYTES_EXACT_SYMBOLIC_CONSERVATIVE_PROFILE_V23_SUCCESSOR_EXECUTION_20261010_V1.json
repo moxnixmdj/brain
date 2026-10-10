@@ -1,0 +1,116 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_CONSERVATIVE_PROFILE_V23_SUCCESSOR_EXECUTION_V1",
+  "status": "FRESH_SUCCESSOR_EXECUTION__CONSERVATIVE_SPENT_NEXT27_ZERO_HIT_PRUNE__ZERO_PROMOTION_CREDIT",
+  "recorded_at": "2026-10-10",
+  "predecessor": {
+    "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_FULL_PROFILE_V22_SUCCESSOR_EXECUTION_20261010_V1.json",
+    "package_raw_python_source_bytes": 2089068,
+    "B_exec_raw_python_source_bytes": 2091828,
+    "archive_bytes": 311496,
+    "qualification": "8050/8050",
+    "manifest_sha256": "84a4947df1815c9dd5e9a82ba25670ee051f6a7bb3e05f904e17445fe8abd6e4"
+  },
+  "selection": {
+    "id": "CONSERVATIVE_SPENT_NEXT27_ZERO_HIT_PROFILE_V23",
+    "corpus": "QUAL_SUCCESSOR_NEXT27_20261010_V1",
+    "spent_cases": 8050,
+    "method": "Local Python-start monitoring over the previously zero-hit candidate pool across the complete spent NEXT27 operation set.",
+    "candidate_pool_size": 624,
+    "monitored_zero_hit_count": 621,
+    "selected_function_bodies": 20,
+    "guardrail": "Avoided tempting low-level core constructors and numeric primitives after prior quartic falsifications demonstrated latent rare-path use."
+  },
+  "structural_cut": {
+    "id": "CONSERVATIVE_SPENT_NEXT27_ZERO_HIT_FUNCTION_PRUNE_V23",
+    "selected": [
+      "sympy.simplify.radsimp.radsimp",
+      "sympy.functions.elementary.trigonometric.tan.eval",
+      "sympy.functions.elementary.exponential.log._eval_nseries",
+      "sympy.functions.elementary.trigonometric.cot.eval",
+      "sympy.simplify.simplify.nsimplify",
+      "sympy.functions.elementary.miscellaneous.MinMaxBase._collapse_arguments",
+      "sympy.functions.special.gamma_functions.uppergamma.eval",
+      "sympy.polys.polytools.groebner",
+      "sympy.polys.polytools.poly",
+      "sympy.functions.elementary.complexes.principal_branch.eval",
+      "sympy.functions.elementary.trigonometric.asin._eval_nseries",
+      "sympy.functions.elementary.trigonometric.acos._eval_nseries",
+      "sympy.simplify.radsimp.collect_const",
+      "sympy.functions.elementary.hyperbolic.acosh.eval",
+      "sympy.simplify.simplify._separatevars",
+      "sympy.functions.elementary.trigonometric.acsc._eval_nseries",
+      "sympy.functions.elementary.trigonometric.asec._eval_nseries",
+      "sympy.polys.polytools.lcm_list",
+      "sympy.matrices.matrixbase.MatrixBase.diag",
+      "sympy.functions.elementary.hyperbolic.coth.eval"
+    ],
+    "module_graph_unchanged": true,
+    "spent_NEXT27_before_fresh_gate": "8050/8050"
+  },
+  "measured_candidate": {
+    "status": "PHYSICALLY_REWRITTEN_RESEARCH_CANDIDATE__NOT_PROMOTED",
+    "python_files": 277,
+    "package_raw_python_source_bytes": 2045561,
+    "router_raw_python_source_bytes": 2760,
+    "B_exec_raw_python_source_bytes": 2048321,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "manifest_sha256": "0566f7127b810bfb1e379ccbbd2901255d13fb372063de8df72b7a2a70635223",
+    "raw_improvement_vs_V22_bytes": 43507,
+    "archive_bytes": 303072,
+    "archive_sha256": "54d4ef31b262a47fd6453fba493ec4ebdadd6212cf868f9c95f684d449d0734f",
+    "archive_improvement_vs_V22_bytes": 8424
+  },
+  "qualification": {
+    "spent_NEXT27": {
+      "id": "QUAL_SUCCESSOR_NEXT27_20261010_V1",
+      "cases": 8050,
+      "candidate": "8050/8050",
+      "spent": true
+    },
+    "fresh_NEXT28": {
+      "id": "QUAL_SUCCESSOR_NEXT28_20261010_V1",
+      "seed": 5291502,
+      "per_operation_budget": 720,
+      "cases": 8280,
+      "corpus_sha256": "6b6841e6a62185bfaa397358f14af68474c5d9a9be6290b166ec09b6ab890549",
+      "stock_donor": "8280/8280",
+      "candidate": "8280/8280",
+      "independent_copy": "8280/8280",
+      "archive_replay": "8280/8280",
+      "spent": true
+    }
+  },
+  "reproducibility": {
+    "predecessor_reconstruction": "canonical/research/bytes/tools/rebuild_candidate_v22.py",
+    "transform": "canonical/research/bytes/tools/conservative_profile_prune_v23.py",
+    "successor_reconstruction": "canonical/research/bytes/tools/rebuild_candidate_v23.py",
+    "route": "canonical/research/bytes/tools/exact_symbolic_route_v1.py",
+    "semantic_digest": "canonical/research/bytes/tools/semantic_digest_v1.py",
+    "qualification_generator": "canonical/research/bytes/tools/generate_qualification_v1.py"
+  },
+  "durable_artifact": {
+    "library_status": "PERSISTED_IN_CHATGPT_LIBRARY",
+    "library_file_id": "libfile_13ca2c372a948191be2d17b9106b5961",
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V23_SUCCESSOR_20261010_V1.tar.xz",
+    "bytes": 303072,
+    "sha256": "54d4ef31b262a47fd6453fba493ec4ebdadd6212cf868f9c95f684d449d0734f"
+  },
+  "next_frozen_qualification": {
+    "id": "QUAL_SUCCESSOR_NEXT29_20261010_V1",
+    "seed": 5385164,
+    "per_operation_budget": 740,
+    "cases": 8510,
+    "corpus_sha256": "44bdcb92e5692b09fa07cb5f5ce615b9dbc94d7543f4e580fcebbcd76771de11",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT"
+  },
+  "truth_boundary": [
+    "MEASURED: exact 2,045,561-byte V23 passes spent NEXT27 8,050/8,050.",
+    "MEASURED: exact V23 passes previously untouched NEXT28 8,280/8,280 on stock donor, candidate, independent copy, and extracted archive.",
+    "MEASURED: V23 is 43,507 raw Python-source bytes smaller than V22 and its source archive is 8,424 bytes smaller.",
+    "INFERRED: the 20 V23 stubs are outside the tested bounded route; finite profile non-use is not universal proof.",
+    "NOT CLAIMED: universal SymPy correctness, absolute information-theoretic minimum, out-of-scope behavior preservation, or Opus-family promotion.",
+    "PROMOTION CREDIT: 0."
+  ],
+  "next_action": "Rerank exact V23 using spent NEXT28 only. Keep NEXT29 untouched until a new physical cut is frozen.",
+  "promotion_credit": 0
+}
