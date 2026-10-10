@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V51",
+  "date": "2026-10-10",
+  "status": "CURRENT_RANK20_V6_FRESH_CLAIM_STAGED__START_CAS_IMPORT_REPAIR_VERIFIED__PUBLIC_RESEAL_REQUIRED__ZERO_EXPOSURE",
+  "predecessor": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V50.json",
+    "git_blob_sha": "2075c175f9d8c97422c57db1318837bfb004e032"
+  },
+  "staged_authority": {
+    "path": "canonical/governance/TB_SCIENCE_RANK20_ONE_SLOT_EXECUTION_AUTHORITY_20261010_V6.json",
+    "git_blob_sha": "d6762479d1706d64df6ae73b07fae364bf6783f9"
+  },
+  "claim_binding": {
+    "path": "canonical/governance/TB_SCIENCE_RANK20_LOGICAL_ATTEMPT_CLAIM_BINDING_20261010_V6.json",
+    "git_blob_sha": "8b416b8dc6702cec573b2247050d16f07d3a3dc8",
+    "execution_claim_binding_digest": "sha256:3c4801910a41d14fc31bc7ec5e4b0f3467154aed5e8ac914f727cb6773d10860",
+    "logical_attempt_id": "f3d4e55a96b3d2dddb85e4f3c5e085d83ab9f7e6c186bba00b0146a528f339b7"
+  },
+  "claim_verification": {
+    "path": "canonical/verification/TB_SCIENCE_RANK20_V6_CLAIM_BINDING_INDEPENDENT_VERIFY_20261010_V1.json",
+    "git_blob_sha": "b2bc5c9c53d1f6060e15e966a7351a7cac741389",
+    "pass": true
+  },
+  "counts": {
+    "benchmark_trials_consumed": 18,
+    "consumed_successes_final": 0,
+    "consumed_failures_final": 18,
+    "started_result_pending": 0,
+    "finalized_slots": 18,
+    "active_in_flight_slot_count": 0
+  },
+  "next_slot": {
+    "ledger_schedule_rank": 20,
+    "frozen_manifest_schedule_order": 19,
+    "task_rank": 19,
+    "slot_id": "terminal-bench-science/hysteretic-aquifer-control::trial-0",
+    "task_digest": "sha256:681df0c3b2ada03a933ac4d2e11f07983676f87a9f26b61e416987904b880289"
+  },
+  "prior_logical_attempt_id": "c7a02ecc6b11f4338120f05cd922370d361ce79e104549f95b656df3b51cb2bb",
+  "prior_execution_claim_binding_digest": "sha256:aa0d91d18bb597319414b7385a92248992c093e14bf9c8f5677b72c05cb09beb",
+  "logical_attempt_id": "f3d4e55a96b3d2dddb85e4f3c5e085d83ab9f7e6c186bba00b0146a528f339b7",
+  "execution_claim_binding_digest": "sha256:3c4801910a41d14fc31bc7ec5e4b0f3467154aed5e8ac914f727cb6773d10860",
+  "claim_epoch_id": "RANK20_V13_START_CAS_IMPORT_REPAIR_20261010_V6",
+  "rank20_task_read_history": false,
+  "rank20_task_started": false,
+  "rank20_start_cas_acquired": false,
+  "rank20_benchmark_trials_consumed": 0,
+  "scheduler": {
+    "frozen": true,
+    "reason": "RANK20_V6_FRESH_CLAIM_STAGED__PUBLIC_ZERO_EXPOSURE_RESEAL_REQUIRED",
+    "only_authorized_transition": "PUBLIC_ZERO_EXPOSURE_RESEAL_AGAINST_V6_CANONICAL_AUTHORITY_AND_LEDGER"
+  },
+  "execution_authority": false,
+  "task_read_authority": false,
+  "activation_authority": false,
+  "repair_authority": "ZERO_EXPOSURE_RESEAL_ONLY",
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
