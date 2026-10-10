@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_CERTIFIED_REACHED_ESCAPE_STATE_FABRIC_PROMOTION_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_BRANCH_BYTES__FABRIC_PY_COMPILE__EDGE_BINDING_PASS__CONSTRUCTOR_6_OF_6_PASS__GLOBAL_TOTALITY_OPEN__ZERO_CREDIT",
+  "subjects": {
+    "constructor": {
+      "path": "canonical/runtime/certified_reached_escape_state_constructor_v1.py",
+      "git_blob_sha": "5cfce3cd753877ecd37d37082f2acd3e4883bfbf"
+    },
+    "fabric": {
+      "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
+      "git_blob_sha": "b1e68fc1627954706de686d2db297efee08dd6f8"
+    },
+    "boundary_regression": {
+      "path": "canonical/tests/test_reached_escape_construction_invariant_boundary_v1.py",
+      "git_blob_sha": "4e21d94009a92b85d7da84165154e072e75459ea"
+    },
+    "constructor_tests": {
+      "path": "canonical/tests/test_certified_reached_escape_state_constructor_v1.py",
+      "git_blob_sha": "318cf37347992502e2edf591a68d934713c4368c"
+    },
+    "finite_totality": {
+      "path": "canonical/runtime/reached_escape_finite_totality_certificate_v1.py",
+      "git_blob_sha": "85487335b7e774ac9084b34c60e0175842771036"
+    }
+  },
+  "independent_execution": {
+    "carrier": "SPRITE",
+    "sprite_name": "brain-escape-constructor-verify-20261010",
+    "sprite_id": "sprite-e06542b9-2666-4407-97ac-e52e4da64ca2",
+    "source_transport": "EXACT_CONTENT_ADDRESSED_BRANCH_BYTES",
+    "fabric_py_compile": "PASS",
+    "boundary_test_py_compile": "PASS",
+    "structural_edge_check": "PASS_FABRIC_CERTIFIED_REACHED_STATE_EDGE",
+    "constructor_tests_run": 6,
+    "constructor_tests_passed": 6
+  },
+  "proved": [
+    "LIVE_REACHED_ESCAPE_STATE_DESCRIPTOR_POINTS_TO_CERTIFIED_CONSTRUCTOR",
+    "LIVE_REACHED_ESCAPE_STATE_DISPATCH_IMPORTS_AND_CALLS_CERTIFIED_CONSTRUCTOR",
+    "OLD_DIRECT_KERNEL_DISPATCH_EDGE_IS_ABSENT",
+    "CERTIFIED_COMMON_POLICY_AND_SPLITTABLE_STATES_REMAIN_ADMISSIBLE",
+    "UNCOVERED_OR_UNSPLITTABLE_STATES_ARE_REJECTED_WITH_CONTENT_ADDRESSED_REPAIR",
+    "THE_PREVIOUS_TWO_REGION_NO_DISCRIMINATOR_COUNTEREXAMPLE_IS_NO_LONGER_ADMITTED_AS_A_CERTIFIED_LIVE_FABRIC_STATE"
+  ],
+  "residual": {
+    "full_repository_integration_replay_performed": false,
+    "global_repair_acquirability_proved": false,
+    "global_escape_progress_totality_proved": false,
+    "open_ended_mission_terminal_proved": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_EVERY_REQUIRED_REPAIR_IS_ACQUIRABLE",
+    "NO_GLOBAL_ESCAPE_PROGRESS_TOTALITY",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
