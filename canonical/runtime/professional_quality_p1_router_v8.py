@@ -31,6 +31,10 @@ BEHAVIOR_ID="PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001"
 SUBJECT_REF_KEY="declared_system_subject"
 STEP_BINDINGS_KEY="professional_step_bindings"
 FINAL_STEP=step_auth.FINAL_STEP
+R12_PROPERTY_CLAIM_ID="11870f850b46bcfcc31094f764fc4f45c911aaac413979ceb62679ff19a53162"
+R12_SCOPE_CLAIM_ID="05b74983836dd1f6a13a0db72443246fb74f99548f0d982a769a6a7e572e9e85"
+R12_MATERIAL_OBLIGATION="ALL_ROOT_RELEVANT_MATERIAL_DEFEATERS_RESOLVED_OR_PROVED_DECISION_NULL_BEFORE_POSITIVE_CERTIFICATION"
+R12_SCOPE_SEMANTICS="ALL_ROOT_RELEVANT_MATERIAL_DEFEATERS_FOR_EXACT_RUN_CONTEXT_AND_EVIDENCE"
 
 AUTHENTICATED_STEPS=(
     "GENERATE_DIVERSE_CANDIDATE_BRANCHES_WITH_INCUMBENT_PRESERVATION",
@@ -99,6 +103,47 @@ def _load_subject(ref:Any,*,root:Path)->tuple[dict[str,Any]|None,dict[str,Any]]:
     if missing:
         return None,_fail("V8_LOAD_BEARING_COMPONENTS_NOT_IN_SUBJECT",missing_component_paths=missing)
     return doc,verified
+
+def _semantic_totality_documents_ok(cert:Any, verification:Any)->dict[str,Any]:
+    if not isinstance(cert,Mapping) or not isinstance(verification,Mapping):
+        return {"pass":False,"reason":"R12_TOTALITY_SEMANTIC_DOCUMENT_REQUIRED"}
+    required={
+        "semantic_property_claim_id":R12_PROPERTY_CLAIM_ID,
+        "semantic_scope_claim_id":R12_SCOPE_CLAIM_ID,
+        "semantic_obligation":R12_MATERIAL_OBLIGATION,
+        "target_scope_semantics":R12_SCOPE_SEMANTICS,
+    }
+    for field,expected in required.items():
+        if cert.get(field)!=expected:
+            return {"pass":False,"reason":"R12_TOTALITY_CERT_SEMANTIC_BINDING_MISMATCH:"+field}
+        if verification.get(field)!=expected:
+            return {"pass":False,"reason":"R12_TOTALITY_VERIFY_SEMANTIC_BINDING_MISMATCH:"+field}
+    if verification.get("semantic_binding_verified") is not True:
+        return {"pass":False,"reason":"R12_TOTALITY_SEMANTIC_BINDING_NOT_INDEPENDENTLY_VERIFIED"}
+    return {"pass":True,"status":"PASS__R12_TOTALITY_SEMANTICS_EXACTLY_BOUND"}
+
+def _authenticate_r12_totality_semantics(binding:Any,*,root:Path)->dict[str,Any]:
+    if not isinstance(binding,Mapping):
+        return {"pass":False,"reason":"R12_FINAL_BINDING_REQUIRED"}
+    try:
+        cert,_,cert_blob=step_auth.base._bound_json(
+            binding.get("material_totality_certificate"),
+            repo_root=root,
+            prefixes=("canonical/governance/","canonical/evidence/","canonical/verification/"),
+        )
+        verify,_,_=step_auth.base._bound_json(
+            binding.get("material_totality_verification"),
+            repo_root=root,
+            prefixes=("canonical/verification/",),
+        )
+    except Exception as exc:
+        return {"pass":False,"reason":"R12_TOTALITY_SEMANTIC_BINDING_LOAD_FAILED:"+type(exc).__name__+":"+str(exc)}
+    out=_semantic_totality_documents_ok(cert,verify)
+    if out.get("pass") is not True:
+        return out
+    if verify.get("subject_git_blob_sha")!=cert_blob:
+        return {"pass":False,"reason":"R12_TOTALITY_SEMANTIC_VERIFY_SUBJECT_MISMATCH"}
+    return {**out,"certificate_git_blob_sha":cert_blob}
 
 def route(state:Mapping[str,Any],*,repo_root:str|Path|None=None)->dict[str,Any]:
     if not isinstance(state,Mapping):
@@ -187,6 +232,14 @@ def route(state:Mapping[str,Any],*,repo_root:str|Path|None=None)->dict[str,Any]:
                 return _fail("FINAL_POSITIVE_CERTIFICATION_NOT_AUTHORIZED",final_step_binding=result)
             if result.get("material_totality_proved") is not True:
                 return _fail("FINAL_POSITIVE_MATERIAL_TOTALITY_NOT_PROVED",final_step_binding=result)
+            semantic_binding=_authenticate_r12_totality_semantics(bindings.get(step),root=root)
+            if semantic_binding.get("pass") is not True:
+                return _fail(
+                    "FINAL_POSITIVE_R12_TOTALITY_SEMANTICS_NOT_BOUND",
+                    semantic_binding_result=semantic_binding,
+                    final_step_binding=result,
+                )
+            result["r12_totality_semantic_binding"]=semantic_binding
 
     delegated=deepcopy(dict(state))
     delegated.pop(SUBJECT_REF_KEY,None)
@@ -214,6 +267,10 @@ def route(state:Mapping[str,Any],*,repo_root:str|Path|None=None)->dict[str,Any]:
     result["material_totality_proved"]=True
     result["material_totality_basis"]=final.get("material_totality_basis")
     result["material_totality_target_scope_id"]=final.get("material_totality_target_scope_id")
+    result["r12_totality_semantics_bound"]=True
+    result["r12_property_claim_id"]=R12_PROPERTY_CLAIM_ID
+    result["r12_scope_claim_id"]=R12_SCOPE_CLAIM_ID
+    result["r12_material_obligation"]=R12_MATERIAL_OBLIGATION
     result["step_binding_receipts"]={
         step:{
             "receipt_path":row.get("receipt_path"),
