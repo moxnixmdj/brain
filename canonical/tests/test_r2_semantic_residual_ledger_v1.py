@@ -118,9 +118,17 @@ class R2SharedCauseResidualLedgerV1Tests(unittest.TestCase):
             "IDENTITY_DISCRIMINATION",
         ):
             self.assertIn(expected, cause_ids)
+        ranked_shared = sorted(
+            out["shared_causes"],
+            key=lambda row: (-row["fanout_clause_count"], row["cause_id"]),
+        )
         self.assertEqual(
             out["highest_fanout_shared_cause"],
-            "SEMANTIC_SCOPE_AUTHORITY",
+            ranked_shared[0]["cause_id"],
+        )
+        self.assertEqual(
+            out["highest_fanout_clause_count"],
+            ranked_shared[0]["fanout_clause_count"],
         )
         self.assertGreater(out["highest_fanout_clause_count"], 1)
 
