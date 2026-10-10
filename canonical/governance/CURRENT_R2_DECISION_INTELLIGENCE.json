@@ -229,7 +229,11 @@
     "regcap_four_rival_mrel_pair_revalidation_bound": true,
     "regcap_four_rival_mrel_pair_revalidation_global_identity_authority": false,
     "regcap_mrel_no_descriptor_pair_domain_truth_bound": true,
-    "regcap_mrel_no_descriptor_pair_global_identity_authority": false
+    "regcap_mrel_no_descriptor_pair_global_identity_authority": false,
+    "policy_cover_positive_regions_require_region_wide_policy_safety": true,
+    "policy_cover_positive_regions_require_hard_constraint_scope_complete": true,
+    "policy_cover_executor_requires_policy_safety_coverage_proved": true,
+    "r2_policy_cover_pass_requires_selected_policy_safety_authority": true
   },
   "judgment_model_policy": {
     "path": "canonical/governance/R2_BRAIN_OWNED_ADVISORY_JUDGMENT_POLICY_20261008_V1.json"
@@ -2520,6 +2524,22 @@
     "direct_route_count_delta": 0,
     "bounded_family_count_delta": 0,
     "primary_internal_unsolved_count_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "policy_cover_hard_constraint_safety_reconciliation": {
+    "path": "canonical/governance/R2_POLICY_COVER_HARD_CONSTRAINT_SAFETY_RECONCILIATION_20261010_V1.json",
+    "reconciliation_git_blob_sha": "9f8aef7837edc9decded63e26f597f12471dd3d3",
+    "merged_repair_commit": "144c74e7c76fee1364e26d31ebef04e2ed7f3cee",
+    "verification_path": "canonical/verification/R2_POLICY_COVER_SAFETY_REPAIR_INDEPENDENT_REPLAY_VERIFY_20261010_V1.json",
+    "verification_git_blob_sha": "a08173e74c2247f0ad344285336377281f7708f6",
+    "theorem_runtime_contract_aligned": true,
+    "adequate_but_unsafe_policy_cover_rejected": true,
+    "incomplete_hard_constraint_scope_rejected": true,
+    "direct_route_count_delta": 0,
+    "bounded_family_count_delta": 0,
+    "primary_internal_unsolved_count_delta": 0,
+    "finance_tail_closed": false,
+    "global_open_world_closure_claimed": false,
     "terminal_credit_delta": 0
   }
 }
