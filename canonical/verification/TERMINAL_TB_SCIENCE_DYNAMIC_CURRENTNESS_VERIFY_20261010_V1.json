@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_TB_SCIENCE_DYNAMIC_CURRENTNESS_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__TDD_RED_GREEN__INDEPENDENT_2_OF_2__MUTATION_KILLED__MUTABLE_PATH_CURRENTNESS_BOUND__ZERO_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "brain/terminal-tb-science-dynamic-currentness-20261010-v1",
+    "rebase_base_commit": "a255754f14cc6781bd5cdb59aa55b846358a71cf",
+    "exact_git_blobs": {
+      "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json": "9cd69afb0c888b44e51cf7d9e4ba30b54e4a3ba9",
+      "canonical/governance/CURRENT_TB_SCIENCE_EXECUTION.json": "8dcd1f782f0d7bfec4673424484cee48de900f0a",
+      "canonical/governance/TERMINAL_TB_SCIENCE_DYNAMIC_CURRENTNESS_RECONCILIATION_20261010_V1.json": "64c788cd10afb16102f853525b929b0dc7364f8c",
+      "canonical/tests/test_terminal_tb_science_dynamic_currentness_v1.py": "ed950d66388e2dd1317a918af93f8ca9d7aa502d"
+    }
+  },
+  "tdd": {
+    "red": {
+      "verifier": "brain-capability-first-scheduler-verify-20261008-v1",
+      "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+      "result": "FAIL__KEYERROR_TB_SCIENCE_DYNAMIC_CURRENTNESS__2_OF_2",
+      "cause": "CURRENT_TERMINAL_AUTHORITY_LACKED_DYNAMIC_TB_SCIENCE_CURRENTNESS_BINDING"
+    },
+    "green": {
+      "command": "python -m unittest canonical.tests.test_terminal_tb_science_dynamic_currentness_v1 -v",
+      "result": "2_OF_2_PASS"
+    }
+  },
+  "independent_verification": {
+    "verifier": "brain-r3-structural-provider-verify-20261010",
+    "sprite_id": "sprite-4c7dc4a8-ac7d-44a7-b49d-0fdf1f321004",
+    "command": "python -m unittest canonical.tests.test_terminal_tb_science_dynamic_currentness_v1 -v",
+    "result": "2_OF_2_PASS",
+    "exact_terminal_blob": "9cd69afb0c888b44e51cf7d9e4ba30b54e4a3ba9",
+    "exact_current_tb_blob": "8dcd1f782f0d7bfec4673424484cee48de900f0a"
+  },
+  "mutation_falsification": {
+    "mutation": "DELETE_TB_SCIENCE_DYNAMIC_CURRENTNESS_SECTION",
+    "mutated_result": "FAIL__2_OF_2_KEYERROR",
+    "restored_exact_bytes_result": "PASS__2_OF_2",
+    "mutation_killed": true
+  },
+  "proved": [
+    "TERMINAL_AUTHORITY_CURRENT_TB_SCIENCE_BINDING_IS_CANONICAL_PATH_BASED_NOT_FROZEN_BLOB_BASED",
+    "HISTORICAL_TB_SCIENCE_CURRENT_SNAPSHOTS_ARE_PROVENANCE_ONLY",
+    "CURRENT_TB_SCIENCE_ACCEPTANCE_AND_TERMINAL_ZERO_CREDIT_INVARIANTS_ARE_RECHECKED_LIVE",
+    "RANK_SPECIFIC_HISTORICAL_STATUS_NO_LONGER_DEFINES_TOP_LEVEL_TB_SCIENCE_CURRENTNESS",
+    "CURRENT_TB_SCIENCE_POINTER_BLOB_MAY_ADVANCE_WITHOUT_REQUIRING_TERMINAL_POINTER_REWRITE_IF_REQUIRED_INVARIANTS_HOLD"
+  ],
+  "hard_nonclaims": [
+    "NO_TB_SCIENCE_EXECUTION_AUTHORITY",
+    "NO_TASK_READ_START_OR_ACTIVATION_AUTHORITY",
+    "NO_BENCHMARK_REWARD_CREDIT",
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_TERMINAL_CREDIT",
+    "NO_FULL_PRIVATE_REPOSITORY_REGRESSION_SUITE_EXECUTED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_TB_SCIENCE_DYNAMIC_CURRENTNESS_RECONCILIATION_20261010_V1",
+  "date": "2026-10-10",
+  "status": "CANDIDATE__MUTABLE_CURRENT_TB_SCIENCE_PATH_BINDING__HISTORICAL_SNAPSHOT_CURRENTNESS_DEMOTED__ZERO_CREDIT",
+  "defect": {
+    "terminal_pointer_path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+    "observed_terminal_pointer_git_blob_sha": "8170b237ef6629d83987e9e1709b2c55c08daa16",
+    "stale_headline_suffix": "RANK19_EXECUTION_FROZEN_PENDING_ZERO_EXPOSURE_PLANNER_REPAIR",
+    "historical_current_execution_pointer_binding": "RANK18_ERA_CONTENT_HASH_SNAPSHOT",
+    "actual_current_tb_science_path": "canonical/governance/CURRENT_TB_SCIENCE_EXECUTION.json",
+    "actual_current_tb_science_git_blob_sha": "8dcd1f782f0d7bfec4673424484cee48de900f0a",
+    "actual_current_tb_science_status": "RANK19_NONCONSUMING_IDENTITY_ABORT_FINAL__IDENTITY_V2_REPAIRS_VERIFIED__RANK20_CAPABILITY_FIRST_ADMITTED_PRECLAIM__NO_TASK_READ_OR_EXECUTION_AUTHORITY",
+    "consequence": "TERMINAL_AUTHORITY_CAN_REPORT_STALE_TB_SCIENCE_CURRENTNESS_AFTER_SOUND_TB_SCIENCE_POINTER_ADVANCE"
+  },
+  "repair_law": {
+    "current_tb_science_binding": "MUTABLE_CURRENT_POINTER_PATH_IDENTITY__LIVE_INVARIANTS_RECHECKED",
+    "historical_tb_science_snapshots": "PROVENANCE_ONLY__NOT_CURRENTNESS_AUTHORITY",
+    "activation_observed_blob_is_load_bearing": false,
+    "required_current_invariants": {
+      "terminal_credit_delta": 0,
+      "acceptance_credit_delta": 0
+    },
+    "future_rank_specific_status_projection": "MUST_NOT_BE_USED_AS_CURRENTNESS_AUTHORITY"
+  },
+  "regression_test": {
+    "path": "canonical/tests/test_terminal_tb_science_dynamic_currentness_v1.py",
+    "git_blob_sha": "ed950d66388e2dd1317a918af93f8ca9d7aa502d",
+    "tdd_red": "CURRENT_MAIN_MISSING_TB_SCIENCE_DYNAMIC_CURRENTNESS_SECTION",
+    "expected_green": "2_OF_2_PASS_BEFORE_BRANCH_PROMOTION"
+  },
+  "hard_nonclaims": [
+    "NO_TB_SCIENCE_BENCHMARK_CREDIT",
+    "NO_TASK_READ_START_EXECUTION_OR_ACTIVATION_AUTHORITY",
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_TERMINAL_CREDIT",
+    "NO_CLAIM_HISTORICAL_TB_SCIENCE_RECEIPTS_ARE_INVALID",
+    "NO_CLAIM_CURRENT_TB_SCIENCE_POINTER_BLOB_IS_IMMUTABLE_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

@@ -1,7 +1,7 @@
 {
-  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V40",
+  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V41",
   "date": "2026-10-10",
-  "status": "ACTIVE_FAIL_CLOSED_REAL_MISSION_BOUND__STRICT_EXTERNALITY_RECONCILED__R3_ZERO_RESIDUAL_RECONCILED__OPUS_5_5_CHECKPOINT_TERMINAL_FALSE__CURRENT_R2_V76_AND_CODING_V4_FIVE_REGION_PROJECTION_BOUND__COVERAGE_R1_R4_LIVE_BINDING_REPAIRED__CLAIM_SCOPED_COMPLETENESS_THEOREM_BOUND__ROOT_NAMESPACE_COLLISION_GUARDED__TB_SCIENCE_RANK18_V3_SAME_ATTEMPT_RESEAL_VERIFIED__ACTIVATION_READY__TB_SCIENCE_RANK18_V4_FRESH_ACTIVATION_RESEAL_VERIFIED__BRAIN_V3_EFFECTIVE__V2_ACTIVATION_NOT_ARMED__TB_SCIENCE_RANK18_V6_FINAL_ZERO__PLANNER_CONTROLLER_FAULT_BEFORE_FIRST_ACTION__RANK19_EXECUTION_FROZEN_PENDING_ZERO_EXPOSURE_PLANNER_REPAIR",
+  "status": "ACTIVE_FAIL_CLOSED_REAL_MISSION_BOUND__STRICT_EXTERNALITY_RECONCILED__R3_ZERO_RESIDUAL_RECONCILED__OPUS_5_5_CHECKPOINT_TERMINAL_FALSE__CURRENT_R2_V76_AND_CODING_V4_FIVE_REGION_PROJECTION_BOUND__COVERAGE_R1_R4_LIVE_BINDING_REPAIRED__CLAIM_SCOPED_COMPLETENESS_THEOREM_BOUND__ROOT_NAMESPACE_COLLISION_GUARDED__TB_SCIENCE_DYNAMIC_CURRENT_PATH_BOUND__HISTORICAL_TB_SCIENCE_CURRENTNESS_SUPERSEDED",
   "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "authoritative_sources": {
     "universal_escape_resolver_v2_active_planning_overlay": {
@@ -2414,7 +2414,11 @@
     "r2_loss_cushion_tlac_mrel_pair_recomposition_bound": true,
     "r2_loss_cushion_pair_recomposition_is_conditional_relative_selection_only": true,
     "r2_loss_cushion_shared_signature_alone_separates_tlac_mrel": false,
-    "r2_loss_cushion_global_identity_closed": false
+    "r2_loss_cushion_global_identity_closed": false,
+    "tb_science_currentness_mode": "MUTABLE_CURRENT_POINTER_PATH_IDENTITY__LIVE_INVARIANTS_RECHECKED",
+    "tb_science_historical_snapshot_currentness_authoritative": false,
+    "tb_science_current_pointer_path": "canonical/governance/CURRENT_TB_SCIENCE_EXECUTION.json",
+    "tb_science_current_pointer_blob_is_load_bearing": false
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -3120,7 +3124,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 131,
+  "pointer_revision": 132,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
@@ -5014,5 +5018,24 @@
     "terminal_false_preserved": true,
     "acceptance_credit_delta": 0,
     "terminal_credit_delta": 0
+  },
+  "tb_science_dynamic_currentness": {
+    "path": "canonical/governance/CURRENT_TB_SCIENCE_EXECUTION.json",
+    "binding": "MUTABLE_CURRENT_POINTER_PATH_IDENTITY__LIVE_INVARIANTS_RECHECKED",
+    "activation_observed_git_blob_sha": "8dcd1f782f0d7bfec4673424484cee48de900f0a",
+    "activation_observed_status": "RANK19_NONCONSUMING_IDENTITY_ABORT_FINAL__IDENTITY_V2_REPAIRS_VERIFIED__RANK20_CAPABILITY_FIRST_ADMITTED_PRECLAIM__NO_TASK_READ_OR_EXECUTION_AUTHORITY",
+    "activation_observed_blob_is_load_bearing": false,
+    "historical_tb_science_snapshots": "PROVENANCE_ONLY__NOT_CURRENTNESS_AUTHORITY",
+    "precedence": "THIS_DYNAMIC_BINDING_SUPERSEDES_ANY_HISTORICAL_TB_SCIENCE_SECTION_THAT_LABELS_ITS_EMBEDDED_SNAPSHOT_CURRENT__HISTORICAL_RECEIPTS_REMAIN_IMMUTABLE_PROVENANCE",
+    "required_current_invariants": {
+      "terminal_credit_delta": 0,
+      "acceptance_credit_delta": 0
+    },
+    "reconciliation": {
+      "path": "canonical/governance/TERMINAL_TB_SCIENCE_DYNAMIC_CURRENTNESS_RECONCILIATION_20261010_V1.json",
+      "git_blob_sha": "64c788cd10afb16102f853525b929b0dc7364f8c"
+    },
+    "current_state_must_be_rederived_before_rank_task_read_start_execution_or_credit_claim": true,
+    "terminal_authority_from_tb_science_pointer_alone": false
   }
 }
