@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_REGISTRY_V1",
   "date": "2026-10-10",
-  "status": "ACTIVE__FIVE_CLAIM_SCOPED_CAPABILITIES__ZERO_GLOBAL_LEAF_CREDIT",
+  "status": "ACTIVE__SIX_CLAIM_SCOPED_CAPABILITIES__ZERO_GLOBAL_LEAF_CREDIT",
   "entries": [
     {
       "scope_id": "PQ::R7::SINGLE_EDIT::UVCK_DEFEATER_ORDER_REPAIR",
@@ -126,12 +126,41 @@
       "semantic_leaf_credit": false,
       "execution_leaf_credit": false,
       "terminal_credit_delta": 0
+    },
+    {
+      "scope_id": "PQ::R4::MECHANICAL_ARTIFACT_MEASUREMENT::CONTENT_ADDRESSED_TYPED_ACCEPTANCE",
+      "root_id": "R4_MEASUREMENT_CONSTRUCT",
+      "contributes_to_leaf_ids": [
+        "PQ::R4_MEASUREMENT_CONSTRUCT::EXECUTION"
+      ],
+      "claim_kind": "CONTENT_ADDRESSED_TYPED_MECHANICAL_ARTIFACT_MEASUREMENT_AND_ACCEPTANCE",
+      "source_receipt": {
+        "path": "canonical/verification/ARTIFACT_MEASUREMENT_VERIFY_20261007_V1.json",
+        "git_blob_sha": "34c64ed759d2e70df48a76d7a254047ac5fe9e2b"
+      },
+      "reusable_compiler": {
+        "path": "canonical/runtime/measured_typed_acceptance_program_v1.py",
+        "git_blob_sha": "7cb47bbefa807e93007e13e84607b41e27245f62"
+      },
+      "measurement_runtime": {
+        "path": "canonical/runtime/content_addressed_artifact_measurement_v1.py",
+        "git_blob_sha": "4da88dc71e85874b6445988b792951fb3c36d62f"
+      },
+      "compiler_verification": {
+        "path": "canonical/governance/ARTIFACT_MEASUREMENT_BINDING_20261007_V1.json",
+        "git_blob_sha": "a174825b4c10fefa06c3a7ba09eb68c0d40af14a"
+      },
+      "global_leaf_closure": false,
+      "global_root_closure": false,
+      "semantic_leaf_credit": false,
+      "execution_leaf_credit": false,
+      "terminal_credit_delta": 0
     }
   ],
   "admission_law": "CLAIM_SCOPED_EVIDENCE_MAY_BE_REUSED_ONLY_INSIDE_ITS_PROVED_SCOPE_AND_NEVER_COUNTS_AS_GLOBAL_LEAF_OR_ROOT_CLOSURE",
   "hard_nonclaims": [
-    "NO_GLOBAL_R3_R6_R7_R10_OR_R11_LEAF_CLOSURE",
-    "NO_GLOBAL_R3_R6_R7_R10_OR_R11_ROOT_CLOSURE",
+    "NO_GLOBAL_R3_R4_R6_R7_R10_OR_R11_LEAF_CLOSURE",
+    "NO_GLOBAL_R3_R4_R6_R7_R10_OR_R11_ROOT_CLOSURE",
     "NO_DOMAIN_SEMANTIC_CLOSURE",
     "NO_DOMAIN_EXECUTION_CLOSURE",
     "NO_TERMINAL_CREDIT"
