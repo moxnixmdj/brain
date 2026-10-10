@@ -25,7 +25,7 @@
     "seed": 73103
   },
   "detected_triggers": [],
-  "evidence_sha256": "e321022880eca86d934a807afb81c2eea90c2bae3ab349f95553896c064f81cc",
+  "evidence_sha256": "1edf6c89f6ee05871be7600a6812552184bcbdea299ed73e6589da7c20b9b5b0",
   "format": "pdf",
   "goal": "Apply exactly the declared bounded PDF text edit and preserve unrelated structure; render the exact audience view and bind observation channels.",
   "hard_defect_profile_id": "NATIVE_ARTIFACT_RENDER_PRESERVATION_PREFLIGHT_V1",
@@ -36,12 +36,16 @@
   "profile_git_blob_sha": "f7e89eafbb691c16d1bdf5b8d295a468d5e3bec5",
   "render_stack": {
     "Pillow": "12.3.0",
+    "current_stack_requires_fresh_replay": true,
     "libreoffice_core": "4:24.2.7-0ubuntu0.24.04.7",
     "openpyxl": "3.1.5",
     "poppler_utils": "24.02.0-1ubuntu9.10",
+    "predecessor_verified_libreoffice_core": "4:24.2.7-0ubuntu0.24.04.6",
+    "predecessor_verified_poppler_utils": "24.02.0-1ubuntu9.9",
     "pypdf": "6.19.0",
     "python-docx": "1.2.0",
-    "python-pptx": "1.0.2"
+    "python-pptx": "1.0.2",
+    "version_transport_claimed": false
   },
   "render_verdict": {
     "changed_page_count": 1,
