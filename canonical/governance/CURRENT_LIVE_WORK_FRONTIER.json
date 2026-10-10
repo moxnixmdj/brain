@@ -46,6 +46,14 @@
       {
         "path": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_CERTIFICATE_READINESS_AUDIT_V2_VERIFY_20261010_V1.json",
         "git_blob_sha": "2d28d932d08753fdf14c56aa24011e625518a4ef"
+      },
+      {
+        "path": "canonical/governance/ESCAPE_TB_SCIENCE_CURRENT_ROUTE_RECLASSIFICATION_20261010_V2.json",
+        "git_blob_sha": "2639f4e58ef71502707ab6b2bb37efb592b1a234"
+      },
+      {
+        "path": "canonical/verification/ESCAPE_TB_SCIENCE_CURRENT_ROUTE_RECLASSIFICATION_V2_VERIFY_20261010_V1.json",
+        "git_blob_sha": "10c1c7ef2650e20d54d504e3c6363ef4febdea00"
       }
     ]
   },
@@ -363,7 +371,7 @@
       "work_type": "RELIABILITY_IMPROVEMENT",
       "source": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
       "causal_role": "THREE_INTERNAL_ROWS_REQUIRE_EXECUTABLE_VERIFIED_ACTION_PLUS_WELL_FOUNDED_ACCEPTANCE_RELEVANT_STRICT_PROGRESS",
-      "readiness": "CURRENT_TB_ROUTE_RECLASSIFIED__STRICT_PROGRESS_WITNESS_EVIDENCE_REQUIRED_FOR_THREE_INTERNAL_ROWS",
+      "readiness": "TB_ROW_PARKED_BY_VERIFIED_V2_RECLASSIFICATION__STRICT_PROGRESS_WITNESS_EVIDENCE_REQUIRED_FOR_TWO_ACTIVE_INTERNAL_ROWS",
       "claims_new_primitive": false,
       "score_state": "UNBOUND",
       "scheduler_state": "READY_EVIDENCE",
@@ -383,20 +391,26 @@
       "read_only_evidence": {
         "source": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
         "source_git_blob_sha": "b6d20015d800c0c10d66b8a97a43f92f4f872ba0",
-        "effective_gap_b_count": 3,
+        "effective_gap_b_count": 2,
         "real_authenticated_row_proofs": 0,
-        "current_gate_status": "CURRENTNESS_AWARE_AUTHENTICATED_V5_GATE_VERIFIED__REAL_AUTHENTICATED_ROW_PROOFS_0_OF_3__GAP_B_TOTALITY_OPEN",
+        "current_gate_status": "CURRENTNESS_AWARE_AUTHENTICATED_V5_GATE_VERIFIED__TB_RANK20_V3_PARKED_OUTSIDE_ACTIVE_GAP_B__TWO_ACTIVE_STRICT_PROGRESS_ROWS_OPEN",
         "new_primitive_established": false,
         "vector_bounds_complete": false,
         "tb_row_currentness_repair_required": false,
-        "current_tb_git_blob_sha": "7aec52d3575710d630a4e8376286723fd5c0a353",
+        "current_tb_git_blob_sha": "7678d9a56461b121ffd52dd4c9c8df464fda08d2",
         "tb_current_route_reclassification": {
-          "path": "canonical/governance/ESCAPE_TB_SCIENCE_CURRENT_ROUTE_RECLASSIFICATION_20261010_V1.json",
-          "git_blob_sha": "d7bc90a0a524a58d3cb4f9ca1978da19fae598fd",
-          "verification_path": "canonical/verification/ESCAPE_TB_SCIENCE_CURRENT_ROUTE_RECLASSIFICATION_VERIFY_20261010_V1.json",
-          "verification_git_blob_sha": "a1b6ca657589b788b3e4eff0fb7682842a917f4a",
-          "strict_progress_witness_bound": false
-        }
+          "path": "canonical/governance/ESCAPE_TB_SCIENCE_CURRENT_ROUTE_RECLASSIFICATION_20261010_V2.json",
+          "git_blob_sha": "2639f4e58ef71502707ab6b2bb37efb592b1a234",
+          "verification_path": "canonical/verification/ESCAPE_TB_SCIENCE_CURRENT_ROUTE_RECLASSIFICATION_V2_VERIFY_20261010_V1.json",
+          "verification_git_blob_sha": "10c1c7ef2650e20d54d504e3c6363ef4febdea00",
+          "active_gap_b_rows": [
+            "PROWORK_GDPVAL_GE_1846",
+            "CHARTOGRAPHY_TOOLS_GE_89"
+          ],
+          "parked_row": "TB_SCIENCE_GE_58_7",
+          "strict_progress_witness_required_for_parked_tb_now": false
+        },
+        "parked_unresolved_row_count": 1
       }
     },
     {
