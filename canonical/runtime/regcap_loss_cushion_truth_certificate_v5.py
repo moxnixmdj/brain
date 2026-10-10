@@ -97,6 +97,20 @@ def _unknown(
     reason: str,
     grounding_result: Mapping[str, Any],
 ) -> dict[str, Any]:
+    request = grounding_result.get("minimum_policy_changing_information_request")
+    next_fields: dict[str, Any] = {}
+    if (
+        grounding_result.get("minimum_policy_changing_information_request_available")
+        is True
+        and isinstance(request, Mapping)
+    ):
+        next_fields = {
+            "next_information_request": dict(request),
+            "next_required_edge": (
+                "REGCAP_LOSS_CUSHION_MINIMUM_POLICY_CHANGING_INFORMATION"
+            ),
+            "next_information_request_source": grounding.SCHEMA,
+        }
     return {
         "schema": SCHEMA,
         "pass": False,
@@ -119,6 +133,7 @@ def _unknown(
         "promotion_authority": False,
         "terminal_authority": False,
         "terminal_credit_delta": 0,
+        **next_fields,
     }
 
 

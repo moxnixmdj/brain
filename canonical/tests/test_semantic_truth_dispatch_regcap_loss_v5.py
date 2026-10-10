@@ -42,6 +42,49 @@ class Tests(unittest.TestCase):
         self.assertFalse(out["terminal_authority"])
         self.assertEqual(out["grounding_result"]["schema"] if "schema" in out["grounding_result"] else cert5.grounding.SCHEMA, cert5.grounding.SCHEMA)
 
+    def test_unresolved_dispatch_exposes_typed_next_information_request(self):
+        text = "loss-absorbing cushion"
+        request = {
+            "pass": True,
+            "status": "PASS__MINIMUM_FOUR_WAY_POLICY_CHANGING_INFORMATION_REQUEST",
+            "minimum_observation_count": 1,
+            "independent_verification_required": True,
+        }
+        v7_result = {
+            "pass": True,
+            "status": "OPEN__FOUR_WAY_CONTEXT_REMAINS_UNRESOLVED_AFTER_ALL_PAIR_REPLAY",
+            "relative_selection_authority": False,
+            "relative_selected_concept_id": None,
+            "candidate_concept_ids": [
+                "REGCAP::CCOB", "REGCAP::CCYB", "REGCAP::TLAC", "REGCAP::MREL"
+            ],
+            "semantic_identity_authority": False,
+            "mapped_concept_id": None,
+            "minimum_policy_changing_information_request": request,
+            "minimum_policy_changing_information_request_available": True,
+            "terminal_authority": False,
+            "terminal_credit_delta": 0,
+        }
+        with patch.object(cert5.grounding, "ground", return_value=v7_result):
+            out = dispatch.evaluate({
+                "truth_kind": "REGCAP_LOSS_CUSHION_GROUNDING",
+                "predicate_id": "caller-label",
+                "claim_kind": "RELATIVE_RIVAL_SELECTION",
+                "source_text": text,
+                "source_id": "doc:v82",
+                "start": 0,
+                "end": len(text),
+                "target_concept_id": "REGCAP::MREL",
+            })
+        self.assertFalse(out["pass"])
+        self.assertEqual(out["predicate_truth"], "UNKNOWN")
+        self.assertEqual(out["next_information_request"], request)
+        self.assertEqual(
+            out["next_required_edge"],
+            "REGCAP_LOSS_CUSHION_MINIMUM_POLICY_CHANGING_INFORMATION",
+        )
+        self.assertFalse(out["terminal_authority"])
+
     def test_dispatch_routes_loss_cushion_truth_to_v5(self):
         expected = {
             "pass": True,
