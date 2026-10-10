@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_PROFESSIONAL_QUALITY_EXECUTION_POINTER_V1",
   "date": "2026-10-10",
-  "status": "P1_V3_INDEPENDENT_11_OF_11_VERIFIED__FIFTEEN_SCOPED_CAPABILITIES_VERIFIED__R1_R6_R7_R10_R11_R12_BOUNDED_SEMANTIC_EVIDENCE_BOUND__EXACT_DECLARED_SYSTEM_SUBJECT_FROZEN__12_ROOT_SAME_SUBJECT_BINDINGS_REDUCED_0_VERIFIED__LEAF_FRONTIER_18_PARTIAL_6_NO_SCOPED_24_GLOBAL_OPEN__NOT_LIVE_DEFAULT",
+  "status": "P1_V3_INDEPENDENT_11_OF_11_VERIFIED__SIXTEEN_SCOPED_CAPABILITIES_CURRENT__R1_R6_R7_R8_R10_R11_R12_BOUNDED_SEMANTIC_EVIDENCE_BOUND__EXACT_DECLARED_SYSTEM_SUBJECT_FROZEN__12_ROOT_SAME_SUBJECT_BINDINGS_REDUCED_0_VERIFIED__LEAF_FRONTIER_19_PARTIAL_5_NO_SCOPED_24_GLOBAL_OPEN__NOT_LIVE_DEFAULT",
   "profile_path": "canonical/governance/PROFESSIONAL_QUALITY_P1_EXECUTION_PROFILE_20261010_V3.json",
   "profile_sha": "f7e89eafbb691c16d1bdf5b8d295a468d5e3bec5",
   "router_path": "canonical/runtime/professional_quality_p1_router_v3.py",
@@ -17,15 +17,15 @@
   },
   "scoped_evidence": {
     "runtime_path": "canonical/runtime/professional_quality_scoped_evidence_v1.py",
-    "runtime_git_blob_sha": "4c76e86344e27ca45a97d212d87219c730234b9f",
+    "runtime_git_blob_sha": "940fc381fa10559bf7ec8f59048562809f1031c0",
     "tests_path": "canonical/tests/test_professional_quality_scoped_evidence_v1.py",
-    "tests_git_blob_sha": "3a6795a6d184bedaef5b702c0cf3b3dd04d352f6",
+    "tests_git_blob_sha": "5a70300a9512eba1ffb2ea8e3dea95b911859a13",
     "registry_path": "canonical/governance/PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_REGISTRY_20261010_V1.json",
-    "registry_git_blob_sha": "8e81ccfc2c90fefcb95883451e9e75ffce2fad6c",
+    "registry_git_blob_sha": "e0868ea39f21685af35c90f4233067f9edc3644c",
     "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_R10_SEMANTIC_SCOPED_INTEGRATION_VERIFY_20261010_V1.json",
     "verification_git_blob_sha": "187535d5e32ac5828a14107f8575298cdce743d0",
-    "replay_result": "52_OF_52_PASS__FIFTEEN_SCOPED_CAPABILITIES__R1_R6_R7_R10_R11_R12_BOUNDED_SEMANTIC_COVERAGE",
-    "admitted_scope_count": 15,
+    "replay_result": "CURRENT_REGISTRY_16_SCOPES__R8_SEMANTIC_DELTA_INDEPENDENT_6_OF_6__FULL_CURRENTNESS_RECONCILIATION_GATED_BY_POINTER_REGRESSION",
+    "admitted_scope_count": 16,
     "admitted_roots": [
       "R1_TARGET_SPECIFICATION",
       "R2_CANDIDATE_SEARCH",
@@ -45,12 +45,13 @@
     "domain_semantic_closure": false,
     "domain_execution_closure": false,
     "bounded_semantic_leaf_ids": [
+      "PQ::R10_ANALYSIS_DECISION::SEMANTIC",
+      "PQ::R11_ADAPTIVE_INTEGRITY_SECURITY::SEMANTIC",
+      "PQ::R12_META_COMPOSITION_CLOSURE::SEMANTIC",
       "PQ::R1_TARGET_SPECIFICATION::SEMANTIC",
       "PQ::R6_EVIDENCE_GROUNDING_DEPENDENCE::SEMANTIC",
       "PQ::R7_CAUSAL_PRESCRIPTIVE::SEMANTIC",
-      "PQ::R10_ANALYSIS_DECISION::SEMANTIC",
-      "PQ::R11_ADAPTIVE_INTEGRITY_SECURITY::SEMANTIC",
-      "PQ::R12_META_COMPOSITION_CLOSURE::SEMANTIC"
+      "PQ::R8_POPULATION_CONTEXT_OPERATOR::SEMANTIC"
     ]
   },
   "profile_execution_authority": true,
@@ -61,7 +62,7 @@
   "quality_authority": false,
   "terminal_authority": false,
   "terminal_credit_delta": 0,
-  "next": "ADD_BOUNDED_SEMANTIC_EVIDENCE_FOR_R2_R3_R4_R5_R8_OR_R9__OR_BIND_REAL_SAME_SUBJECT_ROOT_RECEIPTS_FOR_ONE_EXACT_ARTIFACT_OR_SYSTEM__PROVE_WHOLE_LEAF_SCOPE_TRANSPORT_OR_CERTIFIED_COMPLETE_UNIONS__PROMOTE_LIVE_DEFAULT_ONLY_AFTER_EXACT_PASS",
+  "next": "ADD_BOUNDED_SEMANTIC_EVIDENCE_FOR_R2_R3_R4_R5_OR_R9__OR_BIND_REAL_SAME_SUBJECT_ROOT_RECEIPTS_FOR_ONE_EXACT_ARTIFACT_OR_SYSTEM__PROVE_WHOLE_LEAF_SCOPE_TRANSPORT_OR_CERTIFIED_COMPLETE_UNIONS__PROMOTE_LIVE_DEFAULT_ONLY_AFTER_EXACT_PASS",
   "hard_nonclaims": [
     "NO_PROFESSIONAL_QUALITY_COMPLETENESS_PROOF",
     "NO_GLOBAL_LEAF_OR_ROOT_CLOSURE_FROM_BOUNDED_SCOPED_CAPABILITIES",
@@ -85,12 +86,12 @@
     "terminal_credit_delta": 0
   },
   "leaf_coverage_projection": {
-    "path": "canonical/verification/PROFESSIONAL_QUALITY_R10_SEMANTIC_SCOPED_INTEGRATION_VERIFY_20261010_V1.json",
-    "git_blob_sha": "187535d5e32ac5828a14107f8575298cdce743d0",
-    "partial_coverage_leaf_count": 18,
-    "semantic_partial_coverage_leaf_count": 6,
+    "path": "canonical/runtime/professional_quality_leaf_coverage_projection_v1.py",
+    "git_blob_sha": "b398bdfea24e4a658f44285837e4d09646df2299",
+    "partial_coverage_leaf_count": 19,
+    "semantic_partial_coverage_leaf_count": 7,
     "execution_partial_coverage_leaf_count": 12,
-    "no_scoped_evidence_leaf_count": 6,
+    "no_scoped_evidence_leaf_count": 5,
     "verified_global_leaf_count": 0,
     "open_global_leaf_count": 24,
     "global_leaf_closure": false,
@@ -144,6 +145,15 @@
     "verification_git_blob_sha": "187535d5e32ac5828a14107f8575298cdce743d0",
     "bounded_semantic_evidence": true,
     "global_r10_semantic_leaf_closed": false,
+    "terminal_credit_delta": 0
+  },
+  "r8_population_semantic": {
+    "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_R8_POPULATION_SEMANTIC_VERIFY_20261010_V1.json",
+    "verification_git_blob_sha": "e47503a3b1f61bbb9effa04edccbf158b8b28e96",
+    "scope_path": "canonical/governance/PROFESSIONAL_QUALITY_R8_POPULATION_SEMANTIC_SCOPE_20261010_V1.json",
+    "scope_git_blob_sha": "5bdcf0f7f46daf9abc2cca90524e702c9b601007",
+    "bounded_semantic_evidence": true,
+    "global_r8_semantic_leaf_closed": false,
     "terminal_credit_delta": 0
   }
 }
