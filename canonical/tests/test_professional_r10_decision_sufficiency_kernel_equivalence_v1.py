@@ -1,5 +1,15 @@
 from __future__ import annotations
+import sys
+import types
 import unittest
+
+fake_v1=types.ModuleType("canonical.runtime.one_shot_verified_closure_v1")
+fake_v1.run=lambda **kwargs: {}
+sys.modules["canonical.runtime.one_shot_verified_closure_v1"]=fake_v1
+fake_promoter=types.ModuleType("canonical.runtime.promote_r2_direct_route_v1")
+fake_promoter.promote=lambda **kwargs: {}
+sys.modules["canonical.runtime.promote_r2_direct_route_v1"]=fake_promoter
+
 from canonical.runtime import professional_r10_decision_sufficiency_kernel_v1 as k
 from canonical.runtime import one_shot_reality_closure_v2 as v2
 
