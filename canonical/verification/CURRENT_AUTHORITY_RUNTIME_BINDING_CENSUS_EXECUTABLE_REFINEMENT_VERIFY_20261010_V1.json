@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_AUTHORITY_RUNTIME_BINDING_CENSUS_EXECUTABLE_REFINEMENT_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__CURRENT_AUTHORITY_RUNTIME_BINDING_CENSUS_BRANCH_SURFACE_SEMANTIC_REFINEMENT_VERIFIED",
+  "subject": {
+    "path": "canonical/runtime/current_authority_runtime_binding_census_v1.py",
+    "git_blob_sha": "e8746d141989f5279c66931d9cc9167504034b98",
+    "function": "run"
+  },
+  "abstract_spec": {
+    "path": "canonical/governance/CURRENT_AUTHORITY_RUNTIME_BINDING_CENSUS_ABSTRACT_SPEC_20261010_V1.json",
+    "git_blob_sha": "c233d923d3a6efcc1177356fbc861956072a8b7e"
+  },
+  "checker": {
+    "path": "canonical/runtime/current_authority_runtime_binding_census_refinement_checker_v1.py",
+    "git_blob_sha": "fa0d00c941c2f1e4f6ff0c114f0f67f43d66064b"
+  },
+  "checker_tests": {
+    "path": "canonical/tests/test_current_authority_runtime_binding_census_refinement_checker_v1.py",
+    "git_blob_sha": "91007b4d308e4fae4b63ca9755176d9cac7685cb",
+    "tests_run": 6,
+    "passed": 6,
+    "failed": 0,
+    "errors": 0,
+    "adversarial_cases": [
+      "CURRENT_SUBJECT_PASS",
+      "MISSING_ABSTRACT_BRANCH_CASE_REJECTED",
+      "SUBJECT_BLOB_DRIFT_REJECTED",
+      "NEW_ERROR_KIND_REJECTED",
+      "SUPERSESSION_LOGIC_MUTATION_REJECTED",
+      "SUCCESS_STATUS_MUTATION_REJECTED"
+    ]
+  },
+  "execution": {
+    "carrier": "SPRITE__brain-live-runtime-v1-verify-20261008",
+    "carrier_id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13",
+    "workdir": "/home/sprite/runtime-binding-census-refinement-verify",
+    "incremental_spend_usd": 0,
+    "py_compile": "PASS",
+    "assurance_level": "STATIC_ERROR_EXCEPTION_CENSUS_PLUS_WITNESS_PARTITION_EXECUTION",
+    "error_kind_count": 4,
+    "branch_case_count": 11,
+    "exception_case_count": 2,
+    "witness_count": 13,
+    "receipt_sha256": "c1381ba33865a7c5d61c91fcb9e6722779407cedf13f228544c573641094152c",
+    "refinement_verified": true
+  },
+  "root_assumptions": [
+    "CPYTHON_LANGUAGE_SEMANTICS",
+    "PATHLIB_RESOLVE_AND_FILE_READ_SEMANTICS",
+    "JSON_PARSER_SEMANTICS",
+    "SHA1_GIT_BLOB_IDENTITY_SEMANTICS"
+  ],
+  "claim_scope": "GOAL_RELEVANT_RUNTIME_BINDING_CLASSIFICATION_SURFACE_ONLY",
+  "semantic_refinement_proved": true,
+  "repository_wide_refinement_proved": false,
+  "transitive_dependency_refinement_proved": false,
+  "terminal_authority": false,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
