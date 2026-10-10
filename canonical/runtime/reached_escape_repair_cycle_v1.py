@@ -75,6 +75,7 @@ def _candidate_request(
         "state_sha256": repair.get("state_sha256"),
         "repair_sha256": repair.get("repair_sha256"),
         "repair_kind": repair.get("kind"),
+        "repair_request": deepcopy(dict(repair)),
         "repair_dispatch_sha256": dispatch.get("dispatch_sha256"),
         "repair_dispatch_contract": deepcopy(dict(dispatch)),
         "alternatives": deepcopy(list(dispatch.get("alternatives") or [])),
