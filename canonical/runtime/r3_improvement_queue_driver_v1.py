@@ -2008,10 +2008,31 @@ def advance_once(
                         isinstance(evidence_request, Mapping)
                         and evidence_request.get("pass") is True
                     )
-                    if request_ready and distinguishing_evidence_provider is not None:
+                    evidence_provider = distinguishing_evidence_provider
+                    evidence_provider_id = distinguishing_evidence_provider_id
+                    if request_ready and evidence_provider is None:
+                        from canonical.runtime import r3_retained_distinguishing_evidence_provider_v1 as native_retained_evidence
+
+                        observation_id = str(
+                            (payload or {}).get("observation_id") or ""
+                        ).strip()
+                        if native_retained_evidence.can_acquire(
+                            evidence_request,
+                            observation_id=observation_id,
+                            state_path=state_path,
+                            repo_root=repo_root,
+                        ):
+                            evidence_provider = lambda request: native_retained_evidence.acquire(
+                                request,
+                                state_path=state_path,
+                                repo_root=repo_root,
+                            )
+                            evidence_provider_id = native_retained_evidence.PROVIDER_ID
+
+                    if request_ready and evidence_provider is not None:
                         if _frontier_acquisition_attempt_consumed(
                             work,
-                            provider_id=distinguishing_evidence_provider_id,
+                            provider_id=evidence_provider_id,
                             repo_root=repo_root,
                         ):
                             blockers.append({
@@ -2031,8 +2052,8 @@ def advance_once(
                                 (payload or {}).get("observation_id") or ""
                             ),
                             state_path=state_path,
-                            provider=distinguishing_evidence_provider,
-                            provider_id=distinguishing_evidence_provider_id,
+                            provider=evidence_provider,
+                            provider_id=evidence_provider_id,
                             improvement_work_id=wid,
                             blocked_success_work_id=str(
                                 (payload or {}).get("blocked_success_work_id") or ""
@@ -2045,7 +2066,7 @@ def advance_once(
                             )
                             _record_frontier_acquisition_attempt(
                                 wid,
-                                provider_id=distinguishing_evidence_provider_id,
+                                provider_id=evidence_provider_id,
                                 frontier_sha256=_owned_success_learning_frontier_sha256(
                                     repo_root=repo_root
                                 ),
@@ -2101,7 +2122,7 @@ def advance_once(
                             else None
                         ),
                         "distinguishing_evidence_provider_bound": (
-                            distinguishing_evidence_provider is not None
+                            evidence_provider is not None
                         ),
                         "adapter_acquisition_provider_skipped": True,
                         "replay_original_success": False,
