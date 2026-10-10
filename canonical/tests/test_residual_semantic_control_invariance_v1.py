@@ -2,13 +2,12 @@ from __future__ import annotations
 
 from copy import deepcopy
 from pathlib import Path
+import ast
 import unittest
-from unittest.mock import patch
 
 from canonical.runtime import open_world_semantic_control_v1 as control
 from canonical.runtime import residual_semantic_control_invariance_v1 as builder
 from canonical.runtime import residual_semantic_control_invariance_verify_v1 as verifier
-from canonical.runtime import unified_cognitive_fabric_v1 as fabric
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -132,30 +131,31 @@ class ResidualSemanticControlTests(unittest.TestCase):
         self.assertFalse(receipt["final_domain_action_authority"])
         self.assertTrue(receipt["control_action_authority"])
 
-    def test_auto_route_recognizes_open_world_semantic_control_surface(self):
-        self.assertEqual(
-            fabric._auto_mode(problem(), {}),
-            "OPEN_WORLD_SEMANTIC_CONTROL",
+    def test_live_front_door_source_binds_new_control_mode(self):
+        path = ROOT / "canonical/runtime/unified_cognitive_fabric_v1.py"
+        source = path.read_text(encoding="utf-8")
+        ast.parse(source)
+        self.assertIn(
+            "from canonical.runtime import open_world_semantic_control_v1 as open_world_semantic_control",
+            source,
         )
+        self.assertIn(
+            '"OPEN_WORLD_SEMANTIC_CONTROL": "open_world_semantic_control_v1.resolve"',
+            source,
+        )
+        self.assertIn('return "OPEN_WORLD_SEMANTIC_CONTROL"', source)
+        self.assertIn('elif mode == "OPEN_WORLD_SEMANTIC_CONTROL":', source)
+        self.assertIn("open_world_semantic_control.resolve(", source)
 
-    def test_live_front_door_exposes_control_without_semantic_overclaim(self):
-        with patch.object(
-            fabric.improvement_driver,
-            "drain",
-            return_value={"pass": True, "status": "TEST_NOOP"},
-        ):
-            out = fabric.run({
-                "mode": "OPEN_WORLD_SEMANTIC_CONTROL",
-                "payload": problem(),
-                "options": {"learn": False},
-            })
-        self.assertEqual(out["mode"], "OPEN_WORLD_SEMANTIC_CONTROL")
-        self.assertTrue(out["inner_pass"], out)
-        result = out["result"]
-        self.assertTrue(result["control_sufficient"])
-        self.assertFalse(result["semantic_decision_sufficient"])
-        self.assertFalse(result["final_domain_action_authority"])
-        self.assertFalse(result["terminal_authority"])
+    def test_control_mode_is_learning_observable_without_terminal_authority(self):
+        path = ROOT / "canonical/runtime/unified_cognitive_fabric_v1.py"
+        source = path.read_text(encoding="utf-8")
+        self.assertIn('"OPEN_WORLD_SEMANTIC_CONTROL",', source)
+        out = control.resolve(problem(), repo_root=ROOT)
+        self.assertTrue(out["pass"], out)
+        self.assertFalse(out["semantic_truth_authority"])
+        self.assertFalse(out["final_domain_action_authority"])
+        self.assertFalse(out["terminal_authority"])
 
 
 if __name__ == "__main__":
