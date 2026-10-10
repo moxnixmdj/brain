@@ -230,8 +230,11 @@ def evaluate(payload: Mapping[str, Any], *, repo_root: str | Path | None = None)
             or any(ch not in "0123456789abcdef" for ch in subject_sha)
         ):
             return _fail("SUBJECT_IDENTITY_INVALID", root_id=root_id)
-        if binding.get("global_subject_identity_authority") is not False:
+        global_subject_authority = binding.get("global_subject_identity_authority")
+        if global_subject_authority is True:
             return _fail("GLOBAL_SUBJECT_AUTHORITY_FORBIDDEN", root_id=root_id)
+        if root_id != "R3_REALIZATION_OBSERVATION" and global_subject_authority is not False:
+            return _fail("GLOBAL_SUBJECT_AUTHORITY_FIELD_REQUIRED", root_id=root_id)
         if binding.get("terminal_authority") is not False:
             return _fail("SUBJECT_BINDING_TERMINAL_AUTHORITY_FORBIDDEN", root_id=root_id)
 
