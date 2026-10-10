@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_CURSORBENCH_4_0_PUBLIC_OWNER_SURFACE_CEILING_VERIFICATION_V1",
+  "date": "2026-10-10",
+  "status": "CONTENT_ADDRESSED_CONSISTENCY_PASS__EXTERNAL_SOURCE_OBSERVATIONS_NOT_INDEPENDENTLY_REFETCHED_BY_THIS_RECEIPT__ZERO_CREDIT",
+  "subjects": {
+    "evidence": {
+      "path": "canonical/evidence/CURSORBENCH_4_0_PUBLIC_OWNER_SURFACE_CEILING_EVIDENCE_20261010_V1.json",
+      "git_blob_sha": "05111c026542969ba3a51e8bb89a78b6e9641046"
+    },
+    "reduction": {
+      "path": "canonical/governance/CURSORBENCH_4_0_PUBLIC_OWNER_SURFACE_CEILING_REDUCTION_20261010_V1.json",
+      "git_blob_sha": "e67bb2c5f28972b291a46a938ab9394ba9b2fff2"
+    }
+  },
+  "checks": {
+    "both_subjects_parse_as_json": true,
+    "remaining_route_a_scoring_object_count_is_exactly_two": true,
+    "private_result_file_contents_are_not_invented": true,
+    "absence_on_current_public_surface_is_not_promoted_to_global_nonexistence": true,
+    "existing_result_file_membership_and_sixth_region_routes_are_preserved": true,
+    "acceptance_credit_delta_is_zero": true,
+    "terminal_credit_delta_is_zero": true,
+    "terminal_authority_is_false": true
+  },
+  "result": {
+    "pass": true,
+    "scheduler_effect_only": true,
+    "public_page_repeat_scraping_demoted_until_change_event": true,
+    "next_high_yield_authority": "PRIVATE_CURSOR_RESULT_FILE_OR_NEW_CURSOR_OWNER_SCORE_DISCLOSURE_OR_TASK_GRADER_LEVEL_OWNER_MEMBERSHIP_EVIDENCE"
+  },
+  "verification_scope": {
+    "subject_bytes_rechecked": true,
+    "external_urls_refetched_by_this_verification_receipt": false,
+    "external_source_truth_independently_verified_by_this_receipt": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "promotion_authority": false,
+  "terminal_authority": false
+}

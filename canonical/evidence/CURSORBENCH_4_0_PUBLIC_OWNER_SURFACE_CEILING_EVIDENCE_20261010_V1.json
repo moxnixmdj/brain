@@ -1,0 +1,105 @@
+{
+  "schema": "PROJECT_BRAIN_CURSORBENCH_4_0_PUBLIC_OWNER_SURFACE_CEILING_EVIDENCE_V1",
+  "date": "2026-10-10",
+  "status": "CURRENT_PUBLIC_CURSOR_SURFACE_EXHAUSTED_FOR_REMAINING_ROUTE_A_SCORING_OBJECTS__PRIVATE_RESULT_ARTIFACT_OR_NEW_OWNER_DISCLOSURE_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "CODING_CURSORBENCH_GE_57_8",
+  "observed_at": "2026-10-10",
+  "sources": [
+    {
+      "id": "CURSOR_LIVE_CURSORBENCH_4_0_RENDERED_SURFACE",
+      "publisher": "Cursor",
+      "url": "https://prod.cursor.com/evals",
+      "source_class": "PRIMARY_BENCHMARK_OWNER_CURRENT_LIVE_RENDERED_PAGE",
+      "observed_facts": [
+        "CURRENT_PAGE_IDENTIFIES_CURSORBENCH_4_0",
+        "PAGE_EXPOSES_MODEL_LEVEL_SCORE_COST_TOKENS_AND_STEPS",
+        "OPUS_5_5_MAX_SCORE_IS_57_8_PERCENT",
+        "CURRENT_RENDERED_TABLE_CONTAINS_68_MODEL_EFFORT_ROWS",
+        "CURRENT_CHANGELOG_CLASSIFIES_THE_2026_09_10_4_0_CHANGE_UNDER_TASKS",
+        "PUBLIC_RENDERED_LINK_SET_CONTAINS_NO_DOWNLOADABLE_CURSORBENCH_RESULT_FILE_OR_TASK_LEVEL_RESULT_ENDPOINT",
+        "PUBLIC_RENDERED_SURFACE_EXPOSES_NO_TASK_COUNT_PASS_COUNT_PER_TASK_GRADER_OUTPUT_OR_AGGREGATION_WEIGHT_FIELD"
+      ]
+    },
+    {
+      "id": "CURSOR_CURSORBENCH_METHOD_BACKGROUND",
+      "publisher": "Cursor",
+      "url": "https://prod.cursor.com/blog/cursorbench",
+      "source_class": "PRIMARY_OWNER_BACKGROUND__OLDER_VERSION_SCOPE",
+      "observed_facts": [
+        "CURSORBENCH_TASKS_ARE_SOURCED_FROM_REAL_CURSOR_USAGE_WITH_GROUND_TRUTH_DEVELOPER_SOLUTIONS",
+        "TASK_DESCRIPTIONS_ARE_INTENTIONALLY_SHORT_AND_AMBIGUOUS",
+        "AGENTIC_GRADERS_ARE_USED_IN_THE_DESCRIBED_CURSORBENCH_METHODOLOGY"
+      ],
+      "scope_boundary": "DO_NOT_TREAT_THIS_OLDER_METHOD_DESCRIPTION_AS_EXACT_CURSORBENCH_4_0_PER_TASK_SCORE_OR_AGGREGATION_AUTHORITY"
+    },
+    {
+      "id": "CURSOR_COMPOSER_2_TECHNICAL_REPORT",
+      "publisher": "Cursor",
+      "url": "https://cursor.com/resources/Composer2.pdf",
+      "source_class": "PRIMARY_OWNER_HISTORICAL_CURSORBENCH_3_SCORING_BACKGROUND",
+      "observed_facts": [
+        "HISTORICAL_CURSORBENCH_3_ACCURACY_WAS_AGGREGATED_OVER_ALL_TASKS_ACROSS_MULTIPLE_PASSES",
+        "THIS_REPORT_DOES_NOT_BIND_CURSORBENCH_4_0_TASK_COUNT_PASS_COUNT_PER_TASK_GRADER_DOMAIN_OR_WEIGHTING"
+      ]
+    },
+    {
+      "id": "ANTHROPIC_OPUS_5_5_CURSORBENCH_4_0_RESULT_FILE_DISCLOSURE",
+      "publisher": "Anthropic",
+      "url": "https://www.anthropic.com/claude-opus-5-5",
+      "source_class": "TARGET_MODEL_VENDOR_CURRENT_DISCLOSURE",
+      "observed_facts": [
+        "CURSOR_MEASURED_AND_REPORTED_THE_CURSORBENCH_4_0_RESULT",
+        "OPUS_5_5_SCORES_CAME_FROM_A_RESULT_FILE_CURSOR_SENT_DIRECTLY_TO_ANTHROPIC",
+        "ANTHROPIC_COMPUTED_COST_FROM_MEAN_TOKEN_COUNTS_IN_THAT_PRIVATE_RESULT_FILE"
+      ]
+    }
+  ],
+  "deduction": {
+    "concrete_private_cursor_result_artifact_family_exists": true,
+    "public_live_cursor_page_links_direct_result_artifact": false,
+    "public_live_cursor_page_exposes_task_level_score_rows": false,
+    "public_live_cursor_page_exposes_task_count_or_pass_count": false,
+    "public_live_cursor_page_exposes_per_task_grader_output_domain": false,
+    "public_live_cursor_page_exposes_aggregation_weights_or_formula": false,
+    "historical_3_x_aggregation_statement_can_be_promoted_to_exact_4_0_scoring_rule_without_new_authority": false,
+    "remaining_route_a_scoring_object_count": 2,
+    "remaining_route_a_scoring_objects": [
+      "CURSORBENCH_4_0_PER_TASK_GRADER_OUTPUT_DOMAIN_AND_SCORE_CONTRIBUTION_RULE_OR_EQUIVALENT_LOWER_BOUND_AUTHORITY",
+      "CURSORBENCH_4_0_AGGREGATION_DENOMINATOR_TASK_COUNT_PASS_COUNT_AND_ANY_WEIGHTS_OR_EQUIVALENT_LOWER_BOUND_AUTHORITY"
+    ],
+    "public_web_scraping_same_cursorbench_page_has_positive_expected_information_gain_now": false,
+    "next_required_authority_class": "PRIVATE_CURSOR_RESULT_FILE_OR_NEW_CURSOR_OWNER_SCORING_DISCLOSURE_OR_TASK_GRADER_LEVEL_OWNER_MEMBERSHIP_EVIDENCE"
+  },
+  "scheduler_effect": {
+    "delete": [
+      "REPEAT_PUBLIC_CURSORBENCH_PAGE_SCRAPING_FOR_TASK_COUNT_OR_RESULT_DOWNLOAD_WITHOUT_PAGE_CHANGE",
+      "INFER_BINARY_PER_TASK_GRADES_FROM_PERCENT_FORMATTING",
+      "INFER_4_0_AGGREGATION_DENOMINATOR_FROM_3_X_METHOD_TEXT",
+      "INFER_SCORING_CONTINUITY_ONLY_BECAUSE_4_0_CHANGELOG_IS_LABELED_TASKS"
+    ],
+    "preserve": [
+      "ACQUIRE_THE_CURSOR_TO_VENDOR_RESULT_FILE_OR_EQUIVALENT_OWNER_SCORE_AUTHORITY",
+      "ACQUIRE_TASK_OR_GRADER_LEVEL_OWNER_EVIDENCE_BINDING_ALL_ATOMS_OF_T_F_R_S_OR_V",
+      "RECHECK_PUBLIC_SURFACE_ONLY_AFTER_OWNER_PAGE_OR_VENDOR_DISCLOSURE_CHANGES"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_PRIVATE_RESULT_FILE_CONTAINS_TASK_LEVEL_GRADER_OUTPUTS",
+    "NO_CLAIM_THE_PRIVATE_RESULT_FILE_CONTAINS_TASK_COUNT_PASS_COUNT_OR_AGGREGATION_WEIGHTS",
+    "NO_CLAIM_CURSORBENCH_4_0_SCORING_IS_IDENTICAL_TO_CURSORBENCH_3_X",
+    "NO_PRIVATE_CURSORBENCH_TASK_MEMBERSHIP",
+    "NO_SCORE_LOWER_BOUND",
+    "NO_ACCEPTANCE_FAMILY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "promotion_authority": false,
+  "terminal_authority": false
+}
