@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_REGISTRY_V1",
   "date": "2026-10-10",
-  "status": "ACTIVE__SIXTEEN_CLAIM_SCOPED_CAPABILITIES__R1_R6_R7_R8_R10_R11_R12_BOUNDED_SEMANTIC_EVIDENCE__ZERO_GLOBAL_LEAF_CREDIT",
+  "status": "ACTIVE__SEVENTEEN_CLAIM_SCOPED_CAPABILITIES__R1_R2_R6_R7_R8_R10_R11_R12_BOUNDED_SEMANTIC_EVIDENCE__ZERO_GLOBAL_LEAF_CREDIT",
   "entries": [
     {
       "scope_id": "PQ::R7::SINGLE_EDIT::UVCK_DEFEATER_ORDER_REPAIR",
@@ -445,6 +445,35 @@
       "scope_governance": {
         "path": "canonical/governance/PROFESSIONAL_QUALITY_R8_POPULATION_SEMANTIC_SCOPE_20261010_V1.json",
         "git_blob_sha": "5bdcf0f7f46daf9abc2cca90524e702c9b601007"
+      },
+      "global_leaf_closure": false,
+      "global_root_closure": false,
+      "semantic_leaf_credit": false,
+      "execution_leaf_credit": false,
+      "terminal_credit_delta": 0
+    },
+    {
+      "scope_id": "PQ::R2::CANDIDATE_SEARCH_SEMANTICS::FINITE_SCOPE_COMPLETE_REGION",
+      "root_id": "R2_CANDIDATE_SEARCH",
+      "contributes_to_leaf_ids": [
+        "PQ::R2_CANDIDATE_SEARCH::SEMANTIC"
+      ],
+      "claim_kind": "FINITE_SCOPE_COMPLETE_CANDIDATE_SEARCH_SEMANTICS",
+      "source_receipt": {
+        "path": "canonical/verification/PROFESSIONAL_QUALITY_R2_SEARCH_SEMANTIC_VERIFY_20261010_V1.json",
+        "git_blob_sha": "06da6b94712ec844a56c0f663cce67f059b7ba8d"
+      },
+      "reusable_compiler": {
+        "path": "canonical/runtime/professional_candidate_search_semantic_certificate_v1.py",
+        "git_blob_sha": "84c6dbd8e36c98dde74cf16252fe83ff0aad4baf"
+      },
+      "compiler_verification": {
+        "path": "canonical/verification/PROFESSIONAL_QUALITY_R2_SEARCH_SEMANTIC_VERIFY_20261010_V1.json",
+        "git_blob_sha": "06da6b94712ec844a56c0f663cce67f059b7ba8d"
+      },
+      "scope_governance": {
+        "path": "canonical/governance/PROFESSIONAL_QUALITY_R2_SEARCH_SEMANTIC_SCOPE_20261010_V1.json",
+        "git_blob_sha": "c12893656c0546aafa79135dec221f2e5f7e9774"
       },
       "global_leaf_closure": false,
       "global_root_closure": false,
