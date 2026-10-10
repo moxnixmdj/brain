@@ -81,7 +81,12 @@
     "runtime": "canonical/runtime/r2_semantic_residual_ledger_v1.py",
     "source_authority": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
     "fail_closed_on_unclassified_residual": true,
-    "fail_closed_on_unknown_cause_id": true
+    "fail_closed_on_unknown_cause_id": true,
+    "activation": "canonical/governance/R2_SHARED_CAUSE_RESIDUAL_LEDGER_ACTIVATION_20261010_V2.json",
+    "activation_git_blob_sha": "fa70144866407a64581c7c441cd87fd661664af1",
+    "runtime_git_blob_sha": "00a6963a1b65e96c08bf8fdb605d6143c339ac26",
+    "tests_git_blob_sha": "8192bbc4b1563ba036277a3e7dccc48e368f8ea5",
+    "current_authority_classification_complete_required": true
   },
   "terminal_autopilot_policy": {
     "role": "SUBORDINATE_CHECKPOINT_AUDITOR",
