@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V51",
+  "date": "2026-10-10",
+  "status": "CURRENT_RANK20_V6_STAGED_AFTER_START_CAS_IMPORT_REPAIR__PUBLIC_RESEAL_REQUIRED__EIGHTEEN_CONSUMED",
+  "predecessor": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V50.json",
+    "git_blob_sha": "2075c175f9d8c97422c57db1318837bfb004e032"
+  },
+  "repair_verification": {
+    "path": "canonical/verification/TB_SCIENCE_RANK20_V4_START_CAS_IMPORT_REPAIR_VERIFY_20261010_V1.json",
+    "git_blob_sha": "c318d153a08f4132186fee0ac483b5a3414ce4ec",
+    "pass": true
+  },
+  "authority": {
+    "path": "canonical/governance/TB_SCIENCE_RANK20_ONE_SLOT_EXECUTION_AUTHORITY_20261010_V6.json",
+    "git_blob_sha": "0475ca6aa61b135a87fc818d147d475d0e3c31d2"
+  },
+  "counts": {
+    "benchmark_trials_consumed": 18,
+    "consumed_successes_final": 0,
+    "consumed_failures_final": 18,
+    "started_result_pending": 0,
+    "finalized_slots": 18,
+    "active_in_flight_slot_count": 0
+  },
+  "next_slot": {
+    "ledger_schedule_rank": 20,
+    "frozen_manifest_schedule_order": 19,
+    "task_rank": 19,
+    "slot_id": "terminal-bench-science/hysteretic-aquifer-control::trial-0",
+    "task_digest": "sha256:681df0c3b2ada03a933ac4d2e11f07983676f87a9f26b61e416987904b880289"
+  },
+  "logical_attempt_id": "c9d1a7cb834286ae63ec78d3fe471193760e5d404c5154c796c48c254b6fae5b",
+  "execution_claim_binding_digest": "sha256:bfb1d1f78efdda8a051d58178e21e8031e4e09c4e5e0dcd0fe20eaaeba68c3ea",
+  "claim_epoch_id": "RANK20_V13_START_CAS_IMPORT_REPAIR_20261010_V6",
+  "logical_attempt_claim_binding": {
+    "path": "canonical/governance/TB_SCIENCE_RANK20_LOGICAL_ATTEMPT_CLAIM_BINDING_20261010_V6.json",
+    "git_blob_sha": "ea13cc707c685f43a61a990d851fee2bbcb23f3f"
+  },
+  "rank20_task_read_history": false,
+  "rank20_task_started": false,
+  "rank20_start_cas_acquired": false,
+  "rank20_benchmark_trials_consumed": 0,
+  "scheduler": {
+    "frozen": true,
+    "reason": "RANK20_V6_STAGED__PUBLIC_ZERO_EXPOSURE_RESEAL_REQUIRED",
+    "only_authorized_transition": "PUBLIC_ZERO_EXPOSURE_RESEAL_WITH_BEHAVIOR_V4_AND_CLAIM_V6"
+  },
+  "execution_authority_staged": true,
+  "execution_authority_effective": false,
+  "task_read_authority_staged": true,
+  "task_read_authority_effective": false,
+  "activation_authority": false,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
