@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_CURRENT_PROPERTY_TRUTH_4_OF_24_RECONCILIATION_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__TWO_REMOTE_ENVIRONMENTS__4_OF_4_EACH__CURRENT_POINTER_BYTES_BIND_VERIFIED_REGISTRY_4_OF_24__STALE_NONCLAIMS_REMOVED__ZERO_QUALITY_OR_TERMINAL_CREDIT",
+  "subject": {
+    "branch": "brain/reconcile-professional-leaf-truth-4of24-20261010-v1",
+    "base_main_commit": "2cff61c33e158ec139e765892054574160b4b8db",
+    "exact_blobs": {
+      "registry_verification": "bdde7b52793272623773b07bf774c0a74c6be7af",
+      "current_professional": "343f136734fbd44ba53f389e8299af6520b25468",
+      "current_assurance": "fb6883fde327997ae23c8daf421cbd86d7ec3882",
+      "current_mission": "89feaab3f5a0c887a6e3f5b1dc36cb1ac2fbfb46",
+      "current_live_frontier": "687ce27be1f90239508970eba5e2d5c694dfa3b0",
+      "regression_test": "4a07c4009a4b5965e7a72cc5513386be0a853860"
+    }
+  },
+  "verified_truth": {
+    "verified_leaf_count": 4,
+    "open_leaf_count": 20,
+    "verified_execution_leaf_count": 4,
+    "open_execution_leaf_count": 8,
+    "verified_semantic_leaf_count": 0,
+    "open_semantic_leaf_count": 12,
+    "verified_leaf_ids": [
+      "PQ::R1_TARGET_SPECIFICATION::EXECUTION",
+      "PQ::R7_CAUSAL_PRESCRIPTIVE::EXECUTION",
+      "PQ::R10_ANALYSIS_DECISION::EXECUTION",
+      "PQ::R12_META_COMPOSITION_CLOSURE::EXECUTION"
+    ]
+  },
+  "development_replay": {
+    "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "tests_run": 4,
+    "tests_passed": 4,
+    "tests_failed": 0,
+    "result": "PASS"
+  },
+  "independent_replay": {
+    "carrier": "brain-pq-p1-v2-independent-verify-20261010",
+    "carrier_id": "sprite-5fb5e414-e2f5-4a49-b424-3443341d9d09",
+    "tests_run": 4,
+    "tests_passed": 4,
+    "tests_failed": 0,
+    "result": "PASS"
+  },
+  "proves": [
+    "CURRENT_PROFESSIONAL_MATCHES_INDEPENDENTLY_VERIFIED_4_OF_24_REGISTRY_TRUTH",
+    "MISSION_OBSERVED_BLOBS_MATCH_CURRENT_PROFESSIONAL_AND_ASSURANCE_BYTES",
+    "LIVE_FRONTIER_SOURCE_BLOBS_MATCH_CURRENT_PROFESSIONAL_AND_ASSURANCE_BYTES",
+    "STALE_PRECOMPOSITION_AND_PRE_R12_ASSURANCE_NONCLAIMS_REMOVED",
+    "SCHEDULER_COUNTS_EIGHT_OPEN_EXECUTION_AND_TWELVE_OPEN_SEMANTIC_LEAVES"
+  ],
+  "hard_nonclaims": [
+    "NO_NEW_LEAF_PROPERTY_TRUTH_CREATED_BY_THIS_RECONCILIATION",
+    "NO_SEMANTIC_LEAF_CLOSURE",
+    "NO_ROOT_OR_GLOBAL_PROFESSIONAL_CLOSURE",
+    "NO_FULL_CURRENT_MAIN_FULL_SYSTEM_REGRESSION",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
