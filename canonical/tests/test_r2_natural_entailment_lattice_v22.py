@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 
 from canonical.runtime.certified_document_effect_field_edge_v1 import field_concept_id
 from canonical.runtime.semantic_relation_entailment_dag_v1 import EVIDENCE_SCHEMA, evidence_sha256
@@ -171,6 +172,72 @@ class Tests(unittest.TestCase):
             self.assertEqual(out["effective_value"],"12")
             self.assertTrue(out["source_immutability_verified"])
             self.assertTrue((p/"out.json").is_file())
+
+
+    def test_preflight_is_pure_and_creates_no_output(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td)
+            p=root/"canonical/tmp"
+            p.mkdir(parents=True)
+            (p/"case.json").write_text(json.dumps(_problem()),encoding="utf-8")
+            out=route.preflight({"task_id":"x","goal":_goal()},repo_root=root)
+            self.assertTrue(out["matched"],out)
+            self.assertFalse((p/"out.json").exists())
+
+    def test_unrelated_goal_has_no_scope(self):
+        with tempfile.TemporaryDirectory() as td:
+            out=route.preflight(
+                {"task_id":"x","goal":"Analyze this unrelated request."},
+                repo_root=Path(td),
+            )
+            self.assertFalse(out["matched"])
+            self.assertEqual(out["status"],"NOT_APPLICABLE")
+
+    def test_postwrite_verifier_failure_rolls_back(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td)
+            p=root/"canonical/tmp"
+            p.mkdir(parents=True)
+            (p/"case.json").write_text(json.dumps(_problem()),encoding="utf-8")
+            outp=p/"out.json"
+            outp.write_text('{"old":true}\n',encoding="utf-8")
+            old=outp.read_bytes()
+            original=route.verifier.verify
+            calls={"n":0}
+            def injected(problem,result):
+                calls["n"]+=1
+                if calls["n"]>=3:
+                    return {"verified":False,"errors":["forced"]}
+                return original(problem,result)
+            with patch.object(route.verifier,"verify",side_effect=injected):
+                out=route.run({"task_id":"x","goal":_goal()},repo_root=root)
+            self.assertFalse(out["pass"],out)
+            self.assertTrue(out["rollback_complete"])
+            self.assertEqual(outp.read_bytes(),old)
+
+    def test_raw_acceptance_drift_rolls_back(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td)
+            p=root/"canonical/tmp"
+            p.mkdir(parents=True)
+            (p/"case.json").write_text(json.dumps(_problem()),encoding="utf-8")
+            original=route._contract
+            calls={"n":0}
+            def drift(goal):
+                calls["n"]+=1
+                out=original(goal)
+                if calls["n"]>=3:
+                    changed=json.loads(json.dumps(out))
+                    changed["acceptance_contract"]["required_obligation_ids"]=[
+                        "DRIFTED"
+                    ]
+                    return changed
+                return out
+            with patch.object(route,"_contract",side_effect=drift):
+                out=route.run({"task_id":"x","goal":_goal()},repo_root=root)
+            self.assertFalse(out["pass"],out)
+            self.assertTrue(out["rollback_complete"])
+            self.assertFalse((p/"out.json").exists())
 
 
 if __name__=="__main__":
