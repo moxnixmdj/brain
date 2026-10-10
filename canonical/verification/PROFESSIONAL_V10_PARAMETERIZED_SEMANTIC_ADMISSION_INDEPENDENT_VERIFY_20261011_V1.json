@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_V10_PARAMETERIZED_SEMANTIC_ADMISSION_INDEPENDENT_VERIFY_V1",
+  "date": "2026-10-11",
+  "status": "PASS__INDEPENDENT_SPRITE__V10_28_OF_28_COMPONENTS_CURRENT__PARAMETERIZED_SEMANTIC_BINDER_V3_6_OF_6__SUBJECT_BUILDER_3_OF_3__ZERO_PROPERTY_OR_TERMINAL_CREDIT",
+  "base_main_commit": "b677086527f8c712c22246c4422d81f36a352b44",
+  "subject": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V10_DECLARED_SYSTEM_SUBJECT_20261011_V9.json",
+    "git_blob_sha": "de3b0000c4f8640579b05f28be86573022bccdc6",
+    "subject_id": "PROFESSIONAL_QUALITY_P1_V10_PARAMETERIZED_SEMANTIC_ADMISSION_SYSTEM_20261011_V9",
+    "subject_sha256": "fed249344ddd91fa1b4140addf4e4b3f57dafbe0aafb4d02c9900f5edd0b3a28",
+    "component_count": 28
+  },
+  "binder": {
+    "path": "canonical/runtime/professional_quality_semantic_admission_binder_v3.py",
+    "git_blob_sha": "327b6d5d1c4b9b17273980aa12055de43d052528",
+    "claim_pack_hardcoded": false,
+    "exact_current_claim_required": true,
+    "four_root_totality_and_r4_required": true,
+    "content_addressed_basis_required": true
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/pq-v7-proof-bound-verify",
+    "subject_verifier_status": "PASS__DECLARED_SYSTEM_SUBJECT_CURRENT_AND_CONTENT_ADDRESSED",
+    "component_currentness_verified": true,
+    "component_count": 28
+  },
+  "focused_replay": {
+    "carrier": "brain-professional-hard-defect-verify-20261010",
+    "binder_tests_run": 6,
+    "binder_tests_passed": 6,
+    "builder_tests_run": 3,
+    "builder_tests_passed": 3,
+    "tests_failed": 0
+  },
+  "truth": {
+    "fixed_claim_pack_dependency_removed": true,
+    "truth_repaired_v2_manifest_bound": true,
+    "old_v1_manifest_semantic_authority": false,
+    "semantic_property_truth_proved": false,
+    "positive_semantic_receipts_bound": 0,
+    "new_primitive_required": false
+  },
+  "exact_next": "GENERATE_12_TRUTH_REPAIRED_SEMANTIC_CLAIMS_ON_V10__THEN_PROVE_SHARED_FAIL_CLOSED_PROPERTY_AND_BIND_ONE_AUTHENTIC_POSITIVE_RECEIPT_PER_ROOT",
+  "hard_nonclaims": [
+    "NO_SEMANTIC_LEAF_PROPERTY_TRUTH_FROM_V10_SUBJECT_IDENTITY",
+    "NO_POSITIVE_SEMANTIC_RECEIPT_FROM_BINDER_EXISTENCE",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "semantic_truth_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
