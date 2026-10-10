@@ -157,11 +157,30 @@ def _region_ids(state: Mapping[str, Any]) -> list[str]:
 def _apply_verified_delta(
     state: Mapping[str, Any],
     verified: Mapping[str, Any],
+    *,
+    alternative: Mapping[str, Any],
 ) -> dict[str, Any]:
     candidate = deepcopy(dict(state))
     regions = _region_ids(candidate)
     region_set = set(regions)
     kind = str(verified.get("kind") or "").strip()
+    basis = alternative.get("basis")
+    if not isinstance(basis, Mapping):
+        raise EscapeRepairExecutionError("ALTERNATIVE_BASIS_INVALID")
+    provider_kind = str(basis.get("provider_kind") or "").strip()
+    repair_class = str(basis.get("repair_class") or "").strip()
+    if provider_kind == "EVIDENCE_ACQUISITION":
+        if repair_class != "ACQUIRE_TRUTHFUL_DISTINGUISHING_OBSERVATION" or kind != "ADD_DISCRIMINATOR":
+            raise EscapeRepairExecutionError("VERIFIED_DELTA_KIND_MISMATCH_WITH_EVIDENCE_ALTERNATIVE")
+    elif provider_kind == "CAPABILITY_SYNTHESIS":
+        if repair_class not in {
+            "ACQUIRE_OR_SYNTHESIZE_COMMON_ADEQUATE_POLICY",
+            "ACQUIRE_OR_SYNTHESIZE_REGION_ADEQUATE_POLICY",
+        } or kind != "ADD_POLICY":
+            raise EscapeRepairExecutionError("VERIFIED_DELTA_KIND_MISMATCH_WITH_POLICY_ALTERNATIVE")
+    else:
+        raise EscapeRepairExecutionError("ALTERNATIVE_PROVIDER_KIND_UNSUPPORTED")
+
     row = verified.get("row")
     if not isinstance(row, Mapping):
         raise EscapeRepairExecutionError("VERIFIED_DELTA_ROW_INVALID")
@@ -306,7 +325,11 @@ def execute(
                 candidate=candidate,
                 alternative=alternative,
             )
-            candidate_state = _apply_verified_delta(state, verified_delta)
+            candidate_state = _apply_verified_delta(
+                state,
+                verified_delta,
+                alternative=alternative,
+            )
             recertified = constructor.construct(candidate_state)
             attempt = {
                 "alternative_id": alternative["alternative_id"],
