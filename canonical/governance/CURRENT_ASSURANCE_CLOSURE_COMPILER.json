@@ -173,5 +173,22 @@
     "domain_semantic_closure": false,
     "domain_execution_closure": false,
     "terminal_credit_delta": 0
+  },
+  "professional_quality_scoped_evidence": {
+    "runtime_path": "canonical/runtime/professional_quality_scoped_evidence_v1.py",
+    "runtime_git_blob_sha": "e31f856982e67b0e439caae48a8a20ca918ca194",
+    "tests_path": "canonical/tests/test_professional_quality_scoped_evidence_v1.py",
+    "tests_git_blob_sha": "414a0346067a69428b225a6d4c531868c27c45ea",
+    "registry_path": "canonical/governance/PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_REGISTRY_20261010_V1.json",
+    "registry_git_blob_sha": "c685f267d0eb1b2d0f145b72c91d173b866803b6",
+    "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_VERIFY_20261010_V1.json",
+    "verification_git_blob_sha": "abc50a9505befdf679edc55571d48634b4f4f363",
+    "result": "PYCOMPILE_PASS__5_OF_5_PASS__ONE_R7_SCOPED_CAPABILITY",
+    "admitted_scope_count": 1,
+    "global_leaf_credit": false,
+    "global_r7_root_closed": false,
+    "domain_semantic_closure": false,
+    "domain_execution_closure": false,
+    "terminal_credit_delta": 0
   }
 }
