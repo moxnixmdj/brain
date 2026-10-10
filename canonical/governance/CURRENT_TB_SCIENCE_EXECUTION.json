@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_TB_SCIENCE_EXECUTION_POINTER_V2",
   "date": "2026-10-10",
-  "status": "RANK19_NONCONSUMING_IDENTITY_ABORT_FINAL__AGENT_V14_GENERIC_CLAIM_BOUND_IDENTITY_REPAIR_VERIFIED__COUNTS_UNCHANGED__NEXT_SLOT_SELECTION_ONLY",
+  "status": "RANK19_NONCONSUMING_IDENTITY_ABORT_FINAL__AGENT_V13_AND_PUBLIC_V14_CLAIM_BOUND_IDENTITY_REPAIRS_VERIFIED__COUNTS_UNCHANGED__NEXT_SLOT_SELECTION_ONLY",
   "current_result": {
     "path": "canonical/verification/TB_SCIENCE_RANK19_RESULT_TRUTH_20261010_V1.json",
     "git_blob_sha": "66b02049cc3d142cefe8c6bcc966fdcc4c5cb08b"
@@ -29,7 +29,7 @@
   },
   "acceptance_credit_delta": 0,
   "terminal_credit_delta": 0,
-  "next": "CAPABILITY_FIRST_SELECT_NEXT_UNEXPOSED_VALIDATION_SLOT__RANK20_CANDIDATE_HYSTERETIC_AQUIFER_CONTROL__NO_TASK_READ_OR_EXECUTION_AUTHORITY_YET",
+  "next": "CAPABILITY_FIRST_SELECT_NEXT_UNEXPOSED_VALIDATION_SLOT__RANK20_CANDIDATE_HYSTERETIC_AQUIFER_CONTROL__NO_TASK_READ_OR_EXECUTION_AUTHORITY_YET__ESCAPE_PROGRESS_SHARED_PROOF_WORK_REMAINS_HIGHER_LEVERAGE_UNLESS_SCHEDULER_ADMITS_CHECKPOINT",
   "finalized_rank18": {
     "ledger_schedule_rank": 18,
     "slot_id": "terminal-bench-science/longitudinal-clinical-agent::trial-0",
@@ -170,5 +170,18 @@
     "task_started": false,
     "execution_authority": false,
     "capability_first_admission_required": true
+  },
+  "agent_v13_identity_repair": {
+    "path": "canonical/verification/AGENT_V13_IDENTITY_V2_REPAIR_VERIFY_20261010_V1.json",
+    "git_blob_sha": "ec982a8cde737669d42abfb62a9f3cbdf0752434",
+    "repaired_runtime_path": "canonical/runtime/harbor_science_agent_v13.py",
+    "repaired_runtime_git_blob_sha": "470bfe079aeffaa07a3b92975b4edea17c9a20e1",
+    "public_verification_run_id": 38039194558,
+    "public_verification_conclusion": "success",
+    "task_read": false,
+    "task_started": false,
+    "benchmark_trials_consumed": 0,
+    "repair_verified": true,
+    "rank19_retry_authority": false
   }
 }
