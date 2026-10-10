@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_AGENT_V14_CLAIM_BOUND_IDENTITY_REPAIR_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__GENERIC_ZERO_EXPOSURE_IDENTITY_VERSION_SKEW_REPAIRED__AGENT_V14_MERGED_TO_TRUSTED_PUBLIC_BASE__NO_RANK19_RETRY",
+  "defect": {
+    "diagnosis_path": "canonical/governance/TB_SCIENCE_RANK19_IDENTITY_SKEW_DIAGNOSIS_20261010_V1.json",
+    "diagnosis_git_blob_sha": "e4ce666de016716328ac577b4858a126f41126da",
+    "cause": "RUNNER_CARRIES_V2_CLAIM_BOUND_ID__AGENT_V13_RECOMPUTES_V1_SLOT_TASK_ONLY_ID"
+  },
+  "public_repair": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "trusted_base_branch": "terminal-execution-v1",
+    "merged_commit": "a327bd6f2bb67f2efeb67f0bc17a16508be2e9d2",
+    "repair_branch_head": "4a41a8d6c35fb531913b316b066b16b9cf50ba76",
+    "agent_v14_blob": "afa78733075ac8cbec7bd363dca3e7afb4a56313",
+    "v2_identity_blob": "67ff638459af1bb50a094e9479fb4aa5e2a3de1c",
+    "semantic_delta": [
+      "AGENT_IMPORTS_LOGICAL_ATTEMPT_IDENTITY_V2",
+      "AGENT_REQUIRES_BRAIN_EXECUTION_CLAIM_BINDING_DIGEST",
+      "AGENT_RECOMPUTES_SLOT_PLUS_TASK_PLUS_CLAIM_BINDING_IDENTITY",
+      "AGENT_FAILS_CLOSED_ON_MISSING_OR_MISMATCHED_CLAIM_BINDING",
+      "NO_SCIENCE_REASONING_OR_PLANNER_BEHAVIOR_CHANGE"
+    ]
+  },
+  "verification": {
+    "dedicated_agent_v14_workflow": {
+      "run_id": 38038837799,
+      "conclusion": "success",
+      "proves": [
+        "AGENT_V14_MINIMAL_SOURCE_DELTA_FROM_V13",
+        "PY_COMPILE_PASS",
+        "CLAIM_BOUND_IDENTITY_REGRESSION_PASS",
+        "EXACT_RANK19_V2_IDENTITY_RECOMPUTES_TO_CARRIED_ID_WITH_ZERO_TASK_READ"
+      ]
+    },
+    "rank19_v14_claim_bound_reseal": {
+      "run_id": 38038868400,
+      "conclusion": "success"
+    },
+    "rank19_v13_trusted_base_reseal": {
+      "run_id": 38038868508,
+      "conclusion": "success"
+    },
+    "unrelated_legacy_workflow_failures": "NON_LOAD_BEARING_FOR_THIS_REPAIR__OLDER_RANK16_RANK17_RANK18_SURFACES_HAVE_HISTORICAL_ASSUMPTIONS_AND_DO_NOT_FALSIFY_AGENT_V14_IDENTITY_CONTRACT"
+  },
+  "capability_classification": {
+    "defect_class": "GENERIC_EXECUTION_TRANSPORT_IDENTITY_VERSION_SKEW",
+    "science_capability_failure": false,
+    "new_intelligence_primitive_required": false,
+    "reusable_repair": true,
+    "rank19_retry_authority": false,
+    "rank19_replacement_authority": false
+  },
+  "next": "CAPABILITY_FIRST_SELECT_NEXT_UNEXPOSED_VALIDATION_SLOT__DO_NOT_REOPEN_RANK19",
+  "hard_nonclaims": [
+    "NO_RANK19_RETRY_REPLAY_OR_REPLACEMENT",
+    "NO_BENCHMARK_ACCEPTANCE_CREDIT",
+    "NO_SCIENCE_CAPABILITY_CREDIT_FROM_TRANSPORT_REPAIR_ALONE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
