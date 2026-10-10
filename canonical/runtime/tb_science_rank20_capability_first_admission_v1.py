@@ -94,15 +94,15 @@ def verify() -> dict[str, Any]:
     diagnosis = _load(SOURCES["rank19_diagnosis"][0])
     repair = _load(SOURCES["agent_v13_identity_v2_repair_verification"][0])
 
-    allowed_roles = (
-        activation.get("primary_work_rule", {}).get("allowed_benchmark_roles", [])
-        if isinstance(activation.get("primary_work_rule"), dict)
-        else []
-    )
-    if "NEW_CAPABILITY_VALIDATION" not in allowed_roles:
-        errors.append("NEW_CAPABILITY_VALIDATION_NOT_ALLOWED")
     if activation.get("status") != "ACTIVE_PRIMARY_CAPABILITY_FIRST_DEVELOPMENT_SCHEDULER__REUSE_FIRST_RESIDUAL_ADMISSION_MECHANICALLY_ENFORCED":
         errors.append("SCHEDULER_ACTIVATION_STATUS_DRIFT")
+    if activation.get("scheduler_runtime_git_blob_sha") != SOURCES["scheduler_runtime"][1]:
+        errors.append("SCHEDULER_ACTIVATION_RUNTIME_BINDING_DRIFT")
+    primary_rule = activation.get("primary_work_rule") or {}
+    if primary_rule.get("benchmark_bookkeeping_without_allowed_role") != "DEMOTED":
+        errors.append("BENCHMARK_BOOKKEEPING_POLICY_DRIFT")
+    if primary_rule.get("new_primitive_claim_without_reuse_exhaustion_proof") != "DEMOTED_UNPROVED_NEW_PRIMITIVE_CLAIM":
+        errors.append("REUSE_FIRST_NEW_PRIMITIVE_POLICY_DRIFT")
 
     work = candidate.get("scheduler_work_item")
     scheduler_row: dict[str, Any] = {}
