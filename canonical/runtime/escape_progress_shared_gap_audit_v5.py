@@ -61,6 +61,7 @@ def _resolve_row_current_evidence(
     root = Path(repo_root)
     evidence = row.get("evidence")
     errors: list[str] = []
+    warnings: list[str] = []
     if (
         not isinstance(evidence, list)
         or len(evidence) != 2
@@ -114,11 +115,15 @@ def _resolve_row_current_evidence(
 
     for token in required:
         if token not in text:
-            errors.append("CURRENT_REQUIRED_STRING_MISSING:" + token)
+            if mutable:
+                warnings.append("MUTABLE_REQUIRED_STRING_DRIFT:" + token)
+            else:
+                errors.append("CURRENT_REQUIRED_STRING_MISSING:" + token)
 
     return {
         "pass": not errors,
         "errors": errors,
+        "warnings": warnings,
         "path": rel,
         "binding_mode": binding_mode,
         "manifest_observed_git_blob_sha": manifest_blob,
@@ -131,10 +136,13 @@ def _current_evidence_verification_errors(
     verify: Mapping[str, Any],
     current: Mapping[str, Any],
 ) -> list[str]:
+    errors: list[str] = []
+    if verify.get("current_route_semantics_verified") is not True:
+        errors.append("ROW_PROOF_CURRENT_ROUTE_SEMANTICS_NOT_VERIFIED")
     subject = verify.get("current_evidence_subject")
     if not isinstance(subject, Mapping):
-        return ["ROW_PROOF_CURRENT_EVIDENCE_SUBJECT_REQUIRED"]
-    errors: list[str] = []
+        errors.append("ROW_PROOF_CURRENT_EVIDENCE_SUBJECT_REQUIRED")
+        return errors
     for key in ("path", "git_blob_sha", "byte_sha256"):
         if subject.get(key) != current.get(key):
             errors.append("ROW_PROOF_CURRENT_EVIDENCE_SUBJECT_MISMATCH:" + key)
@@ -212,6 +220,7 @@ def audit(
     rows = manifest.get("rows") if isinstance(manifest, Mapping) else None
     currentness_rows: list[dict[str, Any]] = []
     currentness_errors: list[str] = []
+    currentness_warnings: list[str] = []
     current_by_oid: dict[str, Mapping[str, Any]] = {}
 
     if isinstance(rows, list):
@@ -229,9 +238,12 @@ def audit(
                 "git_blob_sha": current.get("git_blob_sha"),
                 "byte_sha256": current.get("byte_sha256"),
                 "errors": list(current.get("errors") or []),
+                "warnings": list(current.get("warnings") or []),
             })
             for error in current.get("errors") or []:
                 currentness_errors.append(oid + ":" + str(error))
+            for warning in current.get("warnings") or []:
+                currentness_warnings.append(oid + ":" + str(warning))
     else:
         currentness_errors.append("MANIFEST_ROWS_INVALID")
 
@@ -297,6 +309,7 @@ def audit(
         "pass": pass_gate,
         "cc_r3_proved": cc_r3,
         "currentness_errors": all_currentness_errors,
+        "currentness_warnings": sorted(set(currentness_warnings)),
         "currentness_rows": currentness_rows,
         "authenticated_current_row_proof_count": len(filtered),
         "v4_audit": structural,
@@ -304,8 +317,10 @@ def audit(
         "acceptance_credit_delta": 0,
         "terminal_credit_delta": 0,
         "rule": (
-            "CURRENT_ROW_SOURCE_BYTES_MUST_STILL_SUPPORT_MANIFEST_SEMANTICS__"
-            "EACH_INDEPENDENT_ROW_VERIFIER_MUST_BIND_THE_EXACT_CURRENT_EVIDENCE_BYTES"
+            "IMMUTABLE_ROW_SOURCES_REQUIRE_EXACT_MANIFEST_BYTES__MUTABLE_CURRENT_"
+            "SOURCES_ARE_PATH_AUTHORITATIVE_WITH_SUMMARY_DRIFT_NONAUTHORITATIVE__"
+            "ROW_CREDIT_REQUIRES_DISTINCT_VERIFIER_BINDING_EXACT_CURRENT_EVIDENCE_"
+            "BYTES_AND_ATTESTING_CURRENT_ROUTE_SEMANTICS"
         ),
     }
 
