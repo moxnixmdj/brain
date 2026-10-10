@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_DECLARED_SYSTEM_SUBJECT_V7_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__V7_PROOF_BOUND_EXECUTION_SYSTEM__22_OF_22_COMPONENT_CURRENTNESS__INDEPENDENT_SPRITE_REPLAY__ZERO_ROOT_OR_QUALITY_AUTHORITY",
+  "subject": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V7_DECLARED_SYSTEM_SUBJECT_20261010_V6.json",
+    "git_blob_sha": "1d598bc8757017ceb34928d0df9f5fce859ef868",
+    "subject_kind": "DECLARED_SYSTEM",
+    "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+    "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e"
+  },
+  "verifier": {
+    "path": "canonical/runtime/professional_quality_declared_system_subject_verify_v1.py",
+    "git_blob_sha": "2936df1590077f4e97c82adaf79046a1221cef99"
+  },
+  "independent_carrier": {
+    "provider": "Sprites",
+    "sprite": "brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/pq-v7-subject-verify"
+  },
+  "real_subject_replay": {
+    "pass": true,
+    "status": "PASS__DECLARED_SYSTEM_SUBJECT_CURRENT_AND_CONTENT_ADDRESSED",
+    "component_count": 22,
+    "component_currentness_verified": true,
+    "subject_identity_verified": true,
+    "subject_git_blob_sha": "1d598bc8757017ceb34928d0df9f5fce859ef868",
+    "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+    "log_sha256": "f5bbc0ce278aa318966fd205489b1fcacd393064069d92c71eeafced1875dc40"
+  },
+  "proves": [
+    "EXACT_22_COMPONENT_SUBJECT_HASH_MATCHES_CANONICAL_SYSTEM_MATERIAL",
+    "ALL_22_COMPONENT_BLOBS_MATCH_THE_PINNED_REPOSITORY_BYTES",
+    "V7_PROOF_BOUND_ROUTER_AND_GENERIC_STEP_BINDING_KERNEL_ARE_LOAD_BEARING_SUBJECT_COMPONENTS",
+    "V6_AUTHENTICATED_TARGET_HANDOFF_AND_V3_HARD_DEFECT_PREFLIGHT_REMAIN_INHERITED_COMPONENTS",
+    "COMPONENT_MEMBERSHIP_DOES_NOT_GRANT_ROOT_SATISFACTION"
+  ],
+  "authority": {
+    "root_subject_binding_authority": false,
+    "semantic_truth_authority": false,
+    "execution_authority": false,
+    "quality_authority": false,
+    "acceptance_authority": false,
+    "promotion_authority": false,
+    "terminal_authority": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
