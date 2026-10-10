@@ -25,11 +25,18 @@ LOW_LEVEL_TOKENS = (
 )
 CONSTRUCTOR_TOKEN = "certified_reached_escape_state_constructor_v1"
 REPAIR_CYCLE_REL = "canonical/runtime/reached_escape_repair_cycle_v1.py"
+CONSTRUCTOR_V2_REL = "canonical/runtime/certified_reached_escape_state_constructor_v2.py"
 REPAIR_CYCLE_ALLOWED_KERNEL_ATTRIBUTES = frozenset({"_normalize"})
+CONSTRUCTOR_V2_ALLOWED_KERNEL_ATTRIBUTES = frozenset({"STATE_SCHEMA"})
 REPAIR_CYCLE_REQUIRED_MARKERS = (
     "from canonical.runtime import certified_reached_escape_state_constructor_v1 as constructor",
     "from canonical.runtime import reached_escape_state_kernel_v1 as kernel",
     "constructor.construct(",
+)
+CONSTRUCTOR_V2_REQUIRED_MARKERS = (
+    "from canonical.runtime import certified_reached_escape_state_constructor_v1 as v1",
+    "from canonical.runtime import reached_escape_state_kernel_v1 as kernel",
+    "result = v1.construct(verified_state)",
 )
 
 TRUSTED_LOW_LEVEL_REFERENCE_FILES = frozenset(
@@ -37,6 +44,7 @@ TRUSTED_LOW_LEVEL_REFERENCE_FILES = frozenset(
         "canonical/runtime/reached_escape_state_kernel_v1.py",
         "canonical/runtime/reached_escape_finite_totality_certificate_v1.py",
         "canonical/runtime/certified_reached_escape_state_constructor_v1.py",
+        "canonical/runtime/certified_reached_escape_state_constructor_v2.py",
         "canonical/runtime/reached_escape_repair_cycle_v1.py",
         "canonical/runtime/reached_escape_live_no_bypass_guard_v1.py",
     }
@@ -163,6 +171,48 @@ def scan_repo(root: str | Path) -> dict[str, Any]:
                 "attributes": unexpected_kernel_attributes,
             })
 
+    constructor_v2: dict[str, Any] = {
+        "path": CONSTRUCTOR_V2_REL,
+        "constructor_markers_complete": False,
+        "missing_markers": [],
+        "kernel_attributes": [],
+        "unexpected_kernel_attributes": [],
+    }
+    constructor_v2_path = root / CONSTRUCTOR_V2_REL
+    if constructor_v2_path.is_file():
+        constructor_v2_text = constructor_v2_path.read_text(encoding="utf-8")
+        missing_constructor_v2_markers = [
+            marker for marker in CONSTRUCTOR_V2_REQUIRED_MARKERS
+            if marker not in constructor_v2_text
+        ]
+        constructor_v2_kernel_attributes = sorted(set(re.findall(
+            r"\bkernel\.([A-Za-z_][A-Za-z0-9_]*)",
+            constructor_v2_text,
+        )))
+        unexpected_constructor_v2_kernel_attributes = sorted(
+            set(constructor_v2_kernel_attributes)
+            - CONSTRUCTOR_V2_ALLOWED_KERNEL_ATTRIBUTES
+        )
+        constructor_v2 = {
+            "path": CONSTRUCTOR_V2_REL,
+            "constructor_markers_complete": not missing_constructor_v2_markers,
+            "missing_markers": missing_constructor_v2_markers,
+            "kernel_attributes": constructor_v2_kernel_attributes,
+            "unexpected_kernel_attributes": unexpected_constructor_v2_kernel_attributes,
+        }
+        if missing_constructor_v2_markers:
+            errors.append({
+                "code": "CONSTRUCTOR_V2_V1_DELEGATION_INCOMPLETE",
+                "path": CONSTRUCTOR_V2_REL,
+                "missing_markers": missing_constructor_v2_markers,
+            })
+        if unexpected_constructor_v2_kernel_attributes:
+            errors.append({
+                "code": "CONSTRUCTOR_V2_UNAPPROVED_KERNEL_ATTRIBUTE",
+                "path": CONSTRUCTOR_V2_REL,
+                "attributes": unexpected_constructor_v2_kernel_attributes,
+            })
+
     live_entrypoints: list[dict[str, Any]] = []
     for rel, markers in sorted(LIVE_ENTRYPOINT_MARKERS.items()):
         path = root / rel
@@ -208,6 +258,7 @@ def scan_repo(root: str | Path) -> dict[str, Any]:
         "trusted_low_level_reference_files": sorted(TRUSTED_LOW_LEVEL_REFERENCE_FILES),
         "sensitive_reference_files": sensitive_reference_files,
         "repair_cycle": repair_cycle,
+        "constructor_v2": constructor_v2,
         "live_entrypoints": live_entrypoints,
         "errors": errors,
         "scope": "CANONICAL_RUNTIME_RECURSIVE_PYTHON_STATIC_REFERENCE_CENSUS",
