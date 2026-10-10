@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_WHOLE_LEAF_SCOPE_SEMANTIC_VERIFY_V2",
+  "date": "2026-10-10",
+  "status": "PASS__R10_SEMANTIC_CLAIM_BOUND_UNIVERSAL_SCOPE_COVER__EXACT_BRANCH_BYTES__8_OF_8__PROPERTY_TRUTH_SEPARATE",
+  "leaf_id": "PQ::R10_ANALYSIS_DECISION::SEMANTIC",
+  "claim_id": "34a59e3ce3ae28c14a475f913639d9dbf03c65f191cf416034a48db5ffda57f0",
+  "claim_scope_git_blob_sha": "66a292f41f1455101fb5684358b91dfc44afd38d",
+  "certificate_git_blob_sha": "488ff4b86c0849bd5e0c0611b8d49bcdf31f78e8",
+  "claim_verification_git_blob_sha": "8aab9b93cd6aa26ee99fca4828409600d96827fc",
+  "scope_compiler_git_blob_sha": "b208255789b14e44e86c82c196e06b5c41b3d039",
+  "semantic_verifier": {
+    "path": "canonical/runtime/professional_quality_whole_leaf_scope_certificate_v1.py",
+    "git_blob_sha": "3c2630a63aa90f7b4667ef57f73f75b1c6b3c828"
+  },
+  "semantic_tests": {
+    "path": "canonical/tests/test_professional_quality_whole_leaf_scope_certificate_v1.py",
+    "git_blob_sha": "0ab58e1a703a6c9a2af3cc1b6307287d49f6404c"
+  },
+  "semantic_verifier_git_blob_sha": "3c2630a63aa90f7b4667ef57f73f75b1c6b3c828",
+  "semantic_tests_git_blob_sha": "0ab58e1a703a6c9a2af3cc1b6307287d49f6404c",
+  "scope_complete": true,
+  "verified_basis": "UNIVERSAL_FORMAL_SCOPE_PROOF",
+  "independent_replay": {
+    "pass": true,
+    "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "py_compile": "PASS",
+    "tests_run": 8,
+    "tests_passed": 8,
+    "actual_certificate_eval": "PASS__CLAIM_BOUND_UNIVERSAL_WHOLE_LEAF_SCOPE_COVER",
+    "transcript_sha256": "4ab21fef147bdb3006c34a52f248d07a19d2abfaa5e63f54a16ee6f80842d5d9"
+  },
+  "leaf_property_truth_authority": false,
+  "semantic_truth_authority": false,
+  "execution_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "hard_nonclaims": [
+    "NO_R10_SEMANTIC_PROPERTY_TRUTH",
+    "NO_R10_DOMAIN_SEMANTIC_CLOSURE",
+    "NO_R10_ROOT_CLOSURE",
+    "NO_PROFESSIONAL_QUALITY_ACCEPTANCE_OR_PROMOTION"
+  ]
+}
