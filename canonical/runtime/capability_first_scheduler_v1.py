@@ -15,6 +15,8 @@ from fractions import Fraction
 from pathlib import Path
 from typing import Any, Mapping, Sequence
 
+from canonical.runtime import r2_semantic_residual_ledger_v1 as residual_ledger
+
 SCHEMA = "PROJECT_BRAIN_CAPABILITY_FIRST_SCHEDULER_V1"
 MISSION_OBJECTIVE = "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE"
 MILESTONE = "OPUS_5_5_FIRST_FRONTIER_CHECKPOINT__NOT_TERMINAL_OBJECTIVE"
@@ -101,6 +103,61 @@ def _has_load_bearing_path(raw: Mapping[str, Any]) -> bool:
         or _ids(raw, "constructive_gap_for_open_obligation_ids")
         or raw.get("scope_complete_discharge") is True
     )
+
+
+def _shared_residual_fanout(
+    raw: Mapping[str, Any],
+) -> tuple[Fraction, list[str]]:
+    cause_ids = _ids(raw, "shared_residual_cause_ids")
+    if not cause_ids:
+        return Fraction(0), []
+
+    try:
+        ledger = residual_ledger.load_current_ledger()
+    except residual_ledger.R2SemanticResidualLedgerError as exc:
+        raise CapabilityFirstSchedulerError(
+            "CURRENT_R2_RESIDUAL_LEDGER_UNAVAILABLE"
+        ) from exc
+
+    if ledger.get("classification_complete") is not True:
+        raise CapabilityFirstSchedulerError(
+            "CURRENT_R2_RESIDUAL_LEDGER_CLASSIFICATION_INCOMPLETE"
+        )
+
+    cause_to_clauses: dict[str, set[str]] = {}
+    for key in ("fine_causes", "shared_causes"):
+        rows = ledger.get(key, [])
+        if not isinstance(rows, list):
+            raise CapabilityFirstSchedulerError(
+                "CURRENT_R2_RESIDUAL_LEDGER_INVALID"
+            )
+        for row in rows:
+            if not isinstance(row, Mapping):
+                raise CapabilityFirstSchedulerError(
+                    "CURRENT_R2_RESIDUAL_LEDGER_INVALID"
+                )
+            cause_id = _s(row.get("cause_id"))
+            clause_ids = row.get("clause_ids", [])
+            if (
+                not cause_id
+                or not isinstance(clause_ids, list)
+                or not all(isinstance(x, str) and _s(x) for x in clause_ids)
+            ):
+                raise CapabilityFirstSchedulerError(
+                    "CURRENT_R2_RESIDUAL_LEDGER_INVALID"
+                )
+            cause_to_clauses[cause_id] = set(_s(x) for x in clause_ids)
+
+    unknown = [cause_id for cause_id in cause_ids if cause_id not in cause_to_clauses]
+    if unknown:
+        raise CapabilityFirstSchedulerError(
+            "UNKNOWN_SHARED_RESIDUAL_CAUSE:" + ",".join(unknown)
+        )
+
+    covered: set[str] = set()
+    for cause_id in cause_ids:
+        covered.update(cause_to_clauses[cause_id])
+    return Fraction(len(covered), 1), cause_ids
 
 
 class CapabilityFirstSchedulerError(ValueError):
@@ -201,7 +258,10 @@ def rank_work(
         seen.add(work_id)
 
         eligible, eligibility = _eligible(raw, checkpoint_open_obligation_count)
+        shared_residual_score, shared_residual_cause_ids = _shared_residual_fanout(raw)
         capability_score = _score(raw) if eligible else Fraction(0)
+        if not eligible:
+            shared_residual_score = Fraction(0)
         checkpoint_score = Fraction(0)
         if (
             eligible
@@ -228,8 +288,10 @@ def rank_work(
                     raw, "constructive_gap_for_open_obligation_ids"
                 ),
                 "scope_complete_discharge": raw.get("scope_complete_discharge") is True,
+                "shared_residual_cause_ids": shared_residual_cause_ids,
                 "eligibility": eligibility,
                 "capability_priority_score_fraction": capability_score,
+                "shared_residual_fanout_score_fraction": shared_residual_score,
                 "checkpoint_audit_score_fraction": checkpoint_score,
             }
         )
@@ -241,6 +303,7 @@ def rank_work(
         key=lambda x: (
             0 if x["eligibility"] == "ELIGIBLE" else 1,
             -x["capability_priority_score_fraction"],
+            -x["shared_residual_fanout_score_fraction"],
             -x["checkpoint_audit_score_fraction"],
             x["work_id"],
         )
@@ -261,7 +324,8 @@ def rank_work(
         "checkpoint_audit_active": audit_active,
         "primary_admission_rule": (
             "REUSABLE_CAPABILITY_RESOURCE_LEVERAGE_IS_PRIMARY__"
-            "OPUS_CHECKPOINT_LEVERAGE_IS_SECONDARY_AUDIT_SIGNAL__"
+            "CURRENT_R2_SHARED_CAUSE_FANOUT_BREAKS_EQUAL_CAPABILITY_TIES__"
+            "OPUS_CHECKPOINT_LEVERAGE_IS_TERTIARY_AUDIT_SIGNAL__"
             "BENCHMARK_BOOKKEEPING_REMAINS_DEMOTED"
         ),
         "checkpoint_policy": (
@@ -295,8 +359,12 @@ def rank_work(
                     "constructive_gap_for_open_obligation_ids"
                 ],
                 "scope_complete_discharge": row["scope_complete_discharge"],
+                "shared_residual_cause_ids": row["shared_residual_cause_ids"],
                 "eligibility": row["eligibility"],
                 "priority_score": str(row["capability_priority_score_fraction"]),
+                "shared_residual_fanout_score": str(
+                    row["shared_residual_fanout_score_fraction"]
+                ),
                 "checkpoint_audit_score": str(row["checkpoint_audit_score_fraction"]),
             }
             for i, row in enumerate(rows)

@@ -1,0 +1,50 @@
+name: verify-r2-shared-cause-residual-ledger-v1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/runtime/r2_semantic_residual_ledger_v1.py
+      - canonical/runtime/capability_first_scheduler_v1.py
+      - canonical/tests/test_r2_semantic_residual_ledger_v1.py
+      - canonical/tests/test_capability_first_scheduler_v1.py
+      - canonical/governance/CURRENT_R2_SHARED_CAUSE_RESIDUAL_LEDGER.json
+      - canonical/governance/R2_SHARED_CAUSE_RESIDUAL_LEDGER_ACTIVATION_20261010_V1.json
+      - canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V4.json
+      - canonical/governance/CURRENT_DEVELOPMENT_SCHEDULER.json
+      - canonical/governance/CURRENT_MISSION_OBJECTIVE.json
+      - canonical/governance/R2_MECHANISM_CLOSURE_OPEN_WORLD_FRONTIER_POLICY_20261010_V1.json
+      - .github/workflows/verify-r2-shared-cause-residual-ledger-v1.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Compile changed runtimes
+        run: |
+          python3 -m py_compile \
+            canonical/runtime/r2_semantic_residual_ledger_v1.py \
+            canonical/runtime/capability_first_scheduler_v1.py
+      - name: Run residual-ledger and scheduler regressions
+        run: |
+          set -o pipefail
+          PYTHONPATH=. python3 -m unittest -v \
+            canonical.tests.test_r2_semantic_residual_ledger_v1 \
+            canonical.tests.test_capability_first_scheduler_v1 \
+            2>&1 | tee r2-shared-cause-ledger-test-output.txt
+      - name: Publish verification output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: r2-shared-cause-residual-ledger-v1-test-output
+          path: r2-shared-cause-ledger-test-output.txt
+          if-no-files-found: warn
