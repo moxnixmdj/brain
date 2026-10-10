@@ -49,6 +49,7 @@ class GeneralAdequateDecisionPolicyCoverIntegrationV1Tests(TestCase):
             "selected_policy_id": "policy.covered",
             "policy_selection_authorized": True,
             "selected_policy_adequacy_verified": True,
+            "selected_policy_safety_verified": True,
             "bound_state_totality_proved": True,
         }
 
@@ -256,7 +257,22 @@ class GeneralAdequateDecisionPolicyCoverIntegrationV1Tests(TestCase):
 
         self.assertFalse(out["pass"])
         self.assertEqual(out["status"], "FAIL_CLOSED")
-        self.assertIn("POLICY_COVER_PASS_WITHOUT_AUTHORIZED_ADEQUATE_SELECTION", out["reason"])
+        self.assertIn("POLICY_COVER_PASS_WITHOUT_AUTHORIZED_SAFE_ADEQUATE_SELECTION", out["reason"])
+
+
+    def test_cover_pass_without_policy_safety_authority_fails_closed(self):
+        request = self._request()
+        bad_cover = dict(self._cover_pass())
+        bad_cover["selected_policy_safety_verified"] = False
+        with patch.object(controller, "compile_contract", return_value=self._raw_contract()), \
+             patch.object(controller, "_authenticate_goal_binding", return_value={"pass": True}), \
+             patch.object(controller, "evaluate_p3", return_value=self._p3_open_without_information_gap()), \
+             patch.object(controller, "evaluate_policy_cover", return_value=bad_cover):
+            out = controller.run(request)
+
+        self.assertFalse(out["pass"])
+        self.assertEqual(out["status"], "FAIL_CLOSED")
+        self.assertIn("POLICY_COVER_PASS_WITHOUT_AUTHORIZED_SAFE_ADEQUATE_SELECTION", out["reason"])
 
 
     def test_existing_authenticated_observation_is_reused_before_provider(self):
