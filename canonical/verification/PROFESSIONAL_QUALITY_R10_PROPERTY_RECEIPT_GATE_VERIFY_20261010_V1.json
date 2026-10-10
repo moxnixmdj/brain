@@ -1,0 +1,75 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R10_PROPERTY_RECEIPT_GATE_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__SEPARATE_CARRIER_EXACT_BYTES__PYCOMPILE__6_OF_6_PROPERTY_RECEIPT_AND_STRUCTURAL_TO_PROPERTY_NON_SELF_CERTIFICATION_TESTS__ZERO_PROPERTY_QUALITY_OR_TERMINAL_CREDIT",
+  "source_main_head": "d680992ff65f94395a5b4db356ac7e0f8481f5b9",
+  "subject": {
+    "root_id": "R10_ANALYSIS_DECISION",
+    "leaf_id": "PQ::R10_ANALYSIS_DECISION::EXECUTION",
+    "claim_id": "205a864e7d7a56a14a46bb75923cc9b11126d479676d26d88803831da1197294"
+  },
+  "independent_carrier": {
+    "provider": "Sprites",
+    "sprite": "brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695"
+  },
+  "exact_blobs": {
+    "property_receipt_gate_runtime": "b7cf59676e82dbeb44e1acac1adf6e1ef8a41552",
+    "property_receipt_gate_tests": "d672f6005219c1e49e4766e4fb02707a00dd1312",
+    "structural_to_property_integration_test": "7a9a43d271f92ef3feeb121e56aca7c3e9364676",
+    "current_r10_execution_guard": "83ae7bc81660bd4be7f66b9454de5d007c0db959",
+    "current_r10_structural_proof_slot_verifier": "04957e2e385f8169e7d8aff5b0e1f2009e848666",
+    "r10_decision_constitution": "a087db2645b03e589965d50eb51d32a3049dc2fe",
+    "professional_execution_profile": "f7e89eafbb691c16d1bdf5b8d295a468d5e3bec5",
+    "professional_defeater_catalog": "8b92e5cf76f767054f55414b87014e03d43460b8"
+  },
+  "replay": {
+    "py_compile": "PASS",
+    "tests_run": 6,
+    "tests_passed": 6,
+    "tests_failed": 0,
+    "focused_integration": {
+      "structural_status": "PASS__R10_STRUCTURAL_PROOF_SLOTS_SATISFIED",
+      "guard_status": "PASS__R10_EXECUTION_GUARD_ELIGIBLE_FOR_SCOPED_CERTIFICATE_VERIFICATION",
+      "downstream_property_status": "OPEN__R10_PROPERTY_EVIDENCE_OR_DETECTION_COMPLETENESS_REQUIRED",
+      "missing_property_receipt_slots": 9,
+      "detection_completeness_proved": false,
+      "known_defeater_block_status": "ABSTAIN_OR_ESCALATE__KNOWN_R10_DEFEATER_ACTIVE"
+    }
+  },
+  "verified_invariants": [
+    "STRUCTURAL_POLICY_COMPLIANCE_IS_NECESSARY_BUT_NOT_PROPERTY_TRUTH",
+    "HASH_SHAPED_REFERENCES_WITHOUT_REAL_FILES_HAVE_ZERO_PROPERTY_AUTHORITY",
+    "PROPERTY_EVIDENCE_SEMANTIC_VERIFIER_IS_RERUN_OVER_EXACT_CONTENT_ADDRESSED_EVIDENCE",
+    "STORED_PASS_RECEIPT_CANNOT_OVERRIDE_SEMANTIC_VERIFIER_REJECTION",
+    "INDEPENDENT_RECEIPT_MUST_BIND_EXACT_CLAIM_LEAF_SLOT_EVIDENCE_VERIFIER_AND_RERUN_RESULT",
+    "ALL_NINE_PROPERTY_SLOTS_REQUIRE_SEMANTIC_RECEIPTS",
+    "DEFEATER_DETECTION_COMPLETENESS_REQUIRES_A_SEPARATE_SEMANTIC_RECEIPT",
+    "KNOWN_DEFEATER_ENFORCEMENT_ALONE_DOES_NOT_PROVE_DETECTION_COMPLETENESS"
+  ],
+  "current_truth": {
+    "property_receipts_admitted": 0,
+    "detection_completeness_proved": false,
+    "whole_leaf_property_truth_proved": false,
+    "property_truth_credit": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_ANY_OF_THE_NINE_R10_PROPERTY_FACTS_ARE_CURRENTLY_PROVED_BY_THIS_GATE",
+    "NO_DEFEATER_DETECTION_COMPLETENESS",
+    "NO_R10_WHOLE_LEAF_PROPERTY_TRUTH",
+    "NO_PROFESSIONAL_QUALITY_CLOSURE",
+    "NO_EXECUTION_AUTHORITY",
+    "NO_QUALITY_AUTHORITY",
+    "NO_ACCEPTANCE_AUTHORITY",
+    "NO_PROMOTION_AUTHORITY",
+    "NO_TERMINAL_AUTHORITY",
+    "NO_FULL_CURRENT_MAIN_REGRESSION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
