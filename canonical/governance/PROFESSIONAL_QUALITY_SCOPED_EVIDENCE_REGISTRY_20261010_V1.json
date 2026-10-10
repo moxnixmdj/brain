@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_REGISTRY_V1",
   "date": "2026-10-10",
-  "status": "ACTIVE__TEN_CLAIM_SCOPED_CAPABILITIES__ZERO_GLOBAL_LEAF_CREDIT",
+  "status": "ACTIVE__TWELVE_CLAIM_SCOPED_CAPABILITIES__ZERO_GLOBAL_LEAF_CREDIT",
   "entries": [
     {
       "scope_id": "PQ::R7::SINGLE_EDIT::UVCK_DEFEATER_ORDER_REPAIR",
@@ -269,6 +269,64 @@
       "compiler_verification": {
         "path": "canonical/governance/PROFESSIONAL_QUALITY_R9_CONSERVATIVE_CENSORING_SCOPE_20261010_V1.json",
         "git_blob_sha": "7755bc709169abe0db35a6418fd8568ed14131b7"
+      },
+      "global_leaf_closure": false,
+      "global_root_closure": false,
+      "semantic_leaf_credit": false,
+      "execution_leaf_credit": false,
+      "terminal_credit_delta": 0
+    },
+    {
+      "scope_id": "PQ::R8::DELEGATION_POPULATION::FROZEN_512_CASE_PRE_BEACON_BINDING",
+      "root_id": "R8_POPULATION_CONTEXT_OPERATOR",
+      "contributes_to_leaf_ids": [
+        "PQ::R8_POPULATION_CONTEXT_OPERATOR::EXECUTION"
+      ],
+      "claim_kind": "FROZEN_512_CASE_PRE_BEACON_DELEGATION_POPULATION_BINDING",
+      "source_receipt": {
+        "path": "canonical/verification/DELEGATION_TERMINAL_POPULATION_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "git_blob_sha": "3965db684d7104c5829ce1fcfa8ee08d2cd42cfc"
+      },
+      "reusable_compiler": {
+        "path": "canonical/runtime/delegation_terminal_population_binding_v1.py",
+        "git_blob_sha": "fae6d0bf2efbcb9b8fe2a2a627900889c5ec6cab"
+      },
+      "compiler_verification": {
+        "path": "canonical/verification/DELEGATION_TERMINAL_POPULATION_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "git_blob_sha": "3965db684d7104c5829ce1fcfa8ee08d2cd42cfc"
+      },
+      "scope_governance": {
+        "path": "canonical/governance/PROFESSIONAL_QUALITY_R8_POPULATION_CONTEXT_SCOPE_20261010_V1.json",
+        "git_blob_sha": "b174a62c94d36474f0b102d37362ea9fc3adaa91"
+      },
+      "global_leaf_closure": false,
+      "global_root_closure": false,
+      "semantic_leaf_credit": false,
+      "execution_leaf_credit": false,
+      "terminal_credit_delta": 0
+    },
+    {
+      "scope_id": "PQ::R12::UVCK::FAIL_CLOSED_META_COMPOSITION",
+      "root_id": "R12_META_COMPOSITION_CLOSURE",
+      "contributes_to_leaf_ids": [
+        "PQ::R12_META_COMPOSITION_CLOSURE::EXECUTION"
+      ],
+      "claim_kind": "FAIL_CLOSED_ASSURANCE_GRAPH_META_COMPOSITION_AND_ORDER_INDEPENDENT_DEFEATER_ROUTING",
+      "source_receipt": {
+        "path": "canonical/verification/UVCK_V2_CURRENT_GENERATION_INDEPENDENT_REPLAY_VERIFY_20261009_V1.json",
+        "git_blob_sha": "81f7f070233b6aa1c4b491949a4c3e7aedfafd10"
+      },
+      "reusable_compiler": {
+        "path": "canonical/runtime/assurance_closure_compiler_v1.py",
+        "git_blob_sha": "b4274a48edbe626a9ae9fd33da2f2227ca4dd5e8"
+      },
+      "compiler_verification": {
+        "path": "canonical/verification/UVCK_V2_DEFEATER_ORDER_VERIFY_20261009_V1.json",
+        "git_blob_sha": "1c3428b10a1205e928a87f41a7c16a8a3d17b7ca"
+      },
+      "scope_governance": {
+        "path": "canonical/governance/PROFESSIONAL_QUALITY_R12_META_COMPOSITION_SCOPE_20261010_V1.json",
+        "git_blob_sha": "4c69313ae31905f6aa379361d515dffdfb41efae"
       },
       "global_leaf_closure": false,
       "global_root_closure": false,
