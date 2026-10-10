@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_BASE_DOMAIN_NORMAL_FORM_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__TWO_ISOLATED_SPRITES__3_OF_3_EACH__EXACT_SIX_COORDINATES__NINE_STEP_PARTITION__ZERO_LEAF_CREDIT",
+  "exact_blobs": {
+    "runtime": "5fb16c4285354d896fd5507ed597da5bff57e426",
+    "tests": "ce6f4119237b1d9108ccfdfe1853c576beabb5ba",
+    "router_v3": "cdb6716ac6d562d1ab222242d07aeecc5cdfac78",
+    "router_v4": "8e5d473b5606251752c4968dfd35290e9b991f16",
+    "router_v6": "88644e0517d472d9fbef8d5bc6cf3495f2b50005",
+    "router_v7": "765b5994c2fcb5eb669b5fd0d989cc79c1609908",
+    "target_semantics": "583612b0e2226053ac758683087b5c5d0f510996",
+    "profile": "f7e89eafbb691c16d1bdf5b8d295a468d5e3bec5",
+    "behavioral_contract_registry_v2": "ae250d5bc5da73b23600670be354ffba31e65e53"
+  },
+  "replay": [
+    {
+      "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+      "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+      "py_compile": "PASS",
+      "tests_run": 3,
+      "tests_passed": 3
+    },
+    {
+      "carrier": "brain-r3-native-evidence-verify-20261010",
+      "carrier_id": "sprite-61fff7c6-fbff-4b85-a8e1-b98e28fd7e31",
+      "py_compile": "PASS",
+      "tests_run": 3,
+      "tests_passed": 3
+    }
+  ],
+  "proved": {
+    "semantic_coordinates": [
+      "objective",
+      "audience",
+      "source_evidence",
+      "artifact_type",
+      "constraints",
+      "current_draft_or_render"
+    ],
+    "semantic_coordinate_count": 6,
+    "profile_step_count": 9,
+    "target_compilation_step_count": 1,
+    "hard_defect_preflight_step_count": 1,
+    "proof_bound_remaining_step_count": 7,
+    "profile_step_partition_complete": true,
+    "router_chain": [
+      "V7",
+      "V6",
+      "V4",
+      "V3"
+    ],
+    "shared_base_domain_reusable": true
+  },
+  "consequence": "THE_24_PROFESSIONAL_LEAF_SCOPE_PROBLEMS_SHARE_ONE_CONTENT_ADDRESSED_BASE_TARGET_AND_EXECUTION_CONTEXT_NORMAL_FORM__ONLY_ROOT_SPECIFIC_ADMISSIBILITY_PREDICATES_AND_UNCOVERED_COMPLEMENTS_SHOULD_BE_PROVED_PER_LEAF",
+  "hard_nonclaims": [
+    "NO_ARBITRARY_USER_PROMPT_SEMANTIC_COMPLETENESS",
+    "NO_ROOT_SPECIFIC_DOMAIN_EQUIVALENCE",
+    "NO_WHOLE_LEAF_SCOPE_COMPLETENESS",
+    "NO_WHOLE_LEAF_PROPERTY_TRUTH",
+    "NO_DOMAIN_SEMANTIC_OR_EXECUTION_CLOSURE",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "root_specific_domain_equivalence_proved": false,
+  "whole_leaf_scope_complete": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
