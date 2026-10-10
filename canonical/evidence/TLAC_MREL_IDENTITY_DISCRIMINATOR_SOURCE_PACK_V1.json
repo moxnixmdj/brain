@@ -24,21 +24,21 @@
     },
     {
       "schema": "PROJECT_BRAIN_HTTPS_SOURCE_FRAGMENT_PROJECTION_PACK_V2",
-      "source_id": "FSB_TLAC_STANDARD_2015",
-      "url": "https://www.fsb.org/2015/11/total-loss-absorbing-capacity-tlac-principles-and-term-sheet-2/",
+      "source_id": "FSB_TLAC_PRESS_RELEASE_2015",
+      "url": "https://www.fsb.org/2015/11/tlac-press-release/",
       "retrieval_user_agent": "ProjectBrainSourceProjectionVerifier/2.0",
       "fragments": [
         {
-          "fragment_id": "TLAC_FSB_GSIB_SCOPE",
-          "section_anchor": "Total Loss-Absorbing Capacity (TLAC) Principles and Term Sheet",
-          "text": "The Total Loss-absorbing Capacity (TLAC) Standard applies to firms that have been designated as global systemically important banks (G-SIBs) by the FSB.",
+          "fragment_id": "TLAC_FSB_GSIB_STANDARD",
+          "section_anchor": "FSB issues final Total Loss-Absorbing Capacity standard for global systemically important banks",
+          "text": "The Financial Stability Board (FSB) today issued the final Total Loss-Absorbing Capacity (TLAC) standard for global systemically important banks (G-SIBs).",
           "max_chars_after_anchor": 5000
         },
         {
-          "fragment_id": "TLAC_MINIMUM_EXTERNAL_REQUIREMENT",
-          "section_anchor": "Total Loss-Absorbing Capacity (TLAC) Principles and Term Sheet",
-          "text": "All G-SIB are required to meet a new requirement for Minimum External TLAC alongside minimum regulatory capital requirements set out in the Basel III framework.",
-          "max_chars_after_anchor": 5000
+          "fragment_id": "TLAC_ALONGSIDE_BASEL_MINIMUMS",
+          "section_anchor": "FSB issues final Total Loss-Absorbing Capacity standard for global systemically important banks",
+          "text": "G-SIBs will be required to meet the TLAC requirement alongside the minimum regulatory requirements set out in the Basel III framework.",
+          "max_chars_after_anchor": 8000
         }
       ]
     }
