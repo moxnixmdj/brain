@@ -1,0 +1,87 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R9_EXECUTION_PROPERTY_TRUTH_INDEPENDENT_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_SPRITE__PYCOMPILE__18_OF_18_FALSIFICATION_TESTS__26_CASE_R9_EXECUTION_ACCEPTANCE__ONE_LEAF_PROPERTY_TRUTH_ONLY__ZERO_ROOT_QUALITY_OR_TERMINAL_CREDIT",
+  "repository": "moxnixmdj/brain",
+  "verification_branch": "successor/r9-execution-property-truth-20261010-v2",
+  "candidate_head_commit": "ea7ec287226ad5dd11a7eb41d5793f2ea84b3577",
+  "subject": {
+    "leaf_id": "PQ::R9_TEMPORAL_DEPLOYMENT::EXECUTION",
+    "root_id": "R9_TEMPORAL_DEPLOYMENT",
+    "claim_id": "edfe88a8e01f6b62a018891a098df872d9307addd2336b6e67d140084c37ed4f",
+    "manifest_acceptance": "RUN_ROOT_RELEVANT_POSITIVE_NEAR_MISS_AND_ADVERSARIAL_CASES_ON_EXACT_ARTIFACT_OR_RUNTIME_BYTES_AND_BIND_OBSERVED_OUTCOMES_TO_THE_ROOT_CONTRACT"
+  },
+  "exact_blobs": {
+    "property_verifier_runtime": "21bd7448cb60f36c41682c798ddfc09515a71894",
+    "property_verifier_tests": "fb88e64e065fee2304482e72beb4bc7a3e6fa3eb",
+    "execution_guard_runtime": "bdc7c9f0a05ffd06ae23186af4bba411af097867",
+    "execution_guard_tests": "5ff45ab96005d5daae860dfa19ef7728f7e71927",
+    "censoring_runtime": "3b48ea534d606cf47a8321b56427353066393577",
+    "leaf_manifest": "a7cad32c9fd969ff2c3857bb924c7bd746237ec2",
+    "execution_profile": "f7e89eafbb691c16d1bdf5b8d295a468d5e3bec5",
+    "defeater_catalog": "8b92e5cf76f767054f55414b87014e03d43460b8",
+    "whole_leaf_scope_batch_verification": "4c2d40a262f18f34bb35f94b59660d60972d45ef",
+    "r9_conservative_censoring_verification": "7081a52621a1bb8f1ad07d1da23b40c8e57e16c2"
+  },
+  "independent_replay": {
+    "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/r9-execution-property-truth-independent-v1",
+    "exact_files_copied_from_github": true,
+    "py_compile": "PASS",
+    "falsification_tests_run": 18,
+    "falsification_tests_passed": 18,
+    "verifier_entrypoint": "PASS",
+    "observed_case_counts": {
+      "positive": 1,
+      "known_adversarial": 13,
+      "near_miss": 4,
+      "unknown_detected": 1,
+      "unmapped_material": 1,
+      "final_123_boundary": 1,
+      "irreversible_failure_lock": 1,
+      "stale_dependency": 1,
+      "censoring_invariant_drift": 1,
+      "claim_substitution": 1,
+      "total": 26
+    },
+    "transcript_sha256": "2d2cba3d5934c16c1ba0c35486efbe4e07d95529d691046774c4d0fd7094e11b",
+    "transcript_bytes": 6137
+  },
+  "proves": [
+    "THE_EXACT_R9_EXECUTION_MANIFEST_ACCEPTANCE_IS_SATISFIED_BY_OBSERVED_POSITIVE_NEAR_MISS_AND_ADVERSARIAL_OUTCOMES_ON_THE_BOUND_CURRENT_RUNTIME_BEHAVIOR",
+    "ALL_13_DECLARED_KNOWN_R9_DEFEATERS_BLOCK_THE_ORDINARY_CERTIFICATE_PATH_WHEN_DETECTED",
+    "ALL_4_DECLARED_R9_NEAR_MISS_CLASSES_ESCALATE",
+    "UNKNOWN_DETECTED_AND_UNMAPPED_MATERIAL_FALSE_CERTIFICATION_SIGNALS_ESCALATE",
+    "FINAL_123_SUCCESS_AND_IRREVERSIBLE_87_FAILURE_BOUNDARIES_BLOCK",
+    "STALE_DEPENDENCY_CENSORING_INVARIANT_DRIFT_AND_CLAIM_SUBSTITUTION_FAIL_CLOSED",
+    "R9_EXECUTION_LEAF_PROPERTY_TRUTH_AUTHORITY_ONLY"
+  ],
+  "hard_nonclaims": [
+    "NO_DEFEATER_DETECTION_COMPLETENESS",
+    "NO_R9_SEMANTIC_LEAF_CLOSURE",
+    "NO_R9_ROOT_CLOSURE",
+    "NO_MULTIHORIZON_DEPLOYMENT_VALIDITY_FROM_THIS_LEAF_PROOF",
+    "NO_RARE_EVENT_DISTRIBUTION_SHIFT_PERFORMATIVE_OR_EQUILIBRIUM_TOTALITY",
+    "NO_GLOBAL_PROFESSIONAL_PROPERTY_TRUTH",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "leaf_property_truth_authority": true,
+  "detection_completeness_proved": false,
+  "r9_semantic_leaf_closed": false,
+  "r9_root_closed": false,
+  "semantic_truth_authority": false,
+  "execution_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "reseal": {
+    "status": "BYTE_IDENTICAL_CANDIDATE_RESEALED_ON_CURRENT_MAIN__PINNED_DEPENDENCIES_UNCHANGED",
+    "current_main_base_commit": "513204184291a7aa1ae5c04bee4560eb1a951424",
+    "candidate_bytes_unchanged": true,
+    "pinned_dependencies_unchanged": true
+  }
+}
