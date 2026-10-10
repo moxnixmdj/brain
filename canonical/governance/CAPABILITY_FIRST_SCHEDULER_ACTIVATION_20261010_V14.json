@@ -1,0 +1,70 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V14",
+  "date": "2026-10-10",
+  "status": "ACTIVE_POST_COMPOSITION_V14__PROFESSIONAL_V2_DOMAIN_FACTORIZATION_BOUND__R2_V86_CURRENT__TB_RANK20_V3_PARKED__READ_ONLY_ONLY__ZERO_CREDIT",
+  "supersedes": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V13.json",
+  "runtime": {
+    "path": "canonical/runtime/capability_parallel_frontier_post_composition_v1.py",
+    "git_blob_sha": "249b08767cdf4f940ba98ea3e8fe3aff0601e349",
+    "entrypoint": "plan_current_post_composition_frontier"
+  },
+  "frontier": {
+    "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
+    "git_blob_sha": "ba05cbd21e7e2a4d6d5ffcd85682ef12db9a72a1",
+    "frontier_id": "LIVE_WORK_FRONTIER_20261010_PROF12_CLAIM_V2_FACTORIZED_R2V86_TBPARK_V15"
+  },
+  "professional_domain_factorization": {
+    "worklist_path": "canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_DOMAIN_FACTORIZATION_WORKLIST_20261010_V1.json",
+    "worklist_git_blob_sha": "089719f3b935dfb29d03ded459ab0edbd374012a",
+    "compiler_path": "canonical/runtime/professional_quality_whole_leaf_domain_factorization_v1.py",
+    "compiler_git_blob_sha": "db7ccc96a5b06e26f621e8b5b47f93299220da2c",
+    "tests_path": "canonical/tests/test_professional_quality_whole_leaf_domain_factorization_v1.py",
+    "tests_git_blob_sha": "29efff092a85801741dab7b0b69e798c52c6c896",
+    "root_pair_candidate_count": 12,
+    "leaf_count": 24,
+    "pair_domain_equivalence_proved_count": 0,
+    "pair_domain_equivalence_required_count": 12,
+    "domain_reuse_authority": false,
+    "rule": "REUSE_ONE_ROOT_DOMAIN_ONLY_AFTER_INDEPENDENT_SEMANTIC_EXECUTION_DOMAIN_EQUIVALENCE"
+  },
+  "current_plan_regression": {
+    "path": "canonical/tests/test_capability_parallel_frontier_v14_current_plan.py",
+    "git_blob_sha": "14efc43df1975b138abec9bc2271c79f061f084d",
+    "expected_parallel_read_only_evidence_work_ids": [
+      "BYTES_EXACT_SYMBOLIC_V24_NEXT_PHYSICAL_CUT",
+      "ESCAPE_GAP_A_AUTHENTICATED_ROW_PROOFS",
+      "ESCAPE_GAP_B_STRICT_PROGRESS_ROW_PROOFS",
+      "PROFESSIONAL_QUALITY_V7_WHOLE_LEAF_DOMAIN_EVIDENCE"
+    ],
+    "expected_nonprimary": [
+      "TB_SCIENCE_RANK20_V3_RETIRED_PARKED",
+      "R2_FINANCE_SEMANTIC_ADEQUACY_TAIL",
+      "ASSURANCE_UVCK_V2_PROMOTION_GATES"
+    ],
+    "expected_full_execution_work_count": 0
+  },
+  "ci_gate": {
+    "path": ".github/workflows/verify-post-composition-planner.yml",
+    "git_blob_sha": "20e118975caeac25ffd885050bbc1deb8b1884b6"
+  },
+  "authority": {
+    "read_only_evidence_plan": true,
+    "full_execution": false,
+    "promotion": false,
+    "terminal": false
+  },
+  "hard_nonclaims": [
+    "NO_SEMANTIC_EXECUTION_DOMAIN_EQUIVALENCE_PROVED",
+    "NO_WHOLE_LEAF_SCOPE_CERTIFICATE_ADMITTED",
+    "NO_PROPERTY_TRUTH_OR_DOMAIN_CLOSURE",
+    "NO_TB_RETRY_REPLACEMENT_OR_ACTIVATION_AUTHORITY",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
