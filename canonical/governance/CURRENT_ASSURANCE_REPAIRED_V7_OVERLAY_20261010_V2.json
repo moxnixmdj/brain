@@ -1,0 +1,28 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_ASSURANCE_REPAIRED_V7_OVERLAY_V2",
+  "status": "ACTIVE__BASE_UVCK_INHERITED__REPAIRED_V7_R1_R2_2_OF_12__R3_NEXT",
+  "base": {
+    "path": "canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json",
+    "git_blob_sha": "8e65dd28d03d5d021cdd0b9539e8de29b506336b"
+  },
+  "professional": {
+    "path": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
+    "git_blob_sha": "3d3e509993ea72a244d9172ca83707905a6e8fe5"
+  },
+  "subject": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V7_DECLARED_SYSTEM_SUBJECT_20261010_V7.json",
+    "git_blob_sha": "5609e3ceafce91ff9cf4e7de6b0f208e46a22f33",
+    "subject_sha256": "7e2904f3205b283a3a0f9e7583b36599cc2da4a96fd31b1777c226ca5c16c9e4",
+    "components": 23
+  },
+  "roots": {
+    "overlay_path": "canonical/governance/PQ_REPAIRED_V7_ROOT_FRONTIER_OVERLAY_20261010_V1.json",
+    "overlay_git_blob_sha": "c4d61efb66f49233c7d62e5458c00912a45d5e04",
+    "verified": 2,
+    "next": "R3_REALIZATION_OBSERVATION"
+  },
+  "precedence": "OVERRIDE_ONLY_PROFESSIONAL_SUBJECT_AND_ROOT_FRONTIER__INHERIT_ALL_OTHER_BASE_UVCK_FIELDS",
+  "quality_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0
+}
