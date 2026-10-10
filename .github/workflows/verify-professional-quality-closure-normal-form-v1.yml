@@ -7,6 +7,11 @@ on:
       - canonical/governance/PROFESSIONAL_QUALITY_ADVERSARIAL_CHALLENGE_MATRIX_20261009_V1.json
       - canonical/runtime/professional_quality_closure_normal_form_v1.py
       - canonical/tests/test_professional_quality_closure_normal_form_v1.py
+      - canonical/runtime/professional_quality_same_subject_composition_gate_v3.py
+      - canonical/tests/test_professional_quality_same_subject_composition_gate_v3.py
+      - canonical/governance/PROFESSIONAL_QUALITY_P1_V7_SAME_SUBJECT_ROOT_BINDING_WORKLIST_20261010_V18.json
+      - canonical/governance/PROFESSIONAL_QUALITY_R12_ROOT_SUBJECT_BINDING_20261010_V1.json
+      - canonical/verification/PROFESSIONAL_QUALITY_R12_V7_ROOT_SUBJECT_BINDING_PUBLIC_VERIFY_20261010_V1.json
       - .github/workflows/verify-professional-quality-closure-normal-form-v1.yml
 permissions:
   contents: read
@@ -20,3 +25,4 @@ jobs:
         with:
           python-version: "3.11"
       - run: python -m unittest canonical.tests.test_professional_quality_closure_normal_form_v1 -v
+      - run: python -m unittest canonical.tests.test_professional_quality_same_subject_composition_gate_v3 -v
