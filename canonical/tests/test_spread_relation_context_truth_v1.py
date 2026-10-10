@@ -376,6 +376,22 @@ class SpreadRelationTruthCertificateV1Tests(unittest.TestCase):
         self.assertEqual(out, expected)
         fn.assert_called_once()
 
+    def test_existing_regcap_facet_route_is_unchanged(self):
+        expected = {"pass": True, "predicate_truth": "TRUE"}
+        with patch.object(
+            dispatch,
+            "evaluate_regcap_facet_role",
+            return_value=expected,
+        ) as fn:
+            out = dispatch.evaluate(
+                {
+                    "truth_kind": "REGCAP_FACET_ROLE",
+                    "predicate_id": "x",
+                }
+            )
+        self.assertEqual(out, expected)
+        fn.assert_called_once()
+
     def test_true_result_never_grants_policy_or_terminal_authority(self):
         selected = {
             "pass": True,
