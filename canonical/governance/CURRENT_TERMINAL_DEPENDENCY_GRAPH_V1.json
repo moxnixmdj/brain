@@ -79,15 +79,41 @@
       ]
     },
     {
-      "id": "TERMINAL_DEPENDENCY_GRAPH_GENERATOR_COVERAGE",
+      "id": "TERMINAL_EXPLICIT_DECLARED_DEPENDENCY_GENERATOR_COVERAGE",
       "kind": "LEAF",
-      "status": "UNRESOLVED",
-      "note": "GRAPH_ENUMERATION_DOES_NOT_PROVE_OPEN_WORLD_COMPLETENESS",
+      "status": "PROVED",
+      "note": "CLOSED_FOR_EXPLICIT_CANONICAL_ARTIFACT_REFERENCES_IN_CURRENT_TERMINAL_AUTHORITY_REVISION_95__480_DECLARED_REFS__474_CURRENT__6_SUPERSEDED__365_UNIQUE_CURRENT_ARTIFACTS__24_CURRENT_PATH_BOUND_REFS_RETAINED_NOT_DROPPED__IMPLICIT_CHANNELS_SEPARATE",
       "attack_families": [
         "NEGATION",
         "QUANTIFIER_SWAP",
+        "COMPOSITION_MISMATCH"
+      ],
+      "verification": {
+        "path": "canonical/verification/TERMINAL_DECLARED_DEPENDENCY_GENERATOR_COVERAGE_VERIFY_20261010_V1.json",
+        "git_blob_sha": "b15ec12e91f7127df3ff764cf9ac345b300b10ee"
+      },
+      "generator": {
+        "path": "canonical/runtime/terminal_declared_dependency_generator_v1.py",
+        "git_blob_sha": "cdb7c353fa82bd2ed04780f8c25951947c47937d"
+      }
+    },
+    {
+      "id": "TERMINAL_IMPLICIT_DEPENDENCY_CHANNEL_COVERAGE",
+      "kind": "LEAF",
+      "status": "UNRESOLVED",
+      "note": "EXPLICIT_REPOSITORY_ARTIFACT_REFERENCES_ARE_GENERATED_COMPLETELY__DEPENDENCIES_REACHABLE_ONLY_THROUGH_ENVIRONMENT_NETWORK_DYNAMIC_LOADING_HIDDEN_PROCESS_STATE_UNDECLARED_EXTERNAL_RESOURCES_OR_OTHER_CHANNELS_REMAIN_OPEN",
+      "attack_families": [
         "COMPOSITION_MISMATCH",
+        "HIDDEN_STATE",
         "NOVEL_DIMENSION"
+      ],
+      "open_channels": [
+        "ENVIRONMENT",
+        "NETWORK_OR_REMOTE_SERVICE",
+        "DYNAMIC_LOADING_OR_REFLECTION",
+        "HIDDEN_PROCESS_STATE",
+        "UNDECLARED_EXTERNAL_RESOURCE",
+        "OTHER"
       ]
     },
     {
