@@ -69,7 +69,7 @@
   },
   "independent_verification": {
     "path": "canonical/verification/CAPABILITY_FIRST_LIVE_SCHEDULER_V7_INDEPENDENT_VERIFY_20261010_V1.json",
-    "git_blob_sha": "d0b314e8d22d16c4d3a6010df077e37611bb7c2d",
-    "status": "PASS__INDEPENDENT_SPRITE__PYCOMPILE_PASS__9_OF_9_FOCUSED_TESTS_PASS__ZERO_CREDIT"
+    "git_blob_sha": "9b6a17d38a9285db63a6a760648a0567aa8a47ef",
+    "status": "PASS__INDEPENDENT_SPRITE__PYCOMPILE_PASS__11_OF_11_FOCUSED_AND_COMPATIBILITY_TESTS_PASS__ZERO_CREDIT"
   }
 }
