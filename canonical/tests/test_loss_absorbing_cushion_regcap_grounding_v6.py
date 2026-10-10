@@ -210,5 +210,38 @@ class Tests(unittest.TestCase):
         self.assertEqual(out["terminal_credit_delta"], 0)
 
 
+    def test_four_way_shared_loss_absorption_is_attached_when_no_selection_exists(self):
+        base = base_for(regcap.CCOB)
+        base["legacy_v3_relative_selection_authority"] = False
+        certificate = {
+            "pass": True,
+            "status": "PASS__FOUR_WAY_LOSS_ABSORPTION_PROPERTY_AUTHENTICATED_NONSEPARATING",
+            "property_separates_any_candidate": False,
+            "additional_authenticated_discriminator_required": True,
+        }
+        with patch.object(v6.v5, "ground", return_value=base), patch.object(
+            v6.nonsep,
+            "verify_shared_loss_absorption",
+            return_value=certificate,
+        ), patch.object(v6.pair, "resolve_relative") as pair_fn:
+            out = v6.ground(
+                "loss-absorbing cushion",
+                source_id="doc:shared",
+                start=0,
+                end=len("loss-absorbing cushion"),
+            )
+
+        self.assertTrue(out["pass"], out)
+        self.assertTrue(out["shared_loss_absorption_nonseparation_proved"])
+        self.assertFalse(out["reverse_classification_from_loss_absorption_authorized"])
+        self.assertTrue(out["additional_authenticated_discriminator_required"])
+        self.assertEqual(out["four_way_loss_absorption_nonseparation"], certificate)
+        self.assertIn(
+            "FOUR_WAY_LOSS_ABSORPTION_PROPERTY_AUTHENTICATED_NONSEPARATING",
+            out["boundary"],
+        )
+        pair_fn.assert_not_called()
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
