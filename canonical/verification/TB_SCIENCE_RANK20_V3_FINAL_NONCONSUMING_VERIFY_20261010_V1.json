@@ -1,0 +1,37 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK20_V3_FINAL_NONCONSUMING_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__RANK20_V3_PREEXPOSURE_ABORT_NONCONSUMING__ZERO_TRIAL_CONSUMPTION",
+  "diagnosis": {
+    "path": "canonical/governance/TB_SCIENCE_RANK20_V3_PRESTART_ABORT_DIAGNOSIS_20261010_V1.json",
+    "git_blob_sha": "a8c7c9b9548f0515455df1badddebd9fba685d45"
+  },
+  "activation_authority": {
+    "path": "canonical/governance/TB_SCIENCE_RANK20_ACTIVATION_AUTHORITY_20261010_V3.json",
+    "git_blob_sha": "59a506eebe6bbb49386133ff9234443f0ba58d93",
+    "retired": true
+  },
+  "execution": {
+    "pull_request": 2632,
+    "workflow_run_id": 38061639841,
+    "workflow_job_id": 114240929023,
+    "workflow_conclusion": "success",
+    "semantic_outcome": "PREEXPOSURE_ABORT_NONCONSUMING",
+    "task_read": true,
+    "prestart_guard_pass": true,
+    "agent_ready": true,
+    "durable_start_cas_acquired": false,
+    "task_started": false,
+    "benchmark_trials_consumed": 0,
+    "reward": null
+  },
+  "failure_root_class": "POST_READY_START_CAS_CALLER_VERSION_SKEW_V7_VS_BOUND_V8",
+  "no_retry": true,
+  "no_replacement": true,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "pass": true,
+  "next": "REPAIR_GENERAL_BOUND_RUNTIME_CALLER_VERSION_SKEW_ZERO_EXPOSURE__VALIDATE_INDEPENDENTLY__DO_NOT_RERUN_RANK20_V3"
+}
