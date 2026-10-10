@@ -28,8 +28,8 @@
     "primary_runtime": "canonical/runtime/capability_parallel_frontier_post_composition_v1.py",
     "primary_entrypoint": "plan_current_post_composition_frontier",
     "scalar_fallback_runtime": "canonical/runtime/capability_first_live_scheduler_v1.py",
-    "status": "ACTIVE_POST_COMPOSITION_V21__PROPERTY_TRUTH_8_OF_24__FOUR_EXECUTION_PLUS_SEMANTIC_TOTALITY_PARALLEL__ESCAPE_12_A_0_B_1_PARKED__BYTES_V31",
-    "observed_git_blob_sha": "4c0a50f1fa24e449f049b35e9de1b10033c72e5a"
+    "status": "ACTIVE_POST_COMPOSITION_V21__PROPERTY_TRUTH_8_OF_24__FOUR_EXECUTION_PLUS_SEMANTIC_TOTALITY_PARALLEL__ESCAPE_12_A_0_B_1_PARKED__BYTES_V32",
+    "observed_git_blob_sha": "6b81663ba483a13a068dd2542cc326051ca1f9b6"
   },
   "scheduler_precedence": "REAL_MISSION_CAPABILITY_RESOURCE_PARETO_LEVERAGE_IS_PRIMARY__SAFE_NONCONFLICTING_PARALLELISM_MINIMIZES_WALL_CLOCK__CURRENTNESS_AND_DEPENDENCY_GATES_PRECEDE_SELECTION__DIMENSIONWISE_PARETO_DOMINANCE_PRECEDES_ANY_SCALAR_TRADEOFF__SCALARIZATION_REQUIRES_PROVED_TRADEOFF_CONTRACT__CURRENT_R2_SHARED_CAUSE_FANOUT_IS_SECONDARY_DISCRIMINATION_SIGNAL__OPUS_5_5_CHECKPOINT_WORK_IS_TERTIARY_AUDIT__EXPLICIT_NEW_PRIMITIVE_CLAIMS_REQUIRE_REUSE_FIRST_EXHAUSTION_PROOF",
   "current_professional_quality_execution": {
@@ -46,8 +46,8 @@
   },
   "current_parallel_frontier_control": {
     "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
-    "observed_git_blob_sha": "9cd2731cb4af4aa265dbee97e4df619ccb1590a3",
-    "status": "POST_COMPOSITION_V22__PROPERTY_TRUTH_8_OF_24__FOUR_EXECUTION_DEPLETION_PLUS_SEMANTIC_TOTALITY_REUSE__ESCAPE_12_A_0_B_1_PARKED__BYTES_V31",
+    "observed_git_blob_sha": "262bee096f8ca009071879ed9794576eb288d419",
+    "status": "POST_COMPOSITION_V22__PROPERTY_TRUTH_8_OF_24__FOUR_EXECUTION_DEPLETION_PLUS_SEMANTIC_TOTALITY_REUSE__ESCAPE_12_A_0_B_1_PARKED__BYTES_V32",
     "binding": "MUTABLE_CURRENT_PATH_IDENTITY__STALE_SOURCE_BYTES_FAIL_CLOSED_AT_CALL_TIME"
   },
   "current_residual_reuse_classification": {
@@ -176,11 +176,11 @@
   },
   "bytes_current_frontier": {
     "path": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-    "observed_git_blob_sha": "714995cd13bf216f4c9189d77e33edc87fc326e5",
-    "status": "ACTIVE_RESEARCH__CONSERVATIVE_ZETA_V31_FRONTIER__SUCCESSOR_READY",
-    "raw_python_source_bytes": 1909906,
-    "qualification": "10120/10120",
-    "next": "Rerank exact V31 using spent NEXT36 only; make a new physical cut before touching QUAL_SUCCESSOR_NEXT37_20261010_V1.",
+    "observed_git_blob_sha": "22bb42347a8c823f057dc1dcbe38e1e9b2d3c5b1",
+    "status": "ACTIVE_RESEARCH__TOPLEVEL_FACADE_V32_FRONTIER__SUCCESSOR_READY",
+    "raw_python_source_bytes": 1844477,
+    "qualification": "10350/10350",
+    "next": "Rerank exact V32 using spent NEXT37 only; make a new physical cut before touching QUAL_SUCCESSOR_NEXT38_20261010_V1.",
     "promotion_credit": 0
   },
   "scheduler_currentness_invariant": {
