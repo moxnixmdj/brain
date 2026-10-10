@@ -94,7 +94,8 @@ def verify(*,repo_root:str|Path|None=None)->dict[str,Any]:
   return _fail("C3_IDENTITY_ABSTRACTION_REUSE_NOT_PROVED")
 
  execution=docs["execution"]
- counts=execution.get("observed_case_counts") or {}
+ replay=execution.get("independent_replay") or {}
+ counts=replay.get("observed_case_counts") or {}
  if (
   counts.get("positive")!=2
   or execution.get("r12_semantic_leaf_closed") is not False
