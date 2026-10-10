@@ -1,0 +1,27 @@
+name: Verify escape active Gap B causal reclassification
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/governance/ESCAPE_ACTIVE_GAP_B_CAUSAL_RECLASSIFICATION_20261010_V1.json"
+      - "canonical/verification/CHARTOGRAPHY_QWEN3VL4B_ZERO_CASE_PREFLIGHT_V2_RECONCILIATION_20261010_V1.json"
+      - "canonical/runtime/escape_active_gap_b_causal_reclassification_verify_v1.py"
+      - "canonical/tests/test_escape_active_gap_b_causal_reclassification_v1.py"
+      - ".github/workflows/verify-escape-active-gapb-reclassification-v1.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m py_compile canonical/runtime/escape_active_gap_b_causal_reclassification_verify_v1.py
+      - run: python -m pytest -q canonical/tests/test_escape_active_gap_b_causal_reclassification_v1.py
+      - run: python canonical/runtime/escape_active_gap_b_causal_reclassification_verify_v1.py
