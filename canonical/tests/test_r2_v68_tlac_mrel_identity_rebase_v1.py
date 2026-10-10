@@ -63,7 +63,7 @@ class Tests(unittest.TestCase):
         cls.handoff = load(HANDOFF)
         cls.ledger = load(LEDGER)
 
-    def test_current_r2_is_v67_and_route_counts_are_preserved(self):
+    def test_current_r2_is_v68_and_route_counts_are_preserved(self):
         self.assertIn("V68", self.r2["status"])
         self.assertEqual(
             self.r2["direct_adequacy"]["current_route_count"],
@@ -140,12 +140,32 @@ class Tests(unittest.TestCase):
             git_blob(ROOT2),
         )
 
-    def test_ledger_records_pair_projection_and_v67_advance(self):
+    def test_ledger_records_pair_projection_and_v68_advance(self):
         events = {row.get("event") for row in self.ledger["events"] if isinstance(row, dict)}
         self.assertIn("PROJECT_TLAC_MREL_BOUNDED_IDENTITY_DISCRIMINATOR", events)
         self.assertIn("ADVANCE_R2_V68_ROOT2_V62", events)
 
-    def test_terminal_projection_matches_v67_and_remains_false(self):
+    def test_v68_oewn_live_dynamic_admission_is_preserved(self):
+        dynamic = self.r2["direct_adequacy"]["dynamic_admissions"]
+        self.assertEqual(dynamic["admission_count"], 4)
+        self.assertIn(
+            "DIRECT_ADEQUACY::OEWN_DECISION_MANIFEST_LATTICE_V1",
+            dynamic["route_ids"],
+        )
+        rows = [
+            row
+            for row in self.r2["current_cell_classifications"]["FINANCE_SEMANTIC_ADEQUACY_TAIL"]["verified_positive_subregions"]
+            if isinstance(row, dict)
+            and row.get("id") == "OEWN_SOURCE_PROVED_RELEASE_RELATIVE_DECISION_MANIFEST_LATTICE"
+        ]
+        self.assertEqual(len(rows), 1)
+        self.assertTrue(rows[0]["current_dynamic_route_admitted"])
+        self.assertIn(
+            "OEWN_DECISION_MANIFEST_LATTICE_LIVE_DYNAMIC_ROUTE_BOUND",
+            self.r2["status"],
+        )
+
+    def test_terminal_projection_matches_v68_and_remains_false(self):
         auth = self.terminal["authoritative_sources"]["current_r2_decision_intelligence"]
         self.assertEqual(auth["status"], self.r2["status"])
         self.assertEqual(
