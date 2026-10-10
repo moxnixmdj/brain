@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_V5_V10_CURRENTNESS_CHAIN_INDEPENDENT_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__18_OF_18_CROSS_AUTHORITY_CURRENTNESS_AND_ZERO_CREDIT_ASSERTIONS__ZERO_EXECUTION_OR_TERMINAL_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "successor/v5-v10-currentness-chain-20261010-v1",
+    "exact_git_blobs": {
+      "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json": "d121b88629076770ec13361ef6cb61d942611395",
+      "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json": "26d91f7ea78a6345ca03c4a0b6f2f8ea30f80eb5",
+      "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V10.json": "1cc9700cb32f120fab38893bda05f2e11745fed2",
+      "canonical/governance/CURRENT_DEVELOPMENT_SCHEDULER.json": "02f0776503d13f1e7c6c9e9ed68a6704f017c5a2",
+      "canonical/governance/CURRENT_MISSION_OBJECTIVE.json": "93013a96bd800505beeb23aede7333c4f887fac2"
+    }
+  },
+  "independent_verification": {
+    "verifier": "brain-r3-structural-provider-verify-20261010",
+    "sprite_id": "sprite-4c7dc4a8-ac7d-44a7-b49d-0fdf1f321004",
+    "result": "18_OF_18_PASS",
+    "assertions": [
+      "FRONTIER_BINDS_EXACT_CURRENT_V5_RESIDUAL_BLOB",
+      "GAP_A_AND_GAP_B_BIND_EXACT_CURRENT_V5_RESIDUAL_BLOB",
+      "GAP_A_AND_GAP_B_CURRENT_GATE_STATUS_IS_V5",
+      "GAP_A_AND_GAP_B_REAL_ROW_PROOF_COUNTS_REMAIN_ZERO",
+      "LIVE_SELECTION_REMAINS_UNAUTHORIZED",
+      "FULL_EXECUTION_PLAN_AUTHORITY_REMAINS_FALSE",
+      "FRONTIER_CAPABILITY_AND_TERMINAL_CREDIT_REMAIN_ZERO",
+      "SCHEDULER_V10_BINDS_EXACT_RECONCILED_FRONTIER",
+      "CURRENT_SCHEDULER_BINDS_V10_POST_COMPOSITION_RUNTIME_AND_EXACT_FRONTIER",
+      "MISSION_BINDS_EXACT_CURRENT_SCHEDULER_FRONTIER_AND_RESIDUAL_BLOBS"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_GAP_A_OR_GAP_B_ROW_CREDIT",
+    "NO_FULL_EXECUTION_SELECTION_AUTHORITY",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT",
+    "NO_GLOBAL_OPTIMALITY_CLAIM"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
