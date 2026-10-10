@@ -358,3 +358,20 @@ def test_current_binding_path_escape_fails_closed():
             assert str(exc) == "CURRENT_GAP_BINDING_PATH_INVALID"
         else:
             raise AssertionError("path escape must fail closed")
+
+
+def test_current_binding_content_addresses_live_audit_stack():
+    binding_path = _current_binding_path(ROOT)
+    binding = json.loads(binding_path.read_text(encoding="utf-8"))
+    audit_ref = binding["successor_executable_audit"]
+
+    assert audit_ref["path"] == "canonical/runtime/escape_progress_shared_gap_audit_v3.py"
+    assert audit_ref["git_blob_sha"] == _git_blob_sha(ROOT / audit_ref["path"])
+
+    tests_ref = audit_ref["tests"]
+    assert tests_ref["path"] == "canonical/tests/test_escape_progress_shared_gap_audit_v3.py"
+    assert tests_ref["git_blob_sha"] == _git_blob_sha(ROOT / tests_ref["path"])
+
+    verification_ref = audit_ref["verification"]
+    assert verification_ref["path"] == "canonical/verification/ESCAPE_V3_DYNAMIC_CURRENT_BINDING_REPAIR_VERIFY_20261010_V1.json"
+    assert verification_ref["git_blob_sha"] == _git_blob_sha(ROOT / verification_ref["path"])
