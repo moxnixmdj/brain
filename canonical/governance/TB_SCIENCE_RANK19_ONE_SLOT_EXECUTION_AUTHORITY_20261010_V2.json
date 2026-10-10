@@ -99,7 +99,7 @@
     "path": "canonical/governance/TB_SCIENCE_RANK19_CAPABILITY_FIRST_CHECKPOINT_ADMISSION_20261010_V1.json",
     "git_blob_sha": "49e4f9c232f876546b2c72fb32ba19a3e487e1c9",
     "verification_path": "canonical/verification/TB_SCIENCE_RANK19_CAPABILITY_FIRST_ADMISSION_INDEPENDENT_VERIFICATION_20261010_V2.json",
-    "verification_git_blob_sha": "8ce5d9c5f7767536273189489f68d3562cc20135",
+    "verification_git_blob_sha": "7ba01fca8338d966a40f25a8c74f6e1366b29f2e",
     "authorized": true,
     "decision": "ADMIT_CHECKPOINT_AUDIT_EXECUTION",
     "benchmark_role": "NEW_CAPABILITY_VALIDATION",
