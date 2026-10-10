@@ -1,0 +1,78 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_ROOT_SUBJECT_BINDING_V1",
+  "date": "2026-10-10",
+  "status": "CANDIDATE_R4_V7_ROOT_SUBJECT_BINDING__PROOF_BOUND_DETERMINISTIC_CHECK_STEP_PLUS_CONTENT_ADDRESSED_TYPED_MECHANICAL_MEASUREMENT__AWAITING_INDEPENDENT_VERIFICATION__ZERO_QUALITY_OR_TERMINAL_AUTHORITY",
+  "root_id": "R4_MEASUREMENT_CONSTRUCT",
+  "subject_kind": "DECLARED_SYSTEM",
+  "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+  "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+  "subject": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V7_DECLARED_SYSTEM_SUBJECT_20261010_V6.json",
+    "git_blob_sha": "1d598bc8757017ceb34928d0df9f5fce859ef868"
+  },
+  "bridge_evidence": {
+    "execution_profile": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_EXECUTION_PROFILE_20261010_V3.json",
+      "git_blob_sha": "f7e89eafbb691c16d1bdf5b8d295a468d5e3bec5"
+    },
+    "proof_bound_step_verification": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_P1_ROUTER_V7_PROOF_BOUND_STEP_VERIFY_20261010_V1.json",
+      "git_blob_sha": "b7a9df36780513ad73fd14c6a2756c8474d8434d"
+    },
+    "r4_semantic_scope": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_R4_MEASUREMENT_SEMANTIC_SCOPE_20261010_V1.json",
+      "git_blob_sha": "a5b3e1984da25b09a5cb503b615806acdbf88e81"
+    },
+    "r4_semantic_verification": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R4_MEASUREMENT_SEMANTIC_VERIFY_20261010_V1.json",
+      "git_blob_sha": "c91074f2f187834936c0b7297579a6b8ba125fae"
+    },
+    "measurement_binding": {
+      "path": "canonical/governance/ARTIFACT_MEASUREMENT_BINDING_20261007_V1.json",
+      "git_blob_sha": "a174825b4c10fefa06c3a7ba09eb68c0d40af14a"
+    },
+    "measurement_verification": {
+      "path": "canonical/verification/ARTIFACT_MEASUREMENT_VERIFY_20261007_V1.json",
+      "git_blob_sha": "34c64ed759d2e70df48a76d7a254047ac5fe9e2b"
+    }
+  },
+  "binding_scope": {
+    "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+    "step_id": "RUN_DETERMINISTIC_FACT_STRUCTURE_FORMAT_AND_GROUNDING_CHECKS",
+    "claim": "FOR_THE_EXACT_V7_DECLARED_SYSTEM_SUBJECT__THE_DETERMINISTIC_FACT_STRUCTURE_FORMAT_AND_GROUNDING_STEP_IS_PROOF_BOUND_BY_V7__AND_R4_MEASUREMENT_CONSTRUCT_SUPPORT_IS_ADMISSIBLE_ONLY_WHEN_EXACT_CRITERION_FIELDS_ARE_MAPPED_TO_THE_EXISTING_CONTENT_ADDRESSED_TYPED_MECHANICAL_MEASUREMENT_PROGRAM_WITH_MATCHING_TYPES_AND_ACCEPTANCE_RELATIONS__ACTUAL_TASK_EXECUTION_STILL_REQUIRES_A_FRESH_RUN_CONTEXT_BOUND_STEP_RECEIPT",
+    "guarantees": [
+      "EXACT_V7_SUBJECT_TUPLE_BOUND",
+      "V7_DETERMINISTIC_FACT_STRUCTURE_FORMAT_AND_GROUNDING_STEP_IS_CONTENT_ADDRESSED_AND_INDEPENDENTLY_VERIFIED_BEFORE_INTERNAL_PASS_DERIVATION",
+      "R4_SUPPORT_IS_LIMITED_TO_EXISTING_CONTENT_ADDRESSED_TYPED_MECHANICAL_MEASUREMENT_SEMANTICS",
+      "CANDIDATE_MEASUREMENT_VALUES_MUST_BE_DERIVED_FROM_EXACT_ARTIFACT_BYTES",
+      "MEASURED_FIELD_SET_AND_TYPES_MUST_MATCH_THE_TYPED_ACCEPTANCE_PROGRAM_EXACTLY",
+      "EXACT_CRITERION_MEASUREMENT_PROGRAM_SCALE_AND_ACCEPTANCE_RELATIONS_MUST_BE_BOUND_IN_STEP_EVIDENCE",
+      "ACTUAL_V7_R4_EXECUTION_REQUIRES_A_FRESH_RUN_CONTEXT_BOUND_PROFESSIONAL_STEP_RECEIPT",
+      "CALLER_SUPPLIED_CANDIDATE_MEASUREMENT_VALUES_HAVE_ZERO_AUTHORITY"
+    ],
+    "limitations": [
+      "NO_REAL_TASK_DETERMINISTIC_CHECK_STEP_RECEIPT_FROM_THIS_BINDING",
+      "NO_AUTOMATIC_FIELD_TO_RUBRIC_OR_CONSTRUCT_SEMANTIC_ALIGNMENT",
+      "NO_HOLISTIC_OR_VISUAL_QUALITY_MEASUREMENT",
+      "NO_UNSUPPORTED_MEASUREMENT_KIND_SEMANTICS",
+      "NO_OPEN_WORLD_MEASUREMENT_COMPLETENESS",
+      "NO_GLOBAL_R4_ROOT_CLOSURE",
+      "NO_GLOBAL_R4_SEMANTIC_LEAF_CLOSURE",
+      "NO_SAME_SUBJECT_COMPOSITION_PASS",
+      "NO_LIVE_DEFAULT_PROMOTION"
+    ]
+  },
+  "external_root_support": true,
+  "external_support_inside_subject_required": false,
+  "actual_v7_step_receipt_required_for_execution": true,
+  "global_subject_identity_authority": false,
+  "root_subject_binding_authority": false,
+  "semantic_truth_authority": false,
+  "execution_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
