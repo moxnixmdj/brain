@@ -1,0 +1,27 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK20_V10_IDENTITY_CLOSURE_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__V3_EXECUTION_IDENTITY_CLOSED_ACROSS_WORKFLOW_CAS_PREFLIGHT_AND_RESEAL_HARNESS__ZERO_EXPOSURE",
+  "claim_path": "canonical/governance/TB_SCIENCE_RANK20_LOGICAL_ATTEMPT_CLAIM_BINDING_20261010_V10.json",
+  "claim_git_blob_sha": "8f594851e7c43ec70c71647a3aa50ddd9eb4d722",
+  "canonical_sha256": "1d364b0a74bec8e30328cb53ed015989e80c8716ae82bb09af9ae710a824b225",
+  "execution_claim_binding_digest": "sha256:1d364b0a74bec8e30328cb53ed015989e80c8716ae82bb09af9ae710a824b225",
+  "logical_attempt_id": "77cecac61906404599330a1c400022a688cb48e0dd715a8e87afeb287c40cf65",
+  "execution_branch": "execute/tb-science-rank20-20261010-v3",
+  "activation_filename": "ACTIVATE_RANK20_V3_PR.json",
+  "repaired_public_blobs": {
+    "workflow": "33347ec7e5424628520c863f800c05b29df05025",
+    "start_cas": "ae2668664c08392ee0ed09f77303c34cbf55f91e",
+    "preflight": "dcb7f3d87f10452a4755dbfaf6fce01f8dd270e8",
+    "zero_exposure_tests": "fa2bf28ef998c900f80f1ccaff64f7153200df93",
+    "behavior_v5": "2d40253aa4c05f2a1c6f242dfd4b5a35d245de55",
+    "behavior_refinement_verifier": "b64fa130ed34cc795784d2c981e8ac3babdb3b3d"
+  },
+  "prior_v2_literals_authoritative": false,
+  "task_read": false,
+  "task_started": false,
+  "benchmark_trials_consumed": 0,
+  "pass": true,
+  "acceptance_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
