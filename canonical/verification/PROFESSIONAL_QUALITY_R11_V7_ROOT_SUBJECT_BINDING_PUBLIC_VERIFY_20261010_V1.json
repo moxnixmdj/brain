@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R11_V7_ROOT_SUBJECT_BINDING_PUBLIC_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_8_BLOB_BINDING__R11_VERIFIER_PASS__5_OF_5_ADVERSARIAL_TESTS_PASS__ZERO_QUALITY_OR_TERMINAL_CREDIT",
+  "subject": {
+    "id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+    "sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V7_DECLARED_SYSTEM_SUBJECT_20261010_V6.json",
+    "git_blob_sha": "1d598bc8757017ceb34928d0df9f5fce859ef868"
+  },
+  "binding": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_R11_ROOT_SUBJECT_BINDING_20261010_V1.json",
+    "git_blob_sha": "43007547e14da89b0aef9fad7d0f89cad2bbf77f"
+  },
+  "verifier": {
+    "path": "canonical/runtime/professional_quality_r11_root_subject_binding_verify_v1.py",
+    "git_blob_sha": "d7a855e4f52217eebd9155fe766e3197795ec99f"
+  },
+  "tests": {
+    "path": "canonical/tests/test_professional_quality_r11_root_subject_binding_verify_v1.py",
+    "git_blob_sha": "6d7ded2422e89e8e8da804789bbbe21ca071be49",
+    "tests_run": 5,
+    "tests_passed": 5,
+    "tests_failed": 0
+  },
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2623,
+    "pull_request_head_sha": "0dd8073812ae904e87812d3622d77f1c174d6cea",
+    "merge_commit": "56e76037b1997ebe7d95b6a76b0cafdae47dbaa7",
+    "workflow_name": "Verify professional R11 V7 binding",
+    "workflow_run_id": 38056775213,
+    "workflow_job_id": 114226769696,
+    "conclusion": "success",
+    "exact_blob_binding_step": "success",
+    "root_verifier_step": "success",
+    "adversarial_test_step": "success"
+  },
+  "proves": [
+    "EXACT_R11_BINDING_BYTES_MATCH_DECLARED_BRAIN_BLOB",
+    "EXACT_V7_SUBJECT_BYTES_MATCH_DECLARED_BRAIN_BLOB",
+    "EXACT_EXECUTION_PROFILE_FIREWALL_SCOPE_AND_PRIOR_VERIFICATION_BYTES_MATCH_DECLARED_BRAIN_BLOBS",
+    "R11_ROOT_SUBJECT_BINDING_VERIFIER_PASSES",
+    "WRONG_SUBJECT_FAILS_CLOSED",
+    "MISSING_HOLDOUT_ESCALATION_TRIGGER_FAILS_CLOSED",
+    "FIREWALL_SCOPE_WIDENING_FAILS_CLOSED",
+    "SELF_GRANTED_ROOT_AUTHORITY_FAILS_CLOSED"
+  ],
+  "hard_nonclaims": [
+    "NO_GENERAL_PROMPT_INJECTION_CLOSURE",
+    "NO_GENERAL_GOODHART_CLOSURE",
+    "NO_HOLDOUT_LIFECYCLE_CLOSURE",
+    "NO_CROSS_LANE_SECURITY_GENERALIZATION",
+    "NO_GLOBAL_R11_ROOT_CLOSURE",
+    "NO_SAME_SUBJECT_COMPOSITION_PASS",
+    "NO_LIVE_DEFAULT_PROMOTION"
+  ],
+  "root_subject_binding_authority": true,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
