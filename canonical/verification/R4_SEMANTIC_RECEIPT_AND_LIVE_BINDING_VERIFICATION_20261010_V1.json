@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_R4_SEMANTIC_RECEIPT_AND_LIVE_BINDING_VERIFICATION_V1",
+  "date": "2026-10-10",
+  "status": "PASS__REMOTE_EXACT_BYTE_INTEGRATION_REPLAY__ZERO_TERMINAL_CREDIT",
+  "subject": "R4 executable semantic root certificate verification and live currentness",
+  "pull_request": 3870,
+  "remote_verifier": {
+    "sprite": "brain-live-runtime-v1-verify-20261008",
+    "method": "EXACT_GIT_BLOBS_MATERIALIZED_TO_REMOTE_VERIFIER__ZERO_DEPENDENCY_TEST_FUNCTION_HARNESS",
+    "pytest_installed": false,
+    "tests_passed": 78,
+    "tests_failed": 0
+  },
+  "exact_load_bearing_blobs": {
+    "root_theorem_falsifier": "c56f097c89b11edeaccfe05c067bcf22d7d6b0cb",
+    "root_registry_guard": "23cb2d635d38b1b4cdea6d2c7ccd40636dca36c6",
+    "semantic_receipt_verifier": "a79360f818fa53dc460b93deeb1eca43e93d4370",
+    "root_theorem_live_binding_validator": "1acdc6e81cf4410750f04febf079704d024d5b12",
+    "root_theorem_live_binding_tests": "9c7613df1b12827d90832d6c1063e9eab43ac837",
+    "root_registry": "e0a169ecf4c9875d251d99c3711be6195f797387",
+    "current_root_certificate_pointer": "60e40acbc8833d9a07f1a827264081c9ab6af959",
+    "root_theorem": "b2870a70adb5884fbfcc6c9f5115d4a2016c1afc",
+    "claim_scope": "44709e2673a213c01179b5e7d4c622c45b0729bf",
+    "root_theorem_live_binding": "8319c8ec327bf74ee279b216019825e735dba499",
+    "terminal_authority": "7764a2b8954aeed201e653e9ca2f9a712c6fe753"
+  },
+  "falsified_mutation_classes": [
+    "CONTENT_ADDRESSED_EMPTY_VERIFICATION_RECEIPT",
+    "FOREIGN_ROOT_VERIFICATION_RECEIPT",
+    "FOREIGN_CLAIM_VERIFICATION_RECEIPT",
+    "STORED_PASS_RECEIPT_WITH_VERIFIER_REJECTION",
+    "RECEIPT_NOT_BOUND_TO_EXACT_VERIFIER_RERUN_RESULT",
+    "STALE_SEMANTIC_VERIFIER_BLOB",
+    "PROVED_ROOT_SLOT_WITHOUT_SEMANTIC_VERIFIER",
+    "LIVE_BINDING_IGNORES_ROOT_REGISTRY_GUARD",
+    "LIVE_BINDING_IGNORES_SEMANTIC_RECEIPT_VERIFIER",
+    "LIVE_BINDING_IGNORES_REGISTRY_CLAIM_ALIGNMENT_TESTS"
+  ],
+  "verified_invariants": [
+    "BYTE_IDENTITY_IS_NECESSARY_BUT_NOT_SUFFICIENT_PROOF_AUTHORITY",
+    "PROVED_CURRENT_SLOT_REQUIRES_EXECUTABLE_CONTENT_ADDRESSED_SEMANTIC_VERIFIER",
+    "SEMANTIC_VERIFIER_IS_RERUN_OVER_EXACT_CERTIFICATE_AND_ACTIVE_CLAIM",
+    "INDEPENDENT_RECEIPT_BINDS_ROOT_CLAIM_CERTIFICATE_VERIFIER_AND_RERUN_RESULT",
+    "VERIFIER_REJECTION_DOMINATES_STORED_PASS_RECEIPT",
+    "R4_LIVE_BINDING_CONTENT_ADDRESSES_REGISTRY_GUARD_SEMANTIC_VERIFIER_AND_LOAD_BEARING_TESTS",
+    "CURRENT_OPEN_REGISTRY_REMAINS_ZERO_PROVED_AND_R4_OPEN"
+  ],
+  "current_state": {
+    "canonical_root_certificates_proved": 0,
+    "canonical_root_certificates_open": 3,
+    "r4_proof_closure": false,
+    "terminal_credit_delta": 0
+  },
+  "nonclaims": [
+    "DOES_NOT_PROVE_CURRENT_R1",
+    "DOES_NOT_PROVE_CURRENT_R2",
+    "DOES_NOT_PROVE_CURRENT_R3",
+    "DOES_NOT_CLOSE_CURRENT_R4",
+    "DOES_NOT_CHANGE_ACCEPTANCE_CAPABILITY_OR_OWNERSHIP_COUNTS"
+  ],
+  "accounting": {
+    "fresh_reality_units_consumed": 0,
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
