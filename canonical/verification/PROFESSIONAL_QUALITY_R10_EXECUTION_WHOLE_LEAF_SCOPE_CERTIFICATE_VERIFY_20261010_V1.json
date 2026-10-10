@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_WHOLE_LEAF_SCOPE_SEMANTIC_VERIFY_V2",
+  "date": "2026-10-10",
+  "status": "PASS__R10_EXECUTION_CLAIM_BOUND_UNIVERSAL_SCOPE_COVER__EXACT_PINNED_BYTES__8_OF_8__PROPERTY_TRUTH_SEPARATE",
+  "leaf_id": "PQ::R10_ANALYSIS_DECISION::EXECUTION",
+  "claim_id": "205a864e7d7a56a14a46bb75923cc9b11126d479676d26d88803831da1197294",
+  "claim_scope_git_blob_sha": "8f95b72c6edc7ff307342f7a0513bb90e908cd4c",
+  "certificate_git_blob_sha": "45e9ab5687d6b7f6435d867e49dd9e7b36d1b9b9",
+  "claim_verification_git_blob_sha": "44907b5d106db21e00648a234875ecc9e00e3364",
+  "scope_compiler_git_blob_sha": "b208255789b14e44e86c82c196e06b5c41b3d039",
+  "semantic_verifier": {
+    "path": "canonical/runtime/professional_quality_whole_leaf_scope_certificate_v1.py",
+    "git_blob_sha": "3c2630a63aa90f7b4667ef57f73f75b1c6b3c828"
+  },
+  "semantic_tests": {
+    "path": "canonical/tests/test_professional_quality_whole_leaf_scope_certificate_v1.py",
+    "git_blob_sha": "0ab58e1a703a6c9a2af3cc1b6307287d49f6404c"
+  },
+  "semantic_verifier_git_blob_sha": "3c2630a63aa90f7b4667ef57f73f75b1c6b3c828",
+  "semantic_tests_git_blob_sha": "0ab58e1a703a6c9a2af3cc1b6307287d49f6404c",
+  "scope_complete": true,
+  "verified_basis": "UNIVERSAL_FORMAL_SCOPE_PROOF",
+  "independent_replay": {
+    "pass": true,
+    "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "pinned_main_commit": "1d710237baf06029cc5f8fda14511deaa03dcf96",
+    "py_compile": "PASS",
+    "tests_run": 8,
+    "tests_passed": 8,
+    "actual_certificate_eval": "PASS__CLAIM_BOUND_UNIVERSAL_WHOLE_LEAF_SCOPE_COVER",
+    "transcript_sha256": "0cd2fbb55f1219f0d898534264f8b0d5d108e2f3e3c48c57c277be6327c66e6d"
+  },
+  "leaf_property_truth_authority": false,
+  "semantic_truth_authority": false,
+  "execution_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "hard_nonclaims": [
+    "NO_R10_EXECUTION_PROPERTY_TRUTH",
+    "NO_R10_DOMAIN_EXECUTION_CLOSURE",
+    "NO_R10_ROOT_CLOSURE",
+    "NO_PROFESSIONAL_QUALITY_ACCEPTANCE_OR_PROMOTION"
+  ]
+}
