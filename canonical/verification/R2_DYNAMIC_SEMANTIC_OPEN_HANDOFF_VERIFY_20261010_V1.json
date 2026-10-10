@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_R2_DYNAMIC_SEMANTIC_OPEN_HANDOFF_VERIFY_V1",
+  "date": "2026-10-10",
+  "branch": "r2-dynamic-semantic-open-handoff-v1-current",
+  "base_main_sha": "f6cc6d5c39fbb474af22034d11711c87e3567bdb",
+  "capability": "ZERO_AUTHORITY_DYNAMIC_SEMANTIC_OPEN_TO_FIXED_POINT_REPAIR_HANDOFF",
+  "status": "VERIFIED_ISOLATED_CHANGED_AND_INTEGRATION_SURFACE__41_SUCCESSFUL_CHECKS",
+  "theorem": {
+    "routing_law": "DYNAMIC_SEMANTIC_OPEN_REMAINS_FAIL_CLOSED_FOR_PRECEDENCE_AND_IS_NEVER_SELECTED_OR_EXECUTED",
+    "binding_law": "SEMANTIC_OPEN_METADATA_IS_FORWARDABLE_ONLY_WHEN_EXACTLY_ONE_DYNAMIC_OPEN_ROUTE_IS_PRESENT_WITH_EXACT_ADMITTED_ROUTE_ID",
+    "ambiguity_law": "MULTIPLE_DYNAMIC_OPEN_STATES_DO_NOT_LEAK_ONE_ARBITRARY_REPAIR_HINT",
+    "authority_law": "FORWARDED_HINTS_EXPLICITLY_CARRY_ZERO_SEMANTIC_EXECUTION_ACCEPTANCE_AND_TERMINAL_AUTHORITY",
+    "repair_law": "FIXED_POINT_MAY_USE_THE_HINT_ONLY_AS_PROPOSAL_METADATA_AND_ALL_RESULTING_REPAIRS_REENTER_NORMAL_REVERIFICATION"
+  },
+  "exact_changed_blobs": {
+    "canonical/runtime/r2_direct_live_admission_v1.py": "57d64a2f22c0cb7b76eed7eb78c2eb6961e819a2",
+    "canonical/tests/test_r2_direct_live_admission_v1.py": "208e48f1c843a2c3ddc075b273e1116d82d04f12"
+  },
+  "isolated_verification": {
+    "sprite": "brain-r2-grounded-frontier-verify-20261008",
+    "live_admission_wrapper": {
+      "passed": 11,
+      "failed": 0
+    },
+    "current_fixed_point_suite": {
+      "passed": 29,
+      "failed": 0
+    },
+    "explicit_dynamic_open_fixed_point_handoff_probe": {
+      "passed": 1,
+      "failed": 0
+    },
+    "total_successful_checks": 41,
+    "behavioral_failures": 0
+  },
+  "cleanroom_boundary": {
+    "legacy_v21": "STUBBED_ONLY_AS_DELEGATED_DEEP_LEGACY_SURFACE_BECAUSE_OLD_VERIFIER_SPRITE_LACKED_V19_ANCESTRY",
+    "dynamic_admission_loader": "STUBBED_IN_UNIT_HARNESS_WHILE_REAL_LIVE_WRAPPER_UNDER_TEST",
+    "fixed_point_controller_and_repairs": "STUBBED_OR_PATCHED_ACCORDING_TO_EXISTING_UNIT_PATTERN;REAL_CURRENT_FIXED_POINT_AND_REAL_MODIFIED_LIVE_WRAPPER_LOADED"
+  },
+  "discovered_and_repaired_during_falsification": [
+    {
+      "issue": "FAIL_CLOSED_WRAPPER_BASE_DID_NOT_EXPLICITLY_DECLARE_SEMANTIC_EXECUTION_OR_ACCEPTANCE_AUTHORITY_FALSE",
+      "repair": "ADD_EXPLICIT_ZERO_AUTHORITY_FIELDS_TO_WRAPPER_BASE_SURFACE"
+    },
+    {
+      "issue": "INITIAL_REPLAY_USED_STALE_V13_FIXED_POINT_RUNTIME_WHILE_CURRENT_TESTS_WERE_LOADED",
+      "repair": "REPLAY_EXACT_CURRENT_MAIN_FIXED_POINT_RUNTIME_AND_RERUN_29_OF_29_PLUS_EXPLICIT_HANDOFF_PROBE"
+    }
+  ],
+  "nonclaims": [
+    "NO_DYNAMIC_ROUTE_PRECEDENCE_AUTHORITY_CREATED",
+    "NO_DYNAMIC_SEMANTIC_OPEN_ROUTE_EXECUTION",
+    "NO_SEMANTIC_TRUTH_INFERRED_FROM_HINT_METADATA",
+    "NO_TERMINAL_CREDIT_FROM_TEST_PASS_COUNT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
