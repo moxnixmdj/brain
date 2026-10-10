@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_R12_STABLE_C8_NONVACUITY_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__CURRENT_STABLE_R12_C8_NONVACUITY_BY_REAL_SUPPORTED_POSITIVE_META_COMPOSITION_ROUTE__STRONGER_MATERIAL_DEFEATER_TOTALITY_OPEN",
+  "leaf_id": "PQ::R12_META_COMPOSITION_CLOSURE::SEMANTIC",
+  "claim_id": "11870f850b46bcfcc31094f764fc4f45c911aaac413979ceb62679ff19a53162",
+  "scope_sha256": "3958f259dba6bc6d4dfe1dad0b3ec26ecb1b8d92ea4763985f52ce96cfc55a1d",
+  "clause": {
+    "id": "R12C8_NONVACUITY",
+    "source_contract_fragment": "nonvacuity",
+    "decomposition_path": "canonical/governance/PROFESSIONAL_R12_SEMANTIC_CC_R3_CONTRACT_DECOMPOSITION_20261010_V1.json",
+    "decomposition_git_blob_sha": "d83ded1689ec636a2cda60f7c7419dd69a61cbd5"
+  },
+  "positive_route": {
+    "input_path": "canonical/governance/PROFESSIONAL_QUALITY_V7_12_OF_12_COMPOSITION_INPUT_20261010_V1.json",
+    "input_git_blob_sha": "8063d124d6fbd239814380ef4fbc710350a1dea8",
+    "gate_path": "canonical/runtime/professional_quality_same_subject_composition_gate_v4.py",
+    "gate_git_blob_sha": "e1cc6200286c7b400fc7be70ef0789b85af7fe61",
+    "independent_replay_path": "canonical/verification/PROFESSIONAL_QUALITY_V7_12_OF_12_COMPOSITION_INDEPENDENT_VERIFY_20261010_V1.json",
+    "independent_replay_git_blob_sha": "4ee02c41acf64b1f47ebadec55b6bb5453d676ba",
+    "observed_positive_result": "PASS__INDEPENDENT_EXACT_V4_12_OF_12_SAME_SUBJECT_COMPOSITION_REPLAY",
+    "composition_admissible": true,
+    "exact_root_binding_count": 12,
+    "adversarial_probes_passed": 3,
+    "composed_subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e"
+  },
+  "reasoning": {
+    "existential_requirement": "EXISTS_AT_LEAST_ONE_SUPPORTED_POSITIVE_R12_META_COMPOSITION_ROUTE",
+    "witness_is_real_executed_route": true,
+    "witness_is_not_abstention": true,
+    "witness_is_not_empty_positive_set": true,
+    "witness_is_independently_replayed": true,
+    "claim_scope_changed_from_route_scope": false,
+    "predecessor_semantic_property_authority_transported": false
+  },
+  "consequence": {
+    "r12_c8_nonvacuity_proved": true,
+    "cc_r3_terminal_closure_proved": false,
+    "stronger_material_defeater_totality_proved": false,
+    "semantic_property_truth_authority": false
+  },
+  "hard_nonclaims": [
+    "NO_UNKNOWN_DEFEATER_COMPLETENESS",
+    "NO_ALL_ROOT_RELEVANT_MATERIAL_DEFEATER_TOTALITY",
+    "NO_CC_R3_TERMINAL_CLOSURE_FROM_C8_ALONE",
+    "NO_R12_SEMANTIC_PROPERTY_TRUTH",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
