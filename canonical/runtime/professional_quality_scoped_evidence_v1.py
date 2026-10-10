@@ -577,7 +577,10 @@ def _validate_r10(
     if source is not None:
         if source.get("schema") != R10_SOURCE_SCHEMA:
             errors.append("SOURCE_SCHEMA_INVALID")
-        if source.get("status") != "PASS__PINNED_CURRENT_BYTES__PYCOMPILE__23_OF_23__BOUNDED_DECISION_SUFFICIENCY_AND_MINIMUM_INFORMATION_ROUTING__ZERO_GLOBAL_LEAF_CREDIT":
+        status = source.get("status")
+        old_status = "PASS__PINNED_CURRENT_BYTES__PYCOMPILE__23_OF_23__BOUNDED_DECISION_SUFFICIENCY_AND_MINIMUM_INFORMATION_ROUTING__ZERO_GLOBAL_LEAF_CREDIT"
+        factored_status = "PASS__FACTORED_MINIMAL_KERNEL__REMOTE_8_OF_8__EXACT_OUTPUT_EQUIVALENCE_TO_CURRENT_V2_DECISION_SURFACE__ZERO_GLOBAL_LEAF_CREDIT"
+        if status not in {old_status, factored_status}:
             errors.append("SOURCE_STATUS_NOT_ADMITTED")
         blobs = source.get("exact_blobs")
         if not isinstance(blobs, dict):
@@ -585,8 +588,32 @@ def _validate_r10(
         elif blobs.get("runtime") != compiler_declared:
             errors.append("SOURCE_RUNTIME_MISMATCH")
         replay = source.get("replay")
-        if not isinstance(replay, dict) or replay.get("tests_passed") != 23 or replay.get("tests_failed") != 0:
-            errors.append("SOURCE_REPLAY_INVALID")
+        if status == old_status:
+            if not isinstance(replay, dict) or replay.get("tests_passed") != 23 or replay.get("tests_failed") != 0:
+                errors.append("SOURCE_REPLAY_INVALID")
+        elif status == factored_status:
+            if (
+                not isinstance(replay, dict)
+                or replay.get("tests_run") != 8
+                or replay.get("tests_passed") != 8
+                or replay.get("tests_failed") != 0
+                or replay.get("equivalence_cases") != 3
+                or replay.get("decision_contract_output_exact_equal") is not True
+                or replay.get("minimum_information_output_exact_equal") is not True
+            ):
+                errors.append("SOURCE_FACTORED_REPLAY_INVALID")
+            if not isinstance(blobs, dict) or blobs.get("predecessor_runtime") != "b8347a3993f96aa5e6fa2f1fe68d7c8afccb8bec":
+                errors.append("SOURCE_PREDECESSOR_RUNTIME_MISMATCH")
+            eq = source.get("equivalence_basis")
+            if (
+                not isinstance(eq, dict)
+                or eq.get("predecessor_runtime_git_blob_sha") != "b8347a3993f96aa5e6fa2f1fe68d7c8afccb8bec"
+                or set(eq.get("exact_functions") or []) != {
+                    "compile_decision_sufficient_contract",
+                    "compile_minimum_information_contract",
+                }
+            ):
+                errors.append("SOURCE_EQUIVALENCE_BASIS_INVALID")
         scope = source.get("claim_scope")
         claim_scope = scope
         if not isinstance(scope, dict) or scope.get("kind") != R10_KIND:
