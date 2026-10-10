@@ -54,7 +54,7 @@ ENGINE_DESCRIPTORS = {
     "REPAIR_SYNTHESIS": "live_brain_runtime_v1.synthesize_failure_repair",
     "REPAIR_CYCLE": "live_brain_runtime_v1.execute_failure_repair_cycle",
     "UNIVERSAL_ESCAPE": "universal_escape_resolver_v1.resolve",
-    "REACHED_ESCAPE_STATE": "certified_reached_escape_state_constructor_v1.construct",
+    "REACHED_ESCAPE_STATE": "certified_reached_escape_state_constructor_v1.construct + optional certified_reached_escape_repair_executor_v1.execute",
     "CERTIFIED_ROUTE": "certificate_gated_selected_route_runtime_entrypoint_v5",
     "TERMINAL_AUTOPILOT": "terminal_autopilot_v1",
     "TERMINAL_ROOT": "terminal_root_decision_gate_v1.evaluate",
@@ -387,6 +387,9 @@ def run(
     one_shot_externality_certificate_provider: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
     one_shot_capability_synthesis_provider: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
     one_shot_evidence_acquisition_provider: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
+    reached_escape_capability_synthesis_provider: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
+    reached_escape_evidence_acquisition_provider: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
+    reached_escape_candidate_verifier: Callable[[Mapping[str, Any]], Mapping[str, Any] | None] | None = None,
 ) -> dict[str, Any]:
     try:
         if not isinstance(request, Mapping):
@@ -616,6 +619,46 @@ def run(
         elif mode == "REACHED_ESCAPE_STATE":
             from canonical.runtime import certified_reached_escape_state_constructor_v1 as reached_escape_state
             out = reached_escape_state.construct(payload)
+            repair_provider_bound = (
+                reached_escape_capability_synthesis_provider is not None
+                or reached_escape_evidence_acquisition_provider is not None
+            )
+            if (
+                out.get("pass") is not True
+                and isinstance(out.get("repair_dispatch_contract"), Mapping)
+                and options.get("auto_escape_repair", True) is not False
+                and repair_provider_bound
+                and reached_escape_candidate_verifier is not None
+            ):
+                from canonical.runtime import certified_reached_escape_repair_executor_v1 as reached_escape_repair
+                repair = reached_escape_repair.execute(
+                    payload,
+                    capability_synthesis_provider=(
+                        reached_escape_capability_synthesis_provider
+                    ),
+                    evidence_acquisition_provider=(
+                        reached_escape_evidence_acquisition_provider
+                    ),
+                    candidate_verifier=reached_escape_candidate_verifier,
+                )
+                if repair.get("pass") is True:
+                    out = repair
+                else:
+                    out = deepcopy(dict(out))
+                    out["_escape_repair_attempt"] = {
+                        "pass": False,
+                        "status": repair.get("status"),
+                        "reason": repair.get("reason"),
+                        "repair_verified": repair.get("repair_verified") is True,
+                        "global_repair_acquirability_proved": (
+                            repair.get("global_repair_acquirability_proved") is True
+                        ),
+                        "global_escape_progress_totality_proved": (
+                            repair.get("global_escape_progress_totality_proved") is True
+                        ),
+                        "terminal_authority": False,
+                        "terminal_credit_delta": 0,
+                    }
         elif mode == "CERTIFIED_ROUTE":
             operation = str(payload.get("operation") or "").strip().upper()
             if operation == "PREFLIGHT":
