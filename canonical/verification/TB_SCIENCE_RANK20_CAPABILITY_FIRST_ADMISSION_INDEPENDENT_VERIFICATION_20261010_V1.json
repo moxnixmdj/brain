@@ -3,7 +3,7 @@
   "date": "2026-10-10",
   "status": "PASS__RANK20_UNEXPOSED_PRECLAIM_CAPABILITY_FIRST_ADMISSION__ZERO_EXECUTION_CREDIT",
   "subject": {
-    "branch": "successor/tb-science-rank20-capability-admission-20261010-v1",
+    "branch": "successor/tb-science-rank20-capability-admission-20261010-v2",
     "admission": {
       "path": "canonical/governance/TB_SCIENCE_RANK20_CAPABILITY_FIRST_CHECKPOINT_ADMISSION_20261010_V1.json",
       "git_blob_sha": "b03861813f9b9a730659e6e0b6e7301a45061b04"
@@ -15,7 +15,8 @@
     "regression": {
       "path": "canonical/tests/test_tb_science_rank20_capability_first_admission_v1.py",
       "git_blob_sha": "8b0d012bb1b470ab3a0cbb58d0a95688d8b285ce"
-    }
+    },
+    "base_commit": "234838faeca635f724cf4bb2a39545e5ab3cb884"
   },
   "tdd": {
     "red": {
@@ -88,5 +89,14 @@
     "NO_RANK20_EXECUTION_OR_ACTIVATION_AUTHORITY",
     "NO_RANK19_REOPENING",
     "NO_CAPABILITY_ACCEPTANCE_OR_TERMINAL_CREDIT"
-  ]
+  ],
+  "delivery_replay": {
+    "status": "PASS__EXACT_SUBJECT_BLOBS_UNCHANGED_AFTER_REBASE",
+    "candidate_git_blob_sha": "b03861813f9b9a730659e6e0b6e7301a45061b04",
+    "verifier_git_blob_sha": "753d16acb4c19389a0241b77f3c329f7740e05ae",
+    "regression_git_blob_sha": "8b0d012bb1b470ab3a0cbb58d0a95688d8b285ce",
+    "sprite_replay_pass": true,
+    "verifier_errors": [],
+    "branch_behind_main_at_replay": 0
+  }
 }
