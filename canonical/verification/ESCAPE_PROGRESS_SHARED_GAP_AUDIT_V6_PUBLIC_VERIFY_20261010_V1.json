@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_ESCAPE_PROGRESS_SHARED_GAP_AUDIT_V6_PUBLIC_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_V6_BYTES__4_OF_4_TESTS__PROJECTED_12_A_1_B__ACTIVE_GAP_B_ZERO__CC_R3_OPEN__ZERO_CREDIT",
+  "subjects": {
+    "binding": {
+      "path": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V7.json",
+      "git_blob_sha": "2119d0bc2b5c06399da49adb5a86b4e9faf7e08f"
+    },
+    "runtime": {
+      "path": "canonical/runtime/escape_progress_shared_gap_audit_v6.py",
+      "git_blob_sha": "67635dc07213d82e94ea99661d575fcfd5932ac7"
+    },
+    "tests": {
+      "path": "canonical/tests/test_escape_progress_shared_gap_audit_v6.py",
+      "git_blob_sha": "54fdd1ac72da0de87c316ffbc5206c35de2f6fae"
+    }
+  },
+  "independent_carrier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify-escape-audit-v6",
+    "commit": "ca66e9786fd910f3764f95b8d58d9575e10bd4cd",
+    "workflow": ".github/workflows/verify-escape-audit-v6.yml",
+    "workflow_run_id": 38070531267,
+    "workflow_job_id": 114266829191,
+    "conclusion": "success"
+  },
+  "checks": {
+    "pycompile_pass": true,
+    "exact_tests_passed": 4,
+    "exact_tests_run": 4,
+    "exact_runtime_replay_pass": true,
+    "projected_gap_a_count": 12,
+    "projected_gap_b_structural_count": 1,
+    "active_gap_b_count": 0,
+    "parked_gap_b_count": 1,
+    "parked_rows": [
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "currentness_error_count": 0,
+    "authenticated_current_row_proof_count": 0,
+    "open_row_count": 13,
+    "cc_r3_proved": false
+  },
+  "exact_replay_boundary": "ALL_13_CURRENT_EVIDENCE_SUBJECTS_VALID__NO_ROW_CLOSES_WITHOUT_CANONICAL_PROOF_PLUS_INDEPENDENT_VERIFICATION__CAUSAL_RECLASSIFICATION_MINTS_ZERO_ROW_CREDIT",
+  "hard_nonclaims": [
+    "NO_GAP_A_ROW_PROOF",
+    "NO_TB_ROW_PROOF",
+    "NO_CC_R3_OR_GLOBAL_ESCAPE_PROGRESS_TOTALITY",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "row_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
