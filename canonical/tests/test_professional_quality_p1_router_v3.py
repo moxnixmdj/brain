@@ -88,20 +88,31 @@ class ProfessionalQualityP1RouterV3Tests(unittest.TestCase):
             "step_results": {"COMPILE_TARGET_SPEC_AND_HARD_CONSTRAINTS": "PASS"},
             "detected_triggers": [],
         }
-        out = router.route(state, repo_root="/tmp/repo-root")
-        verify.assert_called_once_with({
-            "artifact_paths": ["a.docx"],
-            "profile_id": "BRAIN_PROFESSIONAL_OOXML_SANITY_V1",
-        })
-        base_route.assert_called_once()
-        delegated = base_route.call_args.args[0]
-        self.assertNotIn("artifact_paths", delegated)
-        self.assertNotIn("hard_defect_profile_id", delegated)
-        self.assertEqual(
-            delegated["step_results"],
-            {"COMPILE_TARGET_SPEC_AND_HARD_CONSTRAINTS": "PASS"},
-        )
-        self.assertEqual(base_route.call_args.kwargs["repo_root"], "/tmp/repo-root")
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            profile_path = root / router.PROFILE_PATH
+            profile_path.parent.mkdir(parents=True, exist_ok=True)
+            profile_path.write_text(json.dumps({
+                "schema": router.PROFILE_SCHEMA,
+                "steps": [router.PREFLIGHT_STEP],
+                "hard_defect_preflight": {
+                    "binding_git_blob_sha": router.BINDING_SHA,
+                },
+            }))
+            out = router.route(state, repo_root=root)
+            verify.assert_called_once_with({
+                "artifact_paths": ["a.docx"],
+                "profile_id": "BRAIN_PROFESSIONAL_OOXML_SANITY_V1",
+            })
+            base_route.assert_called_once()
+            delegated = base_route.call_args.args[0]
+            self.assertNotIn("artifact_paths", delegated)
+            self.assertNotIn("hard_defect_profile_id", delegated)
+            self.assertEqual(
+                delegated["step_results"],
+                {"COMPILE_TARGET_SPEC_AND_HARD_CONSTRAINTS": "PASS"},
+            )
+            self.assertEqual(base_route.call_args.kwargs["repo_root"], root)
         self.assertEqual(out["schema"], router.SCHEMA)
         self.assertIs(out["hard_defect_preflight_result"], verify.return_value)
         self.assertFalse(out["preflight_self_attestation_allowed"])
