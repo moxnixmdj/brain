@@ -1,0 +1,25 @@
+{
+  "schema": "PROJECT_BRAIN_ESCAPE_V3_SCHEDULER_RECONCILIATION_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__SCHEDULER_BOUND_TO_V4_BINDING_AND_V3_AUDIT__GAP_A_TERMINAL_FIRST__ZERO_CREDIT",
+  "blobs": {
+    "residual_pointer": "fd399254026e5b2803355581aef698b9de848afd",
+    "binding": "a0199c9fa26340effa8a8e2d4bca503a837eafe0",
+    "audit": "14adf2c1a431285a542340a740e27e764edb1ce5",
+    "audit_verification": "4156e6c9a1c27913120568d8e505f0f154907015"
+  },
+  "verified": {
+    "gap_a_count": 10,
+    "gap_b_count": 3,
+    "gap_a_terminal_common_policy_mode_bound": true,
+    "gap_a_strict_discriminator_mode_bound": true,
+    "gap_b_progress_gate_preserved": true,
+    "row_proofs_complete": false,
+    "cc_r3_proved": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "pass": true
+}
