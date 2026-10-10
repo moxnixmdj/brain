@@ -1,0 +1,89 @@
+{
+  "schema": "PROJECT_BRAIN_R2_DIRECT_ROUTE_PROMOTION_CONCURRENCY_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_BLOBS__PUBLIC_ISOLATED_3_OF_3__NONBLOCKING_PROMOTION_LEASE__SERIAL_COMPOSITION_NO_LOST_UPDATE__ZERO_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "codex/r2-direct-route-promotion-lease-current-v2",
+    "base_main_sha": "12f32e601c1eddbd665ca24c51df72e072ccb2a0",
+    "exact_candidate_blobs": {
+      "canonical/runtime/promote_r2_direct_route_v1.py": "6a1a200da6e049553b6c7bca80d2012eaa13c86e",
+      "canonical/runtime/r2_direct_route_dynamic_admission_v1.py": "65fc5bdb5283944d058c6c6a2ff1fe360aa17489",
+      "canonical/tests/test_r2_direct_route_promotion_lease_v1.py": "229dd6cbf4a75cec28cce575dfef67bb2ec66b54"
+    }
+  },
+  "problem": {
+    "prior_promoter_atomic_file_replace": true,
+    "prior_compare_and_swap": false,
+    "prior_concurrent_lost_update_possible": true,
+    "failure_mode": "TWO_PROMOTERS_READ_SAME_OLD_MANIFEST__COMPILE_DIVERGENT_SUCCESSORS__LATER_POINTER_SWAP_DROPS_EARLIER_ROUTE"
+  },
+  "repair": {
+    "local_process_lease": "FCNTL_FLOCK_EXCLUSIVE_NONBLOCKING",
+    "contention_behavior": "FAIL_CLOSED__PROMOTION_LEASE_BUSY",
+    "lease_scope": "READ_CURRENT__COMPILE__WRITE_CONTENT_ADDRESSED_MANIFEST__PRECOMMIT_REREAD__POINTER_SWAP__POSTCOMMIT_REPLAY",
+    "precommit_stale_pointer_check": true,
+    "postcommit_replay_required": true,
+    "exact_repromotion_idempotent": true
+  },
+  "public_isolated_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2544,
+    "workflow": "Isolated verification dispatcher",
+    "workflow_run_id": 38027061270,
+    "workflow_job_id": 114140028298,
+    "conclusion": "success",
+    "exact_blob_check": true,
+    "python_compile": true,
+    "tests_run": 3,
+    "tests_passed": 3,
+    "verified_properties": [
+      "CONCURRENT_PROMOTION_LEASE_CONTENTION_FAILS_CLOSED_WITHOUT_WAITING",
+      "TWO_VERIFIED_SERIAL_PROMOTIONS_COMPOSE_TO_TWO_LIVE_ROUTES_WITHOUT_LOST_UPDATE",
+      "EXACT_REPROMOTION_REMAINS_IDEMPOTENT_UNDER_LEASE"
+    ]
+  },
+  "authority_boundaries": {
+    "provider_deployment_authority": false,
+    "verification_authority_mutation_allowed": false,
+    "semantic_truth_authority": false,
+    "policy_adequacy_authority": false,
+    "terminal_authority": false,
+    "terminal_credit_delta": 0
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false,
+  "private_actions_carrier": {
+    "classification": "INFRASTRUCTURE_FAILURE_BEFORE_STEP_EXECUTION__NOT_A_TEST_FAILURE",
+    "attempts": [
+      {
+        "workflow_run_id": 38027173730,
+        "workflow_job_id": 114140370831,
+        "status": "completed",
+        "conclusion": "failure",
+        "steps": null,
+        "python_execution_credit": false
+      }
+    ]
+  },
+  "current_main_nonoverlap_lease": {
+    "observed_main_sha": "12f32e601c1eddbd665ca24c51df72e072ccb2a0",
+    "verified_candidate_base_sha": "089f5bc16aca537833600e33b27488a0d0cbb7ac",
+    "intervening_commit_count": 16,
+    "checked_paths": [
+      "canonical/runtime/promote_r2_direct_route_v1.py",
+      "canonical/runtime/r2_direct_route_dynamic_admission_v1.py",
+      "canonical/tests/test_r2_direct_route_promotion_lease_v1.py",
+      "canonical/governance/CURRENT_DEFAULT_RUNTIME_INTEGRATION.json",
+      "canonical/governance/CURRENT_ONE_SHOT_REALITY_CLOSURE.json"
+    ],
+    "overlaps": [],
+    "exact_candidate_blobs_unchanged": true
+  }
+}
