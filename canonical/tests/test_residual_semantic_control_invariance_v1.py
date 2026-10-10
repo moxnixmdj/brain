@@ -343,6 +343,39 @@ class ResidualSemanticControlTests(unittest.TestCase):
         self.assertEqual(rec["primary_unsolved_count_delta"], 0)
         self.assertEqual(rec["terminal_credit_delta"], 0)
 
+    def test_context_meaning_v5_orders_contextual_identity_before_ambiguity_control(self):
+        intent = json.loads(
+            (
+                ROOT
+                / "canonical/action_intents/ACTION_INTENT_CONTEXT_DEPENDENT_MEANING_POSITIVE_COVERAGE_20261010_V4.json"
+            ).read_text(encoding="utf-8")
+        )
+        self.assertTrue(
+            intent["general_control_law"][0].startswith(
+                "FIRST_REUSE_EXACT_AUTHENTICATED_SOURCE_NATIVE_OR_LONGER_MULTIWORD_TERM_IDENTITY"
+            )
+        )
+        handoff = json.loads(
+            (
+                ROOT
+                / "canonical/reasoning/2026-10-10_CONTEXT_DEPENDENT_MEANING_RESEARCH_HANDOFF_V5.json"
+            ).read_text(encoding="utf-8")
+        )
+        stages = handoff["composed_capability"]
+        self.assertEqual(
+            stages["stage_1_contextual_identity"]["git_blob_sha"],
+            "655e46be6e9a31d0df210609152794f70caf1b63",
+        )
+        self.assertEqual(
+            stages["stage_2_negative_identification"]["git_blob_sha"],
+            "e358eeecc45868c91d22009cc57c624e9a210037",
+        )
+        self.assertEqual(
+            stages["stage_3_control_progress"]["git_blob_sha"],
+            "cea865ac319eb420977b60378de213fc11be9090",
+        )
+        self.assertFalse(handoff["exact_margin_truth"]["bare_true_identity_selected"])
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
