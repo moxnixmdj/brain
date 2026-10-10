@@ -13,7 +13,7 @@
   },
   "root_theorem": {
     "path": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_THEOREM_V1.json",
-    "git_blob_sha": "2a4327fe5db9b498fe87d2c4fb38ccbd88c976ef"
+    "git_blob_sha": "b2870a70adb5884fbfcc6c9f5115d4a2016c1afc"
   },
   "falsifier": {
     "path": "canonical/runtime/root_theorem_falsifier_v1.py",
@@ -95,7 +95,7 @@
   },
   "claim_scope_precondition": {
     "path": "canonical/governance/COVERAGE_COMPLETENESS_CLAIM_SCOPE_V1.json",
-    "git_blob_sha": "e3759174eab304a6b24655e6dee12298af1aa499",
+    "git_blob_sha": "44709e2673a213c01179b5e7d4c622c45b0729bf",
     "role": "FROZEN_CLAIM_INDEX_FOR_R1_R4_AND_CARRIER_FACTORIZATION__ZERO_CREDIT"
   },
   "currentness_repair": {
