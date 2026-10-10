@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_R2_V77_REGCAP_MREL_NO_DESCRIPTOR_RECONCILIATION_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_BRANCH_BYTES__10_OF_10_STRUCTURAL_CHECKS__COUNTS_UNCHANGED__ONE_FINANCE_RESIDUAL_REMAINS__TERMINAL_UNCHANGED",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "r2-v77-regcap-mrel-no-descriptor-reconcile-20261010-sol",
+    "exact_blobs": {
+      "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json": "46d8a13127aba6d302b30e19985860526f4f8790",
+      "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261010_V65.json": "a3284796a11c1c69ede669e68deb6d0052b1e5be",
+      "canonical/governance/R2_V77_REGCAP_MREL_NO_DESCRIPTOR_RECONCILIATION_20261010_V1.json": "a71f27f3aa3cf01e94d8b3c4adf246c397107b19",
+      "canonical/tests/test_r2_v77_regcap_mrel_no_descriptor_reconciliation_v1.py": "3352511e78657b264dcc07296a7e86644aad6080"
+    }
+  },
+  "independent_carrier": {
+    "name": "participial-disposition-verify-20261009-sol",
+    "sprite_id": "sprite-72f2a31b-c09c-49e0-bfe0-279786ee2d56",
+    "workspace": "/home/sprite/r2_v77_verify"
+  },
+  "verification": {
+    "structural_tests": {"result":"PASS","tests_run":10,"failures":0,"errors":0},
+    "direct_route_count_before": 39,
+    "direct_route_count_after": 39,
+    "bounded_family_count_before": 36,
+    "bounded_family_count_after": 36,
+    "primary_internal_unsolved_count_before": 1,
+    "primary_internal_unsolved_count_after": 1,
+    "terminal_blob_before": "8170b237ef6629d83987e9e1709b2c55c08daa16",
+    "terminal_blob_after": "8170b237ef6629d83987e9e1709b2c55c08daa16"
+  },
+  "proved": [
+    "CURRENT_R2_V77_POINTS_TO_EXACT_ROOT2_V65",
+    "ROOT2_V65_SUPERSEDES_EXACT_V64",
+    "NEW_REGCAP_MREL_NO_DESCRIPTOR_PAIR_DOMAIN_TRUTH_POSITIVE_SUBREGION_IS_RECORDED",
+    "CCOB_MREL_AND_CCYB_MREL_REMAINING_BOUNDARY_IS_NARROWED_NOT_DELETED",
+    "REUSE_GUIDANCE_IS_LIVE",
+    "FIXED_POINT_INFORMATION_POLICY_MARKS_THE_NEW_BOUND_SUBREGION",
+    "ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_STILL_REMAINS",
+    "DIRECT_ROUTE_AND_BOUNDED_FAMILY_COUNTS_ARE_UNCHANGED",
+    "CURRENT_TERMINAL_AUTHORITY_IS_UNCHANGED",
+    "NO_GLOBAL_SEMANTIC_IDENTITY_OR_OPEN_WORLD_ONTOLOGY_CLOSURE_CLAIM"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
