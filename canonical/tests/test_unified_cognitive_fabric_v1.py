@@ -50,6 +50,7 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
         self.assertIn("SEMANTIC_AMBIGUITY", c["engines"])
         self.assertIn("SEMANTIC_RELATION", c["engines"])
         self.assertIn("OEWN_DECISION_SENSE", c["engines"])
+        self.assertIn("GLOBAL_RETRIEVAL_PLAN", c["engines"])
         self.assertGreater(c["brain_owned_transitive_file_count"], 1)
         self.assertGreater(c["brain_owned_transitive_source_bytes"], 0)
         self.assertIn(
@@ -80,6 +81,38 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
             c["known_unified_fabric_residuals"],
         )
         self.assertFalse(c["all_historical_brain_capabilities_unified"])
+
+    def test_global_retrieval_plan_dispatches_without_granting_execution_authority(self):
+        planned = {
+            "schema": "PROJECT_BRAIN_GLOBAL_RETRIEVAL_ENTRYPOINT_V4",
+            "status": "PASS__AUTHORIZED_EMPIRICAL_PLAN_WITH_VERIFIED_RECOVERY_PORTFOLIO",
+            "plan": {"actions": [{"action_id": "q1"}]},
+            "execution_authority": False,
+            "promotion_authority": False,
+            "capability_credit_delta": 0,
+            "ownership_credit_delta": 0,
+            "incremental_spend_usd": 0,
+        }
+        with patch(
+            "canonical.runtime.unified_cognitive_fabric_v1.global_retrieval.compile_authorized_plan",
+            return_value=planned,
+        ) as compile_plan:
+            out = run({
+                "mode": "GLOBAL_RETRIEVAL_PLAN",
+                "payload": {
+                    "query_actions": [{"action_id": "q1", "source_id": "web", "query": "x"}],
+                    "sources": [{"source_id": "web"}],
+                },
+                "options": {"learn": False},
+            })
+        self.assertEqual(out["status"], "FABRIC_DISPATCH_COMPLETE")
+        self.assertTrue(out["inner_pass"], out)
+        self.assertEqual(out["result"], planned)
+        self.assertFalse(out["result"]["execution_authority"])
+        compile_plan.assert_called_once()
+        kwargs = compile_plan.call_args.kwargs
+        self.assertEqual(kwargs["query_actions"][0]["action_id"], "q1")
+        self.assertEqual(kwargs["sources"][0]["source_id"], "web")
 
     def test_raw_goal_dispatches(self):
         out = run({
