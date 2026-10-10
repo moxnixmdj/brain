@@ -235,7 +235,7 @@
     "remote_exact_byte_replay": "SPRITE__39_PASSED__0_FAILED"
   },
   "reconciliation": {
-    "current_base_commit": "8f98b5d72fd11fe5dbd00ad38f88a47be3ed724e",
+    "current_base_commit": "63ce24491f2e06ebf4e1dfaea945180d7e73bf83",
     "current_terminal_authority": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
     "ancestor_action_intent": "canonical/action_intents/ACTION_INTENT_TERMINAL_FOUR_INVARIANT_COLLAPSE_20261007_V1.json",
     "stale_specialized_pr": {
@@ -324,10 +324,11 @@
     "cross_binding_composition_forbidden": true
   },
   "r4_live_binding_currentness": {
-    "status": "VERIFIED_CURRENT_BYTES_PENDING_FINAL_MERGE",
+    "status": "VERIFICATION_PENDING_CURRENT_PR_MERGE__ZERO_CREDIT",
     "required_validator": "canonical/runtime/root_theorem_live_binding_v1.py",
-    "verification_path": "canonical/verification/R4_LIVE_BINDING_CURRENTNESS_REPAIR_VERIFY_20261009_V1.json",
-    "rule": "ALL_CONTENT_ADDRESSED_R4_DEPENDENCIES_MUST_MATCH_CURRENT_REPO_BYTES",
+    "verification_path": "canonical/verification/R4_SEMANTIC_RECEIPT_AND_LIVE_BINDING_VERIFICATION_20261010_V1.json",
+    "rule": "ALL_CONTENT_ADDRESSED_R4_DEPENDENCIES_MUST_MATCH_CURRENT_REPO_BYTES_INCLUDING_ROOT_REGISTRY_GUARD_EXECUTABLE_SEMANTIC_RECEIPT_VERIFIER_AND_LOAD_BEARING_TESTS",
+    "semantic_receipt_verifier_required": true,
     "zero_credit": true
   },
   "r4_canonical_certificate_authority": {
