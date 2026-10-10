@@ -1,0 +1,1069 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_SUBJECT_DEPENDENCY_CLOSURE_V1",
+  "date": "2026-10-10",
+  "status": "DEPENDENCY_CLASSIFICATION_COMPLETE__SUBJECT_REFRESH_REQUIRED_ONCE__ZERO_QUALITY_OR_TERMINAL_AUTHORITY",
+  "objective": "Classify every load-bearing dependency for all twelve professional-quality roots as either reusable declared-system material or external claim-instance evidence before minting further same-subject root bindings.",
+  "source_registry": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_REGISTRY_20261010_V1.json",
+    "git_blob_sha": "b9ddf7cbe7fbfad0e81fe068a0c19b48703b5aba"
+  },
+  "source_worklist": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V4_SAME_SUBJECT_ROOT_BINDING_WORKLIST_20261010_V3.json",
+    "git_blob_sha": "e352352dca6466826478ea2221ec9b856230499e"
+  },
+  "current_candidate_subject": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V4_DECLARED_SYSTEM_SUBJECT_20261010_V3.json",
+    "git_blob_sha": "ad6867e59b4279e34a3e0058cf539ee94f8d094c",
+    "subject_id": "PROFESSIONAL_QUALITY_P1_V4_TARGET_BOUND_SYSTEM_20261010_V3",
+    "subject_sha256": "e7292fbe697c2dcd06fc2c4346fc3e3bb231428a6511a88d575c655dd0f0c53a"
+  },
+  "classifier": {
+    "path": "canonical/runtime/professional_quality_subject_dependency_closure_v1.py",
+    "git_blob_sha": "06bbfcab27637420202ff3f8fac7ef28383bd063"
+  },
+  "classification_law": {
+    "subject_component_rule": "CONTENT_ADDRESSED_RUNTIME_COMPILER_CONTRACT_SCHEMA_OR_CONTRACT_REGISTRY_THAT_CAN_CHANGE_DECLARED_SYSTEM_BEHAVIOR",
+    "external_evidence_rule": "CONTENT_ADDRESSED_VERIFICATION_SCOPE_AUTHORITY_OR_CLAIM_INSTANCE_OBSERVATION_THAT_JUSTIFIES_A_ROOT_WITHOUT_BECOMING_REUSABLE_SYSTEM_BEHAVIOR",
+    "unknown_content_addressed_role": "FAIL_CLOSED",
+    "role_overlap": "FAIL_CLOSED"
+  },
+  "root_count": 12,
+  "roots": [
+    {
+      "root_id": "R1_TARGET_SPECIFICATION",
+      "subject_components": [
+        {
+          "scope_id": "PQ::R1::TARGET_CONTRACT::STRUCTURAL_COMPLETENESS_GATE",
+          "field": "contract_registry",
+          "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V2.json",
+          "git_blob_sha": "ae250d5bc5da73b23600670be354ffba31e65e53"
+        },
+        {
+          "scope_id": "PQ::R1::TARGET_CONTRACT::STRUCTURAL_COMPLETENESS_GATE",
+          "field": "contract_schema",
+          "path": "canonical/governance/BEHAVIORAL_CONTRACT_SCHEMA_V1.json",
+          "git_blob_sha": "b173d8fc6e29df3cec3579954bb17c594308b151"
+        },
+        {
+          "scope_id": "PQ::R1::TARGET_CONTRACT::STRUCTURAL_COMPLETENESS_GATE",
+          "field": "reusable_compiler",
+          "path": "canonical/runtime/adequacy_basis_structural_completeness_gate_v1.py",
+          "git_blob_sha": "46d01dc945ae7036efc27b6c3740f2e0ac8ff9c0"
+        },
+        {
+          "scope_id": "PQ::R1::TARGET_CONTRACT::STRUCTURAL_COMPLETENESS_GATE",
+          "field": "registry_extension_runtime",
+          "path": "canonical/runtime/behavioral_contract_extension_gate_v1.py",
+          "git_blob_sha": "3d8538389af1a3dc46ef74c79b70531511a1f4ec"
+        },
+        {
+          "scope_id": "PQ::R1::TARGET_CONTRACT::STRUCTURAL_COMPLETENESS_GATE",
+          "field": "dynamic_extension_runtime",
+          "path": "canonical/runtime/dynamic_adequacy_extension_basis_gate_v1.py",
+          "git_blob_sha": "2cae15152a80217871241b71e60a4d2fa9f52f03"
+        },
+        {
+          "scope_id": "PQ::R1::TARGET_SEMANTICS::PROFESSIONAL_ARTIFACT_PLAN",
+          "field": "reusable_compiler",
+          "path": "canonical/runtime/professional_target_semantic_certificate_v1.py",
+          "git_blob_sha": "583612b0e2226053ac758683087b5c5d0f510996"
+        }
+      ],
+      "external_evidence_references": [
+        {
+          "scope_id": "PQ::R1::TARGET_CONTRACT::STRUCTURAL_COMPLETENESS_GATE",
+          "field": "compiler_verification",
+          "path": "canonical/governance/PROFESSIONAL_QUALITY_R1_STRUCTURAL_TARGET_SCOPE_20261010_V1.json",
+          "git_blob_sha": "b50ac48a805618f2f38b1e839e7a227058247b0b"
+        },
+        {
+          "scope_id": "PQ::R1::TARGET_SEMANTICS::PROFESSIONAL_ARTIFACT_PLAN",
+          "field": "scope_governance",
+          "path": "canonical/governance/PROFESSIONAL_QUALITY_R1_TARGET_SEMANTIC_SCOPE_20261010_V1.json",
+          "git_blob_sha": "9145121eb2cfbee43f94534864d30f32868e81de"
+        },
+        {
+          "scope_id": "PQ::R1::TARGET_CONTRACT::STRUCTURAL_COMPLETENESS_GATE",
+          "field": "source_receipt",
+          "path": "canonical/verification/PROFESSIONAL_QUALITY_R1_STRUCTURAL_TARGET_VERIFY_20261010_V1.json",
+          "git_blob_sha": "dcee55ba17d15154117100de6aebd34716ad3e3e"
+        },
+        {
+          "scope_id": "PQ::R1::TARGET_SEMANTICS::PROFESSIONAL_ARTIFACT_PLAN",
+          "field": "source_receipt",
+          "path": "canonical/verification/PROFESSIONAL_QUALITY_R1_TARGET_SEMANTIC_VERIFY_20261010_V1.json",
+          "git_blob_sha": "dfffdd6eff129ce7498c4e4aa8a822cd4a5cda22"
+        },
+        {
+          "scope_id": "PQ::R1::TARGET_SEMANTICS::PROFESSIONAL_ARTIFACT_PLAN",
+          "field": "compiler_verification",
+          "path": "canonical/verification/PROFESSIONAL_QUALITY_R1_TARGET_SEMANTIC_VERIFY_20261010_V1.json",
+          "git_blob_sha": "dfffdd6eff129ce7498c4e4aa8a822cd4a5cda22"
+        }
+      ],
+      "dynamic_external_inputs": [
+        "EXACT_TARGET_INSTANCE_AND_AUTHENTICATED_GOAL_TO_DECISION_BINDING"
+      ]
+    },
+    {
+      "root_id": "R2_CANDIDATE_SEARCH",
+      "subject_components": [
+        {
+          "scope_id": "PQ::R2::FINITE_REGION_SEARCH::COMMON_POLICY_OR_MINIMAX_DISCRIMINATOR",
+          "field": "minimax_runtime",
+          "path": "canonical/runtime/finite_minimax_decision_region_v1.py",
+          "git_blob_sha": "1bb7dd084f10db4fe298fdd0ac77849df23837c9"
+        },
+        {
+          "scope_id": "PQ::R2::SEARCH_SEMANTICS::FINITE_SCOPE",
+          "field": "reusable_compiler",
+          "path": "canonical/runtime/professional_candidate_search_semantic_certificate_v1.py",
+          "git_blob_sha": "84c6dbd8e36c98dde74cf16252fe83ff0aad4baf"
+        },
+        {
+          "scope_id": "PQ::R2::FINITE_REGION_SEARCH::COMMON_POLICY_OR_MINIMAX_DISCRIMINATOR",
+          "field": "reusable_compiler",
+          "path": "canonical/runtime/u_scope_complete_depletion_orchestrator_v1.py",
+          "git_blob_sha": "b783ebdf51db3c6581facf4cc1cc3e9d59440760"
+        }
+      ],
+      "external_evidence_references": [
+        {
+          "scope_id": "PQ::R2::FINITE_REGION_SEARCH::COMMON_POLICY_OR_MINIMAX_DISCRIMINATOR",
+          "field": "compiler_verification",
+          "path": "canonical/governance/PROFESSIONAL_QUALITY_R2_SCOPE_COMPLETE_SEARCH_SCOPE_20261010_V1.json",
+          "git_blob_sha": "b074b6e260cf2d5b534a822c3684171b1cc95b2e"
+        },
+        {
+          "scope_id": "PQ::R2::SEARCH_SEMANTICS::FINITE_SCOPE",
+          "field": "scope_governance",
+          "path": "canonical/governance/PROFESSIONAL_QUALITY_R2_SEARCH_SEMANTIC_SCOPE_20261010_V1.json",
+          "git_blob_sha": "c12893656c0546aafa79135dec221f2e5f7e9774"
+        },
+        {
+          "scope_id": "PQ::R2::FINITE_REGION_SEARCH::COMMON_POLICY_OR_MINIMAX_DISCRIMINATOR",
+          "field": "source_receipt",
+          "path": "canonical/verification/PROFESSIONAL_QUALITY_R2_SCOPE_COMPLETE_SEARCH_VERIFY_20261010_V1.json",
+          "git_blob_sha": "b66115513d1dde4527a65e5eda1ddea300138aca"
+        },
+        {
+          "scope_id": "PQ::R2::SEARCH_SEMANTICS::FINITE_SCOPE",
+          "field": "source_receipt",
+          "path": "canonical/verification/PROFESSIONAL_QUALITY_R2_SEARCH_SEMANTIC_VERIFY_20261010_V1.json",
+          "git_blob_sha": "06da6b94712ec844a56c0f663cce67f059b7ba8d"
+        },
+        {
+          "scope_id": "PQ::R2::SEARCH_SEMANTICS::FINITE_SCOPE",
+          "field": "compiler_verification",
+          "path": "canonical/verification/PROFESSIONAL_QUALITY_R2_SEARCH_SEMANTIC_VERIFY_20261010_V1.json",
+          "git_blob_sha": "06da6b94712ec844a56c0f663cce67f059b7ba8d"
+        }
+      ],
+      "dynamic_external_inputs": [
+        "EXACT_CANDIDATE_UNIVERSE_OR_GENERATOR_OUTPUT_AND_SCOPE_COMPLETENESS_EVIDENCE"
+      ]
+    },
+    {
+      "root_id": "R3_REALIZATION_OBSERVATION",
+      "subject_components": [
+        {
+          "scope_id": "PQ::R3::NATIVE_ARTIFACT::BOUNDED_RENDER_PRESERVATION",
+          "field": "reusable_compiler",
+          "path": "canonical/runtime/native_artifact_render_preservation_proof_v1.py",
+          "git_blob_sha": "39374e775d54cdc58315d7a1f877d834282a64f7"
+        },
+        {
+          "scope_id": "PQ::R3::REALIZATION_SEMANTICS::PINNED_NATIVE_RENDER",
+          "field": "reusable_compiler",
+          "path": "canonical/runtime/professional_r3_realization_semantic_certificate_v1.py",
+          "git_blob_sha": "eb3c5e6537d48640078b52a525a8f1791d88386b"
+        }
+      ],
+      "external_evidence_references": [
+        {
+          "scope_id": "PQ::R3::NATIVE_ARTIFACT::BOUNDED_RENDER_PRESERVATION",
+          "field": "compiler_verification",
+          "path": "canonical/governance/NATIVE_ARTIFACT_RENDER_PRESERVATION_PREFLIGHT_V1.json",
+          "git_blob_sha": "b5ddc896811875b59840959e27dbb515265fc9f8"
+        },
+        {
+          "scope_id": "PQ::R3::REALIZATION_SEMANTICS::PINNED_NATIVE_RENDER",
+          "field": "scope_governance",
+          "path": "canonical/governance/PROFESSIONAL_QUALITY_R3_REALIZATION_SEMANTIC_SCOPE_20261010_V1.json",
+          "git_blob_sha": "1edbd92b4e7b01591162d692f1d4c9b785b4c102"
+        },
+        {
+          "scope_id": "PQ::R3::NATIVE_ARTIFACT::BOUNDED_RENDER_PRESERVATION",
+          "field": "source_receipt",
+          "path": "canonical/verification/NATIVE_ARTIFACT_RENDER_PRESERVATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+          "git_blob_sha": "1a0b4ca6627aaf28eb25f6990682e87319d14d6d"
+        },
+        {
+          "scope_id": "PQ::R3::REALIZATION_SEMANTICS::PINNED_NATIVE_RENDER",
+          "field": "source_receipt",
+          "path": "canonical/verification/PROFESSIONAL_QUALITY_R3_REALIZATION_SEMANTIC_VERIFY_20261010_V1.json",
+          "git_blob_sha": "3c9a6f03c9dfb7597cdb7c5ca01e9eaf66a596e0"
+        },
+        {
+          "scope_id": "PQ::R3::REALIZATION_SEMANTICS::PINNED_NATIVE_RENDER",
+          "field": "compiler_verification",
+          "path": "canonical/verification/PROFESSIONAL_QUALITY_R3_REALIZATION_SEMANTIC_VERIFY_20261010_V1.json",
+          "git_blob_sha": "3c9a6f03c9dfb7597cdb7c5ca01e9eaf66a596e0"
+        }
+      ],
+      "dynamic_external_inputs": [
+        "EXACT_ARTIFACT_BYTES_DELIVERY_ENVIRONMENT_AND_AUDIENCE_VIEW_OBSERVATION"
+      ]
+    },
+    {
+      "root_id": "R4_MEASUREMENT_CONSTRUCT",
+      "subject_components": [
+        {
+          "scope_id": "PQ::R4::MECHANICAL_ARTIFACT_MEASUREMENT::CONTENT_ADDRESSED_TYPED_ACCEPTANCE",
+          "field": "measurement_runtime",
+          "path": "canonical/runtime/content_addressed_artifact_measurement_v1.py",
+          "git_blob_sha": "4da88dc71e85874b6445988b792951fb3c36d62f"
+        },
+        {
+          "scope_id": "PQ::R4::MECHANICAL_ARTIFACT_MEASUREMENT::CONTENT_ADDRESSED_TYPED_ACCEPTANCE",
+          "field": "reusable_compiler",
+          "path": "canonical/runtime/measured_typed_acceptance_program_v1.py",
+          "git_blob_sha": "7cb47bbefa807e93007e13e84607b41e27245f62"
+        },
+        {
+          "scope_id": "PQ::R4::MEASUREMENT_SEMANTICS::CONTENT_ADDRESSED_TYPED_MECHANICAL",
+          "field": "reusable_compiler",
+          "path": "canonical/runtime/professional_r4_measurement_semantic_certificate_v1.py",
+          "git_blob_sha": "349afbd3f5b118bc7da56b5d04c7fdba761b77ec"
+        }
+      ],
+      "external_evidence_references": [
+        {
+          "scope_id": "PQ::R4::MECHANICAL_ARTIFACT_MEASUREMENT::CONTENT_ADDRESSED_TYPED_ACCEPTANCE",
+          "field": "compiler_verification",
+          "path": "canonical/governance/ARTIFACT_MEASUREMENT_BINDING_20261007_V1.json",
+          "git_blob_sha": "a174825b4c10fefa06c3a7ba09eb68c0d40af14a"
+        },
+        {
+          "scope_id": "PQ::R4::MEASUREMENT_SEMANTICS::CONTENT_ADDRESSED_TYPED_MECHANICAL",
+          "field": "scope_governance",
+          "path": "canonical/governance/PROFESSIONAL_QUALITY_R4_MEASUREMENT_SEMANTIC_SCOPE_20261010_V1.json",
+          "git_blob_sha": "a5b3e1984da25b09a5cb503b615806acdbf88e81"
+        },
+        {
+          "scope_id": "PQ::R4::MECHANICAL_ARTIFACT_MEASUREMENT::CONTENT_ADDRESSED_TYPED_ACCEPTANCE",
+          "field": "source_receipt",
+          "path": "canonical/verification/ARTIFACT_MEASUREMENT_VERIFY_20261007_V1.json",
+          "git_blob_sha": "34c64ed759d2e70df48a76d7a254047ac5fe9e2b"
+        },
+        {
+          "scope_id": "PQ::R4::MEASUREMENT_SEMANTICS::CONTENT_ADDRESSED_TYPED_MECHANICAL",
+          "field": "source_receipt",
+          "path": "canonical/verification/PROFESSIONAL_QUALITY_R4_MEASUREMENT_SEMANTIC_VERIFY_20261010_V1.json",
+          "git_blob_sha": "c91074f2f187834936c0b7297579a6b8ba125fae"
+        },
+        {
+          "scope_id": "PQ::R4::MEASUREMENT_SEMANTICS::CONTENT_ADDRESSED_TYPED_MECHANICAL",
+          "field": "compiler_verification",
+          "path": "canonical/verification/PROFESSIONAL_QUALITY_R4_MEASUREMENT_SEMANTIC_VERIFY_20261010_V1.json",
+          "git_blob_sha": "c91074f2f187834936c0b7297579a6b8ba125fae"
+        }
+      ],
+      "dynamic_external_inputs": [
+        "EXACT_CRITERION_ONTOLOGY_SCALE_ACCEPTANCE_FLOORS_AND_MEASUREMENT_INPUTS"
+      ]
+    },
+    {
+      "root_id": "R5_EVALUATOR_REFERENCE",
+      "subject_components": [
+        {
+          "scope_id": "PQ::R5::EVALUATOR_UNCERTAINTY::CONDITIONAL_ROBUST_MARGIN",
+          "field": "reusable_compiler",
+          "path": "canonical/runtime/gdpval_hybrid_evaluator_uncertainty_v1.py",
+          "git_blob_sha": "7adf19997ec90913fb70e618eb4e3adda055deac"
+        },
+        {
+          "scope_id": "PQ::R5::EVALUATOR_SEMANTICS::CONDITIONAL_ROBUSTNESS",
+          "field": "reusable_compiler",
+          "path": "canonical/runtime/professional_r5_evaluator_semantic_certificate_v1.py",
+          "git_blob_sha": "d391f1e66462e740e9869e7dc73429bb77733234"
+        }
+      ],
+      "external_evidence_references": [
+        {
+          "scope_id": "PQ::R5::EVALUATOR_UNCERTAINTY::CONDITIONAL_ROBUST_MARGIN",
+          "field": "compiler_verification",
+          "path": "canonical/governance/GDPVAL_HYBRID_EVALUATOR_UNCERTAINTY_20261008_V1.json",
+          "git_blob_sha": "1b61fa4eb98e0039a46f349d31da725bb02c16e0"
+        },
+        {
+          "scope_id": "PQ::R5::EVALUATOR_SEMANTICS::CONDITIONAL_ROBUSTNESS",
+          "field": "scope_governance",
+          "path": "canonical/governance/PROFESSIONAL_QUALITY_R5_EVALUATOR_SEMANTIC_SCOPE_20261010_V1.json",
+          "git_blob_sha": "dc10374849f5c26e354e9c396aa1f581b5f56d63"
+        },
+        {
+          "scope_id": "PQ::R5::EVALUATOR_UNCERTAINTY::CONDITIONAL_ROBUST_MARGIN",
+          "field": "source_receipt",
+          "path": "canonical/verification/GDPVAL_HYBRID_EVALUATOR_UNCERTAINTY_SPRITE_VERIFICATION_20261008_V1.json",
+          "git_blob_sha": "e852c4fbc14147c17469f1a4ede4e274d768bbf7"
+        },
+        {
+          "scope_id": "PQ::R5::EVALUATOR_SEMANTICS::CONDITIONAL_ROBUSTNESS",
+          "field": "source_receipt",
+          "path": "canonical/verification/PROFESSIONAL_QUALITY_R5_EVALUATOR_SEMANTIC_VERIFY_20261010_V1.json",
+          "git_blob_sha": "33d5e8c11e07e4a153edf3970503c6753c5343d2"
+        },
+        {
+          "scope_id": "PQ::R5::EVALUATOR_SEMANTICS::CONDITIONAL_ROBUSTNESS",
+          "field": "compiler_verification",
+          "path": "canonical/verification/PROFESSIONAL_QUALITY_R5_EVALUATOR_SEMANTIC_VERIFY_20261010_V1.json",
+          "git_blob_sha": "33d5e8c11e07e4a153edf3970503c6753c5343d2"
+        }
+      ],
+      "dynamic_external_inputs": [
+        "EXACT_JUDGE_OR_REFERENCE_SET_AND_LOCAL_QUALIFICATION_DISAGREEMENT_EVIDENCE"
+      ]
+    },
+    {
+      "root_id": "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+      "subject_components": [
+        {
+          "scope_id": "PQ::R6::LEAF_EVIDENCE::CONTENT_ADDRESSED_SCOPE_MATCHED_ADMISSION",
+          "field": "reusable_compiler",
+          "path": "canonical/runtime/professional_quality_leaf_binder_v2.py",
+          "git_blob_sha": "1a181b453271a2ce4fc112c3f6586afaf5effbd7"
+        }
+      ],
+      "external_evidence_references": [
+        {
+          "scope_id": "PQ::R6::LEAF_EVIDENCE::CONTENT_ADDRESSED_SCOPE_MATCHED_ADMISSION",
+          "field": "compiler_verification",
+          "path": "canonical/governance/PROFESSIONAL_QUALITY_LEAF_EVIDENCE_REGISTRY_20261010_V1.json",
+          "git_blob_sha": "d25cb6fe746eef992f71b138446dc999c0f2a307"
+        },
+        {
+          "scope_id": "PQ::R6::LEAF_EVIDENCE::CONTENT_ADDRESSED_SCOPE_MATCHED_ADMISSION",
+          "field": "source_receipt",
+          "path": "canonical/verification/PROFESSIONAL_QUALITY_LEAF_BINDER_V2_VERIFY_20261010_V1.json",
+          "git_blob_sha": "b65a67e8edaee925338fe3f2d61dad6b0f52d129"
+        }
+      ],
+      "dynamic_external_inputs": [
+        "ALL_LOAD_BEARING_TYPED_EVIDENCE_WITH_PROVENANCE_GROUNDING_INDEPENDENCE_FRESHNESS_AND_UNCERTAINTY"
+      ]
+    },
+    {
+      "root_id": "R7_CAUSAL_PRESCRIPTIVE",
+      "subject_components": [
+        {
+          "scope_id": "PQ::R7::SINGLE_EDIT::UVCK_DEFEATER_ORDER_REPAIR",
+          "field": "reusable_compiler",
+          "path": "canonical/runtime/professional_edit_causal_certificate_v1.py",
+          "git_blob_sha": "c3f2da4c97f26126cd304c9d630b4e13655958ea"
+        }
+      ],
+      "external_evidence_references": [
+        {
+          "scope_id": "PQ::R7::SINGLE_EDIT::UVCK_DEFEATER_ORDER_REPAIR",
+          "field": "compiler_verification",
+          "path": "canonical/verification/PROFESSIONAL_EDIT_CAUSAL_CERTIFICATE_VERIFY_20261010_V1.json",
+          "git_blob_sha": "380d26afd8210096e397dacde3f2a339abc75c1c"
+        },
+        {
+          "scope_id": "PQ::R7::SINGLE_EDIT::UVCK_DEFEATER_ORDER_REPAIR",
+          "field": "source_receipt",
+          "path": "canonical/verification/PROFESSIONAL_QUALITY_R7_SINGLE_EDIT_CAUSAL_INSTANCE_VERIFY_20261009_V1.json",
+          "git_blob_sha": "0c692f55dedb6a8523bcd78541d4cb77ef06d610"
+        }
+      ],
+      "dynamic_external_inputs": [
+        "EXACT_INTERVENTION_INSTANCE_PRE_POST_ARTIFACTS_AND_POST_EDIT_OUTCOME_EVIDENCE"
+      ]
+    },
+    {
+      "root_id": "R8_POPULATION_CONTEXT_OPERATOR",
+      "subject_components": [
+        {
+          "scope_id": "PQ::R8::DELEGATION_POPULATION::FROZEN_512_CASE_PRE_BEACON_BINDING",
+          "field": "reusable_compiler",
+          "path": "canonical/runtime/delegation_terminal_population_binding_v1.py",
+          "git_blob_sha": "fae6d0bf2efbcb9b8fe2a2a627900889c5ec6cab"
+        },
+        {
+          "scope_id": "PQ::R8::POPULATION_SEMANTICS::FROZEN_512",
+          "field": "reusable_compiler",
+          "path": "canonical/runtime/professional_r8_population_semantic_certificate_v1.py",
+          "git_blob_sha": "f8335409ccc105f5b96b76672047f2d323156189"
+        }
+      ],
+      "external_evidence_references": [
+        {
+          "scope_id": "PQ::R8::DELEGATION_POPULATION::FROZEN_512_CASE_PRE_BEACON_BINDING",
+          "field": "scope_governance",
+          "path": "canonical/governance/PROFESSIONAL_QUALITY_R8_POPULATION_CONTEXT_SCOPE_20261010_V1.json",
+          "git_blob_sha": "b174a62c94d36474f0b102d37362ea9fc3adaa91"
+        },
+        {
+          "scope_id": "PQ::R8::POPULATION_SEMANTICS::FROZEN_512",
+          "field": "scope_governance",
+          "path": "canonical/governance/PROFESSIONAL_QUALITY_R8_POPULATION_SEMANTIC_SCOPE_20261010_V1.json",
+          "git_blob_sha": "5bdcf0f7f46daf9abc2cca90524e702c9b601007"
+        },
+        {
+          "scope_id": "PQ::R8::DELEGATION_POPULATION::FROZEN_512_CASE_PRE_BEACON_BINDING",
+          "field": "source_receipt",
+          "path": "canonical/verification/DELEGATION_TERMINAL_POPULATION_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+          "git_blob_sha": "3965db684d7104c5829ce1fcfa8ee08d2cd42cfc"
+        },
+        {
+          "scope_id": "PQ::R8::DELEGATION_POPULATION::FROZEN_512_CASE_PRE_BEACON_BINDING",
+          "field": "compiler_verification",
+          "path": "canonical/verification/DELEGATION_TERMINAL_POPULATION_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+          "git_blob_sha": "3965db684d7104c5829ce1fcfa8ee08d2cd42cfc"
+        },
+        {
+          "scope_id": "PQ::R8::POPULATION_SEMANTICS::FROZEN_512",
+          "field": "source_receipt",
+          "path": "canonical/verification/PROFESSIONAL_QUALITY_R8_POPULATION_SEMANTIC_VERIFY_20261010_V1.json",
+          "git_blob_sha": "e47503a3b1f61bbb9effa04edccbf158b8b28e96"
+        },
+        {
+          "scope_id": "PQ::R8::POPULATION_SEMANTICS::FROZEN_512",
+          "field": "compiler_verification",
+          "path": "canonical/verification/PROFESSIONAL_QUALITY_R8_POPULATION_SEMANTIC_VERIFY_20261010_V1.json",
+          "git_blob_sha": "e47503a3b1f61bbb9effa04edccbf158b8b28e96"
+        }
+      ],
+      "dynamic_external_inputs": [
+        "TARGET_CONSTITUENCY_OPERATOR_CONTEXT_DEPLOYMENT_ENVELOPE_AND_TRANSPORT_EVIDENCE"
+      ]
+    },
+    {
+      "root_id": "R9_TEMPORAL_DEPLOYMENT",
+      "subject_components": [
+        {
+          "scope_id": "PQ::R9::TEMPORAL_SEMANTICS::FROZEN_CONSERVATIVE_CENSORING",
+          "field": "reusable_compiler",
+          "path": "canonical/runtime/professional_r9_temporal_semantic_certificate_v1.py",
+          "git_blob_sha": "4cc7ef5a533514409fec4ed731bcea17c934771a"
+        },
+        {
+          "scope_id": "PQ::R9::CENSORING::FIXED_DENOMINATOR_CONSERVATIVE_ACCOUNTING",
+          "field": "reusable_compiler",
+          "path": "canonical/runtime/tb_science_conservative_censoring_reducer_v1.py",
+          "git_blob_sha": "3b48ea534d606cf47a8321b56427353066393577"
+        }
+      ],
+      "external_evidence_references": [
+        {
+          "scope_id": "PQ::R9::CENSORING::FIXED_DENOMINATOR_CONSERVATIVE_ACCOUNTING",
+          "field": "compiler_verification",
+          "path": "canonical/governance/PROFESSIONAL_QUALITY_R9_CONSERVATIVE_CENSORING_SCOPE_20261010_V1.json",
+          "git_blob_sha": "7755bc709169abe0db35a6418fd8568ed14131b7"
+        },
+        {
+          "scope_id": "PQ::R9::TEMPORAL_SEMANTICS::FROZEN_CONSERVATIVE_CENSORING",
+          "field": "scope_governance",
+          "path": "canonical/governance/PROFESSIONAL_QUALITY_R9_TEMPORAL_SEMANTIC_SCOPE_20261010_V1.json",
+          "git_blob_sha": "0f2a434454802d5f76157ce51f19f16bb9cbfd8f"
+        },
+        {
+          "scope_id": "PQ::R9::CENSORING::FIXED_DENOMINATOR_CONSERVATIVE_ACCOUNTING",
+          "field": "source_receipt",
+          "path": "canonical/verification/PROFESSIONAL_QUALITY_R9_CONSERVATIVE_CENSORING_VERIFY_20261010_V1.json",
+          "git_blob_sha": "7081a52621a1bb8f1ad07d1da23b40c8e57e16c2"
+        },
+        {
+          "scope_id": "PQ::R9::TEMPORAL_SEMANTICS::FROZEN_CONSERVATIVE_CENSORING",
+          "field": "source_receipt",
+          "path": "canonical/verification/PROFESSIONAL_QUALITY_R9_TEMPORAL_SEMANTIC_VERIFY_20261010_V1.json",
+          "git_blob_sha": "e4527631fbf6e95cb20381d60eb4fe4b978c176f"
+        },
+        {
+          "scope_id": "PQ::R9::TEMPORAL_SEMANTICS::FROZEN_CONSERVATIVE_CENSORING",
+          "field": "compiler_verification",
+          "path": "canonical/verification/PROFESSIONAL_QUALITY_R9_TEMPORAL_SEMANTIC_VERIFY_20261010_V1.json",
+          "git_blob_sha": "e4527631fbf6e95cb20381d60eb4fe4b978c176f"
+        }
+      ],
+      "dynamic_external_inputs": [
+        "TIME_HORIZON_DRIFT_CENSORING_DELAYED_OUTCOME_RARE_EVENT_AND_TRANSPORT_EVIDENCE"
+      ]
+    },
+    {
+      "root_id": "R10_ANALYSIS_DECISION",
+      "subject_components": [
+        {
+          "scope_id": "PQ::R10::DECISION_SUFFICIENCY::LOSSLESS_MINIMUM_INFORMATION",
+          "field": "reusable_compiler",
+          "path": "canonical/runtime/one_shot_reality_closure_v2.py",
+          "git_blob_sha": "b8347a3993f96aa5e6fa2f1fe68d7c8afccb8bec"
+        },
+        {
+          "scope_id": "PQ::R10::DECISION_SUFFICIENCY_SEMANTICS::LOSSLESS_MINIMUM_INFORMATION",
+          "field": "reusable_compiler",
+          "path": "canonical/runtime/professional_r10_decision_semantic_certificate_v1.py",
+          "git_blob_sha": "79b4d0eb3aff7daa11f7ba511ee0f8f026b49f08"
+        }
+      ],
+      "external_evidence_references": [
+        {
+          "scope_id": "PQ::R10::DECISION_SUFFICIENCY_SEMANTICS::LOSSLESS_MINIMUM_INFORMATION",
+          "field": "scope_governance",
+          "path": "canonical/governance/PROFESSIONAL_QUALITY_R10_DECISION_SEMANTIC_SCOPE_20261010_V1.json",
+          "git_blob_sha": "40149db88374c054fd974cc121ee464a3d3996fd"
+        },
+        {
+          "scope_id": "PQ::R10::DECISION_SUFFICIENCY::LOSSLESS_MINIMUM_INFORMATION",
+          "field": "compiler_verification",
+          "path": "canonical/verification/ONE_SHOT_DECISION_SUFFICIENT_GATE_VERIFY_20261009_V2.json",
+          "git_blob_sha": "188881365c8bb182ebd10cd4bc37aedff8547acd"
+        },
+        {
+          "scope_id": "PQ::R10::DECISION_SUFFICIENCY_SEMANTICS::LOSSLESS_MINIMUM_INFORMATION",
+          "field": "source_receipt",
+          "path": "canonical/verification/PROFESSIONAL_QUALITY_R10_DECISION_SEMANTIC_VERIFY_20261010_V1.json",
+          "git_blob_sha": "c298b2510e352d876c1abacc069e915447e97823"
+        },
+        {
+          "scope_id": "PQ::R10::DECISION_SUFFICIENCY_SEMANTICS::LOSSLESS_MINIMUM_INFORMATION",
+          "field": "compiler_verification",
+          "path": "canonical/verification/PROFESSIONAL_QUALITY_R10_DECISION_SEMANTIC_VERIFY_20261010_V1.json",
+          "git_blob_sha": "c298b2510e352d876c1abacc069e915447e97823"
+        },
+        {
+          "scope_id": "PQ::R10::DECISION_SUFFICIENCY::LOSSLESS_MINIMUM_INFORMATION",
+          "field": "source_receipt",
+          "path": "canonical/verification/PROFESSIONAL_QUALITY_R10_DECISION_SUFFICIENCY_SCOPED_VERIFY_20261010_V1.json",
+          "git_blob_sha": "18574110321eb1bacc18db46cbd0673bf6a0a0ac"
+        }
+      ],
+      "dynamic_external_inputs": [
+        "EXACT_AGGREGATION_THRESHOLD_COMPENSATION_RISK_POLICY_AND_DECISION_RELEVANT_FACTS"
+      ]
+    },
+    {
+      "root_id": "R11_ADAPTIVE_INTEGRITY_SECURITY",
+      "subject_components": [
+        {
+          "scope_id": "PQ::R11::EVAL_FIREWALL::POST_IDENTITY_DISCOVERY_REVOCATION",
+          "field": "reusable_compiler",
+          "path": "canonical/runtime/evaluation_information_firewall_v1.py",
+          "git_blob_sha": "11776f87f41c66802a28a417c344cccb394eb2aa"
+        },
+        {
+          "scope_id": "PQ::R11::FIREWALL_SEMANTICS::POST_IDENTITY_REVOCATION",
+          "field": "reusable_compiler",
+          "path": "canonical/runtime/professional_r11_firewall_semantic_certificate_v1.py",
+          "git_blob_sha": "4ebc3e54dcc492e23144fedd9b4ddc70fb37539a"
+        }
+      ],
+      "external_evidence_references": [
+        {
+          "scope_id": "PQ::R11::EVAL_FIREWALL::POST_IDENTITY_DISCOVERY_REVOCATION",
+          "field": "compiler_verification",
+          "path": "canonical/governance/EVALUATION_INFORMATION_FIREWALL_V1.json",
+          "git_blob_sha": "902c19851629bfb2342eea29e73f4a7ab5d212c5"
+        },
+        {
+          "scope_id": "PQ::R11::FIREWALL_SEMANTICS::POST_IDENTITY_REVOCATION",
+          "field": "scope_governance",
+          "path": "canonical/governance/PROFESSIONAL_QUALITY_R11_FIREWALL_SEMANTIC_SCOPE_20261010_V1.json",
+          "git_blob_sha": "76494c75e3f2c5af87b77c99ce9984eafec60e32"
+        },
+        {
+          "scope_id": "PQ::R11::EVAL_FIREWALL::POST_IDENTITY_DISCOVERY_REVOCATION",
+          "field": "source_receipt",
+          "path": "canonical/verification/PROFESSIONAL_QUALITY_R11_EVALUATION_FIREWALL_SCOPED_VERIFY_20261010_V1.json",
+          "git_blob_sha": "346d369a811aa77af02be901a5b04458fb528667"
+        },
+        {
+          "scope_id": "PQ::R11::FIREWALL_SEMANTICS::POST_IDENTITY_REVOCATION",
+          "field": "source_receipt",
+          "path": "canonical/verification/PROFESSIONAL_QUALITY_R11_FIREWALL_SEMANTIC_VERIFY_20261010_V1.json",
+          "git_blob_sha": "7f0468c4abae22504d71ef627efeaf57e85f02a6"
+        },
+        {
+          "scope_id": "PQ::R11::FIREWALL_SEMANTICS::POST_IDENTITY_REVOCATION",
+          "field": "compiler_verification",
+          "path": "canonical/verification/PROFESSIONAL_QUALITY_R11_FIREWALL_SEMANTIC_VERIFY_20261010_V1.json",
+          "git_blob_sha": "7f0468c4abae22504d71ef627efeaf57e85f02a6"
+        }
+      ],
+      "dynamic_external_inputs": [
+        "CLEAN_DEV_SELECTION_CERTIFICATION_LANE_HOLDOUT_STATE_EXPOSURE_LEDGER_AND_EVALUATOR_CONTROL_EVIDENCE"
+      ]
+    },
+    {
+      "root_id": "R12_META_COMPOSITION_CLOSURE",
+      "subject_components": [
+        {
+          "scope_id": "PQ::R12::UVCK::FAIL_CLOSED_META_COMPOSITION",
+          "field": "reusable_compiler",
+          "path": "canonical/runtime/assurance_closure_compiler_v1.py",
+          "git_blob_sha": "b4274a48edbe626a9ae9fd33da2f2227ca4dd5e8"
+        }
+      ],
+      "external_evidence_references": [
+        {
+          "scope_id": "PQ::R12::UVCK::FAIL_CLOSED_META_COMPOSITION",
+          "field": "scope_governance",
+          "path": "canonical/governance/PROFESSIONAL_QUALITY_R12_META_COMPOSITION_SCOPE_20261010_V1.json",
+          "git_blob_sha": "4c69313ae31905f6aa379361d515dffdfb41efae"
+        },
+        {
+          "scope_id": "PQ::R12::UVCK::FAIL_CLOSED_META_COMPOSITION",
+          "field": "source_receipt",
+          "path": "canonical/verification/UVCK_V2_CURRENT_GENERATION_INDEPENDENT_REPLAY_VERIFY_20261009_V1.json",
+          "git_blob_sha": "81f7f070233b6aa1c4b491949a4c3e7aedfafd10"
+        },
+        {
+          "scope_id": "PQ::R12::UVCK::FAIL_CLOSED_META_COMPOSITION",
+          "field": "compiler_verification",
+          "path": "canonical/verification/UVCK_V2_DEFEATER_ORDER_VERIFY_20261009_V1.json",
+          "git_blob_sha": "1c3428b10a1205e928a87f41a7c16a8a3d17b7ca"
+        }
+      ],
+      "dynamic_external_inputs": [
+        "ALL_ROOT_BINDINGS_ASSUMPTION_GUARANTEE_GRAPH_DEFEATER_SET_AND_CHALLENGE_COVERAGE_EVIDENCE"
+      ]
+    }
+  ],
+  "required_subject_components": [
+    {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V2.json",
+      "git_blob_sha": "ae250d5bc5da73b23600670be354ffba31e65e53"
+    },
+    {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_SCHEMA_V1.json",
+      "git_blob_sha": "b173d8fc6e29df3cec3579954bb17c594308b151"
+    },
+    {
+      "path": "canonical/runtime/adequacy_basis_structural_completeness_gate_v1.py",
+      "git_blob_sha": "46d01dc945ae7036efc27b6c3740f2e0ac8ff9c0"
+    },
+    {
+      "path": "canonical/runtime/assurance_closure_compiler_v1.py",
+      "git_blob_sha": "b4274a48edbe626a9ae9fd33da2f2227ca4dd5e8"
+    },
+    {
+      "path": "canonical/runtime/behavioral_contract_extension_gate_v1.py",
+      "git_blob_sha": "3d8538389af1a3dc46ef74c79b70531511a1f4ec"
+    },
+    {
+      "path": "canonical/runtime/content_addressed_artifact_measurement_v1.py",
+      "git_blob_sha": "4da88dc71e85874b6445988b792951fb3c36d62f"
+    },
+    {
+      "path": "canonical/runtime/delegation_terminal_population_binding_v1.py",
+      "git_blob_sha": "fae6d0bf2efbcb9b8fe2a2a627900889c5ec6cab"
+    },
+    {
+      "path": "canonical/runtime/dynamic_adequacy_extension_basis_gate_v1.py",
+      "git_blob_sha": "2cae15152a80217871241b71e60a4d2fa9f52f03"
+    },
+    {
+      "path": "canonical/runtime/evaluation_information_firewall_v1.py",
+      "git_blob_sha": "11776f87f41c66802a28a417c344cccb394eb2aa"
+    },
+    {
+      "path": "canonical/runtime/finite_minimax_decision_region_v1.py",
+      "git_blob_sha": "1bb7dd084f10db4fe298fdd0ac77849df23837c9"
+    },
+    {
+      "path": "canonical/runtime/gdpval_hybrid_evaluator_uncertainty_v1.py",
+      "git_blob_sha": "7adf19997ec90913fb70e618eb4e3adda055deac"
+    },
+    {
+      "path": "canonical/runtime/measured_typed_acceptance_program_v1.py",
+      "git_blob_sha": "7cb47bbefa807e93007e13e84607b41e27245f62"
+    },
+    {
+      "path": "canonical/runtime/native_artifact_render_preservation_proof_v1.py",
+      "git_blob_sha": "39374e775d54cdc58315d7a1f877d834282a64f7"
+    },
+    {
+      "path": "canonical/runtime/one_shot_reality_closure_v2.py",
+      "git_blob_sha": "b8347a3993f96aa5e6fa2f1fe68d7c8afccb8bec"
+    },
+    {
+      "path": "canonical/runtime/professional_candidate_search_semantic_certificate_v1.py",
+      "git_blob_sha": "84c6dbd8e36c98dde74cf16252fe83ff0aad4baf"
+    },
+    {
+      "path": "canonical/runtime/professional_edit_causal_certificate_v1.py",
+      "git_blob_sha": "c3f2da4c97f26126cd304c9d630b4e13655958ea"
+    },
+    {
+      "path": "canonical/runtime/professional_quality_leaf_binder_v2.py",
+      "git_blob_sha": "1a181b453271a2ce4fc112c3f6586afaf5effbd7"
+    },
+    {
+      "path": "canonical/runtime/professional_r10_decision_semantic_certificate_v1.py",
+      "git_blob_sha": "79b4d0eb3aff7daa11f7ba511ee0f8f026b49f08"
+    },
+    {
+      "path": "canonical/runtime/professional_r11_firewall_semantic_certificate_v1.py",
+      "git_blob_sha": "4ebc3e54dcc492e23144fedd9b4ddc70fb37539a"
+    },
+    {
+      "path": "canonical/runtime/professional_r3_realization_semantic_certificate_v1.py",
+      "git_blob_sha": "eb3c5e6537d48640078b52a525a8f1791d88386b"
+    },
+    {
+      "path": "canonical/runtime/professional_r4_measurement_semantic_certificate_v1.py",
+      "git_blob_sha": "349afbd3f5b118bc7da56b5d04c7fdba761b77ec"
+    },
+    {
+      "path": "canonical/runtime/professional_r5_evaluator_semantic_certificate_v1.py",
+      "git_blob_sha": "d391f1e66462e740e9869e7dc73429bb77733234"
+    },
+    {
+      "path": "canonical/runtime/professional_r8_population_semantic_certificate_v1.py",
+      "git_blob_sha": "f8335409ccc105f5b96b76672047f2d323156189"
+    },
+    {
+      "path": "canonical/runtime/professional_r9_temporal_semantic_certificate_v1.py",
+      "git_blob_sha": "4cc7ef5a533514409fec4ed731bcea17c934771a"
+    },
+    {
+      "path": "canonical/runtime/professional_target_semantic_certificate_v1.py",
+      "git_blob_sha": "583612b0e2226053ac758683087b5c5d0f510996"
+    },
+    {
+      "path": "canonical/runtime/tb_science_conservative_censoring_reducer_v1.py",
+      "git_blob_sha": "3b48ea534d606cf47a8321b56427353066393577"
+    },
+    {
+      "path": "canonical/runtime/u_scope_complete_depletion_orchestrator_v1.py",
+      "git_blob_sha": "b783ebdf51db3c6581facf4cc1cc3e9d59440760"
+    }
+  ],
+  "required_subject_component_count": 27,
+  "external_evidence_references": [
+    {
+      "path": "canonical/governance/ARTIFACT_MEASUREMENT_BINDING_20261007_V1.json",
+      "git_blob_sha": "a174825b4c10fefa06c3a7ba09eb68c0d40af14a"
+    },
+    {
+      "path": "canonical/governance/EVALUATION_INFORMATION_FIREWALL_V1.json",
+      "git_blob_sha": "902c19851629bfb2342eea29e73f4a7ab5d212c5"
+    },
+    {
+      "path": "canonical/governance/GDPVAL_HYBRID_EVALUATOR_UNCERTAINTY_20261008_V1.json",
+      "git_blob_sha": "1b61fa4eb98e0039a46f349d31da725bb02c16e0"
+    },
+    {
+      "path": "canonical/governance/NATIVE_ARTIFACT_RENDER_PRESERVATION_PREFLIGHT_V1.json",
+      "git_blob_sha": "b5ddc896811875b59840959e27dbb515265fc9f8"
+    },
+    {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_LEAF_EVIDENCE_REGISTRY_20261010_V1.json",
+      "git_blob_sha": "d25cb6fe746eef992f71b138446dc999c0f2a307"
+    },
+    {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_R1_STRUCTURAL_TARGET_SCOPE_20261010_V1.json",
+      "git_blob_sha": "b50ac48a805618f2f38b1e839e7a227058247b0b"
+    },
+    {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_R1_TARGET_SEMANTIC_SCOPE_20261010_V1.json",
+      "git_blob_sha": "9145121eb2cfbee43f94534864d30f32868e81de"
+    },
+    {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_R10_DECISION_SEMANTIC_SCOPE_20261010_V1.json",
+      "git_blob_sha": "40149db88374c054fd974cc121ee464a3d3996fd"
+    },
+    {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_R11_FIREWALL_SEMANTIC_SCOPE_20261010_V1.json",
+      "git_blob_sha": "76494c75e3f2c5af87b77c99ce9984eafec60e32"
+    },
+    {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_R12_META_COMPOSITION_SCOPE_20261010_V1.json",
+      "git_blob_sha": "4c69313ae31905f6aa379361d515dffdfb41efae"
+    },
+    {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_R2_SCOPE_COMPLETE_SEARCH_SCOPE_20261010_V1.json",
+      "git_blob_sha": "b074b6e260cf2d5b534a822c3684171b1cc95b2e"
+    },
+    {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_R2_SEARCH_SEMANTIC_SCOPE_20261010_V1.json",
+      "git_blob_sha": "c12893656c0546aafa79135dec221f2e5f7e9774"
+    },
+    {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_R3_REALIZATION_SEMANTIC_SCOPE_20261010_V1.json",
+      "git_blob_sha": "1edbd92b4e7b01591162d692f1d4c9b785b4c102"
+    },
+    {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_R4_MEASUREMENT_SEMANTIC_SCOPE_20261010_V1.json",
+      "git_blob_sha": "a5b3e1984da25b09a5cb503b615806acdbf88e81"
+    },
+    {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_R5_EVALUATOR_SEMANTIC_SCOPE_20261010_V1.json",
+      "git_blob_sha": "dc10374849f5c26e354e9c396aa1f581b5f56d63"
+    },
+    {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_R8_POPULATION_CONTEXT_SCOPE_20261010_V1.json",
+      "git_blob_sha": "b174a62c94d36474f0b102d37362ea9fc3adaa91"
+    },
+    {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_R8_POPULATION_SEMANTIC_SCOPE_20261010_V1.json",
+      "git_blob_sha": "5bdcf0f7f46daf9abc2cca90524e702c9b601007"
+    },
+    {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_R9_CONSERVATIVE_CENSORING_SCOPE_20261010_V1.json",
+      "git_blob_sha": "7755bc709169abe0db35a6418fd8568ed14131b7"
+    },
+    {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_R9_TEMPORAL_SEMANTIC_SCOPE_20261010_V1.json",
+      "git_blob_sha": "0f2a434454802d5f76157ce51f19f16bb9cbfd8f"
+    },
+    {
+      "path": "canonical/verification/ARTIFACT_MEASUREMENT_VERIFY_20261007_V1.json",
+      "git_blob_sha": "34c64ed759d2e70df48a76d7a254047ac5fe9e2b"
+    },
+    {
+      "path": "canonical/verification/DELEGATION_TERMINAL_POPULATION_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "3965db684d7104c5829ce1fcfa8ee08d2cd42cfc"
+    },
+    {
+      "path": "canonical/verification/GDPVAL_HYBRID_EVALUATOR_UNCERTAINTY_SPRITE_VERIFICATION_20261008_V1.json",
+      "git_blob_sha": "e852c4fbc14147c17469f1a4ede4e274d768bbf7"
+    },
+    {
+      "path": "canonical/verification/NATIVE_ARTIFACT_RENDER_PRESERVATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "1a0b4ca6627aaf28eb25f6990682e87319d14d6d"
+    },
+    {
+      "path": "canonical/verification/ONE_SHOT_DECISION_SUFFICIENT_GATE_VERIFY_20261009_V2.json",
+      "git_blob_sha": "188881365c8bb182ebd10cd4bc37aedff8547acd"
+    },
+    {
+      "path": "canonical/verification/PROFESSIONAL_EDIT_CAUSAL_CERTIFICATE_VERIFY_20261010_V1.json",
+      "git_blob_sha": "380d26afd8210096e397dacde3f2a339abc75c1c"
+    },
+    {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_LEAF_BINDER_V2_VERIFY_20261010_V1.json",
+      "git_blob_sha": "b65a67e8edaee925338fe3f2d61dad6b0f52d129"
+    },
+    {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R1_STRUCTURAL_TARGET_VERIFY_20261010_V1.json",
+      "git_blob_sha": "dcee55ba17d15154117100de6aebd34716ad3e3e"
+    },
+    {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R1_TARGET_SEMANTIC_VERIFY_20261010_V1.json",
+      "git_blob_sha": "dfffdd6eff129ce7498c4e4aa8a822cd4a5cda22"
+    },
+    {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R10_DECISION_SEMANTIC_VERIFY_20261010_V1.json",
+      "git_blob_sha": "c298b2510e352d876c1abacc069e915447e97823"
+    },
+    {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R10_DECISION_SUFFICIENCY_SCOPED_VERIFY_20261010_V1.json",
+      "git_blob_sha": "18574110321eb1bacc18db46cbd0673bf6a0a0ac"
+    },
+    {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R11_EVALUATION_FIREWALL_SCOPED_VERIFY_20261010_V1.json",
+      "git_blob_sha": "346d369a811aa77af02be901a5b04458fb528667"
+    },
+    {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R11_FIREWALL_SEMANTIC_VERIFY_20261010_V1.json",
+      "git_blob_sha": "7f0468c4abae22504d71ef627efeaf57e85f02a6"
+    },
+    {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R2_SCOPE_COMPLETE_SEARCH_VERIFY_20261010_V1.json",
+      "git_blob_sha": "b66115513d1dde4527a65e5eda1ddea300138aca"
+    },
+    {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R2_SEARCH_SEMANTIC_VERIFY_20261010_V1.json",
+      "git_blob_sha": "06da6b94712ec844a56c0f663cce67f059b7ba8d"
+    },
+    {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R3_REALIZATION_SEMANTIC_VERIFY_20261010_V1.json",
+      "git_blob_sha": "3c9a6f03c9dfb7597cdb7c5ca01e9eaf66a596e0"
+    },
+    {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R4_MEASUREMENT_SEMANTIC_VERIFY_20261010_V1.json",
+      "git_blob_sha": "c91074f2f187834936c0b7297579a6b8ba125fae"
+    },
+    {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R5_EVALUATOR_SEMANTIC_VERIFY_20261010_V1.json",
+      "git_blob_sha": "33d5e8c11e07e4a153edf3970503c6753c5343d2"
+    },
+    {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R7_SINGLE_EDIT_CAUSAL_INSTANCE_VERIFY_20261009_V1.json",
+      "git_blob_sha": "0c692f55dedb6a8523bcd78541d4cb77ef06d610"
+    },
+    {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R8_POPULATION_SEMANTIC_VERIFY_20261010_V1.json",
+      "git_blob_sha": "e47503a3b1f61bbb9effa04edccbf158b8b28e96"
+    },
+    {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R9_CONSERVATIVE_CENSORING_VERIFY_20261010_V1.json",
+      "git_blob_sha": "7081a52621a1bb8f1ad07d1da23b40c8e57e16c2"
+    },
+    {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R9_TEMPORAL_SEMANTIC_VERIFY_20261010_V1.json",
+      "git_blob_sha": "e4527631fbf6e95cb20381d60eb4fe4b978c176f"
+    },
+    {
+      "path": "canonical/verification/UVCK_V2_CURRENT_GENERATION_INDEPENDENT_REPLAY_VERIFY_20261009_V1.json",
+      "git_blob_sha": "81f7f070233b6aa1c4b491949a4c3e7aedfafd10"
+    },
+    {
+      "path": "canonical/verification/UVCK_V2_DEFEATER_ORDER_VERIFY_20261009_V1.json",
+      "git_blob_sha": "1c3428b10a1205e928a87f41a7c16a8a3d17b7ca"
+    }
+  ],
+  "external_evidence_reference_count": 43,
+  "dynamic_external_inputs_by_root": {
+    "R1_TARGET_SPECIFICATION": [
+      "EXACT_TARGET_INSTANCE_AND_AUTHENTICATED_GOAL_TO_DECISION_BINDING"
+    ],
+    "R2_CANDIDATE_SEARCH": [
+      "EXACT_CANDIDATE_UNIVERSE_OR_GENERATOR_OUTPUT_AND_SCOPE_COMPLETENESS_EVIDENCE"
+    ],
+    "R3_REALIZATION_OBSERVATION": [
+      "EXACT_ARTIFACT_BYTES_DELIVERY_ENVIRONMENT_AND_AUDIENCE_VIEW_OBSERVATION"
+    ],
+    "R4_MEASUREMENT_CONSTRUCT": [
+      "EXACT_CRITERION_ONTOLOGY_SCALE_ACCEPTANCE_FLOORS_AND_MEASUREMENT_INPUTS"
+    ],
+    "R5_EVALUATOR_REFERENCE": [
+      "EXACT_JUDGE_OR_REFERENCE_SET_AND_LOCAL_QUALIFICATION_DISAGREEMENT_EVIDENCE"
+    ],
+    "R6_EVIDENCE_GROUNDING_DEPENDENCE": [
+      "ALL_LOAD_BEARING_TYPED_EVIDENCE_WITH_PROVENANCE_GROUNDING_INDEPENDENCE_FRESHNESS_AND_UNCERTAINTY"
+    ],
+    "R7_CAUSAL_PRESCRIPTIVE": [
+      "EXACT_INTERVENTION_INSTANCE_PRE_POST_ARTIFACTS_AND_POST_EDIT_OUTCOME_EVIDENCE"
+    ],
+    "R8_POPULATION_CONTEXT_OPERATOR": [
+      "TARGET_CONSTITUENCY_OPERATOR_CONTEXT_DEPLOYMENT_ENVELOPE_AND_TRANSPORT_EVIDENCE"
+    ],
+    "R9_TEMPORAL_DEPLOYMENT": [
+      "TIME_HORIZON_DRIFT_CENSORING_DELAYED_OUTCOME_RARE_EVENT_AND_TRANSPORT_EVIDENCE"
+    ],
+    "R10_ANALYSIS_DECISION": [
+      "EXACT_AGGREGATION_THRESHOLD_COMPENSATION_RISK_POLICY_AND_DECISION_RELEVANT_FACTS"
+    ],
+    "R11_ADAPTIVE_INTEGRITY_SECURITY": [
+      "CLEAN_DEV_SELECTION_CERTIFICATION_LANE_HOLDOUT_STATE_EXPOSURE_LEDGER_AND_EVALUATOR_CONTROL_EVIDENCE"
+    ],
+    "R12_META_COMPOSITION_CLOSURE": [
+      "ALL_ROOT_BINDINGS_ASSUMPTION_GUARANTEE_GRAPH_DEFEATER_SET_AND_CHALLENGE_COVERAGE_EVIDENCE"
+    ]
+  },
+  "current_subject_component_count": 13,
+  "missing_required_subject_components": [
+    {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_SCHEMA_V1.json",
+      "git_blob_sha": "b173d8fc6e29df3cec3579954bb17c594308b151"
+    },
+    {
+      "path": "canonical/runtime/adequacy_basis_structural_completeness_gate_v1.py",
+      "git_blob_sha": "46d01dc945ae7036efc27b6c3740f2e0ac8ff9c0"
+    },
+    {
+      "path": "canonical/runtime/behavioral_contract_extension_gate_v1.py",
+      "git_blob_sha": "3d8538389af1a3dc46ef74c79b70531511a1f4ec"
+    },
+    {
+      "path": "canonical/runtime/content_addressed_artifact_measurement_v1.py",
+      "git_blob_sha": "4da88dc71e85874b6445988b792951fb3c36d62f"
+    },
+    {
+      "path": "canonical/runtime/delegation_terminal_population_binding_v1.py",
+      "git_blob_sha": "fae6d0bf2efbcb9b8fe2a2a627900889c5ec6cab"
+    },
+    {
+      "path": "canonical/runtime/dynamic_adequacy_extension_basis_gate_v1.py",
+      "git_blob_sha": "2cae15152a80217871241b71e60a4d2fa9f52f03"
+    },
+    {
+      "path": "canonical/runtime/evaluation_information_firewall_v1.py",
+      "git_blob_sha": "11776f87f41c66802a28a417c344cccb394eb2aa"
+    },
+    {
+      "path": "canonical/runtime/finite_minimax_decision_region_v1.py",
+      "git_blob_sha": "1bb7dd084f10db4fe298fdd0ac77849df23837c9"
+    },
+    {
+      "path": "canonical/runtime/gdpval_hybrid_evaluator_uncertainty_v1.py",
+      "git_blob_sha": "7adf19997ec90913fb70e618eb4e3adda055deac"
+    },
+    {
+      "path": "canonical/runtime/measured_typed_acceptance_program_v1.py",
+      "git_blob_sha": "7cb47bbefa807e93007e13e84607b41e27245f62"
+    },
+    {
+      "path": "canonical/runtime/native_artifact_render_preservation_proof_v1.py",
+      "git_blob_sha": "39374e775d54cdc58315d7a1f877d834282a64f7"
+    },
+    {
+      "path": "canonical/runtime/one_shot_reality_closure_v2.py",
+      "git_blob_sha": "b8347a3993f96aa5e6fa2f1fe68d7c8afccb8bec"
+    },
+    {
+      "path": "canonical/runtime/professional_candidate_search_semantic_certificate_v1.py",
+      "git_blob_sha": "84c6dbd8e36c98dde74cf16252fe83ff0aad4baf"
+    },
+    {
+      "path": "canonical/runtime/professional_edit_causal_certificate_v1.py",
+      "git_blob_sha": "c3f2da4c97f26126cd304c9d630b4e13655958ea"
+    },
+    {
+      "path": "canonical/runtime/professional_r10_decision_semantic_certificate_v1.py",
+      "git_blob_sha": "79b4d0eb3aff7daa11f7ba511ee0f8f026b49f08"
+    },
+    {
+      "path": "canonical/runtime/professional_r11_firewall_semantic_certificate_v1.py",
+      "git_blob_sha": "4ebc3e54dcc492e23144fedd9b4ddc70fb37539a"
+    },
+    {
+      "path": "canonical/runtime/professional_r3_realization_semantic_certificate_v1.py",
+      "git_blob_sha": "eb3c5e6537d48640078b52a525a8f1791d88386b"
+    },
+    {
+      "path": "canonical/runtime/professional_r4_measurement_semantic_certificate_v1.py",
+      "git_blob_sha": "349afbd3f5b118bc7da56b5d04c7fdba761b77ec"
+    },
+    {
+      "path": "canonical/runtime/professional_r5_evaluator_semantic_certificate_v1.py",
+      "git_blob_sha": "d391f1e66462e740e9869e7dc73429bb77733234"
+    },
+    {
+      "path": "canonical/runtime/professional_r8_population_semantic_certificate_v1.py",
+      "git_blob_sha": "f8335409ccc105f5b96b76672047f2d323156189"
+    },
+    {
+      "path": "canonical/runtime/professional_r9_temporal_semantic_certificate_v1.py",
+      "git_blob_sha": "4cc7ef5a533514409fec4ed731bcea17c934771a"
+    },
+    {
+      "path": "canonical/runtime/tb_science_conservative_censoring_reducer_v1.py",
+      "git_blob_sha": "3b48ea534d606cf47a8321b56427353066393577"
+    },
+    {
+      "path": "canonical/runtime/u_scope_complete_depletion_orchestrator_v1.py",
+      "git_blob_sha": "b783ebdf51db3c6581facf4cc1cc3e9d59440760"
+    }
+  ],
+  "missing_required_subject_component_count": 23,
+  "subject_dependency_closure_complete": true,
+  "subject_refresh_required": true,
+  "refresh_rule": "ADD_ALL_MISSING_REQUIRED_SUBJECT_COMPONENTS_IN_ONE_NEW_SUBJECT_GENERATION__DO_NOT_BIND_R2_TO_R12_BEFORE_REFRESH__REVERIFY_R1_IF_SUBJECT_IDENTITY_CHANGES",
+  "hard_nonclaims": [
+    "NO_ROOT_SUBJECT_BINDING_AUTHORITY_FROM_CLASSIFICATION",
+    "NO_SAME_SUBJECT_COMPOSITION_PASS",
+    "NO_GLOBAL_PROFESSIONAL_QUALITY_CLOSURE",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
