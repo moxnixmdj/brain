@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_V4_MULTISCOPE_SUBJECT_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__V4_SUBJECT_14_OF_14_COMPONENTS_CURRENT__MULTISCOPE_GATE_V2_9_OF_9__ZERO_ROOT_BINDING_OR_QUALITY_CREDIT",
+  "branch": "successor/pq-v4-multiscope-same-subject-20261010-v1",
+  "subject": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V4_DECLARED_SYSTEM_SUBJECT_20261010_V4.json",
+    "git_blob_sha": "c1ccdde96f8bb71487a6ca7390addba2f742a9c5",
+    "subject_kind": "DECLARED_SYSTEM",
+    "subject_id": "PROFESSIONAL_QUALITY_P1_V4_TARGET_BOUND_MULTISCOPE_SYSTEM_20261010_V4",
+    "subject_sha256": "924ca9cb02980d19612b9e217b1354baa1a73990a5cd7060cc87975d1231783a"
+  },
+  "exact_dependencies": {
+    "router_v4": "8e5d473b5606251752c4968dfd35290e9b991f16",
+    "scoped_overlay": "19c11df8b011fa2c72c755f421edcd38a89f0a07",
+    "scoped_registry": "b9ddf7cbe7fbfad0e81fe068a0c19b48703b5aba",
+    "same_subject_gate_governance_v2": "9bffe28077f9e14dbb69e2c7562fa0764b8a8c2e",
+    "same_subject_gate_runtime_v2": "184b4287bb3be66fced2dfbd05b7c7e2fd91d783",
+    "same_subject_gate_tests_v2": "c2a4ac767660671800d2c7acec5b8d3c806475b4",
+    "declared_subject_verifier": "2936df1590077f4e97c82adaf79046a1221cef99"
+  },
+  "independent_replay": {
+    "carrier": "Sprites",
+    "sprite": "brain-pq-p1-v2-independent-verify-20261010",
+    "sprite_id": "sprite-5fb5e414-e2f5-4a49-b424-3443341d9d09",
+    "subject_verifier_status": "PASS__DECLARED_SYSTEM_SUBJECT_CURRENT_AND_CONTENT_ADDRESSED",
+    "subject_component_count": 14,
+    "subject_component_currentness_verified": true,
+    "gate_tests_run": 9,
+    "gate_tests_passed": 9,
+    "gate_tests_failed": 0
+  },
+  "proved": [
+    "V4_DECLARED_SYSTEM_IDENTITY_IS_CONTENT_ADDRESSED_AND_CURRENT",
+    "V4_SYSTEM_INCLUDES_TARGET_BOUND_ROUTER_V4",
+    "V4_SYSTEM_INCLUDES_CURRENT_SCOPED_EVIDENCE_OVERLAY_AND_21_SCOPE_REGISTRY",
+    "V4_SYSTEM_INCLUDES_MULTISCOPE_SAME_SUBJECT_GATE_V2",
+    "GATE_V2_PRESERVES_FAIL_CLOSED_SUBJECT_BINDING_SEMANTICS"
+  ],
+  "not_proved": [
+    "ANY_REAL_ROOT_SUBJECT_BINDING",
+    "SAME_SUBJECT_COMPOSITION_FOR_V4",
+    "GLOBAL_LEAF_OR_ROOT_CLOSURE",
+    "QUALITY_OR_Q_ROW_ACCEPTANCE",
+    "LIVE_DEFAULT_PROMOTION",
+    "TERMINAL_AUTHORITY"
+  ],
+  "root_subject_binding_authority": false,
+  "quality_authority": false,
+  "terminal_authority": false,
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
