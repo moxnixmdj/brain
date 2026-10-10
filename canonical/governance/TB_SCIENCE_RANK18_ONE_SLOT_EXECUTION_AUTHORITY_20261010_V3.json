@@ -32,7 +32,7 @@
   },
   "generic_repair": {
     "path": "canonical/governance/TB_SCIENCE_ARTIFACTCONFIG_MAIN_SERVICE_BRIDGE_REPAIR_20261010_V1.json",
-    "git_blob_sha": "c97dfa87bc370c616b482944c2933d368e2ba908",
+    "git_blob_sha": "ea31cc19a1d645fa60b69fb81280f881009b26cf",
     "runtime_path": "canonical/runtime/task_artifact_authority_v1.py",
     "runtime_git_blob_sha": "621efe77fe02c12ef4b6580daaeeaa313988698f",
     "verification_path": "canonical/verification/TASK_ARTIFACT_AUTHORITY_V1_PUBLIC_VERIFY_20261010_V1.json",
