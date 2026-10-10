@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK18_ARTIFACTCONFIG_BRIDGE_PUBLIC_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__PUBLIC_ZERO_EXPOSURE_HARBOR_0_23_ARTIFACTCONFIG_BRIDGE_REPAIR__MAIN_ONLY__SIDECAR_EXCLUDED__FAIL_CLOSED__ZERO_CREDIT",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "slot": {
+    "ledger_schedule_rank": 18,
+    "frozen_manifest_schedule_order": 17,
+    "task_rank": 17,
+    "id": "terminal-bench-science/longitudinal-clinical-agent::trial-0",
+    "digest": "sha256:e9a166b2173f7014d4f1559505397b221f94bc446eab031f94791b35e0e5f1c9"
+  },
+  "predecessor_abort_truth": {
+    "path": "canonical/verification/TB_SCIENCE_RANK18_V1_PRESTART_ABORT_TRUTH_20261010_V1.json",
+    "git_blob_sha": "fd53eecbf4d974e45c936d592005f5f7d518e87d"
+  },
+  "public_repair": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2551,
+    "head_sha": "0440780c3ff74b933a7c515089cd4ff5689e4dbb",
+    "merge_commit_sha": "9f6ee64ca0d06cbf844582f08fa12e62e97e421a",
+    "repaired_path": "capsules/tb_science_rank18_20261010_v1/rank18_v6_status_journal_runner.py",
+    "repaired_git_blob_sha": "d1bb9fc6766f16b34a955c6f1b41d2da0b2709df",
+    "verification_workflow_path": ".github/workflows/verify-tb-science-rank18-artifact-config-bridge-repair.yml",
+    "verification_workflow_git_blob_sha": "85f1d0ae57e695452e87b9cfda83aba5358ceb74",
+    "workflow_run_id": 38028865481,
+    "workflow_job_id": 114145404483,
+    "workflow_conclusion": "success"
+  },
+  "verified": [
+    "PINNED_HARBOR_VERSION_0_23_0_ARTIFACTCONFIG_SCHEMA_IMPORTED_AND_EXERCISED",
+    "LEGACY_ABSOLUTE_STRING_ARTIFACT_FORM_PRESERVED",
+    "ARTIFACTCONFIG_TABLE_SOURCE_NORMALIZED",
+    "ONLY_MAIN_SERVICE_SOURCE_PATHS_ARE_INJECTED_AS_AGENT_DELIVERABLES",
+    "NON_MAIN_SIDECAR_ARTIFACTS_REMAIN_HARBOR_VERIFIER_RESPONSIBILITY",
+    "SOURCE_TRAVERSAL_REJECTED",
+    "MISSING_SOURCE_REJECTED",
+    "INVALID_SERVICE_REJECTED",
+    "CHILD_GITHUB_CREDENTIALS_REMAIN_STRIPPED",
+    "EXACT_PATCHED_RUNNER_BLOB_COMPILES"
+  ],
+  "zero_exposure": {
+    "benchmark_task_downloaded": false,
+    "benchmark_task_read": false,
+    "durable_start_cas_acquired": false,
+    "benchmark_trials_consumed": 0,
+    "execution_authority_granted": false
+  },
+  "supersession": {
+    "old_runner_git_blob_sha": "d9cf2e70a9d8ebb53dcd32d815185aa2b865f930",
+    "new_runner_git_blob_sha": "d1bb9fc6766f16b34a955c6f1b41d2da0b2709df",
+    "old_public_surface_is_stale": true,
+    "fresh_public_reseal_required": true
+  },
+  "pass": true,
+  "execution_authority": false,
+  "task_read_authority": false,
+  "promotion_authority": false,
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_trials_consumed_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
