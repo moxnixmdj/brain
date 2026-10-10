@@ -2,7 +2,7 @@
   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V12_INSTANCE",
   "action_id": "R4_SEMANTIC_VERIFIER_EXECUTION_20261010_V1",
   "date": "2026-10-10",
-  "status": "ACTIVE_PROOF_ONLY__ZERO_FRESH_REALITY__ZERO_TERMINAL_CREDIT",
+  "status": "COMPLETED_PROOF_ONLY__VERIFIED_R4_EXECUTABLE_SEMANTIC_REPAIR__ZERO_FRESH_REALITY__ZERO_TERMINAL_CREDIT",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "canonical_base_commit": "ecd831a3a0cc031ec148f2d0db531187b68f10a0",
   "action_kind": "R4_EXECUTABLE_ROOT_CERTIFICATE_SEMANTICS_REPAIR",
@@ -57,5 +57,22 @@
     "terminal_credit_delta": 0,
     "acceptance_credit_delta": 0,
     "ownership_credit_delta": 0
+  },
+  "outputs": {
+    "law": "canonical/laws/COVERAGE_COMPLETENESS_ROOT_THEOREM_LAW_V1.md",
+    "governance": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_THEOREM_V1.json",
+    "runtime": "canonical/runtime/root_theorem_falsifier_v1.py",
+    "semantic_validator": "canonical/runtime/coverage_root_semantic_receipt_v1.py",
+    "tests": "canonical/tests/test_root_theorem_semantic_execution_v1.py",
+    "verification": "canonical/verification/R4_EXECUTABLE_SEMANTIC_ROOT_VERIFICATION_20261010_V1.json",
+    "regression": "canonical/regressions/2026-10-10_R4_EXECUTABLE_SEMANTIC_ROOT_VERIFICATION.json",
+    "reasoning": "canonical/reasoning/2026-10-10_R4_EXECUTABLE_SEMANTIC_ROOT_VERIFICATION_V1.json",
+    "pull_request": 3883
+  },
+  "verification": {
+    "remote_exact_byte_replay": "36_PASSED__0_FAILED",
+    "current_registry_proved_roots": 0,
+    "current_r4_proof_closure": false,
+    "terminal_credit_delta": 0
   }
 }
