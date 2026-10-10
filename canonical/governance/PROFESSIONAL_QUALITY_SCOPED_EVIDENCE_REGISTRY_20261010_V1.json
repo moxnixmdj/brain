@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_REGISTRY_V1",
+  "date": "2026-10-10",
+  "status": "ACTIVE__ONE_R7_CLAIM_SCOPED_CAPABILITY__ZERO_GLOBAL_LEAF_CREDIT",
+  "entries": [
+    {
+      "scope_id": "PQ::R7::SINGLE_EDIT::UVCK_DEFEATER_ORDER_REPAIR",
+      "root_id": "R7_CAUSAL_PRESCRIPTIVE",
+      "contributes_to_leaf_ids": [
+        "PQ::R7_CAUSAL_PRESCRIPTIVE::SEMANTIC",
+        "PQ::R7_CAUSAL_PRESCRIPTIVE::EXECUTION"
+      ],
+      "claim_kind": "EXACT_SINGLE_EDIT_PROFESSIONAL_CODE_INTERVENTION_INSTANCE",
+      "source_receipt": {
+        "path": "canonical/verification/PROFESSIONAL_QUALITY_R7_SINGLE_EDIT_CAUSAL_INSTANCE_VERIFY_20261009_V1.json",
+        "git_blob_sha": "0c692f55dedb6a8523bcd78541d4cb77ef06d610"
+      },
+      "reusable_compiler": {
+        "path": "canonical/runtime/professional_edit_causal_certificate_v1.py",
+        "git_blob_sha": "c3f2da4c97f26126cd304c9d630b4e13655958ea"
+      },
+      "compiler_verification": {
+        "path": "canonical/verification/PROFESSIONAL_EDIT_CAUSAL_CERTIFICATE_VERIFY_20261010_V1.json",
+        "git_blob_sha": "380d26afd8210096e397dacde3f2a339abc75c1c"
+      },
+      "global_leaf_closure": false,
+      "global_root_closure": false,
+      "terminal_credit_delta": 0
+    }
+  ],
+  "admission_law": "CLAIM_SCOPED_EVIDENCE_MAY_BE_REUSED_ONLY_INSIDE_ITS_PROVED_SCOPE_AND_NEVER_COUNTS_AS_GLOBAL_LEAF_OR_ROOT_CLOSURE",
+  "hard_nonclaims": [
+    "NO_GLOBAL_R7_LEAF_CLOSURE",
+    "NO_GLOBAL_R7_ROOT_CLOSURE",
+    "NO_DOMAIN_SEMANTIC_CLOSURE",
+    "NO_DOMAIN_EXECUTION_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
