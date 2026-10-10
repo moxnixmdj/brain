@@ -371,7 +371,7 @@
       },
       "whole_leaf_certificate_readiness_audit": {
         "path": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_CERTIFICATE_READINESS_AUDIT_VERIFY_20261010_V1.json",
-        "git_blob_sha": "f2b28c0d9f367e91e9d9bf2384079743ac1f39e2",
+        "git_blob_sha": "cea7f55a4794e33c484977072c30fae0169217c8",
         "independent_replay_pass": true,
         "admissible_scope_certificate_count": 0,
         "partition_or_totality_required_count": 24,
