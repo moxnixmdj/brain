@@ -1,0 +1,90 @@
+{
+  "schema": "PROJECT_BRAIN_REUSE_FIRST_RESIDUAL_EXECUTION_POLICY_20261010_V2",
+  "date": "2026-10-10",
+  "status": "ACTIVE_FAIL_CLOSED__MECHANICALLY_ENFORCED_BY_CAPABILITY_FIRST_SCHEDULER_V1__ZERO_CREDIT",
+  "objective": "PREVENT_FALSE_CAPABILITY_GAPS_BY_FORCING_SEARCH_REUSE_MINIMAL_ADAPTATION_PROOF_GENERALIZATION_PROMOTION_FALSIFICATION_BEFORE_NEW_PRIMITIVE_INVENTION",
+  "mission_binding": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
+  "scheduler_binding": "canonical/governance/CURRENT_DEVELOPMENT_SCHEDULER.json",
+  "policy": {
+    "default_sequence": [
+      "SEARCH_EXISTING_BRAIN_CAPABILITIES_AND_CERTIFICATES",
+      "CLASSIFY_RESIDUAL_CAUSAL_PREDICATE",
+      "BIND_STRONGEST_EXISTING_MECHANISM",
+      "COMPUTE_MINIMUM_MISSING_ADAPTATION",
+      "VERIFY_EXACT_CASE",
+      "VERIFY_NEIGHBORING_AND_ADVERSARIAL_CASES",
+      "EXTRACT_GENERAL_MECHANISM",
+      "PROMOTE_ONLY_WITH_SEPARATE_AUTHORITY",
+      "FALSIFY_ON_FRESH_REAL_TASK",
+      "REUSE_CHEAPER"
+    ],
+    "new_primitive_admission_requires": [
+      "EXACT_UNSATISFIED_PREDICATE",
+      "EXISTING_MECHANISMS_SEARCHED",
+      "WHY_EACH_EXISTING_MECHANISM_CANNOT_SOUNDLY_CLOSE_THE_PREDICATE",
+      "INDEPENDENTLY_VERIFIED_MISSING_PRIMITIVE_OR_COUNTEREXAMPLE",
+      "MINIMUM_NEW_PRIMITIVE_SCOPE",
+      "FALSIFIER_AND_PROMOTION_CRITERIA"
+    ],
+    "absent_new_primitive_proof": "ROUTE_TO_ADAPTATION_PROMOTION_VERIFICATION_OR_EVIDENCE_ACQUISITION__DO_NOT_CLASSIFY_AS_NEW_CAPABILITY_GAP",
+    "benchmark_role": "DEFECT_LOCALIZATION_OR_NEW_CAPABILITY_VALIDATION_OR_CLAIM_FALSIFICATION_OR_MILESTONE_CERTIFICATION_ONLY"
+  },
+  "current_shared_escape_projection": {
+    "source": "canonical/governance/ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_20261010_V1.json",
+    "gap_a": "GAP_A_ACQUISITION_TOTALITY",
+    "gap_b": "GAP_B_INTERNAL_ROUTE_STRICT_PROGRESS",
+    "rule": "ATTACK_SHARED_CAUSES_BEFORE_ROW_SPECIFIC_SOLVERS__REUSE_EXISTING_DISCRIMINATOR_REPAIR_AND_PROGRESS_MACHINERY"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THAT_EVERY_RESIDUAL_IS_ALREADY_SOLVED",
+    "NO_GLOBAL_ESCAPE_PROGRESS_TOTALITY_CREDIT",
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_CAPABILITY_CREDIT",
+    "NO_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_CREDIT",
+    "NO_SEMANTIC_TRUTH_FROM_STRUCTURAL_GATE_FIELDS",
+    "NO_EXECUTION_AUTHORITY_FROM_SCHEDULER_ELIGIBILITY",
+    "NO_CAPABILITY_PROMOTION_WITHOUT_SEPARATE_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "supersedes": {
+    "path": "canonical/governance/REUSE_FIRST_RESIDUAL_EXECUTION_POLICY_20261010_V1.json",
+    "git_blob_sha": "e230e9c243ac79b7909dac86071b5cad536f1666"
+  },
+  "runtime_enforcement": {
+    "scheduler_path": "canonical/runtime/capability_first_scheduler_v1.py",
+    "scheduler_git_blob_sha": "ef855067820d880bb5bdfe09ddda048654215f22",
+    "tests_path": "canonical/tests/test_capability_first_scheduler_v1.py",
+    "tests_git_blob_sha": "ff8ae7ec9f11d29854bac528db7e42d30eadadc3",
+    "applies_when_any": [
+      "FRONTIER_CLASS_EQUALS_OPEN_WORLD_EVIDENCE_FRONTIER",
+      "SHARED_RESIDUAL_CAUSE_IDS_NONEMPTY"
+    ],
+    "residual_actions": [
+      "REUSE_EXISTING",
+      "ADAPT_EXISTING",
+      "PROMOTE_EXISTING",
+      "VERIFY_EXISTING",
+      "ACQUIRE_EVIDENCE",
+      "NEW_PRIMITIVE"
+    ],
+    "new_primitive_required_fields": [
+      "EXACT_UNSATISFIED_PREDICATE",
+      "EXISTING_MECHANISMS_SEARCHED",
+      "WHY_EACH_EXISTING_MECHANISM_CANNOT_SOUNDLY_CLOSE_THE_PREDICATE",
+      "INDEPENDENTLY_VERIFIED_MISSING_PRIMITIVE_OR_COUNTEREXAMPLE",
+      "MINIMUM_NEW_PRIMITIVE_SCOPE",
+      "FALSIFIER_AND_PROMOTION_CRITERIA"
+    ],
+    "missing_gate_result": "DEMOTED_NEW_PRIMITIVE_WITHOUT_REUSE_EXHAUSTION_PROOF",
+    "missing_residual_action_result": "RESIDUAL_ACTION_REQUIRED",
+    "structural_gate_does_not_validate_receipt_truth": true,
+    "execution_authority": false
+  }
+}
