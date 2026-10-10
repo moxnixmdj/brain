@@ -259,7 +259,8 @@ def _refresh_assurance(frontier: dict[str, Any], professional: Mapping[str, Any]
     for key, expected in checks.items():
         if projection.get(key) != expected:
             raise PostCompositionFrontierError("ASSURANCE_PROFESSIONAL_DRIFT:" + key)
-    if projection.get("verified_property_truth_leaf_ids") != professional["ids"]:
+    projected_ids = projection.get("verified_property_truth_leaf_ids")
+    if not isinstance(projected_ids, list) or sorted(projected_ids) != sorted(professional["ids"]):
         raise PostCompositionFrontierError("ASSURANCE_PROFESSIONAL_DRIFT:verified_ids")
     candidates = frontier.get("candidates")
     if not isinstance(candidates, list):
