@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_ASSURANCE_CLOSURE_COMPILER_POINTER_V1",
   "date": "2026-10-09",
-  "status": "CURRENT_UVCK_V2_CANDIDATE__DEFEATER_ORDER_SOUNDNESS_REPAIRED__PROFESSIONAL_QUALITY_80_KNOWN_DEFEATERS_BOUND__ALL_12_ROOTS_BOUNDED__LEAF_FRONTIER_14_PARTIAL_10_NO_SCOPED_EVIDENCE_24_GLOBAL_OPEN__P1_ROUTER_V3_INDEPENDENT_REPLAY_BOUND__DOMAIN_SEMANTIC_AND_EXECUTION_CLOSURE_STILL_OPEN__NOT_LIVE_DEFAULT",
+  "status": "CURRENT_UVCK_V2_CANDIDATE__DEFEATER_ORDER_SOUNDNESS_REPAIRED__PROFESSIONAL_QUALITY_80_KNOWN_DEFEATERS_BOUND__ALL_12_ROOTS_BOUNDED__LEAF_FRONTIER_14_PARTIAL_10_NO_SCOPED_EVIDENCE_24_GLOBAL_OPEN__P1_ROUTER_V3_INDEPENDENT_REPLAY_BOUND__SAME_SUBJECT_COMPOSITION_GATE_V2_BOUND__DOMAIN_SEMANTIC_AND_EXECUTION_CLOSURE_STILL_OPEN__NOT_LIVE_DEFAULT",
   "governance": {
     "path": "canonical/governance/UVCK_V2_ASSURANCE_CLOSURE_COMPILER_20261009_V1.json",
     "git_blob_sha": "b7197be29b49c55c81e1a18572cd22020510fa5e"
@@ -58,6 +58,7 @@
   "activation": {
     "live_default": false,
     "required_before_promotion": [
+      "REAL_CONTENT_ADDRESSED_SAME_SUBJECT_BINDINGS_FOR_ALL_LOAD_BEARING_PROFESSIONAL_ROOTS",
       "FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION",
       "DOMAIN_SEMANTIC_AND_EXECUTION_EVIDENCE_BINDING"
     ]
@@ -226,6 +227,23 @@
     "promotion_authority": false,
     "domain_semantic_closure": false,
     "domain_execution_closure": false,
+    "terminal_credit_delta": 0
+  },
+  "professional_quality_same_subject_composition_gate": {
+    "governance_path": "canonical/governance/PROFESSIONAL_QUALITY_SAME_SUBJECT_COMPOSITION_GATE_20261010_V2.json",
+    "governance_git_blob_sha": "b3613f0950359cf62468fa8dd35adb22c91ce888",
+    "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_SAME_SUBJECT_COMPOSITION_GATE_VERIFY_20261010_V2.json",
+    "verification_git_blob_sha": "10b76020f4d18bf5b43b49b5bc40ec72b4e83fc9",
+    "result": "R12_AWARE_DEPENDENCIES__9_OF_9_PASS__COMPOSITION_ADMISSIBILITY_ONLY",
+    "same_subject_normal_form_rule_enforced": true,
+    "real_all_root_subject_binding_proved": false,
+    "global_leaf_closure": false,
+    "domain_semantic_closure": false,
+    "domain_execution_closure": false,
+    "live_default_credit": false,
+    "quality_authority": false,
+    "promotion_authority": false,
+    "terminal_authority": false,
     "terminal_credit_delta": 0
   }
 }
