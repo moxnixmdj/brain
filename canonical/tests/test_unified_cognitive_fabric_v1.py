@@ -662,5 +662,98 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
         self.assertEqual(out["result"]["query_predictions"][0]["prediction_interval"], ["2", "2"])
 
 
+    @patch("canonical.runtime.certified_reached_escape_repair_executor_v1.execute")
+    @patch("canonical.runtime.certified_reached_escape_state_constructor_v1.construct")
+    def test_reached_escape_state_forwards_explicit_verified_repair_handoff(
+        self, construct, repair_execute
+    ):
+        construct.return_value = {
+            "pass": False,
+            "status": "REPAIR_REQUIRED",
+            "repair_dispatch_contract": {
+                "pass": True,
+                "dispatch_sha256": "a" * 64,
+            },
+        }
+        repair_execute.return_value = {
+            "pass": True,
+            "status": "PASS__REPAIR_VERIFIED_BY_CONSTRUCTOR_RECERTIFICATION",
+            "repair_verified": True,
+            "global_repair_acquirability_proved": False,
+            "global_escape_progress_totality_proved": False,
+            "terminal_authority": False,
+            "terminal_credit_delta": 0,
+        }
+        synthesis_provider = Mock()
+        candidate_verifier = Mock()
+        reached_state = {
+            "schema": "PROJECT_BRAIN_REACHED_ESCAPE_STATE_V1",
+            "state_id": "S",
+            "regions": [{"region_id": "r1"}, {"region_id": "r2"}],
+            "policies": [],
+            "discriminators": [],
+        }
+        out = run(
+            {
+                "mode": "REACHED_ESCAPE_STATE",
+                "payload": reached_state,
+                "options": {"learn": False, "auto_one_shot_closure": False},
+            },
+            reached_escape_capability_synthesis_provider=synthesis_provider,
+            reached_escape_candidate_verifier=candidate_verifier,
+        )
+        self.assertTrue(out["inner_pass"], out)
+        self.assertEqual(
+            out["result"]["status"],
+            "PASS__REPAIR_VERIFIED_BY_CONSTRUCTOR_RECERTIFICATION",
+        )
+        repair_execute.assert_called_once()
+        self.assertEqual(repair_execute.call_args.args[0], reached_state)
+        self.assertIs(
+            repair_execute.call_args.kwargs["capability_synthesis_provider"],
+            synthesis_provider,
+        )
+        self.assertIsNone(
+            repair_execute.call_args.kwargs["evidence_acquisition_provider"]
+        )
+        self.assertIs(
+            repair_execute.call_args.kwargs["candidate_verifier"],
+            candidate_verifier,
+        )
+
+    @patch("canonical.runtime.certified_reached_escape_repair_executor_v1.execute")
+    @patch("canonical.runtime.certified_reached_escape_state_constructor_v1.construct")
+    def test_reached_escape_state_does_not_repair_without_independent_verifier(
+        self, construct, repair_execute
+    ):
+        construct.return_value = {
+            "pass": False,
+            "status": "REPAIR_REQUIRED",
+            "repair_dispatch_contract": {
+                "pass": True,
+                "dispatch_sha256": "b" * 64,
+            },
+        }
+        synthesis_provider = Mock()
+        out = run(
+            {
+                "mode": "REACHED_ESCAPE_STATE",
+                "payload": {
+                    "schema": "PROJECT_BRAIN_REACHED_ESCAPE_STATE_V1",
+                    "state_id": "S",
+                    "regions": [{"region_id": "r1"}],
+                    "policies": [],
+                    "discriminators": [],
+                },
+                "options": {"learn": False, "auto_one_shot_closure": False},
+            },
+            reached_escape_capability_synthesis_provider=synthesis_provider,
+        )
+        self.assertFalse(out["inner_pass"], out)
+        self.assertEqual(out["result"]["status"], "REPAIR_REQUIRED")
+        repair_execute.assert_not_called()
+        synthesis_provider.assert_not_called()
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
