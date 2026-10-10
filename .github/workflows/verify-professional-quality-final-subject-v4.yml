@@ -41,13 +41,13 @@ jobs:
           WORKLIST="canonical/governance/PROFESSIONAL_QUALITY_SUBJECT_DEPENDENCY_CLOSURE_WORKLIST_20261010_V2.json"
           s=sv.verify(SUBJECT)
           assert s["pass"] is True, s
-          assert s["component_count"] == 18, s
-          assert s["subject_sha256"] == "4dc798df7a13792ed000700ca2473f68baf20395b383c7908ea8db804ba1d2f5", s
+          assert s["component_count"] == 19, s
+          assert s["subject_sha256"] == "1b3fd164a617ae91c7d6caa26d6fdaba3300a64ab2677ff585da3482fc166e79", s
           dc.WORKLIST_PATH=WORKLIST
           d=dc.compile_closure()
           assert d["pass"] is True, d
           assert d["roots_dependency_classified"] == 12, d
           assert d["missing_subject_component_count"] == 0, d
           assert d["subject_dependency_closure_complete"] is True, d
-          print("PROFESSIONAL_QUALITY_FINAL_SUBJECT_V4_CURRENT__18_OF_18_COMPONENTS__12_OF_12_ROOTS_CLASSIFIED__ZERO_MISSING_DEPENDENCIES")
+          print("PROFESSIONAL_QUALITY_FINAL_SUBJECT_V4_CURRENT__19_OF_19_COMPONENTS__12_OF_12_ROOTS_CLASSIFIED__ZERO_MISSING_DEPENDENCIES")
           PY
