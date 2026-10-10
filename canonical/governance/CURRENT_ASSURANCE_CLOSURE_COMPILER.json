@@ -249,6 +249,10 @@
     "property_truth_closed_count": 8,
     "verified_property_truth_leaf_ids": [
       "PQ::R1_TARGET_SPECIFICATION::EXECUTION",
+      "PQ::R2_CANDIDATE_SEARCH::EXECUTION",
+      "PQ::R3_REALIZATION_OBSERVATION::EXECUTION",
+      "PQ::R4_MEASUREMENT_CONSTRUCT::EXECUTION",
+      "PQ::R6_EVIDENCE_GROUNDING_DEPENDENCE::EXECUTION",
       "PQ::R7_CAUSAL_PRESCRIPTIVE::EXECUTION",
       "PQ::R10_ANALYSIS_DECISION::EXECUTION",
       "PQ::R12_META_COMPOSITION_CLOSURE::EXECUTION"
@@ -438,5 +442,12 @@
     "registry_verification_git_blob_sha": "c0449b1afe7856ac95acea34f8a1f26702da3385",
     "live_default_credit": false,
     "terminal_credit_delta": 0
+  },
+  "currentness_invariant": {
+    "professional_current_path": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
+    "professional_current_git_blob_sha": "59eced2dc3bdbba7da78734f86c8e674dbf29e1b",
+    "exact_verified_leaf_ids_required": true,
+    "count_identity_consistency_required": true,
+    "stale_snapshot_has_zero_promotion_authority": true
   }
 }
