@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_ESCAPE_PROGRESS_TERMINAL_COMMON_POLICY_COMPILER_ACTIVATION_20261010_V1",
+  "date": "2026-10-10",
+  "status": "ACTIVE_VERIFIED_PROOF_COMPOSITION_MECHANISM__ZERO_ROW_CREDIT",
+  "role": "COMPOSE_EXISTING_SCOPE_COMPLETE_TARGET_FREE_ACCEPTANCE_PROOF_AND_INDEPENDENTLY_VERIFIED_CURRENT_BRAIN_POLICY_BINDING_INTO_ESCAPE_V3_TERMINAL_COMMON_POLICY_ROW_PROOF",
+  "runtime": {
+    "path": "canonical/runtime/escape_progress_terminal_common_policy_compiler_v1.py",
+    "git_blob_sha": "e2dce48ca532798fc29749001b3d4cbf300332d7"
+  },
+  "tests": {
+    "path": "canonical/tests/test_escape_progress_terminal_common_policy_compiler_v1.py",
+    "git_blob_sha": "71d39de192ce2195e1af220b4a2f88deb9a66839"
+  },
+  "verification": {
+    "path": "canonical/verification/ESCAPE_PROGRESS_TERMINAL_COMMON_POLICY_COMPILER_VERIFY_20261010_V1.json",
+    "git_blob_sha": "2ebc5cf08e292aa8135f925b5690b2bf4d5a9332",
+    "status": "PASS__DEVELOPMENT_15_OF_15__INDEPENDENT_15_OF_15__PYCOMPILE__MUTATION_KILLED"
+  },
+  "dependencies": {
+    "acceptance_transmuter": {
+      "path": "canonical/runtime/acceptance_proof_transmuter_v1.py",
+      "git_blob_sha": "39b5611e53485674b29e2a05da91b89801bc5aa6"
+    },
+    "escape_audit_v3": {
+      "path": "canonical/runtime/escape_progress_shared_gap_audit_v3.py",
+      "git_blob_sha": "14adf2c1a431285a542340a740e27e764edb1ce5"
+    },
+    "escape_binding_v5": {
+      "path": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V5.json",
+      "git_blob_sha": "58ab70bfd7e98bdc78d480da197c6a8e41df6d43"
+    }
+  },
+  "allowed_target_free_modes": [
+    "UNIVERSAL",
+    "EXHAUSTIVE_FINITE",
+    "ABSOLUTE_DOMINANCE"
+  ],
+  "required_policy_binding": {
+    "schema": "PROJECT_BRAIN_ESCAPE_PROGRESS_COMMON_POLICY_BINDING_V1",
+    "requirements": [
+      "EXACT_OBLIGATION_BINDING",
+      "EXACT_COMMON_POLICY_ID_BINDING",
+      "CURRENT_AVAILABILITY",
+      "BRAIN_OWNERSHIP",
+      "RESOURCE_ADMISSIBILITY",
+      "INDEPENDENT_VERIFICATION",
+      "EXACT_BYTE_BINDING",
+      "CONTENT_ADDRESSED_VERIFICATION_RECEIPT"
+    ]
+  },
+  "output": "CONTENT_ADDRESSED_ESCAPE_V3_TERMINAL_COMMON_POLICY_ROW_PROOF",
+  "scheduling_rule": "SEARCH_EXISTING_SCOPE_COMPLETE_CERTIFICATES_AND_VERIFIED_CURRENT_POLICY_BINDINGS_FIRST__ONLY_FALL_BACK_TO_MINIMUM_DISCRIMINATOR_ACQUISITION_WHEN_TERMINAL_COMMON_POLICY_CANNOT_BE_SOUNDLY_INSTANTIATED",
+  "execution_authority": false,
+  "promotion_authority": false,
+  "row_credit_from_activation": false,
+  "cc_r3_credit_from_activation": false,
+  "hard_nonclaims": [
+    "NO_GAP_A_ROW_CLOSED_BY_ACTIVATION",
+    "NO_POLICY_OR_CERTIFICATE_DISCOVERY_AUTHORITY",
+    "NO_PRIVATE_INFORMATION_ACQUIRABILITY",
+    "NO_CC_R3_CERTIFICATE",
+    "NO_GLOBAL_ESCAPE_PROGRESS_TOTALITY"
+  ],
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
