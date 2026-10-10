@@ -1,6 +1,5 @@
 from __future__ import annotations
 import unittest
-from unittest.mock import patch
 from canonical.runtime import professional_semantic_safety_adequacy_normal_form_v1 as n
 
 class Tests(unittest.TestCase):
@@ -36,23 +35,27 @@ class Tests(unittest.TestCase):
    self.assertTrue(n.binder._semantic_receipt_errors(row,claim),field)
 
  def test_constructive_gap_cannot_be_relabelled_external(self):
-  reality=n._load_reality_helpers(n.Path(__file__).resolve().parents[2])\n  row=reality.compile_gap_contract(n._closure(internal=["MISSING_CAPABILITY"],external=True))
+  reality=n._load_reality_helpers(n.Path(__file__).resolve().parents[2])
+  row=reality.compile_gap_contract(n._closure(internal=["MISSING_CAPABILITY"],external=True))
   self.assertEqual(row["gap_class"],"CONSTRUCTIVE_CAPABILITY_GAP")
 
  def test_evidence_gap_remains_acquisition_work(self):
-  reality=n._load_reality_helpers(n.Path(__file__).resolve().parents[2])\n  row=reality.compile_gap_contract(n._closure(evidence=["MISSING_EVIDENCE"],pending=True))
+  reality=n._load_reality_helpers(n.Path(__file__).resolve().parents[2])
+  row=reality.compile_gap_contract(n._closure(evidence=["MISSING_EVIDENCE"],pending=True))
   self.assertEqual(row["gap_class"],"PENDING_ACQUISITION_OR_EXPERIMENT")
 
  def test_externality_requires_passed_closure_not_current_absence(self):
-  row=n.reality.compile_gap_contract(n._closure(external=True,passed=False))
+  reality=n._load_reality_helpers(n.Path(__file__).resolve().parents[2])
+  row=reality.compile_gap_contract(n._closure(external=True,passed=False))
   self.assertNotEqual(row["gap_class"],"PROVEN_INFORMATION_THEORETICALLY_EXTERNAL")
-  ext=n.reality.compile_gap_contract(n._closure(external=True,passed=True))
+  ext=reality.compile_gap_contract(n._closure(external=True,passed=True))
   self.assertEqual(ext["gap_class"],"PROVEN_INFORMATION_THEORETICALLY_EXTERNAL")
 
  def test_minimum_information_never_defaults_to_full_benchmark(self):
-  gap=n.reality.compile_gap_contract(n._closure(evidence=["E1"],pending=True))
-  d=n.reality.compile_decision_sufficient_contract(gap)
-  m=n.reality.compile_minimum_information_contract(gap,d)
+  reality=n._load_reality_helpers(n.Path(__file__).resolve().parents[2])
+  gap=reality.compile_gap_contract(n._closure(evidence=["E1"],pending=True))
+  d=reality.compile_decision_sufficient_contract(gap)
+  m=reality.compile_minimum_information_contract(gap,d)
   self.assertEqual(m["request_count"],1)
   self.assertTrue(m["requests"][0]["broad_acquisition_forbidden_without_minimality_proof"])
   self.assertEqual(m["proof_precedence"][-1],"FULL_EMPIRICAL_EVALUATION_LAST")
