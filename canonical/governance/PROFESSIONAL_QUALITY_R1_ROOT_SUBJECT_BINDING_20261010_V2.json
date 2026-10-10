@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_ROOT_SUBJECT_BINDING_V1",
+  "date": "2026-10-10",
+  "status": "CANDIDATE_R1_ROOT_SUBJECT_BINDING__DEPENDENCY_CLOSED_SUBJECT_V4__AWAITING_INDEPENDENT_VERIFICATION__ZERO_QUALITY_OR_TERMINAL_AUTHORITY",
+  "root_id": "R1_TARGET_SPECIFICATION",
+  "subject_kind": "DECLARED_SYSTEM",
+  "subject_id": "PROFESSIONAL_QUALITY_P1_V4_DEPENDENCY_CLOSED_SYSTEM_20261010_V4",
+  "subject_sha256": "9360acce10393cc766bd4cecb8dee7aa0cea812912a63e1625a6d9c2bc6ca29f",
+  "subject": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V4_DECLARED_SYSTEM_SUBJECT_20261010_V4.json",
+    "git_blob_sha": "9f51d02661c9ef25f65d64c0f40c934cf1094dc4"
+  },
+  "bridge_evidence": {
+    "subject_verification": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_DECLARED_SYSTEM_SUBJECT_V4_VERIFY_20261010_V1.json",
+      "git_blob_sha": "cdba4fcffedeabdafd3bc4a6a2eb281d9227ee34"
+    },
+    "target_bound_router_regression": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_P1_ROUTER_V4_INHERITED_REGRESSION_VERIFY_20261010_V1.json",
+      "git_blob_sha": "19c287a8424ded099713263f016a23aeb5fc64b3"
+    },
+    "r1_target_semantics": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R1_TARGET_SEMANTIC_VERIFY_20261010_V1.json",
+      "git_blob_sha": "dfffdd6eff129ce7498c4e4aa8a822cd4a5cda22"
+    },
+    "r1_structural_target": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R1_STRUCTURAL_TARGET_VERIFY_20261010_V1.json",
+      "git_blob_sha": "dcee55ba17d15154117100de6aebd34716ad3e3e"
+    }
+  },
+  "binding_scope": {
+    "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+    "claim": "THE_DEPENDENCY_CLOSED_P1_V4_DECLARED_SYSTEM_PRESERVES_THE_EXACT_TARGET_BOUND_R1_CONTRACT_WHILE_ADDING_ONLY_CLASSIFIED_STATIC_MECHANISMS_FOR_OTHER_ROOTS",
+    "guarantees": [
+      "EXACT_TARGET_INSTANCE_FIELDS_REQUIRED_BEFORE_ROUTING",
+      "CANONICAL_TARGET_CONTRACT_SEMANTICS_REPLAY_BEFORE_V3_DELEGATION",
+      "TARGET_INSTANCE_CONTENT_HASH_EMITTED_ON_ROUTED_RESULTS",
+      "V3_REAL_CLEAN_AND_HARD_DEFECT_BRANCHES_PRESERVED",
+      "ALL_STATIC_R1_TO_R12_DEPENDENCIES_CLASSIFIED_BEFORE_THIS_SUBJECT_GENERATION"
+    ],
+    "limitations": [
+      "NO_ARBITRARY_USER_PROMPT_SEMANTIC_COMPLETENESS",
+      "NO_SOURCE_EXTRACTION_COMPLETENESS",
+      "NO_UNIQUE_BEST_PLAN",
+      "NO_GLOBAL_R1_ROOT_CLOSURE",
+      "NO_OTHER_ROOT_SUBJECT_BINDING_FROM_R1",
+      "NO_LIVE_DEFAULT_PROMOTION"
+    ]
+  },
+  "supersedes": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_R1_ROOT_SUBJECT_BINDING_20261010_V1.json",
+    "git_blob_sha": "e702e0d0ea567db92869cfe0be7ca9745d94c8cc",
+    "reason": "SUBJECT_IDENTITY_REFRESHED_ONCE_AFTER_DEPENDENCY_CLOSURE__OLD_R1_BINDING_REMAINS_HISTORICAL_ONLY"
+  },
+  "global_subject_identity_authority": false,
+  "root_subject_binding_authority": false,
+  "semantic_truth_authority": false,
+  "execution_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
