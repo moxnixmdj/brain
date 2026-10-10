@@ -11,7 +11,7 @@ from canonical.runtime import capability_parallel_frontier_v2 as core
 ROOT=Path(__file__).resolve().parents[2]
 
 def _copy_sources(tmp:Path):
- for rel in (p.PROF,p.BYTES,p.R2):
+ for rel in (p.PROF,p.ASSURANCE,p.BYTES,p.R2):
   src=ROOT/rel; dst=tmp/rel; dst.parent.mkdir(parents=True,exist_ok=True); dst.write_bytes(src.read_bytes())
 
 class PostCompositionFrontierV2Tests(unittest.TestCase):
@@ -19,6 +19,7 @@ class PostCompositionFrontierV2Tests(unittest.TestCase):
   out=p.plan_current_post_composition_frontier()
   self.assertTrue(out["frontier_currentness"]["currentness_verified"])
   self.assertTrue(out["dynamic_currentness"]["professional_pointer_follow"])
+  self.assertTrue(out["dynamic_currentness"]["assurance_pointer_follow"])
   self.assertTrue(out["dynamic_currentness"]["bytes_pointer_follow"])
   self.assertTrue(out["dynamic_currentness"]["r2_pointer_follow"])
   self.assertTrue(out["dynamic_currentness"]["parked_normalized_to_nonprimary"])
@@ -26,15 +27,18 @@ class PostCompositionFrontierV2Tests(unittest.TestCase):
   self.assertFalse(out["promotion_authority"])
   self.assertEqual(out["terminal_credit_delta"],0)
 
- def test_refresh_binds_exact_current_three_source_hashes(self):
+ def test_refresh_binds_exact_current_four_source_hashes(self):
   f=p.refresh_post_composition_currentness(core.load_current_frontier())
   bound={x["path"]:x["git_blob_sha"] for x in f["scope"]["source_set"]}
-  for rel in (p.PROF,p.BYTES,p.R2):
-   self.assertEqual(bound[rel],core._git_blob_sha(ROOT/rel),rel)
+  for rel in (p.PROF,p.ASSURANCE,p.BYTES,p.R2):
+   self.assertEqual(bound[rel],p._git_blob_sha(ROOT/rel),rel)
   prow=next(x for x in f["candidates"] if x.get("work_id")==p.PROF_WORK)
+  arow=next(x for x in f["candidates"] if x.get("work_id")==p.ASSURANCE_WORK)
   cur=json.loads((ROOT/p.PROF).read_text())
-  self.assertEqual(prow["read_only_evidence"]["property_truth_closed_count"],cur["property_truth_frontier"]["verified_leaf_count"])
+  count=cur["property_truth_frontier"]["verified_leaf_count"]
+  self.assertEqual(prow["read_only_evidence"]["property_truth_closed_count"],count)
   self.assertEqual(prow["read_only_evidence"]["verified_property_truth_leaf_ids"],cur["property_truth_frontier"]["verified_leaf_ids"])
+  self.assertEqual(arow["read_only_evidence"]["professional_property_truth_closed_count"],count)
 
  def test_parked_is_preserved_as_nonprimary_not_execution(self):
   f=p.refresh_post_composition_currentness(core.load_current_frontier())
@@ -48,6 +52,21 @@ class PostCompositionFrontierV2Tests(unittest.TestCase):
    q=root/p.PROF; d=json.loads(q.read_text()); d["property_truth_frontier"]["verified_leaf_ids"]=[]; q.write_text(json.dumps(d))
    with self.assertRaisesRegex(p.PostCompositionFrontierV2Error,"PROF_IDS"):
     p.refresh_post_composition_currentness(core.load_current_frontier(),root=root)
+
+ def test_assurance_authority_boundary_change_fails_closed(self):
+  with tempfile.TemporaryDirectory() as td:
+   root=Path(td); _copy_sources(root)
+   q=root/p.ASSURANCE; d=json.loads(q.read_text()); d["terminal_authority"]=True; q.write_text(json.dumps(d))
+   with self.assertRaisesRegex(p.PostCompositionFrontierV2Error,"ASSURANCE_AUTHORITY_BOUNDARY"):
+    p.refresh_post_composition_currentness(core.load_current_frontier(),root=root)
+
+ def test_assurance_harmless_blob_drift_is_followed(self):
+  with tempfile.TemporaryDirectory() as td:
+   root=Path(td); _copy_sources(root)
+   q=root/p.ASSURANCE; d=json.loads(q.read_text()); d["observation_only_test_marker"]="changed"; q.write_text(json.dumps(d))
+   f=p.refresh_post_composition_currentness(core.load_current_frontier(),root=root)
+   bound={x["path"]:x["git_blob_sha"] for x in f["scope"]["source_set"]}
+   self.assertEqual(bound[p.ASSURANCE],p._git_blob_sha(q))
 
  def test_bytes_spent_next_frozen_fails_closed(self):
   with tempfile.TemporaryDirectory() as td:
