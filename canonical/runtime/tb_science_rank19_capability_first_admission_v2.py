@@ -181,7 +181,7 @@ def verify() -> dict[str, Any]:
     if (
         not isinstance(counts, dict)
         or counts.get("benchmark_trials_consumed") != 18
-        or counts.get("consumed_final_failures") != 18
+        or counts.get("consumed_failures_final") != 18
     ):
         errors.append("RANK19_LEDGER_PREDECESSOR_COUNT_DRIFT")
     if not isinstance(next_slot, dict):
