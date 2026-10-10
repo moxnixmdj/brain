@@ -1,0 +1,17 @@
+{
+  "schema": "PROJECT_BRAIN_POST_COMPOSITION_FRONTIER_ADAPTER_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_ADAPTER__SPRITE_3_OF_3__CORE_V2_REUSED__LIVE_SOURCES_7_OF_7_CURRENT__ZERO_FULL_EXECUTION",
+  "adapter_sha": "3eaba90481f677bb6be0c568d42bbf95f44c6f4f",
+  "tests_sha": "abdc8836e4b064dfd0e682e84cb1e2538cf4e8de",
+  "core_v2_sha": "209d8d11494645432354636a3dc17e7b515abaf8",
+  "frontier_sha": "99d06f3936b474ef82d2425d089751a465c5e8ab",
+  "sprite_tests": "PASS__3_OF_3",
+  "live_source_currentness": "PASS__7_OF_7",
+  "github_actions_note": "FAILED_BEFORE_ANY_EXECUTABLE_STEP__NOT_USED_AS_SEMANTIC_EVIDENCE",
+  "execution_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
