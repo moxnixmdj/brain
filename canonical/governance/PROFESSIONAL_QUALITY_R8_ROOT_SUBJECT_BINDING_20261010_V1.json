@@ -1,0 +1,78 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_ROOT_SUBJECT_BINDING_V1",
+  "date": "2026-10-10",
+  "status": "CANDIDATE_R8_V7_ROOT_SUBJECT_BINDING__EXPLICIT_POPULATION_CONTEXT_ESCALATION_TRIGGER_PLUS_FROZEN_512_DELEGATION_POPULATION_SCOPE__AWAITING_INDEPENDENT_VERIFICATION__ZERO_QUALITY_OR_TERMINAL_AUTHORITY",
+  "root_id": "R8_POPULATION_CONTEXT_OPERATOR",
+  "subject_kind": "DECLARED_SYSTEM",
+  "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+  "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+  "subject": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V7_DECLARED_SYSTEM_SUBJECT_20261010_V6.json",
+    "git_blob_sha": "1d598bc8757017ceb34928d0df9f5fce859ef868"
+  },
+  "bridge_evidence": {
+    "execution_profile": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_EXECUTION_PROFILE_20261010_V3.json",
+      "git_blob_sha": "f7e89eafbb691c16d1bdf5b8d295a468d5e3bec5"
+    },
+    "r8_context_scope": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_R8_POPULATION_CONTEXT_SCOPE_20261010_V1.json",
+      "git_blob_sha": "b174a62c94d36474f0b102d37362ea9fc3adaa91"
+    },
+    "r8_semantic_scope": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_R8_POPULATION_SEMANTIC_SCOPE_20261010_V1.json",
+      "git_blob_sha": "5bdcf0f7f46daf9abc2cca90524e702c9b601007"
+    },
+    "r8_semantic_verification": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R8_POPULATION_SEMANTIC_VERIFY_20261010_V1.json",
+      "git_blob_sha": "e47503a3b1f61bbb9effa04edccbf158b8b28e96"
+    },
+    "population_preflight_verification": {
+      "path": "canonical/verification/DELEGATION_TERMINAL_POPULATION_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "3965db684d7104c5829ce1fcfa8ee08d2cd42cfc"
+    }
+  },
+  "binding_scope": {
+    "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+    "escalation_trigger": "POPULATION_CONTEXT_OPERATOR_OR_TIME_TRANSPORT_GAP",
+    "claim": "FOR_THE_EXACT_V7_DECLARED_SYSTEM_SUBJECT__POPULATION_CONTEXT_OPERATOR_OR_TIME_TRANSPORT_GAP_IS_AN_EXPLICIT_ESCALATION_TRIGGER__AND_R8_SUPPORT_IS_BOUND_ONLY_TO_THE_VERIFIED_FROZEN_512_CASE_PRE_BEACON_DELEGATION_POPULATION_SEMANTICS_FOR_TASK_TO_DELEGATION_GRAPH_001__WITH_ZERO_CASE_REPLACEMENT_ADAPTIVE_SELECTION_OR_TUNING_REPLAY",
+    "guarantees": [
+      "EXACT_V7_SUBJECT_TUPLE_BOUND",
+      "V7_PROFILE_EXPLICITLY_DECLARES_POPULATION_CONTEXT_OPERATOR_OR_TIME_TRANSPORT_GAP_AS_AN_ESCALATION_TRIGGER",
+      "R8_SUPPORT_IS_LIMITED_TO_TASK_TO_DELEGATION_GRAPH_001_FROZEN_512_CASE_POPULATION",
+      "POPULATION_IDENTITY_IS_BEHAVIOR_AND_VERSION_BOUND",
+      "POPULATION_SIZE_IS_EXACTLY_512",
+      "SLOT_GENERATION_IS_DETERMINISTIC_FROM_COMMITMENT_BEACON_AND_INDEX",
+      "ALL_SIX_DECLARED_DELEGATION_INTERACTION_CASE_CLASSES_ARE_REQUIRED",
+      "ALL_512_PRE_BEACON_CASES_PASS_IN_THE_PINNED_VERIFICATION",
+      "CASE_REPLACEMENT_ADAPTIVE_SELECTION_AND_TUNING_REPLAY_ARE_FORBIDDEN",
+      "POST_FREEZE_TERMINAL_RESULT_IS_NOT_INFERRED_FROM_PREFLIGHT"
+    ],
+    "limitations": [
+      "NO_CONSTITUENCY_SUPPORT_CLAIM",
+      "NO_PRESENTER_OR_OPERATOR_GENERALIZATION",
+      "NO_MEASUREMENT_INVARIANCE_CLAIM",
+      "NO_SOCIAL_INFLUENCE_OR_REACTIVITY_CLOSURE",
+      "NO_POST_FREEZE_TERMINAL_RESULT",
+      "NO_GLOBAL_R8_SEMANTIC_OR_EXECUTION_LEAF_CLOSURE",
+      "NO_GLOBAL_R8_ROOT_CLOSURE",
+      "NO_DOMAIN_SEMANTIC_OR_EXECUTION_CLOSURE",
+      "NO_SAME_SUBJECT_COMPOSITION_PASS",
+      "NO_LIVE_DEFAULT_PROMOTION"
+    ]
+  },
+  "conditional_population_transport_support": true,
+  "target_constituency_generalization_proved": false,
+  "operator_generalization_proved": false,
+  "post_freeze_terminal_result_proved": false,
+  "global_subject_identity_authority": false,
+  "root_subject_binding_authority": false,
+  "semantic_truth_authority": false,
+  "execution_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
