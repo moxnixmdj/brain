@@ -1,0 +1,104 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_R12_V9_REAL_DOCX_POSITIVE_WITNESS_INDEPENDENT_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__REAL_EXACT_V9_POSITIVE_ROUTE__MATERIAL_TOTALITY_AND_EXECUTABLE_SEMANTICS_VERIFIED__CC_R3_EXACT_RUN_PROVED__ZERO_GLOBAL_PROPERTY_OR_TERMINAL_CREDIT",
+  "subject": {
+    "subject_id": "PROFESSIONAL_QUALITY_P1_V9_EXECUTABLE_TOTALITY_SEMANTICS_SYSTEM_20261010_V8",
+    "subject_sha256": "adf7f09e1913526e460b7350c02cd148c2cd14de90eed33fa7fae84d395d9912",
+    "declared_system_path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V9_DECLARED_SYSTEM_SUBJECT_20261010_V8.json",
+    "declared_system_git_blob_sha": "2ff32e4bb78e63635244c86d47fa369d7ba53900",
+    "router_path": "canonical/runtime/professional_quality_p1_router_v9.py",
+    "router_git_blob_sha": "27f0df972a08a2497802865e46bdccdcb1c720ae",
+    "semantic_authority_path": "canonical/runtime/professional_r12_totality_semantic_receipt_v1.py",
+    "semantic_authority_git_blob_sha": "cfb264b92004c55acf73719cd9c54cec6a609a34"
+  },
+  "execution": {
+    "task": "EXACT_BOUNDED_DOCX_VISIBLE_TOKEN_REPLACEMENT",
+    "source_docx_sha256": "1db684b36a66b59f5a8a748036f21a9b7b4e4ff83db6904adfa34137089eb94e",
+    "output_docx_sha256": "41f2d30471a671d77cecf885b5f8c20409ca736616925221ec371761cfa21777",
+    "run_context_sha256": "sha256:103249e3cca5a0166b810752f44f265ed5fdafa4ead23b8a87c77768362638ca",
+    "evidence_sha256": "2cb97029578a3c1f5544c568ab064cbc1dd6c081f1e1664f667badbe0d48d57c",
+    "policy_cover_problem_sha256": "b15b57cb2b6cf150b7ec3fb7623e11139a1324be20554cdd45aea52592c41f76",
+    "policy_relevant_world_count": 1,
+    "route_status": "ROUTE__P1_ORDINARY",
+    "final_step_outcome": "POSITIVE_CERTIFICATE",
+    "positive_certification_authorized": true,
+    "material_totality_proved": true,
+    "v9_executable_r12_totality_semantics_verified": true,
+    "cc_r3_terminal_closure_proved": true,
+    "errors": null
+  },
+  "producer": {
+    "source": "LOCAL_CONTAINER",
+    "fresh_realization": true,
+    "source_token_count": 1,
+    "changed_zip_members": [
+      "word/document.xml"
+    ],
+    "unrelated_zip_members_byte_identical": true,
+    "fresh_render": {
+      "page_size": [
+        816,
+        1056
+      ],
+      "changed_pixels": 1669,
+      "total_pixels": 861696,
+      "pixel_fraction": 0.0019368779708853238,
+      "bbox": [
+        120,
+        100,
+        281,
+        118
+      ],
+      "bbox_fraction": 0.003363135026737968,
+      "source_png_sha256": "314dc1a10dd9242046d082ab38c826912e9c8a5c143a96d0e2a3e13c80264f94",
+      "output_png_sha256": "574681221aeb67a60a67a794d44ebb3e9265e7548088176707b2d675ab8a2e88"
+    }
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-professional-hard-defect-verify-20261010",
+    "carrier_id": "sprite-1bbb86ed-1f7c-409f-8397-fadc4de7a62a",
+    "workspace": "/home/sprite/v9-real-witness",
+    "source_transport_reassembled_sha256": "1db684b36a66b59f5a8a748036f21a9b7b4e4ff83db6904adfa34137089eb94e",
+    "source_zip_crc_pass": true,
+    "source_zip_member_count": 17,
+    "independent_structural_replay_pass": true,
+    "exact_single_token_edit_verified": true,
+    "hard_defect_preflight_pass": true,
+    "fresh_render_raw_hash_equivalence_to_independently_replayed_artifacts": true,
+    "goal_binding_independently_verified": true,
+    "seven_step_bindings_independently_verified": true,
+    "policy_world_set_completeness_independently_verified": true,
+    "policy_cover_replay_pass": true,
+    "executable_semantic_verifier_rerun_pass": true,
+    "canonical_v9_router_positive_rerun_pass": true
+  },
+  "r12_binding": {
+    "semantic_property_claim_id": "11870f850b46bcfcc31094f764fc4f45c911aaac413979ceb62679ff19a53162",
+    "semantic_scope_claim_id": "05b74983836dd1f6a13a0db72443246fb74f99548f0d982a769a6a7e572e9e85",
+    "semantic_obligation": "ALL_ROOT_RELEVANT_MATERIAL_DEFEATERS_RESOLVED_OR_PROVED_DECISION_NULL_BEFORE_POSITIVE_CERTIFICATION",
+    "target_scope_semantics": "ALL_ROOT_RELEVANT_MATERIAL_DEFEATERS_FOR_EXACT_RUN_CONTEXT_AND_EVIDENCE"
+  },
+  "proves": [
+    "A_REAL_EXACT_V9_POSITIVE_ROUTE_EXISTS",
+    "THE_REAL_ROUTE_SURVIVES_CONTENT_ADDRESSED_EXECUTABLE_R12_TOTALITY_SEMANTIC_VERIFICATION",
+    "THE_EXACT_RUN_POLICY_RELEVANT_WORLD_SET_IS_INDEPENDENTLY_VERIFIED_COMPLETE",
+    "THE_EXACT_RUN_MATERIAL_DEFEATER_TOTALITY_AND_CC_R3_TERMINAL_CLOSURE_ARE_PROVED",
+    "THE_V9_POSITIVE_PATH_IS_NONVACUOUS"
+  ],
+  "hard_nonclaims": [
+    "NO_ONE_RUN_EQUALS_WHOLE_PROFESSIONAL_DOMAIN_CLAIM",
+    "NO_GLOBAL_R12_SEMANTIC_PROPERTY_TRUTH_FROM_THIS_WITNESS_ALONE",
+    "NO_R4_PROOF_REALIZATION_AUTHORITY_FROM_THIS_WITNESS_ALONE",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "semantic_property_truth_credit_delta": 0,
+    "quality_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "promotion_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
