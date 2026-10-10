@@ -16,7 +16,8 @@
       "git_blob_sha": "e50e82e8b46e833f70a8c5c5f24e243ccfbdca38"
     },
     "generator_verification": {
-      "path": "canonical/verification/PROFESSIONAL_QUALITY_R2_CANDIDATE_BRANCH_BASIS_VERIFY_20261010_V1.json"
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R2_CANDIDATE_BRANCH_BASIS_VERIFY_20261010_V1.json",
+      "git_blob_sha": "37e29ba250944fa455fe4bee3d3e7c667b1d0fe5"
     },
     "search_semantics": {
       "path": "canonical/governance/PROFESSIONAL_QUALITY_R2_SEARCH_SEMANTIC_SCOPE_20261010_V1.json",
