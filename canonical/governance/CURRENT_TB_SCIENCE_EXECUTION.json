@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_TB_SCIENCE_EXECUTION_POINTER_V2",
   "date": "2026-10-10",
-  "status": "RANK20_V3_FINAL_PREEXPOSURE_ABORT_NONCONSUMING__TASK_READ_TRUE__NO_START__GENERAL_CALLER_VERSION_SKEW_REPAIR_PENDING",
+  "status": "RANK20_V3_FINAL_PREEXPOSURE_ABORT_NONCONSUMING__TASK_READ_TRUE__NO_START__GENERAL_CALLER_VERSION_SKEW_REPAIR_VERIFIED_AND_PUBLIC_BASE_PROMOTED__NO_RETRY",
   "current_result": {
     "path": "canonical/verification/TB_SCIENCE_RANK20_V3_FINAL_NONCONSUMING_VERIFY_20261010_V1.json",
     "git_blob_sha": "8f77186beeb582c5aef8bbead0d7a98e32f818fa"
@@ -29,7 +29,7 @@
   },
   "acceptance_credit_delta": 0,
   "terminal_credit_delta": 0,
-  "next": "VERIFY_GENERAL_CONTENT_ADDRESSED_BOUND_RUNTIME_CALLER_REPAIR__NO_RANK20_V3_RETRY__THEN_RECOMPUTE_CAPABILITY_FIRST_FRONTIER",
+  "next": "PARK_RANK20_V3__RECOMPUTE_CAPABILITY_FIRST_FRONTIER__USE_CONTENT_ADDRESSED_BOUND_RUNTIME_DISPATCH_FOR_FUTURE_AUTHORIZED_EXECUTION_ONLY",
   "finalized_rank18": {
     "ledger_schedule_rank": 18,
     "slot_id": "terminal-bench-science/longitudinal-clinical-agent::trial-0",
@@ -98,8 +98,8 @@
     "NO_RANK20_V3_RETRY_OR_REPLACEMENT_AUTHORITY",
     "NO_RANK20_V3_DURABLE_START",
     "NO_RANK20_V3_BENCHMARK_TRIAL_CONSUMPTION",
-    "NO_REPAIR_CAPABILITY_CREDIT_BEFORE_INDEPENDENT_VERIFICATION",
-    "NO_ACCEPTANCE_CAPABILITY_OR_TERMINAL_CREDIT"
+    "NO_ACCEPTANCE_CAPABILITY_OR_TERMINAL_CREDIT",
+    "NO_RANK20_V3_RETRY_OR_REPLACEMENT_AFTER_REPAIR"
   ],
   "public_effective_authority_reconciliation": {
     "path": "canonical/governance/TB_SCIENCE_RANK19_PUBLIC_EFFECTIVE_AUTHORITY_RECONCILIATION_20261010_V1.json",
@@ -478,5 +478,22 @@
     "public_head_sha": "7868075e686b716aab425881eb74ec5b3285de3a",
     "verification_pending": true,
     "merge_authority": false
+  },
+  "rank20_bound_start_cas_repair_verified": {
+    "status": "PASS__GENERAL_REPAIR_VERIFIED_AND_MERGED__NO_RANK20_RETRY",
+    "verification_path": "canonical/verification/TB_SCIENCE_BOUND_START_CAS_CALLER_REPAIR_VERIFY_20261010_V1.json",
+    "verification_git_blob_sha": "bf5aa5cddf6c1272a9664320273d39725470b2e5",
+    "public_repository": "moxnixmdj/verification-capsule-runner",
+    "public_pull_request": 2633,
+    "public_merge_commit": "a434b8f8d87b0916b1a9924b35ed3a40c32314d7",
+    "dedicated_ci_run_id": 38064942060,
+    "dedicated_ci_job_id": 114250571305,
+    "dedicated_ci_conclusion": "success",
+    "repaired_runner_git_blob_sha": "954f3ad4188e0187071af2416cc3c260c1762d43",
+    "content_addressed_runtime_binding_git_blob_sha": "f5a77f98dcb80fc4dcbae3e04ac2b0853609a2a7",
+    "rank20_v3_retry_authority": false,
+    "rank20_v3_replacement_authority": false,
+    "activation_present": false,
+    "terminal_credit_delta": 0
   }
 }
