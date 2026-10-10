@@ -70,6 +70,37 @@ def validate_manifest(
         if row.get("strict_progress_witness_bound") is not False:
             errors.append(f"{oid}:STRICT_PROGRESS_CREDIT_NOT_SUPPORTED_BY_THIS_MANIFEST")
 
+    shared = manifest.get("shared_progress_reduction") or {}
+    shared_evidence = shared.get("evidence") or []
+    if not isinstance(shared_evidence, list) or len(shared_evidence) != 2:
+        errors.append("SHARED_PROGRESS_BAD_EVIDENCE_REFERENCE")
+    else:
+        shared_path, shared_expected_sha = shared_evidence
+        try:
+            shared_data = read_bytes(str(shared_path))
+        except Exception:
+            errors.append("SHARED_PROGRESS_EVIDENCE_UNREADABLE")
+        else:
+            if git_blob_sha(shared_data) != shared_expected_sha:
+                errors.append("SHARED_PROGRESS_EVIDENCE_BLOB_STALE")
+            shared_text = shared_data.decode("utf-8", errors="replace")
+            for required in shared.get("required_strings") or []:
+                if str(required) not in shared_text:
+                    errors.append(
+                        "SHARED_PROGRESS_SUPPORT_STRING_MISSING:" + str(required)
+                    )
+
+    if shared.get("generic_well_founded_measure_proved") is not True:
+        errors.append("SHARED_PROGRESS_MEASURE_NOT_PROVED")
+    if shared.get("specific_internal_action_bindings_proved") != 0:
+        errors.append("SHARED_PROGRESS_ROW_CREDIT_MUST_REMAIN_ZERO")
+    if shared.get("provider_totality_proved") is not False:
+        errors.append("SHARED_PROGRESS_PROVIDER_TOTALITY_MUST_REMAIN_OPEN")
+    if shared.get("gap_b_closed") is not False:
+        errors.append("GAP_B_MUST_REMAIN_OPEN_WITHOUT_ACTION_BINDINGS")
+    if shared.get("cc_r3_proved") is not False:
+        errors.append("SHARED_PROGRESS_CANNOT_GRANT_CC_R3")
+
     derived = manifest.get("derived_truth") or {}
     if group_counts.get("GAP_A_ACQUISITION_TOTALITY", 0) != 9:
         errors.append("GAP_A_COUNT_NOT_9")
@@ -89,7 +120,7 @@ def validate_manifest(
     return {
         "pass": not errors,
         "status": (
-            "PASS__MANIFEST_CURRENT__TWO_SHARED_GAPS__CC_R3_OPEN__ZERO_CREDIT"
+            "PASS__MANIFEST_CURRENT__SHARED_PROGRESS_MEASURE_BOUND__ACTION_BINDINGS_AND_PROVIDER_TOTALITY_OPEN__CC_R3_OPEN__ZERO_CREDIT"
             if not errors
             else "FAIL_CLOSED__ESCAPE13_ROUTE_MANIFEST_DRIFT"
         ),
@@ -99,6 +130,9 @@ def validate_manifest(
         "gap_b_count": group_counts.get("GAP_B_INTERNAL_ROUTE_STRICT_PROGRESS", 0),
         "strict_progress_witness_bound_count": strict_count,
         "externality_proved_count": external_count,
+        "shared_well_founded_progress_measure_bound": shared.get("generic_well_founded_measure_proved") is True,
+        "gap_b_specific_action_bindings_proved": shared.get("specific_internal_action_bindings_proved"),
+        "provider_totality_proved": shared.get("provider_totality_proved"),
         "cc_r3_proved": False,
         "terminal_credit_delta": 0,
     }
