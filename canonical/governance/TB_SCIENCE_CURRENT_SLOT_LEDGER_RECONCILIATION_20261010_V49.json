@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V49",
+  "date": "2026-10-10",
+  "status": "CURRENT_RANK20_V5_EFFECTIVE_PREACTIVATION_AUTHORITY_VERIFIED__ACTIVATION_ABSENT__ZERO_EXPOSURE",
+  "predecessor": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V48.json",
+    "git_blob_sha": "2d8c04e85b4d611b2074a6fdcab71c031febe284"
+  },
+  "promotion_verification": {
+    "path": "canonical/verification/TB_SCIENCE_RANK20_V5_EFFECTIVE_AUTHORITY_PROMOTION_VERIFY_20261010_V1.json",
+    "git_blob_sha": "37d4bbe33d3d1b50cfc7ace8a07e2b33df94c174",
+    "pass": true
+  },
+  "counts": {
+    "benchmark_trials_consumed": 18,
+    "consumed_successes_final": 0,
+    "consumed_failures_final": 18,
+    "started_result_pending": 0,
+    "finalized_slots": 18,
+    "active_in_flight_slot_count": 0
+  },
+  "next_slot": {
+    "ledger_schedule_rank": 20,
+    "frozen_manifest_schedule_order": 19,
+    "task_rank": 19,
+    "slot_id": "terminal-bench-science/hysteretic-aquifer-control::trial-0",
+    "task_digest": "sha256:681df0c3b2ada03a933ac4d2e11f07983676f87a9f26b61e416987904b880289"
+  },
+  "logical_attempt_id": "c7a02ecc6b11f4338120f05cd922370d361ce79e104549f95b656df3b51cb2bb",
+  "execution_claim_binding_digest": "sha256:aa0d91d18bb597319414b7385a92248992c093e14bf9c8f5677b72c05cb09beb",
+  "claim_epoch_id": "RANK20_V13_WORKFLOW_IMPORT_REPAIR_V2_IDENTITY_20261010_V5",
+  "public_effective_authority": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "merge_commit_sha": "ee3436705ea801a45bfc08d6b5d77f0b199e6c9c",
+    "execution_surface_git_blob_sha": "ddec26f44e4b97eb2b8f76029b889164648fd109",
+    "authority_git_blob_sha": "ed796d6bb51e14fcacdea9222124897321856ef8",
+    "ledger_git_blob_sha": "317b6997344d8fa588a20a73b3c7978bae2f2616",
+    "execution_authority_effective": true,
+    "task_read_authority_effective": true,
+    "activation_present": false
+  },
+  "rank20_task_read_history": false,
+  "rank20_task_started": false,
+  "rank20_start_cas_acquired": false,
+  "rank20_benchmark_trials_consumed": 0,
+  "scheduler": {
+    "frozen": true,
+    "reason": "RANK20_V5_EFFECTIVE_AUTHORITY_VERIFIED__FRESH_ACTIVATION_AUTHORITY_REQUIRED",
+    "only_authorized_transition": "MINT_FRESH_RANK20_V5_ACTIVATION_AUTHORITY__THEN_EXACT_ONE_FILE_ACTIVATION_BRANCH"
+  },
+  "execution_authority": true,
+  "task_read_authority": true,
+  "activation_authority": false,
+  "finalization_authority": false,
+  "repair_authority": false,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
