@@ -155,6 +155,16 @@
       "path": "canonical/verification/ESCAPE_PROGRESS_SHARED_GAP_EXECUTABLE_AUDIT_V4_REBASE_VERIFY_20261010_V1.json",
       "git_blob_sha": "ef08c184710ab53764159240e555554153578d69",
       "role": "AUTHENTICATED_ESCAPE_ROW_PROOF_GATE_VERIFICATION"
+    },
+    {
+      "path": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_AUDIT_V5_ACTIVATION_20261010_V1.json",
+      "git_blob_sha": "41a50db02a1b60a4ab47a02ddb29d5f9f3338019",
+      "role": "CURRENTNESS_AWARE_ESCAPE_ROW_PROOF_GATE_ACTIVATION"
+    },
+    {
+      "path": "canonical/verification/ESCAPE_PROGRESS_SHARED_GAP_EXECUTABLE_AUDIT_V5_VERIFY_20261010_V1.json",
+      "git_blob_sha": "db0d6ae5c19193f2966c9ec4cb47980652e2405e",
+      "role": "INDEPENDENT_ESCAPE_V5_CURRENTNESS_GATE_VERIFICATION"
     }
   ],
   "classifications": [
@@ -224,8 +234,8 @@
       "existing_binding": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V6.json",
       "exact_remaining_class": "10_INFORMATION_DEPENDENT_ROWS__SHARED_CONTENT_AUTHENTICATED_POLICY_COVER_REALIZATION_ADAPTER_LIVE_AND_VERIFIED__REAL_ROW_PROOFS_0_OF_10__O_Q_IS_PRIMARY_SHARED_ACCEPTANCE_RESEARCH_COMPRESSION__ROW_PROOF_STILL_REQUIRES_REAL_CURRENT_AVAILABILITY_OR_ACQUIRABILITY_EVIDENCE",
       "new_primitive_status": "NOT_ESTABLISHED",
-      "executable_audit": "canonical/runtime/escape_progress_shared_gap_audit_v4.py",
-      "current_gate_status": "V6_POLICY_COVER_ADAPTER_PLUS_AUTHENTICATED_V4_GATE_VERIFIED__REAL_AUTHENTICATED_ROW_PROOFS_0_OF_10__ROW_PREMISES_OPEN",
+      "executable_audit": "canonical/runtime/escape_progress_shared_gap_audit_v5.py",
+      "current_gate_status": "V6_POLICY_COVER_ADAPTER_PLUS_CURRENTNESS_AWARE_AUTHENTICATED_V5_GATE_VERIFIED__REAL_AUTHENTICATED_ROW_PROOFS_0_OF_10__ROW_PREMISES_OPEN",
       "causal_reclassification": {
         "path": "canonical/governance/ESCAPE_PROGRESS_FINANCE_INDEX_CAUSAL_RECLASSIFICATION_20261010_V1.json",
         "git_blob_sha": "ea256418ec1f8048c7566c6ecc74206d9d1ac529",
@@ -235,9 +245,9 @@
       "successor_audit_intent": "canonical/action_intents/ESCAPE_PROGRESS_V2_SUCCESSOR_AUDIT_IMPLEMENTATION_INTENT_20261010_V1.json",
       "shared_route_reduction": "canonical/governance/ESCAPE_PROGRESS_SUCCESSOR_SHARED_ROUTE_REDUCTION_20261010_V1.json",
       "reached_state_v2_reuse": "canonical/governance/ESCAPE_PROGRESS_REACHED_STATE_V2_REUSE_RECONCILIATION_20261010_V1.json",
-      "executable_audit_git_blob_sha": "61614d3f026f5bf3e68589a5c90f779b63867d84",
-      "audit_verification": "canonical/verification/ESCAPE_PROGRESS_SHARED_GAP_EXECUTABLE_AUDIT_V4_REBASE_VERIFY_20261010_V1.json",
-      "audit_verification_git_blob_sha": "ef08c184710ab53764159240e555554153578d69",
+      "executable_audit_git_blob_sha": "1f1dcf4806b3d944721abe86f46f018c5345726d",
+      "audit_verification": "canonical/verification/ESCAPE_PROGRESS_SHARED_GAP_EXECUTABLE_AUDIT_V5_VERIFY_20261010_V1.json",
+      "audit_verification_git_blob_sha": "db0d6ae5c19193f2966c9ec4cb47980652e2405e",
       "gap_a_policy_cover_adapter": {
         "activation": "canonical/governance/ESCAPE_GAP_A_POLICY_COVER_ADAPTER_ACTIVATION_20261010_V1.json",
         "behavioral_verification": "canonical/verification/ESCAPE_GAP_A_POLICY_COVER_ADAPTER_VERIFY_20261010_V1.json",
@@ -247,7 +257,11 @@
       },
       "structural_audit": "canonical/runtime/escape_progress_shared_gap_audit_v3.py",
       "structural_audit_git_blob_sha": "14adf2c1a431285a542340a740e27e764edb1ce5",
-      "row_proof_authority_rule": "RAW_OR_SELF_HASHED_IN_MEMORY_ROW_PROOFS_HAVE_ZERO_CC_R3_AUTHORITY__CANONICAL_BYTE_BINDING_PLUS_DISTINCT_INDEPENDENT_SEMANTIC_VERIFICATION_REQUIRED"
+      "row_proof_authority_rule": "RAW_OR_SELF_HASHED_IN_MEMORY_ROW_PROOFS_HAVE_ZERO_CC_R3_AUTHORITY__CANONICAL_PROOF_BYTES_PLUS_DISTINCT_INDEPENDENT_SEMANTIC_VERIFICATION_REQUIRED__IMMUTABLE_EVIDENCE_EXACT_BLOB_REQUIRED__MUTABLE_CURRENT_EVIDENCE_PATH_AUTHORITATIVE__ROW_VERIFIER_MUST_BIND_EXACT_CURRENT_EVIDENCE_BYTES_AND_ATTEST_CURRENT_ROUTE_SEMANTICS",
+      "currentness_activation": {
+        "path": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_AUDIT_V5_ACTIVATION_20261010_V1.json",
+        "git_blob_sha": "41a50db02a1b60a4ab47a02ddb29d5f9f3338019"
+      }
     },
     {
       "residual_id": "ESCAPE_GAP_B_INTERNAL_ROUTE_STRICT_PROGRESS",
@@ -258,8 +272,8 @@
       "existing_binding": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V6.json",
       "exact_remaining_class": "3_CURRENT_INTERNAL_ROWS__GENERIC_REPAIR_VERIFICATION_RECERTIFICATION_AND_LIVE_REENTRY_SOLVED__REMAINING_IS_CURRENT_EXECUTABLE_VERIFIED_ACTION_PLUS_WELL_FOUNDED_ACCEPTANCE_RELEVANT_MEASURE_AND_ALL_OUTCOME_STRICT_PROGRESS",
       "new_primitive_status": "NOT_ESTABLISHED",
-      "executable_audit": "canonical/runtime/escape_progress_shared_gap_audit_v4.py",
-      "current_gate_status": "AUTHENTICATED_V4_GATE_VERIFIED__REAL_AUTHENTICATED_ROW_PROOFS_0_OF_3__GAP_B_TOTALITY_OPEN",
+      "executable_audit": "canonical/runtime/escape_progress_shared_gap_audit_v5.py",
+      "current_gate_status": "CURRENTNESS_AWARE_AUTHENTICATED_V5_GATE_VERIFIED__REAL_AUTHENTICATED_ROW_PROOFS_0_OF_3__GAP_B_TOTALITY_OPEN",
       "causal_reclassification": {
         "path": "canonical/governance/ESCAPE_PROGRESS_FINANCE_INDEX_CAUSAL_RECLASSIFICATION_20261010_V1.json",
         "git_blob_sha": "ea256418ec1f8048c7566c6ecc74206d9d1ac529",
@@ -269,12 +283,16 @@
       "successor_audit_intent": "canonical/action_intents/ESCAPE_PROGRESS_V2_SUCCESSOR_AUDIT_IMPLEMENTATION_INTENT_20261010_V1.json",
       "shared_route_reduction": "canonical/governance/ESCAPE_PROGRESS_SUCCESSOR_SHARED_ROUTE_REDUCTION_20261010_V1.json",
       "reached_state_v2_reuse": "canonical/governance/ESCAPE_PROGRESS_REACHED_STATE_V2_REUSE_RECONCILIATION_20261010_V1.json",
-      "executable_audit_git_blob_sha": "61614d3f026f5bf3e68589a5c90f779b63867d84",
-      "audit_verification": "canonical/verification/ESCAPE_PROGRESS_SHARED_GAP_EXECUTABLE_AUDIT_V4_REBASE_VERIFY_20261010_V1.json",
-      "audit_verification_git_blob_sha": "ef08c184710ab53764159240e555554153578d69",
+      "executable_audit_git_blob_sha": "1f1dcf4806b3d944721abe86f46f018c5345726d",
+      "audit_verification": "canonical/verification/ESCAPE_PROGRESS_SHARED_GAP_EXECUTABLE_AUDIT_V5_VERIFY_20261010_V1.json",
+      "audit_verification_git_blob_sha": "db0d6ae5c19193f2966c9ec4cb47980652e2405e",
       "structural_audit": "canonical/runtime/escape_progress_shared_gap_audit_v3.py",
       "structural_audit_git_blob_sha": "14adf2c1a431285a542340a740e27e764edb1ce5",
-      "row_proof_authority_rule": "RAW_OR_SELF_HASHED_IN_MEMORY_ROW_PROOFS_HAVE_ZERO_CC_R3_AUTHORITY__CANONICAL_BYTE_BINDING_PLUS_DISTINCT_INDEPENDENT_SEMANTIC_VERIFICATION_REQUIRED"
+      "row_proof_authority_rule": "RAW_OR_SELF_HASHED_IN_MEMORY_ROW_PROOFS_HAVE_ZERO_CC_R3_AUTHORITY__CANONICAL_PROOF_BYTES_PLUS_DISTINCT_INDEPENDENT_SEMANTIC_VERIFICATION_REQUIRED__IMMUTABLE_EVIDENCE_EXACT_BLOB_REQUIRED__MUTABLE_CURRENT_EVIDENCE_PATH_AUTHORITATIVE__ROW_VERIFIER_MUST_BIND_EXACT_CURRENT_EVIDENCE_BYTES_AND_ATTEST_CURRENT_ROUTE_SEMANTICS",
+      "currentness_activation": {
+        "path": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_AUDIT_V5_ACTIVATION_20261010_V1.json",
+        "git_blob_sha": "41a50db02a1b60a4ab47a02ddb29d5f9f3338019"
+      }
     },
     {
       "residual_id": "ASSURANCE_CLOSURE_COMPILER_NOT_LIVE_DEFAULT",
@@ -458,7 +476,9 @@
     "o_shared_law_activation": "canonical/governance/ESCAPE_O_OBJECTIVE_ACCEPTANCE_SHARED_LAW_ACTIVATION_20261010_V1.json",
     "q_shared_law_activation": "canonical/governance/ESCAPE_Q_QUALITATIVE_ACCEPTANCE_SHARED_LAW_ACTIVATION_20261010_V1.json",
     "o_shared_law_bound": true,
-    "q_shared_law_bound": true
+    "q_shared_law_bound": true,
+    "successor_escape_audit_v5_projected": true,
+    "successor_escape_audit_v5_verification": "canonical/verification/ESCAPE_PROGRESS_SHARED_GAP_EXECUTABLE_AUDIT_V5_VERIFY_20261010_V1.json"
   },
   "current_source_binding_law": {
     "mutable_current_authorities": "CANONICAL_PATH_IDENTITY_AUTHORITATIVE__OBSERVED_BLOB_IS_DIAGNOSTIC_ONLY__RECHECK_CURRENT_BYTES_BEFORE_SCHEDULING_OR_TRUTH_CLAIM",
