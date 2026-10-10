@@ -97,9 +97,11 @@ def _required_target_regions(
     candidate_kind: str,
 ) -> list[set[str]]:
     if repair.get("kind") == "UNCOVERED_REGION_POLICY_REPAIR":
-        return [
-            {str(x) for x in repair.get("uncovered_region_ids") or []}
-        ] if candidate_kind == "POLICY" else []
+        return (
+            [{str(x)} for x in repair.get("uncovered_region_ids") or []]
+            if candidate_kind == "POLICY"
+            else []
+        )
 
     if repair.get("kind") != "UNSPLITTABLE_EQUIVALENCE_CLASS_REPAIR":
         return []
