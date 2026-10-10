@@ -15,6 +15,7 @@ from pathlib import Path
 from typing import Any, Mapping
 
 from canonical.runtime import professional_quality_whole_leaf_domain_equivalence_v1 as domain
+from canonical.runtime import professional_quality_whole_leaf_scope_batch_v1 as scope_batch
 from canonical.runtime import professional_r10_decision_semantic_certificate_v1 as semcert
 from canonical.runtime import professional_quality_r10_execution_guard_v1 as guard
 from canonical.runtime import professional_quality_r10_execution_property_truth_verify_v1 as execprop
@@ -23,11 +24,12 @@ ROOT=Path(__file__).resolve().parents[2]
 SCHEMA="PROJECT_BRAIN_PROFESSIONAL_QUALITY_R10_SEMANTIC_PROPERTY_TRUTH_VERIFY_V1"
 LEAF_ID="PQ::R10_ANALYSIS_DECISION::SEMANTIC"
 ROOT_ID="R10_ANALYSIS_DECISION"
-EPOCH="2026-10-10T17:50:00+02:00"
+EPOCH=scope_batch.EPOCH
 ACCEPTANCE="DOMAIN_SPECIFIC_CLAIM_SEMANTICS_GROUNDING_SCOPE_UNCERTAINTY_AND_ALL_ROOT_RELEVANT_DEFEATERS_RESOLVED_WITH_TYPED_EVIDENCE"
 
 PINS={
  "manifest":("canonical/governance/PROFESSIONAL_QUALITY_LEAF_BINDING_MANIFEST_20261010_V1.json","a7cad32c9fd969ff2c3857bb924c7bd746237ec2"),
+ "scope_batch_runtime":("canonical/runtime/professional_quality_whole_leaf_scope_batch_v1.py","82ab66c7852fc327821b23ff80dd46de3b81525c"),
  "scope_batch_verify":("canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_SCOPE_BATCH_VERIFY_20261010_V1.json","4c2d40a262f18f34bb35f94b59660d60972d45ef"),
  "semantic_source":("canonical/verification/PROFESSIONAL_QUALITY_R10_DECISION_SUFFICIENCY_SCOPED_VERIFY_20261010_V1.json","18574110321eb1bacc18db46cbd0673bf6a0a0ac"),
  "semantic_history":("canonical/verification/ONE_SHOT_DECISION_SUFFICIENT_GATE_VERIFY_20261009_V2.json","188881365c8bb182ebd10cd4bc37aedff8547acd"),
@@ -122,16 +124,21 @@ def evaluate_documents(
   return _fail("R10_SEMANTIC_ACCEPTANCE_DRIFT",observed_acceptance=_leaf_acceptance(manifest))
 
  batch=scope_batch_verify.get("independent_replay") or {}
+ batch_subject=scope_batch_verify.get("subject") or {}
+ batch_deps=scope_batch_verify.get("pinned_dependencies") or {}
  if (
   not str(scope_batch_verify.get("status") or "").startswith("PASS__")
   or batch.get("leaf_count")!=24
   or batch.get("domain_equivalence_pass_count")!=24
   or batch.get("scope_complete_count")!=24
   or batch.get("property_truth_count")!=0
+  or batch.get("unique_claim_id_count")!=24
+  or (batch_subject.get("runtime") or {}).get("git_blob_sha")!=PINS["scope_batch_runtime"][1]
+  or batch_deps.get("leaf_manifest")!=PINS["manifest"][1]
  ):
   return _fail("WHOLE_LEAF_SCOPE_BATCH_NOT_ADMISSIBLE")
 
- claim_scope=domain.build_claim_scope(manifest,LEAF_ID,epoch=EPOCH)
+ claim_scope=domain.build_claim_scope(manifest,LEAF_ID,epoch=scope_batch.EPOCH)
  dv=domain.evaluate(manifest,claim_scope)
  if dv.get("pass") is not True or dv.get("whole_leaf_domain_equivalence_proved") is not True:
   return _fail("R10_SEMANTIC_DOMAIN_EQUIVALENCE_FAILED",verdict=dv)
@@ -220,7 +227,7 @@ def verify(*,repo_root:str|Path|None=None)->dict[str,Any]:
   observed=_blob(p)
   if observed!=expected:
    return _fail(key.upper()+"_BLOB_STALE",expected_blob=expected,observed_blob=observed)
-  if key not in {"domain_runtime","semantic_runtime","guard_runtime","execution_property_runtime"}:
+  if key not in {"scope_batch_runtime","domain_runtime","semantic_runtime","guard_runtime","execution_property_runtime"}:
    docs[key]=_load(p)
  return evaluate_documents(
   docs["manifest"],docs["scope_batch_verify"],docs["semantic_source"],docs["semantic_history"],
