@@ -44,6 +44,11 @@ def evaluate_spread_relation_identity(payload: Mapping[str, Any]) -> dict[str, A
     return evaluate(payload)
 
 
+def evaluate_tlac_mrel_bounded_sense(payload: Mapping[str, Any]) -> dict[str, Any]:
+    from canonical.runtime.tlac_mrel_bounded_sense_truth_certificate_v1 import evaluate
+    return evaluate(payload)
+
+
 SCHEMA = "PROJECT_BRAIN_SEMANTIC_TRUTH_DISPATCH_V1"
 
 
@@ -84,6 +89,8 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
         return evaluate_regcap_buffer_reference(payload)
     if kind == "SPREAD_RELATION_IDENTITY":
         return evaluate_spread_relation_identity(payload)
+    if kind == "TLAC_MREL_BOUNDED_SENSE":
+        return evaluate_tlac_mrel_bounded_sense(payload)
     return {
         "schema": SCHEMA,
         "pass": False,
