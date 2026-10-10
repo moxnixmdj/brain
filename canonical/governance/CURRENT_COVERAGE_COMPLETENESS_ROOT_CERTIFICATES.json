@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_COVERAGE_COMPLETENESS_ROOT_CERTIFICATES_V1",
   "date": "2026-10-10",
-  "status": "ACTIVE__FROZEN_R3_PROMOTION_SAFETY_CLAIM__THREE_OPEN_CC_ROOT_CERTIFICATE_OBLIGATIONS__ZERO_PROVED__ZERO_CREDIT",
+  "status": "ACTIVE__FROZEN_R3_PROMOTION_SAFETY_CLAIM__CC_R3_PROVED_CURRENT__CC_R1_CC_R2_OPEN__R4_OPEN__ZERO_CREDIT",
   "mission_binding": {
     "pointer_path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
     "authority_path": "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
@@ -10,7 +10,7 @@
   },
   "registry": {
     "path": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_CERTIFICATE_REGISTRY_V1.json",
-    "git_blob_sha": "c080ba321d1b40d9e2fe44ca259a527d037ea003"
+    "git_blob_sha": "2ccef155674d856a924628ba5a59fb6d3ed48ece"
   },
   "guard": {
     "path": "canonical/runtime/coverage_root_certificate_registry_guard_v1.py",
@@ -30,10 +30,10 @@
     "R2",
     "R3"
   ],
-  "proved": 0,
-  "open": 3,
+  "proved": 1,
+  "open": 2,
   "r4_proof_closure": false,
-  "next": "PROVE_OR_FALSIFY_CC_R3_TERMINAL_CLOSURE_V1_FOR_ACTIVE_CLAIM_WITH_EXECUTABLE_SEMANTIC_VERIFIER__NO_ROOT_PROMOTION_BEFORE_EXACT_CERTIFICATE_VERIFIER_RECEIPT_BINDING",
+  "next": "ATTACK_CC_R1_REALITY_CONTAINMENT_V1_FOR_THE_SAME_ACTIVE_CLAIM__THEN_CC_R2__R4_REMAINS_OPEN",
   "terminal_credit_delta": 0,
   "root_theorem_falsifier": {
     "path": "canonical/runtime/root_theorem_falsifier_v1.py",
@@ -74,5 +74,16 @@
   "registry_claim_alignment_tests": {
     "path": "canonical/tests/test_root_theorem_registry_claim_alignment_v1.py",
     "git_blob_sha": "d9ec8aee6cfbec538d49c65deb912121060cc6c5"
+  },
+  "latest_proved_root": {
+    "root_id": "CC_R3_TERMINAL_CLOSURE_V1",
+    "certificate_path": "canonical/governance/CC_R3_PROMOTION_SAFETY_CERTIFICATE_20261010_V1.json",
+    "certificate_git_blob_sha": "20b6f523a2885b87cd04acbe136e092b5f18e5a0",
+    "semantic_verifier_path": "canonical/runtime/cc_r3_promotion_safety_semantic_verifier_v1.py",
+    "semantic_verifier_git_blob_sha": "c2d73b1dbabf9762efc0aa8ac7bf9e6930eff026",
+    "independent_verification_path": "canonical/verification/CC_R3_PROMOTION_SAFETY_SEMANTIC_VERIFY_20261010_V1.json",
+    "independent_verification_git_blob_sha": "69395f8350b4e13f12f8ba591a17f43fe24a23bb",
+    "proof_mode": "DECISION_PROCEDURE",
+    "terminal_credit_delta": 0
   }
 }
