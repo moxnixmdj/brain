@@ -217,6 +217,14 @@
       {
         "id": "M_R4_STALE_SEMANTIC_VERIFIER_BLOB",
         "expected": "R4_LIVE_BINDING_OR_SLOT_REJECTION"
+      },
+      {
+        "id": "M_R4_STRUCTURALLY_VALID_CERTIFICATE_SEMANTICALLY_REJECTED",
+        "expected": "R4_SEMANTIC_ROOT_VERIFICATION_FAILED"
+      },
+      {
+        "id": "M_R4_PROVED_SLOT_WITHOUT_ACTIVE_CLAIM_FOR_SEMANTIC_RERUN",
+        "expected": "R4_SEMANTIC_ACTIVE_CLAIM_MISSING"
       }
     ],
     "mutation_score_semantics": "DIAGNOSTIC_ONLY__NEVER_UNIVERSAL_COMPLETENESS_PROOF"
@@ -226,13 +234,14 @@
     "pure_boolean_valuations_checked": 16,
     "counterexamples_with_R1_R2_R3": 0,
     "each_of_R1_R2_R3_individually_load_bearing": true,
-    "local_test_count": 39,
+    "local_test_count": 36,
     "local_test_failures": 0,
     "scope": "ARCHITECTURE_LOGIC_ONLY__NOT_CURRENT_MISSION_CLOSURE",
     "r4_cross_binding_counterexample_count": 3,
     "r4_cross_binding_symbolic_engine": "WOLFRAM_LANGUAGE",
     "current_registry_state": "PASS__0_PROVED__3_OPEN__R4_PROOF_CLOSURE_FALSE",
-    "remote_exact_byte_replay": "SPRITE__39_PASSED__0_FAILED"
+    "remote_exact_byte_replay": "SPRITE__39_PASSED__0_FAILED",
+    "remote_exact_byte_semantic_replay": "SPRITE__36_PASSED__0_FAILED"
   },
   "reconciliation": {
     "current_base_commit": "63ce24491f2e06ebf4e1dfaea945180d7e73bf83",
@@ -243,7 +252,7 @@
       "status": "CLOSED_AS_SUPERSEDED_LIVE_INTEGRATION_VEHICLE",
       "preserve_evidence": true
     },
-    "active_pr": 3870
+    "active_pr": 3883
   },
   "accounting": {
     "incremental_spend_usd": 0,
@@ -412,5 +421,16 @@
     "empty_or_foreign_receipt_authority": false,
     "stored_receipt_can_override_verifier_rejection": false,
     "terminal_credit_delta": 0
+  },
+  "r4_executable_semantic_root_verification": {
+    "status": "REQUIRED_FOR_EVERY_PROVED_CURRENT_ROOT",
+    "validator": "canonical/runtime/coverage_root_semantic_receipt_v1.py#validate_semantic_root_slot",
+    "authority_path": "canonical/runtime/root_theorem_falsifier_v1.py#execute_semantic_root_verifiers",
+    "rule": "EVERY_PROVED_CURRENT_CANONICAL_ROOT_MUST_PASS_EXECUTABLE_SEMANTIC_RERUN_ON_EXACT_CERTIFICATE_AND_VERIFIER_BYTES",
+    "zero_proved_slots": "VACUOUS_PASS__R4_STILL_OPEN_BY_REGISTRY",
+    "semantic_rejection": "R4_SEMANTIC_ROOT_VERIFICATION_FAILED",
+    "missing_active_claim_with_proved_slot": "R4_SEMANTIC_ACTIVE_CLAIM_MISSING",
+    "independent_receipt_must_bind_rerun_result": true,
+    "structural_registry_pass_sufficient": false
   }
 }
