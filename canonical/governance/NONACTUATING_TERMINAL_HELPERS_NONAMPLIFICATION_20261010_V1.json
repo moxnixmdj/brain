@@ -1,0 +1,20 @@
+{
+  "schema": "PROJECT_BRAIN_NONACTUATING_HELPER_CUT_V1",
+  "date": "2026-10-10",
+  "subjects": [
+    {
+      "path": "canonical/runtime/terminal_candidate_donor_independence_audit_v1.py",
+      "git_blob_sha": "7b3713267d32f9b4ae7e2ca56ea17c5859bdec71"
+    },
+    {
+      "path": "canonical/runtime/terminal_autopilot_v1.py",
+      "git_blob_sha": "78fa2cbabf8ed5e70de8b3ed987b510ca033076b"
+    },
+    {
+      "path": "canonical/runtime/option_preserving_capability_optimizer_v1.py",
+      "git_blob_sha": "367478e71b015fb2f4b7cc40dad34f88a7f47238"
+    }
+  ],
+  "verification_receipt": "canonical/verification/CURRENT_RUNTIME_BYTE_COHERENCE_SPRITE_VERIFICATION_20261010_V1.json",
+  "terminal_credit_delta": 0
+}
