@@ -7,6 +7,7 @@ from typing import Any
 from canonical.runtime import professional_quality_scoped_evidence_v1 as b
 from canonical.runtime import professional_candidate_search_semantic_certificate_v1 as r2c
 from canonical.runtime import professional_r9_temporal_semantic_certificate_v1 as r9c
+from canonical.runtime import professional_r5_evaluator_semantic_certificate_v1 as r5c
 
 ROOT = b.ROOT
 REGISTRY = b.REGISTRY
@@ -23,6 +24,12 @@ R9_SOURCE_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R9_TEMPORAL_SEMANTIC_VERI
 R9_SCOPE_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R9_TEMPORAL_SEMANTIC_SCOPE_V1"
 R9_SOURCE_STATUS = "PASS__PINNED_EXACT_BYTES__PYCOMPILE__8_OF_8__BOUNDED_R9_FROZEN_TEMPORAL_ACCOUNTING_SEMANTICS__ZERO_GLOBAL_LEAF_CREDIT"
 R9_SCOPE_STATUS = "ACTIVE_SCOPED_FROZEN_POPULATION_CONSERVATIVE_CENSORING_SEMANTICS__8_OF_8_INDEPENDENT_REPLAY__ZERO_GLOBAL_LEAF_CREDIT"
+
+R5_LEAVES = {"PQ::R5_EVALUATOR_REFERENCE::SEMANTIC"}
+R5_SOURCE_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R5_EVALUATOR_SEMANTIC_VERIFY_V1"
+R5_SCOPE_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R5_EVALUATOR_SEMANTIC_SCOPE_V1"
+R5_SOURCE_STATUS = "PASS__PINNED_EXACT_BYTES__6_OF_6__BOUNDED_R5_CONDITIONAL_EVALUATOR_REFERENCE_SEMANTICS__ZERO_GLOBAL_LEAF_CREDIT"
+R5_SCOPE_STATUS = "ACTIVE_SCOPED_CONDITIONAL_EVALUATOR_REFERENCE_ROBUSTNESS_SEMANTICS__6_OF_6_INDEPENDENT_REPLAY__ZERO_GLOBAL_LEAF_CREDIT"
 
 
 def _compiler_binding(
@@ -224,6 +231,75 @@ def _validate_r9(entry: dict[str, Any], root: Path) -> dict[str, Any]:
     return _result(entry, errors, semantic)
 
 
+
+def _validate_r5(entry: dict[str, Any], root: Path) -> dict[str, Any]:
+    errors = b._common_checks(entry, r5c.ROOT_ID, R5_LEAVES)
+    source, e = b._read_bound(root, entry.get("source_receipt"), "SOURCE")
+    errors.extend(e)
+    scope, e = b._read_bound(root, entry.get("scope_governance"), "SCOPE")
+    errors.extend(e)
+    compiler_sha, _ = _compiler_binding(entry, root, errors)
+
+    if (
+        source is None
+        or source.get("schema") != R5_SOURCE_SCHEMA
+        or source.get("status") != R5_SOURCE_STATUS
+    ):
+        errors.append("SOURCE_INVALID")
+    elif (
+        (source.get("exact_blobs") or {}).get("runtime") != compiler_sha
+        or (source.get("replay") or {}).get("tests_passed") != 6
+        or (source.get("replay") or {}).get("tests_failed") != 0
+    ):
+        errors.append("SOURCE_BINDING_INVALID")
+
+    semantic = None
+    if (
+        scope is None
+        or scope.get("schema") != R5_SCOPE_SCHEMA
+        or scope.get("status") != R5_SCOPE_STATUS
+    ):
+        errors.append("SCOPE_INVALID")
+    else:
+        parts = scope.get("exact_components") or {}
+        governance, e = b._read_bound(
+            root, parts.get("source_governance"), "SOURCE_GOVERNANCE"
+        )
+        errors.extend(e)
+        source_verify, e = b._read_bound(
+            root, parts.get("source_execution_verification"), "SOURCE_VERIFY"
+        )
+        errors.extend(e)
+        sem_verify = parts.get("semantic_verification")
+        declared_source = (
+            (entry.get("source_receipt") or {}).get("git_blob_sha")
+            if isinstance(entry.get("source_receipt"), dict)
+            else None
+        )
+        if (
+            not isinstance(sem_verify, dict)
+            or sem_verify.get("git_blob_sha") != declared_source
+        ):
+            errors.append("SCOPE_SEMANTIC_VERIFICATION_MISMATCH")
+        if governance is not None and source_verify is not None:
+            binding = {
+                "root_id": r5c.ROOT_ID,
+                "claim_kind": r5c.CLAIM_KIND,
+                "governance_digest": r5c.digest(governance),
+                "verification_digest": r5c.digest(source_verify),
+                "semantic_roles": dict(r5c.SEMANTIC_ROLES),
+            }
+            semantic = r5c.certify(governance, source_verify, binding)
+            if semantic.get("pass") is not True:
+                errors.append("SEMANTIC_REPLAY_FAILED")
+            if source is not None and not _claim_scope_equivalent(
+                source.get("claim_scope"), semantic.get("claim_scope")
+            ):
+                errors.append("CLAIM_SCOPE_MISMATCH")
+
+    return _result(entry, errors, semantic)
+
+
 def validate_entry(entry: dict[str, Any], *, repo_root: Path = ROOT) -> dict[str, Any]:
     if isinstance(entry, dict):
         kind = entry.get("claim_kind")
@@ -231,6 +307,8 @@ def validate_entry(entry: dict[str, Any], *, repo_root: Path = ROOT) -> dict[str
             return _validate_r2(entry, repo_root)
         if kind == r9c.CLAIM_KIND:
             return _validate_r9(entry, repo_root)
+        if kind == r5c.CLAIM_KIND:
+            return _validate_r5(entry, repo_root)
     return b.validate_entry(entry, repo_root=repo_root)
 
 
