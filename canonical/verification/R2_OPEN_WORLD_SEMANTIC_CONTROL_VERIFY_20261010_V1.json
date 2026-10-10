@@ -1,1 +1,54 @@
-{}
+{
+  "schema": "PROJECT_BRAIN_R2_OPEN_WORLD_SEMANTIC_CONTROL_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_BRANCH_BYTES__11_OF_11_FOCUSED_TESTS__LIVE_FRONT_DOOR_SOURCE_BINDING_PARSED__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "successor/r2-open-world-control-closure-20261010-v1",
+    "exact_blobs": {
+      "canonical/runtime/residual_semantic_control_invariance_v1.py": "f2a19e925c331fc575f5b7129011b9b042452edd",
+      "canonical/runtime/residual_semantic_control_invariance_verify_v1.py": "248d23cb86a9a277383ba4204f340ab17e137cc6",
+      "canonical/runtime/open_world_semantic_control_v1.py": "cea865ac319eb420977b60378de213fc11be9090",
+      "canonical/runtime/minimum_information_origin_policy_v1.py": "8e5e7795268927ade207f8af92cfd77fe50d0275",
+      "canonical/runtime/unified_cognitive_fabric_v1.py": "251aa4ec657af2306ba282e71d3dd6f6295dd388",
+      "canonical/tests/test_residual_semantic_control_invariance_v1.py": "949685429222471c5e96f722df4c650d18b90344"
+    }
+  },
+  "independent_carrier": {
+    "provider": "Sprites",
+    "sprite": "brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/tmp/r2control",
+    "tests_run": 11,
+    "failures": 0,
+    "errors": 0,
+    "conclusion": "PASS"
+  },
+  "proved": [
+    "UNRESOLVED_OPEN_WORLD_SEMANTIC_IDENTITY_NEED_NOT_BE_SELECTED_TO_CHOOSE_THE_NEXT_INFORMATION_ACQUISITION_CONTROL_ACTION",
+    "THE_INFORMATION_ORIGIN_ROUTE_REJECTS_NESTED_SENSE_CONCEPT_HYPOTHESIS_AND_RESIDUAL_WORLD_IDENTITY_INPUTS",
+    "UNKNOWN_INFORMATION_ORIGIN_ROUTES_TO_MINIMUM_CLARIFICATION",
+    "DELEGATED_EXTERNAL_WORLD_INFORMATION_ROUTES_TO_MINIMUM_AUTHENTICATED_RESEARCH",
+    "BOUND_EXTERNAL_SOURCE_ROUTES_TO_BOUND_SOURCE_OBSERVATION_ONLY",
+    "ALREADY_BOUND_CONTEXT_IS_NOT_MISCLASSIFIED_AS_RESIDUAL_CONTROL",
+    "DECISION_IRRELEVANT_CASES_GAIN_NO_CONTROL_AUTHORITY",
+    "THE_INDEPENDENT_VERIFIER_RECOMPUTES_THE_CANDIDATE_AND_REJECTS_ACTION_TAMPERING",
+    "CONTROL_AUTHORITY_IS_SCOPED_TO_NEXT_INFORMATION_ACQUISITION_ONLY",
+    "SEMANTIC_TRUTH_AND_FINAL_DOMAIN_ACTION_AUTHORITY_REMAIN_FALSE",
+    "THE_UNIFIED_COGNITIVE_FABRIC_BINDS_THE_NEW_CONTROL_MODE_AND_AUTO_ROUTE_SURFACE"
+  ],
+  "hard_nonclaims": [
+    "NO_WORD_SENSE_IS_RESOLVED",
+    "NO_OPEN_WORLD_SEMANTIC_COMPLETENESS",
+    "NO_FINAL_DOMAIN_ACTION_IS_AUTHORIZED",
+    "NO_FINANCE_SEMANTIC_TAIL_CLOSURE",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
