@@ -191,7 +191,7 @@
     "path": "canonical/governance/TB_SCIENCE_RANK20_CAPABILITY_FIRST_CHECKPOINT_ADMISSION_20261010_V1.json",
     "git_blob_sha": "b03861813f9b9a730659e6e0b6e7301a45061b04",
     "verification_path": "canonical/verification/TB_SCIENCE_RANK20_CAPABILITY_FIRST_ADMISSION_INDEPENDENT_VERIFICATION_20261010_V1.json",
-    "verification_git_blob_sha": "e38e2a9c655977c48bdaa67ff428b595d47926f0",
+    "verification_git_blob_sha": "9629e579b5125bb06eb12bf74c07edcfb4ab72bf",
     "decision": "ADMIT_CHECKPOINT_AUDIT_EXECUTION",
     "benchmark_role": "NEW_CAPABILITY_VALIDATION",
     "task_read": false,
@@ -201,6 +201,8 @@
     "logical_attempt_id": null,
     "execution_claim_authority": false,
     "execution_authority": false,
-    "activation_authority": false
+    "activation_authority": false,
+    "delivery_branch": "successor/tb-science-rank20-capability-admission-20261010-v2",
+    "delivery_base_commit": "234838faeca635f724cf4bb2a39545e5ab3cb884"
   }
 }
