@@ -1,0 +1,31 @@
+{
+  "schema": "PROJECT_BRAIN_R2_DIRECT_ROUTE_DEPLOYMENT_INDEPENDENT_RECEIPT_V1",
+  "date": "2026-10-10",
+  "status": "INDEPENDENT_PASS__R2_DIRECT_ROUTE_DEPLOYMENT",
+  "candidate_path": "canonical/governance/R2_OEWN_EFFECT_FIELD_DYNAMIC_ROUTE_CANDIDATE_20261010_V1.json",
+  "candidate_git_blob_sha": "7f934bd71797d596d1c1f907841575538fe8868f",
+  "route_id": "DIRECT_ADEQUACY::CROSS_DOCUMENT_OEWN_SEMANTIC_REGISTRY_V5_LATTICE_V9",
+  "runtime_path": "canonical/runtime/r2_cross_document_oewn_semantic_registry_v5_lattice_direct_adequacy_v1.py",
+  "runtime_git_blob_sha": "4a570b3743964b6ac0fd5108353406ba135b1745",
+  "route_verification_path": "canonical/verification/R2_OEWN_EFFECT_FIELD_EDGE_VERIFY_20261010_V1.json",
+  "route_verification_git_blob_sha": "40e7885fc07e050a31d4c36c108a9f84436182a1",
+  "selection_class": "UNIQUE_MATCH_REQUIRED",
+  "independent_verified": true,
+  "preflight_pure_no_effect": true,
+  "matched_route_failure_no_fallthrough": true,
+  "producer_independent_acceptance": true,
+  "exact_raw_obligation_acceptance": true,
+  "deployment_eligible": true,
+  "verification_authority_mutated": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "incremental_spend_usd": 0,
+  "independent_evidence": {
+    "isolated_verification_path": "canonical/verification/R2_OEWN_EFFECT_FIELD_EDGE_VERIFY_20261010_V1.json",
+    "isolated_total_passed": 39,
+    "isolated_total_failed": 0,
+    "python_compile_passed": true,
+    "exact_route_grammar_search_matches_on_current_main": 0,
+    "candidate_contract_validation": "PASS"
+  }
+}
