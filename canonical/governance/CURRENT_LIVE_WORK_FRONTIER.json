@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_LIVE_WORK_FRONTIER_V1",
   "date": "2026-10-10",
-  "status": "CURRENT_POST_COMPOSITION_FRONTIER__PROFESSIONAL_WHOLE_LEAF_V2_CLAIM_SCOPE_GATE_AND_READINESS_VERIFIED__R2_V86_RESEALED__ESCAPE_GAP_B_TWO_ACTIVE_ONE_TB_PARKED__TB_CALLER_REPAIR_VERIFIED__READ_ONLY_EVIDENCE_ONLY__FULL_EXECUTION_FAIL_CLOSED__ZERO_CREDIT",
+  "status": "CURRENT_POST_COMPOSITION_FRONTIER__PROFESSIONAL_WHOLE_LEAF_V2_CLAIM_SCOPE_GATE_AND_READINESS_VERIFIED__TB_RANK20_PARKED__GAP_B_TWO_ACTIVE_ROWS__READ_ONLY_EVIDENCE_ONLY__FULL_EXECUTION_FAIL_CLOSED__ZERO_CREDIT",
   "frontier_id": "LIVE_WORK_FRONTIER_20261010_PROF12_WHOLE_LEAF_CLAIM_V2_V15",
   "scope": {
     "base_main_commit": "2b83205785ecb3bd69ac95943636be1dd7ba5c6a",
@@ -9,7 +9,7 @@
     "source_set": [
       {
         "path": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
-        "git_blob_sha": "9d4112927880bf18132083c0e841e6133cb125ab"
+        "git_blob_sha": "d4a5283288e3477c117f1d75533d0f963abf076d"
       },
       {
         "path": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
@@ -56,6 +56,13 @@
       "source": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_CERTIFICATE_READINESS_AUDIT_V2_VERIFY_20261010_V1.json",
       "git_blob_sha": "2d28d932d08753fdf14c56aa24011e625518a4ef",
       "dynamic_current_pointer_follow": false
+    },
+    {
+      "id": "TB_SCIENCE_CURRENT",
+      "truth": "RANK20_V3_RETIRED_NONCONSUMING__GENERAL_BOUND_RUNTIME_CALLER_REPAIR_VERIFIED_AND_PUBLIC_BASE_PROMOTED__NO_RETRY__PARKED_UNTIL_FRESH_CAPABILITY_FIRST_ADMISSION",
+      "source": "canonical/governance/CURRENT_TB_SCIENCE_EXECUTION.json",
+      "git_blob_sha": "7678d9a56461b121ffd52dd4c9c8df464fda08d2",
+      "dynamic_current_pointer_follow": true
     }
   ],
   "candidates": [
@@ -191,46 +198,6 @@
       }
     },
     {
-      "work_id": "TB_SCIENCE_RANK20_V3_ACTIVATION_PRESTART_EVIDENCE",
-      "work_type": "BENCHMARK_INSTRUMENTATION",
-      "benchmark_role": "NEW_CAPABILITY_VALIDATION",
-      "source": "canonical/governance/CURRENT_TB_SCIENCE_EXECUTION.json",
-      "causal_role": "VALIDATE_EXACT_ONE_FILE_V3_ACTIVATION_PRESTART_TRANSITION_WITHOUT_TASK_READ_OR_START",
-      "readiness": "PARKED__RANK20_V3_FINAL_NONCONSUMING__NO_RETRY_REPLACEMENT_OR_ACTIVATION_AUTHORITY__GENERAL_CALLER_REPAIR_VERIFIED__FUTURE_VALIDATION_REQUIRES_FRESH_ADMISSION_AND_AUTHORITY",
-      "claims_new_primitive": false,
-      "score_state": "UNBOUND",
-      "scheduler_state": "BLOCKED",
-      "prerequisites_satisfied": true,
-      "prerequisite_work_ids": [],
-      "mutation_keys": [
-        "canonical:tb-science",
-        "external:verification-capsule-runner"
-      ],
-      "authority_keys": [
-        "authority:tb-rank20-slot"
-      ],
-      "explicit_conflict_work_ids": [],
-      "evidence_conflict_keys": [],
-      "evidence_acquisition_mode": "NONE",
-      "vector_evidence_state": "UNBOUND",
-      "vector_evidence": {},
-      "read_only_evidence": {
-        "source": "canonical/governance/CURRENT_TB_SCIENCE_EXECUTION.json",
-        "source_git_blob_sha": "7678d9a56461b121ffd52dd4c9c8df464fda08d2",
-        "task_read": true,
-        "task_started": false,
-        "rank20_v3_trials_consumed": 0,
-        "retry_authority": false,
-        "replacement_authority": false,
-        "activation_authority": false,
-        "general_caller_repair_verified": true,
-        "repair_verification": "canonical/verification/TB_SCIENCE_BOUND_START_CAS_CALLER_REPAIR_VERIFY_20261010_V1.json",
-        "repair_verification_git_blob_sha": "bf5aa5cddf6c1272a9664320273d39725470b2e5",
-        "parked_unresolved": true,
-        "vector_bounds_complete": false
-      }
-    },
-    {
       "work_id": "R2_FINANCE_SEMANTIC_ADEQUACY_TAIL",
       "work_type": "CAPABILITY_BUILD",
       "frontier_class": "OPEN_WORLD_EVIDENCE_FRONTIER",
@@ -332,8 +299,8 @@
       "work_id": "ESCAPE_GAP_B_STRICT_PROGRESS_ROW_PROOFS",
       "work_type": "RELIABILITY_IMPROVEMENT",
       "source": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
-      "causal_role": "THREE_INTERNAL_ROWS_REQUIRE_EXECUTABLE_VERIFIED_ACTION_PLUS_WELL_FOUNDED_ACCEPTANCE_RELEVANT_STRICT_PROGRESS",
-      "readiness": "TWO_CURRENT_INTERNAL_ROWS__GDPVAL_AND_CHARTOGRAPHY__STRICT_PROGRESS_WITNESS_EVIDENCE_REQUIRED__TB_RANK20_V3_PARKED_UNRESOLVED",
+      "causal_role": "TWO_CURRENT_EXECUTABLE_INTERNAL_ROWS_REQUIRE_EXECUTABLE_VERIFIED_ACTION_PLUS_WELL_FOUNDED_ACCEPTANCE_RELEVANT_STRICT_PROGRESS__TB_ROW_PARKED_UNRESOLVED_AFTER_NONCONSUMING_RANK20_V3_AND_VERIFIED_GENERAL_REPAIR",
+      "readiness": "TWO_ACTIVE_INTERNAL_ROWS_READY_FOR_READ_ONLY_STRICT_PROGRESS_EVIDENCE__TB_SCIENCE_PARKED_UNTIL_FRESH_CAPABILITY_FIRST_ADMISSION",
       "claims_new_primitive": false,
       "score_state": "UNBOUND",
       "scheduler_state": "READY_EVIDENCE",
@@ -352,22 +319,27 @@
       "vector_evidence": {},
       "read_only_evidence": {
         "source": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
-        "source_git_blob_sha": "9d4112927880bf18132083c0e841e6133cb125ab",
-        "effective_gap_b_count": 2,
-        "real_authenticated_row_proofs": 0,
-        "current_gate_status": "REAL_AUTHENTICATED_ROW_PROOFS_0_OF_2_ACTIVE_ROWS__ONE_TB_ROW_PARKED_UNRESOLVED",
-        "new_primitive_established": false,
-        "vector_bounds_complete": false,
-        "active_rows": [
+        "source_git_blob_sha": "d4a5283288e3477c117f1d75533d0f963abf076d",
+        "active_gap_b_count": 2,
+        "parked_unresolved_count": 1,
+        "active_gap_b_rows": [
           "PROWORK_GDPVAL_GE_1846",
           "CHARTOGRAPHY_TOOLS_GE_89"
         ],
-        "parked_unresolved_rows": [
+        "parked_rows": [
           "TB_SCIENCE_GE_58_7"
         ],
-        "tb_reclassification_path": "canonical/governance/ESCAPE_TB_SCIENCE_CURRENT_ROUTE_RECLASSIFICATION_20261010_V2.json",
-        "tb_reclassification_git_blob_sha": "2639f4e58ef71502707ab6b2bb37efb592b1a234",
-        "tb_reclassification_verification_git_blob_sha": "10c1c7ef2650e20d54d504e3c6363ef4febdea00"
+        "real_authenticated_active_row_proofs": 0,
+        "current_gate_status": "CURRENTNESS_AWARE_AUTHENTICATED_V5_GATE_VERIFIED__ACTIVE_GAP_B_ROWS_2__TB_ROW_PARKED_UNRESOLVED",
+        "new_primitive_established": false,
+        "vector_bounds_complete": false,
+        "current_tb_git_blob_sha": "7678d9a56461b121ffd52dd4c9c8df464fda08d2",
+        "tb_current_route_reclassification": {
+          "path": "canonical/governance/ESCAPE_TB_SCIENCE_CURRENT_ROUTE_RECLASSIFICATION_20261010_V2.json",
+          "git_blob_sha": "2639f4e58ef71502707ab6b2bb37efb592b1a234",
+          "active_gap_b_membership": false,
+          "strict_progress_witness_required_now": false
+        }
       }
     },
     {
@@ -443,7 +415,8 @@
     "PROFESSIONAL_QUALITY_V7_R10_ANALYSIS_DECISION_BINDING__CLOSED",
     "PROFESSIONAL_QUALITY_V7_R11_ADAPTIVE_INTEGRITY_SECURITY_BINDING__CLOSED",
     "PROFESSIONAL_QUALITY_V7_R12_META_COMPOSITION_BINDING__CLOSED",
-    "PROFESSIONAL_QUALITY_V7_12_OF_12_SAME_SUBJECT_COMPOSITION__CLOSED_AS_COMPOSITION_ADMISSIBILITY"
+    "PROFESSIONAL_QUALITY_V7_12_OF_12_SAME_SUBJECT_COMPOSITION__CLOSED_AS_COMPOSITION_ADMISSIBILITY",
+    "TB_SCIENCE_RANK20_V3__RETIRED_NONCONSUMING__GENERAL_REPAIR_PROMOTED__PARKED"
   ],
   "score_contract": {
     "path": "canonical/governance/LIVE_WORK_SCORE_CALIBRATION_CONTRACT_20261010_V1.json",
@@ -452,8 +425,8 @@
   },
   "live_selection": {
     "authorized": false,
-    "reason": "NO_COMPLETE_COMMON_CALIBRATED_VECTOR__PROFESSIONAL_V2_DOMAIN_EQUIVALENCE_AND_SCOPE_COVER_READINESS_NOW_BOUND__READ_ONLY_CLAIM_SCOPE_FACTORIZATION_AND_DISCRIMINATING_EVIDENCE_ONLY",
-    "exact_next": "RUN_POST_COMPOSITION_PARALLEL_FRONTIER__FREEZE_MINIMUM_EXACT_WHOLE_LEAF_CLAIM_SCOPE_WHERE_DOMAIN_EQUIVALENCE_CAN_BE_PROVED__CONTINUE_GAP_A_GAP_B_BYTES_AND_TB_READ_ONLY_EVIDENCE__RERUN_PARETO_AFTER_NEW_EVIDENCE"
+    "reason": "NO_COMPLETE_COMMON_CALIBRATED_VECTOR__TB_RANK20_RETIRED_AND_PARKED__PROFESSIONAL_V2_DOMAIN_EQUIVALENCE_AND_SCOPE_COVER_READINESS_BOUND__READ_ONLY_EVIDENCE_ONLY",
+    "exact_next": "FREEZE_MINIMUM_EXACT_WHOLE_LEAF_CLAIM_SCOPE_WHERE_DOMAIN_EQUIVALENCE_CAN_BE_PROVED__WORK_TWO_ACTIVE_GAP_B_ROWS_AND_GAP_A_IN_PARALLEL__KEEP_TB_PARKED__RERUN_PARETO_AFTER_NEW_EVIDENCE"
   },
   "hard_nonclaims": [
     "NO_GLOBAL_UNKNOWN_WORK_COMPLETENESS_CLAIM",
