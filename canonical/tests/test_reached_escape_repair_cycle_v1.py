@@ -33,6 +33,8 @@ def verifier(request):
         "candidate_sha256": request["candidate_sha256"],
         "candidate_kind": request["candidate_kind"],
         "verified_properties": [required],
+        "independent_verification": True,
+        "verifier_id": "TEST_INDEPENDENT_REACHED_ESCAPE_VERIFIER",
         "promotion_authority": False,
         "acceptance_authority": False,
         "terminal_authority": False,
@@ -98,6 +100,40 @@ def test_uncovered_region_closes_via_verified_policy():
     assert out["repair_cycle_closed"] is True
     assert out["repair_rounds_completed"] == 1
     assert out["final_result"]["certified_reached_state_admitted"] is True
+
+
+def test_provider_and_verifier_callable_must_be_distinct():
+    def both(request):
+        if request.get("schema") == cycle.VERIFY_REQUEST_SCHEMA:
+            return {
+                "schema": cycle.VERIFY_SCHEMA,
+                "pass": True,
+                "state_sha256": request["state_sha256"],
+                "repair_sha256": request["repair_sha256"],
+                "candidate_sha256": request["candidate_sha256"],
+                "candidate_kind": request["candidate_kind"],
+                "verified_properties": [request["required_verified_property"]],
+                "independent_verification": True,
+                "verifier_id": "FAKE_SELF_VERIFIER",
+            }
+        return {
+            "schema": cycle.CANDIDATE_SCHEMA,
+            "pass": True,
+            "repair_sha256": request["repair_sha256"],
+            "candidate_kind": "DISCRIMINATOR",
+            "candidate": {
+                "discriminator_id": "d1",
+                "outcomes": {"r1": "A", "r2": "B"},
+            },
+        }
+
+    out = cycle.run(
+        state(policies=[policy("p1", ("r1",)), policy("p2", ("r2",))]),
+        provider=both,
+        verifier=both,
+    )
+    assert out["pass"] is False
+    assert out["status"] == "FAIL_CLOSED__REPAIR_PROVIDER_AND_VERIFIER_NOT_INDEPENDENT"
 
 
 def test_provider_cannot_self_certify():
