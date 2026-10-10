@@ -162,17 +162,27 @@
     "tests_path": "canonical/tests/test_professional_quality_leaf_binder_v2.py",
     "tests_git_blob_sha": "af63e0c126e9b7af0fb7a652adbc5ef7661e1460",
     "registry_path": "canonical/governance/PROFESSIONAL_QUALITY_LEAF_EVIDENCE_REGISTRY_20261010_V1.json",
-    "registry_git_blob_sha": "d25cb6fe746eef992f71b138446dc999c0f2a307",
+    "registry_git_blob_sha": "c36063d403ff07f3e3c16d647129f9b9f4f537cb",
     "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_LEAF_BINDER_V2_VERIFY_20261010_V1.json",
     "verification_git_blob_sha": "b65a67e8edaee925338fe3f2d61dad6b0f52d129",
     "pinned_main_commit": "60225be09564eb7fb1317d8c571af5ba8e9b02a9",
     "result": "PYCOMPILE_PASS__5_OF_5_PASS",
     "manifest_status_has_promotion_authority": false,
-    "verified_leaf_count": 0,
-    "open_leaf_count": 24,
+    "verified_leaf_count": 2,
+    "open_leaf_count": 22,
     "domain_semantic_closure": false,
     "domain_execution_closure": false,
-    "terminal_credit_delta": 0
+    "terminal_credit_delta": 0,
+    "current_projection_verification_path": "canonical/verification/PROFESSIONAL_QUALITY_LEAF_REGISTRY_PROPERTY_TRUTH_VERIFY_20261010_V1.json",
+    "current_projection_verification_git_blob_sha": "efd1342f950d2a5b5e18c42c16b3401d238c11ef",
+    "current_projection_result": "PASS__CURRENT_REGISTRY_DERIVES_PROPERTY_TRUTH_2_OF_24__22_OPEN__PROMOTION_FALSE",
+    "verified_execution_leaf_ids": [
+      "PQ::R7_CAUSAL_PRESCRIPTIVE::EXECUTION",
+      "PQ::R10_ANALYSIS_DECISION::EXECUTION"
+    ],
+    "verified_semantic_leaf_ids": [],
+    "existing_evidence_current": true,
+    "rejected_receipt_count": 0
   },
   "professional_quality_scoped_evidence": {
     "runtime_path": "canonical/runtime/professional_quality_scoped_evidence_v1.py",
