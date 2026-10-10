@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R12_V7_ROOT_SUBJECT_BINDING_PUBLIC_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_34_BLOB_BINDING__R12_VERIFIER_PASS__7_OF_7_ADVERSARIAL_TESTS_PASS__ZERO_QUALITY_OR_TERMINAL_CREDIT",
+  "subject": {
+    "id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+    "sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V7_DECLARED_SYSTEM_SUBJECT_20261010_V6.json",
+    "git_blob_sha": "1d598bc8757017ceb34928d0df9f5fce859ef868"
+  },
+  "binding": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_R12_ROOT_SUBJECT_BINDING_20261010_V1.json",
+    "git_blob_sha": "6eb32264e98bf0b36d48ad3519f9c7c88757d0d7"
+  },
+  "verifier": {
+    "path": "canonical/runtime/professional_quality_r12_root_subject_binding_verify_v1.py",
+    "git_blob_sha": "4b775d22ca65e38391b115101bf4aa08ccad2142"
+  },
+  "tests": {
+    "path": "canonical/tests/test_professional_quality_r12_root_subject_binding_verify_v1.py",
+    "git_blob_sha": "d69e8988412effea782545c4da860e71c4e51218",
+    "tests_run": 7,
+    "tests_passed": 7,
+    "tests_failed": 0
+  },
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2625,
+    "pull_request_head_sha": "2d629ef2b2c6f86594ea53d12a5dad88039b4fd0",
+    "merge_commit": "115de94708919993710c2d241ce17a09ae4f460d",
+    "workflow_name": "Verify professional R12 V7 binding",
+    "workflow_run_id": 38057790694,
+    "workflow_job_id": 114229706693,
+    "conclusion": "success",
+    "exact_blob_binding_step": "success",
+    "root_verifier_step": "success",
+    "adversarial_test_step": "success"
+  },
+  "proves": [
+    "EXACT_R12_BINDING_VERIFIER_TEST_AND_ALL_BOUND_DEPENDENCY_BYTES_MATCH_DECLARED_BRAIN_BLOBS",
+    "R12_ROOT_SUBJECT_BINDING_VERIFIER_PASSES",
+    "R1_THROUGH_R11_PRIOR_ROOT_BINDINGS_REMAIN_INDEPENDENTLY_VERIFIED_ON_THE_IDENTICAL_V7_SUBJECT",
+    "UVCK_META_COMPOSITION_FAILS_CLOSED_ON_SCOPE_DRIFT_SELF_AUTHORITY_AND_UNKNOWN_DEFEATER_OVERCLAIM",
+    "KNOWN_DEFEATER_SCOPE_REMAINS_BOUNDED_AND_UNKNOWN_DEFEATER_COMPLETENESS_IS_NOT_CLAIMED",
+    "R12_BINDING_ITSELF_DOES_NOT_SELF_AUTHORIZE_TWELVE_OF_TWELVE_COMPOSITION"
+  ],
+  "hard_nonclaims": [
+    "NO_UNKNOWN_DEFEATER_COMPLETENESS",
+    "NO_GLOBAL_R12_ROOT_CLOSURE",
+    "NO_GLOBAL_R12_SEMANTIC_OR_EXECUTION_LEAF_CLOSURE",
+    "NO_DOMAIN_SEMANTIC_OR_EXECUTION_CLOSURE",
+    "NO_FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION",
+    "NO_SAME_SUBJECT_COMPOSITION_PASS",
+    "NO_LIVE_DEFAULT_PROMOTION"
+  ],
+  "root_subject_binding_authority": true,
+  "unknown_defeater_completeness_proved": false,
+  "same_subject_composition_pass": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
