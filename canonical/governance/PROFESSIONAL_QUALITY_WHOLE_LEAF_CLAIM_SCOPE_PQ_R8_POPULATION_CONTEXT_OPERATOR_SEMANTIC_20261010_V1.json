@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_WHOLE_LEAF_CLAIM_SCOPE_V1",
+  "leaf_id": "PQ::R8_POPULATION_CONTEXT_OPERATOR::SEMANTIC",
+  "root_id": "R8_POPULATION_CONTEXT_OPERATOR",
+  "kind": "SEMANTIC",
+  "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+  "subject_kind": "DECLARED_SYSTEM",
+  "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+  "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+  "leaf_acceptance": "DOMAIN_SPECIFIC_CLAIM_SEMANTICS_GROUNDING_SCOPE_UNCERTAINTY_AND_ALL_ROOT_RELEVANT_DEFEATERS_RESOLVED_WITH_TYPED_EVIDENCE",
+  "scope_definition": {
+    "domain_schema_id": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_MANIFEST_LEAF_DOMAIN_V1",
+    "entire_admissible_leaf_domain": true,
+    "domain_definition": {
+      "authority": {
+        "path": "canonical/governance/PROFESSIONAL_QUALITY_LEAF_BINDING_MANIFEST_20261010_V1.json",
+        "git_blob_sha": "a7cad32c9fd969ff2c3857bb924c7bd746237ec2"
+      },
+      "leaf_id": "PQ::R8_POPULATION_CONTEXT_OPERATOR::SEMANTIC",
+      "root_id": "R8_POPULATION_CONTEXT_OPERATOR",
+      "kind": "SEMANTIC",
+      "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+      "subject_kind": "DECLARED_SYSTEM",
+      "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+      "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+      "leaf_contract_sha256": "b202196ae1d5891dcd2ad7eafa51ba26f997b072c3bbb8db1d6d6604c96e775f",
+      "leaf_obligation_sha256": "ad4d1f6ace224f65f226ab38c14981e93a31df6022d578050a9a9dcb359cee1d",
+      "leaf_acceptance_sha256": "4967b35be044567ae9fbcd01f2443996dc675f3154fd386790f79301ae9cff09",
+      "membership_rule": "INPUT_IS_IN_THE_WHOLE_LEAF_DOMAIN_IFF_IT_IS_ADMISSIBLE_UNDER_THE_EXACT_FROZEN_MANIFEST_LEAF_CONTRACT_OBLIGATION_AND_ACCEPTANCE_FOR_THE_BOUND_V7_SUBJECT",
+      "exclusion_rule": "EXCLUDE_ONLY_INPUTS_NOT_ADMISSIBLE_UNDER_THE_FROZEN_MANIFEST_LEAF_DEFINITION"
+    }
+  },
+  "epoch": "2026-10-10T15:50:00Z",
+  "claim": {
+    "claim_kind": "PROPERTY_CERTIFICATE",
+    "mission_blob_sha": "13c470645b037bbb46245c687dd35197b420d51a",
+    "scope_sha256": "4ce5b8b2c9291cbb4a8a25203e76ed5db4e119bc9740f3d7d283b94e825fc591",
+    "target_predicate_sha256": "4967b35be044567ae9fbcd01f2443996dc675f3154fd386790f79301ae9cff09",
+    "semantics_sha256": "617829967120ad0fb230d49181e2d4768f0593ce4bccaa179093d0a902934664",
+    "epoch": "2026-10-10T15:50:00Z",
+    "authority_id": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_WHOLE_LEAF",
+    "terminal_credit_delta": 0,
+    "claim_id": "2d192ff3393a3c826c26806ca2587f9fb3e5b401de131fba334f022cf15d349a"
+  },
+  "domain_equivalence_authority": false,
+  "whole_leaf_scope_complete": false,
+  "leaf_property_truth_authority": false,
+  "semantic_truth_authority": false,
+  "execution_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
