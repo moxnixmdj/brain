@@ -1,8 +1,8 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_DEVELOPMENT_SCHEDULER_POINTER_V1",
   "date": "2026-10-10",
-  "status": "ACTIVE__POST_COMPOSITION_V12__SHARED_WHOLE_LEAF_CERTIFICATE_GATE_BOUND__READ_ONLY_EVIDENCE_READY__FULL_EXECUTION_FAILS_CLOSED",
-  "authoritative_activation": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V12.json",
+  "status": "ACTIVE__POST_COMPOSITION_V13__CLAIM_SCOPED_WHOLE_LEAF_V2_GATE_AND_READINESS_BOUND__READ_ONLY_EVIDENCE_READY__FULL_EXECUTION_FAILS_CLOSED",
+  "authoritative_activation": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V13.json",
   "runtime": "canonical/runtime/capability_parallel_frontier_post_composition_v1.py",
   "primary_entrypoint": "canonical.runtime.capability_parallel_frontier_post_composition_v1.plan_current_post_composition_frontier",
   "objective": "MAXIMIZE_REUSABLE_VERIFIED_CAPABILITY_GENERALIZATION_RELIABILITY_AND_EFFICIENCY_PER_RESOURCE_AND_MINIMIZE_WALL_CLOCK_THROUGH_SAFE_PARALLELISM",
@@ -27,8 +27,8 @@
   "planning_entrypoint": "canonical.runtime.capability_first_scheduler_v1.rank_work",
   "current_live_work_frontier": {
     "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
-    "git_blob_sha": "bdee1e798f46ec141a6f914c5f67fe204fdca25f",
-    "status": "CURRENT_POST_COMPOSITION_FRONTIER__PROFESSIONAL_SHARED_WHOLE_LEAF_GATE_VERIFIED__READ_ONLY_EVIDENCE_ONLY__FULL_EXECUTION_FAIL_CLOSED__ZERO_CREDIT",
+    "git_blob_sha": "79139c18e4b99f3e8db33828625553898c680a5c",
+    "status": "CURRENT_POST_COMPOSITION_FRONTIER__PROFESSIONAL_CLAIM_SCOPED_V2_GATE_AND_READINESS_BOUND__READ_ONLY_EVIDENCE_ONLY__FULL_EXECUTION_FAIL_CLOSED__ZERO_CREDIT",
     "professional_verified_root_subject_binding_count": 12,
     "professional_same_subject_composition_admissible": true
   },
@@ -64,18 +64,28 @@
   "whole_leaf_residual_control": {
     "path": "canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_RESIDUAL_LEDGER_20261010_V1.json",
     "git_blob_sha": "ae5503829ad340cccef287f37ff70e4ab9288d33",
-    "status": "24_EXPECTED__0_WHOLE_LEAVES_CLOSED__SHARED_CERTIFICATE_GATE_VERIFIED__TOTALITY_OR_CERTIFIED_COMPLETE_UNION_REQUIRED",
-    "certificate_gate_activation": "canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_CERTIFICATE_GATE_ACTIVATION_20261010_V1.json",
-    "certificate_gate_activation_git_blob_sha": "4b010aae1e741bbbdf7d1431f85b246a6a80c66f",
-    "certificate_gate_verification": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_CERTIFICATE_GATE_VERIFY_20261010_V1.json",
-    "certificate_gate_verification_git_blob_sha": "d6c161a6f2735a9a384d8d07d778334c7d9389da",
+    "status": "24_EXPECTED__0_V2_ADMISSIBLE_CHAINS__CLAIM_SCOPE_AND_WHOLE_DOMAIN_EQUIVALENCE_REQUIRED__PROPERTY_TRUTH_BLOCKED",
+    "certificate_gate_activation": "canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_CERTIFICATE_GATE_ACTIVATION_20261010_V2.json",
+    "certificate_gate_activation_git_blob_sha": "34fdaf7f4a91d0e28d446a9d554c3aa0fbec8222",
+    "certificate_gate_verification": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_CLAIM_SCOPE_GATE_V2_VERIFY_20261010_V1.json",
+    "certificate_gate_verification_git_blob_sha": "cb91d94dd89ec7c67aae54db3cd5319612cd43d5",
     "admitted_scope_certificate_count": 0,
-    "property_truth_closed_count": 0
+    "property_truth_closed_count": 0,
+    "certificate_gate_runtime": "canonical/runtime/professional_quality_whole_leaf_claim_scope_gate_v2.py",
+    "certificate_gate_runtime_git_blob_sha": "d76b922e8d5c86f10568a3582759f8c23e69b2e0",
+    "readiness_audit_runtime": "canonical/runtime/professional_quality_whole_leaf_certificate_readiness_audit_v2.py",
+    "readiness_audit_runtime_git_blob_sha": "dad5f50eba397985580c8559302b6d2bf0f268aa",
+    "readiness_audit_verification": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_CERTIFICATE_READINESS_AUDIT_V2_VERIFY_20261010_V1.json",
+    "readiness_audit_verification_git_blob_sha": "2d28d932d08753fdf14c56aa24011e625518a4ef",
+    "admitted_v2_chain_count": 0,
+    "claim_scope_construction_required_count": 24,
+    "property_truth_ready_count": 0,
+    "admission_order": "EXACT_CLAIM_SCOPE__INDEPENDENT_WHOLE_DOMAIN_EQUIVALENCE__SCOPE_COVER__PROPERTY_TRUTH_AND_EXECUTION"
   },
-  "v12_activation": {
-    "path": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V12.json",
-    "git_blob_sha": "4941a865ceb059de5c825bb7e7032a42aa8d7c20",
-    "independent_plan_replay_sha256": "0ca533770920d0960980d7177803bad32f8e98d2aa680d7d9e1f08da900166e2",
+  "v13_activation": {
+    "path": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V13.json",
+    "git_blob_sha": "0baa1f43dce7c8761bb8fe07a599365515500983",
+    "fresh_v13_exact_plan_replay": false,
     "full_execution_authority": false
   }
 }
