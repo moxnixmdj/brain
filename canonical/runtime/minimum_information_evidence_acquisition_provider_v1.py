@@ -26,6 +26,10 @@ NO_CONCRETE_TARGET_STATUS = (
     "OPEN__PENDING_ACQUISITION_OR_EXPERIMENT__"
     "CONCRETE_DECISION_BOUND_TARGET_REQUIRED"
 )
+SOURCE_ADAPTER_REQUIRED_STATUS = (
+    "OPEN__PENDING_ACQUISITION_OR_EXPERIMENT__"
+    "SOURCE_SPECIFIC_EVIDENCE_ACQUISITION_ADAPTER_REQUIRED"
+)
 
 _CONCRETE_KEYS = (
     "predicate_id",
@@ -87,10 +91,15 @@ def is_sound_nonactionable_decline(result: Any) -> bool:
     return (
         isinstance(result, Mapping)
         and result.get("pass") is False
-        and result.get("status") == NO_CONCRETE_TARGET_STATUS
+        and result.get("status") in {
+            NO_CONCRETE_TARGET_STATUS,
+            SOURCE_ADAPTER_REQUIRED_STATUS,
+        }
         and result.get("frontier_changed") is False
         and result.get("verification_authority_mutated") is False
         and result.get("broad_acquisition_attempted") is False
+        and isinstance(result.get("receipt_sha256"), str)
+        and len(result.get("receipt_sha256")) == 64
     )
 
 
@@ -161,7 +170,7 @@ def acquire(
 
     payload = {
         "schema": SCHEMA,
-        "status": "OPEN__CONCRETE_TARGET_PRESENT__EXTERNAL_ACQUISITION_ADAPTER_REQUIRED",
+        "status": SOURCE_ADAPTER_REQUIRED_STATUS,
         "pass": False,
         "reason": (
             "V1_PROVES_TARGET_CONCRETENESS_BUT_DOES_NOT_OWN_A_GENERIC_"
