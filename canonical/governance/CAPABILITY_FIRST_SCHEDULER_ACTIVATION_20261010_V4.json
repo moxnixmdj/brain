@@ -17,7 +17,13 @@
     "checkpoint_obligations_are_primary_gate": false,
     "generic_reusable_capability_work_is_demoted_while_checkpoint_open": false,
     "shared_cause_fanout_can_wake_open_world_frontier": false,
-    "benchmark_bookkeeping_without_allowed_role": "DEMOTED"
+    "benchmark_bookkeeping_without_allowed_role": "DEMOTED",
+    "allowed_benchmark_roles": [
+      "CAPABILITY_DEFECT_LOCALIZATION",
+      "NEW_CAPABILITY_VALIDATION",
+      "CAPABILITY_CLAIM_FALSIFICATION",
+      "MILESTONE_CERTIFICATION"
+    ]
   },
   "r2_shared_cause_ledger": {
     "pointer": "canonical/governance/CURRENT_R2_SHARED_CAUSE_RESIDUAL_LEDGER.json",
@@ -49,5 +55,16 @@
     "capability_credit_delta": 0,
     "ownership_credit_delta": 0,
     "terminal_credit_delta": 0
+  },
+  "terminal_autopilot_policy": {
+    "role": "SUBORDINATE_CHECKPOINT_AUDITOR",
+    "new_dispatch_requires_explicit_capability_first_checkpoint_admission": true,
+    "verification_of_already_present_results_may_continue": true,
+    "promotion_remains_separately_authorized": true,
+    "default_repo_mode_new_dispatch": "PARKED"
+  },
+  "r3_state": {
+    "status": "SUFFICIENT_CONTROL_LOOP_CLOSURE_UNDER_AVAILABLE_EVIDENCE",
+    "observability_boundary_policy": "PARK_AND_REOPEN_ON_NEW_EFFECT_DISTINGUISHING_EVIDENCE"
   }
 }
