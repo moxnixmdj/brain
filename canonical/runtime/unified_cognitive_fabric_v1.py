@@ -33,6 +33,7 @@ from canonical.runtime.verified_bound_capability_execution_adapter_v1 import exe
 from canonical.runtime import semantic_ambiguity_control_v1 as semantic_ambiguity
 from canonical.runtime import semantic_relation_control_v2 as semantic_relation
 from canonical.runtime import oewn_decision_sense_control_v1 as oewn_decision_sense
+from canonical.runtime import r2_oewn_release_decision_bridge_v1 as oewn_release_decision
 from canonical.runtime import finance_bounded_concept_registry_verify_v1 as finance_concept_verify
 from canonical.runtime import one_shot_reality_closure_v2 as one_shot_reality_closure
 
@@ -64,6 +65,7 @@ ENGINE_DESCRIPTORS = {
     "SEMANTIC_AMBIGUITY": "semantic_ambiguity_control_v1.decide",
     "SEMANTIC_RELATION": "semantic_relation_control_v2.resolve",
     "OEWN_DECISION_SENSE": "oewn_decision_sense_control_v1.resolve",
+    "OEWN_RELEASE_DECISION_SENSE": "r2_oewn_release_decision_bridge_v1.resolve",
 }
 
 META_ORCHESTRATORS = {
@@ -153,6 +155,13 @@ def _unwrap_live_runtime(wrapper: Mapping[str, Any], inner_key: str) -> dict[str
 def _auto_mode(payload: Mapping[str, Any], options: Mapping[str, Any]) -> str:
     """Select only structurally unambiguous fabric routes; otherwise fail closed."""
     keys = set(payload)
+
+    if {
+        "oewn_release_archive_path",
+        "lemma",
+        "decision_manifest",
+    } <= keys:
+        return "OEWN_RELEASE_DECISION_SENSE"
 
     if {"sense_universe", "decision_manifest"} <= keys:
         return "OEWN_DECISION_SENSE"
@@ -589,6 +598,13 @@ def run(
                 evidence_receipts=payload.get("evidence_receipts"),
                 evidence_verifier=semantic_evidence_verifier,
                 ambiguity_owner=str(payload.get("ambiguity_owner") or "SYSTEM_MODEL"),
+            )
+        elif mode == "OEWN_RELEASE_DECISION_SENSE":
+            out = oewn_release_decision.resolve(
+                payload,
+                repo_root=ROOT,
+                authority_verifier=semantic_authority_verifier,
+                evidence_verifier=semantic_evidence_verifier,
             )
         elif mode == "CAPABILITY_SCHEDULER":
             work = payload.get("work")
