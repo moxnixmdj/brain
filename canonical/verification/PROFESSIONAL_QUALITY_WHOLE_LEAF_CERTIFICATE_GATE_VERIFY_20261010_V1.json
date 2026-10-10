@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_WHOLE_LEAF_CERTIFICATE_GATE_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_SPRITE_PYCOMPILE__12_OF_12_ADVERSARIAL_TESTS__ZERO_PROPERTY_QUALITY_OR_TERMINAL_AUTHORITY",
+  "repository": "moxnixmdj/brain",
+  "branch": "successor/professional-whole-leaf-certificate-gate-20261010-v1",
+  "exact_blobs": {
+    "runtime": "19715b5be4267343dfa07e90e5b1fb73787c3ce6",
+    "tests": "a32bc168466c35f4e258c61230301b031c404316",
+    "universal_scope_compiler": "b208255789b14e44e86c82c196e06b5c41b3d039",
+    "whole_leaf_residual_ledger": "ae5503829ad340cccef287f37ff70e4ab9288d33"
+  },
+  "independent_carrier": {
+    "provider": "Sprites",
+    "sprite": "brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/pq-whole-leaf-gate-v1"
+  },
+  "replay": {
+    "py_compile": "PASS",
+    "tests_run": 12,
+    "tests_passed": 12,
+    "tests_failed": 0,
+    "transcript_sha256": "9331bcee44f923ea4133a4442f15f8f3afb47cdb9ececd84aede911f0a45d806",
+    "transcript_bytes": 2971
+  },
+  "proves": [
+    "ONE_SHARED_CONTENT_ADDRESSED_WHOLE_LEAF_SCOPE_CERTIFICATE_GATE_IS_EXECUTABLE",
+    "EXACT_LEAF_IDENTITY_IS_LOAD_BEARING",
+    "UNIVERSAL_SCOPE_COMPILER_REJECTION_IS_LOAD_BEARING",
+    "CERTIFICATE_AND_INDEPENDENT_SEMANTIC_VERIFICATION_BYTES_ARE_LOAD_BEARING",
+    "SEMANTIC_VERIFIER_AND_TEST_BLOBS_ARE_LOAD_BEARING",
+    "SELF_GRANTED_GLOBAL_LEAF_QUALITY_PROMOTION_OR_TERMINAL_AUTHORITY_FAILS_CLOSED",
+    "LOSSLESS_DECOMPOSITION_WITH_AN_OPEN_CHILD_FAILS_CLOSED"
+  ],
+  "hard_nonclaims": [
+    "NO_WHOLE_LEAF_PROPERTY_TRUTH_PROVED",
+    "NO_PROFESSIONAL_LEAF_CLOSED_BY_GATE_EXISTENCE",
+    "NO_DOMAIN_SEMANTIC_OR_EXECUTION_CLOSURE",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "whole_leaf_scope_gate_verified": true,
+  "closed_leaf_count_delta": 0,
+  "semantic_truth_authority": false,
+  "execution_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "next": "INSTANTIATE_EXACT_CLAIM_SCOPED_TOTALITY_OR_COMPLETE_UNION_CERTIFICATES_PER_LEAF_USING_EXISTING_WITNESS_RECEIPTS_AND_INDEPENDENT_SEMANTIC_VERIFIERS"
+}
