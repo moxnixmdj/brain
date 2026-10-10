@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R6_EXECUTION_PROPERTY_TRUTH_INDEPENDENT_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_SPRITE__4_OF_4__31_CASE_R6_EXECUTION_ACCEPTANCE__ONE_LEAF_ONLY__ZERO_CREDIT",
+  "leaf_id": "PQ::R6_EVIDENCE_GROUNDING_DEPENDENCE::EXECUTION",
+  "root_id": "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+  "exact_blobs": {
+    "runtime": "a6468cf298bd1cc52afa585923dd22bfcbf90ad1",
+    "tests": "55fe412ad8b5f454cd277f089d9b31e8a5caa07d",
+    "uvck": "b4274a48edbe626a9ae9fd33da2f2227ca4dd5e8",
+    "manifest": "a7cad32c9fd969ff2c3857bb924c7bd746237ec2",
+    "graph": "03530e29d70206b46b690b33a04c66765ff86ad7",
+    "catalog": "8b92e5cf76f767054f55414b87014e03d43460b8",
+    "scope_batch_verify": "4c2d40a262f18f34bb35f94b59660d60972d45ef",
+    "r6_binding_verify": "abb4a251345e2701dc42578a1695f5e59f4bb665"
+  },
+  "replay": {
+    "carrier": "brain-professional-hard-defect-verify-20261010",
+    "carrier_id": "sprite-1bbb86ed-1f7c-409f-8397-fadc4de7a62a",
+    "workspace": "/home/sprite/r6-exec-v1-independent",
+    "py_compile": "PASS",
+    "tests_passed": 4,
+    "tests_failed": 0,
+    "cases": {
+      "positive": 1,
+      "adversarial": 15,
+      "near_miss": 15,
+      "total": 31
+    }
+  },
+  "leaf_property_truth_authority": true,
+  "unknown_defeater_completeness_proved": false,
+  "semantic_leaf_closed": false,
+  "root_closed": false,
+  "quality_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0
+}
