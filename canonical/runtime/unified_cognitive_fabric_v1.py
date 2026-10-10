@@ -31,7 +31,7 @@ from canonical.runtime import terminal_root_decision_gate_v1 as terminal_root
 from canonical.runtime import terminal_closure_reducer as terminal_closure
 from canonical.runtime.verified_bound_capability_execution_adapter_v1 import execute as execute_bound
 from canonical.runtime import semantic_ambiguity_control_v1 as semantic_ambiguity
-from canonical.runtime import semantic_relation_control_v1 as semantic_relation
+from canonical.runtime import semantic_relation_control_v2 as semantic_relation
 from canonical.runtime import oewn_decision_sense_control_v1 as oewn_decision_sense
 from canonical.runtime import finance_bounded_concept_registry_verify_v1 as finance_concept_verify
 from canonical.runtime import one_shot_reality_closure_v2 as one_shot_reality_closure
@@ -62,7 +62,7 @@ ENGINE_DESCRIPTORS = {
     "LIVE_CAPABILITY": "live_capability_invoker_v1.invoke",
     "LIVE_COMPOSITION": "live_capability_composition_v1.execute",
     "SEMANTIC_AMBIGUITY": "semantic_ambiguity_control_v1.decide",
-    "SEMANTIC_RELATION": "semantic_relation_control_v1.resolve",
+    "SEMANTIC_RELATION": "semantic_relation_control_v2.resolve",
     "OEWN_DECISION_SENSE": "oewn_decision_sense_control_v1.resolve",
 }
 
