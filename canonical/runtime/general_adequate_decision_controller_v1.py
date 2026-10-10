@@ -1163,10 +1163,11 @@ def run(
                                 or not cover_policy_id
                                 or cover_result.get("policy_selection_authorized") is not True
                                 or cover_result.get("selected_policy_adequacy_verified") is not True
+                                or cover_result.get("selected_policy_safety_verified") is not True
                                 or cover_result.get("bound_state_totality_proved") is not True
                             ):
                                 raise DecisionControllerError(
-                                    "POLICY_COVER_PASS_WITHOUT_AUTHORIZED_ADEQUATE_SELECTION"
+                                    "POLICY_COVER_PASS_WITHOUT_AUTHORIZED_SAFE_ADEQUATE_SELECTION"
                                 )
                             decision = {
                                 "pass": True,
