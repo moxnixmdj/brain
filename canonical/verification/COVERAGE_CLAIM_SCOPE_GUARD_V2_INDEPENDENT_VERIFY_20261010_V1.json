@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_COVERAGE_CLAIM_SCOPE_GUARD_V2_INDEPENDENT_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__SECOND_SPRITE__PYCOMPILE__7_OF_7__STABLE_MISSION_AUTHORITY_BINDING__MUTABLE_POINTER_PROJECTION_NOT_CLAIM_IDENTITY",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/coverage_claim_scope_guard_v2.py",
+      "git_blob_sha": "f28a25ad29cec75fd76f50754ce9a36618583c8d"
+    },
+    "tests": {
+      "path": "canonical/tests/test_coverage_claim_scope_guard_v2.py",
+      "git_blob_sha": "fd9d79c307b2c9792b544f3b1aecdc385cc57959"
+    },
+    "predecessor_guard": {
+      "path": "canonical/runtime/coverage_claim_scope_guard_v1.py",
+      "git_blob_sha": "d1de61aa9bc00a184772a50f7ec9d5ee2853d747"
+    },
+    "mission_authority": {
+      "path": "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "git_blob_sha": "13c470645b037bbb46245c687dd35197b420d51a"
+    }
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-professional-hard-defect-verify-20261010",
+    "carrier_id": "sprite-1bbb86ed-1f7c-409f-8397-fadc4de7a62a",
+    "workspace": "/home/sprite/semantic-mission-binding-v2-independent",
+    "py_compile": "PASS",
+    "tests_run": 7,
+    "tests_passed": 7,
+    "tests_failed": 0,
+    "errors": 0,
+    "transcript_sha256": "2782b7d89b90fa26aaceae6e32a925ddd0af138d42204a0523abad6e0a3252c6"
+  },
+  "proves": [
+    "CLAIM_MISSION_IDENTITY_BINDS_IMMUTABLE_REAL_MISSION_AUTHORITY_BLOB_NOT_MUTABLE_CURRENT_POINTER_BLOB",
+    "CURRENT_POINTER_MAY_CHANGE_NONAUTHORITY_PROJECTIONS_WITHOUT_STALING_A_FROZEN_CLAIM",
+    "CURRENT_POINTER_MUST_STILL_NAME_THE_EXACT_CANONICAL_MISSION_AUTHORITY_PATH_AND_OBJECTIVE",
+    "MISSION_AUTHORITY_OBJECTIVE_DRIFT_POINTER_OBJECTIVE_DRIFT_OLD_MUTABLE_BLOB_CLAIM_ID_TAMPER_AND_NONZERO_CREDIT_FAIL_CLOSED"
+  ],
+  "hard_nonclaims": [
+    "NO_EXISTING_V1_CLAIM_REINTERPRETATION",
+    "NO_CROSS_CLAIM_ROOT_CERTIFICATE_TRANSPORT",
+    "NO_SEMANTIC_PROPERTY_TRUTH",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
