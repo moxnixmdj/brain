@@ -6,6 +6,10 @@ on:
       - canonical/runtime/capability_parallel_frontier_post_composition_v1.py
       - canonical/tests/test_capability_parallel_frontier_post_composition_v1.py
       - canonical/runtime/capability_parallel_frontier_v2.py
+      - canonical/runtime/professional_quality_whole_leaf_domain_factorization_v1.py
+      - canonical/tests/test_professional_quality_whole_leaf_domain_factorization_v1.py
+      - canonical/tests/test_capability_parallel_frontier_v14_current_plan.py
+      - canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_DOMAIN_FACTORIZATION_WORKLIST_20261010_V1.json
       - canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json
       - .github/workflows/verify-post-composition-planner.yml
 permissions:
@@ -19,5 +23,5 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: python -m py_compile canonical/runtime/capability_parallel_frontier_post_composition_v1.py canonical/runtime/capability_parallel_frontier_v2.py
-      - run: python -m unittest -v canonical.tests.test_capability_parallel_frontier_post_composition_v1
+      - run: python -m py_compile canonical/runtime/capability_parallel_frontier_post_composition_v1.py canonical/runtime/capability_parallel_frontier_v2.py canonical/runtime/professional_quality_whole_leaf_domain_factorization_v1.py
+      - run: python -m unittest -v canonical.tests.test_capability_parallel_frontier_post_composition_v1 canonical.tests.test_professional_quality_whole_leaf_domain_factorization_v1 canonical.tests.test_capability_parallel_frontier_v14_current_plan
