@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R3_V7_FRONTIER_PROJECTION_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__R3_V7_FRONTIER_PROJECTION_CONTENT_ADDRESSED_COHERENT__3_OF_12__R4_NEXT__ZERO_QUALITY_OR_TERMINAL_CREDIT",
+  "carrier": {
+    "provider": "Sprites",
+    "sprite": "brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/pq-r3-v7-projection",
+    "exact_branch_bytes_materialized": true
+  },
+  "exact_blobs": {
+    "worklist_v9": "f7118fa95076c51984b210d635b0bfcbdfbd933b",
+    "current_professional_quality_execution": "e7d1318d6d4517d8510742c3500a994a28eddbe0",
+    "current_assurance_closure_compiler": "32951522cb1f8737f81c38774f7447e3b849505f",
+    "current_mission_objective": "4f4bd95cd320249d65e33025f2d136289a88644b",
+    "current_residual_reuse_classification": "0098ddb74b807bbaa5361436b098bd0690dc7144"
+  },
+  "checks": {
+    "worklist_verified_root_subject_binding_count": 3,
+    "worklist_r3_binding_status": "PASS",
+    "worklist_r3_verification_blob": "5cf23e9109bc81d88325a761c7521dd21e9a4bf9",
+    "professional_pointer_worklist_binding": true,
+    "professional_pointer_r3_truth_boundary_preserved": true,
+    "assurance_pointer_professional_binding": true,
+    "assurance_pointer_r3_binding_present": true,
+    "mission_pointer_professional_and_assurance_blobs_exact": true,
+    "residual_sources_professional_and_assurance_blobs_exact": true,
+    "residual_exact_remaining_root_bindings": 9,
+    "next_root": "R4_MEASUREMENT_CONSTRUCT"
+  },
+  "authority": {
+    "quality_authority": false,
+    "acceptance_authority": false,
+    "promotion_authority": false,
+    "terminal_authority": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
