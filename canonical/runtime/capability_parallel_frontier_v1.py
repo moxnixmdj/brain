@@ -244,6 +244,144 @@ def refresh_supported_dynamic_sources(
     return out
 
 
+def _refresh_assurance_currentness(
+    frontier: dict[str, Any],
+    professional: Mapping[str, Any],
+    professional_sha: str,
+    *,
+    root: Path,
+) -> None:
+    source_set = frontier.get("scope", {}).get("source_set")
+    if not isinstance(source_set, list):
+        raise ParallelFrontierError("CURRENT_LIVE_WORK_FRONTIER_SOURCE_SET_MISSING")
+    source_row = next(
+        (
+            row
+            for row in source_set
+            if isinstance(row, Mapping) and _s(row.get("path")) == CURRENT_ASSURANCE_REL
+        ),
+        None,
+    )
+    if source_row is None:
+        raise ParallelFrontierError("CURRENT_ASSURANCE_SOURCE_BINDING_MISSING")
+
+    assurance_path = root / CURRENT_ASSURANCE_REL
+    if not assurance_path.is_file():
+        raise ParallelFrontierError("CURRENT_ASSURANCE_SOURCE_UNAVAILABLE")
+    try:
+        assurance = json.loads(assurance_path.read_text(encoding="utf-8"))
+    except Exception as exc:
+        raise ParallelFrontierError("CURRENT_ASSURANCE_SOURCE_INVALID") from exc
+    if not isinstance(assurance, Mapping):
+        raise ParallelFrontierError("CURRENT_ASSURANCE_SOURCE_INVALID")
+    if _s(assurance.get("schema")) != "PROJECT_BRAIN_CURRENT_ASSURANCE_CLOSURE_COMPILER_POINTER_V1":
+        raise ParallelFrontierError("CURRENT_ASSURANCE_SCHEMA_INVALID")
+    if assurance.get("terminal_authority") is not False or assurance.get("live_default") is not False:
+        raise ParallelFrontierError("CURRENT_ASSURANCE_AUTHORITY_BOUNDARY_CHANGED")
+
+    activation = assurance.get("activation")
+    if not isinstance(activation, Mapping) or activation.get("live_default") is not False:
+        raise ParallelFrontierError("CURRENT_ASSURANCE_ACTIVATION_INVALID")
+    blockers = activation.get("required_before_promotion")
+    normalized_blockers = {_s(x) for x in blockers} if isinstance(blockers, list) else set()
+    if normalized_blockers != EXPECTED_ASSURANCE_PROMOTION_BLOCKERS:
+        raise ParallelFrontierError("CURRENT_ASSURANCE_PROMOTION_BLOCKERS_CHANGED")
+
+    prof_frontier = professional.get("same_subject_root_binding_frontier")
+    final_subject = professional.get("final_subject")
+    if not isinstance(prof_frontier, Mapping) or not isinstance(final_subject, Mapping):
+        raise ParallelFrontierError("CURRENT_PROFESSIONAL_IDENTITY_INCOMPLETE")
+    count = prof_frontier.get("verified_root_subject_binding_count")
+    if isinstance(count, bool) or not isinstance(count, int) or count < 0 or count > 12:
+        raise ParallelFrontierError("CURRENT_PROFESSIONAL_VERIFIED_COUNT_INVALID")
+    subject_id = _s(final_subject.get("subject_id"))
+    subject_sha = _s(final_subject.get("subject_sha256"))
+    if not subject_id or not subject_sha:
+        raise ParallelFrontierError("CURRENT_PROFESSIONAL_SUBJECT_IDENTITY_MISSING")
+
+    projection = assurance.get("professional_quality_same_subject_frontier")
+    if not isinstance(projection, Mapping):
+        raise ParallelFrontierError("CURRENT_ASSURANCE_PROFESSIONAL_PROJECTION_MISSING")
+    if _s(projection.get("subject_id")) != subject_id or _s(projection.get("subject_sha256")) != subject_sha:
+        raise ParallelFrontierError("CURRENT_ASSURANCE_PROFESSIONAL_SUBJECT_MISMATCH")
+    if projection.get("verified_root_subject_binding_count") != count:
+        raise ParallelFrontierError("CURRENT_ASSURANCE_PROFESSIONAL_COUNT_MISMATCH")
+    if projection.get("root_count") != 12:
+        raise ParallelFrontierError("CURRENT_ASSURANCE_ROOT_COUNT_INVALID")
+
+    status = _s(assurance.get("status"))
+    if "__" + str(count) + "_OF_12_CURRENT_ROOT_SUBJECT_BINDINGS__" not in status:
+        raise ParallelFrontierError("CURRENT_ASSURANCE_STATUS_COUNT_MISMATCH")
+    next_index, next_name = _current_professional_next_root(professional)
+    if next_index <= 12:
+        expected_next = "R" + str(next_index) + "_" + next_name
+        if expected_next not in _s(projection.get("next")):
+            raise ParallelFrontierError("CURRENT_ASSURANCE_NEXT_ROOT_MISMATCH")
+        if "__R" + str(next_index) + "_" not in status:
+            raise ParallelFrontierError("CURRENT_ASSURANCE_STATUS_NEXT_ROOT_MISMATCH")
+    else:
+        expected_next = "COMPOSITION"
+        if "COMPOSITION" not in _s(projection.get("next")).upper():
+            raise ParallelFrontierError("CURRENT_ASSURANCE_NEXT_COMPOSITION_MISMATCH")
+
+    actual_sha = _git_blob_sha(assurance_path)
+    source_row["git_blob_sha"] = actual_sha
+
+    candidates = frontier.get("candidates")
+    if not isinstance(candidates, list):
+        raise ParallelFrontierError("CURRENT_LIVE_WORK_FRONTIER_CANDIDATES_INVALID")
+    positions = [
+        i
+        for i, row in enumerate(candidates)
+        if isinstance(row, Mapping)
+        and _s(row.get("work_id")) == "ASSURANCE_UVCK_V2_PROMOTION_GATES"
+    ]
+    if len(positions) != 1:
+        raise ParallelFrontierError("CURRENT_ASSURANCE_CANDIDATE_CARDINALITY_INVALID")
+    row = dict(candidates[positions[0]])
+    evidence = dict(row.get("read_only_evidence") or {})
+    evidence.update(
+        {
+            "source": CURRENT_ASSURANCE_REL,
+            "source_git_blob_sha": actual_sha,
+            "promotion_blockers": sorted(EXPECTED_ASSURANCE_PROMOTION_BLOCKERS),
+            "embedded_professional_snapshot_lags_live_frontier": False,
+            "professional_verified_root_subject_binding_count": count,
+            "professional_current_git_blob_sha": professional_sha,
+            "professional_next": expected_next,
+            "vector_bounds_complete": False,
+            "dynamic_current_pointer_follow": True,
+        }
+    )
+    row["read_only_evidence"] = evidence
+    candidates[positions[0]] = row
+
+    findings = frontier.get("currentness_findings")
+    if isinstance(findings, list):
+        for finding in findings:
+            if isinstance(finding, dict) and finding.get("id") == "ASSURANCE_CURRENT_PATH":
+                finding["truth"] = (
+                    "UVCK_V2_CURRENT_POINTER_COHERENT_WITH_PROFESSIONAL_"
+                    + str(count)
+                    + "_OF_12__"
+                    + expected_next
+                    + "_NEXT__PROMOTION_REMAINS_BLOCKED"
+                )
+                finding["source"] = CURRENT_ASSURANCE_REL
+                finding["dynamic_current_pointer_follow"] = True
+
+    dynamic = frontier.setdefault("dynamic_currentness", {})
+    if not isinstance(dynamic, dict):
+        raise ParallelFrontierError("DYNAMIC_CURRENTNESS_NOT_OBJECT")
+    dynamic.update(
+        {
+            "assurance_current_pointer_follow": True,
+            "assurance_current_git_blob_sha": actual_sha,
+            "assurance_professional_count": count,
+            "assurance_professional_next": expected_next,
+        }
+    )
+
 def load_current_frontier(
     frontier_path: Path = CURRENT_FRONTIER_PATH,
 ) -> dict[str, Any]:
