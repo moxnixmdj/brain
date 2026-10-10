@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_SCOPE_NESTED_PROJECTION_CONSISTENCY_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_SPRITE__5_OF_5__THREE_STALE_NESTED_PROJECTIONS_RECONCILED_TO_24_OF_24_SCOPE__PROPERTY_TRUTH_0_OF_24_PRESERVED__ZERO_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "fix-professional-scope-nested-projections-20261010-v1",
+    "exact_blobs": {
+      "assurance": "b5b8ad650fc25e0e1bd392ab602a302fff120708",
+      "scheduler": "23a6b41d66509d3fc8a856055b6b65aef1b2c920",
+      "mission": "a03ed3cfaad2cea477a8bd973e02599cdafa6475",
+      "batch_verification": "4c2d40a262f18f34bb35f94b59660d60972d45ef",
+      "tests": "c7bbf6e85906f4095bba59ae83b735d07586e8d7"
+    }
+  },
+  "independent_replay": {
+    "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/pq-nested-projection-fix-v1",
+    "tests_run": 5,
+    "tests_passed": 5,
+    "failures": 0,
+    "errors": 0
+  },
+  "proved": [
+    "ASSURANCE_NESTED_SCOPE_PROGRESS_EQUALS_24_OF_24",
+    "SCHEDULER_NESTED_SCOPE_PROGRESS_EQUALS_24_OF_24",
+    "MISSION_NESTED_SCOPE_PROGRESS_EQUALS_24_OF_24",
+    "CLAIM_SCOPE_CONSTRUCTION_REMAINING_EQUALS_ZERO",
+    "PROPERTY_TRUTH_CLOSED_REMAINS_ZERO",
+    "NO_SCOPE_TO_PROPERTY_OR_TERMINAL_AUTHORITY_LAUNDERING"
+  ],
+  "hard_nonclaims": [
+    "NO_LEAF_PROPERTY_TRUTH",
+    "NO_ROOT_OR_PROFESSIONAL_QUALITY_CLOSURE",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
