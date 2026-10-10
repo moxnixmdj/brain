@@ -14,8 +14,8 @@
   "current_assurance_closure_compiler": {
     "path": "canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json",
     "binding": "MUTABLE_CURRENT_POINTER_PATH_IDENTITY__OBSERVED_BLOB_IS_CURRENTNESS_EVIDENCE_NOT_IMMUTABLE_AUTHORITY",
-    "observed_git_blob_sha": "34fa800832a5a08417915d91d8a9786e3b31f75d",
-    "status": "UVCK_V2_CANDIDATE__PROPERTY_TRUTH_9_OF_24__SEMANTIC_TOTALITY_REUSE_AND_FULL_REGRESSION_OPEN__NOT_LIVE_DEFAULT",
+    "observed_git_blob_sha": "df8f3bb7cf92df516c896c783bbf41fa5cc5f1c0",
+    "status": "UVCK_V2_CANDIDATE__PROPERTY_TRUTH_12_OF_24__SEMANTIC_TOTALITY_REUSE_AND_FULL_REGRESSION_OPEN__NOT_LIVE_DEFAULT",
     "terminal_authority": false,
     "observed_snapshot_is_non_authoritative_for_v15_runtime": true
   },
@@ -36,7 +36,7 @@
   "current_professional_quality_execution": {
     "path": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
     "binding": "MUTABLE_CURRENT_POINTER_PATH_IDENTITY__OBSERVED_BLOB_IS_CURRENTNESS_EVIDENCE_NOT_IMMUTABLE_AUTHORITY",
-    "observed_git_blob_sha": "91161517b00078f50c17ead7276a8f54e213d45c",
+    "observed_git_blob_sha": "baa5e04e066b98838cb610ea1fad941c713ca57a",
     "status": "P1_V3_LIVE_UNCHANGED__V7_12_OF_12_COMPOSED__24_OF_24_SCOPE_VERIFIED__PROPERTY_TRUTH_12_OF_24__ALL_12_EXECUTION_LEAVES_VERIFIED__12_SEMANTIC_LEAVES_REDUCED_TO_CLAIM_SCOPED_TOTALITY_REUSE__NOT_LIVE_DEFAULT",
     "terminal_authority": false,
     "observed_snapshot_is_non_authoritative_for_v15_runtime": true
@@ -48,15 +48,15 @@
   },
   "current_parallel_frontier_control": {
     "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
-    "observed_git_blob_sha": "e83d7f5c7eda4447f8f65136516f233f51124001",
-    "status": "POST_COMPOSITION_V22__PROPERTY_TRUTH_9_OF_24__THREE_EXECUTION_DEPLETION_PLUS_SEMANTIC_TOTALITY_REUSE__ESCAPE_12_A_0_B_1_PARKED__BYTES_V31",
+    "observed_git_blob_sha": "1fcf9a88a7c4b67b95ed0b1718de530f350f04f4",
+    "status": "CURRENT_POST_COMPOSITION_FRONTIER__PROFESSIONAL_SCOPE_24_OF_24__PROPERTY_TRUTH_12_OF_24__ALL_12_EXECUTION_LEAVES_CLOSED__TWELVE_SEMANTIC_TOTALITY_REUSE__ESCAPE_12_GAP_A_0_GAP_B_1_PARKED__BYTES_V31__ZERO_GLOBAL_CREDIT",
     "binding": "MUTABLE_CURRENT_PATH_IDENTITY__SUPPORTED_PROFESSIONAL_ASSURANCE_BYTES_R2_PROJECTIONS_REFRESHED_AT_CALL_TIME__OTHER_SOURCE_DRIFT_FAILS_CLOSED",
     "snapshot_is_runtime_authority_for_supported_dynamic_families": false
   },
   "current_residual_reuse_classification": {
     "path": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
-    "observed_git_blob_sha": "d5435c09d5021adba11e77d6ada5890535adb5d9",
-    "status": "REUSE_FIRST__PROPERTY_TRUTH_9_OF_24__THREE_EXECUTION_LEAVES_PLUS_SEMANTIC_CLAIM_SCOPED_TOTALITY_AND_FULL_REGRESSION_NEXT__ESCAPE_12_A_0_B_1_PARKED__ZERO_GLOBAL_CREDIT"
+    "observed_git_blob_sha": "75ab56c432085eb9ebcfb41251101d8ec854f257",
+    "status": "DERIVED_CURRENT_CLASSIFICATION__ESCAPE_TOPOLOGY_RECONCILED_TO_12_ACTIVE_ACQUISITION_ROWS_PLUS_1_PARKED_TB_ROW__NO_ACTIVE_GAP_B__ZERO_CREDIT"
   },
   "professional_whole_leaf_control": {
     "scope_batch_activation": "canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_SCOPE_BATCH_ACTIVATION_20261010_V1.json",
@@ -119,7 +119,7 @@
       "path": "canonical/verification/PROFESSIONAL_QUALITY_R7_EXECUTION_PROPERTY_TRUTH_INDEPENDENT_VERIFY_20261010_V1.json",
       "git_blob_sha": "de713f29b4b615a181a67c8595fc3a895f949fe7"
     },
-    "shared_semantic_blocker": "ALL_12_SEMANTIC_LEAVES_REQUIRE_CLAIM_SCOPED_CC_R1_CC_R2_CC_R3_R4_TOTALITY_EVIDENCE__CURRENT_CATALOG_ALONE_IS_NOT_COMPLETENESS_AUTHORITY",
+    "shared_semantic_blocker": "ALL_12_EXECUTION_LEAVES_CLOSED__ALL_12_SEMANTIC_LEAVES_REQUIRE_CURRENT_MISSION_BOUND_CLAIM_SCOPED_TOTALITY_OR_STRONGER_TYPED_EVIDENCE_PROOF",
     "r1_verification": {
       "path": "canonical/verification/PROFESSIONAL_QUALITY_R1_EXECUTION_PROPERTY_TRUTH_INDEPENDENT_VERIFY_20261010_V1.json",
       "git_blob_sha": "c7831ee5157fcddc48c44034bca19a57d9ce314b"
@@ -183,7 +183,8 @@
     "r5_verification": {
       "path": "canonical/verification/PROFESSIONAL_QUALITY_R5_EXECUTION_PROPERTY_TRUTH_INDEPENDENT_VERIFY_20261010_V1.json",
       "git_blob_sha": "0e2e02313594563118498cbe41c23e4251208d6f"
-    }
+    },
+    "full_current_main_regression_open": true
   },
   "semantic_shared_blocker_reconciliation": {
     "path": "canonical/verification/PROFESSIONAL_QUALITY_SEMANTIC_SHARED_BLOCKER_INDEPENDENT_VERIFY_20261010_V1.json",
@@ -221,5 +222,10 @@
     "rule": "SUPPORTED_PROFESSIONAL_ASSURANCE_BYTES_R2_POINTERS_FOLLOW_CURRENT_ONLY_AFTER_EXPLICIT_INVARIANTS__OTHER_DRIFT_FAILS_CLOSED",
     "full_execution_authority": false,
     "terminal_credit_delta": 0
+  },
+  "capability_frontier_currentness_reconciliation": {
+    "path": "canonical/governance/CAPABILITY_FRONTIER_CURRENTNESS_RECONCILIATION_20261010_V1.json",
+    "observed_git_blob_sha": "67b92a5e7a8de039afec0db8a7962b2a0d7f5f20",
+    "status": "CURRENTNESS_RECONCILED__PROFESSIONAL_12_OF_24__ALL_12_EXECUTION_LEAVES_CLOSED__TWELVE_SEMANTIC_TOTALITY_REUSE__BYTES_V32__R2_V87_WAKE_GATED__TB_PARKED__ZERO_CREDIT"
   }
 }
