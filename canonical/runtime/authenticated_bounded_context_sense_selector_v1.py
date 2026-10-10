@@ -178,10 +178,13 @@ def _verified_observations(
         seen.add(oid)
         if "observed_outcome" not in row:
             raise ValueError("OBSERVED_OUTCOME_REQUIRED")
+        auth=str(row.get("authority_sha256") or "").strip()
+        if not auth:
+            raise ValueError("OBSERVATION_AUTHORITY_SHA256_REQUIRED")
         accepted.append({
             "observation_id":oid,
             "observed_outcome":deepcopy(row["observed_outcome"]),
-            "authority_sha256":str(row.get("authority_sha256") or ""),
+            "authority_sha256":auth,
         })
     return accepted,attempts
 
