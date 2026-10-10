@@ -1,10 +1,12 @@
-"""Truth certificate for bounded regulatory-capital contextual atoms.
+"""Truth certificate for canonical bounded regulatory-capital contextual atoms V2.
 
-This adapter exposes strict whole-span source-aligned regulatory-capital context
-facts through the semantic truth dispatcher. It is deliberately positive-only:
-a proved atom may yield TRUE, while an unproved atom remains UNKNOWN. Absence of
-an atom never becomes FALSE, and contextual properties never become concept
-identity.
+V2 reuses the independently verified canonical contextual observation compiler.
+It does not maintain a second language parser. Only canonical positive observation
+outcomes are projected into the legacy bounded atom API.
+
+Unrecognized, negated, attributed, quoted, hypothetical, weaker, or otherwise
+unmodelled language remains UNKNOWN. Context properties never create concept
+identity, candidate-universe completeness, policy adequacy, or terminal authority.
 """
 from __future__ import annotations
 
@@ -12,25 +14,58 @@ from hashlib import sha256
 import json
 from typing import Any, Mapping
 
-from canonical.runtime import source_aligned_regcap_context_proof_v2 as context_proof
+from canonical.runtime import regcap_contextual_observation_compiler_v1 as observation
 
 SCHEMA = "PROJECT_BRAIN_REGCAP_CONTEXT_ATOM_TRUTH_CERTIFICATE_V2"
 TRUTH_KIND = "REGCAP_CONTEXT_ATOM"
 
-CONTEXT_KINDS = {
-    context_proof.CCOB_KIND,
-    context_proof.CCYB_KIND,
-    context_proof.TLAC_KIND,
-}
+CCOB_KIND = "CERTIFIED_REGCAP_CCOB_STRUCTURE_CONTEXT"
+CCYB_KIND = "CERTIFIED_REGCAP_CCYB_RELEASE_CONTEXT"
+TLAC_KIND = "CERTIFIED_REGCAP_TLAC_RESOLUTION_CONTEXT"
+
+ATOM_CET1 = "COMPOSITION::CET1"
+ATOM_ABOVE_MIN = "POSITION::ABOVE_REGULATORY_MINIMUM"
+ATOM_2_5 = "AMOUNT::2.5_PERCENT"
+ATOM_RELEASE = "RELEASE::SYSTEM_WIDE_RISK_CRYSTALLISES_OR_DISSIPATES"
+ATOM_LOSS = "FUNCTION::LOSS_ABSORPTION"
+ATOM_RECAP = "FUNCTION::RECAPITALISATION"
+ATOM_RESOLUTION = "REGIME::RESOLUTION"
+ATOM_GSIB = "SCOPE::G_SIB"
+
+CONTEXT_KINDS = {CCOB_KIND, CCYB_KIND, TLAC_KIND}
 KNOWN_ATOMS = {
-    context_proof.ATOM_CET1,
-    context_proof.ATOM_ABOVE_MIN,
-    context_proof.ATOM_2_5,
-    context_proof.ATOM_RELEASE,
-    context_proof.ATOM_LOSS,
-    context_proof.ATOM_RECAP,
-    context_proof.ATOM_RESOLUTION,
-    context_proof.ATOM_GSIB,
+    ATOM_CET1,
+    ATOM_ABOVE_MIN,
+    ATOM_2_5,
+    ATOM_RELEASE,
+    ATOM_LOSS,
+    ATOM_RECAP,
+    ATOM_RESOLUTION,
+    ATOM_GSIB,
+}
+
+_CANONICAL_OUTCOMES = {
+    (
+        "STRUCTURAL_SIGNATURE_CLASS",
+        "TWO_POINT_FIVE_PERCENT_CET1_ABOVE_REGULATORY_MINIMUM",
+    ): {
+        "context_kind": CCOB_KIND,
+        "atom_ids": [ATOM_2_5, ATOM_CET1, ATOM_ABOVE_MIN],
+    },
+    (
+        "FUNCTIONAL_SIGNATURE_CLASS",
+        "RELEASE_WHEN_SYSTEM_WIDE_RISK_CRYSTALLISES_OR_DISSIPATES",
+    ): {
+        "context_kind": CCYB_KIND,
+        "atom_ids": [ATOM_RELEASE],
+    },
+    (
+        "FUNCTIONAL_SIGNATURE_CLASS",
+        "G_SIB_LOSS_ABSORPTION_RECAPITALISATION_IN_RESOLUTION",
+    ): {
+        "context_kind": TLAC_KIND,
+        "atom_ids": [ATOM_LOSS, ATOM_RECAP, ATOM_RESOLUTION, ATOM_GSIB],
+    },
 }
 
 
@@ -93,7 +128,8 @@ def checked_predicate_id(
         "source_span_sha256": sha256(source_text[start:end].encode("utf-8")).hexdigest(),
         "context_kind": context_kind,
         "target_atom_id": target_atom_id,
-        "checker_schema": context_proof.SCHEMA,
+        "canonical_observation_checker_schema": observation.SCHEMA,
+        "adapter_schema": SCHEMA,
     }
     raw = json.dumps(
         material,
@@ -111,7 +147,7 @@ def _unknown(
     context_kind: str,
     target_atom_id: str,
     reason: str,
-    context_result: Mapping[str, Any],
+    observation_result: Mapping[str, Any],
 ) -> dict[str, Any]:
     return {
         "schema": SCHEMA,
@@ -124,7 +160,7 @@ def _unknown(
         "predicate_truth": "UNKNOWN",
         "context_kind": context_kind,
         "target_atom_id": target_atom_id,
-        "context_proof": dict(context_result),
+        "canonical_observation": dict(observation_result),
         "truthful_precommitment_observation": False,
         "semantic_truth_authority": False,
         "semantic_identity_authority": False,
@@ -179,68 +215,69 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
     except Exception as exc:
         return _fail(type(exc).__name__ + ":" + str(exc))
 
-    claim = {
-        "claim_id": "selected-regcap-context",
-        "kind": context_kind,
-        "start": start,
-        "end": end,
-    }
-    result = context_proof.verify_proof(
-        source_text,
-        source_id=source_id,
-        claims=[claim],
-    )
-    if result.get("status") == "FAIL_CLOSED":
+    compiled = observation.compile_span(source_text, start=start, end=end)
+    if compiled.get("status") == "FAIL_CLOSED":
         return _fail(
-            "REGCAP_CONTEXT_PROOF_FAIL_CLOSED",
-            context_reason=result.get("errors"),
-            context_proof=result,
+            "CANONICAL_REGCAP_OBSERVATION_FAIL_CLOSED",
+            canonical_observation=compiled,
         )
-
-    accepted = [
-        row
-        for row in (result.get("accepted_claims") or [])
-        if isinstance(row, Mapping)
-        and row.get("claim_id") == "selected-regcap-context"
-    ]
-    if len(accepted) != 1:
+    if compiled.get("pass") is not True:
         return _unknown(
             checked_id=checked,
             requested_id=requested_id,
             context_kind=context_kind,
             target_atom_id=target_atom_id,
-            reason="BOUND_CONTEXT_NOT_CERTIFIED",
-            context_result=result,
+            reason="CANONICAL_BOUNDED_CONTEXT_NOT_CERTIFIED",
+            observation_result=compiled,
         )
 
-    row = accepted[0]
-    proved = {
-        str(x)
-        for x in (row.get("proved_atom_ids") or [])
-        if isinstance(x, str)
-    }
-    if target_atom_id not in proved:
+    key = (
+        str(compiled.get("observation_id") or ""),
+        str(compiled.get("outcome") or ""),
+    )
+    projection = _CANONICAL_OUTCOMES.get(key)
+    if projection is None:
+        return _unknown(
+            checked_id=checked,
+            requested_id=requested_id,
+            context_kind=context_kind,
+            target_atom_id=target_atom_id,
+            reason="CANONICAL_OBSERVATION_OUTSIDE_CONTEXT_ATOM_API",
+            observation_result=compiled,
+        )
+    if projection["context_kind"] != context_kind:
+        return _unknown(
+            checked_id=checked,
+            requested_id=requested_id,
+            context_kind=context_kind,
+            target_atom_id=target_atom_id,
+            reason="CANONICAL_OBSERVATION_CONTEXT_KIND_MISMATCH",
+            observation_result=compiled,
+        )
+
+    atom_ids = list(projection["atom_ids"])
+    if target_atom_id not in atom_ids:
         return _unknown(
             checked_id=checked,
             requested_id=requested_id,
             context_kind=context_kind,
             target_atom_id=target_atom_id,
             reason="TARGET_ATOM_NOT_POSITIVELY_PROVED__ABSENCE_IS_NOT_NEGATION",
-            context_result=result,
+            observation_result=compiled,
         )
 
     return {
         "schema": SCHEMA,
         "pass": True,
-        "status": "PASS__SOURCE_BOUND_REGCAP_CONTEXT_ATOM_PROVED_TRUE",
+        "status": "PASS__CANONICAL_SOURCE_BOUND_REGCAP_CONTEXT_ATOM_PROVED_TRUE",
         "predicate_id": checked,
         "requested_predicate_id": requested_id,
         "requested_predicate_id_authority": False,
         "predicate_truth": "TRUE",
         "context_kind": context_kind,
         "target_atom_id": target_atom_id,
-        "accepted_claim": dict(row),
-        "context_proof": dict(result),
+        "proved_atom_ids": atom_ids,
+        "canonical_observation": dict(compiled),
         "truthful_precommitment_observation": True,
         "semantic_truth_authority": True,
         "semantic_identity_authority": False,
@@ -254,8 +291,9 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
         "terminal_authority": False,
         "terminal_credit_delta": 0,
         "boundary": (
-            "STRICT_WHOLE_SPAN_POSITIVE_SOURCE_BOUND_CONTEXT_ATOM_ONLY__UNPROVED_ATOM_REMAINS_UNKNOWN__"
-            "CONTEXTUAL_PROPERTIES_DO_NOT_MINT_CONCEPT_IDENTITY__"
+            "CANONICAL_VERIFIED_CONTEXTUAL_OBSERVATION_ONLY__"
+            "NO_SECOND_LANGUAGE_PARSER__UNRECOGNIZED_WEAKER_NEGATED_ATTRIBUTED_QUOTED_OR_"
+            "HYPOTHETICAL_LANGUAGE_REMAINS_UNKNOWN__CONTEXT_PROPERTIES_DO_NOT_MINT_IDENTITY__"
             "NO_OPEN_WORLD_COMPLETENESS_OR_POLICY_ADEQUACY"
         ),
     }
