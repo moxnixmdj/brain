@@ -1,0 +1,53 @@
+name: Verify professional quality final subject V4
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/governance/PROFESSIONAL_QUALITY_P1_V4_DECLARED_SYSTEM_SUBJECT_20261010_V4.json
+      - canonical/governance/PROFESSIONAL_QUALITY_SUBJECT_DEPENDENCY_CLOSURE_WORKLIST_20261010_V2.json
+      - canonical/runtime/professional_quality_subject_dependency_closure_v2.py
+      - canonical/runtime/professional_quality_declared_system_subject_verify_v1.py
+      - canonical/tests/test_professional_quality_subject_dependency_closure_v2.py
+      - canonical/tests/test_professional_quality_declared_system_subject_verify_v1.py
+      - .github/workflows/verify-professional-quality-final-subject-v4.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Compile dependency closure and subject verifier
+        run: |
+          python -m py_compile \
+            canonical/runtime/professional_quality_subject_dependency_closure_v2.py \
+            canonical/runtime/professional_quality_declared_system_subject_verify_v1.py
+      - name: Run existing unit tests
+        run: |
+          python -m unittest -v \
+            canonical.tests.test_professional_quality_subject_dependency_closure_v2 \
+            canonical.tests.test_professional_quality_declared_system_subject_verify_v1
+      - name: Verify exact V4 subject and dependency closure
+        run: |
+          python - <<'PY'
+          from canonical.runtime import professional_quality_declared_system_subject_verify_v1 as sv
+          from canonical.runtime import professional_quality_subject_dependency_closure_v2 as dc
+          SUBJECT="canonical/governance/PROFESSIONAL_QUALITY_P1_V4_DECLARED_SYSTEM_SUBJECT_20261010_V4.json"
+          WORKLIST="canonical/governance/PROFESSIONAL_QUALITY_SUBJECT_DEPENDENCY_CLOSURE_WORKLIST_20261010_V2.json"
+          s=sv.verify(SUBJECT)
+          assert s["pass"] is True, s
+          assert s["component_count"] == 18, s
+          assert s["subject_sha256"] == "4dc798df7a13792ed000700ca2473f68baf20395b383c7908ea8db804ba1d2f5", s
+          dc.WORKLIST_PATH=WORKLIST
+          d=dc.compile_closure()
+          assert d["pass"] is True, d
+          assert d["roots_dependency_classified"] == 12, d
+          assert d["missing_subject_component_count"] == 0, d
+          assert d["subject_dependency_closure_complete"] is True, d
+          print("PROFESSIONAL_QUALITY_FINAL_SUBJECT_V4_CURRENT__18_OF_18_COMPONENTS__12_OF_12_ROOTS_CLASSIFIED__ZERO_MISSING_DEPENDENCIES")
+          PY
