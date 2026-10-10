@@ -21,6 +21,7 @@ ROOTS = ("R1", "R2", "R3", "R4")
 
 from canonical.runtime.coverage_root_certificate_registry_guard_v1 import validate as validate_root_registry
 from canonical.runtime.coverage_root_semantic_receipt_v1 import validate_semantic_root_slot
+from canonical.runtime.coverage_root_semantic_receipt_v1 import validate_semantic_root_slot
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 ROOT_REGISTRY_PATH = REPO_ROOT / "canonical/governance/COVERAGE_COMPLETENESS_ROOT_CERTIFICATE_REGISTRY_V1.json"
@@ -77,6 +78,58 @@ def _git_blob_sha(path: Path) -> str:
     payload = path.read_bytes()
     header = f"blob {len(payload)}\0".encode("ascii")
     return sha1(header + payload).hexdigest()
+
+
+def execute_semantic_root_verifiers(registry: Mapping[str, Any]) -> Dict[str, Any]:
+    active_claim = registry.get("active_claim")
+    if not isinstance(active_claim, Mapping):
+        return {
+            "status": "R4_SEMANTIC_ACTIVE_CLAIM_MISSING",
+            "pass": False,
+            "results": [],
+            "terminal_credit": 0,
+        }
+
+    results = []
+    for slot in registry.get("certificate_slots", []):
+        if not isinstance(slot, Mapping) or slot.get("status") != "PROVED_CURRENT":
+            continue
+        checked = validate_semantic_root_slot(REPO_ROOT, slot, active_claim)
+        results.append({
+            "root_id": slot.get("root_id"),
+            "pass": checked.get("pass") is True,
+            "status": checked.get("status"),
+            "errors": checked.get("errors", []),
+        })
+
+    failed = [row for row in results if row["pass"] is not True]
+    if failed:
+        return {
+            "status": "R4_SEMANTIC_ROOT_VERIFICATION_FAILED",
+            "pass": False,
+            "results": results,
+            "terminal_credit": 0,
+        }
+
+    proved_count = sum(
+        1
+        for slot in registry.get("certificate_slots", [])
+        if isinstance(slot, Mapping) and slot.get("status") == "PROVED_CURRENT"
+    )
+    if len(results) != proved_count:
+        return {
+            "status": "R4_SEMANTIC_ROOT_VERIFICATION_INCOMPLETE",
+            "pass": False,
+            "results": results,
+            "terminal_credit": 0,
+        }
+
+    return {
+        "status": "PASS_EXECUTABLE_SEMANTIC_ROOT_VERIFICATION",
+        "pass": True,
+        "results": results,
+        "terminal_credit": 0,
+    }
 
 
 def evaluate_canonical_registry_authority() -> Dict[str, Any]:
@@ -161,6 +214,20 @@ def evaluate_canonical_registry_authority() -> Dict[str, Any]:
             "mission_pointer_blob_sha": mission_pointer_sha,
             "terminal_credit": 0,
         }
+
+    semantic = execute_semantic_root_verifiers(registry)
+    if semantic["pass"] is not True:
+        return {
+            "status": semantic["status"],
+            "authorized": False,
+            "registry": checked,
+            "semantic_verification": semantic,
+            "active_claim": registry.get("active_claim"),
+            "canonical_generation": current_generation,
+            "mission_pointer_blob_sha": mission_pointer_sha,
+            "terminal_credit": 0,
+        }
+
     if not checked["r4_proof_closure"]:
         return {
             "status": "R4_CANONICAL_ROOT_CERTIFICATES_OPEN",
