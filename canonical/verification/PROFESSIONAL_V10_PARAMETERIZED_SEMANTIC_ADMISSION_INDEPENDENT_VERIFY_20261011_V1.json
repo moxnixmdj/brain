@@ -1,22 +1,23 @@
 {
   "schema": "PROJECT_BRAIN_PROFESSIONAL_V10_PARAMETERIZED_SEMANTIC_ADMISSION_INDEPENDENT_VERIFY_V1",
   "date": "2026-10-11",
-  "status": "PASS__INDEPENDENT_SPRITE__V10_28_OF_28_COMPONENTS_CURRENT__PARAMETERIZED_SEMANTIC_BINDER_V3_6_OF_6__SUBJECT_BUILDER_3_OF_3__ZERO_PROPERTY_OR_TERMINAL_CREDIT",
-  "base_main_commit": "b677086527f8c712c22246c4422d81f36a352b44",
+  "status": "PASS__FINAL_HARDENED_V10__INDEPENDENT_SPRITE__V10_28_OF_28_COMPONENTS_CURRENT__PARAMETERIZED_BINDER_V3_7_OF_7__SUBJECT_BUILDER_3_OF_3__V10_CLAIM_BATCH_4_OF_4__ZERO_PROPERTY_OR_TERMINAL_CREDIT",
+  "base_main_commit": "06773ca213cdd839f5c9eacea580938bdfb4f1ff",
   "subject": {
     "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V10_DECLARED_SYSTEM_SUBJECT_20261011_V9.json",
-    "git_blob_sha": "de3b0000c4f8640579b05f28be86573022bccdc6",
+    "git_blob_sha": "ea710423f0fb1e20d899653e98d84017011698b0",
     "subject_id": "PROFESSIONAL_QUALITY_P1_V10_PARAMETERIZED_SEMANTIC_ADMISSION_SYSTEM_20261011_V9",
-    "subject_sha256": "fed249344ddd91fa1b4140addf4e4b3f57dafbe0aafb4d02c9900f5edd0b3a28",
+    "subject_sha256": "0f6d54242b7e3e1eeb484b1c3b7384a8ce72246ef1e840687be2fe20de69e6b4",
     "component_count": 28
   },
   "binder": {
     "path": "canonical/runtime/professional_quality_semantic_admission_binder_v3.py",
-    "git_blob_sha": "327b6d5d1c4b9b17273980aa12055de43d052528",
+    "git_blob_sha": "6e8e5ac7c4cf4cc38e5e7a6f0ad6a0c80f0683be",
     "claim_pack_hardcoded": false,
     "exact_current_claim_required": true,
     "four_root_totality_and_r4_required": true,
-    "content_addressed_basis_required": true
+    "content_addressed_basis_required": true,
+    "independent_semantic_totality_basis_required": true
   },
   "independent_replay": {
     "carrier": "SPRITE",
@@ -29,10 +30,14 @@
   },
   "focused_replay": {
     "carrier": "brain-professional-hard-defect-verify-20261010",
-    "binder_tests_run": 6,
-    "binder_tests_passed": 6,
+    "binder_tests_run": 7,
+    "binder_tests_passed": 7,
     "builder_tests_run": 3,
     "builder_tests_passed": 3,
+    "claim_batch_tests_run": 4,
+    "claim_batch_tests_passed": 4,
+    "combined_tests_run": 14,
+    "combined_tests_passed": 14,
     "tests_failed": 0
   },
   "truth": {
@@ -41,9 +46,10 @@
     "old_v1_manifest_semantic_authority": false,
     "semantic_property_truth_proved": false,
     "positive_semantic_receipts_bound": 0,
-    "new_primitive_required": false
+    "new_primitive_required": false,
+    "independent_semantic_totality_basis_required": true
   },
-  "exact_next": "GENERATE_12_TRUTH_REPAIRED_SEMANTIC_CLAIMS_ON_V10__THEN_PROVE_SHARED_FAIL_CLOSED_PROPERTY_AND_BIND_ONE_AUTHENTIC_POSITIVE_RECEIPT_PER_ROOT",
+  "exact_next": "COMPILE_EXISTING_12_BOUNDED_SEMANTIC_WITNESSES_INTO_EXACT_V10_CLAIM_BOUND_INDEPENDENT_TOTALITY_VERIFICATIONS__THEN_ADMIT_ONE_AUTHENTIC_POSITIVE_SEMANTIC_RECEIPT_PER_ROOT",
   "hard_nonclaims": [
     "NO_SEMANTIC_LEAF_PROPERTY_TRUTH_FROM_V10_SUBJECT_IDENTITY",
     "NO_POSITIVE_SEMANTIC_RECEIPT_FROM_BINDER_EXISTENCE",
