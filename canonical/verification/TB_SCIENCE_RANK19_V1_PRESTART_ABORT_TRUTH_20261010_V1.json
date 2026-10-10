@@ -1,0 +1,88 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK19_V1_PRESTART_ABORT_TRUTH_20261010_V1",
+  "date": "2026-10-10",
+  "status": "VERIFIED__PREEXPOSURE_ABORT_NONCONSUMING__TASK_READ_TRUE__DURABLE_START_FALSE__BRAIN_LOGICAL_ATTEMPT_ID_MISMATCH__ZERO_RANK19_TRIAL_DELTA",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "public_execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2593,
+    "pull_request_final_state": "closed",
+    "execution_branch": "execute/tb-science-rank19-20261010-v1",
+    "execution_branch_head": "a388f5be1aefb962f6e238a1ae91fa3aef5ddcbd",
+    "workflow_run_id": 38038077030,
+    "workflow_job_id": 114172615158,
+    "workflow_run_attempt": 1,
+    "workflow_run_conclusion": "success",
+    "artifact_id": 11663834627,
+    "artifact_name": "tb-science-diag-chipseq-trial-0-rank19-v2",
+    "artifact_zip_sha256": "142f09686053917f7d102e7d91b68a155dd4be37d7ebc9b72f68daf2b819b086"
+  },
+  "slot": {
+    "ledger_schedule_rank": 19,
+    "id": "terminal-bench-science/diag-chipseq::trial-0",
+    "task_digest": "sha256:437bfacaebda9ce9905d54bdfe7247aec9649038206512c64547021f42e3950b",
+    "logical_attempt_id": "a3672b9d77c8fa0b7d3f0610ac2c008d2888e566d8a75ac92aa7078c1523abe6",
+    "execution_claim_binding_digest": "sha256:4e9cae8c879a8122f11fe6ae7eea775fcc4fb0ae62b3a87e208a95d28ea4d05f"
+  },
+  "prestart_guard": {
+    "pass": true,
+    "task_read": true,
+    "task_started": false,
+    "input_tokens": 4012,
+    "reserved_completion_tokens": 4096,
+    "server_context_tokens": 16384,
+    "context_headroom_tokens": 8276,
+    "raw_task_obligation_count": 152,
+    "request_identity_sha256": "88c661c072b5186f32efdf4299d856e31d3fb0d90f5ec7674b28dec9ac574299",
+    "payload_sha256": "2f29ea0a1c3ec1e8971b1741eb3ea706c565c95710569b6a4dbaa1df5b7f6f68"
+  },
+  "final_receipt": {
+    "schema": "PROJECT_BRAIN_TB_SCIENCE_TERMINAL_SLOT_RECEIPT_RANK19_V7",
+    "status": "PREEXPOSURE_ABORT_NONCONSUMING",
+    "task_read": true,
+    "task_started": false,
+    "start_cas_acquired": false,
+    "benchmark_trials_consumed": 0,
+    "reward": null,
+    "execution_authority_consumed": false,
+    "rerun_credit": false,
+    "exception_type": "RuntimeError",
+    "exception_message": "BRAIN_LOGICAL_ATTEMPT_ID_MISMATCH",
+    "result_hashes": {
+      "jobs/diag-chipseq-trial-0/diag-chipseq-trial-0/diag-chipseq__wXPgEkr/result.json": "d68ae41b1207169e7d53038a8ee45ae1ea5189a8b0c8ddfade917a56d3b28697",
+      "jobs/diag-chipseq-trial-0/diag-chipseq-trial-0/result.json": "eb36d0d927b62ec0d3136e8f9bc5980e8011dcaa35ada920a82199eb3546cb89"
+    }
+  },
+  "causal_root": {
+    "classification": "PRESTART_IDENTITY_VALIDATOR_VERSION_SKEW",
+    "agent_path": "capsules/tb_science_rank15_20261009_v1/canonical/runtime/harbor_science_agent_v13.py",
+    "agent_git_blob_sha": "8deede8adb960b6ebf7ee747a5e9ff1016238b7e",
+    "stale_identity_primitive_path": "execution_guard/logical_attempt_identity_v1.py",
+    "stale_identity_primitive_git_blob_sha": "6d29ac6a30e7094feb673147802aaecdf391fff0",
+    "stale_v1_derived_logical_attempt_id": "def7e2921acf58d4ef03e3183512996c718a5a13069482cb825464c0c963a8b4",
+    "required_identity_primitive_path": "execution_guard/logical_attempt_identity_v2.py",
+    "required_identity_primitive_git_blob_sha": "67ff638459af1bb50a094e9479fb4aa5e2a3de1c",
+    "required_claim_bound_logical_attempt_id": "a3672b9d77c8fa0b7d3f0610ac2c008d2888e566d8a75ac92aa7078c1523abe6",
+    "rank19_runner_already_injected_execution_claim_binding_digest": true,
+    "failure_occurs_before_start_barrier_await": true,
+    "planner_called": false,
+    "model_reasoning_samples": 0,
+    "action_effect_observed": false
+  },
+  "proof_gap": {
+    "invariant_registry_declared_identity_v2": true,
+    "live_agent_validator_used_identity_v1": true,
+    "missing_invariant": "LIVE_AGENT_IDENTITY_VALIDATOR_MUST_USE_BOUND_IDENTITY_PRIMITIVE_AND_EXECUTION_CLAIM_DIGEST"
+  },
+  "consequence": "FREEZE_RANK19_EXECUTION__REPAIR_AGENT_IDENTITY_VALIDATOR_TO_V2_AND_ADD_SOURCE_WIRING_RATCHET__VERIFY_ZERO_EXPOSURE__RESEAL_PUBLIC_SURFACE__ONLY_THEN_AUTHORIZE_SAME_LOGICAL_ATTEMPT_CONTINUATION",
+  "accounting": {
+    "global_benchmark_trials_consumed": 18,
+    "rank19_benchmark_trials_consumed": 0,
+    "consumed_successes_delta": 0,
+    "consumed_final_failures_delta": 0,
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
