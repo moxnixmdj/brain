@@ -11,7 +11,7 @@ def setup(root):
  state={v.v9.base.STEP_BINDINGS_KEY:{v.v9.base.FINAL_STEP:{
   "material_totality_certificate":{"path":"canonical/governance/tc.json","git_blob_sha":"1"},
   "material_totality_semantic_verifier":{"path":v.TOTALITY_VERIFIER_PATH,"git_blob_sha":v.TOTALITY_VERIFIER_BLOB},
-  "material_totality_semantic_verification":{"path":"canonical/verification/tr.json","git_blob_sha":"2"}}}
+  "material_totality_semantic_verification":{"path":"canonical/verification/tr.json","git_blob_sha":"2"}}}}
  rp=root/"state.json";rp.write_text(json.dumps(state))
  active=json.loads(claim.read_text());active["claim_id"]=v.CLAIM_ID
  cert={"schema":v.CERT_SCHEMA,"root_id":v.ROOT_ID,"claim_id":v.CLAIM_ID,
