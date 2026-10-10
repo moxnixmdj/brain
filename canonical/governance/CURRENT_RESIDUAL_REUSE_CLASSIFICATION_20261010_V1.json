@@ -452,15 +452,15 @@
         "verified_leaf_count": 9,
         "total_leaf_count": 24,
         "verified_leaf_ids": [
+          "PQ::R10_ANALYSIS_DECISION::EXECUTION",
+          "PQ::R12_META_COMPOSITION_CLOSURE::EXECUTION",
           "PQ::R1_TARGET_SPECIFICATION::EXECUTION",
           "PQ::R2_CANDIDATE_SEARCH::EXECUTION",
           "PQ::R3_REALIZATION_OBSERVATION::EXECUTION",
           "PQ::R4_MEASUREMENT_CONSTRUCT::EXECUTION",
           "PQ::R6_EVIDENCE_GROUNDING_DEPENDENCE::EXECUTION",
           "PQ::R7_CAUSAL_PRESCRIPTIVE::EXECUTION",
-          "PQ::R8_POPULATION_CONTEXT_OPERATOR::EXECUTION",
-          "PQ::R10_ANALYSIS_DECISION::EXECUTION",
-          "PQ::R12_META_COMPOSITION_CLOSURE::EXECUTION"
+          "PQ::R8_POPULATION_CONTEXT_OPERATOR::EXECUTION"
         ],
         "open_execution_leaf_count": 3,
         "open_semantic_leaf_count": 12,
