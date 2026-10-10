@@ -1848,7 +1848,8 @@
     "source_local_identity_authority_preserved": true,
     "semantic_identity_authority": false,
     "global_identity_authority": false,
-    "terminal_credit_delta": 0
+    "terminal_credit_delta": 0,
+    "candidate_universe_complete": false
   },
   "regcap_contextual_fact_proofs": {
     "status": "BOUND__THREE_EXACT_REGCAP_CONTEXT_FACT_FAMILIES__NO_REVERSE_CLASSIFICATION",
