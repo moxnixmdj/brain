@@ -180,20 +180,24 @@ def verify() -> dict[str, Any]:
     if not isinstance(state, dict) or state.get("task_read_history") is not False or state.get("task_started") is not False or state.get("benchmark_trials_consumed") != 0:
         errors.append("RANK19_NOT_FRESH")
 
+    counts = ledger.get("counts")
     next_slot = ledger.get("next_slot")
-    if ledger.get("consumed_slots") != 18 or ledger.get("consumed_final_failures") != 18:
+    scheduler = ledger.get("scheduler")
+    if not isinstance(counts, dict) or counts.get("benchmark_trials_consumed") != 18 or counts.get("consumed_failures_final") != 18:
         errors.append("RANK19_LEDGER_PREDECESSOR_COUNT_DRIFT")
     if not isinstance(next_slot, dict):
         errors.append("RANK19_LEDGER_NEXT_SLOT_MISSING")
     else:
         if next_slot.get("slot_id") != SLOT or next_slot.get("task_digest") != DIGEST:
             errors.append("RANK19_LEDGER_SLOT_DRIFT")
-    if ledger.get("logical_attempt_id") != ATTEMPT:
-        errors.append("RANK19_LEDGER_ATTEMPT_DRIFT")
-    if ledger.get("rank19_task_read_history") is not False or ledger.get("rank19_task_started") is not False:
-        errors.append("RANK19_LEDGER_EXPOSURE_DRIFT")
-    if ledger.get("rank19_start_cas_acquired") is not False or ledger.get("rank19_benchmark_trials_consumed") != 0:
-        errors.append("RANK19_LEDGER_CONSUMPTION_DRIFT")
+        if next_slot.get("logical_attempt_id") != ATTEMPT:
+            errors.append("RANK19_LEDGER_ATTEMPT_DRIFT")
+        if next_slot.get("task_read_history") is not False or next_slot.get("task_started") is not False:
+            errors.append("RANK19_LEDGER_EXPOSURE_DRIFT")
+        if next_slot.get("start_cas_acquired") is not False or next_slot.get("benchmark_trials_consumed") != 0:
+            errors.append("RANK19_LEDGER_CONSUMPTION_DRIFT")
+    if not isinstance(scheduler, dict) or scheduler.get("rank19_execution_authority_effective") is not False:
+        errors.append("RANK19_LEDGER_AUTHORITY_STATE_DRIFT")
 
     expected = {
         "schema": "PROJECT_BRAIN_CAPABILITY_FIRST_CHECKPOINT_ADMISSION_V1",
