@@ -1,0 +1,45 @@
+{
+  "carrier": {
+    "id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "provider": "SPRITES",
+    "workspace": "/home/sprite/v9-real-witness-second"
+  },
+  "date": "2026-10-11",
+  "exact_remaining_obligation": "INDEPENDENTLY_VERIFIED_WHOLE_LEAF_DOMAIN_EQUIVALENCE_OR_COMPLETE_UNION_LIFT_FOR_MATERIAL_DEFEATER_TOTALITY__THEN_V3_AND_V4__THEN_R4",
+  "incremental_spend_usd": 0,
+  "proved": {
+    "current_stronger_cc_r3_proved": false,
+    "exact_run_relabelled_as_global_rejected": true,
+    "v3_style_certificate_without_whole_leaf_lift_rejected": true,
+    "v4_closure_requires_both_independent_whole_leaf_lift_and_v3_success": true,
+    "whole_leaf_lift_cannot_replace_v3_material_totality": true,
+    "whole_leaf_lift_digest_bound": true
+  },
+  "replay": {
+    "combined_suite_tests_passed": 17,
+    "combined_suite_tests_run": 17,
+    "py_compile": "PASS",
+    "transcript_bytes": 2990,
+    "transcript_sha256": "386f5f80bce6003af2ba18b154eebe456aba1c63efed7c3ac6ae76ca024007ad",
+    "v4_tests_passed": 5,
+    "v4_tests_run": 5
+  },
+  "schema": "PROJECT_BRAIN_COVERAGE_CC_R3_PROFESSIONAL_R12_V4_SCOPE_LIFT_GUARD_INDEPENDENT_VERIFY_V1",
+  "status": "PASS__SECOND_INDEPENDENT_SPRITE__V4_5_OF_5__EXACT_RUN_SCOPE_INFLATION_REJECTED__ZERO_CC_R3_PROPERTY_OR_TERMINAL_CREDIT",
+  "subject": {
+    "predecessor_v3": [
+      "canonical/runtime/coverage_cc_r3_professional_r12_semantic_verify_v3.py",
+      "e6a65e3b2fc1ddfdc1698a98e5d7783b7fa56276"
+    ],
+    "runtime": [
+      "canonical/runtime/coverage_cc_r3_professional_r12_semantic_verify_v4.py",
+      "06ad9e3c392590f479c006a40234953fcb2e2ac8"
+    ],
+    "tests": [
+      "canonical/tests/test_coverage_cc_r3_professional_r12_semantic_verify_v4.py",
+      "e7d668f831d4e857a0903428d6d543551e3fe0d3"
+    ]
+  },
+  "terminal_credit_delta": 0
+}

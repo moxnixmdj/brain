@@ -1,0 +1,84 @@
+{
+  "carrier": {
+    "id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "provider": "SPRITES",
+    "workspace": "/home/sprite/v9-real-witness-second"
+  },
+  "date": "2026-10-11",
+  "hard_nonclaims": [
+    "NO_STRONGER_R12_CC_R3_CLOSURE",
+    "NO_STRONGER_R12_SEMANTIC_PROPERTY_TRUTH",
+    "NO_WHOLE_LEAF_SCOPE_EQUIVALENCE",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "incremental_spend_usd": 0,
+  "observed": {
+    "acceptance_authority": false,
+    "claim_id": "4d94bc346ec20e2778c1fe8655274dd0e9ff4cd67e94681164f77be9fb4e1962",
+    "incremental_spend_usd": 0,
+    "pass": true,
+    "positive_control_valuations_verified": 16,
+    "promotion_authority": false,
+    "quality_authority": false,
+    "real_positive_nonvacuity_verified": true,
+    "safe_property_truth_proved": true,
+    "schema": "PROJECT_BRAIN_PROFESSIONAL_R12_SAFE_CERTIFICATION_DISPOSITION_PROPERTY_VERIFY_V1",
+    "scope_authority": "EXACT_SAFE_WRAPPER_INVOCATION_DOMAIN_ONLY",
+    "semantic_truth_authority": true,
+    "status": "PASS__SAFE_CERTIFICATION_DISPOSITION_PROPERTY_TRUTH_ON_EXACT_WRAPPER_DOMAIN__STRONGER_R12_REMAINS_OPEN",
+    "stronger_r12_authority_transported": false,
+    "stronger_r12_claim_id": "11870f850b46bcfcc31094f764fc4f45c911aaac413979ceb62679ff19a53162",
+    "stronger_r12_semantic_sufficiency_proved": false,
+    "terminal_authority": false,
+    "terminal_credit_delta": 0,
+    "whole_leaf_scope_equivalence_proved": false
+  },
+  "replay": {
+    "combined_suite_tests_passed": 17,
+    "combined_suite_tests_run": 17,
+    "property_verifier_tests_passed": 3,
+    "property_verifier_tests_run": 3,
+    "py_compile": "PASS",
+    "safe_wrapper_tests_passed": 9,
+    "safe_wrapper_tests_run": 9,
+    "transcript_bytes": 2990,
+    "transcript_sha256": "386f5f80bce6003af2ba18b154eebe456aba1c63efed7c3ac6ae76ca024007ad"
+  },
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_R12_SAFE_CERTIFICATION_DISPOSITION_PROPERTY_INDEPENDENT_VERIFY_V1",
+  "status": "PASS__SECOND_INDEPENDENT_SPRITE__SAFE_WRAPPER_9_OF_9__PROPERTY_VERIFIER_3_OF_3__COMBINED_TRUTH_REPAIR_SUITE_17_OF_17__ZERO_STRONGER_R12_OR_TERMINAL_CREDIT",
+  "subject": {
+    "claim": [
+      "canonical/governance/COVERAGE_COMPLETENESS_FROZEN_CLAIM_PROFESSIONAL_R12_SAFE_CERTIFICATION_DISPOSITION_20261011_V1.json",
+      "89f42a45b6b26232473e891da5e8708805c65d98"
+    ],
+    "property_certificate": [
+      "canonical/governance/PROFESSIONAL_R12_SAFE_CERTIFICATION_DISPOSITION_PROPERTY_CERTIFICATE_20261011_V1.json",
+      "89e0bed47c6d6fb6f49975c4175d9621aefeeb2e"
+    ],
+    "property_tests": [
+      "canonical/tests/test_professional_r12_safe_certification_disposition_claim_verify_v1.py",
+      "2879772072495e3d157d7057fcb34c0895e332fa"
+    ],
+    "property_verifier": [
+      "canonical/runtime/professional_r12_safe_certification_disposition_claim_verify_v1.py",
+      "96214fb90d3b171955abbaa5cc15b736d18b3acb"
+    ],
+    "wrapper": [
+      "canonical/runtime/professional_r12_safe_meta_composition_v1.py",
+      "7c1b6631fc237e7ff7160ba1080f326555e05c52"
+    ],
+    "wrapper_tests": [
+      "canonical/tests/test_professional_r12_safe_meta_composition_v1.py",
+      "73d48eb3de1f72c6f8083a5a44fb59f140c58167"
+    ]
+  },
+  "terminal_credit_delta": 0,
+  "truth": {
+    "exact_wrapper_scope_only": true,
+    "safe_wrapper_claim_property_truth_proved": true,
+    "stronger_r12_authority_transported": false,
+    "stronger_r12_semantic_sufficiency_proved": false,
+    "whole_leaf_scope_equivalence_proved": false
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "carrier": {
+    "id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "provider": "SPRITES",
+    "workspace": "/home/sprite/v9-real-witness-second"
+  },
+  "date": "2026-10-11",
+  "incremental_spend_usd": 0,
+  "proved": {
+    "nonpositive_always_has_explicit_blocking_diagnostic": true,
+    "nonpositive_never_receives_positive_authority": true,
+    "positive_requires_all_four_control_predicates": true,
+    "stronger_semantic_sufficiency_claim_proved": false,
+    "v9_exception_is_normalized_fail_closed": true,
+    "whole_leaf_scope_equivalence_proved": false
+  },
+  "replay": {
+    "exception_fail_closed_checked": true,
+    "positive_control_valuations_checked": 16,
+    "py_compile": "PASS",
+    "tests_failed": 0,
+    "tests_passed": 9,
+    "tests_run": 9,
+    "transcript_bytes": 1558,
+    "transcript_sha256": "dbb040dfa8e25b103781da9af269d0142a1217317ee73a6c501c70977586616d"
+  },
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_R12_SAFE_CERTIFICATION_DISPOSITION_INDEPENDENT_VERIFY_V1",
+  "status": "PASS__SECOND_INDEPENDENT_SPRITE__9_OF_9__16_OF_16_POSITIVE_CONTROL_VALUATIONS__EXCEPTION_FAIL_CLOSED__ZERO_STRONGER_R12_OR_TERMINAL_CREDIT",
+  "subject": {
+    "claim": {
+      "git_blob_sha": "89f42a45b6b26232473e891da5e8708805c65d98",
+      "path": "canonical/governance/COVERAGE_COMPLETENESS_FROZEN_CLAIM_PROFESSIONAL_R12_SAFE_CERTIFICATION_DISPOSITION_20261011_V1.json"
+    },
+    "runtime": {
+      "git_blob_sha": "7c1b6631fc237e7ff7160ba1080f326555e05c52",
+      "path": "canonical/runtime/professional_r12_safe_meta_composition_v1.py"
+    },
+    "tests": {
+      "git_blob_sha": "73d48eb3de1f72c6f8083a5a44fb59f140c58167",
+      "path": "canonical/tests/test_professional_r12_safe_meta_composition_v1.py"
+    }
+  },
+  "terminal_credit_delta": 0
+}

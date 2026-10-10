@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_R12_SEMANTIC_SPEC_SPLIT_GUARD_INDEPENDENT_VERIFY_V1",
+  "date": "2026-10-11",
+  "status": "PASS__SECOND_INDEPENDENT_SPRITE__4_OF_4__SAFE_PROPERTY_AND_STRONGER_ADEQUACY_AUTHORITY_SPLIT_ENFORCED__ZERO_TERMINAL_CREDIT",
+  "repository": "moxnixmdj/brain",
+  "branch": "successor/r12-semantic-spec-repair-20261011-v1",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/professional_r12_semantic_spec_split_guard_v1.py",
+      "git_blob_sha": "dca7fa2dd607a4084ac19639c46ef2de5d7d8db2"
+    },
+    "tests": {
+      "path": "canonical/tests/test_professional_r12_semantic_spec_split_guard_v1.py",
+      "git_blob_sha": "3636b385dba83585117428e6882abb7e01ea71f4"
+    },
+    "whole_leaf_domain_verify": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_DOMAIN_EQUIVALENCE_V1_INDEPENDENT_VERIFY_20261010_V1.json",
+      "git_blob_sha": "b6b826d1658d8a2c88ea80260ee667e86ae99394"
+    },
+    "whole_leaf_scope_verify": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_SCOPE_BATCH_VERIFY_20261010_V1.json",
+      "git_blob_sha": "4c2d40a262f18f34bb35f94b59660d60972d45ef"
+    }
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-professional-hard-defect-verify-20261010",
+    "carrier_id": "sprite-1bbb86ed-1f7c-409f-8397-fadc4de7a62a",
+    "workspace": "/home/sprite/v9-real-witness",
+    "tests_run": 4,
+    "tests_passed": 4,
+    "tests_failed": 0,
+    "transcript_sha256": "1166f5f8065ca360ca29e6d10121a7d0b09fd03872450d9d9b96cbdb29f4215f",
+    "transcript_bytes": 686
+  },
+  "proves": [
+    "SAFE_UNIVERSAL_CERTIFICATION_DISPOSITION_PROPERTY_IS_SEPARATE_FROM_STRONGER_WHOLE_LEAF_R12_SEMANTIC_ADEQUACY",
+    "WHOLE_LEAF_DOMAIN_EQUIVALENCE_AND_SCOPE_COMPLETENESS_DO_NOT_BY_THEMSELVES_IMPLY_PROPERTY_TRUTH",
+    "SAFE_PROPERTY_AUTHORITY_CANNOT_BE_TRANSPORTED_TO_STRONGER_R12_CLAIM",
+    "CURRENT_STRONGER_R12_ROUTE_REQUIRES_INDEPENDENT_WHOLE_LEAF_PREDICATE_TRUTH_OR_COMPLETE_UNION_NOT_SCOPE_EQUIVALENCE_ALONE"
+  ],
+  "hard_nonclaims": [
+    "NO_STRONGER_R12_CC_R3_CLOSURE",
+    "NO_STRONGER_R12_SEMANTIC_PROPERTY_TRUTH",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}

@@ -1,0 +1,72 @@
+{
+  "acceptance_authority": false,
+  "certificate_self_authority": false,
+  "claim": {
+    "git_blob_sha": "89f42a45b6b26232473e891da5e8708805c65d98",
+    "path": "canonical/governance/COVERAGE_COMPLETENESS_FROZEN_CLAIM_PROFESSIONAL_R12_SAFE_CERTIFICATION_DISPOSITION_20261011_V1.json"
+  },
+  "claim_id": "4d94bc346ec20e2778c1fe8655274dd0e9ff4cd67e94681164f77be9fb4e1962",
+  "date": "2026-10-11",
+  "incremental_spend_usd": 0,
+  "promotion_authority": false,
+  "quality_authority": false,
+  "real_v9_positive_second_carrier_replay": {
+    "git_blob_sha": "93fd0bcb6ec271df53fd9694cc3dc242a185aab0",
+    "path": "canonical/verification/V9_REAL_R12_SECOND_CARRIER_REPLAY_VERIFY_20261011_V1.json"
+  },
+  "runtime": {
+    "git_blob_sha": "7c1b6631fc237e7ff7160ba1080f326555e05c52",
+    "path": "canonical/runtime/professional_r12_safe_meta_composition_v1.py"
+  },
+  "runtime_independent_verification": {
+    "git_blob_sha": "028a5f8200b033914cb5202b2f6f512a9abab9d5",
+    "path": "canonical/verification/PROFESSIONAL_R12_SAFE_CERTIFICATION_DISPOSITION_INDEPENDENT_VERIFY_20261011_V1.json"
+  },
+  "runtime_tests": {
+    "git_blob_sha": "73d48eb3de1f72c6f8083a5a44fb59f140c58167",
+    "path": "canonical/tests/test_professional_r12_safe_meta_composition_v1.py"
+  },
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_R12_SAFE_CERTIFICATION_DISPOSITION_PROPERTY_CERTIFICATE_V1",
+  "scope_authority": "EXACT_SAFE_WRAPPER_INVOCATION_DOMAIN_ONLY",
+  "semantic_truth_authority": false,
+  "status": "CANDIDATE_PROPERTY_CERTIFICATE__EXACT_WRAPPER_DOMAIN__ZERO_STRONGER_R12_OR_TERMINAL_CREDIT",
+  "stronger_r12_claim": {
+    "authority_transported": false,
+    "claim_id": "11870f850b46bcfcc31094f764fc4f45c911aaac413979ceb62679ff19a53162",
+    "git_blob_sha": "7b26ddba501358d42d6fa342efd27d389bb30654",
+    "path": "canonical/governance/COVERAGE_COMPLETENESS_FROZEN_CLAIM_PROFESSIONAL_R12_SEMANTIC_20261010_V2.json"
+  },
+  "stronger_r12_semantic_truth_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "theorem": {
+    "all_other_valuations_fail_closed_with_explicit_diagnostic": true,
+    "positive_control_abstraction_predicates": [
+      "FINAL_OUTCOME_IS_POSITIVE",
+      "POSITIVE_AUTHORIZED",
+      "MATERIAL_TOTALITY_PROVED",
+      "EXECUTABLE_R12_SEMANTICS_VERIFIED"
+    ],
+    "positive_control_valuation_count": 16,
+    "positive_iff_all_four": true,
+    "real_positive_nonvacuity_independently_replayed": true,
+    "safe_property_truth_proved": true,
+    "stronger_whole_leaf_semantic_sufficiency_proved": false,
+    "v8_positive_requires_material_totality": true,
+    "v9_exception_fail_closed": true,
+    "v9_positive_implies_v8_positive": true,
+    "v9_positive_requires_executable_r12_semantic_verification": true
+  },
+  "v8_to_v9_refinement_verification": {
+    "git_blob_sha": "555f8b37ff9b02d4a313121b531f12c60914cf44",
+    "path": "canonical/verification/PROFESSIONAL_V8_TO_V9_R12_POSITIVE_REFINEMENT_INDEPENDENT_VERIFY_20261010_V1.json"
+  },
+  "v8_totality_mediation_verification": {
+    "git_blob_sha": "ee8a51e8db8e5f58f8b09cc658001c9f19b664c4",
+    "path": "canonical/verification/PROFESSIONAL_QUALITY_P1_ROUTER_V8_TOTALITY_MEDIATION_INDEPENDENT_VERIFY_20261010_V1.json"
+  },
+  "v9_executable_semantic_verification": {
+    "git_blob_sha": "450b28d112be708bb65698581f64410e4991e86d",
+    "path": "canonical/verification/PROFESSIONAL_R12_V9_EXECUTABLE_TOTALITY_SEMANTIC_INDEPENDENT_VERIFY_20261010_V2.json"
+  }
+}
