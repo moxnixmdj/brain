@@ -1,0 +1,20 @@
+{
+  "schema": "PROJECT_BRAIN_ASSURANCE_ROUTER_V3_RECONCILIATION_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__ROUTER_V3_REPLAY_PROPAGATED__LIVE_DEFAULT_FALSE__24_GLOBAL_LEAVES_OPEN__ZERO_CREDIT",
+  "blobs": {
+    "professional": "9ab980cfc25b87afddc9b57e97d6b77de28f4a4e",
+    "assurance": "8ae14a3aa26f26f5259c91d18dac52f7044215c8",
+    "mission": "6418b76ecb0f57116da0bdd7a8ff028aa37db52b",
+    "replay": "1e793db5919be8a75e1599ba974bd06afaae6e91"
+  },
+  "proved": [
+    "ASSURANCE_BINDS_ROUTER_V3_INDEPENDENT_REPLAY",
+    "MISSION_USES_MUTABLE_ASSURANCE_POINTER_IDENTITY",
+    "LIVE_DEFAULT_FALSE",
+    "DOMAIN_SEMANTIC_AND_EXECUTION_CLOSURE_FALSE",
+    "24_GLOBAL_LEAVES_OPEN"
+  ],
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
