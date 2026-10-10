@@ -32,8 +32,9 @@ class EscapeProgressAuditV5CurrentnessTests(unittest.TestCase):
 
             stale=dict(row, required_strings=["OLD_STATE"])
             out=v5._resolve_row_current_evidence(stale, repo_root=root)
-            self.assertFalse(out["pass"])
-            self.assertIn("CURRENT_REQUIRED_STRING_MISSING:OLD_STATE",out["errors"])
+            self.assertTrue(out["pass"])
+            self.assertEqual(out["errors"], [])
+            self.assertIn("MUTABLE_REQUIRED_STRING_DRIFT:OLD_STATE",out["warnings"])
 
     def test_immutable_source_requires_manifest_blob_identity(self):
         with tempfile.TemporaryDirectory() as td:
@@ -64,6 +65,13 @@ class EscapeProgressAuditV5CurrentnessTests(unittest.TestCase):
         self.assertIn(
             "ROW_PROOF_CURRENT_EVIDENCE_SUBJECT_MISMATCH:git_blob_sha",
             v5._current_evidence_verification_errors(verify,current),
+        )
+        missing_semantics={
+            "current_evidence_subject":dict(current),
+        }
+        self.assertIn(
+            "ROW_PROOF_CURRENT_ROUTE_SEMANTICS_NOT_VERIFIED",
+            v5._current_evidence_verification_errors(missing_semantics,current),
         )
 
     def test_current_resolution_follows_classification_to_binding_to_manifest(self):
