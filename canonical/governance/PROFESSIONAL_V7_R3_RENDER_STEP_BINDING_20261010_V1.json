@@ -1,0 +1,27 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_STEP_RESULT_BINDING_V1",
+  "date": "2026-10-10",
+  "status": "PASS__V7_R3_RENDER_STEP_RESULT_BOUND_TO_EXACT_DURABLE_REALIZATION_EVIDENCE",
+  "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+  "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+  "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+  "step_id": "RENDER_EXACT_AUDIENCE_VIEW_AND_BIND_OBSERVATION_CHANNELS",
+  "run_context_sha256": "sha256:0dc8d549586a7d53801b8d825ce86abdf708d6b60fc98c20f3486e3158a4b7a3",
+  "result": "PASS",
+  "evidence_sha256": "176234b80f16f636c3573f50fe538a2b5208a8617755b8a18f5a2df825e0e20e",
+  "producer_id": "PUBLIC_PROFESSIONAL_V7_R3_ARTIFACT_PRODUCER_V1",
+  "binding_proved": true,
+  "evidence": {
+    "path": "canonical/evidence/PROFESSIONAL_V7_R3_DURABLE_REALIZATION_EVIDENCE_20261010_V1.json",
+    "git_blob_sha": "f18329cac5c702f3503863819b5e3c92cb16d382"
+  },
+  "scope": "ONE_EXACT_V7_BOUND_BOUNDED_PDF_REALIZATION_AND_AUDIENCE_VIEW",
+  "semantic_truth_authority": false,
+  "execution_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
