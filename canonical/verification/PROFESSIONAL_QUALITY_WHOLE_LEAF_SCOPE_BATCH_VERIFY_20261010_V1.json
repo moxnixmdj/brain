@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_WHOLE_LEAF_SCOPE_BATCH_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_SPRITE__DEPENDENCY_HASHES__PYCOMPILE__6_OF_6_FOCUSED_TESTS__24_OF_24_DOMAIN_EQUIVALENCE__24_OF_24_SCOPE_COMPLETE__ZERO_PROPERTY_TRUTH_OR_TERMINAL_CREDIT",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/professional_quality_whole_leaf_scope_batch_v1.py",
+      "git_blob_sha": "82ab66c7852fc327821b23ff80dd46de3b81525c"
+    },
+    "tests": {
+      "path": "canonical/tests/test_professional_quality_whole_leaf_scope_batch_v1.py",
+      "git_blob_sha": "8c6c64754fd567cacc037e0803d3cc8565051485"
+    }
+  },
+  "pinned_dependencies": {
+    "leaf_manifest": "a7cad32c9fd969ff2c3857bb924c7bd746237ec2",
+    "domain_runtime": "76bf7e1a6f26ff3664ed8c355dff8a688b074159",
+    "domain_tests": "38678fcf59ee3fa87b223156748a1b29660764e1",
+    "domain_independent_verification": "b6b826d1658d8a2c88ea80260ee667e86ae99394",
+    "scope_certificate_runtime": "3c2630a63aa90f7b4667ef57f73f75b1c6b3c828",
+    "scope_certificate_tests": "0ab58e1a703a6c9a2af3cc1b6307287d49f6404c",
+    "universal_scope_compiler": "b208255789b14e44e86c82c196e06b5c41b3d039",
+    "coverage_claim_scope_guard": "d1de61aa9bc00a184772a50f7ec9d5ee2853d747"
+  },
+  "independent_replay": {
+    "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/pq-scope-batch-v1",
+    "dependency_hashes": "PASS",
+    "py_compile": "PASS",
+    "focused_tests_run": 6,
+    "focused_tests_passed": 6,
+    "leaf_count": 24,
+    "domain_equivalence_pass_count": 24,
+    "scope_complete_count": 24,
+    "property_truth_count": 0,
+    "unique_claim_id_count": 24,
+    "claim_id_set_sha256": "c96dab59494a45e21e2dc2a7eade51af423d0a3b909a71a9f387437943ab62c3",
+    "transcript_sha256": "36e583eaae7e362f3b50844e953f2da48ee33da0b9823404713a0b97a4eda1be"
+  },
+  "proves": [
+    "ALL_24_CURRENT_PROFESSIONAL_LEAVES_REPLAY_EXACT_WHOLE_DOMAIN_EQUIVALENCE",
+    "ALL_24_CURRENT_PROFESSIONAL_LEAVES_ADMIT_THE_R10_PATTERN_UNIVERSAL_SCOPE_COVER",
+    "ALL_24_CLAIM_IDS_ARE_UNIQUE_UNDER_ONE_FROZEN_BATCH_EPOCH",
+    "SCOPE_CONSTRUCTION_NO_LONGER_REQUIRES_23_MANUAL_PER_LEAF_RESEARCH_PROGRAMS"
+  ],
+  "hard_nonclaims": [
+    "NO_LEAF_PROPERTY_TRUTH",
+    "NO_DOMAIN_SEMANTIC_OR_EXECUTION_PROPERTY_CLOSURE",
+    "NO_ROOT_OR_PROFESSIONAL_QUALITY_CLOSURE",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "next": "PROJECT_24_OF_24_SCOPE_COMPLETE_INTO_LIVE_FRONTIER__THEN_RUN_PROPERTY_TRUTH_VERIFICATION_ON_SCOPE_COMPLETE_CLAIMS__FULL_CURRENT_MAIN_REGRESSION_BEFORE_PROMOTION",
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
