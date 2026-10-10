@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_LEAF_REGISTRY_PROPERTY_TRUTH_VERIFY_20261011_V10",
+  "date": "2026-10-11",
+  "status": "PASS__INDEPENDENT_SPRITE__R12_SEMANTIC_ADMITTED__13_OF_24_DERIVABLE__11_SEMANTIC_OPEN__ZERO_PROMOTION_OR_TERMINAL_CREDIT",
+  "repository": "moxnixmdj/brain",
+  "branch": "repair/r12-v9-local-vs-universal-totality-20261011-v1",
+  "base_main_commit": "06f5041ca1fa308540ee3e529e926b3d7d170c4c",
+  "subject": {
+    "binder_runtime": {
+      "path": "canonical/runtime/professional_quality_leaf_binder_v2.py",
+      "git_blob_sha": "96dedf3641009b08a2e21a8be376459f7ae06a58"
+    },
+    "registry": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_LEAF_EVIDENCE_REGISTRY_20261011_V3.json",
+      "git_blob_sha": "6aea709d9a9edea1f23f37fa7c1144cd3ac6d43a"
+    },
+    "r12_semantic_receipt": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R12_SEMANTIC_LEAF_RECEIPT_20261011_V1.json",
+      "git_blob_sha": "57f4dcf8232db1f5c69b5a51ebb49ddcf6c1d612"
+    },
+    "r12_root_registry": {
+      "path": "canonical/governance/COVERAGE_ROOT_REGISTRY_PROFESSIONAL_R12_SEMANTIC_20261011_V3.json",
+      "git_blob_sha": "3b37895f8e6effdc5f0175361301b0775542e3ff"
+    }
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/r9-registry-integration-v1",
+    "semantic_claim_pack_v3_pass": true,
+    "structural_errors": [],
+    "rejected_receipt_count": 0,
+    "verified_execution_leaf_count": 12,
+    "verified_semantic_leaf_count": 1,
+    "verified_semantic_leaf_ids": [
+      "PQ::R12_META_COMPOSITION_CLOSURE::SEMANTIC"
+    ],
+    "verified_leaf_count": 13,
+    "open_leaf_count": 11,
+    "promotion_ready": false,
+    "pass": false,
+    "summary_sha256": "50e60de97046f6f7fce702e4dd8005df767a546a0c4a0b2869796d37051d740b"
+  },
+  "consequence": [
+    "R12_SEMANTIC_PROPERTY_TRUTH_IS_ADMITTED_FOR_THE_EXACT_FROZEN_CLAIM",
+    "ALL_12_EXECUTION_LEAVES_REMAIN_ADMITTED",
+    "ELEVEN_SEMANTIC_LEAVES_REMAIN_CLAIM_SPECIFIC_OPEN_OBLIGATIONS",
+    "NO_CROSS_CLAIM_ROOT_CERTIFICATE_TRANSPORT",
+    "NO_GLOBAL_QUALITY_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
