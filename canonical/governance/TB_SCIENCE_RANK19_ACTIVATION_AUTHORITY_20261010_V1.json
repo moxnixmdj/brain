@@ -1,0 +1,102 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK19_ACTIVATION_AUTHORITY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "ACTIVE__EXACT_ONE_FILE_PUBLIC_ACTIVATION_PR_AUTHORIZED__PROMOTED_PREACTIVATION_SURFACE_VERIFIED__ZERO_TASK_READ__ZERO_CREDIT",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "source_authority": {
+    "path": "canonical/governance/TB_SCIENCE_RANK19_ONE_SLOT_EXECUTION_AUTHORITY_20261010_V4.json",
+    "git_blob_sha": "95f4cd33804af167ce11088467883858e9e0a042"
+  },
+  "source_ledger": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V40.json",
+    "git_blob_sha": "2bb3967dfe894d1dd0e11e190a956faf1fdfcc46"
+  },
+  "public_effective_authority_reconciliation": {
+    "path": "canonical/governance/TB_SCIENCE_RANK19_PUBLIC_EFFECTIVE_AUTHORITY_RECONCILIATION_20261010_V1.json",
+    "git_blob_sha": "271b53fa8b6408023af1704e6838a9cbf71cb3b4",
+    "public_repository": "moxnixmdj/verification-capsule-runner",
+    "public_base": "terminal-execution-v1",
+    "public_base_commit": "c82abe2be6028408b5cd148b1dd20717db661572",
+    "public_base_tree": "64716d99895087779608746c942f9ea5805960f7",
+    "public_execution_surface_git_blob_sha": "c70895390c12ea1d32b586f07b51e892d2a99321",
+    "verified_pr": 2591,
+    "verified_workflow_run_id": 38037701294,
+    "verified_workflow_job_id": 114171495458,
+    "exact_verified_merge_tree_matches_actual_merge_tree": true
+  },
+  "logical_attempt": {
+    "slot_id": "terminal-bench-science/diag-chipseq::trial-0",
+    "task_digest": "sha256:437bfacaebda9ce9905d54bdfe7247aec9649038206512c64547021f42e3950b",
+    "logical_attempt_id": "a3672b9d77c8fa0b7d3f0610ac2c008d2888e566d8a75ac92aa7078c1523abe6",
+    "execution_claim_binding_digest": "sha256:4e9cae8c879a8122f11fe6ae7eea775fcc4fb0ae62b3a87e208a95d28ea4d05f"
+  },
+  "exact_public_activation": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "base_branch": "terminal-execution-v1",
+    "head_branch": "execute/tb-science-rank19-20261010-v1",
+    "head_branch_observed_absent_before_authorization": true,
+    "workflow_path": ".github/workflows/execute-tb-science-rank19-20261010-v1.yml",
+    "workflow_git_blob_sha": "b3c905ad39667edac9bed11068bf412560c3f198",
+    "activation_path": "capsules/tb_science_rank19_20261010_v1/ACTIVATE_RANK19_V1_PR.json",
+    "only_changed_path_allowed": "capsules/tb_science_rank19_20261010_v1/ACTIVATE_RANK19_V1_PR.json",
+    "activation_payload": {
+      "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK19_ACTIVATION_V7",
+      "activate": true,
+      "slot_id": "terminal-bench-science/diag-chipseq::trial-0",
+      "task_digest": "sha256:437bfacaebda9ce9905d54bdfe7247aec9649038206512c64547021f42e3950b"
+    }
+  },
+  "effective_authority": {
+    "branch_creation_authority": true,
+    "activation_file_creation_authority": true,
+    "pull_request_creation_authority": true,
+    "activation_pr_merge_authority": false,
+    "direct_task_read_authority": false,
+    "direct_benchmark_execution_authority": false,
+    "workflow_task_read_authority_only_after_live_preflight": true,
+    "retries_authorized": 0,
+    "replacement_allowed": false
+  },
+  "load_bearing_runtime_gates": [
+    "FIRST_GITHUB_RUN_ATTEMPT_ONLY",
+    "EXACT_BASE_REF_TERMINAL_EXECUTION_V1",
+    "EXACT_HEAD_REF_EXECUTE_TB_SCIENCE_RANK19_20261010_V1",
+    "EXACT_ONE_FILE_ACTIVATION_DIFF_ONLY",
+    "SAME_REPOSITORY_HEAD_REQUIRED",
+    "CAPABILITY_FIRST_ADMISSION_REQUIRED",
+    "EXACT_PROMOTED_EXECUTION_SURFACE_AND_RUNTIME_BLOBS",
+    "EXECUTION_AUTHORITY_REQUIRED",
+    "ACTIVATION_FILE_REQUIRED_AND_EXACT_SLOT_DIGEST_BOUND",
+    "CARRIER_QUALIFICATION_BEFORE_TASK_READ",
+    "DURABLE_START_CAS_ABSENCE_BEFORE_TASK_READ",
+    "PRESTART_CONTEXT_GUARD_BEFORE_START",
+    "DURABLE_START_CAS_DEFINES_TASK_START",
+    "DURABLE_ACTION_INTENT_ACK_BEFORE_EFFECT",
+    "DURABLE_STATE_COMMIT_ACK_BEFORE_NEXT_ACTION"
+  ],
+  "state_at_authorization": {
+    "activation_present": false,
+    "task_read_history": false,
+    "task_started": false,
+    "durable_start_cas_acquired": false,
+    "benchmark_trials_consumed": 0,
+    "result_present": false
+  },
+  "next": "CREATE_EXACT_PUBLIC_BRANCH_FROM_C82ABE2__ADD_ONLY_ACTIVATE_RANK19_V1_PR_JSON__OPEN_PR_TO_TERMINAL_EXECUTION_V1__LET_WORKFLOW_FAIL_CLOSED_OR_EXECUTE_ONE_LOGICAL_ATTEMPT",
+  "hard_nonclaims": [
+    "NO_TASK_READ_FROM_THIS_AUTHORITY_DOCUMENT",
+    "NO_DURABLE_START_FROM_THIS_AUTHORITY_DOCUMENT",
+    "NO_BENCHMARK_RESULT",
+    "NO_RETRY_OR_REPLACEMENT_AUTHORITY",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT",
+    "NO_AUTHORITY_TO_MERGE_THE_ACTIVATION_PR"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_trials_consumed_delta": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
