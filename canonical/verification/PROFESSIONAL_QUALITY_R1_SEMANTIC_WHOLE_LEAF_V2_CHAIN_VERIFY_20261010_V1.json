@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R1_SEMANTIC_WHOLE_LEAF_V2_CHAIN_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__CANONICAL_V2_GATE_ADMITS_R1_SEMANTIC_WHOLE_LEAF_SCOPE_CHAIN__PROPERTY_TRUTH_SEPARATE__ZERO_CREDIT",
+  "leaf_id": "PQ::R1_TARGET_SPECIFICATION::SEMANTIC",
+  "claim_id": "3e651d35ae8ab99189e6b768866d9a02f8135dd1a1638dbb2d0332d14e6de93e",
+  "exact_blobs": {
+    "domain_verifier": "2a2ad9697fba7f92d67492ba49c7fa637afeaaff",
+    "domain_tests": "833e4aea760f02c8ce1af00b66dca674b1571044",
+    "claim_scope": "5b027682b211f879d9b0f06cfa041b158634743d",
+    "claim_verification": "1d6efe21c71c08f3ba2a25184a597210e00e83ee",
+    "scope_certificate": "c1c142f481bd1cf9bcccc127924d1c1f8824ce95",
+    "certificate_verification": "af04ede5a6c6e038d297017661b2486ca2792678",
+    "canonical_v2_gate": "d76b922e8d5c86f10568a3582759f8c23e69b2e0",
+    "universal_scope_compiler": "b208255789b14e44e86c82c196e06b5c41b3d039",
+    "leaf_manifest": "a7cad32c9fd969ff2c3857bb924c7bd746237ec2",
+    "subject": "1d598bc8757017ceb34928d0df9f5fce859ef868",
+    "behavior_contract_registry": "ae250d5bc5da73b23600670be354ffba31e65e53",
+    "mission_authority": "13c470645b037bbb46245c687dd35197b420d51a"
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "domain_unit_tests": {
+      "passed": 8,
+      "failed": 0
+    },
+    "claim_scope_verifier": {
+      "pass": true,
+      "status": "PASS__EXACT_CANONICAL_BEHAVIOR_CONTRACT_WHOLE_LEAF_DOMAIN",
+      "transcript_sha256": "b8a47afbbd351768689b5ea6952034e46a1149ae178442285da9fd5f48fc153b"
+    },
+    "scope_certificate_verifier": {
+      "pass": true,
+      "status": "PASS__EXACT_BEHAVIOR_CONTRACT_DOMAIN_SCOPE_COVER",
+      "transcript_sha256": "3f2d79121434b5c0e5de80f9eec00583b07d4e075fcd9e9e5aa7cdc17bf68176"
+    },
+    "canonical_v2_gate": {
+      "pass": true,
+      "status": "PASS__CLAIM_SCOPED_WHOLE_LEAF_DOMAIN_AND_SCOPE_COVER_ADMISSIBLE__PROPERTY_TRUTH_SEPARATE",
+      "transcript_sha256": "b288771d8e88b745a72e47dc4d7ae016b37e867cb6dd62e0f7d8f689dfc2f36e"
+    }
+  },
+  "proved": [
+    "R1_SEMANTIC_CLAIM_SCOPE_EQUALS_ALL_RUNTIME_INSTANCES_GOVERNED_BY_EXACT_CANONICAL_PROFESSIONAL_BEHAVIOR_CONTRACT_UNDER_EXACT_V7_SUBJECT",
+    "NO_ROOT_OR_LEAF_SPECIFIC_INPUT_FILTER_NARROWS_THE_SCOPE",
+    "SUCCESS_OR_PROPERTY_FILTERING_IS_FORBIDDEN",
+    "EXACT_CLAIM_SCOPE_HAS_UNIVERSAL_FORMAL_SCOPE_COVER",
+    "CANONICAL_V2_GATE_ADMITS_THE_CLAIM_SCOPED_DOMAIN_AND_SCOPE_COVER_CHAIN"
+  ],
+  "not_proved": [
+    "R1_SEMANTIC_PROPERTY_TRUTH",
+    "DOMAIN_SEMANTIC_CLOSURE",
+    "R1_ROOT_CLOSURE",
+    "PROFESSIONAL_QUALITY_CLOSURE",
+    "ACCEPTANCE_PROMOTION_OR_TERMINAL_COMPLETION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
