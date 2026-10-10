@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_ASSURANCE_CLOSURE_COMPILER_POINTER_V1",
   "date": "2026-10-09",
-  "status": "CURRENT_UVCK_V2_CANDIDATE__DEFEATER_ORDER_SOUNDNESS_REPAIRED__PROFESSIONAL_QUALITY_80_KNOWN_DEFEATERS_BOUND__ALL_12_ROOTS_BOUNDED__LEAF_FRONTIER_15_PARTIAL_9_NO_SCOPED_EVIDENCE_24_GLOBAL_OPEN__P1_ROUTER_V3_INDEPENDENT_REPLAY_BOUND__DOMAIN_SEMANTIC_AND_EXECUTION_CLOSURE_STILL_OPEN__NOT_LIVE_DEFAULT",
+  "status": "CURRENT_UVCK_V2_CANDIDATE__DEFEATER_ORDER_SOUNDNESS_REPAIRED__PROFESSIONAL_QUALITY_80_KNOWN_DEFEATERS_BOUND__ALL_12_ROOTS_BOUNDED__LEAF_FRONTIER_16_PARTIAL_8_NO_SCOPED_EVIDENCE_24_GLOBAL_OPEN__R1_BOUNDED_SEMANTIC_EVIDENCE_BOUND__P1_ROUTER_V3_INDEPENDENT_REPLAY_BOUND__DOMAIN_SEMANTIC_AND_EXECUTION_CLOSURE_STILL_OPEN__NOT_LIVE_DEFAULT",
   "governance": {
     "path": "canonical/governance/UVCK_V2_ASSURANCE_CLOSURE_COMPILER_20261009_V1.json",
     "git_blob_sha": "b7197be29b49c55c81e1a18572cd22020510fa5e"
@@ -176,16 +176,17 @@
   },
   "professional_quality_scoped_evidence": {
     "runtime_path": "canonical/runtime/professional_quality_scoped_evidence_v1.py",
-    "runtime_git_blob_sha": "203f3d404118d05a797714c9f57f0cbd988c0d1f",
+    "runtime_git_blob_sha": "1022fa8ef631334a116ba49becffbd5cc024da38",
     "tests_path": "canonical/tests/test_professional_quality_scoped_evidence_v1.py",
-    "tests_git_blob_sha": "529a763aa64af90cc97f32ee9b17d003857288d7",
+    "tests_git_blob_sha": "1d89df9b3487781e263497e4f92f6964061febae",
     "registry_path": "canonical/governance/PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_REGISTRY_20261010_V1.json",
-    "registry_git_blob_sha": "ec0fe3dd0c1c925f09dde1734e3dbea359ac002c",
+    "registry_git_blob_sha": "0ebda915b778667b1ce9e4f58a333faaec8d2b3a",
     "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_VERIFY_20261010_V13.json",
     "verification_git_blob_sha": "9c413c30fcb8f2995ddc81262039248afa0c26e1",
     "result": "25_OF_25_PASS__TWELVE_SCOPED_CAPABILITIES__R6_R7_R12_BOUNDED_SEMANTIC_COVERAGE",
-    "admitted_scope_count": 12,
+    "admitted_scope_count": 13,
     "bounded_semantic_leaf_ids": [
+      "PQ::R1_TARGET_SPECIFICATION::SEMANTIC",
       "PQ::R6_EVIDENCE_GROUNDING_DEPENDENCE::SEMANTIC",
       "PQ::R7_CAUSAL_PRESCRIPTIVE::SEMANTIC",
       "PQ::R12_META_COMPOSITION_CLOSURE::SEMANTIC"
@@ -201,13 +202,13 @@
     "runtime_git_blob_sha": "b398bdfea24e4a658f44285837e4d09646df2299",
     "tests_path": "canonical/tests/test_professional_quality_leaf_coverage_projection_v1.py",
     "tests_git_blob_sha": "7c2d29d9abd508ff2f8a84ed4b1b9e6a56749534",
-    "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_LEAF_COVERAGE_PROJECTION_VERIFY_20261010_V3.json",
-    "verification_git_blob_sha": "f9d0f1bf9e45b2884f651a225d47bd06e27bb209",
-    "result": "COMBINED_32_OF_32__15_PARTIAL__9_NO_SCOPED_EVIDENCE__24_GLOBAL_OPEN",
-    "partial_coverage_leaf_count": 15,
-    "semantic_partial_coverage_leaf_count": 3,
+    "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_R1_SEMANTIC_SCOPED_INTEGRATION_VERIFY_20261010_V1.json",
+    "verification_git_blob_sha": "3408fe8742da7dd022935f8551b478de4c359c2d",
+    "result": "38_OF_38__16_PARTIAL__8_NO_SCOPED_EVIDENCE__24_GLOBAL_OPEN",
+    "partial_coverage_leaf_count": 16,
+    "semantic_partial_coverage_leaf_count": 4,
     "execution_partial_coverage_leaf_count": 12,
-    "no_scoped_evidence_leaf_count": 9,
+    "no_scoped_evidence_leaf_count": 8,
     "verified_global_leaf_count": 0,
     "open_global_leaf_count": 24,
     "global_leaf_closure": false,
@@ -253,5 +254,19 @@
   "hard_nonclaims": [
     "NO_PROFESSIONAL_SAME_SUBJECT_COMPOSITION_PASS",
     "NO_PROFESSIONAL_GLOBAL_LEAF_OR_ROOT_CLOSURE_FROM_DECLARED_SYSTEM_IDENTITY"
-  ]
+  ],
+  "professional_quality_r1_target_semantic": {
+    "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_R1_SEMANTIC_SCOPED_INTEGRATION_VERIFY_20261010_V1.json",
+    "verification_git_blob_sha": "3408fe8742da7dd022935f8551b478de4c359c2d",
+    "result": "PYCOMPILE_PASS__38_OF_38_PASS__R1_BOUNDED_SEMANTIC_EVIDENCE_BOUND",
+    "scoped_capability_count": 13,
+    "partial_coverage_leaf_count": 16,
+    "semantic_partial_coverage_leaf_count": 4,
+    "execution_partial_coverage_leaf_count": 12,
+    "no_scoped_evidence_leaf_count": 8,
+    "global_leaf_credit": false,
+    "domain_semantic_closure": false,
+    "domain_execution_closure": false,
+    "terminal_credit_delta": 0
+  }
 }
