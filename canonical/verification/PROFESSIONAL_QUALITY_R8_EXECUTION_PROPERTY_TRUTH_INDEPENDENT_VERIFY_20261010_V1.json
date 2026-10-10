@@ -1,0 +1,88 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R8_EXECUTION_PROPERTY_TRUTH_INDEPENDENT_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_SPRITE__PYCOMPILE__12_OF_12_FALSIFICATION_TESTS__R8_POPULATION_CONTEXT_OPERATOR_EXECUTION_ACCEPTANCE__ONE_LEAF_PROPERTY_TRUTH_ONLY__ZERO_ROOT_QUALITY_OR_TERMINAL_CREDIT",
+  "repository": "moxnixmdj/brain",
+  "verification_branch": "successor/professional-r8-execution-property-truth-20261010-v2-current",
+  "base_main_commit": "47948d43f6afd84703160773796f2223e2325795",
+  "subject": {
+    "leaf_id": "PQ::R8_POPULATION_CONTEXT_OPERATOR::EXECUTION",
+    "root_id": "R8_POPULATION_CONTEXT_OPERATOR",
+    "manifest_acceptance": "RUN_ROOT_RELEVANT_POSITIVE_NEAR_MISS_AND_ADVERSARIAL_CASES_ON_EXACT_ARTIFACT_OR_RUNTIME_BYTES_AND_BIND_OBSERVED_OUTCOMES_TO_THE_ROOT_CONTRACT"
+  },
+  "exact_blobs": {
+    "property_guard_runtime": "d113595017f242debaf2ea8de8aaa8d420cdd0cb",
+    "property_verifier_runtime": "ad1ab3c4c951c9687ee2f05aeb3e49b484480015",
+    "guard_tests": "1bab7914aae0d9edff555cb874d99285865e3322",
+    "verifier_tests": "59e568500d64bd5a113f29348f3ea3c39d48dc61",
+    "leaf_manifest": "a7cad32c9fd969ff2c3857bb924c7bd746237ec2",
+    "defeater_catalog": "8b92e5cf76f767054f55414b87014e03d43460b8",
+    "whole_leaf_scope_batch_verification": "4c2d40a262f18f34bb35f94b59660d60972d45ef",
+    "r8_root_binding_verification": "e3e6a3e1cc09779ec59903a721d03a94b6ab441d",
+    "population_preflight_verification": "3965db684d7104c5829ce1fcfa8ee08d2cd42cfc",
+    "population_runtime": "fae6d0bf2efbcb9b8fe2a2a627900889c5ec6cab"
+  },
+  "current_rebase_check": {
+    "previous_replay_branch": "successor/professional-r8-execution-property-truth-20261010-v1",
+    "previous_base_main_commit": "a67c0282c024d792035d5dd3e054ba487bbe94b7",
+    "current_base_main_commit": "47948d43f6afd84703160773796f2223e2325795",
+    "proof_surface_byte_identical": true,
+    "all_six_load_bearing_dependency_blobs_byte_identical": true
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "isolated_workdir": "/home/sprite/pq-r8-exec-v1",
+    "pytest_available": false,
+    "test_harness": "DIRECT_DISCOVERY_AND_EXECUTION_OF_ZERO_FIXTURE_TEST_FUNCTIONS",
+    "py_compile": "PASS",
+    "tests_run": 12,
+    "tests_passed": 12,
+    "tests_failed": 0,
+    "transcript_sha256": "f601506aecbd86853100edc68dd516e56a058a1741d3888b89271fa78f829c28",
+    "transcript_bytes": 1940,
+    "observed": {
+      "positive_population_preflight_case": true,
+      "adversarial_case_count": 12,
+      "near_miss_case_count": 12,
+      "unknown_defeater_catchall": true,
+      "unmapped_material_defeater_catchall": true,
+      "failed_population_preflight_catchall": true
+    }
+  },
+  "proves": [
+    "THE_EXACT_R8_EXECUTION_MANIFEST_ACCEPTANCE_IS_OBSERVED_ON_CURRENT_BOUND_RUNTIME_AND_RECEIPT_BYTES",
+    "THE_EXISTING_INDEPENDENTLY_VERIFIED_FROZEN_512_CASE_POPULATION_PREFLIGHT_SUPPLIES_THE_POSITIVE_BOUND_EXECUTION_CASE",
+    "ALL_TWELVE_DECLARED_R8_ROOT_ATTACK_CLASSES_BLOCK_THE_ORDINARY_ACCEPTANCE_PATH_WHEN_DETECTED",
+    "ALL_TWELVE_MAPPED_R8_NEAR_MISSES_ESCALATE",
+    "UNKNOWN_OR_UNMAPPED_MATERIAL_R8_DEFEATERS_FAIL_CLOSED",
+    "FAILED_POPULATION_PREFLIGHT_CANNOT_PASS",
+    "R8_EXECUTION_LEAF_PROPERTY_TRUTH_AUTHORITY_ONLY"
+  ],
+  "hard_nonclaims": [
+    "NO_R8_DEFEATER_DETECTION_COMPLETENESS",
+    "NO_CONSTITUENCY_SUPPORT_GENERALIZATION",
+    "NO_PRESENTER_OR_OPERATOR_GENERALIZATION",
+    "NO_MEASUREMENT_INVARIANCE_COMPLETENESS",
+    "NO_SOCIAL_INFLUENCE_OR_REACTIVITY_CLOSURE",
+    "NO_POST_FREEZE_TERMINAL_RESULT",
+    "NO_R8_SEMANTIC_LEAF_CLOSURE",
+    "NO_R8_ROOT_CLOSURE",
+    "NO_GLOBAL_PROFESSIONAL_PROPERTY_TRUTH",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "leaf_property_truth_authority": true,
+  "detection_completeness_proved": false,
+  "constituency_support_proved": false,
+  "operator_generalization_proved": false,
+  "measurement_invariance_proved": false,
+  "semantic_leaf_closed": false,
+  "root_closed": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
