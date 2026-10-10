@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CAPABILITY_PARALLEL_FRONTIER_V9_INDEPENDENT_VERIFY_20261010_V1",
   "date": "2026-10-10",
-  "status": "PASS__PYCOMPILE__12_OF_12_ADVERSARIAL_TESTS__CURRENT_18E3B07D_FRONTIER_REPLAY__SIX_READ_ONLY_LANES__ZERO_FULL_EXECUTION__ZERO_CREDIT",
+  "status": "PASS__PYCOMPILE__35_OF_35_COMBINED_CORE_AND_PARALLEL_SCHEDULER_TESTS__CURRENT_18E3B07D_FRONTIER_REPLAY__SIX_READ_ONLY_LANES__ZERO_FULL_EXECUTION__ZERO_CREDIT",
   "carrier": {
     "type": "SPRITE",
     "name": "brain-capability-first-scheduler-verify-20261008-v1",
@@ -18,16 +18,25 @@
     "assurance_path": "canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json",
     "assurance_git_blob_sha": "6934692f76a7fcada460b5dd895a0b5eda79fb44",
     "professional_path": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
-    "professional_git_blob_sha": "56afab9ee8ad927d07e7f939a357896d6295ba4c"
+    "professional_git_blob_sha": "56afab9ee8ad927d07e7f939a357896d6295ba4c",
+    "core_scheduler_tests_path": "canonical/tests/test_capability_first_scheduler_v1.py",
+    "core_scheduler_tests_git_blob_sha": "3a66c753d348e1dc4e682bee2bc41035e91c7f56"
   },
   "execution": {
     "py_compile": "PASS",
     "unittest_module": "canonical.tests.test_capability_parallel_frontier_v1",
-    "tests_run": 12,
+    "tests_run": 35,
     "failures": 0,
     "errors": 0,
     "result": "OK",
-    "current_frontier_replay": "PASS"
+    "current_frontier_replay": "PASS",
+    "unittest_modules": [
+      "canonical.tests.test_capability_first_scheduler_v1",
+      "canonical.tests.test_capability_parallel_frontier_v1"
+    ],
+    "parallel_frontier_tests_run": 12,
+    "core_scheduler_regression_tests_run": 23,
+    "fixture_currentness": "EXACT_POLICY_BOUND_R2_RUNTIME_ARTIFACTS_MATERIALIZED__NO_STALE_FIXTURE_CREDIT"
   },
   "verified_properties": [
     "STALE_UNMODELED_SOURCE_DRIFT_FAILS_CLOSED",
