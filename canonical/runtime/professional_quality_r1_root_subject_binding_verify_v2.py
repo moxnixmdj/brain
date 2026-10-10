@@ -1,4 +1,4 @@
-"""Independent verifier for the stronger V5 R1 professional root/subject binding."""
+"""Independent verifier for the final-V6 R1 professional root/subject binding."""
 from __future__ import annotations
 
 from hashlib import sha1
@@ -6,31 +6,33 @@ import json
 from pathlib import Path
 from typing import Any, Mapping
 
-SCHEMA="PROJECT_BRAIN_PROFESSIONAL_QUALITY_ROOT_SUBJECT_BINDING_VERIFY_V1"
+SCHEMA="PROJECT_BRAIN_PROFESSIONAL_QUALITY_ROOT_SUBJECT_BINDING_VERIFY_V2"
 BINDING_SCHEMA="PROJECT_BRAIN_PROFESSIONAL_QUALITY_ROOT_SUBJECT_BINDING_V1"
 ROOT_ID="R1_TARGET_SPECIFICATION"
-BINDING_PATH="canonical/governance/PROFESSIONAL_QUALITY_R1_ROOT_SUBJECT_BINDING_20261010_V2.json"
-EXPECTED_BINDING_BLOB="710a8ad78dffb4910a50b3b67c56b22e1e2db224"
-SUBJECT_PATH="canonical/governance/PROFESSIONAL_QUALITY_P1_V5_DECLARED_SYSTEM_SUBJECT_20261010_V4.json"
-SUBJECT_BLOB="7bce06f0f58c1406e00de4d16db5b851b4a79327"
-SUBJECT_ID="PROFESSIONAL_QUALITY_P1_V5_AUTHENTICATED_TARGET_SYSTEM_20261010_V4"
-SUBJECT_SHA256="1837e5cdd4c56ebb27ed2feb93f81b21f119e54aee6e0527d2781b235b652b29"
+BINDING_PATH="canonical/governance/PROFESSIONAL_QUALITY_R1_ROOT_SUBJECT_BINDING_20261010_V3.json"
+EXPECTED_BINDING_BLOB="69d9dd4efffb09db17f3ed255d9042e88203f6f2"
+SUBJECT_PATH="canonical/governance/PROFESSIONAL_QUALITY_P1_V6_DECLARED_SYSTEM_SUBJECT_20261010_V5.json"
+SUBJECT_BLOB="994a6a6aef44b6bb33161f7179d1983a1b50b633"
+SUBJECT_ID="PROFESSIONAL_QUALITY_P1_V6_DEPENDENCY_CLOSED_AUTHENTICATED_TARGET_SYSTEM_20261010_V5"
+SUBJECT_SHA256="353978ba4866d1e35794390968a14500ee1d8a4f0bddfb8f081e9a1a71ba468d"
 
 EXPECTED_REFS={
- "subject_verification":("canonical/verification/PROFESSIONAL_QUALITY_DECLARED_SYSTEM_SUBJECT_V4_VERIFY_20261010_V1.json","29559409be6f2700a8022a09e70b37ff7d657b4f"),
- "authenticated_target_handoff":("canonical/verification/PROFESSIONAL_QUALITY_P1_ROUTER_V5_TARGET_HANDOFF_INDEPENDENT_VERIFY_20261010_V3.json","d9bd9acf085cda6c340e90cd921ca977967fc8a4"),
+ "subject_verification":("canonical/verification/PROFESSIONAL_QUALITY_DECLARED_SYSTEM_SUBJECT_V5_VERIFY_20261010_V1.json","3b4213f114ae8d6842f1e2b5ddccab61f4b91078"),
+ "dependency_closure":("canonical/verification/PROFESSIONAL_QUALITY_FINAL_SUBJECT_DEPENDENCY_CLOSURE_VERIFY_20261010_V1.json","45e805a92eacc2e11ca1bdb4e2308c65f0d26e79"),
+ "authenticated_target_handoff":("canonical/verification/PROFESSIONAL_QUALITY_P1_ROUTER_V6_MINIMAL_BINDING_KERNEL_VERIFY_20261010_V1.json","6d9f6ff424d1b2bca1f7c2cf71868087d686e60d"),
  "r1_target_semantics":("canonical/verification/PROFESSIONAL_QUALITY_R1_TARGET_SEMANTIC_VERIFY_20261010_V1.json","dfffdd6eff129ce7498c4e4aa8a822cd4a5cda22"),
  "r1_structural_target":("canonical/verification/PROFESSIONAL_QUALITY_R1_STRUCTURAL_TARGET_VERIFY_20261010_V1.json","dcee55ba17d15154117100de6aebd34716ad3e3e"),
 }
 
 REQUIRED_MATERIAL={
- ("canonical/runtime/professional_quality_p1_router_v5.py","8583b63571b5bfe86a473dcba1a716b98821cd5c"),
- ("canonical/runtime/general_adequate_decision_controller_v1.py","368c6ac07e8feaf1a0c880de5388b618def912e2"),
+ ("canonical/runtime/professional_quality_p1_router_v6.py","88644e0517d472d9fbef8d5bc6cf3495f2b50005"),
+ ("canonical/runtime/goal_to_decision_binding_authority_v1.py","5b4573475437e9fc83338b900556b5c4f31c8d65"),
  ("canonical/runtime/professional_quality_p1_router_v4.py","8e5d473b5606251752c4968dfd35290e9b991f16"),
  ("canonical/runtime/professional_quality_p1_router_v3.py","cdb6716ac6d562d1ab222242d07aeecc5cdfac78"),
  ("canonical/runtime/professional_quality_p1_router_v2.py","bdbbc53ab1e50743869ec515a019bfc17218f126"),
  ("canonical/runtime/professional_target_semantic_certificate_v1.py","583612b0e2226053ac758683087b5c5d0f510996"),
  ("canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V2.json","ae250d5bc5da73b23600670be354ffba31e65e53"),
+ ("canonical/governance/PROFESSIONAL_QUALITY_P1_EXECUTION_PROFILE_20261010_V3.json","f7e89eafbb691c16d1bdf5b8d295a468d5e3bec5"),
 }
 
 REQUIRED_GUARANTEES={
@@ -40,7 +42,8 @@ REQUIRED_GUARANTEES={
  "TARGET_COMPILATION_STEP_SELF_ATTESTATION_FAILS_CLOSED",
  "GOAL_OR_TARGET_PAYLOAD_TAMPER_AFTER_BINDING_FAILS_CLOSED",
  "TARGET_BINDING_REQUIRES_DISTINCT_NONEMPTY_PRODUCER_AND_INDEPENDENT_VERIFIER_IDENTITIES",
- "CANONICAL_TARGET_CONTRACT_SEMANTICS_REPLAYED_BEFORE_V3_DELEGATION",
+ "CANONICAL_TARGET_CONTRACT_SEMANTICS_REPLAYED_BEFORE_V4_V3_V2_DELEGATION",
+ "FINAL_SUBJECT_TRANSITIVE_RUNTIME_AND_CONFIGURATION_DEPENDENCY_CLOSURE_VERIFIED",
 }
 REQUIRED_LIMITS={
  "NO_ARBITRARY_USER_PROMPT_SEMANTIC_COMPLETENESS",
@@ -142,39 +145,49 @@ def verify(*,repo_root:str|Path|None=None)->dict[str,Any]:
     replay=sv.get("real_subject_replay") or {}
     if (
         replay.get("pass") is not True
-        or replay.get("component_count")!=16
+        or replay.get("component_count")!=20
         or replay.get("component_currentness_verified") is not True
         or replay.get("subject_identity_verified") is not True
     ):
         return _fail("SUBJECT_VERIFICATION_INSUFFICIENT")
-    if sv.get("root_subject_binding_authority") is not False:
+    if (sv.get("authority") or {}).get("root_subject_binding_authority") is not False:
         return _fail("SUBJECT_VERIFY_AUTHORITY_OVERCLAIM")
+
+    closure=docs["dependency_closure"]
+    cr=closure.get("replay") or {}
+    if (
+        cr.get("pass") is not True
+        or cr.get("roots_dependency_classified")!=12
+        or cr.get("missing_subject_component_count")!=0
+        or cr.get("subject_component_count")!=20
+    ):
+        return _fail("DEPENDENCY_CLOSURE_INSUFFICIENT")
+    if (closure.get("authority") or {}).get("root_subject_binding_authority") is not False:
+        return _fail("DEPENDENCY_CLOSURE_AUTHORITY_OVERCLAIM")
 
     handoff=docs["authenticated_target_handoff"]
     hr=handoff.get("replay") or {}
-    if hr.get("total_tests_passed")!=31 or hr.get("total_tests_failed")!=0:
-        return _fail("V5_HANDOFF_REPLAY_INSUFFICIENT")
-    hsubject=handoff.get("subject") or {}
-    if hsubject.get("git_blob_sha")!="8583b63571b5bfe86a473dcba1a716b98821cd5c":
-        return _fail("V5_HANDOFF_RUNTIME_MISMATCH")
-    producer=handoff.get("producer_id")
-    verifier=(handoff.get("independent_verifier") or {}).get("independent_verifier_id")
-    if not isinstance(producer,str) or not producer.strip():
-        return _fail("V5_HANDOFF_PRODUCER_ID_MISSING")
-    if not isinstance(verifier,str) or not verifier.strip() or verifier.strip()==producer.strip():
-        return _fail("V5_HANDOFF_INDEPENDENCE_INVALID")
-    proved=set(handoff.get("proves") or [])
+    ke=hr.get("kernel_equivalence") or {}
+    rv6=hr.get("router_v6") or {}
+    real=hr.get("real_integration") or {}
+    if (
+        ke.get("tests_passed")!=7 or ke.get("tests_failed")!=0
+        or rv6.get("tests_passed")!=10 or rv6.get("tests_failed")!=0
+        or rv6.get("general_controller_import_absent") is not True
+        or real.get("cases_passed")!=2
+    ):
+        return _fail("V6_HANDOFF_REPLAY_INSUFFICIENT")
+    proved=set(handoff.get("proved") or [])
     required_handoff_proofs={
-        "UNBOUND_TOP_LEVEL_TARGET_INSTANCE_CANNOT_ENTER_V5",
-        "CALLER_CANNOT_SELF_ATTEST_COMPILE_TARGET_SPEC_AND_HARD_CONSTRAINTS",
-        "TARGET_INSTANCE_IS_EXTRACTED_ONLY_FROM_EXACT_DECISION_PAYLOAD_BOUND_TO_EXACT_RAW_GOAL",
-        "GOAL_OR_DECISION_PAYLOAD_TAMPER_BREAKS_CONTENT_BINDING_BEFORE_V4",
-        "PRODUCER_AND_VERIFIER_IDENTITIES_MUST_BE_DISTINCT",
+        "MINIMAL_KERNEL_MATCHES_LEGACY_GOAL_BINDING_AUTHORITY_OUTPUTS_ON_VALID_OPEN_AND_FAIL_CLOSED_CASES",
+        "V6_REMOVES_GENERAL_ADEQUATE_DECISION_CONTROLLER_FROM_ITS_DIRECT_IMPORT_GRAPH",
+        "AUTHENTICATED_RAW_GOAL_TO_TARGET_HANDOFF_BEHAVIOR_IS_PRESERVED",
+        "REAL_CLEAN_AND_BLANK_DOCX_V4_V3_BEHAVIOR_IS_PRESERVED",
     }
     if not required_handoff_proofs<=proved:
-        return _fail("V5_HANDOFF_PROOF_SET_INSUFFICIENT")
+        return _fail("V6_HANDOFF_PROOF_SET_INSUFFICIENT")
     if handoff.get("quality_authority") is not False or handoff.get("terminal_authority") is not False:
-        return _fail("V5_HANDOFF_AUTHORITY_OVERCLAIM")
+        return _fail("V6_HANDOFF_AUTHORITY_OVERCLAIM")
 
     sem=docs["r1_target_semantics"]
     sem_scope=sem.get("claim_scope") or {}
@@ -204,7 +217,7 @@ def verify(*,repo_root:str|Path|None=None)->dict[str,Any]:
     return {
         "schema":SCHEMA,
         "pass":True,
-        "status":"PASS__R1_ROOT_BOUND_TO_AUTHENTICATED_TARGET_HANDOFF_SUBJECT",
+        "status":"PASS__R1_ROOT_BOUND_TO_FINAL_DEPENDENCY_CLOSED_V6_SUBJECT",
         "root_id":ROOT_ID,
         "subject_kind":"DECLARED_SYSTEM",
         "subject_id":SUBJECT_ID,
