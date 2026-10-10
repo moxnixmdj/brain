@@ -1,0 +1,26 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_STEP_RESULT_BINDING_V1",
+  "date": "2026-10-10",
+  "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+  "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+  "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+  "step_id": "RENDER_EXACT_AUDIENCE_VIEW_AND_BIND_OBSERVATION_CHANNELS",
+  "run_context_sha256": "sha256:4e74da6a85ebf4662d88e770fed0b1c8ad3e9308c9830afe9605dbe458d8a1f0",
+  "result": "PASS",
+  "evidence_sha256": "9d9dc65dfb3d12f7f2e5737cfd6a4ddaafa7f7f423d88effaa4217382b5bccac",
+  "producer_id": "container-r3-v7-producer-20261010-v1",
+  "binding_proved": true,
+  "evidence_scope": "EXACT_SINGLE_V7_BOUND_DOCX_BOUNDED_TEXT_EDIT_REALIZATION_INSTANCE",
+  "evidence_ref": {
+    "path": "canonical/evidence/PROFESSIONAL_QUALITY_R3_V7_EXACT_REALIZATION_INSTANCE_20261010_V1.json",
+    "git_blob_sha": "13e7e58b3621b3cabb7abdebe23689f3a72678d2"
+  },
+  "raw_bundle_sha256": "d617dc6a3dc28ebaa89c16ee1928eebc525143bf8e6f820d3fa13a24424b8978",
+  "renderer_version_transport_claim": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
