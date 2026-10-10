@@ -1,0 +1,79 @@
+{
+  "schema": "PROJECT_BRAIN_P3_BINARY_AUTHENTICATED_TOP_LAW_ADMISSION_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS_4_OF_4__REAL_STRICT_P3_BINARY_POLICY_ADEQUACY_LEAF__EXACT_SEAM_BLOBS_8_OF_8__ZERO_GLOBAL_CREDIT",
+  "subject": {
+    "branch": "research/p3-cegar-selected-truth-bridge-20261008-v1",
+    "admission_runtime": {
+      "path": "canonical/runtime/p3_binary_authenticated_top_law_admission_v1.py",
+      "git_blob_sha": "737d3759b80ee700ef88ca6f3d623d1711f3487b"
+    },
+    "tests": {
+      "path": "canonical/tests/test_p3_binary_authenticated_top_law_admission_v1.py",
+      "git_blob_sha": "3525c82985902029faba2c4a21ad9edd0d00c725"
+    },
+    "adequacy_certificate": {
+      "path": "canonical/governance/P3_BINARY_TOP_LAW_POLICY_ADEQUACY_CERTIFICATE_20261008_V1.json",
+      "git_blob_sha": "7b27ac7bce607651c71e395aa275317761ddea7a"
+    },
+    "adequacy_independent_verification": {
+      "path": "canonical/verification/P3_BINARY_TOP_LAW_POLICY_ADEQUACY_INDEPENDENT_VERIFICATION_20261008_V1.json",
+      "git_blob_sha": "3c6e1e38bb8da9022577029067ee159318ec6c79"
+    },
+    "cegar": {
+      "path": "canonical/runtime/p3_robust_policy_adequacy_cegar_v1.py",
+      "git_blob_sha": "c81746a4e9c9bc48a1aafe22cf854632f81698eb"
+    },
+    "membership": {
+      "path": "canonical/runtime/p3_binary_explicit_contract_membership_v1.py",
+      "git_blob_sha": "ca24d891210fb6d885a959c26a9da3451a8b67c7"
+    },
+    "policy": {
+      "path": "canonical/runtime/p3_binary_decision_grounded_expression_v1.py",
+      "git_blob_sha": "590cdc4e7f5a513d0e40bb31afed20df61826bad"
+    }
+  },
+  "independent_carrier": {
+    "provider": "Sprites",
+    "sprite": "brain-abstract-cover-lift-verify-20261008-v1",
+    "sprite_id": "sprite-c6d765e0-f383-49a0-b78b-7863d8d4793d",
+    "workspace": "/home/sprite"
+  },
+  "verification": {
+    "direct_tests_run": 4,
+    "direct_tests_passed": 4,
+    "exact_seam_git_blobs_verified": 8,
+    "proved": [
+      "REAL_STRICT_P3_BINARY_ROOT_SOURCE_REACHES_AUTHENTICATED_TOP_LAW_POLICY_THROUGH_CEGAR",
+      "EXTRA_SEMANTIC_FIELD_FAILS_BEFORE_POLICY_ADEQUACY",
+      "CALLER_CANNOT_INJECT_POLICY_ID_POLICY_CONDITION_OR_SEMANTIC_CONSTRAINT",
+      "OBJECTIVE_OUTSIDE_THE_BOUND_GRAMMAR_FAILS_BEFORE_POLICY_ADEQUACY"
+    ],
+    "separate_normalization_replay": {
+      "exact_git_blobs_verified": 14,
+      "direct_tests_passed": 2,
+      "cegar_authentication_seam_real_certificate_authenticated": true,
+      "wrong_condition_rejected": true,
+      "forged_verification_binding_rejected": true
+    }
+  },
+  "effect": {
+    "real_authenticated_policy_adequacy_subregion_added": "STRICT_EXPLICIT_P3_BINARY_JSON_SOURCE_CLASS_ONLY",
+    "policy_adequacy_test_fixture_dependency_for_this_subregion": false,
+    "whole_p3_closed": false,
+    "global_policy_adequacy_cover_complete": false,
+    "u_empty": false,
+    "terminal": false
+  },
+  "remaining_policy_adequacy_root": "COVER_THE_COMPLEMENT_OF_ALREADY_AUTHENTICATED_TOP_LAW_SUBREGIONS_WITH_SOUND_COMMON_OR_ADAPTIVE_BRAIN_POLICIES__OR_OBTAIN_ONLY_THE_POLICY_CHANGING_FACTS_NEEDED_TO_SELECT_AMONG_AUTHENTICATED_CHILD_POLICIES",
+  "hard_nonclaims": [
+    "NO_FREE_FORM_P3_SCOPE_CLOSURE",
+    "NO_WHOLE_P3_POLICY_ADEQUACY_COVER",
+    "NO_U_EMPTY_DB_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}

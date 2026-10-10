@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_POLICY_ADEQUACY_INDEPENDENT_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "policy_id": "P3_BOUND_BINARY_GROUNDED_DECISION_TOP_LAW_POLICY_V1",
+  "subject_git_blob_sha": "7b27ac7bce607651c71e395aa275317761ddea7a",
+  "pass": true,
+  "status": "INDEPENDENT_SPRITE_EXACT_BYTE_REPLAY_PASS__P3_BINARY_TOP_LAW_ADEQUACY_NORMALIZATION__ZERO_GLOBAL_CREDIT",
+  "verifier": {
+    "path": "canonical/runtime/p3_binary_top_law_policy_adequacy_verifier_v1.py",
+    "git_blob_sha": "af36ce7e40316b385e348e91648c2489e71abf31"
+  },
+  "tests": {
+    "path": "canonical/tests/test_p3_binary_top_law_policy_adequacy_verifier_v1.py",
+    "git_blob_sha": "839008f0324c84df1df465abb6cac6d0df90e2b9",
+    "tests_run": 2,
+    "tests_passed": 2
+  },
+  "independent_carrier": {
+    "provider": "Sprites",
+    "sprite": "brain-abstract-cover-lift-verify-20261008-v1",
+    "sprite_id": "sprite-c6d765e0-f383-49a0-b78b-7863d8d4793d",
+    "workspace": "/home/sprite/p3_binary_adequacy_verify_v1"
+  },
+  "exact_git_blobs_verified": 14,
+  "verified": [
+    "THE_STANDARD_ADEQUACY_CERTIFICATE_IS_AN_EXACT_NORMALIZATION_OF_THE_EXISTING_STRICT_P3_BINARY_TOP_LAW_REGION.",
+    "THE_EXACT_POLICY_BYTES_MEMBERSHIP_RECOGNIZER_REGION_THEOREM_REGION_VERIFIER_AND_TWO_SPRITE_REGION_RECEIPT_ARE_CONTENT_BOUND.",
+    "THE_REGION_VERIFIER_REPLAYS_PASS_AND_PRESERVES_WHOLE_P3_CLOSED_FALSE_AND_U_EMPTY_FALSE.",
+    "THE_POLICY_CONDITION_IS_ONLY_MEMBERSHIP_IN_THE_STRICT_EXPLICIT_P3_BINARY_TOP_LAW_REGION.",
+    "ROOT_TASK_AUTHORITY_REMAINS_UPSTREAM_AND_IS_NOT_SELF_PROVED."
+  ],
+  "hard_nonclaims": [
+    "NO_FREE_FORM_P3_SCOPE_CLOSURE",
+    "NO_WHOLE_P3_CLOSURE",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
