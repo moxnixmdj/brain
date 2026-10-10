@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_WHOLE_LEAF_CERTIFICATE_READINESS_AUDIT_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_SPRITE_MANUAL_REPLAY__4_OF_4_FOCUSED_CASES__CURRENT_24_LEAF_AUDIT_ZERO_ADMISSIBLE_CERTIFICATES__ZERO_QUALITY_OR_TERMINAL_CREDIT",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/professional_quality_whole_leaf_certificate_readiness_audit_v1.py",
+      "git_blob_sha": "0792d72e0dcf2ddad14f962e6748df4fac41b307"
+    },
+    "tests": {
+      "path": "canonical/tests/test_professional_quality_whole_leaf_certificate_readiness_audit_v1.py",
+      "git_blob_sha": "77737ad735c6bb18297e107bedc0c21fd72457b6"
+    },
+    "shared_gate": {
+      "path": "canonical/runtime/professional_quality_whole_leaf_certificate_gate_v1.py",
+      "git_blob_sha": "19715b5be4267343dfa07e90e5b1fb73787c3ce6"
+    },
+    "universal_scope_compiler": {
+      "path": "canonical/runtime/universal_scope_closure_compiler_v1.py",
+      "git_blob_sha": "b208255789b14e44e86c82c196e06b5c41b3d039"
+    },
+    "whole_leaf_ledger": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_RESIDUAL_LEDGER_20261010_V1.json",
+      "git_blob_sha": "ae5503829ad340cccef287f37ff70e4ab9288d33"
+    }
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "focused_cases_passed": 4,
+    "cases": [
+      "NO_CANDIDATES_ROUTE_ONLY_TO_TOTALITY_OR_PARTITION",
+      "AMBIGUOUS_CANDIDATE_SET_FAILS_CLOSED",
+      "EXACT_PAIR_DELEGATES_TO_SHARED_GATE",
+      "STALE_LEDGER_FAILS_CLOSED"
+    ],
+    "current_ledger_result": {
+      "leaf_count": 24,
+      "admissible_scope_certificate_count": 0,
+      "partition_or_totality_required_count": 24,
+      "candidate_rejected_or_ambiguous_count": 0,
+      "status": "PASS__ALL_CURRENT_LEAVES_AUDITED__NO_ADMISSIBLE_CERTIFICATES"
+    },
+    "transcript_sha256": "4ec1ff7e5cb570601b0c5d61ff8e570449b185ae0da6ad95428accd009ea5e62"
+  },
+  "github_workflow": {
+    "run_id": 38063833269,
+    "job_id": 114247352179,
+    "conclusion": "failure",
+    "recorded_steps": 0,
+    "interpretation": "INFRASTRUCTURE_ONLY__NO_CODE_VERDICT"
+  },
+  "consequence": [
+    "NO_CURRENT_PROFESSIONAL_WHOLE_LEAF_SCOPE_CERTIFICATE_IS_ADMISSIBLE",
+    "ALL_24_CURRENT_LEAVES_REQUIRE_CLAIM_SCOPED_TOTALITY_OR_CERTIFIED_COMPLETE_UNION_CONSTRUCTION",
+    "PROPERTY_TRUTH_WORK_REMAINS_BLOCKED_PER_LEAF_UNTIL_SCOPE_CERTIFICATE_ADMISSION",
+    "NO_NEW_PRIMITIVE_CAPABILITY_IS_ESTABLISHED_BY_THIS_AUDIT"
+  ],
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
