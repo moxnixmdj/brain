@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_CONTEXT_DEPENDENT_MEANING_SUCCESSOR_EXECUTION_LEDGER_20261010_V4",
+  "date": "2026-10-10",
+  "status": "DURABLE_LEDGER__MEASUREMENT_BASIS_SEMANTICS_INTERNALIZED__ZERO_CREDIT",
+  "extends": "canonical/reasoning/2026-10-10_CONTEXT_DEPENDENT_MEANING_SUCCESSOR_EXECUTION_LEDGER_V3.json",
+  "events": [
+    {
+      "order": 39,
+      "event": "SELECT_NEW_SEMANTIC_MECHANISM_AFTER_MARGIN_SPREAD_AND_REGCAP_CONTEXT_COVERAGE",
+      "result": "Selected measurement-basis semantics rather than another lexical term list because explicit RWA denominator structure can prove a useful broad regulatory-capital frame while preserving capital-tier ambiguity."
+    },
+    {
+      "order": 40,
+      "event": "IMPLEMENT_RWA_CAPITAL_MEASUREMENT_FRAME",
+      "result": "Added exact capital-ratio percentage-of-RWA source compiler with current BIS DIS20/RBC20 projection authority; frame proves regulatory-capital domain, risk-based ratio kind, RWA denominator, and quantified-level role only.",
+      "merge_commit": "850ee2ac3efcedb1ac2c3bc7714c6d4b03e00ca6"
+    },
+    {
+      "order": 41,
+      "event": "FALSIFY_OVER_SPECIFIC_INFERENCE",
+      "result": "Adversarial tests preserved UNKNOWN for missing denominator, total-assets denominator, working-capital contamination and negated context; explicit CET1 modifier did not mint CET1 identity authority."
+    },
+    {
+      "order": 42,
+      "event": "REPAIR_DECIMAL_SENTENCE_BOUNDARY_BUG",
+      "result": "Clean-room replay exposed that decimal points such as 12.5 were incorrectly treated as sentence boundaries; parser was repaired and full focused suite rerun."
+    },
+    {
+      "order": 43,
+      "event": "BIND_MEASUREMENT_FRAME_TO_SEMANTIC_TRUTH_DISPATCH",
+      "result": "Added RWA_CAPITAL_MEASUREMENT_FRAME truth kind with source-byte-bound predicate identity and positive-only TRUE semantics; different proved frame remains UNKNOWN without incompatibility."
+    },
+    {
+      "order": 44,
+      "event": "VERIFY_AND_MERGE_RWA_MEASUREMENT_ROUTE",
+      "result": "63 of 63 focused and adjacent semantic-truth tests passed; live current BIS DIS20 and RBC20 projections passed; exact verified head merged.",
+      "verification": "canonical/verification/RWA_CAPITAL_MEASUREMENT_FRAME_VERIFY_20261010_V1.json",
+      "merge_commit": "850ee2ac3efcedb1ac2c3bc7714c6d4b03e00ca6"
+    }
+  ],
+  "new_execution_rule": "AFTER_SOURCE_NATIVE_MULTIWORD_AND_RELATIONAL_CONTEXT_CHECKS__USE_AUTHENTICATED_MEASUREMENT_BASIS_DENOMINATOR_UNIT_OR_FORMULA_STRUCTURE_BEFORE_GENERIC_WSD__PRESERVE_BROADER_FRAME_WHEN_LEAF_IDENTITY_IS_NOT_PROVED",
+  "next_execution_rule": "MOVE_TO_A_NEW_POLICY_MATERIAL_FINANCE_AMBIGUITY__FIRST_RUN_PAIRWISE_NONIDENTIFIABILITY_AND_ALL_EXISTING_SOURCE_NATIVE_MULTIWORD_RELATIONAL_REFERENCE_MEASUREMENT_AND_DOMAIN_AUTHORITY_ROUTES__ONLY_BUILD_A_NEW_MECHANISM_IF_A_REAL_SURVIVING_CASE_REQUIRES_IT",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
