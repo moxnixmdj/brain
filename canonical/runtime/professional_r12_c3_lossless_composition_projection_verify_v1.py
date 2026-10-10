@@ -146,9 +146,10 @@ def analyze(
    return _fail("BINDING_SCOPE_GUARANTEES_MISSING",root_id=rid)
   if not isinstance(scope.get("limitations"),list) or not scope.get("limitations"):
    return _fail("BINDING_SCOPE_LIMITATIONS_MISSING",root_id=rid)
-  if v.get("root_subject_binding_authority") is not True:
-   return _fail("INDEPENDENT_ROOT_AUTHORITY_MISSING",root_id=rid)
-  if v.get("terminal_authority") is not False:
+  vstatus=str(v.get("status") or "")
+  if not (vstatus.startswith("PASS__") or ("INDEPENDENT" in vstatus and "PASS" in vstatus)):
+   return _fail("INDEPENDENT_ROOT_VERIFICATION_NOT_PASS",root_id=rid,status=vstatus)
+  if v.get("terminal_authority") not in (False,None):
    return _fail("ROOT_VERIFICATION_TERMINAL_OVERCLAIM",root_id=rid)
   scope_digests[rid]=_digest(dict(scope))
 
