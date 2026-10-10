@@ -1,0 +1,11 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_RECEIPT_V1",
+  "date": "2026-10-10",
+  "status": "VERIFIED_CURRENTNESS_REPAIR",
+  "problem": "The canonical Escape V3 audit loaded a fixed V4 shared-gap binding even after the live residual classifier advanced both Gap A and Gap B to V5.",
+  "root_cause": "VERSIONED_BINDING_PATH_WAS_HARDCODED_IN_A_RUNTIME_THAT_IS_SUPPOSED_TO_VALIDATE_MUTABLE_CURRENT_GOVERNANCE",
+  "repair": "Resolve the shared-gap binding from the mutable current residual classifier by path identity; require Gap A and Gap B to agree exactly; fail closed on missing, divergent, escaping, symlinked, or non-file binding paths.",
+  "architecture": "MUTABLE_CURRENT_CLASSIFIER_PATH_IDENTITY -> VERSIONED_SHARED_GAP_BINDING -> VERSIONED_AUDIT_RUNTIME_AND_VERIFICATION",
+  "verification": "canonical/verification/ESCAPE_V3_DYNAMIC_CURRENT_BINDING_REPAIR_VERIFY_20261010_V1.json",
+  "terminal_credit_delta": 0
+}
