@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_R12_SEMANTIC_STABLE_C1_INDEPENDENT_VERIFY_20261010_V2",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_SPRITE__PYCOMPILE_PREDECESSOR_PASS__7_OF_7_CURRENT_REPLAY__STABLE_R12_C1_FRESH_BINDING__ZERO_PROPERTY_OR_TERMINAL_CREDIT",
+  "verification_base_main_commit": "860cdf52cd4356964ce27e1d7511b245c793bbb0",
+  "claim_id": "11870f850b46bcfcc31094f764fc4f45c911aaac413979ceb62679ff19a53162",
+  "leaf_id": "PQ::R12_META_COMPOSITION_CLOSURE::SEMANTIC",
+  "clause_id": "R12C1_ASSUMPTION_GUARANTEE_COMPOSITION",
+  "exact_blobs": {
+    "runtime": "f592aa8f8b45e4b1e300669e4a964726895272d6",
+    "tests": "650c81e52475ef3f0bf43bf82e6e9efd22863b22",
+    "semantic_claim_pack_v3": "5c3b47bc2d72b2e0b6b01c3e04635928419082fc",
+    "semantic_v3_current_bytes_verify": "42ae47b7d38743a827da8616751d4290dd310b55",
+    "composition_input": "8063d124d6fbd239814380ef4fbc710350a1dea8",
+    "composition_gate_v4": "e1cc6200286c7b400fc7be70ef0789b85af7fe61",
+    "composition_independent_replay": "4ee02c41acf64b1f47ebadec55b6bb5453d676ba"
+  },
+  "independent_replay": {
+    "carrier": "brain-professional-hard-defect-verify-20261010",
+    "carrier_id": "sprite-1bbb86ed-1f7c-409f-8397-fadc4de7a62a",
+    "tests_run": 7,
+    "tests_passed": 7,
+    "tests_failed": 0
+  },
+  "observed": {
+    "current_r12_claim_id_unchanged_after_pack_repair": true,
+    "c1_assumption_guarantee_composition_proved": true,
+    "c8_nonvacuity_proved_by_this_receipt": false,
+    "stronger_material_defeater_totality_proved": false,
+    "semantic_property_truth_authority": false
+  },
+  "hard_nonclaims": [
+    "NO_CROSS_CLAIM_CERTIFICATE_TRANSPORT",
+    "NO_INTERNAL_ROOT_SEMANTIC_COMPLETENESS",
+    "NO_UNKNOWN_MATERIAL_DEFEATER_COMPLETENESS",
+    "NO_CC_R3_TERMINAL_CLOSURE",
+    "NO_R12_SEMANTIC_PROPERTY_TRUTH",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
