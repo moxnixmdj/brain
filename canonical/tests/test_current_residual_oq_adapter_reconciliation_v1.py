@@ -32,11 +32,29 @@ class CurrentResidualOQAdapterReconciliationTests(unittest.TestCase):
         self.assertIn("Q_QUALITATIVE_RELATIVE_ORDER_2",row["current_truth"])
         self.assertEqual(
             self.doc["next_shared_execution_cut"][0],
-            "ATTACK_O11_OBJECTIVE_ACCEPTANCE_WITH_ONE_REUSABLE_SCOPE_COMPLETE_BRAIN_SIDE_ACCEPTANCE_LAW_AND_EXACT_ROW_SCOPE_BINDINGS",
+            "INSTANTIATE_BOUND_O_SHARED_SCOPE_LIFT_LAW_WITH_REAL_CONTENT_ADDRESSED_SCOPE_COMPLETE_BRAIN_PROOFS_FOR_CURRENT_O11_ROWS__PREFER_ONE_PROOF_COVERING_MULTIPLE_ROWS",
         )
         self.assertEqual(
             self.doc["next_shared_execution_cut"][1],
             "ATTACK_Q2_GDPVAL_AND_AA_BRIEFCASE_WITH_ONE_SHARED_AUTHENTICATED_PROFESSIONAL_QUALITY_ORDER_OR_ROBUST_COMMON_POLICY_DOMINANCE_LAW",
+        )
+
+    def test_o_shared_law_is_bound_and_row_instantiation_is_now_primary(self):
+        row=self.rows["ESCAPE_OQ_SHARED_ACCEPTANCE_LAWS"]
+        self.assertTrue(row["o_shared_law_bound"])
+        self.assertEqual(row["o_current_row_acceptance_closed_count"],0)
+        self.assertIn("O11_SHARED_SCOPE_LIFT_LAW_BOUND",row["current_truth"])
+        self.assertIn("O_ROW_ACCEPTANCE_CLOSED_0_OF_11",row["current_truth"])
+        self.assertIn("Q2_SHARED_QUALITY_LAW_OPEN",row["current_truth"])
+        self.assertIn("SCOPE_COMPLETE_BRAIN_PROOFS_FOR_CURRENT_O11_ROWS",row["exact_remaining_class"])
+        self.assertIn("Q_QUALITY_ORDER",row["exact_remaining_class"])
+        self.assertEqual(
+            row["o_shared_law_activation"],
+            "canonical/governance/ESCAPE_O_OBJECTIVE_ACCEPTANCE_SHARED_LAW_ACTIVATION_20261010_V1.json",
+        )
+        self.assertEqual(
+            row["o_shared_law_verification"],
+            "canonical/verification/CURRENT_ESCAPE_O_OBJECTIVE_ACCEPTANCE_VERIFY_20261010_V1.json",
         )
 
     def test_gap_a_adapter_construction_is_closed_but_rows_remain_open(self):
@@ -57,7 +75,10 @@ class CurrentResidualOQAdapterReconciliationTests(unittest.TestCase):
 
     def test_new_exact_sources_are_content_bound(self):
         expected={
-            "canonical/governance/CURRENT_ESCAPE_OQ_FRONTIER_REDUCTION_20261010_V1.json":"e355f3c168429c96ff0dfa142428ada6c97c47e9",
+            "canonical/governance/CURRENT_ESCAPE_OQ_FRONTIER_REDUCTION_20261010_V1.json":"06ed743742a919615841a77fc9b1cc4e6fadf7f8",
+            "canonical/governance/ESCAPE_O_OBJECTIVE_ACCEPTANCE_SHARED_LAW_ACTIVATION_20261010_V1.json":"95278c5850ccba2087b686b7bb9bc2cc7af93b96",
+            "canonical/verification/CURRENT_ESCAPE_O_OBJECTIVE_ACCEPTANCE_VERIFY_20261010_V1.json":"a9fec9307a193a43c6f478b4a21b2e26e335fcd4",
+            "canonical/runtime/current_escape_o_objective_acceptance_v1.py":"a329ce2d14dd6f23d06f981c090b535bfd43fb52",
             "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V6.json":"a6fe5eda7b596d5a24cf75bc9b046bf53f4fe7be",
             "canonical/governance/ESCAPE_GAP_A_POLICY_COVER_ADAPTER_ACTIVATION_20261010_V1.json":"7eaa5c0a403cfd9e6d131cecdc7cb9a243843872",
             "canonical/verification/ESCAPE_GAP_A_POLICY_COVER_ADAPTER_VERIFY_20261010_V1.json":"4c1ad0d785d4a4d354c01a4d09e412d294304195",
