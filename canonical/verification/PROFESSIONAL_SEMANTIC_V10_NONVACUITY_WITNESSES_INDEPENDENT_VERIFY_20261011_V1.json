@@ -1,0 +1,140 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_SEMANTIC_V10_NONVACUITY_WITNESSES_INDEPENDENT_VERIFY_V1",
+  "date": "2026-10-11",
+  "status": "PASS__INDEPENDENT_SPRITE__3_OF_3__12_OF_12_AUTHENTIC_BOUNDED_SEMANTIC_NONVACUITY_WITNESSES_CURRENT__ZERO_PROPERTY_TRUTH",
+  "pass": true,
+  "independent_verified": true,
+  "runtime": {
+    "path": "canonical/runtime/professional_semantic_v10_nonvacuity_witness_compiler_v1.py",
+    "git_blob_sha": "8853e8235346cb16e0ffd99a8866184fd8ec7f36"
+  },
+  "tests": {
+    "path": "canonical/tests/test_professional_semantic_v10_nonvacuity_witness_compiler_v1.py",
+    "git_blob_sha": "551d98d578e8233bdf0f449bcde30d196146d113"
+  },
+  "independent_replay": {
+    "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/pq-v7-proof-bound-verify",
+    "tests_run": 3,
+    "tests_passed": 3,
+    "tests_failed": 0
+  },
+  "root_count": 12,
+  "nonvacuity_witness_count": 12,
+  "rows": [
+    {
+      "root_id": "R10_ANALYSIS_DECISION",
+      "leaf_id": "PQ::R10_ANALYSIS_DECISION::SEMANTIC",
+      "claim_id": "7f138fe0b324311be20277814321acb71c3556ee47044dd2dcd9a49d3b379daa",
+      "witness": {
+        "path": "canonical/verification/PROFESSIONAL_QUALITY_R10_DECISION_SEMANTIC_VERIFY_20261010_V1.json",
+        "git_blob_sha": "c298b2510e352d876c1abacc069e915447e97823"
+      }
+    },
+    {
+      "root_id": "R11_ADAPTIVE_INTEGRITY_SECURITY",
+      "leaf_id": "PQ::R11_ADAPTIVE_INTEGRITY_SECURITY::SEMANTIC",
+      "claim_id": "2ec3dc80102da6c5d3acba9c36d5de24c1971d12ad7c517d2cfeeb9c64b6baea",
+      "witness": {
+        "path": "canonical/verification/PROFESSIONAL_QUALITY_R11_FIREWALL_SEMANTIC_VERIFY_20261010_V1.json",
+        "git_blob_sha": "7f0468c4abae22504d71ef627efeaf57e85f02a6"
+      }
+    },
+    {
+      "root_id": "R12_META_COMPOSITION_CLOSURE",
+      "leaf_id": "PQ::R12_META_COMPOSITION_CLOSURE::SEMANTIC",
+      "claim_id": "a6b0d4f8e1cdb4d65a168b5df927390f6d24085fab7eb1b2aa43b4a028780b26",
+      "witness": {
+        "path": "canonical/verification/UVCK_V2_CURRENT_GENERATION_INDEPENDENT_REPLAY_VERIFY_20261009_V1.json",
+        "git_blob_sha": "81f7f070233b6aa1c4b491949a4c3e7aedfafd10"
+      }
+    },
+    {
+      "root_id": "R1_TARGET_SPECIFICATION",
+      "leaf_id": "PQ::R1_TARGET_SPECIFICATION::SEMANTIC",
+      "claim_id": "e4956b485f12be3edcd4d9723604683d4fb7f04899dccb129c2234a41ff7d689",
+      "witness": {
+        "path": "canonical/verification/PROFESSIONAL_QUALITY_R1_TARGET_SEMANTIC_VERIFY_20261010_V1.json",
+        "git_blob_sha": "dfffdd6eff129ce7498c4e4aa8a822cd4a5cda22"
+      }
+    },
+    {
+      "root_id": "R2_CANDIDATE_SEARCH",
+      "leaf_id": "PQ::R2_CANDIDATE_SEARCH::SEMANTIC",
+      "claim_id": "04c6e7c2650895b53d69db5dd684fff9bc3ac282ca53638dd974e4cccdf223ad",
+      "witness": {
+        "path": "canonical/verification/PROFESSIONAL_QUALITY_R2_SEARCH_SEMANTIC_VERIFY_20261010_V1.json",
+        "git_blob_sha": "06da6b94712ec844a56c0f663cce67f059b7ba8d"
+      }
+    },
+    {
+      "root_id": "R3_REALIZATION_OBSERVATION",
+      "leaf_id": "PQ::R3_REALIZATION_OBSERVATION::SEMANTIC",
+      "claim_id": "4fec05fae6f5b6e583a28466c25e93581a5475e2045712a7fd74a01303084836",
+      "witness": {
+        "path": "canonical/verification/PROFESSIONAL_QUALITY_R3_REALIZATION_SEMANTIC_VERIFY_20261010_V1.json",
+        "git_blob_sha": "3c9a6f03c9dfb7597cdb7c5ca01e9eaf66a596e0"
+      }
+    },
+    {
+      "root_id": "R4_MEASUREMENT_CONSTRUCT",
+      "leaf_id": "PQ::R4_MEASUREMENT_CONSTRUCT::SEMANTIC",
+      "claim_id": "16a5ea4270e1a575ed9c071bfcbed2f591e7da0f249bbe04ef1d2d73cf420325",
+      "witness": {
+        "path": "canonical/verification/PROFESSIONAL_QUALITY_R4_MEASUREMENT_SEMANTIC_VERIFY_20261010_V1.json",
+        "git_blob_sha": "c91074f2f187834936c0b7297579a6b8ba125fae"
+      }
+    },
+    {
+      "root_id": "R5_EVALUATOR_REFERENCE",
+      "leaf_id": "PQ::R5_EVALUATOR_REFERENCE::SEMANTIC",
+      "claim_id": "d84faf841822bbfc42768e7b11919a3e8b3e1e2f7a9b5963daef026f81767d6e",
+      "witness": {
+        "path": "canonical/verification/PROFESSIONAL_QUALITY_R5_EVALUATOR_SEMANTIC_VERIFY_20261010_V1.json",
+        "git_blob_sha": "33d5e8c11e07e4a153edf3970503c6753c5343d2"
+      }
+    },
+    {
+      "root_id": "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+      "leaf_id": "PQ::R6_EVIDENCE_GROUNDING_DEPENDENCE::SEMANTIC",
+      "claim_id": "bab4ea0e6e88f048f70e83e6aede77d01b3bc7fc5649402249bf981b3666e8e5",
+      "witness": {
+        "path": "canonical/verification/PROFESSIONAL_V10_PARAMETERIZED_SEMANTIC_ADMISSION_INDEPENDENT_VERIFY_20261011_V1.json",
+        "git_blob_sha": "d32187b4f46001c352bb244853582452767355a6"
+      }
+    },
+    {
+      "root_id": "R7_CAUSAL_PRESCRIPTIVE",
+      "leaf_id": "PQ::R7_CAUSAL_PRESCRIPTIVE::SEMANTIC",
+      "claim_id": "aa599f621deb0d2f1e3f5484cb1ddb69be6e594113e80d192bb8997ef44eb765",
+      "witness": {
+        "path": "canonical/verification/PROFESSIONAL_QUALITY_R7_SINGLE_EDIT_CAUSAL_INSTANCE_VERIFY_20261009_V1.json",
+        "git_blob_sha": "0c692f55dedb6a8523bcd78541d4cb77ef06d610"
+      }
+    },
+    {
+      "root_id": "R8_POPULATION_CONTEXT_OPERATOR",
+      "leaf_id": "PQ::R8_POPULATION_CONTEXT_OPERATOR::SEMANTIC",
+      "claim_id": "444c3ed3f7ba58ac51633eef6216feeaeb916f8321f65aea6b44a28d766d60d7",
+      "witness": {
+        "path": "canonical/verification/PROFESSIONAL_QUALITY_R8_POPULATION_SEMANTIC_VERIFY_20261010_V1.json",
+        "git_blob_sha": "e47503a3b1f61bbb9effa04edccbf158b8b28e96"
+      }
+    },
+    {
+      "root_id": "R9_TEMPORAL_DEPLOYMENT",
+      "leaf_id": "PQ::R9_TEMPORAL_DEPLOYMENT::SEMANTIC",
+      "claim_id": "2d845bcb860acc977d4420d99588388f82f1e324aa023a7f4313bf4d5f817223",
+      "witness": {
+        "path": "canonical/verification/PROFESSIONAL_QUALITY_R9_TEMPORAL_SEMANTIC_VERIFY_20261010_V1.json",
+        "git_blob_sha": "e4527631fbf6e95cb20381d60eb4fe4b978c176f"
+      }
+    }
+  ],
+  "whole_leaf_totality_proved": false,
+  "semantic_property_truth_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
