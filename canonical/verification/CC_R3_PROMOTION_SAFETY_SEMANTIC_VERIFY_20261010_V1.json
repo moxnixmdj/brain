@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_COVERAGE_ROOT_SEMANTIC_VERIFICATION_V1",
+  "verifier_protocol": "COVERAGE_ROOT_SEMANTIC_VERIFIER_V1",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_CC_R3_PROMOTION_SAFETY_DECISION_PROCEDURE__EXACT_BYTES__11_CHECKS__3_OF_3_MUTATION_FALSIFIERS",
+  "pass": true,
+  "independent": true,
+  "semantic_claim_verified": true,
+  "root_id": "CC_R3_TERMINAL_CLOSURE_V1",
+  "claim_id": "e1c519109c4b2c46a9225686fc2c5c5490564d1cc62d5c6ff3c6c436bfca4314",
+  "proof_mode": "DECISION_PROCEDURE",
+  "certificate": {
+    "path": "canonical/governance/CC_R3_PROMOTION_SAFETY_CERTIFICATE_20261010_V1.json",
+    "git_blob_sha": "20b6f523a2885b87cd04acbe136e092b5f18e5a0"
+  },
+  "semantic_verifier": {
+    "path": "canonical/runtime/cc_r3_promotion_safety_semantic_verifier_v1.py",
+    "git_blob_sha": "c2d73b1dbabf9762efc0aa8ac7bf9e6930eff026"
+  },
+  "verifier_result_sha256": "0237330880e6ee6971971bc4e0a2e27967de1485e320a10bd1045d5959467465",
+  "independent_execution": {
+    "carrier": "SPRITE",
+    "sprite_name": "brain-r3-native-evidence-verify-20261010",
+    "sprite_id": "sprite-61fff7c6-fbff-4b85-a8e1-b98e28fd7e31",
+    "source_transport": "EXACT_BRANCH_FILES_MATERIALIZED_THROUGH_CONNECTED_GITHUB_AUTHORITY",
+    "py_compile": "PASS",
+    "semantic_decision_procedure": "11_OF_11_CHECKS_PASS",
+    "mutation_falsifiers": "3_OF_3_PASS",
+    "mutations": [
+      "REMOVE_SKILL_REUSE_AUTHORITY_GUARD_WITH_CERTIFICATE_REHASH__REJECTED",
+      "REMOVE_PROVIDER_AUTHORITY_ESCALATION_REJECTION_WITH_CERTIFICATE_REHASH__REJECTED",
+      "INVERT_VERIFICATION_AUTHORITY_REWRITE_GUARD_WITH_CERTIFICATE_REHASH__REJECTED"
+    ]
+  },
+  "errors": [],
+  "hard_nonclaims": [
+    "NO_CC_R1_OR_CC_R2_CERTIFICATE",
+    "NO_R4_PROOF_CLOSURE",
+    "NO_GLOBAL_MISSION_COMPLETION",
+    "NO_OPUS_CHECKPOINT_COMPLETION",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "terminal_credit_delta": 0
+}
