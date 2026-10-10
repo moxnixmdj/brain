@@ -1,0 +1,102 @@
+{
+  "schema": "PROJECT_BRAIN_CURSORBENCH_4_0_VENDOR_PDF_RESULT_ARTIFACT_PACKAGE_EVIDENCE_V1",
+  "date": "2026-10-10",
+  "status": "TWO_CURRENT_ANTHROPIC_4_0_SYSTEM_CARD_PDF_PACKAGES_INSPECTED__NO_EMBEDDED_CURSOR_RESULT_ARTIFACT_OR_NONPUBLIC_CURSOR_URI__ZERO_CREDIT",
+  "target_predicate": "CODING_CURSORBENCH_GE_57_8",
+  "prior_authority": {
+    "owner_result_artifact_evidence": {
+      "path": "canonical/evidence/CURSORBENCH_4_0_OWNER_AND_RESULT_ARTIFACT_AUTHORITY_EVIDENCE_20261009_V1.json",
+      "git_blob_sha": "bbab86792bc0b46371a11571dd539aab4592cde6"
+    },
+    "public_owner_surface_ceiling": {
+      "path": "canonical/evidence/CURSORBENCH_4_0_PUBLIC_OWNER_SURFACE_CEILING_EVIDENCE_20261010_V1.json",
+      "git_blob_sha": "05111c026542969ba3a51e8bb89a78b6e9641046"
+    }
+  },
+  "sources": [
+    {
+      "id": "ANTHROPIC_CLAUDE_OPUS_5_5_SYSTEM_CARD_EXACT_PDF",
+      "publisher": "Anthropic",
+      "url": "https://www.anthropic.com/claude-opus-5-5-system-card",
+      "sha256": "7311c9c6bbb16d012f1c12c7418b05949fcf7ae3e30d2c40f22050074b2a7378",
+      "pages": 230,
+      "cursorbench_section_pages": [179,180],
+      "observed_facts": [
+        "CURSORBENCH_4_0_WAS_EXECUTED_END_TO_END_IN_CURSORS_PRODUCTION_AGENT_HARNESS",
+        "CURSOR_INDEPENDENTLY_MEASURED_AND_REPORTED_THE_SCORES",
+        "OPUS_5_5_SCORES_CAME_FROM_A_RESULT_FILE_CURSOR_SENT_DIRECTLY_TO_ANTHROPIC",
+        "ANTHROPIC_COMPUTED_OPUS_5_5_COST_PER_TASK_FROM_MEAN_TOKEN_COUNTS_IN_THAT_FILE",
+        "PDF_EMBEDDED_FILES_NAME_TREE_ABSENT",
+        "PDF_EMBEDDED_ATTACHMENT_COUNT_ZERO",
+        "PDF_FILE_ATTACHMENT_ANNOTATION_COUNT_ZERO",
+        "PDF_LAUNCH_ACTION_COUNT_ZERO",
+        "ONLY_CURSOR_RELATED_URI_IS_HTTPS_CURSOR_COM_CURSORBENCH"
+      ]
+    },
+    {
+      "id": "ANTHROPIC_CLAUDE_SONNET_5_5_SYSTEM_CARD_EXACT_PDF",
+      "publisher": "Anthropic",
+      "url": "https://www.anthropic.com/document/claude-sonnet-5-5-system-card",
+      "sha256": "89cfd6a6d3aa6148eaf23f4a53006950ee7746009f381237c62920c720725785",
+      "pages": 148,
+      "cursorbench_section_pages": [115],
+      "observed_facts": [
+        "CURSORBENCH_4_0_WAS_EXECUTED_END_TO_END_IN_CURSORS_PRODUCTION_AGENT_HARNESS",
+        "CURSOR_INDEPENDENTLY_MEASURED_AND_REPORTED_THE_SCORES",
+        "SONNET_5_5_SCORES_CAME_FROM_A_RESULTS_TABLE_CURSOR_SENT_DIRECTLY_TO_ANTHROPIC",
+        "ANTHROPIC_COMPUTED_SONNET_5_5_COST_PER_TASK_FROM_TOKEN_COUNTS_IN_THAT_TABLE",
+        "PDF_EMBEDDED_FILES_NAME_TREE_ABSENT",
+        "PDF_EMBEDDED_ATTACHMENT_COUNT_ZERO",
+        "PDF_FILE_ATTACHMENT_ANNOTATION_COUNT_ZERO",
+        "PDF_LAUNCH_ACTION_COUNT_ZERO",
+        "ONLY_CURSOR_RELATED_URI_IS_HTTPS_CURSOR_COM_CURSORBENCH"
+      ]
+    }
+  ],
+  "deduction": {
+    "concrete_private_cursor_result_artifact_family_exists": true,
+    "opus_pdf_embeds_or_attaches_the_private_cursor_result_file": false,
+    "sonnet_pdf_embeds_or_attaches_the_private_cursor_result_table": false,
+    "either_exact_pdf_contains_a_nonpublic_cursor_result_uri": false,
+    "vendor_pdf_package_retrieval_route_exhausted_for_these_exact_bytes": true,
+    "direct_cursor_result_artifact_retrieved": false,
+    "per_task_grader_output_domain_bound": false,
+    "per_task_score_contribution_rule_bound": false,
+    "aggregation_denominator_task_count_pass_count_weights_bound": false,
+    "target_membership_for_T_F_R_S_or_V_bound": false,
+    "route_a_threshold_lower_bound_ready": false
+  },
+  "scheduler_effect": {
+    "delete": [
+      "REOPEN_THE_EXACT_OPUS_5_5_SYSTEM_CARD_PDF_LOOKING_FOR_AN_EMBEDDED_OR_ATTACHED_CURSOR_RESULT_FILE",
+      "REOPEN_THE_EXACT_SONNET_5_5_SYSTEM_CARD_PDF_LOOKING_FOR_AN_EMBEDDED_OR_ATTACHED_CURSOR_RESULT_TABLE",
+      "INFER_PUBLIC_RESULT_ARTIFACT_ACCESS_FROM_THE_FACT_THAT_ANTHROPIC_RECEIVED_A_PRIVATE_FILE"
+    ],
+    "preserve": [
+      "ACQUIRE_THE_CURSOR_TO_VENDOR_RESULT_ARTIFACT_FROM_A_NEW_PUBLICATION_OR_OWNER_VENDOR_HANDOFF_SURFACE",
+      "ACQUIRE_EQUIVALENT_CURSOR_OWNER_SCORING_AUTHORITY",
+      "ACQUIRE_TASK_OR_GRADER_LEVEL_OWNER_EVIDENCE_BINDING_ALL_LOAD_BEARING_ATOMS_OF_T_F_R_S_OR_V",
+      "RECHECK_THESE_PDFS_ONLY_IF_THEIR_CONTENT_HASH_CHANGES"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_PRIVATE_RESULT_FILE_OR_TABLE_LACKS_TASK_LEVEL_DATA",
+    "NO_CLAIM_THE_PRIVATE_RESULT_FILE_OR_TABLE_LACKS_TASK_COUNT_PASS_COUNT_OR_WEIGHTS",
+    "NO_CLAIM_THE_PRIVATE_RESULT_ARTIFACT_CANNOT_BECOME_PUBLIC_LATER",
+    "NO_CLAIM_CURSORBENCH_4_0_SCORING_IS_BINARY_EQUAL_WEIGHT_OR_IDENTICAL_TO_3_X",
+    "NO_SCORE_LOWER_BOUND",
+    "NO_PRIVATE_CURSORBENCH_TASK_MEMBERSHIP",
+    "NO_ACCEPTANCE_FAMILY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "promotion_authority": false,
+  "terminal_authority": false
+}
