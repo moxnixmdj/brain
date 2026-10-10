@@ -1,0 +1,10 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_RECEIPT_V1",
+  "date": "2026-10-10",
+  "status": "VERIFIED_CONTROL_PLANE_REPAIR",
+  "problem": "Reuse-first residual admission existed as governance/specification but was not mechanically enforced by capability_first_scheduler_v1; subsequent pointer maintenance also selected V4, leaving reuse-first policy non-authoritative in the current scheduler path.",
+  "root_cause": "STAGED_GOVERNANCE_WITHOUT_RUNTIME_GATE_PLUS_MUTABLE_POINTER_CURRENTNESS_DRIFT",
+  "repair": "Add a fail-closed gate only for explicit new-primitive claims; require exact residual predicate, searched existing mechanisms, one explicit soundness-preserving rejection per searched mechanism, independent missing-primitive verification, minimum scope, falsifier, and promotion criteria. Preserve legacy scheduling, open-world wake gates, primary capability score, shared-cause fanout, checkpoint audit, and terminal-autopilot controls. Promote V6 and R2 open-world policy V3 with exact content-addressed pointers.",
+  "verification": "canonical/verification/CAPABILITY_FIRST_SCHEDULER_REUSE_FIRST_RUNTIME_VERIFY_20261010_V1.json",
+  "terminal_credit_delta": 0
+}
