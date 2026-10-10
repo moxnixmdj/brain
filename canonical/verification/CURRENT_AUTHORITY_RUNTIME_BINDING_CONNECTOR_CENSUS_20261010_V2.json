@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_AUTHORITY_RUNTIME_BINDING_CONNECTOR_CENSUS_20261010_V2",
+  "date": "2026-10-10",
+  "status": "OPEN__CURRENT_RUNTIME_BYTE_BINDING_DRIFT",
+  "subject_branch": "integrate-executable-refinement-current-main-20261010",
+  "subject_commit": "4056886cd8a880ce0bf44d59274473a3ba9afa01",
+  "subject_tree": "3802112eaac528417fc04c2b42503aca9ac05b79",
+  "authority_pointer_path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+  "runtime_binding_reference_count": 53,
+  "current_binding_count": 52,
+  "superseded_binding_count": 1,
+  "current_unique_runtime_path_count": 43,
+  "drift_count": 16,
+  "missing_blob_binding_count": 1,
+  "missing_runtime_file_count": 0,
+  "conflicting_current_path_count": 2,
+  "error_count": 17,
+  "conflicting_current_paths": [
+    {
+      "path": "canonical/runtime/terminal_autopilot_v1.py",
+      "expected_git_blob_shas": [
+        "28a5959bd0989ec14bc666d4e92f8e75dfc6fede",
+        "bb72c160f3be00efedbd5d111b77d956bed2cb11"
+      ],
+      "actual_git_blob_sha": "ac6023d4695b7d1b4952a4ac9bb796ce8fe1ec22"
+    },
+    {
+      "path": "canonical/runtime/p3_conditioned_policy_adequacy_registry_v1.py",
+      "expected_git_blob_shas": [
+        "0e6abf778d040932d556404c2e9852c1211563fe",
+        "a19d683f86b01fdf3ed174d35c4e2cc96f8f71fa",
+        "ede67d5191af7b6b423e48e162ea6b701bf02328"
+      ],
+      "actual_git_blob_sha": "0e6abf778d040932d556404c2e9852c1211563fe"
+    }
+  ],
+  "exact_error_paths": [
+    "canonical/runtime/certificate_gated_selected_route_runtime_entrypoint_v2.py",
+    "canonical/runtime/terminal_candidate_donor_independence_audit_v1.py",
+    "canonical/runtime/terminal_autopilot_executor_v1.py",
+    "canonical/runtime/terminal_autopilot_v1.py",
+    "canonical/runtime/p3_conditioned_policy_adequacy_registry_v1.py",
+    "canonical/runtime/domain_mapping_truth_certificate_v1.py",
+    "canonical/runtime/terminal_root_decision_gate_v1.py",
+    "canonical/runtime/live_capability_ownership_v1.py",
+    "canonical/runtime/live_capability_invoker_v1.py",
+    "canonical/runtime/unified_cognitive_fabric_v1.py",
+    "canonical/runtime/live_brain_runtime_v1.py",
+    "canonical/runtime/option_preserving_capability_optimizer_v1.py",
+    "canonical/runtime/capability_first_scheduler_v1.py"
+  ],
+  "byte_binding_coherence_proved": false,
+  "semantic_refinement_proved": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "note": "CONNECTOR_SIDE_EXACT_GIT_TREE_CENSUS__DO_NOT_RESEAL_DRIFTED_BINDINGS_WITHOUT_CURRENT_BYTE_VERIFICATION"
+}
