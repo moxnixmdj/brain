@@ -4,25 +4,34 @@ on:
   push:
     branches:
       - "diagnostic/find-tb-science-next-slot-20261010"
+    paths-ignore:
+      - "canonical/diagnostics/TB_SCIENCE_NEXT_SLOT_DIAGNOSTIC_20261010.txt"
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   inspect:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-        with:
-          persist-credentials: false
-      - name: Locate canonical schedule evidence
+      - name: Locate canonical schedule evidence and persist result
         run: |
           set -euo pipefail
-          echo "=== DIAG CHIPSEQ REFERENCES ==="
-          grep -R -n -I --include='*.json' --include='*.md' 'diag-chipseq' canonical 2>/dev/null | head -n 240 || true
-          echo "=== SCHEDULE ORDER REFERENCES ==="
-          grep -R -n -I --include='*.json' --include='*.md' 'frozen_manifest_schedule_order' canonical 2>/dev/null | tail -n 240 || true
-          echo "=== LEDGER RANK20 REFERENCES ==="
-          grep -R -n -I --include='*.json' --include='*.md' '"ledger_schedule_rank"[[:space:]]*:[[:space:]]*20' canonical 2>/dev/null | head -n 240 || true
-          echo "=== TB SCIENCE SCHEDULE FILE NAMES ==="
-          find canonical -type f \( -iname '*science*schedule*' -o -iname '*science*manifest*' -o -iname '*slot*ledger*' \) | sort | tail -n 240
+          out="canonical/diagnostics/TB_SCIENCE_NEXT_SLOT_DIAGNOSTIC_20261010.txt"
+          mkdir -p "$(dirname "$out")"
+          {
+            echo "=== DIAG CHIPSEQ REFERENCES ==="
+            grep -R -n -I --include='*.json' --include='*.md' 'diag-chipseq' canonical 2>/dev/null | head -n 240 || true
+            echo "=== SCHEDULE ORDER REFERENCES ==="
+            grep -R -n -I --include='*.json' --include='*.md' 'frozen_manifest_schedule_order' canonical 2>/dev/null | tail -n 240 || true
+            echo "=== LEDGER RANK20 REFERENCES ==="
+            grep -R -n -I --include='*.json' --include='*.md' '"ledger_schedule_rank"[[:space:]]*:[[:space:]]*20' canonical 2>/dev/null | head -n 240 || true
+            echo "=== TB SCIENCE SCHEDULE FILE NAMES ==="
+            find canonical -type f \( -iname '*science*schedule*' -o -iname '*science*manifest*' -o -iname '*slot*ledger*' \) | sort | tail -n 240
+          } > "$out"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$out"
+          git commit -m "diagnostic-result: TB-Science next-slot evidence [diagnostic-result]"
+          git push
