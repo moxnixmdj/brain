@@ -35,6 +35,10 @@
     "rank19_ledger": {
       "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V38.json",
       "git_blob_sha": "137a2f61d911321365bd80613e3806a77dbe7eca"
+    },
+    "scheduler_residual_ledger": {
+      "path": "canonical/runtime/r2_semantic_residual_ledger_v1.py",
+      "git_blob_sha": "f732f511913a7fecd197d73496f156f9bcadff9a"
     }
   },
   "scheduler_work_item": {
