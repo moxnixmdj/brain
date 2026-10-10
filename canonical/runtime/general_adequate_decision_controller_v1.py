@@ -1609,6 +1609,27 @@ def run(
                     "provider_authority": False,
                 }
             )
+            if (
+                round_information_provider is bound_source_provider.provide
+                and isinstance(provided, Mapping)
+                and provided.get("schema") == bound_source_provider.SCHEMA
+                and provided.get("pass") is False
+            ):
+                information_trace[-1]["ingestion_status"] = (
+                    "BOUND_SOURCE_PROVIDER_FAIL_CLOSED"
+                )
+                return _open(
+                    "OPEN__BOUND_SOURCE_OBSERVATION_REQUIRED",
+                    task_id=task_id,
+                    goal=goal,
+                    raw_contract=raw_contract,
+                    next_required_edge="AUTHENTICATED_OBSERVATION_FROM_BOUND_SOURCE_ONLY",
+                    next_information_request=request_packet,
+                    decision_result=decision,
+                    information_trace=information_trace,
+                    goal_to_decision_binding=goal_binding,
+                    information_provider_failure=deepcopy(dict(provided)),
+                )
             if not isinstance(provided, Mapping):
                 return _open(
                     "OPEN__MINIMUM_POLICY_CHANGING_INFORMATION_REQUIRED",
