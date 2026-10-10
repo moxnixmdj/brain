@@ -13,7 +13,7 @@ EXPECTED_EXECUTION={
 
 
 class ProfessionalLeafRegistryPropertyTruthV1Tests(unittest.TestCase):
-    def test_current_registry_derives_exactly_four_execution_leaves(self):
+    def test_current_registry_derives_exactly_six_execution_leaves(self):
         out=binder.evaluate()
         self.assertTrue(out["existing_evidence_current"],out)
         self.assertEqual(out["structural_errors"],[])
