@@ -48,6 +48,7 @@ WORK_TYPES = frozenset(
 
 LOAD_BEARING_PRIMARY_LANE = "LOAD_BEARING_PRIMARY"
 SECONDARY_CAPABILITY_LANE = "SECONDARY_CAPABILITY"
+OPEN_WORLD_EVIDENCE_FRONTIER = "OPEN_WORLD_EVIDENCE_FRONTIER"
 CURRENT_TERMINAL_AUTHORITY = (
     Path(__file__).resolve().parents[1] / "governance" / "CURRENT_TERMINAL_AUTHORITY.json"
 )
@@ -129,6 +130,21 @@ def _eligible(
     if work_type not in WORK_TYPES:
         raise CapabilityFirstSchedulerError("WORK_TYPE_INVALID")
 
+    # Open-world incompleteness is not, by itself, a capability defect. Once a
+    # general mechanism can acquire minimum task-local information on demand,
+    # endless global ontology/evidence completion must not consume primary
+    # development priority. It wakes only when a concrete task/counterexample or
+    # independently verified capability defect binds the frontier to real work.
+    frontier_class = _s(raw.get("frontier_class"))
+    if frontier_class == OPEN_WORLD_EVIDENCE_FRONTIER:
+        task_counterexamples = _ids(raw, "task_local_counterexample_ids")
+        verified_defects = _ids(raw, "verified_capability_defect_ids")
+        if not task_counterexamples and not verified_defects:
+            return (
+                False,
+                "DEMOTED_OPEN_WORLD_EVIDENCE_FRONTIER_WITHOUT_CURRENT_CAPABILITY_DEFECT",
+            )
+
     # Opus/terminal bookkeeping is instrumentation. Open checkpoint obligations
     # may add an audit signal, but they never turn the checkpoint into the
     # optimization target or demote unrelated reusable capability work.
@@ -200,6 +216,13 @@ def rank_work(
                 "work_type": _s(raw.get("work_type")),
                 "benchmark_role": _s(raw.get("benchmark_role")) or None,
                 "scheduling_lane": _s(raw.get("scheduling_lane")) or None,
+                "frontier_class": _s(raw.get("frontier_class")) or None,
+                "task_local_counterexample_ids": _ids(
+                    raw, "task_local_counterexample_ids"
+                ),
+                "verified_capability_defect_ids": _ids(
+                    raw, "verified_capability_defect_ids"
+                ),
                 "open_obligation_ids": _ids(raw, "open_obligation_ids"),
                 "constructive_gap_for_open_obligation_ids": _ids(
                     raw, "constructive_gap_for_open_obligation_ids"
@@ -245,6 +268,11 @@ def rank_work(
             "OPEN_CHECKPOINT_OBLIGATIONS_DO_NOT_DEMOTE_GENERAL_CAPABILITY_WORK__"
             "CHECKPOINT_SCORE_BREAKS_TIES_ONLY"
         ),
+        "open_world_frontier_policy": (
+            "GLOBAL_OPEN_WORLD_EVIDENCE_INCOMPLETENESS_IS_NOT_A_PRIMARY_"
+            "CAPABILITY_DEFECT__WAKE_ONLY_ON_TASK_LOCAL_COUNTEREXAMPLE_OR_"
+            "INDEPENDENTLY_VERIFIED_CAPABILITY_DEFECT"
+        ),
         "option_preservation_policy": OPTION_PRESERVATION_POLICY,
         "optimization_rule": "OPTIMIZE_IMPLEMENTATIONS_NOT_POSSIBILITIES",
         "capability_learning_loop": list(CAPABILITY_LEARNING_LOOP),
@@ -255,6 +283,13 @@ def rank_work(
                 "work_type": row["work_type"],
                 "benchmark_role": row["benchmark_role"],
                 "scheduling_lane": row["scheduling_lane"],
+                "frontier_class": row["frontier_class"],
+                "task_local_counterexample_ids": row[
+                    "task_local_counterexample_ids"
+                ],
+                "verified_capability_defect_ids": row[
+                    "verified_capability_defect_ids"
+                ],
                 "open_obligation_ids": row["open_obligation_ids"],
                 "constructive_gap_for_open_obligation_ids": row[
                     "constructive_gap_for_open_obligation_ids"
