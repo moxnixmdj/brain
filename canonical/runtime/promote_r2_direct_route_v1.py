@@ -2,11 +2,13 @@
 """Atomically promote one independently verified R2 direct route into live use."""
 from __future__ import annotations
 
+from contextlib import contextmanager
 from copy import deepcopy
 import hashlib
 import json
 from pathlib import Path
-from typing import Any, Mapping
+import tempfile
+from typing import Any, Iterator, Mapping
 
 from canonical.runtime import r2_direct_route_dynamic_admission_v1 as admission
 
@@ -30,17 +32,44 @@ def _receipt_digest(value: Mapping[str, Any]) -> str:
     return hashlib.sha256(raw).hexdigest()
 
 
-def promote(
+@contextmanager
+def _promotion_lease(pointer: Path) -> Iterator[dict[str, str]]:
+    try:
+        import fcntl
+    except ImportError as exc:
+        raise R2DirectRoutePromotionError("PROMOTION_LEASE_UNAVAILABLE") from exc
+
+    key = hashlib.sha256(str(pointer).encode("utf-8")).hexdigest()
+    lock_path = (
+        Path(tempfile.gettempdir())
+        / ("project_brain_r2_direct_route_promotion_" + key + ".lock")
+    )
+    handle = lock_path.open("a+b")
+    acquired = False
+    try:
+        try:
+            fcntl.flock(handle.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+            acquired = True
+        except BlockingIOError as exc:
+            raise R2DirectRoutePromotionError("PROMOTION_LEASE_BUSY") from exc
+        yield {
+            "kind": "LOCAL_PROCESS_FLOCK_NONBLOCKING",
+            "lock_key": key,
+        }
+    finally:
+        if acquired:
+            fcntl.flock(handle.fileno(), fcntl.LOCK_UN)
+        handle.close()
+
+
+def _promote_locked(
     *,
+    root: Path,
+    pointer: Path,
     candidate_path: str,
     receipt_path: str,
-    repo_root: str | Path = ROOT,
-    pointer_path: str | Path | None = None,
+    lease: Mapping[str, str],
 ) -> dict[str, Any]:
-    root = Path(repo_root).resolve()
-    pointer = Path(pointer_path).resolve() if pointer_path is not None else (
-        root / "canonical/governance/CURRENT_R2_DIRECT_ROUTE_ADMISSIONS.json"
-    )
     current = admission.load_current_admissions(
         repo_root=root,
         pointer_path=pointer,
@@ -59,6 +88,7 @@ def promote(
             "frontier_changed": False,
             "route_id": compiled.get("route_id"),
             "current_manifest_git_blob_sha": current["target_git_blob_sha"],
+            "promotion_lease": dict(lease),
             "verification_authority_mutated": False,
             "terminal_authority": False,
             "terminal_credit_delta": 0,
@@ -82,6 +112,15 @@ def promote(
         tmp = target.with_suffix(target.suffix + ".tmp")
         tmp.write_bytes(raw)
         tmp.replace(target)
+
+    before_commit = admission.load_current_admissions(
+        repo_root=root,
+        pointer_path=pointer,
+    )
+    if before_commit["target_git_blob_sha"] != current["target_git_blob_sha"]:
+        raise R2DirectRoutePromotionError(
+            "CURRENT_POINTER_CHANGED_DURING_PROMOTION"
+        )
 
     pointer_doc = {
         "schema": admission.POINTER_SCHEMA,
@@ -107,7 +146,6 @@ def promote(
     tmp_pointer.write_bytes(pointer_raw)
     tmp_pointer.replace(pointer)
 
-    # Re-load from the public current path before reporting success.
     observed = admission.load_current_admissions(
         repo_root=root,
         pointer_path=pointer,
@@ -127,6 +165,8 @@ def promote(
         "candidate_path": candidate_path,
         "receipt_path": receipt_path,
         "frontier_changed": True,
+        "promotion_lease_kind": lease["kind"],
+        "promotion_lease_key": lease["lock_key"],
         "verification_authority_mutated": False,
     }
     return {
@@ -141,6 +181,26 @@ def promote(
         "terminal_credit_delta": 0,
     }
 
+
+def promote(
+    *,
+    candidate_path: str,
+    receipt_path: str,
+    repo_root: str | Path = ROOT,
+    pointer_path: str | Path | None = None,
+) -> dict[str, Any]:
+    root = Path(repo_root).resolve()
+    pointer = Path(pointer_path).resolve() if pointer_path is not None else (
+        root / "canonical/governance/CURRENT_R2_DIRECT_ROUTE_ADMISSIONS.json"
+    )
+    with _promotion_lease(pointer) as lease:
+        return _promote_locked(
+            root=root,
+            pointer=pointer,
+            candidate_path=candidate_path,
+            receipt_path=receipt_path,
+            lease=lease,
+        )
 
 def main() -> int:
     import argparse
