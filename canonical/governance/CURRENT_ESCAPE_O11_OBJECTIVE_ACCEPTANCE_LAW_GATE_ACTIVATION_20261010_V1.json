@@ -12,9 +12,9 @@
     "git_blob_sha": "ea5600b5d520a87508eb11600708707efa33a302"
   },
   "verification": {
-    "path": "canonical/verification/CURRENT_ESCAPE_O11_OBJECTIVE_ACCEPTANCE_LAW_GATE_VERIFY_20261010_V1.json",
-    "git_blob_sha": "602da8e2e43d81b5e94a4b8502d5a8e791fe4872",
-    "result": "64_OF_64_CHECKS_PASS"
+    "path": "canonical/verification/CURRENT_ESCAPE_O11_ROW_PROOF_INSTANTIATION_GATE_VERIFY_20261010_V2.json",
+    "git_blob_sha": "2d4c8b1936d93b8a074feed5d391feeda442f70d",
+    "result": "POST_CONCURRENT_RECLASSIFICATION_PASS__70_EXACT_APPLICABLE_CHECKS"
   },
   "current_frontier": {
     "path": "canonical/governance/CURRENT_ESCAPE_OQ_FRONTIER_REDUCTION_20261010_V1.json",
