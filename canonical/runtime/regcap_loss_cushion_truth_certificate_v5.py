@@ -110,6 +110,27 @@ def _unknown(
                 "REGCAP_LOSS_CUSHION_MINIMUM_POLICY_CHANGING_INFORMATION"
             ),
             "next_information_request_source": grounding.SCHEMA,
+            "checker_materialization_template": {
+                "schema": "PROJECT_BRAIN_SEMANTIC_TRUTH_MATERIALIZATION_TEMPLATE_V1",
+                "truth_kind": TRUTH_KIND,
+                "claim_kind": claim_kind,
+                "target_concept_id": target,
+                "requested_predicate_id": requested_id,
+                "requested_predicate_id_authority": False,
+                "completion_kind": (
+                    "AUTHENTICATED_BOUND_CONTEXT_OR_OBSERVATION_REPAIR_FOR_ORIGINAL_PREDICATE"
+                ),
+                "required_evidence_fields": [
+                    "source_text",
+                    "source_id",
+                    "start",
+                    "end",
+                ],
+                "source_span_must_be_rederived": True,
+                "replacement_source_does_not_inherit_original_predicate_identity": True,
+                "provider_semantic_truth_authority": False,
+                "terminal_authority": False,
+            },
         }
     return {
         "schema": SCHEMA,
