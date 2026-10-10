@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_ESCAPE_PROGRESS_GAP_A_TARGET_FREE_SATURATION_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__10_OF_10_GAP_A_ROWS_CONTENT_ADDRESSED__ZERO_TARGET_FREE_CLOSURES__MINIMUM_WAKES_BOUND__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/ESCAPE_PROGRESS_GAP_A_TARGET_FREE_CERTIFICATE_SATURATION_20261010_V1.json",
+    "git_blob_sha": "644ec7b888b65b635af3851beb435a7b2fdcf45b"
+  },
+  "verification_method": "MECHANICAL_GITHUB_TREE_CONTENT_ADDRESS_REPLAY_PLUS_EXACT_ROW_ACCOUNTING",
+  "checks": {
+    "row_count_10": true,
+    "unique_obligation_ids_10": true,
+    "all_target_free_closure_flags_false": true,
+    "all_minimum_wakes_nonempty": true,
+    "referenced_source_blob_count": 12,
+    "referenced_source_blob_mismatch_count": 0,
+    "gap_a_totality_proved_false": true,
+    "cc_r3_proved_false": true,
+    "zero_acceptance_credit": true,
+    "zero_capability_credit": true,
+    "zero_ownership_credit": true,
+    "zero_terminal_credit": true
+  },
+  "interpretation": "CURRENT_BOUND_EVIDENCE_DOES_NOT_SUPPORT_A_TARGET_FREE_SCOPE_COMPLETE_CERTIFICATE_FOR_ANY_OF_THE_10_CURRENT_GAP_A_ROWS__THIS_DELETES_REPEAT_TARGET_FREE_SEARCH_ON_UNCHANGED_BYTES_BUT_DOES_NOT_PROVE_PRIVATE_OR_OWNER_ACQUISITION_TOTALITY",
+  "next": "SCHEDULE_ONLY_THE_LOCALIZED_MINIMUM_WAKE_OR_A_STRONGER_NEW_SCOPE_COMPLETE_CERTIFICATE_FOR_EACH_ROW__PREFER_SHARED_ACQUISITION_FAMILIES_OVER_ROW_SPECIFIC_SOLVERS",
+  "hard_nonclaims": [
+    "NO_GAP_A_ROW_CLOSED",
+    "NO_ACQUISITION_TOTALITY_PROVED",
+    "NO_CC_R3_CERTIFICATE",
+    "NO_CLAIM_FUTURE_TARGET_FREE_CERTIFICATE_IMPOSSIBLE",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "pass": true
+}
