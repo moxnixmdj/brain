@@ -1,8 +1,8 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_DEVELOPMENT_SCHEDULER_POINTER_V1",
   "date": "2026-10-10",
-  "status": "ACTIVE",
-  "authoritative_activation": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V4.json",
+  "status": "ACTIVE__V6_REUSE_FIRST_RUNTIME_ENFORCED",
+  "authoritative_activation": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V6.json",
   "runtime": "canonical/runtime/capability_first_scheduler_v1.py",
   "primary_entrypoint": "rank_live_work",
   "objective": "MAXIMIZE_REUSABLE_VERIFIED_CAPABILITY_GENERALIZATION_RELIABILITY_AND_EFFICIENCY_PER_RESOURCE",
@@ -17,5 +17,12 @@
     "path": "canonical/governance/CURRENT_R2_SHARED_CAUSE_RESIDUAL_LEDGER.json",
     "status": "ACTIVE_LIVE_DERIVED_FROM_CURRENT_R2_AUTHORITY",
     "scheduler_rule": "PRIMARY_CAPABILITY_RESOURCE_SCORE_FIRST__SHARED_CAUSE_FANOUT_SECONDARY_TIE_BREAK__OPUS_CHECKPOINT_AUDIT_TERTIARY"
-  }
+  },
+  "authoritative_activation_git_blob_sha": "03596d15b6a12a96398ab6171c9d51d641b8389c",
+  "runtime_git_blob_sha": "e3cf20670e5e0bf79050ec2e7e28224ab126cf05",
+  "residual_policy": "SEARCH_REUSE_MINIMAL_ADAPTATION_VERIFY_GENERALIZE_PROMOTE_FALSIFY_BEFORE_NEW_PRIMITIVE_INVENTION",
+  "reuse_first_residual_policy_path": "canonical/governance/REUSE_FIRST_RESIDUAL_EXECUTION_POLICY_20261010_V1.json",
+  "reuse_first_residual_policy_git_blob_sha": "e230e9c243ac79b7909dac86071b5cad536f1666",
+  "reuse_first_residual_runtime_enforced": true,
+  "reuse_first_runtime_verification_path": "canonical/verification/CAPABILITY_FIRST_SCHEDULER_REUSE_FIRST_RUNTIME_VERIFY_20261010_V1.json"
 }
