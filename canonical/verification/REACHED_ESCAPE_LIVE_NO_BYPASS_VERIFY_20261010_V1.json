@@ -1,0 +1,90 @@
+{
+  "schema": "PROJECT_BRAIN_REACHED_ESCAPE_LIVE_NO_BYPASS_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__COMPLETE_STATIC_PYTHON_RUNTIME_CENSUS__1669_OF_1669__ZERO_CREDIT",
+  "branch": "successor/reached-escape-live-no-bypass-20261010-v3",
+  "base_commit": "a042f2b86e83686ee887185f6901950b7f8c4092",
+  "runtime_census_basis": {
+    "complete_git_tree_commit": "31dc6b4fd1a227793c422067b5d951ea0fe6c6c5",
+    "complete_git_tree_truncated": false,
+    "runtime_python_files_before_repair": 1668,
+    "runtime_changes_between_census_commit_and_branch_base": 0,
+    "proof": "compare 31dc6b4..a042f2b shows governance-only changes",
+    "source_transport": "990 authenticated signed contents URLs + 678 existing Git blobs projected on private temporary census branch",
+    "source_download_failures": 0
+  },
+  "baseline_main_counterexample": {
+    "low_level_reference_file_count": 3,
+    "files": [
+      "canonical/runtime/certified_reached_escape_state_constructor_v1.py",
+      "canonical/runtime/live_brain_runtime_v1.py",
+      "canonical/runtime/reached_escape_finite_totality_certificate_v1.py"
+    ],
+    "live_bypass": "canonical/runtime/live_brain_runtime_v1.py -> reached_escape_state_kernel_v1.evaluate"
+  },
+  "post_repair": {
+    "runtime_python_files_scanned": 1669,
+    "errors": [],
+    "status": "PASS__STATIC_PYTHON_RUNTIME_NO_LOW_LEVEL_REACHED_ESCAPE_BYPASS",
+    "live_entrypoints": [
+      "canonical/runtime/live_brain_runtime_v1.py -> certified_reached_escape_state_constructor_v1.construct",
+      "canonical/runtime/unified_cognitive_fabric_v1.py -> certified_reached_escape_state_constructor_v1.construct"
+    ],
+    "sensitive_reference_files": [
+      "canonical/runtime/certified_reached_escape_state_constructor_v1.py",
+      "canonical/runtime/reached_escape_finite_totality_certificate_v1.py",
+      "canonical/runtime/reached_escape_live_no_bypass_guard_v1.py"
+    ]
+  },
+  "exact_blobs": {
+    "live_runtime": "3867b354c87891fdf5dc3766f315a29267c93d0c",
+    "unified_fabric": "b1e68fc1627954706de686d2db297efee08dd6f8",
+    "certified_constructor": "c4ee08f5f3a98889df8f63cd087d19736b38353d",
+    "finite_totality_certificate": "85487335b7e774ac9084b34c60e0175842771036",
+    "raw_kernel": "b1435d90f039bd1d809ff364c325c3d0858d3afd",
+    "no_bypass_guard": "15da5e06ad1f13142e1b3e9e088fc01f385409b1",
+    "no_bypass_tests": "f86627d15588664d4d78ec38d21d48627df96382"
+  },
+  "independent_replay": {
+    "environment": "SPRITE__brain-reached-escape-boundary-verify-20261010",
+    "py_compile": "PASS",
+    "unittest": {
+      "passed": 6,
+      "failed": 0
+    },
+    "complete_post_repair_guard": {
+      "passed": true,
+      "runtime_python_file_count": 1669,
+      "error_count": 0
+    }
+  },
+  "github_actions_observation": {
+    "run_id": 38035253338,
+    "conclusion": "failure",
+    "executed_steps": 0,
+    "evidentiary_role": "EXCLUDED__PRE_EXECUTION_INFRASTRUCTURE_FAILURE"
+  },
+  "proved": [
+    "CURRENT_STATIC_PYTHON_RUNTIME_HAS_ONE_LIVE_RAW_REACHED_STATE_BYPASS_BEFORE_REPAIR",
+    "REPAIR_REMOVES_THAT_BYPASS",
+    "ALL_1669_POST_REPAIR_CANONICAL_RUNTIME_PYTHON_FILES_PASS_STATIC_NO_BYPASS_GUARD",
+    "BOTH_LIVE_REACHED_STATE_ENTRYPOINTS_ROUTE_THROUGH_CERTIFIED_CONSTRUCTOR",
+    "ROGUE_LOW_LEVEL_CONSUMER_AND_MIXED_SAFE_PLUS_RAW_LIVE_REFERENCE_MUTATIONS_FAIL_CLOSED"
+  ],
+  "nonclaims": [
+    "NO_ARBITRARY_DYNAMIC_CODE_NO_BYPASS_PROOF",
+    "NO_NON_PYTHON_NO_BYPASS_PROOF",
+    "NO_FUTURE_REPOSITORY_STATE_PROOF",
+    "NO_GLOBAL_ESCAPE_PROGRESS_TOTALITY",
+    "NO_GLOBAL_REPAIR_ACQUIRABILITY",
+    "NO_ACCEPTANCE_PROMOTION_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "promotion_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
