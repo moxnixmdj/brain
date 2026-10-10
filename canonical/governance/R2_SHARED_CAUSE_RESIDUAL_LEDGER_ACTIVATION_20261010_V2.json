@@ -13,7 +13,7 @@
   },
   "tests": {
     "path": "canonical/tests/test_r2_semantic_residual_ledger_v1.py",
-    "git_blob_sha": "8192bbc4b1563ba036277a3e7dccc48e368f8ea5"
+    "git_blob_sha": "f50d94e870bcc2db056384048540a543324d78d4"
   },
   "semantics": {
     "general_r2_mechanism_is_not_reopened_by_residual_existence": true,
