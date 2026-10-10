@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V15",
+  "date": "2026-10-10",
+  "status": "ACTIVE_POST_COMPOSITION_V15__PROPERTY_TRUTH_4_OF_24__SEMANTIC_IDENTITY_CARRIER_12_OF_12__POSTCOMPOSITION_ADAPTER_V2_VERIFIED__READ_ONLY_ONLY__ZERO_CREDIT",
+  "supersedes": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V14.json",
+  "runtime": {
+    "path": "canonical/runtime/capability_parallel_frontier_post_composition_v2.py",
+    "git_blob_sha": "27646a317eeee3d4233ffe63092170b0e4ea1f53",
+    "entrypoint": "plan_current_post_composition_frontier_v2",
+    "interval_core_path": "canonical/runtime/capability_parallel_frontier_v2.py",
+    "interval_core_git_blob_sha": "209d8d11494645432354636a3dc17e7b515abaf8"
+  },
+  "frontier": {
+    "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
+    "git_blob_sha": "cf3ddaa5f5e810ed992a3f9044a7c7232955a259",
+    "frontier_id": "LIVE_WORK_FRONTIER_20261010_PROF24_PROPERTY_TRUTH_4_V19"
+  },
+  "professional_property_truth": {
+    "registry_path": "canonical/governance/PROFESSIONAL_QUALITY_LEAF_EVIDENCE_REGISTRY_20261010_V1.json",
+    "registry_git_blob_sha": "71863cfbb47f9951eaf34e4e89692aee5c540560",
+    "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_LEAF_REGISTRY_PROPERTY_TRUTH_VERIFY_20261010_V2.json",
+    "verification_git_blob_sha": "bdde7b52793272623773b07bf774c0a74c6be7af",
+    "verified_leaf_count": 4,
+    "total_leaf_count": 24,
+    "open_leaf_count": 20,
+    "verified_execution_leaf_count": 4,
+    "open_execution_leaf_count": 8,
+    "verified_semantic_leaf_count": 0,
+    "open_semantic_leaf_count": 12
+  },
+  "professional_semantic_identity": {
+    "activation_path": "canonical/governance/PROFESSIONAL_SEMANTIC_IDENTITY_CARRIER_ACTIVATION_20261010_V1.json",
+    "activation_git_blob_sha": "3e99ddbf25cd8e392c5a22a5c14ae5fea5dc3138",
+    "verification_path": "canonical/verification/PROFESSIONAL_SEMANTIC_IDENTITY_CARRIER_VERIFY_20261010_V1.json",
+    "verification_git_blob_sha": "35a3ccf9ad454aa0318a4ed10edc065830c3874d",
+    "semantic_claim_count": 12,
+    "identity_factorization_verified_count": 12,
+    "semantic_property_truth_closed_count": 0,
+    "next": "INSTANTIATE_CLAIM_SCOPED_CC_R1_CC_R2_CC_R3_R4_FOR_SMALLEST_RESIDUAL_SEMANTIC_LEAF"
+  },
+  "independent_plan_replay": {
+    "verification_path": "canonical/verification/POST_COMPOSITION_FRONTIER_V2_INDEPENDENT_VERIFY_20261010_V1.json",
+    "verification_git_blob_sha": "35190f63e15afb9438bf328d158e6a6eafd1583a",
+    "transcript_sha256": "74d4a4cf932230bce86cfe641e0bf5e714cf4f980d9c581a0ace1134921e3428",
+    "tests_passed": 4,
+    "source_count": 7,
+    "parallel_full_execution_work_ids": []
+  },
+  "authority": {
+    "read_only_evidence_plan": true,
+    "full_execution": false,
+    "promotion": false,
+    "terminal": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
