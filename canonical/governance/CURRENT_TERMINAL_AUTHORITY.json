@@ -1281,14 +1281,18 @@
         "verification_git_blob_sha": "9ad112a04c73344fa6056fbf25c0fa5ff3d27238"
       },
       "explicit_context_atom_truth": {
-        "runtime_path": "canonical/runtime/regcap_context_atom_truth_certificate_v1.py",
-        "runtime_git_blob_sha": "3e35f67ee88f7337569774835890efc54cdc734d",
+        "runtime_path": "canonical/runtime/regcap_context_atom_truth_certificate_v2.py",
+        "runtime_git_blob_sha": "22490d1d61807aafdb94a6617ee64c4912ecc46f",
         "dispatcher_path": "canonical/runtime/semantic_truth_dispatch_v1.py",
-        "dispatcher_git_blob_sha": "70dffa9e5719ad1ec01ab6ea5d8ad88a57ddcc88",
-        "reconciliation_path": "canonical/governance/R2_REGCAP_CONTEXT_ATOM_TRUTH_DISPATCH_RECONCILIATION_20261009_V1.json",
-        "reconciliation_git_blob_sha": "569ca5dd849e5a5571065ad34fcea3744330ee79",
-        "verification_path": "canonical/verification/REGCAP_CONTEXT_ATOM_TRUTH_DISPATCH_VERIFY_20261009_V1.json",
-        "verification_git_blob_sha": "644a4397e74ffd5f1bcfabdbc34a1197ecc2d8e7"
+        "dispatcher_git_blob_sha": "364eae40fbb38fc0b053bfa0f7aa4950863fa41a",
+        "reconciliation_path": "canonical/governance/R2_REGCAP_CONTEXT_ATOM_V2_CURRENTNESS_RECONCILIATION_20261010_V1.json",
+        "reconciliation_git_blob_sha": "aa8b0fab84aebdbcbfb9a7d61b65761e0b62adf2",
+        "verification_path": "canonical/verification/R2_REGCAP_CONTEXT_ATOM_V2_CANONICAL_INDEPENDENT_VERIFY_20261010_V1.json",
+        "verification_git_blob_sha": "301ac6c9a36067fe2a97d8e3a3436ab5f522427f",
+        "canonical_context_compiler_path": "canonical/runtime/regcap_contextual_observation_compiler_v1.py",
+        "canonical_context_compiler_git_blob_sha": "128142cafd915c2fc206534fd2bdf557e6d2f1ea",
+        "canonical_parent_verification_path": "canonical/verification/REGCAP_NO_DESCRIPTOR_CONTEXT_TRUTH_VERIFY_20261010_V2.json",
+        "canonical_parent_verification_git_blob_sha": "61177086ddd535c615e724d110e323ec872b3535"
       },
       "authority_boundary": "CONTEXT_FACTS_MAY_REFINE_INFORMATION_STATE__RELATION_TRUTH_IDENTITY_POLICY_ADEQUACY_ACCEPTANCE_AND_TERMINALITY_REMAIN_SEPARATE",
       "terminal_credit_delta": 0
@@ -3124,7 +3128,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 132,
+  "pointer_revision": 133,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
@@ -5037,5 +5041,20 @@
     },
     "current_state_must_be_rederived_before_rank_task_read_start_execution_or_credit_claim": true,
     "terminal_authority_from_tb_science_pointer_alone": false
+  },
+  "r2_regcap_context_atom_v2_currentness_20261010_v1": {
+    "status": "RECONCILED__LIVE_REGCAP_CONTEXT_TRUTH_REBOUND_TO_CANONICAL_COMPILER__TERMINAL_FALSE__ZERO_CREDIT",
+    "current_r2_pointer_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+    "scheduler_cut_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261010_V65.json",
+    "scheduler_cut_git_blob_sha": "a3284796a11c1c69ede669e68deb6d0052b1e5be",
+    "reconciliation_path": "canonical/governance/R2_REGCAP_CONTEXT_ATOM_V2_CURRENTNESS_RECONCILIATION_20261010_V1.json",
+    "reconciliation_git_blob_sha": "aa8b0fab84aebdbcbfb9a7d61b65761e0b62adf2",
+    "truth_adapter_path": "canonical/runtime/regcap_context_atom_truth_certificate_v2.py",
+    "truth_adapter_git_blob_sha": "22490d1d61807aafdb94a6617ee64c4912ecc46f",
+    "semantic_dispatch_git_blob_sha": "364eae40fbb38fc0b053bfa0f7aa4950863fa41a",
+    "direct_route_count_delta": 0,
+    "bounded_family_count_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
   }
 }
