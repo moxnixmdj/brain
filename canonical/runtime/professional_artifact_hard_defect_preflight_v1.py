@@ -25,6 +25,55 @@ CHECK_IDS = {
     "PPTX_HAS_SLIDES",
     "PPTX_NO_TEXT_OBJECT_OUTSIDE_SLIDE_BOUNDS",
 }
+PROFILES = {
+    "BRAIN_PROFESSIONAL_OOXML_SANITY_V1": {
+        "authority_class": "BRAIN_OWNED_GENERAL_QA_POLICY",
+        "public_target_example_only": False,
+        "checks_by_suffix": {
+            ".docx": ["DOCX_NONEMPTY_CONTENT"],
+            ".xlsx": [
+                "XLSX_HAS_VISIBLE_WORKSHEET",
+                "XLSX_NO_ERROR_CELLS",
+                "XLSX_NO_ZERO_WIDTH_COLUMNS",
+                "XLSX_NONEMPTY_CONTENT",
+            ],
+            ".pptx": [
+                "PPTX_HAS_SLIDES",
+                "PPTX_NO_TEXT_OBJECT_OUTSIDE_SLIDE_BOUNDS",
+            ],
+        },
+        "constraints": {"allowed_suffixes": [".docx", ".xlsx", ".pptx"]},
+    },
+    "AA_BRIEFCASE_LITE_W1_T2_XLSX_HARD_SUBGATE_V1": {
+        "authority_class": "PINNED_PUBLIC_AA_BRIEFCASE_LITE_EXAMPLE",
+        "public_target_example_only": True,
+        "source_commit": "313e44ef0fdc91c8462fc2b4a3f18a3e4877d7f7",
+        "source_check_id": "W1-T2-P-01",
+        "checks_by_suffix": {
+            ".xlsx": [
+                "XLSX_HAS_VISIBLE_WORKSHEET",
+                "XLSX_NO_ERROR_CELLS",
+                "XLSX_NO_ZERO_WIDTH_COLUMNS",
+                "XLSX_NONEMPTY_CONTENT",
+            ],
+        },
+        "constraints": {"exact_file_count": 1, "allowed_suffixes": [".xlsx"]},
+    },
+    "AA_BRIEFCASE_LITE_W1_T3_PPTX_HARD_SUBGATE_V1": {
+        "authority_class": "PINNED_PUBLIC_AA_BRIEFCASE_LITE_EXAMPLE",
+        "public_target_example_only": True,
+        "source_commit": "313e44ef0fdc91c8462fc2b4a3f18a3e4877d7f7",
+        "source_check_id": "W1-T3-P-01",
+        "checks_by_suffix": {
+            ".pptx": [
+                "PPTX_HAS_SLIDES",
+                "PPTX_NO_TEXT_OBJECT_OUTSIDE_SLIDE_BOUNDS",
+            ],
+        },
+        "constraints": {"exact_file_count": 1, "allowed_suffixes": [".pptx"]},
+    },
+}
+
 ERROR_TOKEN_RE = re.compile(r"^#(?:REF!|DIV/0!|VALUE!|NAME\?|N/A|NUM!|NULL!|SPILL!|CALC!|GETTING_DATA)$", re.I)
 
 NS = {
@@ -330,29 +379,23 @@ def verify(bundle: Mapping[str, Any]) -> dict[str, Any]:
     ):
         return _fail("ARTIFACT_PATHS_INVALID")
 
-    required_checks = bundle.get("required_checks")
-    if (
-        not isinstance(required_checks, Sequence)
-        or isinstance(required_checks, (str, bytes))
-        or not required_checks
-        or any(not isinstance(x, str) or x not in CHECK_IDS for x in required_checks)
-        or len(set(required_checks)) != len(required_checks)
-    ):
-        return _fail("REQUIRED_CHECKS_INVALID_OR_EMPTY")
-    required_check_set = set(required_checks)
-
-    constraints = bundle.get("constraints", {})
-    if not isinstance(constraints, Mapping):
-        return _fail("CONSTRAINTS_NOT_OBJECT")
-    allowed_constraint_keys = {"exact_file_count", "allowed_suffixes"}
-    extra = set(constraints) - allowed_constraint_keys
-    if extra:
-        return _fail("UNKNOWN_CONSTRAINT:" + ",".join(sorted(extra)))
+    profile_id = bundle.get("profile_id")
+    if not isinstance(profile_id, str) or profile_id not in PROFILES:
+        return _fail("PROFILE_ID_UNKNOWN_OR_MISSING")
+    if set(bundle) - {"artifact_paths", "profile_id"}:
+        return _fail("UNSUPPORTED_CALLER_FIELDS")
+    profile = PROFILES[profile_id]
+    constraints = dict(profile.get("constraints") or {})
+    checks_by_suffix = dict(profile.get("checks_by_suffix") or {})
 
     normalized = [str(Path(x)) for x in paths]
     if len(set(normalized)) != len(normalized):
         return _fail("ARTIFACT_PATH_DUPLICATE")
     rows = [inspect_artifact(x) for x in normalized]
+
+    required_by_path: dict[str, set[str]] = {}
+    for row in rows:
+        required_by_path[row["path"]] = set(checks_by_suffix.get(row.get("suffix"), []))
 
     observed_conditions = [
         {"path": row["path"], **d}
@@ -360,7 +403,8 @@ def verify(bundle: Mapping[str, Any]) -> dict[str, Any]:
         for d in row.get("hard_defects", [])
     ]
     hard_defects = [
-        row for row in observed_conditions if row.get("id") in required_check_set
+        row for row in observed_conditions
+        if row.get("id") in required_by_path.get(row.get("path"), set())
     ]
     errors = [
         err
@@ -369,59 +413,58 @@ def verify(bundle: Mapping[str, Any]) -> dict[str, Any]:
     ]
 
     exact_count = constraints.get("exact_file_count")
-    if exact_count is not None:
-        if not isinstance(exact_count, int) or isinstance(exact_count, bool) or exact_count < 1:
-            errors.append("EXACT_FILE_COUNT_INVALID")
-        elif len(rows) != exact_count:
-            hard_defects.append({
-                "path": None,
-                "id": "EXPLICIT_FILE_COUNT_MISMATCH",
-                "severity": "HARD",
-                "evidence": {"observed": len(rows), "expected": exact_count},
-            })
+    if exact_count is not None and len(rows) != int(exact_count):
+        hard_defects.append({
+            "path": None,
+            "id": "EXPLICIT_FILE_COUNT_MISMATCH",
+            "severity": "HARD",
+            "evidence": {"observed": len(rows), "expected": int(exact_count)},
+        })
 
-    allowed = constraints.get("allowed_suffixes")
-    if allowed is not None:
-        if (
-            not isinstance(allowed, Sequence)
-            or isinstance(allowed, (str, bytes))
-            or not allowed
-            or any(not isinstance(x, str) or not x.startswith(".") for x in allowed)
-        ):
-            errors.append("ALLOWED_SUFFIXES_INVALID")
-        else:
-            aset = {x.lower() for x in allowed}
-            for row in rows:
-                if row.get("suffix") not in aset:
-                    hard_defects.append({
-                        "path": row["path"],
-                        "id": "EXPLICIT_FORMAT_MISMATCH",
-                        "severity": "HARD",
-                        "evidence": {"observed": row.get("suffix"), "allowed": sorted(aset)},
-                    })
+    allowed = {x.lower() for x in constraints.get("allowed_suffixes", [])}
+    if allowed:
+        for row in rows:
+            if row.get("suffix") not in allowed:
+                hard_defects.append({
+                    "path": row["path"],
+                    "id": "EXPLICIT_FORMAT_MISMATCH",
+                    "severity": "HARD",
+                    "evidence": {"observed": row.get("suffix"), "allowed": sorted(allowed)},
+                })
 
     passed = not errors and not hard_defects and all(row.get("pass") is True for row in rows)
+    required_checks = sorted({
+        check for checks in required_by_path.values() for check in checks
+    })
     return {
         "schema": SCHEMA,
         "status": (
-            "PASS__NO_CHECKED_HARD_DEFECT_FOUND"
+            "PASS__NO_PROFILE_REQUIRED_HARD_DEFECT_FOUND"
             if passed
-            else "FAIL_CLOSED__HARD_DEFECT_OR_INSPECTION_FAILURE"
+            else "FAIL_CLOSED__PROFILE_HARD_DEFECT_OR_INSPECTION_FAILURE"
         ),
         "pass": passed,
+        "profile_id": profile_id,
+        "profile_authority_class": profile.get("authority_class"),
+        "public_target_example_only": bool(profile.get("public_target_example_only")),
+        "source_commit": profile.get("source_commit"),
+        "source_check_id": profile.get("source_check_id"),
         "checked_artifacts": rows,
         "errors": sorted(set(errors)),
         "hard_defect_count": len(hard_defects),
         "hard_defects": hard_defects,
-        "required_checks": sorted(required_check_set),
+        "required_checks": required_checks,
         "observed_nonrequired_conditions": [
-            row for row in observed_conditions if row.get("id") not in required_check_set
+            row for row in observed_conditions
+            if row.get("id") not in required_by_path.get(row.get("path"), set())
         ],
         "checked_scope": sorted(CHECK_IDS),
         "quality_authority": False,
         "target_preference_authority": False,
         "style_adequacy_proved": False,
-        "source_or_policy_authority_required_for_check_selection": True,
+        "official_private_aa_briefcase_credit": False,
+        "gdpval_owner_elo_credit": False,
         "acceptance_credit_delta": 0,
         "terminal_credit_delta": 0,
     }
+
