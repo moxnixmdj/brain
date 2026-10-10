@@ -270,7 +270,7 @@
         "VERIFY_EXISTING"
       ],
       "existing_binding": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V6.json",
-      "exact_remaining_class": "3_CURRENT_INTERNAL_ROWS__GENERIC_REPAIR_VERIFICATION_RECERTIFICATION_AND_LIVE_REENTRY_SOLVED__REMAINING_IS_CURRENT_EXECUTABLE_VERIFIED_ACTION_PLUS_WELL_FOUNDED_ACCEPTANCE_RELEVANT_MEASURE_AND_ALL_OUTCOME_STRICT_PROGRESS",
+      "exact_remaining_class": "3_CURRENT_INTERNAL_ROWS__TB_SCIENCE_STALE_ROUTE_RECLASSIFIED_TO_CURRENT_RANK20_V3_PRESTART__GENERIC_REPAIR_VERIFICATION_RECERTIFICATION_AND_LIVE_REENTRY_SOLVED__REMAINING_IS_CURRENT_EXECUTABLE_VERIFIED_ACTION_PLUS_WELL_FOUNDED_ACCEPTANCE_RELEVANT_MEASURE_AND_ALL_OUTCOME_STRICT_PROGRESS",
       "new_primitive_status": "NOT_ESTABLISHED",
       "executable_audit": "canonical/runtime/escape_progress_shared_gap_audit_v5.py",
       "current_gate_status": "CURRENTNESS_AWARE_AUTHENTICATED_V5_GATE_VERIFIED__REAL_AUTHENTICATED_ROW_PROOFS_0_OF_3__GAP_B_TOTALITY_OPEN",
@@ -292,6 +292,14 @@
       "currentness_activation": {
         "path": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_AUDIT_V5_ACTIVATION_20261010_V1.json",
         "git_blob_sha": "41a50db02a1b60a4ab47a02ddb29d5f9f3338019"
+      },
+      "tb_science_current_route_reclassification": {
+        "path": "canonical/governance/ESCAPE_TB_SCIENCE_CURRENT_ROUTE_RECLASSIFICATION_20261010_V1.json",
+        "git_blob_sha": "d7bc90a0a524a58d3cb4f9ca1978da19fae598fd",
+        "verification_path": "canonical/verification/ESCAPE_TB_SCIENCE_CURRENT_ROUTE_RECLASSIFICATION_VERIFY_20261010_V1.json",
+        "verification_git_blob_sha": "a1b6ca657589b788b3e4eff0fb7682842a917f4a",
+        "current_route_semantics_verified": true,
+        "strict_progress_witness_bound": false
       }
     },
     {
