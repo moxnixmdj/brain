@@ -185,6 +185,18 @@
       {
         "id": "M_R4_ROOT_CERTIFICATE_CONTENT_ADDRESS_MISMATCH",
         "expected": "R4_CANONICAL_REGISTRY_INVALID"
+      },
+      {
+        "id": "M_R4_CANONICAL_REGISTRY_CLAIM_X_LOCAL_CLAIM_Y",
+        "expected": "R4_REGISTRY_CLAIM_MISMATCH"
+      },
+      {
+        "id": "M_R4_CANONICAL_GENERATION_SPLICE",
+        "expected": "R4_REGISTRY_CLAIM_MISMATCH"
+      },
+      {
+        "id": "M_R4_ACTIVE_CLAIM_WITHOUT_CURRENT_MISSION_POINTER_BLOB",
+        "expected": "REGISTRY_FAIL_CLOSED"
       }
     ],
     "mutation_score_semantics": "DIAGNOSTIC_ONLY__NEVER_UNIVERSAL_COMPLETENESS_PROOF"
@@ -194,12 +206,13 @@
     "pure_boolean_valuations_checked": 16,
     "counterexamples_with_R1_R2_R3": 0,
     "each_of_R1_R2_R3_individually_load_bearing": true,
-    "local_test_count": 28,
+    "local_test_count": 31,
     "local_test_failures": 0,
     "scope": "ARCHITECTURE_LOGIC_ONLY__NOT_CURRENT_MISSION_CLOSURE",
     "r4_cross_binding_counterexample_count": 3,
     "r4_cross_binding_symbolic_engine": "WOLFRAM_LANGUAGE",
-    "current_registry_state": "PASS__0_PROVED__3_OPEN__R4_PROOF_CLOSURE_FALSE"
+    "current_registry_state": "PASS__0_PROVED__3_OPEN__R4_PROOF_CLOSURE_FALSE",
+    "remote_exact_byte_replay": "SPRITE__31_PASSED__0_FAILED"
   },
   "reconciliation": {
     "current_base_commit": "8f98b5d72fd11fe5dbd00ad38f88a47be3ed724e",
@@ -210,7 +223,7 @@
       "status": "CLOSED_AS_SUPERSEDED_LIVE_INTEGRATION_VEHICLE",
       "preserve_evidence": true
     },
-    "active_pr": 3816
+    "active_pr": 3857
   },
   "accounting": {
     "incremental_spend_usd": 0,
@@ -325,5 +338,23 @@
     "role": "R4_PROOF_CLOSURE_REGISTRY__SINGLE_ACTIVE_FROZEN_CLAIM_REQUIRED_BEFORE_ANY_PROVED_SLOT",
     "active_claim_required": true,
     "cross_claim_transport_forbidden": true
+  },
+  "r4_registry_claim_alignment": {
+    "status": "REQUIRED_FOR_FOUR_ROOT_CLOSURE",
+    "validator": "canonical/runtime/root_theorem_falsifier_v1.py#evaluate_registry_claim_alignment",
+    "rule": "LOCAL_EXPECTED_BINDING_MUST_MATCH_CANONICAL_ROOT_REGISTRY_ACTIVE_CLAIM_AND_CURRENT_CANONICAL_GENERATION",
+    "required_alignment_fields": {
+      "claim_id": "claim_id",
+      "scope_sha256": "scope_sha256",
+      "semantics_sha256": "semantics_sha256",
+      "epoch_id": "epoch"
+    },
+    "current_generation_required": true,
+    "current_mission_pointer_blob_passed_to_registry_guard": true,
+    "cross_claim_authority_splice_forbidden": true,
+    "registry_open_or_invalid": "R4_NOT_CLOSED",
+    "mismatch": "R4_REGISTRY_CLAIM_MISMATCH",
+    "missing_active_claim_or_local_binding": "R4_REGISTRY_CLAIM_BINDING_MISSING",
+    "naked_local_binding_sufficient": false
   }
 }

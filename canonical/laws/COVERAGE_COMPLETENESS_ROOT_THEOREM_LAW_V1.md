@@ -240,6 +240,25 @@ The registry binds the stable authoritative mission source, not incidental mutab
 
 If the canonical registry has any open root certificate obligation, R4 is not closed even when local test fixtures make R1, R2, and R3 individually true.
 
+
+## R4 canonical-registry/local-claim alignment
+
+Canonical registry authority and local root-binding coherence MUST refer to the same active frozen certification claim.
+
+After the canonical root-certificate registry validates and reports R4 proof closure, the root theorem checker MUST additionally prove that the locally expected root binding matches the registry's active claim on at least:
+
+- claim identity;
+- scope digest;
+- semantics digest;
+- claim epoch;
+- current canonical generation.
+
+The root theorem checker MUST pass the current mission-pointer Git blob identity into the registry guard when validating an active claim. Otherwise a valid future active claim would fail closed for a plumbing defect rather than a semantic defect.
+
+A registry that closes claim X cannot authorize locally coherent root proofs for claim Y. This is an R4 authority-splice failure, not a new root.
+
+The canonical generation is not part of the registry's abstract claim identity, but local root proofs must still match the currently active generation before they may be composed into terminal authority.
+
 ## Nonclaims
 
 This law:

@@ -1,0 +1,76 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V12_INSTANCE",
+  "action_id": "R4_REGISTRY_CLAIM_SPLICE_CLOSURE_20261010_V1",
+  "date": "2026-10-10",
+  "status": "COMPLETED_PROOF_ONLY__VERIFIED_R4_REGISTRY_CLAIM_SPLICE_REPAIR__ZERO_FRESH_REALITY__ZERO_TERMINAL_CREDIT",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "canonical_base_commit": "6a9f7ab13f43e219a11abe8e7c3ccb7a631de331",
+  "action_kind": "R4_CANONICAL_REGISTRY_AND_LOCAL_BINDING_COHERENCE_REPAIR",
+  "causal_blocker": "CANONICAL_ROOT_REGISTRY_AUTHORITY_AND_LOCAL_ROOT_BINDING_CAN_BE_VALIDATED_INDEPENDENTLY_WITHOUT_PROVING_THEY_REFER_TO_THE_SAME_ACTIVE_CLAIM_AND_CURRENT_GENERATION",
+  "expected_parent_frontier_change": "NO_TERMINAL_CREDIT__PREVENT_CROSS_CLAIM_AUTHORITY_SPLICE__UNBLOCK_FUTURE_ACTIVE_CLAIM_REGISTRY_VALIDATION",
+  "theory_invariants": {
+    "root_theorem_unchanged": true,
+    "no_new_root": true,
+    "unknown_fails_closed": true,
+    "hard_zero_incremental_spend": true,
+    "no_fresh_target_reality": true,
+    "no_acceptance_or_ownership_promotion": true
+  },
+  "recursive_obs": {
+    "live_canonical_refreshed": true,
+    "current_terminal_authority_read": true,
+    "related_open_prs_empty": true,
+    "prior_work_reused": [
+      "canonical/runtime/root_theorem_falsifier_v1.py",
+      "canonical/runtime/coverage_root_certificate_registry_guard_v1.py",
+      "canonical/governance/COVERAGE_COMPLETENESS_ROOT_CERTIFICATE_REGISTRY_V1.json"
+    ],
+    "selected_route": "PATCH_EXISTING_R4_FALSIFIER__NO_PARALLEL_SUBSYSTEM"
+  },
+  "behavioral_contract": {
+    "behavior_id": "R4_REGISTRY_CLAIM_SPLICE_GUARD_V1",
+    "inputs": [
+      "local expected root binding",
+      "canonical root certificate registry",
+      "current mission pointer",
+      "current canonical pointer"
+    ],
+    "environment_state": [
+      "active frozen certification claim",
+      "current canonical generation"
+    ],
+    "required_output_or_action": "R4_CAN_CLOSE_ONLY_IF_LOCAL_EXPECTED_CLAIM_MATCHES_CANONICAL_ACTIVE_CLAIM_AND_GENERATION",
+    "success_condition": "CROSS_CLAIM_OR_STALE_GENERATION_SPLICE_IS_REJECTED_AND_VALID_ACTIVE_CLAIM_CAN_BE_VALIDATED",
+    "failure_condition": "REGISTRY_CLOSES_CLAIM_X_WHILE_LOCAL_ROOT_BINDING_FOR_CLAIM_Y_CAN_STILL_CLOSE_R4",
+    "terminal_consequence": "PREVENT_FALSE_R4_AUTHORITY_COMPOSITION",
+    "verification_route": "DETERMINISTIC_MUTATION_TESTS",
+    "scope": "PROOF_ARCHITECTURE_ONLY"
+  },
+  "reality_query_admission": {
+    "verdict": "NO_REALITY_QUERY_REQUIRED",
+    "fresh_reality_units": 0
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "outputs": {
+    "law": "canonical/laws/COVERAGE_COMPLETENESS_ROOT_THEOREM_LAW_V1.md",
+    "governance": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_THEOREM_V1.json",
+    "runtime": "canonical/runtime/root_theorem_falsifier_v1.py",
+    "tests": "canonical/tests/test_root_theorem_registry_claim_alignment_v1.py",
+    "verification": "canonical/verification/R4_REGISTRY_CLAIM_SPLICE_VERIFICATION_20261010_V1.json",
+    "regression": "canonical/regressions/2026-10-10_R4_REGISTRY_CLAIM_SPLICE.json",
+    "reasoning": "canonical/reasoning/2026-10-10_R4_REGISTRY_CLAIM_SPLICE_V1.json",
+    "pull_request": 3857
+  },
+  "verification": {
+    "remote_exact_byte_replay": "31_PASSED__0_FAILED",
+    "current_registry_proved_roots": 0,
+    "current_r4_proof_closure": false,
+    "terminal_credit_delta": 0
+  }
+}
