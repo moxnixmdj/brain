@@ -87,19 +87,37 @@
         "tests_passed": 32,
         "real_promoter_transaction": true,
         "verification_authority_mutated": false,
-        "terminal_credit_delta": 0
+        "terminal_credit_delta": 0,
+        "role": "HISTORICAL_FUNCTIONAL_BASELINE__CURRENT_CHANGED_BYTES_REVERIFIED_BY_NONINTERFERENCE_VERIFICATION"
       },
-      "promoter_git_blob_sha": "6a1a200da6e049553b6c7bca80d2012eaa13c86e",
+      "promoter_git_blob_sha": "fa6f423837c7f9e8d50d18922f86ca1131c9fa7f",
       "concurrency_verification": {
         "path": "canonical/verification/R2_DIRECT_ROUTE_PROMOTION_CONCURRENCY_VERIFY_20261010_V1.json",
         "git_blob_sha": "0870afa2d1d8d127234cdc2240eb68974d5ab0b7",
         "status": "PASS__EXACT_BLOBS__PUBLIC_ISOLATED_3_OF_3__NONBLOCKING_PROMOTION_LEASE__SERIAL_COMPOSITION_NO_LOST_UPDATE__ZERO_CREDIT",
         "public_run_id": 38027061270,
         "tests_passed": 3,
-        "terminal_credit_delta": 0
+        "terminal_credit_delta": 0,
+        "role": "HISTORICAL_PREDECESSOR_BYTES__SUPERSEDED_FOR_CURRENT_PROMOTER_BY_NONINTERFERENCE_VERIFICATION"
       },
       "concurrent_lost_update_guard_live": true,
-      "promotion_contention_policy": "FAIL_CLOSED_NONBLOCKING_LEASE"
+      "promotion_contention_policy": "FAIL_CLOSED_NONBLOCKING_LEASE",
+      "admission_compiler_path": "canonical/runtime/r2_direct_route_dynamic_admission_v1.py",
+      "admission_compiler_git_blob_sha": "e31c0612a905271a5a8e72865afd08cfe13d8cc1",
+      "future_new_route_noninterference_required": true,
+      "noninterference_proof_class": "PROVED_DISJOINT_FROM_CURRENT_DEFAULT_LIVE_MATCH_DOMAIN_V1",
+      "noninterference_verification": {
+        "path": "canonical/verification/R2_DIRECT_ROUTE_NONINTERFERENCE_GATE_VERIFY_20261010_V1.json",
+        "git_blob_sha": "5631d8e524219f5e8d5af247778018934e80d0e1",
+        "status": "PASS__EXACT_BLOBS__PUBLIC_ISOLATED_5_OF_5__NEW_ROUTE_NONINTERFERENCE_REQUIRED__STALE_PROOF_FAIL_CLOSED__ZERO_CREDIT",
+        "public_run_id": 38027929339,
+        "public_job_id": 114142644099,
+        "tests_passed": 5,
+        "terminal_credit_delta": 0
+      },
+      "stale_noninterference_proof_policy": "FAIL_CLOSED",
+      "missing_noninterference_proof_policy": "FAIL_CLOSED",
+      "existing_exact_live_binding_repromotion_policy": "IDEMPOTENT_GRANDFATHERED"
     }
   },
   "invariants": [

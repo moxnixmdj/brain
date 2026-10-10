@@ -27,6 +27,10 @@ def _base_repo(root: Path) -> None:
     governance.mkdir(parents=True)
     verification.mkdir(parents=True)
     runtime.mkdir(parents=True)
+    (runtime / "r2_direct_live_admission_v1.py").write_text(
+        "# synthetic live wrapper for exact noninterference binding\n",
+        encoding="utf-8",
+    )
 
     admission = promoter.admission
     manifest_rel = "canonical/governance/R2_DIRECT_ROUTE_DYNAMIC_ADMISSIONS_BASE.json"
@@ -110,6 +114,39 @@ def _route_fixture(root: Path, suffix: str) -> tuple[str, str, str]:
         },
     )
 
+    current = admission.load_current_admissions(repo_root=root)
+    proof_rel = f"canonical/verification/TEST_CONCURRENT_ROUTE_{suffix}_NONINTERFERENCE.json"
+    proof_path = root / proof_rel
+    _write_json(
+        proof_path,
+        {
+            "schema": admission.NONINTERFERENCE_SCHEMA,
+            "status": "INDEPENDENT_PASS__R2_DIRECT_ROUTE_NONINTERFERENCE",
+            "candidate_path": candidate_rel,
+            "candidate_git_blob_sha": admission.git_blob_sha(candidate_path),
+            "route_id": route_id,
+            "runtime_path": runtime_rel,
+            "runtime_git_blob_sha": admission.git_blob_sha(runtime_path),
+            "baseline_live_wrapper_path": admission.LIVE_WRAPPER_PATH,
+            "baseline_live_wrapper_git_blob_sha": admission.git_blob_sha(
+                root / admission.LIVE_WRAPPER_PATH
+            ),
+            "baseline_dynamic_manifest_git_blob_sha": current["target_git_blob_sha"],
+            "baseline_dynamic_route_ids": sorted(
+                str(row["route_id"]) for row in current["admissions"]
+            ),
+            "proof_class": admission.NONINTERFERENCE_PROOF_CLASS,
+            "legacy_overlap_absent_verified": True,
+            "dynamic_overlap_absent_verified": True,
+            "scope_complete_for_candidate_match_domain": True,
+            "independent_verified": True,
+            "verification_authority_mutated": False,
+            "promotion_authority": False,
+            "terminal_authority": False,
+            "incremental_spend_usd": 0,
+        },
+    )
+
     receipt_rel = f"canonical/verification/TEST_CONCURRENT_ROUTE_{suffix}_RECEIPT.json"
     _write_json(
         root / receipt_rel,
@@ -134,6 +171,8 @@ def _route_fixture(root: Path, suffix: str) -> tuple[str, str, str]:
             "promotion_authority": False,
             "terminal_authority": False,
             "incremental_spend_usd": 0,
+            "noninterference_verification_path": proof_rel,
+            "noninterference_verification_git_blob_sha": admission.git_blob_sha(proof_path),
         },
     )
     return route_id, candidate_rel, receipt_rel
@@ -177,13 +216,13 @@ class R2DirectRoutePromotionLeaseV1Tests(unittest.TestCase):
             root = Path(td)
             _base_repo(root)
             route_a, candidate_a, receipt_a = _route_fixture(root, "A")
-            route_b, candidate_b, receipt_b = _route_fixture(root, "B")
 
             first = promoter.promote(
                 candidate_path=candidate_a,
                 receipt_path=receipt_a,
                 repo_root=root,
             )
+            route_b, candidate_b, receipt_b = _route_fixture(root, "B")
             second = promoter.promote(
                 candidate_path=candidate_b,
                 receipt_path=receipt_b,
@@ -207,6 +246,46 @@ class R2DirectRoutePromotionLeaseV1Tests(unittest.TestCase):
             ids = [row["route_id"] for row in current["admissions"]]
             self.assertEqual(current["manifest"]["admission_count"], 2)
             self.assertEqual(set(ids), {route_a, route_b})
+
+    def test_new_promotion_without_noninterference_proof_fails_closed(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            _base_repo(root)
+            _, candidate, receipt = _route_fixture(root, "MISSING_PROOF")
+            receipt_path = root / receipt
+            value = json.loads(receipt_path.read_text(encoding="utf-8"))
+            value.pop("noninterference_verification_path")
+            value.pop("noninterference_verification_git_blob_sha")
+            _write_json(receipt_path, value)
+
+            with self.assertRaises(promoter.admission.DynamicAdmissionError):
+                promoter.promote(
+                    candidate_path=candidate,
+                    receipt_path=receipt,
+                    repo_root=root,
+                )
+
+    def test_stale_noninterference_proof_fails_closed_after_frontier_change(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            _base_repo(root)
+            _, candidate_a, receipt_a = _route_fixture(root, "STALE_A")
+            _, candidate_b, receipt_b = _route_fixture(root, "STALE_B")
+
+            promoter.promote(
+                candidate_path=candidate_a,
+                receipt_path=receipt_a,
+                repo_root=root,
+            )
+            with self.assertRaisesRegex(
+                promoter.admission.DynamicAdmissionError,
+                "NONINTERFERENCE_BASELINE_MANIFEST_STALE",
+            ):
+                promoter.promote(
+                    candidate_path=candidate_b,
+                    receipt_path=receipt_b,
+                    repo_root=root,
+                )
 
     def test_exact_repromotion_remains_idempotent_under_lease(self):
         with tempfile.TemporaryDirectory() as td:
