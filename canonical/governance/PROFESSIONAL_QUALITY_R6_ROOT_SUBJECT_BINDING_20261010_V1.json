@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_ROOT_SUBJECT_BINDING_V1",
   "date": "2026-10-10",
-  "status": "CANDIDATE_R6_V7_ROOT_SUBJECT_BINDING__CONTENT_ADDRESSED_SCOPE_MATCHED_EVIDENCE_DEPENDENCE__AWAITING_INDEPENDENT_VERIFICATION__ZERO_QUALITY_OR_TERMINAL_AUTHORITY",
+  "status": "CANDIDATE_R6_V7_ROOT_SUBJECT_BINDING__CONTENT_ADDRESSED_SCOPE_MATCHED_EVIDENCE_DEPENDENCE__UNUSED_NONJSON_PROOF_SURFACE_REMOVED__AWAITING_INDEPENDENT_VERIFICATION__ZERO_QUALITY_OR_TERMINAL_AUTHORITY",
   "root_id": "R6_EVIDENCE_GROUNDING_DEPENDENCE",
   "subject_kind": "DECLARED_SYSTEM",
   "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
@@ -38,14 +38,6 @@
     "leaf_binder_verification": {
       "path": "canonical/verification/PROFESSIONAL_QUALITY_LEAF_BINDER_V2_VERIFY_20261010_V1.json",
       "git_blob_sha": "b65a67e8edaee925338fe3f2d61dad6b0f52d129"
-    },
-    "scoped_evidence_overlay": {
-      "path": "canonical/runtime/professional_quality_scoped_evidence_overlay_v1.py",
-      "git_blob_sha": "19c11df8b011fa2c72c755f421edcd38a89f0a07"
-    },
-    "scoped_integration_verification": {
-      "path": "canonical/verification/PROFESSIONAL_QUALITY_R4_SEMANTIC_SCOPED_INTEGRATION_VERIFY_20261010_V1.json",
-      "git_blob_sha": "664c22bfdfc51ea4058e4e2d3c3efe9d8def907b"
     }
   },
   "binding_scope": {
