@@ -160,10 +160,19 @@ def make_provider(
             ):
                 return _fail("SUCCESS_OBSERVATION_NOT_PROVEN_ADAPTER_MISS")
 
-            proof = learning.get_success_proof_context(
-                observation_id,
-                state_path=state_target,
-            )
+            try:
+                proof = learning.get_success_proof_context(
+                    observation_id,
+                    state_path=state_target,
+                )
+            except Exception as exc:
+                if "SUCCESS_OBSERVATION_PROOF_UNAVAILABLE:" in str(exc):
+                    return _fail(
+                        "RETAINED_SUCCESS_PROOF_UNAVAILABLE__"
+                        "NEW_PROOF_BEARING_EXPERIENCE_REQUIRED",
+                        observation_id=observation_id,
+                    )
+                raise
             replay = learning.get_success_replay_context(
                 observation_id,
                 state_path=state_target,
