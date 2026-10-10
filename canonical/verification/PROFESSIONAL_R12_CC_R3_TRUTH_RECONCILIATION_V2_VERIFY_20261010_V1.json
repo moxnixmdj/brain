@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_R12_CC_R3_TRUTH_RECONCILIATION_V2_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_SPRITE__5_OF_5__R12_CC_R3_V2__6_VERIFIED_2_PARTIAL__STRONGER_TOTALITY_OPEN__ZERO_PROPERTY_OR_TERMINAL_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "r12-cc-r3-truth-reconcile-v2-20261010",
+    "claim_id": "05b74983836dd1f6a13a0db72443246fb74f99548f0d982a769a6a7e572e9e85",
+    "exact_blobs": {
+      "reconciliation": "ba25f3b35093c7e8372fd6f14fe63441880774a8",
+      "verifier": "25013e19fbfdd56fc02aab0716ad660929556490",
+      "tests": "a3afbc643b8d447db47d0901394d2a6e571ba459",
+      "c3_verification": "5965b692dc6bfcffda90cfcdf41fa760f67488d0",
+      "predecessor": "b469e2f13c318d57aaca71d8b29ad1930636507d"
+    }
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/r12-semantic-cc-r3-cut-v1",
+    "tests_run": 5,
+    "tests_passed": 5,
+    "failures": 0,
+    "errors": 0
+  },
+  "truth": {
+    "verified_clause_count": 6,
+    "verified_clause_ids": [
+      "R12C2_SAME_SUBJECT_ROOT_CONJUNCTION",
+      "R12C3_ABSTRACTION_SOUNDNESS",
+      "R12C4_INDEPENDENT_DEFEATER_SEARCH",
+      "R12C5_COVERAGE_ACCOUNTING",
+      "R12C6_PROOF_SEARCH_HONESTY",
+      "R12C7_META_CONTROLLER_FALSIFICATION"
+    ],
+    "partial_clause_count": 2,
+    "partial_clause_ids": [
+      "R12C1_ASSUMPTION_GUARANTEE_COMPOSITION",
+      "R12C8_NONVACUITY"
+    ],
+    "stronger_material_defeater_totality_open": true,
+    "cc_r3_terminal_closure_proved": false
+  },
+  "hard_nonclaims": [
+    "NO_C1_OR_C8_CREDIT",
+    "NO_UNKNOWN_MATERIAL_DEFEATER_COMPLETENESS",
+    "NO_CC_R3_TERMINAL_CLOSURE",
+    "NO_R12_SEMANTIC_PROPERTY_TRUTH",
+    "NO_PROPERTY_ROOT_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "property_truth_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
