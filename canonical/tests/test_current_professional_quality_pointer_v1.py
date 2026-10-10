@@ -11,17 +11,31 @@ PROFILE_BLOB = "f7e89eafbb691c16d1bdf5b8d295a468d5e3bec5"
 ROUTER = "canonical/runtime/professional_quality_p1_router_v3.py"
 ROUTER_BLOB = "cdb6716ac6d562d1ab222242d07aeecc5cdfac78"
 REGISTRY = "canonical/governance/PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_REGISTRY_20261010_V1.json"
-REGISTRY_BLOB = "ec0fe3dd0c1c925f09dde1734e3dbea359ac002c"
-VERIFY = "canonical/verification/PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_VERIFY_20261010_V13.json"
-VERIFY_BLOB = "9c413c30fcb8f2995ddc81262039248afa0c26e1"
+REGISTRY_BLOB = "f862131430822dfa0b76fe6093f31701b6dca7fe"
+OVERLAY = "canonical/runtime/professional_quality_scoped_evidence_overlay_v1.py"
+OVERLAY_BLOB = "17f5472868aafcb45e75c72b744bcd8ad45a7049"
+OVERLAY_TESTS_BLOB = "f434254ad7dd659537f2deab34d9cc70c7391584"
+R3_VERIFY = "canonical/verification/PROFESSIONAL_QUALITY_R3_REALIZATION_SEMANTIC_VERIFY_20261010_V1.json"
+R3_VERIFY_BLOB = "3c9a6f03c9dfb7597cdb7c5ca01e9eaf66a596e0"
 ROUTER_V3_VERIFY = "canonical/verification/PROFESSIONAL_QUALITY_P1_ROUTER_V3_INDEPENDENT_VERIFY_20261010_V1.json"
 ROUTER_V3_VERIFY_BLOB = "1e793db5919be8a75e1599ba974bd06afaae6e91"
 ROUTER_V3_TESTS_BLOB = "7fd496e9200d1408d561cadcf40b8f4bf536c898"
-LEAF_VERIFY = "canonical/verification/PROFESSIONAL_QUALITY_LEAF_COVERAGE_PROJECTION_VERIFY_20261010_V3.json"
-LEAF_VERIFY_BLOB = "f9d0f1bf9e45b2884f651a225d47bd06e27bb209"
+
+EXPECTED_SEMANTIC_LEAVES = {
+    "PQ::R1_TARGET_SPECIFICATION::SEMANTIC",
+    "PQ::R2_CANDIDATE_SEARCH::SEMANTIC",
+    "PQ::R3_REALIZATION_OBSERVATION::SEMANTIC",
+    "PQ::R6_EVIDENCE_GROUNDING_DEPENDENCE::SEMANTIC",
+    "PQ::R7_CAUSAL_PRESCRIPTIVE::SEMANTIC",
+    "PQ::R8_POPULATION_CONTEXT_OPERATOR::SEMANTIC",
+    "PQ::R9_TEMPORAL_DEPLOYMENT::SEMANTIC",
+    "PQ::R10_ANALYSIS_DECISION::SEMANTIC",
+    "PQ::R11_ADAPTIVE_INTEGRITY_SECURITY::SEMANTIC",
+    "PQ::R12_META_COMPOSITION_CLOSURE::SEMANTIC",
+}
 
 
-def test_current_professional_quality_projects_verified_scoped_truth_without_overclaim():
+def test_current_professional_quality_projects_r3_scoped_truth_without_overclaim():
     current = json.loads(CURRENT.read_text(encoding="utf-8"))
 
     assert current["profile_path"] == PROFILE
@@ -32,10 +46,14 @@ def test_current_professional_quality_projects_verified_scoped_truth_without_ove
     scoped = current["scoped_evidence"]
     assert scoped["registry_path"] == REGISTRY
     assert scoped["registry_git_blob_sha"] == REGISTRY_BLOB
-    assert scoped["verification_path"] == VERIFY
-    assert scoped["verification_git_blob_sha"] == VERIFY_BLOB
-    assert scoped["admitted_scope_count"] == 12
-    assert len(scoped["admitted_roots"]) == 12
+    assert scoped["runtime_path"] == OVERLAY
+    assert scoped["runtime_git_blob_sha"] == OVERLAY_BLOB
+    assert scoped["tests_git_blob_sha"] == OVERLAY_TESTS_BLOB
+    assert scoped["verification_path"] == R3_VERIFY
+    assert scoped["verification_git_blob_sha"] == R3_VERIFY_BLOB
+    assert scoped["admitted_scope_count"] == 19
+    assert "R3_REALIZATION_OBSERVATION" in scoped["admitted_roots"]
+    assert set(scoped["bounded_semantic_leaf_ids"]) == EXPECTED_SEMANTIC_LEAVES
     assert scoped["global_leaf_closure"] is False
     assert scoped["global_root_closure"] is False
     assert scoped["domain_semantic_closure"] is False
@@ -56,21 +74,30 @@ def test_current_professional_quality_projects_verified_scoped_truth_without_ove
     assert current["quality_authority"] is False
     assert current["terminal_authority"] is False
 
-    legacy = current["legacy_router_verification"]
-    assert legacy["scope"] == "ROUTER_V1_ONLY__DOES_NOT_VERIFY_ROUTER_V3"
-    assert "NO_ROUTER_V3_INDEPENDENT_REPLAY_YET" not in current["hard_nonclaims"]
-    assert current["next"].startswith(
-        "BIND_REAL_SAME_SUBJECT_ROOT_RECEIPTS_FOR_ONE_EXACT_ARTIFACT_OR_SYSTEM"
-    )
     leaf = current["leaf_coverage_projection"]
-    assert leaf["path"] == LEAF_VERIFY
-    assert leaf["git_blob_sha"] == LEAF_VERIFY_BLOB
+    assert leaf["partial_coverage_leaf_count"] == 22
+    assert leaf["semantic_partial_coverage_leaf_count"] == 10
+    assert leaf["execution_partial_coverage_leaf_count"] == 12
+    assert leaf["no_scoped_evidence_leaf_count"] == 2
+    assert leaf["no_scoped_evidence_leaf_ids"] == [
+        "PQ::R4_MEASUREMENT_CONSTRUCT::SEMANTIC",
+        "PQ::R5_EVALUATOR_REFERENCE::SEMANTIC",
+    ]
     assert leaf["verified_global_leaf_count"] == 0
     assert leaf["open_global_leaf_count"] == 24
-    assert leaf["partial_coverage_leaf_count"] == 15
-    assert leaf["semantic_partial_coverage_leaf_count"] == 3
-    assert leaf["no_scoped_evidence_leaf_count"] == 9
+    assert leaf["global_leaf_closure"] is False
+
+    r3 = current["r3_realization_semantic"]
+    assert r3["verification_path"] == R3_VERIFY
+    assert r3["verification_git_blob_sha"] == R3_VERIFY_BLOB
+    assert r3["bounded_semantic_evidence"] is True
+    assert r3["global_r3_semantic_leaf_closed"] is False
+    assert r3["arbitrary_semantic_target_correctness_proved"] is False
+    assert r3["whole_open_ended_native_artifact_contract_scope_equivalence_proved"] is False
+    assert r3["terminal_credit_delta"] == 0
+
     same = current["same_subject_composition"]
     assert same["structural_gate_verified"] is True
     assert same["real_all_root_subject_bound"] is False
     assert "NO_REAL_ARTIFACT_OR_SYSTEM_BOUND_TO_ALL_TWELVE_ROOTS_YET" in current["hard_nonclaims"]
+    assert current["next"].startswith("ADD_BOUNDED_SEMANTIC_EVIDENCE_FOR_R4_OR_R5")
