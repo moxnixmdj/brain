@@ -28,7 +28,7 @@ class RealityClosureV2IntegrationTests(unittest.TestCase):
             self.assertFalse(out["pass"], out)
             self.assertEqual(
                 out["status"],
-                "OPEN__INTERNAL_UNSOLVED__PENDING_ACQUISITION_OR_EXPERIMENT_PROVIDER_REQUIRED",
+                "OPEN__INTERNAL_UNSOLVED__PENDING_ACQUISITION_OR_EXPERIMENT__CONCRETE_DECISION_BOUND_TARGET_REQUIRED",
             )
             self.assertEqual(
                 out["gap_contract"]["gap_class"],
@@ -54,6 +54,14 @@ class RealityClosureV2IntegrationTests(unittest.TestCase):
             self.assertEqual(
                 out["gap_contract"]["constructive_capability_contract_count"],
                 0,
+            )
+            self.assertTrue(out["default_evidence_acquisition_provider_bound"])
+            self.assertEqual(
+                out["evidence_provider_result"]["status"],
+                "OPEN__PENDING_ACQUISITION_OR_EXPERIMENT__CONCRETE_DECISION_BOUND_TARGET_REQUIRED",
+            )
+            self.assertFalse(
+                out["evidence_provider_result"]["broad_acquisition_attempted"]
             )
             self.assertFalse(out["terminal_authority"])
 
