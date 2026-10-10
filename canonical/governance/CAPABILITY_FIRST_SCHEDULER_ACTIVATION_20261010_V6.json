@@ -83,7 +83,7 @@
     "fail_closed_on_unclassified_residual": true,
     "fail_closed_on_unknown_cause_id": true,
     "activation": "canonical/governance/R2_SHARED_CAUSE_RESIDUAL_LEDGER_ACTIVATION_20261010_V2.json",
-    "activation_git_blob_sha": "463bfcd2dfc510789e51449fa8e32825327e2eeb",
+    "activation_git_blob_sha": "a135de488b4f9c173c19c078af8727f298dc7570",
     "runtime_git_blob_sha": "00a6963a1b65e96c08bf8fdb605d6143c339ac26",
     "tests_git_blob_sha": "f50d94e870bcc2db056384048540a543324d78d4",
     "current_authority_classification_complete_required": true
