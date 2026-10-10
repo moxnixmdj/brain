@@ -42,6 +42,7 @@ def _work(work_id: str, cause_id: str, **overrides) -> dict:
         "memory_cost_ub": 1,
         "complexity_cost_ub": 1,
         "shared_residual_cause_ids": [cause_id],
+        "residual_action": "ADAPT_EXISTING",
     }
     row.update(overrides)
     return row
@@ -81,6 +82,23 @@ class R2SharedCauseResidualLedgerV1Tests(unittest.TestCase):
         self.assertEqual(out["unclassified_clauses"], ["TOTALLY_NEW_RESIDUAL_KIND"])
         with self.assertRaises(ledger.R2SemanticResidualLedgerError):
             ledger.cause_fanout_index(out)
+
+    def test_v76_pair_marker_residual_maps_to_identity_discrimination(self):
+        out = ledger.build_ledger(
+            _authority(
+                "CCOB_MREL_OR_CCYB_MREL_CASES_OUTSIDE_VERIFIED_PAIR_MARKER_SCOPES_"
+                "OR_WITH_ONLY_SHARED_LOSS_ABSORPTION_REMAIN_OPEN"
+            )
+        )
+        self.assertTrue(out["classification_complete"], out)
+        self.assertEqual(
+            out["clauses"][0]["cause_ids"],
+            ["IDENTITY_DISCRIMINATION"],
+        )
+        self.assertEqual(
+            out["clauses"][0]["parent_cause_ids"],
+            ["POLICY_CHANGING_OBSERVABILITY"],
+        )
 
     def test_live_current_authority_is_fully_classified(self):
         out = ledger.load_current_ledger()
@@ -193,7 +211,7 @@ class R2SharedCauseResidualLedgerV1Tests(unittest.TestCase):
         activation = json.loads(
             (
                 ROOT
-                / "canonical/governance/R2_SHARED_CAUSE_RESIDUAL_LEDGER_ACTIVATION_20261010_V1.json"
+                / "canonical/governance/R2_SHARED_CAUSE_RESIDUAL_LEDGER_ACTIVATION_20261010_V2.json"
             ).read_text()
         )
         self.assertEqual(
