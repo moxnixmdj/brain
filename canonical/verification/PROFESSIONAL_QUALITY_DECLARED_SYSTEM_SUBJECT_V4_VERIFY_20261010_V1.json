@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_DECLARED_SYSTEM_SUBJECT_V4_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__AUTHENTICATED_TARGET_SYSTEM_SUBJECT_V4__5_OF_5_VERIFIER_TESTS__REAL_16_OF_16_COMPONENT_CURRENTNESS__ZERO_ROOT_OR_QUALITY_AUTHORITY",
+  "subject": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V5_DECLARED_SYSTEM_SUBJECT_20261010_V4.json",
+    "git_blob_sha": "7bce06f0f58c1406e00de4d16db5b851b4a79327",
+    "subject_kind": "DECLARED_SYSTEM",
+    "subject_id": "PROFESSIONAL_QUALITY_P1_V5_AUTHENTICATED_TARGET_SYSTEM_20261010_V4",
+    "subject_sha256": "1837e5cdd4c56ebb27ed2feb93f81b21f119e54aee6e0527d2781b235b652b29"
+  },
+  "verifier": {
+    "path": "canonical/runtime/professional_quality_declared_system_subject_verify_v1.py",
+    "git_blob_sha": "2936df1590077f4e97c82adaf79046a1221cef99"
+  },
+  "tests": {
+    "path": "canonical/tests/test_professional_quality_declared_system_subject_verify_v1.py",
+    "git_blob_sha": "03464487f4792bba919da59ac4efbfb634380068",
+    "tests_run": 5,
+    "tests_passed": 5,
+    "tests_failed": 0
+  },
+  "independent_verifier": {
+    "provider": "Sprites",
+    "name": "brain-live-runtime-v1-verify-20261008",
+    "id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13",
+    "independent_verifier_id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13",
+    "workspace": "/home/sprite/pq-v5-subject-v4-verify"
+  },
+  "real_subject_replay": {
+    "pass": true,
+    "component_count": 16,
+    "component_currentness_verified": true,
+    "subject_identity_verified": true,
+    "subject_git_blob_sha": "7bce06f0f58c1406e00de4d16db5b851b4a79327"
+  },
+  "proves": [
+    "SUBJECT_HASH_RECOMPUTES_FROM_EXACT_SYSTEM_MATERIAL",
+    "ALL_SIXTEEN_COMPONENT_BLOBS_MATCH_CURRENT_REPLAY_BYTES",
+    "V5_R2_GOAL_BINDING_V4_V3_V2_TARGET_SEMANTICS_AND_ASSURANCE_COMPONENTS_ARE_INSIDE_SUBJECT_IDENTITY",
+    "SUBJECT_MEMBERSHIP_GRANTS_ZERO_ROOT_SUBJECT_BINDING_AUTHORITY"
+  ],
+  "hard_nonclaims": [
+    "NO_R1_ROOT_SUBJECT_BINDING_FROM_IDENTITY_ONLY",
+    "NO_ARBITRARY_NATURAL_LANGUAGE_SEMANTIC_COMPLETENESS",
+    "NO_SAME_SUBJECT_COMPOSITION_PASS",
+    "NO_LIVE_DEFAULT_PROMOTION",
+    "NO_PROFESSIONAL_QUALITY_CLOSURE"
+  ],
+  "root_subject_binding_authority": false,
+  "quality_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
