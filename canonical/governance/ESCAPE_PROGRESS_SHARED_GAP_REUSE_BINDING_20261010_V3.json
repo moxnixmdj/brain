@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V3",
   "date": "2026-10-10",
-  "status": "ACTIVE_SUCCESSOR_CAUSAL_BINDING__10_ACQUISITION_3_INTERNAL_PROGRESS__SUCCESSOR_EXECUTABLE_AUDIT_PENDING__CC_R3_OPEN__ZERO_CREDIT",
+  "status": "ACTIVE_SUCCESSOR_CAUSAL_BINDING__10_ACQUISITION_3_INTERNAL_PROGRESS__GENERIC_TRUTH_REPAIR_RECERTIFICATION_MACHINERY_VERIFIED__SUCCESSOR_EXECUTABLE_AUDIT_PENDING__CC_R3_OPEN__ZERO_CREDIT",
   "predecessor": {
     "path": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V2.json",
     "git_blob_sha": "271634944d0da6a586fbc678f5a2a33e00a5c80e"
@@ -67,8 +67,9 @@
   },
   "execution_order": [
     "IMPLEMENT_COUNT_GENERIC_SUCCESSOR_AUDIT_WITHOUT_MUTATING_FROZEN_V1_HISTORY",
-    "EMIT_ROW_PROOFS_USING_EXISTING_MECHANISMS",
-    "INDEPENDENTLY_VERIFY_AUDIT_AND_PROOFS",
+    "REUSE_VERIFIED_REACHED_STATE_V2_TRUTH_AND_REPAIR_RECERTIFICATION_LOOP",
+    "ATTACK_GAP_A_THROUGH_SHARED_TARGET_FREE_CERTIFICATE_ROUTE_BEFORE_PRIVATE_ACQUISITION",
+    "EMIT_ROW_PROOFS_ONLY_WHEN_PROVIDER_OR_ACTION_TOTALITY_IS_ACTUALLY_PROVED",
     "SCHEDULE_ONLY_EXACT_MISSING_PREDICATES_FOR_ROWS_THAT_REMAIN_OPEN",
     "GENERALIZE_SHARED_PROOF_CONSTRUCTORS_BEFORE_ROW_SPECIFIC_CODE",
     "PROMOTE_CC_R3_ONLY_ON_13_OF_13_CURRENT_SUCCESSOR_PASS"
@@ -87,5 +88,23 @@
     "capability_credit_delta": 0,
     "ownership_credit_delta": 0,
     "terminal_credit_delta": 0
+  },
+  "shared_route_reduction": {
+    "path": "canonical/governance/ESCAPE_PROGRESS_SUCCESSOR_SHARED_ROUTE_REDUCTION_20261010_V1.json",
+    "git_blob_sha": "26004d2b15d2b86a55af40de0269e7005cb9c6f7",
+    "gap_a_shared_family_count": 4,
+    "gap_b_exact_row_count": 3,
+    "rule": "REUSE_SHARED_CERTIFICATE_ACQUISITION_FAMILIES_AND_EXACT_PROGRESS_PREDICATES__NO_THIRTEEN_SOLVERS"
+  },
+  "reached_state_v2_reuse_reconciliation": {
+    "path": "canonical/governance/ESCAPE_PROGRESS_REACHED_STATE_V2_REUSE_RECONCILIATION_20261010_V1.json",
+    "git_blob_sha": "c74716944e6ea6c72af1d43dc852708b1af16fda",
+    "generic_truth_authority_closed": true,
+    "generic_repair_dispatch_closed": true,
+    "independent_verification_closed": true,
+    "constructor_recertification_closed": true,
+    "live_reentry_closed": true,
+    "global_repair_acquirability_proved": false,
+    "global_escape_progress_totality_proved": false
   }
 }
