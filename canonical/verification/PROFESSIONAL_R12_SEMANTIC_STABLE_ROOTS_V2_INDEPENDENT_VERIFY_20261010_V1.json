@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_R12_SEMANTIC_STABLE_ROOTS_V2_INDEPENDENT_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__CURRENT_PACK_V3__SECOND_SPRITE__6_OF_6__R12_CC_R1_CC_R2_REINSTANTIATED__CC_R3_R4_OPEN__ZERO_PROPERTY_OR_TERMINAL_CREDIT",
+  "repository": "moxnixmdj/brain",
+  "base_main_commit": "67af968fc481e493e00b50cb8b53c16f909d3c62",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/professional_r12_semantic_stable_roots_v1.py",
+      "git_blob_sha": "12aeb70f107e87ecc89eac3b7f58349127940f85"
+    },
+    "tests": {
+      "path": "canonical/tests/test_professional_r12_semantic_stable_roots_v1.py",
+      "git_blob_sha": "75e5a695354893bda99d1b0c91eb74ce29a70076"
+    },
+    "current_pack_v3": {
+      "path": "canonical/runtime/professional_semantic_totality_claim_pack_v3.py",
+      "git_blob_sha": "5c3b47bc2d72b2e0b6b01c3e04635928419082fc"
+    },
+    "stable_r12_claim_id": "11870f850b46bcfcc31094f764fc4f45c911aaac413979ceb62679ff19a53162"
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-professional-hard-defect-verify-20261010",
+    "carrier_id": "sprite-1bbb86ed-1f7c-409f-8397-fadc4de7a62a",
+    "workspace": "/home/sprite/v3-current-replay",
+    "tests_run": 6,
+    "tests_passed": 6,
+    "tests_failed": 0,
+    "transcript_sha256": "070fdfbfe001660651d04b06d42ff17d88be7630dc26f2aa09ae02116ce6b637",
+    "transcript_bytes": 2246
+  },
+  "observed": {
+    "claim_id": "11870f850b46bcfcc31094f764fc4f45c911aaac413979ceb62679ff19a53162",
+    "scope_sha256": "3958f259dba6bc6d4dfe1dad0b3ec26ecb1b8d92ea4763985f52ce96cfc55a1d",
+    "semantics_sha256": "39034d3ff3bab4c6b05ff9b224c5910177c0604bf0acbe1570ce8ce1bd6ad46d",
+    "cc_r1_reality_containment_proved": true,
+    "cc_r2_mission_soundness_proved": true,
+    "cc_r3_terminal_closure_proved": false,
+    "r4_proof_closure": false,
+    "semantic_property_truth_authority": false
+  },
+  "hard_nonclaims": [
+    "NO_CC_R3_TERMINAL_CLOSURE",
+    "NO_R4_PROOF_CLOSURE",
+    "NO_R12_SEMANTIC_PROPERTY_TRUTH",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "property_truth_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
