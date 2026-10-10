@@ -1,0 +1,80 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_SAME_SUBJECT_COMPOSITION_GATE_20261010_V2",
+  "date": "2026-10-10",
+  "status": "VERIFIED_MULTISCOPE_COMPOSITION_ADMISSIBILITY_GATE__21_SCOPED_CAPABILITIES_ACROSS_EXACT_12_ROOTS__ZERO_QUALITY_OR_TERMINAL_AUTHORITY",
+  "supersedes": "canonical/governance/PROFESSIONAL_QUALITY_SAME_SUBJECT_COMPOSITION_GATE_20261010_V1.json",
+  "objective": "Enforce that every load-bearing professional-quality root is independently bound to one identical exact artifact or declared-system subject while allowing multiple bounded scoped capabilities per root.",
+  "normal_form": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_CLOSURE_NORMAL_FORM_20261009_V1.json",
+    "git_blob_sha": "ebcfe5a48efce9df7fbc69a3817ac2f9adb1ff93",
+    "required_rule": "SAME_EXACT_ARTIFACT_OR_DECLARED_SYSTEM_SATISFIES_ALL_ROOT_CLAIMS"
+  },
+  "runtime": {
+    "path": "canonical/runtime/professional_quality_same_subject_composition_gate_v1.py",
+    "git_blob_sha": "229e37e96e2e61fd207a6bef7e69ad8d3e72e9c6"
+  },
+  "tests": {
+    "path": "canonical/tests/test_professional_quality_same_subject_composition_gate_v1.py",
+    "git_blob_sha": "38ecaab5f5c8010e0eb2ce138c39da171020960e"
+  },
+  "independent_verification": {
+    "path": "canonical/verification/PROFESSIONAL_QUALITY_SAME_SUBJECT_MULTISCOPE_VERIFY_20261010_V1.json",
+    "git_blob_sha": "d5c55c354475d02acd976622ea0ca6b6266a5275",
+    "result": "9_OF_9_PASS"
+  },
+  "scoped_evidence_dependency": {
+    "runtime_path": "canonical/runtime/professional_quality_scoped_evidence_overlay_v1.py",
+    "runtime_git_blob_sha": "d3bca89c426b8424ec120ace482ba85f1afd26e3",
+    "registry_path": "canonical/governance/PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_REGISTRY_20261010_V1.json",
+    "registry_git_blob_sha": "e8b013d4b10915104ec4f0744b03e5d36c7d87dd",
+    "required_admitted_root_count": 12,
+    "observed_admitted_scope_count": 21,
+    "exact_scope_count_may_exceed_root_count": true
+  },
+  "composition_contract": {
+    "required_root_count": 12,
+    "binding_schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_ROOT_SUBJECT_BINDING_V1",
+    "verification_schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_ROOT_SUBJECT_BINDING_VERIFY_V1",
+    "required_subject_identity_fields": [
+      "subject_kind",
+      "subject_id",
+      "subject_sha256"
+    ],
+    "every_root_requires_independent_root_subject_binding_authority": true,
+    "global_subject_identity_authority_required": false,
+    "all_verified_subject_tuples_must_be_identical": true,
+    "scoped_capability_cardinality_rule": "ONE_OR_MORE_ADMITTED_SCOPES_PER_REQUIRED_ROOT__NO_EXACT_ONE_SCOPE_PER_ROOT_ASSUMPTION"
+  },
+  "outcomes": {
+    "no_bindings": "OPEN__SAME_SUBJECT_BINDINGS_REQUIRED",
+    "incomplete_bindings": "OPEN__SAME_SUBJECT_BINDINGS_INCOMPLETE",
+    "different_verified_subjects": "OPEN__ROOT_SUBJECT_BINDINGS_NOT_IDENTICAL",
+    "all_twelve_same_verified_subject": "PASS__SAME_SUBJECT_ROOT_COMPOSITION_ADMISSIBLE",
+    "stale_or_self_authorized_binding": "FAIL_CLOSED"
+  },
+  "authority_boundary": {
+    "composition_admissibility_only": true,
+    "professional_quality_closed": false,
+    "semantic_truth_authority": false,
+    "execution_authority": false,
+    "quality_authority": false,
+    "acceptance_authority": false,
+    "promotion_authority": false,
+    "terminal_authority": false
+  },
+  "next_required_edge": "REFRESH_DECLARED_SYSTEM_SUBJECT_TO_CURRENT_21_SCOPE_REGISTRY__THEN_PRODUCE_AND_INDEPENDENTLY_VERIFY_REAL_ROOT_SUBJECT_BINDING_RECEIPTS",
+  "hard_nonclaims": [
+    "NO_REAL_ARTIFACT_OR_SYSTEM_BOUND_TO_ALL_TWELVE_ROOTS_BY_THIS_ACTIVATION",
+    "NO_GLOBAL_PROFESSIONAL_QUALITY_LEAF_OR_ROOT_CLOSURE",
+    "NO_DOMAIN_SEMANTIC_OR_EXECUTION_CLOSURE",
+    "NO_P1_ROUTER_LIVE_DEFAULT_PROMOTION",
+    "NO_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
