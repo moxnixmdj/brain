@@ -40,7 +40,10 @@ def _exact_four(base: Mapping[str, Any]) -> bool:
 
 
 def _fail(out: dict[str, Any], reason: str, **extra: Any) -> dict[str, Any]:
+    out.pop("minimum_policy_changing_information_request", None)
     out.update({
+        "minimum_policy_changing_information_request_available": False,
+        "minimum_policy_changing_information_request_suppressed_by": "V7_FAIL_CLOSED",
         "status": "FAIL_CLOSED",
         "pass": False,
         "reason": reason,
@@ -155,7 +158,12 @@ def ground(
         )
 
     if len(selections) == 3 and set(selections.values()) == {mrel.MREL}:
+        out.pop("minimum_policy_changing_information_request", None)
         out.update({
+            "minimum_policy_changing_information_request_available": False,
+            "minimum_policy_changing_information_request_superseded_by": (
+                "UNANIMOUS_THREE_PAIR_MREL_LIFT"
+            ),
             "status": "OPEN__UNIQUE_MREL_SELECTION_RELATIVE_TO_FOUR_CONCEPT_BOUND_INVENTORY",
             "pass": True,
             "semantic_truth_authority": True,
