@@ -1,0 +1,86 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_SUBJECT_DEPENDENCY_CLOSURE_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__12_OF_12_ROOT_DEPENDENCIES_CLASSIFIED__ZERO_UNRESOLVED__R10_FACTORED_FROM_WHOLE_BRAIN_CONE__30_MISSING_SUBJECT_COMPONENTS__ZERO_ROOT_OR_QUALITY_CREDIT",
+  "branch": "successor/r10-decision-kernel-factor-20261010-v1",
+  "compiler": {
+    "path": "canonical/runtime/professional_quality_subject_dependency_closure_v1.py",
+    "git_blob_sha": "0d2b4f380c8881764e7f6860debc9d05181c18ec",
+    "tests_path": "canonical/tests/test_professional_quality_subject_dependency_closure_v1.py",
+    "tests_git_blob_sha": "3b24a7de79ac8f95eb85057cbbc6248749c9b5e9",
+    "isolated_replay": {
+      "tests_run": 5,
+      "tests_passed": 5,
+      "tests_failed": 0
+    }
+  },
+  "source_registry": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_REGISTRY_20261010_V1.json",
+    "git_blob_sha": "9b85486b464725064bc071d61c958383fbdfb056"
+  },
+  "candidate_subject": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V4_DECLARED_SYSTEM_SUBJECT_20261010_V3.json",
+    "git_blob_sha": "ad6867e59b4279e34a3e0058cf539ee94f8d094c",
+    "component_count": 13
+  },
+  "live_replay": {
+    "carrier": {
+      "name": "brain-capability-first-scheduler-verify-20261008-v1",
+      "id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+      "workspace": "/home/sprite/pq-subject-dependency-live"
+    },
+    "roots_total": 12,
+    "roots_dependency_classified": 12,
+    "unresolved_dependencies": [],
+    "unique_missing_subject_component_count": 30,
+    "unique_missing_subject_components": [
+      "canonical/governance/PROFESSIONAL_QUALITY_ASSURANCE_GRAPH_20261009_V2.json",
+      "canonical/governance/PROFESSIONAL_QUALITY_LEAF_EVIDENCE_REGISTRY_20261010_V1.json",
+      "canonical/runtime/adequacy_basis_structural_completeness_gate_v1.py",
+      "canonical/runtime/content_addressed_artifact_measurement_v1.py",
+      "canonical/runtime/delegation_terminal_population_binding_v1.py",
+      "canonical/runtime/delegation_whole_scope_candidate_v2.py",
+      "canonical/runtime/delegation_whole_scope_proof_v2.py",
+      "canonical/runtime/evaluation_information_firewall_v1.py",
+      "canonical/runtime/finite_minimax_decision_region_v1.py",
+      "canonical/runtime/gdpval_hybrid_evaluator_uncertainty_v1.py",
+      "canonical/runtime/measured_typed_acceptance_program_v1.py",
+      "canonical/runtime/native_artifact_cross_format_candidate_v1.py",
+      "canonical/runtime/native_artifact_cross_format_proof_v1.py",
+      "canonical/runtime/native_artifact_render_preservation_proof_v1.py",
+      "canonical/runtime/ooxml_package_transaction.py",
+      "canonical/runtime/pdf_native_edit_transaction.py",
+      "canonical/runtime/professional_candidate_search_semantic_certificate_v1.py",
+      "canonical/runtime/professional_edit_causal_certificate_v1.py",
+      "canonical/runtime/professional_r10_decision_semantic_certificate_v1.py",
+      "canonical/runtime/professional_r10_decision_sufficiency_kernel_v1.py",
+      "canonical/runtime/professional_r11_firewall_semantic_certificate_v1.py",
+      "canonical/runtime/professional_r3_realization_semantic_certificate_v1.py",
+      "canonical/runtime/professional_r4_measurement_semantic_certificate_v1.py",
+      "canonical/runtime/professional_r5_evaluator_semantic_certificate_v1.py",
+      "canonical/runtime/professional_r8_population_semantic_certificate_v1.py",
+      "canonical/runtime/professional_r9_temporal_semantic_certificate_v1.py",
+      "canonical/runtime/structured_method_expression_ast_candidate_v2.py",
+      "canonical/runtime/tb_science_conservative_censoring_reducer_v1.py",
+      "canonical/runtime/typed_acceptance_program_v1.py",
+      "canonical/runtime/u_scope_complete_depletion_orchestrator_v1.py"
+    ]
+  },
+  "r10_factor": {
+    "prior_unresolved_live_brain_cone": true,
+    "new_kernel": "canonical/runtime/professional_r10_decision_sufficiency_kernel_v1.py",
+    "equivalence_receipt": "canonical/verification/PROFESSIONAL_QUALITY_R10_DECISION_SUFFICIENCY_KERNEL_VERIFY_20261010_V1.json",
+    "result": "R10_DEPENDENCY_CLASSIFICATION_COMPLETE_WITH_ONLY_TWO_R10_SYSTEM_COMPONENTS"
+  },
+  "hard_nonclaims": [
+    "NO_FINAL_SUBJECT_FROZEN_BY_THIS_RECEIPT",
+    "NO_ROOT_SUBJECT_BINDING_DELTA",
+    "NO_GLOBAL_LEAF_OR_ROOT_CLOSURE",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "root_subject_binding_authority": false,
+  "quality_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
