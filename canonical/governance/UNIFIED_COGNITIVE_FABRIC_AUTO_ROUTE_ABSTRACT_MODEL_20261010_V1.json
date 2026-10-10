@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_UNIFIED_COGNITIVE_FABRIC_AUTO_ROUTE_ABSTRACT_MODEL_V1",
+  "date": "2026-10-10",
+  "subject_id": "CURRENT_UNIFIED_COGNITIVE_FABRIC_AUTO_ROUTE_CLASSIFIER",
+  "scope": "ONLY__UNIFIED_COGNITIVE_FABRIC_V1__AUTO_MODE_STRUCTURAL_CLASSIFIER",
+  "boolean_route_signals": [
+    "OEWN_DECISION_SENSE",
+    "SEMANTIC_AMBIGUITY",
+    "SEMANTIC_RELATION",
+    "LIVE_COMPOSITION",
+    "LIVE_CAPABILITY",
+    "BOUND_CAPABILITY",
+    "CAPABILITY_SCHEDULER",
+    "REPAIR",
+    "UNIVERSAL_ESCAPE",
+    "COMPILED_TASK",
+    "ADAPTIVE_SOLVER_BASE",
+    "ADEQUATE_DECISION"
+  ],
+  "modifiers": {
+    "operation_class": [
+      "NONE",
+      "H100_SUPPORTED",
+      "OTHER_TRUTHY"
+    ],
+    "problem_mapping": [
+      false,
+      true
+    ],
+    "repair_has_executable": [
+      false,
+      true
+    ],
+    "learning_option_present": [
+      false,
+      true
+    ]
+  },
+  "precedence": [
+    "OEWN_DECISION_SENSE",
+    "SEMANTIC_AMBIGUITY",
+    "SEMANTIC_RELATION",
+    "LIVE_COMPOSITION",
+    "LIVE_CAPABILITY",
+    "BOUND_CAPABILITY",
+    "CAPABILITY_SCHEDULER",
+    "REPAIR_CYCLE_OR_SYNTHESIS",
+    "MYSTERY_INFERENCE",
+    "H100_INFERENCE",
+    "UNIVERSAL_ESCAPE",
+    "COMPILED_TASK",
+    "LEARNING_EPISODE_OR_ADAPTIVE_SOLVER",
+    "ADEQUATE_DECISION",
+    "FAIL_CLOSED"
+  ],
+  "semantics": {
+    "repair": "REPAIR_CYCLE iff REPAIR and repair_has_executable else REPAIR_SYNTHESIS",
+    "mystery": "MYSTERY_INFERENCE iff operation_class != NONE and problem_mapping",
+    "h100": "H100_INFERENCE iff operation_class == H100_SUPPORTED and not already captured by MYSTERY_INFERENCE",
+    "learning": "LEARNING_EPISODE iff ADAPTIVE_SOLVER_BASE and learning_option_present else ADAPTIVE_SOLVER"
+  },
+  "exhaustive_state_count": 98304,
+  "proof_obligation": "CONCRETE__auto_mode_RESULT_EQUALS_ABSTRACT_PRECEDENCE_MODEL_FOR_EVERY_DECLARED_STATE",
+  "liveness_claim": false,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
