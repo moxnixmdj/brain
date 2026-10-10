@@ -51,6 +51,17 @@ WORK_TYPES = frozenset(
 LOAD_BEARING_PRIMARY_LANE = "LOAD_BEARING_PRIMARY"
 SECONDARY_CAPABILITY_LANE = "SECONDARY_CAPABILITY"
 OPEN_WORLD_EVIDENCE_FRONTIER = "OPEN_WORLD_EVIDENCE_FRONTIER"
+RESIDUAL_ACTIONS = frozenset(
+    {
+        "REUSE_EXISTING",
+        "ADAPT_EXISTING",
+        "PROMOTE_EXISTING",
+        "VERIFY_EXISTING",
+        "ACQUIRE_EVIDENCE",
+        "NEW_PRIMITIVE",
+    }
+)
+NEW_PRIMITIVE = "NEW_PRIMITIVE"
 CURRENT_TERMINAL_AUTHORITY = (
     Path(__file__).resolve().parents[1] / "governance" / "CURRENT_TERMINAL_AUTHORITY.json"
 )
@@ -103,6 +114,142 @@ def _has_load_bearing_path(raw: Mapping[str, Any]) -> bool:
         or _ids(raw, "constructive_gap_for_open_obligation_ids")
         or raw.get("scope_complete_discharge") is True
     )
+
+
+def _reuse_first_residual_admission(raw: Mapping[str, Any]) -> dict[str, Any]:
+    """Mechanically enforce reuse-first classification on R2 residual work.
+
+    This is an admission/ordering guard only. It does not establish that cited
+    receipts are true, grant capability credit, or authorize execution.
+    """
+    cause_ids = _ids(raw, "shared_residual_cause_ids")
+    frontier_class = _s(raw.get("frontier_class"))
+    applies = bool(cause_ids) or frontier_class == OPEN_WORLD_EVIDENCE_FRONTIER
+    if not applies:
+        return {
+            "applies": False,
+            "residual_action": None,
+            "pass": True,
+            "status": "NOT_APPLICABLE",
+            "missing_requirements": [],
+        }
+
+    action = _s(raw.get("residual_action"))
+    if not action:
+        return {
+            "applies": True,
+            "residual_action": None,
+            "pass": False,
+            "status": "RESIDUAL_ACTION_REQUIRED",
+            "missing_requirements": ["RESIDUAL_ACTION"],
+        }
+    if action not in RESIDUAL_ACTIONS:
+        raise CapabilityFirstSchedulerError("RESIDUAL_ACTION_INVALID:" + action)
+
+    if action != NEW_PRIMITIVE:
+        return {
+            "applies": True,
+            "residual_action": action,
+            "pass": True,
+            "status": "REUSE_FIRST_NON_NEW_PRIMITIVE_ROUTE",
+            "missing_requirements": [],
+        }
+
+    admission = raw.get("new_primitive_admission")
+    if not isinstance(admission, Mapping):
+        return {
+            "applies": True,
+            "residual_action": action,
+            "pass": False,
+            "status": "DEMOTED_NEW_PRIMITIVE_WITHOUT_REUSE_EXHAUSTION_PROOF",
+            "missing_requirements": [
+                "EXACT_UNSATISFIED_PREDICATE",
+                "EXISTING_MECHANISMS_SEARCHED",
+                "WHY_EACH_EXISTING_MECHANISM_CANNOT_SOUNDLY_CLOSE_THE_PREDICATE",
+                "INDEPENDENTLY_VERIFIED_MISSING_PRIMITIVE_OR_COUNTEREXAMPLE",
+                "MINIMUM_NEW_PRIMITIVE_SCOPE",
+                "FALSIFIER_AND_PROMOTION_CRITERIA",
+            ],
+        }
+
+    missing: list[str] = []
+    if not _s(admission.get("exact_unsatisfied_predicate")):
+        missing.append("EXACT_UNSATISFIED_PREDICATE")
+
+    searched = admission.get("existing_mechanisms_searched", [])
+    searched_ids: set[str] = set()
+    if (
+        not isinstance(searched, list)
+        or not searched
+        or not all(isinstance(x, str) and _s(x) for x in searched)
+    ):
+        missing.append("EXISTING_MECHANISMS_SEARCHED")
+    else:
+        searched_ids = {_s(x) for x in searched}
+
+    rejections = admission.get("mechanism_rejections", [])
+    rejected_ids: set[str] = set()
+    rejection_valid = isinstance(rejections, list) and bool(rejections)
+    if rejection_valid:
+        for row in rejections:
+            if not isinstance(row, Mapping):
+                rejection_valid = False
+                break
+            mechanism_id = _s(row.get("mechanism_id"))
+            reason = _s(row.get("reason"))
+            if (
+                not mechanism_id
+                or not reason
+                or row.get("soundness_preserving_rejection") is not True
+            ):
+                rejection_valid = False
+                break
+            rejected_ids.add(mechanism_id)
+    if (
+        not rejection_valid
+        or not searched_ids
+        or not searched_ids.issubset(rejected_ids)
+    ):
+        missing.append(
+            "WHY_EACH_EXISTING_MECHANISM_CANNOT_SOUNDLY_CLOSE_THE_PREDICATE"
+        )
+
+    independent_receipts = admission.get(
+        "independent_missing_primitive_or_counterexample_receipt_ids", []
+    )
+    if (
+        not isinstance(independent_receipts, list)
+        or not independent_receipts
+        or not all(isinstance(x, str) and _s(x) for x in independent_receipts)
+    ):
+        missing.append("INDEPENDENTLY_VERIFIED_MISSING_PRIMITIVE_OR_COUNTEREXAMPLE")
+
+    if not _s(admission.get("minimum_new_primitive_scope")):
+        missing.append("MINIMUM_NEW_PRIMITIVE_SCOPE")
+
+    falsifier_ids = admission.get("falsifier_ids", [])
+    promotion_criteria = admission.get("promotion_criteria", [])
+    if (
+        not isinstance(falsifier_ids, list)
+        or not falsifier_ids
+        or not all(isinstance(x, str) and _s(x) for x in falsifier_ids)
+        or not isinstance(promotion_criteria, list)
+        or not promotion_criteria
+        or not all(isinstance(x, str) and _s(x) for x in promotion_criteria)
+    ):
+        missing.append("FALSIFIER_AND_PROMOTION_CRITERIA")
+
+    return {
+        "applies": True,
+        "residual_action": action,
+        "pass": not missing,
+        "status": (
+            "NEW_PRIMITIVE_REUSE_EXHAUSTION_GATE_STRUCTURALLY_SATISFIED"
+            if not missing
+            else "DEMOTED_NEW_PRIMITIVE_WITHOUT_REUSE_EXHAUSTION_PROOF"
+        ),
+        "missing_requirements": missing,
+    }
 
 
 def _shared_residual_fanout(
@@ -257,7 +404,11 @@ def rank_work(
             raise CapabilityFirstSchedulerError("WORK_ID_DUPLICATE:" + work_id)
         seen.add(work_id)
 
+        residual_admission = _reuse_first_residual_admission(raw)
         eligible, eligibility = _eligible(raw, checkpoint_open_obligation_count)
+        if eligible and residual_admission["applies"] and not residual_admission["pass"]:
+            eligible = False
+            eligibility = residual_admission["status"]
         shared_residual_score, shared_residual_cause_ids = _shared_residual_fanout(raw)
         capability_score = _score(raw) if eligible else Fraction(0)
         if not eligible:
@@ -289,6 +440,11 @@ def rank_work(
                 ),
                 "scope_complete_discharge": raw.get("scope_complete_discharge") is True,
                 "shared_residual_cause_ids": shared_residual_cause_ids,
+                "residual_action": residual_admission["residual_action"],
+                "reuse_first_admission_status": residual_admission["status"],
+                "reuse_first_missing_requirements": residual_admission[
+                    "missing_requirements"
+                ],
                 "eligibility": eligibility,
                 "capability_priority_score_fraction": capability_score,
                 "shared_residual_fanout_score_fraction": shared_residual_score,
@@ -338,6 +494,11 @@ def rank_work(
             "INDEPENDENTLY_VERIFIED_CAPABILITY_DEFECT"
         ),
         "option_preservation_policy": OPTION_PRESERVATION_POLICY,
+        "reuse_first_residual_policy": (
+            "R2_RESIDUAL_WORK_MUST_CLASSIFY_REUSE_ADAPT_PROMOTE_VERIFY_ACQUIRE_OR_NEW_"
+            "PRIMITIVE__NEW_PRIMITIVE_REQUIRES_STRUCTURED_REUSE_EXHAUSTION_GATE"
+        ),
+        "new_primitive_mechanical_gate_active": True,
         "optimization_rule": "OPTIMIZE_IMPLEMENTATIONS_NOT_POSSIBILITIES",
         "capability_learning_loop": list(CAPABILITY_LEARNING_LOOP),
         "ranked": [
@@ -360,6 +521,11 @@ def rank_work(
                 ],
                 "scope_complete_discharge": row["scope_complete_discharge"],
                 "shared_residual_cause_ids": row["shared_residual_cause_ids"],
+                "residual_action": row["residual_action"],
+                "reuse_first_admission_status": row["reuse_first_admission_status"],
+                "reuse_first_missing_requirements": row[
+                    "reuse_first_missing_requirements"
+                ],
                 "eligibility": row["eligibility"],
                 "priority_score": str(row["capability_priority_score_fraction"]),
                 "shared_residual_fanout_score": str(
