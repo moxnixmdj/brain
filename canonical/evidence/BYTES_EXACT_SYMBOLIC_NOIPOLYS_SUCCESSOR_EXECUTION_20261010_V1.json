@@ -1,0 +1,115 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_NOIPOLYS_SUCCESSOR_EXECUTION_V1",
+  "status": "FRESH_SUCCESSOR_EXECUTION__NEW_POLYS_BYTE_FRONTIER__CANONICAL_TOOL_IDENTITY_RECHECKED__ZERO_PROMOTION_CREDIT",
+  "recorded_at": "2026-10-10",
+  "mission": "Minimum resource-feasible executable description conditional on already-owned Brain substrate.",
+  "governing_laws": [
+    "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V1.md",
+    "canonical/laws/BYTES_RESOURCE_BOUNDED_MINIMUM_MECHANISM_LAW_V1.md"
+  ],
+  "predecessor": {
+    "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_RINGSERIES_ATAN_SUCCESSOR_EXECUTION_20261010_V1.json",
+    "package_raw_python_source_bytes": 6556199,
+    "B_exec_raw_python_source_bytes": 6558959,
+    "fresh_qualification": "2990/2990"
+  },
+  "structural_cut": {
+    "id": "POLYS_RING_IPOLYS_COMPATIBILITY_MIXIN_REMOVAL",
+    "file": "sympy/polys/rings.py",
+    "change": "Remove the eager import of IPolys and PolyRing inheritance from IPolys.",
+    "causal_reason": "The bounded route uses PolyRing/PolyElement directly but did not execute IPolys compatibility methods in exploratory/spent profiling. IPolys is a broad dense/sparse compatibility facade that imported large cross-polynomial machinery at module load.",
+    "physically_removed_files": [
+      [
+        "sympy/polys/compatibility.py",
+        58373
+      ]
+    ],
+    "rings_source_delta_bytes": -53,
+    "net_package_reduction_bytes": 58426,
+    "polys_loaded_source_reduction_bytes": 58426,
+    "retained_independent_dependencies": [
+      "sympy/polys/rootisolation.py",
+      "sympy/polys/galoistools.py",
+      "sympy/polys/rootoftools.py",
+      "sympy/polys/matrices/ddm.py",
+      "sympy/polys/matrices/dense.py"
+    ],
+    "interpretation": "Only the compatibility facade itself disappeared; independently reached polynomial mechanisms remained."
+  },
+  "measured_candidate": {
+    "status": "PHYSICALLY_DELETED_RESEARCH_CANDIDATE__NOT_PROMOTED",
+    "python_files": 296,
+    "package_raw_python_source_bytes": 6497773,
+    "router_raw_python_source_bytes": 2760,
+    "B_exec_raw_python_source_bytes": 6500533,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "package_manifest_sha256": "b9e9ea0c7549c7e7b981aa9685a3fc60217226dc845746f26cbc06806a47dad2",
+    "raw_improvement_vs_immediate_predecessor_bytes": 58426,
+    "polys_loaded_trace_raw_python_source_bytes": 1403682
+  },
+  "qualification": {
+    "exploratory_calibration": "1150/1150",
+    "spent_NEXT5_precheck": "2990/2990",
+    "fresh_NEXT6": {
+      "id": "QUAL_SUCCESSOR_NEXT6_20261010_V1",
+      "seed": 2449489,
+      "per_operation_budget": 280,
+      "cases": 3220,
+      "corpus_sha256": "0320387ab3679d3374df2228f5249ef2606c974ac35c6667f1270d3d27a888e7",
+      "stock_donor_positive_control": "3220/3220",
+      "physical_candidate": "3220/3220",
+      "independent_copy_replay": "3220/3220",
+      "extracted_archive_replay": "3220/3220",
+      "status": "SPENT_ONCE_AS_FRESH_CANDIDATE_QUALIFICATION"
+    },
+    "pre_execution_noncreditable_event": "One initial stock-control command under python -S omitted the explicit donor site-packages path and failed during import before any corpus line was read. The corpus remained unexposed and was then executed correctly with the donor path explicitly bound."
+  },
+  "canonical_tool_identity_recheck": {
+    "reason": "Local working copies of route/verifier tools were behaviorally equivalent but not byte-identical to current canonical GitHub files.",
+    "exact_git_blobs": {
+      "canonical/research/bytes/tools/exact_symbolic_route_v1.py": "7a0cd948e002b5e4b6feea55f75777b0886da238",
+      "canonical/research/bytes/tools/semantic_digest_v1.py": "214b5b950f6c966e89318276e49341db521a1ef7",
+      "canonical/research/bytes/tools/generate_qualification_v1.py": "1a97ca1f7b93affc50ae7d22276672e4b74c4e30",
+      "canonical/research/bytes/tools/run_qualification_v1.py": "9e04430af5b0b49a30c76737547c9c1a42fb5df6"
+    },
+    "canonical_stock_NEXT6": "3220/3220",
+    "canonical_candidate_NEXT6": "3220/3220",
+    "result": "Qualification result survives exact canonical tool identity."
+  },
+  "comparable_storage_measurement": {
+    "recipe": "tar source tree excluding __pycache__/*.pyc; sorted names; epoch mtime; uid/gid 0; numeric owner; xz -6e -T1",
+    "predecessor_same_recipe_bytes": 1132420,
+    "successor_same_recipe_bytes": 1127596,
+    "successor_sha256": "68bad9e89b992a03e1f2898319479717b952cf58f442cc3350d0c1d3419c9ad2",
+    "improvement_bytes": 4824,
+    "boundary": "Do not compare these values directly with earlier archives made by a different undocumented compression recipe."
+  },
+  "reproducibility": {
+    "predecessor_reconstruction": "canonical/research/bytes/tools/rebuild_candidate_v4.py",
+    "successor_reconstruction": "canonical/research/bytes/tools/rebuild_candidate_v5.py",
+    "route": "canonical/research/bytes/tools/exact_symbolic_route_v1.py",
+    "semantic_digest": "canonical/research/bytes/tools/semantic_digest_v1.py",
+    "qualification_generator": "canonical/research/bytes/tools/generate_qualification_v1.py",
+    "loaded_trace_tool": "canonical/research/bytes/tools/trace_loaded_v1.py",
+    "physical_slice_tool": "canonical/research/bytes/tools/build_physical_slice_v1.py",
+    "qualification_runner": "canonical/research/bytes/tools/run_qualification_v1.py"
+  },
+  "next_frozen_qualification": {
+    "id": "QUAL_SUCCESSOR_NEXT7_20261010_V1",
+    "seed": 2645751,
+    "per_operation_budget": 300,
+    "cases": 3450,
+    "corpus_sha256": "a891f77a92fc6eb44c299ac89afd3f958d30c9759047804478f9239e158c88ef",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_STRUCTURAL_POLYS_CUT",
+    "canonical_regeneration_byte_identical": true
+  },
+  "truth_boundary": [
+    "MEASURED: the 6,497,773-byte physical package passes the fresh 3,220-case corpus under exact canonical route/verifier tool bytes.",
+    "MEASURED: stock donor, physical candidate, independent copy replay, and extracted archive replay each pass 3,220/3,220.",
+    "MEASURED: removal of the IPolys mixin edge eliminates compatibility.py and reduces package source by 58,426 bytes while preserving independent root/Galois/matrix dependencies.",
+    "MEASURED: same-procedure source archive storage falls by 4,824 bytes.",
+    "NOT CLAIMED: universal SymPy correctness, all exact-symbolic capability, absolute information-theoretic minimality, or Opus-family promotion.",
+    "PROMOTION CREDIT: 0."
+  ],
+  "next_action": "Rerank the remaining loaded polys closure with spent/exploratory corpora only. Prefer another import-boundary cut over internal rewrites. Do not touch QUAL_SUCCESSOR_NEXT7_20261010_V1 until a new physical candidate is frozen."
+}
