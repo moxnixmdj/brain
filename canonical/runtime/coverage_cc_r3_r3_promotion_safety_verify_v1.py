@@ -334,15 +334,35 @@ def verify_certificate(
     if not all(p >= 0 for p in positions) or positions != sorted(positions):
         errors.append("EPISODE_REAUTHENTICATION_ORDER_INVALID")
 
-    skill_order = [
-        "reauthenticate_skill_record(",
+    skill_reauth = fn_text.find("reauthenticate_skill_record(")
+    skill_reject = fn_text.find(
         'if skill_authority.get("pass") is not True:',
+        skill_reauth + 1,
+    )
+    skill_authenticated = fn_text.find(
         "verified_skill = authenticated_skill",
-        'out.get("verified_skill_reuse_authorized") is True',
+        skill_reject + 1,
+    )
+    positive_gate = fn_text.find(
+        'verified_skill.get("verified_skill") is True',
+        skill_authenticated + 1,
+    )
+    skill_pareto = fn_text.find(
         "skill_admission = update_pareto_frontier(frontier_rows, row)",
+        positive_gate + 1,
+    )
+    skill_store = fn_text.find(
         'state["skills"][sid] = record',
+        skill_pareto + 1,
+    )
+    positions = [
+        skill_reauth,
+        skill_reject,
+        skill_authenticated,
+        positive_gate,
+        skill_pareto,
+        skill_store,
     ]
-    positions = [fn_text.find(x) for x in skill_order]
     if not all(p >= 0 for p in positions) or positions != sorted(positions):
         errors.append("SKILL_REAUTHENTICATION_ORDER_INVALID")
 
