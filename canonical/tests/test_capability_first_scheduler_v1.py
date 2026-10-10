@@ -269,7 +269,7 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
         policy_rel = pointer["r2_mechanism_policy"]["path"]
         self.assertEqual(
             policy_rel,
-            "canonical/governance/R2_MECHANISM_CLOSURE_OPEN_WORLD_FRONTIER_POLICY_20261010_V4.json",
+            "canonical/governance/R2_MECHANISM_CLOSURE_OPEN_WORLD_FRONTIER_POLICY_20261010_V3.json",
         )
         policy = json.loads((ROOT / policy_rel).read_text())
 
@@ -455,17 +455,11 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
             ),
         )
 
-    def test_v7_scalar_contract_preserved_and_v9_is_current_primary(self):
-        v7 = json.loads(
+    def test_governance_binds_v6_and_mission_precedence(self):
+        activation = json.loads(
             (
                 ROOT
-                / "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V7.json"
-            ).read_text()
-        )
-        v9 = json.loads(
-            (
-                ROOT
-                / "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V9.json"
+                / "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V6.json"
             ).read_text()
         )
         pointer = json.loads(
@@ -475,34 +469,28 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
             (ROOT / "canonical/governance/CURRENT_MISSION_OBJECTIVE.json").read_text()
         )
         self.assertEqual(
-            v7["status"],
-            "ACTIVE_PRIMARY_CAPABILITY_FIRST_DEVELOPMENT_SCHEDULER__REUSE_FIRST_ENFORCED__LIVE_SCORE_PROVENANCE_GATE_ADDED__BASE_C6826060__ZERO_CREDIT",
+            activation["status"],
+            "ACTIVE_PRIMARY_CAPABILITY_FIRST_DEVELOPMENT_SCHEDULER__REUSE_FIRST_RESIDUAL_ADMISSION_MECHANICALLY_ENFORCED",
         )
-        self.assertFalse(v7["primary_work_rule"]["checkpoint_obligations_are_primary_gate"])
         self.assertFalse(
-            v7["primary_work_rule"][
+            activation["primary_work_rule"]["checkpoint_obligations_are_primary_gate"]
+        )
+        self.assertFalse(
+            activation["primary_work_rule"][
                 "generic_reusable_capability_work_is_demoted_while_checkpoint_open"
             ]
         )
         self.assertEqual(
-            v7["reuse_first_residual_admission"]["scheduler_runtime_enforcement"],
+            activation["reuse_first_residual_admission"]["scheduler_runtime_enforcement"],
             "MECHANICALLY_IMPLEMENTED__CLAIMS_NEW_PRIMITIVE_TRUE_REQUIRES_ALL_SIX_PROOF_OBLIGATIONS__ELSE_DEMOTED_UNPROVED_NEW_PRIMITIVE_CLAIM",
         )
         self.assertEqual(
             pointer["authoritative_activation"],
-            "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V9.json",
+            "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V6.json",
         )
         self.assertEqual(
             mission["current_development_scheduler"]["activation"],
-            "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V9.json",
-        )
-        self.assertEqual(
-            pointer["scalar_fallback_runtime"],
-            "canonical/runtime/capability_first_live_scheduler_v1.py",
-        )
-        self.assertEqual(
-            v9["primary_parallel_frontier"]["primary_entrypoint"],
-            "plan_current_parallel_frontier",
+            "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V6.json",
         )
         self.assertIn(
             "EXPLICIT_NEW_PRIMITIVE_CLAIMS_REQUIRE_REUSE_FIRST_EXHAUSTION_PROOF",
@@ -589,14 +577,14 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
         self.assertTrue(ranked["new_primitive_proof_complete"])
         self.assertEqual(ranked["new_primitive_missing_requirements"], [])
 
-    def test_reuse_first_policy_remains_load_bearing_through_v9(self):
+    def test_reuse_first_policy_is_load_bearing_in_v6(self):
         pointer = json.loads(
             (ROOT / "canonical/governance/CURRENT_DEVELOPMENT_SCHEDULER.json").read_text()
         )
         activation = json.loads(
             (
                 ROOT
-                / "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V7.json"
+                / "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V6.json"
             ).read_text()
         )
         reuse = pointer["reuse_first_policy"]
@@ -606,7 +594,7 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
         )
         self.assertEqual(
             reuse["status"],
-            "ACTIVE_LOAD_BEARING_MECHANICALLY_ENFORCED_THROUGH_CAPABILITY_FIRST_SCHEDULER_V9",
+            "ACTIVE_LOAD_BEARING_MECHANICALLY_ENFORCED_THROUGH_CAPABILITY_FIRST_SCHEDULER_V6",
         )
         self.assertIn("MECHANICALLY_IMPLEMENTED", activation["reuse_first_residual_admission"]["scheduler_runtime_enforcement"])
         self.assertEqual(
