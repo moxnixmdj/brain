@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R2_CANDIDATE_BRANCH_BASIS_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_BLOBS_BOUND__INDEPENDENT_REIMPLEMENTATION_14_OF_14_STRUCTURAL_CHECKS__REAL_PROFILE_22_BRANCHES__DETERMINISM_AND_SENSITIVITY_PASS__ZERO_QUALITY_OR_TERMINAL_CREDIT",
+  "subject": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V6_DECLARED_SYSTEM_SUBJECT_20261010_V5.json",
+    "git_blob_sha": "994a6a6aef44b6bb33161f7179d1983a1b50b633",
+    "subject_id": "PROFESSIONAL_QUALITY_P1_V6_DEPENDENCY_CLOSED_AUTHENTICATED_TARGET_SYSTEM_20261010_V5",
+    "subject_sha256": "353978ba4866d1e35794390968a14500ee1d8a4f0bddfb8f081e9a1a71ba468d"
+  },
+  "exact_blobs": {
+    "runtime": "34c5c92ad9e4a8499612d6af358dccc3fc625bde",
+    "tests": "1f8f69e39a988657e11947d893a6fdf55bb5b640",
+    "governance": "e50e82e8b46e833f70a8c5c5f24e243ccfbdca38",
+    "execution_profile": "f7e89eafbb691c16d1bdf5b8d295a468d5e3bec5"
+  },
+  "independent_reimplementation": {
+    "engine": "ChatGPT tool-side independent JavaScript structural replay plus independent Python semantic replay",
+    "structural_checks_run": 14,
+    "structural_checks_passed": 14,
+    "real_profile_execution_steps": 9,
+    "real_profile_escalation_triggers": 12,
+    "generated_branch_count": 22,
+    "unique_candidate_ids": 22,
+    "incumbent_branch_count": 1,
+    "deterministic_ids": true,
+    "target_sensitive_universe": true,
+    "incumbent_sensitive_universe": true
+  },
+  "proves": [
+    "GENERATOR_IS_BOUND_TO_THE_EXACT_FINAL_V6_EXECUTION_PROFILE",
+    "FINITE_GENERATED_BRANCH_BASIS_IS_DETERMINISTIC",
+    "INCUMBENT_IS_PRESERVED_EXACTLY_ONCE",
+    "EACH_DECLARED_EXECUTION_STEP_HAS_ONE_FOCUS_BRANCH",
+    "EACH_DECLARED_ESCALATION_TRIGGER_HAS_ONE_FOCUS_BRANCH",
+    "TARGET_OR_INCUMBENT_CHANGE_CHANGES_THE_CANDIDATE_UNIVERSE_IDENTITY",
+    "GENERATOR_DOES_NOT_CLAIM_GLOBAL_CANDIDATE_COMPLETENESS",
+    "GENERATOR_DOES_NOT_INFER_POLICY_ADEQUACY_OR_ARTIFACT_REALIZATION"
+  ],
+  "hard_nonclaims": [
+    "NO_EXECUTION_OF_THE_BRANCH_PYTHON_UNIT_TEST_FILE_IN_THIS_RECEIPT",
+    "NO_GLOBAL_CANDIDATE_SEARCH_COMPLETENESS",
+    "NO_CANDIDATE_ARTIFACT_REALIZATION_COMPLETENESS",
+    "NO_POLICY_ADEQUACY_FROM_GENERATION",
+    "NO_R2_ROOT_SUBJECT_BINDING_AUTHORITY_YET",
+    "NO_SAME_SUBJECT_COMPOSITION_PASS",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "root_subject_binding_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
