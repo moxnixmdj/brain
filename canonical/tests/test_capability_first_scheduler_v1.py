@@ -468,10 +468,8 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
         mission = json.loads(
             (ROOT / "canonical/governance/CURRENT_MISSION_OBJECTIVE.json").read_text()
         )
-        self.assertEqual(
-            activation["status"],
-            activation["status"].startswith("ACTIVE_PRIMARY_CAPABILITY_FIRST_DEVELOPMENT_SCHEDULER"),
-            True,
+        self.assertTrue(
+            activation["status"].startswith("ACTIVE_PRIMARY_CAPABILITY_FIRST_DEVELOPMENT_SCHEDULER")
         )
         self.assertFalse(
             activation["primary_work_rule"]["checkpoint_obligations_are_primary_gate"]
@@ -481,10 +479,10 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
                 "generic_reusable_capability_work_is_demoted_while_checkpoint_open"
             ]
         )
-        self.assertEqual(
-            activation["reuse_first_residual_admission"]["scheduler_runtime_enforcement"],
-            activation["reuse_first_residual_admission"]["scheduler_runtime_enforcement"].startswith("CORE_V1_MECHANICALLY_ENFORCES_NEW_PRIMITIVE_GATE"),
-            True,
+        self.assertTrue(
+            activation["reuse_first_residual_admission"]["scheduler_runtime_enforcement"].startswith(
+                "CORE_V1_MECHANICALLY_ENFORCES_NEW_PRIMITIVE_GATE"
+            )
         )
         self.assertEqual(
             pointer["authoritative_activation"],
