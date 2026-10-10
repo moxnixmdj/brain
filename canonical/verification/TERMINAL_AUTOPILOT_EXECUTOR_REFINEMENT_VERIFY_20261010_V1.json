@@ -1,0 +1,83 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_AUTOPILOT_EXECUTOR_REFINEMENT_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__BOUNDED_EXECUTOR_AUTHORITY_REFINEMENT_VERIFIED",
+  "subject_id": "terminal-autopilot-executor-v1",
+  "assurance_level": "FINITE_ABSTRACTION_EXECUTOR_AUTHORITY_REFINEMENT",
+  "exact_bindings": {
+    "abstract_spec": {
+      "path": "canonical/governance/TERMINAL_AUTOPILOT_EXECUTOR_ABSTRACT_SPEC_20261010_V1.json",
+      "git_blob_sha": "ea7e36af2829f20a27d0bc1ebc5bec25adf4d1f3"
+    },
+    "concrete_executor": {
+      "path": "canonical/runtime/terminal_autopilot_executor_v1.py",
+      "git_blob_sha": "6f828ce5631db582ea4d4a3d73c59b08f232abf0"
+    },
+    "runner_dependency": {
+      "path": "canonical/runtime/same_identity_supervisor.py",
+      "git_blob_sha": "5c620b2e4e371333343e4f42e7340b8a9b4d1e3c"
+    },
+    "proof_checker": {
+      "path": "canonical/runtime/terminal_autopilot_executor_refinement_proof_v1.py",
+      "git_blob_sha": "5b29255fc8d47c53370287325362bf5d8fbd7cad"
+    },
+    "proof_test": {
+      "path": "canonical/tests/test_terminal_autopilot_executor_semantic_refinement_v1.py",
+      "git_blob_sha": "15e97b058c9d8b21cc3a83e45b0457da26a67102"
+    }
+  },
+  "independent_execution": {
+    "carrier": "LOCAL_SANDBOX_FROM_EXACT_SPRITE_MATERIALIZED_BYTES",
+    "source_sprite": "brain-live-runtime-v1-verify-20261008",
+    "source_sprite_id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13",
+    "executor_blob_recomputed": "6f828ce5631db582ea4d4a3d73c59b08f232abf0",
+    "runner_blob_recomputed": "5c620b2e4e371333343e4f42e7340b8a9b4d1e3c",
+    "check_count": 19,
+    "failures": 0,
+    "checks": [
+      "SAFE_CLASSES_EXACT",
+      "PHASE_RANK_EXACT",
+      "TERMINAL_CREDIT_NONAMPLIFICATION_STATIC",
+      "RUNNER_BOUNDARY_STATIC",
+      "VALID_EXECUTE_ADMITTED",
+      "NONZERO_SPEND_REJECTED",
+      "IRREVERSIBLE_BENCHMARK_REJECTED",
+      "PHASE_CLASS_MISMATCH_REJECTED",
+      "PROMOTION_WITHOUT_AUTHORITY_REJECTED",
+      "PROMOTION_EXACT_AUTHORITY_ADMITTED",
+      "PROMOTION_AUTHORITY_DRIFT_REJECTED",
+      "ROUTE_COMPLETE_DOES_NOT_PROJECT_RESULT",
+      "ORDINARY_EXECUTE_PROJECTS_RESULT_PRESENT_ONLY",
+      "VERIFY_PROJECTS_VERIFIED_ONLY",
+      "ONE_TASK_PER_WORKER_IDENTITY",
+      "PLAN_OBLIGATION_MISMATCH_NOT_SELECTED",
+      "RUNNING_TASK_NOT_REDISPATCHED",
+      "RUNNER_CALLED_ONLY_FOR_SELECTED_TASK",
+      "WAVE_TERMINAL_CREDIT_FALSE"
+    ]
+  },
+  "theorem": {
+    "refinement_verified": true,
+    "runner_boundary_explicit": true,
+    "runner_semantics_reproved": false,
+    "irreversible_benchmark_autoexecution_excluded": true,
+    "promotion_requires_exact_content_bound_authority": true,
+    "route_completion_cannot_fabricate_result_present": true,
+    "promotion_completion_cannot_self_mint_promoted": true,
+    "terminal_credit_nonamplification": true
+  },
+  "authority": {
+    "semantic_truth_authority": false,
+    "execution_authority": false,
+    "acceptance_authority": false,
+    "terminal_authority": false,
+    "terminal_credit_delta": 0
+  },
+  "nonclaims": [
+    "DOES_NOT_REPROVE_SAME_IDENTITY_SUPERVISOR_EFFECT_SEMANTICS",
+    "DOES_NOT_PROVE_ARBITRARY_TASK_MISSION_CORRECTNESS",
+    "DOES_NOT_CLOSE_TERMINAL_ROOT_DECISION_GATE_REFINEMENT",
+    "DOES_NOT_CLOSE_NON_SELECTED_RUNTIME_REFINEMENT_COVERAGE_GLOBALLY",
+    "DOES_NOT_GRANT_TERMINAL_OR_CAPABILITY_CREDIT"
+  ]
+}
