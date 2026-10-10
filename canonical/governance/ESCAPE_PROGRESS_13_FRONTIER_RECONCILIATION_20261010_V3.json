@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_ESCAPE_PROGRESS_13_FRONTIER_RECONCILIATION_20261010_V3",
+  "date": "2026-10-10",
+  "observed_at_commit": "2ee578fa6cb29d4c4f8198290a34fa31d1a7065a",
+  "status": "SNAPSHOT__ESCAPE13_REBOUND_TO_CURRENT_MISSION__R4_POINTER_DRIFT_DETECTED__CC_R3_OPEN__ZERO_CREDIT",
+  "claim": {
+    "path": "canonical/governance/ESCAPE_PROGRESS_TOTALITY_FROZEN_13_CLAIM_20261010_V3.json",
+    "git_blob_sha": "e534dfb56e8e3cde66a260de299627662965e079",
+    "claim_id": "d8dec5e454c4cbae50de7a0b23f0cf220e4caeb1c1b620e40dd53c267da1ae28",
+    "active": false
+  },
+  "mission_pointer": {
+    "path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
+    "git_blob_sha": "5e89fe6ad8b367e31d48b2100691480accb228d4",
+    "real_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE"
+  },
+  "observed_r4_drift": {
+    "live_binding_path": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_THEOREM_LIVE_BINDING_V1.json",
+    "live_binding_mission_blob_sha": "6ab2147306a138f9ea327d8e19cb4a5bc76e89df",
+    "actual_mission_blob_sha": "5e89fe6ad8b367e31d48b2100691480accb228d4",
+    "existing_rule": "MISSION_POINTER_DRIFT_IS_R4_FAILURE",
+    "consequence": "PREVIOUS_PROPERTY_SCOPED_R4_CURRENTNESS_DOES_NOT_SURVIVE_THIS_POINTER_CHANGE_WITHOUT_RECONCILIATION"
+  },
+  "reached_state_kernel": {
+    "activation_path": "canonical/governance/REACHED_ESCAPE_STATE_KERNEL_ACTIVATION_20261010_V1.json",
+    "status": "VERIFIED_REACHED_STATE_ONLY",
+    "unresolved_case": "UNSPLITTABLE_POLICY_CONFLICT",
+    "global_totality": false
+  },
+  "cc_r3_gap": "PROVE_FOR_EVERY_REACHED_FROZEN_13_STATE_A_COMMON_POLICY_OR_STRICT_SPLITTER_OR_VERIFIED_REPAIR_ROUTE",
+  "next": [
+    "VERIFY_THE_REBOUND_CLAIM_ON_EXACT_CURRENT_BYTES",
+    "RECONCILE_R4_FAIL_CLOSED_CURRENTNESS",
+    "BUILD_SHARED_REACHED_STATE_ROUTE_MANIFEST_FOR_THE_13_OBLIGATIONS",
+    "PROVE_OR_RECORD_A_COUNTEREXAMPLE_FOR_ESCAPE13_CC_R3",
+    "CONTINUE_TO_CC_R1_AND_CC_R2_ONLY_AFTER_CC_R3_PASSES"
+  ],
+  "accounting": {
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
