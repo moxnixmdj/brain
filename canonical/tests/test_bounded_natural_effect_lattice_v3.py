@@ -29,6 +29,16 @@ def replace_source(eid="B.t",value="12",sup="A.t",target="threshold"):
         f"Effect {eid} supersedes {sup}.",
     ])
 
+def exception_source(eid="C.t",value="8",sup="B.t",target="threshold"):
+    return "\n".join([
+        f"The only effects on {target} are {eid}.",
+        f"Effect {eid} creates an exception for {target} with value {value}.",
+        f'Effect {eid} applies when {{"small":true}}.',
+        f"Effect {eid} has no start date.",
+        f"Effect {eid} has no end date.",
+        f"Effect {eid} supersedes {sup}.",
+    ])
+
 
 def doc(did,text,claims=None):
     return {
@@ -39,12 +49,16 @@ def doc(did,text,claims=None):
     }
 
 
-def problem(*docs):
+def problem(*docs,context=None):
     return {
         "schema":l.SCHEMA,
         "case_id":"natural",
         "source_documents":list(docs),
-        "query":{"target_id":"threshold","as_of":"2026-10-09","context":{}},
+        "query":{
+            "target_id":"threshold",
+            "as_of":"2026-10-09",
+            "context":dict(context or {}),
+        },
     }
 
 
@@ -160,6 +174,30 @@ class NaturalEffectLatticeV3Tests(unittest.TestCase):
         p=problem(
             doc("A",define_source()),
             doc("B",replace_source()),
+        )
+        out=l.evaluate(p)
+        self.assertTrue(out["pass"],out)
+        self.assertEqual(out["effective_value"],12)
+        self.assertTrue(lv.verify(p,out)["verified"])
+
+    def test_natural_define_replace_exception_composes_when_condition_true(self):
+        p=problem(
+            doc("A",define_source()),
+            doc("B",replace_source()),
+            doc("C",exception_source()),
+            context={"small":True},
+        )
+        out=l.evaluate(p)
+        self.assertTrue(out["pass"],out)
+        self.assertEqual(out["effective_value"],8)
+        self.assertTrue(lv.verify(p,out)["verified"])
+
+    def test_conditional_exception_falls_back_to_replacement_when_false(self):
+        p=problem(
+            doc("A",define_source()),
+            doc("B",replace_source()),
+            doc("C",exception_source()),
+            context={"small":False},
         )
         out=l.evaluate(p)
         self.assertTrue(out["pass"],out)
