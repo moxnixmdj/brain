@@ -94,6 +94,28 @@ class Tests(unittest.TestCase):
             "REGCAP_LOSS_CUSHION_MINIMUM_POLICY_CHANGING_INFORMATION",
         )
         self.assertEqual(out["next_information_request_source"], cert.grounding.SCHEMA)
+        template = out["checker_materialization_template"]
+        self.assertEqual(
+            template["schema"],
+            "PROJECT_BRAIN_SEMANTIC_TRUTH_MATERIALIZATION_TEMPLATE_V1",
+        )
+        self.assertEqual(template["truth_kind"], cert.TRUTH_KIND)
+        self.assertEqual(template["claim_kind"], "RELATIVE_RIVAL_SELECTION")
+        self.assertEqual(template["target_concept_id"], regcap.CCOB)
+        self.assertEqual(
+            template["required_evidence_fields"],
+            ["source_text", "source_id", "start", "end"],
+        )
+        self.assertTrue(template["source_span_must_be_rederived"])
+        self.assertTrue(
+            template["replacement_source_does_not_inherit_original_predicate_identity"]
+        )
+        self.assertFalse(template["requested_predicate_id_authority"])
+        self.assertFalse(template["provider_semantic_truth_authority"])
+        self.assertNotIn("source_text", template)
+        self.assertNotIn("source_id", template)
+        self.assertNotIn("start", template)
+        self.assertNotIn("end", template)
         self.assertFalse(out["terminal_authority"])
 
     def test_source_local_identity_remains_true_only_for_mapped_target(self):
