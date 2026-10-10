@@ -1,0 +1,17 @@
+{
+  "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+  "decision_outcome": "POSITIVE_CERTIFICATE",
+  "evidence_scope_verified": true,
+  "evidence_sha256": "2cb97029578a3c1f5544c568ab064cbc1dd6c081f1e1664f667badbe0d48d57c",
+  "independent_verified": true,
+  "independent_verifier_id": "sprite-v9-real-docx-independent-20261010-v1",
+  "pass": true,
+  "result": "PASS",
+  "run_context_sha256": "sha256:103249e3cca5a0166b810752f44f265ed5fdafa4ead23b8a87c77768362638ca",
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_STEP_RESULT_BINDING_INDEPENDENT_VERIFICATION_V1",
+  "semantic_preservation_verified": true,
+  "step_id": "ISSUE_SCOPED_CERTIFICATE_OR_ABSTAIN_WITH_MINIMUM_BLOCKING_CUT",
+  "subject_git_blob_sha": "998e0c760c93289d2fbd7c9a9348cf6b71a62677",
+  "subject_id": "PROFESSIONAL_QUALITY_P1_V9_EXECUTABLE_TOTALITY_SEMANTICS_SYSTEM_20261010_V8",
+  "subject_sha256": "adf7f09e1913526e460b7350c02cd148c2cd14de90eed33fa7fae84d395d9912"
+}
