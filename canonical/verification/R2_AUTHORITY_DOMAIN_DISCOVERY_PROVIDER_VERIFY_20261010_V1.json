@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_R2_AUTHORITY_DOMAIN_DISCOVERY_PROVIDER_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__DELEGATED_AUTHORITY_DOMAIN_DISCOVERY_CANDIDATE_ONLY__42_OF_42_RELEVANT_TESTS__LIVE_WORLDBANK_REPLAY_PASS__ZERO_CREDIT",
+  "branch": "successor/r2-authority-discovery-provider-20261010-v1",
+  "exact_blobs": {
+    "provider": "c8d3ab11171e6eb7362e024cbbfd9a8159671c57",
+    "controller": "18d480179bc285b41ad45acd3de4090855af09c1",
+    "provider_tests": "6d4d0345a341db421ad92b78e93f7e75ed860e34",
+    "controller_seam_tests": "b1de6a1d0b16d11732bc852e17f08e7305eb1192",
+    "v88_provider_tests": "6d9f3e91c033edb8e2f652e392b43a4cd20f8866",
+    "v88_controller_tests": "ab13c3c4e4aae120c77a493f6b4624ba4926f1b7",
+    "controller_regression_tests": "9e0a784be82e47ebc7eb23985f56e83c98afe555"
+  },
+  "independent_execution": {
+    "carrier": "brain-live-runtime-v1-verify-20261008",
+    "combined_relevant_checks": "PASS__42_OF_42",
+    "python_compile": "PASS__4_CHANGED_FILES",
+    "live_replay": {
+      "query": "World Bank SP.POP.TOTL official indicator",
+      "authority_domains": ["worldbank.org"],
+      "direct_source_url_provided": false,
+      "status": "PASS__AUTHORITY_DOMAIN_SOURCE_CANDIDATE_DISCOVERED",
+      "chosen_url": "https://databank.worldbank.org/indicator/SP.POP.TOTL/1ff4a498/Popular-Indicators",
+      "chosen_host": "databank.worldbank.org",
+      "candidate_only": true,
+      "next_required_edge": "CHECKER_CONSUMABLE_MATERIALIZATION_FROM_AUTHORITY_CANDIDATE"
+    }
+  },
+  "proved": [
+    "DELEGATED_EXTERNAL_RESEARCH_CAN_REUSE_EXISTING_MODEL_INDEPENDENT_AUTHORITY_DOMAIN_DISCOVERY_BY_DEFAULT",
+    "DISCOVERY_REQUIRES_EXPLICIT_EXTERNAL_RESEARCH_AUTHORIZATION",
+    "DISCOVERY_REQUIRES_EXPLICIT_QUERY_AND_AUTHORITY_DOMAIN_SET",
+    "CANDIDATES_OUTSIDE_DECLARED_AUTHORITY_DOMAINS_FAIL_CLOSED",
+    "DISCOVERY_MISS_REMAINS_OPEN",
+    "DISCOVERED_SOURCE_IS_CANDIDATE_ONLY_AND_NEVER_INSERTED_INTO_TRUTH_PAYLOADS",
+    "CONTROLLER_STOPS_AT_CHECKER_CONSUMABLE_MATERIALIZATION_EDGE",
+    "EXPLICIT_CUSTOM_INFORMATION_PROVIDER_OVERRIDES_DEFAULT_DISCOVERY_PROVIDER",
+    "V88_BOUND_SOURCE_DEFAULT_ACQUISITION_REMAINS_REGRESSION_CLEAN"
+  ],
+  "boundaries": [
+    "SOURCE_DISCOVERY_IS_NOT_FACT_VERIFICATION",
+    "NO_CHECKER_CONSUMABLE_MATERIALIZATION_FROM_DISCOVERED_CANDIDATE_YET",
+    "NO_RETRIEVAL_CANDIDATE_TO_TRUTH_PROMOTION",
+    "NO_PROVIDER_SEMANTIC_TRUTH_AUTHORITY",
+    "NO_POLICY_ADEQUACY_FROM_DISCOVERY",
+    "NO_OPEN_WORLD_SOURCE_COMPLETENESS",
+    "FINANCE_SEMANTIC_TAIL_REMAINS_OPEN",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

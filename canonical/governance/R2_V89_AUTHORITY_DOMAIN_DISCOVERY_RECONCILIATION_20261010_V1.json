@@ -1,0 +1,22 @@
+{
+  "schema": "PROJECT_BRAIN_R2_V89_AUTHORITY_DOMAIN_DISCOVERY_RECONCILIATION_V1",
+  "status": "RECONCILED__V88_BOUND_SOURCE_ACQUISITION_PRESERVED__DELEGATED_AUTHORITY_DOMAIN_DISCOVERY_NOW_DEFAULT_AUTONOMOUS_CANDIDATE_ONLY__MATERIALIZATION_REMAINS_OPEN__ZERO_CREDIT",
+  "prior_version": "V88",
+  "current_version": "V89",
+  "verification_path": "canonical/verification/R2_AUTHORITY_DOMAIN_DISCOVERY_PROVIDER_VERIFY_20261010_V1.json",
+  "verification_git_blob_sha": "054b1836284b141be804f9efa68e4ebe48d42f30",
+  "provider_runtime_path": "canonical/runtime/r2_authority_domain_discovery_provider_v1.py",
+  "provider_runtime_git_blob_sha": "c8d3ab11171e6eb7362e024cbbfd9a8159671c57",
+  "controller_runtime_path": "canonical/runtime/general_adequate_decision_controller_v1.py",
+  "controller_runtime_git_blob_sha": "18d480179bc285b41ad45acd3de4090855af09c1",
+  "closed_subcase": "EXTERNAL_WORLD__DISCOVERY_DELEGATED__UNBOUND_SOURCE_WITH_EXPLICIT_QUERY_AND_AUTHORITY_DOMAINS__CANDIDATE_DISCOVERY_ONLY",
+  "live_worldbank_replay_pass": true,
+  "candidate_only": true,
+  "checker_materialization_closed": false,
+  "provider_semantic_truth_authority": false,
+  "custom_information_provider_override_preserved": true,
+  "finance_tail_closed": false,
+  "global_open_world_closure_delta": false,
+  "acceptance_credit_delta": 0,
+  "terminal_credit_delta": 0
+}

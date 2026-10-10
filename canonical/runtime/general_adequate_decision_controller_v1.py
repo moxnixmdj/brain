@@ -31,6 +31,7 @@ from canonical.runtime.r2_existing_policy_cover_observation_reuse_v1 import (
 )
 from canonical.runtime import r2_raw_source_proof_material_adapter_v1 as source_proof_material
 from canonical.runtime import r2_bound_source_information_provider_v1 as bound_source_provider
+from canonical.runtime import r2_authority_domain_discovery_provider_v1 as authority_discovery_provider
 from canonical.runtime import r2_grounded_candidate_policy_frontier_v1 as grounded_policy_frontier
 from canonical.runtime.minimum_information_origin_policy_v1 import (
     route as route_minimum_information_origin,
@@ -1493,6 +1494,7 @@ def run(
                 "accepted_provider_response_modes": [
                     "EXISTING_SELECTED_SEMANTIC_TRUTH_PAYLOAD",
                     source_proof_material.KIND,
+                    authority_discovery_provider.SCHEMA,
                 ],
                 "raw_source_material_contract": {
                     "provider_supplies": [
@@ -1559,6 +1561,12 @@ def run(
                 and acquisition_plan.get("action") == "OBSERVE_BOUND_SOURCE_ONLY"
             ):
                 round_information_provider = bound_source_provider.provide
+            if (
+                round_information_provider is None
+                and acquisition_plan.get("action")
+                == "RESEARCH_MINIMUM_AUTHENTICATED_FACT"
+            ):
+                round_information_provider = authority_discovery_provider.provide
 
             if round_information_provider is None:
                 action = acquisition_plan.get("action")
@@ -1629,6 +1637,44 @@ def run(
                     information_trace=information_trace,
                     goal_to_decision_binding=goal_binding,
                     information_provider_failure=deepcopy(dict(provided)),
+                )
+            if (
+                round_information_provider is authority_discovery_provider.provide
+                and isinstance(provided, Mapping)
+                and provided.get("schema") == authority_discovery_provider.SCHEMA
+            ):
+                if provided.get("pass") is True:
+                    information_trace[-1]["ingestion_status"] = (
+                        "AUTHORITY_DISCOVERY_CANDIDATE_ONLY"
+                    )
+                    return _open(
+                        "OPEN__RETRIEVAL_CANDIDATE_MATERIALIZATION_REQUIRED",
+                        task_id=task_id,
+                        goal=goal,
+                        raw_contract=raw_contract,
+                        next_required_edge=(
+                            "CHECKER_CONSUMABLE_MATERIALIZATION_FROM_AUTHORITY_CANDIDATE"
+                        ),
+                        next_information_request=request_packet,
+                        retrieval_candidate=deepcopy(dict(provided)),
+                        decision_result=decision,
+                        information_trace=information_trace,
+                        goal_to_decision_binding=goal_binding,
+                    )
+                information_trace[-1]["ingestion_status"] = (
+                    "AUTHORITY_DISCOVERY_NOT_VERIFIED"
+                )
+                return _open(
+                    "OPEN__DELEGATED_MINIMUM_RESEARCH_REQUIRED",
+                    task_id=task_id,
+                    goal=goal,
+                    raw_contract=raw_contract,
+                    next_required_edge="MINIMUM_AUTHENTICATED_EXTERNAL_FACT_RESEARCH",
+                    next_information_request=request_packet,
+                    information_provider_failure=deepcopy(dict(provided)),
+                    decision_result=decision,
+                    information_trace=information_trace,
+                    goal_to_decision_binding=goal_binding,
                 )
             if not isinstance(provided, Mapping):
                 return _open(
