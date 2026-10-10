@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_PARALLEL_FRONTIER_V10_INTERVAL_ROBUST_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_SPRITE__EXACT_RUNTIME_BLOB_MATCH__PYCOMPILE_PASS__13_OF_13_FOCUSED_TESTS_PASS__INTERVAL_OVERLAP_NONDOMINANCE_AND_12_OF_12_COMPOSITION_TRANSITION_VERIFIED__ZERO_CREDIT",
+  "verifier_carrier": {
+    "type": "SPRITE",
+    "name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "role": "INDEPENDENT_EXECUTION_CARRIER__NO_PROMOTION_OR_TERMINAL_AUTHORITY"
+  },
+  "exact_subject": {
+    "runtime_path": "canonical/runtime/capability_parallel_frontier_v2.py",
+    "runtime_git_blob_sha": "209d8d11494645432354636a3dc17e7b515abaf8",
+    "tests_path": "canonical/tests/test_capability_parallel_frontier_v2.py",
+    "tests_git_blob_sha": "999149923882d88d61e2e617faa194b7ecc70edd",
+    "completion_tests_path": "canonical/tests/test_capability_parallel_frontier_v2_completion.py",
+    "completion_tests_git_blob_sha": "a8c7b9635ab15f44a60b92a56babea88b7f3fed0"
+  },
+  "execution": {
+    "reconstructed_runtime_bytes": 31740,
+    "reconstructed_runtime_git_blob_sha": "209d8d11494645432354636a3dc17e7b515abaf8",
+    "py_compile": "PASS",
+    "interval_and_currentness_tests_run": 12,
+    "completion_boundary_tests_run": 1,
+    "tests_run": 13,
+    "failures": 0,
+    "errors": 0,
+    "result": "OK"
+  },
+  "proves": [
+    "OVERLAPPING_BENEFIT_INTERVALS_DO_NOT_CREATE_FALSE_DOMINANCE",
+    "OVERLAPPING_COST_INTERVALS_DO_NOT_CREATE_FALSE_DOMINANCE",
+    "DOMINANCE_REQUIRES_A_BENEFIT_LCB_GE_B_BENEFIT_UCB_ON_EVERY_BENEFIT_DIMENSION",
+    "DOMINANCE_REQUIRES_A_COST_UCB_LE_B_COST_LCB_ON_EVERY_COST_DIMENSION",
+    "AT_LEAST_ONE_INTERVAL_DIMENSION_MUST_BE_STRICTLY_SEPARATED",
+    "INVERTED_BENEFIT_OR_COST_INTERVALS_FAIL_CLOSED",
+    "SUCCESS_PROBABILITY_BOUNDS_ABOVE_ONE_FAIL_CLOSED",
+    "INCOMPLETE_VECTOR_WORK_REMAINS_READ_ONLY_EVIDENCE_ONLY",
+    "CONFLICTING_INCOMPARABLE_COMPLETE_WORK_REMAINS_UNRESOLVED",
+    "PROFESSIONAL_AND_ASSURANCE_DYNAMIC_CURRENTNESS_FOLLOW_IS_PRESERVED",
+    "PROFESSIONAL_12_OF_12_ROUTES_TO_VERIFIED_V3_SAME_SUBJECT_COMPOSITION_GATE_AS_READ_ONLY_EVIDENCE"
+  ],
+  "hard_nonclaims": [
+    "NO_CURRENT_FRONTIER_VECTOR_COMPLETENESS_CLAIM",
+    "NO_FULL_EXECUTION_DISPATCH_AUTHORITY",
+    "NO_UNIQUE_RANK_ONE_CLAIM",
+    "NO_SCALAR_UTILITY_CALIBRATION_CLAIM",
+    "NO_COMPOSITION_PASS_CLAIM",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
