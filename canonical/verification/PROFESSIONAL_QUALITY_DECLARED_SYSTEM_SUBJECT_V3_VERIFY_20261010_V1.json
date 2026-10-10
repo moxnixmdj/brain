@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_DECLARED_SYSTEM_SUBJECT_V3_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__TARGET_BOUND_CANDIDATE_SUBJECT_V3__PYCOMPILE__5_OF_5_ADVERSARIAL_PASS__REAL_13_OF_13_COMPONENT_CURRENTNESS_PASS__ZERO_ROOT_OR_QUALITY_AUTHORITY",
+  "subject": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V4_DECLARED_SYSTEM_SUBJECT_20261010_V3.json",
+    "git_blob_sha": "ad6867e59b4279e34a3e0058cf539ee94f8d094c",
+    "subject_kind": "DECLARED_SYSTEM",
+    "subject_id": "PROFESSIONAL_QUALITY_P1_V4_TARGET_BOUND_SYSTEM_20261010_V3",
+    "subject_sha256": "e7292fbe697c2dcd06fc2c4346fc3e3bb231428a6511a88d575c655dd0f0c53a"
+  },
+  "verifier": {
+    "path": "canonical/runtime/professional_quality_declared_system_subject_verify_v1.py",
+    "git_blob_sha": "2936df1590077f4e97c82adaf79046a1221cef99"
+  },
+  "tests": {
+    "path": "canonical/tests/test_professional_quality_declared_system_subject_verify_v1.py",
+    "git_blob_sha": "03464487f4792bba919da59ac4efbfb634380068",
+    "tests_run": 5,
+    "tests_passed": 5,
+    "tests_failed": 0
+  },
+  "real_subject_replay": {
+    "carrier": "brain-pq-p1-v2-independent-verify-20261010",
+    "carrier_id": "sprite-5fb5e414-e2f5-4a49-b424-3443341d9d09",
+    "component_count": 13,
+    "component_currentness_verified": true,
+    "subject_identity_verified": true,
+    "pass": true
+  },
+  "proves": [
+    "TARGET_BOUND_CANDIDATE_SUBJECT_HASH_RECOMPUTES_FROM_EXACT_SYSTEM_MATERIAL",
+    "ALL_THIRTEEN_COMPONENT_BLOBS_MATCH_REPLAY_BYTES",
+    "ROUTER_V4_V3_TARGET_SEMANTIC_AND_CONTRACT_ARTIFACTS_ARE_INSIDE_SUBJECT_IDENTITY",
+    "SUBJECT_MEMBERSHIP_STILL_GRANTS_ZERO_ROOT_SUBJECT_BINDING_AUTHORITY"
+  ],
+  "hard_nonclaims": [
+    "NO_R1_ROOT_SUBJECT_BINDING",
+    "NO_SAME_SUBJECT_COMPOSITION_PASS",
+    "NO_LIVE_DEFAULT_PROMOTION",
+    "NO_PROFESSIONAL_QUALITY_CLOSURE"
+  ],
+  "root_subject_binding_authority": false,
+  "quality_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
