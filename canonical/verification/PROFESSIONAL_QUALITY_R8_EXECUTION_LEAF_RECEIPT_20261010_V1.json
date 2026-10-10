@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_LEAF_VERIFICATION_RECEIPT_V1",
+  "date": "2026-10-10",
+  "leaf_id": "PQ::R8_POPULATION_CONTEXT_OPERATOR::EXECUTION",
+  "root_id": "R8_POPULATION_CONTEXT_OPERATOR",
+  "leaf_kind": "EXECUTION",
+  "verdict": "PASS",
+  "closure_scope": "EXACT_LEAF",
+  "acceptance_sha256": "fae7b1ccf4f94a91a1fb4caa4a634e6883538a28382991d97c69278e574b67ce",
+  "root_contract_sha256": "b202196ae1d5891dcd2ad7eafa51ba26f997b072c3bbb8db1d6d6604c96e775f",
+  "manifest_git_blob_sha": "a7cad32c9fd969ff2c3857bb924c7bd746237ec2",
+  "leaf_execution_satisfied": true,
+  "leaf_semantic_satisfied": false,
+  "property_truth_basis": "INDEPENDENTLY_REPLAYED_R8_POSITIVE_POPULATION_PREFLIGHT_PLUS_12_DECLARED_ADVERSARIAL_AND_NEAR_MISS_CASES_WITH_UNKNOWN_OR_UNMAPPED_MATERIAL_DEFEATER_FAIL_CLOSED",
+  "verification_basis": [
+    {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R8_EXECUTION_PROPERTY_TRUTH_INDEPENDENT_VERIFY_20261010_V1.json",
+      "git_blob_sha": "3963345904280f53cb2810313514491f7f6cae97"
+    },
+    {
+      "path": "canonical/runtime/professional_quality_r8_execution_property_truth_verify_v1.py",
+      "git_blob_sha": "ad1ab3c4c951c9687ee2f05aeb3e49b484480015"
+    },
+    {
+      "path": "canonical/tests/test_professional_quality_r8_execution_property_truth_verify_v1.py",
+      "git_blob_sha": "59e568500d64bd5a113f29348f3ea3c39d48dc61"
+    },
+    {
+      "path": "canonical/runtime/professional_quality_r8_execution_guard_v1.py",
+      "git_blob_sha": "d113595017f242debaf2ea8de8aaa8d420cdd0cb"
+    },
+    {
+      "path": "canonical/tests/test_professional_quality_r8_execution_guard_v1.py",
+      "git_blob_sha": "1bab7914aae0d9edff555cb874d99285865e3322"
+    },
+    {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_SCOPE_BATCH_VERIFY_20261010_V1.json",
+      "git_blob_sha": "4c2d40a262f18f34bb35f94b59660d60972d45ef"
+    }
+  ],
+  "detection_completeness_proved": false,
+  "constituency_support_proved": false,
+  "operator_generalization_proved": false,
+  "measurement_invariance_proved": false,
+  "semantic_leaf_closed": false,
+  "root_closed": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "hard_nonclaims": [
+    "NO_R8_DEFEATER_DETECTION_COMPLETENESS",
+    "NO_CONSTITUENCY_SUPPORT_GENERALIZATION",
+    "NO_PRESENTER_OR_OPERATOR_GENERALIZATION",
+    "NO_MEASUREMENT_INVARIANCE_COMPLETENESS",
+    "NO_SOCIAL_INFLUENCE_OR_REACTIVITY_CLOSURE",
+    "NO_POST_FREEZE_TERMINAL_RESULT",
+    "NO_R8_SEMANTIC_LEAF_CLOSURE",
+    "NO_R8_ROOT_CLOSURE",
+    "NO_GLOBAL_PROFESSIONAL_PROPERTY_TRUTH",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ]
+}
