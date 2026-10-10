@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_ESCAPE_O11_OBJECTIVE_ACCEPTANCE_ROW_INSTANTIATION_GATE_INTENT_20261010_V2",
+  "date": "2026-10-10",
+  "status": "POST_CONCURRENT_RECLASSIFICATION__ROW_INSTANTIATION_EDGE__REUSE_ONLY__ZERO_CREDIT",
+  "supersedes": "canonical/action_intents/ESCAPE_O11_OBJECTIVE_ACCEPTANCE_LAW_GATE_INTENT_20261010_V1.json",
+  "canonical_generation": "32e9e4ec184488e185540e697f8b86566b66f3c6",
+  "capability_target": "CURRENT_O11_SCOPE_COMPLETE_ROW_PROOF_INSTANTIATION_GATE",
+  "causal_blocker": "SHARED_O_SCOPE_LIFT_LAW_IS_LIVE_BUT_REAL_CURRENT_O_ROW_PROOFS_LACK_ONE_CURRENT_IDENTITY_SCOPE_PROVENANCE_EVALUATOR_PROOF_RELATION_GATE",
+  "action_kind": "ADAPT_EXISTING_VERIFIED_MECHANISM",
+  "concurrent_authority": {
+    "oq_path": "canonical/governance/CURRENT_ESCAPE_OQ_FRONTIER_REDUCTION_20261010_V1.json",
+    "oq_git_blob_sha": "06ed743742a919615841a77fc9b1cc4e6fadf7f8",
+    "shared_o_activation_path": "canonical/governance/ESCAPE_O_OBJECTIVE_ACCEPTANCE_SHARED_LAW_ACTIVATION_20261010_V1.json",
+    "shared_o_activation_git_blob_sha": "95278c5850ccba2087b686b7bb9bc2cc7af93b96",
+    "shared_o_runtime_path": "canonical/runtime/current_escape_o_objective_acceptance_v1.py",
+    "shared_o_runtime_git_blob_sha": "a329ce2d14dd6f23d06f981c090b535bfd43fb52",
+    "frozen_theorem_path": "canonical/governance/FROZEN_O_OBJECTIVE_ACCEPTANCE_SCOPE_LIFT_NORMAL_FORM_20261007_V1.json",
+    "frozen_theorem_git_blob_sha": "2ce4b7fdcb5556072b936f04887ac6a05e92dce3",
+    "current_truth": "SHARED_O_LAW_BOUND__CURRENT_O_ROW_ACCEPTANCE_CLOSED_COUNT_ZERO__NEXT_EDGE_REAL_CONTENT_ADDRESSED_SCOPE_COMPLETE_BRAIN_PROOF_INSTANTIATIONS"
+  },
+  "reused_instantiation_kernel": {
+    "path": "canonical/runtime/benchmark_witness_elimination_compiler_v4.py",
+    "git_blob_sha": "1da07329d3bf35f598a5716c80519afe6b07dd64",
+    "role": "REAL_ROW_PROOF_CURRENTNESS_IDENTITY_SCOPE_PROVENANCE_EVALUATOR_AND_PROOF_RELATION_GATE"
+  },
+  "relation_to_shared_o_law": "SHARED_O_THEOREM_PROVES_SUFFICIENT_ACCEPTANCE_SHAPE__THIS_GATE_VALIDATES_EACH_REAL_CURRENT_ROW_WITNESS_AGAINST_CURRENT_IDENTITY_AND_COMPLETE_EVIDENCE_LOCKS__THE_TWO_LAYERS_ARE_COMPLEMENTARY",
+  "mysterymechanism_rule": "KEEP_STRENGTHENED_CURRENT_PREDICATE_ID__ALLOW_SCOPE_SUPERSET_OR_TASK_CONDITIONED_DOMINANCE__NO_ALIAS_TO_HISTORICAL_49_55",
+  "rejected_alternatives": [
+    "RESEARCH_ANOTHER_O_ACCEPTANCE_THEOREM",
+    "MERGE_AS_IF_SHARED_O_LAW_WERE_STILL_MISSING",
+    "ELEVEN_ROW_SPECIFIC_VERIFIERS",
+    "HISTORICAL_THRESHOLD_ALIASING"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
