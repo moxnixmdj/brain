@@ -33,7 +33,7 @@ FACT_RESOLUTION = "REGIME::RESOLUTION"
 
 _WS = re.compile(r"\s+")
 _CCOB = re.compile(
-    r"\b2\.5\s*%\b.*\b(?:common\s+equity\s+tier\s+1|cet1)\b.*"
+    r"\b2\.5\s*%.*\b(?:common\s+equity\s+tier\s+1|cet1)\b.*"
     r"\babove\s+(?:the\s+)?(?:regulatory\s+)?minimum(?:\s+capital\s+requirement)?\b",
     re.I | re.S,
 )
