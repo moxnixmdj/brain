@@ -8,7 +8,7 @@
   },
   "subject_kind": "DECLARED_SYSTEM",
   "subject_id": "PROFESSIONAL_QUALITY_P1_V4_R1_LIVE_INTEGRATED_SYSTEM_20261010",
-  "subject_sha256": "815b840e21ab71eba7d0f6940d68a1ea571a276d4ee2ad7e2520c08fe285ae13",
+  "subject_sha256": "a236c4bbeae422d98dc240342bf40e21cfb50cd67b28d4a5094519e8d635294a",
   "subject_hash_rule": "SHA256_OF_RFC8259_JSON_CANONICALIZED_BY_SORTED_KEYS_NO_WHITESPACE_UTF8_OVER_SYSTEM_MATERIAL_OBJECT",
   "system_material": {
     "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_P1_V4_DECLARED_SYSTEM_SUBJECT_MATERIAL_V1",
@@ -27,7 +27,7 @@
       },
       {
         "path": "canonical/runtime/professional_target_instance_compiler_v1.py",
-        "git_blob_sha": "deea06fb56032678901adbf23e16d422ff4fc789"
+        "git_blob_sha": "0403ed2916ea0f7e48b77aec24ea9dd4fda8fce0"
       },
       {
         "path": "canonical/runtime/professional_artifact_hard_defect_preflight_v1.py",
@@ -65,10 +65,10 @@
   },
   "verified_r1_live_target_execution": {
     "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_P1_V4_R1_LIVE_TARGET_VERIFY_20261010_V1.json",
-    "verification_git_blob_sha": "57f4bc48020e13b654a52dca91ba1d2417adca28",
+    "verification_git_blob_sha": "222021906de083c7e5b9dc982f599ad9e8b84f0f",
     "canonical_target_instance_path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V4_R1_TARGET_INSTANCE_20261010_V1.json",
-    "canonical_target_instance_git_blob_sha": "b3b6788543041f919ef8c83ea28d88dee3c9c04d",
-    "canonical_compiled_target_sha256": "c78f38a12b728902661be0ae9ca6eb274ff194893b608bf201bb33229aecd5c2"
+    "canonical_target_instance_git_blob_sha": "15a9ff24ddfb8256cdeb95548c1e68fe619064d2",
+    "canonical_compiled_target_sha256": "842546d190e1efe4e1dd07cbebbc4c18f20b637e93b30737e40622e7c875183b"
   },
   "identity_semantics": {
     "exact_component_set_frozen": true,
@@ -77,7 +77,8 @@
     "component_inclusion_does_not_imply_other_root_satisfaction": true,
     "scoped_evidence_inclusion_does_not_transport_scope": true,
     "every_additional_root_subject_binding_requires_independent_verification": true,
-    "global_subject_identity_authority": false
+    "global_subject_identity_authority": false,
+    "unresolved_supplied_interpretation_plurality_fails_closed": true
   },
   "intended_use": "SUCCESSOR_TARGET_IDENTITY_FOR_INCREMENTAL_TWELVE_ROOT_SAME_SUBJECT_BINDING__R1_FIRST",
   "hard_nonclaims": [
