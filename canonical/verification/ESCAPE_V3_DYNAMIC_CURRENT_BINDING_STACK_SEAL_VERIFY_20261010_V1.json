@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ESCAPE_V3_DYNAMIC_CURRENT_BINDING_STACK_SEAL_VERIFY_20261010_V1",
   "date": "2026-10-10",
-  "status": "PASS__EXACT_BRANCH_BYTES__PYCOMPILE_PASS__22_OF_22__ZERO_CREDIT",
+  "status": "PASS__FINAL_EXACT_BRANCH_BYTES__PYCOMPILE_PASS__22_OF_22__ZERO_CREDIT",
   "branch": "repair/escape-v3-dynamic-current-binding-20261010-v1",
   "base_commit": "e79aa2ba5d163a5964fb56f1d550075c4dfbe5d9",
   "defect_closed": "STALE_VERSIONED_BINDING_HARDCODE_IN_CANONICAL_ESCAPE_V3_AUDIT",
@@ -12,7 +12,7 @@
     },
     "tests": {
       "path": "canonical/tests/test_escape_progress_shared_gap_audit_v3.py",
-      "git_blob_sha": "3f4b38f0847d0562f1a02d25d77ff6a702eb54ba"
+      "git_blob_sha": "47b8d310e6cb63edd7fd7440d389dc328c2d2adb"
     },
     "manifest": {
       "path": "canonical/governance/ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_20261010_V2.json",
@@ -39,7 +39,9 @@
     "tests_discovered": 22,
     "tests_passed": 22,
     "tests_failed": 0,
-    "tests_skipped": 0
+    "tests_skipped": 0,
+    "receipt_agnostic_stack_tripwire": true,
+    "final_replay_after_tripwire_fix": "22_OF_22_PASS"
   },
   "proved": [
     "CURRENT_CLASSIFIER_SELECTS_ONE_IDENTICAL_VERSIONED_BINDING_FOR_GAP_A_AND_GAP_B",
