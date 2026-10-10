@@ -11,21 +11,22 @@ EXPECTED_EXECUTION={
     "PQ::R4_MEASUREMENT_CONSTRUCT::EXECUTION",
     "PQ::R6_EVIDENCE_GROUNDING_DEPENDENCE::EXECUTION",
     "PQ::R7_CAUSAL_PRESCRIPTIVE::EXECUTION",
+    "PQ::R8_POPULATION_CONTEXT_OPERATOR::EXECUTION",
     "PQ::R10_ANALYSIS_DECISION::EXECUTION",
     "PQ::R12_META_COMPOSITION_CLOSURE::EXECUTION",
 }
 
 
 class ProfessionalLeafRegistryPropertyTruthV1Tests(unittest.TestCase):
-    def test_current_registry_derives_exactly_eight_execution_leaves(self):
+    def test_current_registry_derives_exactly_nine_execution_leaves(self):
         out=binder.evaluate()
         self.assertTrue(out["existing_evidence_current"],out)
         self.assertEqual(out["structural_errors"],[])
         self.assertEqual(out["rejected_receipt_count"],0)
         self.assertEqual(set(out["verified_execution_leaf_ids"]),EXPECTED_EXECUTION)
         self.assertEqual(out["verified_semantic_leaf_ids"],[])
-        self.assertEqual(out["verified_leaf_count"],8)
-        self.assertEqual(out["open_leaf_count"],16)
+        self.assertEqual(out["verified_leaf_count"],9)
+        self.assertEqual(out["open_leaf_count"],15)
         self.assertFalse(out["promotion_ready"])
         self.assertFalse(out["pass"])
 
