@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R12_META_COMPOSITION_SCOPE_V1",
+  "date": "2026-10-10",
+  "status": "ACTIVE_SCOPED_UVCK_META_COMPOSITION_AND_DEFEATER_SOUNDNESS__ZERO_GLOBAL_LEAF_CREDIT",
+  "root_id": "R12_META_COMPOSITION_CLOSURE",
+  "claim_kind": "FAIL_CLOSED_ASSURANCE_GRAPH_META_COMPOSITION_AND_ORDER_INDEPENDENT_DEFEATER_ROUTING",
+  "exact_components": {
+    "runtime": {
+      "path": "canonical/runtime/assurance_closure_compiler_v1.py",
+      "git_blob_sha": "b4274a48edbe626a9ae9fd33da2f2227ca4dd5e8"
+    },
+    "current_generation_replay": {
+      "path": "canonical/verification/UVCK_V2_CURRENT_GENERATION_INDEPENDENT_REPLAY_VERIFY_20261009_V1.json",
+      "git_blob_sha": "81f7f070233b6aa1c4b491949a4c3e7aedfafd10"
+    },
+    "order_soundness_verification": {
+      "path": "canonical/verification/UVCK_V2_DEFEATER_ORDER_VERIFY_20261009_V1.json",
+      "git_blob_sha": "1c3428b10a1205e928a87f41a7c16a8a3d17b7ca"
+    }
+  },
+  "guarantees": [
+    "SUPPORTED_DEFEATER_DOMINANCE_IS_ORDER_INDEPENDENT",
+    "GENERIC_GRAPH_CANNOT_SELF_CERTIFY_EXECUTION_OR_ADVERSARIAL_CLOSURE",
+    "UNKNOWN_PRIMITIVE_REMAINS_A_REPRESENTATION_GAP_NOT_AUTOMATIC_CLOSURE",
+    "DANGLING_REFERENCES_AND_UNSUPPORTED_DEPENDENCY_CYCLES_FAIL_CLOSED",
+    "OPEN_OR_STALE_SUPPORT_REMAINS_AN_EXPLICIT_RESIDUAL"
+  ],
+  "limitations": [
+    "NO_UNKNOWN_DEFEATER_COMPLETENESS",
+    "NO_DOMAIN_SEMANTIC_CLOSURE",
+    "NO_DOMAIN_EXECUTION_CLOSURE",
+    "NO_FULL_PRIVATE_REPOSITORY_REGRESSION",
+    "NO_LIVE_DEFAULT_PROMOTION",
+    "NO_GLOBAL_R12_SEMANTIC_OR_EXECUTION_LEAF_CLOSURE",
+    "NO_GLOBAL_R12_ROOT_CLOSURE"
+  ],
+  "execution_authority": false,
+  "global_leaf_closure": false,
+  "global_root_closure": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
