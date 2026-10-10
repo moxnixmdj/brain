@@ -1,0 +1,14 @@
+name: pq-r2-semantic
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/pq-r2-semantic.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 -m unittest -v canonical.tests.test_professional_candidate_search_semantic_certificate_v1 canonical.tests.test_pq_r2_semantic_overlay_v1
