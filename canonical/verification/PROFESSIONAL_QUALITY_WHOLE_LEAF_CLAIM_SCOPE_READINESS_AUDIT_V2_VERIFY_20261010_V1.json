@@ -1,0 +1,79 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_WHOLE_LEAF_CLAIM_SCOPE_READINESS_AUDIT_V2_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_REBASED_BYTES__6_OF_6__CURRENT_V2_INVENTORY_ZERO_ADMISSIBLE__ZERO_CREDIT",
+  "base_main_commit": "084ba2d022c29c5f96f2705f60a65e498e242af8",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/professional_quality_whole_leaf_claim_scope_readiness_audit_v2.py",
+      "git_blob_sha": "961300d1f753cb48eb47df27e4bfa3cf0b48d91b"
+    },
+    "tests": {
+      "path": "canonical/tests/test_professional_quality_whole_leaf_claim_scope_readiness_audit_v2.py",
+      "git_blob_sha": "024cfc8e428694d059a1bea76c8216d3c93348bc"
+    },
+    "v2_gate": {
+      "path": "canonical/runtime/professional_quality_whole_leaf_claim_scope_gate_v2.py",
+      "git_blob_sha": "d76b922e8d5c86f10568a3582759f8c23e69b2e0"
+    },
+    "v2_activation": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_CERTIFICATE_GATE_ACTIVATION_20261010_V2.json",
+      "git_blob_sha": "34fdaf7f4a91d0e28d446a9d554c3aa0fbec8222"
+    },
+    "v2_gate_verification": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_CLAIM_SCOPE_GATE_V2_VERIFY_20261010_V1.json",
+      "git_blob_sha": "cb91d94dd89ec7c67aae54db3cd5319612cd43d5"
+    },
+    "whole_leaf_ledger": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_RESIDUAL_LEDGER_20261010_V1.json",
+      "git_blob_sha": "ae5503829ad340cccef287f37ff70e4ab9288d33"
+    }
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "py_compile": "PASS",
+    "tests_run": 6,
+    "tests_passed": 6,
+    "tests_failed": 0,
+    "canaries": [
+      "NO_V2_CANDIDATES_ROUTE_TO_CLAIM_SCOPE_OR_TOTALITY",
+      "PARTIAL_V2_QUARTET_FAILS_CLOSED",
+      "LEGACY_V1_PAIR_HAS_ZERO_V2_ADMISSION_AUTHORITY",
+      "EXACT_V2_QUARTET_DELEGATES_TO_CLAIM_SCOPED_GATE",
+      "V2_GATE_REJECTION_REMAINS_REJECTED",
+      "STALE_LEDGER_FAILS_CLOSED"
+    ]
+  },
+  "current_inventory_proof": {
+    "pre_v2_main": "dad0c629a9b6d88a31e848978c4a94e139387f54",
+    "v2_main": "084ba2d022c29c5f96f2705f60a65e498e242af8",
+    "v2_delta_changed_file_count": 4,
+    "added_v2_candidate_claim_scope_count": 0,
+    "added_v2_candidate_claim_verification_count": 0,
+    "added_v2_scope_certificate_count": 0,
+    "added_v2_certificate_verification_count": 0,
+    "conclusion": "CURRENT_MAIN_HAS_V2_GATE_INFRASTRUCTURE_BUT_NO_V2_LEAF_CANDIDATE_QUARTET__ADMISSIBLE_COUNT_REMAINS_ZERO"
+  },
+  "current_result": {
+    "leaf_count": 24,
+    "admissible_claim_scope_count": 0,
+    "admissible_scope_certificate_count": 0,
+    "claim_scope_or_totality_required_count": 24,
+    "property_truth_work_blocked_until_scope_admission": true
+  },
+  "hard_nonclaims": [
+    "NO_WHOLE_LEAF_DOMAIN_EQUIVALENCE_PROVED",
+    "NO_WHOLE_LEAF_SCOPE_CERTIFICATE_ADMITTED",
+    "NO_PROPERTY_TRUTH_CLOSED",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
