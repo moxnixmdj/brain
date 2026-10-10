@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V46",
+  "date": "2026-10-10",
+  "status": "CURRENT_POST_RANK20_NONCONSUMING_ABORT__EIGHTEEN_CONSUMED__OLD_ACTIVATION_RETIRED__WORKFLOW_HARNESS_REPAIR_REQUIRED__NO_EXECUTION_AUTHORITY",
+  "predecessor": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V45.json",
+    "git_blob_sha": "8de64c72eddd5dae759e19ab4bb466efac2fd556"
+  },
+  "rank20_result_truth": {
+    "path": "canonical/verification/TB_SCIENCE_RANK20_PREEXPOSURE_ABORT_TRUTH_20261010_V1.json",
+    "git_blob_sha": "2b5b31d242a4fca92b2390c6f3e76dbceeb18619"
+  },
+  "counts": {
+    "benchmark_trials_consumed": 18,
+    "consumed_successes_final": 0,
+    "consumed_failures_final": 18,
+    "started_result_pending": 0,
+    "finalized_slots": 18,
+    "active_in_flight_slot_count": 0
+  },
+  "rank20": {
+    "slot_id": "terminal-bench-science/hysteretic-aquifer-control::trial-0",
+    "task_digest": "sha256:681df0c3b2ada03a933ac4d2e11f07983676f87a9f26b61e416987904b880289",
+    "prior_logical_attempt_id": "62bbf27ddcc679f431c5569244cf0c54fb1b13181e83076e2c019764f0b747e2",
+    "task_read_history": false,
+    "task_started": false,
+    "start_cas_acquired": false,
+    "benchmark_trials_consumed": 0,
+    "result_classification": "PREEXPOSURE_ABORT_NONCONSUMING",
+    "old_activation_authority": false,
+    "old_execution_authority_effective": false
+  },
+  "scheduler": {
+    "frozen": true,
+    "reason": "RANK20_WORKFLOW_PREFLIGHT_IMPORT_PATH_DEFECT__CLAIM_EPOCH_RESEAL_REQUIRED",
+    "only_authorized_transition": "PATCH_WORKFLOW_PYTHONPATH_ZERO_EXPOSURE__MINT_FRESH_RANK20_CLAIM_EPOCH__RESEAL_PUBLIC_SURFACE"
+  },
+  "execution_authority": false,
+  "activation_authority": false,
+  "repair_authority": "ZERO_EXPOSURE_ONLY",
+  "finalization_authority": false,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
