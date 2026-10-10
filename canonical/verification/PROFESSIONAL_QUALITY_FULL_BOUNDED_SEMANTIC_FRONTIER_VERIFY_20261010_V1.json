@@ -1,0 +1,81 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_FULL_BOUNDED_SEMANTIC_FRONTIER_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "INDEPENDENT_SPRITE_PASS__36_OF_36__21_SCOPES__24_OF_24_BOUNDED_LEAVES__CURRENT_SUBJECT_V2_EXACT__MULTISCOPE_GATE_PASS__ZERO_GLOBAL_QUALITY_CREDIT",
+  "exact_state": {
+    "current_pointer": {
+      "path": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
+      "git_blob_sha": "e6765834a93ff4ba4b6c286d885dc25763c4b1a0"
+    },
+    "registry": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_REGISTRY_20261010_V1.json",
+      "git_blob_sha": "e8b013d4b10915104ec4f0744b03e5d36c7d87dd"
+    },
+    "overlay": {
+      "path": "canonical/runtime/professional_quality_scoped_evidence_overlay_v1.py",
+      "git_blob_sha": "d3bca89c426b8424ec120ace482ba85f1afd26e3"
+    },
+    "subject": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V3_DECLARED_SYSTEM_SUBJECT_20261010_V2.json",
+      "git_blob_sha": "d758083973ca040f6b6426e5729e297e283b1e0c",
+      "subject_sha256": "934b90e941d23396525a594a21a3335deb8c5cbbb7797724334f54a42d80e751"
+    },
+    "worklist": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V3_SAME_SUBJECT_ROOT_BINDING_WORKLIST_20261010_V2.json",
+      "git_blob_sha": "ee01e748e51bdf36820ade1378705597467d6776"
+    },
+    "composition_gate": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_SAME_SUBJECT_COMPOSITION_GATE_20261010_V2.json",
+      "git_blob_sha": "19287a6057166262bb7ce7218652093960128d53"
+    },
+    "composition_runtime": {
+      "path": "canonical/runtime/professional_quality_same_subject_composition_gate_v1.py",
+      "git_blob_sha": "229e37e96e2e61fd207a6bef7e69ad8d3e72e9c6"
+    },
+    "frontier_regression": {
+      "path": "canonical/tests/test_professional_quality_full_bounded_semantic_frontier_v1.py",
+      "git_blob_sha": "9b564abc2282922195c13155aa53ad95e779c1a5"
+    }
+  },
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "working_directory": "/home/sprite/r4-semantic-current-integration-verify-v1"
+  },
+  "replay": {
+    "tests_passed": 36,
+    "tests_total": 36,
+    "tests_failed": 0,
+    "suites": [
+      "canonical.tests.test_professional_r4_measurement_semantic_certificate_v1",
+      "canonical.tests.test_professional_quality_scoped_evidence_overlay_v1",
+      "canonical.tests.test_professional_quality_leaf_coverage_projection_v2",
+      "canonical.tests.test_professional_quality_same_subject_composition_gate_v1",
+      "canonical.tests.test_professional_quality_full_bounded_semantic_frontier_v1"
+    ]
+  },
+  "proved": [
+    "ALL_12_PROFESSIONAL_ROOTS_HAVE_AT_LEAST_ONE_BOUNDED_SEMANTIC_SCOPE_AND_ONE_BOUNDED_EXECUTION_SCOPE",
+    "ALL_24_SEMANTIC_AND_EXECUTION_LEAVES_HAVE_BOUNDED_SCOPED_EVIDENCE",
+    "NO_SCOPED_EVIDENCE_LEAF_REMAINS",
+    "MULTIPLE_SCOPED_CAPABILITIES_PER_ROOT_DO_NOT_BREAK_SAME_SUBJECT_ROOT_COVER",
+    "DECLARED_SYSTEM_V2_EXACTLY_BINDS_10_CURRENT_COMPONENT_BLOBS_AND_21_SCOPE_REGISTRY",
+    "CURRENT_PROFESSIONAL_POINTER_MATCHES_LIVE_DERIVED_STATE"
+  ],
+  "remaining": [
+    "ZERO_OF_TWELVE_ROOTS_HAVE_INDEPENDENT_SAME_SUBJECT_BINDING_AUTHORITY",
+    "ZERO_OF_TWENTY_FOUR_LEAVES_HAVE_GLOBAL_CLOSURE",
+    "SAME_SUBJECT_COMPOSITION_NOT_YET_ADMISSIBLE",
+    "DOMAIN_SEMANTIC_AND_EXECUTION_CLOSURE_OPEN",
+    "LIVE_DEFAULT_PROMOTION_OPEN"
+  ],
+  "hard_nonclaims": [
+    "FULL_BOUNDED_SCOPED_COVERAGE_IS_NOT_GLOBAL_CLOSURE",
+    "NO_ROOT_SUBJECT_BINDING_CREDIT_FROM_COMPONENT_MEMBERSHIP",
+    "NO_PROFESSIONAL_QUALITY_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
