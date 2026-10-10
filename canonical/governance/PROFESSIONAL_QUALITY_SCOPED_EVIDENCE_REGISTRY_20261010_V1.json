@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_REGISTRY_V1",
   "date": "2026-10-10",
-  "status": "ACTIVE__FOUR_CLAIM_SCOPED_CAPABILITIES__ZERO_GLOBAL_LEAF_CREDIT",
+  "status": "ACTIVE__FIVE_CLAIM_SCOPED_CAPABILITIES__ZERO_GLOBAL_LEAF_CREDIT",
   "entries": [
     {
       "scope_id": "PQ::R7::SINGLE_EDIT::UVCK_DEFEATER_ORDER_REPAIR",
@@ -101,12 +101,37 @@
       "semantic_leaf_credit": false,
       "execution_leaf_credit": false,
       "terminal_credit_delta": 0
+    },
+    {
+      "scope_id": "PQ::R6::LEAF_EVIDENCE::CONTENT_ADDRESSED_SCOPE_MATCHED_ADMISSION",
+      "root_id": "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+      "contributes_to_leaf_ids": [
+        "PQ::R6_EVIDENCE_GROUNDING_DEPENDENCE::EXECUTION"
+      ],
+      "claim_kind": "CONTENT_ADDRESSED_SCOPE_MATCHED_LEAF_EVIDENCE_ADMISSION_WITH_STATUS_NONAUTHORITY",
+      "source_receipt": {
+        "path": "canonical/verification/PROFESSIONAL_QUALITY_LEAF_BINDER_V2_VERIFY_20261010_V1.json",
+        "git_blob_sha": "b65a67e8edaee925338fe3f2d61dad6b0f52d129"
+      },
+      "reusable_compiler": {
+        "path": "canonical/runtime/professional_quality_leaf_binder_v2.py",
+        "git_blob_sha": "1a181b453271a2ce4fc112c3f6586afaf5effbd7"
+      },
+      "compiler_verification": {
+        "path": "canonical/governance/PROFESSIONAL_QUALITY_LEAF_EVIDENCE_REGISTRY_20261010_V1.json",
+        "git_blob_sha": "d25cb6fe746eef992f71b138446dc999c0f2a307"
+      },
+      "global_leaf_closure": false,
+      "global_root_closure": false,
+      "semantic_leaf_credit": false,
+      "execution_leaf_credit": false,
+      "terminal_credit_delta": 0
     }
   ],
   "admission_law": "CLAIM_SCOPED_EVIDENCE_MAY_BE_REUSED_ONLY_INSIDE_ITS_PROVED_SCOPE_AND_NEVER_COUNTS_AS_GLOBAL_LEAF_OR_ROOT_CLOSURE",
   "hard_nonclaims": [
-    "NO_GLOBAL_R3_R7_R10_OR_R11_LEAF_CLOSURE",
-    "NO_GLOBAL_R3_R7_R10_OR_R11_ROOT_CLOSURE",
+    "NO_GLOBAL_R3_R6_R7_R10_OR_R11_LEAF_CLOSURE",
+    "NO_GLOBAL_R3_R6_R7_R10_OR_R11_ROOT_CLOSURE",
     "NO_DOMAIN_SEMANTIC_CLOSURE",
     "NO_DOMAIN_EXECUTION_CLOSURE",
     "NO_TERMINAL_CREDIT"
