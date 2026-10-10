@@ -1,0 +1,19 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK20_V5_REPAIR_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS_ZERO_EXPOSURE_FOUR_FILE_REPAIR",
+  "public_pr": 2604,
+  "public_head_sha": "d24a19b9e70da2a59883b75362dc7a5541effd14",
+  "workflow_blob": "e4cb372e501790fd9ed5aa72193d18109a599102",
+  "preflight_blob": "74d55719d01f3f434b0b75001548f56a4ed83ff6",
+  "start_cas_blob": "35cd4c7a31d5ffbafa755dcdf888c2dee1beeb1b",
+  "zero_exposure_test_blob": "ba2d467c54a9f9720bc1b647befe655b80555fab",
+  "activation_present": false,
+  "task_read": false,
+  "task_started": false,
+  "benchmark_trials_consumed": 0,
+  "execution_authority_effective": false,
+  "independent_static_verify_pass": true,
+  "pass": true,
+  "terminal_credit_delta": 0
+}
