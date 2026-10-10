@@ -117,11 +117,30 @@ def load_pack(*,repo_root:str|Path|None=None)->dict[str,Any]:
     return {"sources":by_id,"pack_git_blob_sha":blob}
 
 
+def _is_sentence_boundary(text:str,index:int)->bool:
+    ch=text[index]
+    if ch in "!?":
+        return True
+    if ch!=".":
+        return False
+    prev=text[index-1] if index>0 else ""
+    nxt=text[index+1] if index+1<len(text) else ""
+    return not (prev.isdigit() and nxt.isdigit())
+
+
 def _sentence_bounds(text:str,start:int,end:int)->tuple[int,int]:
-    left=max(text.rfind(".",0,start),text.rfind("!",0,start),text.rfind("?",0,start))
+    left=-1
+    for i in range(start-1,-1,-1):
+        if _is_sentence_boundary(text,i):
+            left=i
+            break
     s=0 if left<0 else left+1
-    rights=[x for x in (text.find(".",end),text.find("!",end),text.find("?",end)) if x>=0]
-    e=min(rights)+1 if rights else len(text)
+    right=None
+    for i in range(end,len(text)):
+        if _is_sentence_boundary(text,i):
+            right=i
+            break
+    e=right+1 if right is not None else len(text)
     return s,e
 
 
