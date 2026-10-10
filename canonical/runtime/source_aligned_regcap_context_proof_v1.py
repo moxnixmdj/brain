@@ -154,6 +154,21 @@ def verify_proof(
             })
             continue
 
+        ownership = check_direct_assertion(
+            source_text,
+            start=start,
+            end=end,
+            require_selected_span_is_complete_sentence=True,
+        )
+        if ownership.get("pass") is not True:
+            rejected.append({
+                "claim_id": cid,
+                "reason": "ASSERTION_OWNERSHIP_NOT_PROVED",
+                "source_span": [start, end],
+                "assertion_ownership": ownership,
+            })
+            continue
+
         surface = source_text[start:end]
         atoms, reason = _prove_kind(str(claim.get("kind") or ""), surface)
         if reason is not None:
