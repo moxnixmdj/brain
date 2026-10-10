@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_PROFESSIONAL_V8_R12_REUSE_CLOSURE_20261010_V1",
   "date": "2026-10-10",
-  "status": "CANDIDATE_IMPLEMENTED__C1_TO_C7_EXACT_V8_REUSE_VERIFIER_PLUS_OBSERVABLE_POLICY_COVER_CC_R3_ADAPTER__INDEPENDENT_BRANCH_VERIFICATION_PENDING__ZERO_CREDIT",
+  "status": "CURRENT_VERIFIED_REUSE_CLOSURE__C1_TO_C7_EXACT_V8_REVERIFIED__CC_R3_POLICY_COVER_ADAPTER_VERIFIED__REAL_V8_WITNESS_OPEN__NO_NEW_PRIMITIVE__ZERO_CREDIT",
   "base_main_commit": "ac397ea41997bac1002c7dfcf723192e1da08fe9",
   "objective": "CLOSE_THE_LIVE_R12_V8_FRONTIER_BY_REUSING_EXISTING_VERIFIED_REFINEMENT_AND_TOTALITY_THEOREMS_WITHOUT_CROSS_SUBJECT_AUTHORITY_TRANSPORT_OR_DEFEATER_CATALOG_ENUMERATION",
   "reuse_sources": {
@@ -27,7 +27,12 @@
   "new_implementation": {
     "runtime": "canonical/runtime/professional_v8_r12_reuse_closure_v1.py",
     "tests": "canonical/tests/test_professional_v8_r12_reuse_closure_v1.py",
-    "branch": "successor/v8-r12-reuse-closure-20261010-v1"
+    "branch": "successor/v8-r12-reuse-closure-20261010-v1",
+    "independent_verification": {
+      "path": "canonical/verification/PROFESSIONAL_V8_R12_REUSE_CLOSURE_INDEPENDENT_VERIFY_20261010_V1.json",
+      "git_blob_sha": "b01d8ea91f17313bb78feb0dcec0cbd302b671f6",
+      "status": "PASS__INDEPENDENT_SPRITE__PYCOMPILE__6_OF_6"
+    }
   },
   "exact_v8_subject": {
     "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V8_DECLARED_SYSTEM_SUBJECT_20261010_V7.json",
@@ -44,7 +49,7 @@
   },
   "truth_boundary": {
     "c1_to_c7_branch_candidate_implemented": true,
-    "c1_to_c7_independent_branch_verification_complete": false,
+    "c1_to_c7_independent_branch_verification_complete": true,
     "real_v8_policy_relevant_state_cover_bound": false,
     "real_v8_positive_totality_witness_bound": false,
     "v8_c8_nonvacuity_proved": false,
@@ -54,10 +59,10 @@
     "quality_authority": false,
     "acceptance_authority": false,
     "promotion_authority": false,
-    "terminal_authority": false
+    "terminal_authority": false,
+    "reusable_cc_r3_adapter_independent_verification_complete": true
   },
   "minimum_remaining_cut": [
-    "INDEPENDENTLY_REPLAY_NEW_V8_REUSE_CLOSURE_RUNTIME_AND_TESTS",
     "BIND_ONE_REAL_EXACT_V8_RUN_TO_A_COMPLETE_POLICY_RELEVANT_WORLD_SET",
     "REUSE_EXISTING_BRAIN_OWNED_ADEQUACY_RECEIPTS_AND_ONLY_THE_TRUTHFUL_POLICY_CHANGING_DISCRIMINATORS_NEEDED_FOR_A_CONSTRUCTIVE_POLICY_COVER",
     "INDEPENDENTLY_VERIFY_THE_EXACT_COVER_BYTES_AND_POSITIVE_ROUTE",
