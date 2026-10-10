@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_R1_V10_SEMANTIC_TOTALITY_INDEPENDENT_VERIFY_V1",
+  "date": "2026-10-11",
+  "pass": true,
+  "independent_verified": true,
+  "status": "PASS__INDEPENDENT_SPRITE__R1_V10_CLAIM_SCOPED_TOTALITY__7_OF_7__R4_BOUND__ZERO_GLOBAL_OR_TERMINAL_CREDIT",
+  "leaf_id": "PQ::R1_TARGET_SPECIFICATION::SEMANTIC",
+  "root_id": "R1_TARGET_SPECIFICATION",
+  "semantic_claim_id": "e4956b485f12be3edcd4d9723604683d4fb7f04899dccb129c2234a41ff7d689",
+  "semantic_scope_sha256": "c36ef2f73ed5339234e9f6c154d7ac88809da8b1bda402fc51ee162b090304ef",
+  "semantic_target_predicate_sha256": "630ee7e848b2a7306f23bd995840d8613d76441919fc79d3ef7a0035201bcb88",
+  "semantic_semantics_sha256": "cf82fd3d8c39abeeaa907de5a44e42d272ed40aca97c507c5267545559a5537e",
+  "claim_scoped_totality_proved": true,
+  "cc_r1_reality_containment_proved": true,
+  "cc_r2_mission_soundness_proved": true,
+  "cc_r3_terminal_closure_proved": true,
+  "r4_proof_realization_authority": true,
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/professional_r1_v10_semantic_totality_candidate_v1.py",
+      "git_blob_sha": "09efbb6fb204b5361531bf57d5be2cce4ea7ce8f"
+    },
+    "tests": {
+      "path": "canonical/tests/test_professional_r1_v10_semantic_totality_candidate_v1.py",
+      "git_blob_sha": "56d7c53e1de3f62ecf1482b9ffdefc46e13b775d"
+    },
+    "v10_claim_batch": {
+      "path": "canonical/runtime/professional_semantic_v2_v10_claim_batch_v1.py",
+      "git_blob_sha": "75fcbaf92a2b84b0d670ef7d784107590c5f1d08"
+    },
+    "target_semantic_compiler": {
+      "path": "canonical/runtime/professional_target_semantic_certificate_v1.py",
+      "git_blob_sha": "583612b0e2226053ac758683087b5c5d0f510996"
+    },
+    "admission_binder": {
+      "path": "canonical/runtime/professional_quality_semantic_admission_binder_v3.py",
+      "git_blob_sha": "6e8e5ac7c4cf4cc38e5e7a6f0ad6a0c80f0683be"
+    }
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-professional-hard-defect-verify-20261010",
+    "carrier_id": "sprite-1bbb86ed-1f7c-409f-8397-fadc4de7a62a",
+    "workspace": "/home/sprite/r1-v10-totality",
+    "py_compile": "PASS",
+    "tests_run": 7,
+    "tests_passed": 7,
+    "tests_failed": 0,
+    "transcript_sha256": "7a28f62fbc86084bb78243840b0f4b23057e9e81bf4413a6d064b6a9362ef4da",
+    "transcript_bytes": 1463,
+    "verifier_result_sha256": "fa083779e49b0abd5a3de13470f4fc83ced38fa7a94c770de229a89f4c69a1fd"
+  },
+  "positive_witness": {
+    "kind": "EXACT_PARAMETERIZED_CANONICAL_PROFESSIONAL_TARGET_SEMANTICS",
+    "nonvacuous": true,
+    "resolved_or_decision_null_challenge_ids": [
+      "C01_GOAL_SUBSTITUTION",
+      "C02_AMBIGUOUS_SPEC_WINNER"
+    ],
+    "arbitrary_prompt_completeness_assumed": false,
+    "source_extraction_completeness_assumed": false,
+    "unique_best_plan_assumed": false
+  },
+  "semantic_leaf_property_truth_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
