@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R3_EXECUTION_PROPERTY_TRUTH_INDEPENDENT_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_SPRITE__11_OF_11__R3_EXECUTION_PROPERTY_TRUTH_ONLY",
+  "branch": "pq-r3-execution-property-truth-20261010",
+  "proof_blobs": {
+    "guard": "3512b0634fd563feb4dd64d27c5241f47e9815d6",
+    "verifier": "b3003ec2a6b63792a80b619a7c7e1abcec6a9c15",
+    "guard_tests": "b92f0ecab75cd6b4345e8da0236b628b0275769c",
+    "verifier_tests": "435022d160661f5517da47d27959cf6dfc638a51"
+  },
+  "dependency_blobs": {
+    "manifest": "a7cad32c9fd969ff2c3857bb924c7bd746237ec2",
+    "catalog": "8b92e5cf76f767054f55414b87014e03d43460b8",
+    "r3_root_verify": "870bb85fbd00d670ec36e86b4b0b510f5bb9225c",
+    "render_verify": "734f88f5d201e778f59133c9e22f29ae4d451121",
+    "exact_instance": "13e7e58b3621b3cabb7abdebe23689f3a72678d2",
+    "render_step_receipt": "8a524bd90cee783d9d342b80a95b990d23a413e0"
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/r4-execution-property-truth-v1",
+    "execution_mode": "DIRECT_PYTHON_ASSERTION_REPLAY",
+    "tests_run": 11,
+    "tests_passed": 11,
+    "tests_failed": 0,
+    "proof_surface_byte_equal_to_branch": true,
+    "verifier_pass": true,
+    "verifier_status": "PASS__R3_REAL_RENDER_RECEIPT_PLUS_ALL_DECLARED_ROOT_ATTACK_CLASSES_NEAR_MISSES_AND_CATCHALLS_OBSERVED_FAIL_CLOSED__ONE_EXECUTION_LEAF_PROPERTY_TRUTH_ONLY"
+  },
+  "leaf_id": "PQ::R3_REALIZATION_OBSERVATION::EXECUTION",
+  "leaf_property_truth_authority": true,
+  "detection_completeness_proved": false,
+  "renderer_invariance_proved": false,
+  "semantic_target_correctness_proved": false,
+  "whole_artifact_observation_completeness_proved": false,
+  "semantic_leaf_closed": false,
+  "root_closed": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
