@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V7",
   "date": "2026-10-10",
-  "status": "ACTIVE_PRIMARY_CAPABILITY_FIRST_DEVELOPMENT_SCHEDULER__REUSE_FIRST_ENFORCED__LIVE_SCORE_PROVENANCE_GATE_ADDED__REBASED_174CDF8C__ZERO_CREDIT",
+  "status": "ACTIVE_PRIMARY_CAPABILITY_FIRST_DEVELOPMENT_SCHEDULER__REUSE_FIRST_ENFORCED__LIVE_SCORE_PROVENANCE_GATE_ADDED__REBASED_A8CBE3FF__ZERO_CREDIT",
   "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "terminal_milestone": "OPUS_5_5_FIRST_FRONTIER_CHECKPOINT__NOT_TERMINAL_OBJECTIVE",
   "supersedes": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V6.json",
@@ -17,7 +17,7 @@
     "score_contract_path": "canonical/governance/LIVE_WORK_SCORE_CALIBRATION_CONTRACT_20261010_V1.json",
     "score_contract_git_blob_sha": "2446bc1f551326eb78cc9b94a418d4ce65971c8c",
     "current_frontier_path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
-    "current_frontier_git_blob_sha": "87e5ca7f1f678b860f70f505f75204aafd9a3b81",
+    "current_frontier_git_blob_sha": "3929428b28ef8f922fe8d25cbdaa316248081cae",
     "fail_closed_without_complete_common_calibration": true
   },
   "primary_work_rule": {
@@ -42,7 +42,7 @@
     "current_reason": "CURRENT_FRONTIER_BOUND_BUT_COMMON_CALIBRATION_AND_ALL_METRIC_EVIDENCE_ARE_NOT_YET_BOUND"
   },
   "current_frontier_truth": {
-    "professional": "R1_R2_R3_V7_BOUND__3_OF_12__R4_NEXT",
+    "professional": "R1_R2_R3_R4_V7_BOUND__4_OF_12__R5_NEXT",
     "bytes": "V24__2007446_RAW_PYTHON_BYTES__NEXT_SPENT_NEXT29_BEFORE_FROZEN_NEXT30",
     "tb_science": "RANK20_V13_EFFECTIVE_AUTHORITY_PREACTIVATION__PUBLIC_SURFACE_PROMOTION_PENDING"
   },
