@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK20_CLAIM_BOUND_IDENTITY_INDEPENDENT_VERIFICATION_V1",
+  "date": "2026-10-10",
+  "status": "PASS__RANK20_CLAIM_BOUND_V2_IDENTITY_MINTED__ZERO_EXPOSURE__PUBLIC_RESEAL_PENDING",
+  "branch": "successor/tb-science-rank20-claim-bound-identity-20261010-v1",
+  "base_commit": "2ef51b5cde6785147bd12683542ecabba01f7175",
+  "exact_blobs": {
+    "preclaim_seed": "b058e29630d8b4eb100e08082a8d9c7053516647",
+    "logical_attempt_claim_binding": "9bfc6e9bde3d196443acebf9a0dd0ac1cfd23ab8",
+    "staged_authority": "2888ea4e942584e79837060f31bc594639d089d7",
+    "ledger_v42": "3d88e976fc24d4ced184680f611220456e444543",
+    "verifier": "8c25faad4e40d595e4c615faa24b024f89526568",
+    "regression": "457e1e521336a17e2533854a435465f846ea173b",
+    "identity_v2": "67ff638459af1bb50a094e9479fb4aa5e2a3de1c",
+    "rank20_capability_first_admission": "b03861813f9b9a730659e6e0b6e7301a45061b04",
+    "rank20_capability_first_admission_verification": "d12c7c1f9e1259eaf3950689556fd0e6a37ba705"
+  },
+  "derived_identity": {
+    "execution_claim_binding_canonical_sha256": "1b5a30a3a5d42006b5dd440ec71362dac9728b5d2c2abdca45bfda80de2898b5",
+    "execution_claim_binding_digest": "sha256:1b5a30a3a5d42006b5dd440ec71362dac9728b5d2c2abdca45bfda80de2898b5",
+    "logical_attempt_id_v2": "c02b0f18205db3b81fe40f843a451e696375fbfcd5fd75fd01d8c8d411456fcc",
+    "legacy_v1_fallback_allowed": false
+  },
+  "independent_replay": {
+    "environment": "SPRITE__brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "verifier_status": "PASS__RANK20_CLAIM_BOUND_V2_IDENTITY_MINTED__ZERO_EXPOSURE__PUBLIC_RESEAL_PENDING",
+    "verifier_errors": [],
+    "regression_tests_passed": 4,
+    "regression_tests_failed": 0
+  },
+  "verified": [
+    "PRECLAIM_SEED_CONTAINS_NO_LOGICAL_ATTEMPT_ID_OR_EXECUTION_AUTHORITY",
+    "CLAIM_BINDING_IS_CONTENT_ADDRESSED_FROM_IMMUTABLE_PRECLAIM_INPUTS",
+    "V2_LOGICAL_ATTEMPT_ID_DERIVES_FROM_SLOT_TASK_AND_CLAIM_BINDING_DIGEST",
+    "LEGACY_V1_FALLBACK_IS_FORBIDDEN",
+    "RANK20_REMAINS_UNREAD_UNSTARTED_ZERO_TRIALS",
+    "STAGED_EXECUTION_AUTHORITY_IS_NOT_EFFECTIVE_BEFORE_PUBLIC_RESEAL",
+    "TASK_READ_ACTIVATION_AND_FRESH_REALITY_AUTHORITY_REMAIN_FALSE"
+  ],
+  "next": "BUILD_AND_ZERO_EXPOSURE_VERIFY_PUBLIC_RANK20_CLAIM_BOUND_IDENTITY_EXECUTION_SURFACE__NO_TASK_READ",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_trials_consumed_delta": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_RANK20_TASK_READ_START_OR_BENCHMARK_TRIAL",
+    "NO_RANK20_EFFECTIVE_EXECUTION_OR_ACTIVATION_AUTHORITY",
+    "NO_RANK19_RETRY_REPLAY_OR_REPLACEMENT",
+    "NO_CAPABILITY_ACCEPTANCE_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ]
+}
