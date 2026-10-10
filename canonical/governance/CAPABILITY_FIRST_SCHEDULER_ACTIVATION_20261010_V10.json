@@ -1,0 +1,76 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V10",
+  "date": "2026-10-10",
+  "status": "ACTIVE_PRIMARY_CAPABILITY_FIRST_PARALLEL_FRONTIER_SCHEDULER__INTERVAL_ROBUST_PARETO__CONFLICT_AWARE__SEVEN_READ_ONLY_EVIDENCE_LANES__FULL_EXECUTION_FAIL_CLOSED__ZERO_CREDIT",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "terminal_milestone": "OPUS_5_5_FIRST_FRONTIER_CHECKPOINT__NOT_TERMINAL_OBJECTIVE",
+  "supersedes": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V9.json",
+  "primary_parallel_frontier": {
+    "path": "canonical/runtime/capability_parallel_frontier_v2.py",
+    "git_blob_sha": "209d8d11494645432354636a3dc17e7b515abaf8",
+    "primary_entrypoint": "plan_current_parallel_frontier",
+    "frontier_path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
+    "frontier_git_blob_sha": "768e16f45102384c07552c3c82bc032f2a4b1847",
+    "dominance_rule": "A_BENEFIT_LCB_GE_B_BENEFIT_UCB_EVERY_DIMENSION__A_COST_UCB_LE_B_COST_LCB_EVERY_DIMENSION__AT_LEAST_ONE_STRICT",
+    "dynamic_current_pointer_follow": {
+      "supported_families": [
+        "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
+        "canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json"
+      ],
+      "professional_rule": "MECHANICALLY_SEQUENTIAL_ROOT_FRONTIER__12_OF_12_TRANSITIONS_TO_VERIFIED_V3_SAME_SUBJECT_COMPOSITION_GATE_READ_ONLY",
+      "assurance_rule": "COHERENT_DEPENDENT_PROJECTION_ONLY__SUBJECT_COUNT_NEXT_AUTHORITY_AND_PROMOTION_BLOCKERS_MUST_MATCH",
+      "other_source_family_drift": "FAIL_CLOSED"
+    }
+  },
+  "scalar_fallback": {
+    "core_path": "canonical/runtime/capability_first_scheduler_v1.py",
+    "core_git_blob_sha": "6d2091cc1581b9aa1fd2c74e8a76519a41d9d957",
+    "live_wrapper_path": "canonical/runtime/capability_first_live_scheduler_v1.py",
+    "live_wrapper_git_blob_sha": "a45740441a8bfbbab315ed07c39ca54079ef0779",
+    "rule": "USE_ONLY_WHEN_A_PROVED_COMMON_TRADEOFF_CALIBRATION_EXISTS__NEVER_AS_SUBSTITUTE_FOR_INTERVAL_UNCERTAINTY"
+  },
+  "independent_verification": {
+    "path": "canonical/verification/CAPABILITY_PARALLEL_FRONTIER_V10_INTERVAL_ROBUST_VERIFY_20261010_V1.json",
+    "git_blob_sha": "a0568e6aff736462f359d1c222c0ac519bc6482a",
+    "status": "PASS__INDEPENDENT_SPRITE__EXACT_RUNTIME_BLOB_MATCH__PYCOMPILE_PASS__13_OF_13_FOCUSED_TESTS_PASS__ZERO_CREDIT"
+  },
+  "current_control_state": {
+    "full_execution_plan_authorized": false,
+    "read_only_evidence_plan_authorized": true,
+    "current_parallel_read_only_lane_count": 7,
+    "current_parallel_full_execution_lane_count": 0,
+    "current_read_only_lanes": [
+      "PROFESSIONAL_QUALITY_V7_R12_META_COMPOSITION_CLOSURE_BINDING_OR_DYNAMIC_SAME_SUBJECT_COMPOSITION_GATE",
+      "BYTES_EXACT_SYMBOLIC_V24_NEXT_PHYSICAL_CUT",
+      "TB_SCIENCE_RANK20_V3_ACTIVATION_PRESTART",
+      "R2_FINANCE_FOUR_WAY_GOVERNING_REQUIREMENT_OBSERVATION",
+      "ESCAPE_GAP_A_AUTHENTICATED_ROW_PROOFS",
+      "ESCAPE_GAP_B_STRICT_PROGRESS_ROW_PROOFS",
+      "REPOSITORY_PROMOTION_ENFORCEMENT"
+    ],
+    "reason": "READY_PRIMARY_WORK_REMAINS_INTERVAL_VECTOR_INCOMPLETE__READ_ONLY_EVIDENCE_ACQUISITION_IS_NONCONFLICTING__ROBUST_DOMINANCE_NOT_YET_PROVABLE"
+  },
+  "r2_policy": {
+    "generic_open_world_finance_frontier": "SLEEPING",
+    "exact_bounded_evidence_lane": "R2_FINANCE_FOUR_WAY_GOVERNING_REQUIREMENT_OBSERVATION",
+    "rule": "BOUND_ONE_OBSERVATION_REQUEST_DOES_NOT_WAKE_GENERIC_OPEN_WORLD_RESEARCH"
+  },
+  "scheduling_law": "CURRENTNESS_AND_DEPENDENCY_FIRST__INTERVAL_ROBUST_PARETO_DOMINANCE__SAFE_NONCONFLICTING_PARALLELISM__INCOMPLETE_INTERVAL_VECTORS_READ_ONLY_EVIDENCE_ONLY__CONFLICTING_INCOMPARABLE_WORK_REQUIRES_MINIMUM_DISCRIMINATING_EVIDENCE__NO_INVENTED_POINT_ESTIMATES_OR_SCALAR_WEIGHTS",
+  "hard_nonclaims": [
+    "NO_FULL_EXECUTION_AUTHORITY_FROM_SCHEDULER_PLANNING",
+    "NO_UNIQUE_RANK_ONE_CLAIM",
+    "NO_COMPLETE_INTERVAL_VECTOR_EVIDENCE_CLAIM",
+    "NO_SCALAR_UTILITY_CALIBRATION_CLAIM",
+    "NO_PROFESSIONAL_12_OF_12_POINTER_CREDIT_UNTIL_CURRENT_POINTER_RECONCILES",
+    "NO_SAME_SUBJECT_COMPOSITION_PASS_CLAIM",
+    "NO_GENERIC_R2_OPEN_WORLD_WAKE",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT_FROM_SCHEDULING"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
