@@ -2,7 +2,7 @@
   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V12_INSTANCE",
   "action_id": "R4_SEMANTIC_RECEIPT_ENVELOPE_20261010_V1",
   "date": "2026-10-10",
-  "status": "ACTIVE_PROOF_ONLY__ZERO_FRESH_REALITY__ZERO_TERMINAL_CREDIT",
+  "status": "COMPLETED_PROOF_ONLY__VERIFIED_EXECUTABLE_SEMANTIC_RECEIPT_AND_LIVE_BINDING__ZERO_FRESH_REALITY__ZERO_TERMINAL_CREDIT",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "canonical_base_commit": "63ce24491f2e06ebf4e1dfaea945180d7e73bf83",
   "action_kind": "R4_CERTIFICATE_SEMANTIC_RECEIPT_ENVELOPE_HARDENING",
@@ -52,5 +52,29 @@
     "terminal_credit_delta": 0,
     "acceptance_credit_delta": 0,
     "ownership_credit_delta": 0
+  },
+  "outputs": {
+    "law": "canonical/laws/COVERAGE_COMPLETENESS_ROOT_THEOREM_LAW_V1.md",
+    "root_theorem": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_THEOREM_V1.json",
+    "claim_scope": "canonical/governance/COVERAGE_COMPLETENESS_CLAIM_SCOPE_V1.json",
+    "live_binding": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_THEOREM_LIVE_BINDING_V1.json",
+    "root_registry": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_CERTIFICATE_REGISTRY_V1.json",
+    "root_registry_pointer": "canonical/governance/CURRENT_COVERAGE_COMPLETENESS_ROOT_CERTIFICATES.json",
+    "root_registry_guard": "canonical/runtime/coverage_root_certificate_registry_guard_v1.py",
+    "semantic_receipt_verifier": "canonical/runtime/coverage_root_semantic_receipt_v1.py",
+    "root_theorem_falsifier": "canonical/runtime/root_theorem_falsifier_v1.py",
+    "live_binding_validator": "canonical/runtime/root_theorem_live_binding_v1.py",
+    "terminal_authority": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+    "verification": "canonical/verification/R4_SEMANTIC_RECEIPT_AND_LIVE_BINDING_VERIFICATION_20261010_V1.json",
+    "regression": "canonical/regressions/2026-10-10_R4_SEMANTIC_RECEIPT_AUTHORITY.json",
+    "reasoning": "canonical/reasoning/2026-10-10_R4_SEMANTIC_RECEIPT_AUTHORITY_V1.json",
+    "pull_request": 3870
+  },
+  "verification": {
+    "remote_exact_byte_integration": "78_PASSED__0_FAILED",
+    "current_registry_proved_roots": 0,
+    "current_registry_open_roots": 3,
+    "current_r4_proof_closure": false,
+    "terminal_credit_delta": 0
   }
 }
