@@ -3,7 +3,8 @@
 
 This module does not grant CC_R3 merely because a row has a route description.
 It verifies the exact proof obligations already declared by
-ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V3.json:
+the current shared-gap binding named by
+CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json:
 
 Gap A admits exactly one of two sound modes:
   - TERMINAL_COMMON_POLICY: a currently available authenticated scope-complete
@@ -31,7 +32,7 @@ from typing import Any, Mapping, Sequence
 
 ROOT = Path(__file__).resolve().parents[2]
 MANIFEST_PATH = ROOT / "canonical/governance/ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_20261010_V2.json"
-BINDING_PATH = ROOT / "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V4.json"
+CLASSIFIER_RELATIVE_PATH = "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json"
 
 SCHEMA = "PROJECT_BRAIN_ESCAPE_PROGRESS_SHARED_GAP_EXECUTABLE_AUDIT_V3"
 GAP_A = "GAP_A_ACQUISITION_TOTALITY"
@@ -50,6 +51,57 @@ def _canon(value: Any) -> bytes:
 
 def _sha(value: Any) -> str:
     return hashlib.sha256(_canon(value)).hexdigest()
+
+
+def _current_binding_path(root: Path = ROOT) -> Path:
+    """Resolve one current Gap A/B binding from the live residual classifier.
+
+    The current classifier is a mutable pointer by path identity. Both shared
+    Escape gaps must name the same versioned binding. Any absence, disagreement,
+    path escape, symlink, or non-file fails closed instead of silently auditing
+    a historical contract.
+    """
+    root = Path(root).resolve(strict=True)
+    classifier_path = (root / CLASSIFIER_RELATIVE_PATH).resolve(strict=True)
+    classifier_path.relative_to(root)
+    doc = json.loads(classifier_path.read_text(encoding="utf-8"))
+    rows = doc.get("classifications")
+    if not isinstance(rows, Sequence) or isinstance(rows, (str, bytes)):
+        raise ValueError("CURRENT_RESIDUAL_CLASSIFICATIONS_INVALID")
+
+    bindings: dict[str, str] = {}
+    for row in rows:
+        if not isinstance(row, Mapping):
+            continue
+        rid = str(row.get("residual_id") or "")
+        if rid not in {GAP_A.replace("GAP_A_", "ESCAPE_GAP_A_"), GAP_B.replace("GAP_B_", "ESCAPE_GAP_B_")}:
+            continue
+        value = row.get("existing_binding")
+        if not isinstance(value, str) or not value.strip():
+            raise ValueError("CURRENT_GAP_BINDING_MISSING:" + rid)
+        bindings[rid] = value.strip()
+
+    expected_ids = {
+        "ESCAPE_GAP_A_ACQUISITION_TOTALITY",
+        "ESCAPE_GAP_B_INTERNAL_ROUTE_STRICT_PROGRESS",
+    }
+    if set(bindings) != expected_ids:
+        missing = ",".join(sorted(expected_ids - set(bindings)))
+        raise ValueError("CURRENT_GAP_BINDING_CLASSIFICATION_MISSING:" + missing)
+    if len(set(bindings.values())) != 1:
+        raise ValueError("CURRENT_GAP_BINDING_DIVERGENCE")
+
+    rel = Path(next(iter(bindings.values())))
+    if rel.is_absolute() or ".." in rel.parts:
+        raise ValueError("CURRENT_GAP_BINDING_PATH_INVALID")
+    unresolved = root / rel
+    if unresolved.is_symlink():
+        raise ValueError("CURRENT_GAP_BINDING_SYMLINK_FORBIDDEN")
+    target = unresolved.resolve(strict=True)
+    target.relative_to(root)
+    if not target.is_file():
+        raise ValueError("CURRENT_GAP_BINDING_NOT_FILE")
+    return target
 
 
 def _nonempty_strings(value: Any) -> list[str] | None:
@@ -314,9 +366,15 @@ def audit_repo(
     root: Path = ROOT,
     row_proofs: Mapping[str, Mapping[str, Any]] | None = None,
 ) -> dict[str, Any]:
-    manifest = json.loads((root / MANIFEST_PATH.relative_to(ROOT)).read_text(encoding="utf-8"))
-    binding = json.loads((root / BINDING_PATH.relative_to(ROOT)).read_text(encoding="utf-8"))
-    return audit(manifest, binding, row_proofs=row_proofs)
+    root = Path(root).resolve(strict=True)
+    manifest_path = (root / MANIFEST_PATH.relative_to(ROOT)).resolve(strict=True)
+    manifest_path.relative_to(root)
+    binding_path = _current_binding_path(root)
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    binding = json.loads(binding_path.read_text(encoding="utf-8"))
+    out = audit(manifest, binding, row_proofs=row_proofs)
+    out["current_binding_path"] = binding_path.relative_to(root).as_posix()
+    return out
 
 
 if __name__ == "__main__":
