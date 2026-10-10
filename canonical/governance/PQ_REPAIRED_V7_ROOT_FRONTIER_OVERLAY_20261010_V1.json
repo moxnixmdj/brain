@@ -1,0 +1,31 @@
+{
+  "schema": "PROJECT_BRAIN_PQ_REPAIRED_V7_ROOT_FRONTIER_OVERLAY_V1",
+  "status": "ACTIVE__REPAIRED_V7__R1_R2_VERIFIED__R3_NEXT",
+  "base": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V7_SAME_SUBJECT_ROOT_BINDING_WORKLIST_20261010_V8.json",
+    "git_blob_sha": "05dea41991d4f21d139ca5d4c3db9eba746a71c2"
+  },
+  "subject": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V7_DECLARED_SYSTEM_SUBJECT_20261010_V7.json",
+    "git_blob_sha": "5609e3ceafce91ff9cf4e7de6b0f208e46a22f33",
+    "subject_sha256": "7e2904f3205b283a3a0f9e7583b36599cc2da4a96fd31b1777c226ca5c16c9e4",
+    "components": 23
+  },
+  "bindings": {
+    "R1": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_R1_ROOT_SUBJECT_BINDING_20261010_V5.json",
+      "git_blob_sha": "0d66650ede318cf135420b6087953ec5d0bd7a7b",
+      "verification_git_blob_sha": "2172227518d7f12ef0e67999bc7360f7af1afed1"
+    },
+    "R2": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_R2_ROOT_SUBJECT_BINDING_20261010_V3.json",
+      "git_blob_sha": "6095feb4dbe2e98742832334af8836444dfbb8b5",
+      "verification_git_blob_sha": "6c6bf2eca2cc0b24228d06ac977c63a0e7e3fb7a"
+    }
+  },
+  "verified_root_subject_binding_count": 2,
+  "next_root_id": "R3_REALIZATION_OBSERVATION",
+  "composition_admissible": false,
+  "precedence": "OVERRIDE_SUBJECT_AND_R1_R2_ONLY__INHERIT_R3_R12_AND_ALL_OTHER_FIELDS_FROM_BASE",
+  "terminal_credit_delta": 0
+}
