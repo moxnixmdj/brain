@@ -22,6 +22,7 @@ from canonical.runtime.source_aligned_regcap_context_proof_v1 import (
 )
 from canonical.runtime import regcap_bounded_rival_registry_authority_v1 as regcap_registry
 from canonical.runtime import regcap_context_signature_v1 as regcap_context_signature
+from canonical.runtime import regcap_contextual_resolution_v1 as regcap_contextual_resolution
 from canonical.runtime import tlac_mrel_identity_discriminator_v1 as tlac_mrel_pair
 
 SCHEMA = "PROJECT_BRAIN_DOMAIN_MAPPING_TRUTH_CERTIFICATE_V1"
@@ -157,6 +158,99 @@ def _contextual_refinement(raw_span: str, source_id: str) -> dict[str, Any]:
             "candidate_universe_complete": False,
             "terminal_authority": False,
         }
+
+
+def _bounded_regcap_no_descriptor_context_relation(
+    *,
+    raw_span: str,
+    source_id: str,
+    scope_id: str,
+    target_concept_id: str,
+    required_relation: str,
+    candidate_concepts: Sequence[Mapping[str, Any]],
+) -> dict[str, Any]:
+    """Resolve direct authenticated reg-cap context without requiring descriptor text."""
+    if (
+        scope_id != regcap_registry.SCOPE_ID
+        or required_relation != "LOGICAL_EQUIVALENCE_IN_SCOPE"
+    ):
+        return {
+            "status": "NOT_APPLICABLE",
+            "pass": False,
+            "semantic_truth_authority": False,
+            "terminal_authority": False,
+        }
+
+    supplied_ids = []
+    for i, row in enumerate(candidate_concepts):
+        if not isinstance(row, Mapping):
+            return {
+                "status": "FAIL_CLOSED",
+                "pass": False,
+                "reason": "CANDIDATE_CONCEPT_NOT_OBJECT:" + str(i),
+                "semantic_truth_authority": False,
+                "terminal_authority": False,
+            }
+        cid = str(row.get("concept_id") or "").strip()
+        if not cid:
+            return {
+                "status": "FAIL_CLOSED",
+                "pass": False,
+                "reason": "CANDIDATE_CONCEPT_ID_REQUIRED:" + str(i),
+                "semantic_truth_authority": False,
+                "terminal_authority": False,
+            }
+        supplied_ids.append(cid)
+
+    resolved = regcap_contextual_resolution.resolve_authenticated_regcap_scope(
+        raw_span,
+        start=0,
+        end=len(raw_span),
+        task_scope_id=scope_id,
+        candidate_ids=supplied_ids,
+    )
+    if resolved.get("status") == "FAIL_CLOSED":
+        return {
+            "status": "FAIL_CLOSED",
+            "pass": False,
+            "reason": "REGCAP_NO_DESCRIPTOR_CONTEXT_FAIL_CLOSED",
+            "context_result": resolved,
+            "semantic_truth_authority": False,
+            "terminal_authority": False,
+        }
+    if (
+        resolved.get("pass") is not True
+        or resolved.get("concept_identity_authority") is not True
+        or not resolved.get("selected_concept_id")
+    ):
+        return {
+            "status": "OPEN__BOUNDED_NO_DESCRIPTOR_CONTEXT_RELATION_NOT_RESOLVED",
+            "pass": False,
+            "context_result": resolved,
+            "semantic_truth_authority": False,
+            "terminal_authority": False,
+        }
+
+    selected = str(resolved["selected_concept_id"])
+    return {
+        "status": "PASS__AUTHENTICATED_BOUNDED_NO_DESCRIPTOR_CONTEXT_RELATION",
+        "pass": True,
+        "predicate_truth": "TRUE" if selected == target_concept_id else "FALSE",
+        "selected_concept_id": selected,
+        "target_concept_id": target_concept_id,
+        "required_relation": required_relation,
+        "registry_scope_id": regcap_registry.SCOPE_ID,
+        "context_result": resolved,
+        "semantic_truth_authority": True,
+        "global_semantic_identity_authority": False,
+        "open_world_candidate_set_complete": False,
+        "terminal_authority": False,
+        "boundary": (
+            "LOGICAL_EQUIVALENCE_ONLY_INSIDE_THE_EXACT_AUTHENTICATED_THREE_RIVAL_"
+            "REGISTRY_SCOPE_FROM_DIRECT_BOUND_CONTEXT__NO_GLOBAL_SEMANTIC_IDENTITY_"
+            "OR_OPEN_WORLD_COMPLETENESS"
+        ),
+    }
 
 
 def _bounded_regcap_context_relation(
@@ -619,6 +713,60 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
             "terminal_credit_delta": 0,
             "boundary": (
                 "AUTHENTICATED_TLAC_MREL_PAIR_TASK_SCOPE_ONLY__"
+                "LOGICAL_EQUIVALENCE_IN_SCOPE_ONLY__NO_GLOBAL_SEMANTIC_IDENTITY__"
+                "NO_OPEN_WORLD_CANDIDATE_COMPLETENESS_OR_TERMINAL_AUTHORITY"
+            ),
+        }
+
+    bounded_no_descriptor = _bounded_regcap_no_descriptor_context_relation(
+        raw_span=raw_span,
+        source_id=source_id,
+        scope_id=scope_id,
+        target_concept_id=target,
+        required_relation=required,
+        candidate_concepts=candidates,
+    )
+    if bounded_no_descriptor.get("status") == "FAIL_CLOSED":
+        return _fail(
+            "BOUNDED_REGCAP_NO_DESCRIPTOR_CONTEXT_FAIL_CLOSED",
+            bounded_no_descriptor=bounded_no_descriptor,
+        )
+    if bounded_no_descriptor.get("pass") is True:
+        truth = str(bounded_no_descriptor.get("predicate_truth") or "")
+        if truth not in {"TRUE", "FALSE"}:
+            return _fail(
+                "BOUNDED_REGCAP_NO_DESCRIPTOR_CONTEXT_TRUTH_INVALID",
+                bounded_no_descriptor=bounded_no_descriptor,
+            )
+        return {
+            "schema": SCHEMA,
+            "pass": True,
+            "status": (
+                "PASS__BOUNDED_REGCAP_NO_DESCRIPTOR_CONTEXT_RELATION_PROVED_TRUE"
+                if truth == "TRUE"
+                else "PASS__BOUNDED_REGCAP_NO_DESCRIPTOR_CONTEXT_RELATION_PROVED_FALSE"
+            ),
+            "predicate_id": checked,
+            "requested_predicate_id": requested_id,
+            "requested_predicate_id_authority": False,
+            "predicate_truth": truth,
+            "target_concept_id": target,
+            "required_relation": required,
+            "source_id": source_id,
+            "source_sha256": sha256(raw_span.encode("utf-8")).hexdigest(),
+            "scope_id": scope_id,
+            "mapping_result": {},
+            "authenticated_context_refinement": contextual_refinement,
+            "bounded_no_descriptor_context_relation": bounded_no_descriptor,
+            "truthful_precommitment_observation": True,
+            "semantic_truth_authority": True,
+            "policy_adequacy_authority": False,
+            "db_admission_authority": False,
+            "u_empty_authority": False,
+            "terminal_authority": False,
+            "terminal_credit_delta": 0,
+            "boundary": (
+                "AUTHENTICATED_THREE_RIVAL_REGISTRY_SCOPE_DIRECT_CONTEXT_ONLY__"
                 "LOGICAL_EQUIVALENCE_IN_SCOPE_ONLY__NO_GLOBAL_SEMANTIC_IDENTITY__"
                 "NO_OPEN_WORLD_CANDIDATE_COMPLETENESS_OR_TERMINAL_AUTHORITY"
             ),
