@@ -133,5 +133,49 @@ class Tests(unittest.TestCase):
         self.assertEqual(out["terminal_credit_delta"], 0)
 
 
+    def test_this_determiner_and_us_crystallizes_compile(self):
+        out = run(
+            "This cushion is released when system-wide risk crystallizes or dissipates."
+        )
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(out["observation_id"], "FUNCTIONAL_SIGNATURE_CLASS")
+        self.assertEqual(
+            out["outcome"],
+            "RELEASE_WHEN_SYSTEM_WIDE_RISK_CRYSTALLISES_OR_DISSIPATES",
+        )
+
+    def test_us_recapitalization_spelling_compiles(self):
+        out = run(
+            "This capacity provides loss-absorbing and recapitalization capacity "
+            "available in resolution for a failing G-SIB."
+        )
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(out["observation_id"], "FUNCTIONAL_SIGNATURE_CLASS")
+        self.assertEqual(
+            out["outcome"],
+            "G_SIB_LOSS_ABSORPTION_RECAPITALISATION_IN_RESOLUTION",
+        )
+
+    def test_this_determiner_numeric_signature_compiles(self):
+        out = run("This cushion is 2.5% CET1 above the regulatory minimum.")
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(out["observation_id"], "STRUCTURAL_SIGNATURE_CLASS")
+
+    def test_system_wide_risk_dissipates_only_remains_unresolved(self):
+        out = run("The cushion is released when system-wide risk dissipates.")
+        self.assertFalse(out["pass"])
+
+    def test_bare_numeric_np_remains_unresolved(self):
+        out = run("A 2.5% CET1 buffer above the regulatory minimum.")
+        self.assertFalse(out["pass"])
+
+    def test_bare_tlac_np_remains_unresolved(self):
+        out = run(
+            "Loss-absorbing and recapitalisation capacity available in resolution "
+            "for a G-SIB."
+        )
+        self.assertFalse(out["pass"])
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
