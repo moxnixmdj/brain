@@ -1,0 +1,211 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_CONSERVATIVE_PROFILE_V26_SUCCESSOR_EXECUTION_V1",
+  "status": "FRESH_SUCCESSOR_EXECUTION__CONSERVATIVE_SPENT_NEXT30_PROFILE_V26__ZERO_CAPABILITY_CREDIT",
+  "recorded_at": "2026-10-10",
+  "predecessor": {
+    "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_SECONDARY_PROFILE_V25_SUCCESSOR_EXECUTION_20261010_V1.json",
+    "independent_verification": "canonical/evidence/BYTES_EXACT_SYMBOLIC_SECONDARY_PROFILE_V25_INDEPENDENT_VERIFICATION_20261010_V1.json",
+    "package_raw_python_source_bytes": 1992901,
+    "B_exec_raw_python_source_bytes": 1995661,
+    "manifest_sha256": "7d633d565a52b8a84e3836aadf496e2d1d9af667f94b1876d5dd6b28cc106a9b",
+    "fresh_qualification": "8740/8740"
+  },
+  "selection": {
+    "id": "CONSERVATIVE_SPENT_NEXT30_DOMAIN_EXCLUSION_PROFILE_V26",
+    "corpus": "QUAL_SUCCESSOR_NEXT30_20261010_V1",
+    "spent_cases": 8740,
+    "method": "Instrument the 220 largest surviving executable function bodies, replay all spent NEXT30 cases, rank zero-hit bodies, then admit only a conservative subset whose semantic input domains are structurally outside the bounded exact-symbolic route.",
+    "profiled_function_bodies": 220,
+    "profiled_body_bytes": 472319,
+    "zero_hit_function_bodies": 47,
+    "zero_hit_body_bytes": 73132,
+    "selected_function_bodies": 26,
+    "selected_pre_stub_body_bytes": 45550,
+    "selected": [
+      [
+        "sympy/assumptions/ask_generated.py",
+        "get_known_facts_dict"
+      ],
+      [
+        "sympy/assumptions/ask_generated.py",
+        "get_all_known_facts"
+      ],
+      [
+        "sympy/assumptions/ask_generated.py",
+        "get_all_known_number_facts"
+      ],
+      [
+        "sympy/assumptions/ask_generated.py",
+        "get_all_known_matrix_facts"
+      ],
+      [
+        "sympy/logic/boolalg.py",
+        "_simplify_patterns_and"
+      ],
+      [
+        "sympy/logic/boolalg.py",
+        "_simplify_patterns_and3"
+      ],
+      [
+        "sympy/logic/boolalg.py",
+        "_simplify_patterns_or"
+      ],
+      [
+        "sympy/logic/boolalg.py",
+        "_simplify_patterns_xor"
+      ],
+      [
+        "sympy/assumptions/assume.py",
+        "PredicateMeta.__doc__"
+      ],
+      [
+        "sympy/functions/special/polynomials.py",
+        "jacobi.eval"
+      ],
+      [
+        "sympy/functions/special/polynomials.py",
+        "gegenbauer.eval"
+      ],
+      [
+        "sympy/functions/elementary/trigonometric.py",
+        "acsc.eval"
+      ],
+      [
+        "sympy/functions/elementary/trigonometric.py",
+        "ReciprocalTrigonometricFunction.eval"
+      ],
+      [
+        "sympy/functions/elementary/complexes.py",
+        "_polarify"
+      ],
+      [
+        "sympy/functions/elementary/complexes.py",
+        "_unpolarify"
+      ],
+      [
+        "sympy/functions/elementary/complexes.py",
+        "polar_lift.eval"
+      ],
+      [
+        "sympy/functions/elementary/complexes.py",
+        "periodic_argument.eval"
+      ],
+      [
+        "sympy/functions/combinatorial/numbers.py",
+        "_nP"
+      ],
+      [
+        "sympy/functions/combinatorial/numbers.py",
+        "bernoulli.eval"
+      ],
+      [
+        "sympy/functions/special/gamma_functions.py",
+        "gamma.eval"
+      ],
+      [
+        "sympy/functions/special/gamma_functions.py",
+        "polygamma.eval"
+      ],
+      [
+        "sympy/functions/elementary/exponential.py",
+        "LambertW.eval"
+      ],
+      [
+        "sympy/functions/elementary/hyperbolic.py",
+        "asinh.eval"
+      ],
+      [
+        "sympy/simplify/hyperexpand.py",
+        "FormulaCollection.lookup_origin"
+      ],
+      [
+        "sympy/simplify/simplify.py",
+        "kroneckersimp"
+      ],
+      [
+        "mpmath/libmp/gammazeta.py",
+        "glaisher_fixed"
+      ]
+    ],
+    "explicit_safety_exclusions": [
+      "sympy.core.intfunc.integer_log: previously counterexample-proven necessary",
+      "sympy.core.numbers.Number.__divmod__: previously counterexample-proven necessary",
+      "AlgebraicNumber/root-isolation paths: retained for rare exact-root behavior",
+      "mpmath low-level arithmetic/conversion and core evalf: retained despite zero hits",
+      "gruntz/limit-leading-term paths: retained because limits are in-contract",
+      "polynomial intervals/reduced and root refinement: retained because hidden roots paths remain plausible"
+    ],
+    "profile_replay": "8740/8740"
+  },
+  "measured_candidate": {
+    "status": "PHYSICALLY_REWRITTEN_RESEARCH_CANDIDATE__NOT_OPUS_PROMOTED",
+    "python_files": 277,
+    "package_raw_python_source_bytes": 1949457,
+    "router_raw_python_source_bytes": 2760,
+    "B_exec_raw_python_source_bytes": 1952217,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "raw_improvement_vs_v25_bytes": 43444,
+    "manifest_sha256": "e5d91392e4ef3c962561d3c7f9bdf9bd8dc1a4474ba6ab5f48db71a7c8dcc507",
+    "durable_source_archive_bytes": 294580,
+    "durable_source_archive_sha256": "1c1a088b84405b0cc583f44ab175441f6506d665f2ef78ec46d172a7d65f3f5b",
+    "archive_size_comparability_to_v25": true,
+    "archive_improvement_vs_v25_bytes": 4684
+  },
+  "qualification": {
+    "spent_NEXT30": {
+      "id": "QUAL_SUCCESSOR_NEXT30_20261010_V1",
+      "cases": 8740,
+      "corpus_sha256": "4859272e27dc150cf91807f69d2850342856befe05e04ac0405966f71740764c",
+      "candidate": "8740/8740",
+      "spent": true
+    },
+    "fresh_NEXT31": {
+      "id": "QUAL_SUCCESSOR_NEXT31_20261010_V1",
+      "seed": 5567764,
+      "per_operation_budget": 780,
+      "cases": 8970,
+      "corpus_sha256": "ed5f78856d2621be9293a509aa21486ad82eef794453f4ce4360755222086f53",
+      "stock_donor_expected_outputs": "8970/8970",
+      "candidate": "8970/8970",
+      "independent_copy": "8970/8970",
+      "archive_replay": "8970/8970",
+      "spent": true
+    }
+  },
+  "reproducibility": {
+    "predecessor_reconstruction": "canonical/research/bytes/tools/rebuild_candidate_v25.py",
+    "transform": "canonical/research/bytes/tools/conservative_profile_prune_v26.py",
+    "successor_reconstruction": "canonical/research/bytes/tools/rebuild_candidate_v26.py",
+    "route": "canonical/research/bytes/tools/exact_symbolic_route_v1.py",
+    "semantic_digest": "canonical/research/bytes/tools/semantic_digest_v1.py",
+    "qualification_generator": "canonical/research/bytes/tools/generate_qualification_v1.py"
+  },
+  "durable_artifact": {
+    "library_status": "PERSISTED_IN_CHATGPT_LIBRARY",
+    "library_file_id": "libfile_0c097cde06f08191806f1f1c1f7eb739",
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V26_SUCCESSOR_20261010_V1.tar.xz",
+    "bytes": 294580,
+    "sha256": "1c1a088b84405b0cc583f44ab175441f6506d665f2ef78ec46d172a7d65f3f5b",
+    "extracted_source_identity": "278/278 files"
+  },
+  "next_frozen_qualification": {
+    "id": "QUAL_SUCCESSOR_NEXT32_20261010_V1",
+    "seed": 5656854,
+    "per_operation_budget": 800,
+    "cases": 9200,
+    "corpus_sha256": "eee5966b50fddebd36bf7d1578985925fcb5950c73d7e68e5c64c7e43aa6c866",
+    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT32_20261010_V1.jsonl",
+    "library_file_id": "libfile_e85a8843517c8191bea21eea851a7f24",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT"
+  },
+  "truth_boundary": [
+    "MEASURED: exact V26 is 43,444 raw Python-source bytes smaller than V25.",
+    "MEASURED: instrumented V25 passes spent NEXT30 8,740/8,740 while exposing 47 zero-hit large bodies.",
+    "MEASURED: conservative V26 passes spent NEXT30 8,740/8,740 and fresh NEXT31 8,970/8,970 on candidate, independent copy, and extracted archive.",
+    "INFERRED: selected V26 bodies are outside the tested bounded route and structurally outside its generated input domains; finite profile non-use remains non-universal.",
+    "NOT CLAIMED: out-of-scope behavior preservation, universal SymPy correctness, absolute information-theoretic minimum, or Opus-family promotion.",
+    "PROMOTION CREDIT: 0."
+  ],
+  "next_action": "Rerank exact V26 using spent NEXT31 only. Keep NEXT32 untouched until a new physical cut is frozen.",
+  "promotion_credit": 0
+}
