@@ -64,8 +64,14 @@
     "admitted_v2_chain_count": 24,
     "claim_scope_construction_required_count": 0,
     "property_truth_ready_count": 24,
-    "property_truth_closed_count": 0,
-    "next": "R10_UPSTREAM_DEFEATER_DETECTION_AND_UNDERLYING_FACT_TRUTH_COMPLETENESS__THEN_GENERALIZE_PROPERTY_TRUTH_PATTERNS_ACROSS_REMAINING_LEAVES"
+    "property_truth_closed_count": 1,
+    "next": "VERIFY_R10_SEMANTIC_AND_REMAINING_PROPERTY_TRUTH_LEAVES__RUN_FULL_CURRENT_MAIN_REGRESSION_IN_PARALLEL__NO_SCOPE_RESEARCH_UNLESS_BATCH_DRIFTS",
+    "property_truth_open_count": 23,
+    "verified_property_truth_leaf_ids": [
+      "PQ::R10_ANALYSIS_DECISION::EXECUTION"
+    ],
+    "r10_execution_property_truth_verification": "canonical/verification/PROFESSIONAL_QUALITY_R10_EXECUTION_PROPERTY_TRUTH_INDEPENDENT_VERIFY_20261010_V1.json",
+    "r10_execution_property_truth_verification_git_blob_sha": "cfa1f178e149dbd987a52e9825dc67960dbade4c"
   },
   "professional_scope_reconciliation": {
     "path": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_SCOPE_BATCH_VERIFY_20261010_V1.json",
