@@ -1,0 +1,70 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_ROOT_DECISION_GATE_REFINEMENT_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__BOUNDED_TERMINAL_ROOT_GATE_REFINEMENT_VERIFIED",
+  "subject_id": "terminal-root-decision-gate-v1",
+  "assurance_level": "FINITE_ABSTRACTION_TERMINAL_ROOT_GATE_REFINEMENT",
+  "exact_bindings": {
+    "abstract_spec": {
+      "path": "canonical/governance/TERMINAL_ROOT_DECISION_GATE_ABSTRACT_SPEC_20261010_V1.json",
+      "git_blob_sha": "f74d8be2c961c241152c6e2c05716f84512c4122"
+    },
+    "concrete_gate": {
+      "path": "canonical/runtime/terminal_root_decision_gate_v1.py",
+      "git_blob_sha": "6f546f657900405c628c1eb3575bc1e4ac220aeb"
+    },
+    "proof_checker": {
+      "path": "canonical/runtime/terminal_root_decision_gate_refinement_proof_v1.py",
+      "git_blob_sha": "7f4bfccf7bfc085daa6a4236309d718831278631"
+    },
+    "proof_test": {
+      "path": "canonical/tests/test_terminal_root_decision_gate_semantic_refinement_v1.py",
+      "git_blob_sha": "05f433efbcda777ddf1b76ce6631010e17bc9209"
+    }
+  },
+  "independent_execution": {
+    "carrier": "LOCAL_SANDBOX_FROM_EXACT_SPRITE_MATERIALIZED_BYTES",
+    "source_sprite": "brain-live-runtime-v1-verify-20261008",
+    "source_sprite_id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13",
+    "gate_blob_recomputed": "6f546f657900405c628c1eb3575bc1e4ac220aeb",
+    "check_count": 16,
+    "failures": 0,
+    "checks": [
+      "ALLOWED_PROOF_KINDS_EXACT",
+      "NO_TERMINAL_TRUE_LITERAL",
+      "NO_NONZERO_TERMINAL_CREDIT_LITERAL",
+      "SINGLE_SUCCESS_STATUS",
+      "FULL_SCOPE_DB_COVER_SUCCESS_AND_MISSING_PREMISE_REJECTION",
+      "TARGET_ESCAPE_NONOCCUPANCY_SUCCESS_AND_MISSING_PREMISE_REJECTION",
+      "GENERATOR_CLOSURE_SUCCESS_AND_MISSING_PREMISE_REJECTION",
+      "SELECTED_COVER_COMPLEMENT_SUCCESS_AND_MISSING_PREMISE_REJECTION",
+      "DECLARATION_OVERRIDE_REJECTED",
+      "PROOF_BYTE_DRIFT_REJECTED",
+      "INDEPENDENT_VERIFIER_REQUIRED",
+      "FAKE_HEX_BINDINGS_REJECTED"
+    ]
+  },
+  "theorem": {
+    "refinement_verified": true,
+    "legal_success_route_count": 4,
+    "content_addressed_proof_required": true,
+    "independent_verifier_required": true,
+    "declaration_cannot_override_bound_proof": true,
+    "terminal_nonamplification": true,
+    "d_finality_preserved": true
+  },
+  "authority": {
+    "semantic_truth_authority": false,
+    "execution_authority": false,
+    "acceptance_authority": false,
+    "terminal_authority": false,
+    "terminal_credit_delta": 0
+  },
+  "nonclaims": [
+    "DOES_NOT_PROVE_BOUND_PROOF_ARTIFACTS_CORRECT_BY_ITSELF",
+    "DOES_NOT_PROVE_D_FINALITY",
+    "DOES_NOT_SET_GLOBAL_TERMINAL_TRUE",
+    "DOES_NOT_CLOSE_NON_SELECTED_RUNTIME_REFINEMENT_COVERAGE_GLOBALLY",
+    "DOES_NOT_GRANT_TERMINAL_OR_CAPABILITY_CREDIT"
+  ]
+}
