@@ -34,6 +34,7 @@ from canonical.runtime import semantic_ambiguity_control_v1 as semantic_ambiguit
 from canonical.runtime import semantic_relation_control_v2 as semantic_relation
 from canonical.runtime import oewn_decision_sense_control_v1 as oewn_decision_sense
 from canonical.runtime import finance_bounded_concept_registry_verify_v1 as finance_concept_verify
+from canonical.runtime import semantic_relation_authority_registry_v1 as relation_authority_registry
 from canonical.runtime import one_shot_reality_closure_v2 as one_shot_reality_closure
 
 SCHEMA = "PROJECT_BRAIN_UNIFIED_COGNITIVE_FABRIC_V1"
@@ -574,11 +575,26 @@ def run(
                     value,
                     repo_root=ROOT,
                 )
+            relation_edge_verifier = semantic_authority_verifier
+            dag_evidence = payload.get("entailment_dag_evidence")
+            if relation_edge_verifier is None and isinstance(dag_evidence, Mapping):
+                edge_rows = list(dag_evidence.get("entailment_receipts") or [])
+                counter_rows = list(dag_evidence.get("counterexample_receipts") or [])
+                relation_rows = edge_rows + counter_rows
+                if relation_rows and all(
+                    isinstance(row, Mapping)
+                    and row.get("schema") == relation_authority_registry.REQUEST_SCHEMA
+                    for row in relation_rows
+                ):
+                    relation_edge_verifier = lambda value: relation_authority_registry.verify_relation(
+                        value,
+                        repo_root=ROOT,
+                    )
             out = semantic_relation.resolve(
                 payload,
                 concept_identity_verifier=concept_verifier,
                 terminal_signature_verifier=semantic_authority_verifier,
-                relation_edge_verifier=semantic_authority_verifier,
+                relation_edge_verifier=relation_edge_verifier,
             )
         elif mode == "OEWN_DECISION_SENSE":
             out = oewn_decision_sense.resolve(
