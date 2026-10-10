@@ -154,7 +154,7 @@ def verify_authority(
         checked = load_pack(repo_root=repo_root)
         source_results = {}
         required_fragments = {
-            "EURLEX_BRRD_2026_MREL_ARTICLE_45C": {
+            "EBA_MREL_CASE_BY_CASE_2015": {
                 "MREL_NOT_FIXED_FIGURE",
                 "MREL_CASE_BY_CASE_RESOLUTION_AUTHORITY",
             },
@@ -250,7 +250,7 @@ def compile_context(source_text: str, *, source_id: str) -> dict[str, Any]:
                 _MREL_NAME.search(sentence)
                 and _MREL_SETTER.search(sentence)
             )
-            if mrel and _MREL_ARTICLE.search(sentence):
+            if mrel:
                 matches.append({
                     "candidate_id": MREL,
                     "outcome": OUTCOMES[MREL],
@@ -258,7 +258,6 @@ def compile_context(source_text: str, *, source_id: str) -> dict[str, Any]:
                     "evidence": [
                         "MREL_OFFICIAL_NAME",
                         "MREL_RESOLUTION_AUTHORITY_SETTER",
-                        "MREL_ARTICLE_45C",
                     ],
                 })
 
