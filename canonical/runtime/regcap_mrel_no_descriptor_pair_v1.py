@@ -164,7 +164,7 @@ def compile_context(
             selected_candidate_hint=selected,
             observed_outcome=pair.PAIR_OUTCOMES[pid][selected],
             observation_id=pair.OBSERVATION_ID,
-            anchor_context=anchor,
+            anchor_contexts=anchor_rows,
             mrel_context=mrel_context,
             boundary=(
                 "REUSES_ONLY_EXISTING_VERIFIED_NO_DESCRIPTOR_REGCAP_CONTEXT_AND_"
