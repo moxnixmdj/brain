@@ -267,7 +267,11 @@
       "git_blob_sha": "6f546f657900405c628c1eb3575bc1e4ac220aeb",
       "classification": "NON_SELECTED_CURRENT_RUNTIME",
       "refinement_obligation_present": true,
-      "semantic_refinement_status": "UNRESOLVED"
+      "semantic_refinement_status": "PROVED",
+      "semantic_refinement_verification": {
+        "path": "canonical/verification/TERMINAL_ROOT_DECISION_GATE_EXECUTABLE_REFINEMENT_VERIFY_20261010_V1.json",
+        "git_blob_sha": "5f4411c9b321d20b7c520b7a7c7453006bfe2f21"
+      }
     },
     {
       "path": "canonical/runtime/tournament_failure_capability_compiler_v1.py",
@@ -301,5 +305,7 @@
   "coverage_complete": true,
   "semantic_refinement_proved": false,
   "repository_wide_refinement_proved": false,
-  "terminal_credit_delta": 0
+  "terminal_credit_delta": 0,
+  "semantic_refinement_proved_count": 1,
+  "semantic_refinement_unresolved_count": 39
 }
