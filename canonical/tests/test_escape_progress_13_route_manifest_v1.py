@@ -5,7 +5,7 @@ import json
 import unittest
 from pathlib import Path
 
-from canonical.runtime.escape_progress_13_route_manifest_v1 import validate_manifest, validate_repo
+from canonical.runtime.escape_progress_13_route_manifest_v1 import git_blob_sha, validate_manifest, validate_repo
 
 ROOT = Path(__file__).resolve().parents[2]
 MANIFEST = json.loads(
@@ -45,6 +45,30 @@ class EscapeProgress13RouteManifestTests(unittest.TestCase):
         out = validate_manifest(m, CLAIM, reader)
         self.assertFalse(out["pass"])
         self.assertTrue(any("EVIDENCE_BLOB_STALE" in e for e in out["errors"]))
+
+    def test_frozen_snapshot_cannot_bind_declared_mutable_source_pointer(self):
+        m = copy.deepcopy(MANIFEST)
+        row = next(r for r in m["rows"] if r["obligation_id"] == "TB_SCIENCE_GE_58_7")
+        source = row["evidence_semantics"]["source_current_pointer"]
+        row["evidence"] = [source, git_blob_sha(reader(source))]
+        out = validate_manifest(m, CLAIM, reader)
+        self.assertFalse(out["pass"])
+        self.assertTrue(
+            any(
+                "FROZEN_SNAPSHOT_MUST_NOT_BIND_MUTABLE_SOURCE_POINTER" in e
+                for e in out["errors"]
+            )
+        )
+
+    def test_frozen_snapshot_must_bind_manifest_freeze_base(self):
+        m = copy.deepcopy(MANIFEST)
+        row = next(r for r in m["rows"] if r["obligation_id"] == "TB_SCIENCE_GE_58_7")
+        row["evidence_semantics"]["snapshot_base_commit"] = "0" * 40
+        out = validate_manifest(m, CLAIM, reader)
+        self.assertFalse(out["pass"])
+        self.assertTrue(
+            any("FROZEN_SNAPSHOT_BASE_COMMIT_DRIFT" in e for e in out["errors"])
+        )
 
     def test_externality_or_strict_progress_cannot_be_granted_by_manifest(self):
         m = copy.deepcopy(MANIFEST)
