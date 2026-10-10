@@ -1,0 +1,14 @@
+{
+  "schema":"PROJECT_BRAIN_HTTPS_SOURCE_FRAGMENT_PROJECTION_PACK_V2",
+  "source_id":"FIBO_Q2_2026_DEBT_INSTRUMENTS_MARGIN",
+  "url":"https://raw.githubusercontent.com/edmcouncil/fibo/f59157fe156e3d91b1c045222d0a7dc06b7d78a2/SEC/Debt/DebtInstruments.rdf",
+  "retrieval_user_agent":"ProjectBrainSourceProjectionVerifier/2.0",
+  "fragments":[
+    {
+      "fragment_id":"FIBO_MARGIN_CLASS",
+      "section_anchor":"<owl:Class rdf:about=\"&fibo-sec-dbt-dbti;Margin\">",
+      "text":"<rdfs:label>margin</rdfs:label> <skos:definition>a variable that is added to a specified index rate to determine the fully indexed interest rate charged to a borrower on a credit balance</skos:definition> <cmns-av:synonym>spread</cmns-av:synonym>",
+      "max_chars_after_anchor":1200
+    }
+  ]
+}
