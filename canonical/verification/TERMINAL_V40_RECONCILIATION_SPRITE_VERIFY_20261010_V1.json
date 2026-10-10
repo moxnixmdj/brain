@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_V40_RECONCILIATION_SPRITE_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_BLOBS__TB_V13_REPAIR_STATE_AND_ESCAPE_BOUNDARY_COHERENT__RANK19_UNARMED__ZERO_CREDIT",
+  "exact_git_blobs": {
+    "canonical/governance/CURRENT_TB_SCIENCE_EXECUTION.json": "896419d5c85f84af49a886efb02f3f2391c563f3",
+    "canonical/governance/CURRENT_TB_SCIENCE_RUNTIME_GUARD.json": "cdc639c418c6c5a3ee5a1538f4c328e243883261",
+    "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json": "46fb87f5a15e533ee2627cf3b071eca2ac770122",
+    "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V40_RECONCILIATION_20261010_V1.json": "2c1887f1c795e721fb490d7985641aa597fbcdf1",
+    "canonical/governance/REACHED_ESCAPE_STATE_CONSTRUCTION_INVARIANT_BOUNDARY_20261010_V1.json": "f9dd240a5ee9d5da2fa842c8f7f2af00f4c370bd",
+    "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V38.json": "254f91dd9791c7e978917bfcac636289f2c64d0b",
+    "canonical/verification/REACHED_ESCAPE_CONSTRUCTION_INVARIANT_BOUNDARY_SPRITE_VERIFY_20261010_V1.json": "8525ec9f9795e417cda95bd6d6d56421c4184674",
+    "canonical/verification/TB_SCIENCE_PLANNER_V7_ZERO_EXPOSURE_VERIFICATION_20261010_V1.json": "9797cc625e3e33bb905cf23fa6c79f66dc9794db"
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-reached-escape-boundary-verify-20261010",
+    "sprite_id": "sprite-2e517bec-d836-4425-9142-095075b337e9",
+    "workspace": "/home/sprite"
+  },
+  "verified": [
+    "CURRENT_TB_POINTER_BINDS_V38_LEDGER_RUNTIME_GUARD_AND_PLANNER_V7_ZERO_EXPOSURE_RECEIPT",
+    "PLANNER_V7_REAL_PUBLIC_QWEN_VERIFICATION_PASS_AND_ZERO_BENCHMARK_EXPOSURE",
+    "RANK19_TASK_READ_AND_EXECUTION_AUTHORITY_FALSE",
+    "TERMINAL_V40_POINTER_BINDS_EXACT_TB_REPAIR_PROJECTION",
+    "TERMINAL_V40_POINTER_BINDS_EXACT_REACHED_ESCAPE_COUNTEREXAMPLE_BOUNDARY_AND_INDEPENDENT_VERIFICATION",
+    "BROAD_LIVE_FABRIC_ESCAPE_STATE_INVARIANT_FALSIFIED",
+    "MISSION_OWNED_CONSTRUCTOR_INVARIANT_REMAINS_OPEN",
+    "GLOBAL_ESCAPE_PROGRESS_TOTALITY_REMAINS_FALSE",
+    "TERMINAL_CREDIT_DELTA_ZERO"
+  ],
+  "rank19_task_read_authority": false,
+  "rank19_execution_authority": false,
+  "broad_live_fabric_escape_state_invariant_falsified": true,
+  "mission_owned_constructor_invariant_proved": false,
+  "global_escape_progress_totality_proved": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0
+}
