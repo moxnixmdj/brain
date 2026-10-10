@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_LEAF_BINDING_MANIFEST_V1",
   "date": "2026-10-10",
-  "status": "OPEN__24_EXPLICIT_DOMAIN_LEAVES__EXISTING_EVIDENCE_BOUND__ZERO_TERMINAL_CREDIT",
+  "status": "OPEN__24_EXPLICIT_DOMAIN_LEAVES__MUTABLE_POINTER_EVIDENCE_REMOVED__ZERO_TERMINAL_CREDIT",
   "graph": {
     "path": "canonical/governance/PROFESSIONAL_QUALITY_ASSURANCE_GRAPH_20261009_V2.json",
     "git_blob_sha": "03530e29d70206b46b690b33a04c66765ff86ad7"
@@ -12,7 +12,8 @@
   },
   "assurance_snapshot": {
     "path": "canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json",
-    "git_blob_sha": "4380cc1ef36c8886c59a584f9d1c8ecc7beb5601"
+    "git_blob_sha": "4380cc1ef36c8886c59a584f9d1c8ecc7beb5601",
+    "role": "NON_EVIDENTIARY_GENERATION_CONTEXT_ONLY"
   },
   "root_count": 12,
   "semantic_leaf_count": 12,
@@ -184,16 +185,28 @@
       "contract": "Admit typed evidence with provenance, grounding, independence/common-cause accounting, freshness and uncertainty semantics; forbid circular meta-evaluation and type laundering.",
       "existing_evidence": [
         {
-          "path": "canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json",
-          "git_blob_sha": "d4285aee8fe2a150bafde601c9947b5e505f74a2",
-          "status": "CURRENT_UVCK_V2_CANDIDATE__HARDENED__PRIMARY_10_OF_10__INDEPENDENT_STRUCTURAL_11_OF_11__NOT_LIVE_DEFAULT",
-          "supports": "GENERIC_EVIDENCE_DEFEATER_FRESHNESS_AND_GROUNDING_GRAPH_SEMANTICS"
-        },
-        {
           "path": "canonical/verification/UVCK_V2_ASSURANCE_CLOSURE_VERIFY_20261009_V1.json",
           "git_blob_sha": "3f2e92a842f3f709eb2ebc9fabaf869206c80a66",
           "status": "PASS__ISOLATED_STRUCTURAL_12_OF_12__INDEPENDENT_DIFFERENTIAL_11_OF_11__FULL_MAIN_INTEGRATION_NOT_YET_REPLAYED__ZERO_TERMINAL_CREDIT",
           "supports": "INDEPENDENT_STRUCTURAL_ASSURANCE_KERNEL_VERIFICATION"
+        },
+        {
+          "path": "canonical/verification/UVCK_V2_CURRENT_GENERATION_INDEPENDENT_REPLAY_VERIFY_20261009_V1.json",
+          "git_blob_sha": "81f7f070233b6aa1c4b491949a4c3e7aedfafd10",
+          "status": "PASS__PINNED_CURRENT_GENERATION__PYCOMPILE__18_OF_18__ZERO_TERMINAL_CREDIT",
+          "supports": "CURRENT_GENERATION_UVCK_KERNEL_AND_PROFESSIONAL_DEFEATER_BINDING_REPLAY"
+        },
+        {
+          "path": "canonical/verification/UVCK_V2_DEFEATER_ORDER_VERIFY_20261009_V1.json",
+          "git_blob_sha": "1c3428b10a1205e928a87f41a7c16a8a3d17b7ca",
+          "status": "PASS__EXACT_BLOBS__PYCOMPILE__11_OF_11__ZERO_CREDIT",
+          "supports": "ORDER_INDEPENDENT_SUPPORTED_DEFEATER_DOMINANCE"
+        },
+        {
+          "path": "canonical/verification/PROFESSIONAL_QUALITY_80_DEFEATER_UVCK_REPLAY_VERIFY_20261009_V1.json",
+          "git_blob_sha": "c054e9362ce382889e9cca62bdb69e11cea19644",
+          "status": "PASS__EXACT_DOMAIN_BYTES__REPAIRED_UVCK__PYCOMPILE__7_OF_7__80_OF_80_KNOWN_DEFEATERS_BOUND__ZERO_CREDIT",
+          "supports": "KNOWN_PROFESSIONAL_QUALITY_DEFEATERS_EXECUTABLY_BOUND_TO_UVCK"
         }
       ],
       "prior_state": "PARTIAL_STRONG_GENERIC_ASSURANCE",
@@ -312,16 +325,16 @@
       "contract": "Freeze or robustify admissible analysis, aggregation, compensation, risk and normative policy; preserve Pareto/incomparability structure and model multiplicity rather than selecting convenient scalarizations after outcomes are known.",
       "existing_evidence": [
         {
-          "path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
-          "git_blob_sha": "07120fcb2b9ceebb065849122f5a685dd85d7ec6",
-          "status": "ACTIVE_CURRENT_R2_AUTHORITY__V56__THIRTY_FIVE_DIRECT_ROUTES__THIRTY_TWO_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__FIXED_POINT_DIRECT_REENTRY_BOUND__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_REMAINS",
-          "supports": "GENERAL_DECISION_MECHANICS_AND_BOUNDED_ROUTE_FAMILY"
-        },
-        {
           "path": "canonical/verification/ONE_SHOT_DECISION_SUFFICIENT_GATE_VERIFY_20261009_V2.json",
           "git_blob_sha": "188881365c8bb182ebd10cd4bc37aedff8547acd",
           "status": "PASS__FOCUSED_18_OF_18__CURRENT_V1_ADJACENT_7_OF_7__PY_COMPILE_PASS",
           "supports": "DECISION_SUFFICIENCY_GATE_MECHANICS"
+        },
+        {
+          "path": "canonical/verification/UVCK_V2_R2_FIXED_POINT_FOCUSED_REPLAY_20261009_V1.json",
+          "git_blob_sha": "f40576c826a9750f742fb6d6f81e1bbe381f5d6a",
+          "status": "PASS__EXACT_CURRENT_FIXED_POINT_AND_TEST_BYTES__29_OF_29_FOCUSED_PASS__DEPENDENCY_IMPORT_STUBS_ONLY__ZERO_TERMINAL_CREDIT",
+          "supports": "GENERAL_DECISION_FIXED_POINT_CONTROL_LOGIC_AND_FAIL_CLOSED_REVERIFICATION"
         }
       ],
       "prior_state": "PARTIAL_STRONG_DECISION_MECHANICS",
@@ -376,16 +389,28 @@
       "contract": "Require assumption-guarantee composition, same-subject root conjunction, abstraction soundness, independent defeater search, coverage accounting, proof-search honesty, meta-controller falsification and nonvacuity.",
       "existing_evidence": [
         {
-          "path": "canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json",
-          "git_blob_sha": "d4285aee8fe2a150bafde601c9947b5e505f74a2",
-          "status": "CURRENT_UVCK_V2_CANDIDATE__HARDENED__PRIMARY_10_OF_10__INDEPENDENT_STRUCTURAL_11_OF_11__NOT_LIVE_DEFAULT",
-          "supports": "GENERIC_ASSURANCE_COMPOSITION_AND_DEFEATER_STRUCTURE"
-        },
-        {
           "path": "canonical/verification/UVCK_V2_ASSURANCE_CLOSURE_VERIFY_20261009_V1.json",
           "git_blob_sha": "3f2e92a842f3f709eb2ebc9fabaf869206c80a66",
           "status": "PASS__ISOLATED_STRUCTURAL_12_OF_12__INDEPENDENT_DIFFERENTIAL_11_OF_11__FULL_MAIN_INTEGRATION_NOT_YET_REPLAYED__ZERO_TERMINAL_CREDIT",
           "supports": "INDEPENDENT_STRUCTURAL_DIFFERENTIAL_VERIFICATION"
+        },
+        {
+          "path": "canonical/verification/UVCK_V2_CURRENT_GENERATION_INDEPENDENT_REPLAY_VERIFY_20261009_V1.json",
+          "git_blob_sha": "81f7f070233b6aa1c4b491949a4c3e7aedfafd10",
+          "status": "PASS__PINNED_CURRENT_GENERATION__PYCOMPILE__18_OF_18__ZERO_TERMINAL_CREDIT",
+          "supports": "CURRENT_GENERATION_UVCK_KERNEL_AND_PROFESSIONAL_DEFEATER_BINDING_REPLAY"
+        },
+        {
+          "path": "canonical/verification/UVCK_V2_DEFEATER_ORDER_VERIFY_20261009_V1.json",
+          "git_blob_sha": "1c3428b10a1205e928a87f41a7c16a8a3d17b7ca",
+          "status": "PASS__EXACT_BLOBS__PYCOMPILE__11_OF_11__ZERO_CREDIT",
+          "supports": "ORDER_INDEPENDENT_SUPPORTED_DEFEATER_DOMINANCE"
+        },
+        {
+          "path": "canonical/verification/PROFESSIONAL_QUALITY_80_DEFEATER_UVCK_REPLAY_VERIFY_20261009_V1.json",
+          "git_blob_sha": "c054e9362ce382889e9cca62bdb69e11cea19644",
+          "status": "PASS__EXACT_DOMAIN_BYTES__REPAIRED_UVCK__PYCOMPILE__7_OF_7__80_OF_80_KNOWN_DEFEATERS_BOUND__ZERO_CREDIT",
+          "supports": "KNOWN_PROFESSIONAL_QUALITY_DEFEATERS_EXECUTABLY_BOUND_TO_UVCK"
         }
       ],
       "prior_state": "PARTIAL_STRONG_META_STRUCTURE",
@@ -416,5 +441,6 @@
     "incremental_spend_usd": 0,
     "terminal_credit_delta": 0
   },
-  "terminal_authority": false
+  "terminal_authority": false,
+  "evidence_policy": "PREFER_IMMUTABLE_CONTENT_ADDRESSED_VERIFICATION_RECEIPTS_OVER_MUTABLE_CURRENT_POINTERS_WHEN_THE_RECEIPT_PROVES_THE_REQUIRED_MECHANISM"
 }
