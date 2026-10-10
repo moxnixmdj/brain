@@ -318,5 +318,28 @@
     "top5_fraction": 1,
     "top10_fraction": 1,
     "cases": 6
+  },
+  "bytes_minimization_control": {
+    "status": "ACTIVE__ZERO_CAPABILITY_CREDIT_FROM_RESEARCH_CHECKPOINT_ALONE",
+    "law": "canonical/laws/BYTES_RESOURCE_BOUNDED_MINIMUM_MECHANISM_LAW_V1.md",
+    "white_box_law": "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V1.md",
+    "current_research_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_DONOR_SLICE_CHECKPOINT_20261010_V1.json",
+    "objective": "MINIMUM_RESOURCE_FEASIBLE_EXECUTABLE_DESCRIPTION_CONDITIONAL_ON_ALREADY_OWNED_BRAIN_SUBSTRATE",
+    "accounting": [
+      "B_EXEC",
+      "B_VERIFY",
+      "B_PROOF",
+      "B_JIT"
+    ],
+    "search_order": [
+      "ZERO_NEW_BYTES_REUSE",
+      "TINY_KEY_ELICITATION",
+      "SMALL_DELTA",
+      "TAUGHT_RESIDUAL",
+      "LARGER_MODULE_ONLY_IF_REQUIRED"
+    ],
+    "global_rule": "OPTIMIZE_JOINT_DEPENDENCY_CLOSED_MECHANISM_COVER__COUNT_SHARED_SUBSTRATE_ONCE",
+    "current_exact_symbolic_bottleneck": "POLYS__FACTOR__COEFFICIENT__EXACT_ROOTS_DEGREE_LE_4",
+    "truth_boundary": "CHECKPOINT_VALUES_ARE_PERSISTED_SOURCE_REPORTS__NO_NEW_PROMOTION_CREDIT_WITHOUT_INDEPENDENT_ROUTE_VERIFICATION"
   }
 }
