@@ -9,10 +9,10 @@ from canonical.runtime import professional_quality_scoped_evidence_v1 as scoped
 
 
 class ProfessionalQualityScopedEvidenceV1Tests(unittest.TestCase):
-    def test_current_r1_r3_r4_r5_r6_r7_r10_and_r11_scopes_are_admitted_without_global_credit(self):
+    def test_current_r1_r2_r3_r4_r5_r6_r7_r10_and_r11_scopes_are_admitted_without_global_credit(self):
         out = scoped.evaluate()
         self.assertTrue(out["pass"], out)
-        self.assertEqual(out["admitted_scope_count"], 8, out)
+        self.assertEqual(out["admitted_scope_count"], 9, out)
         self.assertEqual(out["rejected_scope_count"], 0, out)
         self.assertFalse(out["global_leaf_closure"])
         self.assertFalse(out["global_root_closure"])
@@ -361,6 +361,50 @@ class ProfessionalQualityScopedEvidenceV1Tests(unittest.TestCase):
             if x["root_id"] == "R1_TARGET_SPECIFICATION"
         )
         self.assertIn("CONTRACT_SCHEMA_STALE", row["errors"])
+
+
+    def test_r2_scope_is_execution_only_and_preserves_open_world_limits(self):
+        out = scoped.evaluate()
+        row = next(
+            x for x in out["admitted_scopes"]
+            if x["root_id"] == "R2_CANDIDATE_SEARCH"
+        )
+        self.assertEqual(
+            row["claim_scope"]["kind"],
+            "FINITE_SCOPE_COMPLETE_COMMON_POLICY_OR_MINIMUM_TRUTHFUL_DISCRIMINATOR_SEARCH",
+        )
+        self.assertEqual(
+            row["contributes_to_leaf_ids"],
+            ["PQ::R2_CANDIDATE_SEARCH::EXECUTION"],
+        )
+        self.assertIn(
+            "NO_GLOBAL_CANDIDATE_SEARCH_COMPLETENESS",
+            row["claim_scope"]["limitations"],
+        )
+        self.assertIn(
+            "NO_ESCAPE_PROGRESS_TOTALITY",
+            row["claim_scope"]["limitations"],
+        )
+        self.assertFalse(row["semantic_leaf_credit"])
+        self.assertFalse(row["execution_leaf_credit"])
+
+    def test_r2_stale_minimax_dependency_fails_closed(self):
+        registry = json.loads(scoped.REGISTRY.read_text())
+        r2 = next(
+            x for x in registry["entries"]
+            if x["root_id"] == "R2_CANDIDATE_SEARCH"
+        )
+        r2["minimax_runtime"]["git_blob_sha"] = "0" * 40
+        with tempfile.TemporaryDirectory() as td:
+            p = Path(td) / "registry.json"
+            p.write_text(json.dumps(registry, indent=2) + "\n")
+            out = scoped.evaluate(registry_path=p)
+        self.assertFalse(out["pass"], out)
+        row = next(
+            x for x in out["rejected_scopes"]
+            if x["root_id"] == "R2_CANDIDATE_SEARCH"
+        )
+        self.assertIn("MINIMAX_RUNTIME_STALE", row["errors"])
 
 
 
