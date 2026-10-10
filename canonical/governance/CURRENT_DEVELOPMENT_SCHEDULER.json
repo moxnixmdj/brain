@@ -27,8 +27,8 @@
   "planning_entrypoint": "canonical.runtime.capability_first_scheduler_v1.rank_work",
   "current_live_work_frontier": {
     "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
-    "git_blob_sha": "e83d7f5c7eda4447f8f65136516f233f51124001",
-    "status": "CURRENT_POST_COMPOSITION_FRONTIER__PROFESSIONAL_SCOPE_24_OF_24__PROPERTY_TRUTH_9_OF_24__R1_R2_R3_R4_R6_R7_R8_R10_R12_EXECUTION_CLOSED__THREE_EXECUTION_LEAVES_OPEN__TWELVE_SEMANTIC_TOTALITY_REUSE__ESCAPE_12_GAP_A_0_GAP_B_1_PARKED__BYTES_V31__ZERO_GLOBAL_CREDIT",
+    "git_blob_sha": "4efe4898b7d128366a54d7209e37a350ad0b73b2",
+    "status": "CURRENT_POST_COMPOSITION_FRONTIER__PROFESSIONAL_SCOPE_24_OF_24__PROPERTY_TRUTH_11_OF_24__R1_R2_R3_R4_R6_R7_R8_R9_R10_R11_R12_EXECUTION_CLOSED__R5_EXECUTION_OPEN__TWELVE_SEMANTIC_TOTALITY_REUSE__ESCAPE_12_GAP_A_0_GAP_B_1_PARKED__BYTES_V31__ZERO_GLOBAL_CREDIT",
     "professional_verified_root_subject_binding_count": 12,
     "professional_same_subject_composition_admissible": true,
     "professional_whole_leaf_scope_complete_count": 24,
@@ -71,13 +71,13 @@
   "whole_leaf_residual_control": {
     "path": "canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_SCOPE_BATCH_ACTIVATION_20261010_V1.json",
     "git_blob_sha": "d40188f87818d9c6a4507a043380a753ca563e18",
-    "status": "24_OF_24_SCOPE_COMPLETE__PROPERTY_TRUTH_9_OF_24__3_EXECUTION_AND_12_SEMANTIC_OPEN",
+    "status": "24_OF_24_SCOPE_COMPLETE__PROPERTY_TRUTH_11_OF_24__R5_EXECUTION_AND_12_SEMANTIC_OPEN",
     "verification": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_SCOPE_BATCH_VERIFY_20261010_V1.json",
     "verification_git_blob_sha": "4c2d40a262f18f34bb35f94b59660d60972d45ef",
     "admitted_v2_chain_count": 24,
     "claim_scope_construction_required_count": 0,
-    "property_truth_ready_count": 15,
-    "property_truth_closed_count": 9,
+    "property_truth_ready_count": 13,
+    "property_truth_closed_count": 11,
     "registry_verification_v2": "canonical/verification/PROFESSIONAL_QUALITY_LEAF_REGISTRY_PROPERTY_TRUTH_VERIFY_20261010_V2.json",
     "registry_verification_v2_git_blob_sha": "bdde7b52793272623773b07bf774c0a74c6be7af",
     "registry_verification_v3": "canonical/verification/PROFESSIONAL_QUALITY_LEAF_REGISTRY_PROPERTY_TRUTH_VERIFY_20261010_V3.json",
@@ -85,7 +85,9 @@
     "registry_verification_v6": "canonical/verification/PROFESSIONAL_QUALITY_LEAF_REGISTRY_PROPERTY_TRUTH_VERIFY_20261010_V6.json",
     "registry_verification_v6_git_blob_sha": "c0449b1afe7856ac95acea34f8a1f26702da3385",
     "registry_verification_v7": "canonical/verification/PROFESSIONAL_QUALITY_LEAF_REGISTRY_PROPERTY_TRUTH_VERIFY_20261010_V7.json",
-    "registry_verification_v7_git_blob_sha": "1a60d418d18149dc5bcc82f5655a08f4891d3901"
+    "registry_verification_v7_git_blob_sha": "1a60d418d18149dc5bcc82f5655a08f4891d3901",
+    "registry_verification_v8": "canonical/verification/PROFESSIONAL_QUALITY_LEAF_REGISTRY_PROPERTY_TRUTH_VERIFY_20261010_V8.json",
+    "registry_verification_v8_git_blob_sha": "e38a029c9d4411bb4da0787cae388c6a68cb81ab"
   },
   "v12_activation": {
     "path": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V12.json",
