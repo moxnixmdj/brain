@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_DEVELOPMENT_SCHEDULER_POINTER_V1",
   "date": "2026-10-10",
-  "status": "ACTIVE__POST_COMPOSITION_V13__PROFESSIONAL_WHOLE_LEAF_CLAIM_SCOPE_V2_BOUND__TB_PARKED__GAP_B_TWO_ACTIVE__READ_ONLY_EVIDENCE_READY__FULL_EXECUTION_FAILS_CLOSED",
+  "status": "ACTIVE__POST_COMPOSITION_V13__PROFESSIONAL_V2_CLAIMS_FACTORIZED_24_OF_24__ZERO_DOMAIN_EQUIVALENCE__TB_PARKED__GAP_B_TWO_ACTIVE__READ_ONLY_EVIDENCE_READY__FULL_EXECUTION_FAILS_CLOSED",
   "authoritative_activation": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V13.json",
   "runtime": "canonical/runtime/capability_parallel_frontier_post_composition_v1.py",
   "primary_entrypoint": "canonical.runtime.capability_parallel_frontier_post_composition_v1.plan_current_post_composition_frontier",
@@ -27,8 +27,8 @@
   "planning_entrypoint": "canonical.runtime.capability_first_scheduler_v1.rank_work",
   "current_live_work_frontier": {
     "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
-    "git_blob_sha": "616a5ed426754519a6ab2d840a1f8cbc535f096a",
-    "status": "CURRENT_POST_COMPOSITION_FRONTIER__PROFESSIONAL_WHOLE_LEAF_V2_CLAIM_SCOPE_GATE_AND_READINESS_VERIFIED__TB_RANK20_PARKED__GAP_B_TWO_ACTIVE_ROWS__READ_ONLY_EVIDENCE_ONLY__FULL_EXECUTION_FAIL_CLOSED__ZERO_CREDIT",
+    "git_blob_sha": "6918ed944bdf63019c2b8dfb16d553882d412a6a",
+    "status": "CURRENT_POST_COMPOSITION_FRONTIER__PROFESSIONAL_V2_CLAIMS_FACTORIZED_24_OF_24__ZERO_DOMAIN_EQUIVALENCE__TB_RANK20_PARKED__GAP_B_TWO_ACTIVE_ROWS__READ_ONLY_EVIDENCE_ONLY__FULL_EXECUTION_FAIL_CLOSED__ZERO_CREDIT",
     "professional_verified_root_subject_binding_count": 12,
     "professional_same_subject_composition_admissible": true
   },
