@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_LEAF_VERIFICATION_RECEIPT_V1",
+  "date": "2026-10-10",
+  "leaf_id": "PQ::R3_REALIZATION_OBSERVATION::EXECUTION",
+  "root_id": "R3_REALIZATION_OBSERVATION",
+  "leaf_kind": "EXECUTION",
+  "verdict": "PASS",
+  "closure_scope": "EXACT_LEAF",
+  "acceptance_sha256": "fae7b1ccf4f94a91a1fb4caa4a634e6883538a28382991d97c69278e574b67ce",
+  "root_contract_sha256": "51e53a876319001b967ab2bd41a12c54b1640c28d8494f084a69feb45d470a21",
+  "manifest_git_blob_sha": "a7cad32c9fd969ff2c3857bb924c7bd746237ec2",
+  "leaf_execution_satisfied": true,
+  "leaf_semantic_satisfied": false,
+  "property_truth_basis": "SECOND_INDEPENDENT_SPRITE_8_OF_8_EXACT_BLOB_R3_RENDER_REALIZATION_CHALLENGE_PLUS_CURRENT_V7_REAL_TASK_RECEIPT",
+  "verification_basis": [
+    {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R3_EXECUTION_PROPERTY_TRUTH_INDEPENDENT_VERIFY_20261010_V1.json",
+      "git_blob_sha": "dcac0913de3d2070bbfe507b3da3fbdaa062603b"
+    },
+    {
+      "path": "canonical/runtime/professional_quality_r3_execution_property_truth_verify_v1.py",
+      "git_blob_sha": "f6c5a02a577b0dc31b517df3c6bd9441cb90613a"
+    },
+    {
+      "path": "canonical/tests/test_professional_quality_r3_execution_property_truth_verify_v1.py",
+      "git_blob_sha": "b2a613884de403d708e0a93c710739246cb087b2"
+    },
+    {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_SCOPE_BATCH_VERIFY_20261010_V1.json",
+      "git_blob_sha": "4c2d40a262f18f34bb35f94b59660d60972d45ef"
+    },
+    {
+      "path": "canonical/verification/NATIVE_ARTIFACT_RENDER_PRESERVATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "1a0b4ca6627aaf28eb25f6990682e87319d14d6d"
+    },
+    {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R3_V7_RENDER_STEP_RESULT_BINDING_VERIFY_20261010_V3.json",
+      "git_blob_sha": "734f88f5d201e778f59133c9e22f29ae4d451121"
+    }
+  ],
+  "unknown_defeater_completeness_proved": false,
+  "full_main_regression_proved": false,
+  "semantic_leaf_closed": false,
+  "root_closed": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "hard_nonclaims": [
+    "NO_R3_SEMANTIC_LEAF_CLOSURE",
+    "NO_R3_ROOT_CLOSURE",
+    "NO_ARBITRARY_SEMANTIC_TARGET_CORRECTNESS",
+    "NO_UNKNOWN_DEFEATER_COMPLETENESS",
+    "NO_FULL_CURRENT_MAIN_REGRESSION",
+    "NO_GLOBAL_PROFESSIONAL_PROPERTY_TRUTH",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ]
+}
