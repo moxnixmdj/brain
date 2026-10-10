@@ -95,9 +95,9 @@
     "cases": 5520,
     "seed": 4000000,
     "per_operation_budget": 480,
-    "corpus_sha256": "PENDING_FREEZE",
+    "corpus_sha256": "4764759bc7fbca314b300af7a07616f236bca94def7d320ff044d4bf93d6d5ac",
     "generator": "canonical/research/bytes/tools/generate_qualification_v1.py",
-    "status": "PENDING_FREEZE__DO_NOT_EXECUTE",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT",
     "spent": false
   },
   "durable_artifact_persistence": {
