@@ -9,10 +9,10 @@ from canonical.runtime import professional_quality_scoped_evidence_v1 as scoped
 
 
 class ProfessionalQualityScopedEvidenceV1Tests(unittest.TestCase):
-    def test_current_r1_r2_r3_r4_r5_r6_r7_r9_r10_and_r11_scopes_are_admitted_without_global_credit(self):
+    def test_current_r1_through_r12_scopes_are_admitted_without_global_credit(self):
         out = scoped.evaluate()
         self.assertTrue(out["pass"], out)
-        self.assertEqual(out["admitted_scope_count"], 10, out)
+        self.assertEqual(out["admitted_scope_count"], 12, out)
         self.assertEqual(out["rejected_scope_count"], 0, out)
         self.assertFalse(out["global_leaf_closure"])
         self.assertFalse(out["global_root_closure"])
@@ -432,6 +432,121 @@ class ProfessionalQualityScopedEvidenceV1Tests(unittest.TestCase):
         self.assertFalse(row["semantic_leaf_credit"])
         self.assertFalse(row["execution_leaf_credit"])
 
+
+
+    def test_r8_scope_is_execution_only_and_preserves_population_context_limits(self):
+        out = scoped.evaluate()
+        row = next(
+            x for x in out["admitted_scopes"]
+            if x["root_id"] == "R8_POPULATION_CONTEXT_OPERATOR"
+        )
+        self.assertEqual(
+            row["claim_scope"]["kind"],
+            "FROZEN_512_CASE_PRE_BEACON_DELEGATION_POPULATION_BINDING",
+        )
+        self.assertEqual(
+            row["contributes_to_leaf_ids"],
+            ["PQ::R8_POPULATION_CONTEXT_OPERATOR::EXECUTION"],
+        )
+        self.assertIn(
+            "NO_CONSTITUENCY_SUPPORT_CLAIM",
+            row["claim_scope"]["limitations"],
+        )
+        self.assertIn(
+            "PREFLIGHT_ONLY__NO_POST_FREEZE_TERMINAL_RESULT",
+            row["claim_scope"]["limitations"],
+        )
+        self.assertFalse(row["semantic_leaf_credit"])
+        self.assertFalse(row["execution_leaf_credit"])
+
+    def test_r8_stale_population_receipt_fails_closed(self):
+        registry = json.loads(scoped.REGISTRY.read_text())
+        r8 = next(
+            x for x in registry["entries"]
+            if x["root_id"] == "R8_POPULATION_CONTEXT_OPERATOR"
+        )
+        r8["source_receipt"]["git_blob_sha"] = "0" * 40
+        with tempfile.TemporaryDirectory() as td:
+            p = Path(td) / "registry.json"
+            p.write_text(json.dumps(registry, indent=2) + "\n")
+            out = scoped.evaluate(registry_path=p)
+        self.assertFalse(out["pass"], out)
+        row = next(
+            x for x in out["rejected_scopes"]
+            if x["root_id"] == "R8_POPULATION_CONTEXT_OPERATOR"
+        )
+        self.assertIn("SOURCE_RECEIPT_STALE", row["errors"])
+
+    def test_r12_scope_is_execution_only_and_preserves_meta_closure_limits(self):
+        out = scoped.evaluate()
+        row = next(
+            x for x in out["admitted_scopes"]
+            if x["root_id"] == "R12_META_COMPOSITION_CLOSURE"
+        )
+        self.assertEqual(
+            row["claim_scope"]["kind"],
+            "FAIL_CLOSED_ASSURANCE_GRAPH_META_COMPOSITION_AND_ORDER_INDEPENDENT_DEFEATER_ROUTING",
+        )
+        self.assertEqual(
+            row["contributes_to_leaf_ids"],
+            ["PQ::R12_META_COMPOSITION_CLOSURE::EXECUTION"],
+        )
+        self.assertIn(
+            "NO_UNKNOWN_DEFEATER_COMPLETENESS",
+            row["claim_scope"]["limitations"],
+        )
+        self.assertIn(
+            "NO_DOMAIN_EXECUTION_CLOSURE",
+            row["claim_scope"]["limitations"],
+        )
+        self.assertFalse(row["semantic_leaf_credit"])
+        self.assertFalse(row["execution_leaf_credit"])
+
+    def test_r12_stale_order_soundness_binding_fails_closed(self):
+        registry = json.loads(scoped.REGISTRY.read_text())
+        r12 = next(
+            x for x in registry["entries"]
+            if x["root_id"] == "R12_META_COMPOSITION_CLOSURE"
+        )
+        governance_path = (
+            Path(__file__).resolve().parents[2]
+            / r12["compiler_verification"]["path"]
+        )
+        governance = json.loads(governance_path.read_text())
+        governance["exact_components"]["order_soundness_verification"]["git_blob_sha"] = "0" * 40
+        with tempfile.TemporaryDirectory() as td:
+            repo = Path(td)
+            for rel in (
+                r12["source_receipt"]["path"],
+                r12["reusable_compiler"]["path"],
+                r12["compiler_verification"]["path"],
+            ):
+                src = Path(__file__).resolve().parents[2] / rel
+                dst = repo / rel
+                dst.parent.mkdir(parents=True, exist_ok=True)
+                dst.write_bytes(src.read_bytes())
+            order_rel = governance["exact_components"]["order_soundness_verification"]["path"]
+            order_src = Path(__file__).resolve().parents[2] / order_rel
+            order_dst = repo / order_rel
+            order_dst.parent.mkdir(parents=True, exist_ok=True)
+            order_dst.write_bytes(order_src.read_bytes())
+            gov_dst = repo / r12["compiler_verification"]["path"]
+            gov_dst.write_text(json.dumps(governance, indent=2) + "\n")
+            modified = json.loads(scoped.REGISTRY.read_text())
+            row12 = next(
+                x for x in modified["entries"]
+                if x["root_id"] == "R12_META_COMPOSITION_CLOSURE"
+            )
+            row12["compiler_verification"]["git_blob_sha"] = scoped.git_blob_sha(gov_dst)
+            p = repo / "registry.json"
+            p.write_text(json.dumps(modified, indent=2) + "\n")
+            out = scoped.evaluate(registry_path=p, repo_root=repo)
+        self.assertFalse(out["pass"], out)
+        row = next(
+            x for x in out["rejected_scopes"]
+            if x["root_id"] == "R12_META_COMPOSITION_CLOSURE"
+        )
+        self.assertIn("R12_ORDER_SOUNDNESS_VERIFICATION_STALE", row["errors"])
 
 
 if __name__ == "__main__":
