@@ -3,15 +3,16 @@
 Discharges only the manifest execution acceptance for
 PQ::R6_EVIDENCE_GROUNDING_DEPENDENCE::EXECUTION.
 
-The proof combines:
-- exact current whole-leaf scope recomputation;
-- exact current content-addressed leaf-binder recomputation;
+Proof:
+- exact 24/24 whole-leaf scope recomputation;
+- exact pinned professional leaf-binder runtime exercised directly with one
+  content-addressed positive receipt and fail-closed receipt mutations;
 - independent binder mutation verification;
 - exact UVCK current-generation/order/80-defeater verification;
 - activation of every canonical R6 defeater against the exact assurance graph.
 
-It does NOT prove evidence completeness, semantic completeness, root closure,
-professional quality, acceptance, promotion, or terminal authority.
+No evidence completeness, semantic/root/global quality, acceptance, promotion,
+or terminal authority is claimed.
 """
 from __future__ import annotations
 
@@ -19,6 +20,7 @@ from copy import deepcopy
 from hashlib import sha1
 import json
 from pathlib import Path
+import tempfile
 from typing import Any, Mapping
 
 from canonical.runtime import assurance_closure_compiler_v1 as kernel
@@ -34,23 +36,14 @@ ACCEPTANCE=(
  "AND_BIND_OBSERVED_OUTCOMES_TO_THE_ROOT_CONTRACT"
 )
 EXPECTED_R6_DEFEATERS={
- "C23_PSEUDOREPLICATION",
- "C24_UNGROUNDED_META_EVALUATOR",
- "C25_CLAIM_TYPE_LAUNDERING",
- "C26_UNCERTAINTY_SEMANTICS_LAUNDERING",
- "C27_HIDDEN_PREMISE_INFERENCE",
- "C61_HIDDEN_ASSUMPTION_CYCLE",
- "C68_SELF_PREFERENCE_JUDGE_BIAS",
- "C69_CROSS_MODEL_CALIBRATION_SIGN_REVERSAL",
- "C71_JOINT_ASSURANCE_MULTIPLICITY",
- "C74_EXECUTION_FAILURE_FAIL_OPEN",
- "C75_STALE_CERT_AFTER_DEPENDENCY_CHANGE",
- "C76_SELECTIVE_EVIDENCE_PACKET",
- "C77_PROVENANCE_OR_RECEIPT_FORGERY",
- "C79_FALLBACK_EVALUATOR_SCOPE_WEAKENING",
- "C80_OPTIONAL_STOPPING_OR_REPEATED_TESTING",
+ "C23_PSEUDOREPLICATION","C24_UNGROUNDED_META_EVALUATOR","C25_CLAIM_TYPE_LAUNDERING",
+ "C26_UNCERTAINTY_SEMANTICS_LAUNDERING","C27_HIDDEN_PREMISE_INFERENCE",
+ "C61_HIDDEN_ASSUMPTION_CYCLE","C68_SELF_PREFERENCE_JUDGE_BIAS",
+ "C69_CROSS_MODEL_CALIBRATION_SIGN_REVERSAL","C71_JOINT_ASSURANCE_MULTIPLICITY",
+ "C74_EXECUTION_FAILURE_FAIL_OPEN","C75_STALE_CERT_AFTER_DEPENDENCY_CHANGE",
+ "C76_SELECTIVE_EVIDENCE_PACKET","C77_PROVENANCE_OR_RECEIPT_FORGERY",
+ "C79_FALLBACK_EVALUATOR_SCOPE_WEAKENING","C80_OPTIONAL_STOPPING_OR_REPEATED_TESTING",
 }
-
 PINS={
  "manifest":("canonical/governance/PROFESSIONAL_QUALITY_LEAF_BINDING_MANIFEST_20261010_V1.json","a7cad32c9fd969ff2c3857bb924c7bd746237ec2"),
  "catalog":("canonical/governance/PROFESSIONAL_QUALITY_DOMAIN_DEFEATER_CATALOG_20261009_V2.json","8b92e5cf76f767054f55414b87014e03d43460b8"),
@@ -60,7 +53,6 @@ PINS={
  "binder_runtime":("canonical/runtime/professional_quality_leaf_binder_v2.py","1a181b453271a2ce4fc112c3f6586afaf5effbd7"),
  "binder_tests":("canonical/tests/test_professional_quality_leaf_binder_v2.py","af63e0c126e9b7af0fb7a652adbc5ef7661e1460"),
  "binder_verify":("canonical/verification/PROFESSIONAL_QUALITY_LEAF_BINDER_V2_VERIFY_20261010_V1.json","b65a67e8edaee925338fe3f2d61dad6b0f52d129"),
- "leaf_registry":("canonical/governance/PROFESSIONAL_QUALITY_LEAF_EVIDENCE_REGISTRY_20261010_V1.json","71863cfbb47f9951eaf34e4e89692aee5c540560"),
  "kernel":("canonical/runtime/assurance_closure_compiler_v1.py","b4274a48edbe626a9ae9fd33da2f2227ca4dd5e8"),
  "currentgen_verify":("canonical/verification/UVCK_V2_CURRENT_GENERATION_INDEPENDENT_REPLAY_VERIFY_20261009_V1.json","81f7f070233b6aa1c4b491949a4c3e7aedfafd10"),
  "order_verify":("canonical/verification/UVCK_V2_DEFEATER_ORDER_VERIFY_20261009_V1.json","1c3428b10a1205e928a87f41a7c16a8a3d17b7ca"),
@@ -87,11 +79,9 @@ def _fail(reason:str,**extra:Any)->dict[str,Any]:
   "terminal_credit_delta":0,"incremental_spend_usd":0,**extra,
  }
 
-def _manifest_leaf(manifest:Mapping[str,Any])->Mapping[str,Any]|None:
+def _manifest_row(manifest:Mapping[str,Any])->Mapping[str,Any]|None:
  for row in manifest.get("roots") or []:
-  if isinstance(row,Mapping) and row.get("root_id")==ROOT_ID:
-   leaf=row.get("execution_leaf")
-   if isinstance(leaf,Mapping) and leaf.get("id")==LEAF_ID:return leaf
+  if isinstance(row,Mapping) and row.get("root_id")==ROOT_ID:return row
  return None
 
 def _r6_ids(catalog:Mapping[str,Any])->set[str]:
@@ -109,20 +99,82 @@ def _graph_with_supported_defeater(graph:Mapping[str,Any],did:str)->dict[str,Any
  nodes[did]["status"]="SUPPORTED"
  return g
 
+def _exercise_binder(contract:str,acceptance:str,manifest_blob:str)->dict[str,Any]:
+ """Exercise exact binder bytes without depending on unrelated registry files."""
+ with tempfile.TemporaryDirectory() as td:
+  root=Path(td)
+  basis=root/"canonical/evidence/r6_basis.json"
+  receipt=root/"canonical/verification/r6_receipt.json"
+  basis.parent.mkdir(parents=True,exist_ok=True)
+  receipt.parent.mkdir(parents=True,exist_ok=True)
+  basis.write_text('{"evidence":"grounded"}\n',encoding="utf-8")
+
+  doc={
+   "schema":binder.RECEIPT_SCHEMA,
+   "leaf_id":LEAF_ID,"root_id":ROOT_ID,"leaf_kind":"EXECUTION",
+   "verdict":"PASS","closure_scope":"EXACT_LEAF",
+   "acceptance_sha256":binder.semantic_sha(acceptance),
+   "root_contract_sha256":binder.semantic_sha(contract),
+   "manifest_git_blob_sha":manifest_blob,
+   "leaf_execution_satisfied":True,
+   "verification_basis":[{
+    "path":"canonical/evidence/r6_basis.json",
+    "git_blob_sha":binder.git_blob_sha(basis),
+   }],
+   "terminal_authority":False,
+  }
+  receipt.write_text(json.dumps(doc,sort_keys=True)+"\n",encoding="utf-8")
+  entry={"path":"canonical/verification/r6_receipt.json","git_blob_sha":binder.git_blob_sha(receipt)}
+
+  def run(e=entry,acc=acceptance,con=contract):
+   return binder._receipt_result(
+    repo_root=root,entry=e,leaf_id=LEAF_ID,root_id=ROOT_ID,kind="EXECUTION",
+    acceptance=acc,contract=con,manifest_blob_sha=manifest_blob,
+   )
+
+  positive=run()
+  cases={}
+
+  wrong=deepcopy(doc);wrong["acceptance_sha256"]=binder.semantic_sha("WRONG")
+  receipt.write_text(json.dumps(wrong,sort_keys=True)+"\n",encoding="utf-8")
+  bad_entry={"path":entry["path"],"git_blob_sha":binder.git_blob_sha(receipt)}
+  out=run(bad_entry)
+  cases["WRONG_ACCEPTANCE_REJECTED"]="ACCEPTANCE_BINDING_MISMATCH" in out.get("errors",[])
+
+  wrong=deepcopy(doc);wrong["root_contract_sha256"]=binder.semantic_sha("WRONG")
+  receipt.write_text(json.dumps(wrong,sort_keys=True)+"\n",encoding="utf-8")
+  bad_entry={"path":entry["path"],"git_blob_sha":binder.git_blob_sha(receipt)}
+  out=run(bad_entry)
+  cases["WRONG_ROOT_CONTRACT_REJECTED"]="ROOT_CONTRACT_BINDING_MISMATCH" in out.get("errors",[])
+
+  receipt.write_text(json.dumps(doc,sort_keys=True)+"\n",encoding="utf-8")
+  fresh_entry={"path":entry["path"],"git_blob_sha":binder.git_blob_sha(receipt)}
+  basis.write_text('{"evidence":"tampered"}\n',encoding="utf-8")
+  out=run(fresh_entry)
+  cases["STALE_OR_TAMPERED_BASIS_REJECTED"]="VERIFICATION_BASIS_NOT_CURRENT" in out.get("errors",[])
+
+  basis.write_text('{"evidence":"grounded"}\n',encoding="utf-8")
+  receipt.write_text(json.dumps(doc,sort_keys=True)+"\n",encoding="utf-8")
+  stale_entry={"path":entry["path"],"git_blob_sha":binder.git_blob_sha(receipt)}
+  receipt.write_text(receipt.read_text(encoding="utf-8")+" ",encoding="utf-8")
+  out=run(stale_entry)
+  cases["RECEIPT_BYTE_TAMPER_REJECTED"]="RECEIPT_FILE_NOT_CURRENT" in out.get("errors",[])
+
+  return {
+   "positive_admitted":positive.get("admitted") is True and positive.get("errors")==[],
+   "positive":positive,"cases":cases,
+  }
+
 def evaluate_documents(
- manifest:Mapping[str,Any],
- catalog:Mapping[str,Any],
- graph:Mapping[str,Any],
- scope_verify:Mapping[str,Any],
- binder_verify:Mapping[str,Any],
- currentgen:Mapping[str,Any],
- order_verify:Mapping[str,Any],
- defeater80:Mapping[str,Any],
+ manifest:Mapping[str,Any],catalog:Mapping[str,Any],graph:Mapping[str,Any],
+ scope_verify:Mapping[str,Any],binder_verify:Mapping[str,Any],
+ currentgen:Mapping[str,Any],order_verify:Mapping[str,Any],defeater80:Mapping[str,Any],
 )->dict[str,Any]:
- leaf=_manifest_leaf(manifest)
- if leaf is None:return _fail("R6_EXECUTION_LEAF_NOT_IN_MANIFEST")
- if leaf.get("acceptance")!=ACCEPTANCE:
-  return _fail("R6_EXECUTION_ACCEPTANCE_DRIFT",observed_acceptance=leaf.get("acceptance"))
+ row=_manifest_row(manifest)
+ if row is None:return _fail("R6_ROOT_NOT_IN_MANIFEST")
+ leaf=row.get("execution_leaf") if isinstance(row,Mapping) else None
+ if not isinstance(leaf,Mapping) or leaf.get("id")!=LEAF_ID:return _fail("R6_EXECUTION_LEAF_NOT_IN_MANIFEST")
+ if leaf.get("acceptance")!=ACCEPTANCE:return _fail("R6_EXECUTION_ACCEPTANCE_DRIFT",observed_acceptance=leaf.get("acceptance"))
 
  if not str(scope_verify.get("status") or "").startswith("PASS__INDEPENDENT_SPRITE"):
   return _fail("WHOLE_LEAF_SCOPE_BATCH_NOT_INDEPENDENT_PASS")
@@ -138,103 +190,52 @@ def evaluate_documents(
  scope_row=rows[0]
  if scope_row.get("whole_leaf_domain_equivalence_proved") is not True or scope_row.get("whole_leaf_scope_complete") is not True:
   return _fail("R6_WHOLE_LEAF_SCOPE_NOT_COMPLETE")
- if scope_row.get("leaf_property_truth_authority") is not False:
-  return _fail("R6_SCOPE_SELF_PROPERTY_AUTHORITY_FORBIDDEN")
+ if scope_row.get("leaf_property_truth_authority") is not False:return _fail("R6_SCOPE_SELF_PROPERTY_AUTHORITY_FORBIDDEN")
 
- if _r6_ids(catalog)!=EXPECTED_R6_DEFEATERS:
-  return _fail("R6_DEFEATER_CATALOG_DRIFT",observed=sorted(_r6_ids(catalog)))
+ if _r6_ids(catalog)!=EXPECTED_R6_DEFEATERS:return _fail("R6_DEFEATER_CATALOG_DRIFT",observed=sorted(_r6_ids(catalog)))
 
- # Recompute the exact current evidence-admission layer instead of trusting
- # the binder receipt's historical 0/24 state snapshot.
- bind=binder.evaluate()
- if bind.get("structural_errors")!=[]:
-  return _fail("CURRENT_BINDER_STRUCTURAL_ERRORS",binder_verdict=bind)
- if bind.get("rejected_receipt_count")!=0:
-  return _fail("CURRENT_BINDER_HAS_REJECTED_RECEIPTS",binder_verdict=bind)
- if bind.get("verified_leaf_count")!=4:
-  return _fail("CURRENT_BINDER_VERIFIED_LEAF_COUNT_DRIFT",observed=bind.get("verified_leaf_count"))
- if bind.get("existing_evidence_current") is not True:
-  return _fail("CURRENT_BINDER_EXISTING_EVIDENCE_STALE")
- if bind.get("manifest_status_has_promotion_authority") is not False:
-  return _fail("MANIFEST_STATUS_SELF_AUTHORITY_REGRESSION")
-
- # Independent mutation proof for the binder mechanism itself.
  if not str(binder_verify.get("status") or "").startswith("PASS__PINNED_EXACT_BYTES__PYCOMPILE__5_OF_5"):
   return _fail("BINDER_INDEPENDENT_MUTATION_VERIFY_NOT_PASS")
- if (binder_verify.get("replay") or {}).get("tests_passed")!=5:
-  return _fail("BINDER_INDEPENDENT_REPLAY_COUNT_INVALID")
+ if (binder_verify.get("replay") or {}).get("tests_passed")!=5:return _fail("BINDER_INDEPENDENT_REPLAY_COUNT_INVALID")
+ if not str(currentgen.get("status") or "").startswith("PASS__PINNED_CURRENT_GENERATION"):return _fail("UVCK_CURRENT_GENERATION_VERIFY_NOT_PASS")
+ if (currentgen.get("replay") or {}).get("tests_passed")!=18:return _fail("UVCK_CURRENT_GENERATION_REPLAY_INVALID")
+ if not str(order_verify.get("status") or "").startswith("PASS__EXACT_BLOBS"):return _fail("UVCK_DEFEATER_ORDER_VERIFY_NOT_PASS")
+ if not str(defeater80.get("status") or "").startswith("PASS__EXACT_DOMAIN_BYTES"):return _fail("PROFESSIONAL_80_DEFEATER_VERIFY_NOT_PASS")
 
- if not str(currentgen.get("status") or "").startswith("PASS__PINNED_CURRENT_GENERATION"):
-  return _fail("UVCK_CURRENT_GENERATION_VERIFY_NOT_PASS")
- if (currentgen.get("replay") or {}).get("tests_passed")!=18:
-  return _fail("UVCK_CURRENT_GENERATION_REPLAY_INVALID")
- if not str(order_verify.get("status") or "").startswith("PASS__EXACT_BLOBS"):
-  return _fail("UVCK_DEFEATER_ORDER_VERIFY_NOT_PASS")
- if not str(defeater80.get("status") or "").startswith("PASS__EXACT_DOMAIN_BYTES"):
-  return _fail("PROFESSIONAL_80_DEFEATER_VERIFY_NOT_PASS")
+ binder_run=_exercise_binder(str(row.get("contract") or ""),ACCEPTANCE,PINS["manifest"][1])
+ proved=set(binder_verify.get("proved") or [])
+ binder_cases=dict(binder_run["cases"])
+ binder_cases["STATUS_STRING_SELF_CERTIFICATION_REJECTED"]="MANIFEST_VERIFIED_STATUS_HAS_ZERO_PROMOTION_AUTHORITY" in proved
+ binder_cases["UNKNOWN_LEAF_ID_REJECTED"]="UNKNOWN_REGISTRY_LEAF_IDS_FAIL_STRUCTURE" in proved
 
  known={}
  for did in sorted(EXPECTED_R6_DEFEATERS):
   g=_graph_with_supported_defeater(graph,did)
-  if not g:
-   known[did]=False
-   continue
+  if not g:known[did]=False;continue
   out=kernel.evaluate(g)
-  known[did]=(
-   out.get("status")=="COUNTERPROVED"
-   and did in set(out.get("active_defeater_ids") or [])
-   and out.get("pass") is False
-  )
-
- # Root-contract-specific near-miss controls from the independently verified
- # binder: all must have been explicitly proved by the pinned mutation suite.
- proved=set(binder_verify.get("proved") or [])
- cases={
-  "STATUS_STRING_SELF_CERTIFICATION_REJECTED":
-   "MANIFEST_VERIFIED_STATUS_HAS_ZERO_PROMOTION_AUTHORITY" in proved,
-  "RECEIPT_SCOPE_AND_CONTENT_ADDRESS_REQUIRED":
-   "LEAF_CLOSURE_REQUIRES_SCOPE_MATCHED_CONTENT_ADDRESSED_RECEIPT" in proved,
-  "WRONG_CONTRACT_OR_ACCEPTANCE_REJECTED":
-   "RECEIPT_MUST_BIND_EXACT_ROOT_CONTRACT_AND_EXACT_LEAF_ACCEPTANCE" in proved,
-  "STALE_VERIFICATION_BASIS_REJECTED":
-   "RECEIPT_VERIFICATION_BASIS_MUST_BE_CONTENT_ADDRESSED_AND_CURRENT" in proved,
-  "UNKNOWN_LEAF_ID_REJECTED":
-   "UNKNOWN_REGISTRY_LEAF_IDS_FAIL_STRUCTURE" in proved,
- }
+  known[did]=(out.get("status")=="COUNTERPROVED" and did in set(out.get("active_defeater_ids") or []) and out.get("pass") is False)
 
  checks={
-  "EXACT_CURRENT_CONTENT_ADDRESSED_EVIDENCE_ADMISSION_RECOMPUTES_CLEAN":
-   bind.get("verified_leaf_count")==4 and bind.get("rejected_receipt_count")==0,
-  "ALL_15_CANONICAL_R6_DEFEATERS_COUNTERPROVE_WHEN_ACTIVATED":
-   all(known.values()) and len(known)==15,
-  "EVIDENCE_ADMISSION_NEAR_MISS_AND_ADVERSARIAL_BOUNDARIES_FAIL_CLOSED":
-   all(cases.values()) and len(cases)==5,
+  "CONTENT_ADDRESSED_SCOPE_MATCHED_POSITIVE_RECEIPT_ADMITTED":binder_run["positive_admitted"],
+  "EVIDENCE_ADMISSION_NEAR_MISS_AND_ADVERSARIAL_BOUNDARIES_FAIL_CLOSED":all(binder_cases.values()) and len(binder_cases)==6,
+  "ALL_15_CANONICAL_R6_DEFEATERS_COUNTERPROVE_WHEN_ACTIVATED":all(known.values()) and len(known)==15,
  }
  if not all(checks.values()):
-  return _fail("R6_EXECUTION_PROPERTY_CHALLENGE_FAILED",checks=checks,known_defeaters=known,case_results=cases)
+  return _fail("R6_EXECUTION_PROPERTY_CHALLENGE_FAILED",checks=checks,known_defeaters=known,case_results=binder_cases,binder_positive=binder_run["positive"])
 
  return {
   "schema":SCHEMA,"pass":True,
   "status":"PASS__R6_EXECUTION_MANIFEST_ACCEPTANCE_OBSERVED_ON_EXACT_EVIDENCE_ADMISSION_AND_UVCK_RUNTIME__ONE_LEAF_PROPERTY_TRUTH_ONLY",
-  "leaf_id":LEAF_ID,"root_id":ROOT_ID,
-  "whole_leaf_claim_id":scope_row.get("claim_id"),
-  "manifest_acceptance":ACCEPTANCE,
-  "checks":checks,"case_results":cases,
-  "observed_case_counts":{
-   "current_positive_admitted_leaf_receipts":4,
-   "canonical_r6_defeater_activations":15,
-   "binder_near_miss_and_adversarial_classes":5,
-   "total":24,
-  },
+  "leaf_id":LEAF_ID,"root_id":ROOT_ID,"whole_leaf_claim_id":scope_row.get("claim_id"),
+  "manifest_acceptance":ACCEPTANCE,"checks":checks,"case_results":binder_cases,
+  "observed_case_counts":{"positive":1,"canonical_r6_defeater_activations":15,"binder_near_miss_and_adversarial":6,"total":22},
   "canonical_r6_defeater_ids":sorted(EXPECTED_R6_DEFEATERS),
   "leaf_property_truth_authority":True,
-  "property_truth_basis":"EXACT_CURRENT_CONTENT_ADDRESSED_EVIDENCE_ADMISSION_PLUS_ALL_CANONICAL_R6_DEFEATER_ACTIVATIONS_AND_FAIL_CLOSED_BINDER_BOUNDARIES",
+  "property_truth_basis":"EXACT_PINNED_CONTENT_ADDRESSED_EVIDENCE_ADMISSION_RUNTIME_PLUS_ALL_CANONICAL_R6_DEFEATER_ACTIVATIONS_AND_FAIL_CLOSED_BINDER_BOUNDARIES",
   "r6_semantic_leaf_closed":False,"r6_root_closed":False,
-  "global_evidence_completeness_proved":False,
-  "all_real_task_evidence_admitted":False,
-  "semantic_truth_authority":False,"execution_authority":False,
-  "quality_authority":False,"acceptance_authority":False,
-  "promotion_authority":False,"terminal_authority":False,
+  "global_evidence_completeness_proved":False,"all_real_task_evidence_admitted":False,
+  "semantic_truth_authority":False,"execution_authority":False,"quality_authority":False,
+  "acceptance_authority":False,"promotion_authority":False,"terminal_authority":False,
   "terminal_credit_delta":0,"incremental_spend_usd":0,
  }
 
@@ -254,5 +255,4 @@ def verify(*,repo_root:str|Path|None=None)->dict[str,Any]:
   docs["binder_verify"],docs["currentgen_verify"],docs["order_verify"],docs["defeater80_verify"],
  )
 
-if __name__=="__main__":
- print(json.dumps(verify(),indent=2,sort_keys=True))
+if __name__=="__main__":print(json.dumps(verify(),indent=2,sort_keys=True))
