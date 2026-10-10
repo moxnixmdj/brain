@@ -1,0 +1,88 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_R12_SEMANTIC_V3_C5_BRIDGE_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__TWO_DISTINCT_SPRITE_ENVIRONMENTS__PYCOMPILE__6_OF_6_EACH__EXACT_V3_R12_SCOPE_C5_REUSE__ZERO_PROPERTY_OR_TERMINAL_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "brain/r12-semantic-v3-c5-bridge-20261010-v1",
+    "base_main_commit": "23e31c7586be1206b88f02395fb9e4bb7fc05b20",
+    "verified_branch_head": "c5eca615d2a7e3dc3f6591a77b8b272fd891e38c",
+    "runtime": {
+      "path": "canonical/runtime/professional_r12_semantic_v3_c5_bridge_v1.py",
+      "git_blob_sha": "11b59d051610df8aeffd5916b6dac39daaa6c661"
+    },
+    "tests": {
+      "path": "canonical/tests/test_professional_r12_semantic_v3_c5_bridge_v1.py",
+      "git_blob_sha": "b52f382474625201667ff31e97e28795e599b532"
+    },
+    "v3_claim_pack_runtime": {
+      "path": "canonical/runtime/professional_semantic_totality_claim_pack_v3.py",
+      "git_blob_sha": "5c3b47bc2d72b2e0b6b01c3e04635928419082fc"
+    },
+    "v3_claim_pack_verify": {
+      "path": "canonical/verification/PROFESSIONAL_SEMANTIC_TOTALITY_CLAIM_PACK_V3_INDEPENDENT_VERIFY_20261010_V1.json",
+      "git_blob_sha": "b1e01cedfc064ea18a21d6a563c9e6132ae6e7f5"
+    },
+    "prior_c5_runtime": {
+      "path": "canonical/runtime/professional_r12_semantic_c5_claim_bound_verify_v1.py",
+      "git_blob_sha": "07d8176056e1052e9ff94e32f54d67a714ddf74f"
+    },
+    "prior_c5_certificate": {
+      "path": "canonical/governance/PROFESSIONAL_R12_SEMANTIC_CC_R3_C5_CLAIM_BOUND_REUSE_20261010_V1.json",
+      "git_blob_sha": "aa3d60c59af28e938ab3d8840371a701931b3ae4"
+    },
+    "prior_c5_verify": {
+      "path": "canonical/verification/PROFESSIONAL_R12_SEMANTIC_C5_CLAIM_BOUND_VERIFY_20261010_V1.json",
+      "git_blob_sha": "c3f390a230ba6e9dc6bd3f14c3e878fae9315c77"
+    }
+  },
+  "exact_claim_binding": {
+    "leaf_id": "PQ::R12_META_COMPOSITION_CLOSURE::SEMANTIC",
+    "stable_v3_claim_id": "11870f850b46bcfcc31094f764fc4f45c911aaac413979ceb62679ff19a53162",
+    "source_v2_property_claim_id": "97ff74650749db87f378d5926ed820e004f3f792583c2c8455e51c3ccacbe7f7",
+    "source_v2_property_authority_transported": false,
+    "whole_leaf_scope_claim_id": "05b74983836dd1f6a13a0db72443246fb74f99548f0d982a769a6a7e572e9e85",
+    "scope_sha256": "3958f259dba6bc6d4dfe1dad0b3ec26ecb1b8d92ea4763985f52ce96cfc55a1d"
+  },
+  "development_replay": {
+    "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/brain",
+    "py_compile": "PASS",
+    "tests_run": 6,
+    "tests_passed": 6,
+    "tests_failed": 0
+  },
+  "independent_replay": {
+    "carrier": "brain-pq-p1-v2-independent-verify-20261010",
+    "carrier_id": "sprite-5fb5e414-e2f5-4a49-b424-3443341d9d09",
+    "workspace": "/home/sprite/r12-v3-c5-bridge",
+    "py_compile": "PASS",
+    "tests_run": 6,
+    "tests_passed": 6,
+    "tests_failed": 0
+  },
+  "proves": [
+    "CURRENT_STABLE_V3_R12_SEMANTIC_CLAIM_BINDS_THE_IDENTICAL_WHOLE_LEAF_SCOPE_CLAIM_ALREADY_COVERED_BY_C5",
+    "CURRENT_STABLE_V3_R12_SEMANTIC_CLAIM_SCOPE_DIGEST_EQUALS_THE_INDEPENDENTLY_VERIFIED_C5_SCOPE_DIGEST",
+    "PRIOR_C5_WHOLE_DOMAIN_COVERAGE_ACCOUNTING_REVERIFIES",
+    "V2_PROPERTY_CLAIM_AUTHORITY_IS_NOT_TRANSPORTED",
+    "CLAIM_ID_SCOPE_ID_SCOPE_DIGEST_AND_PRIOR_C5_FAILURE_MUTATIONS_FAIL_CLOSED"
+  ],
+  "hard_nonclaims": [
+    "NO_CC_R3_TERMINAL_CLOSURE",
+    "NO_R12_SEMANTIC_PROPERTY_TRUTH",
+    "NO_MATERIAL_DEFEATER_TOTALITY",
+    "NO_V2_PROPERTY_AUTHORITY_TRANSPORT",
+    "NO_R12_ROOT_OR_GLOBAL_PROFESSIONAL_QUALITY_CLOSURE",
+    "NO_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "next": "REUSE_CURRENT_R12_C2_C3_AND_V3_C5__ATTACK_R12C6_PROOF_SEARCH_HONESTY__THEN_C1_C4_C7_C8",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "property_truth_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
