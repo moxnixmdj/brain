@@ -1,0 +1,84 @@
+{
+  "schema": "PROJECT_BRAIN_CONTEXT_DEPENDENT_MEANING_RESEARCH_HANDOFF_20261010_V6",
+  "date": "2026-10-10",
+  "status": "CURRENT_COMPACT_SUCCESSOR_HANDOFF__MEASUREMENT_BASIS_SEMANTICS_LIVE__PRIOR_MARGIN_SPREAD_REGCAP_CONTEXT_ROUTES_PRESERVED__ONE_PRIMARY_FINANCE_RESIDUAL_REMAINS__ZERO_TERMINAL_CREDIT",
+  "supersedes": "canonical/reasoning/2026-10-10_CONTEXT_DEPENDENT_MEANING_RESEARCH_HANDOFF_V5.json",
+  "authoritative_state": {
+    "r2_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+    "r2_git_blob_sha": "8ed410ab753ca1d86de37b721da30e805a1e4ec9",
+    "root2_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261010_V65.json",
+    "root2_git_blob_sha": "a3284796a11c1c69ede669e68deb6d0052b1e5be",
+    "one_primary_finance_semantic_residual_remains": true,
+    "r2_semantic_version_changed_by_this_handoff": false
+  },
+  "newly_live_measurement_basis_route": {
+    "id": "RWA_DENOMINATED_REGULATORY_CAPITAL_MEASUREMENT_FRAME",
+    "merge_commit": "850ee2ac3efcedb1ac2c3bc7714c6d4b03e00ca6",
+    "runtime": "canonical/runtime/rwa_capital_measurement_context_v1.py",
+    "runtime_git_blob_sha": "0e146603975891d5677b0ae2ddd8d958336c92ee",
+    "truth_certificate": "canonical/runtime/rwa_capital_measurement_truth_certificate_v1.py",
+    "truth_certificate_git_blob_sha": "61c3a8d7a8004ab617a9b7964b84462162e1f406",
+    "dispatcher": "canonical/runtime/semantic_truth_dispatch_v1.py",
+    "dispatcher_git_blob_sha": "08786910d60ca7f3af1113c9e28cb27c9016ea53",
+    "truth_kind": "RWA_CAPITAL_MEASUREMENT_FRAME",
+    "verification": "canonical/verification/RWA_CAPITAL_MEASUREMENT_FRAME_VERIFY_20261010_V1.json",
+    "verification_git_blob_sha": "557d1958decee7713dd69eec750f88eca9870c67",
+    "verification_status": "PASS__63_OF_63_FOCUSED_AND_ADJACENT_TESTS__LIVE_BIS_DIS20_RBC20_REPLAY_PASS",
+    "semantic_frame_id": "FINANCE::RISK_BASED_REGULATORY_CAPITAL_RATIO_FRAME",
+    "proved_atom_ids": [
+      "DOMAIN::REGULATORY_CAPITAL",
+      "MEASUREMENT_KIND::RISK_BASED_CAPITAL_RATIO",
+      "DENOMINATOR::RISK_WEIGHTED_ASSETS",
+      "FACET_ROLE::QUANTIFIED_LEVEL"
+    ],
+    "positive_scope": "EXACT_capital_ratio_OCCURRENCE_WITH_EXPLICIT_PERCENTAGE_OF_RISK_WEIGHTED_ASSETS_OR_RWA",
+    "capital_tier_identity_authority": false,
+    "buffer_identity_authority": false,
+    "policy_adequacy_authority": false,
+    "terminal_authority": false
+  },
+  "generalized_ordering_rule": [
+    "CHECK_SOURCE_NATIVE_IDENTITY_FIRST",
+    "THEN_CHECK_LONGEST_AUTHENTICATED_MULTIWORD_TERM_CONTAINING_THE_TARGET_OCCURRENCE",
+    "THEN_CHECK_AUTHENTICATED_OCCURRENCE_BOUND_RELATIONAL_OR_REFERENCE_CONTEXT",
+    "THEN_CHECK_AUTHENTICATED_MEASUREMENT_BASIS_DENOMINATOR_UNIT_OR_FORMULA_STRUCTURE_WHEN_THE_SOURCE_EXPLICITLY_EXPOSES_IT",
+    "THEN_REUSE_VERIFIER_BACKED_DOMAIN_ONTOLOGY_OR_SCOPED_ENTAILMENT",
+    "ONLY_THEN_RUN_BARE_HEADWORD_SENSE_REASONING_IF_STILL_POLICY_MATERIAL",
+    "A_BROADER_PROVED_FRAME_MUST_NOT_BE_PROMOTED_TO_A_LEAF_CONCEPT_WITHOUT_SEPARATE_SUFFICIENCY_EVIDENCE",
+    "A_DIFFERENT_PROVED_FRAME_OR_IDENTITY_DOES_NOT_PROVE_FALSE_WITHOUT_INDEPENDENT_INCOMPATIBILITY_OR_DISJOINTNESS",
+    "SOURCE_AUTHORITY_FAIL_CLOSED_MUST_NOT_FALL_THROUGH_TO_A_WEAKER_SEMANTIC_ROUTE"
+  ],
+  "preserved_truth": {
+    "bare_margin_nonidentifiability_preserved": true,
+    "naked_loss_absorbing_cushion_global_identity_unproved": true,
+    "rwa_frame_does_not_select_cet1_tier1_or_total_capital": true,
+    "total_assets_or_missing_denominator_does_not_enter_rwa_frame": true,
+    "global_word_sense_closed": false,
+    "global_open_world_ontology_mapping_closed": false,
+    "finance_semantic_tail_closed": false
+  },
+  "still_open": [
+    "CONTEXT_RICH_FINANCE_AMBIGUITIES_REQUIRING_MECHANISMS_OTHER_THAN_ALREADY_VERIFIED_MULTIWORD_RELATIONAL_REFERENCE_REGCAP_CONTEXT_AND_MEASUREMENT_BASIS_ROUTES",
+    "ARBITRARY_UNRECOGNIZED_PROSE_WORD_SENSE_INFERENCE",
+    "GENERAL_IMPLICIT_REFERENCE_OUTSIDE_VERIFIED_SCOPES",
+    "DOMAIN_MAPPING_OUTSIDE_VERIFIER_BACKED_BOUNDED_AUTHORITIES",
+    "NONEXPLICIT_RELATIONS_WITHOUT_SOURCE_ALIGNED_OR_VERIFIER_BACKED_PROOF",
+    "CROSS_DOCUMENT_REQUIRED_EFFECT_FIELDS_REMAINING_AT_SEMANTIC_TOP",
+    "STRONGER_EXTERNAL_FACT_AUTHENTICATION_OUTSIDE_BOUND_CHANNELS",
+    "OPEN_WORLD_ONTOLOGY_COMPLETENESS"
+  ],
+  "current_next_move": "SELECT_A_DIFFERENT_CONCRETE_POLICY_MATERIAL_FINANCE_AMBIGUITY_THAT_SURVIVES_ALL_ALREADY_VERIFIED_SOURCE_NATIVE_MULTIWORD_RELATIONAL_REFERENCE_MEASUREMENT_BASIS_DOMAIN_AUTHORITY_AND_PAIRWISE_NONIDENTIFIABILITY_CHECKS__BUILD_ONLY_A_NEW_MECHANISM_IF_THE_CASE_PROVES_ONE_IS_NEEDED",
+  "hard_nonclaims": [
+    "NO_GLOBAL_WORD_SENSE_CLOSURE",
+    "NO_FINANCE_SEMANTIC_TAIL_CLOSURE",
+    "NO_GLOBAL_CAPITAL_RATIO_LEAF_IDENTITY",
+    "NO_CLAIM_RWA_MEASUREMENT_FRAME_EXHAUSTS_FINANCE_RATIO_MEANINGS",
+    "NO_NEW_R2_OR_ROOT2_AUTHORITY_FROM_THIS_BOUNDED_SUBREGION_ALONE",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
