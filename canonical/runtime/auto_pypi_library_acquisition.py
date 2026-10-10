@@ -3,7 +3,7 @@
 from __future__ import annotations
 import base64,hashlib,importlib,json,pathlib,re,subprocess,sys,tempfile,urllib.parse,urllib.request,zipfile
 
-import capability_discovery
+from canonical.runtime import capability_discovery
 
 
 class AutoPyPIAcquisitionFailure(RuntimeError):
