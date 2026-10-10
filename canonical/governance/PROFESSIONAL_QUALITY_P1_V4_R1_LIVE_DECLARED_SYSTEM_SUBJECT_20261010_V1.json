@@ -1,0 +1,93 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_DECLARED_SYSTEM_SUBJECT_V2",
+  "date": "2026-10-10",
+  "status": "CONTENT_ADDRESSED_DECLARED_SYSTEM_SUBJECT__R1_TARGET_STEP_INTERNALLY_EXECUTED__IDENTITY_ONLY__ZERO_QUALITY_AUTHORITY",
+  "supersedes": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V3_DECLARED_SYSTEM_SUBJECT_20261010_V1.json",
+    "git_blob_sha": "742cba44d567c2e2fbfb003b4924507e873a3214"
+  },
+  "subject_kind": "DECLARED_SYSTEM",
+  "subject_id": "PROFESSIONAL_QUALITY_P1_V4_R1_LIVE_INTEGRATED_SYSTEM_20261010",
+  "subject_sha256": "815b840e21ab71eba7d0f6940d68a1ea571a276d4ee2ad7e2520c08fe285ae13",
+  "subject_hash_rule": "SHA256_OF_RFC8259_JSON_CANONICALIZED_BY_SORTED_KEYS_NO_WHITESPACE_UTF8_OVER_SYSTEM_MATERIAL_OBJECT",
+  "system_material": {
+    "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_P1_V4_DECLARED_SYSTEM_SUBJECT_MATERIAL_V1",
+    "components": [
+      {
+        "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_EXECUTION_PROFILE_20261010_V3.json",
+        "git_blob_sha": "f7e89eafbb691c16d1bdf5b8d295a468d5e3bec5"
+      },
+      {
+        "path": "canonical/runtime/professional_quality_p1_router_v3.py",
+        "git_blob_sha": "cdb6716ac6d562d1ab222242d07aeecc5cdfac78"
+      },
+      {
+        "path": "canonical/runtime/professional_quality_p1_router_v4.py",
+        "git_blob_sha": "1c67bf99100b5c51f113ededf0920b7ccb7643e4"
+      },
+      {
+        "path": "canonical/runtime/professional_target_instance_compiler_v1.py",
+        "git_blob_sha": "deea06fb56032678901adbf23e16d422ff4fc789"
+      },
+      {
+        "path": "canonical/runtime/professional_artifact_hard_defect_preflight_v1.py",
+        "git_blob_sha": "1921ef67ec36ac1847243e99c49f638bf7cc170a"
+      },
+      {
+        "path": "canonical/governance/PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_REGISTRY_20261010_V1.json",
+        "git_blob_sha": "4c2283a4e877c4896e855c2459074f431fd1ea19"
+      },
+      {
+        "path": "canonical/governance/PROFESSIONAL_QUALITY_LEAF_BINDING_MANIFEST_20261010_V1.json",
+        "git_blob_sha": "a7cad32c9fd969ff2c3857bb924c7bd746237ec2"
+      },
+      {
+        "path": "canonical/runtime/professional_quality_leaf_binder_v2.py",
+        "git_blob_sha": "1a181b453271a2ce4fc112c3f6586afaf5effbd7"
+      },
+      {
+        "path": "canonical/governance/PROFESSIONAL_QUALITY_SAME_SUBJECT_COMPOSITION_GATE_20261010_V1.json",
+        "git_blob_sha": "f7a4496a6579041c6e2606243732c23b22bcf89c"
+      },
+      {
+        "path": "canonical/runtime/professional_quality_same_subject_composition_gate_v1.py",
+        "git_blob_sha": "46ab1a5bdf91e3559bfca89ee6059d0be7e89937"
+      },
+      {
+        "path": "canonical/governance/PROFESSIONAL_QUALITY_CLOSURE_NORMAL_FORM_20261009_V1.json",
+        "git_blob_sha": "ebcfe5a48efce9df7fbc69a3817ac2f9adb1ff93"
+      },
+      {
+        "path": "canonical/runtime/assurance_closure_compiler_v1.py",
+        "git_blob_sha": "b4274a48edbe626a9ae9fd33da2f2227ca4dd5e8"
+      }
+    ]
+  },
+  "verified_r1_live_target_execution": {
+    "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_P1_V4_R1_LIVE_TARGET_VERIFY_20261010_V1.json",
+    "verification_git_blob_sha": "57f4bc48020e13b654a52dca91ba1d2417adca28",
+    "canonical_target_instance_path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V4_R1_TARGET_INSTANCE_20261010_V1.json",
+    "canonical_target_instance_git_blob_sha": "b3b6788543041f919ef8c83ea28d88dee3c9c04d",
+    "canonical_compiled_target_sha256": "c78f38a12b728902661be0ae9ca6eb274ff194893b608bf201bb33229aecd5c2"
+  },
+  "identity_semantics": {
+    "exact_component_set_frozen": true,
+    "r1_target_step_is_brain_executed": true,
+    "caller_r1_target_step_self_attestation_forbidden": true,
+    "component_inclusion_does_not_imply_other_root_satisfaction": true,
+    "scoped_evidence_inclusion_does_not_transport_scope": true,
+    "every_additional_root_subject_binding_requires_independent_verification": true,
+    "global_subject_identity_authority": false
+  },
+  "intended_use": "SUCCESSOR_TARGET_IDENTITY_FOR_INCREMENTAL_TWELVE_ROOT_SAME_SUBJECT_BINDING__R1_FIRST",
+  "hard_nonclaims": [
+    "NO_OTHER_ROOT_SUBJECT_BINDING_AUTHORITY_FROM_SYSTEM_MEMBERSHIP",
+    "NO_ARBITRARY_LANGUAGE_TARGET_EXTRACTION_COMPLETENESS",
+    "NO_GLOBAL_LEAF_OR_ROOT_CLOSURE",
+    "NO_DOMAIN_SEMANTIC_OR_EXECUTION_CLOSURE",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
