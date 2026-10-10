@@ -1,14 +1,14 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_TB_SCIENCE_EXECUTION_POINTER_V2",
   "date": "2026-10-10",
-  "status": "RANK18_V2_DURABLE_START_COMMITTED__RESULT_PENDING__EIGHTEEN_TRIALS_CONSUMED__NO_RETRY_OR_REPLACEMENT__SCHEDULER_FROZEN",
+  "status": "RANK18_V6_FINAL_ZERO__EIGHTEEN_TRIALS_CONSUMED__EIGHTEEN_FINAL_FAILURES__NO_PENDING__RANK19_EXECUTION_FROZEN_PENDING_ZERO_EXPOSURE_PLANNER_REPAIR",
   "current_result": {
-    "path": "canonical/verification/TB_SCIENCE_RANK18_V2_DURABLE_START_COMMIT_TRUTH_20261010_V1.json",
-    "git_blob_sha": "f7970981283de33ffb421d1ba610532fe6cb9f5d"
+    "path": "canonical/verification/TB_SCIENCE_RANK18_V6_IRREVERSIBLE_RESULT_TRUTH_20261010_V1.json",
+    "git_blob_sha": "2459d821057d6f7178ffea440fb19966e56a3d89"
   },
   "current_ledger": {
-    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V36.json",
-    "git_blob_sha": "bbf368edb524a813452e4a1c6d7ee46ad1637b14"
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V37.json",
+    "git_blob_sha": "1f44e46869055cc046da9c53fcae485615f239f9"
   },
   "verification": {
     "path": "canonical/verification/TB_SCIENCE_RANK18_CROSS_COMMIT_CAS_AUTHORITY_CORRECTION_20261010_V1.json",
@@ -17,27 +17,9 @@
   "counts": {
     "benchmark_trials_consumed": 18,
     "consumed_successes_final": 0,
-    "consumed_failures_final": 17,
-    "started_result_pending": 1,
-    "finalized_slots": 17
-  },
-  "in_flight": {
-    "ledger_schedule_rank": 18,
-    "slot_id": "terminal-bench-science/longitudinal-clinical-agent::trial-0",
-    "task_digest": "sha256:e9a166b2173f7014d4f1559505397b221f94bc446eab031f94791b35e0e5f1c9",
-    "logical_attempt_id": "a02ee7de469f953679fb593ab152a9f67eb1ebe8c364f8c748f18cd8a81eab8d",
-    "workflow_run_id": 38030021656,
-    "workflow_job_id": 114148806597,
-    "execution_branch": "execute/tb-science-rank18-20261010-v2",
-    "task_read": true,
-    "task_started": true,
-    "durable_start_cas_acquired": true,
-    "benchmark_trials_consumed": 1,
-    "result_present": false,
-    "execution_authority": false,
-    "retry_authority": false,
-    "replacement_authority": false,
-    "finalization_authority": true
+    "consumed_failures_final": 18,
+    "started_result_pending": 0,
+    "finalized_slots": 18
   },
   "stale_parallel_run": {
     "workflow_run_id": 38029667582,
@@ -47,5 +29,23 @@
   },
   "acceptance_credit_delta": 0,
   "terminal_credit_delta": 0,
-  "next": "OBSERVE_AND_RECONCILE_ONLY_WORKFLOW_RUN_38030021656_FINAL_RECEIPT__DO_NOT_ARM_ANY_TB_SCIENCE_EXECUTION"
+  "next": "ZERO_EXPOSURE_DIAGNOSE_AND_VERIFY_GENERIC_SCIENCE_PLANNER_PRE_ACTION_FAILURE__DO_NOT_ARM_RANK19_EXECUTION",
+  "finalized_rank18": {
+    "ledger_schedule_rank": 18,
+    "slot_id": "terminal-bench-science/longitudinal-clinical-agent::trial-0",
+    "task_digest": "sha256:e9a166b2173f7014d4f1559505397b221f94bc446eab031f94791b35e0e5f1c9",
+    "logical_attempt_id": "a02ee7de469f953679fb593ab152a9f67eb1ebe8c364f8c748f18cd8a81eab8d",
+    "workflow_run_id": 38030021656,
+    "workflow_job_id": 114148806597,
+    "task_read": true,
+    "task_started": true,
+    "durable_start_cas_acquired": true,
+    "benchmark_trials_consumed": 1,
+    "result_present": true,
+    "reward": 0,
+    "final_classification": "FINAL_ZERO",
+    "failure_root_class": "PLANNER_CONTROLLER_FAILURE_BEFORE_FIRST_ACTION",
+    "retry_authority": false,
+    "replacement_authority": false
+  }
 }
