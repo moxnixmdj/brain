@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_P1_ROUTER_V3_INDEPENDENT_REPLAY_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_SPRITE_REPLAY__11_OF_11__EXACT_CURRENT_BLOBS__ZERO_QUALITY_OR_TERMINAL_CREDIT",
+  "subject": {
+    "router_path": "canonical/runtime/professional_quality_p1_router_v3.py",
+    "router_git_blob_sha": "cdb6716ac6d562d1ab222242d07aeecc5cdfac78",
+    "base_router_path": "canonical/runtime/professional_quality_p1_router_v2.py",
+    "base_router_git_blob_sha": "bdbbc53ab1e50743869ec515a019bfc17218f126",
+    "hard_defect_preflight_path": "canonical/runtime/professional_artifact_hard_defect_preflight_v1.py",
+    "hard_defect_preflight_git_blob_sha": "1921ef67ec36ac1847243e99c49f638bf7cc170a",
+    "test_path": "canonical/tests/test_professional_quality_p1_router_v3.py",
+    "test_git_blob_sha": "7fd496e9200d1408d561cadcf40b8f4bf536c898",
+    "profile_v1_path": "canonical/governance/PROFESSIONAL_QUALITY_P1_EXECUTION_PROFILE_20261010_V1.json",
+    "profile_v1_git_blob_sha": "a01ef78846ce22996128cc2a5858341d8418074c",
+    "profile_v3_path": "canonical/governance/PROFESSIONAL_QUALITY_P1_EXECUTION_PROFILE_20261010_V3.json",
+    "profile_v3_git_blob_sha": "f7e89eafbb691c16d1bdf5b8d295a468d5e3bec5"
+  },
+  "carrier": {
+    "type": "SPRITE",
+    "name": "brain-escape-audit-verify-20261010-v1",
+    "id": "sprite-e24ab09a-a44f-45c6-816a-521154d8c1cc",
+    "command": "python -m unittest -v canonical.tests.test_professional_quality_p1_router_v3",
+    "environment_mutation": "NONE"
+  },
+  "result": {
+    "tests_total": 11,
+    "tests_passed": 11,
+    "tests_failed": 0,
+    "real_artifact_paths_exercised": [
+      "CLEAN_DOCX_PASSES_HARD_DEFECT_PREFLIGHT_AND_DELEGATES",
+      "BLANK_DOCX_IS_BLOCKED_BEFORE_BASE_ROUTER_SUCCESS"
+    ],
+    "fail_closed_paths_exercised": [
+      "NON_OBJECT_STATE",
+      "PREFLIGHT_SELF_ATTESTATION",
+      "INCOMPLETE_PREFLIGHT_INPUT_PAIR",
+      "MISSING_PREFLIGHT_INPUTS_ABSTAIN",
+      "HARD_DEFECT_FAILURE",
+      "PROFILE_CONTRACT_DRIFT",
+      "MISSING_PROFILE"
+    ],
+    "control_field_leakage_blocked": true
+  },
+  "current_truth": {
+    "router_v3_independent_replay": true,
+    "hard_defect_preflight_independently_verified": true,
+    "twelve_scoped_capabilities_independently_verified": true,
+    "domain_semantic_closure": false,
+    "domain_execution_closure": false,
+    "live_default": false
+  },
+  "hard_nonclaims": [
+    "NO_PROFESSIONAL_QUALITY_COMPLETENESS_PROOF",
+    "NO_GLOBAL_LEAF_OR_ROOT_CLOSURE",
+    "NO_DOMAIN_SEMANTIC_CLOSURE",
+    "NO_DOMAIN_EXECUTION_CLOSURE",
+    "NO_LIVE_DEFAULT_PROMOTION",
+    "NO_QUALITY_AUTHORITY",
+    "NO_TERMINAL_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "quality_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
