@@ -1,0 +1,76 @@
+{
+  "schema": "PROJECT_BRAIN_R3_NATIVE_RETAINED_DISTINGUISHING_EVIDENCE_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_MERGED_DELTA_BYTES__PYCOMPILE_PASS__PROVIDER_3_OF_3__DRIVER_BINDING_2_OF_2__FULL_R3_CLOSURE_REPLAY_NOT_RERUN__ZERO_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "merged_main_head": "059033bf0f95cc13881eb718aa61fe0b65406d92",
+    "pull_request": 3879,
+    "merge_title": "Merge R3 native retained-evidence acquisition"
+  },
+  "exact_blob_bindings": {
+    "canonical/runtime/r3_retained_distinguishing_evidence_provider_v1.py": "c713276a1dafa33b233982a4257167757a348a69",
+    "canonical/runtime/r3_improvement_queue_driver_v1.py": "870cd665fffb5398e452b4ede81e54adbe2d9f0d",
+    "canonical/tests/test_r3_retained_distinguishing_evidence_provider_v1.py": "6f1a11bfef7e310516dd72006cde36266fa39645",
+    "canonical/runtime/r3_distinguishing_evidence_acquisition_v1.py": "81abd20f37b3a22bd6a7b97e3a71d6a1e81c6f76",
+    "canonical/runtime/r3_distinguishing_evidence_request_v1.py": "3afe5c84f27482d18a9a13cf261366aa3d1f02b2",
+    "canonical/runtime/r3_verification_frontier_repair_reducer_v1.py": "faa384c0d52155448567581996a29b55ccc41b51"
+  },
+  "independent_execution": {
+    "carrier": "SPRITE",
+    "sprite_name": "brain-r3-native-evidence-verify-20261010",
+    "sprite_id": "sprite-61fff7c6-fbff-4b85-a8e1-b98e28fd7e31",
+    "private_repository_clone_available": false,
+    "source_transport": "EXACT_BRANCH_BYTES_MATERIALIZED_THROUGH_CONNECTED_GITHUB_AUTHORITY",
+    "py_compile": "PASS",
+    "focused_provider_semantics": {
+      "checks": 3,
+      "passed": 3,
+      "cases": [
+        "AUTHENTICATED_CHECKPOINT_EVIDENCE_RECONSTRUCTED_WITHOUT_EFFECT_REPLAY",
+        "RAW_ACCEPTANCE_METADATA_RECONSTRUCTED_ONLY_FROM_RETAINED_ACCEPTANCE_AND_REPLAY",
+        "MISSING_RAW_ACCEPTANCE_RECEIPT_NOT_FABRICATED"
+      ]
+    },
+    "focused_driver_binding": {
+      "checks": 2,
+      "passed": 2,
+      "cases": [
+        "NATIVE_RETAINED_EVIDENCE_FALLBACK_SELECTED_ONLY_WHEN_HOST_PROVIDER_ABSENT",
+        "EXPLICIT_HOST_EVIDENCE_PROVIDER_PRESERVES_PRECEDENCE"
+      ]
+    }
+  },
+  "proved": {
+    "brain_owned_retained_evidence_candidate_provider_exists": true,
+    "provider_uses_only_authenticated_retained_proof_replay_and_checkpoint_material": true,
+    "requested_field_restriction_preserved": true,
+    "effect_replay_required": false,
+    "missing_acceptance_receipt_fabrication_rejected": true,
+    "host_provider_override_preserved": true,
+    "provider_truth_authority": false,
+    "verification_authority": false,
+    "promotion_authority": false,
+    "acceptance_authority": false,
+    "terminal_authority": false
+  },
+  "residual": {
+    "full_r3_regression_replayed": false,
+    "full_r3_control_loop_closure_resealed": false,
+    "arbitrary_missing_distinguishing_evidence_acquired": false,
+    "genuine_adapter_patch_author_gap_closed": false,
+    "external_reality_observability_closed": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_FULL_R3_V13_CLOSURE",
+    "NO_CLAIM_ARBITRARY_MISSING_EVIDENCE_CAN_BE_RECONSTRUCTED",
+    "NO_CLAIM_R3_SUCCESS_ADAPTER_PATCH_AUTHOR_IS_OWNED",
+    "NO_CLAIM_VERIFICATION_AUTHORITY_CHANGED",
+    "NO_SELF_CERTIFICATION",
+    "NO_TERMINAL_OR_OPUS_CHECKPOINT_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
