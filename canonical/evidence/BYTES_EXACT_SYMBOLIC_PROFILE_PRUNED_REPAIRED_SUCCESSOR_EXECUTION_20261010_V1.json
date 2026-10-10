@@ -1,0 +1,86 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_PROFILE_PRUNED_REPAIRED_SUCCESSOR_EXECUTION_V1",
+  "status": "FRESH_SUCCESSOR_EXECUTION__PROFILE_PRUNED_WITH_QUARTIC_CAUSAL_REPAIR__ZERO_PROMOTION_CREDIT",
+  "recorded_at": "2026-10-10",
+  "predecessor": {
+    "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_COMPACT_ERRORS_SUCCESSOR_EXECUTION_20261010_V1.json",
+    "package_raw_python_source_bytes": 3261401,
+    "manifest_sha256": "8fa8d5f6e4a957d35bbf8c1edb82ff0cb068ecbba77bc1550f082363f7abc635"
+  },
+  "falsification": "canonical/evidence/BYTES_EXACT_SYMBOLIC_PROFILE_PRUNE_NEXT19_FALSIFICATION_20261010_V1.json",
+  "transforms": [
+    {
+      "id": "SPENT_PROFILE_BODY_PRUNING_V16",
+      "tool": "canonical/research/bytes/tools/spent_profile_deadbody_v16.py",
+      "tool_sha256": "b848e8c85e4ea736875b81d5137cefdf941fed048962b2c788212a0d90bc70dd",
+      "reconstruction": "canonical/research/bytes/tools/rebuild_candidate_v16.py"
+    },
+    {
+      "id": "FRESH_QUARTIC_CAUSAL_REPAIR_V17",
+      "tool": "canonical/research/bytes/tools/fresh_quartic_unify_repair_v17.py",
+      "tool_sha256": "7bdd3ab273ab936aee1caacd7b1086b4d9c69e6db730169159adcf7113bf4df5",
+      "reconstruction": "canonical/research/bytes/tools/rebuild_candidate_v17.py",
+      "restored_methods": [
+        "Domain.unify_with_symbols",
+        "DMP.sub",
+        "DMP_Python._sub"
+      ]
+    }
+  ],
+  "measured_candidate": {
+    "status": "PHYSICALLY_REWRITTEN_RESEARCH_CANDIDATE__NOT_PROMOTED",
+    "python_files": 277,
+    "package_raw_python_source_bytes": 2251793,
+    "router_raw_python_source_bytes": 2760,
+    "B_exec_raw_python_source_bytes": 2254553,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "manifest_sha256": "9dc4ad75c82f466c197b070d99935828bb6c62bf278fa864d57e3c420e2c14ed",
+    "raw_improvement_vs_v15_bytes": 1009608,
+    "raw_improvement_vs_v13_bytes": 1076839,
+    "loaded_total_raw_bytes": 2251793,
+    "loaded_core_raw_bytes": 546379,
+    "loaded_functions_raw_bytes": 382474,
+    "loaded_polys_raw_bytes": 378173,
+    "archive_bytes": 336148,
+    "archive_sha256": "38783665686a5bb24e0484a00f6e651ecd492d3054663b02d874770dbef99eac",
+    "ustar_sha256": "a42007f9edf12436916377b9eb8cecb055bcea85b2479f8912f048a023ceceae"
+  },
+  "qualification": {
+    "NEXT19_after_repair": "6210/6210 SPENT CALIBRATION ONLY",
+    "fresh_NEXT20": {
+      "id": "QUAL_SUCCESSOR_NEXT20_20261010_V1",
+      "seed": 4472136,
+      "per_operation_budget": 560,
+      "cases": 6440,
+      "corpus_sha256": "dbd9e4bc73e5b595f6207633bea42c2d933ec66da558ca4c174669020291e292",
+      "stock_donor": "6440/6440",
+      "candidate": "6440/6440",
+      "independent_copy": "6440/6440",
+      "archive_replay": "6440/6440",
+      "spent": true
+    }
+  },
+  "durable_artifact": {
+    "library_status": "PERSISTED_IN_CHATGPT_LIBRARY",
+    "library_file_id": "libfile_9c477c0bf7e881918f78856772c7b915",
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_QUARTIC_REPAIR_DEADBODY_SUCCESSOR_20261010_V1.tar.xz",
+    "bytes": 336148,
+    "sha256": "38783665686a5bb24e0484a00f6e651ecd492d3054663b02d874770dbef99eac"
+  },
+  "next_frozen_qualification": {
+    "id": "QUAL_SUCCESSOR_NEXT21_20261010_V1",
+    "seed": 4582576,
+    "per_operation_budget": 580,
+    "cases": 6670,
+    "corpus_sha256": "91f7409c6f377db62c6ee1c2e3ebd858ce34145df58b8c74f62692912fc6fa71",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT"
+  },
+  "truth_boundary": [
+    "MEASURED: exact V17 bytes pass fresh NEXT20 6,440/6,440 on donor, candidate, independent copy, and extracted archive.",
+    "MEASURED: V17 is 1,009,608 raw bytes smaller than V15 and 1,076,839 smaller than V13 while retaining the same 277-module graph.",
+    "MEASURED: loaded byte concentrations rerank to core 546,379; functions 382,474; polys 378,173.",
+    "INFERRED: substantial retained function-body implementation is outside this bounded route, but non-use evidence is never universal proof and fresh counterexamples remain authoritative.",
+    "NOT CLAIMED: universal SymPy correctness, absolute minimum, out-of-scope behavior preservation, or Opus-family promotion.",
+    "PROMOTION CREDIT: 0."
+  ]
+}
