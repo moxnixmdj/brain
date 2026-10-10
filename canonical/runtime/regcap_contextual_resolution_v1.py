@@ -17,6 +17,7 @@ from canonical.runtime.regcap_contrastive_discriminator_matrix_v1 import (
     DOMAIN,
     verify_matrix,
 )
+from canonical.runtime import regcap_bounded_rival_registry_authority_v1 as regcap_registry
 
 SCHEMA = "PROJECT_BRAIN_REGCAP_CONTEXTUAL_RESOLUTION_V1"
 COMPLETENESS_SCHEMA = "PROJECT_BRAIN_TASK_CANDIDATE_SET_COMPLETENESS_RECEIPT_V1"
@@ -211,4 +212,142 @@ def resolve(
         candidate_universe_complete=True,
         candidate_completeness_result=complete,
         matrix_sha256=matrix["matrix_sha256"],
+    )
+
+
+def resolve_authenticated_regcap_scope(
+    source_text: str,
+    *,
+    start: int,
+    end: int,
+    task_scope_id: str,
+    candidate_ids: Sequence[str],
+    repo_root=None,
+    projection_verifier=None,
+) -> dict[str, Any]:
+    """Resolve direct bounded reg-cap context without requiring descriptor text.
+
+    Authority comes only from the existing authenticated three-rival registry.
+    The supplied candidate ids must exactly match that bounded registry.
+    """
+    if task_scope_id != regcap_registry.SCOPE_ID:
+        return _base(
+            "NOT_APPLICABLE__OUTSIDE_AUTHENTICATED_REGCAP_SCOPE",
+            candidate_ids=list(candidate_ids) if isinstance(candidate_ids, Sequence) else [],
+        )
+
+    observation = compile_span(source_text, start=start, end=end)
+    if observation.get("pass") is not True:
+        return _base(
+            observation.get("status") or "UNRESOLVED",
+            observation=observation,
+        )
+
+    universe = (
+        regcap_registry.resolve_authenticated_registry(
+            repo_root=repo_root,
+            projection_verifier=projection_verifier,
+        )
+        if projection_verifier is not None
+        else regcap_registry.resolve_authenticated_registry(repo_root=repo_root)
+    )
+    if universe.get("status") == "FAIL_CLOSED":
+        return _base(
+            "FAIL_CLOSED",
+            reason="REGCAP_BOUNDED_REGISTRY_AUTHORITY_FAILED",
+            registry_result=universe,
+        )
+    if (
+        universe.get("authenticated_scope_completeness") is not True
+        or universe.get("hypothesis_set_complete") is not True
+    ):
+        return _base(
+            "FAIL_CLOSED",
+            reason="REGCAP_BOUNDED_REGISTRY_COMPLETENESS_UNPROVED",
+            registry_result=universe,
+        )
+
+    registry_ids = sorted(str(x) for x in universe.get("candidate_concept_ids") or [])
+    supplied_ids = [str(x) for x in candidate_ids]
+    if sorted(supplied_ids) != registry_ids:
+        return _base(
+            "FAIL_CLOSED",
+            reason="CANDIDATES_DO_NOT_MATCH_AUTHENTICATED_REGISTRY",
+            registry_candidate_ids=registry_ids,
+            supplied_candidate_ids=sorted(supplied_ids),
+            registry_result=universe,
+        )
+
+    authority = universe.get("authority_result")
+    matrix_result = (
+        authority.get("matrix_result")
+        if isinstance(authority, Mapping)
+        else None
+    )
+    if not isinstance(matrix_result, Mapping) or matrix_result.get("pass") is not True:
+        return _base(
+            "FAIL_CLOSED",
+            reason="AUTHENTICATED_MATRIX_RESULT_MISSING",
+            registry_result=universe,
+        )
+
+    row = next(
+        (
+            x for x in matrix_result.get("observations", [])
+            if isinstance(x, Mapping)
+            and x.get("observation_id") == observation.get("observation_id")
+        ),
+        None,
+    )
+    if not isinstance(row, Mapping):
+        return _base(
+            "FAIL_CLOSED",
+            reason="OBSERVATION_NOT_IN_AUTHENTICATED_MATRIX",
+            observation=observation,
+            registry_result=universe,
+        )
+
+    matches = [
+        cid for cid in registry_ids
+        if row.get("outcomes", {}).get(cid) == observation.get("outcome")
+    ]
+    if len(matches) != 1:
+        return _base(
+            "UNRESOLVED__AUTHENTICATED_OBSERVATION_NOT_UNIQUE_IN_BOUND_REGISTRY",
+            observation=observation,
+            matching_candidates=matches,
+            candidate_ids=registry_ids,
+            candidate_universe_complete=True,
+            registry_result=universe,
+        )
+
+    selected = matches[0]
+    proof_material = {
+        "task_scope_id": task_scope_id,
+        "candidate_ids": registry_ids,
+        "matrix_sha256": matrix_result.get("matrix_sha256"),
+        "observation_id": observation["observation_id"],
+        "outcome": observation["outcome"],
+        "selected_concept_id": selected,
+        "source_text_sha256": observation["source_text_sha256"],
+        "source_span": observation["source_span"],
+    }
+    return _base(
+        "PASS__AUTHENTICATED_REGCAP_CONTEXT_RESOLVED_WITHOUT_DESCRIPTOR",
+        passed=True,
+        semantic_truth_authority=True,
+        concept_identity_authority=True,
+        candidate_universe_complete=True,
+        selected_concept_id=selected,
+        observation=observation,
+        candidate_ids=registry_ids,
+        matching_candidates=matches,
+        registry_result=universe,
+        matrix_sha256=matrix_result.get("matrix_sha256"),
+        proof_sha256=_sha(proof_material),
+        boundary=(
+            "EXACT_AUTHENTICATED_THREE_RIVAL_TASK_SCOPE_ONLY__"
+            "NO_LITERAL_DESCRIPTOR_REQUIRED__NO_GLOBAL_ONTOLOGY_COMPLETENESS__"
+            "NO_SEMANTIC_IDENTITY_OUTSIDE_THIS_BOUNDED_SCOPE_OR_TERMINAL_AUTHORITY"
+        ),
     )
