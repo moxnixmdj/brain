@@ -25,6 +25,15 @@ class V3Tests(unittest.TestCase):
         )
         self.assertFalse(out["pass"])
 
+    def test_pointer_bookkeeping_drift_preserves_resolution(self):
+        p=json.loads((ROOT/v3.MISSION_POINTER_PATH).read_text())
+        a=json.loads((ROOT/v3.MISSION_AUTHORITY_PATH).read_text())
+        p=deepcopy(p);p["synthetic_currentness_only"]={"n":1}
+        out=v3.resolve_mission_authority(
+            p,a,authority_blob_sha=v3.EXPECTED_MISSION_AUTHORITY_BLOB
+        )
+        self.assertTrue(out["pass"],out)
+
     def test_authority_drift(self):
         p=json.loads((ROOT/v3.MISSION_POINTER_PATH).read_text())
         a=json.loads((ROOT/v3.MISSION_AUTHORITY_PATH).read_text())
