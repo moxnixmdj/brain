@@ -70,6 +70,7 @@ def _verify_receipt(
     claim: Mapping[str, Any],
     verifier: Verifier | None,
     expected_kind: str,
+    expected_state_sha256: str,
 ) -> dict[str, Any]:
     if verifier is None:
         raise ReachedEscapeAuthorityError(expected_kind + "_VERIFIER_REQUIRED")
@@ -84,6 +85,8 @@ def _verify_receipt(
     claim_sha = _digest(claim)
     if receipt.get("claim_sha256") != claim_sha:
         raise ReachedEscapeAuthorityError(expected_kind + "_CLAIM_BINDING_MISMATCH")
+    if receipt.get("candidate_state_sha256") != expected_state_sha256:
+        raise ReachedEscapeAuthorityError(expected_kind + "_STATE_BINDING_MISMATCH")
     if receipt.get("authority_kind") != expected_kind:
         raise ReachedEscapeAuthorityError(expected_kind + "_AUTHORITY_KIND_MISMATCH")
     if receipt.get("verification_authority_mutated") is not False:
@@ -96,6 +99,25 @@ def _verify_receipt(
     if observed_digest != expected_digest:
         raise ReachedEscapeAuthorityError(expected_kind + "_RECEIPT_DIGEST_MISMATCH")
     return receipt
+
+
+def _resource_bound(receipt: Mapping[str, Any], *, label: str) -> tuple[float, str]:
+    verified = receipt.get("verified")
+    if not isinstance(verified, Mapping):
+        raise ReachedEscapeAuthorityError(label + "_VERIFIED_PAYLOAD_REQUIRED")
+    bound = verified.get("resource_bound")
+    if not isinstance(bound, Mapping):
+        raise ReachedEscapeAuthorityError(label + "_RESOURCE_BOUND_REQUIRED")
+    amount = bound.get("amount")
+    if isinstance(amount, bool) or not isinstance(amount, (int, float)):
+        raise ReachedEscapeAuthorityError(label + "_RESOURCE_AMOUNT_INVALID")
+    amount = float(amount)
+    if not math.isfinite(amount) or amount < 0:
+        raise ReachedEscapeAuthorityError(label + "_RESOURCE_AMOUNT_INVALID")
+    unit = bound.get("unit")
+    if not isinstance(unit, str) or not unit.strip():
+        raise ReachedEscapeAuthorityError(label + "_RESOURCE_UNIT_INVALID")
+    return amount, unit.strip()
 
 
 def _prepare_candidate(state: Mapping[str, Any]) -> tuple[str, list[str], list[dict[str, Any]], list[dict[str, Any]]]:
@@ -181,13 +203,23 @@ def construct(
     }
     try:
         state_id, region_ids, policies, discriminators = _prepare_candidate(state)
+        candidate_state_core = {
+            "schema": kernel.STATE_SCHEMA,
+            "state_id": state_id,
+            "regions": [{"region_id": rid} for rid in region_ids],
+            "policies": deepcopy(policies),
+            "discriminators": deepcopy(discriminators),
+        }
+        candidate_state_sha256 = _digest(candidate_state_core)
 
         verified_policies: list[dict[str, Any]] = []
         policy_receipts: list[dict[str, Any]] = []
+        resource_bounds: list[tuple[str, str, float, str]] = []
         for row in policies:
             claim = {
                 "schema": CLAIM_SCHEMA,
-                "claim_type": "POLICY_ADEQUACY_AND_SAFETY",
+                "claim_type": "POLICY_ADEQUACY_SAFETY_AND_RESOURCE",
+                "candidate_state_sha256": candidate_state_sha256,
                 "state_id": state_id,
                 "region_ids": region_ids,
                 "policy_id": row["policy_id"],
@@ -196,7 +228,8 @@ def construct(
             receipt = _verify_receipt(
                 claim=claim,
                 verifier=policy_authority_verifier,
-                expected_kind="POLICY_ADEQUACY_AND_SAFETY",
+                expected_kind="POLICY_ADEQUACY_SAFETY_AND_RESOURCE",
+                expected_state_sha256=candidate_state_sha256,
             )
             verified = receipt.get("verified")
             if not isinstance(verified, Mapping):
@@ -205,6 +238,8 @@ def construct(
                 raise ReachedEscapeAuthorityError("POLICY_SAFETY_NOT_VERIFIED:" + row["policy_id"])
             if sorted(verified.get("adequate_region_ids") or []) != row["adequate_region_ids"]:
                 raise ReachedEscapeAuthorityError("POLICY_ADEQUACY_NOT_EXACT:" + row["policy_id"])
+            amount, unit = _resource_bound(receipt, label="POLICY:" + row["policy_id"])
+            resource_bounds.append(("POLICY", row["policy_id"], amount, unit))
             verified_policies.append(
                 {
                     "policy_id": row["policy_id"],
@@ -220,7 +255,8 @@ def construct(
         for row in discriminators:
             claim = {
                 "schema": CLAIM_SCHEMA,
-                "claim_type": "DISCRIMINATOR_TRUTH_SAFETY_COMPLETENESS",
+                "claim_type": "DISCRIMINATOR_TRUTH_SAFETY_COMPLETENESS_AND_RESOURCE",
+                "candidate_state_sha256": candidate_state_sha256,
                 "state_id": state_id,
                 "region_ids": region_ids,
                 "discriminator_id": row["discriminator_id"],
@@ -229,7 +265,8 @@ def construct(
             receipt = _verify_receipt(
                 claim=claim,
                 verifier=discriminator_authority_verifier,
-                expected_kind="DISCRIMINATOR_TRUTH_SAFETY_COMPLETENESS",
+                expected_kind="DISCRIMINATOR_TRUTH_SAFETY_COMPLETENESS_AND_RESOURCE",
+                expected_state_sha256=candidate_state_sha256,
             )
             verified = receipt.get("verified")
             if not isinstance(verified, Mapping):
@@ -242,6 +279,12 @@ def construct(
                 raise ReachedEscapeAuthorityError(
                     "DISCRIMINATOR_OUTCOMES_NOT_EXACT:" + row["discriminator_id"]
                 )
+            amount, unit = _resource_bound(
+                receipt, label="DISCRIMINATOR:" + row["discriminator_id"]
+            )
+            resource_bounds.append(
+                ("DISCRIMINATOR", row["discriminator_id"], amount, unit)
+            )
             verified_discriminators.append(
                 {
                     "discriminator_id": row["discriminator_id"],
@@ -253,6 +296,11 @@ def construct(
                 }
             )
             discriminator_receipts.append(receipt)
+
+        resource_units = sorted({row[3] for row in resource_bounds})
+        if len(resource_units) > 1:
+            raise ReachedEscapeAuthorityError("RESOURCE_UNITS_NOT_COMPARABLE")
+        resource_unit = resource_units[0] if resource_units else None
 
         verified_state = {
             "schema": kernel.STATE_SCHEMA,
@@ -266,12 +314,23 @@ def construct(
             **deepcopy(dict(result)),
             "schema": SCHEMA,
             "truth_authority_bound": True,
+            "candidate_state_sha256": candidate_state_sha256,
             "authority_receipts": {
                 "policy": policy_receipts,
                 "discriminator": discriminator_receipts,
             },
             "candidate_authority_flags_ignored": True,
-            "resource_admissibility_proved": False,
+            "resource_admissibility_proved": bool(resource_bounds),
+            "resource_unit": resource_unit,
+            "resource_bounds": [
+                {
+                    "kind": kind,
+                    "subject_id": subject_id,
+                    "finite_upper_bound": amount,
+                    "unit": unit,
+                }
+                for kind, subject_id, amount, unit in resource_bounds
+            ],
             "terminal_authority": False,
             "terminal_credit_delta": 0,
         }
