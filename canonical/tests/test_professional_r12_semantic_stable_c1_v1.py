@@ -10,8 +10,9 @@ ROOT = Path(__file__).resolve().parents[2]
 def current_inputs():
     r12 = c1._current_r12_claim(ROOT)
     payload = json.loads((ROOT / c1.INPUT_PATH).read_text(encoding="utf-8"))
+    replay = json.loads((ROOT / c1.REPLAY_PATH).read_text(encoding="utf-8"))
     assert r12 is not None
-    return r12, payload
+    return r12, payload, replay
 
 
 class StableC1Tests(unittest.TestCase):
@@ -26,44 +27,82 @@ class StableC1Tests(unittest.TestCase):
         self.assertFalse(out["terminal_authority"])
 
     def test_old_claim_substitution_fails(self):
-        r12, payload = current_inputs()
+        r12, payload, replay = current_inputs()
         r12 = deepcopy(r12)
         r12["frozen_claim"]["claim_id"] = c1.OLD_CLAIM_ID
-        out = c1.evaluate(r12_claim=r12, composition_payload=payload, repo_root=ROOT)
+        out = c1.evaluate(
+            r12_claim=r12,
+            composition_input=payload,
+            composition_replay=replay,
+            gate_blob=c1.GATE_BLOB,
+        )
         self.assertFalse(out["pass"])
         self.assertEqual(out["reason"], "R12_STABLE_CLAIM_ID_DRIFT")
 
     def test_missing_root_binding_fails(self):
-        r12, payload = current_inputs()
+        r12, payload, replay = current_inputs()
         payload = deepcopy(payload)
         payload["root_subject_bindings"] = payload["root_subject_bindings"][:-1]
-        out = c1.evaluate(r12_claim=r12, composition_payload=payload, repo_root=ROOT)
+        out = c1.evaluate(
+            r12_claim=r12,
+            composition_input=payload,
+            composition_replay=replay,
+            gate_blob=c1.GATE_BLOB,
+        )
         self.assertFalse(out["pass"])
-        self.assertEqual(out["reason"], "SAME_SUBJECT_COMPOSITION_GATE_REJECTED")
+        self.assertEqual(out["reason"], "COMPOSITION_INPUT_ROOT_COUNT_DRIFT")
 
     def test_duplicate_root_binding_fails(self):
-        r12, payload = current_inputs()
+        r12, payload, replay = current_inputs()
         payload = deepcopy(payload)
         payload["root_subject_bindings"][-1] = deepcopy(payload["root_subject_bindings"][0])
-        out = c1.evaluate(r12_claim=r12, composition_payload=payload, repo_root=ROOT)
+        out = c1.evaluate(
+            r12_claim=r12,
+            composition_input=payload,
+            composition_replay=replay,
+            gate_blob=c1.GATE_BLOB,
+        )
         self.assertFalse(out["pass"])
-        self.assertEqual(out["reason"], "SAME_SUBJECT_COMPOSITION_GATE_REJECTED")
+        self.assertEqual(out["reason"], "COMPOSITION_INPUT_ROOT_IDENTITY_INVALID")
 
-    def test_subject_drift_fails_before_gate(self):
-        r12, payload = current_inputs()
+    def test_subject_drift_fails(self):
+        r12, payload, replay = current_inputs()
         payload = deepcopy(payload)
         payload["subject_sha256"] = "0" * 64
-        out = c1.evaluate(r12_claim=r12, composition_payload=payload, repo_root=ROOT)
+        out = c1.evaluate(
+            r12_claim=r12,
+            composition_input=payload,
+            composition_replay=replay,
+            gate_blob=c1.GATE_BLOB,
+        )
         self.assertFalse(out["pass"])
         self.assertEqual(out["reason"], "COMPOSITION_SUBJECT_DRIFT")
 
     def test_mission_binding_drift_fails(self):
-        r12, payload = current_inputs()
+        r12, payload, replay = current_inputs()
         r12 = deepcopy(r12)
         r12["frozen_claim"]["mission_blob_sha"] = "0" * 40
-        out = c1.evaluate(r12_claim=r12, composition_payload=payload, repo_root=ROOT)
+        out = c1.evaluate(
+            r12_claim=r12,
+            composition_input=payload,
+            composition_replay=replay,
+            gate_blob=c1.GATE_BLOB,
+        )
         self.assertFalse(out["pass"])
         self.assertEqual(out["reason"], "R12_MISSION_BINDING_DRIFT")
+
+    def test_replay_authority_overclaim_fails(self):
+        r12, payload, replay = current_inputs()
+        replay = deepcopy(replay)
+        replay["semantic_truth_authority"] = True
+        out = c1.evaluate(
+            r12_claim=r12,
+            composition_input=payload,
+            composition_replay=replay,
+            gate_blob=c1.GATE_BLOB,
+        )
+        self.assertFalse(out["pass"])
+        self.assertEqual(out["reason"], "REPLAY_AUTHORITY_OVERCLAIM:semantic_truth_authority")
 
 
 if __name__ == "__main__":
