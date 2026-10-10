@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_R2_FOUR_WAY_REGCAP_MREL_MINIMUM_INFORMATION_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_BRANCH_BYTES__13_OF_13__PYCOMPILE_PASS__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "branch": "successor/r2-four-way-minimum-information-20261010-v1",
+    "base_commit": "00c4f8c7102b3abc3156408d2826e72cc5776009",
+    "exact_blobs": {
+      "canonical/runtime/regcap_mrel_property_candidate_discovery_v1.py": "30ac217545105dae82cd5615d6d76fe7945aae3c",
+      "canonical/runtime/regcap_candidate_ambiguity_control_v1.py": "402c75255fa2bd7d8049b22453845dcfc506cb3c",
+      "canonical/tests/test_regcap_mrel_four_way_minimum_information_v1.py": "52de07804c935a81554259b8698adef646bb77d1",
+      "canonical/tests/test_regcap_candidate_ambiguity_control_v1.py": "dbe661f0a681e25c811e5b2f8d3942164cca4d05"
+    }
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/r2-four-way-verify"
+  },
+  "verification": {
+    "four_way_tests": "5_OF_5_PASS",
+    "existing_ambiguity_regression": "8_OF_8_PASS",
+    "total_tests": 13,
+    "total_passed": 13,
+    "total_failed": 0,
+    "py_compile": "PASS"
+  },
+  "proved": [
+    "AUTHENTICATED_CANDIDATE_DISCOVERY_CAN_COMPOSE_CCOB_CCYB_TLAC_AND_MREL_IN_ONE_DECLARED_BOUND_RIVAL_SCOPE",
+    "SHARED_NECESSARY_PROPERTY_NEVER_REVERSE_CLASSIFIES_TO_CONCEPT_IDENTITY",
+    "EXISTING_GENERIC_AMBIGUITY_CONTROLLER_ACCEPTS_EXACT_NEW_FOUR_WAY_AUTHORITY_SCHEMA",
+    "INCOMPLETE_BOUND_OBSERVATION_MODEL_ROUTES_MINIMUM_INFORMATION_BY_INFORMATION_ORIGIN",
+    "USER_OWNED_MISSING_DISCRIMINATOR_ROUTES_TO_MINIMUM_CLARIFICATION",
+    "DELEGATED_EXTERNAL_WORLD_MISSING_DISCRIMINATOR_ROUTES_TO_MINIMUM_AUTHENTICATED_RESEARCH",
+    "OLD_THREE_WAY_AMBIGUITY_BEHAVIOR_REGRESSION_PRESERVED"
+  ],
+  "hard_nonclaims": [
+    "NO_OPEN_WORLD_REGCAP_ONTOLOGY_COMPLETENESS",
+    "NO_BARE_LOSS_ABSORPTION_CONCEPT_IDENTITY",
+    "NO_FINANCE_SEMANTIC_TAIL_CLOSURE",
+    "NO_POLICY_ADEQUACY_ACCEPTANCE_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
