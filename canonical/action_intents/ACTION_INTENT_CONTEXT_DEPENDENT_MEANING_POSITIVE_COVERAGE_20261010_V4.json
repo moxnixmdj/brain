@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_CONTEXT_DEPENDENT_MEANING_POSITIVE_COVERAGE_20261010_V4",
+  "date": "2026-10-10",
+  "status": "ACTIVE__R2_V73__PAIRWISE_NONIDENTIFIABILITY_PLUS_OPEN_WORLD_CONTROL_PROGRESS__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL__ZERO_CREDIT",
+  "supersedes": "canonical/action_intents/ACTION_INTENT_CONTEXT_DEPENDENT_MEANING_POSITIVE_COVERAGE_20261010_V3.json",
+  "load_bearing": {
+    "r2_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+    "r2_git_blob_sha": "84563042f96f7f5fffd2240956fbec985dfe7a40",
+    "nonidentifiability_runtime": "canonical/runtime/semantic_pair_nonidentifiability_v1.py",
+    "nonidentifiability_runtime_git_blob_sha": "e358eeecc45868c91d22009cc57c624e9a210037",
+    "control_runtime": "canonical/runtime/open_world_semantic_control_v1.py",
+    "control_runtime_git_blob_sha": "cea865ac319eb420977b60378de213fc11be9090",
+    "live_front_door": "canonical/runtime/unified_cognitive_fabric_v2.py",
+    "live_front_door_git_blob_sha": "afb8b5c30957168dd8ba8684afb94b31c9118ed5"
+  },
+  "general_control_law": [
+    "IF_TWO_AUTHENTICATED_DISTINCT_SOURCE_COMPATIBLE_INTERPRETATIONS_EXIST__UNIQUE_SEMANTIC_IDENTITY_FROM_SOURCE_ALONE_IS_REFUTED",
+    "DO_NOT_CONTINUE_SAME_SOURCE_WSD_AFTER_NONIDENTIFIABILITY_IS_PROVED",
+    "CLASSIFY_THE_MISSING_INFORMATION_ORIGIN_WITHOUT_CONSULTING_THE_UNKNOWN_SEMANTIC_IDENTITY",
+    "CHOOSE_ONLY_THE_MINIMUM_INFORMATION_ACQUISITION_CONTROL_ACTION",
+    "REVERIFY_SEMANTICS_AND_POLICY_AFTER_NEW_INFORMATION",
+    "DO_NOT_AUTHORIZE_A_FINAL_DOMAIN_ACTION_FROM_CONTROL_PROGRESS_ALONE"
+  ],
+  "exact_margin_instance": {
+    "source": "Margin increased.",
+    "semantic_state": "PROVED_NONIDENTIFIABLE_FROM_SOURCE_ALONE",
+    "semantic_identity_selected": false,
+    "control_progress": "AVAILABLE_WHEN_INFORMATION_ORIGIN_IS_CLASSIFIABLE",
+    "safe_next_class": "ACQUIRE_MINIMUM_POLICY_CHANGING_INFORMATION_OR_ABSTAIN"
+  },
+  "next_execution_rule": "SELECT_A_DIFFERENT_CONCRETE_CONTEXT_RICH_POLICY_MATERIAL_AMBIGUITY__FIRST_TEST_NONIDENTIFIABILITY__THEN_USE_OPEN_WORLD_SEMANTIC_CONTROL_TO_ACQUIRE_ONLY_THE_MINIMUM_POLICY_CHANGING_INFORMATION",
+  "hard_nonclaims": [
+    "NO_GLOBAL_WSD_CLOSURE",
+    "NO_FINANCE_SEMANTIC_TAIL_CLOSURE",
+    "NO_TRUE_MARGIN_SENSE_SELECTION",
+    "NO_FINAL_DOMAIN_ACTION_AUTHORITY_FROM_CONTROL_PROGRESS",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "r2_reconciliation_path": "canonical/governance/R2_OPEN_WORLD_SEMANTIC_CONTROL_AUTHORITY_RECONCILIATION_20261010_V1.json",
+  "r2_reconciliation_git_blob_sha": "61c9c86f7301eb4484e9a84fc1c8c9835a4cfc97"
+}
