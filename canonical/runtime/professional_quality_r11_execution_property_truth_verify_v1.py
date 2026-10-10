@@ -243,7 +243,7 @@ def evaluate_documents(
  )
 
  prev_with_revoked=deepcopy(prev)
- prev_with_revoked["revoked_capabilities"]=["REPO_SEARCH"]
+ prev_with_revoked["revoked_capabilities"]=["DECLARED_TOOL"]
  restore=deepcopy(prev_with_revoked)
  restore["revoked_capabilities"]=[]
  restore_out=firewall.transition(prev_with_revoked,restore)
