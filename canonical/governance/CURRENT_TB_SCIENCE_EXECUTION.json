@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_TB_SCIENCE_EXECUTION_POINTER_V2",
   "date": "2026-10-10",
-  "status": "RANK19_STAGED_UNREAD_UNSTARTED__V13_RUNTIME_VERIFIED__V4_CAPABILITY_FIRST_ADMISSION_BOUND__PUBLIC_EXECUTION_SURFACE_RESEAL_PENDING__NO_EFFECTIVE_EXECUTION_AUTHORITY",
+  "status": "RANK19_STAGED_UNREAD_UNSTARTED__V13_RUNTIME_VERIFIED__V4_CAPABILITY_FIRST_ADMISSION_VERIFIED__PUBLIC_EXECUTION_SURFACE_RESEAL_PENDING__NO_EFFECTIVE_EXECUTION_AUTHORITY",
   "current_result": {
     "path": "canonical/verification/TB_SCIENCE_RANK18_V6_IRREVERSIBLE_RESULT_TRUTH_20261010_V1.json",
     "git_blob_sha": "2459d821057d6f7178ffea440fb19966e56a3d89"
@@ -49,8 +49,8 @@
     "replacement_authority": false
   },
   "staged_rank19": {
-    "authority_path": "canonical/governance/TB_SCIENCE_RANK19_ONE_SLOT_EXECUTION_AUTHORITY_20261010_V1.json",
-    "authority_git_blob_sha": "ea76756ea30084c7f8291747ae9d204485a0186a",
+    "authority_path": "canonical/governance/TB_SCIENCE_RANK19_ONE_SLOT_EXECUTION_AUTHORITY_20261010_V2.json",
+    "authority_git_blob_sha": "271bec8b6983bf549d992ccd77380bf3bb714452",
     "ledger_schedule_rank": 19,
     "slot_id": "terminal-bench-science/diag-chipseq::trial-0",
     "task_digest": "sha256:437bfacaebda9ce9905d54bdfe7247aec9649038206512c64547021f42e3950b",
@@ -66,6 +66,8 @@
     "authorized": true,
     "decision": "ADMIT_CHECKPOINT_AUDIT_EXECUTION",
     "benchmark_role": "NEW_CAPABILITY_VALIDATION",
-    "execution_authority_minted_by_admission": false
+    "execution_authority_minted_by_admission": false,
+    "verification_path": "canonical/verification/TB_SCIENCE_RANK19_CAPABILITY_FIRST_ADMISSION_V2_VERIFICATION_20261010_V1.json",
+    "verification_git_blob_sha": "9065965096b79daacf14c67d66196642372bcd95"
   }
 }
