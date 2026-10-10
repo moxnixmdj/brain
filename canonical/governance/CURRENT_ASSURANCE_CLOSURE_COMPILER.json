@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_ASSURANCE_CLOSURE_COMPILER_POINTER_V1",
   "date": "2026-10-09",
-  "status": "CURRENT_UVCK_V2_CANDIDATE__R10_EXECUTION_SCOPE_ADMITTED__DETECTED_DEFEATER_ENFORCEMENT_35_OF_35_PASS__DETECTION_COMPLETENESS_AND_PROOF_SLOT_EVIDENCE_OPEN__PROPERTY_TRUTH_0_OF_24__NOT_LIVE_DEFAULT",
+  "status": "CURRENT_UVCK_V2_CANDIDATE__PROFESSIONAL_24_OF_24_WHOLE_LEAF_SCOPE_COMPLETE__R10_EXECUTION_DETECTED_DEFEATER_ENFORCEMENT_VERIFIED__PROPERTY_TRUTH_READY_24_OF_24__PROPERTY_TRUTH_CLOSED_0_OF_24__DETECTION_COMPLETENESS_AND_DOMAIN_PROPERTY_EVIDENCE_AND_FULL_CURRENT_MAIN_REGRESSION_OPEN__NOT_LIVE_DEFAULT",
   "governance": {
     "path": "canonical/governance/UVCK_V2_ASSURANCE_CLOSURE_COMPILER_20261009_V1.json",
     "git_blob_sha": "b7197be29b49c55c81e1a18572cd22020510fa5e"
@@ -324,13 +324,20 @@
   },
   "professional_whole_leaf_progress": {
     "expected_leaf_count": 24,
-    "admitted_whole_leaf_scope_count": 1,
-    "property_truth_ready_count": 1,
-    "remaining_scope_construction_count": 23,
+    "scope_batch_activation_path": "canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_SCOPE_BATCH_ACTIVATION_20261010_V1.json",
+    "scope_batch_activation_git_blob_sha": "d40188f87818d9c6a4507a043380a753ca563e18",
+    "scope_batch_verification_path": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_SCOPE_BATCH_VERIFY_20261010_V1.json",
+    "scope_batch_verification_git_blob_sha": "4c2d40a262f18f34bb35f94b59660d60972d45ef",
+    "domain_equivalence_pass_count": 24,
+    "admitted_whole_leaf_scope_count": 24,
+    "admitted_scope_count": 24,
+    "property_truth_ready_count": 24,
+    "remaining_scope_construction_count": 0,
     "property_truth_closed_count": 0,
     "global_leaf_closed_count": 0,
     "domain_semantic_closure": false,
-    "domain_execution_closure": false
+    "domain_execution_closure": false,
+    "next": "RUN_PROPERTY_TRUTH_VERIFICATION_ON_24_SCOPE_COMPLETE_CLAIMS__PRESERVE_R10_DETECTED_DEFEATER_ENFORCEMENT__DO_NOT_REOPEN_SCOPE_CONSTRUCTION_UNLESS_CONTENT_DRIFT_INVALIDATES_BATCH__FULL_CURRENT_MAIN_REGRESSION_BEFORE_PROMOTION"
   },
   "professional_quality_r10_execution_enforcement": {
     "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_R10_EXECUTION_GUARD_VERIFY_20261010_V1.json",
