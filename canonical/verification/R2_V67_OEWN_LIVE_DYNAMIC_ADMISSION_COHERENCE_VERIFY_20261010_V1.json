@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_R2_V67_OEWN_LIVE_DYNAMIC_ADMISSION_COHERENCE_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__R2_V67_AND_TERMINAL_PROJECTION_COHERENT__NO_SEMANTIC_OR_CREDIT_INFLATION",
+  "base_main_sha": "00985165d2a60ef75822f9a4bb18a4ed3fcb9809",
+  "branch": "r2-v67-oewn-live-coherence-20261010-v1",
+  "bindings": {
+    "prior_current_r2_git_blob_sha": "bf2fc9b2748cf40eef873156aa17eba559cdd51f",
+    "current_r2_v67_git_blob_sha": "1e9262a9a6cf1b8442c33024bd656d5fda99bd0a",
+    "prior_terminal_git_blob_sha": "598e9514d2e0a1c5b82d7d81ad2e221777ba76f3",
+    "current_terminal_v123_git_blob_sha": "b21bff729c7aeb70f513e407f6eb6b31908929ac",
+    "scheduler_cut_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V61.json",
+    "scheduler_cut_git_blob_sha": "aeea6e38637d0fe8642847f446de730724e40120",
+    "dynamic_pointer_path": "canonical/governance/CURRENT_R2_DIRECT_ROUTE_ADMISSIONS.json",
+    "dynamic_pointer_git_blob_sha": "598faf4bdb709a40bc8062226b539a68d341217a",
+    "dynamic_manifest_path": "canonical/governance/R2_DIRECT_ROUTE_DYNAMIC_ADMISSIONS_450e876dd4258304.json",
+    "dynamic_manifest_git_blob_sha": "450e876dd4258304846b96daff30b542a50d7e79"
+  },
+  "oewn_route": {
+    "route_id": "DIRECT_ADEQUACY::OEWN_DECISION_MANIFEST_LATTICE_V1",
+    "runtime_git_blob_sha": "0462ca33280df8bbe521a927b01f4c3e095effc7",
+    "route_verification_git_blob_sha": "6a42d85a71f1419f64ebc1d61cbaefdc035953a6",
+    "deployment_candidate_git_blob_sha": "9faae3a199dae1c6eae7d63d29a1f6c55e3e96b3",
+    "independent_deployment_receipt_git_blob_sha": "a33d71c46d3ef1609cbe16146056b0a95e07d141",
+    "live_dynamic_admitted": true
+  },
+  "independent_replay": {
+    "carrier": "brain-one-shot-closure-20261010",
+    "carrier_id": "sprite-a928bb3e-8de3-4c63-af66-61331150667d",
+    "status": "PASS__R2_V67_AND_TERMINAL_PROJECTION_COHERENT__NO_SEMANTIC_OR_CREDIT_INFLATION",
+    "assertions": {
+      "scheduler_cut_unchanged": true,
+      "remaining_hard_frontier_unchanged": true,
+      "scheduler_result_unchanged": true,
+      "finance_remaining_boundary_unchanged": true,
+      "finance_state_unchanged": true,
+      "dynamic_admission_count": 4,
+      "oewn_route_exactly_once_active": true,
+      "semantic_authority_delta": 0,
+      "primary_unsolved_count_delta": 0,
+      "finance_tail_closed": false,
+      "checkpoint_family_pass_count": 7,
+      "checkpoint_family_open_count": 12,
+      "atomic_predicates_proved": 18,
+      "atomic_predicates_unresolved": 20,
+      "terminal": false
+    }
+  },
+  "hard_nonclaims": [
+    "NO_NEW_FINANCE_SEMANTIC_THEOREM",
+    "NO_OPEN_WORLD_FINANCE_OR_WORD_SENSE_CLOSURE",
+    "NO_PRIMARY_UNSOLVED_COUNT_REDUCTION",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "terminal_authority": false
+}
