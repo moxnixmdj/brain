@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_ESCAPE_PROGRESS_FROZEN_13_CLAIM_V2_INDEPENDENT_VERIFICATION_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_BYTE_CURRENT_MISSION_CLAIM_REPLAY__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/ESCAPE_PROGRESS_TOTALITY_FROZEN_13_CLAIM_20261010_V2.json",
+    "git_blob_sha": "138262b57df8a72c784096712cbcba19cd400689",
+    "claim_id": "78375cca9acf2646dd23f4e06247c9206c99e1758a79174314dd448566506a72"
+  },
+  "bindings": {
+    "mission_pointer": {
+      "path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
+      "git_blob_sha": "6ab2147306a138f9ea327d8e19cb4a5bc76e89df"
+    },
+    "quotient": {
+      "path": "canonical/governance/FROZEN_19_ACCEPTANCE_PROOF_SHAPE_QUOTIENT_20261007_V1.json",
+      "git_blob_sha": "b20c5cd6965f7ea7e5ca019d1e828ac6eced042c"
+    },
+    "adaptive_theorem": {
+      "path": "canonical/governance/ADAPTIVE_ABSTRACT_POSITIVE_COVER_FIXED_POINT_THEOREM_20261007_V2.json",
+      "git_blob_sha": "2ac97a6677cf577a52c3fd6d01739ee29be1e9d8"
+    },
+    "claim_guard": {
+      "path": "canonical/runtime/coverage_claim_scope_guard_v1.py",
+      "git_blob_sha": "d1de61aa9bc00a184772a50f7ec9d5ee2853d747"
+    }
+  },
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-r3-native-evidence-verify-20261010",
+    "sprite_id": "sprite-61fff7c6-fbff-4b85-a8e1-b98e28fd7e31",
+    "workspace": "/home/sprite/verify-escape-progress-claim-v2",
+    "package_install_performed": false,
+    "incremental_spend_usd": 0
+  },
+  "result": {
+    "pass": true,
+    "py_compile_pass": true,
+    "mission_blob_match": true,
+    "quotient_blob_match": true,
+    "theorem_blob_match": true,
+    "exact_13_obligation_order_match": true,
+    "scope_sha256_match": true,
+    "target_predicate_sha256_match": true,
+    "semantics_sha256_match": true,
+    "claim_guard_pass": true,
+    "global_mission_completion_derivable": false,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_CC_ROOT_CERTIFICATE_PROVED",
+    "NO_U_EMPTY_CREDIT",
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "promotion_authority": false,
+  "terminal_authority": false
+}
