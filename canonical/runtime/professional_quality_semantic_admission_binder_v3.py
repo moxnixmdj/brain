@@ -77,7 +77,7 @@ def validate_semantic_receipt(
 
  basis=receipt.get("verification_basis")
  if not isinstance(basis,list) or not basis:errors.append("VERIFICATION_BASIS_REQUIRED");basis=[]
- basis_records=[]
+ basis_records=[]; semantic_basis_ok=False
  for item in basis:
   if not isinstance(item,Mapping):
    errors.append("VERIFICATION_BASIS_ENTRY_INVALID");continue
@@ -85,8 +85,23 @@ def validate_semantic_receipt(
   exp=item.get("git_blob_sha")
   if p is None or not p.is_file() or p.is_symlink():
    errors.append("VERIFICATION_BASIS_MISSING");continue
-  got=git_blob_sha(p);basis_records.append({"path":item.get("path"),"git_blob_sha":got})
-  if got!=exp:errors.append("VERIFICATION_BASIS_STALE")
+  got=git_blob_sha(p);record={"path":item.get("path"),"git_blob_sha":got};basis_records.append(record)
+  if got!=exp:errors.append("VERIFICATION_BASIS_STALE");continue
+  try:doc=json.loads(p.read_text(encoding="utf-8"))
+  except Exception:errors.append("VERIFICATION_BASIS_JSON_INVALID");continue
+  if not isinstance(doc,Mapping):errors.append("VERIFICATION_BASIS_NOT_OBJECT");continue
+  if (
+   doc.get("pass") is True
+   and doc.get("independent_verified") is True
+   and doc.get("leaf_id")==leaf_id and doc.get("root_id")==root_id
+   and doc.get("semantic_claim_id")==claim.get("claim_id")
+   and doc.get("semantic_scope_sha256")==claim.get("scope_sha256")
+   and doc.get("semantic_target_predicate_sha256")==claim.get("target_predicate_sha256")
+   and doc.get("semantic_semantics_sha256")==claim.get("semantics_sha256")
+   and all(doc.get(field) is True for field in REQUIRED_TOTALITY_FIELDS)
+  ):
+   semantic_basis_ok=True
+ if not semantic_basis_ok:errors.append("INDEPENDENT_SEMANTIC_TOTALITY_BASIS_REQUIRED")
  if errors:return _base("FAIL_CLOSED",False,errors=sorted(set(errors)),claim_id=cid,leaf_id=leaf_id,root_id=root_id,basis_records=basis_records)
  return _base("PASS__EXACT_CURRENT_CLAIM_PLUS_FOUR_ROOT_TOTALITY_AND_R4",True,
   errors=[],claim_id=cid,leaf_id=leaf_id,root_id=root_id,basis_records=basis_records,
