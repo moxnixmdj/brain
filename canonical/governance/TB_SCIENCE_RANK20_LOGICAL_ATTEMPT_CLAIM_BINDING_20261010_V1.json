@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK20_LOGICAL_ATTEMPT_CLAIM_BINDING_V1",
+  "date": "2026-10-10",
+  "claim_epoch_id": "RANK20_IDENTITY_V2_VALIDATION_20261010_V1",
+  "slot_id": "terminal-bench-science/hysteretic-aquifer-control::trial-0",
+  "task_digest": "sha256:681df0c3b2ada03a933ac4d2e11f07983676f87a9f26b61e416987904b880289",
+  "public_repository": "moxnixmdj/verification-capsule-runner",
+  "execution_base": "terminal-execution-v1",
+  "execution_branch": "execute/tb-science-rank20-20261010-v1",
+  "activation_filename": "ACTIVATE_RANK20_V1_PR.json",
+  "rank19_ledger_v41_blob": "9b57fba46890146527970ee51a47081791341598",
+  "capability_first_checkpoint_admission_blob": "b03861813f9b9a730659e6e0b6e7301a45061b04",
+  "capability_first_admission_verification_blob": "d12c7c1f9e1259eaf3950689556fd0e6a37ba705",
+  "frozen_manifest_blob": "6dfa880b1f68881531afbba6ca211681801fd19b",
+  "identity_v2_blob": "67ff638459af1bb50a094e9479fb4aa5e2a3de1c",
+  "agent_v13_identity_repair_verification_blob": "ec982a8cde737669d42abfb62a9f3cbdf0752434",
+  "agent_v13_blob": "470bfe079aeffaa07a3b92975b4edea17c9a20e1",
+  "planner_v7_blob": "e5d6ab78b6cf5bacee568cd3701410a8745b9ce8",
+  "validation_defect_class": "GENERIC_EXECUTION_TRANSPORT_IDENTITY_VERSION_SKEW",
+  "validation_capability": "CLAIM_BOUND_LOGICAL_ATTEMPT_IDENTITY_V2_END_TO_END_TRANSPORT"
+}
