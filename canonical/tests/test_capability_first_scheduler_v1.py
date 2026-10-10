@@ -584,7 +584,7 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
         activation = json.loads(
             (
                 ROOT
-                / "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V5.json"
+                / "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V6.json"
             ).read_text()
         )
         reuse = pointer["reuse_first_policy"]
