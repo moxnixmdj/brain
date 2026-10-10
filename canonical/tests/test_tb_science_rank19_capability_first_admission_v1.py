@@ -26,6 +26,8 @@ def test_rank19_capability_first_admission_is_exact_and_verified():
     assert doc["execution_authority"] is False
     assert doc["terminal_credit_delta"] == 0
     assert doc["capability_credit_delta"] == 0
+    assert "rank19_ledger" in doc["source_bindings"]
+    assert {"development_scheduler", "terminal_authority", "current_tb_science_execution"}.isdisjoint(doc["source_bindings"])
     out = verify()
     assert out["pass"] is True, out
     assert out["scheduler_eligibility"] == "ELIGIBLE"
