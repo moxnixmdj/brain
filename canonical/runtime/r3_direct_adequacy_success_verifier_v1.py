@@ -294,11 +294,17 @@ def verify_material(
             raise DirectAdequacyVerificationError("ROUTE_CAPABILITY_MISMATCH")
 
         _binding_check(proof, pf, root)
-        retained_evidence = proof.get("independent_acceptance_evidence")
-        if not isinstance(retained_evidence, Mapping):
-            raise DirectAdequacyVerificationError("RETAINED_INDEPENDENT_ACCEPTANCE_MISSING")
-        if _canon(dict(evidence)) != _canon(dict(retained_evidence)):
-            raise DirectAdequacyVerificationError("INDEPENDENT_ACCEPTANCE_EVIDENCE_DRIFT")
+        retained_evidence_sha = str(
+            proof.get("independent_acceptance_sha256") or ""
+        )
+        if len(retained_evidence_sha) != 64:
+            raise DirectAdequacyVerificationError(
+                "RETAINED_INDEPENDENT_ACCEPTANCE_SHA_MISSING"
+            )
+        if _sha(dict(evidence)) != retained_evidence_sha:
+            raise DirectAdequacyVerificationError(
+                "INDEPENDENT_ACCEPTANCE_EVIDENCE_DRIFT"
+            )
 
         accepted_ids = _accepted_ids(pf)
         if accepted_ids != list(problem.get("accepted_raw_obligation_ids") or []):
