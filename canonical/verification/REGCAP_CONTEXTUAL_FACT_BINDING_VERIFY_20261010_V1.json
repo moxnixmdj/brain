@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_REGCAP_CONTEXTUAL_FACT_BINDING_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_BRANCH_BYTES__44_OF_44_FOCUSED_TESTS__PYCOMPILE_PASS__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "regcap-contextual-fact-compiler-v1-20261010-sol",
+    "exact_blobs": {
+      "canonical/runtime/regcap_contextual_fact_compiler_v1.py": "3eda94ea4a5449767c0fa8fe1a64e2c86da61626",
+      "canonical/runtime/regcap_contextual_discriminator_binding_v1.py": "6044dc8c9be8065e39e8646ba89ec2141bd5dba5",
+      "canonical/tests/test_regcap_contextual_fact_compiler_v1.py": "7386cb3fc5fd4a2ce6966046553c05a366d5f9ae",
+      "canonical/tests/test_regcap_contextual_discriminator_binding_v1.py": "0b1ca1e9dd203221e681edf902aa8d607473d9ff"
+    }
+  },
+  "independent_carrier": {
+    "name": "participial-disposition-verify-20261009-sol",
+    "sprite_id": "sprite-72f2a31b-c09c-49e0-bfe0-279786ee2d56",
+    "workspace": "/home/sprite/context_fact_verify"
+  },
+  "verification": {
+    "py_compile": "PASS",
+    "contextual_fact_compiler": {"tests_run": 12, "failures": 0, "errors": 0},
+    "contextual_discriminator_binding": {"tests_run": 9, "failures": 0, "errors": 0},
+    "adjacent_regcap_necessary_property": {"tests_run": 11, "failures": 0, "errors": 0},
+    "adjacent_regcap_contrastive_matrix": {"tests_run": 12, "failures": 0, "errors": 0},
+    "total_focused_tests": 44
+  },
+  "proved": [
+    "BOUNDED_2_5_PERCENT_CET1_ABOVE_REGULATORY_MINIMUM_CONTEXT_COMPILES_TO_THREE_SOURCE_FACTS_ONLY",
+    "BOUNDED_RELEASE_WHEN_SYSTEM_WIDE_RISK_CRYSTALLISES_OR_DISSIPATES_CONTEXT_COMPILES_TO_RELEASE_FACT_ONLY",
+    "BOUNDED_G_SIB_LOSS_ABSORPTION_RECAPITALISATION_IN_RESOLUTION_CONTEXT_COMPILES_TO_FOUR_SOURCE_FACTS_ONLY",
+    "PARTIAL_OR_UNRECOGNIZED_CONTEXT_REMAINS_UNRESOLVED",
+    "CONTEXT_FACTS_DO_NOT_BY_THEMSELVES_GRANT_CCOB_CCYB_TLAC_IDENTITY",
+    "CURRENT_SOURCE_BACKED_MATRIX_CAN_RESOLVE_EACH_OF_THE_THREE_PROFILES_RELATIVE_TO_A_CALLER_DECLARED_MATRIX_SUBSET",
+    "MIXED_INCOMPATIBLE_PROFILES_RETURN_CONFLICT_NOT_A_GUESSED_WINNER",
+    "RELATIVE_RESOLUTION_NEVER_GRANTS_GLOBAL_CANDIDATE_UNIVERSE_COMPLETENESS",
+    "NAKED_loss-absorbing_cushion_REMAINS_UNRESOLVED_BY_THIS_ROUTE",
+    "NO_ACCEPTANCE_PROMOTION_EXECUTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "hard_nonclaims": [
+    "NO_GLOBAL_CCOB_CCYB_TLAC_IDENTITY_FROM_CONTEXTUAL_FACTS",
+    "NO_HYPOTHESIS_SET_COMPLETENESS_FOR_ARBITRARY_LANGUAGE",
+    "NO_GENERAL_REGULATORY_CAPITAL_LANGUAGE_PARSER",
+    "NO_REVERSE_NECESSARY_PROPERTY_CLASSIFICATION_OUTSIDE_THE_AUTHENTICATED_MATRIX_RELATIVE_ROUTE",
+    "NO_OPEN_WORLD_ONTOLOGY_COMPLETENESS",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
