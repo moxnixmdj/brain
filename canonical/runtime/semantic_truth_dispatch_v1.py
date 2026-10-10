@@ -34,6 +34,11 @@ def evaluate_regcap_facet_role(payload: Mapping[str, Any]) -> dict[str, Any]:
     return evaluate(payload)
 
 
+def evaluate_spread_relation_identity(payload: Mapping[str, Any]) -> dict[str, Any]:
+    from canonical.runtime.spread_relation_identity_truth_certificate_v1 import evaluate
+    return evaluate(payload)
+
+
 SCHEMA = "PROJECT_BRAIN_SEMANTIC_TRUTH_DISPATCH_V1"
 
 
@@ -70,6 +75,8 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
         return evaluate_margin_context_identity(payload)
     if kind == "REGCAP_FACET_ROLE":
         return evaluate_regcap_facet_role(payload)
+    if kind == "SPREAD_RELATION_IDENTITY":
+        return evaluate_spread_relation_identity(payload)
     return {
         "schema": SCHEMA,
         "pass": False,
