@@ -24,6 +24,8 @@ from canonical.runtime import regcap_bounded_rival_registry_authority_v1 as regc
 from canonical.runtime import regcap_context_signature_v1 as regcap_context_signature
 from canonical.runtime import regcap_contextual_resolution_v1 as regcap_contextual_resolution
 from canonical.runtime import tlac_mrel_identity_discriminator_v1 as tlac_mrel_pair
+from canonical.runtime import regcap_mrel_pair_discriminator_v1 as regcap_mrel_pair
+from canonical.runtime import regcap_mrel_no_descriptor_pair_v1 as regcap_mrel_no_descriptor_pair
 
 SCHEMA = "PROJECT_BRAIN_DOMAIN_MAPPING_TRUTH_CERTIFICATE_V1"
 TRUTH_KIND = "DOMAIN_MAPPING_RELATION"
@@ -449,6 +451,129 @@ def _bounded_regcap_context_relation(
 
 
 
+def _bounded_regcap_mrel_no_descriptor_context_relation(
+    *,
+    raw_span: str,
+    source_id: str,
+    scope_id: str,
+    target_concept_id: str,
+    required_relation: str,
+    candidate_concepts: Sequence[Mapping[str, Any]],
+) -> dict[str, Any]:
+    """Prove CCoB/MREL or CCyB/MREL only in exact authenticated pair scopes."""
+    pair_id = None
+    for candidate_pair_id, candidate_scope in regcap_mrel_pair.PAIR_SCOPE.items():
+        if scope_id == candidate_scope:
+            pair_id = candidate_pair_id
+            break
+    if (
+        pair_id is None
+        or required_relation != "LOGICAL_EQUIVALENCE_IN_SCOPE"
+    ):
+        return {
+            "status": "NOT_APPLICABLE",
+            "pass": False,
+            "semantic_truth_authority": False,
+            "terminal_authority": False,
+        }
+
+    supplied_ids = []
+    for i, row in enumerate(candidate_concepts):
+        if not isinstance(row, Mapping):
+            return {
+                "status": "FAIL_CLOSED",
+                "pass": False,
+                "reason": "REGCAP_MREL_NO_DESCRIPTOR_CANDIDATE_NOT_OBJECT:" + str(i),
+                "semantic_truth_authority": False,
+                "terminal_authority": False,
+            }
+        cid = str(row.get("concept_id") or "").strip()
+        if not cid:
+            return {
+                "status": "FAIL_CLOSED",
+                "pass": False,
+                "reason": "REGCAP_MREL_NO_DESCRIPTOR_CANDIDATE_ID_REQUIRED:" + str(i),
+                "semantic_truth_authority": False,
+                "terminal_authority": False,
+            }
+        supplied_ids.append(cid)
+
+    required_ids = sorted(regcap_mrel_pair.PAIR_DOMAIN[pair_id])
+    if sorted(supplied_ids) != required_ids:
+        return {
+            "status": "FAIL_CLOSED",
+            "pass": False,
+            "reason": "REGCAP_MREL_NO_DESCRIPTOR_CANDIDATE_SET_MISMATCH",
+            "pair_id": pair_id,
+            "supplied_candidate_ids": sorted(supplied_ids),
+            "required_candidate_ids": required_ids,
+            "semantic_truth_authority": False,
+            "terminal_authority": False,
+        }
+    if target_concept_id not in regcap_mrel_pair.PAIR_DOMAIN[pair_id]:
+        return {
+            "status": "FAIL_CLOSED",
+            "pass": False,
+            "reason": "REGCAP_MREL_NO_DESCRIPTOR_TARGET_OUTSIDE_BOUND_PAIR",
+            "pair_id": pair_id,
+            "semantic_truth_authority": False,
+            "terminal_authority": False,
+        }
+
+    resolved = regcap_mrel_no_descriptor_pair.resolve_relative(
+        raw_span,
+        source_id=source_id,
+        pair_id=pair_id,
+        candidate_concept_ids=supplied_ids,
+    )
+    if resolved.get("status") == "FAIL_CLOSED":
+        return {
+            "status": "FAIL_CLOSED",
+            "pass": False,
+            "reason": "REGCAP_MREL_NO_DESCRIPTOR_DISCRIMINATOR_FAIL_CLOSED",
+            "pair_id": pair_id,
+            "context_result": resolved,
+            "semantic_truth_authority": False,
+            "terminal_authority": False,
+        }
+    if (
+        resolved.get("pass") is not True
+        or resolved.get("relative_selection_authority") is not True
+        or not resolved.get("selected_concept_id")
+    ):
+        return {
+            "status": "OPEN__BOUNDED_REGCAP_MREL_NO_DESCRIPTOR_RELATION_NOT_RESOLVED",
+            "pass": False,
+            "pair_id": pair_id,
+            "context_result": resolved,
+            "semantic_truth_authority": False,
+            "terminal_authority": False,
+        }
+
+    selected = str(resolved["selected_concept_id"])
+    return {
+        "status": "PASS__AUTHENTICATED_BOUNDED_REGCAP_MREL_NO_DESCRIPTOR_RELATION",
+        "pass": True,
+        "predicate_truth": "TRUE" if selected == target_concept_id else "FALSE",
+        "selected_concept_id": selected,
+        "target_concept_id": target_concept_id,
+        "required_relation": required_relation,
+        "pair_id": pair_id,
+        "scope_id": regcap_mrel_pair.PAIR_SCOPE[pair_id],
+        "candidate_ids": list(regcap_mrel_pair.PAIR_DOMAIN[pair_id]),
+        "context_result": resolved,
+        "semantic_truth_authority": True,
+        "global_semantic_identity_authority": False,
+        "open_world_candidate_set_complete": False,
+        "terminal_authority": False,
+        "boundary": (
+            "LOGICAL_EQUIVALENCE_ONLY_INSIDE_THE_EXACT_AUTHENTICATED_CCOB_MREL_"
+            "OR_CCYB_MREL_PAIR_TASK_SCOPE__NO_GLOBAL_SEMANTIC_IDENTITY_DISJOINTNESS_"
+            "OR_OPEN_WORLD_COMPLETENESS"
+        ),
+    }
+
+
 def _bounded_tlac_mrel_context_relation(
     *,
     raw_span: str,
@@ -713,6 +838,60 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
             "terminal_credit_delta": 0,
             "boundary": (
                 "AUTHENTICATED_TLAC_MREL_PAIR_TASK_SCOPE_ONLY__"
+                "LOGICAL_EQUIVALENCE_IN_SCOPE_ONLY__NO_GLOBAL_SEMANTIC_IDENTITY__"
+                "NO_OPEN_WORLD_CANDIDATE_COMPLETENESS_OR_TERMINAL_AUTHORITY"
+            ),
+        }
+
+    bounded_regcap_mrel_no_descriptor = _bounded_regcap_mrel_no_descriptor_context_relation(
+        raw_span=raw_span,
+        source_id=source_id,
+        scope_id=scope_id,
+        target_concept_id=target,
+        required_relation=required,
+        candidate_concepts=candidates,
+    )
+    if bounded_regcap_mrel_no_descriptor.get("status") == "FAIL_CLOSED":
+        return _fail(
+            "BOUNDED_REGCAP_MREL_NO_DESCRIPTOR_CONTEXT_FAIL_CLOSED",
+            bounded_regcap_mrel_no_descriptor=bounded_regcap_mrel_no_descriptor,
+        )
+    if bounded_regcap_mrel_no_descriptor.get("pass") is True:
+        truth = str(bounded_regcap_mrel_no_descriptor.get("predicate_truth") or "")
+        if truth not in {"TRUE", "FALSE"}:
+            return _fail(
+                "BOUNDED_REGCAP_MREL_NO_DESCRIPTOR_CONTEXT_TRUTH_INVALID",
+                bounded_regcap_mrel_no_descriptor=bounded_regcap_mrel_no_descriptor,
+            )
+        return {
+            "schema": SCHEMA,
+            "pass": True,
+            "status": (
+                "PASS__BOUNDED_REGCAP_MREL_NO_DESCRIPTOR_CONTEXT_RELATION_PROVED_TRUE"
+                if truth == "TRUE"
+                else "PASS__BOUNDED_REGCAP_MREL_NO_DESCRIPTOR_CONTEXT_RELATION_PROVED_FALSE"
+            ),
+            "predicate_id": checked,
+            "requested_predicate_id": requested_id,
+            "requested_predicate_id_authority": False,
+            "predicate_truth": truth,
+            "target_concept_id": target,
+            "required_relation": required,
+            "source_id": source_id,
+            "source_sha256": sha256(raw_span.encode("utf-8")).hexdigest(),
+            "scope_id": scope_id,
+            "mapping_result": {},
+            "authenticated_context_refinement": contextual_refinement,
+            "bounded_regcap_mrel_no_descriptor_context_relation": bounded_regcap_mrel_no_descriptor,
+            "truthful_precommitment_observation": True,
+            "semantic_truth_authority": True,
+            "policy_adequacy_authority": False,
+            "db_admission_authority": False,
+            "u_empty_authority": False,
+            "terminal_authority": False,
+            "terminal_credit_delta": 0,
+            "boundary": (
+                "AUTHENTICATED_CCOB_MREL_OR_CCYB_MREL_PAIR_TASK_SCOPE_ONLY__"
                 "LOGICAL_EQUIVALENCE_IN_SCOPE_ONLY__NO_GLOBAL_SEMANTIC_IDENTITY__"
                 "NO_OPEN_WORLD_CANDIDATE_COMPLETENESS_OR_TERMINAL_AUTHORITY"
             ),
