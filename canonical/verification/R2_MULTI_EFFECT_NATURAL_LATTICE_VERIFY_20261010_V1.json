@@ -1,0 +1,77 @@
+{
+  "schema": "PROJECT_BRAIN_R2_MULTI_EFFECT_NATURAL_LATTICE_VERIFY_V1",
+  "date": "2026-10-10",
+  "branch": "r2-multi-effect-current",
+  "capability": "BOUNDED_COMPLETE_MULTI_EFFECT_SAME_TARGET_NATURAL_CROSS_DOCUMENT_LATTICE",
+  "status": "VERIFIED_ISOLATED_CHANGED_SURFACE__13_OF_13_PASS",
+  "theorem": {
+    "grammar_law": "ONE_EXPLICIT_COMPLETE_EFFECT_ID_SET_PER_TARGET_PLUS_EXACTLY_ONE_COMPLETE_BODY_PER_DECLARED_EFFECT_CERTIFIES_FINITE_INVENTORY_AND_ALL_REQUIRED_FIELDS",
+    "multi_effect_law": "MULTIPLE_DEFINE_REPLACE_OVERRIDE_EXCEPTION_EFFECTS_MAY_SHARE_ONE_TARGET",
+    "completeness_law": "MISSING_DECLARED_BODY_EXTRA_UNDECLARED_BODY_DUPLICATE_ID_OR_ORPHAN_BODY_IS_UNRESOLVED",
+    "authority_law": "AUTOFILL_V5_HAS_ZERO_AUTHORITY_AND_V16_INDEPENDENTLY_REPARSES_EXACT_SOURCE",
+    "composition_law": "V9_REUSES_V8_EFFECT_VALIDATION_CORRELATED_WORLDSET_AND_INDEPENDENT_VERIFIER",
+    "example": "A_DEFINE_10__B_REPLACE_12__C_EXCEPTION_8_ON_THRESHOLD_RETURNS_8_FOR_SMALL_TRUE_AND_12_FOR_SMALL_FALSE",
+    "top_law": "UNRECOGNIZED_PROSE_OR_INCOMPLETE_MULTI_EFFECT_BLOCK_REMAINS_SEMANTIC_TOP"
+  },
+  "exact_blobs": {
+    "canonical/runtime/certified_multi_effect_natural_clause_v1.py": "6930df9c7167ac24a9be2994db01863107d17682",
+    "canonical/runtime/source_aligned_semantic_proof_v16.py": "8be8a95160b86e0b74192e6c1492bfc913dcedd7",
+    "canonical/runtime/source_semantic_claim_autofill_v5.py": "9a260fcf9f336779f22d005614a9de5d9c758f62",
+    "canonical/runtime/cross_document_effect_semantic_lattice_v9.py": "c0b063bfc7180824ee7376df40ef99d77312ef4a",
+    "canonical/runtime/cross_document_effect_semantic_lattice_verify_v9.py": "a459ee1ef1223814dfebb48521f056b826ce0747",
+    "canonical/runtime/r2_cross_document_multi_effect_natural_direct_adequacy_v1.py": "7faa792e68c8b1aa8b8fbca1fe2941a9b2930a79",
+    "canonical/tests/test_multi_effect_natural_lattice_v1.py": "2fb0e5b1fb0e482ce519d480a389bbaf61d7bf84",
+    "canonical/tests/test_r2_cross_document_multi_effect_natural_direct_v1.py": "2e4a1ebf4656d11ad9aefd4c2969078342bc894b"
+  },
+  "isolated_verification": {
+    "sprite": "brain-r2-grounded-frontier-verify-20261008",
+    "parser_proof_autofill_lattice": {
+      "passed": 8,
+      "failed": 0
+    },
+    "direct_transactional_route": {
+      "passed": 5,
+      "failed": 0
+    },
+    "total_passed": 13,
+    "total_failed": 0
+  },
+  "structural_compatibility": {
+    "v9_exact_v8_transform": true,
+    "v8_source_blob": "34f9a710424ba2aa5f3beeddb1cfd3978e549d15",
+    "allowed_changes": [
+      "V8_TO_V9_SCHEMA_AND_DOCSTRING",
+      "SOURCE_PROOF_V15_TO_V16",
+      "AUTOFILL_V4_TO_V5"
+    ]
+  },
+  "live_route_nonoverlap": {
+    "new_prefix": "Using the multi-effect natural cross-document lattice case at ",
+    "checked_live_prefixes": [
+      "Using the semantic-edge cross-document effect lattice case at ",
+      "Using the domain-mapped semantic-edge cross-document effect lattice case at ",
+      "Using the structurally complete marked finance coreference typed-decision source at ",
+      "Using the structurally complete marked finance coreference source at ",
+      "Using the OEWN decision manifest lattice case at "
+    ],
+    "exact_prefix_collision": false
+  },
+  "main_drift_outside_dependency_cone": [
+    "canonical/runtime/regcap_contextual_observation_compiler_v1.py",
+    "canonical/runtime/regcap_contextual_resolution_v1.py",
+    "canonical/tests/test_regcap_contextual_observation_compiler_v1.py",
+    "canonical/tests/test_regcap_contextual_resolution_v1.py"
+  ],
+  "nonclaims": [
+    "NO_GENERAL_ARBITRARY_ENGLISH_UNDERSTANDING",
+    "NO_UNRECOGNIZED_PROSE_EFFECT_SEMANTICS",
+    "NO_IMPLICIT_PRECEDENCE_INFERENCE",
+    "NO_EXTERNAL_WORLD_TRUTH",
+    "NO_TERMINAL_CREDIT_FROM_TEST_PASS_COUNT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
