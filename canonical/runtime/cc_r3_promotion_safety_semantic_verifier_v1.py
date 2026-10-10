@@ -143,12 +143,18 @@ def _ancestor_if_texts(node: ast.AST, parent_map: Mapping[int, ast.AST]) -> list
     return out
 
 
-def _find_assignment_nodes(fn: ast.AST, needle: str) -> list[ast.AST]:
+def _find_assignment_nodes(fn: ast.AST, target_text: str) -> list[ast.AST]:
     out = []
     for node in ast.walk(fn):
-        if isinstance(node, (ast.Assign, ast.AnnAssign, ast.AugAssign)):
-            if needle in _unparse(node):
-                out.append(node)
+        targets: list[ast.AST] = []
+        if isinstance(node, ast.Assign):
+            targets = list(node.targets)
+        elif isinstance(node, (ast.AnnAssign, ast.AugAssign)):
+            targets = [node.target]
+        else:
+            continue
+        if any(_unparse(target) == target_text for target in targets):
+            out.append(node)
     return out
 
 
@@ -180,7 +186,7 @@ def _check_learning(root: Path, checks: list[str]) -> None:
     fn = _function(tree, "integrate_solver_output")
     parent_map = _parents(fn)
 
-    episode_writes = _find_assignment_nodes(fn, 'state["episodes"][episode_key]')
+    episode_writes = _find_assignment_nodes(fn, "state['episodes'][episode_key]")
     if len(episode_writes) != 1:
         raise ValueError("EPISODE_WRITE_CARDINALITY")
     episode_guards = " ".join(_ancestor_if_texts(episode_writes[0], parent_map))
@@ -192,7 +198,7 @@ def _check_learning(root: Path, checks: list[str]) -> None:
         raise ValueError("EPISODE_REAUTH_FAILURE_NOT_FAIL_CLOSED")
     checks.append("EPISODE_WRITE_VERIFIED_AND_REAUTHENTICATED")
 
-    skill_writes = _find_assignment_nodes(fn, 'state["skills"][sid]')
+    skill_writes = _find_assignment_nodes(fn, "state['skills'][sid]")
     if len(skill_writes) != 1:
         raise ValueError("SKILL_WRITE_CARDINALITY")
     skill_guards = " ".join(_ancestor_if_texts(skill_writes[0], parent_map))
