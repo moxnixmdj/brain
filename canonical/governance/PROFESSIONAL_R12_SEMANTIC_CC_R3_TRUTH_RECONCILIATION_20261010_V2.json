@@ -1,0 +1,118 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_R12_SEMANTIC_CC_R3_TRUTH_RECONCILIATION_V2",
+  "date": "2026-10-10",
+  "status": "CURRENT_TRUTH__6_VERIFIED_2_PARTIAL_0_UNSTARTED_ROOT_CONTRACT_CLAUSES__STRONGER_MATERIAL_DEFEATER_TOTALITY_OPEN__ZERO_PROPERTY_OR_TERMINAL_CREDIT",
+  "claim_id": "05b74983836dd1f6a13a0db72443246fb74f99548f0d982a769a6a7e572e9e85",
+  "leaf_id": "PQ::R12_META_COMPOSITION_CLOSURE::SEMANTIC",
+  "supersedes_conflicting_cuts": [
+    {
+      "path": "canonical/governance/PROFESSIONAL_R12_SEMANTIC_CC_R3_REUSE_CUT_20261010_V1.json",
+      "git_blob_sha": "4f71b36b76c3bab197fd42b6374f0825fcae6e15",
+      "correction": "C3_ABSTRACTION_SOUNDNESS_WAS_OVERCLAIMED_AS_PROVED__LOSSLESS_IDENTITY_CARRIER_PROVES_CLAIM_CARRIER_SOUNDNESS_BUT_NOT_ALL_COMPONENT_ABSTRACTION_SUBSTITUTION_SOUNDNESS"
+    },
+    {
+      "path": "canonical/runtime/professional_r12_semantic_cc_r3_evidence_cut_v1.py",
+      "prior_git_blob_sha": "df0a722b5cd0456b32b3ab1e4e4bb82a8896fe08",
+      "correction": "C8_NONVACUITY_WAS_OVERCLAIMED_AS_VERIFIED_FROM_CC_R2_MISSION_SOUNDNESS__MISSION_SOUNDNESS_IS_COMPATIBLE_WITH_AN_EMPTY_POSITIVE_CERTIFICATION_SET"
+    }
+  ],
+  "corrected_runtime": {
+    "path": "canonical/runtime/professional_r12_semantic_cc_r3_evidence_cut_v1.py",
+    "git_blob_sha": "bef436afedce200ab68240317053c4c5cc8d3494"
+  },
+  "corrected_tests": {
+    "path": "canonical/tests/test_professional_r12_semantic_cc_r3_evidence_cut_v1.py",
+    "git_blob_sha": "5087e10edd1da4c11bafd9e0f56f0268c4aec01a"
+  },
+  "clause_state": [
+    {
+      "id": "R12C1_ASSUMPTION_GUARANTEE_COMPOSITION",
+      "state": "PARTIAL_EXISTING_EVIDENCE",
+      "remaining": "PROVE_EXACT_ASSUMPTION_GUARANTEE_INTERFACE_DISCHARGE_FOR_R12_COMPOSITION"
+    },
+    {
+      "id": "R12C2_SAME_SUBJECT_ROOT_CONJUNCTION",
+      "state": "VERIFIED_EXISTING"
+    },
+    {
+      "id": "R12C3_ABSTRACTION_SOUNDNESS",
+      "state": "VERIFIED_EXISTING",
+      "boundary": "PROVED_AT_THE_EXACT_ROOT_BINDING_TO_SAME_SUBJECT_COMPOSITION_BOUNDARY__NO_GLOBAL_SEMANTIC_COMPLETENESS_INSIDE_ANY_ROOT"
+    },
+    {
+      "id": "R12C4_INDEPENDENT_DEFEATER_SEARCH",
+      "state": "VERIFIED_EXISTING",
+      "boundary": "KNOWN_AND_DECLARED_DEFEATER_SEARCH_VERIFIED__UNKNOWN_MATERIAL_DEFEATER_TOTALITY_IS_A_SEPARATE_STRONGER_TARGET_OBLIGATION"
+    },
+    {
+      "id": "R12C5_COVERAGE_ACCOUNTING",
+      "state": "VERIFIED_EXISTING"
+    },
+    {
+      "id": "R12C6_PROOF_SEARCH_HONESTY",
+      "state": "VERIFIED_EXISTING"
+    },
+    {
+      "id": "R12C7_META_CONTROLLER_FALSIFICATION",
+      "state": "VERIFIED_EXISTING"
+    },
+    {
+      "id": "R12C8_NONVACUITY",
+      "state": "PARTIAL_EXISTING_EVIDENCE",
+      "remaining": "BIND_ONE_REAL_SUPPORTED_POSITIVE_R12_SEMANTIC_CERTIFICATION_ROUTE"
+    }
+  ],
+  "c8_countermodel": {
+    "premise_proved_by_cc_r2": "G_MINUS_SUBSETEQ_G_REAL",
+    "model": "G_MINUS_EQUALS_EMPTY_SET__G_REAL_ARBITRARY",
+    "subset_relation_true": true,
+    "positive_supported_route_exists": false,
+    "conclusion": "CC_R2_MISSION_SOUNDNESS_DOES_NOT_LOGICALLY_IMPLY_NONVACUITY_EXISTENCE",
+    "consequence": "CC_R2_PROVES_THE_SOUNDNESS_RULE_FOR_ANY_POSITIVE_CERTIFICATE_BUT_C8_REMAINS_PARTIAL_UNTIL_ONE_REAL_SUPPORTED_POSITIVE_ROUTE_IS_BOUND"
+  },
+  "derived": {
+    "verified_clause_count": 6,
+    "partial_clause_count": 2,
+    "open_clause_count": 0,
+    "partial_clause_ids": [
+      "R12C1_ASSUMPTION_GUARANTEE_COMPOSITION",
+      "R12C8_NONVACUITY"
+    ],
+    "stronger_target_residual_open": true,
+    "cc_r3_terminal_closure_proved": false
+  },
+  "stronger_target_residual": {
+    "obligation": "ALL_ROOT_RELEVANT_MATERIAL_DEFEATERS_RESOLVED_OR_PROVED_DECISION_NULL_BEFORE_POSITIVE_CERTIFICATION",
+    "state": "OPEN",
+    "known_defeater_search_is_not_unknown_defeater_completeness": true
+  },
+  "exact_next": [
+    "PROVE_C1_ASSUMPTION_GUARANTEE_INTERFACE_DISCHARGE",
+    "PROVE_C8_REAL_SUPPORTED_POSITIVE_SEMANTIC_ROUTE_NONVACUITY",
+    "PROVE_STRONGER_MATERIAL_DEFEATER_TOTALITY_OR_SCOPE_COMPLETE_EQUIVALENT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "property_truth_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false,
+  "predecessor": {
+    "path": "canonical/governance/PROFESSIONAL_R12_SEMANTIC_CC_R3_TRUTH_RECONCILIATION_20261010_V1.json",
+    "git_blob_sha": "b469e2f13c318d57aaca71d8b29ad1930636507d"
+  },
+  "c3_lossless_composition_projection": {
+    "path": "canonical/verification/PROFESSIONAL_R12_C3_LOSSLESS_COMPOSITION_PROJECTION_VERIFY_20261010_V1.json",
+    "git_blob_sha": "5965b692dc6bfcffda90cfcdf41fa760f67488d0",
+    "status": "PASS__INDEPENDENT_SPRITE__PYCOMPILE__6_OF_6__R12_C3_ROOT_BINDING_COMPOSITION_PROJECTION_LOSSLESS_AND_SCOPE_PRESERVING__ZERO_PROPERTY_OR_TERMINAL_CREDIT"
+  },
+  "hard_nonclaims": [
+    "NO_CC_R3_TERMINAL_CLOSURE",
+    "NO_R12_SEMANTIC_PROPERTY_TRUTH",
+    "NO_C1_OR_C8_CREDIT",
+    "NO_UNKNOWN_MATERIAL_DEFEATER_COMPLETENESS",
+    "NO_GLOBAL_SEMANTIC_COMPLETENESS_INSIDE_ANY_ROOT_FROM_C3",
+    "NO_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT"
+  ]
+}
