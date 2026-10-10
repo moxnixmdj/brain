@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_ONE_SHOT_PREDECESSOR_POINTER_REBIND_INDEPENDENT_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_EXACT_BRANCH_BYTES__11_OF_11_STATIC_AUTHORITY_AND_HASH_CHECKS__ZERO_CREDIT",
+  "subject": {
+    "runtime_path": "canonical/runtime/one_shot_verified_closure_v1.py",
+    "runtime_git_blob_sha": "605fe5a36e26aef51f93c4a5b3e43483abea2c19",
+    "pointer_path": "canonical/governance/CURRENT_ONE_SHOT_REALITY_CLOSURE.json",
+    "focused_test_path": "canonical/tests/test_one_shot_verified_closure_v1.py",
+    "focused_test_git_blob_sha": "e3225ee9d68db39a30474aa5c1d1c3616a1ed229",
+    "repair_receipt_path": "canonical/verification/ONE_SHOT_PREDECESSOR_POINTER_REBIND_VERIFY_20261010_V2.json",
+    "repair_receipt_git_blob_sha": "d3a5380d5782205a77c0aba472f1d6c9ae83d055",
+    "semantic_source_receipt_path": "canonical/verification/R3_PROOF_UNAVAILABLE_CAUSAL_CLASSIFICATION_VERIFY_20261010_V3.json",
+    "semantic_source_receipt_git_blob_sha": "3da2d62aac1b9d87d4fd1bd715df9dc8b64164c2"
+  },
+  "independent_verification": {
+    "carrier": "brain-one-shot-closure-20261010",
+    "sprite_id": "sprite-a928bb3e-8de3-4c63-af66-61331150667d",
+    "workspace": "pointer-coherence-v2-independent",
+    "result": "PASS_11_OF_11",
+    "checked": [
+      "RUNTIME_EXACT_GIT_BLOB",
+      "POINTER_PREDECESSOR_BINDS_RUNTIME",
+      "FOCUSED_TEST_EXACT_GIT_BLOB",
+      "FOCUSED_TEST_CONTAINS_POINTER_COHERENCE_ASSERTION",
+      "PRIMARY_REPAIR_RECEIPT_EXACT_GIT_BLOB",
+      "SEMANTIC_SOURCE_RECEIPT_EXACT_GIT_BLOB",
+      "PRIMARY_REPAIR_RECEIPT_BINDS_TEST",
+      "PRIMARY_REPAIR_RECEIPT_BINDS_SEMANTIC_SOURCE",
+      "POINTER_BINDS_PRIMARY_REPAIR_RECEIPT",
+      "POINTER_BINDS_SEMANTIC_SOURCE_RECEIPT",
+      "TERMINAL_CREDIT_REMAINS_ZERO"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_FULL_PRIVATE_REPOSITORY_REGRESSION_CLAIM",
+    "NO_NEW_RUNTIME_BEHAVIOR",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}

@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_ONE_SHOT_PREDECESSOR_POINTER_REBIND_VERIFY_20261010_V2",
+  "date": "2026-10-10",
+  "status": "PASS__TDD_RED_GREEN__CURRENT_V1_POINTER_REBOUND__FOCUSED_V1_SUITE_12_OF_12__COHERENCE_ASSERTION_MOVED_INTO_V1_FOCUSED_SUITE__ZERO_CREDIT",
+  "source_main_head_observed": "238f7c60a8a19c0405fb9f5d844377112f62815d",
+  "defect": {
+    "pointer_path": "canonical/governance/CURRENT_ONE_SHOT_REALITY_CLOSURE.json",
+    "load_bearing_field": "predecessor.git_blob_sha",
+    "stale_blob_sha": "367a232ef5438bea976607ed607fd4f02c9c2d5d",
+    "current_v1_blob_sha": "605fe5a36e26aef51f93c4a5b3e43483abea2c19",
+    "consequence": "CURRENT_ONE_SHOT_DYNAMIC_PROJECTION_FAILS_CLOSED_ON_STABLE_V1_V2_POINTER_MISMATCH"
+  },
+  "semantic_change_source": {
+    "commit": "97c3f345614f37d9e68361ae9719f5456ef85114",
+    "verification_path": "canonical/verification/R3_PROOF_UNAVAILABLE_CAUSAL_CLASSIFICATION_VERIFY_20261010_V3.json",
+    "verification_git_blob_sha": "3da2d62aac1b9d87d4fd1bd715df9dc8b64164c2",
+    "verification_status": "PASS__FOCUSED_6_OF_6__LATEST_AUTHORITY_REAL_STATE_REPLAY_CORRECT__ZERO_TERMINAL_CREDIT"
+  },
+  "tdd": {
+    "red": {
+      "carrier": "brain-live-runtime-v1-verify-20261008",
+      "workspace": "unified-fabric-current-byte-verify",
+      "result": "FAIL__POINTER_367A232E_DID_NOT_EQUAL_CURRENT_V1_605FE5A3"
+    },
+    "green": {
+      "same_carrier": true,
+      "exact_pointer_rebind_to": "605fe5a36e26aef51f93c4a5b3e43483abea2c19",
+      "focused_v1_suite_tests_run": 12,
+      "focused_v1_suite_tests_passed": 12,
+      "failures": 0,
+      "required_inert_fixture": "state.json existed only to satisfy current Root1 provider path resolution in historical mocked-run tests"
+    }
+  },
+  "permanent_regression": {
+    "path": "canonical/tests/test_one_shot_verified_closure_v1.py",
+    "git_blob_sha": "e3225ee9d68db39a30474aa5c1d1c3616a1ed229",
+    "test": "test_current_pointer_binds_exact_v1_runtime_blob",
+    "placement": "INSIDE_V1_FOCUSED_TEST_MODULE",
+    "law": "ANY_FOCUSED_V1_SUITE_RUN_FAILS_IF_CURRENT_POINTER_PREDECESSOR_HASH_DOES_NOT_MATCH_V1_RUNTIME_BYTES"
+  },
+  "hard_nonclaims": [
+    "NO_NEW_ONE_SHOT_RUNTIME_BEHAVIOR_INTRODUCED_BY_POINTER_REBIND",
+    "NO_FULL_PRIVATE_REPOSITORY_REGRESSION_CLAIM",
+    "NO_NEW_SEMANTIC_AUTHORITY_BEYOND_THE_EXISTING_PROOF_UNAVAILABLE_CLASSIFICATION_RECEIPT",
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_CAPABILITY_CREDIT",
+    "NO_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
