@@ -1,0 +1,32 @@
+name: verify-current-professional-quality-reconciliation-v1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json
+      - canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json
+      - canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json
+      - canonical/governance/PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_REGISTRY_20261010_V1.json
+      - canonical/governance/PROFESSIONAL_QUALITY_R8_POPULATION_SEMANTIC_SCOPE_20261010_V1.json
+      - canonical/runtime/professional_quality_scoped_evidence_v1.py
+      - canonical/runtime/professional_quality_leaf_coverage_projection_v1.py
+      - canonical/tests/test_professional_quality_scoped_evidence_v1.py
+      - canonical/tests/test_professional_quality_leaf_coverage_projection_v1.py
+      - canonical/tests/test_current_professional_quality_reconciliation_v1.py
+      - canonical/verification/PROFESSIONAL_QUALITY_R8_POPULATION_SEMANTIC_VERIFY_20261010_V1.json
+      - .github/workflows/verify-current-professional-quality-reconciliation-v1.yml
+
+permissions:
+  contents: read
+
+jobs:
+  reconcile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m unittest canonical.tests.test_current_professional_quality_reconciliation_v1 -v
