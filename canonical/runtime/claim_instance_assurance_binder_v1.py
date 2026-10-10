@@ -176,6 +176,7 @@ def _adapt_r7_single_edit(receipt: Mapping[str, Any]) -> dict[str, Any]:
         "semantics_sha256": sha256_value(dict(dispositions)),
         "evidence_kind": "EXACT_SINGLE_EDIT_R7_CAUSAL_EXECUTION",
         "claim_scoped_defeaters_closed": sorted(R7_DEFEATERS),
+        "claim_scoped_adversarial_closure": True,
     }
 
 
@@ -264,6 +265,9 @@ def evaluate(
             **adapted,
         })
 
+    if not all(row.get("claim_scoped_adversarial_closure") is True for row in accepted):
+        return _fail("CLAIM_SCOPED_ADVERSARIAL_CLOSURE_UNPROVED")
+
     covered_roots = {row["root_id"] for row in accepted}
     missing_roots = sorted(set(required_roots) - covered_roots)
     extra_roots = sorted(covered_roots - set(required_roots))
@@ -291,5 +295,6 @@ def evaluate(
         "accepted_evidence": accepted,
         "domain_semantic_closure": True,
         "domain_execution_closure": True,
+        "claim_scoped_adversarial_closure": True,
         "closure_scope": "FROZEN_CLAIM_INSTANCE_ONLY",
     }
