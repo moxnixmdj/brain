@@ -1,0 +1,74 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V14",
+  "date": "2026-10-10",
+  "status": "ACTIVE_POST_COMPOSITION_V14__PROFESSIONAL_24_UNCOVERED_COMPLEMENTS_BOUND__R2_V86_CURRENT__TB_RANK20_V3_RETIRED_REPAIR_PROMOTED__READ_ONLY_ONLY__ZERO_CREDIT",
+  "supersedes": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V13.json",
+  "runtime": {
+    "path": "canonical/runtime/capability_parallel_frontier_post_composition_v1.py",
+    "git_blob_sha": "249b08767cdf4f940ba98ea3e8fe3aff0601e349",
+    "entrypoint": "plan_current_post_composition_frontier"
+  },
+  "frontier": {
+    "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
+    "git_blob_sha": "d13c3806cae464ee65667e432196d73167d1d118",
+    "frontier_id": "LIVE_WORK_FRONTIER_20261010_PROF12_WHOLE_LEAF_CLAIM_V2_V14"
+  },
+  "professional_whole_leaf": {
+    "uncovered_partition_worklist_path": "canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_UNCOVERED_PARTITION_WORKLIST_20261010_V1.json",
+    "uncovered_partition_worklist_git_blob_sha": "07dee32099a252cad07e5630504dcb2fc252180f",
+    "leaf_count": 24,
+    "whole_leaf_scope_complete_count": 0,
+    "uncovered_partition_count": 24,
+    "property_truth_ready_count": 0,
+    "mutation_rule": "NO_CERTIFICATE_WRITE_UNTIL_EXACT_TOTALITY_OR_CERTIFIED_COMPLETE_UNION_EVIDENCE_EXISTS"
+  },
+  "tb_rank20_v3": {
+    "current_tb_git_blob_sha": "7678d9a56461b121ffd52dd4c9c8df464fda08d2",
+    "final_status": "PREEXPOSURE_ABORT_NONCONSUMING",
+    "task_read": true,
+    "agent_ready": true,
+    "durable_start_cas_acquired": false,
+    "task_started": false,
+    "trial_consumed": 0,
+    "caller_repair_verified": true,
+    "caller_repair_verification_git_blob_sha": "bf5aa5cddf6c1272a9664320273d39725470b2e5",
+    "public_repair_merge_commit_sha": "a434b8f8d87b0916b1a9924b35ed3a40c32314d7",
+    "retry_authority": false,
+    "replacement_authority": false
+  },
+  "r2_v86": {
+    "current_r2_git_blob_sha": "af80fd1c9845730cbbdd68413dcb9427428427b5",
+    "wake_gate": false,
+    "bound_truth_reentry_consumption_verified": true
+  },
+  "independent_plan_replay": {
+    "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "tests": "4_OF_4_PASS",
+    "source_count": 7,
+    "currentness_verified": true,
+    "plan_sha256": "7db690e8e3a2e9882555985ccba31d62873752d50cfc71345e9866a3918ba9f7",
+    "plan_bytes": 2170,
+    "status": "PARALLEL_FRONTIER_PLAN_READY",
+    "parallel_read_only_evidence_work_ids": [
+      "BYTES_EXACT_SYMBOLIC_V24_NEXT_PHYSICAL_CUT",
+      "ESCAPE_GAP_A_AUTHENTICATED_ROW_PROOFS",
+      "ESCAPE_GAP_B_STRICT_PROGRESS_ROW_PROOFS",
+      "PROFESSIONAL_QUALITY_V7_WHOLE_LEAF_DOMAIN_EVIDENCE"
+    ],
+    "parallel_full_execution_work_ids": []
+  },
+  "authority": {
+    "read_only_evidence_plan": true,
+    "full_execution": false,
+    "promotion": false,
+    "terminal": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
