@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_R2_OPEN_WORLD_SEMANTIC_CONTROL_LIVE_VERIFY_20261010_V2",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_BRANCH_BYTES__19_OF_19_FOCUSED_TESTS__FABRIC_V2_DYNAMIC_ROUTE_AND_DELEGATION_PASS__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "successor/r2-open-world-control-closure-20261010-v2",
+    "exact_blobs": {
+      "canonical/runtime/residual_semantic_control_invariance_v1.py": "f2a19e925c331fc575f5b7129011b9b042452edd",
+      "canonical/runtime/residual_semantic_control_invariance_verify_v1.py": "248d23cb86a9a277383ba4204f340ab17e137cc6",
+      "canonical/runtime/open_world_semantic_control_v1.py": "cea865ac319eb420977b60378de213fc11be9090",
+      "canonical/runtime/unified_cognitive_fabric_v2.py": "afb8b5c30957168dd8ba8684afb94b31c9118ed5",
+      "canonical/tests/test_residual_semantic_control_invariance_v1.py": "8e6a14063c338a06270822594acf176b4daf5bcc"
+    }
+  },
+  "independent_carrier": {
+    "provider": "Sprites",
+    "sprite": "brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/tmp/r2controlv2",
+    "tests_run": 19,
+    "failures": 0,
+    "errors": 0,
+    "conclusion": "PASS"
+  },
+  "fabric_v2_verification": {
+    "explicit_control_route_executed": true,
+    "automatic_control_route_executed": true,
+    "existing_v1_surface_delegation_executed_with_stub_backend": true,
+    "r3_observation_hook_executed_with_stub_live_runtime": true,
+    "v1_backend_full_integration_reexecuted": false,
+    "reason": "THE_WRAPPER_DELEGATION_CONTRACT_WAS_EXECUTED_WITH_A_MINIMAL_STUB_TO_ISOLATE_V2_BEHAVIOR; EXISTING_V1_BYTES_ARE_UNMODIFIED"
+  },
+  "complementary_existing_evidence": {
+    "pairwise_nonidentifiability_verification": "canonical/verification/SEMANTIC_PAIR_NONIDENTIFIABILITY_VERIFY_20261010_V1.json",
+    "pairwise_nonidentifiability_verification_git_blob_sha": "2e5f81c929025f4df7b5c2589ccc37f6147cdee6",
+    "pairwise_existing_result": "PASS__21_OF_21__UNCHANGED_MAIN_CAPABILITY__NOT_REEXECUTED_IN_THIS_ISOLATED_WORKSPACE"
+  },
+  "proved": [
+    "UNRESOLVED_OPEN_WORLD_SEMANTICS_CAN_YIELD_A_VERIFIED_NEXT_INFORMATION_ACQUISITION_CONTROL_ACTION_WITHOUT_SELECTING_SEMANTIC_IDENTITY",
+    "NESTED_SEMANTIC_IDENTITY_INPUTS_CANNOT_CONTROL_THE_ORIGIN_ROUTE",
+    "TAMPERED_CONTROL_ACTIONS_FAIL_INDEPENDENT_RECOMPUTATION",
+    "FABRIC_V2_EXPLICITLY_ROUTES_THE_NEW_CONTROL_SURFACE",
+    "FABRIC_V2_AUTO_ROUTES_THE_NEW_CONTROL_SURFACE",
+    "FABRIC_V2_DELEGATES_EXISTING_SURFACES_TO_V1",
+    "FABRIC_V2_EXPOSES_THE_NEW_SURFACE_TO_R3_OBSERVATION",
+    "R2_V72_PRESERVES_THE_ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL",
+    "THE_SCHEDULER_DEDUPLICATES_GENERIC_CONTROL_WORK_WITHOUT_CLAIMING_SEMANTIC_CLOSURE",
+    "CONTEXT_DEPENDENT_MEANING_V4_COMPOSES_PAIRWISE_NONIDENTIFIABILITY_WITH_MINIMUM_INFORMATION_CONTROL"
+  ],
+  "hard_nonclaims": [
+    "NO_TRUE_WORD_SENSE_SELECTION",
+    "NO_OPEN_WORLD_SEMANTIC_COMPLETENESS",
+    "NO_FINANCE_SEMANTIC_TAIL_CLOSURE",
+    "NO_FINAL_DOMAIN_ACTION_AUTHORITY",
+    "NO_FULL_V1_DEPENDENCY_GRAPH_REEXECUTION_IN_THIS_RECEIPT",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
