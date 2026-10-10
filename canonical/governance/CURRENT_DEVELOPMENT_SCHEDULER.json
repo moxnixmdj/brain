@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_DEVELOPMENT_SCHEDULER_POINTER_V1",
   "date": "2026-10-10",
-  "status": "ACTIVE__POST_COMPOSITION_V13__PROFESSIONAL_V2_CLAIMS_FACTORIZED_24_OF_24__ZERO_DOMAIN_EQUIVALENCE__TB_PARKED__GAP_B_TWO_ACTIVE__READ_ONLY_EVIDENCE_READY__FULL_EXECUTION_FAILS_CLOSED",
+  "status": "ACTIVE__POST_COMPOSITION_V14__PROFESSIONAL_24_OF_24_SCOPE_COMPLETE__PROPERTY_TRUTH_0_OF_24__R10_EXECUTION_PROBE_ACTIVE__PARALLEL_EVIDENCE_READY__FULL_EXECUTION_FAILS_CLOSED_WITHOUT_VECTOR_OR_SEPARATE_AUTHORITY",
   "authoritative_activation": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V13.json",
   "runtime": "canonical/runtime/capability_parallel_frontier_post_composition_v1.py",
   "primary_entrypoint": "canonical.runtime.capability_parallel_frontier_post_composition_v1.plan_current_post_composition_frontier",
@@ -27,10 +27,12 @@
   "planning_entrypoint": "canonical.runtime.capability_first_scheduler_v1.rank_work",
   "current_live_work_frontier": {
     "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
-    "git_blob_sha": "6918ed944bdf63019c2b8dfb16d553882d412a6a",
-    "status": "CURRENT_POST_COMPOSITION_FRONTIER__PROFESSIONAL_V2_CLAIMS_FACTORIZED_24_OF_24__ZERO_DOMAIN_EQUIVALENCE__TB_RANK20_PARKED__GAP_B_TWO_ACTIVE_ROWS__READ_ONLY_EVIDENCE_ONLY__FULL_EXECUTION_FAIL_CLOSED__ZERO_CREDIT",
+    "git_blob_sha": "a06d1c66f705f9583e4fd36a20a044e3f6093a03",
+    "status": "CURRENT_POST_COMPOSITION_FRONTIER__PROFESSIONAL_24_OF_24_SCOPE_COMPLETE__PROPERTY_TRUTH_0_OF_24__R10_EXECUTION_PROPERTY_PROBE_ACTIVE",
     "professional_verified_root_subject_binding_count": 12,
-    "professional_same_subject_composition_admissible": true
+    "professional_same_subject_composition_admissible": true,
+    "professional_whole_leaf_scope_complete_count": 24,
+    "professional_property_truth_closed_count": 0
   },
   "live_score_contract": {
     "path": "canonical/governance/LIVE_WORK_SCORE_CALIBRATION_CONTRACT_20261010_V1.json",
@@ -86,5 +88,12 @@
     "git_blob_sha": "9e8864cb22c997d7c4e2f582d8abf3f03f26f22f",
     "independent_plan_replay_sha256": "8b49532adefbc859843cf473b1208eac44d291dfd8c92937d2ccf714993711fe",
     "full_execution_authority": false
+  },
+  "post_composition": {
+    "professional_scope_construction_complete": true,
+    "professional_scope_complete_count": 24,
+    "professional_property_truth_closed_count": 0,
+    "current_primary_professional_edge": "R10_EXECUTION_EXACT_BYTE_PROPERTY_TRUTH_FALSIFICATION_PROBE",
+    "full_current_main_regression_open": true
   }
 }
