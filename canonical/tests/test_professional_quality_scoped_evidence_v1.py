@@ -9,10 +9,10 @@ from canonical.runtime import professional_quality_scoped_evidence_v1 as scoped
 
 
 class ProfessionalQualityScopedEvidenceV1Tests(unittest.TestCase):
-    def test_current_r1_r2_r3_r4_r5_r6_r7_r10_and_r11_scopes_are_admitted_without_global_credit(self):
+    def test_current_r1_r2_r3_r4_r5_r6_r7_r9_r10_and_r11_scopes_are_admitted_without_global_credit(self):
         out = scoped.evaluate()
         self.assertTrue(out["pass"], out)
-        self.assertEqual(out["admitted_scope_count"], 9, out)
+        self.assertEqual(out["admitted_scope_count"], 10, out)
         self.assertEqual(out["rejected_scope_count"], 0, out)
         self.assertFalse(out["global_leaf_closure"])
         self.assertFalse(out["global_root_closure"])
@@ -405,6 +405,32 @@ class ProfessionalQualityScopedEvidenceV1Tests(unittest.TestCase):
             if x["root_id"] == "R2_CANDIDATE_SEARCH"
         )
         self.assertIn("MINIMAX_RUNTIME_STALE", row["errors"])
+
+
+    def test_r9_scope_is_execution_only_and_preserves_deployment_limits(self):
+        out = scoped.evaluate()
+        row = next(
+            x for x in out["admitted_scopes"]
+            if x["root_id"] == "R9_TEMPORAL_DEPLOYMENT"
+        )
+        self.assertEqual(
+            row["claim_scope"]["kind"],
+            "FROZEN_POPULATION_CONSERVATIVE_CENSORING_AND_EARLY_FAILURE_ACCOUNTING",
+        )
+        self.assertEqual(
+            row["contributes_to_leaf_ids"],
+            ["PQ::R9_TEMPORAL_DEPLOYMENT::EXECUTION"],
+        )
+        self.assertIn(
+            "NO_MULTIHORIZON_DEPLOYMENT_VALIDITY",
+            row["claim_scope"]["limitations"],
+        )
+        self.assertIn(
+            "NO_DISTRIBUTION_SHIFT_TRANSPORT_CLAIM",
+            row["claim_scope"]["limitations"],
+        )
+        self.assertFalse(row["semantic_leaf_credit"])
+        self.assertFalse(row["execution_leaf_credit"])
 
 
 
