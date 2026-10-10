@@ -30,6 +30,7 @@ from canonical.runtime.r2_existing_policy_cover_observation_reuse_v1 import (
     discover as discover_existing_cover_observation,
 )
 from canonical.runtime import r2_raw_source_proof_material_adapter_v1 as source_proof_material
+from canonical.runtime import r2_bound_source_information_provider_v1 as bound_source_provider
 from canonical.runtime import r2_grounded_candidate_policy_frontier_v1 as grounded_policy_frontier
 from canonical.runtime.minimum_information_origin_policy_v1 import (
     route as route_minimum_information_origin,
@@ -1485,6 +1486,7 @@ def run(
                 "predicate_id": gap["predicate_id"],
                 "reason": gap["loop_status"],
                 "acquisition_plan": acquisition_plan,
+                "source_scope": deepcopy(origin_problem["source_scope"]),
                 "external_research_authorized": acquisition_plan.get(
                     "external_research_authorized"
                 ) is True,
@@ -1551,7 +1553,14 @@ def run(
                     goal_to_decision_binding=goal_binding,
                 )
 
-            if information_provider is None:
+            round_information_provider = information_provider
+            if (
+                round_information_provider is None
+                and acquisition_plan.get("action") == "OBSERVE_BOUND_SOURCE_ONLY"
+            ):
+                round_information_provider = bound_source_provider.provide
+
+            if round_information_provider is None:
                 action = acquisition_plan.get("action")
                 if action == "ASK_USER_MINIMUM_CLARIFICATION":
                     open_status = "OPEN__USER_MINIMUM_CLARIFICATION_REQUIRED"
@@ -1591,7 +1600,7 @@ def run(
                     information_trace=information_trace,
                     goal_to_decision_binding=goal_binding,
                 )
-            provided = information_provider(request_packet, round_index)
+            provided = round_information_provider(request_packet, round_index)
             information_trace.append(
                 {
                     "round": round_index,
