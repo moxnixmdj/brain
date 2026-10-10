@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V56",
+  "date": "2026-10-10",
+  "status": "CURRENT_RANK20_V9_EFFECTIVE_AUTHORITY__PREACTIVATION__ZERO_EXPOSURE__EIGHTEEN_CONSUMED",
+  "predecessor": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V55.json",
+    "git_blob_sha": "91053699c9fbd731781b0e2b8c17d4f97a357e86"
+  },
+  "public_v8_reseal_verification": {
+    "path": "canonical/verification/TB_SCIENCE_RANK20_V8_PUBLIC_RESEAL_VERIFY_20261010_V1.json",
+    "git_blob_sha": "0da9bef7f0418b6f192e4ebcb43ef3a4bfa8bf86",
+    "pass": true
+  },
+  "authority": {
+    "path": "canonical/governance/TB_SCIENCE_RANK20_ONE_SLOT_EXECUTION_AUTHORITY_20261010_V9.json",
+    "git_blob_sha": "75ea2068d87591351ba790e17af02a7857f670a9"
+  },
+  "counts": {
+    "benchmark_trials_consumed": 18,
+    "consumed_successes_final": 0,
+    "consumed_failures_final": 18,
+    "started_result_pending": 0,
+    "finalized_slots": 18,
+    "active_in_flight_slot_count": 0
+  },
+  "next_slot": {
+    "ledger_schedule_rank": 20,
+    "frozen_manifest_schedule_order": 19,
+    "task_rank": 19,
+    "slot_id": "terminal-bench-science/hysteretic-aquifer-control::trial-0",
+    "task_digest": "sha256:681df0c3b2ada03a933ac4d2e11f07983676f87a9f26b61e416987904b880289"
+  },
+  "logical_attempt_id": "6ec02f79eb1c35206800ec6196a82d24acc17f9562d8e51d99a011bf9c89a618",
+  "execution_claim_binding_digest": "sha256:08acc8711eff0c388582af03a071ec412c99a57393d9cc40dbfc0002ae802ca6",
+  "claim_epoch_id": "RANK20_V13_STRONG_REPAIR_FRESH_V3_ACTIVATION_IDENTITY_20261010_V8",
+  "logical_attempt_claim_binding": {
+    "path": "canonical/governance/TB_SCIENCE_RANK20_LOGICAL_ATTEMPT_CLAIM_BINDING_20261010_V8.json",
+    "git_blob_sha": "79ade372c86afbc088fea729c31e09f4ba823cf0",
+    "canonical_sha256": "08acc8711eff0c388582af03a071ec412c99a57393d9cc40dbfc0002ae802ca6"
+  },
+  "rank20_task_read_history": false,
+  "rank20_task_started": false,
+  "rank20_start_cas_acquired": false,
+  "rank20_benchmark_trials_consumed": 0,
+  "scheduler": {
+    "frozen": true,
+    "reason": "RANK20_V9_EFFECTIVE_AUTHORITY_STAGED__PUBLIC_PREACTIVATION_PROMOTION_REQUIRED",
+    "only_authorized_transition": "PROMOTE_PUBLIC_V8_EFFECTIVE_AUTHORITY_PREACTIVATION__NO_ACTIVATION"
+  },
+  "execution_authority": true,
+  "execution_authority_effective": true,
+  "task_read_authority": true,
+  "task_read_authority_effective": true,
+  "activation_authority": false,
+  "repair_authority": false,
+  "finalization_authority": false,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
