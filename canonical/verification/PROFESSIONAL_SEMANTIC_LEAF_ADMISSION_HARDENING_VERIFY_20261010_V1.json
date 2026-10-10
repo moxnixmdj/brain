@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_SEMANTIC_LEAF_ADMISSION_HARDENING_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__SEMANTIC_RECEIPTS_REQUIRE_CURRENT_V3_CLAIM_IDENTITY_PLUS_FOUR_ROOT_TOTALITY__EXISTING_12_EXECUTION_RECEIPTS_UNCHANGED",
+  "subject": {
+    "binder": {
+      "path": "canonical/runtime/professional_quality_leaf_binder_v2.py",
+      "git_blob_sha": "96dedf3641009b08a2e21a8be376459f7ae06a58"
+    },
+    "tests": {
+      "path": "canonical/tests/test_professional_quality_leaf_binder_semantic_admission_v1.py",
+      "git_blob_sha": "f45061fdb98541ddf461f2885b137c7de6233367"
+    },
+    "stable_claim_generator": {
+      "path": "canonical/runtime/professional_semantic_totality_claim_pack_v3.py",
+      "git_blob_sha": "5c3b47bc2d72b2e0b6b01c3e04635928419082fc",
+      "note": "CURRENT_MAIN_V3_PACK_AFTER_SELF_CONTAINED_STABLE_AUTHORITY_REPAIR"
+    }
+  },
+  "focused_replay": {
+    "second_carrier": "brain-professional-hard-defect-verify-20261010",
+    "py_compile": "PASS",
+    "tests_run": 5,
+    "tests_passed": 5,
+    "tests_failed": 0
+  },
+  "current_registry_non_regression": {
+    "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "registry": "canonical/governance/PROFESSIONAL_QUALITY_LEAF_EVIDENCE_REGISTRY_20261010_V2.json",
+    "verified_execution_leaf_count": 12,
+    "verified_semantic_leaf_count": 0,
+    "verified_leaf_count": 12,
+    "open_leaf_count": 12,
+    "rejected_receipt_count": 0,
+    "structural_errors": [],
+    "existing_evidence_current": true,
+    "promotion_ready": false,
+    "pass": false
+  },
+  "semantic_admission_requires": [
+    "EXACT_CURRENT_STABLE_SEMANTIC_CLAIM_ID",
+    "EXACT_CURRENT_SEMANTIC_SCOPE_SHA256",
+    "EXACT_CURRENT_SEMANTIC_TARGET_PREDICATE_SHA256",
+    "EXACT_CURRENT_SEMANTICS_SHA256",
+    "CLAIM_SCOPED_TOTALITY_PROVED",
+    "CC_R1_REALITY_CONTAINMENT_PROVED",
+    "CC_R2_MISSION_SOUNDNESS_PROVED",
+    "CC_R3_TERMINAL_CLOSURE_PROVED",
+    "R4_PROOF_REALIZATION_AUTHORITY"
+  ],
+  "hard_nonclaims": [
+    "NO_SEMANTIC_LEAF_PROPERTY_TRUTH_FROM_THIS_GUARD",
+    "NO_R12_CC_R3_OR_R4_CLOSURE_FROM_THIS_GUARD",
+    "NO_24_OF_24_PROPERTY_TRUTH",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "property_truth_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "currentness": {
+    "branch_base_main_commit": "860cdf52cd4356964ce27e1d7511b245c793bbb0",
+    "current_pack_v3_blob": "5c3b47bc2d72b2e0b6b01c3e04635928419082fc",
+    "old_r12_root_receipt_stale_under_current_pack": true,
+    "semantic_admission_guard_does_not_transport_old_root_authority": true
+  }
+}

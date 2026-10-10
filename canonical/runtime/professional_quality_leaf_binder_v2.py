@@ -14,7 +14,9 @@ from __future__ import annotations
 from hashlib import sha1, sha256
 import json
 from pathlib import Path
-from typing import Any
+from typing import Any, Mapping
+
+from canonical.runtime import professional_semantic_totality_claim_pack_v3 as semantic_pack_v3
 
 ROOT = Path(__file__).resolve().parents[2]
 MANIFEST = ROOT / "canonical/governance/PROFESSIONAL_QUALITY_LEAF_BINDING_MANIFEST_20261010_V1.json"
@@ -75,6 +77,31 @@ def _check_content_addressed_file(
     }
 
 
+def _semantic_receipt_errors(
+    receipt: Mapping[str, Any],
+    current_claim: Mapping[str, Any] | None,
+) -> list[str]:
+    """Return fail-closed semantic-admission errors for one leaf receipt."""
+    if not isinstance(current_claim, Mapping):
+        return ["CURRENT_SEMANTIC_CLAIM_REQUIRED"]
+    frozen = current_claim.get("frozen_claim")
+    if not isinstance(frozen, Mapping):
+        return ["CURRENT_SEMANTIC_FROZEN_CLAIM_REQUIRED"]
+
+    checks = (
+        (receipt.get("semantic_claim_id") == frozen.get("claim_id"), "SEMANTIC_CLAIM_ID_MISMATCH"),
+        (receipt.get("semantic_scope_sha256") == frozen.get("scope_sha256"), "SEMANTIC_SCOPE_BINDING_MISMATCH"),
+        (receipt.get("semantic_target_predicate_sha256") == frozen.get("target_predicate_sha256"), "SEMANTIC_TARGET_BINDING_MISMATCH"),
+        (receipt.get("semantic_semantics_sha256") == frozen.get("semantics_sha256"), "SEMANTIC_SEMANTICS_BINDING_MISMATCH"),
+        (receipt.get("claim_scoped_totality_proved") is True, "CLAIM_SCOPED_TOTALITY_NOT_PROVED"),
+        (receipt.get("cc_r1_reality_containment_proved") is True, "CC_R1_NOT_PROVED"),
+        (receipt.get("cc_r2_mission_soundness_proved") is True, "CC_R2_NOT_PROVED"),
+        (receipt.get("cc_r3_terminal_closure_proved") is True, "CC_R3_NOT_PROVED"),
+        (receipt.get("r4_proof_realization_authority") is True, "R4_NOT_PROVED"),
+    )
+    return [error for ok, error in checks if not ok]
+
+
 def _receipt_result(
     *,
     repo_root: Path,
@@ -85,6 +112,7 @@ def _receipt_result(
     acceptance: str,
     contract: str,
     manifest_blob_sha: str,
+    semantic_claim: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     path_text = entry.get("path")
     declared_sha = entry.get("git_blob_sha")
@@ -146,6 +174,7 @@ def _receipt_result(
     if kind == "SEMANTIC":
         if receipt.get("leaf_semantic_satisfied") is not True:
             result["errors"].append("SEMANTIC_SATISFACTION_NOT_PROVED")
+        result["errors"].extend(_semantic_receipt_errors(receipt, semantic_claim))
     elif kind == "EXECUTION":
         if receipt.get("leaf_execution_satisfied") is not True:
             result["errors"].append("EXECUTION_SATISFACTION_NOT_PROVED")
@@ -218,6 +247,26 @@ def evaluate(
         structural_errors.append("LEAF_RECEIPTS_NOT_OBJECT")
         leaf_receipts = {}
 
+    semantic_claims: dict[str, Mapping[str, Any]] = {}
+    semantic_receipts_present = any(
+        isinstance(leaf_id, str)
+        and leaf_id.endswith("::SEMANTIC")
+        and isinstance(entries, list)
+        and bool(entries)
+        for leaf_id, entries in leaf_receipts.items()
+    )
+    if semantic_receipts_present:
+        try:
+            semantic_pack = semantic_pack_v3.verify(repo_root=repo_root)
+        except Exception as exc:
+            semantic_pack = {"pass": False, "reason": type(exc).__name__ + ":" + str(exc)}
+        if semantic_pack.get("pass") is not True:
+            structural_errors.append("CURRENT_SEMANTIC_CLAIM_PACK_NOT_PASS")
+        else:
+            for claim in semantic_pack.get("claims") or []:
+                if isinstance(claim, Mapping) and isinstance(claim.get("leaf_id"), str):
+                    semantic_claims[claim["leaf_id"]] = claim
+
     expected_leaf_ids: set[str] = set()
     declared_verified_without_receipt: list[str] = []
     verified_semantic: list[str] = []
@@ -282,6 +331,7 @@ def evaluate(
                     acceptance=leaf.get("acceptance") or "",
                     contract=contract,
                     manifest_blob_sha=manifest_blob_sha,
+                    semantic_claim=(semantic_claims.get(leaf_id) if kind == "SEMANTIC" else None),
                 ))
             receipt_results.extend(results)
 
