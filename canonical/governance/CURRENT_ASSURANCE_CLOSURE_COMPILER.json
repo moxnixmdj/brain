@@ -204,5 +204,24 @@
     "domain_semantic_closure": false,
     "domain_execution_closure": false,
     "terminal_credit_delta": 0
+  },
+  "professional_quality_leaf_coverage_projection": {
+    "runtime_path": "canonical/runtime/professional_quality_leaf_coverage_projection_v1.py",
+    "runtime_git_blob_sha": "b398bdfea24e4a658f44285837e4d09646df2299",
+    "tests_path": "canonical/tests/test_professional_quality_leaf_coverage_projection_v1.py",
+    "tests_git_blob_sha": "87cd1a9f8be258a90084b842fce8bc5c0a64ecc8",
+    "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_LEAF_COVERAGE_PROJECTION_VERIFY_20261010_V1.json",
+    "verification_git_blob_sha": "210353cc444d2168f10ad5ecebc73d39a2d6d10a",
+    "result": "PYCOMPILE_PASS__32_OF_32__13_PARTIAL__11_NO_SCOPED_EVIDENCE__24_GLOBAL_OPEN",
+    "partial_coverage_leaf_count": 13,
+    "semantic_partial_coverage_leaf_count": 1,
+    "execution_partial_coverage_leaf_count": 12,
+    "no_scoped_evidence_leaf_count": 11,
+    "verified_global_leaf_count": 0,
+    "open_global_leaf_count": 24,
+    "global_leaf_closure": false,
+    "domain_semantic_closure": false,
+    "domain_execution_closure": false,
+    "terminal_credit_delta": 0
   }
 }
