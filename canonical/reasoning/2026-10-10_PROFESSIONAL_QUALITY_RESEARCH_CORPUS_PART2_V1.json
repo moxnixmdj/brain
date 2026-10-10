@@ -1,0 +1,236 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_RESEARCH_CORPUS_PART_V1",
+  "date": "2026-10-10",
+  "status": "RESEARCH_PROVENANCE_ONLY__ZERO_CREDIT",
+  "part": "2_of_4",
+  "layer_range": "26-50",
+  "layers": [
+    {
+      "id": 26,
+      "title": "Adaptive attacker-defender value",
+      "root_ids": [
+        "R11_ADAPTIVE_INTEGRITY_SECURITY",
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "summary": "Prioritize defenses against the cheapest causal false-certification routes using adaptive attacker/defender reasoning rather than static checklist counts."
+    },
+    {
+      "id": 27,
+      "title": "Lifetime risk",
+      "root_ids": [
+        "R9_TEMPORAL_DEPLOYMENT",
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "summary": "Per-run risk can accumulate over repeated use; reusable-system assurance must account for lifetime exposure and dependence when material."
+    },
+    {
+      "id": 28,
+      "title": "Model-risk closure",
+      "root_ids": [
+        "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+        "R10_ANALYSIS_DECISION",
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "summary": "Risk and quality models are assumption-bearing; preserve model-family uncertainty, misspecification challenges and decision robustness rather than treating one fitted model as truth."
+    },
+    {
+      "id": 29,
+      "title": "Observability",
+      "root_ids": [
+        "R3_REALIZATION_OBSERVATION",
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "summary": "Every material failure must have an observation path with adequate coverage; an unobservable control trigger cannot protect certification."
+    },
+    {
+      "id": 30,
+      "title": "Detection-to-enforcement",
+      "root_ids": [
+        "R11_ADAPTIVE_INTEGRITY_SECURITY",
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "summary": "Detected invalid states must actually block, reopen, route or remediate; dashboards and warnings alone have no certification authority."
+    },
+    {
+      "id": 31,
+      "title": "Crash-consistent issuance",
+      "root_ids": [
+        "R11_ADAPTIVE_INTEGRITY_SECURITY",
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "summary": "Artifact identity, evidence snapshot and certificate issuance must not split across a crash or partial commit."
+    },
+    {
+      "id": 32,
+      "title": "Rollback resistance",
+      "root_ids": [
+        "R11_ADAPTIVE_INTEGRITY_SECURITY",
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "summary": "Stale favorable state cannot overwrite newer invalidating evidence; use epoch, version and freshness binding."
+    },
+    {
+      "id": 33,
+      "title": "Trusted time/randomness",
+      "root_ids": [
+        "R11_ADAPTIVE_INTEGRITY_SECURITY",
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "summary": "When freshness or hidden-challenge unpredictability is load-bearing, bind trustworthy time and randomness semantics."
+    },
+    {
+      "id": 34,
+      "title": "Software realization/reproducible builds",
+      "root_ids": [
+        "R3_REALIZATION_OBSERVATION",
+        "R11_ADAPTIVE_INTEGRITY_SECURITY",
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "summary": "Correct assurance theory can be invalidated by implementation; bind implementation/source versions, deterministic replay and reproducible build evidence where material."
+    },
+    {
+      "id": 35,
+      "title": "Platform attestation",
+      "root_ids": [
+        "R3_REALIZATION_OBSERVATION",
+        "R11_ADAPTIVE_INTEGRITY_SECURITY"
+      ],
+      "summary": "Require platform-execution identity only when platform substitution is a material false-certification route."
+    },
+    {
+      "id": 36,
+      "title": "Assurance regress",
+      "root_ids": [
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "summary": "Do not recurse assurance forever; terminate in explicit PROVED, ASSURED or ASSUMED leaves, use conditional assurance, and keep ordinary professional work at lightweight P0/P1 unless deeper assurance is triggered."
+    },
+    {
+      "id": 37,
+      "title": "Latent criterion discovery",
+      "root_ids": [
+        "R4_MEASUREMENT_CONSTRUCT",
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "summary": "Treat the rubric as a hypothesis; use holistic residual, independent criterion discovery and promotion tests to find decision-relevant missing dimensions without pretending universal criterion completeness."
+    },
+    {
+      "id": 38,
+      "title": "Residual attribution",
+      "root_ids": [
+        "R4_MEASUREMENT_CONSTRUCT",
+        "R7_CAUSAL_PRESCRIPTIVE"
+      ],
+      "summary": "Residual quality can arise from nonlinearity, interactions, context, measurement, evaluator noise or latent criteria; discriminate among explanations before adding constructs."
+    },
+    {
+      "id": 39,
+      "title": "Stakeholder aggregation",
+      "root_ids": [
+        "R10_ANALYSIS_DECISION"
+      ],
+      "summary": "Separate epistemic judgment from normative authority; preserve user requirements, audience needs, professional convention and reviewer taste, using Pareto/necessary dominance/minimax regret instead of unjustified averaging."
+    },
+    {
+      "id": 40,
+      "title": "Surrogate validity/target anchoring",
+      "root_ids": [
+        "R5_EVALUATOR_REFERENCE",
+        "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+        "R8_POPULATION_CONTEXT_OPERATOR"
+      ],
+      "summary": "AI-judge reliability is not target-professional validity; calibrate near finalists and target populations with professional/outcome grounding, local bias estimates and OOD boundaries."
+    },
+    {
+      "id": 41,
+      "title": "Adaptive Goodhart",
+      "root_ids": [
+        "R5_EVALUATOR_REFERENCE",
+        "R11_ADAPTIVE_INTEGRITY_SECURITY"
+      ],
+      "summary": "Evaluator validity can collapse under optimizer pressure; track search pressure, attack the surrogate, preserve exploit archives, freeze dev evaluators and use fresh generator-blind terminal evidence."
+    },
+    {
+      "id": 42,
+      "title": "Evidence ancestry",
+      "root_ids": [
+        "R6_EVIDENCE_GROUNDING_DEPENDENCE"
+      ],
+      "summary": "Model/provider/prompt/rubric/reference/data ancestry can create common error; independence requires genealogical and empirical error diversity, not different labels alone."
+    },
+    {
+      "id": 43,
+      "title": "Selection noise/optimizer's curse",
+      "root_ids": [
+        "R5_EVALUATOR_REFERENCE",
+        "R11_ADAPTIVE_INTEGRITY_SECURITY"
+      ],
+      "summary": "Large noisy search selects lucky errors; search evidence is not certification evidence, so use fresh finalist evaluation and track regret, ties and winner-identity uncertainty."
+    },
+    {
+      "id": 44,
+      "title": "Evaluation resolution",
+      "root_ids": [
+        "R4_MEASUREMENT_CONSTRUCT",
+        "R5_EVALUATOR_REFERENCE",
+        "R10_ANALYSIS_DECISION"
+      ],
+      "summary": "Define meaningful difference and evaluator resolution; use comparison intervals, practical equivalence and abstention, and qualify near the actual decision boundary."
+    },
+    {
+      "id": 45,
+      "title": "Absolute quality floor",
+      "root_ids": [
+        "R4_MEASUREMENT_CONSTRUCT",
+        "R10_ANALYSIS_DECISION"
+      ],
+      "summary": "Relative best does not imply professional excellence; maintain criterion-referenced floors, vetoes, outcome requirements and explicit states for below-standard, standard-met-search-open and excellent-search-closed."
+    },
+    {
+      "id": 46,
+      "title": "Anchor/provenance contamination",
+      "root_ids": [
+        "R5_EVALUATOR_REFERENCE"
+      ],
+      "summary": "Prestige, brand or provenance can bias judgment; use blind intrinsic channels, provenance swaps, candidate-blind standard setting and never let Opus provenance itself define excellence."
+    },
+    {
+      "id": 47,
+      "title": "Anchor memorization/training contamination",
+      "root_ids": [
+        "R5_EVALUATOR_REFERENCE",
+        "R11_ADAPTIVE_INTEGRITY_SECURITY"
+      ],
+      "summary": "Public anchors may be recognized despite blinding; use private shadow anchors, twins, transformed controls and fresh post-freeze examples, and never treat exposure as generalization evidence."
+    },
+    {
+      "id": 48,
+      "title": "Challenge-generation validity",
+      "root_ids": [
+        "R4_MEASUREMENT_CONSTRUCT",
+        "R11_ADAPTIVE_INTEGRITY_SECURITY",
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "summary": "Fresh challenge is insufficient; require freshness, construct validity, diagnostic value, representativeness and oracle soundness, with generator and oracle separated."
+    },
+    {
+      "id": 49,
+      "title": "Challenge-to-deployment transport",
+      "root_ids": [
+        "R8_POPULATION_CONTEXT_OPERATOR",
+        "R9_TEMPORAL_DEPLOYMENT",
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "summary": "Test distributions need not match deployment; separate representative, stress and mechanism suites, require support before reweighting, and bind claim tiers to demonstrated transport envelope."
+    },
+    {
+      "id": 50,
+      "title": "Performative deployment",
+      "root_ids": [
+        "R9_TEMPORAL_DEPLOYMENT",
+        "R11_ADAPTIVE_INTEGRITY_SECURITY"
+      ],
+      "summary": "Deployment policy can alter future populations and evidence; separate exogenous from endogenous shift, retain external anchors, account for selection and watch for self-confirming loops or diversity collapse."
+    }
+  ]
+}
