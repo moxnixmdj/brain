@@ -1,0 +1,37 @@
+{
+  "schema": "PROJECT_BRAIN_COVERAGE_ROOT_SEMANTIC_VERIFICATION_V1",
+  "status": "PASS__INDEPENDENT_SEMANTIC_VERIFICATION__CC_R3_PROFESSIONAL_R12_V10_UNIVERSAL_POSITIVE_GATE",
+  "pass": true,
+  "verifier_protocol": "COVERAGE_ROOT_SEMANTIC_VERIFIER_V1",
+  "independent": true,
+  "semantic_claim_verified": true,
+  "root_id": "CC_R3_TERMINAL_CLOSURE_V1",
+  "claim_id": "11870f850b46bcfcc31094f764fc4f45c911aaac413979ceb62679ff19a53162",
+  "proof_mode": "FORMAL_REDUCTION",
+  "certificate": {
+    "path": "canonical/governance/COVERAGE_CC_R3_PROFESSIONAL_R12_V10_TERMINAL_CLOSURE_CERTIFICATE_20261011_V1.json",
+    "git_blob_sha": "060cfd8182102ba29fb8e978feaee55b73f446d4"
+  },
+  "semantic_verifier": {
+    "path": "canonical/runtime/coverage_cc_r3_professional_r12_semantic_verify_v1.py",
+    "git_blob_sha": "d084f8907471cbb686532de57f22ef2c7e54f850"
+  },
+  "verifier_result_sha256": "1659927b98c608e621a5830256f312a2e2008c7909e1e2aa7ebc2bd7e9f23609",
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-professional-hard-defect-verify-20261010",
+    "sprite_id": "sprite-1bbb86ed-1f7c-409f-8397-fadc4de7a62a",
+    "workspace": "/home/sprite/v9-real-witness",
+    "package_install_performed": false,
+    "incremental_spend_usd": 0
+  },
+  "result": {
+    "cc_r3_terminal_closure_proved": true,
+    "universal_positive_route_local_totality": true,
+    "abstention_fail_closed": true,
+    "v10_subject_sha256": "bb9dfcec9e006aebebcfa904ff6bf096aa01c62392f16f5915c2bf8e7fca1be5",
+    "property_truth_implied": false
+  },
+  "errors": [],
+  "terminal_credit_delta": 0
+}
