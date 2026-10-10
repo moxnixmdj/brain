@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_R12_SEMANTIC_CC_R3_MINIMUM_CUT_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_SPRITE__PYCOMPILE__6_OF_6__EXACT_THREE_OBLIGATION_R12_CC_R3_CUT__ZERO_PROPERTY_OR_TERMINAL_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "r12-semantic-cc-r3-mincut-v1-20261010",
+    "claim_id": "05b74983836dd1f6a13a0db72443246fb74f99548f0d982a769a6a7e572e9e85",
+    "leaf_id": "PQ::R12_META_COMPOSITION_CLOSURE::SEMANTIC",
+    "exact_blobs": {
+      "cut": "3181660934373c78e7d10a964420972c0332d84d",
+      "runtime": "ec3ffd3fd0a5716ec822945f6208b71558eb21d1",
+      "tests": "f71c3b4878a3f71735a60c7309b59f0bf5cf9134"
+    }
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/r12-semantic-cc-r3-cut-v1",
+    "py_compile": "PASS",
+    "tests_run": 6,
+    "tests_passed": 6,
+    "failures": 0,
+    "errors": 0
+  },
+  "verified_cut": {
+    "open_obligation_count": 3,
+    "obligation_ids": [
+      "R12_CC_R3_C1_EXACT_ASSUMPTION_GUARANTEE_DISCHARGE",
+      "R12_CC_R3_C3_COMPONENT_ABSTRACTION_SUBSTITUTION_SOUNDNESS",
+      "R12_CC_R3_STRONGER_MATERIAL_DEFEATER_TOTALITY"
+    ],
+    "solved_or_do_not_reopen_count": 9,
+    "predecessor_clause_state": "6_VERIFIED__2_PARTIAL__0_OPEN__STRONGER_TARGET_TOTALITY_OPEN"
+  },
+  "proved": [
+    "R12_CC_R3_CURRENT_SEARCH_SPACE_COMPRESSES_TO_EXACTLY_THREE_LOAD_BEARING_OPEN_OBLIGATIONS_UNDER_BOUND_CURRENT_EVIDENCE",
+    "SIX_ALREADY_VERIFIED_R12_CONTRACT_CLAUSES_AND_R12_CC_R1_CC_R2_IDENTITY_CARRIER_MUST_NOT_BE_REOPENED",
+    "SAME_SUBJECT_BINDING_CANNOT_SELF_CERTIFY_ASSUMPTION_GUARANTEE_DISCHARGE",
+    "IDENTITY_CARRIER_OR_CONDITIONAL_QUOTIENT_THEOREM_CANNOT_SELF_CERTIFY_ALL_COMPONENT_ABSTRACTION_SOUNDNESS",
+    "KNOWN_DEFEATER_REPLAY_CANNOT_SELF_CERTIFY_UNKNOWN_MATERIAL_DEFEATER_TOTALITY",
+    "PREMATURE_AUTHORITY_OR_OBLIGATION_DELETION_FAILS_CLOSED"
+  ],
+  "hard_nonclaims": [
+    "NO_CC_R3_TERMINAL_CLOSURE",
+    "NO_R12_SEMANTIC_PROPERTY_TRUTH",
+    "NO_ASSUMPTION_GUARANTEE_INTERFACE_DISCHARGE_PROOF",
+    "NO_COMPONENT_ABSTRACTION_SUBSTITUTION_SOUNDNESS_PROOF",
+    "NO_MATERIAL_DEFEATER_TOTALITY_PROOF",
+    "NO_R12_ROOT_OR_GLOBAL_PROFESSIONAL_QUALITY_CLOSURE",
+    "NO_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "property_truth_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
