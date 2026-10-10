@@ -1,0 +1,14 @@
+{
+  "schema": "PROJECT_BRAIN_FINITE_DOMAIN_EXECUTABLE_REFINEMENT_PROOF_V1",
+  "subject_id": "finite-domain-refinement-probe-v1",
+  "abstract_spec": {
+    "path": "canonical/governance/FINITE_DOMAIN_REFINEMENT_PROBE_ABSTRACT_SPEC_20261010_V1.json",
+    "git_blob_sha": "4d88ba124404c22b84e3e239040c65c7ae3f28b4"
+  },
+  "concrete_implementation": {
+    "path": "canonical/runtime/finite_domain_refinement_probe_v1.py",
+    "git_blob_sha": "9850d128df4f5e6e768fe7d8b0d372f0a3275e2c"
+  },
+  "callable": "run",
+  "terminal_credit_delta": 0
+}
