@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_FRONTIER_7_OF_24_V31_R2_V87_RECONCILIATION_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__15_OF_15_CROSS_POINTER_COHERENCE_CHECKS__ZERO_CAPABILITY_OR_TERMINAL_CREDIT",
+  "branch": "successor/current-frontier-reconcile-7of24-v31-20261010-v1",
+  "exact_blobs": {
+    "current_professional_quality_execution": "aff898774f7d431f969da7bc1bac511fdb37b787",
+    "current_r2_decision_intelligence": "ee03f3fe71383d1bf12e0797bf568e6b5eeeaca4",
+    "bytes_active_state": "714995cd13bf216f4c9189d77e33edc87fc326e5",
+    "current_live_work_frontier": "240098a9307308be145413a251eaa2a88f8806d3",
+    "current_development_scheduler": "9db0be86899abafabb9e86ed9936a0f30cef15a7",
+    "current_mission_objective": "11e69ed57ad94df14b6938304a7aba63da381895"
+  },
+  "checks": {
+    "frontier_status_property_truth_7_of_24": true,
+    "frontier_status_five_execution_leaves_open": true,
+    "frontier_status_bytes_v31": true,
+    "frontier_status_r2_v87": true,
+    "frontier_professional_source_blob_exact": true,
+    "frontier_bytes_source_blob_exact": true,
+    "frontier_r2_source_blob_exact": true,
+    "scheduler_frontier_blob_exact": true,
+    "scheduler_professional_property_truth_count_7": true,
+    "mission_professional_blob_exact": true,
+    "mission_frontier_blob_exact": true,
+    "mission_scheduler_blob_exact": true,
+    "mission_property_truth_count_7": true,
+    "mission_bytes_v31": true,
+    "mission_property_truth_ready_count_17": true
+  },
+  "preserved_nonclaims": {
+    "professional_live_default": false,
+    "global_professional_quality_closed": false,
+    "semantic_leaf_property_truth_count": 0,
+    "terminal_authority": false,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "incremental_spend_usd": 0
+}
