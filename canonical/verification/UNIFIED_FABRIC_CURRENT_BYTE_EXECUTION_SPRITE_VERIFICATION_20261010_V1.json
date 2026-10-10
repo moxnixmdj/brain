@@ -1,0 +1,166 @@
+{
+  "schema": "PROJECT_BRAIN_UNIFIED_FABRIC_CURRENT_BYTE_EXECUTION_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-10",
+  "status": "PASS__UNIFIED_FABRIC_CURRENT_BYTE_EXECUTION_VERIFIED__R1_DRIFT_LOCKED",
+  "branch": "impl-executable-refinement-terminal-closure-20261009",
+  "carrier": {
+    "kind": "EXISTING_ZERO_INCREMENTAL_SPEND_SPRITE",
+    "sprite": "brain-live-runtime-v1-verify-20261008",
+    "sprite_id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13",
+    "working_directory": "/home/sprite/unified-fabric-current-byte-verify/livebrain",
+    "incremental_spend_usd": 0
+  },
+  "exact_subjects": [
+    {
+      "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
+      "git_blob_sha": "31b9a227dba79f069045e915e416bcc370900af6"
+    },
+    {
+      "path": "canonical/tests/test_unified_cognitive_fabric_v1.py",
+      "git_blob_sha": "91996514d1e0d572cfeefd5064e4f4bd10048f8e"
+    },
+    {
+      "path": "canonical/runtime/live_brain_runtime_v1.py",
+      "git_blob_sha": "2d7680370fc77884f10d2fb3cd423dc29b0b35c0"
+    },
+    {
+      "path": "canonical/tests/test_live_brain_runtime_v1.py",
+      "git_blob_sha": "8eecd4e30a32cf7f5a9c083a53aebc187119c0eb"
+    },
+    {
+      "path": "canonical/runtime/brain_owned_python_closure_census_v1.py",
+      "git_blob_sha": "aee80dcae7c3397c79acf10a7e15e007dcf8a7a6"
+    },
+    {
+      "path": "canonical/runtime/current_authority_runtime_census_v1.py",
+      "git_blob_sha": "14d21fc3ad453493fa0e0a1477783ce0cbdb277b"
+    },
+    {
+      "path": "canonical/runtime/capability_discovery.py",
+      "git_blob_sha": "2acefaacfbcc9620cf97e9958c04eaff1d1d2937"
+    },
+    {
+      "path": "canonical/runtime/auto_npm_library_acquisition.py",
+      "git_blob_sha": "c59c53317c000ce171352bd216b80a1e5fe533bf"
+    },
+    {
+      "path": "canonical/runtime/independent_npm_codec_verifier.py",
+      "git_blob_sha": "b7edf974d3b0b4817f3dff8835b516c52c45f984"
+    },
+    {
+      "path": "canonical/runtime/auto_pypi_library_acquisition.py",
+      "git_blob_sha": "37decef0b7876428b7c4048ea3952888af18d374"
+    },
+    {
+      "path": "canonical/runtime/independent_pypi_codec_verifier.py",
+      "git_blob_sha": "8c83302bf645a901bdcedd38e04081ae0ca5f6a5"
+    },
+    {
+      "path": "canonical/tests/test_npm_runtime_package_imports_v1.py",
+      "git_blob_sha": "d5b9884e383b787b374b3757f7e6dbefc1892627"
+    }
+  ],
+  "verification": {
+    "unified_fabric_suite": {
+      "tests_run": 25,
+      "passed": 25,
+      "failures": 0,
+      "errors": 0,
+      "status": "PASS"
+    },
+    "live_brain_runtime_suite": {
+      "tests_run": 31,
+      "passed": 31,
+      "failures": 0,
+      "errors": 0,
+      "status": "PASS"
+    },
+    "npm_pypi_package_import_regression": {
+      "tests_run": 4,
+      "passed": 4,
+      "failures": 0,
+      "errors": 0,
+      "status": "PASS"
+    },
+    "current_authority_runtime_census_regex_regression": {
+      "tests_run": 1,
+      "passed": 1,
+      "status": "PASS",
+      "positive_paths": [
+        "canonical/runtime/a.py",
+        "canonical/runtime/nested/example_v1.py"
+      ],
+      "negative_paths": [
+        "canonical/governance/example.json"
+      ]
+    },
+    "representative_r2_decision_paths": {
+      "auto_raw_goal_status": "OPEN__DECISION_CONTEXT_REQUIRED",
+      "auto_raw_goal_r2_fixed_point_status": "OPEN__R2_EDGE_RESOLVER_UNAVAILABLE",
+      "explicit_decision_status": "OPEN__DECISION_CONTEXT_REQUIRED",
+      "execution_authority": false,
+      "terminal_authority": false
+    },
+    "r1_catalog": {
+      "pass": true,
+      "status": "PASS__R1_LIVE_ARCHITECTURE_CLOSED_AND_DRIFT_LOCKED",
+      "live_owned_capability_count": 89,
+      "universally_invocable_capability_count": 89,
+      "r1_structural_closure": true,
+      "r1_drift_locked": true
+    }
+  },
+  "defects_found_and_fixed": [
+    {
+      "class": "PACKAGE_IMPORT_NAMESPACE",
+      "affected": [
+        "canonical/runtime/auto_npm_library_acquisition.py",
+        "canonical/runtime/independent_npm_codec_verifier.py"
+      ],
+      "red_observation": "CANONICAL_PACKAGE_IMPORT_FAILED_FOR_UNQUALIFIED_INTERNAL_MODULES",
+      "fix": "USE_CANONICAL_RUNTIME_PACKAGE_IMPORTS",
+      "regression_status": "PASS"
+    },
+    {
+      "class": "PACKAGE_IMPORT_NAMESPACE",
+      "affected": [
+        "canonical/runtime/auto_pypi_library_acquisition.py",
+        "canonical/runtime/independent_pypi_codec_verifier.py"
+      ],
+      "red_observation": "CANONICAL_PACKAGE_IMPORT_FAILED_FOR_UNQUALIFIED_INTERNAL_MODULES",
+      "fix": "USE_CANONICAL_RUNTIME_PACKAGE_IMPORTS",
+      "regression_status": "PASS"
+    },
+    {
+      "class": "RUNTIME_PATH_REGEX_OVERESCAPE",
+      "affected": [
+        "canonical/runtime/current_authority_runtime_census_v1.py"
+      ],
+      "red_observation": "74_RUNTIME_PATH_CANDIDATES__0_REGEX_MATCHES",
+      "fix": "CORRECT_CANONICAL_RUNTIME_PYTHON_PATH_REGEX",
+      "regression_status": "PASS"
+    }
+  ],
+  "carrier_materialization_note": "THE_EXISTING_SPRITE_BASE_WAS RECONSTRUCTED WITH EXACT CURRENT SUBJECTS AND ONLY THE CURRENT GOVERNANCE/VERIFICATION/IMPORT DEPENDENCIES NEEDED TO REACH A CLEAN CATALOG AND RUN THE DECLARED SUITES. THIS DOES NOT PROVE EVERY TRANSITIVE FILE IN THE CARRIER MATCHES THE BRANCH.",
+  "claims": {
+    "unified_fabric_current_byte_execution_verified": true,
+    "live_subruntime_current_byte_execution_verified": true,
+    "r1_current_execution_surface_drift_locked": true,
+    "current_package_import_contracts_for_NPM_and_PyPI_verified": true,
+    "repository_wide_executable_refinement_closed": false,
+    "full_transitive_dependency_cone_current_byte_verified": false,
+    "authority_pointer_historical_reference_reachability_complete": false,
+    "terminal_closed": false
+  },
+  "nonclaims": [
+    "COMPONENT_AND_FRONT_DOOR_TESTS_DO_NOT_PROVE_OPEN_WORLD_BEHAVIOR_COMPLETENESS",
+    "R1_STRUCTURAL_CLOSURE_DOES_NOT_PROVE_R2_SEMANTIC_COMPLETENESS",
+    "THE_CONSERVATIVE_AUTHORITY_POINTER_REACHABILITY_CENSUS_STILL_INCLUDES_RETAINED_SUPERSEDED_OR_HISTORICAL_REFERENCES",
+    "THIS_RECEIPT_DOES_NOT GRANT CAPABILITY_ACCEPTANCE_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
