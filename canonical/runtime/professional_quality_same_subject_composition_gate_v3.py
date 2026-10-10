@@ -20,6 +20,7 @@ from typing import Any, Mapping
 ROOT = Path(__file__).resolve().parents[2]
 SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_SAME_SUBJECT_COMPOSITION_GATE_V3"
 BINDING_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_ROOT_SUBJECT_BINDING_V1"
+R3_BINDING_SCHEMA_V2 = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_ROOT_SUBJECT_BINDING_V2"
 VERIFY_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_ROOT_SUBJECT_BINDING_VERIFY_V1"
 NORMAL_FORM_PATH = (
     "canonical/governance/PROFESSIONAL_QUALITY_CLOSURE_NORMAL_FORM_20261009_V1.json"
@@ -380,8 +381,23 @@ def evaluate(
         if error is not None:
             return _fail(error, root_id=root_id)
         assert binding is not None and binding_blob is not None
-        if binding.get("schema") != BINDING_SCHEMA:
-            return _fail("SUBJECT_BINDING_SCHEMA_INVALID", root_id=root_id)
+        binding_schema = binding.get("schema")
+        if binding_schema != BINDING_SCHEMA:
+            if not (
+                root_id == "R3_REALIZATION_OBSERVATION"
+                and binding_schema == R3_BINDING_SCHEMA_V2
+            ):
+                return _fail("SUBJECT_BINDING_SCHEMA_INVALID", root_id=root_id)
+            scope = binding.get("binding_scope")
+            guarantees = set(scope.get("guarantees") or []) if isinstance(scope, Mapping) else set()
+            limitations = set(scope.get("limitations") or []) if isinstance(scope, Mapping) else set()
+            if (
+                "ALL_V1_R3_STRUCTURAL_BINDING_GUARANTEES_PRESERVED" not in guarantees
+                or "ONE_EXACT_REAL_TASK_RENDER_STEP_RECEIPT_BOUND" not in guarantees
+                or "NO_GLOBAL_R3_ROOT_CLOSURE" not in limitations
+                or "NO_SAME_SUBJECT_COMPOSITION_PASS" not in limitations
+            ):
+                return _fail("R3_V2_BINDING_PRESERVATION_CONTRACT_INVALID", root_id=root_id)
         if binding.get("root_id") != root_id:
             return _fail("SUBJECT_BINDING_ROOT_MISMATCH", root_id=root_id)
         subject_kind = binding.get("subject_kind")
