@@ -24,6 +24,10 @@ SOURCES = {
         "canonical/runtime/capability_first_scheduler_v1.py",
         "63be50dacedec96809b9f3b40faaeab411741c39",
     ),
+    "scheduler_residual_ledger": (
+        "canonical/runtime/r2_semantic_residual_ledger_v1.py",
+        "f732f511913a7fecd197d73496f156f9bcadff9a",
+    ),
     "rank18_diagnosis": (
         "canonical/verification/TB_SCIENCE_RANK18_PLANNER_TIMEOUT_CAUSAL_DIAGNOSIS_20261010_V1.json",
         "97697c3c7868644d36b317dc7e4e80dfd8f97647",
