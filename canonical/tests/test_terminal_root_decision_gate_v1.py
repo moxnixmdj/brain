@@ -65,6 +65,22 @@ def _bound_receipt(root: Path, kind: str, **premises):
     }
 
 
+def _refresh_authority_admission(root: Path, receipt: dict) -> None:
+    authority_path = root / "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json"
+    authority = {
+        "authoritative_sources": {
+            "fixture": {
+                **receipt["proof_artifact"],
+                "independent_verification": receipt["verifier_receipt_artifact"],
+            }
+        }
+    }
+    authority_path.write_text(
+        json.dumps(authority, sort_keys=True) + "\n", encoding="utf-8"
+    )
+    receipt["authority_pointer"]["git_blob_sha"] = _git_blob_sha(authority_path)
+
+
 def test_full_scope_db_cover_closes_abc_only():
     with TemporaryDirectory() as td:
         root = Path(td)
@@ -110,6 +126,7 @@ def test_generator_closure_requires_bound_load_bearing_premises():
         verifier["proof_artifact"] = r["proof_artifact"]
         verifier_path.write_text(json.dumps(verifier, sort_keys=True) + "\n", encoding="utf-8")
         r["verifier_receipt_artifact"]["git_blob_sha"] = _git_blob_sha(verifier_path)
+        _refresh_authority_admission(root, r)
 
         out = evaluate({"closure_receipt": r}, repo_root=root)
         assert out["pass"] is False
@@ -164,6 +181,7 @@ def test_verifier_must_bind_exact_proof_artifact():
         verifier["proof_artifact"] = {"path": "other.json", "git_blob_sha": "c" * 40}
         verifier_path.write_text(json.dumps(verifier, sort_keys=True) + "\n", encoding="utf-8")
         r["verifier_receipt_artifact"]["git_blob_sha"] = _git_blob_sha(verifier_path)
+        _refresh_authority_admission(root, r)
         out = evaluate({"closure_receipt": r}, repo_root=root)
         assert out["pass"] is False
         assert out["reason"] == "VERIFIER_PROOF_BINDING_MISMATCH"
