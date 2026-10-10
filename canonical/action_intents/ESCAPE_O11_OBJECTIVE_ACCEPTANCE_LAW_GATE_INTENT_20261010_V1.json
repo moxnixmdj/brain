@@ -1,0 +1,77 @@
+{
+  "schema": "PROJECT_BRAIN_ESCAPE_O11_OBJECTIVE_ACCEPTANCE_LAW_GATE_INTENT_20261010_V1",
+  "date": "2026-10-10",
+  "status": "ACTIVE_REUSE_ONLY_IMPLEMENTATION_INTENT__ZERO_CREDIT",
+  "canonical_generation": "e2fe9b31d9b71f2c76b519c462f8e31b1e153977",
+  "canonical_base_commit": "e2fe9b31d9b71f2c76b519c462f8e31b1e153977",
+  "capability_target": "CURRENT_O11_OBJECTIVE_ACCEPTANCE_SHARED_LAW",
+  "causal_blocker": "CURRENT_O11_MEMBERSHIP_NOT_BOUND_TO_EXISTING_CURRENT_IDENTITY_PROOF_CARRYING_BENCHMARK_CLAIM_KERNEL",
+  "blocker_lease_key": "e2fe9b31d9b71f2c76b519c462f8e31b1e153977::CURRENT_O11_OBJECTIVE_ACCEPTANCE_SHARED_LAW::CURRENT_O11_MEMBERSHIP_NOT_BOUND_TO_EXISTING_CURRENT_IDENTITY_PROOF_CARRYING_BENCHMARK_CLAIM_KERNEL",
+  "action_kind": "ADAPT_EXISTING_VERIFIED_MECHANISM",
+  "current_frontier": {
+    "path": "canonical/governance/CURRENT_ESCAPE_OQ_FRONTIER_REDUCTION_20261010_V1.json",
+    "git_blob_sha": "e355f3c168429c96ff0dfa142428ada6c97c47e9",
+    "O_OBJECTIVE_ACCEPTANCE": 11,
+    "Q_QUALITATIVE_RELATIVE_ORDER": 2
+  },
+  "reused_kernel": {
+    "path": "canonical/runtime/benchmark_witness_elimination_compiler_v4.py",
+    "git_blob_sha": "1da07329d3bf35f598a5716c80519afe6b07dd64",
+    "predecessor_v3": {
+      "path": "canonical/runtime/benchmark_witness_elimination_compiler_v3.py",
+      "git_blob_sha": "ace06caa1a8680a0a52d5341345dd5413b0620aa"
+    },
+    "proof_modes": [
+      "THRESHOLD_LOWER_BOUND",
+      "TASK_CONDITIONED_DOMINANCE",
+      "SCOPE_SUPERSET"
+    ]
+  },
+  "supporting_mechanisms": [
+    [
+      "canonical/runtime/proof_carrying_scope_cover_v1.py",
+      "3143bd707d51d4d66b2171396b3d596c9a26adf8"
+    ],
+    [
+      "canonical/runtime/blind_threshold_receipt_v1.py",
+      "324e9c236fed50d150082ebcca6078a2921ed65a"
+    ],
+    [
+      "canonical/runtime/acceptance_bound_compiler_v1.py",
+      "4ef569ab0663c0d4a3b2b91c82a8dfec880eefd0"
+    ],
+    [
+      "canonical/runtime/acceptance_proof_transmuter_v1.py",
+      "39b5611e53485674b29e2a05da91b89801bc5aa6"
+    ]
+  ],
+  "semantic_law": {
+    "statement": "FOR_ANY_CURRENT_O_ROW__A_PROOF_IS_STRUCTURALLY_ELIGIBLE_ONLY_IF_THE_EXISTING_V4_KERNEL_PROVES_CURRENT_IDENTITY_FRESHNESS__EXACT_OR_STRONGER_SCOPE__CLEAN_PROVENANCE__EVALUATOR_ROBUSTNESS__COMPLETE_FAILURE_ACCOUNTING__AND_ONE_CONTENT_ADDRESSED_V3_OBJECTIVE_PROOF_MODE",
+    "current_epoch_rule": "CURRENT_IDENTITY_WINS_OVER_HISTORICAL_PREDICATE_LABEL_WHERE_CURRENT_OWNER_TARGET_OR_HARNESS_HAS_ADVANCED",
+    "mysterymechanism_rule": "KEEP_MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER_AS_ITS_OWN_CURRENT_PREDICATE__ALLOW_SOUND_SCOPE_SUPERSET_OR_TASK_CONDITIONED_DOMINANCE__DO_NOT_ALIAS_TO_MYSTERYMECHANISM_GE_49_55"
+  },
+  "behavioral_contract": {
+    "input": "CURRENT_O_OBLIGATION_ID_PLUS_EXISTING_V4_CLAIM_SPEC",
+    "success": "ONLY_IF_OBLIGATION_IS_CURRENT_O_AND_KERNEL_STATUS_IS_PROVEN",
+    "stale": "CURRENT_IDENTITY_DRIFT_RETURNS_STALE_WITHOUT_PROOF",
+    "q_boundary": "CURRENT_Q_ROW_REJECTED",
+    "authority": "ZERO_ACCEPTANCE_CAPABILITY_OWNERSHIP_TERMINAL_CREDIT"
+  },
+  "rejected_alternatives": [
+    "ELEVEN_SEPARATE_ACCEPTANCE_COMPILERS",
+    "HARDCODE_CURRENT_SCORE_THRESHOLDS_FROM_HISTORICAL_LABELS",
+    "ALIAS_STRENGTHENED_MYSTERYMECHANISM_TO_OLD_49_55_ATOM",
+    "NEW_ACCEPTANCE_PRIMITIVE"
+  ],
+  "reality_query_admission": {
+    "admission_verdict": "NO_REALITY_QUERY_REQUIRED",
+    "reason": "REUSE_AND_CURRENT_MEMBERSHIP_BINDING_ONLY"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
