@@ -1,0 +1,116 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK18_V1_PRESTART_ABORT_TRUTH_20261010_V1",
+  "date": "2026-10-10",
+  "status": "IRREVERSIBLE_OBSERVATION__RANK18_TASK_READ_TRUE__DURABLE_START_FALSE__PREEXPOSURE_ABORT_NONCONSUMING__ARTIFACT_CONFIG_TABLE_BRIDGE_REQUIRED__ZERO_CREDIT",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "slot": {
+    "ledger_schedule_rank": 18,
+    "frozen_manifest_schedule_order": 17,
+    "task_rank": 17,
+    "id": "terminal-bench-science/longitudinal-clinical-agent::trial-0",
+    "digest": "sha256:e9a166b2173f7014d4f1559505397b221f94bc446eab031f94791b35e0e5f1c9"
+  },
+  "execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2547,
+    "execution_branch": "execute/tb-science-rank18-20261010-v1",
+    "activation_commit_sha": "42ac54e777558417b0b55cc416456c2eeda8d9c7",
+    "github_run_id": 38027841300,
+    "github_job_id": 114142379742,
+    "github_synthetic_merge_sha": "a2f0e0935a914243c22550423edd01e26682dde5",
+    "run_attempt": 1,
+    "workflow_conclusion": "success",
+    "artifact_id": 11660558751,
+    "artifact_digest": "sha256:391135827a44c7ddb39cd3ebb86b36391887cc349bf3fe0111d00cf20db0331f"
+  },
+  "prestart": {
+    "carrier_ready": true,
+    "task_read": true,
+    "task_started": false,
+    "start_cas_acquired": false,
+    "prestart_guard_pass": true,
+    "prestart_context_headroom_tokens": 9340,
+    "input_tokens": 2948,
+    "reserved_completion_tokens": 4096,
+    "server_context_tokens": 16384,
+    "logical_attempt_id": "a02ee7de469f953679fb593ab152a9f67eb1ebe8c364f8c748f18cd8a81eab8d",
+    "first_cycle_prompt_sha256": "9eacbc21d9a55dfb68341ffe8473a83366b38737016007f022a448548eadba5c",
+    "request_identity_sha256": "91a71cea6429449f78a320b3e316954e52369679488714dd4e6e33d315ce50a3"
+  },
+  "runner_receipt": {
+    "sha256": "1b7c82b4765163070a19e7c6fa2d88cb6e8f1639f85cd5932e0d2429c8994185",
+    "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK18_V6_STATUS_JOURNAL_RUNNER",
+    "status": "PRESTART_ABORT__NONCONSUMING",
+    "error_type": "BarrierRunnerError",
+    "error": "TASK_ARTIFACT_PATH_INVALID",
+    "status_store_qualified": true,
+    "harbor_launched": false,
+    "agent_ready": false,
+    "agent_released": false,
+    "journal_requests_committed": 0,
+    "github_credentials_exposed_to_harbor": false,
+    "benchmark_trials_consumed": 0
+  },
+  "final_slot_receipt": {
+    "sha256": "7c32f718e4635e3b6b20572344dde1f141b1c8513ddf87e3a975dde467ff34a4",
+    "schema": "PROJECT_BRAIN_TB_SCIENCE_TERMINAL_SLOT_RECEIPT_RANK18_V6",
+    "status": "PREEXPOSURE_ABORT_NONCONSUMING",
+    "reward": null,
+    "task_read": true,
+    "task_started": false,
+    "start_cas_acquired": false,
+    "execution_authority_consumed": false,
+    "benchmark_trials_consumed": 0,
+    "consumed_successes_delta": 0,
+    "consumed_final_failures_delta": 0,
+    "rerun_credit": false
+  },
+  "causal_diagnosis": {
+    "failing_component": "capsules/tb_science_rank18_20261010_v1/rank18_v6_status_journal_runner.py",
+    "failing_component_git_blob_sha": "d9cf2e70a9d8ebb53dcd32d815185aa2b865f930",
+    "exact_root_cause": "PARENT_ARTIFACT_BRIDGE_ACCEPTED_ONLY_STRING_ARTIFACT_ENTRIES_BUT_PINNED_HARBOR_0_23_0_SUPPORTS_STRING_OR_ARTIFACTCONFIG_TABLE_ENTRIES",
+    "pinned_harbor_artifact_schema": {
+      "accepted_entry_forms": [
+        "ABSOLUTE_SOURCE_PATH_STRING",
+        "ARTIFACTCONFIG_TABLE"
+      ],
+      "artifactconfig_fields": [
+        "source",
+        "destination",
+        "exclude",
+        "service"
+      ]
+    },
+    "observed_task_shape": "TASK_USES_ARTIFACTCONFIG_TABLES_FOR_MAIN_AND_SIDECAR_SERVICES",
+    "required_general_repair": [
+      "NORMALIZE_STRING_AND_ARTIFACTCONFIG_TABLE_FORMS",
+      "INJECT_ONLY_MAIN_SERVICE_SOURCE_PATHS_AS_AGENT_DELIVERABLES",
+      "KEEP_SIDECAR_ARTIFACTS_AS_HARBOR_VERIFIER_RESPONSIBILITY",
+      "FAIL_CLOSED_ON_TRAVERSAL_OR_MALFORMED_CONFIG",
+      "ADD_FUNCTIONAL_REGRESSION_THAT_EXERCISES_TABLE_AND_SIDECAR_FORMS"
+    ]
+  },
+  "authority_effect": {
+    "rank18_slot_consumed": false,
+    "prior_activation_retired": true,
+    "prior_execution_authority_must_not_be_reused": true,
+    "fresh_execution_authority_requires_independently_verified_generic_repair": true
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_trials_consumed_delta": 0,
+    "consumed_successes_delta": 0,
+    "consumed_final_failures_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_RANK18_BENCHMARK_RESULT_WAS_PRODUCED",
+    "NO_RANK18_REWARD_WAS_OBSERVED",
+    "NO_DURABLE_START_CAS_WAS_ACQUIRED",
+    "NO_RANK18_SLOT_WAS_CONSUMED",
+    "NO_RETRY_OR_REPLACEMENT_AUTHORITY_IS_GRANTED_BY_THIS_RECEIPT",
+    "NO_ACCEPTANCE_FAMILY_OR_TERMINAL_CREDIT"
+  ]
+}
