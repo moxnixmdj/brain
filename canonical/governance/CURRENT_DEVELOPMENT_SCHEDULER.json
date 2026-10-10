@@ -2,14 +2,14 @@
   "schema": "PROJECT_BRAIN_CURRENT_DEVELOPMENT_SCHEDULER_POINTER_V1",
   "date": "2026-10-10",
   "status": "ACTIVE",
-  "authoritative_activation": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V4.json",
+  "authoritative_activation": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V6.json",
   "runtime": "canonical/runtime/capability_first_scheduler_v1.py",
   "primary_entrypoint": "rank_live_work",
   "objective": "MAXIMIZE_REUSABLE_VERIFIED_CAPABILITY_GENERALIZATION_RELIABILITY_AND_EFFICIENCY_PER_RESOURCE",
   "checkpoint_policy": "OPUS_5_5_IS_SECONDARY_FRONTIER_AUDIT__NOT_PRIMARY_DEVELOPMENT_GATE",
   "terminal_autopilot_policy": "NEW_CHECKPOINT_DISPATCH_REQUIRES_EXPLICIT_CAPABILITY_FIRST_ADMISSION",
   "r2_mechanism_policy": {
-    "path": "canonical/governance/R2_MECHANISM_CLOSURE_OPEN_WORLD_FRONTIER_POLICY_20261010_V2.json",
+    "path": "canonical/governance/R2_MECHANISM_CLOSURE_OPEN_WORLD_FRONTIER_POLICY_20261010_V3.json",
     "status": "GENERAL_R2_MECHANISM_CLOSED__OPEN_WORLD_EVIDENCE_FRONTIER_WAKE_GATED",
     "scheduler_rule": "OPEN_WORLD_EVIDENCE_FRONTIER_IS_DEMOTED_UNLESS_BOUND_TO_TASK_LOCAL_COUNTEREXAMPLE_OR_VERIFIED_CAPABILITY_DEFECT"
   },
@@ -17,5 +17,11 @@
     "path": "canonical/governance/CURRENT_R2_SHARED_CAUSE_RESIDUAL_LEDGER.json",
     "status": "ACTIVE_LIVE_DERIVED_FROM_CURRENT_R2_AUTHORITY",
     "scheduler_rule": "PRIMARY_CAPABILITY_RESOURCE_SCORE_FIRST__SHARED_CAUSE_FANOUT_SECONDARY_TIE_BREAK__OPUS_CHECKPOINT_AUDIT_TERTIARY"
+  },
+  "reuse_first_residual_admission": {
+    "policy": "canonical/governance/REUSE_FIRST_RESIDUAL_EXECUTION_POLICY_20261010_V2.json",
+    "status": "MECHANICALLY_ENFORCED_BY_CANONICAL_SCHEDULER_RUNTIME",
+    "rule": "R2_RESIDUAL_WORK_REQUIRES_EXPLICIT_ROUTE_CLASSIFICATION__NEW_PRIMITIVE_REQUIRES_SIX_PART_REUSE_EXHAUSTION_GATE",
+    "structural_gate_does_not_grant_truth_or_execution_authority": true
   }
 }
