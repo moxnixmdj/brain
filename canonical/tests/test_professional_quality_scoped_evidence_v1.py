@@ -338,7 +338,7 @@ class ProfessionalQualityScopedEvidenceV1Tests(unittest.TestCase):
             row["claim_scope"]["limitations"],
         )
         self.assertIn(
-            "NO_CANDIDATE_POLICY_SET_COMPLETENESS_TRUTH",
+            "NO_NEGATIVE_POLICY_ABSENCE_OR_GLOBAL_MINIMALITY_WITHOUT_SEPARATE_COMPLETENESS_PROOF",
             row["claim_scope"]["limitations"],
         )
         self.assertFalse(row["semantic_leaf_credit"])
