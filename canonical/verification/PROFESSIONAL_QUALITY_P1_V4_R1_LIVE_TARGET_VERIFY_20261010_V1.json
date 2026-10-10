@@ -1,0 +1,81 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_P1_V4_R1_LIVE_TARGET_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_BRANCH_BYTES__PYCOMPILE__23_OF_23_REGRESSION_AND_FALSIFICATION_PASS__CANONICAL_TARGET_INSTANCE_REPLAY_PASS__ZERO_QUALITY_OR_TERMINAL_CREDIT",
+  "repository": "moxnixmdj/brain",
+  "branch": "successor/pq-r1-live-target-binding-20261010-v1",
+  "base_main_commit": "a255754f14cc6781bd5cdb59aa55b846358a71cf",
+  "exact_subjects": {
+    "target_instance_compiler": {
+      "path": "canonical/runtime/professional_target_instance_compiler_v1.py",
+      "git_blob_sha": "deea06fb56032678901adbf23e16d422ff4fc789"
+    },
+    "router_v4": {
+      "path": "canonical/runtime/professional_quality_p1_router_v4.py",
+      "git_blob_sha": "1c67bf99100b5c51f113ededf0920b7ccb7643e4"
+    },
+    "compiler_tests": {
+      "path": "canonical/tests/test_professional_target_instance_compiler_v1.py",
+      "git_blob_sha": "45965589cd81025ac99c81ce55b864f6f103b6b8"
+    },
+    "router_v4_tests": {
+      "path": "canonical/tests/test_professional_quality_p1_router_v4.py",
+      "git_blob_sha": "9a51f10dccb1b9a08ddd60fe6bf6edbe1e811bb6"
+    },
+    "legacy_router_v3": {
+      "path": "canonical/runtime/professional_quality_p1_router_v3.py",
+      "git_blob_sha": "cdb6716ac6d562d1ab222242d07aeecc5cdfac78"
+    },
+    "legacy_router_v3_tests": {
+      "path": "canonical/tests/test_professional_quality_p1_router_v3.py",
+      "git_blob_sha": "7fd496e9200d1408d561cadcf40b8f4bf536c898"
+    },
+    "canonical_target_instance": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V4_R1_TARGET_INSTANCE_20261010_V1.json",
+      "git_blob_sha": "b3b6788543041f919ef8c83ea28d88dee3c9c04d"
+    }
+  },
+  "independent_execution": {
+    "carrier": "SPRITE",
+    "sprite_name": "brain-live-runtime-v1-verify-20261008",
+    "sprite_id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13",
+    "workspace": "/home/sprite/unified-fabric-current-byte-verify",
+    "source_transport": "EXACT_CONTENT_ADDRESSED_BRANCH_BYTES",
+    "py_compile": "PASS",
+    "focused_and_regression_tests_run": 23,
+    "focused_and_regression_tests_passed": 23,
+    "canonical_target_instance_replay": "PASS"
+  },
+  "canonical_target_instance_replay": {
+    "status": "PASS__EXPLICIT_PROFESSIONAL_TARGET_INSTANCE_BOUND",
+    "target_instance_sha256": "c78f38a12b728902661be0ae9ca6eb274ff194893b608bf201bb33229aecd5c2",
+    "raw_task_sha256": "74c7faa31ea99c89f32fe16c325f7359106a7ca2ffe8d576538574246f099486",
+    "raw_task_contract_sha256": "5ce9e7d956a1addf3e5532ea18e168ef34bf76169c39a9d91546cc2172d4653b",
+    "canonical_behavior_sha256": "f6c9438aec89b442686f99bb4aaa232fb2e665e282fc0e0574695cf984254c59",
+    "semantic_receipt_pass": true,
+    "structural_receipt_pass": true
+  },
+  "proved": [
+    "CALLER_CANNOT_SELF_ATTEST_COMPILE_TARGET_SPEC_AND_HARD_CONSTRAINTS",
+    "R1_TARGET_STEP_PASS_IS_INJECTED_ONLY_AFTER_BRAIN_OWNED_COMPILATION_PASS",
+    "RAW_TASK_NONWHITESPACE_SOURCE_IS_LOSSLESSLY_BOUND",
+    "OBJECTIVE_AUDIENCE_SOURCE_EVIDENCE_ARTIFACT_TYPE_HARD_CONSTRAINTS_PLAUSIBLE_INTERPRETATIONS_TARGET_CONSTRUCT_CLAIM_SCOPE_AND_CURRENT_DRAFT_RENDER_ARE_CONTENT_ADDRESSED",
+    "CANONICAL_PROFESSIONAL_TARGET_ROLE_SEMANTICS_ARE_REVERIFIED_ON_EVERY_COMPILE",
+    "CANONICAL_REQUIRED_BEHAVIOR_FIELDS_ARE_STRUCTURALLY_REVERIFIED",
+    "CANONICAL_BEHAVIOR_DRIFT_FAILS_CLOSED",
+    "LEGACY_V3_HARD_DEFECT_PREFLIGHT_REGRESSION_REMAINS_GREEN"
+  ],
+  "hard_nonclaims": [
+    "NO_ARBITRARY_NATURAL_LANGUAGE_TARGET_EXTRACTION_COMPLETENESS",
+    "NO_OPEN_WORLD_PLAUSIBLE_INTERPRETATION_ENUMERATION_COMPLETENESS",
+    "NO_GLOBAL_R1_LEAF_OR_ROOT_CLOSURE",
+    "NO_PROFESSIONAL_QUALITY_COMPLETENESS",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
