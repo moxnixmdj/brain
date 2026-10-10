@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_R3_PROOF_UNAVAILABLE_CAUSAL_CLASSIFICATION_VERIFY_20261010_V2",
+  "date": "2026-10-10",
+  "status": "PASS__FOCUSED_6_OF_6__CURRENT_AUTHORITY_REAL_STATE_REPLAY_CORRECT__ZERO_TERMINAL_CREDIT",
+  "subject_branch": "brain/proof-gap-classify-v2-20261010",
+  "base_main_sha": "61d21f99556f9e6a43a789772f52d9b1ab517c76",
+  "exact_git_blobs": {
+    "canonical/runtime/r3_structural_adapter_rule_acquisition_provider_v1.py": "b224f2e5f56140930ac3750a79e097429b81e081",
+    "canonical/runtime/one_shot_verified_closure_v1.py": "605fe5a36e26aef51f93c4a5b3e43483abea2c19",
+    "canonical/tests/test_r3_structural_adapter_rule_acquisition_provider_v1.py": "70c6971805b8eec15a4b972f2639d91d523a3a58",
+    "canonical/tests/test_one_shot_verified_closure_v1.py": "2a85759d3c52447e13ce1a624148008982e9cfd8"
+  },
+  "focused_remote_verification": {
+    "carrier": {
+      "name": "brain-r3-structural-provider-verify-20261010",
+      "sprite_id": "sprite-4c7dc4a8-ac7d-44a7-b49d-0fdf1f321004"
+    },
+    "result": "6_OF_6_PASS"
+  },
+  "real_durable_state_replay": {
+    "carrier": {
+      "name": "brain-live-runtime-v1-verify-20261008",
+      "sprite_id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13"
+    },
+    "source_state": "/home/sprite/unified-current-byte-verify/canonical/runtime/SELF_IMPROVEMENT_STATE_V1.json",
+    "executed_on_copy": true,
+    "source_state_mutated": false,
+    "latest_authority_overlaid_from_base_main": true,
+    "observed_success_surfaces": [
+      "SPECIALIZED:P3_REAL_CONTEXT_V12",
+      "LIVE_RUNTIME"
+    ],
+    "retained_proof_available": false,
+    "corrected_evidence_residual": "NEW_PROOF_BEARING_EXPERIENCE_REQUIRED__SUCCESS_PROOF_UNAVAILABLE",
+    "final_one_shot_status": "OPEN__INTERNAL_UNSOLVED__PENDING_ACQUISITION_OR_EXPERIMENT",
+    "rounds_executed": 2,
+    "frontier_progress_claimed": false,
+    "terminal_credit_delta": 0
+  },
+  "causal_truth": {
+    "structural_root1_provider_exists_and_executes": true,
+    "historical_successes_have_no_retained_proof": true,
+    "structural_rule_mutation_for_these_cases": false,
+    "root1_provider_exhaustion_is_not_the_root_cause": true,
+    "next_required_class": "NEW_PROOF_BEARING_EXPERIENCE_OR_EQUIVALENT_VERIFIABLE_RETAINED_EVIDENCE"
+  },
+  "hard_nonclaims": [
+    "NO_EFFECT_SAFE_REPLAY_CLAIM",
+    "NO_HISTORICAL_EPISODE_PROMOTION",
+    "NO_NEW_LEARNED_SKILL",
+    "NO_CLAIM_ALL_ADAPTER_AUTHORSHIP_CLOSED",
+    "NO_FULL_REPOSITORY_SUITE_REPLAY",
+    "NO_TERMINAL_AUTHORITY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0
+}
