@@ -114,7 +114,8 @@ def test_unknown_fields_fail_closed():
 def test_forged_pass_object_is_revalidated_not_trusted():
     frozen=u.freeze(payload())
     forged=deepcopy(frozen)
-    forged["manifest"]["candidates"][1]["generator_trace_sha256"]=None
+    generated=next(row for row in forged["manifest"]["candidates"] if row["source_kind"]=="GENERATED")
+    generated["generator_trace_sha256"]=None
     forged["candidate_universe_sha256"]=u._digest(forged["manifest"])
     out=u.validate_frozen(forged)
     assert out["pass"] is False
