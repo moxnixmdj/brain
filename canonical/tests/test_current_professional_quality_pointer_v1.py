@@ -14,6 +14,9 @@ REGISTRY = "canonical/governance/PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_REGISTRY_2
 REGISTRY_BLOB = "58083361e2f56c7b7312f07fb5d9670eb78dc121"
 VERIFY = "canonical/verification/PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_VERIFY_20261010_V11.json"
 VERIFY_BLOB = "6760cf07f928a9adcf70a0e2ec46e81b109f035a"
+ROUTER_V3_VERIFY = "canonical/verification/PROFESSIONAL_QUALITY_P1_ROUTER_V3_INDEPENDENT_VERIFY_20261010_V1.json"
+ROUTER_V3_VERIFY_BLOB = "1e793db5919be8a75e1599ba974bd06afaae6e91"
+ROUTER_V3_TESTS_BLOB = "7fd496e9200d1408d561cadcf40b8f4bf536c898"
 
 
 def test_current_professional_quality_projects_verified_scoped_truth_without_overclaim():
@@ -37,8 +40,15 @@ def test_current_professional_quality_projects_verified_scoped_truth_without_ove
     assert scoped["domain_execution_closure"] is False
 
     assert current["profile_execution_authority"] is True
-    assert current["router_v3_independent_replay"] is False
-    assert current["independent_replay"] is False
+    router_verify = current["router_v3_independent_verification"]
+    assert router_verify["path"] == ROUTER_V3_VERIFY
+    assert router_verify["git_blob_sha"] == ROUTER_V3_VERIFY_BLOB
+    assert router_verify["exact_router_git_blob_sha"] == ROUTER_BLOB
+    assert router_verify["exact_tests_git_blob_sha"] == ROUTER_V3_TESTS_BLOB
+    assert router_verify["actual_clean_and_hard_defect_docx_integration"] is True
+    assert router_verify["quality_authority"] is False
+    assert current["router_v3_independent_replay"] is True
+    assert current["independent_replay"] is True
     assert current["live_default"] is False
     assert current["promotion_authority"] is False
     assert current["quality_authority"] is False
@@ -46,4 +56,5 @@ def test_current_professional_quality_projects_verified_scoped_truth_without_ove
 
     legacy = current["legacy_router_verification"]
     assert legacy["scope"] == "ROUTER_V1_ONLY__DOES_NOT_VERIFY_ROUTER_V3"
-    assert "NO_ROUTER_V3_INDEPENDENT_REPLAY_YET" in current["hard_nonclaims"]
+    assert "NO_ROUTER_V3_INDEPENDENT_REPLAY_YET" not in current["hard_nonclaims"]
+    assert current["next"].startswith("BIND_DOMAIN_SEMANTIC_AND_EXECUTION_EVIDENCE")
