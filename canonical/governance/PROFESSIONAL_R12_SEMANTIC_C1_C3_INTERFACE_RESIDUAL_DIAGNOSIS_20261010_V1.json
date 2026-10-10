@@ -1,0 +1,209 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_R12_SEMANTIC_C1_C3_INTERFACE_RESIDUAL_DIAGNOSIS_20261010_V1",
+  "date": "2026-10-10",
+  "status": "DIAGNOSED__C1_C3_NOT_CURRENTLY_PROVABLE__12_OF_12_GUARANTEE_BINDINGS__0_OF_12_EXPLICIT_ASSUMPTION_INTERFACES__0_OF_12_EXPLICIT_ABSTRACTION_REFINEMENT_RELATIONS__ZERO_PROPERTY_CREDIT",
+  "observed_main_commit": "e116eee64d2aee55853e1e1469595e0d4e213ed1",
+  "current_professional_pointer": {
+    "path": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
+    "git_blob_sha": "59eced2dc3bdbba7da78734f86c8e674dbf29e1b"
+  },
+  "exact_subject": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V7_DECLARED_SYSTEM_SUBJECT_20261010_V6.json",
+    "git_blob_sha": "1d598bc8757017ceb34928d0df9f5fce859ef868"
+  },
+  "composition_input": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_V7_12_OF_12_COMPOSITION_INPUT_20261010_V1.json",
+    "git_blob_sha": "8063d124d6fbd239814380ef4fbc710350a1dea8"
+  },
+  "r12_cc_r3_evidence_cut": {
+    "path": "canonical/verification/PROFESSIONAL_R12_SEMANTIC_CC_R3_EVIDENCE_CUT_VERIFY_20261010_V1.json",
+    "git_blob_sha": "f0a4ab092d1ec5ae86c63e9a8f62117aa8ee6da1"
+  },
+  "claim_id": "05b74983836dd1f6a13a0db72443246fb74f99548f0d982a769a6a7e572e9e85",
+  "leaf_id": "PQ::R12_META_COMPOSITION_CLOSURE::SEMANTIC",
+  "audit": {
+    "root_binding_count": 12,
+    "roots_with_declared_guarantees": 12,
+    "roots_with_explicit_assumption_interfaces": 0,
+    "roots_with_explicit_abstraction_or_refinement_relations": 0,
+    "roots": [
+      {
+        "root_id": "R1_TARGET_SPECIFICATION",
+        "binding": {
+          "path": "canonical/governance/PROFESSIONAL_QUALITY_R1_ROOT_SUBJECT_BINDING_20261010_V4.json",
+          "git_blob_sha": "4e29f1a01832158d9897f3c71c81e015b5e51b05"
+        },
+        "declared_guarantee_count": 9,
+        "explicit_assumptions_present": false,
+        "explicit_assumption_count": 0,
+        "explicit_abstraction_or_refinement_relation_present": false
+      },
+      {
+        "root_id": "R2_CANDIDATE_SEARCH",
+        "binding": {
+          "path": "canonical/governance/PROFESSIONAL_QUALITY_R2_ROOT_SUBJECT_BINDING_20261010_V2.json",
+          "git_blob_sha": "d16ec4ce481880e7b3ca85dab64ba2ead744f088"
+        },
+        "declared_guarantee_count": 9,
+        "explicit_assumptions_present": false,
+        "explicit_assumption_count": 0,
+        "explicit_abstraction_or_refinement_relation_present": false
+      },
+      {
+        "root_id": "R3_REALIZATION_OBSERVATION",
+        "binding": {
+          "path": "canonical/governance/PROFESSIONAL_QUALITY_R3_ROOT_SUBJECT_BINDING_20261010_V2.json",
+          "git_blob_sha": "2fe91ecba3830641ed800d04b70279a3f84283bf"
+        },
+        "declared_guarantee_count": 9,
+        "explicit_assumptions_present": false,
+        "explicit_assumption_count": 0,
+        "explicit_abstraction_or_refinement_relation_present": false
+      },
+      {
+        "root_id": "R4_MEASUREMENT_CONSTRUCT",
+        "binding": {
+          "path": "canonical/governance/PROFESSIONAL_QUALITY_R4_ROOT_SUBJECT_BINDING_20261010_V1.json",
+          "git_blob_sha": "5a99d72d8a6c8fe01241e8a611cceb528fb8c512"
+        },
+        "declared_guarantee_count": 8,
+        "explicit_assumptions_present": false,
+        "explicit_assumption_count": 0,
+        "explicit_abstraction_or_refinement_relation_present": false
+      },
+      {
+        "root_id": "R5_EVALUATOR_REFERENCE",
+        "binding": {
+          "path": "canonical/governance/PROFESSIONAL_QUALITY_R5_ROOT_SUBJECT_BINDING_20261010_V1.json",
+          "git_blob_sha": "adad696b4ce4ed62063e871e42ad91300f4590e1"
+        },
+        "declared_guarantee_count": 10,
+        "explicit_assumptions_present": false,
+        "explicit_assumption_count": 0,
+        "explicit_abstraction_or_refinement_relation_present": false
+      },
+      {
+        "root_id": "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+        "binding": {
+          "path": "canonical/governance/PROFESSIONAL_QUALITY_R6_ROOT_SUBJECT_BINDING_20261010_V1.json",
+          "git_blob_sha": "0a6626c3378b471bff70de0ae3ea53e1e784276e"
+        },
+        "declared_guarantee_count": 10,
+        "explicit_assumptions_present": false,
+        "explicit_assumption_count": 0,
+        "explicit_abstraction_or_refinement_relation_present": false
+      },
+      {
+        "root_id": "R7_CAUSAL_PRESCRIPTIVE",
+        "binding": {
+          "path": "canonical/governance/PROFESSIONAL_QUALITY_R7_ROOT_SUBJECT_BINDING_20261010_V1.json",
+          "git_blob_sha": "d1b4af80e94048ec4093192d2b8203d47eff56ed"
+        },
+        "declared_guarantee_count": 10,
+        "explicit_assumptions_present": false,
+        "explicit_assumption_count": 0,
+        "explicit_abstraction_or_refinement_relation_present": false
+      },
+      {
+        "root_id": "R8_POPULATION_CONTEXT_OPERATOR",
+        "binding": {
+          "path": "canonical/governance/PROFESSIONAL_QUALITY_R8_ROOT_SUBJECT_BINDING_20261010_V1.json",
+          "git_blob_sha": "e5b0b434fb040b77443e541e80c6f5e0890ff7aa"
+        },
+        "declared_guarantee_count": 10,
+        "explicit_assumptions_present": false,
+        "explicit_assumption_count": 0,
+        "explicit_abstraction_or_refinement_relation_present": false
+      },
+      {
+        "root_id": "R9_TEMPORAL_DEPLOYMENT",
+        "binding": {
+          "path": "canonical/governance/PROFESSIONAL_QUALITY_R9_ROOT_SUBJECT_BINDING_20261010_V1.json",
+          "git_blob_sha": "7c9f22e80110389768d4c16876571d54304b4536"
+        },
+        "declared_guarantee_count": 8,
+        "explicit_assumptions_present": false,
+        "explicit_assumption_count": 0,
+        "explicit_abstraction_or_refinement_relation_present": false
+      },
+      {
+        "root_id": "R10_ANALYSIS_DECISION",
+        "binding": {
+          "path": "canonical/governance/PROFESSIONAL_QUALITY_R10_ROOT_SUBJECT_BINDING_20261010_V1.json",
+          "git_blob_sha": "6d8cc56e9273f15f199a624c4a11f1482c76e039"
+        },
+        "declared_guarantee_count": 10,
+        "explicit_assumptions_present": false,
+        "explicit_assumption_count": 0,
+        "explicit_abstraction_or_refinement_relation_present": false
+      },
+      {
+        "root_id": "R11_ADAPTIVE_INTEGRITY_SECURITY",
+        "binding": {
+          "path": "canonical/governance/PROFESSIONAL_QUALITY_R11_ROOT_SUBJECT_BINDING_20261010_V1.json",
+          "git_blob_sha": "43007547e14da89b0aef9fad7d0f89cad2bbf77f"
+        },
+        "declared_guarantee_count": 8,
+        "explicit_assumptions_present": false,
+        "explicit_assumption_count": 0,
+        "explicit_abstraction_or_refinement_relation_present": false
+      },
+      {
+        "root_id": "R12_META_COMPOSITION_CLOSURE",
+        "binding": {
+          "path": "canonical/governance/PROFESSIONAL_QUALITY_R12_ROOT_SUBJECT_BINDING_20261010_V1.json",
+          "git_blob_sha": "6eb32264e98bf0b36d48ad3519f9c7c88757d0d7"
+        },
+        "declared_guarantee_count": 11,
+        "explicit_assumptions_present": false,
+        "explicit_assumption_count": 0,
+        "explicit_abstraction_or_refinement_relation_present": false
+      }
+    ]
+  },
+  "conclusions": {
+    "c1_assumption_guarantee_composition": "INTERNAL_UNSOLVED__INSUFFICIENT_EXPLICIT_INTERFACE_SEMANTICS",
+    "c3_abstraction_soundness": "INTERNAL_UNSOLVED__INSUFFICIENT_COMPONENT_REFINEMENT_SEMANTICS",
+    "c1_falsified": false,
+    "c3_falsified": false,
+    "same_subject_composition_sufficient_for_c1": false,
+    "global_identity_semantic_carrier_sufficient_for_c3": false,
+    "known_defeater_replay_sufficient_for_either": false,
+    "new_ontology_primitive_required": "NOT_ESTABLISHED",
+    "reason": "CURRENT_ASSURANCE_VOCABULARY_ALREADY_CONTAINS_ASSUMPTION_DEPENDENCY_AND_EVIDENCE_PRIMITIVES__THE_MISSING_LOAD_BEARING_CONTENT_IS_EXPLICIT_CLAIM_BOUND_INTERFACE_AND_REFINEMENT_SEMANTICS"
+  },
+  "minimum_general_repair_contract": {
+    "c1": [
+      "FREEZE_EXACT_CLAIM_BOUND_ASSUMPTION_AND_GUARANTEE_SET_PER_COMPOSED_ROOT_OR_COMPONENT",
+      "BIND_EACH_ASSUMPTION_TO_AUTHORIZED_ENVIRONMENT_PREMISE_OR_PROVED_GUARANTEE_ON_THE_SAME_CLAIM_AND_SUBJECT",
+      "REJECT_UNBOUND_ASSUMPTIONS_AND_HIDDEN_CROSS_CLAIM_TRANSPORT",
+      "REJECT_CYCLIC_ASSUMPTION_SUPPORT_UNLESS_A_SEPARATE_WELL_FOUNDED_OR_FIXED_POINT_PROOF_DISCHARGES_THE_CYCLE",
+      "INDEPENDENTLY_REPLAY_INTERFACE_DISCHARGE"
+    ],
+    "c3": [
+      "FREEZE_EXACT_CLAIM_BOUND_CONCRETE_AND_ABSTRACT_COMPONENT_SEMANTICS_OR_PROVE_IDENTITY_PER_COMPONENT",
+      "BIND_EXPLICIT_REFINEMENT_RELATION_TO_EVERY_ABSTRACTED_LOAD_BEARING_COMPONENT",
+      "PROVE_ALL_R12_CLAIM_RELEVANT_PREDICATES_AND_INTERFACE_GUARANTEES_ARE_PRESERVED_BY_THE_RELATION",
+      "REJECT_ALIASING_SUBSTITUTION_AND_SCOPE_DRIFT",
+      "INDEPENDENTLY_REPLAY_COMPONENT_REFINEMENT_SOUNDNESS"
+    ],
+    "stronger_material_defeater_totality": "REMAINS_SEPARATE__C1_AND_C3_CLOSURE_MUST_NOT_AUTO_CLOSE_UNKNOWN_MATERIAL_DEFEATER_TOTALITY"
+  },
+  "hard_nonclaims": [
+    "NO_C1_PROPERTY_TRUTH",
+    "NO_C3_PROPERTY_TRUTH",
+    "NO_CC_R3_TERMINAL_CLOSURE",
+    "NO_R12_SEMANTIC_PROPERTY_TRUTH",
+    "NO_UNKNOWN_DEFEATER_COMPLETENESS",
+    "NO_NEW_PRIMITIVE_CAPABILITY_CREDIT",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "property_truth_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "next": "INSTANTIATE_ONE_GENERAL_CLAIM_BOUND_INTERFACE_AND_REFINEMENT_CONTRACT_OVER_EXISTING_ASSURANCE_PRIMITIVES__THEN_FALSIFY_ON_R12_C1_C3__KEEP_STRONGER_MATERIAL_DEFEATER_TOTALITY_SEPARATE"
+}
