@@ -7,6 +7,9 @@ verified, dimensionless calibration/frontier contract.
 """
 from __future__ import annotations
 
+from hashlib import sha1
+import json
+from pathlib import Path
 from typing import Any, Mapping, Sequence
 
 from canonical.runtime import capability_first_scheduler_v1 as core
@@ -26,6 +29,8 @@ LIVE_SCORE_FIELDS = (
     "complexity_cost_ub",
 )
 LIVE_SCORE_CONTRACT_SCALE = "COMMON_DIMENSIONLESS_MISSION_UTILITY_RESOURCE_SCALE_V1"
+ROOT = Path(__file__).resolve().parents[2]
+CURRENT_FRONTIER_PATH = ROOT / "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json"
 
 
 class LiveSchedulerContractError(ValueError):
@@ -130,8 +135,91 @@ def validate_live_score_contract(work: Sequence[Mapping[str, Any]]) -> dict[str,
     }
 
 
+def _git_blob_sha(path: Path) -> str:
+    raw = path.read_bytes()
+    return sha1(
+        b"blob " + str(len(raw)).encode("ascii") + bytes([0]) + raw
+    ).hexdigest()
+
+
+def validate_current_frontier(
+    work: Sequence[Mapping[str, Any]],
+    contract: Mapping[str, Any],
+    *,
+    frontier_path: Path = CURRENT_FRONTIER_PATH,
+) -> dict[str, Any]:
+    try:
+        frontier = json.loads(frontier_path.read_text(encoding="utf-8"))
+    except Exception as exc:
+        raise LiveSchedulerContractError("CURRENT_LIVE_WORK_FRONTIER_UNAVAILABLE") from exc
+
+    expected_frontier_id = _s(frontier.get("frontier_id"))
+    if not expected_frontier_id:
+        raise LiveSchedulerContractError("CURRENT_LIVE_WORK_FRONTIER_ID_MISSING")
+    if _s(contract.get("frontier_id")) != expected_frontier_id:
+        raise LiveSchedulerContractError("LIVE_WORK_FRONTIER_NOT_CURRENT")
+
+    source_set = frontier.get("scope", {}).get("source_set")
+    if not isinstance(source_set, list) or not source_set:
+        raise LiveSchedulerContractError("CURRENT_LIVE_WORK_FRONTIER_SOURCE_SET_MISSING")
+
+    stale: list[str] = []
+    for row in source_set:
+        if not isinstance(row, Mapping):
+            raise LiveSchedulerContractError("CURRENT_LIVE_WORK_FRONTIER_SOURCE_SET_INVALID")
+        rel = _s(row.get("path"))
+        expected_sha = _s(row.get("git_blob_sha"))
+        if not rel or not expected_sha:
+            raise LiveSchedulerContractError("CURRENT_LIVE_WORK_FRONTIER_SOURCE_BINDING_INVALID")
+        source = ROOT / rel
+        if not source.is_file() or _git_blob_sha(source) != expected_sha:
+            stale.append(rel)
+    if stale:
+        raise LiveSchedulerContractError(
+            "LIVE_WORK_FRONTIER_STALE:" + ",".join(sorted(stale))
+        )
+
+    candidates = frontier.get("candidates")
+    if not isinstance(candidates, list):
+        raise LiveSchedulerContractError("CURRENT_LIVE_WORK_FRONTIER_CANDIDATES_INVALID")
+    expected_ids: set[str] = set()
+    for row in candidates:
+        if not isinstance(row, Mapping):
+            raise LiveSchedulerContractError("CURRENT_LIVE_WORK_FRONTIER_CANDIDATES_INVALID")
+        work_id = _s(row.get("work_id"))
+        if not work_id:
+            raise LiveSchedulerContractError("CURRENT_LIVE_WORK_FRONTIER_CANDIDATE_ID_MISSING")
+        if _s(row.get("score_state")).startswith("INELIGIBLE_"):
+            continue
+        expected_ids.add(work_id)
+
+    supplied_ids = {_s(row.get("work_id")) for row in work}
+    if supplied_ids != expected_ids:
+        missing = sorted(expected_ids - supplied_ids)
+        extra = sorted(supplied_ids - expected_ids)
+        raise LiveSchedulerContractError(
+            "LIVE_WORK_FRONTIER_CANDIDATE_SET_MISMATCH:"
+            + "missing="
+            + ",".join(missing)
+            + ";extra="
+            + ",".join(extra)
+        )
+
+    live_selection = frontier.get("live_selection")
+    if not isinstance(live_selection, Mapping) or live_selection.get("authorized") is not True:
+        raise LiveSchedulerContractError("LIVE_WORK_FRONTIER_SELECTION_NOT_AUTHORIZED")
+
+    return {
+        "frontier_id": expected_frontier_id,
+        "source_count": len(source_set),
+        "eligible_candidate_count": len(expected_ids),
+        "currentness_verified": True,
+    }
+
+
 def rank_live_work(work: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
     contract = validate_live_score_contract(work)
+    frontier = validate_current_frontier(work, contract)
     out = core.rank_work(
         work,
         checkpoint_open_obligation_count=core._current_open_obligation_count(),
@@ -139,6 +227,7 @@ def rank_live_work(work: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
     out["schema"] = SCHEMA
     out["live_score_contract_verified"] = True
     out["live_score_contract"] = contract
+    out["live_frontier_currentness"] = frontier
     out["live_ranking_semantics"] = (
         "ONLY_COMMON_DIMENSIONLESS_EVIDENCE_BOUND_COMPLETE_FRONTIER_SCORES_RANK"
     )
