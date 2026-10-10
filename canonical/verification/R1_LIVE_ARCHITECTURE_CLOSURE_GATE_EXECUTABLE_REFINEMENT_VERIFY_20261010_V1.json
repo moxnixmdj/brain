@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_R1_LIVE_ARCHITECTURE_CLOSURE_GATE_EXECUTABLE_REFINEMENT_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__R1_LIVE_ARCHITECTURE_CLOSURE_GATE_BRANCH_SURFACE_SEMANTIC_REFINEMENT_VERIFIED",
+  "subject": {
+    "path": "canonical/runtime/r1_live_architecture_closure_gate_v1.py",
+    "git_blob_sha": "34e559b81e08ff67281a2feb401ebc24bb663741",
+    "function": "evaluate"
+  },
+  "abstract_spec": {
+    "path": "canonical/governance/R1_LIVE_ARCHITECTURE_CLOSURE_GATE_ABSTRACT_SPEC_20261010_V1.json",
+    "git_blob_sha": "c363e7540aea658007cea33927819adf6132999c"
+  },
+  "checker": {
+    "path": "canonical/runtime/r1_live_architecture_closure_gate_refinement_checker_v1.py",
+    "git_blob_sha": "a9d26a1f17872b3bcef20e0f340eb7dadcdd6d45"
+  },
+  "checker_tests": {
+    "path": "canonical/tests/test_r1_live_architecture_closure_gate_refinement_checker_v1.py",
+    "git_blob_sha": "6ba59ccf91bd7ed380f3b313935324ac0c2e9337",
+    "tests_run": 5,
+    "passed": 5,
+    "failed": 0,
+    "errors": 0,
+    "adversarial_cases": [
+      "CURRENT_SUBJECT_PASS",
+      "MISSING_FIXED_ERROR_SPEC_REJECTED",
+      "SUBJECT_BLOB_DRIFT_REJECTED",
+      "LIFECYCLE_CONDITION_MUTATION_REJECTED",
+      "SUCCESS_STATUS_MUTATION_REJECTED"
+    ]
+  },
+  "execution": {
+    "carrier": "SPRITE__brain-live-runtime-v1-verify-20261008",
+    "carrier_id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13",
+    "workdir": "/home/sprite/unified-fabric-current-byte-verify/livebrain",
+    "incremental_spend_usd": 0,
+    "py_compile": "PASS",
+    "assurance_level": "STATIC_ERROR_FAMILY_CENSUS_PLUS_MEMBER_COMPLETE_WITNESS_EXECUTION",
+    "fixed_error_class_count": 24,
+    "parameterized_family_count": 3,
+    "branch_witness_count": 53,
+    "exception_witness_count": 3,
+    "witness_count": 56,
+    "receipt_sha256": "a2efd21832b7a1b81060c4407fe2260e8d02a1dbacb1e7a36eee30ab5a50b63c",
+    "refinement_verified": true
+  },
+  "root_assumptions": [
+    "CPYTHON_LANGUAGE_SEMANTICS",
+    "PATHLIB_RESOLVE_AND_FILE_READ_SEMANTICS",
+    "JSON_PARSER_SEMANTICS",
+    "SHA1_GIT_BLOB_IDENTITY_SEMANTICS",
+    "ACTIVATION_AND_AUTHORITY_FILES_EXIST_FOR_STRUCTURED_GATE_EVALUATION"
+  ],
+  "claim_scope": "GOAL_RELEVANT_R1_STRUCTURAL_CLOSURE_GATE_SURFACE_ONLY",
+  "semantic_refinement_proved": true,
+  "downstream_capability_semantics_proved": false,
+  "repository_wide_refinement_proved": false,
+  "transitive_dependency_refinement_proved": false,
+  "terminal_authority": false,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
