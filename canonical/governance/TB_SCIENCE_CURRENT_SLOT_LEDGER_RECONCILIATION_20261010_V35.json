@@ -1,0 +1,73 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V35",
+  "date": "2026-10-10",
+  "status": "CURRENT_POST_RANK18_PRESTART_ABORT__SEVENTEEN_CONSUMED__RANK18_TASK_READ_HISTORY_TRUE__DURABLE_START_FALSE__SLOT_UNCONSUMED__ARTIFACT_CONFIG_BRIDGE_REPAIR_REQUIRED__ZERO_ACCEPTANCE_CREDIT",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "predecessor": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V34.json",
+    "git_blob_sha": "db4d64817b63ac89b2de65e9cfbbe996ea87093f"
+  },
+  "rank18_abort_truth": {
+    "path": "canonical/verification/TB_SCIENCE_RANK18_V1_PRESTART_ABORT_TRUTH_20261010_V1.json",
+    "git_blob_sha": "fd53eecbf4d974e45c936d592005f5f7d518e87d"
+  },
+  "prior_rank18_authority": {
+    "path": "canonical/governance/TB_SCIENCE_RANK18_ONE_SLOT_EXECUTION_AUTHORITY_20261010_V2.json",
+    "git_blob_sha": "44de85f705f9e248cee8a35a175d9a9523f41c9c",
+    "retired_for_new_execution": true
+  },
+  "current_counts": {
+    "consumed_slots": 17,
+    "consumed_successes": 0,
+    "consumed_final_failures": 17,
+    "successes_remaining_for_pass_lock": 124,
+    "additional_failures_before_fail_lock": 70,
+    "maximum_possible_successes_remaining": 193,
+    "minimum_required_success_rate_over_remaining_slots": 0.6424870466321243,
+    "pass_still_mathematically_reachable": true,
+    "next_unconsumed_slot": {
+      "ledger_schedule_rank": 18,
+      "frozen_manifest_schedule_order": 17,
+      "task_rank": 17,
+      "slot_id": "terminal-bench-science/longitudinal-clinical-agent::trial-0",
+      "task_digest": "sha256:e9a166b2173f7014d4f1559505397b221f94bc446eab031f94791b35e0e5f1c9"
+    }
+  },
+  "rank18": {
+    "slot_id": "terminal-bench-science/longitudinal-clinical-agent::trial-0",
+    "task_digest": "sha256:e9a166b2173f7014d4f1559505397b221f94bc446eab031f94791b35e0e5f1c9",
+    "task_read_history": true,
+    "task_read_count_observed": 1,
+    "task_started": false,
+    "durable_start_cas_acquired": false,
+    "execution_authority_consumed": false,
+    "benchmark_trials_consumed": 0,
+    "result_present": false,
+    "reward_observed": false,
+    "prestart_abort_status": "PREEXPOSURE_ABORT_NONCONSUMING",
+    "prestart_abort_run_id": 38027841300,
+    "prestart_abort_artifact_digest": "sha256:391135827a44c7ddb39cd3ebb86b36391887cc349bf3fe0111d00cf20db0331f",
+    "causal_failure": "TASK_ARTIFACT_PATH_INVALID",
+    "fresh_execution_authority": false,
+    "fresh_task_read_authority": false,
+    "repair_required": "HARBOR_0_23_ARTIFACTCONFIG_TABLE_TO_MAIN_SERVICE_SOURCE_PATH_BRIDGE"
+  },
+  "scheduler": [
+    "DO_NOT_TREAT_RUN_38027841300_AS_A_BENCHMARK_TRIAL.",
+    "DO_NOT_REUSE_RANK18_V2_EXECUTION_AUTHORITY_OR_ACTIVATION_PR.",
+    "CLOSE_OR_QUARANTINE_THE_PRIOR_ACTIVATION_PR_WITHOUT_RERUN.",
+    "VERIFY_THE_GENERIC_HARBOR_ARTIFACTCONFIG_TABLE_BRIDGE_WITH_ZERO_BENCHMARK_EXECUTION.",
+    "ONLY_AFTER_INDEPENDENT_REPAIR_VERIFICATION_MAY_A_FRESH_RANK18_AUTHORITY_BE_ISSUED.",
+    "ANY_FUTURE_RANK18_EXECUTION_MUST_BIND_TASK_READ_HISTORY_TRUE_AND_START_CAS_ABSENCE.",
+    "AFTER_DURABLE_START_ANY_FINAL_NON_SUCCESS_REMAINS_IRREVERSIBLE_ZERO."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_trials_consumed_delta": 0,
+    "consumed_successes_delta": 0,
+    "consumed_final_failures_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
