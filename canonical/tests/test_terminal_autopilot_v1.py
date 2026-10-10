@@ -93,13 +93,7 @@ class TerminalAutopilotTests(unittest.TestCase):
                 for x in out["dispatch"]
                 if x["kind"] == "ROUTE_RACE"
             }
-            self.assertIn("ADAPTIVE_ESCAPE_PROGRESS_TOTALITY", routes)
-            self.assertIn("SCOPE_COMPLETE_UNIVERSAL_COVER", routes)
-            self.assertIn("OBJECTIVE_ACCEPTANCE_COMMON_LAW", routes)
-            self.assertNotIn("CODING_TRIAD_SCOPE_COMPLETE_COVER", routes)
-            self.assertNotIn("FINANCE_MYSTERY_COMMON_POLICY_COVER", routes)
-            self.assertNotIn("PROFESSIONAL_QUALITATIVE_ROBUST_DOMINANCE", routes)
-            self.assertNotIn("GDPVAL_FINITE_PUBLIC_ACCEPTANCE_COVER", routes)
+            self.assertEqual(routes, set())
             self.assertLessEqual(len(direct), 12)
 
 
@@ -147,8 +141,7 @@ class TerminalAutopilotTests(unittest.TestCase):
                 for x in out["dispatch"]
                 if x["kind"] == "ROUTE_RACE"
             }
-            self.assertIn("ADAPTIVE_ESCAPE_PROGRESS_TOTALITY", routes)
-            self.assertIn("SCOPE_COMPLETE_UNIVERSAL_COVER", routes)
+            self.assertEqual(routes, set())
 
     def test_repo_mode_allows_science_intent_only_with_live_authority(self):
         with tempfile.TemporaryDirectory() as td:
@@ -174,7 +167,7 @@ class TerminalAutopilotTests(unittest.TestCase):
             self.assertEqual(len(built["blockers"]), 0)
 
 
-    def test_repo_mode_ranks_verified_adaptive_escape_progress_route_first(self):
+    def test_repo_mode_does_not_rank_missing_premise_count_as_wall_clock_cost(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
             q = root / "canonical/governance"
@@ -203,9 +196,14 @@ class TerminalAutopilotTests(unittest.TestCase):
             )
             self.assertEqual(
                 adaptive["wall_clock_basis"],
-                "VERIFIED_MISSING_PREMISE_COUNT_LOWER_BOUND",
+                "VERIFIED_MISSING_PREMISE_COUNT_LOWER_BOUND_ONLY",
             )
             self.assertEqual(set(adaptive["can_discharge"]), set(OPEN))
+            self.assertFalse(adaptive["proof_cost_bound"])
+            self.assertEqual(
+                adaptive["proof_cost_status"],
+                "LOWER_BOUND_ONLY__NOT_RANKABLE",
+            )
 
             universal = by_id["SCOPE_COMPLETE_UNIVERSAL_COVER"]
             self.assertEqual(universal["estimated_wall_clock_units"], 3.0)
@@ -223,6 +221,44 @@ class TerminalAutopilotTests(unittest.TestCase):
 
             out = plan(built)
             self.assertEqual(len(out["dispatch"]), 1)
+            self.assertEqual(out["dispatch"][0]["kind"], "REPAIR")
+            self.assertFalse(any(
+                row["kind"] == "ROUTE_RACE"
+                for row in out["dispatch"]
+            ))
+
+
+    def test_verified_adaptive_wall_clock_upper_bound_reactivates_route_race(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            q = root / "canonical/governance"
+            q.mkdir(parents=True)
+            (q / "FROZEN_19_ACCEPTANCE_PROOF_SHAPE_QUOTIENT_20261007_V1.json").write_text(
+                json.dumps({"independent_open_obligations": OPEN}), encoding="utf-8")
+            (q / "CURRENT_TERMINAL_AUTHORITY.json").write_text(json.dumps({
+                "live_truth": {
+                    "adaptive_terminal_or_progress_cover_theorem_bound": True,
+                    "adaptive_terminal_policy_safety_premise_bound": True,
+                    "current_escape_progress_totality_proved": False,
+                    "terminal_autopilot_adaptive_escape_progress_wall_clock_cost_ub": 2.0,
+                }
+            }), encoding="utf-8")
+
+            built = build_manifest_from_repo(root, max_concurrency=1)
+            adaptive = {
+                row["id"]: row for row in built["routes"]
+            }["ADAPTIVE_ESCAPE_PROGRESS_TOTALITY"]
+            self.assertTrue(adaptive["proof_cost_bound"])
+            self.assertEqual(adaptive["estimated_wall_clock_units"], 2.0)
+            self.assertEqual(
+                adaptive["wall_clock_basis"],
+                "VERIFIED_WALL_CLOCK_COST_UPPER_BOUND",
+            )
+            self.assertEqual(
+                adaptive["proof_cost_status"],
+                "RANKABLE__VERIFIED_WALL_CLOCK_COST_UPPER_BOUND",
+            )
+            out = plan(built)
             self.assertEqual(out["dispatch"][0]["kind"], "ROUTE_RACE")
             self.assertEqual(
                 out["dispatch"][0]["route_id"],
@@ -243,6 +279,7 @@ class TerminalAutopilotTests(unittest.TestCase):
                     "objective_acceptance_common_law_relations_exactly_bound": True,
                     "objective_acceptance_common_law_brain_bounds_at_target_or_top_proved": True,
                     "objective_acceptance_common_law_scope_completeness_proved": True,
+                    "terminal_autopilot_objective_acceptance_common_law_wall_clock_cost_ub": 1.0,
                 }
             }), encoding="utf-8")
 
@@ -252,9 +289,14 @@ class TerminalAutopilotTests(unittest.TestCase):
             }["OBJECTIVE_ACCEPTANCE_COMMON_LAW"]
             self.assertEqual(objective["estimated_wall_clock_units"], 1.0)
             self.assertEqual(objective["missing_verified_premises"], [])
+            self.assertTrue(objective["proof_cost_bound"])
+            self.assertEqual(
+                objective["proof_cost_status"],
+                "RANKABLE__VERIFIED_WALL_CLOCK_COST_UPPER_BOUND",
+            )
             self.assertEqual(
                 objective["wall_clock_basis"],
-                "VERIFIED_MISSING_PREMISE_COUNT_LOWER_BOUND",
+                "VERIFIED_WALL_CLOCK_COST_UPPER_BOUND",
             )
             out = plan(built)
             self.assertEqual(out["dispatch"][0]["route_id"], "OBJECTIVE_ACCEPTANCE_COMMON_LAW")
@@ -296,14 +338,16 @@ class TerminalAutopilotTests(unittest.TestCase):
                 rid for rid, row in by_id.items()
                 if row["proof_cost_bound"] is True
             }
-            self.assertEqual(
-                rankable,
-                {
-                    "ADAPTIVE_ESCAPE_PROGRESS_TOTALITY",
-                    "SCOPE_COMPLETE_UNIVERSAL_COVER",
-                    "OBJECTIVE_ACCEPTANCE_COMMON_LAW",
-                },
-            )
+            self.assertEqual(rankable, set())
+            for rid in {
+                "ADAPTIVE_ESCAPE_PROGRESS_TOTALITY",
+                "SCOPE_COMPLETE_UNIVERSAL_COVER",
+                "OBJECTIVE_ACCEPTANCE_COMMON_LAW",
+            }:
+                self.assertEqual(
+                    by_id[rid]["proof_cost_status"],
+                    "LOWER_BOUND_ONLY__NOT_RANKABLE",
+                )
             for rid in {
                 "PROFESSIONAL_QUALITATIVE_ROBUST_DOMINANCE",
                 "CODING_TRIAD_SCOPE_COMPLETE_COVER",

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 from collections import defaultdict
 from pathlib import Path
 from typing import Any
@@ -39,6 +40,9 @@ ONE_SHOT_ROUTE_RACES = (
         "estimated_wall_clock_units": 1.0,
         "proof_class": "ADAPTIVE_TERMINAL_OR_STRICT_PROGRESS_COVER",
         "verified_prerequisite_truth_keys": ADAPTIVE_ESCAPE_PROGRESS_VERIFIED_PREMISES,
+        "verified_wall_clock_cost_ub_truth_key": (
+            "terminal_autopilot_adaptive_escape_progress_wall_clock_cost_ub"
+        ),
     },
     {
         "id": "SCOPE_COMPLETE_UNIVERSAL_COVER",
@@ -46,6 +50,9 @@ ONE_SHOT_ROUTE_RACES = (
         "estimated_wall_clock_units": 1.0,
         "proof_class": "SCOPE_COMPLETE_UNIVERSAL_COVER",
         "verified_prerequisite_truth_keys": UNIVERSAL_ROUTE_VERIFIED_PREMISES,
+        "verified_wall_clock_cost_ub_truth_key": (
+            "terminal_autopilot_scope_complete_universal_cover_wall_clock_cost_ub"
+        ),
     },
     {
         "id": "OBJECTIVE_ACCEPTANCE_COMMON_LAW",
@@ -60,6 +67,9 @@ ONE_SHOT_ROUTE_RACES = (
         "estimated_wall_clock_units": 1.0,
         "proof_class": "O_OBJECTIVE_ACCEPTANCE",
         "verified_prerequisite_truth_keys": OBJECTIVE_COMMON_LAW_VERIFIED_PREMISES,
+        "verified_wall_clock_cost_ub_truth_key": (
+            "terminal_autopilot_objective_acceptance_common_law_wall_clock_cost_ub"
+        ),
     },
     {
         "id": "PROFESSIONAL_QUALITATIVE_ROBUST_DOMINANCE",
@@ -152,6 +162,18 @@ def _science_repair_action(live_truth: dict[str, Any]) -> str:
     return "repair::TB_SCIENCE_CURRENT_AUTHORITY_PREFLIGHT"
 
 
+def _verified_positive_cost_upper_bound(value: Any) -> float | None:
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        return None
+    try:
+        cost = float(value)
+    except (TypeError, ValueError, OverflowError):
+        return None
+    if not math.isfinite(cost) or cost <= 0:
+        return None
+    return cost
+
+
 def build_manifest_from_repo(repo_root: str | Path, *, max_concurrency: int = 32) -> dict[str, Any]:
     root = Path(repo_root).resolve()
     quotient_path = root / DEFAULT_QUOTIENT
@@ -224,30 +246,64 @@ def build_manifest_from_repo(repo_root: str | Path, *, max_concurrency: int = 32
             key for key in prerequisite_keys
             if live_truth.get(key) is not True
         ]
-        proof_cost_bound = bool(prerequisite_keys) or spec.get("proof_cost_bound") is True
         declared_minimum = float(spec.get("estimated_wall_clock_units", 1.0))
         proof_work_lower_bound = max(
             declared_minimum,
             float(len(missing_verified_premises)),
         )
+        cost_ub_key = spec.get("verified_wall_clock_cost_ub_truth_key")
+        verified_cost_ub = (
+            _verified_positive_cost_upper_bound(live_truth.get(cost_ub_key))
+            if isinstance(cost_ub_key, str) and cost_ub_key
+            else None
+        )
+        # Missing-premise count is a lower bound on proof decomposition, not an
+        # upper bound on wall-clock work. It cannot safely rank a route by
+        # discharge-per-time. A route becomes wall-clock-rankable only when
+        # current authority binds a finite positive cost upper bound.
+        if prerequisite_keys:
+            proof_cost_bound = verified_cost_ub is not None
+            estimated_wall_clock = (
+                max(declared_minimum, verified_cost_ub)
+                if verified_cost_ub is not None
+                else proof_work_lower_bound
+            )
+            wall_clock_basis = (
+                "VERIFIED_WALL_CLOCK_COST_UPPER_BOUND"
+                if verified_cost_ub is not None
+                else "VERIFIED_MISSING_PREMISE_COUNT_LOWER_BOUND_ONLY"
+            )
+            proof_cost_status = (
+                "RANKABLE__VERIFIED_WALL_CLOCK_COST_UPPER_BOUND"
+                if verified_cost_ub is not None
+                else "LOWER_BOUND_ONLY__NOT_RANKABLE"
+            )
+        else:
+            proof_cost_bound = spec.get("proof_cost_bound") is True
+            estimated_wall_clock = declared_minimum
+            wall_clock_basis = (
+                "DECLARED_PROOF_COST_BOUND"
+                if proof_cost_bound
+                else "DECLARED_MINIMUM_WORK_UNIT_ONLY"
+            )
+            proof_cost_status = (
+                "RANKABLE__DECLARED_PROOF_COST_BOUND"
+                if proof_cost_bound
+                else "UNBOUND__NOT_RANKABLE"
+            )
         routes.append({
             "id": spec["id"],
             "status": "OPEN" if discharges else "CLOSED",
             "can_discharge": discharges,
-            "estimated_wall_clock_units": proof_work_lower_bound,
-            "wall_clock_basis": (
-                "VERIFIED_MISSING_PREMISE_COUNT_LOWER_BOUND"
-                if prerequisite_keys
-                else "DECLARED_MINIMUM_WORK_UNIT"
-            ),
+            "estimated_wall_clock_units": estimated_wall_clock,
+            "proof_work_lower_bound_units": proof_work_lower_bound,
+            "wall_clock_basis": wall_clock_basis,
+            "verified_wall_clock_cost_ub_truth_key": cost_ub_key,
+            "verified_wall_clock_cost_ub": verified_cost_ub,
             "verified_prerequisite_truth_keys": list(prerequisite_keys),
             "missing_verified_premises": missing_verified_premises,
             "proof_cost_bound": proof_cost_bound,
-            "proof_cost_status": (
-                "BOUND_BY_VERIFIED_MISSING_PREMISE_COUNT"
-                if proof_cost_bound
-                else "UNBOUND__NOT_RANKABLE"
-            ),
+            "proof_cost_status": proof_cost_status,
             "proof_class": spec["proof_class"],
             "candidate_only": True,
             "promotion_authority": False,
