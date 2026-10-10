@@ -1,0 +1,73 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R1_SEMANTIC_SCOPED_INTEGRATION_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__PINNED_EXACT_BYTES__PYCOMPILE__38_OF_38__R1_BOUNDED_SEMANTIC_EVIDENCE_BOUND__FRONTIER_16_PARTIAL_8_NO_SCOPED__ZERO_GLOBAL_CREDIT",
+  "pinned_main_commit": "c0d71b75b45b9f9078478ff2632e3a2e58fab606",
+  "carrier": {
+    "name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/pq-r1-semantic-integration-c0d71b75"
+  },
+  "exact_blobs": {
+    "r1_semantic_runtime": "583612b0e2226053ac758683087b5c5d0f510996",
+    "r1_semantic_tests": "4e0f15ef5ea58d7ec4d8ae91a600d1d7e26cc1b4",
+    "r1_semantic_receipt": "dfffdd6eff129ce7498c4e4aa8a822cd4a5cda22",
+    "r1_semantic_scope": "9145121eb2cfbee43f94534864d30f32868e81de",
+    "scoped_validator": "1022fa8ef631334a116ba49becffbd5cc024da38",
+    "scoped_registry": "0ebda915b778667b1ce9e4f58a333faaec8d2b3a",
+    "scoped_tests": "1d89df9b3487781e263497e4f92f6964061febae",
+    "projection_runtime": "b398bdfea24e4a658f44285837e4d09646df2299",
+    "projection_tests": "4dd388fe44e78ceef59861aacf08a75cb0c37a39"
+  },
+  "replay": {
+    "py_compile": "PASS",
+    "tests_run": 38,
+    "tests_passed": 38,
+    "tests_failed": 0
+  },
+  "projected_state": {
+    "admitted_scoped_capability_count": 13,
+    "partial_coverage_leaf_count": 16,
+    "semantic_partial_coverage_leaf_count": 4,
+    "execution_partial_coverage_leaf_count": 12,
+    "no_scoped_evidence_leaf_count": 8,
+    "semantic_partial_coverage_leaf_ids": [
+      "PQ::R12_META_COMPOSITION_CLOSURE::SEMANTIC",
+      "PQ::R1_TARGET_SPECIFICATION::SEMANTIC",
+      "PQ::R6_EVIDENCE_GROUNDING_DEPENDENCE::SEMANTIC",
+      "PQ::R7_CAUSAL_PRESCRIPTIVE::SEMANTIC"
+    ],
+    "verified_global_leaf_count": 0,
+    "open_global_leaf_count": 24,
+    "global_leaf_closure": false,
+    "domain_semantic_closure": false,
+    "domain_execution_closure": false
+  },
+  "frontier_delta": {
+    "admitted_scoped_capability_count": 1,
+    "partial_coverage_leaf_count": 1,
+    "semantic_partial_coverage_leaf_count": 1,
+    "no_scoped_evidence_leaf_count": -1,
+    "global_leaf_credit_delta": 0
+  },
+  "proves": [
+    "EXACT_PROFESSIONAL_ARTIFACT_PLAN_BEHAVIOR_NOW_HAS_BOUNDED_R1_TARGET_SEMANTIC_EVIDENCE",
+    "R1_TARGET_DRIFT_ROLE_REMAP_AND_UNIQUE_OPTIMUM_OVERCLAIM_FAIL_CLOSED",
+    "R1_SEMANTIC_EVIDENCE_IS_CONTENT_ADDRESSED_AND_SCOPE_LIMITED",
+    "SCOPED_REGISTRY_ADMITS_13_CAPABILITIES_WITH_ZERO_GLOBAL_LEAF_CREDIT",
+    "LEAF_PROJECTION_REPORTS_16_PARTIAL_AND_8_WITHOUT_SCOPED_EVIDENCE"
+  ],
+  "not_proved": [
+    "ARBITRARY_PROFESSIONAL_TASK_TARGET_SEMANTIC_COMPLETENESS",
+    "GLOBAL_R1_SEMANTIC_LEAF_CLOSURE",
+    "GLOBAL_R1_ROOT_CLOSURE",
+    "DOMAIN_SEMANTIC_CLOSURE",
+    "DOMAIN_EXECUTION_CLOSURE",
+    "FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION",
+    "LIVE_DEFAULT_PROMOTION"
+  ],
+  "next_required_edge": "ADD_BOUNDED_SEMANTIC_EVIDENCE_FOR_ONE_OF_R2_R3_R4_R5_R8_R9_R10_R11_OR_PROVE_COMPLETE_SCOPE_TRANSPORT_FOR_EXISTING_PARTIAL_LEAVES",
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
