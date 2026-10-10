@@ -9,10 +9,10 @@ from canonical.runtime import professional_quality_scoped_evidence_v1 as scoped
 
 
 class ProfessionalQualityScopedEvidenceV1Tests(unittest.TestCase):
-    def test_current_r7_and_r3_scopes_are_admitted_without_global_credit(self):
+    def test_current_r7_r3_and_r11_scopes_are_admitted_without_global_credit(self):
         out = scoped.evaluate()
         self.assertTrue(out["pass"], out)
-        self.assertEqual(out["admitted_scope_count"], 2, out)
+        self.assertEqual(out["admitted_scope_count"], 3, out)
         self.assertEqual(out["rejected_scope_count"], 0, out)
         self.assertFalse(out["global_leaf_closure"])
         self.assertFalse(out["global_root_closure"])
@@ -104,6 +104,48 @@ class ProfessionalQualityScopedEvidenceV1Tests(unittest.TestCase):
         )
         self.assertFalse(row["semantic_leaf_credit"])
         self.assertFalse(row["execution_leaf_credit"])
+
+    def test_r11_scope_is_execution_only_and_bounded_to_clean_lane_firewall(self):
+        out = scoped.evaluate()
+        row = next(
+            x for x in out["admitted_scopes"]
+            if x["root_id"] == "R11_ADAPTIVE_INTEGRITY_SECURITY"
+        )
+        self.assertEqual(
+            row["claim_scope"]["kind"],
+            "CLEAN_EVALUATION_LANE_POST_IDENTITY_DISCOVERY_REVOCATION",
+        )
+        self.assertEqual(
+            row["contributes_to_leaf_ids"],
+            ["PQ::R11_ADAPTIVE_INTEGRITY_SECURITY::EXECUTION"],
+        )
+        self.assertIn(
+            "NO_GLOBAL_R11_LEAF_OR_ROOT_CLOSURE",
+            row["claim_scope"]["limitations"],
+        )
+        self.assertFalse(row["semantic_leaf_credit"])
+        self.assertFalse(row["execution_leaf_credit"])
+
+    def test_r11_registry_cannot_promote_global_or_execution_leaf_credit(self):
+        registry = json.loads(scoped.REGISTRY.read_text())
+        r11 = next(
+            x for x in registry["entries"]
+            if x["root_id"] == "R11_ADAPTIVE_INTEGRITY_SECURITY"
+        )
+        r11["global_root_closure"] = True
+        r11["execution_leaf_credit"] = True
+        with tempfile.TemporaryDirectory() as td:
+            p = Path(td) / "registry.json"
+            p.write_text(json.dumps(registry, indent=2) + "\n")
+            out = scoped.evaluate(registry_path=p)
+        self.assertFalse(out["pass"], out)
+        row = next(
+            x for x in out["rejected_scopes"]
+            if x["root_id"] == "R11_ADAPTIVE_INTEGRITY_SECURITY"
+        )
+        self.assertIn("GLOBAL_ROOT_CLOSURE_FORBIDDEN", row["errors"])
+        self.assertIn("EXECUTION_LEAF_CREDIT_FORBIDDEN", row["errors"])
+
 
     def test_r3_registry_cannot_promote_execution_leaf_credit(self):
         registry = json.loads(scoped.REGISTRY.read_text())
