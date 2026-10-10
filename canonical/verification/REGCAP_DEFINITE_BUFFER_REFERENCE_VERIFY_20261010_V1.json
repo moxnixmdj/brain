@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_REGCAP_DEFINITE_BUFFER_REFERENCE_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_BRANCH_BYTES__19_OF_19_NEW_AND_EXISTING_DISPATCH_TESTS__2_OF_2_LIVE_REFERENCE_REPLAY__PYCOMPILE_PASS__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "regcap-definite-buffer-reference-v1-20261010-sol",
+    "exact_blobs": {
+      "canonical/runtime/regcap_definite_buffer_reference_v1.py": "62f8d0a88a6214b6dea5c123b5940648ca2abf10",
+      "canonical/runtime/regcap_buffer_reference_truth_certificate_v1.py": "9af807c7f2e1ba0d7b8620cbdf6dbf7ee1e30c33",
+      "canonical/runtime/semantic_truth_dispatch_v1.py": "fe1ad51bb1f251bca22fe16528c9e4f6308c30a3",
+      "canonical/tests/test_regcap_definite_buffer_reference_v1.py": "5ec11e3e9e9615cc909bc36b0d05a054b8273ff1"
+    }
+  },
+  "independent_carrier": {
+    "name": "regcap-buffer-reference-verify-20261010-sol",
+    "sprite_id": "sprite-4aad8282-8697-4b6f-a370-16b97fd8bec2",
+    "workspace": "/home/sprite/work"
+  },
+  "verification": {
+    "py_compile": "PASS",
+    "new_reference_suite": {"tests_run": 13, "failures": 0, "errors": 0},
+    "existing_dispatch_suite": {"tests_run": 6, "failures": 0, "errors": 0},
+    "total_new_and_existing_dispatch_tests": 19,
+    "live_reference_replay": {
+      "result": "PASS",
+      "unique_case": {
+        "source": "CCyB increased. The buffer was later released.",
+        "selected_concept_id": "REGCAP::CCYB",
+        "status": "PASS__UNIQUE_LOCAL_BUFFER_REFERENCE_IDENTITY"
+      },
+      "ambiguous_case": {
+        "source": "CCoB was stable and CCyB increased. The buffer was later released.",
+        "candidate_concept_ids": ["REGCAP::CCOB", "REGCAP::CCYB"],
+        "status": "UNRESOLVED__MULTIPLE_AUTHENTICATED_BUFFER_ANTECEDENTS"
+      }
+    }
+  },
+  "proved": [
+    "EXACT_the_buffer_CAN_BIND_TO_A_UNIQUE_AUTHENTICATED_PRIOR_CCOB_OR_CCYB_ANTECEDENT_WITHIN_THE_BOUND_REFERENCE_WINDOW",
+    "MULTIPLE_MENTIONS_OF_THE_SAME_CONCEPT_DO_NOT_CREATE_FALSE_AMBIGUITY",
+    "TWO_DISTINCT_BUFFER_CONCEPTS_IN_THE_ALLOWED_WINDOW_PRESERVE_AMBIGUITY",
+    "NEAREST_MENTION_DOES_NOT_OVERRIDE_MULTIPLE_DISTINCT_CANDIDATES",
+    "LATER_MENTIONS_ARE_NOT_ANTECEDENTS",
+    "MENTIONS_TWO_SENTENCES_BACK_ARE_OUTSIDE_V1_SCOPE",
+    "this_buffer_IS_OUTSIDE_THE_EXACT_REFERENCE_FORM_SCOPE",
+    "THE_LIVE_SEMANTIC_TRUTH_DISPATCHER_CAN_PROVE_A_MATCHING_OCCURRENCE_LOCAL_REFERENCE_TRUE",
+    "A_DIFFERENT_PROVED_REFERENCE_IDENTITY_REMAINS_UNKNOWN_WITHOUT_DISJOINTNESS",
+    "NO_GLOBAL_buffer_ALIAS_OPEN_WORLD_COREFERENCE_COMPLETENESS_OR_TERMINAL_AUTHORITY"
+  ],
+  "hard_nonclaims": [
+    "NO_GENERAL_COREFERENCE_RESOLUTION",
+    "NO_NEAREST_ANTECEDENT_HEURISTIC",
+    "NO_GLOBAL_buffer_SYNONYMY",
+    "NO_REFERENCE_RESOLUTION_BEYOND_ONE_PRECEDING_SENTENCE",
+    "NO_FINANCE_SEMANTIC_TAIL_CLOSURE",
+    "NO_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
