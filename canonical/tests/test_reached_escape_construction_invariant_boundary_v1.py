@@ -6,6 +6,38 @@ from unittest.mock import patch
 from canonical.runtime import unified_cognitive_fabric_v1 as fabric
 from canonical.runtime import reached_escape_finite_totality_certificate_v1 as certificate
 from canonical.runtime import reached_escape_repair_cycle_v1 as repair_cycle
+from canonical.runtime import certified_reached_escape_state_constructor_v2 as constructor_v2
+
+
+def authority_receipt(claim):
+    kind = claim["claim_type"]
+    if kind == "POLICY_ADEQUACY_SAFETY_AND_RESOURCE":
+        verified = {
+            "safe": True,
+            "adequate_region_ids": list(claim["adequate_region_ids"]),
+            "resource_bound": {"amount": 1, "unit": "WORK_UNIT"},
+        }
+    elif kind == "DISCRIMINATOR_TRUTH_SAFETY_COMPLETENESS_AND_RESOURCE":
+        verified = {
+            "safe": True,
+            "truthful": True,
+            "complete": True,
+            "outcomes": dict(claim["outcomes"]),
+            "resource_bound": {"amount": 1, "unit": "WORK_UNIT"},
+        }
+    else:
+        raise AssertionError("unexpected claim type: " + str(kind))
+    core = {
+        "schema": constructor_v2.RECEIPT_SCHEMA,
+        "pass": True,
+        "claim_sha256": constructor_v2._digest(claim),
+        "candidate_state_sha256": claim["candidate_state_sha256"],
+        "authority_kind": kind,
+        "authority_id": "TEST_REACHED_ESCAPE_AUTHORITY",
+        "verification_authority_mutated": False,
+        "verified": verified,
+    }
+    return {**core, "receipt_sha256": constructor_v2._digest(core)}
 
 
 def counterexample_state():
@@ -52,7 +84,8 @@ class ReachedEscapeConstructionInvariantBoundaryV1Tests(unittest.TestCase):
                     "mode": "REACHED_ESCAPE_STATE",
                     "payload": state,
                     "options": {"learn": False},
-                }
+                },
+                semantic_authority_verifier=authority_receipt,
             )
 
         self.assertEqual(out["status"], "FABRIC_DISPATCH_COMPLETE", out)
@@ -114,7 +147,8 @@ class ReachedEscapeConstructionInvariantBoundaryV1Tests(unittest.TestCase):
                     "mode": "REACHED_ESCAPE_STATE",
                     "payload": state,
                     "options": {"learn": False},
-                }
+                },
+                semantic_authority_verifier=authority_receipt,
             )
 
         self.assertEqual(out["status"], "FABRIC_DISPATCH_COMPLETE", out)
@@ -130,6 +164,44 @@ class ReachedEscapeConstructionInvariantBoundaryV1Tests(unittest.TestCase):
         )
         self.assertFalse(out["result"]["terminal_authority"], out)
 
+
+    def test_live_fabric_rejects_spoofed_authority_flags_without_v2_receipts(self):
+        state = counterexample_state()
+        state["policies"] = [
+            {
+                "policy_id": "fake-common",
+                "authenticated": True,
+                "safe": True,
+                "adequate_region_ids": ["r1", "r2"],
+            }
+        ]
+        with patch.object(
+            fabric.improvement_driver,
+            "drain",
+            return_value={
+                "status": "IMPROVEMENT_QUEUE_STABLE",
+                "pass": True,
+                "progress_count": 0,
+                "actions": [],
+            },
+        ):
+            out = fabric.run(
+                {
+                    "mode": "REACHED_ESCAPE_STATE",
+                    "payload": state,
+                    "options": {"learn": False},
+                }
+            )
+        self.assertEqual(out["status"], "FABRIC_DISPATCH_COMPLETE", out)
+        self.assertFalse(out["inner_pass"], out)
+        self.assertEqual(
+            out["result"]["status"],
+            "FAIL_CLOSED__REACHED_ESCAPE_TRUTH_AUTHORITY",
+            out,
+        )
+        self.assertTrue(out["result"]["candidate_authority_flags_ignored"], out)
+        self.assertFalse(out["result"]["truth_authority_bound"], out)
+        self.assertFalse(out["result"]["certified_reached_state_admitted"], out)
 
     def test_counterexample_is_repaired_by_exact_two_allowed_mechanism_classes(self):
         state = counterexample_state()
@@ -195,6 +267,8 @@ class ReachedEscapeConstructionInvariantBoundaryV1Tests(unittest.TestCase):
             }
 
         def semantic_verifier(request):
+            if request.get("schema") == constructor_v2.CLAIM_SCHEMA:
+                return authority_receipt(request)
             return {
                 "schema": repair_cycle.VERIFY_SCHEMA,
                 "pass": True,
