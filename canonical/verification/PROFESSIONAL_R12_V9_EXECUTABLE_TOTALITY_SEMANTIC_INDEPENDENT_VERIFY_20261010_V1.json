@@ -1,0 +1,70 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_R12_V9_EXECUTABLE_TOTALITY_SEMANTIC_INDEPENDENT_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__SECOND_SPRITE__PYCOMPILE__9_OF_9__27_OF_27_DECLARED_COMPONENTS_CURRENT__STORED_PASS_CANNOT_OVERRIDE_SEMANTIC_RERUN__ZERO_PROPERTY_OR_TERMINAL_CREDIT",
+  "base_main_commit": "ac397ea41997bac1002c7dfcf723192e1da08fe9",
+  "subject": {
+    "semantic_authority": {
+      "path": "canonical/runtime/professional_r12_totality_semantic_receipt_v1.py",
+      "git_blob_sha": "cfb264b92004c55acf73719cd9c54cec6a609a34"
+    },
+    "router_v9": {
+      "path": "canonical/runtime/professional_quality_p1_router_v9.py",
+      "git_blob_sha": "27f0df972a08a2497802865e46bdccdcb1c720ae"
+    },
+    "semantic_tests": {
+      "path": "canonical/tests/test_professional_r12_totality_semantic_receipt_v1.py",
+      "git_blob_sha": "90726d699667a4447be43650bd9e58ff81ba11f6"
+    },
+    "router_tests": {
+      "path": "canonical/tests/test_professional_quality_p1_router_v9.py",
+      "git_blob_sha": "c559f19dffc7f69f52a4f225e3574c2fd6c371df"
+    },
+    "declared_system": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V9_DECLARED_SYSTEM_SUBJECT_20261010_V8.json",
+      "git_blob_sha": "4d9425a701615ecda70eb8161f473640650cc0e4",
+      "subject_id": "PROFESSIONAL_QUALITY_P1_V9_EXECUTABLE_TOTALITY_SEMANTICS_SYSTEM_20261010_V8",
+      "subject_sha256": "adf7f09e1913526e460b7350c02cd148c2cd14de90eed33fa7fae84d395d9912",
+      "component_count": 27
+    }
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/pq-v7-proof-bound-verify",
+    "replay_mode": "V7_BASE_PLUS_EXACT_V8_V9_DEPENDENCY_DELTA",
+    "py_compile": "PASS",
+    "tests_run": 9,
+    "tests_passed": 9,
+    "tests_failed": 0,
+    "declared_system_component_count": 27,
+    "declared_system_component_current_count": 27,
+    "declared_system_verification": "PASS__DECLARED_SYSTEM_SUBJECT_CURRENT_AND_CONTENT_ADDRESSED",
+    "transcript_sha256": "8f98524b9c76b5de3c6a06607ad3d110371b9e1dedb53ed6cde9b9039b279138",
+    "transcript_bytes": 5842
+  },
+  "proves": [
+    "A_STORED_POSITIVE_TOTALITY_RECEIPT_HAS_ZERO_V9_SEMANTIC_AUTHORITY_UNLESS_THE_CONTENT_ADDRESSED_SEMANTIC_VERIFIER_RERUNS_SUCCESSFULLY",
+    "THE_INDEPENDENT_RECEIPT_MUST_BIND_THE_EXACT_RERUN_RESULT_SHA256",
+    "CROSS_CLAIM_TOTALITY_CERTIFICATE_SUBSTITUTION_FAILS_CLOSED",
+    "SEMANTIC_VERIFIER_BYTE_DRIFT_FAILS_CLOSED_BEFORE_POSITIVE_AUTHORIZATION",
+    "V9_POSITIVE_PATH_REQUIRES_EXECUTABLE_R12_TOTALITY_SEMANTIC_VERIFICATION",
+    "THE_EXACT_27_COMPONENT_V9_DECLARED_SYSTEM_SUBJECT_IS_CURRENT_ON_AN_INDEPENDENT_CARRIER"
+  ],
+  "hard_nonclaims": [
+    "NO_REAL_V9_POSITIVE_TOTALITY_WITNESS_YET",
+    "NO_R12_MATERIAL_DEFEATER_TOTALITY_FROM_AUTHORITY_HARDENING_ALONE",
+    "NO_R12_C8_NONVACUITY_FROM_AUTHORITY_HARDENING_ALONE",
+    "NO_R12_CC_R3_OR_R4_CLOSURE",
+    "NO_SEMANTIC_PROPERTY_TRUTH_OR_PROFESSIONAL_QUALITY_CLOSURE",
+    "NO_LIVE_DEFAULT_PROMOTION",
+    "NO_TERMINAL_AUTHORITY"
+  ],
+  "semantic_property_truth_credit_delta": 0,
+  "quality_credit_delta": 0,
+  "acceptance_credit_delta": 0,
+  "promotion_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
