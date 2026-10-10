@@ -1,0 +1,86 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R3_V7_ROOT_SUBJECT_BINDING_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__R3_BOUND_TO_V7_SUBJECT_WITH_DURABLE_ARTIFACT_AND_AUDIENCE_REALIZATION__INDEPENDENT_SPRITE_REPLAY__ZERO_QUALITY_OR_TERMINAL_AUTHORITY",
+  "exact_subject": {
+    "binding_path": "canonical/governance/PROFESSIONAL_QUALITY_R3_ROOT_SUBJECT_BINDING_20261010_V1.json",
+    "binding_git_blob_sha": "211e264d445810e93fcca91c18bcbeea2b279e54",
+    "verifier_path": "canonical/runtime/professional_quality_r3_root_subject_binding_verify_v1.py",
+    "verifier_git_blob_sha": "4ad20449fbefe08ce6dbdcf0858166025f0f8d4d",
+    "authority_receipt_path": "canonical/verification/PROFESSIONAL_QUALITY_R3_ROOT_SUBJECT_BINDING_AUTHORITY_20261010_V1.json",
+    "authority_receipt_git_blob_sha": "efcc8fb3c97c79e87bc30299777a3d3c2bb694fd",
+    "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+    "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e"
+  },
+  "durable_realization": {
+    "evidence_path": "canonical/evidence/PROFESSIONAL_V7_R3_DURABLE_REALIZATION_EVIDENCE_20261010_V1.json",
+    "evidence_git_blob_sha": "f18329cac5c702f3503863819b5e3c92cb16d382",
+    "evidence_sha256": "176234b80f16f636c3573f50fe538a2b5208a8617755b8a18f5a2df825e0e20e",
+    "source_artifact_sha256": "fd92941ae9e419723694b87c3bc3a4f6442217a6e54b8fa5a13f3bb8c5750ed4",
+    "output_artifact_sha256": "15aa5b7604207b5bb910d190bd769db697ca9d45dc4867b45a22dcbd26ca2bc0",
+    "audience_page_count": 1,
+    "run_context_sha256": "sha256:0dc8d549586a7d53801b8d825ce86abdf708d6b60fc98c20f3486e3158a4b7a3"
+  },
+  "public_independent_carrier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2619,
+    "merge_commit": "22175613a8afb3f43c444623587725bc5a87ce92",
+    "workflow_run_id": 38052011796,
+    "producer_job_id": 114212869823,
+    "verifier_job_id": 114212935274,
+    "producer_artifact_digest": "sha256:39aaa2da70cba5c227dd1dc7fd61409dad0330b63ef12c05439a78f0bae01ba5",
+    "verifier_artifact_digest": "sha256:88604b129a98d0c21f653305263b681f9fee7963a1e4cb625d073835e6069413",
+    "conclusion": "success"
+  },
+  "independent_brain_replay": {
+    "provider": "Sprites",
+    "sprite": "brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/pq-r3-v7-materialized",
+    "exact_files_materialized_from_branch": true,
+    "py_compile": "PASS",
+    "verifier_pass": true,
+    "verifier_status": "PASS__R3_ROOT_BOUND_TO_EXACT_V7_SUBJECT_WITH_DURABLE_ARTIFACT_AND_AUDIENCE_REALIZATION",
+    "initial_false_negative": {
+      "status": "CORRECTED_BEFORE_PROMOTION",
+      "cause": "VERIFIER_LOOKED_FOR_DEPENDENCY_CLOSURE_COMPLETE_AT_TOP_LEVEL_INSTEAD_OF_THE_FROZEN_SUBJECTS_ACTUAL_SYSTEM_MATERIAL_AND_DEPENDENCY_CLOSURE_STRUCTURE",
+      "authority_or_credit_created": false
+    }
+  },
+  "authority": {
+    "root_subject_binding_authority": true,
+    "global_subject_identity_authority": false,
+    "semantic_truth_authority": false,
+    "execution_authority": false,
+    "quality_authority": false,
+    "acceptance_authority": false,
+    "promotion_authority": false,
+    "terminal_authority": false
+  },
+  "truth_boundary": {
+    "one_exact_realization_instance_proved": true,
+    "exact_artifact_bytes_proved": true,
+    "exact_audience_view_bytes_proved": true,
+    "actual_v7_render_step_receipt_proved": true,
+    "bounded_r3_realization_semantics_bound": true,
+    "global_r3_realization_completeness": false,
+    "arbitrary_semantic_target_selection_proved": false,
+    "whole_open_ended_contract_equivalence_proved": false
+  },
+  "proves": [
+    "R3_REALIZATION_OBSERVATION_IS_BOUND_TO_THE_EXACT_V7_SUBJECT_TUPLE_WITHOUT_SUBJECT_DRIFT",
+    "EXACT_SOURCE_AND_OUTPUT_PDF_BYTES_ARE_DURABLY_CONTENT_BOUND",
+    "EXACT_SOURCE_AND_OUTPUT_96_DPI_AUDIENCE_VIEW_BYTES_ARE_DURABLY_CONTENT_BOUND",
+    "PUBLIC_PRODUCER_AND_INDEPENDENT_VERIFIER_ARE_DISTINCT",
+    "STRUCTURAL_AND_RENDER_PRESERVATION_ARE_INDEPENDENTLY_REPLAYED",
+    "THE_V7_RENDER_STEP_RECEIPT_IS_CONTENT_ADDRESSED_AND_AUTHENTICATED_BY_THE_EXISTING_STEP_AUTHORITY",
+    "THE_BOUNDED_R3_SEMANTIC_SCOPE_IS_REUSED_WITHOUT_GLOBALIZATION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "next": "ADVANCE_V7_WORKLIST_TO_3_OF_12__R4_MEASUREMENT_CONSTRUCT_NEXT"
+}
