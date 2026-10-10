@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_PROFESSIONAL_QUALITY_EXECUTION_POINTER_V1",
   "date": "2026-10-10",
-  "status": "P1_V3_LIVE_UNCHANGED__V7_PROOF_BOUND_EXECUTION_SUBJECT_22_OF_22_CURRENT__0_OF_12_CURRENT_ROOT_BINDINGS_AFTER_MATERIAL_SUBJECT_REFRESH__R1_REBIND_FIRST__NOT_LIVE_DEFAULT",
+  "status": "P1_V3_LIVE_UNCHANGED__V7_PROOF_BOUND_EXECUTION_SUBJECT_22_OF_22_CURRENT__R1_V7_BINDING_VERIFIED__1_OF_12_CURRENT_ROOT_BINDINGS__R2_NEXT__NOT_LIVE_DEFAULT",
   "profile_path": "canonical/governance/PROFESSIONAL_QUALITY_P1_EXECUTION_PROFILE_20261010_V3.json",
   "profile_sha": "f7e89eafbb691c16d1bdf5b8d295a468d5e3bec5",
   "router_path": "canonical/runtime/professional_quality_p1_router_v3.py",
@@ -69,7 +69,7 @@
   "quality_authority": false,
   "terminal_authority": false,
   "terminal_credit_delta": 0,
-  "next": "REVERIFY_R1_ON_V7_PROOF_BOUND_EXECUTION_SUBJECT__THEN_BIND_R2_R12_WITHOUT_SUBJECT_DRIFT__RUN_SAME_SUBJECT_COMPOSITION_GATE_AT_12_OF_12",
+  "next": "BIND_R2_CANDIDATE_SEARCH_TO_V7_PROOF_BOUND_EXECUTION_SUBJECT__THEN_R3_R12_WITHOUT_SUBJECT_DRIFT__RUN_SAME_SUBJECT_COMPOSITION_GATE_AT_12_OF_12",
   "hard_nonclaims": [
     "NO_PROFESSIONAL_QUALITY_COMPLETENESS_PROOF",
     "NO_GLOBAL_LEAF_OR_ROOT_CLOSURE_FROM_BOUNDED_SCOPED_CAPABILITIES",
@@ -80,7 +80,6 @@
     "NO_OPUS_5_5_NONINFERIORITY",
     "NO_TERMINAL_AUTHORITY",
     "NO_R2_THROUGH_R12_CURRENT_ROOT_SUBJECT_BINDING_YET",
-    "NO_CURRENT_ROOT_SUBJECT_BINDING_AFTER_V7_SUBJECT_REFRESH",
     "NO_CLAIM_ANY_REAL_TASK_ALREADY_HAS_ALL_SEVEN_PROOF_BOUND_STEP_RECEIPTS",
     "NO_SAME_SUBJECT_COMPOSITION_PASS"
   ],
@@ -119,14 +118,14 @@
     "terminal_authority": false
   },
   "declared_system_subject": {
-    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V6_DECLARED_SYSTEM_SUBJECT_20261010_V5.json",
-    "git_blob_sha": "994a6a6aef44b6bb33161f7179d1983a1b50b633",
-    "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_DECLARED_SYSTEM_SUBJECT_V5_VERIFY_20261010_V1.json",
-    "verification_git_blob_sha": "3b4213f114ae8d6842f1e2b5ddccab61f4b91078",
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V7_DECLARED_SYSTEM_SUBJECT_20261010_V6.json",
+    "git_blob_sha": "1d598bc8757017ceb34928d0df9f5fce859ef868",
+    "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_DECLARED_SYSTEM_SUBJECT_V7_VERIFY_20261010_V1.json",
+    "verification_git_blob_sha": "9bca985bfcef8f5cc6d62b42a51ccc72a6abfd2c",
     "subject_kind": "DECLARED_SYSTEM",
-    "subject_id": "PROFESSIONAL_QUALITY_P1_V6_DEPENDENCY_CLOSED_AUTHENTICATED_TARGET_SYSTEM_20261010_V5",
-    "subject_sha256": "353978ba4866d1e35794390968a14500ee1d8a4f0bddfb8f081e9a1a71ba468d",
-    "component_count": 20,
+    "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+    "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+    "component_count": 22,
     "component_currentness_verified": true,
     "dependency_closure_complete": true,
     "identity_only": true,
@@ -138,7 +137,7 @@
     "root_count": 12,
     "roots_with_bounded_semantic_support": 12,
     "roots_with_bounded_execution_support": 12,
-    "verified_root_subject_binding_count": 0,
+    "verified_root_subject_binding_count": 1,
     "composition_admissible": false,
     "subject_dependency_closure_complete": true
   },
@@ -234,10 +233,15 @@
     "terminal_credit_delta": 0
   },
   "r1_root_subject_binding": {
-    "status": "STALE__V6_BINDING_REVOKED_BY_V7_SUBJECT_REFRESH",
-    "prior_subject_id": "PROFESSIONAL_QUALITY_P1_V6_DEPENDENCY_CLOSED_AUTHENTICATED_TARGET_SYSTEM_20261010_V5",
-    "prior_verification_path": "canonical/verification/PROFESSIONAL_QUALITY_R1_FINAL_V6_ROOT_SUBJECT_BINDING_VERIFY_20261010_V1.json",
-    "current_root_subject_binding_authority": false,
+    "status": "PASS__V7_R1_ROOT_SUBJECT_BINDING_INDEPENDENTLY_VERIFIED",
+    "binding_path": "canonical/governance/PROFESSIONAL_QUALITY_R1_ROOT_SUBJECT_BINDING_20261010_V4.json",
+    "binding_git_blob_sha": "4e29f1a01832158d9897f3c71c81e015b5e51b05",
+    "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_R1_V7_ROOT_SUBJECT_BINDING_VERIFY_20261010_V1.json",
+    "verification_git_blob_sha": "723e408841020b5430a9934eb92f232a1036d98b",
+    "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+    "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+    "root_subject_binding_authority": true,
+    "quality_authority": false,
     "terminal_credit_delta": 0
   },
   "subject_dependency_closure": {
