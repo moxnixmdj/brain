@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK20_V6_STAGED_AUTHORITY_INDEPENDENT_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_BRANCH_BYTES__FRESH_CLAIM_PLUS_STAGED_AUTHORITY_7_OF_7__ZERO_EXPOSURE",
+  "subjects": {
+    "claim": {
+      "path": "canonical/governance/TB_SCIENCE_RANK20_LOGICAL_ATTEMPT_CLAIM_BINDING_20261010_V6.json",
+      "git_blob_sha": "8b416b8dc6702cec573b2247050d16f07d3a3dc8"
+    },
+    "authority": {
+      "path": "canonical/governance/TB_SCIENCE_RANK20_ONE_SLOT_EXECUTION_AUTHORITY_20261010_V6.json",
+      "git_blob_sha": "d6762479d1706d64df6ae73b07fae364bf6783f9"
+    },
+    "ledger": {
+      "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V51.json",
+      "git_blob_sha": "2ec8d07461a654459c3a688a75fc7c318344971b"
+    },
+    "claim_verification": {
+      "path": "canonical/verification/TB_SCIENCE_RANK20_V6_CLAIM_BINDING_INDEPENDENT_VERIFY_20261010_V1.json",
+      "git_blob_sha": "b2bc5c9c53d1f6060e15e966a7351a7cac741389"
+    },
+    "tests": [
+      {
+        "path": "canonical/tests/test_tb_science_rank20_claim_binding_v6.py",
+        "git_blob_sha": "8394e1b7980b69c5f24a961995966f79ba0fe237"
+      },
+      {
+        "path": "canonical/tests/test_tb_science_rank20_v6_staged_authority.py",
+        "git_blob_sha": "adc804d21f13d727fca8a038ea9f2c22fbafc751"
+      }
+    ]
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "sprite_name": "brain-live-runtime-v1-verify-20261008",
+    "sprite_id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13",
+    "command": "python3 -m unittest -v canonical.tests.test_tb_science_rank20_claim_binding_v6 canonical.tests.test_tb_science_rank20_v6_staged_authority",
+    "tests_run": 7,
+    "tests_passed": 7,
+    "tests_failed": 0
+  },
+  "proved": [
+    "FRESH_CLAIM_DIGEST_DIFFERS_FROM_RETIRED_V5",
+    "FRESH_LOGICAL_ATTEMPT_ID_DERIVES_FROM_V6_CLAIM_DIGEST",
+    "V6_BINDS_CURRENT_V50_LEDGER_AND_NONCONSUMING_ABORT_TRUTH",
+    "V6_BINDS_VERIFIED_FIXED_START_CAS_BEHAVIOR",
+    "STAGED_AUTHORITY_IS_NOT_EFFECTIVE_BEFORE_PUBLIC_RESEAL",
+    "LEDGER_IS_FROZEN_TO_PUBLIC_ZERO_EXPOSURE_RESEAL_ONLY",
+    "NO_TASK_READ_START_TRIAL_OR_ACCEPTANCE_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "pass": true
+}
