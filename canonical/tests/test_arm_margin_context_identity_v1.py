@@ -141,7 +141,7 @@ class Tests(unittest.TestCase):
         self.assertEqual(out["status"], "FAIL_CLOSED")
         self.assertEqual(
             out["reason"],
-            "PINNED_CFPB_ARM_MARGIN_SOURCE_AUTHORITY_FAILED",
+            "PINNED_FED_ARM_MARGIN_SOURCE_AUTHORITY_FAILED",
         )
 
     def test_missing_fragment_fails_closed(self):
@@ -156,7 +156,7 @@ class Tests(unittest.TestCase):
         self.assertEqual(out["status"], "FAIL_CLOSED")
         self.assertEqual(
             out["reason"],
-            "CFPB_ARM_MARGIN_FRAGMENT_NOT_AUTHENTICATED",
+            "FED_ARM_MARGIN_FRAGMENT_NOT_AUTHENTICATED",
         )
 
     def test_pack_blob_drift_fails_closed(self):
