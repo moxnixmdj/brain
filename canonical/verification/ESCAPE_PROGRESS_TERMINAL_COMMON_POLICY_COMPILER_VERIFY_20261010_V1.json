@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_ESCAPE_PROGRESS_TERMINAL_COMMON_POLICY_COMPILER_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__DEVELOPMENT_15_OF_15__INDEPENDENT_15_OF_15__PYCOMPILE__MUTATION_KILLED__ZERO_CREDIT",
+  "exact_blobs": {
+    "runtime_path": "canonical/runtime/escape_progress_terminal_common_policy_compiler_v1.py",
+    "runtime_git_blob_sha": "e2dce48ca532798fc29749001b3d4cbf300332d7",
+    "tests_path": "canonical/tests/test_escape_progress_terminal_common_policy_compiler_v1.py",
+    "tests_git_blob_sha": "71d39de192ce2195e1af220b4a2f88deb9a66839",
+    "acceptance_transmuter_path": "canonical/runtime/acceptance_proof_transmuter_v1.py",
+    "acceptance_transmuter_git_blob_sha": "39b5611e53485674b29e2a05da91b89801bc5aa6",
+    "escape_audit_v3_path": "canonical/runtime/escape_progress_shared_gap_audit_v3.py",
+    "escape_audit_v3_git_blob_sha": "14adf2c1a431285a542340a740e27e764edb1ce5",
+    "escape_binding_v5_path": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V5.json",
+    "escape_binding_v5_git_blob_sha": "58ab70bfd7e98bdc78d480da197c6a8e41df6d43"
+  },
+  "tdd": {
+    "red": "COMPILER_MODULE_ABSENT__8_OF_8_BEHAVIORAL_CONTRACTS_FAILED_ON_IMPORT",
+    "development_green": "15_OF_15_PASS__PYCOMPILE_PASS",
+    "independent_carrier": "brain-r3-structural-provider-verify-20261010",
+    "independent_sprite_id": "sprite-4c7dc4a8-ac7d-44a7-b49d-0fdf1f321004",
+    "independent_result": "15_OF_15_PASS__PYCOMPILE_PASS",
+    "mutation": "DISABLE_POLICY_BINDING_INDEPENDENT_VERIFICATION_GATE",
+    "mutation_result": "TARGETED_TEST_FAIL__MUTATION_KILLED",
+    "restored_result": "TARGETED_TEST_PASS"
+  },
+  "proved": [
+    "UNIVERSAL_EXHAUSTIVE_FINITE_AND_SCOPE_COMPLETE_ABSOLUTE_DOMINANCE_CAN_COMPOSE_TO_V3_TERMINAL_COMMON_POLICY_PROOFS",
+    "MATCHED_COMPARATOR_CANNOT_MASQUERADE_AS_TARGET_FREE",
+    "ABSOLUTE_DOMINANCE_WITHOUT_INDEPENDENT_COMPLETE_SCOPE_CANNOT_COMPILE",
+    "POLICY_IDENTITY_CURRENT_AVAILABILITY_BRAIN_OWNERSHIP_RESOURCE_ADMISSIBILITY_AND_EXACT_INDEPENDENT_VERIFICATION_ARE_REQUIRED",
+    "UNSAFE_EVIDENCE_CANNOT_COMPILE",
+    "POST_COMPILE_TAMPERING_IS_REJECTED_BY_V3_CONTENT_ADDRESS",
+    "COMPILER_GRANTS_NO_EXECUTION_PROMOTION_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "hard_nonclaims": [
+    "NO_GAP_A_ROW_IS_CLOSED_BY_COMPILER_EXISTENCE",
+    "NO_POLICY_BINDING_IS_CREATED_BY_THE_COMPILER",
+    "NO_SCOPE_COMPLETE_ACCEPTANCE_EVIDENCE_IS_CREATED_BY_THE_COMPILER",
+    "NO_PRIVATE_INFORMATION_ACQUIRABILITY_CLAIM",
+    "NO_CC_R3_CERTIFICATE",
+    "NO_GLOBAL_ESCAPE_PROGRESS_TOTALITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "pass": true
+}
