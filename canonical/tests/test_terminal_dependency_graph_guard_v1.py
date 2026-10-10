@@ -213,3 +213,73 @@ def test_terminal_closure_rejects_unknown_attack_applicability(tmp_path):
     assert out["pass"] is False
     assert out["reason"] == "TERMINAL_CLOSURE_WITH_UNRESOLVED_LEAVES"
     assert "FRAMEWORK::ATTACK_APPLICABILITY" in out["unresolved"]
+
+def test_typed_leaf_metadata_extensions_are_accepted(tmp_path):
+    graph = base_graph(tmp_path)
+    verification = write(
+        tmp_path,
+        "canonical/verification/framework.json",
+        '{"pass":true}\n',
+    )
+    generator = write(
+        tmp_path,
+        "canonical/runtime/generator.py",
+        "VALUE = 1\n",
+    )
+    leaf = graph["nodes"][0]
+    leaf["status"] = "PROVED"
+    leaf["verification"] = {
+        "path": "canonical/verification/framework.json",
+        "git_blob_sha": blob(verification),
+    }
+    leaf["generator"] = {
+        "path": "canonical/runtime/generator.py",
+        "git_blob_sha": blob(generator),
+    }
+    leaf["open_channels"] = ["ENVIRONMENT", "OTHER"]
+    leaf["current_runtime_obligation_count"] = 2
+    leaf["subobligations"] = [
+        {"id": "SUB_A", "status": "PROVED"},
+        {"id": "SUB_B", "status": "ENFORCED"},
+    ]
+    out = validate_graph(graph, repo_root=tmp_path)
+    assert out["pass"] is True, out
+
+
+def test_leaf_metadata_binding_drift_fails_closed(tmp_path):
+    graph = base_graph(tmp_path)
+    verification = write(
+        tmp_path,
+        "canonical/verification/framework.json",
+        '{"pass":true}\n',
+    )
+    leaf = graph["nodes"][0]
+    leaf["verification"] = {
+        "path": "canonical/verification/framework.json",
+        "git_blob_sha": "0" * 40,
+    }
+    out = validate_graph(graph, repo_root=tmp_path)
+    assert out["pass"] is False
+    assert out["reason"] == "FRAMEWORK_VERIFICATION_BLOB_DRIFT"
+
+
+def test_proved_leaf_cannot_hide_unresolved_subobligation(tmp_path):
+    graph = base_graph(tmp_path)
+    leaf = graph["nodes"][0]
+    leaf["status"] = "PROVED"
+    leaf["subobligations"] = [
+        {"id": "SUB_OPEN", "status": "UNRESOLVED"},
+    ]
+    out = validate_graph(graph, repo_root=tmp_path)
+    assert out["pass"] is False
+    assert out["reason"] == "PROVED_LEAF_HAS_UNRESOLVED_SUBOBLIGATION"
+
+
+def test_leaf_open_channels_must_be_nonempty_unique_strings(tmp_path):
+    graph = base_graph(tmp_path)
+    leaf = graph["nodes"][0]
+    leaf["open_channels"] = ["OTHER", "OTHER"]
+    out = validate_graph(graph, repo_root=tmp_path)
+    assert out["pass"] is False
+    assert out["reason"] == "LEAF_OPEN_CHANNELS_INVALID"
+
