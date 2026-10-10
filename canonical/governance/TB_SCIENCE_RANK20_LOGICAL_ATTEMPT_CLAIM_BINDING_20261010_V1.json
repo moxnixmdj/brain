@@ -51,7 +51,7 @@
     }
   },
   "public_runtime_bindings": {
-    "trusted_base_merge_commit": "a327bd6f2bb67f2efeb67f0bc17a16508be2e9d2",
+    "trusted_base_merge_commit": "5f6bf12bb882bb94bfa4dc8762daf5fb68beb895",
     "agent_v14": {
       "path": "capsules/tb_science_rank15_20261009_v1/canonical/runtime/harbor_science_agent_v14.py",
       "git_blob_sha": "afa78733075ac8cbec7bd363dca3e7afb4a56313"
