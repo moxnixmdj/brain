@@ -95,6 +95,8 @@ def _r10_catalog_ids(catalog: Mapping[str, Any]) -> set[str]:
     if not isinstance(rows, list):
         rows = catalog.get("nodes")
     if not isinstance(rows, list):
+        rows = catalog.get("challenges")
+    if not isinstance(rows, list):
         return set()
     out: set[str] = set()
     for row in rows:
