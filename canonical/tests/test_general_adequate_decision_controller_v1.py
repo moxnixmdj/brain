@@ -588,6 +588,41 @@ class GeneralAdequateDecisionControllerV1Tests(unittest.TestCase):
         )
         self.assertFalse(out["actual_goal_satisfaction_verified"])
 
+    def test_raw_source_provider_material_cannot_bypass_checker_ingestion(self):
+        request = self._base_request()
+        request["max_information_rounds"] = 1
+        predicate_id = "source-condition-sha256:a"
+        provider = Mock(return_value={
+            "kind": controller.source_proof_material.KIND,
+            "source_text": "Total exposure means exposure_amount.",
+            "source_id": "policy",
+            "fact_source": '{"schema_id":"FINANCE_TYPED_CONTEXT_V1","fields":{}}',
+            "fact_source_id": "facts",
+            "condition_holds": True,
+        })
+        still_open = self._information_open(predicate_id)
+        with patch.object(controller, "compile_contract", return_value=self._raw_contract()), \
+             patch.object(controller, "_authenticate_goal_binding", return_value=self._goal_binding_pass()), \
+             patch.object(controller, "evaluate_p3", return_value=still_open):
+            out = controller.run(request, information_provider=provider)
+
+        self.assertFalse(out["pass"])
+        provider.assert_called_once()
+        self.assertEqual(
+            out["information_material_rejection"]["status"],
+            "SOURCE_PROOF_MATERIAL_REJECTED",
+        )
+        self.assertIn(
+            "UNMODELED_SOURCE_PROOF_MATERIAL_FIELDS",
+            out["information_material_rejection"]["reason"],
+        )
+        self.assertEqual(
+            out["information_trace"][-1]["ingestion_status"],
+            "SOURCE_PROOF_MATERIAL_REJECTED",
+        )
+        self.assertFalse(out["actual_goal_satisfaction_verified"])
+        self.assertFalse(out["terminal_authority"])
+
     def test_selected_policy_execution_requires_independent_binding(self):
         request = self._base_request()
         request["execution_problem"] = {

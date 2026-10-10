@@ -1,0 +1,25 @@
+{
+  "schema": "PROJECT_BRAIN_R2_V87_CHECKER_OWNED_SOURCE_INGESTION_RESTORATION_V1",
+  "status": "RECONCILED__V86_BOUND_TRUTH_REENTRY_PRESERVED__CHECKER_OWNED_RAW_SOURCE_INGESTION_RESTORED_AFTER_STALE_MERGE_REGRESSION__ONE_PRIMARY_FINANCE_RESIDUAL_REMAINS__ZERO_CREDIT",
+  "prior_version": "V86",
+  "current_version": "V87",
+  "verification_path": "canonical/verification/R2_CHECKER_OWNED_SOURCE_INGESTION_RESTORATION_VERIFY_20261010_V1.json",
+  "controller_runtime_path": "canonical/runtime/general_adequate_decision_controller_v1.py",
+  "controller_runtime_git_blob_sha": "1f4fe68f96d31c4917f8a1e32696fb7a261571e5",
+  "raw_source_adapter_path": "canonical/runtime/r2_raw_source_proof_material_adapter_v1.py",
+  "raw_source_adapter_git_blob_sha": "90cf4e0f7ccdec8ae228852bf36513ae4a12cf92",
+  "selected_semantic_truth_checker_path": "canonical/runtime/selected_semantic_truth_certificate_v1.py",
+  "selected_semantic_truth_checker_git_blob_sha": "18202653b4b6d1ef6434c851ab7d2a314365082c",
+  "verified_restoration": {
+    "raw_provider_truth_authority_removed": true,
+    "brain_owned_two_boolean_candidate_compilation": true,
+    "downstream_checker_identity_and_truth_recomputation_required": true,
+    "concrete_truth_request_propagation_preserved": true,
+    "bound_truth_reentry_preserved": true,
+    "provider_truth_field_smuggling_rejected_at_live_information_seam": true
+  },
+  "finance_tail_closed": false,
+  "global_open_world_closure_delta": false,
+  "acceptance_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
