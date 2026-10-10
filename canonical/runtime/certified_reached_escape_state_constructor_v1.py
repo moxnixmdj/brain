@@ -22,6 +22,7 @@ from canonical.runtime import certified_reached_escape_repair_dispatch_v1 as rep
 
 SCHEMA = "PROJECT_BRAIN_CERTIFIED_REACHED_ESCAPE_STATE_CONSTRUCTOR_V1"
 REPAIR_SCHEMA = "PROJECT_BRAIN_CERTIFIED_REACHED_ESCAPE_STATE_REPAIR_V1"
+STATE_SCHEMA = kernel.STATE_SCHEMA
 
 
 def _canon(value: Any) -> str:
