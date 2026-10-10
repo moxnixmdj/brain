@@ -3,13 +3,13 @@ from hashlib import sha1
 import json
 from pathlib import Path
 from typing import Any,Mapping
-from canonical.runtime import professional_quality_same_subject_composition_gate_v3 as gate
+from canonical.runtime import professional_quality_same_subject_composition_gate_v4 as gate
 
 SCHEMA="PROJECT_BRAIN_PROFESSIONAL_QUALITY_V7_12_OF_12_COMPOSITION_VERIFY_V1"
 MANIFEST="canonical/governance/PROFESSIONAL_QUALITY_V7_12_OF_12_COMPOSITION_INPUT_20261010_V1.json"
-MANIFEST_BLOB="1fd1bb9e5933860b406e119aace8b8f42f02fdda"
-GATE_PATH="canonical/runtime/professional_quality_same_subject_composition_gate_v3.py"
-GATE_BLOB="ddbe6ec92fef405b8909a161ef9acd685ec7317b"
+MANIFEST_BLOB="25ed911c9c71860fb359091749dc8fd1212a7bd8"
+GATE_PATH="canonical/runtime/professional_quality_same_subject_composition_gate_v4.py"
+GATE_BLOB="7b65c61f951339a445ef3735a7dbdd34e7a218f2"
 GATE_PUBLIC_VERIFY="canonical/verification/PROFESSIONAL_QUALITY_SAME_SUBJECT_GATE_V3_RECEIPT_ADAPTER_PUBLIC_VERIFY_20261010_V1.json"
 GATE_PUBLIC_VERIFY_BLOB="79910bf40700ddf000630a7169566fef91e6c939"
 SUBJECT_KIND="DECLARED_SYSTEM"
