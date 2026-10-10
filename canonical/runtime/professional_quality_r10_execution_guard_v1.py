@@ -89,11 +89,9 @@ def _fail(reason: str, **extra: Any) -> dict[str, Any]:
 
 
 def _r10_catalog_ids(catalog: Mapping[str, Any]) -> set[str]:
-    rows = catalog.get("defeaters")
-    if not isinstance(rows, list):
-        rows = catalog.get("attack_classes")
-    if not isinstance(rows, list):
-        rows = catalog.get("nodes")
+    if catalog.get("schema") != "PROJECT_BRAIN_PROFESSIONAL_QUALITY_DOMAIN_DEFEATER_CATALOG_V2":
+        return set()
+    rows = catalog.get("challenges")
     if not isinstance(rows, list):
         return set()
     out: set[str] = set()
