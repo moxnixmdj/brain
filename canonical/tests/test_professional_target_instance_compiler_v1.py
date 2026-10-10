@@ -29,8 +29,7 @@ def target() -> dict:
             "PRESERVE_MATERIAL_UNCERTAINTY",
         ],
         "plausible_interpretations": [
-            "COMPARE_TWO_OPTIONS_FOR_DECISION",
-            "REPORT_EVIDENCE_WITHOUT_FORCING_A_UNIQUE_WINNER",
+            "COMPARE_TWO_OPTIONS_AND_RECOMMEND_ONLY_IF_EVIDENCE_JUSTIFIES_A_WINNER",
         ],
         "target_construct": "Decision-useful professional quality under evidence constraints",
         "claim_scope": "Only claims supported by the supplied evidence packet",
@@ -72,6 +71,17 @@ class ProfessionalTargetInstanceCompilerV1Tests(unittest.TestCase):
             out["reason"],
             "TARGET_LIST_FIELD_INVALID:plausible_interpretations",
         )
+
+    def test_multiple_plausible_interpretations_remain_open(self):
+        t = target()
+        t["plausible_interpretations"] = [
+            "INTERPRETATION_A",
+            "INTERPRETATION_B",
+        ]
+        out = compiler.compile_target(t)
+        self.assertFalse(out["pass"])
+        self.assertEqual(out["reason"], "TARGET_INTERPRETATION_NOT_SINGLETON")
+        self.assertTrue(out["ambiguity_resolution_required"])
 
     def test_unmodeled_target_field_fails_closed(self):
         t = target()
