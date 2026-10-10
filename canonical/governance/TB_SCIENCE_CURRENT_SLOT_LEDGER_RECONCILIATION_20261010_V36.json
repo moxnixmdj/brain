@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V36",
+  "date": "2026-10-10",
+  "status": "CURRENT_POST_RANK18_PRESTART_ABORT_REPAIR_VERIFIED__SEVENTEEN_CONSUMED__RANK18_TASK_READ_HISTORY_TRUE__DURABLE_START_FALSE__SLOT_UNCONSUMED__PUBLIC_RESEAL_REQUIRED__ZERO_CREDIT",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "predecessor": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V35.json",
+    "git_blob_sha": "73ad3e6e2b9cb9e1f3b72c3f08d6842814ca1940"
+  },
+  "abort_truth": {
+    "path": "canonical/verification/TB_SCIENCE_RANK18_V1_PRESTART_ABORT_TRUTH_20261010_V1.json",
+    "git_blob_sha": "fd53eecbf4d974e45c936d592005f5f7d518e87d"
+  },
+  "repair_verification": {
+    "path": "canonical/verification/TB_SCIENCE_RANK18_ARTIFACTCONFIG_BRIDGE_PUBLIC_VERIFY_20261010_V1.json",
+    "git_blob_sha": "59d24c5441e4269ac34bad1e15a22584d4f1f3d0",
+    "pass": true
+  },
+  "current_counts": {
+    "consumed_slots": 17,
+    "consumed_successes": 0,
+    "consumed_final_failures": 17,
+    "successes_remaining_for_pass_lock": 124,
+    "additional_failures_before_fail_lock": 70,
+    "maximum_possible_successes_remaining": 193,
+    "minimum_required_success_rate_over_remaining_slots": 0.6424870466321243,
+    "pass_still_mathematically_reachable": true,
+    "next_unconsumed_slot": {
+      "ledger_schedule_rank": 18,
+      "frozen_manifest_schedule_order": 17,
+      "task_rank": 17,
+      "slot_id": "terminal-bench-science/longitudinal-clinical-agent::trial-0",
+      "task_digest": "sha256:e9a166b2173f7014d4f1559505397b221f94bc446eab031f94791b35e0e5f1c9"
+    }
+  },
+  "rank18": {
+    "slot_id": "terminal-bench-science/longitudinal-clinical-agent::trial-0",
+    "task_digest": "sha256:e9a166b2173f7014d4f1559505397b221f94bc446eab031f94791b35e0e5f1c9",
+    "task_read_history": true,
+    "task_read_count_observed": 1,
+    "task_started": false,
+    "durable_start_cas_acquired": false,
+    "execution_authority_consumed": false,
+    "benchmark_trials_consumed": 0,
+    "result_present": false,
+    "reward_observed": false,
+    "bridge_repair_verified": true,
+    "repaired_runner_git_blob_sha": "d1bb9fc6766f16b34a955c6f1b41d2da0b2709df",
+    "fresh_execution_authority": false,
+    "fresh_task_read_authority": false
+  },
+  "scheduler": [
+    "DO_NOT_REUSE_RANK18_V2_AUTHORITY_OR_PR_2547",
+    "RESEAL_THE_PUBLIC_EXECUTION_SURFACE_TO_THE_VERIFIED_ARTIFACTCONFIG_BRIDGE_WITH_ZERO_BENCHMARK_EXECUTION",
+    "FRESH_CONTROL_EPOCH_MUST_BIND_TASK_READ_HISTORY_TRUE_AND_DURABLE_START_ABSENCE",
+    "ONLY_AFTER_ZERO_EXPOSURE_RESEAL_VERIFICATION_MAY_FRESH_TASK_READ_AUTHORITY_BE_GRANTED",
+    "AFTER_DURABLE_START_ANY_FINAL_NON_SUCCESS_REMAINS_IRREVERSIBLE_ZERO"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_trials_consumed_delta": 0,
+    "consumed_successes_delta": 0,
+    "consumed_final_failures_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
