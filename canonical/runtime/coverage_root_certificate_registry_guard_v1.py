@@ -130,11 +130,15 @@ def validate(
 
         if status == "OPEN_NO_GLOBAL_CERTIFICATE_BOUND":
             open_ids.append(root_id)
-            if slot.get("certificate") is not None or slot.get("independent_verification") is not None:
+            if any(
+                slot.get(field) is not None
+                for field in ("certificate", "semantic_verifier", "independent_verification")
+            ):
                 errors.append(f"OPEN_SLOT_HAS_AUTHORITY_PAYLOAD:{root_id}")
         else:
             proved_ids.append(root_id)
             cert = slot.get("certificate")
+            semantic_verifier = slot.get("semantic_verifier")
             verify = slot.get("independent_verification")
             if active_claim is None:
                 errors.append(f"PROVED_SLOT_WITHOUT_ACTIVE_CLAIM:{root_id}")
@@ -155,6 +159,8 @@ def validate(
                         for field in CLAIM_BINDING_FIELDS:
                             if claim_binding.get(field) != active_claim.get(field):
                                 errors.append(f"PROVED_SLOT_CLAIM_BINDING_MISMATCH:{root_id}:{field}")
+            if not isinstance(semantic_verifier, Mapping) or not isinstance(semantic_verifier.get("path"), str) or not isinstance(semantic_verifier.get("git_blob_sha"), str):
+                errors.append(f"PROVED_SLOT_SEMANTIC_VERIFIER_MISSING:{root_id}")
             if not isinstance(verify, Mapping) or not isinstance(verify.get("path"), str) or not isinstance(verify.get("git_blob_sha"), str):
                 errors.append(f"PROVED_SLOT_INDEPENDENT_VERIFICATION_MISSING:{root_id}")
             elif isinstance(active_claim, Mapping) and verify.get("claim_id") != active_claim.get("claim_id"):
