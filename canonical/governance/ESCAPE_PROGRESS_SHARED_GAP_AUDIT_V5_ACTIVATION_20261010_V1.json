@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_ESCAPE_PROGRESS_SHARED_GAP_AUDIT_V5_ACTIVATION_20261010_V1",
+  "date": "2026-10-10",
+  "status": "ACTIVE_CANDIDATE_CURRENTNESS_AWARE_ESCAPE_ROW_PROOF_GATE__INDEPENDENTLY_VERIFIED__ZERO_ROW_CREDIT",
+  "objective": "PREVENT_STALE_MUTABLE_CURRENT_ROW_STATE_FROM_CLOSING_CC_R3_WHILE_PRESERVING_CURRENT_PATH_SEMANTICS_WITHOUT_MANIFEST_VERSION_TREADMILL",
+  "runtime": {
+    "path": "canonical/runtime/escape_progress_shared_gap_audit_v5.py",
+    "git_blob_sha": "1f1dcf4806b3d944721abe86f46f018c5345726d"
+  },
+  "tests": {
+    "path": "canonical/tests/test_escape_progress_shared_gap_audit_v5.py",
+    "git_blob_sha": "b8ea576bc0fc9be10e3b9e088c5d4bee41fffe59"
+  },
+  "verification": {
+    "path": "canonical/verification/ESCAPE_PROGRESS_SHARED_GAP_EXECUTABLE_AUDIT_V5_VERIFY_20261010_V1.json",
+    "git_blob_sha": "db0d6ae5c19193f2966c9ec4cb47980652e2405e",
+    "status": "PASS__DEVELOPMENT_4_OF_4__INDEPENDENT_4_OF_4__PYCOMPILE__MUTATION_KILLED"
+  },
+  "predecessor_gate": {
+    "v4_path": "canonical/runtime/escape_progress_shared_gap_audit_v4.py",
+    "v4_git_blob_sha": "61614d3f026f5bf3e68589a5c90f779b63867d84",
+    "v3_path": "canonical/runtime/escape_progress_shared_gap_audit_v3.py",
+    "v3_git_blob_sha": "14adf2c1a431285a542340a740e27e764edb1ce5",
+    "proof_algebra_changed": false
+  },
+  "current_resolution": {
+    "path": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
+    "binding": "MUTABLE_CURRENT_POINTER_PATH_IDENTITY__LIVE_ESCAPE_GAP_BINDING_AND_SUCCESSOR_MANIFEST_RESOLVED_AT_CALL_TIME",
+    "observed_blob_is_load_bearing": false
+  },
+  "authority_law": {
+    "immutable_sources": "EXACT_GIT_BLOB_AND_REQUIRED_SEMANTICS",
+    "mutable_current_sources": "CANONICAL_CURRENT_PATH__HISTORICAL_SUMMARY_DRIFT_WARNING_ONLY",
+    "row_proof_admission": "EXACT_CURRENT_SOURCE_PATH_GIT_BLOB_BYTE_SHA256_PLUS_CURRENT_ROUTE_SEMANTICS_ATTESTATION_BY_DISTINCT_INDEPENDENT_VERIFIER",
+    "caller_asserted_currentness": "REJECTED"
+  },
+  "hard_nonclaims": [
+    "NO_REAL_ROW_PROOF_CLOSED_BY_ACTIVATION",
+    "NO_CC_R3_CERTIFICATE",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT",
+    "NO_PRIVATE_INFORMATION_ACQUISITION_AUTHORITY",
+    "NO_FULL_REPOSITORY_REGRESSION_CLAIM"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "row_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
