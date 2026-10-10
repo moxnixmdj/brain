@@ -22,6 +22,7 @@ from canonical.runtime.source_aligned_regcap_context_proof_v1 import (
 )
 from canonical.runtime import regcap_bounded_rival_registry_authority_v1 as regcap_registry
 from canonical.runtime import regcap_context_signature_v1 as regcap_context_signature
+from canonical.runtime import tlac_mrel_identity_discriminator_v1 as tlac_mrel_pair
 
 SCHEMA = "PROJECT_BRAIN_DOMAIN_MAPPING_TRUTH_CERTIFICATE_V1"
 TRUTH_KIND = "DOMAIN_MAPPING_RELATION"
@@ -353,6 +354,117 @@ def _bounded_regcap_context_relation(
     }
 
 
+
+def _bounded_tlac_mrel_context_relation(
+    *,
+    raw_span: str,
+    source_id: str,
+    scope_id: str,
+    target_concept_id: str,
+    required_relation: str,
+    candidate_concepts: Sequence[Mapping[str, Any]],
+) -> dict[str, Any]:
+    """Prove task-scoped TLAC/MREL identity only inside the authenticated pair."""
+    if (
+        scope_id != tlac_mrel_pair.SCOPE_ID
+        or required_relation != "LOGICAL_EQUIVALENCE_IN_SCOPE"
+    ):
+        return {
+            "status": "NOT_APPLICABLE",
+            "pass": False,
+            "semantic_truth_authority": False,
+            "terminal_authority": False,
+        }
+
+    supplied_ids = []
+    for i, row in enumerate(candidate_concepts):
+        if not isinstance(row, Mapping):
+            return {
+                "status": "FAIL_CLOSED",
+                "pass": False,
+                "reason": "TLAC_MREL_CANDIDATE_NOT_OBJECT:" + str(i),
+                "semantic_truth_authority": False,
+                "terminal_authority": False,
+            }
+        cid = str(row.get("concept_id") or "").strip()
+        if not cid:
+            return {
+                "status": "FAIL_CLOSED",
+                "pass": False,
+                "reason": "TLAC_MREL_CANDIDATE_ID_REQUIRED:" + str(i),
+                "semantic_truth_authority": False,
+                "terminal_authority": False,
+            }
+        supplied_ids.append(cid)
+
+    if sorted(supplied_ids) != sorted(tlac_mrel_pair.DOMAIN):
+        return {
+            "status": "FAIL_CLOSED",
+            "pass": False,
+            "reason": "TLAC_MREL_CANDIDATE_SET_MISMATCH",
+            "supplied_candidate_ids": sorted(supplied_ids),
+            "required_candidate_ids": sorted(tlac_mrel_pair.DOMAIN),
+            "semantic_truth_authority": False,
+            "terminal_authority": False,
+        }
+    if target_concept_id not in tlac_mrel_pair.DOMAIN:
+        return {
+            "status": "FAIL_CLOSED",
+            "pass": False,
+            "reason": "TLAC_MREL_TARGET_OUTSIDE_BOUND_PAIR",
+            "semantic_truth_authority": False,
+            "terminal_authority": False,
+        }
+
+    resolved = tlac_mrel_pair.resolve_relative(
+        raw_span,
+        source_id=source_id,
+        candidate_concept_ids=supplied_ids,
+    )
+    if resolved.get("status") == "FAIL_CLOSED":
+        return {
+            "status": "FAIL_CLOSED",
+            "pass": False,
+            "reason": "TLAC_MREL_DISCRIMINATOR_FAIL_CLOSED",
+            "context_result": resolved,
+            "semantic_truth_authority": False,
+            "terminal_authority": False,
+        }
+    if (
+        resolved.get("pass") is not True
+        or resolved.get("relative_selection_authority") is not True
+        or not resolved.get("selected_concept_id")
+    ):
+        return {
+            "status": "OPEN__BOUNDED_TLAC_MREL_CONTEXT_RELATION_NOT_RESOLVED",
+            "pass": False,
+            "context_result": resolved,
+            "semantic_truth_authority": False,
+            "terminal_authority": False,
+        }
+
+    selected = str(resolved["selected_concept_id"])
+    return {
+        "status": "PASS__AUTHENTICATED_BOUNDED_TLAC_MREL_CONTEXT_RELATION",
+        "pass": True,
+        "predicate_truth": "TRUE" if selected == target_concept_id else "FALSE",
+        "selected_concept_id": selected,
+        "target_concept_id": target_concept_id,
+        "required_relation": required_relation,
+        "scope_id": tlac_mrel_pair.SCOPE_ID,
+        "candidate_ids": list(tlac_mrel_pair.DOMAIN),
+        "context_result": resolved,
+        "semantic_truth_authority": True,
+        "global_semantic_identity_authority": False,
+        "open_world_candidate_set_complete": False,
+        "terminal_authority": False,
+        "boundary": (
+            "LOGICAL_EQUIVALENCE_ONLY_INSIDE_THE_EXACT_AUTHENTICATED_TLAC_MREL_"
+            "PAIR_TASK_SCOPE__NO_GLOBAL_SEMANTIC_IDENTITY_DISJOINTNESS_OR_OPEN_WORLD_COMPLETENESS"
+        ),
+    }
+
+
 def _unknown(
     *,
     checked_id: str,
@@ -457,6 +569,60 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
         )
     except Exception as exc:
         return _fail(type(exc).__name__ + ":" + str(exc))
+
+    bounded_tlac_mrel = _bounded_tlac_mrel_context_relation(
+        raw_span=raw_span,
+        source_id=source_id,
+        scope_id=scope_id,
+        target_concept_id=target,
+        required_relation=required,
+        candidate_concepts=candidates,
+    )
+    if bounded_tlac_mrel.get("status") == "FAIL_CLOSED":
+        return _fail(
+            "BOUNDED_TLAC_MREL_CONTEXT_FAIL_CLOSED",
+            bounded_tlac_mrel=bounded_tlac_mrel,
+        )
+    if bounded_tlac_mrel.get("pass") is True:
+        truth = str(bounded_tlac_mrel.get("predicate_truth") or "")
+        if truth not in {"TRUE", "FALSE"}:
+            return _fail(
+                "BOUNDED_TLAC_MREL_CONTEXT_TRUTH_INVALID",
+                bounded_tlac_mrel=bounded_tlac_mrel,
+            )
+        return {
+            "schema": SCHEMA,
+            "pass": True,
+            "status": (
+                "PASS__BOUNDED_TLAC_MREL_CONTEXT_RELATION_PROVED_TRUE"
+                if truth == "TRUE"
+                else "PASS__BOUNDED_TLAC_MREL_CONTEXT_RELATION_PROVED_FALSE"
+            ),
+            "predicate_id": checked,
+            "requested_predicate_id": requested_id,
+            "requested_predicate_id_authority": False,
+            "predicate_truth": truth,
+            "target_concept_id": target,
+            "required_relation": required,
+            "source_id": source_id,
+            "source_sha256": sha256(raw_span.encode("utf-8")).hexdigest(),
+            "scope_id": scope_id,
+            "mapping_result": {},
+            "authenticated_context_refinement": contextual_refinement,
+            "bounded_tlac_mrel_context_relation": bounded_tlac_mrel,
+            "truthful_precommitment_observation": True,
+            "semantic_truth_authority": True,
+            "policy_adequacy_authority": False,
+            "db_admission_authority": False,
+            "u_empty_authority": False,
+            "terminal_authority": False,
+            "terminal_credit_delta": 0,
+            "boundary": (
+                "AUTHENTICATED_TLAC_MREL_PAIR_TASK_SCOPE_ONLY__"
+                "LOGICAL_EQUIVALENCE_IN_SCOPE_ONLY__NO_GLOBAL_SEMANTIC_IDENTITY__"
+                "NO_OPEN_WORLD_CANDIDATE_COMPLETENESS_OR_TERMINAL_AUTHORITY"
+            ),
+        }
 
     bounded_context = _bounded_regcap_context_relation(
         raw_span=raw_span,
