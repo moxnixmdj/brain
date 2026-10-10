@@ -1,15 +1,15 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_LIVE_WORK_FRONTIER_V1",
   "date": "2026-10-10",
-  "status": "CURRENT_POST_COMPOSITION_FRONTIER__R2_V85_RESEALED__READ_ONLY_EVIDENCE_ONLY__FULL_EXECUTION_FAIL_CLOSED__ZERO_CREDIT",
+  "status": "CURRENT_POST_COMPOSITION_FRONTIER__R2_V85_RESEALED__ESCAPE_V5_CURRENTNESS_RECONCILED__READ_ONLY_EVIDENCE_ONLY__FULL_EXECUTION_FAIL_CLOSED__ZERO_CREDIT",
   "frontier_id": "LIVE_WORK_FRONTIER_20261010_PROF12_COMPOSED_V12",
   "scope": {
-    "base_main_commit": "82b155b76826d61af96b007bdbe6660889d8df5a",
+    "base_main_commit": "bb508503ed6c588a623891a43af7d4800996c960",
     "completeness_semantics": "COMPLETE_FOR_EXPLICIT_CURRENT_ACTIONABLE_OR_SCHEDULABLE_WORK_EXPOSED_BY_THE_BOUND_CURRENT_AUTHORITY_SOURCES__NOT_COMPLETE_FOR_UNKNOWN_FUTURE_WORK_OR_UNDISCOVERED_CAPABILITIES",
     "source_set": [
       {
         "path": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
-        "git_blob_sha": "2c3f4c6194c824163b0cd7eec8e32dfb3961551c"
+        "git_blob_sha": "d121b88629076770ec13361ef6cb61d942611395"
       },
       {
         "path": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
@@ -288,12 +288,13 @@
       "vector_evidence": {},
       "read_only_evidence": {
         "source": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
-        "source_git_blob_sha": "2c3f4c6194c824163b0cd7eec8e32dfb3961551c",
+        "source_git_blob_sha": "d121b88629076770ec13361ef6cb61d942611395",
         "effective_gap_a_count": 10,
         "real_authenticated_row_proofs": 0,
         "existing_realization_bridge": "ESCAPE_GAP_A_POLICY_COVER_ADAPTER_ACTIVATION_20261010_V1",
         "new_primitive_established": false,
-        "vector_bounds_complete": false
+        "vector_bounds_complete": false,
+        "current_gate_status": "V6_POLICY_COVER_ADAPTER_PLUS_CURRENTNESS_AWARE_AUTHENTICATED_V5_GATE_VERIFIED__REAL_AUTHENTICATED_ROW_PROOFS_0_OF_10__ROW_PREMISES_OPEN"
       }
     },
     {
@@ -320,10 +321,10 @@
       "vector_evidence": {},
       "read_only_evidence": {
         "source": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
-        "source_git_blob_sha": "2c3f4c6194c824163b0cd7eec8e32dfb3961551c",
+        "source_git_blob_sha": "d121b88629076770ec13361ef6cb61d942611395",
         "effective_gap_b_count": 3,
         "real_authenticated_row_proofs": 0,
-        "current_gate_status": "AUTHENTICATED_V4_GATE_VERIFIED__REAL_AUTHENTICATED_ROW_PROOFS_0_OF_3__GAP_B_TOTALITY_OPEN",
+        "current_gate_status": "CURRENTNESS_AWARE_AUTHENTICATED_V5_GATE_VERIFIED__REAL_AUTHENTICATED_ROW_PROOFS_0_OF_3__GAP_B_TOTALITY_OPEN",
         "new_primitive_established": false,
         "vector_bounds_complete": false,
         "tb_row_currentness_repair_required": true,
