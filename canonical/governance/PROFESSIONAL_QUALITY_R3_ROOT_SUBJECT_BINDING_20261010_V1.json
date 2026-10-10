@@ -1,0 +1,76 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_ROOT_SUBJECT_BINDING_V1",
+  "date": "2026-10-10",
+  "status": "CANDIDATE_R3_V7_ROOT_SUBJECT_BINDING__PROOF_BOUND_RENDER_STEP_PLUS_PINNED_NATIVE_REALIZATION_SCOPE__AWAITING_INDEPENDENT_VERIFICATION__ZERO_QUALITY_OR_TERMINAL_AUTHORITY",
+  "root_id": "R3_REALIZATION_OBSERVATION",
+  "subject_kind": "DECLARED_SYSTEM",
+  "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+  "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+  "subject": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V7_DECLARED_SYSTEM_SUBJECT_20261010_V6.json",
+    "git_blob_sha": "1d598bc8757017ceb34928d0df9f5fce859ef868"
+  },
+  "bridge_evidence": {
+    "execution_profile": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_EXECUTION_PROFILE_20261010_V3.json",
+      "git_blob_sha": "f7e89eafbb691c16d1bdf5b8d295a468d5e3bec5"
+    },
+    "proof_bound_step_verification": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_P1_ROUTER_V7_PROOF_BOUND_STEP_VERIFY_20261010_V1.json",
+      "git_blob_sha": "b7a9df36780513ad73fd14c6a2756c8474d8434d"
+    },
+    "r3_semantic_scope": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_R3_REALIZATION_SEMANTIC_SCOPE_20261010_V1.json",
+      "git_blob_sha": "1edbd92b4e7b01591162d692f1d4c9b785b4c102"
+    },
+    "r3_semantic_verification": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R3_REALIZATION_SEMANTIC_VERIFY_20261010_V1.json",
+      "git_blob_sha": "3c9a6f03c9dfb7597cdb7c5ca01e9eaf66a596e0"
+    },
+    "native_render_preflight": {
+      "path": "canonical/governance/NATIVE_ARTIFACT_RENDER_PRESERVATION_PREFLIGHT_V1.json",
+      "git_blob_sha": "b5ddc896811875b59840959e27dbb515265fc9f8"
+    },
+    "native_render_public_verification": {
+      "path": "canonical/verification/NATIVE_ARTIFACT_RENDER_PRESERVATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "1a0b4ca6627aaf28eb25f6990682e87319d14d6d"
+    }
+  },
+  "binding_scope": {
+    "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+    "step_id": "RENDER_EXACT_AUDIENCE_VIEW_AND_BIND_OBSERVATION_CHANNELS",
+    "claim": "FOR_THE_EXACT_V7_DECLARED_SYSTEM_SUBJECT__THE_RENDER_AND_OBSERVATION_PROFILE_STEP_IS_PROOF_BOUND_BY_THE_V7_CONTENT_ADDRESSED_STEP_AUTHORITY__AND_R3_REALIZATION_OBSERVATION_SUPPORT_IS_ADMISSIBLE_ONLY_WHEN_THAT_STEP_EVIDENCE_IS_INDEPENDENTLY_VERIFIED_WITHIN_THE_EXISTING_PINNED_NATIVE_ARTIFACT_RENDER_REALIZATION_SCOPE__ACTUAL_TASK_EXECUTION_STILL_REQUIRES_A_FRESH_RUN_CONTEXT_BOUND_STEP_RECEIPT",
+    "guarantees": [
+      "EXACT_V7_SUBJECT_TUPLE_BOUND",
+      "V7_RENDER_AND_OBSERVATION_STEP_IS_CONTENT_ADDRESSED_AND_INDEPENDENTLY_VERIFIED_BEFORE_INTERNAL_PASS_DERIVATION",
+      "R3_SUPPORT_IS_LIMITED_TO_THE_EXISTING_PINNED_NATIVE_RENDER_REALIZATION_SCOPE",
+      "EXACT_ARTIFACT_BYTES_AND_AUDIENCE_VIEW_EVIDENCE_MUST_BE_BOUND_BY_THE_STEP_EVIDENCE_AND_INDEPENDENT_SCOPE_VERIFICATION",
+      "PINNED_NATIVE_RENDER_SCOPE_REUSES_LIBREOFFICE_POPPLER_AND_HIDDEN_STRUCTURAL_ORACLE_BOUNDARIES",
+      "ACTUAL_V7_R3_EXECUTION_REQUIRES_A_FRESH_RUN_CONTEXT_BOUND_PROFESSIONAL_STEP_RECEIPT",
+      "CALLER_SUPPLIED_RENDER_STEP_PASS_HAS_ZERO_AUTHORITY"
+    ],
+    "limitations": [
+      "NO_REAL_TASK_RENDER_STEP_RECEIPT_FROM_THIS_BINDING",
+      "NO_ARBITRARY_SEMANTIC_TARGET_CORRECTNESS",
+      "NO_WHOLE_OPEN_ENDED_NATIVE_ARTIFACT_CONTRACT_SCOPE_EQUIVALENCE",
+      "NO_ALL_RENDERER_OR_ENVIRONMENT_INVARIANCE",
+      "NO_GLOBAL_R3_ROOT_CLOSURE",
+      "NO_GLOBAL_R3_SEMANTIC_LEAF_CLOSURE",
+      "NO_SAME_SUBJECT_COMPOSITION_PASS",
+      "NO_LIVE_DEFAULT_PROMOTION"
+    ]
+  },
+  "external_root_support": true,
+  "external_support_inside_subject_required": false,
+  "actual_v7_step_receipt_required_for_execution": true,
+  "global_subject_identity_authority": false,
+  "root_subject_binding_authority": false,
+  "semantic_truth_authority": false,
+  "execution_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
