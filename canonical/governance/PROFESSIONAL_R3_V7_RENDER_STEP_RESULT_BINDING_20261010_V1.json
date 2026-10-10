@@ -15,7 +15,8 @@
     "git_blob_sha": "95e08e82ffba5c84426e07b0f8d2556f7308f5a0"
   },
   "public_verification": {
-    "path": "canonical/verification/PROFESSIONAL_R3_V7_REALIZATION_WITNESS_PUBLIC_VERIFY_20261010_V1.json"
+    "path": "canonical/verification/PROFESSIONAL_R3_V7_REALIZATION_WITNESS_PUBLIC_VERIFY_20261010_V1.json",
+    "git_blob_sha": "64e7355020d700b066090d524a92737547ae1b02"
   },
   "scope": "ONE_EXACT_BOUNDED_GENERATED_PDF_REALIZATION_INSTANCE_ON_THE_FROZEN_V7_SUBJECT",
   "semantic_truth_authority": false,
