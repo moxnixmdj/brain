@@ -1,0 +1,157 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_CONSERVATIVE_PROFILE_V27_SUCCESSOR_EXECUTION_V1",
+  "status": "FRESH_SUCCESSOR_EXECUTION__CONSERVATIVE_SPENT_NEXT31_PROFILE_V27__ZERO_CAPABILITY_CREDIT",
+  "recorded_at": "2026-10-10",
+  "predecessor": {
+    "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_CONSERVATIVE_PROFILE_V26_SUCCESSOR_EXECUTION_20261010_V1.json",
+    "package_raw_python_source_bytes": 1949457,
+    "B_exec_raw_python_source_bytes": 1952217,
+    "manifest_sha256": "e5d91392e4ef3c962561d3c7f9bdf9bd8dc1a4474ba6ab5f48db71a7c8dcc507",
+    "fresh_qualification": "8970/8970"
+  },
+  "selection": {
+    "id": "CONSERVATIVE_SPENT_NEXT31_DOMAIN_EXCLUSION_PROFILE_V27",
+    "corpus": "QUAL_SUCCESSOR_NEXT31_20261010_V1",
+    "spent_cases": 8970,
+    "method": "Reprofile exact V26 over spent NEXT31, rank large zero-hit bodies, permanently exclude counterexample-proven and plausible rare-path numeric/root/limit/core mechanisms, and prune only narrow out-of-domain helper surfaces.",
+    "selected_function_bodies": [
+      [
+        "sympy/functions/special/error_functions.py",
+        "TrigonometricIntegral.eval"
+      ],
+      [
+        "sympy/simplify/hyperexpand.py",
+        "try_shifted_sum"
+      ],
+      [
+        "sympy/simplify/simplify.py",
+        "product_simplify"
+      ],
+      [
+        "sympy/simplify/simplify.py",
+        "product_mul"
+      ],
+      [
+        "sympy/core/function.py",
+        "UndefinedFunction.__new__"
+      ],
+      [
+        "sympy/printing/printer.py",
+        "Printer._compare_pretty"
+      ],
+      [
+        "sympy/functions/special/hyper.py",
+        "hyper.radius_of_convergence"
+      ],
+      [
+        "sympy/ntheory/generate.py",
+        "Sieve.totientrange"
+      ],
+      [
+        "sympy/ntheory/generate.py",
+        "nextprime"
+      ],
+      [
+        "sympy/functions/special/tensor_functions.py",
+        "KroneckerDelta.eval"
+      ],
+      [
+        "sympy/simplify/gammasimp.py",
+        "_rf.eval"
+      ],
+      [
+        "sympy/calculus/accumulationbounds.py",
+        "AccumulationBounds.__sub__"
+      ],
+      [
+        "sympy/calculus/accumulationbounds.py",
+        "AccumulationBounds.__add__"
+      ],
+      [
+        "sympy/functions/elementary/trigonometric.py",
+        "cot._eval_expand_trig"
+      ],
+      [
+        "sympy/functions/elementary/trigonometric.py",
+        "tan._eval_expand_trig"
+      ]
+    ],
+    "selected_pre_stub_body_bytes": 13681,
+    "explicit_safety_exclusions": [
+      "integer_log and Number.__divmod__: counterexample-proven necessary",
+      "root-isolation/refinement and algebraic-number paths: retained",
+      "mpmath low-level arithmetic/conversion and evalf paths: retained",
+      "gruntz/limits and polynomial root interval/reduction paths: retained"
+    ],
+    "spent_profile_replay": "8970/8970"
+  },
+  "measured_candidate": {
+    "status": "PHYSICALLY_REWRITTEN_RESEARCH_CANDIDATE__NOT_OPUS_PROMOTED",
+    "python_files": 277,
+    "package_raw_python_source_bytes": 1937005,
+    "router_raw_python_source_bytes": 2760,
+    "B_exec_raw_python_source_bytes": 1939765,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "raw_improvement_vs_v26_bytes": 12452,
+    "manifest_sha256": "44e43221928b763c60eacd0a39c50e067ded82c66151886829d7cc58d037b3b9",
+    "durable_source_archive_bytes": 292916,
+    "durable_source_archive_sha256": "4d5f34006774437784fa5b108e26e743ac084cd4477a03b31f5ea86bbab0a562",
+    "archive_improvement_vs_v26_bytes": 1664
+  },
+  "qualification": {
+    "spent_NEXT31": {
+      "id": "QUAL_SUCCESSOR_NEXT31_20261010_V1",
+      "cases": 8970,
+      "corpus_sha256": "ed5f78856d2621be9293a509aa21486ad82eef794453f4ce4360755222086f53",
+      "candidate": "8970/8970",
+      "spent": true
+    },
+    "fresh_NEXT32": {
+      "id": "QUAL_SUCCESSOR_NEXT32_20261010_V1",
+      "seed": 5656854,
+      "per_operation_budget": 800,
+      "cases": 9200,
+      "corpus_sha256": "eee5966b50fddebd36bf7d1578985925fcb5950c73d7e68e5c64c7e43aa6c866",
+      "candidate": "9200/9200",
+      "independent_copy": "9200/9200",
+      "extracted_archive_replay": "9200/9200",
+      "spent": true
+    }
+  },
+  "reproducibility": {
+    "predecessor_reconstruction": "canonical/research/bytes/tools/rebuild_candidate_v26.py",
+    "transform": "canonical/research/bytes/tools/conservative_profile_prune_v27.py",
+    "successor_reconstruction": "canonical/research/bytes/tools/rebuild_candidate_v27.py",
+    "route": "canonical/research/bytes/tools/exact_symbolic_route_v1.py",
+    "semantic_digest": "canonical/research/bytes/tools/semantic_digest_v1.py",
+    "qualification_generator": "canonical/research/bytes/tools/generate_qualification_v1.py"
+  },
+  "durable_artifact": {
+    "library_status": "PERSISTED_IN_CHATGPT_LIBRARY",
+    "library_file_id": "libfile_75a145b9561081919ef0f13e5820e381",
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V27_SUCCESSOR_20261010_V1.tar.xz",
+    "bytes": 292916,
+    "sha256": "4d5f34006774437784fa5b108e26e743ac084cd4477a03b31f5ea86bbab0a562",
+    "extracted_source_identity": "278/278 files"
+  },
+  "next_frozen_qualification": {
+    "id": "QUAL_SUCCESSOR_NEXT33_20261010_V1",
+    "seed": 5744562,
+    "per_operation_budget": 820,
+    "cases": 9430,
+    "corpus_sha256": "996721b61f1a6b6257d8595b85bc9df6bb2fc1c6e5257f80efcba276375285e8",
+    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT33_20261010_V1.jsonl",
+    "library_file_id": "libfile_41ba4cce64408191b03f1d9919045350",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT"
+  },
+  "truth_boundary": [
+    "MEASURED: exact V27 is 12,452 raw Python-source bytes smaller than V26.",
+    "MEASURED: exact V27 passes spent NEXT31 8,970/8,970.",
+    "MEASURED: exact V27 passes fresh NEXT32 9,200/9,200 on candidate, independent copy, and extracted archive.",
+    "INFERRED: selected V27 bodies are outside the tested bounded route and generated input domains; finite non-use remains non-universal.",
+    "NOT CLAIMED: out-of-scope behavior preservation, universal SymPy correctness, absolute information-theoretic minimum, or Opus-family promotion.",
+    "PROMOTION CREDIT: 0."
+  ],
+  "next_action": "Rerank exact V27 using spent NEXT32 only. Keep NEXT33 untouched until a new physical cut is frozen.",
+  "promotion_credit": 0
+}
