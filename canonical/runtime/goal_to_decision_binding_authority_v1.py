@@ -21,8 +21,11 @@ GOAL_BINDING_VERIFY_SCHEMA = (
 )
 
 
-class GoalBindingAuthorityError(ValueError):
+class DecisionControllerError(ValueError):
     pass
+
+
+GoalBindingAuthorityError = DecisionControllerError
 
 
 def canon(value: Any) -> str:
