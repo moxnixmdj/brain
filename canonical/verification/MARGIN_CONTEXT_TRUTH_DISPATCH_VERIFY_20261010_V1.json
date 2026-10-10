@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_MARGIN_CONTEXT_TRUTH_DISPATCH_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_BRANCH_BYTES__16_OF_16_FOCUSED_AND_EXISTING_DISPATCH_TESTS__4_OF_4_LIVE_DISPATCH_REPLAY__PYCOMPILE_PASS__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "margin-context-truth-dispatch-v1-20261010-sol",
+    "exact_blobs": {
+      "canonical/runtime/margin_context_identity_truth_certificate_v1.py": "9bb8723e34fb4a05b0e1f1a0fa875c0bd6cf3446",
+      "canonical/runtime/semantic_truth_dispatch_v1.py": "1f8be6a821d3dadc2a92c64e8e7fcc4eee301884",
+      "canonical/tests/test_margin_context_identity_truth_dispatch_v1.py": "1a88c39691b7ba816c34ccf0a42f7e05cae4a96b"
+    }
+  },
+  "independent_carrier": {
+    "name": "margin-truth-dispatch-verify-20261010-sol",
+    "sprite_id": "sprite-f294bba6-4fd7-40ae-8af3-7737491412dc",
+    "workspace": "/home/sprite/work"
+  },
+  "verification": {
+    "py_compile": "PASS",
+    "new_truth_dispatch_suite": {"tests_run": 10, "failures": 0, "errors": 0},
+    "existing_dispatch_suite": {"tests_run": 6, "failures": 0, "errors": 0},
+    "total_focused_and_existing_dispatch_tests": 16,
+    "live_dispatch_replay": {
+      "result": "PASS",
+      "cases": {
+        "NET_INTEREST_MARGIN_HEAD": "TRUE",
+        "INITIAL_MARGIN_HEAD": "TRUE",
+        "ARM_INDEX_MARGIN": "TRUE",
+        "BARE_MARGIN": "UNKNOWN"
+      },
+      "terminal_authority": false
+    }
+  },
+  "proved": [
+    "THE_LIVE_SEMANTIC_TRUTH_DISPATCHER_CAN_RECOMPUTE_CONTEXT_RICH_MARGIN_IDENTITY",
+    "AUTHENTICATED_LONGEST_MULTIWORD_TERM_IS_TRIED_BEFORE_RELATIONAL_ARM_CONTEXT",
+    "THE_margin_HEAD_INSIDE_net_interest_margin_RESOLVES_TO_BANK_NET_INTEREST_MARGIN",
+    "THE_margin_HEAD_INSIDE_initial_margin_RESOLVES_TO_DERIVATIVES_INITIAL_MARGIN",
+    "EXPLICIT_ARM_INDEX_RELATIONAL_CONTEXT_RESOLVES_TO_ARM_INDEX_MARGIN",
+    "BARE_Margin_REMAINS_UNKNOWN",
+    "A_DIFFERENT_PROVED_CONTEXT_IDENTITY_DOES_NOT_AUTOMATICALLY_PROVE_FALSE",
+    "SOURCE_AUTHORITY_FAIL_CLOSED_DOES_NOT_FALL_THROUGH_TO_WEAKER_ROUTES",
+    "EXISTING_SEMANTIC_TRUTH_DISPATCH_FAMILIES_REMAIN_GREEN",
+    "NO_GLOBAL_BARE_MARGIN_SENSE_OPEN_WORLD_COMPLETENESS_POLICY_ADEQUACY_OR_TERMINAL_AUTHORITY"
+  ],
+  "hard_nonclaims": [
+    "NO_GLOBAL_WORD_SENSE_CLOSURE",
+    "NO_FALSE_TRUTH_FROM_DIFFERENT_CONTEXT_IDENTITY_WITHOUT_DISJOINTNESS",
+    "NO_GENERAL_MULTIWORD_OR_RELATIONAL_LANGUAGE_PARSER",
+    "NO_FINANCE_SEMANTIC_TAIL_CLOSURE",
+    "NO_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
