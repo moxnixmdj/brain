@@ -776,7 +776,7 @@
     "quality_authority": false,
     "terminal_authority": false
   },
-  "exact_next": "CLOSE_ONLY_R12_CC_R3_MATERIAL_DEFEATER_TOTALITY_USING_EXISTING_UNIVERSAL_FORMAL_SCOPE_OR_LOSSLESS_GENERATOR_OBSERVABLE_POLICY_COVER_MACHINERY__BIND_THROUGH_V9_EXECUTABLE_SEMANTIC_AUTHORITY__EXECUTE_AND_INDEPENDENTLY_REPLAY_ONE_REAL_V9_POSITIVE_ROUTE__RERUN_R4_REGISTRY__THEN_PROPAGATE_SHARED_ROOT_REUSE_TO_REMAINING_SEMANTIC_LEAVES__FULL_CURRENT_MAIN_REGRESSION",
+  "exact_next": "BIND_AUTHENTIC_STABLE_R12_CLAIM_WIDE_POLICY_COVER__MINT_ONE_SHARED_V9_LOCAL_TOTALITY_CERTIFICATE__RUN_V2_SEMANTIC_RERUN__BIND_AND_EXECUTE_ONE_REAL_V9_POSITIVE_ROUTE__THEN_CC_R3_ROOT_CERTIFICATE__RERUN_R4__PROPAGATE_REUSE_TO_REMAINING_SEMANTIC_LEAVES",
   "r12_v8_reuse_closure_current": {
     "path": "canonical/governance/PROFESSIONAL_V8_R12_REUSE_CLOSURE_20261010_V1.json",
     "git_blob_sha": "5ee3d7405ac9a16e6d872b3e05a147ec10abd419",
@@ -837,5 +837,16 @@
     ],
     "r4_proof_closure": false,
     "new_primitive_required": false
+  },
+  "r12_cc_r3_v2_current": {
+    "path": "canonical/governance/COVERAGE_CC_R3_PROFESSIONAL_R12_V2_CURRENTNESS_20261010_V1.json",
+    "status": "CURRENT_V2_ADAPTER_VERIFIED__CC_R3_OPEN",
+    "totality_verifier": "canonical/runtime/professional_r12_v9_policy_cover_totality_semantic_verify_v2.py",
+    "root_verifier": "canonical/runtime/coverage_cc_r3_professional_r12_semantic_verify_v2.py",
+    "exact_missing": [
+      "AUTHENTIC_CLAIM_WIDE_POLICY_COVER",
+      "REAL_V9_POSITIVE_ROUTE_BOUND_TO_SAME_TOTALITY_CERTIFICATE"
+    ],
+    "terminal_credit_delta": 0
   }
 }
