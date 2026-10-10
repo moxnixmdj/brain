@@ -9,6 +9,7 @@ from canonical.runtime import professional_candidate_search_semantic_certificate
 from canonical.runtime import professional_r9_temporal_semantic_certificate_v1 as r9c
 from canonical.runtime import professional_r3_realization_semantic_certificate_v1 as r3c
 from canonical.runtime import professional_r5_evaluator_semantic_certificate_v1 as r5c
+from canonical.runtime import professional_r4_measurement_semantic_certificate_v1 as r4c
 
 ROOT = b.ROOT
 REGISTRY = b.REGISTRY
@@ -37,6 +38,12 @@ R5_SOURCE_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R5_EVALUATOR_SEMANTIC_VER
 R5_SCOPE_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R5_EVALUATOR_SEMANTIC_SCOPE_V1"
 R5_SOURCE_STATUS = "PASS__PINNED_EXACT_BYTES__6_OF_6__BOUNDED_R5_CONDITIONAL_EVALUATOR_REFERENCE_SEMANTICS__ZERO_GLOBAL_LEAF_CREDIT"
 R5_SCOPE_STATUS = "ACTIVE_SCOPED_CONDITIONAL_EVALUATOR_REFERENCE_ROBUSTNESS_SEMANTICS__6_OF_6_INDEPENDENT_REPLAY__ZERO_GLOBAL_LEAF_CREDIT"
+
+R4_LEAVES = {"PQ::R4_MEASUREMENT_CONSTRUCT::SEMANTIC"}
+R4_SOURCE_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R4_MEASUREMENT_SEMANTIC_VERIFY_V1"
+R4_SCOPE_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R4_MEASUREMENT_SEMANTIC_SCOPE_V1"
+R4_SOURCE_STATUS = "PASS__PINNED_EXACT_BYTES__UNITTEST_8_OF_8__BOUNDED_R4_MECHANICAL_MEASUREMENT_SEMANTICS__ZERO_GLOBAL_LEAF_CREDIT"
+R4_SCOPE_STATUS = "ACTIVE_SCOPED_CONTENT_ADDRESSED_TYPED_MECHANICAL_MEASUREMENT_SEMANTICS__8_OF_8_INDEPENDENT_REPLAY__ZERO_GLOBAL_LEAF_CREDIT"
 
 
 def _compiler_binding(
@@ -380,6 +387,94 @@ def _validate_r5(entry: dict[str, Any], root: Path) -> dict[str, Any]:
     return _result(entry, errors, semantic)
 
 
+
+def _validate_r4(entry: dict[str, Any], root: Path) -> dict[str, Any]:
+    errors = b._common_checks(entry, r4c.ROOT_ID, R4_LEAVES)
+    source, e = b._read_bound(root, entry.get("source_receipt"), "SOURCE")
+    errors.extend(e)
+    scope, e = b._read_bound(root, entry.get("scope_governance"), "SCOPE")
+    errors.extend(e)
+    compiler_sha, _ = _compiler_binding(entry, root, errors)
+
+    if (
+        source is None
+        or source.get("schema") != R4_SOURCE_SCHEMA
+        or source.get("status") != R4_SOURCE_STATUS
+    ):
+        errors.append("SOURCE_INVALID")
+    elif (
+        (source.get("exact_blobs") or {}).get("runtime") != compiler_sha
+        or (source.get("replay") or {}).get("tests_passed") != 8
+        or (source.get("replay") or {}).get("tests_failed") != 0
+    ):
+        errors.append("SOURCE_BINDING_INVALID")
+
+    semantic = None
+    if (
+        scope is None
+        or scope.get("schema") != R4_SCOPE_SCHEMA
+        or scope.get("status") != R4_SCOPE_STATUS
+    ):
+        errors.append("SCOPE_INVALID")
+    else:
+        parts = scope.get("exact_components") or {}
+        governance, e = b._read_bound(
+            root, parts.get("source_governance"), "SOURCE_GOVERNANCE"
+        )
+        errors.extend(e)
+        source_verify, e = b._read_bound(
+            root, parts.get("source_execution_verification"), "SOURCE_VERIFY"
+        )
+        errors.extend(e)
+        sem_verify = parts.get("semantic_verification")
+        declared_source = (
+            (entry.get("source_receipt") or {}).get("git_blob_sha")
+            if isinstance(entry.get("source_receipt"), dict)
+            else None
+        )
+        if (
+            not isinstance(sem_verify, dict)
+            or sem_verify.get("git_blob_sha") != declared_source
+        ):
+            errors.append("SCOPE_SEMANTIC_VERIFICATION_MISMATCH")
+        if governance is not None and source_verify is not None:
+            blobs = source_verify.get("blobs") or {}
+            binding = {
+                "root_id": r4c.ROOT_ID,
+                "claim_kind": r4c.CLAIM_KIND,
+                "governance_sha256": r4c.digest(governance),
+                "verification_sha256": r4c.digest(source_verify),
+                "measurement_runtime_git_blob_sha": blobs.get("measurement"),
+                "acceptance_runtime_git_blob_sha": blobs.get("measured_acceptance"),
+                "semantic_roles": dict(r4c.SEMANTIC_ROLES),
+                "boundaries": {
+                    "automatic_rubric_construct_alignment": False,
+                    "holistic_visual_quality_measured": False,
+                    "proposal_supplied_values_authoritative": False,
+                    "unsupported_measurement_kinds_allowed": False,
+                    "global_r4_semantic_leaf_closed": False,
+                    "outside_supported_mechanical_kinds_stays_open": True,
+                },
+            }
+            semantic = r4c.certify(governance, source_verify, binding)
+            if semantic.get("pass") is not True:
+                errors.append("SEMANTIC_REPLAY_FAILED")
+            if source is not None and not _claim_scope_equivalent(
+                source.get("claim_scope"), semantic.get("claim_scope")
+            ):
+                errors.append("CLAIM_SCOPE_MISMATCH")
+            scope_claim = {
+                "kind": r4c.CLAIM_KIND,
+                "measurement_kinds": sorted(r4c.SUPPORTED_KINDS),
+                "guarantees": scope.get("guarantees") or [],
+                "limitations": scope.get("limitations") or [],
+            }
+            if not _claim_scope_equivalent(scope_claim, semantic.get("claim_scope")):
+                errors.append("SCOPE_CLAIM_MISMATCH")
+
+    return _result(entry, errors, semantic)
+
+
 def validate_entry(entry: dict[str, Any], *, repo_root: Path = ROOT) -> dict[str, Any]:
     if isinstance(entry, dict):
         kind = entry.get("claim_kind")
@@ -391,6 +486,8 @@ def validate_entry(entry: dict[str, Any], *, repo_root: Path = ROOT) -> dict[str
             return _validate_r3(entry, repo_root)
         if kind == r5c.CLAIM_KIND:
             return _validate_r5(entry, repo_root)
+        if kind == r4c.CLAIM_KIND:
+            return _validate_r4(entry, repo_root)
     return b.validate_entry(entry, repo_root=repo_root)
 
 
