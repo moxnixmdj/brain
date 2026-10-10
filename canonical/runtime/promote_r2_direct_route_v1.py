@@ -79,6 +79,8 @@ def _promote_locked(
         current_manifest=current["manifest"],
         candidate_path=candidate_path,
         receipt_path=receipt_path,
+        require_noninterference=True,
+        current_manifest_git_blob_sha=current["target_git_blob_sha"],
     )
     if compiled.get("frontier_changed") is not True:
         return {
@@ -134,6 +136,7 @@ def _promote_locked(
             "git_blob_sha": sha,
             "schema": admission.MANIFEST_SCHEMA,
         },
+        "future_promotion_noninterference_required": True,
         "incremental_spend_usd": 0,
         "terminal_authority": False,
         "terminal_credit_delta": 0,
