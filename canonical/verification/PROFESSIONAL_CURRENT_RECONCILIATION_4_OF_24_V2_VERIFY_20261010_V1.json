@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_CURRENT_RECONCILIATION_4_OF_24_V2_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__TWO_DISTINCT_REMOTE_ENVIRONMENTS__5_OF_5_EACH__EMBEDDED_PROPERTY_TRUTH_4_OF_24__SEMANTIC_TOTALITY_REUSE_BOUND__STALE_PRECOMPOSITION_NONCLAIMS_REMOVED__ZERO_QUALITY_OR_TERMINAL_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "brain/reconcile-professional-leaf-truth-4of24-20261010-v2",
+    "base_main_commit": "4520b46b4a8a66f66add0b8fb54977dcffd0168f",
+    "exact_blobs": {
+      "registry_verification": "bdde7b52793272623773b07bf774c0a74c6be7af",
+      "semantic_totality_verification": "57574ebc5c9e0077691808241d905fde1d06cfcc",
+      "current_professional": "5ed35b8483ff74b056be37fe06ebd55ee354ad8f",
+      "current_assurance": "86c289c6518edd44a99cf55e77d6124c9943b76c",
+      "current_mission": "dca7dbf4c231e94f1336cae6490d53361f87103e",
+      "current_live_frontier": "6ef67543153f3417b1945dde718b9a39a87d9cab",
+      "regression_test": "66a29af7eef98c2d1ae46e38c441fe4647dc8a53"
+    }
+  },
+  "development_replay": {
+    "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "tests_run": 5,
+    "tests_passed": 5,
+    "tests_failed": 0,
+    "result": "PASS"
+  },
+  "independent_replay": {
+    "carrier": "brain-pq-p1-v2-independent-verify-20261010",
+    "carrier_id": "sprite-5fb5e414-e2f5-4a49-b424-3443341d9d09",
+    "tests_run": 5,
+    "tests_passed": 5,
+    "tests_failed": 0,
+    "result": "PASS"
+  },
+  "reconciled_truth": {
+    "property_truth_verified_leaf_count": 4,
+    "property_truth_open_leaf_count": 20,
+    "verified_execution_leaf_count": 4,
+    "open_execution_leaf_count": 8,
+    "verified_semantic_leaf_count": 0,
+    "open_semantic_leaf_count": 12,
+    "semantic_totality_reduction": "TWELVE_SEMANTIC_LEAVES_REDUCED_TO_ONE_CLAIM_SCOPED_TOTALITY_REUSE_MECHANISM__ZERO_PROPERTY_TRUTH_CREDIT",
+    "stale_assurance_nonclaims_removed": [
+      "NO_PROFESSIONAL_SAME_SUBJECT_COMPOSITION_PASS",
+      "NO_R12_CURRENT_ROOT_SUBJECT_BINDING_YET"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_NEW_PROPERTY_TRUTH_CREATED_BY_CURRENTNESS_RECONCILIATION",
+    "NO_SEMANTIC_LEAF_TOTALITY_PROVED",
+    "NO_SEMANTIC_PROPERTY_TRUTH_CREDIT",
+    "NO_24_OF_24_PROPERTY_TRUTH",
+    "NO_GLOBAL_PROFESSIONAL_QUALITY_CLOSURE",
+    "NO_FULL_CURRENT_MAIN_FULL_SYSTEM_REGRESSION",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
