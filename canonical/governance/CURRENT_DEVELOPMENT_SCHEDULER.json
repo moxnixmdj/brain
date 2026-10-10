@@ -1,11 +1,11 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_DEVELOPMENT_SCHEDULER_POINTER_V1",
   "date": "2026-10-10",
-  "status": "ACTIVE__LIVE_SELECTION_FAILS_CLOSED_UNTIL_CALIBRATED_COMPLETE_FRONTIER",
-  "authoritative_activation": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V7.json",
-  "runtime": "canonical/runtime/capability_first_scheduler_v1.py",
-  "primary_entrypoint": "canonical.runtime.capability_first_live_scheduler_v1.rank_live_work",
-  "objective": "MAXIMIZE_REUSABLE_VERIFIED_CAPABILITY_GENERALIZATION_RELIABILITY_AND_EFFICIENCY_PER_RESOURCE",
+  "status": "ACTIVE__PARALLEL_FRONTIER_PRIMARY__READ_ONLY_EVIDENCE_PARALLELISM_READY__FULL_EXECUTION_FAILS_CLOSED_UNTIL_VECTOR_EVIDENCE_OR_SEPARATE_AUTHORITY",
+  "authoritative_activation": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V8.json",
+  "runtime": "canonical/runtime/capability_parallel_frontier_v1.py",
+  "primary_entrypoint": "canonical.runtime.capability_parallel_frontier_v1.plan_current_parallel_frontier",
+  "objective": "MAXIMIZE_REUSABLE_VERIFIED_CAPABILITY_GENERALIZATION_RELIABILITY_AND_EFFICIENCY_PER_RESOURCE_AND_MINIMIZE_WALL_CLOCK_THROUGH_SAFE_PARALLELISM",
   "checkpoint_policy": "OPUS_5_5_IS_SECONDARY_FRONTIER_AUDIT__NOT_PRIMARY_DEVELOPMENT_GATE",
   "terminal_autopilot_policy": "NEW_CHECKPOINT_DISPATCH_REQUIRES_EXPLICIT_CAPABILITY_FIRST_ADMISSION",
   "r2_mechanism_policy": {
@@ -20,25 +20,43 @@
   },
   "reuse_first_policy": {
     "path": "canonical/governance/REUSE_FIRST_RESIDUAL_EXECUTION_POLICY_20261010_V1.json",
-    "status": "ACTIVE_LOAD_BEARING_MECHANICALLY_ENFORCED_THROUGH_CAPABILITY_FIRST_SCHEDULER_V7",
+    "status": "ACTIVE_LOAD_BEARING_MECHANICALLY_ENFORCED_THROUGH_CAPABILITY_FIRST_SCHEDULER_V8",
     "scheduler_rule": "EXPLICIT_NEW_PRIMITIVE_CLAIMS_REQUIRE_ALL_SIX_REUSE_EXHAUSTION_AND_FALSIFICATION_OBLIGATIONS__OTHERWISE_DEMOTED"
   },
   "live_runtime": "canonical/runtime/capability_first_live_scheduler_v1.py",
   "planning_entrypoint": "canonical.runtime.capability_first_scheduler_v1.rank_work",
   "current_live_work_frontier": {
     "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
-    "git_blob_sha": "00dac12b83774e4e0f96b74e5bc52cd1ffb97476",
-    "status": "CURRENT_CANDIDATE_INVENTORY_BOUND__BASE_C6826060__SCORE_CALIBRATION_OPEN__NO_LIVE_RANK_ONE_AUTHORITY"
+    "git_blob_sha": "371630ed9e98aa335ef8436acfb0acde68ae6103",
+    "status": "CURRENT_CANDIDATE_INVENTORY_BOUND__BASE_AAABC2BC__PARALLEL_FRONTIER_METADATA_AND_READ_ONLY_EVIDENCE_BOUND__VECTOR_EVIDENCE_PARTIAL__NO_FULL_EXECUTION_SELECTION_AUTHORITY__ZERO_CREDIT"
   },
   "live_score_contract": {
     "path": "canonical/governance/LIVE_WORK_SCORE_CALIBRATION_CONTRACT_20261010_V1.json",
     "git_blob_sha": "1b8a9cbb14dc70de35c0acd12573593488978670",
     "status": "ACTIVE_FAIL_CLOSED_CONTRACT__NO_CALIBRATED_COMPLETE_FRONTIER_BOUND_YET"
   },
-  "live_selection_rule": "NO_LIVE_RANKING_FROM_RAW_HETEROGENEOUS_UNPROVEN_OR_STALE_SCORE_INPUTS__COMPLETE_CURRENT_FRONTIER_PLUS_COMMON_DIMENSIONLESS_CALIBRATION_PLUS_PER_METRIC_EVIDENCE_PLUS_INDEPENDENT_VERIFICATION_PLUS_SOURCE_REHASH_CURRENTNESS_REQUIRED",
+  "live_selection_rule": "CURRENTNESS_AND_DEPENDENCY_FIRST__PARETO_DOMINANCE_WITH_COMPLETE_PER_DIMENSION_EVIDENCE__SAFE_PARALLEL_NONCONFLICTING_WORK__INCOMPLETE_VECTORS_READ_ONLY_EVIDENCE_ONLY__NO_INVENTED_SCALAR_WEIGHTS",
   "independent_live_scheduler_verification": {
     "path": "canonical/verification/CAPABILITY_FIRST_LIVE_SCHEDULER_V7_INDEPENDENT_VERIFY_20261010_V1.json",
     "git_blob_sha": "9b6a17d38a9285db63a6a760648a0567aa8a47ef",
     "status": "PYCOMPILE_PASS__11_OF_11_FOCUSED_AND_COMPATIBILITY_TESTS_PASS__CURRENTNESS_COMPLETENESS_AND_REUSE_FIRST_FAIL_CLOSED"
+  },
+  "scalar_fallback_runtime": "canonical/runtime/capability_first_live_scheduler_v1.py",
+  "scalar_fallback_entrypoint": "canonical.runtime.capability_first_live_scheduler_v1.rank_live_work",
+  "parallel_frontier_policy": {
+    "runtime": "canonical/runtime/capability_parallel_frontier_v1.py",
+    "primary_entrypoint": "plan_current_parallel_frontier",
+    "pareto_first": true,
+    "explicit_dependencies": true,
+    "explicit_mutation_and_authority_conflicts": true,
+    "read_only_incomplete_vector_parallelism": true,
+    "full_execution_requires_complete_vector_or_separate_explicit_authority": true,
+    "scalarization_requires_proved_tradeoff_contract": true,
+    "dynamic_current_pointer_follow": "PROFESSIONAL_SEQUENTIAL_ROOT_FRONTIER_ONLY__OTHER_SOURCE_DRIFT_FAILS_CLOSED"
+  },
+  "independent_parallel_frontier_verification": {
+    "path": "canonical/verification/CAPABILITY_PARALLEL_FRONTIER_V8_INDEPENDENT_VERIFY_20261010_V3.json",
+    "git_blob_sha": "73124ce1b33ebc608756163f901cf44e758a4b16",
+    "status": "PASS__PYCOMPILE__10_OF_10_ADVERSARIAL_TESTS__BOUNDED_DYNAMIC_PROFESSIONAL_POINTER_FOLLOW_VERIFIED"
   }
 }
