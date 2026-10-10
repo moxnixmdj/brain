@@ -1,0 +1,10 @@
+{
+  "decision_payload_sha256": "sha256:ef7610c8ef640fbc840f75c60c49da8baa29fe6a453e4f60d0f4c85538d49916",
+  "goal_sha256": "4b2d8b031a4752280e7244a42ec6925e3ab04d5a99cf1e5f4efbfe965e5128e9",
+  "independent_verified": true,
+  "independent_verifier_id": "sprite-v9-real-docx-independent-20261010-v1",
+  "pass": true,
+  "schema": "PROJECT_BRAIN_GOAL_TO_DECISION_CONTEXT_BINDING_INDEPENDENT_VERIFICATION_V1",
+  "semantic_preservation_verified": true,
+  "subject_git_blob_sha": "3b001bf406f1744710211263c42d0311325a1f8a"
+}
