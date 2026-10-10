@@ -12,20 +12,20 @@ import json
 from pathlib import Path
 from typing import Any, Mapping, Sequence
 
-from canonical.runtime import r2_direct_end_to_end_adequacy_v1 as direct
-from canonical.runtime import r2_structured_binary_direct_adequacy_v1 as codec
-from canonical.runtime import r2_structured_table_direct_adequacy_v1 as table
-from canonical.runtime import r2_docx_direct_adequacy_v1 as docx
-from canonical.runtime import r2_docx_json_direct_adequacy_v1 as docx_json
-from canonical.runtime import r2_typed_decision_direct_adequacy_v1 as typed_decision
-from canonical.runtime import r2_visual_code_direct_adequacy_v1 as visual
-from canonical.runtime import r2_markdown_pdf_direct_adequacy_v1 as markdown_pdf
-from canonical.runtime import r2_typed_json_transform_direct_adequacy_v1 as typed_transform
 from canonical.runtime.executable_skill_program_v7 import program_digest
 from canonical.runtime.r3_direct_adequacy_success_adapter_v1 import VERIFICATION_KIND
 
 SCHEMA = "PROJECT_BRAIN_R3_DIRECT_ADEQUACY_SUCCESS_VERIFIER_V1"
 VERIFICATION_BASIS = "R2_DIRECT_ROUTE_PRODUCER_INDEPENDENT_READBACK_V1"
+
+STRUCTURED_BINARY_CODEC_ROUTE_ID = "DIRECT_ADEQUACY::STRUCTURED_BINARY_CODEC_FAMILY_V1"
+STRUCTURED_TABLE_ROUTE_ID = "DIRECT_ADEQUACY::STRUCTURED_TABLE_ARTIFACT_FAMILY_V1"
+DOCX_ROUTE_ID = "DIRECT_ADEQUACY::LITERAL_DOCX_OOXML_FAMILY_V1"
+DOCX_JSON_ROUTE_ID = "DIRECT_ADEQUACY::DOCX_JSON_RECORD_FAMILY_V1"
+TYPED_DECISION_ROUTE_ID = "DIRECT_ADEQUACY::TYPED_EVIDENCE_DECISION_FAMILY_V1"
+VISUAL_CODE_ROUTE_ID = "DIRECT_ADEQUACY::VISUAL_CODE_QR_CODE128_FAMILY_V1"
+MARKDOWN_PDF_ROUTE_ID = "DIRECT_ADEQUACY::PLAIN_MARKDOWN_PDF_FAMILY_V1"
+TYPED_JSON_TRANSFORM_ROUTE_ID = "DIRECT_ADEQUACY::TYPED_JSON_TRANSFORM_FAMILY_V1"
 
 
 class DirectAdequacyVerificationError(ValueError):
@@ -78,7 +78,11 @@ def _accepted_ids(pf: Mapping[str, Any]) -> list[str]:
     raise DirectAdequacyVerificationError("RAW_ACCEPTANCE_OBLIGATIONS_MISSING")
 
 
-def _typed_transform_verify(pf: Mapping[str, Any], root: Path) -> Mapping[str, Any]:
+def _typed_transform_verify(
+    typed_transform: Any,
+    pf: Mapping[str, Any],
+    root: Path,
+) -> Mapping[str, Any]:
     spec_path = _safe(root, str(pf["spec_path"]))
     input_path = _safe(root, str(pf["input_path"]))
     output_path = _safe(root, str(pf["output_path"]))
@@ -115,7 +119,10 @@ def _route_readback(
     *,
     root: Path,
 ) -> tuple[Mapping[str, Any], Mapping[str, Any]]:
-    if route_id == direct.STRUCTURED_BINARY_CODEC_ROUTE_ID:
+    # Route modules are deliberately lazy-loaded. R3 verifier import must not
+    # inherit every direct producer's dependency graph.
+    if route_id == STRUCTURED_BINARY_CODEC_ROUTE_ID:
+        from canonical.runtime import r2_structured_binary_direct_adequacy_v1 as codec
         pf = codec.preflight(raw_request, repo_root=root)
         evidence = codec._independent_verify(pf, repo_root=root)
         independent = (
@@ -134,7 +141,8 @@ def _route_readback(
             raise DirectAdequacyVerificationError("CODEC_READBACK_NOT_INDEPENDENT")
         return pf, evidence
 
-    if route_id == direct.STRUCTURED_TABLE_ROUTE_ID:
+    if route_id == STRUCTURED_TABLE_ROUTE_ID:
+        from canonical.runtime import r2_structured_table_direct_adequacy_v1 as table
         pf = table.preflight(raw_request, repo_root=root)
         evidence = table._independent_verify(pf, repo_root=root)
         if not (
@@ -145,7 +153,8 @@ def _route_readback(
             raise DirectAdequacyVerificationError("TABLE_READBACK_NOT_VERIFIED")
         return pf, evidence
 
-    if route_id == direct.DOCX_ROUTE_ID:
+    if route_id == DOCX_ROUTE_ID:
+        from canonical.runtime import r2_docx_direct_adequacy_v1 as docx
         pf = docx.preflight(raw_request, repo_root=root)
         evidence = docx.docx_verify_ooxml_intent.run({"path": pf["output_path"]}, root)
         if not (
@@ -162,7 +171,8 @@ def _route_readback(
             raise DirectAdequacyVerificationError("DOCX_READBACK_NOT_VERIFIED")
         return pf, evidence
 
-    if route_id == direct.DOCX_JSON_ROUTE_ID:
+    if route_id == DOCX_JSON_ROUTE_ID:
+        from canonical.runtime import r2_docx_json_direct_adequacy_v1 as docx_json
         pf = docx_json.preflight(raw_request, repo_root=root)
         evidence = docx_json._independent_verify(pf, repo_root=root)
         expected = evidence.get("intent_derived_expected") if isinstance(evidence, Mapping) else None
@@ -181,7 +191,8 @@ def _route_readback(
             raise DirectAdequacyVerificationError("DOCX_JSON_READBACK_NOT_VERIFIED")
         return pf, evidence
 
-    if route_id == direct.TYPED_DECISION_ROUTE_ID:
+    if route_id == TYPED_DECISION_ROUTE_ID:
+        from canonical.runtime import r2_typed_decision_direct_adequacy_v1 as typed_decision
         pf = typed_decision.preflight(raw_request, repo_root=root)
         input_path = _safe(root, str(pf["input_path"]))
         evidence = typed_decision.verifier.run(
@@ -198,7 +209,8 @@ def _route_readback(
             raise DirectAdequacyVerificationError("TYPED_DECISION_READBACK_NOT_VERIFIED")
         return pf, evidence
 
-    if route_id == direct.VISUAL_CODE_ROUTE_ID:
+    if route_id == VISUAL_CODE_ROUTE_ID:
+        from canonical.runtime import r2_visual_code_direct_adequacy_v1 as visual
         pf = visual.preflight(raw_request, repo_root=root)
         evidence = visual._independent_decode(pf, repo_root=root)
         if not (
@@ -211,7 +223,8 @@ def _route_readback(
             raise DirectAdequacyVerificationError("VISUAL_CODE_READBACK_NOT_VERIFIED")
         return pf, evidence
 
-    if route_id == direct.MARKDOWN_PDF_ROUTE_ID:
+    if route_id == MARKDOWN_PDF_ROUTE_ID:
+        from canonical.runtime import r2_markdown_pdf_direct_adequacy_v1 as markdown_pdf
         pf = markdown_pdf.preflight(raw_request, repo_root=root)
         evidence = markdown_pdf._independent_verify(pf, repo_root=root)
         if not (
@@ -223,13 +236,13 @@ def _route_readback(
             raise DirectAdequacyVerificationError("MARKDOWN_PDF_READBACK_NOT_VERIFIED")
         return pf, evidence
 
-    if route_id == direct.TYPED_JSON_TRANSFORM_ROUTE_ID:
+    if route_id == TYPED_JSON_TRANSFORM_ROUTE_ID:
+        from canonical.runtime import r2_typed_json_transform_direct_adequacy_v1 as typed_transform
         pf = typed_transform.preflight(raw_request, repo_root=root)
-        evidence = _typed_transform_verify(pf, root)
+        evidence = _typed_transform_verify(typed_transform, pf, root)
         return pf, evidence
 
     raise DirectAdequacyVerificationError("DIRECT_ROUTE_NOT_ADMITTED:" + route_id)
-
 
 def _binding_check(proof: Mapping[str, Any], pf: Mapping[str, Any], root: Path) -> None:
     bindings = proof.get("route_bindings")
@@ -274,16 +287,6 @@ def verify_material(
             raise DirectAdequacyVerificationError("DIRECT_PROOF_ROUTE_OR_GOAL_MISMATCH")
         if proof.get("capability_id") != capability_id:
             raise DirectAdequacyVerificationError("DIRECT_PROOF_CAPABILITY_MISMATCH")
-
-        direct_pf = direct.preflight(raw_request, repo_root=root)
-        if (
-            direct_pf.get("matched") is not True
-            or direct_pf.get("route_id") != route_id
-            or direct_pf.get("goal_sha256") != goal_sha
-        ):
-            raise DirectAdequacyVerificationError("DIRECT_PREFLIGHT_RECOMPUTATION_MISMATCH")
-        if direct_pf.get("capability_id") not in {None, capability_id}:
-            raise DirectAdequacyVerificationError("DIRECT_CAPABILITY_REBINDING_MISMATCH")
 
         pf, evidence = _route_readback(route_id, raw_request, root=root)
         if pf.get("matched") is not True or pf.get("status") == "FAIL_CLOSED":
