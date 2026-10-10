@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_NEXT23_FALSIFICATION_V1",
+  "status": "FRESH_FALSIFICATION__LATENT_MULTI_GENERATION_QUARTIC_NUMERIC_FALLBACK_HOLE__REPAIRED_IN_V20",
+  "recorded_at": "2026-10-10",
+  "fresh_corpus": {
+    "id": "QUAL_SUCCESSOR_NEXT23_20261010_V1",
+    "seed": 4795832,
+    "per_operation_budget": 620,
+    "cases": 7130,
+    "corpus_sha256": "b178f48d1bc0a8dc135d007f7e64a27608d68a9f9cadf5304fc1dc7665f37755",
+    "status": "SPENT"
+  },
+  "results": {
+    "stock_donor_roots": "620/620",
+    "accepted_V19_failing_case_replay": "FAIL",
+    "attempted_V20_roots": "619/620",
+    "failing_roots_block_case_index": 115,
+    "global_case_index": 1975,
+    "operation": "roots",
+    "parameters": [
+      3,
+      0,
+      1,
+      0,
+      5
+    ],
+    "error": "NotImplementedError"
+  },
+  "causal_attribution": {
+    "interpretation": "The fresh case falsified the accepted V19 frontier as well as the attempted V20 cut. The path requires a numeric trig fallback during ordering/simplification of a valid quartic-root result.",
+    "required_restorations": [
+      "sympy.core.function.Function._eval_evalf",
+      "sympy.core.evalf.evalf_trig",
+      "mpmath.libmp.libelefun.mpf_sin",
+      "mpmath.libmp.libelefun.mpf_cos"
+    ],
+    "provenance": [
+      "Function._eval_evalf and evalf_trig had been removed by the V19 core zero-hit prune.",
+      "mpf_sin and mpf_cos had been removed by an earlier spent-profile body prune and remained latent until NEXT23."
+    ]
+  },
+  "repaired_spent_corpus_result": "7130/7130",
+  "disposition": "V19 remains historically measured but is superseded as a sound current bounded frontier. NEXT23 is spent. V20 restores only the four exposed donor-derived functions and requires a new untouched corpus.",
+  "promotion_credit": 0
+}
