@@ -14,6 +14,8 @@ from hashlib import sha256
 import re
 from typing import Any, Mapping, Sequence
 
+from canonical.runtime.source_assertion_ownership_guard_v1 import check_direct_assertion
+
 SCHEMA = "BRAIN_SOURCE_ALIGNED_REGCAP_CONTEXT_PROOF_V1"
 
 CCOB_KIND = "CERTIFIED_REGCAP_CCOB_STRUCTURE_CONTEXT"
@@ -195,7 +197,7 @@ def verify_proof(
         "semantic_truth_authority": True if accepted else False,
         "terminal_authority": False,
         "soundness_boundary": (
-            "EXACT_BOUNDED_REGCAP_CONTEXT_FACTS_ONLY__NO_CCOB_CCYB_TLAC_IDENTITY__"
+            "ASSERTION_COMPLETE_BOUNDED_REGCAP_CONTEXT_FACTS_ONLY__NO_CCOB_CCYB_TLAC_IDENTITY__"
             "NO_REVERSE_NECESSARY_PROPERTY_CLASSIFICATION__NO_GENERAL_FINANCE_WSD"
         ),
     }
