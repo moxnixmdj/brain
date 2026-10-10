@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_COVERAGE_ROOT_SEMANTIC_VERIFICATION_V1",
+  "status": "PASS__INDEPENDENT_SEMANTIC_VERIFICATION__CC_R3_R3_PROMOTION_SAFETY",
+  "pass": true,
+  "verifier_protocol": "COVERAGE_ROOT_SEMANTIC_VERIFIER_V1",
+  "independent": true,
+  "semantic_claim_verified": true,
+  "root_id": "CC_R3_TERMINAL_CLOSURE_V1",
+  "claim_id": "e1c519109c4b2c46a9225686fc2c5c5490564d1cc62d5c6ff3c6c436bfca4314",
+  "proof_mode": "KERNEL_CHECKED",
+  "certificate": {
+    "path": "canonical/governance/COVERAGE_CC_R3_R3_PROMOTION_SAFETY_CERTIFICATE_20261010_V1.json",
+    "git_blob_sha": "f50d73da0cac3a7d292a327507a545003bdf61e6"
+  },
+  "semantic_verifier": {
+    "path": "canonical/runtime/coverage_cc_r3_r3_promotion_safety_verify_v1.py",
+    "git_blob_sha": "6c3d7b39dd486d6fd26e11af19069d45188f7e59"
+  },
+  "verifier_result_sha256": "196304291c99a0b42678bd874266be7ce9c982c55d292da16ab92bb17a884db7",
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-r3-native-evidence-verify-20261010",
+    "sprite_id": "sprite-61fff7c6-fbff-4b85-a8e1-b98e28fd7e31",
+    "workspace": "/home/sprite/cc-r3-promotion-safety-v1",
+    "package_install_performed": false,
+    "incremental_spend_usd": 0
+  },
+  "result": {
+    "bounded_surface_file_count": 10,
+    "direct_authority_elevation_count": 0,
+    "noncentral_durable_learning_writer_count": 0,
+    "episode_persistence_reauthenticated": true,
+    "skill_persistence_reauthenticated": true,
+    "pareto_admission_reauthenticated": true,
+    "candidate_acquisition_authority_boundary_verified": true,
+    "future_bytes_covered": false,
+    "global_mission_completion_derivable": false
+  },
+  "errors": [],
+  "terminal_credit_delta": 0
+}
