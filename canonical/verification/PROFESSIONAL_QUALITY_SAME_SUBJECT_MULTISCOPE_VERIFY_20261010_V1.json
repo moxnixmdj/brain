@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_SAME_SUBJECT_COMPOSITION_GATE_MULTISCOPE_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "INDEPENDENT_SPRITE_PASS__9_OF_9__MULTIPLE_SCOPED_CAPABILITIES_PER_ROOT_SUPPORTED__EXACT_12_ROOT_COVER_PRESERVED__ZERO_QUALITY_CREDIT",
+  "subjects": {
+    "runtime": {
+      "path": "canonical/runtime/professional_quality_same_subject_composition_gate_v1.py",
+      "git_blob_sha": "229e37e96e2e61fd207a6bef7e69ad8d3e72e9c6"
+    },
+    "tests": {
+      "path": "canonical/tests/test_professional_quality_same_subject_composition_gate_v1.py",
+      "git_blob_sha": "38ecaab5f5c8010e0eb2ce138c39da171020960e"
+    },
+    "overlay": {
+      "path": "canonical/runtime/professional_quality_scoped_evidence_overlay_v1.py",
+      "git_blob_sha": "d3bca89c426b8424ec120ace482ba85f1afd26e3"
+    },
+    "registry": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_REGISTRY_20261010_V1.json",
+      "git_blob_sha": "e8b013d4b10915104ec4f0744b03e5d36c7d87dd"
+    },
+    "normal_form": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_CLOSURE_NORMAL_FORM_20261009_V1.json",
+      "git_blob_sha": "ebcfe5a48efce9df7fbc69a3817ac2f9adb1ff93"
+    }
+  },
+  "replay": {
+    "carrier": "SPRITES",
+    "sprite_name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "working_directory": "/home/sprite/r4-semantic-current-integration-verify-v1",
+    "tests_passed": 9,
+    "tests_total": 9,
+    "tests_failed": 0
+  },
+  "proved": [
+    "SCOPED_EVIDENCE_CARDINALITY_MAY_EXCEED_ROOT_COUNT_WHEN_MULTIPLE_BOUNDED_SCOPES_SHARE_A_ROOT",
+    "EXACT_ADMITTED_ROOT_SET_MUST_STILL_EQUAL_ALL_TWELVE_REQUIRED_ROOTS",
+    "MISSING_ROOTS_STILL_FAIL_CLOSED",
+    "DUPLICATE_ROOT_SUBJECT_BINDING_ROWS_STILL_FAIL_CLOSED",
+    "STALE_BINDINGS_STILL_FAIL_CLOSED",
+    "SPLIT_SUBJECT_IDENTITIES_STILL_BLOCK_COMPOSITION",
+    "ROOT_BINDING_SELF_AUTHORIZATION_AND_GLOBAL_SUBJECT_AUTHORITY_REMAIN_FORBIDDEN"
+  ],
+  "composition_admissibility_only": true,
+  "professional_quality_closed": false,
+  "quality_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
