@@ -15,7 +15,7 @@ def evaluate_domain_mapping(payload: Mapping[str, Any]) -> dict[str, Any]:
 
 
 def evaluate_regcap_loss_cushion(payload: Mapping[str, Any]) -> dict[str, Any]:
-    from canonical.runtime.regcap_loss_cushion_truth_certificate_v2 import evaluate
+    from canonical.runtime.regcap_loss_cushion_truth_certificate_v3 import evaluate
     return evaluate(payload)
 
 
