@@ -37,7 +37,7 @@
     },
     "r12_c5_claim_bound": {
       "path": "canonical/verification/PROFESSIONAL_R12_SEMANTIC_C5_CLAIM_BOUND_VERIFY_20261010_V1.json",
-      "git_blob_sha": "d4fc8b359a6ee5f70d584ff068aa9bb70071564f"
+      "git_blob_sha": "c3f390a230ba6e9dc6bd3f14c3e878fae9315c77"
     }
   },
   "clause_reuse": [
