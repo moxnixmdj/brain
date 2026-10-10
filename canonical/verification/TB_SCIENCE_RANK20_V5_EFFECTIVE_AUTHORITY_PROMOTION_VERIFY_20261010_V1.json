@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK20_V5_EFFECTIVE_AUTHORITY_PROMOTION_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__PUBLIC_V5_EFFECTIVE_AUTHORITY_PROMOTION__PREACTIVATION__ZERO_EXPOSURE",
+  "authorization": {
+    "path": "canonical/governance/TB_SCIENCE_RANK20_V5_EFFECTIVE_AUTHORITY_PROMOTION_20261010_V1.json",
+    "git_blob_sha": "eb8897191156aced387a220a247e3ca4276be73c"
+  },
+  "canonical_authority": {
+    "path": "canonical/governance/TB_SCIENCE_RANK20_ONE_SLOT_EXECUTION_AUTHORITY_20261010_V5.json",
+    "git_blob_sha": "d50b123ed0df77fbd772e00331f278835d4bf35b"
+  },
+  "canonical_ledger_predecessor": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V48.json",
+    "git_blob_sha": "2d8c04e85b4d611b2074a6fdcab71c031febe284"
+  },
+  "public": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2605,
+    "merge_commit_sha": "ee3436705ea801a45bfc08d6b5d77f0b199e6c9c",
+    "execution_surface_git_blob_sha": "ddec26f44e4b97eb2b8f76029b889164648fd109",
+    "public_authority_git_blob_sha": "ed796d6bb51e14fcacdea9222124897321856ef8",
+    "public_ledger_git_blob_sha": "317b6997344d8fa588a20a73b3c7978bae2f2616",
+    "public_epoch_git_blob_sha": "e7446cbc8ef2b655a51fc59134dff12d6161052e",
+    "public_execution_claim_git_blob_sha": "5f3deca2d53910dba1622ec1e23d3b45e47af2b1",
+    "promotion_verifier_git_blob_sha": "f07db19277f883787d078db89247e6e24256b566",
+    "workflow_git_blob_sha": "e4cb372e501790fd9ed5aa72193d18109a599102",
+    "behavior_git_blob_sha": "8c3d285161f356c9256375c9168e88cdaadd58e5"
+  },
+  "identity": {
+    "slot_id": "terminal-bench-science/hysteretic-aquifer-control::trial-0",
+    "task_digest": "sha256:681df0c3b2ada03a933ac4d2e11f07983676f87a9f26b61e416987904b880289",
+    "logical_attempt_id": "c7a02ecc6b11f4338120f05cd922370d361ce79e104549f95b656df3b51cb2bb",
+    "execution_claim_binding_digest": "sha256:aa0d91d18bb597319414b7385a92248992c093e14bf9c8f5677b72c05cb09beb"
+  },
+  "verified_postconditions": {
+    "execution_authority": true,
+    "task_read_authority": true,
+    "activation_present": false,
+    "task_read_history": false,
+    "task_started": false,
+    "durable_start_cas_acquired": false,
+    "benchmark_trials_consumed": 0,
+    "logical_attempt_unchanged": true,
+    "workflow_unchanged": true,
+    "behavior_unchanged": true,
+    "exact_content_addressed_bindings": true,
+    "independent_promotion_replay_passed": true
+  },
+  "accounting": {
+    "consumed_slots_total": 18,
+    "benchmark_trials_consumed_delta": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0,
+    "incremental_spend_usd": 0
+  },
+  "activation_authority": false,
+  "pass": true,
+  "next": "ADVANCE_LEDGER_TO_EFFECTIVE_V5_PREACTIVATION__THEN_MINT_FRESH_ACTIVATION_AUTHORITY"
+}
