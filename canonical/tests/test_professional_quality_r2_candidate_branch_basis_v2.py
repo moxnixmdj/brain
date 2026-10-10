@@ -35,7 +35,10 @@ class Tests(unittest.TestCase):
    self.assertEqual(a["incumbent_branch_count"],1)
    self.assertEqual(sum(x["incumbent_preserved"] for x in a["candidates"]),1)
    self.assertFalse(a["global_candidate_search_complete"])
-   self.assertFalse(a["candidate_artifact_realization_complete"])\n   self.assertEqual(a["subject_id"],g.SUBJECT_ID)\n   self.assertTrue(a["actual_step_result_requires_independent_v7_step_binding"])\n   self.assertEqual(a["v7_profile_step_id"],"GENERATE_DIVERSE_CANDIDATE_BRANCHES_WITH_INCUMBENT_PRESERVATION")
+   self.assertFalse(a["candidate_artifact_realization_complete"])
+   self.assertEqual(a["subject_id"],g.SUBJECT_ID)
+   self.assertTrue(a["actual_step_result_requires_independent_v7_step_binding"])
+   self.assertEqual(a["v7_profile_step_id"],"GENERATE_DIVERSE_CANDIDATE_BRANCHES_WITH_INCUMBENT_PRESERVATION")
   finally: td.cleanup()
  def test_deterministic_ids(self):
   td,a=self.call()
