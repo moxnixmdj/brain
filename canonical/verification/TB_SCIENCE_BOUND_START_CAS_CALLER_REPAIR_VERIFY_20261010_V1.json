@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_BOUND_START_CAS_CALLER_REPAIR_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__GENERAL_CONTENT_ADDRESSED_BOUND_RUNTIME_CALLER_REPAIR__PUBLIC_BASE_MERGED__DEDICATED_CI_GREEN__RANK20_V3_RETRY_FORBIDDEN__ZERO_TERMINAL_CREDIT",
+  "root_cause": {
+    "diagnosis_path": "canonical/governance/TB_SCIENCE_RANK20_V3_PRESTART_ABORT_DIAGNOSIS_20261010_V1.json",
+    "diagnosis_git_blob_sha": "a8c7c9b9548f0515455df1badddebd9fba685d45",
+    "failure_root_class": "POST_READY_START_CAS_CALLER_VERSION_SKEW_V7_VS_BOUND_V8"
+  },
+  "public_delivery": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2633,
+    "repair_branch": "repair/rank20-start-cas-caller-v8-20261010-v1",
+    "verified_head_sha": "7868075e686b716aab425881eb74ec5b3285de3a",
+    "merged_base_branch": "terminal-execution-v1",
+    "merge_commit_sha": "a434b8f8d87b0916b1a9924b35ed3a40c32314d7",
+    "activation_present_after_merge": false
+  },
+  "exact_blobs": {
+    "content_addressed_runtime_binding_v1": "f5a77f98dcb80fc4dcbae3e04ac2b0853609a2a7",
+    "successor_status_journal_runner_v8": "954f3ad4188e0187071af2416cc3c260c1762d43",
+    "adversarial_regression": "fb06891295eb904fcea9b5d6ab642cdbcfedc9bf",
+    "verification_workflow": "ab46d73ab0a2fab7a6cb29452afd41e559011464"
+  },
+  "dedicated_ci": {
+    "workflow_name": "Verify Rank20 bound START-CAS caller v1",
+    "workflow_run_id": 38064942060,
+    "workflow_job_id": 114250571305,
+    "conclusion": "success",
+    "compile_repair": "success",
+    "adversarial_bound_caller_regression": "success"
+  },
+  "verified_semantics": [
+    "STATUS_JOURNAL_RUNNER_NO_LONGER_HARD_CODES_RANK20_START_CAS_V7",
+    "START_CAS_RUNTIME_RESOLVES_FROM_CONTENT_ADDRESSED_BEHAVIOR_RUNTIME_BINDING",
+    "RUNTIME_GIT_BLOB_IS_VERIFIED_BEFORE_INVOCATION",
+    "FORGED_RUNTIME_BLOB_FAILS_CLOSED",
+    "REPOSITORY_PATH_ESCAPE_FAILS_CLOSED",
+    "RETIRED_RANK20_V3_SURFACE_NOT_REARMED",
+    "NO_ACTIVATION_FILE_ON_REPAIRED_PUBLIC_BASE"
+  ],
+  "authority": {
+    "general_repair_verified": true,
+    "rank20_v3_retry_authority": false,
+    "rank20_v3_replacement_authority": false,
+    "execution_authority": false,
+    "promotion_authority": false,
+    "terminal_authority": false
+  },
+  "accounting": {
+    "benchmark_trials_consumed_delta": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0,
+    "incremental_spend_usd": 0
+  },
+  "next": "PARK_RETIRED_RANK20_V3__RECOMPUTE_CAPABILITY_FIRST_FRONTIER__USE_REPAIRED_BOUND_RUNTIME_DISPATCH_FOR_FUTURE_AUTHORIZED_EXECUTION_SUBJECTS_ONLY"
+}
