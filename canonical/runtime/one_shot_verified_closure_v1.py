@@ -268,6 +268,10 @@ def frontier_snapshot(
                     "required_capability_class": payload.get(
                         "required_capability_class"
                     ),
+                    "blocked_success_work_id": payload.get(
+                        "blocked_success_work_id"
+                    ),
+                    "observation_id": payload.get("observation_id"),
                 },
             })
     files = [_safe_file_digest(root, rel) for rel in LOAD_BEARING_PATHS]
@@ -374,6 +378,24 @@ def classify_residual(
             evidence.add(blocker)
             continue
         if blocker == "FRONTIER_ACQUISITION_ALREADY_ATTEMPTED_FOR_CURRENT_PROVIDER_AND_FRONTIER":
+            blocked_id = str(payload.get("blocked_success_work_id") or "")
+            blocked_work = pending_by_id.get(blocked_id, {})
+            blocked_payload = (
+                blocked_work.get("payload")
+                if isinstance(blocked_work, Mapping)
+                and isinstance(blocked_work.get("payload"), Mapping)
+                else {}
+            )
+            proof_unavailable = (
+                blocked_payload.get("proof_available") is False
+                or "RETAINED_SUCCESS_PROOF_UNAVAILABLE" in reason
+                or "SUCCESS_OBSERVATION_PROOF_UNAVAILABLE" in reason
+            )
+            if proof_unavailable:
+                evidence.add(
+                    "NEW_PROOF_BEARING_EXPERIENCE_REQUIRED__SUCCESS_PROOF_UNAVAILABLE"
+                )
+                continue
             internal.add("ROOT1_ACQUISITION_EXHAUSTED_ON_CURRENT_PROVIDER_FRONTIER")
             continue
         if blocker != "WORK_ALREADY_ATTEMPTED_FOR_CURRENT_EVIDENCE":
