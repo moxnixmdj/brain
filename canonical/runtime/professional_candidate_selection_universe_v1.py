@@ -176,14 +176,62 @@ def freeze(payload:Mapping[str,Any])->dict[str,Any]:
     )
 
 
-def select(frozen:Mapping[str,Any],candidate_id:str)->dict[str,Any]:
+def validate_frozen(frozen:Mapping[str,Any])->dict[str,Any]:
     if not isinstance(frozen,Mapping) or frozen.get("pass") is not True:
         return _fail("FROZEN_UNIVERSE_PASS_REQUIRED")
     manifest=frozen.get("manifest")
     if not isinstance(manifest,Mapping) or manifest.get("schema")!=MANIFEST_SCHEMA:
         return _fail("FROZEN_MANIFEST_INVALID")
-    if frozen.get("candidate_universe_sha256")!=_digest(dict(manifest)):
+    candidates=manifest.get("candidates")
+    if not isinstance(candidates,list):
+        return _fail("FROZEN_CANDIDATES_INVALID")
+    payload={
+        "behavior_id":manifest.get("behavior_id"),
+        "subject_id":manifest.get("subject_id"),
+        "subject_sha256":manifest.get("subject_sha256"),
+        "run_context_sha256":manifest.get("run_context_sha256"),
+        "incumbent_candidate_id":manifest.get("incumbent_candidate_id"),
+        "candidates":[
+            {
+                "candidate_id":row.get("candidate_id"),
+                "content_sha256":row.get("content_sha256"),
+                "source_kind":row.get("source_kind"),
+                "artifact_type":row.get("artifact_type"),
+                "generator_trace_sha256":row.get("generator_trace_sha256"),
+            }
+            for row in candidates
+            if isinstance(row,Mapping)
+        ],
+    }
+    rebuilt=freeze(payload)
+    if rebuilt.get("pass") is not True:
+        return _fail(
+            "FROZEN_MANIFEST_REVALIDATION_FAILED",
+            revalidation_reason=rebuilt.get("reason"),
+        )
+    if rebuilt.get("manifest")!=dict(manifest):
+        return _fail("FROZEN_MANIFEST_NORMAL_FORM_MISMATCH")
+    if rebuilt.get("candidate_universe_sha256")!=frozen.get("candidate_universe_sha256"):
         return _fail("FROZEN_MANIFEST_DIGEST_MISMATCH")
+    return _base(
+        "PASS__FROZEN_CANDIDATE_SELECTION_UNIVERSE_REVALIDATED",
+        passed=True,
+        manifest=dict(manifest),
+        candidate_universe_sha256=rebuilt.get("candidate_universe_sha256"),
+        candidate_count=rebuilt.get("candidate_count"),
+        incumbent_candidate_id=rebuilt.get("incumbent_candidate_id"),
+        finite_selection_universe_complete_by_construction=True,
+        incumbent_preserved=True,
+        open_world_generation_complete=False,
+        policy_generation_complete=False,
+    )
+
+
+def select(frozen:Mapping[str,Any],candidate_id:str)->dict[str,Any]:
+    checked=validate_frozen(frozen)
+    if checked.get("pass") is not True:
+        return checked
+    manifest=checked["manifest"]
     if not isinstance(candidate_id,str) or not candidate_id:
         return _fail("CANDIDATE_ID_REQUIRED")
     rows=manifest.get("candidates")
