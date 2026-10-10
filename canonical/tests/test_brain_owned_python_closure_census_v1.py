@@ -54,3 +54,19 @@ def test_from_module_import_symbol_falls_back_to_parent_module():
             "canonical/runtime/a.py",
             "canonical/runtime/b.py",
         }
+
+def test_parent_import_of_namespace_package_is_zero_byte_owned_container():
+    with tempfile.TemporaryDirectory() as td:
+        r=Path(td)
+        (r/"canonical/runtime/ns_pkg").mkdir(parents=True)
+        (r/"canonical/__init__.py").write_text("")
+        (r/"canonical/runtime/__init__.py").write_text("")
+        (r/"canonical/runtime/ns_pkg/child.py").write_text("X=1\n")
+        (r/"canonical/runtime/a.py").write_text("from canonical.runtime import ns_pkg\n")
+        out=census(r,["canonical/runtime/a.py"])
+        assert out["brain_owned_file_count"]==1
+        assert {x["path"] for x in out["brain_owned_transitive_files"]}=={
+            "canonical/runtime/a.py",
+        }
+        assert out["external_or_stdlib_substrate_imports"]==[]
+
