@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_SUBJECT_DEPENDENCY_CLOSURE_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__12_OF_12_ROOT_DEPENDENCIES_CLASSIFIED__79_OF_79_STATIC_REFERENCES_CURRENT__5_OF_5_ADVERSARIAL_CLASSIFIER_TESTS__ZERO_QUALITY_OR_TERMINAL_CREDIT",
+  "pass": true,
+  "classifier": {
+    "path": "canonical/runtime/professional_quality_subject_dependency_closure_v1.py",
+    "git_blob_sha": "06bbfcab27637420202ff3f8fac7ef28383bd063"
+  },
+  "tests": {
+    "path": "canonical/tests/test_professional_quality_subject_dependency_closure_v1.py",
+    "git_blob_sha": "45a15887d2fe24ea235835d88cde04ad741c02d5",
+    "adversarial_tests_run": 5,
+    "adversarial_tests_passed": 5,
+    "adversarial_tests_failed": 0
+  },
+  "closure": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_SUBJECT_DEPENDENCY_CLOSURE_20261010_V1.json",
+    "git_blob_sha": "67b867f71037189c9ce9c2e136dc6ecd94dfe629",
+    "classified_root_count": 12,
+    "required_subject_component_count": 27,
+    "external_evidence_reference_count": 43,
+    "dynamic_external_input_root_count": 12
+  },
+  "currentness_sweep": {
+    "declared_registry_reference_count": 70,
+    "additional_subject_core_component_count": 9,
+    "total_checked": 79,
+    "mismatches": 0
+  },
+  "independent_replay": {
+    "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "result": "DEPENDENCY_CLASSIFICATION_5_OF_5_MUTATION_TESTS_PASS__DEPENDENCY_CLOSURE_ARTIFACT_MATCH_PASS"
+  },
+  "proves": [
+    "ALL_TWELVE_ROOTS_HAVE_CLASSIFIED_STATIC_SUBJECT_COMPONENTS",
+    "ALL_TWELVE_ROOTS_HAVE_CLASSIFIED_EXTERNAL_EVIDENCE_REFERENCES",
+    "ALL_TWELVE_ROOTS_HAVE_EXPLICIT_DYNAMIC_EXTERNAL_INPUT_CLASS",
+    "UNKNOWN_CONTENT_ADDRESSED_DEPENDENCY_ROLE_FAILS_CLOSED",
+    "SUBJECT_AND_EXTERNAL_ROLE_COLLISION_FAILS_CLOSED"
+  ],
+  "hard_nonclaims": [
+    "NO_ROOT_SUBJECT_BINDING_AUTHORITY",
+    "NO_SAME_SUBJECT_COMPOSITION_PASS",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
