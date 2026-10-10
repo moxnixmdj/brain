@@ -700,12 +700,14 @@ def run(
                 raise CognitiveFabricError("GLOBAL_RETRIEVAL_SOURCES_NOT_LIST")
             if state is not None and not isinstance(state, Mapping):
                 raise CognitiveFabricError("GLOBAL_RETRIEVAL_STATE_NOT_OBJECT")
-            out = global_retrieval.compile_authorized_plan(
+            retrieval_plan = global_retrieval.compile_authorized_plan(
                 root=ROOT,
                 query_actions=query_actions,
                 sources=sources,
                 state=state,
             )
+            out = deepcopy(dict(retrieval_plan))
+            out["pass"] = str(out.get("status") or "").startswith("PASS__")
         elif mode == "OWNERSHIP_CATALOG":
             out = live_ownership.evaluate(ENGINE_DESCRIPTORS)
         elif mode == "LIVE_COMPOSITION":
