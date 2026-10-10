@@ -22,6 +22,7 @@ import json
 from pathlib import Path
 import re
 from typing import Any, Mapping
+from canonical.runtime import r2_runtime_dependency_closure_v1 as runtime_closure
 
 SCHEMA = "PROJECT_BRAIN_R2_DIRECT_ROUTE_DYNAMIC_ADMISSION_V1"
 CANDIDATE_SCHEMA = "PROJECT_BRAIN_R2_DIRECT_ROUTE_DEPLOYMENT_CANDIDATE_V1"
@@ -343,6 +344,17 @@ def validate_admission_row(root: Path, row: Mapping[str, Any]) -> dict[str, Any]
         candidate_blob_sha=candidate_blob,
         candidate=candidate,
     )
+    try:
+        dependency_closure = runtime_closure.validate(
+            root,
+            candidate["runtime_path"],
+            row.get("runtime_dependency_closure"),
+        )
+    except Exception as exc:
+        raise DynamicAdmissionError(
+            "RUNTIME_DEPENDENCY_CLOSURE_INVALID:"
+            +type(exc).__name__+":"+str(exc)
+        ) from exc
     noninterference = None
     if row.get("noninterference_policy") is not None:
         if row.get("noninterference_policy") != "PROVED_DISJOINT_V1":
@@ -367,6 +379,7 @@ def validate_admission_row(root: Path, row: Mapping[str, Any]) -> dict[str, Any]
         "selection_class": SELECTION_CLASS,
         "active": True,
         "automatic_live_admission": True,
+        "runtime_dependency_closure": dependency_closure,
     }
     if noninterference is not None:
         expected.update({
@@ -542,6 +555,10 @@ def compile_admission(
         "selection_class": SELECTION_CLASS,
         "active": True,
         "automatic_live_admission": True,
+        "runtime_dependency_closure": runtime_closure.build(
+            root,
+            candidate["runtime_path"],
+        ),
         "collision_policy": "FAIL_CLOSED_ON_ANY_OTHER_DYNAMIC_OR_LEGACY_MATCH",
     }
     if noninterference is not None:
