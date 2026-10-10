@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R10_EXECUTION_GUARD_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__PINNED_EXACT_BYTES__PYCOMPILE__35_OF_35__ALL_17_KNOWN_R10_DEFEATERS_BLOCK__5_NEAR_MISS_CLASSES_ESCALATE__DETECTION_COMPLETENESS_OPEN__ZERO_PROPERTY_CREDIT",
+  "repository": "moxnixmdj/brain",
+  "pinned_main_commit": "8c4b1485c9f468f075b75eaeeb10733591564087",
+  "leaf_id": "PQ::R10_ANALYSIS_DECISION::EXECUTION",
+  "claim_id": "205a864e7d7a56a14a46bb75923cc9b11126d479676d26d88803831da1197294",
+  "exact_blobs": {
+    "r10_guard_runtime": "0a88d49211e0a34e32b9d96f58927ccfaedf6487",
+    "r10_guard_tests": "05cf00149fff0efb1fc13f8791d3d2b07f895c9e",
+    "one_shot_runtime": "b8347a3993f96aa5e6fa2f1fe68d7c8afccb8bec",
+    "one_shot_tests": "d42cfce3850dbf090e7344f5c5988d43aac1e599",
+    "execution_profile": "f7e89eafbb691c16d1bdf5b8d295a468d5e3bec5",
+    "defeater_catalog": "8b92e5cf76f767054f55414b87014e03d43460b8"
+  },
+  "replay": {
+    "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "py_compile": "PASS",
+    "tests_run": 35,
+    "tests_passed": 35,
+    "tests_failed": 0,
+    "original_one_shot_tests": 23,
+    "guard_tests": 12,
+    "known_r10_defeater_cases": 17,
+    "near_miss_signal_classes": 5,
+    "transcript_sha256": "0dfd49b834f6551a2cba0b4f0c111c483e3bc7618700f9e5fa3afb182bcb5b20"
+  },
+  "proved": [
+    "CURRENT_LOSSLESS_DECISION_SUFFICIENT_CONTRACT_REQUIRED",
+    "CURRENT_MINIMUM_INFORMATION_CONTRACT_CANNOT_WEAKEN_BROAD_ACQUISITION_GUARD",
+    "ALL_17_DECLARED_KNOWN_R10_DEFEATERS_BLOCK_ORDINARY_CERTIFICATE_PATH_WHEN_DETECTED",
+    "UNKNOWN_DETECTED_DEFEATER_ESCALATES_THROUGH_UNMAPPED_MATERIAL_DEFEATER_TRIGGER",
+    "UNMAPPED_MATERIAL_FALSE_CERTIFICATION_SIGNAL_ESCALATES",
+    "NEAR_DECISION_MULTIPLICITY_VETO_INVARIANCE_AND_CONTEXT_NEAR_MISSES_ESCALATE",
+    "MISSING_R10_PROOF_SLOT_REMAINS_OPEN",
+    "CATALOG_OR_PROFILE_DRIFT_FAILS_CLOSED",
+    "CLEAN_PATH_ONLY_BECOMES_ELIGIBLE_FOR_DOWNSTREAM_SCOPED_CERTIFICATE_VERIFICATION"
+  ],
+  "open_residual": {
+    "blocker": "R10_DEFEATER_DETECTION_AND_REQUIRED_PROOF_SLOT_COMPLETENESS_NOT_PROVED",
+    "detection_completeness_proved": false,
+    "whole_leaf_property_truth_proved": false,
+    "required_next": "PROVE_OR_CONSTRUCT_OBSERVATION_AND_DETECTION_COVERAGE_FOR_R10_REQUIRED_PROOF_SLOTS_AND_DECISION_RELEVANT_FALSE_CERTIFICATION_PATHS"
+  },
+  "leaf_property_truth_authority": false,
+  "execution_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
