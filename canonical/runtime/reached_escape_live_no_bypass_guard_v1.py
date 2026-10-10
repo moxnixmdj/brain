@@ -137,7 +137,7 @@ def scan_repo(root: str | Path) -> dict[str, Any]:
             if marker not in repair_text
         ]
         kernel_attributes = sorted(set(re.findall(
-            r"\\bkernel\\.([A-Za-z_][A-Za-z0-9_]*)",
+            r"\bkernel\.([A-Za-z_][A-Za-z0-9_]*)",
             repair_text,
         )))
         unexpected_kernel_attributes = sorted(
