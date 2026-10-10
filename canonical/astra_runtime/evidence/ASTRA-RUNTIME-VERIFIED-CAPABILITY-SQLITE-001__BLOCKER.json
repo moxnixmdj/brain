@@ -1,9 +1,0 @@
-{
-  "adapter": "goal",
-  "error": "RuntimeError:SQLITE_TABLE_NAME_UNRESOLVED",
-  "mission_id": "ASTRA-RUNTIME-VERIFIED-CAPABILITY-SQLITE-001",
-  "observed_at_utc": "2026-09-25T01:56:38.925141+00:00",
-  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
-  "step_id": "execute-verified-capability-sqlite",
-  "step_index": 0
-}

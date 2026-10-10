@@ -1,9 +1,0 @@
-{
-  "adapter": "goal",
-  "error": "Blocker:ACTION_EXPECTATION_FAILED:verified:OBSERVED=False",
-  "mission_id": "ASTRA-RUNTIME-PYPI-ACQUIRE-BSON-009",
-  "observed_at_utc": "2026-09-25T19:21:06.908977+00:00",
-  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
-  "step_id": "run-held-out-codec-goal",
-  "step_index": 0
-}

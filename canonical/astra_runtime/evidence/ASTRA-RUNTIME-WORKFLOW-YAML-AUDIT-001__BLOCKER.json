@@ -1,9 +1,0 @@
-{
-  "adapter": "goal",
-  "error": "RuntimeError:JQ_FILTER_FORBIDDEN",
-  "mission_id": "ASTRA-RUNTIME-WORKFLOW-YAML-AUDIT-001",
-  "observed_at_utc": "2026-09-25T00:59:13.194645+00:00",
-  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
-  "step_id": "execute-workflow-yaml-audit",
-  "step_index": 0
-}
