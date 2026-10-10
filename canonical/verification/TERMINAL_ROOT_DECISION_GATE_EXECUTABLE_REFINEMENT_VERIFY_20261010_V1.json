@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_ROOT_DECISION_GATE_EXECUTABLE_REFINEMENT_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__ROOT_GATE_BRANCH_SURFACE_SEMANTIC_REFINEMENT_VERIFIED",
+  "subject": {
+    "path": "canonical/runtime/terminal_root_decision_gate_v1.py",
+    "git_blob_sha": "40a6f984013d0d701edba498c2a122edcb9a8103",
+    "function": "evaluate"
+  },
+  "abstract_spec": {
+    "path": "canonical/governance/TERMINAL_ROOT_DECISION_GATE_ABSTRACT_SPEC_20261010_V1.json",
+    "git_blob_sha": "4bbf9581581f1ed95de6a97287a63eb79c24694d"
+  },
+  "checker": {
+    "path": "canonical/runtime/terminal_root_decision_gate_refinement_checker_v1.py",
+    "git_blob_sha": "a99cdc14541f92d28e7844aca637d9a5cfe7a23f"
+  },
+  "checker_tests": {
+    "path": "canonical/tests/test_terminal_root_decision_gate_refinement_checker_v1.py",
+    "git_blob_sha": "16fe311e746d641c382109ae018c57b271421848",
+    "tests_run": 5,
+    "passed": 5,
+    "failed": 0,
+    "errors": 0,
+    "adversarial_cases": [
+      "CURRENT_SUBJECT_PASS",
+      "MISSING_ABSTRACT_FAIL_BRANCH_REJECTED",
+      "SUBJECT_BLOB_DRIFT_REJECTED",
+      "NEW_CONCRETE_FAIL_BRANCH_REJECTED",
+      "SUCCESS_PROJECTION_MUTATION_REJECTED"
+    ]
+  },
+  "execution": {
+    "carrier": "SPRITE__brain-live-runtime-v1-verify-20261008",
+    "workdir": "/home/sprite/current-byte-runtime-coherence-verify",
+    "assurance_level": "STATIC_AST_BRANCH_CENSUS_PLUS_WITNESS_COMPLETE_EXECUTION",
+    "fail_reason_count": 17,
+    "success_case_count": 4,
+    "witness_count": 21,
+    "receipt_sha256": "23b8afa3ee2fd8f0654de6724a7c61c0ee5e60e51f821af7ca5cbbeba9190eda",
+    "refinement_verified": true
+  },
+  "root_assumptions": [
+    "CPYTHON_LANGUAGE_SEMANTICS",
+    "PATHLIB_RESOLVE_AND_FILE_READ_SEMANTICS",
+    "JSON_PARSER_SEMANTICS",
+    "SHA1_GIT_BLOB_IDENTITY_SEMANTICS"
+  ],
+  "claim_scope": "GOAL_RELEVANT_BRANCH_SURFACE_ONLY",
+  "semantic_refinement_proved": true,
+  "repository_wide_refinement_proved": false,
+  "transitive_dependency_refinement_proved": false,
+  "terminal_authority": false,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
