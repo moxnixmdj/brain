@@ -17,8 +17,6 @@ import json
 from pathlib import Path
 from typing import Any, Mapping
 
-from canonical.runtime import professional_quality_scoped_evidence_overlay_v1 as scoped
-
 ROOT = Path(__file__).resolve().parents[2]
 SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_SAME_SUBJECT_COMPOSITION_GATE_V3"
 BINDING_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_ROOT_SUBJECT_BINDING_V1"
@@ -316,6 +314,7 @@ def evaluate(
     if not normal_ok:
         return _fail("NORMAL_FORM_SAME_SUBJECT_LAW_UNAVAILABLE", normal_form=normal_record)
 
+    from canonical.runtime import professional_quality_scoped_evidence_overlay_v1 as scoped
     scoped_result = scoped.evaluate(repo_root=root)
     if scoped_result.get("pass") is not True:
         return _fail(
