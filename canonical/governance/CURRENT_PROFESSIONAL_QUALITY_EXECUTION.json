@@ -1,0 +1,16 @@
+{
+  "schema":"PROJECT_BRAIN_CURRENT_PROFESSIONAL_QUALITY_EXECUTION_POINTER_V1",
+  "date":"2026-10-10",
+  "status":"P1_ROUTER_CANDIDATE__8_OF_8_LOCAL_PASS__NOT_LIVE_DEFAULT",
+  "profile_path":"canonical/governance/PROFESSIONAL_QUALITY_P1_EXECUTION_PROFILE_20261010_V1.json",
+  "profile_sha":"a01ef78846ce22996128cc2a5858341d8418074c",
+  "router_path":"canonical/runtime/professional_quality_p1_router_v1.py",
+  "router_sha":"81a856213d3d182f9844a6361a915d71423ecad0",
+  "tests_sha":"522ea4d2c087b9efd839534ac050b57177a972c4",
+  "verification_path":"canonical/verification/PROFESSIONAL_QUALITY_P1_ROUTER_VERIFY_20261010_V1.json",
+  "verification_sha":"416ffa40e7884eb44bdfca249ea651e96826c669",
+  "independent_replay":false,
+  "live_default":false,
+  "terminal_authority":false,
+  "terminal_credit_delta":0
+}
