@@ -1,0 +1,121 @@
+{
+  "schema": "PROJECT_BRAIN_R1_LIVE_ARCHITECTURE_CLOSURE_GATE_ABSTRACT_SPEC_V1",
+  "date": "2026-10-10",
+  "subject": {
+    "path": "canonical/runtime/r1_live_architecture_closure_gate_v1.py",
+    "git_blob_sha": "34e559b81e08ff67281a2feb401ebc24bb663741",
+    "function": "evaluate"
+  },
+  "scope": "GOAL_RELEVANT_R1_STRUCTURAL_CLOSURE_GATE_SURFACE_RELATIVE_TO_DECLARED_RUNTIME_IDENTITY_AND_INPUT_CONTRACTS",
+  "expected_public_entrypoint": "canonical.runtime.unified_cognitive_fabric_v1.run",
+  "expected_subruntime_entrypoint": "canonical.runtime.live_brain_runtime_v1.run",
+  "required_engine_bindings": {
+    "RAW_GOAL": "live_brain_runtime_v1.run(raw_bound)",
+    "COMPILED_TASK": "live_brain_runtime_v1.run(compiled_bound)",
+    "ADEQUATE_DECISION": "live_brain_runtime_v1.run(decision)",
+    "ADAPTIVE_SOLVER": "live_brain_runtime_v1.run(generic)",
+    "LEARNING_EPISODE": "autonomous_verified_self_improvement_v1.run_learning_episode",
+    "IMPROVEMENT_CYCLE": "r3_improvement_queue_driver_v1.drain",
+    "CAPABILITY_SCHEDULER": "capability_first_scheduler_v1.rank_work",
+    "REPAIR_SYNTHESIS": "live_brain_runtime_v1.synthesize_failure_repair",
+    "REPAIR_CYCLE": "live_brain_runtime_v1.execute_failure_repair_cycle",
+    "LIVE_CAPABILITY": "live_capability_invoker_v1.invoke",
+    "LIVE_COMPOSITION": "live_capability_composition_v1.execute"
+  },
+  "required_subruntime_surfaces": [
+    "GENERAL_ADEQUATE_DECISION_FIXED_POINT_V2",
+    "UNIVERSAL_VERIFIED_ADAPTIVE_SOLVER_V12",
+    "AUTONOMOUS_VERIFIED_SELF_IMPROVEMENT_V1",
+    "LIVE_INTEGRATED_BOUND_BRAIN_V1",
+    "P3_REAL_CONTEXT_V12",
+    "H100_VERIFIED_CAPABILITY_REGISTRY_V8",
+    "CAPABILITY_FIRST_SCHEDULER_V1",
+    "COUNTEREXAMPLE_GUIDED_CAUSAL_ARCHITECTURE_SYNTHESIZER_V1",
+    "VERIFIED_REPAIR_REPLAY_LOOP_V1"
+  ],
+  "required_activation_invariants": [
+    "ONE_CANONICAL_PUBLIC_FRONT_DOOR__UNIFIED_COGNITIVE_FABRIC_V1",
+    "NATIVE_VERIFICATION_CONTRACTS_PRESERVED",
+    "V12_EXECUTION_EXPERIENCE_AUTOMATICALLY_FED_TO_R3_WHEN_LEARNING_ENABLED",
+    "PRIOR_VERIFIED_EPISODES_AUTOMATICALLY_REUSED_IN_V12_SCOPE",
+    "ACTIVE_VERIFIED_SKILLS_AUTOMATICALLY_LOADED_FOR_SKILL_AWARE_PLANNING",
+    "NO_PARALLEL_REIMPLEMENTATION_OF_EXISTING_EXECUTION_ENGINES",
+    "LIVE_BRAIN_RUNTIME_V1_HAS_NO_INDEPENDENT_PUBLIC_AUTHORITY",
+    "HETEROGENEOUS_LIVE_CAPABILITY_COMPOSITION_FAIL_CLOSED",
+    "LIVE_COMPOSITION_OUTCOMES_AUTOMATICALLY_OBSERVED_BY_R3"
+  ],
+  "fixed_error_classes": [
+    "ACTIVATION_CANONICAL_PUBLIC_ENTRYPOINT_DRIFT",
+    "ACTIVATION_PUBLIC_ENTRYPOINT_DRIFT",
+    "ACTIVATION_STATUS_DRIFT",
+    "ACTIVATION_SUBRUNTIME_ENTRYPOINT_DRIFT",
+    "ACTIVATION_SUBRUNTIME_ROLE_DRIFT",
+    "AUTHORITY_FABRIC_BLOB_DRIFT",
+    "AUTHORITY_INVOKER_BLOB_DRIFT",
+    "AUTHORITY_LIVE_OWNERSHIP_NODE_MISSING",
+    "AUTHORITY_PUBLIC_ENTRYPOINT_DRIFT",
+    "AUTHORITY_R1_CLOSURE_NOT_TRUE",
+    "AUTHORITY_SUBRUNTIME_BLOB_DRIFT",
+    "AUTHORITY_SUBRUNTIME_PUBLIC_AUTHORITY_DRIFT",
+    "AUTHORITY_UNIVERSAL_INVOCATION_NODE_MISSING",
+    "INVOCATION_AUTHORITY_FABRIC_BLOB_DRIFT",
+    "INVOCATION_AUTHORITY_INVOKER_BLOB_DRIFT",
+    "INVOCATION_AUTHORITY_MISSING_CONTRACTS",
+    "LIVE_OWNED_NOT_FABRIC_REACHABLE",
+    "LIVE_OWNERSHIP_NOT_CLOSED",
+    "OWNERSHIP_INVOCATION_COUNT_DIVERGENCE",
+    "PUBLIC_ENTRYPOINT_DRIFT",
+    "R1_CAPABILITY_LIFECYCLE_INCOMPLETE",
+    "SUBRUNTIME_ENTRYPOINT_DRIFT",
+    "UNIVERSAL_INVOCATION_CONTRACTS_MISSING",
+    "UNIVERSAL_INVOCATION_COVERAGE_NOT_CLOSED"
+  ],
+  "parameterized_error_families": {
+    "ENGINE_BINDING_DRIFT": "REQUIRED_ENGINE_BINDINGS",
+    "SUBRUNTIME_SURFACE_MISSING": "REQUIRED_SUBRUNTIME_SURFACES",
+    "ACTIVATION_INVARIANT_MISSING": "REQUIRED_ACTIVATION_INVARIANTS"
+  },
+  "expected_exception_classes": {
+    "fixed": [
+      "ENGINE_DESCRIPTORS_NOT_OBJECT"
+    ],
+    "prefixes": [
+      "JSON_NOT_OBJECT:"
+    ]
+  },
+  "success_projection": {
+    "pass": true,
+    "status": "PASS__R1_LIVE_ARCHITECTURE_CLOSED_AND_DRIFT_LOCKED",
+    "errors": [],
+    "subordinate_runtime_public_authority": false,
+    "required_engine_binding_count": 11,
+    "required_subruntime_surface_count": 9,
+    "missing_subruntime_surfaces": [],
+    "capability_lifecycle_complete": true,
+    "semantic_selection_authority": false,
+    "terminal_authority": false,
+    "terminal_credit_delta": 0
+  },
+  "failure_projection": {
+    "pass": false,
+    "status": "FAIL_CLOSED__R1_LIVE_ARCHITECTURE_DRIFT",
+    "subordinate_runtime_public_authority": false,
+    "semantic_selection_authority": false,
+    "terminal_authority": false,
+    "terminal_credit_delta": 0
+  },
+  "root_assumptions": [
+    "CPYTHON_LANGUAGE_SEMANTICS",
+    "PATHLIB_RESOLVE_AND_FILE_READ_SEMANTICS",
+    "JSON_PARSER_SEMANTICS",
+    "SHA1_GIT_BLOB_IDENTITY_SEMANTICS",
+    "ACTIVATION_AND_AUTHORITY_FILES_EXIST_FOR_STRUCTURED_GATE_EVALUATION"
+  ],
+  "nonclaims": [
+    "DOWNSTREAM_CAPABILITY_SEMANTICS_NOT_PROVED",
+    "ARBITRARY_INTENT_SELECTION_NOT_PROVED",
+    "TRANSITIVE_DEPENDENCY_REFINEMENT_NOT_PROVED",
+    "REPOSITORY_WIDE_REFINEMENT_NOT_PROVED"
+  ],
+  "terminal_credit_delta": 0
+}
