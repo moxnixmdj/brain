@@ -1,21 +1,41 @@
 {
-  "schema":"PROJECT_BRAIN_PROFESSIONAL_QUALITY_R4_MEASUREMENT_SEMANTIC_SCOPE_V1",
-  "date":"2026-10-10",
-  "status":"ACTIVE_SCOPED_CONTENT_ADDRESSED_TYPED_MECHANICAL_MEASUREMENT_SEMANTICS__8_OF_8_INDEPENDENT_REPLAY__ZERO_GLOBAL_LEAF_CREDIT",
-  "root_id":"R4_MEASUREMENT_CONSTRUCT",
-  "claim_kind":"CONTENT_ADDRESSED_TYPED_MECHANICAL_MEASUREMENT_SEMANTICS",
-  "exact_components":{
-    "runtime":{"path":"canonical/runtime/professional_r4_measurement_semantic_certificate_v1.py","git_blob_sha":"349afbd3f5b118bc7da56b5d04c7fdba761b77ec"},
-    "source_governance":{"path":"canonical/governance/ARTIFACT_MEASUREMENT_BINDING_20261007_V1.json","git_blob_sha":"a174825b4c10fefa06c3a7ba09eb68c0d40af14a"},
-    "source_execution_verification":{"path":"canonical/verification/ARTIFACT_MEASUREMENT_VERIFY_20261007_V1.json","git_blob_sha":"34c64ed759d2e70df48a76d7a254047ac5fe9e2b"},
-    "semantic_verification":{"path":"canonical/verification/PROFESSIONAL_QUALITY_R4_MEASUREMENT_SEMANTIC_VERIFY_20261010_V1.json","git_blob_sha":"bd873489f301df1d9eb41e85922d1b8f891e2e6f"}
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R4_MEASUREMENT_SEMANTIC_SCOPE_V1",
+  "date": "2026-10-10",
+  "status": "ACTIVE_SCOPED_CONTENT_ADDRESSED_TYPED_MECHANICAL_MEASUREMENT_SEMANTICS__8_OF_8_INDEPENDENT_REPLAY__ZERO_GLOBAL_LEAF_CREDIT",
+  "root_id": "R4_MEASUREMENT_CONSTRUCT",
+  "claim_kind": "CONTENT_ADDRESSED_TYPED_MECHANICAL_MEASUREMENT_SEMANTICS",
+  "exact_components": {
+    "runtime": {
+      "path": "canonical/runtime/professional_r4_measurement_semantic_certificate_v1.py",
+      "git_blob_sha": "349afbd3f5b118bc7da56b5d04c7fdba761b77ec"
+    },
+    "source_governance": {
+      "path": "canonical/governance/ARTIFACT_MEASUREMENT_BINDING_20261007_V1.json",
+      "git_blob_sha": "a174825b4c10fefa06c3a7ba09eb68c0d40af14a"
+    },
+    "source_execution_verification": {
+      "path": "canonical/verification/ARTIFACT_MEASUREMENT_VERIFY_20261007_V1.json",
+      "git_blob_sha": "34c64ed759d2e70df48a76d7a254047ac5fe9e2b"
+    },
+    "semantic_verification": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R4_MEASUREMENT_SEMANTIC_VERIFY_20261010_V1.json",
+      "git_blob_sha": "c91074f2f187834936c0b7297579a6b8ba125fae"
+    }
   },
-  "measurement_kinds":[
-    "FILE_BASENAME","FILE_SUFFIX","FILE_SIZE_BYTES","OOXML_MEMBER_EXISTS",
-    "XLSX_SHEET_EXISTS","XLSX_SHEET_COUNT","DOCX_TEXT_CONTAINS",
-    "DOCX_PARAGRAPH_COUNT","DOCX_TABLE_COUNT","PPTX_SLIDE_COUNT","PPTX_TEXT_CONTAINS"
+  "measurement_kinds": [
+    "DOCX_PARAGRAPH_COUNT",
+    "DOCX_TABLE_COUNT",
+    "DOCX_TEXT_CONTAINS",
+    "FILE_BASENAME",
+    "FILE_SIZE_BYTES",
+    "FILE_SUFFIX",
+    "OOXML_MEMBER_EXISTS",
+    "PPTX_SLIDE_COUNT",
+    "PPTX_TEXT_CONTAINS",
+    "XLSX_SHEET_COUNT",
+    "XLSX_SHEET_EXISTS"
   ],
-  "guarantees":[
+  "guarantees": [
     "MEASUREMENT_VALUES_ARE_DERIVED_FROM_CONTENT_ADDRESSED_ARTIFACT_BYTES",
     "EACH_MEASUREMENT_REQUEST_IS_CONTENT_ADDRESSED_AND_TYPED",
     "THE_MEASURED_FIELD_SET_AND_TYPES_MUST_MATCH_THE_TYPED_ACCEPTANCE_PROGRAM_EXACTLY",
@@ -23,19 +43,16 @@
     "PROPOSAL_SUPPLIED_CANDIDATE_VALUES_DO_NOT_DEFINE_ARTIFACT_FACTS",
     "A_FAILED_MEASURED_PROPERTY_CAN_FALSIFY_TYPED_ACCEPTANCE"
   ],
-  "limitations":[
+  "limitations": [
     "NO_AUTOMATIC_FIELD_TO_RUBRIC_OR_CONSTRUCT_SEMANTIC_ALIGNMENT",
     "NO_HOLISTIC_OR_VISUAL_QUALITY_MEASUREMENT",
     "NO_UNSUPPORTED_MEASUREMENT_KIND_SEMANTICS",
     "NO_GLOBAL_R4_SEMANTIC_LEAF_CLOSURE",
-    "NO_GLOBAL_R4_ROOT_CLOSURE",
-    "NO_DOMAIN_SEMANTIC_CLOSURE",
-    "NO_DOMAIN_EXECUTION_CLOSURE",
-    "NO_TERMINAL_ACCEPTANCE_OR_CAPABILITY_CREDIT"
+    "NO_GLOBAL_R4_ROOT_CLOSURE"
   ],
-  "global_leaf_closure":false,
-  "global_root_closure":false,
-  "terminal_authority":false,
-  "terminal_credit_delta":0,
-  "incremental_spend_usd":0
+  "global_leaf_closure": false,
+  "global_root_closure": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
 }
