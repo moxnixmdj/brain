@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V53",
+  "date": "2026-10-10",
+  "status": "CURRENT_RANK20_V7_STRONG_REPAIR_STAGED__SUPERSEDES_WEAKER_V6_RESEAL__PUBLIC_ZERO_EXPOSURE_RESEAL_REQUIRED",
+  "predecessor": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V52.json",
+    "git_blob_sha": "f045eb065e25cbc0e4c0b646bcf4329995f64ddf"
+  },
+  "superseded_public_reseal_verification": {
+    "path": "canonical/verification/TB_SCIENCE_RANK20_V6_PUBLIC_RESEAL_VERIFY_20261010_V1.json",
+    "git_blob_sha": "39c39abae0542407af7247c1aa0271824d1145d2",
+    "reason": "STRONGER_REPAIR_ADDS_AUTHORITY_DERIVED_ACTIVATION_IDENTITY_AND_ADVERSARIAL_IMPORT_BOOTSTRAP"
+  },
+  "strong_repair_verification": {
+    "path": "canonical/verification/TB_SCIENCE_RANK20_V4_STRONG_REPAIR_VERIFY_20261010_V2.json",
+    "git_blob_sha": "314102c91da76ab2ac7ddbbb95b10d45306f1674",
+    "pass": true
+  },
+  "authority": {
+    "path": "canonical/governance/TB_SCIENCE_RANK20_ONE_SLOT_EXECUTION_AUTHORITY_20261010_V7.json",
+    "git_blob_sha": "d05ad30c5c75abc0f757885a5ea770b4cb6b2077"
+  },
+  "counts": {
+    "benchmark_trials_consumed": 18,
+    "consumed_successes_final": 0,
+    "consumed_failures_final": 18,
+    "started_result_pending": 0,
+    "finalized_slots": 18,
+    "active_in_flight_slot_count": 0
+  },
+  "next_slot": {
+    "ledger_schedule_rank": 20,
+    "frozen_manifest_schedule_order": 19,
+    "task_rank": 19,
+    "slot_id": "terminal-bench-science/hysteretic-aquifer-control::trial-0",
+    "task_digest": "sha256:681df0c3b2ada03a933ac4d2e11f07983676f87a9f26b61e416987904b880289"
+  },
+  "logical_attempt_id": "35882bb248aa1486fb845e9028bc40297c040cb002262ad629ca71c332df1ff0",
+  "execution_claim_binding_digest": "sha256:d237cb57191aeb030d0f5f4d8732f9ac8c8bf6e163e6db984850877f3ba47d51",
+  "claim_epoch_id": "RANK20_V13_START_CAS_AND_AUTHORITY_DERIVATION_REPAIR_20261010_V7",
+  "logical_attempt_claim_binding": {
+    "path": "canonical/governance/TB_SCIENCE_RANK20_LOGICAL_ATTEMPT_CLAIM_BINDING_20261010_V7.json",
+    "git_blob_sha": "e58921cf2e2e3b2b6afbc5b776ed708f4710543c"
+  },
+  "rank20_task_read_history": false,
+  "rank20_task_started": false,
+  "rank20_start_cas_acquired": false,
+  "rank20_benchmark_trials_consumed": 0,
+  "scheduler": {
+    "frozen": true,
+    "reason": "RANK20_V7_STRONG_REPAIR_STAGED__PUBLIC_ZERO_EXPOSURE_RESEAL_REQUIRED",
+    "only_authorized_transition": "PUBLIC_ZERO_EXPOSURE_RESEAL_WITH_STRONG_REPAIR_AND_CLAIM_V7"
+  },
+  "execution_authority_staged": true,
+  "execution_authority_effective": false,
+  "task_read_authority_staged": true,
+  "task_read_authority_effective": false,
+  "activation_authority": false,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
