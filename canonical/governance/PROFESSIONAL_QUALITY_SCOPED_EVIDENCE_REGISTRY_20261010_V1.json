@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_REGISTRY_V1",
   "date": "2026-10-10",
-  "status": "ACTIVE__TWELVE_CLAIM_SCOPED_CAPABILITIES__ZERO_GLOBAL_LEAF_CREDIT",
+  "status": "ACTIVE__THIRTEEN_CLAIM_SCOPED_CAPABILITIES__R1_R6_R7_R12_BOUNDED_SEMANTIC_EVIDENCE__ZERO_GLOBAL_LEAF_CREDIT",
   "entries": [
     {
       "scope_id": "PQ::R7::SINGLE_EDIT::UVCK_DEFEATER_ORDER_REPAIR",
@@ -329,6 +329,35 @@
       "scope_governance": {
         "path": "canonical/governance/PROFESSIONAL_QUALITY_R12_META_COMPOSITION_SCOPE_20261010_V1.json",
         "git_blob_sha": "4c69313ae31905f6aa379361d515dffdfb41efae"
+      },
+      "global_leaf_closure": false,
+      "global_root_closure": false,
+      "semantic_leaf_credit": false,
+      "execution_leaf_credit": false,
+      "terminal_credit_delta": 0
+    },
+    {
+      "scope_id": "PQ::R1::TARGET_SEMANTICS::PROFESSIONAL_ARTIFACT_PLAN",
+      "root_id": "R1_TARGET_SPECIFICATION",
+      "contributes_to_leaf_ids": [
+        "PQ::R1_TARGET_SPECIFICATION::SEMANTIC"
+      ],
+      "claim_kind": "EXACT_PARAMETERIZED_PROFESSIONAL_ARTIFACT_TARGET_SEMANTICS",
+      "source_receipt": {
+        "path": "canonical/verification/PROFESSIONAL_QUALITY_R1_TARGET_SEMANTIC_VERIFY_20261010_V1.json",
+        "git_blob_sha": "dfffdd6eff129ce7498c4e4aa8a822cd4a5cda22"
+      },
+      "reusable_compiler": {
+        "path": "canonical/runtime/professional_target_semantic_certificate_v1.py",
+        "git_blob_sha": "583612b0e2226053ac758683087b5c5d0f510996"
+      },
+      "compiler_verification": {
+        "path": "canonical/verification/PROFESSIONAL_QUALITY_R1_TARGET_SEMANTIC_VERIFY_20261010_V1.json",
+        "git_blob_sha": "dfffdd6eff129ce7498c4e4aa8a822cd4a5cda22"
+      },
+      "scope_governance": {
+        "path": "canonical/governance/PROFESSIONAL_QUALITY_R1_TARGET_SEMANTIC_SCOPE_20261010_V1.json",
+        "git_blob_sha": "9145121eb2cfbee43f94534864d30f32868e81de"
       },
       "global_leaf_closure": false,
       "global_root_closure": false,
