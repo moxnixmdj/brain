@@ -1,0 +1,113 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_R12_SEMANTIC_CC_R3_TRUTH_RECONCILIATION_V3",
+  "date": "2026-10-10",
+  "status": "CURRENT_TRUTH__8_OF_8_ROOT_CONTRACT_CLAUSES_VERIFIED__STRONGER_MATERIAL_DEFEATER_TOTALITY_OPEN__CC_R3_NOT_CLOSED__ZERO_PROPERTY_OR_TERMINAL_CREDIT",
+  "property_claim_id": "11870f850b46bcfcc31094f764fc4f45c911aaac413979ceb62679ff19a53162",
+  "scope_claim_id": "05b74983836dd1f6a13a0db72443246fb74f99548f0d982a769a6a7e572e9e85",
+  "leaf_id": "PQ::R12_META_COMPOSITION_CLOSURE::SEMANTIC",
+  "predecessor": {
+    "path": "canonical/governance/PROFESSIONAL_R12_SEMANTIC_CC_R3_TRUTH_RECONCILIATION_20261010_V2.json",
+    "git_blob_sha": "ba25f3b35093c7e8372fd6f14fe63441880774a8"
+  },
+  "new_clause_closures": {
+    "c1": {
+      "path": "canonical/verification/PROFESSIONAL_R12_STABLE_C1_INDEPENDENT_VERIFY_20261010_V1.json",
+      "git_blob_sha": "42b16818beca1d5f624b817fa68761a4ba795e37"
+    },
+    "c8": {
+      "path": "canonical/verification/PROFESSIONAL_R12_C8_NONVACUITY_INDEPENDENT_VERIFY_20261010_V1.json",
+      "git_blob_sha": "077de7c62f3ab2df1a7ddbb3836f38450345d8f6"
+    }
+  },
+  "clause_state": [
+    {
+      "id": "R12C1_ASSUMPTION_GUARANTEE_COMPOSITION",
+      "state": "VERIFIED_CURRENT",
+      "basis": [
+        "STABLE_V3_R12_C1_REINSTANTIATED"
+      ]
+    },
+    {
+      "id": "R12C2_SAME_SUBJECT_ROOT_CONJUNCTION",
+      "state": "VERIFIED_CURRENT",
+      "basis": [
+        "VERIFIED_V2_RECONCILIATION"
+      ]
+    },
+    {
+      "id": "R12C3_ABSTRACTION_SOUNDNESS",
+      "state": "VERIFIED_CURRENT",
+      "basis": [
+        "VERIFIED_V2_RECONCILIATION",
+        "LOSSLESS_COMPOSITION_PROJECTION"
+      ]
+    },
+    {
+      "id": "R12C4_INDEPENDENT_DEFEATER_SEARCH",
+      "state": "VERIFIED_CURRENT",
+      "basis": [
+        "VERIFIED_V2_RECONCILIATION"
+      ],
+      "boundary": "KNOWN_AND_DECLARED_DEFEATER_SEARCH_VERIFIED__UNKNOWN_MATERIAL_DEFEATER_TOTALITY_SEPARATE"
+    },
+    {
+      "id": "R12C5_COVERAGE_ACCOUNTING",
+      "state": "VERIFIED_CURRENT",
+      "basis": [
+        "VERIFIED_V2_RECONCILIATION"
+      ]
+    },
+    {
+      "id": "R12C6_PROOF_SEARCH_HONESTY",
+      "state": "VERIFIED_CURRENT",
+      "basis": [
+        "VERIFIED_V2_RECONCILIATION"
+      ]
+    },
+    {
+      "id": "R12C7_META_CONTROLLER_FALSIFICATION",
+      "state": "VERIFIED_CURRENT",
+      "basis": [
+        "VERIFIED_V2_RECONCILIATION"
+      ]
+    },
+    {
+      "id": "R12C8_NONVACUITY",
+      "state": "VERIFIED_CURRENT",
+      "basis": [
+        "TWO_INDEPENDENTLY_OBSERVED_SUPPORTED_POSITIVE_R12_ROUTES"
+      ]
+    }
+  ],
+  "derived": {
+    "verified_clause_count": 8,
+    "partial_clause_count": 0,
+    "open_clause_count": 0,
+    "all_eight_root_contract_clauses_verified": true,
+    "stronger_target_residual_open": true,
+    "cc_r3_terminal_closure_proved": false
+  },
+  "stronger_target_residual": {
+    "obligation": "ALL_ROOT_RELEVANT_MATERIAL_DEFEATERS_RESOLVED_OR_PROVED_DECISION_NULL_BEFORE_POSITIVE_CERTIFICATION",
+    "state": "OPEN",
+    "known_defeater_search_is_not_unknown_defeater_completeness": true,
+    "exact_next": "PROVE_STRONGER_MATERIAL_DEFEATER_TOTALITY_OR_SCOPE_COMPLETE_EQUIVALENT"
+  },
+  "claim_scoped_totality_proved": false,
+  "cc_r3_terminal_closure_proved": false,
+  "semantic_property_truth_authority": false,
+  "r4_proof_realization_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "hard_nonclaims": [
+    "NO_UNKNOWN_OR_MATERIAL_DEFEATER_TOTALITY",
+    "NO_CC_R3_TERMINAL_CLOSURE_FROM_EIGHT_CLAUSE_ACCOUNTING_ALONE",
+    "NO_R12_SEMANTIC_PROPERTY_TRUTH",
+    "NO_R4_PROOF_REALIZATION_AUTHORITY",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ]
+}
