@@ -82,6 +82,19 @@ R9_LEAVES = {"PQ::R9_TEMPORAL_DEPLOYMENT::EXECUTION"}
 R9_SOURCE_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R9_CONSERVATIVE_CENSORING_VERIFY_V1"
 R9_GOVERNANCE_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R9_CONSERVATIVE_CENSORING_SCOPE_V1"
 
+R8_KIND = "FROZEN_512_CASE_PRE_BEACON_DELEGATION_POPULATION_BINDING"
+R8_ROOT = "R8_POPULATION_CONTEXT_OPERATOR"
+R8_LEAVES = {"PQ::R8_POPULATION_CONTEXT_OPERATOR::EXECUTION"}
+R8_SOURCE_SCHEMA = "PROJECT_BRAIN_DELEGATION_TERMINAL_POPULATION_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1"
+R8_SCOPE_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R8_POPULATION_CONTEXT_SCOPE_V1"
+
+R12_KIND = "FAIL_CLOSED_ASSURANCE_GRAPH_META_COMPOSITION_AND_ORDER_INDEPENDENT_DEFEATER_ROUTING"
+R12_ROOT = "R12_META_COMPOSITION_CLOSURE"
+R12_LEAVES = {"PQ::R12_META_COMPOSITION_CLOSURE::EXECUTION"}
+R12_SOURCE_SCHEMA = "PROJECT_BRAIN_UVCK_V2_CURRENT_GENERATION_INDEPENDENT_REPLAY_VERIFY_V1"
+R12_VERIFY_SCHEMA = "PROJECT_BRAIN_UVCK_V2_DEFEATER_ORDER_VERIFY_V1"
+R12_SCOPE_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R12_META_COMPOSITION_SCOPE_V1"
+
 
 def git_blob_sha(path: Path) -> str:
     data = path.read_bytes()
@@ -995,6 +1008,175 @@ def _validate_r9(
     return errors, claim_scope
 
 
+def _validate_r8(
+    entry: dict[str, Any],
+    source: dict[str, Any] | None,
+    verifier: dict[str, Any] | None,
+    compiler_declared: Any,
+    repo_root: Path,
+) -> tuple[list[str], Any]:
+    errors = _common_checks(entry, R8_ROOT, R8_LEAVES)
+    claim_scope = None
+    scope, e = _read_bound(repo_root, entry.get("scope_governance"), "SCOPE_GOVERNANCE")
+    errors.extend(e)
+    if source is not None:
+        if source.get("schema") != R8_SOURCE_SCHEMA:
+            errors.append("SOURCE_SCHEMA_INVALID")
+        if source.get("status") != "INDEPENDENT_PASS__EXACT_CURRENT_512_CASE_BINDING_PREFLIGHT__ZERO_TERMINAL_RESULT":
+            errors.append("SOURCE_STATUS_NOT_ADMITTED")
+        exact = source.get("exact_bound_blobs")
+        if not isinstance(exact, dict) or exact.get("canonical/runtime/delegation_terminal_population_binding_v1.py") != compiler_declared:
+            errors.append("SOURCE_RUNTIME_MISMATCH")
+        required_verified = {
+            "FROZEN_BINDING_MANIFEST_INVARIANTS_PASS",
+            "FRESH_512_CASE_PRE_BEACON_POPULATION_PASSES",
+            "ALL_SIX_FROZEN_DELEGATION_CASE_CLASSES_PRESENT",
+            "ZERO_CASE_REPLACEMENT",
+            "ZERO_ADAPTIVE_CASE_SELECTION",
+            "ZERO_TUNING_REPLAY",
+        }
+        if not required_verified <= set(source.get("verified") or []):
+            errors.append("SOURCE_REQUIRED_POPULATION_PROPERTIES_MISSING")
+        if "PREFLIGHT_ONLY__POST_FREEZE_TERMINAL_BEACON_NOT_CONSUMED" not in set(source.get("limitations") or []):
+            errors.append("SOURCE_PREFLIGHT_LIMIT_MISSING")
+        if source.get("terminal_results_observed") != 0:
+            errors.append("SOURCE_TERMINAL_RESULTS_OVERCLAIM")
+    if verifier is not None:
+        if verifier.get("schema") != R8_SOURCE_SCHEMA:
+            errors.append("VERIFIER_SCHEMA_INVALID")
+        if verifier.get("status") != "INDEPENDENT_PASS__EXACT_CURRENT_512_CASE_BINDING_PREFLIGHT__ZERO_TERMINAL_RESULT":
+            errors.append("VERIFIER_STATUS_NOT_ADMITTED")
+    if scope is not None:
+        if scope.get("schema") != R8_SCOPE_SCHEMA:
+            errors.append("SCOPE_SCHEMA_INVALID")
+        if scope.get("status") != "ACTIVE_SCOPED_FROZEN_512_CASE_DELEGATION_POPULATION_BINDING__ZERO_GLOBAL_LEAF_CREDIT":
+            errors.append("SCOPE_STATUS_INVALID")
+        components = scope.get("exact_components")
+        if not isinstance(components, dict):
+            errors.append("SCOPE_COMPONENTS_INVALID")
+        else:
+            runtime = components.get("runtime")
+            source_row = components.get("source_receipt")
+            if not isinstance(runtime, dict) or runtime.get("git_blob_sha") != compiler_declared:
+                errors.append("SCOPE_RUNTIME_MISMATCH")
+            declared_source = (entry.get("source_receipt") or {}).get("git_blob_sha") if isinstance(entry.get("source_receipt"), dict) else None
+            if not isinstance(source_row, dict) or source_row.get("git_blob_sha") != declared_source:
+                errors.append("SCOPE_SOURCE_MISMATCH")
+        required_limits = {
+            "PREFLIGHT_ONLY__NO_POST_FREEZE_TERMINAL_RESULT",
+            "NO_CONSTITUENCY_SUPPORT_CLAIM",
+            "NO_PRESENTER_OR_OPERATOR_GENERALIZATION",
+            "NO_MEASUREMENT_INVARIANCE_CLAIM",
+            "NO_SOCIAL_INFLUENCE_OR_REACTIVITY_CLOSURE",
+            "NO_GLOBAL_R8_SEMANTIC_OR_EXECUTION_LEAF_CLOSURE",
+            "NO_GLOBAL_R8_ROOT_CLOSURE",
+        }
+        if not required_limits <= set(scope.get("limitations") or []):
+            errors.append("SCOPE_LIMITATIONS_MISSING")
+        claim_scope = {
+            "kind": R8_KIND,
+            "guarantees": [
+                "FROZEN_512_CASE_PRE_BEACON_POPULATION_PASSES",
+                "ALL_SIX_FROZEN_DELEGATION_CASE_CLASSES_PRESENT",
+                "ZERO_CASE_REPLACEMENT",
+                "ZERO_ADAPTIVE_CASE_SELECTION",
+                "ZERO_TUNING_REPLAY",
+            ],
+            "limitations": sorted(required_limits),
+        }
+    return errors, claim_scope
+
+
+def _validate_r12(
+    entry: dict[str, Any],
+    source: dict[str, Any] | None,
+    verifier: dict[str, Any] | None,
+    compiler_declared: Any,
+    repo_root: Path,
+) -> tuple[list[str], Any]:
+    errors = _common_checks(entry, R12_ROOT, R12_LEAVES)
+    claim_scope = None
+    scope, e = _read_bound(repo_root, entry.get("scope_governance"), "SCOPE_GOVERNANCE")
+    errors.extend(e)
+    if source is not None:
+        if source.get("schema") != R12_SOURCE_SCHEMA:
+            errors.append("SOURCE_SCHEMA_INVALID")
+        if source.get("status") != "PASS__PINNED_CURRENT_GENERATION__PYCOMPILE__18_OF_18__ZERO_TERMINAL_CREDIT":
+            errors.append("SOURCE_STATUS_NOT_ADMITTED")
+        exact = source.get("exact_blobs")
+        if not isinstance(exact, dict) or exact.get("uvck_runtime") != compiler_declared:
+            errors.append("SOURCE_RUNTIME_MISMATCH")
+        replay = source.get("replay")
+        if not isinstance(replay, dict) or replay.get("tests_run") != 18 or replay.get("tests_passed") != 18 or replay.get("tests_failed") != 0:
+            errors.append("SOURCE_REPLAY_INVALID")
+        required_proved = {
+            "SUPPORTED_DEFEATER_DOMINANCE_IS_ORDER_INDEPENDENT_ON_CURRENT_GENERATION",
+            "GENERIC_GRAPH_STILL_CANNOT_SELF_CERTIFY_EXECUTION_OR_ADVERSARIAL_CLOSURE",
+            "UNMAPPED_CHALLENGE_FAILS_CLOSED",
+            "KNOWN_PROFESSIONAL_QUALITY_ATTACK_SET_REQUIRES_NO_NEW_UVCK_PRIMITIVE",
+        }
+        if not required_proved <= set(source.get("proves") or []):
+            errors.append("SOURCE_REQUIRED_META_PROPERTIES_MISSING")
+        required_nonclaims = {
+            "UNKNOWN_DEFEATER_COMPLETENESS",
+            "PROFESSIONAL_QUALITY_DOMAIN_PROOF_CLOSURE",
+            "PROFESSIONAL_QUALITY_DOMAIN_EXECUTION_CLOSURE",
+            "FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION",
+            "LIVE_DEFAULT_PROMOTION",
+        }
+        if not required_nonclaims <= set(source.get("not_proved") or []):
+            errors.append("SOURCE_SCOPE_NONCLAIMS_MISSING")
+    if verifier is not None:
+        if verifier.get("schema") != R12_VERIFY_SCHEMA:
+            errors.append("VERIFIER_SCHEMA_INVALID")
+        if verifier.get("status") != "PASS__EXACT_BLOBS__PYCOMPILE__11_OF_11__ZERO_CREDIT":
+            errors.append("VERIFIER_STATUS_NOT_ADMITTED")
+        if verifier.get("runtime_git_blob_sha") != compiler_declared:
+            errors.append("VERIFIER_RUNTIME_MISMATCH")
+    if scope is not None:
+        if scope.get("schema") != R12_SCOPE_SCHEMA:
+            errors.append("SCOPE_SCHEMA_INVALID")
+        if scope.get("status") != "ACTIVE_SCOPED_UVCK_META_COMPOSITION_AND_DEFEATER_SOUNDNESS__ZERO_GLOBAL_LEAF_CREDIT":
+            errors.append("SCOPE_STATUS_INVALID")
+        components = scope.get("exact_components")
+        if not isinstance(components, dict):
+            errors.append("SCOPE_COMPONENTS_INVALID")
+        else:
+            runtime = components.get("runtime")
+            replay_row = components.get("current_generation_replay")
+            order_row = components.get("order_soundness_verification")
+            if not isinstance(runtime, dict) or runtime.get("git_blob_sha") != compiler_declared:
+                errors.append("SCOPE_RUNTIME_MISMATCH")
+            source_declared = (entry.get("source_receipt") or {}).get("git_blob_sha") if isinstance(entry.get("source_receipt"), dict) else None
+            verifier_declared = (entry.get("compiler_verification") or {}).get("git_blob_sha") if isinstance(entry.get("compiler_verification"), dict) else None
+            if not isinstance(replay_row, dict) or replay_row.get("git_blob_sha") != source_declared:
+                errors.append("SCOPE_SOURCE_MISMATCH")
+            if not isinstance(order_row, dict) or order_row.get("git_blob_sha") != verifier_declared:
+                errors.append("SCOPE_VERIFIER_MISMATCH")
+        required_limits = {
+            "NO_UNKNOWN_DEFEATER_COMPLETENESS",
+            "NO_DOMAIN_SEMANTIC_CLOSURE",
+            "NO_DOMAIN_EXECUTION_CLOSURE",
+            "NO_FULL_PRIVATE_REPOSITORY_REGRESSION",
+            "NO_LIVE_DEFAULT_PROMOTION",
+            "NO_GLOBAL_R12_SEMANTIC_OR_EXECUTION_LEAF_CLOSURE",
+            "NO_GLOBAL_R12_ROOT_CLOSURE",
+        }
+        if not required_limits <= set(scope.get("limitations") or []):
+            errors.append("SCOPE_LIMITATIONS_MISSING")
+        claim_scope = {
+            "kind": R12_KIND,
+            "guarantees": [
+                "SUPPORTED_DEFEATER_DOMINANCE_IS_ORDER_INDEPENDENT",
+                "GENERIC_GRAPH_CANNOT_SELF_CERTIFY_EXECUTION_OR_ADVERSARIAL_CLOSURE",
+                "UNMAPPED_CHALLENGE_FAILS_CLOSED",
+                "KNOWN_PROFESSIONAL_QUALITY_ATTACK_SET_REQUIRES_NO_NEW_UVCK_PRIMITIVE",
+            ],
+            "limitations": sorted(required_limits),
+        }
+    return errors, claim_scope
+
+
 def validate_entry(entry: dict[str, Any], *, repo_root: Path = ROOT) -> dict[str, Any]:
     errors: list[str] = []
     if not isinstance(entry, dict):
@@ -1051,6 +1233,14 @@ def validate_entry(entry: dict[str, Any], *, repo_root: Path = ROOT) -> dict[str
     elif kind == R9_KIND:
         handler_errors, claim_scope = _validate_r9(
             entry, source, verifier, compiler_declared
+        )
+    elif kind == R8_KIND:
+        handler_errors, claim_scope = _validate_r8(
+            entry, source, verifier, compiler_declared, repo_root
+        )
+    elif kind == R12_KIND:
+        handler_errors, claim_scope = _validate_r12(
+            entry, source, verifier, compiler_declared, repo_root
         )
     else:
         handler_errors, claim_scope = ["CLAIM_KIND_UNSUPPORTED"], None
