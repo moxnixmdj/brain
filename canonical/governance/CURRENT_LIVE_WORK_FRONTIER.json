@@ -349,12 +349,14 @@
       "work_type": "RELIABILITY_IMPROVEMENT",
       "source": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
       "causal_role": "LOAD_BEARING_PR_VALIDATOR_EXISTS_BUT_REQUIRED_STATUS_CHECK_AND_BRANCH_PROTECTION_ARE_NOT_ENFORCED",
-      "readiness": "ACTIONABLE_ONLY_IF_REPOSITORY_SETTINGS_AUTHORITY_IS_AVAILABLE",
+      "readiness": "BLOCKED__CURRENT_GITHUB_CONNECTION_CANNOT_READ_BRANCH_PROTECTION__RULESETS_API_ALSO_UNAVAILABLE_FOR_PRIVATE_REPO_PLAN",
       "claims_new_primitive": false,
       "score_state": "UNBOUND",
-      "scheduler_state": "READY_EVIDENCE",
-      "prerequisites_satisfied": true,
-      "prerequisite_work_ids": [],
+      "scheduler_state": "BLOCKED",
+      "prerequisites_satisfied": false,
+      "prerequisite_work_ids": [
+        "REPOSITORY_SETTINGS_READ_OR_ADMIN_AUTHORITY"
+      ],
       "mutation_keys": [
         "github:repository-settings"
       ],
@@ -367,12 +369,18 @@
       "vector_evidence_state": "PARTIAL",
       "vector_evidence": {},
       "read_only_evidence": {
-        "source": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
-        "source_git_blob_sha": "50f0194142c2649d67bbaf6285b8e1dd8051ef43",
-        "pr_gate_status": "DEFINED_AND_EXACT_BYTE_VERIFIED__NOT_YET_MERGE_BLOCKING",
-        "required_status_check_enforced": false,
-        "branch_protection_enforced": false,
-        "settings_connector_direct_read_available": false,
+        "source": "FRESH_GITHUB_SETTINGS_READ_2026_10_10",
+        "rulesets_read": {
+          "available": false,
+          "http_status": 403,
+          "reason": "PRIVATE_REPOSITORY_RULESETS_FEATURE_UNAVAILABLE_ON_CURRENT_GITHUB_PLAN"
+        },
+        "branch_protection_read": {
+          "available": false,
+          "http_status": 403,
+          "reason": "RESOURCE_NOT_ACCESSIBLE_BY_INTEGRATION"
+        },
+        "settings_authority_available": false,
         "vector_bounds_complete": false
       }
     },
@@ -469,6 +477,7 @@
       "acceptance_credit_delta": 0,
       "terminal_credit_delta": 0,
       "incremental_spend_usd": 0
-    }
+    },
+    "repository_enforcement_lane_reclassification": "READY_EVIDENCE_TO_BLOCKED__FRESH_AUTHORITY_READ_FAILED__NO_RETRY_UNTIL_AUTHORITY_OR_PLAN_CHANGES"
   }
 }
