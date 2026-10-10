@@ -1,0 +1,92 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_DECLARED_SYSTEM_SUBJECT_V2",
+  "date": "2026-10-10",
+  "status": "CONTENT_ADDRESSED_DECLARED_SYSTEM_SUBJECT__R1_TARGET_STEP_INTERNALLY_EXECUTED__R1_ROOT_STILL_OPEN_AT_RAW_LANGUAGE_BINDING__ZERO_QUALITY_AUTHORITY",
+  "subject_kind": "DECLARED_SYSTEM",
+  "subject_id": "PROFESSIONAL_QUALITY_P1_V4_R1_LIVE_INTEGRATED_SYSTEM_CURRENT_MAIN_20261010",
+  "subject_sha256": "f885374aa893c9e9b5afd764245e333cabb3a9d0cfbbdd2ee4cd9fc7f84a2eb7",
+  "subject_hash_rule": "SHA256_OF_RFC8259_JSON_CANONICALIZED_BY_SORTED_KEYS_NO_WHITESPACE_UTF8_OVER_SYSTEM_MATERIAL_OBJECT",
+  "system_material": {
+    "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_P1_V4_DECLARED_SYSTEM_SUBJECT_MATERIAL_V2",
+    "components": [
+      {
+        "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_EXECUTION_PROFILE_20261010_V3.json",
+        "git_blob_sha": "f7e89eafbb691c16d1bdf5b8d295a468d5e3bec5"
+      },
+      {
+        "path": "canonical/runtime/professional_quality_p1_router_v3.py",
+        "git_blob_sha": "cdb6716ac6d562d1ab222242d07aeecc5cdfac78"
+      },
+      {
+        "path": "canonical/runtime/professional_quality_p1_router_v4.py",
+        "git_blob_sha": "1c67bf99100b5c51f113ededf0920b7ccb7643e4"
+      },
+      {
+        "path": "canonical/runtime/professional_target_instance_compiler_v1.py",
+        "git_blob_sha": "0403ed2916ea0f7e48b77aec24ea9dd4fda8fce0"
+      },
+      {
+        "path": "canonical/runtime/professional_artifact_hard_defect_preflight_v1.py",
+        "git_blob_sha": "1921ef67ec36ac1847243e99c49f638bf7cc170a"
+      },
+      {
+        "path": "canonical/governance/PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_REGISTRY_20261010_V1.json",
+        "git_blob_sha": "8e81ccfc2c90fefcb95883451e9e75ffce2fad6c"
+      },
+      {
+        "path": "canonical/governance/PROFESSIONAL_QUALITY_LEAF_BINDING_MANIFEST_20261010_V1.json",
+        "git_blob_sha": "a7cad32c9fd969ff2c3857bb924c7bd746237ec2"
+      },
+      {
+        "path": "canonical/runtime/professional_quality_leaf_binder_v2.py",
+        "git_blob_sha": "1a181b453271a2ce4fc112c3f6586afaf5effbd7"
+      },
+      {
+        "path": "canonical/governance/PROFESSIONAL_QUALITY_SAME_SUBJECT_COMPOSITION_GATE_20261010_V1.json",
+        "git_blob_sha": "f7a4496a6579041c6e2606243732c23b22bcf89c"
+      },
+      {
+        "path": "canonical/runtime/professional_quality_same_subject_composition_gate_v1.py",
+        "git_blob_sha": "46ab1a5bdf91e3559bfca89ee6059d0be7e89937"
+      },
+      {
+        "path": "canonical/governance/PROFESSIONAL_QUALITY_CLOSURE_NORMAL_FORM_20261009_V1.json",
+        "git_blob_sha": "ebcfe5a48efce9df7fbc69a3817ac2f9adb1ff93"
+      },
+      {
+        "path": "canonical/runtime/assurance_closure_compiler_v1.py",
+        "git_blob_sha": "b4274a48edbe626a9ae9fd33da2f2227ca4dd5e8"
+      }
+    ]
+  },
+  "verified_r1_live_target_execution": {
+    "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_P1_V4_R1_LIVE_TARGET_CURRENT_MAIN_VERIFY_20261010_V2.json",
+    "verification_git_blob_sha": "a0efdcf7e9b52c3706adde9b639d7b7f151d5da1",
+    "canonical_target_instance_path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V4_R1_TARGET_INSTANCE_20261010_V1.json",
+    "canonical_target_instance_git_blob_sha": "15a9ff24ddfb8256cdeb95548c1e68fe619064d2",
+    "canonical_compiled_target_sha256": "842546d190e1efe4e1dd07cbebbc4c18f20b637e93b30737e40622e7c875183b"
+  },
+  "identity_semantics": {
+    "exact_component_set_frozen": true,
+    "r1_target_step_is_brain_executed": true,
+    "caller_r1_target_step_self_attestation_forbidden": true,
+    "multiple_supplied_interpretations_fail_closed": true,
+    "component_inclusion_does_not_imply_root_satisfaction": true,
+    "every_root_subject_binding_requires_independent_verification": true,
+    "global_subject_identity_authority": false
+  },
+  "current_r1_boundary": {
+    "bounded_live_capability_proved": true,
+    "full_root_subject_binding_proved": false,
+    "remaining_gap": "ARBITRARY_RAW_TASK_TO_EXPLICIT_TARGET_INSTANCE_SOUNDNESS_AND_OPEN_WORLD_INTERPRETATION_COMPLETENESS_NOT_PROVED"
+  },
+  "hard_nonclaims": [
+    "NO_R1_ROOT_SUBJECT_BINDING_AUTHORITY_YET",
+    "NO_ARBITRARY_LANGUAGE_TARGET_EXTRACTION_COMPLETENESS",
+    "NO_GLOBAL_LEAF_OR_ROOT_CLOSURE",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
