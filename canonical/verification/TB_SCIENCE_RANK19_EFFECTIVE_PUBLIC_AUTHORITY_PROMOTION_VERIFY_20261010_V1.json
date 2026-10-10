@@ -1,0 +1,101 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK19_EFFECTIVE_PUBLIC_AUTHORITY_PROMOTION_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__PUBLIC_PR_2591_PROMOTED_EFFECTIVE_AUTHORITY__THREE_LOAD_BEARING_ZERO_EXPOSURE_WORKFLOWS_SUCCESS__SAME_CLAIM_BOUND_LOGICAL_ATTEMPT__ACTIVATION_ABSENT__ZERO_CREDIT",
+  "subject": {
+    "public_repository": "moxnixmdj/verification-capsule-runner",
+    "public_pull_request": 2591,
+    "public_pr_head_sha": "d93b53c1496cdb89b0d6c32491ea93bdbe3edd6f",
+    "public_merge_commit_sha": "c82abe2be6028408b5cd148b1dd20717db661572",
+    "base_branch": "terminal-execution-v1"
+  },
+  "exact_public_blobs": {
+    "current_terminal_execution_surface": "c70895390c12ea1d32b586f07b51e892d2a99321",
+    "rank19_public_authority_v3": "31cd7ac44fcdac4dbf1dbcc3e9509aa263d64eac",
+    "rank19_public_ledger_v40": "62a9aeccbdeea3dd8f51446ddfdd65f993c1c282",
+    "rank19_epoch_v7_promoted_v1": "7caf4cd8239f2f47e35889aea8010c00fd9394ed",
+    "rank19_execution_claim_v7_promoted_v1": "b7d11231103a45a2ae16b8e4e64e41b9a801001d",
+    "rank19_promoted_pre_activation_verifier": "7a2e1ab2f879cf37ead21fe86abcdcd8701ee13c"
+  },
+  "canonical_basis": {
+    "brain_rank19_authority_v4_path": "canonical/governance/TB_SCIENCE_RANK19_ONE_SLOT_EXECUTION_AUTHORITY_20261010_V4.json",
+    "brain_rank19_authority_v4_git_blob_sha": "95f4cd33804af167ce11088467883858e9e0a042",
+    "brain_ledger_v40_path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V40.json",
+    "brain_ledger_v40_git_blob_sha": "2bb3967dfe894d1dd0e11e190a956faf1fdfcc46",
+    "public_v14_reseal_verification_path": "canonical/verification/TB_SCIENCE_RANK19_V14_FINAL_PUBLIC_RESEAL_VERIFICATION_20261010_V2.json",
+    "public_v14_reseal_verification_git_blob_sha": "c0a723a39c1fcfb3e25a4d72ef9543f0e8f8f17f"
+  },
+  "logical_attempt": {
+    "slot_id": "terminal-bench-science/diag-chipseq::trial-0",
+    "task_digest": "sha256:437bfacaebda9ce9905d54bdfe7247aec9649038206512c64547021f42e3950b",
+    "logical_attempt_id": "a3672b9d77c8fa0b7d3f0610ac2c008d2888e566d8a75ac92aa7078c1523abe6",
+    "execution_claim_binding_digest": "sha256:4e9cae8c879a8122f11fe6ae7eea775fcc4fb0ae62b3a87e208a95d28ea4d05f",
+    "same_logical_attempt_preserved": true
+  },
+  "load_bearing_workflow_runs": [
+    {
+      "name": "Verify TB-Science Rank19 V14 claim-bound reseal",
+      "run_id": 38037701294,
+      "job_id": 114171495458,
+      "conclusion": "success",
+      "proved": [
+        "CLAIM_BOUND_IDENTITY_DERIVATION_AND_SEPARATION",
+        "STATE_APPROPRIATE_ZERO_EXPOSURE_VERIFIER",
+        "ADMISSION_AND_PREFLIGHT_WITHOUT_ACTIVATION",
+        "NO_ACTIVATION_OR_BENCHMARK_EXPOSURE"
+      ]
+    },
+    {
+      "name": "Verify TB-Science Rank19 V13 reseal from trusted base",
+      "run_id": 38037701177,
+      "job_id": 114171495252,
+      "conclusion": "success",
+      "proved": [
+        "PROOF_CARRYING_PROMOTED_SURFACE_EXACT_BINDINGS_AND_ZERO_EXPOSURE"
+      ]
+    },
+    {
+      "name": "Verify TB-Science execution ratchet v1",
+      "run_id": 38037701109,
+      "job_id": 114171495170,
+      "conclusion": "success",
+      "proved": [
+        "INVARIANT_RATCHET",
+        "ACTIVATION_GATE_CLOSED",
+        "ZERO_EXPOSURE_RECEIPT"
+      ]
+    }
+  ],
+  "unrelated_broad_path_failures": {
+    "present": true,
+    "credit_effect": "NONE",
+    "reason": "OLDER_RANK16_17_18_WORKFLOWS_TRIGGERED_BY_BROAD_PATH_FILTERS__NOT_LOAD_BEARING_FOR_RANK19_PROMOTION"
+  },
+  "verified_state": {
+    "execution_authority": true,
+    "task_read_authority": true,
+    "task_read_history": false,
+    "task_started": false,
+    "start_cas_acquired": false,
+    "benchmark_trials_consumed": 0,
+    "activation_present": false,
+    "retries_authorized": 0,
+    "replacement_allowed": false
+  },
+  "hard_nonclaims": [
+    "NO_TASK_READ_OCCURRED",
+    "NO_DURABLE_START_OCCURRED",
+    "NO_ACTIVATION_FILE_PRESENT",
+    "NO_BENCHMARK_RESULT",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_TERMINAL_CREDIT",
+    "NO_RETRY_OR_REPLACEMENT_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_trials_consumed_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
