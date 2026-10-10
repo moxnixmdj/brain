@@ -1,0 +1,20 @@
+{
+  "schema":"PROJECT_BRAIN_ARM_MARGIN_CONTEXT_SOURCE_PACK_V1",
+  "scope_id":"FINANCE_ARM_MARGIN_CONTEXT_IDENTITY_V1",
+  "sources":[
+    {
+      "schema":"PROJECT_BRAIN_HTTPS_SOURCE_FRAGMENT_PROJECTION_PACK_V2",
+      "source_id":"CFPB_ARM_INDEX_MARGIN_2024",
+      "url":"https://www.consumerfinance.gov/ask-cfpb/for-an-adjustable-rate-mortgage-arm-what-are-the-index-and-margin-and-how-do-they-work-en-1949/",
+      "retrieval_user_agent":"ProjectBrainSourceProjectionVerifier/2.0",
+      "fragments":[
+        {
+          "fragment_id":"CFPB_ARM_MARGIN_DEFINITION",
+          "section_anchor":"For an adjustable-rate mortgage (ARM), what are the index and margin, and how do they work?",
+          "text":"The margin is the number of percentage points added to the index by the mortgage lender to set your interest rate on an adjustable-rate mortgage (ARM) after the initial rate period ends.",
+          "max_chars_after_anchor":12000
+        }
+      ]
+    }
+  ]
+}
