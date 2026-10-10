@@ -29,6 +29,9 @@ class EscapeProgress13RouteManifestTests(unittest.TestCase):
         self.assertEqual(out["gap_b_count"], 4)
         self.assertEqual(out["strict_progress_witness_bound_count"], 0)
         self.assertEqual(out["externality_proved_count"], 0)
+        self.assertTrue(out["shared_well_founded_progress_measure_bound"])
+        self.assertEqual(out["gap_b_specific_action_bindings_proved"], 0)
+        self.assertFalse(out["provider_totality_proved"])
         self.assertFalse(out["cc_r3_proved"])
         self.assertEqual(out["terminal_credit_delta"], 0)
 
@@ -54,6 +57,27 @@ class EscapeProgress13RouteManifestTests(unittest.TestCase):
         self.assertFalse(out["pass"])
         self.assertTrue(any("EXTERNALITY_MUST_REMAIN_FALSE" in e for e in out["errors"]))
         self.assertTrue(any("STRICT_PROGRESS_CREDIT_NOT_SUPPORTED" in e for e in out["errors"]))
+
+    def test_shared_progress_evidence_hash_drift_fails_closed(self):
+        m = copy.deepcopy(MANIFEST)
+        m["shared_progress_reduction"]["evidence"][1] = "0" * 40
+        out = validate_manifest(m, CLAIM, reader)
+        self.assertFalse(out["pass"])
+        self.assertIn("SHARED_PROGRESS_EVIDENCE_BLOB_STALE", out["errors"])
+
+    def test_shared_measure_cannot_self_promote_provider_totality(self):
+        m = copy.deepcopy(MANIFEST)
+        m["shared_progress_reduction"]["provider_totality_proved"] = True
+        out = validate_manifest(m, CLAIM, reader)
+        self.assertFalse(out["pass"])
+        self.assertIn("SHARED_PROGRESS_PROVIDER_TOTALITY_MUST_REMAIN_OPEN", out["errors"])
+
+    def test_shared_measure_cannot_grant_specific_row_credit(self):
+        m = copy.deepcopy(MANIFEST)
+        m["shared_progress_reduction"]["specific_internal_action_bindings_proved"] = 1
+        out = validate_manifest(m, CLAIM, reader)
+        self.assertFalse(out["pass"])
+        self.assertIn("SHARED_PROGRESS_ROW_CREDIT_MUST_REMAIN_ZERO", out["errors"])
 
 
 if __name__ == "__main__":
