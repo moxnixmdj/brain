@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R11_EVALUATION_FIREWALL_SCOPED_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__PINNED_EXACT_BYTES__PYCOMPILE__4_OF_4__BOUNDED_POST_IDENTITY_DISCOVERY_REVOCATION__ZERO_GLOBAL_LEAF_CREDIT",
+  "repository": "moxnixmdj/brain",
+  "pinned_main_commit": "1ade08f4c7676dfcca9141e1adf89e89e33604f0",
+  "carrier": {
+    "name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/pq-r11-firewall-1ade08f"
+  },
+  "exact_blobs": {
+    "runtime": "11776f87f41c66802a28a417c344cccb394eb2aa",
+    "tests": "710006e95a7107320945461fd5b8eca1f61c5fe7",
+    "governance": "902c19851629bfb2342eea29e73f4a7ab5d212c5"
+  },
+  "replay": {
+    "py_compile": "PASS",
+    "tests_run": 4,
+    "tests_passed": 4,
+    "tests_failed": 0
+  },
+  "claim_scope": {
+    "kind": "CLEAN_EVALUATION_LANE_POST_IDENTITY_DISCOVERY_REVOCATION",
+    "root_id": "R11_ADAPTIVE_INTEGRITY_SECURITY",
+    "guarantees": [
+      "POST_EXPOSURE_REPO_SEARCH_DENIED",
+      "POST_EXPOSURE_EXACT_FROZEN_BLOB_READ_ALLOWED",
+      "TASK_IDENTITY_EXPOSURE_CANNOT_REVERSE",
+      "REVOKED_DISCOVERY_CAPABILITY_CANNOT_BE_RESTORED_IN_SAME_LANE"
+    ],
+    "limitations": [
+      "NO_GENERAL_PROMPT_INJECTION_CLOSURE",
+      "NO_GENERAL_GOODHART_CLOSURE",
+      "NO_HOLDOUT_LIFECYCLE_CLOSURE",
+      "NO_GLOBAL_R11_LEAF_OR_ROOT_CLOSURE"
+    ]
+  },
+  "current_state": {
+    "global_leaf_credit": false,
+    "global_r11_root_closed": false,
+    "domain_semantic_closure": false,
+    "domain_execution_closure": false
+  },
+  "hard_nonclaims": [
+    "NO_GLOBAL_R11_LEAF_CLOSURE",
+    "NO_GLOBAL_R11_ROOT_CLOSURE",
+    "NO_GENERAL_ADAPTIVE_SECURITY_CLOSURE",
+    "NO_DOMAIN_EXECUTION_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
