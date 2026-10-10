@@ -9,11 +9,11 @@
     "source_set": [
       {
         "path": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
-        "git_blob_sha": "493d6367ee6e30b698f440823361972cc425d899"
+        "git_blob_sha": "6123d32608575d73ce042d50dfd2aa58a2714b37"
       },
       {
         "path": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
-        "git_blob_sha": "dba48e0881dcd6073ba137b9156ec2772bfe8499"
+        "git_blob_sha": "360ff610c5d2386fe47e4f36eb6f3246a4d826a4"
       },
       {
         "path": "canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json",
@@ -90,7 +90,7 @@
       "vector_evidence": {},
       "read_only_evidence": {
         "source": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
-        "source_git_blob_sha": "dba48e0881dcd6073ba137b9156ec2772bfe8499",
+        "source_git_blob_sha": "360ff610c5d2386fe47e4f36eb6f3246a4d826a4",
         "verified_root_subject_binding_count": 12,
         "required_root_count": 12,
         "composition_admissible": true,
@@ -145,6 +145,15 @@
         "readiness_replay_verification": {
           "path": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_READINESS_1_OF_24_REPLAY_VERIFY_20261010_V1.json",
           "git_blob_sha": "944e0e16c5583cd3a1b28ceb5f2348ce1d54b7a9"
+        },
+        "professional_execution_subject_pointer_intentionally_unchanged": true,
+        "scope_progress_source": {
+          "assurance_current_path": "canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json",
+          "assurance_current_git_blob_sha": "f742d1965d721c77de20dfe3ec6a04fe228386a5",
+          "r10_gate_verification_path": "canonical/verification/PROFESSIONAL_QUALITY_R10_EXECUTION_WHOLE_LEAF_V2_GATE_VERIFY_20261010_V1.json",
+          "r10_gate_verification_git_blob_sha": "afeeac2ffcdf2f858b5560299396fe450193e5df",
+          "readiness_replay_path": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_READINESS_1_OF_24_REPLAY_VERIFY_20261010_V1.json",
+          "readiness_replay_git_blob_sha": "944e0e16c5583cd3a1b28ceb5f2348ce1d54b7a9"
         }
       }
     },
@@ -310,7 +319,7 @@
       "vector_evidence": {},
       "read_only_evidence": {
         "source": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
-        "source_git_blob_sha": "493d6367ee6e30b698f440823361972cc425d899",
+        "source_git_blob_sha": "6123d32608575d73ce042d50dfd2aa58a2714b37",
         "effective_gap_a_count": 10,
         "real_authenticated_row_proofs": 0,
         "existing_realization_bridge": "ESCAPE_GAP_A_POLICY_COVER_ADAPTER_ACTIVATION_20261010_V1",
@@ -343,7 +352,7 @@
       "vector_evidence": {},
       "read_only_evidence": {
         "source": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
-        "source_git_blob_sha": "493d6367ee6e30b698f440823361972cc425d899",
+        "source_git_blob_sha": "6123d32608575d73ce042d50dfd2aa58a2714b37",
         "active_gap_b_count": 2,
         "parked_unresolved_count": 1,
         "active_gap_b_rows": [
