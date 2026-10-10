@@ -1,0 +1,77 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_P1_ROUTER_V5_TARGET_HANDOFF_INDEPENDENT_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_BRANCH_BYTES__AUTHENTICATED_GOAL_TO_TARGET_HANDOFF__31_OF_31_RELEVANT_TESTS_PASS__ZERO_QUALITY_OR_TERMINAL_CREDIT",
+  "subject": {
+    "path": "canonical/runtime/professional_quality_p1_router_v5.py",
+    "git_blob_sha": "8583b63571b5bfe86a473dcba1a716b98821cd5c"
+  },
+  "producer_id": "chatgpt-successor-professional-target-v5-20261010",
+  "independent_verifier": {
+    "provider": "Sprites",
+    "name": "brain-live-runtime-v1-verify-20261008",
+    "id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13",
+    "verifier_id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13",
+    "workspace": "/home/sprite/uvck-private-full-regression-20261010"
+  },
+  "exact_blobs": {
+    "router_v5": "8583b63571b5bfe86a473dcba1a716b98821cd5c",
+    "router_v5_tests": "6a4c643d5a3bda1a5b43df7ca9d692ce516806ee",
+    "general_adequate_decision_controller_v1": "368c6ac07e8feaf1a0c880de5388b618def912e2",
+    "router_v4": "8e5d473b5606251752c4968dfd35290e9b991f16",
+    "router_v4_tests": "e76b82fd332213d5bf6b6a0544aba70b4b71e9e2",
+    "router_v3": "cdb6716ac6d562d1ab222242d07aeecc5cdfac78",
+    "router_v3_tests": "7fd496e9200d1408d561cadcf40b8f4bf536c898",
+    "target_semantics_runtime": "583612b0e2226053ac758683087b5c5d0f510996",
+    "target_semantics_tests": "4e0f15ef5ea58d7ec4d8ae91a600d1d7e26cc1b4"
+  },
+  "replay": {
+    "py_compile": "PASS",
+    "router_v5": {
+      "tests_run": 9,
+      "tests_passed": 9,
+      "tests_failed": 0
+    },
+    "router_v4": {
+      "tests_run": 6,
+      "tests_passed": 6,
+      "tests_failed": 0
+    },
+    "router_v3": {
+      "tests_run": 11,
+      "tests_passed": 11,
+      "tests_failed": 0
+    },
+    "target_semantics": {
+      "tests_run": 5,
+      "tests_passed": 5,
+      "tests_failed": 0
+    },
+    "total_tests_run": 31,
+    "total_tests_passed": 31,
+    "total_tests_failed": 0
+  },
+  "proves": [
+    "UNBOUND_TOP_LEVEL_TARGET_INSTANCE_CANNOT_ENTER_V5",
+    "CALLER_CANNOT_SELF_ATTEST_COMPILE_TARGET_SPEC_AND_HARD_CONSTRAINTS",
+    "TARGET_INSTANCE_IS_EXTRACTED_ONLY_FROM_EXACT_DECISION_PAYLOAD_BOUND_TO_EXACT_RAW_GOAL",
+    "GOAL_OR_DECISION_PAYLOAD_TAMPER_BREAKS_CONTENT_BINDING_BEFORE_V4",
+    "TARGET_COMPILATION_PASS_IS_INJECTED_ONLY_AFTER_AUTHENTICATED_GOAL_TO_DECISION_BINDING",
+    "TARGET_BINDING_REQUIRES_NONEMPTY_PRODUCER_AND_INDEPENDENT_VERIFIER_IDENTITIES",
+    "PRODUCER_AND_VERIFIER_IDENTITIES_MUST_BE_DISTINCT",
+    "V4_TARGET_INSTANCE_CONTRACT_V3_HARD_DEFECT_PREFLIGHT_AND_TARGET_SEMANTIC_REGRESSIONS_REMAIN_GREEN"
+  ],
+  "hard_nonclaims": [
+    "NO_ARBITRARY_NATURAL_LANGUAGE_SEMANTIC_COMPLETENESS",
+    "NO_CLAIM_ALL_PROFESSIONAL_ROOTS_ARE_BOUND_TO_ONE_SUBJECT",
+    "NO_GLOBAL_PROFESSIONAL_QUALITY_CLOSURE",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY",
+    "NO_LIVE_DEFAULT_PROMOTION_FROM_THIS_REPLAY"
+  ],
+  "quality_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "capability_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
