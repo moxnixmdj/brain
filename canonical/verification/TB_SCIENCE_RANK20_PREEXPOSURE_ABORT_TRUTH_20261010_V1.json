@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK20_PREEXPOSURE_ABORT_TRUTH_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__PREEXPOSURE_ABORT_NONCONSUMING__WORKFLOW_PREFLIGHT_IMPORT_PATH_DEFECT__OLD_ACTIVATION_RETIRED",
+  "slot_id": "terminal-bench-science/hysteretic-aquifer-control::trial-0",
+  "task_digest": "sha256:681df0c3b2ada03a933ac4d2e11f07983676f87a9f26b61e416987904b880289",
+  "logical_attempt_id": "62bbf27ddcc679f431c5569244cf0c54fb1b13181e83076e2c019764f0b747e2",
+  "execution_claim_binding_digest": "sha256:ad74fd461333c1673b76ec0b439aba98c35bf6a0691796b24a5847209873adba",
+  "activation": {
+    "public_repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2603,
+    "head_sha": "b718680c056e2fe85300f2198c59c2f288d2c4fc",
+    "merge_ref_sha": "9dec09d334181baade175fb8636ea3ae52d8befd",
+    "activation_git_blob_sha": "8ed2d4dfcd69f6723f7b3c6466a51a1139bef1c0",
+    "workflow_run_id": 38043812498,
+    "workflow_job_id": 114189182998,
+    "pull_request_closed_unmerged": true
+  },
+  "receipt": {
+    "status": "PREEXPOSURE_ABORT_NONCONSUMING",
+    "artifact_id": 11667225583,
+    "artifact_digest": "sha256:9c9d28f5c7ed9a110885cc69f494cf0e99c7d715cca92cdaf9df5f7a741f17fc",
+    "task_read": false,
+    "task_started": false,
+    "start_cas_acquired": false,
+    "benchmark_trials_consumed": 0,
+    "reward": null,
+    "execution_authority_consumed": false
+  },
+  "root_cause": {
+    "class": "WORKFLOW_PREFLIGHT_IMPORT_PATH_DEFECT",
+    "exact_error": "ModuleNotFoundError: No module named 'execution_guard'",
+    "admission_v4_passed": true,
+    "preflight_started": false,
+    "harbor_installed": false,
+    "carrier_qualification_started": false,
+    "task_read_started": false,
+    "required_repair": "RUN_RANK20_PREFLIGHT_WITH_REPOSITORY_ROOT_ON_PYTHONPATH_BEFORE_ANY_TASK_READ"
+  },
+  "revocations": {
+    "activation_authority_v1_spent_for_old_bytes": true,
+    "old_activation_file_reuse": false,
+    "old_activation_branch_reuse": false,
+    "old_claim_epoch_execution_authority_effective": false
+  },
+  "accounting": {
+    "benchmark_trials_consumed_delta": 0,
+    "consumed_successes_delta": 0,
+    "consumed_final_failures_delta": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0,
+    "incremental_spend_usd": 0
+  },
+  "pass": true
+}
