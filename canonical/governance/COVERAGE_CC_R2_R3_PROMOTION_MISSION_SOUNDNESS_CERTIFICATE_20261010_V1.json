@@ -1,0 +1,99 @@
+{
+  "schema": "PROJECT_BRAIN_CC_R2_R3_PROMOTION_MISSION_SOUNDNESS_CERTIFICATE_V1",
+  "date": "2026-10-10",
+  "status": "CANDIDATE_CC_R2_CERTIFICATE__CLAIM_SCOPED_FORMAL_MISSION_REDUCTION__ZERO_TERMINAL_CREDIT",
+  "root_id": "CC_R2_MISSION_SOUNDNESS_V1",
+  "claim_id": "e1c519109c4b2c46a9225686fc2c5c5490564d1cc62d5c6ff3c6c436bfca4314",
+  "active_claim": {
+    "path": "canonical/governance/COVERAGE_COMPLETENESS_FROZEN_CLAIM_R3_PROMOTION_SAFETY_20261010_V1.json",
+    "git_blob_sha": "ace6ad8b44c3b571746f3f229ca76d68a88c3dab"
+  },
+  "mission_pointer": {
+    "path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
+    "git_blob_sha": "6ab2147306a138f9ea327d8e19cb4a5bc76e89df"
+  },
+  "mission_authority": {
+    "path": "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+    "git_blob_sha": "13c470645b037bbb46245c687dd35197b420d51a"
+  },
+  "authorized_mission_axioms": {
+    "M_VERIFY": {
+      "field": "correctness_rule",
+      "exact_value": "FAIL_CLOSED_NO_PROGRESS_CREDIT_WITHOUT_SOUND_VERIFICATION",
+      "proposition": "NO_PROGRESS_OR_PROMOTION_CREDIT_MAY_BE_GRANTED_WITHOUT_SOUND_VERIFICATION"
+    },
+    "M_COMPOUND": {
+      "field": "compounding_requirement",
+      "exact_value": "SUCCESS_AND_FAILURE_EXPERIENCE_MUST_COMPOUND_INTO_DURABLE_VERIFIED_REUSABLE_CAPABILITY",
+      "proposition": "DURABLE_REUSABLE_CAPABILITY_CREATED_FROM_EXPERIENCE_MUST_BE_VERIFIED"
+    },
+    "M_OPTIMIZE_VERIFIED": {
+      "field": "optimization_objective",
+      "exact_value": "MAXIMIZE_REUSABLE_VERIFIED_CAPABILITY_GENERALIZATION_RELIABILITY_AND_EFFICIENCY_PER_AVAILABLE_RESOURCE_WHILE_PRESERVING_SEMANTIC_CAPABILITY_AND_FUTURE_OPTION_VALUE",
+      "proposition": "VERIFIED_CAPABILITY_AND_RELIABILITY_ARE_POSITIVE_MISSION_OBJECTIVES"
+    }
+  },
+  "claim_scoped_terms": {
+    "G_minus": "IN_SCOPE_BEHAVIORS_THAT_SATISFY_ALL_FIVE_R3_PROMOTION_SAFETY_REQUIREMENTS_OF_THE_ACTIVE_PROPERTY_CERTIFICATE",
+    "G_real": "IN_SCOPE_BEHAVIORS_ACCEPTED_BY_THE_AUTHORIZED_MISSION_WITH_RESPECT_TO_THE_VERIFICATION_AND_DURABLE_LEARNING_SAFETY_PROPERTY_CERTIFIED_BY_THIS_CLAIM",
+    "progress_credit_binding": "PROMOTION_TO_DURABLE_LEARNED_SKILL_REUSE_OR_TERMINAL_TRUTH_IS_PROGRESS_CREDIT_FOR_THIS_PROPERTY",
+    "sound_verification_binding": "THE_ACTIVE_CLAIM'S_INDEPENDENT_AUTHENTICATION_PATH_IS_THE_BOUND_IMPLEMENTATION_OF_SOUND_VERIFICATION_FOR_THIS_PROPERTY",
+    "unresolved_binding": "MISSING_DISTINGUISHING_EVIDENCE_OR_ADAPTER_COVERAGE_HAS_NO_SOUND_VERIFICATION_AND_THEREFORE_MUST_NOT_RECEIVE_PROGRESS_CREDIT"
+  },
+  "reduction": [
+    {
+      "requirement": "candidate_generation_and_external_provider_outputs_have_zero_verification_promotion_acceptance_terminal_authority",
+      "mission_axioms": [
+        "M_VERIFY",
+        "M_COMPOUND"
+      ],
+      "consequence": "UNVERIFIED_CANDIDATE_OR_PROVIDER_OUTPUT_CANNOT_RECEIVE_DURABLE_LEARNING_OR_TERMINAL_PROGRESS_CREDIT"
+    },
+    {
+      "requirement": "skills_are_promoted_only_after_independent_skill_verification_and_authentication",
+      "mission_axioms": [
+        "M_VERIFY",
+        "M_COMPOUND",
+        "M_OPTIMIZE_VERIFIED"
+      ],
+      "consequence": "PROMOTED_REUSABLE_SKILL_IS_VERIFIED_BEFORE_DURABLE_REUSE"
+    },
+    {
+      "requirement": "episodes_used_for_learning_are_independently_verified_or_remain_unpromoted",
+      "mission_axioms": [
+        "M_VERIFY",
+        "M_COMPOUND"
+      ],
+      "consequence": "EXPERIENCE_ENTERING_DURABLE_LEARNING_IS_VERIFIED_OR_RECEIVES_NO_PROMOTION"
+    },
+    {
+      "requirement": "verification_frontier_acquisition_cannot_rewrite_independent_verification_authority",
+      "mission_axioms": [
+        "M_VERIFY"
+      ],
+      "consequence": "ACQUISITION_CANNOT_SELF_DEFINE_THE_SOUND_VERIFICATION_STANDARD_THAT_GRANTS_ITS_OWN_PROGRESS_CREDIT"
+    },
+    {
+      "requirement": "missing_distinguishing_evidence_or_adapter_coverage_does_not_self_certify_success",
+      "mission_axioms": [
+        "M_VERIFY"
+      ],
+      "consequence": "UNRESOLVED_EVIDENCE_GAPS_FAIL_CLOSED_WITH_ZERO_PROGRESS_CREDIT"
+    }
+  ],
+  "theorem": {
+    "statement": "FOR_THIS_ACTIVE_PROPERTY_CERTIFICATE_ONLY__EVERY_G_MINUS_BEHAVIOR_SATISFIES_THE_AUTHORIZED_MISSION'S_FAIL_CLOSED_SOUND_VERIFICATION_RULE_AND_VERIFIED_DURABLE_COMPOUNDING_REQUIREMENT_FOR_THE_EXACT_PROMOTION_SAFETY_PROPERTY__THEREFORE_G_MINUS_C_IS_A_SUBSET_OF_G_REAL_C",
+    "proof_mode": "FORMAL_REDUCTION",
+    "full_mission_optimality_implied": false,
+    "global_mission_completion_implied": false,
+    "opus_checkpoint_completion_implied": false
+  },
+  "accounting": {
+    "fresh_reality_units_consumed": 0,
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "promotion_authority": false,
+  "terminal_authority": false
+}
