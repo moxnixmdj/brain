@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R1_V6_TO_V7_TRANSPORT_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_COMPONENT_DELTA_17_OF_17__ISOLATED_REAL_VERIFIER_PASS__R1_TRANSPORTED_TO_V7__ZERO_QUALITY_OR_TERMINAL_CREDIT",
+  "predecessor_subject": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V6_DECLARED_SYSTEM_SUBJECT_20261010_V5.json",
+    "git_blob_sha": "994a6a6aef44b6bb33161f7179d1983a1b50b633",
+    "component_count": 20
+  },
+  "successor_subject": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V7_DECLARED_SYSTEM_SUBJECT_20261010_V6.json",
+    "git_blob_sha": "1d598bc8757017ceb34928d0df9f5fce859ef868",
+    "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+    "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+    "component_count": 22
+  },
+  "binding": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_R1_ROOT_SUBJECT_BINDING_20261010_V4.json",
+    "git_blob_sha": "b0b05ecd50a094c20fc7a6584a6840f6869561c9"
+  },
+  "verifier": {
+    "path": "canonical/runtime/professional_quality_r1_v6_to_v7_transport_verify_v1.py",
+    "git_blob_sha": "2ac7b1064a949ad08af6d7a965ab8bf84961adde"
+  },
+  "exact_delta": {
+    "added": [
+      [
+        "canonical/runtime/professional_quality_p1_router_v7.py",
+        "765b5994c2fcb5eb669b5fd0d989cc79c1609908"
+      ],
+      [
+        "canonical/runtime/professional_step_binding_authority_v1.py",
+        "27f3c137dae7f00925083a0824d008c2b4d10f0a"
+      ]
+    ],
+    "removed_or_changed_predecessor_components": []
+  },
+  "independent_replay": {
+    "structural_checks_run": 17,
+    "structural_checks_passed": 17,
+    "carrier": "Sprites",
+    "sprite": "brain-capability-first-scheduler-verify-20261008-v1",
+    "workspace": "/home/sprite/pq-r1-v7-transport",
+    "py_compile": "PASS",
+    "real_verifier_pass": true
+  },
+  "inherited_r1_blobs": {
+    "router_v6": "88644e0517d472d9fbef8d5bc6cf3495f2b50005",
+    "goal_binding_kernel": "5b4573475437e9fc83338b900556b5c4f31c8d65",
+    "target_semantics": "583612b0e2226053ac758683087b5c5d0f510996",
+    "hard_defect_preflight": "1921ef67ec36ac1847243e99c49f638bf7cc170a"
+  },
+  "proves": [
+    "V7_IS_EXACT_ADDITIVE_V6_SUBJECT_EXTENSION_WITH_TWO_AND_ONLY_TWO_NEW_COMPONENTS",
+    "ALL_V6_R1_LOAD_BEARING_COMPONENTS_ARE_BYTE_IDENTICAL_IN_V7",
+    "V7_ADDITIONS_ONLY_STRENGTHEN_DOWNSTREAM_STEP_PROVENANCE_AND_DO_NOT_CHANGE_R1_TARGET_SEMANTICS",
+    "R1_ROOT_SUBJECT_BINDING_TRANSPORTS_TO_THE_EXACT_V7_SUBJECT"
+  ],
+  "hard_nonclaims": [
+    "NO_R2_R12_ROOT_SUBJECT_BINDING",
+    "NO_SAME_SUBJECT_COMPOSITION_PASS",
+    "NO_GLOBAL_R1_ROOT_CLOSURE",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "root_subject_binding_authority": true,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
