@@ -86,12 +86,12 @@
   },
   "current_counts": {
     "roots_total": 12,
-    "roots_subject_bound_on_final_v6": 0,
+    "roots_subject_bound_on_final_v6": 1,
     "roots_dependency_classified": 12,
     "roots_known_to_require_subject_expansion": 0,
     "roots_dependency_unclassified": 0
   },
-  "next_required_edge": "REVERIFY_R1_ON_FINAL_V6_SUBJECT__THEN_BIND_R2_R12_TO_IDENTICAL_FINAL_SUBJECT_WITHOUT_DRIFT__RUN_COMPOSITION_GATE_AT_12_OF_12",
+  "next_required_edge": "BIND_R2_R12_TO_FINAL_V6_SUBJECT_WITHOUT_DRIFT__RUN_COMPOSITION_GATE_AT_12_OF_12",
   "hard_nonclaims": [
     "NO_CURRENT_ROOT_SUBJECT_BINDING_AFTER_FINAL_SUBJECT_REFRESH",
     "NO_SAME_SUBJECT_COMPOSITION_PASS",
