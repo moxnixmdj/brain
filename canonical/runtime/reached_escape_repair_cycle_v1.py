@@ -493,9 +493,19 @@ def run(
         current = next_state
 
     final = constructor.construct(current)
+    if final.get("pass") is True:
+        return _base(
+            "PASS__REACHED_ESCAPE_REPAIR_CYCLE_CLOSED",
+            passed=True,
+            repair_cycle_closed=True,
+            repair_rounds_completed=len(trace),
+            repair_trace=trace,
+            final_state=deepcopy(current),
+            final_result=deepcopy(dict(final)),
+        )
     return _base(
         "OPEN__REPAIR_ROUND_BOUND_EXHAUSTED",
-        repair_cycle_closed=final.get("pass") is True,
+        repair_cycle_closed=False,
         repair_rounds_completed=len(trace),
         repair_trace=trace,
         final_state=deepcopy(current),
