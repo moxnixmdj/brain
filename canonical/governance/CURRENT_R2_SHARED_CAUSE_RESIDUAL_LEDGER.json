@@ -1,8 +1,8 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_R2_SHARED_CAUSE_RESIDUAL_LEDGER_POINTER_V1",
   "date": "2026-10-10",
-  "status": "ACTIVE_LIVE_DERIVED_FROM_CURRENT_R2_AUTHORITY",
-  "activation": "canonical/governance/R2_SHARED_CAUSE_RESIDUAL_LEDGER_ACTIVATION_20261010_V1.json",
+  "status": "ACTIVE_LIVE_DERIVED_FROM_CURRENT_R2_AUTHORITY__CURRENT_CLASSIFICATION_COMPLETE_REQUIRED",
+  "activation": "canonical/governance/R2_SHARED_CAUSE_RESIDUAL_LEDGER_ACTIVATION_20261010_V2.json",
   "runtime": "canonical/runtime/r2_semantic_residual_ledger_v1.py",
   "source_authority": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
   "scheduler": "canonical/runtime/capability_first_scheduler_v1.py",
@@ -13,5 +13,11 @@
     "execution": false,
     "acceptance": false,
     "terminal": false
+  },
+  "currentness": {
+    "activation_git_blob_sha": "27671f10d70ab847e9c5f80ddca7d78242c034dc",
+    "runtime_git_blob_sha": "d7646a9f0113536ed52dd4f9c2e14e0190ed52a1",
+    "tests_git_blob_sha": "9f53ebf37be156e6767fd869bb31ac3c7f83dee0",
+    "source_current_r2_binding": "MUTABLE_CURRENT_AUTHORITY_PATH_IDENTITY__FAIL_CLOSED_IF_ANY_CURRENT_BOUNDARY_CLAUSE_UNCLASSIFIED"
   }
 }
