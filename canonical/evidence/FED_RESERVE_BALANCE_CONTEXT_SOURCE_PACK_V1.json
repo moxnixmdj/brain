@@ -1,0 +1,26 @@
+{
+  "schema": "PROJECT_BRAIN_FED_RESERVE_BALANCE_CONTEXT_SOURCE_PACK_V1",
+  "scope_id": "FED_RESERVE_BALANCE_CONTEXT_2025_V1",
+  "sources": [
+    {
+      "schema": "PROJECT_BRAIN_HTTPS_SOURCE_FRAGMENT_PROJECTION_PACK_V2",
+      "source_id": "FED_IORB_FAQ_RESERVE_BALANCES_2025",
+      "url": "https://www.federalreserve.gov/monetarypolicy/iorb-faqs.htm",
+      "retrieval_user_agent": "ProjectBrainSourceProjectionVerifier/2.0",
+      "fragments": [
+        {
+          "fragment_id": "BANKS_HOLD_RESERVES_IN_FED_ACCOUNTS",
+          "section_anchor": "What are reserves, why are they important, and how do they work?",
+          "text": "banks hold reserves—money—in accounts at the Federal Reserve.",
+          "max_chars_after_anchor": 6000
+        },
+        {
+          "fragment_id": "RESERVE_BALANCES_OR_RESERVES_ASSET_LIABILITY",
+          "section_anchor": "What are reserves, why are they important, and how do they work?",
+          "text": "Reserve balances (or \"reserves\") are a liability of the Federal Reserve and an asset of the depository institutions (hereafter, \"banks\") that hold them.",
+          "max_chars_after_anchor": 6000
+        }
+      ]
+    }
+  ]
+}
