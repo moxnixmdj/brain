@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_ESCAPE_PROGRESS_ROW_PROOF_INDEPENDENT_VERIFICATION_V1",
+  "date": "2026-10-10",
+  "status": "PASS__CHARTOGRAPHY_GAP_A_STRICT_DISCRIMINATOR__SEPARATE_PUBLIC_RUNNER_REPEAT__ZERO_CREDIT",
+  "obligation_id": "CHARTOGRAPHY_TOOLS_GE_89",
+  "route_group": "GAP_A_ACQUISITION_TOTALITY",
+  "subject": {
+    "path": "canonical/governance/ESCAPE_ROW_PROOF_CHARTOGRAPHY_TOOLS_GE_89_20261010_V1.json",
+    "git_blob_sha": "423417e35cfb834bc390ab7147c80eaa4ff26a94",
+    "byte_sha256": "16ba9f728ce8bc6d3f2877278522dd7f356ac2df2c545f976a0f1c6cb25b6945"
+  },
+  "current_evidence_subject": {
+    "path": "canonical/evidence/CHARTOGRAPHY_QWEN3VL4B_ZERO_CASE_PREFLIGHT_RUN_38040901506_20261010_V1.json",
+    "git_blob_sha": "eb5bdf5c166082263a673b9ebbe8c4bdc86dc155",
+    "byte_sha256": "143d91614f6455085d202613b82c5debcbfd679e01f478a8ef745c91f32ad0ab"
+  },
+  "independent_repeat": {
+    "path": "canonical/verification/CHARTOGRAPHY_QWEN3VL4B_ZERO_CASE_PREFLIGHT_REPEAT_VERIFY_20261010_V1.json",
+    "git_blob_sha": "2115356a66bda216c0edc74b8611f98f87bf7028",
+    "run_id": 38066930051,
+    "job_id": 114256355555,
+    "workflow_git_blob_sha": "7570f4931d08b5dc1de269beff18cf8ed771421a",
+    "exact_execution_subject_repeated": true,
+    "observed_outcome": "PUBLIC_RUNNER_FEASIBLE"
+  },
+  "checks": {
+    "resolution_mode_verified": "STRICT_DISCRIMINATOR",
+    "current_acquirability_verified": true,
+    "finite_complete_outcome_set_verified": true,
+    "strict_decision_region_shrink_verified": true,
+    "authenticated_truth_preservation_verified": true,
+    "safe_zero_terminal_observation_verified": true,
+    "exact_current_evidence_binding_verified": true,
+    "zero_spend_verified": true,
+    "zero_terminal_cases_verified": true
+  },
+  "producer_id_observed": "BRAIN_CHARTOGRAPHY_ZERO_CASE_PREFLIGHT_BINDER_V1",
+  "independent_verifier_id": "PUBLIC_GITHUB_ACTIONS_REPEAT_RUN_38066930051_V1",
+  "producer_verifier_distinct": true,
+  "pass": true,
+  "independent_verified": true,
+  "semantic_proof_verified": true,
+  "evidence_bindings_verified": true,
+  "current_route_semantics_verified": true,
+  "truth_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "acceptance_authority": false,
+  "terminal_authority": false,
+  "acceptance_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "boundary": "CLOSES_ONLY_CHARTOGRAPHY_BOUND_EXECUTION_FEASIBILITY_ACQUISITION_DISCRIMINATOR__NO_CHARTOGRAPHY_THRESHOLD_OR_ACCEPTANCE_CREDIT"
+}
