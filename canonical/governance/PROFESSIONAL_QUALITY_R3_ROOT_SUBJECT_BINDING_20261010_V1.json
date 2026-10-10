@@ -1,0 +1,116 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_ROOT_SUBJECT_BINDING_V1",
+  "date": "2026-10-10",
+  "status": "CANDIDATE_R3_V7_EXACT_REALIZATION_ROOT_SUBJECT_BINDING__AWAITING_INDEPENDENT_ROOT_VERIFICATION__ZERO_QUALITY_OR_TERMINAL_AUTHORITY",
+  "root_id": "R3_REALIZATION_OBSERVATION",
+  "subject_kind": "DECLARED_SYSTEM",
+  "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+  "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+  "subject": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V7_DECLARED_SYSTEM_SUBJECT_20261010_V6.json",
+    "git_blob_sha": "1d598bc8757017ceb34928d0df9f5fce859ef868"
+  },
+  "realization_executor_external_root_support": true,
+  "candidate_executor_inside_subject_required": false,
+  "exact_v7_step_receipt_authenticated": true,
+  "bridge_evidence": {
+    "subject_verification": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_DECLARED_SYSTEM_SUBJECT_V7_VERIFY_20261010_V1.json",
+      "git_blob_sha": "9bca985bfcef8f5cc6d62b42a51ccc72a6abfd2c"
+    },
+    "proof_bound_profile_execution": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_P1_ROUTER_V7_PROOF_BOUND_STEP_VERIFY_20261010_V1.json",
+      "git_blob_sha": "b7a9df36780513ad73fd14c6a2756c8474d8434d"
+    },
+    "r3_realization_semantic_scope": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_R3_REALIZATION_SEMANTIC_SCOPE_20261010_V1.json",
+      "git_blob_sha": "1edbd92b4e7b01591162d692f1d4c9b785b4c102"
+    },
+    "r3_realization_semantic_verification": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R3_REALIZATION_SEMANTIC_VERIFY_20261010_V1.json",
+      "git_blob_sha": "3c9a6f03c9dfb7597cdb7c5ca01e9eaf66a596e0"
+    },
+    "r3_scoped_integration_verification": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R3_SEMANTIC_SCOPED_INTEGRATION_VERIFY_20261010_V1.json",
+      "git_blob_sha": "86efb5396f90a4182d90029b47868123226fa05c"
+    },
+    "predecessor_render_preflight": {
+      "path": "canonical/governance/NATIVE_ARTIFACT_RENDER_PRESERVATION_PREFLIGHT_V1.json",
+      "git_blob_sha": "b5ddc896811875b59840959e27dbb515265fc9f8"
+    },
+    "predecessor_render_public_verification": {
+      "path": "canonical/verification/NATIVE_ARTIFACT_RENDER_PRESERVATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "1a0b4ca6627aaf28eb25f6990682e87319d14d6d"
+    },
+    "exact_realization_witness": {
+      "path": "canonical/evidence/PROFESSIONAL_R3_V7_REALIZATION_WITNESS_20261010_V1.json",
+      "git_blob_sha": "95e08e82ffba5c84426e07b0f8d2556f7308f5a0"
+    },
+    "current_stack_public_verification": {
+      "path": "canonical/verification/PROFESSIONAL_R3_V7_REALIZATION_WITNESS_PUBLIC_VERIFY_20261010_V1.json",
+      "git_blob_sha": "64e7355020d700b066090d524a92737547ae1b02"
+    },
+    "render_step_receipt": {
+      "path": "canonical/governance/PROFESSIONAL_R3_V7_RENDER_STEP_RESULT_BINDING_20261010_V1.json",
+      "git_blob_sha": "76c262ee9eb355ca2bac32ede86e9c64c284ebaf"
+    },
+    "render_step_independent_verification": {
+      "path": "canonical/verification/PROFESSIONAL_R3_V7_RENDER_STEP_RESULT_BINDING_INDEPENDENT_VERIFICATION_20261010_V1.json",
+      "git_blob_sha": "12084180959187e9e2789cafd3cefa88a8d83795"
+    },
+    "witness_verifier": {
+      "path": "canonical/runtime/professional_quality_r3_realization_witness_verify_v1.py",
+      "git_blob_sha": "316d9df9ebf73756a28c11e70be7cc167c1a6c5b"
+    },
+    "witness_verifier_tests": {
+      "path": "canonical/tests/test_professional_quality_r3_realization_witness_verify_v1.py",
+      "git_blob_sha": "78c18458ad6a7913e127142fbfb30a2c4c7bd6cb"
+    }
+  },
+  "binding_scope": {
+    "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+    "step_id": "RENDER_EXACT_AUDIENCE_VIEW_AND_BIND_OBSERVATION_CHANNELS",
+    "run_context_sha256": "sha256:a0c03647ce739eee1ee92c6e4ef26347b2e98082bed68de2742d57abdbc83b70",
+    "evidence_sha256": "1edf6c89f6ee05871be7600a6812552184bcbdea299ed73e6589da7c20b9b5b0",
+    "claim": "THE_EXACT_FROZEN_V7_SUBJECT_HAS_ONE_AUTHENTICATED_BOUNDED_R3_REALIZATION_INSTANCE_WITH_CONTENT_ADDRESSED_SOURCE_AND_OUTPUT_ARTIFACT_BYTES_EXACT_AUDIENCE_VIEW_BYTES_STRUCTURAL_PRESERVATION_AND_CURRENT_STACK_RENDER_REPLAY__WITHOUT_TRANSPORTING_PREDECESSOR_VERSION_AUTHORITY_OR_GENERALIZING_TO_ARBITRARY_SEMANTIC_TARGETS",
+    "guarantees": [
+      "EXACT_V7_SUBJECT_TUPLE_BOUND",
+      "EXACT_V3_RENDER_PROFILE_STEP_BOUND",
+      "EXACT_SOURCE_AND_OUTPUT_ARTIFACT_BYTES_CONTENT_ADDRESSED",
+      "EXACT_SOURCE_AND_OUTPUT_AUDIENCE_VIEW_PNG_BYTES_CONTENT_ADDRESSED",
+      "CANONICAL_V7_RUN_CONTEXT_DIGEST_BOUND",
+      "CURRENT_UBUNTU_RENDER_STACK_FRESHLY_REPLAYED",
+      "PREDECESSOR_RENDER_STACK_VERSION_AUTHORITY_NOT_TRANSPORTED",
+      "HISTORICAL_RENDER_PRESERVATION_TESTS_PASS_ON_CURRENT_STACK",
+      "EXACT_BOUNDED_PDF_STRUCTURAL_ORACLE_PASS",
+      "EXACT_BOUNDED_PDF_RENDER_OBSERVATION_PASS",
+      "V7_RENDER_STEP_RECEIPT_AUTHENTICATED_BY_CANONICAL_STEP_BINDING_KERNEL",
+      "STEP_PRODUCER_AND_INDEPENDENT_VERIFIER_IDENTITIES_DISTINCT",
+      "CALLER_SUPPLIED_RENDER_STEP_RESULT_HAS_ZERO_AUTHORITY_WITHOUT_CONTENT_ADDRESSED_RECEIPT"
+    ],
+    "limitations": [
+      "NO_ARBITRARY_SEMANTIC_TARGET_CORRECTNESS",
+      "NO_WHOLE_CONTRACT_SCOPE_EQUIVALENCE",
+      "NO_GLOBAL_R3_ROOT_CLOSURE",
+      "NO_ALL_RENDERER_ENVIRONMENT_INVARIANCE",
+      "NO_GLOBAL_SUBJECT_IDENTITY_AUTHORITY",
+      "NO_QUALITY_AUTHORITY",
+      "NO_ACCEPTANCE_AUTHORITY",
+      "NO_PROMOTION_AUTHORITY",
+      "NO_TERMINAL_AUTHORITY",
+      "NO_R4_THROUGH_R12_ROOT_SUBJECT_BINDING",
+      "NO_SAME_SUBJECT_COMPOSITION_PASS",
+      "NO_LIVE_DEFAULT_PROMOTION"
+    ]
+  },
+  "global_subject_identity_authority": false,
+  "root_subject_binding_authority": false,
+  "semantic_truth_authority": false,
+  "execution_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
