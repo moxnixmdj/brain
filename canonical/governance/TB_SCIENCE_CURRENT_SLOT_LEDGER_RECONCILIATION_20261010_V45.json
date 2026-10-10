@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V45",
+  "date": "2026-10-10",
+  "status": "CURRENT_RANK20_EFFECTIVE_AUTHORITY__ACTIVATION_AUTHORIZED_NOT_ARMED__UNREAD_UNSTARTED__EIGHTEEN_CONSUMED",
+  "predecessor": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V44.json",
+    "git_blob_sha": "fb20c82a5b7f8c7738a526905d51cab5c7994a5a"
+  },
+  "rank20_authority": {
+    "path": "canonical/governance/TB_SCIENCE_RANK20_ONE_SLOT_EXECUTION_AUTHORITY_20261010_V3.json",
+    "git_blob_sha": "6720cd2ea9ca70f6cf1b4a26036c935759842140"
+  },
+  "activation_authority": true,
+  "public_effective_authority_verification": {
+    "path": "canonical/verification/TB_SCIENCE_RANK20_PUBLIC_EFFECTIVE_AUTHORITY_VERIFY_20261010_V1.json",
+    "git_blob_sha": "492bdfee5215c95e1cf4674106ffef42cfa17985"
+  },
+  "counts": {
+    "benchmark_trials_consumed": 18,
+    "consumed_successes_final": 0,
+    "consumed_failures_final": 18,
+    "started_result_pending": 0,
+    "finalized_slots": 18
+  },
+  "next_slot": {
+    "ledger_schedule_rank": 20,
+    "slot_id": "terminal-bench-science/hysteretic-aquifer-control::trial-0",
+    "task_digest": "sha256:681df0c3b2ada03a933ac4d2e11f07983676f87a9f26b61e416987904b880289",
+    "logical_attempt_id": "62bbf27ddcc679f431c5569244cf0c54fb1b13181e83076e2c019764f0b747e2",
+    "task_read_history": false,
+    "task_started": false,
+    "start_cas_acquired": false,
+    "benchmark_trials_consumed": 0,
+    "execution_authority_effective": true,
+    "task_read_authority_effective": true,
+    "activation_authority": true,
+    "activation_present": false
+  },
+  "scheduler": {
+    "frozen": true,
+    "reason": "RANK20_EXACT_ONE_FILE_ACTIVATION_AUTHORIZED_NOT_YET_ARMED",
+    "only_authorized_transition": "CREATE_EXACT_ONE_FILE_RANK20_ACTIVATION_BRANCH_FROM_E022D442"
+  },
+  "execution_authority": true,
+  "finalization_authority": false,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
