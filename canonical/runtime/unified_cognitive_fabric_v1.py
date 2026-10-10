@@ -36,6 +36,7 @@ from canonical.runtime import oewn_decision_sense_control_v1 as oewn_decision_se
 from canonical.runtime import finance_bounded_concept_registry_verify_v1 as finance_concept_verify
 from canonical.runtime import one_shot_reality_closure_v2 as one_shot_reality_closure
 from canonical.runtime import reached_escape_repair_cycle_v1 as reached_escape_repair
+from canonical.runtime import global_retrieval_entrypoint_v4 as global_retrieval
 
 SCHEMA = "PROJECT_BRAIN_UNIFIED_COGNITIVE_FABRIC_V1"
 ROOT = Path(__file__).resolve().parents[2]
@@ -66,6 +67,7 @@ ENGINE_DESCRIPTORS = {
     "SEMANTIC_AMBIGUITY": "semantic_ambiguity_control_v1.decide",
     "SEMANTIC_RELATION": "semantic_relation_control_v2.resolve",
     "OEWN_DECISION_SENSE": "oewn_decision_sense_control_v1.resolve",
+    "GLOBAL_RETRIEVAL_PLAN": "global_retrieval_entrypoint_v4.compile_authorized_plan",
 }
 
 META_ORCHESTRATORS = {
@@ -688,6 +690,22 @@ def run(
                 }
             else:
                 raise CognitiveFabricError("TERMINAL_CLOSURE_OPERATION_INVALID:" + operation)
+        elif mode == "GLOBAL_RETRIEVAL_PLAN":
+            query_actions = payload.get("query_actions", [])
+            sources = payload.get("sources", [])
+            state = payload.get("state")
+            if not isinstance(query_actions, list):
+                raise CognitiveFabricError("GLOBAL_RETRIEVAL_QUERY_ACTIONS_NOT_LIST")
+            if not isinstance(sources, list):
+                raise CognitiveFabricError("GLOBAL_RETRIEVAL_SOURCES_NOT_LIST")
+            if state is not None and not isinstance(state, Mapping):
+                raise CognitiveFabricError("GLOBAL_RETRIEVAL_STATE_NOT_OBJECT")
+            out = global_retrieval.compile_authorized_plan(
+                root=ROOT,
+                query_actions=query_actions,
+                sources=sources,
+                state=state,
+            )
         elif mode == "OWNERSHIP_CATALOG":
             out = live_ownership.evaluate(ENGINE_DESCRIPTORS)
         elif mode == "LIVE_COMPOSITION":
