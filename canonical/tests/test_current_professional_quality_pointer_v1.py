@@ -57,4 +57,14 @@ def test_current_professional_quality_projects_verified_scoped_truth_without_ove
     legacy = current["legacy_router_verification"]
     assert legacy["scope"] == "ROUTER_V1_ONLY__DOES_NOT_VERIFY_ROUTER_V3"
     assert "NO_ROUTER_V3_INDEPENDENT_REPLAY_YET" not in current["hard_nonclaims"]
-    assert current["next"].startswith("BIND_DOMAIN_SEMANTIC_AND_EXECUTION_EVIDENCE")
+    assert current["next"].startswith(
+        "BIND_REAL_SAME_SUBJECT_ROOT_RECEIPTS_FOR_ONE_EXACT_ARTIFACT_OR_SYSTEM"
+    )
+    leaf = current["leaf_coverage_projection"]
+    assert leaf["verified_global_leaf_count"] == 0
+    assert leaf["open_global_leaf_count"] == 24
+    assert leaf["partial_coverage_leaf_count"] == 13
+    same = current["same_subject_composition"]
+    assert same["structural_gate_verified"] is True
+    assert same["real_all_root_subject_bound"] is False
+    assert "NO_REAL_ARTIFACT_OR_SYSTEM_BOUND_TO_ALL_TWELVE_ROOTS_YET" in current["hard_nonclaims"]
