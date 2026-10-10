@@ -96,6 +96,35 @@ def route(state: Mapping[str, Any], *, repo_root: str | Path | None = None) -> d
             goal_to_decision_binding=deepcopy(auth),
         )
 
+    # The shared R2 authenticator proves exact content binding and checks the
+    # independent_verified flag.  For this professional-routing authority edge
+    # we additionally require concrete, distinct producer/verifier identities so
+    # a caller cannot satisfy "independent" with an anonymous self-assertion.
+    try:
+        receipt_doc, _, _ = decision._bound_json(
+            binding.get("receipt"),
+            repo_root=root,
+            prefixes=("canonical/governance/", "canonical/verification/"),
+        )
+        verify_doc, _, _ = decision._bound_json(
+            binding.get("verification"),
+            repo_root=root,
+            prefixes=("canonical/verification/",),
+        )
+    except Exception as exc:
+        return _fail(
+            "TARGET_BINDING_IDENTITY_EVIDENCE_INVALID",
+            identity_error=type(exc).__name__ + ":" + str(exc),
+        )
+    producer_id = receipt_doc.get("producer_id")
+    verifier_id = verify_doc.get("independent_verifier_id")
+    if not isinstance(producer_id, str) or not producer_id.strip():
+        return _fail("TARGET_BINDING_PRODUCER_ID_REQUIRED")
+    if not isinstance(verifier_id, str) or not verifier_id.strip():
+        return _fail("TARGET_BINDING_INDEPENDENT_VERIFIER_ID_REQUIRED")
+    if producer_id.strip() == verifier_id.strip():
+        return _fail("TARGET_BINDING_PRODUCER_VERIFIER_NOT_INDEPENDENT")
+
     delegated = deepcopy(dict(state))
     delegated.pop("goal", None)
     delegated.pop("decision_payload", None)
@@ -114,6 +143,8 @@ def route(state: Mapping[str, Any], *, repo_root: str | Path | None = None) -> d
     result["goal_to_decision_binding"] = deepcopy(auth)
     result["target_instance_source"] = "AUTHENTICATED_DECISION_PAYLOAD"
     result["target_step_injected_by_authenticated_binding"] = True
+    result["target_binding_producer_id"] = producer_id.strip()
+    result["target_binding_independent_verifier_id"] = verifier_id.strip()
     result["target_compilation_self_attestation_allowed"] = False
     result["unbound_target_substitution_allowed"] = False
     result["semantic_truth_authority"] = False
