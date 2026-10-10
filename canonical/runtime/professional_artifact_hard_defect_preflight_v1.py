@@ -16,6 +16,15 @@ import xml.etree.ElementTree as ET
 
 SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_ARTIFACT_HARD_DEFECT_PREFLIGHT_V1"
 SUPPORTED_SUFFIXES = {".docx", ".xlsx", ".pptx"}
+CHECK_IDS = {
+    "DOCX_NONEMPTY_CONTENT",
+    "XLSX_HAS_VISIBLE_WORKSHEET",
+    "XLSX_NO_ERROR_CELLS",
+    "XLSX_NO_ZERO_WIDTH_COLUMNS",
+    "XLSX_NONEMPTY_CONTENT",
+    "PPTX_HAS_SLIDES",
+    "PPTX_NO_TEXT_OBJECT_OUTSIDE_SLIDE_BOUNDS",
+}
 ERROR_TOKEN_RE = re.compile(r"^#(?:REF!|DIV/0!|VALUE!|NAME\?|N/A|NUM!|NULL!|SPILL!|CALC!|GETTING_DATA)$", re.I)
 
 NS = {
@@ -78,7 +87,7 @@ def _docx(path: Path) -> tuple[list[dict[str, Any]], dict[str, Any]]:
         media = [n for n in names if n.startswith("word/media/") and not n.endswith("/")]
         if not visible_text and not has_drawing and not has_pict and not media:
             defects.append({
-                "id": "DOCX_EFFECTIVELY_BLANK",
+                "id": "DOCX_NONEMPTY_CONTENT",
                 "severity": "HARD",
                 "evidence": {"text_chars": 0, "media_count": 0},
             })
@@ -98,11 +107,11 @@ def _xlsx(path: Path) -> tuple[list[dict[str, Any]], dict[str, Any]]:
         wb = _xml(zf, "xl/workbook.xml")
         sheets = wb.findall(".//s:sheets/s:sheet", NS)
         if not sheets:
-            defects.append({"id": "XLSX_NO_WORKSHEETS", "severity": "HARD", "evidence": {}})
+            defects.append({"id": "XLSX_HAS_VISIBLE_WORKSHEET", "severity": "HARD", "evidence": {"reason": "NO_WORKSHEETS"}})
         visible = [x for x in sheets if x.attrib.get("state", "visible") == "visible"]
         if sheets and not visible:
             defects.append({
-                "id": "XLSX_NO_VISIBLE_WORKSHEET",
+                "id": "XLSX_HAS_VISIBLE_WORKSHEET",
                 "severity": "HARD",
                 "evidence": {"sheet_count": len(sheets)},
             })
@@ -131,7 +140,7 @@ def _xlsx(path: Path) -> tuple[list[dict[str, Any]], dict[str, Any]]:
                         width_zero = float(width_raw) <= 0.0
                     except ValueError:
                         width_zero = True
-                if hidden or width_zero:
+                if width_zero:
                     zero_width_cols.append({
                         "sheet_xml": name,
                         "min": col.attrib.get("min"),
@@ -160,19 +169,19 @@ def _xlsx(path: Path) -> tuple[list[dict[str, Any]], dict[str, Any]]:
 
         if error_cells:
             defects.append({
-                "id": "XLSX_ERROR_CELL_PRESENT",
+                "id": "XLSX_NO_ERROR_CELLS",
                 "severity": "HARD",
                 "evidence": {"count": len(error_cells), "examples": error_cells[:20]},
             })
         if zero_width_cols:
             defects.append({
-                "id": "XLSX_HIDDEN_OR_ZERO_WIDTH_COLUMN",
+                "id": "XLSX_NO_ZERO_WIDTH_COLUMNS",
                 "severity": "HARD",
                 "evidence": {"count": len(zero_width_cols), "examples": zero_width_cols[:20]},
             })
         if sheets and nonempty_cells == 0:
             defects.append({
-                "id": "XLSX_EFFECTIVELY_BLANK",
+                "id": "XLSX_NONEMPTY_CONTENT",
                 "severity": "HARD",
                 "evidence": {"sheet_count": len(sheets)},
             })
@@ -246,7 +255,8 @@ def _pptx(path: Path) -> tuple[list[dict[str, Any]], dict[str, Any]]:
                 except ValueError:
                     out_of_bounds.append({"slide_xml": name, "reason": "NONINTEGER_GEOMETRY"})
                     continue
-                if x < 0 or y < 0 or cx < 0 or cy < 0 or x + cx > slide_cx or y + cy > slide_cy:
+                contains_text = bool("".join(texts).strip())
+                if contains_text and (x < 0 or y < 0 or cx < 0 or cy < 0 or x + cx > slide_cx or y + cy > slide_cy):
                     out_of_bounds.append({
                         "slide_xml": name,
                         "shape_tag": tag,
@@ -258,15 +268,9 @@ def _pptx(path: Path) -> tuple[list[dict[str, Any]], dict[str, Any]]:
 
         if out_of_bounds:
             defects.append({
-                "id": "PPTX_TOP_LEVEL_OBJECT_OUTSIDE_SLIDE_BOUNDS",
+                "id": "PPTX_NO_TEXT_OBJECT_OUTSIDE_SLIDE_BOUNDS",
                 "severity": "HARD",
                 "evidence": {"count": len(out_of_bounds), "examples": out_of_bounds[:20]},
-            })
-        if effectively_blank:
-            defects.append({
-                "id": "PPTX_EFFECTIVELY_BLANK_SLIDE",
-                "severity": "HARD",
-                "evidence": {"count": len(effectively_blank), "slides": effectively_blank[:20]},
             })
         return defects, {
             "format": "pptx",
@@ -325,6 +329,17 @@ def verify(bundle: Mapping[str, Any]) -> dict[str, Any]:
     ):
         return _fail("ARTIFACT_PATHS_INVALID")
 
+    required_checks = bundle.get("required_checks")
+    if (
+        not isinstance(required_checks, Sequence)
+        or isinstance(required_checks, (str, bytes))
+        or not required_checks
+        or any(not isinstance(x, str) or x not in CHECK_IDS for x in required_checks)
+        or len(set(required_checks)) != len(required_checks)
+    ):
+        return _fail("REQUIRED_CHECKS_INVALID_OR_EMPTY")
+    required_check_set = set(required_checks)
+
     constraints = bundle.get("constraints", {})
     if not isinstance(constraints, Mapping):
         return _fail("CONSTRAINTS_NOT_OBJECT")
@@ -338,10 +353,13 @@ def verify(bundle: Mapping[str, Any]) -> dict[str, Any]:
         return _fail("ARTIFACT_PATH_DUPLICATE")
     rows = [inspect_artifact(x) for x in normalized]
 
-    hard_defects = [
+    observed_conditions = [
         {"path": row["path"], **d}
         for row in rows
         for d in row.get("hard_defects", [])
+    ]
+    hard_defects = [
+        row for row in observed_conditions if row.get("id") in required_check_set
     ]
     errors = [
         err
@@ -394,17 +412,15 @@ def verify(bundle: Mapping[str, Any]) -> dict[str, Any]:
         "errors": sorted(set(errors)),
         "hard_defect_count": len(hard_defects),
         "hard_defects": hard_defects,
-        "checked_scope": [
-            "OOXML_PACKAGE_PARSE_INTEGRITY",
-            "EFFECTIVELY_BLANK_ARTIFACT_OR_SLIDE",
-            "XLSX_ERROR_CELLS",
-            "XLSX_HIDDEN_OR_ZERO_WIDTH_COLUMNS",
-            "PPTX_TOP_LEVEL_OBJECTS_OUTSIDE_SLIDE_BOUNDS",
-            "EXPLICIT_FILE_COUNT_AND_FORMAT_CONSTRAINTS",
+        "required_checks": sorted(required_check_set),
+        "observed_nonrequired_conditions": [
+            row for row in observed_conditions if row.get("id") not in required_check_set
         ],
+        "checked_scope": sorted(CHECK_IDS),
         "quality_authority": False,
         "target_preference_authority": False,
         "style_adequacy_proved": False,
+        "source_or_policy_authority_required_for_check_selection": True,
         "acceptance_credit_delta": 0,
         "terminal_credit_delta": 0,
     }
