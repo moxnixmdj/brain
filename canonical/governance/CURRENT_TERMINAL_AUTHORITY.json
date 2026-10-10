@@ -2320,7 +2320,13 @@
     "tb_science_rank16_benchmark_trials_consumed": 0,
     "tb_science_rank16_fresh_execution_authority": false,
     "tb_science_rank16_fresh_task_read_authority": false,
-    "tb_science_rank16_required_pre_execution_repair": "CANDIDATE_LOCAL_FAIL_CLOSED_REJECTION_FOR_COVERAGE_OUTSIDE_FROZEN_CONTRACT"
+    "tb_science_rank16_required_pre_execution_repair": "SATISFIED__CANDIDATE_LOCAL_FAIL_CLOSED_REJECTION_VERIFIED",
+    "tb_science_rank16_controller_repair_prerequisite_satisfied": true,
+    "tb_science_rank16_controller_repair_reconciliation_blob": "56b7bc8e0c1eb821d0b71788fce4a2e9eda4794e",
+    "tb_science_rank16_controller_repair_verification_blob": "5070f37f6d6364efbd572f41c942c326b1cd0265",
+    "tb_science_rank16_repaired_controller_blob": "b7c821bc63523d21ed56665fae4d88e10ee148d5",
+    "tb_science_rank16_next_required_transition": "FRESH_ZERO_EXPOSURE_CARRIER_QUALIFICATION_THEN_CONTENT_ADDRESSED_ONE_SLOT_AUTHORITY",
+    "tb_science_rank16_public_zero_exposure_carrier_qualified": false
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -4543,6 +4549,8 @@
     "rank15_rerun_forbidden": true,
     "rank16_next_unexposed": true,
     "acceptance_credit_delta": 0,
-    "terminal_credit_delta": 0
+    "terminal_credit_delta": 0,
+    "rank16_controller_repair_prerequisite_satisfied": true,
+    "rank16_next_required_transition": "FRESH_ZERO_EXPOSURE_CARRIER_QUALIFICATION_THEN_CONTENT_ADDRESSED_ONE_SLOT_AUTHORITY"
   }
 }
