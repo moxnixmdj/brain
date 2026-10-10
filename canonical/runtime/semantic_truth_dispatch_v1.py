@@ -39,6 +39,11 @@ def evaluate_regcap_buffer_reference(payload: Mapping[str, Any]) -> dict[str, An
     return evaluate(payload)
 
 
+def evaluate_spread_relation_identity(payload: Mapping[str, Any]) -> dict[str, Any]:
+    from canonical.runtime.spread_relation_identity_truth_certificate_v1 import evaluate
+    return evaluate(payload)
+
+
 SCHEMA = "PROJECT_BRAIN_SEMANTIC_TRUTH_DISPATCH_V1"
 
 
@@ -77,6 +82,8 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
         return evaluate_regcap_facet_role(payload)
     if kind == "REGCAP_BUFFER_REFERENCE_IDENTITY":
         return evaluate_regcap_buffer_reference(payload)
+    if kind == "SPREAD_RELATION_IDENTITY":
+        return evaluate_spread_relation_identity(payload)
     return {
         "schema": SCHEMA,
         "pass": False,
