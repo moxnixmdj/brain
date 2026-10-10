@@ -51,12 +51,25 @@
       "root_id": "CC_R3_TERMINAL_CLOSURE_V1",
       "status": "PROVED_CURRENT",
       "certificate": {
+        "root_id": "CC_R3_TERMINAL_CLOSURE_V1",
+        "mission_authority_blob_sha": "13c470645b037bbb46245c687dd35197b420d51a",
         "path": "canonical/governance/COVERAGE_CC_R3_R3_PROMOTION_SAFETY_CERTIFICATE_20261010_V1.json",
-        "git_blob_sha": "f50d73da0cac3a7d292a327507a545003bdf61e6"
+        "git_blob_sha": "f50d73da0cac3a7d292a327507a545003bdf61e6",
+        "claim_binding": {
+          "claim_id": "e1c519109c4b2c46a9225686fc2c5c5490564d1cc62d5c6ff3c6c436bfca4314",
+          "claim_kind": "PROPERTY_CERTIFICATE",
+          "mission_blob_sha": "6ab2147306a138f9ea327d8e19cb4a5bc76e89df",
+          "scope_sha256": "144e629c2e3315abe8e31eb10aaa8edd28ab7799796152484602f88ba0895e51",
+          "target_predicate_sha256": "2634d67900467b46dd6e5e8c0c6472d4215963a2467b7da2df5a4bc39e8a2755",
+          "semantics_sha256": "d08683f6df6d51ce4c3c37853c6bfc20ceec350a31e8a6d65421d83d203cdb9b",
+          "epoch": "R4_R3_PROMOTION_SAFETY_EPOCH_20261010_V1",
+          "authority_id": "PROJECT_BRAIN_R4_COVERAGE_COMPLETENESS_AUTHORITY_V1"
+        }
       },
       "independent_verification": {
         "path": "canonical/verification/COVERAGE_CC_R3_R3_PROMOTION_SAFETY_INDEPENDENT_VERIFICATION_20261010_V1.json",
-        "git_blob_sha": "8027c8e9994facd6f0e7ddd7cf0530643e13837d"
+        "git_blob_sha": "8027c8e9994facd6f0e7ddd7cf0530643e13837d",
+        "claim_id": "e1c519109c4b2c46a9225686fc2c5c5490564d1cc62d5c6ff3c6c436bfca4314"
       },
       "semantic_verifier": {
         "path": "canonical/runtime/coverage_cc_r3_r3_promotion_safety_verify_v1.py",
