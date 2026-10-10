@@ -1,0 +1,87 @@
+{
+  "schema": "PROJECT_BRAIN_ESCAPE_PROGRESS_SHARED_GAP_EXECUTABLE_AUDIT_V5_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__TDD_RED_GREEN__DEVELOPMENT_4_OF_4__INDEPENDENT_4_OF_4__PYCOMPILE_PASS__CURRENT_ROUTE_SEMANTICS_MUTATION_KILLED__ZERO_ROW_AND_TERMINAL_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "brain/escape-v5-currentness-20261010-v2",
+    "base_observed_main_commit": "07f6e503b1c3898216176e0c7897cb06fa4faed3",
+    "exact_git_blobs": {
+      "canonical/runtime/escape_progress_shared_gap_audit_v5.py": "1f1dcf4806b3d944721abe86f46f018c5345726d",
+      "canonical/tests/test_escape_progress_shared_gap_audit_v5.py": "b8ea576bc0fc9be10e3b9e088c5d4bee41fffe59",
+      "canonical/runtime/escape_progress_shared_gap_audit_v4.py": "61614d3f026f5bf3e68589a5c90f779b63867d84",
+      "canonical/runtime/escape_progress_shared_gap_audit_v3.py": "14adf2c1a431285a542340a740e27e764edb1ce5",
+      "canonical/runtime/effect_broker_receipt_resolver_v2.py": "7f4eeeb19def420d0014631b99c5e2dc3a30592e"
+    }
+  },
+  "defect": {
+    "class": "STALE_MUTABLE_CURRENT_ROW_STATE_COULD_RETAIN_STRUCTURALLY_VALID_AUTHENTICATED_ROW_PROOF",
+    "demonstrated_row": "TB_SCIENCE_GE_58_7",
+    "manifest_path": "canonical/governance/ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_20261010_V2.json",
+    "historical_current_tb_science_blob": "999db25cb0a339eac146130fac884e879ab1c88f",
+    "observed_current_tb_science_blob_before_repair": "a6381fae606f0ce54a203e49add87607d8b8ff33",
+    "stale_required_string_count": 2,
+    "prior_v4_current_source_revalidation": false
+  },
+  "repaired_law": {
+    "immutable_row_sources": "EXACT_MANIFEST_GIT_BLOB_REQUIRED_AND_REQUIRED_SEMANTICS_RECHECKED",
+    "mutable_current_sources": "CANONICAL_CURRENT_PATH_IDENTITY_AUTHORITATIVE__OBSERVED_SUMMARY_DRIFT_NONAUTHORITATIVE",
+    "row_credit": "DISTINCT_INDEPENDENT_VERIFIER_MUST_BIND_EXACT_CURRENT_EVIDENCE_PATH_GIT_BLOB_AND_BYTE_SHA256_AND_ATTEST_CURRENT_ROUTE_SEMANTICS",
+    "proof_algebra": "UNCHANGED_V4_AUTHENTICATION_PLUS_V3_STRUCTURAL_THEOREM",
+    "current_resolution": "CURRENT_RESIDUAL_REUSE_CLASSIFICATION_TO_SHARED_BINDING_TO_CURRENT_SUCCESSOR_MANIFEST"
+  },
+  "development_verification": {
+    "verifier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/escape-v5-dev",
+    "tests": "4_OF_4_PASS",
+    "exact_runtime_git_blob_sha": "1f1dcf4806b3d944721abe86f46f018c5345726d",
+    "exact_tests_git_blob_sha": "b8ea576bc0fc9be10e3b9e088c5d4bee41fffe59"
+  },
+  "independent_verification": {
+    "verifier": "brain-r3-structural-provider-verify-20261010",
+    "sprite_id": "sprite-4c7dc4a8-ac7d-44a7-b49d-0fdf1f321004",
+    "workspace": "/home/sprite/escape-v5-independent",
+    "py_compile": "PASS",
+    "tests": "4_OF_4_PASS",
+    "exact_runtime_git_blob_sha": "1f1dcf4806b3d944721abe86f46f018c5345726d",
+    "exact_tests_git_blob_sha": "b8ea576bc0fc9be10e3b9e088c5d4bee41fffe59",
+    "exact_v3_git_blob_sha": "14adf2c1a431285a542340a740e27e764edb1ce5",
+    "exact_v4_git_blob_sha": "61614d3f026f5bf3e68589a5c90f779b63867d84",
+    "exact_receipt_resolver_git_blob_sha": "7f4eeeb19def420d0014631b99c5e2dc3a30592e"
+  },
+  "mutation_falsification": {
+    "mutation": "REMOVE_CURRENT_ROUTE_SEMANTICS_VERIFIED_GATE",
+    "expected_test": "test_independent_verifier_must_bind_exact_current_evidence_subject",
+    "mutated_result": "FAIL__MISSING_SEMANTICS_ATTESTATION_WAS_NOT_REJECTED",
+    "restored_exact_bytes_result": "4_OF_4_PASS",
+    "mutation_killed": true
+  },
+  "proved": [
+    "IMMUTABLE_ROW_EVIDENCE_DRIFT_FAILS_CLOSED",
+    "MUTABLE_CURRENT_PATH_FOLLOWS_CURRENT_BYTES_WITH_HISTORICAL_SUMMARY_DRIFT_NONAUTHORITATIVE",
+    "ROW_PROOF_VERIFIER_MUST_BIND_EXACT_CURRENT_EVIDENCE_BYTES",
+    "ROW_PROOF_VERIFIER_MUST_ATTEST_CURRENT_ROUTE_SEMANTICS",
+    "CURRENT_CLASSIFICATION_DYNAMically_RESOLVES_CURRENT_BINDING_AND_MANIFEST",
+    "EXISTING_V4_V3_PROOF_ALGEBRA_REUSED_UNCHANGED"
+  ],
+  "hard_nonclaims": [
+    "NO_REAL_ESCAPE_ROW_PROOF_CLOSED",
+    "NO_GAP_A_ROW_CREDIT",
+    "NO_GAP_B_ROW_CREDIT",
+    "NO_CC_R3_CERTIFICATE",
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_CAPABILITY_CREDIT",
+    "NO_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_CREDIT",
+    "NO_FULL_PRIVATE_REPOSITORY_REGRESSION_SUITE_EXECUTED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "row_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
