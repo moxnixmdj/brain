@@ -1,0 +1,21 @@
+name: verify-professional-quality-r4-semantic-v1
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/runtime/professional_r4_measurement_semantic_certificate_v1.py
+      - canonical/tests/test_professional_r4_measurement_semantic_certificate_v1.py
+      - .github/workflows/verify-professional-quality-r4-semantic-v1.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Run bounded R4 measurement semantic certificate tests
+        run: python -m unittest canonical.tests.test_professional_r4_measurement_semantic_certificate_v1 -v
