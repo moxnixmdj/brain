@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK20_V3_AUTHORITY_LEDGER_INTERNAL_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__CLAIM_V3_AUTHORITY_V2_LEDGER_V43_EXACTLY_COHERENT__PUBLIC_RESEAL_STILL_PENDING__ZERO_EXPOSURE_ZERO_CREDIT",
+  "claim": {
+    "path": "canonical/governance/TB_SCIENCE_RANK20_LOGICAL_ATTEMPT_CLAIM_BINDING_20261010_V3.json",
+    "git_blob_sha": "59fa5616f1754f90ded1c3b30cb53c98b4348cee",
+    "canonical_sha256": "ad74fd461333c1673b76ec0b439aba98c35bf6a0691796b24a5847209873adba",
+    "logical_attempt_id": "62bbf27ddcc679f431c5569244cf0c54fb1b13181e83076e2c019764f0b747e2"
+  },
+  "authority": {
+    "path": "canonical/governance/TB_SCIENCE_RANK20_ONE_SLOT_EXECUTION_AUTHORITY_20261010_V2.json",
+    "git_blob_sha": "a6016f92ec074835af7cae7383f30699e5c584b3"
+  },
+  "ledger": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V43.json",
+    "git_blob_sha": "810e414b9740cf02f8fceeb5ddc00689ab46e66e"
+  },
+  "exact_public_bytes_required": {
+    "workflow": "19a12ff77ebdedb3177f05281e116dee69d915ea",
+    "behavior": "9012d4bf1c84e157cdfa27ec04fd1a5afd7c78c7",
+    "zero_exposure_test": "b93af6baee042ac09f352b1a12c84fc03123c55d",
+    "agent_v13": "470bfe079aeffaa07a3b92975b4edea17c9a20e1",
+    "invariant_registry": "b9fbb776ed5cf0888f34809c94f78638d3d915c1"
+  },
+  "verified": [
+    "AUTHORITY_V2_BINDS_CLAIM_V3_DIGEST_AND_LOGICAL_ATTEMPT",
+    "AUTHORITY_V2_BINDS_PREDECESSOR_LEDGER_V42_WITHOUT_CONTENT_CYCLE",
+    "LEDGER_V43_BINDS_AUTHORITY_V2_AND_CLAIM_V3",
+    "LEDGER_V43_COUNTS_REMAIN_18_CONSUMED_0_SUCCESS_18_FINAL_FAILURES",
+    "RANK20_REMAINS_UNREAD_UNSTARTED_WITH_ZERO_CONSUMED_TRIALS",
+    "PUBLIC_V2_STALE_AGENT_TEST_EPOCH_IS_SUPERSEDED_BEFORE_TASK_READ"
+  ],
+  "hard_nonclaims": [
+    "NO_PUBLIC_RESEAL_PASS_YET",
+    "NO_EFFECTIVE_EXECUTION_AUTHORITY",
+    "NO_ACTIVATION_AUTHORITY",
+    "NO_TASK_READ",
+    "NO_BENCHMARK_TRIAL",
+    "NO_ACCEPTANCE_CAPABILITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_trials_consumed_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "pass": true
+}
