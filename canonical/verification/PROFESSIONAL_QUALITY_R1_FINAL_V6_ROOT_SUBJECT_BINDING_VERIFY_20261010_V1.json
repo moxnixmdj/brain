@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R1_FINAL_V6_ROOT_SUBJECT_BINDING_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__FINAL_V6_R1_ROOT_SUBJECT_BINDING__PYCOMPILE__7_OF_7__REAL_BINDING_PASS__ZERO_QUALITY_OR_TERMINAL_CREDIT",
+  "pinned_commit": "c17782317ea24a1d2dc642e035eeeaf1e83003a5",
+  "subject": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V6_DECLARED_SYSTEM_SUBJECT_20261010_V5.json",
+    "git_blob_sha": "994a6a6aef44b6bb33161f7179d1983a1b50b633",
+    "subject_id": "PROFESSIONAL_QUALITY_P1_V6_DEPENDENCY_CLOSED_AUTHENTICATED_TARGET_SYSTEM_20261010_V5",
+    "subject_sha256": "353978ba4866d1e35794390968a14500ee1d8a4f0bddfb8f081e9a1a71ba468d"
+  },
+  "binding": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_R1_ROOT_SUBJECT_BINDING_20261010_V3.json",
+    "git_blob_sha": "25f02a605da31c8f9d2c6208b82597e85f00be87"
+  },
+  "verifier": {
+    "path": "canonical/runtime/professional_quality_r1_root_subject_binding_verify_v3.py",
+    "git_blob_sha": "1d012414149ac2f937032a895904b4a36e4a03b5"
+  },
+  "tests": {
+    "path": "canonical/tests/test_professional_quality_r1_root_subject_binding_verify_v3.py",
+    "git_blob_sha": "3d48b5db066a120ce142c8ad544d195380bcd1cd",
+    "tests_run": 7,
+    "tests_passed": 7,
+    "tests_failed": 0
+  },
+  "independent_replay": {
+    "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/pq-r1-v6-binding-verify",
+    "py_compile": "PASS",
+    "real_binding_pass": true,
+    "execution_log_sha256": "0c14db46316406a634f56d3ec09eb5453f1baedf9deb6d3d54bda668654dd88f"
+  },
+  "proves": [
+    "FINAL_V6_SUBJECT_IDENTITY_AND_DEPENDENCY_CLOSURE_ARE_CONTENT_BOUND",
+    "R1_AUTHENTICATED_RAW_GOAL_TO_DECISION_TARGET_HANDOFF_APPLIES_TO_THE_FINAL_V6_SUBJECT",
+    "V6_LOAD_BEARING_ROUTER_BINDING_KERNEL_TARGET_SEMANTICS_CONTRACT_AND_PROFILE_COMPONENTS_ARE_IN_THE_SUBJECT",
+    "R1_TARGET_SEMANTIC_AND_STRUCTURAL_EVIDENCE_REMAIN_BOUNDED_AND_NON_GLOBAL",
+    "R1_CURRENT_ROOT_SUBJECT_BINDING_AUTHORITY_IS_GRANTED_FOR_THE_FINAL_V6_SUBJECT_ONLY"
+  ],
+  "hard_nonclaims": [
+    "NO_GLOBAL_R1_ROOT_CLOSURE",
+    "NO_OTHER_ROOT_SUBJECT_BINDING",
+    "NO_SAME_SUBJECT_COMPOSITION_PASS",
+    "NO_DOMAIN_SEMANTIC_CLOSURE",
+    "NO_DOMAIN_EXECUTION_CLOSURE",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "root_subject_binding_authority": true,
+  "global_subject_identity_authority": false,
+  "semantic_truth_authority": false,
+  "execution_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
