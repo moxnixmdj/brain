@@ -27,7 +27,7 @@
   "planning_entrypoint": "canonical.runtime.capability_first_scheduler_v1.rank_work",
   "current_live_work_frontier": {
     "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
-    "git_blob_sha": "d007ac21ea52cbeea9b472fbe7c8cb5e4603e6a0",
+    "git_blob_sha": "506e3c0f10d4c99c46e86f90958c290591c0d0dc",
     "status": "CURRENT_POST_COMPOSITION_FRONTIER__PROPERTY_TRUTH_8_OF_24__FOUR_EXECUTION_DEPLETION_PLUS_SEMANTIC_TOTALITY_REUSE__ESCAPE_12_A_0_B_1_PARKED__BYTES_V31",
     "professional_verified_root_subject_binding_count": 12,
     "professional_same_subject_composition_admissible": true,
