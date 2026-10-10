@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_VERIFY_V5",
+  "date": "2026-10-10",
+  "status": "PASS__PINNED_EXACT_BYTES__PYCOMPILE__13_OF_13__FIVE_SCOPED_CAPABILITIES__ZERO_GLOBAL_LEAF_CREDIT",
+  "repository": "moxnixmdj/brain",
+  "pinned_main_commit": "6c0a131228e7062a24f71ee7376b7710d3cb9d2f",
+  "carrier": {
+    "name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/pq-scoped-evidence-6c0a131"
+  },
+  "exact_blobs": {
+    "runtime": "f447860e51dfe0e498ae53cb83fbe29f16bb68ea",
+    "tests": "210f3b10e8a0c3041f390ea63ac9204afb54f00f",
+    "registry": "199ce68a735ec04da894960c99e3fa78538c373f",
+    "r6_source_receipt": "b65a67e8edaee925338fe3f2d61dad6b0f52d129",
+    "r6_leaf_binder": "1a181b453271a2ce4fc112c3f6586afaf5effbd7",
+    "r6_leaf_registry": "d25cb6fe746eef992f71b138446dc999c0f2a307"
+  },
+  "replay": {
+    "py_compile": "PASS",
+    "tests_run": 13,
+    "tests_passed": 13,
+    "tests_failed": 0
+  },
+  "admitted_scopes": [
+    "PQ::R3::NATIVE_ARTIFACT::BOUNDED_RENDER_PRESERVATION",
+    "PQ::R6::LEAF_EVIDENCE::CONTENT_ADDRESSED_SCOPE_MATCHED_ADMISSION",
+    "PQ::R7::SINGLE_EDIT::UVCK_DEFEATER_ORDER_REPAIR",
+    "PQ::R10::DECISION_SUFFICIENCY::LOSSLESS_MINIMUM_INFORMATION",
+    "PQ::R11::EVAL_FIREWALL::POST_IDENTITY_DISCOVERY_REVOCATION"
+  ],
+  "proved": [
+    "FIVE_BOUND_SCOPES_REUSABLE_WITH_CONTENT_ADDRESSED_EVIDENCE",
+    "R6_SCOPE_PROVES_STATUS_STRING_NONAUTHORITY_AND_CONTENT_ADDRESSED_BASIS_FRESHNESS_ONLY",
+    "R6_SCOPE_CANNOT_PROMOTE_GLOBAL_OR_EXECUTION_LEAF_CREDIT",
+    "R3_R7_R10_R11_SCOPE_GUARDS_REMAIN_INTACT"
+  ],
+  "current_state": {
+    "admitted_scope_count": 5,
+    "global_leaf_closure": false,
+    "global_root_closure": false,
+    "domain_semantic_closure": false,
+    "domain_execution_closure": false
+  },
+  "hard_nonclaims": [
+    "NO_GLOBAL_R3_R6_R7_R10_OR_R11_LEAF_CLOSURE",
+    "NO_DOMAIN_SEMANTIC_CLOSURE",
+    "NO_DOMAIN_EXECUTION_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
