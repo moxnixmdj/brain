@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 import tempfile
+import zipfile
 import unittest
 from unittest import mock
 
@@ -140,6 +141,67 @@ class ProfessionalQualityP1RouterV3Tests(unittest.TestCase):
             out = router.route({"step_results": {}}, repo_root=td)
         self.assertEqual(out["status"], "FAIL_CLOSED")
         self.assertEqual(out["reason"], "PROFILE_LOAD_FAILURE")
+
+
+    def _write_docx(self, path: Path, text: str) -> None:
+        content_types = (
+            '<?xml version="1.0" encoding="UTF-8"?>'
+            '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"></Types>'
+        ).encode()
+        body = (
+            '<?xml version="1.0" encoding="UTF-8"?>'
+            '<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">'
+            '<w:body><w:p><w:r><w:t>' + text + '</w:t></w:r></w:p></w:body></w:document>'
+        ).encode()
+        with zipfile.ZipFile(path, "w") as zf:
+            zf.writestr("[Content_Types].xml", content_types)
+            zf.writestr("word/document.xml", body)
+
+    def _all_v1_steps_pass(self) -> dict[str, str]:
+        root = Path(__file__).resolve().parents[2]
+        profile = json.loads(
+            (
+                root
+                / "canonical/governance/PROFESSIONAL_QUALITY_P1_EXECUTION_PROFILE_20261010_V1.json"
+            ).read_text()
+        )
+        return {step: "PASS" for step in profile["steps"]}
+
+    def test_actual_clean_docx_preflight_flows_into_base_router(self):
+        with tempfile.TemporaryDirectory() as td:
+            artifact = Path(td) / "clean.docx"
+            self._write_docx(artifact, "Hello")
+            out = router.route({
+                "artifact_paths": [str(artifact)],
+                "hard_defect_profile_id": "BRAIN_PROFESSIONAL_OOXML_SANITY_V1",
+                "step_results": self._all_v1_steps_pass(),
+                "detected_triggers": [],
+            })
+        self.assertEqual(out["status"], "ROUTE__P1_ORDINARY", out)
+        self.assertEqual(out["route"], "P1")
+        self.assertTrue(out["hard_defect_preflight_result"]["pass"])
+        self.assertEqual(out["hard_defect_preflight_result"]["hard_defect_count"], 0)
+        self.assertFalse(out["quality_judgment_authority"])
+        self.assertFalse(out["terminal_authority"])
+
+    def test_actual_blank_docx_hard_defect_blocks_before_base_success(self):
+        with tempfile.TemporaryDirectory() as td:
+            artifact = Path(td) / "blank.docx"
+            self._write_docx(artifact, "")
+            out = router.route({
+                "artifact_paths": [str(artifact)],
+                "hard_defect_profile_id": "BRAIN_PROFESSIONAL_OOXML_SANITY_V1",
+                "step_results": self._all_v1_steps_pass(),
+                "detected_triggers": [],
+            })
+        self.assertEqual(out["status"], "ABSTAIN__P1_HARD_FAILURE", out)
+        self.assertEqual(out["route"], "ABSTAIN")
+        pre = out["hard_defect_preflight_result"]
+        self.assertFalse(pre["pass"])
+        self.assertTrue(
+            any(x["id"] == "DOCX_NONEMPTY_CONTENT" for x in pre["hard_defects"])
+        )
+        self.assertFalse(out["terminal_authority"])
 
 
 if __name__ == "__main__":
