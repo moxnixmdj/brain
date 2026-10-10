@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_REGCAP_MREL_NO_DESCRIPTOR_PAIR_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_BRANCH_BYTES__31_OF_31_FOCUSED_TESTS__LIVE_PAIR_AUTHORITY_REPLAY_PASS__PYCOMPILE_PASS__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "regcap-mrel-no-descriptor-pair-v1-20261010-sol",
+    "exact_blobs": {
+      "canonical/runtime/regcap_mrel_no_descriptor_pair_v1.py": "b66f45b7f9cc8aeeb68fc1ed4a962b6b4ac2474a",
+      "canonical/tests/test_regcap_mrel_no_descriptor_pair_v1.py": "920a7783ec29b98d5e7d2a06d279e430e059cfa9"
+    }
+  },
+  "independent_carrier": {
+    "name": "participial-disposition-verify-20261009-sol",
+    "sprite_id": "sprite-72f2a31b-c09c-49e0-bfe0-279786ee2d56",
+    "workspace": "/home/sprite/mrel_no_descriptor_verify"
+  },
+  "verification": {
+    "py_compile": "PASS",
+    "new_no_descriptor_pair_suite": {"tests_run": 9, "failures": 0, "errors": 0},
+    "existing_descriptor_pair_suite": {"tests_run": 12, "failures": 0, "errors": 0},
+    "existing_tlac_mrel_pair_suite": {"tests_run": 10, "failures": 0, "errors": 0},
+    "total_focused_tests": 31,
+    "live_pair_authority_replay": {
+      "CCOB_MREL": {
+        "pass": true,
+        "authority_sha256": "ac613f278da059f5df4329ace834fea53ec4fcc8310da0f0fca88e5b6e35b62b"
+      },
+      "CCYB_MREL": {
+        "pass": true,
+        "authority_sha256": "21685a89cd8cf85cd18d615cb9a682ec1bc01e96e0aafaba2af9460deb66f1b4"
+      }
+    }
+  },
+  "proved": [
+    "CCOB_MREL_CAN_BE_RESOLVED_FROM_EXISTING_AUTHENTICATED_CCOB_DIRECT_SIGNATURE_OR_MREL_GOVERNING_MARKER_WITHOUT_LITERAL_DESCRIPTOR",
+    "CCYB_MREL_CAN_BE_RESOLVED_FROM_EXISTING_AUTHENTICATED_CCYB_DIRECT_SIGNATURE_OR_MREL_GOVERNING_MARKER_WITHOUT_LITERAL_DESCRIPTOR",
+    "NO_NEW_LANGUAGE_SEMANTICS_ARE_INTRODUCED",
+    "MIXED_CROSS_SENTENCE_POSITIVE_MARKERS_FAIL_CLOSED",
+    "GENERIC_SHARED_LOSS_ABSORPTION_STAYS_OPEN",
+    "PAIR_CANDIDATE_SET_MUST_MATCH_EXACT_AUTHENTICATED_TWO_CONCEPT_SCOPE",
+    "EXISTING_DESCRIPTOR_PAIR_AND_TLAC_MREL_BEHAVIOR_REMAINS_GREEN",
+    "NO_GLOBAL_SEMANTIC_IDENTITY_OPEN_WORLD_COMPLETENESS_OR_TERMINAL_AUTHORITY"
+  ],
+  "hard_nonclaims": [
+    "NO_GLOBAL_CCOB_MREL_OR_CCYB_MREL_DISJOINTNESS",
+    "NO_OPEN_WORLD_REGCAP_COMPLETENESS",
+    "NO_GENERAL_RAW_LANGUAGE_PARSER",
+    "NO_POLICY_ADEQUACY_EXECUTION_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
