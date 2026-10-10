@@ -13,6 +13,7 @@ DEFAULT_QUOTIENT = "canonical/governance/FROZEN_19_ACCEPTANCE_PROOF_SHAPE_QUOTIE
 ACTION_INTENT_DIR = "canonical/action_intents"
 CURRENT_AUTHORITY = "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json"
 SCIENCE_OBLIGATION = "TB_SCIENCE_GE_58_7"
+CHECKPOINT_ADMISSION_SCHEMA = "PROJECT_BRAIN_CAPABILITY_FIRST_CHECKPOINT_ADMISSION_V1"
 
 ADAPTIVE_ESCAPE_PROGRESS_VERIFIED_PREMISES = (
     "adaptive_terminal_or_progress_cover_theorem_bound",
@@ -174,7 +175,7 @@ def _verified_positive_cost_upper_bound(value: Any) -> float | None:
     return cost
 
 
-def build_manifest_from_repo(repo_root: str | Path, *, max_concurrency: int = 32) -> dict[str, Any]:
+def build_manifest_from_repo(\n    repo_root: str | Path,\n    *,\n    max_concurrency: int = 32,\n    checkpoint_audit_authorized: bool = False,\n) -> dict[str, Any]:
     root = Path(repo_root).resolve()
     quotient_path = root / DEFAULT_QUOTIENT
     quotient = json.loads(quotient_path.read_text(encoding="utf-8"))
@@ -318,11 +319,7 @@ def build_manifest_from_repo(repo_root: str | Path, *, max_concurrency: int = 32
         "routes": routes,
         "active_jobs": active_jobs,
         "source_quotient": DEFAULT_QUOTIENT,
-        "one_shot_attack_graph": True,
-    }
-
-
-def plan(manifest: dict[str, Any]) -> dict[str, Any]:
+        "one_shot_attack_graph": True,\n        "capability_first_checkpoint_admission": {\n            "schema": CHECKPOINT_ADMISSION_SCHEMA,\n            "authorized": checkpoint_audit_authorized is True,\n            "source": "CAPABILITY_FIRST_SCHEDULER_V3",\n        },\n    }\n\n\ndef plan(manifest: dict[str, Any]) -> dict[str, Any]:
     try:
         if manifest.get("zero_incremental_spend_hard_stop") is not True:
             raise ValueError("ZERO_SPEND_HARD_STOP_REQUIRED")
@@ -382,6 +379,32 @@ def plan(manifest: dict[str, Any]) -> dict[str, Any]:
             verify.append({"kind": "VERIFY", "obligation_ids": [oid], "action_id": f"verify::{oid}"})
         elif status == "VERIFIED":
             promote.append({"kind": "PROMOTE", "obligation_ids": [oid], "action_id": f"promote::{oid}"})
+
+    admission = manifest.get("capability_first_checkpoint_admission")
+    checkpoint_admitted = (
+        isinstance(admission, dict)
+        and admission.get("schema") == CHECKPOINT_ADMISSION_SCHEMA
+        and admission.get("authorized") is True
+    )
+    if not checkpoint_admitted:
+        return {
+            "schema": SCHEMA,
+            "pass": True,
+            "classification": "CHECKPOINT_AUDIT_PARKED_BY_CAPABILITY_FIRST_SCHEDULER",
+            "open_obligation_count": len(open_ids),
+            "active_target_count": len(active_targets),
+            "dispatch": [],
+            "verify": verify,
+            "promote": promote,
+            "cancel": [],
+            "checkpoint_audit_admission_required": True,
+            "checkpoint_audit_admitted": False,
+            "terminal_credit": False,
+            "rule": (
+                "NO_NEW_TERMINAL_CHECKPOINT_DISPATCH_WITHOUT_EXPLICIT_"
+                "CAPABILITY_FIRST_ADMISSION__EXISTING_RESULT_VERIFICATION_MAY_CONTINUE"
+            ),
+        }
 
     blocker_for: dict[str, set[str]] = defaultdict(set)
     for blocker in blockers:
@@ -486,13 +509,11 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("manifest", nargs="?", type=Path)
     parser.add_argument("--repo-root", type=Path)
-    parser.add_argument("--max-concurrency", type=int, default=32)
-    args = parser.parse_args()
+    parser.add_argument("--max-concurrency", type=int, default=32)\n    parser.add_argument("--checkpoint-audit-authorized", action="store_true")\n    args = parser.parse_args()
     if (args.manifest is None) == (args.repo_root is None):
         parser.error("provide exactly one of manifest or --repo-root")
     if args.repo_root is not None:
-        manifest = build_manifest_from_repo(args.repo_root, max_concurrency=args.max_concurrency)
-    else:
+        manifest = build_manifest_from_repo(\n            args.repo_root,\n            max_concurrency=args.max_concurrency,\n            checkpoint_audit_authorized=args.checkpoint_audit_authorized,\n        )\n    else:
         manifest = json.loads(args.manifest.read_text(encoding="utf-8"))
     out = plan(manifest)
     print(json.dumps(out, indent=2, sort_keys=True))
