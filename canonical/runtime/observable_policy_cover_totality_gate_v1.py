@@ -36,6 +36,7 @@ def _fail(reason: str, **detail: Any) -> dict[str, Any]:
         "status": "FAIL_CLOSED",
         "reason": reason,
         "bound_state_totality_proved": False,
+        "policy_safety_coverage_proved": False,
         "u_empty_authorized": False,
         "terminal_authority": False,
         "terminal_credit_delta": 0,
@@ -144,6 +145,8 @@ def evaluate(problem: Mapping[str, Any]) -> dict[str, Any]:
             required={
                 "policy_id": pid,
                 "policy_adequate_on_every_listed_world": True,
+                "policy_safe_on_every_listed_world": True,
+                "hard_constraint_scope_complete": True,
                 "brain_owned": True,
                 "deployed_exact": True,
                 "resource_bound_proved": True,
@@ -308,6 +311,7 @@ def evaluate(problem: Mapping[str, Any]) -> dict[str, Any]:
             "unresolved_observational_classes": unresolved_classes,
             "negative_impossibility_authorized": library_complete,
             "bound_state_totality_proved": False,
+            "policy_safety_coverage_proved": False,
             "u_empty_authorized": False,
             "terminal_authority": False,
             "terminal_credit_delta": 0,
@@ -344,6 +348,7 @@ def evaluate(problem: Mapping[str, Any]) -> dict[str, Any]:
         "decision_tree": serialize(root),
         "unresolved_observational_classes": [],
         "bound_state_totality_proved": True,
+        "policy_safety_coverage_proved": True,
         "strict_refinement_by_construction": True,
         "finite_termination_by_finite_partition_descent": True,
         "complete_raw_semantic_world_model_required": False,
@@ -352,7 +357,7 @@ def evaluate(problem: Mapping[str, Any]) -> dict[str, Any]:
         "terminal_authority": False,
         "terminal_credit_delta": 0,
         "proof_rule": (
-            "COMPLETE_BOUND_POLICY_RELEVANT_WORLD_SET__SOUND_POSITIVE_POLICY_REGIONS__"
+            "COMPLETE_BOUND_POLICY_RELEVANT_WORLD_SET__SOUND_SAFE_POSITIVE_POLICY_REGIONS__"
             "TRUTHFUL_SAFE_COMPLETE_OUTCOME_MAPS_FOR_USED_DISCRIMINATORS__"
             "EVERY_NONTERMINAL_NODE_STRICTLY_PARTITIONS__EVERY_LEAF_HAS_ONE_COMMON_"
             "ADEQUATE_BRAIN_POLICY__THEREFORE_BOUND_STATE_TOTALITY"
