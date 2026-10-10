@@ -20,6 +20,12 @@ ROUTER_V3_TESTS_BLOB = "7fd496e9200d1408d561cadcf40b8f4bf536c898"
 LEAF_VERIFY = "canonical/verification/PROFESSIONAL_QUALITY_LEAF_COVERAGE_PROJECTION_VERIFY_20261010_V2.json"
 LEAF_VERIFY_BLOB = "ff0adc4f3c3b7df83834437dd84c1912ee8a8787"
 
+SAME_V2_GOV = "canonical/governance/PROFESSIONAL_QUALITY_SAME_SUBJECT_COMPOSITION_GATE_20261010_V2.json"
+SAME_V2_GOV_BLOB = "b3613f0950359cf62468fa8dd35adb22c91ce888"
+SAME_V2_VERIFY = "canonical/verification/PROFESSIONAL_QUALITY_SAME_SUBJECT_COMPOSITION_GATE_VERIFY_20261010_V2.json"
+SAME_V2_VERIFY_BLOB = "10b76020f4d18bf5b43b49b5bc40ec72b4e83fc9"
+ASSURANCE = ROOT / "canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json"
+
 
 def test_current_professional_quality_projects_verified_scoped_truth_without_overclaim():
     current = json.loads(CURRENT.read_text(encoding="utf-8"))
@@ -71,6 +77,41 @@ def test_current_professional_quality_projects_verified_scoped_truth_without_ove
     assert leaf["semantic_partial_coverage_leaf_count"] == 2
     assert leaf["no_scoped_evidence_leaf_count"] == 10
     same = current["same_subject_composition"]
+    assert same["governance_path"] == SAME_V2_GOV
+    assert same["governance_git_blob_sha"] == SAME_V2_GOV_BLOB
+    assert same["verification_path"] == SAME_V2_VERIFY
+    assert same["verification_git_blob_sha"] == SAME_V2_VERIFY_BLOB
     assert same["structural_gate_verified"] is True
+    assert same["current_r12_aware_dependency_replay"] is True
+    assert same["replay_result"] == "9_OF_9_PASS"
     assert same["real_all_root_subject_bound"] is False
+    assert same["professional_quality_closed"] is False
+    assert same["quality_authority"] is False
+    assert same["terminal_authority"] is False
     assert "NO_REAL_ARTIFACT_OR_SYSTEM_BOUND_TO_ALL_TWELVE_ROOTS_YET" in current["hard_nonclaims"]
+
+
+def test_current_assurance_requires_same_subject_binding_before_promotion():
+    assurance = json.loads(ASSURANCE.read_text(encoding="utf-8"))
+    same = assurance["professional_quality_same_subject_composition_gate"]
+
+    assert same["governance_path"] == SAME_V2_GOV
+    assert same["governance_git_blob_sha"] == SAME_V2_GOV_BLOB
+    assert same["verification_path"] == SAME_V2_VERIFY
+    assert same["verification_git_blob_sha"] == SAME_V2_VERIFY_BLOB
+    assert same["same_subject_normal_form_rule_enforced"] is True
+    assert same["real_all_root_subject_binding_proved"] is False
+    assert same["global_leaf_closure"] is False
+    assert same["domain_semantic_closure"] is False
+    assert same["domain_execution_closure"] is False
+    assert same["live_default_credit"] is False
+    assert same["quality_authority"] is False
+    assert same["terminal_authority"] is False
+
+    required = assurance["activation"]["required_before_promotion"]
+    assert (
+        "REAL_CONTENT_ADDRESSED_SAME_SUBJECT_BINDINGS_FOR_ALL_LOAD_BEARING_PROFESSIONAL_ROOTS"
+        in required
+    )
+    assert assurance["live_default"] is False
+    assert assurance["terminal_authority"] is False
