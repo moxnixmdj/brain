@@ -4,7 +4,8 @@
 Scope: every Python file recursively under canonical/runtime in the checked-out
 repository. The raw reached-state kernel and finite-totality certificate are
 trusted-core implementation details. Live orchestration surfaces must route
-through certified_reached_escape_state_constructor_v1.construct.
+through certified_reached_escape_state_constructor_v2 truth authority before
+any constructor-V1/kernel result can become live progress.
 
 This is a static Python reference census, not a theorem about arbitrary dynamic
 code generation, non-Python executables, or future repository states.
@@ -29,6 +30,7 @@ TRUSTED_LOW_LEVEL_REFERENCE_FILES = frozenset(
         "canonical/runtime/reached_escape_state_kernel_v1.py",
         "canonical/runtime/reached_escape_finite_totality_certificate_v1.py",
         "canonical/runtime/certified_reached_escape_state_constructor_v1.py",
+        "canonical/runtime/certified_reached_escape_state_constructor_v2.py",
         "canonical/runtime/reached_escape_live_no_bypass_guard_v1.py",
     }
 )
@@ -38,6 +40,7 @@ REQUIRED_SENTINELS = frozenset(
         "canonical/runtime/reached_escape_state_kernel_v1.py",
         "canonical/runtime/reached_escape_finite_totality_certificate_v1.py",
         "canonical/runtime/certified_reached_escape_state_constructor_v1.py",
+        "canonical/runtime/certified_reached_escape_state_constructor_v2.py",
         "canonical/runtime/live_brain_runtime_v1.py",
         "canonical/runtime/unified_cognitive_fabric_v1.py",
     }
@@ -45,14 +48,17 @@ REQUIRED_SENTINELS = frozenset(
 
 LIVE_ENTRYPOINT_MARKERS = {
     "canonical/runtime/live_brain_runtime_v1.py": (
-        "from canonical.runtime.certified_reached_escape_state_constructor_v1 import construct",
-        "return construct(payload)",
-        '"CERTIFIED_REACHED_ESCAPE_STATE_CONSTRUCTOR_V1"',
+        "certified_reached_escape_state_constructor_v2",
+        "policy_authority_verifier=authority_verifier",
+        "discriminator_authority_verifier=authority_verifier",
+        "reached_escape_authority_verifier=None",
     ),
     "canonical/runtime/unified_cognitive_fabric_v1.py": (
-        '"REACHED_ESCAPE_STATE": "certified_reached_escape_state_constructor_v1.construct"',
-        "from canonical.runtime import certified_reached_escape_state_constructor_v1 as reached_escape_state",
-        "out = reached_escape_state.construct(payload)",
+        '"REACHED_ESCAPE_STATE": "certified_reached_escape_state_constructor_v2.construct + reached_escape_repair_cycle_v1.run"',
+        "certified_reached_escape_state_constructor_v2 as reached_escape_state",
+        "policy_authority_verifier=semantic_authority_verifier",
+        "discriminator_authority_verifier=semantic_authority_verifier",
+        'authority.get("truth_authority_bound") is not True',
     ),
 }
 
