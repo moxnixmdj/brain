@@ -149,8 +149,8 @@ def preflight(request:Mapping[str,Any],*,repo_root=None)->dict[str,Any]:
             "query_relative_effect_semantics_finite":True,
             "raw_acceptance_obligation_ids":ids,
             "semantic_scope":(
-                "QUERY_RELATIVE_EFFECT_FIELD_LATTICE_WITH_COMPOSITIONAL_V14_SOURCE_PROOF_"
-                "AND_BRAIN_OWNED_REGISTRY_V3_WITH_DOMAIN_MAPPING_RELATION_AUTHORITY_AND_V15_ADMISSIBILITY_GATE"
+                "QUERY_RELATIVE_EFFECT_FIELD_LATTICE_WITH_V16_SOURCE_PROOF_"
+                "AND_BRAIN_OWNED_REGISTRY_V5_NATURAL_SUBSUMPTION_CLOSURE"
             ),
             "preflight_execution_authority":False,
             "preflight_verification":deepcopy(checked),
