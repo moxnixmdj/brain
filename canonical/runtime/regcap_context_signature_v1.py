@@ -10,75 +10,16 @@ world and never grants global concept identity.
 """
 from __future__ import annotations
 
-import re
 from hashlib import sha256
 from typing import Any, Mapping, Sequence
 
 from canonical.runtime import regcap_contrastive_discriminator_matrix_v1 as matrix
+from canonical.runtime import regcap_contextual_observation_compiler_v1 as observation
+from canonical.runtime.source_assertion_ownership_guard_v1 import check_direct_assertion
 
 SCHEMA = "PROJECT_BRAIN_REGCAP_CONTEXT_SIGNATURE_V1"
 EXACT_SURFACE = "loss-absorbing cushion"
 MAX_SENTENCE_CHARS = 800
-
-_CCOB_FUNC = re.compile(
-    r"\b(?:can\s+be\s+)?drawn\s+down\s+as\s+losses\s+are\s+incurred\b",
-    re.I,
-)
-_CCYB_FUNC = re.compile(
-    r"\breleased\s+when\s+system[- ]wide\s+risk\s+crystalli[sz]es\s+or\s+dissipates\b",
-    re.I,
-)
-_TLAC_FUNC_RECAP = re.compile(
-    r"\bloss-absorbing\s+and\s+recapitali[sz]ation\s+capacity\b",
-    re.I,
-)
-_TLAC_FUNC_RESOLUTION = re.compile(r"\bavailable\s+in\s+resolution\b", re.I)
-_TLAC_FUNC_GSIB = re.compile(
-    r"\b(?:G-SIBs?|global\s+systemically\s+important\s+banks?)\b",
-    re.I,
-)
-
-_CCOB_STRUCT_PERCENT = re.compile(r"(?<!\w)2\.5(?:%|\s+percent\b)", re.I)
-_CCOB_STRUCT_CET1 = re.compile(r"\b(?:CET1|Common\s+Equity\s+Tier\s+1)\b", re.I)
-_CCOB_STRUCT_ABOVE = re.compile(
-    r"\babove\s+(?:the\s+)?regulatory\s+minimum(?:\s+capital\s+requirement)?s?\b",
-    re.I,
-)
-_CCYB_STRUCT_EXTENDS = re.compile(
-    r"\bextend(?:s|ed|ing)?\s+(?:the\s+)?size\s+of\s+the\s+capital\s+conservation\s+buffer\b",
-    re.I,
-)
-_CCYB_STRUCT_CET1 = _CCOB_STRUCT_CET1
-_TLAC_STRUCT_MIN = re.compile(r"\bminimum\s+external\s+TLAC\b", re.I)
-_TLAC_STRUCT_ALONGSIDE = re.compile(
-    r"\balongside\s+minimum\s+regulatory\s+capital\s+requirements\b",
-    re.I,
-)
-
-_SIGNATURES = {
-    ("FUNCTIONAL_SIGNATURE_CLASS", "DRAWDOWN_AS_LOSSES_ARE_INCURRED"): "REGCAP::CCOB",
-    (
-        "FUNCTIONAL_SIGNATURE_CLASS",
-        "RELEASE_WHEN_SYSTEM_WIDE_RISK_CRYSTALLISES_OR_DISSIPATES",
-    ): "REGCAP::CCYB",
-    (
-        "FUNCTIONAL_SIGNATURE_CLASS",
-        "G_SIB_LOSS_ABSORPTION_RECAPITALISATION_IN_RESOLUTION",
-    ): "REGCAP::TLAC",
-    (
-        "STRUCTURAL_SIGNATURE_CLASS",
-        "TWO_POINT_FIVE_PERCENT_CET1_ABOVE_REGULATORY_MINIMUM",
-    ): "REGCAP::CCOB",
-    (
-        "STRUCTURAL_SIGNATURE_CLASS",
-        "EXTENDS_CCOB_AND_MET_WITH_CET1",
-    ): "REGCAP::CCYB",
-    (
-        "STRUCTURAL_SIGNATURE_CLASS",
-        "SEPARATE_MINIMUM_TLAC_REQUIREMENT",
-    ): "REGCAP::TLAC",
-}
-
 
 def _sha(text: str) -> str:
     return sha256(text.encode("utf-8")).hexdigest()
@@ -178,87 +119,42 @@ def compile_context(
                 sentence_span=[s0, s1],
             )
 
-        observed: list[dict[str, Any]] = []
-
-        if _CCOB_FUNC.search(sentence):
-            observed.append({
-                "observation_id": "FUNCTIONAL_SIGNATURE_CLASS",
-                "outcome": "DRAWDOWN_AS_LOSSES_ARE_INCURRED",
-                "relative_candidate_id": "REGCAP::CCOB",
-            })
-        if _CCYB_FUNC.search(sentence):
-            observed.append({
-                "observation_id": "FUNCTIONAL_SIGNATURE_CLASS",
-                "outcome": "RELEASE_WHEN_SYSTEM_WIDE_RISK_CRYSTALLISES_OR_DISSIPATES",
-                "relative_candidate_id": "REGCAP::CCYB",
-            })
-        if (
-            _TLAC_FUNC_RECAP.search(sentence)
-            and _TLAC_FUNC_RESOLUTION.search(sentence)
-            and _TLAC_FUNC_GSIB.search(sentence)
-        ):
-            observed.append({
-                "observation_id": "FUNCTIONAL_SIGNATURE_CLASS",
-                "outcome": "G_SIB_LOSS_ABSORPTION_RECAPITALISATION_IN_RESOLUTION",
-                "relative_candidate_id": "REGCAP::TLAC",
-            })
-
-        if (
-            _CCOB_STRUCT_PERCENT.search(sentence)
-            and _CCOB_STRUCT_CET1.search(sentence)
-            and _CCOB_STRUCT_ABOVE.search(sentence)
-        ):
-            observed.append({
-                "observation_id": "STRUCTURAL_SIGNATURE_CLASS",
-                "outcome": "TWO_POINT_FIVE_PERCENT_CET1_ABOVE_REGULATORY_MINIMUM",
-                "relative_candidate_id": "REGCAP::CCOB",
-            })
-        if (
-            _CCYB_STRUCT_EXTENDS.search(sentence)
-            and _CCYB_STRUCT_CET1.search(sentence)
-        ):
-            observed.append({
-                "observation_id": "STRUCTURAL_SIGNATURE_CLASS",
-                "outcome": "EXTENDS_CCOB_AND_MET_WITH_CET1",
-                "relative_candidate_id": "REGCAP::CCYB",
-            })
-        if _TLAC_STRUCT_MIN.search(sentence) and _TLAC_STRUCT_ALONGSIDE.search(sentence):
-            observed.append({
-                "observation_id": "STRUCTURAL_SIGNATURE_CLASS",
-                "outcome": "SEPARATE_MINIMUM_TLAC_REQUIREMENT",
-                "relative_candidate_id": "REGCAP::TLAC",
-            })
-
-        by_observation: dict[str, set[str]] = {}
-        for row in observed:
-            by_observation.setdefault(row["observation_id"], set()).add(row["outcome"])
-        conflicts = {
-            oid: sorted(values)
-            for oid, values in by_observation.items()
-            if len(values) > 1
-        }
-        if conflicts:
+        ownership = check_direct_assertion(
+            source_text,
+            start=s0,
+            end=s1,
+            require_selected_span_is_complete_sentence=True,
+        )
+        if ownership.get("pass") is not True:
+            if ownership.get("status") == "FAIL_CLOSED":
+                return _base(
+                    "FAIL_CLOSED",
+                    reason="ASSERTION_OWNERSHIP_GUARD_FAIL_CLOSED",
+                    assertion_ownership=ownership,
+                )
             return _base(
-                "FAIL_CLOSED",
-                reason="CONFLICTING_CONTEXT_SIGNATURES",
-                conflicts=conflicts,
+                "OPEN__ASSERTION_OWNERSHIP_NOT_PROVED",
+                assertion_ownership=ownership,
                 source_id=source_id,
                 source_text_sha256=_sha(source_text),
+                descriptor_span=[start, end],
                 sentence_span=[s0, s1],
                 sentence=sentence,
             )
 
-        candidate_ids = sorted({row["relative_candidate_id"] for row in observed})
-        if len(candidate_ids) > 1:
-            return _base(
-                "FAIL_CLOSED",
-                reason="CROSS_OBSERVATION_CONTEXT_SIGNATURE_CONFLICT",
-                relative_candidate_ids=candidate_ids,
-                observations=observed,
-                sentence_span=[s0, s1],
-            )
-
-        if not observed:
+        descriptor_left = start - s0
+        descriptor_right = end - s0
+        projected_sentence = (
+            sentence[:descriptor_left]
+            + "cushion"
+            + sentence[descriptor_right:]
+        )
+        canonical = observation.compile_span(
+            projected_sentence,
+            start=0,
+            end=len(projected_sentence),
+        )
+        if canonical.get("pass") is not True:
             return _base(
                 "OPEN__NO_BOUND_CONTEXT_SIGNATURE",
                 source_id=source_id,
@@ -266,7 +162,36 @@ def compile_context(
                 descriptor_span=[start, end],
                 sentence_span=[s0, s1],
                 sentence=sentence,
+                canonical_projection=canonical,
             )
+
+        key = (
+            str(canonical.get("observation_id") or ""),
+            str(canonical.get("outcome") or ""),
+        )
+        matrix_row = matrix.OBSERVATIONS.get(key[0])
+        if not isinstance(matrix_row, Mapping):
+            return _base(
+                "FAIL_CLOSED",
+                reason="CANONICAL_OBSERVATION_ID_NOT_IN_MATRIX_SCHEMA",
+                canonical_projection=canonical,
+            )
+        matching_candidates = sorted(
+            cid for cid, outcome in matrix_row.items()
+            if outcome == key[1]
+        )
+        if not matching_candidates:
+            return _base(
+                "FAIL_CLOSED",
+                reason="CANONICAL_OUTCOME_NOT_IN_MATRIX_SCHEMA",
+                canonical_projection=canonical,
+            )
+
+        observed: list[dict[str, Any]] = [{
+            "observation_id": key[0],
+            "outcome": key[1],
+            "relative_candidate_ids": matching_candidates,
+        }]
 
         return _base(
             "PASS__BOUND_CONTEXT_SIGNATURES_COMPILED",
@@ -278,12 +203,18 @@ def compile_context(
             sentence_span=[s0, s1],
             sentence=sentence,
             observations=observed,
-            relative_candidate_hint=candidate_ids[0],
+            relative_candidate_hint=(
+                matching_candidates[0]
+                if len(matching_candidates) == 1
+                else None
+            ),
+            relative_candidate_hint_candidates=matching_candidates,
             relative_selection_authority=False,
             boundary=(
-                "EXACT_DESCRIPTOR_PLUS_SAME_SENTENCE_BOUNDED_SIGNATURE_GRAMMAR_ONLY__"
-                "OBSERVATIONS_HAVE_SOURCE_ALIGNED_SEMANTIC_AUTHORITY__"
-                "CANDIDATE_ID_IS_A_HINT_UNTIL_AUTHENTICATED_MATRIX_REPLAY"
+                "EXACT_DESCRIPTOR_PLUS_CANONICAL_ASSERTION_COMPLETE_OBSERVATION_PROJECTION_ONLY__"
+                "CANDIDATE_HINTS_ARE_DERIVED_FROM_THE_BOUND_MATRIX_SCHEMA__"
+                "NO_DUPLICATE_LOCAL_OBSERVATION_VOCABULARY__"
+                "SELECTION_REQUIRES_AUTHENTICATED_MATRIX_REPLAY"
             ),
         )
     except Exception as exc:
