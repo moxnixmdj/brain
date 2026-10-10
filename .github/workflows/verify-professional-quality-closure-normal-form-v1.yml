@@ -7,6 +7,17 @@ on:
       - canonical/governance/PROFESSIONAL_QUALITY_ADVERSARIAL_CHALLENGE_MATRIX_20261009_V1.json
       - canonical/runtime/professional_quality_closure_normal_form_v1.py
       - canonical/tests/test_professional_quality_closure_normal_form_v1.py
+      - canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json
+      - canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json
+      - canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json
+      - canonical/governance/PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_REGISTRY_20261010_V1.json
+      - canonical/governance/PROFESSIONAL_QUALITY_R8_POPULATION_SEMANTIC_SCOPE_20261010_V1.json
+      - canonical/runtime/professional_quality_scoped_evidence_v1.py
+      - canonical/runtime/professional_quality_leaf_coverage_projection_v1.py
+      - canonical/tests/test_professional_quality_scoped_evidence_v1.py
+      - canonical/tests/test_professional_quality_leaf_coverage_projection_v1.py
+      - canonical/tests/test_current_professional_quality_reconciliation_v1.py
+      - canonical/verification/PROFESSIONAL_QUALITY_R8_POPULATION_SEMANTIC_VERIFY_20261010_V1.json
       - .github/workflows/verify-professional-quality-closure-normal-form-v1.yml
 permissions:
   contents: read
@@ -20,3 +31,4 @@ jobs:
         with:
           python-version: "3.11"
       - run: python -m unittest canonical.tests.test_professional_quality_closure_normal_form_v1 -v
+      - run: python -m unittest canonical.tests.test_current_professional_quality_reconciliation_v1 -v
