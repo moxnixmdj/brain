@@ -14,7 +14,7 @@
   },
   "tests": {
     "path": "canonical/tests/test_chartography_synthetic_reasoning_suite_v1.py",
-    "git_blob_sha": "2f983f5a0d251fcd47fedb650477025a73d7fc3d"
+    "git_blob_sha": "b7a2e00d0e7c4b0b4685456a3b6b8bf262c47153"
   },
   "exact_cases": [
     {
