@@ -327,13 +327,17 @@
   },
   "professional_whole_leaf_progress": {
     "expected_leaf_count": 24,
-    "admitted_whole_leaf_scope_count": 1,
-    "property_truth_ready_count": 1,
-    "remaining_scope_construction_count": 23,
+    "admitted_whole_leaf_scope_count": 24,
+    "admitted_scope_count": 24,
+    "property_truth_ready_count": 24,
+    "remaining_scope_construction_count": 0,
     "property_truth_closed_count": 0,
     "global_leaf_closed_count": 0,
     "domain_semantic_closure": false,
-    "domain_execution_closure": false
+    "domain_execution_closure": false,
+    "scope_batch_verification_path": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_SCOPE_BATCH_VERIFY_20261010_V1.json",
+    "scope_batch_verification_git_blob_sha": "4c2d40a262f18f34bb35f94b59660d60972d45ef",
+    "next": "RUN_PROPERTY_TRUTH_VERIFICATION_ON_24_SCOPE_COMPLETE_CLAIMS__DO_NOT_REOPEN_SCOPE_CONSTRUCTION_UNLESS_CONTENT_DRIFT_INVALIDATES_THE_BATCH__R10_DETECTION_COMPLETENESS_AND_FULL_CURRENT_MAIN_REGRESSION_REMAIN_OPEN"
   },
   "professional_quality_r10_execution_enforcement": {
     "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_R10_EXECUTION_GUARD_VERIFY_20261010_V1.json",
