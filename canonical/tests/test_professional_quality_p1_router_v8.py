@@ -43,17 +43,21 @@ def auth_pass(step):
 
 class Tests(unittest.TestCase):
     @patch.object(r.base,"route")
+    @patch.object(r,"_authenticate_r12_totality_semantics")
     @patch.object(r.step_auth,"authenticate_step_binding")
     @patch.object(r,"_load_subject")
-    def test_positive_requires_v2_totality_then_delegates(self,load_subject,auth,base):
+    def test_positive_requires_v2_totality_then_delegates(self,load_subject,auth,semantic,base):
         load_subject.return_value=({},subject_state())
         auth.side_effect=lambda binding,**kw: auth_pass(kw["step_id"])
+        semantic.return_value={"pass":True,"status":"PASS__R12_TOTALITY_SEMANTICS_EXACTLY_BOUND"}
         base.return_value={"status":"ROUTE__P1_ORDINARY","route":"P1"}
         out=r.route(base_state())
         self.assertEqual(auth.call_count,7)
         self.assertTrue(out["positive_certification_authorized"])
         self.assertTrue(out["material_totality_proved"])
         self.assertEqual(out["final_step_outcome"],"POSITIVE_CERTIFICATE")
+        self.assertTrue(out["r12_totality_semantics_bound"])
+        semantic.assert_called_once()
         base.assert_called_once()
 
     @patch.object(r.base,"route")
@@ -138,5 +142,51 @@ class Tests(unittest.TestCase):
         self.assertEqual(out["status"],"FAIL_CLOSED")
         self.assertEqual(out["blocking_step"],r.FINAL_STEP)
         base.assert_not_called()
+
+    def test_exact_r12_semantic_binding_accepts(self):
+        cert={
+            "semantic_property_claim_id":r.R12_PROPERTY_CLAIM_ID,
+            "semantic_scope_claim_id":r.R12_SCOPE_CLAIM_ID,
+            "semantic_obligation":r.R12_MATERIAL_OBLIGATION,
+            "target_scope_semantics":r.R12_SCOPE_SEMANTICS,
+        }
+        verify={**cert,"semantic_binding_verified":True}
+        self.assertTrue(r._semantic_totality_documents_ok(cert,verify)["pass"])
+
+    def test_wrong_claim_binding_rejected(self):
+        cert={
+            "semantic_property_claim_id":"0"*64,
+            "semantic_scope_claim_id":r.R12_SCOPE_CLAIM_ID,
+            "semantic_obligation":r.R12_MATERIAL_OBLIGATION,
+            "target_scope_semantics":r.R12_SCOPE_SEMANTICS,
+        }
+        verify={**cert,"semantic_binding_verified":True}
+        out=r._semantic_totality_documents_ok(cert,verify)
+        self.assertFalse(out["pass"])
+        self.assertIn("semantic_property_claim_id",out["reason"])
+
+    def test_wrong_material_obligation_rejected(self):
+        cert={
+            "semantic_property_claim_id":r.R12_PROPERTY_CLAIM_ID,
+            "semantic_scope_claim_id":r.R12_SCOPE_CLAIM_ID,
+            "semantic_obligation":"SOMETHING_WEAKER",
+            "target_scope_semantics":r.R12_SCOPE_SEMANTICS,
+        }
+        verify={**cert,"semantic_binding_verified":True}
+        out=r._semantic_totality_documents_ok(cert,verify)
+        self.assertFalse(out["pass"])
+        self.assertIn("semantic_obligation",out["reason"])
+
+    def test_semantic_binding_requires_independent_verification(self):
+        cert={
+            "semantic_property_claim_id":r.R12_PROPERTY_CLAIM_ID,
+            "semantic_scope_claim_id":r.R12_SCOPE_CLAIM_ID,
+            "semantic_obligation":r.R12_MATERIAL_OBLIGATION,
+            "target_scope_semantics":r.R12_SCOPE_SEMANTICS,
+        }
+        verify={**cert,"semantic_binding_verified":False}
+        out=r._semantic_totality_documents_ok(cert,verify)
+        self.assertFalse(out["pass"])
+        self.assertEqual(out["reason"],"R12_TOTALITY_SEMANTIC_BINDING_NOT_INDEPENDENTLY_VERIFIED")
 
 if __name__=="__main__": unittest.main(verbosity=2)
