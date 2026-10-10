@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V10",
+  "date": "2026-10-10",
+  "status": "ACTIVE_PRIMARY_CAPABILITY_FIRST_PARALLEL_FRONTIER_SCHEDULER__INTERVAL_ROBUST_PARETO__SEVEN_READ_ONLY_EVIDENCE_LANES__FULL_EXECUTION_FAIL_CLOSED__ZERO_CREDIT",
+  "supersedes": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V9.json",
+  "objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "milestone": "OPUS_5_5_FIRST_FRONTIER_CHECKPOINT__NOT_TERMINAL_OBJECTIVE",
+  "runtime": {
+    "path": "canonical/runtime/capability_parallel_frontier_v2.py",
+    "git_blob_sha": "209d8d11494645432354636a3dc17e7b515abaf8",
+    "entrypoint": "plan_current_parallel_frontier",
+    "frontier_path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
+    "frontier_git_blob_sha": "223dbee8e1be4bcee58bcf1d232f1d992e2e96e6"
+  },
+  "scheduling_law": {
+    "dominance": "A_BENEFIT_LCB_GE_B_BENEFIT_UCB_EVERY_DIMENSION__A_COST_UCB_LE_B_COST_LCB_EVERY_DIMENSION__AT_LEAST_ONE_STRICT",
+    "parallelism": "NONCONFLICTING_NONDOMINATED_COMPLETE_WORK_MAY_RUN_IN_PARALLEL",
+    "incomplete_vectors": "READ_ONLY_EVIDENCE_ONLY",
+    "conflicts": "MINIMUM_DISCRIMINATING_EVIDENCE",
+    "scalarization": "PROVED_COMMON_TRADEOFF_CONTRACT_ONLY"
+  },
+  "dynamic_currentness": {
+    "professional": "SEQUENTIAL_ROOT_FRONTIER__12_OF_12_TO_VERIFIED_V3_SAME_SUBJECT_COMPOSITION_GATE_READ_ONLY",
+    "assurance": "COHERENT_DEPENDENT_PROJECTION_ONLY",
+    "other_source_drift": "FAIL_CLOSED"
+  },
+  "control_state": {
+    "read_only_evidence_plan_authorized": true,
+    "full_execution_plan_authorized": false,
+    "read_only_lane_count": 7,
+    "full_execution_lane_count": 0
+  },
+  "r2_policy": {
+    "generic_open_world_finance_frontier": "SLEEPING",
+    "exact_bounded_lane": "R2_FINANCE_TYPED_NEXT_INFORMATION_REQUEST"
+  },
+  "verification": {
+    "path": "canonical/verification/CAPABILITY_PARALLEL_FRONTIER_V10_INTERVAL_ROBUST_VERIFY_20261010_V1.json",
+    "git_blob_sha": "a0568e6aff736462f359d1c222c0ac519bc6482a",
+    "status": "PASS__EXACT_RUNTIME_BLOB__PYCOMPILE__13_OF_13_FOCUSED_TESTS"
+  },
+  "hard_nonclaims": [
+    "NO_FULL_EXECUTION_AUTHORITY",
+    "NO_UNIQUE_RANK_ONE",
+    "NO_COMPLETE_INTERVAL_VECTOR_EVIDENCE",
+    "NO_SAME_SUBJECT_COMPOSITION_PASS",
+    "NO_GENERIC_R2_OPEN_WORLD_WAKE",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
