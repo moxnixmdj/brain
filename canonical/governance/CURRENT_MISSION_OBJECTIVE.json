@@ -14,7 +14,7 @@
   "current_assurance_closure_compiler": {
     "path": "canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json",
     "binding": "MUTABLE_CURRENT_POINTER_PATH_IDENTITY__OBSERVED_BLOB_IS_CURRENTNESS_EVIDENCE_NOT_IMMUTABLE_AUTHORITY",
-    "observed_git_blob_sha": "34fa800832a5a08417915d91d8a9786e3b31f75d",
+    "observed_git_blob_sha": "655f2b0ddaf04563f9dbc9b3c1b00727f45f31da",
     "status": "UVCK_V2_CANDIDATE__PROPERTY_TRUTH_9_OF_24__SEMANTIC_TOTALITY_REUSE_AND_FULL_REGRESSION_OPEN__NOT_LIVE_DEFAULT",
     "terminal_authority": false
   },
@@ -29,7 +29,7 @@
     "primary_entrypoint": "plan_current_post_composition_frontier",
     "scalar_fallback_runtime": "canonical/runtime/capability_first_live_scheduler_v1.py",
     "status": "ACTIVE_POST_COMPOSITION_V22__PROPERTY_TRUTH_9_OF_24__THREE_EXECUTION_PLUS_SEMANTIC_TOTALITY_PARALLEL__ESCAPE_12_A_0_B_1_PARKED__BYTES_V32",
-    "observed_git_blob_sha": "0d5ed6ce6bead2a28a1d780a270dcde2a2237c0f"
+    "observed_git_blob_sha": "efbb35c2d489af42c437dcd09e28bc1e336a8d57"
   },
   "scheduler_precedence": "REAL_MISSION_CAPABILITY_RESOURCE_PARETO_LEVERAGE_IS_PRIMARY__SAFE_NONCONFLICTING_PARALLELISM_MINIMIZES_WALL_CLOCK__CURRENTNESS_AND_DEPENDENCY_GATES_PRECEDE_SELECTION__DIMENSIONWISE_PARETO_DOMINANCE_PRECEDES_ANY_SCALAR_TRADEOFF__SCALARIZATION_REQUIRES_PROVED_TRADEOFF_CONTRACT__CURRENT_R2_SHARED_CAUSE_FANOUT_IS_SECONDARY_DISCRIMINATION_SIGNAL__OPUS_5_5_CHECKPOINT_WORK_IS_TERTIARY_AUDIT__EXPLICIT_NEW_PRIMITIVE_CLAIMS_REQUIRE_REUSE_FIRST_EXHAUSTION_PROOF",
   "current_professional_quality_execution": {
@@ -46,13 +46,13 @@
   },
   "current_parallel_frontier_control": {
     "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
-    "observed_git_blob_sha": "cb368eb4beaa59ddd23a395f2399aaf76b54a889",
+    "observed_git_blob_sha": "d172875d04a06bed4e811fa6b56a3db68bda2467",
     "status": "POST_COMPOSITION_V23__PROPERTY_TRUTH_9_OF_24__THREE_EXECUTION_DEPLETION_PLUS_SEMANTIC_TOTALITY_REUSE__ESCAPE_12_A_0_B_1_PARKED__BYTES_V32",
     "binding": "MUTABLE_CURRENT_PATH_IDENTITY__STALE_SOURCE_BYTES_FAIL_CLOSED_AT_CALL_TIME"
   },
   "current_residual_reuse_classification": {
     "path": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
-    "observed_git_blob_sha": "d5435c09d5021adba11e77d6ada5890535adb5d9",
+    "observed_git_blob_sha": "c8f1995a9da98f8e3e0a1ee2b4a8f417b68c283e",
     "status": "REUSE_FIRST__PROPERTY_TRUTH_9_OF_24__THREE_EXECUTION_LEAVES_PLUS_SEMANTIC_CLAIM_SCOPED_TOTALITY_AND_FULL_REGRESSION_NEXT__ESCAPE_12_A_0_B_1_PARKED__ZERO_GLOBAL_CREDIT"
   },
   "professional_whole_leaf_control": {
