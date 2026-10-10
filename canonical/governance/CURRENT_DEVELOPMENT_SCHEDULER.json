@@ -1,8 +1,8 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_DEVELOPMENT_SCHEDULER_POINTER_V1",
   "date": "2026-10-10",
-  "status": "ACTIVE__POST_COMPOSITION_V13__PROFESSIONAL_WHOLE_LEAF_CLAIM_SCOPE_V2_BOUND__READ_ONLY_EVIDENCE_READY__FULL_EXECUTION_FAILS_CLOSED",
-  "authoritative_activation": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V13.json",
+  "status": "ACTIVE__POST_COMPOSITION_V14__PROFESSIONAL_V2_DOMAIN_FACTORIZATION_BOUND__R2_V86_CURRENT__TB_RANK20_V3_PARKED__READ_ONLY_EVIDENCE_READY__FULL_EXECUTION_FAILS_CLOSED",
+  "authoritative_activation": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V14.json",
   "runtime": "canonical/runtime/capability_parallel_frontier_post_composition_v1.py",
   "primary_entrypoint": "canonical.runtime.capability_parallel_frontier_post_composition_v1.plan_current_post_composition_frontier",
   "objective": "MAXIMIZE_REUSABLE_VERIFIED_CAPABILITY_GENERALIZATION_RELIABILITY_AND_EFFICIENCY_PER_RESOURCE_AND_MINIMIZE_WALL_CLOCK_THROUGH_SAFE_PARALLELISM",
@@ -27,8 +27,8 @@
   "planning_entrypoint": "canonical.runtime.capability_first_scheduler_v1.rank_work",
   "current_live_work_frontier": {
     "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
-    "git_blob_sha": "f27b08785af220dceb5c4bcf8b32b7dd283abccb",
-    "status": "CURRENT_POST_COMPOSITION_FRONTIER__PROFESSIONAL_WHOLE_LEAF_V2_CLAIM_SCOPE_GATE_AND_READINESS_VERIFIED__READ_ONLY_EVIDENCE_ONLY__FULL_EXECUTION_FAIL_CLOSED__ZERO_CREDIT",
+    "git_blob_sha": "ba05cbd21e7e2a4d6d5ffcd85682ef12db9a72a1",
+    "status": "CURRENT_POST_COMPOSITION_FRONTIER__PROFESSIONAL_V2_DOMAIN_FACTORIZATION_BOUND__R2_V86_BOUND_TRUTH_REENTRY__ESCAPE_V5_TWO_ACTIVE_GAP_B_ROWS__TB_RANK20_V3_PARKED__READ_ONLY_EVIDENCE_ONLY__FULL_EXECUTION_FAIL_CLOSED__ZERO_CREDIT",
     "professional_verified_root_subject_binding_count": 12,
     "professional_same_subject_composition_admissible": true
   },
@@ -73,7 +73,14 @@
     "readiness_verification_git_blob_sha": "2d28d932d08753fdf14c56aa24011e625518a4ef",
     "admitted_v2_chain_count": 0,
     "claim_scope_construction_required_count": 24,
-    "property_truth_ready_count": 0
+    "property_truth_ready_count": 0,
+    "domain_factorization_worklist": "canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_DOMAIN_FACTORIZATION_WORKLIST_20261010_V1.json",
+    "domain_factorization_worklist_git_blob_sha": "089719f3b935dfb29d03ded459ab0edbd374012a",
+    "root_pair_candidate_count": 12,
+    "pair_domain_equivalence_proved_count": 0,
+    "pair_domain_equivalence_required_count": 12,
+    "domain_reuse_authority": false,
+    "next": "RUN_12_ROOT_PAIR_DOMAIN_EQUIVALENCE_DECISIONS_IN_PARALLEL__REUSE_ONLY_INDEPENDENTLY_PROVED_EQUAL_DOMAINS__BUILD_V2_CLAIM_SCOPES__ACQUIRE_ONLY_UNCOVERED_PARTITIONS"
   },
   "v12_activation": {
     "path": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V12.json",
@@ -85,6 +92,11 @@
     "path": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V13.json",
     "git_blob_sha": "9e8864cb22c997d7c4e2f582d8abf3f03f26f22f",
     "independent_plan_replay_sha256": "8b49532adefbc859843cf473b1208eac44d291dfd8c92937d2ccf714993711fe",
+    "full_execution_authority": false
+  },
+  "v14_activation": {
+    "path": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V14.json",
+    "git_blob_sha": "9f6c3a020749333295db31fd8542d688c0c05fb9",
     "full_execution_authority": false
   }
 }
