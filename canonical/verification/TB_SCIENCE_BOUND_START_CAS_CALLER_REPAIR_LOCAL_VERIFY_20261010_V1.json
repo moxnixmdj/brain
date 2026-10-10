@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_BOUND_START_CAS_CALLER_REPAIR_LOCAL_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__LOCAL_SEMANTIC_3_OF_3__EXACT_BRANCH_STATIC_9_OF_9__INDEPENDENT_VERIFICATION_STILL_REQUIRED",
+  "candidate": {
+    "path": "canonical/governance/TB_SCIENCE_BOUND_START_CAS_CALLER_REPAIR_CANDIDATE_20261010_V1.json",
+    "git_blob_sha": "947aa2d992f0e6fe6939f91cba94b2729f495f4e"
+  },
+  "public_repository": "moxnixmdj/verification-capsule-runner",
+  "repair_branch": "repair/rank20-start-cas-caller-v8-20261010-v1",
+  "branch_head_sha": "7868075e686b716aab425881eb74ec5b3285de3a",
+  "exact_blobs": {
+    "resolver": "f5a77f98dcb80fc4dcbae3e04ac2b0853609a2a7",
+    "successor_runner": "954f3ad4188e0187071af2416cc3c260c1762d43",
+    "regression": "fb06891295eb904fcea9b5d6ab642cdbcfedc9bf",
+    "workflow": "ab46d73ab0a2fab7a6cb29452afd41e559011464"
+  },
+  "local_semantic_replay": {
+    "independent": false,
+    "checks_run": 3,
+    "checks_passed": 3,
+    "checks": [
+      "VALID_CONTENT_ADDRESSED_RUNTIME_BINDING_RESOLVES",
+      "FORGED_RUNTIME_BLOB_REJECTS_FAIL_CLOSED",
+      "REPOSITORY_PATH_ESCAPE_REJECTS_FAIL_CLOSED"
+    ],
+    "transcript_sha256": "4efc2983fc5d84a56066069bb9105bec19686da6841d2e95579b15421db53f3c"
+  },
+  "exact_branch_static_replay": {
+    "independent": false,
+    "checks_run": 9,
+    "checks_passed": 9,
+    "proves": [
+      "EXACT_EXPECTED_FILE_BLOBS_PRESENT_ON_REPAIR_BRANCH",
+      "SUCCESSOR_RUNNER_HAS_NO_RETIRED_RANK20_START_CAS_V7_LITERAL",
+      "SUCCESSOR_RUNNER_RESOLVES_RUNTIME_KEY_START_CAS_THROUGH_CONTENT_ADDRESSED_RESOLVER",
+      "RESOLVER_FAILS_CLOSED_ON_BLOB_MISMATCH_AND_PATH_ESCAPE",
+      "ADVERSARIAL_REGRESSION_CONTAINS_FORGED_BLOB_AND_PATH_ESCAPE_CASES"
+    ]
+  },
+  "dedicated_ci": {
+    "workflow_path": ".github/workflows/verify-rank20-bound-start-cas-caller-v1.yml",
+    "workflow_run_observed": false,
+    "conclusion": null
+  },
+  "delivery": {
+    "pull_request_created": false,
+    "pull_request_creation_blocked_by_host": true,
+    "merge_authority": false
+  },
+  "hard_nonclaims": [
+    "NOT_INDEPENDENT_VERIFICATION",
+    "NO_PUBLIC_BASE_PROMOTION",
+    "NO_RANK20_V3_RETRY_OR_REPLACEMENT",
+    "NO_TASK_START_OR_BENCHMARK_CONSUMPTION",
+    "NO_CAPABILITY_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "pass": true,
+  "next": "OBTAIN_INDEPENDENT_EXACT_BYTE_REPLAY_OR_ALLOWED_PR_CI__THEN_PROMOTE_REPAIR_FOR_FUTURE_FRESH_VALIDATION_ONLY"
+}
