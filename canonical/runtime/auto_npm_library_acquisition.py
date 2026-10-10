@@ -3,7 +3,7 @@
 from __future__ import annotations
 import hashlib,json,pathlib,re,subprocess,sys,tempfile,urllib.parse,urllib.request
 
-import npm_package_utils
+from canonical.runtime import npm_package_utils
 
 
 class AutoNpmAcquisitionFailure(RuntimeError):
