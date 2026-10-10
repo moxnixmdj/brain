@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK20_LIVE_ACTIVATION_SNAPSHOT_20261010_V2",
+  "date": "2026-10-10",
+  "status": "LIVE_LAST_OBSERVED__RANK20_V5_ACTIVATION_V2_PR_OPEN__PREFLIGHT_PASS__CARRIER_BUILD_IN_PROGRESS__PRE_TASK_READ",
+  "slot_id": "terminal-bench-science/hysteretic-aquifer-control::trial-0",
+  "task_digest": "sha256:681df0c3b2ada03a933ac4d2e11f07983676f87a9f26b61e416987904b880289",
+  "logical_attempt_id": "c7a02ecc6b11f4338120f05cd922370d361ce79e104549f95b656df3b51cb2bb",
+  "execution_claim_binding_digest": "sha256:aa0d91d18bb597319414b7385a92248992c093e14bf9c8f5677b72c05cb09beb",
+  "activation_authority": {
+    "path": "canonical/governance/TB_SCIENCE_RANK20_ACTIVATION_AUTHORITY_20261010_V2.json",
+    "git_blob_sha": "822b5846d22cdba193602700fe6d15eccabbb7d0",
+    "authorized": true
+  },
+  "current_ledger": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V49.json",
+    "git_blob_sha": "58b67c9241036e4f182381a711200fcadb55251f"
+  },
+  "public": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2606,
+    "execution_branch": "execute/tb-science-rank20-20261010-v2",
+    "branch_head_sha": "843efd89ad09c5adc737a7a867a87cf5e449c021",
+    "activation_file": "capsules/tb_science_rank20_20261010_v1/ACTIVATE_RANK20_V2_PR.json",
+    "activation_file_git_blob_sha": "455b06aae6255706363a855e6781729d5aaae776",
+    "changed_files_exactly_one": true,
+    "workflow_run_id": 38045888545,
+    "workflow_job_id": 114195221191,
+    "workflow_name": "Execute TB-Science rank20 V2 V13 claim-bound journaled one-shot"
+  },
+  "last_observed_steps": {
+    "exact_surface_preflight": "success",
+    "harbor_install": "success",
+    "llama_cpp_clean_build": "in_progress",
+    "model_restore": "pending",
+    "carrier_qualification": "pending",
+    "start_cas_absence_check": "pending",
+    "task_read_guard": "pending",
+    "harbor_execution": "pending",
+    "finalizer": "pending"
+  },
+  "last_observed_task_read": false,
+  "last_observed_task_started": false,
+  "last_observed_durable_start_cas_acquired": false,
+  "last_observed_benchmark_trials_consumed": 0,
+  "total_benchmark_trials_consumed_before_rank20_v2": 18,
+  "result_present": false,
+  "reward_observed": false,
+  "retry_authority": false,
+  "replacement_authority": false,
+  "live_state_must_be_rederived": true,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "hard_nonclaims": [
+    "NO_RANK20_TASK_READ_OBSERVED",
+    "NO_RANK20_DURABLE_START_OBSERVED",
+    "NO_RANK20_BENCHMARK_TRIAL_CONSUMPTION_OBSERVED",
+    "NO_RANK20_RESULT_OR_REWARD",
+    "NO_TERMINAL_OR_CAPABILITY_CREDIT"
+  ]
+}
