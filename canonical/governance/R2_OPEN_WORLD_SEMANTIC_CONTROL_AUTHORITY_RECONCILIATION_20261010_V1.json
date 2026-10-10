@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_R2_OPEN_WORLD_SEMANTIC_CONTROL_AUTHORITY_RECONCILIATION_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__CURRENT_R2_ADVANCED_V72_TO_V73__LOSS_CUSHION_MREL_AUTHORITY_PRESERVED__OPEN_WORLD_CONTROL_PROGRESS_BOUND__ZERO_CREDIT",
+  "prior_authority": {
+    "version": "V72",
+    "git_blob_sha": "6306ac666c5c56d75b8c1a2caeb3994a3251e547",
+    "preserved_repair": "LOSS_CUSHION_MREL_BOUND_FRONTIER_REPAIRED",
+    "reconciliation_path": "canonical/governance/R2_LOSS_CUSHION_MREL_AUTHORITY_RECONCILIATION_20261010_V1.json",
+    "reconciliation_git_blob_sha": "68c0223695ce9c5f9770d10027525f90a16d227a"
+  },
+  "current_authority": {
+    "version": "V73",
+    "path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+    "git_blob_sha": "84563042f96f7f5fffd2240956fbec985dfe7a40",
+    "direct_route_count": 40,
+    "bounded_family_count": 36,
+    "primary_internal_unsolved_count": 1,
+    "primary_internal_unsolved_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL"
+  },
+  "new_control_capability": {
+    "activation_path": "canonical/governance/R2_OPEN_WORLD_SEMANTIC_CONTROL_ACTIVATION_20261010_V1.json",
+    "activation_git_blob_sha": "b9768835ea3e41c53c0b7ef39c2a7e4ab999908a",
+    "live_front_door": "canonical/runtime/unified_cognitive_fabric_v2.py",
+    "live_front_door_git_blob_sha": "afb8b5c30957168dd8ba8684afb94b31c9118ed5",
+    "control_runtime": "canonical/runtime/open_world_semantic_control_v1.py",
+    "control_runtime_git_blob_sha": "cea865ac319eb420977b60378de213fc11be9090",
+    "live_verification_path": "canonical/verification/R2_OPEN_WORLD_SEMANTIC_CONTROL_LIVE_VERIFY_20261010_V2.json",
+    "live_verification_git_blob_sha": "929c4d125f1ed29fc62a13c96f5fa997402ae083"
+  },
+  "composition": {
+    "pairwise_nonidentifiability_runtime_git_blob_sha": "e358eeecc45868c91d22009cc57c624e9a210037",
+    "pairwise_nonidentifiability_verification_git_blob_sha": "2e5f81c929025f4df7b5c2589ccc37f6147cdee6",
+    "rule": "PROVE_SOURCE_NONIDENTIFIABILITY_WHEN_POSSIBLE__THEN_ROUTE_MINIMUM_INFORMATION_ACQUISITION_WITHOUT_SEMANTIC_IDENTITY_DEPENDENCE__REVERIFY_AFTER_ACQUISITION"
+  },
+  "scheduler_invariance": {
+    "root2_cut_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261010_V64.json",
+    "root2_cut_git_blob_sha": "88d62359c8e3cd4c4c6c775355e4370c63ea251b",
+    "direct_route_count_delta": 0,
+    "bounded_family_count_delta": 0,
+    "primary_unsolved_count_delta": 0,
+    "finance_tail_closed": false
+  },
+  "authority_boundary": {
+    "control_progress_closed_when_preconditions_hold": true,
+    "semantic_identity_closed": false,
+    "semantic_truth_authority": false,
+    "final_domain_action_authority": false,
+    "open_world_candidate_universe_complete": false,
+    "terminal_authority": false
+  },
+  "hard_nonclaims": [
+    "NO_REVOCATION_OF_V72_LOSS_CUSHION_MREL_REPAIR",
+    "NO_TRUE_MARGIN_SENSE_SELECTION",
+    "NO_FINANCE_SEMANTIC_TAIL_CLOSURE",
+    "NO_OPEN_WORLD_SEMANTIC_COMPLETENESS",
+    "NO_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
