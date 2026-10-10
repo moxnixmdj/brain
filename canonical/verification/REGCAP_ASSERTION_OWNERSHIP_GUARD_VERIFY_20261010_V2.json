@@ -1,0 +1,59 @@
+{
+  "schema":"PROJECT_BRAIN_REGCAP_ASSERTION_OWNERSHIP_GUARD_VERIFY_20261010_V2",
+  "date":"2026-10-10",
+  "status":"PASS__CURRENT_MAIN_REBASE__EXACT_SUBJECT_BYTES__60_OF_60_FOCUSED_TESTS__PYCOMPILE_PASS__ZERO_TERMINAL_CREDIT",
+  "supersedes":"canonical/verification/REGCAP_ASSERTION_OWNERSHIP_GUARD_VERIFY_20261010_V1.json",
+  "subject":{
+    "repository":"moxnixmdj/brain",
+    "branch":"regcap-assertion-ownership-guard-v1-20261010-v2",
+    "base_main_sha":"e2fe9b31d9b71f2c76b519c462f8e31b1e153977",
+    "exact_blobs":{
+      "canonical/runtime/source_assertion_ownership_guard_v1.py":"c86f390247de214c0f01d4de872800f2d3d9f344",
+      "canonical/runtime/regcap_contextual_observation_compiler_v1.py":"4ae999c1f6805d46d6d18c10c115ebb09c306516",
+      "canonical/runtime/regcap_context_signature_v1.py":"15619eb80ffb2d20e9652e30c8206b89de24eeb4",
+      "canonical/runtime/source_aligned_regcap_context_proof_v1.py":"02a59611ba354a6e448c0fe9c3d413fc6717faa6",
+      "canonical/tests/test_regcap_assertion_ownership_guard_v1.py":"ed1c2c0c9cbaff63521d4d91677dd1d91d906ad6"
+    }
+  },
+  "independent_carrier":{
+    "name":"participial-disposition-verify-20261009-sol",
+    "sprite_id":"sprite-72f2a31b-c09c-49e0-bfe0-279786ee2d56",
+    "workspace":"/home/sprite/assertion_ownership_verify_v2",
+    "assembly":"CURRENT_MAIN_DEPENDENCY_BYTES_PLUS_EXACT_REBASED_SUBJECT_BYTES"
+  },
+  "counterexample_before_repair":{
+    "result":"REPRODUCED_ON_PRE_FIX_CANONICAL_PATH",
+    "unsafe_cases":[
+      "quoted positive signature",
+      "denied positive signature",
+      "hypothetical positive signature"
+    ],
+    "pre_fix_result":"semantic_truth_authority=true"
+  },
+  "verification":{
+    "py_compile":"PASS",
+    "assertion_ownership_and_exploit_suite":{"tests_run":19,"failures":0,"errors":0},
+    "canonical_contextual_observation_suite":{"tests_run":22,"failures":0,"errors":0},
+    "context_atom_truth_certificate_v2_suite":{"tests_run":6,"failures":0,"errors":0},
+    "source_aligned_regcap_context_proof_suite":{"tests_run":13,"failures":0,"errors":0},
+    "total_focused_tests":60
+  },
+  "proved":[
+    "CROPPED_INNER_CLAUSES_CANNOT_REMOVE_ATTRIBUTION_AND_REGAIN_REGCAP_SEMANTIC_TRUTH",
+    "QUOTED_DENIED_HYPOTHETICAL_CONDITIONAL_AND_INTERROGATIVE_CONTEXTS_DO_NOT_RECEIVE_DIRECT_REGCAP_SEMANTIC_TRUTH",
+    "UNKNOWN_WRAPPERS_DO_NOT_LAUNDER_THROUGH_SUBSTRING_SEARCH",
+    "REGCAP_DESCRIPTOR_CONTEXT_REUSES_THE_SINGLE_CANONICAL_POSITIVE_GRAMMAR",
+    "DESCRIPTOR_CANDIDATE_HINTS_ARE_DERIVED_FROM_THE_AUTHENTICATED_MATRIX_SCHEMA",
+    "ALL_SIX_BOUND_DIRECT_DESCRIPTOR_SIGNATURES_REMAIN_SUPPORTED",
+    "LEGACY_SOURCE_ALIGNED_REGCAP_CONTEXT_PROOF_USES_ASSERTION_COMPLETE_ANCHORED_GRAMMARS",
+    "TERMINAL_PERIOD_OMISSION_ONLY_REMAINS_A_NEUTRAL_SPAN_VARIATION",
+    "UNSAFE_CONTEXT_CANNOT_TRIGGER_RELATIVE_CCOB_CCYB_TLAC_SELECTION"
+  ],
+  "hard_nonclaims":[
+    "NO_GENERAL_ASSERTION_OWNERSHIP_SOLVER",
+    "NO_GENERAL_NATURAL_LANGUAGE_SEMANTIC_COMPLETENESS",
+    "NO_NEW_GLOBAL_REGCAP_IDENTITY",
+    "NO_NEW_POLICY_ADEQUACY_EXECUTION_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "accounting":{"incremental_spend_usd":0,"terminal_credit_delta":0}
+}

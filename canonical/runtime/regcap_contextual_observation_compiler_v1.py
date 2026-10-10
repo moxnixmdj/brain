@@ -12,6 +12,8 @@ from hashlib import sha256
 import re
 from typing import Any
 
+from canonical.runtime.source_assertion_ownership_guard_v1 import check_direct_assertion
+
 SCHEMA = "PROJECT_BRAIN_REGCAP_CONTEXTUAL_OBSERVATION_COMPILER_V1"
 
 _WS = re.compile(r"\s+")
@@ -142,6 +144,26 @@ def compile_span(
     ):
         return _base("FAIL_CLOSED", reason="SPAN_INVALID")
 
+    ownership = check_direct_assertion(
+        source_text,
+        start=start,
+        end=end,
+        require_selected_span_is_complete_sentence=True,
+    )
+    if ownership.get("pass") is not True:
+        if ownership.get("status") == "FAIL_CLOSED":
+            return _base(
+                "FAIL_CLOSED",
+                reason="ASSERTION_OWNERSHIP_GUARD_FAIL_CLOSED",
+                assertion_ownership=ownership,
+            )
+        return _base(
+            "UNRESOLVED__ASSERTION_OWNERSHIP_NOT_PROVED",
+            reason=ownership.get("reason") or ownership.get("status"),
+            assertion_ownership=ownership,
+            source_span=[start, end],
+        )
+
     surface = source_text[start:end]
     normalized = _norm(surface)
     matches = []
@@ -175,7 +197,7 @@ def compile_span(
         concept_identity_authority=False,
         candidate_universe_complete=False,
         boundary=(
-            "EXACT_CONTROLLED_CONTEXT_TO_OBSERVATION_ONLY__"
+            "EXACT_CONTROLLED_ASSERTION_COMPLETE_CONTEXT_TO_OBSERVATION_ONLY__"
             "NO_CONCEPT_CLASSIFICATION__NO_REVERSE_PROPERTY_INFERENCE__"
             "NO_HYPOTHESIS_SET_COMPLETENESS_OR_TERMINAL_AUTHORITY"
         ),
