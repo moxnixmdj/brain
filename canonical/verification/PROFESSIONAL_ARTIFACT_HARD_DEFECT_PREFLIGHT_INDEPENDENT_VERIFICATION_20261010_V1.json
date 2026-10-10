@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_ARTIFACT_HARD_DEFECT_PREFLIGHT_INDEPENDENT_VERIFICATION_V1",
+  "date": "2026-10-10",
+  "status": "INDEPENDENT_SPRITE_PASS__11_OF_11__EXACT_RUNTIME_AND_TEST_BLOBS__ZERO_QUALITY_OR_TERMINAL_CREDIT",
+  "runtime": {
+    "path": "canonical/runtime/professional_artifact_hard_defect_preflight_v1.py",
+    "git_blob_sha": "1921ef67ec36ac1847243e99c49f638bf7cc170a"
+  },
+  "tests": {
+    "path": "canonical/tests/test_professional_artifact_hard_defect_preflight_v1.py",
+    "git_blob_sha": "1b22b143339fd10ee245c808fb4a087adebbf110"
+  },
+  "replay": {
+    "carrier": "brain-professional-hard-defect-verify-20261010",
+    "carrier_id": "sprite-1bbb86ed-1f7c-409f-8397-fadc4de7a62a",
+    "tests_run": 11,
+    "tests_passed": 11,
+    "tests_failed": 0
+  },
+  "verified": [
+    "CORRUPT_OOXML_PACKAGE_FAILS_CLOSED",
+    "BLANK_DOCX_BLOCKS_UNDER_BRAIN_SANITY_PROFILE",
+    "CLEAN_DOCX_PASS_HAS_NO_QUALITY_CREDIT",
+    "XLSX_ERROR_CELLS_BLOCK",
+    "XLSX_ZERO_WIDTH_COLUMNS_BLOCK",
+    "HIDDEN_NONZERO_WIDTH_COLUMN_IS_NOT_INVENTED_AS_ZERO_WIDTH_FAILURE",
+    "PPTX_TEXT_OUTSIDE_SLIDE_BOUNDS_BLOCKS",
+    "BLANK_SLIDE_IS_NOT_INVENTED_AS_PUBLIC_HARD_FAILURE",
+    "EXACT_ARTIFACT_FORMAT_IS_ENFORCED",
+    "UNKNOWN_PROFILE_FAILS_CLOSED",
+    "CALLER_CANNOT_INJECT_CUSTOM_CHECK_SELECTION"
+  ],
+  "hard_nonclaims": [
+    "NO_PROFESSIONAL_EXCELLENCE_PROOF",
+    "NO_COMPLETE_PRESENTATION_ORDER",
+    "NO_GDPVAL_OR_PRIVATE_AA_SCORE_CREDIT",
+    "NO_TERMINAL_AUTHORITY"
+  ],
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0,
+  "quality_authority": false,
+  "terminal_authority": false
+}
