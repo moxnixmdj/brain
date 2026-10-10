@@ -206,7 +206,7 @@ class Tests(unittest.TestCase):
             calls={"n":0}
             def injected(problem,result):
                 calls["n"]+=1
-                if calls["n"]>=3:
+                if calls["n"]>=2:
                     return {"verified":False,"errors":["forced"]}
                 return original(problem,result)
             with patch.object(route.verifier,"verify",side_effect=injected):
