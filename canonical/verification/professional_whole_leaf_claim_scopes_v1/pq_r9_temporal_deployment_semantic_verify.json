@@ -1,0 +1,41 @@
+{
+  "acceptance_authority": false,
+  "claim_guard_git_blob_sha": "d1de61aa9bc00a184772a50f7ec9d5ee2853d747",
+  "claim_id": "80e0f7cd50ed5744d6267775fdb11363448becc1940f53810745d76e240fc9be",
+  "claim_scope_git_blob_sha": "27d598dc6e8b781e963a339be72b865cb5c1b747",
+  "date": "2026-10-10",
+  "execution_authority": false,
+  "incremental_spend_usd": 0,
+  "independent_replay": {
+    "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "pass": true,
+    "real_manifest_leaf_count": 24,
+    "real_manifest_passed": 24,
+    "transcript_sha256": "11e7bd16c42d66035ffe2989f365f56392d963f187b6f35c4f8a1c047a3779dc"
+  },
+  "leaf_acceptance_sha256": "4967b35be044567ae9fbcd01f2443996dc675f3154fd386790f79301ae9cff09",
+  "leaf_id": "PQ::R9_TEMPORAL_DEPLOYMENT::SEMANTIC",
+  "leaf_manifest_git_blob_sha": "a7cad32c9fd969ff2c3857bb924c7bd746237ec2",
+  "mission_authority_git_blob_sha": "13c470645b037bbb46245c687dd35197b420d51a",
+  "promotion_authority": false,
+  "quality_authority": false,
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_WHOLE_LEAF_CLAIM_SCOPE_VERIFY_V1",
+  "scope_definition_sha256": "abcb3e76d4f36d31f043b16ac1ddab81c7546373f20c3fedc471265d979935d9",
+  "semantic_tests": {
+    "git_blob_sha": "38678fcf59ee3fa87b223156748a1b29660764e1",
+    "path": "canonical/tests/test_professional_quality_whole_leaf_domain_equivalence_v1.py"
+  },
+  "semantic_tests_git_blob_sha": "38678fcf59ee3fa87b223156748a1b29660764e1",
+  "semantic_truth_authority": false,
+  "semantic_verifier": {
+    "git_blob_sha": "76bf7e1a6f26ff3664ed8c355dff8a688b074159",
+    "path": "canonical/runtime/professional_quality_whole_leaf_domain_equivalence_v1.py"
+  },
+  "semantic_verifier_git_blob_sha": "76bf7e1a6f26ff3664ed8c355dff8a688b074159",
+  "status": "PASS__INDEPENDENT_REAL_MANIFEST_WHOLE_LEAF_DOMAIN_EQUIVALENCE__ZERO_PROPERTY_OR_TERMINAL_CREDIT",
+  "subject_git_blob_sha": "1d598bc8757017ceb34928d0df9f5fce859ef868",
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "whole_leaf_domain_equivalence_proved": true
+}
