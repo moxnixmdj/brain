@@ -1,0 +1,134 @@
+{
+  "schema": "PROJECT_BRAIN_ESCAPE_PROGRESS_13_CURRENT_PROOF_FRONTIER_RECONCILIATION_20261010_V2",
+  "date": "2026-10-10",
+  "canonical_base_commit": "336c680b19cb3df3119cc6e49700b4f68baad1c0",
+  "status": "SNAPSHOT_RECONCILED__VERIFIED_DORMANT_CLAIM_PROMOTED__CLAIM_SPECIFIC_CC_R3_OPEN__ZERO_CREDIT",
+  "mission": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "frozen_claim": {
+    "path": "canonical/governance/ESCAPE_PROGRESS_TOTALITY_FROZEN_13_CLAIM_20261010_V2.json",
+    "git_blob_sha": "138262b57df8a72c784096712cbcba19cd400689",
+    "claim_id": "78375cca9acf2646dd23f4e06247c9206c99e1758a79174314dd448566506a72",
+    "claim_kind": "BOUNDED_SUBGOAL",
+    "independent_verification": [
+      "canonical/verification/ESCAPE_PROGRESS_FROZEN_13_CLAIM_V2_INDEPENDENT_VERIFICATION_20261010_V1.json",
+      "a08ec7464a2b4c66aba72897eac03def6804af4d"
+    ],
+    "dormant_not_active": true
+  },
+  "currentness_at_base": {
+    "mission_pointer": [
+      "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
+      "6ab2147306a138f9ea327d8e19cb4a5bc76e89df"
+    ],
+    "frozen_quotient": [
+      "canonical/governance/FROZEN_19_ACCEPTANCE_PROOF_SHAPE_QUOTIENT_20261007_V1.json",
+      "b20c5cd6965f7ea7e5ca019d1e828ac6eced042c"
+    ],
+    "adaptive_theorem": [
+      "canonical/governance/ADAPTIVE_ABSTRACT_POSITIVE_COVER_FIXED_POINT_THEOREM_20261007_V2.json",
+      "2ac97a6677cf577a52c3fd6d01739ee29be1e9d8"
+    ],
+    "claim_guard": [
+      "canonical/runtime/coverage_claim_scope_guard_v1.py",
+      "d1de61aa9bc00a184772a50f7ec9d5ee2853d747"
+    ],
+    "coverage_pointer": [
+      "canonical/governance/CURRENT_COVERAGE_COMPLETENESS_ROOT_CERTIFICATES.json",
+      "8199d0d5a992c0ab4876af95349396bcc62a81fe"
+    ],
+    "r2_pointer": [
+      "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+      "c94c84aaf3c759abd6827c1ff93181c04033b6a1"
+    ],
+    "terminal_pointer": [
+      "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+      "4daaba1c02842dece511c8678f5ab42618ded913"
+    ]
+  },
+  "coverage_truth_at_base": {
+    "active_claim_id": "e1c519109c4b2c46a9225686fc2c5c5490564d1cc62d5c6ff3c6c436bfca4314",
+    "active_claim_subject": "R3_PROMOTION_SAFETY",
+    "roots_proved": 3,
+    "roots_open": 0,
+    "r4_proof_closure": true,
+    "property_scoped_only": true,
+    "escape13_active": false,
+    "single_active_claim_policy": true,
+    "cross_claim_certificate_transport_forbidden": true
+  },
+  "reached_escape_truth": {
+    "activation": [
+      "canonical/governance/REACHED_ESCAPE_STATE_KERNEL_ACTIVATION_20261010_V1.json",
+      "cd34ca0b65c754f54efaf820512c6f39efdce7ec"
+    ],
+    "runtime": [
+      "canonical/runtime/reached_escape_state_kernel_v1.py",
+      "b1435d90f039bd1d809ff364c325c3d0858d3afd"
+    ],
+    "verified_reached_state_kernel": true,
+    "constructive_outcomes": [
+      "TERMINALIZE_WITH_COMMON_POLICY",
+      "STRICT_PROGRESS_WITH_DISCRIMINATOR",
+      "UNSPLITTABLE_POLICY_CONFLICT"
+    ],
+    "global_escape_progress_totality_proved": false,
+    "global_unsplittable_repair_acquirability_proved": false
+  },
+  "structural_adapter_truth": {
+    "verification": [
+      "canonical/verification/R3_STRUCTURAL_ADAPTER_RULE_ACQUISITION_PROVIDER_VERIFY_20261010_V1.json",
+      "aa5942e4c1385db0db8048a2f02f0a0f7515fdac"
+    ],
+    "result": "5_OF_5_PASS",
+    "global_all_adapter_gaps_closed": false,
+    "terminal_credit_delta": 0
+  },
+  "r2_truth_at_base": {
+    "version": "V71",
+    "direct_routes": 40,
+    "bounded_families": 36,
+    "one_primary_finance_semantic_residual": true,
+    "primary_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL"
+  },
+  "terminal_currentness_risk_at_base": {
+    "terminal_pointer_schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V38",
+    "status_token_names_r2": "V69",
+    "actual_current_r2": "V71",
+    "classification": "HUMAN_STATUS_TOKEN_STALE__POINTER_REMAINS_FAIL_CLOSED__RECONCILE_SEPARATELY_WITH_ZERO_CREDIT"
+  },
+  "exact_claim_specific_cc_r3_gap": {
+    "root_id": "CC_R3_TERMINAL_CLOSURE_V1",
+    "missing_premise": "SCOPE_COMPLETE_PROGRESS_FOR_EVERY_ACTUALLY_REACHED_NONTERMINAL_STATE_IN_FROZEN_13_SCOPE",
+    "current_sufficient_cases": [
+      "AUTHENTICATED_SAFE_COMMON_ADEQUATE_POLICY_EXISTS",
+      "AUTHENTICATED_SAFE_TRUTH_PRESERVING_COMPLETE_FINITE_STRICT_SPLITTER_EXISTS"
+    ],
+    "unresolved_case": "UNSPLITTABLE_POLICY_CONFLICT",
+    "closure_requirement": "PROVE_NO_SUCH_REACHED_STATE_EXISTS_IN_SCOPE_OR_PROVE_EVERY_SUCH_REACHED_STATE_HAS_AN_AUTHENTICATED_ACQUIRABLE_REPAIR_RETURNING_TO_A_SUFFICIENT_CASE",
+    "current_kernel_alone_sufficient": false,
+    "current_structural_adapter_provider_alone_sufficient": false
+  },
+  "next": [
+    "BUILD_SCOPE_COMPLETE_13_OBLIGATION_REACHED_STATE_AND_REPAIR_ROUTE_MANIFEST",
+    "COLLAPSE_SHARED_ROUTE_CLASSES",
+    "PROVE_OR_FALSIFY_ESCAPE13_CC_R3_WITH_EXECUTABLE_SEMANTIC_VERIFIER",
+    "INDEPENDENTLY_VERIFY_EXACT_CC_R3_BYTES_IF_PASS",
+    "THEN_PROVE_OR_FALSIFY_CC_R1_AND_CC_R2_FOR_SAME_CLAIM",
+    "ONLY_AFTER_ALL_THREE_PASS__ATOMically_SWITCH_SINGLE_ACTIVE_CLAIM_AND_R4_BINDING",
+    "RECOMPUTE_ESCAPE_PROGRESS_TOTALITY_AND_TERMINAL_RESIDUAL",
+    "RECONCILE_TERMINAL_POINTER_R2_VERSION_TOKEN_SEPARATELY"
+  ],
+  "hard_nonclaims": [
+    "NO_ESCAPE13_CC_ROOT_PROVED",
+    "NO_ESCAPE_PROGRESS_TOTALITY",
+    "NO_U_EMPTY",
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_TERMINAL_CREDIT",
+    "NO_GLOBAL_MISSION_COMPLETION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
