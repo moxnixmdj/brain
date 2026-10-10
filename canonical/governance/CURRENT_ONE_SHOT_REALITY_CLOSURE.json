@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_ONE_SHOT_REALITY_CLOSURE_POINTER_V1",
   "date": "2026-10-09",
-  "status": "ACTIVE_VERIFIED_ORCHESTRATOR__CANONICAL_FRONTDOOR_META_MODE_LIVE__STRICT_EXTERNALITY_LAW_VERIFIED__ACTUAL_LIVE_R3_INTERNAL_FIXED_POINT__NO_RESIDUAL__CURRENT_R2_V56_AND_CODING_V3_PROJECTION_BOUND__INFRASTRUCTURE_FAILURES_INTERNAL_AND_RETRYABLE__DYNAMIC_CURRENT_PROJECTION__FINAL_CLEANROOM_GATE_BOUND__AUTO_DEFAULT_FALLBACK_LIVE__PROOF_CARRYING_DIRECT_ROUTE_AUTO_PROMOTION_LIVE__EXACT_DECISION_REPLAY_REQUIRED__DYNAMIC_ADMISSION_POINTER_TARGET_FOLLOW_BOUND__PROMOTION_CONCURRENCY_GUARD_BOUND__ROUTE_NONINTERFERENCE_GATE_BOUND__ROOT1_STRUCTURAL_ADAPTER_ACQUISITION_BOUND__V1_POINTER_REBOUND",
+  "status": "ACTIVE_VERIFIED_ORCHESTRATOR__CANONICAL_FRONTDOOR_META_MODE_LIVE__STRICT_EXTERNALITY_LAW_VERIFIED__ACTUAL_LIVE_R3_INTERNAL_FIXED_POINT__NO_RESIDUAL__CURRENT_R2_V56_AND_CODING_V3_PROJECTION_BOUND__INFRASTRUCTURE_FAILURES_INTERNAL_AND_RETRYABLE__DYNAMIC_CURRENT_PROJECTION__FINAL_CLEANROOM_GATE_BOUND__AUTO_DEFAULT_FALLBACK_LIVE__PROOF_CARRYING_DIRECT_ROUTE_AUTO_PROMOTION_LIVE__EXACT_DECISION_REPLAY_REQUIRED__DYNAMIC_ADMISSION_POINTER_TARGET_FOLLOW_BOUND__PROMOTION_CONCURRENCY_GUARD_BOUND__ROUTE_NONINTERFERENCE_GATE_BOUND__ROOT1_STRUCTURAL_ADAPTER_ACQUISITION_BOUND__V1_POINTER_REBOUND__REACHED_ESCAPE_TRUTH_AUTHORITY_V2_VERIFIED__VERIFIED_REPAIR_RECERTIFICATION_LIVE",
   "runtime": {
     "path": "canonical/runtime/one_shot_reality_closure_v2.py",
     "git_blob_sha": "b8347a3993f96aa5e6fa2f1fe68d7c8afccb8bec"
@@ -436,5 +436,36 @@
     "stale_noninterference_proof_policy": "FAIL_CLOSED",
     "missing_noninterference_proof_policy": "FAIL_CLOSED",
     "existing_exact_live_binding_repromotion_policy": "IDEMPOTENT_GRANDFATHERED"
+  },
+  "reached_escape_truth_authority_v2": {
+    "runtime_path": "canonical/runtime/certified_reached_escape_state_constructor_v2.py",
+    "runtime_git_blob_sha": "7d83dc696347a529fe4476f02f31d11865a0b77b",
+    "verification_path": "canonical/verification/CERTIFIED_REACHED_ESCAPE_STATE_CONSTRUCTOR_V2_VERIFY_20261010_V1.json",
+    "verification_git_blob_sha": "88f62a35c0c92b44a6c4903f4b735fef82e13f47",
+    "status": "PASS__VERIFIER_BOUND_POLICY_AND_DISCRIMINATOR_TRUTH_AUTHORITY__CALLER_FLAGS_NONAUTHORITATIVE",
+    "truth_authority_bound_for_verified_receipts": true,
+    "global_repair_acquirability_proved": false,
+    "global_escape_progress_totality_proved": false,
+    "terminal_authority": false
+  },
+  "reached_escape_repair_recertification_loop": {
+    "runtime_path": "canonical/runtime/reached_escape_repair_cycle_v1.py",
+    "runtime_git_blob_sha": "c2d606cb176fe18735c458b415a943848a7d15a0",
+    "unified_fabric_path": "canonical/runtime/unified_cognitive_fabric_v1.py",
+    "unified_fabric_git_blob_sha": "c3dbea74679450273bd07689251499bcd9609212",
+    "verification_path": "canonical/verification/REACHED_ESCAPE_REPAIR_CYCLE_LIVE_FABRIC_VERIFY_20261010_V2.json",
+    "verification_git_blob_sha": "112966f7249838a31b16745a385c9e6b71f69077",
+    "status": "PASS__DISPATCH_BOUND_INDEPENDENTLY_VERIFIED_REPAIR__STATE_DELTA__CONSTRUCTOR_RECERTIFICATION__LIVE_REENTRY",
+    "provider_self_certification_blocked": true,
+    "provider_verifier_independence_required": true,
+    "multiround_policy_then_discriminator_compounding_verified": true,
+    "global_repair_acquirability_proved": false,
+    "global_escape_progress_totality_proved": false,
+    "terminal_authority": false
+  },
+  "escape_progress_reuse_reconciliation": {
+    "path": "canonical/governance/ESCAPE_PROGRESS_REACHED_STATE_V2_REUSE_RECONCILIATION_20261010_V1.json",
+    "git_blob_sha": "c74716944e6ea6c72af1d43dc852708b1af16fda",
+    "effect": "GENERIC_REACHED_STATE_TRUTH_AUTHORITY_REPAIR_VERIFICATION_RECERTIFICATION_AND_LIVE_REENTRY_REMOVED_FROM_OPEN_FRONTIER__ROW_SPECIFIC_PROVIDER_ACTION_TOTALITY_REMAINS"
   }
 }
