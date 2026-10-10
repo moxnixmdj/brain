@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_ESCAPE_PROGRESS_SHARED_REPAIR_POTENTIAL_INTEGRATION_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__18_OF_18__MANIFEST_CURRENT__CC_R3_OPEN__ZERO_CREDIT",
+  "exact_blobs": {
+    "manifest": "5637c39d12fc8fffd57da98e139aaacba61a7e2e",
+    "manifest_validator": "e74856dd0f138223f4c970e415195110a4055466",
+    "manifest_tests": "c6ac21876927b2ff2f655f21693173953e82187a",
+    "activation": "5bafe04ce1b55f92479b13d08dce88deb87327e9",
+    "repair_potential": "865848d3dd2b61e2385934868d6106e2b04dedcd",
+    "repair_potential_tests": "9cd5a3e93ef90e2d3afdb3f5a45048e7e4da7afa",
+    "tb_route_reconciliation": "eafb7f92361414dfdc02872b7a5ead11f2b25000"
+  },
+  "replay": {
+    "repair_potential_tests_passed": 11,
+    "manifest_tests_passed": 7,
+    "total_tests_passed": 18,
+    "py_compile_pass": true,
+    "manifest_pass": true,
+    "shared_measure_bound": true,
+    "specific_action_bindings_proved": 0,
+    "provider_totality_proved": false,
+    "cc_r3_proved": false,
+    "terminal_credit_delta": 0
+  },
+  "remaining": [
+    "BIND_FOUR_INTERNAL_ACTIONS_TO_SHARED_REPAIR_CONTRACT",
+    "PROVE_OR_REFUTE_GLOBAL_AUTHENTICATED_REPAIR_PROVIDER_TOTALITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
