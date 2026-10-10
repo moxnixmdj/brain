@@ -1,0 +1,78 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_V9_R12_REUSE_CLOSURE_INDEPENDENT_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__REBASED_CURRENT_MAIN__INDEPENDENT_SPRITE__PYCOMPILE__13_OF_13__V8_TO_V9_STRICT_REFINEMENT_PLUS_EXACT_V9_C1_TO_C7_REUSE_PLUS_POLICY_COVER_CC_R3_ADAPTER__C8_REAL_EXECUTION_STILL_OPEN__ZERO_PROPERTY_OR_TERMINAL_CREDIT",
+  "base_main_commit": "1656ea7dca2c1693576c5af4fc601d23932f1db7",
+  "subject": {
+    "refinement_runtime": {
+      "path": "canonical/runtime/professional_v8_to_v9_r12_positive_refinement_v1.py",
+      "git_blob_sha": "aec696c4a07c44d9a5cb8f95f0b15834fe4be814"
+    },
+    "refinement_tests": {
+      "path": "canonical/tests/test_professional_v8_to_v9_r12_positive_refinement_v1.py",
+      "git_blob_sha": "4c147afb4d468d95586fde26822f42b271c1ea4c"
+    },
+    "v9_reuse_runtime": {
+      "path": "canonical/runtime/professional_v9_r12_reuse_closure_v1.py",
+      "git_blob_sha": "472459ec7b405ce75bd2689c560e13a441c28437"
+    },
+    "v9_reuse_tests": {
+      "path": "canonical/tests/test_professional_v9_r12_reuse_closure_v1.py",
+      "git_blob_sha": "4168657e6bbf2de218127a6340f9ea9f5d3514ec"
+    },
+    "v9_subject": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V9_DECLARED_SYSTEM_SUBJECT_20261010_V8.json",
+      "git_blob_sha": "2ff32e4bb78e63635244c86d47fa369d7ba53900",
+      "subject_id": "PROFESSIONAL_QUALITY_P1_V9_EXECUTABLE_TOTALITY_SEMANTICS_SYSTEM_20261010_V8",
+      "subject_sha256": "adf7f09e1913526e460b7350c02cd148c2cd14de90eed33fa7fae84d395d9912"
+    }
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/pq-v7-proof-bound-verify",
+    "exact_branch_blob_identity_checked": true,
+    "py_compile": "PASS",
+    "tests_run": 13,
+    "tests_passed": 13,
+    "tests_failed": 0
+  },
+  "truth": {
+    "v8_to_v9_positive_route_refinement_proved": true,
+    "c1_to_c7_exact_v9_reuse_verified": true,
+    "v9_policy_cover_cc_r3_adapter_verified": true,
+    "real_v9_policy_cover_witness_bound": false,
+    "real_v9_positive_execution_observed": false,
+    "v9_c8_nonvacuity_proved": false,
+    "v9_cc_r3_property_truth_promoted": false,
+    "r4_proof_realization_authority": false
+  },
+  "hard_nonclaims": [
+    "NO_REAL_V9_C8_NONVACUITY_FROM_SYNTHETIC_TESTS",
+    "NO_REAL_V9_CC_R3_PROPERTY_CREDIT_WITHOUT_AUTHENTIC_WITNESS_BYTES",
+    "NO_CROSS_SUBJECT_PROPERTY_AUTHORITY_TRANSPORT",
+    "NO_R4_SEMANTIC_PROPERTY_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "semantic_property_truth_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "rebase_proof": {
+    "prior_base_main_commit": "2297bcbd6fd7f2fbc3e1a854cfa3e9acd1135ab4",
+    "current_base_main_commit": "1656ea7dca2c1693576c5af4fc601d23932f1db7",
+    "changed_load_bearing_component_count": 0,
+    "changed_paths_between_bases": [
+      "canonical/governance/CURRENT_DEVELOPMENT_SCHEDULER.json",
+      "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
+      "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
+      "canonical/runtime/professional_v8_to_v9_r12_positive_refinement_v1.py",
+      "canonical/tests/test_professional_v8_to_v9_r12_positive_refinement_v1.py",
+      "canonical/verification/PROFESSIONAL_V8_TO_V9_R12_POSITIVE_REFINEMENT_INDEPENDENT_VERIFY_20261010_V1.json"
+    ],
+    "note": "V8_TO_V9_REFINEMENT_IS_NOW_CANONICAL_MAIN__V9_REUSE_CLOSURE_LOAD_BEARING_PINS_UNCHANGED"
+  }
+}
