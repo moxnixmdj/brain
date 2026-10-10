@@ -34,6 +34,8 @@ REFS={
  "current_stack_public_verification":("canonical/verification/PROFESSIONAL_R3_V7_REALIZATION_WITNESS_PUBLIC_VERIFY_20261010_V1.json","64e7355020d700b066090d524a92737547ae1b02"),
  "render_step_receipt":("canonical/governance/PROFESSIONAL_R3_V7_RENDER_STEP_RESULT_BINDING_20261010_V1.json","76c262ee9eb355ca2bac32ede86e9c64c284ebaf"),
  "render_step_independent_verification":("canonical/verification/PROFESSIONAL_R3_V7_RENDER_STEP_RESULT_BINDING_INDEPENDENT_VERIFICATION_20261010_V1.json","12084180959187e9e2789cafd3cefa88a8d83795"),
+}
+CODE_REFS={
  "witness_verifier":("canonical/runtime/professional_quality_r3_realization_witness_verify_v1.py","316d9df9ebf73756a28c11e70be7cc167c1a6c5b"),
  "witness_verifier_tests":("canonical/tests/test_professional_quality_r3_realization_witness_verify_v1.py","78c18458ad6a7913e127142fbfb30a2c4c7bd6cb"),
 }
@@ -137,6 +139,14 @@ def verify(*,repo_root:str|Path|None=None):
   d,e=_read(root,path,sha)
   if e:return _fail(e)
   docs[k]=d
+ for k,(path,sha) in CODE_REFS.items():
+  ref=refs.get(k)
+  if not isinstance(ref,Mapping) or ref.get("path")!=path or ref.get("git_blob_sha")!=sha:return _fail("BRIDGE_REFERENCE_MISMATCH:"+k)
+  p=(root/path).resolve()
+  try:p.relative_to(root.resolve())
+  except ValueError:return _fail("OUTSIDE_ROOT:"+path)
+  if not p.is_file() or p.is_symlink():return _fail("FILE_INVALID:"+path)
+  if _blob(p)!=sha:return _fail("BLOB_STALE:"+path)
 
  if not str(docs["subject_verification"].get("status") or "").startswith("PASS__"):return _fail("SUBJECT_VERIFY_NOT_PASS")
  pv=docs["proof_bound_profile_execution"]
