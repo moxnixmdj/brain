@@ -1,0 +1,20 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK20_V8_IDENTITY_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__FRESH_V3_ACTIVATION_IDENTITY_DERIVED__ZERO_EXPOSURE",
+  "claim_path": "canonical/governance/TB_SCIENCE_RANK20_LOGICAL_ATTEMPT_CLAIM_BINDING_20261010_V8.json",
+  "claim_git_blob_sha": "79ade372c86afbc088fea729c31e09f4ba823cf0",
+  "canonical_sha256": "08acc8711eff0c388582af03a071ec412c99a57393d9cc40dbfc0002ae802ca6",
+  "execution_claim_binding_digest": "sha256:08acc8711eff0c388582af03a071ec412c99a57393d9cc40dbfc0002ae802ca6",
+  "logical_attempt_id": "6ec02f79eb1c35206800ec6196a82d24acc17f9562d8e51d99a011bf9c89a618",
+  "execution_branch": "execute/tb-science-rank20-20261010-v3",
+  "activation_filename": "ACTIVATE_RANK20_V3_PR.json",
+  "predecessor_activation_generation": "V2_RETIRED",
+  "fresh_activation_generation": "V3",
+  "task_read": false,
+  "task_started": false,
+  "benchmark_trials_consumed": 0,
+  "pass": true,
+  "acceptance_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
