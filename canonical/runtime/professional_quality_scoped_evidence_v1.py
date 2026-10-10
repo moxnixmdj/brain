@@ -70,6 +70,12 @@ R1_LEAVES = {"PQ::R1_TARGET_SPECIFICATION::EXECUTION"}
 R1_SOURCE_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R1_STRUCTURAL_TARGET_VERIFY_V1"
 R1_GOVERNANCE_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R1_STRUCTURAL_TARGET_SCOPE_V1"
 
+R2_KIND = "FINITE_SCOPE_COMPLETE_COMMON_POLICY_OR_MINIMUM_TRUTHFUL_DISCRIMINATOR_SEARCH"
+R2_ROOT = "R2_CANDIDATE_SEARCH"
+R2_LEAVES = {"PQ::R2_CANDIDATE_SEARCH::EXECUTION"}
+R2_SOURCE_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R2_SCOPE_COMPLETE_SEARCH_VERIFY_V1"
+R2_GOVERNANCE_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R2_SCOPE_COMPLETE_SEARCH_SCOPE_V1"
+
 
 def git_blob_sha(path: Path) -> str:
     data = path.read_bytes()
@@ -795,6 +801,112 @@ def _validate_r1(
     return errors, claim_scope
 
 
+def _validate_r2(
+    entry: dict[str, Any],
+    source: dict[str, Any] | None,
+    governance: dict[str, Any] | None,
+    compiler_declared: Any,
+    repo_root: Path,
+) -> tuple[list[str], Any]:
+    errors = _common_checks(entry, R2_ROOT, R2_LEAVES)
+    claim_scope = None
+    minimax = entry.get("minimax_runtime")
+    minimax_path = _resolve(
+        repo_root,
+        minimax.get("path") if isinstance(minimax, dict) else None,
+    )
+    minimax_declared = (
+        minimax.get("git_blob_sha") if isinstance(minimax, dict) else None
+    )
+    if minimax_path is None:
+        errors.append("MINIMAX_RUNTIME_PATH_INVALID")
+    elif not minimax_path.exists():
+        errors.append("MINIMAX_RUNTIME_MISSING")
+    elif git_blob_sha(minimax_path) != minimax_declared:
+        errors.append("MINIMAX_RUNTIME_STALE")
+
+    if source is not None:
+        if source.get("schema") != R2_SOURCE_SCHEMA:
+            errors.append("SOURCE_SCHEMA_INVALID")
+        if source.get("status") != "PASS__PINNED_EXACT_BYTES__PYCOMPILE__9_OF_9__FINITE_SCOPE_COMPLETE_SEARCH_REFINEMENT__ZERO_GLOBAL_LEAF_CREDIT":
+            errors.append("SOURCE_STATUS_NOT_ADMITTED")
+        exact = source.get("exact_blobs")
+        if not isinstance(exact, dict):
+            errors.append("SOURCE_EXACT_BLOBS_INVALID")
+        else:
+            if exact.get("orchestrator_runtime") != compiler_declared:
+                errors.append("SOURCE_ORCHESTRATOR_RUNTIME_MISMATCH")
+            if exact.get("minimax_runtime") != minimax_declared:
+                errors.append("SOURCE_MINIMAX_RUNTIME_MISMATCH")
+        replay = source.get("replay")
+        if (
+            not isinstance(replay, dict)
+            or replay.get("tests_run") != 9
+            or replay.get("tests_passed") != 9
+            or replay.get("tests_failed") != 0
+        ):
+            errors.append("SOURCE_REPLAY_INVALID")
+        required_proved = {
+            "SCOPE_INCOMPLETE_REGIONS_NEVER_AUTHORIZE_U_SUBTRACTION",
+            "INDEPENDENT_POLICY_ADEQUACY_IS_REQUIRED",
+            "WHOLE_REGION_COMMON_POLICY_STOPS_WITHOUT_UNNECESSARY_OBSERVATION",
+            "WHEN_NO_COMMON_POLICY_EXISTS_THE_EXACT_MINIMAX_SOLVER_SELECTS_THE_CHEAPEST_DECLARED_RESOLVING_OBSERVATION",
+            "OVERLAPPING_POLICY_REGIONS_ALLOW_STOPPING_BEFORE_WORLD_IDENTIFICATION",
+            "INDISTINGUISHABLE_INCOMPATIBLE_WORLDS_FAIL_CLOSED",
+            "NO_COMMON_POLICY_RETURNS_A_TRUTHFUL_DISCRIMINATOR_PLAN_NOT_FAKE_CLOSURE",
+        }
+        if not required_proved <= set(source.get("proved") or []):
+            errors.append("SOURCE_REQUIRED_SEARCH_PROPERTIES_MISSING")
+        required_nonclaims = {
+            "GLOBAL_CANDIDATE_SEARCH_COMPLETENESS",
+            "ESCAPE_PROGRESS_TOTALITY",
+            "OPEN_WORLD_HYPOTHESIS_SET_COMPLETENESS",
+            "POLICY_GENERATION_COMPLETENESS",
+            "GLOBAL_R2_SEMANTIC_OR_EXECUTION_LEAF_CLOSURE",
+        }
+        if not required_nonclaims <= set(source.get("not_proved") or []):
+            errors.append("SOURCE_SCOPE_NONCLAIMS_MISSING")
+
+    if governance is not None:
+        if governance.get("schema") != R2_GOVERNANCE_SCHEMA:
+            errors.append("R2_GOVERNANCE_SCHEMA_INVALID")
+        if governance.get("status") != "ACTIVE_SCOPED_FINITE_SCOPE_COMPLETE_SEARCH_REFINEMENT__9_OF_9_INDEPENDENT_REPLAY__ZERO_GLOBAL_LEAF_CREDIT":
+            errors.append("R2_GOVERNANCE_STATUS_INVALID")
+        components = governance.get("exact_components")
+        if not isinstance(components, dict):
+            errors.append("R2_GOVERNANCE_COMPONENTS_INVALID")
+        else:
+            orch = components.get("orchestrator_runtime")
+            mini = components.get("minimax_runtime")
+            if not isinstance(orch, dict) or orch.get("git_blob_sha") != compiler_declared:
+                errors.append("R2_GOVERNANCE_ORCHESTRATOR_MISMATCH")
+            if not isinstance(mini, dict) or mini.get("git_blob_sha") != minimax_declared:
+                errors.append("R2_GOVERNANCE_MINIMAX_MISMATCH")
+        limitations = set(governance.get("limitations") or [])
+        required_limits = {
+            "NO_GLOBAL_CANDIDATE_SEARCH_COMPLETENESS",
+            "NO_ESCAPE_PROGRESS_TOTALITY",
+            "NO_OPEN_WORLD_HYPOTHESIS_COMPLETENESS",
+            "NO_POLICY_GENERATION_COMPLETENESS",
+            "NO_GLOBAL_R2_SEMANTIC_OR_EXECUTION_LEAF_CLOSURE",
+            "NO_GLOBAL_R2_ROOT_CLOSURE",
+        }
+        if not required_limits <= limitations:
+            errors.append("R2_GOVERNANCE_SCOPE_LIMITATIONS_MISSING")
+        claim_scope = {
+            "kind": R2_KIND,
+            "guarantees": [
+                "COMMON_INDEPENDENTLY_ADEQUATE_POLICY_CLOSES_A_SCOPE_COMPLETE_FINITE_REGION_WITHOUT_EXTRA_OBSERVATION",
+                "NO_COMMON_POLICY_RETURNS_EXACT_MINIMAX_DECLARED_TRUTHFUL_DISCRIMINATOR_PLAN",
+                "OVERLAPPING_POLICY_REGIONS_CAN_RESOLVE_BEFORE_WORLD_IDENTIFICATION",
+                "SCOPE_INCOMPLETENESS_OR_UNRESOLVABLE_INCOMPATIBILITY_FAILS_CLOSED",
+                "DISCRIMINATOR_PLAN_ALONE_NEVER_AUTHORIZES_U_SUBTRACTION",
+            ],
+            "limitations": sorted(required_limits),
+        }
+    return errors, claim_scope
+
+
 def validate_entry(entry: dict[str, Any], *, repo_root: Path = ROOT) -> dict[str, Any]:
     errors: list[str] = []
     if not isinstance(entry, dict):
@@ -842,6 +954,10 @@ def validate_entry(entry: dict[str, Any], *, repo_root: Path = ROOT) -> dict[str
         handler_errors, claim_scope = _validate_r5(entry, source, verifier, compiler_declared)
     elif kind == R1_KIND:
         handler_errors, claim_scope = _validate_r1(
+            entry, source, verifier, compiler_declared, repo_root
+        )
+    elif kind == R2_KIND:
+        handler_errors, claim_scope = _validate_r2(
             entry, source, verifier, compiler_declared, repo_root
         )
     else:
