@@ -1,0 +1,100 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_CORE_PROFILE_REPAIRED_V20_SUCCESSOR_EXECUTION_V1",
+  "status": "FRESH_SUCCESSOR_EXECUTION__NEXT23_CAUSAL_REPAIR_PLUS_THIRD_CORE_PRUNE__ZERO_PROMOTION_CREDIT",
+  "recorded_at": "2026-10-10",
+  "predecessor": {
+    "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_CORE_PROFILE_V19_SUCCESSOR_EXECUTION_20261010_V1.json",
+    "package_raw_python_source_bytes": 2185690,
+    "B_exec_raw_python_source_bytes": 2188450,
+    "archive_bytes": 329316,
+    "fresh_qualification": "6900/6900",
+    "manifest_sha256": "0327ae08f5ac9e0bbbe92d74fc1e4aa114c1bae9c0f94a0e5dedc96a1032137f"
+  },
+  "falsification": "canonical/evidence/BYTES_EXACT_SYMBOLIC_NEXT23_FALSIFICATION_20261010_V1.json",
+  "attempted_cut": {
+    "selected_additional_core_function_bodies": 23,
+    "attempted_raw_python_source_bytes": 2169313,
+    "spent_NEXT22": "6900/6900",
+    "fresh_NEXT23": "REJECTED__ROOTS_619_OF_620",
+    "note": "NEXT23 also falsified V19 itself; failure was not attributable solely to the new V20 stubs."
+  },
+  "minimal_causal_repair": {
+    "restored": [
+      "Function._eval_evalf",
+      "evalf_trig",
+      "mpf_sin",
+      "mpf_cos"
+    ],
+    "repair_raw_byte_cost_vs_attempted_candidate": 3106,
+    "repaired_spent_NEXT23": "7130/7130"
+  },
+  "measured_candidate": {
+    "status": "PHYSICALLY_REWRITTEN_RESEARCH_CANDIDATE__NOT_PROMOTED",
+    "python_files": 277,
+    "package_raw_python_source_bytes": 2172419,
+    "router_raw_python_source_bytes": 2760,
+    "B_exec_raw_python_source_bytes": 2175179,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "manifest_sha256": "45adf82ebe04814cdb5827821ee9d079f48dbc5f58d35f8b7a4a6d4e512deacb",
+    "raw_improvement_vs_V19_bytes": 13271,
+    "archive_bytes": 323816,
+    "archive_sha256": "1f33400db4062811c51a4c2e4172e6fbdec5fd082a9495d9baef48603438631f",
+    "ustar_bytes": 2447360,
+    "ustar_sha256": "c47618855f73a88c11240985f6b712e3b57ceb905b0297ddbe068ba40ac1a780"
+  },
+  "qualification": {
+    "spent_NEXT23": {
+      "id": "QUAL_SUCCESSOR_NEXT23_20261010_V1",
+      "cases": 7130,
+      "corpus_sha256": "b178f48d1bc0a8dc135d007f7e64a27608d68a9f9cadf5304fc1dc7665f37755",
+      "repaired_candidate": "7130/7130",
+      "spent": true
+    },
+    "fresh_NEXT24": {
+      "id": "QUAL_SUCCESSOR_NEXT24_20261010_V1",
+      "seed": 4898979,
+      "per_operation_budget": 640,
+      "cases": 7360,
+      "corpus_sha256": "d09a701bfc745b120d85baca1a229186e5cd78a89ee1f9a55aa2ba3d26c784c2",
+      "stock_donor": "7360/7360 by complete operation-block replay",
+      "candidate": "7360/7360 by complete operation-block replay",
+      "independent_copy": "7360/7360 by complete operation-block replay",
+      "archive_replay": "7360/7360 by complete operation-block replay",
+      "spent": true
+    }
+  },
+  "reproducibility": {
+    "predecessor_reconstruction": "canonical/research/bytes/tools/rebuild_candidate_v19.py",
+    "transform_and_repair": "canonical/research/bytes/tools/core_profile_repair_v20.py",
+    "transform_sha256": "64e2a074bcf5b264cb744bd78c42f33e260c0e335bcdc7acab2a012786f2babf",
+    "successor_reconstruction": "canonical/research/bytes/tools/rebuild_candidate_v20.py",
+    "route": "canonical/research/bytes/tools/exact_symbolic_route_v1.py",
+    "semantic_digest": "canonical/research/bytes/tools/semantic_digest_v1.py",
+    "qualification_generator": "canonical/research/bytes/tools/generate_qualification_v1.py"
+  },
+  "durable_artifact": {
+    "library_status": "PERSISTED_IN_CHATGPT_LIBRARY",
+    "library_file_id": "libfile_425df4333750819197496d3b454e0312",
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_NEXT23_REPAIRED_CORE_V20_SUCCESSOR_20261010_V1.tar.xz",
+    "bytes": 323816,
+    "sha256": "1f33400db4062811c51a4c2e4172e6fbdec5fd082a9495d9baef48603438631f"
+  },
+  "next_frozen_qualification": {
+    "id": "QUAL_SUCCESSOR_NEXT25_20261010_V1",
+    "seed": 5000000,
+    "per_operation_budget": 660,
+    "cases": 7590,
+    "corpus_sha256": "61c30aa8823b3a33e4762905ba3708d710e5d8118521c083d57269cd76b65b87",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT"
+  },
+  "truth_boundary": [
+    "MEASURED: NEXT23 falsified V19 and the first V20 attempt on one valid quartic-root case.",
+    "MEASURED: restoring exactly Function._eval_evalf, evalf_trig, mpf_sin, and mpf_cos closes the spent NEXT23 failure.",
+    "MEASURED: exact repaired V20 bytes pass fresh NEXT24 7,360/7,360 on stock donor, candidate, independent copy, and extracted archive.",
+    "MEASURED: repaired V20 remains 13,271 raw bytes smaller than V19 and its source archive is 5,500 bytes smaller.",
+    "INFERRED: retained V20 stubs are outside the bounded route for tested scope; finite non-use remains non-universal.",
+    "NOT CLAIMED: universal SymPy correctness, absolute minimum, out-of-scope behavior preservation, or Opus-family promotion.",
+    "PROMOTION CREDIT: 0."
+  ],
+  "next_action": "Rerank exact V20 concentrations using spent NEXT24 only. Do not execute NEXT25 before a new physical cut."
+}
