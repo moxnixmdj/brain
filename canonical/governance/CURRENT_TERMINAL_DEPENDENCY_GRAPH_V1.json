@@ -131,7 +131,7 @@
       },
       "snapshot": {
         "path": "canonical/governance/CURRENT_AUTHORITY_RUNTIME_REFINEMENT_OBLIGATION_SNAPSHOT_20261010_V1.json",
-        "git_blob_sha": "a7d0b0b4327b13a000177990e0940601d439e0bf"
+        "git_blob_sha": "4955458a0514ebaa52e5f9320ec81cb335780821"
       }
     },
     {
@@ -152,20 +152,28 @@
       "id": "CURRENT_RUNTIME_SEMANTIC_REFINEMENT_COMPLETION",
       "kind": "LEAF",
       "status": "UNRESOLVED",
-      "note": "ONE_OF_40_CURRENT_RUNTIME_SUBJECTS_NOW_HAS_SUBJECT_SPECIFIC_SEMANTIC_REFINEMENT__TERMINAL_ROOT_DECISION_GATE CLOSED BY STATIC AST BRANCH CENSUS PLUS 21 WITNESS EXECUTION__39 CURRENT RUNTIME OBLIGATIONS REMAIN",
+      "note": "TWO_OF_40_CURRENT_RUNTIME_SUBJECTS_HAVE_SUBJECT_SPECIFIC_SEMANTIC_REFINEMENT__TERMINAL_ROOT_DECISION_GATE PLUS CURRENT_AUTHORITY_RUNTIME_BINDING_CENSUS__38 CURRENT RUNTIME OBLIGATIONS REMAIN",
       "current_runtime_obligation_count": 40,
       "obligation_snapshot": {
         "path": "canonical/governance/CURRENT_AUTHORITY_RUNTIME_REFINEMENT_OBLIGATION_SNAPSHOT_20261010_V1.json",
-        "git_blob_sha": "a7d0b0b4327b13a000177990e0940601d439e0bf"
+        "git_blob_sha": "4955458a0514ebaa52e5f9320ec81cb335780821"
       },
       "attack_families": [
         "COMPOSITION_MISMATCH",
         "IMPLEMENTATION_REFINEMENT_MISMATCH",
         "NOVEL_DIMENSION"
       ],
-      "proved_runtime_obligation_count": 1,
-      "unresolved_runtime_obligation_count": 39,
+      "proved_runtime_obligation_count": 2,
+      "unresolved_runtime_obligation_count": 38,
       "proved_subjects": [
+        {
+          "path": "canonical/runtime/current_authority_runtime_binding_census_v1.py",
+          "git_blob_sha": "e8746d141989f5279c66931d9cc9167504034b98",
+          "verification": {
+            "path": "canonical/verification/CURRENT_AUTHORITY_RUNTIME_BINDING_CENSUS_EXECUTABLE_REFINEMENT_VERIFY_20261010_V1.json",
+            "git_blob_sha": "27845cfae3499cb292ae16b75afe74ca9906016c"
+          }
+        },
         {
           "path": "canonical/runtime/terminal_root_decision_gate_v1.py",
           "git_blob_sha": "40a6f984013d0d701edba498c2a122edcb9a8103",
