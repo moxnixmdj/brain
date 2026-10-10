@@ -56,7 +56,7 @@ def test_rank19_governance_composition_is_hash_closed_and_still_zero_exposure():
     assert current_cap["authorized"] is True
     assert current_cap["decision"] == "ADMIT_CHECKPOINT_AUDIT_EXECUTION"
 
-    assert current["next"] == "BUILD_AND_ZERO_EXPOSURE_VERIFY_PUBLIC_V13_RANK19_EXECUTION_SURFACE_BOUND_TO_CAPABILITY_FIRST_ADMISSION__NO_TASK_READ"
+    assert current["next"] == "BUILD_AND_ZERO_EXPOSURE_VERIFY_PUBLIC_V13_RANK19_EXECUTION_SURFACE_BOUND_TO_CAPABILITY_FIRST_ADMISSION_V2__NO_TASK_READ"
     assert admission["execution_authority"] is False
     assert authority["execution_authority"] is True
     assert authority["execution_authority_effective"] is False
