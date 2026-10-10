@@ -497,9 +497,36 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
         )
         self.assertEqual(
             mission["current_development_scheduler"]["status"],
-            "ACTIVE_PRIMARY_CAPABILITY_FIRST_DEVELOPMENT_SCHEDULER",
+            "ACTIVE_PRIMARY_CAPABILITY_FIRST_DEVELOPMENT_SCHEDULER__REUSE_FIRST_RESIDUAL_RUNTIME_ENFORCED",
         )
-        self.assertIn("CAPABILITY_RESOURCE_PARETO_LEVERAGE_IS_PRIMARY", mission["scheduler_precedence"])
+        activation_path = ROOT / pointer["authoritative_activation"]
+        runtime_path = ROOT / pointer["runtime"]
+        r2_policy_path = ROOT / pointer["r2_mechanism_policy"]["path"]
+        self.assertEqual(
+            pointer["authoritative_activation_git_blob_sha"],
+            _git_blob_sha(activation_path),
+        )
+        self.assertEqual(pointer["runtime_git_blob_sha"], _git_blob_sha(runtime_path))
+        self.assertEqual(
+            pointer["r2_mechanism_policy"]["git_blob_sha"],
+            _git_blob_sha(r2_policy_path),
+        )
+        self.assertEqual(
+            mission["current_development_scheduler"]["activation_git_blob_sha"],
+            _git_blob_sha(activation_path),
+        )
+        self.assertEqual(
+            mission["current_development_scheduler"]["runtime_git_blob_sha"],
+            _git_blob_sha(runtime_path),
+        )
+        self.assertIn(
+            "CAPABILITY_RESOURCE_PARETO_LEVERAGE_IS_PRIMARY",
+            mission["scheduler_precedence"],
+        )
+        self.assertIn(
+            "REUSE_EXISTING_VERIFIED_CAPABILITY_BEFORE_NEW_PRIMITIVE_INVENTION",
+            mission["scheduler_precedence"],
+        )
 
 
 if __name__ == "__main__":
