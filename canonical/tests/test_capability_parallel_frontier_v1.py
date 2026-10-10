@@ -197,5 +197,112 @@ class ParallelFrontierTests(unittest.TestCase):
                 p.plan_parallel_frontier(f, root=root)
 
 
+    def test_dynamic_professional_pointer_follow_rekeys_next_root(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            prof_path = root / p.PROFESSIONAL_SOURCE_REL
+            prof_path.parent.mkdir(parents=True, exist_ok=True)
+            old_prof = {
+                "status": "X__R9_NEXT__NOT_LIVE_DEFAULT",
+                "next": "BIND_R9_TEMPORAL_DEPLOYMENT_TO_V7_PROOF_BOUND_EXECUTION_SUBJECT",
+                "same_subject_root_binding_frontier": {
+                    "verified_root_subject_binding_count": 8
+                },
+            }
+            prof_path.write_text(json.dumps(old_prof), encoding="utf-8")
+            old_sha = p._git_blob_sha(prof_path)
+            f = {
+                "frontier_id": "F-DYN",
+                "scope": {
+                    "source_set": [
+                        {
+                            "path": p.PROFESSIONAL_SOURCE_REL,
+                            "git_blob_sha": old_sha,
+                        }
+                    ]
+                },
+                "currentness_findings": [
+                    {"id": "PROFESSIONAL_CURRENT", "truth": "R9_NEXT"}
+                ],
+                "candidates": [
+                    {
+                        "work_id": "PROFESSIONAL_QUALITY_V7_R9_TEMPORAL_DEPLOYMENT_BINDING",
+                        "scheduler_state": "READY_EXECUTION",
+                        "prerequisites_satisfied": True,
+                        "prerequisite_work_ids": [],
+                        "mutation_keys": ["professional"],
+                        "authority_keys": ["v7"],
+                        "explicit_conflict_work_ids": [],
+                        "evidence_conflict_keys": [],
+                        "evidence_acquisition_mode": "READ_ONLY",
+                        "vector_evidence_state": "PARTIAL",
+                        "vector_evidence": {},
+                        "read_only_evidence": {},
+                    }
+                ],
+            }
+            new_prof = {
+                "status": "X__R10_NEXT__NOT_LIVE_DEFAULT",
+                "next": "BIND_R10_ANALYSIS_DECISION_TO_V7_PROOF_BOUND_EXECUTION_SUBJECT",
+                "same_subject_root_binding_frontier": {
+                    "verified_root_subject_binding_count": 9
+                },
+            }
+            prof_path.write_text(json.dumps(new_prof), encoding="utf-8")
+            out = p.refresh_supported_dynamic_sources(f, root=root)
+            row = out["candidates"][0]
+            self.assertEqual(
+                row["work_id"],
+                "PROFESSIONAL_QUALITY_V7_R10_ANALYSIS_DECISION_BINDING",
+            )
+            self.assertEqual(
+                out["dynamic_currentness"]["professional_next_root"],
+                "R10_ANALYSIS_DECISION",
+            )
+            self.assertEqual(
+                out["scope"]["source_set"][0]["git_blob_sha"],
+                p._git_blob_sha(prof_path),
+            )
+
+    def test_dynamic_professional_pointer_follow_fails_on_incoherent_next(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            prof_path = root / p.PROFESSIONAL_SOURCE_REL
+            prof_path.parent.mkdir(parents=True, exist_ok=True)
+            prof_path.write_text(
+                json.dumps(
+                    {
+                        "status": "X__R10_NEXT",
+                        "next": "BIND_R11_WRONG_ROOT",
+                        "same_subject_root_binding_frontier": {
+                            "verified_root_subject_binding_count": 9
+                        },
+                    }
+                ),
+                encoding="utf-8",
+            )
+            f = {
+                "frontier_id": "F-DYN",
+                "scope": {
+                    "source_set": [
+                        {
+                            "path": p.PROFESSIONAL_SOURCE_REL,
+                            "git_blob_sha": "stale",
+                        }
+                    ]
+                },
+                "candidates": [
+                    {
+                        "work_id": "PROFESSIONAL_QUALITY_V7_R9_TEMPORAL_DEPLOYMENT_BINDING"
+                    }
+                ],
+            }
+            with self.assertRaisesRegex(
+                p.ParallelFrontierError,
+                "CURRENT_PROFESSIONAL_NEXT_ROOT_INCOHERENT",
+            ):
+                p.refresh_supported_dynamic_sources(f, root=root)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
