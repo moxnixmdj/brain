@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_LEAF_EVIDENCE_REGISTRY_V1",
   "date": "2026-10-10",
-  "status": "ACTIVE__R1_R2_R3_R4_R6_R7_R8_R10_R12_EXECUTION_LEAF_RECEIPTS_ADMITTED__9_OF_24_DERIVABLE__ZERO_TERMINAL_CREDIT",
+  "status": "ACTIVE__ALL_12_EXECUTION_LEAF_RECEIPTS_ADMITTED__12_OF_24_DERIVABLE__12_SEMANTIC_LEAVES_OPEN__ZERO_TERMINAL_CREDIT",
   "manifest": {
     "path": "canonical/governance/PROFESSIONAL_QUALITY_LEAF_BINDING_MANIFEST_20261010_V1.json",
     "git_blob_sha": "a7cad32c9fd969ff2c3857bb924c7bd746237ec2"
@@ -65,6 +65,24 @@
       {
         "path": "canonical/verification/PROFESSIONAL_QUALITY_R8_EXECUTION_LEAF_RECEIPT_20261010_V1.json",
         "git_blob_sha": "8c99b9bbdef69e0812a94b31105fa8082eb48b1b"
+      }
+    ],
+    "PQ::R5_EVALUATOR_REFERENCE::EXECUTION": [
+      {
+        "path": "canonical/verification/PROFESSIONAL_QUALITY_R5_EXECUTION_LEAF_RECEIPT_20261010_V1.json",
+        "git_blob_sha": "9375cf8a11e418a2269a960f27e012b73145faf6"
+      }
+    ],
+    "PQ::R9_TEMPORAL_DEPLOYMENT::EXECUTION": [
+      {
+        "path": "canonical/verification/PROFESSIONAL_QUALITY_R9_EXECUTION_LEAF_RECEIPT_20261010_V1.json",
+        "git_blob_sha": "1465d4768b8ab7adef65e082073bfb3d5f5e32e0"
+      }
+    ],
+    "PQ::R11_ADAPTIVE_INTEGRITY_SECURITY::EXECUTION": [
+      {
+        "path": "canonical/verification/PROFESSIONAL_QUALITY_R11_EXECUTION_LEAF_RECEIPT_20261010_V1.json",
+        "git_blob_sha": "9aa72e896923150dadbdc5e551d014a55a507768"
       }
     ]
   },
