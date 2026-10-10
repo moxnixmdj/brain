@@ -1,0 +1,84 @@
+{
+  "schema": "PROJECT_BRAIN_ESCAPE_GAP_A_POLICY_COVER_ADAPTER_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_BRANCH_BYTES__PYCOMPILE__11_OF_11_ADAPTER__41_OF_41_EXISTING_SEAM_REGRESSIONS__ZERO_ROW_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "escape-gap-a-policy-cover-adapter-v1",
+    "pull_request": 4038,
+    "exact_blobs": {
+      "canonical/runtime/escape_gap_a_policy_cover_adapter_v1.py": "19b0bdf00eb9b8d76cbf7f1a615e1ce6e89ffbf8",
+      "canonical/tests/test_escape_gap_a_policy_cover_adapter_v1.py": "8415c50f23ed38da22ba8af17d07ff4f5b110127",
+      "canonical/runtime/escape_progress_shared_gap_audit_v3.py": "14adf2c1a431285a542340a740e27e764edb1ce5",
+      "canonical/runtime/observable_policy_cover_executor_v1.py": "89f25a163e9fe663f49e6c5e9d66d41d911cd8a3",
+      "canonical/runtime/observable_policy_cover_totality_gate_v1.py": "2b09c856297e506fb6dc303c0f2cca2b6e89c07b",
+      "canonical/governance/ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_20261010_V2.json": "f3a566a982dcd867c583eafd24c6f5dd3baa0530"
+    }
+  },
+  "independent_verification": {
+    "carrier": "Sprites",
+    "sprite": "brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/brain",
+    "py_compile": {
+      "files": [
+        "canonical/runtime/escape_gap_a_policy_cover_adapter_v1.py",
+        "canonical/tests/test_escape_gap_a_policy_cover_adapter_v1.py"
+      ],
+      "result": "PASS"
+    },
+    "adapter_suite": {
+      "runner": "python3 -m unittest -v canonical.tests.test_escape_gap_a_policy_cover_adapter_v1",
+      "passed": 11,
+      "failed": 0,
+      "errors": 0
+    },
+    "existing_seam_regressions": {
+      "runner": "DIRECT_ZERO_ARGUMENT_TEST_FUNCTION_REPLAY__PYTEST_PACKAGE_UNAVAILABLE_ON_CARRIER",
+      "modules": [
+        "canonical.tests.test_escape_progress_shared_gap_audit_v3",
+        "canonical.tests.test_observable_policy_cover_totality_gate_v1",
+        "canonical.tests.test_observable_policy_cover_executor_selection_v1",
+        "canonical.tests.test_observable_policy_cover_minimax_oracle_v1",
+        "canonical.tests.test_observable_policy_cover_overapproximation_gate_v2"
+      ],
+      "passed": 41,
+      "failed": 0
+    },
+    "total_test_functions_passed": 52
+  },
+  "proved": [
+    "AUTHENTICATED_DIRECT_COMMON_POLICY_CAN_BE_ADAPTED_TO_EXISTING_GAP_A_TERMINAL_COMMON_POLICY_PROOF_SCHEMA",
+    "AUTHENTICATED_ROOT_DISCRIMINATOR_CAN_BE_ADAPTED_TO_EXISTING_GAP_A_STRICT_DISCRIMINATOR_PROOF_SCHEMA",
+    "CALLER_ASSERTED_COVER_AUTHORITY_WITHOUT_CONTENT_ADDRESSED_BINDING_CANNOT_MINT_ROW_PROOF",
+    "CURRENT_POLICY_AVAILABILITY_AND_RESOURCE_ADMISSIBILITY_REQUIRE_SEPARATE_INDEPENDENT_CONTENT_BOUND_EVIDENCE",
+    "CURRENT_DISCRIMINATOR_ACQUIRABILITY_REQUIRES_SEPARATE_INDEPENDENT_CONTENT_BOUND_EVIDENCE",
+    "RESOURCE_BOUND_DOES_NOT_IMPLY_RESOURCE_ADMISSIBLE",
+    "ADEQUATE_BUT_UNSAFE_POLICY_CANNOT_MINT_ROW_PROOF",
+    "STALE_AVAILABILITY_BLOB_FAILS_CLOSED",
+    "STATE_ID_MUST_EQUAL_CURRENT_GAP_A_OBLIGATION_ID",
+    "ROW_PROOF_DIGEST_TAMPER_IS_REJECTED_BY_EXISTING_V3_AUDIT",
+    "EXISTING_GAP_A_AUDIT_POLICY_COVER_MINIMAX_EXECUTOR_AND_OVERAPPROXIMATION_REGRESSIONS_REMAIN_GREEN"
+  ],
+  "current_real_row_effect": {
+    "gap_a_total_rows": 10,
+    "real_row_proofs_before": 0,
+    "real_row_proofs_after": 0,
+    "reason": "ADAPTER_EXISTENCE_DOES_NOT_CREATE_ROW_SPECIFIC_CURRENT_AVAILABILITY_OR_ACQUIRABILITY_EVIDENCE"
+  },
+  "hard_nonclaims": [
+    "NO_GAP_A_ROW_CLOSED_BY_ADAPTER_EXISTENCE",
+    "NO_CC_R3_CERTIFICATE",
+    "NO_GLOBAL_ESCAPE_PROGRESS_TOTALITY",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT",
+    "NO_FRESH_TARGET_REALITY_ACQUIRED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "row_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
