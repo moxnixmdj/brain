@@ -1,0 +1,84 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_P1_V4_R1_LIVE_TARGET_CURRENT_MAIN_VERIFY_20261010_V2",
+  "date": "2026-10-10",
+  "status": "PASS__BASE_MAIN_C2254302__EXACT_RUNTIME_BYTES__PYCOMPILE__24_OF_24_PASS__CANONICAL_TARGET_REPLAY_PASS__ZERO_ROOT_OR_TERMINAL_CREDIT",
+  "repository": "moxnixmdj/brain",
+  "branch": "successor/pq-r1-live-target-current-20261010-v2",
+  "base_main_commit": "c2254302d3d7f0310568e2473727910a7ddfa8f3",
+  "exact_subjects": {
+    "target_instance_compiler": {
+      "path": "canonical/runtime/professional_target_instance_compiler_v1.py",
+      "git_blob_sha": "0403ed2916ea0f7e48b77aec24ea9dd4fda8fce0"
+    },
+    "router_v4": {
+      "path": "canonical/runtime/professional_quality_p1_router_v4.py",
+      "git_blob_sha": "1c67bf99100b5c51f113ededf0920b7ccb7643e4"
+    },
+    "compiler_tests": {
+      "path": "canonical/tests/test_professional_target_instance_compiler_v1.py",
+      "git_blob_sha": "ad20d8ea9be2e745cc344042b6998f2c5d4e115d"
+    },
+    "router_v4_tests": {
+      "path": "canonical/tests/test_professional_quality_p1_router_v4.py",
+      "git_blob_sha": "9a51f10dccb1b9a08ddd60fe6bf6edbe1e811bb6"
+    },
+    "legacy_router_v3": {
+      "path": "canonical/runtime/professional_quality_p1_router_v3.py",
+      "git_blob_sha": "cdb6716ac6d562d1ab222242d07aeecc5cdfac78"
+    },
+    "legacy_router_v3_tests": {
+      "path": "canonical/tests/test_professional_quality_p1_router_v3.py",
+      "git_blob_sha": "7fd496e9200d1408d561cadcf40b8f4bf536c898"
+    },
+    "canonical_target_instance": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V4_R1_TARGET_INSTANCE_20261010_V1.json",
+      "git_blob_sha": "15a9ff24ddfb8256cdeb95548c1e68fe619064d2"
+    }
+  },
+  "current_main_dependency_bindings": {
+    "behavioral_contract_registry_git_blob_sha": "ae250d5bc5da73b23600670be354ffba31e65e53",
+    "professional_profile_v3_git_blob_sha": "f7e89eafbb691c16d1bdf5b8d295a468d5e3bec5"
+  },
+  "independent_execution": {
+    "carrier": "SPRITE",
+    "sprite_name": "brain-live-runtime-v1-verify-20261008",
+    "sprite_id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13",
+    "workspace": "/home/sprite/unified-fabric-current-byte-verify",
+    "source_transport": "CURRENT_MAIN_DEPENDENCIES_PLUS_EXACT_TRANSPLANTED_BRANCH_BYTES",
+    "py_compile": "PASS",
+    "regression_and_falsification_tests_run": 24,
+    "regression_and_falsification_tests_passed": 24,
+    "canonical_target_instance_replay": "PASS"
+  },
+  "canonical_target_instance_replay": {
+    "status": "PASS__EXPLICIT_PROFESSIONAL_TARGET_INSTANCE_BOUND",
+    "target_instance_sha256": "842546d190e1efe4e1dd07cbebbc4c18f20b637e93b30737e40622e7c875183b",
+    "raw_task_sha256": "74c7faa31ea99c89f32fe16c325f7359106a7ca2ffe8d576538574246f099486",
+    "raw_task_contract_sha256": "5ce9e7d956a1addf3e5532ea18e168ef34bf76169c39a9d91546cc2172d4653b",
+    "canonical_behavior_sha256": "f6c9438aec89b442686f99bb4aaa232fb2e665e282fc0e0574695cf984254c59",
+    "semantic_receipt_pass": true,
+    "structural_receipt_pass": true
+  },
+  "proved": [
+    "CALLER_CANNOT_SELF_ATTEST_COMPILE_TARGET_SPEC_AND_HARD_CONSTRAINTS",
+    "R1_TARGET_STEP_PASS_IS_INJECTED_ONLY_AFTER_BRAIN_OWNED_COMPILATION_PASS",
+    "RAW_TASK_NONWHITESPACE_SOURCE_IS_LOSSLESSLY_BOUND",
+    "OBJECTIVE_AUDIENCE_SOURCE_EVIDENCE_ARTIFACT_TYPE_HARD_CONSTRAINTS_SINGLE_ADMITTED_INTERPRETATION_TARGET_CONSTRUCT_CLAIM_SCOPE_AND_CURRENT_DRAFT_RENDER_ARE_CONTENT_ADDRESSED",
+    "MULTIPLE_SUPPLIED_PLAUSIBLE_INTERPRETATIONS_REMAIN_OPEN",
+    "CANONICAL_PROFESSIONAL_TARGET_ROLE_SEMANTICS_AND_REQUIRED_FIELDS_REVERIFY",
+    "LEGACY_V3_HARD_DEFECT_PREFLIGHT_REGRESSION_REMAINS_GREEN"
+  ],
+  "remaining_r1_root_gap": "ARBITRARY_RAW_TASK_TO_EXPLICIT_TARGET_INSTANCE_SOUNDNESS_AND_OPEN_WORLD_INTERPRETATION_COMPLETENESS_NOT_PROVED",
+  "root_subject_binding_authority": false,
+  "global_r1_root_closure": false,
+  "quality_authority": false,
+  "terminal_authority": false,
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "verification_base_main_commit": "c2254302d3d7f0310568e2473727910a7ddfa8f3",
+  "promotion_boundary": "RUNTIME_AND_TEST_BYTES_MAY_PROMOTE_IF_ACTUAL_LOAD_BEARING_BEHAVIOR_REGISTRY_AND_PROFILE_BINDINGS_REMAIN_EXACT;MUTABLE_SCOPED_EVIDENCE_REGISTRY_IS_NOT_A_RUNTIME_DEPENDENCY"
+}

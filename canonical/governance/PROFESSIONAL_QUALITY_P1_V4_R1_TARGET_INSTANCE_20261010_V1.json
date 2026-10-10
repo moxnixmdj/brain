@@ -1,0 +1,23 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_TARGET_INSTANCE_V1",
+  "source_id": "canonical://professional-quality/r1-target-instance/20261010/v1",
+  "raw_task_text": "Prepare an evidence-grounded executive brief for an audit committee comparing two proposed operational changes. Preserve material uncertainty, do not invent unsupported facts, make the decision-relevant tradeoffs explicit, and keep claims within the supplied evidence.",
+  "objective": "Produce a decision-useful evidence-grounded executive brief comparing the two proposed operational changes.",
+  "audience": "Audit committee",
+  "source_evidence": [
+    "canonical://professional-quality/r1-target-instance/evidence-packet-placeholder"
+  ],
+  "artifact_type": "EXECUTIVE_BRIEF",
+  "hard_constraints": [
+    "NO_UNSUPPORTED_FACTS",
+    "PRESERVE_MATERIAL_UNCERTAINTY",
+    "MAKE_DECISION_RELEVANT_TRADEOFFS_EXPLICIT",
+    "CLAIMS_WITHIN_SUPPLIED_EVIDENCE"
+  ],
+  "plausible_interpretations": [
+    "COMPARE_THE_TWO_OPTIONS_AND_RECOMMEND_A_WINNER_ONLY_IF_THE_SUPPLIED_EVIDENCE_AND_DECLARED_DECISION_CRITERIA_JUSTIFY_IT"
+  ],
+  "target_construct": "Decision-useful professional quality under explicit evidence and uncertainty constraints",
+  "claim_scope": "Only claims and comparisons supportable from the declared supplied evidence",
+  "current_draft_render": "NONE__NEW_ARTIFACT"
+}
