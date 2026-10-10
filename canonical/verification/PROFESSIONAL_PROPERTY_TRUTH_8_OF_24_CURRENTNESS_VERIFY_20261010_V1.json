@@ -1,0 +1,70 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_PROPERTY_TRUTH_8_OF_24_CURRENTNESS_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_SPRITE__EXACT_8_OF_24_CURRENTNESS_CHAIN__BYTES_V31_BOUND__ZERO_EXTRA_AUTHORITY",
+  "subject": {
+    "professional": {
+      "path": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
+      "git_blob_sha": "6287785b8ec8cffb639d655e4198781e8e0449f7"
+    },
+    "assurance": {
+      "path": "canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json",
+      "git_blob_sha": "3f1d09357de17de8851b51016dd22902f6263b1f"
+    },
+    "residual": {
+      "path": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
+      "git_blob_sha": "85a20b0aa5e2bd94fb96abb416cedaeb5dfcefd6"
+    },
+    "frontier": {
+      "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
+      "git_blob_sha": "b4e565a3452b4d4faba390698e4ce7010460c48d"
+    },
+    "scheduler": {
+      "path": "canonical/governance/CURRENT_DEVELOPMENT_SCHEDULER.json",
+      "git_blob_sha": "030e70de4c2dfd444b9afe6ae0ed53c0f73c1653"
+    },
+    "mission": {
+      "path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
+      "git_blob_sha": "4fcfae2ff7d49a52f617625a12748ede58d265eb"
+    },
+    "bytes": {
+      "path": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
+      "git_blob_sha": "714995cd13bf216f4c9189d77e33edc87fc326e5"
+    },
+    "registry_verify": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_LEAF_REGISTRY_PROPERTY_TRUTH_VERIFY_20261010_V6.json",
+      "git_blob_sha": "c0449b1afe7856ac95acea34f8a1f26702da3385"
+    }
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-professional-hard-defect-verify-20261010",
+    "carrier_id": "sprite-1bbb86ed-1f7c-409f-8397-fadc4de7a62a",
+    "workspace": "/home/sprite/professional-8of24-reconcile-verify",
+    "result": "PASS_8_OF_24_CURRENTNESS_CHAIN",
+    "verified_leaf_count": 8,
+    "open_execution_leaf_count": 4,
+    "open_semantic_leaf_count": 12,
+    "bytes_v31_raw_python_source_bytes": 1909906
+  },
+  "verifies": [
+    "PROFESSIONAL_POINTER_BINDS_EXACT_REGISTRY_V6_8_OF_24",
+    "ASSURANCE_BINDS_EXACT_PROFESSIONAL_POINTER",
+    "FRONTIER_BINDS_EXACT_PROFESSIONAL_ASSURANCE_RESIDUAL_AND_BYTES_SOURCES",
+    "SCHEDULER_BINDS_EXACT_FRONTIER",
+    "MISSION_BINDS_EXACT_ASSURANCE_SCHEDULER_PROFESSIONAL_FRONTIER_RESIDUAL_AND_BYTES_POINTERS"
+  ],
+  "hard_nonclaims": [
+    "NO_SEMANTIC_LEAF_CLOSURE",
+    "NO_ROOT_CLOSURE",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY",
+    "NO_FULL_EXECUTION_AUTHORITY",
+    "NO_BYTES_CAPABILITY_PROMOTION"
+  ],
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
