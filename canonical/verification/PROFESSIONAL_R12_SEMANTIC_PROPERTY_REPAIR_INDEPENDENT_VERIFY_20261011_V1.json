@@ -1,0 +1,15 @@
+{
+  "schema":"PROJECT_BRAIN_PROFESSIONAL_R12_SEMANTIC_PROPERTY_REPAIR_INDEPENDENT_VERIFY_V1",
+  "date":"2026-10-11",
+  "status":"PASS__SECOND_SPRITE__DIRECT_VERIFY__4_OF_4_ADVERSARIAL__NEW_CLAIM_ONLY__ZERO_QUALITY_OR_TERMINAL_CREDIT",
+  "claim":{"path":"canonical/governance/COVERAGE_COMPLETENESS_FROZEN_CLAIM_PROFESSIONAL_R12_SEMANTIC_20261011_V3.json","git_blob_sha":"caf80a84e89c4d1e7d2820e79e94874422bdfa24","claim_id":"c6ce8218b33a09567078979c307ba3fe2a0591244c0da0c2348f89547e200775"},
+  "runtime":{"path":"canonical/runtime/professional_r12_semantic_property_repair_verify_v2.py","git_blob_sha":"7b4077074c8d7abec7b45a400f2dc14a51d4dbcc"},
+  "independent_replay":{"carrier":"brain-capability-first-scheduler-verify-20261008-v1","carrier_id":"sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695","workspace":"/home/sprite/v9-real-witness-second","direct_verify_pass":true,"adversarial_passed":4,"adversarial_failed":0},
+  "truth":{"claim_scoped_totality_proved":true,"cc_r1_reality_containment_proved":true,"cc_r2_mission_soundness_proved":true,"cc_r3_terminal_closure_proved":true,"r4_proof_realization_authority":true,"semantic_property_truth_authority":true,"predecessor_authority_transported":false,"new_primitive_required":false},
+  "quality_authority":false,
+  "acceptance_authority":false,
+  "promotion_authority":false,
+  "terminal_authority":false,
+  "terminal_credit_delta":0,
+  "incremental_spend_usd":0
+}
