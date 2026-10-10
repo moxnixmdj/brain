@@ -455,22 +455,27 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
             ),
         )
 
-    def test_governance_binds_v4_and_mission_precedence(self):
-        activation = json.loads(
-            (
-                ROOT
-                / "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V4.json"
-            ).read_text()
+    def test_governance_binds_v6_reuse_first_and_preserves_mission_precedence(self):
+        activation_path = (
+            ROOT
+            / "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V6.json"
         )
+        activation = json.loads(activation_path.read_text())
         pointer = json.loads(
             (ROOT / "canonical/governance/CURRENT_DEVELOPMENT_SCHEDULER.json").read_text()
         )
         mission = json.loads(
             (ROOT / "canonical/governance/CURRENT_MISSION_OBJECTIVE.json").read_text()
         )
+
         self.assertEqual(
             activation["status"],
-            "ACTIVE_PRIMARY_CAPABILITY_FIRST_DEVELOPMENT_SCHEDULER",
+            "ACTIVE_PRIMARY_CAPABILITY_FIRST_DEVELOPMENT_SCHEDULER__"
+            "REUSE_FIRST_RESIDUAL_ADMISSION_MECHANICALLY_ENFORCED",
+        )
+        self.assertEqual(
+            activation["scheduler_runtime_git_blob_sha"],
+            _git_blob_sha(ROOT / activation["scheduler_runtime"]),
         )
         self.assertFalse(
             activation["primary_work_rule"]["checkpoint_obligations_are_primary_gate"]
@@ -481,19 +486,68 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
             ]
         )
         self.assertTrue(
+            activation["primary_work_rule"][
+                "reuse_first_new_primitive_gate_mechanically_enforced"
+            ]
+        )
+        self.assertEqual(
+            activation["reuse_first_residual_admission"][
+                "scheduler_runtime_enforcement"
+            ],
+            "MECHANICALLY_IMPLEMENTED_IN_CAPABILITY_FIRST_SCHEDULER_V1",
+        )
+        self.assertEqual(
+            activation["reuse_first_residual_admission"]["independent_replay"],
+            "33_OF_33_PASS",
+        )
+        self.assertTrue(
             activation["terminal_autopilot_policy"][
                 "new_dispatch_requires_explicit_capability_first_checkpoint_admission"
             ]
         )
         self.assertEqual(
+            activation["r3_state"]["status"],
+            "SUFFICIENT_CONTROL_LOOP_CLOSURE_UNDER_AVAILABLE_EVIDENCE",
+        )
+        self.assertEqual(
+            activation["canonical_learning_loop"],
+            list(s.CAPABILITY_LEARNING_LOOP),
+        )
+
+        self.assertEqual(
             pointer["authoritative_activation"],
-            "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V4.json",
+            "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V6.json",
+        )
+        self.assertEqual(
+            pointer["authoritative_activation_git_blob_sha"],
+            _git_blob_sha(activation_path),
+        )
+        self.assertEqual(
+            pointer["runtime_git_blob_sha"],
+            _git_blob_sha(ROOT / pointer["runtime"]),
+        )
+        self.assertEqual(
+            pointer["r2_mechanism_policy"]["path"],
+            "canonical/governance/R2_MECHANISM_CLOSURE_OPEN_WORLD_FRONTIER_POLICY_20261010_V3.json",
+        )
+        self.assertEqual(
+            pointer["reuse_first_runtime_enforcement"]["status"],
+            "ACTIVE_FAIL_CLOSED",
+        )
+
+        self.assertEqual(
+            mission["current_development_scheduler"]["activation"],
+            "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V6.json",
         )
         self.assertEqual(
             mission["current_development_scheduler"]["status"],
-            "ACTIVE_PRIMARY_CAPABILITY_FIRST_DEVELOPMENT_SCHEDULER",
+            activation["status"],
         )
-        self.assertIn("CAPABILITY_RESOURCE_PARETO_LEVERAGE_IS_PRIMARY", mission["scheduler_precedence"])
+        self.assertIn(
+            "REUSE_EXISTING_VERIFIED_CAPABILITY_AND_PROVE_REUSE_EXHAUSTION_"
+            "BEFORE_NEW_PRIMITIVE_INVENTION",
+            mission["scheduler_precedence"],
+        )
 
 
 if __name__ == "__main__":
