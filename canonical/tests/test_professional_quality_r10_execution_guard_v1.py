@@ -185,7 +185,8 @@ class R10ExecutionGuardV1Tests(unittest.TestCase):
 
     def test_catalog_drift_fails_closed(self):
         catalog = deepcopy(self.catalog)
-        rows = catalog.get("defeaters") or catalog.get("attack_classes") or catalog.get("nodes")
+        rows = catalog.get("challenges")
+        self.assertIsInstance(rows, list)
         target = next(
             row
             for row in rows
