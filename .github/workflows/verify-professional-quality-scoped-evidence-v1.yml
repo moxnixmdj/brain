@@ -1,0 +1,27 @@
+name: verify-professional-quality-scoped-evidence-v1
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/runtime/professional_quality_scoped_evidence_v1.py
+      - canonical/tests/test_professional_quality_scoped_evidence_v1.py
+      - canonical/governance/PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_REGISTRY_20261010_V1.json
+      - canonical/governance/PROFESSIONAL_QUALITY_R8_POPULATION_CONTEXT_SCOPE_20261010_V1.json
+      - canonical/governance/PROFESSIONAL_QUALITY_R12_META_COMPOSITION_SCOPE_20261010_V1.json
+      - .github/workflows/verify-professional-quality-scoped-evidence-v1.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Compile scoped evidence validator
+        run: |
+          python -m py_compile             canonical/runtime/professional_quality_scoped_evidence_v1.py             canonical/tests/test_professional_quality_scoped_evidence_v1.py
+      - name: Run scoped evidence regression
+        run: python -m unittest canonical.tests.test_professional_quality_scoped_evidence_v1 -v
