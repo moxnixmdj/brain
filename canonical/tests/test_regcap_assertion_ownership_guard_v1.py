@@ -270,6 +270,47 @@ class Tests(unittest.TestCase):
         self.assertFalse(out["relative_selection_authority"])
         self.assertFalse(out["semantic_truth_authority"])
 
+    def test_descriptor_projection_preserves_all_six_direct_signatures(self):
+        cases = [
+            (
+                "The loss-absorbing cushion can be drawn down as losses are incurred.",
+                "REGCAP::CCOB",
+            ),
+            (
+                "The loss-absorbing cushion is released when system-wide risk crystallises or dissipates.",
+                "REGCAP::CCYB",
+            ),
+            (
+                "The loss-absorbing cushion provides loss-absorbing and recapitalisation capacity available in resolution for a failing G-SIB.",
+                "REGCAP::TLAC",
+            ),
+            (
+                "The loss-absorbing cushion is 2.5% CET1 above the regulatory minimum.",
+                "REGCAP::CCOB",
+            ),
+            (
+                "The loss-absorbing cushion extends the capital conservation buffer and is met with CET1.",
+                "REGCAP::CCYB",
+            ),
+            (
+                "The loss-absorbing cushion is a separate minimum TLAC requirement alongside minimum Basel regulatory capital requirements.",
+                "REGCAP::TLAC",
+            ),
+        ]
+        phrase = "loss-absorbing cushion"
+        for text, expected in cases:
+            with self.subTest(text=text):
+                start = text.index(phrase)
+                out = signature.compile_context(
+                    text,
+                    source_id="doc:positive",
+                    start=start,
+                    end=start + len(phrase),
+                )
+                self.assertTrue(out["pass"], out)
+                self.assertEqual(out["relative_candidate_hint"], expected)
+                self.assertTrue(out["semantic_truth_authority"])
+
     def test_guard_never_grants_terminal_authority(self):
         out = check_direct_assertion(
             DIRECT,
