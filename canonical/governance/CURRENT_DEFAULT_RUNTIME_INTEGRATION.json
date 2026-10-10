@@ -108,7 +108,7 @@
       "noninterference_proof_class": "PROVED_DISJOINT_FROM_CURRENT_DEFAULT_LIVE_MATCH_DOMAIN_V1",
       "noninterference_verification": {
         "path": "canonical/verification/R2_DIRECT_ROUTE_NONINTERFERENCE_GATE_VERIFY_20261010_V1.json",
-        "git_blob_sha": "d05740792d277cede9dca09c53361ad0a2880945",
+        "git_blob_sha": "5631d8e524219f5e8d5af247778018934e80d0e1",
         "status": "PASS__EXACT_BLOBS__PUBLIC_ISOLATED_5_OF_5__NEW_ROUTE_NONINTERFERENCE_REQUIRED__STALE_PROOF_FAIL_CLOSED__ZERO_CREDIT",
         "public_run_id": 38027929339,
         "public_job_id": 114142644099,
