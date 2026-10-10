@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_TLAC_MREL_IDENTITY_DISCRIMINATOR_SOURCE_PACK_V1",
+  "scope_id": "REGCAP_TLAC_MREL_BOUNDED_RIVAL_TASK_V1",
+  "sources": [
+    {
+      "schema": "PROJECT_BRAIN_HTTPS_SOURCE_FRAGMENT_PROJECTION_PACK_V2",
+      "source_id": "EURLEX_BRRD_2026_MREL_ARTICLE_45C",
+      "url": "https://eur-lex.europa.eu/eli/dir/2014/59/2026-05-11/eng",
+      "retrieval_user_agent": "ProjectBrainSourceProjectionVerifier/2.0",
+      "fragments": [
+        {
+          "fragment_id": "MREL_ARTICLE_45C_TITLE",
+          "section_anchor": "Article 45c",
+          "text": "Determination of the minimum requirement for own funds and eligible liabilities",
+          "max_chars_after_anchor": 3000
+        },
+        {
+          "fragment_id": "MREL_DETERMINED_BY_RESOLUTION_AUTHORITY",
+          "section_anchor": "Article 45c",
+          "text": "The requirement referred to in Article 45(1) shall be determined by the resolution authority, after consulting the competent authority, on the basis of the following criteria:",
+          "max_chars_after_anchor": 5000
+        }
+      ]
+    },
+    {
+      "schema": "PROJECT_BRAIN_HTTPS_SOURCE_FRAGMENT_PROJECTION_PACK_V2",
+      "source_id": "FSB_TLAC_STANDARD_2015",
+      "url": "https://www.fsb.org/2015/11/total-loss-absorbing-capacity-tlac-principles-and-term-sheet-2/",
+      "retrieval_user_agent": "ProjectBrainSourceProjectionVerifier/2.0",
+      "fragments": [
+        {
+          "fragment_id": "TLAC_FSB_GSIB_SCOPE",
+          "section_anchor": "Total Loss-Absorbing Capacity (TLAC) Principles and Term Sheet",
+          "text": "The Total Loss-absorbing Capacity (TLAC) Standard applies to firms that have been designated as global systemically important banks (G-SIBs) by the FSB.",
+          "max_chars_after_anchor": 5000
+        },
+        {
+          "fragment_id": "TLAC_MINIMUM_EXTERNAL_REQUIREMENT",
+          "section_anchor": "Total Loss-Absorbing Capacity (TLAC) Principles and Term Sheet",
+          "text": "All G-SIB are required to meet a new requirement for Minimum External TLAC alongside minimum regulatory capital requirements set out in the Basel III framework.",
+          "max_chars_after_anchor": 5000
+        }
+      ]
+    }
+  ]
+}
