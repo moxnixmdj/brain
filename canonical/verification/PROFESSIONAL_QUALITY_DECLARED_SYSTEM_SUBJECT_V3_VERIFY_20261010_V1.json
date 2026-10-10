@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_DECLARED_SYSTEM_SUBJECT_V3_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "INDEPENDENT_SPRITE_PASS__17_OF_17_PLUS_REAL_SUBJECT_REPLAY__10_OF_10_COMPONENTS_CURRENT__ZERO_ROOT_AUTHORITY",
+  "subject": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V3_DECLARED_SYSTEM_SUBJECT_20261010_V3.json",
+    "git_blob_sha": "165747cc19bdcfa08a7fa5d4678b6abac6f34430",
+    "subject_kind": "DECLARED_SYSTEM",
+    "subject_id": "PROFESSIONAL_QUALITY_P1_V3_INTEGRATED_SYSTEM_20261010_V3",
+    "subject_sha256": "27bd312ca0bbd92ee3eeca909d4bd52edd9f5e312fee448c5af5738790765e99"
+  },
+  "verifier": {
+    "runtime_path": "canonical/runtime/professional_quality_declared_system_subject_verify_v2.py",
+    "runtime_git_blob_sha": "dfb96a5684d311a523b051ad53c3d05813c9c6b6",
+    "tests_path": "canonical/tests/test_professional_quality_declared_system_subject_verify_v2.py",
+    "tests_git_blob_sha": "fa5d682fccb760a88764961397e5fea01b141089"
+  },
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "working_directory": "/home/sprite/professional-frontier-main-verify-v2"
+  },
+  "replay": {
+    "combined_unit_tests_passed": 17,
+    "combined_unit_tests_failed": 0,
+    "actual_subject_verifier_pass": true,
+    "verified_component_count": 10,
+    "subject_identity_verified": true,
+    "component_currentness_verified": true,
+    "root_subject_binding_authority": false
+  },
+  "hard_nonclaims": [
+    "SUBJECT_IDENTITY_DOES_NOT_PROVE_ANY_ROOT_SATISFIED",
+    "NO_ROOT_SCOPE_TRANSPORT_AUTHORITY",
+    "NO_GLOBAL_QUALITY_OR_LEAF_CLOSURE",
+    "NO_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
