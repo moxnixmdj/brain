@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_ESCAPE_V3_DYNAMIC_CURRENT_BINDING_REPAIR_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_BRANCH_BYTES__PYCOMPILE_PASS__21_OF_21__ZERO_CREDIT",
+  "branch": "repair/escape-v3-dynamic-current-binding-20261010-v1",
+  "base_commit": "e79aa2ba5d163a5964fb56f1d550075c4dfbe5d9",
+  "defect": "V3_AUDIT_HARDCODED_SUPERSEDED_V4_BINDING_WHILE_CURRENT_CLASSIFIER_BOUND_GAP_A_AND_GAP_B_TO_V5",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/escape_progress_shared_gap_audit_v3.py",
+      "git_blob_sha": "e556880aa216673e0e316e11fc6f4ab25d644ce6"
+    },
+    "tests": {
+      "path": "canonical/tests/test_escape_progress_shared_gap_audit_v3.py",
+      "git_blob_sha": "63550e58b056a5032384fbe9fa90dee08078ac15"
+    },
+    "manifest": {
+      "path": "canonical/governance/ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_20261010_V2.json",
+      "git_blob_sha": "f3a566a982dcd867c583eafd24c6f5dd3baa0530"
+    },
+    "classifier": {
+      "path": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
+      "binding": "MUTABLE_CURRENT_PATH_IDENTITY",
+      "observed_git_blob_sha": "fa5355528c6104c1768499b9dc657ea0b895e3ee",
+      "observed_blob_is_load_bearing": false
+    },
+    "pre_repair_current_binding": {
+      "path": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V5.json",
+      "git_blob_sha": "58ab70bfd7e98bdc78d480da197c6a8e41df6d43"
+    }
+  },
+  "independent_replay": {
+    "environment": "SPRITE__brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "python_compile": "PASS",
+    "test_runner": "STANDARD_LIBRARY_RUNPY__ALL_ZERO_ARG_TEST_FUNCTIONS",
+    "tests_discovered": 21,
+    "tests_passed": 21,
+    "tests_failed": 0,
+    "tests_skipped": 0
+  },
+  "proved": [
+    "AUDIT_REPO_RESOLVES_CURRENT_GAP_BINDING_FROM_LIVE_RESIDUAL_CLASSIFIER",
+    "GAP_A_AND_GAP_B_MUST_NAME_ONE_IDENTICAL_CURRENT_BINDING",
+    "BINDING_PATH_ESCAPE_FAILS_CLOSED",
+    "HISTORICAL_V1_V2_AUDIT_AND_V1_V3_GOVERNANCE_BYTES_REMAIN_UNCHANGED",
+    "CURRENT_13_ROW_10_A_3_B_PROOF_SEMANTICS_AND_ZERO_CREDIT_PRESERVED"
+  ],
+  "nonclaims": [
+    "NO_GAP_A_ROW_PROOF",
+    "NO_GAP_B_ROW_PROOF",
+    "NO_CC_R3_CERTIFICATE",
+    "NO_GLOBAL_ESCAPE_PROGRESS_TOTALITY",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
