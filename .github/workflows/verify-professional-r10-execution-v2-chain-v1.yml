@@ -1,0 +1,27 @@
+name: verify-professional-r10-execution-v2-chain-v1
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'canonical/tests/test_professional_quality_r10_execution_whole_leaf_v2_current_chain_v1.py'
+      - '.github/workflows/verify-professional-r10-execution-v2-chain-v1.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Compile exact gate replay
+        run: |
+          python -m py_compile canonical/tests/test_professional_quality_r10_execution_whole_leaf_v2_current_chain_v1.py
+      - name: Replay exact R10 execution V2 chain
+        run: |
+          PYTHONPATH="$GITHUB_WORKSPACE"             python -m unittest -v canonical.tests.test_professional_quality_r10_execution_whole_leaf_v2_current_chain_v1
