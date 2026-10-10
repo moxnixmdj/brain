@@ -1,0 +1,272 @@
+{
+  "acceptance_authority": false,
+  "authenticated_step_ids": [
+    "GENERATE_DIVERSE_CANDIDATE_BRANCHES_WITH_INCUMBENT_PRESERVATION",
+    "RUN_DETERMINISTIC_FACT_STRUCTURE_FORMAT_AND_GROUNDING_CHECKS",
+    "RENDER_EXACT_AUDIENCE_VIEW_AND_BIND_OBSERVATION_CHANNELS",
+    "RUN_CRITERION_SPECIFIC_PLUS_HOLISTIC_COMPARATIVE_EVALUATION",
+    "ATTACK_FINALISTS_WITH_RELEVANT_INVARIANCE_DEFEATER_HIDDEN_CHANNEL_AND_COUNTEREXAMPLE_PROBES",
+    "FREEZE_WINNER_AND_USE_FRESH_OR_SELECTION_AWARE_TERMINAL_EVIDENCE",
+    "ISSUE_SCOPED_CERTIFICATE_OR_ABSTAIN_WITH_MINIMUM_BLOCKING_CUT"
+  ],
+  "caller_step_results_allowed": false,
+  "capability_credit_delta": 0,
+  "declared_system_subject": {
+    "git_blob_sha": "2ff32e4bb78e63635244c86d47fa369d7ba53900",
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V9_DECLARED_SYSTEM_SUBJECT_20261010_V8.json",
+    "subject_id": "PROFESSIONAL_QUALITY_P1_V9_EXECUTABLE_TOTALITY_SEMANTICS_SYSTEM_20261010_V8",
+    "subject_sha256": "adf7f09e1913526e460b7350c02cd148c2cd14de90eed33fa7fae84d395d9912"
+  },
+  "detected_triggers": [],
+  "escalation_root_ids": [],
+  "execution_authority": false,
+  "final_step_outcome": "POSITIVE_CERTIFICATE",
+  "goal_to_decision_binding": {
+    "decision_payload_sha256": "sha256:ef7610c8ef640fbc840f75c60c49da8baa29fe6a453e4f60d0f4c85538d49916",
+    "goal_sha256": "4b2d8b031a4752280e7244a42ec6925e3ab04d5a99cf1e5f4efbfe965e5128e9",
+    "pass": true,
+    "receipt_git_blob_sha": "3b001bf406f1744710211263c42d0311325a1f8a",
+    "receipt_path": "canonical/governance/V9_REAL_R12_DOCX_GOAL_BINDING_20261010_V1.json",
+    "status": "PASS__GOAL_TO_DECISION_CONTEXT_AUTHENTICATED",
+    "verification_git_blob_sha": "f7562b3c35d5499c1df99a5d020ebf95b7628485",
+    "verification_path": "canonical/verification/V9_REAL_R12_DOCX_GOAL_BINDING_VERIFY_20261010_V1.json"
+  },
+  "hard_defect_preflight_result": {
+    "acceptance_credit_delta": 0,
+    "checked_artifacts": [
+      {
+        "artifact_sha256": "41f2d30471a671d77cecf885b5f8c20409ca736616925221ec371761cfa21777",
+        "errors": [],
+        "hard_defects": [],
+        "measurements": {
+          "format": "docx",
+          "media_count": 0,
+          "package_member_count": 17,
+          "text_char_count": 69
+        },
+        "observed_conditions": [],
+        "pass": true,
+        "path": "output.docx",
+        "suffix": ".docx"
+      }
+    ],
+    "checked_scope": [
+      "DOCX_NONEMPTY_CONTENT",
+      "PPTX_HAS_SLIDES",
+      "PPTX_NO_TEXT_OBJECT_OUTSIDE_SLIDE_BOUNDS",
+      "XLSX_HAS_VISIBLE_WORKSHEET",
+      "XLSX_NONEMPTY_CONTENT",
+      "XLSX_NO_ERROR_CELLS",
+      "XLSX_NO_ZERO_WIDTH_COLUMNS"
+    ],
+    "errors": [],
+    "gdpval_owner_elo_credit": false,
+    "hard_defect_count": 0,
+    "hard_defects": [],
+    "observed_nonrequired_conditions": [],
+    "official_private_aa_briefcase_credit": false,
+    "pass": true,
+    "profile_authority_class": "BRAIN_OWNED_GENERAL_QA_POLICY",
+    "profile_id": "BRAIN_PROFESSIONAL_OOXML_SANITY_V1",
+    "public_target_example_only": false,
+    "quality_authority": false,
+    "required_checks": [
+      "DOCX_NONEMPTY_CONTENT"
+    ],
+    "schema": "PROJECT_BRAIN_PROFESSIONAL_ARTIFACT_HARD_DEFECT_PREFLIGHT_V1",
+    "source_check_id": null,
+    "source_commit": null,
+    "source_git_blob_sha": null,
+    "source_path": null,
+    "status": "PASS__NO_PROFILE_REQUIRED_HARD_DEFECT_FOUND",
+    "style_adequacy_proved": false,
+    "target_preference_authority": false,
+    "terminal_credit_delta": 0
+  },
+  "incremental_spend_usd": 0,
+  "material_totality_basis": "EXACT_COMPLETE_TARGET_CASE_UNIVERSE",
+  "material_totality_proved": true,
+  "material_totality_target_scope_id": "scope://professional-final-positive/60c37d385c4b0876068a6d2af39eaaf0bb4e5565d52b0c2376d76aa6fd321f53",
+  "new_root_authority": false,
+  "positive_certification_authorized": true,
+  "preflight_self_attestation_allowed": false,
+  "professional_step_bindings_authenticated": true,
+  "profile_steps": [
+    "COMPILE_TARGET_SPEC_AND_HARD_CONSTRAINTS",
+    "GENERATE_DIVERSE_CANDIDATE_BRANCHES_WITH_INCUMBENT_PRESERVATION",
+    "RUN_DETERMINISTIC_FACT_STRUCTURE_FORMAT_AND_GROUNDING_CHECKS",
+    "RENDER_EXACT_AUDIENCE_VIEW_AND_BIND_OBSERVATION_CHANNELS",
+    "RUN_CRITERION_SPECIFIC_PLUS_HOLISTIC_COMPARATIVE_EVALUATION",
+    "ATTACK_FINALISTS_WITH_RELEVANT_INVARIANCE_DEFEATER_HIDDEN_CHANNEL_AND_COUNTEREXAMPLE_PROBES",
+    "FREEZE_WINNER_AND_USE_FRESH_OR_SELECTION_AWARE_TERMINAL_EVIDENCE",
+    "ISSUE_SCOPED_CERTIFICATE_OR_ABSTAIN_WITH_MINIMUM_BLOCKING_CUT"
+  ],
+  "promotion_authority": false,
+  "quality_authority": false,
+  "quality_judgment_authority": false,
+  "r12_material_obligation": "ALL_ROOT_RELEVANT_MATERIAL_DEFEATERS_RESOLVED_OR_PROVED_DECISION_NULL_BEFORE_POSITIVE_CERTIFICATION",
+  "r12_property_claim_id": "11870f850b46bcfcc31094f764fc4f45c911aaac413979ceb62679ff19a53162",
+  "r12_scope_claim_id": "05b74983836dd1f6a13a0db72443246fb74f99548f0d982a769a6a7e572e9e85",
+  "r12_totality_semantic_verification": {
+    "acceptance_authority": false,
+    "certificate_git_blob_sha": "20a2eef7757e585f6d2fa161a6c2ee94e2c715fb",
+    "certificate_path": "canonical/evidence/v9_real_r12/V9_REAL_R12_MATERIAL_TOTALITY_CERTIFICATE_20261010_V1.json",
+    "incremental_spend_usd": 0,
+    "independent_verification_git_blob_sha": "7319c1f307d0953e6e5179ca336b52f399160d12",
+    "independent_verification_path": "canonical/verification/V9_REAL_R12_SEMANTIC_VERIFY_20261010_V1.json",
+    "pass": true,
+    "promotion_authority": false,
+    "proof_mode": "INDEPENDENT_REPLAY",
+    "quality_authority": false,
+    "schema": "PROJECT_BRAIN_PROFESSIONAL_R12_TOTALITY_SEMANTIC_AUTHORITY_V1",
+    "semantic_obligation": "ALL_ROOT_RELEVANT_MATERIAL_DEFEATERS_RESOLVED_OR_PROVED_DECISION_NULL_BEFORE_POSITIVE_CERTIFICATION",
+    "semantic_property_claim_id": "11870f850b46bcfcc31094f764fc4f45c911aaac413979ceb62679ff19a53162",
+    "semantic_scope_claim_id": "05b74983836dd1f6a13a0db72443246fb74f99548f0d982a769a6a7e572e9e85",
+    "semantic_totality_verified": true,
+    "semantic_truth_authority": false,
+    "semantic_verifier_git_blob_sha": "d11bc2335a0b24eb003cb809b5128d627f1302d4",
+    "semantic_verifier_path": "canonical/runtime/professional_r12_v9_real_docx_semantic_verifier_v1.py",
+    "status": "PASS__EXECUTABLE_R12_TOTALITY_SEMANTIC_VERIFICATION",
+    "target_scope_semantics": "ALL_ROOT_RELEVANT_MATERIAL_DEFEATERS_FOR_EXACT_RUN_CONTEXT_AND_EVIDENCE",
+    "terminal_authority": false,
+    "terminal_credit_delta": 0,
+    "verifier_result_sha256": "906a39d31ac94cec6d68221c6045c523a77ea14520c14142cdd400594d3ada33"
+  },
+  "r12_totality_semantics_bound": true,
+  "route": "P1",
+  "run_context_sha256": "sha256:103249e3cca5a0166b810752f44f265ed5fdafa4ead23b8a87c77768362638ca",
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_P1_ROUTER_V9",
+  "semantic_truth_authority": false,
+  "status": "ROUTE__P1_ORDINARY",
+  "step_binding_receipts": {
+    "ATTACK_FINALISTS_WITH_RELEVANT_INVARIANCE_DEFEATER_HIDDEN_CHANNEL_AND_COUNTEREXAMPLE_PROBES": {
+      "decision_outcome": "NOT_APPLICABLE",
+      "evidence_sha256": "2cb97029578a3c1f5544c568ab064cbc1dd6c081f1e1664f667badbe0d48d57c",
+      "receipt_git_blob_sha": "86927276a4de4888b290a24336f740303276b0fc",
+      "receipt_path": "canonical/governance/V9_REAL_R12_STEP_5_RECEIPT_20261010_V1.json",
+      "verification_git_blob_sha": "39816c289bdd542b7ef1a8a575f6e11c4eef43af",
+      "verification_path": "canonical/verification/V9_REAL_R12_STEP_5_VERIFY_20261010_V1.json"
+    },
+    "FREEZE_WINNER_AND_USE_FRESH_OR_SELECTION_AWARE_TERMINAL_EVIDENCE": {
+      "decision_outcome": "NOT_APPLICABLE",
+      "evidence_sha256": "2cb97029578a3c1f5544c568ab064cbc1dd6c081f1e1664f667badbe0d48d57c",
+      "receipt_git_blob_sha": "494fc63b3038c32f5f8c9ca522a495bfee11e52a",
+      "receipt_path": "canonical/governance/V9_REAL_R12_STEP_6_RECEIPT_20261010_V1.json",
+      "verification_git_blob_sha": "c1e8bf92f4c3d807e069aa2bc7463e501bd4d2c9",
+      "verification_path": "canonical/verification/V9_REAL_R12_STEP_6_VERIFY_20261010_V1.json"
+    },
+    "GENERATE_DIVERSE_CANDIDATE_BRANCHES_WITH_INCUMBENT_PRESERVATION": {
+      "decision_outcome": "NOT_APPLICABLE",
+      "evidence_sha256": "2cb97029578a3c1f5544c568ab064cbc1dd6c081f1e1664f667badbe0d48d57c",
+      "receipt_git_blob_sha": "6c4f5720a5378398e8297bbe9d7ce513364e9d01",
+      "receipt_path": "canonical/governance/V9_REAL_R12_STEP_1_RECEIPT_20261010_V1.json",
+      "verification_git_blob_sha": "74a879876c6cee5e840453770b739df842ee82ab",
+      "verification_path": "canonical/verification/V9_REAL_R12_STEP_1_VERIFY_20261010_V1.json"
+    },
+    "ISSUE_SCOPED_CERTIFICATE_OR_ABSTAIN_WITH_MINIMUM_BLOCKING_CUT": {
+      "decision_outcome": "POSITIVE_CERTIFICATE",
+      "evidence_sha256": "2cb97029578a3c1f5544c568ab064cbc1dd6c081f1e1664f667badbe0d48d57c",
+      "receipt_git_blob_sha": "998e0c760c93289d2fbd7c9a9348cf6b71a62677",
+      "receipt_path": "canonical/governance/V9_REAL_R12_STEP_7_RECEIPT_20261010_V1.json",
+      "verification_git_blob_sha": "4d006dd2eb3978894d244bbe653102dbfbedd099",
+      "verification_path": "canonical/verification/V9_REAL_R12_STEP_7_VERIFY_20261010_V1.json"
+    },
+    "RENDER_EXACT_AUDIENCE_VIEW_AND_BIND_OBSERVATION_CHANNELS": {
+      "decision_outcome": "NOT_APPLICABLE",
+      "evidence_sha256": "2cb97029578a3c1f5544c568ab064cbc1dd6c081f1e1664f667badbe0d48d57c",
+      "receipt_git_blob_sha": "65ff11ab9b0222de0e730a5160636a4526e6cb97",
+      "receipt_path": "canonical/governance/V9_REAL_R12_STEP_3_RECEIPT_20261010_V1.json",
+      "verification_git_blob_sha": "fad7508f4eb78926fd53889db08b9b552681c571",
+      "verification_path": "canonical/verification/V9_REAL_R12_STEP_3_VERIFY_20261010_V1.json"
+    },
+    "RUN_CRITERION_SPECIFIC_PLUS_HOLISTIC_COMPARATIVE_EVALUATION": {
+      "decision_outcome": "NOT_APPLICABLE",
+      "evidence_sha256": "2cb97029578a3c1f5544c568ab064cbc1dd6c081f1e1664f667badbe0d48d57c",
+      "receipt_git_blob_sha": "bec65382ca3e72da7e1b33af8517b59831e26218",
+      "receipt_path": "canonical/governance/V9_REAL_R12_STEP_4_RECEIPT_20261010_V1.json",
+      "verification_git_blob_sha": "e5c20c34948895878c1569f8977a6afd010ec61f",
+      "verification_path": "canonical/verification/V9_REAL_R12_STEP_4_VERIFY_20261010_V1.json"
+    },
+    "RUN_DETERMINISTIC_FACT_STRUCTURE_FORMAT_AND_GROUNDING_CHECKS": {
+      "decision_outcome": "NOT_APPLICABLE",
+      "evidence_sha256": "2cb97029578a3c1f5544c568ab064cbc1dd6c081f1e1664f667badbe0d48d57c",
+      "receipt_git_blob_sha": "41be17ea77c6c10352ef57d24a1c1b76d3d18373",
+      "receipt_path": "canonical/governance/V9_REAL_R12_STEP_2_RECEIPT_20261010_V1.json",
+      "verification_git_blob_sha": "1b904f7aa6058f372f4032be1bde59c39fccbdcd",
+      "verification_path": "canonical/verification/V9_REAL_R12_STEP_2_VERIFY_20261010_V1.json"
+    }
+  },
+  "target_binding_independent_verifier_id": "sprite-v9-real-docx-independent-20261010-v1",
+  "target_binding_producer_id": "v9-real-docx-producer-20261010-v1",
+  "target_compilation_self_attestation_allowed": false,
+  "target_instance_binding": {
+    "arbitrary_prompt_semantic_completeness": false,
+    "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+    "contract_registry_git_blob_sha": "ae250d5bc5da73b23600670be354ffba31e65e53",
+    "contract_sha256": "f6c9438aec89b442686f99bb4aaa232fb2e665e282fc0e0574695cf984254c59",
+    "exact_target_instance": {
+      "artifact_type": "docx",
+      "audience": "A document reader viewing the rendered DOCX.",
+      "constraints": [
+        "Exactly one OLD314159 occurrence exists in the source and is replaced by NEW314159.",
+        "No unrelated ZIP member bytes may change.",
+        "The output must remain a valid nonempty DOCX.",
+        "The rendered visible change must remain localized to the edited token region."
+      ],
+      "current_draft_or_render": {
+        "source_docx_sha256": "1db684b36a66b59f5a8a748036f21a9b7b4e4ff83db6904adfa34137089eb94e",
+        "source_png_sha256": "314dc1a10dd9242046d082ab38c826912e9c8a5c143a96d0e2a3e13c80264f94"
+      },
+      "objective": "Apply exactly one bounded visible text replacement OLD314159 -> NEW314159.",
+      "source_evidence": {
+        "fresh_render_report": "fresh_render_report.json",
+        "source_docx_sha256": "1db684b36a66b59f5a8a748036f21a9b7b4e4ff83db6904adfa34137089eb94e",
+        "source_token": "OLD314159",
+        "source_token_count": 1
+      }
+    },
+    "profile_git_blob_sha": "f7e89eafbb691c16d1bdf5b8d295a468d5e3bec5",
+    "target_binding_authority": true,
+    "target_fields": [
+      "objective",
+      "audience",
+      "source_evidence",
+      "artifact_type",
+      "constraints",
+      "current_draft_or_render"
+    ],
+    "target_instance_sha256": "e656cf8c6f45388eef03570352d347ec1ab4cbbef9ea160d3ffab9c5479597e9"
+  },
+  "target_instance_bound": true,
+  "target_instance_source": "AUTHENTICATED_DECISION_PAYLOAD",
+  "target_semantic_certificate": {
+    "claim_scope": {
+      "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+      "guarantees": [
+        "OBJECTIVE_AUDIENCE_EVIDENCE_ARTIFACT_TYPE_CONSTRAINTS_AND_CURRENT_DRAFT_ARE_EXPLICIT_RUNTIME_PARAMETERS",
+        "SUCCESS_FAILURE_TARGET_CONSTRUCT_SCOPE_AND_EVIDENCE_BOUNDARY_ARE_BOUND_TO_EXACT_CONTRACT_FIELDS",
+        "CONTRACT_TARGET_DRIFT_FAILS_CLOSED_BY_CONTENT_DIGEST",
+        "UNIQUE_OPTIMUM_IS_NOT_INFERRED_FROM_NONUNIQUE_SUCCESS_SEMANTICS",
+        "UNRESOLVED_RUNTIME_TASK_AMBIGUITY_REMAINS_OPEN"
+      ],
+      "kind": "EXACT_PARAMETERIZED_PROFESSIONAL_ARTIFACT_TARGET_SEMANTICS",
+      "limitations": [
+        "NO_ARBITRARY_USER_PROMPT_SEMANTIC_COMPLETENESS",
+        "NO_GLOBAL_R1_ROOT_CLOSURE",
+        "NO_GLOBAL_R1_SEMANTIC_LEAF_CLOSURE",
+        "NO_SOURCE_EXTRACTION_COMPLETENESS",
+        "NO_UNIQUE_BEST_PLAN"
+      ]
+    },
+    "global_leaf_closure": false,
+    "pass": true,
+    "schema": "PROJECT_BRAIN_PROFESSIONAL_TARGET_SEMANTIC_CERTIFICATE_V1",
+    "status": "PASS__EXACT_PARAMETERIZED_TARGET_SEMANTICS_BOUND",
+    "terminal_authority": false
+  },
+  "target_step_injected_by_authenticated_binding": true,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "unbound_target_substitution_allowed": false,
+  "v9_executable_r12_totality_semantics_verified": true
+}
