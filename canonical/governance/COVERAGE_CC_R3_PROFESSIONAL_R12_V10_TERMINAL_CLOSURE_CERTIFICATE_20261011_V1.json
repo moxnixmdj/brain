@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_CC_R3_PROFESSIONAL_R12_V10_TERMINAL_CLOSURE_CERTIFICATE_V1",
+  "date": "2026-10-11",
+  "status": "CANDIDATE_CC_R3_CERTIFICATE__STABLE_R12_CLAIM__V10_UNIVERSAL_POSITIVE_GATE_DIRECT_SUBSET_CLOSURE__ZERO_PROPERTY_OR_TERMINAL_CREDIT",
+  "root_id": "CC_R3_TERMINAL_CLOSURE_V1",
+  "claim_id": "11870f850b46bcfcc31094f764fc4f45c911aaac413979ceb62679ff19a53162",
+  "claim_binding": {
+    "claim_id": "11870f850b46bcfcc31094f764fc4f45c911aaac413979ceb62679ff19a53162",
+    "claim_kind": "PROPERTY_CERTIFICATE",
+    "mission_blob_sha": "13c470645b037bbb46245c687dd35197b420d51a",
+    "scope_sha256": "3958f259dba6bc6d4dfe1dad0b3ec26ecb1b8d92ea4763985f52ce96cfc55a1d",
+    "target_predicate_sha256": "4436ce9a119fb5f9410080e0f5b675adb6220c644969d29373c55e9694bd14a8",
+    "semantics_sha256": "39034d3ff3bab4c6b05ff9b224c5910177c0604bf0acbe1570ce8ce1bd6ad46d",
+    "epoch": "PROFESSIONAL_SEMANTIC_TOTALITY_BATCH_20261010_V3",
+    "authority_id": "PROJECT_BRAIN_PROFESSIONAL_SEMANTIC_TOTALITY_COVERAGE_AUTHORITY_V3"
+  },
+  "active_claim": {
+    "path": "canonical/governance/COVERAGE_COMPLETENESS_FROZEN_CLAIM_PROFESSIONAL_R12_SEMANTIC_20261010_V2.json",
+    "git_blob_sha": "7b26ddba501358d42d6fa342efd27d389bb30654"
+  },
+  "v10_subject": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V10_DECLARED_SYSTEM_SUBJECT_20261011_V1.json",
+    "git_blob_sha": "71333ce3c40ec8e500e05a6f6b92f425db771a11",
+    "subject_id": "PROFESSIONAL_QUALITY_P1_V10_FIXED_TRUSTED_R12_TOTALITY_SYSTEM_20261011_V1",
+    "subject_sha256": "bb9dfcec9e006aebebcfa904ff6bf096aa01c62392f16f5915c2bf8e7fca1be5"
+  },
+  "universal_positive_gate_verifier": {
+    "path": "canonical/runtime/coverage_cc_r3_professional_r12_v10_universal_positive_gate_verify_v1.py",
+    "git_blob_sha": "69917c191346e08f0e3b662de9bde41bd582a41a"
+  },
+  "v9_to_v10_refinement": {
+    "path": "canonical/runtime/professional_v9_to_v10_r12_positive_refinement_v1.py",
+    "git_blob_sha": "95915ab44b5ede08241bb8c706b9bb9b7a64b805"
+  },
+  "theorem": {
+    "statement": "FOR_EVERY_ADMISSIBLE_INPUT_IN_THE_FROZEN_R12_WHOLE_LEAF_SCOPE__V10_CAN_EMIT_A_POSITIVE_CERTIFICATE_ONLY_AFTER_THE_EXACT_PINNED_TRUSTED_LOCAL_TOTALITY_VERIFIER_PROVES_ALL_ROOT_RELEVANT_MATERIAL_DEFEATERS_FOR_THAT_RUN_RESOLVED_OR_DECISION_NULL__OTHERWISE_V10_FAILS_CLOSED__THEREFORE_B_PLUS_SUBSETEQ_G_MINUS_FOR_CC_R3",
+    "proof_mode": "FORMAL_REDUCTION",
+    "universal_positive_route_local_totality": true,
+    "abstention_fail_closed": true,
+    "positive_route_expansion_over_v9": false,
+    "cc_r3_terminal_closure_proved": true,
+    "finite_catalog_only": false,
+    "one_run_extrapolation": false,
+    "property_truth_implied": false
+  },
+  "semantic_truth_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "accounting": {
+    "fresh_reality_units_consumed": 0,
+    "incremental_spend_usd": 0,
+    "property_truth_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
