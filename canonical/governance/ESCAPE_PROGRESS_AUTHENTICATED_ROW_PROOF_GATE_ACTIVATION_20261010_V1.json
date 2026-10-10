@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_ESCAPE_PROGRESS_AUTHENTICATED_ROW_PROOF_GATE_ACTIVATION_20261010_V1",
+  "date": "2026-10-10",
+  "status": "ACTIVE_CANDIDATE__V4_AUTHENTICATED_ROW_PROOF_GATE_SUPERSEDES_V3_FOR_CC_R3_AUTHORITY__ZERO_CREDIT",
+  "predecessor_binding": {
+    "path": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V5.json",
+    "git_blob_sha": "58ab70bfd7e98bdc78d480da197c6a8e41df6d43"
+  },
+  "structural_theorem": {
+    "path": "canonical/runtime/escape_progress_shared_gap_audit_v3.py",
+    "git_blob_sha": "14adf2c1a431285a542340a740e27e764edb1ce5",
+    "role": "STRUCTURAL_CHECKER_ONLY__NO_STANDALONE_ROW_PROOF_AUTHORITY"
+  },
+  "authority_wrapper": {
+    "path": "canonical/runtime/escape_progress_shared_gap_audit_v4.py",
+    "git_blob_sha": "f92a557d39bb33cfebc7701b275dba1a4bf442c5",
+    "tests": {
+      "path": "canonical/tests/test_escape_progress_shared_gap_audit_v4.py",
+      "git_blob_sha": "5de9d4f12bc8f18a90075e46b192706bd91e721b"
+    },
+    "verification": {
+      "path": "canonical/verification/ESCAPE_PROGRESS_SHARED_GAP_EXECUTABLE_AUDIT_V4_VERIFY_20261010_V1.json",
+      "git_blob_sha": "1afed4ddbf61ce876c92a65e72349119bcc72e5d"
+    }
+  },
+  "mandatory_rule": "CC_R3_MAY_BE_TRUE_ONLY_AFTER_V4_AUTHENTICATES_ALL_13_CANONICAL_ROW_PROOFS_AND_THEIR_DISTINCT_INDEPENDENT_SEMANTIC_VERIFICATIONS_AND_V3_STRUCTURAL_THEOREM_PASSES",
+  "rejected_authority": [
+    "RAW_IN_MEMORY_ROW_PROOF_MAPPING",
+    "SELF_HASHED_ROW_PROOF_WITHOUT_CANONICAL_GIT_BLOB_BINDING",
+    "ROW_PROOF_WITHOUT_SEPARATE_INDEPENDENT_SEMANTIC_VERIFICATION",
+    "PRODUCER_SELF_VERIFICATION",
+    "POST_VERIFICATION_PROOF_BYTE_DRIFT"
+  ],
+  "current_truth": {
+    "authenticated_real_row_proofs_bound": 0,
+    "required_rows": 13,
+    "cc_r3_proved": false,
+    "global_escape_progress_totality_proved": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "promotion_authority": false,
+  "terminal_authority": false
+}
