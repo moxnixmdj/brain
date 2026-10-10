@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_SECONDARY_PROFILE_V25_INDEPENDENT_VERIFICATION_V1",
+  "status": "PASS__INDEPENDENT_REPLAY__EXACT_MANIFEST__EXACT_NEXT30_CORPUS__ZERO_CAPABILITY_CREDIT",
+  "recorded_at": "2026-10-10",
+  "producer_record": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_SECONDARY_PROFILE_V25_LOCAL_EXECUTION_20261010_V1.json",
+  "verifier_context": "SEPARATE_SUCCESSOR_EXECUTION_CONTEXT",
+  "artifacts": {
+    "v24_archive": {
+      "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V24_SUCCESSOR_20261010_V1.tar.xz",
+      "sha256": "4ec32995774f9886f9726490188bb77d300c8aef628c66896559f59e34f4a0ee",
+      "recorded_sha_match": true
+    },
+    "producer_v25_archive": {
+      "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V25_SUCCESSOR_CANDIDATE_20261010_V1.tar.xz",
+      "sha256": "0137e81081f34a6287aba1a14c6b27b17bb0da841837d7b4b52017fd2eeba805",
+      "recorded_sha_match": true,
+      "note": "Contains runtime pycache and is not archive-size comparable to canonical predecessor."
+    },
+    "transform": {
+      "library_sha256": "74eba658be58cc2067d1ae4641bb110a3d20a242e4ceed2ff0adb211d5332ae6",
+      "canonical_path": "canonical/research/bytes/tools/secondary_profile_prune_v25.py",
+      "canonical_git_blob_sha": "55f7ad1c36da56daed42d0d100e8267e8a864b7e",
+      "recorded_expected_git_blob_sha": "55f7ad1c36da56daed42d0d100e8267e8a864b7e",
+      "exact_blob_match": true
+    }
+  },
+  "reconstruction": {
+    "v24_manifest_sha256": "eb71ab231a6281de6133082c59eb9732864e68af42daf4cfb6c6f258c3dea1f9",
+    "transform_target_manifest_sha256": "7d633d565a52b8a84e3836aadf496e2d1d9af667f94b1876d5dd6b28cc106a9b",
+    "reconstructed_manifest_sha256": "7d633d565a52b8a84e3836aadf496e2d1d9af667f94b1876d5dd6b28cc106a9b",
+    "producer_archive_manifest_sha256": "7d633d565a52b8a84e3836aadf496e2d1d9af667f94b1876d5dd6b28cc106a9b",
+    "python_files": 277,
+    "raw_python_source_bytes": 1992901,
+    "python_file_byte_identity": "277/277",
+    "manifest_file_byte_identity": true,
+    "result": "PASS"
+  },
+  "qualification": {
+    "id": "QUAL_SUCCESSOR_NEXT30_20261010_V1",
+    "seed": 5477225,
+    "per_operation_budget": 760,
+    "cases": 8740,
+    "frozen_corpus_sha256": "4859272e27dc150cf91807f69d2850342856befe05e04ac0405966f71740764c",
+    "independently_regenerated_corpus_sha256": "4859272e27dc150cf91807f69d2850342856befe05e04ac0405966f71740764c",
+    "exact_corpus_hash_match": true,
+    "donor_expected_outputs_recomputed": "8740/8740",
+    "exact_producer_archive_replay": "8740/8740",
+    "independent_reconstruction_replay": "8740/8740",
+    "execution_mode": "python -S with candidate source and canonical route/verifier only",
+    "result": "PASS"
+  },
+  "durable_promoted_archive": {
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V25_SUCCESSOR_20261010_V1.tar.xz",
+    "library_file_id": "libfile_bc38d37e13108191aafe124a3ed94d56",
+    "bytes": 299264,
+    "sha256": "deaabf9ebd51b6cd73020129877b89909ccb245544919e1a55ef2a93f0ac6b86",
+    "contents": "277 Python source files plus exact BRAIN_SLICE_MANIFEST.json; no pycache",
+    "byte_identity_check_after_extract": "278/278 files",
+    "archive_size_comparability_to_v24": false,
+    "comparison_reason": "Different deterministic archive construction from the prior canonical archive; raw source bytes remain the cross-frontier primary metric."
+  },
+  "conclusion": "Independent replay closes the sole recorded V25 promotion blocker for the bounded exact-symbolic Bytes research frontier.",
+  "truth_boundary": [
+    "MEASURED: exact V24 plus the persisted V25 transform reconstructs the exact 1,992,901-byte V25 Python source manifest.",
+    "MEASURED: all 277 Python source files match the producer V25 artifact byte-for-byte.",
+    "MEASURED: independently regenerated NEXT30 matches the frozen corpus SHA-256 exactly.",
+    "MEASURED: producer V25 artifact and independently reconstructed V25 each pass NEXT30 8,740/8,740.",
+    "NOT CLAIMED: semantic equivalence outside the bounded exact-symbolic contract, universal minimum, or Opus-family capability promotion.",
+    "CAPABILITY/PROMOTION CREDIT: 0."
+  ]
+}
