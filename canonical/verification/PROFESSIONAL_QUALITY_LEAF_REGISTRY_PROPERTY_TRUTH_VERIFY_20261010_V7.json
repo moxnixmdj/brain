@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_LEAF_REGISTRY_PROPERTY_TRUTH_VERIFY_20261010_V7",
+  "date": "2026-10-10",
+  "status": "PASS__R8_INDEPENDENT_EXECUTION_12_OF_12__CONTENT_ADDRESSED_BINDER_LAW_AUDIT__PROPERTY_TRUTH_9_OF_24__ZERO_EXTRA_AUTHORITY",
+  "repository": "moxnixmdj/brain",
+  "branch": "successor/r8-professional-execution-admit-20261010-v1",
+  "r8_independent_execution": {
+    "path": "canonical/verification/PROFESSIONAL_QUALITY_R8_EXECUTION_PROPERTY_TRUTH_INDEPENDENT_VERIFY_20261010_V1.json",
+    "git_blob_sha": "3963345904280f53cb2810313514491f7f6cae97",
+    "tests_run": 12,
+    "tests_passed": 12,
+    "tests_failed": 0,
+    "py_compile": "PASS"
+  },
+  "binder_law": {
+    "path": "canonical/runtime/professional_quality_leaf_binder_v2.py",
+    "git_blob_sha": "1a181b453271a2ce4fc112c3f6586afaf5effbd7",
+    "receipt_schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_LEAF_VERIFICATION_RECEIPT_V1",
+    "acceptance_sha256": "fae7b1ccf4f94a91a1fb4caa4a634e6883538a28382991d97c69278e574b67ce",
+    "root_contract_sha256": "b202196ae1d5891dcd2ad7eafa51ba26f997b072c3bbb8db1d6d6604c96e775f",
+    "manifest_git_blob_sha": "a7cad32c9fd969ff2c3857bb924c7bd746237ec2"
+  },
+  "content_addressed_checks": {
+    "r8_independent_verification_blob_exact": true,
+    "r8_property_verifier_runtime_blob_exact": true,
+    "r8_property_verifier_tests_blob_exact": true,
+    "r8_execution_guard_runtime_blob_exact": true,
+    "r8_execution_guard_tests_blob_exact": true,
+    "whole_leaf_scope_batch_verification_blob_exact": true,
+    "r8_leaf_receipt_blob_exact": true,
+    "manifest_blob_exact": true,
+    "registry_blob": "961938d08375a3ca60703b536683995e5374a3aa",
+    "registry_test_blob": "8d60b7a89065d704ebf7c3b135acc24f651b5f66"
+  },
+  "derived_truth": {
+    "verified_execution_leaf_count": 9,
+    "verified_semantic_leaf_count": 0,
+    "verified_leaf_count": 9,
+    "open_leaf_count": 15,
+    "r8_execution_leaf_property_truth": true,
+    "r8_semantic_leaf_closed": false,
+    "r8_root_closed": false,
+    "promotion_ready": false
+  },
+  "hard_nonclaims": [
+    "NO_R8_DEFEATER_DETECTION_COMPLETENESS",
+    "NO_R8_SEMANTIC_LEAF_CLOSURE",
+    "NO_R8_ROOT_CLOSURE",
+    "NO_GLOBAL_PROFESSIONAL_PROPERTY_TRUTH",
+    "NO_GLOBAL_QUALITY_ACCEPTANCE",
+    "NO_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
