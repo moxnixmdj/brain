@@ -58,6 +58,12 @@ R4_SOURCE_SCHEMA = "PROJECT_BRAIN_ARTIFACT_MEASUREMENT_VERIFY_V1"
 R4_GOVERNANCE_SCHEMA = "PROJECT_BRAIN_ARTIFACT_MEASUREMENT_BINDING_V1"
 R4_MEASUREMENT_RUNTIME = "canonical/runtime/content_addressed_artifact_measurement_v1.py"
 
+R5_KIND = "CONDITIONAL_EVALUATOR_UNCERTAINTY_ROBUST_MARGIN_CERTIFICATE"
+R5_ROOT = "R5_EVALUATOR_REFERENCE"
+R5_LEAVES = {"PQ::R5_EVALUATOR_REFERENCE::EXECUTION"}
+R5_SOURCE_SCHEMA = "PROJECT_BRAIN_GDPVAL_HYBRID_EVALUATOR_UNCERTAINTY_SPRITE_VERIFICATION_V1"
+R5_GOVERNANCE_SCHEMA = "PROJECT_BRAIN_GDPVAL_HYBRID_EVALUATOR_UNCERTAINTY_V1"
+
 
 def git_blob_sha(path: Path) -> str:
     data = path.read_bytes()
@@ -548,6 +554,100 @@ def _validate_r4(
         }
     return errors, claim_scope
 
+
+def _validate_r5(
+    entry: dict[str, Any],
+    source: dict[str, Any] | None,
+    governance: dict[str, Any] | None,
+    compiler_declared: Any,
+) -> tuple[list[str], Any]:
+    errors = _common_checks(entry, R5_ROOT, R5_LEAVES)
+    claim_scope = None
+    if source is not None:
+        if source.get("schema") != R5_SOURCE_SCHEMA:
+            errors.append("SOURCE_SCHEMA_INVALID")
+        if source.get("status") != "INDEPENDENT_SPRITE_EXACT_BLOB_REPLAY_PASS__11_OF_11__SEMANTIC_DECOMPOSITION_UNVERIFIED__ZERO_CREDIT":
+            errors.append("SOURCE_STATUS_NOT_ADMITTED")
+        subject = source.get("subject")
+        runtime = subject.get("runtime") if isinstance(subject, dict) else None
+        if not isinstance(runtime, dict) or runtime.get("git_blob_sha") != compiler_declared:
+            errors.append("SOURCE_RUNTIME_MISMATCH")
+        replay = source.get("replay")
+        if not isinstance(replay, dict) or replay.get("tests_passed") != 11 or replay.get("tests_total") != 11 or replay.get("failures") != []:
+            errors.append("SOURCE_REPLAY_INVALID")
+        required_mechanics = {
+            "POSITIVE_ROBUST_MARGIN_CERTIFICATE_PASSES",
+            "UNPROVED_DECOMPOSITION_FAILS_CLOSED",
+            "PUBLIC_RUBRIC_ONLY_SEMANTIC_CLASS_IS_FIREWALLED",
+            "NONINDEPENDENT_DECOMPOSITION_RECEIPT_FAILS_CLOSED",
+            "NONZERO_MASS_DIFFERENCE_VECTOR_FAILS_CLOSED",
+            "NONORTHOGONAL_LINEALITY_FAILS_EVEN_WITH_LARGE_NOMINAL_MARGIN",
+            "BOUNDED_UNCERTAINTY_CAN_BE_ABSORBED_BY_SUFFICIENT_CERTIFIED_MARGIN",
+            "EXCESS_BOUNDED_UNCERTAINTY_FAILS",
+            "DIMENSION_MISMATCH_FAILS_CLOSED",
+        }
+        if not required_mechanics <= set(source.get("verified_mechanics") or []):
+            errors.append("SOURCE_REQUIRED_EVALUATOR_MECHANICS_MISSING")
+        boundary = " ".join(source.get("verification_boundary") or [])
+        if "DOES_NOT_PROVE_THE_TRUE_CURRENT_GDPVAL_OWNER_EVALUATOR" not in boundary:
+            errors.append("SOURCE_SEMANTIC_DECOMPOSITION_LIMIT_MISSING")
+        if "NO_GDPVAL_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT" not in boundary:
+            errors.append("SOURCE_GLOBAL_SCOPE_LIMIT_MISSING")
+
+    if governance is not None:
+        if governance.get("schema") != R5_GOVERNANCE_SCHEMA:
+            errors.append("EVALUATOR_GOVERNANCE_SCHEMA_INVALID")
+        if governance.get("status") != "CANDIDATE_CONDITIONAL_THEOREM__ARITHMETIC_ONLY__ZERO_GDPVAL_AND_TERMINAL_CREDIT":
+            errors.append("EVALUATOR_GOVERNANCE_STATUS_INVALID")
+        runtime = governance.get("runtime")
+        if not isinstance(runtime, dict) or runtime.get("path") != "canonical/runtime/gdpval_hybrid_evaluator_uncertainty_v1.py":
+            errors.append("EVALUATOR_GOVERNANCE_RUNTIME_PATH_MISMATCH")
+        elif runtime.get("promotion_authority") is not False:
+            errors.append("EVALUATOR_GOVERNANCE_PROMOTION_AUTHORITY_INVALID")
+        reality = governance.get("current_reality")
+        if not isinstance(reality, dict):
+            errors.append("EVALUATOR_CURRENT_REALITY_INVALID")
+        else:
+            for field in (
+                "sound_complete_gdpval_owner_decomposition_bound",
+                "current_owner_pairwise_relation_bound",
+                "complete_opus55_220_evaluator_facing_laws_bound",
+                "gdpval_closed",
+            ):
+                if reality.get(field) is not False:
+                    errors.append("EVALUATOR_GLOBAL_OVERCLAIM:" + field)
+        firewall = governance.get("soundness_firewall")
+        if not isinstance(firewall, dict):
+            errors.append("EVALUATOR_SOUNDNESS_FIREWALL_INVALID")
+        else:
+            allowed = set(firewall.get("admissible_decomposition_proof_classes") or [])
+            required_allowed = {
+                "AUTHENTIC_CURRENT_OWNER_SEMANTICS",
+                "EXTENSIONALLY_EQUIVALENT_CURRENT_PREFERENCE_RELATION",
+                "INDEPENDENTLY_VERIFIED_RESTRICTED_OWNER_CLASS",
+                "EVALUATOR_INDEPENDENT_SCOPE_COMPLETE_BOUND",
+            }
+            if not required_allowed <= allowed:
+                errors.append("EVALUATOR_ALLOWED_PROOF_CLASSES_MISSING")
+            forbidden = set(firewall.get("forbidden_as_semantic_containment_proof") or [])
+            if "PUBLIC_RUBRIC_ONLY" not in forbidden or "UNVERIFIED_RECONSTRUCTED_GRADER" not in forbidden:
+                errors.append("EVALUATOR_FORBIDDEN_PROOF_CLASSES_MISSING")
+        claim_scope = {
+            "kind": R5_KIND,
+            "guarantees": [
+                "ROBUST_MARGIN_CHECKED_WITH_EXACT_RATIONAL_ARITHMETIC",
+                "UNPROVED_OR_NONINDEPENDENT_DECOMPOSITION_FAILS_CLOSED",
+                "ARBITRARY_LINEALITY_REQUIRES_EXACT_ORTHOGONALITY",
+                "BOUNDED_UNCERTAINTY_MUST_FIT_CERTIFIED_MARGIN",
+            ],
+            "limitations": [
+                "NO_PROOF_THE_TRUE_CURRENT_OWNER_EVALUATOR_IS_IN_THE_DECOMPOSITION",
+                "NO_PUBLIC_RUBRIC_TO_OWNER_SEMANTIC_PROMOTION",
+                "NO_GLOBAL_R5_LEAF_OR_ROOT_CLOSURE",
+            ],
+        }
+    return errors, claim_scope
+
 def validate_entry(entry: dict[str, Any], *, repo_root: Path = ROOT) -> dict[str, Any]:
     errors: list[str] = []
     if not isinstance(entry, dict):
@@ -591,6 +691,8 @@ def validate_entry(entry: dict[str, Any], *, repo_root: Path = ROOT) -> dict[str
         handler_errors, claim_scope = _validate_r4(
             entry, source, verifier, compiler_declared, repo_root
         )
+    elif kind == R5_KIND:
+        handler_errors, claim_scope = _validate_r5(entry, source, verifier, compiler_declared)
     else:
         handler_errors, claim_scope = ["CLAIM_KIND_UNSUPPORTED"], None
     errors.extend(handler_errors)
