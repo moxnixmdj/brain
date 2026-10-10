@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK20_V12_IDENTITY_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__ADMISSION_CLOSED_V3_IDENTITY__ZERO_EXPOSURE",
+  "claim_path": "canonical/governance/TB_SCIENCE_RANK20_LOGICAL_ATTEMPT_CLAIM_BINDING_20261010_V12.json",
+  "claim_git_blob_sha": "c081d1a7ece49e2d5313503548be19a00ef8a274",
+  "canonical_sha256": "bc4522cfc367a3fd250ce53d0812b8a856f575dcf7eb00e8104781cfe0d29a15",
+  "execution_claim_binding_digest": "sha256:bc4522cfc367a3fd250ce53d0812b8a856f575dcf7eb00e8104781cfe0d29a15",
+  "logical_attempt_id": "aeadf4a998d2392b4aa277f1fdd6d31f057a81305dd98f9038f3a8b8bb14be68",
+  "logical_attempt_identity_basis": "SLOT_ID_PLUS_TASK_DIGEST_PLUS_EXECUTION_CLAIM_BINDING_DIGEST",
+  "behavior_git_blob_sha": "d149c4071b0359e902aaeb844ce738f55c34f992",
+  "behavior_refinement_verifier_git_blob_sha": "72c2987218c491404163ee353aaa5edac08c3b04",
+  "capability_first_admission_git_blob_sha": "b03861813f9b9a730659e6e0b6e7301a45061b04",
+  "execution_branch": "execute/tb-science-rank20-20261010-v3",
+  "activation_filename": "ACTIVATE_RANK20_V3_PR.json",
+  "task_read": false,
+  "task_started": false,
+  "benchmark_trials_consumed": 0,
+  "pass": true,
+  "terminal_credit_delta": 0
+}
