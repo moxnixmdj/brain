@@ -15,6 +15,7 @@ PATHS = {
     "mission": ROOT / "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
     "activation": ROOT / "canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_SCOPE_BATCH_ACTIVATION_20261010_V1.json",
     "verification": ROOT / "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_SCOPE_BATCH_VERIFY_20261010_V1.json",
+    "r10_slots": ROOT / "canonical/verification/PROFESSIONAL_QUALITY_R10_PROOF_SLOT_DIRECT_VERIFY_20261010_V1.json",
 }
 
 
@@ -127,6 +128,37 @@ class ProfessionalScopeBatchControlPlaneReconciliationV1Tests(unittest.TestCase)
         self.assertEqual(ctl["claim_scope_construction_required_count"], 0)
         self.assertEqual(ctl["property_truth_ready_count"], 24)
         self.assertEqual(ctl["property_truth_closed_count"], 0)
+
+    def test_r10_structural_slot_currentness_is_not_property_truth(self):
+        r10 = load("r10_slots")
+        self.assertEqual(
+            blob(PATHS["r10_slots"]),
+            "d7de9a123c02f46e26e182cd45d95e22eee2ee8c",
+        )
+        self.assertEqual(
+            r10["independent_replay"]["direct_adversarial_cases_passed"], 13
+        )
+        self.assertFalse(
+            r10["authority_boundary"]["underlying_fact_truth_authority"]
+        )
+        self.assertFalse(
+            r10["authority_boundary"]["whole_leaf_property_truth_proved"]
+        )
+        slots = self.assurance["professional_quality_r10_structural_proof_slots"]
+        self.assertEqual(
+            slots["verification_git_blob_sha"],
+            "d7de9a123c02f46e26e182cd45d95e22eee2ee8c",
+        )
+        self.assertEqual(slots["direct_adversarial_cases_passed"], 13)
+        self.assertFalse(slots["underlying_fact_truth_authority"])
+        self.assertFalse(slots["whole_leaf_property_truth_proved"])
+        guard = self.assurance["professional_quality_r10_execution_enforcement"]
+        self.assertEqual(
+            guard["currentness"],
+            "HISTORICAL_VERIFICATION_ONLY__VERIFIED_GUARD_RUNTIME_BLOB_DIFFERS_FROM_CURRENT_MAIN_GUARD_RUNTIME",
+        )
+        self.assertFalse(guard["current_guard_exact_behavioral_reverification_claimed"])
+        self.assertFalse(guard["whole_leaf_property_truth_proved"])
 
     def test_no_scope_to_property_truth_laundering(self):
         texts = "\n".join(
