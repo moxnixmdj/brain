@@ -1,15 +1,15 @@
 {
   "schema": "PROJECT_BRAIN_ACTIVE_GOAL_HIERARCHY_V1",
-  "status": "CANONICAL_FAIL_CLOSED__POSTWAVE_OPUS55_ACCEPTANCE_CLOSURE_ACTIVE",
-  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
-  "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
-  "active_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+  "status": "CANONICAL_FAIL_CLOSED__GENERAL_CAPABILITY_FIRST__BENCHMARK_AUDIT_SUBORDINATE",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "active_capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "active_probe": null,
   "probe_state": "TERMINAL_V3_ONE_SHOT_CONSUMED__3352_OF_3352_PASS__12_OF_12_BEHAVIORAL_CONTRACTS_PASS__19_OF_19_PROVISIONAL_BEHAVIORAL_FAMILIES_PASS__5_OF_19_FROZEN_OPUS55_ACCEPTANCE_PROTOCOL_RESULTS_PASS__14_OPEN",
-  "current_parent_blocker": "TERMINAL_FALSE__12_OF_19_FAMILIES_OPEN__20_OF_38_ATOMIC_PREDICATES_UNRESOLVED__SEE_CURRENT_TERMINAL_AUTHORITY_NEXT_FOR_EXACT_ACTIVE_ROUTE",
-  "next_required_action_class": "RUN_CURRENT_TERMINAL_COVERAGE_PARTITION_V3__CONTINUE_DEEPEST_NECESSITY_AND_J_G_FALSIFICATION_ON_30_CURRENT_TRUTHS__COMPLETE_SHARED_ROOT3_EFFECT_TOTALITY_AND_COMPOSITION_CLOSURE__USE_ASTRA_ONLY_FOR_IRREDUCIBLE_MATCHED_BEHAVIORAL_CALIBRATION__DIRECT_EXTERNAL_EVIDENCE_LAST__DONOR_REMOVAL_CLEAN_ROOM_FINALITY",
+  "current_parent_blocker": "GENERAL_CAPABILITY_FRONTIER_SELECTION__CHOOSE_HIGHEST_EXPECTED_VERIFIED_GENERAL_CAPABILITY_GAIN_PER_RESOURCE_FROM_CURRENT_CAUSAL_EVIDENCE",
+  "next_required_action_class": "SELECT_NONDOMINATED_GENERAL_CAPABILITY_ACTION__REUSE_ADAPT_VERIFY_PROMOTE_FIRST__BENCHMARK_ONLY_AS_AUDIT_FALSIFIER_CALIBRATION_OR_CAUSAL_PROBE",
   "forbidden_local_frontier": "HELDOUT_003_REPLAY__SECOND_CARRIER_FOR_HELDOUT_003__PROMOTION_FROM_UNAUTHORIZED_HELDOUT_003_RESULT__CAPABILITY_RUNTIME_REPAIR_FROM_UNAUTHORIZED_HELDOUT_003_RESULT__CARRIER_CORRECTION_BEFORE_FRESH_ORTHOGONAL_GATE_FREEZE__HAND_PICKED_CARRIER_SUBSET__HELDOUT_005_REPLAY__HELDOUT_002_EXECUTION__SOURCE_NAME_WHITELIST_ONLY_PATCH__BLIND_ABSOLUTE_SCORE_THRESHOLD__CONTRACT_PARSER_REPAIR__DISCOVERY_RETUNING__PACKAGE_HINTS__TASK_SPECIFIC_LITERALS__PARENT_ASTRONOMY_EROS_KEPLER_REAL_TASK_20260930_001_REPLAY__PARENT_GEOPHYSICS_ENERGY_REAL_TASK_20260930_002_REPLAY__PARENT_CLIMATE_MAUNA_LOA_CO2_ACCELERATION_OPEN_RESEARCH_TASK_A_20260930_001_REPLAY__TERMINAL_V3_REPLAY__NAMED_BENCHMARK_SCORE_INHERITANCE__PROVISIONAL_BEHAVIORAL_PASS_PROMOTED_AS_OPUS55_OWNERSHIP__HIDDEN_EXTERNAL_TARGET_CAPABILITY_PROVIDER_PROMOTED_AS_BRAIN_OWNERSHIP__CLEAN_ACCEPTANCE_CASE_SPEND_BEFORE_SOURCE_GATE_V2_PASS",
-  "progress_level_minimum": "PERMANENT_VERIFIED_OPUS_5_5_OR_BETTER_CAPABILITY_OWNERSHIP",
+  "progress_level_minimum": "VERIFIED_GENERAL_REUSABLE_CAPABILITY_GAIN_OR_INDEPENDENT_FALSIFICATION_THAT_NARROWS_A_GENERAL_CAPABILITY_CLAIM",
   "probe_budget": {
     "repairs_used_on_active_probe": 0,
     "max_repairs_from_single_probe": 1,
@@ -138,10 +138,10 @@
     "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_SCHOLARLY_SOURCE_ADMISSION_QUALIFICATION_20260930_V1.json",
     "parent_capability_promoted": false
   },
-  "active_operating_mode": "POSTWAVE_OPUS55_ACCEPTANCE_CLOSURE_WITH_RECURSIVE_OBS_AND_PROOF_DIRECTED_REALITY_COMPRESSION",
+  "active_operating_mode": "CAPABILITY_FIRST_CAUSAL_DEVELOPMENT__BENCHMARKS_AUDIT_FALSIFICATION_ONLY",
   "progress_scoreboard_path": "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
   "synthetic_probe_frontier_default": false,
-  "real_task_first": false,
+  "real_task_first": true,
   "recursive_obs": {
     "required": true,
     "law": "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
@@ -162,7 +162,7 @@
     "selected_route_execution_preflight_required": true,
     "max_route_frontier_age_hours": 24,
     "max_selected_route_preflight_age_hours": 2,
-    "hierarchy_action_gate": "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V11.json"
+    "hierarchy_action_gate": "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V12.json"
   },
   "last_real_output_event": {
     "event_id": "FIN_SACCR_RWA_TB4_VERIFIED_FAILURE_20261001",
@@ -188,7 +188,7 @@
     "terminal_success_delta": 0,
     "retained_control": "DETERMINISTIC_FIRST_C3_ROUTER"
   },
-  "parent_frontier_capability": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+  "parent_frontier_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "last_frontier_reconciliation": {
     "status": "POSTWAVE_ACCEPTANCE_CALIBRATION_INDEPENDENTLY_VERIFIED__2_OF_19_CLOSED__17_OPEN",
     "blocker": "17_PREDECLARED_OPUS55_ACCEPTANCE_PROTOCOL_RESULTS_OPEN",
@@ -200,7 +200,7 @@
     "parent_capability_promoted": false,
     "whole_envelope_complete": false
   },
-  "next_progress_event_target": "CURRENT_TERMINAL_AUTHORITY_NEXT_PASS_OR_FALSIFICATION__OR_ANOTHER_CAUSALLY_BOUND_ZERO_REALITY_DELTA__NO_TERMINAL_PROMOTION_WITHOUT_SEPARATE_INDEPENDENT_REDUCTION",
+  "next_progress_event_target": "VERIFIED_GENERAL_CAPABILITY_GAIN_OR_CAUSAL_FALSIFICATION__THEN_OPTIONAL_MILESTONE_AUDIT",
   "carrier_path_authority_correction": {
     "status": "VALIDATED_BY_FRESH_NON_PARENT_CANARY__FRESH_PARENT_TASK_REQUIRED",
     "evidence_path": "canonical/capabilities/obsolescence/PARENT_OPEN_ENDED_CARRIER_PATH_AUTHORITY_CORRECTION_20260930_V1.json",
@@ -279,14 +279,14 @@
     "knowledge": "EXTERNAL_JIT",
     "capabilities": "EXTERNAL_WINNERS_ARE_SPECIMENS__ACQUIRE_EXISTING_REUSABLE_MECHANISM__INTERNALIZE_IN_BRAIN__VERIFY__SAVE_PERMANENTLY",
     "general_computation_substrate": "MAY_BE_EXTERNAL_MODEL_OR_RUNTIME__MUST_NOT_BE_CREDITED_AS_OPAQUE_CAPABILITY_PROVIDER",
-    "opus_bar": "EQUAL_OR_BETTER",
+    "opus_bar": "MILESTONE_AUDIT_ONLY__NOT_PARENT_OPTIMIZATION_TARGET",
     "capability_externalization": false,
-    "underlying_capability_invention": false
+    "underlying_capability_invention": "LAST_RESORT_ONLY_AFTER_RELEVANT_REUSE_ADAPT_SUBSTITUTE_COMPOSE_CONFIGURE_INTEGRATE_SPACE_IS_SPECIFICALLY_FALSIFIED"
   },
   "reasoning_authority": {
     "law": "canonical/laws/REASONING_DURABILITY_AND_DECISION_RECEIPT_LAW_V1.md",
     "theory_receipt": "canonical/reasoning/2026-10-01_TERMINAL_SUCCESS_PREMORTEM_AND_FAILURE_IMMUNITY_V1.json",
-    "execution_first_optimizer": "canonical/governance/EXECUTION_FIRST_SELF_PROVING_OPTIMIZER_V1.json",
+    "execution_first_optimizer": "canonical/governance/EXECUTION_FIRST_SELF_PROVING_OPTIMIZER_V2.json",
     "export_live_reconciliation": "canonical/reasoning/2026-10-01_COMBINED_EXPORT_LIVE_RECONCILIATION_V1.json",
     "evidence_saturation_activation": "canonical/reasoning/2026-10-02_EVIDENCE_SATURATION_MINIMUM_REALITY_QUERY_ACTIVATION_V1.json",
     "evidence_saturation_law": "canonical/laws/EVIDENCE_SATURATION_AND_MINIMUM_REALITY_QUERY_LAW_V1.md",
@@ -296,8 +296,8 @@
   "opus_5_5_envelope_path": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
   "opus_5_5_ownership_matrix_path": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
   "all_family_obsolescence_campaign": {
-    "status": "ACTIVE__SHARED_RESIDUAL_LANES__ZERO_CREDIT_FROM_DISCOVERY",
-    "directive": "OBSOLETE_EVERYTHING",
+    "status": "AUDIT_ONLY__NOT_PRIMARY_DEVELOPMENT_SCHEDULER",
+    "directive": "AUDIT_AND_FALSIFY_GENERAL_CAPABILITY_CLAIMS__DO_NOT_SCORE_CHASE",
     "path": "canonical/governance/ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1.json",
     "unfinished_families_at_activation": 17,
     "shared_residual_lanes": 5,
@@ -1193,5 +1193,39 @@
       "NO_NEW_ACCEPTANCE_OR_OWNERSHIP_CREDIT",
       "NO_FRESH_REALITY_AUTHORITY"
     ]
+  },
+  "development_authority": "canonical/governance/CURRENT_DEVELOPMENT_AUTHORITY.json",
+  "goal_hierarchy_action_gate": "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V12.json",
+  "execution_first_optimizer": "canonical/governance/EXECUTION_FIRST_SELF_PROVING_OPTIMIZER_V2.json",
+  "development_loop": [
+    "UNDERSTAND",
+    "PLAN",
+    "COMPOSE",
+    "ACT",
+    "VERIFY",
+    "LEARN",
+    "GENERALIZE",
+    "COMPRESS",
+    "REUSE"
+  ],
+  "benchmark_policy": {
+    "opus_5_5": "MILESTONE_CHECKPOINT_AND_CAPABILITY_SPECIMEN__NOT_PARENT_OBJECTIVE",
+    "named_benchmarks": "AUDIT_FALSIFIER_CALIBRATION_OR_CAUSAL_PROBE_ONLY",
+    "red_row_is_job": false,
+    "score_delta_is_general_progress": false,
+    "task_specific_patch_credit": 0,
+    "general_causal_link_required_for_development": true
+  },
+  "development_scheduler": {
+    "primary_object": "MAXIMIZE_VERIFIED_GENERAL_REUSABLE_RELIABLE_RESOURCE_EFFICIENT_PROBLEM_SOLVING_CAPABILITY",
+    "authority": "canonical/governance/CURRENT_DEVELOPMENT_AUTHORITY.json",
+    "benchmark_rank_authority": false,
+    "acceptance_family_rank_authority": false,
+    "reuse_first": true
+  },
+  "control_plane_precedence": {
+    "development_scheduling": "canonical/governance/CURRENT_DEVELOPMENT_AUTHORITY.json",
+    "terminal_or_milestone_truth": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+    "rule": "IF_LEGACY_OR_NESTED_BENCHMARK_SCHEDULING_FIELDS_CONFLICT_WITH_CURRENT_DEVELOPMENT_AUTHORITY__THEY_ARE_HISTORICAL_OR_AUDIT_ONLY_AND_HAVE_ZERO_PARENT_DEVELOPMENT_AUTHORITY"
   }
 }
