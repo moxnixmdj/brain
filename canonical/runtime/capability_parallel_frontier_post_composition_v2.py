@@ -6,10 +6,14 @@ from typing import Any,Mapping
 from canonical.runtime import capability_parallel_frontier_v2 as core
 
 SCHEMA="PROJECT_BRAIN_POST_COMPOSITION_PARALLEL_FRONTIER_V2"
+RESIDUAL="canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json"
 PROF="canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json"
 ASSURANCE="canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json"
 BYTES="canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json"
 R2="canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json"
+OQ_WORK="ESCAPE_OQ_SCOPE_COMPLETE_ACCEPTANCE_INSTANTIATION"
+GAP_A_WORK="ESCAPE_GAP_A_AUTHENTICATED_ROW_PROOFS"
+GAP_B_WORK="ESCAPE_GAP_B_STRICT_PROGRESS_ROW_PROOFS"
 PROF_WORK="PROFESSIONAL_QUALITY_V7_PROPERTY_TRUTH_DEPLETION"
 ASSURANCE_WORK="ASSURANCE_UVCK_V2_PROMOTION_GATES"
 R2_WORK="R2_FINANCE_SEMANTIC_ADEQUACY_TAIL"
@@ -42,6 +46,49 @@ def _cand_id(f:dict,wid:str):
  rows=[x for x in f.get("candidates",[]) if isinstance(x,dict) and x.get("work_id")==wid]
  if len(rows)!=1: raise PostCompositionFrontierV2Error("CANDIDATE_CARDINALITY:"+wid)
  return rows[0]
+
+def _classification(doc:Mapping[str,Any],rid:str):
+ rows=doc.get("classifications")
+ if not isinstance(rows,list): raise PostCompositionFrontierV2Error("RESIDUAL_CLASSIFICATIONS")
+ found=[x for x in rows if isinstance(x,Mapping) and x.get("residual_id")==rid]
+ if len(found)!=1: raise PostCompositionFrontierV2Error("RESIDUAL_CLASS_CARDINALITY:"+rid)
+ return found[0]
+
+def _residual(f:dict,root:Path):
+ d,sha=_load(root,RESIDUAL); status=str(d.get("status") or "")
+ if not status.startswith("DERIVED_CURRENT_CLASSIFICATION__"): raise PostCompositionFrontierV2Error("RESIDUAL_STATUS")
+ acct=d.get("accounting")
+ if not isinstance(acct,Mapping) or any(acct.get(k)!=0 for k in ("acceptance_credit_delta","capability_credit_delta","ownership_credit_delta","terminal_credit_delta")): raise PostCompositionFrontierV2Error("RESIDUAL_CREDIT")
+ oq=_classification(d,"ESCAPE_OQ_SHARED_ACCEPTANCE_LAWS")
+ a=_classification(d,"ESCAPE_GAP_A_ACQUISITION_TOTALITY")
+ b=_classification(d,"ESCAPE_GAP_B_INTERNAL_ROUTE_STRICT_PROGRESS")
+ for row in (oq,a,b):
+  if not str(row.get("new_primitive_status") or "").startswith("NOT_ESTABLISHED"): raise PostCompositionFrontierV2Error("RESIDUAL_NEW_PRIMITIVE")
+ ai=a.get("active_gap_a_count"); bi=b.get("active_gap_b_count"); ap=a.get("parked_unresolved_count"); bp=b.get("parked_unresolved_count")
+ if any(isinstance(x,bool) or not isinstance(x,int) or x<0 for x in (ai,bi,ap,bp)) or ap!=bp: raise PostCompositionFrontierV2Error("RESIDUAL_TOPOLOGY_COUNTS")
+ ar=a.get("parked_unresolved_rows"); br=b.get("parked_rows")
+ if not isinstance(ar,list) or not isinstance(br,list) or ar!=br or len(ar)!=ap or len(set(ar))!=ap or any(not isinstance(x,str) or not x for x in ar): raise PostCompositionFrontierV2Error("RESIDUAL_PARKED_ROWS")
+ ab=a.get("binding_reconciliation"); bb=b.get("binding_reconciliation")
+ if not isinstance(ab,Mapping) or not isinstance(bb,Mapping) or ab.get("path")!=bb.get("path") or ab.get("git_blob_sha")!=bb.get("git_blob_sha"): raise PostCompositionFrontierV2Error("RESIDUAL_BINDING")
+ bind_path=ab.get("path"); bind_sha=ab.get("git_blob_sha")
+ if not isinstance(bind_path,str) or not isinstance(bind_sha,str) or _git_blob_sha(root/bind_path)!=bind_sha: raise PostCompositionFrontierV2Error("RESIDUAL_BINDING_HASH")
+ _source(f,RESIDUAL)["git_blob_sha"]=sha
+ oqrow=_cand_id(f,OQ_WORK); oqrow["scheduler_state"]="AUDIT_ONLY"; oqrow["prerequisites_satisfied"]=False
+ arow=_cand_id(f,GAP_A_WORK); arow["scheduler_state"]="READY_EVIDENCE" if ai else "AUDIT_ONLY"; arow["prerequisites_satisfied"]=bool(ai)
+ arow["causal_role"]=f"{ai}_ACTIVE_INFORMATION_ACQUISITION_ROWS_REQUIRE_REAL_CURRENT_AVAILABILITY_OR_ACQUIRABILITY_EVIDENCE__{ap}_ROWS_PARKED"
+ arow["readiness"]=f"{ai}_ACTIVE_ACQUISITION_ROWS__EVIDENCE_ACQUISITION_OR_FALSIFICATION_WITH_EXISTING_ADAPTER"
+ aev=dict(arow.get("read_only_evidence") or {}); aev.update({"source":RESIDUAL,"source_git_blob_sha":sha,"active_gap_a_count":ai,"active_gap_b_count":bi,"parked_unresolved_count":ap,"parked_rows":list(ar),"active_binding":bind_path,"active_binding_git_blob_sha":bind_sha,"vector_bounds_complete":False,"dynamic_current_pointer_follow":True}); arow["read_only_evidence"]=aev
+ brow=_cand_id(f,GAP_B_WORK)
+ if bi:
+  brow["scheduler_state"]="READY_EVIDENCE"; brow["prerequisites_satisfied"]=True; strict=True
+ elif bp:
+  brow["scheduler_state"]="PARKED"; brow["prerequisites_satisfied"]=False; strict=False
+ else:
+  brow["scheduler_state"]="AUDIT_ONLY"; brow["prerequisites_satisfied"]=False; strict=False
+ brow["causal_role"]=f"{bi}_ACTIVE_STRICT_PROGRESS_ROWS__{bp}_PARKED_UNRESOLVED_ROWS"
+ brow["readiness"]=f"{bi}_ACTIVE_GAP_B_ROWS__{bp}_PARKED_ROWS"
+ bev=dict(brow.get("read_only_evidence") or {}); bev.update({"source":RESIDUAL,"source_git_blob_sha":sha,"active_gap_b_count":bi,"parked_unresolved_count":bp,"parked_rows":list(br),"strict_progress_witness_required_now":strict,"vector_bounds_complete":False,"dynamic_current_pointer_follow":True}); brow["read_only_evidence"]=bev
+ return {"git_blob_sha":sha,"active_gap_a_count":ai,"active_gap_b_count":bi,"parked_unresolved_count":ap,"parked_rows":list(ar),"active_binding":bind_path,"active_binding_git_blob_sha":bind_sha}
 
 def _prof(f:dict,root:Path):
  d,sha=_load(root,PROF); status=str(d.get("status") or "")
@@ -94,11 +141,11 @@ def _r2(f:dict,root:Path):
  return {"git_blob_sha":sha,"version":ver}
 
 def refresh_post_composition_currentness(frontier:Mapping[str,Any],*,root:Path=core.ROOT):
- f=json.loads(json.dumps(frontier)); p=_prof(f,root); a=_assurance(f,p,root); b=_bytes(f,root); r=_r2(f,root)
+ f=json.loads(json.dumps(frontier)); rr=_residual(f,root); p=_prof(f,root); a=_assurance(f,p,root); b=_bytes(f,root); r=_r2(f,root)
  for row in f.get("candidates",[]):
   if isinstance(row,dict) and row.get("scheduler_state")=="PARKED":
    row["original_scheduler_state"]="PARKED"; row["scheduler_state"]="BLOCKED"
- f["dynamic_currentness"]={"professional_pointer_follow":True,"assurance_pointer_follow":True,"bytes_pointer_follow":True,"r2_pointer_follow":True,"parked_normalized_to_nonprimary":True,"professional":p,"assurance":a,"bytes":b,"r2":r,"other_source_families_dynamic_follow":False}
+ f["dynamic_currentness"]={"residual_reuse_pointer_follow":True,"professional_pointer_follow":True,"assurance_pointer_follow":True,"bytes_pointer_follow":True,"r2_pointer_follow":True,"parked_normalized_to_nonprimary":True,"residual_reuse":rr,"professional":p,"assurance":a,"bytes":b,"r2":r,"other_source_families_dynamic_follow":False}
  return f
 
 def plan_current_post_composition_frontier():
