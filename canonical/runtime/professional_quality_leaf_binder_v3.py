@@ -79,9 +79,16 @@ def harden_base_output(
     for row in results:
         if not isinstance(row, dict):
             continue
+        if row.get("kind") != "SEMANTIC" or row.get("admitted") is not True:
+            continue
         verdict = _semantic_candidate_verdict(repo_root=repo_root, receipt_result=row)
         if verdict is None:
-            continue
+            verdict = {
+                "pass": False,
+                "status": "FAIL_CLOSED",
+                "reason": "SEMANTIC_PROPERTY_TRUTH_ADMISSION_MISSING",
+                "leaf_property_truth_admissible": False,
+            }
         semantic_gate_results.append({
             "leaf_id": row.get("leaf_id"),
             "path": row.get("path"),
