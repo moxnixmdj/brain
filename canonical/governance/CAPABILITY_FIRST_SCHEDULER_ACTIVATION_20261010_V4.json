@@ -66,5 +66,9 @@
   "r3_state": {
     "status": "SUFFICIENT_CONTROL_LOOP_CLOSURE_UNDER_AVAILABLE_EVIDENCE",
     "observability_boundary_policy": "PARK_AND_REOPEN_ON_NEW_EFFECT_DISTINGUISHING_EVIDENCE"
+  },
+  "verification": {
+    "path": "canonical/verification/R2_SHARED_CAUSE_RESIDUAL_LEDGER_V1_VERIFY_20261010_V1.json",
+    "role": "INDEPENDENT_ISOLATED_RUNTIME_AND_SCHEDULER_REGRESSION_RECEIPT"
   }
 }
