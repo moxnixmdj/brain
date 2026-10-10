@@ -28,20 +28,37 @@ def _clean_fixture(root: Path) -> None:
     )
     _write(
         root,
+        "canonical/runtime/certified_reached_escape_state_constructor_v2.py",
+        "from canonical.runtime import certified_reached_escape_state_constructor_v1 as v1\n"
+        "from canonical.runtime import reached_escape_state_kernel_v1 as kernel\n",
+    )
+    _write(
+        root,
         "canonical/runtime/live_brain_runtime_v1.py",
         'SURFACES=("CERTIFIED_REACHED_ESCAPE_STATE_CONSTRUCTOR_V1",)\n'
-        "def f(payload):\n"
-        "    from canonical.runtime.certified_reached_escape_state_constructor_v1 import construct\n"
-        "    return construct(payload)\n",
+        "def run(payload, reached_escape_authority_verifier=None):\n"
+        "    authority_verifier = reached_escape_authority_verifier\n"
+        "    from canonical.runtime import certified_reached_escape_state_constructor_v2 as constructor\n"
+        "    return constructor.construct(\n"
+        "        payload,\n"
+        "        policy_authority_verifier=authority_verifier,\n"
+        "        discriminator_authority_verifier=authority_verifier,\n"
+        "    )\n",
     )
     _write(
         root,
         "canonical/runtime/unified_cognitive_fabric_v1.py",
-        'DIRECT={"REACHED_ESCAPE_STATE": "certified_reached_escape_state_constructor_v1.construct"}\n'
-        "def f(payload):\n"
-        "    from canonical.runtime import certified_reached_escape_state_constructor_v1 as reached_escape_state\n"
-        "    out = reached_escape_state.construct(payload)\n"
-        "    return out\n",
+        'DIRECT={"REACHED_ESCAPE_STATE": "certified_reached_escape_state_constructor_v2.construct + reached_escape_repair_cycle_v1.run"}\n'
+        "def f(payload, semantic_authority_verifier=None):\n"
+        "    from canonical.runtime import certified_reached_escape_state_constructor_v2 as reached_escape_state\n"
+        "    authority = reached_escape_state.construct(\n"
+        "        payload,\n"
+        "        policy_authority_verifier=semantic_authority_verifier,\n"
+        "        discriminator_authority_verifier=semantic_authority_verifier,\n"
+        "    )\n"
+        '    if authority.get("truth_authority_bound") is not True:\n'
+        "        return authority\n"
+        "    return authority\n",
     )
 
 
