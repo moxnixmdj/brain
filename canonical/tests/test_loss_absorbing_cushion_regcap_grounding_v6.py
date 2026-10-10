@@ -219,11 +219,22 @@ class Tests(unittest.TestCase):
             "property_separates_any_candidate": False,
             "additional_authenticated_discriminator_required": True,
         }
+        request = {
+            "pass": True,
+            "status": "PASS__MINIMUM_FOUR_WAY_POLICY_CHANGING_INFORMATION_REQUEST",
+            "minimum_observation_count": 1,
+            "concept_identity_authority": False,
+            "terminal_authority": False,
+        }
         with patch.object(v6.v5, "ground", return_value=base), patch.object(
             v6.nonsep,
             "verify_shared_loss_absorption",
             return_value=certificate,
-        ), patch.object(v6.pair, "resolve_relative") as pair_fn:
+        ), patch.object(
+            v6.four_request,
+            "compile_request",
+            return_value=request,
+        ) as request_fn, patch.object(v6.pair, "resolve_relative") as pair_fn:
             out = v6.ground(
                 "loss-absorbing cushion",
                 source_id="doc:shared",
@@ -236,8 +247,13 @@ class Tests(unittest.TestCase):
         self.assertFalse(out["reverse_classification_from_loss_absorption_authorized"])
         self.assertTrue(out["additional_authenticated_discriminator_required"])
         self.assertEqual(out["four_way_loss_absorption_nonseparation"], certificate)
+        self.assertTrue(out["minimum_policy_changing_information_request_available"])
+        self.assertEqual(out["minimum_policy_changing_information_request"], request)
+        self.assertFalse(out["minimum_policy_changing_information_request"]["concept_identity_authority"])
+        self.assertFalse(out["minimum_policy_changing_information_request"]["terminal_authority"])
+        request_fn.assert_called_once_with(list(v6.FOUR), repo_root=None)
         self.assertIn(
-            "FOUR_WAY_LOSS_ABSORPTION_PROPERTY_AUTHENTICATED_NONSEPARATING",
+            "MINIMUM_AUTHENTICATED_GOVERNING_REQUIREMENT_OBSERVATION_REQUEST_COMPILED",
             out["boundary"],
         )
         pair_fn.assert_not_called()
