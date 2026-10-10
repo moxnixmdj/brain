@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_CHARTOGRAPHY_SYNTHETIC_REASONING_QUALIFICATION_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__DETERMINISTIC_6_CASE_NONTERMINAL_SUITE__3_OF_3_DISCOVERABLE_TESTS__EXECUTION_STILL_BLOCKED_ON_V3_PREFLIGHT",
+  "branch": "successor/chartography-synthetic-reasoning-qualification-20261010-v1",
+  "base_commit": "cd69b063474f8199fc37bb873b6d0addcf640e35",
+  "exact_blobs": {
+    "generator": "1378cde88e501384a103500906f58bfeb06b7881",
+    "tests": "b7a2e00d0e7c4b0b4685456a3b6b8bf262c47153",
+    "governance": "b9f22cb4cf16d8efc15640068bec2a834c14a152"
+  },
+  "independent_replay": {
+    "environment": "SPRITE__brain-capability-first-scheduler-verify-20261008-v1",
+    "generator_self_check": "PASS__6_CASES__6_DISTINCT_HASHES__ZERO_EXTERNAL_DEPENDENCIES",
+    "unittest_collected": 3,
+    "unittest_passed": 3,
+    "unittest_failed": 0,
+    "mutation_hash_drift_rejected": true
+  },
+  "suite": {
+    "case_count": 6,
+    "distinct_skills": [
+      "BAR_ORDERING",
+      "BAR_RATIO",
+      "LINE_TREND",
+      "LINE_CROSSING",
+      "SCATTER_COUNT",
+      "GROUPED_BAR_COMPARISON"
+    ],
+    "pass_rule": "6_OF_6_EXACT",
+    "terminal_cases_consumed": 0,
+    "external_datasets_used": 0,
+    "judge_calls": 0
+  },
+  "current_execution_authority": false,
+  "prerequisite": "CONTENT_ADDRESSED_CHARTOGRAPHY_V3_RUNTIME_FIT_PASS",
+  "hard_nonclaims": [
+    "NO_MODEL_EXECUTION_PERFORMED_BY_THIS_RECEIPT",
+    "NO_CHARTOGRAPHY_SCORE_OR_THRESHOLD_CERTIFICATE",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "judge_calls": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
