@@ -1,0 +1,27 @@
+{
+  "schema": "PROJECT_BRAIN_R2_V86_BOUND_TRUTH_REENTRY_RECONCILIATION_V1",
+  "status": "RECONCILED__V85_MONOTONIC_BOUND_TRUTH_ORIGIN_PRESERVED__REAL_CONTROLLER_CONSUMPTION_AND_P3_REEVALUATION_PROVED__ONE_PRIMARY_FINANCE_RESIDUAL_REMAINS__ZERO_CREDIT",
+  "prior_version": "V85",
+  "current_version": "V86",
+  "verification_path": "canonical/verification/R2_BOUND_TRUTH_REENTRY_VERIFY_20261010_V1.json",
+  "verification_git_blob_sha": "3feddecd063d4fa1d083a91bd51e478958cb4bad",
+  "fixed_point_runtime_path": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
+  "fixed_point_runtime_git_blob_sha": "34d62b109b99f38e62995544871460b266d2c7df",
+  "controller_runtime_path": "canonical/runtime/general_adequate_decision_controller_v1.py",
+  "controller_runtime_git_blob_sha": "3737baedb87c6b4212ba55826b7f58d2955920c7",
+  "integration_test_path": "canonical/tests/test_r2_fixed_point_bound_truth_reentry_v1.py",
+  "integration_test_git_blob_sha": "890785d33c14360c49b5b324c0597b4ffe7703b4",
+  "verified_integration": {
+    "fixed_point_patch_reenters_real_controller": true,
+    "real_controller_reuses_bound_context_truth_payload": true,
+    "p3_truth_payloads_by_predicate_id_receives_bound_truth": true,
+    "p3_re_evaluated_after_insertion": true,
+    "success_depends_on_bound_truth_consumption": true,
+    "provider_semantic_truth_authority": false,
+    "terminal_authority": false
+  },
+  "finance_tail_closed": false,
+  "global_open_world_closure_delta": false,
+  "acceptance_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
