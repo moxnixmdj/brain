@@ -34,6 +34,6 @@ class Tests(unittest.TestCase):
   self.assertEqual(self.run_patch({v.GATE_ADAPTER_VERIFY:d})["reason"],"GATE_ADAPTER_NOT_INDEPENDENTLY_VERIFIED")
  def test_root_terminal_self_authority_fails_closed(self):
   wl=load(v.WORKLIST);row=next(x for x in wl["roots"] if x["root_id"]=="R10_ANALYSIS_DECISION");p=row["binding"]["path"];d=load(p);d["terminal_authority"]=True
-  self.assertEqual(self.run_patch({p:d})["reason"],"ROOT_BINDING_SELF_AUTHORITY_FORBIDDEN")
+  self.assertEqual(self.run_patch({p:d})["reason"],"BINDING_TERMINAL_AUTHORITY_FORBIDDEN")
 
 if __name__=="__main__":unittest.main(verbosity=2)
