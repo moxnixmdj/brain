@@ -1,43 +1,42 @@
 {
   "schema": "PROJECT_BRAIN_BYTES_ACTIVE_STATE_V1",
-  "status": "ACTIVE_RESEARCH__NO_IPOLYS_SUCCESSOR_FRONTIER__SUCCESSOR_READY",
+  "status": "ACTIVE_RESEARCH__LAZY_ALGEBRAICFIELD_SUCCESSOR_FRONTIER__SUCCESSOR_READY",
   "date": "2026-10-10",
   "mission_lock": "Find the minimum resource-feasible executable description of the required capability set conditional on already-owned Brain substrate.",
   "governing_laws": [
     "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V1.md",
     "canonical/laws/BYTES_RESOURCE_BOUNDED_MINIMUM_MECHANISM_LAW_V1.md"
   ],
-  "source_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_NOIPOLYS_SUCCESSOR_EXECUTION_20261010_V1.json",
+  "source_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_LAZY_ALGEBRAICFIELD_SUCCESSOR_EXECUTION_20261010_V1.json",
   "exact_symbolic_state": {
-    "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_NOIPOLYS_SUCCESSOR_EXECUTION_20261010_V1.json",
+    "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_LAZY_ALGEBRAICFIELD_SUCCESSOR_EXECUTION_20261010_V1.json",
     "status": "FRESH_MEASURED_PHYSICAL_RESEARCH_CANDIDATE__NOT_PROMOTED",
-    "raw_python_source_bytes": 6497773,
-    "B_exec_raw_python_source_bytes": 6500533,
+    "raw_python_source_bytes": 6474730,
+    "B_exec_raw_python_source_bytes": 6477490,
     "B_verify_semantic_digest_raw_bytes": 1358,
-    "python_files": 296,
-    "final_untouched_qualification": "3220/3220",
-    "stock_donor_positive_control": "3220/3220",
-    "clean_room_execution": "3220/3220",
-    "archive_replay": "3220/3220",
-    "canonical_tool_identity_recheck": "3220/3220",
-    "manifest_sha256": "b9e9ea0c7549c7e7b981aa9685a3fc60217226dc845746f26cbc06806a47dad2",
-    "comparable_archive_bytes": 1127596,
-    "comparable_archive_sha256": "68bad9e89b992a03e1f2898319479717b952cf58f442cc3350d0c1d3419c9ad2",
-    "raw_improvement_vs_previous_frontier_bytes": 58426,
-    "comparable_xz_improvement_vs_same_recipe_predecessor_bytes": 4824,
+    "python_files": 295,
+    "final_untouched_qualification": "3450/3450",
+    "stock_donor_positive_control": "3450/3450",
+    "clean_room_execution": "3450/3450",
+    "archive_replay": "3450/3450",
+    "manifest_sha256": "a83b7a9e5e678e96f057144a500d7c772b3c45cdd416e21bcaeb706500d14694",
+    "comparable_archive_bytes": 1123864,
+    "comparable_archive_sha256": "c30e728158028606cded1a60defba1034a0e500a4d89f10b2c637d036c9b3875",
+    "raw_improvement_vs_previous_frontier_bytes": 23043,
+    "comparable_xz_improvement_vs_same_recipe_predecessor_bytes": 3732,
     "promotion_credit_from_this_record": 0
   },
   "current_bottleneck": {
     "subsystem": "polys",
-    "successor_trace_raw_python_source_bytes": 1403682,
-    "previous_trace_raw_python_source_bytes": 1462108,
-    "last_structural_cut": "POLYS_RING_IPOLYS_COMPATIBILITY_MIXIN_REMOVAL",
+    "successor_trace_raw_python_source_bytes": 1380639,
+    "previous_trace_raw_python_source_bytes": 1403682,
+    "last_structural_cut": "POLYS_GAUSSIAN_ALGEBRAICFIELD_BRANCH_LOCAL_IMPORT",
     "required_surface": [
       "factor",
       "coefficient",
       "exact roots degree <= 4"
     ],
-    "next_action": "Rerank remaining loaded polys files using spent/exploratory corpora only; freeze a new physical structural cut before touching QUAL_SUCCESSOR_NEXT7_20261010_V1."
+    "next_action": "Continue zero-execution import-boundary decomposition with spent corpora only; freeze a physical cut before touching QUAL_SUCCESSOR_NEXT8_20261010_V1."
   },
   "rejected_do_not_reopen_without_new_evidence": [
     "parameter count as terminal metric",
@@ -69,16 +68,15 @@
   "fresh_local_donor_evidence": "canonical/evidence/BYTES_SYMPY_1_14_DEPENDENCY_CENSUS_20261010_V1.json",
   "execution_reconciliation": {
     "stock_donor_available_in_current_runtime": "SymPy 1.14.0 plus mpmath 1.3.0",
-    "predecessor_6556199_byte_candidate_superseded": true,
-    "fresh_candidate_raw_python_source_bytes": 6497773,
-    "fresh_candidate_B_exec_raw_python_source_bytes": 6500533,
-    "untouched_qualification": "3220/3220",
-    "stock_donor_positive_control": "3220/3220",
-    "clean_room_execution": "3220/3220",
-    "archive_replay": "3220/3220",
-    "canonical_tool_identity_recheck": "3220/3220",
-    "action_taken": "Removed PolyRing's unused IPolys compatibility-mixin edge, physically removed compatibility.py, retained independently reached polynomial mechanisms, and re-ran NEXT6 under exact canonical route/verifier bytes.",
-    "physical_next_step": "Continue from the 6,497,773-byte physical candidate; prefer another import-boundary cut over internal donor rewrites."
+    "predecessor_6497773_byte_candidate_superseded": true,
+    "fresh_candidate_raw_python_source_bytes": 6474730,
+    "fresh_candidate_B_exec_raw_python_source_bytes": 6477490,
+    "untouched_qualification": "3450/3450",
+    "stock_donor_positive_control": "3450/3450",
+    "clean_room_execution": "3450/3450",
+    "archive_replay": "3450/3450",
+    "action_taken": "Deferred Gaussian-domain AlgebraicField construction to as_AlgebraicField, physically removed algebraicfield.py, and qualified on fresh NEXT7.",
+    "physical_next_step": "Continue from the 6,474,730-byte physical candidate; target another zero-execution eager dependency."
   },
   "historical_reported_predecessor": {
     "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_DONOR_SLICE_CHECKPOINT_20261010_V1.json",
@@ -87,16 +85,15 @@
     "qualification": "1854/1854",
     "provenance": "USER_SUPPLIED_TRANSCRIPT_CHECKPOINT"
   },
-  "fresh_execution_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_NOIPOLYS_SUCCESSOR_EXECUTION_20261010_V1.json",
+  "fresh_execution_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_LAZY_ALGEBRAICFIELD_SUCCESSOR_EXECUTION_20261010_V1.json",
   "next_frozen_qualification": {
-    "id": "QUAL_SUCCESSOR_NEXT7_20261010_V1",
-    "cases": 3450,
-    "seed": 2645751,
-    "per_operation_budget": 300,
-    "corpus_sha256": "a891f77a92fc6eb44c299ac89afd3f958d30c9759047804478f9239e158c88ef",
+    "id": "QUAL_SUCCESSOR_NEXT8_20261010_V1",
+    "cases": 3680,
+    "seed": 2828427,
+    "per_operation_budget": 320,
+    "corpus_sha256": "609e173869fda62ec19ac634fc84f2b0b3d110a30d0b3851ed80870038bffc95",
     "generator": "canonical/research/bytes/tools/generate_qualification_v1.py",
     "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_POLYS_CUT",
-    "canonical_regeneration_byte_identical": true,
     "spent": false
   },
   "durable_artifact_persistence": {
@@ -107,12 +104,13 @@
       "canonical/research/bytes/tools/rebuild_candidate_v3.py",
       "canonical/research/bytes/tools/rebuild_candidate_v4.py",
       "canonical/research/bytes/tools/rebuild_candidate_v5.py",
+      "canonical/research/bytes/tools/rebuild_candidate_v6.py",
       "canonical/research/bytes/tools/build_physical_slice_v1.py"
     ],
     "exact_route": "canonical/research/bytes/tools/exact_symbolic_route_v1.py",
     "qualification_generator": "canonical/research/bytes/tools/generate_qualification_v1.py",
-    "local_comparable_source_archive_bytes": 1127596,
-    "local_comparable_source_archive_sha256": "68bad9e89b992a03e1f2898319479717b952cf58f442cc3350d0c1d3419c9ad2",
+    "local_comparable_source_archive_bytes": 1123864,
+    "local_comparable_source_archive_sha256": "c30e728158028606cded1a60defba1034a0e500a4d89f10b2c637d036c9b3875",
     "library_binary_status": "NOT_RETRIED_IN_THIS_CHECKPOINT",
     "rule": "GitHub reconstruction tooling, hashes, measurements and evidence are canonical; promotion credit remains zero."
   },
@@ -124,16 +122,15 @@
     "generator_sha256": "de6cf261f4e78b010c2454347409a309880066e18f89f7953bb477a7502f59e4",
     "spent": false
   },
-  "previous_fresh_execution_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_RINGSERIES_ATAN_SUCCESSOR_EXECUTION_20261010_V1.json",
+  "previous_fresh_execution_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_NOIPOLYS_SUCCESSOR_EXECUTION_20261010_V1.json",
   "spent_successor_qualification": {
-    "id": "QUAL_SUCCESSOR_NEXT6_20261010_V1",
-    "cases": 3220,
-    "corpus_sha256": "0320387ab3679d3374df2228f5249ef2606c974ac35c6667f1270d3d27a888e7",
-    "candidate_result": "3220/3220",
-    "stock_donor_replay": "3220/3220",
-    "clean_room_replay": "3220/3220",
-    "archive_replay": "3220/3220",
-    "canonical_tool_identity_recheck": "3220/3220",
+    "id": "QUAL_SUCCESSOR_NEXT7_20261010_V1",
+    "cases": 3450,
+    "corpus_sha256": "a891f77a92fc6eb44c299ac89afd3f958d30c9759047804478f9239e158c88ef",
+    "candidate_result": "3450/3450",
+    "stock_donor_replay": "3450/3450",
+    "clean_room_replay": "3450/3450",
+    "archive_replay": "3450/3450",
     "spent": true
   },
   "fresh_falsification_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_NEXT3_FALSIFICATION_20261010_V1.json",
@@ -149,13 +146,14 @@
     "spent": true
   },
   "prior_spent_successor_qualification": {
-    "id": "QUAL_SUCCESSOR_NEXT5_20261010_V1",
-    "cases": 2990,
-    "corpus_sha256": "c9ed7ab14f80edfcefca44a6d992c15b4321f1b955939560892b590a3121d78d",
-    "candidate_result": "2990/2990",
-    "stock_donor_replay": "2990/2990",
-    "clean_room_replay": "2990/2990",
-    "archive_replay": "2990/2990",
+    "id": "QUAL_SUCCESSOR_NEXT6_20261010_V1",
+    "cases": 3220,
+    "corpus_sha256": "0320387ab3679d3374df2228f5249ef2606c974ac35c6667f1270d3d27a888e7",
+    "candidate_result": "3220/3220",
+    "stock_donor_replay": "3220/3220",
+    "clean_room_replay": "3220/3220",
+    "archive_replay": "3220/3220",
+    "canonical_tool_identity_recheck": "3220/3220",
     "spent": true
   }
 }
