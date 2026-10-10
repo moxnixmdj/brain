@@ -56,7 +56,7 @@
       "work_id": "PROFESSIONAL_QUALITY_V7_WHOLE_LEAF_DOMAIN_EVIDENCE",
       "work_type": "RELIABILITY_IMPROVEMENT",
       "source": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
-      "causal_role": "AFTER_12_OF_12_SAME_SUBJECT_COMPOSITION__CLOSE_WHOLE_LEAF_SCOPE_TRANSPORT_OR_CERTIFIED_COMPLETE_UNIONS_AND_DOMAIN_SEMANTIC_EXECUTION_EVIDENCE_BEFORE_PROMOTION",
+      "causal_role": "AFTER_12_OF_12_SAME_SUBJECT_COMPOSITION__REUSE_SHARED_WHOLE_LEAF_TOTALITY_OR_COMPLETE_UNION_PROOF_PATTERN__THEN_DOMAIN_SEMANTIC_EXECUTION_EVIDENCE_AND_FULL_MAIN_REGRESSION",
       "readiness": "ACTIONABLE_READ_ONLY_EVIDENCE_AND_VERIFICATION_ON_COMPOSED_V7_SUBJECT",
       "claims_new_primitive": false,
       "score_state": "UNBOUND",
@@ -85,7 +85,11 @@
         "open_global_leaf_count": 24,
         "domain_semantic_closure": false,
         "domain_execution_closure": false,
-        "vector_bounds_complete": false
+        "vector_bounds_complete": false,
+        "whole_leaf_residual_ledger_path": "canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_RESIDUAL_LEDGER_20261010_V1.json",
+        "whole_leaf_residual_ledger_git_blob_sha": "ae5503829ad340cccef287f37ff70e4ab9288d33",
+        "bounded_witness_leaf_count": 24,
+        "shared_residual_class": "WHOLE_LEAF_INPUT_DOMAIN_TOTALITY_OR_INDEPENDENT_CERTIFIED_COMPLETE_UNION"
       }
     },
     {
