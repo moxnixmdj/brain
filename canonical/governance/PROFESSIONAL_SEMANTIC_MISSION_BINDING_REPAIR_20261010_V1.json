@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_SEMANTIC_MISSION_BINDING_REPAIR_20261010_V1",
+  "date": "2026-10-10",
+  "status": "DIAGNOSED_AND_REPAIR_CONTRACT_FROZEN__MUTABLE_MISSION_POINTER_BLOB_IS_NOT_A_STABLE_SEMANTIC_CLAIM_IDENTITY_COORDINATE__ZERO_PROPERTY_OR_TERMINAL_CREDIT",
+  "defect": {
+    "current_claim_pack_path": "canonical/governance/PROFESSIONAL_SEMANTIC_TOTALITY_FROZEN_CLAIM_PACK_20261010_V2.json",
+    "current_claim_pack_git_blob_sha": "f16aab3760d4f5958da986782632f3cb2bbd2646",
+    "frozen_mission_pointer_blob_sha": "51327d24f82809279e37e51cf3d994d13a6f1ff3",
+    "current_mission_pointer_path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
+    "current_mission_pointer_git_blob_sha": "afb55399f54fdf79bf5e4253950527233b64fb41",
+    "claim_guard_rule": "mission_blob_sha_must_equal_supplied_current_mission_blob_sha",
+    "failure_mode": "ROUTINE_CURRENTNESS_BOOKKEEPING_CHANGES_POINTER_BYTES_AND_INVALIDATES_ALL_SEMANTIC_CLAIM_IDS_WITHOUT_CHANGING_THE_REAL_MISSION"
+  },
+  "preserved_mission_truth": {
+    "immutable_authority_path": "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+    "immutable_authority_git_blob_sha": "13c470645b037bbb46245c687dd35197b420d51a",
+    "pointer_authoritative_source_path": "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+    "real_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "opus_5_5_role": "FIRST_FRONTIER_CHECKPOINT_NOT_TERMINAL_OBJECTIVE",
+    "mission_semantics_changed": false
+  },
+  "repair_contract": {
+    "claim_mission_blob_sha_must_bind": "IMMUTABLE_REAL_MISSION_AUTHORITY_BLOB",
+    "current_pointer_role": "RESOLVER_AND_CURRENTNESS_ASSERTION_ONLY",
+    "pointer_checks": [
+      "AUTHORITATIVE_SOURCE_PATH_MUST_EQUAL_THE_BOUND_IMMUTABLE_MISSION_AUTHORITY_PATH",
+      "POINTER_REAL_OBJECTIVE_MUST_EQUAL_IMMUTABLE_AUTHORITY_REAL_OBJECTIVE",
+      "POINTER_OPUS_ROLE_MUST_EQUAL_IMMUTABLE_AUTHORITY_OPUS_ROLE"
+    ],
+    "invalidation_rules": [
+      "IMMUTABLE_MISSION_AUTHORITY_BYTES_CHANGE",
+      "CURRENT_POINTER_RESOLVES_TO_A_DIFFERENT_AUTHORITY_PATH",
+      "CURRENT_POINTER_OBJECTIVE_OR_OPUS_ROLE_DISAGREES_WITH_BOUND_AUTHORITY"
+    ],
+    "non_invalidation_rule": "MUTABLE_PROGRESS_SCHEDULER_R2_BYTES_PROFESSIONAL_ASSURANCE_OR_OTHER_CURRENTNESS_FIELDS_MAY_CHANGE_WITHOUT_CHANGING_SEMANTIC_CLAIM_IDENTITY_WHEN_THE_BOUND_MISSION_AUTHORITY_IS_UNCHANGED"
+  },
+  "consequence": {
+    "regenerate_semantic_claim_pack_required": true,
+    "old_claim_ids_transport_authority": false,
+    "old_root_certificates_transport_authority": false,
+    "property_truth_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_CURRENT_V2_SEMANTIC_CLAIM_ROOT_CLOSURE",
+    "NO_CROSS_CLAIM_CERTIFICATE_TRANSPORT",
+    "NO_SEMANTIC_PROPERTY_TRUTH",
+    "NO_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
