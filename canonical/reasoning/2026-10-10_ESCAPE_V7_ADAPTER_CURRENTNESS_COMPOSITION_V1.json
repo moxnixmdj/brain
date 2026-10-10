@@ -1,0 +1,12 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_RECEIPT_V1",
+  "date": "2026-10-10",
+  "status": "VERIFIED_COMPOSITION_REPAIR",
+  "problem": "Main V6 added a verified Gap-A policy-cover realization adapter while the canonical V3 audit still hardcoded an older shared-gap binding. A naive overwrite would either lose the adapter or leave the audit stale.",
+  "composition": "INHERIT_MAIN_V6_EXACTLY__REPAIR_AUDIT_CURRENTNESS__PROJECT_COMBINED_STATE_AS_V7",
+  "key_fact": "THE_ADAPTER_IMPORTS_ONLY_GAP_A_FROM_THE_AUDIT_MODULE__THE_CURRENTNESS_PATCH_PRESERVES_GAP_A_VALUE_AND_ALL_ROW_PROOF_SEMANTICS",
+  "result": "ONE_CURRENT_V7_CONTRACT_PRESERVES_ADAPTER_CAPABILITY_AND_FAIL_CLOSED_DYNAMIC_BINDING_CURRENTNESS",
+  "verification": "canonical/verification/ESCAPE_V7_ADAPTER_CURRENTNESS_COMPOSITION_VERIFY_20261010_V1.json",
+  "row_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
