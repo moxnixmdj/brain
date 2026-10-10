@@ -96,6 +96,20 @@ class R2SharedCauseResidualLedgerV1Tests(unittest.TestCase):
             ["POLICY_CHANGING_OBSERVABILITY"],
         )
 
+    def test_v81_four_way_bare_disposition_maps_to_identity_discrimination(self):
+        out = ledger.build_ledger(
+            _authority(
+                "BARE_DISPOSITION_LOSS_ABSORPTION_IS_PROVED_NONSEPARATING_ACROSS_BOUND_"
+                "CCOB_CCYB_TLAC_MREL_AND_REQUIRES_AN_ADDITIONAL_AUTHENTICATED_DISCRIMINATOR"
+            )
+        )
+        self.assertTrue(out["classification_complete"], out)
+        self.assertEqual(out["clauses"][0]["cause_ids"], ["IDENTITY_DISCRIMINATION"])
+        self.assertEqual(
+            out["clauses"][0]["parent_cause_ids"],
+            ["POLICY_CHANGING_OBSERVABILITY"],
+        )
+
     def test_live_current_authority_is_fully_classified(self):
         out = ledger.load_current_ledger()
         self.assertTrue(out["general_mechanism_closed"])
