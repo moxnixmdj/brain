@@ -1,0 +1,141 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_CONSERVATIVE_HYPEREXPAND_V30_SUCCESSOR_EXECUTION_V1",
+  "status": "FRESH_SUCCESSOR_EXECUTION__HYPEREXPAND_IMPLEMENTATION_DOMAIN_EXCLUSION_V30__ZERO_CAPABILITY_CREDIT",
+  "recorded_at": "2026-10-10",
+  "predecessor": {
+    "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_CONSERVATIVE_PROFILE_V29_SUCCESSOR_EXECUTION_20261010_V1.json",
+    "package_raw_python_source_bytes": 1923390,
+    "B_exec_raw_python_source_bytes": 1926150,
+    "manifest_sha256": "fefb4f023644b1d63fd5a693289226b64080c161adbd3f782a3c361232c4462a",
+    "fresh_qualification": "9660/9660",
+    "calibrated_same_writer_xz_extreme_bytes": 288256
+  },
+  "selection": {
+    "id": "CONSERVATIVE_SPENT_NEXT34_HYPEREXPAND_IMPLEMENTATION_PROFILE_V30",
+    "corpus": "QUAL_SUCCESSOR_NEXT34_20261010_V1",
+    "spent_cases": 9660,
+    "method": "Keep the top-level hyperexpand dispatcher intact, but replace 37 heavy hypergeometric/Meijer construction, reduction, origin-selection and nested execution bodies with explicit fail-closed stubs.",
+    "selected_function_bodies": [
+      "make_simp",
+      "Hyper_Function.__new__",
+      "Hyper_Function.build_invariants",
+      "Hyper_Function.difficulty",
+      "Hyper_Function._is_suitable_origin",
+      "G_Function.__new__",
+      "G_Function.compute_buckets",
+      "Formula._compute_basis",
+      "Formula.__init__",
+      "FormulaCollection.__init__",
+      "MeijerFormula.__init__",
+      "MeijerFormula.try_instantiate",
+      "MeijerFormulaCollection.__init__",
+      "MeijerFormulaCollection.lookup_origin",
+      "Operator.apply",
+      "ShiftA.__init__",
+      "ShiftB.__init__",
+      "UnShiftA.__init__",
+      "UnShiftB.__init__",
+      "MeijerUnShiftA.__init__",
+      "MeijerUnShiftA.__str__",
+      "MeijerUnShiftB.__init__",
+      "MeijerUnShiftB.__str__",
+      "MeijerUnShiftC.__init__",
+      "MeijerUnShiftC.__str__",
+      "MeijerUnShiftD.__init__",
+      "MeijerUnShiftD.__str__",
+      "ReduceOrder.__new__",
+      "ReduceOrder._meijer",
+      "_reduce_order",
+      "reduce_order",
+      "reduce_order_meijer",
+      "make_derivative_operator",
+      "try_polynomial",
+      "hyperexpand_special",
+      "hyperexpand.do_replace",
+      "hyperexpand.do_meijer"
+    ],
+    "selected_original_body_bytes": 13968,
+    "net_raw_reduction_bytes": 10925,
+    "module_graph_unchanged": true
+  },
+  "falsification_and_rescue": {
+    "rejected_broad_cut": "Also stubbing top-level hyperexpand itself.",
+    "rejected_result": "ROOTS 834/840 on spent NEXT34",
+    "first_failure_case_in_roots_partition": 40,
+    "traceback_boundary": "polyroots.roots -> roots_quadratic -> simplify -> hyperexpand",
+    "rescue": "Restore only top-level hyperexpand dispatcher; keep 37 heavy implementation bodies fail-closed.",
+    "rescued_roots_result": "840/840",
+    "rescued_full_spent_NEXT34": "9660/9660",
+    "interpretation": "The dispatcher is causally required even for non-hyper quartic simplification, while its hypergeometric/Meijer implementation branches are not reached by the tested bounded domains."
+  },
+  "measured_candidate": {
+    "status": "PHYSICALLY_REWRITTEN_RESEARCH_CANDIDATE__NOT_OPUS_PROMOTED",
+    "python_files": 277,
+    "package_raw_python_source_bytes": 1912465,
+    "router_raw_python_source_bytes": 2760,
+    "B_exec_raw_python_source_bytes": 1915225,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "raw_improvement_vs_v29_bytes": 10925,
+    "manifest_sha256": "9e8322e1034dd8ced3100b1c66503d0d7fd51f52ab43553672f1d36d19fe78b8",
+    "durable_source_archive_bytes": 286100,
+    "durable_source_archive_sha256": "8f405c1191ec46ed1ed996d0312179b3dee79c4c6e8ec81d0c88a32216017448",
+    "calibrated_xz_improvement_vs_v29_bytes": 2156
+  },
+  "qualification": {
+    "spent_NEXT34": {
+      "id": "QUAL_SUCCESSOR_NEXT34_20261010_V1",
+      "cases": 9660,
+      "corpus_sha256": "9a2d5eaa036c21d39c8340a7e59cd3bfe29c1030abe18f3b5ac83803fd82dfe6",
+      "candidate": "9660/9660",
+      "spent": true
+    },
+    "fresh_NEXT35": {
+      "id": "QUAL_SUCCESSOR_NEXT35_20261010_V1",
+      "seed": 5916079,
+      "per_operation_budget": 860,
+      "cases": 9890,
+      "corpus_sha256": "82f9e5b695f4c54a7b87d91a90e96bf18ac631cfce39a268f7d40988b8adeb71",
+      "candidate": "9890/9890",
+      "independent_copy": "9890/9890",
+      "extracted_archive_replay": "9890/9890",
+      "spent": true
+    }
+  },
+  "reproducibility": {
+    "predecessor_reconstruction": "canonical/research/bytes/tools/rebuild_candidate_v29.py",
+    "transform": "canonical/research/bytes/tools/conservative_hyperexpand_prune_v30.py",
+    "successor_reconstruction": "canonical/research/bytes/tools/rebuild_candidate_v30.py",
+    "route": "canonical/research/bytes/tools/exact_symbolic_route_v1.py",
+    "semantic_digest": "canonical/research/bytes/tools/semantic_digest_v1.py",
+    "qualification_generator": "canonical/research/bytes/tools/generate_qualification_v1.py"
+  },
+  "durable_artifact": {
+    "library_status": "PERSISTED_IN_CHATGPT_LIBRARY",
+    "library_file_id": "libfile_676854d594648191bbed9f50634de0c6",
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V30_SUCCESSOR_20261010_V1.tar.xz",
+    "bytes": 286100,
+    "sha256": "8f405c1191ec46ed1ed996d0312179b3dee79c4c6e8ec81d0c88a32216017448",
+    "extracted_source_identity": "277/277 Python files; manifest 9e8322e1034dd8ced3100b1c66503d0d7fd51f52ab43553672f1d36d19fe78b8"
+  },
+  "next_frozen_qualification": {
+    "id": "QUAL_SUCCESSOR_NEXT36_20261010_V1",
+    "seed": 6000000,
+    "per_operation_budget": 880,
+    "cases": 10120,
+    "corpus_sha256": "df8c2d19f48522ceb532f1bf397dc23d599220cd8c43a7a8757d8a50ed0b0d87",
+    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT36_20261010_V1.jsonl",
+    "library_file_id": "libfile_edfcbe93b9108191956e5fcdbd4bb4ed",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT"
+  },
+  "truth_boundary": [
+    "MEASURED: V30 is 10,925 raw Python-source bytes smaller than V29 and its same-regime durable archive is 2,156 bytes smaller.",
+    "MEASURED: the broad dispatcher-deletion hypothesis is false on spent NEXT34; restoring only the dispatcher closes the failures.",
+    "MEASURED: rescued V30 passes spent NEXT34 9,660/9,660.",
+    "MEASURED: exact V30 passes fresh NEXT35 9,890/9,890 on candidate, independent copy, and extracted archive.",
+    "INFERRED: the 37 retained fail-closed hypergeometric/Meijer implementation bodies are outside the tested bounded input domains; finite non-use remains non-universal.",
+    "NOT CLAIMED: out-of-scope behavior preservation, universal SymPy correctness, absolute information-theoretic minimum, or Opus-family promotion.",
+    "PROMOTION CREDIT: 0."
+  ],
+  "next_action": "Rerank exact V30 using spent NEXT35 only. Keep NEXT36 untouched until a new physical cut is frozen.",
+  "promotion_credit": 0
+}
