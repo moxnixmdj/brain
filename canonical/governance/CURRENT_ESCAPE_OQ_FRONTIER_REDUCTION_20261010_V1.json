@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_ESCAPE_OQ_FRONTIER_REDUCTION_20261010_V1",
+  "date": "2026-10-10",
+  "status": "CURRENT_13_ESCAPE_ACCEPTANCE_FRONTIER_EXECUTABLY_REDUCED_TO_O11_Q2__TWO_SHARED_ACCEPTANCE_LAWS__ZERO_CREDIT",
+  "source_manifest": {
+    "path": "canonical/governance/ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_20261010_V2.json",
+    "git_blob_sha": "f3a566a982dcd867c583eafd24c6f5dd3baa0530",
+    "row_count": 13
+  },
+  "source_acceptance_regime_classification": {
+    "path": "canonical/governance/FROZEN_18_ACCEPTANCE_REGIME_EXHAUSTIVE_CLASSIFICATION_20261007_V1.json",
+    "git_blob_sha": "dc9f0c5147349fa806d2a0296a8139c637d85b83"
+  },
+  "runtime": {
+    "path": "canonical/runtime/current_escape_oq_frontier_reduction_v1.py",
+    "git_blob_sha": "b21be4b3f457f116a7d5dfa657699b34cd59cad0"
+  },
+  "tests": {
+    "path": "canonical/tests/test_current_escape_oq_frontier_reduction_v1.py",
+    "git_blob_sha": "579522f8bf5a55fd5f552562802370052949fb16"
+  },
+  "independent_verification": {
+    "path": "canonical/verification/CURRENT_ESCAPE_OQ_FRONTIER_REDUCTION_INDEPENDENT_VERIFY_20261010_V1.json",
+    "git_blob_sha": "e69d5b60343260811c7d637258ec1a2dbed7663b",
+    "result": "PASS__5_OF_5"
+  },
+  "reduction": {
+    "current_frontier_row_count": 13,
+    "O_OBJECTIVE_ACCEPTANCE": 11,
+    "Q_QUALITATIVE_RELATIVE_ORDER": 2,
+    "mixed": 0,
+    "unclassified": 0,
+    "Q_rows": [
+      "PROWORK_GDPVAL_GE_1846",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT"
+    ]
+  },
+  "primary_research_objects": {
+    "O_OBJECTIVE_ACCEPTANCE": "PROVE_ONE_REUSABLE_SCOPE_COMPLETE_BRAIN_SIDE_OBJECTIVE_ACCEPTANCE_LAW_THAT_CAN_INSTANTIATE_EACH_CURRENT_O_ROW_WITH_EXACT_ROW_SCOPE_BINDING__PREFER_COMPLETE_OBJECTIVE_OR_UNIVERSAL_FORMAL_SCOPE_PROOFS_OVER_TARGET_EXECUTION",
+    "Q_QUALITATIVE_RELATIVE_ORDER": "PROVE_ONE_SHARED_AUTHENTICATED_PROFESSIONAL_QUALITY_ORDER_OR_ROBUST_COMMON_POLICY_DOMINANCE_LAW_COVERING_THE_GDPVAL_AND_AA_BRIEFCASE_QUALITY_FRONTIER"
+  },
+  "scheduler_rule": [
+    "DO_NOT_TREAT_THIRTEEN_BENCHMARK_LABELS_AS_THIRTEEN_PRIMARY_ACCEPTANCE_RESEARCH_PROGRAMS",
+    "ATTACK_O_AND_Q_SHARED_ACCEPTANCE_LAWS_FIRST",
+    "RETAIN_EACH_ROW_AS_A_SCOPE_BINDING_AND_COUNTEREXAMPLE_PARTITION",
+    "A_SCOPE_COMPLETE_UNIVERSAL_COVER_PROOF_PREEMPTS_BOTH_O_AND_Q_ROW_EXECUTION"
+  ],
+  "relation_to_gap_a_b": "GAP_A_B_REMAINS_VALID_AS_EXECUTION_OR_ACQUISITION_STATE__O_Q_IS_A_STRONGER_ACCEPTANCE_LAW_COMPRESSION_FOR_ROOT_RESEARCH_SCHEDULING__NEITHER_REDUCTION_BY_ITSELF_PROVES_PROGRESS_TOTALITY",
+  "hard_nonclaims": [
+    "NO_O_CLOSURE",
+    "NO_Q_CLOSURE",
+    "NO_CC_R3_CERTIFICATE",
+    "NO_ESCAPE_PROGRESS_TOTALITY",
+    "NO_U_EMPTY",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
