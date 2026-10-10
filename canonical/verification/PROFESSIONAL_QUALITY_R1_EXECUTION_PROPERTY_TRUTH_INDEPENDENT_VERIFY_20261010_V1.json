@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R1_EXECUTION_PROPERTY_TRUTH_INDEPENDENT_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_SECOND_SPRITE__PYCOMPILE__5_OF_5_FALSIFICATION_TESTS__46_CASE_R1_EXECUTION_ACCEPTANCE__ONE_LEAF_PROPERTY_TRUTH_ONLY__ZERO_ROOT_QUALITY_OR_TERMINAL_CREDIT",
+  "repository": "moxnixmdj/brain",
+  "verification_branch": "successor/r1-execution-property-truth-20261010-v1",
+  "subject": {
+    "leaf_id": "PQ::R1_TARGET_SPECIFICATION::EXECUTION",
+    "root_id": "R1_TARGET_SPECIFICATION",
+    "manifest_acceptance": "RUN_ROOT_RELEVANT_POSITIVE_NEAR_MISS_AND_ADVERSARIAL_CASES_ON_EXACT_ARTIFACT_OR_RUNTIME_BYTES_AND_BIND_OBSERVED_OUTCOMES_TO_THE_ROOT_CONTRACT"
+  },
+  "exact_blobs": {
+    "property_verifier_runtime": "bba1798a8a977830dd410ec60bb19acf42927a85",
+    "property_verifier_tests": "6b21b931d197fe8c7ce41dc6649643059de726b3",
+    "leaf_manifest": "a7cad32c9fd969ff2c3857bb924c7bd746237ec2",
+    "defeater_catalog": "8b92e5cf76f767054f55414b87014e03d43460b8",
+    "structural_target_verification": "dcee55ba17d15154117100de6aebd34716ad3e3e",
+    "whole_leaf_scope_batch_verification": "4c2d40a262f18f34bb35f94b59660d60972d45ef",
+    "behavioral_contract_schema": "b173d8fc6e29df3cec3579954bb17c594308b151",
+    "behavioral_contract_registry": "ae250d5bc5da73b23600670be354ffba31e65e53",
+    "base_structural_runtime": "46d01dc945ae7036efc27b6c3740f2e0ac8ff9c0",
+    "extension_runtime": "3d8538389af1a3dc46ef74c79b70531511a1f4ec"
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-professional-hard-defect-verify-20261010",
+    "py_compile": "PASS",
+    "falsification_tests_run": 5,
+    "falsification_tests_passed": 5,
+    "falsification_tests_failed": 0,
+    "observed_case_counts": {
+      "positive_live_contracts": 13,
+      "required_field_omissions": 11,
+      "unknown_extension": 1,
+      "prior_independent_structural_cases": 21,
+      "total": 46
+    }
+  },
+  "proves": [
+    "THE_EXACT_R1_EXECUTION_MANIFEST_ACCEPTANCE_IS_OBSERVED_ON_CURRENT_BOUND_RUNTIME_AND_REGISTRY_BYTES",
+    "ALL_13_CURRENT_BEHAVIORAL_CONTRACTS_RECOMPUTE_WITH_REQUIRED_CANONICAL_BASE_FIELDS_AND_CLASSIFIED_EXTENSIONS",
+    "EVERY_ONE_OF_11_REQUIRED_CANONICAL_BASE_FIELDS_FAILS_CLOSED_WHEN_REMOVED",
+    "UNKNOWN_EXTENSION_FIELDS_FAIL_CLOSED",
+    "R1_EXECUTION_LEAF_PROPERTY_TRUTH_AUTHORITY_ONLY"
+  ],
+  "hard_nonclaims": [
+    "NO_R1_DEFEATER_DETECTION_COMPLETENESS",
+    "NO_R1_SEMANTIC_LEAF_CLOSURE",
+    "NO_R1_ROOT_CLOSURE",
+    "NO_SOURCE_EXTRACTION_COMPLETENESS",
+    "NO_POLICY_ADEQUACY",
+    "NO_GLOBAL_PROFESSIONAL_PROPERTY_TRUTH",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "leaf_property_truth_authority": true,
+  "detection_completeness_proved": false,
+  "r1_semantic_leaf_closed": false,
+  "r1_root_closed": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
