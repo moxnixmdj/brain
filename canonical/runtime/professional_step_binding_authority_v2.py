@@ -32,6 +32,14 @@ OUTCOMES=frozenset({"ABSTAIN","POSITIVE_CERTIFICATE"})
 SCOPE_COMPILER_PATH="canonical/runtime/universal_scope_closure_compiler_v1.py"
 SCOPE_COMPILER_BLOB="b208255789b14e44e86c82c196e06b5c41b3d039"
 
+# Preserve the V1 helper/schema surface so V2 is a drop-in authority successor.
+RECEIPT_SCHEMA=base.RECEIPT_SCHEMA
+VERIFY_SCHEMA=base.VERIFY_SCHEMA
+ALLOWED_REF_PREFIXES=base.ALLOWED_REF_PREFIXES
+StepBindingAuthorityError=base.StepBindingAuthorityError
+run_context_digest=base.run_context_digest
+git_blob_sha=base.git_blob_sha
+
 
 def _sha(value:str)->str:
     return sha256(value.encode("utf-8")).hexdigest()
