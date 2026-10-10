@@ -470,7 +470,7 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
         )
         self.assertEqual(
             activation["status"],
-            "ACTIVE_PRIMARY_CAPABILITY_FIRST_DEVELOPMENT_SCHEDULER__REUSE_FIRST_ENFORCED__LIVE_SCORE_PROVENANCE_GATE_ADDED__REBASED_174CDF8C__ZERO_CREDIT",
+            "ACTIVE_PRIMARY_CAPABILITY_FIRST_DEVELOPMENT_SCHEDULER__REUSE_FIRST_ENFORCED__LIVE_SCORE_PROVENANCE_GATE_ADDED__REBASED_A8CBE3FF__ZERO_CREDIT",
         )
         self.assertFalse(
             activation["primary_work_rule"]["checkpoint_obligations_are_primary_gate"]
