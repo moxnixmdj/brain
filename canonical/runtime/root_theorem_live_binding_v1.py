@@ -24,6 +24,13 @@ CARRIER_PATH = "canonical/governance/MISSION_SUFFICIENT_SEMANTIC_CARRIER_V1.json
 CARRIER_RUNTIME_PATH = "canonical/runtime/mission_carrier_factorization_v1.py"
 CARRIER_TESTS_PATH = "canonical/tests/test_mission_carrier_factorization_v1.py"
 CLAIM_SCOPE_PATH = "canonical/governance/COVERAGE_COMPLETENESS_CLAIM_SCOPE_V1.json"
+ROOT_REGISTRY_PATH = "canonical/governance/COVERAGE_COMPLETENESS_ROOT_CERTIFICATE_REGISTRY_V1.json"
+ROOT_REGISTRY_POINTER_PATH = "canonical/governance/CURRENT_COVERAGE_COMPLETENESS_ROOT_CERTIFICATES.json"
+ROOT_REGISTRY_GUARD_PATH = "canonical/runtime/coverage_root_certificate_registry_guard_v1.py"
+ROOT_REGISTRY_TESTS_PATH = "canonical/tests/test_coverage_root_certificate_registry_guard_v1.py"
+ROOT_SEMANTIC_RECEIPT_PATH = "canonical/runtime/coverage_root_semantic_receipt_v1.py"
+ROOT_SEMANTIC_RECEIPT_TESTS_PATH = "canonical/tests/test_coverage_root_semantic_receipt_v1.py"
+REGISTRY_ALIGNMENT_TESTS_PATH = "canonical/tests/test_root_theorem_registry_claim_alignment_v1.py"
 FALSIFIER_PATH = "canonical/runtime/root_theorem_falsifier_v1.py"
 FALSIFIER_TESTS_PATH = "canonical/tests/test_root_theorem_falsifier_v1.py"
 R4_BINDING_TESTS_PATH = "canonical/tests/test_root_theorem_r4_binding_coherence_v1.py"
@@ -65,6 +72,13 @@ def validate_documents(
     falsifier_blob_sha: str,
     falsifier_tests_blob_sha: str,
     r4_binding_tests_blob_sha: str,
+    registry_alignment_tests_blob_sha: str,
+    root_registry_blob_sha: str,
+    root_registry_pointer_blob_sha: str,
+    root_registry_guard_blob_sha: str,
+    root_registry_tests_blob_sha: str,
+    root_semantic_receipt_blob_sha: str,
+    root_semantic_receipt_tests_blob_sha: str,
     live_validator_blob_sha: str,
     live_validator_tests_blob_sha: str,
 ) -> dict[str, Any]:
@@ -162,6 +176,26 @@ def validate_documents(
     _fail(errors, "BINDING_LIVE_VALIDATOR_TESTS_PATH_DRIFT", validator_ref.get("tests_path") == LIVE_VALIDATOR_TESTS_PATH)
     _fail(errors, "BINDING_LIVE_VALIDATOR_TESTS_BLOB_STALE", validator_ref.get("tests_git_blob_sha") == live_validator_tests_blob_sha)
 
+    registry_ref = binding.get("root_certificate_registry_precondition") or {}
+    _fail(errors, "BINDING_ROOT_REGISTRY_PATH_DRIFT", registry_ref.get("registry_path") == ROOT_REGISTRY_PATH)
+    _fail(errors, "BINDING_ROOT_REGISTRY_BLOB_STALE", registry_ref.get("registry_git_blob_sha") == root_registry_blob_sha)
+    _fail(errors, "BINDING_ROOT_REGISTRY_POINTER_PATH_DRIFT", registry_ref.get("current_pointer_path") == ROOT_REGISTRY_POINTER_PATH)
+    _fail(errors, "BINDING_ROOT_REGISTRY_POINTER_BLOB_STALE", registry_ref.get("current_pointer_git_blob_sha") == root_registry_pointer_blob_sha)
+    _fail(errors, "BINDING_ROOT_REGISTRY_GUARD_PATH_DRIFT", registry_ref.get("guard_path") == ROOT_REGISTRY_GUARD_PATH)
+    _fail(errors, "BINDING_ROOT_REGISTRY_GUARD_BLOB_STALE", registry_ref.get("guard_git_blob_sha") == root_registry_guard_blob_sha)
+    _fail(errors, "BINDING_ROOT_REGISTRY_TESTS_PATH_DRIFT", registry_ref.get("tests_path") == ROOT_REGISTRY_TESTS_PATH)
+    _fail(errors, "BINDING_ROOT_REGISTRY_TESTS_BLOB_STALE", registry_ref.get("tests_git_blob_sha") == root_registry_tests_blob_sha)
+
+    semantic_ref = registry_ref.get("semantic_receipt_verifier") or {}
+    _fail(errors, "BINDING_ROOT_SEMANTIC_RECEIPT_PATH_DRIFT", semantic_ref.get("path") == ROOT_SEMANTIC_RECEIPT_PATH)
+    _fail(errors, "BINDING_ROOT_SEMANTIC_RECEIPT_BLOB_STALE", semantic_ref.get("git_blob_sha") == root_semantic_receipt_blob_sha)
+    _fail(errors, "BINDING_ROOT_SEMANTIC_RECEIPT_TESTS_PATH_DRIFT", semantic_ref.get("tests_path") == ROOT_SEMANTIC_RECEIPT_TESTS_PATH)
+    _fail(errors, "BINDING_ROOT_SEMANTIC_RECEIPT_TESTS_BLOB_STALE", semantic_ref.get("tests_git_blob_sha") == root_semantic_receipt_tests_blob_sha)
+
+    alignment_ref = registry_ref.get("claim_alignment_tests") or {}
+    _fail(errors, "BINDING_REGISTRY_ALIGNMENT_TESTS_PATH_DRIFT", alignment_ref.get("path") == REGISTRY_ALIGNMENT_TESTS_PATH)
+    _fail(errors, "BINDING_REGISTRY_ALIGNMENT_TESTS_BLOB_STALE", alignment_ref.get("git_blob_sha") == registry_alignment_tests_blob_sha)
+
     root_ref = binding.get("root_theorem") or {}
     _fail(errors, "BINDING_ROOT_PATH_DRIFT", root_ref.get("path") == THEOREM_PATH)
     _fail(errors, "BINDING_ROOT_BLOB_STALE", root_ref.get("git_blob_sha") == root_theorem_blob_sha)
@@ -213,6 +247,13 @@ def validate_repo(root: Path) -> dict[str, Any]:
     carrier_runtime_path = root / CARRIER_RUNTIME_PATH
     carrier_tests_path = root / CARRIER_TESTS_PATH
     claim_scope_path = root / CLAIM_SCOPE_PATH
+    root_registry_path = root / ROOT_REGISTRY_PATH
+    root_registry_pointer_path = root / ROOT_REGISTRY_POINTER_PATH
+    root_registry_guard_path = root / ROOT_REGISTRY_GUARD_PATH
+    root_registry_tests_path = root / ROOT_REGISTRY_TESTS_PATH
+    root_semantic_receipt_path = root / ROOT_SEMANTIC_RECEIPT_PATH
+    root_semantic_receipt_tests_path = root / ROOT_SEMANTIC_RECEIPT_TESTS_PATH
+    registry_alignment_tests_path = root / REGISTRY_ALIGNMENT_TESTS_PATH
     falsifier_path = root / FALSIFIER_PATH
     falsifier_tests_path = root / FALSIFIER_TESTS_PATH
     r4_binding_tests_path = root / R4_BINDING_TESTS_PATH
@@ -245,6 +286,13 @@ def validate_repo(root: Path) -> dict[str, Any]:
         falsifier_blob_sha=git_blob_sha(falsifier_path.read_bytes()),
         falsifier_tests_blob_sha=git_blob_sha(falsifier_tests_path.read_bytes()),
         r4_binding_tests_blob_sha=git_blob_sha(r4_binding_tests_path.read_bytes()),
+        registry_alignment_tests_blob_sha=git_blob_sha(registry_alignment_tests_path.read_bytes()),
+        root_registry_blob_sha=git_blob_sha(root_registry_path.read_bytes()),
+        root_registry_pointer_blob_sha=git_blob_sha(root_registry_pointer_path.read_bytes()),
+        root_registry_guard_blob_sha=git_blob_sha(root_registry_guard_path.read_bytes()),
+        root_registry_tests_blob_sha=git_blob_sha(root_registry_tests_path.read_bytes()),
+        root_semantic_receipt_blob_sha=git_blob_sha(root_semantic_receipt_path.read_bytes()),
+        root_semantic_receipt_tests_blob_sha=git_blob_sha(root_semantic_receipt_tests_path.read_bytes()),
         live_validator_blob_sha=git_blob_sha(live_validator_path.read_bytes()),
         live_validator_tests_blob_sha=git_blob_sha(live_validator_tests_path.read_bytes()),
     )

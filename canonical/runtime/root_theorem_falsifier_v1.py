@@ -20,6 +20,7 @@ from typing import Any, Dict, Iterable, Mapping, Optional
 ROOTS = ("R1", "R2", "R3", "R4")
 
 from canonical.runtime.coverage_root_certificate_registry_guard_v1 import validate as validate_root_registry
+from canonical.runtime.coverage_root_semantic_receipt_v1 import validate_semantic_root_slot
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 ROOT_REGISTRY_PATH = REPO_ROOT / "canonical/governance/COVERAGE_COMPLETENESS_ROOT_CERTIFICATE_REGISTRY_V1.json"
@@ -110,7 +111,7 @@ def evaluate_canonical_registry_authority() -> Dict[str, Any]:
         for slot in registry.get("certificate_slots", []):
             if slot.get("status") != "PROVED_CURRENT":
                 continue
-            for field in ("certificate", "independent_verification"):
+            for field in ("certificate", "semantic_verifier", "independent_verification"):
                 ref = slot.get(field) or {}
                 rel = ref.get("path")
                 claimed_sha = ref.get("git_blob_sha")
@@ -136,6 +137,16 @@ def evaluate_canonical_registry_authority() -> Dict[str, Any]:
                     checked["errors"].append(
                         f"PROVED_SLOT_{field.upper()}_CONTENT_ADDRESS_MISMATCH:{slot.get('root_id')}"
                     )
+
+            semantic = validate_semantic_root_slot(
+                REPO_ROOT,
+                slot,
+                registry.get("active_claim") or {},
+            )
+            if semantic.get("pass") is not True:
+                checked["errors"].append(
+                    f"PROVED_SLOT_SEMANTIC_RECEIPT_INVALID:{slot.get('root_id')}:{semantic.get('status')}"
+                )
         if checked["errors"]:
             checked["pass"] = False
             checked["status"] = "FAIL_CLOSED"

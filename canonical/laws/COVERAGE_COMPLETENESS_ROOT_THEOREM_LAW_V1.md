@@ -259,6 +259,28 @@ A registry that closes claim X cannot authorize locally coherent root proofs for
 
 The canonical generation is not part of the registry's abstract claim identity, but local root proofs must still match the currently active generation before they may be composed into terminal authority.
 
+
+## R4 executable semantic certificate verification
+
+Content identity is necessary but not sufficient proof authority.
+
+A `PROVED_CURRENT` canonical root slot MUST bind:
+
+- the exact root certificate bytes;
+- a content-addressed canonical semantic verifier;
+- an independent verification receipt;
+- the exact frozen claim.
+
+Before R4 accepts the slot, the semantic verifier MUST be rerun over the exact certificate and active claim. The independent receipt MUST bind the same root ID, claim ID, certificate blob, verifier blob, and deterministic verifier-result digest, and MUST explicitly report successful semantic verification under an allowed proof mode.
+
+A byte-perfect empty, foreign, self-contradictory, or unrelated verification receipt has zero proof authority.
+
+A stored PASS receipt cannot override a verifier that rejects the certificate.
+
+The semantic verifier itself becomes an explicit R4 trusted dependency and MUST be content-addressed by the live-binding currentness layer. Its tests and the registry claim-alignment tests are also load-bearing currentness dependencies.
+
+This remains R4 proof-authority hardening, not a fifth semantic root.
+
 ## Nonclaims
 
 This law:

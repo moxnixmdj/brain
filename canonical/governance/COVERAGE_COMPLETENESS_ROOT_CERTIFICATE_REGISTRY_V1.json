@@ -37,19 +37,22 @@
       "root_id": "CC_R1_REALITY_CONTAINMENT_V1",
       "status": "OPEN_NO_GLOBAL_CERTIFICATE_BOUND",
       "certificate": null,
-      "independent_verification": null
+      "independent_verification": null,
+      "semantic_verifier": null
     },
     {
       "root_id": "CC_R2_MISSION_SOUNDNESS_V1",
       "status": "OPEN_NO_GLOBAL_CERTIFICATE_BOUND",
       "certificate": null,
-      "independent_verification": null
+      "independent_verification": null,
+      "semantic_verifier": null
     },
     {
       "root_id": "CC_R3_TERMINAL_CLOSURE_V1",
       "status": "OPEN_NO_GLOBAL_CERTIFICATE_BOUND",
       "certificate": null,
-      "independent_verification": null
+      "independent_verification": null,
+      "semantic_verifier": null
     }
   ],
   "alias_policy": {
@@ -62,7 +65,7 @@
     ],
     "hard_rule": "AN_UNRELATED_R2_OR_R3_RECEIPT_CANNOT_SATISFY_CC_R2_OR_CC_R3_BY_NAME_MATCH"
   },
-  "proof_closure_rule": "R4_PROOF_CLOSURE_REQUIRES_ONE_VALID_ACTIVE_FROZEN_CLAIM_AND_ALL_THREE_CANONICAL_ROOT_SLOTS_PROVED_CURRENT_FOR_THAT_EXACT_CLAIM_WITH_CONTENT_ADDRESSED_CERTIFICATE_INDEPENDENT_VERIFICATION_CURRENT_MISSION_AUTHORITY_AND_EXACT_ROOT_SEMANTIC_BINDING",
+  "proof_closure_rule": "R4_PROOF_CLOSURE_REQUIRES_ONE_VALID_ACTIVE_FROZEN_CLAIM_AND_ALL_THREE_CANONICAL_ROOT_SLOTS_PROVED_CURRENT_FOR_THAT_EXACT_CLAIM_WITH_CONTENT_ADDRESSED_CERTIFICATE_CONTENT_ADDRESSED_EXECUTABLE_SEMANTIC_VERIFIER_INDEPENDENT_VERIFICATION_RECEIPT_CURRENT_MISSION_AUTHORITY_AND_EXACT_ROOT_SEMANTIC_BINDING",
   "currently_proved_root_certificates": 0,
   "currently_open_root_certificates": 3,
   "r4_proof_closure": false,
@@ -90,7 +93,11 @@
     "proved_certificate_must_match_active_claim_exactly": true,
     "independent_verification_must_match_active_claim_id": true,
     "no_cross_claim_root_certificate_transport": true,
-    "no_global_open_ended_mission_claim": true
+    "no_global_open_ended_mission_claim": true,
+    "semantic_verifier_required_for_proved_slot": true,
+    "semantic_verifier_must_be_content_addressed": true,
+    "semantic_verifier_must_be_executed_by_r4_authority_path": true,
+    "independent_verification_must_bind_certificate_verifier_and_rerun_result": true
   },
-  "next": "FREEZE_ONE_VALID_CERTIFICATION_CLAIM__THEN_PROVE_OR_FALSIFY_CC_R3_CC_R1_CC_R2_FOR_THAT_EXACT_CLAIM__NO_GLOBAL_OR_CROSS_CLAIM_PROMOTION"
+  "next": "FREEZE_ONE_VALID_CERTIFICATION_CLAIM__THEN_PROVE_OR_FALSIFY_CC_R3_CC_R1_CC_R2_WITH_EXECUTABLE_SEMANTIC_VERIFIERS_FOR_THAT_EXACT_CLAIM__NO_GLOBAL_OR_CROSS_CLAIM_PROMOTION"
 }

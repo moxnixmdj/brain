@@ -88,6 +88,26 @@ def docs():
             "path": CLAIM_SCOPE_PATH,
             "git_blob_sha": "claim-scope-sha",
         },
+        "root_certificate_registry_precondition": {
+            "registry_path": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_CERTIFICATE_REGISTRY_V1.json",
+            "registry_git_blob_sha": "root-registry-sha",
+            "current_pointer_path": "canonical/governance/CURRENT_COVERAGE_COMPLETENESS_ROOT_CERTIFICATES.json",
+            "current_pointer_git_blob_sha": "root-registry-pointer-sha",
+            "guard_path": "canonical/runtime/coverage_root_certificate_registry_guard_v1.py",
+            "guard_git_blob_sha": "root-registry-guard-sha",
+            "tests_path": "canonical/tests/test_coverage_root_certificate_registry_guard_v1.py",
+            "tests_git_blob_sha": "root-registry-tests-sha",
+            "semantic_receipt_verifier": {
+                "path": "canonical/runtime/coverage_root_semantic_receipt_v1.py",
+                "git_blob_sha": "semantic-receipt-sha",
+                "tests_path": "canonical/tests/test_coverage_root_semantic_receipt_v1.py",
+                "tests_git_blob_sha": "semantic-receipt-tests-sha",
+            },
+            "claim_alignment_tests": {
+                "path": "canonical/tests/test_root_theorem_registry_claim_alignment_v1.py",
+                "git_blob_sha": "registry-alignment-tests-sha",
+            },
+        },
         "falsifier": {
             "path": "canonical/runtime/root_theorem_falsifier_v1.py",
             "git_blob_sha": "falsifier-sha",
@@ -149,6 +169,13 @@ def check(mission, theorem, binding, namespace_bridge, authority, carrier, claim
         falsifier_blob_sha="falsifier-sha",
         falsifier_tests_blob_sha="falsifier-tests-sha",
         r4_binding_tests_blob_sha="r4-tests-sha",
+        registry_alignment_tests_blob_sha="registry-alignment-tests-sha",
+        root_registry_blob_sha="root-registry-sha",
+        root_registry_pointer_blob_sha="root-registry-pointer-sha",
+        root_registry_guard_blob_sha="root-registry-guard-sha",
+        root_registry_tests_blob_sha="root-registry-tests-sha",
+        root_semantic_receipt_blob_sha="semantic-receipt-sha",
+        root_semantic_receipt_tests_blob_sha="semantic-receipt-tests-sha",
         live_validator_blob_sha="live-validator-sha",
         live_validator_tests_blob_sha="live-validator-tests-sha",
     )
@@ -309,3 +336,24 @@ def test_current_repo_binding_passes():
     assert out["claim_completeness_closed_claimed"] is False
     assert out["carrier_factorization_closed_claimed"] is False
     assert out["global_mission_completion_derivable"] is False
+
+
+def test_stale_semantic_receipt_checker_blob_fails():
+    mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope = docs()
+    binding["root_certificate_registry_precondition"]["semantic_receipt_verifier"]["git_blob_sha"] = "stale"
+    out = check(mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope)
+    assert "BINDING_ROOT_SEMANTIC_RECEIPT_BLOB_STALE" in out["errors"]
+
+
+def test_stale_root_registry_guard_blob_fails():
+    mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope = docs()
+    binding["root_certificate_registry_precondition"]["guard_git_blob_sha"] = "stale"
+    out = check(mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope)
+    assert "BINDING_ROOT_REGISTRY_GUARD_BLOB_STALE" in out["errors"]
+
+
+def test_stale_registry_alignment_tests_blob_fails():
+    mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope = docs()
+    binding["root_certificate_registry_precondition"]["claim_alignment_tests"]["git_blob_sha"] = "stale"
+    out = check(mission, theorem, binding, namespace_bridge, authority, carrier, claim_scope)
+    assert "BINDING_REGISTRY_ALIGNMENT_TESTS_BLOB_STALE" in out["errors"]

@@ -1240,8 +1240,8 @@
     },
     "coverage_completeness_root_theorem_r1_r4": {
       "path": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_THEOREM_LIVE_BINDING_V1.json",
-      "git_blob_sha": "149891188b32fd7e52460b1536c6a52cb4bf5919",
-      "note": "CCRT_R1_R4_META_CONTROL_BOUND_TO_CURRENT_REAL_MISSION__EXPLICIT_ROOT_NAMESPACE__FROZEN_CLAIM_SCOPE__MISSION_SUFFICIENT_SEMANTIC_CARRIER__CLAIM_SCOPED_ROOT_CERTIFICATE_REGISTRY__R4_FAIL_CLOSED__ZERO_CREDIT",
+      "git_blob_sha": "8319c8ec327bf74ee279b216019825e735dba499",
+      "note": "CCRT_R1_R4_META_CONTROL_BOUND_TO_CURRENT_REAL_MISSION__EXPLICIT_ROOT_NAMESPACE__FROZEN_CLAIM_SCOPE__MISSION_SUFFICIENT_SEMANTIC_CARRIER__CLAIM_SCOPED_ROOT_CERTIFICATE_REGISTRY__EXECUTABLE_SEMANTIC_ROOT_VERIFICATION__R4_FAIL_CLOSED__ZERO_CREDIT",
       "semantic_carrier_precondition": {
         "path": "canonical/governance/MISSION_SUFFICIENT_SEMANTIC_CARRIER_V1.json",
         "git_blob_sha": "3c8da3adfcea2134dadae18634fc4dd7b14b19e7",
@@ -1259,7 +1259,7 @@
     },
     "coverage_completeness_claim_scope": {
       "path": "canonical/governance/COVERAGE_COMPLETENESS_CLAIM_SCOPE_V1.json",
-      "git_blob_sha": "05b555f4f9a0227ee0b3e6121246172078857279",
+      "git_blob_sha": "44709e2673a213c01179b5e7d4c622c45b0729bf",
       "guard_path": "canonical/runtime/coverage_claim_scope_guard_v1.py",
       "guard_git_blob_sha": "d1de61aa9bc00a184772a50f7ec9d5ee2853d747",
       "tests_path": "canonical/tests/test_coverage_claim_scope_guard_v1.py",
