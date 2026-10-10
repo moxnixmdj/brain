@@ -1,0 +1,81 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_ROOT_SUBJECT_BINDING_V1",
+  "date": "2026-10-10",
+  "status": "CANDIDATE_R6_V7_ROOT_SUBJECT_BINDING__V7_STEP_EVIDENCE_AUTHENTICATION_PLUS_FULL_CURRENT_SCOPED_EVIDENCE_ADMISSION__AWAITING_INDEPENDENT_VERIFICATION__ZERO_GLOBAL_LEAF_QUALITY_OR_TERMINAL_AUTHORITY",
+  "root_id": "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+  "subject_kind": "DECLARED_SYSTEM",
+  "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+  "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+  "subject": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V7_DECLARED_SYSTEM_SUBJECT_20261010_V6.json",
+    "git_blob_sha": "1d598bc8757017ceb34928d0df9f5fce859ef868"
+  },
+  "bridge_evidence": {
+    "proof_bound_step_verification": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_P1_ROUTER_V7_PROOF_BOUND_STEP_VERIFY_20261010_V1.json",
+      "git_blob_sha": "b7a9df36780513ad73fd14c6a2756c8474d8434d"
+    },
+    "leaf_binder_verification": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_LEAF_BINDER_V2_VERIFY_20261010_V1.json",
+      "git_blob_sha": "b65a67e8edaee925338fe3f2d61dad6b0f52d129"
+    },
+    "scoped_registry": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_REGISTRY_20261010_V1.json",
+      "git_blob_sha": "b9ddf7cbe7fbfad0e81fe068a0c19b48703b5aba"
+    },
+    "leaf_registry": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_LEAF_EVIDENCE_REGISTRY_20261010_V1.json",
+      "git_blob_sha": "d25cb6fe746eef992f71b138446dc999c0f2a307"
+    },
+    "leaf_manifest": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_LEAF_BINDING_MANIFEST_20261010_V1.json",
+      "git_blob_sha": "a7cad32c9fd969ff2c3857bb924c7bd746237ec2"
+    },
+    "assurance_graph": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_ASSURANCE_GRAPH_20261009_V2.json",
+      "git_blob_sha": "03530e29d70206b46b690b33a04c66765ff86ad7"
+    }
+  },
+  "binding_scope": {
+    "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+    "claim": "FOR_THE_EXACT_FROZEN_V7_SUBJECT__EVERY_CURRENTLY_REGISTERED_BOUNDED_PROFESSIONAL_CAPABILITY_MUST_PASS_THE_EXISTING_SCOPE_MATCHED_CONTENT_ADDRESSED_SCOPED_EVIDENCE_VALIDATOR__AND_EVERY_LOAD_BEARING_V7_RUNTIME_STEP_RESULT_MUST_PASS_THE_EXISTING_CONTENT_ADDRESSED_INDEPENDENT_STEP_BINDING_AUTHORITY_WITH_EVIDENCE_SCOPE_AND_SEMANTIC_PRESERVATION_VERIFIED__THE_EMPTY_GLOBAL_LEAF_REGISTRY_REMAINS_OPEN_AND_HAS_ZERO_GLOBAL_CLOSURE_AUTHORITY",
+    "guarantees": [
+      "EXACT_V7_SUBJECT_TUPLE_BOUND",
+      "CURRENT_SCOPED_EVIDENCE_REGISTRY_IS_EXACTLY_CONTENT_ADDRESSED",
+      "ALL_CURRENT_21_SCOPED_CAPABILITY_ENTRIES_MUST_BE_ADMITTED_BY_THE_EXISTING_HANDLER_SPECIFIC_SCOPED_EVIDENCE_VALIDATOR",
+      "ALL_CURRENT_12_ROOTS_MUST_REMAIN_REPRESENTED_IN_THE_ADMITTED_SCOPED_CAPABILITY_SET",
+      "SCOPED_ADMISSION_REQUIRES_BOUND_SOURCE_RECEIPT_COMPILER_VERIFICATION_AND_REUSABLE_COMPILER_BYTES",
+      "V7_LOAD_BEARING_STEP_RESULTS_REQUIRE_CONTENT_ADDRESSED_RECEIPT_AND_INDEPENDENT_VERIFICATION",
+      "V7_STEP_VERIFICATION_REQUIRES_SEMANTIC_PRESERVATION_AND_EVIDENCE_SCOPE_VERIFIED",
+      "CALLER_SUPPLIED_STEP_PASS_AND_MANIFEST_STATUS_STRINGS_HAVE_ZERO_AUTHORITY",
+      "GLOBAL_LEAF_REGISTRY_REMAINS_EMPTY_AND_GRANTS_ZERO_GLOBAL_LEAF_ROOT_OR_DOMAIN_CLOSURE"
+    ],
+    "limitations": [
+      "NO_GENERAL_EVIDENCE_TRUTH_CLOSURE",
+      "NO_GENERAL_EVIDENCE_INDEPENDENCE_CLOSURE",
+      "NO_GENERAL_UNCERTAINTY_SEMANTICS_CLOSURE",
+      "NO_CLAIM_ANY_REAL_TASK_ALREADY_HAS_ALL_REQUIRED_V7_STEP_RECEIPTS",
+      "NO_GLOBAL_R6_SEMANTIC_OR_EXECUTION_LEAF_CLOSURE",
+      "NO_GLOBAL_R6_ROOT_CLOSURE",
+      "NO_GLOBAL_PROFESSIONAL_LEAF_OR_ROOT_CLOSURE",
+      "NO_SAME_SUBJECT_COMPOSITION_PASS",
+      "NO_LIVE_DEFAULT_PROMOTION"
+    ]
+  },
+  "required_current_scoped_capability_count": 21,
+  "required_current_root_count": 12,
+  "global_leaf_registry_must_remain_empty": true,
+  "external_root_support": false,
+  "root_support_inside_frozen_subject": true,
+  "all_real_task_step_receipts_proved": false,
+  "global_subject_identity_authority": false,
+  "root_subject_binding_authority": false,
+  "semantic_truth_authority": false,
+  "execution_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
