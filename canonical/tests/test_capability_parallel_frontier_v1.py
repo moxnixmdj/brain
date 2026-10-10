@@ -311,7 +311,7 @@ class ParallelFrontierTests(unittest.TestCase):
             assurance_path = root / p.ASSURANCE_SOURCE_REL
             prof_path.parent.mkdir(parents=True, exist_ok=True)
             professional = {
-                "status": "X__R11_ADAPTIVE_INTEGRITY_SECURITY_NEXT__NOT_LIVE_DEFAULT",
+                "status": "X__R11_NEXT__NOT_LIVE_DEFAULT",
                 "next": "BIND_R11_ADAPTIVE_INTEGRITY_SECURITY_TO_V7_PROOF_BOUND_EXECUTION_SUBJECT",
                 "same_subject_root_binding_frontier": {
                     "path": "worklist.json",
@@ -432,7 +432,7 @@ class ParallelFrontierTests(unittest.TestCase):
             assurance_path = root / p.ASSURANCE_SOURCE_REL
             prof_path.parent.mkdir(parents=True, exist_ok=True)
             professional = {
-                "status": "X__R2_CANDIDATE_SEARCH_NEXT__NOT_LIVE_DEFAULT",
+                "status": "X__R2_NEXT__NOT_LIVE_DEFAULT",
                 "next": "BIND_R2_CANDIDATE_SEARCH_TO_V7_PROOF_BOUND_EXECUTION_SUBJECT",
                 "same_subject_root_binding_frontier": {
                     "path": "worklist.json",
