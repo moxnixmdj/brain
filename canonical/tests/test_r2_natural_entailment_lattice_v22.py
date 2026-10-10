@@ -10,8 +10,8 @@ from canonical.runtime.semantic_relation_entailment_dag_v1 import EVIDENCE_SCHEM
 from canonical.runtime.brain_owned_natural_subsumption_closure_edge_authority_v1 import (
     SCHEMA as EDGE_SCHEMA, PROOF_CLASS,
 )
-from canonical.runtime.cross_document_effect_semantic_lattice_v8 import SCHEMA as LATTICE_SCHEMA
-from canonical.runtime import r2_cross_document_semantic_registry_v3_lattice_direct_adequacy_v1 as route
+from canonical.runtime.cross_document_effect_semantic_lattice_v9 import SCHEMA as LATTICE_SCHEMA
+from canonical.runtime import r2_cross_document_natural_entailment_lattice_direct_adequacy_v1 as route
 
 
 def _field_line(effect_id,field,value):
@@ -21,7 +21,7 @@ def _field_line(effect_id,field,value):
 
 def _goal():
     return (
-        "Using the domain-mapped semantic-edge cross-document effect lattice case at "
+        "Using the natural-entailment semantic-edge cross-document effect lattice case at "
         "canonical/tmp/case.json, compute and independently verify the effective value "
         "and save it to canonical/tmp/out.json."
     )
