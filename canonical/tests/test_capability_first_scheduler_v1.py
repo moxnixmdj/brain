@@ -269,7 +269,7 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
         policy_rel = pointer["r2_mechanism_policy"]["path"]
         self.assertEqual(
             policy_rel,
-            "canonical/governance/R2_MECHANISM_CLOSURE_OPEN_WORLD_FRONTIER_POLICY_20261010_V2.json",
+            "canonical/governance/R2_MECHANISM_CLOSURE_OPEN_WORLD_FRONTIER_POLICY_20261010_V3.json",
         )
         policy = json.loads((ROOT / policy_rel).read_text())
 
@@ -455,11 +455,11 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
             ),
         )
 
-    def test_governance_binds_v4_and_mission_precedence(self):
+    def test_governance_binds_v5_and_mission_precedence(self):
         activation = json.loads(
             (
                 ROOT
-                / "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V4.json"
+                / "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V5.json"
             ).read_text()
         )
         pointer = json.loads(
@@ -487,7 +487,7 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
         )
         self.assertEqual(
             pointer["authoritative_activation"],
-            "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V4.json",
+            "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V5.json",
         )
         self.assertEqual(
             mission["current_development_scheduler"]["status"],
@@ -495,6 +495,112 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
         )
         self.assertIn("CAPABILITY_RESOURCE_PARETO_LEVERAGE_IS_PRIMARY", mission["scheduler_precedence"])
 
+
+    def test_unproved_new_primitive_claim_is_demoted(self):
+        row = capability_row(
+            "UNPROVED_NEW_PRIMITIVE",
+            claims_new_primitive=True,
+        )
+        out = self.rank_general([row])
+        ranked = out["ranked"][0]
+        self.assertEqual(
+            ranked["eligibility"],
+            "DEMOTED_UNPROVED_NEW_PRIMITIVE_CLAIM",
+        )
+        self.assertTrue(ranked["claims_new_primitive"])
+        self.assertFalse(ranked["new_primitive_proof_complete"])
+        self.assertEqual(ranked["priority_score"], "0")
+        self.assertEqual(
+            set(ranked["new_primitive_missing_requirements"]),
+            {
+                "EXACT_UNSATISFIED_PREDICATE",
+                "EXISTING_MECHANISMS_SEARCHED",
+                "WHY_EACH_EXISTING_MECHANISM_CANNOT_SOUNDLY_CLOSE_THE_PREDICATE",
+                "INDEPENDENTLY_VERIFIED_MISSING_PRIMITIVE_OR_COUNTEREXAMPLE",
+                "MINIMUM_NEW_PRIMITIVE_SCOPE",
+                "FALSIFIER_AND_PROMOTION_CRITERIA",
+            },
+        )
+
+    def test_complete_new_primitive_exhaustion_proof_is_eligible(self):
+        row = capability_row(
+            "PROVED_NEW_PRIMITIVE",
+            claims_new_primitive=True,
+            exact_unsatisfied_predicate="P",
+            existing_mechanisms_searched=["A", "B"],
+            existing_mechanism_unsoundness_reasons={
+                "A": "counterexample-a",
+                "B": "counterexample-b",
+            },
+            independently_verified_missing_primitive_or_counterexample="receipt-1",
+            minimum_new_primitive_scope="P-only",
+            falsifier_and_promotion_criteria="fresh replay plus independent verifier",
+        )
+        out = self.rank_general([row])
+        ranked = out["ranked"][0]
+        self.assertEqual(ranked["eligibility"], "ELIGIBLE")
+        self.assertTrue(ranked["claims_new_primitive"])
+        self.assertTrue(ranked["new_primitive_proof_complete"])
+        self.assertEqual(ranked["new_primitive_missing_requirements"], [])
+        self.assertNotEqual(ranked["priority_score"], "0")
+
+    def test_partial_mechanism_exhaustion_does_not_admit_new_primitive(self):
+        row = capability_row(
+            "PARTIAL_NEW_PRIMITIVE",
+            claims_new_primitive=True,
+            exact_unsatisfied_predicate="P",
+            existing_mechanisms_searched=["A", "B"],
+            existing_mechanism_unsoundness_reasons={"A": "counterexample-a"},
+            independently_verified_missing_primitive_or_counterexample="receipt-1",
+            minimum_new_primitive_scope="P-only",
+            falsifier_and_promotion_criteria="fresh replay",
+        )
+        out = self.rank_general([row])
+        ranked = out["ranked"][0]
+        self.assertEqual(
+            ranked["eligibility"],
+            "DEMOTED_UNPROVED_NEW_PRIMITIVE_CLAIM",
+        )
+        self.assertIn(
+            "WHY_EACH_EXISTING_MECHANISM_CANNOT_SOUNDLY_CLOSE_THE_PREDICATE",
+            ranked["new_primitive_missing_requirements"],
+        )
+
+    def test_ordinary_capability_build_remains_eligible_without_novelty_proof(self):
+        row = capability_row("REUSE_OR_ADAPT_EXISTING")
+        out = self.rank_general([row])
+        ranked = out["ranked"][0]
+        self.assertEqual(ranked["eligibility"], "ELIGIBLE")
+        self.assertFalse(ranked["claims_new_primitive"])
+        self.assertTrue(ranked["new_primitive_proof_complete"])
+        self.assertEqual(ranked["new_primitive_missing_requirements"], [])
+
+    def test_reuse_first_policy_is_load_bearing_in_v5(self):
+        pointer = json.loads(
+            (ROOT / "canonical/governance/CURRENT_DEVELOPMENT_SCHEDULER.json").read_text()
+        )
+        activation = json.loads(
+            (
+                ROOT
+                / "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V5.json"
+            ).read_text()
+        )
+        reuse = pointer["reuse_first_policy"]
+        self.assertEqual(
+            reuse["path"],
+            "canonical/governance/REUSE_FIRST_RESIDUAL_EXECUTION_POLICY_20261010_V1.json",
+        )
+        self.assertEqual(
+            reuse["status"],
+            "ACTIVE_LOAD_BEARING_THROUGH_CAPABILITY_FIRST_SCHEDULER_V5",
+        )
+        self.assertTrue(activation["reuse_first_policy"]["enforced_by_runtime"])
+        self.assertEqual(
+            activation["primary_work_rule"][
+                "new_primitive_claim_without_reuse_exhaustion_proof"
+            ],
+            "DEMOTED_UNPROVED_NEW_PRIMITIVE_CLAIM",
+        )
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
