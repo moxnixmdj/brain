@@ -38,6 +38,24 @@ def _compiler_binding(
     return declared, path
 
 
+def _claim_scope_equivalent(left: Any, right: Any) -> bool:
+    if not isinstance(left, dict) or not isinstance(right, dict):
+        return False
+    left_fixed = {
+        key: value for key, value in left.items()
+        if key not in {"guarantees", "limitations"}
+    }
+    right_fixed = {
+        key: value for key, value in right.items()
+        if key not in {"guarantees", "limitations"}
+    }
+    return (
+        left_fixed == right_fixed
+        and set(left.get("guarantees") or []) == set(right.get("guarantees") or [])
+        and set(left.get("limitations") or []) == set(right.get("limitations") or [])
+    )
+
+
 def _result(
     entry: dict[str, Any],
     errors: list[str],
@@ -124,7 +142,9 @@ def _validate_r2(entry: dict[str, Any], root: Path) -> dict[str, Any]:
             semantic = r2c.certify(source_scope, source_verify, binding)
             if semantic.get("pass") is not True:
                 errors.append("SEMANTIC_REPLAY_FAILED")
-            if source is not None and source.get("claim_scope") != semantic.get("claim_scope"):
+            if source is not None and not _claim_scope_equivalent(
+                source.get("claim_scope"), semantic.get("claim_scope")
+            ):
                 errors.append("CLAIM_SCOPE_MISMATCH")
 
     return _result(entry, errors, semantic)
