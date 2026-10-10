@@ -1,0 +1,133 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_SECONDARY_PROFILE_V25_SUCCESSOR_EXECUTION_V1",
+  "status": "INDEPENDENTLY_VERIFIED_SUCCESSOR__SECONDARY_PROFILE_V25_FRONTIER__ZERO_CAPABILITY_CREDIT",
+  "recorded_at": "2026-10-10",
+  "predecessor": {
+    "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_SECONDARY_PROFILE_V24_SUCCESSOR_EXECUTION_20261010_V1.json",
+    "raw_python_source_bytes": 2007446,
+    "B_exec_raw_python_source_bytes": 2010206,
+    "manifest_sha256": "eb71ab231a6281de6133082c59eb9732864e68af42daf4cfb6c6f258c3dea1f9",
+    "qualification": "8510/8510"
+  },
+  "selection": {
+    "id": "SECONDARY_SPENT_NEXT29_ZERO_HIT_PROFILE_V25",
+    "corpus": "QUAL_SUCCESSOR_NEXT29_20261010_V1",
+    "spent_cases": 8510,
+    "selected_function_bodies": [
+      [
+        "sympy/simplify/trigsimp.py",
+        "__trigsimp"
+      ],
+      [
+        "sympy/calculus/accumulationbounds.py",
+        "AccumulationBounds.__pow__"
+      ],
+      [
+        "sympy/calculus/accumulationbounds.py",
+        "AccumulationBounds.__truediv__"
+      ],
+      [
+        "sympy/simplify/simplify.py",
+        "logcombine.f"
+      ],
+      [
+        "sympy/calculus/accumulationbounds.py",
+        "AccumulationBounds.__mul__"
+      ],
+      [
+        "sympy/calculus/accumulationbounds.py",
+        "AccumulationBounds.__rtruediv__"
+      ]
+    ],
+    "safety_filter": "Excluded low-level core/numeric/evalf/conversion paths and removed false-zero-hit targets exposed by spent qualification."
+  },
+  "falsification_history": [
+    {
+      "candidate": "V25_12_BODY_AGGRESSIVE",
+      "result": "REJECTED",
+      "reason": "NEXT29 exception exposed import-time profile blind spot and indirect dependence",
+      "raw_improvement_bytes": 38267
+    },
+    {
+      "candidate": "V25_8_BODY_NO_IMPORT_TIME_TARGETS",
+      "result": "REJECTED",
+      "reason": "NEXT29 case 7896 exposed root-isolation false zero-hit targets",
+      "unsafe_targets": [
+        [
+          "sympy/polys/rootisolation.py",
+          "dup_inner_isolate_real_roots"
+        ],
+        [
+          "sympy/polys/rootisolation.py",
+          "dup_inner_refine_real_root"
+        ]
+      ],
+      "raw_improvement_bytes": 18396
+    }
+  ],
+  "measured_candidate": {
+    "status": "CURRENT_VERIFIED_BYTES_RESEARCH_FRONTIER__NOT_OPUS_PROMOTED",
+    "python_files": 277,
+    "package_raw_python_source_bytes": 1992901,
+    "router_raw_python_source_bytes": 2760,
+    "B_exec_raw_python_source_bytes": 1995661,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "raw_improvement_vs_v24_bytes": 14545,
+    "manifest_sha256": "7d633d565a52b8a84e3836aadf496e2d1d9af667f94b1876d5dd6b28cc106a9b"
+  },
+  "qualification": {
+    "spent_NEXT29": {
+      "cases": 8510,
+      "candidate": "8510/8510",
+      "spent": true
+    },
+    "fresh_NEXT30": {
+      "seed": 5477225,
+      "per_operation_budget": 760,
+      "cases": 8740,
+      "corpus_sha256": "4859272e27dc150cf91807f69d2850342856befe05e04ac0405966f71740764c",
+      "producer_candidate": "8740/8740",
+      "independent_donor_regeneration_hash_match": true,
+      "independent_exact_archive_replay": "8740/8740",
+      "independent_reconstruction_replay": "8740/8740",
+      "spent": true
+    }
+  },
+  "independent_verification": "canonical/evidence/BYTES_EXACT_SYMBOLIC_SECONDARY_PROFILE_V25_INDEPENDENT_VERIFICATION_20261010_V1.json",
+  "reproducibility": {
+    "predecessor_reconstruction": "canonical/research/bytes/tools/rebuild_candidate_v24.py",
+    "transform": "canonical/research/bytes/tools/secondary_profile_prune_v25.py",
+    "successor_reconstruction": "canonical/research/bytes/tools/rebuild_candidate_v25.py",
+    "route": "canonical/research/bytes/tools/exact_symbolic_route_v1.py",
+    "semantic_digest": "canonical/research/bytes/tools/semantic_digest_v1.py",
+    "qualification_generator": "canonical/research/bytes/tools/generate_qualification_v1.py"
+  },
+  "durable_artifact": {
+    "library_status": "PERSISTED_IN_CHATGPT_LIBRARY",
+    "library_file_id": "libfile_bc38d37e13108191aafe124a3ed94d56",
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V25_SUCCESSOR_20261010_V1.tar.xz",
+    "bytes": 299264,
+    "sha256": "deaabf9ebd51b6cd73020129877b89909ccb245544919e1a55ef2a93f0ac6b86",
+    "archive_size_comparability_to_v24": false
+  },
+  "next_frozen_qualification": {
+    "id": "QUAL_SUCCESSOR_NEXT31_20261010_V1",
+    "seed": 5567764,
+    "per_operation_budget": 780,
+    "cases": 8970,
+    "corpus_sha256": "ed5f78856d2621be9293a509aa21486ad82eef794453f4ce4360755222086f53",
+    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT31_20261010_V1.jsonl",
+    "library_file_id": "libfile_083b89b79ca48191a31ca119adfd587e",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT"
+  },
+  "truth_boundary": [
+    "MEASURED: V25 is 14,545 raw Python-source bytes smaller than V24.",
+    "MEASURED: exact V25 passes spent NEXT29 8,510/8,510.",
+    "MEASURED: independently regenerated NEXT30 matches the frozen hash and exact V25 passes 8,740/8,740 in two independent source realizations.",
+    "INFERRED: selected V25 bodies are outside the tested bounded route; finite profile non-use is not universal proof.",
+    "NOT CLAIMED: universal SymPy correctness, absolute information-theoretic minimum, out-of-scope behavior preservation, or Opus-family promotion.",
+    "PROMOTION CREDIT: 0."
+  ],
+  "next_action": "Rerank exact V25 using spent NEXT30 only. Keep NEXT31 untouched until a new physical cut is frozen.",
+  "promotion_credit": 0
+}
