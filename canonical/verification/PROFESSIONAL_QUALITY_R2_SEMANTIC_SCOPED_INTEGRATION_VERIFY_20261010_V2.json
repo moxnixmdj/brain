@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R2_SEMANTIC_SCOPED_INTEGRATION_VERIFY_V2",
+  "date": "2026-10-10",
+  "status": "PASS__DEDUPED_EXACT_REGISTRY__PYCOMPILE__14_OF_14__R2_SEMANTIC_ADMITTED__LEAF_FRONTIER_20_OF_24_PARTIAL__ZERO_GLOBAL_LEAF_CREDIT",
+  "repository": "moxnixmdj/brain",
+  "pinned_main_commit": "f08b5c59a4e287afc72cd524002f92ea74afd643",
+  "exact_blobs": {
+    "registry": "230cd2fdebc7f01ccf1e4e77b8169dd3f0853203",
+    "scoped_overlay": "59bd66b4abf82a2bd02749f045b6acf10f0fe2c9",
+    "semantic_runtime": "84c6dbd8e36c98dde74cf16252fe83ff0aad4baf",
+    "semantic_tests": "4783db48caa87ec5e2c1c0239141d17dabc720a2",
+    "semantic_scope": "c12893656c0546aafa79135dec221f2e5f7e9774",
+    "semantic_source_verification": "06da6b94712ec844a56c0f663cce67f059b7ba8d",
+    "execution_scope": "b074b6e260cf2d5b534a822c3684171b1cc95b2e",
+    "execution_verification": "b66115513d1dde4527a65e5eda1ddea300138aca",
+    "leaf_projection_v2": "b316d103d7134e58b8b5b838627ba7946742b2c4",
+    "overlay_tests": "402f1fcf3840771fef2d7a8d91ef01d00dce7669",
+    "projection_v2_tests": "57a0bba4fdf98cf86f351cdf99e431f345eff3aa"
+  },
+  "replay": {
+    "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/pq-r2-semantic-integration-final-v2",
+    "py_compile": "PASS",
+    "tests_run": 14,
+    "tests_passed": 14,
+    "tests_failed": 0,
+    "log_sha256": "f08cbb8244703c2c952d19e6d66107644553bec78f8e143a57f54ea23352344c"
+  },
+  "result": {
+    "admitted_scoped_capability_count": 17,
+    "partial_coverage_leaf_count": 20,
+    "semantic_partial_coverage_leaf_count": 8,
+    "execution_partial_coverage_leaf_count": 12,
+    "no_scoped_evidence_leaf_count": 4,
+    "no_scoped_evidence_leaf_ids": [
+      "PQ::R3_REALIZATION_OBSERVATION::SEMANTIC",
+      "PQ::R4_MEASUREMENT_CONSTRUCT::SEMANTIC",
+      "PQ::R5_EVALUATOR_REFERENCE::SEMANTIC",
+      "PQ::R9_TEMPORAL_DEPLOYMENT::SEMANTIC"
+    ],
+    "verified_global_leaf_count": 0,
+    "open_global_leaf_count": 24,
+    "global_leaf_closure": false,
+    "domain_semantic_closure": false,
+    "domain_execution_closure": false
+  },
+  "proves": [
+    "ONE_CANONICAL_R2_SEMANTIC_REGISTRY_BINDING_REMAINS_AFTER_DEDUPLICATION",
+    "R2_BOUNDED_SEMANTICS_ADMITTED_FAIL_CLOSED",
+    "R2_GLOBAL_SEARCH_COMPLETENESS_NOT_INFERRED",
+    "R2_DISCRIMINATOR_PLAN_DOES_NOT_AUTHORIZE_U_SUBTRACTION",
+    "V2_LEAF_PROJECTION_IS_20_OF_24_BOUNDED_PARTIAL_WITH_ZERO_GLOBAL_CREDIT"
+  ],
+  "not_proved": [
+    "GLOBAL_R2_SEMANTIC_LEAF_CLOSURE",
+    "GLOBAL_R2_ROOT_CLOSURE",
+    "DOMAIN_SEMANTIC_CLOSURE",
+    "DOMAIN_EXECUTION_CLOSURE",
+    "LIVE_DEFAULT_PROMOTION",
+    "TERMINAL_AUTHORITY"
+  ],
+  "next_required_edge": "BIND_BOUNDED_SEMANTIC_EVIDENCE_FOR_R3_R4_R5_OR_R9_OR_BIND_EXACT_SAME_SUBJECT_ROOT_RECEIPTS",
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
