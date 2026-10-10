@@ -1,0 +1,88 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_PROOF_VERIFIER_PROVENANCE_HARDENING_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-10",
+  "status": "PASS__TERMINAL_PROOF_VERIFIER_PROVENANCE_HARDENED",
+  "branch": "impl-executable-refinement-terminal-closure-20261009",
+  "authority_pointer": {
+    "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+    "git_blob_sha": "744afae507ea2feab21f249bfc81fc583d1a3d7c",
+    "pointer_revision": 96
+  },
+  "carrier": {
+    "kind": "EXISTING_ZERO_INCREMENTAL_SPEND_SPRITE",
+    "sprite": "brain-live-runtime-v1-verify-20261008",
+    "sprite_id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13",
+    "working_directory": "/home/sprite/unified-fabric-current-byte-verify/livebrain",
+    "incremental_spend_usd": 0
+  },
+  "subjects": [
+    {
+      "path": "canonical/runtime/terminal_root_decision_gate_v1.py",
+      "git_blob_sha": "40a6f984013d0d701edba498c2a122edcb9a8103",
+      "test_path": "canonical/tests/test_terminal_root_decision_gate_v1.py",
+      "test_git_blob_sha": "0767251b2ad4df55f591d5761b0e9a3c01852c99",
+      "tests_passed": 10,
+      "py_compile": "PASS"
+    },
+    {
+      "path": "canonical/runtime/terminal_closure_reducer.py",
+      "git_blob_sha": "0816624d43cc1f90eeddcd602f7693e362675d9e",
+      "test_path": "canonical/tests/test_terminal_closure_reducer_authority_v1.py",
+      "test_git_blob_sha": "0e429f8f25243c89adff99fa5ebed9a6b30d60a4",
+      "tests_passed": 2,
+      "py_compile": "PASS"
+    }
+  ],
+  "red_green_evidence": [
+    {
+      "subject": "terminal_root_decision_gate_v1",
+      "red": {
+        "legacy_tests_passed": 8,
+        "new_provenance_tests_failed": 2
+      },
+      "defect": "CONTENT_ADDRESSED_BUT_UNADMITTED_PROOF_VERIFIER_PAIR_COULD_PASS_ROOT_GATE",
+      "repair": "REQUIRE_EXACT_CURRENT_AUTHORITY_POINTER_AND_EXACT_PROOF_PLUS_INDEPENDENT_VERIFICATION_PAIR_ADMISSION",
+      "green": {
+        "tests_passed": 10,
+        "tests_failed": 0
+      }
+    },
+    {
+      "subject": "terminal_closure_reducer",
+      "red": {
+        "positive_fixture_passed": 1,
+        "unadmitted_pair_negative_test_failed": 1
+      },
+      "defect": "MANDATORY_TERMINAL_REDUCER_DUPLICATED_OLD_SELF_ASSERTED_VERIFIER_TRUST_RULE",
+      "repair": "DELEGATE_UNIVERSAL_PROOF_ADMISSION_TO_HARDENED_TERMINAL_ROOT_GATE",
+      "green": {
+        "tests_passed": 2,
+        "tests_failed": 0
+      }
+    }
+  ],
+  "enforced_invariants": [
+    "CONTENT_ADDRESSING_ALONE_DOES_NOT_ESTABLISH_INDEPENDENT_VERIFICATION",
+    "TERMINAL_PROOF_AND_VERIFIER_PAIR_MUST_BE_ADMITTED_BY_EXACT_CURRENT_AUTHORITY_SNAPSHOT",
+    "STALE_CURRENT_AUTHORITY_POINTER_FAILS_CLOSED",
+    "MANDATORY_TERMINAL_REDUCER_REUSES_THE_HARDENED_ROOT_ADMISSION_PATH",
+    "TERMINAL_TRUTH_REMAINS_FALSE"
+  ],
+  "claims": {
+    "terminal_proof_verifier_provenance_hardened": true,
+    "arbitrary_repo_local_verifier_self_certification_blocked": true,
+    "mandatory_reducer_uses_hardened_root_gate": true,
+    "repository_wide_semantic_refinement_closed": false,
+    "terminal_closed": false
+  },
+  "nonclaims": [
+    "CURRENT_AUTHORITY_ADMISSION_IS_AN_EXPLICIT_ROOT_OF_TRUST_AND_DOES_NOT_BY_ITSELF_PROVE_THE_VERIFIER_IMPLEMENTATION_SEMANTICALLY_CORRECT",
+    "THIS_RECEIPT_DOES_NOT_PROVE_ALL_40_CURRENT_RUNTIME_REFINEMENT_OBLIGATIONS",
+    "THIS_RECEIPT_DOES_NOT GRANT ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
