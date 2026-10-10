@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_R2_OPEN_WORLD_SEMANTIC_CONTROL_V73_AUTHORITY_VERIFY_20261010_V2",
+  "date": "2026-10-10",
+  "status": "PASS__FINAL_V73_AUTHORITY_AND_TERMINAL_CURRENTNESS__21_OF_21_EXACT_BRANCH_TESTS__CONTEXTUAL_IDENTITY_COMPOSED__ZERO_TERMINAL_CREDIT",
+  "exact_blobs": {
+    "canonical/runtime/residual_semantic_control_invariance_v1.py": "f2a19e925c331fc575f5b7129011b9b042452edd",
+    "canonical/runtime/residual_semantic_control_invariance_verify_v1.py": "248d23cb86a9a277383ba4204f340ab17e137cc6",
+    "canonical/runtime/open_world_semantic_control_v1.py": "cea865ac319eb420977b60378de213fc11be9090",
+    "canonical/runtime/unified_cognitive_fabric_v2.py": "afb8b5c30957168dd8ba8684afb94b31c9118ed5",
+    "canonical/tests/test_residual_semantic_control_invariance_v1.py": "06d0c3842c87db5b0da3ddb59cf10e83cefdeba2",
+    "canonical/governance/R2_OPEN_WORLD_SEMANTIC_CONTROL_ACTIVATION_20261010_V1.json": "b9768835ea3e41c53c0b7ef39c2a7e4ab999908a",
+    "canonical/governance/R2_OPEN_WORLD_SEMANTIC_CONTROL_AUTHORITY_RECONCILIATION_20261010_V1.json": "61c9c86f7301eb4484e9a84fc1c8c9835a4cfc97",
+    "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json": "84563042f96f7f5fffd2240956fbec985dfe7a40",
+    "canonical/governance/CURRENT_DEVELOPMENT_SCHEDULER.json": "2b56668db404d266cffd9197eb751b5b3c9e05e2",
+    "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json": "bdc6ac0a47e3c6716f4f8eb9d0090fef5a1912b0",
+    "canonical/action_intents/ACTION_INTENT_CONTEXT_DEPENDENT_MEANING_POSITIVE_COVERAGE_20261010_V4.json": "9156700e7a3502b80dfacf9c3b97ea9f3659b259",
+    "canonical/reasoning/2026-10-10_CONTEXT_DEPENDENT_MEANING_RESEARCH_HANDOFF_V5.json": "2ce7a80d90760bb882baefaa8bd9ce96eaa31e92"
+  },
+  "independent_replay": {
+    "provider": "Sprites",
+    "sprite": "brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/tmp/r2controlv3",
+    "tests_run": 21,
+    "failures": 0,
+    "errors": 0,
+    "result": "PASS"
+  },
+  "preserved_main_capabilities": {
+    "r2_v72_loss_cushion_git_blob_sha": "6306ac666c5c56d75b8c1a2caeb3994a3251e547",
+    "loss_cushion_reconciliation_git_blob_sha": "68c0223695ce9c5f9770d10027525f90a16d227a",
+    "contextual_margin_runtime_git_blob_sha": "655e46be6e9a31d0df210609152794f70caf1b63",
+    "contextual_margin_verification_git_blob_sha": "b606447bf298f83ea4644c24723ed1e67396b0b8",
+    "pairwise_nonidentifiability_runtime_git_blob_sha": "e358eeecc45868c91d22009cc57c624e9a210037",
+    "pairwise_nonidentifiability_verification_git_blob_sha": "2e5f81c929025f4df7b5c2589ccc37f6147cdee6",
+    "root2_v64_scheduler_git_blob_sha": "88d62359c8e3cd4c4c6c775355e4370c63ea251b"
+  },
+  "verified_composition_order": [
+    "REUSE_EXACT_AUTHENTICATED_SOURCE_NATIVE_OR_LONGER_MULTIWORD_TERM_IDENTITY",
+    "IF_AMBIGUITY_REMAINS__PROVE_PAIRWISE_NONIDENTIFIABILITY_WHEN_POSSIBLE",
+    "ROUTE_ONLY_THE_MINIMUM_INFORMATION_ACQUISITION_ACTION_WITHOUT_UNKNOWN_IDENTITY_DEPENDENCE",
+    "REVERIFY_SEMANTICS_AND_POLICY_AFTER_NEW_INFORMATION"
+  ],
+  "authority_boundary": {
+    "control_progress_closed_when_preconditions_hold": true,
+    "semantic_identity_closed": false,
+    "semantic_truth_authority": false,
+    "final_domain_action_authority": false,
+    "finance_semantic_tail_closed": false,
+    "terminal_authority": false
+  },
+  "hard_nonclaims": [
+    "NO_GLOBAL_WORD_SENSE_CLOSURE",
+    "NO_TRUE_SENSE_FOR_BARE_MARGIN",
+    "NO_CLAIM_CONTEXTUAL_MARGIN_TERMS_EXHAUST_MARGIN_MEANINGS",
+    "NO_OPEN_WORLD_FINANCE_SEMANTIC_COMPLETENESS",
+    "NO_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
