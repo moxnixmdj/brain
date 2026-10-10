@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_R2_V78_FOUR_WAY_LOSS_ABSORPTION_NONSEPARATION_RECONCILIATION_20261010_V1",
+  "date": "2026-10-10",
+  "status": "RECONCILED__R2_V78_ROOT2_V66__FOUR_WAY_SHARED_LOSS_ABSORPTION_NONSEPARATION_BOUND__ONE_FINANCE_RESIDUAL_REMAINS__ZERO_TERMINAL_CREDIT",
+  "predecessor": {
+    "current_r2_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+    "current_r2_git_blob_sha": "8ed410ab753ca1d86de37b721da30e805a1e4ec9",
+    "root2_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261010_V65.json",
+    "root2_git_blob_sha": "a3284796a11c1c69ede669e68deb6d0052b1e5be",
+    "terminal_path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+    "terminal_git_blob_sha": "8a4f06038e37bcedaee46c734180586e3957f0ab"
+  },
+  "successor": {
+    "current_r2_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+    "current_r2_git_blob_sha": "94b6a52b28336030ac7307321ed6796ca003d6ad",
+    "current_r2_version": "V78",
+    "root2_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261010_V66.json",
+    "root2_git_blob_sha": "97e40427e90c4e3cc95ec829859b8de31d1c8531",
+    "terminal_path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+    "terminal_git_blob_sha": "0837a637235904985d33248e4878faa786cac042"
+  },
+  "theorem": {
+    "runtime_path": "canonical/runtime/regcap_four_way_loss_absorption_nonseparation_guard_v1.py",
+    "runtime_git_blob_sha": "5100f2a217236a74b337c506381fda95dd6003b5",
+    "verification_path": "canonical/verification/REGCAP_FOUR_WAY_LOSS_ABSORPTION_NONSEPARATION_VERIFY_20261010_V1.json",
+    "verification_git_blob_sha": "d4fe09e0d7045443a5625c9f6d2af62523c5c8e9",
+    "shared_property": "DISPOSITION::LOSS_ABSORPTION",
+    "candidate_concept_ids": [
+      "REGCAP::CCOB",
+      "REGCAP::CCYB",
+      "REGCAP::TLAC",
+      "REGCAP::MREL"
+    ],
+    "reverse_classification_authorized": false,
+    "additional_authenticated_discriminator_required": true
+  },
+  "semantic_delta": {
+    "verified_negative_control_count_delta": 1,
+    "verified_positive_subregion_count_delta": 0,
+    "direct_route_count_delta": 0,
+    "bounded_family_count_delta": 0,
+    "primary_internal_unsolved_count_delta": 0,
+    "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
+    "finance_tail_closed": false,
+    "global_semantic_identity_closed": false,
+    "open_world_candidate_universe_complete": false,
+    "terminal_credit_delta": 0
+  },
+  "residual_refinement": {
+    "removed_shortcut": "REVERSE_CLASSIFY_ONE_OF_CCOB_CCYB_TLAC_MREL_FROM_BARE_DISPOSITION_LOSS_ABSORPTION",
+    "replacement_requirement": "ADDITIONAL_AUTHENTICATED_IDENTITY_DISCRIMINATOR_OR_STRONGER_SOURCE_LOCAL_BINDING",
+    "residual_still_open": true
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
