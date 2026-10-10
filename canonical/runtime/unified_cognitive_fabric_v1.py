@@ -55,7 +55,7 @@ ENGINE_DESCRIPTORS = {
     "REPAIR_SYNTHESIS": "live_brain_runtime_v1.synthesize_failure_repair",
     "REPAIR_CYCLE": "live_brain_runtime_v1.execute_failure_repair_cycle",
     "UNIVERSAL_ESCAPE": "universal_escape_resolver_v1.resolve",
-    "REACHED_ESCAPE_STATE": "certified_reached_escape_state_constructor_v1.construct + reached_escape_repair_cycle_v1.run",
+    "REACHED_ESCAPE_STATE": "certified_reached_escape_state_constructor_v2.construct + reached_escape_repair_cycle_v1.run",
     "CERTIFIED_ROUTE": "certificate_gated_selected_route_runtime_entrypoint_v5",
     "TERMINAL_AUTOPILOT": "terminal_autopilot_v1",
     "TERMINAL_ROOT": "terminal_root_decision_gate_v1.evaluate",
@@ -615,16 +615,43 @@ def run(
         elif mode == "UNIVERSAL_ESCAPE":
             out = universal_escape.resolve(**dict(payload))
         elif mode == "REACHED_ESCAPE_STATE":
-            from canonical.runtime import certified_reached_escape_state_constructor_v1 as reached_escape_state
-            if capability_expander is not None and semantic_authority_verifier is not None:
+            from canonical.runtime import certified_reached_escape_state_constructor_v2 as reached_escape_state
+            authority = reached_escape_state.construct(
+                payload,
+                policy_authority_verifier=semantic_authority_verifier,
+                discriminator_authority_verifier=semantic_authority_verifier,
+            )
+            verified_state = authority.get("verified_state")
+            if authority.get("truth_authority_bound") is not True:
+                out = authority
+            elif authority.get("pass") is True:
+                out = authority
+            elif (
+                authority.get("status")
+                == "REPAIR_REQUIRED__UNCERTIFIED_REACHED_STATE_REJECTED"
+                and isinstance(verified_state, Mapping)
+                and capability_expander is not None
+                and semantic_authority_verifier is not None
+            ):
                 out = reached_escape_repair.run(
-                    payload,
+                    verified_state,
                     provider=capability_expander,
                     verifier=semantic_authority_verifier,
                     max_rounds=int(options.get("reached_escape_max_repair_rounds", 4)),
                 )
+                if isinstance(out, Mapping):
+                    out = deepcopy(dict(out))
+                    out["initial_truth_authority"] = {
+                        "schema": authority.get("schema"),
+                        "candidate_state_sha256": authority.get("candidate_state_sha256"),
+                        "verified_state_sha256": authority.get("verified_state_sha256"),
+                        "authority_receipts": deepcopy(authority.get("authority_receipts")),
+                        "resource_admissibility_proved": authority.get(
+                            "resource_admissibility_proved"
+                        ) is True,
+                    }
             else:
-                out = reached_escape_state.construct(payload)
+                out = authority
         elif mode == "CERTIFIED_ROUTE":
             operation = str(payload.get("operation") or "").strip().upper()
             if operation == "PREFLIGHT":
