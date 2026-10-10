@@ -1,0 +1,70 @@
+{
+  "schema": "PROJECT_BRAIN_REGCAP_NO_DESCRIPTOR_CONTEXT_TRUTH_VERIFY_20261010_V2",
+  "date": "2026-10-10",
+  "status": "PASS__CANONICALIZED_CONTEXT_COMPILER__82_OF_82_FOCUSED_TESTS__3_OF_3_LIVE_PRIMARY_SOURCE_REPLAY__PYCOMPILE_PASS__ZERO_TERMINAL_CREDIT",
+  "supersedes": "canonical/verification/REGCAP_NO_DESCRIPTOR_CONTEXT_TRUTH_VERIFY_20261010_V1.json",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "regcap-contextual-canonicalize-v1-20261010-sol",
+    "exact_blobs": {
+      "canonical/runtime/regcap_contextual_observation_compiler_v1.py": "128142cafd915c2fc206534fd2bdf557e6d2f1ea",
+      "canonical/tests/test_regcap_contextual_observation_compiler_v1.py": "baa20788a3d7425854e7a21a9c09e4e7ce8c2319",
+      "canonical/runtime/regcap_contextual_resolution_v1.py": "4e7661fb508ddb58fcf0ea154af21a73eda2467d",
+      "canonical/runtime/domain_mapping_truth_certificate_v1.py": "681954586f0864de8882e547619d2bbdd8ced001",
+      "canonical/tests/test_domain_mapping_regcap_no_descriptor_context_truth_v1.py": "1fe07c30acbb76292fbe0ec602329e822bb9c253",
+      "canonical/tests/test_domain_mapping_bounded_regcap_context_truth_v1.py": "79b809dd52937f44b1f8e818d5a41818ea299a00",
+      "canonical/tests/test_source_aligned_regcap_context_proof_v1.py": "8718468bfbb217072ab236d2ee3d536ebdb501fd",
+      "canonical/tests/test_regcap_contrastive_discriminator_matrix_v1.py": "9c3c6f4b95ce4a18e5a1e24673b38f6d9e2a6914"
+    }
+  },
+  "independent_carrier": {
+    "name": "participial-disposition-verify-20261009-sol",
+    "sprite_id": "sprite-72f2a31b-c09c-49e0-bfe0-279786ee2d56",
+    "workspace": "/home/sprite/work"
+  },
+  "verification": {
+    "py_compile": "PASS",
+    "contextual_observation_compiler": {"tests_run": 22, "failures": 0, "errors": 0},
+    "contextual_resolution": {"tests_run": 15, "failures": 0, "errors": 0},
+    "descriptor_bounded_domain_truth": {"tests_run": 10, "failures": 0, "errors": 0},
+    "no_descriptor_domain_truth": {"tests_run": 10, "failures": 0, "errors": 0},
+    "source_aligned_regcap_context": {"tests_run": 13, "failures": 0, "errors": 0},
+    "contrastive_matrix": {"tests_run": 12, "failures": 0, "errors": 0},
+    "total_focused_tests": 82,
+    "live_primary_source_replay": {
+      "result": "PASS",
+      "cases": {
+        "CCOB": "THIS_CUSHION_2_5_PERCENT_CET1_ABOVE_MINIMUM__SELECTED_REGCAP_CCOB",
+        "CCYB": "THIS_CUSHION_RELEASED_WHEN_SYSTEM_WIDE_RISK_CRYSTALLIZES_OR_DISSIPATES__SELECTED_REGCAP_CCYB",
+        "TLAC": "THIS_CAPACITY_LOSS_ABSORBING_RECAPITALIZATION_IN_RESOLUTION_FOR_FAILING_G_SIB__SELECTED_REGCAP_TLAC"
+      },
+      "all_terminal_authority": false
+    }
+  },
+  "proved": [
+    "CANONICAL_CONTEXT_COMPILER_ACCEPTS_THIS_DETERMINER_WITHOUT_CHANGING_OBSERVATION_SEMANTICS",
+    "CANONICAL_CONTEXT_COMPILER_ACCEPTS_UK_OR_US_CRYSTALLISE_CRYSTALLIZE_SPELLING",
+    "CANONICAL_CONTEXT_COMPILER_ACCEPTS_UK_OR_US_RECAPITALISATION_RECAPITALIZATION_SPELLING",
+    "WEAKER_SYSTEM_WIDE_RISK_DISSIPATES_ONLY_FORM_REMAINS_UNRESOLVED",
+    "BARE_2_5_PERCENT_CET1_NOUN_PHRASE_REMAINS_UNRESOLVED",
+    "BARE_LOSS_RECAPITALISATION_RESOLUTION_NOUN_PHRASE_REMAINS_UNRESOLVED",
+    "DESCRIPTOR_AND_NO_DESCRIPTOR_DOMAIN_TRUTH_PATHS_REMAIN_GREEN",
+    "SOURCE_ALIGNED_FACT_PROOFS_AND_CONTRASTIVE_MATRIX_REMAIN_GREEN",
+    "LIVE_BIS_FSB_BACKED_THREE_RIVAL_RESOLUTION_PASSES_3_OF_3_FOR_THE_SAFE_NEW_SURFACE_VARIANTS",
+    "NO_GLOBAL_SEMANTIC_IDENTITY_OPEN_WORLD_COMPLETENESS_POLICY_ADEQUACY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "hard_nonclaims": [
+    "NO_GENERAL_LANGUAGE_NORMALIZATION",
+    "NO_WEAKER_RELEASE_TRIGGER_TO_CCYB_UPGRADE",
+    "NO_BARE_NOUN_PHRASE_ASSERTION_TRUTH",
+    "NO_NEW_CANDIDATE_UNIVERSE",
+    "NO_NEW_RELATION_TYPE",
+    "NO_FINANCE_SEMANTIC_TAIL_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
