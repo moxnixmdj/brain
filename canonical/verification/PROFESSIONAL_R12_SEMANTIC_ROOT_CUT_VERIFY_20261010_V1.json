@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_R12_SEMANTIC_ROOT_CUT_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_SPRITE__PYCOMPILE__5_OF_5_ADVERSARIAL_TESTS__R12_SEMANTIC_COMPRESSED_TO_CC_R2_CC_R3__ZERO_PROPERTY_OR_TERMINAL_CREDIT",
+  "repository": "moxnixmdj/brain",
+  "subject": {
+    "governance": {
+      "path": "canonical/governance/PROFESSIONAL_R12_SEMANTIC_ROOT_CUT_20261010_V1.json",
+      "git_blob_sha": "f9a9a586b41fe49e8f53dda16e5b4b6b71043d60"
+    },
+    "runtime": {
+      "path": "canonical/runtime/professional_r12_semantic_root_cut_v1.py",
+      "git_blob_sha": "6a9dcd1b8a041c936ae2bf3d9cb169154a5b36d6"
+    },
+    "tests": {
+      "path": "canonical/tests/test_professional_r12_semantic_root_cut_v1.py",
+      "git_blob_sha": "07de11edaa74f133bedda9e3e78b942d121c9c16"
+    }
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/r12-semantic-root-cut-v1",
+    "py_compile": "PASS",
+    "tests_run": 5,
+    "tests_passed": 5,
+    "tests_failed": 0,
+    "transcript_sha256": "64d893a78c52284e3e4eb69cda00775ceb3acbbc609bebafbf230dbd3c4274e4",
+    "transcript_bytes": 1272
+  },
+  "proved": [
+    "R12_SEMANTIC_WHOLE_DOMAIN_SCOPE_IS_ALREADY_VERIFIED",
+    "R12_SEMANTIC_LOSSLESS_IDENTITY_CARRIER_FACTORIZATION_IS_ALREADY_VERIFIED",
+    "CC_R1_HAS_VERIFIED_MATERIAL_FOR_CERTIFICATE_CONSTRUCTION_BUT_IS_NOT_YET_A_CANONICAL_ROOT_CERTIFICATE",
+    "CC_R2_MISSION_SOUNDNESS_REMAINS_AN_EXPLICIT_SEMANTIC_PROOF_OBLIGATION",
+    "CC_R3_TERMINAL_CLOSURE_REMAINS_THE_UNIVERSAL_R12_SEMANTIC_PROPERTY_OBLIGATION",
+    "CC_R4_IS_DEPENDENCY_BLOCKED_ON_SAME_CLAIM_ROOT_CERTIFICATES"
+  ],
+  "open_semantic_root_ids": [
+    "CC_R2_MISSION_SOUNDNESS_V1",
+    "CC_R3_TERMINAL_CLOSURE_V1"
+  ],
+  "hard_nonclaims": [
+    "NO_R12_SEMANTIC_PROPERTY_TRUTH",
+    "NO_CC_R1_ROOT_CERTIFICATE_AUTHORITY",
+    "NO_CC_R2_OR_CC_R3_PROOF",
+    "NO_R12_ROOT_CLOSURE",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "semantic_property_truth_authority": false,
+  "root_certificate_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
