@@ -1,0 +1,73 @@
+{
+  "schema": "PROJECT_BRAIN_CHARTOGRAPHY_QWEN3_VL4B_GGUF_Q4_EXECUTION_SUBJECT_V2",
+  "date": "2026-10-10",
+  "status": "CANDIDATE__CORRECTED_OFFICIAL_QWEN_QUANTIZED_MULTIMODAL_ARTIFACT__ZERO_CASE_RUNTIME_FIT_OBSERVED__DUMMY_CHART_QUALIFICATION_PENDING__ZERO_CREDIT",
+  "target_predicate": "CHARTOGRAPHY_TOOLS_GE_89",
+  "supersedes_subject": {
+    "path": "canonical/governance/CHARTOGRAPHY_QWEN3_VL4B_GGUF_Q4_EXECUTION_SUBJECT_V1.json",
+    "git_blob_sha": "92e9d895f4d7b1bbf70132ae27eae89fc601dd75",
+    "disposition": "FALSIFIED_FOR_PINNED_LLAMA_CPP_RUNTIME__OLD_MODEL_GENERAL_ARCHITECTURE_WAS_REJECTED"
+  },
+  "upstream": {
+    "repository": "Qwen/Qwen3-VL-4B-Instruct-GGUF",
+    "revision": "1cd86afb9a95c410a6038ab3b40d8b578c892266",
+    "license": "apache-2.0",
+    "modality": "image-text-to-text",
+    "model_file": {
+      "name": "Qwen3VL-4B-Instruct-Q4_K_M.gguf",
+      "bytes": 2497281664,
+      "sha256": "66358cb18bb6b3b1b6675aa412c7a88ef01d228f481184d13668e5201c730a0a"
+    },
+    "projector_file": {
+      "name": "mmproj-Qwen3VL-4B-Instruct-Q8_0.gguf",
+      "bytes": 453974304,
+      "sha256": "30ba2c7dd3127a4561b6cba9d13d0f711c91bdb38742e2f56d73c8cb596bd06d"
+    }
+  },
+  "runtime": {
+    "llama_cpp_revision": "a7fb71fab83b474a0892b9a05aaa3a8ddca2729b",
+    "public_runner_repo": "moxnixmdj/verification-capsule-runner",
+    "zero_case_run_id": 38040901506,
+    "zero_case_artifact_sha256": "b56e5fb8752abde505067b9b09258968e05b6317aa153f4f1f67d440d43edbb1",
+    "observed_runtime_fit": true,
+    "observed_multimodal_smoke": true,
+    "observed_peak_rss_kib": 15542804,
+    "robust_resource_headroom_proved": false
+  },
+  "evidence": {
+    "path": "canonical/evidence/CHARTOGRAPHY_QWEN3_VL4B_GGUF_ZERO_CASE_PREFLIGHT_V2_EVIDENCE_20261010_V1.json",
+    "branch_subject_commit": "406037de76d9951a0285cf2a1ae3a222d014eb6d"
+  },
+  "scheduler_delta": {
+    "delete": [
+      "OLD_Q4_SUBJECT_RUNTIME_FIT_UNCERTAINTY",
+      "OLD_MODEL_ARCHITECTURE_COMPATIBILITY_ASSUMPTION"
+    ],
+    "preserve": [
+      "ROBUST_RESOURCE_HEADROOM",
+      "NONTERMINAL_CHART_REASONING_QUALIFICATION",
+      "BRAIN_CONTROLLED_OFFLINE_BACKEND_BINDING",
+      "CHARTOGRAPHY_THRESHOLD_CERTIFICATE_GE_89"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_PERFORMANCE_INHERITANCE_FROM_SYNTHETIC_COLOR_SMOKE",
+    "NO_ROBUST_RESOURCE_HEADROOM_CLAIM",
+    "NO_RELEASED_CHARTOGRAPHY_CASE_EXECUTED",
+    "NO_CHARTOGRAPHY_SCORE",
+    "NO_ACCEPTANCE_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
