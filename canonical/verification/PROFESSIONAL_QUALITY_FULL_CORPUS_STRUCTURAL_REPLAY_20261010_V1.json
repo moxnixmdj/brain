@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_FULL_CORPUS_STRUCTURAL_REPLAY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__IN_SESSION_STRUCTURAL_REPLAY__NON_INDEPENDENT__ZERO_CREDIT",
+  "pr": 3685,
+  "branch": "research/professional-quality-domain-defeaters-20261009-v2",
+  "input_head_sha": "26aeb624d220ddb99c1e0cfb6a5e2012d80a93bb",
+  "results": {
+    "root_count": 12,
+    "research_layer_count": 97,
+    "research_layer_sequence": "1..97",
+    "research_layer_root_mapping_errors": 0,
+    "known_attack_class_count": 80,
+    "known_attack_root_coverage": "12/12",
+    "attack_binding_errors": 0,
+    "p1_profile_errors": 0,
+    "structural_replay_pass": true
+  },
+  "ci_truth": {
+    "domain_workflow_run": 38025578415,
+    "corpus_workflow_run": 38025578456,
+    "conclusion": "FAILURE_RECORDS_WITH_ZERO_EXECUTED_STEPS",
+    "job_steps_observed": 0,
+    "classification": "EXECUTION_CARRIER_FAILURE_BEFORE_TEST_EXECUTION__NOT_A_TEST_FAILURE_OR_PASS"
+  },
+  "hard_nonclaims": [
+    "NO_PROFESSIONAL_QUALITY_COMPLETENESS_PROOF",
+    "NO_ADVERSARIAL_CLOSURE_PROOF",
+    "NO_EXECUTION_CLOSURE_PROOF",
+    "NO_OPUS_5_5_NONINFERIORITY_OR_EQUIVALENCE",
+    "NO_TERMINAL_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0,
+    "capability_credit_delta": 0
+  }
+}

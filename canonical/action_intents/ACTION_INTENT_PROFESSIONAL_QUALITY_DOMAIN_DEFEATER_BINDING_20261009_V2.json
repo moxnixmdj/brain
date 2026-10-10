@@ -1,0 +1,80 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_PROFESSIONAL_QUALITY_DOMAIN_DEFEATER_BINDING_20261009_V2",
+  "action_id": "PROFESSIONAL-QUALITY-DOMAIN-DEFEATER-BINDING-20261009-V2",
+  "date": "2026-10-09",
+  "status": "ZERO_REALITY_REUSE_OF_VERIFIED_ASSURANCE_KERNEL__80_CLASS_FALSIFICATION_SWEEP__NO_PROMOTION_OR_TERMINAL_AUTHORITY__ZERO_CREDIT",
+  "canonical_base_commit": "cf1bb9b70251d05883ada9a5c9689dffc2ca9201",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+  "causal_blocker": "UVCK_V2_EXPLICITLY_REQUIRES_DOMAIN_LEVEL_ADVERSARIAL_DEFEATER_BINDING__PROFESSIONAL_QUALITY_RESEARCH_NOT_YET_COMPILED_INTO_THE_GENERIC_ASSURANCE_GRAPH",
+  "selected_route": "REUSE_UVCK_V2_PRIMITIVES_AND_COMPILER__ADD_ONLY_DOMAIN_GRAPH_CATALOG_AND_TEST_BINDING",
+  "supersedes_work": {
+    "pr": 3667,
+    "reason": "MAIN_GAINED_A_VERIFIED_GENERIC_ASSURANCE_CLOSURE_KERNEL__CUSTOM_PROFESSIONAL_QUALITY_VERIFIER_IS_NOW_REDUNDANT_AND_VIOLATES_REUSE_FIRST"
+  },
+  "source_bindings": {
+    "assurance_pointer": {
+      "path": "canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json",
+      "git_blob_sha": "2adee7bb282cd01ce7b62f69c8f093268a891753"
+    },
+    "assurance_runtime": {
+      "path": "canonical/runtime/assurance_closure_compiler_v1.py",
+      "git_blob_sha": "a52d62d63aeb50a6bbb613c37ec76d1c86327b12"
+    },
+    "independent_structural_verification": {
+      "path": "canonical/verification/UVCK_V2_ASSURANCE_CLOSURE_VERIFY_20261009_V1.json",
+      "status": "PASS__ISOLATED_STRUCTURAL_12_OF_12__INDEPENDENT_DIFFERENTIAL_11_OF_11__ZERO_TERMINAL_CREDIT"
+    },
+    "professional_behavior": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001"
+    }
+  },
+  "recursive_obs": {
+    "goal": "Bind professional-quality false-certification research into the existing generic closure kernel without creating another architectural primitive.",
+    "delete": [
+      "CUSTOM_DOMAIN_ASSURANCE_RUNTIME",
+      "CUSTOM_DOMAIN_META_KERNEL",
+      "SERIAL_NEW_ROOT_DISCOVERY_BY_DEFAULT"
+    ],
+    "reuse": [
+      "UVCK_V2_ASSURANCE_CLOSURE_COMPILER",
+      "UVCK_V2_PRIMITIVE_VOCABULARY",
+      "EXISTING_PROFESSIONAL_BEHAVIORAL_CONTRACT"
+    ],
+    "selected_action": "DOMAIN_GRAPH_PLUS_DEFEATER_CATALOG_PLUS_BINDING_TESTS",
+    "why_fastest": "The current mainline kernel's stated next edge includes DOMAIN_LEVEL_ADVERSARIAL_DEFEATER_BINDING; this directly supplies that edge for professional quality with zero fresh target evidence."
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0,
+    "capability_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_target_reality_authority": false,
+  "rebase_receipt": {
+    "prior_branch_head": "4538dd00704e3f8417d1a5c4a64dc79de54c44b4",
+    "rebased_parent": "cf1bb9b70251d05883ada9a5c9689dffc2ca9201",
+    "reason": "MAIN_ADVANCED_DURING_FALSIFICATION_SWEEP__REBASE_PRESERVES_ONLY_DOMAIN_BINDING_DELTA"
+  },
+  "falsification_sweep": {
+    "known_attack_classes_bound": 80,
+    "new_architecture_primitive_required": false,
+    "new_root_required": false,
+    "newly_added_cross_layer_classes": [
+      "JOINT_ASSURANCE_MULTIPLICITY",
+      "UNGROUNDED_RISK_TOLERANCE",
+      "BASE_RATE_PRECISION_LAUNDERING",
+      "EXECUTION_FAILURE_FAIL_OPEN",
+      "STALE_CERT_AFTER_DEPENDENCY_CHANGE",
+      "SELECTIVE_EVIDENCE_PACKET",
+      "PROVENANCE_OR_RECEIPT_FORGERY",
+      "CONTEXT_TRUNCATION_OBLIGATION_DROP",
+      "FALLBACK_EVALUATOR_SCOPE_WEAKENING",
+      "OPTIONAL_STOPPING_OR_REPEATED_TESTING"
+    ],
+    "rule": "NEW_ROOT_ONLY_IF_A_MATERIALLY_DISTINCT_FALSE_CERTIFICATION_CAUSAL_PATH_CANNOT_BE_SOUNDLY_REPRESENTED_BY_EXISTING_ROOTS_AND_UVCK_PRIMITIVES"
+  }
+}

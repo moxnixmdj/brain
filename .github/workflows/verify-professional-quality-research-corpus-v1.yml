@@ -1,0 +1,26 @@
+name: verify-professional-quality-research-corpus-v1
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/reasoning/2026-10-10_PROFESSIONAL_QUALITY_RESEARCH_CORPUS_POINTER_V1.json
+      - canonical/reasoning/2026-10-10_PROFESSIONAL_QUALITY_RESEARCH_CORPUS_PART1_V1.json
+      - canonical/reasoning/2026-10-10_PROFESSIONAL_QUALITY_RESEARCH_CORPUS_PART2_V1.json
+      - canonical/reasoning/2026-10-10_PROFESSIONAL_QUALITY_RESEARCH_CORPUS_PART3_V1.json
+      - canonical/reasoning/2026-10-10_PROFESSIONAL_QUALITY_RESEARCH_CORPUS_PART4_V1.json
+      - canonical/governance/PROFESSIONAL_QUALITY_P1_EXECUTION_PROFILE_20261010_V1.json
+      - canonical/tests/test_professional_quality_research_corpus_v1.py
+      - canonical/tests/test_professional_quality_p1_execution_profile_v1.py
+      - .github/workflows/verify-professional-quality-research-corpus-v1.yml
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m unittest canonical.tests.test_professional_quality_research_corpus_v1 canonical.tests.test_professional_quality_p1_execution_profile_v1 -v

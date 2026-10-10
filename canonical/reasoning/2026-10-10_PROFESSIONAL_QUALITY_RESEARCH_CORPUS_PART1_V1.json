@@ -1,0 +1,232 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_RESEARCH_CORPUS_PART_V1",
+  "date": "2026-10-10",
+  "status": "RESEARCH_PROVENANCE_ONLY__ZERO_CREDIT",
+  "part": "1_of_4",
+  "layer_range": "1-25",
+  "layers": [
+    {
+      "id": 1,
+      "title": "Robust qualitative excellence",
+      "root_ids": [
+        "R4_MEASUREMENT_CONSTRUCT",
+        "R5_EVALUATOR_REFERENCE",
+        "R10_ANALYSIS_DECISION",
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "summary": "No single scalar or judge defines professional quality; use context-conditioned dimensions, pairwise comparison, heterogeneous calibrated evaluators, hard-defect separation, robust preference reasoning, and fresh terminal evidence; professional excellence is distinct from exact Opus preference."
+    },
+    {
+      "id": 2,
+      "title": "Measurement-system qualification",
+      "root_ids": [
+        "R4_MEASUREMENT_CONSTRUCT",
+        "R5_EVALUATOR_REFERENCE",
+        "R6_EVIDENCE_GROUNDING_DEPENDENCE"
+      ],
+      "summary": "Construct validity precedes scoring; build the quality universe, anchor ladder, evaluator calibration, causal degradations/metamorphic checks, uncertainty decomposition, and legitimate-disagreement preservation."
+    },
+    {
+      "id": 3,
+      "title": "Candidate-space/search closure",
+      "root_ids": [
+        "R2_CANDIDATE_SEARCH"
+      ],
+      "summary": "Strong judging cannot rescue weak search; maintain diverse lineages, transformation operators, escape generation, separate artifact from search closure, and stop only after material-undiscovered-improvement saturation."
+    },
+    {
+      "id": 4,
+      "title": "Reality/outcome anchoring",
+      "root_ids": [
+        "R4_MEASUREMENT_CONSTRUCT",
+        "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+        "R8_POPULATION_CONTEXT_OPERATOR",
+        "R9_TEMPORAL_DEPLOYMENT"
+      ],
+      "summary": "Combine construct, comparative and consequence evidence; audience outcomes and heterogeneous grounding mechanisms outrank mere judge consensus for outcome claims."
+    },
+    {
+      "id": 5,
+      "title": "Causal quality verification",
+      "root_ids": [
+        "R4_MEASUREMENT_CONSTRUCT",
+        "R7_CAUSAL_PRESCRIPTIVE"
+      ],
+      "summary": "Separate intrinsic, causal and preference quality; model X→M→Y, use interventions/randomization where feasible, preserve outcome vectors, and distinguish structural validity, robust preference, causal effect and generalization."
+    },
+    {
+      "id": 6,
+      "title": "Applicability envelope",
+      "root_ids": [
+        "R8_POPULATION_CONTEXT_OPERATOR",
+        "R9_TEMPORAL_DEPLOYMENT"
+      ],
+      "summary": "Quality is conditional on audience, goal, environment and time; certify only inside demonstrated context and transport coverage."
+    },
+    {
+      "id": 7,
+      "title": "Temporal drift",
+      "root_ids": [
+        "R5_EVALUATOR_REFERENCE",
+        "R9_TEMPORAL_DEPLOYMENT"
+      ],
+      "summary": "Detect drift before adaptation, freeze evaluator within an optimization episode, bind certificates to time/version, and distinguish evaluator drift from world or audience drift."
+    },
+    {
+      "id": 8,
+      "title": "Novelty-safe excellence",
+      "root_ids": [
+        "R2_CANDIDATE_SEARCH",
+        "R5_EVALUATOR_REFERENCE"
+      ],
+      "summary": "Unfamiliar is not bad and novel is not good; detect OOD, use mechanism/outcome tests, separate familiarity penalty from defect, and preserve escape search."
+    },
+    {
+      "id": 9,
+      "title": "Adaptive evaluation integrity",
+      "root_ids": [
+        "R11_ADAPTIVE_INTEGRITY_SECURITY"
+      ],
+      "summary": "Separate development, selection and certification evidence; freeze before terminal testing, retire exposed holdouts, track contamination states, and consume failed-cert evidence."
+    },
+    {
+      "id": 10,
+      "title": "Preference structure",
+      "root_ids": [
+        "R10_ANALYSIS_DECISION"
+      ],
+      "summary": "Do not assume a total scalar order; allow practical equivalence, uncertain dominance and incomparability, preserve compatible preference models, vetoes and decision-sensitive VOI."
+    },
+    {
+      "id": 11,
+      "title": "Causal attribution",
+      "root_ids": [
+        "R7_CAUSAL_PRESCRIPTIVE"
+      ],
+      "summary": "Correctly identifying the winner does not prove why; use matched counterfactuals, factorial interactions, swaps and negative controls before promoting mechanism claims."
+    },
+    {
+      "id": 12,
+      "title": "Multiscale/emergent quality",
+      "root_ids": [
+        "R3_REALIZATION_OBSERVATION",
+        "R4_MEASUREMENT_CONSTRUCT"
+      ],
+      "summary": "Evaluate element→section→whole artifact→audience session; preserve dependency, sequence and holistic residuals and require global regression after local repair."
+    },
+    {
+      "id": 13,
+      "title": "Delivery/realization fidelity",
+      "root_ids": [
+        "R3_REALIZATION_OBSERVATION"
+      ],
+      "summary": "Bind quality to the experienced artifact, delivery environment and exact artifact identity; track render differences, accessibility, dependencies and graceful degradation."
+    },
+    {
+      "id": 14,
+      "title": "Intent/specification closure",
+      "root_ids": [
+        "R1_TARGET_SPECIFICATION"
+      ],
+      "summary": "Keep immutable request R0 separate from compiled spec S, preserve plausible interpretations, trace obligations to tests and artifact, and block proxy substitution and target weakening."
+    },
+    {
+      "id": 15,
+      "title": "Meta-assurance/defeaters",
+      "root_ids": [
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "summary": "Use explicit assurance cases and adversarial defeaters; every material false-certification path must map to a control, assumption or open hazard, and fatal defeaters cannot average away."
+    },
+    {
+      "id": 16,
+      "title": "Executable assurance kernel/proof-carrying artifact",
+      "root_ids": [
+        "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "summary": "Represent Claim, Inference, Evidence, Defeater, Assumption, Test, Scope and Subject with exact hashes, provenance, uncertainty and explicit proof dependencies."
+    },
+    {
+      "id": 17,
+      "title": "Kernel semantics",
+      "root_ids": [
+        "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "summary": "Workers emit facts rather than CLOSED; closure is reducer-derived from append-only history with OPEN/CLOSED/FAILED/CONFLICT states and dependency invalidation."
+    },
+    {
+      "id": 18,
+      "title": "Bounded model checking and policy precommit",
+      "root_ids": [
+        "R10_ANALYSIS_DECISION",
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "summary": "Freeze materiality/risk policy before terminal evidence and falsify closure logic with bounded state exploration and mutation tests rather than trusting implementation narratives."
+    },
+    {
+      "id": 19,
+      "title": "Immutable ledger/pure reducer",
+      "root_ids": [
+        "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "summary": "Persist immutable facts/events rather than conclusions; SemanticState=Reduce(Facts), with derived closures and hash-linked checkpoints."
+    },
+    {
+      "id": 20,
+      "title": "Confluence/canonical representation",
+      "root_ids": [
+        "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "summary": "The same logical facts must yield the same state independent of arrival order, serialization and duplication; preserve conflicts and canonical semantics."
+    },
+    {
+      "id": 21,
+      "title": "Schema/reducer evolution",
+      "root_ids": [
+        "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "summary": "Use MUST_UNDERSTAND semantics, explicit compatible/breaking evolution classes, append-only migration provenance, and semantic-preservation proof before auto-migrating certificates."
+    },
+    {
+      "id": 22,
+      "title": "Authority graph/roles",
+      "root_ids": [
+        "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+        "R11_ADAPTIVE_INTEGRITY_SECURITY"
+      ],
+      "summary": "Separate proposal, observation, validation, adjudication, certification and policy mutation authority; no actor promotes its own evidence to terminal authority."
+    },
+    {
+      "id": 23,
+      "title": "Threshold authorization",
+      "root_ids": [
+        "R10_ANALYSIS_DECISION",
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "summary": "Load-bearing state changes use explicit, scope-bounded threshold and authority policy rather than hidden implementation defaults."
+    },
+    {
+      "id": 24,
+      "title": "Failure-domain independence",
+      "root_ids": [
+        "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "summary": "Assurance strength depends on genuinely independent failure domains; shared ancestry/common causes reduce effective redundancy."
+    },
+    {
+      "id": 25,
+      "title": "Weighted temporal compromise cost",
+      "root_ids": [
+        "R11_ADAPTIVE_INTEGRITY_SECURITY",
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "summary": "Where adversarial corruption matters, reason about the cost and time required to compromise enough independent domains rather than count nominal controls."
+    }
+  ]
+}

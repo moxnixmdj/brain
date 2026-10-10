@@ -1,0 +1,220 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_RESEARCH_CORPUS_PART_V1",
+  "date": "2026-10-10",
+  "status": "RESEARCH_PROVENANCE_ONLY__ZERO_CREDIT",
+  "part": "4_of_4",
+  "layer_range": "76-97",
+  "layers": [
+    {
+      "id": 76,
+      "title": "Agenda/consideration set",
+      "root_ids": [
+        "R1_TARGET_SPECIFICATION",
+        "R10_ANALYSIS_DECISION"
+      ],
+      "summary": "Preference can depend on candidate set, attributes, representation, order, reference and protocol; test agenda perturbations and require winner robustness across defensible agendas or mark AGENDA_DEPENDENT."
+    },
+    {
+      "id": 77,
+      "title": "Criterion ontology/decomposition invariance",
+      "root_ids": [
+        "R4_MEASUREMENT_CONSTRUCT",
+        "R10_ANALYSIS_DECISION"
+      ],
+      "summary": "Criterion splitting can create fake weight; distinguish fundamental objectives from indicators/proxies/constraints, conserve value under refinement, and require semantics-preserving split/merge invariance."
+    },
+    {
+      "id": 78,
+      "title": "Scale/normalization/reference range",
+      "root_ids": [
+        "R4_MEASUREMENT_CONSTRUCT",
+        "R10_ANALYSIS_DECISION"
+      ],
+      "summary": "Numeric representation can reverse winners; respect scale type, avoid candidate-dependent normalization, use meaningful anchors/value functions and revalidate weights when range semantics change."
+    },
+    {
+      "id": 79,
+      "title": "Compensability/interaction topology",
+      "root_ids": [
+        "R10_ANALYSIS_DECISION"
+      ],
+      "summary": "Weighted sums can wrongly compensate veto weaknesses; encode forbidden/bounded/allowed/conditional tradeoffs, floors and sparse interactions, using the weakest aggregation model sufficient."
+    },
+    {
+      "id": 80,
+      "title": "Reference-point/baseline contamination",
+      "root_ids": [
+        "R5_EVALUATOR_REFERENCE",
+        "R10_ANALYSIS_DECISION"
+      ],
+      "summary": "Absolute quality, relative improvement and benchmark superiority are different claims; weak baselines cannot certify excellence and reference effects must be separated from intrinsic quality."
+    },
+    {
+      "id": 81,
+      "title": "Distributional quality/tail risk",
+      "root_ids": [
+        "R9_TEMPORAL_DEPLOYMENT",
+        "R10_ANALYSIS_DECISION"
+      ],
+      "summary": "Equal means do not imply reliability; track central quality, threshold reliability, low quantiles/tails and critical-group failure as needed, separating aleatoric from epistemic uncertainty and preserving veto-level tails."
+    },
+    {
+      "id": 82,
+      "title": "Rare-event/unseen failure",
+      "root_ids": [
+        "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+        "R9_TEMPORAL_DEPLOYMENT",
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "summary": "Zero observed failures does not mean zero risk; separate failure-mode discovery, frequency estimation and structural exclusion, and do not treat stress-test frequency as deployment frequency."
+    },
+    {
+      "id": 83,
+      "title": "Selective observability/missing outcomes",
+      "root_ids": [
+        "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+        "R8_POPULATION_CONTEXT_OPERATOR",
+        "R9_TEMPORAL_DEPLOYMENT"
+      ],
+      "summary": "Exposure→participation→completion→outcome observation can censor results; distinguish MCAR/MAR-like/MNAR structures, require support for weighting, use audits/sensitivity bounds and preserve tail observability."
+    },
+    {
+      "id": 84,
+      "title": "Rashomon/model multiplicity",
+      "root_ids": [
+        "R7_CAUSAL_PRESCRIPTIVE",
+        "R10_ANALYSIS_DECISION",
+        "R12_META_COMPOSITION_CLOSURE"
+      ],
+      "summary": "Multiple semantically admissible near-optimal models can fit evidence yet disagree on finalists or edits; preserve the model/version set and DecisionSet, and use disagreement to choose discriminating evidence rather than average it away."
+    },
+    {
+      "id": 85,
+      "title": "Evaluator-channel/candidate-control integrity",
+      "root_ids": [
+        "R3_REALIZATION_OBSERVATION",
+        "R11_ADAPTIVE_INTEGRITY_SECURITY"
+      ],
+      "summary": "Artifact content is evidence, never evaluator-control authority; separate control plane from evidence plane, inventory visible/hidden/metadata/link surfaces and block candidate attempts to alter judge or tool instructions."
+    },
+    {
+      "id": 86,
+      "title": "Observer equivalence/representation loss",
+      "root_ids": [
+        "R3_REALIZATION_OBSERVATION",
+        "R4_MEASUREMENT_CONSTRUCT"
+      ],
+      "summary": "Judgment is mediated by an observation operator; if materially different audience experiences collapse to the same evaluator representation, lost information cannot be recovered by more reasoning and terminal claims must bind to the exact observation basis."
+    },
+    {
+      "id": 87,
+      "title": "Operator/presenter dependence",
+      "root_ids": [
+        "R8_POPULATION_CONTEXT_OPERATOR",
+        "R9_TEMPORAL_DEPLOYMENT"
+      ],
+      "summary": "Artifact quality, operator quality, pair quality and deployed-system quality are distinct; use operator envelopes, crossed designs and rank-reversal tests, and do not let exceptional delivery certify a weak artifact intrinsically."
+    },
+    {
+      "id": 88,
+      "title": "Cross-condition contamination/carryover",
+      "root_ids": [
+        "R8_POPULATION_CONTEXT_OPERATOR",
+        "R9_TEMPORAL_DEPLOYMENT"
+      ],
+      "summary": "Prior exposure can change later participant/evaluator state through learning, sensitization, memory or fatigue; counterbalancing does not erase irreversible carryover and first-exposure claims require naive or validly adjusted evidence."
+    },
+    {
+      "id": 89,
+      "title": "Analysis-path/researcher degrees of freedom",
+      "root_ids": [
+        "R10_ANALYSIS_DECISION",
+        "R11_ADAPTIVE_INTEGRITY_SECURITY"
+      ],
+      "summary": "The same data can support different conclusions under defensible analyses; freeze the analysis constitution/admissible family and selection rule, record terminal-relevant paths and treat post-hoc path selection as another selection problem."
+    },
+    {
+      "id": 90,
+      "title": "Pseudoreplication/hidden dependence",
+      "root_ids": [
+        "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+        "R8_POPULATION_CONTEXT_OPERATOR"
+      ],
+      "summary": "Nominal N is not effective independent information; distinguish observation from inference/replication units, model shared sessions/presenters/judge families/sources/failure causes and never count the same evidence ancestry repeatedly."
+    },
+    {
+      "id": 91,
+      "title": "Base-rate/spectrum shift",
+      "root_ids": [
+        "R5_EVALUATOR_REFERENCE",
+        "R8_POPULATION_CONTEXT_OPERATOR",
+        "R11_ADAPTIVE_INTEGRITY_SECURITY"
+      ],
+      "summary": "Evaluator accuracy, calibration and precision are population/stage specific; distinguish prevalence shift from difficulty-spectrum shift, qualify near the actual boundary and post-selection population, and treat heavy optimization as distribution shift."
+    },
+    {
+      "id": 92,
+      "title": "Reference-standard/ground-truth fallibility",
+      "root_ids": [
+        "R5_EVALUATOR_REFERENCE",
+        "R6_EVIDENCE_GROUNDING_DEPENDENCE"
+      ],
+      "summary": "A reference label is evidence unless its grounding makes it definitive; distinguish deterministic truth, direct outcomes, normative authority, construct judgment and latent empirical states, preserve disagreement/plurality and propagate reference uncertainty into calibration."
+    },
+    {
+      "id": 93,
+      "title": "Temporal-horizon/delayed outcomes",
+      "root_ids": [
+        "R9_TEMPORAL_DEPLOYMENT",
+        "R10_ANALYSIS_DECISION"
+      ],
+      "summary": "Outcome is a trajectory Y_x(t); immediate and delayed rankings can reverse, target horizons are part of the frozen spec, and short-term proxies transport only through validated temporal-surrogacy or causal arguments."
+    },
+    {
+      "id": 94,
+      "title": "Outcome-measure gaming/transfer validity",
+      "root_ids": [
+        "R4_MEASUREMENT_CONSTRUCT",
+        "R11_ADAPTIVE_INTEGRITY_SECURITY"
+      ],
+      "summary": "Assessment performance is not the construct; use transfer levels from verbatim retrieval through paraphrase, structural application and deployment-like tasks, generate terminal items after artifact freeze and classify gains that vanish under surface changes as assessment-specific."
+    },
+    {
+      "id": 95,
+      "title": "Evaluation reactivity/ecological context",
+      "root_ids": [
+        "R3_REALIZATION_OBSERVATION",
+        "R8_POPULATION_CONTEXT_OPERATOR"
+      ],
+      "summary": "Being evaluated can change attention, effort, presenter behavior or strategy; distinguish level reactivity from differential reactivity that changes the decision, and probe evaluation-vs-deployment regimes only when material."
+    },
+    {
+      "id": 96,
+      "title": "Predictive-to-prescriptive/edit-effect closure",
+      "root_ids": [
+        "R7_CAUSAL_PRESCRIPTIVE"
+      ],
+      "summary": "Knowing what is good does not prove what action improves it; feature importance, critique, model gradients and correlations are edit hypotheses, while reusable prescriptions require context-conditioned intervention effects, interaction/sequence checks and realized post-edit verification."
+    },
+    {
+      "id": 97,
+      "title": "Intervention fidelity/manipulation validity",
+      "root_ids": [
+        "R3_REALIZATION_OBSERVATION",
+        "R7_CAUSAL_PRESCRIPTIVE"
+      ],
+      "summary": "Intended edit, realized transformation and actual changed properties may differ; use intervention contracts with target/dose/preconditions/allowed and forbidden effects/invariants, verify collateral changes, and attribute package effects only at the resolution actually manipulated."
+    }
+  ],
+  "process_transition": {
+    "from": "SERIAL_NAMED_LAYER_DISCOVERY",
+    "to": "NORMALIZE_EXISTING_MECHANISMS__BUILD_GLOBAL_FALSE_CERT_GRAPH__SEARCH_FOR_UNMAPPED_MATERIAL_PATHS__PATCH_ONLY_GENUINE_GAPS__RUN_END_TO_END_CHALLENGES__SEEK_DECISION_LEVEL_SATURATION",
+    "new_root_rule": "ADD_A_NEW_ROOT_ONLY_IF_A_MATERIALLY_DISTINCT_FALSE_CERTIFICATION_CAUSAL_PATH_CANNOT_BE_SOUNDLY_REPRESENTED_BY_THE_EXISTING_12_ROOTS_AND_GENERIC_ASSURANCE_PRIMITIVES"
+  },
+  "hard_nonclaims": [
+    "NO_PROFESSIONAL_QUALITY_COMPLETENESS_PROOF",
+    "NO_UNCOVERED_SET_EMPTY_PROOF",
+    "NO_OPUS_5_5_NONINFERIORITY_OR_EQUIVALENCE_PROOF",
+    "NO_TERMINAL_OR_CAPABILITY_CREDIT_FROM_RESEARCH_PERSISTENCE"
+  ]
+}
