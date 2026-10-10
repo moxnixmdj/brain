@@ -1,0 +1,81 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_ROOT_SUBJECT_BINDING_V1",
+  "date": "2026-10-10",
+  "status": "CANDIDATE_R5_V7_ROOT_SUBJECT_BINDING__PROOF_BOUND_COMPARATIVE_EVALUATION_STEP_PLUS_CONDITIONAL_AUTHENTICATED_EVALUATOR_CLASS_SEMANTICS__AWAITING_INDEPENDENT_VERIFICATION__ZERO_QUALITY_OR_TERMINAL_AUTHORITY",
+  "root_id": "R5_EVALUATOR_REFERENCE",
+  "subject_kind": "DECLARED_SYSTEM",
+  "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+  "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+  "subject": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V7_DECLARED_SYSTEM_SUBJECT_20261010_V6.json",
+    "git_blob_sha": "1d598bc8757017ceb34928d0df9f5fce859ef868"
+  },
+  "bridge_evidence": {
+    "execution_profile": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_EXECUTION_PROFILE_20261010_V3.json",
+      "git_blob_sha": "f7e89eafbb691c16d1bdf5b8d295a468d5e3bec5"
+    },
+    "proof_bound_step_verification": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_P1_ROUTER_V7_PROOF_BOUND_STEP_VERIFY_20261010_V1.json",
+      "git_blob_sha": "b7a9df36780513ad73fd14c6a2756c8474d8434d"
+    },
+    "r5_semantic_scope": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_R5_EVALUATOR_SEMANTIC_SCOPE_20261010_V1.json",
+      "git_blob_sha": "dc10374849f5c26e354e9c396aa1f581b5f56d63"
+    },
+    "r5_semantic_verification": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R5_EVALUATOR_SEMANTIC_VERIFY_20261010_V1.json",
+      "git_blob_sha": "33d5e8c11e07e4a153edf3970503c6753c5343d2"
+    },
+    "evaluator_uncertainty_governance": {
+      "path": "canonical/governance/GDPVAL_HYBRID_EVALUATOR_UNCERTAINTY_20261008_V1.json",
+      "git_blob_sha": "1b61fa4eb98e0039a46f349d31da725bb02c16e0"
+    },
+    "evaluator_uncertainty_verification": {
+      "path": "canonical/verification/GDPVAL_HYBRID_EVALUATOR_UNCERTAINTY_SPRITE_VERIFICATION_20261008_V1.json",
+      "git_blob_sha": "e852c4fbc14147c17469f1a4ede4e274d768bbf7"
+    }
+  },
+  "binding_scope": {
+    "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+    "step_id": "RUN_CRITERION_SPECIFIC_PLUS_HOLISTIC_COMPARATIVE_EVALUATION",
+    "claim": "FOR_THE_EXACT_V7_DECLARED_SYSTEM_SUBJECT__THE_COMPARATIVE_EVALUATION_STEP_IS_PROOF_BOUND_BY_V7__AND_R5_EVALUATOR_REFERENCE_SUPPORT_IS_ADMISSIBLE_ONLY_CONDITIONALLY_ON_AN_INDEPENDENTLY_AUTHENTICATED_EVALUATOR_OR_REFERENCE_OUTER_CLASS_BOUND_IN_STEP_EVIDENCE__PUBLIC_RUBRIC_OR_RECONSTRUCTED_GRADER_DATA_HAS_ZERO_OWNER_SEMANTIC_AUTHORITY__ACTUAL_TASK_EXECUTION_REQUIRES_A_FRESH_RUN_CONTEXT_BOUND_STEP_RECEIPT",
+    "guarantees": [
+      "EXACT_V7_SUBJECT_TUPLE_BOUND",
+      "V7_COMPARATIVE_EVALUATION_STEP_REQUIRES_CONTENT_ADDRESSED_INDEPENDENT_STEP_BINDING",
+      "EVALUATOR_REFERENCE_SEMANTICS_ARE_CONDITIONAL_ON_AN_INDEPENDENTLY_AUTHENTICATED_OUTER_CLASS",
+      "ROBUST_MARGIN_MECHANICS_USE_EXACT_RATIONAL_ARITHMETIC",
+      "UNPROVED_OR_NONINDEPENDENT_EVALUATOR_CLASS_MEMBERSHIP_FAILS_CLOSED",
+      "PUBLIC_RUBRIC_ONLY_HAS_ZERO_OWNER_SEMANTIC_AUTHORITY",
+      "ARBITRARY_LINEALITY_REQUIRES_EXACT_ORTHOGONALITY",
+      "BOUNDED_EVALUATOR_UNCERTAINTY_MUST_FIT_INSIDE_CERTIFIED_MARGIN",
+      "EXACT_JUDGE_OR_REFERENCE_CLASS_AND_UNCERTAINTY_RELATION_MUST_BE_BOUND_IN_ACTUAL_STEP_EVIDENCE",
+      "CALLER_SUPPLIED_COMPARATIVE_EVALUATION_PASS_HAS_ZERO_AUTHORITY"
+    ],
+    "limitations": [
+      "NO_REAL_TASK_COMPARATIVE_EVALUATION_STEP_RECEIPT_FROM_THIS_BINDING",
+      "NO_PROOF_THE_TRUE_CURRENT_OWNER_EVALUATOR_IS_IN_ANY_PROPOSED_DECOMPOSITION",
+      "NO_PROOF_PUBLIC_RUBRIC_DIRECTIONS_ARE_OWNER_MONOTONE",
+      "NO_CURRENT_BRAIN_VS_OPUS55_DIFFERENCE_VECTOR_BINDING",
+      "NO_GLOBAL_R5_ROOT_CLOSURE",
+      "NO_GLOBAL_R5_SEMANTIC_LEAF_CLOSURE",
+      "NO_GDPVAL_OR_AA_BRIEFCASE_QUALITY_ACCEPTANCE_CREDIT",
+      "NO_SAME_SUBJECT_COMPOSITION_PASS",
+      "NO_LIVE_DEFAULT_PROMOTION"
+    ]
+  },
+  "external_root_support": true,
+  "actual_v7_step_receipt_required_for_execution": true,
+  "true_owner_evaluator_containment_proved": false,
+  "public_rubric_owner_semantic_authority": false,
+  "global_subject_identity_authority": false,
+  "root_subject_binding_authority": false,
+  "semantic_truth_authority": false,
+  "execution_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
