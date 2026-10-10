@@ -192,6 +192,8 @@ def construct(
         "pass": False,
         "certified_reached_state_admitted": False,
         "truth_authority_bound": False,
+        "verified_state": None,
+        "verified_state_sha256": None,
         "global_escape_progress_totality_proved": False,
         "global_repair_acquirability_proved": False,
         "resource_admissibility_proved": False,
@@ -314,6 +316,8 @@ def construct(
             **deepcopy(dict(result)),
             "schema": SCHEMA,
             "truth_authority_bound": True,
+            "verified_state": deepcopy(verified_state),
+            "verified_state_sha256": _digest(verified_state),
             "candidate_state_sha256": candidate_state_sha256,
             "authority_receipts": {
                 "policy": policy_receipts,
