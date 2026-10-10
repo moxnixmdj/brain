@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_WHOLE_LEAF_SCOPE_BATCH_ACTIVATION_20261010_V1",
+  "date": "2026-10-10",
+  "status": "ACTIVE_CANDIDATE__INDEPENDENTLY_VERIFIED_24_OF_24_DOMAIN_AND_SCOPE__ZERO_PROPERTY_OR_TERMINAL_CREDIT",
+  "objective": "REPLAY_THE_ALREADY_VERIFIED_24_OF_24_EXACT_WHOLE_DOMAIN_EQUIVALENCE_AND_R10_UNIVERSAL_SCOPE_CERTIFICATE_PATTERN_ACROSS_ALL_FROZEN_PROFESSIONAL_LEAVES_WITHOUT_23_MANUAL_CHAINS",
+  "runtime": {
+    "path": "canonical/runtime/professional_quality_whole_leaf_scope_batch_v1.py",
+    "git_blob_sha": "82ab66c7852fc327821b23ff80dd46de3b81525c"
+  },
+  "tests": {
+    "path": "canonical/tests/test_professional_quality_whole_leaf_scope_batch_v1.py",
+    "git_blob_sha": "8c6c64754fd567cacc037e0803d3cc8565051485"
+  },
+  "expected": {
+    "leaf_count": 24,
+    "domain_equivalence_pass_count": 24,
+    "scope_complete_count": 24,
+    "property_truth_count": 0
+  },
+  "hard_nonclaims": [
+    "NO_LEAF_PROPERTY_TRUTH",
+    "NO_DOMAIN_SEMANTIC_OR_EXECUTION_PROPERTY_CLOSURE",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "independent_verification": {
+    "path": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_SCOPE_BATCH_VERIFY_20261010_V1.json",
+    "git_blob_sha": "4c2d40a262f18f34bb35f94b59660d60972d45ef",
+    "pass": true,
+    "scope_complete_count": 24,
+    "property_truth_count": 0
+  },
+  "next": "PROJECT_24_OF_24_SCOPE_COMPLETE_INTO_LIVE_FRONTIER__THEN_RUN_PROPERTY_TRUTH_VERIFICATION_ON_SCOPE_COMPLETE_CLAIMS__FULL_CURRENT_MAIN_REGRESSION_BEFORE_PROMOTION"
+}
