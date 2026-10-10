@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CAPABILITY_FIRST_LIVE_SCHEDULER_V7_INDEPENDENT_VERIFY_20261010_V1",
   "date": "2026-10-10",
-  "status": "PASS__INDEPENDENT_SPRITE__PYCOMPILE_PASS__9_OF_9_FOCUSED_TESTS_PASS__STALE_SOURCE_AND_INCOMPLETE_FRONTIER_FAIL_CLOSED__ZERO_CREDIT",
+  "status": "PASS__INDEPENDENT_SPRITE__PYCOMPILE_PASS__11_OF_11_FOCUSED_AND_COMPATIBILITY_TESTS_PASS__STALE_SOURCE_AND_INCOMPLETE_FRONTIER_FAIL_CLOSED__ZERO_CREDIT",
   "verifier_carrier": {
     "type": "SPRITE",
     "name": "brain-capability-first-scheduler-verify-20261008-v1",
@@ -14,15 +14,19 @@
     "tests_path": "canonical/tests/test_capability_first_live_scheduler_v1.py",
     "tests_git_blob_sha": "b5639df63bc011ac6ab02776dba55693d8561bb7",
     "core_scheduler_path": "canonical/runtime/capability_first_scheduler_v1.py",
-    "core_scheduler_git_blob_sha": "6d2091cc1581b9aa1fd2c74e8a76519a41d9d957"
+    "core_scheduler_git_blob_sha": "6d2091cc1581b9aa1fd2c74e8a76519a41d9d957",
+    "core_governance_tests_path": "canonical/tests/test_capability_first_scheduler_v1.py",
+    "core_governance_tests_git_blob_sha": "5bef54d3e28b43f131a1ce5bcfb1cf614c589739"
   },
   "execution": {
     "py_compile": "PASS",
     "unittest_module": "canonical.tests.test_capability_first_live_scheduler_v1",
-    "tests_run": 9,
+    "tests_run": 11,
     "failures": 0,
     "errors": 0,
-    "result": "OK"
+    "result": "OK",
+    "live_gate_tests_run": 9,
+    "compatibility_tests_run": 2
   },
   "verified_fail_closed_cases": [
     "MISSING_SCORE_CONTRACT",
@@ -50,5 +54,9 @@
     "capability_credit_delta": 0,
     "ownership_credit_delta": 0,
     "terminal_credit_delta": 0
-  }
+  },
+  "verified_compatibility_cases": [
+    "V7_MISSION_PRECEDENCE_AND_CHECKPOINT_NON_GATE_PRESERVED",
+    "V7_REUSE_FIRST_LOAD_BEARING_ENFORCEMENT_CONTRACT_PRESERVED"
+  ]
 }
