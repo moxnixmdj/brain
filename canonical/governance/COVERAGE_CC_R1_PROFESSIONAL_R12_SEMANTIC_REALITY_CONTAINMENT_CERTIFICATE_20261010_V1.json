@@ -1,0 +1,90 @@
+{
+  "schema": "PROJECT_BRAIN_CC_R1_PROFESSIONAL_R12_SEMANTIC_REALITY_CONTAINMENT_CERTIFICATE_V1",
+  "date": "2026-10-10",
+  "status": "CANDIDATE_CC_R1_CERTIFICATE__R12_SEMANTIC_WHOLE_ADMISSIBLE_DOMAIN_IDENTITY_TOP_ENVELOPE__ZERO_PROPERTY_OR_TERMINAL_CREDIT",
+  "root_id": "CC_R1_REALITY_CONTAINMENT_V1",
+  "claim_id": "05b74983836dd1f6a13a0db72443246fb74f99548f0d982a769a6a7e572e9e85",
+  "mission_authority_blob_sha": "13c470645b037bbb46245c687dd35197b420d51a",
+  "claim_binding": {
+    "claim_id": "05b74983836dd1f6a13a0db72443246fb74f99548f0d982a769a6a7e572e9e85",
+    "claim_kind": "PROPERTY_CERTIFICATE",
+    "mission_blob_sha": "13c470645b037bbb46245c687dd35197b420d51a",
+    "scope_sha256": "3958f259dba6bc6d4dfe1dad0b3ec26ecb1b8d92ea4763985f52ce96cfc55a1d",
+    "target_predicate_sha256": "4967b35be044567ae9fbcd01f2443996dc675f3154fd386790f79301ae9cff09",
+    "semantics_sha256": "bdb1e40284acf8f93f0552143ccfb2a3246428a1862c3f37907a00b20d18fc3e",
+    "epoch": "2026-10-10T18:05:00+02:00",
+    "authority_id": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_WHOLE_LEAF"
+  },
+  "active_claim": {
+    "path": "canonical/governance/COVERAGE_COMPLETENESS_FROZEN_CLAIM_PROFESSIONAL_R12_SEMANTIC_20261010_V1.json",
+    "git_blob_sha": "5e7c198da31b901bb4f53c4fc15cee7d6298c114"
+  },
+  "evidence": {
+    "whole_domain_equivalence": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_DOMAIN_EQUIVALENCE_V1_INDEPENDENT_VERIFY_20261010_V1.json",
+      "git_blob_sha": "b6b826d1658d8a2c88ea80260ee667e86ae99394"
+    },
+    "scope_batch": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_SCOPE_BATCH_VERIFY_20261010_V1.json",
+      "git_blob_sha": "4c2d40a262f18f34bb35f94b59660d60972d45ef"
+    },
+    "identity_carrier": {
+      "path": "canonical/verification/PROFESSIONAL_SEMANTIC_IDENTITY_CARRIER_VERIFY_20261010_V1.json",
+      "git_blob_sha": "35a3ccf9ad454aa0318a4ed10edc065830c3874d"
+    },
+    "identity_activation": {
+      "path": "canonical/governance/PROFESSIONAL_SEMANTIC_IDENTITY_CARRIER_ACTIVATION_20261010_V1.json",
+      "git_blob_sha": "3e99ddbf25cd8e392c5a22a5c14ae5fea5dc3138"
+    },
+    "mission_authority": {
+      "path": "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "git_blob_sha": "13c470645b037bbb46245c687dd35197b420d51a"
+    }
+  },
+  "b_plus_model": {
+    "id": "R12_SEMANTIC_COMPLETE_FROZEN_CLAIM_WORLD_STATE_TOP_ENVELOPE_V1",
+    "domain_quantifier": "FOR_ALL_ADMISSIBLE_LEAF_INPUTS",
+    "entire_admissible_leaf_domain": true,
+    "filters": [],
+    "exclusions": [],
+    "carrier": "OMEGA_C_EQUALS_W_C__IDENTITY_ON_COMPLETE_FROZEN_CLAIM_WORLD_STATE",
+    "semantics": [
+      "EVERY_REAL_IN_SCOPE_R12_SEMANTIC_WORLD_STATE_IS_AN_ADMISSIBLE_STATE_OF_THE_EXACT_FROZEN_WHOLE_LEAF_DOMAIN",
+      "ALL_CLAIM_SEMANTICS_GROUNDING_SCOPE_UNCERTAINTY_DEFEATER_AND_NONVACUITY_FIELDS_REMAIN_EXPLICIT_IN_THE_COMPLETE_WORLD_STATE",
+      "UNRESOLVED_OR_UNKNOWN_VALUES_REMAIN_TOP_OR_UNKNOWN_AND_ARE_NOT_DROPPED_NARROWED_OR_ASSUMED_FAVORABLE",
+      "THE_CLAIM_SCOPED_CARRIER_IS_IDENTITY_AND_THEREFORE_LOSSES_NO_SEMANTIC_INFORMATION",
+      "NO_FILTER_EXCLUSION_FINITE_WITNESS_SET_OR_BOUNDED_EVIDENCE_SUBSET_DEFINES_THE_REALITY_ENVELOPE"
+    ]
+  },
+  "containment_conditions": [
+    "FROZEN_CLAIM_BYTES_AND_CLAIM_ID_MATCH",
+    "WHOLE_LEAF_DOMAIN_EQUIVALENCE_INDEPENDENTLY_VERIFIED_24_OF_24",
+    "WHOLE_LEAF_SCOPE_COMPLETE_24_OF_24_WITH_ZERO_PROPERTY_SELF_PROMOTION",
+    "R12_IDENTITY_CARRIER_UNIVERSAL_FACTORIZATION_PROVED_WITH_ZERO_SEMANTIC_INFORMATION_LOSS",
+    "R12_SCOPE_HAS_NO_FILTERS_OR_EXCLUSIONS_AND_QUANTIFIES_OVER_ALL_ADMISSIBLE_LEAF_INPUTS",
+    "MISSION_AUTHORITY_BYTES_MATCH_FROZEN_CLAIM"
+  ],
+  "theorem": {
+    "statement": "FOR_THIS_EXACT_FROZEN_R12_SEMANTIC_CLAIM__B_PLUS_IS_THE_COMPLETE_ADMISSIBLE_CLAIM_WORLD_STATE_DOMAIN_WITH_IDENTITY_CARRIER_AND_ALL_UNRESOLVED_FIELDS_RETAINED_AS_TOP_OR_UNKNOWN__THEREFORE_EVERY_REAL_IN_SCOPE_STATE_IS_CONTAINED_IN_B_PLUS__B_REAL_C_IS_A_SUBSET_OF_B_PLUS_C",
+    "proof_mode": "KERNEL_CHECKED",
+    "conservative_overapproximation": true,
+    "b_real_subseteq_b_plus": true,
+    "semantic_information_loss": false,
+    "finite_witness_set_used": false,
+    "future_claim_bytes_covered": false,
+    "r12_semantic_property_truth_implied": false,
+    "global_mission_completion_implied": false
+  },
+  "semantic_claim_verified": false,
+  "cc_r1_reality_containment_authority": false,
+  "r12_semantic_property_truth_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "accounting": {
+    "fresh_reality_units_consumed": 0,
+    "incremental_spend_usd": 0,
+    "property_truth_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
