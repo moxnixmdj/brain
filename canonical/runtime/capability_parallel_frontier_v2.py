@@ -47,6 +47,10 @@ PROFESSIONAL_ROOT_NAMES = {
     12: "META_COMPOSITION_CLOSURE",
 }
 PROFESSIONAL_SOURCE_REL = "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json"
+PROFESSIONAL_COMPOSITION_GATE_RUNTIME = "canonical/runtime/professional_quality_same_subject_composition_gate_v3.py"
+PROFESSIONAL_COMPOSITION_GATE_RUNTIME_SHA = "ddbe6ec92fef405b8909a161ef9acd685ec7317b"
+PROFESSIONAL_COMPOSITION_GATE_VERIFY = "canonical/verification/PROFESSIONAL_QUALITY_SAME_SUBJECT_GATE_V3_RECEIPT_ADAPTER_PUBLIC_VERIFY_20261010_V1.json"
+PROFESSIONAL_COMPOSITION_GATE_VERIFY_SHA = "79910bf40700ddf000630a7169566fef91e6c939"
 
 BENEFIT_INTERVALS = (
     ("expected_capability_gain_lcb", "expected_capability_gain_ucb"),
@@ -188,7 +192,10 @@ def refresh_supported_dynamic_sources(
         if isinstance(row, Mapping)
         and (
             _s(row.get("work_id")).startswith("PROFESSIONAL_QUALITY_V7_R")
-            or _s(row.get("work_id")) == "PROFESSIONAL_QUALITY_V7_SAME_SUBJECT_BINDINGS_COMPLETE"
+            or _s(row.get("work_id")) in {
+                "PROFESSIONAL_QUALITY_V7_SAME_SUBJECT_BINDINGS_COMPLETE",
+                "PROFESSIONAL_QUALITY_V7_SAME_SUBJECT_COMPOSITION_GATE",
+            }
         )
     ]
     if len(positions) != 1:
@@ -196,22 +203,57 @@ def refresh_supported_dynamic_sources(
     i = positions[0]
 
     expected_id = (
-        "PROFESSIONAL_QUALITY_V7_SAME_SUBJECT_BINDINGS_COMPLETE"
+        "PROFESSIONAL_QUALITY_V7_SAME_SUBJECT_COMPOSITION_GATE"
         if next_index == 13
         else "PROFESSIONAL_QUALITY_V7_R" + str(next_index) + "_" + next_name + "_BINDING"
     )
     if professional_changed:
         source_row["git_blob_sha"] = actual_sha
         if next_index == 13:
-            candidates[i] = {
-                **dict(candidates[i]),
-                "work_id": expected_id,
-                "scheduler_state": "BLOCKED",
-                "prerequisites_satisfied": False,
-                "readiness": "ALL_12_ROOT_BINDINGS_COMPLETE__COMPOSITION_GATE_NEXT_OUTSIDE_THIS_DYNAMIC_ADAPTER",
-                "vector_evidence_state": "UNBOUND",
-                "vector_evidence": {},
+            row = dict(candidates[i])
+            row.update(
+                {
+                    "work_id": expected_id,
+                    "work_type": "RELIABILITY_IMPROVEMENT",
+                    "causal_role": (
+                        "VERIFY_ALL_12_INDEPENDENT_ROOT_SUBJECT_BINDINGS_COMPOSE_"
+                        "TO_THE_SAME_FROZEN_V7_SUBJECT__UPSTREAM_OF_DOMAIN_LEVEL_"
+                        "CHALLENGES_AND_REMAINING_SEMANTIC_EXECUTION_EVIDENCE"
+                    ),
+                    "scheduler_state": "READY_EVIDENCE",
+                    "prerequisites_satisfied": True,
+                    "prerequisite_work_ids": [],
+                    "readiness": (
+                        "ALL_12_ROOT_BINDINGS_COMPLETE__RUN_VERIFIED_V3_"
+                        "SAME_SUBJECT_COMPOSITION_GATE_READ_ONLY"
+                    ),
+                    "mutation_keys": ["canonical:professional-quality"],
+                    "authority_keys": ["authority:professional-v7-composition"],
+                    "explicit_conflict_work_ids": [],
+                    "evidence_conflict_keys": [],
+                    "evidence_acquisition_mode": "READ_ONLY",
+                    "vector_evidence_state": "PARTIAL",
+                    "vector_evidence": {},
+                }
+            )
+            row["read_only_evidence"] = {
+                "source": PROFESSIONAL_SOURCE_REL,
+                "source_git_blob_sha": actual_sha,
+                "verified_root_subject_binding_count": 12,
+                "required_root_count": 12,
+                "next_action": "RUN_SAME_SUBJECT_COMPOSITION_GATE",
+                "composition_gate_runtime": PROFESSIONAL_COMPOSITION_GATE_RUNTIME,
+                "composition_gate_runtime_git_blob_sha": PROFESSIONAL_COMPOSITION_GATE_RUNTIME_SHA,
+                "composition_gate_independent_verification": PROFESSIONAL_COMPOSITION_GATE_VERIFY,
+                "composition_gate_independent_verification_git_blob_sha": PROFESSIONAL_COMPOSITION_GATE_VERIFY_SHA,
+                "composition_gate_authority_boundary": (
+                    "READ_ONLY_COMPOSITION_ADMISSIBILITY_ONLY__NO_QUALITY_"
+                    "ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+                ),
+                "vector_bounds_complete": False,
+                "dynamic_current_pointer_follow": True,
             }
+            candidates[i] = row
         else:
             row = dict(candidates[i])
             row["work_id"] = expected_id
@@ -253,7 +295,7 @@ def refresh_supported_dynamic_sources(
         for finding in findings:
             if isinstance(finding, dict) and finding.get("id") == "PROFESSIONAL_CURRENT":
                 finding["truth"] = (
-                    "R1_R12_V7_BINDINGS_VERIFIED__12_OF_12__COMPOSITION_NEXT"
+                    "R1_R12_V7_BINDINGS_VERIFIED__12_OF_12__SAME_SUBJECT_COMPOSITION_GATE_NEXT"
                     if next_index == 13
                     else "R1_R"
                     + str(next_index - 1)
@@ -270,7 +312,7 @@ def refresh_supported_dynamic_sources(
         "professional_current_pointer_follow": True,
         "professional_current_git_blob_sha": actual_sha,
         "professional_next_root": (
-            "COMPLETE"
+            "SAME_SUBJECT_COMPOSITION_GATE"
             if next_index == 13
             else "R" + str(next_index) + "_" + next_name
         ),
