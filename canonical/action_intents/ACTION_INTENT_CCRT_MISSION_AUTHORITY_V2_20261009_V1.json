@@ -1,0 +1,79 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V12_INSTANCE",
+  "action_id": "CCRT_MISSION_SEMANTIC_AUTHORITY_AND_CLAIM_AUTHORIZATION_V2_20261009",
+  "date": "2026-10-09",
+  "status": "ACTIVE_PROOF_ONLY__ZERO_FRESH_REALITY__ZERO_TERMINAL_CREDIT",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_base_commit": "69693869a3014466419a245fae01a811618232d6",
+  "capability_target": "CCRT_CLAIM_SOUNDNESS",
+  "action_kind": "R2_R4_MISSION_AUTHORITY_REPAIR",
+  "causal_blocker": "CCRT_CLAIM_SCOPE_V1_STRUCTURALLY_BINDS_A_MISSION_POINTER_BUT_DOES_NOT_PROVE_TARGET_PREDICATE_AUTHORIZATION__AND_R4_PINS_VOLATILE_POINTER_BYTES_INSTEAD_OF_STABLE_MISSION_SEMANTICS",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::CCRT_CLAIM_SOUNDNESS::MISSION_AUTHORIZATION_AND_SEMANTIC_POINTER_BINDING",
+  "demonstrated_counterexamples": [
+    {
+      "id": "UNAUTHORIZED_CLAIM_STRUCTURALLY_ACCEPTED",
+      "construction": "PROPERTY_CERTIFICATE + current mission hash + arbitrary target/semantics hashes + authority_id=ARBITRARY_UNAUTHORIZED_AUTHORITY + self-consistent claim_id",
+      "observed_v1_result": "PASS__FROZEN_CLAIM_SCOPE",
+      "expected_sound_result": "FAIL_CLOSED__MISSION_AUTHORIZATION_MISSING"
+    },
+    {
+      "id": "SEMANTIC_NOOP_POINTER_DRIFT_INVALIDATES_R4",
+      "prior_pointer_blob": "52b98f8019938fa7d8164e6a47e359ffb0faeb6a",
+      "current_pointer_blob": "07038a32598324c7aed88929a09c58bbe28b51a1",
+      "authoritative_mission_source_blob": "13c470645b037bbb46245c687dd35197b420d51a",
+      "mission_semantics_sha256": "4d3d7866ad8ee54606a11791f53519eef15a80700bd5dcc221ec0da676ceb942",
+      "semantic_change": false,
+      "defect": "R4_CURRENTNESS_COUPLED_TO_INCIDENTAL_POINTER_FIELDS"
+    }
+  ],
+  "selected_route": "ADD_STABLE_MISSION_SEMANTIC_AUTHORITY_V1__ADD_CLAIM_SCOPE_V2_WITH_MISSION_SEMANTICS_DIGEST__ADD_INDEPENDENT_CLAIM_AUTHORIZATION_GATE__BIND_CURRENT_CCRT_R4_TO_V2",
+  "deletion_first": {
+    "reused": [
+      "REAL_MISSION_OBJECTIVE_20261008_V1",
+      "COVERAGE_COMPLETENESS_CLAIM_SCOPE_V1_AS_STRUCTURAL_PREDECESSOR",
+      "COVERAGE_ROOT_NAMESPACE_GUARD_V1",
+      "MISSION_SUFFICIENT_SEMANTIC_CARRIER_V1",
+      "EXISTING_CONTENT_ADDRESSED_RECEIPT_PATTERN"
+    ],
+    "rejected": [
+      "REBIND_WHOLE_CURRENT_MISSION_POINTER_ON_EVERY_AUXILIARY_CHANGE",
+      "TREAT_AUTHORITY_ID_STRING_AS_AUTHORIZATION",
+      "ADD_NEW_CCRT_ROOT"
+    ]
+  },
+  "theorem_goal": {
+    "r2_induction": [
+      "G_minus_0[C]=EMPTY_SET",
+      "ADMIT_X_ONLY_IF_AUTHORIZED_GOOD_CERT(C,X)",
+      "AUTHORIZED_GOOD_CERT(C,X) => X SUBSETEQ G_real[C]",
+      "G_minus_t SUBSETEQ G_real[C] AND X SUBSETEQ G_real[C] => G_minus_t UNION X SUBSETEQ G_real[C]"
+    ],
+    "r4_currentness": "MISSION_POINTER_IS_A_LOCATOR__MISSION_SEMANTIC_AUTHORITY_SOURCE_AND_SEMANTIC_DIGEST_ARE_LOAD_BEARING"
+  },
+  "behavioral_contract": {
+    "behavior_id": "CCRT_AUTHORIZED_CLAIM_ADMISSION_V2",
+    "inputs": [
+      "frozen_claim",
+      "mission_semantic_authority",
+      "claim_authorization_receipt",
+      "independent_authorization_verification"
+    ],
+    "required_output_or_action": "PASS_ONLY_WHEN_THE_EXACT_FROZEN_CLAIM_IS_EXPLICITLY_AUTHORIZED_UNDER_CURRENT_MISSION_SEMANTICS",
+    "success_condition": "ARBITRARY_TARGET_OR_SEMANTICS_HASH_CANNOT_ENTER_G_MINUS_BY_SELF_CONSISTENT_HASH_BINDING",
+    "failure_condition": "STRUCTURALLY_VALID_BUT_UNAUTHORIZED_CLAIM_IS_ACCEPTED",
+    "terminal_consequence": "PRESERVE_CCRT_R2_MISSION_SOUNDNESS",
+    "verification_route": "DETERMINISTIC_NEGATIVE_CANARIES_PLUS_INDUCTIVE_SET_THEOREM_CHECK",
+    "scope": "CLAIM_SCOPED_R2_R4_ONLY"
+  },
+  "reality_query_admission": {
+    "verdict": "NO_REALITY_QUERY_REQUIRED",
+    "fresh_reality_units": 0
+  },
+  "accounting": {
+    "fresh_reality_units_consumed": 0,
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}

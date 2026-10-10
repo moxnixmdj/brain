@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_CCRT_GOOD_CELL_VERIFIER_REGISTRY_V1",
+  "date": "2026-10-09",
+  "status": "ACTIVE_CONTENT_ADDRESSED_GOAL_SATISFACTION_VERIFIER_REGISTRY__ZERO_CREDIT",
+  "rule": "ONLY_REGISTERED_CONTENT_ADDRESSED_GOAL_SATISFACTION_VERIFIERS_MAY_SUPPORT_A_G_MINUS_CELL__EVERY_CELL_STILL_REQUIRES_EXACT_CLAIM_BINDING_AND_INDEPENDENT_SEMANTIC_VERIFICATION",
+  "verifiers": [
+    {
+      "verifier_id": "LOSSLESS_RAW_TASK_ACCEPTANCE_V1",
+      "path": "canonical/runtime/lossless_raw_task_acceptance_gate_v1.py",
+      "git_blob_sha": "1cc72c7075d2e113dfbb2c0f790a3e0bd2a1e7dd",
+      "success_status": "PASS__EVERY_RAW_TASK_OBLIGATION_INDEPENDENTLY_ACCEPTED",
+      "scope": "LOSSLESS_RAW_TASK_CONTRACT_WITH_EXACT_CANDIDATE_BOUND_ACCEPTANCE_AND_INDEPENDENT_VERIFICATION"
+    },
+    {
+      "verifier_id": "RAW_GOAL_EXACT_LITERAL_ACCEPTANCE_V1",
+      "path": "canonical/runtime/raw_goal_exact_literal_acceptance_v1.py",
+      "git_blob_sha": "18e1a6f1daa8d0b83853649be83c427a063ae55c",
+      "success_status": "PASS__EXACT_LITERAL_RAW_GOAL_ACCEPTED",
+      "scope": "STRICT_EXACT_LITERAL_RAW_GOALS"
+    },
+    {
+      "verifier_id": "RAW_GOAL_LITERAL_JSON_ACCEPTANCE_V1",
+      "path": "canonical/runtime/raw_goal_literal_json_acceptance_v1.py",
+      "git_blob_sha": "2a02b73145e7779a4b8a952585d5229cb22ec920",
+      "success_status": "PASS__LITERAL_JSON_RAW_GOAL_ACCEPTED",
+      "scope": "STRICT_LITERAL_JSON_RECORD_GOALS"
+    },
+    {
+      "verifier_id": "RAW_GOAL_ARCHIVE_ACCEPTANCE_V1",
+      "path": "canonical/runtime/raw_goal_archive_acceptance_v1.py",
+      "git_blob_sha": "fe6210c737975509be6488d97cefe64e455877ef",
+      "success_status": "PASS__EXACT_RAW_GOAL_ARCHIVE_ACCEPTED",
+      "scope": "STRICT_ARCHIVE_MANIFEST_GOALS"
+    }
+  ],
+  "hard_rules": [
+    "REGISTRY_MEMBERSHIP_IS_NECESSARY_NOT_SUFFICIENT",
+    "VERIFIER_BLOB_MUST_MATCH_EXACTLY",
+    "GOOD_CELL_MUST_BIND_EXACT_CLAIM_SCOPE_AND_SEMANTICS",
+    "GOOD_CELL_REQUIRES_SEPARATE_INDEPENDENT_SEMANTIC_VERIFICATION",
+    "VERIFIER_OUTPUT_OR_ROUTING_SUCCESS_ALONE_CANNOT_ENTER_G_MINUS"
+  ],
+  "accounting": {
+    "fresh_reality_units_consumed": 0,
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
