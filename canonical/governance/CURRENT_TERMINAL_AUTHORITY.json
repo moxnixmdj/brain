@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V36",
   "date": "2026-10-09",
-  "status": "ACTIVE_FAIL_CLOSED_REAL_MISSION_BOUND__STRICT_EXTERNALITY_RECONCILED__R3_ZERO_RESIDUAL_RECONCILED__OPUS_5_5_CHECKPOINT_TERMINAL_FALSE__CURRENT_R2_V66_AND_CODING_V4_FIVE_REGION_PROJECTION_BOUND__COVERAGE_R1_R4_LIVE_BINDING_REPAIRED__CLAIM_SCOPED_COMPLETENESS_THEOREM_BOUND__ROOT_NAMESPACE_COLLISION_GUARDED",
+  "status": "ACTIVE_FAIL_CLOSED_REAL_MISSION_BOUND__STRICT_EXTERNALITY_RECONCILED__R3_ZERO_RESIDUAL_RECONCILED__OPUS_5_5_CHECKPOINT_TERMINAL_FALSE__CURRENT_R2_V67_AND_CODING_V4_FIVE_REGION_PROJECTION_BOUND__COVERAGE_R1_R4_LIVE_BINDING_REPAIRED__CLAIM_SCOPED_COMPLETENESS_THEOREM_BOUND__ROOT_NAMESPACE_COLLISION_GUARDED",
   "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "authoritative_sources": {
     "universal_escape_resolver_v2_active_planning_overlay": {
@@ -887,10 +887,10 @@
     "current_r2_decision_intelligence": {
       "path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
       "scheduler_cut": {
-        "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V61.json",
-        "git_blob_sha": "aeea6e38637d0fe8642847f446de730724e40120"
+        "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261010_V62.json",
+        "git_blob_sha": "e7a97ad818144e02594223e4b01fed76d18d0bbe"
       },
-      "status": "ACTIVE_CURRENT_R2_AUTHORITY__V66__FORTY_DIRECT_ROUTES__THIRTY_SIX_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__DERIVED_TYPED_TERMINAL_SIGNATURES_ROUTE_BOUND__MREL_NECESSARY_PROPERTY_AUTHORITY_BOUND__TLAC_MREL_SHARED_SIGNATURE_NONSEPARATION_GUARD_BOUND__OEWN_DECISION_MANIFEST_LATTICE_BOUND__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_REMAINS",
+      "status": "ACTIVE_CURRENT_R2_AUTHORITY__V67__FORTY_DIRECT_ROUTES__THIRTY_SIX_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__DERIVED_TYPED_TERMINAL_SIGNATURES_ROUTE_BOUND__MREL_NECESSARY_PROPERTY_AUTHORITY_BOUND__TLAC_MREL_SHARED_SIGNATURE_NONSEPARATION_GUARD_BOUND__TLAC_MREL_BOUNDED_IDENTITY_DISCRIMINATOR_BOUND__OEWN_DECISION_MANIFEST_LATTICE_BOUND__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_REMAINS",
       "pointer_semantics": "MUTABLE_CURRENT_POINTER__PATH_IDENTITY_AUTHORITATIVE__IMMUTABLE_SCHEDULER_CUT_HASH_BOUND_BELOW",
       "mutable_pointer_blob_is_not_load_bearing": true
     },
@@ -2326,7 +2326,11 @@
     "tb_science_rank16_controller_repair_verification_blob": "5070f37f6d6364efbd572f41c942c326b1cd0265",
     "tb_science_rank16_repaired_controller_blob": "b7c821bc63523d21ed56665fae4d88e10ee148d5",
     "tb_science_rank16_next_required_transition": "FRESH_ZERO_EXPOSURE_CARRIER_QUALIFICATION_THEN_CONTENT_ADDRESSED_ONE_SLOT_AUTHORITY",
-    "tb_science_rank16_public_zero_exposure_carrier_qualified": false
+    "tb_science_rank16_public_zero_exposure_carrier_qualified": false,
+    "r2_tlac_mrel_bounded_identity_discriminator_bound": true,
+    "r2_tlac_mrel_bounded_identity_scope_id": "REGCAP_TLAC_MREL_BOUNDED_RIVAL_TASK_V1",
+    "r2_tlac_mrel_global_identity_closed": false,
+    "r2_tlac_mrel_shared_signature_remains_nonseparating": true
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -3016,14 +3020,14 @@
   },
   "r2_scheduler_precedence": {
     "current_authority_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
-    "current_scheduler_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261009_V61.json",
-    "current_scheduler_git_blob_sha": "aeea6e38637d0fe8642847f446de730724e40120",
+    "current_scheduler_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261010_V62.json",
+    "current_scheduler_git_blob_sha": "e7a97ad818144e02594223e4b01fed76d18d0bbe",
     "single_live_primitive": "ESCAPE_POLICY_ADEQUACY",
     "general_mechanism_missing": false,
     "enumerated_active_zero_reality_cell_count": 0,
     "enumerated_external_required_sleep_cell_count": 0,
     "historical_root2_scheduler_fields_authoritative_for_current_r2": false,
-    "rule": "CURRENT_R2_V66_OVERLAYS_ROOT2_V61__PRESERVE_ROUTE40__BIND_MREL_ONE_WAY_AND_TLAC_MREL_NONSEPARATION__REUSE_CLOSED_SOURCE_PROVED_OEWN_DECISION_LATTICE__ONE_FINANCE_RESIDUAL_REMAINS",
+    "rule": "CURRENT_R2_V67_OVERLAYS_ROOT2_V62__PRESERVE_ROUTE40__BIND_MREL_ONE_WAY_TLAC_MREL_NONSEPARATION_AND_EXACT_BOUND_PAIR_IDENTITY_DISCRIMINATOR__REUSE_CLOSED_SOURCE_PROVED_OEWN_DECISION_LATTICE__ONE_FINANCE_RESIDUAL_REMAINS",
     "current_authority_pointer_mutable": true,
     "current_authority_pointer_blob_is_not_load_bearing": true,
     "binding_law": "CURRENT_POINTERS_BIND_BY_CANONICAL_PATH_IDENTITY__IMMUTABLE_VERSIONED_AUTHORITY_ARTIFACTS_BIND_BY_GIT_BLOB_SHA",
@@ -4552,5 +4556,22 @@
     "terminal_credit_delta": 0,
     "rank16_controller_repair_prerequisite_satisfied": true,
     "rank16_next_required_transition": "FRESH_ZERO_EXPOSURE_CARRIER_QUALIFICATION_THEN_CONTENT_ADDRESSED_ONE_SLOT_AUTHORITY"
+  },
+  "r2_v67_tlac_mrel_identity_reconciliation_20261010_v1": {
+    "status": "RECONCILED__CURRENT_R2_V67_ROOT2_V62__TLAC_MREL_BOUND_IDENTITY_DISCRIMINATOR_BOUND__TERMINAL_FALSE__ZERO_CREDIT",
+    "current_r2_pointer_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+    "current_r2_git_blob_sha": "cc2162c262c9052e5d57f97ae20266a85c14ea87",
+    "scheduler_cut_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261010_V62.json",
+    "scheduler_cut_git_blob_sha": "e7a97ad818144e02594223e4b01fed76d18d0bbe",
+    "direct_route_count": 40,
+    "bounded_family_count": 36,
+    "dynamic_admission_count": 3,
+    "tlac_mrel_identity_runtime_git_blob_sha": "cc658256abe2b7958c62ae6bc2b55a8872fac147",
+    "tlac_mrel_identity_verification_git_blob_sha": "30d94a9878e2910fb2f626d394dc1a79596cfd91",
+    "finance_tail_closed": false,
+    "global_tlac_mrel_identity_closed": false,
+    "terminal": false,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
   }
 }
