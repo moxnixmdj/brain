@@ -320,10 +320,10 @@
     "cases": 6
   },
   "bytes_minimization_control": {
-    "status": "ACTIVE__JOINT_LAZY_IMPORT_SUCCESSOR_BYTE_FRONTIER__ZERO_CAPABILITY_CREDIT_FROM_RESEARCH_CHECKPOINT_ALONE",
+    "status": "ACTIVE__INTRAMODULE_FAILCLOSED_TRIM_FRONTIER__ZERO_CAPABILITY_CREDIT_FROM_RESEARCH_CHECKPOINT_ALONE",
     "law": "canonical/laws/BYTES_RESOURCE_BOUNDED_MINIMUM_MECHANISM_LAW_V1.md",
     "white_box_law": "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V1.md",
-    "current_research_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_JOINT_LAZY_IMPORT_SUCCESSOR_EXECUTION_20261010_V1.json",
+    "current_research_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_FAILCLOSED_TRIM_SUCCESSOR_EXECUTION_20261010_V1.json",
     "objective": "MINIMUM_RESOURCE_FEASIBLE_EXECUTABLE_DESCRIPTION_CONDITIONAL_ON_ALREADY_OWNED_BRAIN_SUBSTRATE",
     "accounting": [
       "B_EXEC",
@@ -339,37 +339,38 @@
       "LARGER_MODULE_ONLY_IF_REQUIRED"
     ],
     "global_rule": "OPTIMIZE_JOINT_DEPENDENCY_CLOSED_MECHANISM_COVER__COUNT_SHARED_SUBSTRATE_ONCE",
-    "current_exact_symbolic_bottleneck": "POLYS__SUCCESSOR_TRACE_RAW_1211849__FACTOR__COEFFICIENT__EXACT_ROOTS_DEGREE_LE_4",
-    "truth_boundary": "FRESH_PHYSICAL_BYTE_FRONTIER_MEASURED__EXPRESSIONDOMAIN_QUARTIC_DEPENDENCY_FALSIFIED_AS_REMOVABLE__NO_OPUS_FAMILY_PROMOTION_CREDIT__NO_UNIVERSAL_MINIMUM_CLAIM",
+    "current_exact_symbolic_bottleneck": "POLYS__SUCCESSOR_TRACE_RAW_788908__FACTOR__COEFFICIENT__EXACT_ROOTS_DEGREE_LE_4",
+    "truth_boundary": "FRESH_PHYSICAL_BYTE_FRONTIER_MEASURED__INTRAMODULE_DEAD_SURFACE_FAILCLOSED_TRIMMED__NO_OPUS_FAMILY_PROMOTION_CREDIT__NO_UNIVERSAL_MINIMUM_CLAIM",
     "current_fresh_exact_symbolic_candidate": {
-      "package_raw_python_source_bytes": 6306260,
-      "B_exec_raw_python_source_bytes": 6309020,
+      "package_raw_python_source_bytes": 5883319,
+      "B_exec_raw_python_source_bytes": 5886079,
       "B_verify_semantic_digest_raw_bytes": 1358,
-      "persistent_xz_comparable_bytes": 1096200,
-      "qualification": "4370/4370",
-      "stock_donor_positive_control": "4370/4370",
-      "clean_room_execution": "4370/4370",
-      "archive_replay": "4370/4370",
-      "manifest_sha256": "2e5c1207f9877341f9cc5fc775fac472d478668d887761ee12a034487220bfb6",
-      "comparable_archive_sha256": "e9ed3086ad678a8e3c17f2dfabd1b3e39fa6a44d93e57a651a9bef38a1da6ac9",
+      "persistent_xz_comparable_bytes": 1029488,
+      "qualification": "4830/4830",
+      "stock_donor_positive_control": "4830/4830",
+      "clean_room_execution": "4830/4830",
+      "archive_replay": "4830/4830",
+      "manifest_sha256": "181d7798bc5b9b0cdd182c8fc052d7620b9bd490ef74ff3e0e4920218410e5c4",
+      "comparable_archive_sha256": "90286e299618a07c68140aa9791e9399a3f944e2df19c558785da54853cb93f3",
       "promotion_credit": 0
     },
     "latest_structural_cut": {
-      "id": "JOINT_ZERO_EXECUTION_BRANCH_LOCAL_IMPORT_BUNDLE_V9",
-      "removed_raw_file_bytes": 75519,
-      "net_package_reduction_bytes": 74344,
-      "removed_files": 11,
-      "causal_result": "ZERO_EXECUTION_EAGER_DEPENDENCIES_DEFERRED_TO_EXACT_BRANCHES__FRESH_NEXT11_PASS"
+      "id": "INTRA_MODULE_CAUSAL_DEAD_WEIGHT_FAILCLOSED_TRIM_V10",
+      "files_changed": 20,
+      "fail_closed_stub_targets": 1006,
+      "removed_raw_bytes": 422941,
+      "deleted_files": 0,
+      "causal_result": "ALL_MODULES_RETAINED__UNEXECUTED_FUNCTION_METHOD_BODIES_REPLACED_BY_HASH_BOUND_FAIL_CLOSED_STUBS__FRESH_NEXT13_PASS"
     },
     "previous_fresh_frontier": {
-      "raw_python_source_bytes": 6380604,
-      "persistent_xz_comparable_bytes": 1108544,
-      "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_LAZY_MINPOLY_SUCCESSOR_EXECUTION_20261010_V1.json"
+      "raw_python_source_bytes": 6306260,
+      "persistent_xz_comparable_bytes": 1096200,
+      "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_JOINT_LAZY_IMPORT_SUCCESSOR_EXECUTION_20261010_V1.json"
     },
     "next_frozen_qualification": {
-      "id": "QUAL_SUCCESSOR_NEXT12_20261010_V1",
-      "cases": 4600,
-      "corpus_sha256": "d092726e2c648f73172799cdd71b162ecdded3d6e0044ee1155476bf8cdab124",
+      "id": "QUAL_SUCCESSOR_NEXT14_20261010_V1",
+      "cases": 5060,
+      "corpus_sha256": "acd117d92c2ec91279ff9e58d4460c816fa4a34f957485e705f0482d07df43be",
       "spent": false
     },
     "current_falsification_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_NEXT10_EXPRESSIONDOMAIN_FALSIFICATION_20261010_V1.json",
