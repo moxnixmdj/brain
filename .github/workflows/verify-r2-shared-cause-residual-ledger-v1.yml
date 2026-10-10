@@ -10,6 +10,7 @@ on:
       - canonical/tests/test_capability_first_scheduler_v1.py
       - canonical/governance/CURRENT_R2_SHARED_CAUSE_RESIDUAL_LEDGER.json
       - canonical/governance/R2_SHARED_CAUSE_RESIDUAL_LEDGER_ACTIVATION_20261010_V1.json
+      - canonical/governance/R2_MECHANISM_CLOSURE_OPEN_WORLD_FRONTIER_POLICY_20261010_V2.json
       - canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V4.json
       - canonical/governance/CURRENT_DEVELOPMENT_SCHEDULER.json
       - canonical/governance/CURRENT_MISSION_OBJECTIVE.json
