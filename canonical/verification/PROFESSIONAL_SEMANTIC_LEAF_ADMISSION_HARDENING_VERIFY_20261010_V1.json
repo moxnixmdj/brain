@@ -13,7 +13,8 @@
     },
     "stable_claim_generator": {
       "path": "canonical/runtime/professional_semantic_totality_claim_pack_v3.py",
-      "git_blob_sha": "803bda772beaa11318ebaafb7f47e45512150e0b"
+      "git_blob_sha": "5c3b47bc2d72b2e0b6b01c3e04635928419082fc",
+      "note": "CURRENT_MAIN_V3_PACK_AFTER_SELF_CONTAINED_STABLE_AUTHORITY_REPAIR"
     }
   },
   "focused_replay": {
@@ -58,5 +59,11 @@
     "property_truth_credit_delta": 0,
     "acceptance_credit_delta": 0,
     "terminal_credit_delta": 0
+  },
+  "currentness": {
+    "branch_base_main_commit": "860cdf52cd4356964ce27e1d7511b245c793bbb0",
+    "current_pack_v3_blob": "5c3b47bc2d72b2e0b6b01c3e04635928419082fc",
+    "old_r12_root_receipt_stale_under_current_pack": true,
+    "semantic_admission_guard_does_not_transport_old_root_authority": true
   }
 }
