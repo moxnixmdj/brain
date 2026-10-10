@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK20_PUBLIC_EFFECTIVE_AUTHORITY_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__PUBLIC_EFFECTIVE_AUTHORITY_PROMOTED__PREACTIVATION__ZERO_EXPOSURE",
+  "slot_id": "terminal-bench-science/hysteretic-aquifer-control::trial-0",
+  "task_digest": "sha256:681df0c3b2ada03a933ac4d2e11f07983676f87a9f26b61e416987904b880289",
+  "logical_attempt_id": "62bbf27ddcc679f431c5569244cf0c54fb1b13181e83076e2c019764f0b747e2",
+  "execution_claim_binding_digest": "sha256:ad74fd461333c1673b76ec0b439aba98c35bf6a0691796b24a5847209873adba",
+  "canonical_authority": {
+    "path": "canonical/governance/TB_SCIENCE_RANK20_ONE_SLOT_EXECUTION_AUTHORITY_20261010_V3.json",
+    "git_blob_sha": "6720cd2ea9ca70f6cf1b4a26036c935759842140"
+  },
+  "canonical_ledger": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V44.json",
+    "git_blob_sha": "fb20c82a5b7f8c7738a526905d51cab5c7994a5a"
+  },
+  "public": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "promotion_pull_request": 2602,
+    "promotion_head_sha": "95a16b7526d6826cec7cf172af58c13dd62a7092",
+    "promotion_merge_commit_sha": "e022d442233c748b7405664f70b56ab56622e680",
+    "surface_git_blob_sha": "4fdf6fc7c4f07ffa6afea524a03bf1588f0cfb21",
+    "public_authority_git_blob_sha": "fcd77d4db9570e8ab7c3898ad82ffd69216d81b3",
+    "public_ledger_git_blob_sha": "fd61b24b76065aae96986b12e99bd34c72a2ffac",
+    "epoch_git_blob_sha": "e9d85cc9c737c904e8c7e2b17ed2e2787d2a00e3",
+    "execution_claim_git_blob_sha": "f377c3b4cb6d0941cb963794010cd01b31789efd",
+    "promotion_verifier_git_blob_sha": "ef71df0295129bb5b34df55895dd167ea174015e",
+    "workflow_git_blob_sha": "19a12ff77ebdedb3177f05281e116dee69d915ea",
+    "effective_behavior_git_blob_sha": "dc20b4ef740eaeb6741c834d9c74634653c69193",
+    "claim_seed_behavior_git_blob_sha": "9012d4bf1c84e157cdfa27ec04fd1a5afd7c78c7",
+    "activation_present": false,
+    "execution_authority": true,
+    "task_read_authority": true,
+    "task_read": false,
+    "task_started": false,
+    "benchmark_trials_consumed": 0
+  },
+  "github_verification": {
+    "ratchet_run_id": 38043449457,
+    "ratchet_job_id": 114188125949,
+    "conclusion": "success",
+    "artifact_digest": "sha256:173a2d5ef4a141cb66b5f6548b1e4e2bdfc800bc945be5c301e67d525ce95aa1"
+  },
+  "independent_replay": {
+    "provider": "Sprites",
+    "sprite_name": "rank20-promotion-verify",
+    "sprite_id": "sprite-7850419c-b251-4e33-8105-22dc68013fb3",
+    "promotion_theorem_pass": true,
+    "admission_pass": true,
+    "preflight_pass": true,
+    "activation_gate_closed": true
+  },
+  "pass": true,
+  "task_read": false,
+  "task_started": false,
+  "benchmark_trials_consumed": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
