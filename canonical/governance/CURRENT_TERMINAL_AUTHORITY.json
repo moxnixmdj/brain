@@ -1999,7 +1999,7 @@
     "cursorbench_absence_of_bound_v5_failure_is_adequacy_proof": false,
     "cursorbench_one_v5_pass_is_scope_complete_adequacy_proof": false,
     "cursorbench_selector_work_authorized_now": false,
-    "cursorbench_next_proof_object": "ACQUIRE_TARGET_RELEVANT_MEMBERSHIP_OWNER_GRADER_OR_SCORE_AUTHORITY_FOR_THE_FIVE_EXISTING_REGIONS__ONLY_AUTHENTICATE_A_SIXTH_REGION_IF_IT_STRICTLY_ADDS_HIGH_YIELD_ADEQUACY_INFORMATION",
+    "cursorbench_next_proof_object": "EVENT_DRIVEN_ONLY__WAIT_FOR_MATERIAL_TARGET_OWNER_GRADER_SCORE_RESULT_ARTIFACT_OR_ACCESS_DELTA__OR_NEW_INDEPENDENTLY_VERIFIED_CONSTRUCTIVE_CODING_THEOREM_FROM_OTHER_BRAIN_WORK__NO_CURSORBENCH_INTERNAL_JOB_NOW",
     "r2_sec_standard_xbrl_companyconcept_source_native_semantics_bound": true,
     "r2_sec_standard_xbrl_source_native_policy_adequacy_claimed": false,
     "cursorbench_advanced_coding_canonical_residual_count": 4,
@@ -2082,7 +2082,7 @@
     "cursorbench_threshold_lower_bound_route_state": "OPEN_BLOCKED",
     "cursorbench_threshold_lower_bound_route_blocker": "TWO_EXACT_4_0_SCORING_OBJECTS_REMAIN_UNBOUND",
     "cursorbench_stronger_scope_complete_route_state": "OPEN_INTERNAL",
-    "cursorbench_current_active_lane": "ROUTE_B_SCOPE_COMPLETE_STRONGER_PROOF",
+    "cursorbench_current_active_lane": "DORMANT_INFORMATION_BOUNDARY__EVENT_DRIVEN_REACTIVATION",
     "cursorbench_threshold_route_reactivation_trigger": "EXACT_FROZEN_SCORING_SEMANTICS_OR_EQUIVALENT_OWNER_OR_INDEPENDENT_LOWER_BOUND_AUTHORITY_BECOMES_AVAILABLE",
     "cursorbench_public_scoring_metric_family_bound": true,
     "cursorbench_public_scoring_metric_family": "SOLUTION_CORRECTNESS_ACCURACY_AGGREGATED_OVER_TASKS_WITH_MULTIPLE_EVALUATION_PASSES",
@@ -2352,7 +2352,23 @@
     "tb_science_rank18_prestart_abort_run_id": 38027841300,
     "tb_science_rank18_prestart_abort_truth_blob": "fd53eecbf4d974e45c936d592005f5f7d518e87d",
     "tb_science_rank18_prestart_abort_cause": "TASK_ARTIFACT_PATH_INVALID",
-    "tb_science_rank18_required_repair": "HARBOR_0_23_ARTIFACTCONFIG_TABLE_TO_MAIN_SERVICE_SOURCE_PATH_BRIDGE"
+    "tb_science_rank18_required_repair": "HARBOR_0_23_ARTIFACTCONFIG_TABLE_TO_MAIN_SERVICE_SOURCE_PATH_BRIDGE",
+    "cursorbench_internal_execution_state": "DORMANT_INFORMATION_BOUNDARY",
+    "cursorbench_immediate_internal_cursorbench_job": null,
+    "cursorbench_information_boundary_wait_state_bound": true,
+    "cursorbench_information_boundary_wait_state_path": "canonical/governance/CURSORBENCH_CURRENT_INFORMATION_BOUNDARY_WAIT_STATE_RECONCILIATION_20261010_V1.json",
+    "cursorbench_information_boundary_wait_state_git_blob_sha": "4f1df11b30d9b69090c31e234449975eb7cdfd89",
+    "cursorbench_route_a_same_static_public_surface_work_authorized_now": false,
+    "cursorbench_target_membership_same_public_metadata_work_authorized_now": false,
+    "cursorbench_constructive_scope_same_information_retry_authorized_now": false,
+    "cursorbench_sixth_region_work_authorized_now": false,
+    "cursorbench_sixth_region_reactivation_rule": "ONLY_AFTER_A_GENUINELY_NEW_BRAIN_OWNED_CODING_POLICY_WITH_AN_INDEPENDENTLY_VERIFIED_CONSTRUCTIVE_ADEQUACY_THEOREM_STRICTLY_EXPANDS_THE_EXISTING_FIVE_REGION_UNION",
+    "cursorbench_reactivation_triggers": [
+      "CURSOR_OR_TARGET_VENDOR_PUBLISHES_NEW_CURSORBENCH_4_0_SCORING_GRADER_TASK_OR_RESULT_ARTIFACT_INFORMATION",
+      "CURSOR_OWNER_ACCESS_POLICY_OR_EXTERNAL_EVALUATION_INTERFACE_MATERIALLY_CHANGES",
+      "CONTENT_ADDRESSED_ACTUAL_CURSORBENCH_TARGET_CONTEXT_OR_GRADER_EVIDENCE_BECOMES_AVAILABLE",
+      "A_NEW_BRAIN_OWNED_CODING_POLICY_WITH_AN_INDEPENDENTLY_VERIFIED_CONSTRUCTIVE_ADEQUACY_THEOREM_STRICTLY_EXPANDS_THE_FIVE_REGION_UNION"
+    ]
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -3058,7 +3074,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 127,
+  "pointer_revision": 128,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
@@ -4809,6 +4825,19 @@
     "activation_armed": false,
     "retries_authorized": 0,
     "replacement_allowed": false,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "cursorbench_information_boundary_wait_state_reconciliation_20261010_v1": {
+    "source": {
+      "path": "canonical/governance/CURSORBENCH_CURRENT_INFORMATION_BOUNDARY_WAIT_STATE_RECONCILIATION_20261010_V1.json",
+      "git_blob_sha": "4f1df11b30d9b69090c31e234449975eb7cdfd89"
+    },
+    "prior_pointer_revision": 127,
+    "result": "CURSORBENCH_INTERNAL_LANE_DORMANT_AT_CURRENT_INFORMATION_BOUNDARY__EVENT_DRIVEN_REACTIVATION_ONLY",
+    "score_threshold_proved": false,
+    "whole_positive_cover_closed": false,
+    "target_membership_created": false,
     "acceptance_credit_delta": 0,
     "terminal_credit_delta": 0
   }
