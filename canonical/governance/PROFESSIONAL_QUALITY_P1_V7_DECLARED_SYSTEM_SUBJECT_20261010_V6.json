@@ -1,0 +1,156 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_DECLARED_SYSTEM_SUBJECT_V2",
+  "date": "2026-10-10",
+  "status": "CONTENT_ADDRESSED_DECLARED_SYSTEM_SUBJECT__V7_PROOF_BOUND_PROFILE_EXECUTION__22_COMPONENTS__IDENTITY_ONLY__NOT_LIVE_DEFAULT__ZERO_QUALITY_AUTHORITY",
+  "source_main_commit": "ceaecb4667357f0661be18261ee1a70e6d42861f",
+  "subject_kind": "DECLARED_SYSTEM",
+  "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+  "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+  "subject_hash_rule": "SHA256_OF_RFC8259_JSON_CANONICALIZED_BY_SORTED_KEYS_NO_WHITESPACE_UTF8_OVER_SYSTEM_MATERIAL_OBJECT",
+  "system_material": {
+    "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_P1_V3_DECLARED_SYSTEM_SUBJECT_MATERIAL_V2",
+    "components": [
+      {
+        "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_EXECUTION_PROFILE_20261010_V3.json",
+        "git_blob_sha": "f7e89eafbb691c16d1bdf5b8d295a468d5e3bec5"
+      },
+      {
+        "path": "canonical/runtime/professional_quality_p1_router_v6.py",
+        "git_blob_sha": "88644e0517d472d9fbef8d5bc6cf3495f2b50005"
+      },
+      {
+        "path": "canonical/runtime/goal_to_decision_binding_authority_v1.py",
+        "git_blob_sha": "5b4573475437e9fc83338b900556b5c4f31c8d65"
+      },
+      {
+        "path": "canonical/runtime/professional_quality_p1_router_v4.py",
+        "git_blob_sha": "8e5d473b5606251752c4968dfd35290e9b991f16"
+      },
+      {
+        "path": "canonical/runtime/professional_quality_p1_router_v3.py",
+        "git_blob_sha": "cdb6716ac6d562d1ab222242d07aeecc5cdfac78"
+      },
+      {
+        "path": "canonical/runtime/professional_quality_p1_router_v2.py",
+        "git_blob_sha": "bdbbc53ab1e50743869ec515a019bfc17218f126"
+      },
+      {
+        "path": "canonical/runtime/professional_target_semantic_certificate_v1.py",
+        "git_blob_sha": "583612b0e2226053ac758683087b5c5d0f510996"
+      },
+      {
+        "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V2.json",
+        "git_blob_sha": "ae250d5bc5da73b23600670be354ffba31e65e53"
+      },
+      {
+        "path": "canonical/runtime/professional_artifact_hard_defect_preflight_v1.py",
+        "git_blob_sha": "1921ef67ec36ac1847243e99c49f638bf7cc170a"
+      },
+      {
+        "path": "canonical/governance/PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_REGISTRY_20261010_V1.json",
+        "git_blob_sha": "b9ddf7cbe7fbfad0e81fe068a0c19b48703b5aba"
+      },
+      {
+        "path": "canonical/governance/PROFESSIONAL_QUALITY_LEAF_BINDING_MANIFEST_20261010_V1.json",
+        "git_blob_sha": "a7cad32c9fd969ff2c3857bb924c7bd746237ec2"
+      },
+      {
+        "path": "canonical/runtime/professional_quality_leaf_binder_v2.py",
+        "git_blob_sha": "1a181b453271a2ce4fc112c3f6586afaf5effbd7"
+      },
+      {
+        "path": "canonical/governance/PROFESSIONAL_QUALITY_SAME_SUBJECT_COMPOSITION_GATE_20261010_V1.json",
+        "git_blob_sha": "f7a4496a6579041c6e2606243732c23b22bcf89c"
+      },
+      {
+        "path": "canonical/runtime/professional_quality_same_subject_composition_gate_v1.py",
+        "git_blob_sha": "46ab1a5bdf91e3559bfca89ee6059d0be7e89937"
+      },
+      {
+        "path": "canonical/governance/PROFESSIONAL_QUALITY_CLOSURE_NORMAL_FORM_20261009_V1.json",
+        "git_blob_sha": "ebcfe5a48efce9df7fbc69a3817ac2f9adb1ff93"
+      },
+      {
+        "path": "canonical/runtime/assurance_closure_compiler_v1.py",
+        "git_blob_sha": "b4274a48edbe626a9ae9fd33da2f2227ca4dd5e8"
+      },
+      {
+        "path": "canonical/governance/PROFESSIONAL_QUALITY_ASSURANCE_GRAPH_20261009_V2.json",
+        "git_blob_sha": "03530e29d70206b46b690b33a04c66765ff86ad7"
+      },
+      {
+        "path": "canonical/governance/PROFESSIONAL_QUALITY_LEAF_EVIDENCE_REGISTRY_20261010_V1.json",
+        "git_blob_sha": "d25cb6fe746eef992f71b138446dc999c0f2a307"
+      },
+      {
+        "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_EXECUTION_PROFILE_20261010_V1.json",
+        "git_blob_sha": "a01ef78846ce22996128cc2a5858341d8418074c"
+      },
+      {
+        "path": "canonical/runtime/professional_quality_scoped_evidence_v1.py",
+        "git_blob_sha": "940fc381fa10559bf7ec8f59048562809f1031c0"
+      },
+      {
+        "path": "canonical/runtime/professional_quality_p1_router_v7.py",
+        "git_blob_sha": "765b5994c2fcb5eb669b5fd0d989cc79c1609908"
+      },
+      {
+        "path": "canonical/runtime/professional_step_binding_authority_v1.py",
+        "git_blob_sha": "27f3c137dae7f00925083a0824d008c2b4d10f0a"
+      }
+    ]
+  },
+  "supersedes": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V6_DECLARED_SYSTEM_SUBJECT_20261010_V5.json",
+    "git_blob_sha": "994a6a6aef44b6bb33161f7179d1983a1b50b633",
+    "reason": "V6_PROVED_TARGET_AND_PREFLIGHT_PROVENANCE_BUT_SEVEN_OTHER_LOAD_BEARING_PROFILE_STEPS_REMAINED_CALLER_SELF_ATTESTABLE__V7_BINDS_ALL_REMAINING_STEP_RESULTS_TO_CONTENT_ADDRESSED_INDEPENDENTLY_VERIFIED_RECEIPTS"
+  },
+  "dependency_closure": {
+    "inherited_v6_subject": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V6_DECLARED_SYSTEM_SUBJECT_20261010_V5.json",
+      "git_blob_sha": "994a6a6aef44b6bb33161f7179d1983a1b50b633",
+      "inherited_component_count": 20
+    },
+    "v7_proof_bound_profile_execution": {
+      "router": {
+        "path": "canonical/runtime/professional_quality_p1_router_v7.py",
+        "git_blob_sha": "765b5994c2fcb5eb669b5fd0d989cc79c1609908"
+      },
+      "step_binding_kernel": {
+        "path": "canonical/runtime/professional_step_binding_authority_v1.py",
+        "git_blob_sha": "27f3c137dae7f00925083a0824d008c2b4d10f0a"
+      },
+      "verification": {
+        "path": "canonical/verification/PROFESSIONAL_QUALITY_P1_ROUTER_V7_PROOF_BOUND_STEP_VERIFY_20261010_V1.json",
+        "git_blob_sha": "b7a9df36780513ad73fd14c6a2756c8474d8434d"
+      },
+      "caller_step_results_allowed": false,
+      "proof_bound_step_count": 7,
+      "target_compilation_bound_by_v6": true,
+      "hard_defect_preflight_bound_by_v3": true,
+      "all_profile_step_success_requires_noncaller_authority": true
+    }
+  },
+  "identity_semantics": {
+    "exact_component_set_frozen": true,
+    "component_inclusion_does_not_imply_root_satisfaction": true,
+    "scoped_evidence_inclusion_does_not_transport_scope": true,
+    "root_subject_binding_requires_independent_verification": true,
+    "global_subject_identity_authority": false
+  },
+  "candidate_generation": true,
+  "live_default": false,
+  "intended_use": "FINAL_PROOF_BOUND_EXECUTION_IDENTITY_FOR_STABLE_R1_THROUGH_R12_SAME_SUBJECT_BINDINGS_AND_COMPOSITION_VERIFICATION",
+  "hard_nonclaims": [
+    "NO_CLAIM_ANY_REAL_TASK_ALREADY_HAS_ALL_SEVEN_STEP_RECEIPTS",
+    "NO_ROOT_SUBJECT_BINDING_AUTHORITY_FROM_SYSTEM_MEMBERSHIP",
+    "NO_ARBITRARY_NATURAL_LANGUAGE_SEMANTIC_COMPLETENESS",
+    "NO_GLOBAL_LEAF_OR_ROOT_CLOSURE",
+    "NO_DOMAIN_SEMANTIC_OR_EXECUTION_CLOSURE",
+    "NO_LIVE_DEFAULT_PROMOTION",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
