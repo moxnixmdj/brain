@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Any,Mapping
 from canonical.runtime import professional_quality_same_subject_composition_gate_v3 as gate
 from canonical.runtime import professional_quality_root_binding_compat_v1 as compat
+from canonical.runtime import professional_quality_root_receipt_compat_v1 as receipt_compat
 
 SCHEMA="PROJECT_BRAIN_PROFESSIONAL_QUALITY_V7_REAL_12_OF_12_COMPOSITION_VERIFY_V1"
 WORKLIST="canonical/governance/PROFESSIONAL_QUALITY_P1_V7_SAME_SUBJECT_ROOT_BINDING_WORKLIST_20261010_V18.json"
@@ -77,7 +78,9 @@ def verify(*,repo_root:str|Path|None=None):
   norm=compat.normalize(bd)
   if norm.get("pass") is not True:return _fail(norm.get("reason","ROOT_BINDING_COMPAT_FAILED"),root_id=rid)
   kind=norm.get("subject_kind");sid=norm.get("subject_id");sha=norm.get("subject_sha256")
-  err=gate._verification_receipt_error(root_id=rid,verification=vd,binding_blob=br.get("git_blob_sha"),subject_kind=kind,subject_id=sid,subject_sha=sha)
+  rc=receipt_compat.normalize(vd)
+  if rc.get("pass") is not True:return _fail(rc.get("reason","RECEIPT_COMPAT_FAILED"),root_id=rid)
+  err=gate._verification_receipt_error(root_id=rid,verification=rc.get("verification"),binding_blob=br.get("git_blob_sha"),subject_kind=kind,subject_id=sid,subject_sha=sha)
   if err is not None:return _fail(err,root_id=rid)
   subject_keys.add((kind,sid,sha));verified.append(rid)
  if subject_keys!={(SKIND,SID,SSH)}:return _fail("ROOT_SUBJECT_BINDINGS_NOT_IDENTICAL",subject_tuples=sorted(map(str,subject_keys)))
