@@ -1,0 +1,76 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_ESCAPE_O11_ROW_PROOF_INSTANTIATION_GATE_VERIFY_20261010_V2",
+  "date": "2026-10-10",
+  "status": "PASS__POST_CONCURRENT_RECLASSIFICATION__SHARED_O_LAW_BOUND__ROW_INSTANTIATION_GATE_VERIFIED__ZERO_CREDIT",
+  "supersedes": "canonical/verification/CURRENT_ESCAPE_O11_OBJECTIVE_ACCEPTANCE_LAW_GATE_VERIFY_20261010_V1.json",
+  "subject": {
+    "runtime": [
+      "canonical/runtime/current_escape_o11_objective_acceptance_law_gate_v1.py",
+      "24ea38682ddef16139e716eb35cda8808555b621"
+    ],
+    "behavioral_tests": [
+      "canonical/tests/test_current_escape_o11_objective_acceptance_law_gate_v1.py",
+      "ea5600b5d520a87508eb11600708707efa33a302"
+    ],
+    "benchmark_kernel_v4": [
+      "canonical/runtime/benchmark_witness_elimination_compiler_v4.py",
+      "1da07329d3bf35f598a5716c80519afe6b07dd64"
+    ],
+    "proof_kernel_v3": [
+      "canonical/runtime/benchmark_witness_elimination_compiler_v3.py",
+      "ace06caa1a8680a0a52d5341345dd5413b0620aa"
+    ],
+    "scope_cover": [
+      "canonical/runtime/proof_carrying_scope_cover_v1.py",
+      "3143bd707d51d4d66b2171396b3d596c9a26adf8"
+    ],
+    "current_oq": [
+      "canonical/governance/CURRENT_ESCAPE_OQ_FRONTIER_REDUCTION_20261010_V1.json",
+      "06ed743742a919615841a77fc9b1cc4e6fadf7f8"
+    ],
+    "shared_o_activation": [
+      "canonical/governance/ESCAPE_O_OBJECTIVE_ACCEPTANCE_SHARED_LAW_ACTIVATION_20261010_V1.json",
+      "95278c5850ccba2087b686b7bb9bc2cc7af93b96"
+    ],
+    "shared_o_runtime": [
+      "canonical/runtime/current_escape_o_objective_acceptance_v1.py",
+      "a329ce2d14dd6f23d06f981c090b535bfd43fb52"
+    ],
+    "frozen_o_theorem": [
+      "canonical/governance/FROZEN_O_OBJECTIVE_ACCEPTANCE_SCOPE_LIFT_NORMAL_FORM_20261007_V1.json",
+      "2ce4b7fdcb5556072b936f04887ac6a05e92dce3"
+    ]
+  },
+  "verification": {
+    "prior_exact_behavioral_and_kernel_checks": {
+      "count": 64,
+      "result": "PASS",
+      "reason_carried_forward": "ALL_RUNTIME_TEST_AND_REUSED_KERNEL_BLOBS_IDENTICAL_TO_V1_VERIFICATION"
+    },
+    "post_concurrent_currentness_suite": {
+      "path": "canonical/tests/test_current_escape_o11_objective_acceptance_law_gate_activation_v1.py",
+      "git_blob_sha": "cbd3b267eec3ef91c7a23160ed35d4d4ef7694b8",
+      "tests_run": 6,
+      "failures": 0,
+      "errors": 0,
+      "result": "PASS"
+    },
+    "total_exact_applicable_checks": 70
+  },
+  "proved": [
+    "SHARED_O_SCOPE_LIFT_LAW_IS_ALREADY_BOUND_AND_PRECEDES_THIS_GATE",
+    "THIS_GATE_VALIDATES_REAL_CURRENT_O_ROW_PROOF_INSTANTIATIONS_RATHER_THAN_RESEARCHING_A_DUPLICATE_O_LAW",
+    "CURRENT_OQ_AUTHORITY_REMAINS_O11_Q2",
+    "CURRENT_IDENTITY_DRIFT_IS_STALE",
+    "EXACT_OR_STRONGER_SCOPE_PROVENANCE_EVALUATOR_FAILURE_ACCOUNTING_AND_V3_PROOF_RELATION_REMAIN_REQUIRED",
+    "STRENGTHENED_MYSTERYMECHANISM_REMAINS_DISTINCT_AND_SUPPORTS_SCOPE_SUPERSET_WITHOUT_OLD_BAR_ALIAS",
+    "CURRENT_O_ROW_ACCEPTANCE_CLOSED_COUNT_REMAINS_ZERO"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
