@@ -149,9 +149,11 @@ class ResidualSemanticControlTests(unittest.TestCase):
         self.assertIn("open_world_control.resolve(", source)
 
     def test_control_mode_is_learning_observable_without_terminal_authority(self):
-        path = ROOT / "canonical/runtime/unified_cognitive_fabric_v1.py"
+        path = ROOT / "canonical/runtime/unified_cognitive_fabric_v2.py"
         source = path.read_text(encoding="utf-8")
-        self.assertIn('"OPEN_WORLD_SEMANTIC_CONTROL",', source)
+        ast.parse(source)
+        self.assertIn("v1.live_runtime.observe_runtime_outcome(", source)
+        self.assertIn('surface="UNIFIED_FABRIC_DIRECT_" + OPEN_WORLD_MODE', source)
         out = control.resolve(problem(), repo_root=ROOT)
         self.assertTrue(out["pass"], out)
         self.assertFalse(out["semantic_truth_authority"])
@@ -203,7 +205,7 @@ class ResidualSemanticControlTests(unittest.TestCase):
             ).read_text(encoding="utf-8")
         )
         row = scheduler["open_world_semantic_control_progress"]
-        self.assertIn("DO_NOT_REBUILD_GENERIC_OPEN_WORLD_INFORMATION_ORIGIN_CONTROL", row["scheduler_rule"])
+        self.assertIn("DO_NOT_REBUILD_GENERIC_SOURCE_NONIDENTIFIABILITY_OR_INFORMATION_ORIGIN_CONTROL", row["scheduler_rule"])
         self.assertFalse(row["semantic_closure_claimed"])
         self.assertIn("SEMANTIC_IDENTITY_RESIDUAL_STILL_OPEN", row["status"])
 
