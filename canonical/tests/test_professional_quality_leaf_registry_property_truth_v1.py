@@ -5,6 +5,7 @@ import unittest
 from canonical.runtime import professional_quality_leaf_binder_v2 as binder
 
 EXPECTED_EXECUTION={
+    "PQ::R5_EVALUATOR_REFERENCE::EXECUTION",
     "PQ::R1_TARGET_SPECIFICATION::EXECUTION",
     "PQ::R2_CANDIDATE_SEARCH::EXECUTION",
     "PQ::R3_REALIZATION_OBSERVATION::EXECUTION",
@@ -20,15 +21,15 @@ EXPECTED_EXECUTION={
 
 
 class ProfessionalLeafRegistryPropertyTruthV1Tests(unittest.TestCase):
-    def test_current_registry_derives_exactly_eleven_execution_leaves(self):
+    def test_current_registry_derives_exactly_twelve_execution_leaves(self):
         out=binder.evaluate()
         self.assertTrue(out["existing_evidence_current"],out)
         self.assertEqual(out["structural_errors"],[])
         self.assertEqual(out["rejected_receipt_count"],0)
         self.assertEqual(set(out["verified_execution_leaf_ids"]),EXPECTED_EXECUTION)
         self.assertEqual(out["verified_semantic_leaf_ids"],[])
-        self.assertEqual(out["verified_leaf_count"],11)
-        self.assertEqual(out["open_leaf_count"],13)
+        self.assertEqual(out["verified_leaf_count"],12)
+        self.assertEqual(out["open_leaf_count"],12)
         self.assertFalse(out["promotion_ready"])
         self.assertFalse(out["pass"])
 
