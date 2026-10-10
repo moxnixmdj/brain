@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_SAME_SUBJECT_COMPOSITION_GATE_20261010_V2",
+  "date": "2026-10-10",
+  "status": "CANDIDATE_CURRENT_OVERLAY_AWARE_SAME_SUBJECT_COMPOSITION_GATE__REQUIRES_FULL_REPO_REPLAY__ZERO_QUALITY_OR_TERMINAL_AUTHORITY",
+  "objective": "Repair same-subject composition admission so it validates the current 21-scope professional-quality evidence overlay while still requiring 12 independently verified identical root-subject bindings.",
+  "predecessor": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_SAME_SUBJECT_COMPOSITION_GATE_20261010_V1.json",
+    "git_blob_sha": "f7a4496a6579041c6e2606243732c23b22bcf89c",
+    "defect": "V1 imports base scoped-evidence validator and requires admitted_scope_count==12; current canonical registry contains 21 admitted scoped capabilities across 12 roots, so V1 fails closed before root-binding evaluation."
+  },
+  "runtime": {
+    "path": "canonical/runtime/professional_quality_same_subject_composition_gate_v2.py"
+  },
+  "current_scoped_evidence": {
+    "runtime_path": "canonical/runtime/professional_quality_scoped_evidence_overlay_v1.py",
+    "runtime_git_blob_sha": "19c11df8b011fa2c72c755f421edcd38a89f0a07",
+    "registry_path": "canonical/governance/PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_REGISTRY_20261010_V1.json",
+    "registry_git_blob_sha": "b9ddf7cbe7fbfad0e81fe068a0c19b48703b5aba",
+    "admitted_scope_count": 21,
+    "distinct_root_count": 12,
+    "all_twelve_roots_have_bounded_semantic_and_execution_evidence": true,
+    "global_leaf_closure": false,
+    "global_root_closure": false
+  },
+  "repaired_law": {
+    "required_distinct_root_ids": 12,
+    "admitted_scope_count_may_exceed_root_count": true,
+    "all_verified_subject_tuples_must_be_identical": true,
+    "every_root_requires_independent_root_subject_binding_authority": true,
+    "component_membership_is_not_root_binding_authority": true,
+    "scoped_evidence_existence_is_not_scope_transport": true
+  },
+  "authority_boundary": {
+    "composition_admissibility_only": true,
+    "professional_quality_closed": false,
+    "semantic_truth_authority": false,
+    "execution_authority": false,
+    "quality_authority": false,
+    "acceptance_authority": false,
+    "promotion_authority": false,
+    "terminal_authority": false
+  },
+  "hard_nonclaims": [
+    "NO_ROOT_SUBJECT_BINDING_CREATED_BY_THIS_REPAIR",
+    "NO_SAME_SUBJECT_COMPOSITION_PASS_WITHOUT_12_INDEPENDENT_BINDINGS",
+    "NO_GLOBAL_LEAF_OR_ROOT_CLOSURE",
+    "NO_DOMAIN_SEMANTIC_OR_EXECUTION_CLOSURE",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
