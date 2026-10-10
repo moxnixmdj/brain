@@ -1,0 +1,12 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_RECEIPT_V1",
+  "date": "2026-10-10",
+  "status": "VERIFIED_CAPABILITY_CONTROL_REPAIR",
+  "problem": "Canonical unified fabric already used the certified reached-state constructor, but subordinate live_brain_runtime_v1 still called the raw reached_escape_state_kernel_v1.evaluate path, bypassing finite-totality certification and proof-carrying repair dispatch.",
+  "root_cause": "LIVE_ENTRYPOINT_BINDING_DRIFT_AFTER_CERTIFIED_CONSTRUCTOR_PROMOTION",
+  "repair": "Route subordinate live runtime through certified_reached_escape_state_constructor_v1.construct and add a recursive repository-local static Python census that fails on any untrusted raw kernel/finite-totality reference or live-entrypoint constructor-binding drift.",
+  "why_not_old_pr_3942": "Its construction audit was weaker than the certified constructor already on current main and its branch was far behind. This repair preserves the stronger constructor and closes the repository-static bypass gap directly.",
+  "verification": "canonical/verification/REACHED_ESCAPE_LIVE_NO_BYPASS_VERIFY_20261010_V1.json",
+  "global_escape_progress_totality_proved": false,
+  "terminal_credit_delta": 0
+}
