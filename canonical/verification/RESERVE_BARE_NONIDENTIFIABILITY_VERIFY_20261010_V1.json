@@ -1,0 +1,73 @@
+{
+  "schema": "PROJECT_BRAIN_RESERVE_BARE_NONIDENTIFIABILITY_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_BRANCH_BYTES__19_OF_19_NEW_AND_GENERIC_TESTS__LIVE_OFFICIAL_OEWN_2025_REPLAY_PASS__PYCOMPILE_PASS__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "reserve-bare-nonidentifiability-v1-20261010-sol",
+    "current_main_at_receipt": "8662adc3c02ffd3217ab7cb22c9894a69b7840b3",
+    "exact_blobs": {
+      "canonical/runtime/reserve_bare_nonidentifiability_v1.py": "a2bfc9df1e07f14e289982d0cb143dd71e6a196e",
+      "canonical/tests/test_reserve_bare_nonidentifiability_v1.py": "b96f42e799a1b4bb24eb460650249bea7fc8c028"
+    },
+    "load_bearing_dependencies": {
+      "canonical/runtime/semantic_pair_nonidentifiability_v1.py": "e358eeecc45868c91d22009cc57c624e9a210037",
+      "canonical/runtime/oewn_release_sense_universe_v1.py": "7c9cd0e81732f05b02348fbd53d364dd567223f7"
+    }
+  },
+  "independent_carrier": {
+    "name": "participial-disposition-verify-20261009-sol",
+    "sprite_id": "sprite-72f2a31b-c09c-49e0-bfe0-279786ee2d56",
+    "workspace": "/home/sprite/reserve_nonid_verify"
+  },
+  "verification": {
+    "py_compile": "PASS",
+    "new_reserve_suite": {
+      "result": "PASS",
+      "tests_run": 9,
+      "failures": 0,
+      "errors": 0
+    },
+    "generic_pairwise_suite": {
+      "result": "PASS",
+      "tests_run": 10,
+      "failures": 0,
+      "errors": 0
+    },
+    "total_focused_and_adjacent_tests": 19,
+    "live_oewn_2025_replay": {
+      "result": "PASS",
+      "archive_sha256": "7d749f6e2c39e6970e4997839dcf6e42fd281f3c2fae0171d2192bae8cfa4b51",
+      "release_relative_reserve_noun_sense_count": 7,
+      "witness_sense_ids": [
+        "reserve%1:21:00::",
+        "reserve%1:23:00::"
+      ],
+      "generic_pairwise_pass": true,
+      "unique_sense_identifiable_from_source_alone": false
+    }
+  },
+  "proved": [
+    "THE_EXACT_BARE_SOURCE_Reserve_increased_HAS_AT_LEAST_TWO_DISTINCT_AUTHENTICATED_OEWN_2025_NOUN_INTERPRETATIONS_THAT_ADMIT_THE_SOURCE",
+    "THE_WITNESSES_ARE_A_SAVED_STOCKPILE_INTERPRETATION_AND_A_MEDICAL_RESERVE_CAPACITY_INTERPRETATION",
+    "THE_GENERIC_PAIRWISE_NONIDENTIFIABILITY_THEOREM_IS_LOAD_BEARING",
+    "EXHAUSTIVE_OPEN_WORLD_HYPOTHESIS_COMPLETENESS_IS_NOT_REQUIRED_FOR_THIS_NEGATIVE_RESULT",
+    "THE_BARE_SOURCE_ALONE_CANNOT_UNIQUELY_IDENTIFY_ONE_SEMANTIC_SENSE",
+    "THE_RESULT_REQUIRES_DECISIVE_ADDITIONAL_CONTEXT_FOR_UNIQUE_IDENTITY",
+    "OEWN_RELEASE_RELATIVE_COMPLETENESS_IS_NOT_PROMOTED_TO_FINANCE_DOMAIN_COMPLETENESS",
+    "NO_TRUE_SENSE_POLICY_ADEQUACY_EXECUTION_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "hard_nonclaims": [
+    "NO_TRUE_RESERVE_SENSE_SELECTED",
+    "NO_FINANCE_DOMAIN_IDENTITY_FOR_BARE_reserve",
+    "NO_CLAIM_THE_TWO_WITNESSES_EXHAUST_ALL_RESERVE_MEANINGS",
+    "NO_OPEN_WORLD_FINANCE_SEMANTIC_COMPLETENESS",
+    "NO_DECISION_UNDERDETERMINATION_WITHOUT_SEPARATE_TERMINAL_ACTION_EVIDENCE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
