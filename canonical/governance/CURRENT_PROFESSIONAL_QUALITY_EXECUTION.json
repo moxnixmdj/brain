@@ -646,8 +646,19 @@
     "promotion_ready": false
   },
   "r12_semantic_cc_r3_current": {
-    "status": "SIX_OF_EIGHT_R12_CONTRACT_CLAUSES_VERIFIED__C1_ASSUMPTION_GUARANTEE_AND_C3_ABSTRACTION_SOUNDNESS_PARTIAL__STRONGER_UNKNOWN_MATERIAL_DEFEATER_TOTALITY_OPEN",
-    "source_commit": "a833f6db7b4cf56523315eaa47524e399fe343b9",
+    "status": "CURRENT_TRUTH__5_VERIFIED_3_PARTIAL_0_UNSTARTED_ROOT_CONTRACT_CLAUSES__STRONGER_MATERIAL_DEFEATER_TOTALITY_OPEN",
+    "reconciliation_path": "canonical/governance/PROFESSIONAL_R12_SEMANTIC_CC_R3_TRUTH_RECONCILIATION_20261010_V1.json",
+    "reconciliation_git_blob_sha": "b469e2f13c318d57aaca71d8b29ad1930636507d",
+    "verification_path": "canonical/verification/PROFESSIONAL_R12_SEMANTIC_CC_R3_EVIDENCE_CUT_VERIFY_20261010_V2.json",
+    "verification_git_blob_sha": "d761b9a8018839ce89520046557a1059d5934e83",
+    "verified_contract_clause_count": 5,
+    "partial_clause_count": 3,
+    "partial_clause_ids": [
+      "R12C1_ASSUMPTION_GUARANTEE_COMPOSITION",
+      "R12C3_ABSTRACTION_SOUNDNESS",
+      "R12C8_NONVACUITY"
+    ],
+    "stronger_unknown_material_defeater_totality_open": true,
     "property_truth_credit": false,
     "quality_authority": false,
     "terminal_credit_delta": 0
