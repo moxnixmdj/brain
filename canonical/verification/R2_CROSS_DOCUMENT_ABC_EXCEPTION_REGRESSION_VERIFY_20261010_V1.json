@@ -1,0 +1,91 @@
+{
+  "schema": "PROJECT_BRAIN_R2_CROSS_DOCUMENT_ABC_EXCEPTION_REGRESSION_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "branch": "r2-crossdoc-abc-exception-regression-current3",
+  "base_main_sha": "c8376f101429a71e3f1334c13c210b3fe5348588",
+  "objective": "TASK_LOCAL_FALSIFICATION_OF_ORIGINAL_GENERAL_CROSS_DOCUMENT_EXAMPLE__A_DEFINE_10__B_REPLACE_12__C_CONDITIONAL_EXCEPTION_8",
+  "status": "PASS__EXACT_SCENARIO_CLOSED_ON_NATURAL_LATTICE_AND_CURRENT_ADMITTED_V8_ROUTE",
+  "exact_changed_blob": {
+    "canonical/tests/test_bounded_natural_effect_lattice_v3.py": "2c4f1b123744380b2765c89856acaf4ecbab576d"
+  },
+  "live_binding": {
+    "route_id": "DIRECT_ADEQUACY::CROSS_DOCUMENT_SEMANTIC_REGISTRY_V3_LATTICE_V8",
+    "active_dynamic_admission": true,
+    "runtime_path": "canonical/runtime/r2_cross_document_semantic_registry_v3_lattice_direct_adequacy_v1.py",
+    "runtime_git_blob_sha": "c7ff0ba7be07eb8449ff1834b758e00f1b00059a",
+    "lattice_v8_git_blob_sha": "34f9a710424ba2aa5f3beeddb1cfd3978e549d15",
+    "source_proof_v15_git_blob_sha": "aa334ed3ff106161ccbafb227473dcc4d302a89c",
+    "bounded_natural_clause_git_blob_sha": "6ac0e177341f3298b33405c087567a6701634965",
+    "source_autofill_v4_git_blob_sha": "181e724d48e04363be41cabc9638cad5ee78b568",
+    "live_admission_wrapper_git_blob_sha": "57d64a2f22c0cb7b76eed7eb78c2eb6961e819a2",
+    "current_admission_pointer_git_blob_sha": "598faf4bdb709a40bc8062226b539a68d341217a",
+    "current_admission_manifest_git_blob_sha": "450e876dd4258304846b96daff30b542a50d7e79"
+  },
+  "scenario": {
+    "document_A": "The only effects on threshold are A.t. / A.t defines threshold as 10 / unconditional / no start / no end / supersedes nothing",
+    "document_B": "The only effects on threshold are B.t. / B.t replaces threshold with 12 / unconditional / no start / no end / supersedes A.t",
+    "document_C": "The only effects on threshold are C.t. / C.t creates an exception for threshold with value 8 / applies when {\"small\":true} / no start / no end / supersedes B.t",
+    "query_target": "threshold",
+    "observed_cases": [
+      {
+        "context": {
+          "small": true
+        },
+        "expected": 8,
+        "observed": 8,
+        "pass": true
+      },
+      {
+        "context": {
+          "small": false
+        },
+        "expected": 12,
+        "observed": 12,
+        "pass": true
+      }
+    ]
+  },
+  "isolated_verification": {
+    "carrier": "brain-r2-grounded-frontier-verify-20261008",
+    "sprite_id": "sprite-87368f21-5869-452d-b326-b420f5e99347",
+    "natural_lattice_suite": {
+      "command": "python3 -m unittest canonical.tests.test_bounded_natural_effect_lattice_v3 -v",
+      "passed": 14,
+      "failed": 0,
+      "errors": 0,
+      "includes_new_regressions": [
+        "test_natural_define_replace_exception_composes_when_condition_true",
+        "test_conditional_exception_falls_back_to_replacement_when_false"
+      ]
+    },
+    "current_admitted_route_direct_execution": {
+      "command": "python3 run_abc_live_route.py",
+      "passed_cases": 2,
+      "failed_cases": 0,
+      "observed_route_id": "DIRECT_ADEQUACY::CROSS_DOCUMENT_SEMANTIC_REGISTRY_V3_LATTICE_V8"
+    },
+    "live_dispatcher_import_attempt": {
+      "counted_as_behavioral_evidence": false,
+      "result": "NOT_EXECUTED",
+      "reason": "STALE_ISOLATED_SPRITE_LACKED_HISTORICAL_R2_V19_MODULE_REQUIRED_BY_LEGACY_V21_IMPORT_CHAIN",
+      "classification": "VERIFIER_ENVIRONMENT_DEPENDENCY_GAP_NOT_ROUTE_OR_SEMANTIC_FAILURE"
+    }
+  },
+  "conclusion": [
+    "ORIGINAL_A_B_C_CROSS_DOCUMENT_INTERACTION_IS_CLOSED_FOR_THE_CERTIFIED_BOUNDED_NATURAL_SOURCE_CLASS",
+    "CONDITIONAL_EXCEPTION_ACTIVATION_AND_FALLBACK_TO_REPLACEMENT_BOTH_VERIFIED",
+    "CURRENT_DYNAMIC_ADMISSION_BINDS_THE_EXECUTED_V8_ROUTE"
+  ],
+  "nonclaims": [
+    "NO_GLOBAL_ARBITRARY_NATURAL_LANGUAGE_SEMANTIC_COMPLETENESS",
+    "NO_OPEN_WORLD_ONTOLOGY_COMPLETENESS",
+    "NO_UNRECOGNIZED_PROSE_AUTHORITY",
+    "NO_TERMINAL_CREDIT_FROM_THIS_REGRESSION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false,
+  "replay_note": "REPLAYED_ON_CURRENT_MAIN_WITH_IDENTICAL_VERIFIED_TEST_BLOB_AND_UNCHANGED_BOUND_RUNTIME_BLOBS"
+}
