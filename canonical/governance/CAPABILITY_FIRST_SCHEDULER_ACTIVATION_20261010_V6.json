@@ -83,5 +83,16 @@
     "capability_credit_delta": 0,
     "ownership_credit_delta": 0,
     "terminal_credit_delta": 0
+  },
+  "terminal_autopilot_policy": {
+    "role": "SUBORDINATE_CHECKPOINT_AUDITOR",
+    "new_dispatch_requires_explicit_capability_first_checkpoint_admission": true,
+    "verification_of_already_present_results_may_continue": true,
+    "promotion_remains_separately_authorized": true,
+    "default_repo_mode_new_dispatch": "PARKED"
+  },
+  "preserved_predecessor_controls": {
+    "terminal_autopilot_policy_source": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V4.json",
+    "terminal_autopilot_policy_preserved_exactly": true
   }
 }
