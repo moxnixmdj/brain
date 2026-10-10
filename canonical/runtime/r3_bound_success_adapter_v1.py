@@ -103,9 +103,46 @@ def adapt(request: Mapping[str, Any], *, repo_root: str | Path) -> Mapping[str, 
         return None
 
     try:
+        if capsule.get("schema") != "PROJECT_BRAIN_SUCCESS_PROOF_CAPSULE_V1":
+            raise BoundSuccessAdapterError("SUCCESS_PROOF_CAPSULE_SCHEMA_INVALID")
+        if str(capsule.get("sha256") or "") != _sha(material):
+            raise BoundSuccessAdapterError("SUCCESS_PROOF_CAPSULE_DIGEST_MISMATCH")
+        if material.get("source_schema") != "PROJECT_BRAIN_LIVE_INTEGRATED_BRAIN_V1":
+            raise BoundSuccessAdapterError("SUCCESS_PROOF_SOURCE_SCHEMA_NOT_ADMITTED")
+        if material.get("source_status") != "PASS__REAL_TASK_PLANNED_EXECUTED_AND_REVERIFIED":
+            raise BoundSuccessAdapterError("SUCCESS_PROOF_SOURCE_STATUS_NOT_ADMITTED")
+
         selected_plan = _items(material.get("selected_plan"), "SELECTED_PLAN", allow_empty=False)
         initial_facts = _items(raw_request.get("initial_facts", []), "INITIAL_FACTS")
         target_effects = _items(raw_request.get("target_effects"), "TARGET_EFFECTS", allow_empty=False)
+        proof_targets = _items(
+            material.get("verified_target_effects"),
+            "PROOF_TARGET_EFFECTS",
+            allow_empty=False,
+        )
+        if proof_targets != target_effects:
+            raise BoundSuccessAdapterError("SUCCESS_PROOF_TARGET_EFFECTS_MISMATCH")
+        task_id = str(raw_request.get("task_id") or "").strip()
+        if not task_id or str(material.get("task_id") or "").strip() != task_id:
+            raise BoundSuccessAdapterError("SUCCESS_PROOF_TASK_ID_MISMATCH")
+        proof_execution = material.get("execution")
+        if (
+            not isinstance(proof_execution, Sequence)
+            or isinstance(proof_execution, (str, bytes))
+            or len(proof_execution) != len(selected_plan)
+        ):
+            raise BoundSuccessAdapterError("SUCCESS_PROOF_EXECUTION_SUMMARY_INVALID")
+        for index, capability_id in enumerate(selected_plan):
+            summary = proof_execution[index]
+            if (
+                not isinstance(summary, Mapping)
+                or str(summary.get("capability_id") or "") != capability_id
+                or summary.get("pass") is not True
+                or len(str(summary.get("composition_capsule_head_hash") or "")) != 64
+            ):
+                raise BoundSuccessAdapterError(
+                    "SUCCESS_PROOF_EXECUTION_SUMMARY_MISMATCH:" + capability_id
+                )
         checkpoint = material.get("controller_checkpoint")
         if not isinstance(checkpoint, Mapping):
             raise BoundSuccessAdapterError("CONTROLLER_CHECKPOINT_BINDING_MISSING")
@@ -146,6 +183,18 @@ def adapt(request: Mapping[str, Any], *, repo_root: str | Path) -> Mapping[str, 
                 raise BoundSuccessAdapterError("CONTROLLER_CAPABILITY_ID_MISMATCH")
             if not isinstance(result, Mapping) or result.get("pass") is not True:
                 raise BoundSuccessAdapterError("BOUND_ADAPTER_RESULT_NOT_PASSING")
+            summary = proof_execution[index]
+            if (
+                result.get("composition_capsule_head_hash")
+                != summary.get("composition_capsule_head_hash")
+            ):
+                raise BoundSuccessAdapterError(
+                    "SUCCESS_PROOF_COMPOSITION_HEAD_MISMATCH:" + capability_id
+                )
+            if str(result.get("status") or "") != str(summary.get("status") or ""):
+                raise BoundSuccessAdapterError(
+                    "SUCCESS_PROOF_RESULT_STATUS_MISMATCH:" + capability_id
+                )
             requires = _items(args.get("requires", []), "STEP_REQUIRES")
             provides = _items(args.get("provides"), "STEP_PROVIDES", allow_empty=False)
             result_sha = str(result.get("result_sha256") or "").strip()
@@ -198,7 +247,7 @@ def adapt(request: Mapping[str, Any], *, repo_root: str | Path) -> Mapping[str, 
             "program_sha256": digest,
         }
         problem = {
-            "task_id": str(raw_request.get("task_id") or material.get("task_id") or episode["episode_id"]),
+            "task_id": task_id,
             "verification_kind": VERIFICATION_KIND,
             "initial_facts": initial_facts,
             "target_effects": target_effects,

@@ -162,6 +162,7 @@ def verify_material(
 
         expected_steps: list[dict[str, Any]] = []
         expected_trace: list[dict[str, Any]] = []
+        available_facts = set(initial_facts)
         for index, cid in enumerate(selected):
             record = completed[index]
             if astra_runtime._controller_checkpoint_record_valid(record) is not True:
@@ -233,6 +234,15 @@ def verify_material(
 
             requires = list(prepared["requires"])
             provides = list(prepared["provides"])
+            if not set(requires).issubset(available_facts):
+                raise BoundSuccessVerificationError(
+                    "BOUND_COMPOSITION_PREREQUISITE_NOT_DERIVABLE:" + cid
+                )
+            if not provides:
+                raise BoundSuccessVerificationError(
+                    "BOUND_COMPOSITION_PROVIDES_EMPTY:" + cid
+                )
+            available_facts.update(provides)
             expected_steps.append({
                 "index": index,
                 "op": cid,
@@ -248,6 +258,11 @@ def verify_material(
                 "composition_capsule_head_hash": result["composition_capsule_head_hash"],
                 "effect_outcome_sha256": result["result_sha256"],
             })
+
+        if not set(target_effects).issubset(available_facts):
+            raise BoundSuccessVerificationError(
+                "BOUND_COMPOSITION_TARGET_EFFECT_NOT_DERIVABLE"
+            )
 
         if [dict(x) for x in trace] != expected_trace:
             raise BoundSuccessVerificationError("EPISODE_TRACE_MISMATCH")
