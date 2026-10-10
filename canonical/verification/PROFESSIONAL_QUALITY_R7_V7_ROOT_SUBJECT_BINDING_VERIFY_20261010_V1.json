@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R7_V7_ROOT_SUBJECT_BINDING_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_SPRITE_6_OF_6__R7_BOUND_TO_EXACT_V7_SUBJECT_THROUGH_EXACT_SINGLE_EDIT_CAUSAL_INTERVENTION_ON_LOAD_BEARING_COMPONENT__ZERO_QUALITY_OR_TERMINAL_AUTHORITY",
+  "root_id": "R7_CAUSAL_PRESCRIPTIVE",
+  "exact_blobs": {
+    "binding": "d1b4af80e94048ec4093192d2b8203d47eff56ed",
+    "verifier": "74ea696b7a4c3537796ed9b4dfe8b321a12235db",
+    "tests": "87805cf865eb12d7801c594926ac1c516fb495ec",
+    "subject": "1d598bc8757017ceb34928d0df9f5fce859ef868",
+    "causal_scope": "cc86ad5c442366d772c51491dbb98615982f5896",
+    "causal_scope_verification": "761fade0036ab56e4db65fbb61619b04f8acadae",
+    "causal_instance": "0c692f55dedb6a8523bcd78541d4cb77ef06d610",
+    "causal_compiler_verification": "380d26afd8210096e397dacde3f2a339abc75c1c"
+  },
+  "replay": {
+    "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/pq-r7-v7-binding-independent-verify",
+    "py_compile": "PASS",
+    "tests_run": 6,
+    "tests_passed": 6,
+    "tests_failed": 0,
+    "verifier_pass": true,
+    "verifier_status": "PASS__R7_BOUND_TO_V7_SUBJECT_THROUGH_EXACT_SINGLE_EDIT_CAUSAL_INTERVENTION_ON_LOAD_BEARING_COMPONENT"
+  },
+  "proves": [
+    "EXACT_V7_SUBJECT_CONTAINS_THE_REPAIRED_POST_INTERVENTION_ASSURANCE_CLOSURE_COMPILER_BLOB",
+    "ONE_REAL_CONTENT_ADDRESSED_SINGLE_EDIT_INTERVENTION_FLIPPED_THE_IDENTICAL_REGRESSION_TEST_FROM_FAIL_TO_PASS",
+    "R7_CAUSAL_PRESCRIPTIVE_SUPPORT_IS_BOUND_FOR_THIS_EXACT_INTERVENTION_AND_EFFECT",
+    "REUSABLE_CAUSAL_COMPILER_ACCEPTS_ONLY_EXACT_SINGLE_EDIT_FAIL_TO_PASS_AB_RECEIPTS_WITH_IDENTICAL_TEST_BYTES"
+  ],
+  "hard_nonclaims": [
+    "NO_GLOBAL_R7_ROOT_CLOSURE",
+    "NO_GENERAL_PROFESSIONAL_EDIT_CAUSALITY",
+    "NO_MULTI_EDIT_ATTRIBUTION",
+    "NO_SEQUENCE_INVARIANCE",
+    "NO_TREATMENT_VERSION_GENERALIZATION",
+    "NO_DOMAIN_SEMANTIC_OR_EXECUTION_CLOSURE",
+    "NO_SAME_SUBJECT_COMPOSITION_PASS",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "root_subject_binding_authority": true,
+  "exact_subject_component_intervention_bound": true,
+  "global_r7_root_closed": false,
+  "multi_edit_attribution_proved": false,
+  "sequence_invariance_proved": false,
+  "treatment_generalization_proved": false,
+  "semantic_truth_authority": false,
+  "execution_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "next": "PROMOTE_R7_V7_ROOT_BINDING__ADVANCE_SAME_SUBJECT_FRONTIER_TO_7_OF_12__R8_NEXT"
+}
