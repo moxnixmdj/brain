@@ -46,7 +46,7 @@ def _field_line(effect_id,field,value):
     )
 
 
-def _problem(*,terminally_equivalent=True):
+def _problem(*,terminally_equivalent=True,schema="PROJECT_BRAIN_CROSS_DOCUMENT_EFFECT_SEMANTIC_LATTICE_V9"):
     source_id="doc"
     scope="scope"
     effect_id="E.t"
@@ -144,7 +144,7 @@ def _problem(*,terminally_equivalent=True):
     })
 
     return {
-        "schema":"PROJECT_BRAIN_CROSS_DOCUMENT_EFFECT_SEMANTIC_LATTICE_V8",
+        "schema":schema,
         "case_id":"oewn-field",
         "source_documents":[{
             "document_id":"D",
