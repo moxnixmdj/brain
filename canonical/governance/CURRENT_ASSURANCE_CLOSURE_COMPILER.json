@@ -140,5 +140,20 @@
     "domain_semantic_closure": false,
     "domain_execution_closure": false,
     "terminal_credit_delta": 0
+  },
+  "professional_quality_r7_claim_scoped_causal_compiler": {
+    "runtime_path": "canonical/runtime/professional_edit_causal_certificate_v1.py",
+    "runtime_git_blob_sha": "c3f2da4c97f26126cd304c9d630b4e13655958ea",
+    "tests_path": "canonical/tests/test_professional_edit_causal_certificate_v1.py",
+    "tests_git_blob_sha": "01842b64b2edbe641579a43cdad011547df3f604",
+    "verification_path": "canonical/verification/PROFESSIONAL_EDIT_CAUSAL_CERTIFICATE_VERIFY_20261010_V1.json",
+    "verification_git_blob_sha": "380d26afd8210096e397dacde3f2a339abc75c1c",
+    "result": "PYCOMPILE_PASS__8_OF_8_PASS",
+    "reusable_scope": "EXACT_SINGLE_EDIT_FAIL_TO_PASS_AB_EXPERIMENTS_WITH_IDENTICAL_TEST_BYTES_AND_CONTENT_ADDRESSED_SUBJECTS",
+    "reusable_capability_generalized": true,
+    "global_r7_root_closed": false,
+    "domain_semantic_closure": false,
+    "domain_execution_closure": false,
+    "terminal_credit_delta": 0
   }
 }
