@@ -1,0 +1,36 @@
+name: verify-escape-progress-successor-audit-v2
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/runtime/escape_progress_shared_gap_audit_v2.py
+      - canonical/tests/test_escape_progress_shared_gap_audit_v2.py
+      - canonical/governance/ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_20261010_V2.json
+      - canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V3.json
+      - .github/workflows/verify-escape-progress-successor-audit-v2.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile successor and historical audits
+        run: |
+          python -m py_compile canonical/runtime/escape_progress_shared_gap_audit_v2.py
+          python -m py_compile canonical/runtime/escape_progress_shared_gap_audit_v1.py
+          python -m py_compile canonical/tests/test_escape_progress_shared_gap_audit_v2.py
+      - name: Run successor falsification suite
+        run: python -m unittest canonical.tests.test_escape_progress_shared_gap_audit_v2 -v
+      - name: Run frozen historical suite
+        run: python -m unittest canonical.tests.test_escape_progress_shared_gap_audit_v1 -v
+      - name: Emit current successor status
+        run: python canonical/runtime/escape_progress_shared_gap_audit_v2.py
