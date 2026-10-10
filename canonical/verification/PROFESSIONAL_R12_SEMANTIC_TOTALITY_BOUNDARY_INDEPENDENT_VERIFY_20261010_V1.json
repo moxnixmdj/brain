@@ -1,0 +1,25 @@
+{
+  "schema":"PROJECT_BRAIN_R12_SEMANTIC_TOTALITY_BOUNDARY_INDEPENDENT_VERIFY_V1",
+  "date":"2026-10-10",
+  "status":"PASS__INDEPENDENT_SPRITE__8_OF_8__CURRENT_ROUTE_OPEN__ZERO_CREDIT",
+  "claim_id":"11870f850b46bcfcc31094f764fc4f45c911aaac413979ceb62679ff19a53162",
+  "exact_blobs":{
+    "runtime":"f8d2d473e1fe8a8d26d5994a2126470adc487c60",
+    "tests":"c6a084a1c8b98abb78dda91e9e79a22995ec988c",
+    "governance":"981c1fb85fac719e61371e93ad6128660e74d791"
+  },
+  "replay":{"carrier":"brain-professional-hard-defect-verify-20261010","carrier_id":"sprite-1bbb86ed-1f7c-409f-8397-fadc4de7a62a","tests_run":8,"tests_passed":8,"tests_failed":0},
+  "verified":{
+    "finite_catalog_not_totality":true,
+    "eight_clauses_not_totality":true,
+    "always_abstain_not_totality":true,
+    "complete_decider_route_sound":true,
+    "finite_characteristic_partition_route_sound":true,
+    "proof_carrying_positive_mediation_route_sound":true
+  },
+  "stronger_totality_proved":false,
+  "cc_r3_terminal_closure_proved":false,
+  "semantic_property_truth_authority":false,
+  "terminal_authority":false,
+  "terminal_credit_delta":0
+}
