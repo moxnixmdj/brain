@@ -1,10 +1,10 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_LIVE_WORK_FRONTIER_V1",
   "date": "2026-10-10",
-  "status": "CURRENT_POST_COMPOSITION_FRONTIER__PROFESSIONAL_24_OF_24_SCOPE_COMPLETE__PROPERTY_TRUTH_0_OF_24__R10_EXECUTION_PROPERTY_PROBE_ACTIVE__GAP_A_AND_TWO_GAP_B_ROWS_READY__BYTES_V27__READ_ONLY_EVIDENCE_PRIMARY__ZERO_CREDIT",
-  "frontier_id": "LIVE_WORK_FRONTIER_20261010_PROF24_SCOPE_COMPLETE_PROPERTY_TRUTH_V14",
+  "status": "CURRENT_POST_COMPOSITION_FRONTIER__PROFESSIONAL_24_OF_24_SCOPE_COMPLETE__PROPERTY_TRUTH_0_OF_24__R10_STRUCTURAL_GUARD_INDEPENDENTLY_VERIFIED__DETECTION_COMPLETENESS_OPEN__GAP_A_AND_TWO_GAP_B_ROWS_READY__BYTES_V27__READ_ONLY_EVIDENCE_PRIMARY__ZERO_CREDIT",
+  "frontier_id": "LIVE_WORK_FRONTIER_20261010_PROF24_SCOPE_COMPLETE_PROPERTY_TRUTH_V15",
   "scope": {
-    "base_main_commit": "100f0a26379b3a438cf88be0647b17654372aafb",
+    "base_main_commit": "bd2e7a2483b5d4b55f99151bcc5fcdff67da51fa",
     "completeness_semantics": "COMPLETE_FOR_EXPLICIT_CURRENT_ACTIONABLE_OR_SCHEDULABLE_WORK_EXPOSED_BY_THE_BOUND_CURRENT_AUTHORITY_SOURCES__NOT_COMPLETE_FOR_UNKNOWN_FUTURE_WORK_OR_UNDISCOVERED_CAPABILITIES",
     "source_set": [
       {
@@ -17,7 +17,7 @@
       },
       {
         "path": "canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json",
-        "git_blob_sha": "f1d3aabf095525a465bb532d94e37e4dfdb16dbe"
+        "git_blob_sha": "656356847794fb9e2cf25334dcd4408816049b25"
       },
       {
         "path": "canonical/governance/CURRENT_TB_SCIENCE_EXECUTION.json",
@@ -25,7 +25,7 @@
       },
       {
         "path": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-        "git_blob_sha": "476e444241aa5a09258dd450eba237fc87c95e92"
+        "git_blob_sha": "ed10e6650cc66f8b921bb1ed0c7b3e63d75d0a63"
       },
       {
         "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
@@ -71,7 +71,7 @@
       "work_type": "RELIABILITY_IMPROVEMENT",
       "source": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
       "causal_role": "AFTER_24_OF_24_WHOLE_LEAF_DOMAIN_AND_SCOPE_CLOSURE__RUN_ROOT_RELEVANT_POSITIVE_NEAR_MISS_AND_ADVERSARIAL_PROPERTY_TRUTH_CHALLENGES_ON_EXACT_BYTES__START_WITH_ACTIVE_R10_EXECUTION_PROBE__GENERALIZE_SHARED_PATTERNS",
-      "readiness": "24_OF_24_SCOPE_COMPLETE__PROPERTY_TRUTH_0_OF_24__R10_EXECUTION_GUARD_35_OF_35_PASS__STRUCTURAL_PROOF_SLOT_VERIFIER_BOUND__DETECTION_COMPLETENESS_AND_OBSERVED_OUTCOME_BINDING_OPEN",
+      "readiness": "24_OF_24_SCOPE_COMPLETE__PROPERTY_TRUTH_0_OF_24__R10_STRUCTURAL_PROOF_SLOTS_AND_ENFORCEMENT_INDEPENDENTLY_VERIFIED__DEFEATER_DETECTION_COMPLETENESS_AND_UNDERLYING_FACT_TRUTH_OPEN",
       "claims_new_primitive": false,
       "score_state": "UNBOUND",
       "scheduler_state": "READY_EVIDENCE",
@@ -100,7 +100,15 @@
         "r10_execution_guard_verification_git_blob_sha": "7a29d67c77c8961b238e7f9b3bf74d278984452e",
         "r10_guard_tests_passed": 35,
         "r10_detection_completeness_proved": false,
-        "vector_bounds_complete": false
+        "vector_bounds_complete": false,
+        "r10_structural_guard_verification_path": "canonical/verification/PROFESSIONAL_QUALITY_R10_STRUCTURAL_GUARD_INDEPENDENT_VERIFY_20261010_V1.json",
+        "r10_structural_guard_verification_git_blob_sha": "1fab18d1ffc51ee674f3ebc9f0971c8eef0df23c",
+        "r10_structural_slot_checks_passed": 16,
+        "r10_integrated_guard_checks_passed": 30,
+        "r10_legacy_boolean_self_certification_rejected": true,
+        "r10_underlying_fact_truth_authority": false,
+        "r10_whole_leaf_property_truth_proved": false,
+        "next_required_edge": "R10_UPSTREAM_DEFEATER_DETECTION_AND_UNDERLYING_FACT_TRUTH_COMPLETENESS"
       }
     },
     {
@@ -130,9 +138,9 @@
       "vector_evidence": {},
       "read_only_evidence": {
         "source": "canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json",
-        "source_git_blob_sha": "ea8da1aaeff847f9bb8604242f079e6bdfabbef9",
+        "source_git_blob_sha": "656356847794fb9e2cf25334dcd4408816049b25",
         "promotion_blockers": [
-          "DOMAIN_SEMANTIC_AND_EXECUTION_EVIDENCE_BINDING",
+          "PROFESSIONAL_PROPERTY_TRUTH_AND_DOMAIN_SEMANTIC_EXECUTION_EVIDENCE",
           "FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION"
         ],
         "embedded_professional_snapshot_lags_live_frontier": false,
@@ -140,7 +148,9 @@
         "professional_verified_root_subject_binding_count": 12,
         "professional_current_git_blob_sha": "360ff610c5d2386fe47e4f36eb6f3246a4d826a4",
         "professional_next": "WHOLE_LEAF_DOMAIN_EVIDENCE_AND_FULL_CURRENT_MAIN_REGRESSION",
-        "dynamic_current_pointer_follow": true
+        "dynamic_current_pointer_follow": true,
+        "r10_structural_guard_verification_bound": true,
+        "r10_detection_completeness_proved": false
       },
       "ready": "BLOCKED_BY_PROFESSIONAL_PROPERTY_TRUTH_DOMAIN_EXECUTION_EVIDENCE_AND_FULL_CURRENT_MAIN_REGRESSION"
     },
@@ -168,11 +178,11 @@
       "vector_evidence": {},
       "read_only_evidence": {
         "source": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-        "source_git_blob_sha": "476e444241aa5a09258dd450eba237fc87c95e92",
-        "raw_python_source_bytes": 2007446,
-        "previous_frontier_improvement_bytes": 38115,
-        "qualification": "8510/8510",
-        "next_action": "SPENT_NEXT29_PHYSICAL_CUT_BEFORE_FROZEN_NEXT30",
+        "source_git_blob_sha": "ed10e6650cc66f8b921bb1ed0c7b3e63d75d0a63",
+        "raw_python_source_bytes": 1937005,
+        "previous_frontier_improvement_bytes": 12452,
+        "qualification": "9200/9200",
+        "next_action": "RERANK_EXACT_V27_USING_SPENT_NEXT32_ONLY__MAKE_NEW_PHYSICAL_CUT_BEFORE_QUAL_SUCCESSOR_NEXT33_20261010_V1",
         "next_gain_lcb_bytes": 0,
         "vector_bounds_complete": false
       },
