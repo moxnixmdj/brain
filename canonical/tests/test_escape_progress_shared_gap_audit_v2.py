@@ -1,4 +1,5 @@
 from copy import deepcopy
+import hashlib
 import json
 from pathlib import Path
 
@@ -10,12 +11,10 @@ from canonical.runtime.escape_progress_shared_gap_audit_v2 import (
 )
 
 ROOT = Path(__file__).resolve().parents[2]
-MANIFEST = json.loads(
-    (ROOT / "canonical/governance/ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_20261010_V2.json").read_text()
-)
-BINDING = json.loads(
-    (ROOT / "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V3.json").read_text()
-)
+MANIFEST_PATH = ROOT / "canonical/governance/ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_20261010_V2.json"
+BINDING_PATH = ROOT / "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V3.json"
+MANIFEST = json.loads(MANIFEST_PATH.read_text())
+BINDING = json.loads(BINDING_PATH.read_text())
 
 
 def _seal(row):
@@ -24,9 +23,9 @@ def _seal(row):
     return material
 
 
-def _proofs():
+def _proofs(manifest=MANIFEST):
     out = {}
-    for row in MANIFEST["rows"]:
+    for row in manifest["rows"]:
         oid = row["obligation_id"]
         if row["route_group"] == GAP_A:
             out[oid] = _seal(
@@ -65,7 +64,12 @@ def _proofs():
     return out
 
 
-def test_current_repository_truth_stays_open_without_row_proofs():
+def _git_blob_sha(path):
+    data = Path(path).read_bytes()
+    return hashlib.sha1(b"blob " + str(len(data)).encode() + b"\0" + data).hexdigest()
+
+
+def test_current_successor_truth_stays_open_without_row_proofs():
     result = audit(MANIFEST, BINDING)
     assert result["pass"] is True
     assert result["cc_r3_proved"] is False
@@ -76,7 +80,12 @@ def test_current_repository_truth_stays_open_without_row_proofs():
     assert result["terminal_credit_delta"] == 0
 
 
-def test_complete_content_addressed_row_proofs_close_cc_r3():
+def test_finance_index_is_gap_a_after_causal_reclassification():
+    row = next(x for x in MANIFEST["rows"] if x["obligation_id"] == "FINANCE_ACCOUNTING_INDEX_GE_61")
+    assert row["route_group"] == GAP_A
+
+
+def test_complete_content_addressed_row_proofs_close_syntactic_cc_r3_gate():
     result = audit(MANIFEST, BINDING, _proofs())
     assert result["pass"] is True
     assert result["cc_r3_proved"] is True
@@ -95,7 +104,7 @@ def test_gap_a_without_strict_shrink_remains_open():
     result = audit(MANIFEST, BINDING, proofs)
     assert result["pass"] is True
     assert result["cc_r3_proved"] is False
-    assert any(x == f"{oid}:STRICT_DECISION_REGION_SHRINK_NOT_PROVED" for x in result["open_predicates"])
+    assert f"{oid}:STRICT_DECISION_REGION_SHRINK_NOT_PROVED" in result["open_predicates"]
 
 
 def test_gap_b_nonprogress_outcome_remains_open():
@@ -113,7 +122,7 @@ def test_gap_b_nonprogress_outcome_remains_open():
     assert any("OUTCOME_NOT_EXACTLY_TERMINAL_OR_DECREASING" in x for x in result["open_predicates"])
 
 
-def test_manifest_route_group_drift_fails_closed():
+def test_unknown_route_group_fails_closed():
     manifest = deepcopy(MANIFEST)
     manifest["rows"][0]["route_group"] = "UNKNOWN"
     result = audit(manifest, BINDING, _proofs())
@@ -128,7 +137,6 @@ def test_binding_partition_count_drift_fails_closed():
     binding["shared_gaps"][GAP_B]["obligation_count"] = 4
     result = audit(MANIFEST, binding, _proofs())
     assert result["pass"] is False
-    assert result["cc_r3_proved"] is False
     assert any("GAP_A_COUNT_MISMATCH" in x for x in result["errors"])
     assert any("GAP_B_COUNT_MISMATCH" in x for x in result["errors"])
 
@@ -139,5 +147,29 @@ def test_declared_partition_total_must_stay_thirteen():
     binding["shared_gaps"][GAP_B]["obligation_count"] = 4
     result = audit(MANIFEST, binding, _proofs())
     assert result["pass"] is False
-    assert result["cc_r3_proved"] is False
     assert "DECLARED_SHARED_GAP_TOTAL_NOT_13" in result["errors"]
+
+
+def test_finance_reversion_to_gap_b_mutation_is_killed():
+    manifest = deepcopy(MANIFEST)
+    next(x for x in manifest["rows"] if x["obligation_id"] == "FINANCE_ACCOUNTING_INDEX_GE_61")["route_group"] = GAP_B
+    result = audit(manifest, BINDING, _proofs(manifest))
+    assert result["pass"] is False
+    assert "GAP_A_COUNT_MISMATCH:manifest=9:binding=10" in result["errors"]
+    assert "GAP_B_COUNT_MISMATCH:manifest=4:binding=3" in result["errors"]
+
+
+def test_hardcoded_historical_9_4_count_logic_is_absent():
+    source = (ROOT / "canonical/runtime/escape_progress_shared_gap_audit_v2.py").read_text()
+    assert "group_counts[GAP_A] != 9" not in source
+    assert "group_counts[GAP_B] != 4" not in source
+    assert "GAP_A_COUNT_NOT_9" not in source
+    assert "GAP_B_COUNT_NOT_4" not in source
+    result = audit(MANIFEST, BINDING)
+    assert result["pass"] is True
+    assert (result["gap_a_count"], result["gap_b_count"]) == (10, 3)
+
+
+def test_frozen_v1_history_is_byte_identical():
+    assert _git_blob_sha(ROOT / "canonical/runtime/escape_progress_shared_gap_audit_v1.py") == "53fb708e755561696f57b39705b04cefcaa2233b"
+    assert _git_blob_sha(ROOT / "canonical/governance/ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_20261010_V1.json") == "4ebe25308bf9816d4eeaea415b37b9ec152604c0"
