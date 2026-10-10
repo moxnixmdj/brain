@@ -9,10 +9,10 @@ from canonical.runtime import professional_quality_scoped_evidence_v1 as scoped
 
 
 class ProfessionalQualityScopedEvidenceV1Tests(unittest.TestCase):
-    def test_current_r3_r4_r5_r6_r7_r10_and_r11_scopes_are_admitted_without_global_credit(self):
+    def test_current_r1_r3_r4_r5_r6_r7_r10_and_r11_scopes_are_admitted_without_global_credit(self):
         out = scoped.evaluate()
         self.assertTrue(out["pass"], out)
-        self.assertEqual(out["admitted_scope_count"], 7, out)
+        self.assertEqual(out["admitted_scope_count"], 8, out)
         self.assertEqual(out["rejected_scope_count"], 0, out)
         self.assertFalse(out["global_leaf_closure"])
         self.assertFalse(out["global_root_closure"])
@@ -317,6 +317,50 @@ class ProfessionalQualityScopedEvidenceV1Tests(unittest.TestCase):
         )
         self.assertFalse(row["semantic_leaf_credit"])
         self.assertFalse(row["execution_leaf_credit"])
+
+
+    def test_r1_scope_is_execution_only_and_preserves_semantic_truth_limits(self):
+        out = scoped.evaluate()
+        row = next(
+            x for x in out["admitted_scopes"]
+            if x["root_id"] == "R1_TARGET_SPECIFICATION"
+        )
+        self.assertEqual(
+            row["claim_scope"]["kind"],
+            "CONTENT_ADDRESSED_BEHAVIORAL_CONTRACT_STRUCTURAL_COMPLETENESS_GATE",
+        )
+        self.assertEqual(
+            row["contributes_to_leaf_ids"],
+            ["PQ::R1_TARGET_SPECIFICATION::EXECUTION"],
+        )
+        self.assertIn(
+            "NO_OPAQUE_FIELD_PROSE_SEMANTIC_INTERPRETATION",
+            row["claim_scope"]["limitations"],
+        )
+        self.assertIn(
+            "NO_CANDIDATE_POLICY_SET_COMPLETENESS_TRUTH",
+            row["claim_scope"]["limitations"],
+        )
+        self.assertFalse(row["semantic_leaf_credit"])
+        self.assertFalse(row["execution_leaf_credit"])
+
+    def test_r1_stale_contract_schema_fails_closed(self):
+        registry = json.loads(scoped.REGISTRY.read_text())
+        r1 = next(
+            x for x in registry["entries"]
+            if x["root_id"] == "R1_TARGET_SPECIFICATION"
+        )
+        r1["contract_schema"]["git_blob_sha"] = "0" * 40
+        with tempfile.TemporaryDirectory() as td:
+            p = Path(td) / "registry.json"
+            p.write_text(json.dumps(registry, indent=2) + "\n")
+            out = scoped.evaluate(registry_path=p)
+        self.assertFalse(out["pass"], out)
+        row = next(
+            x for x in out["rejected_scopes"]
+            if x["root_id"] == "R1_TARGET_SPECIFICATION"
+        )
+        self.assertIn("CONTRACT_SCHEMA_STALE", row["errors"])
 
 
 
