@@ -42,6 +42,7 @@ MUTABLE_REQUEST_FIELDS = frozenset(
         "policy_execution_binding",
         "goal_satisfaction_binding",
         "policy_cover_observation_bindings",
+        "information_origin_by_predicate_id",
         "max_policy_cover_observations",
         "max_information_rounds",
         "episode_id",
@@ -293,6 +294,31 @@ def _merge_candidate(
 
     merged = deepcopy(dict(current))
     for key, value in patch.items():
+        if key == "information_origin_by_predicate_id":
+            if not isinstance(value, Mapping):
+                return None, "INFORMATION_ORIGIN_BY_PREDICATE_ID_PATCH_NOT_OBJECT"
+            prior_origins = merged.get(key, {})
+            if not isinstance(prior_origins, Mapping):
+                return None, "EXISTING_INFORMATION_ORIGIN_BY_PREDICATE_ID_NOT_OBJECT"
+            combined_origins = deepcopy(dict(prior_origins))
+            for predicate_id, origin in value.items():
+                if not isinstance(predicate_id, str) or not predicate_id:
+                    return None, "INFORMATION_ORIGIN_PREDICATE_ID_INVALID"
+                if not isinstance(origin, Mapping):
+                    return None, (
+                        "INFORMATION_ORIGIN_RECORD_NOT_OBJECT:" + predicate_id
+                    )
+                if (
+                    predicate_id in combined_origins
+                    and combined_origins[predicate_id] != origin
+                ):
+                    return None, (
+                        "INFORMATION_ORIGIN_BINDING_MUTATION_FORBIDDEN:"
+                        + predicate_id
+                    )
+                combined_origins[predicate_id] = deepcopy(dict(origin))
+            merged[key] = combined_origins
+            continue
         if key == "policy_cover_observation_bindings":
             if not isinstance(value, Mapping):
                 return None, "POLICY_COVER_OBSERVATION_BINDINGS_PATCH_NOT_OBJECT"
