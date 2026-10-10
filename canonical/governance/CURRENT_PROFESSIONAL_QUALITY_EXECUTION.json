@@ -69,7 +69,7 @@
   "quality_authority": false,
   "terminal_authority": false,
   "terminal_credit_delta": 0,
-  "next": "CLOSE_CANDIDATE_SUBJECT_DEPENDENCY_SET_FOR_REMAINING_ROOTS_BEFORE_MORE_BINDINGS__THEN_REFRESH_SUBJECT_ONCE_IF_REQUIRED__REVERIFY_R1_IF_SUBJECT_CHANGES__THEN_BIND_REMAINING_ROOTS",
+  "next": "CLASSIFY_REMAINING_TEN_ROOT_LOAD_BEARING_DEPENDENCIES__DO_NOT_MINT_MORE_ROOT_BINDINGS_UNTIL_FINAL_SUBJECT_COMPONENT_SET_IS_CLOSED__THEN_REFRESH_SUBJECT_ONCE_AND_REVERIFY_R1",
   "hard_nonclaims": [
     "NO_PROFESSIONAL_QUALITY_COMPLETENESS_PROOF",
     "NO_GLOBAL_LEAF_OR_ROOT_CLOSURE_FROM_BOUNDED_SCOPED_CAPABILITIES",
@@ -239,5 +239,17 @@
     "root_subject_binding_authority": true,
     "quality_authority": false,
     "terminal_credit_delta": 0
+  },
+  "subject_dependency_closure": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_SUBJECT_DEPENDENCY_CLOSURE_WORKLIST_20261010_V1.json",
+    "git_blob_sha": "4cab4fd3cd5625e1c4605785bc56f1fbda33f20b",
+    "roots_dependency_classified": 2,
+    "roots_dependency_unclassified": 10,
+    "known_subject_expansion_required": true,
+    "known_missing_subject_components": [
+      "canonical/governance/PROFESSIONAL_QUALITY_ASSURANCE_GRAPH_20261009_V2.json",
+      "canonical/governance/PROFESSIONAL_QUALITY_LEAF_EVIDENCE_REGISTRY_20261010_V1.json"
+    ],
+    "final_subject_frozen": false
   }
 }
