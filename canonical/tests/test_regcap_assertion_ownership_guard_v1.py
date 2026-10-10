@@ -214,6 +214,40 @@ class Tests(unittest.TestCase):
         self.assertTrue(out["semantic_truth_authority"], out)
         self.assertEqual(len(out["accepted_claims"]), 1)
 
+    def test_descriptor_context_unknown_wrapper_does_not_launder(self):
+        text = (
+            "Rumor has it that the loss-absorbing cushion can be drawn down "
+            "as losses are incurred."
+        )
+        phrase = "loss-absorbing cushion"
+        start = text.index(phrase)
+        out = signature.compile_context(
+            text,
+            source_id="doc:rumor",
+            start=start,
+            end=start + len(phrase),
+        )
+        self.assertFalse(out["pass"], out)
+        self.assertFalse(out["semantic_truth_authority"])
+
+    def test_source_aligned_unknown_wrapper_does_not_launder(self):
+        text = (
+            "Rumor has it that a 2.5% buffer comprised of CET1 "
+            "above the regulatory minimum capital requirement."
+        )
+        out = proof.verify_proof(
+            text,
+            source_id="doc:rumor",
+            claims=[{
+                "claim_id": "c1",
+                "kind": proof.CCOB_KIND,
+                "start": 0,
+                "end": len(text),
+            }],
+        )
+        self.assertFalse(out["semantic_truth_authority"], out)
+        self.assertEqual(out["accepted_claims"], [])
+
     def test_guard_never_grants_terminal_authority(self):
         out = check_direct_assertion(
             DIRECT,
