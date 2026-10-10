@@ -165,7 +165,11 @@ def verify(*,repo_root:str|Path|None=None):
  if not str(si.get("status") or "").startswith("PASS__"):return _fail("R3_SCOPED_INTEGRATION_NOT_PASS")
 
  pred=docs["predecessor_render_public_verification"]
- if not str(pred.get("status") or "").startswith("PASS__"):return _fail("PREDECESSOR_RENDER_VERIFY_NOT_PASS")
+ pred_status=str(pred.get("status") or "")
+ pred_runner=pred.get("independent_public_runner") or {}
+ if "PREFLIGHT_PASS" not in pred_status or pred_runner.get("conclusion")!="success":return _fail("PREDECESSOR_RENDER_VERIFY_NOT_PASS")
+ pred_limits=set(pred.get("limitations") or [])
+ if "NO_ARBITRARY_SEMANTIC_TARGET_SELECTION" not in pred_limits or "NO_WHOLE_OPEN_ENDED_NATIVE_ARTIFACT_CONTRACT_SCOPE_EQUIVALENCE" not in pred_limits:return _fail("PREDECESSOR_RENDER_SCOPE_TOO_BROAD")
  preflight=docs["predecessor_render_preflight"]
  if preflight.get("execution_authority") is not False or preflight.get("capability_credit_delta")!=0:return _fail("PREDECESSOR_PREFLIGHT_AUTHORITY_OVERCLAIM")
 
