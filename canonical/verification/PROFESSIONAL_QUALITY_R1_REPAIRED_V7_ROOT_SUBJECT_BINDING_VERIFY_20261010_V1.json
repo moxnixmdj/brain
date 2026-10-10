@@ -1,0 +1,16 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R1_REPAIRED_V7_BINDING_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__R1_REPAIRED_V7_BINDING",
+  "binding_path": "canonical/governance/PROFESSIONAL_QUALITY_R1_ROOT_SUBJECT_BINDING_20261010_V5.json",
+  "binding_git_blob_sha": "fcb9b4b720892bad197328c0ca259b02c34f3f03",
+  "verifier_git_blob_sha": "428f77fc7e493d38f50cbacb2da0971d0067d092",
+  "tests_git_blob_sha": "6d72af42e9e36a09e4cde7295d10a99e7c8098e5",
+  "tests_passed": 6,
+  "real_replay_pass": true,
+  "subject_sha256": "7e2904f3205b283a3a0f9e7583b36599cc2da4a96fd31b1777c226ca5c16c9e4",
+  "root_subject_binding_authority": true,
+  "quality_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0
+}
