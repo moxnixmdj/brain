@@ -30,3 +30,24 @@ jobs:
         run: python -m unittest canonical.tests.test_escape_progress_13_route_manifest_v1 -v
       - name: Emit fail-closed manifest status
         run: python canonical/runtime/escape_progress_13_route_manifest_v1.py
+      - name: Run current O11 proof-instantiation search
+        run: |
+          python - <<'PY'
+          from canonical.runtime.current_escape_o11_proof_instantiation_search_v1 import scan
+          import json
+          out=scan()
+          summary={
+              "status":out.get("status"),
+              "pass":out.get("pass"),
+              "current_o_count":out.get("current_o_count"),
+              "current_q_count":out.get("current_q_count"),
+              "candidate_count":out.get("candidate_count"),
+              "proved_candidate_count":out.get("proved_candidate_count"),
+              "proved_obligation_ids":out.get("proved_obligation_ids"),
+              "missing_obligation_ids":out.get("missing_obligation_ids"),
+              "multi_row_proof_sources":out.get("multi_row_proof_sources"),
+              "near_misses":out.get("near_misses"),
+              "parse_failure_count":out.get("parse_failure_count"),
+          }
+          print("O11_CURRENT_SEARCH_SUMMARY="+json.dumps(summary,sort_keys=True,separators=(",",":")))
+          PY
