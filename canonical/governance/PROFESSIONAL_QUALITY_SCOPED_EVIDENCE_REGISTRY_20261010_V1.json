@@ -577,7 +577,7 @@
       "claim_kind": "CONTENT_ADDRESSED_TYPED_MECHANICAL_MEASUREMENT_SEMANTICS",
       "source_receipt": {
         "path": "canonical/verification/PROFESSIONAL_QUALITY_R4_MEASUREMENT_SEMANTIC_VERIFY_20261010_V1.json",
-        "git_blob_sha": "bd873489f301df1d9eb41e85922d1b8f891e2e6f"
+        "git_blob_sha": "c91074f2f187834936c0b7297579a6b8ba125fae"
       },
       "reusable_compiler": {
         "path": "canonical/runtime/professional_r4_measurement_semantic_certificate_v1.py",
@@ -585,11 +585,11 @@
       },
       "compiler_verification": {
         "path": "canonical/verification/PROFESSIONAL_QUALITY_R4_MEASUREMENT_SEMANTIC_VERIFY_20261010_V1.json",
-        "git_blob_sha": "bd873489f301df1d9eb41e85922d1b8f891e2e6f"
+        "git_blob_sha": "c91074f2f187834936c0b7297579a6b8ba125fae"
       },
       "scope_governance": {
         "path": "canonical/governance/PROFESSIONAL_QUALITY_R4_MEASUREMENT_SEMANTIC_SCOPE_20261010_V1.json",
-        "git_blob_sha": "178435c75f5ba31c7ffcb76a0fb64eb0e58cceee"
+        "git_blob_sha": "a5b3e1984da25b09a5cb503b615806acdbf88e81"
       },
       "global_leaf_closure": false,
       "global_root_closure": false,
