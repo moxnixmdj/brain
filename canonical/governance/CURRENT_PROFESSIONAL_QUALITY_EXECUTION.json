@@ -1,16 +1,71 @@
 {
-  "schema":"PROJECT_BRAIN_CURRENT_PROFESSIONAL_QUALITY_EXECUTION_POINTER_V1",
-  "date":"2026-10-10",
-  "status":"P1_ROUTER_CANDIDATE__8_OF_8_LOCAL_PASS__NOT_LIVE_DEFAULT",
-  "profile_path":"canonical/governance/PROFESSIONAL_QUALITY_P1_EXECUTION_PROFILE_20261010_V1.json",
-  "profile_sha":"a01ef78846ce22996128cc2a5858341d8418074c",
-  "router_path":"canonical/runtime/professional_quality_p1_router_v1.py",
-  "router_sha":"81a856213d3d182f9844a6361a915d71423ecad0",
-  "tests_sha":"522ea4d2c087b9efd839534ac050b57177a972c4",
-  "verification_path":"canonical/verification/PROFESSIONAL_QUALITY_P1_ROUTER_VERIFY_20261010_V1.json",
-  "verification_sha":"416ffa40e7884eb44bdfca249ea651e96826c669",
-  "independent_replay":false,
-  "live_default":false,
-  "terminal_authority":false,
-  "terminal_credit_delta":0
+  "schema": "PROJECT_BRAIN_CURRENT_PROFESSIONAL_QUALITY_EXECUTION_POINTER_V1",
+  "date": "2026-10-10",
+  "status": "P1_V3_EXECUTION_PROFILE_BOUND__VERIFIED_HARD_DEFECT_PREFLIGHT__TWELVE_SCOPED_CAPABILITIES_REGISTERED__TEN_SCOPE_COMBINED_REPLAY_V10__R8_R12_COMPONENT_EVIDENCE_AND_REGRESSION_BOUND__NO_TWELVE_SCOPE_COMBINED_INDEPENDENT_REPLAY__NOT_LIVE_DEFAULT",
+  "profile_path": "canonical/governance/PROFESSIONAL_QUALITY_P1_EXECUTION_PROFILE_20261010_V3.json",
+  "profile_sha": "f7e89eafbb691c16d1bdf5b8d295a468d5e3bec5",
+  "router_path": "canonical/runtime/professional_quality_p1_router_v3.py",
+  "router_sha": "cdb6716ac6d562d1ab222242d07aeecc5cdfac78",
+  "legacy_router_verification": {
+    "path": "canonical/verification/PROFESSIONAL_QUALITY_P1_ROUTER_VERIFY_20261010_V1.json",
+    "git_blob_sha": "416ffa40e7884eb44bdfca249ea651e96826c669",
+    "scope": "ROUTER_V1_ONLY__DOES_NOT_VERIFY_ROUTER_V3"
+  },
+  "hard_defect_preflight_independent_verification": {
+    "path": "canonical/verification/PROFESSIONAL_ARTIFACT_HARD_DEFECT_PREFLIGHT_INDEPENDENT_VERIFICATION_20261010_V1.json",
+    "commit_sha": "d20893ae9c71f014a6440eb5a69f0f12cfb6902b",
+    "status": "INDEPENDENT_SPRITE_PASS__11_OF_11__EXACT_RUNTIME_AND_TEST_BLOBS__ZERO_QUALITY_OR_TERMINAL_CREDIT"
+  },
+  "scoped_evidence": {
+    "registry_path": "canonical/governance/PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_REGISTRY_20261010_V1.json",
+    "registry_git_blob_sha": "58083361e2f56c7b7312f07fb5d9670eb78dc121",
+    "admission_test_path": "canonical/tests/test_professional_quality_scoped_evidence_v1.py",
+    "admission_test_git_blob_sha": "3e0cd908c1c0a765fcbbd80fd3b9cc699b0833cc",
+    "admitted_scope_count": 12,
+    "represented_root_count": 12,
+    "represented_roots": [
+      "R1_TARGET_SPECIFICATION",
+      "R2_CANDIDATE_SEARCH",
+      "R3_REALIZATION_OBSERVATION",
+      "R4_MEASUREMENT_CONSTRUCT",
+      "R5_EVALUATOR_REFERENCE",
+      "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+      "R7_CAUSAL_PRESCRIPTIVE",
+      "R8_POPULATION_CONTEXT_OPERATOR",
+      "R9_TEMPORAL_DEPLOYMENT",
+      "R10_ANALYSIS_DECISION",
+      "R11_ADAPTIVE_INTEGRITY_SECURITY",
+      "R12_META_COMPOSITION_CLOSURE"
+    ],
+    "latest_combined_independent_replay": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_VERIFY_20261010_V10.json",
+      "git_blob_sha": "f8ca5391876acd164af3a238958bca959f4fc026",
+      "admitted_scope_count": 10,
+      "covers_r8_r12": false
+    },
+    "r8_r12_combined_independent_replay": false,
+    "global_leaf_closure": false,
+    "global_root_closure": false,
+    "domain_semantic_closure": false,
+    "domain_execution_closure": false
+  },
+  "profile_execution_authority": true,
+  "router_v3_independent_replay": false,
+  "twelve_scope_combined_independent_replay": false,
+  "independent_replay": false,
+  "live_default": false,
+  "promotion_authority": false,
+  "quality_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "next": "INDEPENDENTLY_REPLAY_ROUTER_V3_AND_ALL_TWELVE_SCOPED_ADMISSIONS__PROMOTE_ONLY_AFTER_EXACT_PASS",
+  "hard_nonclaims": [
+    "NO_PROFESSIONAL_QUALITY_COMPLETENESS_PROOF",
+    "NO_GLOBAL_LEAF_OR_ROOT_CLOSURE_FROM_TWELVE_SCOPED_CAPABILITIES",
+    "NO_ROUTER_V3_INDEPENDENT_REPLAY_YET",
+    "NO_TWELVE_SCOPE_COMBINED_INDEPENDENT_REPLAY_YET",
+    "NO_LIVE_DEFAULT_PROMOTION",
+    "NO_OPUS_5_5_NONINFERIORITY",
+    "NO_TERMINAL_AUTHORITY"
+  ]
 }
