@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R10_PROOF_SLOT_DIRECT_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__CURRENT_R10_PROOF_SLOT_VERIFIER__13_OF_13_DIRECT_ADVERSARIAL_REPLAY__STRUCTURAL_ONLY__ZERO_PROPERTY_CREDIT",
+  "repository": "moxnixmdj/brain",
+  "source_main_commit": "d73634607e7c878970a47973015285ad03c6924f",
+  "leaf_id": "PQ::R10_ANALYSIS_DECISION::EXECUTION",
+  "claim_id": "205a864e7d7a56a14a46bb75923cc9b11126d479676d26d88803831da1197294",
+  "exact_blobs": {
+    "proof_slot_runtime": "04957e2e385f8169e7d8aff5b0e1f2009e848666",
+    "proof_slot_tests": "ee97b8b61ebd58a2e1614709717aec70063edb17",
+    "constitution": "a087db2645b03e589965d50eb51d32a3049dc2fe",
+    "one_shot_reality_runtime": "b8347a3993f96aa5e6fa2f1fe68d7c8afccb8bec",
+    "one_shot_verified_runtime": "605fe5a36e26aef51f93c4a5b3e43483abea2c19"
+  },
+  "independent_replay": {
+    "carrier": "brain-live-runtime-v1-verify-20261008",
+    "carrier_id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13",
+    "workspace": "/home/sprite/uvck-private-full-regression-20261010",
+    "verifier_pycompile": "PASS",
+    "stock_unittest_load_status": "NOT_COUNTED__ISOLATED_WORKSPACE_IMPORT_CLOSURE_INCOMPLETE",
+    "direct_adversarial_cases_run": 13,
+    "direct_adversarial_cases_passed": 13,
+    "transcript_sha256": "64b9b317e7a98087f91f5d5efcb16a6764c053ff54c1393b518fbb0f0ee84d36"
+  },
+  "cases_proved": [
+    "CLEAN_CONSERVATIVE_STRUCTURAL_CASE_PASSES_ALL_NINE_SLOTS",
+    "TARGET_AND_HARD_CONSTRAINT_FREEZE_REQUIRED",
+    "LOSSLESS_DECISION_STATE_REQUIRED",
+    "UNCERTAINTY_TYPE_LAUNDERING_BLOCKED",
+    "UNAUTHORIZED_AGGREGATION_POLICY_BLOCKED",
+    "FAILED_OR_COMPENSATORY_VETO_BLOCKED",
+    "DECISION_SENSITIVE_MODEL_MULTIPLICITY_REQUIRES_RESOLUTION_OR_ESCALATION",
+    "SELECTIVE_EVIDENCE_PACKET_BLOCKED",
+    "POST_OUTCOME_STOPPING_RULE_BLOCKED",
+    "ABSOLUTE_EXCELLENCE_REQUIRES_ABSOLUTE_FLOOR_EVIDENCE",
+    "CLAIM_SUBSTITUTION_BLOCKED",
+    "CONSTITUTION_AUTHORITY_OVERCLAIM_BLOCKED",
+    "BROAD_ACQUISITION_MINIMALITY_WEAKENING_BLOCKED"
+  ],
+  "authority_boundary": {
+    "structural_policy_compliance_only": true,
+    "underlying_fact_truth_authority": false,
+    "detection_completeness_proved": false,
+    "whole_leaf_property_truth_proved": false,
+    "execution_authority": false,
+    "quality_authority": false,
+    "acceptance_authority": false,
+    "promotion_authority": false,
+    "terminal_authority": false
+  },
+  "historical_guard_currentness": {
+    "historical_verification_path": "canonical/verification/PROFESSIONAL_QUALITY_R10_EXECUTION_GUARD_VERIFY_20261010_V1.json",
+    "historical_verification_git_blob_sha": "7a29d67c77c8961b238e7f9b3bf74d278984452e",
+    "verified_guard_runtime_git_blob_sha": "0a88d49211e0a34e32b9d96f58927ccfaedf6487",
+    "current_guard_runtime_git_blob_sha": "83ae7bc81660bd4be7f66b9454de5d007c0db959",
+    "current_guard_exact_behavioral_reverification_claimed": false
+  },
+  "next_required_edge": "BIND_REAL_CONTENT_ADDRESSED_CASE_RECEIPTS_TO_ALL_NINE_STRUCTURAL_SLOTS_AND_REVERIFY_CURRENT_GUARD_DETECTION_ENFORCEMENT_BYTES__DETECTION_COMPLETENESS_AND_UNDERLYING_FACT_TRUTH_REMAIN_SEPARATE",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
