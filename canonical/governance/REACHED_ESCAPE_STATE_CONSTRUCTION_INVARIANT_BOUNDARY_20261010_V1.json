@@ -1,0 +1,81 @@
+{
+  "schema": "PROJECT_BRAIN_REACHED_ESCAPE_STATE_CONSTRUCTION_INVARIANT_BOUNDARY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "BROAD_LIVE_FABRIC_STATE_CONSTRUCTION_INVARIANT_FALSIFIED__MISSION_OWNED_CONSTRUCTOR_INVARIANT_REMAINS_OPEN__ZERO_CREDIT",
+  "mission_relation": "CORRECT_NEXT_GLOBAL_QUESTION_AFTER_BOUNDED_FINITE_REACHED_STATE_TOTALITY_CERTIFICATE",
+  "exact_load_bearing_bytes": {
+    "unified_cognitive_fabric": {
+      "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
+      "git_blob_sha": "a56de06be6e1263e577d8f3bb586ec42439593d8"
+    },
+    "reached_escape_state_kernel": {
+      "path": "canonical/runtime/reached_escape_state_kernel_v1.py",
+      "git_blob_sha": "b1435d90f039bd1d809ff364c325c3d0858d3afd"
+    },
+    "finite_totality_certificate": {
+      "path": "canonical/runtime/reached_escape_finite_totality_certificate_v1.py",
+      "git_blob_sha": "85487335b7e774ac9084b34c60e0175842771036"
+    },
+    "counterexample_regression": {
+      "path": "canonical/tests/test_reached_escape_construction_invariant_boundary_v1.py",
+      "git_blob_sha": "8993a3070652466446e202b5562a838e302e70c8"
+    }
+  },
+  "falsified_statement": "EVERY_STATE_REACHABLE_THROUGH_THE_LIVE_REACHED_ESCAPE_STATE_FABRIC_MODE_SATISFIES_THE_BOUNDED_FINITE_TOTALITY_CERTIFICATE_PRECONDITIONS",
+  "exact_counterexample": {
+    "state_id": "LIVE_FABRIC_UNSPLITTABLE_COUNTEREXAMPLE_V1",
+    "regions": [
+      "r1",
+      "r2"
+    ],
+    "authenticated_safe_policy_adequacy": {
+      "p1": [
+        "r1"
+      ],
+      "p2": [
+        "r2"
+      ]
+    },
+    "authenticated_safe_truthful_complete_discriminators": [],
+    "kernel_result": "UNSPLITTABLE_POLICY_CONFLICT",
+    "finite_totality_result": "OPEN__INDISTINGUISHABLE_CLASS_WITHOUT_COMMON_ADEQUATE_POLICY",
+    "reason": "THE_EMPTY_CURRENT_DISCRIMINATOR_FAMILY_MAKES_R1_AND_R2_ONE_EQUIVALENCE_CLASS_WITH_NO_COMMON_ADEQUATE_POLICY"
+  },
+  "why_live_reachable": [
+    "UNIFIED_COGNITIVE_FABRIC_REACHED_ESCAPE_STATE_MODE_FORWARDS_CALLER_PAYLOAD_DIRECTLY_TO_REACHED_ESCAPE_STATE_KERNEL_V1_EVALUATE",
+    "KERNEL_NORMALIZATION_ACCEPTS_THE_COUNTEREXAMPLE_AS_A_VALID_FINITE_AUTHENTICATED_STATE",
+    "NO_MISSION_OWNED_STATE_CONSTRUCTOR_PRECONDITION_IS_APPLIED_ON_THIS_EXPLICIT_MODE"
+  ],
+  "narrowed_next_global_question": "PROVE_THAT_EVERY_NONTERMINAL_ESCAPE_STATE_EMITTED_BY_THE_MISSION_OWNED_STATE_CONSTRUCTOR_EITHER_SATISFIES_THE_FINITE_TOTALITY_CERTIFICATE_PRECONDITIONS_OR_IS_FAIL_CLOSED_WITH_ONE_EXACT_CONTENT_ADDRESSED_REPAIR_OBLIGATION_BEFORE_BEING_ADMITTED_AS_A_CERTIFIED_REACHED_STATE",
+  "exact_remaining_obstruction_classes": [
+    "REGION_WITHOUT_ANY_AUTHENTICATED_SAFE_ADEQUATE_POLICY",
+    "DISCRIMINATOR_EQUIVALENCE_CLASS_WITHOUT_A_COMMON_AUTHENTICATED_SAFE_ADEQUATE_POLICY"
+  ],
+  "exact_repair_classes": [
+    "ACQUIRE_TRUTHFUL_DISTINGUISHING_OBSERVATION",
+    "ACQUIRE_OR_SYNTHESIZE_COMMON_ADEQUATE_POLICY"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_MISSION_AUTOPILOT_CURRENTLY_EMITS_THIS_COUNTEREXAMPLE",
+    "NO_CLAIM_REPAIR_CLASSES_ARE_GLOBALLY_ACQUIRABLE",
+    "NO_GLOBAL_ESCAPE_PROGRESS_TOTALITY",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "scheduling_effect": {
+    "delete": [
+      "PROVE_THE_BROAD_ALL_LIVE_FABRIC_REACHABLE_STATE_INVARIANT"
+    ],
+    "preserve": [
+      "PROVE_OR_FALSIFY_THE_NARROW_MISSION_OWNED_STATE_CONSTRUCTOR_INVARIANT",
+      "UNIVERSAL_REPAIR_ACQUIRABILITY"
+    ],
+    "next": "LOCATE_THE_MISSION_OWNED_ESCAPE_STATE_CONSTRUCTOR_AND_PROVE_IT_CANNOT_ADMIT_AN_UNCOVERED_REGION_OR_UNRESOLVED_EQUIVALENCE_CLASS_WITHOUT_A_CONTENT_ADDRESSED_REPAIR_OBLIGATION"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false,
+  "terminal_credit_delta": 0
+}
