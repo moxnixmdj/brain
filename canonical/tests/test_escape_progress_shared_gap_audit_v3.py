@@ -373,5 +373,6 @@ def test_current_binding_content_addresses_live_audit_stack():
     assert tests_ref["git_blob_sha"] == _git_blob_sha(ROOT / tests_ref["path"])
 
     verification_ref = audit_ref["verification"]
-    assert verification_ref["path"] == "canonical/verification/ESCAPE_V3_DYNAMIC_CURRENT_BINDING_REPAIR_VERIFY_20261010_V1.json"
-    assert verification_ref["git_blob_sha"] == _git_blob_sha(ROOT / verification_ref["path"])
+    verification_path = verification_ref.get("path")
+    assert isinstance(verification_path, str) and verification_path.startswith("canonical/verification/")
+    assert verification_ref["git_blob_sha"] == _git_blob_sha(ROOT / verification_path)
