@@ -1,0 +1,16 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK20_IDENTITY_V2_VERIFY_V1",
+  "date": "2026-10-10",
+  "pass": true,
+  "claim_binding_git_blob_sha": "44900b99c1c527ddf4df5f92092d6d43dedd387b",
+  "claim_binding_canonical_sha256": "a9946cb909ce91844a6ca77583a1323df4722cd406d74713ec474c3cb4262035",
+  "slot_id": "terminal-bench-science/hysteretic-aquifer-control::trial-0",
+  "task_digest": "sha256:681df0c3b2ada03a933ac4d2e11f07983676f87a9f26b61e416987904b880289",
+  "logical_attempt_id": "fc59ecc0388364db0617ebb5a5630c31d0ef4d66491738ab4518e2ea55707d52",
+  "authority_git_blob_sha": "80887ee9ef52daea90279cebb1cea0f2a0c4e8ad",
+  "ledger_git_blob_sha": "1e7b6eb23667c5c86d79bd438f25856b74366ff3",
+  "task_read": false,
+  "task_started": false,
+  "benchmark_trials_consumed_delta": 0,
+  "terminal_credit_delta": 0
+}
