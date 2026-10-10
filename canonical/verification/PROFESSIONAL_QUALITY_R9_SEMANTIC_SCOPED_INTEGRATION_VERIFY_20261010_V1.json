@@ -1,0 +1,75 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R9_SEMANTIC_SCOPED_INTEGRATION_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__PINNED_EXACT_BYTES__PYCOMPILE__17_OF_17__R9_SEMANTIC_ADMITTED__LEAF_FRONTIER_21_OF_24_PARTIAL__ZERO_GLOBAL_LEAF_CREDIT",
+  "repository": "moxnixmdj/brain",
+  "pinned_main_commit": "45ff821002050fa8b232c277ad8f96144ee2a8ad",
+  "carrier": {
+    "name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/pq-r9-semantic-integration-final"
+  },
+  "exact_blobs": {
+    "registry": "70dc8713ffaa3a68a711e19366dfc48ec226442d",
+    "scoped_overlay": "ffceb16a8318bf0a680eba0956a40a43b207b286",
+    "semantic_runtime": "4cc7ef5a533514409fec4ed731bcea17c934771a",
+    "semantic_tests": "dbbee54a786c60921f3e89334f77a9c19051c50e",
+    "semantic_scope": "0f2a434454802d5f76157ce51f19f16bb9cbfd8f",
+    "semantic_source_verification": "e4527631fbf6e95cb20381d60eb4fe4b978c176f",
+    "execution_scope": "7755bc709169abe0db35a6418fd8568ed14131b7",
+    "execution_verification": "7081a52621a1bb8f1ad07d1da23b40c8e57e16c2",
+    "leaf_projection_v2": "b316d103d7134e58b8b5b838627ba7946742b2c4",
+    "overlay_tests": "d84166b1ef7cb859f33762b62b878ab1746a5c9b",
+    "projection_v2_tests": "1806e23120457616ac53d62ce644ce515187839e"
+  },
+  "replay": {
+    "py_compile": "PASS",
+    "tests_run": 17,
+    "tests_passed": 17,
+    "tests_failed": 0,
+    "execution_log_sha256": "d1c4d557491712f765160f03e08bdb7180b707d46b36b017d41853e89c458c34"
+  },
+  "integration_repairs": [
+    "CLAIM_SCOPE_GUARANTEE_AND_LIMITATION_LIST_ORDER_IS_NORMALIZED_AS_SET_SEMANTICS",
+    "R9_HANDLER_USES_THE_SAME_ORDER_INVARIANT_CLAIM_SCOPE_COMPARISON_AS_R2"
+  ],
+  "result": {
+    "admitted_scoped_capability_count": 18,
+    "partial_coverage_leaf_count": 21,
+    "semantic_partial_coverage_leaf_count": 9,
+    "execution_partial_coverage_leaf_count": 12,
+    "no_scoped_evidence_leaf_count": 3,
+    "no_scoped_evidence_leaf_ids": [
+      "PQ::R3_REALIZATION_OBSERVATION::SEMANTIC",
+      "PQ::R4_MEASUREMENT_CONSTRUCT::SEMANTIC",
+      "PQ::R5_EVALUATOR_REFERENCE::SEMANTIC"
+    ],
+    "verified_global_leaf_count": 0,
+    "open_global_leaf_count": 24,
+    "global_leaf_closure": false,
+    "domain_semantic_closure": false,
+    "domain_execution_closure": false
+  },
+  "proved": [
+    "R9_FROZEN_POPULATION_TEMPORAL_ACCOUNTING_SEMANTICS_ARE_ADMITTED_THROUGH_THE_SCOPED_OVERLAY",
+    "GENERAL_DEPLOYMENT_VALIDITY_IS_NOT_INFERRED_FROM_FROZEN_FINITE_CENSORING_ACCOUNTING",
+    "CLAIM_SCOPE_SERIALIZATION_ORDER_CANNOT_CHANGE_SEMANTIC_ADMISSION",
+    "LEAF_PROJECTION_ADVANCES_TO_21_OF_24_BOUNDED_PARTIAL_WITH_ZERO_GLOBAL_CREDIT"
+  ],
+  "not_proved": [
+    "GLOBAL_R9_SEMANTIC_LEAF_CLOSURE",
+    "GLOBAL_R9_ROOT_CLOSURE",
+    "MULTIHORIZON_DEPLOYMENT_VALIDITY",
+    "RARE_EVENT_COVERAGE",
+    "DISTRIBUTION_SHIFT_TRANSPORT",
+    "PERFORMATIVE_OR_EQUILIBRIUM_STABILITY",
+    "DOMAIN_SEMANTIC_CLOSURE",
+    "DOMAIN_EXECUTION_CLOSURE",
+    "LIVE_DEFAULT_PROMOTION",
+    "TERMINAL_AUTHORITY"
+  ],
+  "next_required_edge": "BIND_BOUNDED_SEMANTIC_EVIDENCE_FOR_R3_R4_OR_R5_OR_BIND_EXACT_SAME_SUBJECT_ROOT_RECEIPTS",
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
