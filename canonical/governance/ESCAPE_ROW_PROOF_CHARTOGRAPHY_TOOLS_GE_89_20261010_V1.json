@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_ESCAPE_PROGRESS_ROW_PROOF_V1",
+  "obligation_id": "CHARTOGRAPHY_TOOLS_GE_89",
+  "route_group": "GAP_A_ACQUISITION_TOTALITY",
+  "resolution_mode": "STRICT_DISCRIMINATOR",
+  "currently_acquirable": true,
+  "finite_outcome_ids": [
+    "PUBLIC_RUNNER_FEASIBLE",
+    "PUBLIC_RUNNER_INFEASIBLE"
+  ],
+  "outcome_map_complete": true,
+  "decision_region_size_before": 2,
+  "max_nonterminal_decision_region_size_after": 1,
+  "authenticated_truth_preserving": true,
+  "safe": true,
+  "producer_id": "BRAIN_CHARTOGRAPHY_ZERO_CASE_PREFLIGHT_BINDER_V1",
+  "evidence": {
+    "path": "canonical/evidence/CHARTOGRAPHY_QWEN3VL4B_ZERO_CASE_PREFLIGHT_RUN_38040901506_20261010_V1.json",
+    "git_blob_sha": "eb5bdf5c166082263a673b9ebbe8c4bdc86dc155",
+    "byte_sha256": "143d91614f6455085d202613b82c5debcbfd679e01f478a8ef745c91f32ad0ab"
+  },
+  "observed_outcome": "PUBLIC_RUNNER_FEASIBLE",
+  "semantic_effect": "STRICTLY_SHRINK_BOUND_EXECUTION_FEASIBILITY_REGION_FROM_TWO_POSSIBILITIES_TO_THE_FEASIBLE_BRANCH__PRESERVE_ROUTE_AND_ADVANCE_TO_NONTERMINAL_SCOPE_RELEVANT_QUALIFICATION",
+  "truth_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "acceptance_authority": false,
+  "terminal_authority": false,
+  "hard_nonclaims": [
+    "NO_CHARTOGRAPHY_SCORE",
+    "NO_THRESHOLD_ACCEPTANCE",
+    "NO_CC_R3_OR_TERMINAL_CREDIT"
+  ],
+  "proof_sha256": "d6d4c369d5a66a150e0c9f609c699b7b02b12a67b3ad0c9cfcee27530b142268"
+}
