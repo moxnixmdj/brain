@@ -1,0 +1,21 @@
+name: Verify professional whole-leaf residual
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/runtime/professional_quality_whole_leaf_residual_compiler_v1.py
+      - canonical/tests/test_professional_quality_whole_leaf_residual_compiler_v1.py
+      - canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_RESIDUAL_LEDGER_20261010_V1.json
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m py_compile canonical/runtime/professional_quality_whole_leaf_residual_compiler_v1.py
+      - run: python -m unittest -v canonical.tests.test_professional_quality_whole_leaf_residual_compiler_v1
