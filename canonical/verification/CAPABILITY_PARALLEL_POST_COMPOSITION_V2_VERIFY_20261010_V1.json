@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_PARALLEL_POST_COMPOSITION_V2_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PRIMARY_ISOLATED_21_OF_21_PASS__SECOND_CARRIER_EXACT_BLOB_PYCOMPILE_PASS__SECOND_RUNTIME_REPLAY_NOT_CLAIMED_DUE_STALE_DEPENDENCY_SNAPSHOT__ZERO_AUTHORITY_OR_TERMINAL_CREDIT",
+  "source_main_observation": "145c8257efa539765ea0ab14bb55fb15b1097dbe",
+  "runtime": {
+    "path": "canonical/runtime/capability_parallel_frontier_post_composition_v2.py",
+    "git_blob_sha": "b8a86551545a3ecfe8ba8d6fa44d2347703aa42d"
+  },
+  "tests": {
+    "path": "canonical/tests/test_capability_parallel_frontier_post_composition_v2.py",
+    "git_blob_sha": "16c46ce3c7f812d7cb9814a07a4683c1b5e5cca3"
+  },
+  "primary_isolated_verification": {
+    "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "exact_runtime_git_blob_sha": "b8a86551545a3ecfe8ba8d6fa44d2347703aa42d",
+    "exact_test_git_blob_sha": "16c46ce3c7f812d7cb9814a07a4683c1b5e5cca3",
+    "py_compile": "PASS",
+    "command_family": "python -m unittest capability_parallel_frontier_v2 + post_composition_v2",
+    "tests_passed": 21,
+    "tests_failed": 0
+  },
+  "second_carrier_verification": {
+    "carrier": "brain-live-runtime-v1-verify-20261008/scheduler-currentness-verify",
+    "exact_runtime_git_blob_sha": "b8a86551545a3ecfe8ba8d6fa44d2347703aa42d",
+    "exact_test_git_blob_sha": "16c46ce3c7f812d7cb9814a07a4683c1b5e5cca3",
+    "py_compile": "PASS",
+    "runtime_replay_credit": false,
+    "runtime_replay_nonclaim": "LOCAL_CORE_AND_FRONTIER_DEPENDENCY_SNAPSHOT_PREDATES_CURRENT_API_AND_PRIVATE_REPO_CREDENTIALS_ARE_UNAVAILABLE__NO_FALSE_INDEPENDENT_RUNTIME_PASS"
+  },
+  "proved": [
+    "PROFESSIONAL_CURRENT_POINTER_FOLLOW_IS_INVARIANT_GATED_AND_CONTENT_REBOUND",
+    "ASSURANCE_CURRENT_POINTER_FOLLOW_REQUIRES_NO_TERMINAL_OR_LIVE_DEFAULT_AUTHORITY_AND_FULL_REGRESSION_PROMOTION_BLOCKER",
+    "BYTES_CURRENT_POINTER_FOLLOW_REQUIRES_COHERENT_QUALIFICATION_AND_UNSPENT_FROZEN_SUCCESSOR",
+    "R2_CURRENT_POINTER_FOLLOW_REQUIRES_GENERAL_MECHANISM_CLOSED_AND_EXACT_SINGLE_FINANCE_TAIL_INVARIANTS",
+    "PARKED_ROWS_REMAIN_NONPRIMARY_BY_LOCAL_NORMALIZATION_TO_BLOCKED",
+    "UNMODELED_SOURCE_DRIFT_REMAINS_FAIL_CLOSED",
+    "NO_SCALARIZATION_OR_FULL_EXECUTION_AUTHORITY_IS_ADDED"
+  ],
+  "live_race_observation": {
+    "note": "DURING_IMPLEMENTATION_MAIN_ADVANCED_PROFESSIONAL_PROJECTION_FROM_5_TO_7_TO_8_TO_9_OF_24_AND_BYTES_FROM_V30_TO_V31_TO_V32",
+    "consequence": "MANUAL_FRONTIER_REBINDING_IS_A_REAL_WALL_CLOCK_AND_CURRENTNESS_FAILURE_MODE"
+  },
+  "hard_nonclaims": [
+    "NO_FULL_PRIVATE_REPOSITORY_REGRESSION_EXECUTED",
+    "NO_SECOND_CARRIER_RUNTIME_REPLAY_PASS_CLAIM",
+    "NO_EXECUTION_AUTHORITY",
+    "NO_PROMOTION_AUTHORITY",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT",
+    "NO_DYNAMIC_FOLLOW_FOR_RESIDUAL_REUSE_TB_SCIENCE_OR_TERMINAL_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
