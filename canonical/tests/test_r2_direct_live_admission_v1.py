@@ -192,5 +192,31 @@ class R2DirectLiveAdmissionV1Tests(unittest.TestCase):
         self.assertFalse(out["legacy_precedence_reencoded"])
 
 
+    def test_current_default_runtime_pointer_binds_exact_wrapper_blob(self):
+        from hashlib import sha1
+        import json
+        from pathlib import Path
+
+        root = Path(__file__).resolve().parents[2]
+        runtime = root / "canonical/runtime/r2_direct_live_admission_v1.py"
+        pointer = json.loads(
+            (root / "canonical/governance/CURRENT_DEFAULT_RUNTIME_INTEGRATION.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        raw = runtime.read_bytes()
+        actual = sha1(
+            b"blob " + str(len(raw)).encode("ascii") + bytes([0]) + raw
+        ).hexdigest()
+        self.assertEqual(
+            pointer["r2_default_route_runtime"]["stable_wrapper_path"],
+            "canonical/runtime/r2_direct_live_admission_v1.py",
+        )
+        self.assertEqual(
+            pointer["r2_default_route_runtime"]["stable_wrapper_git_blob_sha"],
+            actual,
+        )
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
