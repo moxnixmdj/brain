@@ -5,6 +5,18 @@ from pathlib import Path
 import tempfile
 import unittest
 from unittest.mock import patch
+import sys
+import types
+
+legacy=types.ModuleType("canonical.runtime.r2_direct_end_to_end_adequacy_v21")
+legacy.ROUTES={}
+legacy.preflight=lambda request, **kwargs: {
+    "matched":False,"pass":False,"status":"NOT_APPLICABLE"
+}
+legacy.run=lambda request, **kwargs: {
+    "matched":False,"pass":False,"status":"NOT_APPLICABLE"
+}
+sys.modules["canonical.runtime.r2_direct_end_to_end_adequacy_v21"]=legacy
 
 from canonical.runtime import r2_direct_live_admission_v1 as live
 from canonical.runtime import r2_cross_document_natural_entailment_lattice_direct_adequacy_v1 as route
