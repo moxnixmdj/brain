@@ -1,0 +1,22 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK20_LOGICAL_ATTEMPT_CLAIM_BINDING_V3",
+  "date": "2026-10-10",
+  "claim_epoch_id": "RANK20_V13_CLAIM_BOUND_IDENTITY_20261010_V3",
+  "supersedes_git_blob_sha": "6516a5e35c70e798403633b7a0417153447bae03",
+  "slot_id": "terminal-bench-science/hysteretic-aquifer-control::trial-0",
+  "task_digest": "sha256:681df0c3b2ada03a933ac4d2e11f07983676f87a9f26b61e416987904b880289",
+  "execution_base": "terminal-execution-v1",
+  "execution_branch": "execute/tb-science-rank20-20261010-v1",
+  "activation_filename": "ACTIVATE_RANK20_V1_PR.json",
+  "preclaim_ledger_blob": "9b57fba46890146527970ee51a47081791341598",
+  "capability_first_checkpoint_admission_blob": "b03861813f9b9a730659e6e0b6e7301a45061b04",
+  "capability_first_admission_verification_blob": "d12c7c1f9e1259eaf3950689556fd0e6a37ba705",
+  "workflow_blob": "19a12ff77ebdedb3177f05281e116dee69d915ea",
+  "behavior_blob": "9012d4bf1c84e157cdfa27ec04fd1a5afd7c78c7",
+  "zero_exposure_test_blob": "b93af6baee042ac09f352b1a12c84fc03123c55d",
+  "planner_v7_blob": "e5d6ab78b6cf5bacee568cd3701410a8745b9ce8",
+  "agent_v13_blob": "470bfe079aeffaa07a3b92975b4edea17c9a20e1",
+  "identity_v2_blob": "67ff638459af1bb50a094e9479fb4aa5e2a3de1c",
+  "claim_bound_identity_resolver_blob": "d5e5207a41a5cf0983a0078b1d996bffc9e7a01c",
+  "invariant_registry_blob": "b9fbb776ed5cf0888f34809c94f78638d3d915c1"
+}
