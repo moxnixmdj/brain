@@ -1,0 +1,105 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_SUBJECT_DEPENDENCY_CLOSURE_WORKLIST_V1",
+  "date": "2026-10-10",
+  "status": "ACTIVE__R1_BOUND_ON_CANDIDATE_SUBJECT_V3__R6_EXPOSES_TWO_MISSING_LOAD_BEARING_SYSTEM_CONFIG_COMPONENTS__REMAINING_ROOTS_UNCLASSIFIED__DO_NOT_REFRESH_SUBJECT_UNTIL_DEPENDENCY_SET_CLOSED",
+  "candidate_subject": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V4_DECLARED_SYSTEM_SUBJECT_20261010_V3.json",
+    "git_blob_sha": "ad6867e59b4279e34a3e0058cf539ee94f8d094c",
+    "subject_id": "PROFESSIONAL_QUALITY_P1_V4_TARGET_BOUND_SYSTEM_20261010_V3",
+    "subject_sha256": "e7292fbe697c2dcd06fc2c4346fc3e3bb231428a6511a88d575c655dd0f0c53a",
+    "finalized_for_all_roots": false
+  },
+  "laws": [
+    "COMPONENT_MEMBERSHIP_DOES_NOT_PROVE_ROOT_SATISFACTION",
+    "RUNTIME_OR_CONFIGURATION_FILE_WHOSE_CONTENT_CAN_CHANGE_ROOT_MECHANISM_BEHAVIOR_IS_LOAD_BEARING_SYSTEM_MATERIAL",
+    "EXTERNAL_OBSERVATION_OR_VERIFICATION_RECEIPT_MAY_REMAIN_OUTSIDE_SUBJECT_ONLY_WHEN_SYSTEM_BEHAVIOR_DOES_NOT_DEPEND_ON_ITS_CONTENT_AS_CONFIGURATION",
+    "SUBJECT_REFRESH_INVALIDATES_EXISTING_ROOT_BINDINGS_AND_REQUIRES_REVERIFICATION",
+    "DO_NOT_MINT_MORE_ROOT_BINDINGS_UNTIL_REMAINING_ROOT_DEPENDENCY_CLASSIFICATION_IS_COMPLETE"
+  ],
+  "roots": {
+    "R1_TARGET_SPECIFICATION": {
+      "classification_status": "BOUND_ON_CANDIDATE_SUBJECT_V3",
+      "verified_binding": {
+        "path": "canonical/verification/PROFESSIONAL_QUALITY_R1_ROOT_SUBJECT_BINDING_VERIFY_20261010_V1.json",
+        "git_blob_sha": "4ba82b0dc2ec7b07b117fa42bc57b51ea2530d2f"
+      },
+      "missing_subject_components": []
+    },
+    "R2_CANDIDATE_SEARCH": {
+      "classification_status": "OPEN__DEPENDENCY_CLASSIFICATION_REQUIRED"
+    },
+    "R3_REALIZATION_OBSERVATION": {
+      "classification_status": "OPEN__DEPENDENCY_CLASSIFICATION_REQUIRED"
+    },
+    "R4_MEASUREMENT_CONSTRUCT": {
+      "classification_status": "OPEN__DEPENDENCY_CLASSIFICATION_REQUIRED"
+    },
+    "R5_EVALUATOR_REFERENCE": {
+      "classification_status": "OPEN__DEPENDENCY_CLASSIFICATION_REQUIRED"
+    },
+    "R6_EVIDENCE_GROUNDING_DEPENDENCE": {
+      "classification_status": "OPEN__KNOWN_SUBJECT_EXPANSION_REQUIRED",
+      "load_bearing_runtime": {
+        "path": "canonical/runtime/professional_quality_leaf_binder_v2.py",
+        "git_blob_sha": "1a181b453271a2ce4fc112c3f6586afaf5effbd7",
+        "already_in_subject": true
+      },
+      "missing_subject_components": [
+        {
+          "path": "canonical/governance/PROFESSIONAL_QUALITY_ASSURANCE_GRAPH_20261009_V2.json",
+          "git_blob_sha": "03530e29d70206b46b690b33a04c66765ff86ad7",
+          "class": "SYSTEM_CONFIGURATION",
+          "reason": "LEAF_BINDER_V2_HARDCODES_GRAPH_AND_DERIVES_ROOT_AND_CONTRACT_STRUCTURE_FROM_ITS_CONTENT"
+        },
+        {
+          "path": "canonical/governance/PROFESSIONAL_QUALITY_LEAF_EVIDENCE_REGISTRY_20261010_V1.json",
+          "git_blob_sha": "d25cb6fe746eef992f71b138446dc999c0f2a307",
+          "class": "SYSTEM_CONFIGURATION",
+          "reason": "LEAF_BINDER_V2_HARDCODES_REGISTRY_AND_DERIVES_ADMITTED_LEAF_RECEIPT_SET_FROM_ITS_CONTENT"
+        }
+      ],
+      "evidence_receipt": {
+        "path": "canonical/verification/PROFESSIONAL_QUALITY_LEAF_BINDER_V2_VERIFY_20261010_V1.json",
+        "git_blob_sha": "b65a67e8edaee925338fe3f2d61dad6b0f52d129"
+      }
+    },
+    "R7_CAUSAL_PRESCRIPTIVE": {
+      "classification_status": "OPEN__DEPENDENCY_CLASSIFICATION_REQUIRED"
+    },
+    "R8_POPULATION_CONTEXT_OPERATOR": {
+      "classification_status": "OPEN__DEPENDENCY_CLASSIFICATION_REQUIRED"
+    },
+    "R9_TEMPORAL_DEPLOYMENT": {
+      "classification_status": "OPEN__DEPENDENCY_CLASSIFICATION_REQUIRED"
+    },
+    "R10_ANALYSIS_DECISION": {
+      "classification_status": "OPEN__DEPENDENCY_CLASSIFICATION_REQUIRED"
+    },
+    "R11_ADAPTIVE_INTEGRITY_SECURITY": {
+      "classification_status": "OPEN__DEPENDENCY_CLASSIFICATION_REQUIRED"
+    },
+    "R12_META_COMPOSITION_CLOSURE": {
+      "classification_status": "OPEN__DEPENDENCY_CLASSIFICATION_REQUIRED"
+    }
+  },
+  "current_counts": {
+    "roots_total": 12,
+    "roots_subject_bound_on_v3": 1,
+    "roots_dependency_classified": 2,
+    "roots_known_to_require_subject_expansion": 1,
+    "roots_dependency_unclassified": 10
+  },
+  "next_required_edge": "CLASSIFY_R2_R5_AND_R7_R12_LOAD_BEARING_DEPENDENCIES__THEN_MINT_ONE_FINALIZED_SUBJECT_GENERATION_WITH_COMPLETE_SYSTEM_MATERIAL__REVERIFY_R1_AND_BIND_REMAINING_ROOTS",
+  "hard_nonclaims": [
+    "NO_FINAL_SUBJECT_DEPENDENCY_CLOSURE",
+    "NO_2_OF_12_ROOT_BINDING",
+    "NO_SAME_SUBJECT_COMPOSITION_PASS",
+    "NO_PROFESSIONAL_QUALITY_CLOSURE",
+    "NO_LIVE_DEFAULT_PROMOTION",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
