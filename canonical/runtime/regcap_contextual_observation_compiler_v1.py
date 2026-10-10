@@ -21,8 +21,8 @@ _PATTERNS = [
         "FUNCTIONAL_SIGNATURE_CLASS",
         "DRAWDOWN_AS_LOSSES_ARE_INCURRED",
         re.compile(
-            r"^(?:the\\s+)?(?:buffer|cushion)\\s+(?:can\\s+be|is|was)\\s+"
-            r"drawn\\s+down\\s+as\\s+losses\\s+are\\s+incurred[.]?$",
+            r"^(?:the\s+)?(?:buffer|cushion)\s+(?:can\s+be|is|was)\s+"
+            r"drawn\s+down\s+as\s+losses\s+are\s+incurred[.]?$",
             re.I,
         ),
     ),
@@ -30,9 +30,9 @@ _PATTERNS = [
         "FUNCTIONAL_SIGNATURE_CLASS",
         "RELEASE_WHEN_SYSTEM_WIDE_RISK_CRYSTALLISES_OR_DISSIPATES",
         re.compile(
-            r"^(?:the\\s+)?(?:buffer|cushion)\\s+(?:is|was)\\s+released\\s+"
-            r"when\\s+system-wide\\s+risk\\s+(?:crystallises\\s+or\\s+dissipates|"
-            r"dissipates\\s+or\\s+crystallises)[.]?$",
+            r"^(?:the\s+)?(?:buffer|cushion)\s+(?:is|was)\s+released\s+"
+            r"when\s+system-wide\s+risk\s+(?:crystallises\s+or\s+dissipates|"
+            r"dissipates\s+or\s+crystallises)[.]?$",
             re.I,
         ),
     ),
@@ -40,10 +40,10 @@ _PATTERNS = [
         "FUNCTIONAL_SIGNATURE_CLASS",
         "G_SIB_LOSS_ABSORPTION_RECAPITALISATION_IN_RESOLUTION",
         re.compile(
-            r"^(?:the\\s+)?(?:capacity|resource|cushion)\\s+(?:provides|has)\\s+"
-            r"loss-absorbing\\s+and\\s+recapitalisation\\s+capacity\\s+"
-            r"(?:available\\s+)?in\\s+resolution\\s+for\\s+(?:a\\s+)?"
-            r"(?:failing\\s+)?g-sib[.]?$",
+            r"^(?:the\s+)?(?:capacity|resource|cushion)\s+(?:provides|has)\s+"
+            r"loss-absorbing\s+and\s+recapitalisation\s+capacity\s+"
+            r"(?:available\s+)?in\s+resolution\s+for\s+(?:a\s+)?"
+            r"(?:failing\s+)?g-sib[.]?$",
             re.I,
         ),
     ),
@@ -51,8 +51,8 @@ _PATTERNS = [
         "STRUCTURAL_SIGNATURE_CLASS",
         "TWO_POINT_FIVE_PERCENT_CET1_ABOVE_REGULATORY_MINIMUM",
         re.compile(
-            r"^(?:the\\s+)?(?:buffer|cushion)\\s+(?:is|was)\\s+2[.]5%\\s+"
-            r"cet1\\s+above\\s+(?:the\\s+)?regulatory\\s+minimum(?:\\s+capital\\s+requirement)?[.]?$",
+            r"^(?:the\s+)?(?:buffer|cushion)\s+(?:is|was)\s+2[.]5%\s+"
+            r"cet1\s+above\s+(?:the\s+)?regulatory\s+minimum(?:\s+capital\s+requirement)?[.]?$",
             re.I,
         ),
     ),
@@ -60,9 +60,9 @@ _PATTERNS = [
         "STRUCTURAL_SIGNATURE_CLASS",
         "EXTENDS_CCOB_AND_MET_WITH_CET1",
         re.compile(
-            r"^(?:the\\s+)?(?:buffer|cushion)\\s+(?:extends|extended)\\s+"
-            r"(?:the\\s+)?capital\\s+conservation\\s+buffer\\s+and\\s+"
-            r"(?:is|was|must\\s+be)\\s+met\\s+with\\s+cet1[.]?$",
+            r"^(?:the\s+)?(?:buffer|cushion)\s+(?:extends|extended)\s+"
+            r"(?:the\s+)?capital\s+conservation\s+buffer\s+and\s+"
+            r"(?:is|was|must\s+be)\s+met\s+with\s+cet1[.]?$",
             re.I,
         ),
     ),
