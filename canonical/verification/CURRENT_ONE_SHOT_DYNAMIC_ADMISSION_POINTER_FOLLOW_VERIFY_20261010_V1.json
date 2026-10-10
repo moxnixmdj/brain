@@ -54,5 +54,18 @@
     "ownership_credit_delta": 0,
     "terminal_credit_delta": 0
   },
-  "terminal_authority": false
+  "terminal_authority": false,
+  "private_actions_carrier": {
+    "classification": "INFRASTRUCTURE_FAILURE_BEFORE_STEP_EXECUTION__NOT_A_TEST_FAILURE",
+    "attempts": [
+      {
+        "workflow_run_id": 38024818468,
+        "workflow_job_id": 114133312642,
+        "status": "completed",
+        "conclusion": "failure",
+        "steps": null,
+        "python_execution_credit": false
+      }
+    ]
+  }
 }
