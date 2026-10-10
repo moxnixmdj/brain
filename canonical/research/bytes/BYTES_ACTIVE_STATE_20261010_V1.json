@@ -1,38 +1,37 @@
 {
   "schema": "PROJECT_BRAIN_BYTES_ACTIVE_STATE_V1",
-  "status": "ACTIVE_RESEARCH__SECONDARY_PROFILE_V24_FRONTIER__SUCCESSOR_READY",
+  "status": "ACTIVE_RESEARCH__SECONDARY_PROFILE_V25_FRONTIER__SUCCESSOR_READY",
   "date": "2026-10-10",
   "mission_lock": "Find the minimum resource-feasible executable description of the required capability set conditional on already-owned Brain substrate.",
   "governing_laws": [
     "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V1.md",
     "canonical/laws/BYTES_RESOURCE_BOUNDED_MINIMUM_MECHANISM_LAW_V1.md"
   ],
-  "source_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_SECONDARY_PROFILE_V24_SUCCESSOR_EXECUTION_20261010_V1.json",
+  "source_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_SECONDARY_PROFILE_V25_SUCCESSOR_EXECUTION_20261010_V1.json",
   "exact_symbolic_state": {
-    "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_SECONDARY_PROFILE_V24_SUCCESSOR_EXECUTION_20261010_V1.json",
-    "status": "FRESH_MEASURED_PHYSICAL_RESEARCH_CANDIDATE__NOT_PROMOTED",
-    "raw_python_source_bytes": 2007446,
-    "B_exec_raw_python_source_bytes": 2010206,
+    "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_SECONDARY_PROFILE_V25_SUCCESSOR_EXECUTION_20261010_V1.json",
+    "independent_verification": "canonical/evidence/BYTES_EXACT_SYMBOLIC_SECONDARY_PROFILE_V25_INDEPENDENT_VERIFICATION_20261010_V1.json",
+    "status": "CURRENT_VERIFIED_BYTES_RESEARCH_FRONTIER__NOT_PROMOTED_TO_OPUS_CAPABILITY",
+    "raw_python_source_bytes": 1992901,
+    "B_exec_raw_python_source_bytes": 1995661,
     "B_verify_semantic_digest_raw_bytes": 1358,
     "python_files": 277,
-    "final_untouched_qualification": "8510/8510",
-    "stock_donor_positive_control": "8510/8510",
-    "clean_room_execution": "8510/8510",
-    "archive_replay": "8510/8510",
-    "manifest_sha256": "eb71ab231a6281de6133082c59eb9732864e68af42daf4cfb6c6f258c3dea1f9",
-    "comparable_archive_bytes": 297952,
-    "comparable_archive_sha256": "4ec32995774f9886f9726490188bb77d300c8aef628c66896559f59e34f4a0ee",
-    "raw_improvement_vs_previous_frontier_bytes": 38115,
+    "final_untouched_qualification": "8740/8740",
+    "stock_donor_positive_control": "8740/8740",
+    "independent_exact_archive_replay": "8740/8740",
+    "independent_reconstruction_replay": "8740/8740",
+    "manifest_sha256": "7d633d565a52b8a84e3836aadf496e2d1d9af667f94b1876d5dd6b28cc106a9b",
+    "raw_improvement_vs_previous_frontier_bytes": 14545,
     "promotion_credit_from_this_record": 0
   },
   "current_bottleneck": {
-    "subsystem": "POST_V24_RERANK_PENDING",
-    "last_structural_cut": "SECONDARY_SPENT_NEXT28_ZERO_HIT_FUNCTION_PRUNE_V24",
+    "subsystem": "POST_V25_RERANK_PENDING",
+    "last_structural_cut": "SECONDARY_SPENT_NEXT29_ZERO_HIT_FUNCTION_PRUNE_V25",
     "required_surface": [
       "complete bounded exact-symbolic route"
     ],
-    "next_action": "Rerank exact V24 using spent NEXT29 only; make a new physical cut before touching QUAL_SUCCESSOR_NEXT30_20261010_V1.",
-    "note": "26 direct zero-start bodies across complete spent NEXT28 were stubbed fail-closed after excluding unresolved and high-risk core/numeric paths; fresh NEXT29 passed all four lanes."
+    "next_action": "Rerank exact V25 using spent NEXT30 only; make a new physical cut before touching QUAL_SUCCESSOR_NEXT31_20261010_V1.",
+    "note": "Six conservative zero-hit bodies survived falsification of broader V25 candidate sets; exact V25 independently verified."
   },
   "rejected_do_not_reopen_without_new_evidence": [
     "parameter count as terminal metric",
@@ -67,15 +66,15 @@
   "fresh_local_donor_evidence": "canonical/evidence/BYTES_SYMPY_1_14_DEPENDENCY_CENSUS_20261010_V1.json",
   "execution_reconciliation": {
     "stock_donor_available_in_current_runtime": "SymPy 1.14.0 plus mpmath 1.3.0",
-    "predecessor_2045561_byte_candidate_superseded": true,
-    "fresh_candidate_raw_python_source_bytes": 2007446,
-    "fresh_candidate_B_exec_raw_python_source_bytes": 2010206,
-    "untouched_qualification": "8510/8510",
-    "stock_donor_positive_control": "8510/8510",
-    "clean_room_execution": "8510/8510",
-    "archive_replay": "8510/8510",
-    "action_taken": "Used spent NEXT28 direct monitoring over the largest surviving V23 bodies, excluded unresolved and high-risk low-level paths, stubbed 26 bounded-route-zero bodies, passed spent NEXT28, then fresh NEXT29 on donor/candidate/copy/archive lanes.",
-    "physical_next_step": "Continue from 2,007,446 bytes using spent NEXT29 only; rerank before selecting the next cut."
+    "predecessor_2007446_byte_candidate_superseded": true,
+    "fresh_candidate_raw_python_source_bytes": 1992901,
+    "fresh_candidate_B_exec_raw_python_source_bytes": 1995661,
+    "untouched_qualification": "8740/8740",
+    "stock_donor_positive_control": "8740/8740",
+    "independent_archive_replay": "8740/8740",
+    "independent_reconstruction_replay": "8740/8740",
+    "action_taken": "Independently materialized V24 and V25 artifacts; reproduced the exact V25 target manifest from V24 plus persisted transform; confirmed 277/277 Python-file byte identity; independently regenerated NEXT30 to the exact frozen SHA; replayed exact V25 and independent reconstruction 8740/8740.",
+    "physical_next_step": "Continue from 1,992,901 bytes using spent NEXT30 only; rerank before selecting the next cut."
   },
   "historical_reported_predecessor": {
     "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_DONOR_SLICE_CHECKPOINT_20261010_V1.json",
@@ -84,32 +83,36 @@
     "qualification": "1854/1854",
     "provenance": "USER_SUPPLIED_TRANSCRIPT_CHECKPOINT"
   },
-  "fresh_execution_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_SECONDARY_PROFILE_V24_SUCCESSOR_EXECUTION_20261010_V1.json",
+  "fresh_execution_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_SECONDARY_PROFILE_V25_SUCCESSOR_EXECUTION_20261010_V1.json",
   "next_frozen_qualification": {
-    "id": "QUAL_SUCCESSOR_NEXT30_20261010_V1",
-    "cases": 8740,
-    "seed": 5477225,
-    "per_operation_budget": 760,
-    "corpus_sha256": "4859272e27dc150cf91807f69d2850342856befe05e04ac0405966f71740764c",
+    "id": "QUAL_SUCCESSOR_NEXT31_20261010_V1",
+    "cases": 8970,
+    "seed": 5567764,
+    "per_operation_budget": 780,
+    "corpus_sha256": "ed5f78856d2621be9293a509aa21486ad82eef794453f4ce4360755222086f53",
     "generator": "canonical/research/bytes/tools/generate_qualification_v1.py",
     "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT",
-    "spent": false
+    "spent": false,
+    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT31_20261010_V1.jsonl",
+    "library_file_id": "libfile_083b89b79ca48191a31ca119adfd587e"
   },
   "durable_artifact_persistence": {
     "candidate_manifest_and_measurements": "PERSISTED_IN_CANONICAL_GITHUB_EVIDENCE",
     "reconstruction_tools": [
-      "canonical/research/bytes/tools/rebuild_candidate_v23.py",
-      "canonical/research/bytes/tools/secondary_profile_prune_v24.py",
-      "canonical/research/bytes/tools/rebuild_candidate_v24.py"
+      "canonical/research/bytes/tools/rebuild_candidate_v24.py",
+      "canonical/research/bytes/tools/secondary_profile_prune_v25.py",
+      "canonical/research/bytes/tools/rebuild_candidate_v25.py"
     ],
     "exact_route": "canonical/research/bytes/tools/exact_symbolic_route_v1.py",
     "qualification_generator": "canonical/research/bytes/tools/generate_qualification_v1.py",
     "library_binary_status": "PERSISTED_IN_CHATGPT_LIBRARY",
-    "library_file_id": "libfile_bcdaf2c7b41c8191b2adb8cc92c03b51",
-    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V24_SUCCESSOR_20261010_V1.tar.xz",
-    "library_binary_bytes": 297952,
-    "library_binary_sha256": "4ec32995774f9886f9726490188bb77d300c8aef628c66896559f59e34f4a0ee",
-    "rule": "GitHub reconstruction/evidence and exact qualified archive are durable; promotion credit remains zero."
+    "library_file_id": "libfile_bc38d37e13108191aafe124a3ed94d56",
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V25_SUCCESSOR_20261010_V1.tar.xz",
+    "library_binary_bytes": 299264,
+    "library_binary_sha256": "deaabf9ebd51b6cd73020129877b89909ccb245544919e1a55ef2a93f0ac6b86",
+    "archive_size_comparability_to_v24": false,
+    "next_frozen_corpus_library_file_id": "libfile_083b89b79ca48191a31ca119adfd587e",
+    "rule": "GitHub reconstruction/evidence, exact source archive, and frozen NEXT31 corpus are durable; capability promotion credit remains zero."
   },
   "predecessor_fresh_execution_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_RECOVERY_EXECUTION_20261010_V1.json",
   "reserved_predecessor_qualification_qual8": {
@@ -119,15 +122,15 @@
     "generator_sha256": "de6cf261f4e78b010c2454347409a309880066e18f89f7953bb477a7502f59e4",
     "spent": false
   },
-  "previous_fresh_execution_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_CONSERVATIVE_PROFILE_V23_SUCCESSOR_EXECUTION_20261010_V1.json",
+  "previous_fresh_execution_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_SECONDARY_PROFILE_V24_SUCCESSOR_EXECUTION_20261010_V1.json",
   "spent_successor_qualification": {
-    "id": "QUAL_SUCCESSOR_NEXT29_20261010_V1",
-    "cases": 8510,
-    "corpus_sha256": "44bdcb92e5692b09fa07cb5f5ce615b9dbc94d7543f4e580fcebbcd76771de11",
-    "candidate_result": "8510/8510",
-    "stock_donor_replay": "8510/8510",
-    "clean_room_replay": "8510/8510",
-    "archive_replay": "8510/8510",
+    "id": "QUAL_SUCCESSOR_NEXT30_20261010_V1",
+    "cases": 8740,
+    "corpus_sha256": "4859272e27dc150cf91807f69d2850342856befe05e04ac0405966f71740764c",
+    "candidate_result": "8740/8740",
+    "stock_donor_replay": "8740/8740",
+    "independent_archive_replay": "8740/8740",
+    "independent_reconstruction_replay": "8740/8740",
     "spent": true
   },
   "fresh_falsification_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_NEXT25_FALSIFICATION_20261010_V1.json",
@@ -157,5 +160,6 @@
     "clean_room_replay": "3910/3910",
     "archive_replay": "3910/3910",
     "spent": true
-  }
+  },
+  "independent_verification_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_SECONDARY_PROFILE_V25_INDEPENDENT_VERIFICATION_20261010_V1.json"
 }
