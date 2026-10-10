@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_SELECTION_TRUTH_C906_RECONCILIATION_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__TWO_DISTINCT_REMOTE_EXECUTION_ENVIRONMENTS__37_OF_37_EACH__C906_LINEAGE__ESCAPE_V5_CURRENTNESS__V8_STRUCTURAL_PREDECESSOR_AUTHORITY__ZERO_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "base_main_commit": "c906f3ee43d3b2779e202ec113f6ca448a7dd4a1",
+    "verified_head_before_receipt": "4bdc28ffa8a8abe695e65283ae2e4d812d387f8f",
+    "branch": "brain/selection-truth-c906-r6-20261010-v1"
+  },
+  "exact_blobs": {
+    "canonical/runtime/capability_first_scheduler_v1.py": "6d2091cc1581b9aa1fd2c74e8a76519a41d9d957",
+    "canonical/runtime/capability_first_live_scheduler_v1.py": "a45740441a8bfbbab315ed07c39ca54079ef0779",
+    "canonical/tests/test_capability_first_scheduler_v1.py": "4626f5b49d85ead828eeb71a5f1c3683956a31e1",
+    "canonical/tests/test_capability_first_live_scheduler_v1.py": "b5639df63bc011ac6ab02776dba55693d8561bb7",
+    "canonical/runtime/escape_progress_shared_gap_audit_v5.py": "1f1dcf4806b3d944721abe86f46f018c5345726d",
+    "canonical/tests/test_escape_progress_shared_gap_audit_v5.py": "b8ea576bc0fc9be10e3b9e088c5d4bee41fffe59",
+    "canonical/tests/test_escape_v5_current_projection_v1.py": "9aaaf055f4839bd58f013cb9a2fd315d91552fa0",
+    "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json": "7e4e78cf114ffcba57ce44be0ba486df7e1df666",
+    "canonical/governance/CURRENT_DEVELOPMENT_SCHEDULER.json": "4c06f8da09f1678eb6bbb9709b12fa8d101b1ffd",
+    "canonical/governance/CURRENT_MISSION_OBJECTIVE.json": "ee21155c2a62b00cd6e8c4d26d5a19a60b1c8c46",
+    "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json": "1b68c003247002d2a647961e38f9de9089623626",
+    "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V8.json": "5d62f55925a2a9c6f05a5b484f1246dfc6446b89"
+  },
+  "replay_command": "python -m unittest canonical.tests.test_capability_first_scheduler_v1 canonical.tests.test_capability_first_live_scheduler_v1 canonical.tests.test_escape_progress_shared_gap_audit_v5 canonical.tests.test_escape_v5_current_projection_v1 -v",
+  "development_replay": {
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/verify4122",
+    "tests_run": 37,
+    "tests_passed": 37,
+    "result": "PASS"
+  },
+  "separate_environment_replay": {
+    "carrier_id": "sprite-5fb5e414-e2f5-4a49-b424-3443341d9d09",
+    "workspace": "/home/sprite/verify4122-independent",
+    "tests_run": 37,
+    "tests_passed": 37,
+    "result": "PASS",
+    "independence_scope": "DISTINCT_REMOTE_EXECUTION_ENVIRONMENT__SAME_ORCHESTRATED_TEST_SPEC"
+  },
+  "proves": [
+    "C906_LIVE_SCORE_CURRENTNESS_AND_COMPLETENESS_GATES_PRESERVED",
+    "ESCAPE_GAP_A_AND_GAP_B_PROJECT_TO_V5_CURRENTNESS_AWARE_AUTHENTICATED_GATE",
+    "GLOBAL_SCALAR_SELECTION_REMAINS_FAIL_CLOSED",
+    "R6_MAY_EXECUTE_ONLY_AS_EXACT_FROZEN_V7_STRUCTURAL_PREDECESSOR",
+    "REUSE_FIRST_AND_R2_WAKE_GATE_INVARIANTS_PRESERVED"
+  ],
+  "hard_nonclaims": [
+    "NO_GLOBAL_SCALAR_RANK_ONE_PROOF",
+    "NO_FULL_PRIVATE_REPOSITORY_REGRESSION",
+    "NO_ROW_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
