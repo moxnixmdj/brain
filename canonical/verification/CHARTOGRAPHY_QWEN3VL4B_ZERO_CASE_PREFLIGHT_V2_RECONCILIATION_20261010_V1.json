@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_CHARTOGRAPHY_QWEN3VL4B_ZERO_CASE_PREFLIGHT_V2_RECONCILIATION_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_PUBLIC_RUNNER_PREFLIGHT_RECONCILED__RUNTIME_FIT_AND_SYNTHETIC_MULTIMODAL_SMOKE_CLOSED__ZERO_TERMINAL_CASES__ZERO_CREDIT",
+  "target_predicate": "CHARTOGRAPHY_TOOLS_GE_89",
+  "carrier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "commit": "5b4d378cb447e33160745bb625318f8726c1e6d8",
+    "workflow": ".github/workflows/chartography-qwen3vl4b-gguf-zero-case-preflight-v2.yml",
+    "workflow_run_id": 38066930051,
+    "job_id": 114256355555,
+    "conclusion": "success",
+    "artifact_id": 11675595530,
+    "artifact_name": "chartography-qwen3vl4b-zero-case-preflight-v2",
+    "artifact_digest": "sha256:c5442821398d5ac1230bc4e9e47583161d839ba432e362e900edbe6c348e5f00"
+  },
+  "exact_subject": {
+    "model_repository": "Qwen/Qwen3-VL-4B-Instruct-GGUF",
+    "model_revision": "1cd86afb9a95c410a6038ab3b40d8b578c892266",
+    "model_file": "Qwen3VL-4B-Instruct-Q4_K_M.gguf",
+    "model_sha256": "66358cb18bb6b3b1b6675aa412c7a88ef01d228f481184d13668e5201c730a0a",
+    "projector_file": "mmproj-Qwen3VL-4B-Instruct-Q8_0.gguf",
+    "projector_sha256": "30ba2c7dd3127a4561b6cba9d13d0f711c91bdb38742e2f56d73c8cb596bd06d",
+    "llama_cpp_commit": "a7fb71fab83b474a0892b9a05aaa3a8ddca2729b"
+  },
+  "observed": {
+    "runner_nproc": 4,
+    "runner_mem_gib": 15.61,
+    "initial_free_disk_gib": 85.91,
+    "model_hash_match": true,
+    "projector_hash_match": true,
+    "llama_mtmd_cli_build_pass": true,
+    "model_and_projector_loaded_without_oom": true,
+    "synthetic_multimodal_inference_exit_zero": true,
+    "synthetic_answer_nonempty": true,
+    "synthetic_answer_identified_red_and_blue": true,
+    "inference_wall_seconds": 21.23,
+    "maximum_resident_set_kbytes": 15607460,
+    "terminal_cases_consumed": 0,
+    "incremental_spend_usd": 0
+  },
+  "closed_now": [
+    "EXACT_COMPACT_QWEN3VL_EXECUTION_SUBJECT_RUNTIME_FIT_ON_FREE_PUBLIC_RUNNER",
+    "SYNTHETIC_IMAGE_TEXT_EXECUTION_ROUTE",
+    "FIRST_FIT_DEPENDENCY_ON_BUILDKITE_OR_LOCAL_LAPTOP"
+  ],
+  "still_open": [
+    "NONTERMINAL_SCOPE_RELEVANT_CHART_REASONING_QUALIFICATION",
+    "PROJECT_SPECIFIC_GEMINI_3_5_FLASH_JUDGE_CAPACITY_RECEIPT",
+    "THIN_OFFICIAL_CHARTOGRAPHY_ADAPTER_END_TO_END_BINDING",
+    "CHARTOGRAPHY_THRESHOLD_CERTIFICATE_GE_89"
+  ],
+  "hard_nonclaims": [
+    "NO_CHARTOGRAPHY_TERMINAL_CASE_READ",
+    "NO_CHARTOGRAPHY_SCORE",
+    "NO_SCOPE_RELEVANT_CHART_REASONING_QUALIFICATION",
+    "NO_THRESHOLD_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
