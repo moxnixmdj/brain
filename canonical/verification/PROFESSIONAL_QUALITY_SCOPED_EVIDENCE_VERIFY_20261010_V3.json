@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_VERIFY_V3",
+  "date": "2026-10-10",
+  "status": "PASS__PINNED_EXACT_BYTES__PYCOMPILE__9_OF_9__THREE_SCOPED_CAPABILITIES__ZERO_GLOBAL_LEAF_CREDIT",
+  "repository": "moxnixmdj/brain",
+  "pinned_main_commit": "f6cc6d5c39fbb474af22034d11711c87e3567bdb",
+  "carrier": {
+    "name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/pq-scoped-evidence-f6cc6d5"
+  },
+  "exact_blobs": {
+    "runtime": "eda524b3521f15f400a778e74cc6199d12aefc06",
+    "tests": "440b77f66e25422d46d0e97b6337299f867c8cc3",
+    "registry": "00d292ad33302029ea7b0cfe657cb73b46888cdf",
+    "r7_source_receipt": "0c692f55dedb6a8523bcd78541d4cb77ef06d610",
+    "r7_compiler_verification": "380d26afd8210096e397dacde3f2a339abc75c1c",
+    "r3_source_receipt": "1a0b4ca6627aaf28eb25f6990682e87319d14d6d",
+    "r3_preflight": "b5ddc896811875b59840959e27dbb515265fc9f8",
+    "r11_source_receipt": "346d369a811aa77af02be901a5b04458fb528667",
+    "r11_governance": "902c19851629bfb2342eea29e73f4a7ab5d212c5"
+  },
+  "replay": {
+    "py_compile": "PASS",
+    "tests_run": 9,
+    "tests_passed": 9,
+    "tests_failed": 0
+  },
+  "admitted_scopes": [
+    "PQ::R3::NATIVE_ARTIFACT::BOUNDED_RENDER_PRESERVATION",
+    "PQ::R7::SINGLE_EDIT::UVCK_DEFEATER_ORDER_REPAIR",
+    "PQ::R11::EVAL_FIREWALL::POST_IDENTITY_DISCOVERY_REVOCATION"
+  ],
+  "proved": [
+    "THREE_BOUND_SCOPES_REUSABLE_WITH_CONTENT_ADDRESSED_EVIDENCE",
+    "R3_SCOPE_CANNOT_PROMOTE_EXECUTION_LEAF_CREDIT",
+    "R7_SCOPE_CANNOT_PROMOTE_GLOBAL_CAUSAL_ROOT",
+    "R11_SCOPE_CANNOT_PROMOTE_GLOBAL_OR_EXECUTION_LEAF_CREDIT",
+    "UNKNOWN_STALE_OR_WRONG_SCOPE_EVIDENCE_FAILS_CLOSED"
+  ],
+  "current_state": {
+    "admitted_scope_count": 3,
+    "global_leaf_closure": false,
+    "global_root_closure": false,
+    "domain_semantic_closure": false,
+    "domain_execution_closure": false
+  },
+  "hard_nonclaims": [
+    "NO_GLOBAL_R3_R7_OR_R11_LEAF_CLOSURE",
+    "NO_DOMAIN_SEMANTIC_CLOSURE",
+    "NO_DOMAIN_EXECUTION_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
