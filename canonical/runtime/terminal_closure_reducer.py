@@ -14,6 +14,10 @@ import json
 from pathlib import Path
 from typing import Any
 
+from canonical.runtime.terminal_root_decision_gate_v1 import (
+    evaluate as evaluate_terminal_root,
+)
+
 REQUIRED_FAMILY_COUNT = 19
 REQUIRED_COUNTERS = (
     "uncontracted_required_behaviors",
@@ -131,6 +135,20 @@ def _evaluate_universal_cover_proof(
             "pass": False,
             "reason": "UNIVERSAL_COVER_PROOF_ABSENT",
             "failed_predicates": ["UNIVERSAL_COVER_PROOF_ABSENT"],
+        }
+
+    root_verdict = evaluate_terminal_root(
+        {"closure_receipt": declaration},
+        repo_root=repo_root,
+    )
+    if root_verdict.get("pass") is not True:
+        reason = str(root_verdict.get("reason") or "TERMINAL_ROOT_GATE_REJECTED")
+        return {
+            "pass": False,
+            "reason": "FAIL_CLOSED",
+            "failed_predicates": [reason],
+            "root_gate_status": root_verdict.get("status"),
+            "root_gate_reason": reason,
         }
 
     failures: list[str] = []
