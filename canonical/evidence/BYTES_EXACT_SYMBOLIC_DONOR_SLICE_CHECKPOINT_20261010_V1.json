@@ -1,0 +1,90 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_DONOR_SLICE_CHECKPOINT_V1",
+  "status": "RESEARCH_CHECKPOINT__NOT_PROMOTED_CAPABILITY",
+  "recorded_at": "2026-10-10",
+  "provenance": {
+    "source_type": "USER_SUPPLIED_CHAT_RESEARCH_TRANSCRIPT",
+    "source_title": "Bits research solutions.md",
+    "independent_rerun_in_this_commit": false,
+    "rule": "Persist the reported experimental state without upgrading it into stronger evidence than the source supports."
+  },
+  "mission": "Minimize persistent executable bytes for required capability while preserving the qualified exact-symbolic contract, runtime bounds, donor deletion, and truthful evidence.",
+  "current_best_reported_donor_derived_candidate": {
+    "donor_family": "SymPy 1.14.0 plus mpmath",
+    "original_combined_source_bytes_approx": 28100000,
+    "raw_python_source_bytes": 7044219,
+    "persistent_xz_bytes": 1207652,
+    "raw_source_deletion_fraction_approx": 0.75,
+    "calibration": {
+      "passed": 397,
+      "total": 397
+    },
+    "post_freeze_qualification_after_physical_deletion": {
+      "passed": 1854,
+      "total": 1854
+    },
+    "promotion_state": "ACCEPTED_RESEARCH_CANDIDATE_ONLY",
+    "universal_scope_claim": false
+  },
+  "important_repairs_and_deletions": [
+    "Removed tensor closure not required by the bounded contract.",
+    "Tensor-edge removal eliminated the dragged combinatorics closure.",
+    "Removed a roughly 96 KB quintic constants table because the qualified roots contract stops below quintic degree.",
+    "Replaced generic integration for the qualified even-sin-power class with the donor-derived specialized branch and failed closed outside that class.",
+    "Removed the resulting general-solver dependency closure where no longer reachable."
+  ],
+  "verifier_integrity_event": {
+    "issue": "An earlier qualification script hard-coded the previous capsule path and therefore retested its parent.",
+    "disposition": "INVALIDATED_AND_RERUN_AGAINST_CORRECT_BYTES"
+  },
+  "rejected_or_nonpromotable_branches": [
+    {
+      "candidate": "13.3 KB standalone exact-symbolic kernel",
+      "evidence": "981 generated checks passed",
+      "reason_not_winner": [
+        "newly constructed rather than cleanly harvested under the active no-underlying-capability-invention rule",
+        "broader hidden test became computationally expensive"
+      ],
+      "use": "EXISTENCE_HINT_ONLY"
+    },
+    {
+      "candidate": "Replace general limit machinery with as_leading_term",
+      "result": "REJECTED",
+      "reason": "Preserved calibration but removed no meaningful dependency bytes and made qualification slower."
+    }
+  ],
+  "remaining_compressed_information_concentrations_bytes_approx": {
+    "polys": 329000,
+    "core": 220000,
+    "functions": 132000,
+    "matrices": 110000,
+    "simplify": 96000,
+    "mpmath": 87000
+  },
+  "current_highest_leverage_target": {
+    "subsystem": "polys",
+    "target_contract": [
+      "factor",
+      "coefficient",
+      "exact roots of degree <= 4"
+    ],
+    "deletion_hypothesis": [
+      "number-field machinery not causally required by the frozen contract",
+      "Galois machinery not causally required by the frozen contract",
+      "general-domain machinery not causally required by the frozen contract"
+    ],
+    "rule": "Delete only after a frozen untouched qualification generator exists and the physically deleted slice passes it."
+  },
+  "governing_objective": {
+    "minimize": "persistent executable bytes",
+    "constraints": [
+      "capability >= required contract",
+      "latency <= bound",
+      "memory <= bound",
+      "compute <= bound",
+      "reliability >= minimum",
+      "donor runtime dependency = 0",
+      "untouched qualification passes"
+    ]
+  }
+}
