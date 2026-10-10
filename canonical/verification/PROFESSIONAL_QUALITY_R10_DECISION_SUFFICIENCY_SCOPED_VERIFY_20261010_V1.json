@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R10_DECISION_SUFFICIENCY_SCOPED_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__PINNED_CURRENT_BYTES__PYCOMPILE__23_OF_23__BOUNDED_DECISION_SUFFICIENCY_AND_MINIMUM_INFORMATION_ROUTING__ZERO_GLOBAL_LEAF_CREDIT",
+  "repository": "moxnixmdj/brain",
+  "pinned_main_commit": "7f86e0be3aae4315dedbf504929631b9e46c72b4",
+  "carrier": {
+    "name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/pq-r10-decision-7f86e0b"
+  },
+  "exact_blobs": {
+    "runtime": "b8347a3993f96aa5e6fa2f1fe68d7c8afccb8bec",
+    "tests": "d42cfce3850dbf090e7344f5c5988d43aac1e599",
+    "route_promoter": "fa6f423837c7f9e8d50d18922f86ca1131c9fa7f",
+    "dynamic_admission": "e31c0612a905271a5a8e72865afd08cfe13d8cc1"
+  },
+  "replay": {
+    "py_compile": "PASS",
+    "tests_run": 23,
+    "tests_passed": 23,
+    "tests_failed": 0
+  },
+  "claim_scope": {
+    "kind": "LOSSLESS_DECISION_SUFFICIENT_GAP_REPRESENTATION_AND_MINIMUM_POLICY_CHANGING_INFORMATION_ROUTING",
+    "root_id": "R10_ANALYSIS_DECISION",
+    "guarantees": [
+      "DECISION_SUFFICIENT_BASELINE_IS_LOSSLESS_IDENTITY_AND_CONTENT_ADDRESSED",
+      "NO_EVIDENCE_IS_OMITTED_WITHOUT_A_FUTURE_OMISSION_CERTIFICATE",
+      "MINIMUM_INFORMATION_REQUESTS_DEDUPLICATE_EVIDENCE_BLOCKERS",
+      "BROAD_ACQUISITION_IS_FORBIDDEN_WITHOUT_MINIMALITY_PROOF",
+      "FULL_EMPIRICAL_EVALUATION_REMAINS_LAST",
+      "PROVIDERS_CANNOT_MUTATE_VERIFICATION_AUTHORITY",
+      "FALSE_PROGRESS_WITH_UNCHANGED_FRONTIER_FAILS_CLOSED",
+      "STRUCTURED_R2_ACQUISITION_SURVIVES_MINIMUM_INFORMATION_COMPILATION"
+    ],
+    "limitations": [
+      "NO_GENERAL_PROFESSIONAL_RISK_POLICY_CLOSURE",
+      "NO_NORMATIVE_AGGREGATION_CLOSURE",
+      "NO_MODEL_MULTIPLICITY_DECISION_CLOSURE",
+      "NO_GENERAL_SEMANTIC_COMPRESSION_CLAIM",
+      "NO_GLOBAL_R10_LEAF_OR_ROOT_CLOSURE"
+    ]
+  },
+  "historical_design_verification": {
+    "path": "canonical/verification/ONE_SHOT_DECISION_SUFFICIENT_GATE_VERIFY_20261009_V2.json",
+    "git_blob_sha": "188881365c8bb182ebd10cd4bc37aedff8547acd",
+    "role": "HISTORICAL_FEATURE_INTRODUCTION_PROVENANCE_NOT_CURRENT_RUNTIME_IDENTITY"
+  },
+  "current_state": {
+    "global_leaf_credit": false,
+    "global_r10_root_closed": false,
+    "domain_semantic_closure": false,
+    "domain_execution_closure": false
+  },
+  "hard_nonclaims": [
+    "NO_GLOBAL_R10_LEAF_CLOSURE",
+    "NO_GLOBAL_R10_ROOT_CLOSURE",
+    "NO_GENERAL_PROFESSIONAL_ANALYSIS_DECISION_CLOSURE",
+    "NO_DOMAIN_SEMANTIC_CLOSURE",
+    "NO_DOMAIN_EXECUTION_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
