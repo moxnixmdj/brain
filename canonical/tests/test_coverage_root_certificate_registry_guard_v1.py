@@ -44,6 +44,10 @@ def proved_slot(root_id, claim, *, claim_override=None, verify_claim_id=None):
             "git_blob_sha": "abc",
             "claim_binding": binding,
         },
+        "semantic_verifier": {
+            "path": f"{root_id}.verifier.py",
+            "git_blob_sha": "ghi",
+        },
         "independent_verification": {
             "path": f"{root_id}.verify.json",
             "git_blob_sha": "def",
