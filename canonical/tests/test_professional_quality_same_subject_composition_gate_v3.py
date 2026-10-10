@@ -273,5 +273,51 @@ class ProfessionalQualitySameSubjectCompositionGateV2Tests(unittest.TestCase):
 
 
 
+class CurrentV18CompositionGateTests(unittest.TestCase):
+    def test_current_v18_twelve_root_receipts_compose_on_identical_v7_subject(self):
+        worklist = json.loads(
+            (
+                ROOT
+                / "canonical/governance/PROFESSIONAL_QUALITY_P1_V7_SAME_SUBJECT_ROOT_BINDING_WORKLIST_20261010_V18.json"
+            ).read_text(encoding="utf-8")
+        )
+        self.assertEqual(worklist["verified_root_subject_binding_count"], 12)
+        self.assertIs(worklist["composition_admissible"], False)
+
+        rows = []
+        for row in worklist["roots"]:
+            self.assertIn("binding", row)
+            self.assertIn("verification", row)
+            rows.append(
+                {
+                    "root_id": row["root_id"],
+                    "binding": row["binding"],
+                    "verification": row["verification"],
+                }
+            )
+
+        out = gate.evaluate({"root_subject_bindings": rows}, repo_root=ROOT)
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(
+            out["status"],
+            "PASS__SAME_SUBJECT_ROOT_COMPOSITION_ADMISSIBLE",
+            out,
+        )
+        self.assertEqual(out["verified_root_subject_binding_count"], 12)
+        self.assertTrue(out["composition_admissible"])
+        self.assertFalse(out["professional_quality_closed"])
+        self.assertFalse(out["semantic_truth_authority"])
+        self.assertFalse(out["execution_authority"])
+        self.assertFalse(out["quality_authority"])
+        self.assertFalse(out["acceptance_authority"])
+        self.assertFalse(out["promotion_authority"])
+        self.assertFalse(out["terminal_authority"])
+        self.assertEqual(out["terminal_credit_delta"], 0)
+        self.assertEqual(
+            out["composed_subject"]["subject_id"],
+            "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+        )
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
