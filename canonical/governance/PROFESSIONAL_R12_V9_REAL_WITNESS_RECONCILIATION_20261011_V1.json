@@ -1,0 +1,26 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_R12_V9_REAL_WITNESS_RECONCILIATION_V1",
+  "date": "2026-10-11",
+  "status": "V9_REAL_POSITIVE_ROUTE_REPLAYED__C8_PROVED__EXACT_RUN_TOTALITY_PROVED__WHOLE_LEAF_CC_R3_OPEN__ZERO_CREDIT",
+  "property_claim_id": "11870f850b46bcfcc31094f764fc4f45c911aaac413979ceb62679ff19a53162",
+  "scope_claim_id": "05b74983836dd1f6a13a0db72443246fb74f99548f0d982a769a6a7e572e9e85",
+  "v9_subject_id": "PROFESSIONAL_QUALITY_P1_V9_EXECUTABLE_TOTALITY_SEMANTICS_SYSTEM_20261010_V8",
+  "replay_path": "canonical/verification/V9_REAL_R12_SECOND_CARRIER_REPLAY_VERIFY_20261011_V1.json",
+  "proved": {
+    "c1_to_c7_reverified": true,
+    "real_v9_positive_execution": true,
+    "c8_nonvacuity": true,
+    "exact_run_material_totality": true,
+    "exact_run_cc_r3": true
+  },
+  "open": {
+    "whole_leaf_cc_r3": true,
+    "r4": true,
+    "r12_semantic_property_truth": true
+  },
+  "scope_reason": "FROZEN_R12_PROPERTY_QUANTIFIES_OVER_ALL_ADMISSIBLE_INPUTS__ONE_EXACT_RUN_PROVES_EXISTENCE_AND_RUN_SCOPED_TOTALITY_ONLY",
+  "exact_next": "PROVE_CLAIM_WIDE_UNIVERSAL_OR_LOSSLESS_GENERATOR_CLOSURE_OR_INDEPENDENT_COMPLETE_UNION__THEN_BIND_CC_R3_SLOT__THEN_RERUN_R4",
+  "new_primitive_required": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
