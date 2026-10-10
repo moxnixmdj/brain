@@ -52,6 +52,21 @@ class ProfessionalQualityScopedEvidenceOverlayV1Tests(unittest.TestCase):
         self.assertFalse(out["global_leaf_closure"])
         self.assertFalse(out["domain_semantic_closure"])
 
+    def test_claim_scope_list_order_is_not_semantic(self):
+        left = {
+            "kind": "K",
+            "guarantees": ["A", "B"],
+            "limitations": ["X", "Y"],
+        }
+        right = {
+            "kind": "K",
+            "guarantees": ["B", "A"],
+            "limitations": ["Y", "X"],
+        }
+        self.assertTrue(scoped._claim_scope_equivalent(left, right))
+        right["limitations"] = ["Y"]
+        self.assertFalse(scoped._claim_scope_equivalent(left, right))
+
     def test_r2_semantic_global_credit_attempt_fails_closed(self):
         registry = json.loads(scoped.REGISTRY.read_text())
         r2 = next(
