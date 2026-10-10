@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_DEFAULT_WRAPPER_POINTER_REBIND_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__TDD_RED_GREEN_STATIC_IDENTITY__SOURCE_RUNTIME_PREEXISTING_41_CHECK_VERIFICATION__FOCUSED_COHERENCE_ASSERTION_ADDED__ZERO_CREDIT",
+  "defect": {
+    "pointer_path": "canonical/governance/CURRENT_DEFAULT_RUNTIME_INTEGRATION.json",
+    "load_bearing_field": "r2_default_route_runtime.stable_wrapper_git_blob_sha",
+    "stale_blob_sha": "baf62086f6258d24ae933a900c43ae62c438c503",
+    "current_wrapper_blob_sha": "57d64a2f22c0cb7b76eed7eb78c2eb6961e819a2",
+    "consequence": "DYNAMIC_CURRENT_PROJECTION_FAILS_CLOSED_ON_DEFAULT_RUNTIME_DESCENDANT_BLOB_MISMATCH"
+  },
+  "source_runtime_change": {
+    "commit": "fbe8c2efebedd9ca9cfa461187bac9863edc545e",
+    "capability": "ZERO_AUTHORITY_DYNAMIC_SEMANTIC_OPEN_TO_FIXED_POINT_REPAIR_HANDOFF",
+    "verification_path": "canonical/verification/R2_DYNAMIC_SEMANTIC_OPEN_HANDOFF_VERIFY_20261010_V1.json",
+    "verification_git_blob_sha": "a665ad09b4113c522f1f1b091c17749152f7dd0f",
+    "verification_status": "VERIFIED_ISOLATED_CHANGED_AND_INTEGRATION_SURFACE__41_SUCCESSFUL_CHECKS",
+    "exact_wrapper_git_blob_sha": "57d64a2f22c0cb7b76eed7eb78c2eb6961e819a2"
+  },
+  "tdd": {
+    "red": "STATIC_IDENTITY_ASSERTION_FAILED_WITH_STALE_BAF62086_VS_CURRENT_57D64A2F",
+    "green": "SAME_ASSERTION_PASS_AFTER_ONE_FIELD_POINTER_REBIND",
+    "development_carrier": "brain-live-runtime-v1-verify-20261008",
+    "workspace": "unified-fabric-current-byte-verify"
+  },
+  "permanent_regression": {
+    "path": "canonical/tests/test_r2_direct_live_admission_v1.py",
+    "git_blob_sha": "8c1df80285531162f61b8910e394174add71ec44",
+    "test": "test_current_default_runtime_pointer_binds_exact_wrapper_blob",
+    "placement": "INSIDE_STABLE_WRAPPER_FOCUSED_TEST_MODULE"
+  },
+  "preserved_truth": {
+    "dynamic_admission_snapshot_fields_are_nonauthoritative": true,
+    "dynamic_snapshot_was_not_rewritten": true,
+    "fixed_point_binding_unchanged": true,
+    "runtime_behavior_unchanged_by_this_repair": true
+  },
+  "hard_nonclaims": [
+    "NO_NEW_WRAPPER_RUNTIME_BEHAVIOR",
+    "NO_FULL_PRIVATE_REPOSITORY_REGRESSION_EXECUTED_FOR_THIS_REBIND",
+    "NO_CLAIM_THE_NEW_FOCUSED_COHERENCE_METHOD_WAS_EXECUTED_AS_PART_OF_THE_PREEXISTING_41_CHECK_SOURCE_RECEIPT",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
