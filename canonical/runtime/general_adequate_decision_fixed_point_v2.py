@@ -21,7 +21,7 @@ from typing import Any, Callable, Mapping
 from canonical.runtime.general_adequate_decision_controller_v1 import (
     run as run_controller,
 )
-from canonical.runtime import r2_direct_live_admission_v1 as direct_adequacy
+from canonical.runtime import r2_direct_live_admission_v2 as direct_adequacy
 from canonical.runtime.r2_existing_policy_adequacy_repair_v1 import (
     repair as repair_existing_adequacy,
 )
@@ -46,6 +46,7 @@ MUTABLE_REQUEST_FIELDS = frozenset(
         "max_information_rounds",
         "episode_id",
         "scope_id",
+        "semantic_claim_overlay",
     }
 )
 IMMUTABLE_REQUEST_FIELDS = frozenset({"task_id", "goal"})
@@ -77,6 +78,15 @@ def _direct_semantic_open_hint(
         "route_id": direct_preflight.get("route_id"),
         "status": direct_preflight.get("status"),
         "effect_status": direct_preflight.get("effect_status"),
+        "input_path": direct_preflight.get("input_path"),
+        "input_sha256": direct_preflight.get("input_sha256"),
+        "output_path": direct_preflight.get("output_path"),
+        "semantic_claim_overlay_contract": deepcopy(
+            direct_preflight.get("semantic_claim_overlay_contract")
+        ),
+        "semantic_claim_overlay_result": deepcopy(
+            direct_preflight.get("semantic_claim_overlay_result")
+        ),
         "minimum_discriminator_slots": deepcopy(
             direct_preflight.get("minimum_discriminator_slots") or []
         ),
@@ -278,6 +288,72 @@ def _edge_request(
     }
 
 
+SEMANTIC_OVERLAY_SCHEMA = "PROJECT_BRAIN_R2_SEMANTIC_CLAIM_OVERLAY_V1"
+
+
+def _merge_semantic_overlay(
+    prior: Any,
+    incoming: Any,
+) -> tuple[dict[str, Any] | None, str | None]:
+    if not isinstance(incoming, Mapping):
+        return None, "SEMANTIC_CLAIM_OVERLAY_PATCH_NOT_OBJECT"
+    if (
+        incoming.get("schema") != SEMANTIC_OVERLAY_SCHEMA
+        or set(incoming) != {"schema", "input_sha256", "claims_by_document"}
+        or not isinstance(incoming.get("input_sha256"), str)
+        or not isinstance(incoming.get("claims_by_document"), Mapping)
+    ):
+        return None, "SEMANTIC_CLAIM_OVERLAY_PATCH_INVALID"
+    if prior is None:
+        return deepcopy(dict(incoming)), None
+    if not isinstance(prior, Mapping):
+        return None, "EXISTING_SEMANTIC_CLAIM_OVERLAY_NOT_OBJECT"
+    if (
+        prior.get("schema") != SEMANTIC_OVERLAY_SCHEMA
+        or prior.get("input_sha256") != incoming.get("input_sha256")
+        or not isinstance(prior.get("claims_by_document"), Mapping)
+    ):
+        return None, "SEMANTIC_CLAIM_OVERLAY_BINDING_MUTATION_FORBIDDEN"
+
+    merged = deepcopy(dict(prior))
+    by_doc = deepcopy(dict(prior["claims_by_document"]))
+    known: dict[str, str] = {}
+    for did, rows in by_doc.items():
+        if not isinstance(rows, list):
+            return None, "EXISTING_SEMANTIC_CLAIM_OVERLAY_ROWS_INVALID"
+        for row in rows:
+            if not isinstance(row, Mapping):
+                return None, "EXISTING_SEMANTIC_CLAIM_OVERLAY_CLAIM_INVALID"
+            cid = str(row.get("claim_id") or "").strip()
+            if not cid:
+                return None, "EXISTING_SEMANTIC_CLAIM_OVERLAY_CLAIM_ID_INVALID"
+            if cid in known:
+                return None, "EXISTING_SEMANTIC_CLAIM_OVERLAY_CLAIM_ID_DUPLICATE"
+            known[cid] = _canon(row)
+
+    for raw_did, rows in incoming["claims_by_document"].items():
+        did = str(raw_did)
+        if not isinstance(rows, list):
+            return None, "SEMANTIC_CLAIM_OVERLAY_ROWS_INVALID"
+        target = by_doc.setdefault(did, [])
+        for row in rows:
+            if not isinstance(row, Mapping):
+                return None, "SEMANTIC_CLAIM_OVERLAY_CLAIM_INVALID"
+            cid = str(row.get("claim_id") or "").strip()
+            if not cid:
+                return None, "SEMANTIC_CLAIM_OVERLAY_CLAIM_ID_REQUIRED"
+            encoded = _canon(row)
+            if cid in known:
+                if known[cid] != encoded:
+                    return None, "SEMANTIC_CLAIM_OVERLAY_CLAIM_MUTATION_FORBIDDEN:" + cid
+                continue
+            known[cid] = encoded
+            target.append(deepcopy(dict(row)))
+
+    merged["claims_by_document"] = by_doc
+    return merged, None
+
+
 def _merge_candidate(
     current: Mapping[str, Any],
     candidate: Mapping[str, Any],
@@ -293,6 +369,14 @@ def _merge_candidate(
 
     merged = deepcopy(dict(current))
     for key, value in patch.items():
+        if key == "semantic_claim_overlay":
+            combined, overlay_error = _merge_semantic_overlay(
+                merged.get(key), value
+            )
+            if overlay_error is not None or combined is None:
+                return None, overlay_error
+            merged[key] = combined
+            continue
         if key == "policy_cover_observation_bindings":
             if not isinstance(value, Mapping):
                 return None, "POLICY_COVER_OBSERVATION_BINDINGS_PATCH_NOT_OBJECT"
