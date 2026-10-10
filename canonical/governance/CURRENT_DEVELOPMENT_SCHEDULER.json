@@ -1,0 +1,11 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_DEVELOPMENT_SCHEDULER_POINTER_V1",
+  "date": "2026-10-10",
+  "status": "ACTIVE",
+  "authoritative_activation": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V3.json",
+  "runtime": "canonical/runtime/capability_first_scheduler_v1.py",
+  "primary_entrypoint": "rank_live_work",
+  "objective": "MAXIMIZE_REUSABLE_VERIFIED_CAPABILITY_GENERALIZATION_RELIABILITY_AND_EFFICIENCY_PER_RESOURCE",
+  "checkpoint_policy": "OPUS_5_5_IS_SECONDARY_FRONTIER_AUDIT__NOT_PRIMARY_DEVELOPMENT_GATE",
+  "terminal_autopilot_policy": "NEW_CHECKPOINT_DISPATCH_REQUIRES_EXPLICIT_CAPABILITY_FIRST_ADMISSION"
+}

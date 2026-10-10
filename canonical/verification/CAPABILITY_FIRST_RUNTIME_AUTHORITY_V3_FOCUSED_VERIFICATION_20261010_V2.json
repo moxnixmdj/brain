@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_FIRST_RUNTIME_AUTHORITY_V3_FOCUSED_VERIFICATION_20261010_V2",
+  "date": "2026-10-10",
+  "status": "PASS",
+  "branch": "successor/capability-first-runtime-authority-20261010-v3",
+  "base_reconciliation": "REAPPLIED_ON_CURRENT_MAIN_AFTER_30_INTERVENING_COMMITS__PRESERVED_TERMINAL_AUTOPILOT_PROOF_COST_TRUTH_REPAIR",
+  "exact_git_blobs": {
+    "canonical/runtime/capability_first_scheduler_v1.py": "7408e4d012dd5afad65d37a471edc27c740510c9",
+    "canonical/runtime/terminal_autopilot_v1.py": "ac6023d4695b7d1b4952a4ac9bb796ce8fe1ec22",
+    "canonical/tests/test_capability_first_scheduler_v1.py": "4cf380a8197f2e1aa956d42cd27201791496f269",
+    "canonical/tests/test_terminal_autopilot_v1.py": "cef28296abb7c7f02e81a958c2465aecff5c92a1",
+    "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V3.json": "472c98a195c4b98d340e9bb397fa8766e3b47928",
+    "canonical/governance/CURRENT_DEVELOPMENT_SCHEDULER.json": "e5ddb927e6c8dd8692fe12901272819fd86d4e2f",
+    "canonical/governance/CURRENT_MISSION_OBJECTIVE.json": "6ab2147306a138f9ea327d8e19cb4a5bc76e89df",
+    "canonical/governance/TERMINAL_AUTOPILOT_CAPABILITY_FIRST_SUBORDINATION_20261010_V1.json": "e8d9cca5891139540d822eff743cb3fc3746c4b6",
+    "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json": "8d2e84282867cddd43ea672e7f2cb679e0c19cb6"
+  },
+  "independent_carrier": {
+    "provider": "Sprites",
+    "sprite": "brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "isolated_root": "/tmp/capv3current",
+    "command": "PYTHONPATH=/tmp/capv3current python3 -m unittest -v canonical.tests.test_capability_first_scheduler_v1 canonical.tests.test_terminal_autopilot_v1",
+    "tests_run": 26,
+    "failures": 0,
+    "errors": 0,
+    "conclusion": "PASS"
+  },
+  "verified_properties": [
+    "CAPABILITY_RESOURCE_PARETO_LEVERAGE_IS_PRIMARY",
+    "OPEN_OPUS_CHECKPOINT_OBLIGATIONS_DO_NOT_HARD_DEMOTE_GENERAL_REUSABLE_CAPABILITY_WORK",
+    "CHECKPOINT_LEVERAGE_IS_SECONDARY_AUDIT_TIE_BREAK_ONLY",
+    "BENCHMARK_BOOKKEEPING_REMAINS_DEMOTED",
+    "CURRENT_TERMINAL_AUTOPILOT_PROOF_COST_UPPER_BOUND_REPAIR_IS_PRESERVED",
+    "TERMINAL_AUTOPILOT_NEW_DISPATCH_PARKS_WITHOUT_EXPLICIT_CAPABILITY_FIRST_ADMISSION",
+    "AUTHORIZED_CHECKPOINT_AUDIT_RETAINS_CURRENT_ROUTE_COST_GATES",
+    "EXISTING_RESULT_VERIFICATION_AND_PROMOTION_HANDOFFS_REMAIN_AVAILABLE"
+  ],
+  "github_actions_prior_attempt": {
+    "conclusion": "INFRASTRUCTURE_FAILURE_ONLY__ZERO_CODE_EXECUTION_CREDIT",
+    "note": "Earlier PR jobs had steps=null. Independent Sprite replay is the execution evidence."
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

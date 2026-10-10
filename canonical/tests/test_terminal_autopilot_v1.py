@@ -32,10 +32,28 @@ def manifest():
         "blockers": [],
         "routes": [{"id": "SCOPE_COMPLETE_UNIVERSAL_COVER", "status": "OPEN", "can_discharge": OPEN, "proof_cost_bound": True, "estimated_wall_clock_units": 1.0}],
         "active_jobs": [],
+        "capability_first_checkpoint_admission": {
+            "schema": "PROJECT_BRAIN_CAPABILITY_FIRST_CHECKPOINT_ADMISSION_V1",
+            "authorized": True,
+            "source": "TEST_CAPABILITY_FIRST_SCHEDULER",
+        },
     }
 
 
 class TerminalAutopilotTests(unittest.TestCase):
+    def test_new_checkpoint_dispatch_is_parked_without_capability_first_admission(self):
+        m = manifest()
+        m.pop("capability_first_checkpoint_admission")
+        out = plan(m)
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(
+            out["classification"],
+            "CHECKPOINT_AUDIT_PARKED_BY_CAPABILITY_FIRST_SCHEDULER",
+        )
+        self.assertEqual(out["dispatch"], [])
+        self.assertTrue(out["checkpoint_audit_admission_required"])
+        self.assertFalse(out["checkpoint_audit_admitted"])
+
     def test_fans_out_all_direct_work_and_universal_race(self):
         out = plan(manifest())
         self.assertTrue(out["pass"], out)
@@ -82,7 +100,7 @@ class TerminalAutopilotTests(unittest.TestCase):
             (a / "ACTION_INTENT_TB_SCIENCE_RANK9_ONE_SHOT_20261007_V1.json").write_text(
                 json.dumps({"status": "READY_AFTER_TRANSITIVE_CARRIER_CLOSURE_AND_LIVE_EPOCH_BINDING"}),
                 encoding="utf-8")
-            built = build_manifest_from_repo(root)
+            built = build_manifest_from_repo(root, checkpoint_audit_authorized=True)
             tb = [x for x in built["obligations"] if x["id"] == "TB_SCIENCE_GE_58_7"][0]
             self.assertEqual(tb["status"], "RUNNING")
             out = plan(built)
@@ -118,7 +136,7 @@ class TerminalAutopilotTests(unittest.TestCase):
             (a / "ACTION_INTENT_TB_SCIENCE_RANK9_ONE_SHOT_20261007_V1.json").write_text(
                 json.dumps({"status": "READY_AFTER_TRANSITIVE_CARRIER_CLOSURE_AND_LIVE_EPOCH_BINDING"}),
                 encoding="utf-8")
-            built = build_manifest_from_repo(root)
+            built = build_manifest_from_repo(root, checkpoint_audit_authorized=True)
             tb = [x for x in built["obligations"] if x["id"] == "TB_SCIENCE_GE_58_7"][0]
             self.assertEqual(tb["status"], "BLOCKED")
             self.assertEqual(len(built["active_jobs"]), 0)
@@ -161,7 +179,7 @@ class TerminalAutopilotTests(unittest.TestCase):
             (a / "ACTION_INTENT_TB_SCIENCE_RANK10_ONE_SHOT_20261007_V1.json").write_text(
                 json.dumps({"status": "READY_AFTER_PREFLIGHT"}),
                 encoding="utf-8")
-            built = build_manifest_from_repo(root)
+            built = build_manifest_from_repo(root, checkpoint_audit_authorized=True)
             tb = [x for x in built["obligations"] if x["id"] == "TB_SCIENCE_GE_58_7"][0]
             self.assertEqual(tb["status"], "RUNNING")
             self.assertEqual(len(built["blockers"]), 0)
@@ -185,7 +203,7 @@ class TerminalAutopilotTests(unittest.TestCase):
                 }
             }), encoding="utf-8")
 
-            built = build_manifest_from_repo(root, max_concurrency=1)
+            built = build_manifest_from_repo(root, max_concurrency=1, checkpoint_audit_authorized=True)
             by_id = {row["id"]: row for row in built["routes"]}
 
             adaptive = by_id["ADAPTIVE_ESCAPE_PROGRESS_TOTALITY"]
@@ -244,7 +262,7 @@ class TerminalAutopilotTests(unittest.TestCase):
                 }
             }), encoding="utf-8")
 
-            built = build_manifest_from_repo(root, max_concurrency=1)
+            built = build_manifest_from_repo(root, max_concurrency=1, checkpoint_audit_authorized=True)
             adaptive = {
                 row["id"]: row for row in built["routes"]
             }["ADAPTIVE_ESCAPE_PROGRESS_TOTALITY"]
@@ -283,7 +301,7 @@ class TerminalAutopilotTests(unittest.TestCase):
                 }
             }), encoding="utf-8")
 
-            built = build_manifest_from_repo(root, max_concurrency=1)
+            built = build_manifest_from_repo(root, max_concurrency=1, checkpoint_audit_authorized=True)
             objective = {
                 row["id"]: row for row in built["routes"]
             }["OBJECTIVE_ACCEPTANCE_COMMON_LAW"]
@@ -309,7 +327,7 @@ class TerminalAutopilotTests(unittest.TestCase):
             q.mkdir(parents=True)
             (q / "FROZEN_19_ACCEPTANCE_PROOF_SHAPE_QUOTIENT_20261007_V1.json").write_text(
                 json.dumps({"independent_open_obligations": OPEN}), encoding="utf-8")
-            built = build_manifest_from_repo(root)
+            built = build_manifest_from_repo(root, checkpoint_audit_authorized=True)
             self.assertTrue(built["one_shot_attack_graph"])
             by_id = {row["id"]: row for row in built["routes"]}
             self.assertEqual(len(by_id), 7)
