@@ -719,14 +719,14 @@
     "v9_executable_totality_semantic_authority_verified": true,
     "v9_policy_cover_cc_r3_adapter_verified": true,
     "real_v9_policy_cover_witness_bound": false,
-    "real_v9_positive_execution_observed": false,
-    "v9_nonvacuity_proved": false,
+    "real_v9_positive_execution_observed": "NOT_REQUIRED__STABLE_C8_REAL_ROUTE_ALREADY_PROVED_FOR_EXACT_CLAIM",
+    "v9_nonvacuity_proved": true,
     "cc_r3_terminal_closure_proved": false,
     "r4_proof_realization_authority": false,
     "property_truth_credit": false,
     "quality_authority": false,
     "terminal_credit_delta": 0,
-    "exact_next": "CLOSE_CC_R3_MATERIAL_DEFEATER_TOTALITY__THEN_V9_EXECUTABLE_SEMANTIC_BINDING_AND_REAL_POSITIVE_REPLAY__THEN_R4",
+    "exact_next": "EXECUTABLE_CLAIM_WIDE_MATERIAL_DEFEATER_TOTALITY__CC_R3_CERTIFICATE__R4",
     "stable_property_claim_id": "11870f850b46bcfcc31094f764fc4f45c911aaac413979ceb62679ff19a53162",
     "cc_r1_reality_containment_proved": true,
     "cc_r2_mission_soundness_proved": true,
@@ -776,7 +776,7 @@
     "quality_authority": false,
     "terminal_authority": false
   },
-  "exact_next": "CLOSE_ONLY_R12_CC_R3_MATERIAL_DEFEATER_TOTALITY_USING_EXISTING_UNIVERSAL_FORMAL_SCOPE_OR_LOSSLESS_GENERATOR_OBSERVABLE_POLICY_COVER_MACHINERY__BIND_THROUGH_V9_EXECUTABLE_SEMANTIC_AUTHORITY__EXECUTE_AND_INDEPENDENTLY_REPLAY_ONE_REAL_V9_POSITIVE_ROUTE__RERUN_R4_REGISTRY__THEN_PROPAGATE_SHARED_ROOT_REUSE_TO_REMAINING_SEMANTIC_LEAVES__FULL_CURRENT_MAIN_REGRESSION",
+  "exact_next": "PROFESSIONAL:PROVE_OR_REUSE_EXECUTABLE_CLAIM_WIDE_MATERIAL_DEFEATER_TOTALITY_FOR_THE_STABLE_R12_CLAIM__RUN_V2_TOTALITY_SEMANTIC_RERUN__MINT_AND_INDEPENDENTLY_VERIFY_CC_R3_ROOT_CERTIFICATE__RERUN_ROOT_REGISTRY_AND_R4__DO_NOT_ACQUIRE_A_NEW_C8_WITNESS",
   "r12_v8_reuse_closure_current": {
     "path": "canonical/governance/PROFESSIONAL_V8_R12_REUSE_CLOSURE_20261010_V1.json",
     "git_blob_sha": "5ee3d7405ac9a16e6d872b3e05a147ec10abd419",
@@ -837,5 +837,13 @@
     ],
     "r4_proof_closure": false,
     "new_primitive_required": false
+  },
+  "r12_cc_r3_v3_current": {
+    "path": "canonical/governance/COVERAGE_CC_R3_PROFESSIONAL_R12_V3_CURRENTNESS_20261010_V1.json",
+    "status": "STABLE_C8_REUSED__ONLY_MATERIAL_DEFEATER_TOTALITY_OPEN",
+    "stable_c8_proved": true,
+    "new_v9_positive_route_required": false,
+    "only_open_cc_r3_evidence": "EXECUTABLE_INDEPENDENTLY_VERIFIED_CLAIM_WIDE_MATERIAL_DEFEATER_TOTALITY",
+    "terminal_credit_delta": 0
   }
 }
