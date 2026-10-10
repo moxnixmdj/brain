@@ -10,7 +10,7 @@
   },
   "root_theorem": {
     "path": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_THEOREM_V1.json",
-    "git_blob_sha": "2a4327fe5db9b498fe87d2c4fb38ccbd88c976ef"
+    "git_blob_sha": "b2870a70adb5884fbfcc6c9f5115d4a2016c1afc"
   },
   "claim_semantics": {
     "quantification": "FOR_EACH_FROZEN_CERTIFICATION_CLAIM_C",
