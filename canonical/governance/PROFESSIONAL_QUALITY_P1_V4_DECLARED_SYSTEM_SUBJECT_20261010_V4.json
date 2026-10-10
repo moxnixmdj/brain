@@ -158,7 +158,7 @@
   },
   "dependency_closure": {
     "path": "canonical/governance/PROFESSIONAL_QUALITY_SUBJECT_DEPENDENCY_CLOSURE_20261010_V1.json",
-    "git_blob_sha": "a204ff5cc9fe6cf54d7299690228abd581abb26f",
+    "git_blob_sha": "67b867f71037189c9ce9c2e136dc6ecd94dfe629",
     "classification_complete": true,
     "required_subject_components_included": true,
     "external_evidence_remains_outside_subject_identity": true
