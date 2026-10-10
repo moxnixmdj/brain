@@ -1,0 +1,76 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V34",
+  "date": "2026-10-10",
+  "status": "CURRENT_POST_PUBLIC_RANK18_V12_ZERO_EXPOSURE_RESEAL__SEVENTEEN_CONSUMED__RANK18_V2_AUTHORITY_ACTIVE__TASK_UNREAD_UNSTARTED__EXACT_ONE_FILE_ACTIVATION_NEXT__ZERO_ACCEPTANCE_CREDIT",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "predecessor": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V33.json",
+    "git_blob_sha": "c2d405754e51254aa2eee8e6eb9413a298cdf90b"
+  },
+  "public_reseal_verification": {
+    "path": "canonical/verification/TB_SCIENCE_RANK18_PUBLIC_V12_ZERO_EXPOSURE_RESEAL_VERIFY_20261010_V1.json",
+    "git_blob_sha": "db5b99717dbf32189fc74cd2c34621b348a366bc"
+  },
+  "rank18_authority_v2": {
+    "path": "canonical/governance/TB_SCIENCE_RANK18_ONE_SLOT_EXECUTION_AUTHORITY_20261010_V2.json",
+    "git_blob_sha": "44de85f705f9e248cee8a35a175d9a9523f41c9c"
+  },
+  "frozen_manifest": {
+    "git_blob_sha": "e0318f4fcde040498077dcdd872e398e32240791",
+    "verification_git_blob_sha": "e9bca17092cecbb7d2611d5c081bae8336c2083f"
+  },
+  "current_counts": {
+    "consumed_slots": 17,
+    "consumed_successes": 0,
+    "consumed_final_failures": 17,
+    "successes_remaining_for_pass_lock": 124,
+    "additional_failures_before_fail_lock": 70,
+    "maximum_possible_successes_remaining": 193,
+    "minimum_required_success_rate_over_remaining_slots": 0.6424870466321243,
+    "pass_still_mathematically_reachable": true,
+    "next_unconsumed_slot": {
+      "ledger_schedule_rank": 18,
+      "frozen_manifest_schedule_order": 17,
+      "task_rank": 17,
+      "slot_id": "terminal-bench-science/longitudinal-clinical-agent::trial-0",
+      "task_digest": "sha256:e9a166b2173f7014d4f1559505397b221f94bc446eab031f94791b35e0e5f1c9"
+    }
+  },
+  "rank18": {
+    "slot_id": "terminal-bench-science/longitudinal-clinical-agent::trial-0",
+    "task_digest": "sha256:e9a166b2173f7014d4f1559505397b221f94bc446eab031f94791b35e0e5f1c9",
+    "public_v12_surface_resealed": true,
+    "public_reseal_merge_commit_sha": "ff74920b8827243910da297420222c789e5b751c",
+    "public_surface_git_blob_sha": "4f8c9bc50dc5e959c3f9f47253df214ae7c6a5da",
+    "public_reseal_workflow_run_id": 38027734978,
+    "task_read": false,
+    "task_started": false,
+    "execution_authority_consumed": false,
+    "benchmark_trials_consumed": 0,
+    "fresh_execution_authority": true,
+    "fresh_task_read_authority": true,
+    "activation_armed": false,
+    "exact_execution_branch": "execute/tb-science-rank18-20261010-v1",
+    "exact_activation_filename": "ACTIVATE_RANK18_V1_PR.json",
+    "next_action": "CREATE_FRESH_EXECUTION_BRANCH_FROM_EXACT_PUBLIC_MERGE_COMMIT__ADD_ONLY_ACTIVATE_RANK18_V1_PR_JSON__OPEN_PR_TO_TERMINAL_EXECUTION_V1__ALLOW_EXACT_WORKFLOW_TO_QUALIFY_CARRIER_AND_READ_TASK_ONCE"
+  },
+  "scheduler": [
+    "DO_NOT_RERUN_RANK17.",
+    "USE_ONLY_RANK18_V2_AUTHORITY_FOR_THE_NEXT_TB_SCIENCE_SLOT.",
+    "CREATE_ONLY_THE_EXACT_ONE_FILE_RANK18_ACTIVATION_DELTA.",
+    "TASK_READ_IS_AUTHORIZED_ONLY_AFTER_LIVE_CARRIER_QUALIFICATION_AND_PRE_TASK_READ_START_CAS_ABSENCE_PROOF.",
+    "PRESERVE_V12_AGENT_PLANNER_V6_TYPED_ACTION_V2_DURABLE_START_CAUSAL_JOURNAL_AND_UNCERTAIN_EFFECT_NO_REPLAY_INVARIANTS.",
+    "PRECHECK_FAILURE_BEFORE_DURABLE_START_DOES_NOT_CONSUME_SLOT.",
+    "AFTER_DURABLE_START_ANY FINAL NON_SUCCESS IS IRREVERSIBLE ZERO WITH NO REPLAY OR REPLACEMENT.",
+    "ONE_SLOT_SUCCESS CANNOT GRANT AGGREGATE TB_SCIENCE ACCEPTANCE CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_trials_consumed_delta": 0,
+    "consumed_successes_delta": 0,
+    "consumed_final_failures_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
