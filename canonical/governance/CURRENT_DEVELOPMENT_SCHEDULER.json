@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_DEVELOPMENT_SCHEDULER_POINTER_V1",
   "date": "2026-10-10",
-  "status": "ACTIVE__POST_COMPOSITION_V18__PROFESSIONAL_SCOPE_24_OF_24__PROPERTY_TRUTH_2_OF_24__TEN_EXECUTION_LEAVES_OPEN__ONE_SHARED_SEMANTIC_COMPLETENESS_BLOCKER__PARALLEL_EVIDENCE_READY__FULL_EXECUTION_FAILS_CLOSED_WITHOUT_VECTOR_OR_SEPARATE_AUTHORITY",
+  "status": "ACTIVE__POST_COMPOSITION_V18__PROFESSIONAL_SCOPE_24_OF_24__PROPERTY_TRUTH_4_OF_24__EIGHT_EXECUTION_LEAVES_OPEN__ONE_SHARED_SEMANTIC_COMPLETENESS_BLOCKER__PARALLEL_EVIDENCE_READY__FULL_EXECUTION_FAILS_CLOSED_WITHOUT_VECTOR_OR_SEPARATE_AUTHORITY",
   "authoritative_activation": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V13.json",
   "runtime": "canonical/runtime/capability_parallel_frontier_post_composition_v1.py",
   "primary_entrypoint": "canonical.runtime.capability_parallel_frontier_post_composition_v1.plan_current_post_composition_frontier",
@@ -27,12 +27,12 @@
   "planning_entrypoint": "canonical.runtime.capability_first_scheduler_v1.rank_work",
   "current_live_work_frontier": {
     "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
-    "git_blob_sha": "74ee9f14f40f0b0f23d668fb403aff60dca6d781",
-    "status": "CURRENT_POST_COMPOSITION_FRONTIER__PROPERTY_TRUTH_2_OF_24__INDEPENDENT_SHARED_SEMANTIC_BLOCKER_BOUND__EXECUTION_DEPLETION_PRIMARY",
+    "git_blob_sha": "8bf3b56ceec803777c3d65fcfd33fe6d47ae836a",
+    "status": "CURRENT_POST_COMPOSITION_FRONTIER__PROPERTY_TRUTH_4_OF_24__INDEPENDENT_SHARED_SEMANTIC_BLOCKER_BOUND__EXECUTION_DEPLETION_PRIMARY",
     "professional_verified_root_subject_binding_count": 12,
     "professional_same_subject_composition_admissible": true,
     "professional_whole_leaf_scope_complete_count": 24,
-    "professional_property_truth_closed_count": 2
+    "professional_property_truth_closed_count": 4
   },
   "live_score_contract": {
     "path": "canonical/governance/LIVE_WORK_SCORE_CALIBRATION_CONTRACT_20261010_V1.json",
@@ -89,7 +89,7 @@
   "post_composition": {
     "professional_scope_construction_complete": true,
     "professional_scope_complete_count": 24,
-    "professional_property_truth_closed_count": 2,
+    "professional_property_truth_closed_count": 4,
     "current_primary_professional_edge": "DEPLET_REMAINING_EXECUTION_PROPERTY_TRUTH__PARALLEL_SHARED_SEMANTIC_COMPLETENESS",
     "full_current_main_regression_open": true,
     "r10_structural_guard_verification": {
