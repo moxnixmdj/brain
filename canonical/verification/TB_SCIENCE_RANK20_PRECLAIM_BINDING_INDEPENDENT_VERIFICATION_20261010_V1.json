@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK20_PRECLAIM_BINDING_INDEPENDENT_VERIFICATION_V1",
+  "date": "2026-10-10",
+  "status": "PASS__CONTENT_ADDRESSED_PRECLAIM_AND_V2_IDENTITY_DERIVED__ZERO_EXPOSURE__ZERO_AUTHORITY",
+  "exact_blobs": {
+    "claim": {
+      "path": "canonical/governance/TB_SCIENCE_RANK20_LOGICAL_ATTEMPT_CLAIM_BINDING_20261010_V1.json",
+      "git_blob_sha": "33cb465f4e2105dbe4d3f4230e34b4d589676f63"
+    },
+    "verifier": {
+      "path": "canonical/runtime/tb_science_rank20_preclaim_binding_v1.py",
+      "git_blob_sha": "4de57ec505496ddcc2bc132ae23a8afac557e73c"
+    },
+    "tests": {
+      "path": "canonical/tests/test_tb_science_rank20_preclaim_binding_v1.py",
+      "git_blob_sha": "7c3ec3ae1f3a58ebad428513a3d95d7fa318e7a2"
+    },
+    "admission": "b03861813f9b9a730659e6e0b6e7301a45061b04",
+    "admission_verification": "d12c7c1f9e1259eaf3950689556fd0e6a37ba705",
+    "frozen_manifest": "6dfa880b1f68881531afbba6ca211681801fd19b",
+    "rank19_ledger_v41": "9b57fba46890146527970ee51a47081791341598",
+    "identity_v2": "67ff638459af1bb50a094e9479fb4aa5e2a3de1c",
+    "repaired_agent_v13": "470bfe079aeffaa07a3b92975b4edea17c9a20e1",
+    "repaired_agent_v13_verification": "ec982a8cde737669d42abfb62a9f3cbdf0752434",
+    "public_planner_v7": "e5d6ab78b6cf5bacee568cd3701410a8745b9ce8"
+  },
+  "derived": {
+    "execution_claim_binding_digest": "sha256:8ffb9a1041ef950a8f8fa3a876a9deeb964ebd099ebbd4e2d182b8f256f87d23",
+    "logical_attempt_id_v2": "7d5b448bf14e7c6ed675e131e693e53b986288af1a5498edc434e8071219f2ce"
+  },
+  "isolated_carrier": {
+    "type": "SPRITE",
+    "name": "rank20-preclaim-verify",
+    "id": "sprite-fdbc6e7b-1d63-4144-aaf6-dd01d1ab0993"
+  },
+  "tests": {
+    "pycompile": true,
+    "total": 5,
+    "passed": 5,
+    "failed": 0
+  },
+  "verified": [
+    "UNIQUE_FROZEN_RANK20_MANIFEST_ROW",
+    "ADMISSION_STILL_PRECLAIM_ZERO_TASK_READ_ZERO_START_ZERO_TRIAL",
+    "NO_EXECUTION_CLAIM_EXECUTION_PROMOTION_OR_ACTIVATION_AUTHORITY_IN_ADMISSION",
+    "CANONICAL_CLAIM_DIGEST_REDERIVED",
+    "LOGICAL_ATTEMPT_ID_V2_REDERIVED",
+    "FORBIDDEN_TASK_CONTENT_MUTATION_FAILS_CLOSED",
+    "PREMATURE_EXECUTION_AUTHORITY_MUTATION_FAILS_CLOSED",
+    "TASK_DIGEST_DRIFT_FAILS_CLOSED",
+    "BOUND_SOURCE_BLOB_DRIFT_FAILS_CLOSED",
+    "PUBLIC_PLANNER_V7_BLOB_MATCHED_DIRECTLY_AT_PUBLIC_EXECUTION_BASE"
+  ],
+  "state": {
+    "task_read": false,
+    "task_started": false,
+    "benchmark_trials_consumed": 0,
+    "execution_authority": false,
+    "activation_authority": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_trials_consumed_delta": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "pass": true,
+  "next": "PROMOTE_EXACT_PRECLAIM_BYTES__THEN_BUILD_ZERO_EXPOSURE_RANK20_PUBLIC_RESEAL_AROUND_THIS_IMMUTABLE_CLAIM_IDENTITY__NO_TASK_READ"
+}
