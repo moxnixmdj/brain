@@ -1,0 +1,81 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R10_EXECUTION_PROPERTY_CHALLENGE_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__DUAL_INDEPENDENT_FOCUSED_REPLAY__12_OF_12_EACH__R10_EXECUTION_ACCEPTANCE_CASES_BOUND__ZERO_QUALITY_OR_TERMINAL_CREDIT",
+  "leaf_id": "PQ::R10_ANALYSIS_DECISION::EXECUTION",
+  "root_id": "R10_ANALYSIS_DECISION",
+  "claim_id": "205a864e7d7a56a14a46bb75923cc9b11126d479676d26d88803831da1197294",
+  "leaf_acceptance": "RUN_ROOT_RELEVANT_POSITIVE_NEAR_MISS_AND_ADVERSARIAL_CASES_ON_EXACT_ARTIFACT_OR_RUNTIME_BYTES_AND_BIND_OBSERVED_OUTCOMES_TO_THE_ROOT_CONTRACT",
+  "exact_blobs": {
+    "guard_runtime": "d0bbda399a71ea7f30aae9095237b1ab2542647c",
+    "challenge_tests": "8a57df62f10fe6f3a949b2adf3d412451f18fb32",
+    "one_shot_reality_v2": "b8347a3993f96aa5e6fa2f1fe68d7c8afccb8bec",
+    "one_shot_verified_v1": "605fe5a36e26aef51f93c4a5b3e43483abea2c19",
+    "promote_r2_direct_route_v1": "fa6f423837c7f9e8d50d18922f86ca1131c9fa7f",
+    "execution_profile": "f7e89eafbb691c16d1bdf5b8d295a468d5e3bec5",
+    "defeater_catalog": "8b92e5cf76f767054f55414b87014e03d43460b8"
+  },
+  "focused_replay_import_stubs": {
+    "used": true,
+    "semantics": "IMPORT_ONLY_DEPENDENCIES_NOT_EXECUTED_BY_THE_TESTED_R10_CONTRACT_COMPILERS",
+    "forbidden_credit": "NO_CREDIT_FOR_STUBBED_MODULE_BEHAVIOR"
+  },
+  "replay": [
+    {
+      "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+      "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+      "workspace": "/home/sprite/r10-property-v1",
+      "py_compile": "PASS",
+      "tests_run": 12,
+      "tests_passed": 12,
+      "tests_failed": 0
+    },
+    {
+      "carrier": "brain-pq-p1-v2-independent-verify-20261010",
+      "carrier_id": "sprite-5fb5e414-e2f5-4a49-b424-3443341d9d09",
+      "workspace": "/home/sprite/r10-property-v1-independent",
+      "py_compile": "PASS",
+      "tests_run": 12,
+      "tests_passed": 12,
+      "tests_failed": 0
+    }
+  ],
+  "observed_case_coverage": {
+    "positive_clean_path": true,
+    "all_known_r10_defeaters_count": 17,
+    "all_known_r10_defeaters_blocked": true,
+    "near_miss_signal_count": 5,
+    "near_miss_signals_escalate": true,
+    "unknown_detected_defeater_escalates": true,
+    "unmapped_material_signal_escalates": true,
+    "missing_proof_slot_blocks": true,
+    "lossy_decision_contract_fails_closed": true,
+    "omitted_decision_evidence_fails_closed": true,
+    "broad_acquisition_weakening_fails_closed": true,
+    "profile_trigger_drift_fails_closed": true,
+    "catalog_drift_fails_closed": true,
+    "claim_substitution_fails_closed": true
+  },
+  "proves": [
+    "EXACT_R10_EXECUTION_GUARD_BYTES_EXECUTE_AGAINST_CANONICAL_V2_DEFEATER_CATALOG_SCHEMA",
+    "POSITIVE_NEAR_MISS_AND_ADVERSARIAL_CASES_ARE_BOUND_TO_THE_EXACT_R10_CLAIM_ID",
+    "ALL_17_CATALOGED_R10_ROOT_RELEVANT_DEFEATERS_BLOCK_ORDINARY_CERTIFICATION",
+    "DECLARED_NEAR_MISSES_ROUTE_TO_PROFILE_ESCALATION",
+    "UNKNOWN_OR_UNMAPPED_MATERIAL_DEFEATERS_ROUTE_TO_ESCALATION",
+    "CONTRACT_PROOF_SLOT_AND_CATALOG_WEAKENING_FAILS_CLOSED"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_ALL_CONCEIVABLE_DEFEATERS_ARE_ENUMERATED",
+    "NO_GENERAL_R10_SEMANTIC_LEAF_CLOSURE",
+    "NO_R10_ROOT_CLOSURE",
+    "NO_DOMAIN_EXECUTION_CLOSURE",
+    "NO_PROFESSIONAL_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "leaf_property_truth_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
