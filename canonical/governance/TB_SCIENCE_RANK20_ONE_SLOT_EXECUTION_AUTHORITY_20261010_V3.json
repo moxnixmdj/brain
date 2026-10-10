@@ -1,0 +1,104 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK20_ONE_SLOT_EXECUTION_AUTHORITY_20261010_V3",
+  "date": "2026-10-10",
+  "status": "PUBLIC_RESEAL_VERIFIED__PROOF_ONLY_BEHAVIOR_REFINEMENT_ACCEPTED__EXECUTION_AUTHORITY_EFFECTIVE__ACTIVATION_NOT_ARMED__ZERO_EXPOSURE",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "supersedes": {
+    "path": "canonical/governance/TB_SCIENCE_RANK20_ONE_SLOT_EXECUTION_AUTHORITY_20261010_V2.json",
+    "git_blob_sha": "a6016f92ec074835af7cae7383f30699e5c584b3"
+  },
+  "slot": {
+    "ledger_schedule_rank": 20,
+    "frozen_manifest_schedule_order": 19,
+    "task_rank": 19,
+    "id": "terminal-bench-science/hysteretic-aquifer-control::trial-0",
+    "digest": "sha256:681df0c3b2ada03a933ac4d2e11f07983676f87a9f26b61e416987904b880289"
+  },
+  "logical_attempt": {
+    "id": "62bbf27ddcc679f431c5569244cf0c54fb1b13181e83076e2c019764f0b747e2",
+    "identity_basis": "SLOT_ID_PLUS_TASK_DIGEST_PLUS_EXECUTION_CLAIM_BINDING_DIGEST",
+    "execution_claim_binding_digest": "sha256:ad74fd461333c1673b76ec0b439aba98c35bf6a0691796b24a5847209873adba",
+    "claim_epoch_id": "RANK20_V13_CLAIM_BOUND_IDENTITY_20261010_V3",
+    "carrier_independent": true,
+    "prior_model_reasoning_samples": 0,
+    "prior_durable_start": false,
+    "fresh_slot": true
+  },
+  "logical_attempt_claim_binding": {
+    "path": "canonical/governance/TB_SCIENCE_RANK20_LOGICAL_ATTEMPT_CLAIM_BINDING_20261010_V3.json",
+    "git_blob_sha": "59fa5616f1754f90ded1c3b30cb53c98b4348cee",
+    "canonical_sha256": "ad74fd461333c1673b76ec0b439aba98c35bf6a0691796b24a5847209873adba"
+  },
+  "public_reseal_verification": {
+    "path": "canonical/verification/TB_SCIENCE_RANK20_PUBLIC_RESEAL_REFINEMENT_VERIFY_20261010_V1.json",
+    "git_blob_sha": "3a77e4abc900d9d3adadafde54dbfff70cc75345",
+    "pass": true
+  },
+  "public_surface": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2599,
+    "merge_commit_sha": "73db1b05ab8e08b84d2076e2b36f4e376b90091c",
+    "surface_git_blob_sha": "31cef695b88e9f13c14167a4e0e7dac27b4de620",
+    "workflow_git_blob_sha": "19a12ff77ebdedb3177f05281e116dee69d915ea",
+    "claim_seed_behavior_git_blob_sha": "9012d4bf1c84e157cdfa27ec04fd1a5afd7c78c7",
+    "effective_behavior_git_blob_sha": "dc20b4ef740eaeb6741c834d9c74634653c69193",
+    "behavior_refinement_verifier_git_blob_sha": "b15a9d9ba3a717a9758f56aef75e5e14764d9221",
+    "public_authority_git_blob_sha": "a5186b7e46e47f7f391f8d9d39485a95d83a3824",
+    "epoch_git_blob_sha": "31882225445bd8a8e2db306bb4ec5d90c02403bf",
+    "execution_claim_git_blob_sha": "241148ab473702b82deedcf75b4ae160885e9f16",
+    "zero_exposure_test_git_blob_sha": "b93af6baee042ac09f352b1a12c84fc03123c55d",
+    "agent_v13_git_blob_sha": "470bfe079aeffaa07a3b92975b4edea17c9a20e1",
+    "invariant_registry_git_blob_sha": "b9fbb776ed5cf0888f34809c94f78638d3d915c1"
+  },
+  "refinement_policy": {
+    "class": "PROOF_ONLY_NON_REAUTHORIZING_STRICT_REFINEMENT",
+    "claim_seed_behavior_identity_root": "9012d4bf1c84e157cdfa27ec04fd1a5afd7c78c7",
+    "effective_behavior": "dc20b4ef740eaeb6741c834d9c74634653c69193",
+    "semantic_behavior_facts_changed": false,
+    "preexisting_runtime_bindings_changed": false,
+    "added_bindings": [
+      "logical_attempt_claim_binding",
+      "logical_attempt_binding_helper"
+    ],
+    "added_bindings_proof_plane_only": true,
+    "logical_attempt_id_preserved": true
+  },
+  "controls": {
+    "logical_attempts_authorized_total": 1,
+    "retries_authorized": 0,
+    "replacement_allowed": false,
+    "incremental_spend_usd_max": 0,
+    "exact_task_digest_rematerialization_allowed": true,
+    "different_task_or_digest_forbidden": true,
+    "model_reasoning_before_durable_start_forbidden": true,
+    "task_start_requires_prestart_guard_agent_ready_and_durable_start_cas": true,
+    "action_effect_requires_durable_intent_ack": true,
+    "next_action_requires_durable_state_commit_ack": true,
+    "uncertain_effect_replay_authority": false,
+    "post_start_result_irreversible": true,
+    "exact_one_file_activation_required": true
+  },
+  "state": {
+    "task_read_history": false,
+    "task_started": false,
+    "start_cas_acquired": false,
+    "benchmark_trials_consumed": 0,
+    "activation_present": false,
+    "result_present": false,
+    "reward_observed": false
+  },
+  "execution_authority": true,
+  "execution_authority_effective": true,
+  "task_rematerialization_authority": true,
+  "task_read_authority": true,
+  "task_read_authority_effective": true,
+  "activation_authority": false,
+  "promotion_authority": false,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "next": "MINT_EXACT_RANK20_ACTIVATION_AUTHORITY__THEN_ONE_FILE_ACTIVATION_BRANCH__NO_TASK_READ_BEFORE_LIVE_PREFLIGHT"
+}
