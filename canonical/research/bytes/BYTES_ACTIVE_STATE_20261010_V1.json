@@ -61,13 +61,13 @@
   ],
   "completion_boundary": "Do not claim universal minimum. Claim exact optimum only over an exhaustively searched finite discovered mechanism library, or a verified upper bound otherwise.",
   "drive_evidence_mirror": {
-    "status": "UPDATED_WITH_RINGSERIES_ATAN_REPAIRED_SUCCESSOR_FRONTIER__NONCANONICAL",
+    "status": "UPDATED_WITH_JOINT_LAZY_IMPORT_SUCCESSOR_FRONTIER__NONCANONICAL",
     "file_id": "1iSGwawxceR81ssMCfAmkXJNLoFlLaEfda8QiggnOnq4",
     "url": "https://docs.google.com/document/d/1iSGwawxceR81ssMCfAmkXJNLoFlLaEfda8QiggnOnq4",
     "authority": "NONCANONICAL_EVIDENCE_MIRROR__GITHUB_REMAINS_CANONICAL",
-    "last_updated_revision_id": "AHj4eMTgT8TC8NlPFlw67KPlxONifMvthvAOId3rz0DwWLf0UbXDS19Qp6dZgaMXD3maQs4Rt6JqSVg_xy6mOS7-tD37m_ahWoYMuITSjw",
-    "fresh_execution_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_RINGSERIES_ATAN_SUCCESSOR_EXECUTION_20261010_V1.json",
-    "fresh_falsification_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_NEXT3_FALSIFICATION_20261010_V1.json"
+    "last_updated_revision_id": "AHj4eMQ9zy0ZdnsW-bLk2HVK00RyiO_ZGszpNDIXy2HsOQ_Yz-pUit9qA62qurfYjlmbGNRsdaZVk2z1g6aAk5LigGbePGsrcNheEU2bXQ",
+    "fresh_execution_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_JOINT_LAZY_IMPORT_SUCCESSOR_EXECUTION_20261010_V1.json",
+    "fresh_falsification_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_NEXT10_EXPRESSIONDOMAIN_FALSIFICATION_20261010_V1.json"
   },
   "fresh_local_donor_evidence": "canonical/evidence/BYTES_SYMPY_1_14_DEPENDENCY_CENSUS_20261010_V1.json",
   "execution_reconciliation": {
@@ -118,8 +118,12 @@
     "qualification_generator": "canonical/research/bytes/tools/generate_qualification_v1.py",
     "local_comparable_source_archive_bytes": 1096200,
     "local_comparable_source_archive_sha256": "e9ed3086ad678a8e3c17f2dfabd1b3e39fa6a44d93e57a651a9bef38a1da6ac9",
-    "library_binary_status": "PENDING_RETRY_THIS_CHECKPOINT",
-    "rule": "GitHub reconstruction tooling, hashes, measurements, falsification, and evidence are canonical; promotion credit remains zero."
+    "library_binary_status": "PERSISTED_IN_CHATGPT_LIBRARY",
+    "rule": "GitHub reconstruction tooling/evidence and the exact qualified source archive are both durably persisted; promotion credit remains zero.",
+    "library_file_id": "libfile_038071e15af88191bf0c1ffaa12b4289",
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_JOINT_LAZY_IMPORT_SUCCESSOR_20261010_V1.tar.xz",
+    "library_binary_bytes": 1096200,
+    "library_binary_sha256": "e9ed3086ad678a8e3c17f2dfabd1b3e39fa6a44d93e57a651a9bef38a1da6ac9"
   },
   "predecessor_fresh_execution_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_RECOVERY_EXECUTION_20261010_V1.json",
   "reserved_predecessor_qualification_qual8": {
