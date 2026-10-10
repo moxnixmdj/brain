@@ -97,7 +97,9 @@ def _targets(root:Path,rel:str)->list[str]:
                 if node.module: parts+=str(node.module).split(".")
                 base=".".join(parts)
             if base=="canonical.runtime":
-                add(base)
+                # canonical.runtime may be a namespace package with no __init__.py.
+                # The package object itself contributes no file blob in that case.
+                add(base,required=False)
                 for alias in node.names:
                     add(base+"."+alias.name,required=False)
             elif base.startswith("canonical.runtime."):
