@@ -19,7 +19,7 @@ from __future__ import annotations
 
 from copy import deepcopy
 from pathlib import Path
-from typing import Any, Mapping
+from typing import Any, Mapping, Sequence
 
 from canonical.runtime import escape_progress_shared_gap_audit_v3 as v3
 from canonical.runtime.effect_broker_receipt_resolver_v2 import (
@@ -33,7 +33,58 @@ ROW_VERIFY_SCHEMA = "PROJECT_BRAIN_ESCAPE_PROGRESS_ROW_PROOF_INDEPENDENT_VERIFIC
 
 ROOT = Path(__file__).resolve().parents[2]
 MANIFEST_PATH = ROOT / "canonical/governance/ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_20261010_V2.json"
-BINDING_PATH = ROOT / "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V6.json"
+CLASSIFIER_RELATIVE_PATH = "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json"
+
+def _current_binding_path(root: Path = ROOT) -> Path:
+    """Resolve one current shared-gap binding from the mutable classifier.
+
+    Gap A and Gap B must agree on exactly one versioned binding. Missing,
+    divergent, escaping, symlinked, or non-file targets fail closed.
+    """
+    root = Path(root).resolve(strict=True)
+    classifier_path = (root / CLASSIFIER_RELATIVE_PATH).resolve(strict=True)
+    classifier_path.relative_to(root)
+    doc = json.loads(classifier_path.read_text(encoding="utf-8"))
+    rows = doc.get("classifications")
+    if not isinstance(rows, Sequence) or isinstance(rows, (str, bytes)):
+        raise ValueError("CURRENT_RESIDUAL_CLASSIFICATIONS_INVALID")
+
+    expected = {
+        "ESCAPE_GAP_A_ACQUISITION_TOTALITY",
+        "ESCAPE_GAP_B_INTERNAL_ROUTE_STRICT_PROGRESS",
+    }
+    bindings: dict[str, str] = {}
+    for row in rows:
+        if not isinstance(row, Mapping):
+            continue
+        rid = str(row.get("residual_id") or "")
+        if rid not in expected:
+            continue
+        value = row.get("existing_binding")
+        if not isinstance(value, str) or not value.strip():
+            raise ValueError("CURRENT_GAP_BINDING_MISSING:" + rid)
+        bindings[rid] = value.strip()
+
+    if set(bindings) != expected:
+        raise ValueError(
+            "CURRENT_GAP_BINDING_CLASSIFICATION_MISSING:"
+            + ",".join(sorted(expected - set(bindings)))
+        )
+    if len(set(bindings.values())) != 1:
+        raise ValueError("CURRENT_GAP_BINDING_DIVERGENCE")
+
+    rel = Path(next(iter(bindings.values())))
+    if rel.is_absolute() or ".." in rel.parts:
+        raise ValueError("CURRENT_GAP_BINDING_PATH_INVALID")
+    unresolved = root / rel
+    if unresolved.is_symlink():
+        raise ValueError("CURRENT_GAP_BINDING_SYMLINK_FORBIDDEN")
+    target = unresolved.resolve(strict=True)
+    target.relative_to(root)
+    if not target.is_file():
+        raise ValueError("CURRENT_GAP_BINDING_NOT_FILE")
+    return target
+
 
 _AUTHORITY_FIELDS = (
     "truth_authority",
@@ -235,20 +286,20 @@ def audit_repo(
     root: Path = ROOT,
     row_proof_bindings: Mapping[str, Mapping[str, Any]] | None = None,
 ) -> dict[str, Any]:
-    import json
-
-    manifest = json.loads(
-        (root / MANIFEST_PATH.relative_to(ROOT)).read_text(encoding="utf-8")
-    )
-    binding = json.loads(
-        (root / BINDING_PATH.relative_to(ROOT)).read_text(encoding="utf-8")
-    )
-    return audit(
+    root = Path(root).resolve(strict=True)
+    manifest_path = (root / MANIFEST_PATH.relative_to(ROOT)).resolve(strict=True)
+    manifest_path.relative_to(root)
+    binding_path = _current_binding_path(root)
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    binding = json.loads(binding_path.read_text(encoding="utf-8"))
+    out = audit(
         manifest,
         binding,
         row_proof_bindings=row_proof_bindings,
         repo_root=root,
     )
+    out["current_binding_path"] = binding_path.relative_to(root).as_posix()
+    return out
 
 
 if __name__ == "__main__":
