@@ -1,0 +1,94 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK18_ONE_SLOT_EXECUTION_AUTHORITY_20261010_V3",
+  "date": "2026-10-10",
+  "status": "ACTIVE_BRAIN_ONE_SLOT_AUTHORITY__V35_READ_HISTORY_BOUND__ARTIFACTCONFIG_BRIDGE_VERIFIED__FRESH_PUBLIC_V2_RESEAL_REQUIRED__TASK_READ_WITHHELD",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "slot": {
+    "ledger_schedule_rank": 18,
+    "frozen_manifest_schedule_order": 17,
+    "task_rank": 17,
+    "id": "terminal-bench-science/longitudinal-clinical-agent::trial-0",
+    "digest": "sha256:e9a166b2173f7014d4f1559505397b221f94bc446eab031f94791b35e0e5f1c9"
+  },
+  "predecessor_ledger": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V35.json",
+    "git_blob_sha": "73ad3e6e2b9cb9e1f3b72c3f08d6842814ca1940",
+    "consumed_slots": 17,
+    "task_read_history": true,
+    "durable_start_cas_acquired": false,
+    "benchmark_trials_consumed": 0
+  },
+  "predecessor_abort_truth": {
+    "path": "canonical/verification/TB_SCIENCE_RANK18_V1_PRESTART_ABORT_TRUTH_20261010_V1.json",
+    "git_blob_sha": "fd53eecbf4d974e45c936d592005f5f7d518e87d",
+    "status": "PREEXPOSURE_ABORT_NONCONSUMING",
+    "prior_activation_reusable": false
+  },
+  "superseded_authority": {
+    "path": "canonical/governance/TB_SCIENCE_RANK18_ONE_SLOT_EXECUTION_AUTHORITY_20261010_V2.json",
+    "git_blob_sha": "44de85f705f9e248cee8a35a175d9a9523f41c9c",
+    "reusable": false
+  },
+  "generic_repair": {
+    "path": "canonical/governance/TB_SCIENCE_ARTIFACTCONFIG_MAIN_SERVICE_BRIDGE_REPAIR_20261010_V1.json",
+    "git_blob_sha": "c97dfa87bc370c616b482944c2933d368e2ba908",
+    "runtime_path": "canonical/runtime/task_artifact_authority_v1.py",
+    "runtime_git_blob_sha": "621efe77fe02c12ef4b6580daaeeaa313988698f",
+    "verification_path": "canonical/verification/TASK_ARTIFACT_AUTHORITY_V1_PUBLIC_VERIFY_20261010_V1.json",
+    "verification_git_blob_sha": "82bf3a955612aeac952663cbf0979229b84d6028",
+    "public_verification_merge_commit": "e6041a39f8df001867b464b6e16035fe20c3b651",
+    "public_tests_passed": 12
+  },
+  "required_public_reseal": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "required_base": "terminal-execution-v1",
+    "required_reseal_branch": "reseal/tb-science-rank18-v2-20261010",
+    "required_future_execution_branch": "execute/tb-science-rank18-20261010-v2",
+    "required_future_activation_filename": "ACTIVATE_RANK18_V2_PR.json",
+    "mirror_exact_artifact_authority_runtime": true,
+    "parent_runner_must_use_normalizer_for_task_toml_artifacts": true,
+    "main_service_only_injected_to_agent": true,
+    "non_main_service_artifacts_not_agent_finish_postconditions": true,
+    "bind_task_read_history_true": true,
+    "bind_prior_start_cas_absence": true,
+    "fresh_epoch_required": true,
+    "fresh_execution_claim_required": true,
+    "fresh_surface_required": true,
+    "zero_exposure_verification_required": true,
+    "activation_file_forbidden_on_reseal": true
+  },
+  "controls": {
+    "logical_attempts_authorized": 1,
+    "retries_authorized": 0,
+    "replacement_allowed": false,
+    "incremental_spend_usd_max": 0,
+    "task_read_only_after_fresh_public_v2_reseal_and_new_activation": true,
+    "task_start_requires_prestart_guard_agent_ready_and_durable_start_cas": true,
+    "prior_activation_reuse_authority": false,
+    "prior_execution_authority_reuse": false,
+    "uncertain_effect_replay_authority": false,
+    "precheck_failure_consumes_slot": false,
+    "post_start_result_irreversible": true,
+    "final_non_success_after_start_counts_zero": true
+  },
+  "state": {
+    "task_read_history": true,
+    "task_read_count_observed": 1,
+    "task_started": false,
+    "durable_start_cas_acquired": false,
+    "benchmark_trials_consumed": 0,
+    "authority_consumed": false,
+    "result_present": false,
+    "public_v2_surface_resealed": false,
+    "public_v2_activation_armed": false
+  },
+  "execution_authority": true,
+  "task_read_authority": false,
+  "fresh_reality_authority": true,
+  "promotion_authority": false,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
