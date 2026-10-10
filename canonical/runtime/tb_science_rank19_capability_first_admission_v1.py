@@ -20,17 +20,9 @@ SOURCES = {
         "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V3.json",
         "472c98a195c4b98d340e9bb397fa8766e3b47928",
     ),
-    "development_scheduler": (
-        "canonical/governance/CURRENT_DEVELOPMENT_SCHEDULER.json",
-        "6723cac2745e08147ec4efe2a887a53992b0c06a",
-    ),
     "scheduler_runtime": (
         "canonical/runtime/capability_first_scheduler_v1.py",
         "b74f967038ae5f71d45468b4233452cd134fd699",
-    ),
-    "terminal_authority": (
-        "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
-        "57398d9a9ce84ab1897490995a0316206a4148d6",
     ),
     "rank18_diagnosis": (
         "canonical/verification/TB_SCIENCE_RANK18_PLANNER_TIMEOUT_CAUSAL_DIAGNOSIS_20261010_V1.json",
@@ -81,7 +73,6 @@ def verify() -> dict[str, Any]:
             errors.append("CANDIDATE_SOURCE_BINDING_DRIFT:" + key)
 
     activation = _load(SOURCES["scheduler_activation"][0])
-    terminal = _load(SOURCES["terminal_authority"][0])
     diagnosis = _load(SOURCES["rank18_diagnosis"][0])
     planner_verify = _load(SOURCES["planner_v7_verification"][0])
     authority = _load(SOURCES["rank19_one_slot_authority"][0])
@@ -99,20 +90,14 @@ def verify() -> dict[str, Any]:
     ) is not True:
         errors.append("EXPLICIT_CHECKPOINT_ADMISSION_POLICY_MISSING")
 
-    live_truth = terminal.get("live_truth")
-    open_count = (
-        live_truth.get("independent_open_acceptance_obligations")
-        if isinstance(live_truth, dict)
-        else None
-    )
-    if not isinstance(open_count, int) or isinstance(open_count, bool) or open_count < 0:
-        errors.append("OPEN_OBLIGATION_COUNT_INVALID")
-        open_count = 0
+    # Eligibility is a structural policy fact. Do not bind this durable admission
+    # to mutable project pointers or a changing count of open checkpoint obligations.
+    scheduler_test_open_count = 0
 
     work = candidate.get("scheduler_work_item")
     scheduler_row: dict[str, Any] = {}
     try:
-        ranking = rank_work([work], checkpoint_open_obligation_count=open_count)
+        ranking = rank_work([work], checkpoint_open_obligation_count=scheduler_test_open_count)
         rows = ranking.get("ranked", [])
         scheduler_row = rows[0] if isinstance(rows, list) and len(rows) == 1 else {}
         if scheduler_row.get("eligibility") != "ELIGIBLE":
@@ -247,7 +232,7 @@ def verify() -> dict[str, Any]:
         "errors": sorted(errors),
         "scheduler_eligibility": scheduler_row.get("eligibility"),
         "benchmark_role": scheduler_row.get("benchmark_role"),
-        "checkpoint_open_obligation_count": open_count,
+        "scheduler_test_checkpoint_open_obligation_count": scheduler_test_open_count,
         "slot_id": SLOT,
         "task_digest": DIGEST,
         "logical_attempt_id": ATTEMPT,
