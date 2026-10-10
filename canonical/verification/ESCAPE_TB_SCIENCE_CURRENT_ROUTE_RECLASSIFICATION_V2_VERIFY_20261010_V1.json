@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_ESCAPE_TB_SCIENCE_CURRENT_ROUTE_RECLASSIFICATION_V2_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_SPRITE__TB_RANK20_V3_RETIRED__GENERAL_CALLER_REPAIR_VERIFIED__PARKED_OUTSIDE_ACTIVE_GAP_B__TARGET_UNRESOLVED__ZERO_CREDIT",
+  "subject": {
+    "reclassification_path": "canonical/governance/ESCAPE_TB_SCIENCE_CURRENT_ROUTE_RECLASSIFICATION_20261010_V2.json",
+    "reclassification_git_blob_sha": "2639f4e58ef71502707ab6b2bb37efb592b1a234",
+    "current_tb_path": "canonical/governance/CURRENT_TB_SCIENCE_EXECUTION.json",
+    "current_tb_git_blob_sha": "7678d9a56461b121ffd52dd4c9c8df464fda08d2",
+    "repair_verification_path": "canonical/verification/TB_SCIENCE_BOUND_START_CAS_CALLER_REPAIR_VERIFY_20261010_V1.json",
+    "repair_verification_git_blob_sha": "bf5aa5cddf6c1272a9664320273d39725470b2e5",
+    "verifier_path": "canonical/runtime/escape_tb_science_current_route_reclassification_v2_verify.py",
+    "verifier_git_blob_sha": "5cebedc07d606514abfe79ed9f92876dc401727c"
+  },
+  "independent_replay": {
+    "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/tb-gapb-park-v2-verify",
+    "py_compile": "PASS",
+    "verifier_pass": true,
+    "active_gap_b_rows_after_reclassification": 2,
+    "parked_unresolved_tb_row": true
+  },
+  "conclusions": {
+    "tb_target_closed": false,
+    "current_executable_internal_tb_action": false,
+    "retry_authority": false,
+    "replacement_authority": false,
+    "activation_authority": false,
+    "general_caller_repair_verified": true,
+    "active_gap_b_rows": [
+      "PROWORK_GDPVAL_GE_1846",
+      "CHARTOGRAPHY_TOOLS_GE_89"
+    ]
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
