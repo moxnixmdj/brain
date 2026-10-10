@@ -31,15 +31,23 @@ def binding():
 
 
 def subject():
+    required = [
+        {"path": path, "git_blob_sha": sha}
+        for path, sha in sorted(v.REQUIRED_MATERIAL)
+    ]
+    extras = [
+        {
+            "path": f"canonical/governance/TEST_COMPONENT_{i}.json",
+            "git_blob_sha": f"{i:040x}",
+        }
+        for i in range(1, 21 - len(required))
+    ]
+    rows = required + extras
+    assert len(rows) == 20
     return {
         "subject_id": v.SUBJECT_ID,
         "subject_sha256": v.SUBJECT_SHA256,
-        "system_material": {
-            "components": [
-                {"path": path, "git_blob_sha": sha}
-                for path, sha in sorted(v.REQUIRED_MATERIAL)
-            ]
-        },
+        "system_material": {"components": rows},
     }
 
 
@@ -50,30 +58,41 @@ def docs():
         v.EXPECTED_REFS["subject_verification"][0]: {
             "real_subject_replay": {
                 "pass": True,
-                "component_count": 16,
+                "component_count": 20,
                 "component_currentness_verified": True,
                 "subject_identity_verified": True,
             },
-            "root_subject_binding_authority": False,
+            "authority": {"root_subject_binding_authority": False},
+        },
+        v.EXPECTED_REFS["dependency_closure"][0]: {
+            "replay": {
+                "pass": True,
+                "roots_dependency_classified": 12,
+                "missing_subject_component_count": 0,
+                "subject_component_count": 20,
+            },
+            "authority": {"root_subject_binding_authority": False},
         },
         v.EXPECTED_REFS["authenticated_target_handoff"][0]: {
-            "subject": {
-                "git_blob_sha": "8583b63571b5bfe86a473dcba1a716b98821cd5c"
-            },
-            "producer_id": "producer-a",
-            "independent_verifier": {
-                "independent_verifier_id": "verifier-b"
-            },
             "replay": {
-                "total_tests_passed": 31,
-                "total_tests_failed": 0,
+                "kernel_equivalence": {
+                    "tests_passed": 7,
+                    "tests_failed": 0,
+                },
+                "router_v6": {
+                    "tests_passed": 10,
+                    "tests_failed": 0,
+                    "general_controller_import_absent": True,
+                },
+                "real_integration": {
+                    "cases_passed": 2,
+                },
             },
-            "proves": [
-                "UNBOUND_TOP_LEVEL_TARGET_INSTANCE_CANNOT_ENTER_V5",
-                "CALLER_CANNOT_SELF_ATTEST_COMPILE_TARGET_SPEC_AND_HARD_CONSTRAINTS",
-                "TARGET_INSTANCE_IS_EXTRACTED_ONLY_FROM_EXACT_DECISION_PAYLOAD_BOUND_TO_EXACT_RAW_GOAL",
-                "GOAL_OR_DECISION_PAYLOAD_TAMPER_BREAKS_CONTENT_BINDING_BEFORE_V4",
-                "PRODUCER_AND_VERIFIER_IDENTITIES_MUST_BE_DISTINCT",
+            "proved": [
+                "MINIMAL_KERNEL_MATCHES_LEGACY_GOAL_BINDING_AUTHORITY_OUTPUTS_ON_VALID_OPEN_AND_FAIL_CLOSED_CASES",
+                "V6_REMOVES_GENERAL_ADEQUATE_DECISION_CONTROLLER_FROM_ITS_DIRECT_IMPORT_GRAPH",
+                "AUTHENTICATED_RAW_GOAL_TO_TARGET_HANDOFF_BEHAVIOR_IS_PRESERVED",
+                "REAL_CLEAN_AND_BLANK_DOCX_V4_V3_BEHAVIOR_IS_PRESERVED",
             ],
             "quality_authority": False,
             "terminal_authority": False,
@@ -101,59 +120,83 @@ def reader(table):
 
 
 class R1RootSubjectBindingVerifyV2Tests(unittest.TestCase):
-    def test_valid_stronger_binding_grants_only_root_binding_authority(self):
-        table=docs()
+    def test_final_v6_binding_grants_only_root_binding_authority(self):
+        table = docs()
         with patch.object(v, "_read", side_effect=reader(table)):
-            out=v.verify()
+            out = v.verify()
         self.assertTrue(out["pass"], out)
+        self.assertEqual(
+            out["status"],
+            "PASS__R1_ROOT_BOUND_TO_FINAL_DEPENDENCY_CLOSED_V6_SUBJECT",
+        )
         self.assertTrue(out["root_subject_binding_authority"])
         self.assertFalse(out["global_subject_identity_authority"])
-        self.assertFalse(out["semantic_truth_authority"])
         self.assertFalse(out["quality_authority"])
         self.assertFalse(out["terminal_authority"])
 
     def test_binding_cannot_self_authorize(self):
-        table=docs()
-        table[v.BINDING_PATH]["root_subject_binding_authority"]=True
+        table = docs()
+        table[v.BINDING_PATH]["root_subject_binding_authority"] = True
         with patch.object(v, "_read", side_effect=reader(table)):
-            out=v.verify()
-        self.assertEqual(out["reason"],"BINDING_SELF_AUTHORITY_FORBIDDEN:root_subject_binding_authority")
+            out = v.verify()
+        self.assertEqual(
+            out["reason"],
+            "BINDING_SELF_AUTHORITY_FORBIDDEN:root_subject_binding_authority",
+        )
 
-    def test_missing_v5_material_fails_closed(self):
-        table=docs()
-        table[v.SUBJECT_PATH]["system_material"]["components"]=[
-            row for row in table[v.SUBJECT_PATH]["system_material"]["components"]
-            if row["path"]!="canonical/runtime/professional_quality_p1_router_v5.py"
+    def test_missing_v6_kernel_material_fails_closed(self):
+        table = docs()
+        table[v.SUBJECT_PATH]["system_material"]["components"] = [
+            row
+            for row in table[v.SUBJECT_PATH]["system_material"]["components"]
+            if row["path"]
+            != "canonical/runtime/goal_to_decision_binding_authority_v1.py"
         ]
         with patch.object(v, "_read", side_effect=reader(table)):
-            out=v.verify()
-        self.assertEqual(out["reason"],"R1_LOAD_BEARING_MATERIAL_NOT_IN_SUBJECT")
+            out = v.verify()
+        self.assertEqual(
+            out["reason"],
+            "R1_LOAD_BEARING_MATERIAL_NOT_IN_SUBJECT",
+        )
 
-    def test_weak_v5_replay_fails_closed(self):
-        table=docs()
-        table[v.EXPECTED_REFS["authenticated_target_handoff"][0]]["replay"]["total_tests_passed"]=30
+    def test_incomplete_dependency_closure_fails_closed(self):
+        table = docs()
+        table[v.EXPECTED_REFS["dependency_closure"][0]][
+            "replay"
+        ]["missing_subject_component_count"] = 1
         with patch.object(v, "_read", side_effect=reader(table)):
-            out=v.verify()
-        self.assertEqual(out["reason"],"V5_HANDOFF_REPLAY_INSUFFICIENT")
+            out = v.verify()
+        self.assertEqual(out["reason"], "DEPENDENCY_CLOSURE_INSUFFICIENT")
 
-    def test_same_handoff_producer_and_verifier_fails_closed(self):
-        table=docs()
-        handoff=table[v.EXPECTED_REFS["authenticated_target_handoff"][0]]
-        handoff["producer_id"]="same"
-        handoff["independent_verifier"]["independent_verifier_id"]="same"
+    def test_weak_v6_replay_fails_closed(self):
+        table = docs()
+        table[v.EXPECTED_REFS["authenticated_target_handoff"][0]][
+            "replay"
+        ]["router_v6"]["tests_passed"] = 9
         with patch.object(v, "_read", side_effect=reader(table)):
-            out=v.verify()
-        self.assertEqual(out["reason"],"V5_HANDOFF_INDEPENDENCE_INVALID")
+            out = v.verify()
+        self.assertEqual(out["reason"], "V6_HANDOFF_REPLAY_INSUFFICIENT")
+
+    def test_missing_v6_proof_fails_closed(self):
+        table = docs()
+        table[v.EXPECTED_REFS["authenticated_target_handoff"][0]][
+            "proved"
+        ].remove(
+            "AUTHENTICATED_RAW_GOAL_TO_TARGET_HANDOFF_BEHAVIOR_IS_PRESERVED"
+        )
+        with patch.object(v, "_read", side_effect=reader(table)):
+            out = v.verify()
+        self.assertEqual(out["reason"], "V6_HANDOFF_PROOF_SET_INSUFFICIENT")
 
     def test_missing_anti_substitution_guarantee_fails_closed(self):
-        table=docs()
+        table = docs()
         table[v.BINDING_PATH]["binding_scope"]["guarantees"].remove(
             "UNBOUND_TOP_LEVEL_TARGET_INSTANCE_SUBSTITUTION_FAILS_CLOSED"
         )
         with patch.object(v, "_read", side_effect=reader(table)):
-            out=v.verify()
-        self.assertEqual(out["reason"],"BINDING_GUARANTEES_INSUFFICIENT")
+            out = v.verify()
+        self.assertEqual(out["reason"], "BINDING_GUARANTEES_INSUFFICIENT")
 
 
-if __name__=="__main__":
+if __name__ == "__main__":
     unittest.main()
