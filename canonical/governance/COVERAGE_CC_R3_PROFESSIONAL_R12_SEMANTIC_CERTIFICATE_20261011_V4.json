@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_CC_R3_PROFESSIONAL_R12_SEMANTIC_CERTIFICATE_V4",
+  "date": "2026-10-11",
+  "status": "CANDIDATE_CC_R3_STABLE_R12__INDEPENDENTLY_VERIFIED_UNIVERSAL_POSITIVE_GATE_FORMAL_SCOPE_PROOF__ZERO_PROPERTY_OR_TERMINAL_CREDIT",
+  "root_id": "CC_R3_TERMINAL_CLOSURE_V1",
+  "claim_id": "11870f850b46bcfcc31094f764fc4f45c911aaac413979ceb62679ff19a53162",
+  "active_claim": {
+    "path": "canonical/governance/COVERAGE_COMPLETENESS_FROZEN_CLAIM_PROFESSIONAL_R12_SEMANTIC_20261010_V2.json",
+    "git_blob_sha": "7b26ddba501358d42d6fa342efd27d389bb30654"
+  },
+  "r12_reconciliation": {
+    "path": "canonical/governance/PROFESSIONAL_R12_SEMANTIC_CC_R3_TRUTH_RECONCILIATION_20261010_V3.json",
+    "git_blob_sha": "56a5f85e6133661dd7afbc8fc5041ad799f0736f"
+  },
+  "stable_c8_verification": {
+    "path": "canonical/verification/PROFESSIONAL_R12_STABLE_C8_NONVACUITY_VERIFY_20261010_V1.json",
+    "git_blob_sha": "6ed0f5d253d0fc734af2998e86ad72f73fe8c073"
+  },
+  "universal_totality_runtime": {
+    "path": "canonical/runtime/professional_r12_universal_positive_gate_totality_verified_v1.py",
+    "git_blob_sha": "6e71ad867307b8d905dd998183562e2e7c3cf52a"
+  },
+  "universal_totality_independent_verification": {
+    "path": "canonical/verification/PROFESSIONAL_R12_UNIVERSAL_POSITIVE_GATE_CC_R3_COMPOSITION_INDEPENDENT_VERIFY_20261011_V1.json",
+    "git_blob_sha": "bb9eaa24afa423c638e4cd3e619d843ee9e7e042"
+  },
+  "theorem": {
+    "proof_basis": "UNIVERSAL_FORMAL_SCOPE_PROOF",
+    "statement": "FOR_EVERY_ADMISSIBLE_EXECUTION_IN_THE_EXACT_WHOLE_R12_CLAIM_DOMAIN__IF_THE_SYSTEM_RETURNS_A_POSITIVE_CERTIFICATE_THEN_EXECUTABLE_EXACT_CLAIM_R12_TOTALITY_SEMANTICS_MUST_HAVE_PASSED__NONPOSITIVE_EXECUTIONS_CANNOT_BE_FALSE_POSITIVE_CERTIFICATIONS__STABLE_C8_SUPPLIES_NONVACUITY__THEREFORE_ALL_ROOT_RELEVANT_MATERIAL_DEFEATERS_ARE_RESOLVED_OR_PROVED_DECISION_NULL_BEFORE_POSITIVE_CERTIFICATION",
+    "material_defeater_totality_proved": true,
+    "stable_c8_nonvacuity_proved": true,
+    "cc_r3_terminal_closure_proved": true,
+    "finite_catalog_used": false,
+    "cross_subject_property_authority_transport": false
+  },
+  "semantic_truth_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "accounting": {
+    "fresh_reality_units_consumed": 0,
+    "incremental_spend_usd": 0,
+    "property_truth_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_R12_SEMANTIC_PROPERTY_TRUTH_FROM_CC_R3_CERTIFICATE_ALONE",
+    "NO_R4_PROOF_REALIZATION_AUTHORITY",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ]
+}
