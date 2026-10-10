@@ -1,0 +1,273 @@
+{
+  "schema": "PROJECT_BRAIN_ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_V2",
+  "date": "2026-10-10",
+  "canonical_base_commit": "8bbab859c4bc3116b2f7112bfddd22f4b4121121",
+  "status": "SCOPE_COMPLETE_13_ROW_ROUTE_CLASSIFICATION__FINANCE_INDEX_CAUSAL_RECLASSIFICATION_BOUND__CC_R3_NOT_PROVED__TWO_SHARED_PROOF_GAPS__ZERO_CREDIT",
+  "claim": {
+    "path": "canonical/governance/ESCAPE_PROGRESS_TOTALITY_FROZEN_13_CLAIM_20261010_V3.json",
+    "git_blob_sha": "e534dfb56e8e3cde66a260de299627662965e079",
+    "claim_id": "d8dec5e454c4cbae50de7a0b23f0cf220e4caeb1c1b620e40dd53c267da1ae28"
+  },
+  "cc_r3_target": "FOR_EVERY_ACTUALLY_REACHED_NONTERMINAL_STATE_IN_SCOPE__TERMINALIZE_WITH_ONE_AUTHENTICATED_SAFE_ADEQUATE_COMMON_POLICY_OR_STRICTLY_SHRINK_THE_FINITE_POLICY_DECISION_REGION_SET_WITH_ONE_AUTHENTICATED_SAFE_TRUTH_PRESERVING_COMPLETE_FINITE_DISCRIMINATOR__OR_PROVE_AN_AUTHENTICATED_ACQUIRABLE_REPAIR_RETURNS_TO_ONE_OF_THOSE_CASES",
+  "shared_gap_collapse": [
+    {
+      "id": "GAP_A_ACQUISITION_TOTALITY",
+      "obligation_count": 10,
+      "statement": "FOR_EVERY_INFORMATION_DEPENDENT_ROW__PROVE_ONE_AUTHENTICATED_CURRENTLY_ACQUIRABLE_DISTINGUISHING_OWNER_PRIVATE_TASK_CONTRACT_SCORE_COMPONENT_BOUND_OR_EQUIVALENT_STRONGER_PROOF_ROUTE__WITH_FINITE_OUTCOMES_AND_STRICT_REGION_SHRINK"
+    },
+    {
+      "id": "GAP_B_INTERNAL_ROUTE_STRICT_PROGRESS",
+      "obligation_count": 3,
+      "statement": "FOR_EVERY_CURRENTLY_INTERNAL_ROUTE_ROW__BIND_ONE_EXECUTABLE_VERIFIED_ACTION_TO_A_FINITE_PROGRESS_MEASURE_AND_PROVE_EVERY_ALLOWED_OUTCOME_TERMINALIZES_OR_STRICTLY_DECREASES_THAT_MEASURE"
+    }
+  ],
+  "rows": [
+    {
+      "obligation_id": "CODING_TB4_GE_66_4",
+      "route_group": "GAP_A_ACQUISITION_TOTALITY",
+      "route_class": "NEW_DISTINGUISHING_INFORMATION_OR_SCOPE_COMPLETE_CROSS_SLOT_PREMISE",
+      "evidence": [
+        "canonical/governance/TB4_CURRENT_RESEARCH_FRONTIER_20261008_V1.json",
+        "24c68a809cf356f1d37aabbeebff8f2a8fe55e91"
+      ],
+      "required_strings": [
+        "ACTIVE_CURRENT_FRONTIER__CURRENT_BOUND_INTERNAL_THRESHOLD_DERIVATION_EXHAUSTED_BY_PASS_FAIL_COUNTERMODELS__NEW_DISTINGUISHING_TB4_INFORMATION_REQUIRED__ZERO_NEW_CASES__ZERO_CREDIT",
+        "information_theoretic_indistinguishability_proved",
+        "ACQUIRE_NEW_DISTINGUISHING_INFORMATION_FOR_TB4"
+      ],
+      "current_route_available": "EVENT_OR_NEW_PREMISE_REQUIRED",
+      "strict_progress_witness_bound": false,
+      "externality_proved": false
+    },
+    {
+      "obligation_id": "CODING_FRONTIERCODE_GE_54_4",
+      "route_group": "GAP_A_ACQUISITION_TOTALITY",
+      "route_class": "OWNER_INFORMATION_WAKE_OR_STRONGER_SCOPE_COMPLETE_PROOF",
+      "evidence": [
+        "canonical/action_intents/FRONTIERCODE_OWNER_INTAKE_ROUTING_INQUIRY_20261009_V1.json",
+        "e8f3b3d2aa334e002e4258c10b95ec15f569d90b"
+      ],
+      "required_strings": [
+        "OWNER_RESPONSE_PENDING",
+        "INTERNAL_UNSOLVED__PENDING_OWNER_INFORMATION",
+        "execution_authority"
+      ],
+      "current_route_available": "PENDING_OWNER_INFORMATION",
+      "strict_progress_witness_bound": false,
+      "externality_proved": false
+    },
+    {
+      "obligation_id": "CODING_CURSORBENCH_GE_57_8",
+      "route_group": "GAP_A_ACQUISITION_TOTALITY",
+      "route_class": "EVENT_DRIVEN_TARGET_OWNER_GRADER_OR_NEW_CONSTRUCTIVE_PARENT",
+      "evidence": [
+        "canonical/governance/CURSORBENCH_CURRENT_INFORMATION_BOUNDARY_WAIT_STATE_RECONCILIATION_20261010_V1.json",
+        "4f1df11b30d9b69090c31e234449975eb7cdfd89"
+      ],
+      "required_strings": [
+        "CURRENT_CURSORBENCH_INTERNAL_INFORMATION_MOVES_EXHAUSTED__EVENT_DRIVEN_REACTIVATION__ZERO_CREDIT",
+        "DORMANT_INFORMATION_BOUNDARY",
+        "reactivation_triggers"
+      ],
+      "current_route_available": "EVENT_DRIVEN_DORMANT",
+      "strict_progress_witness_bound": false,
+      "externality_proved": false
+    },
+    {
+      "obligation_id": "PROWORK_GDPVAL_GE_1846",
+      "route_group": "GAP_B_INTERNAL_ROUTE_STRICT_PROGRESS",
+      "route_class": "INTERNAL_PARTIAL_MECHANICAL_VERIFIER_ROUTE",
+      "evidence": [
+        "canonical/governance/GDPVAL_FIRST_RESIDUAL_MECHANICAL_ROUTE_EXPANSION_20261009_V2.json",
+        "c38ca6ee010a63d6dc218aa2c9d85831e39441ed"
+      ],
+      "required_strings": [
+        "VERIFIED_ROUTE_AVAILABILITY_EXPANSION__92_OF_220_CURRENT_FIRST_RESIDUALS_MACHINE_COMPILABLE__64_NEW__ZERO_ACCEPTANCE_CREDIT",
+        "THIS_IS_ROUTE_AVAILABILITY_NOT_CRITERION_SATISFACTION",
+        "remaining_unresolved_first_residuals"
+      ],
+      "current_route_available": "INTERNAL_PARTIAL_ROUTE_AVAILABLE",
+      "strict_progress_witness_bound": false,
+      "externality_proved": false
+    },
+    {
+      "obligation_id": "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "route_group": "GAP_A_ACQUISITION_TOTALITY",
+      "route_class": "MATCHED_SCORE_OR_SCOPE_COMPLETE_PROFESSIONAL_QUALITY_PREMISE",
+      "evidence": [
+        "canonical/governance/AA_BRIEFCASE_CURRENT_EVIDENCE_INDISTINGUISHABILITY_CUT_20261008_V1.json",
+        "74d891755dd6ac095741c90ed049d7b80820bdc3"
+      ],
+      "required_strings": [
+        "CURRENT_BOUND_AA_EVIDENCE_PARITY_INDETERMINATE__NO_BRAIN_SCORE_OR_FULL_SCOPE_CERTIFICATE__NEW_DISTINGUISHING_INFORMATION_REQUIRED__ZERO_CREDIT",
+        "information_theoretic_indistinguishability_proved",
+        "required_new_information_class"
+      ],
+      "current_route_available": "NEW_DISTINGUISHING_INFORMATION_REQUIRED",
+      "strict_progress_witness_bound": false,
+      "externality_proved": false
+    },
+    {
+      "obligation_id": "AUTOMATIONBENCH_GE_40",
+      "route_group": "GAP_A_ACQUISITION_TOTALITY",
+      "route_class": "PRIVATE_TASK_SCOPE_OR_EXACT_RESULT_OR_STRONGER_CERTIFICATE",
+      "evidence": [
+        "canonical/governance/AUTOMATIONBENCH_PRIVATE_TASK_CONTRACT_SCOPE_FALSIFICATION_20261006_V1.json",
+        "d87eaf579f93a7829c33aa7ee07ddcde3e59a0a6"
+      ],
+      "required_strings": [
+        "CURRENT_FINITE_GRAMMAR_SUPERSET_SHORTCUT_KILLED_AT_HIDDEN_TASK_CONTRACT_LAYER__AUTOMATIONBENCH_ATOM_REMAINS_OPEN__ZERO_CREDIT",
+        "EXACT_PRIVATE_RESULT_ROUTE",
+        "wake_conditions"
+      ],
+      "current_route_available": "PENDING_PRIVATE_SCOPE_OR_STRONGER_PROOF",
+      "strict_progress_witness_bound": false,
+      "externality_proved": false
+    },
+    {
+      "obligation_id": "HLE_TOOLS_GE_67_7",
+      "route_group": "GAP_A_ACQUISITION_TOTALITY",
+      "route_class": "GATED_POPULATION_ACCESS_AND_COMPARABLE_GRADER_OR_STRONGER_SCORER",
+      "evidence": [
+        "canonical/governance/ROOT2_FIXED_BAR_ROUTE_INVENTORY_V1.json",
+        "dfa7a46cd0131443750dd57f42d06e4ed2447c2a"
+      ],
+      "required_strings": [
+        "HLE_TOOLS_GE_67_7",
+        "CAIS_HLE_AUTO_GATE_ACCESS",
+        "BIND_MATERIAL_CAIS_HLE_FULL_2500_AUTO_GATE_ACCOUNT_ACCESS_WITHOUT_CONTAMINATION"
+      ],
+      "current_route_available": "PENDING_GATED_ACCESS_AND_SCORER_RELATION",
+      "strict_progress_witness_bound": false,
+      "externality_proved": false
+    },
+    {
+      "obligation_id": "TB_SCIENCE_GE_58_7",
+      "route_group": "GAP_B_INTERNAL_ROUTE_STRICT_PROGRESS",
+      "route_class": "INTERNAL_PLANNER_CONTROLLER_REPAIR_BEFORE_NEXT_IRREVERSIBLE_TRIAL",
+      "evidence": [
+        "canonical/governance/CURRENT_TB_SCIENCE_EXECUTION.json",
+        "999db25cb0a339eac146130fac884e879ab1c88f"
+      ],
+      "required_strings": [
+        "RANK19_EXECUTION_FROZEN_PENDING_ZERO_EXPOSURE_PLANNER_REPAIR",
+        "PLANNER_CONTROLLER_FAILURE_BEFORE_FIRST_ACTION",
+        "ZERO_EXPOSURE_DIAGNOSE_AND_VERIFY_GENERIC_SCIENCE_PLANNER_PRE_ACTION_FAILURE"
+      ],
+      "current_route_available": "INTERNAL_REPAIR_AVAILABLE",
+      "strict_progress_witness_bound": false,
+      "externality_proved": false
+    },
+    {
+      "obligation_id": "CHARTOGRAPHY_TOOLS_GE_89",
+      "route_group": "GAP_B_INTERNAL_ROUTE_STRICT_PROGRESS",
+      "route_class": "INTERNAL_ROUTE_MATERIALIZATION_QUALIFICATION_JUDGE_AND_THRESHOLD_CERTIFICATE",
+      "evidence": [
+        "canonical/governance/CHARTOGRAPHY_QWEN3_VL4B_VISION_ACQUISITION_ACTIVATION_V1.json",
+        "d5b46fc2f784a206cda9bb7c6f1ee951300eccc0"
+      ],
+      "required_strings": [
+        "ACTIVE__PUBLIC_SOURCE_ROUTE_EXISTENCE_VERIFIED__SCHEDULING_ONLY__ZERO_CREDIT",
+        "EXACT_EXECUTION_SUBJECT_FIT_AND_RESOURCE_PREFLIGHT",
+        "CHARTOGRAPHY_THRESHOLD_CERTIFICATE_GE_89"
+      ],
+      "current_route_available": "INTERNAL_PARTIAL_ROUTE_AVAILABLE",
+      "strict_progress_witness_bound": false,
+      "externality_proved": false
+    },
+    {
+      "obligation_id": "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "route_group": "GAP_A_ACQUISITION_TOTALITY",
+      "route_class": "ACQUIRE_PINNED_108_TASK_SEMANTICS_THEN_INTERNAL_SCOPE_AUDIT",
+      "evidence": [
+        "canonical/governance/OSWORLD_V21_COMPUTER_BROWSER_SCOPE_BLOCKER_REDUCTION_20261005_V1.json",
+        "0c00d17e784924be063b18b9f82f94b130ea8e71"
+      ],
+      "required_strings": [
+        "EXACT_PINNED_TASK_UNION_SEMANTICS_NOT_AVAILABLE_IN_CURRENT_CONNECTED_SOURCE",
+        "TASK_UNION_SEMANTIC_COVERAGE_MATRIX_OVER_THE_EXACT_PINNED_108_TASKS",
+        "no_terminal_execution_required"
+      ],
+      "current_route_available": "PENDING_SOURCE_ACQUISITION",
+      "strict_progress_witness_bound": false,
+      "externality_proved": false
+    },
+    {
+      "obligation_id": "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "route_group": "GAP_A_ACQUISITION_TOTALITY",
+      "route_class": "NEW_NORMALIZED_COMPONENT_LOWER_BOUND_OR_OWNER_RECEIPT_OR_VERIFIED_STRONGER_PROOF",
+      "evidence": [
+        "canonical/governance/ESCAPE_PROGRESS_FINANCE_INDEX_CAUSAL_RECLASSIFICATION_20261010_V1.json",
+        "ea256418ec1f8048c7566c6ecc74206d9d1ac529"
+      ],
+      "required_strings": [
+        "VERIFIED_CAUSAL_RECLASSIFICATION__FINANCE_INDEX_IS_WAKE_GATED_ACQUISITION_NOT_CURRENT_INTERNAL_STRICT_PROGRESS__ZERO_CREDIT",
+        "WAKE_GATED_ON_NEW_DECISION_CHANGING_PREMISE",
+        "AN_INTERNAL_ACTION_WITH_UNCHANGED_PREMISES_CANNOT_STRICTLY_PROGRESS"
+      ],
+      "current_route_available": "WAKE_GATED_ON_NEW_DECISION_CHANGING_PREMISE",
+      "strict_progress_witness_bound": false,
+      "externality_proved": false
+    },
+    {
+      "obligation_id": "FINANCE_AGENT_V2_GE_58_59",
+      "route_group": "GAP_A_ACQUISITION_TOTALITY",
+      "route_class": "EXACT_RESULT_PRIVATE_SCOPE_BIND_OR_STRONGER_SCOPE_COMPLETE_CERTIFICATE",
+      "evidence": [
+        "canonical/governance/FINANCE_ACCEPTANCE_ROUTE_SPLIT_20261009_V1.json",
+        "09ff2c5368fc9643fd1f1e64f37a1687a3f338f2"
+      ],
+      "required_strings": [
+        "DORMANT_ON_CURRENT_PUBLIC_SCOPE_CUT",
+        "EXACT_OFFICIAL_RESULT_RECEIPT",
+        "FIRST_PARTY_PRIVATE_TASK_CONTRACT_SCOPE_BOUND_WITHOUT_CASE_EXPOSURE"
+      ],
+      "current_route_available": "DORMANT_PENDING_PRIVATE_SCOPE_OR_RESULT",
+      "strict_progress_witness_bound": false,
+      "externality_proved": false
+    },
+    {
+      "obligation_id": "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "route_group": "GAP_A_ACQUISITION_TOTALITY",
+      "route_class": "TASK_CONTRACT_NOISE_AND_FINITE_COVERAGE_INFORMATION_PLUS_INTERNAL_EXACT_KERNEL",
+      "evidence": [
+        "canonical/governance/MYSTERYMECHANISM_EXACT_LINEAR_PARAMETER_POLYTOPE_20261008_V1.json",
+        "093a778d1e72dffe40bd619eb2444e40b787969e"
+      ],
+      "required_strings": [
+        "SOUND_OBSERVATION_NOISE_INTERVALS_FROM_A_BOUND TASK CONTRACT",
+        "FINITE_FAMILY_OR_CELL_COVERAGE_FOR_THE_CLAIMED SUBREGION",
+        "NO CLAIM PUBLIC MYSTERYMECHANISM NOISE HAS A KNOWN FINITE BOUND"
+      ],
+      "current_route_available": "MIXED_INTERNAL_KERNEL_AND_INFORMATION_ACQUISITION",
+      "strict_progress_witness_bound": false,
+      "externality_proved": false
+    }
+  ],
+  "derived_truth": {
+    "row_count": 13,
+    "gap_a_count": 10,
+    "gap_b_count": 3,
+    "externality_proved_count": 0,
+    "strict_progress_witness_bound_count": 0,
+    "cc_r3_proved": false,
+    "next_load_bearing_object": "PROVE_OR_REFUTE_CURRENT_GAP_A_ACQUISITION_TOTALITY_10_AND_GAP_B_INTERNAL_ROUTE_STRICT_PROGRESS_3__DO_NOT_BUILD_THIRTEEN_SEPARATE_SOLVERS"
+  },
+  "hard_nonclaims": [
+    "NO_CC_R3_CERTIFICATE",
+    "NO_CC_R1_OR_CC_R2_CERTIFICATE",
+    "NO_ESCAPE_PROGRESS_TOTALITY",
+    "NO_INFORMATION_THEORETIC_EXTERNALITY_CLASSIFICATION",
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "predecessor": {
+    "path": "canonical/governance/ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_20261010_V1.json",
+    "git_blob_sha": "4ebe25308bf9816d4eeaea415b37b9ec152604c0"
+  }
+}
