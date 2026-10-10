@@ -355,6 +355,14 @@ class GeneralAdequateDecisionControllerV1Tests(unittest.TestCase):
         loop["next_required_edge"] = (
             "REGCAP_LOSS_CUSHION_MINIMUM_POLICY_CHANGING_INFORMATION"
         )
+        template = {
+            "schema": "PROJECT_BRAIN_SEMANTIC_TRUTH_MATERIALIZATION_TEMPLATE_V1",
+            "truth_kind": "REGCAP_LOSS_CUSHION_GROUNDING",
+            "claim_kind": "RELATIVE_RIVAL_SELECTION",
+            "target_concept_id": "REGCAP::CCOB",
+            "provider_semantic_truth_authority": False,
+        }
+        loop["checker_materialization_template"] = template
         with patch.object(controller, "compile_contract", return_value=self._raw_contract()), \
              patch.object(controller, "_authenticate_goal_binding", return_value=self._goal_binding_pass()), \
              patch.object(controller, "evaluate_p3", return_value=opened):
@@ -368,6 +376,7 @@ class GeneralAdequateDecisionControllerV1Tests(unittest.TestCase):
             packet["truth_next_required_edge"],
             "REGCAP_LOSS_CUSHION_MINIMUM_POLICY_CHANGING_INFORMATION",
         )
+        self.assertEqual(packet["checker_materialization_template"], template)
         self.assertFalse(packet["information_authority"])
         self.assertFalse(packet["semantic_truth_authority"])
         self.assertFalse(out["terminal_authority"])
