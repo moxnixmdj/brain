@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_PROFESSIONAL_QUALITY_RECONCILIATION_CONNECTOR_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__AUTHENTICATED_GITHUB_EXACT_BRANCH_BYTES__18_OF_18_CURRENTNESS_CHECKS__ZERO_CREDIT",
+  "branch": "successor/currentness-r8-professional-reconcile-20261010-v1",
+  "method": "AUTHENTICATED_GITHUB_CONNECTOR_EXACT_FILE_BYTES__DERIVE_SCOPE_AND_LEAF_COUNTS_FROM_CANONICAL_MANIFEST_AND_SCOPED_REGISTRY__COMPARE_MUTABLE_CURRENT_POINTERS__NO_POINTER_SELF_ATTESTATION",
+  "exact_blobs": {
+    "leaf_manifest": "a7cad32c9fd969ff2c3857bb924c7bd746237ec2",
+    "scoped_registry": "e0868ea39f21685af35c90f4233067f9edc3644c",
+    "current_professional_execution": "e6f21926e725938a36177c1a71e3560724fc9885",
+    "current_assurance_compiler": "28efc3dc7fadf6a582ba44b206e442a36157248f",
+    "residual_reuse_classifier": "7bea861467c2dcf2a934201ad99405e08ad42899",
+    "r8_semantic_verification": "e47503a3b1f61bbb9effa04edccbf158b8b28e96",
+    "r8_semantic_scope": "5bdcf0f7f46daf9abc2cca90524e702c9b601007"
+  },
+  "derived_state": {
+    "admitted_scoped_capability_count": 16,
+    "partial_coverage_leaf_count": 19,
+    "semantic_partial_coverage_leaf_count": 7,
+    "execution_partial_coverage_leaf_count": 12,
+    "no_scoped_evidence_leaf_count": 5,
+    "verified_global_leaf_count": 0,
+    "open_global_leaf_count": 24,
+    "no_scoped_evidence_leaf_ids": [
+      "PQ::R2_CANDIDATE_SEARCH::SEMANTIC",
+      "PQ::R3_REALIZATION_OBSERVATION::SEMANTIC",
+      "PQ::R4_MEASUREMENT_CONSTRUCT::SEMANTIC",
+      "PQ::R5_EVALUATOR_REFERENCE::SEMANTIC",
+      "PQ::R9_TEMPORAL_DEPLOYMENT::SEMANTIC"
+    ]
+  },
+  "checks": {
+    "manifest_has_24_unique_leaves": "PASS",
+    "registry_has_16_entries": "PASS",
+    "partial_leaf_count_19": "PASS",
+    "semantic_partial_count_7": "PASS",
+    "execution_partial_count_12": "PASS",
+    "no_scoped_evidence_count_5": "PASS",
+    "r8_semantic_leaf_present": "PASS",
+    "current_professional_scope_count_matches": "PASS",
+    "current_professional_leaf_projection_matches": "PASS",
+    "current_assurance_scope_count_matches": "PASS",
+    "current_assurance_leaf_projection_matches": "PASS",
+    "current_professional_no_live_default_promotion": "PASS",
+    "current_assurance_no_live_default_promotion": "PASS",
+    "r8_independent_receipt_pass": "PASS",
+    "r8_independent_receipt_6_of_6": "PASS",
+    "r8_scope_remains_bounded": "PASS",
+    "residual_classifier_uses_19_partial_frontier": "PASS",
+    "residual_classifier_new_primitive_not_established": "PASS"
+  },
+  "hard_nonclaims": [
+    "NO_GLOBAL_PROFESSIONAL_LEAF_CLOSURE",
+    "NO_GLOBAL_PROFESSIONAL_ROOT_CLOSURE",
+    "NO_DOMAIN_SEMANTIC_CLOSURE",
+    "NO_DOMAIN_EXECUTION_CLOSURE",
+    "NO_LIVE_DEFAULT_PROMOTION",
+    "NO_QUALITY_ACCEPTANCE_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
