@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R8_POPULATION_CONTEXT_SCOPE_V1",
+  "date": "2026-10-10",
+  "status": "ACTIVE_SCOPED_FROZEN_512_CASE_DELEGATION_POPULATION_BINDING__ZERO_GLOBAL_LEAF_CREDIT",
+  "root_id": "R8_POPULATION_CONTEXT_OPERATOR",
+  "claim_kind": "FROZEN_512_CASE_PRE_BEACON_DELEGATION_POPULATION_BINDING",
+  "exact_components": {
+    "runtime": {
+      "path": "canonical/runtime/delegation_terminal_population_binding_v1.py",
+      "git_blob_sha": "fae6d0bf2efbcb9b8fe2a2a627900889c5ec6cab"
+    },
+    "source_receipt": {
+      "path": "canonical/verification/DELEGATION_TERMINAL_POPULATION_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "3965db684d7104c5829ce1fcfa8ee08d2cd42cfc"
+    }
+  },
+  "guarantees": [
+    "FROZEN_BINDING_MANIFEST_INVARIANTS_PASS",
+    "FRESH_512_CASE_PRE_BEACON_POPULATION_PASSES",
+    "ALL_SIX_FROZEN_DELEGATION_CASE_CLASSES_PRESENT",
+    "ZERO_CASE_REPLACEMENT",
+    "ZERO_ADAPTIVE_CASE_SELECTION",
+    "ZERO_TUNING_REPLAY"
+  ],
+  "limitations": [
+    "PREFLIGHT_ONLY__NO_POST_FREEZE_TERMINAL_RESULT",
+    "NO_CONSTITUENCY_SUPPORT_CLAIM",
+    "NO_PRESENTER_OR_OPERATOR_GENERALIZATION",
+    "NO_MEASUREMENT_INVARIANCE_CLAIM",
+    "NO_SOCIAL_INFLUENCE_OR_REACTIVITY_CLOSURE",
+    "NO_GLOBAL_R8_SEMANTIC_OR_EXECUTION_LEAF_CLOSURE",
+    "NO_GLOBAL_R8_ROOT_CLOSURE"
+  ],
+  "execution_authority": false,
+  "global_leaf_closure": false,
+  "global_root_closure": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
