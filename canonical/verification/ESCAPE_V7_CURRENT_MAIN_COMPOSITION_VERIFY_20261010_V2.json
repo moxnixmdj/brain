@@ -1,0 +1,98 @@
+{
+  "schema": "PROJECT_BRAIN_ESCAPE_V7_CURRENT_MAIN_COMPOSITION_VERIFY_20261010_V2",
+  "date": "2026-10-10",
+  "status": "PASS__LATEST_O11_Q2_CLASSIFIER_COMPOSED_WITH_V7_DYNAMIC_AUDIT_CURRENTNESS__23_OF_23_PLUS_6_OF_6__ZERO_CREDIT",
+  "branch": "repair/escape-v3-dynamic-current-binding-20261010-v4",
+  "verified_base_main": "392dcf5bfc8634aab1032b713715f5f495be8151",
+  "exact_subjects": {
+    "audit_runtime": {
+      "path": "canonical/runtime/escape_progress_shared_gap_audit_v3.py",
+      "git_blob_sha": "e556880aa216673e0e316e11fc6f4ab25d644ce6"
+    },
+    "audit_tests": {
+      "path": "canonical/tests/test_escape_progress_shared_gap_audit_v3.py",
+      "git_blob_sha": "f89cfebb6ffd5d2ff09ac37ba6f2b38e7aa718ed"
+    },
+    "oq_reconciliation_tests": {
+      "path": "canonical/tests/test_current_residual_oq_adapter_reconciliation_v1.py",
+      "git_blob_sha": "d39bf49964753cac415cf6f135b78b8a512b17bc"
+    },
+    "oq_frontier": {
+      "path": "canonical/governance/CURRENT_ESCAPE_OQ_FRONTIER_REDUCTION_20261010_V1.json",
+      "git_blob_sha": "e355f3c168429c96ff0dfa142428ada6c97c47e9"
+    },
+    "predecessor_binding": {
+      "path": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V6.json",
+      "git_blob_sha": "a6fe5eda7b596d5a24cf75bc9b046bf53f4fe7be"
+    },
+    "adapter_activation": {
+      "path": "canonical/governance/ESCAPE_GAP_A_POLICY_COVER_ADAPTER_ACTIVATION_20261010_V1.json",
+      "git_blob_sha": "7eaa5c0a403cfd9e6d131cecdc7cb9a243843872"
+    },
+    "adapter_runtime": {
+      "path": "canonical/runtime/escape_gap_a_policy_cover_adapter_v1.py",
+      "git_blob_sha": "19b0bdf00eb9b8d76cbf7f1a615e1ce6e89ffbf8"
+    },
+    "adapter_behavioral_verification": {
+      "path": "canonical/verification/ESCAPE_GAP_A_POLICY_COVER_ADAPTER_VERIFY_20261010_V1.json",
+      "git_blob_sha": "4c1ad0d785d4a4d354c01a4d09e412d294304195"
+    },
+    "adapter_activation_verification": {
+      "path": "canonical/verification/ESCAPE_GAP_A_POLICY_COVER_ADAPTER_ACTIVATION_VERIFY_20261010_V1.json",
+      "git_blob_sha": "fbd067e5aa8cf6648f61395fcba39d1f413f9bd1"
+    },
+    "current_classifier": {
+      "path": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
+      "binding": "MUTABLE_CURRENT_PATH_IDENTITY__LATEST_O11_Q2_STATE_RECHECKED"
+    },
+    "current_binding": {
+      "path": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V7.json",
+      "binding": "VERSIONED_CURRENT_CONTRACT__THIS_RECEIPT_IS_CONTENT_ADDRESSED_BY_BINDING__NO_REVERSE_HASH_EDGE"
+    }
+  },
+  "independent_replay": {
+    "environment": "SPRITE__brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "python_compile": "PASS",
+    "escape_audit_tests": {
+      "passed": 23,
+      "failed": 0,
+      "skipped": 0
+    },
+    "oq_classifier_reconciliation_tests": {
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "proved": [
+    "LATEST_O11_Q2_NEXT_SHARED_EXECUTION_CUT_PRESERVED",
+    "MAIN_V6_GAP_A_POLICY_COVER_ADAPTER_PRESERVED_AS_V7_PREDECESSOR_CAPABILITY",
+    "GAP_A_AND_GAP_B_SHARE_ONE_DYNAMIC_CURRENT_BINDING",
+    "V7_AUDIT_RESOLVES_CURRENT_BINDING_FROM_CLASSIFIER_AND_FAILS_CLOSED_ON_DIVERGENCE_OR_PATH_ESCAPE",
+    "ADAPTER_AUDIT_IMPORT_SURFACE_REMAINS_EXACTLY_GAP_A_WITH_IDENTICAL_VALUE",
+    "V6_EXACT_SOURCES_REMAIN_CONTENT_ADDRESSED"
+  ],
+  "current_truth": {
+    "O_objective_acceptance_rows": 11,
+    "Q_qualitative_relative_order_rows": 2,
+    "real_gap_a_row_proofs": 0,
+    "real_gap_b_row_proofs": 0,
+    "cc_r3_proved": false
+  },
+  "nonclaims": [
+    "NO_O11_ACCEPTANCE_LAW_PROOF",
+    "NO_Q2_QUALITY_ORDER_PROOF",
+    "NO_GAP_A_OR_GAP_B_ROW_CREDIT",
+    "NO_CC_R3_OR_GLOBAL_ESCAPE_PROGRESS_TOTALITY",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "row_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
