@@ -320,10 +320,10 @@
     "cases": 6
   },
   "bytes_minimization_control": {
-    "status": "ACTIVE__CONSERVATIVE_ZETA_V31_BYTE_FRONTIER__ZERO_CAPABILITY_CREDIT_FROM_RESEARCH_CHECKPOINT_ALONE",
+    "status": "ACTIVE__TOPLEVEL_FACADE_V32_BYTE_FRONTIER__ZERO_CAPABILITY_CREDIT_FROM_RESEARCH_CHECKPOINT_ALONE",
     "law": "canonical/laws/BYTES_RESOURCE_BOUNDED_MINIMUM_MECHANISM_LAW_V1.md",
     "white_box_law": "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V1.md",
-    "current_research_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_CONSERVATIVE_ZETA_V31_SUCCESSOR_EXECUTION_20261010_V1.json",
+    "current_research_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_TOPLEVEL_FACADE_V32_SUCCESSOR_EXECUTION_20261010_V1.json",
     "objective": "MINIMUM_RESOURCE_FEASIBLE_EXECUTABLE_DESCRIPTION_CONDITIONAL_ON_ALREADY_OWNED_BRAIN_SUBSTRATE",
     "accounting": [
       "B_EXEC",
@@ -339,38 +339,41 @@
       "LARGER_MODULE_ONLY_IF_REQUIRED"
     ],
     "global_rule": "OPTIMIZE_JOINT_DEPENDENCY_CLOSED_MECHANISM_COVER__COUNT_SHARED_SUBSTRATE_ONCE",
-    "current_exact_symbolic_bottleneck": "POST_V31_RERANK_PENDING__COMPLETE_BOUNDED_EXACT_SYMBOLIC_ROUTE",
-    "truth_boundary": "FRESH_PHYSICAL_BYTE_FRONTIER_MEASURED__ZETA_SPECIAL_DOMAIN_EXCLUSION__FINITE_NONUSE_NOT_UNIVERSAL_PROOF__NO_OPUS_FAMILY_PROMOTION_CREDIT",
+    "current_exact_symbolic_bottleneck": "POST_V32_RERANK_PENDING__COMPLETE_BOUNDED_EXACT_SYMBOLIC_ROUTE",
+    "truth_boundary": "FRESH_PHYSICAL_BYTE_FRONTIER_MEASURED__TOPLEVEL_PUBLIC_FACADE_BOUNDED_TO_16_OBSERVED_BINDINGS__FINITE_NONUSE_NOT_UNIVERSAL_PROOF__NO_OPUS_FAMILY_PROMOTION_CREDIT",
     "current_fresh_exact_symbolic_candidate": {
-      "package_raw_python_source_bytes": 1909906,
-      "B_exec_raw_python_source_bytes": 1912666,
+      "package_raw_python_source_bytes": 1844477,
+      "B_exec_raw_python_source_bytes": 1847237,
       "B_verify_semantic_digest_raw_bytes": 1358,
-      "qualification": "10120/10120",
-      "clean_room_execution": "10120/10120",
-      "archive_replay": "10120/10120",
-      "manifest_sha256": "7378181385754faac46bef85dd647314ed2773e87e2b80b3888eb53ea9f2725a",
-      "durable_archive_bytes": 285480,
-      "durable_archive_sha256": "b30d58d0b1924d6d7cf853e1b7763cff6ec06804080fdd2f6318c03ef85af0da",
+      "qualification": "10350/10350",
+      "clean_room_execution": "10350/10350",
+      "archive_replay": "10350/10350",
+      "manifest_sha256": "ca938743ef2c2660f88daa52f4df6d42b828b0ce3bdcc79c31646ca0e11d7d8c",
+      "durable_archive_bytes": 283140,
+      "durable_archive_sha256": "80df08cb6f966ba21dd76fbcb32a9507175d6ab5a8377d5887a3de6c045ff161",
       "promotion_credit": 0
     },
     "latest_structural_cut": {
-      "id": "CONSERVATIVE_SPENT_NEXT35_ZETA_DOMAIN_EXCLUSION_PROFILE_V31",
-      "accepted_stubbed_function_bodies": 5,
-      "selected_original_body_bytes": 2970,
-      "net_raw_reduction_bytes": 2559,
+      "id": "SPENT_NEXT36_TOPLEVEL_LAZY_FACADE_CLOSURE_V32",
+      "original_lazy_bindings": 903,
+      "retained_lazy_bindings": 16,
+      "removed_lazy_bindings": 887,
+      "init_bytes_before": 66683,
+      "init_bytes_after": 1254,
+      "net_raw_reduction_bytes": 65429,
       "module_graph_unchanged": true,
-      "causal_result": "SPENT_NEXT35_9890_OF_9890__FRESH_NEXT36_10120_OF_10120__COPY_AND_ARCHIVE_10120_OF_10120"
+      "causal_result": "SPENT_NEXT36_10120_OF_10120__FRESH_NEXT37_10350_OF_10350__COPY_AND_ARCHIVE_10350_OF_10350"
     },
     "previous_fresh_frontier": {
-      "raw_python_source_bytes": 1912465,
-      "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_CONSERVATIVE_HYPEREXPAND_V30_SUCCESSOR_EXECUTION_20261010_V1.json"
+      "raw_python_source_bytes": 1909906,
+      "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_CONSERVATIVE_ZETA_V31_SUCCESSOR_EXECUTION_20261010_V1.json"
     },
     "next_frozen_qualification": {
-      "id": "QUAL_SUCCESSOR_NEXT37_20261010_V1",
-      "cases": 10350,
-      "corpus_sha256": "3924da71e686ef91622401e0801b74639361e6d8d756a196e15324708ca9da4e",
+      "id": "QUAL_SUCCESSOR_NEXT38_20261010_V1",
+      "cases": 10580,
+      "corpus_sha256": "dcdbf5a3c76cd61c338a07861b8688bb4691e6f31d1b52d12fba9ad0b2f0dc3e",
       "spent": false,
-      "library_file_id": "libfile_85bf92edeef08191927d6ad17d9257e9"
+      "library_file_id": "libfile_c156706387748191a0d520a6bdf15e58"
     },
     "current_falsification_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_NEXT25_FALSIFICATION_20261010_V1.json",
     "latest_coverage_repair": {
