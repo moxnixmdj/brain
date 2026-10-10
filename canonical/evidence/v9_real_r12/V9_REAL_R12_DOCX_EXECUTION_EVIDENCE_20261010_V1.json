@@ -1,0 +1,146 @@
+{
+  "adversarial_attack": {
+    "all_material_probes_fail_closed": true,
+    "probes": [
+      "missing source token",
+      "multiple source tokens",
+      "unrelated member drift",
+      "invalid package",
+      "nonlocalized visible drift",
+      "stale render evidence"
+    ]
+  },
+  "authority_nonclaims": {
+    "acceptance_authority": false,
+    "promotion_authority": false,
+    "quality_authority": false,
+    "terminal_authority": false
+  },
+  "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+  "candidate_generation": {
+    "candidates": [
+      {
+        "id": "INCUMBENT",
+        "role": "preserve baseline",
+        "sha256": "1db684b36a66b59f5a8a748036f21a9b7b4e4ff83db6904adfa34137089eb94e"
+      },
+      {
+        "id": "EXACT_REPLACEMENT",
+        "role": "bounded requested edit",
+        "sha256": "41f2d30471a671d77cecf885b5f8c20409ca736616925221ec371761cfa21777"
+      },
+      {
+        "id": "REJECTED_BROAD_REWRITE",
+        "role": "counterfactual rejected because it violates minimal-change constraint"
+      }
+    ],
+    "incumbent_preserved": true
+  },
+  "comparative_evaluation": {
+    "broad_rewrite_rejected": true,
+    "criteria": [
+      "target correctness",
+      "minimal change",
+      "package integrity",
+      "visible locality"
+    ],
+    "incumbent_loses_only_target_correctness": true,
+    "winner": "EXACT_REPLACEMENT"
+  },
+  "content_addressed": true,
+  "date": "2026-10-10",
+  "decision_payload": {
+    "context_id": "PQ_R12_V9_REAL_DOCX_20261010_V1",
+    "professional_target_instance": {
+      "artifact_type": "docx",
+      "audience": "A document reader viewing the rendered DOCX.",
+      "constraints": [
+        "Exactly one OLD314159 occurrence exists in the source and is replaced by NEW314159.",
+        "No unrelated ZIP member bytes may change.",
+        "The output must remain a valid nonempty DOCX.",
+        "The rendered visible change must remain localized to the edited token region."
+      ],
+      "current_draft_or_render": {
+        "source_docx_sha256": "1db684b36a66b59f5a8a748036f21a9b7b4e4ff83db6904adfa34137089eb94e",
+        "source_png_sha256": "314dc1a10dd9242046d082ab38c826912e9c8a5c143a96d0e2a3e13c80264f94"
+      },
+      "objective": "Apply exactly one bounded visible text replacement OLD314159 -> NEW314159.",
+      "source_evidence": {
+        "fresh_render_report": "fresh_render_report.json",
+        "source_docx_sha256": "1db684b36a66b59f5a8a748036f21a9b7b4e4ff83db6904adfa34137089eb94e",
+        "source_token": "OLD314159",
+        "source_token_count": 1
+      }
+    }
+  },
+  "deterministic_checks": {
+    "changed_zip_members": [
+      "word/document.xml"
+    ],
+    "output_replacement_token_count": 1,
+    "output_source_token_count": 0,
+    "output_zip_crc_pass": true,
+    "source_token_count": 1,
+    "unrelated_zip_members_byte_identical": true
+  },
+  "freeze": {
+    "fresh_terminal_evidence_sha256": "e6ce1c66f613243f28a0380246bb68889da837e3630818e91748c3b16aecfd2e",
+    "winner_id": "EXACT_REPLACEMENT",
+    "winner_sha256": "41f2d30471a671d77cecf885b5f8c20409ca736616925221ec371761cfa21777"
+  },
+  "goal": "Replace the single visible token OLD314159 with NEW314159 in the exact DOCX, preserving all unrelated package structure and audience-visible layout outside the localized edit.",
+  "output": {
+    "bytes": 36697,
+    "sha256": "41f2d30471a671d77cecf885b5f8c20409ca736616925221ec371761cfa21777"
+  },
+  "real_exact_run": true,
+  "render_observation": {
+    "bbox": [
+      120,
+      100,
+      281,
+      118
+    ],
+    "bbox_fraction": 0.003363135026737968,
+    "changed_pixels": 1669,
+    "fresh_render_producer": "local-container-libreoffice-20261010-v9",
+    "localized_visible_change_pass": true,
+    "output_png_sha256": "574681221aeb67a60a67a794d44ebb3e9265e7548088176707b2d675ab8a2e88",
+    "pixel_fraction": 0.0019368779708853238,
+    "prior_raw_evidence_path": "canonical/evidence/PROFESSIONAL_QUALITY_R3_V7_EXACT_REALIZATION_INSTANCE_20261010_V1.json",
+    "raw_byte_equivalence_to_prior_independently_replayed_render": true,
+    "source_png_sha256": "314dc1a10dd9242046d082ab38c826912e9c8a5c143a96d0e2a3e13c80264f94",
+    "total_pixels": 861696
+  },
+  "run_context_sha256": "sha256:103249e3cca5a0166b810752f44f265ed5fdafa4ead23b8a87c77768362638ca",
+  "schema": "PROJECT_BRAIN_V9_REAL_R12_DOCX_EXECUTION_EVIDENCE_V1",
+  "source": {
+    "bytes": 36696,
+    "sha256": "1db684b36a66b59f5a8a748036f21a9b7b4e4ff83db6904adfa34137089eb94e"
+  },
+  "step_claims": {
+    "ATTACK_FINALISTS_WITH_RELEVANT_INVARIANCE_DEFEATER_HIDDEN_CHANNEL_AND_COUNTEREXAMPLE_PROBES": {
+      "result": "PASS"
+    },
+    "FREEZE_WINNER_AND_USE_FRESH_OR_SELECTION_AWARE_TERMINAL_EVIDENCE": {
+      "result": "PASS"
+    },
+    "GENERATE_DIVERSE_CANDIDATE_BRANCHES_WITH_INCUMBENT_PRESERVATION": {
+      "result": "PASS"
+    },
+    "ISSUE_SCOPED_CERTIFICATE_OR_ABSTAIN_WITH_MINIMUM_BLOCKING_CUT": {
+      "result": "PASS"
+    },
+    "RENDER_EXACT_AUDIENCE_VIEW_AND_BIND_OBSERVATION_CHANNELS": {
+      "result": "PASS"
+    },
+    "RUN_CRITERION_SPECIFIC_PLUS_HOLISTIC_COMPARATIVE_EVALUATION": {
+      "result": "PASS"
+    },
+    "RUN_DETERMINISTIC_FACT_STRUCTURE_FORMAT_AND_GROUNDING_CHECKS": {
+      "result": "PASS"
+    }
+  },
+  "subject_id": "PROFESSIONAL_QUALITY_P1_V9_EXECUTABLE_TOTALITY_SEMANTICS_SYSTEM_20261010_V8",
+  "subject_sha256": "adf7f09e1913526e460b7350c02cd148c2cd14de90eed33fa7fae84d395d9912"
+}
