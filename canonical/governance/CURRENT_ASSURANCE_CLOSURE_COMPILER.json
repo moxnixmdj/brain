@@ -330,13 +330,23 @@
   },
   "professional_whole_leaf_progress": {
     "expected_leaf_count": 24,
-    "admitted_whole_leaf_scope_count": 1,
-    "property_truth_ready_count": 1,
-    "remaining_scope_construction_count": 23,
-    "property_truth_closed_count": 0,
-    "global_leaf_closed_count": 0,
+    "admitted_whole_leaf_scope_count": 24,
+    "admitted_scope_count": 24,
+    "property_truth_ready_count": 24,
+    "remaining_scope_construction_count": 0,
+    "property_truth_closed_count": 1,
+    "global_leaf_closed_count": 1,
+    "open_property_truth_leaf_count": 23,
+    "verified_property_truth_leaf_ids": [
+      "PQ::R10_ANALYSIS_DECISION::EXECUTION"
+    ],
     "domain_semantic_closure": false,
-    "domain_execution_closure": false
+    "domain_execution_closure": false,
+    "scope_batch_verification_path": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_SCOPE_BATCH_VERIFY_20261010_V1.json",
+    "scope_batch_verification_git_blob_sha": "4c2d40a262f18f34bb35f94b59660d60972d45ef",
+    "r10_execution_property_truth_verification_path": "canonical/verification/PROFESSIONAL_QUALITY_R10_EXECUTION_PROPERTY_TRUTH_INDEPENDENT_VERIFY_20261010_V1.json",
+    "r10_execution_property_truth_verification_git_blob_sha": "cfa1f178e149dbd987a52e9825dc67960dbade4c",
+    "next": "VERIFY_R10_SEMANTIC_AND_REMAINING_22_PROPERTY_TRUTH_LEAVES__FULL_CURRENT_MAIN_REGRESSION_AND_OTHER_NONCONFLICTING_EVIDENCE_LANES_REMAIN_OPEN"
   },
   "professional_quality_r10_execution_enforcement": {
     "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_R10_EXECUTION_GUARD_VERIFY_20261010_V1.json",
