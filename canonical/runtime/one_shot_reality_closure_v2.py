@@ -27,6 +27,7 @@ from typing import Any, Callable, Mapping, Sequence
 
 from canonical.runtime import one_shot_verified_closure_v1 as v1
 from canonical.runtime import promote_r2_direct_route_v1 as r2_direct_route_promoter
+from canonical.runtime import minimum_information_evidence_acquisition_provider_v1 as default_evidence_acquisition
 
 SCHEMA = "PROJECT_BRAIN_ONE_SHOT_REALITY_CLOSURE_V2"
 GAP_SCHEMA = "PROJECT_BRAIN_PROOF_CARRYING_GAP_CONTRACT_V1"
@@ -835,6 +836,12 @@ def run(
     rounds = _positive_int("MAX_REPAIR_ROUNDS", max_repair_rounds)
     previous_frontier_after_provider: str | None = None
     transcript: list[dict[str, Any]] = []
+    default_evidence_provider_bound = evidence_acquisition_provider is None
+    if evidence_acquisition_provider is None:
+        evidence_acquisition_provider = lambda request: default_evidence_acquisition.acquire(
+            request,
+            repo_root=repo_root,
+        )
 
     for repair_round in range(rounds):
         kwargs = {
@@ -961,22 +968,57 @@ def run(
                     gap_contract=contract,
                 )
         elif gap_class == "PENDING_ACQUISITION_OR_EXPERIMENT":
-            if evidence_acquisition_provider is None:
-                return {
-                    "schema": SCHEMA,
-                    "status": "OPEN__INTERNAL_UNSOLVED__PENDING_ACQUISITION_OR_EXPERIMENT_PROVIDER_REQUIRED",
-                    "pass": False,
-                    "gap_contract": contract,
-                    "transcript": transcript,
-                    "terminal_authority": False,
-                }
+            provider_request = {
+                **deepcopy(contract),
+                "decision_sufficient_contract": deepcopy(decision_contract),
+                "minimum_information_contract": deepcopy(minimum_information_contract),
+            }
             try:
+                raw_evidence_receipt = evidence_acquisition_provider(provider_request)
+                if (
+                    default_evidence_provider_bound
+                    and default_evidence_acquisition.is_sound_nonactionable_decline(
+                        raw_evidence_receipt
+                    )
+                ):
+                    provider_status = _s(raw_evidence_receipt.get("status"))
+                    transcript[-1]["provider_kind"] = gap_class
+                    transcript[-1]["provider_status"] = provider_status
+                    transcript[-1]["provider_receipt_sha256"] = raw_evidence_receipt.get(
+                        "receipt_sha256"
+                    )
+                    if (
+                        provider_status
+                        == default_evidence_acquisition.NO_CONCRETE_TARGET_STATUS
+                    ):
+                        status = (
+                            "OPEN__INTERNAL_UNSOLVED__"
+                            "PENDING_ACQUISITION_OR_EXPERIMENT__"
+                            "CONCRETE_DECISION_BOUND_TARGET_REQUIRED"
+                        )
+                    else:
+                        status = (
+                            "OPEN__INTERNAL_UNSOLVED__"
+                            "PENDING_ACQUISITION_OR_EXPERIMENT__"
+                            "SOURCE_SPECIFIC_EVIDENCE_ACQUISITION_ADAPTER_REQUIRED"
+                        )
+                    return {
+                        "schema": SCHEMA,
+                        "status": status,
+                        "pass": False,
+                        "fixed_point": False,
+                        "gap_contract": contract,
+                        "decision_sufficient_contract": decision_contract,
+                        "minimum_information_contract": minimum_information_contract,
+                        "default_evidence_acquisition_provider_bound": True,
+                        "evidence_provider_result": deepcopy(
+                            dict(raw_evidence_receipt)
+                        ),
+                        "transcript": transcript,
+                        "terminal_authority": False,
+                    }
                 receipt = _validate_provider_receipt(
-                    evidence_acquisition_provider({
-                        **deepcopy(contract),
-                        "decision_sufficient_contract": deepcopy(decision_contract),
-                        "minimum_information_contract": deepcopy(minimum_information_contract),
-                    }),
+                    raw_evidence_receipt,
                     provider_kind="EVIDENCE_ACQUISITION",
                 )
             except Exception as exc:
