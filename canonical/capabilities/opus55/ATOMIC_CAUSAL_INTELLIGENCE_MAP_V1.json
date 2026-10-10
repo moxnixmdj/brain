@@ -320,10 +320,10 @@
     "cases": 6
   },
   "bytes_minimization_control": {
-    "status": "ACTIVE__PROFILE_PRUNED_REPAIRED_FRONTIER__ZERO_CAPABILITY_CREDIT_FROM_RESEARCH_CHECKPOINT_ALONE",
+    "status": "ACTIVE__CORE_FUNCTION_GRANULAR_PRUNED_FRONTIER__ZERO_CAPABILITY_CREDIT_FROM_RESEARCH_CHECKPOINT_ALONE",
     "law": "canonical/laws/BYTES_RESOURCE_BOUNDED_MINIMUM_MECHANISM_LAW_V1.md",
     "white_box_law": "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V1.md",
-    "current_research_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_PROFILE_PRUNED_REPAIRED_SUCCESSOR_EXECUTION_20261010_V1.json",
+    "current_research_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_CORE_PROFILE_SUCCESSOR_EXECUTION_20261010_V1.json",
     "objective": "MINIMUM_RESOURCE_FEASIBLE_EXECUTABLE_DESCRIPTION_CONDITIONAL_ON_ALREADY_OWNED_BRAIN_SUBSTRATE",
     "accounting": [
       "B_EXEC",
@@ -339,42 +339,39 @@
       "LARGER_MODULE_ONLY_IF_REQUIRED"
     ],
     "global_rule": "OPTIMIZE_JOINT_DEPENDENCY_CLOSED_MECHANISM_COVER__COUNT_SHARED_SUBSTRATE_ONCE",
-    "current_exact_symbolic_bottleneck": "CORE__SUCCESSOR_TRACE_RAW_546379__COMPLETE_BOUNDED_EXACT_SYMBOLIC_ROUTE",
-    "truth_boundary": "FRESH_PHYSICAL_BYTE_FRONTIER_MEASURED__FINITE_PROFILE_NONUSE_NOT_UNIVERSAL_PROOF__NO_OPUS_FAMILY_PROMOTION_CREDIT__NO_UNIVERSAL_MINIMUM_CLAIM",
+    "current_exact_symbolic_bottleneck": "CORE__FUNCTION_GRANULAR_REFINEMENT__COMPLETE_BOUNDED_EXACT_SYMBOLIC_ROUTE",
+    "truth_boundary": "FRESH_PHYSICAL_BYTE_FRONTIER_MEASURED__PROFILE_NONUSE_NOT_UNIVERSAL_PROOF__NO_OPUS_FAMILY_PROMOTION_CREDIT__NO_UNIVERSAL_MINIMUM_CLAIM",
     "current_fresh_exact_symbolic_candidate": {
-      "package_raw_python_source_bytes": 2251793,
-      "B_exec_raw_python_source_bytes": 2254553,
+      "package_raw_python_source_bytes": 2224347,
+      "B_exec_raw_python_source_bytes": 2227107,
       "B_verify_semantic_digest_raw_bytes": 1358,
-      "persistent_xz_comparable_bytes": 336148,
-      "qualification": "6440/6440",
-      "stock_donor_positive_control": "6440/6440",
-      "clean_room_execution": "6440/6440",
-      "archive_replay": "6440/6440",
-      "manifest_sha256": "9dc4ad75c82f466c197b070d99935828bb6c62bf278fa864d57e3c420e2c14ed",
-      "comparable_archive_sha256": "38783665686a5bb24e0484a00f6e651ecd492d3054663b02d874770dbef99eac",
+      "persistent_xz_comparable_bytes": 335396,
+      "qualification": "6670/6670",
+      "stock_donor_positive_control": "6670/6670",
+      "clean_room_execution": "6670/6670",
+      "archive_replay": "6670/6670",
+      "manifest_sha256": "74a2c8eb3caf941c1efc80beb39018e4577565ae40e5b9c952cc52491a453e6d",
+      "comparable_archive_sha256": "325ac7468bbcec2e547a311bdebdca2f28833b1c6983d454823aa9da2f495908",
       "promotion_credit": 0
     },
     "latest_structural_cut": {
-      "id": "SPENT_PROFILE_BODY_PRUNING_V16_PLUS_QUARTIC_REPAIR_V17",
-      "stubbed_function_bodies": 4865,
-      "module_restore_exemptions": 41,
-      "net_raw_reduction_vs_v13_bytes": 1076839,
-      "fresh_counterexample_repairs": [
-        "Domain.unify_with_symbols",
-        "DMP.sub",
-        "DMP_Python._sub"
-      ],
-      "causal_result": "FRESH_NEXT20_6440_OF_6440_AFTER_NEXT19_FALSIFICATION_AND_MINIMAL_REPAIR"
+      "id": "CORE_FUNCTION_GRANULAR_PROFILE_PRUNE_V18",
+      "attempted_stubbed_function_bodies": 24,
+      "accepted_stubbed_function_bodies": 23,
+      "rescued_function": "count_ops",
+      "net_raw_reduction_bytes": 27446,
+      "module_graph_unchanged": true,
+      "causal_result": "SPENT_NEXT20_6440_OF_6440_AFTER_COUNT_OPS_RESCUE__FRESH_NEXT21_6670_OF_6670"
     },
     "previous_fresh_frontier": {
-      "raw_python_source_bytes": 3328632,
-      "persistent_xz_comparable_bytes": 519732,
-      "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_CANONICAL_AST_SUCCESSOR_EXECUTION_20261010_V1.json"
+      "raw_python_source_bytes": 2251793,
+      "persistent_xz_comparable_bytes": 336148,
+      "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_PROFILE_PRUNED_REPAIRED_SUCCESSOR_EXECUTION_20261010_V1.json"
     },
     "next_frozen_qualification": {
-      "id": "QUAL_SUCCESSOR_NEXT21_20261010_V1",
-      "cases": 6670,
-      "corpus_sha256": "91f7409c6f377db62c6ee1c2e3ebd858ce34145df58b8c74f62692912fc6fa71",
+      "id": "QUAL_SUCCESSOR_NEXT22_20261010_V1",
+      "cases": 6900,
+      "corpus_sha256": "7917ed4310c2cd5a66ae324c88e9ea51f7061af35d387c425df872b7ff34b1ce",
       "spent": false
     },
     "current_falsification_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_PROFILE_PRUNE_NEXT19_FALSIFICATION_20261010_V1.json",
@@ -385,11 +382,11 @@
       "result": "NEXT19_SPENT_6210_OF_6210__FRESH_NEXT20_6440_OF_6440"
     },
     "latest_falsified_cut": {
-      "id": "FINITE_SPENT_PROFILE_BODY_PRUNING_V16",
-      "attempted_candidate_raw_bytes": 2251528,
-      "result": "REJECTED__NEXT19_6209_OF_6210",
-      "root_cause": "VALID_QUARTIC_ROOT_DECOMPOSITION_REQUIRES_DOMAIN_UNIFY_WITH_SYMBOLS_AND_DMP_SUBTRACTION",
-      "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_PROFILE_PRUNE_NEXT19_FALSIFICATION_20261010_V1.json"
+      "id": "CORE_PROFILE_PRUNE_V18_INITIAL_24_FUNCTION_VARIANT",
+      "attempted_candidate_raw_bytes": 2220098,
+      "result": "REJECTED_ON_SPENT_NEXT20__6437_OF_6440",
+      "root_cause": "RARER_QUARTIC_SIMPLIFICATION_REQUIRES_COUNT_OPS",
+      "disposition": "RESTORE_COUNT_OPS_ONLY__RETAIN_OTHER_23_STUBS"
     }
   }
 }
