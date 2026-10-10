@@ -36,11 +36,11 @@ class Tests(unittest.TestCase):
    self.assertTrue(n.binder._semantic_receipt_errors(row,claim),field)
 
  def test_constructive_gap_cannot_be_relabelled_external(self):
-  row=n.reality.compile_gap_contract(n._closure(internal=["MISSING_CAPABILITY"],external=True))
+  reality=n._load_reality_helpers(n.Path(__file__).resolve().parents[2])\n  row=reality.compile_gap_contract(n._closure(internal=["MISSING_CAPABILITY"],external=True))
   self.assertEqual(row["gap_class"],"CONSTRUCTIVE_CAPABILITY_GAP")
 
  def test_evidence_gap_remains_acquisition_work(self):
-  row=n.reality.compile_gap_contract(n._closure(evidence=["MISSING_EVIDENCE"],pending=True))
+  reality=n._load_reality_helpers(n.Path(__file__).resolve().parents[2])\n  row=reality.compile_gap_contract(n._closure(evidence=["MISSING_EVIDENCE"],pending=True))
   self.assertEqual(row["gap_class"],"PENDING_ACQUISITION_OR_EXPERIMENT")
 
  def test_externality_requires_passed_closure_not_current_absence(self):
