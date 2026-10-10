@@ -1,15 +1,15 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_LIVE_WORK_FRONTIER_V1",
   "date": "2026-10-10",
-  "status": "CURRENT_POST_COMPOSITION_FRONTIER__R2_V85_RESEALED__ESCAPE_V5_CURRENTNESS_RECONCILED__TB_GAP_B_CURRENT_ROUTE_RECLASSIFIED__READ_ONLY_EVIDENCE_ONLY__FULL_EXECUTION_FAIL_CLOSED__ZERO_CREDIT",
-  "frontier_id": "LIVE_WORK_FRONTIER_20261010_PROF12_COMPOSED_V12",
+  "status": "CURRENT_POST_COMPOSITION_FRONTIER__PROFESSIONAL_SHARED_WHOLE_LEAF_GATE_VERIFIED__R2_V85_RESEALED__ESCAPE_V5_CURRENTNESS_RECONCILED__TB_GAP_B_CURRENT_ROUTE_RECLASSIFIED__READ_ONLY_EVIDENCE_ONLY__FULL_EXECUTION_FAIL_CLOSED__ZERO_CREDIT",
+  "frontier_id": "LIVE_WORK_FRONTIER_20261010_PROF12_WHOLE_LEAF_GATE_V13",
   "scope": {
     "base_main_commit": "ff86b139ae0aeafe0533ebc238141c6d5b007cee",
     "completeness_semantics": "COMPLETE_FOR_EXPLICIT_CURRENT_ACTIONABLE_OR_SCHEDULABLE_WORK_EXPOSED_BY_THE_BOUND_CURRENT_AUTHORITY_SOURCES__NOT_COMPLETE_FOR_UNKNOWN_FUTURE_WORK_OR_UNDISCOVERED_CAPABILITIES",
     "source_set": [
       {
         "path": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
-        "git_blob_sha": "b6d20015d800c0c10d66b8a97a43f92f4f872ba0"
+        "git_blob_sha": "573ca4f6c8e900a4d8044e7ccf51cc15c3c3f252"
       },
       {
         "path": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
@@ -56,8 +56,8 @@
       "work_id": "PROFESSIONAL_QUALITY_V7_WHOLE_LEAF_DOMAIN_EVIDENCE",
       "work_type": "RELIABILITY_IMPROVEMENT",
       "source": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
-      "causal_role": "AFTER_12_OF_12_SAME_SUBJECT_COMPOSITION__CLOSE_WHOLE_LEAF_SCOPE_TRANSPORT_OR_CERTIFIED_COMPLETE_UNIONS_AND_DOMAIN_SEMANTIC_EXECUTION_EVIDENCE_BEFORE_PROMOTION",
-      "readiness": "ACTIONABLE_READ_ONLY_EVIDENCE_AND_VERIFICATION_ON_COMPOSED_V7_SUBJECT",
+      "causal_role": "AFTER_12_OF_12_SAME_SUBJECT_COMPOSITION__ONE_SHARED_WHOLE_LEAF_SCOPE_CERTIFICATE_GATE_NOW_VERIFIED__INSTANTIATE_CLAIM_SCOPED_TOTALITY_OR_COMPLETE_UNION_CERTIFICATES_FOR_24_LEAVES__THEN_BIND_DOMAIN_PROPERTY_TRUTH_AND_EXECUTION",
+      "readiness": "SHARED_GATE_VERIFIED__0_OF_24_WHOLE_LEAF_SCOPE_CERTIFICATES_ADMITTED__READ_ONLY_SEARCH_AND_CERTIFICATE_INSTANTIATION_READY",
       "claims_new_primitive": false,
       "score_state": "UNBOUND",
       "scheduler_state": "READY_EVIDENCE",
@@ -85,7 +85,18 @@
         "open_global_leaf_count": 24,
         "domain_semantic_closure": false,
         "domain_execution_closure": false,
-        "vector_bounds_complete": false
+        "vector_bounds_complete": false,
+        "shared_residual_class": "WHOLE_LEAF_INPUT_DOMAIN_TOTALITY_OR_INDEPENDENT_CERTIFIED_COMPLETE_UNION",
+        "whole_leaf_count": 24,
+        "whole_leaf_scope_certificates_admitted": 0,
+        "whole_leaf_property_truth_closed": 0,
+        "shared_certificate_gate_activation": "canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_CERTIFICATE_GATE_ACTIVATION_20261010_V1.json",
+        "shared_certificate_gate_activation_git_blob_sha": "4b010aae1e741bbbdf7d1431f85b246a6a80c66f",
+        "shared_certificate_gate_runtime": "canonical/runtime/professional_quality_whole_leaf_certificate_gate_v1.py",
+        "shared_certificate_gate_runtime_git_blob_sha": "19715b5be4267343dfa07e90e5b1fb73787c3ce6",
+        "shared_certificate_gate_verification": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_CERTIFICATE_GATE_VERIFY_20261010_V1.json",
+        "shared_certificate_gate_verification_git_blob_sha": "d6c161a6f2735a9a384d8d07d778334c7d9389da",
+        "property_truth_separate": true
       }
     },
     {
@@ -420,8 +431,8 @@
   },
   "live_selection": {
     "authorized": false,
-    "reason": "NO_COMPLETE_COMMON_CALIBRATED_VECTOR__POST_COMPOSITION_PLANNER_MUST_BYPASS_OBSOLETE_R1_R12_DYNAMIC_ADAPTER__READ_ONLY_EVIDENCE_ONLY",
-    "exact_next": "RUN_PARALLEL_FRONTIER_CONTROLLER__CONTINUE_MINIMUM_DISCRIMINATING_VECTOR_EVIDENCE_ACQUISITION__RERUN_PARETO_AND_CONFLICT_PARTITION"
+    "reason": "NO_COMPLETE_COMMON_CALIBRATED_VECTOR__SHARED_PROFESSIONAL_WHOLE_LEAF_GATE_NOW_VERIFIED__READ_ONLY_CERTIFICATE_AND_DISCRIMINATING_EVIDENCE_ACQUISITION_ONLY",
+    "exact_next": "RUN_POST_COMPOSITION_PARALLEL_FRONTIER__INSTANTIATE_MINIMUM_CLAIM_SCOPED_WHOLE_LEAF_CERTIFICATES__CONTINUE_GAP_A_GAP_B_BYTES_AND_TB_READ_ONLY_EVIDENCE__RERUN_PARETO_AFTER_NEW_EVIDENCE"
   },
   "hard_nonclaims": [
     "NO_GLOBAL_UNKNOWN_WORK_COMPLETENESS_CLAIM",
