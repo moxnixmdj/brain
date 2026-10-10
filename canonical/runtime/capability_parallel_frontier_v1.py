@@ -27,6 +27,9 @@ SCHEMA = "PROJECT_BRAIN_CAPABILITY_PARALLEL_FRONTIER_V1"
 ROOT = Path(__file__).resolve().parents[2]
 CURRENT_FRONTIER_PATH = ROOT / "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json"
 CURRENT_PROFESSIONAL_PATH = ROOT / "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json"
+CURRENT_ASSURANCE_PATH = ROOT / "canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json"
+ASSURANCE_SOURCE_REL = "canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json"
+ASSURANCE_WORK_ID = "ASSURANCE_UVCK_V2_PROMOTION_GATES"
 PROFESSIONAL_ROOT_NAMES = {
     1: "TARGET_SPECIFICATION",
     2: "CANDIDATE_SEARCH",
@@ -128,116 +131,291 @@ def _current_professional_next_root(raw: Mapping[str, Any]) -> tuple[int, str]:
     return next_index, expected_name
 
 
+def _load_mapping(path: Path, code: str) -> dict[str, Any]:
+    try:
+        raw = json.loads(path.read_text(encoding="utf-8"))
+    except Exception as exc:
+        raise ParallelFrontierError(code) from exc
+    if not isinstance(raw, dict):
+        raise ParallelFrontierError(code)
+    return raw
+
+
+def _validate_assurance_professional_mirror(
+    assurance: Mapping[str, Any],
+    professional: Mapping[str, Any],
+    professional_blob_sha: str,
+) -> dict[str, Any]:
+    if assurance.get("live_default") is not False or assurance.get("terminal_authority") is not False:
+        raise ParallelFrontierError("CURRENT_ASSURANCE_PROMOTION_STATE_CHANGED")
+
+    prof_frontier = professional.get("same_subject_root_binding_frontier")
+    if not isinstance(prof_frontier, Mapping):
+        raise ParallelFrontierError("CURRENT_PROFESSIONAL_FRONTIER_MISSING")
+    verified = prof_frontier.get("verified_root_subject_binding_count")
+    root_count = prof_frontier.get("root_count")
+    if (
+        isinstance(verified, bool)
+        or not isinstance(verified, int)
+        or isinstance(root_count, bool)
+        or not isinstance(root_count, int)
+        or verified < 0
+        or root_count != 12
+        or verified > root_count
+    ):
+        raise ParallelFrontierError("CURRENT_PROFESSIONAL_VERIFIED_COUNT_INVALID")
+
+    next_index, next_name = _current_professional_next_root(professional)
+    mirror = assurance.get("professional_quality_same_subject_frontier")
+    if not isinstance(mirror, Mapping):
+        raise ParallelFrontierError("CURRENT_ASSURANCE_PROFESSIONAL_MIRROR_MISSING")
+    if _s(mirror.get("current_professional_execution_path")) != PROFESSIONAL_SOURCE_REL:
+        raise ParallelFrontierError("CURRENT_ASSURANCE_PROFESSIONAL_PATH_DRIFT")
+    if _s(mirror.get("current_professional_execution_git_blob_sha")) != professional_blob_sha:
+        raise ParallelFrontierError("CURRENT_ASSURANCE_PROFESSIONAL_BLOB_STALE")
+
+    worklist = mirror.get("root_binding_worklist")
+    if not isinstance(worklist, Mapping):
+        raise ParallelFrontierError("CURRENT_ASSURANCE_WORKLIST_MISSING")
+    expected_worklist_path = _s(prof_frontier.get("path"))
+    expected_worklist_sha = _s(prof_frontier.get("git_blob_sha"))
+    if (
+        _s(worklist.get("path")) != expected_worklist_path
+        or _s(worklist.get("git_blob_sha")) != expected_worklist_sha
+        or worklist.get("required_root_count") != root_count
+        or worklist.get("verified_root_subject_binding_count") != verified
+        or worklist.get("composition_admissible") is not (
+            prof_frontier.get("composition_admissible") is True
+        )
+    ):
+        raise ParallelFrontierError("CURRENT_ASSURANCE_WORKLIST_DRIFT")
+
+    if (
+        mirror.get("verified_root_subject_binding_count") != verified
+        or mirror.get("root_count") != root_count
+        or mirror.get("composition_admissible") is not (
+            prof_frontier.get("composition_admissible") is True
+        )
+    ):
+        raise ParallelFrontierError("CURRENT_ASSURANCE_FRONTIER_COUNT_DRIFT")
+
+    expected_next = "COMPLETE" if next_index == 13 else f"R{next_index}_{next_name}"
+    if _s(mirror.get("next")) != expected_next:
+        raise ParallelFrontierError("CURRENT_ASSURANCE_NEXT_ROOT_DRIFT")
+
+    bindings = mirror.get("current_verified_root_bindings")
+    if not isinstance(bindings, Mapping):
+        raise ParallelFrontierError("CURRENT_ASSURANCE_VERIFIED_BINDINGS_MISSING")
+    expected_keys = {
+        f"R{i}_{PROFESSIONAL_ROOT_NAMES[i]}" for i in range(1, verified + 1)
+    }
+    if set(bindings) != expected_keys:
+        raise ParallelFrontierError("CURRENT_ASSURANCE_VERIFIED_BINDING_SET_DRIFT")
+    for i in range(1, verified + 1):
+        key = f"R{i}_{PROFESSIONAL_ROOT_NAMES[i]}"
+        mirror_row = bindings.get(key)
+        source_row = professional.get(f"r{i}_root_subject_binding")
+        if not isinstance(mirror_row, Mapping) or not isinstance(source_row, Mapping):
+            raise ParallelFrontierError("CURRENT_ASSURANCE_VERIFIED_BINDING_INVALID:" + key)
+        for field in (
+            "binding_path",
+            "binding_git_blob_sha",
+            "verification_path",
+            "verification_git_blob_sha",
+        ):
+            if _s(mirror_row.get(field)) != _s(source_row.get(field)):
+                raise ParallelFrontierError(
+                    "CURRENT_ASSURANCE_VERIFIED_BINDING_DRIFT:" + key + ":" + field
+                )
+
+    status = _s(assurance.get("status"))
+    if f"__{verified}_OF_{root_count}_CURRENT_ROOT_SUBJECT_BINDINGS" not in status:
+        raise ParallelFrontierError("CURRENT_ASSURANCE_TOP_LEVEL_COUNT_DRIFT")
+    if next_index != 13 and f"__R{next_index}_{next_name}_NEXT" not in status:
+        raise ParallelFrontierError("CURRENT_ASSURANCE_TOP_LEVEL_NEXT_DRIFT")
+
+    return {
+        "verified_root_subject_binding_count": verified,
+        "required_root_count": root_count,
+        "next_root": expected_next,
+        "composition_admissible": prof_frontier.get("composition_admissible") is True,
+    }
+
+
 def refresh_supported_dynamic_sources(
     frontier: Mapping[str, Any],
     *,
     root: Path = ROOT,
 ) -> dict[str, Any]:
-    """Refresh only explicitly supported moving current-pointer families.
+    """Refresh explicitly supported moving current-pointer families.
 
-    Professional same-subject work advances frequently and has a strict,
-    mechanically checkable sequential frontier. Other source-family drift still
-    fails closed until an explicit adapter exists.
+    Professional same-subject work is mechanically sequential. Assurance is a
+    derived mirror of that same subject and may follow only when every mirrored
+    root binding, worklist binding, count, next edge, and non-promotion state
+    agrees with the authoritative professional pointer. Any other source drift
+    still fails closed.
     """
     out = json.loads(json.dumps(frontier))
     source_set = out.get("scope", {}).get("source_set")
     if not isinstance(source_set, list):
         raise ParallelFrontierError("CURRENT_LIVE_WORK_FRONTIER_SOURCE_SET_MISSING")
 
-    source_row = next(
-        (row for row in source_set if isinstance(row, Mapping) and _s(row.get("path")) == PROFESSIONAL_SOURCE_REL),
-        None,
-    )
-    if source_row is None:
+    professional_rows = [
+        row for row in source_set
+        if isinstance(row, Mapping) and _s(row.get("path")) == PROFESSIONAL_SOURCE_REL
+    ]
+    if len(professional_rows) != 1:
         raise ParallelFrontierError("CURRENT_PROFESSIONAL_SOURCE_BINDING_MISSING")
+    professional_source_row = professional_rows[0]
 
     professional_path = root / PROFESSIONAL_SOURCE_REL
     if not professional_path.is_file():
         raise ParallelFrontierError("CURRENT_PROFESSIONAL_SOURCE_UNAVAILABLE")
-    actual_sha = _git_blob_sha(professional_path)
-    if _s(source_row.get("git_blob_sha")) == actual_sha:
-        return out
-
-    try:
-        professional = json.loads(professional_path.read_text(encoding="utf-8"))
-    except Exception as exc:
-        raise ParallelFrontierError("CURRENT_PROFESSIONAL_SOURCE_INVALID") from exc
-    if not isinstance(professional, Mapping):
-        raise ParallelFrontierError("CURRENT_PROFESSIONAL_SOURCE_INVALID")
-
+    professional = _load_mapping(
+        professional_path, "CURRENT_PROFESSIONAL_SOURCE_INVALID"
+    )
+    actual_prof_sha = _git_blob_sha(professional_path)
     next_index, next_name = _current_professional_next_root(professional)
-    source_row["git_blob_sha"] = actual_sha
 
-    candidates = out.get("candidates")
-    if not isinstance(candidates, list):
-        raise ParallelFrontierError("CURRENT_LIVE_WORK_FRONTIER_CANDIDATES_INVALID")
-    positions = [
-        i for i, row in enumerate(candidates)
-        if isinstance(row, Mapping)
-        and _s(row.get("work_id")).startswith("PROFESSIONAL_QUALITY_V7_R")
-    ]
-    if len(positions) != 1:
-        raise ParallelFrontierError("CURRENT_PROFESSIONAL_CANDIDATE_CARDINALITY_INVALID")
-    i = positions[0]
-    if next_index == 13:
-        candidates[i] = {
-            **dict(candidates[i]),
-            "work_id": "PROFESSIONAL_QUALITY_V7_SAME_SUBJECT_BINDINGS_COMPLETE",
-            "scheduler_state": "BLOCKED",
-            "prerequisites_satisfied": False,
-            "readiness": "ALL_12_ROOT_BINDINGS_COMPLETE__COMPOSITION_GATE_NEXT_OUTSIDE_THIS_DYNAMIC_ADAPTER",
-            "vector_evidence_state": "UNBOUND",
-            "vector_evidence": {},
-        }
-    else:
-        row = dict(candidates[i])
-        row["work_id"] = f"PROFESSIONAL_QUALITY_V7_R{next_index}_{next_name}_BINDING"
-        row["causal_role"] = (
-            f"NEXT_EXACT_SAME_SUBJECT_BINDING_EDGE__R{next_index}_"
-            f"{next_name}__UPSTREAM_OF_REMAINING_COMPOSITION_AND_DOMAIN_EVIDENCE"
-        )
-        row["readiness"] = (
-            f"ACTIONABLE_ON_CURRENT_V7_SUBJECT_AFTER_R1_R{next_index - 1}_VERIFIED"
-        )
-        row["scheduler_state"] = "READY_EXECUTION"
-        row["prerequisites_satisfied"] = True
-        row["vector_evidence_state"] = "PARTIAL"
-        row["vector_evidence"] = {}
-        evidence = dict(row.get("read_only_evidence") or {})
-        evidence.update(
-            {
-                "source": PROFESSIONAL_SOURCE_REL,
-                "source_git_blob_sha": actual_sha,
-                "verified_root_subject_binding_count": next_index - 1,
-                "required_root_count": 12,
-                "next_root": f"R{next_index}_{next_name}",
-                "vector_bounds_complete": False,
-                "dynamic_current_pointer_follow": True,
+    if _s(professional_source_row.get("git_blob_sha")) != actual_prof_sha:
+        professional_source_row["git_blob_sha"] = actual_prof_sha
+        candidates = out.get("candidates")
+        if not isinstance(candidates, list):
+            raise ParallelFrontierError("CURRENT_LIVE_WORK_FRONTIER_CANDIDATES_INVALID")
+        positions = [
+            i for i, row in enumerate(candidates)
+            if isinstance(row, Mapping)
+            and _s(row.get("work_id")).startswith("PROFESSIONAL_QUALITY_V7_R")
+        ]
+        if len(positions) != 1:
+            raise ParallelFrontierError("CURRENT_PROFESSIONAL_CANDIDATE_CARDINALITY_INVALID")
+        i = positions[0]
+        if next_index == 13:
+            candidates[i] = {
+                **dict(candidates[i]),
+                "work_id": "PROFESSIONAL_QUALITY_V7_SAME_SUBJECT_BINDINGS_COMPLETE",
+                "scheduler_state": "BLOCKED",
+                "prerequisites_satisfied": False,
+                "readiness": "ALL_12_ROOT_BINDINGS_COMPLETE__COMPOSITION_GATE_NEXT_OUTSIDE_THIS_DYNAMIC_ADAPTER",
+                "vector_evidence_state": "UNBOUND",
+                "vector_evidence": {},
             }
-        )
-        row["read_only_evidence"] = evidence
-        candidates[i] = row
+        else:
+            row = dict(candidates[i])
+            row["work_id"] = f"PROFESSIONAL_QUALITY_V7_R{next_index}_{next_name}_BINDING"
+            row["causal_role"] = (
+                f"NEXT_EXACT_SAME_SUBJECT_BINDING_EDGE__R{next_index}_"
+                f"{next_name}__UPSTREAM_OF_REMAINING_COMPOSITION_AND_DOMAIN_EVIDENCE"
+            )
+            row["readiness"] = (
+                f"ACTIONABLE_ON_CURRENT_V7_SUBJECT_AFTER_R1_R{next_index - 1}_VERIFIED"
+            )
+            row["scheduler_state"] = "READY_EXECUTION"
+            row["prerequisites_satisfied"] = True
+            row["vector_evidence_state"] = "PARTIAL"
+            row["vector_evidence"] = {}
+            evidence = dict(row.get("read_only_evidence") or {})
+            evidence.update(
+                {
+                    "source": PROFESSIONAL_SOURCE_REL,
+                    "source_git_blob_sha": actual_prof_sha,
+                    "verified_root_subject_binding_count": next_index - 1,
+                    "required_root_count": 12,
+                    "next_root": f"R{next_index}_{next_name}",
+                    "vector_bounds_complete": False,
+                    "dynamic_current_pointer_follow": True,
+                }
+            )
+            row["read_only_evidence"] = evidence
+            candidates[i] = row
 
-    findings = out.get("currentness_findings")
-    if isinstance(findings, list):
-        for finding in findings:
-            if isinstance(finding, dict) and finding.get("id") == "PROFESSIONAL_CURRENT":
-                finding["truth"] = (
-                    "R1_R12_V7_BINDINGS_VERIFIED__12_OF_12__COMPOSITION_NEXT"
-                    if next_index == 13
-                    else f"R1_R{next_index - 1}_V7_BINDINGS_VERIFIED__{next_index - 1}_OF_12__R{next_index}_NEXT"
-                )
-                finding["source"] = PROFESSIONAL_SOURCE_REL
-                finding["dynamic_current_pointer_follow"] = True
+        findings = out.get("currentness_findings")
+        if isinstance(findings, list):
+            for finding in findings:
+                if isinstance(finding, dict) and finding.get("id") == "PROFESSIONAL_CURRENT":
+                    finding["truth"] = (
+                        "R1_R12_V7_BINDINGS_VERIFIED__12_OF_12__COMPOSITION_NEXT"
+                        if next_index == 13
+                        else f"R1_R{next_index - 1}_V7_BINDINGS_VERIFIED__{next_index - 1}_OF_12__R{next_index}_NEXT"
+                    )
+                    finding["source"] = PROFESSIONAL_SOURCE_REL
+                    finding["dynamic_current_pointer_follow"] = True
+
+    assurance_rows = [
+        row for row in source_set
+        if isinstance(row, Mapping) and _s(row.get("path")) == ASSURANCE_SOURCE_REL
+    ]
+    assurance_followed = False
+    assurance_sha = None
+    if assurance_rows:
+        if len(assurance_rows) != 1:
+            raise ParallelFrontierError("CURRENT_ASSURANCE_SOURCE_BINDING_INVALID")
+        assurance_path = root / ASSURANCE_SOURCE_REL
+        if not assurance_path.is_file():
+            raise ParallelFrontierError("CURRENT_ASSURANCE_SOURCE_UNAVAILABLE")
+        assurance = _load_mapping(
+            assurance_path, "CURRENT_ASSURANCE_SOURCE_INVALID"
+        )
+        assurance_sha = _git_blob_sha(assurance_path)
+        assurance_snapshot = _validate_assurance_professional_mirror(
+            assurance, professional, actual_prof_sha
+        )
+        assurance_row = assurance_rows[0]
+        if _s(assurance_row.get("git_blob_sha")) != assurance_sha:
+            assurance_row["git_blob_sha"] = assurance_sha
+            assurance_followed = True
+            candidates = out.get("candidates")
+            if not isinstance(candidates, list):
+                raise ParallelFrontierError("CURRENT_LIVE_WORK_FRONTIER_CANDIDATES_INVALID")
+            positions = [
+                i for i, row in enumerate(candidates)
+                if isinstance(row, Mapping) and _s(row.get("work_id")) == ASSURANCE_WORK_ID
+            ]
+            if len(positions) != 1:
+                raise ParallelFrontierError("CURRENT_ASSURANCE_CANDIDATE_CARDINALITY_INVALID")
+            row = dict(candidates[positions[0]])
+            evidence = dict(row.get("read_only_evidence") or {})
+            evidence.update(
+                {
+                    "source": ASSURANCE_SOURCE_REL,
+                    "source_git_blob_sha": assurance_sha,
+                    "embedded_professional_snapshot_lags_live_frontier": False,
+                    "verified_root_subject_binding_count": assurance_snapshot[
+                        "verified_root_subject_binding_count"
+                    ],
+                    "required_root_count": assurance_snapshot["required_root_count"],
+                    "next_professional_root": assurance_snapshot["next_root"],
+                    "vector_bounds_complete": False,
+                    "dynamic_current_pointer_follow": True,
+                }
+            )
+            row["read_only_evidence"] = evidence
+            candidates[positions[0]] = row
+
+            findings = out.get("currentness_findings")
+            if isinstance(findings, list):
+                for finding in findings:
+                    if isinstance(finding, dict) and finding.get("id") == "ASSURANCE_CURRENT_PATH":
+                        finding["truth"] = (
+                            "UVCK_V2_CURRENT_POINTER_PRESENT__EMBEDDED_PROFESSIONAL_"
+                            "SNAPSHOT_MATCHES_LIVE_PROFESSIONAL_FRONTIER__"
+                            "BLOCKED_PROMOTION_REMAINS_BLOCKED"
+                        )
+                        finding["source"] = ASSURANCE_SOURCE_REL
+                        finding["dynamic_current_pointer_follow"] = True
 
     out["dynamic_currentness"] = {
         "professional_current_pointer_follow": True,
-        "professional_current_git_blob_sha": actual_sha,
-        "professional_next_root": "COMPLETE" if next_index == 13 else f"R{next_index}_{next_name}",
+        "professional_current_git_blob_sha": actual_prof_sha,
+        "professional_next_root": (
+            "COMPLETE" if next_index == 13 else f"R{next_index}_{next_name}"
+        ),
+        "assurance_current_pointer_follow": bool(assurance_rows),
+        "assurance_current_git_blob_sha": assurance_sha,
+        "assurance_source_was_refreshed": assurance_followed,
         "other_source_families_dynamic_follow": False,
     }
     return out
-
 
 def load_current_frontier(
     frontier_path: Path = CURRENT_FRONTIER_PATH,
