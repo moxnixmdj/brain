@@ -1,13 +1,13 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_R2_DECISION_INTELLIGENCE_POINTER_V1",
   "date": "2026-10-10",
-  "status": "ACTIVE_CURRENT_R2_AUTHORITY__V71__FORTY_DIRECT_ROUTES__THIRTY_SIX_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__DERIVED_TYPED_TERMINAL_SIGNATURES_ROUTE_BOUND__MREL_NECESSARY_PROPERTY_AUTHORITY_BOUND__TLAC_MREL_SHARED_SIGNATURE_NONSEPARATION_AND_BOUNDED_IDENTITY_DISCRIMINATOR_BOUND__OEWN_DECISION_MANIFEST_LATTICE_LIVE_DYNAMIC_ROUTE_BOUND__REGCAP_NO_DESCRIPTOR_DIRECT_SIGNATURE_CONTEXT_BOUND__SCOPED_DOMAIN_EQUIVALENCE_INTERNALIZED__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_REMAINS",
+  "status": "ACTIVE_CURRENT_R2_AUTHORITY__V72__FORTY_DIRECT_ROUTES__THIRTY_SIX_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__OPEN_WORLD_SEMANTIC_CONTROL_PROGRESS_BOUND__DERIVED_TYPED_TERMINAL_SIGNATURES_ROUTE_BOUND__MREL_NECESSARY_PROPERTY_AUTHORITY_BOUND__TLAC_MREL_SHARED_SIGNATURE_NONSEPARATION_AND_BOUNDED_IDENTITY_DISCRIMINATOR_BOUND__OEWN_DECISION_MANIFEST_LATTICE_LIVE_DYNAMIC_ROUTE_BOUND__REGCAP_NO_DESCRIPTOR_DIRECT_SIGNATURE_CONTEXT_BOUND__SCOPED_DOMAIN_EQUIVALENCE_INTERNALIZED__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_REMAINS",
   "mission_objective": {
     "path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json"
   },
   "live_front_door": {
-    "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "git_blob_sha": "e6713badf2a240daa019ab7d3eb4cfabeea76485"
+    "path": "canonical/runtime/unified_cognitive_fabric_v2.py",
+    "git_blob_sha": "afb8b5c30957168dd8ba8684afb94b31c9118ed5"
   },
   "controller": {
     "path": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
@@ -2239,5 +2239,43 @@
     "terminal_credit_delta": 0,
     "wake_cut_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261010_V64.json",
     "wake_cut_git_blob_sha": "88d62359c8e3cd4c4c6c775355e4370c63ea251b"
+  },
+  "open_world_semantic_control_progress": {
+    "status": "LIVE_BOUND__PAIRWISE_NONIDENTIFIABILITY_COMPLEMENTARY__CONTROL_PROGRESS_CLOSED_WHEN_INFORMATION_ORIGIN_IS_CLASSIFIABLE__SEMANTIC_IDENTITY_REMAINS_OPEN",
+    "activation_path": "canonical/governance/R2_OPEN_WORLD_SEMANTIC_CONTROL_ACTIVATION_20261010_V1.json",
+    "activation_git_blob_sha": "b9768835ea3e41c53c0b7ef39c2a7e4ab999908a",
+    "runtime_path": "canonical/runtime/open_world_semantic_control_v1.py",
+    "runtime_git_blob_sha": "cea865ac319eb420977b60378de213fc11be9090",
+    "candidate_runtime_path": "canonical/runtime/residual_semantic_control_invariance_v1.py",
+    "candidate_runtime_git_blob_sha": "f2a19e925c331fc575f5b7129011b9b042452edd",
+    "verifier_path": "canonical/runtime/residual_semantic_control_invariance_verify_v1.py",
+    "verifier_git_blob_sha": "248d23cb86a9a277383ba4204f340ab17e137cc6",
+    "behavior_verification_path": "canonical/verification/R2_OPEN_WORLD_SEMANTIC_CONTROL_VERIFY_20261010_V1.json",
+    "behavior_verification_git_blob_sha": "570f47951f7c329f61e356a65ee74dde884d3d22",
+    "complementary_nonidentifiability_runtime": "canonical/runtime/semantic_pair_nonidentifiability_v1.py",
+    "complementary_nonidentifiability_git_blob_sha": "e358eeecc45868c91d22009cc57c624e9a210037",
+    "complementary_nonidentifiability_verification": "canonical/verification/SEMANTIC_PAIR_NONIDENTIFIABILITY_VERIFY_20261010_V1.json",
+    "complementary_nonidentifiability_verification_git_blob_sha": "2e5f81c929025f4df7b5c2589ccc37f6147cdee6",
+    "live_mode": "OPEN_WORLD_SEMANTIC_CONTROL",
+    "control_scope": "NEXT_INFORMATION_ACQUISITION_CONTROL_ONLY",
+    "composition_rule": "PROVE_SOURCE_NONIDENTIFIABILITY_WHEN_POSSIBLE__THEN_ROUTE_MINIMUM_INFORMATION_ACQUISITION_WITHOUT_SEMANTIC_IDENTITY_DEPENDENCE__REVERIFY_AFTER_ACQUISITION",
+    "control_progress_closed": true,
+    "semantic_identity_closed": false,
+    "semantic_truth_authority": false,
+    "final_domain_action_authority": false,
+    "downstream_reverification_required": true,
+    "finance_semantic_tail_closed": false,
+    "terminal_credit_delta": 0
+  },
+  "r2_v72_open_world_semantic_control_reconciliation": {
+    "status": "RECONCILED__V71_SEMANTIC_AUTHORITY_PRESERVED__PAIRWISE_NONIDENTIFIABILITY_COMPLEMENTARY__NEW_CONTROL_ONLY_PROGRESS_ROUTE_BOUND__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_REMAINS__ZERO_CREDIT",
+    "prior_version": "V71",
+    "current_version": "V72",
+    "semantic_authority_delta": 0,
+    "control_capability_delta": "VERIFIED_NEXT_INFORMATION_ACQUISITION_CONTROL_FOR_CLASSIFIABLE_OPEN_WORLD_RESIDUALS",
+    "primary_internal_unsolved_count": 1,
+    "finance_tail_closed": false,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
   }
 }
