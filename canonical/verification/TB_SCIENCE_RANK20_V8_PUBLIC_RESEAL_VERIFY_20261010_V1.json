@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK20_V8_PUBLIC_RESEAL_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__PUBLIC_V8_FRESH_V3_RESEAL__ZERO_EXPOSURE__NO_EFFECTIVE_AUTHORITY",
+  "public_repository": "moxnixmdj/verification-capsule-runner",
+  "public_pull_request": 2614,
+  "public_merge_commit_sha": "722a43716377d4245b5b677e30ea51e145ced09b",
+  "exact_public_blobs": {
+    "surface": "3ce814e1a46887fbc0909f1a39c7c51b97568cb2",
+    "authority": "2ff4fd92ee95c9917a37ced90703a1964a58bccb",
+    "ledger": "a2b38a6fd490a2855d517f75bb296a6b9aef8931",
+    "epoch": "4e96d68a2836605d98d65cd4dd282ab3da91902f",
+    "execution_claim": "15d06a958c6f585d2b8af785a6ac46f7553f9d3c",
+    "logical_attempt_claim_binding": "79ade372c86afbc088fea729c31e09f4ba823cf0"
+  },
+  "canonical_inputs": {
+    "claim_binding": {
+      "path": "canonical/governance/TB_SCIENCE_RANK20_LOGICAL_ATTEMPT_CLAIM_BINDING_20261010_V8.json",
+      "git_blob_sha": "79ade372c86afbc088fea729c31e09f4ba823cf0"
+    },
+    "authority": {
+      "path": "canonical/governance/TB_SCIENCE_RANK20_ONE_SLOT_EXECUTION_AUTHORITY_20261010_V8.json",
+      "git_blob_sha": "95de52c167ca66a7742acf68bdf63f1928416f6e"
+    },
+    "ledger": {
+      "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V55.json",
+      "git_blob_sha": "91053699c9fbd731781b0e2b8c17d4f97a357e86"
+    },
+    "identity_verification": {
+      "path": "canonical/verification/TB_SCIENCE_RANK20_V8_IDENTITY_VERIFY_20261010_V1.json",
+      "git_blob_sha": "9a03de6d36240b4ff654d126c02e644a35cfae22"
+    }
+  },
+  "independent_static_checks": {
+    "exact_blob_match": true,
+    "logical_attempt_id_consistent": true,
+    "execution_claim_binding_digest_consistent": true,
+    "fresh_v3_execution_branch_consistent": true,
+    "fresh_v3_activation_filename_consistent": true,
+    "authority_ledger_epoch_execution_claim_crosslinks_consistent": true,
+    "current_surface_crosslinks_consistent": true,
+    "retired_v2_activation_absent": true,
+    "fresh_v3_activation_absent": true
+  },
+  "logical_attempt_id": "6ec02f79eb1c35206800ec6196a82d24acc17f9562d8e51d99a011bf9c89a618",
+  "execution_claim_binding_digest": "sha256:08acc8711eff0c388582af03a071ec412c99a57393d9cc40dbfc0002ae802ca6",
+  "task_read": false,
+  "task_started": false,
+  "durable_start_cas_acquired": false,
+  "benchmark_trials_consumed": 0,
+  "activation_present": false,
+  "execution_authority": false,
+  "task_read_authority": false,
+  "activation_authority": false,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "pass": true,
+  "next": "PROMOTE_RANK20_V8_EFFECTIVE_AUTHORITY_ZERO_EXPOSURE_ONLY"
+}
