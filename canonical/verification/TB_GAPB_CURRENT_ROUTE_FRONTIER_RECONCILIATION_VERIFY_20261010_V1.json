@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_TB_GAPB_CURRENT_ROUTE_FRONTIER_RECONCILIATION_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "INDEPENDENT_PASS__TB_CURRENT_ROUTE_12_ASSERTIONS__POST_COMPOSITION_PLANNER_3_OF_3__ZERO_CREDIT",
+  "current_tb_subject": {
+    "path": "canonical/governance/CURRENT_TB_SCIENCE_EXECUTION.json",
+    "git_blob_sha": "7aec52d3575710d630a4e8376286723fd5c0a353",
+    "byte_sha256": "13abdb9efbec773d6bc1cfa9c0a6a88a7128b473b69f90195d30cb486a86c39d"
+  },
+  "bindings": {
+    "reclassification_blob": "d7bc90a0a524a58d3cb4f9ca1978da19fae598fd",
+    "reclassification_verification_blob": "a1b6ca657589b788b3e4eff0fb7682842a917f4a",
+    "residual_blob": "b6d20015d800c0c10d66b8a97a43f92f4f872ba0",
+    "frontier_blob": "d4e577162523317742ff697f1a82b956dec3a58d",
+    "scheduler_activation_blob": "17ffaa576e50e1db08cae21c4b720a0d45b668b5",
+    "current_scheduler_blob": "9d0b87d32b8caac829f2014cbf139ea332a250e2",
+    "mission_blob": "700a6bd53cf36d26a7838ae1727cdea550cd9552"
+  },
+  "independent_verifier": {
+    "name": "brain-r3-structural-provider-verify-20261010",
+    "sprite_id": "sprite-4c7dc4a8-ac7d-44a7-b49d-0fdf1f321004",
+    "tb_route_semantics": "12_OF_12_PASS",
+    "post_composition_planner": "3_OF_3_PASS",
+    "planner_currentness_verified": true
+  },
+  "conclusions": {
+    "stale_rank19_tb_route_interpretation_retired": true,
+    "current_rank20_v3_prestart_route_bound": true,
+    "tb_gap_b_strict_progress_witness_bound": false,
+    "full_execution_authority": false,
+    "planner_ready_evidence_lane_count": 5
+  },
+  "hard_nonclaims": [
+    "NO_GAP_B_ROW_CREDIT",
+    "NO_TB_ACCEPTANCE_CREDIT",
+    "NO_TASK_READ_OR_START",
+    "NO_TRIAL_CONSUMPTION",
+    "NO_FULL_EXECUTION_PLAN_AUTHORITY",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
