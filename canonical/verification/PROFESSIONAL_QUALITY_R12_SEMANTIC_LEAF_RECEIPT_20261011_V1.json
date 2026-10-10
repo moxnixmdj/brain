@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_LEAF_VERIFICATION_RECEIPT_V1",
+  "date": "2026-10-11",
+  "leaf_id": "PQ::R12_META_COMPOSITION_CLOSURE::SEMANTIC",
+  "root_id": "R12_META_COMPOSITION_CLOSURE",
+  "leaf_kind": "SEMANTIC",
+  "verdict": "PASS",
+  "closure_scope": "EXACT_LEAF",
+  "acceptance_sha256": "4967b35be044567ae9fbcd01f2443996dc675f3154fd386790f79301ae9cff09",
+  "root_contract_sha256": "25eb91e82bc238444aa0df064b23ad23768e8213340ae5c3640b297020761b85",
+  "manifest_git_blob_sha": "a7cad32c9fd969ff2c3857bb924c7bd746237ec2",
+  "leaf_semantic_satisfied": true,
+  "semantic_claim_id": "11870f850b46bcfcc31094f764fc4f45c911aaac413979ceb62679ff19a53162",
+  "semantic_scope_sha256": "3958f259dba6bc6d4dfe1dad0b3ec26ecb1b8d92ea4763985f52ce96cfc55a1d",
+  "semantic_target_predicate_sha256": "4436ce9a119fb5f9410080e0f5b675adb6220c644969d29373c55e9694bd14a8",
+  "semantic_semantics_sha256": "39034d3ff3bab4c6b05ff9b224c5910177c0604bf0acbe1570ce8ce1bd6ad46d",
+  "claim_scoped_totality_proved": true,
+  "cc_r1_reality_containment_proved": true,
+  "cc_r2_mission_soundness_proved": true,
+  "cc_r3_terminal_closure_proved": true,
+  "r4_proof_realization_authority": true,
+  "verification_basis": [
+    {
+      "path": "canonical/runtime/professional_r12_semantic_leaf_property_truth_v1.py",
+      "git_blob_sha": "3a340fa1176b1d6d669d8e0c06f9c19db383e116"
+    },
+    {
+      "path": "canonical/verification/PROFESSIONAL_R12_SEMANTIC_LEAF_PROPERTY_TRUTH_INDEPENDENT_VERIFY_20261011_V1.json",
+      "git_blob_sha": "c2f1f16e2acb4fe5ac5c7a78b3d4a87883b98eaf"
+    },
+    {
+      "path": "canonical/verification/PROFESSIONAL_R12_ROOT_REGISTRY_INDEPENDENT_VERIFY_20261011_V3.json",
+      "git_blob_sha": "211ca40876bb45d72ccd6764a91d62a584721cb0"
+    },
+    {
+      "path": "canonical/governance/COVERAGE_COMPLETENESS_FROZEN_CLAIM_PROFESSIONAL_R12_SEMANTIC_20261010_V2.json",
+      "git_blob_sha": "7b26ddba501358d42d6fa342efd27d389bb30654"
+    }
+  ],
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "hard_nonclaims": [
+    "NO_OTHER_SEMANTIC_LEAF_PROPERTY_TRUTH",
+    "NO_GLOBAL_PROFESSIONAL_QUALITY_CLOSURE",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ]
+}
