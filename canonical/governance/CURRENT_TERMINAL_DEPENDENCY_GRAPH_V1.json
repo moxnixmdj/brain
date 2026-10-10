@@ -127,7 +127,7 @@
       "id": "CURRENT_AUTHORITY_RUNTIME_BYTE_BINDING_COHERENCE",
       "kind": "LEAF",
       "status": "UNRESOLVED",
-      "note": "EXACT_BRANCH_CENSUS FOUND SIX STALE REFERENCES ACROSS FIVE RUNTIME PATHS PLUS ONE CURRENT RUNTIME WITHOUT BLOB BINDING. ALL SIX NOW HAVE BOUNDED TEST SURFACES OR EXISTING COMPONENT TESTS. NO EXISTING SPRITE SNAPSHOT CONTAINS THE FULL CURRENT SIX-PATH CONE. DO NOT RESEAL UNTIL FRESH CURRENT-BYTE EXECUTION.",
+      "note": "ALL SIX DECLARED CURRENT RUNTIME TARGET BYTES EXECUTED GREEN ON BOUNDED COMPONENT SURFACES__67_TESTS_ZERO_FAILURES_ERRORS__EXACT CONTENT-BOUND RECEIPT EXISTS__ONLY CURRENT_TERMINAL_AUTHORITY PROJECTION REMAINS",
       "attack_families": [
         "VERSION_DRIFT",
         "COMPOSITION_MISMATCH",
@@ -136,28 +136,22 @@
       ],
       "subobligations": [
         {
-          "id": "CURRENT_BYTE_REEXECUTE_TEST_BACKED_RUNTIME_PATHS",
-          "status": "UNRESOLVED",
-          "paths": [
-            "canonical/runtime/terminal_autopilot_executor_v1.py",
-            "canonical/runtime/terminal_autopilot_v1.py",
-            "canonical/runtime/terminal_root_decision_gate_v1.py",
-            "canonical/runtime/unified_cognitive_fabric_v1.py",
-            "canonical/runtime/option_preserving_capability_optimizer_v1.py"
-          ],
-          "evidence_available": "COMPONENT_TEST_SURFACES_PRESENT",
-          "requirement": "FRESH_CURRENT_BYTE_EXECUTION_AND_CONTENT_BOUND_RECEIPT"
+          "id": "CURRENT_RUNTIME_TARGET_BYTES_EXECUTED",
+          "status": "PROVED",
+          "verification_path": "canonical/verification/CURRENT_RUNTIME_BYTE_COHERENCE_SPRITE_VERIFICATION_20261010_V1.json",
+          "verification_git_blob_sha": "52de2370122ca2eb1e934425c963a918ea72a24f",
+          "tests_run": 67,
+          "failures": 0,
+          "errors": 0
         },
         {
-          "id": "DONOR_INDEPENDENCE_AUDIT_CURRENT_BYTE_VERIFICATION",
+          "id": "CURRENT_AUTHORITY_RUNTIME_RESEAL_PROJECTION",
           "status": "UNRESOLVED",
-          "paths": [
-            "canonical/runtime/terminal_candidate_donor_independence_audit_v1.py"
-          ],
-          "evidence_available": "DEDICATED_BOUNDED_TEST_SURFACE_ADDED__NOT_YET_EXECUTED_ON_CURRENT_BYTES",
-          "requirement": "FRESH_CURRENT_BYTE_EXECUTION_AND_CONTENT_BOUND_RECEIPT",
-          "test_path": "canonical/tests/test_terminal_candidate_donor_independence_audit_v1.py",
-          "test_git_blob_sha": "1b70c9494993e894d45605f8fecffa3781ea1541"
+          "projection_path": "canonical/governance/CURRENT_RUNTIME_BYTE_BINDING_RESEAL_PROJECTION_20261010_V1.json",
+          "projection_git_blob_sha": "c5ef86a5253cdf5514e428a1e8937552a143df43",
+          "target_path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+          "expected_target_git_blob_sha": "7a8458d51aa703e2103b89ca741276fecfae1338",
+          "requirement": "APPLY_EXACT_PROJECTION_IF_AND_ONLY_IF_EXPECTED_TARGET_AND_OLD_VALUES_MATCH"
         }
       ]
     }
