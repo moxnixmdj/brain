@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V14",
+  "date": "2026-10-10",
+  "status": "ACTIVE_POST_COMPOSITION_V14__TB_RETIRED_ROUTE_PARKED__GAP_B_TWO_ACTIVE__R2_V86_CURRENT__PROFESSIONAL_WHOLE_LEAF_V2_READ_ONLY__FULL_EXECUTION_FAIL_CLOSED__ZERO_CREDIT",
+  "supersedes": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V13.json",
+  "runtime": {
+    "path": "canonical/runtime/capability_parallel_frontier_post_composition_v1.py",
+    "git_blob_sha": "249b08767cdf4f940ba98ea3e8fe3aff0601e349",
+    "entrypoint": "plan_current_post_composition_frontier"
+  },
+  "frontier": {
+    "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
+    "git_blob_sha": "3c051ab4fd0833b66ab8ea8829cf837d160b62a0",
+    "frontier_id": "LIVE_WORK_FRONTIER_20261010_PROF12_WHOLE_LEAF_CLAIM_V2_V15"
+  },
+  "currentness": {
+    "residual_classifier_git_blob_sha": "9d4112927880bf18132083c0e841e6133cb125ab",
+    "tb_science_git_blob_sha": "7678d9a56461b121ffd52dd4c9c8df464fda08d2",
+    "terminal_authority_git_blob_sha": "2f4c0900bb5c0d5b4e3b5831f13e951ad75fe859",
+    "r2_git_blob_sha": "af80fd1c9845730cbbdd68413dcb9427428427b5"
+  },
+  "tb_reconciliation": {
+    "route_reclassification_path": "canonical/governance/ESCAPE_TB_SCIENCE_CURRENT_ROUTE_RECLASSIFICATION_20261010_V2.json",
+    "route_reclassification_git_blob_sha": "2639f4e58ef71502707ab6b2bb37efb592b1a234",
+    "verification_path": "canonical/verification/ESCAPE_TB_SCIENCE_CURRENT_ROUTE_RECLASSIFICATION_V2_VERIFY_20261010_V1.json",
+    "verification_git_blob_sha": "10c1c7ef2650e20d54d504e3c6363ef4febdea00",
+    "general_caller_repair_verification_path": "canonical/verification/TB_SCIENCE_BOUND_START_CAS_CALLER_REPAIR_VERIFY_20261010_V1.json",
+    "general_caller_repair_verification_git_blob_sha": "bf5aa5cddf6c1272a9664320273d39725470b2e5",
+    "rank20_v3_parked_unresolved": true,
+    "active_gap_b_count": 2
+  },
+  "professional_whole_leaf": {
+    "residual_ledger_path": "canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_RESIDUAL_LEDGER_20261010_V1.json",
+    "residual_ledger_git_blob_sha": "ae5503829ad340cccef287f37ff70e4ab9288d33",
+    "uncovered_partition_worklist_path": "canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_UNCOVERED_PARTITION_WORKLIST_20261010_V1.json",
+    "uncovered_partition_worklist_git_blob_sha": "c2c412c6a14ba9de3e127177a362095a88cd14c5",
+    "claim_scope_gate_activation_path": "canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_CERTIFICATE_GATE_ACTIVATION_20261010_V2.json",
+    "claim_scope_gate_activation_git_blob_sha": "34fdaf7f4a91d0e28d446a9d554c3aa0fbec8222",
+    "admitted_v2_chain_count": 0,
+    "claim_scope_construction_required_count": 24,
+    "property_truth_ready_count": 0
+  },
+  "authority": {
+    "read_only_evidence_plan": true,
+    "full_execution": false,
+    "promotion": false,
+    "terminal": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
