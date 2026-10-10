@@ -132,8 +132,8 @@
     "root_subject_binding_authority": false
   },
   "same_subject_root_binding_frontier": {
-    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V7_SAME_SUBJECT_ROOT_BINDING_WORKLIST_20261010_V6.json",
-    "git_blob_sha": "1a7238420d12b043026a5367769eb610d9b08495",
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V7_SAME_SUBJECT_ROOT_BINDING_WORKLIST_20261010_V7.json",
+    "git_blob_sha": "5acef1c552f6e2562a1b0b34e1596cf15ae10a81",
     "root_count": 12,
     "roots_with_bounded_semantic_support": 12,
     "roots_with_bounded_execution_support": 12,
