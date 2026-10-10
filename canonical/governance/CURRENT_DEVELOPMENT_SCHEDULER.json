@@ -1,10 +1,10 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_DEVELOPMENT_SCHEDULER_POINTER_V1",
   "date": "2026-10-10",
-  "status": "ACTIVE__POST_COMPOSITION_V18__PROFESSIONAL_SCOPE_24_OF_24__PROPERTY_TRUTH_2_OF_24__TEN_EXECUTION_LEAVES_OPEN__ONE_SHARED_SEMANTIC_COMPLETENESS_BLOCKER__PARALLEL_EVIDENCE_READY__FULL_EXECUTION_FAILS_CLOSED_WITHOUT_VECTOR_OR_SEPARATE_AUTHORITY",
-  "authoritative_activation": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V13.json",
-  "runtime": "canonical/runtime/capability_parallel_frontier_post_composition_v1.py",
-  "primary_entrypoint": "canonical.runtime.capability_parallel_frontier_post_composition_v1.plan_current_post_composition_frontier",
+  "status": "ACTIVE__POST_COMPOSITION_V19__PROPERTY_TRUTH_4_OF_24__EIGHT_EXECUTION_LEAVES_OPEN__TWELVE_SEMANTIC_IDENTITY_CARRIERS_VERIFIED__CLAIM_SCOPED_TOTALITY_OPEN__PARALLEL_READ_ONLY_EVIDENCE_READY__FULL_EXECUTION_FAILS_CLOSED",
+  "authoritative_activation": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V15.json",
+  "runtime": "canonical/runtime/capability_parallel_frontier_post_composition_v2.py",
+  "primary_entrypoint": "canonical.runtime.capability_parallel_frontier_post_composition_v2.plan_current_post_composition_frontier_v2",
   "objective": "MAXIMIZE_REUSABLE_VERIFIED_CAPABILITY_GENERALIZATION_RELIABILITY_AND_EFFICIENCY_PER_RESOURCE_AND_MINIMIZE_WALL_CLOCK_THROUGH_SAFE_PARALLELISM",
   "checkpoint_policy": "OPUS_5_5_IS_SECONDARY_FRONTIER_AUDIT__NOT_PRIMARY_DEVELOPMENT_GATE",
   "terminal_autopilot_policy": "NEW_CHECKPOINT_DISPATCH_REQUIRES_EXPLICIT_CAPABILITY_FIRST_ADMISSION",
@@ -27,12 +27,12 @@
   "planning_entrypoint": "canonical.runtime.capability_first_scheduler_v1.rank_work",
   "current_live_work_frontier": {
     "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
-    "git_blob_sha": "74ee9f14f40f0b0f23d668fb403aff60dca6d781",
-    "status": "CURRENT_POST_COMPOSITION_FRONTIER__PROPERTY_TRUTH_2_OF_24__INDEPENDENT_SHARED_SEMANTIC_BLOCKER_BOUND__EXECUTION_DEPLETION_PRIMARY",
+    "git_blob_sha": "cf3ddaa5f5e810ed992a3f9044a7c7232955a259",
+    "status": "CURRENT_POST_COMPOSITION_FRONTIER__PROPERTY_TRUTH_4_OF_24__8_EXECUTION_AND_12_SEMANTIC_LEAVES_OPEN__SEMANTIC_IDENTITY_CARRIER_12_OF_12",
     "professional_verified_root_subject_binding_count": 12,
     "professional_same_subject_composition_admissible": true,
     "professional_whole_leaf_scope_complete_count": 24,
-    "professional_property_truth_closed_count": 2
+    "professional_property_truth_closed_count": 4
   },
   "live_score_contract": {
     "path": "canonical/governance/LIVE_WORK_SCORE_CALIBRATION_CONTRACT_20261010_V1.json",
@@ -48,15 +48,16 @@
   "scalar_fallback_runtime": "canonical/runtime/capability_first_live_scheduler_v1.py",
   "scalar_fallback_entrypoint": "canonical.runtime.capability_first_live_scheduler_v1.rank_live_work",
   "parallel_frontier_policy": {
-    "runtime": "canonical/runtime/capability_parallel_frontier_v1.py",
-    "primary_entrypoint": "plan_current_parallel_frontier",
+    "runtime": "canonical/runtime/capability_parallel_frontier_v2.py",
+    "runtime_git_blob_sha": "209d8d11494645432354636a3dc17e7b515abaf8",
+    "primary_entrypoint": "plan_parallel_frontier",
     "pareto_first": true,
     "explicit_dependencies": true,
     "explicit_mutation_and_authority_conflicts": true,
     "read_only_incomplete_vector_parallelism": true,
     "full_execution_requires_complete_vector_or_separate_explicit_authority": true,
     "scalarization_requires_proved_tradeoff_contract": true,
-    "dynamic_current_pointer_follow": "PROFESSIONAL_SEQUENTIAL_ROOT_FRONTIER_PLUS_COHERENT_ASSURANCE_DEPENDENT_PROJECTION__OTHER_SOURCE_DRIFT_FAILS_CLOSED"
+    "dynamic_current_pointer_follow": "V15_POSTCOMPOSITION_ADAPTER_BINDS_ALL_SEVEN_CURRENT_SOURCES__UNMODELED_SOURCE_DRIFT_FAILS_CLOSED"
   },
   "independent_parallel_frontier_verification": {
     "path": "canonical/verification/CAPABILITY_PARALLEL_FRONTIER_V9_INDEPENDENT_VERIFY_20261010_V1.json",
@@ -64,15 +65,15 @@
     "status": "PASS__PYCOMPILE__35_OF_35_COMBINED_CORE_AND_PARALLEL_SCHEDULER_TESTS__CURRENT_FRONTIER_REPLAY__SIX_SAFE_READ_ONLY_LANES__ZERO_FULL_EXECUTION"
   },
   "whole_leaf_residual_control": {
-    "path": "canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_SCOPE_BATCH_ACTIVATION_20261010_V1.json",
-    "git_blob_sha": "d40188f87818d9c6a4507a043380a753ca563e18",
-    "status": "24_OF_24_WHOLE_DOMAIN_EQUIVALENCE_AND_SCOPE_COMPLETE__PROPERTY_TRUTH_0_OF_24",
-    "verification": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_SCOPE_BATCH_VERIFY_20261010_V1.json",
-    "verification_git_blob_sha": "4c2d40a262f18f34bb35f94b59660d60972d45ef",
-    "admitted_v2_chain_count": 24,
-    "claim_scope_construction_required_count": 0,
-    "property_truth_ready_count": 24,
-    "property_truth_closed_count": 0
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_LEAF_EVIDENCE_REGISTRY_20261010_V1.json",
+    "git_blob_sha": "71863cfbb47f9951eaf34e4e89692aee5c540560",
+    "status": "24_OF_24_WHOLE_SCOPE_COMPLETE__PROPERTY_TRUTH_4_OF_24__R1_R7_R10_R12_EXECUTION_VERIFIED",
+    "verification": "canonical/verification/PROFESSIONAL_QUALITY_LEAF_REGISTRY_PROPERTY_TRUTH_VERIFY_20261010_V2.json",
+    "verification_git_blob_sha": "bdde7b52793272623773b07bf774c0a74c6be7af",
+    "whole_leaf_scope_complete_count": 24,
+    "property_truth_closed_count": 4,
+    "open_execution_leaf_count": 8,
+    "open_semantic_leaf_count": 12
   },
   "v12_activation": {
     "path": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V12.json",
@@ -89,19 +90,29 @@
   "post_composition": {
     "professional_scope_construction_complete": true,
     "professional_scope_complete_count": 24,
-    "professional_property_truth_closed_count": 2,
-    "current_primary_professional_edge": "DEPLET_REMAINING_EXECUTION_PROPERTY_TRUTH__PARALLEL_SHARED_SEMANTIC_COMPLETENESS",
-    "full_current_main_regression_open": true,
-    "r10_structural_guard_verification": {
-      "path": "canonical/verification/PROFESSIONAL_QUALITY_R10_STRUCTURAL_GUARD_INDEPENDENT_VERIFY_20261010_V1.json",
-      "git_blob_sha": "1fab18d1ffc51ee674f3ebc9f0971c8eef0df23c",
-      "structural_slot_checks": "16_OF_16_PASS",
-      "integrated_guard_checks": "30_OF_30_PASS",
-      "detection_completeness_proved": false,
-      "whole_leaf_property_truth_proved": false
-    },
-    "semantic_shared_blocker_verification": "canonical/verification/PROFESSIONAL_QUALITY_SEMANTIC_SHARED_BLOCKER_INDEPENDENT_VERIFY_20261010_V1.json",
-    "semantic_shared_blocker_git_blob_sha": "d5218f612e282f1b9339b5b3e84b5c74282b7042",
-    "semantic_duplicate_programs_collapsed": true
+    "professional_property_truth_closed_count": 4,
+    "current_primary_professional_edge": "DEPLET_REMAINING_8_EXECUTION_PROPERTY_TRUTH__PARALLEL_CLAIM_SCOPED_SEMANTIC_CC_R1_CC_R2_CC_R3_R4",
+    "semantic_identity_carrier_verified_count": 12,
+    "semantic_property_truth_closed_count": 0,
+    "full_current_main_regression_open": true
+  },
+  "semantic_totality_control": {
+    "reduction_path": "canonical/governance/PROFESSIONAL_SEMANTIC_TOTALITY_REUSE_REDUCTION_20261010_V1.json",
+    "reduction_git_blob_sha": "ab7e1c6ac1aad3b6bd3f32dfc959cefc903cbb6d",
+    "identity_carrier_activation_path": "canonical/governance/PROFESSIONAL_SEMANTIC_IDENTITY_CARRIER_ACTIVATION_20261010_V1.json",
+    "identity_carrier_activation_git_blob_sha": "3e99ddbf25cd8e392c5a22a5c14ae5fea5dc3138",
+    "identity_carrier_verification_path": "canonical/verification/PROFESSIONAL_SEMANTIC_IDENTITY_CARRIER_VERIFY_20261010_V1.json",
+    "identity_carrier_verification_git_blob_sha": "35a3ccf9ad454aa0318a4ed10edc065830c3874d",
+    "semantic_claim_count": 12,
+    "identity_factorization_verified_count": 12,
+    "semantic_property_truth_closed_count": 0,
+    "next": "INSTANTIATE_CLAIM_SCOPED_CC_R1_CC_R2_CC_R3_R4_FOR_SMALLEST_RESIDUAL_SEMANTIC_LEAF"
+  },
+  "v15_activation": {
+    "path": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V15.json",
+    "git_blob_sha": "a8c280443b1b87311f3fef1ef808ad5484e0f5e8",
+    "independent_verification": "canonical/verification/POST_COMPOSITION_FRONTIER_V2_INDEPENDENT_VERIFY_20261010_V1.json",
+    "independent_verification_git_blob_sha": "35190f63e15afb9438bf328d158e6a6eafd1583a",
+    "full_execution_authority": false
   }
 }
