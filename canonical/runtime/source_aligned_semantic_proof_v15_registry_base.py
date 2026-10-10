@@ -24,7 +24,7 @@ from canonical.runtime.source_aligned_semantic_proof_v10 import (
 from canonical.runtime.certified_document_effect_field_edge_v1 import (
     prove_field,
 )
-from canonical.runtime.brain_owned_semantic_relation_edge_registry_v3 import (
+from canonical.runtime.brain_owned_semantic_relation_edge_registry_v5 import (
     can_prove as brain_edge_can_prove,
     verify as brain_edge_verify,
 )
@@ -287,7 +287,7 @@ def verify_proof(
             "V15_REGISTRY_BASE_PRESERVES_V14_FIELD_EDGE_SEMANTICS_WITH_REGISTRY_V3_"
             "INDEPENDENTLY_RECOMPUTED_SCOPED_SEMANTIC_ENTAILMENT_DAG;"
             "MISSING_RELATION_VERIFIER_OR_UNPROVED_EDGE_LEAVES_THE_FIELD_UNPROVED;"
-            "BRAIN_OWNED_SEMANTIC_RELATION_EDGE_REGISTRY_V3_IS_USED_ONLY_WHEN_EVERY_DAG_"
+            "BRAIN_OWNED_SEMANTIC_RELATION_EDGE_REGISTRY_V5_IS_USED_ONLY_WHEN_EVERY_DAG_"
             "RECEIPT_IS_A_SUPPORTED_INTERNAL_PROOF_CLASS;"
             "UNSUPPORTED_EVIDENCE_WITHOUT_CALLER_VERIFIER_REMAINS_TOP;"
             "NO_GENERAL_RAW_LANGUAGE_EXTRACTION_CLOSURE"
