@@ -1,0 +1,75 @@
+{
+  "schema": "PROJECT_BRAIN_REACHED_ESCAPE_REPAIR_CYCLE_LIVE_FABRIC_VERIFY_20261010_V2",
+  "date": "2026-10-10",
+  "status": "PASS__CURRENT_MAIN_RECONCILED__DISPATCH_BOUND_VERIFIED_REPAIR_RECERTIFICATION_LIVE",
+  "subject": {
+    "branch": "successor/reached-escape-repair-cycle-20261010-v3",
+    "exact_blobs": {
+      "canonical/runtime/reached_escape_repair_cycle_v1.py": "c2d606cb176fe18735c458b415a943848a7d15a0",
+      "canonical/runtime/unified_cognitive_fabric_v1.py": "c3dbea74679450273bd07689251499bcd9609212",
+      "canonical/tests/test_reached_escape_repair_cycle_v1.py": "104b2b078096f6c8a9ffb0a4fe632086d0411592",
+      "canonical/tests/test_reached_escape_construction_invariant_boundary_v1.py": "c1a1e070ba534fea229072de7f37f079551efc46"
+    },
+    "current_main_dependencies": {
+      "canonical/runtime/certified_reached_escape_state_constructor_v1.py": "c4ee08f5f3a98889df8f63cd087d19736b38353d",
+      "canonical/runtime/certified_reached_escape_repair_dispatch_v1.py": "80c48fdf35a6a0f2afeab5b317af52086fb0d897",
+      "canonical/runtime/reached_escape_finite_totality_certificate_v1.py": "85487335b7e774ac9084b34c60e0175842771036",
+      "canonical/runtime/reached_escape_state_kernel_v1.py": "b1435d90f039bd1d809ff364c325c3d0858d3afd"
+    }
+  },
+  "verified_behavior": {
+    "certified_dispatch_contract_is_single_repair_ontology": true,
+    "exact_dispatch_digest_binding": true,
+    "exact_dispatch_alternative_binding": true,
+    "provider_candidate_has_zero_truth_verification_promotion_acceptance_terminal_authority": true,
+    "provider_and_verifier_same_callable_rejected": true,
+    "independent_verifier_id_required": true,
+    "verifier_receipt_binds_state_repair_dispatch_alternative_candidate_and_kind": true,
+    "stale_dispatch_binding_rejected": true,
+    "wrong_alternative_rejected": true,
+    "nonseparating_discriminator_rejected": true,
+    "exact_uncovered_region_policy_target_required": true,
+    "policy_then_discriminator_multiround_compounding": true,
+    "constructor_recertification_required": true,
+    "final_allowed_round_success_recognized": true,
+    "live_unified_fabric_reentry_verified": true,
+    "no_bound_provider_or_verifier_preserves_constructor_only_fail_closed_path": true
+  },
+  "focused_verification": {
+    "provider": "Sprites",
+    "sprite": "brain-escape-constructor-verify-20261010",
+    "sprite_id": "sprite-e06542b9-2666-4407-97ac-e52e4da64ca2",
+    "tests_run": 17,
+    "tests_passed": 17,
+    "failures": 0
+  },
+  "live_fabric_verification": {
+    "provider": "Sprites",
+    "sprite": "brain-live-runtime-v1-verify-20261008",
+    "sprite_id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13",
+    "workspace": "unified-fabric-current-byte-verify",
+    "tests_run": 4,
+    "tests_passed": 4,
+    "failures": 0
+  },
+  "broader_regression_probe": {
+    "existing_fabric_tests_observed_pass": 20,
+    "remaining_cases_classification": "INCONCLUSIVE_SELECTIVE_WORKSPACE_MISSING_UNRELATED_CURRENT_R1_R2_FILES",
+    "remaining_cases_failure_credit": 0,
+    "complete_private_repo_regression_claimed": false
+  },
+  "hard_nonclaims": [
+    "NO_GLOBAL_REPAIR_ACQUIRABILITY_PROOF",
+    "NO_GLOBAL_ESCAPE_PROGRESS_TOTALITY_PROOF",
+    "NO_CLAIM_EVERY_FUTURE_REPAIR_HAS_A_PROVIDER",
+    "NO_OPEN_ENDED_MISSION_TERMINAL_CLAIM",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
