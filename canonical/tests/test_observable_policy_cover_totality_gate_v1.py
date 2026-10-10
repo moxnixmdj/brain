@@ -26,6 +26,8 @@ def base():
                 "adequacy_receipt": receipt(
                     policy_id="p0",
                     policy_adequate_on_every_listed_world=True,
+                    policy_safe_on_every_listed_world=True,
+                    hard_constraint_scope_complete=True,
                     brain_owned=True,
                     deployed_exact=True,
                     resource_bound_proved=True,
@@ -38,6 +40,8 @@ def base():
                 "adequacy_receipt": receipt(
                     policy_id="p1",
                     policy_adequate_on_every_listed_world=True,
+                    policy_safe_on_every_listed_world=True,
+                    hard_constraint_scope_complete=True,
                     brain_owned=True,
                     deployed_exact=True,
                     resource_bound_proved=True,
@@ -201,6 +205,8 @@ def test_cheaper_truthful_discriminator_beats_available_common_policy():
         "adequacy_receipt": receipt(
             policy_id="p_all",
             policy_adequate_on_every_listed_world=True,
+            policy_safe_on_every_listed_world=True,
+            hard_constraint_scope_complete=True,
             brain_owned=True,
             deployed_exact=True,
             resource_bound_proved=True,
@@ -223,6 +229,8 @@ def test_equal_cost_prefers_common_adequate_policy_without_observation():
         "adequacy_receipt": receipt(
             policy_id="p_all",
             policy_adequate_on_every_listed_world=True,
+            policy_safe_on_every_listed_world=True,
+            hard_constraint_scope_complete=True,
             brain_owned=True,
             deployed_exact=True,
             resource_bound_proved=True,
