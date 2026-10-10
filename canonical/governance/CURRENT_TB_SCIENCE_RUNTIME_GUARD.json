@@ -1,7 +1,7 @@
 {
-  "schema": "PROJECT_BRAIN_CURRENT_TB_SCIENCE_RUNTIME_GUARD_V1",
+  "schema": "PROJECT_BRAIN_CURRENT_TB_SCIENCE_RUNTIME_GUARD_V2",
   "date": "2026-10-10",
-  "status": "V12_GENERIC_AUTHORITATIVE_ARTIFACT_FINISH_GATE_VERIFIED__PUBLIC_RUNTIME_COMPOSITION_VERIFIED__RANK18_TASK_READ_AUTHORITY_EFFECTIVE__ACTIVATION_NOT_ARMED",
+  "status": "RANK18_FINAL_ZERO_BOUND__V12_RUNTIME_RETIRED_FOR_NEW_SLOTS__RANK19_EXECUTION_FROZEN_PENDING_VERIFIED_PLANNER_V7_REPAIR",
   "rank17_result_truth": {
     "path": "canonical/verification/TB_SCIENCE_RANK17_V6_IRREVERSIBLE_RESULT_TRUTH_20261010_V1.json",
     "git_blob_sha": "3d7a0339ccf320f256834fcbde6427c8c62d473b"
@@ -23,7 +23,8 @@
     "typed_action_protocol": {
       "path": "canonical/runtime/science_typed_action_protocol_v2.py",
       "git_blob_sha": "fa10b92942b92ab6c7f2f1831f660f2a2e3bd6e3"
-    }
+    },
+    "historical_status": "RETIRED_FOR_FRESH_TB_SCIENCE_SLOTS_AFTER_RANK18_PLANNER_TIMEOUT_UNDERBUDGET"
   },
   "verified_tests": {
     "isolated_sprite_targeted": 5,
@@ -35,18 +36,33 @@
   "rank18": {
     "slot_id": "terminal-bench-science/longitudinal-clinical-agent::trial-0",
     "task_digest": "sha256:e9a166b2173f7014d4f1559505397b221f94bc446eab031f94791b35e0e5f1c9",
-    "task_read": false,
-    "task_started": false,
-    "benchmark_trials_consumed": 0,
-    "task_read_authority": true,
-    "execution_authority": true
+    "task_read": true,
+    "task_started": true,
+    "benchmark_trials_consumed": 1,
+    "final_classification": "FINAL_ZERO",
+    "result_truth": {
+      "path": "canonical/verification/TB_SCIENCE_RANK18_V6_IRREVERSIBLE_RESULT_TRUTH_20261010_V1.json",
+      "git_blob_sha": "2459d821057d6f7178ffea440fb19966e56a3d89"
+    },
+    "task_read_authority": false,
+    "execution_authority": false,
+    "retry_authority": false,
+    "replacement_authority": false
   },
-  "next": "ONLY_EXACT_ONE_FILE_RANK18_V1_ACTIVATION_MAY_ARM_EXECUTION__TASK_READ_REMAINS_GATED_BY_ACTIVATION_AND_LIVE_CARRIER_QUALIFICATION",
+  "next": "VERIFY_PLANNER_V7_WITH_REAL_LOCAL_QWEN_ZERO_EXPOSURE__THEN_RESEAL_RUNTIME_BEFORE_ANY_RANK19_TASK_READ",
   "public_reseal": {
     "reconciliation_git_blob_sha": "43405b2f540fd8a8e3a6a07a1f7ccb431432590e",
     "verification_git_blob_sha": "329985ebb77c51091762d9003ab82acb24612495",
     "merge_commit": "ff74920b8827243910da297420222c789e5b751c",
     "exact_surface_blob": "4f8c9bc50dc5e959c3f9f47253df214ae7c6a5da",
     "zero_exposure_verified": true
+  },
+  "rank19": {
+    "task_read": false,
+    "task_started": false,
+    "benchmark_trials_consumed": 0,
+    "task_read_authority": false,
+    "execution_authority": false,
+    "blocker": "PLANNER_V7_ZERO_EXPOSURE_REAL_LOCAL_QWEN_VERIFICATION_AND_RUNTIME_RESEAL_REQUIRED"
   }
 }
