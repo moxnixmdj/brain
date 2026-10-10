@@ -79,6 +79,8 @@ def test_caller_true_flags_do_not_create_policy_authority():
     assert "POLICY_ADEQUACY_SAFETY_AND_RESOURCE_VERIFIER_REQUIRED" in out["reason"]
     assert out["certified_reached_state_admitted"] is False
     assert out["candidate_authority_flags_ignored"] is True
+    assert out["verified_state"] is None
+    assert out["verified_state_sha256"] is None
 
 
 def test_verified_policy_receipt_allows_existing_finite_certificate_path():
@@ -89,6 +91,14 @@ def test_verified_policy_receipt_allows_existing_finite_certificate_path():
     assert out["pass"] is True, out
     assert out["truth_authority_bound"] is True
     assert out["certified_reached_state_admitted"] is True
+    assert out["verified_state"]["policies"] == [{
+        "policy_id": "p",
+        "authenticated": True,
+        "safe": True,
+        "adequate_region_ids": ["r1", "r2"],
+    }]
+    assert out["verified_state"]["discriminators"] == []
+    assert out["verified_state_sha256"] == c._digest(out["verified_state"])
     assert out["kernel_result"]["status"] == "TERMINALIZE_WITH_COMMON_POLICY"
     assert out["resource_admissibility_proved"] is True
     assert out["resource_unit"] == "WORK_UNIT"
