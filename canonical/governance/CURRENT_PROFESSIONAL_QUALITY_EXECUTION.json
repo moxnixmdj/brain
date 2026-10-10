@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_PROFESSIONAL_QUALITY_EXECUTION_POINTER_V1",
   "date": "2026-10-10",
-  "status": "P1_V3_LIVE_UNCHANGED__V7_PROOF_SUBJECT_CURRENT__V8_EXACT_R12_TOTALITY_MEDIATION_SUCCESSOR_VERIFIED__V7_TO_V8_SEMANTIC_TRANSPORT_AND_V8_NONVACUITY_OPEN__PROPERTY_TRUTH_12_OF_24__ALL_12_EXECUTION_LEAVES_VERIFIED__NOT_LIVE_DEFAULT",
+  "status": "P1_V3_LIVE_UNCHANGED__V8_R12_REFINEMENT_AND_C1_TO_C7_REUSE_VERIFIED__OBSERVABLE_POLICY_COVER_CC_R3_ADAPTER_VERIFIED__REAL_V8_TOTALITY_WITNESS_OPEN__PROPERTY_TRUTH_12_OF_24__ALL_12_EXECUTION_LEAVES_VERIFIED__NOT_LIVE_DEFAULT",
   "profile_path": "canonical/governance/PROFESSIONAL_QUALITY_P1_EXECUTION_PROFILE_20261010_V3.json",
   "profile_sha": "f7e89eafbb691c16d1bdf5b8d295a468d5e3bec5",
   "router_path": "canonical/runtime/professional_quality_p1_router_v3.py",
@@ -580,7 +580,8 @@
       "shared_acceptance_proved": true,
       "catalog_completeness_proved": false,
       "catalog_alone_can_authorize_semantic_property_truth": false,
-      "new_primitive_required": false
+      "new_primitive_required": false,
+      "reuse_resolution": "REUSE_OBSERVABLE_POLICY_COVER_TOTALITY_AND_CLAIM_SCOPED_CC_R3_ADAPTER__FINITE_DEFEATER_CATALOG_COMPLETENESS_NOT_REQUIRED_FOR_POSITIVE_CONSTRUCTIVE_COVER"
     },
     "r1_execution": {
       "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_R1_EXECUTION_PROPERTY_TRUTH_INDEPENDENT_VERIFY_20261010_V1.json",
@@ -708,7 +709,7 @@
     "promotion_ready": false
   },
   "r12_semantic_cc_r3_current": {
-    "status": "CURRENT_V7_FROZEN_R12_CLAIM__8_OF_8_CONTRACT_CLAUSES_VERIFIED__STRONGER_MATERIAL_DEFEATER_TOTALITY_OPEN__V8_SUCCESSOR_MEDIATION_VERIFIED_BUT_CROSS_SUBJECT_TRANSPORT_FORBIDDEN",
+    "status": "CURRENT_V8_REUSE_FRONTIER__V7_TO_V8_POSITIVE_ROUTE_REFINEMENT_VERIFIED__C1_TO_C7_EXACT_V8_REVERIFIED__POLICY_COVER_CC_R3_ADAPTER_VERIFIED__REAL_V8_TOTALITY_WITNESS_OPEN",
     "current_subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
     "current_subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
     "successor_v8_subject_id": "PROFESSIONAL_QUALITY_P1_V8_TOTALITY_MEDIATED_SYSTEM_20261010_V7",
@@ -716,7 +717,7 @@
     "root_contract_clause_count": 8,
     "root_contract_verified_clause_count": 8,
     "v8_totality_mediation_mechanism_verified": true,
-    "v7_to_v8_semantic_refinement_proved": false,
+    "v7_to_v8_semantic_refinement_proved": true,
     "v8_nonvacuity_proved": false,
     "real_v8_positive_totality_certificate_instantiated": false,
     "cc_r3_terminal_closure_proved": false,
@@ -724,7 +725,9 @@
     "property_truth_credit": false,
     "quality_authority": false,
     "terminal_credit_delta": 0,
-    "exact_next": "PROVE_V7_TO_V8_R12_SEMANTIC_REFINEMENT_WITH_NO_CROSS_SUBJECT_AUTHORITY_TRANSPORT__REUSE_C1_TO_C7_WHERE_PRESERVED__OBTAIN_ONE_REAL_V8_POSITIVE_TOTALITY_WITNESS_TO_REESTABLISH_C8_NONVACUITY_AND_MATERIAL_TOTALITY__THEN_R4"
+    "exact_next": "BIND_REAL_EXACT_V8_POLICY_RELEVANT_STATE_COVER__INDEPENDENTLY_VERIFY_POSITIVE_ROUTE_AND_EXACT_BYTES__REPLAY_CC_R3_ADAPTER__THEN_R4",
+    "c1_to_c7_exact_v8_reverified": true,
+    "cc_r3_policy_cover_adapter_verified": true
   },
   "latest_leaf_property_truth_verification": {
     "path": "canonical/verification/PROFESSIONAL_QUALITY_LEAF_REGISTRY_PROPERTY_TRUTH_VERIFY_20261010_V7.json",
@@ -767,5 +770,12 @@
     "semantic_property_truth_authority": false,
     "quality_authority": false,
     "terminal_authority": false
+  },
+  "exact_next": "BIND_ONE_REAL_EXACT_V8_RUN_TO_A_COMPLETE_POLICY_RELEVANT_WORLD_SET__CONSTRUCT_POLICY_COVER_USING_EXISTING_OWNED_ADEQUACY_RECEIPTS_AND_ONLY_NEEDED_TRUTHFUL_POLICY_CHANGING_DISCRIMINATORS__INDEPENDENT_REPLAY__CLOSE_C8_AND_CC_R3__BIND_R4_TO_SAME_EXACT_SUBJECT_AND_WITNESS__THEN_PROPAGATE_SHARED_REUSE_TO_REMAINING_SEMANTIC_LEAVES__RUN_FULL_CURRENT_MAIN_REGRESSION",
+  "r12_v8_reuse_closure_current": {
+    "path": "canonical/governance/PROFESSIONAL_V8_R12_REUSE_CLOSURE_20261010_V1.json",
+    "git_blob_sha": "5ee3d7405ac9a16e6d872b3e05a147ec10abd419",
+    "verification_path": "canonical/verification/PROFESSIONAL_V8_R12_REUSE_CLOSURE_INDEPENDENT_VERIFY_20261010_V1.json",
+    "verification_git_blob_sha": "b01d8ea91f17313bb78feb0dcec0cbd302b671f6"
   }
 }
