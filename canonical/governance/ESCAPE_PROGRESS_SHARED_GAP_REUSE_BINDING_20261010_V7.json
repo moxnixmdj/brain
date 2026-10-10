@@ -1,0 +1,177 @@
+{
+  "schema": "PROJECT_BRAIN_ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V7",
+  "date": "2026-10-10",
+  "status": "ACTIVE_SUCCESSOR_CAUSAL_BINDING__12_ACQUISITION_1_INTERNAL_PARKED__ACTIVE_GAP_B_ZERO__CC_R3_OPEN__ZERO_CREDIT",
+  "predecessor": {
+    "path": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V6.json",
+    "git_blob_sha": "a6fe5eda7b596d5a24cf75bc9b046bf53f4fe7be"
+  },
+  "frozen_claim": {
+    "path": "canonical/governance/ESCAPE_PROGRESS_TOTALITY_FROZEN_13_CLAIM_20261010_V3.json",
+    "git_blob_sha": "e534dfb56e8e3cde66a260de299627662965e079",
+    "rule": "FROZEN_OBLIGATION_UNIVERSE_AND_IDS_UNCHANGED"
+  },
+  "current_successor_manifest": {
+    "path": "canonical/governance/ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_20261010_V3.json",
+    "git_blob_sha": "17e6c23f5463a52c94b4cf6f8a821bea67fd5958",
+    "row_count": 13,
+    "gap_a_count": 12,
+    "gap_b_count": 1
+  },
+  "causal_reclassification": {
+    "path": "canonical/governance/ESCAPE_GAP_B_CAUSAL_RECLASSIFICATION_20261010_V1.json",
+    "git_blob_sha": "0aec57297e933517767f27207a2fb9535b857a58",
+    "changed_obligation_ids": [
+      "PROWORK_GDPVAL_GE_1846",
+      "CHARTOGRAPHY_TOOLS_GE_89"
+    ],
+    "prior_gap_a_count": 10,
+    "prior_gap_b_count": 3,
+    "successor_gap_a_count": 12,
+    "successor_gap_b_count": 1,
+    "active_gap_b_count": 0
+  },
+  "shared_gaps": {
+    "GAP_A_ACQUISITION_TOTALITY": {
+      "obligation_count": 12,
+      "exact_predicate": "FOR_EACH INFORMATION DEPENDENT ROW__PROVE EITHER A CURRENTLY AVAILABLE AUTHENTICATED SCOPE COMPLETE BRAIN OWNED SAFE ADEQUATE RESOURCE ADMISSIBLE COMMON POLICY TERMINAL CERTIFICATE__OR A CURRENTLY ACQUIRABLE AUTHENTICATED SAFE TRUTH PRESERVING POLICY CHANGING OBSERVATION WITH FINITE COMPLETE OUTCOMES AND STRICT DECISION REGION SHRINK",
+      "proof_modes": {
+        "TERMINAL_COMMON_POLICY": {
+          "required_proof_fields": [
+            "CURRENT_AVAILABILITY",
+            "AUTHENTICATED_SCOPE_COMPLETE_COMMON_POLICY_CERTIFICATE",
+            "BRAIN_OWNERSHIP",
+            "ADEQUACY_OVER_ENTIRE_CURRENT_DECISION_REGION",
+            "SAFETY_OVER_ENTIRE_CURRENT_DECISION_REGION",
+            "RESOURCE_ADMISSIBILITY",
+            "CONTENT_ADDRESS"
+          ],
+          "semantic_effect": "TERMINALIZE_CURRENT_DECISION_REGION_WITHOUT_REQUIRING_AN_OBSERVATION"
+        },
+        "STRICT_DISCRIMINATOR": {
+          "required_proof_fields": [
+            "CURRENT_ACQUIRABILITY",
+            "FINITE_COMPLETE_OUTCOME_SET",
+            "STRICT_DECISION_REGION_SHRINK",
+            "AUTHENTICATED_TRUTH_PRESERVATION",
+            "SAFETY",
+            "CONTENT_ADDRESS"
+          ],
+          "semantic_effect": "STRICTLY_SHRINK_CURRENT_DECISION_REGION_ON_EVERY_NONTERMINAL_OUTCOME"
+        }
+      },
+      "default_resolution": "TRY_TERMINAL_COMMON_POLICY_FROM_EXISTING_SCOPE_COMPLETE_CERTIFICATE_MACHINERY_BEFORE_ACQUIRING_A_NEW_DISCRIMINATOR"
+    },
+    "GAP_B_INTERNAL_ROUTE_STRICT_PROGRESS": {
+      "obligation_count": 1,
+      "exact_predicate": "FOR_EACH_CURRENT_INTERNAL_ROUTE_ROW__BIND_ONE_EXECUTABLE_VERIFIED_ACTION_TO_A_FINITE_WELL_FOUNDED_PROGRESS_MEASURE_AND_PROVE_EVERY_ALLOWED_OUTCOME_TERMINALIZES_OR_STRICTLY_DECREASES_THE_MEASURE",
+      "required_proof_fields": [
+        "VERIFIED_EXECUTABLE_ACTION",
+        "CURRENT_EXECUTABILITY",
+        "FINITE_WELL_FOUNDED_PROGRESS_MEASURE",
+        "EVERY_ALLOWED_OUTCOME_TERMINAL_OR_STRICTLY_DECREASING",
+        "SAFETY",
+        "CONTENT_ADDRESS"
+      ],
+      "default_resolution": "NO ACTIVE GAP B WORK__TB SCIENCE REMAINS PARKED UNTIL FRESH EXPLICIT CAPABILITY FIRST AUTHORITY",
+      "current_active_obligation_count": 0,
+      "parked_obligation_ids": [
+        "TB_SCIENCE_GE_58_7"
+      ]
+    }
+  },
+  "historical_executable_audit": {
+    "path": "canonical/runtime/escape_progress_shared_gap_audit_v1.py",
+    "git_blob_sha": "53fb708e755561696f57b39705b04cefcaa2233b",
+    "role": "HISTORICAL_V1_9_A_4_B_AUDIT__DO_NOT_USE_AS_CURRENT_SUCCESSOR_COUNT_AUTHORITY",
+    "still_valid_for_original_v1_manifest": true
+  },
+  "successor_executable_audit": {
+    "status": "INDEPENDENTLY_VERIFIED_V3__18_OF_18__PYCOMPILE_PASS",
+    "path": "canonical/runtime/escape_progress_shared_gap_audit_v3.py",
+    "git_blob_sha": "14adf2c1a431285a542340a740e27e764edb1ce5",
+    "tests": {
+      "path": "canonical/tests/test_escape_progress_shared_gap_audit_v3.py",
+      "git_blob_sha": "b5861a10ce69bfb2d9be171560cf66f22cd43961"
+    },
+    "verification": {
+      "path": "canonical/verification/ESCAPE_PROGRESS_SHARED_GAP_EXECUTABLE_AUDIT_V3_VERIFY_20261010_V1.json",
+      "git_blob_sha": "4156e6c9a1c27913120568d8e505f0f154907015"
+    },
+    "required_property": "COUNT_GENERIC_MANIFEST_DERIVED_AND_GAP_A_MODE_EXACT__NO_HARDCODED_10_3_OR_TERMINALIZATION_AS_FAKE_SHRINK",
+    "cc_r3_promotion_rule": "ONLY_IF_ALL_13_CURRENT_SUCCESSOR_ROWS_HAVE_VALID_CONTENT_ADDRESSED_PROOFS"
+  },
+  "execution_order": [
+    "ATTACK_SHARED_O_AND_Q_ACCEPTANCE_INSTANTIATIONS_FIRST",
+    "REUSE_VERIFIED_GAP_A_POLICY_COVER_ADAPTER_FOR_SCOPE_COMPLETE_TERMINAL OR MINIMUM POLICY CHANGING OBSERVATION ROUTES",
+    "DO_NOT SCHEDULE GDPVAL OR CHARTOGRAPHY AS GAP_B STRICT_PROGRESS",
+    "DO_NOT SCHEDULE PARKED TB SCIENCE WITHOUT FRESH EXPLICIT AUTHORITY",
+    "PROMOTE CC_R3 ONLY ON 13_OF_13 CURRENT AUTHENTICATED ROW PROOFS"
+  ],
+  "hard_nonclaims": [
+    "V3_AUDIT_VERIFICATION_CLOSES_PROOF_GATE_ONLY__NO_GAP_A_OR_GAP_B_ROW_CREDIT_FROM_GATE_EXISTENCE",
+    "NO_GAP_B_TOTALITY_CREDIT",
+    "NO_CC_R3_CERTIFICATE",
+    "NO_GLOBAL_ESCAPE_PROGRESS_TOTALITY_CREDIT",
+    "NO_CLAIM_PRIVATE_INFORMATION_IS_CURRENTLY_ACQUIRABLE",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT",
+    "GAP_A_ADAPTER_EXISTENCE_IS_NOT_A_ROW_PROOF",
+    "NO_GAP_A_ROW_CREDIT_WITHOUT_REAL_CONTENT_ADDRESSED_CURRENT_PREMISES",
+    "NO_PRIVATE_ACQUISITION_CREDIT_OR_AUTHORITY_FROM_ADAPTER_ACTIVATION",
+    "NO_O_OR_Q_ACCEPTANCE_LAW_CREDIT_FROM_ADAPTER_EXISTENCE",
+    "NO_ROW_ACCEPTANCE_CREDIT_FROM_PROGRESS_TOTALITY_PROOF_ALONE",
+    "NO_GAP_A_ROW_CREDIT_FROM_RECLASSIFICATION",
+    "NO_CC_R3_CREDIT_FROM_ACTIVE_GAP_B_COLLAPSE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "shared_route_reduction": {
+    "path": "canonical/governance/ESCAPE_PROGRESS_SUCCESSOR_SHARED_ROUTE_REDUCTION_20261010_V1.json",
+    "git_blob_sha": "26004d2b15d2b86a55af40de0269e7005cb9c6f7",
+    "gap_a_shared_family_count": 4,
+    "gap_b_exact_row_count": 3,
+    "rule": "REUSE_SHARED_CERTIFICATE_ACQUISITION_FAMILIES_AND_EXACT_PROGRESS_PREDICATES__NO_THIRTEEN_SOLVERS"
+  },
+  "reached_state_v2_reuse_reconciliation": {
+    "path": "canonical/governance/ESCAPE_PROGRESS_REACHED_STATE_V2_REUSE_RECONCILIATION_20261010_V1.json",
+    "git_blob_sha": "c74716944e6ea6c72af1d43dc852708b1af16fda",
+    "generic_truth_authority_closed": true,
+    "generic_repair_dispatch_closed": true,
+    "independent_verification_closed": true,
+    "constructor_recertification_closed": true,
+    "live_reentry_closed": true,
+    "global_repair_acquirability_proved": false,
+    "global_escape_progress_totality_proved": false
+  },
+  "gap_a_policy_cover_adapter": {
+    "status": "ACTIVE_INDEPENDENTLY_VERIFIED__SHARED_ADAPTER_CLOSED__ROW_PREMISES_OPEN",
+    "activation_path": "canonical/governance/ESCAPE_GAP_A_POLICY_COVER_ADAPTER_ACTIVATION_20261010_V1.json",
+    "runtime_path": "canonical/runtime/escape_gap_a_policy_cover_adapter_v1.py",
+    "runtime_git_blob_sha": "19b0bdf00eb9b8d76cbf7f1a615e1ce6e89ffbf8",
+    "verification_path": "canonical/verification/ESCAPE_GAP_A_POLICY_COVER_ADAPTER_VERIFY_20261010_V1.json",
+    "verification_git_blob_sha": "4c1ad0d785d4a4d354c01a4d09e412d294304195",
+    "new_primitive": false,
+    "real_gap_a_row_proofs": 0,
+    "gap_a_rows": 10,
+    "exact_remaining_predicate": "FOR_EACH_GAP_A_ROW__BIND_AN_AUTHENTICATED_CONTENT_ADDRESSED_POLICY_COVER_PROBLEM_AND_EITHER_INDEPENDENT_CURRENT_POLICY_AVAILABILITY_PLUS_RESOURCE_ADMISSIBILITY_OR_INDEPENDENT_CURRENT_DISCRIMINATOR_ACQUIRABILITY",
+    "private_acquisition_allowed_before_target_free_row_check": false
+  },
+  "relation_to_current_oq_frontier": {
+    "current_reduction_path": "canonical/governance/CURRENT_ESCAPE_OQ_FRONTIER_REDUCTION_20261010_V1.json",
+    "relation": "O_Q_IS_PRIMARY_SHARED_ACCEPTANCE_LAW_RESEARCH_COMPRESSION__GAP_A_B_REMAINS_EXECUTION_OR_ACQUISITION_STATE__THIS_ADAPTER_IS_A_REUSABLE_REALIZATION_BRIDGE_NOT_A_ROW_BY_ROW_RESEARCH_SCHEDULER",
+    "adapter_primary_uses": [
+      "REALIZE_A_SCOPE_COMPLETE_O_OBJECTIVE_ACCEPTANCE_LAW_AS_A_TERMINAL_COMMON_POLICY_PROOF_WHEN_CURRENT_AVAILABILITY_AND_RESOURCE_ADMISSIBILITY_ARE_BOUND",
+      "REALIZE_A_ROBUST_COMMON_POLICY_OR_AUTHENTICATED_STRICT_DISCRIMINATOR_ROUTE_WHEN_IT_SOUNDLY_APPLIES_TO_Q_OR_O_SCOPE"
+    ],
+    "adapter_does_not_prove": [
+      "O_OBJECTIVE_ACCEPTANCE_SHARED_LAW",
+      "Q_QUALITATIVE_RELATIVE_ORDER_SHARED_LAW",
+      "ROW_ACCEPTANCE_FROM_ROUTE_TOTALITY_ALONE"
+    ]
+  }
+}
