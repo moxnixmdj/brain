@@ -337,11 +337,13 @@
         "TWELVE_ROOT_SAME_SUBJECT_BINDING_WORKLIST",
         "PROFESSIONAL_EDIT_CAUSAL_CERTIFICATES",
         "KNOWN_DEFEATER_BINDING",
-        "PROFESSIONAL_WHOLE_LEAF_CERTIFICATE_GATE_V1"
+        "PROFESSIONAL_WHOLE_LEAF_CERTIFICATE_GATE_V1",
+        "PROFESSIONAL_WHOLE_LEAF_CLAIM_SCOPE_GATE_V2",
+        "PROFESSIONAL_WHOLE_LEAF_READINESS_AUDIT_V2"
       ],
-      "exact_remaining_class": "ONE_SHARED_WHOLE_LEAF_TOTALITY_OR_COMPLETE_UNION_CONSTRUCTION_PATTERN__CURRENT_EXACT_AUDIT_FINDS_ZERO_ADMISSIBLE_CERTIFICATES_AND_TWENTY_FOUR_PARTITION_OR_TOTALITY_RESIDUALS__DO_NOT_RUN_PROPERTY_TRUTH_WORK_BEFORE_SCOPE_ADMISSION",
+      "exact_remaining_class": "V2_CLAIM_SCOPED_WHOLE_LEAF_ADMISSION_ACTIVE__CURRENT_INDEPENDENT_AUDIT_0_OF_24_ADMISSIBLE_CHAINS__24_OF_24_REQUIRE_EXACT_WHOLE_LEAF_CLAIM_SCOPE_FACTORIZATION_PLUS_INDEPENDENT_DOMAIN_EQUIVALENCE_THEN_CLAIM_BOUND_TOTALITY_OR_COMPLETE_UNION_CERTIFICATE__PROPERTY_TRUTH_REMAINS_BLOCKED_UNTIL_V2_ADMISSION",
       "new_primitive_status": "NOT_ESTABLISHED__REUSE_SCOPE_TRANSPORT_COMPOSITION_AND_EVIDENCE_MACHINERY_FIRST",
-      "current_truth": "V7_12_OF_12_SAME_SUBJECT_COMPOSITION_ADMISSIBLE__WHOLE_LEAF_READINESS_AUDIT_INDEPENDENTLY_REPLAYED__0_OF_24_ADMISSIBLE_SCOPE_CERTIFICATES__24_OF_24_REQUIRE_CLAIM_SCOPED_TOTALITY_OR_CERTIFIED_COMPLETE_UNION__PROPERTY_TRUTH_BLOCKED_UNTIL_SCOPE_ADMISSION__NOT_LIVE_DEFAULT",
+      "current_truth": "V7_12_OF_12_SAME_SUBJECT_COMPOSITION_ADMISSIBLE__V2_DOMAIN_SUBSTITUTION_GUARD_INDEPENDENTLY_VERIFIED__0_OF_24_V2_CLAIM_SCOPE_CHAINS_ADMISSIBLE__24_OF_24_REQUIRE_CLAIM_SCOPE_CONSTRUCTION__PROPERTY_TRUTH_READY_0__NOT_LIVE_DEFAULT",
       "source_current_path": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
       "observed_summary_is_load_bearing": false,
       "current_binding_frontier": {
@@ -360,22 +362,27 @@
         "observed_blob_is_load_bearing": false
       },
       "whole_leaf_certificate_gate": {
-        "activation_path": "canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_CERTIFICATE_GATE_ACTIVATION_20261010_V1.json",
-        "runtime_path": "canonical/runtime/professional_quality_whole_leaf_certificate_gate_v1.py",
-        "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_CERTIFICATE_GATE_VERIFY_20261010_V1.json",
+        "activation_path": "canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_CERTIFICATE_GATE_ACTIVATION_20261010_V2.json",
+        "activation_git_blob_sha": "34fdaf7f4a91d0e28d446a9d554c3aa0fbec8222",
+        "runtime_path": "canonical/runtime/professional_quality_whole_leaf_claim_scope_gate_v2.py",
+        "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_CLAIM_SCOPE_GATE_V2_VERIFY_20261010_V1.json",
+        "verification_git_blob_sha": "cb91d94dd89ec7c67aae54db3cd5319612cd43d5",
         "gate_independently_verified": true,
+        "requires_independent_whole_domain_equivalence": true,
+        "requires_claim_specific_scope_cover": true,
         "leaf_count": 24,
-        "admitted_scope_certificate_count": 0,
+        "admitted_scope_chain_count": 0,
         "closed_leaf_property_count": 0,
         "property_truth_separate": true
       },
       "whole_leaf_certificate_readiness_audit": {
-        "path": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_CERTIFICATE_READINESS_AUDIT_VERIFY_20261010_V1.json",
-        "git_blob_sha": "cea7f55a4794e33c484977072c30fae0169217c8",
+        "path": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_CERTIFICATE_READINESS_AUDIT_V2_VERIFY_20261010_V1.json",
+        "git_blob_sha": "2d28d932d08753fdf14c56aa24011e625518a4ef",
         "independent_replay_pass": true,
-        "admissible_scope_certificate_count": 0,
-        "partition_or_totality_required_count": 24,
-        "candidate_rejected_or_ambiguous_count": 0
+        "admissible_chain_count": 0,
+        "claim_scope_construction_required_count": 24,
+        "incomplete_or_ambiguous_chain_count": 0,
+        "property_truth_ready_count": 0
       }
     },
     {
@@ -457,8 +464,8 @@
   ],
   "global_rule": "NO_RESIDUAL_ABOVE_MAY_BE_SCHEDULED_AS_NEW_PRIMITIVE_INVENTION_SOLELY_BECAUSE_ITS_EXACT_CASE_OR_PROOF_IS_OPEN__APPLY_REUSE_FIRST_POLICY_AND_REQUIRE_VERIFIED_REUSE_EXHAUSTION",
   "next_shared_execution_cut": [
-    "INSTANTIATE_PROFESSIONAL_WHOLE_LEAF_CLAIM_SCOPED_TOTALITY_OR_COMPLETE_UNION_CERTIFICATES_THROUGH_THE_VERIFIED_SHARED_GATE__DO_NOT_BUILD_24_VERIFIERS",
-    "RUN_DOMAIN_SEMANTIC_AND_EXECUTION_PROPERTY_VERIFICATION_ONLY_AFTER_SCOPE_CERTIFICATE_ADMISSION_FOR_THE_RELEVANT_LEAF",
+    "FREEZE_ONE_EXACT_PROFESSIONAL_LEAF_CLAIM_SCOPE_ONLY_WHEN_THE_ENTIRE_ADMISSIBLE_LEAF_DOMAIN_CAN_BE_FACTORIZED_AND_INDEPENDENTLY_VERIFIED__V2_GATE_REQUIRED",
+    "AFTER_V2_SCOPE_ADMISSION_RUN_SEPARATE_DOMAIN_PROPERTY_TRUTH_AND_EXECUTION_VERIFICATION",
     "RUN_FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION_AND_INDEPENDENT_REPLAY_BEFORE_UVCK_PROMOTION",
     "IN_PARALLEL_INSTANTIATE_REAL_GAP_A_AUTHENTICATED_ROW_EVIDENCE_AND_GAP_B_STRICT_PROGRESS_PROOFS_WITH_EXISTING_MACHINERY",
     "CONTINUE_RESOURCE_PARETO_OPTIMIZATION_ONLY_ON_NONCONFLICTING_LANES",
@@ -512,7 +519,9 @@
     "professional_whole_leaf_shared_gate": "MERGED_AND_INDEPENDENTLY_VERIFIED__12_OF_12_GATE_TESTS__0_OF_24_LEAF_SCOPE_CERTIFICATES_ADMITTED__ZERO_PROPERTY_OR_TERMINAL_CREDIT",
     "professional_whole_leaf_gate_activation": "canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_CERTIFICATE_GATE_ACTIVATION_20261010_V1.json",
     "professional_whole_leaf_readiness_audit": "PASS__0_OF_24_ADMISSIBLE__24_OF_24_TOTALITY_OR_CERTIFIED_COMPLETE_UNION__ZERO_CREDIT",
-    "professional_whole_leaf_readiness_audit_verification": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_CERTIFICATE_READINESS_AUDIT_VERIFY_20261010_V1.json"
+    "professional_whole_leaf_readiness_audit_verification": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_CERTIFICATE_READINESS_AUDIT_VERIFY_20261010_V1.json",
+    "professional_whole_leaf_v2_gate": "INDEPENDENTLY_VERIFIED__16_OF_16__DOMAIN_EQUIVALENCE_AND_SCOPE_COVER_SEPARATED__ZERO_PROPERTY_OR_TERMINAL_CREDIT",
+    "professional_whole_leaf_v2_readiness": "INDEPENDENTLY_VERIFIED__0_OF_24_ADMISSIBLE_CHAINS__24_OF_24_CLAIM_SCOPE_CONSTRUCTION_REQUIRED__PROPERTY_TRUTH_READY_0"
   },
   "current_source_binding_law": {
     "mutable_current_authorities": "CANONICAL_PATH_IDENTITY_AUTHORITATIVE__OBSERVED_BLOB_IS_DIAGNOSTIC_ONLY__RECHECK_CURRENT_BYTES_BEFORE_SCHEDULING_OR_TRUTH_CLAIM",
