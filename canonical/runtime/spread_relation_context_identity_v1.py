@@ -31,13 +31,41 @@ ROOT=Path(__file__).resolve().parents[2]
 
 _WORD_SPREAD=re.compile(r"\bspreads?\b",re.I)
 _NEG=re.compile(r"\b(?:not|never|no)\b",re.I)
-_BID=re.compile(r"\bbid\b",re.I)
-_ASK=re.compile(r"\bask\b",re.I)
-_PRICE=re.compile(r"\b(?:price|prices|quote|quotes)\b",re.I)
-_CORP=re.compile(r"\bcorporate\s+bonds?\b",re.I)
-_TSY=re.compile(r"\b(?:treasury|treasuries)\b",re.I)
-_YIELD=re.compile(r"\byields?\b",re.I)
-_REL=re.compile(r"\b(?:between|difference|minus|versus|vs\.?|relative\s+to|over)\b",re.I)
+_BIDASK_PATTERNS=(
+    re.compile(
+        r"(?P<spread>\bspreads?\b)\s+(?:between|from)\s+(?:the\s+)?"
+        r"bid(?:\s+(?:price|quote))?\s+(?:and|to|versus|vs\.?)\s+(?:the\s+)?"
+        r"ask(?:\s+(?:price|quote)s?)?",
+        re.I,
+    ),
+    re.compile(r"\bbid\s*[-–]\s*ask\s+(?P<spread>spreads?)\b",re.I),
+    re.compile(
+        r"\bdifference\s+between\s+(?:the\s+)?bid(?:\s+price)?\s+and\s+"
+        r"(?:the\s+)?ask(?:\s+price)?\s+is\s+called\s+(?:the\s+)?"
+        r"[\"“]?(?P<spread>spread)[\"”]?",
+        re.I,
+    ),
+)
+_CORP_TSY_PATTERNS=(
+    re.compile(
+        r"(?P<spread>\bspreads?\b)\s+(?:between|over|relative\s+to)\s+"
+        r"(?:the\s+)?(?:yields?\s+on\s+)?corporate\s+bonds?.{0,40}"
+        r"(?:and|versus|vs\.?)\s+(?:comparable[- ]maturity\s+)?"
+        r"(?:treasury|treasuries)(?:\s+securities?)?(?:\s+yields?)?",
+        re.I,
+    ),
+    re.compile(
+        r"\bcorporate\s+bond\s+(?P<spread>spreads?)\b.{0,120}"
+        r"\bdifference\s+in\s+yields\s+between\s+corporate\s+bonds?\s+and\s+"
+        r"(?:comparable[- ]maturity\s+)?treasury\s+securities",
+        re.I,
+    ),
+    re.compile(
+        r"\bcorporate\s+bond\s+(?P<spread>spread)\b\s+(?:over|relative\s+to)\s+"
+        r"(?:comparable[- ]maturity\s+)?treasury\s+yields?",
+        re.I,
+    ),
+)
 
 
 def _git_blob(raw:bytes)->str:
@@ -101,26 +129,17 @@ def _sentence_bounds(text:str,start:int,end:int)->tuple[int,int]:
     return s,e
 
 
-def _window(sentence:str, rel_start:int, rel_end:int, radius:int=140)->str:
-    return sentence[max(0,rel_start-radius):min(len(sentence),rel_end+radius)]
-
-
-def _bid_ask_signature(window:str)->bool:
-    return bool(
-        _BID.search(window)
-        and _ASK.search(window)
-        and _PRICE.search(window)
-        and _REL.search(window)
-    )
-
-
-def _corp_tsy_signature(window:str)->bool:
-    return bool(
-        _CORP.search(window)
-        and _TSY.search(window)
-        and _YIELD.search(window)
-        and _REL.search(window)
-    )
+def _pattern_binds_occurrence(
+    patterns:tuple[re.Pattern[str],...],
+    sentence:str,
+    rel_start:int,
+    rel_end:int,
+)->bool:
+    for pattern in patterns:
+        for match in pattern.finditer(sentence):
+            if match.start("spread")==rel_start and match.end("spread")==rel_end:
+                return True
+    return False
 
 
 def _verify_source(concept_id:str, sources:Mapping[str,Mapping[str,Any]], verifier)->dict[str,Any]:
@@ -169,13 +188,12 @@ def resolve_occurrence(
         offset=ss+leading
         rel_start=start-offset
         rel_end=end-offset
-        local=_window(sentence,rel_start,rel_end)
         neg_window=sentence[max(0,rel_start-32):min(len(sentence),rel_end+32)]
         if _NEG.search(neg_window):
             return _base("UNRESOLVED__NEGATED_OR_NEGATIVE_LOCAL_CONTEXT",sentence=sentence,source_span=[start,end])
 
-        bidask=_bid_ask_signature(local)
-        corp=_corp_tsy_signature(local)
+        bidask=_pattern_binds_occurrence(_BIDASK_PATTERNS,sentence,rel_start,rel_end)
+        corp=_pattern_binds_occurrence(_CORP_TSY_PATTERNS,sentence,rel_start,rel_end)
         if bidask and corp:
             return _base("UNRESOLVED__CONFLICTING_SPREAD_RELATION_SIGNATURES",sentence=sentence,source_span=[start,end])
         if not bidask and not corp:
