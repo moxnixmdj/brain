@@ -1,0 +1,97 @@
+{
+  "schema": "PROJECT_BRAIN_R2_DIRECT_ROUTE_NONINTERFERENCE_GATE_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_BLOBS__PUBLIC_ISOLATED_5_OF_5__NEW_ROUTE_NONINTERFERENCE_REQUIRED__STALE_PROOF_FAIL_CLOSED__ZERO_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "codex/r2-route-noninterference-gate-v1",
+    "candidate_base_main_sha": "ecd831a3a0cc031ec148f2d0db531187b68f10a0",
+    "observed_current_main_sha": "d31ff9956b6245ca222f2ab6214f5cc5dcab3b55",
+    "exact_candidate_blobs": {
+      "canonical/runtime/r2_direct_route_dynamic_admission_v1.py": "e31c0612a905271a5a8e72865afd08cfe13d8cc1",
+      "canonical/runtime/promote_r2_direct_route_v1.py": "fa6f423837c7f9e8d50d18922f86ca1131c9fa7f",
+      "canonical/tests/test_r2_direct_route_promotion_lease_v1.py": "8444048e9728efabf3e47ff06e22038ed997c4ee",
+      "canonical/tests/test_one_shot_auto_direct_route_promotion_v1.py": "10a31678c2b54405e3866bb59ab3be7498f101fd"
+    }
+  },
+  "problem": {
+    "prior_runtime_collision_behavior": "FAIL_CLOSED_AFTER_ACTIVATION",
+    "correctness_preserved": true,
+    "availability_monotonicity_preserved": false,
+    "risk": "A_NEW_ROUTE_COULD_OVERLAP_A_PREVIOUSLY_WORKING_DEFAULT_ROUTE_AND_TURN_THAT_REQUEST_INTO_A_COLLISION_REFUSAL_AFTER_PROMOTION"
+  },
+  "repair": {
+    "future_new_route_noninterference_required": true,
+    "grandfather_existing_exact_live_bindings": true,
+    "proof_schema": "PROJECT_BRAIN_R2_DIRECT_ROUTE_NONINTERFERENCE_VERIFY_V1",
+    "proof_status": "INDEPENDENT_PASS__R2_DIRECT_ROUTE_NONINTERFERENCE",
+    "proof_class": "PROVED_DISJOINT_FROM_CURRENT_DEFAULT_LIVE_MATCH_DOMAIN_V1",
+    "required_bindings": [
+      "EXACT_CANDIDATE_PATH_AND_GIT_BLOB",
+      "EXACT_ROUTE_RUNTIME_PATH_AND_GIT_BLOB",
+      "EXACT_CURRENT_LIVE_WRAPPER_GIT_BLOB",
+      "EXACT_PREPROMOTION_DYNAMIC_MANIFEST_GIT_BLOB",
+      "EXACT_PREPROMOTION_DYNAMIC_ROUTE_ID_SET"
+    ],
+    "required_propositions": [
+      "LEGACY_OVERLAP_ABSENT_VERIFIED",
+      "DYNAMIC_OVERLAP_ABSENT_VERIFIED",
+      "SCOPE_COMPLETE_FOR_CANDIDATE_MATCH_DOMAIN",
+      "INDEPENDENT_VERIFIED"
+    ],
+    "stale_frontier_proof_behavior": "FAIL_CLOSED",
+    "missing_proof_behavior": "FAIL_CLOSED",
+    "exact_repromotion_behavior": "IDEMPOTENT_WITHOUT_RETROACTIVE_PROOF_REQUIREMENT"
+  },
+  "public_isolated_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2548,
+    "workflow": "Isolated verification dispatcher",
+    "workflow_run_id": 38027929339,
+    "workflow_job_id": 114142644099,
+    "conclusion": "success",
+    "exact_blob_check": true,
+    "python_compile": true,
+    "tests_run": 5,
+    "tests_passed": 5,
+    "verified_properties": [
+      "CONCURRENT_PROMOTION_LEASE_CONTENTION_FAILS_CLOSED_WITHOUT_WAITING",
+      "EXACT_REPROMOTION_REMAINS_IDEMPOTENT_UNDER_LEASE",
+      "NEW_PROMOTION_WITHOUT_NONINTERFERENCE_PROOF_FAILS_CLOSED",
+      "STALE_NONINTERFERENCE_PROOF_FAILS_CLOSED_AFTER_FRONTIER_CHANGE",
+      "TWO_VERIFIED_PROMOTIONS_WITH_CURRENT_PROOFS_COMPOSE_WITHOUT_LOST_UPDATE"
+    ]
+  },
+  "current_main_nonoverlap_lease": {
+    "verified_candidate_base_sha": "ecd831a3a0cc031ec148f2d0db531187b68f10a0",
+    "observed_main_sha": "d31ff9956b6245ca222f2ab6214f5cc5dcab3b55",
+    "intervening_commit_count": 44,
+    "checked_paths": [
+      "canonical/runtime/r2_direct_route_dynamic_admission_v1.py",
+      "canonical/runtime/promote_r2_direct_route_v1.py",
+      "canonical/tests/test_r2_direct_route_promotion_lease_v1.py",
+      "canonical/tests/test_one_shot_auto_direct_route_promotion_v1.py",
+      "canonical/governance/CURRENT_DEFAULT_RUNTIME_INTEGRATION.json",
+      "canonical/governance/CURRENT_ONE_SHOT_REALITY_CLOSURE.json"
+    ],
+    "overlaps": [],
+    "exact_candidate_blobs_unchanged": true
+  },
+  "authority_boundaries": {
+    "existing_live_rows_invalidated": false,
+    "provider_deployment_authority": false,
+    "verification_authority_mutation_allowed": false,
+    "semantic_truth_authority": false,
+    "policy_adequacy_authority": false,
+    "terminal_authority": false,
+    "terminal_credit_delta": 0
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
