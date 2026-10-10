@@ -1,0 +1,112 @@
+{
+  "schema": "PROJECT_BRAIN_CHARTOGRAPHY_SYNTHETIC_REASONING_QUALIFICATION_V1",
+  "date": "2026-10-10",
+  "status": "STAGED_NONTERMINAL_QUALIFICATION__DETERMINISTIC_SUITE_VERIFIED_LOCALLY__EXECUTION_BLOCKED_ON_EXACT_V3_RUNTIME_FIT_RECEIPT__ZERO_CREDIT",
+  "target_predicate": "CHARTOGRAPHY_TOOLS_GE_89",
+  "purpose": "CLOSE_NONTERMINAL_SCOPE_RELEVANT_CHART_IMAGE_REASONING_QUALIFICATION_ONLY_AFTER_EXACT_EXECUTION_SUBJECT_RUNTIME_FIT_IS_VERIFIED",
+  "generator": {
+    "path": "canonical/runtime/chartography_synthetic_reasoning_suite_v1.py",
+    "git_blob_sha": "1378cde88e501384a103500906f58bfeb06b7881",
+    "external_python_dependencies": 0,
+    "terminal_cases_used": 0,
+    "external_datasets_used": 0,
+    "model_judges_used": 0
+  },
+  "tests": {
+    "path": "canonical/tests/test_chartography_synthetic_reasoning_suite_v1.py",
+    "git_blob_sha": "2f983f5a0d251fcd47fedb650477025a73d7fc3d"
+  },
+  "exact_cases": [
+    {
+      "case_id": 1,
+      "skill": "BAR_ORDERING",
+      "expected": "BLUE",
+      "sha256": "c68d78abd05fc9101fe8112d35f2af95fb29be783ac6751d3bb44d0aa1ff7144"
+    },
+    {
+      "case_id": 2,
+      "skill": "BAR_RATIO",
+      "expected": "2",
+      "sha256": "554d3a72a1b14e267fe36233a6c0a45486823436a39911cc2287648ee2f3479c"
+    },
+    {
+      "case_id": 3,
+      "skill": "LINE_TREND",
+      "expected": "INCREASE",
+      "sha256": "0c76e5f3157425f155acdc5a02f271f9706ae8e4d154aa74782a0da939dc4c9a"
+    },
+    {
+      "case_id": 4,
+      "skill": "LINE_CROSSING",
+      "expected": "BLUE",
+      "sha256": "ff92368272340426cce84c6db1d30868fe7b24c8daac7fc413800e8b27693ea1"
+    },
+    {
+      "case_id": 5,
+      "skill": "SCATTER_COUNT",
+      "expected": "5",
+      "sha256": "dad9460416cd783a1205e061e471fe09fbae0007629adc03c04a1e43d634dbb2"
+    },
+    {
+      "case_id": 6,
+      "skill": "GROUPED_BAR_COMPARISON",
+      "expected": "RIGHT",
+      "sha256": "33099ac52b5b17f0b5071cf1db02fb1c27a5001c3f0546fbcb54a26aa209f57c"
+    }
+  ],
+  "execution_subject_precondition": {
+    "public_repository": "moxnixmdj/verification-capsule-runner",
+    "public_pr": 2597,
+    "subject_path": "subject/chartography_qwen3vl4b_gguf_public_runner_preflight/CHARTOGRAPHY_QWEN3_VL4B_GGUF_PUBLIC_RUNNER_PREFLIGHT_V3.json",
+    "subject_git_blob_sha": "a1103a611ee07c5c09a026549022311686436529",
+    "workflow_path": ".github/workflows/verify-chartography-qwen3vl4b-gguf-public-runner.yml",
+    "workflow_git_blob_sha": "2c4e2e40e45ce3547f5502ceb3a93e4504ae170a",
+    "required_preflight_status": "PASS__EXACT_MODEL_AND_PROJECTOR_HASHES__RUNTIME_LOAD__SYNTHETIC_MULTIMODAL_SMOKE",
+    "currently_satisfied": false
+  },
+  "qualification_contract": {
+    "image_format": "BMP_256x192_24BPP",
+    "case_count": 6,
+    "exact_answer_normalization": "TRIM_WHITESPACE__UPPERCASE__REQUIRE_EXACT_EXPECTED_TOKEN",
+    "pass_rule": "6_OF_6_EXACT",
+    "allowed_evidence": "EXACT_PUBLIC_RUN_RECEIPT_BOUND_TO_V3_EXECUTION_SUBJECT_AND_THESE_GENERATED_CASE_HASHES",
+    "scope": "BOUNDED_SYNTHETIC_CHART_GEOMETRY_AND_REASONING",
+    "general_chart_ocr_claimed": false,
+    "arbitrary_chart_semantics_claimed": false,
+    "chartography_threshold_ge_89_claimed": false
+  },
+  "post_pass_state": {
+    "closes": [
+      "NONTERMINAL_SCOPE_RELEVANT_CHART_IMAGE_REASONING_QUALIFICATION"
+    ],
+    "remains_open": [
+      "PROJECT_SPECIFIC_GEMINI_3_5_FLASH_JUDGE_CAPACITY_RECEIPT_OR_EQUIVALENT_AUTHORIZED_EVALUATOR_RELATION",
+      "THIN_OFFICIAL_CHARTOGRAPHY_ADAPTER_IF_STILL_REQUIRED",
+      "CHARTOGRAPHY_THRESHOLD_CERTIFICATE_GE_89",
+      "GAP_B_TOTAL_STRICT_PROGRESS_CONTROLLER_FOR_CHARTOGRAPHY_ROW"
+    ]
+  },
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false
+  },
+  "activation_rule": "EXECUTION_AUTHORITY_MAY_BECOME_TRUE_ONLY_AFTER_CONTENT_ADDRESSED_V3_PUBLIC_PREFLIGHT_PASS_IS_CANONICALLY_BOUND",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "judge_calls": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_CHARTOGRAPHY_TERMINAL_CASE_READ",
+    "NO_CHARTOGRAPHY_SCORE_OR_GE_89_CERTIFICATE",
+    "NO_GENERAL_VISION_OR_GENERAL_CHART_REASONING_CLAIM",
+    "NO_EXECUTION_AUTHORITY_BEFORE_V3_RUNTIME_FIT_PASS",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ]
+}
