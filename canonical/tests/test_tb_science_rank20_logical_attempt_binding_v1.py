@@ -8,8 +8,8 @@ from canonical.runtime.tb_science_rank20_logical_attempt_binding_v1 import (
 
 
 def test_rank20_claim_binding_and_v2_identity_are_exact():
-    assert EXECUTION_CLAIM_BINDING_DIGEST == "sha256:426dd1c0cc9b21b35b793f2c5154e62eb74fb05cafa2c7e344843d93fbd367a3"
-    assert EXPECTED_LOGICAL_ATTEMPT_ID == "62741de107152d9dba8d890d0294ed4c1d7d07a080c7a4d158231b10d98b052d"
+    assert EXECUTION_CLAIM_BINDING_DIGEST == "sha256:0d61d00d8b5dfd829397c801428f2c287d05deeb0fab318e6a0377b10d851b63"
+    assert EXPECTED_LOGICAL_ATTEMPT_ID == "205b4f35a594b98d3d307ff077e510dbe94ba9e8ceb5c41b869af50042a99e8c"
     assert execution_claim_binding_digest() == EXECUTION_CLAIM_BINDING_DIGEST
     assert logical_attempt_id() == EXPECTED_LOGICAL_ATTEMPT_ID
     out = verify()
