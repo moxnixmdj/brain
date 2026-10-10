@@ -136,3 +136,13 @@ Do not assume a general neural kernel is necessary. Reality decides.
 ## Stop rule
 
 Stop harvesting for a target immediately when a simpler already-owned, deterministic, software, or existing reusable route meets the target bar with lower total cost and equal or better reliability/verifiability.
+
+
+## Resource-bounded Bytes extension
+
+All Bytes-minimization work under this law MUST also satisfy:
+- canonical/laws/BYTES_RESOURCE_BOUNDED_MINIMUM_MECHANISM_LAW_V1.md
+
+That extension makes the terminal objective resource-bounded, requires complete byte/dependency accounting, elicit-before-teach search, joint cross-capability factoring, marginal-versus-terminal byte accounting, and explicit separation of executable, verifier, proof, and JIT storage.
+
+When the two laws overlap, apply the stricter requirement. Neither law may be used to bypass donor deletion, causal sufficiency, untouched qualification, or truthful dependency accounting.
