@@ -269,7 +269,7 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
         policy_rel = pointer["r2_mechanism_policy"]["path"]
         self.assertEqual(
             policy_rel,
-            "canonical/governance/R2_MECHANISM_CLOSURE_OPEN_WORLD_FRONTIER_POLICY_20261010_V2.json",
+            "canonical/governance/R2_MECHANISM_CLOSURE_OPEN_WORLD_FRONTIER_POLICY_20261010_V3.json",
         )
         policy = json.loads((ROOT / policy_rel).read_text())
 
