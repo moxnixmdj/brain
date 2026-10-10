@@ -320,10 +320,10 @@
     "cases": 6
   },
   "bytes_minimization_control": {
-    "status": "ACTIVE__FULL_PROFILE_V22_BYTE_FRONTIER__ZERO_CAPABILITY_CREDIT_FROM_RESEARCH_CHECKPOINT_ALONE",
+    "status": "ACTIVE__CONSERVATIVE_PROFILE_V23_BYTE_FRONTIER__ZERO_CAPABILITY_CREDIT_FROM_RESEARCH_CHECKPOINT_ALONE",
     "law": "canonical/laws/BYTES_RESOURCE_BOUNDED_MINIMUM_MECHANISM_LAW_V1.md",
     "white_box_law": "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V1.md",
-    "current_research_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_FULL_PROFILE_V22_SUCCESSOR_EXECUTION_20261010_V1.json",
+    "current_research_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_CONSERVATIVE_PROFILE_V23_SUCCESSOR_EXECUTION_20261010_V1.json",
     "objective": "MINIMUM_RESOURCE_FEASIBLE_EXECUTABLE_DESCRIPTION_CONDITIONAL_ON_ALREADY_OWNED_BRAIN_SUBSTRATE",
     "accounting": [
       "B_EXEC",
@@ -339,37 +339,37 @@
       "LARGER_MODULE_ONLY_IF_REQUIRED"
     ],
     "global_rule": "OPTIMIZE_JOINT_DEPENDENCY_CLOSED_MECHANISM_COVER__COUNT_SHARED_SUBSTRATE_ONCE",
-    "current_exact_symbolic_bottleneck": "POST_V22_RERANK_PENDING__COMPLETE_BOUNDED_EXACT_SYMBOLIC_ROUTE",
-    "truth_boundary": "FRESH_PHYSICAL_BYTE_FRONTIER_MEASURED__COMPLETE_FINITE_PROFILE_NONUSE_NOT_UNIVERSAL_PROOF__NO_OPUS_FAMILY_PROMOTION_CREDIT__NO_UNIVERSAL_MINIMUM_CLAIM",
+    "current_exact_symbolic_bottleneck": "POST_V23_RERANK_PENDING__COMPLETE_BOUNDED_EXACT_SYMBOLIC_ROUTE",
+    "truth_boundary": "FRESH_PHYSICAL_BYTE_FRONTIER_MEASURED__FINITE_PROFILE_NONUSE_NOT_UNIVERSAL_PROOF__NO_OPUS_FAMILY_PROMOTION_CREDIT__NO_UNIVERSAL_MINIMUM_CLAIM",
     "current_fresh_exact_symbolic_candidate": {
-      "package_raw_python_source_bytes": 2089068,
-      "B_exec_raw_python_source_bytes": 2091828,
+      "package_raw_python_source_bytes": 2045561,
+      "B_exec_raw_python_source_bytes": 2048321,
       "B_verify_semantic_digest_raw_bytes": 1358,
-      "persistent_xz_comparable_bytes": 311496,
-      "qualification": "8050/8050",
-      "stock_donor_positive_control": "8050/8050",
-      "clean_room_execution": "8050/8050",
-      "archive_replay": "8050/8050",
-      "manifest_sha256": "84a4947df1815c9dd5e9a82ba25670ee051f6a7bb3e05f904e17445fe8abd6e4",
-      "comparable_archive_sha256": "a9b60efb8f12cadbd42a72a173b533ed291e4183f3cb80a41111ae959a5323f3",
+      "persistent_xz_comparable_bytes": 303072,
+      "qualification": "8280/8280",
+      "stock_donor_positive_control": "8280/8280",
+      "clean_room_execution": "8280/8280",
+      "archive_replay": "8280/8280",
+      "manifest_sha256": "0566f7127b810bfb1e379ccbbd2901255d13fb372063de8df72b7a2a70635223",
+      "comparable_archive_sha256": "54d4ef31b262a47fd6453fba493ec4ebdadd6212cf868f9c95f684d449d0734f",
       "promotion_credit": 0
     },
     "latest_structural_cut": {
-      "id": "FULL_SPENT_NEXT26_ZERO_HIT_FUNCTION_PRUNE_V22",
-      "accepted_stubbed_function_bodies": 22,
-      "net_raw_reduction_bytes": 33914,
+      "id": "CONSERVATIVE_SPENT_NEXT27_ZERO_HIT_FUNCTION_PRUNE_V23",
+      "accepted_stubbed_function_bodies": 20,
+      "net_raw_reduction_bytes": 43507,
       "module_graph_unchanged": true,
-      "causal_result": "SPENT_NEXT26_7820_OF_7820__FRESH_NEXT27_8050_OF_8050"
+      "causal_result": "SPENT_NEXT27_8050_OF_8050__FRESH_NEXT28_8280_OF_8280"
     },
     "previous_fresh_frontier": {
-      "raw_python_source_bytes": 2122982,
-      "persistent_xz_comparable_bytes": 317236,
-      "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_NONCORE_REPAIRED_V21_SUCCESSOR_EXECUTION_20261010_V1.json"
+      "raw_python_source_bytes": 2089068,
+      "persistent_xz_comparable_bytes": 311496,
+      "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_FULL_PROFILE_V22_SUCCESSOR_EXECUTION_20261010_V1.json"
     },
     "next_frozen_qualification": {
-      "id": "QUAL_SUCCESSOR_NEXT28_20261010_V1",
-      "cases": 8280,
-      "corpus_sha256": "6b6841e6a62185bfaa397358f14af68474c5d9a9be6290b166ec09b6ab890549",
+      "id": "QUAL_SUCCESSOR_NEXT29_20261010_V1",
+      "cases": 8510,
+      "corpus_sha256": "44bdcb92e5692b09fa07cb5f5ce615b9dbc94d7543f4e580fcebbcd76771de11",
       "spent": false
     },
     "current_falsification_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_NEXT25_FALSIFICATION_20261010_V1.json",
