@@ -12,7 +12,7 @@ class ProfessionalQualityScopedEvidenceV1Tests(unittest.TestCase):
     def test_current_all_twelve_roots_have_bounded_scoped_capabilities_without_global_credit(self):
         out = scoped.evaluate()
         self.assertTrue(out["pass"], out)
-        self.assertEqual(out["admitted_scope_count"], 12, out)
+        self.assertEqual(out["admitted_scope_count"], 13, out)
         self.assertEqual(out["rejected_scope_count"], 0, out)
         self.assertFalse(out["global_leaf_closure"])
         self.assertFalse(out["global_root_closure"])
@@ -321,6 +321,30 @@ class ProfessionalQualityScopedEvidenceV1Tests(unittest.TestCase):
         self.assertFalse(row["semantic_leaf_credit"])
         self.assertFalse(row["execution_leaf_credit"])
 
+
+
+    def test_r1_target_semantic_scope_is_bounded_and_nonpromotional(self):
+        out = scoped.evaluate()
+        row = next(
+            x for x in out["admitted_scopes"]
+            if x["claim_kind"] == "EXACT_PARAMETERIZED_PROFESSIONAL_ARTIFACT_TARGET_SEMANTICS"
+        )
+        self.assertEqual(row["root_id"], "R1_TARGET_SPECIFICATION")
+        self.assertEqual(
+            row["contributes_to_leaf_ids"],
+            ["PQ::R1_TARGET_SPECIFICATION::SEMANTIC"],
+        )
+        self.assertIn(
+            "NO_ARBITRARY_USER_PROMPT_SEMANTIC_COMPLETENESS",
+            row["claim_scope"]["limitations"],
+        )
+        self.assertIn(
+            "UNRESOLVED_RUNTIME_TASK_AMBIGUITY_REMAINS_OPEN",
+            row["claim_scope"]["guarantees"],
+        )
+        self.assertFalse(row["semantic_leaf_credit"])
+        self.assertFalse(row["global_leaf_credit"])
+        self.assertFalse(row["global_root_credit"])
 
     def test_r1_scope_is_execution_only_and_preserves_semantic_truth_limits(self):
         out = scoped.evaluate()
