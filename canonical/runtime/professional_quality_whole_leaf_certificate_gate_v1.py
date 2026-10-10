@@ -58,7 +58,7 @@ def _fail(reason: str, **extra: Any) -> dict[str, Any]:
         **extra,
     }
 
-def _resolve_bound(repo_root: Path, ref: Any, label: str) -> tuple[dict[str, Any] | None, str | None, str | None]:
+def _resolve_bytes(repo_root: Path, ref: Any, label: str) -> tuple[Path | None, str | None, str | None]:
     if not isinstance(ref, Mapping):
         return None, None, label + "_REF_INVALID"
     rel = ref.get("path")
@@ -77,6 +77,13 @@ def _resolve_bound(repo_root: Path, ref: Any, label: str) -> tuple[dict[str, Any
     actual = _blob(path)
     if actual != expected:
         return None, actual, label + "_BLOB_STALE"
+    return path, actual, None
+
+def _resolve_bound(repo_root: Path, ref: Any, label: str) -> tuple[dict[str, Any] | None, str | None, str | None]:
+    path, actual, error = _resolve_bytes(repo_root, ref, label)
+    if error:
+        return None, actual, error
+    assert path is not None and actual is not None
     try:
         doc = json.loads(path.read_text(encoding="utf-8"))
     except Exception:
@@ -218,10 +225,10 @@ def verify_entry(entry: Mapping[str, Any], *, repo_root: str | Path | None = Non
         return _fail(error)
     assert cert is not None and cert_blob is not None and verification is not None
 
-    semantic_verifier, verifier_blob, error = _resolve_bound(root, verification.get("semantic_verifier"), "SEMANTIC_VERIFIER")
+    semantic_verifier, verifier_blob, error = _resolve_bytes(root, verification.get("semantic_verifier"), "SEMANTIC_VERIFIER")
     if error:
         return _fail(error)
-    semantic_tests, tests_blob, error = _resolve_bound(root, verification.get("semantic_tests"), "SEMANTIC_TESTS")
+    semantic_tests, tests_blob, error = _resolve_bytes(root, verification.get("semantic_tests"), "SEMANTIC_TESTS")
     if error:
         return _fail(error)
     assert semantic_verifier is not None and verifier_blob is not None
@@ -229,7 +236,7 @@ def verify_entry(entry: Mapping[str, Any], *, repo_root: str | Path | None = Non
 
     # Every certificate evidence reference must itself be current and content-addressed.
     for ref in cert.get("evidence_refs") or []:
-        _, _, error = _resolve_bound(root, ref, "EVIDENCE")
+        _, _, error = _resolve_bytes(root, ref, "EVIDENCE")
         if error:
             return _fail(error)
 
