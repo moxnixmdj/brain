@@ -1,0 +1,76 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_ROOT_SUBJECT_BINDING_V1",
+  "date": "2026-10-10",
+  "status": "CANDIDATE_R9_V7_ROOT_SUBJECT_BINDING__EXPLICIT_TIME_TRANSPORT_ESCALATION_PLUS_FROZEN_210_SLOT_CONSERVATIVE_CENSORING_SCOPE__AWAITING_INDEPENDENT_VERIFICATION__ZERO_QUALITY_OR_TERMINAL_AUTHORITY",
+  "root_id": "R9_TEMPORAL_DEPLOYMENT",
+  "subject_kind": "DECLARED_SYSTEM",
+  "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+  "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+  "subject": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V7_DECLARED_SYSTEM_SUBJECT_20261010_V6.json",
+    "git_blob_sha": "1d598bc8757017ceb34928d0df9f5fce859ef868"
+  },
+  "bridge_evidence": {
+    "execution_profile": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_EXECUTION_PROFILE_20261010_V3.json",
+      "git_blob_sha": "f7e89eafbb691c16d1bdf5b8d295a468d5e3bec5"
+    },
+    "censor_scope": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_R9_CONSERVATIVE_CENSORING_SCOPE_20261010_V1.json",
+      "git_blob_sha": "7755bc709169abe0db35a6418fd8568ed14131b7"
+    },
+    "temporal_scope": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_R9_TEMPORAL_SEMANTIC_SCOPE_20261010_V1.json",
+      "git_blob_sha": "0f2a434454802d5f76157ce51f19f16bb9cbfd8f"
+    },
+    "censor_verification": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R9_CONSERVATIVE_CENSORING_VERIFY_20261010_V1.json",
+      "git_blob_sha": "7081a52621a1bb8f1ad07d1da23b40c8e57e16c2"
+    },
+    "temporal_verification": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R9_TEMPORAL_SEMANTIC_VERIFY_20261010_V1.json",
+      "git_blob_sha": "e4527631fbf6e95cb20381d60eb4fe4b978c176f"
+    }
+  },
+  "binding_scope": {
+    "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+    "escalation_trigger": "POPULATION_CONTEXT_OPERATOR_OR_TIME_TRANSPORT_GAP",
+    "claim": "FOR_THE_EXACT_V7_SUBJECT__TIME_TRANSPORT_GAPS_TRIGGER_ESCALATION__AND_R9_SUPPORT_IS_BOUND_ONLY_TO_VERIFIED_FIXED_DENOMINATOR_CONSERVATIVE_CENSORING_ON_ONE_FROZEN_210_SLOT_POPULATION",
+    "guarantees": [
+      "EXACT_V7_SUBJECT_TUPLE_BOUND",
+      "V7_PROFILE_EXPLICITLY_DECLARES_POPULATION_CONTEXT_OPERATOR_OR_TIME_TRANSPORT_GAP",
+      "ONE_FROZEN_SET_OF_EXACTLY_210_UNIQUE_SLOTS",
+      "ONLY_EXACT_SUCCESS_CREATES_POSITIVE_CREDIT",
+      "FINAL_UNOBSERVED_OR_NON_SUCCESS_OUTCOMES_CREATE_ZERO_POSITIVE_CREDIT",
+      "PASS_AND_FAIL_LOCKS_ARE_MONOTONE_WITH_REMAINING_POSSIBLE_SUCCESSES",
+      "DUPLICATE_AND_OUT_OF_UNIVERSE_RECORDS_FAIL_CLOSED",
+      "ALL_211_FINAL_SUCCESS_COUNTS_HAVE_BEEN_EXHAUSTIVELY_CHECKED"
+    ],
+    "limitations": [
+      "NO_MULTIHORIZON_DEPLOYMENT_VALIDITY",
+      "NO_RARE_EVENT_COVERAGE_CLAIM",
+      "NO_DISTRIBUTION_SHIFT_TRANSPORT_CLAIM",
+      "NO_PERFORMATIVE_OR_EQUILIBRIUM_STABILITY",
+      "NO_GLOBAL_R9_SEMANTIC_OR_EXECUTION_LEAF_CLOSURE",
+      "NO_GLOBAL_R9_ROOT_CLOSURE",
+      "NO_DOMAIN_SEMANTIC_OR_EXECUTION_CLOSURE",
+      "NO_SAME_SUBJECT_COMPOSITION_PASS",
+      "NO_LIVE_DEFAULT_PROMOTION"
+    ]
+  },
+  "bounded_temporal_accounting_support": true,
+  "multihorizon_deployment_validity_proved": false,
+  "rare_event_coverage_proved": false,
+  "distribution_shift_transport_proved": false,
+  "performative_equilibrium_stability_proved": false,
+  "global_subject_identity_authority": false,
+  "root_subject_binding_authority": false,
+  "semantic_truth_authority": false,
+  "execution_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
