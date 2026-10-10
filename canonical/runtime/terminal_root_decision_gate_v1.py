@@ -70,6 +70,49 @@ def _load_bound_json(
     return payload, None
 
 
+def _same_content_binding(left: Any, right: Any) -> bool:
+    return (
+        _content_binding(left)
+        and _content_binding(right)
+        and left.get("path") == right.get("path")
+        and left.get("git_blob_sha") == right.get("git_blob_sha")
+    )
+
+
+def _authority_admits_proof_verifier_pair(
+    value: Any,
+    proof_binding: Mapping[str, Any],
+    verifier_binding: Mapping[str, Any],
+) -> bool:
+    if isinstance(value, Mapping):
+        if (
+            _same_content_binding(value, proof_binding)
+            and _same_content_binding(
+                value.get("independent_verification"),
+                verifier_binding,
+            )
+        ):
+            return True
+        return any(
+            _authority_admits_proof_verifier_pair(
+                item,
+                proof_binding,
+                verifier_binding,
+            )
+            for item in value.values()
+        )
+    if isinstance(value, list):
+        return any(
+            _authority_admits_proof_verifier_pair(
+                item,
+                proof_binding,
+                verifier_binding,
+            )
+            for item in value
+        )
+    return False
+
+
 def _fail(reason: str, **detail: Any) -> dict[str, Any]:
     out = {
         "schema": SCHEMA,
@@ -113,6 +156,27 @@ def evaluate(
 
     proof = proof or {}
     verifier = verifier or {}
+
+    authority_binding = declaration.get("authority_pointer")
+    if (
+        not _content_binding(authority_binding)
+        or authority_binding.get("path")
+        != "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json"
+    ):
+        return _fail("CURRENT_AUTHORITY_POINTER_INVALID")
+
+    authority, authority_error = _load_bound_json(authority_binding, repo_root)
+    if authority_error is not None or authority is None:
+        return _fail(
+            "CURRENT_AUTHORITY_POINTER_INVALID",
+            authority_error=authority_error,
+        )
+    if not _authority_admits_proof_verifier_pair(
+        authority,
+        proof_binding,
+        verifier_binding,
+    ):
+        return _fail("CURRENT_AUTHORITY_PROOF_VERIFIER_ADMISSION_REQUIRED")
 
     kind = proof.get("proof_kind")
     if kind not in ALLOWED_PROOF_KINDS:
