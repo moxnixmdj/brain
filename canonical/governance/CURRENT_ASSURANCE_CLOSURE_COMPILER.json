@@ -234,7 +234,7 @@
   },
   "professional_quality_same_subject_frontier": {
     "current_professional_execution_path": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
-    "current_professional_execution_git_blob_sha": "36c8a0f94077a54b49efca2be377478b38cc1aaa",
+    "current_professional_execution_git_blob_sha": "c6bf0e57d0660e0a804ae0ab31d3bae8b51eed59",
     "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
     "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
     "verified_root_subject_binding_count": 12,
@@ -400,6 +400,13 @@
     "catalog_git_blob_sha": "8b92e5cf76f767054f55414b87014e03d43460b8",
     "catalog_completeness_claim": false,
     "explicit_hard_nonclaim": "NO_CLAIM_DEFEATER_SET_COMPLETE",
-    "promotion_effect": "SEMANTIC_PROPERTY_TRUTH_REMAINS_OPEN_UNTIL_STRONGER_CLAIM_SCOPED_COMPLETENESS_OR_TYPED_EVIDENCE_PROOF"
+    "promotion_effect": "SEMANTIC_PROPERTY_TRUTH_REMAINS_OPEN_UNTIL_STRONGER_CLAIM_SCOPED_COMPLETENESS_OR_TYPED_EVIDENCE_PROOF",
+    "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_SEMANTIC_SHARED_BLOCKER_INDEPENDENT_VERIFY_20261010_V1.json",
+    "verification_git_blob_sha": "d5218f612e282f1b9339b5b3e84b5c74282b7042",
+    "independently_verified": true,
+    "shared_acceptance_proved": true,
+    "catalog_completeness_proved": false,
+    "catalog_alone_can_authorize_semantic_property_truth": false,
+    "new_primitive_required": false
   }
 }
