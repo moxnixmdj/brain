@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_PARALLEL_FRONTIER_V10_ACTIVATION_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_SPRITE__13_OF_13_GOVERNANCE_ASSERTIONS__V10_RUNTIME_AND_INTERVAL_POLICY_BOUND__SEVEN_READ_ONLY_LANES__FULL_EXECUTION_FALSE__MISSION_COMPATIBILITY_RECONCILED__ZERO_CREDIT",
+  "verifier_carrier": {
+    "type": "SPRITE",
+    "name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695"
+  },
+  "exact_blobs": {
+    "activation": {
+      "path": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V10.json",
+      "git_blob_sha": "293ae9d4a615ce4cd94f52007cac6b592545ba74"
+    },
+    "scheduler": {
+      "path": "canonical/governance/CURRENT_DEVELOPMENT_SCHEDULER.json",
+      "git_blob_sha": "056d37f6165477d9e113b57907fcea6c686a33ee"
+    },
+    "frontier": {
+      "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
+      "git_blob_sha": "223dbee8e1be4bcee58bcf1d232f1d992e2e96e6"
+    },
+    "mission": {
+      "path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
+      "git_blob_sha": "1f3ca7d1ffe7d543dd6b840285e4905e28f63a4f"
+    },
+    "mission_reconciliation": {
+      "path": "canonical/governance/V10_MISSION_SCHEDULER_RECONCILIATION_20261010_V1.json",
+      "git_blob_sha": "dafc1cc9b71d13ec27fb1304cd0a357487f907ca"
+    },
+    "runtime": {
+      "path": "canonical/runtime/capability_parallel_frontier_v2.py",
+      "git_blob_sha": "209d8d11494645432354636a3dc17e7b515abaf8"
+    },
+    "implementation_verification": {
+      "path": "canonical/verification/CAPABILITY_PARALLEL_FRONTIER_V10_INTERVAL_ROBUST_VERIFY_20261010_V1.json",
+      "git_blob_sha": "a0568e6aff736462f359d1c222c0ac519bc6482a"
+    }
+  },
+  "execution": {
+    "governance_assertions": 13,
+    "failures": 0,
+    "errors": 0,
+    "result": "PASS"
+  },
+  "verified": [
+    "CURRENT_SCHEDULER_BINDS_V10_AND_RUNTIME_V2",
+    "INTERVAL_ROBUST_DOMINANCE_ENABLED",
+    "READ_ONLY_EVIDENCE_AUTHORIZED",
+    "FULL_EXECUTION_NOT_AUTHORIZED",
+    "SEVEN_READ_ONLY_LANES_BOUND",
+    "GENERIC_R2_OPEN_WORLD_FRONTIER_REMAINS_SLEEPING",
+    "EXACT_R2_TYPED_NEXT_INFORMATION_REQUEST_BOUND",
+    "UNCHANGED_ULTIMATE_MISSION_RESOLVES_CURRENT_SCHEDULER_BY_PATH_IDENTITY",
+    "MISSION_PARETO_AND_PROVED_SCALARIZATION_LAWS_COMPATIBLE_WITH_STRICTER_V10"
+  ],
+  "hard_nonclaims": [
+    "NO_FULL_EXECUTION_DISPATCH",
+    "NO_COMPLETE_INTERVAL_VECTOR_EVIDENCE",
+    "NO_SAME_SUBJECT_COMPOSITION_PASS",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
