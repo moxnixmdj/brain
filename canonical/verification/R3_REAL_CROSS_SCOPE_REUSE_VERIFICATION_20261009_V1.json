@@ -1,0 +1,112 @@
+{
+  "schema": "PROJECT_BRAIN_R3_REAL_CROSS_SCOPE_REUSE_VERIFICATION_20261009_V1",
+  "date": "2026-10-09",
+  "status": "PASS__EXACT_EXECUTED_SURFACE_REAL_CROSS_SCOPE_REUSE__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "pull_request": 3532,
+    "test_path": "canonical/tests/test_r3_real_cross_scope_reuse_v1.py",
+    "test_git_blob_sha": "38ca030e02e6dbff87a53899d937f1b98e543308",
+    "test_size_bytes": 9796
+  },
+  "execution": {
+    "carrier": "brain-r3-root1-gap-verify-20261008",
+    "workspace": "/home/sprite/r3_second_family_exact",
+    "command": "python3 -m unittest canonical.tests.test_r3_real_cross_scope_reuse_v1 -v",
+    "tests_run": 1,
+    "tests_passed": 1,
+    "result": "PASS"
+  },
+  "proved_cycle": [
+    "REAL_NON_EFFECTFUL_EXACT_JSON_EPISODE_VERIFIED_IN_SCOPE_A",
+    "REAL_NON_EFFECTFUL_EXACT_JSON_EPISODE_VERIFIED_IN_SCOPE_B",
+    "NORMAL_QUEUE_PROMOTES_EXACT_MULTI_SCOPE_SKILL",
+    "INDEPENDENT_VERIFIER_PROMOTES_PROVEN_SUPERSET_WITH_STRUCTURAL_MATCH_V1",
+    "FRESH_SCOPE_C_SELECTS_THE_GENERALIZED_SKILL_REUSE_FIRST",
+    "FRESH_SCOPE_C_REUSE_PASSES",
+    "NO_FALLBACK_USED",
+    "NO_EFFECT_MAY_HAVE_OCCURRED",
+    "FRESH_SCOPE_C_EPISODE_INDEPENDENTLY_VERIFIED",
+    "REUSE_STATS_RECORD_ONE_ATTEMPT_ONE_SUCCESS_ZERO_FAILURES"
+  ],
+  "runtime_exactness": {
+    "executed_runtime_file_count": 18,
+    "full_git_blob_exact_current_main_count": 17,
+    "full_git_blob_exact_current_main": [
+      "canonical/runtime/capability_first_scheduler_v1.py",
+      "canonical/runtime/capability_planner.py",
+      "canonical/runtime/composition_state_capsule_v2.py",
+      "canonical/runtime/effect_broker_receipt_resolver_v2.py",
+      "canonical/runtime/executable_skill_program_v7.py",
+      "canonical/runtime/executable_skill_verification_authenticator_v1.py",
+      "canonical/runtime/general_cognition_proposal_packet_v1.py",
+      "canonical/runtime/live_brain_runtime_v1.py",
+      "canonical/runtime/r3_independent_learning_verifier_v1.py",
+      "canonical/runtime/universal_solver_episode_verification_authenticator_v1.py",
+      "canonical/runtime/universal_solver_state_capsule_v1.py",
+      "canonical/runtime/universal_solver_value_state_v1.py",
+      "canonical/runtime/universal_verified_adaptive_solver_v1.py",
+      "canonical/runtime/universal_verified_adaptive_solver_v12.py",
+      "canonical/runtime/universal_verified_adaptive_solver_v3.py",
+      "canonical/runtime/universal_verified_adaptive_solver_v4.py",
+      "canonical/runtime/verified_skill_macro_planner_v1.py"
+    ],
+    "function_exact_exception": {
+      "path": "canonical/runtime/autonomous_verified_self_improvement_v1.py",
+      "carrier_git_blob_sha": "f7965544dd9de91da43b8cb8f98c2a0c75edc1a3",
+      "current_main_git_blob_sha": "665190356fca7e7c599db3abce0dfc800df9e0ff",
+      "full_file_exact": false,
+      "executed_named_function_count": 27,
+      "all_executed_named_functions_byte_identical_to_current_main": true,
+      "executed_functions": [
+        "_all_prior_verified_episodes",
+        "_candidate_from_verified_skill",
+        "_canon",
+        "_effect_may_have_occurred",
+        "_empty_state",
+        "_enqueue_improvement",
+        "_episode_key",
+        "_family_id",
+        "_items",
+        "_next_improvement_from_state",
+        "_post_execution_independent_verification",
+        "_prior_verified_episodes",
+        "_record_reuse_result",
+        "_refresh_stats",
+        "_resolve_improvements",
+        "_restrict_problem_to_skill",
+        "_s",
+        "_select_active_skill",
+        "_sha",
+        "_skill_id",
+        "_skill_pareto_row",
+        "_work_id",
+        "_write_state",
+        "advance_verification_queue",
+        "integrate_solver_output",
+        "load_state",
+        "run_learning_episode"
+      ],
+      "nested_lambda_and_generator_execution_is_contained_inside_the_hashed_parent_functions": true
+    }
+  },
+  "github_actions": {
+    "focused_workflow_run_id": 37905958488,
+    "focused_conclusion": "failure",
+    "focused_steps": null,
+    "canonical_r3_workflow_run_id": 37908367585,
+    "canonical_conclusion": "failure",
+    "canonical_steps": null,
+    "classification": "TWO_PRE_RUNNER_INFRASTRUCTURE_FAILURES__NOT_TEST_FAILURES"
+  },
+  "claim": "A_REAL_NON_EFFECTFUL_VERIFIED_SKILL_WAS_PROMOTED_FROM_TWO_DISTINCT_SOURCE_SCOPES_TO_INDEPENDENTLY_VERIFIED_PROVEN_SUPERSET_STRUCTURAL_MATCH_V1_AND_THEN_SUCCESSFULLY_REUSED_FIRST_IN_A_FRESH_THIRD_SCOPE_WITHOUT_FALLBACK.",
+  "hard_nonclaims": [
+    "NO_CLAIM_ALL_EFFECTFUL_SKILLS_MAY_GENERALIZE_CROSS_SCOPE.",
+    "NO_CLAIM_STRUCTURAL_MATCH_V1_IS_COMPLETE_FOR_ALL_USEFUL_SCOPE_RELATIONS.",
+    "NO_CLAIM_OPEN_WORLD_R3_COMPOUNDING_IS_GLOBALLY_COMPLETE.",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}

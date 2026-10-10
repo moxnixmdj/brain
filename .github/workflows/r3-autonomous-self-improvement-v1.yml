@@ -38,6 +38,7 @@ on:
       - "canonical/tests/test_r3_queue_kind_totality_v1.py"
       - "canonical/tests/test_r3_quarantine_recovery_v1.py"
       - "canonical/tests/test_r3_verified_cross_scope_generalization_v1.py"
+      - "canonical/tests/test_r3_real_cross_scope_reuse_v1.py"
       - "canonical/tests/test_verified_repair_replay_loop_v1.py"
       - "canonical/tests/test_live_brain_runtime_v1.py"
       - "canonical/runtime/unified_cognitive_fabric_v1.py"
@@ -97,6 +98,7 @@ on:
       - "canonical/tests/test_r3_queue_kind_totality_v1.py"
       - "canonical/tests/test_r3_quarantine_recovery_v1.py"
       - "canonical/tests/test_r3_verified_cross_scope_generalization_v1.py"
+      - "canonical/tests/test_r3_real_cross_scope_reuse_v1.py"
       - "canonical/tests/test_verified_repair_replay_loop_v1.py"
       - "canonical/tests/test_live_brain_runtime_v1.py"
       - "canonical/runtime/unified_cognitive_fabric_v1.py"
@@ -155,6 +157,8 @@ jobs:
         run: python -m unittest canonical.tests.test_r3_integrator_disposition_totality_v1 -v
       - name: Run R3 verified cross-scope generalization suite
         run: python -m unittest canonical.tests.test_r3_verified_cross_scope_generalization_v1 -v
+      - name: Run R3 real cross-scope reuse regression
+        run: python -m unittest canonical.tests.test_r3_real_cross_scope_reuse_v1 -v
       - name: Run R3 queue-driver regression suite
         run: python -m unittest canonical.tests.test_r3_improvement_queue_driver_v1 -v
       - name: Run R3 direct-owned no-delta disposition suite
