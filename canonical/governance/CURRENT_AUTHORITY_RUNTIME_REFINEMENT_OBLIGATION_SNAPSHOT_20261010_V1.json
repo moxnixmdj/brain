@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_AUTHORITY_RUNTIME_REFINEMENT_OBLIGATION_SNAPSHOT_V1",
   "date": "2026-10-10",
-  "status": "COMPLETE_CURRENT_RUNTIME_REFINEMENT_OBLIGATION_ENUMERATION__SEMANTIC_REFINEMENT_OPEN",
+  "status": "COMPLETE_CURRENT_RUNTIME_REFINEMENT_OBLIGATION_ENUMERATION__SEMANTIC_REFINEMENT_PARTIAL",
   "authority": {
     "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
     "git_blob_sha": "b3d053e1451c053af2bf75ad9f31a091b101be39",
@@ -71,7 +71,11 @@
       "git_blob_sha": "e8746d141989f5279c66931d9cc9167504034b98",
       "classification": "NON_SELECTED_CURRENT_RUNTIME",
       "refinement_obligation_present": true,
-      "semantic_refinement_status": "UNRESOLVED"
+      "semantic_refinement_status": "PROVED",
+      "semantic_refinement_verification": {
+        "path": "canonical/verification/CURRENT_AUTHORITY_RUNTIME_BINDING_CENSUS_EXECUTABLE_REFINEMENT_VERIFY_20261010_V1.json",
+        "git_blob_sha": "27845cfae3499cb292ae16b75afe74ca9906016c"
+      }
     },
     {
       "path": "canonical/runtime/dynamic_adequacy_extension_basis_gate_v1.py",
@@ -306,6 +310,6 @@
   "semantic_refinement_proved": false,
   "repository_wide_refinement_proved": false,
   "terminal_credit_delta": 0,
-  "semantic_refinement_proved_count": 1,
-  "semantic_refinement_unresolved_count": 39
+  "semantic_refinement_proved_count": 2,
+  "semantic_refinement_unresolved_count": 38
 }
