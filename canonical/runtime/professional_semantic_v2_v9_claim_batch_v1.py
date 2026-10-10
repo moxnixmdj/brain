@@ -47,7 +47,7 @@ def verify(*,root:Path|str|None=None,epoch:str=EPOCH)->dict[str,Any]:
   cert={"schema":scope.CERT_SCHEMA,"leaf_id":leaf_id,"claim_id":dv["claim_id"],
    "claim_scope_git_blob_sha":cs_blob,
    "scope_certificate":{"id":leaf_id+"::SEMANTIC_V2_V9_WHOLE_SCOPE",
-     "target_scope_id":"scope://professional-quality/whole-leaf/v9/"+dv["claim_id"],
+     "target_scope_id":"scope://professional-quality/whole-leaf/"+dv["claim_id"],
      "claim_id":dv["claim_id"],"basis":"UNIVERSAL_FORMAL_SCOPE_PROOF","verified":True,
      "independent":True,"scope_relation":"EXACT","formal_completeness":True,
      "all_admissible_target_inputs_proved":True,"premise_set_id":"claim-verification:"+cv_blob},
