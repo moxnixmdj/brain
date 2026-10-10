@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_CONTEXT_DEPENDENT_MEANING_MARGIN_NONIDENTIFIABILITY_RECONCILIATION_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_STATE_BYTES__BARE_MARGIN_RECLASSIFIED_INFORMATION_BOUNDARY__R2_ROOT2_UNCHANGED__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "context-meaning-margin-nonid-reconcile-20261010-sol",
+    "exact_blobs": {
+      "canonical/action_intents/ACTION_INTENT_CONTEXT_DEPENDENT_MEANING_POSITIVE_COVERAGE_20261010_V2.json": "5dcc436351f241dcd4bed5f41704beda4b911bd9",
+      "canonical/reasoning/2026-10-10_CONTEXT_DEPENDENT_MEANING_RESEARCH_HANDOFF_V2.json": "bfd7d042d80bdf304a63c766c3a8cce86914cd1d",
+      "canonical/reasoning/2026-10-10_CONTEXT_DEPENDENT_MEANING_SUCCESSOR_EXECUTION_LEDGER_V2.json": "612987d055ff4b6c528d6a8b4076a56304c09fbf"
+    }
+  },
+  "independent_carrier": {
+    "name": "participial-disposition-verify-20261009-sol",
+    "sprite_id": "sprite-72f2a31b-c09c-49e0-bfe0-279786ee2d56",
+    "workspace": "/home/sprite/context_nonid_state_verify"
+  },
+  "checks": [
+    "ALL_SUCCESSOR_STATE_JSON_PARSES",
+    "CURRENT_R2_V71_GIT_BLOB_UNCHANGED_c94c84aaf3c759abd6827c1ff93181c04033b6a1",
+    "ROOT2_V64_GIT_BLOB_UNCHANGED_88d62359c8e3cd4c4c6c775355e4370c63ea251b",
+    "BARE_MARGIN_VERIFICATION_GIT_BLOB_BOUND_f908bbe0eb1e836dd41e64318422c30ef6c1d199",
+    "BARE_MARGIN_CLASSIFICATION_EQUALS_INFORMATION_ACQUISITION_BOUNDARY_NOT_CAPABILITY_DEFICIT",
+    "HANDOFF_RECORDS_UNIQUE_SENSE_NONIDENTIFIABILITY_FROM_SOURCE_ALONE",
+    "LEDGER_RECORDS_RECLASSIFICATION_AND_FORBIDS_MORE_SAME_SOURCE_WSD_WITHOUT_NEW_INFORMATION",
+    "TERMINAL_CREDIT_DELTA_ZERO"
+  ],
+  "authority_changes": {
+    "r2_mutated": false,
+    "root2_mutated": false,
+    "acceptance_authority_mutated": false,
+    "terminal_authority_mutated": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
