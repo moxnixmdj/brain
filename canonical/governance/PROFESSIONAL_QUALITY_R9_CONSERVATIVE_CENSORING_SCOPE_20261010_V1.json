@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R9_CONSERVATIVE_CENSORING_SCOPE_V1",
+  "date": "2026-10-10",
+  "status": "ACTIVE_SCOPED_FIXED_DENOMINATOR_CONSERVATIVE_CENSORING__211_OF_211_BOUNDARY_REPLAY__ZERO_GLOBAL_LEAF_CREDIT",
+  "root_id": "R9_TEMPORAL_DEPLOYMENT",
+  "claim_kind": "FROZEN_POPULATION_CONSERVATIVE_CENSORING_AND_EARLY_FAILURE_ACCOUNTING",
+  "exact_components": {
+    "runtime": {
+      "path": "canonical/runtime/tb_science_conservative_censoring_reducer_v1.py",
+      "git_blob_sha": "3b48ea534d606cf47a8321b56427353066393577"
+    },
+    "governance": {
+      "path": "canonical/governance/TB_SCIENCE_CONSERVATIVE_CENSORING_LOWER_BOUND_V1.json",
+      "git_blob_sha": "eb5142c2b55f649912f9b60ee42daa9faf0b60e4"
+    },
+    "verification": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R9_CONSERVATIVE_CENSORING_VERIFY_20261010_V1.json",
+      "git_blob_sha": "7081a52621a1bb8f1ad07d1da23b40c8e57e16c2"
+    }
+  },
+  "guarantees": [
+    "FROZEN_DENOMINATOR_NEVER_SHRINKS",
+    "ONLY_EXACT_SUCCESS_COUNTS_POSITIVE",
+    "FINAL_MISSING_AND_NON_SUCCESS_OUTCOMES_COUNT_ZERO",
+    "DUPLICATES_AND_OUT_OF_UNIVERSE_RECORDS_FAIL_CLOSED",
+    "PASS_AND_FAIL_LOCKS_ARE_MONOTONE_WITH_RESPECT_TO_REMAINING_POSSIBLE_SUCCESSES"
+  ],
+  "limitations": [
+    "NO_MULTIHORIZON_DEPLOYMENT_VALIDITY",
+    "NO_RARE_EVENT_COVERAGE_CLAIM",
+    "NO_DISTRIBUTION_SHIFT_TRANSPORT_CLAIM",
+    "NO_PERFORMATIVE_OR_EQUILIBRIUM_STABILITY",
+    "NO_GLOBAL_R9_SEMANTIC_OR_EXECUTION_LEAF_CLOSURE",
+    "NO_GLOBAL_R9_ROOT_CLOSURE"
+  ],
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
