@@ -1,8 +1,8 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_R2_SHARED_CAUSE_RESIDUAL_LEDGER_POINTER_V1",
   "date": "2026-10-10",
-  "status": "ACTIVE_LIVE_DERIVED_FROM_CURRENT_R2_AUTHORITY",
-  "activation": "canonical/governance/R2_SHARED_CAUSE_RESIDUAL_LEDGER_ACTIVATION_20261010_V1.json",
+  "status": "ACTIVE_LIVE_DERIVED_FROM_CURRENT_R2_AUTHORITY__CURRENT_CLASSIFICATION_COMPLETE_REQUIRED",
+  "activation": "canonical/governance/R2_SHARED_CAUSE_RESIDUAL_LEDGER_ACTIVATION_20261010_V2.json",
   "runtime": "canonical/runtime/r2_semantic_residual_ledger_v1.py",
   "source_authority": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
   "scheduler": "canonical/runtime/capability_first_scheduler_v1.py",
@@ -13,5 +13,10 @@
     "execution": false,
     "acceptance": false,
     "terminal": false
+  },
+  "currentness": {
+    "activation_git_blob_sha": "fa70144866407a64581c7c441cd87fd661664af1",
+    "runtime_git_blob_sha": "00a6963a1b65e96c08bf8fdb605d6143c339ac26",
+    "tests_git_blob_sha": "8192bbc4b1563ba036277a3e7dccc48e368f8ea5"
   }
 }
