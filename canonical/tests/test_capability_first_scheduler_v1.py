@@ -34,6 +34,31 @@ def capability_row(work_id: str, **overrides):
     return row
 
 
+def complete_new_primitive_admission():
+    return {
+        "exact_unsatisfied_predicate": "PREDICATE_X_REMAINS_FALSE",
+        "existing_mechanisms_searched": ["MECH_A", "MECH_B"],
+        "mechanism_rejections": [
+            {
+                "mechanism_id": "MECH_A",
+                "reason": "Cannot preserve the required invariant.",
+                "soundness_preserving_rejection": True,
+            },
+            {
+                "mechanism_id": "MECH_B",
+                "reason": "Cannot realize the required output type.",
+                "soundness_preserving_rejection": True,
+            },
+        ],
+        "independent_missing_primitive_or_counterexample_receipt_ids": [
+            "VERIFY_MISSING_PRIMITIVE_1"
+        ],
+        "minimum_new_primitive_scope": "ONLY_PREDICATE_X",
+        "falsifier_ids": ["FALSIFIER_X"],
+        "promotion_criteria": ["PASS_EXACT_AND_NEIGHBORING_CASES"],
+    }
+
+
 class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
     def rank_general(self, rows):
         return s.rank_work(rows, checkpoint_open_obligation_count=0)
@@ -215,6 +240,7 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
         frontier = capability_row(
             "GLOBAL_FINANCE_SEMANTIC_COMPLETION",
             frontier_class=s.OPEN_WORLD_EVIDENCE_FRONTIER,
+            residual_action="ACQUIRE_EVIDENCE",
             expected_capability_gain_lcb=1000000,
             expected_efficiency_gain_lcb=1000000,
             expected_reliability_gain_lcb=1000000,
@@ -240,6 +266,7 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
             "FINANCE_SEMANTIC_COUNTEREXAMPLE_REPAIR",
             frontier_class=s.OPEN_WORLD_EVIDENCE_FRONTIER,
             task_local_counterexample_ids=["task-case-1"],
+            residual_action="ADAPT_EXISTING",
         )
         out = self.rank_general([row])
         self.assertEqual(out["ranked"][0]["eligibility"], "ELIGIBLE")
@@ -254,6 +281,7 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
             "GENERAL_SEMANTIC_DEFECT_REPAIR",
             frontier_class=s.OPEN_WORLD_EVIDENCE_FRONTIER,
             verified_capability_defect_ids=["verified-defect-1"],
+            residual_action="VERIFY_EXISTING",
         )
         out = self.rank_general([row])
         self.assertEqual(out["ranked"][0]["eligibility"], "ELIGIBLE")
@@ -262,6 +290,87 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
             ["verified-defect-1"],
         )
 
+    def test_woken_residual_without_reuse_first_action_is_demoted(self):
+        row = capability_row(
+            "UNCLASSIFIED_RESIDUAL",
+            frontier_class=s.OPEN_WORLD_EVIDENCE_FRONTIER,
+            task_local_counterexample_ids=["task-case-2"],
+        )
+        out = self.rank_general([row])
+        ranked = out["ranked"][0]
+        self.assertEqual(ranked["eligibility"], "RESIDUAL_ACTION_REQUIRED")
+        self.assertEqual(
+            ranked["reuse_first_missing_requirements"],
+            ["RESIDUAL_ACTION"],
+        )
+        self.assertEqual(ranked["priority_score"], "0")
+
+    def test_new_primitive_without_reuse_exhaustion_proof_is_demoted(self):
+        row = capability_row(
+            "UNPROVED_NEW_PRIMITIVE",
+            frontier_class=s.OPEN_WORLD_EVIDENCE_FRONTIER,
+            verified_capability_defect_ids=["verified-defect-2"],
+            residual_action="NEW_PRIMITIVE",
+        )
+        out = self.rank_general([row])
+        ranked = out["ranked"][0]
+        self.assertEqual(
+            ranked["eligibility"],
+            "DEMOTED_NEW_PRIMITIVE_WITHOUT_REUSE_EXHAUSTION_PROOF",
+        )
+        self.assertIn(
+            "EXISTING_MECHANISMS_SEARCHED",
+            ranked["reuse_first_missing_requirements"],
+        )
+        self.assertEqual(ranked["priority_score"], "0")
+
+    def test_complete_new_primitive_reuse_exhaustion_gate_is_eligible(self):
+        row = capability_row(
+            "VERIFIED_NEW_PRIMITIVE",
+            frontier_class=s.OPEN_WORLD_EVIDENCE_FRONTIER,
+            verified_capability_defect_ids=["verified-defect-3"],
+            residual_action="NEW_PRIMITIVE",
+            new_primitive_admission=complete_new_primitive_admission(),
+        )
+        out = self.rank_general([row])
+        ranked = out["ranked"][0]
+        self.assertEqual(ranked["eligibility"], "ELIGIBLE")
+        self.assertEqual(
+            ranked["reuse_first_admission_status"],
+            "NEW_PRIMITIVE_REUSE_EXHAUSTION_GATE_STRUCTURALLY_SATISFIED",
+        )
+        self.assertEqual(ranked["reuse_first_missing_requirements"], [])
+        self.assertNotEqual(ranked["priority_score"], "0")
+
+    def test_new_primitive_must_reject_every_searched_existing_mechanism(self):
+        admission = complete_new_primitive_admission()
+        admission["mechanism_rejections"] = admission["mechanism_rejections"][:1]
+        row = capability_row(
+            "INCOMPLETE_REUSE_EXHAUSTION",
+            frontier_class=s.OPEN_WORLD_EVIDENCE_FRONTIER,
+            verified_capability_defect_ids=["verified-defect-4"],
+            residual_action="NEW_PRIMITIVE",
+            new_primitive_admission=admission,
+        )
+        out = self.rank_general([row])
+        ranked = out["ranked"][0]
+        self.assertEqual(
+            ranked["eligibility"],
+            "DEMOTED_NEW_PRIMITIVE_WITHOUT_REUSE_EXHAUSTION_PROOF",
+        )
+        self.assertIn(
+            "WHY_EACH_EXISTING_MECHANISM_CANNOT_SOUNDLY_CLOSE_THE_PREDICATE",
+            ranked["reuse_first_missing_requirements"],
+        )
+
+    def test_unrelated_capability_work_does_not_require_residual_action(self):
+        row = self.rank_general([capability_row("UNRELATED_GENERAL_CAPABILITY")])[
+            "ranked"
+        ][0]
+        self.assertEqual(row["eligibility"], "ELIGIBLE")
+        self.assertEqual(row["reuse_first_admission_status"], "NOT_APPLICABLE")
+        self.assertIsNone(row["residual_action"])
+
     def test_r2_mechanism_policy_binds_mutable_current_r2_by_path_and_rechecks_invariants(self):
         pointer = json.loads(
             (ROOT / "canonical/governance/CURRENT_DEVELOPMENT_SCHEDULER.json").read_text()
@@ -269,7 +378,7 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
         policy_rel = pointer["r2_mechanism_policy"]["path"]
         self.assertEqual(
             policy_rel,
-            "canonical/governance/R2_MECHANISM_CLOSURE_OPEN_WORLD_FRONTIER_POLICY_20261010_V2.json",
+            "canonical/governance/R2_MECHANISM_CLOSURE_OPEN_WORLD_FRONTIER_POLICY_20261010_V3.json",
         )
         policy = json.loads((ROOT / policy_rel).read_text())
 
@@ -445,21 +554,24 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
         self.assertEqual(
             s.CAPABILITY_LEARNING_LOOP,
             (
+                "SEARCH_REUSE",
                 "SOLVE",
                 "VERIFY",
                 "EXTRACT_MECHANISM",
                 "GENERALIZE",
                 "COMPRESS",
                 "PRESERVE_OPTIONS",
+                "PROMOTE_WITH_SEPARATE_AUTHORITY",
+                "FALSIFY_ON_FRESH_REAL_TASK",
                 "REUSE_CHEAPER",
             ),
         )
 
-    def test_governance_binds_v4_and_mission_precedence(self):
+    def test_governance_binds_v6_and_mission_precedence(self):
         activation = json.loads(
             (
                 ROOT
-                / "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V4.json"
+                / "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V6.json"
             ).read_text()
         )
         pointer = json.loads(
@@ -470,7 +582,7 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
         )
         self.assertEqual(
             activation["status"],
-            "ACTIVE_PRIMARY_CAPABILITY_FIRST_DEVELOPMENT_SCHEDULER",
+            "ACTIVE_PRIMARY_CAPABILITY_FIRST_DEVELOPMENT_SCHEDULER__REUSE_FIRST_RESIDUAL_ADMISSION_MECHANICALLY_ENFORCED",
         )
         self.assertFalse(
             activation["primary_work_rule"]["checkpoint_obligations_are_primary_gate"]
@@ -487,13 +599,19 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
         )
         self.assertEqual(
             pointer["authoritative_activation"],
-            "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V4.json",
+            "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V6.json",
         )
         self.assertEqual(
             mission["current_development_scheduler"]["status"],
-            "ACTIVE_PRIMARY_CAPABILITY_FIRST_DEVELOPMENT_SCHEDULER",
+            "ACTIVE_PRIMARY_CAPABILITY_FIRST_DEVELOPMENT_SCHEDULER__REUSE_FIRST_RESIDUAL_ADMISSION_MECHANICALLY_ENFORCED",
         )
+        self.assertEqual(
+            mission["current_development_scheduler"]["activation"],
+            "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V6.json",
+        )
+        self.assertTrue(activation["reuse_first_residual_admission"]["mechanically_enforced"])
         self.assertIn("CAPABILITY_RESOURCE_PARETO_LEVERAGE_IS_PRIMARY", mission["scheduler_precedence"])
+        self.assertIn("REUSE_FIRST", mission["scheduler_precedence"])
 
 
 if __name__ == "__main__":
