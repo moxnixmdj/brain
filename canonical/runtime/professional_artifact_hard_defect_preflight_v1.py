@@ -48,6 +48,8 @@ PROFILES = {
         "authority_class": "PINNED_PUBLIC_AA_BRIEFCASE_LITE_EXAMPLE",
         "public_target_example_only": True,
         "source_commit": "313e44ef0fdc91c8462fc2b4a3f18a3e4877d7f7",
+        "source_path": "canonical/evidence/AA_BRIEFCASE_LITE_PRESENTATION_PAIRWISE_CONTRACT_MANIFEST_20261007_V1.json",
+        "source_git_blob_sha": "42920315a5ecb9a1c8fe96a1a441dfd4a2f3b4e8",
         "source_check_id": "W1-T2-P-01",
         "checks_by_suffix": {
             ".xlsx": [
@@ -61,6 +63,8 @@ PROFILES = {
         "authority_class": "PINNED_PUBLIC_AA_BRIEFCASE_LITE_EXAMPLE",
         "public_target_example_only": True,
         "source_commit": "313e44ef0fdc91c8462fc2b4a3f18a3e4877d7f7",
+        "source_path": "canonical/evidence/AA_BRIEFCASE_LITE_PRESENTATION_PAIRWISE_CONTRACT_MANIFEST_20261007_V1.json",
+        "source_git_blob_sha": "42920315a5ecb9a1c8fe96a1a441dfd4a2f3b4e8",
         "source_check_id": "W1-T3-P-01",
         "checks_by_suffix": {
             ".pptx": [
@@ -446,6 +450,8 @@ def verify(bundle: Mapping[str, Any]) -> dict[str, Any]:
         "profile_authority_class": profile.get("authority_class"),
         "public_target_example_only": bool(profile.get("public_target_example_only")),
         "source_commit": profile.get("source_commit"),
+        "source_path": profile.get("source_path"),
+        "source_git_blob_sha": profile.get("source_git_blob_sha"),
         "source_check_id": profile.get("source_check_id"),
         "checked_artifacts": rows,
         "errors": sorted(set(errors)),
