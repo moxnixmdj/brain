@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_CURSORBENCH_INFORMATION_BOUNDARY_WAIT_STATE_POINTER_R128_CONTENT_ADDRESSED_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_GITHUB_OBJECT_REPLAY__NOT_INDEPENDENT_CARRIER__ZERO_CREDIT",
+  "subjects": {
+    "pointer": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+      "git_blob_sha": "026016830ece7a1f78299991d991ce1ee44e558d",
+      "pointer_revision": 128
+    },
+    "wait_state": {
+      "path": "canonical/governance/CURSORBENCH_CURRENT_INFORMATION_BOUNDARY_WAIT_STATE_RECONCILIATION_20261010_V1.json",
+      "git_blob_sha": "4f1df11b30d9b69090c31e234449975eb7cdfd89"
+    }
+  },
+  "verification_method": "GITHUB_CONTENT_ADDRESSED_EXACT_JSON_REPLAY",
+  "independent_carrier": false,
+  "pass": true,
+  "checks": {
+    "wait_state_bound": true,
+    "active_lane_is_event_driven_dormant": true,
+    "immediate_internal_cursorbench_job_is_null": true,
+    "repeat_same_public_route_a_work_forbidden": true,
+    "repeat_same_public_membership_work_forbidden": true,
+    "repeat_same_constructive_scope_information_forbidden": true,
+    "sixth_region_not_authorized_without_new_constructive_parent": true,
+    "reactivation_trigger_count": 4,
+    "positive_adequacy_cover_still_open": true,
+    "route_a_still_open": true,
+    "route_a_remaining_scoring_object_count": 2,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0,
+    "terminal_authority": false
+  },
+  "limitation": "THIS_RECORD_VERIFIES_EXACT_GIT_OBJECT_BINDINGS_AND_POINTER_INVARIANTS. IT DOES_NOT CLAIM A SEPARATE_REMOTE_CARRIER EXECUTED THE REPLAY; THE LOAD_BEARING COMPONENT THEOREMS REFERENCED BY THE WAIT_STATE RETAIN THEIR OWN EXISTING INDEPENDENT_VERIFICATIONS.",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
