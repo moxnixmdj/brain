@@ -13,6 +13,7 @@ def gen(seed, per=70):
         a=nonzero(r,vals); b=r.randint(1,9); c=nonzero(r,vals); d=r.randint(1,9); e=nonzero(r,vals); f=r.randint(1,9)
         add('rat',[a,b,c,d,e,f])
     for _ in range(per):
+        # mix arbitrary small polynomials and products with known factors
         deg=r.choice([2,3,4,5,6]); coeffs=[nonzero(r,range(-4,5))]+[r.randint(-5,5) for _ in range(deg)]
         add('factor',coeffs)
     for _ in range(per):
