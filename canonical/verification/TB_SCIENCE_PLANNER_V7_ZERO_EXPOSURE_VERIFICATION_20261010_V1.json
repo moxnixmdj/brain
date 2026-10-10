@@ -1,0 +1,83 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_PLANNER_V7_ZERO_EXPOSURE_VERIFICATION_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__PLANNER_V7_STATIC_AND_REAL_LOCAL_QWEN_ZERO_EXPOSURE_VERIFIED__RANK19_EXECUTION_AUTHORITY_FALSE",
+  "causal_diagnosis": {
+    "path": "canonical/verification/TB_SCIENCE_RANK18_PLANNER_TIMEOUT_CAUSAL_DIAGNOSIS_20261010_V1.json"
+  },
+  "candidate": {
+    "planner": {
+      "path": "canonical/runtime/harbor_science_planner_v7.py",
+      "git_blob_sha": "e5d6ab78b6cf5bacee568cd3701410a8745b9ce8"
+    },
+    "agent": {
+      "path": "canonical/runtime/harbor_science_agent_v13.py",
+      "git_blob_sha": "8deede8adb960b6ebf7ee747a5e9ff1016238b7e"
+    },
+    "regression_test": {
+      "path": "canonical/tests/test_harbor_science_planner_v7_generation_deadline.py",
+      "git_blob_sha": "5b05359423e425a04ca860f03ea4786cdf040bad"
+    }
+  },
+  "static_public_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2557,
+    "workflow_run_id": 38032281437,
+    "workflow_job_id": 114155549346,
+    "tested_head_sha": "6b40a434635ed1f115301fb61f1b7ea29db7c0a4",
+    "tests_passed": 10,
+    "tests_total": 10,
+    "conclusion": "success"
+  },
+  "real_public_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2557,
+    "workflow_run_id": 38032446676,
+    "workflow_job_id": 114156037037,
+    "tested_head_sha": "a0feab51092b77addb80329fe2991672fa373ffb",
+    "artifact_id": 11662757131,
+    "artifact_name": "tb-science-planner-v7-real-zero-exposure",
+    "artifact_zip_sha256": "591d91e8a01286ff1c725eb4d370563a663610765ae3ab0de7dbe4cfb015e4b9",
+    "receipt_sha256": "cca7b30a4c9c2fadf6b9e1fb14fc37041d2223fca5580cf40d1def967fbe2996",
+    "server_log_sha256": "d7c5eacdd0c37c3755a2ad88633ee35ea88bc912b500a86c6599733b8f0c15d4",
+    "health_sha256": "a29ee2b15c494311c52521766e44af56a3ad2248e7a8ab465e5206463c13d288",
+    "conclusion": "success",
+    "exact_planner_git_blob_sha": "e5d6ab78b6cf5bacee568cd3701410a8745b9ce8",
+    "synthetic_input_tokens": 3000,
+    "effective_timeout_s": 1746,
+    "elapsed_s": 102.508,
+    "transport_attempts": 1,
+    "request_identity_sha256": "4f9439ddd3e2ffbd264d7b9cc742407ae8669879211553e496dcb4f10ad3407a",
+    "payload_sha256": "c371cb44cccb7ff5ab796ce2c839e456829f6ebd7f66bc904c08d18bdb60a077",
+    "task_read": false,
+    "task_started": false,
+    "benchmark_trials_consumed": 0,
+    "execution_authority": false,
+    "rank19_execution_authority": false
+  },
+  "verified": [
+    "RANK18_TIMEOUT_UNDERBUDGET_ROOT_CAUSE_IS_CLOSED_BY_GENERATION_COMPLETE_DEADLINE_ACCOUNTING",
+    "EXACT_CORRECTED_PLANNER_BYTES_COMPILE_ON_PUBLIC_UBUNTU_24_04",
+    "DETERMINISTIC_SEEDED_REQUEST_IDENTITY_REMAINS_STABLE",
+    "SHORT_AND_LONG_PRODUCTION_CONTEXT_DEADLINE_ENVELOPES_FIT_CONFIGURED_CAPS",
+    "PINNED_LLAMA_CPP_CLEAN_BUILDS_ON_CURRENT_PUBLIC_RUNNER",
+    "PINNED_QWEN_MODEL_HASH_VERIFIES",
+    "REAL_3000_TOKEN_SYNTHETIC_PLANNER_TOOL_CALL_COMPLETES_IN_ONE_TRANSPORT_ATTEMPT",
+    "ZERO_BENCHMARK_TASK_CONTENT_WAS_READ_OR_STARTED"
+  ],
+  "hard_nonclaims": [
+    "NO_RANK18_RETRY_OR_REPLACEMENT_AUTHORITY",
+    "NO_RANK19_EXECUTION_AUTHORITY",
+    "NO_BENCHMARK_ACCEPTANCE_OR_TERMINAL_CREDIT",
+    "NO_CLAIM_RUNTIME_EXECUTION_SURFACE_IS_ALREADY_RESEALED_FOR_RANK19"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_trials_consumed": 0,
+    "task_read": false,
+    "task_started": false,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "pass": true
+}
