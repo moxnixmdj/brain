@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_WHOLE_LEAF_READINESS_1_OF_24_REPLAY_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__SEPARATE_CARRIER_REPLAY__21_OF_21_GATE_AND_READINESS_TESTS__ACTUAL_AUDIT_1_OF_24__23_CONSTRUCTION__0_AMBIGUOUS__PROPERTY_TRUTH_READY_1__ZERO_CREDIT",
+  "source_main_head": "ad9f8e684fa097d58f6f44ccede1b90c27cb1dc3",
+  "carrier": {
+    "name": "brain-professional-hard-defect-verify-20261010",
+    "id": "sprite-1bbb86ed-1f7c-409f-8397-fadc4de7a62a",
+    "workspace": "/home/sprite/r10-whole-leaf-v2-independent"
+  },
+  "exact_blobs": {
+    "claim_scope_gate_runtime": "d76b922e8d5c86f10568a3582759f8c23e69b2e0",
+    "claim_scope_gate_tests": "dba858e5a67ecf210f3777c8c18a29dcfe6c0961",
+    "readiness_audit_runtime": "dad5f50eba397985580c8559302b6d2bf0f268aa",
+    "readiness_audit_tests_repaired": "c6a0ec0eb500804d80c0fa8a4bc177e6bbe32bbf",
+    "r10_execution_v2_chain": "180234a8eeca62f51737f69db53a83ff2d0fe237",
+    "r10_execution_v2_gate_verification": "afeeac2ffcdf2f858b5560299396fe450193e5df",
+    "whole_leaf_residual_ledger": "ae5503829ad340cccef287f37ff70e4ab9288d33",
+    "v2_gate_activation": "34fdaf7f4a91d0e28d446a9d554c3aa0fbec8222"
+  },
+  "verification": {
+    "py_compile": "PASS",
+    "combined_tests_run": 21,
+    "combined_tests_passed": 21,
+    "combined_tests_failed": 0,
+    "actual_readiness_audit": {
+      "pass": true,
+      "leaf_count": 24,
+      "admissible_chain_count": 1,
+      "claim_scope_construction_required_count": 23,
+      "incomplete_or_ambiguous_chain_count": 0,
+      "property_truth_ready_count": 1,
+      "readiness_result_canonical_json_sha256": "842bed5b767d989b61f6dc06bb1d767c440c704e7bbea66a4396558d32a8ed74"
+    },
+    "admitted_leaf": {
+      "leaf_id": "PQ::R10_ANALYSIS_DECISION::EXECUTION",
+      "state": "ADMISSIBLE_V2_WHOLE_LEAF_SCOPE_CHAIN",
+      "next": "RUN_SEPARATE_LEAF_PROPERTY_TRUTH_AND_EXECUTION_VERIFICATION"
+    }
+  },
+  "proves": [
+    "THE_CURRENT_24_LEAF_SET_PARTITIONS_EXACTLY_INTO_1_ADMISSIBLE_23_CONSTRUCTION_0_AMBIGUOUS",
+    "R10_EXECUTION_SCOPE_CHAIN_PASSES_THE_CURRENT_SHARED_V2_GATE_ON_SEPARATE_CARRIER",
+    "R10_EXECUTION_IS_PROPERTY_TRUTH_READY_BUT_PROPERTY_TRUTH_IS_NOT_YET_GRANTED",
+    "THE_READINESS_REGRESSION_MUST_TRACK_DURABLE_PARTITION_INVARIANTS_INSTEAD_OF_HARDCODING_ZERO_ADMISSIONS"
+  ],
+  "hard_nonclaims": [
+    "NO_R10_EXECUTION_PROPERTY_TRUTH",
+    "NO_R10_DOMAIN_EXECUTION_CLOSURE",
+    "NO_PROFESSIONAL_QUALITY_CLOSURE",
+    "NO_FULL_CURRENT_MAIN_FULL_SYSTEM_REGRESSION",
+    "NO_EXECUTION_AUTHORITY",
+    "NO_QUALITY_AUTHORITY",
+    "NO_ACCEPTANCE_AUTHORITY",
+    "NO_PROMOTION_AUTHORITY",
+    "NO_TERMINAL_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
