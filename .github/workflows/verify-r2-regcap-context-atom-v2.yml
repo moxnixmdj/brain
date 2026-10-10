@@ -3,7 +3,6 @@ on:
   pull_request:
     branches: [main]
     paths:
-      - canonical/runtime/source_aligned_regcap_context_proof_v2.py
       - canonical/runtime/regcap_context_atom_truth_certificate_v2.py
       - canonical/runtime/semantic_truth_dispatch_v1.py
       - canonical/tests/test_regcap_context_atom_truth_certificate_v2.py
@@ -21,9 +20,9 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Compile changed modules
+      - name: Compile live dependency cone
         run: |
-          python -m py_compile             canonical/runtime/source_aligned_regcap_context_proof_v2.py             canonical/runtime/regcap_context_atom_truth_certificate_v2.py             canonical/runtime/semantic_truth_dispatch_v1.py
-      - name: Run strict regcap context truth suites
+          python -m py_compile             canonical/runtime/regcap_contextual_observation_compiler_v1.py             canonical/runtime/regcap_context_atom_truth_certificate_v2.py             canonical/runtime/semantic_truth_dispatch_v1.py
+      - name: Run canonical regcap truth suites
         run: |
           python -m unittest -v             canonical.tests.test_regcap_context_atom_truth_certificate_v2             canonical.tests.test_semantic_truth_dispatch_regcap_context_v2             canonical.tests.test_semantic_truth_dispatch_v1
