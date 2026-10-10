@@ -150,6 +150,14 @@ def auth(binding,root,step_id):
 
 
 class ProfessionalStepBindingAuthorityV2Tests(unittest.TestCase):
+    def test_v2_preserves_v1_run_context_helper_surface(self):
+        self.assertEqual(v2.run_context_digest(
+            goal="Improve report",
+            decision_payload={"context_id":"x"},
+            artifact_paths=["a.docx"],
+            hard_defect_profile_id="profile",
+            detected_triggers=[],
+        ), context())
     def test_nonfinal_step_preserves_v1_semantics(self):
         with tempfile.TemporaryDirectory() as td:
             root=Path(td); binding,_,_=write_pair(root,step_id=OTHER,outcome=None)
