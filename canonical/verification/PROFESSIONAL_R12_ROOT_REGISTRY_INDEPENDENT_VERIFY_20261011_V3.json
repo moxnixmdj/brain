@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_R12_ROOT_REGISTRY_INDEPENDENT_VERIFY_20261011_V3",
+  "date": "2026-10-11",
+  "status": "PASS__INDEPENDENT_SPRITE__STABLE_R12_CC_R1_CC_R2_CC_R3_PROVED_CURRENT__R4_TRUE__ZERO_TERMINAL_CREDIT",
+  "base_main_commit": "06f5041ca1fa308540ee3e529e926b3d7d170c4c",
+  "branch": "repair/r12-v9-local-vs-universal-totality-20261011-v1",
+  "subject": {
+    "registry": {
+      "path": "canonical/governance/COVERAGE_ROOT_REGISTRY_PROFESSIONAL_R12_SEMANTIC_20261011_V3.json",
+      "git_blob_sha": "3b37895f8e6effdc5f0175361301b0775542e3ff"
+    },
+    "runtime": {
+      "path": "canonical/runtime/professional_r12_root_registry_verify_v3.py",
+      "git_blob_sha": "6036b68d11f5bd2514d09e13b34e7038b7cadf1b"
+    },
+    "stable_claim": {
+      "path": "canonical/governance/COVERAGE_COMPLETENESS_FROZEN_CLAIM_PROFESSIONAL_R12_SEMANTIC_20261010_V2.json",
+      "git_blob_sha": "7b26ddba501358d42d6fa342efd27d389bb30654"
+    }
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-professional-hard-defect-verify-20261010",
+    "carrier_id": "sprite-1bbb86ed-1f7c-409f-8397-fadc4de7a62a",
+    "workspace": "/home/sprite/v9-real-witness",
+    "exact_branch_bytes_overlaid": true,
+    "result_sha256": "21a06ff4a24c4c743e6daa7f9785f6bf9d6202e071428cb2193a2aff58506fee",
+    "root_semantic_receipts": {
+      "CC_R1": "2b97d47544375aa59684fa6a5222d3262d88519dfe480103f7e771a9669cba47",
+      "CC_R2": "d9b9a98fb9484c9cecb11b83679bb90059fc0f27257885889d1a0d351824fd39",
+      "CC_R3": "1659927b98c608e621a5830256f312a2e2008c7909e1e2aa7ebc2bd7e9f23609"
+    }
+  },
+  "truth": {
+    "claim_id": "11870f850b46bcfcc31094f764fc4f45c911aaac413979ceb62679ff19a53162",
+    "proved_root_ids": [
+      "CC_R1_REALITY_CONTAINMENT_V1",
+      "CC_R2_MISSION_SOUNDNESS_V1",
+      "CC_R3_TERMINAL_CLOSURE_V1"
+    ],
+    "open_root_ids": [],
+    "proved_root_count": 3,
+    "open_root_count": 0,
+    "r4_proof_closure": true,
+    "new_primitive_required": false
+  },
+  "hard_nonclaims": [
+    "NO_CROSS_CLAIM_ROOT_TRANSPORT",
+    "NO_GLOBAL_MISSION_TERMINALITY",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY_FROM_R4_ALONE"
+  ],
+  "accounting": {
+    "fresh_reality_units_consumed": 0,
+    "incremental_spend_usd": 0,
+    "property_truth_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
