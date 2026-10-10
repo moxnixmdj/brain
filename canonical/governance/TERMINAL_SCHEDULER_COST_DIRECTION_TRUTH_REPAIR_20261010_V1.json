@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_SCHEDULER_COST_DIRECTION_TRUTH_REPAIR_V1",
+  "date": "2026-10-10",
+  "status": "ADAPTIVE_ESCAPE_OPTIONAL__COST_LOWER_BOUND_NOT_LEVERAGE_LOWER_BOUND__ZERO_CREDIT",
+  "proof": {
+    "mandatory_terminal_semantics": "FROZEN_19_FAMILY_ACCEPTANCE_PLUS_OWNERSHIP_FINALITY",
+    "adaptive_route_role": "OPTIONAL_STRONGER_MULTI_OBLIGATION_DISCHARGE_ROUTE",
+    "max_open_obligation_discharge_count": 13,
+    "wall_clock_cost_lower_bound_units": 1,
+    "verified_wall_clock_cost_upper_bound_present": false,
+    "corrected_inequality": "D_LE_13_AND_C_GE_1_IMPLIES_D_DIV_C_LE_13",
+    "executable_scheduler_rule": "ROUTE_WITH_VERIFIED_PREREQUISITES_IS_WALL_CLOCK_RANKABLE_ONLY_WITH_FINITE_POSITIVE_VERIFIED_COST_UPPER_BOUND",
+    "adaptive_route_rankable_now": false,
+    "tb_science_rank18_in_flight_protected": true
+  },
+  "scheduler_effect": {
+    "remove_claim": "ADAPTIVE_ESCAPE_IS_CURRENT_VERIFIED_HIGHEST_LEVERAGE_ROUTE",
+    "keep_candidate": "ADAPTIVE_ESCAPE_PROGRESS_TOTALITY",
+    "current_priority": "PROTECT_AND_RECONCILE_TB_SCIENCE_RANK18_RESULT",
+    "mandatory_root": "CLOSE_FROZEN_TERMINAL_PREDICATES_OR_SOUNDLY_DISCHARGE_SOME_BY_STRONGER_SCOPE_COMPLETE_PROOF"
+  },
+  "nonclaims": [
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_ESCAPE_TOTALITY_PROOF",
+    "NO_TERMINAL_CREDIT",
+    "NO_CLAIM_DIRECT_ROUTES_ALWAYS_CHEAPER"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "promotion_authority": false,
+  "terminal_authority": false
+}

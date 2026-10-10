@@ -1437,6 +1437,11 @@
         "git_blob_sha": "5a10547706a1b46dcb11d32122490efd927d30b0"
       },
       "note": "CURRENT_HIGHEST_LEVERAGE_ALL_OPEN_ROUTE__13_OBLIGATIONS__ONE_REMAINING_VERIFIED_PREMISE_ESCAPE_PROGRESS_TOTALITY__ZERO_CREDIT"
+    },
+    "terminal_scheduler_cost_direction_truth_repair_20261010_v1": {
+      "path": "canonical/governance/TERMINAL_SCHEDULER_COST_DIRECTION_TRUTH_REPAIR_20261010_V1.json",
+      "git_blob_sha": "a94aa1f1f85bd3938c473f0a5876da65544a2c16",
+      "note": "ADAPTIVE_ESCAPE_IS_OPTIONAL_STRONGER_ROUTE__COST_LOWER_BOUND_IMPLIES_LEVERAGE_UPPER_BOUND__NO_VERIFIED_COST_UB_NO_WALL_CLOCK_RANK"
     }
   },
   "live_truth": {
@@ -1750,7 +1755,7 @@
     "frozen_atomic_predicates_unresolved": 20,
     "frozen_atomic_predicates_total": 38,
     "universal_trace_not_x_required_for_terminal": false,
-    "universal_trace_not_x_optional_stronger_route": false,
+    "universal_trace_not_x_optional_stronger_route": true,
     "bureaucracy_scheduler_truth_reconciled": true,
     "optional_not_x_is_mandatory_terminal_root": false,
     "instruction_following_frozen_acceptance_protocol_closed": true,
@@ -2295,16 +2300,16 @@
     "r2_marked_finance_mention_universe_dynamic_route_bound": true,
     "r2_marked_finance_mention_universe_open_world_plain_text_completeness": false,
     "terminal_autopilot_adaptive_escape_progress_route_active": true,
-    "terminal_autopilot_current_highest_leverage_route": "ADAPTIVE_ESCAPE_PROGRESS_TOTALITY",
+    "terminal_autopilot_current_highest_leverage_route": "UNRANKED__NO_VERIFIED_WALL_CLOCK_COST_UPPER_BOUND_FOR_ADAPTIVE_ESCAPE_PROGRESS",
     "terminal_autopilot_adaptive_route_open_obligation_discharge_count": 13,
     "terminal_autopilot_adaptive_route_missing_verified_premise_count": 1,
     "terminal_autopilot_adaptive_route_missing_verified_premises": [
       "current_escape_progress_totality_proved"
     ],
     "terminal_autopilot_adaptive_route_estimated_wall_clock_units_lower_bound": 1,
-    "terminal_autopilot_adaptive_route_leverage_lower_bound": 13,
+    "terminal_autopilot_adaptive_route_leverage_lower_bound": null,
     "escape_progress_totality_is_current_single_adaptive_universal_premise": true,
-    "current_terminal_next_proof_object": "ESCAPE_PROGRESS_TOTALITY__EVERY_REACHED_NONTERMINAL_ESCAPE_STATE_HAS_COMMON_AUTHENTICATED_SAFE_ADEQUACY_OR_ONE_AUTHENTICATED_SAFE_TRUTH_PRESERVING_STRICTLY_POLICY_REGION_SHRINKING_SELECTED_DISCRIMINATOR",
+    "current_terminal_next_proof_object": "PROTECT_TB_SCIENCE_RANK18_IN_FLIGHT_RESULT__PARALLEL_WORK_ONLY_IF_IT_CLOSES_OR_SOUNDLY_REDUCES_A_FROZEN_TERMINAL_OBLIGATION__REACTIVATE_ADAPTIVE_ESCAPE_RANKING_ONLY_WITH_VERIFIED_COST_UPPER_BOUND",
     "tb_science_current_slot_ledger_v29_blob": "0c97c84d98ef3ce97025ea6672971f188d5fc566",
     "tb_science_rank15_result_status": "FINAL_ZERO",
     "tb_science_rank15_reward": 0,
@@ -2368,7 +2373,11 @@
       "CURSOR_OWNER_ACCESS_POLICY_OR_EXTERNAL_EVALUATION_INTERFACE_MATERIALLY_CHANGES",
       "CONTENT_ADDRESSED_ACTUAL_CURSORBENCH_TARGET_CONTEXT_OR_GRADER_EVIDENCE_BECOMES_AVAILABLE",
       "A_NEW_BRAIN_OWNED_CODING_POLICY_WITH_AN_INDEPENDENTLY_VERIFIED_CONSTRUCTIVE_ADEQUACY_THEOREM_STRICTLY_EXPANDS_THE_FIVE_REGION_UNION"
-    ]
+    ],
+    "terminal_autopilot_adaptive_route_leverage_lower_bound_valid": false,
+    "terminal_autopilot_adaptive_route_leverage_upper_bound_from_cost_lower_bound": 13,
+    "terminal_autopilot_adaptive_route_verified_wall_clock_cost_ub": null,
+    "terminal_autopilot_adaptive_route_rankable_by_wall_clock": false
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -3074,7 +3083,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 128,
+  "pointer_revision": 129,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
@@ -4865,6 +4874,18 @@
     "rank19_execution_authority": false,
     "scheduler_frozen": true,
     "finalization_authority": true,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_scheduler_cost_direction_truth_repair_20261010_v1": {
+    "source": {
+      "path": "canonical/governance/TERMINAL_SCHEDULER_COST_DIRECTION_TRUTH_REPAIR_20261010_V1.json",
+      "git_blob_sha": "a94aa1f1f85bd3938c473f0a5876da65544a2c16"
+    },
+    "prior_invalid_leverage_lower_bound": 13,
+    "corrected_leverage_upper_bound_from_cost_lower_bound": 13,
+    "adaptive_route_wall_clock_rankable": false,
+    "universal_trace_route_optional": true,
     "acceptance_credit_delta": 0,
     "terminal_credit_delta": 0
   }
