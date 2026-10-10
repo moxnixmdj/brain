@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TYPED_ACCEPTANCE_INTEGER_CONSTANT_INTEGRATION_VERIFY_20261010_V1",
   "date": "2026-10-10",
-  "status": "PASS__INDEPENDENT_SPRITE__PYCOMPILE__21_OF_21_INTEGRATION_AND_DOWNSTREAM_CASES__GENERAL_TYPED_INTEGER_CONSTANT_REPAIR__ZERO_CREDIT",
+  "status": "PASS__INDEPENDENT_SPRITE__PYCOMPILE__11_OF_11_CORE_CURRENT_MAIN_INTEGRATION_CASES__GENERAL_TYPED_INTEGER_CONSTANT_REPAIR__ZERO_CREDIT",
   "defect": {
     "class": "TRANSITIVE_TYPED_ACCEPTANCE_SCHEMA_MISMATCH",
     "observed_failure": "CompileError:CONST_TYPE_INVALID",
@@ -21,13 +21,12 @@
   "independent_replay": {
     "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
     "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
-    "workspace": "/home/sprite/r4-execution-property-truth-v1",
+    "workspace": "/home/sprite/typed-integer-current-v2",
     "py_compile": "PASS",
     "integer_regression_cases": "3_OF_3_PASS",
     "original_measurement_integration_cases": "8_OF_8_PASS",
-    "downstream_r4_guard_cases": "5_OF_5_PASS",
-    "downstream_r4_property_verifier_cases": "5_OF_5_PASS",
-    "total": "21_OF_21_PASS"
+    "total": "11_OF_11_PASS",
+    "current_main_rebase": true
   },
   "proves": [
     "INTEGER_CONSTANTS_PRESERVE_INTEGER_TYPE",
@@ -39,6 +38,7 @@
   "hard_nonclaims": [
     "NO_ACCEPTANCE_PROGRAM_SEMANTIC_ADEQUACY_CLAIM",
     "NO_R4_PROPERTY_TRUTH_CREDIT_FROM_THIS_REPAIR_ALONE",
+    "DOWNSTREAM_R4_CANDIDATE_OBSERVATION_IS_NOT_CANONICAL_AUTHORITY",
     "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT"
   ],
   "accounting": {
@@ -47,5 +47,10 @@
     "capability_credit_delta": 0,
     "ownership_credit_delta": 0,
     "terminal_credit_delta": 0
+  },
+  "downstream_candidate_observation": {
+    "scope": "NONCANONICAL_R4_EXECUTION_PROPERTY_CANDIDATE_ONLY",
+    "result": "10_OF_10_R4_GUARD_AND_PROPERTY_VERIFIER_CASES_PASSED_ON_PRIOR_CANDIDATE_WORKSPACE_AFTER_THIS_REPAIR",
+    "authority": false
   }
 }
