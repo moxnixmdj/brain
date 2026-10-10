@@ -1,18 +1,18 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_TB_SCIENCE_EXECUTION_POINTER_V2",
   "date": "2026-10-10",
-  "status": "RANK20_V13_PUBLIC_EFFECTIVE_AUTHORITY_VERIFIED__ACTIVATION_AUTHORITY_V3_READY__EIGHTEEN_CONSUMED__UNREAD_UNSTARTED",
+  "status": "RANK20_V3_FINAL_PREEXPOSURE_ABORT_NONCONSUMING__TASK_READ_TRUE__NO_START__GENERAL_CALLER_VERSION_SKEW_REPAIR_PENDING",
   "current_result": {
-    "path": "canonical/verification/TB_SCIENCE_RANK20_V12_PUBLIC_RESEAL_VERIFY_20261010_V1.json",
-    "git_blob_sha": "68ad6e384e10833a2e97e47e6d4af37d820277ca"
+    "path": "canonical/verification/TB_SCIENCE_RANK20_V3_FINAL_NONCONSUMING_VERIFY_20261010_V1.json",
+    "git_blob_sha": "8f77186beeb582c5aef8bbead0d7a98e32f818fa"
   },
   "current_ledger": {
-    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V61.json",
-    "git_blob_sha": "bbc2b776d625afe77ce4631540f1e622c55341ab"
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V62.json",
+    "git_blob_sha": "f7dfbc4504d03854425cea426f8cc9b63751b536"
   },
   "verification": {
-    "path": "canonical/verification/TB_SCIENCE_RANK20_V13_PUBLIC_EFFECTIVE_AUTHORITY_VERIFY_20261010_V1.json",
-    "git_blob_sha": "080ef4580946fd1b72354efb10cf5d0d937ee346"
+    "path": "canonical/verification/TB_SCIENCE_RANK20_V3_FINAL_NONCONSUMING_VERIFY_20261010_V1.json",
+    "git_blob_sha": "8f77186beeb582c5aef8bbead0d7a98e32f818fa"
   },
   "counts": {
     "benchmark_trials_consumed": 18,
@@ -29,7 +29,7 @@
   },
   "acceptance_credit_delta": 0,
   "terminal_credit_delta": 0,
-  "next": "CREATE_EXACT_ONE_FILE_RANK20_V3_ACTIVATION_PR_FROM_18ABCBF__OBSERVE_PRESTART__COMMIT_DURABLE_START_ONLY_AFTER_AGENT_READY",
+  "next": "VERIFY_GENERAL_CONTENT_ADDRESSED_BOUND_RUNTIME_CALLER_REPAIR__NO_RANK20_V3_RETRY__THEN_RECOMPUTE_CAPABILITY_FIRST_FRONTIER",
   "finalized_rank18": {
     "ledger_schedule_rank": 18,
     "slot_id": "terminal-bench-science/longitudinal-clinical-agent::trial-0",
@@ -95,9 +95,10 @@
     "benchmark_role": "NEW_CAPABILITY_VALIDATION"
   },
   "hard_nonclaims": [
-    "NO_RANK20_V3_TASK_READ_OR_START",
+    "NO_RANK20_V3_RETRY_OR_REPLACEMENT_AUTHORITY",
     "NO_RANK20_V3_DURABLE_START",
     "NO_RANK20_V3_BENCHMARK_TRIAL_CONSUMPTION",
+    "NO_REPAIR_CAPABILITY_CREDIT_BEFORE_INDEPENDENT_VERIFICATION",
     "NO_ACCEPTANCE_CAPABILITY_OR_TERMINAL_CREDIT"
   ],
   "public_effective_authority_reconciliation": {
@@ -247,9 +248,9 @@
   "rank20_activation_authority": {
     "path": "canonical/governance/TB_SCIENCE_RANK20_ACTIVATION_AUTHORITY_20261010_V3.json",
     "git_blob_sha": "59a506eebe6bbb49386133ff9234443f0ba58d93",
-    "authorized": true,
-    "activation_generation": "V3",
-    "activation_present": false
+    "authorized": false,
+    "retired_after_nonconsuming_abort": true,
+    "activation_generation": "V3"
   },
   "public_rank20_effective_authority": {
     "public_repository": "moxnixmdj/verification-capsule-runner",
@@ -448,5 +449,34 @@
     "task_read": false,
     "task_started": false,
     "benchmark_trials_consumed": 0
+  },
+  "finalized_rank20_v3_nonconsuming": {
+    "slot_id": "terminal-bench-science/hysteretic-aquifer-control::trial-0",
+    "task_digest": "sha256:681df0c3b2ada03a933ac4d2e11f07983676f87a9f26b61e416987904b880289",
+    "logical_attempt_id": "aeadf4a998d2392b4aa277f1fdd6d31f057a81305dd98f9038f3a8b8bb14be68",
+    "activation_pull_request": 2632,
+    "workflow_run_id": 38061639841,
+    "workflow_job_id": 114240929023,
+    "task_read": true,
+    "prestart_guard_pass": true,
+    "agent_ready": true,
+    "task_started": false,
+    "durable_start_cas_acquired": false,
+    "benchmark_trials_consumed": 0,
+    "final_receipt_status": "PREEXPOSURE_ABORT_NONCONSUMING",
+    "failure_root_class": "POST_READY_START_CAS_CALLER_VERSION_SKEW_V7_VS_BOUND_V8",
+    "diagnosis_path": "canonical/governance/TB_SCIENCE_RANK20_V3_PRESTART_ABORT_DIAGNOSIS_20261010_V1.json",
+    "diagnosis_git_blob_sha": "a8c7c9b9548f0515455df1badddebd9fba685d45",
+    "retry_authority": false,
+    "replacement_authority": false,
+    "activation_authority": false
+  },
+  "rank20_bound_start_cas_repair_candidate": {
+    "path": "canonical/governance/TB_SCIENCE_BOUND_START_CAS_CALLER_REPAIR_CANDIDATE_20261010_V1.json",
+    "git_blob_sha": "947aa2d992f0e6fe6939f91cba94b2729f495f4e",
+    "public_branch": "repair/rank20-start-cas-caller-v8-20261010-v1",
+    "public_head_sha": "7868075e686b716aab425881eb74ec5b3285de3a",
+    "verification_pending": true,
+    "merge_authority": false
   }
 }
