@@ -182,3 +182,45 @@ def test_theorem_keeps_provider_totality_open():
     assert out["status"] == "PROVED_REDUCTION_LAW__REPAIR_PROVIDER_TOTALITY_REMAINS_OPEN"
     assert "A_VALID_REPAIR_IS_ALWAYS_ACQUIRABLE" in out["not_proved"]
     assert out["terminal_credit_delta"] == 0
+
+
+import unittest
+
+
+class ReachedEscapeRepairPotentialTests(unittest.TestCase):
+    def test_zero_potential_iff_finite_certificate_passes(self):
+        test_zero_potential_iff_finite_certificate_passes()
+
+    def test_uncovered_region_contributes_weighted_potential(self):
+        test_uncovered_region_contributes_weighted_potential()
+
+    def test_covering_uncovered_region_is_strict_progress_even_before_full_certificate(self):
+        test_covering_uncovered_region_is_strict_progress_even_before_full_certificate()
+
+    def test_common_policy_repair_resolves_conflict_to_zero(self):
+        test_common_policy_repair_resolves_conflict_to_zero()
+
+    def test_truthful_discriminator_split_resolves_two_region_conflict(self):
+        test_truthful_discriminator_split_resolves_two_region_conflict()
+
+    def test_constant_discriminator_does_not_fake_progress(self):
+        test_constant_discriminator_does_not_fake_progress()
+
+    def test_unrelated_policy_does_not_fake_progress(self):
+        test_unrelated_policy_does_not_fake_progress()
+
+    def test_existing_policy_mutation_is_rejected(self):
+        test_existing_policy_mutation_is_rejected()
+
+    def test_region_set_drift_is_rejected(self):
+        test_region_set_drift_is_rejected()
+
+    def test_three_region_split_strictly_decreases_conflict_mass(self):
+        test_three_region_split_strictly_decreases_conflict_mass()
+
+    def test_theorem_keeps_provider_totality_open(self):
+        test_theorem_keeps_provider_totality_open()
+
+
+if __name__ == "__main__":
+    unittest.main(verbosity=2)
