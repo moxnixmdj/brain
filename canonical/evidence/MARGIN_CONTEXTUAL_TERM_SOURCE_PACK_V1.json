@@ -25,7 +25,7 @@
         {
           "fragment_id": "CFTC_INITIAL_MARGIN_DEFINITION",
           "section_anchor": "Initial Margin",
-          "text": "Customers' funds put up as security for a guarantee of contract fulfillment at the time a futures market position is established. See Original Margin.",
+          "text": "Customers' funds put up as security for a guarantee of contract fulfillment at the time a futures market position is established.",
           "max_chars_after_anchor": 2000
         }
       ]
