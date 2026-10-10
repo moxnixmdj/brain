@@ -56,13 +56,12 @@
   ],
   "completion_boundary": "Do not claim universal minimum. Claim exact optimum only over an exhaustively searched finite discovered mechanism library, or a verified upper bound otherwise.",
   "drive_evidence_mirror": {
-    "status": "UPDATED_WITH_CONSERVATIVE_HYPEREXPAND_V30_FRONTIER__NONCANONICAL",
+    "status": "UPDATED_WITH_TOPLEVEL_FACADE_V32_FRONTIER__NONCANONICAL",
     "file_id": "1iSGwawxceR81ssMCfAmkXJNLoFlLaEfda8QiggnOnq4",
     "url": "https://docs.google.com/document/d/1iSGwawxceR81ssMCfAmkXJNLoFlLaEfda8QiggnOnq4",
     "authority": "NONCANONICAL_EVIDENCE_MIRROR__GITHUB_REMAINS_CANONICAL",
-    "last_updated_revision_id": "AHj4eMQmqL6QvbvJ4ysfxIjzOaHeCc-QLMM2S9V094nHpoT9cEyX9QamGfS5dhp3E1aZuvEYGYOzgbfl3w2NsEaRwH31235Z0DlqXEsaxA",
-    "fresh_execution_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_CONSERVATIVE_HYPEREXPAND_V30_SUCCESSOR_EXECUTION_20261010_V1.json",
-    "fresh_falsification_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_NEXT25_FALSIFICATION_20261010_V1.json"
+    "last_updated_revision_id": "AHj4eMRXIZGyrvfSEPB5-beXdBYORv0abovdOpfxfvLxhwEkEpw2T_KU7-a_ALLRT87ry30BkYjCsJH8tOgD_a2OC877bnyJfyAOfAXVnA",
+    "fresh_execution_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_TOPLEVEL_FACADE_V32_SUCCESSOR_EXECUTION_20261010_V1.json"
   },
   "fresh_local_donor_evidence": "canonical/evidence/BYTES_SYMPY_1_14_DEPENDENCY_CENSUS_20261010_V1.json",
   "execution_reconciliation": {
