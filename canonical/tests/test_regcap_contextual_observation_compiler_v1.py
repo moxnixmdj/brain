@@ -38,22 +38,64 @@ class Tests(unittest.TestCase):
         self.assertEqual(out["observation_id"], "FRAMEWORK_CLASS")
         self.assertEqual(out["outcome"], "SEPARATE_MINIMUM_TLAC_REQUIREMENT")
 
-    def test_release_when_risk_dissipates_is_not_silently_upgraded(self):
-        out = run("The cushion is released when system-wide risk dissipates.")
-        self.assertFalse(out["pass"])
+    def test_ccob_functional_signature_compiles(self):
+        out = run("The buffer can be drawn down as losses are incurred.")
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(out["observation_id"], "FUNCTIONAL_SIGNATURE_CLASS")
+        self.assertEqual(out["outcome"], "DRAWDOWN_AS_LOSSES_ARE_INCURRED")
+
+    def test_ccyb_functional_signature_compiles(self):
+        out = run(
+            "The cushion is released when system-wide risk crystallises or dissipates."
+        )
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(out["observation_id"], "FUNCTIONAL_SIGNATURE_CLASS")
         self.assertEqual(
-            out["status"],
-            "UNRESOLVED__NO_CERTIFIED_CONTEXTUAL_OBSERVATION",
+            out["outcome"],
+            "RELEASE_WHEN_SYSTEM_WIDE_RISK_CRYSTALLISES_OR_DISSIPATES",
         )
 
-    def test_resolution_recapitalisation_is_not_silently_upgraded(self):
+    def test_tlac_functional_signature_compiles(self):
+        out = run(
+            "The capacity provides loss-absorbing and recapitalisation capacity "
+            "available in resolution for a failing G-SIB."
+        )
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(out["observation_id"], "FUNCTIONAL_SIGNATURE_CLASS")
+        self.assertEqual(
+            out["outcome"],
+            "G_SIB_LOSS_ABSORPTION_RECAPITALISATION_IN_RESOLUTION",
+        )
+
+    def test_ccob_structural_signature_compiles(self):
+        out = run("The cushion is 2.5% CET1 above the regulatory minimum.")
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(out["observation_id"], "STRUCTURAL_SIGNATURE_CLASS")
+        self.assertEqual(
+            out["outcome"],
+            "TWO_POINT_FIVE_PERCENT_CET1_ABOVE_REGULATORY_MINIMUM",
+        )
+
+    def test_ccyb_structural_signature_compiles(self):
+        out = run(
+            "The buffer extends the capital conservation buffer and is met with CET1."
+        )
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(out["observation_id"], "STRUCTURAL_SIGNATURE_CLASS")
+        self.assertEqual(out["outcome"], "EXTENDS_CCOB_AND_MET_WITH_CET1")
+
+    def test_partial_release_fact_is_not_upgraded(self):
+        out = run("The cushion is released when risk dissipates.")
+        self.assertFalse(out["pass"])
+
+    def test_partial_resolution_fact_is_not_upgraded(self):
         out = run(
             "The capacity is available in resolution to recapitalise a failing G-SIB."
         )
         self.assertFalse(out["pass"])
 
-    def test_numeric_cet1_context_is_not_silently_upgraded(self):
-        out = run("The cushion is 2.5% CET1 above the regulatory minimum.")
+    def test_partial_numeric_fact_is_not_upgraded(self):
+        out = run("The cushion is 2.5% above the regulatory minimum.")
         self.assertFalse(out["pass"])
 
     def test_naked_phrase_is_unresolved(self):
