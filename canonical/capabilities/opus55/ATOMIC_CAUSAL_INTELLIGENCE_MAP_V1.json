@@ -320,10 +320,10 @@
     "cases": 6
   },
   "bytes_minimization_control": {
-    "status": "ACTIVE__SECONDARY_PROFILE_V24_BYTE_FRONTIER__ZERO_CAPABILITY_CREDIT_FROM_RESEARCH_CHECKPOINT_ALONE",
+    "status": "ACTIVE__SECONDARY_PROFILE_V25_BYTE_FRONTIER__ZERO_CAPABILITY_CREDIT_FROM_RESEARCH_CHECKPOINT_ALONE",
     "law": "canonical/laws/BYTES_RESOURCE_BOUNDED_MINIMUM_MECHANISM_LAW_V1.md",
     "white_box_law": "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V1.md",
-    "current_research_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_SECONDARY_PROFILE_V24_SUCCESSOR_EXECUTION_20261010_V1.json",
+    "current_research_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_SECONDARY_PROFILE_V25_SUCCESSOR_EXECUTION_20261010_V1.json",
     "objective": "MINIMUM_RESOURCE_FEASIBLE_EXECUTABLE_DESCRIPTION_CONDITIONAL_ON_ALREADY_OWNED_BRAIN_SUBSTRATE",
     "accounting": [
       "B_EXEC",
@@ -339,38 +339,39 @@
       "LARGER_MODULE_ONLY_IF_REQUIRED"
     ],
     "global_rule": "OPTIMIZE_JOINT_DEPENDENCY_CLOSED_MECHANISM_COVER__COUNT_SHARED_SUBSTRATE_ONCE",
-    "current_exact_symbolic_bottleneck": "POST_V24_RERANK_PENDING__COMPLETE_BOUNDED_EXACT_SYMBOLIC_ROUTE",
-    "truth_boundary": "FRESH_PHYSICAL_BYTE_FRONTIER_MEASURED__FINITE_PROFILE_NONUSE_NOT_UNIVERSAL_PROOF__NO_OPUS_FAMILY_PROMOTION_CREDIT__NO_UNIVERSAL_MINIMUM_CLAIM",
+    "current_exact_symbolic_bottleneck": "POST_V25_RERANK_PENDING__COMPLETE_BOUNDED_EXACT_SYMBOLIC_ROUTE",
+    "truth_boundary": "INDEPENDENTLY_VERIFIED_PHYSICAL_BYTE_FRONTIER__FINITE_PROFILE_NONUSE_NOT_UNIVERSAL_PROOF__NO_OPUS_FAMILY_PROMOTION_CREDIT__NO_UNIVERSAL_MINIMUM_CLAIM",
     "current_fresh_exact_symbolic_candidate": {
-      "package_raw_python_source_bytes": 2007446,
-      "B_exec_raw_python_source_bytes": 2010206,
+      "package_raw_python_source_bytes": 1992901,
+      "B_exec_raw_python_source_bytes": 1995661,
       "B_verify_semantic_digest_raw_bytes": 1358,
-      "persistent_xz_comparable_bytes": 297952,
-      "qualification": "8510/8510",
-      "stock_donor_positive_control": "8510/8510",
-      "clean_room_execution": "8510/8510",
-      "archive_replay": "8510/8510",
-      "manifest_sha256": "eb71ab231a6281de6133082c59eb9732864e68af42daf4cfb6c6f258c3dea1f9",
-      "comparable_archive_sha256": "4ec32995774f9886f9726490188bb77d300c8aef628c66896559f59e34f4a0ee",
+      "qualification": "8740/8740",
+      "stock_donor_positive_control": "8740/8740",
+      "independent_archive_replay": "8740/8740",
+      "independent_reconstruction_replay": "8740/8740",
+      "manifest_sha256": "7d633d565a52b8a84e3836aadf496e2d1d9af667f94b1876d5dd6b28cc106a9b",
+      "durable_archive_bytes": 299264,
+      "durable_archive_sha256": "deaabf9ebd51b6cd73020129877b89909ccb245544919e1a55ef2a93f0ac6b86",
+      "archive_size_comparable_to_previous": false,
       "promotion_credit": 0
     },
     "latest_structural_cut": {
-      "id": "SECONDARY_SPENT_NEXT28_ZERO_HIT_FUNCTION_PRUNE_V24",
-      "accepted_stubbed_function_bodies": 26,
-      "net_raw_reduction_bytes": 38115,
+      "id": "SECONDARY_SPENT_NEXT29_ZERO_HIT_FUNCTION_PRUNE_V25",
+      "accepted_stubbed_function_bodies": 6,
+      "net_raw_reduction_bytes": 14545,
       "module_graph_unchanged": true,
-      "causal_result": "SPENT_NEXT28_8280_OF_8280__FRESH_NEXT29_8510_OF_8510"
+      "causal_result": "SPENT_NEXT29_8510_OF_8510__FRESH_NEXT30_8740_OF_8740__INDEPENDENT_REPLAY_8740_OF_8740"
     },
     "previous_fresh_frontier": {
-      "raw_python_source_bytes": 2045561,
-      "persistent_xz_comparable_bytes": 303072,
-      "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_CONSERVATIVE_PROFILE_V23_SUCCESSOR_EXECUTION_20261010_V1.json"
+      "raw_python_source_bytes": 2007446,
+      "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_SECONDARY_PROFILE_V24_SUCCESSOR_EXECUTION_20261010_V1.json"
     },
     "next_frozen_qualification": {
-      "id": "QUAL_SUCCESSOR_NEXT30_20261010_V1",
-      "cases": 8740,
-      "corpus_sha256": "4859272e27dc150cf91807f69d2850342856befe05e04ac0405966f71740764c",
-      "spent": false
+      "id": "QUAL_SUCCESSOR_NEXT31_20261010_V1",
+      "cases": 8970,
+      "corpus_sha256": "ed5f78856d2621be9293a509aa21486ad82eef794453f4ce4360755222086f53",
+      "spent": false,
+      "library_file_id": "libfile_083b89b79ca48191a31ca119adfd587e"
     },
     "current_falsification_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_NEXT25_FALSIFICATION_20261010_V1.json",
     "latest_coverage_repair": {
@@ -389,6 +390,7 @@
       "result": "7588_OF_7590",
       "same_failures_on_pre_repair_V21": true,
       "disposition": "SUPERSEDED_BY_MINIMALLY_REPAIRED_V21"
-    }
+    },
+    "current_independent_verification": "canonical/evidence/BYTES_EXACT_SYMBOLIC_SECONDARY_PROFILE_V25_INDEPENDENT_VERIFICATION_20261010_V1.json"
   }
 }
