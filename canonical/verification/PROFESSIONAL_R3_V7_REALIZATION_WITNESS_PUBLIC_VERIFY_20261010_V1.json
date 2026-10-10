@@ -1,0 +1,79 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_R3_V7_REALIZATION_WITNESS_PUBLIC_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__PUBLIC_STANDARD_RUNNER_CURRENT_STACK_RESEAL__HISTORICAL_RENDER_SUITE_3_OF_3__EXACT_V7_WITNESS_PASS__ZERO_QUALITY_OR_TERMINAL_AUTHORITY",
+  "pass": true,
+  "independent_verified": true,
+  "semantic_preservation_verified": true,
+  "evidence_scope_verified": true,
+  "exact_evidence": {
+    "path": "canonical/evidence/PROFESSIONAL_R3_V7_REALIZATION_WITNESS_20261010_V1.json",
+    "git_blob_sha": "95e08e82ffba5c84426e07b0f8d2556f7308f5a0",
+    "evidence_sha256": "1edf6c89f6ee05871be7600a6812552184bcbdea299ed73e6589da7c20b9b5b0"
+  },
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "visibility": "public",
+    "pull_request": 2618,
+    "branch": "verify/professional-r3-v7-realization-witness-20261010-v1",
+    "head_sha": "c7f073d5f1940330fe98fc215b6bc299c3c17da9",
+    "workflow": "Verify native artifact render preservation v1",
+    "workflow_run_id": 38051863009,
+    "job_id": 114212442560,
+    "conclusion": "success",
+    "runner_label": "ubuntu-24.04",
+    "standard_github_hosted_runner": true
+  },
+  "replay": {
+    "predecessor_exact_stack_transport_claimed": false,
+    "historical_render_preservation_tests_run": 3,
+    "historical_render_preservation_tests_passed": 3,
+    "historical_render_preservation_tests_failed": 0,
+    "exact_v7_witness_step": "PASS",
+    "brain_witness_verifier_tests": "6_OF_6_PASS",
+    "brain_exact_evidence_verifier": "PASS__R3_V7_REALIZATION_WITNESS_CONTENT_AND_SCOPE_VALID"
+  },
+  "render_stack": {
+    "predecessor_verified": {
+      "libreoffice_core": "4:24.2.7-0ubuntu0.24.04.6",
+      "poppler_utils": "24.02.0-1ubuntu9.9"
+    },
+    "current_resealed": {
+      "libreoffice_core": "4:24.2.7-0ubuntu0.24.04.7",
+      "poppler_utils": "24.02.0-1ubuntu9.10",
+      "python-docx": "1.2.0",
+      "openpyxl": "3.1.5",
+      "python-pptx": "1.0.2",
+      "pypdf": "6.19.0",
+      "Pillow": "12.3.0"
+    }
+  },
+  "exact_output": {
+    "run_context_sha256": "sha256:a0c03647ce739eee1ee92c6e4ef26347b2e98082bed68de2742d57abdbc83b70",
+    "source_artifact_sha256": "1a1583c1a9f9500a7ad2f1b4359ae8740e3df4e8e1c84e64f34a26f4d79eb5dd",
+    "output_artifact_sha256": "d06c3b1e24f0a966017ffe745b8603bbdb4eed7f9ac0d1275a81f3942b70add4",
+    "output_audience_view_png_sha256": "4a84d311b8f8fe7f966d8dbdea50273c34a22d4c30e3ec8bddaf8f199b629ae1"
+  },
+  "authority": {
+    "root_subject_binding_authority": false,
+    "semantic_truth_authority": false,
+    "execution_authority": false,
+    "quality_authority": false,
+    "acceptance_authority": false,
+    "promotion_authority": false,
+    "terminal_authority": false
+  },
+  "hard_nonclaims": [
+    "NO_VERSION_EQUIVALENCE_CLAIM_BETWEEN_PREDECESSOR_AND_CURRENT_STACK",
+    "NO_ARBITRARY_SEMANTIC_TARGET_CORRECTNESS",
+    "NO_WHOLE_CONTRACT_SCOPE_EQUIVALENCE",
+    "NO_GLOBAL_R3_ROOT_CLOSURE",
+    "NO_SAME_SUBJECT_COMPOSITION_PASS"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
