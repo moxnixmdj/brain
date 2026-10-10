@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R1_V7_ROOT_SUBJECT_BINDING_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__CURRENT_MAIN_R1_BOUND_TO_V7_PROOF_BOUND_EXECUTION_SUBJECT__INDEPENDENT_SPRITE_REPLAY__6_OF_6_NEGATIVE_AND_POSITIVE_TESTS__ZERO_QUALITY_OR_TERMINAL_AUTHORITY",
+  "current_main_subject": {
+    "binding": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_R1_ROOT_SUBJECT_BINDING_20261010_V4.json",
+      "git_blob_sha": "4e29f1a01832158d9897f3c71c81e015b5e51b05"
+    },
+    "verifier": {
+      "path": "canonical/runtime/professional_quality_r1_root_subject_binding_verify_v4.py",
+      "git_blob_sha": "7f59df92413cd3fd09e5e97aead1eee623a41d91"
+    },
+    "tests": {
+      "path": "canonical/tests/test_professional_quality_r1_root_subject_binding_verify_v4.py",
+      "git_blob_sha": "81fdacb3bce5418ee9b0deb71cddde1040dec197"
+    },
+    "declared_system": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V7_DECLARED_SYSTEM_SUBJECT_20261010_V6.json",
+      "git_blob_sha": "1d598bc8757017ceb34928d0df9f5fce859ef868",
+      "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+      "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e"
+    }
+  },
+  "independent_carrier": {
+    "provider": "Sprites",
+    "sprite": "brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/pq-r1-v7-current-main-verify",
+    "exact_files_copied_from_current_main": true
+  },
+  "replay": {
+    "py_compile": "PASS",
+    "verifier_pass": true,
+    "verifier_status": "PASS__R1_ROOT_BOUND_TO_V7_PROOF_BOUND_EXECUTION_SUBJECT",
+    "unit_tests_run": 6,
+    "unit_tests_passed": 6,
+    "unit_tests_failed": 0,
+    "log_sha256": "7b164ba319aaa77f623275743acdb629f2bcffdd1045e65239fd9a33e0745c02"
+  },
+  "proves": [
+    "R1_TARGET_SPECIFICATION_IS_BOUND_TO_THE_EXACT_V7_SUBJECT_TUPLE",
+    "V7_SUBJECT_22_COMPONENT_CURRENTNESS_RECEIPT_IS_BOUND",
+    "V6_AUTHENTICATED_TARGET_HANDOFF_IS_REUSED_WITHOUT_SCOPE_EXPANSION",
+    "V7_CALLER_STEP_RESULT_NONAUTHORITY_IS_BOUND",
+    "R1_TARGET_SEMANTIC_AND_STRUCTURAL_RECEIPTS_REMAIN_EXACTLY_BOUND",
+    "SELF_AUTHORITY_COMPONENT_DRIFT_STEP_PROVENANCE_WEAKENING_AND_SUBJECT_COUNT_DRIFT_FAIL_CLOSED"
+  ],
+  "authority": {
+    "root_subject_binding_authority": true,
+    "global_subject_identity_authority": false,
+    "semantic_truth_authority": false,
+    "execution_authority": false,
+    "quality_authority": false,
+    "acceptance_authority": false,
+    "promotion_authority": false,
+    "terminal_authority": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "next": "ADVANCE_V7_WORKLIST_TO_1_OF_12__BIND_R2_CANDIDATE_SEARCH_TO_IDENTICAL_V7_SUBJECT_WITHOUT_SUBJECT_DRIFT"
+}
