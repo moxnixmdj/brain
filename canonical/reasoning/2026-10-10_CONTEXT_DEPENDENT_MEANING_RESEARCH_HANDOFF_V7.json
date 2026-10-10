@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_CONTEXT_DEPENDENT_MEANING_RESEARCH_HANDOFF_20261010_V7",
+  "date": "2026-10-10",
+  "status": "CURRENT_COMPACT_SUCCESSOR_HANDOFF__MEASUREMENT_BASIS_SEMANTICS_LIVE__BARE_RESERVE_NONIDENTIFIABILITY_PROVED__ONE_PRIMARY_FINANCE_RESIDUAL_REMAINS__ZERO_TERMINAL_CREDIT",
+  "supersedes": "canonical/reasoning/2026-10-10_CONTEXT_DEPENDENT_MEANING_RESEARCH_HANDOFF_V6.json",
+  "authoritative_state": {
+    "r2_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+    "r2_git_blob_sha": "8ed410ab753ca1d86de37b721da30e805a1e4ec9",
+    "root2_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261010_V65.json",
+    "root2_git_blob_sha": "a3284796a11c1c69ede669e68deb6d0052b1e5be",
+    "one_primary_finance_semantic_residual_remains": true,
+    "r2_or_root2_version_changed_by_this_handoff": false
+  },
+  "newly_owned_negative_boundary": {
+    "id": "BARE_RESERVE_PAIRWISE_NONIDENTIFIABILITY",
+    "merge_commit": "f69aa7e0226bfdd28517cd887afdde98cdf52ff3",
+    "runtime": "canonical/runtime/reserve_bare_nonidentifiability_v1.py",
+    "runtime_git_blob_sha": "a2bfc9df1e07f14e289982d0cb143dd71e6a196e",
+    "verification": "canonical/verification/RESERVE_BARE_NONIDENTIFIABILITY_VERIFY_20261010_V1.json",
+    "verification_git_blob_sha": "14f909eed1f7eed48f995d180c6b84fed90fd828",
+    "source": "Reserve increased.",
+    "state": "PROVED_NONIDENTIFIABLE_FROM_SOURCE_ALONE",
+    "witness_interpretations": [
+      "reserve%1:21:00::",
+      "reserve%1:23:00::"
+    ],
+    "generic_pairwise_theorem_load_bearing": true,
+    "open_world_finance_semantics_complete": false,
+    "true_sense_selected": false,
+    "terminal_authority": false
+  },
+  "owned_measurement_basis_mechanism": {
+    "merge_commit": "850ee2ac3efcedb1ac2c3bc7714c6d4b03e00ca6",
+    "runtime": "canonical/runtime/rwa_capital_measurement_context_v1.py",
+    "truth_kind": "RWA_CAPITAL_MEASUREMENT_FRAME",
+    "semantic_frame_id": "FINANCE::RISK_BASED_REGULATORY_CAPITAL_RATIO_FRAME",
+    "leaf_identity_authority": false
+  },
+  "execution_order": [
+    "CHECK_SOURCE_NATIVE_IDENTITY",
+    "CHECK_LONGEST_AUTHENTICATED_MULTIWORD_TERM_AND_EXPLICIT_DEFINITION_ALIAS_REFERENCE",
+    "CHECK_AUTHENTICATED_OCCURRENCE_BOUND_RELATIONAL_REFERENCE_OR_APPOSITIVE_CONTEXT",
+    "CHECK_AUTHENTICATED_MEASUREMENT_BASIS_DENOMINATOR_UNIT_FORMULA_OR_STRUCTURED_RATIO_CONTEXT",
+    "REUSE_VERIFIER_BACKED_DOMAIN_MAPPING_SCOPED_ENTAILMENT_AND_BOUNDED_ONTOLOGY",
+    "RUN_PAIRWISE_NONIDENTIFIABILITY_BEFORE_BUILDING_NEW_WSD_FOR_AN_AMBIGUOUS_SOURCE",
+    "IF_PAIRWISE_NONIDENTIFIABILITY_IS_PROVED_STOP_SAME_SOURCE_WSD_AND_ACQUIRE_NEW_INFORMATION",
+    "ONLY_BUILD_A_NEW_MECHANISM_FOR_A_CONCRETE_POLICY_MATERIAL_CASE_WHEN_EXISTING_ROUTES_CANNOT_CLOSE_IT"
+  ],
+  "preserved_truth": {
+    "bare_margin_nonidentifiability_preserved": true,
+    "bare_reserve_nonidentifiability_proved": true,
+    "naked_loss_absorbing_cushion_global_identity_unproved": true,
+    "rwa_frame_does_not_select_capital_tier_or_buffer": true,
+    "finance_semantic_tail_closed": false,
+    "global_word_sense_closed": false
+  },
+  "current_next_move": "SELECT_A_CONTEXT_RICH_RESERVE_OR_OTHER_NEW_FINANCE_AMBIGUITY_WITH_AUTHENTICATED_POLICY_CHANGING_CONTEXT__DO_NOT_CONTINUE_BARE_reserve_WSD__FIRST_REUSE_ALL_EXISTING_SOURCE_NATIVE_MULTIWORD_RELATIONAL_REFERENCE_MEASUREMENT_DOMAIN_AND_NONIDENTIFIABILITY_ROUTES__BUILD_ONLY_THE_MINIMUM_MISSING_MECHANISM",
+  "hard_nonclaims": [
+    "NO_TRUE_RESERVE_SENSE_FOR_BARE_SOURCE",
+    "NO_FINANCE_DOMAIN_IDENTITY_FOR_BARE_reserve",
+    "NO_GLOBAL_WORD_SENSE_CLOSURE",
+    "NO_FINANCE_SEMANTIC_TAIL_CLOSURE",
+    "NO_R2_OR_ROOT2_VERSION_BUMP",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
