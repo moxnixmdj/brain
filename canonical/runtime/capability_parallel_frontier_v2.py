@@ -78,6 +78,7 @@ NONPRIMARY_STATES = {
     "SLEEPING",
     "BLOCKED",
     "AUDIT_ONLY",
+    "PARKED",
     "HISTORICAL",
 }
 
