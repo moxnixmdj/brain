@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_ESCAPE_GAP_B_CAUSAL_RECLASSIFICATION_CONNECTOR_REPLAY_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_BRANCH_BLOB_STRUCTURAL_REPLAY__12_GAP_A__1_PARKED_GAP_B__ACTIVE_GAP_B_ZERO__ZERO_CREDIT",
+  "branch": "successor/gapb-causal-reclass-v1",
+  "method": "SECOND_IMPLEMENTATION_CONNECTOR_REPLAY_OVER_EXACT_GITHUB_OBJECTS",
+  "subjects": {
+    "predecessor_manifest": {
+      "path": "canonical/governance/ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_20261010_V2.json",
+      "git_blob_sha": "f3a566a982dcd867c583eafd24c6f5dd3baa0530"
+    },
+    "successor_manifest": {
+      "path": "canonical/governance/ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_20261010_V3.json",
+      "git_blob_sha": "17e6c23f5463a52c94b4cf6f8a821bea67fd5958"
+    },
+    "current_classification": {
+      "path": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
+      "git_blob_sha": "440699d181377b0059e754d92b51837e326ecc67"
+    },
+    "successor_binding": {
+      "path": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V7.json",
+      "git_blob_sha": "7b9bc3a11a25778c458b08f9a59a6c9d36dfedae"
+    },
+    "causal_reclassification": {
+      "path": "canonical/governance/ESCAPE_GAP_B_CAUSAL_RECLASSIFICATION_20261010_V1.json",
+      "git_blob_sha": "0aec57297e933517767f27207a2fb9535b857a58"
+    },
+    "regression": {
+      "path": "canonical/tests/test_escape_gap_b_causal_reclassification_v1.py",
+      "git_blob_sha": "0a3bf7ce65a726a7b491569c41a1163ebeafb4cd"
+    }
+  },
+  "checks": {
+    "frozen_obligation_id_set_unchanged": true,
+    "exactly_changed_route_groups": [
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "PROWORK_GDPVAL_GE_1846"
+    ],
+    "both_changed_rows_now_gap_a": true,
+    "successor_gap_a_count": 12,
+    "successor_gap_b_count": 1,
+    "tb_science_preserved_in_gap_b": true,
+    "tb_science_parked": true,
+    "active_gap_b_count": 0,
+    "v7_points_to_v3": true,
+    "zero_acceptance_credit": true,
+    "zero_terminal_credit": true,
+    "no_gap_a_row_proof_claimed": true
+  },
+  "limitation": "STRUCTURAL_CONNECTOR_REPLAY_ONLY__SEMANTIC_RECLASSIFICATION_STILL_REQUIRES_DISTINCT_INDEPENDENT_REVIEW_BEFORE_CURRENT_MAIN_AUTHORITY",
+  "pass": true,
+  "terminal_authority": false,
+  "acceptance_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
