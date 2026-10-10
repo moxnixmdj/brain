@@ -320,10 +320,10 @@
     "cases": 6
   },
   "bytes_minimization_control": {
-    "status": "ACTIVE__SECOND_CORE_FUNCTION_GRANULAR_PRUNED_FRONTIER__ZERO_CAPABILITY_CREDIT_FROM_RESEARCH_CHECKPOINT_ALONE",
+    "status": "ACTIVE__NONCORE_REPAIRED_V21_BYTE_FRONTIER__ZERO_CAPABILITY_CREDIT_FROM_RESEARCH_CHECKPOINT_ALONE",
     "law": "canonical/laws/BYTES_RESOURCE_BOUNDED_MINIMUM_MECHANISM_LAW_V1.md",
     "white_box_law": "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V1.md",
-    "current_research_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_CORE_PROFILE_V19_SUCCESSOR_EXECUTION_20261010_V1.json",
+    "current_research_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_NONCORE_REPAIRED_V21_SUCCESSOR_EXECUTION_20261010_V1.json",
     "objective": "MINIMUM_RESOURCE_FEASIBLE_EXECUTABLE_DESCRIPTION_CONDITIONAL_ON_ALREADY_OWNED_BRAIN_SUBSTRATE",
     "accounting": [
       "B_EXEC",
@@ -339,53 +339,56 @@
       "LARGER_MODULE_ONLY_IF_REQUIRED"
     ],
     "global_rule": "OPTIMIZE_JOINT_DEPENDENCY_CLOSED_MECHANISM_COVER__COUNT_SHARED_SUBSTRATE_ONCE",
-    "current_exact_symbolic_bottleneck": "CORE__POST_V19_RERANK_PENDING__COMPLETE_BOUNDED_EXACT_SYMBOLIC_ROUTE",
-    "truth_boundary": "FRESH_PHYSICAL_BYTE_FRONTIER_MEASURED__PROFILE_NONUSE_NOT_UNIVERSAL_PROOF__NO_OPUS_FAMILY_PROMOTION_CREDIT__NO_UNIVERSAL_MINIMUM_CLAIM",
+    "current_exact_symbolic_bottleneck": "POST_V21_RERANK_PENDING__COMPLETE_BOUNDED_EXACT_SYMBOLIC_ROUTE",
+    "truth_boundary": "FRESH_PHYSICAL_BYTE_FRONTIER_MEASURED__NEXT25_PREDECESSOR_FALSIFICATION_REPAIRED__FINITE_PROFILE_NONUSE_NOT_UNIVERSAL_PROOF__NO_OPUS_FAMILY_PROMOTION_CREDIT__NO_UNIVERSAL_MINIMUM_CLAIM",
     "current_fresh_exact_symbolic_candidate": {
-      "package_raw_python_source_bytes": 2185690,
-      "B_exec_raw_python_source_bytes": 2188450,
+      "package_raw_python_source_bytes": 2122982,
+      "B_exec_raw_python_source_bytes": 2125742,
       "B_verify_semantic_digest_raw_bytes": 1358,
-      "persistent_xz_comparable_bytes": 329316,
-      "qualification": "6900/6900",
-      "stock_donor_positive_control": "6900/6900",
-      "clean_room_execution": "6900/6900",
-      "archive_replay": "6900/6900",
-      "manifest_sha256": "0327ae08f5ac9e0bbbe92d74fc1e4aa114c1bae9c0f94a0e5dedc96a1032137f",
-      "comparable_archive_sha256": "72111a49000955d466116f840f37f3ad9906b819a684abbcf5039b2726db9034",
+      "persistent_xz_comparable_bytes": 317236,
+      "qualification": "7820/7820",
+      "stock_donor_positive_control": "7820/7820",
+      "clean_room_execution": "7820/7820",
+      "archive_replay": "7820/7820",
+      "manifest_sha256": "0fa7fd19f6a674e493954d48f7438285dbab4fd9eefe559a3d537ca9834c6022",
+      "comparable_archive_sha256": "5f9ba609d1dfab1e416cbf51e5517ecdd617463617d7fa06ceb88b450e98ee9e",
       "promotion_credit": 0
     },
     "latest_structural_cut": {
-      "id": "CORE_FULL_SPENT_NEXT21_ZERO_HIT_PRUNE_V19",
-      "accepted_stubbed_function_bodies": 27,
-      "selected_source_bytes_before_rewrite": 40682,
-      "net_raw_reduction_bytes": 38657,
+      "id": "NONCORE_SPENT_NEXT24_ZERO_HIT_FUNCTION_PRUNE_V21",
+      "accepted_stubbed_function_bodies": 14,
+      "net_raw_reduction_vs_repaired_V20_bytes": 49437,
       "module_graph_unchanged": true,
-      "causal_result": "SPENT_NEXT21_6670_OF_6670__FRESH_NEXT22_6900_OF_6900"
+      "causal_result": "SPENT_NEXT25_7590_OF_7590_AFTER_MINIMAL_REPAIR__FRESH_NEXT26_7820_OF_7820"
     },
     "previous_fresh_frontier": {
-      "raw_python_source_bytes": 2224347,
-      "persistent_xz_comparable_bytes": 335396,
-      "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_CORE_PROFILE_SUCCESSOR_EXECUTION_20261010_V1.json"
+      "raw_python_source_bytes": 2172419,
+      "persistent_xz_comparable_bytes": 323816,
+      "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_CORE_PROFILE_REPAIRED_V20_SUCCESSOR_EXECUTION_20261010_V1.json"
     },
     "next_frozen_qualification": {
-      "id": "QUAL_SUCCESSOR_NEXT23_20261010_V1",
-      "cases": 7130,
-      "corpus_sha256": "b178f48d1bc0a8dc135d007f7e64a27608d68a9f9cadf5304fc1dc7665f37755",
+      "id": "QUAL_SUCCESSOR_NEXT27_20261010_V1",
+      "cases": 8050,
+      "corpus_sha256": "bac8ef513a82f91c59ae2afb503703df2fc23cfcacefb5c36c414f2ae6405702",
       "spent": false
     },
-    "current_falsification_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_PROFILE_PRUNE_NEXT19_FALSIFICATION_20261010_V1.json",
+    "current_falsification_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_NEXT25_FALSIFICATION_20261010_V1.json",
     "latest_coverage_repair": {
-      "id": "QUARTIC_ROOT_DECOMPOSITION_REPAIR_V17",
-      "source_byte_cost": 265,
-      "new_dependency_files": 0,
-      "result": "NEXT19_SPENT_6210_OF_6210__FRESH_NEXT20_6440_OF_6440"
+      "id": "NEXT25_QUARTIC_PATH_REPAIR_V21",
+      "restored": [
+        "mpmath.libmp.libmpc.mpc_square",
+        "sympy.core.numbers.Number.__divmod__",
+        "sympy.core.intfunc.num_digits",
+        "sympy.core.intfunc.integer_log"
+      ],
+      "broad_subsystem_restored": false,
+      "result": "V20_AND_PRE_REPAIR_V21_7588_OF_7590__REPAIRED_V21_7590_OF_7590__FRESH_NEXT26_7820_OF_7820"
     },
     "latest_falsified_cut": {
-      "id": "CORE_PROFILE_PRUNE_V18_INITIAL_24_FUNCTION_VARIANT",
-      "attempted_candidate_raw_bytes": 2220098,
-      "result": "REJECTED_ON_SPENT_NEXT20__6437_OF_6440",
-      "root_cause": "RARER_QUARTIC_SIMPLIFICATION_REQUIRES_COUNT_OPS",
-      "disposition": "RESTORE_COUNT_OPS_ONLY__RETAIN_OTHER_23_STUBS"
+      "id": "V20_CURRENT_FRONTIER_UNDER_NEXT25",
+      "result": "7588_OF_7590",
+      "same_failures_on_pre_repair_V21": true,
+      "disposition": "SUPERSEDED_BY_MINIMALLY_REPAIRED_V21"
     }
   }
 }
