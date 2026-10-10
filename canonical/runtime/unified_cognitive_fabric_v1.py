@@ -737,6 +737,15 @@ def run(
                     episode_verification_provider=episode_verification_provider,
                     skill_verification_provider=skill_verification_provider,
                     success_episode_adapter_provider=success_episode_adapter_provider,
+                    escape_repair_capability_synthesis_provider=(
+                        escape_repair_capability_synthesis_provider
+                    ),
+                    escape_repair_evidence_acquisition_provider=(
+                        escape_repair_evidence_acquisition_provider
+                    ),
+                    escape_repair_candidate_verifier=(
+                        escape_repair_candidate_verifier
+                    ),
                 )
 
             composition_options = dict(options)
@@ -817,6 +826,15 @@ def run(
                     episode_verification_provider=episode_verification_provider,
                     skill_verification_provider=skill_verification_provider,
                     success_episode_adapter_provider=success_episode_adapter_provider,
+                    escape_repair_capability_synthesis_provider=(
+                        escape_repair_capability_synthesis_provider
+                    ),
+                    escape_repair_evidence_acquisition_provider=(
+                        escape_repair_evidence_acquisition_provider
+                    ),
+                    escape_repair_candidate_verifier=(
+                        escape_repair_candidate_verifier
+                    ),
                 )
 
             invoker_options = dict(options)
