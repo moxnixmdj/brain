@@ -174,6 +174,8 @@ class ResidualSemanticControlTests(unittest.TestCase):
         self.assertFalse(authority["semantic_identity_closed"])
         self.assertFalse(authority["semantic_truth_authority"])
         self.assertFalse(authority["final_domain_action_authority"])
+        self.assertEqual(activation["live_surface"]["front_door_path"], "canonical/runtime/unified_cognitive_fabric_v2.py")
+        self.assertEqual(activation["live_surface"]["mode"], "OPEN_WORLD_SEMANTIC_CONTROL")
 
     def test_current_r2_v72_binds_control_capability_without_tail_closure(self):
         current = json.loads(
@@ -191,6 +193,8 @@ class ResidualSemanticControlTests(unittest.TestCase):
         self.assertFalse(bound["semantic_identity_closed"])
         self.assertFalse(bound["finance_semantic_tail_closed"])
         self.assertEqual(bound["live_mode"], "OPEN_WORLD_SEMANTIC_CONTROL")
+        self.assertEqual(current["live_front_door"]["path"], "canonical/runtime/unified_cognitive_fabric_v2.py")
+        self.assertEqual(bound["complementary_nonidentifiability_git_blob_sha"], "e358eeecc45868c91d22009cc57c624e9a210037")
 
     def test_scheduler_deduplicates_generic_control_work_only(self):
         scheduler = json.loads(
@@ -202,6 +206,19 @@ class ResidualSemanticControlTests(unittest.TestCase):
         self.assertIn("DO_NOT_REBUILD_GENERIC_OPEN_WORLD_INFORMATION_ORIGIN_CONTROL", row["scheduler_rule"])
         self.assertFalse(row["semantic_closure_claimed"])
         self.assertIn("SEMANTIC_IDENTITY_RESIDUAL_STILL_OPEN", row["status"])
+
+    def test_context_meaning_v4_composes_nonidentifiability_then_control(self):
+        intent = json.loads(
+            (
+                ROOT
+                / "canonical/action_intents/ACTION_INTENT_CONTEXT_DEPENDENT_MEANING_POSITIVE_COVERAGE_20261010_V4.json"
+            ).read_text(encoding="utf-8")
+        )
+        law = intent["general_control_law"]
+        self.assertTrue(any("NONIDENTIFIABILITY" in row for row in law))
+        self.assertTrue(any("MINIMUM_INFORMATION_ACQUISITION_CONTROL_ACTION" in row for row in law))
+        self.assertFalse(intent["exact_margin_instance"]["semantic_identity_selected"])
+        self.assertIn("ACQUIRE_MINIMUM_POLICY_CHANGING_INFORMATION", intent["exact_margin_instance"]["safe_next_class"])
 
 
 if __name__ == "__main__":
