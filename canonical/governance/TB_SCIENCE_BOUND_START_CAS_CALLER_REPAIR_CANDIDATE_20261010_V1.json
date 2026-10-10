@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_BOUND_START_CAS_CALLER_REPAIR_CANDIDATE_20261010_V1",
+  "date": "2026-10-10",
+  "status": "ZERO_EXPOSURE_REPAIR_CANDIDATE__DELIVERY_PR_BLOCKED__VERIFICATION_PENDING",
+  "root_cause": {
+    "diagnosis_path": "canonical/governance/TB_SCIENCE_RANK20_V3_PRESTART_ABORT_DIAGNOSIS_20261010_V1.json",
+    "diagnosis_git_blob_sha": "a8c7c9b9548f0515455df1badddebd9fba685d45",
+    "class": "POST_READY_START_CAS_CALLER_VERSION_SKEW_V7_VS_BOUND_V8"
+  },
+  "public_repository": "moxnixmdj/verification-capsule-runner",
+  "repair_branch": "repair/rank20-start-cas-caller-v8-20261010-v1",
+  "base_commit_sha": "18abcbf86a55582731ec7589a44c4ba287f0e1e3",
+  "branch_head_sha": "7868075e686b716aab425881eb74ec5b3285de3a",
+  "files": {
+    "content_addressed_runtime_binding_v1": {
+      "path": "execution_guard/content_addressed_runtime_binding_v1.py",
+      "git_blob_sha": "f5a77f98dcb80fc4dcbae3e04ac2b0853609a2a7"
+    },
+    "successor_status_journal_runner_v8": {
+      "path": "capsules/tb_science_rank20_20261010_v1/rank20_v8_status_journal_runner.py",
+      "git_blob_sha": "954f3ad4188e0187071af2416cc3c260c1762d43"
+    },
+    "adversarial_regression": {
+      "path": "capsules/tb_science_rank20_20261010_v1/rank20_bound_start_cas_caller_regression_v1.py",
+      "git_blob_sha": "fb06891295eb904fcea9b5d6ab642cdbcfedc9bf"
+    },
+    "verification_workflow": {
+      "path": ".github/workflows/verify-rank20-bound-start-cas-caller-v1.yml",
+      "git_blob_sha": "ab46d73ab0a2fab7a6cb29452afd41e559011464"
+    }
+  },
+  "repair_semantics": {
+    "hard_coded_cas_version_removed": true,
+    "runtime_resolved_from_content_addressed_behavior_binding": true,
+    "runtime_git_blob_verified_before_invocation": true,
+    "repository_escape_rejected": true,
+    "forged_runtime_blob_rejected": true,
+    "retired_rank20_surface_mutated": false,
+    "activation_present": false,
+    "task_read": false,
+    "task_started": false,
+    "benchmark_trials_consumed": 0
+  },
+  "verification": {
+    "dedicated_ci_expected": true,
+    "workflow_run_id": null,
+    "conclusion": null,
+    "pass": false
+  },
+  "delivery": {
+    "pull_request_created": false,
+    "pull_request_creation_blocked_by_host": true,
+    "merge_authority": false
+  },
+  "accounting": {
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0,
+    "incremental_spend_usd": 0
+  },
+  "next": "OBSERVE_DEDICATED_REPAIR_CI__IF_PASS_RECORD_VERIFIED_REPAIR__DO_NOT_RERUN_RANK20_V3__RECOMPUTE_CAPABILITY_FIRST_FRONTIER"
+}
