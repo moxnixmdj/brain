@@ -301,6 +301,15 @@ def _verification_receipt_error(
     return None
 
 
+
+def _binding_self_authority_error(binding: Mapping[str, Any]) -> str | None:
+    if binding.get("global_subject_identity_authority") is True:
+        return "GLOBAL_SUBJECT_AUTHORITY_FORBIDDEN"
+    if binding.get("terminal_authority") is not False:
+        return "SUBJECT_BINDING_TERMINAL_AUTHORITY_FORBIDDEN"
+    return None
+
+
 def evaluate(
     payload: Mapping[str, Any],
     *,
@@ -397,10 +406,9 @@ def evaluate(
             or any(ch not in "0123456789abcdef" for ch in subject_sha)
         ):
             return _fail("SUBJECT_IDENTITY_INVALID", root_id=root_id)
-        if binding.get("global_subject_identity_authority") is True:
-            return _fail("GLOBAL_SUBJECT_AUTHORITY_FORBIDDEN", root_id=root_id)
-        if binding.get("terminal_authority") is not False:
-            return _fail("SUBJECT_BINDING_TERMINAL_AUTHORITY_FORBIDDEN", root_id=root_id)
+        binding_authority_error = _binding_self_authority_error(binding)
+        if binding_authority_error is not None:
+            return _fail(binding_authority_error, root_id=root_id)
 
         verification, _, error = _read_bound(
             root, row.get("verification"), label="SUBJECT_BINDING_VERIFICATION"
