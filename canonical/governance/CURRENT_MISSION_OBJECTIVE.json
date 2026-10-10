@@ -24,19 +24,19 @@
   "optimization_precedence": "EFFICIENCY_OPTIMIZATION_MUST_PRESERVE_SEMANTIC_CAPABILITY_FUTURE_OPTION_VALUE_AND_RECONSTRUCTIBILITY__CURRENT_DOMINANCE_IS_NOT_DELETION_AUTHORITY",
   "current_development_scheduler": {
     "path": "canonical/governance/CURRENT_DEVELOPMENT_SCHEDULER.json",
-    "activation": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V12.json",
+    "activation": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V13.json",
     "primary_runtime": "canonical/runtime/capability_parallel_frontier_post_composition_v1.py",
     "primary_entrypoint": "plan_current_post_composition_frontier",
     "scalar_fallback_runtime": "canonical/runtime/capability_first_live_scheduler_v1.py",
-    "status": "ACTIVE_POST_COMPOSITION_V12__SHARED_WHOLE_LEAF_CERTIFICATE_GATE_BOUND__READ_ONLY_ONLY",
-    "observed_git_blob_sha": "65c51a9d21ab162c6ab10cb61c75f86b719ca71b"
+    "status": "ACTIVE_POST_COMPOSITION_V13__CLAIM_SCOPED_WHOLE_LEAF_V2_GATE_AND_READINESS_BOUND__READ_ONLY_ONLY",
+    "observed_git_blob_sha": "18c2324ba8e6e5cb0396f892c426de30db7b6c12"
   },
   "scheduler_precedence": "REAL_MISSION_CAPABILITY_RESOURCE_PARETO_LEVERAGE_IS_PRIMARY__SAFE_NONCONFLICTING_PARALLELISM_MINIMIZES_WALL_CLOCK__CURRENTNESS_AND_DEPENDENCY_GATES_PRECEDE_SELECTION__DIMENSIONWISE_PARETO_DOMINANCE_PRECEDES_ANY_SCALAR_TRADEOFF__SCALARIZATION_REQUIRES_PROVED_TRADEOFF_CONTRACT__CURRENT_R2_SHARED_CAUSE_FANOUT_IS_SECONDARY_DISCRIMINATION_SIGNAL__OPUS_5_5_CHECKPOINT_WORK_IS_TERTIARY_AUDIT__EXPLICIT_NEW_PRIMITIVE_CLAIMS_REQUIRE_REUSE_FIRST_EXHAUSTION_PROOF",
   "current_professional_quality_execution": {
     "path": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
     "binding": "MUTABLE_CURRENT_POINTER_PATH_IDENTITY__OBSERVED_BLOB_IS_CURRENTNESS_EVIDENCE_NOT_IMMUTABLE_AUTHORITY",
-    "observed_git_blob_sha": "360ff610c5d2386fe47e4f36eb6f3246a4d826a4",
-    "status": "P1_V3_LIVE_UNCHANGED__V7_PROOF_BOUND_EXECUTION_SUBJECT_22_OF_22_CURRENT__R1_R12_V7_BINDINGS_VERIFIED__12_OF_12_CURRENT_ROOT_BINDINGS__SAME_SUBJECT_COMPOSITION_ADMISSIBLE__DOMAIN_AND_GLOBAL_LEAF_CLOSURE_OPEN__NOT_LIVE_DEFAULT",
+    "observed_git_blob_sha": "d5714be3f93a5734eeb1ce1ac8d628e04df6aacd",
+    "status": "P1_V3_LIVE_UNCHANGED__V7_PROOF_BOUND_EXECUTION_SUBJECT_22_OF_22_CURRENT__R1_R12_V7_BINDINGS_VERIFIED__12_OF_12_CURRENT_ROOT_BINDINGS__SAME_SUBJECT_COMPOSITION_ADMISSIBLE__CLAIM_SCOPED_V2_WHOLE_LEAF_GATE_AND_READINESS_BOUND__DOMAIN_AND_GLOBAL_LEAF_CLOSURE_OPEN__NOT_LIVE_DEFAULT",
     "terminal_authority": false
   },
   "professional_quality_currentness_reconciliation": {
@@ -46,8 +46,8 @@
   },
   "current_parallel_frontier_control": {
     "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
-    "observed_git_blob_sha": "bdee1e798f46ec141a6f914c5f67fe204fdca25f",
-    "status": "POST_COMPOSITION_V13_FRONTIER__SHARED_PROFESSIONAL_WHOLE_LEAF_GATE_VERIFIED__FIVE_SAFE_READ_ONLY_EVIDENCE_LANES__NO_FULL_EXECUTION_PLAN_AUTHORITY",
+    "observed_git_blob_sha": "79139c18e4b99f3e8db33828625553898c680a5c",
+    "status": "POST_COMPOSITION_V14_FRONTIER__CLAIM_SCOPED_V2_WHOLE_LEAF_GATE_AND_READINESS_BOUND__READ_ONLY_EVIDENCE_LANES__NO_FULL_EXECUTION_PLAN_AUTHORITY",
     "binding": "MUTABLE_CURRENT_PATH_IDENTITY__STALE_SOURCE_BYTES_FAIL_CLOSED_AT_CALL_TIME"
   },
   "current_residual_reuse_classification": {
@@ -58,13 +58,19 @@
   "professional_whole_leaf_control": {
     "ledger_path": "canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_RESIDUAL_LEDGER_20261010_V1.json",
     "ledger_git_blob_sha": "ae5503829ad340cccef287f37ff70e4ab9288d33",
-    "certificate_gate_activation": "canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_CERTIFICATE_GATE_ACTIVATION_20261010_V1.json",
-    "certificate_gate_activation_git_blob_sha": "4b010aae1e741bbbdf7d1431f85b246a6a80c66f",
-    "certificate_gate_verification": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_CERTIFICATE_GATE_VERIFY_20261010_V1.json",
-    "certificate_gate_verification_git_blob_sha": "d6c161a6f2735a9a384d8d07d778334c7d9389da",
+    "certificate_gate_activation": "canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_CERTIFICATE_GATE_ACTIVATION_20261010_V2.json",
+    "certificate_gate_activation_git_blob_sha": "34fdaf7f4a91d0e28d446a9d554c3aa0fbec8222",
+    "certificate_gate_verification": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_CLAIM_SCOPE_GATE_V2_VERIFY_20261010_V1.json",
+    "certificate_gate_verification_git_blob_sha": "cb91d94dd89ec7c67aae54db3cd5319612cd43d5",
     "leaf_count": 24,
     "admitted_scope_certificate_count": 0,
     "property_truth_closed_count": 0,
-    "next": "INSTANTIATE_CLAIM_SCOPED_TOTALITY_OR_CERTIFIED_COMPLETE_UNION_CERTIFICATES__PROPERTY_TRUTH_REMAINS_SEPARATE"
+    "next": "FREEZE_EXACT_WHOLE_LEAF_CLAIM_SCOPES__INDEPENDENTLY_PROVE_WHOLE_DOMAIN_EQUIVALENCE__THEN_SCOPE_COVER__PROPERTY_TRUTH_REMAINS_SEPARATE",
+    "certificate_gate_runtime": "canonical/runtime/professional_quality_whole_leaf_claim_scope_gate_v2.py",
+    "certificate_gate_runtime_git_blob_sha": "d76b922e8d5c86f10568a3582759f8c23e69b2e0",
+    "readiness_audit_verification": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_CERTIFICATE_READINESS_AUDIT_V2_VERIFY_20261010_V1.json",
+    "readiness_audit_verification_git_blob_sha": "2d28d932d08753fdf14c56aa24011e625518a4ef",
+    "admitted_v2_chain_count": 0,
+    "claim_scope_construction_required_count": 24
   }
 }
