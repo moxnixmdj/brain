@@ -1,0 +1,81 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_V8_TO_V9_R12_POSITIVE_REFINEMENT_INDEPENDENT_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_SPRITE__6_OF_6__V9_POSITIVE_ROUTE_STRICTLY_REFINES_V8__C1_TO_C7_REVERIFICATION_ADMISSIBLE__C8_NOT_TRANSPORTED__ZERO_PROPERTY_OR_TERMINAL_CREDIT",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/professional_v8_to_v9_r12_positive_refinement_v1.py",
+      "git_blob_sha": "aec696c4a07c44d9a5cb8f95f0b15834fe4be814"
+    },
+    "tests": {
+      "path": "canonical/tests/test_professional_v8_to_v9_r12_positive_refinement_v1.py",
+      "git_blob_sha": "4c147afb4d468d95586fde26822f42b271c1ea4c"
+    },
+    "v8_router": {
+      "path": "canonical/runtime/professional_quality_p1_router_v8.py",
+      "git_blob_sha": "48c6839071b8de1309f87b0df1803a9eb29f0e13"
+    },
+    "v9_router": {
+      "path": "canonical/runtime/professional_quality_p1_router_v9.py",
+      "git_blob_sha": "27f0df972a08a2497802865e46bdccdcb1c720ae"
+    },
+    "semantic_authority": {
+      "path": "canonical/runtime/professional_r12_totality_semantic_receipt_v1.py",
+      "git_blob_sha": "cfb264b92004c55acf73719cd9c54cec6a609a34"
+    },
+    "v8_subject": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V8_DECLARED_SYSTEM_SUBJECT_20261010_V7.json",
+      "git_blob_sha": "21820105caab672440c76d051fecc16a562ae4cc"
+    },
+    "v9_subject": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V9_DECLARED_SYSTEM_SUBJECT_20261010_V8.json",
+      "git_blob_sha": "2ff32e4bb78e63635244c86d47fa369d7ba53900"
+    }
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-professional-hard-defect-verify-20261010",
+    "carrier_id": "sprite-1bbb86ed-1f7c-409f-8397-fadc4de7a62a",
+    "workspace": "/home/sprite/v8-current-replay",
+    "command": "python3 -m unittest -v canonical.tests.test_professional_v8_to_v9_r12_positive_refinement_v1",
+    "tests_run": 6,
+    "tests_passed": 6,
+    "tests_failed": 0
+  },
+  "truth": {
+    "positive_route_refinement_proved": true,
+    "v8_route_executes_before_v9_semantic_gate": true,
+    "v9_positive_requires_v8_positive": true,
+    "v9_positive_adds_executable_semantic_totality_verification": true,
+    "v9_subject_exact_two_component_strict_extension": true,
+    "preserved_clause_ids": [
+      "R12C1_ASSUMPTION_GUARANTEE_COMPOSITION",
+      "R12C2_SAME_SUBJECT_ROOT_CONJUNCTION",
+      "R12C3_ABSTRACTION_SOUNDNESS",
+      "R12C4_INDEPENDENT_DEFEATER_SEARCH",
+      "R12C5_COVERAGE_ACCOUNTING",
+      "R12C6_PROOF_SEARCH_HONESTY",
+      "R12C7_META_CONTROLLER_FALSIFICATION"
+    ],
+    "preserved_clause_reverification_admissible": true,
+    "c8_nonvacuity_transport_proved": false,
+    "cross_subject_property_authority_transport": false,
+    "semantic_property_truth_authority": false
+  },
+  "exact_next": "REVERIFY_C1_TO_C7_ON_EXACT_V9_SUBJECT__BIND_ONE_REAL_V9_POLICY_COVER_AND_EXECUTABLE_TOTALITY_SEMANTIC_WITNESS_FOR_C8_CC_R3__THEN_R4",
+  "hard_nonclaims": [
+    "NO_V8_TO_V9_PROPERTY_AUTHORITY_TRANSPORT",
+    "NO_C8_NONVACUITY_TRANSPORT",
+    "NO_V9_REAL_POSITIVE_TOTALITY_WITNESS",
+    "NO_V9_R12_SEMANTIC_PROPERTY_TRUTH",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY",
+    "NO_GITHUB_ACTIONS_CI_PASS_CLAIM"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "property_truth_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
