@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_AGENT_V14_CLAIM_BOUND_IDENTITY_SPRITE_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__CLAIM_BOUND_V2_IDENTITY_FIXED__V1_FALLBACK_PRESERVED__NO_NEW_INHERITED_REGRESSION",
+  "candidate": {
+    "path": "canonical/runtime/harbor_science_agent_v14.py",
+    "git_blob_sha": "b509fc4763c9ca8f0929ae4e93d9299dfb7013cb"
+  },
+  "focused_tests": {
+    "path": "canonical/tests/test_harbor_science_agent_v14_claim_bound_identity.py",
+    "git_blob_sha": "9bc5312137928efa1bb2a4574cb06355e0b10180",
+    "pass_count": 4,
+    "fail_count": 0
+  },
+  "independent_carrier": {
+    "kind": "SPRITE",
+    "name": "rank19-v14-identity-verify",
+    "sprite_id": "sprite-a5863ba0-0be0-436a-86cb-eb75fdf05fc4"
+  },
+  "inherited_regression": {
+    "v11_typed_schema": {
+      "pass_count": 8,
+      "fail_count": 0
+    },
+    "v12_artifact_finish": {
+      "pass_count": 5,
+      "fail_count": 0
+    },
+    "v10_lossless_evidence_parity": "V13_PASS__V14_PASS",
+    "v9_candidate_local_parity": "V13_FAILS_SAME_HISTORICAL_EXPECTATION_AS_V14__NOT_A_V14_REGRESSION"
+  },
+  "identity_truth": {
+    "legacy_v1_without_claim_digest": true,
+    "claim_bound_v2_with_execution_claim_digest": true,
+    "legacy_v1_rejected_on_claim_bound_surface": true,
+    "missing_carried_identity_fails_closed": true
+  },
+  "reached_escape_guard_relation": {
+    "v14_contains_low_level_reached_escape_tokens": false,
+    "v14_is_live_reached_escape_entrypoint": false,
+    "failing_pr_guard_is_not_caused_by_v14_text_delta": true
+  },
+  "benchmark_execution": false,
+  "benchmark_trials_consumed_delta": 0,
+  "acceptance_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "pass": true
+}
