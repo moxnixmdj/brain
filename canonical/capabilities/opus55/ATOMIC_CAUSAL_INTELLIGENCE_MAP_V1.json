@@ -320,10 +320,10 @@
     "cases": 6
   },
   "bytes_minimization_control": {
-    "status": "ACTIVE__RINGSERIES_ATAN_REPAIRED_BYTE_FRONTIER__ZERO_CAPABILITY_CREDIT_FROM_RESEARCH_CHECKPOINT_ALONE",
+    "status": "ACTIVE__NO_IPOLYS_SUCCESSOR_BYTE_FRONTIER__ZERO_CAPABILITY_CREDIT_FROM_RESEARCH_CHECKPOINT_ALONE",
     "law": "canonical/laws/BYTES_RESOURCE_BOUNDED_MINIMUM_MECHANISM_LAW_V1.md",
     "white_box_law": "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V1.md",
-    "current_research_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_RINGSERIES_ATAN_SUCCESSOR_EXECUTION_20261010_V1.json",
+    "current_research_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_NOIPOLYS_SUCCESSOR_EXECUTION_20261010_V1.json",
     "objective": "MINIMUM_RESOURCE_FEASIBLE_EXECUTABLE_DESCRIPTION_CONDITIONAL_ON_ALREADY_OWNED_BRAIN_SUBSTRATE",
     "accounting": [
       "B_EXEC",
@@ -339,40 +339,36 @@
       "LARGER_MODULE_ONLY_IF_REQUIRED"
     ],
     "global_rule": "OPTIMIZE_JOINT_DEPENDENCY_CLOSED_MECHANISM_COVER__COUNT_SHARED_SUBSTRATE_ONCE",
-    "current_exact_symbolic_bottleneck": "POLYS__SUCCESSOR_TRACE_RAW_1462108__FACTOR__COEFFICIENT__EXACT_ROOTS_DEGREE_LE_4",
-    "truth_boundary": "FRESH_PHYSICAL_BYTE_FRONTIER_AND_BOUNDED_DONOR_EQUIVALENCE_MEASURED__PREDECESSOR_QUARTIC_COVERAGE_HOLE_REPAIRED__NO_OPUS_FAMILY_PROMOTION_CREDIT__NO_UNIVERSAL_MINIMUM_CLAIM",
+    "current_exact_symbolic_bottleneck": "POLYS__SUCCESSOR_TRACE_RAW_1403682__FACTOR__COEFFICIENT__EXACT_ROOTS_DEGREE_LE_4",
+    "truth_boundary": "FRESH_PHYSICAL_BYTE_FRONTIER_MEASURED_WITH_EXACT_CANONICAL_TOOL_IDENTITY__NO_OPUS_FAMILY_PROMOTION_CREDIT__NO_UNIVERSAL_MINIMUM_CLAIM",
     "current_fresh_exact_symbolic_candidate": {
-      "package_raw_python_source_bytes": 6556199,
-      "B_exec_raw_python_source_bytes": 6558959,
-      "persistent_xz_comparable_bytes": 1118488,
-      "qualification": "2990/2990",
-      "stock_donor_positive_control": "2990/2990",
-      "clean_room_execution": "2990/2990",
-      "archive_replay": "2990/2990",
-      "manifest_sha256": "48062708f5f89363fb89fef800776652d13752f860ce56cc0621083fc9f874af",
-      "comparable_archive_sha256": "e1f6a7fed4a0f14d6e66ef375ff2b2e3e005b56c2160e97feb63b6b9c8ef3353",
+      "package_raw_python_source_bytes": 6497773,
+      "B_exec_raw_python_source_bytes": 6500533,
+      "B_verify_semantic_digest_raw_bytes": 1358,
+      "qualification": "3220/3220",
+      "stock_donor_positive_control": "3220/3220",
+      "clean_room_execution": "3220/3220",
+      "archive_replay": "3220/3220",
+      "canonical_tool_identity_recheck": "3220/3220",
+      "manifest_sha256": "b9e9ea0c7549c7e7b981aa9685a3fc60217226dc845746f26cbc06806a47dad2",
       "promotion_credit": 0
     },
     "latest_structural_cut": {
-      "id": "POLYS_MINPOLY_RING_SERIES_BRANCH_LOCAL_IMPORT",
-      "removed_raw_file_bytes": 86395,
-      "net_package_reduction_bytes": 86301,
-      "removed_files": 2,
-      "removed": [
-        "sympy/polys/ring_series.py",
-        "sympy/polys/puiseux.py"
-      ],
-      "causal_result": "ADDITIVE_COMPOSITION_RING_SERIES_BRANCH_NOT_REACHED_BY_BOUNDED_ROUTE"
+      "id": "POLYS_RING_IPOLYS_COMPATIBILITY_MIXIN_REMOVAL",
+      "removed_raw_file_bytes": 58373,
+      "rings_source_delta_bytes": -53,
+      "net_package_reduction_bytes": 58426,
+      "removed_files": 1,
+      "causal_result": "BROAD_DENSE_SPARSE_COMPATIBILITY_MIXIN_NOT_INVOKED_BY_BOUNDED_ROUTE"
     },
     "previous_fresh_frontier": {
-      "raw_python_source_bytes": 6642500,
-      "persistent_xz_comparable_bytes": 1131868,
-      "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_SPECIALPOLYS_SUCCESSOR_EXECUTION_20261010_V1.json"
+      "raw_python_source_bytes": 6556199,
+      "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_RINGSERIES_ATAN_SUCCESSOR_EXECUTION_20261010_V1.json"
     },
     "next_frozen_qualification": {
-      "id": "QUAL_SUCCESSOR_NEXT6_20261010_V1",
-      "cases": 3220,
-      "corpus_sha256": "0320387ab3679d3374df2228f5249ef2606c974ac35c6667f1270d3d27a888e7",
+      "id": "QUAL_SUCCESSOR_NEXT7_20261010_V1",
+      "cases": 3450,
+      "corpus_sha256": "a891f77a92fc6eb44c299ac89afd3f958d30c9759047804478f9239e158c88ef",
       "spent": false
     },
     "current_falsification_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_NEXT3_FALSIFICATION_20261010_V1.json",
