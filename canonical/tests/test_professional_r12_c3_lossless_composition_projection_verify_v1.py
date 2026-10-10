@@ -55,12 +55,12 @@ class R12C3LosslessCompositionProjectionVerifyV1Tests(unittest.TestCase):
   self.assertFalse(out["pass"])
   self.assertEqual(out["reason"],"BINDING_SUBJECT_DRIFT")
 
- def test_missing_independent_root_authority_fails_closed(self):
+ def test_failed_root_verification_fails_closed(self):
   inp,b,vv,cv,actual,source=docs()
-  vv=deepcopy(vv);rid=next(iter(vv));vv[rid]["root_subject_binding_authority"]=False
+  vv=deepcopy(vv);rid=next(iter(vv));vv[rid]["status"]="FAIL_CLOSED"
   out=v.analyze(inp,b,vv,cv,actual_binding_blobs=actual,gate_source=source)
   self.assertFalse(out["pass"])
-  self.assertEqual(out["reason"],"INDEPENDENT_ROOT_AUTHORITY_MISSING")
+  self.assertEqual(out["reason"],"INDEPENDENT_ROOT_VERIFICATION_NOT_PASS")
 
  def test_composition_receipt_authority_widening_fails_closed(self):
   inp,b,vv,cv,actual,source=docs()
