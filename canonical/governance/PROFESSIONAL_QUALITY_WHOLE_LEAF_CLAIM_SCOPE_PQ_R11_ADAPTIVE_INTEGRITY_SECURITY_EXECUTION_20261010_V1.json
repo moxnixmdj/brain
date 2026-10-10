@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_WHOLE_LEAF_CLAIM_SCOPE_V1",
+  "leaf_id": "PQ::R11_ADAPTIVE_INTEGRITY_SECURITY::EXECUTION",
+  "root_id": "R11_ADAPTIVE_INTEGRITY_SECURITY",
+  "kind": "EXECUTION",
+  "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+  "subject_kind": "DECLARED_SYSTEM",
+  "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+  "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+  "leaf_acceptance": "RUN_ROOT_RELEVANT_POSITIVE_NEAR_MISS_AND_ADVERSARIAL_CASES_ON_EXACT_ARTIFACT_OR_RUNTIME_BYTES_AND_BIND_OBSERVED_OUTCOMES_TO_THE_ROOT_CONTRACT",
+  "scope_definition": {
+    "domain_schema_id": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_MANIFEST_LEAF_DOMAIN_V1",
+    "entire_admissible_leaf_domain": true,
+    "domain_definition": {
+      "authority": {
+        "path": "canonical/governance/PROFESSIONAL_QUALITY_LEAF_BINDING_MANIFEST_20261010_V1.json",
+        "git_blob_sha": "a7cad32c9fd969ff2c3857bb924c7bd746237ec2"
+      },
+      "leaf_id": "PQ::R11_ADAPTIVE_INTEGRITY_SECURITY::EXECUTION",
+      "root_id": "R11_ADAPTIVE_INTEGRITY_SECURITY",
+      "kind": "EXECUTION",
+      "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+      "subject_kind": "DECLARED_SYSTEM",
+      "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+      "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+      "leaf_contract_sha256": "7ca2d962cf2541ad5c27548c878d243c46bffccaa45b51490978f21aa2322b71",
+      "leaf_obligation_sha256": "d28d21ff80ebe6f1070c83551e38513e3bdf5ddfb9c474b3932a11b864731184",
+      "leaf_acceptance_sha256": "fae7b1ccf4f94a91a1fb4caa4a634e6883538a28382991d97c69278e574b67ce",
+      "membership_rule": "INPUT_IS_IN_THE_WHOLE_LEAF_DOMAIN_IFF_IT_IS_ADMISSIBLE_UNDER_THE_EXACT_FROZEN_MANIFEST_LEAF_CONTRACT_OBLIGATION_AND_ACCEPTANCE_FOR_THE_BOUND_V7_SUBJECT",
+      "exclusion_rule": "EXCLUDE_ONLY_INPUTS_NOT_ADMISSIBLE_UNDER_THE_FROZEN_MANIFEST_LEAF_DEFINITION"
+    }
+  },
+  "epoch": "2026-10-10T15:50:00Z",
+  "claim": {
+    "claim_kind": "PROPERTY_CERTIFICATE",
+    "mission_blob_sha": "13c470645b037bbb46245c687dd35197b420d51a",
+    "scope_sha256": "f58f33fdd2dfda0fc75379f625664429a3bb6fbdd491565a9c50b4796770fa65",
+    "target_predicate_sha256": "fae7b1ccf4f94a91a1fb4caa4a634e6883538a28382991d97c69278e574b67ce",
+    "semantics_sha256": "5a501d440bcb308b46f5979a23c55f271e4760d2d5abc92f826a0385ffe0fd7e",
+    "epoch": "2026-10-10T15:50:00Z",
+    "authority_id": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_WHOLE_LEAF",
+    "terminal_credit_delta": 0,
+    "claim_id": "1d03f5eb3e6c475f8a6cca09d6746ef08a6579e6ea7f53b52327c4df881faeae"
+  },
+  "domain_equivalence_authority": false,
+  "whole_leaf_scope_complete": false,
+  "leaf_property_truth_authority": false,
+  "semantic_truth_authority": false,
+  "execution_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
