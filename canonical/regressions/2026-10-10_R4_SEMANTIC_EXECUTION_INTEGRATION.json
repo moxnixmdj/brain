@@ -1,0 +1,12 @@
+{
+  "schema": "PROJECT_BRAIN_REGRESSION_R4_SEMANTIC_EXECUTION_INTEGRATION_V1",
+  "date": "2026-10-10",
+  "status": "PERMANENT_TEST_ONLY_REGRESSION",
+  "invariant": "CANONICAL_R4_AUTHORITY_PATH_MUST_EXECUTE_SEMANTIC_ROOT_VALIDATION_FOR_EVERY_PROVED_CURRENT_SLOT",
+  "test": "canonical/tests/test_root_theorem_semantic_execution_integration_v1.py",
+  "forbidden": [
+    "SEMANTIC_VALIDATOR_EXISTS_BUT_CANONICAL_R4_PATH_DOES_NOT_CALL_IT",
+    "SEMANTIC_REJECTION_IGNORED_BY_CANONICAL_R4_PATH"
+  ],
+  "terminal_credit_delta": 0
+}
