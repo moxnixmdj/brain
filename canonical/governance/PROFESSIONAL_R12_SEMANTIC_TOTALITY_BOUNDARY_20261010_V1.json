@@ -1,0 +1,21 @@
+{
+  "schema":"PROJECT_BRAIN_R12_SEMANTIC_TOTALITY_BOUNDARY_V1",
+  "date":"2026-10-10",
+  "status":"VERIFIED_BOUNDARY__CURRENT_ROUTE_OPEN__ZERO_CREDIT",
+  "leaf_id":"PQ::R12_META_COMPOSITION_CLOSURE::SEMANTIC",
+  "claim_id":"11870f850b46bcfcc31094f764fc4f45c911aaac413979ceb62679ff19a53162",
+  "current":{"eight_clauses_verified":true,"nonvacuity_verified":true,"stronger_totality":false,"cc_r3":false},
+  "sources":{
+    "r12_truth":"56a5f85e6133661dd7afbc8fc5041ad799f0736f",
+    "assurance_graph":"03530e29d70206b46b690b33a04c66765ff86ad7",
+    "root_theorem":"3d2c89502d94c045d04af04db4cdecc509a08dd8",
+    "open_domain_cut":"496e4a1333339f9c098d59982d5a1c67c75059a8",
+    "nonvacuity":"077de7c62f3ab2df1a7ddbb3836f38450345d8f6"
+  },
+  "valid_routes":["COMPLETE_DECIDER","FINITE_CHARACTERISTIC_PARTITION","PROOF_CARRYING_POSITIVE_MEDIATION"],
+  "finite_catalog_is_totality_authority":false,
+  "eight_clauses_are_totality_authority":false,
+  "semantic_property_truth_authority":false,
+  "terminal_authority":false,
+  "terminal_credit_delta":0
+}
