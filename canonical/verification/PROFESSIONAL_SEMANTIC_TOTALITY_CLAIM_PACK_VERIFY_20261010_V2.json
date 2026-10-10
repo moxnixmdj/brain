@@ -1,0 +1,66 @@
+{
+  "accounting": {
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "incremental_spend_usd": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "date": "2026-10-10",
+  "frozen_claims": {
+    "claim_id_set_sha256": "1599fc28c53afafe98fad94cfdebe6721ee07147222443ea6be1cdfdcf4a9f0b",
+    "cross_claim_root_transport_authorized": false,
+    "mission_blob_sha": "c7e261ca8d07de2d59b44b1caa5b59f43cd093de",
+    "property_truth_claim_count": 0,
+    "root_proved_claim_count": 0,
+    "semantic_claim_count": 12,
+    "single_active_claim_policy_preserved": true,
+    "unique_claim_id_count": 12
+  },
+  "hard_nonclaims": [
+    "NO_MISSION_SUFFICIENT_CARRIER_FACTORIZATION_PROVED",
+    "NO_CC_R1_CC_R2_OR_CC_R3_ROOT_PROOF",
+    "NO_R4_PROOF_CLOSURE",
+    "NO_SEMANTIC_PROPERTY_TRUTH_CREDIT",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "carrier_name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "py_compile": "PASS",
+    "stored_pack_exact_recompute_match": true,
+    "tests_failed": 0,
+    "tests_passed": 6,
+    "tests_run": 6,
+    "transcript_sha256": "fecb4bba2a7b31da41fa24ab58c23a499e4d3faf8d264e1ff3d1bd9a6bc2231c"
+  },
+  "proved": [
+    "ALL_TWELVE_CURRENT_PROFESSIONAL_SEMANTIC_LEAVES_HAVE_DISTINCT_CONTENT_ADDRESSED_PROPERTY_CLAIMS",
+    "CLAIM_IDS_BIND_CURRENT_MISSION_POINTER_WHOLE_LEAF_SCOPE_TARGET_PREDICATE_AND_SEMANTICS",
+    "STORED_GOVERNANCE_PACK_EXACTLY_MATCHES_INDEPENDENT_RECOMPUTATION",
+    "BOUNDED_WITNESSES_REMAIN_NON_TOTALITY_EVIDENCE",
+    "SINGLE_ACTIVE_ROOT_REGISTRY_POLICY_IS_PRESERVED",
+    "CROSS_CLAIM_ROOT_CERTIFICATE_TRANSPORT_REMAINS_FORBIDDEN"
+  ],
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_SEMANTIC_TOTALITY_CLAIM_PACK_VERIFY_20261010_V2",
+  "status": "PASS__INDEPENDENT_EXACT_STORED_BYTES__PYCOMPILE__6_OF_6__12_DISTINCT_CURRENT_SEMANTIC_CLAIMS__ZERO_PROPERTY_TRUTH_CREDIT",
+  "subject": {
+    "frozen_claim_pack": {
+      "git_blob_sha": "0d0fe7a524b0f5c120ece237ce4ef821044619af",
+      "path": "canonical/governance/PROFESSIONAL_SEMANTIC_TOTALITY_FROZEN_CLAIM_PACK_20261010_V2.json"
+    },
+    "mission_pointer": {
+      "git_blob_sha": "c7e261ca8d07de2d59b44b1caa5b59f43cd093de",
+      "path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json"
+    },
+    "runtime": {
+      "git_blob_sha": "20fa4b310665f2b24a6385e7893f7794325b382f",
+      "path": "canonical/runtime/professional_semantic_totality_claim_pack_v2.py"
+    },
+    "tests": {
+      "git_blob_sha": "0536cd7a0b76f26d6913dcc3b8ed2deeafa30ff3",
+      "path": "canonical/tests/test_professional_semantic_totality_claim_pack_v2.py"
+    }
+  }
+}
