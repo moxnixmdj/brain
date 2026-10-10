@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_R2_OPEN_WORLD_FRONTIER_SCHEDULER_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS",
+  "branch": "successor/r2-open-world-frontier-demotion-20261010-v2",
+  "purpose": "Verify that the capability-first scheduler distinguishes a globally open evidence/ontology frontier from a current reusable capability defect while preserving immediate wake on concrete task counterexamples or independently verified defects.",
+  "exact_changed_blobs": {
+    "canonical/runtime/capability_first_scheduler_v1.py": "b74f967038ae5f71d45468b4233452cd134fd699",
+    "canonical/tests/test_capability_first_scheduler_v1.py": "bb2d6cb6f2fa39e713e25be32bdeafa91ff7d426",
+    "canonical/governance/CURRENT_DEVELOPMENT_SCHEDULER.json": "6723cac2745e08147ec4efe2a887a53992b0c06a",
+    "canonical/governance/R2_MECHANISM_CLOSURE_OPEN_WORLD_FRONTIER_POLICY_20261010_V1.json": "ee29c53bc892d468d04949c3e977da63def841c8"
+  },
+  "content_bound_basis": {
+    "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json": "c94c84aaf3c759abd6827c1ff93181c04033b6a1",
+    "canonical/runtime/general_adequate_decision_controller_v1.py": "b0cab3da36d89af202d6a95aa80701ad61372001",
+    "canonical/runtime/general_adequate_decision_fixed_point_v2.py": "cabe3bd1ec3748a595f3a959718c38accdacfb2f",
+    "canonical/runtime/one_shot_verified_closure_v1.py": "117d85bec1e5fb49428271aa9883e89d0ef1aa0a",
+    "canonical/runtime/one_shot_reality_closure_v2.py": "b8347a3993f96aa5e6fa2f1fe68d7c8afccb8bec"
+  },
+  "independent_execution": {
+    "provider": "Sprites",
+    "sprite": "brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/tmp/r2frontier",
+    "command": "PYTHONPATH=/tmp/r2frontier python3 -m unittest -v canonical.tests.test_capability_first_scheduler_v1",
+    "tests_run": 18,
+    "failures": 0,
+    "errors": 0,
+    "conclusion": "PASS"
+  },
+  "verified_properties": [
+    "CURRENT_R2_DECLARES_GENERAL_MECHANISM_CLOSED",
+    "FINANCE_SEMANTIC_ADEQUACY_TAIL_REMAINS_INTERNAL_UNSOLVED_PENDING_ACQUISITION_OR_EXPERIMENT",
+    "FINANCE_TAIL_INFORMATION_THEORETIC_EXTERNALITY_REMAINS_UNPROVED",
+    "UNBOUND_OPEN_WORLD_EVIDENCE_FRONTIER_IS_DEMOTED_EVEN_IF_CALLER_CLAIMS_ARBITRARILY_LARGE_CAPABILITY_GAIN",
+    "TASK_LOCAL_COUNTEREXAMPLE_IMMEDIATELY_REENABLES_NORMAL_CAPABILITY_FIRST_SCORING",
+    "INDEPENDENTLY_VERIFIED_CAPABILITY_DEFECT_IMMEDIATELY_REENABLES_NORMAL_CAPABILITY_FIRST_SCORING",
+    "NO_GLOBAL_FINANCE_SEMANTIC_CLOSURE_IS_CLAIMED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
