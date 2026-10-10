@@ -53,7 +53,8 @@
         "git_blob_sha": "c39b31c25aaa49febb63e5fb1d2c038425b406a1"
       },
       "verification": {
-        "path": "canonical/verification/PROFESSIONAL_QUALITY_R2_FINAL_V6_ROOT_SUBJECT_BINDING_VERIFY_20261010_V1.json"
+        "path": "canonical/verification/PROFESSIONAL_QUALITY_R2_FINAL_V6_ROOT_SUBJECT_BINDING_VERIFY_20261010_V1.json",
+        "git_blob_sha": "782f08033153ae14d1932e83f615c6c08d6cb40b"
       }
     },
     {
