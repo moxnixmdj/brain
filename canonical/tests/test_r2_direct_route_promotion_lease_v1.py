@@ -247,6 +247,24 @@ class R2DirectRoutePromotionLeaseV1Tests(unittest.TestCase):
             self.assertEqual(current["manifest"]["admission_count"], 2)
             self.assertEqual(set(ids), {route_a, route_b})
 
+    def test_new_promotion_without_noninterference_proof_fails_closed(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            _base_repo(root)
+            _, candidate, receipt = _route_fixture(root, "MISSING_PROOF")
+            receipt_path = root / receipt
+            value = json.loads(receipt_path.read_text(encoding="utf-8"))
+            value.pop("noninterference_verification_path")
+            value.pop("noninterference_verification_git_blob_sha")
+            _write_json(receipt_path, value)
+
+            with self.assertRaises(promoter.admission.DynamicAdmissionError):
+                promoter.promote(
+                    candidate_path=candidate,
+                    receipt_path=receipt,
+                    repo_root=root,
+                )
+
     def test_stale_noninterference_proof_fails_closed_after_frontier_change(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
