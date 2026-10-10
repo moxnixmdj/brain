@@ -1,0 +1,79 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R2_FINAL_V6_ROOT_SUBJECT_BINDING_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_DOCUMENT_REPLAY_25_OF_25__ADVERSARIAL_PYTHON_7_OF_7__PYCOMPILE_PASS__BOUNDED_R2_ROOT_SUBJECT_BINDING_ONLY__ZERO_QUALITY_OR_TERMINAL_CREDIT",
+  "subject": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V6_DECLARED_SYSTEM_SUBJECT_20261010_V5.json",
+    "git_blob_sha": "994a6a6aef44b6bb33161f7179d1983a1b50b633",
+    "subject_id": "PROFESSIONAL_QUALITY_P1_V6_DEPENDENCY_CLOSED_AUTHENTICATED_TARGET_SYSTEM_20261010_V5",
+    "subject_sha256": "353978ba4866d1e35794390968a14500ee1d8a4f0bddfb8f081e9a1a71ba468d"
+  },
+  "binding": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_R2_ROOT_SUBJECT_BINDING_20261010_V1.json",
+    "git_blob_sha": "c39b31c25aaa49febb63e5fb1d2c038425b406a1"
+  },
+  "exact_blobs": {
+    "generator_governance": "e50e82e8b46e833f70a8c5c5f24e243ccfbdca38",
+    "generator_verification": "37e29ba250944fa455fe4bee3d3e7c667b1d0fe5",
+    "search_semantics": "c12893656c0546aafa79135dec221f2e5f7e9774",
+    "search_execution": "b074b6e260cf2d5b534a822c3684171b1cc95b2e",
+    "search_semantic_verification": "06da6b94712ec844a56c0f663cce67f059b7ba8d",
+    "search_execution_verification": "b66115513d1dde4527a65e5eda1ddea300138aca",
+    "verifier": "f0b845a622808ee44489bb6d83a09d26645c611d",
+    "tests": "009d4fe7c14691edabd2d51b437cc7088b901a59"
+  },
+  "independent_document_replay": {
+    "engine": "independent JavaScript reimplementation of binding verifier predicates",
+    "checks_run": 25,
+    "checks_passed": 25,
+    "failed_checks": 0,
+    "exact_branch_documents": true
+  },
+  "independent_python_adversarial_replay": {
+    "carrier": "Sprites",
+    "sprite": "brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/pq-r2-binding-unit",
+    "py_compile": "PASS",
+    "tests_run": 7,
+    "tests_passed": 7,
+    "tests_failed": 0
+  },
+  "generator_basis": {
+    "real_profile_execution_step_count": 9,
+    "real_profile_escalation_trigger_count": 12,
+    "generated_branch_count": 22,
+    "incumbent_branch_count": 1,
+    "deterministic_ids": true,
+    "target_sensitive_universe": true,
+    "incumbent_sensitive_universe": true
+  },
+  "proves": [
+    "FINAL_V6_SUBJECT_TUPLE_IS_EXACTLY_BOUND",
+    "FINITE_EXTERNAL_PROFILE_DERIVED_GENERATOR_BASIS_IS_CONTENT_ADDRESSED_AND_INDEPENDENTLY_REPLAYED",
+    "EXISTING_VERIFIED_FINITE_SEARCH_SEMANTICS_AND_EXECUTION_SCOPE_ARE_BOUND_WITH_THEIR_NON_GLOBAL_LIMITS",
+    "POLICY_ADEQUACY_AND_TRUTHFUL_OBSERVATION_REMAIN_SEPARATE_REQUIRED_PREMISES",
+    "R2_ROOT_SUBJECT_BINDING_IS_VALID_ONLY_FOR_THE_BOUND_FINITE_GENERATED_BASIS_SCOPE"
+  ],
+  "hard_nonclaims": [
+    "NO_COMPLETED_REAL_FILE_PYTHON_VERIFIER_REPLAY_IN_THIS_RECEIPT",
+    "NO_GLOBAL_CANDIDATE_SEARCH_COMPLETENESS",
+    "NO_OPEN_WORLD_HYPOTHESIS_COMPLETENESS",
+    "NO_POLICY_GENERATION_COMPLETENESS",
+    "NO_CANDIDATE_ARTIFACT_REALIZATION_COMPLETENESS",
+    "NO_POLICY_ADEQUACY_FROM_GENERATION",
+    "NO_GLOBAL_R2_ROOT_CLOSURE",
+    "NO_SAME_SUBJECT_COMPOSITION_PASS",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "root_subject_binding_authority": true,
+  "global_subject_identity_authority": false,
+  "semantic_truth_authority": false,
+  "execution_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
