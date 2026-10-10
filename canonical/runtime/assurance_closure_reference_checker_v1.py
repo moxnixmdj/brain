@@ -88,16 +88,25 @@ def check(graph:Mapping[str,Any])->dict[str,Any]:
         frontier.extend(n["deps"])
         frontier.extend(n["defeaters"])
 
-    active_defeaters={
-        d for nid in reachable
-        for d in nodes[nid]["defeaters"]
-        if nodes[d]["status"]=="SUPPORTED"
-    }
-    unresolved_defeaters={
-        d for nid in reachable
-        for d in nodes[nid]["defeaters"]
-        if nodes[d]["status"] in {"OPEN","STALE"}
-    }
+    # Defeater classification mirrors the semantic law independently:
+    # for each supported node, any SUPPORTED defeater dominates OPEN/STALE
+    # defeaters. Only when that node has no active defeater may unresolved
+    # defeaters keep it open. This is order-independent.
+    active_defeaters=set()
+    unresolved_defeaters=set()
+    for nid in reachable:
+        defeaters=nodes[nid]["defeaters"]
+        supported={
+            d for d in defeaters
+            if nodes[d]["status"]=="SUPPORTED"
+        }
+        if supported:
+            active_defeaters.update(supported)
+            continue
+        unresolved_defeaters.update(
+            d for d in defeaters
+            if nodes[d]["status"] in {"OPEN","STALE"}
+        )
 
     true=set()
     residual=set()
