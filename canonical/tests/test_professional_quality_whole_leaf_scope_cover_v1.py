@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+import hashlib
+import json
+from pathlib import Path
 import unittest
 
 from canonical.runtime import professional_quality_whole_leaf_scope_cover_v1 as s
@@ -8,6 +11,16 @@ LEAF = "PQ::R10_ANALYSIS_DECISION::EXECUTION"
 CLAIM_ID = "2" * 64
 CLAIM_SCOPE_BLOB = "a" * 40
 CLAIM_VERIFY_BLOB = "b" * 40
+ROOT = Path(__file__).resolve().parents[2]
+
+
+def git_blob(path: Path) -> str:
+    raw = path.read_bytes()
+    return hashlib.sha1(b"blob " + str(len(raw)).encode() + b"\\0" + raw).hexdigest()
+
+
+def load_json(rel: str):
+    return json.loads((ROOT / rel).read_text(encoding="utf-8"))
 
 
 def claim_scope():
@@ -125,6 +138,25 @@ class ScopeCoverV1Tests(unittest.TestCase):
         cert = certificate()
         cert["claim_id"] = "3" * 64
         self.assertEqual(evaluate(cert=cert)["reason"], "CERT_IDENTITY_MISMATCH")
+
+    def test_current_r10_execution_certificate_exact_bytes_pass(self):
+        claim_path = "canonical/governance/PROFESSIONAL_QUALITY_R10_EXECUTION_WHOLE_LEAF_CLAIM_SCOPE_20261010_V1.json"
+        verify_path = "canonical/verification/PROFESSIONAL_QUALITY_R10_EXECUTION_WHOLE_LEAF_CLAIM_SCOPE_VERIFY_20261010_V1.json"
+        cert_path = "canonical/governance/PROFESSIONAL_QUALITY_R10_EXECUTION_WHOLE_LEAF_SCOPE_CERTIFICATE_20261010_V1.json"
+        cs = load_json(claim_path)
+        cv = load_json(verify_path)
+        cert = load_json(cert_path)
+        out = s.evaluate(
+            claim_scope=cs,
+            claim_verification=cv,
+            certificate=cert,
+            claim_scope_blob=git_blob(ROOT / claim_path),
+            claim_verification_blob=git_blob(ROOT / verify_path),
+        )
+        self.assertTrue(out["pass"], out)
+        self.assertTrue(out["scope_complete"])
+        self.assertEqual(out["verified_basis"], s.UNIVERSAL)
+        self.assertFalse(out["leaf_property_truth_authority"])
 
 
 if __name__ == "__main__":
