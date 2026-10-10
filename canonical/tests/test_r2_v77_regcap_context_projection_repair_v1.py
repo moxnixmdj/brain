@@ -36,12 +36,13 @@ class Tests(unittest.TestCase):
     def setUp(self):
         self.r2 = load(R2)
         self.terminal = load(TERMINAL)
-        rows = (
-            self.r2["current_cell_classifications"]
-            ["FINANCE_SEMANTIC_ADEQUACY_TAIL"]
-            ["verified_positive_subregions"]
+        tail = self.r2["current_cell_classifications"]["FINANCE_SEMANTIC_ADEQUACY_TAIL"]
+        rows = tail["verified_positive_subregions"]
+        self.assertIsInstance(rows, list)
+        self.row = next(
+            x for x in rows
+            if isinstance(x, dict) and x.get("id") == SUBREGION_ID
         )
-        self.row = next(x for x in rows if x.get("id") == SUBREGION_ID)
 
     def test_r2_remains_v77_with_same_route_and_residual_shape(self):
         status = self.r2["status"]
