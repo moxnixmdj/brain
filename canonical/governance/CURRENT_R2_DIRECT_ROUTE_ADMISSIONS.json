@@ -1,14 +1,14 @@
 {
-  "binding_semantics": "MUTABLE_CURRENT_POINTER_PATH_IDENTITY__IMMUTABLE_TARGET_GIT_BLOB_BOUND",
-  "date": "2026-10-09",
-  "incremental_spend_usd": 0,
   "schema": "PROJECT_BRAIN_CURRENT_R2_DIRECT_ROUTE_DYNAMIC_ADMISSIONS_POINTER_V1",
   "status": "ACTIVE_CURRENT_R2_DYNAMIC_ADMISSIONS_POINTER",
+  "date": "2026-10-10",
+  "binding_semantics": "MUTABLE_CURRENT_POINTER_PATH_IDENTITY__IMMUTABLE_TARGET_GIT_BLOB_BOUND",
   "target": {
-    "git_blob_sha": "450e876dd4258304846b96daff30b542a50d7e79",
-    "path": "canonical/governance/R2_DIRECT_ROUTE_DYNAMIC_ADMISSIONS_450e876dd4258304.json",
+    "path": "canonical/governance/R2_DIRECT_ROUTE_DYNAMIC_ADMISSIONS_MULTI_EFFECT_20261010_V1.json",
+    "git_blob_sha": "3869376dba57bc207af004089309d206b2302ca2",
     "schema": "PROJECT_BRAIN_R2_DIRECT_ROUTE_DYNAMIC_ADMISSIONS_V1"
   },
+  "incremental_spend_usd": 0,
   "terminal_authority": false,
   "terminal_credit_delta": 0
 }
