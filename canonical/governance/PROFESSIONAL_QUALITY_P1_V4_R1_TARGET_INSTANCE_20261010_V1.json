@@ -15,8 +15,7 @@
     "CLAIMS_WITHIN_SUPPLIED_EVIDENCE"
   ],
   "plausible_interpretations": [
-    "COMPARE_THE_TWO_OPTIONS_WITHOUT_FORCING_A_UNIQUE_WINNER_IF_EVIDENCE_DOES_NOT_SUPPORT_ONE",
-    "RECOMMEND_A_WINNER_ONLY_IF_THE_SUPPLIED_EVIDENCE_AND_DECLARED_DECISION_CRITERIA_JUSTIFY_IT"
+    "COMPARE_THE_TWO_OPTIONS_AND_RECOMMEND_A_WINNER_ONLY_IF_THE_SUPPLIED_EVIDENCE_AND_DECLARED_DECISION_CRITERIA_JUSTIFY_IT"
   ],
   "target_construct": "Decision-useful professional quality under explicit evidence and uncertainty constraints",
   "claim_scope": "Only claims and comparisons supportable from the declared supplied evidence",
