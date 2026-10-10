@@ -1,0 +1,91 @@
+{
+  "schema": "PROJECT_BRAIN_R2_OEWN_EFFECT_FIELD_EDGE_VERIFY_V1",
+  "date": "2026-10-10",
+  "branch": "r2-oewn-effect-field-edge-v1-current",
+  "base_main_sha": "139821f916a52ba9edc2597c27d031f31eb95be1",
+  "capability": "OEWN_RELEASE_RELATIVE_DECISION_SUFFICIENT_MENTION_TO_EFFECT_FIELD_ENTAILMENT",
+  "status": "VERIFIED_ISOLATED_FOCUSED_STACK__39_OF_39_PASS",
+  "theorem": {
+    "source_binding": "EDGE_SOURCE_ID_IS_DETERMINISTIC_MENTION_ID_OF_RAW_SOURCE_SCOPE_AND_EXACT_RAW_SPAN",
+    "lexical_candidate_law": "CANDIDATE_SENSE_SET_IS_COMPLETE_ONLY_RELATIVE_TO_PINNED_OEWN_RELEASE",
+    "lemma_binding": "RAW_SPAN_CASEFOLD_MUST_EQUAL_OEWN_UNIVERSE_LEMMA",
+    "target_binding": "EDGE_TARGET_IS_DETERMINISTIC_EFFECT_FIELD_CONCEPT_DERIVED_FROM_SCOPE_EFFECT_ID_FIELD_AND_VALUE",
+    "terminal_equivalence_law": "A_UNIQUE_INTENDED_SENSE_IS_NOT_REQUIRED_WHEN_ALL_SURVIVING_RELEASE_RELATIVE_SENSES_HAVE_THE_SAME_EFFECT_FIELD_CONCEPT_TERMINAL_SIGNATURE",
+    "observation_law": "ACTION_CHANGING_SENSES_REMAIN_OPEN_UNLESS_AUTHENTICATED_OBSERVATION_EVIDENCE_NARROWS_THE_SURVIVING_SET_TO_ONE_FIELD_CONCEPT",
+    "similarity_law": "MODEL_OR_EMBEDDING_SIMILARITY_NEVER_MINTS_THE_EDGE",
+    "guarded_registry_law": "REGISTRY_V5_IS_AUTO_SELECTED_ONLY_WHEN_CAN_PROVE_RECOMPUTES_TRUE;UNPROVED_OR_ACTION_CHANGING_OEWN_EVIDENCE_LEAVES_THE_EFFECT_FIELD_TOP",
+    "lattice_law": "V9_REUSES_V8_FIELD_ASSEMBLY_CROSS_FIELD_VALIDATION_AND_FINITE_WORLDSET_EXECUTION_WITH_NO_NEW_EFFECT_EXECUTION_SEMANTICS"
+  },
+  "exact_changed_blobs": {
+    "canonical/runtime/brain_owned_oewn_decision_relation_edge_authority_v1.py": "7bfc1aadfa949fbd72392d8fd7c555ccee7ddefe",
+    "canonical/runtime/brain_owned_semantic_relation_edge_registry_v5.py": "15a23ca2cc342d87b83ee8d4cfff77a580d5135b",
+    "canonical/runtime/cross_document_effect_semantic_lattice_v9.py": "d0019f4023a0511cbe6326415e1602fe081ca27f",
+    "canonical/runtime/cross_document_effect_semantic_lattice_verify_v9.py": "a7e6961de9f411758de60e631cc6aa1a3a24abf6",
+    "canonical/runtime/r2_cross_document_oewn_semantic_registry_v5_lattice_direct_adequacy_v1.py": "4a570b3743964b6ac0fd5108353406ba135b1745",
+    "canonical/runtime/source_aligned_semantic_proof_v16.py": "9100d60b6599c123d61faefa3fb82449d62bde93",
+    "canonical/runtime/source_aligned_semantic_proof_v16_registry_base.py": "05a36d6dfd55dbf893dc4a7c604463a4deaeae13",
+    "canonical/tests/test_brain_owned_oewn_decision_relation_edge_authority_v1.py": "8ca6561a0befc0aaf4fade98d2787ae767707413",
+    "canonical/tests/test_oewn_effect_field_registry_v5_integration_v1.py": "e65ac319e9ab0923403856501fdb13a8f92cfd96",
+    "canonical/tests/test_r2_oewn_semantic_registry_v5_lattice_direct_v1.py": "b5eea8b01f6520fe6587d276a271d0260a997545"
+  },
+  "isolated_verification": {
+    "carrier": {
+      "name": "brain-r2-grounded-frontier-verify-20261008",
+      "sprite_id": "sprite-87368f21-5869-452d-b326-b420f5e99347",
+      "workspace": "/home/sprite/crossdoc_pr3481_verify"
+    },
+    "python_compile": {
+      "passed": true,
+      "runtime_files": 7
+    },
+    "oewn_decision_relation_authority": {
+      "passed": 8,
+      "failed": 0
+    },
+    "oewn_registry_v5_to_lattice_v9_integration": {
+      "passed": 5,
+      "failed": 0
+    },
+    "direct_transactional_route": {
+      "passed": 5,
+      "failed": 0
+    },
+    "inherited_domain_mapping_registry_v3_compatibility": {
+      "passed": 13,
+      "failed": 0
+    },
+    "inherited_scoped_domain_mapping_registry_v4_compatibility": {
+      "passed": 8,
+      "failed": 0
+    },
+    "total_passed": 39,
+    "total_failed": 0
+  },
+  "important_falsification": {
+    "unsafe_attempt_observed": "PASSING_REGISTRY_V5_AS_AN_UNCONDITIONAL_EXPLICIT_RELATION_VERIFIER_CAUSED_UNPROVED_LEXICAL_EDGES_TO_FAIL_THE_DAG_CLOSED",
+    "repair": "V16_REGISTRY_BASE_USES_REGISTRY_V5_ONLY_WHEN_CAN_PROVE_RETURNS_TRUE",
+    "consequence": "ACTION_CHANGING_OR_UNSUPPORTED_LEXICAL_EVIDENCE_NOW_LEAVES_FIELD_TOP_INSTEAD_OF_POISONING_THE_DOCUMENT"
+  },
+  "direct_route": {
+    "route_id": "DIRECT_ADEQUACY::CROSS_DOCUMENT_OEWN_SEMANTIC_REGISTRY_V5_LATTICE_V9",
+    "capability_id": "cross_document.semantic_registry_v5_oewn_lattice.stdlib",
+    "grammar": "Using the OEWN-mapped semantic-edge cross-document effect lattice case at ...",
+    "preflight_pure_no_effect": true,
+    "producer_independent_acceptance": true,
+    "output_readback_verification": true,
+    "verifier_failure_rollback": true
+  },
+  "nonclaims": [
+    "NO_OPEN_WORLD_ENGLISH_SENSE_COMPLETENESS",
+    "NO_UNRECOGNIZED_PROSE_TO_SENSE_INFERENCE",
+    "NO_GENERAL_WORD_SENSE_CLOSURE",
+    "NO_MODEL_OR_EMBEDDING_SIMILARITY_AUTHORITY",
+    "NO_NEGATIVE_SEMANTIC_EDGE_FROM_OEWN_DECISION",
+    "NO_TERMINAL_CREDIT_FROM_TEST_PASS_COUNT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
