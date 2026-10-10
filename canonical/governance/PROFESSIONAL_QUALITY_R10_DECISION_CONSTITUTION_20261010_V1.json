@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R10_DECISION_CONSTITUTION_V1",
+  "date": "2026-10-10",
+  "status": "ACTIVE_CONSERVATIVE_R10_DECISION_POLICY__UNBOUND_NORMATIVE_CHOICES_ABSTAIN__ZERO_QUALITY_OR_TERMINAL_AUTHORITY",
+  "root_id": "R10_ANALYSIS_DECISION",
+  "leaf_id": "PQ::R10_ANALYSIS_DECISION::EXECUTION",
+  "claim_id": "205a864e7d7a56a14a46bb75923cc9b11126d479676d26d88803831da1197294",
+  "governing_laws": {
+    "target_and_constraints": "TARGET_AND_HARD_CONSTRAINTS_MUST_BE_CONTENT_ADDRESSED_AND_FROZEN_BEFORE_TERMINAL_ANALYSIS",
+    "decision_state": "DECISION_RELEVANT_STATE_IS_LOSSLESS_BY_DEFAULT__OMISSION_REQUIRES_INDEPENDENT_OMISSION_CERTIFICATE",
+    "uncertainty": "UNCERTAINTY_TYPES_ARE_NOT_INTERCHANGEABLE__ANY_CROSS_TYPE_TRANSFORM_REQUIRES_EXPLICIT_ADAPTER",
+    "aggregation": "NO_UNAUTHORIZED_SCALARIZATION__USE_PARETO_OR_NECESSARY_DOMINANCE_OR_MINIMAX_REGRET_WHEN_SUFFICIENT__OTHER_AGGREGATION_REQUIRES_AUTHORITY",
+    "risk": "RISK_TOLERANCE_LOSS_FUNCTION_AND_DECISION_THRESHOLD_MUST_BE_PRECOMMITTED_BY_AUTHORITY_OR_DECISION_ABSTAINS",
+    "veto": "HARD_CONSTRAINTS_AND_VETO_DIMENSIONS_ARE_NONCOMPENSATORY",
+    "multiplicity": "DECISION_SENSITIVE_MODEL_OR_ANALYSIS_MULTIPLICITY_REQUIRES_COMMON_DECISION_OR_ESCALATION_ABSTENTION",
+    "evidence_packet": "EVERY_DECLARED_DECISION_RELEVANT_EVIDENCE_ITEM_IS_PRESERVED_OR_HAS_AN_INDEPENDENT_OMISSION_CERTIFICATE",
+    "stopping": "STOPPING_RULE_IS_CONTENT_ADDRESSED_AND_FROZEN_BEFORE_OUTCOME_REVEAL_OR_TERMINAL_DECISION_ABSTAINS",
+    "absolute_floor": "RELATIVE_IMPROVEMENT_OR_WEAK_BASELINE_DOMINANCE_CANNOT_ESTABLISH_ABSOLUTE_PROFESSIONAL_EXCELLENCE__ABSOLUTE_CLAIMS_REQUIRE_INDEPENDENT_CRITERION_FLOOR_EVIDENCE",
+    "defeaters": "DETECTED_DECISION_RELEVANT_DEFEATERS_BLOCK_ORDINARY_CERTIFICATION_AND_ROUTE_TO_ESCALATION_OR_ABSTENTION"
+  },
+  "safe_default_modes": {
+    "aggregation_modes_without_extra_normative_authority": [
+      "PARETO_ONLY",
+      "NECESSARY_DOMINANCE",
+      "MINIMAX_REGRET"
+    ],
+    "unbound_normative_policy": "ABSTAIN_WITH_MINIMUM_BLOCKING_CUT",
+    "unbound_risk_policy": "ABSTAIN_WITH_MINIMUM_BLOCKING_CUT",
+    "unresolved_model_multiplicity": "ESCALATE_OR_ABSTAIN",
+    "absent_absolute_floor": "FORBID_ABSOLUTE_EXCELLENCE_CLAIM"
+  },
+  "uncertainty_types": [
+    "CONFIDENCE_INTERVAL",
+    "POSTERIOR_PROBABILITY",
+    "PREDICTIVE_RISK",
+    "DEPLOYMENT_RISK",
+    "MEASUREMENT_UNCERTAINTY",
+    "MODEL_UNCERTAINTY"
+  ],
+  "authority_boundary": {
+    "policy_file_can_supply_conservative_fail_closed_defaults": true,
+    "policy_file_can_invent_user_utility": false,
+    "policy_file_can_invent_risk_tolerance": false,
+    "policy_file_can_invent_normative_weights": false,
+    "policy_file_can_waive_hard_constraint": false,
+    "policy_file_can_grant_property_truth": false,
+    "policy_file_can_grant_quality_authority": false
+  },
+  "hard_nonclaims": [
+    "NO_R10_PROPERTY_TRUTH_FROM_POLICY_DECLARATION",
+    "NO_DEFEATER_DETECTION_COMPLETENESS",
+    "NO_DOMAIN_EXECUTION_CLOSURE",
+    "NO_PROFESSIONAL_QUALITY_ACCEPTANCE_OR_PROMOTION",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "execution_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
