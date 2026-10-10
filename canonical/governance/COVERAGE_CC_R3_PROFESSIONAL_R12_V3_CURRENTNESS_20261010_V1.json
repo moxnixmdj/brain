@@ -1,0 +1,27 @@
+{
+  "schema": "PROJECT_BRAIN_CC_R3_STABLE_R12_V3_CURRENTNESS_V1",
+  "date": "2026-10-10",
+  "status": "CURRENT_V3__STABLE_C8_REUSED__ONLY_MATERIAL_DEFEATER_TOTALITY_OPEN__ZERO_CREDIT",
+  "stable_claim": "11870f850b46bcfcc31094f764fc4f45c911aaac413979ceb62679ff19a53162",
+  "current_roots": {
+    "cc_r1": "PROVED_CURRENT",
+    "cc_r2": "PROVED_CURRENT",
+    "cc_r3": "OPEN_NO_GLOBAL_CERTIFICATE_BOUND",
+    "r4": false
+  },
+  "verified_reuse": {
+    "c1_c8_all_current": true,
+    "stable_c8_nonvacuity": true,
+    "stable_c8_real_executed_route": true,
+    "stable_c8_independently_replayed": true,
+    "new_v9_positive_route_required": false,
+    "cc_r3_v3_verifier": [
+      "canonical/runtime/coverage_cc_r3_professional_r12_semantic_verify_v3.py",
+      "e6a65e3b2fc1ddfdc1698a98e5d7783b7fa56276"
+    ],
+    "independent_verify": "canonical/verification/COVERAGE_CC_R3_PROFESSIONAL_R12_STABLE_C8_REUSE_V3_VERIFY_20261010_V1.json"
+  },
+  "only_open_cc_r3_evidence": "EXECUTABLE_INDEPENDENTLY_VERIFIED_CLAIM_WIDE_MATERIAL_DEFEATER_TOTALITY",
+  "exact_next": "BUILD_OR_REUSE_SCOPE_COMPLETE_MATERIAL_DEFEATER_TOTALITY_CERTIFICATE__RUN_V2_EXECUTABLE_TOTALITY_SEMANTICS__MINT_CC_R3_CERTIFICATE__RERUN_ROOT_REGISTRY_AND_R4",
+  "terminal_credit_delta": 0
+}
