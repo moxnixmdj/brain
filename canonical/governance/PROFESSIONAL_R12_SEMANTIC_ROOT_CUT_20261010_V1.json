@@ -1,0 +1,93 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_R12_SEMANTIC_ROOT_CUT_20261010_V1",
+  "date": "2026-10-10",
+  "status": "VERIFIED_RESIDUAL_COMPRESSION__R12_SEMANTIC_CARRIER_AND_WHOLE_DOMAIN_SCOPE_CLOSED__CC_R1_MATERIALIZABLE__CC_R2_CC_R3_SEMANTIC_PROOFS_OPEN__CC_R4_DEPENDENCY_BLOCKED__ZERO_PROPERTY_CREDIT",
+  "leaf_id": "PQ::R12_META_COMPOSITION_CLOSURE::SEMANTIC",
+  "claim_id": "05b74983836dd1f6a13a0db72443246fb74f99548f0d982a769a6a7e572e9e85",
+  "bindings": {
+    "runtime": {
+      "path": "canonical/runtime/professional_r12_semantic_root_cut_v1.py",
+      "git_blob_sha": "6a9dcd1b8a041c936ae2bf3d9cb169154a5b36d6"
+    },
+    "tests": {
+      "path": "canonical/tests/test_professional_r12_semantic_root_cut_v1.py",
+      "git_blob_sha": "07de11edaa74f133bedda9e3e78b942d121c9c16"
+    },
+    "whole_domain_equivalence": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_DOMAIN_EQUIVALENCE_V1_INDEPENDENT_VERIFY_20261010_V1.json",
+      "git_blob_sha": "b6b826d1658d8a2c88ea80260ee667e86ae99394"
+    },
+    "scope_batch": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_SCOPE_BATCH_VERIFY_20261010_V1.json",
+      "git_blob_sha": "4c2d40a262f18f34bb35f94b59660d60972d45ef"
+    },
+    "identity_carrier": {
+      "path": "canonical/verification/PROFESSIONAL_SEMANTIC_IDENTITY_CARRIER_VERIFY_20261010_V1.json",
+      "git_blob_sha": "35a3ccf9ad454aa0318a4ed10edc065830c3874d"
+    },
+    "bounded_r12_semantics": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_VERIFY_20261010_V12.json",
+      "git_blob_sha": "87a1c86ce805ef3d2c8c987199ef844b0dbc3a26"
+    },
+    "claim_scope_law": {
+      "path": "canonical/governance/COVERAGE_COMPLETENESS_CLAIM_SCOPE_V1.json",
+      "git_blob_sha": "34b6e725efff42536e3c78b3c24543c32cbc02a9"
+    },
+    "root_theorem": {
+      "path": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_THEOREM_V1.json",
+      "git_blob_sha": "3d2c89502d94c045d04af04db4cdecc509a08dd8"
+    }
+  },
+  "root_states": {
+    "CC_R1_REALITY_CONTAINMENT_V1": {
+      "state": "MATERIALIZABLE_FROM_VERIFIED_EXISTING_PROOFS",
+      "basis": [
+        "WHOLE_ADMISSIBLE_R12_SEMANTIC_DOMAIN_EQUIVALENCE",
+        "WHOLE_LEAF_SCOPE_COMPLETE",
+        "LOSSLESS_IDENTITY_CARRIER_UNIVERSAL_FACTORIZATION"
+      ],
+      "next": "MINT_EXACT_CLAIM_SCOPED_CONTENT_ADDRESSED_CC_R1_CERTIFICATE_AND_INDEPENDENT_RECEIPT",
+      "semantic_research_open": false
+    },
+    "CC_R2_MISSION_SOUNDNESS_V1": {
+      "state": "OPEN_SEMANTIC_PROOF",
+      "next": "PROVE_EXPLICIT_CLAIM_SCOPED_REDUCTION_FROM_R12_SEMANTIC_GOOD_SET_TO_AUTHORIZED_MISSION_ACCEPTANCE",
+      "semantic_research_open": true
+    },
+    "CC_R3_TERMINAL_CLOSURE_V1": {
+      "state": "OPEN_SEMANTIC_PROOF",
+      "next": "PROVE_FOR_ALL_ADMISSIBLE_R12_SEMANTIC_WORLD_STATES_THAT_STILL_POSSIBLE_BEHAVIOR_SATISFIES_R12_SEMANTIC_ACCEPTANCE",
+      "semantic_research_open": true,
+      "bounded_evidence_is_not_totality": true
+    },
+    "CC_R4_PROOF_AUTHORITY_V1": {
+      "state": "DEPENDENCY_BLOCKED",
+      "next": "AFTER_SAME_CLAIM_CC_R1_CC_R2_CC_R3_CERTIFICATES_EXIST__BIND_CONTENT_ADDRESSED_VERIFIERS_INDEPENDENT_RECEIPTS_AND_CURRENTNESS",
+      "semantic_research_open": false
+    }
+  },
+  "open_semantic_root_ids": [
+    "CC_R2_MISSION_SOUNDNESS_V1",
+    "CC_R3_TERMINAL_CLOSURE_V1"
+  ],
+  "open_semantic_root_count": 2,
+  "carrier_factorization_open": false,
+  "whole_domain_scope_open": false,
+  "semantic_property_truth_authority": false,
+  "root_certificate_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "next": "PROVE_CC_R2_AND_CC_R3_IN_PARALLEL__MATERIALIZE_CC_R1_AS_NONRESEARCH_PLUMBING__THEN_CLOSE_CC_R4_IF_SAME_CLAIM_ROOT_CHAIN_VERIFIES",
+  "hard_nonclaims": [
+    "NO_R12_SEMANTIC_PROPERTY_TRUTH",
+    "NO_R12_ROOT_CLOSURE",
+    "NO_CC_R1_CANONICAL_ROOT_CERTIFICATE_YET",
+    "NO_CC_R2_OR_CC_R3_PROOF",
+    "NO_GLOBAL_PROFESSIONAL_QUALITY_CLOSURE",
+    "NO_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT"
+  ]
+}
