@@ -34,15 +34,12 @@
     "fail_closed_on_unknown_cause_id": true
   },
   "canonical_learning_loop": [
-    "SEARCH_REUSE",
     "SOLVE",
     "VERIFY",
     "EXTRACT_MECHANISM",
     "GENERALIZE",
     "COMPRESS",
     "PRESERVE_OPTIONS",
-    "PROMOTE_WITH_SEPARATE_AUTHORITY",
-    "FALSIFY_ON_FRESH_REAL_TASK",
     "REUSE_CHEAPER"
   ],
   "hard_nonclaims": [
@@ -85,7 +82,8 @@
     "path": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V5.json",
     "git_blob_sha": "70b855e71c3a68d0c6b600142437c001184392df",
     "prior_status": "STAGED_GOVERNANCE_ONLY__RUNTIME_ENFORCEMENT_WAS_NOT_YET_IMPLEMENTED",
-    "mutation_of_v5": false
+    "mutation_of_v5": false,
+    "semantic_note": "V5_REUSE_FIRST_SEQUENCE_IS_BOUND_AS_PRE_ADMISSION_CONTROL__NOT_RELABELED_AS_THE_POST_ADMISSION_CAPABILITY_LEARNING_LOOP"
   },
   "reuse_first_residual_admission": {
     "policy_path": "canonical/governance/REUSE_FIRST_RESIDUAL_EXECUTION_POLICY_20261010_V1.json",
@@ -119,5 +117,17 @@
     "git_blob_sha": "e12db696bc98d71e434d059ed974fa57dae71844",
     "py_compile": "PASS",
     "tests": "33_OF_33_PASS"
-  }
+  },
+  "reuse_first_pre_admission_sequence": [
+    "SEARCH_EXISTING_BRAIN_CAPABILITIES_AND_CERTIFICATES",
+    "CLASSIFY_RESIDUAL_CAUSAL_PREDICATE",
+    "BIND_STRONGEST_EXISTING_MECHANISM",
+    "COMPUTE_MINIMUM_MISSING_ADAPTATION",
+    "VERIFY_EXACT_CASE",
+    "VERIFY_NEIGHBORING_AND_ADVERSARIAL_CASES",
+    "EXTRACT_GENERAL_MECHANISM",
+    "PROMOTE_ONLY_WITH_SEPARATE_AUTHORITY",
+    "FALSIFY_ON_FRESH_REAL_TASK",
+    "REUSE_CHEAPER"
+  ]
 }
