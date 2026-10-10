@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_VERIFY_V4",
+  "date": "2026-10-10",
+  "status": "PASS__PINNED_EXACT_BYTES__PYCOMPILE__11_OF_11__FOUR_SCOPED_CAPABILITIES__ZERO_GLOBAL_LEAF_CREDIT",
+  "repository": "moxnixmdj/brain",
+  "pinned_main_commit": "5b144516d1a1211f598fa889617ae38a7d5019c2",
+  "carrier": {
+    "name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/pq-scoped-evidence-5b14451"
+  },
+  "exact_blobs": {
+    "runtime": "a8beac7532bff66c5b0d0af401658ce8ecd100c9",
+    "tests": "45b1f70851f0fb6436e5f407550bb138cccdfb56",
+    "registry": "f98dde6bad713f86f572d5bcfda41c1a1d0f6095",
+    "r10_source_receipt": "18574110321eb1bacc18db46cbd0673bf6a0a0ac",
+    "r10_runtime": "b8347a3993f96aa5e6fa2f1fe68d7c8afccb8bec",
+    "r10_historical_feature_receipt": "188881365c8bb182ebd10cd4bc37aedff8547acd"
+  },
+  "replay": {
+    "py_compile": "PASS",
+    "tests_run": 11,
+    "tests_passed": 11,
+    "tests_failed": 0
+  },
+  "admitted_scopes": [
+    "PQ::R3::NATIVE_ARTIFACT::BOUNDED_RENDER_PRESERVATION",
+    "PQ::R7::SINGLE_EDIT::UVCK_DEFEATER_ORDER_REPAIR",
+    "PQ::R10::DECISION_SUFFICIENCY::LOSSLESS_MINIMUM_INFORMATION",
+    "PQ::R11::EVAL_FIREWALL::POST_IDENTITY_DISCOVERY_REVOCATION"
+  ],
+  "proved": [
+    "FOUR_BOUND_SCOPES_REUSABLE_WITH_CONTENT_ADDRESSED_EVIDENCE",
+    "CURRENT_R10_RUNTIME_IDENTITY_IS_BOUND_BY_CURRENT_23_OF_23_REPLAY",
+    "HISTORICAL_R10_RECEIPT_IS_USED_ONLY_AS_FEATURE_PROVENANCE_NOT_MUTABLE_RUNTIME_AUTHORITY",
+    "R10_SCOPE_CANNOT_PROMOTE_EXECUTION_LEAF_OR_GLOBAL_ROOT_CREDIT",
+    "R3_R7_R11_SCOPE_GUARDS_REMAIN_INTACT"
+  ],
+  "current_state": {
+    "admitted_scope_count": 4,
+    "global_leaf_closure": false,
+    "global_root_closure": false,
+    "domain_semantic_closure": false,
+    "domain_execution_closure": false
+  },
+  "hard_nonclaims": [
+    "NO_GLOBAL_R3_R7_R10_OR_R11_LEAF_CLOSURE",
+    "NO_DOMAIN_SEMANTIC_CLOSURE",
+    "NO_DOMAIN_EXECUTION_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
