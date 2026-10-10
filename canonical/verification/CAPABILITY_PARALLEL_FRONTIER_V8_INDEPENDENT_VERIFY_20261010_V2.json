@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_PARALLEL_FRONTIER_V8_INDEPENDENT_VERIFY_20261010_V2",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_SPRITE__PYCOMPILE_PASS__8_OF_8_ADVERSARIAL_TESTS_PASS__EXACT_R9_FRONTIER_REPLAY_PASS__SIX_SAFE_PARALLEL_READ_ONLY_EVIDENCE_LANES__ZERO_CREDIT",
+  "verifier_carrier": {
+    "type": "SPRITE",
+    "name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "role": "INDEPENDENT_EXECUTION_CARRIER__NO_PROMOTION_OR_TERMINAL_AUTHORITY"
+  },
+  "exact_subject": {
+    "runtime_path": "canonical/runtime/capability_parallel_frontier_v1.py",
+    "runtime_git_blob_sha": "2869f0aa76a8d6eb9dc87f937d767ed3690b0079",
+    "tests_path": "canonical/tests/test_capability_parallel_frontier_v1.py",
+    "tests_git_blob_sha": "d21a8fbeed2eb4c53eca9dcf09baa3b2c867b911",
+    "frontier_path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
+    "frontier_git_blob_sha": "371630ed9e98aa335ef8436acfb0acde68ae6103"
+  },
+  "execution": {
+    "py_compile": "PASS",
+    "unit_tests_run": 8,
+    "failures": 0,
+    "errors": 0,
+    "exact_current_frontier_replay": "PASS",
+    "frontier_currentness_verified": true,
+    "frontier_id": "LIVE_WORK_FRONTIER_20261010_AAABC2BC_V7"
+  },
+  "exact_current_plan": {
+    "parallel_full_execution_work_ids": [],
+    "parallel_read_only_evidence_work_ids": [
+      "BYTES_EXACT_SYMBOLIC_V24_NEXT_PHYSICAL_CUT",
+      "ESCAPE_GAP_A_AUTHENTICATED_ROW_PROOFS",
+      "ESCAPE_GAP_B_STRICT_PROGRESS_ROW_PROOFS",
+      "PROFESSIONAL_QUALITY_V7_R9_TEMPORAL_DEPLOYMENT_BINDING",
+      "REPOSITORY_PROMOTION_ENFORCEMENT",
+      "TB_SCIENCE_RANK20_V13_PREACTIVATION_PROMOTION"
+    ],
+    "nonprimary_candidate_ids": [
+      "ASSURANCE_UVCK_V2_PROMOTION_GATES",
+      "ESCAPE_OQ_SCOPE_COMPLETE_ACCEPTANCE_INSTANTIATION",
+      "OPUS_CHECKPOINT_OPEN_FAMILY_AUDIT",
+      "R2_FINANCE_SEMANTIC_ADEQUACY_TAIL"
+    ],
+    "unresolved_evidence_conflict_components": [],
+    "unresolved_full_execution_conflict_components": [],
+    "vector_complete_candidate_ids": [],
+    "vector_incomplete_candidate_count": 6
+  },
+  "hard_nonclaims": [
+    "NO_FULL_EXECUTION_DISPATCH_AUTHORITY",
+    "NO_UNIQUE_RANK_ONE_CLAIM",
+    "NO_COMPLETE_VECTOR_EVIDENCE_CLAIM",
+    "NO_SCALAR_UTILITY_CALIBRATION_CLAIM",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
