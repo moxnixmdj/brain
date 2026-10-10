@@ -7,10 +7,14 @@
   "supersedes": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V7.json",
   "primary_parallel_frontier": {
     "path": "canonical/runtime/capability_parallel_frontier_v1.py",
-    "git_blob_sha": "2869f0aa76a8d6eb9dc87f937d767ed3690b0079",
+    "git_blob_sha": "b6cc3af315b228ee088f673634bccabf7a4fc9fa",
     "primary_entrypoint": "plan_current_parallel_frontier",
     "frontier_path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
-    "frontier_git_blob_sha": "371630ed9e98aa335ef8436acfb0acde68ae6103"
+    "frontier_git_blob_sha": "371630ed9e98aa335ef8436acfb0acde68ae6103",
+    "dynamic_current_pointer_follow": {
+      "supported_family": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
+      "rule": "MECHANICALLY_SEQUENTIAL_ROOT_FRONTIER_ONLY__STATUS_AND_NEXT_MUST_AGREE__OTHER_SOURCE_FAMILY_DRIFT_FAILS_CLOSED"
+    }
   },
   "scalar_fallback": {
     "core_path": "canonical/runtime/capability_first_scheduler_v1.py",
@@ -20,16 +24,16 @@
     "rule": "USE_ONLY_WHEN_A_PROVED_COMMON_TRADEOFF_CALIBRATION_EXISTS"
   },
   "independent_verification": {
-    "path": "canonical/verification/CAPABILITY_PARALLEL_FRONTIER_V8_INDEPENDENT_VERIFY_20261010_V2.json",
-    "git_blob_sha": "a655b61356d08ac1cd0c4a840eb3f46fbd89a5d7",
-    "status": "PASS__PYCOMPILE__8_OF_8_ADVERSARIAL_TESTS__EXACT_R9_FRONTIER_REPLAY__SIX_SAFE_READ_ONLY_EVIDENCE_LANES"
+    "path": "canonical/verification/CAPABILITY_PARALLEL_FRONTIER_V8_INDEPENDENT_VERIFY_20261010_V3.json",
+    "git_blob_sha": "73124ce1b33ebc608756163f901cf44e758a4b16",
+    "status": "PASS__PYCOMPILE__10_OF_10_ADVERSARIAL_TESTS__STATIC_AAABC2_FRONTIER_DYNAMICALLY_FOLLOWED_LIVE_R10_PROFESSIONAL_POINTER"
   },
   "current_control_state": {
     "full_execution_plan_authorized": false,
     "read_only_evidence_plan_authorized": true,
     "current_parallel_read_only_lane_count": 6,
     "current_parallel_full_execution_lane_count": 0,
-    "reason": "ALL_SIX_READY_PRIMARY_CANDIDATES_HAVE_PARTIAL_OR_UNBOUND_VECTOR_EVIDENCE__READ_ONLY_EVIDENCE_ACQUISITION_IS_CONFLICT_FREE"
+    "reason": "SIX_READY_PRIMARY_CANDIDATES_REMAIN_VECTOR_INCOMPLETE__READ_ONLY_EVIDENCE_ACQUISITION_IS_CONFLICT_FREE__PROFESSIONAL_CANDIDATE_DYAMICALLY_FOLLOWS_VERIFIED_CURRENT_ROOT_FRONTIER"
   },
   "scheduling_law": "CURRENTNESS_AND_DEPENDENCY_FIRST__PARETO_DOMINANCE_WITH_COMPLETE_PER_DIMENSION_EVIDENCE__SAFE_NONCONFLICTING_PARALLELISM__INCOMPLETE_VECTORS_READ_ONLY_EVIDENCE_ONLY__CONFLICTING_INCOMPARABLE_WORK_REQUIRES_MINIMUM_DISCRIMINATING_EVIDENCE__NO_INVENTED_SCALAR_WEIGHTS",
   "hard_nonclaims": [
