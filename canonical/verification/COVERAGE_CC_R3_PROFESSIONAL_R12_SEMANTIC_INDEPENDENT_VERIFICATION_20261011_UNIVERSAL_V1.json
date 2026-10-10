@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_COVERAGE_ROOT_SEMANTIC_VERIFICATION_V1",
+  "verifier_protocol": "COVERAGE_ROOT_SEMANTIC_VERIFIER_V1",
+  "date": "2026-10-11",
+  "pass": true,
+  "status": "PASS__SECOND_INDEPENDENT_SPRITE__CC_R3_STABLE_R12_UNIVERSAL_FORMAL_SCOPE_PROOF__24_OF_24_COMBINED_CURRENT_MAIN_REPLAY",
+  "independent": true,
+  "semantic_claim_verified": true,
+  "root_id": "CC_R3_TERMINAL_CLOSURE_V1",
+  "claim_id": "11870f850b46bcfcc31094f764fc4f45c911aaac413979ceb62679ff19a53162",
+  "proof_mode": "FORMAL_REDUCTION",
+  "verifier_result_sha256": "16f2af7b275bf13fd8b9c942578882a7644732f55f237ff0aa3b379647710d23",
+  "certificate": {
+    "path": "canonical/governance/COVERAGE_CC_R3_PROFESSIONAL_R12_SEMANTIC_CERTIFICATE_20261011_V4.json",
+    "git_blob_sha": "53b96f6fd1d26ad6eb3e4c1d0744a04465c402f4"
+  },
+  "semantic_verifier": {
+    "path": "canonical/runtime/coverage_cc_r3_professional_r12_semantic_verify_universal_v1.py",
+    "git_blob_sha": "ae240608dd3a6797e7e5614c47feec7a33ac9d98"
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/v9-real-witness-second",
+    "tests_run": 24,
+    "tests_passed": 24,
+    "tests_failed": 0,
+    "includes": [
+      "UNIVERSAL_POSITIVE_GATE_7",
+      "VERIFIED_COMPOSITION_6",
+      "NONCOLLIDING_CC_R3_7",
+      "SPEC_SPLIT_GUARD_4"
+    ]
+  },
+  "proved": {
+    "material_defeater_totality_verified": true,
+    "stable_c8_nonvacuity_verified": true,
+    "cc_r3_terminal_closure_proved": true,
+    "finite_catalog_used": false,
+    "cross_subject_property_authority_transport": false,
+    "semantic_property_truth_authority": false
+  },
+  "errors": [],
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
