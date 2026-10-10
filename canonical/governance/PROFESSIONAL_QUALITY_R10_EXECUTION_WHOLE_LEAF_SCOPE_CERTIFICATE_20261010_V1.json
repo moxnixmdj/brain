@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_WHOLE_LEAF_SCOPE_CERTIFICATE_V2",
+  "date": "2026-10-10",
+  "leaf_id": "PQ::R10_ANALYSIS_DECISION::EXECUTION",
+  "claim_id": "205a864e7d7a56a14a46bb75923cc9b11126d479676d26d88803831da1197294",
+  "claim_scope_git_blob_sha": "8f95b72c6edc7ff307342f7a0513bb90e908cd4c",
+  "scope_certificate": {
+    "id": "PQ::R10_ANALYSIS_DECISION::EXECUTION::WHOLE_LEAF_SCOPE_V1",
+    "target_scope_id": "scope://professional-quality/whole-leaf/205a864e7d7a56a14a46bb75923cc9b11126d479676d26d88803831da1197294",
+    "claim_id": "205a864e7d7a56a14a46bb75923cc9b11126d479676d26d88803831da1197294",
+    "basis": "UNIVERSAL_FORMAL_SCOPE_PROOF",
+    "verified": true,
+    "independent": true,
+    "scope_relation": "EXACT",
+    "formal_completeness": true,
+    "all_admissible_target_inputs_proved": true,
+    "premise_set_id": "claim-verification:44907b5d106db21e00648a234875ecc9e00e3364"
+  },
+  "evidence_refs": [
+    {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R10_EXECUTION_WHOLE_LEAF_CLAIM_SCOPE_VERIFY_20261010_V1.json",
+      "git_blob_sha": "44907b5d106db21e00648a234875ecc9e00e3364"
+    }
+  ],
+  "semantic_truth_authority": false,
+  "execution_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "hard_nonclaims": [
+    "NO_R10_EXECUTION_PROPERTY_TRUTH",
+    "NO_R10_DOMAIN_EXECUTION_CLOSURE",
+    "NO_R10_ROOT_CLOSURE",
+    "NO_PROFESSIONAL_QUALITY_ACCEPTANCE_OR_PROMOTION"
+  ]
+}
