@@ -94,6 +94,28 @@ class Tests(unittest.TestCase):
         self.assertFalse(out["pass"], out)
         self.assertEqual(out["predicate_truth"], "UNKNOWN")
 
+    def test_exact_selected_span_inside_larger_document_still_passes(self):
+        clause = (
+            "sufficient loss-absorbing and recapitalisation capacity "
+            "available in resolution"
+        )
+        text = "prefix sentence. " + clause + ". suffix sentence."
+        start = text.index(clause)
+        end = start + len(clause)
+        payload = {
+            "truth_kind": "REGCAP_CONTEXT_ATOM",
+            "predicate_id": "caller-label",
+            "source_text": text,
+            "source_id": "doc:A",
+            "start": start,
+            "end": end,
+            "context_kind": context.TLAC_KIND,
+            "target_atom_id": context.ATOM_RESOLUTION,
+        }
+        out = evaluate(payload)
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(out["predicate_truth"], "TRUE")
+
     def test_unknown_atom_fails_closed(self):
         text = (
             "a 2.5% buffer comprised of CET1 above the regulatory minimum "
