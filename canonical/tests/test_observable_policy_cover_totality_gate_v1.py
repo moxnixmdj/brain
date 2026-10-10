@@ -26,6 +26,8 @@ def base():
                 "adequacy_receipt": receipt(
                     policy_id="p0",
                     policy_adequate_on_every_listed_world=True,
+                    policy_safe_on_every_listed_world=True,
+                    hard_constraint_scope_complete=True,
                     brain_owned=True,
                     deployed_exact=True,
                     resource_bound_proved=True,
@@ -38,6 +40,8 @@ def base():
                 "adequacy_receipt": receipt(
                     policy_id="p1",
                     policy_adequate_on_every_listed_world=True,
+                    policy_safe_on_every_listed_world=True,
+                    hard_constraint_scope_complete=True,
                     brain_owned=True,
                     deployed_exact=True,
                     resource_bound_proved=True,
@@ -65,6 +69,7 @@ def test_positive_cover_builds_strict_refinement_tree():
     out = evaluate(base())
     assert out["pass"] is True
     assert out["bound_state_totality_proved"] is True
+    assert out["policy_safety_coverage_proved"] is True
     assert out["decision_tree"]["discriminator_id"] == "d"
     assert out["minimum_worst_case_resource_bound_units"] == 5.0
     assert out["u_empty_authorized"] is False
@@ -131,6 +136,24 @@ def test_unsound_policy_receipt_fails_closed():
     assert out["reason"].startswith("POLICY_ADEQUACY_RECEIPT_INVALID")
 
 
+def test_adequate_but_unsafe_policy_receipt_fails_closed():
+    p = base()
+    p["policies"][0]["adequacy_receipt"]["policy_safe_on_every_listed_world"] = False
+    out = evaluate(p)
+    assert out["pass"] is False
+    assert out["reason"].startswith("POLICY_ADEQUACY_RECEIPT_INVALID")
+    assert out["policy_safety_coverage_proved"] is False
+
+
+def test_policy_receipt_without_complete_hard_constraint_scope_fails_closed():
+    p = base()
+    p["policies"][0]["adequacy_receipt"]["hard_constraint_scope_complete"] = False
+    out = evaluate(p)
+    assert out["pass"] is False
+    assert out["reason"].startswith("POLICY_ADEQUACY_RECEIPT_INVALID")
+    assert out["policy_safety_coverage_proved"] is False
+
+
 def test_dict_outcomes_are_canonicalized_not_order_sensitive():
     p = base()
     p["worlds"] = [{"world_id": "w0"}, {"world_id": "w1"}]
@@ -142,6 +165,8 @@ def test_dict_outcomes_are_canonicalized_not_order_sensitive():
             "adequacy_receipt": receipt(
                 policy_id="p0",
                 policy_adequate_on_every_listed_world=True,
+                policy_safe_on_every_listed_world=True,
+                hard_constraint_scope_complete=True,
                 brain_owned=True,
                 deployed_exact=True,
                 resource_bound_proved=True,
@@ -154,6 +179,8 @@ def test_dict_outcomes_are_canonicalized_not_order_sensitive():
             "adequacy_receipt": receipt(
                 policy_id="p1",
                 policy_adequate_on_every_listed_world=True,
+                policy_safe_on_every_listed_world=True,
+                hard_constraint_scope_complete=True,
                 brain_owned=True,
                 deployed_exact=True,
                 resource_bound_proved=True,
@@ -178,6 +205,8 @@ def test_cheaper_truthful_discriminator_beats_available_common_policy():
         "adequacy_receipt": receipt(
             policy_id="p_all",
             policy_adequate_on_every_listed_world=True,
+            policy_safe_on_every_listed_world=True,
+            hard_constraint_scope_complete=True,
             brain_owned=True,
             deployed_exact=True,
             resource_bound_proved=True,
@@ -200,6 +229,8 @@ def test_equal_cost_prefers_common_adequate_policy_without_observation():
         "adequacy_receipt": receipt(
             policy_id="p_all",
             policy_adequate_on_every_listed_world=True,
+            policy_safe_on_every_listed_world=True,
+            hard_constraint_scope_complete=True,
             brain_owned=True,
             deployed_exact=True,
             resource_bound_proved=True,
