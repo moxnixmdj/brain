@@ -48,6 +48,13 @@ class R10SemanticPropertyTruthV1Tests(unittest.TestCase):
   self.assertFalse(out["pass"])
   self.assertEqual(out["reason"],"WHOLE_LEAF_SCOPE_BATCH_NOT_ADMISSIBLE")
 
+ def test_scope_batch_runtime_binding_must_match_exact_epoch_algorithm(self):
+  d=docs()
+  d["scope_batch_verify"]["subject"]["runtime"]["git_blob_sha"]="0"*40
+  out=evaluate(d)
+  self.assertFalse(out["pass"])
+  self.assertEqual(out["reason"],"WHOLE_LEAF_SCOPE_BATCH_NOT_ADMISSIBLE")
+
  def test_catalog_loss_fails_closed(self):
   d=docs()
   rows=(d["catalog"].get("defeaters") or d["catalog"].get("attack_classes") or d["catalog"].get("nodes") or d["catalog"].get("challenges") or [])
