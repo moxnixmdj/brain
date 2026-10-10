@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V44",
+  "date": "2026-10-10",
+  "status": "POST_RANK20_PUBLIC_STAGED_RESEAL__CANONICAL_RANK20_AUTHORITY_EFFECTIVE__PUBLIC_EFFECTIVE_SURFACE_PROMOTION_PENDING__UNREAD_UNSTARTED",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "predecessor": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V43.json",
+    "git_blob_sha": "810e414b9740cf02f8fceeb5ddc00689ab46e66e"
+  },
+  "rank20_authority": {
+    "path": "canonical/governance/TB_SCIENCE_RANK20_ONE_SLOT_EXECUTION_AUTHORITY_20261010_V3.json",
+    "git_blob_sha": "7402eae3242cac39f9a3b26314b0e45bfb9ca19f"
+  },
+  "public_reseal_verification": {
+    "path": "canonical/verification/TB_SCIENCE_RANK20_PUBLIC_RESEAL_VERIFICATION_20261010_V1.json",
+    "git_blob_sha": "0bc06489a634ee3c01af3f67023d70fbb0cf2905",
+    "public_commit_sha": "73db1b05ab8e08b84d2076e2b36f4e376b90091c"
+  },
+  "logical_attempt_claim_binding": {
+    "path": "canonical/governance/TB_SCIENCE_RANK20_LOGICAL_ATTEMPT_CLAIM_BINDING_20261010_V3.json",
+    "git_blob_sha": "59fa5616f1754f90ded1c3b30cb53c98b4348cee",
+    "canonical_sha256": "ad74fd461333c1673b76ec0b439aba98c35bf6a0691796b24a5847209873adba"
+  },
+  "counts": {
+    "benchmark_trials_consumed": 18,
+    "consumed_successes_final": 0,
+    "consumed_failures_final": 18,
+    "started_result_pending": 0,
+    "finalized_slots": 18,
+    "active_in_flight_slot_count": 0
+  },
+  "next_slot": {
+    "ledger_schedule_rank": 20,
+    "frozen_manifest_schedule_order": 19,
+    "task_rank": 19,
+    "slot_id": "terminal-bench-science/hysteretic-aquifer-control::trial-0",
+    "task_digest": "sha256:681df0c3b2ada03a933ac4d2e11f07983676f87a9f26b61e416987904b880289",
+    "logical_attempt_id": "62bbf27ddcc679f431c5569244cf0c54fb1b13181e83076e2c019764f0b747e2",
+    "logical_attempt_identity_basis": "SLOT_ID_PLUS_TASK_DIGEST_PLUS_EXECUTION_CLAIM_BINDING_DIGEST",
+    "execution_claim_binding_digest": "sha256:ad74fd461333c1673b76ec0b439aba98c35bf6a0691796b24a5847209873adba",
+    "task_read_history": false,
+    "task_started": false,
+    "start_cas_acquired": false,
+    "benchmark_trials_consumed": 0
+  },
+  "scheduler": {
+    "frozen": true,
+    "reason": "PUBLIC_EFFECTIVE_AUTHORITY_SURFACE_PROMOTION_PENDING",
+    "canonical_rank20_execution_authority_effective": true,
+    "public_rank20_execution_authority_effective": false,
+    "task_read_authority_effective": false,
+    "activation_authority": false,
+    "only_authorized_transition": "PROMOTE_PUBLIC_RANK20_EFFECTIVE_AUTHORITY_SURFACE_WITH_ZERO_EXPOSURE_PROOF"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_trials_consumed_delta": 0,
+    "consumed_successes_delta": 0,
+    "consumed_final_failures_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "execution_authority": false,
+  "finalization_authority": false,
+  "repair_authority": true,
+  "public_surface_promotion_authority": true,
+  "activation_authority": false,
+  "reseal_authority": "PUBLIC_EFFECTIVE_AUTHORITY_PROMOTION_ZERO_EXPOSURE_ONLY"
+}
