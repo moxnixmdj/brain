@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK20_V9_OUTER_WORKFLOW_GATE_DIAGNOSIS_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__OUTER_WORKFLOW_STILL_BINDS_RETIRED_V2_ACTIVATION_IDENTITY__V9_NOT_ACTIVATABLE__ZERO_EXPOSURE",
+  "slot_id": "terminal-bench-science/hysteretic-aquifer-control::trial-0",
+  "task_digest": "sha256:681df0c3b2ada03a933ac4d2e11f07983676f87a9f26b61e416987904b880289",
+  "canonical_v9_authority": {
+    "path": "canonical/governance/TB_SCIENCE_RANK20_ONE_SLOT_EXECUTION_AUTHORITY_20261010_V9.json",
+    "git_blob_sha": "75ea2068d87591351ba790e17af02a7857f670a9",
+    "execution_branch": "execute/tb-science-rank20-20261010-v3",
+    "activation_filename": "ACTIVATE_RANK20_V3_PR.json"
+  },
+  "public_workflow": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "terminal-execution-v1",
+    "path": ".github/workflows/execute-tb-science-rank20-20261010-v1.yml",
+    "git_blob_sha": "e4cb372e501790fd9ed5aa72193d18109a599102",
+    "trigger_activation_filename": "ACTIVATE_RANK20_V2_PR.json",
+    "shell_required_head": "execute/tb-science-rank20-20261010-v2",
+    "shell_required_activation_filename": "ACTIVATE_RANK20_V2_PR.json",
+    "invoked_preflight": "rank20_execution_preflight_v7.py",
+    "invoked_start_cas": "rank20_start_cas_v7.py"
+  },
+  "generation_neutral_candidate": {
+    "branch": "repair/rank20-v8-gate-candidate-v1",
+    "preflight_v8_git_blob_sha": "3cc62699388993a053969b03d09343c0e8a4d659",
+    "start_cas_v8_git_blob_sha": "99d81c7d1316d1767c688e12c2c05790c69662f3",
+    "behavior_v5_present": true,
+    "regression_test_git_blob_sha": "856752278fff9ee10f8d9d4bc23adfd7c8d3b369",
+    "outer_workflow_repaired": false
+  },
+  "root_cause": "AUTHORITY_DERIVED_INNER_GATES_DO_NOT_OVERRIDE_GITHUB_EVENT_TRIGGER_OR_OUTER_SHELL_HEAD_AND_DIFF_GATES",
+  "consequence": "FRESH_V3_ACTIVATION_WOULD_NOT_TRIGGER_OR_WOULD_FAIL_BEFORE_INNER_AUTHORITY_DERIVATION",
+  "required_repair": [
+    "REPAIR_OUTER_WORKFLOW_TRIGGER_TO_FRESH_V3_ACTIVATION_FILE",
+    "REPAIR_OUTER_WORKFLOW_HEAD_AND_ONE_FILE_DIFF_GATE_TO_FRESH_V3_IDENTITY_OR_AUTHORITY_DERIVATION",
+    "BIND_WORKFLOW_TO_GENERATION_NEUTRAL_PREFLIGHT_V8_AND_START_CAS_V8",
+    "ZERO_EXPOSURE_VERIFY_COMPLETE_WORKFLOW_PLUS_GATE_BYTES",
+    "REMINT_CLAIM_IDENTITY_BECAUSE_WORKFLOW_BEHAVIOR_PREFLIGHT_AND_START_CAS_BYTES_CHANGE",
+    "RESEAL_AUTHORITY_LEDGER_EPOCH_EXECUTION_CLAIM_AND_SURFACE_BEFORE_ACTIVATION"
+  ],
+  "task_read": false,
+  "task_started": false,
+  "durable_start_cas_acquired": false,
+  "benchmark_trials_consumed": 0,
+  "activation_present": false,
+  "activation_authority": false,
+  "v9_activation_ready": false,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "pass": true
+}
