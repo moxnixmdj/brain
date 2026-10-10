@@ -1,0 +1,99 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_NEXT10_EXPRESSIONDOMAIN_FALSIFICATION_V1",
+  "status": "FRESH_FALSIFICATION__EXPRESSIONDOMAIN_REQUIRED_BY_IN_SCOPE_QUARTIC_ROOTS__CUT_REJECTED",
+  "recorded_at": "2026-10-10",
+  "mission": "Minimum resource-feasible executable description conditional on already-owned Brain substrate.",
+  "predecessor": {
+    "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_LAZY_MINPOLY_SUCCESSOR_EXECUTION_20261010_V1.json",
+    "package_raw_python_source_bytes": 6380604,
+    "fresh_qualification": "3910/3910"
+  },
+  "corpus": {
+    "id": "QUAL_SUCCESSOR_NEXT10_20261010_V1",
+    "seed": 3162277,
+    "per_operation_budget": 360,
+    "cases": 4140,
+    "corpus_sha256": "c20dacc5b6f4ee65e234848051b8c46e7004ca043d75accd83fcd9750b637a72",
+    "stock_donor_positive_control": "4140/4140",
+    "status": "SPENT"
+  },
+  "rejected_candidate": {
+    "id": "V20_EXPRESSIONDOMAIN_LAZY_PROBE",
+    "package_raw_python_source_bytes": 6298675,
+    "python_files": 276,
+    "package_manifest_sha256": "8e7fb16d6d4dd41162f68d93e78b7c81e09afa419823b168b0e8041b2f05ccee",
+    "result": "4136/4140",
+    "attempted_change": "Defer EX import from sympy/matrices/inverse.py so expressiondomain.py leaves the physical closure.",
+    "physically_removed_candidate_file": [
+      "sympy/polys/domains/expressiondomain.py",
+      7593
+    ]
+  },
+  "failing_cases": [
+    {
+      "global_case_index": 1089,
+      "op": "roots",
+      "p": [
+        -2,
+        3,
+        4,
+        3,
+        -2
+      ],
+      "error": "ModuleNotFoundError: No module named 'sympy.polys.domains.expressiondomain'"
+    },
+    {
+      "global_case_index": 1206,
+      "op": "roots",
+      "p": [
+        -2,
+        3,
+        6,
+        3,
+        -2
+      ],
+      "error": "ModuleNotFoundError: No module named 'sympy.polys.domains.expressiondomain'"
+    },
+    {
+      "global_case_index": 1279,
+      "op": "roots",
+      "p": [
+        -2,
+        6,
+        -3,
+        6,
+        -2
+      ],
+      "error": "ModuleNotFoundError: No module named 'sympy.polys.domains.expressiondomain'"
+    },
+    {
+      "global_case_index": 1349,
+      "op": "roots",
+      "p": [
+        -4,
+        -4,
+        1,
+        1,
+        -6
+      ],
+      "error": "ModuleNotFoundError: No module named 'sympy.polys.domains.expressiondomain'"
+    }
+  ],
+  "attribution": {
+    "conclusion": "ExpressionDomain is genuinely required by some in-scope degree<=4 exact-root paths.",
+    "sibling_candidate_before_expressiondomain_cut_raw_bytes": 6306260,
+    "sibling_candidate_spent_NEXT10_result": "4140/4140",
+    "fresh_credit_for_sibling_from_NEXT10": false,
+    "reason": "Sibling fallback was selected after NEXT10 failure exposure; NEXT10 therefore became spent diagnostic evidence."
+  },
+  "resolution": {
+    "action": "RETAIN_EXPRESSIONDOMAIN__REJECT_MATRIX_INVERSE_EX_LAZY_DELETION",
+    "reopen_condition": "Only with a smaller causally sufficient substitute that preserves the exposed quartic-root cases and later fresh qualification."
+  },
+  "truth_boundary": [
+    "MEASURED: stock donor passes NEXT10 4140/4140.",
+    "MEASURED: physical deletion of expressiondomain causes four in-scope quartic-root failures.",
+    "MEASURED: the immediately preceding sibling candidate retaining expressiondomain passes spent NEXT10 4140/4140.",
+    "NOT CLAIMED: spent NEXT10 grants fresh credit to the sibling fallback candidate."
+  ]
+}
