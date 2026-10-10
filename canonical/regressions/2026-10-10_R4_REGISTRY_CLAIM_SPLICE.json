@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_REGRESSION_R4_REGISTRY_CLAIM_SPLICE_V1",
+  "date": "2026-10-10",
+  "status": "PERMANENT_FAIL_CLOSED_REGRESSION",
+  "invariant": "CANONICAL_REGISTRY_AUTHORITY_AND_LOCAL_ROOT_BINDING_MUST_REFERENCE_THE_SAME_ACTIVE_CLAIM_AND_CURRENT_GENERATION",
+  "forbidden": [
+    "REGISTRY_CLOSES_CLAIM_X_WHILE_LOCAL_ROOTS_FOR_CLAIM_Y_CLOSE_R4",
+    "STALE_CANONICAL_GENERATION_LOCAL_ROOTS_CLOSE_CURRENT_R4",
+    "ACTIVE_CLAIM_VALIDATION_OMITS_CURRENT_MISSION_POINTER_BLOB_SHA",
+    "LOCAL_BINDING_COHERENCE_SUBSTITUTES_FOR_CANONICAL_REGISTRY_AUTHORITY"
+  ],
+  "mutations": [
+    {
+      "id": "CLAIM_ID_SPLICE",
+      "expect": "R4_REGISTRY_CLAIM_MISMATCH"
+    },
+    {
+      "id": "SCOPE_SPLICE",
+      "expect": "R4_REGISTRY_CLAIM_MISMATCH"
+    },
+    {
+      "id": "SEMANTICS_SPLICE",
+      "expect": "R4_REGISTRY_CLAIM_MISMATCH"
+    },
+    {
+      "id": "EPOCH_SPLICE",
+      "expect": "R4_REGISTRY_CLAIM_MISMATCH"
+    },
+    {
+      "id": "GENERATION_SPLICE",
+      "expect": "R4_REGISTRY_CLAIM_MISMATCH"
+    },
+    {
+      "id": "MISSING_POINTER_BLOB_TO_ACTIVE_CLAIM_GUARD",
+      "expect": "FAIL_CLOSED"
+    }
+  ],
+  "verifier": "canonical/runtime/root_theorem_falsifier_v1.py#evaluate_registry_claim_alignment",
+  "tests": "canonical/tests/test_root_theorem_registry_claim_alignment_v1.py",
+  "terminal_credit_delta": 0
+}
