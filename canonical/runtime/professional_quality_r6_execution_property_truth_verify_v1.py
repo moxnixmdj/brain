@@ -25,7 +25,7 @@ PINS={
  "graph":("canonical/governance/PROFESSIONAL_QUALITY_ASSURANCE_GRAPH_20261009_V2.json","03530e29d70206b46b690b33a04c66765ff86ad7"),
  "catalog":("canonical/governance/PROFESSIONAL_QUALITY_DOMAIN_DEFEATER_CATALOG_20261009_V2.json","8b92e5cf76f767054f55414b87014e03d43460b8"),
  "scope_batch_verify":("canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_SCOPE_BATCH_VERIFY_20261010_V1.json","4c2d40a262f18f34bb35f94b59660d60972d45ef"),
- "r6_binding_verify":("canonical/verification/PROFESSIONAL_QUALITY_R6_V7_ROOT_SUBJECT_BINDING_VERIFY_20261010_V1.json","3c6ae6372db78bf3db117eeaa82d374ab4b0ecbc"),
+ "r6_binding_verify":("canonical/verification/PROFESSIONAL_QUALITY_R6_V7_ROOT_SUBJECT_BINDING_VERIFY_20261010_V1.json","abb4a251345e2701dc42578a1695f5e59f4bb665"),
  "uvck_runtime":("canonical/runtime/assurance_closure_compiler_v1.py","b4274a48edbe626a9ae9fd33da2f2227ca4dd5e8"),
 }
 
