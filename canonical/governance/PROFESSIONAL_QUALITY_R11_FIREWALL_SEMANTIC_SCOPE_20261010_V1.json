@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R11_FIREWALL_SEMANTIC_SCOPE_V1",
+  "date": "2026-10-10",
+  "status": "ACTIVE_SCOPED_CLEAN_EVALUATION_LANE_POST_IDENTITY_REVOCATION_SEMANTICS__6_OF_6_INDEPENDENT_REPLAY__ZERO_GLOBAL_LEAF_CREDIT",
+  "root_id": "R11_ADAPTIVE_INTEGRITY_SECURITY",
+  "claim_kind": "CLEAN_EVALUATION_LANE_POST_IDENTITY_REVOCATION_SEMANTICS",
+  "exact_components": {
+    "runtime": {
+      "path": "canonical/runtime/professional_r11_firewall_semantic_certificate_v1.py",
+      "git_blob_sha": "4ebc3e54dcc492e23144fedd9b4ddc70fb37539a"
+    },
+    "firewall_governance": {
+      "path": "canonical/governance/EVALUATION_INFORMATION_FIREWALL_V1.json",
+      "git_blob_sha": "902c19851629bfb2342eea29e73f4a7ab5d212c5"
+    },
+    "verification": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R11_FIREWALL_SEMANTIC_VERIFY_20261010_V1.json",
+      "git_blob_sha": "7f0468c4abae22504d71ef627efeaf57e85f02a6"
+    }
+  },
+  "guarantees": [
+    "TASK_IDENTITY_EXPOSURE_IS_MONOTONIC_WITHIN_A_LANE",
+    "POST_EXPOSURE_BROAD_DISCOVERY_CAPABILITIES_ARE_REVOKED",
+    "REVOKED_CAPABILITIES_CANNOT_BE_RESTORED_WITHIN_THE_SAME_LANE",
+    "DEACTIVATING_CLEAN_MODE_DOES_NOT_REENABLE_DISCOVERY_IN_THE_SAME_LANE",
+    "UNKNOWN_CAPABILITY_DENIES_FAIL_CLOSED",
+    "ALLOW_AND_REVOKE_CAPABILITY_CLASSES_ARE_DISJOINT"
+  ],
+  "limitations": [
+    "NO_GENERAL_PROMPT_INJECTION_CLOSURE",
+    "NO_GENERAL_GOODHART_CLOSURE",
+    "NO_HOLDOUT_LIFECYCLE_CLOSURE",
+    "NO_GLOBAL_R11_SEMANTIC_LEAF_CLOSURE",
+    "NO_GLOBAL_R11_ROOT_CLOSURE",
+    "NO_DOMAIN_SEMANTIC_CLOSURE",
+    "NO_DOMAIN_EXECUTION_CLOSURE"
+  ],
+  "global_leaf_closure": false,
+  "global_root_closure": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
