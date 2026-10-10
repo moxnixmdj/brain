@@ -63,9 +63,9 @@
     "leaf_count": 24,
     "admitted_v2_chain_count": 24,
     "claim_scope_construction_required_count": 0,
-    "property_truth_ready_count": 19,
-    "property_truth_closed_count": 5,
-    "next": "DEPLET_SEVEN_REMAINING_EXECUTION_PROPERTY_TRUTH__IN_PARALLEL_INSTANTIATE_SEMANTIC_CLAIM_SCOPED_TOTALITY__RUN_FULL_CURRENT_MAIN_REGRESSION"
+    "property_truth_ready_count": 17,
+    "property_truth_closed_count": 7,
+    "next": "DEPLET_FIVE_REMAINING_EXECUTION_PROPERTY_TRUTH__IN_PARALLEL_INSTANTIATE_SEMANTIC_CLAIM_SCOPED_TOTALITY__RUN_FULL_CURRENT_MAIN_REGRESSION"
   },
   "professional_scope_reconciliation": {
     "path": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_SCOPE_BATCH_VERIFY_20261010_V1.json",
@@ -88,10 +88,12 @@
     "status": "PASS__R10_EXECUTION_LEAF_ONLY__38_CASE_EXACT_BOUND_ACCEPTANCE__DETECTION_COMPLETENESS_SEMANTIC_ROOT_AND_GLOBAL_CLOSURE_OPEN"
   },
   "property_truth_reconciliation": {
-    "verified_leaf_count": 5,
+    "verified_leaf_count": 7,
     "total_leaf_count": 24,
     "verified_leaf_ids": [
       "PQ::R1_TARGET_SPECIFICATION::EXECUTION",
+      "PQ::R2_CANDIDATE_SEARCH::EXECUTION",
+      "PQ::R3_REALIZATION_OBSERVATION::EXECUTION",
       "PQ::R4_MEASUREMENT_CONSTRUCT::EXECUTION",
       "PQ::R7_CAUSAL_PRESCRIPTIVE::EXECUTION",
       "PQ::R10_ANALYSIS_DECISION::EXECUTION",
@@ -139,6 +141,18 @@
       ],
       "stronger_unknown_material_defeater_totality_open": true,
       "property_truth_credit": false
+    },
+    "r2_verification": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R2_EXECUTION_PROPERTY_TRUTH_INDEPENDENT_VERIFY_20261010_V1.json",
+      "git_blob_sha": "286d325e293b39be210b27a31df5b796c073dfd7"
+    },
+    "r3_verification": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R3_EXECUTION_PROPERTY_TRUTH_INDEPENDENT_VERIFY_20261010_V1.json",
+      "git_blob_sha": "443780ad771e8f6bc114257cb7fe07c7a83f1751"
+    },
+    "registry_verification_v5": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_LEAF_REGISTRY_PROPERTY_TRUTH_VERIFY_20261010_V5.json",
+      "git_blob_sha": "2beb411c133193fa39a9ab0aa1c20bface771fc9"
     }
   },
   "semantic_shared_blocker_reconciliation": {
@@ -161,11 +175,11 @@
   },
   "bytes_current_frontier": {
     "path": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-    "observed_git_blob_sha": "c612a238884f13ba79e96b087d1d999635ec183f",
-    "status": "ACTIVE_RESEARCH__CONSERVATIVE_HYPEREXPAND_V30_FRONTIER__SUCCESSOR_READY",
-    "raw_python_source_bytes": 1912465,
-    "qualification": "9890/9890",
-    "next": "RERANK_EXACT_V30_USING_SPENT_NEXT35_ONLY__NEW_PHYSICAL_CUT_BEFORE_FROZEN_NEXT36",
+    "observed_git_blob_sha": "714995cd13bf216f4c9189d77e33edc87fc326e5",
+    "status": "ACTIVE_RESEARCH__CONSERVATIVE_ZETA_V31_FRONTIER__SUCCESSOR_READY",
+    "raw_python_source_bytes": 1909906,
+    "qualification": "10120/10120",
+    "next": "RERANK_EXACT_V31_USING_SPENT_NEXT36_ONLY__NEW_PHYSICAL_CUT_BEFORE_FROZEN_NEXT37",
     "promotion_credit": 0
   }
 }
