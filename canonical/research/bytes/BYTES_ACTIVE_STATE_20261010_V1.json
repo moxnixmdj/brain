@@ -1,42 +1,42 @@
 {
   "schema": "PROJECT_BRAIN_BYTES_ACTIVE_STATE_V1",
-  "status": "ACTIVE_RESEARCH__LAZY_DENSE_MATRIX_SUCCESSOR_FRONTIER__SUCCESSOR_READY",
+  "status": "ACTIVE_RESEARCH__LAZY_MINPOLY_SUCCESSOR_FRONTIER__SUCCESSOR_READY",
   "date": "2026-10-10",
   "mission_lock": "Find the minimum resource-feasible executable description of the required capability set conditional on already-owned Brain substrate.",
   "governing_laws": [
     "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V1.md",
     "canonical/laws/BYTES_RESOURCE_BOUNDED_MINIMUM_MECHANISM_LAW_V1.md"
   ],
-  "source_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_LAZY_DENSE_MATRIX_SUCCESSOR_EXECUTION_20261010_V1.json",
+  "source_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_LAZY_MINPOLY_SUCCESSOR_EXECUTION_20261010_V1.json",
   "exact_symbolic_state": {
-    "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_LAZY_DENSE_MATRIX_SUCCESSOR_EXECUTION_20261010_V1.json",
+    "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_LAZY_MINPOLY_SUCCESSOR_EXECUTION_20261010_V1.json",
     "status": "FRESH_MEASURED_PHYSICAL_RESEARCH_CANDIDATE__NOT_PROMOTED",
-    "raw_python_source_bytes": 6415500,
-    "B_exec_raw_python_source_bytes": 6418260,
+    "raw_python_source_bytes": 6380604,
+    "B_exec_raw_python_source_bytes": 6383364,
     "B_verify_semantic_digest_raw_bytes": 1358,
-    "python_files": 291,
-    "final_untouched_qualification": "3680/3680",
-    "stock_donor_positive_control": "3680/3680",
-    "clean_room_execution": "3680/3680",
-    "archive_replay": "3680/3680",
-    "manifest_sha256": "75d6a2c014055b856c14722d15db87016f2bd96b6397cfedc5c65fe51a24b232",
-    "comparable_archive_bytes": 1114444,
-    "comparable_archive_sha256": "4303ecf33d9a1bde59219ce678d10ae6be87c6b955081968498f96342efd756a",
-    "raw_improvement_vs_previous_frontier_bytes": 59230,
-    "comparable_xz_improvement_vs_same_recipe_predecessor_bytes": 9420,
+    "python_files": 288,
+    "final_untouched_qualification": "3910/3910",
+    "stock_donor_positive_control": "3910/3910",
+    "clean_room_execution": "3910/3910",
+    "archive_replay": "3910/3910",
+    "manifest_sha256": "a53ed47bd1fea05f89914a42876764a7669d2bfe689ec128362a35adb4cf6d7e",
+    "comparable_archive_bytes": 1108544,
+    "comparable_archive_sha256": "4d6e74a80959b65461980164b5aed32e39c1f62d42ae6142c0023f72055bc30a",
+    "raw_improvement_vs_previous_frontier_bytes": 34896,
+    "comparable_xz_improvement_vs_same_recipe_predecessor_bytes": 5900,
     "promotion_credit_from_this_record": 0
   },
   "current_bottleneck": {
     "subsystem": "polys",
-    "successor_trace_raw_python_source_bytes": 1321405,
-    "previous_trace_raw_python_source_bytes": 1380639,
-    "last_structural_cut": "MATRIX_DDM_DENSE_BRANCH_LOCAL_IMPORT_BOUNDARY",
+    "successor_trace_raw_python_source_bytes": 1286441,
+    "previous_trace_raw_python_source_bytes": 1321405,
+    "last_structural_cut": "MINPOLY_FALLBACK_BRANCH_LOCAL_IMPORT_BOUNDARY",
     "required_surface": [
       "factor",
       "coefficient",
       "exact roots degree <= 4"
     ],
-    "next_action": "Rerank remaining loaded closure with spent corpora only; freeze a physical cut before touching QUAL_SUCCESSOR_NEXT9_20261010_V1."
+    "next_action": "Rerank remaining zero-execution loaded modules with spent corpora only; freeze a physical cut before touching QUAL_SUCCESSOR_NEXT10_20261010_V1."
   },
   "rejected_do_not_reopen_without_new_evidence": [
     "parameter count as terminal metric",
@@ -68,15 +68,15 @@
   "fresh_local_donor_evidence": "canonical/evidence/BYTES_SYMPY_1_14_DEPENDENCY_CENSUS_20261010_V1.json",
   "execution_reconciliation": {
     "stock_donor_available_in_current_runtime": "SymPy 1.14.0 plus mpmath 1.3.0",
-    "predecessor_6474730_byte_candidate_superseded": true,
-    "fresh_candidate_raw_python_source_bytes": 6415500,
-    "fresh_candidate_B_exec_raw_python_source_bytes": 6418260,
-    "untouched_qualification": "3680/3680",
-    "stock_donor_positive_control": "3680/3680",
-    "clean_room_execution": "3680/3680",
-    "archive_replay": "3680/3680",
-    "action_taken": "Localized DDM/dense imports to dense/list/Bird branches, physically removed DDM+dense+LLL+typing closure, and qualified on fresh NEXT8.",
-    "physical_next_step": "Continue from the 6,415,500-byte physical candidate and rerank remaining zero-execution imports."
+    "predecessor_6415500_byte_candidate_superseded": true,
+    "fresh_candidate_raw_python_source_bytes": 6380604,
+    "fresh_candidate_B_exec_raw_python_source_bytes": 6383364,
+    "untouched_qualification": "3910/3910",
+    "stock_donor_positive_control": "3910/3910",
+    "clean_room_execution": "3910/3910",
+    "archive_replay": "3910/3910",
+    "action_taken": "Deferred minimal-polynomial imports to the exact surd/nthroot and low-significance algebraic fallback branches, physically removed minpoly plus its now-unreachable package/fraction-field support, and qualified on fresh NEXT9.",
+    "physical_next_step": "Continue from the 6,380,604-byte physical candidate and rerank remaining zero-execution import edges."
   },
   "historical_reported_predecessor": {
     "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_DONOR_SLICE_CHECKPOINT_20261010_V1.json",
@@ -85,13 +85,13 @@
     "qualification": "1854/1854",
     "provenance": "USER_SUPPLIED_TRANSCRIPT_CHECKPOINT"
   },
-  "fresh_execution_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_LAZY_DENSE_MATRIX_SUCCESSOR_EXECUTION_20261010_V1.json",
+  "fresh_execution_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_LAZY_MINPOLY_SUCCESSOR_EXECUTION_20261010_V1.json",
   "next_frozen_qualification": {
-    "id": "QUAL_SUCCESSOR_NEXT9_20261010_V1",
-    "cases": 3910,
-    "seed": 3000001,
-    "per_operation_budget": 340,
-    "corpus_sha256": "f3188c665af2c22aee80ad8293e6869198f9d1fa5df5d64d0c71972ff61387fd",
+    "id": "QUAL_SUCCESSOR_NEXT10_20261010_V1",
+    "cases": 4140,
+    "seed": 3162277,
+    "per_operation_budget": 360,
+    "corpus_sha256": "c20dacc5b6f4ee65e234848051b8c46e7004ca043d75accd83fcd9750b637a72",
     "generator": "canonical/research/bytes/tools/generate_qualification_v1.py",
     "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_CUT",
     "spent": false
@@ -123,15 +123,15 @@
     "generator_sha256": "de6cf261f4e78b010c2454347409a309880066e18f89f7953bb477a7502f59e4",
     "spent": false
   },
-  "previous_fresh_execution_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_LAZY_ALGEBRAICFIELD_SUCCESSOR_EXECUTION_20261010_V1.json",
+  "previous_fresh_execution_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_LAZY_DENSE_MATRIX_SUCCESSOR_EXECUTION_20261010_V1.json",
   "spent_successor_qualification": {
-    "id": "QUAL_SUCCESSOR_NEXT8_20261010_V1",
-    "cases": 3680,
-    "corpus_sha256": "609e173869fda62ec19ac634fc84f2b0b3d110a30d0b3851ed80870038bffc95",
-    "candidate_result": "3680/3680",
-    "stock_donor_replay": "3680/3680",
-    "clean_room_replay": "3680/3680",
-    "archive_replay": "3680/3680",
+    "id": "QUAL_SUCCESSOR_NEXT9_20261010_V1",
+    "cases": 3910,
+    "corpus_sha256": "f3188c665af2c22aee80ad8293e6869198f9d1fa5df5d64d0c71972ff61387fd",
+    "candidate_result": "3910/3910",
+    "stock_donor_replay": "3910/3910",
+    "clean_room_replay": "3910/3910",
+    "archive_replay": "3910/3910",
     "spent": true
   },
   "fresh_falsification_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_NEXT3_FALSIFICATION_20261010_V1.json",
@@ -147,13 +147,13 @@
     "spent": true
   },
   "prior_spent_successor_qualification": {
-    "id": "QUAL_SUCCESSOR_NEXT7_20261010_V1",
-    "cases": 3450,
-    "corpus_sha256": "a891f77a92fc6eb44c299ac89afd3f958d30c9759047804478f9239e158c88ef",
-    "candidate_result": "3450/3450",
-    "stock_donor_replay": "3450/3450",
-    "clean_room_replay": "3450/3450",
-    "archive_replay": "3450/3450",
+    "id": "QUAL_SUCCESSOR_NEXT8_20261010_V1",
+    "cases": 3680,
+    "corpus_sha256": "609e173869fda62ec19ac634fc84f2b0b3d110a30d0b3851ed80870038bffc95",
+    "candidate_result": "3680/3680",
+    "stock_donor_replay": "3680/3680",
+    "clean_room_replay": "3680/3680",
+    "archive_replay": "3680/3680",
     "spent": true
   }
 }
