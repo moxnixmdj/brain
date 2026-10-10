@@ -1,19 +1,19 @@
 {
   "schema": "PROJECT_BRAIN_ESCAPE_PROGRESS_SHARED_GAP_EXECUTABLE_AUDIT_V4_REBASE_VERIFY_20261010_V1",
   "date": "2026-10-10",
-  "status": "PASS__EXACT_BYTE_EQUIVALENCE_TO_INDEPENDENT_4_OF_4_REPLAY__CURRENT_MAIN_DEPENDENCIES_IDENTICAL__ZERO_CREDIT",
+  "status": "INDEPENDENT_SPRITE_PASS__CURRENT_V6_BINDING__EXACT_BRANCH_BYTES__4_OF_4_REGRESSION_PASS__PYCOMPILE_PASS__ZERO_CREDIT",
   "exact_blobs": {
-    "runtime": "f92a557d39bb33cfebc7701b275dba1a4bf442c5",
-    "tests": "5de9d4f12bc8f18a90075e46b192706bd91e721b",
+    "runtime": "61614d3f026f5bf3e68589a5c90f779b63867d84",
+    "tests": "bc36c8fc1f2bb7c3159c60a9ac79afe877d669c4",
     "v3_structural": "14adf2c1a431285a542340a740e27e764edb1ce5",
     "receipt_resolver": "7f4eeeb19def420d0014631b99c5e2dc3a30592e",
     "manifest": "f3a566a982dcd867c583eafd24c6f5dd3baa0530",
-    "binding_v5": "58ab70bfd7e98bdc78d480da197c6a8e41df6d43"
+    "binding_v6": "a6fe5eda7b596d5a24cf75bc9b046bf53f4fe7be"
   },
   "prior_independent_replay": {
     "sprite": "brain-live-runtime-v1-verify-20261008",
     "sprite_id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13",
-    "workspace": "/home/sprite/escape-progress-v4-auth-verify",
+    "workspace": "/home/sprite/escape-progress-v4-v6-verify",
     "tests_passed": 4,
     "tests_failed": 0,
     "py_compile": "PASS"
@@ -22,7 +22,8 @@
     "NO_BINDINGS_STAY_OPEN",
     "EXACT_INDEPENDENT_13_OF_13_CAN_REACH_STRUCTURAL_GATE",
     "SELF_VERIFICATION_REJECTED",
-    "POST_VERIFICATION_BYTE_DRIFT_REJECTED"
+    "POST_VERIFICATION_BYTE_DRIFT_REJECTED",
+    "CURRENT_V6_BINDING_COMPATIBLE"
   ],
   "hard_nonclaims": [
     "NO_REAL_ROW_PROOF_CLOSED",
