@@ -1,38 +1,38 @@
 {
   "schema": "PROJECT_BRAIN_BYTES_ACTIVE_STATE_V1",
-  "status": "ACTIVE_RESEARCH__CONSERVATIVE_ZETA_V31_FRONTIER__SUCCESSOR_READY",
+  "status": "ACTIVE_RESEARCH__TOPLEVEL_FACADE_V32_FRONTIER__SUCCESSOR_READY",
   "date": "2026-10-10",
   "mission_lock": "Find the minimum resource-feasible executable description of the required capability set conditional on already-owned Brain substrate.",
   "governing_laws": [
     "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V1.md",
     "canonical/laws/BYTES_RESOURCE_BOUNDED_MINIMUM_MECHANISM_LAW_V1.md"
   ],
-  "source_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_CONSERVATIVE_ZETA_V31_SUCCESSOR_EXECUTION_20261010_V1.json",
+  "source_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_TOPLEVEL_FACADE_V32_SUCCESSOR_EXECUTION_20261010_V1.json",
   "exact_symbolic_state": {
-    "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_CONSERVATIVE_ZETA_V31_SUCCESSOR_EXECUTION_20261010_V1.json",
+    "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_TOPLEVEL_FACADE_V32_SUCCESSOR_EXECUTION_20261010_V1.json",
     "status": "CURRENT_VERIFIED_BYTES_RESEARCH_FRONTIER__NOT_PROMOTED_TO_OPUS_CAPABILITY",
-    "raw_python_source_bytes": 1909906,
-    "B_exec_raw_python_source_bytes": 1912666,
+    "raw_python_source_bytes": 1844477,
+    "B_exec_raw_python_source_bytes": 1847237,
     "B_verify_semantic_digest_raw_bytes": 1358,
     "python_files": 277,
-    "final_untouched_qualification": "10120/10120",
-    "clean_room_execution": "10120/10120",
-    "archive_replay": "10120/10120",
-    "manifest_sha256": "7378181385754faac46bef85dd647314ed2773e87e2b80b3888eb53ea9f2725a",
-    "durable_archive_bytes": 285480,
-    "durable_archive_sha256": "b30d58d0b1924d6d7cf853e1b7763cff6ec06804080fdd2f6318c03ef85af0da",
-    "raw_improvement_vs_previous_frontier_bytes": 2559,
-    "durable_archive_improvement_vs_previous_frontier_bytes": 620,
+    "final_untouched_qualification": "10350/10350",
+    "clean_room_execution": "10350/10350",
+    "archive_replay": "10350/10350",
+    "manifest_sha256": "ca938743ef2c2660f88daa52f4df6d42b828b0ce3bdcc79c31646ca0e11d7d8c",
+    "durable_archive_bytes": 283140,
+    "durable_archive_sha256": "80df08cb6f966ba21dd76fbcb32a9507175d6ab5a8377d5887a3de6c045ff161",
+    "raw_improvement_vs_previous_frontier_bytes": 65429,
+    "calibrated_same_writer_archive_improvement_vs_previous_frontier_bytes": 2944,
     "promotion_credit_from_this_record": 0
   },
   "current_bottleneck": {
-    "subsystem": "POST_V31_RERANK_PENDING",
-    "last_structural_cut": "CONSERVATIVE_SPENT_NEXT35_ZETA_DOMAIN_EXCLUSION_PROFILE_V31",
+    "subsystem": "POST_V32_RERANK_PENDING",
+    "last_structural_cut": "SPENT_NEXT36_TOPLEVEL_LAZY_FACADE_CLOSURE_V32",
     "required_surface": [
       "complete bounded exact-symbolic route"
     ],
-    "next_action": "Rerank exact V31 using spent NEXT36 only; make a new physical cut before touching QUAL_SUCCESSOR_NEXT37_20261010_V1.",
-    "note": "At ~1.910 MB raw, remaining cuts are increasingly branch-local. Preserve all root/numeric/limit/core mechanisms and fail closed on excluded special-function domains."
+    "next_action": "Rerank exact V32 using spent NEXT37 only; make a new physical cut before touching QUAL_SUCCESSOR_NEXT38_20261010_V1.",
+    "note": "Top-level SymPy public facade is bounded to the 16 bindings actually resolved across all spent NEXT36 cases; finite non-use is not universal proof."
   },
   "rejected_do_not_reopen_without_new_evidence": [
     "parameter count as terminal metric",
@@ -67,14 +67,14 @@
   "fresh_local_donor_evidence": "canonical/evidence/BYTES_SYMPY_1_14_DEPENDENCY_CENSUS_20261010_V1.json",
   "execution_reconciliation": {
     "stock_donor_available_in_current_runtime": "SymPy 1.14.0 plus mpmath 1.3.0",
-    "predecessor_1912465_byte_candidate_superseded": true,
-    "fresh_candidate_raw_python_source_bytes": 1909906,
-    "fresh_candidate_B_exec_raw_python_source_bytes": 1912666,
-    "untouched_qualification": "10120/10120",
-    "clean_room_execution": "10120/10120",
-    "archive_replay": "10120/10120",
-    "action_taken": "Using spent NEXT35, fail-closed five zeta-family evaluation bodies while preserving module/classes/dispatch. Passed full spent NEXT35 and fresh NEXT36 on candidate/copy/archive.",
-    "physical_next_step": "Continue from 1,909,906 bytes using spent NEXT36 only; rerank before selecting the next cut."
+    "predecessor_1909906_byte_candidate_superseded": true,
+    "fresh_candidate_raw_python_source_bytes": 1844477,
+    "fresh_candidate_B_exec_raw_python_source_bytes": 1847237,
+    "untouched_qualification": "10350/10350",
+    "clean_room_execution": "10350/10350",
+    "archive_replay": "10350/10350",
+    "action_taken": "Merged canonical V31 zeta cut with a full-spent-NEXT36 measured top-level lazy-facade closure: 903 bindings reduced to the 16 actually resolved; passed spent NEXT36 and fresh canonical NEXT37 on candidate/copy/archive.",
+    "physical_next_step": "Continue from 1,844,477 bytes using spent NEXT37 only; rerank before selecting the next cut."
   },
   "historical_reported_predecessor": {
     "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_DONOR_SLICE_CHECKPOINT_20261010_V1.json",
@@ -83,35 +83,31 @@
     "qualification": "1854/1854",
     "provenance": "USER_SUPPLIED_TRANSCRIPT_CHECKPOINT"
   },
-  "fresh_execution_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_CONSERVATIVE_ZETA_V31_SUCCESSOR_EXECUTION_20261010_V1.json",
+  "fresh_execution_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_TOPLEVEL_FACADE_V32_SUCCESSOR_EXECUTION_20261010_V1.json",
   "next_frozen_qualification": {
-    "id": "QUAL_SUCCESSOR_NEXT37_20261010_V1",
-    "cases": 10350,
-    "seed": 6082762,
-    "per_operation_budget": 900,
-    "corpus_sha256": "3924da71e686ef91622401e0801b74639361e6d8d756a196e15324708ca9da4e",
+    "id": "QUAL_SUCCESSOR_NEXT38_20261010_V1",
+    "cases": 10580,
+    "seed": 6180340,
+    "per_operation_budget": 920,
+    "corpus_sha256": "dcdbf5a3c76cd61c338a07861b8688bb4691e6f31d1b52d12fba9ad0b2f0dc3e",
     "generator": "canonical/research/bytes/tools/generate_qualification_v1.py",
     "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT",
     "spent": false,
-    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT37_20261010_V1.jsonl",
-    "library_file_id": "libfile_85bf92edeef08191927d6ad17d9257e9"
+    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT38_20261010_V1.jsonl",
+    "library_file_id": "libfile_c156706387748191a0d520a6bdf15e58"
   },
   "durable_artifact_persistence": {
     "candidate_manifest_and_measurements": "PERSISTED_IN_CANONICAL_GITHUB_EVIDENCE",
-    "reconstruction_tools": [
-      "canonical/research/bytes/tools/rebuild_candidate_v30.py",
-      "canonical/research/bytes/tools/conservative_zeta_prune_v31.py",
-      "canonical/research/bytes/tools/rebuild_candidate_v31.py"
-    ],
+    "predecessor_reconstruction": "canonical/research/bytes/tools/rebuild_candidate_v31.py",
     "exact_route": "canonical/research/bytes/tools/exact_symbolic_route_v1.py",
     "qualification_generator": "canonical/research/bytes/tools/generate_qualification_v1.py",
     "library_binary_status": "PERSISTED_IN_CHATGPT_LIBRARY",
-    "library_file_id": "libfile_30c1f1b95c40819196b27568c11a025d",
-    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V31_SUCCESSOR_20261010_V1.tar.xz",
-    "library_binary_bytes": 285480,
-    "library_binary_sha256": "b30d58d0b1924d6d7cf853e1b7763cff6ec06804080fdd2f6318c03ef85af0da",
-    "next_frozen_corpus_library_file_id": "libfile_85bf92edeef08191927d6ad17d9257e9",
-    "rule": "GitHub reconstruction/evidence, exact V31 archive, and frozen NEXT37 corpus are durable; capability promotion credit remains zero."
+    "library_file_id": "libfile_dd221fe090a08191afbede55766d9ea1",
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V32_SUCCESSOR_20261010_V1.tar.xz",
+    "library_binary_bytes": 283140,
+    "library_binary_sha256": "80df08cb6f966ba21dd76fbcb32a9507175d6ab5a8377d5887a3de6c045ff161",
+    "next_frozen_corpus_library_file_id": "libfile_c156706387748191a0d520a6bdf15e58",
+    "rule": "GitHub evidence, exact V32 archive, and frozen NEXT38 corpus are durable; capability promotion credit remains zero."
   },
   "predecessor_fresh_execution_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_RECOVERY_EXECUTION_20261010_V1.json",
   "reserved_predecessor_qualification_qual8": {
@@ -121,14 +117,14 @@
     "generator_sha256": "de6cf261f4e78b010c2454347409a309880066e18f89f7953bb477a7502f59e4",
     "spent": false
   },
-  "previous_fresh_execution_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_CONSERVATIVE_HYPEREXPAND_V30_SUCCESSOR_EXECUTION_20261010_V1.json",
+  "previous_fresh_execution_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_CONSERVATIVE_ZETA_V31_SUCCESSOR_EXECUTION_20261010_V1.json",
   "spent_successor_qualification": {
-    "id": "QUAL_SUCCESSOR_NEXT36_20261010_V1",
-    "cases": 10120,
-    "corpus_sha256": "df8c2d19f48522ceb532f1bf397dc23d599220cd8c43a7a8757d8a50ed0b0d87",
-    "candidate_result": "10120/10120",
-    "clean_room_replay": "10120/10120",
-    "archive_replay": "10120/10120",
+    "id": "QUAL_SUCCESSOR_NEXT37_20261010_V1",
+    "cases": 10350,
+    "corpus_sha256": "3924da71e686ef91622401e0801b74639361e6d8d756a196e15324708ca9da4e",
+    "candidate_result": "10350/10350",
+    "clean_room_replay": "10350/10350",
+    "archive_replay": "10350/10350",
     "spent": true
   },
   "fresh_falsification_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_NEXT25_FALSIFICATION_20261010_V1.json",
