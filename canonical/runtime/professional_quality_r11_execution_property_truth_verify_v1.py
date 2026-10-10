@@ -40,7 +40,7 @@ PINS={
  "firewall_scoped_verify":("canonical/verification/PROFESSIONAL_QUALITY_R11_EVALUATION_FIREWALL_SCOPED_VERIFY_20261010_V1.json","346d369a811aa77af02be901a5b04458fb528667"),
  "scope_batch_verify":("canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_SCOPE_BATCH_VERIFY_20261010_V1.json","4c2d40a262f18f34bb35f94b59660d60972d45ef"),
  "firewall_runtime":("canonical/runtime/evaluation_information_firewall_v1.py","11776f87f41c66802a28a417c344cccb394eb2aa"),
- "guard_runtime":("canonical/runtime/professional_quality_r11_execution_guard_v1.py",None),
+ "guard_runtime":("canonical/runtime/professional_quality_r11_execution_guard_v1.py","055402eea98861a57287dde25e2a28cdc2b692b1"),
  "domain_runtime":("canonical/runtime/professional_quality_whole_leaf_domain_equivalence_v1.py","76bf7e1a6f26ff3664ed8c355dff8a688b074159"),
  "batch_runtime":("canonical/runtime/professional_quality_whole_leaf_scope_batch_v1.py","82ab66c7852fc327821b23ff80dd46de3b81525c"),
 }
