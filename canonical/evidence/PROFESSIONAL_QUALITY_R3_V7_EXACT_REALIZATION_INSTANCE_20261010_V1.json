@@ -1,0 +1,130 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R3_V7_EXACT_REALIZATION_INSTANCE_EVIDENCE_V1",
+  "date": "2026-10-10",
+  "status": "EXACT_V7_BOUND_DOCX_REALIZATION_INSTANCE__PRODUCER_AND_INDEPENDENT_REPLAY_PASS__CURRENT_STACK_INSTANCE_ONLY__ZERO_QUALITY_OR_TERMINAL_AUTHORITY",
+  "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+  "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+  "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+  "step_id": "RENDER_EXACT_AUDIENCE_VIEW_AND_BIND_OBSERVATION_CHANNELS",
+  "run_context_sha256": "sha256:4e74da6a85ebf4662d88e770fed0b1c8ad3e9308c9830afe9605dbe458d8a1f0",
+  "goal": "Apply the declared bounded text edit to the generated DOCX and preserve unrelated structure and audience-visible layout outside the localized edit.",
+  "decision_payload": {
+    "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+    "context_id": "PQ_R3_V7_REALIZATION_INSTANCE_20261010_V1",
+    "artifact_format": "docx",
+    "operation": "BOUNDED_EXPLICIT_LOW_LEVEL_TEXT_EDIT",
+    "source_token": "OLD314159",
+    "replacement_token": "NEW314159",
+    "realization_contract": "LOCALIZED_RENDER_PRESERVATION"
+  },
+  "artifact_paths": [
+    "canonical/evidence/pq_r3_v7/source.docx",
+    "canonical/evidence/pq_r3_v7/output.docx"
+  ],
+  "hard_defect_profile_id": "NATIVE_ARTIFACT_RENDER_PRESERVATION_PREFLIGHT_V1",
+  "detected_triggers": [],
+  "producer": {
+    "producer_id": "container-r3-v7-producer-20261010-v1",
+    "producer_evidence_sha256": "9d9dc65dfb3d12f7f2e5737cfd6a4ddaafa7f7f423d88effaa4217382b5bccac",
+    "render_stack_observed": {
+      "libreoffice": "LibreOffice 25.2.3.2 520(Build:2)",
+      "pdftoppm": "pdftoppm version 25.06.0"
+    },
+    "structural_verdict": {
+      "pass": true,
+      "changed_members": ["word/document.xml"]
+    },
+    "visual_verdict": {
+      "pass": true,
+      "page_count": 1,
+      "changed_page_count": 1,
+      "pages": [{
+        "pass": true,
+        "changed_pixels": 1669,
+        "total_pixels": 861696,
+        "pixel_fraction": 0.0019368779708853238,
+        "bbox": [120,100,281,118],
+        "bbox_fraction": 0.003363135026737968,
+        "size": [816,1056]
+      }],
+      "max_pixel_fraction": 0.0019368779708853238,
+      "max_bbox_fraction": 0.003363135026737968
+    }
+  },
+  "independent_replay": {
+    "independent_verifier_id": "python-r3-v7-independent-replay-20261010-v1",
+    "producer_verifier_distinct": true,
+    "structural_replay": {
+      "changed_members": ["word/document.xml"],
+      "target_replacement_exact": true,
+      "unrelated_zip_members_byte_identical": true,
+      "source_semantic_token": "OLD314159",
+      "output_semantic_token": "NEW314159",
+      "unchanged_text_preserved": true
+    },
+    "render_replay": {
+      "libreoffice": "LibreOffice 25.2.3.2 520(Build:2)",
+      "pdftoppm": "pdftoppm version 25.06.0",
+      "page_count": 1,
+      "page_size": [816,1056],
+      "changed_pixels": 1669,
+      "pixel_fraction": 0.0019368779708853238,
+      "bbox": [120,100,281,118],
+      "bbox_fraction": 0.003363135026737968,
+      "thresholds": {
+        "pixel_delta_threshold": 8,
+        "max_changed_pixel_fraction": 0.025,
+        "max_changed_bounding_box_fraction": 0.1
+      },
+      "localized_visible_change_pass": true,
+      "producer_metric_match": true
+    }
+  },
+  "artifacts": {
+    "source_docx_sha256": "1db684b36a66b59f5a8a748036f21a9b7b4e4ff83db6904adfa34137089eb94e",
+    "output_docx_sha256": "41f2d30471a671d77cecf885b5f8c20409ca736616925221ec371761cfa21777",
+    "source_pdf_sha256": "72bc9bdee2154d591212cf6469828ec88d03304996a917ecf12ecb09c0eef3a7",
+    "output_pdf_sha256": "fc37a0b81c4f020075d3d6cf45b1c0422402290c0c4622ded84caf827b775d8c",
+    "source_page_png_sha256": ["314dc1a10dd9242046d082ab38c826912e9c8a5c143a96d0e2a3e13c80264f94"],
+    "output_page_png_sha256": ["574681221aeb67a60a67a794d44ebb3e9265e7548088176707b2d675ab8a2e88"],
+    "source_docx_bytes": 36696,
+    "output_docx_bytes": 36697,
+    "source_pdf_bytes": 25506,
+    "output_pdf_bytes": 25622
+  },
+  "durable_raw_bundle": {
+    "library_path": "/Brain Evidence/Professional Quality/R3/PQ_R3_V7_REALIZATION_INSTANCE_20261010_V1.zip",
+    "library_file_id": "libfile_297071cc89788191a6ee1b3984f952c7",
+    "file_id": "file_00000000898081f4b4e907a5dffc9111",
+    "bytes": 256875,
+    "sha256": "d617dc6a3dc28ebaa89c16ee1928eebc525143bf8e6f820d3fa13a24424b8978",
+    "contents": ["source.docx","output.docx","source.pdf","output.pdf","source_page_1.png","output_page_1.png","producer_evidence.json"]
+  },
+  "claim_scope": {
+    "kind": "EXACT_SINGLE_V7_BOUND_DOCX_BOUNDED_TEXT_EDIT_REALIZATION_INSTANCE",
+    "page_count": 1,
+    "source_token": "OLD314159",
+    "output_token": "NEW314159",
+    "pixel_delta_threshold": 8,
+    "max_changed_pixel_fraction": 0.025,
+    "max_changed_bounding_box_fraction": 0.1,
+    "observed_changed_pixel_fraction": 0.0019368779708853238,
+    "observed_changed_bbox_fraction": 0.003363135026737968,
+    "visible_change_required": true,
+    "unrelated_zip_members_byte_identical": true
+  },
+  "hard_nonclaims": [
+    "NO_GENERIC_RENDERER_VERSION_TRANSPORT",
+    "NO_PINNED_2026_10_02_RENDER_STACK_IDENTITY_CLAIM",
+    "NO_ARBITRARY_SEMANTIC_TARGET_CORRECTNESS",
+    "NO_WHOLE_OPEN_ENDED_NATIVE_ARTIFACT_CONTRACT_SCOPE_EQUIVALENCE",
+    "NO_GLOBAL_R3_ROOT_CLOSURE",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
