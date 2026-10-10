@@ -57,6 +57,18 @@ class Tests(unittest.TestCase):
         self.assertFalse(out["policy_adequacy_authority"])
         self.assertFalse(out["terminal_authority"])
 
+    def test_tlac_mrel_bounded_sense_dispatches(self):
+        with patch(
+            "canonical.runtime.semantic_truth_dispatch_v1.evaluate_tlac_mrel_bounded_sense",
+            return_value={"pass": True, "predicate_truth": "TRUE"},
+        ) as fn:
+            out = evaluate({
+                "truth_kind": "TLAC_MREL_BOUNDED_SENSE",
+                "predicate_id": "x",
+            })
+        self.assertTrue(out["pass"])
+        fn.assert_called_once()
+
     def test_absent_kind_preserves_legacy_path(self):
         with patch(
             "canonical.runtime.semantic_truth_dispatch_v1.evaluate_legacy",
