@@ -24,12 +24,12 @@
   "optimization_precedence": "EFFICIENCY_OPTIMIZATION_MUST_PRESERVE_SEMANTIC_CAPABILITY_FUTURE_OPTION_VALUE_AND_RECONSTRUCTIBILITY__CURRENT_DOMINANCE_IS_NOT_DELETION_AUTHORITY",
   "current_development_scheduler": {
     "path": "canonical/governance/CURRENT_DEVELOPMENT_SCHEDULER.json",
-    "activation": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V9.json",
-    "primary_runtime": "canonical/runtime/capability_parallel_frontier_v1.py",
-    "primary_entrypoint": "plan_current_parallel_frontier",
+    "activation": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V10.json",
+    "primary_runtime": "canonical/runtime/capability_parallel_frontier_post_composition_v1.py",
+    "primary_entrypoint": "plan_current_post_composition_frontier",
     "scalar_fallback_runtime": "canonical/runtime/capability_first_live_scheduler_v1.py",
     "status": "ACTIVE_PRIMARY_CAPABILITY_FIRST_PARALLEL_FRONTIER_SCHEDULER__POST_PROFESSIONAL_12_OF_12_COMPOSITION_FRONTIER_BOUND",
-    "observed_git_blob_sha": "1b962250e619ed59365949d4e3859d22b413cd56"
+    "observed_git_blob_sha": "02f0776503d13f1e7c6c9e9ed68a6704f017c5a2"
   },
   "scheduler_precedence": "REAL_MISSION_CAPABILITY_RESOURCE_PARETO_LEVERAGE_IS_PRIMARY__SAFE_NONCONFLICTING_PARALLELISM_MINIMIZES_WALL_CLOCK__CURRENTNESS_AND_DEPENDENCY_GATES_PRECEDE_SELECTION__DIMENSIONWISE_PARETO_DOMINANCE_PRECEDES_ANY_SCALAR_TRADEOFF__SCALARIZATION_REQUIRES_PROVED_TRADEOFF_CONTRACT__CURRENT_R2_SHARED_CAUSE_FANOUT_IS_SECONDARY_DISCRIMINATION_SIGNAL__OPUS_5_5_CHECKPOINT_WORK_IS_TERTIARY_AUDIT__EXPLICIT_NEW_PRIMITIVE_CLAIMS_REQUIRE_REUSE_FIRST_EXHAUSTION_PROOF",
   "current_professional_quality_execution": {
@@ -46,13 +46,13 @@
   },
   "current_parallel_frontier_control": {
     "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
-    "observed_git_blob_sha": "49fb778f549f75d0cb3a8bdfbd38807909a4aef2",
-    "status": "POST_COMPOSITION_FRONTIER_CURRENT__PROFESSIONAL_WHOLE_LEAF_DOMAIN_EVIDENCE_READY__READ_ONLY_PARALLELISM__NO_FULL_EXECUTION_PLAN_AUTHORITY",
+    "observed_git_blob_sha": "26d91f7ea78a6345ca03c4a0b6f2f8ea30f80eb5",
+    "status": "POST_COMPOSITION_FRONTIER_CURRENT__ESCAPE_V5_CURRENTNESS_RECONCILED__PROFESSIONAL_WHOLE_LEAF_DOMAIN_EVIDENCE_READY__READ_ONLY_PARALLELISM__NO_FULL_EXECUTION_PLAN_AUTHORITY",
     "binding": "MUTABLE_CURRENT_PATH_IDENTITY__STALE_SOURCE_BYTES_FAIL_CLOSED_AT_CALL_TIME"
   },
   "current_residual_reuse_classification": {
     "path": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
-    "observed_git_blob_sha": "2c3f4c6194c824163b0cd7eec8e32dfb3961551c",
+    "observed_git_blob_sha": "d121b88629076770ec13361ef6cb61d942611395",
     "status": "REUSE_FIRST__PROFESSIONAL_COMPOSITION_CLOSED_AS_ADMISSIBILITY__DOMAIN_EVIDENCE_AND_FULL_REGRESSION_NEXT__ZERO_CREDIT"
   }
 }
