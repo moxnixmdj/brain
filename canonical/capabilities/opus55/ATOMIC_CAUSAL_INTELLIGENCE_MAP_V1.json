@@ -320,10 +320,10 @@
     "cases": 6
   },
   "bytes_minimization_control": {
-    "status": "ACTIVE__LAZY_ALGEBRAICFIELD_SUCCESSOR_BYTE_FRONTIER__ZERO_CAPABILITY_CREDIT_FROM_RESEARCH_CHECKPOINT_ALONE",
+    "status": "ACTIVE__LAZY_DENSE_MATRIX_SUCCESSOR_BYTE_FRONTIER__ZERO_CAPABILITY_CREDIT_FROM_RESEARCH_CHECKPOINT_ALONE",
     "law": "canonical/laws/BYTES_RESOURCE_BOUNDED_MINIMUM_MECHANISM_LAW_V1.md",
     "white_box_law": "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V1.md",
-    "current_research_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_LAZY_ALGEBRAICFIELD_SUCCESSOR_EXECUTION_20261010_V1.json",
+    "current_research_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_LAZY_DENSE_MATRIX_SUCCESSOR_EXECUTION_20261010_V1.json",
     "objective": "MINIMUM_RESOURCE_FEASIBLE_EXECUTABLE_DESCRIPTION_CONDITIONAL_ON_ALREADY_OWNED_BRAIN_SUBSTRATE",
     "accounting": [
       "B_EXEC",
@@ -339,34 +339,34 @@
       "LARGER_MODULE_ONLY_IF_REQUIRED"
     ],
     "global_rule": "OPTIMIZE_JOINT_DEPENDENCY_CLOSED_MECHANISM_COVER__COUNT_SHARED_SUBSTRATE_ONCE",
-    "current_exact_symbolic_bottleneck": "POLYS__SUCCESSOR_TRACE_RAW_1380639__FACTOR__COEFFICIENT__EXACT_ROOTS_DEGREE_LE_4",
+    "current_exact_symbolic_bottleneck": "POLYS__SUCCESSOR_TRACE_RAW_1321405__FACTOR__COEFFICIENT__EXACT_ROOTS_DEGREE_LE_4",
     "truth_boundary": "FRESH_PHYSICAL_BYTE_FRONTIER_MEASURED__NO_OPUS_FAMILY_PROMOTION_CREDIT__NO_UNIVERSAL_MINIMUM_CLAIM",
     "current_fresh_exact_symbolic_candidate": {
-      "package_raw_python_source_bytes": 6474730,
-      "B_exec_raw_python_source_bytes": 6477490,
+      "package_raw_python_source_bytes": 6415500,
+      "B_exec_raw_python_source_bytes": 6418260,
       "B_verify_semantic_digest_raw_bytes": 1358,
-      "qualification": "3450/3450",
-      "stock_donor_positive_control": "3450/3450",
-      "clean_room_execution": "3450/3450",
-      "archive_replay": "3450/3450",
-      "manifest_sha256": "a83b7a9e5e678e96f057144a500d7c772b3c45cdd416e21bcaeb706500d14694",
+      "qualification": "3680/3680",
+      "stock_donor_positive_control": "3680/3680",
+      "clean_room_execution": "3680/3680",
+      "archive_replay": "3680/3680",
+      "manifest_sha256": "75d6a2c014055b856c14722d15db87016f2bd96b6397cfedc5c65fe51a24b232",
       "promotion_credit": 0
     },
     "latest_structural_cut": {
-      "id": "POLYS_GAUSSIAN_ALGEBRAICFIELD_BRANCH_LOCAL_IMPORT",
-      "removed_raw_file_bytes": 23051,
-      "net_package_reduction_bytes": 23043,
-      "removed_files": 1,
-      "causal_result": "ALGEBRAICFIELD_CONVERSION_BRANCH_NOT_INVOKED_BY_BOUNDED_GAUSSIAN_ROUTE"
+      "id": "MATRIX_DDM_DENSE_BRANCH_LOCAL_IMPORT_BOUNDARY",
+      "removed_raw_file_bytes": 59536,
+      "net_package_reduction_bytes": 59230,
+      "removed_files": 4,
+      "causal_result": "DENSE_DDM_BIRD_LLL_CLOSURE_NOT_REACHED_BY_BOUNDED_ROUTE"
     },
     "previous_fresh_frontier": {
-      "raw_python_source_bytes": 6497773,
-      "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_NOIPOLYS_SUCCESSOR_EXECUTION_20261010_V1.json"
+      "raw_python_source_bytes": 6474730,
+      "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_LAZY_ALGEBRAICFIELD_SUCCESSOR_EXECUTION_20261010_V1.json"
     },
     "next_frozen_qualification": {
-      "id": "QUAL_SUCCESSOR_NEXT8_20261010_V1",
-      "cases": 3680,
-      "corpus_sha256": "609e173869fda62ec19ac634fc84f2b0b3d110a30d0b3851ed80870038bffc95",
+      "id": "QUAL_SUCCESSOR_NEXT9_20261010_V1",
+      "cases": 3910,
+      "corpus_sha256": "f3188c665af2c22aee80ad8293e6869198f9d1fa5df5d64d0c71972ff61387fd",
       "spent": false
     },
     "current_falsification_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_NEXT3_FALSIFICATION_20261010_V1.json",
