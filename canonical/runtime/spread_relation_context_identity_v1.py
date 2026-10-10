@@ -170,7 +170,8 @@ def resolve_occurrence(
         rel_start=start-offset
         rel_end=end-offset
         local=_window(sentence,rel_start,rel_end)
-        if _NEG.search(local[max(0,rel_start-32):min(len(local),rel_end+32)]):
+        neg_window=sentence[max(0,rel_start-32):min(len(sentence),rel_end+32)]
+        if _NEG.search(neg_window):
             return _base("UNRESOLVED__NEGATED_OR_NEGATIVE_LOCAL_CONTEXT",sentence=sentence,source_span=[start,end])
 
         bidask=_bid_ask_signature(local)
