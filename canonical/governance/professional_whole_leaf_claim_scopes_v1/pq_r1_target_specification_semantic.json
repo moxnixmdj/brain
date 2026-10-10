@@ -1,0 +1,44 @@
+{
+  "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+  "claim": {
+    "authority_id": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_WHOLE_LEAF",
+    "claim_id": "79568c8dff305081906606073c1b3a7d3f78d93a4df2cd48a45ca475f3ca5f14",
+    "claim_kind": "PROPERTY_CERTIFICATE",
+    "epoch": "2026-10-10T15:55:32Z",
+    "mission_blob_sha": "13c470645b037bbb46245c687dd35197b420d51a",
+    "scope_sha256": "d130c980813f2e9572da6bd463c1d3930e9d4d21c0937f78636433277d220b88",
+    "semantics_sha256": "ec919ae209ce206ce8ac47f5973848f8d447f1940658e9e63654eaae9908dde7",
+    "target_predicate_sha256": "4967b35be044567ae9fbcd01f2443996dc675f3154fd386790f79301ae9cff09",
+    "terminal_credit_delta": 0
+  },
+  "epoch": "2026-10-10T15:55:32Z",
+  "kind": "SEMANTIC",
+  "leaf_acceptance": "DOMAIN_SPECIFIC_CLAIM_SEMANTICS_GROUNDING_SCOPE_UNCERTAINTY_AND_ALL_ROOT_RELEVANT_DEFEATERS_RESOLVED_WITH_TYPED_EVIDENCE",
+  "leaf_id": "PQ::R1_TARGET_SPECIFICATION::SEMANTIC",
+  "root_id": "R1_TARGET_SPECIFICATION",
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_WHOLE_LEAF_CLAIM_SCOPE_V1",
+  "scope_definition": {
+    "domain_definition": {
+      "admissibility_basis": "FROZEN_BEHAVIOR_SUBJECT_ROOT_CONTRACT_LEAF_OBLIGATION_AND_ACCEPTANCE",
+      "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+      "exclusions": [],
+      "filters": [],
+      "kind": "SEMANTIC",
+      "leaf_acceptance": "DOMAIN_SPECIFIC_CLAIM_SEMANTICS_GROUNDING_SCOPE_UNCERTAINTY_AND_ALL_ROOT_RELEVANT_DEFEATERS_RESOLVED_WITH_TYPED_EVIDENCE",
+      "leaf_id": "PQ::R1_TARGET_SPECIFICATION::SEMANTIC",
+      "leaf_obligation": "PROVE_DOMAIN_SEMANTIC_SUFFICIENCY_FOR_R1_TARGET_SPECIFICATION",
+      "quantifier": "FOR_ALL_ADMISSIBLE_LEAF_INPUTS",
+      "root_contract": "Freeze objective, audience, hard constraints, plausible interpretations, target construct and claim scope; block goal substitution and unresolved decision-relevant ambiguity.",
+      "root_id": "R1_TARGET_SPECIFICATION",
+      "scope_relation": "EXACT_WHOLE_ADMISSIBLE_LEAF_DOMAIN",
+      "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+      "subject_kind": "DECLARED_SYSTEM",
+      "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e"
+    },
+    "domain_schema_id": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_WHOLE_LEAF_DOMAIN_V1",
+    "entire_admissible_leaf_domain": true
+  },
+  "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+  "subject_kind": "DECLARED_SYSTEM",
+  "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e"
+}
