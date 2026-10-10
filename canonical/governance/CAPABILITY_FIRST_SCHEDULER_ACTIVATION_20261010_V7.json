@@ -12,13 +12,14 @@
   },
   "live_scheduler": {
     "path": "canonical/runtime/capability_first_live_scheduler_v1.py",
-    "git_blob_sha": "4d4936d7fa75afd533e09804f728bfa54f473b87",
+    "git_blob_sha": "a45740441a8bfbbab315ed07c39ca54079ef0779",
     "primary_entrypoint": "rank_live_work",
     "score_contract_path": "canonical/governance/LIVE_WORK_SCORE_CALIBRATION_CONTRACT_20261010_V1.json",
-    "score_contract_git_blob_sha": "2446bc1f551326eb78cc9b94a418d4ce65971c8c",
+    "score_contract_git_blob_sha": "1b8a9cbb14dc70de35c0acd12573593488978670",
     "current_frontier_path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
-    "current_frontier_git_blob_sha": "734c93f3dbe013cb33719ffc7cd4882357bbe95b",
-    "fail_closed_without_complete_common_calibration": true
+    "current_frontier_git_blob_sha": "00dac12b83774e4e0f96b74e5bc52cd1ffb97476",
+    "fail_closed_without_complete_common_calibration": true,
+    "currentness_gate": "REHASH_ALL_BOUND_FRONTIER_SOURCE_BYTES_AT_INVOCATION__REQUIRE_EXACT_ELIGIBLE_CANDIDATE_SET__REQUIRE_SELECTION_AUTHORIZED"
   },
   "primary_work_rule": {
     "objective": "MAXIMIZE_REUSABLE_VERIFIED_CAPABILITY_GENERALIZATION_RELIABILITY_AND_EFFICIENCY_PER_RESOURCE",
@@ -39,7 +40,7 @@
     "per_metric_evidence_required": true,
     "independent_verification_required": true,
     "current_live_selection_authorized": false,
-    "current_reason": "CURRENT_FRONTIER_BOUND_BUT_COMMON_CALIBRATION_AND_ALL_METRIC_EVIDENCE_ARE_NOT_YET_BOUND"
+    "current_reason": "CURRENT_FRONTIER_BOUND_AND_CURRENTNESS_GATE_VERIFIED__COMMON_CALIBRATION_AND_ALL_METRIC_EVIDENCE_NOT_YET_BOUND__SELECTION_REMAINS_UNAUTHORIZED"
   },
   "current_frontier_truth": {
     "professional": "R1_R2_R3_R4_R5_V7_BOUND__5_OF_12__R6_NEXT",
@@ -64,5 +65,10 @@
     "capability_credit_delta": 0,
     "ownership_credit_delta": 0,
     "terminal_credit_delta": 0
+  },
+  "independent_verification": {
+    "path": "canonical/verification/CAPABILITY_FIRST_LIVE_SCHEDULER_V7_INDEPENDENT_VERIFY_20261010_V1.json",
+    "git_blob_sha": "d0b314e8d22d16c4d3a6010df077e37611bb7c2d",
+    "status": "PASS__INDEPENDENT_SPRITE__PYCOMPILE_PASS__9_OF_9_FOCUSED_TESTS_PASS__ZERO_CREDIT"
   }
 }
