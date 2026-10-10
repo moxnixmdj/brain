@@ -114,7 +114,7 @@
   },
   "live_activation_snapshot": {
     "path": "canonical/governance/TB_SCIENCE_RANK19_LIVE_ACTIVATION_SNAPSHOT_20261010_V1.json",
-    "git_blob_sha": "657b2144714d881fc30a0a1d8d988c903029ffdc",
+    "git_blob_sha": "f6e401996fcb042be2cf3573dfcd5f4e688573da",
     "workflow_run_id": 38038077030,
     "workflow_job_id": 114172615158,
     "last_observed_task_read": false,
