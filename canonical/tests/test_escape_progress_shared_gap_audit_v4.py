@@ -10,7 +10,8 @@ from canonical.runtime import escape_progress_shared_gap_audit_v4 as v4
 
 ROOT=Path(__file__).resolve().parents[2]
 M=json.loads((ROOT/"canonical/governance/ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_20261010_V2.json").read_text())
-B=json.loads((ROOT/"canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V6.json").read_text())
+BINDING_PATH=v4._current_binding_path(ROOT)
+B=json.loads(BINDING_PATH.read_text())
 
 def _blob(data):
     return hashlib.sha1(b"blob "+str(len(data)).encode()+bytes([0])+data).hexdigest()
@@ -77,3 +78,54 @@ def test_post_verification_proof_byte_drift_is_rejected():
         out=v4.audit(M,B,binds,repo_root=root)
         assert out["cc_r3_proved"] is False
         assert any(x.startswith(oid+":ROW_PROOF_BYTE_BINDING_INVALID:") for x in out["authentication_errors"])
+
+
+def test_audit_repo_resolves_one_current_classifier_binding():
+    classifier=json.loads((ROOT/"canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json").read_text())
+    rows={x["residual_id"]:x for x in classifier["classifications"]}
+    expected=rows["ESCAPE_GAP_A_ACQUISITION_TOTALITY"]["existing_binding"]
+    assert expected==rows["ESCAPE_GAP_B_INTERNAL_ROUTE_STRICT_PROGRESS"]["existing_binding"]
+    out=v4.audit_repo(ROOT)
+    assert out["pass"] is True
+    assert out["cc_r3_proved"] is False
+    assert out["current_binding_path"]==expected
+
+
+def test_current_binding_divergence_fails_closed():
+    with tempfile.TemporaryDirectory() as td:
+        root=Path(td)
+        gov=root/"canonical/governance"
+        gov.mkdir(parents=True)
+        classifier={
+            "classifications":[
+                {"residual_id":"ESCAPE_GAP_A_ACQUISITION_TOTALITY","existing_binding":"canonical/governance/A.json"},
+                {"residual_id":"ESCAPE_GAP_B_INTERNAL_ROUTE_STRICT_PROGRESS","existing_binding":"canonical/governance/B.json"},
+            ]
+        }
+        (gov/"CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json").write_text(json.dumps(classifier))
+        try:
+            v4._current_binding_path(root)
+        except ValueError as exc:
+            assert str(exc)=="CURRENT_GAP_BINDING_DIVERGENCE"
+        else:
+            raise AssertionError("divergent Gap A/B current bindings must fail closed")
+
+
+def test_current_binding_path_escape_fails_closed():
+    with tempfile.TemporaryDirectory() as td:
+        root=Path(td)
+        gov=root/"canonical/governance"
+        gov.mkdir(parents=True)
+        classifier={
+            "classifications":[
+                {"residual_id":"ESCAPE_GAP_A_ACQUISITION_TOTALITY","existing_binding":"../escape.json"},
+                {"residual_id":"ESCAPE_GAP_B_INTERNAL_ROUTE_STRICT_PROGRESS","existing_binding":"../escape.json"},
+            ]
+        }
+        (gov/"CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json").write_text(json.dumps(classifier))
+        try:
+            v4._current_binding_path(root)
+        except ValueError as exc:
+            assert str(exc)=="CURRENT_GAP_BINDING_PATH_INVALID"
+        else:
+            raise AssertionError("current binding path escape must fail closed")
