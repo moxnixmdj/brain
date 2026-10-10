@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_EXECUTABLE_REFINEMENT_VERIFIER_EXECUTABLE_REFINEMENT_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXECUTABLE_REFINEMENT_VERIFIER_BRANCH_SURFACE_SEMANTIC_REFINEMENT_VERIFIED",
+  "subject": {
+    "path": "canonical/runtime/executable_refinement_verifier_v1.py",
+    "git_blob_sha": "65569581716d5378929a900fa0a2045e1785fabf",
+    "function": "verify_certificate"
+  },
+  "abstract_spec": {
+    "path": "canonical/governance/EXECUTABLE_REFINEMENT_VERIFIER_ABSTRACT_SPEC_20261010_V1.json",
+    "git_blob_sha": "996356789764935d6171efe5b3d2d6abafd269a4"
+  },
+  "checker": {
+    "path": "canonical/runtime/executable_refinement_verifier_refinement_checker_v1.py",
+    "git_blob_sha": "fab39288848259af575498dc9ba52652358b7cfa"
+  },
+  "checker_tests": {
+    "path": "canonical/tests/test_executable_refinement_verifier_refinement_checker_v1.py",
+    "git_blob_sha": "2008d13676d7108f1f094de37efdf7c565fe0a5f",
+    "tests_run": 5,
+    "passed": 5,
+    "failed": 0,
+    "errors": 0,
+    "adversarial_cases": [
+      "CURRENT_SUBJECT_PASS",
+      "MISSING_REASON_SPEC_REJECTED",
+      "SUBJECT_BLOB_DRIFT_REJECTED",
+      "ALLOWED_CONSTANT_MUTATION_REJECTED",
+      "SUCCESS_STATUS_MUTATION_REJECTED"
+    ]
+  },
+  "execution": {
+    "carrier": "SPRITE__brain-live-runtime-v1-verify-20261008",
+    "carrier_id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13",
+    "workdir": "/home/sprite/unified-fabric-current-byte-verify/livebrain",
+    "incremental_spend_usd": 0,
+    "checker_tests": "5_OF_5_PASS_BEFORE_CARRIER_ONLY_RECEIPT_EXTRACTION_EDIT",
+    "assurance_level": "STATIC_FAIL_CENSUS_PLUS_REJECTION_AND_ACCEPTANCE_WITNESS_EXECUTION",
+    "rejection_witness_count": 42,
+    "acceptance_witness_count": 18,
+    "witness_count": 60,
+    "deterministic_checker_receipt_sha256": "312f779f39294d912b09db137c5c01b8cdf2e8f0382b8af1aad4a4b159d890d1",
+    "refinement_verified": true
+  },
+  "claim_scope": "STRUCTURAL_CERTIFICATE_VALIDATION_BRANCH_SURFACE_ONLY",
+  "semantic_refinement_proved": true,
+  "semantic_truth_authority": false,
+  "execution_authority": false,
+  "repository_wide_refinement_proved": false,
+  "transitive_dependency_refinement_proved": false,
+  "terminal_authority": false,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "nonclaims": [
+    "THE_VERIFIER_STILL_DOES_NOT_SELF_CERTIFY_SEMANTIC_REFINEMENT",
+    "NO_EXECUTION_AUTHORITY_GRANTED",
+    "NO_REPOSITORY_WIDE_REFINEMENT_CLAIM"
+  ]
+}
