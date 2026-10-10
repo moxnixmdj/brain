@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R3_V7_ROOT_SUBJECT_BINDING_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_SPRITE_6_OF_6__R3_BOUND_TO_EXACT_V7_SUBJECT_WITH_PROOF_BOUND_RENDER_STEP_AND_PINNED_NATIVE_REALIZATION_SCOPE__ZERO_QUALITY_OR_TERMINAL_CREDIT",
+  "root_id": "R3_REALIZATION_OBSERVATION",
+  "exact_blobs": {
+    "binding": "c49c120a61620d400e372884266b63ec34a054d2",
+    "verifier": "9d2ff75fa8333395d356f841cfe45e3b56d47efe",
+    "tests": "ee5c728ddf099d02465bf714e599afc9a19e27ac",
+    "subject": "1d598bc8757017ceb34928d0df9f5fce859ef868",
+    "execution_profile": "f7e89eafbb691c16d1bdf5b8d295a468d5e3bec5",
+    "proof_bound_step_verification": "b7a9df36780513ad73fd14c6a2756c8474d8434d",
+    "r3_semantic_scope": "1edbd92b4e7b01591162d692f1d4c9b785b4c102",
+    "r3_semantic_verification": "3c9a6f03c9dfb7597cdb7c5ca01e9eaf66a596e0",
+    "native_render_preflight": "b5ddc896811875b59840959e27dbb515265fc9f8",
+    "native_render_public_verification": "1a0b4ca6627aaf28eb25f6990682e87319d14d6d"
+  },
+  "subject": {
+    "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+    "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e"
+  },
+  "replay": {
+    "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/pq-r3-v7-binding-verify",
+    "tests_run": 6,
+    "tests_passed": 6,
+    "tests_failed": 0
+  },
+  "falsification_tests": [
+    "WRONG_SUBJECT_TUPLE_FAILS_CLOSED",
+    "RENDER_STEP_NOT_PROOF_BOUND_FAILS_CLOSED",
+    "R3_SCOPE_WIDENING_FAILS_CLOSED",
+    "PUBLIC_RENDER_VERIFICATION_FAILURE_FAILS_CLOSED",
+    "CANDIDATE_SELF_AUTHORIZATION_FAILS_CLOSED"
+  ],
+  "proves": [
+    "R3_BINDING_USES_EXACT_FROZEN_V7_SUBJECT_TUPLE",
+    "V7_RENDER_AND_OBSERVATION_STEP_REQUIRES_CONTENT_ADDRESSED_INDEPENDENT_STEP_BINDING",
+    "R3_SUPPORT_IS_LIMITED_TO_EXISTING_PINNED_NATIVE_ARTIFACT_RENDER_REALIZATION_SCOPE",
+    "ACTUAL_TASK_EXECUTION_STILL_REQUIRES_FRESH_RUN_CONTEXT_BOUND_STEP_RECEIPT",
+    "CALLER_SUPPLIED_RENDER_PASS_HAS_ZERO_AUTHORITY"
+  ],
+  "hard_nonclaims": [
+    "NO_REAL_TASK_RENDER_STEP_RECEIPT",
+    "NO_ARBITRARY_SEMANTIC_TARGET_CORRECTNESS",
+    "NO_WHOLE_OPEN_ENDED_NATIVE_ARTIFACT_CONTRACT_SCOPE_EQUIVALENCE",
+    "NO_GLOBAL_R3_ROOT_CLOSURE",
+    "NO_SAME_SUBJECT_COMPOSITION_PASS",
+    "NO_LIVE_DEFAULT_PROMOTION",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "root_subject_binding_authority": true,
+  "semantic_truth_authority": false,
+  "execution_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
