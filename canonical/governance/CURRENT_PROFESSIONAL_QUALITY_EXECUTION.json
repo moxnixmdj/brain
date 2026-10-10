@@ -539,7 +539,14 @@
       "current_defeater_catalog_git_blob_sha": "8b92e5cf76f767054f55414b87014e03d43460b8",
       "catalog_explicit_complete_claim": false,
       "catalog_hard_nonclaim": "NO_CLAIM_DEFEATER_SET_COMPLETE",
-      "consequence": "DO_NOT_GRANT_ANY_SEMANTIC_LEAF_PROPERTY_TRUTH_FROM_CURRENT_CATALOG_ALONE__SEEK_STRONGER_CLAIM_SCOPED_COMPLETENESS_OR_TYPED_EVIDENCE_PROOF"
+      "consequence": "DO_NOT_GRANT_ANY_SEMANTIC_LEAF_PROPERTY_TRUTH_FROM_CURRENT_CATALOG_ALONE__SEEK_STRONGER_CLAIM_SCOPED_COMPLETENESS_OR_TYPED_EVIDENCE_PROOF",
+      "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_SEMANTIC_SHARED_BLOCKER_INDEPENDENT_VERIFY_20261010_V1.json",
+      "verification_git_blob_sha": "d5218f612e282f1b9339b5b3e84b5c74282b7042",
+      "independently_verified": true,
+      "shared_acceptance_proved": true,
+      "catalog_completeness_proved": false,
+      "catalog_alone_can_authorize_semantic_property_truth": false,
+      "new_primitive_required": false
     }
   }
 }
