@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_PROFESSIONAL_QUALITY_EXECUTION_POINTER_V1",
   "date": "2026-10-10",
-  "status": "P1_V3_INDEPENDENT_11_OF_11_VERIFIED__THIRTEEN_SCOPED_CAPABILITIES_VERIFIED__R1_R6_R7_R12_BOUNDED_SEMANTIC_EVIDENCE_BOUND__EXACT_DECLARED_SYSTEM_SUBJECT_FROZEN__12_ROOT_SAME_SUBJECT_BINDINGS_REDUCED_0_VERIFIED__LEAF_FRONTIER_16_PARTIAL_8_NO_SCOPED_24_GLOBAL_OPEN__NOT_LIVE_DEFAULT",
+  "status": "P1_V3_INDEPENDENT_11_OF_11_VERIFIED__FOURTEEN_SCOPED_CAPABILITIES_VERIFIED__R1_R6_R7_R11_R12_BOUNDED_SEMANTIC_EVIDENCE_BOUND__EXACT_DECLARED_SYSTEM_SUBJECT_FROZEN__12_ROOT_SAME_SUBJECT_BINDINGS_REDUCED_0_VERIFIED__LEAF_FRONTIER_17_PARTIAL_7_NO_SCOPED_24_GLOBAL_OPEN__NOT_LIVE_DEFAULT",
   "profile_path": "canonical/governance/PROFESSIONAL_QUALITY_P1_EXECUTION_PROFILE_20261010_V3.json",
   "profile_sha": "f7e89eafbb691c16d1bdf5b8d295a468d5e3bec5",
   "router_path": "canonical/runtime/professional_quality_p1_router_v3.py",
@@ -17,15 +17,15 @@
   },
   "scoped_evidence": {
     "runtime_path": "canonical/runtime/professional_quality_scoped_evidence_v1.py",
-    "runtime_git_blob_sha": "1022fa8ef631334a116ba49becffbd5cc024da38",
+    "runtime_git_blob_sha": "8171635e504957980eddc0c7ca870bd65751c7d0",
     "tests_path": "canonical/tests/test_professional_quality_scoped_evidence_v1.py",
-    "tests_git_blob_sha": "1d89df9b3487781e263497e4f92f6964061febae",
+    "tests_git_blob_sha": "58d96789e9566f852240d29113ce383087daa86d",
     "registry_path": "canonical/governance/PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_REGISTRY_20261010_V1.json",
-    "registry_git_blob_sha": "0ebda915b778667b1ce9e4f58a333faaec8d2b3a",
-    "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_R1_SEMANTIC_SCOPED_INTEGRATION_VERIFY_20261010_V1.json",
-    "verification_git_blob_sha": "3408fe8742da7dd022935f8551b478de4c359c2d",
-    "replay_result": "38_OF_38_PASS__THIRTEEN_SCOPED_CAPABILITIES__R1_R6_R7_R12_BOUNDED_SEMANTIC_COVERAGE",
-    "admitted_scope_count": 13,
+    "registry_git_blob_sha": "4c2283a4e877c4896e855c2459074f431fd1ea19",
+    "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_R11_SEMANTIC_SCOPED_INTEGRATION_VERIFY_20261010_V1.json",
+    "verification_git_blob_sha": "423393e523bd7f4763750c8935d8ef7a3b3af82d",
+    "replay_result": "45_OF_45_PASS__FOURTEEN_SCOPED_CAPABILITIES__R1_R6_R7_R11_R12_BOUNDED_SEMANTIC_COVERAGE",
+    "admitted_scope_count": 14,
     "admitted_roots": [
       "R1_TARGET_SPECIFICATION",
       "R2_CANDIDATE_SEARCH",
@@ -48,6 +48,7 @@
       "PQ::R1_TARGET_SPECIFICATION::SEMANTIC",
       "PQ::R6_EVIDENCE_GROUNDING_DEPENDENCE::SEMANTIC",
       "PQ::R7_CAUSAL_PRESCRIPTIVE::SEMANTIC",
+      "PQ::R11_ADAPTIVE_INTEGRITY_SECURITY::SEMANTIC",
       "PQ::R12_META_COMPOSITION_CLOSURE::SEMANTIC"
     ]
   },
@@ -59,7 +60,7 @@
   "quality_authority": false,
   "terminal_authority": false,
   "terminal_credit_delta": 0,
-  "next": "ADD_BOUNDED_SEMANTIC_EVIDENCE_FOR_R2_R3_R4_R5_R8_R9_R10_OR_R11__OR_BIND_REAL_SAME_SUBJECT_ROOT_RECEIPTS_FOR_ONE_EXACT_ARTIFACT_OR_SYSTEM__PROVE_WHOLE_LEAF_SCOPE_TRANSPORT_OR_CERTIFIED_COMPLETE_UNIONS__PROMOTE_LIVE_DEFAULT_ONLY_AFTER_EXACT_PASS",
+  "next": "ADD_BOUNDED_SEMANTIC_EVIDENCE_FOR_R2_R3_R4_R5_R8_R9_OR_R10__OR_BIND_REAL_SAME_SUBJECT_ROOT_RECEIPTS_FOR_ONE_EXACT_ARTIFACT_OR_SYSTEM__PROVE_WHOLE_LEAF_SCOPE_TRANSPORT_OR_CERTIFIED_COMPLETE_UNIONS__PROMOTE_LIVE_DEFAULT_ONLY_AFTER_EXACT_PASS",
   "hard_nonclaims": [
     "NO_PROFESSIONAL_QUALITY_COMPLETENESS_PROOF",
     "NO_GLOBAL_LEAF_OR_ROOT_CLOSURE_FROM_BOUNDED_SCOPED_CAPABILITIES",
@@ -83,12 +84,12 @@
     "terminal_credit_delta": 0
   },
   "leaf_coverage_projection": {
-    "path": "canonical/verification/PROFESSIONAL_QUALITY_R1_SEMANTIC_SCOPED_INTEGRATION_VERIFY_20261010_V1.json",
-    "git_blob_sha": "3408fe8742da7dd022935f8551b478de4c359c2d",
-    "partial_coverage_leaf_count": 16,
-    "semantic_partial_coverage_leaf_count": 4,
+    "path": "canonical/verification/PROFESSIONAL_QUALITY_R11_SEMANTIC_SCOPED_INTEGRATION_VERIFY_20261010_V1.json",
+    "git_blob_sha": "423393e523bd7f4763750c8935d8ef7a3b3af82d",
+    "partial_coverage_leaf_count": 17,
+    "semantic_partial_coverage_leaf_count": 5,
     "execution_partial_coverage_leaf_count": 12,
-    "no_scoped_evidence_leaf_count": 8,
+    "no_scoped_evidence_leaf_count": 7,
     "verified_global_leaf_count": 0,
     "open_global_leaf_count": 24,
     "global_leaf_closure": false,
@@ -128,6 +129,13 @@
     "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
     "bounded_semantic_evidence": true,
     "global_r1_semantic_leaf_closed": false,
+    "terminal_credit_delta": 0
+  },
+  "r11_firewall_semantic": {
+    "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_R11_SEMANTIC_SCOPED_INTEGRATION_VERIFY_20261010_V1.json",
+    "verification_git_blob_sha": "423393e523bd7f4763750c8935d8ef7a3b3af82d",
+    "bounded_semantic_evidence": true,
+    "global_r11_semantic_leaf_closed": false,
     "terminal_credit_delta": 0
   }
 }
