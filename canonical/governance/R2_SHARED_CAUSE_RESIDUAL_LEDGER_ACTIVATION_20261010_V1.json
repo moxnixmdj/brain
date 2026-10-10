@@ -9,7 +9,7 @@
   },
   "runtime": {
     "path": "canonical/runtime/r2_semantic_residual_ledger_v1.py",
-    "git_blob_sha": "8c3766656789a7ff5c3dc11cfede36fbb1a6e7d4"
+    "git_blob_sha": "f732f511913a7fecd197d73496f156f9bcadff9a"
   },
   "tests": {
     "path": "canonical/tests/test_r2_semantic_residual_ledger_v1.py",
