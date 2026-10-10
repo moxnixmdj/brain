@@ -37,9 +37,12 @@ def _clean_fixture(root: Path) -> None:
     _write(
         root,
         "canonical/runtime/unified_cognitive_fabric_v1.py",
-        'DIRECT={"REACHED_ESCAPE_STATE": "certified_reached_escape_state_constructor_v1.construct"}\n'
+        'DIRECT={"REACHED_ESCAPE_STATE": "certified_reached_escape_state_constructor_v1.construct + reached_escape_repair_cycle_v1.run"}\n'
+        "from canonical.runtime import reached_escape_repair_cycle_v1 as reached_escape_repair\n"
         "def f(payload):\n"
         "    from canonical.runtime import certified_reached_escape_state_constructor_v1 as reached_escape_state\n"
+        "    if False:\n"
+        "        out = reached_escape_repair.run(payload)\n"
         "    out = reached_escape_state.construct(payload)\n"
         "    return out\n",
     )
