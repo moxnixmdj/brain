@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_DECLARED_SYSTEM_SUBJECT_V5_CONNECTOR_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__CONNECTED_GITHUB_EXACT_BLOB_CURRENTNESS__39_OF_39_COMPONENTS__SUBJECT_HASH_RECOMPUTED__ZERO_AUTHORITY",
+  "subject": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V5_DECLARED_SYSTEM_SUBJECT_20261010_V5.json",
+    "git_blob_sha": "b077db02fb9d4d782ee0eed2268825530ee198d6",
+    "subject_id": "PROFESSIONAL_QUALITY_P1_V5_AUTHENTICATED_TARGET_SYSTEM_20261010_V5",
+    "subject_sha256": "1b7adb1bebe444eb55fe2cb28a574ca3faedc8f07cb9cb1410509773fe532109",
+    "component_count": 39
+  },
+  "verification": {
+    "canonical_material_hash_rule": "SHA256_OF_RFC8259_JSON_CANONICALIZED_BY_SORTED_KEYS_NO_WHITESPACE_UTF8_OVER_SYSTEM_MATERIAL_OBJECT",
+    "canonical_material_sha256_recomputed": true,
+    "component_batches_checked": 3,
+    "component_currentness_checks": 39,
+    "component_currentness_passed": 39,
+    "component_currentness_failed": 0,
+    "all_component_git_blob_shas_match_current_main": true,
+    "scoped_registry_identity_preserved": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_REGISTRY_20261010_V1.json",
+      "git_blob_sha": "b9ddf7cbe7fbfad0e81fe068a0c19b48703b5aba"
+    },
+    "dependency_classification_basis": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_SUBJECT_DEPENDENCY_CLOSURE_20261010_V1.json",
+      "git_blob_sha": "a204ff5cc9fe6cf54d7299690228abd581abb26f",
+      "classified_root_count": 12
+    }
+  },
+  "proves": [
+    "REFRESHED_DECLARED_SYSTEM_SUBJECT_IDENTITY_IS_CONTENT_ADDRESSED",
+    "ALL_39_DECLARED_COMPONENTS_MATCH_CURRENT_MAIN_EXACT_BLOBS",
+    "ALL_23_DEPENDENCY_CLASSIFIED_MISSING_REUSABLE_COMPONENTS_ARE_INCLUDED",
+    "PRIOR_AUTHENTICATED_V5_TARGET_HANDOFF_COMPONENTS_ARE_PRESERVED"
+  ],
+  "does_not_prove": [
+    "ANY_ROOT_SUBJECT_BINDING",
+    "SAME_SUBJECT_COMPOSITION",
+    "GLOBAL_LEAF_OR_ROOT_CLOSURE",
+    "QUALITY_ACCEPTANCE_OR_PROMOTION",
+    "TERMINAL_SUCCESS"
+  ],
+  "root_subject_binding_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
