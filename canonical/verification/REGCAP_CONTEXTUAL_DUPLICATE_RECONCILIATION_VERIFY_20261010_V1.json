@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_REGCAP_CONTEXTUAL_DUPLICATE_RECONCILIATION_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__DUPLICATE_RUNTIME_SURFACE_REMOVED__CANONICAL_V77_CONTEXT_STACK_37_OF_37_PASS__ZERO_FRONTIER_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "reconcile-regcap-context-duplicate-20261010-sol",
+    "removed_duplicate_files": [
+      "canonical/runtime/regcap_contextual_fact_compiler_v1.py",
+      "canonical/runtime/regcap_contextual_discriminator_binding_v1.py",
+      "canonical/tests/test_regcap_contextual_fact_compiler_v1.py",
+      "canonical/tests/test_regcap_contextual_discriminator_binding_v1.py"
+    ],
+    "supersession_record": "canonical/governance/REGCAP_CONTEXTUAL_FACT_BINDING_SUPERSESSION_20261010_V1.json"
+  },
+  "verification": {
+    "canonical_contextual_observation_compiler": {
+      "path": "canonical/tests/test_regcap_contextual_observation_compiler_v1.py",
+      "tests_run": 22,
+      "failures": 0,
+      "errors": 0,
+      "result": "PASS"
+    },
+    "canonical_contextual_resolution": {
+      "path": "canonical/tests/test_regcap_contextual_resolution_v1.py",
+      "tests_run": 15,
+      "failures": 0,
+      "errors": 0,
+      "result": "PASS"
+    },
+    "total_canonical_context_tests": 37
+  },
+  "proved": [
+    "THE_CURRENT_V77_REGCAP_CONTEXTUAL_OBSERVATION_COMPILER_REMAINS_GREEN_AFTER_DUPLICATE_REMOVAL",
+    "THE_CURRENT_V77_CONTEXTUAL_RESOLUTION_REMAINS_GREEN_AFTER_DUPLICATE_REMOVAL",
+    "THE_REMOVED_PARALLEL_COMPILER_AND_BINDER_ARE_NOT_REQUIRED_FOR_CANONICAL_V77_CONTEXT_TRUTH",
+    "THE_CANONICAL_ROUTE_PRESERVES_ASSERTION_OWNERSHIP_GUARDING_AND_INDEPENDENT_CANDIDATE_SET_COMPLETENESS",
+    "THE_HISTORICAL_REGCAP_CONTEXTUAL_FACT_BINDING_VERIFICATION_HAS_ZERO_CURRENT_RUNTIME_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "semantic_family_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
