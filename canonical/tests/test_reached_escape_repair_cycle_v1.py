@@ -79,8 +79,8 @@ def test_uncovered_region_closes_via_verified_policy():
             "repair_sha256": request["repair_sha256"],
             "candidate_kind": "POLICY",
             "candidate": {
-                "policy_id": "p2",
-                "adequate_region_ids": ["r2"],
+                "policy_id": "p_common",
+                "adequate_region_ids": ["r1", "r2"],
             },
             "truth_authority": False,
             "verification_authority": False,
@@ -188,24 +188,37 @@ def test_partial_policy_repair_can_compound_across_rounds():
     issued = []
 
     def provider(request):
-        uncovered = request["repair_request"].get("uncovered_region_ids") or []
-        rid = uncovered[0]
-        issued.append(rid)
+        repair = request["repair_request"]
+        uncovered = repair.get("uncovered_region_ids") or []
+        if uncovered:
+            rid = uncovered[0]
+            issued.append(rid)
+            return {
+                "schema": cycle.CANDIDATE_SCHEMA,
+                "pass": True,
+                "repair_sha256": request["repair_sha256"],
+                "candidate_kind": "POLICY",
+                "candidate": {
+                    "policy_id": "p_" + rid,
+                    "adequate_region_ids": [rid],
+                },
+            }
+        issued.append("split")
         return {
             "schema": cycle.CANDIDATE_SCHEMA,
             "pass": True,
             "repair_sha256": request["repair_sha256"],
-            "candidate_kind": "POLICY",
+            "candidate_kind": "DISCRIMINATOR",
             "candidate": {
-                "policy_id": "p_" + rid,
-                "adequate_region_ids": [rid],
+                "discriminator_id": "d_all",
+                "outcomes": {"r1": "A", "r2": "B", "r3": "C"},
             },
         }
 
     out = cycle.run(initial, provider=provider, verifier=verifier, max_rounds=4)
     assert out["pass"] is True, out
-    assert issued == ["r2", "r3"]
-    assert out["repair_rounds_completed"] == 2
+    assert issued == ["r2", "r3", "split"]
+    assert out["repair_rounds_completed"] == 3
 
 
 def test_round_bound_never_becomes_global_acquirability_claim():
