@@ -57,7 +57,7 @@ class Tests(unittest.TestCase):
         self.assertEqual(out["selected_concept_id"], regcap.CCOB)
 
     def test_two_distinct_prior_buffer_concepts_preserve_ambiguity(self):
-        text = "CCoB was stable. CCyB increased. The buffer was later released."
+        text = "CCoB was stable and CCyB increased. The buffer was later released."
         start, end = locate(text)
         with patch.object(ref, "_registry_surface_check", side_effect=fake_surface_check):
             out = ref.resolve_reference(
