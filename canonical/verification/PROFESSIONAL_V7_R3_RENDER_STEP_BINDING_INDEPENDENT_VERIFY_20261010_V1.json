@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_STEP_RESULT_BINDING_INDEPENDENT_VERIFICATION_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_V7_R3_RENDER_STEP_RECEIPT_INDEPENDENTLY_VERIFIED",
+  "pass": true,
+  "independent_verified": true,
+  "semantic_preservation_verified": true,
+  "evidence_scope_verified": true,
+  "subject_git_blob_sha": "276ffbda0ecc68aa65228386d9ca19b3a0bc6c9b",
+  "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+  "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+  "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+  "step_id": "RENDER_EXACT_AUDIENCE_VIEW_AND_BIND_OBSERVATION_CHANNELS",
+  "run_context_sha256": "sha256:0dc8d549586a7d53801b8d825ce86abdf708d6b60fc98c20f3486e3158a4b7a3",
+  "result": "PASS",
+  "evidence_sha256": "176234b80f16f636c3573f50fe538a2b5208a8617755b8a18f5a2df825e0e20e",
+  "producer_id": "PUBLIC_PROFESSIONAL_V7_R3_ARTIFACT_PRODUCER_V1",
+  "independent_verifier_id": "PUBLIC_PROFESSIONAL_V7_R3_INDEPENDENT_RENDER_VERIFIER_V1",
+  "durable_evidence": {
+    "path": "canonical/evidence/PROFESSIONAL_V7_R3_DURABLE_REALIZATION_EVIDENCE_20261010_V1.json",
+    "git_blob_sha": "f18329cac5c702f3503863819b5e3c92cb16d382"
+  },
+  "public_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2619,
+    "merge_commit": "22175613a8afb3f43c444623587725bc5a87ce92",
+    "workflow_run_id": 38052011796,
+    "producer_job_id": 114212869823,
+    "verifier_job_id": 114212935274,
+    "conclusion": "success",
+    "producer_artifact_digest": "sha256:39aaa2da70cba5c227dd1dc7fd61409dad0330b63ef12c05439a78f0bae01ba5",
+    "verifier_artifact_digest": "sha256:88604b129a98d0c21f653305263b681f9fee7963a1e4cb625d073835e6069413"
+  },
+  "global_r3_root_closed": false,
+  "semantic_truth_authority": false,
+  "execution_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
