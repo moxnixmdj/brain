@@ -427,5 +427,27 @@ class OneShotClosureTests(unittest.TestCase):
         )
 
 
+    def test_current_pointer_binds_exact_v1_runtime_blob(self):
+        from hashlib import sha1
+        import json
+        from pathlib import Path
+
+        root = Path(__file__).resolve().parents[2]
+        runtime = root / "canonical/runtime/one_shot_verified_closure_v1.py"
+        pointer = json.loads(
+            (root / "canonical/governance/CURRENT_ONE_SHOT_REALITY_CLOSURE.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        raw = runtime.read_bytes()
+        actual = sha1(
+            b"blob " + str(len(raw)).encode("ascii") + bytes([0]) + raw
+        ).hexdigest()
+        self.assertEqual(
+            pointer["predecessor"]["path"],
+            "canonical/runtime/one_shot_verified_closure_v1.py",
+        )
+        self.assertEqual(pointer["predecessor"]["git_blob_sha"], actual)
+
 if __name__ == "__main__":
     unittest.main()
