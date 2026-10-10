@@ -2260,11 +2260,11 @@
     "git_blob_sha": "e70f662d27e0b917eaf6ef8ba9da3bebc5ab7ee0",
     "runtime_gate": {
       "path": "canonical/runtime/terminal_root_decision_gate_v1.py",
-      "git_blob_sha": "6f546f657900405c628c1eb3575bc1e4ac220aeb"
+      "git_blob_sha": "40a6f984013d0d701edba498c2a122edcb9a8103"
     },
     "tests": {
       "path": "canonical/tests/test_terminal_root_decision_gate_v1.py",
-      "git_blob_sha": "4d8a4aae55562e772730bb71d37ef08bf0385c6e"
+      "git_blob_sha": "0767251b2ad4df55f591d5761b0e9a3c01852c99"
     },
     "rule": "COEQUAL_SCOPE_COMPLETE_UNIVERSAL_COVER_ROUTE__ONE_LIVE_PRE_ABC_PRIMITIVE_ESCAPE_POLICY_ADEQUACY__NONEXHAUSTIVE_SEVENTEEN_REGION_DB_BINDING_COMPILATION_DEMOTED_FROM_SERIAL_PREREQUISITE__FROZEN_19_REMAINS_DIRECT_WITNESS_ROUTE",
     "exact_sound_db_admission_convergence_gate": {
@@ -2274,7 +2274,7 @@
       "tests_git_blob_sha": "e4130b4e3401d382e27e233a02c2447e6c07d459"
     },
     "current_runtime_gate_binding_verified": true,
-    "current_runtime_gate_status": "PASS__CURRENT_EXACT_BYTES"
+    "current_runtime_gate_status": "PASS__CURRENT_EXACT_BYTES__CURRENT_AUTHORITY_PROOF_VERIFIER_PROVENANCE_REQUIRED"
   },
   "zero_bureaucracy_truth_reconciliation_20261007_v1": {
     "status": "BOUND_EXISTING_PROOF_INTO_LIVE_AUTHORITY__NO_TERMINAL_CREDIT",
@@ -2295,7 +2295,7 @@
     "precedence": "THIS_OBJECT_CONTROLS_TERMINAL_NECESSITY__V34_PROVE_NOT_X_IS_RETAINED_AS_AN_OPTIONAL_STRONGER_SUFFICIENCY_ROUTE",
     "mandatory_terminal_reducer": {
       "path": "canonical/runtime/terminal_closure_reducer.py",
-      "git_blob_sha": "27b51e53db5063756ff3046f978c0087fd4a9256"
+      "git_blob_sha": "0816624d43cc1f90eeddcd602f7693e362675d9e"
     },
     "mandatory_terminal_predicate": "TERMINAL_CLOSURE_REDUCER_ACHIEVED_TRUE",
     "optional_stronger_route": "PROVE_NOT_X_OVER_SOUND_OBSERVABLE_TRACE_ESCAPE_MODEL",
@@ -2307,6 +2307,7 @@
     "universal_route_fail_closed_requirements": [
       "INDEPENDENT_VERIFICATION",
       "EXACT_BYTE_BINDING",
+      "CURRENT_AUTHORITY_PROOF_VERIFIER_ADMISSION",
       "OBSERVABLE_TRACE_SCOPE_COMPLETE",
       "ALL_USEFUL_TARGET_BEHAVIORS_IN_SCOPE",
       "EVERY_ADMISSION_SOUND",
@@ -2742,7 +2743,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 95,
+  "pointer_revision": 96,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
