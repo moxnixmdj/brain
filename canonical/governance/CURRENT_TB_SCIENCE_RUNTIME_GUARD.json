@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_TB_SCIENCE_RUNTIME_GUARD_V3",
   "date": "2026-10-10",
-  "status": "V13_PLANNER_GENERATION_COMPLETE_DEADLINE_REPAIR_VERIFIED__REAL_LOCAL_QWEN_ZERO_EXPOSURE_PASS__RANK19_EXECUTION_UNARMED_PENDING_FRESH_SURFACE_RESEAL",
+  "status": "V13_PLANNER_GENERATION_COMPLETE_DEADLINE_REPAIR_VERIFIED__RANK19_PUBLIC_EFFECTIVE_AUTHORITY_VERIFIED__TASK_UNREAD_UNSTARTED__ACTIVATION_NOT_ARMED",
   "rank17_result_truth": {
     "path": "canonical/verification/TB_SCIENCE_RANK17_V6_IRREVERSIBLE_RESULT_TRUTH_20261010_V1.json",
     "git_blob_sha": "3d7a0339ccf320f256834fcbde6427c8c62d473b"
@@ -55,7 +55,7 @@
     "retry_authority": false,
     "replacement_authority": false
   },
-  "next": "BUILD_AND_VERIFY_FRESH_V13_PROOF_CARRYING_PUBLIC_EXECUTION_SURFACE_FOR_RANK19__DO_NOT_READ_TASK_BEFORE_ACTIVATION_AND_LIVE_CARRIER_QUALIFICATION",
+  "next": "MINT_CANONICAL_RANK19_ACTIVATION_AUTHORITY__THEN_EXACT_ONE_FILE_ACTIVATION__TASK_READ_ONLY_AFTER_LIVE_CARRIER_QUALIFICATION_AND_CAS_ABSENCE",
   "public_reseal": {
     "reconciliation_git_blob_sha": "43405b2f540fd8a8e3a6a07a1f7ccb431432590e",
     "verification_git_blob_sha": "329985ebb77c51091762d9003ab82acb24612495",
@@ -70,9 +70,18 @@
     "task_read": false,
     "task_started": false,
     "benchmark_trials_consumed": 0,
-    "task_read_authority": false,
-    "execution_authority": false,
-    "blocker": "FRESH_PROOF_CARRYING_PUBLIC_EXECUTION_SURFACE_RESEAL_REQUIRED_FOR_V13"
+    "task_read_authority": true,
+    "execution_authority": true,
+    "blocker": "CANONICAL_ACTIVATION_AUTHORITY_NOT_YET_MINTED",
+    "activation_authority": false,
+    "public_effective_authority_verification": {
+      "path": "canonical/verification/TB_SCIENCE_RANK19_EFFECTIVE_PUBLIC_AUTHORITY_PROMOTION_VERIFY_20261010_V1.json",
+      "git_blob_sha": "0c26880a76957d5e9da51910cfe00b79dfa77c95",
+      "reconciliation_path": "canonical/governance/TB_SCIENCE_RANK19_EFFECTIVE_PUBLIC_AUTHORITY_PROMOTION_RECONCILIATION_20261010_V1.json",
+      "git_blob_sha_reconciliation": "ec42b77544566329e8b735ec7bdb0829aeb30fa3",
+      "public_surface_git_blob_sha": "c70895390c12ea1d32b586f07b51e892d2a99321",
+      "public_merge_commit_sha": "c82abe2be6028408b5cd148b1dd20717db661572"
+    }
   },
   "rank18_timeout_diagnosis": {
     "path": "canonical/verification/TB_SCIENCE_RANK18_PLANNER_TIMEOUT_CAUSAL_DIAGNOSIS_20261010_V1.json",
