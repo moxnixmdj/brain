@@ -6,7 +6,7 @@
   "sources": {
     "current_r2": {
       "path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
-      "git_blob_sha": "c94c84aaf3c759abd6827c1ff93181c04033b6a1"
+      "git_blob_sha": "31e3469774ab38656facda19e05ca3aa8a2468c1"
     },
     "adequate_decision_controller": {
       "path": "canonical/runtime/general_adequate_decision_controller_v1.py",
@@ -18,7 +18,7 @@
     },
     "one_shot_v1": {
       "path": "canonical/runtime/one_shot_verified_closure_v1.py",
-      "git_blob_sha": "117d85bec1e5fb49428271aa9883e89d0ef1aa0a"
+      "git_blob_sha": "605fe5a36e26aef51f93c4a5b3e43483abea2c19"
     },
     "one_shot_v2": {
       "path": "canonical/runtime/one_shot_reality_closure_v2.py",
@@ -26,7 +26,7 @@
     },
     "capability_first_scheduler_candidate": {
       "path": "canonical/runtime/capability_first_scheduler_v1.py",
-      "git_blob_sha": "b74f967038ae5f71d45468b4233452cd134fd699"
+      "git_blob_sha": "63be50dacedec96809b9f3b40faaeab411741c39"
     }
   },
   "verified_current_truth": {
@@ -71,5 +71,12 @@
     "capability_credit_delta": 0,
     "ownership_credit_delta": 0,
     "terminal_credit_delta": 0
-  }
+  },
+  "shared_cause_residual_ledger": {
+    "pointer": "canonical/governance/CURRENT_R2_SHARED_CAUSE_RESIDUAL_LEDGER.json",
+    "runtime": "canonical/runtime/r2_semantic_residual_ledger_v1.py",
+    "role": "CLASSIFY_CURRENT_RESIDUALS_AND_BREAK_EQUAL_PRIMARY_CAPABILITY_TIES_BY_DISTINCT_CLAUSE_FANOUT",
+    "open_world_wake_gate_preserved": true
+  },
+  "reconciliation_note": "REFRESHED_STALE_CURRENT_R2_AND_ONE_SHOT_V1_CONTENT_PINS__BOUND_SCHEDULER_V4_RESIDUAL_LEDGER_INTEGRATION"
 }
