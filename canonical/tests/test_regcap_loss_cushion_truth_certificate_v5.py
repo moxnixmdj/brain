@@ -65,6 +65,12 @@ class Tests(unittest.TestCase):
         self.assertFalse(out["global_identity_authority"])
 
     def test_unresolved_pair_stays_unknown(self):
+        request = {
+            "pass": True,
+            "status": "PASS__MINIMUM_FOUR_WAY_POLICY_CHANGING_INFORMATION_REQUEST",
+            "minimum_observation_count": 1,
+            "independent_verification_required": True,
+        }
         grounding = {
             "pass": True,
             "status": "OPEN__ANCHOR_MREL_PAIR_REMAINS_UNRESOLVED",
@@ -74,12 +80,21 @@ class Tests(unittest.TestCase):
                 regcap.CCOB, regcap.CCYB, regcap.TLAC, mrel.MREL,
             ],
             "semantic_identity_authority": False,
+            "minimum_policy_changing_information_request": request,
+            "minimum_policy_changing_information_request_available": True,
         }
         with patch.object(cert.grounding, "ground", return_value=grounding):
             out = cert.evaluate(payload(regcap.CCOB))
         self.assertFalse(out["pass"])
         self.assertEqual(out["predicate_truth"], "UNKNOWN")
         self.assertFalse(out["semantic_truth_authority"])
+        self.assertEqual(out["next_information_request"], request)
+        self.assertEqual(
+            out["next_required_edge"],
+            "REGCAP_LOSS_CUSHION_MINIMUM_POLICY_CHANGING_INFORMATION",
+        )
+        self.assertEqual(out["next_information_request_source"], cert.grounding.SCHEMA)
+        self.assertFalse(out["terminal_authority"])
 
     def test_source_local_identity_remains_true_only_for_mapped_target(self):
         grounding = {
