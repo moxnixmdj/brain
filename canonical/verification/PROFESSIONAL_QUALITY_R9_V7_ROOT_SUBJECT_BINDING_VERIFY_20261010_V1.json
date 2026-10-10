@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R9_V7_ROOT_SUBJECT_BINDING_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_SPRITE_5_OF_5__R9_BOUND_TO_EXACT_V7_SUBJECT_THROUGH_FROZEN_210_SLOT_CONSERVATIVE_TEMPORAL_ACCOUNTING__ZERO_QUALITY_OR_TERMINAL_AUTHORITY",
+  "root_id": "R9_TEMPORAL_DEPLOYMENT",
+  "exact_blobs": {
+    "binding": "7c9f22e80110389768d4c16876571d54304b4536",
+    "verifier": "76db9f2862c678262c0e96feef1d6f2405c5f96f",
+    "tests": "2ebe8bbe85f28c779feefc3942f941c20fa615f2",
+    "subject": "1d598bc8757017ceb34928d0df9f5fce859ef868",
+    "execution_profile": "f7e89eafbb691c16d1bdf5b8d295a468d5e3bec5",
+    "censor_scope": "7755bc709169abe0db35a6418fd8568ed14131b7",
+    "temporal_scope": "0f2a434454802d5f76157ce51f19f16bb9cbfd8f",
+    "censor_verification": "7081a52621a1bb8f1ad07d1da23b40c8e57e16c2",
+    "temporal_verification": "e4527631fbf6e95cb20381d60eb4fe4b978c176f"
+  },
+  "replay": {
+    "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/pq-r9-v7-binding-independent-verify",
+    "py_compile": "PASS",
+    "tests_run": 5,
+    "tests_passed": 5,
+    "tests_failed": 0,
+    "verifier_pass": true,
+    "verifier_status": "PASS__R9_BOUND_TO_V7_FROZEN_210_SLOT_TEMPORAL_ACCOUNTING_SCOPE"
+  },
+  "hard_nonclaims": [
+    "NO_MULTIHORIZON_DEPLOYMENT_VALIDITY",
+    "NO_RARE_EVENT_COVERAGE_CLAIM",
+    "NO_DISTRIBUTION_SHIFT_TRANSPORT_CLAIM",
+    "NO_PERFORMATIVE_OR_EQUILIBRIUM_STABILITY",
+    "NO_GLOBAL_R9_ROOT_CLOSURE",
+    "NO_DOMAIN_SEMANTIC_OR_EXECUTION_CLOSURE",
+    "NO_SAME_SUBJECT_COMPOSITION_PASS",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "root_subject_binding_authority": true,
+  "bounded_temporal_accounting_support": true,
+  "multihorizon_deployment_validity_proved": false,
+  "rare_event_coverage_proved": false,
+  "distribution_shift_transport_proved": false,
+  "performative_equilibrium_stability_proved": false,
+  "global_r9_root_closed": false,
+  "quality_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "next": "PROMOTE_R9_V7_ROOT_BINDING__ADVANCE_SAME_SUBJECT_FRONTIER_TO_9_OF_12__R10_NEXT"
+}
