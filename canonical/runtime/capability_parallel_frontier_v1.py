@@ -121,7 +121,9 @@ def _current_professional_next_root(raw: Mapping[str, Any]) -> tuple[int, str]:
     expected_name = PROFESSIONAL_ROOT_NAMES[next_index]
     next_text = _s(raw.get("next"))
     status = _s(raw.get("status"))
-    if f"R{next_index}_" not in next_text and f"__R{next_index}_NEXT" not in status:
+    if next_text and f"R{next_index}_" not in next_text:
+        raise ParallelFrontierError("CURRENT_PROFESSIONAL_NEXT_ROOT_INCOHERENT")
+    if status and f"__R{next_index}_NEXT" not in status:
         raise ParallelFrontierError("CURRENT_PROFESSIONAL_NEXT_ROOT_INCOHERENT")
     return next_index, expected_name
 
