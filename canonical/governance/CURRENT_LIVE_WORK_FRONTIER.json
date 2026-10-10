@@ -1,8 +1,8 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_LIVE_WORK_FRONTIER_V1",
   "date": "2026-10-10",
-  "status": "CURRENT_POST_COMPOSITION_FRONTIER__PROFESSIONAL_24_OF_24_SCOPE_COMPLETE__PROPERTY_TRUTH_1_OF_24__R10_EXECUTION_CLOSED__R10_SEMANTIC_NEXT__GAP_A_AND_TWO_GAP_B_ROWS_READY__BYTES_V28__READ_ONLY_EVIDENCE_PRIMARY__ZERO_GLOBAL_CREDIT",
-  "frontier_id": "LIVE_WORK_FRONTIER_20261010_PROF24_PROPERTY_TRUTH_1_V16",
+  "status": "CURRENT_POST_COMPOSITION_FRONTIER__PROFESSIONAL_24_OF_24_SCOPE_COMPLETE__PROPERTY_TRUTH_1_OF_24__R10_EXECUTION_CLOSED__R10_SEMANTIC_NEXT__GAP_A_AND_TWO_GAP_B_ROWS_READY__BYTES_V28_CURRENT__READ_ONLY_EVIDENCE_PRIMARY__ZERO_GLOBAL_CREDIT",
+  "frontier_id": "LIVE_WORK_FRONTIER_20261010_PROF24_PROPERTY_TRUTH_1_V17",
   "scope": {
     "base_main_commit": "3303bcc94c43081cc6da555ad4549e2183d911a5",
     "completeness_semantics": "COMPLETE_FOR_EXPLICIT_CURRENT_ACTIONABLE_OR_SCHEDULABLE_WORK_EXPOSED_BY_THE_BOUND_CURRENT_AUTHORITY_SOURCES__NOT_COMPLETE_FOR_UNKNOWN_FUTURE_WORK_OR_UNDISCOVERED_CAPABILITIES",
@@ -25,7 +25,7 @@
       },
       {
         "path": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-        "git_blob_sha": "ed10e6650cc66f8b921bb1ed0c7b3e63d75d0a63"
+        "git_blob_sha": "fb40c705e76370f7e578fe09d16bc32dec55ceea"
       },
       {
         "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
@@ -150,8 +150,8 @@
       "work_id": "BYTES_EXACT_SYMBOLIC_V28_NEXT_PHYSICAL_CUT",
       "work_type": "EFFICIENCY_IMPROVEMENT",
       "source": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-      "causal_role": "CONTINUE_RESOURCE_REDUCTION_FROM_1937005_RAW_PYTHON_BYTES_USING_SPENT_NEXT32_ONLY_BEFORE_TOUCHING_FROZEN_NEXT33",
-      "readiness": "ACTIONABLE_WITH_EXISTING_RECONSTRUCTION_AND_QUALIFICATION_MACHINERY",
+      "causal_role": "CONTINUE_RESOURCE_REDUCTION_FROM_1930030_RAW_PYTHON_BYTES_USING_SPENT_NEXT33_ONLY_BEFORE_TOUCHING_FROZEN_NEXT34",
+      "readiness": "ACTIONABLE_WITH_EXISTING_RECONSTRUCTION_AND_QUALIFICATION_MACHINERY__V28_CURRENT",
       "claims_new_primitive": false,
       "score_state": "UNBOUND",
       "scheduler_state": "READY_EXECUTION",
@@ -170,15 +170,15 @@
       "vector_evidence": {},
       "read_only_evidence": {
         "source": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-        "source_git_blob_sha": "ed10e6650cc66f8b921bb1ed0c7b3e63d75d0a63",
-        "raw_python_source_bytes": 1937005,
-        "previous_frontier_improvement_bytes": 12452,
-        "qualification": "9200/9200",
-        "next_action": "RERANK_EXACT_V27_USING_SPENT_NEXT32_ONLY__MAKE_NEW_PHYSICAL_CUT_BEFORE_QUAL_SUCCESSOR_NEXT33_20261010_V1",
+        "source_git_blob_sha": "fb40c705e76370f7e578fe09d16bc32dec55ceea",
+        "raw_python_source_bytes": 1930030,
+        "previous_frontier_improvement_bytes": 6975,
+        "qualification": "9430/9430",
+        "next_action": "RERANK_EXACT_V28_USING_SPENT_NEXT33_ONLY__MAKE_NEW_PHYSICAL_CUT_BEFORE_QUAL_SUCCESSOR_NEXT34_20261010_V1",
         "next_gain_lcb_bytes": 0,
         "vector_bounds_complete": false
       },
-      "ready": "V28_CURRENT_AT_1930_KB_FRONTIER__CONTINUE_ONLY_NONCONFLICTING_RESOURCE_PARETO_CUT"
+      "ready": "V28_CURRENT_AT_1930030_BYTES__CONTINUE_ONLY_NONCONFLICTING_RESOURCE_PARETO_CUT"
     },
     {
       "work_id": "R2_FINANCE_SEMANTIC_ADEQUACY_TAIL",
