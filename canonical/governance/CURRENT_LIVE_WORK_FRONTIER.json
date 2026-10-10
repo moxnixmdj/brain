@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_LIVE_WORK_FRONTIER_V1",
   "date": "2026-10-10",
-  "status": "CURRENT_POST_COMPOSITION_FRONTIER__PROFESSIONAL_SCOPE_24_OF_24__PROPERTY_TRUTH_8_OF_24__R1_R2_R3_R4_R6_R7_R10_R12_EXECUTION_CLOSED__FOUR_EXECUTION_LEAVES_OPEN__TWELVE_SEMANTIC_TOTALITY_REUSE__ESCAPE_12_GAP_A_0_GAP_B_1_PARKED__BYTES_V30__ZERO_GLOBAL_CREDIT",
+  "status": "CURRENT_POST_COMPOSITION_FRONTIER__PROFESSIONAL_SCOPE_24_OF_24__PROPERTY_TRUTH_8_OF_24__R1_R2_R3_R4_R6_R7_R10_R12_EXECUTION_CLOSED__FOUR_EXECUTION_LEAVES_OPEN__TWELVE_SEMANTIC_TOTALITY_REUSE__ESCAPE_12_GAP_A_0_GAP_B_1_PARKED__BYTES_V31__R2_V87__ZERO_GLOBAL_CREDIT",
   "frontier_id": "LIVE_WORK_FRONTIER_20261010_PROF_PROPERTY_8_OF_24_V21",
   "scope": {
     "base_main_commit": "3303bcc94c43081cc6da555ad4549e2183d911a5",
@@ -17,7 +17,7 @@
       },
       {
         "path": "canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json",
-        "git_blob_sha": "076b769a4a896ccd979f69f36ea7e9f7cfb275b1"
+        "git_blob_sha": "60aa5a357eada92239cdc64d3c3a17f3afbeb2d2"
       },
       {
         "path": "canonical/governance/CURRENT_TB_SCIENCE_EXECUTION.json",
@@ -25,7 +25,7 @@
       },
       {
         "path": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-        "git_blob_sha": "c612a238884f13ba79e96b087d1d999635ec183f"
+        "git_blob_sha": "714995cd13bf216f4c9189d77e33edc87fc326e5"
       },
       {
         "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
@@ -33,7 +33,7 @@
       },
       {
         "path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
-        "git_blob_sha": "af80fd1c9845730cbbdd68413dcb9427428427b5"
+        "git_blob_sha": "ee03f3fe71383d1bf12e0797bf568e6b5eeeaca4"
       }
     ]
   },
@@ -152,7 +152,7 @@
       "vector_evidence": {},
       "read_only_evidence": {
         "source": "canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json",
-        "source_git_blob_sha": "076b769a4a896ccd979f69f36ea7e9f7cfb275b1",
+        "source_git_blob_sha": "60aa5a357eada92239cdc64d3c3a17f3afbeb2d2",
         "promotion_blockers": [
           "PROFESSIONAL_PROPERTY_TRUTH_AND_DOMAIN_SEMANTIC_EXECUTION_EVIDENCE",
           "FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION"
@@ -160,22 +160,22 @@
         "embedded_professional_snapshot_lags_live_frontier": false,
         "vector_bounds_complete": false,
         "professional_verified_root_subject_binding_count": 12,
-        "professional_current_git_blob_sha": "779ce69c3364cdf6a7090d216d4a3c7b1a8d7f9c",
-        "professional_next": "WHOLE_LEAF_DOMAIN_EVIDENCE_AND_FULL_CURRENT_MAIN_REGRESSION",
+        "professional_current_git_blob_sha": "59eced2dc3bdbba7da78734f86c8e674dbf29e1b",
+        "professional_next": "INSTANTIATE_CLAIM_SCOPED_TOTALITY_REUSE_FOR_TWELVE_SEMANTIC_LEAVES__IN_PARALLEL_DEPLET_R5_R8_R9_R11_EXECUTION_WITH_REUSE_FIRST_CASE_CHALLENGES__RUN_FULL_CURRENT_MAIN_REGRESSION__PROMOTE_ONLY_AFTER_REQUIRED_EVIDENCE",
         "dynamic_current_pointer_follow": true,
         "r10_structural_guard_verification_bound": true,
         "r10_detection_completeness_proved": false,
-        "professional_property_truth_closed_count": 5,
-        "professional_open_execution_leaf_count": 7
+        "professional_property_truth_closed_count": 8,
+        "professional_open_execution_leaf_count": 4
       },
       "ready": "BLOCKED_BY_REMAINING_PROFESSIONAL_PROPERTY_TRUTH_DOMAIN_EVIDENCE_AND_FULL_CURRENT_MAIN_REGRESSION"
     },
     {
-      "work_id": "BYTES_EXACT_SYMBOLIC_V30_NEXT_PHYSICAL_CUT",
+      "work_id": "BYTES_EXACT_SYMBOLIC_V31_NEXT_PHYSICAL_CUT",
       "work_type": "EFFICIENCY_IMPROVEMENT",
       "source": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-      "causal_role": "CONTINUE_RESOURCE_REDUCTION_FROM_1912465_RAW_PYTHON_BYTES_USING_SPENT_NEXT35_ONLY__RERANK_BEFORE_NEW_PHYSICAL_CUT__DO_NOT_TOUCH_FROZEN_NEXT36_BEFORE_CUT",
-      "readiness": "ACTIONABLE_WITH_EXISTING_RECONSTRUCTION_AND_QUALIFICATION_MACHINERY__V30_CURRENT",
+      "causal_role": "CONTINUE_RESOURCE_REDUCTION_FROM_1909906_RAW_PYTHON_BYTES_USING_SPENT_NEXT36_ONLY__RERANK_BEFORE_NEW_PHYSICAL_CUT__DO_NOT_TOUCH_FROZEN_NEXT37_BEFORE_CUT",
+      "readiness": "ACTIONABLE_WITH_EXISTING_RECONSTRUCTION_AND_QUALIFICATION_MACHINERY__V31_CURRENT",
       "claims_new_primitive": false,
       "score_state": "UNBOUND",
       "scheduler_state": "READY_EXECUTION",
@@ -194,16 +194,16 @@
       "vector_evidence": {},
       "read_only_evidence": {
         "source": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-        "source_git_blob_sha": "c612a238884f13ba79e96b087d1d999635ec183f",
-        "raw_python_source_bytes": 1912465,
-        "B_exec_raw_python_source_bytes": 1915225,
-        "qualification": "9890/9890",
-        "next_action": "RERANK_EXACT_V30_USING_SPENT_NEXT35_ONLY__MAKE_NEW_PHYSICAL_CUT_BEFORE_QUAL_SUCCESSOR_NEXT36_20261010_V1",
-        "next_frozen_qualification": "QUAL_SUCCESSOR_NEXT36_20261010_V1",
+        "source_git_blob_sha": "714995cd13bf216f4c9189d77e33edc87fc326e5",
+        "raw_python_source_bytes": 1909906,
+        "B_exec_raw_python_source_bytes": 1912666,
+        "qualification": "10120/10120",
+        "next_action": "RERANK_EXACT_V31_USING_SPENT_NEXT36_ONLY__MAKE_NEW_PHYSICAL_CUT_BEFORE_QUAL_SUCCESSOR_NEXT37_20261010_V1",
+        "next_frozen_qualification": "QUAL_SUCCESSOR_NEXT37_20261010_V1",
         "next_frozen_spent": false,
         "vector_bounds_complete": false
       },
-      "ready": "V28_CURRENT_AT_1930030_BYTES__CONTINUE_ONLY_NONCONFLICTING_RESOURCE_PARETO_CUT"
+      "ready": "V31_CURRENT_AT_1909906_BYTES__CONTINUE_ONLY_NONCONFLICTING_RESOURCE_PARETO_CUT"
     },
     {
       "work_id": "R2_FINANCE_SEMANTIC_ADEQUACY_TAIL",
@@ -211,7 +211,7 @@
       "frontier_class": "OPEN_WORLD_EVIDENCE_FRONTIER",
       "source": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
       "causal_role": "ONE_PRIMARY_OPEN_WORLD_FINANCE_SEMANTIC_RESIDUAL",
-      "readiness": "SLEEPING_UNLESS_TASK_LOCAL_COUNTEREXAMPLE_OR_VERIFIED_DEFECT_WAKES_IT__V86_BOUND_TRUTH_REENTRY_CONSUMPTION_VERIFIED__ONE_PRIMARY_FINANCE_RESIDUAL_REMAINS",
+      "readiness": "SLEEPING_UNLESS_TASK_LOCAL_COUNTEREXAMPLE_OR_VERIFIED_DEFECT_WAKES_IT__V87_BOUND_TRUTH_REENTRY_CONSUMPTION_VERIFIED__ONE_PRIMARY_FINANCE_RESIDUAL_REMAINS",
       "claims_new_primitive": false,
       "score_state": "INELIGIBLE_WHILE_WAKE_GATE_FALSE",
       "scheduler_state": "SLEEPING",
@@ -232,7 +232,7 @@
       "vector_evidence": {},
       "read_only_evidence": {
         "source": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
-        "source_git_blob_sha": "af80fd1c9845730cbbdd68413dcb9427428427b5",
+        "source_git_blob_sha": "ee03f3fe71383d1bf12e0797bf568e6b5eeeaca4",
         "general_mechanism_closed": true,
         "finance_tail_closed": false,
         "concrete_truth_request_propagation_bound": true,
