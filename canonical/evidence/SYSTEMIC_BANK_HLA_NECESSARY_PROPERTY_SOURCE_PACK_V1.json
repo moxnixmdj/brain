@@ -1,0 +1,44 @@
+{
+  "schema":"PROJECT_BRAIN_SYSTEMIC_BANK_HLA_NECESSARY_PROPERTY_SOURCE_PACK_V1",
+  "scope_id":"REGCAP_BIS_RBC40_SYSTEMIC_BANK_HLA_V1",
+  "sources":[
+    {
+      "schema":"PROJECT_BRAIN_HTTPS_SOURCE_FRAGMENT_PROJECTION_PACK_V2",
+      "source_id":"BIS_BASEL_RBC40_SYSTEMIC_BANK_BUFFERS_2019_12_15",
+      "url":"https://www.bis.org/committees/bcbs/basel-framework/standard/rbc/40/inforce/2019-12-15/published/2019-12-15",
+      "retrieval_user_agent":"ProjectBrainSourceProjectionVerifier/2.0",
+      "fragments":[
+        {
+          "fragment_id":"GSIB_GOING_CONCERN_CET1",
+          "section_anchor":"Higher loss absorbency requirement for G-SIBs",
+          "text":"Taking into account this going-concern objective, global systemically important banks (G-SIBs) must meet their higher loss absorbency requirement with Common Equity Tier 1 capital only.",
+          "max_chars_after_anchor":5000
+        },
+        {
+          "fragment_id":"GSIB_EXTENDS_CCOB",
+          "section_anchor":"Higher loss absorbency requirement for G-SIBs",
+          "text":"National supervisors have implemented the higher loss absorbency requirement through an extension of the capital conservation buffer, maintaining the division of the buffer into four bands of equal size (as described in RBC30.17).",
+          "max_chars_after_anchor":7000
+        },
+        {
+          "fragment_id":"DSIB_EFFECTIVE_LOSS_ABSORBING_CET1",
+          "section_anchor":"Principle 5: higher loss absorbency requirement met with Common Equity Tier 1 and additional requirements and policy measures to address the risks posed by a D-SIB",
+          "text":"Higher loss absorbency requirements for D-SIBs should be fully met with Common Equity Tier 1 to ensure a maximum degree of consistency with G-SIBs in terms of effective loss-absorbing capacity.",
+          "max_chars_after_anchor":5000
+        },
+        {
+          "fragment_id":"DSIB_EXTENDS_CCOB",
+          "section_anchor":"Principle 5: higher loss absorbency requirement met with Common Equity Tier 1 and additional requirements and policy measures to address the risks posed by a D-SIB",
+          "text":"National authorities should implement the higher loss absorbency requirement through an extension of the capital conservation buffer, maintaining the division of the buffer into four bands of equal size (as described in RBC30.17).",
+          "max_chars_after_anchor":7000
+        },
+        {
+          "fragment_id":"DSIB_SYSTEMIC_IMPORTANCE_CALIBRATION",
+          "section_anchor":"Higher loss absorbency for domestic systemically important banks",
+          "text":"The higher loss absorbency requirement imposed on a bank should be commensurate with the degree of systemic importance",
+          "max_chars_after_anchor":15000
+        }
+      ]
+    }
+  ]
+}
