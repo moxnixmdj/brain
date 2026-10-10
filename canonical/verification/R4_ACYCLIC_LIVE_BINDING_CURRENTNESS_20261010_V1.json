@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_R4_ACYCLIC_LIVE_BINDING_VERIFICATION_V1",
+  "date": "2026-10-10",
+  "status": "PASS__R4_LIVE_BINDING_CURRENT__ACYCLIC__ZERO_TERMINAL_CREDIT",
+  "branch": "successor/r4-live-binding-currentness-20261010-v1",
+  "base_commit": "fd49b7b89d1a8989765f80dbd7d16f16d5912ad4",
+  "exact_blobs": {
+    "mission": "6ab2147306a138f9ea327d8e19cb4a5bc76e89df",
+    "root_theorem": "3d2c89502d94c045d04af04db4cdecc509a08dd8",
+    "claim_scope": "34b6e725efff42536e3c78b3c24543c32cbc02a9",
+    "root_registry": "7552290f57d478d4cf48ba42e392f71a23a91264",
+    "current_root_pointer": "8199d0d5a992c0ab4876af95349396bcc62a81fe",
+    "live_binding": "d008c3b4222119f272aae5342253dc3225f18ba8",
+    "terminal_authority": "4daaba1c02842dece511c8678f5ab42618ded913",
+    "live_validator": "1acdc6e81cf4410750f04febf079704d024d5b12",
+    "live_validator_tests": "9c7613df1b12827d90832d6c1063e9eab43ac837",
+    "snapshot_regression": "3d11f63757426646544a8b42ec64dac3f3caa1bd",
+    "acyclic_regression": "8dba5dfc23a1830129a4272dc2425762cab9f74a"
+  },
+  "independent_replay": {
+    "environment": "SPRITE__brain-capability-first-scheduler-verify-20261008-v1",
+    "method": "EXACT_FILE_BYTES__STANDARD_LIBRARY_EXECUTION__NO_DEPENDENCY_INSTALL",
+    "live_binding_validator": {
+      "status": "PASS__R4_LIVE_BINDING_CURRENT",
+      "errors": [],
+      "terminal_credit_delta": 0,
+      "global_mission_completion_derivable": false
+    },
+    "snapshot_regression": {
+      "passed": 2,
+      "failed": 0
+    },
+    "acyclic_regression": {
+      "passed": 2,
+      "failed": 0
+    }
+  },
+  "defect_closed": "IMPOSSIBLE_CONTENT_ADDRESS_CYCLE_AND_STALE_R4_CURRENTNESS_CHAIN",
+  "graph_after_repair": [
+    "ROOT_THEOREM_STATIC_ARCHITECTURE",
+    "CLAIM_SCOPE_HASHES_ROOT_THEOREM",
+    "CURRENT_ROOT_POINTER_HASHES_CLAIM_SCOPE",
+    "LIVE_BINDING_HASHES_THEOREM_CLAIM_SCOPE_CURRENT_POINTER_REGISTRY",
+    "TERMINAL_AUTHORITY_HASHES_LIVE_BINDING"
+  ],
+  "scope": "ACTIVE_FROZEN_R3_PROMOTION_SAFETY_PROPERTY_CLAIM_ONLY",
+  "nonclaims": [
+    "NO_GLOBAL_MISSION_COMPLETION",
+    "NO_OPUS_CHECKPOINT_COMPLETION",
+    "NO_ACCEPTANCE_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
