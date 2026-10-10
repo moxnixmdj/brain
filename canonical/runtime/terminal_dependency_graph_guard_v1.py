@@ -42,6 +42,30 @@ _REQUIRED_FIELDS = frozenset(
     }
 )
 
+_LEAF_REQUIRED_FIELDS = frozenset(
+    {"id", "kind", "status", "attack_families", "note"}
+)
+_LEAF_OPTIONAL_BINDING_FIELDS = frozenset(
+    {"verification", "generator", "snapshot", "obligation_snapshot"}
+)
+_LEAF_OPTIONAL_FIELDS = _LEAF_OPTIONAL_BINDING_FIELDS | frozenset(
+    {"open_channels", "current_runtime_obligation_count", "subobligations"}
+)
+_SUBOBLIGATION_ALLOWED_FIELDS = frozenset(
+    {
+        "id",
+        "status",
+        "verification_path",
+        "exact_target_count",
+        "scope",
+        "test_path",
+        "test_git_blob_sha",
+        "evidence_available",
+        "requirement",
+        "paths",
+    }
+)
+
 
 def git_blob_sha(path: Path) -> str:
     data = path.read_bytes()
@@ -96,6 +120,103 @@ def _load_json(path: Path, *, label: str) -> Mapping[str, Any] | None:
     return value if isinstance(value, Mapping) else None
 
 
+def _nonempty_unique_strings(value: Any) -> bool:
+    if not isinstance(value, Sequence) or isinstance(value, (str, bytes)) or not value:
+        return False
+    rows = [str(x).strip() for x in value]
+    return all(rows) and len(rows) == len(set(rows))
+
+
+def _validate_subobligations(
+    value: Any, *, root: Path, node_id: str
+) -> tuple[list[str] | None, str | None]:
+    if not isinstance(value, Sequence) or isinstance(value, (str, bytes)) or not value:
+        return None, "LEAF_SUBOBLIGATIONS_INVALID"
+    seen: set[str] = set()
+    unresolved: list[str] = []
+    for index, row in enumerate(value):
+        if not isinstance(row, Mapping):
+            return None, "LEAF_SUBOBLIGATION_NOT_OBJECT"
+        if not {"id", "status"} <= set(row) or set(row) - _SUBOBLIGATION_ALLOWED_FIELDS:
+            return None, "LEAF_SUBOBLIGATION_FIELD_SET_INVALID"
+        sid = str(row.get("id") or "").strip()
+        if not sid or sid in seen:
+            return None, "LEAF_SUBOBLIGATION_ID_INVALID"
+        seen.add(sid)
+        status = row.get("status")
+        if status not in LEAF_STATUSES:
+            return None, "LEAF_SUBOBLIGATION_STATUS_INVALID"
+        if status == "UNRESOLVED":
+            unresolved.append(sid)
+
+        if "exact_target_count" in row:
+            count = row.get("exact_target_count")
+            if isinstance(count, bool) or not isinstance(count, int) or count < 0:
+                return None, "LEAF_SUBOBLIGATION_TARGET_COUNT_INVALID"
+
+        for key in ("verification_path", "scope", "evidence_available", "requirement"):
+            if key in row and not str(row.get(key) or "").strip():
+                return None, "LEAF_SUBOBLIGATION_TEXT_FIELD_INVALID"
+
+        if "paths" in row and not _nonempty_unique_strings(row.get("paths")):
+            return None, "LEAF_SUBOBLIGATION_PATHS_INVALID"
+
+        has_test_path = "test_path" in row
+        has_test_sha = "test_git_blob_sha" in row
+        if has_test_path != has_test_sha:
+            return None, "LEAF_SUBOBLIGATION_TEST_BINDING_INCOMPLETE"
+        if has_test_path:
+            _, reason = _bound_file(
+                {
+                    "path": row.get("test_path"),
+                    "git_blob_sha": row.get("test_git_blob_sha"),
+                },
+                root=root,
+                label=f"{node_id}_{sid}_TEST",
+            )
+            if reason:
+                return None, reason
+    return unresolved, None
+
+
+def _validate_leaf_extensions(
+    node: Mapping[str, Any], *, root: Path, node_id: str
+) -> tuple[list[str] | None, str | None]:
+    keys = set(node)
+    missing = _LEAF_REQUIRED_FIELDS - keys
+    extra = keys - _LEAF_REQUIRED_FIELDS - _LEAF_OPTIONAL_FIELDS
+    if missing or extra:
+        return None, "LEAF_FIELD_SET_INVALID"
+
+    for field in sorted(_LEAF_OPTIONAL_BINDING_FIELDS):
+        if field not in node:
+            continue
+        _, reason = _bound_file(
+            node.get(field),
+            root=root,
+            label=f"{node_id}_{field.upper()}",
+        )
+        if reason:
+            return None, reason
+
+    if "open_channels" in node and not _nonempty_unique_strings(node.get("open_channels")):
+        return None, "LEAF_OPEN_CHANNELS_INVALID"
+
+    if "current_runtime_obligation_count" in node:
+        count = node.get("current_runtime_obligation_count")
+        if isinstance(count, bool) or not isinstance(count, int) or count < 0:
+            return None, "LEAF_RUNTIME_OBLIGATION_COUNT_INVALID"
+
+    unresolved_subs: list[str] = []
+    if "subobligations" in node:
+        unresolved_subs, reason = _validate_subobligations(
+            node.get("subobligations"), root=root, node_id=node_id
+        )
+        if reason:
+            return None, reason
+    return unresolved_subs, None
+
+
 def validate_graph(
     raw: Mapping[str, Any], *, repo_root: Path | None = None
 ) -> dict[str, Any]:
@@ -143,17 +264,28 @@ def validate_graph(
         kind = str(node.get("kind") or "").strip()
 
         if kind == "LEAF":
-            if set(node) != {"id", "kind", "status", "attack_families", "note"}:
-                return _fail("LEAF_FIELD_SET_INVALID", node_id=node_id)
+            unresolved_subs, reason = _validate_leaf_extensions(
+                node, root=root, node_id=node_id
+            )
+            if reason:
+                return _fail(reason, node_id=node_id)
             if not _attack_families(node.get("attack_families")):
                 return _fail("ATTACK_FAMILIES_INVALID", node_id=node_id)
             status = node.get("status")
             if status not in LEAF_STATUSES:
                 return _fail("LEAF_STATUS_INVALID", node_id=node_id)
+            if unresolved_subs and status == "PROVED":
+                return _fail(
+                    "PROVED_LEAF_HAS_UNRESOLVED_SUBOBLIGATION",
+                    node_id=node_id,
+                    unresolved_subobligations=sorted(unresolved_subs),
+                )
             if not node.get("attack_families"):
                 unresolved.append(node_id + "::ATTACK_APPLICABILITY")
             if status == "UNRESOLVED":
                 unresolved.append(node_id)
+            for sub_id in unresolved_subs or []:
+                unresolved.append(node_id + "::SUBOBLIGATION:" + sub_id)
             continue
 
         if kind != "ROUTE":
