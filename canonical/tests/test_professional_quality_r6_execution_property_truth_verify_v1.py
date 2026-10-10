@@ -57,11 +57,11 @@ class R6ExecutionPropertyTruthV1Tests(unittest.TestCase):
         self.assertFalse(out["pass"])
         self.assertEqual(out["reason"],"WHOLE_LEAF_SCOPE_BATCH_NOT_24_OF_24")
 
-    def test_binder_mutation_proof_cannot_drop_stale_basis_guard(self):
+    def test_binder_mutation_proof_cannot_restore_manifest_status_authority(self):
         d=docs()
         d["binder_verify"]["proved"]=[
             x for x in d["binder_verify"]["proved"]
-            if x!="RECEIPT_VERIFICATION_BASIS_MUST_BE_CONTENT_ADDRESSED_AND_CURRENT"
+            if x!="MANIFEST_VERIFIED_STATUS_HAS_ZERO_PROMOTION_AUTHORITY"
         ]
         out=self.evaluate(d)
         self.assertFalse(out["pass"])
