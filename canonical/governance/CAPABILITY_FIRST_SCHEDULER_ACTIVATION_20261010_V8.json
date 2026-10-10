@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V8",
+  "date": "2026-10-10",
+  "status": "ACTIVE_PRIMARY_CAPABILITY_FIRST_PARALLEL_FRONTIER_SCHEDULER__PARETO_FIRST__CONFLICT_AWARE__READ_ONLY_EVIDENCE_PARALLELISM_VERIFIED__FULL_EXECUTION_FAIL_CLOSED__ZERO_CREDIT",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "terminal_milestone": "OPUS_5_5_FIRST_FRONTIER_CHECKPOINT__NOT_TERMINAL_OBJECTIVE",
+  "supersedes": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V7.json",
+  "verified_core_scheduler": {
+    "path": "canonical/runtime/capability_first_scheduler_v1.py",
+    "git_blob_sha": "6d2091cc1581b9aa1fd2c74e8a76519a41d9d957",
+    "role": "SCALAR_PLANNING_CORE__NOT_PRIMARY_WHEN_NO_PROVED_TRADEOFF_CALIBRATION"
+  },
+  "verified_scalar_live_wrapper": {
+    "path": "canonical/runtime/capability_first_live_scheduler_v1.py",
+    "git_blob_sha": "a45740441a8bfbbab315ed07c39ca54079ef0779",
+    "role": "CALIBRATED_SCALAR_FALLBACK_ONLY__CURRENTNESS_AND_SCORE_CONTRACT_FAIL_CLOSED"
+  },
+  "primary_parallel_frontier": {
+    "path": "canonical/runtime/capability_parallel_frontier_v1.py",
+    "git_blob_sha": "2869f0aa76a8d6eb9dc87f937d767ed3690b0079",
+    "primary_entrypoint": "plan_current_parallel_frontier",
+    "frontier_path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
+    "frontier_git_blob_sha": "aecf51398bf2fee35e3ef984611aba6534152a8a",
+    "selection_law": "PARETO_DOMINANCE_ONLY_WITH_COMPLETE_PER_DIMENSION_EVIDENCE__EXPLICIT_DEPENDENCY_AND_MUTATION_AUTHORITY_CONFLICT_KEYS__NONCONFLICTING_NONDOMINATED_WORK_PARALLELIZES__CONFLICTING_INCOMPARABLE_WORK_REQUIRES_MINIMUM_DISCRIMINATING_EVIDENCE__NO_INVENTED_SCALAR_WEIGHTS"
+  },
+  "independent_verification": {
+    "path": "canonical/verification/CAPABILITY_PARALLEL_FRONTIER_V8_INDEPENDENT_VERIFY_20261010_V1.json",
+    "git_blob_sha": "946f785f41464e44837fb568a6136e1b789f3b9f",
+    "status": "PASS__PYCOMPILE__8_OF_8_ADVERSARIAL_TESTS__EXACT_R8_FRONTIER_REPLAY__SIX_SAFE_READ_ONLY_EVIDENCE_LANES"
+  },
+  "current_control_state": {
+    "full_execution_plan_authorized": false,
+    "read_only_evidence_plan_authorized": true,
+    "current_parallel_read_only_lane_count": 6,
+    "current_parallel_full_execution_lane_count": 0,
+    "current_reason": "ALL_SIX_READY_PRIMARY_CANDIDATES_HAVE_PARTIAL_OR_UNBOUND_VECTOR_EVIDENCE__READ_ONLY_EVIDENCE_ACQUISITION_IS_CONFLICT_FREE__FULL_EXECUTION_SELECTION_REMAINS_FAIL_CLOSED"
+  },
+  "primary_work_rule": {
+    "objective": "MAXIMIZE_REUSABLE_VERIFIED_CAPABILITY_GENERALIZATION_RELIABILITY_AND_EFFICIENCY_PER_RESOURCE_AND_MINIMIZE_WALL_CLOCK_THROUGH_SAFE_PARALLELISM",
+    "first_gate": "CURRENTNESS_DEPENDENCY_AND_CAPABILITY_FIRST_ELIGIBILITY",
+    "dominance_rule": "DIMENSIONWISE_PARETO_ONLY__NO_SCALARIZATION_REQUIRED",
+    "parallel_rule": "RUN_ALL_NONCONFLICTING_NONDOMINATED_READY_WORK_WHEN_FULL_VECTOR_EVIDENCE_IS_COMPLETE",
+    "incomplete_vector_rule": "READ_ONLY_EVIDENCE_ACQUISITION_ONLY_OR_FAIL_CLOSED",
+    "conflict_rule": "CONFLICTING_INCOMPARABLE_WORK_REQUIRES_MINIMUM_DISCRIMINATING_EVIDENCE_OR_PROVED_TRADEOFF_CONTRACT",
+    "shared_cause_rule": "SHARED_CAUSE_FANOUT_IS_A_TIE_OR_DISCRIMINATION_SIGNAL__NOT_PERMISSION_TO_WAKE_SLEEPING_OPEN_WORLD_WORK",
+    "checkpoint_rule": "OPUS_CHECKPOINT_IS_TERTIARY_AUDIT__NOT_PRIMARY_DEVELOPMENT_GATE",
+    "new_primitive_rule": "ALL_SIX_REUSE_EXHAUSTION_AND_FALSIFICATION_OBLIGATIONS_REQUIRED"
+  },
+  "option_preservation_binding": {
+    "current_pointer": "canonical/governance/CURRENT_OPTION_PRESERVING_OPTIMIZATION.json",
+    "invariant": "OPTIMIZE_IMPLEMENTATIONS_NOT_POSSIBILITIES",
+    "adaptation": "NONDOMINATED_WORK_OPTIONS_ARE_PRESERVED__DOMINANCE_MAY_DEMOTE_ACTIVE_WORK_BUT_NEVER_DELETE_CAPABILITY_EVIDENCE_OR_RECONSTRUCTION_STATE"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THIS_FINITE_CURRENT_FRONTIER_COVERS_UNKNOWN_FUTURE_WORK",
+    "NO_UNIQUE_RANK_ONE_CLAIM",
+    "NO_FULL_EXECUTION_AUTHORITY_FROM_SCHEDULER_PLANNING",
+    "NO_SCALAR_UTILITY_CALIBRATION_CLAIM",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT_FROM_SCHEDULING"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
