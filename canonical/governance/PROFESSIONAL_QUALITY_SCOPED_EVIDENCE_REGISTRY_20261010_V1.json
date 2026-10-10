@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_REGISTRY_V1",
   "date": "2026-10-10",
-  "status": "ACTIVE__EIGHT_CLAIM_SCOPED_CAPABILITIES__ZERO_GLOBAL_LEAF_CREDIT",
+  "status": "ACTIVE__NINE_CLAIM_SCOPED_CAPABILITIES__ZERO_GLOBAL_LEAF_CREDIT",
   "entries": [
     {
       "scope_id": "PQ::R7::SINGLE_EDIT::UVCK_DEFEATER_ORDER_REPAIR",
@@ -221,12 +221,41 @@
         "path": "canonical/runtime/dynamic_adequacy_extension_basis_gate_v1.py",
         "git_blob_sha": "2cae15152a80217871241b71e60a4d2fa9f52f03"
       }
+    },
+    {
+      "scope_id": "PQ::R2::FINITE_REGION_SEARCH::COMMON_POLICY_OR_MINIMAX_DISCRIMINATOR",
+      "root_id": "R2_CANDIDATE_SEARCH",
+      "contributes_to_leaf_ids": [
+        "PQ::R2_CANDIDATE_SEARCH::EXECUTION"
+      ],
+      "claim_kind": "FINITE_SCOPE_COMPLETE_COMMON_POLICY_OR_MINIMUM_TRUTHFUL_DISCRIMINATOR_SEARCH",
+      "source_receipt": {
+        "path": "canonical/verification/PROFESSIONAL_QUALITY_R2_SCOPE_COMPLETE_SEARCH_VERIFY_20261010_V1.json",
+        "git_blob_sha": "b66115513d1dde4527a65e5eda1ddea300138aca"
+      },
+      "reusable_compiler": {
+        "path": "canonical/runtime/u_scope_complete_depletion_orchestrator_v1.py",
+        "git_blob_sha": "b783ebdf51db3c6581facf4cc1cc3e9d59440760"
+      },
+      "minimax_runtime": {
+        "path": "canonical/runtime/finite_minimax_decision_region_v1.py",
+        "git_blob_sha": "1bb7dd084f10db4fe298fdd0ac77849df23837c9"
+      },
+      "compiler_verification": {
+        "path": "canonical/governance/PROFESSIONAL_QUALITY_R2_SCOPE_COMPLETE_SEARCH_SCOPE_20261010_V1.json",
+        "git_blob_sha": "b074b6e260cf2d5b534a822c3684171b1cc95b2e"
+      },
+      "global_leaf_closure": false,
+      "global_root_closure": false,
+      "semantic_leaf_credit": false,
+      "execution_leaf_credit": false,
+      "terminal_credit_delta": 0
     }
   ],
   "admission_law": "CLAIM_SCOPED_EVIDENCE_MAY_BE_REUSED_ONLY_INSIDE_ITS_PROVED_SCOPE_AND_NEVER_COUNTS_AS_GLOBAL_LEAF_OR_ROOT_CLOSURE",
   "hard_nonclaims": [
-    "NO_GLOBAL_R1_R3_R4_R5_R6_R7_R10_OR_R11_LEAF_CLOSURE",
-    "NO_GLOBAL_R1_R3_R4_R5_R6_R7_R10_OR_R11_ROOT_CLOSURE",
+    "NO_GLOBAL_R1_R2_R3_R4_R5_R6_R7_R10_OR_R11_LEAF_CLOSURE",
+    "NO_GLOBAL_R1_R2_R3_R4_R5_R6_R7_R10_OR_R11_ROOT_CLOSURE",
     "NO_DOMAIN_SEMANTIC_CLOSURE",
     "NO_DOMAIN_EXECUTION_CLOSURE",
     "NO_TERMINAL_CREDIT"
