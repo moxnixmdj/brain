@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_REGCAP_CONTEXTUAL_FACT_BINDING_SUPERSESSION_20261010_V1",
+  "date": "2026-10-10",
+  "status": "SUPERSEDED__DUPLICATE_CONTEXTUAL_COMPILER_AND_RELATIVE_BINDER_REMOVED__CANONICAL_V77_PATH_PRESERVED__ZERO_FRONTIER_CREDIT",
+  "accidental_reintroduction": {
+    "merge_commit": "d66aa6247c249c46956f939d18786cc0c74f9086",
+    "historical_verification": "canonical/verification/REGCAP_CONTEXTUAL_FACT_BINDING_VERIFY_20261010_V1.json",
+    "removed_files": [
+      "canonical/runtime/regcap_contextual_fact_compiler_v1.py",
+      "canonical/runtime/regcap_contextual_discriminator_binding_v1.py",
+      "canonical/tests/test_regcap_contextual_fact_compiler_v1.py",
+      "canonical/tests/test_regcap_contextual_discriminator_binding_v1.py"
+    ]
+  },
+  "reason": [
+    "CURRENT_R2_V77_ALREADY_OWNS_THE_REGCAP_CONTEXTUAL_OBSERVATION_AND_RESOLUTION_PATH",
+    "THE_REINTRODUCED_CONTEXTUAL_FACT_COMPILER_DUPLICATED_A_PREVIOUSLY_SUPERSEDED_PARSER_SURFACE",
+    "THE_REINTRODUCED_COMPILER_WAS_MORE_PERMISSIVE_THAN_THE_CANONICAL_ASSERTION_OWNERSHIP_GUARDED_SPAN_COMPILER",
+    "THE_RELATIVE_BINDER_LACKED_THE_CANONICAL_INDEPENDENT_CANDIDATE_SET_COMPLETENESS_AUTHORITY_REQUIRED_FOR_CONCEPT_IDENTITY",
+    "KEEPING_PARALLEL_PARSERS_AND_RESOLVERS_WOULD_VIOLATE_THE_EXISTING_ANTI_DUPLICATION_AND_SINGLE_AUTHORITY_RULES"
+  ],
+  "canonical_path": {
+    "observation_compiler": "canonical/runtime/regcap_contextual_observation_compiler_v1.py",
+    "contextual_resolution": "canonical/runtime/regcap_contextual_resolution_v1.py",
+    "domain_truth": "canonical/runtime/domain_mapping_truth_certificate_v1.py",
+    "current_reconciliation": "canonical/governance/R2_V77_REGCAP_CONTEXT_PROJECTION_REPAIR_20261010_V1.json",
+    "current_verification": "canonical/verification/REGCAP_NO_DESCRIPTOR_CONTEXT_TRUTH_VERIFY_20261010_V2.json"
+  },
+  "retained_nonduplicative_truth": [
+    "THE_CURRENT_V77_CANONICAL_ROUTE_ALREADY_SUPPORTS_EXACT_BOUNDED_CCOB_CCYB_TLAC_FUNCTIONAL_AND_STRUCTURAL_SIGNATURE_CONTEXTS",
+    "CONCEPT_SELECTION_REQUIRES_AUTHENTICATED_TASK_CANDIDATE_SET_COMPLETENESS_OR_THE_AUTHENTICATED_BOUNDED_REGCAP_REGISTRY",
+    "NAKED_OR_WEAKER_UNRECOGNIZED_PROSE_REMAINS_UNRESOLVED",
+    "GLOBAL_OPEN_WORLD_CONCEPT_IDENTITY_REMAINS_UNCLAIMED"
+  ],
+  "historical_verification_semantics": {
+    "REGCAP_CONTEXTUAL_FACT_BINDING_VERIFY_20261010_V1": "HISTORICAL_ONLY__NO_CURRENT_RUNTIME_AUTHORITY__ZERO_FRONTIER_CREDIT"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "semantic_family_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
