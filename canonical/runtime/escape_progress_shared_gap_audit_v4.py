@@ -18,6 +18,7 @@ or terminal credit. Missing or unauthenticated rows remain open.
 from __future__ import annotations
 
 from copy import deepcopy
+import json
 from pathlib import Path
 from typing import Any, Mapping, Sequence
 
