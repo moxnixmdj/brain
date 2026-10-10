@@ -1,0 +1,33 @@
+{
+  "schema":"PROJECT_BRAIN_PROFESSIONAL_STEP_BINDING_AUTHORITY_V2_INDEPENDENT_VERIFY_20261010_V1",
+  "date":"2026-10-10",
+  "status":"PASS__INDEPENDENT_SPRITE__PYCOMPILE__9_OF_9__PROOF_CARRYING_FINAL_POSITIVE_CERTIFICATION_MEDIATION__ZERO_PROPERTY_CREDIT",
+  "exact_blobs":{
+    "runtime":"a3df22c695f8b204ab7802cc4c8e21efbed49af2",
+    "tests":"d8bf0024be55001ab377cc43694a71debe752e14",
+    "v1_authority":"27f3c137dae7f00925083a0824d008c2b4d10f0a",
+    "scope_compiler":"b208255789b14e44e86c82c196e06b5c41b3d039"
+  },
+  "replay":{
+    "carrier":"brain-professional-hard-defect-verify-20261010",
+    "carrier_id":"sprite-1bbb86ed-1f7c-409f-8397-fadc4de7a62a",
+    "py_compile":"PASS",
+    "tests_run":9,
+    "tests_passed":9,
+    "tests_failed":0
+  },
+  "proves":[
+    "NONFINAL_STEPS_PRESERVE_V1_AUTHENTICATION",
+    "FINAL_ABSTENTION_REMAINS_AVAILABLE_WITH_ZERO_POSITIVE_AUTHORITY",
+    "FINAL_POSITIVE_CERTIFICATION_REQUIRES_COMPLETE_LOCAL_TOTALITY",
+    "TOTALITY_CERTIFICATE_BINDS_EXACT_RUN_CONTEXT_AND_EVIDENCE",
+    "INCOMPLETE_UNKNOWN_OR_UNVERIFIED_TOTALITY_CANNOT_AUTHORIZE_POSITIVE_CERTIFICATION",
+    "TOTALITY_CERTIFICATE_CANNOT_SELF_GRANT_QUALITY_AUTHORITY"
+  ],
+  "complete_mediation_in_declared_system_proved":false,
+  "r12_material_totality_proved":false,
+  "cc_r3_terminal_closure_proved":false,
+  "semantic_property_truth_authority":false,
+  "terminal_authority":false,
+  "terminal_credit_delta":0
+}
