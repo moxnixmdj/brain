@@ -1,0 +1,24 @@
+name: Verify frozen escape-progress claim
+
+on:
+  pull_request:
+    paths:
+      - "canonical/governance/ESCAPE_PROGRESS_TOTALITY_FROZEN_13_CLAIM_20261010_V1.json"
+      - "canonical/tests/test_escape_progress_frozen_13_claim_v1.py"
+      - "canonical/runtime/coverage_claim_scope_guard_v1.py"
+      - "canonical/governance/CURRENT_MISSION_OBJECTIVE.json"
+      - "canonical/governance/FROZEN_19_ACCEPTANCE_PROOF_SHAPE_QUOTIENT_20261007_V1.json"
+      - ".github/workflows/verify-frozen-escape-progress-claim.yml"
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Compile exact verifier surface
+        run: python -m py_compile canonical/runtime/coverage_claim_scope_guard_v1.py canonical/tests/test_escape_progress_frozen_13_claim_v1.py
+      - name: Execute exact claim regression
+        run: python -c "from canonical.tests.test_escape_progress_frozen_13_claim_v1 import test_escape_progress_frozen_13_claim_is_exact_and_fail_closed as t; t(); print('PASS')"
