@@ -190,6 +190,13 @@ def compile_target(
             return _fail("TARGET_LIST_FIELD_INVALID:" + field)
         normalized[field] = values
 
+    if len(normalized["plausible_interpretations"]) != 1:
+        return _fail(
+            "TARGET_INTERPRETATION_NOT_SINGLETON",
+            plausible_interpretation_count=len(normalized["plausible_interpretations"]),
+            ambiguity_resolution_required=True,
+        )
+
     extra = sorted(set(target) - set(_REQUIRED_TEXT) - set(_REQUIRED_LISTS) - {"schema"})
     if extra:
         return _fail("UNMODELED_TARGET_INSTANCE_FIELDS", unmodeled_fields=extra)
@@ -273,7 +280,7 @@ def compile_target(
             "SOURCE_EVIDENCE_SET_CONTENT_ADDRESSED",
             "ARTIFACT_TYPE_CONTENT_ADDRESSED",
             "HARD_CONSTRAINT_SET_CONTENT_ADDRESSED",
-            "PLAUSIBLE_INTERPRETATION_SET_CONTENT_ADDRESSED",
+            "SINGLE_ADMITTED_INTERPRETATION_CONTENT_ADDRESSED",
             "TARGET_CONSTRUCT_CONTENT_ADDRESSED",
             "CLAIM_SCOPE_CONTENT_ADDRESSED",
             "CURRENT_DRAFT_OR_RENDER_REFERENCE_CONTENT_ADDRESSED",
@@ -282,7 +289,7 @@ def compile_target(
         ],
         hard_nonclaims=[
             "NO_CLAIM_STRUCTURED_TARGET_FIELDS_WERE_INFERRED_COMPLETELY_FROM_ARBITRARY_LANGUAGE",
-            "NO_CLAIM_PLAUSIBLE_INTERPRETATION_ENUMERATION_IS_OPEN_WORLD_COMPLETE",
+            "NO_CLAIM_SINGLE_ADMITTED_INTERPRETATION_IS_OPEN_WORLD_COMPLETE",
             "NO_SOURCE_EXTRACTION_COMPLETENESS",
             "NO_UNIQUE_BEST_PLAN",
             "NO_GLOBAL_R1_SEMANTIC_OR_EXECUTION_LEAF_CLOSURE",
