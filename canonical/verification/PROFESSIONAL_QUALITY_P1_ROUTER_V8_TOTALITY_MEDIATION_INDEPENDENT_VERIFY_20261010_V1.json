@@ -1,0 +1,70 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_P1_ROUTER_V8_TOTALITY_MEDIATION_INDEPENDENT_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_SPRITE__PYCOMPILE__11_OF_11__25_OF_25_SUBJECT_CURRENT__EXACT_R12_TOTALITY_SEMANTICS_MEDIATED__ZERO_QUALITY_OR_TERMINAL_CREDIT",
+  "subject": {
+    "router": {
+      "path": "canonical/runtime/professional_quality_p1_router_v8.py",
+      "git_blob_sha": "48c6839071b8de1309f87b0df1803a9eb29f0e13"
+    },
+    "tests": {
+      "path": "canonical/tests/test_professional_quality_p1_router_v8.py",
+      "git_blob_sha": "f53e6475a9acd204381a1eeabdeae91c5360c748"
+    },
+    "declared_system": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V8_DECLARED_SYSTEM_SUBJECT_20261010_V7.json",
+      "git_blob_sha": "21820105caab672440c76d051fecc16a562ae4cc",
+      "subject_sha256": "f6a1752167c3e4972ac952b04e3298690088256fcaa65150743582e8e655e51c",
+      "component_count": 25
+    },
+    "final_step_authority": {
+      "path": "canonical/runtime/professional_step_binding_authority_v2.py",
+      "git_blob_sha": "a3df22c695f8b204ab7802cc4c8e21efbed49af2"
+    },
+    "scope_compiler": {
+      "path": "canonical/runtime/universal_scope_closure_compiler_v1.py",
+      "git_blob_sha": "b208255789b14e44e86c82c196e06b5c41b3d039"
+    }
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-professional-hard-defect-verify-20261010",
+    "carrier_id": "sprite-1bbb86ed-1f7c-409f-8397-fadc4de7a62a",
+    "py_compile": "PASS",
+    "tests_run": 11,
+    "tests_passed": 11,
+    "tests_failed": 0,
+    "subject_component_count": 25,
+    "subject_current_component_count": 25,
+    "transcript_sha256": "9a1c9b352d15e4df6db9956f1425247730e02a707f6d16568717012bd66c9826",
+    "transcript_bytes": 5681
+  },
+  "proved": {
+    "caller_step_results_forbidden": true,
+    "all_seven_load_bearing_steps_authenticated": true,
+    "authenticated_final_abstain_stops_before_delegate": true,
+    "generic_final_pass_without_positive_authority_rejected": true,
+    "positive_without_material_totality_rejected": true,
+    "unknown_final_outcome_rejected": true,
+    "invalid_v2_totality_binding_rejected": true,
+    "positive_delegation_requires_v2_totality_authority": true,
+    "declared_system_current_and_content_addressed": true,
+    "exact_r12_property_claim_binding_required": true,
+    "exact_r12_scope_claim_binding_required": true,
+    "exact_r12_material_obligation_binding_required": true,
+    "independent_semantic_binding_verification_required": true,
+    "wrong_claim_or_obligation_binding_rejected": true
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_ANY_REAL_TASK_CURRENTLY_HAS_A_VALID_POSITIVE_TOTALITY_CERTIFICATE",
+    "NO_R12_CC_R3_PROPERTY_CREDIT_FROM_MEDIATION_MECHANISM_ALONE_WITHOUT_A_REAL_POSITIVE_TOTALITY_CERTIFICATE",
+    "NO_R4_OR_SEMANTIC_PROPERTY_TRUTH_FROM_ROUTER_MEDIATION_ALONE",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
