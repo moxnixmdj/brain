@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_LEAF_REGISTRY_R12_SEMANTIC_INDEPENDENT_VERIFY_V1",
+  "date": "2026-10-11",
+  "pass": true,
+  "status": "PASS__INDEPENDENT_SPRITE__UNCHANGED_BINDER_V2__12_EXECUTION_PLUS_R12_SEMANTIC__13_OF_24_DERIVABLE__11_SEMANTIC_OPEN__ZERO_GLOBAL_AUTHORITY",
+  "subject": {
+    "binder": {
+      "path": "canonical/runtime/professional_quality_leaf_binder_v2.py",
+      "git_blob_sha": "96dedf3641009b08a2e21a8be376459f7ae06a58"
+    },
+    "registry": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_LEAF_EVIDENCE_REGISTRY_20261011_V3.json",
+      "git_blob_sha": "d6c7199c90672876d6de689c4acb30000e2c17e9"
+    },
+    "tests": {
+      "path": "canonical/tests/test_professional_quality_leaf_registry_r12_semantic_v1.py",
+      "git_blob_sha": "e664de22dcf4da558466d4eb391a5d9cc8a5e371"
+    },
+    "semantic_receipt": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R12_SEMANTIC_LEAF_RECEIPT_20261011_V1.json",
+      "git_blob_sha": "896bcb2f7efbf444b5573eedffdeaa95d3ae27b1"
+    }
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-professional-hard-defect-verify-20261010",
+    "carrier_id": "sprite-1bbb86ed-1f7c-409f-8397-fadc4de7a62a",
+    "workspace": "/home/sprite/brain",
+    "complete_transitive_binder_evidence_set_staged": true,
+    "py_compile": "PASS",
+    "tests_run": 4,
+    "tests_passed": 4,
+    "tests_failed": 0,
+    "transcript_sha256": "2212616007c26ba915ef41300e13a905e24affd7bdb2fb7399e84bb5949c9f61",
+    "transcript_bytes": 874,
+    "binder_summary_sha256": "a9a22e942ffc184bb1315c496e8df4c4617a1e904ed2d4d1d231fa3f74364b86"
+  },
+  "truth": {
+    "existing_evidence_current": true,
+    "structural_errors": [],
+    "rejected_receipt_count": 0,
+    "verified_execution_leaf_count": 12,
+    "verified_semantic_leaf_count": 1,
+    "verified_leaf_count": 13,
+    "open_execution_leaf_count": 0,
+    "open_semantic_leaf_count": 11,
+    "open_leaf_count": 11,
+    "verified_semantic_leaf_ids": [
+      "PQ::R12_META_COMPOSITION_CLOSURE::SEMANTIC"
+    ],
+    "promotion_ready": false,
+    "terminal_authority": false
+  },
+  "hard_nonclaims": [
+    "NO_OTHER_SEMANTIC_LEAF_PROPERTY_TRUTH",
+    "NO_GLOBAL_PROFESSIONAL_QUALITY_CLOSURE",
+    "NO_LIVE_DEFAULT_PROMOTION",
+    "NO_ACCEPTANCE_OR_TERMINAL_AUTHORITY"
+  ],
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
