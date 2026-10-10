@@ -4,7 +4,7 @@
   "status": "RANK20_V12_CANONICAL_STAGED__INDEPENDENT_ZERO_EXPOSURE_PASS__PUBLIC_SURFACE_POINTER_PENDING__EIGHTEEN_CONSUMED__NO_ACTIVATION_AUTHORITY",
   "current_result": {
     "path": "canonical/verification/TB_SCIENCE_RANK20_V12_LOCAL_ZERO_EXPOSURE_VERIFY_20261010_V1.json",
-    "git_blob_sha": "1f7d1b1b57b740f609c4e1fc1e0560f4a2f3e35d"
+    "git_blob_sha": "54918310df1e52a2bff84e390201be5f13844038"
   },
   "current_ledger": {
     "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V59.json",
