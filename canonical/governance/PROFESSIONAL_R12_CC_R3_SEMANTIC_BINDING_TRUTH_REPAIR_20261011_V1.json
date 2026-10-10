@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_R12_CC_R3_SEMANTIC_BINDING_TRUTH_REPAIR_20261011_V1",
+  "date": "2026-10-11",
+  "status": "ACTIVE_TRUTH_REPAIR__PR4275_CC_R3_AND_R4_PROMOTION_REVOKED__UNIVERSAL_SAFETY_THEOREM_PRESERVED__ZERO_PROPERTY_OR_TERMINAL_CREDIT",
+  "base_main_commit": "fe2faad543a22808be8c431a7bdd360e18b26b7a",
+  "affected_artifacts": {
+    "merged_pr": 4275,
+    "merge_commit": "fe2faad543a22808be8c431a7bdd360e18b26b7a",
+    "overclaim_registry": {
+      "path": "canonical/governance/COVERAGE_ROOT_REGISTRY_PROFESSIONAL_R12_SEMANTIC_20261011_V3.json",
+      "git_blob_sha": "d312c84dc9ccf9583d8098f71953467aee6e26f2"
+    },
+    "overclaim_cc_r3_certificate": {
+      "path": "canonical/governance/COVERAGE_CC_R3_PROFESSIONAL_R12_SEMANTIC_CERTIFICATE_20261011_V4.json",
+      "git_blob_sha": "53b96f6fd1d26ad6eb3e4c1d0744a04465c402f4"
+    }
+  },
+  "exact_semantic_mismatch": {
+    "root_theorem_r3": "B_PLUS_SUBSETEQ_G_MINUS",
+    "g_minus_bound_semantics": "IN_SCOPE_R12_SEMANTIC_CERTIFICATION_STATES_SATISFYING_THE_EXACT_LEAF_ACCEPTANCE_UNDER_THE_BOUND_CLOSURE_NORMAL_FORM",
+    "frozen_leaf_acceptance": "DOMAIN_SPECIFIC_CLAIM_SEMANTICS_GROUNDING_SCOPE_UNCERTAINTY_AND_ALL_ROOT_RELEVANT_DEFEATERS_RESOLVED_WITH_TYPED_EVIDENCE",
+    "universal_theorem_proves": "ALL_ROOT_RELEVANT_MATERIAL_DEFEATERS_RESOLVED_OR_PROVED_DECISION_NULL_BEFORE_POSITIVE_CERTIFICATION",
+    "non_entailment": "A_NONPOSITIVE_FAIL_CLOSED_STATE_WITH_AN_UNRESOLVED_MATERIAL_PREMISE_SATISFIES_THE_POSITIVE_CERTIFICATION_SAFETY_PROPERTY_BUT_DOES_NOT_SATISFY_THE_LITERAL_FULL_LEAF_ACCEPTANCE"
+  },
+  "corrected_truth": {
+    "cc_r1": "PROVED_CURRENT",
+    "cc_r2": "PROVED_CURRENT",
+    "universal_positive_gate_safety": "PROVED_AND_PRESERVED",
+    "cc_r3_set_inclusion": "OPEN",
+    "r4_proof_closure": false,
+    "r12_semantic_property_truth": false,
+    "new_primitive_required": false
+  },
+  "corrected_registry": {
+    "path": "canonical/governance/COVERAGE_ROOT_REGISTRY_PROFESSIONAL_R12_SEMANTIC_20261011_V4.json"
+  },
+  "exact_next": "REUSE_EXISTING_WHOLE_LEAF_SCOPE__LOSSLESS_GENERATOR__TYPED_EVIDENCE__AND_COVERAGE_CERTIFICATE_MACHINERY_TO_PROVE_THE_FULL_FROZEN_ACCEPTANCE_OVER_B_PLUS__OR_BIND_A_CONSTRUCTIVE_ADMISSIBLE_COUNTEREXAMPLE_AND_CREATE_A_SUCCESSOR_CLAIM_WITH_THE_INTENDED_SAFE_CERTIFICATION_PREDICATE__NO_AUTHORITY_TRANSPORT",
+  "hard_nonclaims": [
+    "NO_CC_R3_SET_INCLUSION_FROM_POSITIVE_GATE_SAFETY",
+    "NO_R4_CLOSURE",
+    "NO_R12_SEMANTIC_PROPERTY_TRUTH",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "property_truth_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
