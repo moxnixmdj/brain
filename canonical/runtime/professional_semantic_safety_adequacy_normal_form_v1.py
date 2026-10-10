@@ -22,14 +22,16 @@ positive capability/coverage per resource.
 from __future__ import annotations
 
 from hashlib import sha1
+import importlib.util
 import json
 from pathlib import Path
+import sys
+import types
 from typing import Any, Mapping
 
 from canonical.runtime import professional_quality_leaf_binder_v2 as binder
 from canonical.runtime import professional_semantic_totality_claim_pack_v3 as pack_v3
 from canonical.runtime import professional_semantic_shared_overstrong_predicate_falsifier_v1 as falsifier
-from canonical.runtime import one_shot_reality_closure_v2 as reality
 
 SCHEMA="PROJECT_BRAIN_PROFESSIONAL_SEMANTIC_SAFETY_ADEQUACY_NORMAL_FORM_V1"
 PINS={
@@ -52,6 +54,34 @@ def _load(root:Path,key:str)->dict[str,Any]:
   if not isinstance(o,dict):raise ValueError("PIN_NOT_OBJECT:"+key)
   return o
  return {}
+
+def _load_reality_helpers(root:Path):
+ path=root/PINS["reality"][0]
+ if _blob(path)!=PINS["reality"][1]:
+  raise ValueError("PIN_BLOB_DRIFT:reality")
+ spec=importlib.util.spec_from_file_location("_brain_reality_closure_v2_isolated",path)
+ if spec is None or spec.loader is None:raise RuntimeError("REALITY_SPEC_LOAD_FAILED")
+ saved={}
+ names=[
+  "canonical.runtime.one_shot_verified_closure_v1",
+  "canonical.runtime.promote_r2_direct_route_v1",
+ ]
+ try:
+  for name in names:
+   saved[name]=sys.modules.get(name)
+   stub=types.ModuleType(name)
+   if name.endswith("one_shot_verified_closure_v1"):
+    stub.learning=types.SimpleNamespace(DEFAULT_STATE_PATH=None)
+   else:
+    stub.promote=lambda **kwargs: {"pass":False,"status":"STUB_NOT_EXECUTED"}
+   sys.modules[name]=stub
+  module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+  return module
+ finally:
+  for name in names:
+   old=saved[name]
+   if old is None:sys.modules.pop(name,None)
+   else:sys.modules[name]=old
 
 def _fail(reason:str,**extra:Any)->dict[str,Any]:
  return {
@@ -117,7 +147,8 @@ def _closure(*,internal=(),evidence=(),pending=False,external=False,passed=False
   },
  }
 
-def _verify_adequacy_mechanism()->tuple[bool,dict[str,Any]]:
+def _verify_adequacy_mechanism(root:Path)->tuple[bool,dict[str,Any]]:
+ reality=_load_reality_helpers(root)
  cases={
   "constructive":(reality.compile_gap_contract(_closure(internal=["MISSING_CAPABILITY"])),"CONSTRUCTIVE_CAPABILITY_GAP"),
   "acquisition":(reality.compile_gap_contract(_closure(evidence=["MISSING_EVIDENCE"],pending=True)),"PENDING_ACQUISITION_OR_EXPERIMENT"),
@@ -181,7 +212,7 @@ def verify(*,repo_root:str|Path|None=None)->dict[str,Any]:
   rows.append({"leaf_id":claim.get("leaf_id"),"credit_safety_gate_ready":True})
  if len({r["leaf_id"] for r in rows})!=12:return _fail("SEMANTIC_LEAF_SET_NOT_UNIQUE")
 
- adequate,detail=_verify_adequacy_mechanism()
+ adequate,detail=_verify_adequacy_mechanism(root)
  if not adequate:return _fail("ADEQUACY_MECHANISM_REUSE_FAILED",detail=detail)
 
  return {
