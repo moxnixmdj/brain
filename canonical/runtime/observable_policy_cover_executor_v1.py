@@ -12,8 +12,8 @@ decision:
 2. every runtime observation used to traverse the tree must be content-addressed,
    independently verified, truth-preserving, safe, and precommitted.
 
-A positive result selects one Brain-owned policy already certified adequate for
-the entire surviving world class. It does not itself execute that policy and does
+A positive result selects one Brain-owned policy already certified adequate and
+hard-constraint-safe for the entire surviving world class. It does not itself execute that policy and does
 not certify the caller's original goal as satisfied.
 """
 from __future__ import annotations
@@ -110,6 +110,7 @@ def _fail(reason: str, **extra: Any) -> dict[str, Any]:
         "reason": reason,
         "policy_selection_authorized": False,
         "selected_policy_adequacy_verified": False,
+        "selected_policy_safety_verified": False,
         "actual_goal_satisfaction_verified": False,
         "u_empty_authorized": False,
         "terminal_authority": False,
@@ -126,6 +127,7 @@ def _open(status: str, *, reason: str, **extra: Any) -> dict[str, Any]:
         "reason": reason,
         "policy_selection_authorized": False,
         "selected_policy_adequacy_verified": False,
+        "selected_policy_safety_verified": False,
         "actual_goal_satisfaction_verified": False,
         "u_empty_authorized": False,
         "terminal_authority": False,
@@ -418,6 +420,11 @@ def evaluate(
                 "POLICY_COVER_GATE_PASS_WITHOUT_TOTALITY",
                 policy_cover_result=cover,
             )
+        if cover.get("policy_safety_coverage_proved") is not True:
+            return _fail(
+                "POLICY_COVER_GATE_PASS_WITHOUT_POLICY_SAFETY",
+                policy_cover_result=cover,
+            )
 
         observations = payload.get("observation_bindings_by_discriminator_id", {})
         if not isinstance(observations, Mapping):
@@ -470,13 +477,14 @@ def evaluate(
                     "bound_state_totality_proved": True,
                     "policy_selection_authorized": True,
                     "selected_policy_adequacy_verified": True,
+                    "selected_policy_safety_verified": True,
                     "actual_goal_satisfaction_verified": False,
                     "u_empty_authorized": False,
                     "terminal_authority": False,
                     "terminal_credit_delta": 0,
                     "boundary": (
                         "BOUND_FINITE_POLICY_RELEVANT_STATE_ONLY__"
-                        "POLICY_SELECTION_AND_ADEQUACY_ONLY__"
+                        "POLICY_SELECTION_ADEQUACY_AND_HARD_CONSTRAINT_SAFETY_ONLY__"
                         "EXECUTION_AND_ACTUAL_GOAL_ACCEPTANCE_REMAIN_SEPARATE"
                     ),
                 }

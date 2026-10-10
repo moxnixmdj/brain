@@ -55,6 +55,8 @@ def test_minimax_against_160_deterministic_independent_bottom_up_cases():
                 "adequacy_receipt": _receipt(
                     policy_id=policy_id,
                     policy_adequate_on_every_listed_world=True,
+                    policy_safe_on_every_listed_world=True,
+                    hard_constraint_scope_complete=True,
                     brain_owned=True,
                     deployed_exact=True,
                     resource_bound_proved=True,

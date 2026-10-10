@@ -12,6 +12,8 @@ def base():
       "policies":[{
         "policy_id":"p","adequate_world_ids":["real","spurious"],"cost_units":1,
         "adequacy_receipt":receipt(policy_id="p",policy_adequate_on_every_listed_world=True,
+                    policy_safe_on_every_listed_world=True,
+                    hard_constraint_scope_complete=True,
           brain_owned=True,deployed_exact=True,resource_bound_proved=True)
       }],
       "discriminators":[]
@@ -51,9 +53,13 @@ def test_truthful_discriminator_can_cover_overapproximation():
     p["policies"]=[
       {"policy_id":"p0","adequate_world_ids":["real"],"cost_units":1,
        "adequacy_receipt":receipt(policy_id="p0",policy_adequate_on_every_listed_world=True,
+                    policy_safe_on_every_listed_world=True,
+                    hard_constraint_scope_complete=True,
          brain_owned=True,deployed_exact=True,resource_bound_proved=True)},
       {"policy_id":"p1","adequate_world_ids":["spurious"],"cost_units":1,
        "adequacy_receipt":receipt(policy_id="p1",policy_adequate_on_every_listed_world=True,
+                    policy_safe_on_every_listed_world=True,
+                    hard_constraint_scope_complete=True,
          brain_owned=True,deployed_exact=True,resource_bound_proved=True)}]
     p["discriminators"]=[{
       "discriminator_id":"d","cost_units":1,
