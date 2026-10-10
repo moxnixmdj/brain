@@ -1,0 +1,87 @@
+{
+  "schema": "PROJECT_BRAIN_ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V7",
+  "date": "2026-10-10",
+  "status": "ACTIVE_SUCCESSOR_CAUSAL_BINDING__12_ACQUISITION__1_PARKED_STRUCTURAL_GAP_B__ZERO_ACTIVE_GAP_B__CC_R3_OPEN__ZERO_CREDIT",
+  "predecessor": {
+    "path": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V6.json",
+    "git_blob_sha": "a6fe5eda7b596d5a24cf75bc9b046bf53f4fe7be"
+  },
+  "frozen_claim": {
+    "path": "canonical/governance/ESCAPE_PROGRESS_TOTALITY_FROZEN_13_CLAIM_20261010_V3.json",
+    "git_blob_sha": "e534dfb56e8e3cde66a260de299627662965e079",
+    "rule": "FROZEN_OBLIGATION_UNIVERSE_AND_IDS_UNCHANGED"
+  },
+  "current_successor_manifest": {
+    "path": "canonical/governance/ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_20261010_V2.json",
+    "git_blob_sha": "f3a566a982dcd867c583eafd24c6f5dd3baa0530",
+    "row_count": 13,
+    "historical_gap_a_count": 10,
+    "historical_gap_b_count": 3
+  },
+  "causal_reclassification": {
+    "path": "canonical/governance/ESCAPE_ACTIVE_GAP_B_CAUSAL_RECLASSIFICATION_20261010_V1.json",
+    "git_blob_sha": "c793b7f57b13a936646a2825cd67f26c28bf3744",
+    "independent_verification": {
+      "path": "canonical/verification/ESCAPE_ACTIVE_GAP_B_CAUSAL_RECLASSIFICATION_PUBLIC_VERIFY_20261010_V1.json",
+      "git_blob_sha": "1be936fc211b06baa480f2b747cb933ca2cd6dcf"
+    }
+  },
+  "current_effective_projection": {
+    "route_group_overrides": {
+      "PROWORK_GDPVAL_GE_1846": "GAP_A_ACQUISITION_TOTALITY",
+      "CHARTOGRAPHY_TOOLS_GE_89": "GAP_A_ACQUISITION_TOTALITY"
+    },
+    "parked_rows": [
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "projected_gap_a_count": 12,
+    "projected_gap_b_structural_count": 1,
+    "active_gap_b_count": 0,
+    "parked_gap_b_count": 1,
+    "active_gap_a_count": 12,
+    "total_row_count": 13,
+    "rule": "PROJECT_VERIFIED_CURRENT_CAUSAL_ROUTE_BEFORE_ROW_PROOF_VALIDATION__PARKED_TB_REMAINS_OPEN_BUT_IS_NOT_ACTIVE_GAP_B_WORK"
+  },
+  "shared_gaps": {
+    "GAP_A_ACQUISITION_TOTALITY": {
+      "obligation_count": 12,
+      "exact_predicate": "FOR_EACH_CURRENT_ACQUISITION_ROW__PROVE_EITHER_A_CURRENTLY_AVAILABLE_AUTHENTICATED_SCOPE_COMPLETE_BRAIN_OWNED_SAFE_ADEQUATE_RESOURCE_ADMISSIBLE_COMMON_POLICY_TERMINAL_CERTIFICATE__OR_A_CURRENTLY_ACQUIRABLE_AUTHENTICATED_SAFE_TRUTH_PRESERVING_DISCRIMINATOR_WITH_A_FINITE_COMPLETE_OUTCOME_SET_AND_STRICT_DECISION_REGION_SHRINK",
+      "proof_modes": [
+        "TERMINAL_COMMON_POLICY",
+        "STRICT_DISCRIMINATOR"
+      ]
+    },
+    "GAP_B_INTERNAL_ROUTE_STRICT_PROGRESS": {
+      "obligation_count": 1,
+      "active_obligation_count": 0,
+      "parked_obligation_count": 1,
+      "parked_obligation_ids": [
+        "TB_SCIENCE_GE_58_7"
+      ],
+      "exact_predicate": "IF_THE_PARKED_ROW_WAKES__BIND_ONE_EXECUTABLE_VERIFIED_ACTION_TO_A_FINITE_WELL_FOUNDED_PROGRESS_MEASURE_AND_PROVE_EVERY_ALLOWED_OUTCOME_TERMINALIZES_OR_STRICTLY_DECREASES_THE_MEASURE",
+      "wake_condition": "FRESH_EXPLICIT_CAPABILITY_FIRST_ADMISSION_AND_NEW_NONRETRY_EXECUTION_AUTHORITY_FOR_A_FUTURE_UNEXPOSED_VALIDATION_SUBJECT"
+    }
+  },
+  "execution_order": [
+    "NO_ACTIVE_GAP_B_RESEARCH_NOW",
+    "ATTACK_CURRENT_GAP_A_12_THROUGH_SHARED_O_Q_ACCEPTANCE_INSTANTIATIONS_AND_TARGET_FREE_COMMON_POLICY_CERTIFICATES_FIRST",
+    "ONLY_ACQUIRE_MINIMUM_DECISION_CHANGING_INFORMATION_WHEN_COMMON_POLICY_OR_STRONGER_SCOPE_COMPLETE_PROOF_DOES_NOT_CLOSE_THE_ROW",
+    "KEEP_TB_PARKED_UNTIL_ITS_EXPLICIT_WAKE_CONDITION_BECOMES_TRUE",
+    "PROMOTE_CC_R3_ONLY_WHEN_ALL_13_PROJECTED_CURRENT_ROWS_HAVE_AUTHENTICATED_ROW_PROOFS"
+  ],
+  "hard_nonclaims": [
+    "NO_GAP_A_ROW_PROOF_FROM_RECLASSIFICATION",
+    "NO_TB_ROW_PROOF",
+    "NO_CC_R3_OR_GLOBAL_ESCAPE_PROGRESS_TOTALITY",
+    "NO_CLAIM_ANY_PRIVATE_OR_GATED_INFORMATION_IS_CURRENTLY_ACQUIRABLE",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "row_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
