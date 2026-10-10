@@ -1,0 +1,43 @@
+name: verify-pq-same-subject-gate-v2
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/runtime/professional_quality_same_subject_composition_gate_v2.py
+      - canonical/tests/test_professional_quality_same_subject_composition_gate_v2.py
+      - canonical/governance/PROFESSIONAL_QUALITY_SAME_SUBJECT_COMPOSITION_GATE_20261010_V2.json
+      - canonical/governance/PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_REGISTRY_20261010_V1.json
+      - canonical/runtime/professional_quality_scoped_evidence_overlay_v1.py
+      - .github/workflows/verify-pq-same-subject-gate-v2.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Compile gate
+        run: python3 -m py_compile canonical/runtime/professional_quality_same_subject_composition_gate_v2.py
+      - name: Replay current scoped overlay
+        run: |
+          PYTHONPATH=. python3 - <<'PY'
+          from canonical.runtime import professional_quality_scoped_evidence_overlay_v1 as scoped
+          out=scoped.evaluate()
+          assert out["pass"], out
+          assert out["admitted_scope_count"] == 21, out
+          roots={x["root_id"] for x in out["admitted_scopes"]}
+          assert len(roots) == 12, out
+          assert out["global_leaf_closure"] is False
+          assert out["global_root_closure"] is False
+          print(out["status"], out["admitted_scope_count"], len(roots))
+          PY
+      - name: Replay same-subject gate V2
+        run: PYTHONPATH=. python3 -m unittest -v canonical.tests.test_professional_quality_same_subject_composition_gate_v2
