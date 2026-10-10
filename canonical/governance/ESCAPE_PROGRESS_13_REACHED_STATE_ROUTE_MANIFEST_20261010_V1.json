@@ -146,7 +146,7 @@
       "route_group": "GAP_B_INTERNAL_ROUTE_STRICT_PROGRESS",
       "route_class": "INTERNAL_PLANNER_CONTROLLER_REPAIR_BEFORE_NEXT_IRREVERSIBLE_TRIAL",
       "evidence": [
-        "canonical/governance/CURRENT_TB_SCIENCE_EXECUTION.json",
+        "canonical/governance/TB_SCIENCE_RANK18_V6_RANK19_FROZEN_EXECUTION_SNAPSHOT_20261010_V1.json",
         "999db25cb0a339eac146130fac884e879ab1c88f"
       ],
       "required_strings": [
@@ -156,7 +156,13 @@
       ],
       "current_route_available": "INTERNAL_REPAIR_AVAILABLE",
       "strict_progress_witness_bound": false,
-      "externality_proved": false
+      "externality_proved": false,
+      "evidence_semantics": {
+        "binding_mode": "FROZEN_SNAPSHOT",
+        "source_current_pointer": "canonical/governance/CURRENT_TB_SCIENCE_EXECUTION.json",
+        "snapshot_base_commit": "8bbab859c4bc3116b2f7112bfddd22f4b4121121",
+        "rule": "FROZEN_REACHED_STATE_EVIDENCE_MUST_NOT_FOLLOW_MUTABLE_CURRENT_POINTER_AFTER_CLAIM_FREEZE"
+      }
     },
     {
       "obligation_id": "CHARTOGRAPHY_TOOLS_GE_89",
@@ -251,7 +257,8 @@
     "externality_proved_count": 0,
     "strict_progress_witness_bound_count": 0,
     "cc_r3_proved": false,
-    "next_load_bearing_object": "PROVE_OR_REFUTE_GAP_A_ACQUISITION_TOTALITY_AND_GAP_B_INTERNAL_ROUTE_STRICT_PROGRESS__DO_NOT_BUILD_THIRTEEN_SEPARATE_SOLVERS"
+    "next_load_bearing_object": "PROVE_OR_REFUTE_GAP_A_ACQUISITION_TOTALITY_AND_GAP_B_INTERNAL_ROUTE_STRICT_PROGRESS__DO_NOT_BUILD_THIRTEEN_SEPARATE_SOLVERS",
+    "frozen_snapshot_evidence_binding_count": 1
   },
   "hard_nonclaims": [
     "NO_CC_R3_CERTIFICATE",
@@ -259,7 +266,8 @@
     "NO_ESCAPE_PROGRESS_TOTALITY",
     "NO_INFORMATION_THEORETIC_EXTERNALITY_CLASSIFICATION",
     "NO_ACCEPTANCE_CREDIT",
-    "NO_TERMINAL_CREDIT"
+    "NO_TERMINAL_CREDIT",
+    "FROZEN_SNAPSHOT_REBINDING_DOES_NOT_UPDATE_OR_REEVALUATE_THE_LIVE_TB_SCIENCE_FRONTIER"
   ],
   "accounting": {
     "incremental_spend_usd": 0,
