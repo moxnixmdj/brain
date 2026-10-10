@@ -1,0 +1,109 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK19_ONE_SLOT_EXECUTION_AUTHORITY_20261010_V2",
+  "date": "2026-10-10",
+  "status": "STAGED_FRESH_RANK19_V13_AUTHORITY__CURRENT_MAIN_CAPABILITY_FIRST_ADMISSION_V2_VERIFIED__ZERO_TASK_READ__ZERO_TRIALS_CONSUMED__EFFECTIVE_ONLY_AFTER_FULL_PUBLIC_V13_RESEAL_AND_CANONICAL_PROMOTION",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "slot": {
+    "ledger_schedule_rank": 19,
+    "frozen_manifest_schedule_order": 18,
+    "task_rank": 18,
+    "id": "terminal-bench-science/diag-chipseq::trial-0",
+    "digest": "sha256:437bfacaebda9ce9905d54bdfe7247aec9649038206512c64547021f42e3950b"
+  },
+  "logical_attempt": {
+    "id": "def7e2921acf58d4ef03e3183512996c718a5a13069482cb825464c0c963a8b4",
+    "identity_basis": "SLOT_ID_PLUS_TASK_DIGEST",
+    "carrier_independent": true,
+    "prior_model_reasoning_samples": 0,
+    "prior_durable_start": false,
+    "fresh_slot": true
+  },
+  "predecessor_result": {
+    "path": "canonical/verification/TB_SCIENCE_RANK18_V6_IRREVERSIBLE_RESULT_TRUTH_20261010_V1.json",
+    "git_blob_sha": "2459d821057d6f7178ffea440fb19966e56a3d89",
+    "final_classification": "FINAL_ZERO",
+    "consumed_slots_after": 18
+  },
+  "current_ledger": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V37.json",
+    "git_blob_sha": "1f44e46869055cc046da9c53fcae485615f239f9",
+    "consumed_slots": 18,
+    "consumed_successes": 0,
+    "consumed_final_failures": 18
+  },
+  "runtime_repair": {
+    "diagnosis": {
+      "path": "canonical/verification/TB_SCIENCE_RANK18_PLANNER_TIMEOUT_CAUSAL_DIAGNOSIS_20261010_V1.json",
+      "git_blob_sha": "97697c3c7868644d36b317dc7e4e80dfd8f97647"
+    },
+    "verification": {
+      "path": "canonical/verification/TB_SCIENCE_PLANNER_V7_ZERO_EXPOSURE_VERIFICATION_20261010_V1.json",
+      "git_blob_sha": "9797cc625e3e33bb905cf23fa6c79f66dc9794db"
+    },
+    "planner": {
+      "path": "canonical/runtime/harbor_science_planner_v7.py",
+      "git_blob_sha": "e5d6ab78b6cf5bacee568cd3701410a8745b9ce8"
+    },
+    "agent": {
+      "path": "canonical/runtime/harbor_science_agent_v13.py",
+      "git_blob_sha": "8deede8adb960b6ebf7ee747a5e9ff1016238b7e"
+    }
+  },
+  "controls": {
+    "logical_attempts_authorized_total": 1,
+    "retries_authorized": 0,
+    "replacement_allowed": false,
+    "incremental_spend_usd_max": 0,
+    "exact_task_digest_rematerialization_allowed": true,
+    "different_task_or_digest_forbidden": true,
+    "model_reasoning_before_durable_start_forbidden": true,
+    "task_start_requires_prestart_guard_agent_ready_and_durable_start_cas": true,
+    "action_effect_requires_durable_intent_ack": true,
+    "next_action_requires_durable_state_commit_ack": true,
+    "uncertain_effect_replay_authority": false,
+    "prestart_failure_before_durable_start_consumes_slot": false,
+    "post_start_result_irreversible": true
+  },
+  "activation_preconditions": [
+    "CAPABILITY_FIRST_CHECKPOINT_ADMISSION_V2_VERIFIED_AND_BOUND",
+    "FULL_PUBLIC_EXECUTION_SURFACE_RESEALED_AROUND_PLANNER_V7_AGENT_V13",
+    "PUBLIC_ZERO_EXPOSURE_RESEAL_VERIFICATION_PASS",
+    "CURRENT_TERMINAL_AUTHORITY_PROMOTES_THIS_RANK19_AUTHORITY_AFTER_RESEAL_PASS",
+    "EXACT_ONE_FILE_ACTIVATION_BRANCH_WITH_NO_PRIOR_ACTIVE_RUN",
+    "DURABLE_START_CAS_ABSENT"
+  ],
+  "state": {
+    "task_read_history": false,
+    "task_started": false,
+    "start_cas_acquired": false,
+    "benchmark_trials_consumed": 0,
+    "result_present": false,
+    "reward_observed": false
+  },
+  "execution_authority": true,
+  "execution_authority_effective": false,
+  "task_rematerialization_authority": true,
+  "task_read_authority": true,
+  "fresh_reality_authority": true,
+  "promotion_authority": false,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "predecessor_authority": {
+    "path": "canonical/governance/TB_SCIENCE_RANK19_ONE_SLOT_EXECUTION_AUTHORITY_20261010_V1.json",
+    "git_blob_sha": "ea76756ea30084c7f8291747ae9d204485a0186a"
+  },
+  "capability_first_checkpoint_admission": {
+    "path": "canonical/governance/TB_SCIENCE_RANK19_CAPABILITY_FIRST_CHECKPOINT_ADMISSION_20261010_V1.json",
+    "git_blob_sha": "49e4f9c232f876546b2c72fb32ba19a3e487e1c9",
+    "verification_path": "canonical/verification/TB_SCIENCE_RANK19_CAPABILITY_FIRST_ADMISSION_INDEPENDENT_VERIFICATION_20261010_V2.json",
+    "verification_git_blob_sha": "8ce5d9c5f7767536273189489f68d3562cc20135",
+    "authorized": true,
+    "decision": "ADMIT_CHECKPOINT_AUDIT_EXECUTION",
+    "benchmark_role": "NEW_CAPABILITY_VALIDATION",
+    "execution_authority_minted_by_admission": false
+  },
+  "capability_credit_delta": 0
+}
