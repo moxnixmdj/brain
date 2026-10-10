@@ -8,6 +8,40 @@ from canonical.runtime import regcap_loss_cushion_truth_certificate_v5 as cert5
 
 
 class Tests(unittest.TestCase):
+    def test_dispatch_consumes_v7_four_way_mrel_relative_selection(self):
+        text = "loss-absorbing cushion"
+        v7_result = {
+            "pass": True,
+            "status": "OPEN__UNIQUE_MREL_SELECTION_RELATIVE_TO_FOUR_CONCEPT_BOUND_INVENTORY",
+            "relative_selection_authority": True,
+            "relative_selected_concept_id": "REGCAP::MREL",
+            "candidate_concept_ids": [
+                "REGCAP::CCOB", "REGCAP::CCYB", "REGCAP::TLAC", "REGCAP::MREL"
+            ],
+            "semantic_identity_authority": False,
+            "mapped_concept_id": None,
+            "terminal_authority": False,
+            "terminal_credit_delta": 0,
+        }
+        with patch.object(cert5.grounding, "ground", return_value=v7_result):
+            out = dispatch.evaluate({
+                "truth_kind": "REGCAP_LOSS_CUSHION_GROUNDING",
+                "predicate_id": "caller-label",
+                "claim_kind": "RELATIVE_RIVAL_SELECTION",
+                "source_text": text,
+                "source_id": "doc:v81",
+                "start": 0,
+                "end": len(text),
+                "target_concept_id": "REGCAP::MREL",
+            })
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(out["predicate_truth"], "TRUE")
+        self.assertTrue(out["relative_selection_authority"])
+        self.assertFalse(out["semantic_identity_authority"])
+        self.assertFalse(out["global_identity_authority"])
+        self.assertFalse(out["terminal_authority"])
+        self.assertEqual(out["grounding_result"]["schema"] if "schema" in out["grounding_result"] else cert5.grounding.SCHEMA, cert5.grounding.SCHEMA)
+
     def test_dispatch_routes_loss_cushion_truth_to_v5(self):
         expected = {
             "pass": True,
