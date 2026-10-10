@@ -37,6 +37,18 @@ def _clean_fixture(root: Path) -> None:
     )
     _write(
         root,
+        "canonical/runtime/certified_reached_escape_state_constructor_v2.py",
+        "from canonical.runtime import certified_reached_escape_state_constructor_v1 as v1\n"
+        "from canonical.runtime import reached_escape_state_kernel_v1 as kernel\n"
+        "def construct(state):\n"
+        "    if state.get('schema') != kernel.STATE_SCHEMA:\n"
+        "        return {'pass': False}\n"
+        "    verified_state = state\n"
+        "    result = v1.construct(verified_state)\n"
+        "    return result\n",
+    )
+    _write(
+        root,
         "canonical/runtime/live_brain_runtime_v1.py",
         'SURFACES=("CERTIFIED_REACHED_ESCAPE_STATE_CONSTRUCTOR_V1",)\n'
         "def f(payload):\n"
@@ -93,6 +105,27 @@ class ReachedEscapeNoBypassGuardTests(unittest.TestCase):
                 any(
                     row["code"] == "UNTRUSTED_LOW_LEVEL_REACHED_ESCAPE_REFERENCE"
                     and row["path"] == "canonical/runtime/rogue_consumer.py"
+                    for row in out["errors"]
+                )
+            )
+
+    def test_constructor_v2_cannot_use_raw_kernel_evaluator(self):
+        with TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            _clean_fixture(root)
+            constructor_v2 = root / "canonical/runtime/certified_reached_escape_state_constructor_v2.py"
+            constructor_v2.write_text(
+                constructor_v2.read_text(encoding="utf-8")
+                + "\ndef bad(state):\n"
+                + "    return kernel.evaluate(state)\n",
+                encoding="utf-8",
+            )
+            out = g.scan_repo(root)
+            self.assertFalse(out["pass"])
+            self.assertTrue(
+                any(
+                    row["code"] == "CONSTRUCTOR_V2_UNAPPROVED_KERNEL_ATTRIBUTE"
+                    and "evaluate" in row["attributes"]
                     for row in out["errors"]
                 )
             )
