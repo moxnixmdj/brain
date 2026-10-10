@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_COMPACT_ERRORS_SUCCESSOR_EXECUTION_V1",
+  "status": "FRESH_SUCCESSOR_EXECUTION__BUILTIN_ERROR_METADATA_COMPACTED__ZERO_PROMOTION_CREDIT",
+  "recorded_at": "2026-10-10",
+  "predecessor": {
+    "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_NO_ANNOTATIONS_SUCCESSOR_EXECUTION_20261010_V1.json",
+    "raw_python_source_bytes": 3316798,
+    "manifest_sha256": "a08322767e870d97082745e22b2757a5efcafdeefb84b4911bf5de382111178a"
+  },
+  "transform": {
+    "id": "BUILTIN_ERROR_AND_ASSERT_MESSAGE_COMPACTION_V15",
+    "tool": "canonical/research/bytes/tools/compact_builtin_errors_v15.py",
+    "reconstruction": "canonical/research/bytes/tools/rebuild_candidate_v15.py"
+  },
+  "measured_candidate": {
+    "python_files": 277,
+    "package_raw_python_source_bytes": 3261401,
+    "B_exec_raw_python_source_bytes": 3264161,
+    "manifest_sha256": "8fa8d5f6e4a957d35bbf8c1edb82ff0cb068ecbba77bc1550f082363f7abc635",
+    "raw_improvement_bytes": 55397,
+    "archive_bytes": 502732,
+    "archive_sha256": "5602c9c90da065bda1feee7c157f608956713e561e566b38b95ad97765f5bd9f"
+  },
+  "qualification": {
+    "id": "QUAL_SUCCESSOR_NEXT18_20261010_V1",
+    "cases": 5980,
+    "corpus_sha256": "d756ff0909ddbb0b8e4ea8421dbb7d26c0f25f2186b98194c85e4e3a8f7f93ca",
+    "stock_donor": "5980/5980",
+    "candidate": "5980/5980",
+    "independent_copy": "5980/5980",
+    "archive_replay": "5980/5980",
+    "spent": true
+  },
+  "truth_boundary": [
+    "MEASURED: exact V15 bytes pass frozen NEXT18 in all four lanes.",
+    "INFERRED: selected builtin exception/assert message payloads are outside the bounded execution obligation.",
+    "NOT CLAIMED: exact out-of-scope error text, universal correctness, absolute minimum, or Opus-family promotion.",
+    "PROMOTION CREDIT: 0."
+  ]
+}
