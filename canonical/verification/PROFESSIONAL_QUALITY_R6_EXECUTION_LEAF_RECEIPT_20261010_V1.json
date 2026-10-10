@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_LEAF_VERIFICATION_RECEIPT_V1",
+  "date": "2026-10-10",
+  "leaf_id": "PQ::R6_EVIDENCE_GROUNDING_DEPENDENCE::EXECUTION",
+  "root_id": "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+  "leaf_kind": "EXECUTION",
+  "verdict": "PASS",
+  "closure_scope": "EXACT_LEAF",
+  "acceptance_sha256": "fae7b1ccf4f94a91a1fb4caa4a634e6883538a28382991d97c69278e574b67ce",
+  "root_contract_sha256": "5afa7e6a92354663c1229c6dd463d2e1d1ce24b6238bbebd72d9fe570301cb87",
+  "manifest_git_blob_sha": "a7cad32c9fd969ff2c3857bb924c7bd746237ec2",
+  "leaf_execution_satisfied": true,
+  "leaf_semantic_satisfied": false,
+  "property_truth_basis": "INDEPENDENTLY_REPLAYED_31_CASE_R6_EXECUTION_ACCEPTANCE_ON_EXACT_UVCK_RUNTIME_AND_DOMAIN_GRAPH_BYTES",
+  "verification_basis": [
+    {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R6_EXECUTION_PROPERTY_TRUTH_INDEPENDENT_VERIFY_20261010_V1.json",
+      "git_blob_sha": "e35de079c3161909de2ee821b3753a2ab820aa8c"
+    },
+    {
+      "path": "canonical/runtime/professional_quality_r6_execution_property_truth_verify_v1.py",
+      "git_blob_sha": "a6468cf298bd1cc52afa585923dd22bfcbf90ad1"
+    },
+    {
+      "path": "canonical/tests/test_professional_quality_r6_execution_property_truth_verify_v1.py",
+      "git_blob_sha": "55fe412ad8b5f454cd277f089d9b31e8a5caa07d"
+    },
+    {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_SCOPE_BATCH_VERIFY_20261010_V1.json",
+      "git_blob_sha": "4c2d40a262f18f34bb35f94b59660d60972d45ef"
+    }
+  ],
+  "unknown_defeater_completeness_proved": false,
+  "semantic_leaf_closed": false,
+  "root_closed": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "hard_nonclaims": [
+    "NO_R6_UNKNOWN_DEFEATER_COMPLETENESS",
+    "NO_R6_SEMANTIC_LEAF_CLOSURE",
+    "NO_R6_ROOT_CLOSURE",
+    "NO_GLOBAL_PROFESSIONAL_PROPERTY_TRUTH",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ]
+}
