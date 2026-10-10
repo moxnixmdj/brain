@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_CERTIFIED_REACHED_ESCAPE_STATE_FABRIC_ACTIVATION_20261010_V1",
+  "date": "2026-10-10",
+  "status": "ACTIVE_CANDIDATE__LIVE_FABRIC_REACHED_STATE_ADMISSION_GATED_BY_FINITE_TOTALITY_CERTIFICATE__GLOBAL_REPAIR_ACQUIRABILITY_OPEN__ZERO_CREDIT",
+  "mission_relation": "LOAD_BEARING_REPAIR_OF_REACHED_ESCAPE_STATE_CONSTRUCTION_INVARIANT",
+  "predecessor_boundary": {
+    "path": "canonical/governance/REACHED_ESCAPE_STATE_CONSTRUCTION_INVARIANT_BOUNDARY_20261010_V1.json",
+    "git_blob_sha": "f9dd240a5ee9d5da2fa842c8f7f2af00f4c370bd",
+    "prior_counterexample_live_admissible": true
+  },
+  "runtime": {
+    "constructor": {
+      "path": "canonical/runtime/certified_reached_escape_state_constructor_v1.py",
+      "git_blob_sha": "5cfce3cd753877ecd37d37082f2acd3e4883bfbf"
+    },
+    "fabric": {
+      "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
+      "git_blob_sha": "b1e68fc1627954706de686d2db297efee08dd6f8"
+    },
+    "finite_totality": {
+      "path": "canonical/runtime/reached_escape_finite_totality_certificate_v1.py",
+      "git_blob_sha": "85487335b7e774ac9084b34c60e0175842771036"
+    }
+  },
+  "verification": {
+    "path": "canonical/verification/CERTIFIED_REACHED_ESCAPE_STATE_FABRIC_PROMOTION_VERIFY_20261010_V1.json"
+  },
+  "invariant": {
+    "statement": "EVERY_STATE_ADMITTED_BY_LIVE_REACHED_ESCAPE_STATE_FABRIC_MODE_HAS_PASSED_THE_EXACT_FINITE_REACHED_STATE_FUTURE_OUTCOME_TOTALITY_CERTIFICATE",
+    "enforced_by_construction": true,
+    "uncertified_state_behavior": "FAIL_CLOSED_WITH_DETERMINISTIC_CONTENT_ADDRESSED_REPAIR_OBLIGATION",
+    "admitted_state_behavior": "PRESERVE_EXISTING_KERNEL_TERMINALIZE_OR_STRICT_PROGRESS_RESULT"
+  },
+  "resolved": [
+    "BROAD_LIVE_FABRIC_DIRECT_ADMISSION_OF_UNSPLITTABLE_POLICY_CONFLICT_STATE",
+    "UNCOVERED_REGION_ADMISSION_AS_CERTIFIED_REACHED_STATE",
+    "UNRESOLVED_EQUIVALENCE_CLASS_ADMISSION_AS_CERTIFIED_REACHED_STATE"
+  ],
+  "remaining_global_question": "FOR_EVERY_REPAIR_REQUIRED_STATE_ON_ACTUAL_MISSION_SUPPORT__IS_AT_LEAST_ONE_REQUIRED_POLICY_OR_TRUTHFUL_DISCRIMINATOR_REPAIR_SOUNDLY_ACQUIRABLE_OR_IS_THE_STATE_PROVABLY_OUTSIDE_ACTUAL_TARGET_SUPPORT",
+  "remaining_repair_classes": [
+    "ACQUIRE_TRUTHFUL_DISTINGUISHING_OBSERVATION",
+    "ACQUIRE_OR_SYNTHESIZE_COMMON_ADEQUATE_POLICY",
+    "ACQUIRE_OR_SYNTHESIZE_REGION_ADEQUATE_POLICY"
+  ],
+  "global_escape_progress_totality_proved": false,
+  "global_repair_acquirability_proved": false,
+  "open_ended_mission_terminal_proved": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "acceptance_authority": false,
+  "terminal_authority": false,
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
