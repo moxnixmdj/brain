@@ -215,11 +215,18 @@ def test_nonzero_credit_in_receipt_is_rejected():
         td.cleanup()
 
 
-def test_liveness_requirement_is_bound_to_rerun_result():
-    td, root, slot, subject_id = make_fixture(
-        result_mutator=lambda r: r.__setitem__("liveness_preserved", False)
-    )
+def test_liveness_requirement_is_bound_to_executable_rerun():
+    td, root, slot, subject_id = make_fixture()
     try:
+        verifier_path = root / slot["semantic_verifier"]["path"]
+        verifier_path.write_text(
+            "def verify_refinement(*, root, certificate_path, subject_id):\n"
+            "    import json\n"
+            "    cert=json.loads(certificate_path.read_text(encoding='utf-8'))\n"
+            "    return {'pass': True, 'subject_id': subject_id, 'certificate_subject_id': cert.get('subject_id'), 'refinement_fact': 'checked', 'liveness_preserved': False}\n",
+            encoding="utf-8",
+        )
+        slot["semantic_verifier"]["git_blob_sha"] = blob(verifier_path)
         slot["liveness_required"] = True
         out = validate_executable_refinement(root, slot, subject_id)
         assert out["pass"] is False
