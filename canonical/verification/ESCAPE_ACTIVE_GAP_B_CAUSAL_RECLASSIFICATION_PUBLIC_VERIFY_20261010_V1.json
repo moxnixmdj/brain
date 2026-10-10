@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_ESCAPE_ACTIVE_GAP_B_CAUSAL_RECLASSIFICATION_PUBLIC_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_SIX_BRAIN_BLOBS__ACTIVE_GAP_B_ZERO__ACTIVE_ACQUISITION_12__PARKED_TB_1__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/ESCAPE_ACTIVE_GAP_B_CAUSAL_RECLASSIFICATION_20261010_V1.json",
+    "git_blob_sha": "c793b7f57b13a936646a2825cd67f26c28bf3744"
+  },
+  "independent_carrier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify-gapb-reclass-v1",
+    "commit": "6c88f6cc4e396559b1e82e03edc31b0a1c79394f",
+    "workflow": ".github/workflows/verify-gapb-reclass-v1.yml",
+    "workflow_run_id": 38069801972,
+    "workflow_job_id": 114264720076,
+    "conclusion": "success",
+    "verifier": "capsules/escape_gapb_reclass_v1/verify.py"
+  },
+  "exact_source_git_blobs": {
+    "reclassification": "c793b7f57b13a936646a2825cd67f26c28bf3744",
+    "gdp_route": "c38ca6ee010a63d6dc218aa2c9d85831e39441ed",
+    "gdp_information_cut": "7bf8b2ffc8186e14380da080e5a9832a2fd9a2a8",
+    "chart_activation": "d5b46fc2f784a206cda9bb7c6f1ee951300eccc0",
+    "chart_preflight": "ea260cd10e29379fc148ec6f281e1006bf5bdbfa",
+    "tb_reclassification": "2639f4e58ef71502707ab6b2bb37efb592b1a234"
+  },
+  "verified_conclusion": {
+    "active_gap_b_count": 0,
+    "effective_gap_a_active_count": 12,
+    "parked_unresolved_count": 1,
+    "parked_rows": [
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "reclassified_rows": [
+      "PROWORK_GDPVAL_GE_1846",
+      "CHARTOGRAPHY_TOOLS_GE_89"
+    ]
+  },
+  "boundary": "SCHEDULING_CAUSAL_RECLASSIFICATION_ONLY__NO_GAP_A_ROW_ACQUIRABILITY_NO_CC_R3_NO_GLOBAL_ESCAPE_TOTALITY",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "row_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
