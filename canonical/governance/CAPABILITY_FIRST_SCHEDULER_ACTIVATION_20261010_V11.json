@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V11",
+  "date": "2026-10-10",
+  "status": "ACTIVE_POST_COMPOSITION_V11__WHOLE_LEAF_RESIDUAL_CURRENTNESS_BOUND__READ_ONLY_ONLY__ZERO_CREDIT",
+  "supersedes": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V10.json",
+  "runtime": {
+    "path": "canonical/runtime/capability_parallel_frontier_post_composition_v1.py",
+    "git_blob_sha": "249b08767cdf4f940ba98ea3e8fe3aff0601e349",
+    "entrypoint": "plan_current_post_composition_frontier"
+  },
+  "frontier": {
+    "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
+    "git_blob_sha": "26d91f7ea78a6345ca03c4a0b6f2f8ea30f80eb5"
+  },
+  "whole_leaf": {
+    "ledger_path": "canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_RESIDUAL_LEDGER_20261010_V1.json",
+    "ledger_git_blob_sha": "ae5503829ad340cccef287f37ff70e4ab9288d33",
+    "compiler_path": "canonical/runtime/professional_quality_whole_leaf_residual_compiler_v1.py",
+    "compiler_git_blob_sha": "67b9420187322268e7ddf98a3b19fb5408ec86ae",
+    "expected_leaf_count": 24,
+    "closed_leaf_count": 0
+  },
+  "authority": {
+    "read_only_evidence_plan": true,
+    "full_execution": false,
+    "promotion": false,
+    "terminal": false
+  },
+  "terminal_credit_delta": 0
+}
