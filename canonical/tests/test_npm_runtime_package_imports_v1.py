@@ -13,5 +13,13 @@ class NpmRuntimePackageImportTests(unittest.TestCase):
         self.assertTrue(hasattr(mod, "verify"))
 
 
+    def test_auto_pypi_library_acquisition_imports_as_canonical_package(self):
+        from canonical.runtime import auto_pypi_library_acquisition as mod
+        self.assertTrue(hasattr(mod, "supports"))
+
+    def test_independent_pypi_codec_verifier_imports_as_canonical_package(self):
+        from canonical.runtime import independent_pypi_codec_verifier as mod
+        self.assertTrue(hasattr(mod, "verify"))
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
