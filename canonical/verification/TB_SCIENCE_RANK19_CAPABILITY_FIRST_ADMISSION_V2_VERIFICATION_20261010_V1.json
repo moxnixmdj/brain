@@ -1,0 +1,123 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK19_CAPABILITY_FIRST_ADMISSION_V2_VERIFICATION_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_CURRENT_V4_BYTES__RANK19_NEW_CAPABILITY_VALIDATION_ADMISSION__ZERO_EXPOSURE_ZERO_CREDIT",
+  "subject": {
+    "branch": "successor/rank19-capability-first-current-base-20261010-v2",
+    "admission": {
+      "path": "canonical/governance/TB_SCIENCE_RANK19_CAPABILITY_FIRST_CHECKPOINT_ADMISSION_20261010_V2.json",
+      "git_blob_sha": "65c8c53d6478ec78d1423bb28cca48be00e0de14"
+    },
+    "verifier": {
+      "path": "canonical/runtime/tb_science_rank19_capability_first_admission_v2.py",
+      "git_blob_sha": "d7df99bb46c4a1256bfff776d20b4e3eb4c6fdea"
+    },
+    "admission_test": {
+      "path": "canonical/tests/test_tb_science_rank19_capability_first_admission_v2.py",
+      "git_blob_sha": "6874f51f6ad71f1534364b58705ba3d46da3e6b5"
+    },
+    "verifier_test": {
+      "path": "canonical/tests/test_tb_science_rank19_capability_first_admission_v2_verifier.py",
+      "git_blob_sha": "340b25ccdfa19659babd3506a9f9a806b06724a5"
+    }
+  },
+  "exact_bound_sources": {
+    "scheduler_activation_v4": "9c286a67fc5e61dc671682771d5590ce0cbfd6b7",
+    "scheduler_runtime_v4": "63be50dacedec96809b9f3b40faaeab411741c39",
+    "scheduler_v4_independent_verification": "90fb5c6770070e1f8d2f6cb65c08d0714fb12a42",
+    "rank18_planner_timeout_diagnosis": "97697c3c7868644d36b317dc7e4e80dfd8f97647",
+    "planner_v7_zero_exposure_verification": "9797cc625e3e33bb905cf23fa6c79f66dc9794db",
+    "rank19_one_slot_authority_v1": "ea76756ea30084c7f8291747ae9d204485a0186a",
+    "rank19_slot_ledger_v38": "137a2f61d911321365bd80613e3806a77dbe7eca"
+  },
+  "test_driven_history": [
+    {
+      "phase": "RED_ADMISSION",
+      "commit": "8dfb65562a98a8c27982d65b4eb5a07bf875f242",
+      "result": "EXPECTED_FAIL",
+      "failure": "V4-bound Rank19 admission missing"
+    },
+    {
+      "phase": "GREEN_ADMISSION",
+      "admission_commit": "94db5045b888a7c2a51144ad5c4c27f5cd6b0762",
+      "pointer_commit": "e03b9aa8b78a2b71159659df0c6c81155e155546",
+      "result": "PASS__RANK19_V4_ADMISSION_BINDING_GREEN"
+    },
+    {
+      "phase": "RED_VERIFIER",
+      "commit": "4008d4f5132cee80fcd04552fa72783d5353fd79",
+      "result": "EXPECTED_FAIL",
+      "failure": "ModuleNotFoundError: canonical.runtime.tb_science_rank19_capability_first_admission_v2"
+    },
+    {
+      "phase": "GREEN_VERIFIER_FIRST_ATTEMPT",
+      "implementation_commit": "e9f35a194fc2b66922d522c2ebebec6170889277",
+      "result": "EXPECTED_IMPLEMENTATION_FAILURE",
+      "failure": "RANK19_LEDGER_PREDECESSOR_COUNT_DRIFT",
+      "cause": "VERIFIER_USED_WRONG_V38_FIELD_NAME_CONSUMED_FINAL_FAILURES"
+    },
+    {
+      "phase": "GREEN_VERIFIER_FINAL",
+      "fix_commit": "5ccdfe0ed7cd85597a42c9e181ff0536e3153c4d",
+      "result": "PASS__RANK19_V4_ADMISSION_VERIFIER_GREEN"
+    }
+  ],
+  "independent_carrier": {
+    "provider": "Sprites",
+    "sprite_name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "isolated_root": "/tmp/rank19_v4_admission_verifier_green",
+    "github_authentication_present": false
+  },
+  "observed_verification": {
+    "compile": {
+      "runtime_verifier": "PASS",
+      "capability_first_scheduler_v4": "PASS",
+      "r2_semantic_residual_ledger_v1": "PASS"
+    },
+    "direct_verifier": {
+      "pass": true,
+      "errors": [],
+      "scheduler_activation": "CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V4",
+      "scheduler_eligibility": "ELIGIBLE",
+      "benchmark_role": "NEW_CAPABILITY_VALIDATION",
+      "task_read": false,
+      "task_started": false,
+      "benchmark_trials_consumed": 0,
+      "execution_authority": false,
+      "capability_credit_delta": 0,
+      "terminal_credit_delta": 0
+    },
+    "admission_test_suite": {
+      "passed": 2,
+      "failed": 0,
+      "marker": "PASS__RANK19_V4_ADMISSION_SUITE__2_OF_2"
+    }
+  },
+  "result": {
+    "pass": true,
+    "scheduler_activation": "CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V4",
+    "scheduler_eligibility": "ELIGIBLE",
+    "benchmark_role": "NEW_CAPABILITY_VALIDATION",
+    "slot_id": "terminal-bench-science/diag-chipseq::trial-0",
+    "task_digest": "sha256:437bfacaebda9ce9905d54bdfe7247aec9649038206512c64547021f42e3950b",
+    "logical_attempt_id": "def7e2921acf58d4ef03e3183512996c718a5a13069482cb825464c0c963a8b4",
+    "task_read": false,
+    "task_started": false,
+    "benchmark_trials_consumed": 0,
+    "execution_authority": false,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0,
+    "incremental_spend_usd": 0
+  },
+  "hard_nonclaims": [
+    "NO_PUBLIC_RANK19_EXECUTION_SURFACE_RESEAL_CREDIT_YET",
+    "NO_RANK19_TASK_READ_OR_START",
+    "NO_BENCHMARK_RESULT",
+    "NO_EXECUTION_AUTHORITY_MINTED_BY_ADMISSION",
+    "NO_TERMINAL_ACCEPTANCE_OR_CAPABILITY_CREDIT",
+    "SCHEDULER_TEST_OPEN_COUNT_ZERO_IS_A_STRUCTURAL_ELIGIBILITY_REPLAY_PARAMETER_NOT_CURRENT_OPEN_OBLIGATION_TRUTH"
+  ]
+}
