@@ -17,7 +17,7 @@
   },
   "current_frontier": {
     "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
-    "git_blob_sha": "26d91f7ea78a6345ca03c4a0b6f2f8ea30f80eb5",
+    "git_blob_sha": "d4e577162523317742ff697f1a82b956dec3a58d",
     "frontier_id": "LIVE_WORK_FRONTIER_20261010_PROF12_COMPOSED_V12"
   },
   "adapter_verification": {
