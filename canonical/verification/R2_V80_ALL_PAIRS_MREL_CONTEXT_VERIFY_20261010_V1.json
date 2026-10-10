@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_R2_V80_ALL_PAIRS_MREL_CONTEXT_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_BRANCH_BYTES__46_OF_46__PYCOMPILE_PASS__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "branch": "successor/r2-v80-all-pairs-mrel-context-20261010-v2",
+    "base_commit": "79d60934f7df181e3745be1264ef396669a50fde",
+    "exact_blobs": {
+      "canonical/runtime/loss_absorbing_cushion_regcap_grounding_v7.py": "8b41bf17be9045158d77c1f2d30207c30ea81643",
+      "canonical/tests/test_loss_absorbing_cushion_regcap_grounding_v7.py": "d82d2e6aa0004272dd2e8bd7903f0b690b16d99a",
+      "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json": "1cda8295010a8bddc8a191a18a132d1df42c072b",
+      "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json": "2f034581c5d69d9458ae1572fe0810a733bbd5ca",
+      "canonical/tests/test_r2_v80_all_pairs_mrel_context_reconciliation.py": "1d8ea781f0b2fa441913feb4dfdbfbab431efbec"
+    }
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "name": "participial-disposition-verify-20261009-sol",
+    "sprite_id": "sprite-72f2a31b-c09c-49e0-bfe0-279786ee2d56",
+    "workspace": "/home/sprite/loss_cushion_pair_compose_verify"
+  },
+  "verification": {
+    "v7_new_tests": "6_OF_6_PASS",
+    "v6_regression": "10_OF_10_PASS",
+    "v5_regression": "6_OF_6_PASS",
+    "regcap_mrel_pair_regression": "12_OF_12_PASS",
+    "tlac_mrel_pair_regression": "10_OF_10_PASS",
+    "governance_projection": "2_OF_2_PASS",
+    "total_tests": 46,
+    "total_passed": 46,
+    "total_failed": 0,
+    "py_compile": "PASS"
+  },
+  "proved": [
+    "V6_UNRESOLVED_EXACT_FOUR_CONCEPT_CONTEXT_CAN_REUSE_ALL_THREE_EXISTING_MREL_PAIR_AUTHORITIES",
+    "UNANIMOUS_MREL_SELECTION_ACROSS_CCOB_MREL_CCYB_MREL_AND_TLAC_MREL_LIFTS_TO_FOUR_CONCEPT_RELATIVE_SELECTION",
+    "ONE_MISSING_PAIR_PRESERVES_FOUR_WAY_AMBIGUITY",
+    "MIXED_PAIR_SELECTION_FAILS_CLOSED",
+    "ANY_PAIR_AUTHORITY_FAILURE_FAILS_CLOSED",
+    "PREEXISTING_V6_SELECTION_BYPASSES_NEW_LIFT",
+    "R2_V80_PROJECTS_EXACT_RUNTIME_WHILE_FINANCE_TAIL_AND_GLOBAL_TERMINAL_REMAIN_OPEN"
+  ],
+  "hard_nonclaims": [
+    "NO_GLOBAL_MREL_IDENTITY",
+    "NO_OPEN_WORLD_REGCAP_ONTOLOGY_COMPLETENESS",
+    "NO_FINANCE_TAIL_CLOSURE",
+    "NO_NEW_DIRECT_ROUTE_ACCEPTANCE_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
