@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_SEMANTIC_PAIR_NONIDENTIFIABILITY_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_BRANCH_BYTES__21_OF_21_GENERIC_AND_MARGIN_TESTS__LIVE_OEWN_MARGIN_INTEGRATION_PASS__PYCOMPILE_PASS__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "semantic-pair-nonidentifiability-kernel-v1-20261010-sol",
+    "exact_blobs": {
+      "canonical/runtime/semantic_pair_nonidentifiability_v1.py": "e358eeecc45868c91d22009cc57c624e9a210037",
+      "canonical/tests/test_semantic_pair_nonidentifiability_v1.py": "3df7ef44c88a47c38e34a1dcd5f76d0ff5a0e47a"
+    }
+  },
+  "independent_carrier": {
+    "name": "participial-disposition-verify-20261009-sol",
+    "sprite_id": "sprite-72f2a31b-c09c-49e0-bfe0-279786ee2d56",
+    "workspace": "/home/sprite/semantic_pair_nonid_verify"
+  },
+  "verification": {
+    "py_compile": "PASS",
+    "generic_kernel_suite": {
+      "tests_run": 10,
+      "failures": 0,
+      "errors": 0
+    },
+    "adjacent_margin_suite": {
+      "tests_run": 11,
+      "failures": 0,
+      "errors": 0
+    },
+    "total_tests": 21,
+    "live_margin_integration": {
+      "result": "PASS",
+      "oewn_archive_sha256": "7d749f6e2c39e6970e4997839dcf6e42fd281f3c2fae0171d2192bae8cfa4b51",
+      "source_text": "Margin increased.",
+      "witness_interpretation_ids": [
+        "margin%1:21:01::",
+        "margin%1:21:02::"
+      ],
+      "unique_semantic_identity_identifiable_from_source_alone": false,
+      "hypothesis_space_completeness_required": false
+    }
+  },
+  "proved": [
+    "TWO_INDEPENDENTLY_AUTHENTICATED_SOURCE_COMPATIBLE_AND_SEMANTICALLY_DISTINCT_INTERPRETATIONS_REFUTE_UNIQUE_SEMANTIC_IDENTITY_FROM_THE_SOURCE",
+    "THE_NEGATIVE_NONIDENTIFIABILITY_RESULT_DOES_NOT_REQUIRE_EXHAUSTIVE_HYPOTHESIS_ENUMERATION",
+    "SOURCE_HASH_SEMANTIC_HASH_INTERPRETATION_ID_AND_DISTINCTNESS_PAIR_BINDINGS_ARE_ALL_LOAD_BEARING",
+    "SAME_ID_OR_SAME_SEMANTICS_CANNOT_BE_LAUNDERED_AS_DISTINCTNESS",
+    "FORGED_OR_SOURCE_MISMATCHED_COMPATIBILITY_RECEIPTS_FAIL_CLOSED",
+    "THE_EXISTING_BARE_MARGIN_CERTIFICATE_REPLAYS_THROUGH_THE_GENERIC_THEOREM",
+    "NO_TRUE_INTERPRETATION_IS_SELECTED",
+    "NO_DECISION_UNDERDETERMINATION_OR_OPEN_WORLD_COMPLETENESS_IS_INFERRED",
+    "NO_EXECUTION_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "hard_nonclaims": [
+    "NO_GENERAL_LANGUAGE_INTERPRETATION_GENERATOR",
+    "NO_HYPOTHESIS_COMPLETENESS",
+    "NO_SEMANTIC_TRUTH_OF_EITHER_WITNESS",
+    "NO_DECISION_UNDERDETERMINATION_FROM_PAIRWISE_IDENTITY_NONIDENTIFIABILITY_ALONE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
