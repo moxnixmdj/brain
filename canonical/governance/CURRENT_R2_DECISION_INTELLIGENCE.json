@@ -2013,22 +2013,26 @@
     "terminal_credit_delta": 0
   },
   "regcap_context_atom_truth_dispatch": {
-    "status": "BOUND__EXPLICIT_TRUTH_KIND_FOR_POSITIVE_SOURCE_BOUND_CCOB_CCYB_TLAC_CONTEXT_ATOMS__ABSENCE_REMAINS_UNKNOWN",
+    "status": "BOUND__REGCAP_CONTEXT_ATOM_V2_OVER_SINGLE_CANONICAL_VERIFIED_CONTEXTUAL_OBSERVATION_COMPILER__WEAKER_AND_UNMODELED_LANGUAGE_REMAINS_UNKNOWN",
     "truth_kind": "REGCAP_CONTEXT_ATOM",
-    "truth_certificate_path": "canonical/runtime/regcap_context_atom_truth_certificate_v1.py",
-    "truth_certificate_git_blob_sha": "3e35f67ee88f7337569774835890efc54cdc734d",
+    "truth_certificate_path": "canonical/runtime/regcap_context_atom_truth_certificate_v2.py",
+    "truth_certificate_git_blob_sha": "22490d1d61807aafdb94a6617ee64c4912ecc46f",
     "semantic_dispatch_path": "canonical/runtime/semantic_truth_dispatch_v1.py",
-    "semantic_dispatch_git_blob_sha": "70dffa9e5719ad1ec01ab6ea5d8ad88a57ddcc88",
-    "reconciliation_path": "canonical/governance/R2_REGCAP_CONTEXT_ATOM_TRUTH_DISPATCH_RECONCILIATION_20261009_V1.json",
-    "reconciliation_git_blob_sha": "569ca5dd849e5a5571065ad34fcea3744330ee79",
-    "verification_path": "canonical/verification/REGCAP_CONTEXT_ATOM_TRUTH_DISPATCH_VERIFY_20261009_V1.json",
-    "verification_git_blob_sha": "644a4397e74ffd5f1bcfabdbc34a1197ecc2d8e7",
+    "semantic_dispatch_git_blob_sha": "364eae40fbb38fc0b053bfa0f7aa4950863fa41a",
+    "reconciliation_path": "canonical/governance/R2_REGCAP_CONTEXT_ATOM_V2_CURRENTNESS_RECONCILIATION_20261010_V1.json",
+    "reconciliation_git_blob_sha": "aa8b0fab84aebdbcbfb9a7d61b65761e0b62adf2",
+    "verification_path": "canonical/verification/R2_REGCAP_CONTEXT_ATOM_V2_CANONICAL_INDEPENDENT_VERIFY_20261010_V1.json",
+    "verification_git_blob_sha": "301ac6c9a36067fe2a97d8e3a3436ab5f522427f",
     "semantic_truth_authority": "POSITIVE_BOUND_ATOM_ONLY",
     "negative_truth_from_absence_authorized": false,
     "concept_identity_authority": false,
     "policy_adequacy_authority": false,
     "finance_semantic_tail_closed": false,
-    "terminal_credit_delta": 0
+    "terminal_credit_delta": 0,
+    "canonical_context_compiler_path": "canonical/runtime/regcap_contextual_observation_compiler_v1.py",
+    "canonical_context_compiler_git_blob_sha": "128142cafd915c2fc206534fd2bdf557e6d2f1ea",
+    "canonical_parent_verification_path": "canonical/verification/REGCAP_NO_DESCRIPTOR_CONTEXT_TRUTH_VERIFY_20261010_V2.json",
+    "canonical_parent_verification_git_blob_sha": "61177086ddd535c615e724d110e323ec872b3535"
   },
   "r2_v59_regcap_entry_surface_admission": {
     "status": "RECONCILED__ALREADY_BOUND_REGCAP_CONTEXT_ENTRY_SURFACES_ADMITTED_AS_FINANCE_POSITIVE_SUBREGIONS__FINANCE_TAIL_REMAINS_OPEN",
@@ -2540,6 +2544,16 @@
     "primary_internal_unsolved_count_delta": 0,
     "finance_tail_closed": false,
     "global_open_world_closure_claimed": false,
+    "terminal_credit_delta": 0
+  },
+  "regcap_context_atom_v2_currentness_reconciliation": {
+    "status": "RECONCILED__V77_V65_UNCHANGED__LIVE_TRUTH_BACKEND_REBOUND_TO_CANONICAL_CONTEXT_COMPILER__ZERO_CREDIT",
+    "path": "canonical/governance/R2_REGCAP_CONTEXT_ATOM_V2_CURRENTNESS_RECONCILIATION_20261010_V1.json",
+    "git_blob_sha": "aa8b0fab84aebdbcbfb9a7d61b65761e0b62adf2",
+    "merge_commit": "5909fc15690b645557bf9158305fb8cb413cbfb7",
+    "direct_route_count_delta": 0,
+    "bounded_family_count_delta": 0,
+    "primary_unsolved_count_delta": 0,
     "terminal_credit_delta": 0
   }
 }
