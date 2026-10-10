@@ -15,6 +15,9 @@ from canonical.runtime import professional_quality_same_subject_composition_gate
 SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_SAME_SUBJECT_COMPOSITION_GATE_V2"
 ROOT = v1.ROOT
 EXPECTED_ROOTS = v1.EXPECTED_ROOTS
+SCOPED_REGISTRY_PATH = "canonical/governance/PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_REGISTRY_20261010_V1.json"
+SCOPED_REGISTRY_BLOB = "b9ddf7cbe7fbfad0e81fe068a0c19b48703b5aba"
+SCOPED_REGISTRY_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_REGISTRY_V1"
 
 EXPECTED_VERIFY_SCHEMAS = {
     "R1_TARGET_SPECIFICATION": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R1_V7_ROOT_SUBJECT_BINDING_VERIFY_20261010_V1",
@@ -157,15 +160,28 @@ def evaluate(payload: Mapping[str, Any], *, repo_root: str | Path | None = None)
     if not normal_ok:
         return _fail("NORMAL_FORM_SAME_SUBJECT_LAW_UNAVAILABLE", normal_form=normal_record)
 
-    scoped_result = v1.scoped.evaluate(repo_root=root)
-    if scoped_result.get("pass") is not True:
-        return _fail("SCOPED_EVIDENCE_REGISTRY_NOT_CURRENT", scoped_evidence_status=scoped_result.get("status"))
-    admitted = scoped_result.get("admitted_scopes")
+    scoped_doc, _, scoped_error = v1._read_bound(
+        root,
+        {"path": SCOPED_REGISTRY_PATH, "git_blob_sha": SCOPED_REGISTRY_BLOB},
+        label="SCOPED_EVIDENCE_REGISTRY",
+    )
+    if scoped_error is not None or scoped_doc is None:
+        return _fail("SCOPED_EVIDENCE_REGISTRY_NOT_CURRENT", detail=scoped_error)
+    if scoped_doc.get("schema") != SCOPED_REGISTRY_SCHEMA:
+        return _fail("SCOPED_EVIDENCE_REGISTRY_SCHEMA_INVALID")
+    admitted = scoped_doc.get("entries")
     if not isinstance(admitted, list):
         return _fail("SCOPED_EVIDENCE_ADMITTED_SCOPES_INVALID")
     admitted_roots = {str(row.get("root_id") or "") for row in admitted if isinstance(row, Mapping)}
-    if admitted_roots != EXPECTED_ROOTS or len(admitted) != len(EXPECTED_ROOTS):
+    if admitted_roots != EXPECTED_ROOTS:
         return _fail("SCOPED_EVIDENCE_ROOT_COVER_INCOMPLETE", admitted_root_ids=sorted(admitted_roots))
+    for row in admitted:
+        if not isinstance(row, Mapping):
+            return _fail("SCOPED_EVIDENCE_ROW_INVALID")
+        if row.get("global_leaf_closure") is not False or row.get("global_root_closure") is not False:
+            return _fail("SCOPED_EVIDENCE_GLOBAL_AUTHORITY_FORBIDDEN")
+        if row.get("terminal_credit_delta") != 0:
+            return _fail("SCOPED_EVIDENCE_TERMINAL_CREDIT_FORBIDDEN")
 
     rows = payload.get("root_subject_bindings")
     if not isinstance(rows, list):
