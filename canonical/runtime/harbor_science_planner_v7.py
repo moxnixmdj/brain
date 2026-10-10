@@ -34,7 +34,8 @@ MIN_TIMEOUT_S = 300
 MAX_TIMEOUT_S = 2400
 TOKEN_COUNT_TIMEOUT_S = 60
 PREFILL_TOKENS_PER_SECOND_FLOOR = 15
-GENERATION_TOKENS_PER_SECOND_FLOOR = 3\nGENERATION_AND_TRANSPORT_MARGIN_S = 180
+GENERATION_TOKENS_PER_SECOND_FLOOR = 3
+GENERATION_AND_TRANSPORT_MARGIN_S = 180
 LONG_CONTEXT_THRESHOLD_TOKENS = 8192
 LONG_CONTEXT_PREFILL_TOKENS_PER_SECOND_FLOOR = 8
 LONG_CONTEXT_GENERATION_AND_TRANSPORT_MARGIN_S = 240
@@ -46,7 +47,14 @@ EVIDENCE_ID_PATTERN = "^[0-9a-f]{64}$"
 MAX_EVIDENCE_CHUNK_INDEX = 4095
 
 
-def effective_timeout_s(input_tokens: int, requested_timeout_s: int) -> int:\n    """Bound a whole non-streaming planner call, including maximum generation.\n\n    V6 budgeted prefill plus a fixed margin but omitted bounded completion time.\n    Rank18 proved that could cancel the same deterministic tool call three times\n    while decoding normally. V7 reserves the full MAX_TOOL_COMPLETION_TOKENS at\n    a conservative verified-carrier generation floor before applying the cap.\n    """
+def effective_timeout_s(input_tokens: int, requested_timeout_s: int) -> int:
+    """Bound a whole non-streaming planner call, including maximum generation.
+
+    V6 budgeted prefill plus a fixed margin but omitted bounded completion time.
+    Rank18 proved that could cancel the same deterministic tool call three times
+    while decoding normally. V7 reserves the full MAX_TOOL_COMPLETION_TOKENS at
+    a conservative verified-carrier generation floor before applying the cap.
+    """
     if (
         not isinstance(input_tokens, int)
         or isinstance(input_tokens, bool)
