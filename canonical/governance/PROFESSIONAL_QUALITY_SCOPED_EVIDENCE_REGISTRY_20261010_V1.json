@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_REGISTRY_V1",
   "date": "2026-10-10",
-  "status": "ACTIVE__TWENTY_CLAIM_SCOPED_CAPABILITIES__R1_R2_R3_R5_R6_R7_R8_R9_R10_R11_R12_BOUNDED_SEMANTIC_EVIDENCE__ZERO_GLOBAL_LEAF_CREDIT",
+  "status": "ACTIVE__TWENTY_ONE_CLAIM_SCOPED_CAPABILITIES__R1_R2_R3_R4_R5_R6_R7_R8_R9_R10_R11_R12_BOUNDED_SEMANTIC_EVIDENCE__ZERO_GLOBAL_LEAF_CREDIT",
   "entries": [
     {
       "scope_id": "PQ::R7::SINGLE_EDIT::UVCK_DEFEATER_ORDER_REPAIR",
@@ -561,6 +561,35 @@
       "scope_governance": {
         "path": "canonical/governance/PROFESSIONAL_QUALITY_R5_EVALUATOR_SEMANTIC_SCOPE_20261010_V1.json",
         "git_blob_sha": "dc10374849f5c26e354e9c396aa1f581b5f56d63"
+      },
+      "global_leaf_closure": false,
+      "global_root_closure": false,
+      "semantic_leaf_credit": false,
+      "execution_leaf_credit": false,
+      "terminal_credit_delta": 0
+    },
+    {
+      "scope_id": "PQ::R4::MEASUREMENT_SEMANTICS::CONTENT_ADDRESSED_TYPED_MECHANICAL",
+      "root_id": "R4_MEASUREMENT_CONSTRUCT",
+      "contributes_to_leaf_ids": [
+        "PQ::R4_MEASUREMENT_CONSTRUCT::SEMANTIC"
+      ],
+      "claim_kind": "CONTENT_ADDRESSED_TYPED_MECHANICAL_MEASUREMENT_SEMANTICS",
+      "source_receipt": {
+        "path": "canonical/verification/PROFESSIONAL_QUALITY_R4_MEASUREMENT_SEMANTIC_VERIFY_20261010_V1.json",
+        "git_blob_sha": "44a9e9e31e43404d1aed0a9547502e5f5dee772f"
+      },
+      "reusable_compiler": {
+        "path": "canonical/runtime/professional_r4_measurement_semantic_certificate_v1.py",
+        "git_blob_sha": "349afbd3f5b118bc7da56b5d04c7fdba761b77ec"
+      },
+      "compiler_verification": {
+        "path": "canonical/verification/PROFESSIONAL_QUALITY_R4_MEASUREMENT_SEMANTIC_VERIFY_20261010_V1.json",
+        "git_blob_sha": "44a9e9e31e43404d1aed0a9547502e5f5dee772f"
+      },
+      "scope_governance": {
+        "path": "canonical/governance/PROFESSIONAL_QUALITY_R4_MEASUREMENT_SEMANTIC_SCOPE_20261010_V1.json",
+        "git_blob_sha": "fdc7f57aa64c13dd55952bef72bc8f9cba28b583"
       },
       "global_leaf_closure": false,
       "global_root_closure": false,
