@@ -240,7 +240,7 @@ def _reuse_first_admission(raw: Mapping[str, Any]) -> tuple[bool, str, dict[str,
         "verification_id": None,
     }
     if not classifier_present:
-        return True, "NOT_APPLICABLE__NO_RESIDUAL_CLASSIFICATION", summary
+        return True, "NOT_APPLICABLE__NO_EXPLICIT_NEW_PRIMITIVE_CLAIM", summary
 
     missing: list[str] = []
     if not mode:
@@ -259,7 +259,15 @@ def _reuse_first_admission(raw: Mapping[str, Any]) -> tuple[bool, str, dict[str,
     if mode != NEW_PRIMITIVE_MODE:
         summary["missing_requirements"] = sorted(set(missing))
         if missing:
-            return False, "DEMOTED_REUSE_FIRST_CLASSIFICATION_INCOMPLETE", summary
+            return (
+                False,
+                (
+                    "DEMOTED_NEW_PRIMITIVE_REUSE_EXHAUSTION_INCOMPLETE"
+                    if explicit_claim
+                    else "DEMOTED_REUSE_FIRST_CLASSIFICATION_INCOMPLETE"
+                ),
+                summary,
+            )
         return True, "CLASSIFIED_REUSE_FIRST_RESOLUTION__" + mode, summary
 
     searched = _ids(raw, "existing_mechanisms_searched")
