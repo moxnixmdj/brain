@@ -15,6 +15,7 @@ from hashlib import sha256
 from typing import Any, Mapping, Sequence
 
 from canonical.runtime import regcap_contrastive_discriminator_matrix_v1 as matrix
+from canonical.runtime.source_assertion_ownership_guard_v1 import check_direct_assertion
 
 SCHEMA = "PROJECT_BRAIN_REGCAP_CONTEXT_SIGNATURE_V1"
 EXACT_SURFACE = "loss-absorbing cushion"
@@ -281,7 +282,7 @@ def compile_context(
             relative_candidate_hint=candidate_ids[0],
             relative_selection_authority=False,
             boundary=(
-                "EXACT_DESCRIPTOR_PLUS_SAME_SENTENCE_BOUNDED_SIGNATURE_GRAMMAR_ONLY__"
+                "EXACT_DESCRIPTOR_PLUS_DIRECT_ASSERTION_COMPLETE_SENTENCE_BOUNDED_SIGNATURE_GRAMMAR_ONLY__"
                 "OBSERVATIONS_HAVE_SOURCE_ALIGNED_SEMANTIC_AUTHORITY__"
                 "CANDIDATE_ID_IS_A_HINT_UNTIL_AUTHENTICATED_MATRIX_REPLAY"
             ),
