@@ -20,6 +20,15 @@ PROF_AUTHORITY_KEY = "authority:professional-v7-subject"
 BYTES_SOURCE = "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json"
 BYTES_SCHEMA = "PROJECT_BRAIN_BYTES_ACTIVE_STATE_V1"
 BYTES_MUTATION_KEY = "canonical:bytes"
+ASSURANCE_SOURCE = "canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json"
+ASSURANCE_SCHEMA = "PROJECT_BRAIN_CURRENT_ASSURANCE_CLOSURE_COMPILER_POINTER_V1"
+RESIDUAL_SOURCE = "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json"
+RESIDUAL_SCHEMA = "PROJECT_BRAIN_CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1"
+EXPECTED_ASSURANCE_BLOCKERS = {
+    "REMAINING_PROFESSIONAL_PROPERTY_TRUTH_AND_DOMAIN_SEMANTIC_EXECUTION_EVIDENCE_BINDING",
+    "FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION",
+}
+PARKED_TB_ROWS = ["TB_SCIENCE_GE_58_7"]
 TOTAL_LEAVES = 24
 
 
@@ -147,6 +156,7 @@ def _refresh_professional(frontier: dict[str, Any]) -> dict[str, Any]:
     )
     candidates[index] = row
     _source_row(frontier, PROF_SOURCE)["git_blob_sha"] = sha
+    live["sha"] = sha
     return live
 
 
@@ -228,9 +238,135 @@ def _refresh_bytes(frontier: dict[str, Any]) -> dict[str, Any]:
     return {"version": version, "raw": raw, "qualification": q, "sha": sha}
 
 
+def _refresh_assurance(frontier: dict[str, Any], professional: Mapping[str, Any]) -> None:
+    doc, sha = _load_current(ASSURANCE_SOURCE, ASSURANCE_SCHEMA)
+    if doc.get("live_default") is not False or doc.get("terminal_authority") is not False:
+        raise PostCompositionFrontierError("ASSURANCE_AUTHORITY_BOUNDARY_CHANGED")
+    activation = doc.get("activation")
+    if not isinstance(activation, Mapping) or activation.get("live_default") is not False:
+        raise PostCompositionFrontierError("ASSURANCE_ACTIVATION_INVALID")
+    blockers = activation.get("required_before_promotion")
+    if not isinstance(blockers, list) or set(blockers) != EXPECTED_ASSURANCE_BLOCKERS:
+        raise PostCompositionFrontierError("ASSURANCE_PROMOTION_BLOCKERS_CHANGED")
+    projection = doc.get("professional_quality_same_subject_frontier")
+    if not isinstance(projection, Mapping):
+        raise PostCompositionFrontierError("ASSURANCE_PROFESSIONAL_PROJECTION_MISSING")
+    checks = {
+        "property_truth_closed_count": professional["closed"],
+        "open_execution_leaf_count": professional["open_exec"],
+        "open_semantic_leaf_count": professional["open_sem"],
+    }
+    for key, expected in checks.items():
+        if projection.get(key) != expected:
+            raise PostCompositionFrontierError("ASSURANCE_PROFESSIONAL_DRIFT:" + key)
+    if projection.get("verified_property_truth_leaf_ids") != professional["ids"]:
+        raise PostCompositionFrontierError("ASSURANCE_PROFESSIONAL_DRIFT:verified_ids")
+    candidates = frontier.get("candidates")
+    if not isinstance(candidates, list):
+        raise PostCompositionFrontierError("CANDIDATES_INVALID")
+    positions = [
+        i for i, row in enumerate(candidates)
+        if isinstance(row, Mapping) and row.get("source") == ASSURANCE_SOURCE
+    ]
+    if len(positions) != 1:
+        raise PostCompositionFrontierError("ASSURANCE_CANDIDATE_CARDINALITY")
+    row = dict(candidates[positions[0]])
+    if row.get("scheduler_state") != "BLOCKED" or row.get("prerequisites_satisfied") is not False:
+        raise PostCompositionFrontierError("ASSURANCE_SCHEDULER_BOUNDARY_CHANGED")
+    ev = dict(row.get("read_only_evidence") or {})
+    ev.update({
+        "source": ASSURANCE_SOURCE,
+        "source_git_blob_sha": sha,
+        "embedded_professional_snapshot_lags_live_frontier": False,
+        "professional_property_truth_closed_count": professional["closed"],
+        "professional_open_execution_leaf_count": professional["open_exec"],
+        "professional_current_git_blob_sha": professional["sha"],
+        "professional_next": str(projection.get("next") or ""),
+        "promotion_blockers": sorted(EXPECTED_ASSURANCE_BLOCKERS),
+        "dynamic_current_pointer_follow": True,
+        "vector_bounds_complete": False,
+    })
+    row["read_only_evidence"] = ev
+    candidates[positions[0]] = row
+    _source_row(frontier, ASSURANCE_SOURCE)["git_blob_sha"] = sha
+
+
+def _classification(doc: Mapping[str, Any], residual_id: str) -> Mapping[str, Any]:
+    rows = doc.get("classifications")
+    if not isinstance(rows, list):
+        raise PostCompositionFrontierError("RESIDUAL_CLASSIFICATIONS_MISSING")
+    matches = [
+        row for row in rows
+        if isinstance(row, Mapping) and row.get("residual_id") == residual_id
+    ]
+    if len(matches) != 1:
+        raise PostCompositionFrontierError("RESIDUAL_CLASSIFICATION_CARDINALITY:" + residual_id)
+    return matches[0]
+
+
+def _refresh_residual(frontier: dict[str, Any]) -> None:
+    doc, sha = _load_current(RESIDUAL_SOURCE, RESIDUAL_SCHEMA)
+    a = _classification(doc, "ESCAPE_GAP_A_ACQUISITION_TOTALITY")
+    b = _classification(doc, "ESCAPE_GAP_B_INTERNAL_ROUTE_STRICT_PROGRESS")
+    oq = _classification(doc, "ESCAPE_OQ_SHARED_ACCEPTANCE_LAWS")
+    if a.get("active_gap_a_count") != 12 or a.get("parked_unresolved_count") != 1:
+        raise PostCompositionFrontierError("RESIDUAL_GAP_A_TOPOLOGY_CHANGED")
+    if a.get("parked_unresolved_rows") != PARKED_TB_ROWS:
+        raise PostCompositionFrontierError("RESIDUAL_GAP_A_PARKED_ROWS_CHANGED")
+    latest = a.get("latest_causal_reclassification")
+    if not isinstance(latest, Mapping) or (
+        latest.get("effective_gap_a_active_count"),
+        latest.get("effective_gap_b_active_count"),
+        latest.get("parked_unresolved_count"),
+    ) != (12, 0, 1):
+        raise PostCompositionFrontierError("RESIDUAL_LATEST_TOPOLOGY_CHANGED")
+    bridge = a.get("gap_a_policy_cover_adapter")
+    if not isinstance(bridge, Mapping) or bridge.get("real_row_proofs") != 0:
+        raise PostCompositionFrontierError("RESIDUAL_GAP_A_REAL_PROOF_STATE_CHANGED")
+    if b.get("active_gap_b_count") != 0 or b.get("parked_unresolved_count") != 1:
+        raise PostCompositionFrontierError("RESIDUAL_GAP_B_TOPOLOGY_CHANGED")
+    if b.get("parked_rows") != PARKED_TB_ROWS:
+        raise PostCompositionFrontierError("RESIDUAL_GAP_B_PARKED_ROWS_CHANGED")
+    laws = oq.get("shared_laws_bound")
+    closed = oq.get("current_row_acceptance_closed")
+    if not isinstance(laws, Mapping) or laws.get("objective_acceptance") is not True or laws.get("qualitative_acceptance") is not True:
+        raise PostCompositionFrontierError("RESIDUAL_OQ_SHARED_LAWS_CHANGED")
+    if closed != {"O": 0, "Q": 0}:
+        raise PostCompositionFrontierError("RESIDUAL_OQ_ROW_CLOSURE_CHANGED")
+
+    candidates = frontier.get("candidates")
+    if not isinstance(candidates, list):
+        raise PostCompositionFrontierError("CANDIDATES_INVALID")
+    by_id = {
+        row.get("work_id"): i for i, row in enumerate(candidates)
+        if isinstance(row, Mapping) and row.get("source") == RESIDUAL_SOURCE
+    }
+    required = {
+        "ESCAPE_OQ_SCOPE_COMPLETE_ACCEPTANCE_INSTANTIATION": "AUDIT_ONLY",
+        "ESCAPE_GAP_A_AUTHENTICATED_ROW_PROOFS": "READY_EVIDENCE",
+        "ESCAPE_GAP_B_STRICT_PROGRESS_ROW_PROOFS": "PARKED",
+    }
+    if set(by_id) != set(required):
+        raise PostCompositionFrontierError("RESIDUAL_CANDIDATE_SET_CHANGED")
+    for work_id, state in required.items():
+        row = dict(candidates[by_id[work_id]])
+        if row.get("scheduler_state") != state:
+            raise PostCompositionFrontierError("RESIDUAL_CANDIDATE_STATE_CHANGED:" + work_id)
+        ev = row.get("read_only_evidence")
+        if isinstance(ev, Mapping):
+            ev = dict(ev)
+            ev["source_git_blob_sha"] = sha
+            ev["dynamic_current_pointer_follow"] = True
+            row["read_only_evidence"] = ev
+        candidates[by_id[work_id]] = row
+    _source_row(frontier, RESIDUAL_SOURCE)["git_blob_sha"] = sha
+
+
 def _refresh_supported_sources(frontier: Mapping[str, Any]) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
     out = json.loads(json.dumps(frontier))
     professional = _refresh_professional(out)
+    _refresh_assurance(out, professional)
+    _refresh_residual(out)
     bytes_state = _refresh_bytes(out)
     dynamic = out.setdefault("dynamic_currentness", {})
     if not isinstance(dynamic, dict):
@@ -239,6 +375,8 @@ def _refresh_supported_sources(frontier: Mapping[str, Any]) -> tuple[dict[str, A
         "post_composition_professional_follow": True,
         "professional_property_truth_closed_count": professional["closed"],
         "professional_open_execution_leaf_count": professional["open_exec"],
+        "post_composition_assurance_follow": True,
+        "post_composition_residual_follow": True,
         "post_composition_bytes_follow": True,
         "bytes_frontier_version": bytes_state["version"],
         "bytes_raw_python_source_bytes": bytes_state["raw"],
@@ -283,6 +421,8 @@ def plan_current_post_composition_frontier() -> dict[str, Any]:
         "professional_property_truth_closed_count": professional["closed"],
         "professional_open_execution_leaf_count": professional["open_exec"],
         "professional_open_semantic_leaf_count": professional["open_sem"],
+        "dynamic_assurance_currentness_verified": True,
+        "dynamic_residual_currentness_verified": True,
         "dynamic_bytes_currentness_verified": True,
         "bytes_frontier_version": bytes_state["version"],
         "bytes_raw_python_source_bytes": bytes_state["raw"],
