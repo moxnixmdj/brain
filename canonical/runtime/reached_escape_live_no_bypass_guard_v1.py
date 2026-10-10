@@ -12,6 +12,7 @@ code generation, non-Python executables, or future repository states.
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 from typing import Any
 
@@ -23,12 +24,20 @@ LOW_LEVEL_TOKENS = (
     "reached_escape_finite_totality_certificate_v1",
 )
 CONSTRUCTOR_TOKEN = "certified_reached_escape_state_constructor_v1"
+REPAIR_CYCLE_REL = "canonical/runtime/reached_escape_repair_cycle_v1.py"
+REPAIR_CYCLE_ALLOWED_KERNEL_ATTRIBUTES = frozenset({"_normalize"})
+REPAIR_CYCLE_REQUIRED_MARKERS = (
+    "from canonical.runtime import certified_reached_escape_state_constructor_v1 as constructor",
+    "from canonical.runtime import reached_escape_state_kernel_v1 as kernel",
+    "constructor.construct(",
+)
 
 TRUSTED_LOW_LEVEL_REFERENCE_FILES = frozenset(
     {
         "canonical/runtime/reached_escape_state_kernel_v1.py",
         "canonical/runtime/reached_escape_finite_totality_certificate_v1.py",
         "canonical/runtime/certified_reached_escape_state_constructor_v1.py",
+        "canonical/runtime/reached_escape_repair_cycle_v1.py",
         "canonical/runtime/reached_escape_live_no_bypass_guard_v1.py",
     }
 )
@@ -38,6 +47,7 @@ REQUIRED_SENTINELS = frozenset(
         "canonical/runtime/reached_escape_state_kernel_v1.py",
         "canonical/runtime/reached_escape_finite_totality_certificate_v1.py",
         "canonical/runtime/certified_reached_escape_state_constructor_v1.py",
+        "canonical/runtime/reached_escape_repair_cycle_v1.py",
         "canonical/runtime/live_brain_runtime_v1.py",
         "canonical/runtime/unified_cognitive_fabric_v1.py",
     }
@@ -50,8 +60,10 @@ LIVE_ENTRYPOINT_MARKERS = {
         '"CERTIFIED_REACHED_ESCAPE_STATE_CONSTRUCTOR_V1"',
     ),
     "canonical/runtime/unified_cognitive_fabric_v1.py": (
-        '"REACHED_ESCAPE_STATE": "certified_reached_escape_state_constructor_v1.construct"',
+        '"REACHED_ESCAPE_STATE": "certified_reached_escape_state_constructor_v1.construct + reached_escape_repair_cycle_v1.run"',
+        "from canonical.runtime import reached_escape_repair_cycle_v1 as reached_escape_repair",
         "from canonical.runtime import certified_reached_escape_state_constructor_v1 as reached_escape_state",
+        "out = reached_escape_repair.run(",
         "out = reached_escape_state.construct(payload)",
     ),
 }
@@ -110,6 +122,47 @@ def scan_repo(root: str | Path) -> dict[str, Any]:
                     }
                 )
 
+    repair_cycle: dict[str, Any] = {
+        "path": REPAIR_CYCLE_REL,
+        "constructor_markers_complete": False,
+        "missing_markers": [],
+        "kernel_attributes": [],
+        "unexpected_kernel_attributes": [],
+    }
+    repair_path = root / REPAIR_CYCLE_REL
+    if repair_path.is_file():
+        repair_text = repair_path.read_text(encoding="utf-8")
+        missing_repair_markers = [
+            marker for marker in REPAIR_CYCLE_REQUIRED_MARKERS
+            if marker not in repair_text
+        ]
+        kernel_attributes = sorted(set(re.findall(
+            r"\\bkernel\\.([A-Za-z_][A-Za-z0-9_]*)",
+            repair_text,
+        )))
+        unexpected_kernel_attributes = sorted(
+            set(kernel_attributes) - REPAIR_CYCLE_ALLOWED_KERNEL_ATTRIBUTES
+        )
+        repair_cycle = {
+            "path": REPAIR_CYCLE_REL,
+            "constructor_markers_complete": not missing_repair_markers,
+            "missing_markers": missing_repair_markers,
+            "kernel_attributes": kernel_attributes,
+            "unexpected_kernel_attributes": unexpected_kernel_attributes,
+        }
+        if missing_repair_markers:
+            errors.append({
+                "code": "REPAIR_CYCLE_CONSTRUCTOR_BINDING_INCOMPLETE",
+                "path": REPAIR_CYCLE_REL,
+                "missing_markers": missing_repair_markers,
+            })
+        if unexpected_kernel_attributes:
+            errors.append({
+                "code": "REPAIR_CYCLE_UNAPPROVED_KERNEL_ATTRIBUTE",
+                "path": REPAIR_CYCLE_REL,
+                "attributes": unexpected_kernel_attributes,
+            })
+
     live_entrypoints: list[dict[str, Any]] = []
     for rel, markers in sorted(LIVE_ENTRYPOINT_MARKERS.items()):
         path = root / rel
@@ -154,6 +207,7 @@ def scan_repo(root: str | Path) -> dict[str, Any]:
         "runtime_python_file_count": len(files),
         "trusted_low_level_reference_files": sorted(TRUSTED_LOW_LEVEL_REFERENCE_FILES),
         "sensitive_reference_files": sensitive_reference_files,
+        "repair_cycle": repair_cycle,
         "live_entrypoints": live_entrypoints,
         "errors": errors,
         "scope": "CANONICAL_RUNTIME_RECURSIVE_PYTHON_STATIC_REFERENCE_CENSUS",
