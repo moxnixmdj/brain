@@ -245,6 +245,55 @@ class OneShotClosureTests(unittest.TestCase):
         )
 
 
+
+    def test_proof_unavailable_frontier_retry_is_evidence_gap_not_root1_exhaustion(self):
+        pending = [
+            {
+                "work_id": "frontier-1",
+                "kind": "EXPAND_SUCCESS_VERIFICATION_FRONTIER",
+                "last_attempt_status": (
+                    "FRONTIER_ACQUISITION_DID_NOT_CHANGE_OWNED_SUCCESS_ADAPTER_FRONTIER"
+                ),
+                "last_attempt_reason": (
+                    "RETAINED_SUCCESS_PROOF_UNAVAILABLE__"
+                    "NEW_PROOF_BEARING_EXPERIENCE_REQUIRED"
+                ),
+                "payload": {
+                    "blocked_success_work_id": "blocked-1",
+                    "observation_id": "observation-1",
+                },
+            },
+            {
+                "work_id": "blocked-1",
+                "kind": "ADAPT_SUCCESS_TO_VERIFIABLE_EPISODE",
+                "status": "PARKED",
+                "payload": {
+                    "proof_available": False,
+                    "replayable": True,
+                },
+            },
+        ]
+        blockers = [{
+            "work_id": "frontier-1",
+            "kind": "EXPAND_SUCCESS_VERIFICATION_FRONTIER",
+            "blocker": (
+                "FRONTIER_ACQUISITION_ALREADY_ATTEMPTED_FOR_CURRENT_PROVIDER_AND_FRONTIER"
+            ),
+        }]
+        out = closure.classify_residual(blockers, pending=pending)
+        self.assertEqual(out["class"], "PENDING_ACQUISITION_OR_EXPERIMENT")
+        self.assertFalse(out["internally_solvable_gap_remaining"])
+        self.assertTrue(out["pending_acquisition_or_experiment_required"])
+        self.assertIn(
+            "NEW_PROOF_BEARING_EXPERIENCE_REQUIRED__SUCCESS_PROOF_UNAVAILABLE",
+            out["evidence_blockers"],
+        )
+        self.assertNotIn(
+            "ROOT1_ACQUISITION_EXHAUSTED_ON_CURRENT_PROVIDER_FRONTIER",
+            out["internal_blockers"],
+        )
+
+
     def test_replayable_success_backoff_is_internal_root1_gap(self):
         pending = [{
             "work_id": "w4",
