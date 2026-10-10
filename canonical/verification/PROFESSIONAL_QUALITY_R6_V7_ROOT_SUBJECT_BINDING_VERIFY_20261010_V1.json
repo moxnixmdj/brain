@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R6_V7_ROOT_SUBJECT_BINDING_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_SPRITE_6_OF_6__R6_BOUND_TO_EXACT_V7_SUBJECT_THROUGH_CONTENT_ADDRESSED_SCOPE_MATCHED_EVIDENCE_DEPENDENCE__ZERO_QUALITY_OR_TERMINAL_AUTHORITY",
+  "root_id": "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+  "exact_blobs": {
+    "binding": "0a6626c3378b471bff70de0ae3ea53e1e784276e",
+    "verifier": "a739946e5b467a27bd8ecb93d3181d9025a3abeb",
+    "tests": "146642940e955fb7fc0e25926a7f36a95fb35896",
+    "subject": "1d598bc8757017ceb34928d0df9f5fce859ef868",
+    "execution_profile": "f7e89eafbb691c16d1bdf5b8d295a468d5e3bec5",
+    "proof_bound_step_verification": "b7a9df36780513ad73fd14c6a2756c8474d8434d",
+    "scoped_evidence_registry": "b9ddf7cbe7fbfad0e81fe068a0c19b48703b5aba",
+    "leaf_evidence_registry": "d25cb6fe746eef992f71b138446dc999c0f2a307",
+    "leaf_binding_manifest": "a7cad32c9fd969ff2c3857bb924c7bd746237ec2",
+    "leaf_binder_verification": "b65a67e8edaee925338fe3f2d61dad6b0f52d129"
+  },
+  "replay": {
+    "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/pq-r6-v7-binding-independent-verify",
+    "py_compile": "PASS",
+    "tests_run": 6,
+    "tests_passed": 6,
+    "tests_failed": 0,
+    "verifier_pass": true,
+    "verifier_status": "PASS__R6_BOUND_TO_V7_SUBJECT_THROUGH_CONTENT_ADDRESSED_SCOPE_MATCHED_EVIDENCE_DEPENDENCE"
+  },
+  "proves": [
+    "R6_BINDING_USES_EXACT_FROZEN_V7_SUBJECT_TUPLE",
+    "V7_SUBJECT_CONTAINS_EXACT_SCOPED_EVIDENCE_REGISTRY_LEAF_EVIDENCE_REGISTRY_MANIFEST_LEAF_BINDER_AND_STEP_BINDING_KERNEL",
+    "R6_SCOPED_ENTRY_IS_LIMITED_TO_CONTENT_ADDRESSED_SCOPE_MATCHED_ADMISSION",
+    "LEAF_CLOSURE_REQUIRES_EXACT_ROOT_CONTRACT_AND_LEAF_ACCEPTANCE_BOUND_RECEIPTS",
+    "VERIFICATION_BASIS_MUST_BE_CONTENT_ADDRESSED_AND_CURRENT",
+    "MANIFEST_STATUS_STRINGS_HAVE_ZERO_PROMOTION_AUTHORITY",
+    "CALLER_SUPPLIED_V7_STEP_RESULTS_HAVE_ZERO_AUTHORITY",
+    "ALL_SEVEN_PREVIOUSLY_UNBOUND_LOAD_BEARING_PROFILE_STEPS_REQUIRE_CONTENT_ADDRESSED_STEP_BINDINGS"
+  ],
+  "hard_nonclaims": [
+    "NO_GLOBAL_EVIDENCE_COMPLETENESS_PROOF",
+    "NO_CLAIM_ALL_REAL_TASK_EVIDENCE_HAS_ALREADY_BEEN_ADMITTED",
+    "NO_CLAIM_ALL_V7_STEPS_HAVE_REAL_TASK_RECEIPTS",
+    "NO_GLOBAL_R6_ROOT_CLOSURE",
+    "NO_GLOBAL_LEAF_OR_ROOT_CLOSURE",
+    "NO_DOMAIN_SEMANTIC_OR_EXECUTION_CLOSURE",
+    "NO_SAME_SUBJECT_COMPOSITION_PASS",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "root_subject_binding_authority": true,
+  "global_evidence_completeness_proved": false,
+  "real_task_all_evidence_receipts_proved": false,
+  "semantic_truth_authority": false,
+  "execution_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "next": "PROMOTE_R6_V7_ROOT_BINDING__ADVANCE_SAME_SUBJECT_FRONTIER_TO_6_OF_12__R7_NEXT"
+}

@@ -1,0 +1,25 @@
+name: Verify professional quality R6 V7 binding
+
+on:
+  push:
+    branches:
+      - professional-quality-r6-v7-binding-20261010
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile verifier
+        run: python -m py_compile canonical/runtime/professional_quality_r6_root_subject_binding_verify_v1.py canonical/tests/test_professional_quality_r6_root_subject_binding_verify_v1.py
+      - name: Run R6 binding tests
+        run: python -m unittest canonical.tests.test_professional_quality_r6_root_subject_binding_verify_v1
+      - name: Run exact verifier
+        run: python canonical/runtime/professional_quality_r6_root_subject_binding_verify_v1.py

@@ -1,0 +1,76 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_ROOT_SUBJECT_BINDING_V1",
+  "date": "2026-10-10",
+  "status": "CANDIDATE_R6_V7_ROOT_SUBJECT_BINDING__CONTENT_ADDRESSED_SCOPE_MATCHED_EVIDENCE_DEPENDENCE__NONJSON_RUNTIME_VALIDATED_AS_SUBJECT_COMPONENT__AWAITING_INDEPENDENT_VERIFICATION__ZERO_QUALITY_OR_TERMINAL_AUTHORITY",
+  "root_id": "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+  "subject_kind": "DECLARED_SYSTEM",
+  "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+  "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+  "subject": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V7_DECLARED_SYSTEM_SUBJECT_20261010_V6.json",
+    "git_blob_sha": "1d598bc8757017ceb34928d0df9f5fce859ef868"
+  },
+  "bridge_evidence": {
+    "execution_profile": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_EXECUTION_PROFILE_20261010_V3.json",
+      "git_blob_sha": "f7e89eafbb691c16d1bdf5b8d295a468d5e3bec5"
+    },
+    "proof_bound_step_verification": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_P1_ROUTER_V7_PROOF_BOUND_STEP_VERIFY_20261010_V1.json",
+      "git_blob_sha": "b7a9df36780513ad73fd14c6a2756c8474d8434d"
+    },
+    "scoped_evidence_registry": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_REGISTRY_20261010_V1.json",
+      "git_blob_sha": "b9ddf7cbe7fbfad0e81fe068a0c19b48703b5aba"
+    },
+    "leaf_evidence_registry": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_LEAF_EVIDENCE_REGISTRY_20261010_V1.json",
+      "git_blob_sha": "d25cb6fe746eef992f71b138446dc999c0f2a307"
+    },
+    "leaf_binding_manifest": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_LEAF_BINDING_MANIFEST_20261010_V1.json",
+      "git_blob_sha": "a7cad32c9fd969ff2c3857bb924c7bd746237ec2"
+    },
+    "leaf_binder_verification": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_LEAF_BINDER_V2_VERIFY_20261010_V1.json",
+      "git_blob_sha": "b65a67e8edaee925338fe3f2d61dad6b0f52d129"
+    }
+  },
+  "binding_scope": {
+    "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+    "claim": "FOR_THE_EXACT_V7_DECLARED_SYSTEM_SUBJECT__ALL_LOAD_BEARING_PROFESSIONAL_EVIDENCE_MAY_CONTRIBUTE_ONLY_THROUGH_CONTENT_ADDRESSED_SCOPE_MATCHED_ADMISSION__MANIFEST_OR_STATUS_STRINGS_HAVE_ZERO_TRUTH_PROMOTION_OR_CLOSURE_AUTHORITY__AND_ALL_PROOF_BOUND_PROFILE_STEPS_REQUIRE_NONCALLER_CONTENT_ADDRESSED_STEP_BINDINGS",
+    "guarantees": [
+      "EXACT_V7_SUBJECT_TUPLE_BOUND",
+      "SCOPED_EVIDENCE_REGISTRY_IS_AN_EXACT_COMPONENT_OF_THE_V7_SUBJECT",
+      "LEAF_EVIDENCE_REGISTRY_AND_LEAF_BINDER_ARE_EXACT_COMPONENTS_OF_THE_V7_SUBJECT",
+      "LEAF_CLOSURE_REQUIRES_SCOPE_MATCHED_CONTENT_ADDRESSED_VERIFICATION_RECEIPTS",
+      "RECEIPT_MUST_BIND_EXACT_ROOT_CONTRACT_AND_EXACT_LEAF_ACCEPTANCE",
+      "VERIFICATION_BASIS_MUST_BE_CONTENT_ADDRESSED_AND_CURRENT",
+      "MANIFEST_STATUS_STRINGS_HAVE_ZERO_PROMOTION_AUTHORITY",
+      "SCOPED_EVIDENCE_CONTRIBUTES_ONLY_WITHIN_ITS_PROVED_SCOPE",
+      "CALLER_SUPPLIED_STEP_RESULTS_HAVE_ZERO_AUTHORITY",
+      "ALL_SEVEN_PREVIOUSLY_UNBOUND_LOAD_BEARING_PROFILE_STEPS_REQUIRE_CONTENT_ADDRESSED_STEP_BINDINGS"
+    ],
+    "limitations": [
+      "NO_GLOBAL_EVIDENCE_COMPLETENESS_PROOF",
+      "NO_GLOBAL_LEAF_OR_ROOT_CLOSURE",
+      "NO_DOMAIN_SEMANTIC_OR_EXECUTION_CLOSURE",
+      "NO_CLAIM_ALL_REAL_TASK_EVIDENCE_HAS_ALREADY_BEEN_ADMITTED",
+      "NO_CLAIM_ALL_V7_STEPS_HAVE_REAL_TASK_RECEIPTS",
+      "NO_SAME_SUBJECT_COMPOSITION_PASS",
+      "NO_LIVE_DEFAULT_PROMOTION"
+    ]
+  },
+  "actual_v7_evidence_receipts_required_for_execution": true,
+  "evidence_status_string_authority": false,
+  "global_subject_identity_authority": false,
+  "root_subject_binding_authority": false,
+  "semantic_truth_authority": false,
+  "execution_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
