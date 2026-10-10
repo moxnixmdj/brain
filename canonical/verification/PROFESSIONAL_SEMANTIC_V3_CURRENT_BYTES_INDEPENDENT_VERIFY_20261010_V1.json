@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_SEMANTIC_V3_CURRENT_BYTES_INDEPENDENT_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_SPRITE__CURRENT_V3_BYTES__PYCOMPILE__CLAIM_PACK_5_OF_5__IDENTITY_CARRIER_4_OF_4__ZERO_PROPERTY_OR_TERMINAL_CREDIT",
+  "repository": "moxnixmdj/brain",
+  "current_main_load_bearing_bytes_rechecked_at_commit": "7eab2a2834c43081b02998662beefb7e18a1317f",
+  "exact_blobs": {
+    "semantic_claim_pack_v3_runtime": "5c3b47bc2d72b2e0b6b01c3e04635928419082fc",
+    "semantic_claim_pack_v3_tests": "34cda6b79039424a87b3cb2d1219d9797b7a3386",
+    "semantic_identity_carrier_v3_runtime": "a3d818c133bc91e6f417aa938c9afb44287ed8da",
+    "semantic_identity_carrier_v3_tests": "bd6d543349e4ea300a921e6afdaad09a194c83cd",
+    "semantic_identity_carrier_v2_runtime": "66d0cc279c581f82e703af8b878fcbe15af7fd01",
+    "coverage_claim_scope_guard_v1": "d1de61aa9bc00a184772a50f7ec9d5ee2853d747",
+    "coverage_claim_scope_guard_v2": "f28a25ad29cec75fd76f50754ce9a36618583c8d",
+    "real_mission_authority": "13c470645b037bbb46245c687dd35197b420d51a",
+    "current_mission_pointer_observed": "9e038a948656d9df45a4b38538cbef0793ad0e5f",
+    "mission_binding_repair": "221a4b1554e9ddd1589585eadaa470c84d5d42a8",
+    "source_v2_claim_pack": "f16aab3760d4f5958da986782632f3cb2bbd2646",
+    "source_v2_claim_pack_verify": "3d1f32e6e0e24d49c394daa365a7e3797c7d9984",
+    "claim_guard_v2_verify": "f54e555de1dd7fbbba5e83e2d58c6860452f5308"
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/v3-semantic-current-verify",
+    "exact_current_dependencies_overlaid_from_canonical_github_bytes": true,
+    "py_compile": "PASS",
+    "semantic_claim_pack_tests_run": 5,
+    "semantic_claim_pack_tests_passed": 5,
+    "semantic_claim_pack_tests_failed": 0,
+    "semantic_identity_carrier_tests_run": 4,
+    "semantic_identity_carrier_tests_passed": 4,
+    "semantic_identity_carrier_tests_failed": 0
+  },
+  "observed": {
+    "semantic_claim_count": 12,
+    "stable_mission_authority_bound": true,
+    "pointer_bookkeeping_drift_preserves_claim_identity": true,
+    "v3_identity_carrier_factorization_count": 12,
+    "r12_stable_claim_id": "11870f850b46bcfcc31094f764fc4f45c911aaac413979ceb62679ff19a53162",
+    "semantic_property_truth_authority": false,
+    "quality_authority": false,
+    "acceptance_authority": false,
+    "promotion_authority": false,
+    "terminal_authority": false
+  },
+  "proves": [
+    "CURRENT_V3_SEMANTIC_CLAIM_PACK_BYTES_PASS_THE_CURRENT_FIVE_TEST_SUITE",
+    "CURRENT_V3_IDENTITY_CARRIER_BYTES_PASS_THE_CURRENT_FOUR_TEST_SUITE",
+    "MUTABLE_MISSION_POINTER_BOOKKEEPING_DRIFT_DOES_NOT_CHANGE_STABLE_V3_CLAIM_IDENTITIES_WHEN_REAL_MISSION_AUTHORITY_IS_UNCHANGED",
+    "ALL_TWELVE_STABLE_V3_SEMANTIC_CLAIMS_RETAIN_LOSSLESS_IDENTITY_CARRIER_FACTORIZATION"
+  ],
+  "hard_nonclaims": [
+    "NO_SEMANTIC_LEAF_PROPERTY_TRUTH",
+    "NO_CC_R1_CC_R2_CC_R3_OR_R4_ROOT_CLOSURE_FROM_THIS_RECEIPT",
+    "NO_CROSS_CLAIM_ROOT_CERTIFICATE_TRANSPORT",
+    "NO_PROFESSIONAL_QUALITY_CLOSURE",
+    "NO_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY",
+    "NO_FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "property_truth_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
