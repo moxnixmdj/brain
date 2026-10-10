@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_R2_V67_TLAC_MREL_IDENTITY_RECONCILIATION_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_SUCCESSOR_BYTES__9_OF_9_STATE_FALSIFIERS__INHERITS_37_OF_37_PAIR_CONE__4_OF_4_LIVE_PAIR_TRUTH__TERMINAL_FALSE__ZERO_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "successor/r2-v67-tlac-mrel-identity-20261010-sol",
+    "exact_blobs": {
+      "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json": "cc2162c262c9052e5d57f97ae20266a85c14ea87",
+      "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261010_V62.json": "e7a97ad818144e02594223e4b01fed76d18d0bbe",
+      "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json": "6379c1d337c6c6a3166ec8f4112fd92bd9c898c4",
+      "canonical/action_intents/ACTION_INTENT_CONTEXT_DEPENDENT_MEANING_POSITIVE_COVERAGE_20261010_V10.json": "48510dbf8ae53865f3151fe1e95f4e7dc4251d29",
+      "canonical/reasoning/2026-10-10_CONTEXT_DEPENDENT_MEANING_RESEARCH_HANDOFF_V11.json": "1c8f41b4b2fa22fcf8f588185a7f1fd3be0c9c07",
+      "canonical/reasoning/2026-10-10_CONTEXT_DEPENDENT_MEANING_SUCCESSOR_EXECUTION_LEDGER_V7.json": "bcef82cb49153a9a67c521ca59c5d0c691795f61",
+      "canonical/tests/test_r2_v67_tlac_mrel_identity_reconciliation_v1.py": "5707aaad1bcf845361702ca30e4f2525857a8b95"
+    }
+  },
+  "inherited_capability_verification": {
+    "path": "canonical/verification/TLAC_MREL_IDENTITY_DISCRIMINATOR_VERIFY_20261010_V1.json",
+    "git_blob_sha": "30d94a9878e2910fb2f626d394dc1a79596cfd91",
+    "focused_tests": "37_OF_37_PASS",
+    "live_source_authority": "EBA_AND_FSB_PASS",
+    "live_domain_mapping_truth": "4_OF_4_PASS"
+  },
+  "independent_successor_replay": {
+    "carrier": "participial-disposition-verify-20261009-sol",
+    "sprite_id": "sprite-72f2a31b-c09c-49e0-bfe0-279786ee2d56",
+    "workspace": "/home/sprite/r2_v67_tlac_mrel_verify",
+    "test": "canonical/tests/test_r2_v67_tlac_mrel_identity_reconciliation_v1.py",
+    "result": "9_OF_9_PASS"
+  },
+  "proved": [
+    "CURRENT_R2_ADVANCES_FROM_V66_TO_V67_WITHOUT_CHANGING_DIRECT_ROUTE_OR_BOUNDED_FAMILY_COUNTS",
+    "ROOT2_V62_SUPERSEDES_V61_AND_IS_CONTENT_ADDRESSED_FROM_CURRENT_R2",
+    "THE_OLD_TLAC_MREL_IDENTITY_DISCRIMINATOR_MISSING_RESIDUAL_IS_REMOVED",
+    "THE_REPLACEMENT_RESIDUAL_EXPLICITLY_RETAINS_TLAC_MREL_CASES_OUTSIDE_THE_VERIFIED_EBA_FSB_GOVERNING_REQUIREMENT_PAIR_SCOPE",
+    "THE_BOUNDED_TLAC_MREL_PAIR_SCOPE_IS_RECORDED_AS_ONE_VERIFIED_POSITIVE_FINANCE_SUBREGION",
+    "THE_SHARED_LOSS_ABSORPTION_RECAPITALISATION_RESOLUTION_SIGNATURE_REMAINS_NONSEPARATING",
+    "GLOBAL_TLAC_MREL_IDENTITY_DISJOINTNESS_EQUIVALENCE_AND_OPEN_WORLD_REGCAP_COMPLETENESS_REMAIN_UNPROVED",
+    "ACTION_INTENT_RECONCILIATION_HANDOFF_AND_LEDGER_ALL_PRESERVE_THE_NARROWER_RESIDUAL",
+    "CURRENT_TERMINAL_AUTHORITY_PROJECTS_R2_V67_ROOT2_V62_AND_REMAINS_TERMINAL_FALSE",
+    "ALL_NEW_ACCEPTANCE_AND_TERMINAL_CREDIT_DELTAS_REMAIN_ZERO"
+  ],
+  "hard_nonclaims": [
+    "NO_FINANCE_SEMANTIC_TAIL_CLOSURE",
+    "NO_GLOBAL_TLAC_MREL_DISJOINTNESS",
+    "NO_GLOBAL_TLAC_MREL_EQUIVALENCE",
+    "NO_OPEN_WORLD_REGULATORY_CAPITAL_ONTOLOGY_COMPLETENESS",
+    "NO_DIRECT_ROUTE_COUNT_INCREASE",
+    "NO_BOUNDED_FAMILY_COUNT_INCREASE",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
