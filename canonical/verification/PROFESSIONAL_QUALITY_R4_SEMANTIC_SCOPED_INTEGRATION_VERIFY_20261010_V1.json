@@ -1,0 +1,73 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R4_SEMANTIC_SCOPED_INTEGRATION_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "INDEPENDENT_SPRITE_PASS__23_OF_23__ALL_24_PROFESSIONAL_LEAVES_HAVE_BOUNDED_SCOPED_EVIDENCE__ZERO_GLOBAL_LEAF_CREDIT",
+  "subjects": {
+    "r4_runtime": {
+      "path": "canonical/runtime/professional_r4_measurement_semantic_certificate_v1.py",
+      "git_blob_sha": "349afbd3f5b118bc7da56b5d04c7fdba761b77ec"
+    },
+    "r4_scope": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_R4_MEASUREMENT_SEMANTIC_SCOPE_20261010_V1.json",
+      "git_blob_sha": "fdc7f57aa64c13dd55952bef72bc8f9cba28b583"
+    },
+    "r4_verification": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R4_MEASUREMENT_SEMANTIC_VERIFY_20261010_V1.json",
+      "git_blob_sha": "44a9e9e31e43404d1aed0a9547502e5f5dee772f"
+    },
+    "scoped_overlay": {
+      "path": "canonical/runtime/professional_quality_scoped_evidence_overlay_v1.py",
+      "git_blob_sha": "d3bca89c426b8424ec120ace482ba85f1afd26e3"
+    },
+    "scoped_registry": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_REGISTRY_20261010_V1.json",
+      "git_blob_sha": "e8b013d4b10915104ec4f0744b03e5d36c7d87dd"
+    },
+    "overlay_tests": {
+      "path": "canonical/tests/test_professional_quality_scoped_evidence_overlay_v1.py",
+      "git_blob_sha": "2f74e077ca1b3491635c789591b3fd613f43ff04"
+    },
+    "projection_runtime": {
+      "path": "canonical/runtime/professional_quality_leaf_coverage_projection_v2.py",
+      "git_blob_sha": "b316d103d7134e58b8b5b838627ba7946742b2c4"
+    },
+    "projection_tests": {
+      "path": "canonical/tests/test_professional_quality_leaf_coverage_projection_v2.py",
+      "git_blob_sha": "c99bd8f7c079fb749ca243c21240850d60243c03"
+    }
+  },
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "working_directory": "/home/sprite/r4-semantic-current-integration-verify-v1"
+  },
+  "replay": {
+    "command": "python -m unittest canonical.tests.test_professional_r4_measurement_semantic_certificate_v1 canonical.tests.test_professional_quality_scoped_evidence_overlay_v1 canonical.tests.test_professional_quality_leaf_coverage_projection_v2 -v",
+    "tests_passed": 23,
+    "tests_total": 23,
+    "tests_failed": 0
+  },
+  "projected_state": {
+    "admitted_scoped_capability_count": 21,
+    "expected_leaf_count": 24,
+    "partial_coverage_leaf_count": 24,
+    "semantic_partial_coverage_leaf_count": 12,
+    "execution_partial_coverage_leaf_count": 12,
+    "no_scoped_evidence_leaf_count": 0,
+    "verified_global_leaf_count": 0,
+    "open_global_leaf_count": 24,
+    "global_leaf_closure": false,
+    "domain_semantic_closure": false,
+    "domain_execution_closure": false
+  },
+  "hard_nonclaims": [
+    "BOUNDED_SCOPED_EVIDENCE_IS_NOT_GLOBAL_LEAF_CLOSURE",
+    "NO_GLOBAL_PROFESSIONAL_ROOT_CLOSURE",
+    "NO_DOMAIN_SEMANTIC_OR_EXECUTION_CLOSURE",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
