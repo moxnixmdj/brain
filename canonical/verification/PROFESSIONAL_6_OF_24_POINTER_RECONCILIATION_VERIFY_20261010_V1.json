@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_6_OF_24_POINTER_RECONCILIATION_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_SPRITE__4_OF_4__BINDER_PROVED_PROPERTY_TRUTH_6_OF_24_PROPAGATED_THROUGH_PROFESSIONAL_ASSURANCE_LIVE_FRONTIER_AND_SCHEDULER",
+  "basis": {
+    "registry_verification": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_LEAF_REGISTRY_PROPERTY_TRUTH_VERIFY_20261010_V4.json",
+      "git_blob_sha": "db7295e8088b371a1166c6f6cfa6b0157990eaf9"
+    },
+    "professional_pointer": {
+      "path": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
+      "git_blob_sha": "1b4fe285a7c8930692d6b2ff8631691218f2b866"
+    },
+    "assurance_pointer": {
+      "path": "canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json",
+      "git_blob_sha": "ff59f5c966961becb4d6a0e3d47411a7157c520f"
+    },
+    "live_frontier": {
+      "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
+      "git_blob_sha": "31b7cf075e317171151b55c3476e0f346ddb7557"
+    },
+    "development_scheduler": {
+      "path": "canonical/governance/CURRENT_DEVELOPMENT_SCHEDULER.json",
+      "git_blob_sha": "b6b8e58d6577af2da19ca3de037e4368d051be71"
+    }
+  },
+  "independent_replay": {
+    "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/professional-6of24-pointer-reconcile-v1",
+    "checks_run": 4,
+    "checks_passed": 4,
+    "checks_failed": 0,
+    "transcript_sha256": "01615a8206e609018ad8389e51d5de2c387b3ed5e819f172e6670430f1c126c2",
+    "transcript_bytes": 188
+  },
+  "proves": [
+    "PROFESSIONAL_POINTER_DERIVES_SIX_VERIFIED_EXECUTION_LEAVES_AND_EIGHTEEN_OPEN_LEAVES_FROM_V4_REGISTRY_EVIDENCE",
+    "ASSURANCE_POINTER_CONTENT_ADDRESSED_LINKS_TO_EXACT_RECONCILED_PROFESSIONAL_POINTER",
+    "LIVE_FRONTIER_CONTENT_ADDRESSED_LINKS_TO_EXACT_RECONCILED_PROFESSIONAL_POINTER",
+    "DEVELOPMENT_SCHEDULER_CONTENT_ADDRESSED_LINKS_TO_EXACT_RECONCILED_LIVE_FRONTIER",
+    "SIX_EXECUTION_LEAVES_REMAIN_OPEN_AND_TWELVE_SEMANTIC_LEAVES_REMAIN_OPEN",
+    "STALE_PROPERTY_TRUTH_5_OF_24_AND_SEVEN_EXECUTION_SCHEDULER_LANGUAGE_REMOVED"
+  ],
+  "hard_nonclaims": [
+    "NO_GLOBAL_PROFESSIONAL_QUALITY_CLOSURE",
+    "NO_SEMANTIC_LEAF_CLOSURE",
+    "NO_DOMAIN_EXECUTION_CLOSURE",
+    "NO_FULL_CURRENT_MAIN_REGRESSION",
+    "NO_LIVE_DEFAULT_PROMOTION",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "quality_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
