@@ -27,8 +27,8 @@
   "planning_entrypoint": "canonical.runtime.capability_first_scheduler_v1.rank_work",
   "current_live_work_frontier": {
     "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
-    "git_blob_sha": "5a21ea9e80eb7832c7736d852e421e6dd021534e",
-    "status": "CURRENT_POST_COMPOSITION_FRONTIER__V7_R12_PROOF_SUBJECT_CURRENT__V8_SUCCESSOR_TOTALITY_MEDIATION_VERIFIED__V7_TO_V8_REFINEMENT_AND_V8_NONVACUITY_OPEN__PROPERTY_TRUTH_12_OF_24__ALL_12_EXECUTION_LEAVES_CLOSED__ESCAPE_12_GAP_A_0_GAP_B_1_PARKED__ZERO_GLOBAL_CREDIT",
+    "git_blob_sha": "417a0959258be75966c0fa7ea80de49fd9160a6a",
+    "status": "CURRENT_POST_COMPOSITION_FRONTIER__V7_TO_V8_POSITIVE_ROUTE_REFINEMENT_VERIFIED__C1_TO_C7_V8_REVERIFICATION_PLUS_FRESH_V8_C8_MATERIAL_TOTALITY_WITNESS_OPEN__PROPERTY_TRUTH_12_OF_24__ALL_12_EXECUTION_LEAVES_CLOSED__ZERO_GLOBAL_CREDIT",
     "professional_verified_root_subject_binding_count": 12,
     "professional_same_subject_composition_admissible": true,
     "professional_whole_leaf_scope_complete_count": 24,
@@ -107,7 +107,7 @@
     "professional_scope_construction_complete": true,
     "professional_scope_complete_count": 24,
     "professional_property_truth_closed_count": 12,
-    "current_primary_professional_edge": "PROVE_V7_TO_V8_R12_SEMANTIC_REFINEMENT_WITH_ZERO_AUTHORITY_TRANSPORT__OBTAIN_ONE_REAL_V8_POSITIVE_TOTALITY_WITNESS__THEN_R4__PARALLEL_REMAINING_SEMANTIC_REUSE",
+    "current_primary_professional_edge": "REVERIFY_PRESERVED_R12_C1_TO_C7_ON_V8_SUBJECT__OBTAIN_ONE_REAL_V8_POSITIVE_TOTALITY_WITNESS_FOR_C8_AND_MATERIAL_TOTALITY__THEN_R4__PARALLEL_REMAINING_SEMANTIC_REUSE",
     "full_current_main_regression_open": true,
     "r10_structural_guard_verification": {
       "path": "canonical/verification/PROFESSIONAL_QUALITY_R10_STRUCTURAL_GUARD_INDEPENDENT_VERIFY_20261010_V1.json",
@@ -162,6 +162,15 @@
     "effect_partition": "RESOLVED_OR_PROVED_DECISION_NULL_OVER_CC_R1_REALITY_CONTAINING_CARRIER",
     "cross_subject_authority_transport": false,
     "wake_new_primitive_only_on": "EFFECT_DISTINGUISHING_COUNTEREXAMPLE_PLUS_VERIFIED_REUSE_EXHAUSTION",
+    "terminal_credit_delta": 0
+  },
+  "r12_v7_v8_refinement": {
+    "verification_path": "canonical/verification/PROFESSIONAL_V7_TO_V8_R12_POSITIVE_REFINEMENT_INDEPENDENT_VERIFY_20261010_V1.json",
+    "independently_verified": true,
+    "positive_route_refinement_proved": true,
+    "cross_subject_property_authority_transport": false,
+    "c8_nonvacuity_transport_proved": false,
+    "exact_next": "REVERIFY_C1_TO_C7_ON_V8__REAL_V8_C8_AND_MATERIAL_TOTALITY_WITNESS__THEN_R4",
     "terminal_credit_delta": 0
   }
 }
