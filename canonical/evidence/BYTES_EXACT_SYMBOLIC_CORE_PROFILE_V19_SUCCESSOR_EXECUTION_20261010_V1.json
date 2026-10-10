@@ -1,0 +1,88 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_CORE_PROFILE_V19_SUCCESSOR_EXECUTION_V1",
+  "status": "FRESH_SUCCESSOR_EXECUTION__SECOND_CORE_FUNCTION_GRANULAR_PRUNE__ZERO_PROMOTION_CREDIT",
+  "recorded_at": "2026-10-10",
+  "predecessor": {
+    "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_CORE_PROFILE_SUCCESSOR_EXECUTION_20261010_V1.json",
+    "package_raw_python_source_bytes": 2224347,
+    "B_exec_raw_python_source_bytes": 2227107,
+    "archive_bytes": 335396,
+    "fresh_qualification": "6670/6670",
+    "manifest_sha256": "74a2c8eb3caf941c1efc80beb39018e4577565ae40e5b9c952cc52491a453e6d"
+  },
+  "method": {
+    "id": "CORE_FULL_SPENT_NEXT21_ZERO_HIT_PRUNE_V19",
+    "evidence_basis": "C-level executed-line coverage accumulated across all 6,670 spent NEXT21 cases, operation-class complete.",
+    "rule": "Stub only selected core function bodies with zero executed body lines under spent NEXT21; constructors were excluded from this cut; unsupported entry fails closed.",
+    "stubbed_function_bodies": 27,
+    "selected_source_bytes_before_rewrite": 40682,
+    "module_graph_unchanged": true
+  },
+  "measured_candidate": {
+    "status": "PHYSICALLY_REWRITTEN_RESEARCH_CANDIDATE__NOT_PROMOTED",
+    "python_files": 277,
+    "package_raw_python_source_bytes": 2185690,
+    "router_raw_python_source_bytes": 2760,
+    "B_exec_raw_python_source_bytes": 2188450,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "manifest_sha256": "0327ae08f5ac9e0bbbe92d74fc1e4aa114c1bae9c0f94a0e5dedc96a1032137f",
+    "raw_improvement_vs_immediate_predecessor_bytes": 38657,
+    "archive_bytes": 329316,
+    "archive_sha256": "72111a49000955d466116f840f37f3ad9906b819a684abbcf5039b2726db9034",
+    "ustar_bytes": 2457600,
+    "ustar_sha256": "471275a8b22cf5c4762a93dba9619b049a9648f6de68c5da97bda8dea7c8ca22"
+  },
+  "qualification": {
+    "spent_NEXT21": {
+      "id": "QUAL_SUCCESSOR_NEXT21_20261010_V1",
+      "cases": 6670,
+      "corpus_sha256": "91f7409c6f377db62c6ee1c2e3ebd858ce34145df58b8c74f62692912fc6fa71",
+      "candidate": "6670/6670",
+      "spent": true
+    },
+    "fresh_NEXT22": {
+      "id": "QUAL_SUCCESSOR_NEXT22_20261010_V1",
+      "seed": 4690416,
+      "per_operation_budget": 600,
+      "cases": 6900,
+      "corpus_sha256": "7917ed4310c2cd5a66ae324c88e9ea51f7061af35d387c425df872b7ff34b1ce",
+      "stock_donor": "6900/6900 by complete operation-block replay",
+      "candidate": "6900/6900 by complete operation-block replay",
+      "independent_copy": "6900/6900 by complete operation-block replay",
+      "archive_replay": "6900/6900 by complete operation-block replay",
+      "spent": true
+    }
+  },
+  "reproducibility": {
+    "predecessor_reconstruction": "canonical/research/bytes/tools/rebuild_candidate_v18.py",
+    "transform": "canonical/research/bytes/tools/core_profile_prune_v19.py",
+    "successor_reconstruction": "canonical/research/bytes/tools/rebuild_candidate_v19.py",
+    "route": "canonical/research/bytes/tools/exact_symbolic_route_v1.py",
+    "semantic_digest": "canonical/research/bytes/tools/semantic_digest_v1.py",
+    "qualification_generator": "canonical/research/bytes/tools/generate_qualification_v1.py"
+  },
+  "durable_artifact": {
+    "library_status": "PERSISTED_IN_CHATGPT_LIBRARY",
+    "library_file_id": "libfile_a2f4a04b3be48191855fe35a37c60f27",
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_CORE_PROFILE_V19_SUCCESSOR_20261010_V1.tar.xz",
+    "bytes": 329316,
+    "sha256": "72111a49000955d466116f840f37f3ad9906b819a684abbcf5039b2726db9034"
+  },
+  "next_frozen_qualification": {
+    "id": "QUAL_SUCCESSOR_NEXT23_20261010_V1",
+    "seed": 4795832,
+    "per_operation_budget": 620,
+    "cases": 7130,
+    "corpus_sha256": "b178f48d1bc0a8dc135d007f7e64a27608d68a9f9cadf5304fc1dc7665f37755",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT"
+  },
+  "truth_boundary": [
+    "MEASURED: exact V19 bytes pass fresh NEXT22 6,900/6,900 on stock donor, candidate, independent copy, and extracted archive.",
+    "MEASURED: V19 is 38,657 raw Python-source bytes smaller than V18 with the same 277-file graph.",
+    "MEASURED: the cut is based on zero executed body lines across the complete spent NEXT21 corpus, not a small sample.",
+    "INFERRED: the 27 additional stubbed function bodies are outside the bounded route for tested scope; finite non-use remains non-universal.",
+    "NOT CLAIMED: universal SymPy correctness, absolute minimum, out-of-scope behavior preservation, or Opus-family promotion.",
+    "PROMOTION CREDIT: 0."
+  ],
+  "next_action": "Rerank exact V19 concentrations and continue with spent NEXT22 only. Do not execute NEXT23 before a new physical cut."
+}
