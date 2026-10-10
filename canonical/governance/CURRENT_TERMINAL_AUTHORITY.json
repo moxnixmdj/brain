@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V36",
-  "date": "2026-10-09",
+  "date": "2026-10-10",
   "status": "ACTIVE_FAIL_CLOSED_REAL_MISSION_BOUND__STRICT_EXTERNALITY_RECONCILED__R3_ZERO_RESIDUAL_RECONCILED__OPUS_5_5_CHECKPOINT_TERMINAL_FALSE__CURRENT_R2_V53_AND_CODING_V3_PROJECTION_BOUND__EXECUTABLE_REFINEMENT_STRUCTURAL_ANTI_BYPASS_TERMINAL_FALSE",
   "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "authoritative_sources": {
@@ -594,9 +594,10 @@
     },
     "terminal_candidate_donor_independence_audit": {
       "path": "canonical/runtime/terminal_candidate_donor_independence_audit_v1.py",
-      "git_blob_sha": "0ed69641693538f15b7e1658f5ac5e80031afb26",
-      "current_byte_binding_verified": false,
-      "current_byte_status": "OPEN__BYTE_DRIFT_FROM_BOUND_AUTHORITY"
+      "git_blob_sha": "7b3713267d32f9b4ae7e2ca56ea17c5859bdec71",
+      "current_byte_binding_verified": true,
+      "current_byte_status": "CURRENT_BYTE_BOUND_AND_BOUNDED_COMPONENT_SURFACE_GREEN",
+      "current_byte_verification_receipt": "canonical/verification/CURRENT_RUNTIME_BYTE_COHERENCE_SPRITE_VERIFICATION_20261010_V1.json"
     },
     "adaptive_positive_cover_fixed_point_v2": {
       "path": "canonical/governance/ADAPTIVE_ABSTRACT_POSITIVE_COVER_FIXED_POINT_THEOREM_20261007_V2.json"
@@ -775,11 +776,17 @@
       },
       "runtime": {
         "path": "canonical/runtime/terminal_autopilot_executor_v1.py",
-        "git_blob_sha": "657a94d00833ad91403070132ef4e1f0d7337336"
+        "git_blob_sha": "6f828ce5631db582ea4d4a3d73c59b08f232abf0",
+        "current_byte_binding_verified": true,
+        "current_byte_status": "CURRENT_BYTE_BOUND_AND_BOUNDED_COMPONENT_SURFACE_GREEN",
+        "current_byte_verification_receipt": "canonical/verification/CURRENT_RUNTIME_BYTE_COHERENCE_SPRITE_VERIFICATION_20261010_V1.json"
       },
       "planner": {
         "path": "canonical/runtime/terminal_autopilot_v1.py",
-        "git_blob_sha": "bb72c160f3be00efedbd5d111b77d956bed2cb11"
+        "git_blob_sha": "78fa2cbabf8ed5e70de8b3ed987b510ca033076b",
+        "current_byte_binding_verified": true,
+        "current_byte_status": "CURRENT_BYTE_BOUND_AND_BOUNDED_COMPONENT_SURFACE_GREEN",
+        "current_byte_verification_receipt": "canonical/verification/CURRENT_RUNTIME_BYTE_COHERENCE_SPRITE_VERIFICATION_20261010_V1.json"
       },
       "role": "ACTIVE_GATED_CONCURRENT_EXECUTOR__REVERSIBLE_ZERO_REALITY_AND_INDEPENDENT_VERIFY__PER_TASK_CONTENT_BOUND_PROMOTION__NO_IRREVERSIBLE_BENCHMARK_AUTOEXECUTION",
       "current_byte_binding_verified": false,
@@ -2260,7 +2267,10 @@
     "git_blob_sha": "e70f662d27e0b917eaf6ef8ba9da3bebc5ab7ee0",
     "runtime_gate": {
       "path": "canonical/runtime/terminal_root_decision_gate_v1.py",
-      "git_blob_sha": "7c7e0c34cc599c7114fb83421307db2433e2b269"
+      "git_blob_sha": "6f546f657900405c628c1eb3575bc1e4ac220aeb",
+      "current_byte_binding_verified": true,
+      "current_byte_status": "CURRENT_BYTE_BOUND_AND_BOUNDED_COMPONENT_SURFACE_GREEN",
+      "current_byte_verification_receipt": "canonical/verification/CURRENT_RUNTIME_BYTE_COHERENCE_SPRITE_VERIFICATION_20261010_V1.json"
     },
     "tests": {
       "path": "canonical/tests/test_terminal_root_decision_gate_v1.py",
@@ -2560,7 +2570,10 @@
     },
     "unified_fabric": {
       "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-      "git_blob_sha": "5badd256e18ab4bad58be862c69ef9e272bf7eb1"
+      "git_blob_sha": "31b9a227dba79f069045e915e416bcc370900af6",
+      "current_byte_binding_verified": true,
+      "current_byte_status": "CURRENT_BYTE_BOUND_AND_BOUNDED_COMPONENT_SURFACE_GREEN",
+      "current_byte_verification_receipt": "canonical/verification/CURRENT_RUNTIME_BYTE_COHERENCE_SPRITE_VERIFICATION_20261010_V1.json"
     },
     "verification": {
       "path": "canonical/verification/LIVE_CAPABILITY_OWNERSHIP_UNIVERSAL_INVOCATION_V1_SOURCE_REPLAY_20261008_V1.json",
@@ -2636,7 +2649,10 @@
     },
     "unified_fabric": {
       "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-      "git_blob_sha": "5badd256e18ab4bad58be862c69ef9e272bf7eb1"
+      "git_blob_sha": "31b9a227dba79f069045e915e416bcc370900af6",
+      "current_byte_binding_verified": true,
+      "current_byte_status": "CURRENT_BYTE_BOUND_AND_BOUNDED_COMPONENT_SURFACE_GREEN",
+      "current_byte_verification_receipt": "canonical/verification/CURRENT_RUNTIME_BYTE_COHERENCE_SPRITE_VERIFICATION_20261010_V1.json"
     },
     "regression": {
       "path": "canonical/tests/test_live_capability_invoker_v1.py",
@@ -2703,7 +2719,11 @@
       "path": "canonical/governance/OPTION_PRESERVING_CAPABILITY_OPTIMIZATION_20261008_V1.json"
     },
     "runtime": {
-      "path": "canonical/runtime/option_preserving_capability_optimizer_v1.py"
+      "path": "canonical/runtime/option_preserving_capability_optimizer_v1.py",
+      "git_blob_sha": "367478e71b015fb2f4b7cc40dad34f88a7f47238",
+      "current_byte_binding_verified": true,
+      "current_byte_status": "CURRENT_BYTE_BOUND_AND_BOUNDED_COMPONENT_SURFACE_GREEN",
+      "current_byte_verification_receipt": "canonical/verification/CURRENT_RUNTIME_BYTE_COHERENCE_SPRITE_VERIFICATION_20261010_V1.json"
     },
     "physical_deletion_requires_separate_proof": true,
     "terminal_credit_delta": 0,
@@ -3738,5 +3758,13 @@
     "current_authority_runtime_drift_unique_path_count": 5,
     "current_authority_runtime_missing_blob_binding_count": 1,
     "current_authority_runtime_binding_census_verified": true
+  },
+  "current_runtime_byte_coherence_20261010_v1": {
+    "status": "PROVED_FOR_EXACT_DIRECT_RUNTIME_BINDINGS__BOUNDED_COMPONENT_SURFACES",
+    "verification_receipt": "canonical/verification/CURRENT_RUNTIME_BYTE_COHERENCE_SPRITE_VERIFICATION_20261010_V1.json",
+    "exact_direct_runtime_binding_count": 7,
+    "full_transitive_dependency_cone_current_byte_verified": false,
+    "repository_wide_executable_refinement_closed": false,
+    "terminal_credit_delta": 0
   }
 }
