@@ -48,6 +48,7 @@ def _fail(reason: str, **extra: Any) -> dict[str, Any]:
         "schema": SCHEMA,
         "pass": False,
         "status": "FAIL_CLOSED",
+        "reason": reason,
         "disposition": NEGATIVE,
         "blocking_diagnostic": reason,
         **_zero(),
