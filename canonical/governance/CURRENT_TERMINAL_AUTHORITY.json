@@ -1,7 +1,7 @@
 {
-  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V39",
+  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V40",
   "date": "2026-10-10",
-  "status": "ACTIVE_FAIL_CLOSED_REAL_MISSION_BOUND__STRICT_EXTERNALITY_RECONCILED__R3_ZERO_RESIDUAL_RECONCILED__OPUS_5_5_CHECKPOINT_TERMINAL_FALSE__CURRENT_R2_V72_AND_CODING_V4_FIVE_REGION_PROJECTION_BOUND__COVERAGE_R1_R4_LIVE_BINDING_REPAIRED__CLAIM_SCOPED_COMPLETENESS_THEOREM_BOUND__ROOT_NAMESPACE_COLLISION_GUARDED__TB_SCIENCE_RANK18_V3_SAME_ATTEMPT_RESEAL_VERIFIED__ACTIVATION_READY__TB_SCIENCE_RANK18_V4_FRESH_ACTIVATION_RESEAL_VERIFIED__BRAIN_V3_EFFECTIVE__V2_ACTIVATION_NOT_ARMED__TB_SCIENCE_RANK18_V6_FINAL_ZERO__PLANNER_CONTROLLER_FAULT_BEFORE_FIRST_ACTION__RANK19_EXECUTION_FROZEN_PENDING_ZERO_EXPOSURE_PLANNER_REPAIR",
+  "status": "ACTIVE_FAIL_CLOSED_REAL_MISSION_BOUND__STRICT_EXTERNALITY_RECONCILED__R3_ZERO_RESIDUAL_RECONCILED__OPUS_5_5_CHECKPOINT_TERMINAL_FALSE__CURRENT_R2_V72_AND_CODING_V4_FIVE_REGION_PROJECTION_BOUND__COVERAGE_R1_R4_LIVE_BINDING_REPAIRED__CLAIM_SCOPED_COMPLETENESS_THEOREM_BOUND__ROOT_NAMESPACE_COLLISION_GUARDED__TB_SCIENCE_RANK18_V3_SAME_ATTEMPT_RESEAL_VERIFIED__ACTIVATION_READY__TB_SCIENCE_RANK18_V4_FRESH_ACTIVATION_RESEAL_VERIFIED__BRAIN_V3_EFFECTIVE__V2_ACTIVATION_NOT_ARMED__TB_SCIENCE_PLANNER_V7_V13_REPAIR_VERIFIED__RANK19_EXECUTION_FROZEN_PENDING_FRESH_V13_PUBLIC_SURFACE_RESEAL__REACHED_ESCAPE_FINITE_TOTALITY_BOUND__BROAD_LIVE_FABRIC_STATE_INVARIANT_FALSIFIED__MISSION_CONSTRUCTOR_INVARIANT_OPEN",
   "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "authoritative_sources": {
     "universal_escape_resolver_v2_active_planning_overlay": {
@@ -1460,6 +1460,20 @@
       "explicit_three_rival_scope_preserved": true,
       "open_world_candidate_universe_complete": false,
       "terminal_credit_delta": 0
+    },
+    "reached_escape_finite_totality_certificate": {
+      "path": "canonical/governance/REACHED_ESCAPE_FINITE_TOTALITY_CERTIFICATE_ACTIVATION_20261010_V1.json",
+      "git_blob_sha": "a2b775c960fa6e33d97e75535656fcd4f09e87bb",
+      "note": "BOUNDED_EXACT_FINITE_REACHED_STATE_ALL_FUTURE_DISCRIMINATOR_OUTCOMES_TOTALIZED_WHEN_CERTIFICATE_PRECONDITIONS_HOLD__NO_GLOBAL_TOTALITY"
+    },
+    "reached_escape_state_construction_boundary": {
+      "path": "canonical/governance/REACHED_ESCAPE_STATE_CONSTRUCTION_INVARIANT_BOUNDARY_20261010_V1.json",
+      "git_blob_sha": "f9dd240a5ee9d5da2fa842c8f7f2af00f4c370bd",
+      "independent_verification": {
+        "path": "canonical/verification/REACHED_ESCAPE_CONSTRUCTION_INVARIANT_BOUNDARY_SPRITE_VERIFY_20261010_V1.json",
+        "git_blob_sha": "8525ec9f9795e417cda95bd6d6d56421c4184674"
+      },
+      "note": "BROAD_ALL_LIVE_FABRIC_REACHABLE_STATE_INVARIANT_FALSIFIED__NARROW_MISSION_OWNED_CONSTRUCTOR_INVARIANT_REMAINS_OPEN"
     }
   },
   "live_truth": {
@@ -2431,7 +2445,12 @@
     ],
     "current_single_boundary": "PROVE_THE_EXACT_SOUND_ADMISSION_COMPLEMENT_R_UNSAT__OR_EQUIVALENT_ESCAPE_PROGRESS_TOTALITY__TOTAL_ALPHA_GAMMA_IS_ALREADY_BOUND__RANK_RESOURCE_POTENTIAL_AND_COMPLETE_RAW_OUTCOME_MODELS_ARE_NOT_SEPARATE_LIVE_BLOCKERS",
     "route_role": "OPTIONAL_STRONGER_MULTI_PREDICATE_DISCHARGE_ROUTE__NOT_MANDATORY_TERMINAL_ROOT",
-    "acceptance_scheduler_rule": "PRESERVE_38_REGISTRY_LABELS_FOR_PROVENANCE__18_PROVED__20_RAW_UNRESOLVED__SEVEN_RAW_UNRESOLVED_LABELS_ARE_VERIFIED_DUPLICATE_OR_DERIVED_NONINDEPENDENT_SCHEDULER_VARIABLES__SCHEDULE_ONLY_13_INDEPENDENT_OPEN_EVIDENCE_OBLIGATIONS_OR_A_STRONGER_MULTI_OBLIGATION_SCOPE_COMPLETE_PROOF"
+    "acceptance_scheduler_rule": "PRESERVE_38_REGISTRY_LABELS_FOR_PROVENANCE__18_PROVED__20_RAW_UNRESOLVED__SEVEN_RAW_UNRESOLVED_LABELS_ARE_VERIFIED_DUPLICATE_OR_DERIVED_NONINDEPENDENT_SCHEDULER_VARIABLES__SCHEDULE_ONLY_13_INDEPENDENT_OPEN_EVIDENCE_OBLIGATIONS_OR_A_STRONGER_MULTI_OBLIGATION_SCOPE_COMPLETE_PROOF",
+    "reached_state_finite_totality_certificate_bound": true,
+    "broad_live_fabric_state_constructor_invariant_proved": false,
+    "broad_live_fabric_state_constructor_invariant_falsified": true,
+    "mission_owned_state_constructor_invariant_proved": false,
+    "next_escape_subproblem": "PROVE_OR_FALSIFY_MISSION_OWNED_ESCAPE_STATE_CONSTRUCTOR_INVARIANT"
   },
   "scheduling_lock": [
     "TB_SCIENCE_RANK8_V3_IS_THE_ONLY_CURRENT_RANK8_EXECUTION_AUTHORITY__V1_AND_V2_MUST_NOT_BE_USED.",
@@ -4915,7 +4934,7 @@
   },
   "tb_science_rank18_v6_irreversible_result_truth_20261010_v1": {
     "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK18_V6_IRREVERSIBLE_RESULT_TERMINAL_PROJECTION_V1",
-    "status": "CURRENT__FINAL_ZERO__PLANNER_CONTROLLER_FAULT_BEFORE_FIRST_ACTION__EXECUTION_ROBUSTNESS_HELD__RANK18_IRREVERSIBLY_CONSUMED__RANK19_EXECUTION_FROZEN_PENDING_ZERO_EXPOSURE_PLANNER_REPAIR",
+    "status": "HISTORICAL_FINAL_ZERO__RANK18_IRREVERSIBLY_CONSUMED__PLANNER_ROOT_CAUSE_REPAIRED_AND_ZERO_EXPOSURE_VERIFIED__NO_RANK18_RETRY_OR_REPLACEMENT",
     "truth_path": "canonical/verification/TB_SCIENCE_RANK18_V6_IRREVERSIBLE_RESULT_TRUTH_20261010_V1.json",
     "truth_git_blob_sha": "2459d821057d6f7178ffea440fb19966e56a3d89",
     "ledger_path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V37.json",
@@ -4937,9 +4956,10 @@
     "rank18_retry_authority": false,
     "rank18_replacement_authority": false,
     "rank19_execution_authority": false,
-    "zero_exposure_planner_repair_required": true,
+    "zero_exposure_planner_repair_required": false,
     "acceptance_credit_delta": 0,
-    "terminal_credit_delta": 0
+    "terminal_credit_delta": 0,
+    "planner_repair_verified": true
   },
   "r2_v72_loss_cushion_mrel_frontier_currentness_reconciliation_20261010_v1": {
     "status": "RECONCILED__TERMINAL_CURRENT_R2_PROJECTION_ADVANCED_TO_V72_V64__ZERO_CREDIT",
@@ -4958,5 +4978,49 @@
     "acceptance_credit_delta": 0,
     "terminal_credit_delta": 0,
     "reconciliation_git_blob_sha": "68c0223695ce9c5f9770d10027525f90a16d227a"
-  }
+  },
+  "current_terminal_authority_v40_reconciliation": {
+    "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V40_RECONCILIATION_20261010_V1.json",
+    "git_blob_sha": "2c1887f1c795e721fb490d7985641aa597fbcdf1",
+    "terminal_credit_delta": 0
+  },
+  "tb_science_v38_planner_repair_reconciliation": {
+    "schema": "PROJECT_BRAIN_TB_SCIENCE_V38_PLANNER_REPAIR_TERMINAL_PROJECTION_V1",
+    "status": "CURRENT__PLANNER_V7_V13_ZERO_EXPOSURE_VERIFIED__RANK18_FINAL_ZERO_IMMUTABLE__RANK19_UNEXPOSED_UNARMED_PENDING_FRESH_V13_PUBLIC_SURFACE_RESEAL__ZERO_CREDIT",
+    "current_execution_pointer_path": "canonical/governance/CURRENT_TB_SCIENCE_EXECUTION.json",
+    "current_execution_pointer_git_blob_sha": "896419d5c85f84af49a886efb02f3f2391c563f3",
+    "ledger_path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V38.json",
+    "ledger_git_blob_sha": "254f91dd9791c7e978917bfcac636289f2c64d0b",
+    "runtime_guard_path": "canonical/governance/CURRENT_TB_SCIENCE_RUNTIME_GUARD.json",
+    "runtime_guard_git_blob_sha": "cdc639c418c6c5a3ee5a1538f4c328e243883261",
+    "repair_verification_path": "canonical/verification/TB_SCIENCE_PLANNER_V7_ZERO_EXPOSURE_VERIFICATION_20261010_V1.json",
+    "repair_verification_git_blob_sha": "9797cc625e3e33bb905cf23fa6c79f66dc9794db",
+    "planner_v7_git_blob_sha": "e5d6ab78b6cf5bacee568cd3701410a8745b9ce8",
+    "agent_v13_git_blob_sha": "8deede8adb960b6ebf7ee747a5e9ff1016238b7e",
+    "rank19_slot_id": "terminal-bench-science/diag-chipseq::trial-0",
+    "rank19_task_digest": "sha256:437bfacaebda9ce9905d54bdfe7247aec9649038206512c64547021f42e3950b",
+    "rank19_task_read": false,
+    "rank19_task_started": false,
+    "rank19_execution_authority": false,
+    "next_required_transition": "FRESH_V13_PROOF_CARRYING_PUBLIC_EXECUTION_SURFACE_RESEAL",
+    "terminal_credit_delta": 0
+  },
+  "reached_escape_finite_totality_reconciliation_20261010_v1": {
+    "status": "BOUND__EXACT_FINITE_REACHED_STATE_FUTURE_OUTCOME_TOTALITY__GLOBAL_TOTALITY_OPEN",
+    "activation_path": "canonical/governance/REACHED_ESCAPE_FINITE_TOTALITY_CERTIFICATE_ACTIVATION_20261010_V1.json",
+    "activation_git_blob_sha": "a2b775c960fa6e33d97e75535656fcd4f09e87bb",
+    "global_escape_progress_totality_proved": false,
+    "terminal_credit_delta": 0
+  },
+  "reached_escape_state_construction_boundary_20261010_v1": {
+    "status": "CURRENT__BROAD_LIVE_FABRIC_STATE_INVARIANT_FALSIFIED__MISSION_OWNED_CONSTRUCTOR_INVARIANT_OPEN",
+    "boundary_path": "canonical/governance/REACHED_ESCAPE_STATE_CONSTRUCTION_INVARIANT_BOUNDARY_20261010_V1.json",
+    "boundary_git_blob_sha": "f9dd240a5ee9d5da2fa842c8f7f2af00f4c370bd",
+    "verification_path": "canonical/verification/REACHED_ESCAPE_CONSTRUCTION_INVARIANT_BOUNDARY_SPRITE_VERIFY_20261010_V1.json",
+    "verification_git_blob_sha": "8525ec9f9795e417cda95bd6d6d56421c4184674",
+    "next_global_question": "PROVE_OR_FALSIFY_MISSION_OWNED_ESCAPE_STATE_CONSTRUCTOR_INVARIANT__UNCERTIFIED_STATES_MUST_FAIL_CLOSED_WITH_CONTENT_ADDRESSED_REPAIR_OBLIGATION",
+    "global_escape_progress_totality_proved": false,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
 }
