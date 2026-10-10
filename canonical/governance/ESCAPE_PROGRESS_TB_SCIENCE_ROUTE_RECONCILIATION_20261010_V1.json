@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_ESCAPE_PROGRESS_TB_SCIENCE_ROUTE_RECONCILIATION_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__PLANNER_V7_REPAIR_CLOSED__CURRENT_INTERNAL_ROUTE_IS_V13_PROOF_CARRYING_PUBLIC_SURFACE_RESEAL__STRICT_PROGRESS_BINDING_STILL_OPEN__ZERO_CREDIT",
+  "obligation_id": "TB_SCIENCE_GE_58_7",
+  "prior_route": "ZERO_EXPOSURE_DIAGNOSE_AND_VERIFY_GENERIC_SCIENCE_PLANNER_PRE_ACTION_FAILURE",
+  "current_route": "BUILD_AND_VERIFY_FRESH_V13_PROOF_CARRYING_PUBLIC_EXECUTION_SURFACE_FOR_RANK19__DO_NOT_READ_TASK_BEFORE_ACTIVATION_AND_LIVE_CARRIER_QUALIFICATION",
+  "evidence": {
+    "runtime_guard": {
+      "path": "canonical/governance/CURRENT_TB_SCIENCE_RUNTIME_GUARD.json",
+      "git_blob_sha": "cdc639c418c6c5a3ee5a1538f4c328e243883261"
+    },
+    "planner_repair_verification": {
+      "path": "canonical/verification/TB_SCIENCE_PLANNER_V7_ZERO_EXPOSURE_VERIFICATION_20261010_V1.json",
+      "git_blob_sha": "9797cc625e3e33bb905cf23fa6c79f66dc9794db"
+    },
+    "planner": {
+      "path": "canonical/runtime/harbor_science_planner_v7.py",
+      "git_blob_sha": "e5d6ab78b6cf5bacee568cd3701410a8745b9ce8"
+    },
+    "agent": {
+      "path": "canonical/runtime/harbor_science_agent_v13.py",
+      "git_blob_sha": "8deede8adb960b6ebf7ee747a5e9ff1016238b7e"
+    }
+  },
+  "proved": [
+    "RANK18_PLANNER_TIMEOUT_UNDERBUDGET_ROOT_CAUSE_REPAIRED",
+    "PLANNER_V7_REAL_LOCAL_QWEN_ZERO_EXPOSURE_PASS",
+    "RANK19_TASK_NOT_READ_OR_STARTED",
+    "OLD_PLANNER_REPAIR_IS_NOT_CURRENT_GAP_B_ACTION"
+  ],
+  "remaining": [
+    "FRESH_V13_PROOF_CARRYING_PUBLIC_EXECUTION_SURFACE_RESEAL",
+    "BIND_CURRENT_INTERNAL_ACTION_TO_GENERIC_REACHED_ESCAPE_REPAIR_PROGRESS_CONTRACT"
+  ],
+  "current_route_available": "INTERNAL_PUBLIC_SURFACE_RESEAL_AVAILABLE",
+  "strict_progress_witness_bound": false,
+  "externality_proved": false,
+  "hard_nonclaims": [
+    "NO_RANK19_EXECUTION_AUTHORITY",
+    "NO_TB_SCIENCE_ACCEPTANCE_CREDIT",
+    "NO_GAP_B_CLOSURE",
+    "NO_CC_R3_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
