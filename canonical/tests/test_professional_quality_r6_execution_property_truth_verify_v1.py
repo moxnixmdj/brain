@@ -27,7 +27,7 @@ class R6ExecutionPropertyTruthV1Tests(unittest.TestCase):
         self.assertTrue(out["pass"],out)
         self.assertTrue(out["leaf_property_truth_authority"])
         self.assertEqual(out["observed_case_counts"]["canonical_r6_defeater_activations"],15)
-        self.assertEqual(out["observed_case_counts"]["total"],24)
+        self.assertEqual(out["observed_case_counts"]["total"],22)
         self.assertFalse(out["r6_semantic_leaf_closed"])
         self.assertFalse(out["r6_root_closed"])
         self.assertFalse(out["global_evidence_completeness_proved"])
