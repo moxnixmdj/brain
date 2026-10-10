@@ -1,0 +1,151 @@
+{
+  "schema": "PROJECT_BRAIN_EXECUTABLE_REFINEMENT_VERIFIER_ABSTRACT_SPEC_V1",
+  "date": "2026-10-10",
+  "subject": {
+    "path": "canonical/runtime/executable_refinement_verifier_v1.py",
+    "git_blob_sha": "65569581716d5378929a900fa0a2045e1785fabf",
+    "function": "verify_certificate"
+  },
+  "scope": "STRUCTURAL_CERTIFICATE_VALIDATION_BRANCH_SURFACE_RELATIVE_TO_FILESYSTEM_GIT_BLOB_JSON_AND_PYTHON_SEQUENCE_SEMANTICS",
+  "constants": {
+    "schema": "PROJECT_BRAIN_EXECUTABLE_REFINEMENT_CERTIFICATE_V1",
+    "receipt_schema": "PROJECT_BRAIN_EXECUTABLE_REFINEMENT_RECEIPT_V1",
+    "supported_proof_classes": [
+      "DECLARATIVE_BOUNDING"
+    ],
+    "allowed_transition_kinds": [
+      "FAIL_CLOSED",
+      "PASS",
+      "STUTTER",
+      "TYPE_ERROR"
+    ],
+    "allowed_coverage_modes": [
+      "DECLARED_FINITE_PARTITION",
+      "EXHAUSTIVE_ENUMERATION"
+    ],
+    "allowed_input_binding_modes": [
+      "CANONICAL_JSON",
+      "DIRECT_TYPED_MAPPING",
+      "EXACT_BYTES"
+    ],
+    "allowed_state_mapping_modes": [
+      "DECLARED_RELATION",
+      "IDENTITY",
+      "STATELESS"
+    ],
+    "allowed_observation_modes": [
+      "EXACT_GOAL_PROJECTION",
+      "SAFE_REFINEMENT"
+    ],
+    "allowed_nondeterminism_modes": [
+      "ABSTRACT_SUPERSET",
+      "DECLARED_RELATION",
+      "DETERMINISTIC"
+    ],
+    "required_fields": [
+      "abstract_spec",
+      "concrete_implementation",
+      "input_binding",
+      "liveness_refinement",
+      "nondeterminism_contract",
+      "observation_refinement",
+      "proof_class",
+      "proof_dependencies",
+      "safety_refinement",
+      "schema",
+      "state_mapping",
+      "subject_id",
+      "terminal_credit_delta",
+      "transition_refinement"
+    ]
+  },
+  "direct_fail_reasons": [
+    "CERTIFICATE_NOT_OBJECT",
+    "CERTIFICATE_SCHEMA_INVALID",
+    "CERTIFICATE_FIELD_SET_INVALID",
+    "PROOF_CLASS_UNSUPPORTED",
+    "SUBJECT_ID_REQUIRED",
+    "NONZERO_TERMINAL_CREDIT_FORBIDDEN",
+    "CONCRETE_IMPLEMENTATION_BINDING_INVALID",
+    "STATE_MAPPING_UNPROVED",
+    "STATE_MAPPING_MODE_UNSUPPORTED",
+    "INPUT_BINDING_UNPROVED",
+    "INPUT_BINDING_MODE_UNSUPPORTED",
+    "TRANSITION_REFINEMENT_INVALID",
+    "TRANSITION_COVERAGE_MODE_UNSUPPORTED",
+    "UNSUPPORTED_BEHAVIOR_MUST_FAIL_CLOSED",
+    "TRANSITION_CLASSES_REQUIRED",
+    "TRANSITION_CLASS_INVALID",
+    "TRANSITION_CLASS_ID_INVALID",
+    "TRANSITION_CLASS_KIND_UNSUPPORTED",
+    "OBSERVATION_REFINEMENT_UNPROVED",
+    "OBSERVATION_REFINEMENT_MODE_UNSUPPORTED",
+    "NONDETERMINISM_CONTRACT_UNPROVED",
+    "NONDETERMINISM_MODE_UNSUPPORTED",
+    "SAFETY_REFINEMENT_UNPROVED",
+    "LIVENESS_REFINEMENT_INVALID",
+    "LIVENESS_REFINEMENT_REQUIRED_BUT_UNPROVED",
+    "PROOF_DEPENDENCIES_INVALID"
+  ],
+  "artifact_binding_error_suffixes": [
+    "BLOB_DRIFT",
+    "FIELD_SET_INVALID",
+    "NOT_OBJECT",
+    "PATH_INVALID",
+    "SEMANTIC_VERSION_REQUIRED"
+  ],
+  "artifact_labels": {
+    "abstract_spec": {
+      "label": "ABSTRACT_SPEC",
+      "semantic_version_required": true
+    },
+    "concrete_implementation": {
+      "label_prefix": "CONCRETE_IMPLEMENTATION_",
+      "semantic_version_required": false,
+      "index_parametric": true
+    },
+    "proof_dependencies": {
+      "label_prefix": "PROOF_DEPENDENCY_",
+      "semantic_version_required": false,
+      "index_parametric": true
+    }
+  },
+  "success_projection": {
+    "pass": true,
+    "schema": "PROJECT_BRAIN_EXECUTABLE_REFINEMENT_RECEIPT_V1",
+    "status": "PASS__STRUCTURAL_REFINEMENT_BINDING_VERIFIED",
+    "proof_class": "DECLARATIVE_BOUNDING",
+    "assurance_level": "STRUCTURAL_BINDING_ONLY",
+    "structural_binding_verified": true,
+    "refinement_verified": false,
+    "semantic_truth_authority": false,
+    "execution_authority": false,
+    "acceptance_authority": false,
+    "terminal_authority": false,
+    "terminal_credit_delta": 0
+  },
+  "acceptance_witness_dimensions": [
+    "SUPPORTED_PROOF_CLASSES",
+    "ALLOWED_TRANSITION_KINDS",
+    "ALLOWED_COVERAGE_MODES",
+    "ALLOWED_INPUT_BINDING_MODES",
+    "ALLOWED_STATE_MAPPING_MODES",
+    "ALLOWED_OBSERVATION_MODES",
+    "ALLOWED_NONDETERMINISM_MODES"
+  ],
+  "parameterized_index_basis": "SINGLE_LOOP_BODY_WITH_INDEX_USED_ONLY_IN_ERROR_LABEL_AND_RECEIPT_POSITION__TEST_INDEX_0_AND_1",
+  "root_assumptions": [
+    "CPYTHON_LANGUAGE_SEMANTICS",
+    "PATHLIB_RESOLVE_FILE_SEMANTICS",
+    "JSON_CANONICALIZATION_SEMANTICS",
+    "SHA1_GIT_BLOB_IDENTITY_SEMANTICS",
+    "SHA256_DIGEST_SEMANTICS"
+  ],
+  "nonclaims": [
+    "SEMANTIC_REFINEMENT_NOT_SELF_CERTIFIED",
+    "EXECUTION_AUTHORITY_NOT_GRANTED",
+    "TRANSITIVE_DEPENDENCY_REFINEMENT_NOT_PROVED",
+    "REPOSITORY_WIDE_REFINEMENT_NOT_PROVED"
+  ],
+  "terminal_credit_delta": 0
+}
