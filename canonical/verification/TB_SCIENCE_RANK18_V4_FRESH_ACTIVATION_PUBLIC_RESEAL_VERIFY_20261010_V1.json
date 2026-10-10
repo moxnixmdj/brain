@@ -1,0 +1,148 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK18_V4_FRESH_ACTIVATION_PUBLIC_RESEAL_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__PUBLIC_V4_FRESH_ACTIVATION_BRANCH_RESEAL__SAME_LOGICAL_ATTEMPT__ZERO_EXPOSURE__ACTIVATION_ABSENT__ZERO_CREDIT",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "slot": {
+    "ledger_schedule_rank": 18,
+    "frozen_manifest_schedule_order": 17,
+    "task_rank": 17,
+    "id": "terminal-bench-science/longitudinal-clinical-agent::trial-0",
+    "digest": "sha256:e9a166b2173f7014d4f1559505397b221f94bc446eab031f94791b35e0e5f1c9",
+    "logical_attempt_id": "a02ee7de469f953679fb593ab152a9f67eb1ebe8c364f8c748f18cd8a81eab8d"
+  },
+  "brain_preconditions": {
+    "staged_authority": {
+      "path": "canonical/governance/TB_SCIENCE_RANK18_ONE_SLOT_EXECUTION_AUTHORITY_20261010_V3.json",
+      "git_blob_sha": "7ab3d1d294d82192462c735ff7cb7e0dc3abc06f"
+    },
+    "current_ledger": {
+      "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V35.json",
+      "git_blob_sha": "73ad3e6e2b9cb9e1f3b72c3f08d6842814ca1940"
+    },
+    "prestart_abort_truth": {
+      "path": "canonical/verification/TB_SCIENCE_RANK18_V1_PRESTART_ABORT_TRUTH_20261010_V1.json",
+      "git_blob_sha": "fd53eecbf4d974e45c936d592005f5f7d518e87d"
+    },
+    "artifactconfig_repair_verification": {
+      "path": "canonical/verification/TB_SCIENCE_RANK18_ARTIFACT_CONFIG_BRIDGE_REPAIR_VERIFY_20261010_V1.json",
+      "git_blob_sha": "aec85d3a6b82aa8ab7a6942b535838333195fb9c"
+    }
+  },
+  "public_reseal": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2554,
+    "head_sha": "b8acbe309c6d47aa19fbe332aec6bff3bd7954af",
+    "merge_commit_sha": "91d3acb2f7d8e8ebf79eedff13ce1cbb800fa9df",
+    "base": "terminal-execution-v1",
+    "surface": {
+      "path": "execution_guard/CURRENT_TERMINAL_EXECUTION_SURFACE_V1.json",
+      "git_blob_sha": "001c3d3a40e52aa57a8f775faf31e43d63bfbc93"
+    },
+    "workflow": {
+      "path": ".github/workflows/execute-tb-science-rank18-20261010-v2.yml",
+      "git_blob_sha": "969a9a735d5dfdf371a9a5c82aa972fe6ad85549"
+    },
+    "behavior": {
+      "path": "execution_guard/TB_SCIENCE_RANK18_EXECUTION_BEHAVIOR_V4.json",
+      "git_blob_sha": "960a06b3450b9686575dc1e7aae3ea4f0695fa90"
+    },
+    "public_authority": {
+      "path": "capsules/tb_science_rank18_20261010_v1/RANK18_PUBLIC_AUTHORITY_BINDING_V4.json",
+      "git_blob_sha": "f9a5bae9882ae10f8aeee3107626096828584116"
+    },
+    "public_ledger": {
+      "path": "capsules/tb_science_rank18_20261010_v1/RANK18_PUBLIC_LEDGER_BINDING_V35.json",
+      "git_blob_sha": "2423b7b49a43cc786475029d0f2fe410ba169d6c"
+    },
+    "epoch": {
+      "path": "capsules/tb_science_rank18_20261010_v1/RANK18_EPOCH_V6_V4.json",
+      "git_blob_sha": "9173a66721ad6c75c4405aef55e4432e04130a1c"
+    },
+    "execution_claim": {
+      "path": "capsules/tb_science_rank18_20261010_v1/RANK18_EXECUTION_CLAIM_V6_V4.json",
+      "git_blob_sha": "19332b9eea4bd02fa1cca3b3c7101696a2105b6b"
+    },
+    "start_cas": {
+      "path": "capsules/tb_science_rank18_20261010_v1/rank18_start_cas_v6.py",
+      "git_blob_sha": "36d220f5caaee9f52fe9dd6f5dac1cbac774d3b1"
+    },
+    "preflight": {
+      "path": "capsules/tb_science_rank18_20261010_v1/rank18_execution_preflight_v6.py",
+      "git_blob_sha": "f1b5557508ac821338268884b3415f142e3d6281"
+    },
+    "status_journal_runner": {
+      "path": "capsules/tb_science_rank18_20261010_v1/rank18_v6_status_journal_runner.py",
+      "git_blob_sha": "d1bb9fc6766f16b34a955c6f1b41d2da0b2709df"
+    },
+    "zero_exposure_tests": {
+      "path": "capsules/tb_science_rank18_20261010_v1/rank18_v4_zero_exposure_reseal_tests.py",
+      "git_blob_sha": "eb9dabf3527788c7e2006525193b639fbcb3fa08"
+    },
+    "fresh_execution_branch": "execute/tb-science-rank18-20261010-v2",
+    "fresh_activation_filename": "ACTIVATE_RANK18_V2_PR.json",
+    "retired_execution_branch": "execute/tb-science-rank18-20261010-v1"
+  },
+  "executed_verification": [
+    {
+      "name": "RANK18_V4_FRESH_BRANCH_RESEAL",
+      "run_id": 38029799988,
+      "job_id": 114148151263,
+      "conclusion": "success"
+    },
+    {
+      "name": "TB_SCIENCE_EXECUTION_RATCHET_V1",
+      "run_id": 38029799902,
+      "job_id": 114148151062,
+      "conclusion": "success"
+    },
+    {
+      "name": "RANK18_ARTIFACTCONFIG_BRIDGE_REPAIR",
+      "run_id": 38029799983,
+      "job_id": 114148151205,
+      "conclusion": "success"
+    },
+    {
+      "name": "RANK15_V6_HISTORICAL_QUARANTINE_AND_CONTROLLER_REGRESSION",
+      "run_id": 38029799770,
+      "job_id": 114148150854,
+      "conclusion": "success"
+    }
+  ],
+  "verified": [
+    "PUBLIC_MERGED_BASE_READBACK_MATCHES_EXACT_V4_SURFACE_AND_V2_WORKFLOW_BLOBS",
+    "FRESH_V2_EXECUTION_BRANCH_DID_NOT_EXIST_AT_RESEAL_VERIFICATION_TIME",
+    "V1_AND_V2_ACTIVATION_FILES_WERE_BOTH_ABSENT_ON_MERGED_BASE",
+    "V4_DEDICATED_ZERO_EXPOSURE_RESEAL_WORKFLOW_PASSED",
+    "GENERIC_EXECUTION_RATCHET_PASSED_ON_THE_SAME_HEAD",
+    "PINNED_HARBOR_0_23_ARTIFACTCONFIG_BRIDGE_REGRESSION_PASSED_ON_THE_SAME_HEAD",
+    "RETIRED_V1_ACTIVATION_COORDINATES_ARE_REJECTED_BY_START_CAS_AND_PREFLIGHT",
+    "SAME_LOGICAL_ATTEMPT_ID_IS_PRESERVED",
+    "TASK_READ_HISTORY_REMAINS_TRUE",
+    "DURABLE_START_REMAINS_FALSE",
+    "BENCHMARK_TRIALS_CONSUMED_REMAINS_ZERO"
+  ],
+  "authority_effect": {
+    "v3_public_reseal_precondition_satisfied": true,
+    "canonical_pointer_promotion_still_required": true,
+    "activation_armed": false,
+    "execution_branch_creation_authority": false,
+    "direct_benchmark_execution_authority": false
+  },
+  "exposure": {
+    "new_task_read": false,
+    "model_reasoning_samples": 0,
+    "durable_start_cas_acquired": false,
+    "benchmark_trials_consumed": 0
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_trials_consumed_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "pass": true,
+  "execution_authority": false,
+  "promotion_authority": true
+}
