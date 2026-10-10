@@ -183,7 +183,7 @@ class OewnEffectFieldRegistryV5IntegrationTests(unittest.TestCase):
 
     def test_action_changing_lexical_senses_remain_top(self):
         problem=_problem(terminally_equivalent=False)
-        out=evaluate(problem,relation_verifier=registry_v5.verify)
+        out=evaluate_v9(problem)
         self.assertFalse(out["pass"],out)
         atoms=[
             x for x in out["open_lattice_atoms"]
@@ -194,10 +194,8 @@ class OewnEffectFieldRegistryV5IntegrationTests(unittest.TestCase):
 
     def test_producer_and_independent_verifier_agree_on_open_case(self):
         problem=_problem(terminally_equivalent=False)
-        out=evaluate(problem,relation_verifier=registry_v5.verify)
-        check=verify(
-            problem,out,relation_verifier=registry_v5.verify
-        )
+        out=evaluate_v9(problem)
+        check=verify_v9(problem,out)
         self.assertTrue(check["verified"],check)
 
 
