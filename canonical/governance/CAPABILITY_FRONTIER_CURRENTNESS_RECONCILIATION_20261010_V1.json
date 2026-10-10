@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_FRONTIER_CURRENTNESS_RECONCILIATION_20261010_V1",
+  "date": "2026-10-10",
+  "status": "CURRENTNESS_RECONCILED__PROFESSIONAL_11_OF_24__R5_ONLY_EXECUTION_OPEN__TWELVE_SEMANTIC_TOTALITY_REUSE__BYTES_V32__R2_V87_WAKE_GATED__TB_PARKED__ZERO_CREDIT",
+  "sources": {
+    "professional": {
+      "path": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
+      "git_blob_sha": "505c19df5063b4eb0be297e22c443ed52ffa5a6a"
+    },
+    "assurance": {
+      "path": "canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json",
+      "git_blob_sha": "34fa800832a5a08417915d91d8a9786e3b31f75d"
+    },
+    "bytes": {
+      "path": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
+      "git_blob_sha": "22bb42347a8c823f057dc1dcbe38e1e9b2d3c5b1"
+    },
+    "r2": {
+      "path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+      "git_blob_sha": "ee03f3fe71383d1bf12e0797bf568e6b5eeeaca4"
+    },
+    "tb_science": {
+      "path": "canonical/governance/CURRENT_TB_SCIENCE_EXECUTION.json",
+      "git_blob_sha": "7678d9a56461b121ffd52dd4c9c8df464fda08d2"
+    },
+    "terminal": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+      "git_blob_sha": "2f4c0900bb5c0d5b4e3b5831f13e951ad75fe859"
+    }
+  },
+  "frontier": {
+    "primary_ready": [
+      "PROFESSIONAL_R5_EXECUTION_PROPERTY_TRUTH",
+      "PROFESSIONAL_TWELVE_SEMANTIC_CLAIM_SCOPED_TOTALITY_REUSE"
+    ],
+    "safe_parallel_ready": [
+      "BYTES_V32_RESOURCE_PARETO_CUT"
+    ],
+    "blocked": [
+      "ASSURANCE_PROMOTION_UNTIL_PROFESSIONAL_AND_FULL_CURRENT_MAIN_REGRESSION"
+    ],
+    "sleeping": [
+      "R2_FINANCE_SEMANTIC_ADEQUACY_TAIL_UNTIL_TASK_LOCAL_COUNTEREXAMPLE_OR_VERIFIED_DEFECT"
+    ],
+    "parked": [
+      "TB_SCIENCE_RANK20_V3_NO_RETRY"
+    ]
+  },
+  "professional": {
+    "scope_complete": 24,
+    "property_truth_closed": 11,
+    "open_execution_leaf_ids": [
+      "PQ::R5_EVALUATOR_REFERENCE::EXECUTION"
+    ],
+    "semantic_totality_reuse_leaf_count": 12
+  },
+  "authority": {
+    "planning": true,
+    "execution": false,
+    "promotion": false,
+    "acceptance": false,
+    "terminal": false
+  },
+  "next": "DEPLET_R5_EXECUTION_PROPERTY_TRUTH_AND_INSTANTIATE_SHARED_SEMANTIC_TOTALITY_REUSE__PARALLELIZE_BYTES_V32_ONLY_IF_NONCONFLICTING__THEN_FULL_CURRENT_MAIN_REGRESSION",
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
