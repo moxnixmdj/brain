@@ -44,9 +44,9 @@ SOURCES = {
         "canonical/governance/TB_SCIENCE_RANK19_ONE_SLOT_EXECUTION_AUTHORITY_20261010_V1.json",
         "ea76756ea30084c7f8291747ae9d204485a0186a",
     ),
-    "current_tb_science_execution": (
-        "canonical/governance/CURRENT_TB_SCIENCE_EXECUTION.json",
-        "0522034857112617e4dacd4cfe340eee7e5cb51f",
+    "rank19_ledger": (
+        "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V38.json",
+        "137a2f61d911321365bd80613e3806a77dbe7eca",
     ),
 }
 
@@ -85,7 +85,7 @@ def verify() -> dict[str, Any]:
     diagnosis = _load(SOURCES["rank18_diagnosis"][0])
     planner_verify = _load(SOURCES["planner_v7_verification"][0])
     authority = _load(SOURCES["rank19_one_slot_authority"][0])
-    current = _load(SOURCES["current_tb_science_execution"][0])
+    ledger = _load(SOURCES["rank19_ledger"][0])
 
     allowed_roles = (
         activation.get("primary_work_rule", {}).get("allowed_benchmark_roles", [])
@@ -180,22 +180,20 @@ def verify() -> dict[str, Any]:
     if not isinstance(state, dict) or state.get("task_read_history") is not False or state.get("task_started") is not False or state.get("benchmark_trials_consumed") != 0:
         errors.append("RANK19_NOT_FRESH")
 
-    staged = current.get("staged_rank19")
-    if not isinstance(staged, dict):
-        errors.append("CURRENT_RANK19_STAGE_MISSING")
+    next_slot = ledger.get("next_slot")
+    if ledger.get("consumed_slots") != 18 or ledger.get("consumed_final_failures") != 18:
+        errors.append("RANK19_LEDGER_PREDECESSOR_COUNT_DRIFT")
+    if not isinstance(next_slot, dict):
+        errors.append("RANK19_LEDGER_NEXT_SLOT_MISSING")
     else:
-        if staged.get("slot_id") != SLOT or staged.get("task_digest") != DIGEST:
-            errors.append("CURRENT_RANK19_SLOT_DRIFT")
-        if staged.get("logical_attempt_id") != ATTEMPT:
-            errors.append("CURRENT_RANK19_ATTEMPT_DRIFT")
-        if staged.get("task_read") is not False or staged.get("task_started") is not False:
-            errors.append("CURRENT_RANK19_EXPOSURE_DRIFT")
-        if staged.get("benchmark_trials_consumed") != 0:
-            errors.append("CURRENT_RANK19_TRIAL_COUNT_DRIFT")
-        if staged.get("execution_authority_effective") is not False:
-            errors.append("CURRENT_RANK19_ALREADY_EFFECTIVE")
-    if current.get("next") != "BUILD_AND_ZERO_EXPOSURE_VERIFY_PUBLIC_V13_RANK19_EXECUTION_SURFACE__NO_TASK_READ":
-        errors.append("CURRENT_RANK19_NEXT_STEP_DRIFT")
+        if next_slot.get("slot_id") != SLOT or next_slot.get("task_digest") != DIGEST:
+            errors.append("RANK19_LEDGER_SLOT_DRIFT")
+    if ledger.get("logical_attempt_id") != ATTEMPT:
+        errors.append("RANK19_LEDGER_ATTEMPT_DRIFT")
+    if ledger.get("rank19_task_read_history") is not False or ledger.get("rank19_task_started") is not False:
+        errors.append("RANK19_LEDGER_EXPOSURE_DRIFT")
+    if ledger.get("rank19_start_cas_acquired") is not False or ledger.get("rank19_benchmark_trials_consumed") != 0:
+        errors.append("RANK19_LEDGER_CONSUMPTION_DRIFT")
 
     expected = {
         "schema": "PROJECT_BRAIN_CAPABILITY_FIRST_CHECKPOINT_ADMISSION_V1",
