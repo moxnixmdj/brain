@@ -1,0 +1,121 @@
+{
+  "schema": "PROJECT_BRAIN_REACHED_ESCAPE_LIVE_NO_BYPASS_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__COMPLETE_STATIC_PYTHON_RUNTIME_CENSUS_EXTENDED_BY_COMPLETE_DELTA__1672_POST_REPAIR__ZERO_CREDIT",
+  "branch": "successor/reached-escape-live-no-bypass-20261010-v5",
+  "base_commit": "b8671d2fdb4fb6cebe197fe507a7007e03f1c8a0",
+  "runtime_census_basis": {
+    "exhaustive_census_commit": "31dc6b4fd1a227793c422067b5d951ea0fe6c6c5",
+    "exhaustive_git_tree_truncated": false,
+    "runtime_python_files_at_exhaustive_census": 1668,
+    "exhaustive_source_downloads": 1668,
+    "exhaustive_source_download_failures": 0,
+    "source_transport": "990 authenticated signed Contents URLs + 678 existing Git blobs projected into one private temporary census directory",
+    "delta_to_base": {
+      "base_git_tree_truncated": false,
+      "runtime_python_files_at_base": 1671,
+      "changed_or_added_runtime_files_screened": [
+        {
+          "path": "canonical/runtime/professional_quality_scoped_evidence_v1.py",
+          "git_blob_sha": "1ba295fdf13312de2bab26e1845bac2964cff6d2",
+          "low_level_hits": []
+        },
+        {
+          "path": "canonical/runtime/loss_absorbing_cushion_regcap_grounding_v6.py",
+          "git_blob_sha": "2065d4343b6c15dd536a9a6d6f5c552432a5c9cc",
+          "low_level_hits": []
+        },
+        {
+          "path": "canonical/runtime/regcap_loss_cushion_truth_certificate_v4.py",
+          "git_blob_sha": "4fb3e62ad6412601d3eb738f25c8f70e18f6dec8",
+          "low_level_hits": []
+        },
+        {
+          "path": "canonical/runtime/regcap_mrel_pair_discriminator_v1.py",
+          "git_blob_sha": "ba0c06771c183baf14bfe42d28285d9327675e50",
+          "low_level_hits": []
+        },
+        {
+          "path": "canonical/runtime/semantic_truth_dispatch_v1.py",
+          "git_blob_sha": "f109b1e2bfc046fa817676a85b910b37947a55a3",
+          "low_level_hits": []
+        }
+      ],
+      "conclusion": "EXHAUSTIVE_CENSUS_EXTENDS_TO_BASE_BY_COMPLETE_RUNTIME_DELTA_SCREEN"
+    }
+  },
+  "baseline_main_counterexample": {
+    "sensitive_reference_file_count": 3,
+    "files": [
+      "canonical/runtime/certified_reached_escape_state_constructor_v1.py",
+      "canonical/runtime/live_brain_runtime_v1.py",
+      "canonical/runtime/reached_escape_finite_totality_certificate_v1.py"
+    ],
+    "live_bypass": "canonical/runtime/live_brain_runtime_v1.py -> reached_escape_state_kernel_v1.evaluate"
+  },
+  "post_repair": {
+    "runtime_python_files": 1672,
+    "complete_guard_errors": [],
+    "status": "PASS__STATIC_PYTHON_RUNTIME_NO_LOW_LEVEL_REACHED_ESCAPE_BYPASS",
+    "live_entrypoints": [
+      "canonical/runtime/live_brain_runtime_v1.py -> certified_reached_escape_state_constructor_v1.construct",
+      "canonical/runtime/unified_cognitive_fabric_v1.py -> certified_reached_escape_state_constructor_v1.construct"
+    ],
+    "sensitive_reference_files": [
+      "canonical/runtime/certified_reached_escape_state_constructor_v1.py",
+      "canonical/runtime/reached_escape_finite_totality_certificate_v1.py",
+      "canonical/runtime/reached_escape_live_no_bypass_guard_v1.py"
+    ]
+  },
+  "exact_blobs": {
+    "live_runtime": "3867b354c87891fdf5dc3766f315a29267c93d0c",
+    "unified_fabric": "b1e68fc1627954706de686d2db297efee08dd6f8",
+    "certified_constructor": "c4ee08f5f3a98889df8f63cd087d19736b38353d",
+    "finite_totality_certificate": "85487335b7e774ac9084b34c60e0175842771036",
+    "raw_kernel": "b1435d90f039bd1d809ff364c325c3d0858d3afd",
+    "no_bypass_guard": "15da5e06ad1f13142e1b3e9e088fc01f385409b1",
+    "no_bypass_tests": "f86627d15588664d4d78ec38d21d48627df96382"
+  },
+  "independent_replay": {
+    "environment": "SPRITE__brain-reached-escape-boundary-verify-20261010",
+    "py_compile": "PASS",
+    "unittest": {
+      "passed": 6,
+      "failed": 0
+    },
+    "exhaustive_post_repair_guard": {
+      "passed": true,
+      "runtime_python_file_count": 1669,
+      "note": "Direct full-tree replay was at exhaustive-census tree plus repair; the three subsequently added and two modified runtime files were completely delta-screened and contain zero low-level reached-state tokens."
+    }
+  },
+  "github_actions_observation": {
+    "run_id": 38035253338,
+    "conclusion": "failure",
+    "executed_steps": 0,
+    "evidentiary_role": "EXCLUDED__PRE_EXECUTION_INFRASTRUCTURE_FAILURE"
+  },
+  "proved": [
+    "BASE_STATIC_PYTHON_RUNTIME_HAS_EXACTLY_ONE_LIVE_RAW_REACHED_STATE_BYPASS",
+    "REPAIR_REMOVES_THAT_BYPASS",
+    "COMPLETE_STATIC_RUNTIME_UNIVERSE_IS_COVERED_BY_EXHAUSTIVE_CENSUS_PLUS_COMPLETE_RUNTIME_DELTA_SCREEN",
+    "BOTH_LIVE_REACHED_STATE_ENTRYPOINTS_ROUTE_THROUGH_CERTIFIED_CONSTRUCTOR",
+    "ROGUE_LOW_LEVEL_CONSUMER_AND_MIXED_SAFE_PLUS_RAW_LIVE_REFERENCE_MUTATIONS_FAIL_CLOSED"
+  ],
+  "nonclaims": [
+    "NO_ARBITRARY_DYNAMIC_CODE_NO_BYPASS_PROOF",
+    "NO_NON_PYTHON_NO_BYPASS_PROOF",
+    "NO_FUTURE_REPOSITORY_STATE_PROOF",
+    "NO_GLOBAL_ESCAPE_PROGRESS_TOTALITY",
+    "NO_GLOBAL_REPAIR_ACQUIRABILITY",
+    "NO_ACCEPTANCE_PROMOTION_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "promotion_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
