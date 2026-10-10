@@ -81,6 +81,18 @@ def _git_blob_sha(path: Path) -> str:
 
 
 def execute_semantic_root_verifiers(registry: Mapping[str, Any]) -> Dict[str, Any]:
+    proved_slots = [
+        slot for slot in registry.get("certificate_slots", [])
+        if isinstance(slot, Mapping) and slot.get("status") == "PROVED_CURRENT"
+    ]
+    if not proved_slots:
+        return {
+            "status": "PASS_NO_PROVED_ROOTS_TO_SEMANTICALLY_VERIFY",
+            "pass": True,
+            "results": [],
+            "terminal_credit": 0,
+        }
+
     active_claim = registry.get("active_claim")
     if not isinstance(active_claim, Mapping):
         return {
@@ -91,9 +103,7 @@ def execute_semantic_root_verifiers(registry: Mapping[str, Any]) -> Dict[str, An
         }
 
     results = []
-    for slot in registry.get("certificate_slots", []):
-        if not isinstance(slot, Mapping) or slot.get("status") != "PROVED_CURRENT":
-            continue
+    for slot in proved_slots:
         checked = validate_semantic_root_slot(REPO_ROOT, slot, active_claim)
         results.append({
             "root_id": slot.get("root_id"),
@@ -111,12 +121,7 @@ def execute_semantic_root_verifiers(registry: Mapping[str, Any]) -> Dict[str, An
             "terminal_credit": 0,
         }
 
-    proved_count = sum(
-        1
-        for slot in registry.get("certificate_slots", [])
-        if isinstance(slot, Mapping) and slot.get("status") == "PROVED_CURRENT"
-    )
-    if len(results) != proved_count:
+    if len(results) != len(proved_slots):
         return {
             "status": "R4_SEMANTIC_ROOT_VERIFICATION_INCOMPLETE",
             "pass": False,
