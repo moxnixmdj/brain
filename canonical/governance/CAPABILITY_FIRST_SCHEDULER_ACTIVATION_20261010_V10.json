@@ -6,7 +6,7 @@
   "supersedes": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V9.json",
   "primary_runtime": {
     "path": "canonical/runtime/capability_parallel_frontier_post_composition_v1.py",
-    "git_blob_sha": "3eaba90481f677bb6be0c568d42bbf95f44c6f4f",
+    "git_blob_sha": "adbb1ba6cc20bfea32ec45867fc94b7b1c12ccea",
     "entrypoint": "plan_current_post_composition_frontier"
   },
   "interval_core": {
@@ -17,7 +17,7 @@
   },
   "current_frontier": {
     "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
-    "git_blob_sha": "99d06f3936b474ef82d2425d089751a465c5e8ab",
+    "git_blob_sha": "701cfe9911acaa227cabb543896bf84be724f847",
     "frontier_id": "LIVE_WORK_FRONTIER_20261010_PROF12_COMPOSED_V12"
   },
   "adapter_verification": {
@@ -29,7 +29,7 @@
     "professional_root_bindings_required": 12,
     "same_subject_composition_admissible": true,
     "sequential_root_dynamic_refresh_required": false,
-    "next_professional_class": "WHOLE_LEAF_SCOPE_TRANSPORT__DOMAIN_SEMANTIC_EXECUTION_EVIDENCE__FULL_CURRENT_MAIN_REGRESSION"
+    "next_professional_class": "WHOLE_LEAF_TOTALITY_OR_CERTIFIED_COMPLETE_UNION__DOMAIN_SEMANTIC_EXECUTION_EVIDENCE__FULL_CURRENT_MAIN_REGRESSION"
   },
   "authority": {
     "read_only_evidence_plan_authority": true,
@@ -51,5 +51,11 @@
     "acceptance_credit_delta": 0,
     "ownership_credit_delta": 0,
     "terminal_credit_delta": 0
+  },
+  "whole_leaf_residual_reduction": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_RESIDUAL_LEDGER_20261010_V1.json",
+    "git_blob_sha": "ae5503829ad340cccef287f37ff70e4ab9288d33",
+    "status": "BOUND_READ_ONLY_EVIDENCE__24_OF_24_BOUNDED_WITNESSES__0_OF_24_WHOLE_LEAVES_CLOSED__SHARED_TOTALITY_OR_COMPLETE_UNION_RESIDUAL",
+    "runtime_currentness_enforced": true
   }
 }
