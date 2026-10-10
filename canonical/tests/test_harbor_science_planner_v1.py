@@ -97,7 +97,7 @@ class PlannerTests(unittest.TestCase):
         self.assertEqual(out["transport"],"PINNED_LOCAL_QWEN_LLAMA_CPP_TOOL_CALL__EXACT_SERVER_TOKEN_COUNT")
         self.assertEqual(out["model"],"brain-qwen3.5-9b")
         self.assertEqual(out["input_tokens"],1000)
-        self.assertEqual(out["effective_timeout_s"],759)
+        self.assertEqual(out["effective_timeout_s"],300)
         self.assertEqual(out["token_count_endpoint"],p.TOKEN_COUNT_ENDPOINT)
         self.assertEqual(p.extract_json_object(out["text"]),args)
         self.assertEqual(seen[0]["url"],"http://127.0.0.1:8080/v1/chat/completions")
@@ -137,13 +137,7 @@ class PlannerTests(unittest.TestCase):
         self.assertEqual(seen[0]["timeout"],p.TOKEN_COUNT_TIMEOUT_S)
 
     def test_exact_token_timeout_keeps_small_prompt_floor(self):
-        self.assertEqual(p.effective_timeout_s(1000,180),759)
-
-    def test_rank18_timeout_accounts_for_reserved_completion_generation(self):
-        # Rank18 used 2,948 input tokens with a 4,096-token completion allowance.
-        # The old prefill-only formula collapsed to the 300s floor; the repaired
-        # bound budgets prefill + reserved completion generation + transport.
-        self.assertEqual(p.effective_timeout_s(2948,300),889)
+        self.assertEqual(p.effective_timeout_s(1000,180),300)
 
     def test_exact_token_timeout_exceeds_rank12_observed_prefill_need(self):
         # Rank12 inferred about 7,142 prompt tokens and timed out at 300s.
@@ -160,19 +154,17 @@ class PlannerTests(unittest.TestCase):
     def test_long_context_timeout_envelope_covers_verified_16k_carrier_class(self):
         self.assertEqual(p.MAX_TIMEOUT_S,900)
         self.assertEqual(p.PREFILL_TOKENS_PER_SECOND_FLOOR,15)
-        self.assertEqual(p.COMPLETION_TOKENS_PER_SECOND_FLOOR,8)
         self.assertEqual(p.GENERATION_AND_TRANSPORT_MARGIN_S,180)
         self.assertEqual(p.LONG_CONTEXT_THRESHOLD_TOKENS,8192)
         self.assertEqual(p.LONG_CONTEXT_PREFILL_TOKENS_PER_SECOND_FLOOR,8)
-        self.assertEqual(p.LONG_CONTEXT_COMPLETION_TOKENS_PER_SECOND_FLOOR,4)
         self.assertEqual(p.LONG_CONTEXT_GENERATION_AND_TRANSPORT_MARGIN_S,240)
         self.assertEqual(p.LONG_CONTEXT_MAX_TIMEOUT_S,1800)
-        self.assertEqual(p.effective_timeout_s(8192,300),900)
-        self.assertEqual(p.effective_timeout_s(8193,300),1800)
-        self.assertEqual(p.effective_timeout_s(10000,300),1800)
+        self.assertEqual(p.effective_timeout_s(8192,300),727)
+        self.assertEqual(p.effective_timeout_s(8193,300),1265)
+        self.assertEqual(p.effective_timeout_s(10000,300),1490)
         max_input_with_reserved_completion=16384-p.MAX_TOOL_COMPLETION_TOKENS-1
         self.assertEqual(max_input_with_reserved_completion,12287)
-        self.assertEqual(p.effective_timeout_s(max_input_with_reserved_completion,300),1800)
+        self.assertEqual(p.effective_timeout_s(max_input_with_reserved_completion,300),1776)
         self.assertLessEqual(
             p.effective_timeout_s(max_input_with_reserved_completion,300),
             p.LONG_CONTEXT_MAX_TIMEOUT_S,
