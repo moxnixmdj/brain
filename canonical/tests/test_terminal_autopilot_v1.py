@@ -221,7 +221,11 @@ class TerminalAutopilotTests(unittest.TestCase):
 
             out = plan(built)
             self.assertEqual(len(out["dispatch"]), 1)
-            self.assertEqual(out["dispatch"][0]["kind"], "EVIDENCE")
+            self.assertEqual(out["dispatch"][0]["kind"], "REPAIR")
+            self.assertFalse(any(
+                row["kind"] == "ROUTE_RACE"
+                for row in out["dispatch"]
+            ))
 
 
     def test_verified_adaptive_wall_clock_upper_bound_reactivates_route_race(self):
