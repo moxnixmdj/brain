@@ -1,0 +1,117 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_NONCORE_REPAIRED_V21_SUCCESSOR_EXECUTION_V1",
+  "status": "FRESH_SUCCESSOR_EXECUTION__NEXT25_CAUSAL_REPAIR_PLUS_NONCORE_PROFILE_PRUNE__ZERO_PROMOTION_CREDIT",
+  "recorded_at": "2026-10-10",
+  "predecessor": {
+    "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_CORE_PROFILE_REPAIRED_V20_SUCCESSOR_EXECUTION_20261010_V1.json",
+    "package_raw_python_source_bytes": 2172419,
+    "B_exec_raw_python_source_bytes": 2175179,
+    "archive_bytes": 323816,
+    "fresh_qualification": "7360/7360",
+    "manifest_sha256": "45adf82ebe04814cdb5827821ee9d079f48dbc5f58d35f8b7a4a6d4e512deacb"
+  },
+  "falsification": "canonical/evidence/BYTES_EXACT_SYMBOLIC_NEXT25_FALSIFICATION_20261010_V1.json",
+  "structural_cut": {
+    "id": "NONCORE_SPENT_NEXT24_ZERO_HIT_FUNCTION_PRUNE_V21",
+    "selected_function_bodies": 14,
+    "selected": [
+      "sympy/core/kind.py::KindDispatcher.__doc__",
+      "sympy/core/function.py::Lambda.__new__",
+      "sympy/polys/polyroots.py::roots_quintic",
+      "sympy/simplify/simplify.py::nc_simplify",
+      "sympy/utilities/lambdify.py::lambdify",
+      "sympy/utilities/iterables.py::multiset_derangements",
+      "sympy/simplify/hyperexpand.py::add_formulae",
+      "sympy/simplify/hyperexpand.py::add_meijerg_formulae",
+      "sympy/simplify/hyperexpand.py::try_lerchphi",
+      "sympy/simplify/hyperexpand.py::_hyperexpand",
+      "sympy/simplify/hyperexpand.py::_meijergexpand",
+      "sympy/integrals/meijerint.py::_rewrite_single",
+      "sympy/integrals/meijerint.py::meijerint_definite",
+      "sympy/integrals/meijerint.py::_meijerint_definite_4"
+    ],
+    "selection_evidence": "No execution under complete spent NEXT24 profiling; finite non-use used only as a candidate-selection signal, not universal proof.",
+    "spent_NEXT24_pre_fresh_gate": "7360/7360"
+  },
+  "minimal_causal_repair": {
+    "trigger": "QUAL_SUCCESSOR_NEXT25_20261010_V1",
+    "restored": [
+      "mpmath.libmp.libmpc.mpc_square",
+      "sympy.core.numbers.Number.__divmod__",
+      "sympy.core.intfunc.num_digits",
+      "sympy.core.intfunc.integer_log"
+    ],
+    "broad_subsystem_restored": false,
+    "repaired_spent_NEXT25": "7590/7590"
+  },
+  "measured_candidate": {
+    "status": "PHYSICALLY_REWRITTEN_RESEARCH_CANDIDATE__NOT_PROMOTED",
+    "python_files": 277,
+    "package_raw_python_source_bytes": 2122982,
+    "router_raw_python_source_bytes": 2760,
+    "B_exec_raw_python_source_bytes": 2125742,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "manifest_sha256": "0fa7fd19f6a674e493954d48f7438285dbab4fd9eefe559a3d537ca9834c6022",
+    "raw_improvement_vs_V20_bytes": 49437,
+    "archive_bytes": 317236,
+    "archive_sha256": "5f9ba609d1dfab1e416cbf51e5517ecdd617463617d7fa06ceb88b450e98ee9e",
+    "archive_improvement_vs_V20_bytes": 6580
+  },
+  "qualification": {
+    "spent_NEXT25": {
+      "id": "QUAL_SUCCESSOR_NEXT25_20261010_V1",
+      "cases": 7590,
+      "corpus_sha256": "61c30aa8823b3a33e4762905ba3708d710e5d8118521c083d57269cd76b65b87",
+      "clean_repaired_candidate": "7590/7590",
+      "spent": true
+    },
+    "fresh_NEXT26": {
+      "id": "QUAL_SUCCESSOR_NEXT26_20261010_V1",
+      "seed": 5099019,
+      "per_operation_budget": 680,
+      "cases": 7820,
+      "corpus_sha256": "537684c7693774cee934b3a36399f891c1b28a0747eea7721bdcf98ef93ff9b1",
+      "stock_donor": "7820/7820",
+      "candidate": "7820/7820",
+      "independent_copy": "7820/7820",
+      "archive_replay": "7820/7820",
+      "spent": true
+    }
+  },
+  "reproducibility": {
+    "predecessor_reconstruction": "canonical/research/bytes/tools/rebuild_candidate_v20.py",
+    "transform_and_repair": "canonical/research/bytes/tools/noncore_profile_repair_v21.py",
+    "transform_sha256": "f1d216673c255cf4ca2bd3ba228c6952bb458fdd894678e554e99cd532da7bb0",
+    "successor_reconstruction": "canonical/research/bytes/tools/rebuild_candidate_v21.py",
+    "rebuild_sha256": "6e9e64cc6ae5520851cee20ee2fcb366e82875e310d008920259069e6c59210d",
+    "route": "canonical/research/bytes/tools/exact_symbolic_route_v1.py",
+    "semantic_digest": "canonical/research/bytes/tools/semantic_digest_v1.py",
+    "qualification_generator": "canonical/research/bytes/tools/generate_qualification_v1.py"
+  },
+  "durable_artifact": {
+    "library_status": "PERSISTED_IN_CHATGPT_LIBRARY",
+    "library_file_id": "libfile_9997eaa91c7c81919efaeeeabde9c7ce",
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V21_SUCCESSOR_20261010_V1.tar.xz",
+    "bytes": 317236,
+    "sha256": "5f9ba609d1dfab1e416cbf51e5517ecdd617463617d7fa06ceb88b450e98ee9e"
+  },
+  "next_frozen_qualification": {
+    "id": "QUAL_SUCCESSOR_NEXT27_20261010_V1",
+    "seed": 5196152,
+    "per_operation_budget": 700,
+    "cases": 8050,
+    "corpus_sha256": "bac8ef513a82f91c59ae2afb503703df2fc23cfcacefb5c36c414f2ae6405702",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT"
+  },
+  "truth_boundary": [
+    "MEASURED: NEXT25 falsified V20 on two valid roots cases and the exact same failures occurred before the V21 structural cut could receive fresh credit.",
+    "MEASURED: minimal restoration of mpc_square, Number.__divmod__, num_digits, and integer_log closes those spent failures without broad subsystem restoration.",
+    "MEASURED: exact 2,122,982-byte V21 passes fresh NEXT26 7,820/7,820 on stock donor, candidate, independent copy, and extracted archive.",
+    "MEASURED: V21 is 49,437 raw Python-source bytes smaller than V20 and its source archive is 6,580 bytes smaller.",
+    "INFERRED: the 14 retained V21 stubs are outside the tested bounded route; finite non-use remains non-universal.",
+    "NOT CLAIMED: universal SymPy correctness, absolute minimum, out-of-scope behavior preservation, or Opus-family promotion.",
+    "PROMOTION CREDIT: 0."
+  ],
+  "next_action": "Rerank exact V21 concentrations using spent NEXT26 only. Do not execute NEXT27 before a new physical cut.",
+  "promotion_credit": 0
+}
