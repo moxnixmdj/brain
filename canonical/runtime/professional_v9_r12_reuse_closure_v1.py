@@ -85,7 +85,7 @@ def verify_preserved_c1_c7(*,repo_root:str|Path|None=None)->dict[str,Any]:
  if tuple(r.get("preserved_clause_ids") or ())!=PRESERVED_CLAUSES:
   return _fail("V9_PRESERVED_CLAUSE_SET_DRIFT")
  truth=refv.get("truth") or {}
- if not str(refv.get("status") or "").startswith("PASS__SECOND_SPRITE"):
+ if not str(refv.get("status") or "").startswith(("PASS__SECOND_SPRITE","PASS__INDEPENDENT_SPRITE")):
   return _fail("V8_TO_V9_REFINEMENT_INDEPENDENT_VERIFY_NOT_PASS")
  if truth.get("positive_route_refinement_proved") is not True:
   return _fail("REFINEMENT_VERIFY_MISSING_POSITIVE_ROUTE_REFINEMENT")
