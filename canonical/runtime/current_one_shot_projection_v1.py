@@ -130,14 +130,40 @@ def _finance_wake_effect_projection(r2: dict[str, Any]) -> dict[str, Any]:
 
 
 
+
+def _resolve_dynamic_admissions_manifest(
+    root: Path,
+    admissions_pointer: dict[str, Any],
+) -> tuple[str, Path]:
+    target = admissions_pointer.get("target")
+    target = target if isinstance(target, dict) else {}
+    rel = str(target.get("path") or "")
+    if not rel:
+        raise ValueError("DYNAMIC_ADMISSIONS_TARGET_PATH_MISSING")
+    if not rel.startswith("canonical/governance/R2_DIRECT_ROUTE_DYNAMIC_ADMISSIONS_"):
+        raise ValueError("DYNAMIC_ADMISSIONS_TARGET_PATH_OUTSIDE_ALLOWED_NAMESPACE")
+    if not rel.endswith(".json"):
+        raise ValueError("DYNAMIC_ADMISSIONS_TARGET_PATH_NOT_JSON")
+    if target.get("schema") != "PROJECT_BRAIN_R2_DIRECT_ROUTE_DYNAMIC_ADMISSIONS_V1":
+        raise ValueError("DYNAMIC_ADMISSIONS_TARGET_SCHEMA_INVALID")
+
+    resolved = (root / rel).resolve(strict=True)
+    resolved.relative_to(root)
+    return rel, resolved
+
+
 def _default_runtime_projection(
     pointer: dict[str, Any],
     default_runtime: dict[str, Any],
     admissions_pointer: dict[str, Any],
     admissions_manifest: dict[str, Any],
     actual: dict[str, str],
+    dynamic_manifest_path: str | None = None,
 ) -> tuple[dict[str, Any], list[str]]:
     errors: list[str] = []
+    dynamic_manifest_path = (
+        dynamic_manifest_path or PATHS["dynamic_admissions_manifest"]
+    )
 
     if default_runtime.get("binding_semantics") != (
         "MUTABLE_CURRENT_PATH_IDENTITY__IMMUTABLE_LOAD_BEARING_DESCENDANTS_GIT_BLOB_BOUND"
@@ -205,15 +231,28 @@ def _default_runtime_projection(
 
     target = admissions_pointer.get("target")
     target = target if isinstance(target, dict) else {}
-    if target.get("path") != PATHS["dynamic_admissions_manifest"]:
+    if target.get("path") != dynamic_manifest_path:
         errors.append("DYNAMIC_ADMISSIONS_TARGET_PATH_MISMATCH")
     if target.get("git_blob_sha") != actual["dynamic_admissions_manifest"]:
         errors.append("DYNAMIC_ADMISSIONS_TARGET_BLOB_MISMATCH")
 
-    if dynamic.get("current_manifest_path") != PATHS["dynamic_admissions_manifest"]:
-        errors.append("DEFAULT_RUNTIME_DYNAMIC_MANIFEST_PATH_MISMATCH")
-    if dynamic.get("current_manifest_git_blob_sha") != actual["dynamic_admissions_manifest"]:
-        errors.append("DEFAULT_RUNTIME_DYNAMIC_MANIFEST_BLOB_MISMATCH")
+    snapshot_drift = {
+        "pointer_blob_differs_from_current": (
+            bool(dynamic.get("current_pointer_git_blob_sha"))
+            and dynamic.get("current_pointer_git_blob_sha")
+            != actual["dynamic_admissions_pointer"]
+        ),
+        "manifest_path_differs_from_current": (
+            bool(dynamic.get("current_manifest_path"))
+            and dynamic.get("current_manifest_path") != dynamic_manifest_path
+        ),
+        "manifest_blob_differs_from_current": (
+            bool(dynamic.get("current_manifest_git_blob_sha"))
+            and dynamic.get("current_manifest_git_blob_sha")
+            != actual["dynamic_admissions_manifest"]
+        ),
+        "snapshot_is_authoritative": False,
+    }
 
     manifest_count = admissions_manifest.get("admission_count")
     admissions = admissions_manifest.get("admissions")
@@ -226,8 +265,10 @@ def _default_runtime_projection(
     ):
         errors.append("DYNAMIC_ADMISSIONS_COUNT_INVALID")
         manifest_count = None
-    if dynamic.get("current_dynamic_route_count") != manifest_count:
-        errors.append("DEFAULT_RUNTIME_DYNAMIC_ROUTE_COUNT_MISMATCH")
+    snapshot_drift["route_count_differs_from_current"] = (
+        isinstance(manifest_count, int)
+        and dynamic.get("current_dynamic_route_count") != manifest_count
+    )
     if admissions_manifest.get("terminal_authority") is not False:
         errors.append("DYNAMIC_ADMISSIONS_MANIFEST_TERMINAL_AUTHORITY_INVALID")
     if admissions_manifest.get("terminal_credit_delta") != 0:
@@ -274,12 +315,13 @@ def _default_runtime_projection(
         "dynamic_admission": {
             "pointer_path": PATHS["dynamic_admissions_pointer"],
             "pointer_git_blob_sha": actual["dynamic_admissions_pointer"],
-            "manifest_path": PATHS["dynamic_admissions_manifest"],
+            "manifest_path": dynamic_manifest_path,
             "manifest_git_blob_sha": actual["dynamic_admissions_manifest"],
             "dynamic_route_count": manifest_count,
             "future_verified_route_requires_new_vN_source": dynamic.get(
                 "future_verified_route_requires_new_vN_source"
             ),
+            "snapshot_drift": snapshot_drift,
         },
         "effective_known_direct_route_count": effective_count,
         "scheduler_snapshot_is_default_runtime_source_selector": False,
@@ -311,7 +353,11 @@ def _version_from_status(status: Any) -> int | None:
 
 def evaluate(repo_root: str | Path = ROOT) -> dict[str, Any]:
     root = Path(repo_root).resolve(strict=True)
-    targets = {name: (root / rel).resolve(strict=True) for name, rel in PATHS.items()}
+    targets = {
+        name: (root / rel).resolve(strict=True)
+        for name, rel in PATHS.items()
+        if name != "dynamic_admissions_manifest"
+    }
     for path in targets.values():
         path.relative_to(root)
 
@@ -320,7 +366,11 @@ def evaluate(repo_root: str | Path = ROOT) -> dict[str, Any]:
     terminal = _load(targets["terminal"])
     default_runtime = _load(targets["default_runtime"])
     admissions_pointer = _load(targets["dynamic_admissions_pointer"])
-    admissions_manifest = _load(targets["dynamic_admissions_manifest"])
+    dynamic_manifest_path, dynamic_manifest_target = (
+        _resolve_dynamic_admissions_manifest(root, admissions_pointer)
+    )
+    targets["dynamic_admissions_manifest"] = dynamic_manifest_target
+    admissions_manifest = _load(dynamic_manifest_target)
 
     actual = {name: _blob(path) for name, path in targets.items()}
     errors: list[str] = []
@@ -365,6 +415,7 @@ def evaluate(repo_root: str | Path = ROOT) -> dict[str, Any]:
         admissions_pointer,
         admissions_manifest,
         actual,
+        dynamic_manifest_path,
     )
     errors.extend(default_runtime_errors)
 
