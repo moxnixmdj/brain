@@ -1,0 +1,108 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_SEMANTIC_V2_SUCCESSOR_CLAIM_BATCH_INDEPENDENT_VERIFY_V1",
+  "date": "2026-10-11",
+  "status": "PASS__TWO_SPRITE_REPLAY__12_OF_12_V2_SEMANTIC_CLAIMS__12_OF_12_WHOLE_DOMAIN_EQUIVALENCE__12_OF_12_SCOPE_COMPLETE__ZERO_PROPERTY_TRUTH",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/professional_semantic_v2_claim_batch_v1.py",
+      "git_blob_sha": "9fac15d9b13744c2c34d0c578f5454d77fb4de49"
+    },
+    "tests": {
+      "path": "canonical/tests/test_professional_semantic_v2_claim_batch_v1.py",
+      "git_blob_sha": "84e5f8a69638c088eff72023534c6b2f7418a3ca"
+    },
+    "batch": {
+      "path": "canonical/governance/PROFESSIONAL_SEMANTIC_V2_SUCCESSOR_CLAIM_BATCH_20261011_V1.json",
+      "git_blob_sha": "6a7413d5d70c827f76020c85fa76cca5b5c511d7"
+    },
+    "manifest": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_LEAF_BINDING_MANIFEST_20261011_V2.json",
+      "git_blob_sha": "8ae72d7d44047ac9dec1b014c34a44f9933f0215"
+    }
+  },
+  "replay": [
+    {
+      "carrier": "SPRITE",
+      "name": "brain-capability-first-scheduler-verify-20261008-v1",
+      "id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+      "tests_run": 5,
+      "tests_passed": 5,
+      "tests_failed": 0
+    },
+    {
+      "carrier": "SPRITE",
+      "name": "brain-professional-hard-defect-verify-20261010",
+      "id": "sprite-1bbb86ed-1f7c-409f-8397-fadc4de7a62a",
+      "tests_run": 5,
+      "tests_passed": 5,
+      "tests_failed": 0
+    }
+  ],
+  "truth": {
+    "semantic_leaf_count": 12,
+    "claim_count": 12,
+    "unique_claim_id_count": 12,
+    "whole_domain_equivalence_count": 12,
+    "whole_leaf_scope_complete_count": 12,
+    "property_truth_count": 0,
+    "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+    "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e"
+  },
+  "claim_ids": [
+    {
+      "leaf_id": "PQ::R10_ANALYSIS_DECISION::SEMANTIC",
+      "claim_id": "34e913471722a07aef8901676e3027191047561b3d4df702bc34ae8bbe93bb6d"
+    },
+    {
+      "leaf_id": "PQ::R11_ADAPTIVE_INTEGRITY_SECURITY::SEMANTIC",
+      "claim_id": "b2a9af299dd351aba2158221750dacba10beb76d8638311f92f6f93f7d5773f9"
+    },
+    {
+      "leaf_id": "PQ::R12_META_COMPOSITION_CLOSURE::SEMANTIC",
+      "claim_id": "2693b34f454d92e6904a90395b4018a15b1faf5a5f324581e754507bd4d683a7"
+    },
+    {
+      "leaf_id": "PQ::R1_TARGET_SPECIFICATION::SEMANTIC",
+      "claim_id": "a6f3451c4610f5b438397d9bb0bd729a9aca6e5ae0e6cb8c2afd809bfcc62c34"
+    },
+    {
+      "leaf_id": "PQ::R2_CANDIDATE_SEARCH::SEMANTIC",
+      "claim_id": "e05a6f5b3b03f5c0a35c95e07b89e350b6e67512bf004cd7baa75e177718af80"
+    },
+    {
+      "leaf_id": "PQ::R3_REALIZATION_OBSERVATION::SEMANTIC",
+      "claim_id": "d1e83d32b04badfda3b0e58a6b789990276834e5587ab9c5742fff415f0b1b19"
+    },
+    {
+      "leaf_id": "PQ::R4_MEASUREMENT_CONSTRUCT::SEMANTIC",
+      "claim_id": "941d0422d53bfc30e5f4c0469e305881b6b3c75f0f95d01a03132175271d607b"
+    },
+    {
+      "leaf_id": "PQ::R5_EVALUATOR_REFERENCE::SEMANTIC",
+      "claim_id": "7c0ec5a88788b2dc145c6365448e42e5390c4dd0730aaab01e47820b2a8a950e"
+    },
+    {
+      "leaf_id": "PQ::R6_EVIDENCE_GROUNDING_DEPENDENCE::SEMANTIC",
+      "claim_id": "aab2603e70709aa35123ceb08cc80d61f55315e231d3b2d5a83ebdbe16969367"
+    },
+    {
+      "leaf_id": "PQ::R7_CAUSAL_PRESCRIPTIVE::SEMANTIC",
+      "claim_id": "3c68508473ad4d7cb4144540adbf1b884973c561094f51b6b6efe1dd830af46e"
+    },
+    {
+      "leaf_id": "PQ::R8_POPULATION_CONTEXT_OPERATOR::SEMANTIC",
+      "claim_id": "f71ff93261e4f92851e0831f3367487217303de2c78f88f3f655fb53b783e366"
+    },
+    {
+      "leaf_id": "PQ::R9_TEMPORAL_DEPLOYMENT::SEMANTIC",
+      "claim_id": "e8ba9a897adc2f110c6fa352d267ee89fd664b78469f1dc9a7a2594e98024dd2"
+    }
+  ],
+  "hard_nonclaims": [
+    "NO_V2_SEMANTIC_PROPERTY_TRUTH",
+    "NO_V1_TO_V2_AUTHORITY_TRANSPORT",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
