@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_VERIFY_V2",
+  "date": "2026-10-10",
+  "status": "PASS__PINNED_EXACT_BYTES__PYCOMPILE__7_OF_7__TWO_SCOPED_CAPABILITIES__ZERO_GLOBAL_LEAF_CREDIT",
+  "repository": "moxnixmdj/brain",
+  "pinned_main_commit": "c7d0c5487690b10fd47894b24f95a6df4c6a343e",
+  "carrier": {
+    "name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/pq-scoped-evidence-c7d0c54"
+  },
+  "exact_blobs": {
+    "runtime": "704b7384b9912bb1f99d83526b5613a671e10bc3",
+    "tests": "1b256af3577d5a0a97d7b92cfb2e59117717f98c",
+    "registry": "baf7a0eeacef5e8d7a0e1c2d5ad55e611a005790",
+    "r7_source_receipt": "0c692f55dedb6a8523bcd78541d4cb77ef06d610",
+    "r7_compiler_verification": "380d26afd8210096e397dacde3f2a339abc75c1c",
+    "r7_reusable_compiler": "c3f2da4c97f26126cd304c9d630b4e13655958ea",
+    "r3_source_receipt": "1a0b4ca6627aaf28eb25f6990682e87319d14d6d",
+    "r3_preflight": "b5ddc896811875b59840959e27dbb515265fc9f8",
+    "r3_render_oracle": "39374e775d54cdc58315d7a1f877d834282a64f7"
+  },
+  "replay": {
+    "py_compile": "PASS",
+    "tests_run": 7,
+    "tests_passed": 7,
+    "tests_failed": 0
+  },
+  "admitted_scopes": [
+    {
+      "scope_id": "PQ::R7::SINGLE_EDIT::UVCK_DEFEATER_ORDER_REPAIR",
+      "root_id": "R7_CAUSAL_PRESCRIPTIVE",
+      "claim_kind": "EXACT_SINGLE_EDIT_PROFESSIONAL_CODE_INTERVENTION_INSTANCE",
+      "global_leaf_credit": false
+    },
+    {
+      "scope_id": "PQ::R3::NATIVE_ARTIFACT::BOUNDED_RENDER_PRESERVATION",
+      "root_id": "R3_REALIZATION_OBSERVATION",
+      "claim_kind": "BOUNDED_GENERATED_EXPLICIT_LOW_LEVEL_TEXT_EDIT_RENDER_PRESERVATION",
+      "contributes_to": [
+        "PQ::R3_REALIZATION_OBSERVATION::EXECUTION"
+      ],
+      "semantic_scope_expansion_forbidden": true,
+      "global_leaf_credit": false
+    }
+  ],
+  "proved": [
+    "R3_BOUNDED_RENDER_PRESERVATION_IS_REUSABLE_ONLY_INSIDE_DECLARED_DOCX_XLSX_PPTX_PDF_LOW_LEVEL_EDIT_SCOPE",
+    "R3_SCOPE_PRESERVES_NO_ARBITRARY_SEMANTIC_TARGET_SELECTION_LIMIT",
+    "R3_SCOPED_EVIDENCE_CANNOT_PROMOTE_EXECUTION_LEAF_CREDIT",
+    "R7_SCOPED_CAUSAL_CAPABILITY_REMAINS_ADMITTED",
+    "STALE_OR_WRONG_SCOPE_EVIDENCE_FAILS_CLOSED"
+  ],
+  "current_state": {
+    "admitted_scope_count": 2,
+    "global_leaf_closure": false,
+    "global_root_closure": false,
+    "domain_semantic_closure": false,
+    "domain_execution_closure": false
+  },
+  "hard_nonclaims": [
+    "NO_GLOBAL_R3_OR_R7_LEAF_CLOSURE",
+    "NO_GLOBAL_R3_OR_R7_ROOT_CLOSURE",
+    "NO_ARBITRARY_PROFESSIONAL_ARTIFACT_RENDER_CLOSURE",
+    "NO_DOMAIN_SEMANTIC_CLOSURE",
+    "NO_DOMAIN_EXECUTION_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
