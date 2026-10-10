@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_TB_SCIENCE_EXECUTION_POINTER_V2",
   "date": "2026-10-10",
-  "status": "RANK20_V9_EFFECTIVE_AUTHORITY_STAGED__PUBLIC_V8_RESEAL_VERIFIED__PREACTIVATION__EIGHTEEN_CONSUMED",
+  "status": "RANK20_V9_CANONICAL_EFFECTIVE_AUTHORITY__OUTER_WORKFLOW_V2_GATE_QUARANTINED__FRESH_V3_CARRIER_REPAIR_REQUIRED__EIGHTEEN_CONSUMED__NO_ACTIVATION_AUTHORITY",
   "current_result": {
     "path": "canonical/verification/TB_SCIENCE_RANK20_V2_START_CAS_IMPORT_ABORT_TRUTH_20261010_V1.json",
     "git_blob_sha": "ef93d358f4eb67aade536e886ae1a6cadb13adb0"
@@ -11,8 +11,8 @@
     "git_blob_sha": "7228aa4cc33337506543e459408e7afdbf8e68c0"
   },
   "verification": {
-    "path": "canonical/verification/TB_SCIENCE_RANK20_V8_PUBLIC_RESEAL_VERIFY_20261010_V1.json",
-    "git_blob_sha": "0da9bef7f0418b6f192e4ebcb43ef3a4bfa8bf86"
+    "path": "canonical/verification/TB_SCIENCE_RANK20_V9_OUTER_WORKFLOW_GATE_DIAGNOSIS_20261010_V1.json",
+    "git_blob_sha": "08e0c74da33a753b0a24623204331518282c450e"
   },
   "counts": {
     "benchmark_trials_consumed": 18,
@@ -29,7 +29,7 @@
   },
   "acceptance_credit_delta": 0,
   "terminal_credit_delta": 0,
-  "next": "PROMOTE_PUBLIC_V8_EFFECTIVE_AUTHORITY_PREACTIVATION__VERIFY__THEN_MINT_EXACT_ONE_FILE_V3_ACTIVATION_AUTHORITY",
+  "next": "REPAIR_OUTER_WORKFLOW_AND_BIND_GENERATION_NEUTRAL_V8_GATES_ZERO_EXPOSURE__THEN_REMINT_CLAIM_AND_RESEAL__NO_ACTIVATION",
   "finalized_rank18": {
     "ledger_schedule_rank": 18,
     "slot_id": "terminal-bench-science/longitudinal-clinical-agent::trial-0",
@@ -95,10 +95,12 @@
     "benchmark_role": "NEW_CAPABILITY_VALIDATION"
   },
   "hard_nonclaims": [
-    "NO_RANK20_TASK_READ_OR_START_BEFORE_ACTIVATION",
+    "NO_RANK20_TASK_READ_OR_START",
     "NO_RANK20_DURABLE_START",
     "NO_RANK20_BENCHMARK_TRIAL_CONSUMPTION",
-    "NO_RANK20_ACTIVATION_AUTHORITY_YET",
+    "NO_RANK20_ACTIVATION_AUTHORITY",
+    "NO_CLAIM_V9_IS_ACTIVATION_READY",
+    "NO_PROMOTION_OF_PARTIAL_PUBLIC_V10_AUTHORITY_BRANCH",
     "NO_V2_ACTIVATION_IDENTITY_REUSE",
     "NO_ACCEPTANCE_CAPABILITY_OR_TERMINAL_CREDIT"
   ],
@@ -388,6 +390,9 @@
     "public_reseal_verification_path": "canonical/verification/TB_SCIENCE_RANK20_V8_PUBLIC_RESEAL_VERIFY_20261010_V1.json",
     "public_reseal_verification_git_blob_sha": "0da9bef7f0418b6f192e4ebcb43ef3a4bfa8bf86",
     "public_merge_commit_sha": "722a43716377d4245b5b677e30ea51e145ced09b",
-    "public_surface_git_blob_sha": "3ce814e1a46887fbc0909f1a39c7c51b97568cb2"
+    "public_surface_git_blob_sha": "3ce814e1a46887fbc0909f1a39c7c51b97568cb2",
+    "outer_workflow_activation_ready": false,
+    "outer_workflow_gate_diagnosis_path": "canonical/verification/TB_SCIENCE_RANK20_V9_OUTER_WORKFLOW_GATE_DIAGNOSIS_20261010_V1.json",
+    "outer_workflow_gate_diagnosis_git_blob_sha": "08e0c74da33a753b0a24623204331518282c450e"
   }
 }
