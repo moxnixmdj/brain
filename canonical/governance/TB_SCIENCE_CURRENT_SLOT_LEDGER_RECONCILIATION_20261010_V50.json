@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V50",
+  "date": "2026-10-10",
+  "status": "CURRENT_RANK20_V2_PREEXPOSURE_ABORT_NONCONSUMING__START_CAS_IMPORT_REPAIR_REQUIRED__EIGHTEEN_CONSUMED",
+  "predecessor": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V49.json",
+    "git_blob_sha": "58b67c9241036e4f182381a711200fcadb55251f"
+  },
+  "result_truth": {
+    "path": "canonical/verification/TB_SCIENCE_RANK20_V2_START_CAS_IMPORT_ABORT_TRUTH_20261010_V1.json",
+    "git_blob_sha": "ef93d358f4eb67aade536e886ae1a6cadb13adb0",
+    "pass": true
+  },
+  "counts": {
+    "benchmark_trials_consumed": 18,
+    "consumed_successes_final": 0,
+    "consumed_failures_final": 18,
+    "started_result_pending": 0,
+    "finalized_slots": 18,
+    "active_in_flight_slot_count": 0
+  },
+  "next_slot": {
+    "ledger_schedule_rank": 20,
+    "frozen_manifest_schedule_order": 19,
+    "task_rank": 19,
+    "slot_id": "terminal-bench-science/hysteretic-aquifer-control::trial-0",
+    "task_digest": "sha256:681df0c3b2ada03a933ac4d2e11f07983676f87a9f26b61e416987904b880289"
+  },
+  "prior_logical_attempt_id": "c7a02ecc6b11f4338120f05cd922370d361ce79e104549f95b656df3b51cb2bb",
+  "prior_execution_claim_binding_digest": "sha256:aa0d91d18bb597319414b7385a92248992c093e14bf9c8f5677b72c05cb09beb",
+  "rank20_task_read_history": false,
+  "rank20_task_started": false,
+  "rank20_start_cas_acquired": false,
+  "rank20_benchmark_trials_consumed": 0,
+  "retired_activation": {
+    "pull_request": 2606,
+    "workflow_run_id": 38045888545,
+    "execution_branch": "execute/tb-science-rank20-20261010-v2",
+    "authority_retired": true
+  },
+  "scheduler": {
+    "frozen": true,
+    "reason": "RANK20_START_CAS_IMPORT_PATH_REPAIR_AND_FRESH_CLAIM_EPOCH_REQUIRED",
+    "only_authorized_transition": "ZERO_EXPOSURE_START_CAS_WRAPPER_REPAIR__MINT_FRESH_CLAIM_EPOCH__RESEAL"
+  },
+  "execution_authority": false,
+  "task_read_authority": false,
+  "activation_authority": false,
+  "repair_authority": "ZERO_EXPOSURE_ONLY",
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
