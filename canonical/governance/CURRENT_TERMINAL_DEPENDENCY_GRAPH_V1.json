@@ -126,8 +126,8 @@
     {
       "id": "CURRENT_AUTHORITY_RUNTIME_BYTE_BINDING_COHERENCE",
       "kind": "LEAF",
-      "status": "UNRESOLVED",
-      "note": "ALL SIX DECLARED CURRENT RUNTIME TARGET BYTES EXECUTED GREEN ON BOUNDED COMPONENT SURFACES__67_TESTS_ZERO_FAILURES_ERRORS__EXACT CONTENT-BOUND RECEIPT EXISTS__ONLY CURRENT_TERMINAL_AUTHORITY PROJECTION REMAINS",
+      "status": "PROVED",
+      "note": "CLOSED__ALL_SIX_DECLARED_CURRENT_RUNTIME TARGET BYTES EXECUTED GREEN__67_TESTS_ZERO_FAILURES_ERRORS__CURRENT_TERMINAL_AUTHORITY REVISION_95 BINDS EXACT CURRENT BYTES__DRIFT_AND_MISSING_BINDING_COUNTS_ZERO",
       "attack_families": [
         "VERSION_DRIFT",
         "COMPOSITION_MISMATCH",
@@ -146,12 +146,14 @@
         },
         {
           "id": "CURRENT_AUTHORITY_RUNTIME_RESEAL_PROJECTION",
-          "status": "UNRESOLVED",
+          "status": "PROVED",
           "projection_path": "canonical/governance/CURRENT_RUNTIME_BYTE_BINDING_RESEAL_PROJECTION_20261010_V1.json",
           "projection_git_blob_sha": "c5ef86a5253cdf5514e428a1e8937552a143df43",
           "target_path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
           "expected_target_git_blob_sha": "7a8458d51aa703e2103b89ca741276fecfae1338",
-          "requirement": "APPLY_EXACT_PROJECTION_IF_AND_ONLY_IF_EXPECTED_TARGET_AND_OLD_VALUES_MATCH"
+          "requirement": "APPLY_EXACT_PROJECTION_IF_AND_ONLY_IF_EXPECTED_TARGET_AND_OLD_VALUES_MATCH",
+          "applied_target_git_blob_sha": "b3d053e1451c053af2bf75ad9f31a091b101be39",
+          "applied_pointer_revision": 95
         }
       ]
     }
