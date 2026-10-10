@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_REGISTRY_V1",
   "date": "2026-10-10",
-  "status": "ACTIVE__ONE_R7_CLAIM_SCOPED_CAPABILITY__ZERO_GLOBAL_LEAF_CREDIT",
+  "status": "ACTIVE__TWO_CLAIM_SCOPED_CAPABILITIES__ZERO_GLOBAL_LEAF_CREDIT",
   "entries": [
     {
       "scope_id": "PQ::R7::SINGLE_EDIT::UVCK_DEFEATER_ORDER_REPAIR",
@@ -26,12 +26,37 @@
       "global_leaf_closure": false,
       "global_root_closure": false,
       "terminal_credit_delta": 0
+    },
+    {
+      "scope_id": "PQ::R3::NATIVE_ARTIFACT::BOUNDED_RENDER_PRESERVATION",
+      "root_id": "R3_REALIZATION_OBSERVATION",
+      "contributes_to_leaf_ids": [
+        "PQ::R3_REALIZATION_OBSERVATION::EXECUTION"
+      ],
+      "claim_kind": "BOUNDED_GENERATED_EXPLICIT_LOW_LEVEL_TEXT_EDIT_RENDER_PRESERVATION",
+      "source_receipt": {
+        "path": "canonical/verification/NATIVE_ARTIFACT_RENDER_PRESERVATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "git_blob_sha": "1a0b4ca6627aaf28eb25f6990682e87319d14d6d"
+      },
+      "reusable_compiler": {
+        "path": "canonical/runtime/native_artifact_render_preservation_proof_v1.py",
+        "git_blob_sha": "39374e775d54cdc58315d7a1f877d834282a64f7"
+      },
+      "compiler_verification": {
+        "path": "canonical/governance/NATIVE_ARTIFACT_RENDER_PRESERVATION_PREFLIGHT_V1.json",
+        "git_blob_sha": "b5ddc896811875b59840959e27dbb515265fc9f8"
+      },
+      "global_leaf_closure": false,
+      "global_root_closure": false,
+      "semantic_leaf_credit": false,
+      "execution_leaf_credit": false,
+      "terminal_credit_delta": 0
     }
   ],
   "admission_law": "CLAIM_SCOPED_EVIDENCE_MAY_BE_REUSED_ONLY_INSIDE_ITS_PROVED_SCOPE_AND_NEVER_COUNTS_AS_GLOBAL_LEAF_OR_ROOT_CLOSURE",
   "hard_nonclaims": [
-    "NO_GLOBAL_R7_LEAF_CLOSURE",
-    "NO_GLOBAL_R7_ROOT_CLOSURE",
+    "NO_GLOBAL_R3_OR_R7_LEAF_CLOSURE",
+    "NO_GLOBAL_R3_OR_R7_ROOT_CLOSURE",
     "NO_DOMAIN_SEMANTIC_CLOSURE",
     "NO_DOMAIN_EXECUTION_CLOSURE",
     "NO_TERMINAL_CREDIT"
