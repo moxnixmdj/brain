@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_DEVELOPMENT_SCHEDULER_POINTER_V1",
   "date": "2026-10-10",
-  "status": "ACTIVE__POST_COMPOSITION_V21__PROFESSIONAL_SCOPE_24_OF_24__PROPERTY_TRUTH_8_OF_24__R5_R8_R9_R11_EXECUTION_OPEN__TWELVE_SEMANTIC_TOTALITY_REUSE__ESCAPE_12_GAP_A_0_GAP_B_1_PARKED__BYTES_V31__PARALLEL_EVIDENCE_READY__FULL_EXECUTION_FAILS_CLOSED_WITHOUT_VECTOR_OR_SEPARATE_AUTHORITY",
+  "status": "ACTIVE__POST_COMPOSITION_V23__PROFESSIONAL_SCOPE_24_OF_24__PROPERTY_TRUTH_9_OF_24__R5_R9_R11_EXECUTION_OPEN__TWELVE_SEMANTIC_TOTALITY_REUSE__ESCAPE_12_GAP_A_0_GAP_B_1_PARKED__BYTES_V32__PARALLEL_EVIDENCE_READY__FULL_EXECUTION_FAILS_CLOSED_WITHOUT_VECTOR_OR_SEPARATE_AUTHORITY",
   "authoritative_activation": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V13.json",
   "runtime": "canonical/runtime/capability_parallel_frontier_post_composition_v1.py",
   "primary_entrypoint": "canonical.runtime.capability_parallel_frontier_post_composition_v1.plan_current_post_composition_frontier",
@@ -27,13 +27,13 @@
   "planning_entrypoint": "canonical.runtime.capability_first_scheduler_v1.rank_work",
   "current_live_work_frontier": {
     "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
-    "git_blob_sha": "9cd2731cb4af4aa265dbee97e4df619ccb1590a3",
-    "status": "CURRENT_POST_COMPOSITION_FRONTIER__PROFESSIONAL_SCOPE_24_OF_24__PROPERTY_TRUTH_8_OF_24__R1_R2_R3_R4_R6_R7_R10_R12_EXECUTION_CLOSED__FOUR_EXECUTION_LEAVES_OPEN__TWELVE_SEMANTIC_TOTALITY_REUSE__ESCAPE_12_GAP_A_0_GAP_B_1_PARKED__BYTES_V31__ZERO_GLOBAL_CREDIT",
+    "git_blob_sha": "8d38f1235bef50722d98491e48dd5e7af39d0634",
+    "status": "CURRENT_POST_COMPOSITION_FRONTIER__PROFESSIONAL_SCOPE_24_OF_24__PROPERTY_TRUTH_9_OF_24__R1_R2_R3_R4_R6_R7_R8_R10_R12_EXECUTION_CLOSED__THREE_EXECUTION_LEAVES_OPEN__TWELVE_SEMANTIC_TOTALITY_REUSE__ESCAPE_12_GAP_A_0_GAP_B_1_PARKED__BYTES_V32__ZERO_GLOBAL_CREDIT",
     "professional_verified_root_subject_binding_count": 12,
     "professional_same_subject_composition_admissible": true,
     "professional_whole_leaf_scope_complete_count": 24,
-    "professional_property_truth_closed_count": 8,
-    "professional_open_execution_leaf_count": 4,
+    "professional_property_truth_closed_count": 9,
+    "professional_open_execution_leaf_count": 3,
     "professional_open_semantic_leaf_count": 12
   },
   "live_score_contract": {
@@ -68,19 +68,21 @@
   "whole_leaf_residual_control": {
     "path": "canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_SCOPE_BATCH_ACTIVATION_20261010_V1.json",
     "git_blob_sha": "d40188f87818d9c6a4507a043380a753ca563e18",
-    "status": "24_OF_24_SCOPE_COMPLETE__PROPERTY_TRUTH_8_OF_24__4_EXECUTION_AND_12_SEMANTIC_OPEN",
+    "status": "24_OF_24_SCOPE_COMPLETE__PROPERTY_TRUTH_9_OF_24__3_EXECUTION_AND_12_SEMANTIC_OPEN",
     "verification": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_SCOPE_BATCH_VERIFY_20261010_V1.json",
     "verification_git_blob_sha": "4c2d40a262f18f34bb35f94b59660d60972d45ef",
     "admitted_v2_chain_count": 24,
     "claim_scope_construction_required_count": 0,
-    "property_truth_ready_count": 16,
-    "property_truth_closed_count": 8,
+    "property_truth_ready_count": 15,
+    "property_truth_closed_count": 9,
     "registry_verification_v2": "canonical/verification/PROFESSIONAL_QUALITY_LEAF_REGISTRY_PROPERTY_TRUTH_VERIFY_20261010_V2.json",
     "registry_verification_v2_git_blob_sha": "bdde7b52793272623773b07bf774c0a74c6be7af",
     "registry_verification_v3": "canonical/verification/PROFESSIONAL_QUALITY_LEAF_REGISTRY_PROPERTY_TRUTH_VERIFY_20261010_V3.json",
     "registry_verification_v3_git_blob_sha": "f491a215fee5310b54c37eea694af642bbe12d6e",
     "registry_verification_v6": "canonical/verification/PROFESSIONAL_QUALITY_LEAF_REGISTRY_PROPERTY_TRUTH_VERIFY_20261010_V6.json",
-    "registry_verification_v6_git_blob_sha": "c0449b1afe7856ac95acea34f8a1f26702da3385"
+    "registry_verification_v6_git_blob_sha": "c0449b1afe7856ac95acea34f8a1f26702da3385",
+    "registry_verification_v7": "canonical/verification/PROFESSIONAL_QUALITY_LEAF_REGISTRY_PROPERTY_TRUTH_VERIFY_20261010_V7.json",
+    "registry_verification_v7_git_blob_sha": "1a60d418d18149dc5bcc82f5655a08f4891d3901"
   },
   "v12_activation": {
     "path": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V12.json",
@@ -97,8 +99,8 @@
   "post_composition": {
     "professional_scope_construction_complete": true,
     "professional_scope_complete_count": 24,
-    "professional_property_truth_closed_count": 8,
-    "current_primary_professional_edge": "DEPLET_FOUR_REMAINING_EXECUTION_PROPERTY_TRUTH__PARALLEL_SEMANTIC_CLAIM_SCOPED_TOTALITY_REUSE",
+    "professional_property_truth_closed_count": 9,
+    "current_primary_professional_edge": "DEPLET_R5_R9_R11_EXECUTION_PROPERTY_TRUTH__PARALLEL_SEMANTIC_CLAIM_SCOPED_TOTALITY_REUSE",
     "full_current_main_regression_open": true,
     "r10_structural_guard_verification": {
       "path": "canonical/verification/PROFESSIONAL_QUALITY_R10_STRUCTURAL_GUARD_INDEPENDENT_VERIFY_20261010_V1.json",
@@ -114,7 +116,7 @@
     "escape_active_gap_a_count": 12,
     "escape_active_gap_b_count": 0,
     "escape_parked_unresolved_count": 1,
-    "bytes_current_frontier": "V31__1909906_RAW_PYTHON_BYTES"
+    "bytes_current_frontier": "V32__1844477_RAW_PYTHON_BYTES"
   },
   "post_composition_currentness_invariant": {
     "runtime_path": "canonical/runtime/capability_parallel_frontier_post_composition_v1.py",
