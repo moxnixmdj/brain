@@ -1,5 +1,5 @@
 from __future__ import annotations
-import hashlib, json
+import hashlib, json, pathlib
 from typing import Any, Mapping
 
 SCHEMA="PROJECT_BRAIN_PROFESSIONAL_R4_MEASUREMENT_SEMANTIC_CERTIFICATE_V1"
@@ -43,9 +43,17 @@ def certify(req: Mapping[str,Any])->dict[str,Any]:
    value=req.get(p,True)
    if not isinstance(value,bool): return _fail("CASE_SENSITIVE_NOT_BOOLEAN")
    bound[p]=value
+   bound["comparison_mode"]=(
+    "EXACT" if value else
+    "STRIP_CASEFOLD_EQUALITY" if kind=="XLSX_SHEET_EXISTS" else
+    "CASEFOLD_SUBSTRING"
+   )
   else:
    value=req.get(p)
    if not isinstance(value,str) or not value: return _fail("LITERAL_REQUIRED:"+p)
+   if kind=="OOXML_MEMBER_EXISTS":
+    pure=pathlib.PurePosixPath(value)
+    if value.startswith("/") or ".." in pure.parts: return _fail("OOXML_MEMBER_INVALID")
    bound[p+"_sha256"]=hashlib.sha256(value.encode()).hexdigest()
    bound[p+"_length"]=len(value)
  core={"kind":kind,"operator":op,"output_type":out_type,"parameters":bound,
