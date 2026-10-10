@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_SEMANTIC_TOTALITY_REDUCTION_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_SECOND_SPRITE_REPLAY__4_OF_4__TWELVE_SEMANTIC_LEAVES_REDUCED_TO_CLAIM_SCOPED_TOTALITY__ZERO_PROPERTY_TRUTH_CREDIT",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/professional_semantic_totality_reduction_v1.py",
+      "git_blob_sha": "9c615d8792bf37122a01776eae7f7306ece849ee"
+    },
+    "tests": {
+      "path": "canonical/tests/test_professional_semantic_totality_reduction_v1.py",
+      "git_blob_sha": "b1c68c9dff1e464ac21a5116db1c450b5258dbea"
+    },
+    "residual_ledger": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_RESIDUAL_LEDGER_20261010_V1.json",
+      "git_blob_sha": "ae5503829ad340cccef287f37ff70e4ab9288d33"
+    },
+    "defeater_catalog": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_DOMAIN_DEFEATER_CATALOG_20261009_V2.json",
+      "git_blob_sha": "8b92e5cf76f767054f55414b87014e03d43460b8"
+    },
+    "claim_scope": {
+      "path": "canonical/governance/COVERAGE_COMPLETENESS_CLAIM_SCOPE_V1.json",
+      "git_blob_sha": "34b6e725efff42536e3c78b3c24543c32cbc02a9"
+    },
+    "coverage_root_theorem": {
+      "path": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_THEOREM_V1.json",
+      "git_blob_sha": "3d2c89502d94c045d04af04db4cdecc509a08dd8"
+    },
+    "universal_scope_compiler": {
+      "path": "canonical/runtime/universal_scope_closure_compiler_v1.py",
+      "git_blob_sha": "b208255789b14e44e86c82c196e06b5c41b3d039"
+    }
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-professional-hard-defect-verify-20261010",
+    "focused_cases_passed": 4,
+    "focused_cases_failed": 0,
+    "cases": [
+      "CURRENT_TWELVE_SEMANTIC_LEAVES_REDUCE_TO_CLAIM_SCOPED_TOTALITY",
+      "MISSING_SEMANTIC_LEAF_FAILS_CLOSED",
+      "BOUNDED_WITNESS_GLOBAL_SELF_PROMOTION_FORBIDDEN",
+      "CATALOG_COMPLETENESS_SELF_CLAIM_NOT_AUTHORITY"
+    ]
+  },
+  "proved": [
+    "CURRENT_SEMANTIC_LEAF_COUNT_IS_12",
+    "ALL_12_SHARE_WHOLE_LEAF_INPUT_DOMAIN_TOTALITY_OR_CERTIFIED_COMPLETE_UNION_RESIDUAL",
+    "CURRENT_BOUNDED_WITNESSES_HAVE_ZERO_GLOBAL_LEAF_CLOSURE_AUTHORITY",
+    "DEFEATER_CATALOG_ENUMERATION_IS_NOT_COMPLETENESS_AUTHORITY",
+    "NO_NEW_PRIMITIVE_REQUIRED_FOR_THE_REDUCTION",
+    "ONE_SHARED_ADAPTER_CAN_ROUTE_ALL_12_TO_EXISTING_CLAIM_SCOPE_ROOT_THEOREM_AND_SCOPE_COMPILER"
+  ],
+  "hard_nonclaims": [
+    "NO_SEMANTIC_LEAF_TOTALITY_PROVED",
+    "NO_PROPERTY_TRUTH_CREDIT",
+    "NO_QUALITY_CREDIT",
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_PROMOTION_AUTHORITY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
