@@ -78,8 +78,8 @@ def evaluate(registry:Mapping[str,Any],*,repo_root:Path)->dict[str,Any]:
   "claim_id":CLAIM_ID,"proved_root_ids":proved,"open_root_ids":opened,
   "proved_root_count":3,"open_root_count":0,"r4_proof_closure":True,
   "semantic_root_results":semantic_results,
-  "exact_remaining_root":"CC_R3_TERMINAL_CLOSURE_V1",
-  "exact_remaining_obligation":"ALL_ROOT_RELEVANT_MATERIAL_DEFEATERS_RESOLVED_OR_PROVED_DECISION_NULL_BEFORE_POSITIVE_CERTIFICATION",
+  "exact_remaining_root":None,
+  "exact_remaining_obligation":None,
   "new_primitive_required":False,
   "semantic_property_truth_authority":False,"terminal_authority":False,
   "terminal_credit_delta":0,"errors":[]}
