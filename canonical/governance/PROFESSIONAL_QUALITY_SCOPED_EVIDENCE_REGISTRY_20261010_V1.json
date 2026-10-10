@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_REGISTRY_V1",
   "date": "2026-10-10",
-  "status": "ACTIVE__FOURTEEN_CLAIM_SCOPED_CAPABILITIES__R1_R6_R7_R11_R12_BOUNDED_SEMANTIC_EVIDENCE__ZERO_GLOBAL_LEAF_CREDIT",
+  "status": "ACTIVE__FIFTEEN_CLAIM_SCOPED_CAPABILITIES__R1_R6_R7_R10_R11_R12_BOUNDED_SEMANTIC_EVIDENCE__ZERO_GLOBAL_LEAF_CREDIT",
   "entries": [
     {
       "scope_id": "PQ::R7::SINGLE_EDIT::UVCK_DEFEATER_ORDER_REPAIR",
@@ -387,6 +387,35 @@
       "scope_governance": {
         "path": "canonical/governance/PROFESSIONAL_QUALITY_R11_FIREWALL_SEMANTIC_SCOPE_20261010_V1.json",
         "git_blob_sha": "76494c75e3f2c5af87b77c99ce9984eafec60e32"
+      },
+      "global_leaf_closure": false,
+      "global_root_closure": false,
+      "semantic_leaf_credit": false,
+      "execution_leaf_credit": false,
+      "terminal_credit_delta": 0
+    },
+    {
+      "scope_id": "PQ::R10::DECISION_SUFFICIENCY_SEMANTICS::LOSSLESS_MINIMUM_INFORMATION",
+      "root_id": "R10_ANALYSIS_DECISION",
+      "contributes_to_leaf_ids": [
+        "PQ::R10_ANALYSIS_DECISION::SEMANTIC"
+      ],
+      "claim_kind": "LOSSLESS_MINIMUM_INFORMATION_DECISION_SUFFICIENCY_SEMANTICS",
+      "source_receipt": {
+        "path": "canonical/verification/PROFESSIONAL_QUALITY_R10_DECISION_SEMANTIC_VERIFY_20261010_V1.json",
+        "git_blob_sha": "c298b2510e352d876c1abacc069e915447e97823"
+      },
+      "reusable_compiler": {
+        "path": "canonical/runtime/professional_r10_decision_semantic_certificate_v1.py",
+        "git_blob_sha": "79b4d0eb3aff7daa11f7ba511ee0f8f026b49f08"
+      },
+      "compiler_verification": {
+        "path": "canonical/verification/PROFESSIONAL_QUALITY_R10_DECISION_SEMANTIC_VERIFY_20261010_V1.json",
+        "git_blob_sha": "c298b2510e352d876c1abacc069e915447e97823"
+      },
+      "scope_governance": {
+        "path": "canonical/governance/PROFESSIONAL_QUALITY_R10_DECISION_SEMANTIC_SCOPE_20261010_V1.json",
+        "git_blob_sha": "40149db88374c054fd974cc121ee464a3d3996fd"
       },
       "global_leaf_closure": false,
       "global_root_closure": false,
