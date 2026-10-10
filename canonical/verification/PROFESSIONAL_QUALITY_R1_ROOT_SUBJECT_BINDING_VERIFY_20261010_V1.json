@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_ROOT_SUBJECT_BINDING_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__R1_ROOT_BOUND_TO_TARGET_BOUND_CANDIDATE_SUBJECT",
+  "pass": true,
+  "root_id": "R1_TARGET_SPECIFICATION",
+  "subject_kind": "DECLARED_SYSTEM",
+  "subject_id": "PROFESSIONAL_QUALITY_P1_V4_TARGET_BOUND_SYSTEM_20261010_V3",
+  "subject_sha256": "e7292fbe697c2dcd06fc2c4346fc3e3bb231428a6511a88d575c655dd0f0c53a",
+  "subject_binding_git_blob_sha": "e702e0d0ea567db92869cfe0be7ca9745d94c8cc",
+  "verifier": {
+    "path": "canonical/runtime/professional_quality_r1_root_subject_binding_verify_v1.py",
+    "git_blob_sha": "be8c5b2d196df0cd7da360a86f9f4042bfded3ac"
+  },
+  "tests": {
+    "path": "canonical/tests/test_professional_quality_r1_root_subject_binding_verify_v1.py",
+    "git_blob_sha": "a383931e1e62257aff8a36640e4e1db669d5cab4",
+    "tests_run": 6,
+    "tests_passed": 6,
+    "tests_failed": 0
+  },
+  "independent_replay": {
+    "carrier": "brain-pq-p1-v2-independent-verify-20261010",
+    "carrier_id": "sprite-5fb5e414-e2f5-4a49-b424-3443341d9d09",
+    "py_compile": "PASS",
+    "real_binding_pass": true
+  },
+  "binding_scope": {
+    "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+    "claim": "THE_TARGET_BOUND_P1_V4_CANDIDATE_SYSTEM_REQUIRES_AND_CONTENT_BINDS_AN_EXACT_RUNTIME_TARGET_INSTANCE_TO_THE_CURRENT_CANONICAL_PROFESSIONAL_TARGET_CONTRACT_BEFORE_DELEGATING_TO_THE_VERIFIED_V3_ROUTING_SURFACE",
+    "guarantees": [
+      "EXACT_TARGET_INSTANCE_FIELDS_REQUIRED_BEFORE_ROUTING",
+      "CANONICAL_TARGET_CONTRACT_SEMANTICS_REPLAY_BEFORE_V3_DELEGATION",
+      "TARGET_INSTANCE_CONTENT_HASH_EMITTED_ON_ROUTED_RESULTS",
+      "V3_REAL_CLEAN_AND_HARD_DEFECT_BRANCHES_PRESERVED_IN_FOCUSED_INHERITED_REGRESSION"
+    ],
+    "limitations": [
+      "NO_ARBITRARY_USER_PROMPT_SEMANTIC_COMPLETENESS",
+      "NO_SOURCE_EXTRACTION_COMPLETENESS",
+      "NO_UNIQUE_BEST_PLAN",
+      "NO_GLOBAL_R1_ROOT_CLOSURE",
+      "NO_LIVE_DEFAULT_PROMOTION"
+    ]
+  },
+  "root_subject_binding_authority": true,
+  "global_subject_identity_authority": false,
+  "semantic_truth_authority": false,
+  "execution_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
