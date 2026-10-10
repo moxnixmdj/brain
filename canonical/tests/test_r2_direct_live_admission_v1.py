@@ -85,13 +85,31 @@ class R2DirectLiveAdmissionV1Tests(unittest.TestCase):
         self.assertEqual(out["matching_route_ids"], ["D1", "D2"])
         legacy.assert_not_called()
 
-    def test_dynamic_semantic_open_fails_closed_before_legacy(self):
+    def test_dynamic_semantic_open_fails_closed_but_preserves_unique_zero_authority_hint(self):
         row = dyn_row()
+        atom = {
+            "document_id": "A",
+            "dimension": "DOCUMENT_EFFECT_FIELD",
+            "effect_id": "A.t",
+            "field": "value",
+            "state": "TOP",
+        }
+        obligation = {
+            "kind": "PROVE_DOCUMENT_EFFECT_FIELD",
+            "document_id": "A",
+            "effect_id": "A.t",
+            "field": "value",
+        }
         with patch.object(live.admission, "load_current_admissions", return_value={"admissions": [row]}), \
              patch.object(live, "_dynamic_preflight", return_value={
                  "matched": False,
                  "direct_route_semantic_open": True,
                  "route_id": "DYNAMIC_X",
+                 "status": "OPEN__FIELD_TOP",
+                 "effect_status": "OPEN__QUERY_RELEVANT_EFFECT_FIELD_TOP_REMAINS",
+                 "open_lattice_atoms": [atom],
+                 "next_proof_obligations": [obligation],
+                 "query_relative_effect_semantics_finite": False,
              }), \
              patch.object(live.legacy, "preflight") as legacy:
             out = live.preflight({"task_id": "t", "goal": "g"})
@@ -99,7 +117,59 @@ class R2DirectLiveAdmissionV1Tests(unittest.TestCase):
             out["status"],
             "FAIL_CLOSED__DYNAMIC_SEMANTIC_OPEN_REQUIRES_PRECEDENCE_AUTHORITY",
         )
+        self.assertTrue(out["direct_route_semantic_open"])
+        self.assertEqual(out["route_id"], "DYNAMIC_X")
+        self.assertEqual(out["dynamic_semantic_open_status"], "OPEN__FIELD_TOP")
+        self.assertEqual(out["open_lattice_atoms"], [atom])
+        self.assertEqual(out["next_proof_obligations"], [obligation])
+        self.assertFalse(out["query_relative_effect_semantics_finite"])
+        self.assertFalse(out["dynamic_semantic_open_hint_authority"])
+        self.assertFalse(out["semantic_truth_authority"])
+        self.assertFalse(out["execution_authority"])
+        self.assertFalse(out["acceptance_authority"])
+        self.assertFalse(out["terminal_authority"])
         legacy.assert_not_called()
+
+    def test_multiple_dynamic_semantic_open_states_do_not_leak_one_hint(self):
+        rows = [dyn_row("D1"), dyn_row("D2")]
+        side = [
+            {
+                "matched": False,
+                "direct_route_semantic_open": True,
+                "route_id": "D1",
+                "open_lattice_atoms": [{"dimension": "A"}],
+            },
+            {
+                "matched": False,
+                "direct_route_semantic_open": True,
+                "route_id": "D2",
+                "open_lattice_atoms": [{"dimension": "B"}],
+            },
+        ]
+        with patch.object(live.admission, "load_current_admissions", return_value={"admissions": rows}), \
+             patch.object(live, "_dynamic_preflight", side_effect=side), \
+             patch.object(live.legacy, "preflight") as legacy:
+            out = live.preflight({"task_id": "t", "goal": "g"})
+        self.assertEqual(
+            out["status"],
+            "FAIL_CLOSED__DYNAMIC_SEMANTIC_OPEN_REQUIRES_PRECEDENCE_AUTHORITY",
+        )
+        self.assertNotIn("direct_route_semantic_open", out)
+        self.assertEqual(out["route_ids"], ["D1", "D2"])
+        legacy.assert_not_called()
+
+    def test_dynamic_semantic_open_route_id_mismatch_fails_closed(self):
+        row = dyn_row("D1")
+        dynamic = Mock(return_value={
+            "matched": False,
+            "direct_route_semantic_open": True,
+            "route_id": "D2",
+        })
+        with patch.object(live.admission, "load_current_admissions", return_value={"admissions": [row]}), \
+             patch.object(live, "_resolve_callable", return_value=dynamic):
+            out = live.preflight({"task_id": "t", "goal": "g"})
+        self.assertEqual(out["status"], "FAIL_CLOSED")
+        self.assertIn("DYNAMIC_PREFLIGHT_ROUTE_ID_MISMATCH", out["reason"])
 
     def test_dynamic_selected_run_executes_dynamic_not_v21(self):
         row = dyn_row()
