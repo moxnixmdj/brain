@@ -176,18 +176,19 @@
   },
   "professional_quality_scoped_evidence": {
     "runtime_path": "canonical/runtime/professional_quality_scoped_evidence_v1.py",
-    "runtime_git_blob_sha": "704b7384b9912bb1f99d83526b5613a671e10bc3",
+    "runtime_git_blob_sha": "eda524b3521f15f400a778e74cc6199d12aefc06",
     "tests_path": "canonical/tests/test_professional_quality_scoped_evidence_v1.py",
-    "tests_git_blob_sha": "1b256af3577d5a0a97d7b92cfb2e59117717f98c",
+    "tests_git_blob_sha": "440b77f66e25422d46d0e97b6337299f867c8cc3",
     "registry_path": "canonical/governance/PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_REGISTRY_20261010_V1.json",
-    "registry_git_blob_sha": "baf7a0eeacef5e8d7a0e1c2d5ad55e611a005790",
-    "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_VERIFY_20261010_V2.json",
-    "verification_git_blob_sha": "0da4b81cfdae1ee0a91620b8efabb9a65d2f6fe3",
-    "result": "PYCOMPILE_PASS__7_OF_7_PASS__TWO_SCOPED_CAPABILITIES",
-    "admitted_scope_count": 2,
+    "registry_git_blob_sha": "00d292ad33302029ea7b0cfe657cb73b46888cdf",
+    "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_VERIFY_20261010_V3.json",
+    "verification_git_blob_sha": "835b7425353bd3089700631b9de8cc3f0415f74d",
+    "result": "PYCOMPILE_PASS__9_OF_9_PASS__THREE_SCOPED_CAPABILITIES",
+    "admitted_scope_count": 3,
     "admitted_roots": [
       "R3_REALIZATION_OBSERVATION",
-      "R7_CAUSAL_PRESCRIPTIVE"
+      "R7_CAUSAL_PRESCRIPTIVE",
+      "R11_ADAPTIVE_INTEGRITY_SECURITY"
     ],
     "global_leaf_credit": false,
     "global_root_closure": false,
