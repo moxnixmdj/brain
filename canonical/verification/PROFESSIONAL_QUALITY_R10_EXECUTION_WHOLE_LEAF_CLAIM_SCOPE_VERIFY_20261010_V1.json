@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_WHOLE_LEAF_CLAIM_SCOPE_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__R10_EXECUTION_WHOLE_LEAF_DOMAIN_EQUIVALENCE__EXACT_PINNED_BYTES__8_OF_8__ZERO_PROPERTY_CREDIT",
+  "leaf_id": "PQ::R10_ANALYSIS_DECISION::EXECUTION",
+  "claim_id": "205a864e7d7a56a14a46bb75923cc9b11126d479676d26d88803831da1197294",
+  "claim_scope_git_blob_sha": "8f95b72c6edc7ff307342f7a0513bb90e908cd4c",
+  "leaf_manifest_git_blob_sha": "a7cad32c9fd969ff2c3857bb924c7bd746237ec2",
+  "subject_git_blob_sha": "1d598bc8757017ceb34928d0df9f5fce859ef868",
+  "mission_authority_git_blob_sha": "13c470645b037bbb46245c687dd35197b420d51a",
+  "claim_guard_git_blob_sha": "d1de61aa9bc00a184772a50f7ec9d5ee2853d747",
+  "semantic_verifier": {
+    "path": "canonical/runtime/professional_quality_whole_leaf_domain_equivalence_v1.py",
+    "git_blob_sha": "76bf7e1a6f26ff3664ed8c355dff8a688b074159"
+  },
+  "semantic_tests": {
+    "path": "canonical/tests/test_professional_quality_whole_leaf_domain_equivalence_v1.py",
+    "git_blob_sha": "38678fcf59ee3fa87b223156748a1b29660764e1"
+  },
+  "semantic_verifier_git_blob_sha": "76bf7e1a6f26ff3664ed8c355dff8a688b074159",
+  "semantic_tests_git_blob_sha": "38678fcf59ee3fa87b223156748a1b29660764e1",
+  "whole_leaf_domain_equivalence_proved": true,
+  "scope_definition_sha256": "ff37a6457f99c9eafe5bc3f006ebd7c0afe614336089d4004464a5d9a73c4a5f",
+  "leaf_acceptance_sha256": "fae7b1ccf4f94a91a1fb4caa4a634e6883538a28382991d97c69278e574b67ce",
+  "proof_basis": "EXACT_FROZEN_MANIFEST_BINDING_PLUS_UNIVERSAL_QUANTIFICATION_WITH_NO_FILTERS_OR_EXCLUSIONS",
+  "independent_replay": {
+    "pass": true,
+    "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "pinned_main_commit": "40febfde2c6a79dfa1c21fd4860d1cc2d0872fdc",
+    "py_compile": "PASS",
+    "tests_run": 8,
+    "tests_passed": 8,
+    "actual_scope_eval": "PASS__EXACT_WHOLE_LEAF_DOMAIN_EQUIVALENCE",
+    "transcript_sha256": "546a76b465bc992f47a5bf5001dd7ccd19d829711099436e6edbada051b440ec"
+  },
+  "semantic_truth_authority": false,
+  "execution_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "hard_nonclaims": [
+    "NO_R10_EXECUTION_PROPERTY_TRUTH",
+    "NO_R10_DOMAIN_EXECUTION_CLOSURE",
+    "NO_R10_ROOT_CLOSURE",
+    "NO_PROFESSIONAL_QUALITY_ACCEPTANCE_OR_PROMOTION"
+  ]
+}
