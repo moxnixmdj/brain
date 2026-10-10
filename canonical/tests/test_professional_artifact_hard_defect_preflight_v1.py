@@ -22,12 +22,15 @@ def docx(path: Path, text: str = "Hello") -> None:
     ).encode()
     write_zip(path, {"word/document.xml": body})
 
-def xlsx(path: Path, *, error=False, zero_width=False) -> None:
+def xlsx(path: Path, *, error=False, zero_width=False, hidden=False) -> None:
     wb = b'''<?xml version="1.0" encoding="UTF-8"?>
 <workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">
   <sheets><sheet name="Model" sheetId="1"/></sheets>
 </workbook>'''
-    cols = '<cols><col min="2" max="2" width="0"/></cols>' if zero_width else ''
+    attrs=[]
+    if zero_width: attrs.append('width="0"')
+    if hidden: attrs.append('hidden="1"')
+    cols = '<cols><col min="2" max="2" ' + ' '.join(attrs) + '/></cols>' if attrs else ''
     cell = '<c r="A1" t="e"><v>#REF!</v></c>' if error else '<c r="A1"><v>42</v></c>'
     ws = (
         '<?xml version="1.0" encoding="UTF-8"?>'
@@ -57,108 +60,89 @@ def pptx(path: Path, *, outside=False, blank=False) -> None:
 </p:sld>'''.encode()
     write_zip(path, {"ppt/presentation.xml": pres, "ppt/slides/slide1.xml": slide})
 
-def test_clean_docx_is_only_required_check_clean():
+def verify(profile, path):
+    return m.verify({"artifact_paths":[str(path)],"profile_id":profile})
+
+def test_brain_sanity_clean_docx_passes_without_quality_credit():
     with tempfile.TemporaryDirectory() as td:
         p=Path(td)/"a.docx"; docx(p)
-        out=m.verify({
-            "artifact_paths":[str(p)],
-            "required_checks":["DOCX_NONEMPTY_CONTENT"],
-        })
+        out=verify("BRAIN_PROFESSIONAL_OOXML_SANITY_V1",p)
         assert out["pass"] is True, out
-        assert out["hard_defect_count"] == 0
         assert out["quality_authority"] is False
         assert out["style_adequacy_proved"] is False
         assert out["acceptance_credit_delta"] == 0
 
-def test_blank_docx_blocks_only_when_check_is_required():
+def test_brain_sanity_blank_docx_blocks():
     with tempfile.TemporaryDirectory() as td:
-        p=Path(td)/"a.docx"; docx(p, "")
-        out=m.verify({
-            "artifact_paths":[str(p)],
-            "required_checks":["DOCX_NONEMPTY_CONTENT"],
-        })
+        p=Path(td)/"a.docx"; docx(p,"")
+        out=verify("BRAIN_PROFESSIONAL_OOXML_SANITY_V1",p)
         assert out["pass"] is False
         assert any(x["id"]=="DOCX_NONEMPTY_CONTENT" for x in out["hard_defects"])
 
-def test_xlsx_error_cell_blocks_when_source_or_policy_requires_check():
+def test_public_xlsx_subgate_blocks_error_cells():
     with tempfile.TemporaryDirectory() as td:
         p=Path(td)/"a.xlsx"; xlsx(p,error=True)
-        out=m.verify({
-            "artifact_paths":[str(p)],
-            "required_checks":["XLSX_NO_ERROR_CELLS"],
-        })
+        out=verify("AA_BRIEFCASE_LITE_W1_T2_XLSX_HARD_SUBGATE_V1",p)
         assert out["pass"] is False
+        assert out["public_target_example_only"] is True
+        assert out["source_check_id"]=="W1-T2-P-01"
         assert any(x["id"]=="XLSX_NO_ERROR_CELLS" for x in out["hard_defects"])
 
-def test_xlsx_zero_width_column_blocks_when_required():
+def test_public_xlsx_subgate_blocks_zero_width_not_merely_hidden_column():
     with tempfile.TemporaryDirectory() as td:
-        p=Path(td)/"a.xlsx"; xlsx(p,zero_width=True)
-        out=m.verify({
-            "artifact_paths":[str(p)],
-            "required_checks":["XLSX_NO_ZERO_WIDTH_COLUMNS"],
-        })
-        assert out["pass"] is False
-        assert any(x["id"]=="XLSX_NO_ZERO_WIDTH_COLUMNS" for x in out["hard_defects"])
+        p=Path(td)/"zero.xlsx"; xlsx(p,zero_width=True)
+        bad=verify("AA_BRIEFCASE_LITE_W1_T2_XLSX_HARD_SUBGATE_V1",p)
+        assert bad["pass"] is False
+        assert any(x["id"]=="XLSX_NO_ZERO_WIDTH_COLUMNS" for x in bad["hard_defects"])
 
-def test_observed_unrequired_condition_does_not_become_authority():
-    with tempfile.TemporaryDirectory() as td:
-        p=Path(td)/"a.xlsx"; xlsx(p,error=True)
-        out=m.verify({
-            "artifact_paths":[str(p)],
-            "required_checks":["XLSX_HAS_VISIBLE_WORKSHEET"],
-        })
-        assert out["pass"] is True, out
-        assert out["hard_defect_count"] == 0
-        assert any(x["id"]=="XLSX_NO_ERROR_CELLS" for x in out["observed_nonrequired_conditions"])
-        assert out["source_or_policy_authority_required_for_check_selection"] is True
+        q=Path(td)/"hidden.xlsx"; xlsx(q,hidden=True)
+        good=verify("AA_BRIEFCASE_LITE_W1_T2_XLSX_HARD_SUBGATE_V1",q)
+        assert good["pass"] is True, good
 
-def test_pptx_text_object_outside_slide_bounds_blocks_when_required():
+def test_public_pptx_subgate_blocks_text_outside_slide_bounds():
     with tempfile.TemporaryDirectory() as td:
         p=Path(td)/"a.pptx"; pptx(p,outside=True)
-        out=m.verify({
-            "artifact_paths":[str(p)],
-            "required_checks":["PPTX_NO_TEXT_OBJECT_OUTSIDE_SLIDE_BOUNDS"],
-        })
+        out=verify("AA_BRIEFCASE_LITE_W1_T3_PPTX_HARD_SUBGATE_V1",p)
         assert out["pass"] is False, out
+        assert out["source_check_id"]=="W1-T3-P-01"
         assert any(x["id"]=="PPTX_NO_TEXT_OBJECT_OUTSIDE_SLIDE_BOUNDS" for x in out["hard_defects"])
 
-def test_blank_slide_is_not_universally_declared_a_defect():
+def test_blank_slide_not_invented_as_public_pptx_hard_failure():
     with tempfile.TemporaryDirectory() as td:
         p=Path(td)/"a.pptx"; pptx(p,blank=True)
-        out=m.verify({
-            "artifact_paths":[str(p)],
-            "required_checks":["PPTX_HAS_SLIDES"],
-        })
+        out=verify("AA_BRIEFCASE_LITE_W1_T3_PPTX_HARD_SUBGATE_V1",p)
         assert out["pass"] is True, out
         assert out["style_adequacy_proved"] is False
 
-def test_explicit_file_count_and_format_constraints_fail_closed():
+def test_public_profile_enforces_exact_artifact_format():
     with tempfile.TemporaryDirectory() as td:
         p=Path(td)/"a.docx"; docx(p)
-        out=m.verify({
-            "artifact_paths":[str(p)],
-            "required_checks":["DOCX_NONEMPTY_CONTENT"],
-            "constraints":{"exact_file_count":2,"allowed_suffixes":[".xlsx"]},
-        })
-        ids={x["id"] for x in out["hard_defects"]}
+        out=verify("AA_BRIEFCASE_LITE_W1_T2_XLSX_HARD_SUBGATE_V1",p)
         assert out["pass"] is False
-        assert "EXPLICIT_FILE_COUNT_MISMATCH" in ids
-        assert "EXPLICIT_FORMAT_MISMATCH" in ids
+        assert any(x["id"]=="EXPLICIT_FORMAT_MISMATCH" for x in out["hard_defects"])
 
 def test_corrupt_package_is_inspection_failure_not_style_judgment():
     with tempfile.TemporaryDirectory() as td:
         p=Path(td)/"a.docx"; p.write_bytes(b"not-a-zip")
-        out=m.verify({
-            "artifact_paths":[str(p)],
-            "required_checks":["DOCX_NONEMPTY_CONTENT"],
-        })
+        out=verify("BRAIN_PROFESSIONAL_OOXML_SANITY_V1",p)
         assert out["pass"] is False
         assert out["hard_defect_count"] == 0
         assert any("OOXML_PACKAGE_INVALID" in e for e in out["checked_artifacts"][0]["errors"])
 
-def test_missing_required_check_authority_fails_closed():
+def test_unknown_profile_fails_closed():
     with tempfile.TemporaryDirectory() as td:
         p=Path(td)/"a.docx"; docx(p)
-        out=m.verify({"artifact_paths":[str(p)]})
+        out=verify("USER_CHOSE_EASY_CHECKS",p)
         assert out["pass"] is False
-        assert "REQUIRED_CHECKS_INVALID_OR_EMPTY" in out["errors"]
+        assert "PROFILE_ID_UNKNOWN_OR_MISSING" in out["errors"]
+
+def test_caller_cannot_inject_custom_check_selection():
+    with tempfile.TemporaryDirectory() as td:
+        p=Path(td)/"a.docx"; docx(p)
+        out=m.verify({
+            "artifact_paths":[str(p)],
+            "profile_id":"BRAIN_PROFESSIONAL_OOXML_SANITY_V1",
+            "required_checks":["DOCX_NONEMPTY_CONTENT"],
+        })
+        assert out["pass"] is False
+        assert "UNSUPPORTED_CALLER_FIELDS" in out["errors"]
