@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_PROFESSIONAL_QUALITY_EXECUTION_POINTER_V1",
   "date": "2026-10-10",
-  "status": "P1_V3_INDEPENDENT_11_OF_11_VERIFIED__EIGHTEEN_SCOPED_CAPABILITIES_VERIFIED__R1_R2_R6_R7_R8_R9_R10_R11_R12_BOUNDED_SEMANTIC_EVIDENCE_BOUND__EXACT_DECLARED_SYSTEM_SUBJECT_FROZEN__12_ROOT_SAME_SUBJECT_BINDINGS_REDUCED_0_VERIFIED__LEAF_FRONTIER_21_PARTIAL_3_NO_SCOPED_24_GLOBAL_OPEN__NOT_LIVE_DEFAULT",
+  "status": "P1_V3_INDEPENDENT_11_OF_11_VERIFIED__NINETEEN_SCOPED_CAPABILITIES_VERIFIED__R1_R2_R3_R6_R7_R8_R9_R10_R11_R12_BOUNDED_SEMANTIC_EVIDENCE_BOUND__EXACT_DECLARED_SYSTEM_SUBJECT_FROZEN__12_ROOT_SAME_SUBJECT_BINDINGS_REDUCED_0_VERIFIED__LEAF_FRONTIER_22_PARTIAL_2_NO_SCOPED_24_GLOBAL_OPEN__NOT_LIVE_DEFAULT",
   "profile_path": "canonical/governance/PROFESSIONAL_QUALITY_P1_EXECUTION_PROFILE_20261010_V3.json",
   "profile_sha": "f7e89eafbb691c16d1bdf5b8d295a468d5e3bec5",
   "router_path": "canonical/runtime/professional_quality_p1_router_v3.py",
@@ -17,17 +17,17 @@
   },
   "scoped_evidence": {
     "runtime_path": "canonical/runtime/professional_quality_scoped_evidence_overlay_v1.py",
-    "runtime_git_blob_sha": "ffceb16a8318bf0a680eba0956a40a43b207b286",
+    "runtime_git_blob_sha": "17f5472868aafcb45e75c72b744bcd8ad45a7049",
     "base_runtime_path": "canonical/runtime/professional_quality_scoped_evidence_v1.py",
     "base_runtime_git_blob_sha": "940fc381fa10559bf7ec8f59048562809f1031c0",
     "tests_path": "canonical/tests/test_professional_quality_scoped_evidence_overlay_v1.py",
-    "tests_git_blob_sha": "d84166b1ef7cb859f33762b62b878ab1746a5c9b",
+    "tests_git_blob_sha": "f434254ad7dd659537f2deab34d9cc70c7391584",
     "registry_path": "canonical/governance/PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_REGISTRY_20261010_V1.json",
-    "registry_git_blob_sha": "70dc8713ffaa3a68a711e19366dfc48ec226442d",
-    "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_R9_SEMANTIC_SCOPED_INTEGRATION_VERIFY_20261010_V1.json",
-    "verification_git_blob_sha": "812cfe1505641d509250d72d078bcd32453b2f1b",
-    "replay_result": "17_OF_17_FOCUSED_PASS__EIGHTEEN_SCOPED_CAPABILITIES__R1_R2_R6_R7_R8_R9_R10_R11_R12_BOUNDED_SEMANTIC_COVERAGE",
-    "admitted_scope_count": 18,
+    "registry_git_blob_sha": "f862131430822dfa0b76fe6093f31701b6dca7fe",
+    "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_R3_SEMANTIC_SCOPED_INTEGRATION_VERIFY_20261010_V1.json",
+    "verification_git_blob_sha": "86efb5396f90a4182d90029b47868123226fa05c",
+    "replay_result": "19_OF_19_FOCUSED_PASS__NINETEEN_SCOPED_CAPABILITIES__R1_R2_R3_R6_R7_R8_R9_R10_R11_R12_BOUNDED_SEMANTIC_COVERAGE",
+    "admitted_scope_count": 19,
     "admitted_roots": [
       "R1_TARGET_SPECIFICATION",
       "R2_CANDIDATE_SEARCH",
@@ -49,6 +49,7 @@
     "bounded_semantic_leaf_ids": [
       "PQ::R1_TARGET_SPECIFICATION::SEMANTIC",
       "PQ::R2_CANDIDATE_SEARCH::SEMANTIC",
+      "PQ::R3_REALIZATION_OBSERVATION::SEMANTIC",
       "PQ::R6_EVIDENCE_GROUNDING_DEPENDENCE::SEMANTIC",
       "PQ::R7_CAUSAL_PRESCRIPTIVE::SEMANTIC",
       "PQ::R8_POPULATION_CONTEXT_OPERATOR::SEMANTIC",
@@ -66,7 +67,7 @@
   "quality_authority": false,
   "terminal_authority": false,
   "terminal_credit_delta": 0,
-  "next": "ADD_BOUNDED_SEMANTIC_EVIDENCE_FOR_R3_R4_OR_R5__OR_BIND_REAL_SAME_SUBJECT_ROOT_RECEIPTS_FOR_ONE_EXACT_ARTIFACT_OR_SYSTEM__PROVE_WHOLE_LEAF_SCOPE_TRANSPORT_OR_CERTIFIED_COMPLETE_UNIONS__PROMOTE_LIVE_DEFAULT_ONLY_AFTER_EXACT_PASS",
+  "next": "ADD_BOUNDED_SEMANTIC_EVIDENCE_FOR_R4_OR_R5__OR_BIND_REAL_SAME_SUBJECT_ROOT_RECEIPTS_FOR_ONE_EXACT_ARTIFACT_OR_SYSTEM__PROVE_WHOLE_LEAF_SCOPE_TRANSPORT_OR_CERTIFIED_COMPLETE_UNIONS__PROMOTE_LIVE_DEFAULT_ONLY_AFTER_EXACT_PASS",
   "hard_nonclaims": [
     "NO_PROFESSIONAL_QUALITY_COMPLETENESS_PROOF",
     "NO_GLOBAL_LEAF_OR_ROOT_CLOSURE_FROM_BOUNDED_SCOPED_CAPABILITIES",
@@ -90,14 +91,13 @@
     "terminal_credit_delta": 0
   },
   "leaf_coverage_projection": {
-    "path": "canonical/verification/PROFESSIONAL_QUALITY_R9_SEMANTIC_SCOPED_INTEGRATION_VERIFY_20261010_V1.json",
-    "git_blob_sha": "812cfe1505641d509250d72d078bcd32453b2f1b",
-    "partial_coverage_leaf_count": 21,
-    "semantic_partial_coverage_leaf_count": 9,
+    "path": "canonical/verification/PROFESSIONAL_QUALITY_R3_SEMANTIC_SCOPED_INTEGRATION_VERIFY_20261010_V1.json",
+    "git_blob_sha": "86efb5396f90a4182d90029b47868123226fa05c",
+    "partial_coverage_leaf_count": 22,
+    "semantic_partial_coverage_leaf_count": 10,
     "execution_partial_coverage_leaf_count": 12,
-    "no_scoped_evidence_leaf_count": 3,
+    "no_scoped_evidence_leaf_count": 2,
     "no_scoped_evidence_leaf_ids": [
-      "PQ::R3_REALIZATION_OBSERVATION::SEMANTIC",
       "PQ::R4_MEASUREMENT_CONSTRUCT::SEMANTIC",
       "PQ::R5_EVALUATOR_REFERENCE::SEMANTIC"
     ],
@@ -179,6 +179,16 @@
     "global_r9_semantic_leaf_closed": false,
     "multihorizon_deployment_validity_proved": false,
     "distribution_shift_transport_proved": false,
+    "terminal_credit_delta": 0
+  },
+  "r3_realization_semantic": {
+    "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_R3_SEMANTIC_SCOPED_INTEGRATION_VERIFY_20261010_V1.json",
+    "verification_git_blob_sha": "86efb5396f90a4182d90029b47868123226fa05c",
+    "bounded_semantic_evidence": true,
+    "pinned_render_stack_only": true,
+    "global_r3_semantic_leaf_closed": false,
+    "arbitrary_semantic_target_correctness_proved": false,
+    "whole_contract_scope_equivalence_proved": false,
     "terminal_credit_delta": 0
   }
 }
