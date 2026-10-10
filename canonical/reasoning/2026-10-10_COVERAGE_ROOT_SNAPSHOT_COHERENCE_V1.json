@@ -1,0 +1,10 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_RECEIPT_V1",
+  "date": "2026-10-10",
+  "status": "VERIFIED_REPAIR_CANDIDATE",
+  "problem": "Canonical root-theorem governance embedded a stale 0/3-open R4 snapshot while the live claim-scoped registry had advanced to 3/3 PROVED_CURRENT with R4 closure true; CURRENT_COVERAGE_COMPLETENESS_ROOT_CERTIFICATES also retained a stale mission-pointer blob.",
+  "root_classification": "R4_PROOF_AUTHORITY__STALE_BINDING_AND_NON_EQUIVOCATION",
+  "decision": "Reconcile only embedded live snapshot metadata and add a permanent fail-closed regression. Preserve the four-root theorem, active claim scope, and zero global terminal credit.",
+  "evidence": "canonical/verification/COVERAGE_ROOT_SNAPSHOT_COHERENCE_20261010_V1.json",
+  "terminal_credit_delta": 0
+}
