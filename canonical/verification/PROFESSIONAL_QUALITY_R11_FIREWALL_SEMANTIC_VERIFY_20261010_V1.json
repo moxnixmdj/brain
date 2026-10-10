@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R11_FIREWALL_SEMANTIC_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__PINNED_EXACT_BYTES__PYCOMPILE__6_OF_6__BOUNDED_R11_FIREWALL_SEMANTICS__ZERO_GLOBAL_LEAF_CREDIT",
+  "pinned_main_commit": "b19e66fe30d9b847e798178805ddd61facc337a6",
+  "carrier": {
+    "name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/pq-r11-semantic-b19e66fe"
+  },
+  "exact_blobs": {
+    "runtime": "4ebc3e54dcc492e23144fedd9b4ddc70fb37539a",
+    "tests": "47a758ce98a2b218bee285b8fbf1df9cfc0c9065",
+    "governance": "902c19851629bfb2342eea29e73f4a7ab5d212c5"
+  },
+  "claim_scope": {
+    "kind": "CLEAN_EVALUATION_LANE_POST_IDENTITY_REVOCATION_SEMANTICS",
+    "guarantees": [
+      "TASK_IDENTITY_EXPOSURE_IS_MONOTONIC_WITHIN_A_LANE",
+      "POST_EXPOSURE_BROAD_DISCOVERY_CAPABILITIES_ARE_REVOKED",
+      "REVOKED_CAPABILITIES_CANNOT_BE_RESTORED_WITHIN_THE_SAME_LANE",
+      "DEACTIVATING_CLEAN_MODE_DOES_NOT_REENABLE_DISCOVERY_IN_THE_SAME_LANE",
+      "UNKNOWN_CAPABILITY_DENIES_FAIL_CLOSED",
+      "ALLOW_AND_REVOKE_CAPABILITY_CLASSES_ARE_DISJOINT"
+    ],
+    "limitations": [
+      "NO_GENERAL_PROMPT_INJECTION_CLOSURE",
+      "NO_GENERAL_GOODHART_CLOSURE",
+      "NO_HOLDOUT_LIFECYCLE_CLOSURE",
+      "NO_GLOBAL_R11_SEMANTIC_LEAF_CLOSURE",
+      "NO_GLOBAL_R11_ROOT_CLOSURE"
+    ]
+  },
+  "replay": {
+    "py_compile": "PASS",
+    "tests_run": 6,
+    "tests_passed": 6,
+    "tests_failed": 0
+  },
+  "proves": [
+    "POST_IDENTITY_CLEAN_LANE_REVOCATION_SEMANTICS_ARE_CONTENT_BOUND",
+    "TASK_IDENTITY_EXPOSURE_AND_REVOCATION_ARE_MONOTONIC_WITHIN_THE_SAME_LANE",
+    "UNKNOWN_CAPABILITIES_FAIL_CLOSED",
+    "ALLOW_AND_REVOKE_CLASSES_CANNOT_OVERLAP",
+    "CROSS_LANE_SECURITY_IS_NOT_INFERRED"
+  ],
+  "not_proved": [
+    "GENERAL_PROMPT_INJECTION_CLOSURE",
+    "GENERAL_GOODHART_CLOSURE",
+    "HOLDOUT_LIFECYCLE_CLOSURE",
+    "GLOBAL_R11_SEMANTIC_LEAF_CLOSURE",
+    "GLOBAL_R11_ROOT_CLOSURE",
+    "DOMAIN_SEMANTIC_CLOSURE",
+    "DOMAIN_EXECUTION_CLOSURE"
+  ],
+  "semantic_leaf_credit": false,
+  "global_leaf_closure": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
