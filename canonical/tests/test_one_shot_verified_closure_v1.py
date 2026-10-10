@@ -334,5 +334,49 @@ class OneShotClosureTests(unittest.TestCase):
         )
 
 
+    def test_default_root1_adapter_acquisition_provider_is_bound(self):
+        sentinel = object()
+        snaps = [
+            self._snap("a", []),
+            self._snap("a", []),
+            self._snap("a", []),
+        ]
+        with (
+            patch.object(
+                closure.root1_adapter_acquisition,
+                "make_provider",
+                return_value=sentinel,
+            ) as make_provider,
+            patch.object(closure, "frontier_snapshot", side_effect=snaps),
+            patch.object(
+                closure.r3,
+                "drain",
+                return_value={
+                    "status": "IMPROVEMENT_QUEUE_STABLE",
+                    "pass": True,
+                    "progress_count": 0,
+                    "actions": [],
+                },
+            ) as drain,
+        ):
+            out = closure.run(repo_root=".", state_path="state.json")
+
+        self.assertTrue(out["pass"], out)
+        make_provider.assert_called_once_with(
+            repo_root=".",
+            state_path="state.json",
+        )
+        self.assertIs(
+            drain.call_args.kwargs["verification_frontier_acquisition_provider"],
+            sentinel,
+        )
+        self.assertEqual(
+            drain.call_args.kwargs[
+                "verification_frontier_acquisition_provider_id"
+            ],
+            "ROOT1_STRUCTURAL_ADAPTER_RULE_ACQUISITION_PROVIDER_V1",
+        )
+
+
 if __name__ == "__main__":
     unittest.main()
