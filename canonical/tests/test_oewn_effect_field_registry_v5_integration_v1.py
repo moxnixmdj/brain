@@ -164,8 +164,8 @@ class OewnEffectFieldRegistryV5IntegrationTests(unittest.TestCase):
         self.assertEqual(new-old,{"OEWN_DECISION_RELATION"})
 
     def test_registry_v4_leaves_lexical_field_top(self):
-        problem=_problem()
-        out=evaluate(problem,relation_verifier=registry_v4.verify)
+        problem=_problem(schema="PROJECT_BRAIN_CROSS_DOCUMENT_EFFECT_SEMANTIC_LATTICE_V8")
+        out=evaluate_v8(problem)
         self.assertFalse(out["pass"],out)
         atoms=[
             x for x in out["open_lattice_atoms"]
@@ -175,12 +175,10 @@ class OewnEffectFieldRegistryV5IntegrationTests(unittest.TestCase):
 
     def test_registry_v5_closes_lexical_effect_class(self):
         problem=_problem()
-        out=evaluate(problem,relation_verifier=registry_v5.verify)
+        out=evaluate_v9(problem)
         self.assertTrue(out["pass"],out)
         self.assertEqual(out["effective_value"],"10")
-        check=verify(
-            problem,out,relation_verifier=registry_v5.verify
-        )
+        check=verify_v9(problem,out)
         self.assertTrue(check["verified"],check)
 
     def test_action_changing_lexical_senses_remain_top(self):
