@@ -5,6 +5,7 @@ from unittest.mock import patch
 
 from canonical.runtime import unified_cognitive_fabric_v1 as fabric
 from canonical.runtime import reached_escape_finite_totality_certificate_v1 as certificate
+from canonical.runtime import reached_escape_repair_cycle_v1 as repair_cycle
 
 
 def counterexample_state():
@@ -63,6 +64,12 @@ class ReachedEscapeConstructionInvariantBoundaryV1Tests(unittest.TestCase):
             out,
         )
         self.assertFalse(out["result"]["certified_reached_state_admitted"], out)
+        self.assertTrue(out["result"]["repair_dispatch_contract"]["pass"], out)
+        self.assertEqual(
+            out["result"]["repair_dispatch_sha256"],
+            out["result"]["repair_dispatch_contract"]["dispatch_sha256"],
+            out,
+        )
         self.assertEqual(
             out["result"]["repair_request"]["kind"],
             "UNSPLITTABLE_EQUIVALENCE_CLASS_REPAIR",
@@ -157,6 +164,89 @@ class ReachedEscapeConstructionInvariantBoundaryV1Tests(unittest.TestCase):
         }
         split = certificate.certify(with_splitter)
         self.assertTrue(split["pass"], split)
+
+
+    def test_live_fabric_can_close_uncertified_state_through_verified_repair_provider(self):
+        state = counterexample_state()
+
+        def capability_expander(request):
+            alternatives = [
+                row
+                for row in request["alternatives"]
+                if row["basis"]["provider_kind"] == "EVIDENCE_ACQUISITION"
+            ]
+            self.assertEqual(len(alternatives), 1, alternatives)
+            return {
+                "schema": repair_cycle.CANDIDATE_SCHEMA,
+                "pass": True,
+                "repair_sha256": request["repair_sha256"],
+                "repair_dispatch_sha256": request["repair_dispatch_sha256"],
+                "alternative_id": alternatives[0]["alternative_id"],
+                "candidate_kind": "DISCRIMINATOR",
+                "candidate": {
+                    "discriminator_id": "d_verified",
+                    "outcomes": {"r1": "A", "r2": "B"},
+                },
+                "truth_authority": False,
+                "verification_authority": False,
+                "promotion_authority": False,
+                "acceptance_authority": False,
+                "terminal_authority": False,
+            }
+
+        def semantic_verifier(request):
+            return {
+                "schema": repair_cycle.VERIFY_SCHEMA,
+                "pass": True,
+                "state_sha256": request["state_sha256"],
+                "repair_sha256": request["repair_sha256"],
+                "repair_dispatch_sha256": request["repair_dispatch_sha256"],
+                "alternative_id": request["alternative_id"],
+                "candidate_sha256": request["candidate_sha256"],
+                "candidate_kind": request["candidate_kind"],
+                "verified_properties": [request["required_verified_property"]],
+                "independent_verification": True,
+                "verifier_id": "TEST_INDEPENDENT_REACHED_ESCAPE_VERIFIER",
+                "promotion_authority": False,
+                "acceptance_authority": False,
+                "terminal_authority": False,
+            }
+
+        with patch.object(
+            fabric.improvement_driver,
+            "drain",
+            return_value={
+                "status": "IMPROVEMENT_QUEUE_STABLE",
+                "pass": True,
+                "progress_count": 0,
+                "actions": [],
+            },
+        ):
+            out = fabric.run(
+                {
+                    "mode": "REACHED_ESCAPE_STATE",
+                    "payload": state,
+                    "options": {"learn": False},
+                },
+                capability_expander=capability_expander,
+                semantic_authority_verifier=semantic_verifier,
+            )
+
+        self.assertEqual(out["status"], "FABRIC_DISPATCH_COMPLETE", out)
+        self.assertTrue(out["inner_pass"], out)
+        self.assertEqual(
+            out["result"]["status"],
+            "PASS__REACHED_ESCAPE_REPAIR_CYCLE_CLOSED",
+            out,
+        )
+        self.assertTrue(out["result"]["repair_cycle_closed"], out)
+        self.assertEqual(out["result"]["repair_rounds_completed"], 1, out)
+        self.assertTrue(
+            out["result"]["final_result"]["certified_reached_state_admitted"],
+            out,
+        )
+        self.assertFalse(out["result"]["global_repair_acquirability_proved"], out)
+        self.assertFalse(out["result"]["terminal_authority"], out)
 
 
 if __name__ == "__main__":
