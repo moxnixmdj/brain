@@ -1,0 +1,84 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_LEAF_REGISTRY_PROPERTY_TRUTH_VERIFY_20261010_V5",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_SPRITE__PYCOMPILE__8_OF_8__PROPERTY_TRUTH_7_OF_24_DERIVED__STALE_R6_FALLS_BACK_6_OF_24__ZERO_GLOBAL_CREDIT",
+  "repository": "moxnixmdj/brain",
+  "subject": {
+    "binder_runtime": {
+      "path": "canonical/runtime/professional_quality_leaf_binder_v2.py",
+      "git_blob_sha": "1a181b453271a2ce4fc112c3f6586afaf5effbd7"
+    },
+    "registry": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_LEAF_EVIDENCE_REGISTRY_20261010_V1.json",
+      "git_blob_sha": "69d0c50dad314d7719f66349a2840a978ebb93eb"
+    },
+    "registry_tests": {
+      "path": "canonical/tests/test_professional_quality_leaf_registry_property_truth_v1.py",
+      "git_blob_sha": "571e3e55c6ef5f888f6fc98a8a84395d20d6b9e1"
+    },
+    "r3_receipt": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R3_EXECUTION_LEAF_RECEIPT_20261010_V1.json",
+      "git_blob_sha": "3e7e3d62c8d8d1c37cace258b6686fd606d0bcfb"
+    },
+    "r4_receipt": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R4_EXECUTION_LEAF_RECEIPT_20261010_V1.json",
+      "git_blob_sha": "5f16431dcddf0dc5d39d318ad8a547a61e8beb43"
+    },
+    "r6_receipt": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R6_EXECUTION_LEAF_RECEIPT_20261010_V1.json",
+      "git_blob_sha": "6f8e15297ecad8e2e5877accbd423ddd0ae704c3"
+    },
+    "r6_property_verification": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R6_EXECUTION_PROPERTY_TRUTH_INDEPENDENT_VERIFY_20261010_V1.json",
+      "git_blob_sha": "040a937aecced1bc40d9a38f26108cb88c0a7e4d"
+    }
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-professional-hard-defect-verify-20261010",
+    "carrier_id": "sprite-1bbb86ed-1f7c-409f-8397-fadc4de7a62a",
+    "workspace": "/home/sprite/pq-r6-registry-7of24",
+    "py_compile": "PASS",
+    "tests_run": 8,
+    "tests_passed": 8,
+    "tests_failed": 0,
+    "existing_evidence_current": true,
+    "structural_errors": 0,
+    "rejected_receipt_count": 0,
+    "verified_execution_leaf_ids": [
+      "PQ::R1_TARGET_SPECIFICATION::EXECUTION",
+      "PQ::R3_REALIZATION_OBSERVATION::EXECUTION",
+      "PQ::R4_MEASUREMENT_CONSTRUCT::EXECUTION",
+      "PQ::R6_EVIDENCE_GROUNDING_DEPENDENCE::EXECUTION",
+      "PQ::R7_CAUSAL_PRESCRIPTIVE::EXECUTION",
+      "PQ::R10_ANALYSIS_DECISION::EXECUTION",
+      "PQ::R12_META_COMPOSITION_CLOSURE::EXECUTION"
+    ],
+    "verified_semantic_leaf_ids": [],
+    "verified_leaf_count": 7,
+    "open_leaf_count": 17,
+    "stale_r6_receipt_mutation_verified_leaf_count": 6,
+    "stale_r6_receipt_rejected": true,
+    "r3_and_r4_preserved_after_r6_tamper": true,
+    "promotion_ready": false
+  },
+  "consequence": [
+    "LEAF_BINDER_DERIVES_EXACTLY_7_OF_24_PROPERTY_TRUTH_FROM_SCOPE_MATCHED_CONTENT_ADDRESSED_RECEIPTS",
+    "R6_EXECUTION_IS_ADMITTED_WITH_CURRENT_R1_R3_R4_R7_R10_R12_EXECUTION_LEAVES",
+    "STALE_R6_RECEIPT_REMOVES_ONLY_R6_CREDIT_AND_FALLS_BACK_TO_6_OF_24",
+    "ALL_12_SEMANTIC_LEAVES_AND_5_OTHER_EXECUTION_LEAVES_REMAIN_OPEN"
+  ],
+  "hard_nonclaims": [
+    "NO_SEMANTIC_LEAF_CLOSURE",
+    "NO_ROOT_CLOSURE",
+    "NO_24_OF_24_PROPERTY_TRUTH",
+    "NO_GLOBAL_DOMAIN_SEMANTIC_OR_EXECUTION_CLOSURE",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
