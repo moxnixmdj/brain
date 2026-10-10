@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK20_EFFECTIVE_AUTHORITY_LEDGER_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__RANK20_CANONICAL_EFFECTIVE_AUTHORITY_V3_LEDGER_V44_COHERENT__PUBLIC_PROMOTION_ONLY__ZERO_EXPOSURE",
+  "authority": {
+    "path": "canonical/governance/TB_SCIENCE_RANK20_ONE_SLOT_EXECUTION_AUTHORITY_20261010_V3.json",
+    "git_blob_sha": "7402eae3242cac39f9a3b26314b0e45bfb9ca19f"
+  },
+  "ledger": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V44.json",
+    "git_blob_sha": "21089cd5a6dd6070140bd33fd7bd43f5b44d70b6"
+  },
+  "claim": {
+    "path": "canonical/governance/TB_SCIENCE_RANK20_LOGICAL_ATTEMPT_CLAIM_BINDING_20261010_V3.json",
+    "git_blob_sha": "59fa5616f1754f90ded1c3b30cb53c98b4348cee",
+    "canonical_sha256": "ad74fd461333c1673b76ec0b439aba98c35bf6a0691796b24a5847209873adba",
+    "logical_attempt_id": "62bbf27ddcc679f431c5569244cf0c54fb1b13181e83076e2c019764f0b747e2"
+  },
+  "public_reseal_verification": {
+    "path": "canonical/verification/TB_SCIENCE_RANK20_PUBLIC_RESEAL_VERIFICATION_20261010_V1.json",
+    "git_blob_sha": "0bc06489a634ee3c01af3f67023d70fbb0cf2905",
+    "public_merge_commit_sha": "73db1b05ab8e08b84d2076e2b36f4e376b90091c",
+    "public_surface_git_blob_sha": "31cef695b88e9f13c14167a4e0e7dac27b4de620"
+  },
+  "verified": [
+    "AUTHORITY_V3_PRESERVES_CLAIM_V3_LOGICAL_ATTEMPT_AND_EXACT_SLOT_DIGEST",
+    "AUTHORITY_V3_BINDS_VERIFIED_PUBLIC_STAGED_RESEAL_AND_PREDECESSOR_LEDGER_V43",
+    "AUTHORITY_V3_CANONICAL_EXECUTION_AUTHORITY_IS_EFFECTIVE",
+    "PUBLIC_EXECUTION_AND_TASK_READ_AUTHORITY_REMAIN_INEFFECTIVE_PENDING_PUBLIC_PROMOTION",
+    "LEDGER_V44_BINDS_AUTHORITY_V3_WITH_COUNTS_UNCHANGED_AT_18_CONSUMED",
+    "RANK20_REMAINS_UNREAD_UNSTARTED_WITH_NO_DURABLE_START_AND_ZERO_CONSUMED_TRIALS",
+    "ACTIVATION_AUTHORITY_REMAINS_FALSE",
+    "ONLY_AUTHORIZED_TRANSITION_IS_ZERO_EXPOSURE_PUBLIC_EFFECTIVE_AUTHORITY_PROMOTION"
+  ],
+  "state": {
+    "canonical_execution_authority_effective": true,
+    "public_execution_authority_effective": false,
+    "task_read_authority_effective": false,
+    "activation_authority": false,
+    "task_read_history": false,
+    "task_started": false,
+    "durable_start_cas_acquired": false,
+    "rank20_benchmark_trials_consumed": 0
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_trials_consumed_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "pass": true,
+  "next": "PROMOTE_PUBLIC_RANK20_EFFECTIVE_AUTHORITY_SURFACE_WITH_ZERO_EXPOSURE_PROOF__NO_ACTIVATION"
+}
