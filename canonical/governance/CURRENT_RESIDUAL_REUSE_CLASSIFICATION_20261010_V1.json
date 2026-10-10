@@ -132,7 +132,7 @@
     {
       "path": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V6.json",
       "git_blob_sha": "a6fe5eda7b596d5a24cf75bc9b046bf53f4fe7be",
-      "role": "CURRENT_SUCCESSOR_ESCAPE_EXECUTION_ACQUISITION_BINDING"
+      "role": "VERIFIED_PREDECESSOR_SUCCESSOR_ESCAPE_BINDING__MAIN_V6_GAP_A_ADAPTER_STATE"
     },
     {
       "path": "canonical/governance/ESCAPE_GAP_A_POLICY_COVER_ADAPTER_ACTIVATION_20261010_V1.json",
@@ -148,6 +148,16 @@
       "path": "canonical/verification/ESCAPE_GAP_A_POLICY_COVER_ADAPTER_ACTIVATION_VERIFY_20261010_V1.json",
       "git_blob_sha": "fbd067e5aa8cf6648f61395fcba39d1f413f9bd1",
       "role": "ADAPTER_OQ_COHERENCE_VERIFICATION"
+    },
+    {
+      "path": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V7.json",
+      "git_blob_sha": "3e380f89ce4f064770016460f2bb6d59df6bf614",
+      "role": "CURRENT_SUCCESSOR_ESCAPE_EXECUTION_ACQUISITION_BINDING__DYNAMIC_AUDIT_CURRENTNESS"
+    },
+    {
+      "path": "canonical/verification/ESCAPE_V7_CURRENT_MAIN_COMPOSITION_VERIFY_20261010_V2.json",
+      "git_blob_sha": "4c58f7a165954629096c585ce2ced2e77253833a",
+      "role": "CURRENT_V7_O11_Q2_COMPOSITION_VERIFICATION"
     }
   ],
   "classifications": [
@@ -210,7 +220,7 @@
       "exact_remaining_class": "10_INFORMATION_DEPENDENT_ROWS__SHARED_CONTENT_AUTHENTICATED_POLICY_COVER_REALIZATION_ADAPTER_LIVE_AND_VERIFIED__REAL_ROW_PROOFS_0_OF_10__O_Q_IS_PRIMARY_SHARED_ACCEPTANCE_RESEARCH_COMPRESSION__ROW_PROOF_STILL_REQUIRES_REAL_CURRENT_AVAILABILITY_OR_ACQUIRABILITY_EVIDENCE",
       "new_primitive_status": "NOT_ESTABLISHED",
       "executable_audit": "canonical/runtime/escape_progress_shared_gap_audit_v3.py",
-      "current_gate_status": "V7_REBASE_PRESEAL__DYNAMIC_CURRENT_BINDING_AND_MAIN_V6_GAP_A_POLICY_COVER_ADAPTER_COMPOSED__REAL_ROW_PROOFS_0_OF_10__O11_Q2_PRIMARY_RESEARCH_PRESERVED",
+      "current_gate_status": "V7_FINAL__LATEST_O11_Q2_CLASSIFIER_PRESERVED__DYNAMIC_CURRENT_BINDING_AND_GAP_A_POLICY_COVER_ADAPTER_COMPOSED__23_PLUS_6_VERIFIED__REAL_ROW_PROOFS_0_OF_10",
       "causal_reclassification": {
         "path": "canonical/governance/ESCAPE_PROGRESS_FINANCE_INDEX_CAUSAL_RECLASSIFICATION_20261010_V1.json",
         "git_blob_sha": "ea256418ec1f8048c7566c6ecc74206d9d1ac529",
@@ -221,8 +231,8 @@
       "shared_route_reduction": "canonical/governance/ESCAPE_PROGRESS_SUCCESSOR_SHARED_ROUTE_REDUCTION_20261010_V1.json",
       "reached_state_v2_reuse": "canonical/governance/ESCAPE_PROGRESS_REACHED_STATE_V2_REUSE_RECONCILIATION_20261010_V1.json",
       "executable_audit_git_blob_sha": "e556880aa216673e0e316e11fc6f4ab25d644ce6",
-      "audit_verification": "canonical/verification/ESCAPE_V7_ADAPTER_CURRENTNESS_COMPOSITION_VERIFY_20261010_V1.json",
-      "audit_verification_git_blob_sha": "fadfa82045d6b226788a307f982a96509a5c5e2b",
+      "audit_verification": "canonical/verification/ESCAPE_V7_CURRENT_MAIN_COMPOSITION_VERIFY_20261010_V2.json",
+      "audit_verification_git_blob_sha": "4c58f7a165954629096c585ce2ced2e77253833a",
       "gap_a_policy_cover_adapter": {
         "activation": "canonical/governance/ESCAPE_GAP_A_POLICY_COVER_ADAPTER_ACTIVATION_20261010_V1.json",
         "behavioral_verification": "canonical/verification/ESCAPE_GAP_A_POLICY_COVER_ADAPTER_VERIFY_20261010_V1.json",
@@ -242,7 +252,7 @@
       "exact_remaining_class": "3_CURRENT_INTERNAL_ROWS__GENERIC_REPAIR_VERIFICATION_RECERTIFICATION_AND_LIVE_REENTRY_SOLVED__REMAINING_IS_CURRENT_EXECUTABLE_VERIFIED_ACTION_PLUS_WELL_FOUNDED_ACCEPTANCE_RELEVANT_MEASURE_AND_ALL_OUTCOME_STRICT_PROGRESS",
       "new_primitive_status": "NOT_ESTABLISHED",
       "executable_audit": "canonical/runtime/escape_progress_shared_gap_audit_v3.py",
-      "current_gate_status": "V7_REBASE_PRESEAL__DYNAMIC_CURRENT_BINDING_COMPOSED__GAP_B_PROGRESS_GATE_PRESERVED__REAL_ROW_PROOFS_0_OF_3",
+      "current_gate_status": "V7_FINAL__LATEST_O11_Q2_CLASSIFIER_PRESERVED__DYNAMIC_CURRENT_BINDING__23_PLUS_6_VERIFIED__GAP_B_PROGRESS_GATE_PRESERVED__REAL_ROW_PROOFS_0_OF_3",
       "causal_reclassification": {
         "path": "canonical/governance/ESCAPE_PROGRESS_FINANCE_INDEX_CAUSAL_RECLASSIFICATION_20261010_V1.json",
         "git_blob_sha": "ea256418ec1f8048c7566c6ecc74206d9d1ac529",
@@ -253,8 +263,8 @@
       "shared_route_reduction": "canonical/governance/ESCAPE_PROGRESS_SUCCESSOR_SHARED_ROUTE_REDUCTION_20261010_V1.json",
       "reached_state_v2_reuse": "canonical/governance/ESCAPE_PROGRESS_REACHED_STATE_V2_REUSE_RECONCILIATION_20261010_V1.json",
       "executable_audit_git_blob_sha": "e556880aa216673e0e316e11fc6f4ab25d644ce6",
-      "audit_verification": "canonical/verification/ESCAPE_V7_ADAPTER_CURRENTNESS_COMPOSITION_VERIFY_20261010_V1.json",
-      "audit_verification_git_blob_sha": "fadfa82045d6b226788a307f982a96509a5c5e2b",
+      "audit_verification": "canonical/verification/ESCAPE_V7_CURRENT_MAIN_COMPOSITION_VERIFY_20261010_V2.json",
+      "audit_verification_git_blob_sha": "4c58f7a165954629096c585ce2ced2e77253833a",
       "audit_current_binding_mode": "MUTABLE_CURRENT_CLASSIFIER_PATH_IDENTITY__GAP_A_B_BINDING_CONSENSUS_REQUIRED"
     },
     {
@@ -405,7 +415,7 @@
     "terminal_credit_delta": 0
   },
   "reconciliation": {
-    "status": "CURRENTNESS_RECONCILED__O11_Q2_PRIMARY_RESEARCH_COMPRESSION__GAP_A_ADAPTER_LIVE__V7_DYNAMIC_AUDIT_CURRENTNESS_COMPOSED__ZERO_ROW_OR_TERMINAL_CREDIT",
+    "status": "CURRENTNESS_RECONCILED__O11_Q2_PRIMARY_RESEARCH_COMPRESSION__GAP_A_ADAPTER_LIVE__V7_DYNAMIC_AUDIT_CURRENTNESS_FINAL_VERIFIED__ZERO_ROW_OR_TERMINAL_CREDIT",
     "frozen_main_commit": "5b668966898d3b12a628921d5151167a4d37daab",
     "corrected": [
       "ASSURANCE_PROFESSIONAL_TB_AND_LEAF_SOURCE_PINS",
@@ -424,7 +434,8 @@
     "real_gap_a_row_proofs": 0,
     "successor_escape_binding_v7": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V7.json",
     "escape_v3_dynamic_current_binding_composed_with_gap_a_adapter": true,
-    "escape_v7_composition_verification": "canonical/verification/ESCAPE_V7_ADAPTER_CURRENTNESS_COMPOSITION_VERIFY_20261010_V1.json"
+    "escape_v7_composition_verification": "canonical/verification/ESCAPE_V7_ADAPTER_CURRENTNESS_COMPOSITION_VERIFY_20261010_V1.json",
+    "escape_v7_current_main_verification": "canonical/verification/ESCAPE_V7_CURRENT_MAIN_COMPOSITION_VERIFY_20261010_V2.json"
   },
   "current_source_binding_law": {
     "mutable_current_authorities": "CANONICAL_PATH_IDENTITY_AUTHORITATIVE__OBSERVED_BLOB_IS_DIAGNOSTIC_ONLY__RECHECK_CURRENT_BYTES_BEFORE_SCHEDULING_OR_TRUTH_CLAIM",
