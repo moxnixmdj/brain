@@ -1,0 +1,89 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_V8_R12_REUSE_CLOSURE_20261010_V1",
+  "date": "2026-10-10",
+  "status": "CURRENT_VERIFIED_REUSE_CLOSURE__C1_TO_C7_EXACT_V8_REVERIFIED__CC_R3_POLICY_COVER_ADAPTER_VERIFIED__REAL_V8_WITNESS_OPEN__NO_NEW_PRIMITIVE__ZERO_CREDIT",
+  "base_main_commit": "ac397ea41997bac1002c7dfcf723192e1da08fe9",
+  "objective": "CLOSE_THE_LIVE_R12_V8_FRONTIER_BY_REUSING_EXISTING_VERIFIED_REFINEMENT_AND_TOTALITY_THEOREMS_WITHOUT_CROSS_SUBJECT_AUTHORITY_TRANSPORT_OR_DEFEATER_CATALOG_ENUMERATION",
+  "reuse_sources": {
+    "v7_to_v8_refinement": {
+      "runtime": "canonical/runtime/professional_v7_to_v8_r12_positive_refinement_v1.py",
+      "runtime_git_blob_sha": "d89fff7cda1bde90fae72e7652ddc50ab457231b",
+      "independent_verification": "canonical/verification/PROFESSIONAL_V7_TO_V8_R12_POSITIVE_REFINEMENT_INDEPENDENT_VERIFY_20261010_V1.json",
+      "independent_verification_git_blob_sha": "0a4bd655f6b6e2faeb23b39c6affe1b8187feba9"
+    },
+    "observable_policy_cover_totality": {
+      "runtime": "canonical/runtime/observable_policy_cover_totality_gate_v1.py",
+      "independent_verification": "canonical/verification/OBSERVABLE_POLICY_COVER_TOTALITY_TWO_SPRITE_VERIFICATION_20261008_V1.json",
+      "independent_verification_git_blob_sha": "776f309139463ad6e143f86c133efba78ff15f26",
+      "theorem": "canonical/governance/OBSERVATIONAL_EQUIVALENCE_POLICY_COVER_TOTALITY_THEOREM_20261007_V1.json"
+    },
+    "r12_generator_closure": {
+      "runtime": "canonical/runtime/professional_r12_material_defeater_generator_closure_v1.py",
+      "runtime_git_blob_sha": "fb1c80a25a387085da0c3a3b570d34f3bc5a455a",
+      "independent_verification": "canonical/verification/PROFESSIONAL_R12_MATERIAL_DEFEATER_GENERATOR_CLOSURE_INDEPENDENT_VERIFY_20261010_V1.json",
+      "independent_verification_git_blob_sha": "e72e29635038abbe8a4339b4fe77058040e93ffb"
+    }
+  },
+  "new_implementation": {
+    "runtime": "canonical/runtime/professional_v8_r12_reuse_closure_v1.py",
+    "tests": "canonical/tests/test_professional_v8_r12_reuse_closure_v1.py",
+    "branch": "successor/v8-r12-reuse-closure-20261010-v1",
+    "independent_verification": {
+      "path": "canonical/verification/PROFESSIONAL_V8_R12_REUSE_CLOSURE_INDEPENDENT_VERIFY_20261010_V1.json",
+      "git_blob_sha": "b01d8ea91f17313bb78feb0dcec0cbd302b671f6",
+      "status": "PASS__INDEPENDENT_SPRITE__PYCOMPILE__6_OF_6"
+    }
+  },
+  "exact_v8_subject": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V8_DECLARED_SYSTEM_SUBJECT_20261010_V7.json",
+    "git_blob_sha": "21820105caab672440c76d051fecc16a562ae4cc",
+    "subject_id": "PROFESSIONAL_QUALITY_P1_V8_TOTALITY_MEDIATED_SYSTEM_20261010_V7",
+    "subject_sha256": "f6a1752167c3e4972ac952b04e3298690088256fcaa65150743582e8e655e51c"
+  },
+  "fine_tuned_solution": {
+    "c1_to_c7": "REVERIFY_ON_EXACT_V8_BY_INDEPENDENTLY_VERIFIED_REFINEMENT_PLUS_CURRENT_CLAUSE_PREMISES__NO_V7_PROPERTY_AUTHORITY_TRANSPORT",
+    "c8_and_cc_r3": "REPLACE_OPEN_ENDED_UNKNOWN_DEFEATER_ENUMERATION_WITH_ONE_COMPLETE_POLICY_RELEVANT_WORLD_SET_PLUS_SOUND_BRAIN_OWNED_POLICY_REGIONS_PLUS_TRUTHFUL_SAFE_DISCRIMINATORS__CONSTRUCTIVE_OBSERVABLE_POLICY_COVER_PROVES_EVERY_MATERIAL_DECISION_BRANCH_RESOLVED_OR_DECISION_NULL",
+    "finite_defeater_catalog_required": false,
+    "complete_discriminator_library_required_for_positive_proof": false,
+    "new_primitive_required": false
+  },
+  "truth_boundary": {
+    "c1_to_c7_branch_candidate_implemented": true,
+    "c1_to_c7_independent_branch_verification_complete": true,
+    "real_v8_policy_relevant_state_cover_bound": false,
+    "real_v8_positive_totality_witness_bound": false,
+    "v8_c8_nonvacuity_proved": false,
+    "v8_cc_r3_terminal_closure_proved": false,
+    "r4_proof_realization_authority": false,
+    "semantic_property_truth_authority": false,
+    "quality_authority": false,
+    "acceptance_authority": false,
+    "promotion_authority": false,
+    "terminal_authority": false,
+    "reusable_cc_r3_adapter_independent_verification_complete": true
+  },
+  "minimum_remaining_cut": [
+    "BIND_ONE_REAL_EXACT_V8_RUN_TO_A_COMPLETE_POLICY_RELEVANT_WORLD_SET",
+    "REUSE_EXISTING_BRAIN_OWNED_ADEQUACY_RECEIPTS_AND_ONLY_THE_TRUTHFUL_POLICY_CHANGING_DISCRIMINATORS_NEEDED_FOR_A_CONSTRUCTIVE_POLICY_COVER",
+    "INDEPENDENTLY_VERIFY_THE_EXACT_COVER_BYTES_AND_POSITIVE_ROUTE",
+    "REPLAY_R12_GENERATOR_CLOSURE_ADAPTER_TO_CLOSE_C8_AND_CC_R3",
+    "BIND_R4_TO_THE_SAME_EXACT_SUBJECT_AND_WITNESS",
+    "ONLY_THEN_PROMOTE_R12_SEMANTIC_PROPERTY_TRUTH_AND_PROPAGATE_THE_PATTERN_TO_THE_OTHER_ELEVEN_SEMANTIC_LEAVES"
+  ],
+  "hard_nonclaims": [
+    "NO_V8_C8_OR_CC_R3_CREDIT_FROM_MECHANISM_EXISTENCE_ALONE",
+    "NO_CROSS_SUBJECT_V7_PROPERTY_AUTHORITY_TRANSPORT",
+    "NO_TOTALITY_FROM_FINITE_DEFEATER_CATALOG_OR_EIGHT_CLAUSE_COUNT",
+    "NO_SYNTHETIC_UNIT_TEST_AS_REAL_V8_WITNESS",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "property_truth_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
