@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_ARTIFACT_HARD_DEFECT_PREFLIGHT_INDEPENDENT_VERIFICATION_V1",
+  "date": "2026-10-10",
+  "status": "PASS__FRESH_ISOLATED_SPRITE_EXACT_BYTE_REPLAY__11_OF_11__SOURCE_BOUND_PROFILE_AUTHORITY_ENFORCED__ZERO_BENCHMARK_CREDIT",
+  "subjects": {
+    "runtime": {
+      "path": "canonical/runtime/professional_artifact_hard_defect_preflight_v1.py",
+      "git_blob_sha": "1921ef67ec36ac1847243e99c49f638bf7cc170a"
+    },
+    "tests": {
+      "path": "canonical/tests/test_professional_artifact_hard_defect_preflight_v1.py",
+      "git_blob_sha": "1b22b143339fd10ee245c808fb4a087adebbf110"
+    },
+    "public_example_contract": {
+      "path": "canonical/evidence/AA_BRIEFCASE_LITE_PRESENTATION_PAIRWISE_CONTRACT_MANIFEST_20261007_V1.json",
+      "git_blob_sha": "42920315a5ecb9a1c8fe96a1a441dfd4a2f3b4e8"
+    }
+  },
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-professional-hard-defect-verify-20261010",
+    "sprite_id": "sprite-1bbb86ed-1f7c-409f-8397-fadc4de7a62a",
+    "workspace": "/home/sprite/work",
+    "package_install_performed": false,
+    "incremental_spend_usd": 0
+  },
+  "result": {
+    "py_compile_pass": true,
+    "tests_run": 11,
+    "tests_passed": 11,
+    "tests_failed": 0,
+    "exact_public_manifest_blob_recomputed": true,
+    "caller_custom_check_selection_rejected": true,
+    "unknown_profile_rejected": true,
+    "corrupt_ooxml_fails_closed": true,
+    "xlsx_error_cell_public_subgate_falsification_pass": true,
+    "xlsx_zero_width_public_subgate_falsification_pass": true,
+    "hidden_nonzero_width_column_not_overclassified": true,
+    "pptx_text_outside_slide_bounds_public_subgate_falsification_pass": true,
+    "blank_slide_not_invented_as_public_hard_failure": true,
+    "clean_result_quality_authority": false,
+    "clean_result_target_preference_authority": false
+  },
+  "verified_scope": [
+    "OOXML_PACKAGE_PARSE_INTEGRITY",
+    "DOCX_NONEMPTY_CONTENT_UNDER_BRAIN_SANITY_PROFILE",
+    "XLSX_VISIBLE_WORKSHEET_ERROR_CELL_ZERO_WIDTH_AND_NONEMPTY_OBSERVATION",
+    "PPTX_SLIDE_PRESENCE_AND_TOP_LEVEL_TEXT_OBJECT_BOUNDARY_OBSERVATION",
+    "FROZEN_PROFILE_SELECTION",
+    "EXACT_AA_BRIEFCASE_LITE_W1_T2_AND_W1_T3_PUBLIC_EXAMPLE_SUBGATES"
+  ],
+  "hard_nonclaims": [
+    "NO_COMPLETE_PROFESSIONAL_PRESENTATION_UTILITY",
+    "NO_HOLISTIC_STYLE_ADEQUACY",
+    "NO_GENERAL_OVERLAP_OR_CLIPPING_DETECTION",
+    "NO_PDF_AUDIO_VIDEO_SCOPE",
+    "NO_PRIVATE_AA_BRIEFCASE_MEMBERSHIP_OR_SCORE_CREDIT",
+    "NO_GDPVAL_OWNER_ELO_CREDIT",
+    "NO_ACCEPTANCE_FAMILY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "promotion_authority": false,
+  "terminal_authority": false
+}
