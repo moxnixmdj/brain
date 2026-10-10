@@ -1,0 +1,29 @@
+{
+  "schema": "PROJECT_BRAIN_R2_TRUTH_NEXT_INFORMATION_REQUEST_VERIFY_V1",
+  "status": "PASS__REGCAP_SEMANTIC_TRUTH_SURFACES_TYPED_NEXT_INFORMATION_REQUEST",
+  "merge_commit": "3b6edb369357ecf61b50140f38f7eeab9f0ec303",
+  "exact_blob_shas": {
+    "canonical/runtime/regcap_loss_cushion_truth_certificate_v5.py": "657d5c04bba76cf1806e12ae1e29df2c79b3a8cc",
+    "canonical/tests/test_regcap_loss_cushion_truth_certificate_v5.py": "0dba70a9094e9c2f1241382205bd7676611e97f7",
+    "canonical/runtime/semantic_truth_dispatch_v1.py": "1c70deffb9657b067a70fade6051d269df43ab32",
+    "canonical/tests/test_semantic_truth_dispatch_regcap_loss_v5.py": "7793cf5617b01ff1419bff284f315a83aac88b2d"
+  },
+  "verified_behavior": {
+    "unresolved_actionable_truth_exposes_next_information_request": true,
+    "next_required_edge": "REGCAP_LOSS_CUSHION_MINIMUM_POLICY_CHANGING_INFORMATION",
+    "fixed_point_compatible_field_name": "next_information_request",
+    "resolved_truth_unchanged": true,
+    "unrelated_dispatch_families_unchanged": true,
+    "semantic_truth_authority_granted_by_request": false,
+    "terminal_authority": false
+  },
+  "execution_receipts": {
+    "truth_and_dispatch_test_suites": "PASS__11_OF_11",
+    "python_compile": "PASS__ALL_TOUCHED_RUNTIME_AND_TEST_FILES"
+  },
+  "credit": {
+    "finance_semantic_tail_closed": false,
+    "global_open_world_closure_delta": false,
+    "terminal_credit_delta": 0
+  }
+}
