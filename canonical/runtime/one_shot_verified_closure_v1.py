@@ -268,6 +268,10 @@ def frontier_snapshot(
                     "required_capability_class": payload.get(
                         "required_capability_class"
                     ),
+                    "blocked_success_work_id": payload.get(
+                        "blocked_success_work_id"
+                    ),
+                    "observation_id": payload.get("observation_id"),
                 },
             })
     files = [_safe_file_digest(root, rel) for rel in LOAD_BEARING_PATHS]
