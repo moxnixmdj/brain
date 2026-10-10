@@ -230,62 +230,29 @@ def compile_context(
             str(canonical.get("observation_id") or ""),
             str(canonical.get("outcome") or ""),
         )
-        candidate = _SIGNATURES.get(key)
-        if candidate is None:
+        matrix_row = matrix.OBSERVATIONS.get(key[0])
+        if not isinstance(matrix_row, Mapping):
             return _base(
-                "OPEN__CANONICAL_OBSERVATION_OUTSIDE_DESCRIPTOR_SIGNATURE_SCOPE",
-                source_id=source_id,
-                source_text_sha256=_sha(source_text),
-                descriptor_span=[start, end],
-                sentence_span=[s0, s1],
-                sentence=sentence,
+                "FAIL_CLOSED",
+                reason="CANONICAL_OBSERVATION_ID_NOT_IN_MATRIX_SCHEMA",
+                canonical_projection=canonical,
+            )
+        matching_candidates = sorted(
+            cid for cid, outcome in matrix_row.items()
+            if outcome == key[1]
+        )
+        if not matching_candidates:
+            return _base(
+                "FAIL_CLOSED",
+                reason="CANONICAL_OUTCOME_NOT_IN_MATRIX_SCHEMA",
                 canonical_projection=canonical,
             )
 
         observed: list[dict[str, Any]] = [{
             "observation_id": key[0],
             "outcome": key[1],
-            "relative_candidate_id": candidate,
+            "relative_candidate_ids": matching_candidates,
         }]
-
-        by_observation: dict[str, set[str]] = {}
-        for row in observed:
-            by_observation.setdefault(row["observation_id"], set()).add(row["outcome"])
-        conflicts = {
-            oid: sorted(values)
-            for oid, values in by_observation.items()
-            if len(values) > 1
-        }
-        if conflicts:
-            return _base(
-                "FAIL_CLOSED",
-                reason="CONFLICTING_CONTEXT_SIGNATURES",
-                conflicts=conflicts,
-                source_id=source_id,
-                source_text_sha256=_sha(source_text),
-                sentence_span=[s0, s1],
-                sentence=sentence,
-            )
-
-        candidate_ids = sorted({row["relative_candidate_id"] for row in observed})
-        if len(candidate_ids) > 1:
-            return _base(
-                "FAIL_CLOSED",
-                reason="CROSS_OBSERVATION_CONTEXT_SIGNATURE_CONFLICT",
-                relative_candidate_ids=candidate_ids,
-                observations=observed,
-                sentence_span=[s0, s1],
-            )
-
-        if not observed:
-            return _base(
-                "OPEN__NO_BOUND_CONTEXT_SIGNATURE",
-                source_id=source_id,
-                source_text_sha256=_sha(source_text),
-                descriptor_span=[start, end],
-                sentence_span=[s0, s1],
-                sentence=sentence,
-            )
 
         return _base(
             "PASS__BOUND_CONTEXT_SIGNATURES_COMPILED",
@@ -297,12 +264,18 @@ def compile_context(
             sentence_span=[s0, s1],
             sentence=sentence,
             observations=observed,
-            relative_candidate_hint=candidate_ids[0],
+            relative_candidate_hint=(
+                matching_candidates[0]
+                if len(matching_candidates) == 1
+                else None
+            ),
+            relative_candidate_hint_candidates=matching_candidates,
             relative_selection_authority=False,
             boundary=(
                 "EXACT_DESCRIPTOR_PLUS_CANONICAL_ASSERTION_COMPLETE_OBSERVATION_PROJECTION_ONLY__"
-                "OBSERVATIONS_HAVE_SOURCE_ALIGNED_SEMANTIC_AUTHORITY__"
-                "CANDIDATE_ID_IS_A_HINT_UNTIL_AUTHENTICATED_MATRIX_REPLAY"
+                "CANDIDATE_HINTS_ARE_DERIVED_FROM_THE_BOUND_MATRIX_SCHEMA__"
+                "NO_DUPLICATE_LOCAL_OBSERVATION_VOCABULARY__"
+                "SELECTION_REQUIRES_AUTHENTICATED_MATRIX_REPLAY"
             ),
         )
     except Exception as exc:
