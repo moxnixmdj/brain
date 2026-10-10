@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V10",
+  "date": "2026-10-10",
+  "status": "ACTIVE_PRIMARY_POST_COMPOSITION_PARALLEL_FRONTIER_SCHEDULER__INTERVAL_ROBUST_CORE_REUSED__SOURCE_CURRENTNESS_FAIL_CLOSED__READ_ONLY_EVIDENCE_PARALLELISM_READY__FULL_EXECUTION_FAIL_CLOSED__ZERO_CREDIT",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "supersedes": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V9.json",
+  "primary_runtime": {
+    "path": "canonical/runtime/capability_parallel_frontier_post_composition_v1.py",
+    "git_blob_sha": "3eaba90481f677bb6be0c568d42bbf95f44c6f4f",
+    "entrypoint": "plan_current_post_composition_frontier"
+  },
+  "interval_core": {
+    "path": "canonical/runtime/capability_parallel_frontier_v2.py",
+    "git_blob_sha": "209d8d11494645432354636a3dc17e7b515abaf8",
+    "independent_verification_path": "canonical/verification/CAPABILITY_PARALLEL_FRONTIER_V10_INTERVAL_ROBUST_VERIFY_20261010_V1.json",
+    "independent_verification_git_blob_sha": "a0568e6aff736462f359d1c222c0ac519bc6482a"
+  },
+  "current_frontier": {
+    "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
+    "git_blob_sha": "99d06f3936b474ef82d2425d089751a465c5e8ab",
+    "frontier_id": "LIVE_WORK_FRONTIER_20261010_PROF12_COMPOSED_V12"
+  },
+  "adapter_verification": {
+    "path": "canonical/verification/POST_COMPOSITION_FRONTIER_ADAPTER_VERIFY_20261010_V1.json",
+    "git_blob_sha": "7f691a6834673a610aeaa3f95a722671f5c761df"
+  },
+  "phase_boundary": {
+    "professional_root_bindings_verified": 12,
+    "professional_root_bindings_required": 12,
+    "same_subject_composition_admissible": true,
+    "sequential_root_dynamic_refresh_required": false,
+    "next_professional_class": "WHOLE_LEAF_SCOPE_TRANSPORT__DOMAIN_SEMANTIC_EXECUTION_EVIDENCE__FULL_CURRENT_MAIN_REGRESSION"
+  },
+  "authority": {
+    "read_only_evidence_plan_authority": true,
+    "full_execution_plan_authority": false,
+    "execution_authority": false,
+    "promotion_authority": false,
+    "terminal_authority": false
+  },
+  "hard_nonclaims": [
+    "NO_COMPLETE_COMMON_CALIBRATED_VECTOR",
+    "NO_GLOBAL_RANK_ONE_CLAIM",
+    "NO_FULL_EXECUTION_DISPATCH_AUTHORITY",
+    "NO_PROFESSIONAL_GLOBAL_LEAF_OR_DOMAIN_CLOSURE",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
