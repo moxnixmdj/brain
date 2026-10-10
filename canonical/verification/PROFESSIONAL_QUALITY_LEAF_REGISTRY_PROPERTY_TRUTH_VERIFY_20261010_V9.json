@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_LEAF_REGISTRY_PROPERTY_TRUTH_VERIFY_20261010_V9",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_SPRITE__ALL_12_EXECUTION_LEAVES__12_OF_24_DERIVABLE__ZERO_SEMANTIC_OR_GLOBAL_AUTHORITY",
+  "repository": "moxnixmdj/brain",
+  "subject": {
+    "binder_runtime": {
+      "path": "canonical/runtime/professional_quality_leaf_binder_v2.py",
+      "git_blob_sha": "b1747ee991539e01cbd0f661bc840e1e5a84b170"
+    },
+    "registry": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_LEAF_EVIDENCE_REGISTRY_20261010_V2.json",
+      "git_blob_sha": "7b1d50e7d89d4e15d013ec91801766a8b709b663"
+    },
+    "registry_test": {
+      "path": "canonical/tests/test_professional_quality_leaf_registry_property_truth_v1.py",
+      "git_blob_sha": "f5b082ab7d15bedf5bd5fa3fa1552b29bbd652a5"
+    },
+    "r5_receipt": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R5_EXECUTION_LEAF_RECEIPT_20261010_V1.json",
+      "git_blob_sha": "9375cf8a11e418a2269a960f27e012b73145faf6"
+    },
+    "r5_property_verification": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R5_EXECUTION_PROPERTY_TRUTH_INDEPENDENT_VERIFY_20261010_V1.json",
+      "git_blob_sha": "0e2e02313594563118498cbe41c23e4251208d6f"
+    }
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/r9-registry-integration-v1",
+    "py_compile": "PASS",
+    "tests_run": 2,
+    "tests_passed": 2,
+    "tests_failed": 0,
+    "direct_registry_v2_eval": {
+      "existing_evidence_current": true,
+      "structural_errors": [],
+      "rejected_receipt_count": 0,
+      "verified_execution_leaf_count": 12,
+      "verified_semantic_leaf_count": 0,
+      "verified_leaf_count": 12,
+      "open_leaf_count": 12,
+      "promotion_ready": false,
+      "pass": false,
+      "terminal_authority": false
+    },
+    "candidate_replay_sha256": "93d7b49f753420d54d69aa6479ab47b885877222cc1021a838978c8a005b3369"
+  },
+  "consequence": [
+    "ALL_12_EXECUTION_LEAVES_DERIVE_FROM_SCOPE_MATCHED_CONTENT_ADDRESSED_RECEIPTS",
+    "R5_EXECUTION_IS_ADDED_WITH_ZERO_REJECTED_RECEIPTS",
+    "ALL_12_SEMANTIC_LEAVES_REMAIN_OPEN",
+    "NO_ROOT_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "hard_nonclaims": [
+    "NO_SEMANTIC_LEAF_CLOSURE",
+    "NO_24_OF_24_PROPERTY_TRUTH",
+    "NO_GLOBAL_DOMAIN_SEMANTIC_CLOSURE",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
