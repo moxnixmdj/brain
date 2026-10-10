@@ -26,9 +26,12 @@ from typing import Any, Mapping
 SCHEMA = "PROJECT_BRAIN_R2_DIRECT_ROUTE_DYNAMIC_ADMISSION_V1"
 CANDIDATE_SCHEMA = "PROJECT_BRAIN_R2_DIRECT_ROUTE_DEPLOYMENT_CANDIDATE_V1"
 RECEIPT_SCHEMA = "PROJECT_BRAIN_R2_DIRECT_ROUTE_DEPLOYMENT_INDEPENDENT_RECEIPT_V1"
+NONINTERFERENCE_SCHEMA = "PROJECT_BRAIN_R2_DIRECT_ROUTE_NONINTERFERENCE_VERIFY_V1"
+NONINTERFERENCE_PROOF_CLASS = "PROVED_DISJOINT_FROM_CURRENT_DEFAULT_LIVE_MATCH_DOMAIN_V1"
 MANIFEST_SCHEMA = "PROJECT_BRAIN_R2_DIRECT_ROUTE_DYNAMIC_ADMISSIONS_V1"
 POINTER_SCHEMA = "PROJECT_BRAIN_CURRENT_R2_DIRECT_ROUTE_DYNAMIC_ADMISSIONS_POINTER_V1"
 SELECTION_CLASS = "UNIQUE_MATCH_REQUIRED"
+LIVE_WRAPPER_PATH = "canonical/runtime/r2_direct_live_admission_v1.py"
 ROOT = Path(__file__).resolve().parents[2]
 CURRENT_POINTER = ROOT / "canonical/governance/CURRENT_R2_DIRECT_ROUTE_ADMISSIONS.json"
 
@@ -213,6 +216,99 @@ def validate_receipt(
     return deepcopy(dict(receipt))
 
 
+def validate_noninterference_verification(
+    root: Path,
+    receipt: Mapping[str, Any],
+    *,
+    candidate_path: str,
+    candidate_blob_sha: str,
+    candidate: Mapping[str, Any],
+    expected_baseline_manifest_git_blob_sha: str | None = None,
+    expected_baseline_route_ids: list[str] | None = None,
+) -> dict[str, Any]:
+    proof_path, proof_sha = _verify_bound_file(
+        root,
+        receipt.get("noninterference_verification_path"),
+        receipt.get("noninterference_verification_git_blob_sha"),
+        prefixes=("canonical/verification/",),
+        label="NONINTERFERENCE_VERIFICATION",
+    )
+    proof = _load_json(root / proof_path)
+    if proof.get("schema") != NONINTERFERENCE_SCHEMA:
+        raise DynamicAdmissionError("NONINTERFERENCE_SCHEMA_INVALID")
+    if proof.get("status") != "INDEPENDENT_PASS__R2_DIRECT_ROUTE_NONINTERFERENCE":
+        raise DynamicAdmissionError("NONINTERFERENCE_STATUS_INVALID")
+
+    live_wrapper = _inside(
+        root,
+        LIVE_WRAPPER_PATH,
+        prefixes=("canonical/runtime/",),
+    )
+    live_wrapper_sha = git_blob_sha(live_wrapper)
+
+    baseline_sha = _sha40(
+        proof.get("baseline_dynamic_manifest_git_blob_sha"),
+        field="BASELINE_DYNAMIC_MANIFEST_GIT_BLOB_SHA",
+    )
+    route_ids = proof.get("baseline_dynamic_route_ids")
+    if (
+        not isinstance(route_ids, list)
+        or any(not isinstance(x, str) or not x for x in route_ids)
+        or route_ids != sorted(set(route_ids))
+    ):
+        raise DynamicAdmissionError("BASELINE_DYNAMIC_ROUTE_IDS_INVALID")
+
+    expected = {
+        "candidate_path": candidate_path,
+        "candidate_git_blob_sha": candidate_blob_sha,
+        "route_id": candidate["route_id"],
+        "runtime_path": candidate["runtime_path"],
+        "runtime_git_blob_sha": candidate["runtime_git_blob_sha"],
+        "baseline_live_wrapper_path": LIVE_WRAPPER_PATH,
+        "baseline_live_wrapper_git_blob_sha": live_wrapper_sha,
+        "proof_class": NONINTERFERENCE_PROOF_CLASS,
+        "legacy_overlap_absent_verified": True,
+        "dynamic_overlap_absent_verified": True,
+        "scope_complete_for_candidate_match_domain": True,
+        "independent_verified": True,
+        "verification_authority_mutated": False,
+        "promotion_authority": False,
+        "terminal_authority": False,
+        "incremental_spend_usd": 0,
+    }
+    for key, value in expected.items():
+        if proof.get(key) != value:
+            raise DynamicAdmissionError(
+                "NONINTERFERENCE_BINDING_MISMATCH:" + key
+            )
+
+    if expected_baseline_manifest_git_blob_sha is not None:
+        expected_sha = _sha40(
+            expected_baseline_manifest_git_blob_sha,
+            field="EXPECTED_BASELINE_DYNAMIC_MANIFEST_GIT_BLOB_SHA",
+        )
+        if baseline_sha != expected_sha:
+            raise DynamicAdmissionError(
+                "NONINTERFERENCE_BASELINE_MANIFEST_STALE"
+            )
+    if expected_baseline_route_ids is not None:
+        expected_ids = sorted(set(str(x) for x in expected_baseline_route_ids))
+        if route_ids != expected_ids:
+            raise DynamicAdmissionError(
+                "NONINTERFERENCE_BASELINE_ROUTE_SET_STALE"
+            )
+
+    return {
+        "verification_path": proof_path,
+        "verification_git_blob_sha": proof_sha,
+        "proof_class": NONINTERFERENCE_PROOF_CLASS,
+        "baseline_dynamic_manifest_git_blob_sha": baseline_sha,
+        "baseline_dynamic_route_ids": route_ids,
+        "baseline_live_wrapper_path": LIVE_WRAPPER_PATH,
+        "baseline_live_wrapper_git_blob_sha": live_wrapper_sha,
+    }
+
+
 def validate_admission_row(root: Path, row: Mapping[str, Any]) -> dict[str, Any]:
     if not isinstance(row, Mapping):
         raise DynamicAdmissionError("ADMISSION_ROW_OBJECT_REQUIRED")
@@ -240,13 +336,24 @@ def validate_admission_row(root: Path, row: Mapping[str, Any]) -> dict[str, Any]
     ):
         raise DynamicAdmissionError("ADMISSION_RECEIPT_BLOB_MISMATCH")
     candidate = validate_candidate(root, _load_json(candidate_file))
-    validate_receipt(
+    receipt = validate_receipt(
         root,
         _load_json(receipt_file),
         candidate_path=candidate_path,
         candidate_blob_sha=candidate_blob,
         candidate=candidate,
     )
+    noninterference = None
+    if row.get("noninterference_policy") is not None:
+        if row.get("noninterference_policy") != "PROVED_DISJOINT_V1":
+            raise DynamicAdmissionError("NONINTERFERENCE_POLICY_INVALID")
+        noninterference = validate_noninterference_verification(
+            root,
+            receipt,
+            candidate_path=candidate_path,
+            candidate_blob_sha=candidate_blob,
+            candidate=candidate,
+        )
     expected = {
         "route_id": candidate["route_id"],
         "capability_id": candidate["capability_id"],
@@ -261,6 +368,15 @@ def validate_admission_row(root: Path, row: Mapping[str, Any]) -> dict[str, Any]
         "active": True,
         "automatic_live_admission": True,
     }
+    if noninterference is not None:
+        expected.update({
+            "noninterference_policy": "PROVED_DISJOINT_V1",
+            "noninterference_verification_path": noninterference["verification_path"],
+            "noninterference_verification_git_blob_sha": noninterference["verification_git_blob_sha"],
+            "noninterference_proof_class": noninterference["proof_class"],
+            "noninterference_baseline_dynamic_manifest_git_blob_sha": noninterference["baseline_dynamic_manifest_git_blob_sha"],
+            "noninterference_baseline_live_wrapper_git_blob_sha": noninterference["baseline_live_wrapper_git_blob_sha"],
+        })
     for key, value in expected.items():
         if row.get(key) != value:
             raise DynamicAdmissionError("ADMISSION_ROW_BINDING_MISMATCH:" + key)
@@ -339,6 +455,8 @@ def compile_admission(
     current_manifest: Mapping[str, Any],
     candidate_path: str,
     receipt_path: str,
+    require_noninterference: bool = False,
+    current_manifest_git_blob_sha: str | None = None,
 ) -> dict[str, Any]:
     root = Path(repo_root).resolve()
     manifest = validate_manifest(root, current_manifest)
@@ -355,7 +473,7 @@ def compile_admission(
     candidate_blob = git_blob_sha(candidate_file)
     receipt_blob = git_blob_sha(receipt_file)
     candidate = validate_candidate(root, _load_json(candidate_file))
-    validate_receipt(
+    receipt = validate_receipt(
         root,
         _load_json(receipt_file),
         candidate_path=candidate_path,
@@ -389,6 +507,24 @@ def compile_admission(
             "terminal_authority": False,
         }
 
+    noninterference = None
+    if require_noninterference:
+        if current_manifest_git_blob_sha is None:
+            raise DynamicAdmissionError(
+                "CURRENT_MANIFEST_GIT_BLOB_SHA_REQUIRED_FOR_NONINTERFERENCE"
+            )
+        noninterference = validate_noninterference_verification(
+            root,
+            receipt,
+            candidate_path=candidate_path,
+            candidate_blob_sha=candidate_blob,
+            candidate=candidate,
+            expected_baseline_manifest_git_blob_sha=current_manifest_git_blob_sha,
+            expected_baseline_route_ids=[
+                str(x["route_id"]) for x in manifest["admissions"]
+            ],
+        )
+
     row = {
         "route_id": route_id,
         "capability_id": candidate["capability_id"],
@@ -408,6 +544,15 @@ def compile_admission(
         "automatic_live_admission": True,
         "collision_policy": "FAIL_CLOSED_ON_ANY_OTHER_DYNAMIC_OR_LEGACY_MATCH",
     }
+    if noninterference is not None:
+        row.update({
+            "noninterference_policy": "PROVED_DISJOINT_V1",
+            "noninterference_verification_path": noninterference["verification_path"],
+            "noninterference_verification_git_blob_sha": noninterference["verification_git_blob_sha"],
+            "noninterference_proof_class": noninterference["proof_class"],
+            "noninterference_baseline_dynamic_manifest_git_blob_sha": noninterference["baseline_dynamic_manifest_git_blob_sha"],
+            "noninterference_baseline_live_wrapper_git_blob_sha": noninterference["baseline_live_wrapper_git_blob_sha"],
+        })
     rows = [deepcopy(dict(x)) for x in manifest["admissions"]] + [row]
     rows.sort(key=lambda x: str(x["route_id"]))
     new_manifest = {
