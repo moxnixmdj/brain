@@ -1,0 +1,96 @@
+{
+  "schema": "PROJECT_BRAIN_R2_MECHANISM_CLOSURE_OPEN_WORLD_FRONTIER_POLICY_20261010_V3",
+  "date": "2026-10-10",
+  "status": "ACTIVE_CANDIDATE__GENERAL_R2_MECHANISM_CLOSED__OPEN_WORLD_EVIDENCE_FRONTIER_WAKE_GATED__MUTABLE_CURRENT_R2_PATH_BOUND__REUSE_FIRST_SCHEDULER_RUNTIME_BOUND",
+  "mission_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "supersedes": "canonical/governance/R2_MECHANISM_CLOSURE_OPEN_WORLD_FRONTIER_POLICY_20261010_V2.json",
+  "binding_law": {
+    "mutable_current_r2": "CANONICAL_PATH_IDENTITY_AUTHORITATIVE__DO_NOT_REQUIRE_FROZEN_BLOB_EQUALITY__RECHECK_REQUIRED_INVARIANTS_AGAINST_CURRENT_BYTES",
+    "immutable_dependencies": "EXACT_GIT_BLOB_SHA_REQUIRED",
+    "reason": "CURRENT_R2_REMAINS_MUTABLE_BY_PATH_IDENTITY_WHILE_THE_MECHANICALLY_ENFORCED_REUSE_FIRST_SCHEDULER_RUNTIME_IS_CONTENT_ADDRESSED"
+  },
+  "sources": {
+    "current_r2": {
+      "path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+      "binding": "MUTABLE_CURRENT_POINTER_PATH_IDENTITY__LIVE_INVARIANTS_RECHECKED",
+      "activation_observed_git_blob_sha": "0f11d0ced7edd1c3f33815ad5ef669ea54348fb4",
+      "activation_observed_version": "V76",
+      "activation_observed_blob_is_load_bearing": false
+    },
+    "adequate_decision_controller": {
+      "path": "canonical/runtime/general_adequate_decision_controller_v1.py",
+      "git_blob_sha": "b0cab3da36d89af202d6a95aa80701ad61372001"
+    },
+    "adequate_decision_fixed_point": {
+      "path": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
+      "git_blob_sha": "cabe3bd1ec3748a595f3a959718c38accdacfb2f"
+    },
+    "one_shot_v1": {
+      "path": "canonical/runtime/one_shot_verified_closure_v1.py",
+      "git_blob_sha": "605fe5a36e26aef51f93c4a5b3e43483abea2c19"
+    },
+    "one_shot_v2": {
+      "path": "canonical/runtime/one_shot_reality_closure_v2.py",
+      "git_blob_sha": "b8347a3993f96aa5e6fa2f1fe68d7c8afccb8bec"
+    },
+    "capability_first_scheduler": {
+      "path": "canonical/runtime/capability_first_scheduler_v1.py",
+      "git_blob_sha": "5f695b269d291c47656b2827064d15f3fb7edcf4"
+    }
+  },
+  "required_current_r2_invariants": {
+    "status_contains": "GENERAL_MECHANISM_CLOSED",
+    "general_mechanism_missing": false,
+    "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
+    "primary_internal_cell_state": "INTERNAL_UNSOLVED__PENDING_ACQUISITION_OR_EXPERIMENT",
+    "primary_internal_unsolved_count": 1,
+    "information_theoretic_externality_proved": false,
+    "global_open_world_closure_claimed": false
+  },
+  "verified_architecture_truth": {
+    "task_local_controller_emits_minimum_information_requests": true,
+    "task_local_controller_can_use_information_provider_then_reverify": true,
+    "fixed_point_reenters_verified_controller_after_repair": true,
+    "one_shot_preserves_structured_r2_acquisition_requests": true,
+    "one_shot_minimum_information_contract_forbids_broad_acquisition_without_minimality_proof": true
+  },
+  "classification": {
+    "r2_general_control_mechanism": "SUFFICIENTLY_CLOSED_FOR_CAPABILITY_FIRST_SCHEDULING_WHILE_REQUIRED_CURRENT_R2_INVARIANTS_HOLD",
+    "finance_global_residual": "OPEN_WORLD_EVIDENCE_FRONTIER__WAKE_GATED__NOT_GLOBAL_MECHANISM_FAILURE_BY_EXISTENCE_ALONE",
+    "why": "The live task-local R2 loop can preserve unknown semantics, select a minimum policy-changing discriminator, acquire task-local information through a zero-authority provider, and rerun verified decision authority. Global completion of every future finance meaning/source/ontology case is therefore not a prerequisite for unrelated useful capability development."
+  },
+  "scheduler_rule": {
+    "frontier_class": "OPEN_WORLD_EVIDENCE_FRONTIER",
+    "default_eligibility": "DEMOTED_OPEN_WORLD_EVIDENCE_FRONTIER_WITHOUT_CURRENT_CAPABILITY_DEFECT",
+    "wake_if_any": [
+      "TASK_LOCAL_COUNTEREXAMPLE_BOUND",
+      "INDEPENDENTLY_VERIFIED_CAPABILITY_DEFECT_BOUND"
+    ],
+    "wake_does_not_grant_truth": true,
+    "wake_does_not_grant_capability_credit": true,
+    "concrete_failure_may_outrank_other_work_under_normal_capability_resource_scoring": true
+  },
+  "shared_cause_residual_ledger": {
+    "pointer": "canonical/governance/CURRENT_R2_SHARED_CAUSE_RESIDUAL_LEDGER.json",
+    "runtime": "canonical/runtime/r2_semantic_residual_ledger_v1.py",
+    "role": "CLASSIFY_CURRENT_RESIDUALS_AND_BREAK_EQUAL_PRIMARY_CAPABILITY_TIES_BY_DISTINCT_CLAUSE_FANOUT",
+    "open_world_wake_gate_preserved": true
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_GLOBAL_FINANCE_SEMANTICS_ARE_CLOSED",
+    "NO_CLAIM_OPEN_WORLD_ONTOLOGY_MAPPING_IS_SOLVED",
+    "NO_CLAIM_INFORMATION_THEORETIC_EXTERNALITY_FOR_THE_FINANCE_TAIL",
+    "NO_CLAIM_TASK_LOCAL_INFORMATION_PROVIDER_OUTPUT_HAS_SEMANTIC_AUTHORITY",
+    "NO_CLAIM_R2_CAN_SUCCEED_ON_EVERY_FUTURE_TASK_WITHOUT_NEW_INFORMATION",
+    "NO_MUTABLE_CURRENT_R2_BLOB_SHA_IS_TREATED_AS_IMMUTABLE_AUTHORITY",
+    "NO_OPUS_CHECKPOINT_ACCEPTANCE_OR_TERMINAL_CREDIT",
+    "NO_NEW_PRIMITIVE_AUTHORITY_FROM_REUSE_FIRST_ADMISSION_ALONE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
