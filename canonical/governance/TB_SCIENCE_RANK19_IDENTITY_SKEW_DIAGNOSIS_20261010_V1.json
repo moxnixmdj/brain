@@ -1,0 +1,22 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK19_IDENTITY_SKEW_DIAGNOSIS_V1",
+  "date": "2026-10-10",
+  "status": "PROVED_PRESTART_TRANSPORT_VERSION_SKEW",
+  "public_runner_head": "a388f5be1aefb962f6e238a1ae91fa3aef5ddcbd",
+  "agent_v13_blob": "8deede8adb960b6ebf7ee747a5e9ff1016238b7e",
+  "runner_v7_blob": "7165b58a2f8d3617adde15cccbe5bff23a5f968b",
+  "identity_v1_blob": "6d29ac6a30e7094feb673147802aaecdf391fff0",
+  "identity_v2_blob": "67ff638459af1bb50a094e9479fb4aa5e2a3de1c",
+  "cause": "RUNNER_CARRIES_V2_CLAIM_BOUND_ID__AGENT_V13_RECOMPUTES_V1_SLOT_TASK_ONLY_ID",
+  "v1_expected_id": "def7e2921acf58d4ef03e3183512996c718a5a13069482cb825464c0c963a8b4",
+  "v2_carried_id": "a3672b9d77c8fa0b7d3f0610ac2c008d2888e566d8a75ac92aa7078c1523abe6",
+  "ids_equal": false,
+  "observed_exception": "BRAIN_LOGICAL_ATTEMPT_ID_MISMATCH",
+  "occurs_before_agent_ready": true,
+  "occurs_before_start_cas": true,
+  "science_capability_failure": false,
+  "required_repair": "ADAPT_AGENT_IDENTITY_VALIDATION_TO_V2_CLAIM_BOUND_IDENTITY__VERIFY_OFFLINE__DO_NOT_RERUN_RANK19",
+  "retry_authority": false,
+  "replacement_authority": false,
+  "terminal_credit_delta": 0
+}
