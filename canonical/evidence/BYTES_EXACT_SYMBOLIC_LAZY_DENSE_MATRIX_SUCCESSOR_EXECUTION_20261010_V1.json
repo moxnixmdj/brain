@@ -1,0 +1,110 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_LAZY_DENSE_MATRIX_SUCCESSOR_EXECUTION_V1",
+  "status": "FRESH_SUCCESSOR_EXECUTION__NEW_MATRIX_DEPENDENCY_BYTE_FRONTIER__ZERO_PROMOTION_CREDIT",
+  "recorded_at": "2026-10-10",
+  "mission": "Minimum resource-feasible executable description conditional on already-owned Brain substrate.",
+  "governing_laws": [
+    "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V1.md",
+    "canonical/laws/BYTES_RESOURCE_BOUNDED_MINIMUM_MECHANISM_LAW_V1.md"
+  ],
+  "predecessor": {
+    "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_LAZY_ALGEBRAICFIELD_SUCCESSOR_EXECUTION_20261010_V1.json",
+    "package_raw_python_source_bytes": 6474730,
+    "B_exec_raw_python_source_bytes": 6477490,
+    "fresh_qualification": "3450/3450"
+  },
+  "structural_cut": {
+    "id": "MATRIX_DDM_DENSE_BRANCH_LOCAL_IMPORT_BOUNDARY",
+    "files_modified": [
+      "sympy/polys/matrices/sdm.py",
+      "sympy/polys/matrices/rref.py",
+      "sympy/polys/matrices/domainmatrix.py",
+      "sympy/matrices/determinant.py"
+    ],
+    "change": "Move DDM and dense-kernel imports into actual dense/list conversion, dense-RREF, and Bird-determinant branches.",
+    "causal_reason": "DDM and dense kernel functions executed zero times across the full spent NEXT6 profiling surface. A final hidden eager DDM edge came from the standard Matrix Bird determinant implementation.",
+    "physically_removed_files": [
+      [
+        "sympy/polys/matrices/ddm.py",
+        32362
+      ],
+      [
+        "sympy/polys/matrices/dense.py",
+        23217
+      ],
+      [
+        "sympy/polys/matrices/lll.py",
+        3550
+      ],
+      [
+        "sympy/polys/matrices/_typing.py",
+        407
+      ]
+    ],
+    "removed_file_source_bytes": 59536,
+    "net_package_reduction_bytes": 59230,
+    "polys_loaded_source_reduction_bytes": 59234,
+    "donor_branches_preserved": "Dense/list conversions, dense RREF and Bird determinant retain local imports and original donor implementations."
+  },
+  "measured_candidate": {
+    "status": "PHYSICALLY_DELETED_RESEARCH_CANDIDATE__NOT_PROMOTED",
+    "python_files": 291,
+    "package_raw_python_source_bytes": 6415500,
+    "router_raw_python_source_bytes": 2760,
+    "B_exec_raw_python_source_bytes": 6418260,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "package_manifest_sha256": "75d6a2c014055b856c14722d15db87016f2bd96b6397cfedc5c65fe51a24b232",
+    "raw_improvement_vs_immediate_predecessor_bytes": 59230,
+    "polys_loaded_trace_raw_python_source_bytes": 1321405
+  },
+  "qualification": {
+    "exploratory_calibration": "1150/1150",
+    "spent_NEXT7_precheck": "3450/3450",
+    "fresh_NEXT8": {
+      "id": "QUAL_SUCCESSOR_NEXT8_20261010_V1",
+      "seed": 2828427,
+      "per_operation_budget": 320,
+      "cases": 3680,
+      "corpus_sha256": "609e173869fda62ec19ac634fc84f2b0b3d110a30d0b3851ed80870038bffc95",
+      "stock_donor_positive_control": "3680/3680",
+      "physical_candidate": "3680/3680",
+      "independent_copy_replay": "3680/3680",
+      "extracted_archive_replay": "3680/3680",
+      "status": "SPENT_ONCE_AS_FRESH_CANDIDATE_QUALIFICATION"
+    },
+    "orchestration_note": "A combined donor+candidate shell command exhausted the outer command window after the donor pass; standalone candidate execution completed 3680/3680 in about 16 seconds."
+  },
+  "comparable_storage_measurement": {
+    "recipe": "tar source tree excluding __pycache__/*.pyc; sorted names; epoch mtime; uid/gid 0; numeric owner; xz -6e -T1",
+    "predecessor_same_recipe_bytes": 1123864,
+    "successor_same_recipe_bytes": 1114444,
+    "successor_sha256": "4303ecf33d9a1bde59219ce678d10ae6be87c6b955081968498f96342efd756a",
+    "improvement_bytes": 9420
+  },
+  "reproducibility": {
+    "predecessor_reconstruction": "canonical/research/bytes/tools/rebuild_candidate_v6.py",
+    "successor_reconstruction": "canonical/research/bytes/tools/rebuild_candidate_v7.py",
+    "route": "canonical/research/bytes/tools/exact_symbolic_route_v1.py",
+    "semantic_digest": "canonical/research/bytes/tools/semantic_digest_v1.py",
+    "qualification_generator": "canonical/research/bytes/tools/generate_qualification_v1.py",
+    "loaded_trace_tool": "canonical/research/bytes/tools/trace_loaded_v1.py",
+    "physical_slice_tool": "canonical/research/bytes/tools/build_physical_slice_v1.py",
+    "qualification_runner": "canonical/research/bytes/tools/run_qualification_v1.py"
+  },
+  "next_frozen_qualification": {
+    "id": "QUAL_SUCCESSOR_NEXT9_20261010_V1",
+    "seed": 3000001,
+    "per_operation_budget": 340,
+    "cases": 3910,
+    "corpus_sha256": "f3188c665af2c22aee80ad8293e6869198f9d1fa5df5d64d0c71972ff61387fd",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_STRUCTURAL_CUT"
+  },
+  "truth_boundary": [
+    "MEASURED: the 6,415,500-byte physical package passes fresh NEXT8 3,680/3,680 on donor, candidate, independent copy replay and extracted archive replay.",
+    "MEASURED: branch-local DDM/dense imports physically remove four files and reduce package source by 59,230 bytes.",
+    "MEASURED: same-procedure compressed source storage falls by 9,420 bytes.",
+    "NOT CLAIMED: all dense-matrix/Bird/LLL behavior without invoking the preserved local branches, universal SymPy correctness, absolute information-theoretic minimality, or Opus-family promotion.",
+    "PROMOTION CREDIT: 0."
+  ],
+  "next_action": "Rerank the remaining loaded closure using spent NEXT8/NEXT7 only. Do not touch NEXT9 until a new physical structural cut is frozen."
+}
