@@ -1,0 +1,185 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK17_V6_IRREVERSIBLE_RESULT_TRUTH_20261010_V1",
+  "date": "2026-10-10",
+  "status": "FINAL_ZERO__INDEPENDENT_VERIFIER_REWARD_ZERO__EXECUTION_ROBUSTNESS_HELD__PREMATURE_SUBMISSION_AFTER_LOSSY_MATERIAL_REQUIREMENT_CLOSURE__RANK17_IRREVERSIBLY_CONSUMED__ZERO_ACCEPTANCE_CREDIT",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "slot": {
+    "id": "terminal-bench-science/variable-star-vetting::trial-0",
+    "ledger_schedule_rank": 17,
+    "frozen_manifest_schedule_order": 16,
+    "task_rank": 16,
+    "task_name": "terminal-bench-science/variable-star-vetting",
+    "digest": "sha256:51bf2b9d8e87a428772d92c6765d83ad3edc7c24283d2ff75af5f050aaee0c67"
+  },
+  "frozen_manifest": {
+    "manifest_git_blob_sha": "e0318f4fcde040498077dcdd872e398e32240791",
+    "verification_path": "canonical/verification/TB_SCIENCE_210_SLOT_MANIFEST_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "verification_git_blob_sha": "e9bca17092cecbb7d2611d5c081bae8336c2083f"
+  },
+  "public_execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "activation_pull_request": 2540,
+    "workflow_run_id": 38024152007,
+    "workflow_job_id": 114131300523,
+    "artifact_id": 11659272369,
+    "artifact_zip_sha256": "9d10376279742fc735b3e787f11257167623f2775926f66da596fd7f4d1cb856",
+    "activation_head_sha": "34d110dad75bbb421300e11605a969bdde90388b",
+    "github_run_sha": "98bee5fda8a53fcdefa329732dbb6ee608ee750d",
+    "run_attempt": 1,
+    "workflow_conclusion": "success",
+    "harbor_step_outcome": "success",
+    "activation_pr_closed_unmerged": true,
+    "incremental_spend_usd": 0
+  },
+  "exact_prestart_measurement": {
+    "guard_status": "PASS__RANK17_V4_SLOT_BOUND_IDENTITY__MAXIMAL_RESERVED_CYCLE0_CORE_FITS__TASK_NOT_STARTED",
+    "guard_pass": true,
+    "logical_attempt_id": "c2096eb47a6965cd763619d45fbae639bd4d9c5f615889009f8ed946f209a3dc",
+    "instruction_sha256": "718cc18a482846385125d92882426bd1c1abf8732d3fd95982698a8751649c18",
+    "first_cycle_prompt_sha256": "179b3e44a8589ab47181c9b1bc0977f3ef041978e9f5c159ffd6426f8f184225",
+    "prestart_raw_task_obligation_count": 20,
+    "input_tokens": 2881,
+    "reserved_completion_tokens": 4096,
+    "required_context_tokens": 6977,
+    "server_context_tokens": 16384,
+    "context_headroom_tokens": 9407
+  },
+  "durable_start_truth": {
+    "start_cas_acquired": true,
+    "start_status": "PASS__AGENT_READY_BOUND_START_COMMITTED__IRREVERSIBLE_SLOT_START",
+    "durable_record_sha256": "4340f5e07123660b5a24685a5fde7e24504a0966033e1229705fdca01dc5813b",
+    "logical_attempt_id": "c2096eb47a6965cd763619d45fbae639bd4d9c5f615889009f8ed946f209a3dc",
+    "runtime_identity_sha256": "06e71e0fe2448e2d5e12ca63f63c088b419a3537c9c08ffcadfd9eddf45eb0f8",
+    "task_started": true,
+    "benchmark_trials_consumed": 1,
+    "replay_authority": false,
+    "replacement_carrier_authority": false,
+    "github_credentials_exposed_to_harbor": false,
+    "causal_journal_requests_committed": 5
+  },
+  "execution_truth": {
+    "task_read": true,
+    "task_started": true,
+    "execution_authority_consumed": true,
+    "benchmark_trials_consumed": 1,
+    "reward": 0,
+    "receipt_status": "FINAL_ZERO",
+    "controller_status": "SUBMISSION_READY__RAW_TASK_ACCEPTANCE_PENDING_EXTERNAL_INDEPENDENT_VERIFIER",
+    "controller_cycles": 1,
+    "raw_task_required_obligation_count": 18,
+    "raw_task_semantic_residual_obligation_count": 18,
+    "material_requirements": [
+      "task_01"
+    ],
+    "resolved_requirements": [
+      "task_01"
+    ],
+    "brain_mandated_deliverables": {},
+    "raw_task_acceptance_receipts_present": false,
+    "task_completion_claimed": false,
+    "action_count": 1,
+    "coverage_promoted_count": 1,
+    "independent_verifier_result_present": true,
+    "verifier_environment_mode": "separate",
+    "verifier_failure_detail": "required artifact /root/results/output.csv absent; four output-scoring tests errored on missing file",
+    "rerun_authority": false,
+    "promotion_authority": false,
+    "result_hashes": {
+      "slot_receipt_v6": "df89577dda2b2350aab0a3cd0b1d8b3106c766b40e8dd20a115d958821e1e4eb",
+      "runner_receipt": "0bd399978eb0d0e37e40850d632f57ba2f560ada89cdc9f1be40e88a5b5af918",
+      "job_result": "e1059a5dfac29a87a04e5f8b33b645ebeec170b753a4c9a402df4ac468f33a92",
+      "trial_result": "d2deff7a258b81b21419d45492189274927e0ef46d55ee672d584a65c2f8f1ed",
+      "science_trace": "6322d7534b257eef99fa7a6e301e4491243897ce38b3d655449bac304e82a4b0",
+      "reward_txt": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "verifier_stdout": "f008caca3aee59e7a5219bea0567fc5adb11dbc8b324c03bbd48309683b5b356",
+      "verifier_ctrf": "b9a8d0eef49d4c3f66eeb66b14581c5aa534af72252c35fbad34e48b06a3cca7"
+    }
+  },
+  "causal_journal": {
+    "event_count": 5,
+    "sequence_min": 0,
+    "sequence_max": 4,
+    "final_durable_event_sequence": 4,
+    "final_durable_event_kind": "ACTION_VERIFY_STATE_COMMIT",
+    "final_durable_event_sha256": "27b8f9d6b8723ec8d9354382e2785fede9927f3419b9a4381b9475a335a1967f",
+    "rejected_candidate_count": 3,
+    "executed_action_id": "read_data",
+    "action_returncode": 0,
+    "verification_returncode": 0,
+    "verified_covers": [
+      "task_01"
+    ],
+    "execution_robustness_failure": false
+  },
+  "failure": {
+    "root_class": "INTERNAL_MATERIAL_REQUIREMENT_COVERAGE_COLLAPSE_AND_PREMATURE_SUBMISSION_READINESS",
+    "evidence": [
+      "EIGHTEEN_RAW_TASK_SEMANTIC_RESIDUAL_OBLIGATIONS_WERE_PRESERVED_BUT_COMPRESSED_TO_ONE_PLANNER_MATERIAL_REQUIREMENT",
+      "THE_SINGLE_MATERIAL_REQUIREMENT_WAS_RESOLVED_BY_LISTING_THE_100_INPUT_FILES",
+      "RAW_TASK_ACCEPTANCE_RECEIPTS_REMAINED_ABSENT",
+      "BRAIN_MANDATED_DELIVERABLES_WAS_EMPTY_DESPITE_TASK_AUTHORITY_DECLARING_/root/results/output.csv",
+      "AGENT_RETURNED_SUBMISSION_READY_AFTER_ONE_CYCLE",
+      "INDEPENDENT_VERIFIER_FOUND_/root/results/output.csv_ABSENT_AND_RETURNED_REWARD_ZERO",
+      "CARRIER_CONTEXT_START_CAS_JOURNAL_EFFECT_AND_VERIFICATION_TRANSPORT_ALL_COMPLETED_SUCCESSFULLY"
+    ],
+    "task_authority_counterexample": {
+      "upstream_repository": "harbor-framework/terminal-bench-science",
+      "task_toml_path": "tasks/physical-sciences/astronomy/variable-star-vetting/task.toml",
+      "declared_artifacts": [
+        "/root/results/output.csv"
+      ],
+      "instruction_form": "Save the results to a file named /root/results/output.csv",
+      "significance": "AUTHORITATIVE_ARTIFACT_EXISTED_BUT_V11_DID_NOT_BIND_IT_INTO_FINISH_GATE"
+    },
+    "context_capacity_failure": false,
+    "carrier_failure": false,
+    "transport_replay_failure": false,
+    "effect_journal_failure": false,
+    "external_information_failure": false
+  },
+  "exact_repair_requirement": {
+    "invariant": "SUBSTRATE_MATERIAL_REQUIREMENT_CLOSURE_MAY_NEVER_BYPASS_AUTHORITATIVE_TASK_ARTIFACT_POSTCONDITIONS_OR_RAW_TASK_ACCEPTANCE_SCOPE",
+    "required_behavior": [
+      "BIND_AUTHORITATIVE_TASK_ARTIFACT_PATHS_INTO_BRAIN_FINISH_POSTCONDITIONS_BEFORE_AGENT_EXECUTION",
+      "ALLOW_BRAIN_OWNED_POSTCONDITION_CHECKS_FOR_SAFE_TASK_AUTHORITATIVE_ABSOLUTE_ARTIFACT_PATHS_NOT_ONLY_/app",
+      "PARSE_COMMON_EXPLICIT_OUTPUT_FORMS_SUCH_AS_SAVE_RESULTS_TO_A_FILE_NAMED_PATH_AS_A_FAIL_CLOSED_FALLBACK_NOT_PRIMARY_AUTHORITY",
+      "IF_MATERIAL_REQUIREMENTS_ARE_RESOLVED_BUT_ANY_AUTHORITATIVE_ARTIFACT_POSTCONDITION_FAILS_CONTINUE_COGNITION_AND_ALLOW_DISTINCT_REPAIR_ACTIONS",
+      "DO_NOT_TREAT_RAW_TASK_ACCEPTANCE_PENDING_AS_ACCEPTED_OR_AS_BENCHMARK_SUCCESS",
+      "PRESERVE_TYPED_ACTION_SCHEMA_GROUNDING_CONTENT_ADDRESSED_FAILURE_BLACKLIST_START_CAS_AND_CAUSAL_JOURNAL_INVARIANTS"
+    ],
+    "forbidden_repair": [
+      "DO_NOT_RERUN_RANK17",
+      "DO_NOT_GRANT_REPLACEMENT_OR_REPLAY_AUTHORITY",
+      "DO_NOT_READ_RANK18_TASK_BEFORE_GENERIC_REPAIR_AND_FRESH_AUTHORITY",
+      "DO_NOT_TREAT_WORKFLOW_SUCCESS_AS_BENCHMARK_SUCCESS",
+      "DO_NOT_HARD_CODE_VARIABLE_STAR_VETTING_SEMANTICS_IN_GENERIC_RUNTIME"
+    ]
+  },
+  "next_slot": {
+    "ledger_schedule_rank": 18,
+    "frozen_manifest_schedule_order": 17,
+    "task_rank": 17,
+    "slot_id": "terminal-bench-science/longitudinal-clinical-agent::trial-0",
+    "task_name": "terminal-bench-science/longitudinal-clinical-agent",
+    "task_digest": "sha256:e9a166b2173f7014d4f1559505397b221f94bc446eab031f94791b35e0e5f1c9",
+    "task_read": false,
+    "task_started": false
+  },
+  "hard_nonclaims": [
+    "NO_RANK17_RETRY_OR_REPLACEMENT_AUTHORITY",
+    "NO_TB_SCIENCE_SUCCESS_CREDIT",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT",
+    "NO_CLAIM_THE_GENERIC_REPAIR_WOULD_HAVE_MADE_RANK17_SUCCEED",
+    "NO_CLAIM_RANK18_IS_AUTHORIZED_TO_READ_OR_START",
+    "NO_CLAIM_WORKFLOW_SUCCESS_IMPLIES_BENCHMARK_SUCCESS"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_trials_consumed_delta": 1,
+    "consumed_successes_delta": 0,
+    "consumed_final_failures_delta": 1,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

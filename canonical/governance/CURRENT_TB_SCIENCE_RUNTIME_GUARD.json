@@ -1,16 +1,33 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_TB_SCIENCE_RUNTIME_GUARD_V1",
-  "date": "2026-10-09",
-  "status": "V11_CANONICAL_REPAIR_VERIFIED__RANK17_TASK_READ_STILL_PROHIBITED",
-  "verification_path": "canonical/verification/TB_SCIENCE_V11_CANONICAL_RUNTIME_MIRROR_VERIFY_20261009_V1.json",
-  "verification_git_blob_sha": "77ab42e2586997eeb54b9d280ffc4fc3af2ae364",
+  "date": "2026-10-10",
+  "status": "V11_EXECUTION_ROBUSTNESS_HELD_THROUGH_RANK17__V11_ARTIFACT_FINISH_GATE_FALSIFIED__RANK18_TASK_READ_PROHIBITED",
+  "result_truth": {
+    "path": "canonical/verification/TB_SCIENCE_RANK17_V6_IRREVERSIBLE_RESULT_TRUTH_20261010_V1.json",
+    "git_blob_sha": "3d7a0339ccf320f256834fcbde6427c8c62d473b"
+  },
+  "verified_execution_properties": [
+    "CURRENT_RUNNER_LLAMA_BUILD_AND_MODEL_QUALIFICATION_PASSED",
+    "EXACT_CYCLE0_AND_RUNTIME_CONTEXT_GATES_PASSED",
+    "AGENT_READY_BOUND_DURABLE_START_CAS_COMMITTED_ONCE",
+    "HARBOR_CHILD_GITHUB_CREDENTIALS_ABSENT",
+    "CAUSAL_JOURNAL_INTENT_PRECEDED_EFFECT",
+    "ACTION_AND_VERIFICATION_RECEIPTS_COMMITTED",
+    "NO_REPLAY_OR_REPLACEMENT_OCCURRED"
+  ],
+  "falsified_controller_property": {
+    "class": "AUTHORITATIVE_TASK_ARTIFACT_NOT_BOUND_INTO_FINISH_POSTCONDITIONS",
+    "observed_required_artifact": "/root/results/output.csv",
+    "brain_mandated_deliverables_empty": true,
+    "raw_task_acceptance_receipts_present": false,
+    "premature_submission_ready_after_material_requirement_closure": true
+  },
   "canonical_runtime_version": "V11",
-  "prior_rank17_authority_version": "V2",
-  "prior_rank17_authority_sufficient_for_task_read": false,
+  "runtime_repair_required": true,
   "task_read": false,
   "task_started": false,
-  "benchmark_trials_consumed": 0,
-  "next": "REBIND_RANK17_AUTHORITY_TO_CURRENT_VERIFIED_RUNTIME_BEFORE_ANY_EXPOSURE",
-  "acceptance_credit_delta": 0,
-  "terminal_credit_delta": 0
+  "benchmark_trials_consumed_for_next_slot": 0,
+  "rank18_task_read_authority": false,
+  "rank18_execution_authority": false,
+  "next": "BUILD_V12_GENERIC_REPAIR_WITH_AUTHORITATIVE_ARTIFACT_BINDING_SAFE_ABSOLUTE_POSTCONDITION_CHECKS_AND_FAIL_CLOSED_SUBMISSION_GATE__VERIFY_ON_RANK17_SPENT_FIXTURE_AND_SYNTHETICS__DO_NOT_READ_RANK18"
 }

@@ -1,59 +1,53 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_TB_SCIENCE_EXECUTION_POINTER_V2",
-  "date": "2026-10-09",
-  "status": "RANK16_FINAL_ZERO__RANK17_V3_V11_BRAIN_AUTHORITY_ACTIVE__TASK_UNREAD_UNSTARTED__PUBLIC_RESEAL_REQUIRED",
+  "date": "2026-10-10",
+  "status": "RANK17_FINAL_ZERO__SEVENTEEN_CONSUMED__RANK18_BLOCKED_PENDING_GENERIC_ARTIFACT_FINISH_GATE_REPAIR",
   "current_result": {
-    "path": "canonical/verification/TB_SCIENCE_RANK16_V6_IRREVERSIBLE_RESULT_TRUTH_20261009_V1.json",
-    "git_blob_sha": "86479149eaac70ed678098a042ccb4047712698e"
+    "path": "canonical/verification/TB_SCIENCE_RANK17_V6_IRREVERSIBLE_RESULT_TRUTH_20261010_V1.json",
+    "git_blob_sha": "3d7a0339ccf320f256834fcbde6427c8c62d473b"
   },
   "current_ledger": {
-    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261009_V31.json",
-    "git_blob_sha": "8f01d3f68664ca64ce727f69845b8db6eb9ce903"
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V33.json",
+    "git_blob_sha": "c2d405754e51254aa2eee8e6eb9413a298cdf90b"
   },
   "verification": {
-    "path": "canonical/verification/TB_SCIENCE_RANK16_V6_RESULT_LEDGER_V31_INDEPENDENT_VERIFY_20261009_V1.json",
-    "git_blob_sha": "71059aab940b6500ef3450c02b7aef246058ea5d"
+    "path": "canonical/verification/TB_SCIENCE_RANK17_V6_RESULT_LEDGER_V33_RECONCILIATION_VERIFY_20261010_V1.json",
+    "git_blob_sha": "b85046e9a2e2194d9caa251b48f7d58739b47695"
   },
-  "rank16": {
-    "slot_id": "terminal-bench-science/sparse-network-assimilation::trial-0",
-    "workflow_run_id": 37948159650,
-    "artifact_id": 11627643266,
+  "rank17": {
+    "slot_id": "terminal-bench-science/variable-star-vetting::trial-0",
+    "workflow_run_id": 38024152007,
+    "artifact_id": 11659272369,
     "reward": 0,
     "result": "FINAL_ZERO",
-    "controller_status": "BLOCKED_MAX_CYCLES_NO_BRAIN_AUTHORIZED_FINISH",
+    "controller_status": "SUBMISSION_READY__RAW_TASK_ACCEPTANCE_PENDING_EXTERNAL_INDEPENDENT_VERIFIER",
     "benchmark_trials_consumed": 1,
     "rerun_authority": false,
     "replacement_carrier_authority": false
   },
   "counts": {
-    "consumed_slots": 16,
+    "consumed_slots": 17,
     "consumed_successes": 0,
-    "consumed_final_failures": 16,
-    "additional_failures_before_fail_lock": 71,
+    "consumed_final_failures": 17,
+    "additional_failures_before_fail_lock": 70,
     "successes_remaining_for_pass_lock": 124,
-    "remaining_slots": 194,
-    "minimum_required_success_rate": 0.6391752577319587
+    "remaining_slots": 193,
+    "minimum_required_success_rate": 0.6424870466321243
   },
   "next_slot": {
-    "ledger_schedule_rank": 17,
-    "frozen_manifest_schedule_order": 16,
-    "task_rank": 16,
-    "slot_id": "terminal-bench-science/variable-star-vetting::trial-0",
-    "task_digest": "sha256:51bf2b9d8e87a428772d92c6765d83ad3edc7c24283d2ff75af5f050aaee0c67",
+    "ledger_schedule_rank": 18,
+    "frozen_manifest_schedule_order": 17,
+    "task_rank": 17,
+    "slot_id": "terminal-bench-science/longitudinal-clinical-agent::trial-0",
+    "task_digest": "sha256:e9a166b2173f7014d4f1559505397b221f94bc446eab031f94791b35e0e5f1c9",
     "task_read": false,
     "task_started": false,
-    "execution_authority": true,
+    "execution_authority": false,
     "task_read_authority": false,
-    "authority_path": "canonical/governance/TB_SCIENCE_RANK17_ONE_SLOT_EXECUTION_AUTHORITY_20261009_V3.json",
-    "authority_git_blob_sha": "f10ae44652cab95db1ad271ba6ae388aae137760",
-    "authority_verification_path": "canonical/verification/TB_SCIENCE_RANK17_ONE_SLOT_AUTHORITY_VERIFY_20261009_V3.json",
-    "authority_verification_git_blob_sha": "0f562dfa69a726ae14916b94e4e552fcd8a36730",
-    "runtime_closure_verification_path": "canonical/verification/TB_SCIENCE_RANK17_V11_RUNTIME_CLOSURE_VERIFY_20261009_V1.json",
-    "runtime_closure_verification_git_blob_sha": "93a98c32a5e5b94a497264698b30bb9efac6fbb9",
     "public_surface_resealed": false,
     "activation_armed": false
   },
   "acceptance_credit_delta": 0,
   "terminal_credit_delta": 0,
-  "next": "BUILD_FRESH_RANK17_PUBLIC_RESEAL_BOUND_TO_V3_V11_TYPED_SCHEMA_AUTHORITY_AND_CURRENT_V31_LEDGER__RUN_ZERO_EXPOSURE_PREFLIGHT_AND_RUNTIME_COMPOSITION__ONLY_THEN_ARM_EXACT_ONE_FILE_ACTIVATION_PR"
+  "next": "REPAIR_GENERIC_AUTHORITATIVE_TASK_ARTIFACT_BINDING_AND_FINISH_GATE_ON_SPENT_OR_SYNTHETIC_CONTEXTS__INDEPENDENTLY_VERIFY_EXACT_RUNTIME_BYTES__ONLY_THEN_BUILD_FRESH_RANK18_ZERO_EXPOSURE_AUTHORITY_AND_PUBLIC_RESEAL"
 }
