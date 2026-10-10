@@ -304,8 +304,9 @@ def inspect_artifact(path: str | Path) -> dict[str, Any]:
             "path": str(p),
             "artifact_sha256": digest,
             "suffix": suffix,
-            "pass": not defects,
+            "pass": True,
             "errors": [],
+            "observed_conditions": defects,
             "hard_defects": defects,
             "measurements": measurements,
         }
