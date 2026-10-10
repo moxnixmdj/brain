@@ -4,7 +4,7 @@
   "status": "ACTIVE_PLANNING_BINDING__EXISTING_MECHANISMS_BOUND__SHARED_GAPS_NOT_YET_PROVED_CLOSED__ZERO_CREDIT",
   "source_route_manifest": {
     "path": "canonical/governance/ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_20261010_V1.json",
-    "git_blob_sha": "4ebe25308bf9816d4eeaea415b37b9ec152604c0"
+    "git_blob_sha": "fffc2f27e9e314ed95eb8e9ecc820eba58187b4e"
   },
   "source_theorem": {
     "path": "canonical/governance/ADAPTIVE_ABSTRACT_POSITIVE_COVER_FIXED_POINT_THEOREM_20261007_V2.json",
@@ -68,6 +68,14 @@
     "acceptance_credit_delta": 0,
     "capability_credit_delta": 0,
     "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "currentness_repair": {
+    "status": "FROZEN_TB_EVIDENCE_REBOUND_TO_IMMUTABLE_SNAPSHOT__ZERO_CREDIT",
+    "frozen_manifest_base_commit": "8bbab859c4bc3116b2f7112bfddd22f4b4121121",
+    "mutable_pointer_path": "canonical/governance/CURRENT_TB_SCIENCE_EXECUTION.json",
+    "immutable_snapshot_path": "canonical/governance/TB_SCIENCE_RANK18_V6_RANK19_FROZEN_EXECUTION_SNAPSHOT_20261010_V1.json",
+    "immutable_snapshot_git_blob_sha": "999db25cb0a339eac146130fac884e879ab1c88f",
     "terminal_credit_delta": 0
   }
 }
