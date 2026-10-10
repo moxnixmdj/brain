@@ -1440,7 +1440,8 @@
     },
     "r2_v72_loss_cushion_mrel_frontier_20261010_v1": {
       "reconciliation": {
-        "path": "canonical/governance/R2_LOSS_CUSHION_MREL_AUTHORITY_RECONCILIATION_20261010_V1.json"
+        "path": "canonical/governance/R2_LOSS_CUSHION_MREL_AUTHORITY_RECONCILIATION_20261010_V1.json",
+        "git_blob_sha": "68c0223695ce9c5f9770d10027525f90a16d227a"
       },
       "verification": {
         "path": "canonical/verification/R2_LOSS_CUSHION_MREL_FRONTIER_CURRENT_VERIFY_20261010_V1.json",
@@ -2074,7 +2075,7 @@
     "cursorbench_first_positive_region_membership_self_certified": false,
     "cursorbench_first_positive_region_hidden_task_membership_proved": false,
     "current_r2_semantic_revision": "V72_LOSS_CUSHION_MREL_FRONTIER_REPAIRED__SCOPED_DOMAIN_EQUIVALENCE_INTERNALIZED__OPEN_WORLD_FINANCE_TAIL_REMAINS",
-    "current_r2_pointer_git_blob_sha": "3631f1a3d5dc5273c73fdf24f54dfef10ef230af",
+    "current_r2_pointer_git_blob_sha": "a7551b8f92a3845bdd977855a5b0461965429f6e",
     "r2_source_explicit_semantic_autofill_bound": true,
     "r2_source_explicit_autofill_replaces_caller_claims": false,
     "r2_unrecognized_prose_remains_semantic_top": true,
@@ -4943,7 +4944,7 @@
   "r2_v72_loss_cushion_mrel_frontier_currentness_reconciliation_20261010_v1": {
     "status": "RECONCILED__TERMINAL_CURRENT_R2_PROJECTION_ADVANCED_TO_V72_V64__ZERO_CREDIT",
     "current_r2_pointer_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
-    "current_r2_pointer_git_blob_sha": "3631f1a3d5dc5273c73fdf24f54dfef10ef230af",
+    "current_r2_pointer_git_blob_sha": "a7551b8f92a3845bdd977855a5b0461965429f6e",
     "current_r2_status": "ACTIVE_CURRENT_R2_AUTHORITY__V72__FORTY_DIRECT_ROUTES__THIRTY_SIX_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__DERIVED_TYPED_TERMINAL_SIGNATURES_ROUTE_BOUND__MREL_NECESSARY_PROPERTY_AUTHORITY_BOUND__LOSS_CUSHION_MREL_BOUND_FRONTIER_REPAIRED__TLAC_MREL_SHARED_SIGNATURE_NONSEPARATION_AND_BOUNDED_IDENTITY_DISCRIMINATOR_BOUND__OEWN_DECISION_MANIFEST_LATTICE_LIVE_DYNAMIC_ROUTE_BOUND__REGCAP_NO_DESCRIPTOR_DIRECT_SIGNATURE_CONTEXT_BOUND__SCOPED_DOMAIN_EQUIVALENCE_INTERNALIZED__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_REMAINS",
     "scheduler_cut_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261010_V64.json",
     "scheduler_cut_git_blob_sha": "88d62359c8e3cd4c4c6c775355e4370c63ea251b",
@@ -4955,6 +4956,7 @@
     "primary_unsolved_count_delta": 0,
     "terminal_false_preserved": true,
     "acceptance_credit_delta": 0,
-    "terminal_credit_delta": 0
+    "terminal_credit_delta": 0,
+    "reconciliation_git_blob_sha": "68c0223695ce9c5f9770d10027525f90a16d227a"
   }
 }
