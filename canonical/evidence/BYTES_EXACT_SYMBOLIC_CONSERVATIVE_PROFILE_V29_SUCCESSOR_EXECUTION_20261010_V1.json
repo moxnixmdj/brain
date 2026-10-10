@@ -1,0 +1,115 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_CONSERVATIVE_PROFILE_V29_SUCCESSOR_EXECUTION_V1",
+  "status": "FRESH_SUCCESSOR_EXECUTION__SPECIAL_ERROR_FUNCTION_DOMAIN_EXCLUSION_V29__ZERO_CAPABILITY_CREDIT",
+  "recorded_at": "2026-10-10",
+  "predecessor": {
+    "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_CONSERVATIVE_PROFILE_V28_SUCCESSOR_EXECUTION_20261010_V1.json",
+    "package_raw_python_source_bytes": 1930030,
+    "B_exec_raw_python_source_bytes": 1932790,
+    "manifest_sha256": "6b7eee6f8a15670189e06ffda61d9149ea5e5a58ec158ce23f396ac50edf34eb",
+    "fresh_qualification": "9430/9430",
+    "durable_archive_bytes": 289100
+  },
+  "selection": {
+    "id": "CONSERVATIVE_SPENT_NEXT33_ERROR_FUNCTION_DOMAIN_EXCLUSION_PROFILE_V29",
+    "corpus": "QUAL_SUCCESSOR_NEXT33_20261010_V1",
+    "spent_cases": 9430,
+    "method": "Replace only 17 erf/erfc/erfi/inverse-erf/Ei/expint/li/Fresnel evaluation or Taylor bodies with explicit fail-closed stubs. Preserve class identities, imports, dispatch surfaces, and all core numeric/root/limit/polynomial machinery.",
+    "selected_function_bodies": [
+      "erf.eval",
+      "erf.taylor_term",
+      "erfc.eval",
+      "erfc.taylor_term",
+      "erfi.eval",
+      "erfi.taylor_term",
+      "erf2.eval",
+      "erfinv.eval",
+      "erfcinv.eval",
+      "erf2inv.eval",
+      "Ei.eval",
+      "expint.eval",
+      "li.eval",
+      "Li.eval",
+      "FresnelIntegral.eval",
+      "fresnels.taylor_term",
+      "fresnelc.taylor_term"
+    ],
+    "selected_original_body_bytes": 8051,
+    "net_raw_reduction_bytes": 6640,
+    "spent_NEXT33_replay": "9430/9430",
+    "interpretation": "These branches are outside the tested bounded exact-symbolic input domains; finite non-use remains non-universal."
+  },
+  "measured_candidate": {
+    "status": "PHYSICALLY_REWRITTEN_RESEARCH_CANDIDATE__NOT_OPUS_PROMOTED",
+    "python_files": 277,
+    "package_raw_python_source_bytes": 1923390,
+    "router_raw_python_source_bytes": 2760,
+    "B_exec_raw_python_source_bytes": 1926150,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "raw_improvement_vs_v28_bytes": 6640,
+    "manifest_sha256": "fefb4f023644b1d63fd5a693289226b64080c161adbd3f782a3c361232c4462a",
+    "calibrated_same_writer_xz_extreme_bytes": 288256,
+    "calibrated_same_writer_xz_extreme_sha256": "70d3255166ff77a2760df325bc26a29154997edd765c9d69ee3dc9ba6c628dde",
+    "calibrated_v28_same_writer_xz_extreme_bytes": 289064,
+    "calibrated_xz_improvement_vs_v28_bytes": 808
+  },
+  "qualification": {
+    "spent_NEXT33": {
+      "id": "QUAL_SUCCESSOR_NEXT33_20261010_V1",
+      "cases": 9430,
+      "corpus_sha256": "996721b61f1a6b6257d8595b85bc9df6bb2fc1c6e5257f80efcba276375285e8",
+      "candidate": "9430/9430",
+      "spent": true
+    },
+    "fresh_NEXT34": {
+      "id": "QUAL_SUCCESSOR_NEXT34_20261010_V1",
+      "seed": 5830951,
+      "per_operation_budget": 840,
+      "cases": 9660,
+      "corpus_sha256": "9a2d5eaa036c21d39c8340a7e59cd3bfe29c1030abe18f3b5ac83803fd82dfe6",
+      "candidate": "9660/9660",
+      "independent_copy": "9660/9660",
+      "extracted_archive_replay": "9660/9660",
+      "spent": true
+    }
+  },
+  "reproducibility": {
+    "predecessor_reconstruction": "canonical/research/bytes/tools/rebuild_candidate_v28.py",
+    "transform": "canonical/research/bytes/tools/conservative_profile_prune_v29.py",
+    "successor_reconstruction": "canonical/research/bytes/tools/rebuild_candidate_v29.py",
+    "route": "canonical/research/bytes/tools/exact_symbolic_route_v1.py",
+    "semantic_digest": "canonical/research/bytes/tools/semantic_digest_v1.py",
+    "qualification_generator": "canonical/research/bytes/tools/generate_qualification_v1.py"
+  },
+  "durable_artifact": {
+    "library_status": "PERSISTED_IN_CHATGPT_LIBRARY__WRAPPER_NOT_STORAGE_OPTIMAL",
+    "library_file_id": "libfile_2287e08ad0f88191b1c14596c4c8c536",
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V29_SUCCESSOR_20261010_V1.tar.xz",
+    "library_bytes": 291800,
+    "library_archive_sha256_at_upload": "4e51977919b83e23406687eec511ae7b362f44db39fcd9c07292bbac9410e366",
+    "source_identity_manifest_sha256": "fefb4f023644b1d63fd5a693289226b64080c161adbd3f782a3c361232c4462a",
+    "storage_calibration_note": "The durable Library wrapper used a weaker local xz pass. Recompressing V28 and V29 with the same tar writer plus xz -6e gives 289064 and 288256 bytes respectively, proving an 808-byte comparable persistent-storage reduction. Attempted Library wrapper replacement returned container_session_expired; do not claim the Library object itself is 288256 bytes."
+  },
+  "next_frozen_qualification": {
+    "id": "QUAL_SUCCESSOR_NEXT35_20261010_V1",
+    "seed": 5916079,
+    "per_operation_budget": 860,
+    "cases": 9890,
+    "corpus_sha256": "82f9e5b695f4c54a7b87d91a90e96bf18ac631cfce39a268f7d40988b8adeb71",
+    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT35_20261010_V1.jsonl",
+    "library_file_id": "libfile_43904426f1308191aef565af0bbf08ca",
+    "generation_validation": "Parameter-only sharded generator was checked against canonical NEXT34 and matched all 9660 op/p parameter sequences exactly before NEXT35 was frozen.",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT"
+  },
+  "truth_boundary": [
+    "MEASURED: exact V29 is 6,640 raw Python-source bytes smaller than V28.",
+    "MEASURED: exact V29 passes spent NEXT33 9,430/9,430.",
+    "MEASURED: exact V29 passes fresh NEXT34 9,660/9,660 on candidate, independent copy, and extracted source archive.",
+    "MEASURED: same-writer xz -6e calibration compresses V28 to 289,064 bytes and V29 to 288,256 bytes, an 808-byte V29 improvement.",
+    "INFERRED: selected special error-function bodies are outside the tested bounded route/input domains; finite non-use remains non-universal.",
+    "NOT CLAIMED: out-of-scope behavior preservation, universal SymPy correctness, absolute information-theoretic minimum, or Opus-family promotion.",
+    "PROMOTION CREDIT: 0."
+  ],
+  "next_action": "Rerank exact V29 using spent NEXT34 only. Keep NEXT35 untouched until a new physical cut is frozen.",
+  "promotion_credit": 0
+}
