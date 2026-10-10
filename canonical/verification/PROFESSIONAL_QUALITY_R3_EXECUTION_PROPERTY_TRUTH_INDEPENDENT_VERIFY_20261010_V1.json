@@ -1,0 +1,89 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R3_EXECUTION_PROPERTY_TRUTH_INDEPENDENT_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__SECOND_INDEPENDENT_SPRITE__8_OF_8_FALSIFICATION_TESTS__R3_EXECUTION_PROPERTY_TRUTH_ONLY",
+  "repository": "moxnixmdj/brain",
+  "evidence_branch": "evidence/r3-execution-property-truth-v1",
+  "leaf_id": "PQ::R3_REALIZATION_OBSERVATION::EXECUTION",
+  "claim_id": "48152aa4add9c74930e0f693ba8b804e5dae6cddb4fc0555847c1aab25f7d391",
+  "proof_blobs": {
+    "verifier": "f6c5a02a577b0dc31b517df3c6bd9441cb90613a",
+    "tests": "b2a613884de403d708e0a93c710739246cb087b2",
+    "manifest": "a7cad32c9fd969ff2c3857bb924c7bd746237ec2",
+    "public_render_verification": "1a0b4ca6627aaf28eb25f6990682e87319d14d6d",
+    "r3_root_binding_verification": "870bb85fbd00d670ec36e86b4b0b510f5bb9225c",
+    "r3_real_task_step_verification": "734f88f5d201e778f59133c9e22f29ae4d451121",
+    "r3_real_task_step_receipt": "8a524bd90cee783d9d342b80a95b990d23a413e0",
+    "subject": "1d598bc8757017ceb34928d0df9f5fce859ef868"
+  },
+  "scope_recompute": {
+    "leaf_count": 24,
+    "domain_equivalence_pass_count": 24,
+    "scope_complete_count": 24,
+    "property_truth_count_before_adjudication": 0,
+    "r3_claim_id": "48152aa4add9c74930e0f693ba8b804e5dae6cddb4fc0555847c1aab25f7d391",
+    "r3_claim_scope_git_blob_sha": "7f6ce0905688bbbed03960cdeab8568202f240f2",
+    "r3_claim_verification_git_blob_sha": "327fd04b7360dcd2851b2024b531aa5e6e466375",
+    "r3_scope_definition_sha256": "33a6dfb9371150552eaf3800572fafd434284206e54a4b0a9d37f6f9da504a4f"
+  },
+  "independent_replay": {
+    "authoring_carrier": {
+      "name": "brain-capability-first-scheduler-verify-20261008-v1",
+      "id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+      "workspace": "/home/sprite/r3-property-truth-candidate",
+      "py_compile": "PASS",
+      "tests_run": 8,
+      "tests_passed": 8
+    },
+    "independent_carrier": {
+      "name": "r3-property-independent-verify-20261010",
+      "id": "sprite-2577be52-6af6-41d0-b29b-0230a86758a5",
+      "workspace": "/home/sprite/r3-independent",
+      "py_compile": "PASS",
+      "tests_run": 8,
+      "tests_passed": 8,
+      "tests_failed": 0,
+      "transcript_sha256": "df5c086a71863b4182ce96a2c67c1552a83f329514b6a9c3d92e0be7beaef362",
+      "transcript_bytes": 1636
+    }
+  },
+  "renderer_evidence_boundary": {
+    "exact_current_native_blobs_equal_to_independent_public_capsule": true,
+    "prior_public_runner_conclusion": "success",
+    "fresh_second_sprite_renderer_reexecution_count": 0,
+    "reason": "SECOND_SPRITE_OS_REPOSITORIES_DO_NOT_OFFER_THE_PINNED_UBUNTU_24_04_LIBREOFFICE_AND_POPPLER_VERSIONS",
+    "prohibited_substitution": "DO_NOT_TREAT_NEWER_UBUNTU_26_04_RENDERER_PACKAGES_AS_EQUIVALENT_TO_PINNED_PUBLIC_CAPSULE",
+    "fresh_authoring_sprite_partial_observation": {
+      "adversarial_large_layout_mutation_rejected": true,
+      "adversarial_unchanged_output_rejected": true,
+      "positive_four_format_replay_blocked_by_missing_pinned_system_renderer_dependencies": true
+    }
+  },
+  "proves": [
+    "R3_EXECUTION_WHOLE_LEAF_SCOPE_IS_CURRENT_AND_COMPLETE",
+    "EXACT_CURRENT_NATIVE_RUNTIME_AND_TEST_BLOBS_EQUAL_THE_INDEPENDENT_PUBLIC_RENDER_CAPSULE",
+    "THE_PUBLIC_CAPSULE_VERIFIED_POSITIVE_FOUR_FORMAT_RENDER_PRESERVATION_AND_ROOT_RELEVANT_NEAR_MISS_AND_ADVERSARIAL_REJECTIONS",
+    "ONE_EXACT_CURRENT_V7_REAL_TASK_RENDER_STEP_RECEIPT_IS_INDEPENDENTLY_BOUND_TO_THE_CURRENT_SUBJECT",
+    "THE_R3_EXECUTION_MANIFEST_ACCEPTANCE_IS_SATISFIED_FOR_THIS_EXACT_LEAF"
+  ],
+  "leaf_property_truth_authority": true,
+  "semantic_leaf_closed": false,
+  "root_closed": false,
+  "unknown_defeater_completeness_proved": false,
+  "full_main_regression_proved": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "hard_nonclaims": [
+    "NO_R3_SEMANTIC_LEAF_CLOSURE",
+    "NO_R3_ROOT_CLOSURE",
+    "NO_ARBITRARY_SEMANTIC_TARGET_CORRECTNESS",
+    "NO_UNKNOWN_DEFEATER_COMPLETENESS",
+    "NO_FULL_CURRENT_MAIN_REGRESSION",
+    "NO_GLOBAL_PROFESSIONAL_PROPERTY_TRUTH",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ]
+}
