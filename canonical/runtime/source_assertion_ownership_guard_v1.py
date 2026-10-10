@@ -134,16 +134,21 @@ def check_direct_assertion(
         return _base("FAIL_CLOSED", reason="CONTAINING_SENTENCE_NOT_FOUND")
     sentence_start, sentence_end, sentence = found
 
-    if require_selected_span_is_complete_sentence and (
-        start != sentence_start or end != sentence_end
-    ):
-        return _base(
-            "UNRESOLVED__ASSERTION_COMPLETE_SPAN_UNPROVED",
-            reason="SELECTED_SPAN_IS_PROPER_SUBSPAN_OF_CONTAINING_SENTENCE",
-            selected_span=[start, end],
-            containing_sentence_span=[sentence_start, sentence_end],
-            containing_sentence=sentence,
-        )
+    if require_selected_span_is_complete_sentence:
+        omitted_prefix = source_text[sentence_start:start]
+        omitted_suffix = source_text[end:sentence_end]
+        prefix_safe = omitted_prefix.strip() == ""
+        suffix_safe = omitted_suffix.strip() in {"", "."}
+        if not (prefix_safe and suffix_safe):
+            return _base(
+                "UNRESOLVED__ASSERTION_COMPLETE_SPAN_UNPROVED",
+                reason="SELECTED_SPAN_OMITS_NONNEUTRAL_SENTENCE_MATERIAL",
+                selected_span=[start, end],
+                containing_sentence_span=[sentence_start, sentence_end],
+                containing_sentence=sentence,
+                omitted_prefix=omitted_prefix,
+                omitted_suffix=omitted_suffix,
+            )
 
     if sentence.rstrip().endswith("?"):
         return _base(
