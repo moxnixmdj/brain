@@ -1,0 +1,26 @@
+{
+  "schema": "PROJECT_BRAIN_NONACTUATING_HELPER_CUT_VERIFY_V1",
+  "date": "2026-10-10",
+  "pass": true,
+  "assurance": "STATIC_NONAMPLIFICATION_PLUS_28_BOUND_TESTS",
+  "spec_sha": "a7e410c2e985fbfc1f3059587757cfa396fb2a31",
+  "checker_sha": "72f2bb407ea4a567820a812f6ffaa99046dd6741",
+  "test_sha": "c52ac26fed1d99fd15a955953558bfa6fa95fd1d",
+  "component_receipt_sha": "52de2370122ca2eb1e934425c963a918ea72a24f",
+  "subjects": {
+    "canonical/runtime/terminal_candidate_donor_independence_audit_v1.py": "7b3713267d32f9b4ae7e2ca56ea17c5859bdec71",
+    "canonical/runtime/terminal_autopilot_v1.py": "78fa2cbabf8ed5e70de8b3ed987b510ca033076b",
+    "canonical/runtime/option_preserving_capability_optimizer_v1.py": "367478e71b015fb2f4b7cc40dad34f88a7f47238"
+  },
+  "checks": {
+    "subject_count": 3,
+    "component_tests": 28,
+    "failures": 0,
+    "direct_effect_calls": 0,
+    "authority_true_literals": 0,
+    "nonzero_terminal_credit_literals": 0
+  },
+  "execution_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0
+}
