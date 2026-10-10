@@ -1,10 +1,10 @@
 """Professional-quality P1 Router V8: proof-carrying final certification handoff.
 
 V6 authenticates the raw-goal -> decision-payload -> target handoff.
-V3 independently runs hard-defect preflight.  V7 closes the remaining execution
+V3 independently runs hard-defect preflight. V8 preserves proof-bound execution
 provenance gap: callers may not supply any profile step result directly.
 
-For the seven remaining load-bearing profile steps, V7 requires content-addressed
+For the seven remaining load-bearing profile steps, V8 requires content-addressed
 producer receipts plus independent verification bound to the exact declared
 system subject and run context.  Only then does it derive PASS values for V6/V4/V3.
 
@@ -89,7 +89,7 @@ def _load_subject(ref:Any,*,root:Path)->tuple[dict[str,Any]|None,dict[str,Any]]:
     paths={row.get("path") for row in components if isinstance(row,Mapping)}
     missing=sorted(REQUIRED_SUBJECT_COMPONENT_PATHS-paths)
     if missing:
-        return None,_fail("V7_LOAD_BEARING_COMPONENTS_NOT_IN_SUBJECT",missing_component_paths=missing)
+        return None,_fail("V8_LOAD_BEARING_COMPONENTS_NOT_IN_SUBJECT",missing_component_paths=missing)
     return doc,verified
 
 
