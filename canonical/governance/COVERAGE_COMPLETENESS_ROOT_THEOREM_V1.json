@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_COVERAGE_COMPLETENESS_ROOT_THEOREM_V1",
-  "date": "2026-10-09",
+  "date": "2026-10-10",
   "status": "ACTIVE_PROOF_ARCHITECTURE__SUBORDINATE_TO_CURRENT_TERMINAL_AUTHORITY__ZERO_TERMINAL_CREDIT",
   "authority_scope": "PROOF_ARCHITECTURE_ONLY",
   "terminal_objective_unchanged": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
@@ -231,7 +231,7 @@
     "scope": "ARCHITECTURE_LOGIC_ONLY__NOT_CURRENT_MISSION_CLOSURE",
     "r4_cross_binding_counterexample_count": 3,
     "r4_cross_binding_symbolic_engine": "WOLFRAM_LANGUAGE",
-    "current_registry_state": "PASS__0_PROVED__3_OPEN__R4_PROOF_CLOSURE_FALSE",
+    "current_registry_state": "PASS__3_PROVED__0_OPEN__R4_PROOF_CLOSURE_TRUE__ACTIVE_FROZEN_CLAIM_ONLY",
     "remote_exact_byte_replay": "SPRITE__39_PASSED__0_FAILED"
   },
   "reconciliation": {
@@ -243,7 +243,8 @@
       "status": "CLOSED_AS_SUPERSEDED_LIVE_INTEGRATION_VEHICLE",
       "preserve_evidence": true
     },
-    "active_pr": 3870
+    "active_pr": 3870,
+    "root_registry_snapshot_reconciled_at_base": "69bbf167542b786647b5db12391c2973f07fa258"
   },
   "accounting": {
     "incremental_spend_usd": 0,
@@ -264,7 +265,7 @@
   ],
   "mission_objective_binding": {
     "path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
-    "git_blob_sha": "7ad5f82d8434966781bf97c725d482e10133fc7c",
+    "git_blob_sha": "6ab2147306a138f9ea327d8e19cb4a5bc76e89df",
     "real_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
     "opus_5_5_role": "FIRST_FRONTIER_CHECKPOINT_NOT_TERMINAL_OBJECTIVE"
   },
@@ -324,7 +325,7 @@
     "cross_binding_composition_forbidden": true
   },
   "r4_live_binding_currentness": {
-    "status": "VERIFICATION_PENDING_CURRENT_PR_MERGE__ZERO_CREDIT",
+    "status": "CURRENT_FOR_ACTIVE_FROZEN_CLAIM__ZERO_CREDIT",
     "required_validator": "canonical/runtime/root_theorem_live_binding_v1.py",
     "verification_path": "canonical/verification/R4_SEMANTIC_RECEIPT_AND_LIVE_BINDING_VERIFICATION_20261010_V1.json",
     "rule": "ALL_CONTENT_ADDRESSED_R4_DEPENDENCIES_MUST_MATCH_CURRENT_REPO_BYTES_INCLUDING_ROOT_REGISTRY_GUARD_EXECUTABLE_SEMANTIC_RECEIPT_VERIFIER_AND_LOAD_BEARING_TESTS",
@@ -334,7 +335,7 @@
   "r4_canonical_certificate_authority": {
     "status": "REQUIRED_FOR_FOUR_ROOT_CLOSURE",
     "registry_path": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_CERTIFICATE_REGISTRY_V1.json",
-    "registry_git_blob_sha": "e0a169ecf4c9875d251d99c3711be6195f797387",
+    "registry_git_blob_sha": "7552290f57d478d4cf48ba42e392f71a23a91264",
     "guard_path": "canonical/runtime/coverage_root_certificate_registry_guard_v1.py",
     "guard_git_blob_sha": "23cb2d635d38b1b4cdea6d2c7ccd40636dca36c6",
     "current_authority_manifest": "canonical/governance/CURRENT_COVERAGE_COMPLETENESS_ROOT_CERTIFICATES.json",
@@ -343,9 +344,9 @@
       "CC_R2_MISSION_SOUNDNESS_V1",
       "CC_R3_TERMINAL_CLOSURE_V1"
     ],
-    "current_proved": 0,
-    "current_open": 3,
-    "current_r4_proof_closure": false,
+    "current_proved": 3,
+    "current_open": 0,
+    "current_r4_proof_closure": true,
     "local_status_proved_is_authority": false,
     "content_address_verification_required": true,
     "mission_binding": {
@@ -353,7 +354,7 @@
       "authority_path": "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
       "authority_git_blob_sha": "13c470645b037bbb46245c687dd35197b420d51a"
     },
-    "current_authority_manifest_git_blob_sha": "60e40acbc8833d9a07f1a827264081c9ab6af959",
+    "current_authority_manifest_git_blob_sha": "6bbf64e0ad5cb158e8edb6a561dceb7babaef116",
     "executable_semantic_verification_required": true,
     "semantic_receipt_verifier": {
       "path": "canonical/runtime/coverage_root_semantic_receipt_v1.py",
@@ -369,7 +370,9 @@
     "claim_alignment_tests": {
       "path": "canonical/tests/test_root_theorem_registry_claim_alignment_v1.py",
       "git_blob_sha": "d9ec8aee6cfbec538d49c65deb912121060cc6c5"
-    }
+    },
+    "active_claim_id": "e1c519109c4b2c46a9225686fc2c5c5490564d1cc62d5c6ff3c6c436bfca4314",
+    "scope_note": "CURRENT_COUNTS_AND_R4_CLOSURE_APPLY_ONLY_TO_THE_REGISTRY_ACTIVE_FROZEN_PROPERTY_CLAIM__NOT_GLOBAL_MISSION_COMPLETION"
   },
   "root_certificate_registry": {
     "path": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_CERTIFICATE_REGISTRY_V1.json",
@@ -411,6 +414,13 @@
     ],
     "empty_or_foreign_receipt_authority": false,
     "stored_receipt_can_override_verifier_rejection": false,
+    "terminal_credit_delta": 0
+  },
+  "r4_snapshot_coherence_guard": {
+    "status": "REQUIRED",
+    "rule": "ROOT_THEOREM_EMBEDDED_CURRENT_REGISTRY_AND_MISSION_SNAPSHOT_MUST_MATCH_LIVE_CANONICAL_FILES__PROPERTY_SCOPED_R4_CLOSURE_MUST_NOT_INFLATE_GLOBAL_TERMINAL_CREDIT",
+    "test_path": "canonical/tests/test_coverage_root_snapshot_coherence_v1.py",
+    "test_git_blob_sha": "3d11f63757426646544a8b42ec64dac3f3caa1bd",
     "terminal_credit_delta": 0
   }
 }
