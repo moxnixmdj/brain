@@ -43,5 +43,10 @@
     "capability_credit_delta": 0,
     "ownership_credit_delta": 0,
     "terminal_credit_delta": 0
+  },
+  "verification": {
+    "path": "canonical/verification/R2_SHARED_CAUSE_RESIDUAL_LEDGER_V1_VERIFY_20261010_V1.json",
+    "git_blob_sha": "90fb5c6770070e1f8d2f6cb65c08d0714fb12a42",
+    "status": "PASS__EXACT_PR_RUNTIME_COMPILE__NEW_AND_EXISTING_SCHEDULER_REGRESSIONS_26_OF_26"
   }
 }
