@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_WHOLE_LEAF_CLAIM_SCOPE_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__WHOLE_LEAF_DOMAIN_EQUIVALENCE_INDEPENDENTLY_VERIFIED__SCOPE_COVER_AND_PROPERTY_TRUTH_SEPARATE",
+  "leaf_id": "PQ::R10_ANALYSIS_DECISION::EXECUTION",
+  "claim_id": "4f9de3e5ff6f38eb49c20c5c0029ca4c230c1d2469ebb0a5849ddd1e96c6d34e",
+  "claim_scope_git_blob_sha": "42e8a52be3070f4fe60d0dc6d1ee980322f2f509",
+  "leaf_manifest_git_blob_sha": "a7cad32c9fd969ff2c3857bb924c7bd746237ec2",
+  "subject_git_blob_sha": "1d598bc8757017ceb34928d0df9f5fce859ef868",
+  "mission_authority_git_blob_sha": "13c470645b037bbb46245c687dd35197b420d51a",
+  "claim_guard_git_blob_sha": "d1de61aa9bc00a184772a50f7ec9d5ee2853d747",
+  "semantic_verifier": {
+    "path": "canonical/runtime/professional_quality_whole_leaf_domain_scope_verify_v1.py",
+    "git_blob_sha": "b2b6eb266124810306229ddd6cc2c2f231fed2cb"
+  },
+  "semantic_tests": {
+    "path": "canonical/tests/test_professional_quality_whole_leaf_domain_scope_verify_v1.py",
+    "git_blob_sha": "b9bf32f174945055828d49bc98191099ce921e67"
+  },
+  "semantic_verifier_git_blob_sha": "b2b6eb266124810306229ddd6cc2c2f231fed2cb",
+  "semantic_tests_git_blob_sha": "b9bf32f174945055828d49bc98191099ce921e67",
+  "whole_leaf_domain_equivalence_proved": true,
+  "scope_definition_sha256": "0746b2b9924b39abd4b3b28517e1303697a564f6b9c1a946c9ff4b1390dfd2ce",
+  "leaf_acceptance_sha256": "fae7b1ccf4f94a91a1fb4caa4a634e6883538a28382991d97c69278e574b67ce",
+  "independent_replay": {
+    "pass": true,
+    "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "tests_run": 5,
+    "tests_passed": 5,
+    "claim_scopes_verified": 24,
+    "tamper_classes_rejected": 4,
+    "transcript_sha256": "13aa68e741a8431ffa8ea08ef3996074b740de346b8dbb83ab2f4a6a7bf069e3",
+    "transcript_bytes": 4575
+  },
+  "whole_leaf_scope_complete": false,
+  "leaf_property_truth_authority": false,
+  "semantic_truth_authority": false,
+  "execution_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "next": "BUILD_CLAIM_BOUND_SCOPE_COVER_CERTIFICATE_FOR_THE_EXACT_WHOLE_LEAF_DOMAIN__THEN_SEPARATE_PROPERTY_TRUTH_VERIFICATION"
+}
