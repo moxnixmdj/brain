@@ -1,0 +1,24 @@
+name: Verify full current-main regression V1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/verify-full-current-main-regression-v1.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  full-regression:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Compile canonical Python
+        run: python -m compileall -q canonical/runtime canonical/tests
+      - name: Run canonical full regression
+        run: PYTHONPATH=. python -m unittest discover -s canonical/tests -p 'test_*.py' -v
