@@ -7,7 +7,7 @@ separate and false.
 """
 from __future__ import annotations
 
-from typing import Any, Mapping
+from typing import Any, Mapping, Sequence
 
 from canonical.runtime.universal_scope_closure_compiler_v1 import (
     UNIVERSAL,
@@ -37,25 +37,6 @@ def _fail(reason: str, **extra: Any) -> dict[str, Any]:
         "terminal_credit_delta": 0,
         "incremental_spend_usd": 0,
         **extra,
-    }
-
-
-def expected_scope_certificate(claim_id: str, claim_verify_blob: str) -> dict[str, Any]:
-    if not isinstance(claim_id, str) or len(claim_id) != 64:
-        raise ValueError("CLAIM_ID_INVALID")
-    if not isinstance(claim_verify_blob, str) or len(claim_verify_blob) != 40:
-        raise ValueError("CLAIM_VERIFY_BLOB_INVALID")
-    return {
-        "id": "PQ_WHOLE_LEAF_SCOPE::" + claim_id,
-        "target_scope_id": "scope://professional-quality/whole-leaf/" + claim_id,
-        "claim_id": claim_id,
-        "basis": UNIVERSAL,
-        "verified": True,
-        "independent": True,
-        "scope_relation": "EXACT",
-        "formal_completeness": True,
-        "all_admissible_target_inputs_proved": True,
-        "premise_set_id": "claim-domain-equivalence:" + claim_verify_blob,
     }
 
 
@@ -97,13 +78,13 @@ def evaluate(
     replay = claim_verification.get("independent_replay")
     if not isinstance(replay, Mapping) or replay.get("pass") is not True:
         return _fail("INDEPENDENT_DOMAIN_REPLAY_REQUIRED")
+    if not isinstance(replay.get("transcript_sha256"), str) or len(replay["transcript_sha256"]) != 64:
+        return _fail("INDEPENDENT_DOMAIN_TRANSCRIPT_INVALID")
 
     if certificate.get("leaf_id") != leaf_id or certificate.get("claim_id") != claim_id:
         return _fail("CERT_IDENTITY_MISMATCH")
     if certificate.get("claim_scope_git_blob_sha") != claim_scope_blob:
         return _fail("CERT_CLAIM_SCOPE_BLOB_MISMATCH")
-    if certificate.get("claim_verification_git_blob_sha") != claim_verification_blob:
-        return _fail("CERT_CLAIM_VERIFY_BLOB_MISMATCH")
 
     for field in (
         "semantic_truth_authority", "execution_authority", "quality_authority",
@@ -114,12 +95,41 @@ def evaluate(
     if certificate.get("terminal_credit_delta") != 0:
         return _fail("CERT_TERMINAL_CREDIT_FORBIDDEN")
 
-    expected = expected_scope_certificate(claim_id, claim_verification_blob)
-    observed = certificate.get("scope_certificate")
-    if observed != expected:
-        return _fail("SCOPE_CERTIFICATE_NOT_EXACT")
+    refs = certificate.get("evidence_refs")
+    if not isinstance(refs, Sequence) or isinstance(refs, (str, bytes)) or not refs:
+        return _fail("CERT_EVIDENCE_REFS_REQUIRED")
+    matching = [
+        row for row in refs
+        if isinstance(row, Mapping)
+        and row.get("git_blob_sha") == claim_verification_blob
+        and isinstance(row.get("path"), str)
+        and row["path"].startswith("canonical/verification/")
+    ]
+    if len(matching) != 1:
+        return _fail("CERT_EXACT_CLAIM_VERIFICATION_EVIDENCE_REQUIRED")
 
-    scope = evaluate_scope(observed)
+    scope_cert = certificate.get("scope_certificate")
+    if not isinstance(scope_cert, Mapping):
+        return _fail("SCOPE_CERTIFICATE_REQUIRED")
+    expected_target = "scope://professional-quality/whole-leaf/" + claim_id
+    fixed = {
+        "target_scope_id": expected_target,
+        "claim_id": claim_id,
+        "basis": UNIVERSAL,
+        "verified": True,
+        "independent": True,
+        "scope_relation": "EXACT",
+        "formal_completeness": True,
+        "all_admissible_target_inputs_proved": True,
+        "premise_set_id": "claim-verification:" + claim_verification_blob,
+    }
+    for field, expected in fixed.items():
+        if scope_cert.get(field) != expected:
+            return _fail("SCOPE_CERTIFICATE_BINDING_MISMATCH:" + field)
+    if not isinstance(scope_cert.get("id"), str) or not scope_cert["id"]:
+        return _fail("SCOPE_CERTIFICATE_ID_REQUIRED")
+
+    scope = evaluate_scope(scope_cert)
     if scope.get("scope_complete") is not True:
         return _fail("UNIVERSAL_SCOPE_COMPILER_REJECTED", scope_verdict=scope)
     if scope.get("basis") != UNIVERSAL:
