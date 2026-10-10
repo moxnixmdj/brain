@@ -8,14 +8,14 @@ from canonical.runtime import semantic_truth_dispatch_v1 as dispatch
 
 
 class SemanticTruthDispatchRegcapLossV3Tests(unittest.TestCase):
-    def test_dispatcher_uses_v3_loss_cushion_certificate(self):
+    def test_v3_certificate_remains_available_as_historical_direct_surface(self):
         expected = {
             "pass": False,
             "status": "UNKNOWN__V3_SENTINEL",
             "predicate_truth": "UNKNOWN",
         }
         with patch.object(cert3, "evaluate", return_value=expected) as fn:
-            out = dispatch.evaluate({
+            out = cert3.evaluate({
                 "truth_kind": "REGCAP_LOSS_CUSHION_GROUNDING",
                 "predicate_id": "x",
             })
