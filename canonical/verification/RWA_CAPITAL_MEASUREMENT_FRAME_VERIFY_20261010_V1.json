@@ -1,0 +1,103 @@
+{
+  "schema": "PROJECT_BRAIN_RWA_CAPITAL_MEASUREMENT_FRAME_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_BRANCH_BYTES__63_OF_63_FOCUSED_AND_ADJACENT_TESTS__LIVE_BIS_DIS20_RBC20_REPLAY_PASS__PYCOMPILE_PASS__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "rwa-measurement-basis-v1-20261010-sol",
+    "current_main_at_receipt": "9f15bc9220f3ec1e9f6d6067a2f4794f3ea21f3d",
+    "shared_dispatch_base_git_blob_sha": "364eae40fbb38fc0b053bfa0f7aa4950863fa41a",
+    "exact_blobs": {
+      "canonical/evidence/RWA_CAPITAL_MEASUREMENT_SOURCE_PACK_V1.json": "1b6db24e9794a50c1dc68ad4e363bf0321730811",
+      "canonical/runtime/rwa_capital_measurement_context_v1.py": "0e146603975891d5677b0ae2ddd8d958336c92ee",
+      "canonical/runtime/rwa_capital_measurement_truth_certificate_v1.py": "61c3a8d7a8004ab617a9b7964b84462162e1f406",
+      "canonical/runtime/semantic_truth_dispatch_v1.py": "08786910d60ca7f3af1113c9e28cb27c9016ea53",
+      "canonical/tests/test_rwa_capital_measurement_context_v1.py": "819e08456268dc27506dcae2eb5018039bb7b770",
+      "canonical/tests/test_rwa_capital_measurement_truth_dispatch_v1.py": "ae306e4d674850d434bd1bd99da7a0dbe86fb091"
+    }
+  },
+  "independent_carrier": {
+    "name": "participial-disposition-verify-20261009-sol",
+    "sprite_id": "sprite-72f2a31b-c09c-49e0-bfe0-279786ee2d56",
+    "workspace": "/home/sprite/rwa_measurement_verify",
+    "assembly": "EXACT_BRANCH_SUBJECT_BYTES_PLUS_EXACT_MAIN_ADJACENT_DEPENDENCY_BYTES"
+  },
+  "verification": {
+    "py_compile": "PASS",
+    "new_measurement_frame_suite": {
+      "result": "PASS",
+      "tests_run": 12,
+      "failures": 0,
+      "errors": 0
+    },
+    "new_truth_dispatch_suite": {
+      "result": "PASS",
+      "tests_run": 9,
+      "failures": 0,
+      "errors": 0
+    },
+    "adjacent_base_dispatch_suite": {
+      "result": "PASS",
+      "tests_run": 6,
+      "failures": 0,
+      "errors": 0
+    },
+    "adjacent_margin_truth_dispatch_suite": {
+      "result": "PASS",
+      "tests_run": 10,
+      "failures": 0,
+      "errors": 0
+    },
+    "adjacent_spread_truth_suite": {
+      "result": "PASS",
+      "tests_run": 26,
+      "failures": 0,
+      "errors": 0
+    },
+    "total_focused_and_adjacent_tests": 63,
+    "live_https_replay": {
+      "result": "PASS",
+      "source_text": "The capital ratio stood at 12.5% of risk-weighted assets.",
+      "selected_frame": "FINANCE::RISK_BASED_REGULATORY_CAPITAL_RATIO_FRAME",
+      "proved_atom_ids": [
+        "DOMAIN::REGULATORY_CAPITAL",
+        "MEASUREMENT_KIND::RISK_BASED_CAPITAL_RATIO",
+        "DENOMINATOR::RISK_WEIGHTED_ASSETS",
+        "FACET_ROLE::QUANTIFIED_LEVEL"
+      ],
+      "measurement_value_percent": "12.5",
+      "denominator_normalized": "RISK_WEIGHTED_ASSETS",
+      "sources": {
+        "BIS_DIS20_CURRENT_2023": "PASS__HTTPS_SOURCE_FRAGMENT_PROJECTION_AUTHENTICATED",
+        "BIS_RBC20_CURRENT_2023": "PASS__HTTPS_SOURCE_FRAGMENT_PROJECTION_AUTHENTICATED"
+      }
+    }
+  },
+  "proved": [
+    "AN_EXPLICIT_capital_ratio_OCCURRENCE_EXPRESSED_AS_A_PERCENTAGE_OF_RWA_CAN_PROVE_A_RISK_BASED_REGULATORY_CAPITAL_MEASUREMENT_FRAME",
+    "THE_MEASUREMENT_FRAME_PROVES_THE_RWA_DENOMINATOR_AND_QUANTIFIED_LEVEL_ROLE_WITHOUT_SELECTING_A_CAPITAL_TIER",
+    "CET1_PRENOMINAL_WORDING_DOES_NOT_BY_ITSELF_GRANT_CAPITAL_TIER_IDENTITY_AUTHORITY_IN_THIS_ROUTE",
+    "TOTAL_ASSETS_OR_MISSING_DENOMINATOR_CONTEXTS_REMAIN_UNRESOLVED",
+    "WORKING_CAPITAL_RATIO_CONTAMINATION_IS_REJECTED",
+    "NEGATED_CONTEXT_REMAINS_UNRESOLVED",
+    "DECIMAL_POINTS_DO_NOT_TERMINATE_SENTENCE_SCOPE",
+    "THE_TRUTH_CERTIFICATE_RECOMPUTES_THE_SOURCE_BOUND_FRAME_AND_BINDS_THE_PREDICATE_ID_TO_EXACT_SOURCE_BYTES",
+    "A_DIFFERENT_PROVED_FRAME_REMAINS_UNKNOWN_NOT_FALSE_WITHOUT_INDEPENDENT_INCOMPATIBILITY",
+    "THE_SHARED_SEMANTIC_TRUTH_DISPATCHER_ADDS_RWA_CAPITAL_MEASUREMENT_FRAME_WITHOUT_REGRESSING_EXISTING_BASE_MARGIN_OR_SPREAD_ROUTES",
+    "LIVE_CURRENT_BIS_DIS20_AND_RBC20_SOURCE_PROJECTIONS_REPLAY_SUCCESSFULLY",
+    "NO_POLICY_ADEQUACY_EXECUTION_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "hard_nonclaims": [
+    "NO_CET1_TIER1_TOTAL_CAPITAL_OR_BUFFER_IDENTITY_FROM_THE_MEASUREMENT_FRAME",
+    "NO_GLOBAL_capital_OR_ratio_WORD_SENSE_IDENTITY",
+    "NO_GENERAL_RATIO_GRAMMAR",
+    "NO_TOTAL_ASSET_OR_LEVERAGE_RATIO_SEMANTICS",
+    "NO_OPEN_WORLD_FINANCE_SEMANTIC_COMPLETENESS",
+    "NO_POLICY_ADEQUACY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
