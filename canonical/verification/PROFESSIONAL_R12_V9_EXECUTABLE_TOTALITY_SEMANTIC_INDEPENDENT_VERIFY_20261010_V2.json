@@ -1,0 +1,83 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_R12_V9_EXECUTABLE_TOTALITY_SEMANTIC_INDEPENDENT_VERIFY_20261010_V2",
+  "date": "2026-10-10",
+  "status": "PASS__REBASED_CURRENT_MAIN__SECOND_SPRITE__PYCOMPILE__9_OF_9__27_OF_27_DECLARED_COMPONENTS_CURRENT__EXECUTABLE_SEMANTIC_RERUN_REQUIRED__ZERO_PROPERTY_OR_TERMINAL_CREDIT",
+  "base_main_commit": "00440f640ff48476f39c6e7e33f8639064d232ed",
+  "rebase_proof": {
+    "prior_base": "ac397ea41997bac1002c7dfcf723192e1da08fe9",
+    "changed_load_bearing_component_count": 0,
+    "changed_paths_between_bases": [
+      "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
+      "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
+      "canonical/governance/PROFESSIONAL_V8_R12_REUSE_CLOSURE_20261010_V1.json",
+      "canonical/runtime/professional_v8_r12_reuse_closure_v1.py",
+      "canonical/tests/test_professional_v8_r12_reuse_closure_v1.py",
+      "canonical/verification/PROFESSIONAL_V8_R12_REUSE_CLOSURE_INDEPENDENT_VERIFY_20261010_V1.json"
+    ],
+    "v9_declared_subject_component_set_disjoint_from_changed_paths": true
+  },
+  "subject": {
+    "semantic_authority": {
+      "path": "canonical/runtime/professional_r12_totality_semantic_receipt_v1.py",
+      "git_blob_sha": "cfb264b92004c55acf73719cd9c54cec6a609a34"
+    },
+    "router_v9": {
+      "path": "canonical/runtime/professional_quality_p1_router_v9.py",
+      "git_blob_sha": "27f0df972a08a2497802865e46bdccdcb1c720ae"
+    },
+    "semantic_tests": {
+      "path": "canonical/tests/test_professional_r12_totality_semantic_receipt_v1.py",
+      "git_blob_sha": "90726d699667a4447be43650bd9e58ff81ba11f6"
+    },
+    "router_tests": {
+      "path": "canonical/tests/test_professional_quality_p1_router_v9.py",
+      "git_blob_sha": "c559f19dffc7f69f52a4f225e3574c2fd6c371df"
+    },
+    "declared_system": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V9_DECLARED_SYSTEM_SUBJECT_20261010_V8.json",
+      "git_blob_sha": "2ff32e4bb78e63635244c86d47fa369d7ba53900",
+      "subject_id": "PROFESSIONAL_QUALITY_P1_V9_EXECUTABLE_TOTALITY_SEMANTICS_SYSTEM_20261010_V8",
+      "subject_sha256": "adf7f09e1913526e460b7350c02cd148c2cd14de90eed33fa7fae84d395d9912",
+      "component_count": 27
+    }
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/pq-v7-proof-bound-verify",
+    "replay_mode": "V7_BASE_PLUS_EXACT_V8_V9_DEPENDENCY_DELTA__REBASED_SUBJECT_METADATA",
+    "py_compile": "PASS",
+    "tests_run": 9,
+    "tests_passed": 9,
+    "tests_failed": 0,
+    "declared_system_component_count": 27,
+    "declared_system_component_current_count": 27,
+    "declared_system_verification": "PASS__DECLARED_SYSTEM_SUBJECT_CURRENT_AND_CONTENT_ADDRESSED",
+    "transcript_sha256": "1e0bca64b8603eb0f1f7f397b32f3a9acc87cb98689e0c931062d3e00a50cfd9",
+    "transcript_bytes": 5842
+  },
+  "proves": [
+    "STORED_TOTALITY_PASS_METADATA_HAS_ZERO_V9_SEMANTIC_AUTHORITY_WITHOUT_SUCCESSFUL_CONTENT_ADDRESSED_SEMANTIC_VERIFIER_RERUN",
+    "INDEPENDENT_RECEIPT_MUST_BIND_EXACT_RERUN_RESULT_SHA256",
+    "CROSS_CLAIM_TOTALITY_CERTIFICATE_SUBSTITUTION_FAILS_CLOSED",
+    "SEMANTIC_VERIFIER_BYTE_DRIFT_FAILS_CLOSED",
+    "V9_POSITIVE_PATH_REQUIRES_EXECUTABLE_R12_TOTALITY_SEMANTIC_VERIFICATION",
+    "V9_27_COMPONENT_DECLARED_SYSTEM_IS_CURRENT_ON_SECOND_CARRIER_AT_REBASED_MAIN"
+  ],
+  "hard_nonclaims": [
+    "NO_REAL_V9_POSITIVE_TOTALITY_WITNESS_YET",
+    "NO_R12_MATERIAL_DEFEATER_TOTALITY_FROM_AUTHORITY_HARDENING_ALONE",
+    "NO_R12_C8_NONVACUITY_FROM_AUTHORITY_HARDENING_ALONE",
+    "NO_R12_CC_R3_OR_R4_CLOSURE",
+    "NO_SEMANTIC_PROPERTY_TRUTH_OR_PROFESSIONAL_QUALITY_CLOSURE",
+    "NO_LIVE_DEFAULT_PROMOTION",
+    "NO_TERMINAL_AUTHORITY"
+  ],
+  "semantic_property_truth_credit_delta": 0,
+  "quality_credit_delta": 0,
+  "acceptance_credit_delta": 0,
+  "promotion_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
