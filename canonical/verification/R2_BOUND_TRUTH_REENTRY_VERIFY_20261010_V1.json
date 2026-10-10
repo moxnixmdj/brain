@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_R2_BOUND_TRUTH_REENTRY_VERIFY_V1",
+  "status": "PASS__FIXED_POINT_BOUND_TRUTH_ORIGIN_IS_CONSUMED_BY_CONTROLLER_AND_P3_BEFORE_SUCCESS",
+  "base_main_commit": "abc3ab17c4b86b5ef6ffcb7a46f1f4348f8054c5",
+  "exact_blob_shas": {
+    "canonical/runtime/general_adequate_decision_fixed_point_v2.py": "34d62b109b99f38e62995544871460b266d2c7df",
+    "canonical/runtime/general_adequate_decision_controller_v1.py": "3737baedb87c6b4212ba55826b7f58d2955920c7",
+    "canonical/tests/test_r2_fixed_point_bound_truth_reentry_v1.py": "890785d33c14360c49b5b324c0597b4ffe7703b4"
+  },
+  "verified_behavior": {
+    "proposal_can_add_new_bound_truth_origin_monotonically": true,
+    "second_fixed_point_controller_pass_occurs": true,
+    "bound_context_route_is_reused": true,
+    "bound_truth_payload_is_inserted_into_p3_truth_payloads_by_predicate_id": true,
+    "p3_is_re_evaluated_after_bound_truth_insertion": true,
+    "success_before_bound_truth_consumption_forbidden_by_test": true,
+    "proposal_provider_semantic_truth_authority": false,
+    "downstream_truth_authentication_required": true,
+    "terminal_authority": false
+  },
+  "execution_receipts": {
+    "focused_integration_test": "PASS__1_OF_1",
+    "python_compile": "PASS__NEW_TEST",
+    "carrier": "brain-live-runtime-v1-verify-20261008",
+    "carrier_import_isolation": [
+      "r2_direct_live_admission_v1",
+      "r2_existing_policy_adequacy_repair_v1",
+      "r2_basis_discriminator_repair_v1"
+    ],
+    "carrier_import_isolation_note": "Stubs were used only for unrelated import branches. Real current-main fixed-point and controller bytes executed on the tested path."
+  },
+  "credit": {
+    "finance_semantic_tail_closed": false,
+    "global_open_world_closure_delta": false,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
