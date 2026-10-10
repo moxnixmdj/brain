@@ -1,0 +1,100 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V38",
+  "date": "2026-10-10",
+  "status": "CURRENT_POST_RANK18_FINAL_ZERO__PLANNER_V7_V13_REPAIR_ZERO_EXPOSURE_VERIFIED__EIGHTEEN_TRIALS_CONSUMED__ZERO_PENDING__RANK19_UNEXPOSED_AND_UNARMED_PENDING_FRESH_V13_PUBLIC_SURFACE_RESEAL",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "predecessor": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V37.json",
+    "git_blob_sha": "1f44e46869055cc046da9c53fcae485615f239f9"
+  },
+  "rank18_final_truth": {
+    "path": "canonical/verification/TB_SCIENCE_RANK18_V6_IRREVERSIBLE_RESULT_TRUTH_20261010_V1.json",
+    "git_blob_sha": "2459d821057d6f7178ffea440fb19966e56a3d89",
+    "pass": true
+  },
+  "planner_repair": {
+    "runtime_guard_path": "canonical/governance/CURRENT_TB_SCIENCE_RUNTIME_GUARD.json",
+    "runtime_guard_git_blob_sha": "cdc639c418c6c5a3ee5a1538f4c328e243883261",
+    "verification_path": "canonical/verification/TB_SCIENCE_PLANNER_V7_ZERO_EXPOSURE_VERIFICATION_20261010_V1.json",
+    "verification_git_blob_sha": "9797cc625e3e33bb905cf23fa6c79f66dc9794db",
+    "planner_path": "canonical/runtime/harbor_science_planner_v7.py",
+    "planner_git_blob_sha": "e5d6ab78b6cf5bacee568cd3701410a8745b9ce8",
+    "agent_path": "canonical/runtime/harbor_science_agent_v13.py",
+    "agent_git_blob_sha": "8deede8adb960b6ebf7ee747a5e9ff1016238b7e",
+    "real_local_qwen_zero_exposure_pass": true,
+    "synthetic_input_tokens": 3000,
+    "effective_timeout_s": 1746,
+    "elapsed_s": 102.508,
+    "transport_attempts": 1,
+    "task_read": false,
+    "task_started": false,
+    "benchmark_trials_consumed": 0
+  },
+  "counts": {
+    "benchmark_trials_consumed": 18,
+    "consumed_successes_final": 0,
+    "consumed_failures_final": 18,
+    "started_result_pending": 0,
+    "finalized_slots": 18,
+    "active_in_flight_slot_count": 0
+  },
+  "rank18": {
+    "ledger_schedule_rank": 18,
+    "frozen_manifest_schedule_order": 17,
+    "task_rank": 17,
+    "slot_id": "terminal-bench-science/longitudinal-clinical-agent::trial-0",
+    "task_digest": "sha256:e9a166b2173f7014d4f1559505397b221f94bc446eab031f94791b35e0e5f1c9",
+    "logical_attempt_id": "a02ee7de469f953679fb593ab152a9f67eb1ebe8c364f8c748f18cd8a81eab8d",
+    "workflow_run_id": 38030021656,
+    "workflow_job_id": 114148806597,
+    "task_read_history": true,
+    "task_started": true,
+    "durable_start_cas_acquired": true,
+    "benchmark_trials_consumed": 1,
+    "result_present": true,
+    "reward": 0,
+    "final_classification": "FINAL_ZERO",
+    "retries_authorized": 0,
+    "replacement_allowed": false
+  },
+  "rank19": {
+    "ledger_schedule_rank": 19,
+    "frozen_manifest_schedule_order": 18,
+    "task_rank": 18,
+    "slot_id": "terminal-bench-science/diag-chipseq::trial-0",
+    "task_digest": "sha256:437bfacaebda9ce9905d54bdfe7247aec9649038206512c64547021f42e3950b",
+    "task_read": false,
+    "task_started": false,
+    "benchmark_trials_consumed": 0,
+    "task_read_authority": false,
+    "execution_authority": false,
+    "blocker": "FRESH_PROOF_CARRYING_PUBLIC_EXECUTION_SURFACE_RESEAL_REQUIRED_FOR_V13"
+  },
+  "scheduler": {
+    "frozen": true,
+    "reason": "RANK18_FINALIZED__PLANNER_REPAIR_VERIFIED__RANK19_BLOCKED_ONLY_ON_FRESH_V13_PROOF_CARRYING_PUBLIC_EXECUTION_SURFACE_RESEAL",
+    "next_slot_execution_authority": false,
+    "rank18_retry_authority": false,
+    "rank18_replacement_carrier_authority": false,
+    "only_authorized_transition": "BUILD_AND_VERIFY_FRESH_V13_PROOF_CARRYING_PUBLIC_EXECUTION_SURFACE_FOR_RANK19_WITH_ZERO_BENCHMARK_EXPOSURE"
+  },
+  "hard_nonclaims": [
+    "NO_TB_SCIENCE_SUCCESS_CREDIT",
+    "NO_ACCEPTANCE_FAMILY_OR_TERMINAL_CREDIT",
+    "NO_AUTHORITY_TO_RERUN_RANK18",
+    "NO_RANK19_TASK_READ_OR_EXECUTION_AUTHORITY",
+    "NO_CLAIM_V13_PUBLIC_EXECUTION_SURFACE_IS_ALREADY_RESEALED_FOR_RANK19"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_trials_consumed_delta": 0,
+    "consumed_successes_delta": 0,
+    "consumed_final_failures_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "execution_authority": false,
+  "finalization_authority": false,
+  "repair_authority": "ZERO_EXPOSURE_PUBLIC_V13_SURFACE_RESEAL_ONLY"
+}
