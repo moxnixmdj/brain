@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R3_V7_ROOT_SUBJECT_BINDING_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_SINGLE_V7_BOUND_DOCX_REALIZATION_INSTANCE__INDEPENDENT_ROOT_REPLAY__ZERO_QUALITY_OR_TERMINAL_AUTHORITY",
+  "subject": {
+    "binding_path": "canonical/governance/PROFESSIONAL_QUALITY_R3_ROOT_SUBJECT_BINDING_20261010_V1.json",
+    "binding_git_blob_sha": "fe360ed0f4f958f303ab4ba968c6782d5860f8e5",
+    "verifier_path": "canonical/runtime/professional_quality_r3_root_subject_binding_verify_v1.py",
+    "verifier_git_blob_sha": "1f6518d3f35f2ac7e3395568efcaacf32de8d71a",
+    "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+    "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e"
+  },
+  "carrier": {
+    "name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/pq-r3-v7-root-binding-verify"
+  },
+  "replay": {
+    "py_compile": "PASS",
+    "verifier_pass": true,
+    "verifier_status": "PASS__R3_EXACT_REALIZATION_INSTANCE_BOUND_TO_V7_DECLARED_SYSTEM_SUBJECT"
+  },
+  "authority": {
+    "root_subject_binding_authority": true,
+    "semantic_truth_authority": false,
+    "execution_authority": false,
+    "quality_authority": false,
+    "acceptance_authority": false,
+    "promotion_authority": false,
+    "terminal_authority": false
+  },
+  "scope": {
+    "binding_scope_kind": "EXACT_SINGLE_V7_BOUND_DOCX_BOUNDED_TEXT_EDIT_REALIZATION_INSTANCE",
+    "global_r3_root_closed": false,
+    "generic_renderer_version_transport": false,
+    "pinned_2026_10_02_stack_identity_claim": false,
+    "arbitrary_semantic_target_correctness": false
+  },
+  "evidence": {
+    "exact_realization_path": "canonical/evidence/PROFESSIONAL_QUALITY_R3_V7_EXACT_REALIZATION_INSTANCE_20261010_V1.json",
+    "exact_realization_git_blob_sha": "13e7e58b3621b3cabb7abdebe23689f3a72678d2",
+    "render_step_binding_path": "canonical/governance/PROFESSIONAL_QUALITY_R3_V7_RENDER_STEP_RESULT_BINDING_20261010_V2.json",
+    "render_step_binding_git_blob_sha": "7149011b50c97e14906d4bba3c537cad846ec0fb",
+    "render_step_verification_path": "canonical/verification/PROFESSIONAL_QUALITY_R3_V7_RENDER_STEP_RESULT_BINDING_VERIFY_20261010_V2.json",
+    "render_step_verification_git_blob_sha": "4ba735698a530a1a7c42a528efd0e92ea8a30c9f",
+    "raw_bundle_sha256": "d617dc6a3dc28ebaa89c16ee1928eebc525143bf8e6f820d3fa13a24424b8978",
+    "durable_library_path": "/Brain Evidence/Professional Quality/R3/PQ_R3_V7_REALIZATION_INSTANCE_20261010_V1.zip"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "next": "PROMOTE_R3_EXACT_INSTANCE_BINDING__ADVANCE_V7_FRONTIER_TO_3_OF_12__R4_MEASUREMENT_CONSTRUCT_NEXT"
+}
