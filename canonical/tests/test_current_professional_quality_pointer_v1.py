@@ -11,14 +11,14 @@ PROFILE_BLOB = "f7e89eafbb691c16d1bdf5b8d295a468d5e3bec5"
 ROUTER = "canonical/runtime/professional_quality_p1_router_v3.py"
 ROUTER_BLOB = "cdb6716ac6d562d1ab222242d07aeecc5cdfac78"
 REGISTRY = "canonical/governance/PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_REGISTRY_20261010_V1.json"
-REGISTRY_BLOB = "650b2d5c29b18f213d5effddae2e600bb14d37df"
-VERIFY = "canonical/verification/PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_VERIFY_20261010_V12.json"
-VERIFY_BLOB = "87a1c86ce805ef3d2c8c987199ef844b0dbc3a26"
+REGISTRY_BLOB = "ec0fe3dd0c1c925f09dde1734e3dbea359ac002c"
+VERIFY = "canonical/verification/PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_VERIFY_20261010_V13.json"
+VERIFY_BLOB = "9c413c30fcb8f2995ddc81262039248afa0c26e1"
 ROUTER_V3_VERIFY = "canonical/verification/PROFESSIONAL_QUALITY_P1_ROUTER_V3_INDEPENDENT_VERIFY_20261010_V1.json"
 ROUTER_V3_VERIFY_BLOB = "1e793db5919be8a75e1599ba974bd06afaae6e91"
 ROUTER_V3_TESTS_BLOB = "7fd496e9200d1408d561cadcf40b8f4bf536c898"
-LEAF_VERIFY = "canonical/verification/PROFESSIONAL_QUALITY_LEAF_COVERAGE_PROJECTION_VERIFY_20261010_V2.json"
-LEAF_VERIFY_BLOB = "ff0adc4f3c3b7df83834437dd84c1912ee8a8787"
+LEAF_VERIFY = "canonical/verification/PROFESSIONAL_QUALITY_LEAF_COVERAGE_PROJECTION_VERIFY_20261010_V3.json"
+LEAF_VERIFY_BLOB = "f9d0f1bf9e45b2884f651a225d47bd06e27bb209"
 
 
 def test_current_professional_quality_projects_verified_scoped_truth_without_overclaim():
@@ -67,9 +67,9 @@ def test_current_professional_quality_projects_verified_scoped_truth_without_ove
     assert leaf["git_blob_sha"] == LEAF_VERIFY_BLOB
     assert leaf["verified_global_leaf_count"] == 0
     assert leaf["open_global_leaf_count"] == 24
-    assert leaf["partial_coverage_leaf_count"] == 14
-    assert leaf["semantic_partial_coverage_leaf_count"] == 2
-    assert leaf["no_scoped_evidence_leaf_count"] == 10
+    assert leaf["partial_coverage_leaf_count"] == 15
+    assert leaf["semantic_partial_coverage_leaf_count"] == 3
+    assert leaf["no_scoped_evidence_leaf_count"] == 9
     same = current["same_subject_composition"]
     assert same["structural_gate_verified"] is True
     assert same["real_all_root_subject_bound"] is False
