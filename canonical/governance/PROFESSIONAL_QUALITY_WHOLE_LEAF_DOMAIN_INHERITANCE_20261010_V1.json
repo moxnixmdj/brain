@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_WHOLE_LEAF_DOMAIN_INHERITANCE_V1",
+  "date": "2026-10-10",
+  "status": "CANDIDATE_STRUCTURAL_DOMAIN_INHERITANCE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_PROPERTY_OR_TERMINAL_CREDIT",
+  "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+  "sources": {
+    "behavioral_contract_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V2.json",
+      "git_blob_sha": "ae250d5bc5da73b23600670be354ffba31e65e53"
+    },
+    "behavioral_contract_schema": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_SCHEMA_V1.json",
+      "git_blob_sha": "b173d8fc6e29df3cec3579954bb17c594308b151"
+    },
+    "assurance_graph": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_ASSURANCE_GRAPH_20261009_V2.json",
+      "git_blob_sha": "03530e29d70206b46b690b33a04c66765ff86ad7"
+    },
+    "leaf_manifest": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_LEAF_BINDING_MANIFEST_20261010_V1.json",
+      "git_blob_sha": "a7cad32c9fd969ff2c3857bb924c7bd746237ec2"
+    }
+  },
+  "inheritance_law": {
+    "parent_domain": "ALL_INSTANCES_SATISFYING_THE_CANONICAL_BEHAVIORAL_CONTRACT_FOR_PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+    "graph_domain_binding": "ASSURANCE_GRAPH_DOMAIN_EQUALS_BEHAVIOR_ID",
+    "manifest_binding": "LEAF_MANIFEST_BINDS_EXACT_ASSURANCE_GRAPH_AND_CONTAINS_EXACTLY_TWO_LEAVES_PER_GRAPH_ROOT",
+    "leaf_domain_rule": "ABSENT_AN_EXPLICIT_CONTENT_ADDRESSED_NARROWER_DOMAIN_OVERRIDE__EACH_LEAF_INHERITS_THE_PARENT_GRAPH_BEHAVIOR_DOMAIN__LEAF_CONTRACT_OBLIGATION_AND_ACCEPTANCE_DEFINE_THE_PROPERTY_NOT_A_DIFFERENT_INPUT_POPULATION",
+    "universal_quantification": "LEAF_CLAIM_SCOPE_MAY_QUANTIFY_OVER_ALL_VALUES_OF_THE_BEHAVIOR_CONTRACT_INPUT_FIELDS_THAT_SATISFY_THE_CANONICAL_CONTRACT__NO_FINITE_ENUMERATION_REQUIRED",
+    "conservative_scope_rule": "A_BROADER_PARENT_DOMAIN_IS_SOUND_FOR_SCOPE_COVER_IF_THE_PROPERTY_IS_PROVED_OVER_THE_BROADER_DOMAIN__NO_NARROWER_SCOPE_CREDIT_MAY_BE_INFERRED_WITHOUT_EXPLICIT_OVERRIDE"
+  },
+  "prohibited_manifest_domain_override_fields": [
+    "domain",
+    "input_domain",
+    "admissible_input_domain",
+    "scope_override",
+    "domain_filter",
+    "population_scope",
+    "input_population"
+  ],
+  "expected_root_count": 12,
+  "expected_leaf_count": 24,
+  "expected_semantic_leaf_count": 12,
+  "expected_execution_leaf_count": 12,
+  "proves": [
+    "ONE_CANONICAL_BEHAVIOR_DOMAIN_GOVERNS_THE_PROFESSIONAL_ASSURANCE_GRAPH",
+    "THE_24_MANIFEST_LEAVES_ARE_CHILD_OBLIGATIONS_OF_THE_12_ROOTS_IN_THAT_GRAPH",
+    "NO_MANIFEST_LEAF_DECLARES_A_SEPARATE_NARROWER_INPUT_DOMAIN",
+    "THE_CANONICAL_BEHAVIOR_CONTRACT_FIELDS_DEFINE_A_SYMBOLIC_OPEN_DOMAIN_OVER_ALL_CONFORMING_INSTANCES",
+    "CLAIM_SCOPE_IDENTITY_CAN_BE_FROZEN_WITHOUT_ENUMERATING_FUTURE_ARTIFACT_VALUES"
+  ],
+  "hard_nonclaims": [
+    "NO_LEAF_PROPERTY_TRUTH",
+    "NO_LEAF_SCOPE_COVER_CERTIFICATE",
+    "NO_FINITE_DOMAIN_OR_ENUMERABILITY_CLAIM",
+    "NO_CLAIM_ALL_POSSIBLE_HUMAN_PROFESSIONAL_WORK_IS_INSIDE_THE_BEHAVIOR_CONTRACT",
+    "NO_DOMAIN_EXECUTION_CLOSURE",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "semantic_truth_authority": false,
+  "execution_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
