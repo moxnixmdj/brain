@@ -42,14 +42,16 @@ def analyze(
  composition_verify:Mapping[str,Any],
  v3_current_verify:Mapping[str,Any],
  c5_bridge:Mapping[str,Any],
+ c1_verify:Mapping[str,Any],
+ c3_verify:Mapping[str,Any],
  defeater_replay:Mapping[str,Any],
  challenge_verify:Mapping[str,Any],
  root_theorem:Mapping[str,Any],
  r12_execution_verify:Mapping[str,Any],
  c8_verify:Mapping[str,Any],
 )->dict[str,Any]:
- docs=(decomposition,composition_verify,v3_current_verify,c5_bridge,defeater_replay,
-       challenge_verify,root_theorem,r12_execution_verify,c8_verify)
+ docs=(decomposition,composition_verify,v3_current_verify,c5_bridge,c1_verify,c3_verify,
+       defeater_replay,challenge_verify,root_theorem,r12_execution_verify,c8_verify)
  if not all(isinstance(x,Mapping) for x in docs):
   return _fail("INPUT_NOT_MAPPING")
 
@@ -87,9 +89,20 @@ def analyze(
   and "SAME_SUBJECT_COMPOSITION_IS_STRUCTURALLY_ADMISSIBLE" in comp
  )
 
- # C3 remains partial. V3 identity carrier proves no semantic information loss,
- # but not universal soundness of every component abstraction under composition.
- c3_partial=True
+ # C1/C3 now have independent current proofs on the stable V3 / exact
+ # same-subject composition boundary.
+ c1=(
+  str(c1_verify.get("status") or "").startswith("PASS__INDEPENDENT_SPRITE")
+  and c1_verify.get("c1_assumption_guarantee_composition_proved") is True
+  and c1_verify.get("cc_r3_terminal_closure_proved") is False
+  and c1_verify.get("semantic_property_truth_authority") is False
+ )
+ c3_proves=set(c3_verify.get("proves") or [])
+ c3=(
+  str(c3_verify.get("status") or "").startswith("PASS__INDEPENDENT_SPRITE")
+  and "R12C3_ABSTRACTION_SOUNDNESS_IS_PROVED_AT_THE_ROOT_BINDING_TO_SAME_SUBJECT_COMPOSITION_BOUNDARY" in c3_proves
+  and "NO_UNKNOWN_MATERIAL_DEFEATER_COMPLETENESS" in set(c3_verify.get("hard_nonclaims") or [])
+ )
 
  # C4: independently replayed known-defeater search/challenge only.
  c4=(
@@ -138,16 +151,13 @@ def analyze(
   and truth.get("semantic_property_truth_authority") is False
  )
 
- c1_partial=c2
  rows=[
-  {"clause_id":EXPECTED_CLAUSES[0],"state":"PARTIAL_EXISTING_EVIDENCE" if c1_partial else "OPEN",
-   "basis":["SAME_SUBJECT_COMPOSITION_VERIFIED"] if c1_partial else [],
-   "remaining":"PROVE_EXACT_ASSUMPTION_GUARANTEE_INTERFACE_DISCHARGE_FOR_R12_COMPOSITION"},
+  {"clause_id":EXPECTED_CLAUSES[0],"state":"VERIFIED_CURRENT" if c1 else "OPEN",
+   "basis":["STABLE_V3_C1_ASSUMPTION_GUARANTEE_REINSTANTIATION"] if c1 else []},
   {"clause_id":EXPECTED_CLAUSES[1],"state":"VERIFIED_CURRENT" if c2 else "OPEN",
    "basis":["INDEPENDENT_12_OF_12_SAME_SUBJECT_COMPOSITION"] if c2 else []},
-  {"clause_id":EXPECTED_CLAUSES[2],"state":"PARTIAL_EXISTING_EVIDENCE" if c3_partial else "OPEN",
-   "basis":["CURRENT_V3_LOSSLESS_IDENTITY_SEMANTIC_CARRIER"],
-   "remaining":"PROVE_COMPONENT_ABSTRACTION_SOUNDNESS_UNDER_R12_COMPOSITION"},
+  {"clause_id":EXPECTED_CLAUSES[2],"state":"VERIFIED_CURRENT" if c3 else "OPEN",
+   "basis":["INDEPENDENT_LOSSLESS_COMPOSITION_PROJECTION_SCOPE_PRESERVATION"] if c3 else []},
   {"clause_id":EXPECTED_CLAUSES[3],"state":"VERIFIED_CURRENT" if c4 else "OPEN",
    "basis":["INDEPENDENT_KNOWN_DEFEATER_REPLAY","INDEPENDENT_DOMAIN_CHALLENGE_REFERENCE"] if c4 else [],
    "boundary":"SEARCH_VERIFIED__UNKNOWN_DEFEATER_COMPLETENESS_NOT_PROVED"},
@@ -177,8 +187,6 @@ def analyze(
    "execution_known_defeater_replay_is_not_completeness":True,
   },
   "exact_next":[
-   "PROVE_C1_ASSUMPTION_GUARANTEE_INTERFACE_DISCHARGE",
-   "PROVE_C3_COMPONENT_ABSTRACTION_SOUNDNESS",
    "PROVE_STRONGER_MATERIAL_DEFEATER_TOTALITY_OR_SCOPE_COMPLETE_EQUIVALENT",
   ],
   "cc_r3_terminal_closure_proved":False,
