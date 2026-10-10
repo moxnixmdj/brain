@@ -1,0 +1,74 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_V12_AUTHORITATIVE_ARTIFACT_FINISH_GATE_REPAIR_20261010_V1",
+  "date": "2026-10-10",
+  "status": "GENERIC_V12_REPAIR_CANDIDATE__RANK17_SPENT_COUNTEREXAMPLE_CLOSED_ON_SYNTHETIC_REPLAY__RANK18_UNREAD_UNSTARTED__ZERO_CREDIT",
+  "predecessor_runtime": {
+    "path": "canonical/runtime/harbor_science_agent_v11.py",
+    "git_blob_sha": "124d13a7449281c9781c39df8f02c2e8f74226b4"
+  },
+  "subjects": {
+    "agent": {
+      "path": "canonical/runtime/harbor_science_agent_v12.py",
+      "git_blob_sha": "e5ccaab049d22c0b3cc59e36c050ce2f6e83404f"
+    },
+    "typed_action_protocol": {
+      "path": "canonical/runtime/science_typed_action_protocol_v2.py",
+      "git_blob_sha": "fa10b92942b92ab6c7f2f1831f660f2a2e3bd6e3"
+    },
+    "regression_test": {
+      "path": "canonical/tests/test_harbor_science_agent_v12_artifact_finish_gate.py",
+      "git_blob_sha": "4cc352b58a71127a4e524b58818c25c34e57a7cf"
+    }
+  },
+  "motivating_counterexample": {
+    "result_truth": {
+      "path": "canonical/verification/TB_SCIENCE_RANK17_V6_IRREVERSIBLE_RESULT_TRUTH_20261010_V1.json",
+      "git_blob_sha": "3d7a0339ccf320f256834fcbde6427c8c62d473b"
+    },
+    "failure": "RANK17_RETURNED_SUBMISSION_READY_AFTER_RESOLVING_ONE_LOSSY_MATERIAL_REQUIREMENT_WHILE_REQUIRED_/root/results/output.csv_WAS_ABSENT",
+    "rank17_rerun_authority": false
+  },
+  "repair_invariants": [
+    "TASK_OR_BRAIN_AUTHORITATIVE_ARTIFACT_PATHS_BECOME_MANDATORY_BRAIN_REQUIREMENTS_AND_FINISH_POSTCONDITIONS.",
+    "AUTHORITATIVE_ARTIFACT_PATHS_MAY_BE_SAFE_ABSOLUTE_CONTAINER_PATHS__PLANNER_PROPOSED_DELIVERABLES_REMAIN_/app_SCOPED.",
+    "PROC_SYS_DEV_AND_RUN_SECRETS_AUTHORITATIVE_OUTPUT_PATHS_ARE_DENIED.",
+    "EXPLICIT_OUTPUT_FALLBACK_RECOGNIZES_COMMON_FORMS_INCLUDING_SAVE_RESULTS_TO_A_FILE_NAMED_ABSOLUTE_PATH.",
+    "MISSING_AUTHORITATIVE_ARTIFACT_PREVENTS_FINISH_AND_PERMITS_A_LATER_DISTINCT_REPAIR_ACTION.",
+    "RAW_TASK_ACCEPTANCE_REMAINS_EXTERNAL_VERIFIER_PENDING_AND_IS_NOT_PROMOTED_TO_BRAIN_TERMINAL_AUTHORITY.",
+    "V11_SCHEMA_GROUNDING_CONTENT_ADDRESSED_FAILED_EFFECT_CONTAINMENT_AND_TYPED_ACTION_INVARIANTS_ARE_PRESERVED."
+  ],
+  "authoritative_metadata_interface": {
+    "environment_variable": "BRAIN_TASK_ARTIFACTS_JSON",
+    "value_contract": "JSON_LIST_OF_TASK_AUTHORITY_ARTIFACT_PATHS",
+    "trust_boundary": "SUPPLIED_BY_TRUSTED_PARENT_FROM_AUTHORIZED_TASK_METADATA__NOT_BY_COGNITION_SUBSTRATE",
+    "rank18_binding_required_before_task_execution": true
+  },
+  "security_boundary": {
+    "planner_deliverables_outside_app_allowed": false,
+    "authoritative_absolute_paths_allowed": true,
+    "traversal_allowed": false,
+    "virtual_or_secret_roots_allowed": false
+  },
+  "rank18": {
+    "slot_id": "terminal-bench-science/longitudinal-clinical-agent::trial-0",
+    "task_digest": "sha256:e9a166b2173f7014d4f1559505397b221f94bc446eab031f94791b35e0e5f1c9",
+    "task_read": false,
+    "task_started": false,
+    "execution_authority": false,
+    "task_read_authority": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_V12_WOULD_HAVE_MADE_RANK17_SUCCEED.",
+    "NO_RANK17_RERUN_OR_REPLACEMENT_AUTHORITY.",
+    "NO_CLAIM_V12_IS_LIVE_ON_THE_PUBLIC_EXECUTION_SURFACE_YET.",
+    "NO_RANK18_TASK_READ_OR_EXECUTION_AUTHORITY_FROM_THIS_REPAIR_ALONE.",
+    "NO_ACCEPTANCE_FAMILY_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_trials_consumed_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
