@@ -1,0 +1,20 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V58",
+  "date": "2026-10-10",
+  "status": "RANK20_V11_STAGED_ZERO_EXPOSURE_ONLY",
+  "authority_blob": "3e5828298ff526071ab65531f5e28821d26aeabc",
+  "claim_blob": "5bcded2e52f971f3e5c63c7e15ac65cffe892d9d",
+  "logical_attempt_id": "73f4c6f9b9a2ea481a9e7bc7e3ee8745f9344cc10f3e792587be067ace4eca2f",
+  "execution_claim_binding_digest": "sha256:e540cee1c5ae3039b42c1f4bf4348d2ef239ac429ab1e39b4a0026f0b87a9aea",
+  "slot_id": "terminal-bench-science/hysteretic-aquifer-control::trial-0",
+  "task_digest": "sha256:681df0c3b2ada03a933ac4d2e11f07983676f87a9f26b61e416987904b880289",
+  "benchmark_trials_consumed_total": 18,
+  "rank20_benchmark_trials_consumed": 0,
+  "task_read": false,
+  "task_started": false,
+  "execution_authority": false,
+  "task_read_authority": false,
+  "activation_authority": false,
+  "next": "PUBLIC_V11_ZERO_EXPOSURE_RESEAL_GENERIC_RATCHET",
+  "terminal_credit_delta": 0
+}
