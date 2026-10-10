@@ -455,11 +455,11 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
             ),
         )
 
-    def test_governance_binds_v4_and_mission_precedence(self):
+    def test_governance_binds_v6_and_mission_precedence(self):
         activation = json.loads(
             (
                 ROOT
-                / "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V4.json"
+                / "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V6.json"
             ).read_text()
         )
         pointer = json.loads(
@@ -470,7 +470,7 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
         )
         self.assertEqual(
             activation["status"],
-            "ACTIVE_PRIMARY_CAPABILITY_FIRST_DEVELOPMENT_SCHEDULER",
+            "ACTIVE_PRIMARY_CAPABILITY_FIRST_DEVELOPMENT_SCHEDULER__REUSE_FIRST_RESIDUAL_RUNTIME_ENFORCED",
         )
         self.assertFalse(
             activation["primary_work_rule"]["checkpoint_obligations_are_primary_gate"]
@@ -485,6 +485,12 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
                 "new_dispatch_requires_explicit_capability_first_checkpoint_admission"
             ]
         )
+        self.assertTrue(
+            activation["reuse_first_residual_admission"][
+                "scheduler_runtime_enforcement"
+            ].startswith("MECHANICALLY_ENFORCED")
+        )
+        self.assertTrue(pointer["reuse_first_residual_runtime_enforced"])
         self.assertEqual(
             pointer["authoritative_activation"],
             "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V4.json",
