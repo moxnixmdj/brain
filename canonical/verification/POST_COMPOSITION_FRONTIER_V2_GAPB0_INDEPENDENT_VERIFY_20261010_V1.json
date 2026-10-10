@@ -1,0 +1,84 @@
+{
+  "schema": "PROJECT_BRAIN_POST_COMPOSITION_FRONTIER_V2_GAPB0_INDEPENDENT_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_SPRITE__PYCOMPILE__4_OF_4__SEVEN_SOURCE_CURRENT__PROPERTY_TRUTH_4_OF_24__SEMANTIC_IDENTITY_12_OF_12__GAP_A_12__ACTIVE_GAP_B_0__THREE_READ_ONLY_LANES__ZERO_FULL_EXECUTION__ZERO_CREDIT",
+  "subject": {
+    "core_runtime": {
+      "path": "canonical/runtime/capability_parallel_frontier_v2.py",
+      "git_blob_sha": "209d8d11494645432354636a3dc17e7b515abaf8"
+    },
+    "adapter_runtime": {
+      "path": "canonical/runtime/capability_parallel_frontier_post_composition_v2.py",
+      "git_blob_sha": "27646a317eeee3d4233ffe63092170b0e4ea1f53"
+    },
+    "adapter_tests": {
+      "path": "canonical/tests/test_capability_parallel_frontier_post_composition_v2.py",
+      "git_blob_sha": "81f2635fef22b5ca1518034a8ae3f6b01efec839"
+    },
+    "frontier": {
+      "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
+      "git_blob_sha": "624c1c7d465e4b8c7a5eadbaade6bab7c72df5b3"
+    },
+    "residual": {
+      "path": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
+      "git_blob_sha": "dc42b2373d26af123ed2bbeeed2aa22b61158c8c"
+    },
+    "escape_v6_verify": {
+      "path": "canonical/verification/ESCAPE_PROGRESS_SHARED_GAP_AUDIT_V6_PUBLIC_VERIFY_20261010_V1.json",
+      "git_blob_sha": "b32ac529606b4a8d21008e049d2ac897a4db8f9d"
+    }
+  },
+  "independent_replay": {
+    "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/postcomp-v2-gapb0-verify",
+    "py_compile": "PASS",
+    "focused_tests_run": 4,
+    "focused_tests_passed": 4,
+    "focused_tests_failed": 0,
+    "frontier_currentness_verified": true,
+    "source_count": 7,
+    "property_truth_closed_count": 4,
+    "open_execution_leaf_count": 8,
+    "open_semantic_leaf_count": 12,
+    "semantic_identity_carrier_verified_count": 12,
+    "ready_candidate_ids": [
+      "BYTES_EXACT_SYMBOLIC_V28_NEXT_PHYSICAL_CUT",
+      "ESCAPE_GAP_A_AUTHENTICATED_ROW_PROOFS",
+      "PROFESSIONAL_QUALITY_V7_PROPERTY_TRUTH_DEPLETION"
+    ],
+    "nonprimary_contains_gap_b": true,
+    "parallel_read_only_evidence_work_ids": [
+      "BYTES_EXACT_SYMBOLIC_V28_NEXT_PHYSICAL_CUT",
+      "ESCAPE_GAP_A_AUTHENTICATED_ROW_PROOFS",
+      "PROFESSIONAL_QUALITY_V7_PROPERTY_TRUTH_DEPLETION"
+    ],
+    "parallel_full_execution_work_ids": []
+  },
+  "proves": [
+    "POST_COMPOSITION_V2_ADAPTER_MATCHES_CURRENT_PROPERTY_TRUTH_LANE",
+    "ALL_SEVEN_BOUND_FRONTIER_SOURCES_ARE_CURRENT",
+    "PROFESSIONAL_PROPERTY_TRUTH_IS_EXACTLY_4_OF_24",
+    "SEMANTIC_IDENTITY_CARRIER_IS_VERIFIED_12_OF_12_WITH_ZERO_SEMANTIC_PROPERTY_TRUTH",
+    "ESCAPE_CURRENT_CAUSAL_PROJECTION_HAS_12_GAP_A_ROWS_ZERO_ACTIVE_GAP_B_ROWS_AND_ONE_PARKED_TB_ROW",
+    "GAP_B_IS_NOT_DISPATCHED_AS_READ_ONLY_WORK",
+    "ONLY_BYTES_GAP_A_AND_PROFESSIONAL_ARE_CURRENT_READ_ONLY_LANES",
+    "FULL_EXECUTION_REMAINS_EMPTY"
+  ],
+  "hard_nonclaims": [
+    "NO_GAP_A_ROW_PROOF",
+    "NO_TB_ROW_PROOF",
+    "NO_SEMANTIC_PROPERTY_TRUTH",
+    "NO_FULL_EXECUTION_AUTHORITY",
+    "NO_PROMOTION_OR_TERMINAL_AUTHORITY",
+    "NO_CAPABILITY_ACCEPTANCE_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "execution_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "capability_credit_delta": 0,
+  "acceptance_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
