@@ -1,0 +1,87 @@
+{
+  "schema": "PROJECT_BRAIN_SELECTION_TRUTH_CURRENT_MAIN_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__TWO_DISTINCT_REMOTE_EXECUTION_ENVIRONMENTS__34_OF_34_EACH__EXACT_BRANCH_BLOBS__GITHUB_ACTIONS_ZERO_STEP_CARRIER_FAILURES_NONCREDITABLE__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "pull_request": 4122,
+    "base_main_commit": "c68260602f35cfb929fe18f44a6d527ad7a7489f",
+    "verified_head_before_receipt": "b8fa50e753c1aa7ae301a3990dabfa074fecd72c",
+    "branch": "brain/selection-truth-current-main-20261010-v1"
+  },
+  "exact_blobs": {
+    "canonical/runtime/capability_first_scheduler_v1.py": "6d2091cc1581b9aa1fd2c74e8a76519a41d9d957",
+    "canonical/runtime/capability_first_live_scheduler_v1.py": "4d4936d7fa75afd533e09804f728bfa54f473b87",
+    "canonical/tests/test_capability_first_scheduler_v1.py": "f2d5c629f8d6fc144e00a9bb57dab30e9efeedc0",
+    "canonical/tests/test_capability_first_live_scheduler_v1.py": "5953f165ba24727d40480b5387694387bc26cc9c",
+    "canonical/runtime/escape_progress_shared_gap_audit_v5.py": "1f1dcf4806b3d944721abe86f46f018c5345726d",
+    "canonical/tests/test_escape_progress_shared_gap_audit_v5.py": "b8ea576bc0fc9be10e3b9e088c5d4bee41fffe59",
+    "canonical/tests/test_escape_v5_current_projection_v1.py": "9aaaf055f4839bd58f013cb9a2fd315d91552fa0",
+    "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json": "7e4e78cf114ffcba57ce44be0ba486df7e1df666",
+    "canonical/governance/CURRENT_DEVELOPMENT_SCHEDULER.json": "6c47879103c7e106bd236fb1943355239db64448",
+    "canonical/governance/CURRENT_MISSION_OBJECTIVE.json": "533317bc52a3d6bf29fa12f21fdfc758f99eff40",
+    "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json": "0af70ce55c8704c1c4376cd077bffba4c2d95e41",
+    "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V8.json": "5a9c9532d52f6f991dc290e1a6c18e5ee5375c9b"
+  },
+  "replay_command": "python -m unittest canonical.tests.test_capability_first_scheduler_v1 canonical.tests.test_capability_first_live_scheduler_v1 canonical.tests.test_escape_progress_shared_gap_audit_v5 canonical.tests.test_escape_v5_current_projection_v1 -v",
+  "development_replay": {
+    "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/verify4122",
+    "tests_run": 34,
+    "tests_passed": 34,
+    "tests_failed": 0,
+    "result": "PASS"
+  },
+  "separate_environment_replay": {
+    "carrier": "brain-pq-p1-v2-independent-verify-20261010",
+    "carrier_id": "sprite-5fb5e414-e2f5-4a49-b424-3443341d9d09",
+    "workspace": "/home/sprite/verify4122-independent",
+    "tests_run": 34,
+    "tests_passed": 34,
+    "tests_failed": 0,
+    "result": "PASS",
+    "independence_scope": "DISTINCT_REMOTE_EXECUTION_ENVIRONMENT__SAME_ORCHESTRATED_TEST_SPEC__NOT_CLAIMED_AS_INDEPENDENT_RESEARCH_JUDGMENT"
+  },
+  "github_actions": {
+    "runs": [
+      38054134134,
+      38054133934,
+      38054133944,
+      38054134043
+    ],
+    "conclusions": [
+      "failure",
+      "failure",
+      "failure",
+      "failure"
+    ],
+    "executed_step_counts": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "classification": "CARRIER_OR_RUNNER_FAILURE_BEFORE_TEST_EXECUTION__ZERO_POSITIVE_OR_NEGATIVE_CODE_CREDIT"
+  },
+  "proves": [
+    "LIVE_SCORE_GATE_FAILS_CLOSED_ON_MISSING_MIXED_OR_UNPROVEN_CALIBRATION",
+    "CORE_CAPABILITY_FIRST_SCHEDULER_INVARIANTS_REMAIN_GREEN_UNDER_V8_POINTERS",
+    "R2_MUTABLE_CURRENT_POLICY_BINDING_REMAINS_GREEN",
+    "ESCAPE_V5_CURRENTNESS_GATE_AND_CURRENT_PROJECTION_REPLAY_GREEN",
+    "CURRENT_GOVERNANCE_POINTS_TO_V8_AND_PRESERVES_REUSE_FIRST_POLICY"
+  ],
+  "hard_nonclaims": [
+    "NO_FULL_PRIVATE_REPOSITORY_REGRESSION",
+    "NO_GLOBAL_SCALAR_RANK_ONE_PROOF",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT",
+    "NO_CLAIM_GITHUB_ACTIONS_PASSED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
