@@ -97,7 +97,7 @@
     "canonical_v2_runtime_path": "canonical/runtime/professional_quality_subject_dependency_closure_v2.py",
     "canonical_v2_runtime_git_blob_sha": "52eafdc40a5024bb950750c0198c7655b513141c",
     "canonical_v2_verification_path": "canonical/verification/PROFESSIONAL_QUALITY_SUBJECT_DEPENDENCY_CLOSURE_V2_INDEPENDENT_VERIFY_20261010_V1.json",
-    "canonical_v2_verification_git_blob_sha": "f02e07738c97b651c50700a6c6b0a9c5ba62d835",
+    "canonical_v2_verification_git_blob_sha": "526c6d2dcf00ed0dcfe5e0dafd628e105381cc1e",
     "canonical_v2_missing_components_added": [
       "canonical/governance/PROFESSIONAL_QUALITY_ASSURANCE_GRAPH_20261009_V2.json",
       "canonical/governance/PROFESSIONAL_QUALITY_LEAF_EVIDENCE_REGISTRY_20261010_V1.json",
