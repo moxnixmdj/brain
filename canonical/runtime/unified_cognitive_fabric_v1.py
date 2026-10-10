@@ -36,6 +36,7 @@ from canonical.runtime import oewn_decision_sense_control_v1 as oewn_decision_se
 from canonical.runtime import finance_bounded_concept_registry_verify_v1 as finance_concept_verify
 from canonical.runtime import one_shot_reality_closure_v2 as one_shot_reality_closure
 from canonical.runtime import reached_escape_repair_cycle_v1 as reached_escape_repair
+from canonical.runtime import claim_instance_assurance_runtime_v1 as claim_assurance
 
 SCHEMA = "PROJECT_BRAIN_UNIFIED_COGNITIVE_FABRIC_V1"
 ROOT = Path(__file__).resolve().parents[2]
@@ -56,6 +57,7 @@ ENGINE_DESCRIPTORS = {
     "REPAIR_CYCLE": "live_brain_runtime_v1.execute_failure_repair_cycle",
     "UNIVERSAL_ESCAPE": "universal_escape_resolver_v1.resolve",
     "REACHED_ESCAPE_STATE": "certified_reached_escape_state_constructor_v1.construct + reached_escape_repair_cycle_v1.run",
+    "ASSURANCE_CLAIM": "claim_instance_assurance_runtime_v1.evaluate",
     "CERTIFIED_ROUTE": "certificate_gated_selected_route_runtime_entrypoint_v5",
     "TERMINAL_AUTOPILOT": "terminal_autopilot_v1",
     "TERMINAL_ROOT": "terminal_root_decision_gate_v1.evaluate",
@@ -612,6 +614,11 @@ def run(
                 proposal_provider=proposal_provider,
                 capability_expander=capability_expander,
             )
+        elif mode == "ASSURANCE_CLAIM":
+            bundle = payload.get("bundle")
+            if not isinstance(bundle, Mapping):
+                raise CognitiveFabricError("ASSURANCE_CLAIM_BUNDLE_NOT_OBJECT")
+            out = claim_assurance.evaluate(bundle, repo_root=ROOT)
         elif mode == "UNIVERSAL_ESCAPE":
             out = universal_escape.resolve(**dict(payload))
         elif mode == "REACHED_ESCAPE_STATE":
