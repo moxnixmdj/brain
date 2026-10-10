@@ -10,7 +10,6 @@ world and never grants global concept identity.
 """
 from __future__ import annotations
 
-import re
 from hashlib import sha256
 from typing import Any, Mapping, Sequence
 
@@ -21,66 +20,6 @@ from canonical.runtime.source_assertion_ownership_guard_v1 import check_direct_a
 SCHEMA = "PROJECT_BRAIN_REGCAP_CONTEXT_SIGNATURE_V1"
 EXACT_SURFACE = "loss-absorbing cushion"
 MAX_SENTENCE_CHARS = 800
-
-_CCOB_FUNC = re.compile(
-    r"\b(?:can\s+be\s+)?drawn\s+down\s+as\s+losses\s+are\s+incurred\b",
-    re.I,
-)
-_CCYB_FUNC = re.compile(
-    r"\breleased\s+when\s+system[- ]wide\s+risk\s+crystalli[sz]es\s+or\s+dissipates\b",
-    re.I,
-)
-_TLAC_FUNC_RECAP = re.compile(
-    r"\bloss-absorbing\s+and\s+recapitali[sz]ation\s+capacity\b",
-    re.I,
-)
-_TLAC_FUNC_RESOLUTION = re.compile(r"\bavailable\s+in\s+resolution\b", re.I)
-_TLAC_FUNC_GSIB = re.compile(
-    r"\b(?:G-SIBs?|global\s+systemically\s+important\s+banks?)\b",
-    re.I,
-)
-
-_CCOB_STRUCT_PERCENT = re.compile(r"(?<!\w)2\.5(?:%|\s+percent\b)", re.I)
-_CCOB_STRUCT_CET1 = re.compile(r"\b(?:CET1|Common\s+Equity\s+Tier\s+1)\b", re.I)
-_CCOB_STRUCT_ABOVE = re.compile(
-    r"\babove\s+(?:the\s+)?regulatory\s+minimum(?:\s+capital\s+requirement)?s?\b",
-    re.I,
-)
-_CCYB_STRUCT_EXTENDS = re.compile(
-    r"\bextend(?:s|ed|ing)?\s+(?:the\s+)?size\s+of\s+the\s+capital\s+conservation\s+buffer\b",
-    re.I,
-)
-_CCYB_STRUCT_CET1 = _CCOB_STRUCT_CET1
-_TLAC_STRUCT_MIN = re.compile(r"\bminimum\s+external\s+TLAC\b", re.I)
-_TLAC_STRUCT_ALONGSIDE = re.compile(
-    r"\balongside\s+minimum\s+regulatory\s+capital\s+requirements\b",
-    re.I,
-)
-
-_SIGNATURES = {
-    ("FUNCTIONAL_SIGNATURE_CLASS", "DRAWDOWN_AS_LOSSES_ARE_INCURRED"): "REGCAP::CCOB",
-    (
-        "FUNCTIONAL_SIGNATURE_CLASS",
-        "RELEASE_WHEN_SYSTEM_WIDE_RISK_CRYSTALLISES_OR_DISSIPATES",
-    ): "REGCAP::CCYB",
-    (
-        "FUNCTIONAL_SIGNATURE_CLASS",
-        "G_SIB_LOSS_ABSORPTION_RECAPITALISATION_IN_RESOLUTION",
-    ): "REGCAP::TLAC",
-    (
-        "STRUCTURAL_SIGNATURE_CLASS",
-        "TWO_POINT_FIVE_PERCENT_CET1_ABOVE_REGULATORY_MINIMUM",
-    ): "REGCAP::CCOB",
-    (
-        "STRUCTURAL_SIGNATURE_CLASS",
-        "EXTENDS_CCOB_AND_MET_WITH_CET1",
-    ): "REGCAP::CCYB",
-    (
-        "STRUCTURAL_SIGNATURE_CLASS",
-        "SEPARATE_MINIMUM_TLAC_REQUIREMENT",
-    ): "REGCAP::TLAC",
-}
-
 
 def _sha(text: str) -> str:
     return sha256(text.encode("utf-8")).hexdigest()
