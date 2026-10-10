@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_R2_FOUR_WAY_GOVERNING_REQUIREMENT_REQUEST_VERIFY_V1",
+  "status": "PASS__CONCRETE_FOUR_WAY_GOVERNING_REQUIREMENT_OBSERVATION_REQUEST_AND_V7_LIFECYCLE_VERIFIED",
+  "scope": "REGCAP_CCOB_CCYB_TLAC_MREL_BOUND_TASK_ONLY",
+  "main_merge_commits": {
+    "four_way_request_merge": "1f5d767759a0ded74c27624e90cc1b1b99f2237f",
+    "v7_request_lifecycle_merge": "812c7ee899e192fb24ea813b38d07bf96cd6f844"
+  },
+  "exact_blob_shas": {
+    "canonical/runtime/regcap_four_way_governing_requirement_discriminator_v1.py": "9815a4f85fdf7a05ed3c62dd7146af3556ee9d11",
+    "canonical/runtime/regcap_four_way_minimum_discriminator_request_v1.py": "3835ad9610bd247d038c36a5ce3ca9223be28dd5",
+    "canonical/runtime/loss_absorbing_cushion_regcap_grounding_v6.py": "3fda7718d5bee4f08a88167d61d0e1e4cb684eca",
+    "canonical/tests/test_loss_absorbing_cushion_regcap_grounding_v6.py": "7829d93086c1810d74f4049ef9f426862998ecfb",
+    "canonical/runtime/loss_absorbing_cushion_regcap_grounding_v7.py": "113e8c27ceabd07f6df418a3b4e5647b2e5c3e30",
+    "canonical/tests/test_loss_absorbing_cushion_regcap_grounding_v7.py": "372f2efc63b0f787502d34d1dbba178bff78a138"
+  },
+  "verified_behavior": {
+    "four_way_candidate_domain": [
+      "REGCAP::CCOB",
+      "REGCAP::CCYB",
+      "REGCAP::TLAC",
+      "REGCAP::MREL"
+    ],
+    "four_distinct_governing_requirement_outcomes": true,
+    "minimum_authenticated_observation_count": 1,
+    "absence_is_not_negative_evidence": true,
+    "independent_verification_required": true,
+    "unresolved_v7_keeps_request_active": true,
+    "successful_unanimous_mrel_lift_retires_request": true,
+    "v7_fail_closed_suppresses_request": true,
+    "global_concept_identity_authority": false,
+    "open_world_ontology_complete": false,
+    "terminal_authority": false
+  },
+  "execution_receipts": {
+    "new_four_way_focused_tests": "PASS__2_OF_2",
+    "grounding_v6_suite": "PASS__10_OF_10",
+    "grounding_v7_suite": "PASS__6_OF_6",
+    "python_compile": "PASS__ALL_CHANGED_RUNTIME_AND_TEST_FILES"
+  },
+  "credit": {
+    "finance_semantic_tail_closed": false,
+    "terminal_credit_delta": 0,
+    "global_open_world_closure_delta": false
+  }
+}
