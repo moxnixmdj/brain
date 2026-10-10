@@ -24,6 +24,7 @@ from canonical.runtime.coverage_root_certificate_registry_guard_v1 import valida
 REPO_ROOT = Path(__file__).resolve().parents[2]
 ROOT_REGISTRY_PATH = REPO_ROOT / "canonical/governance/COVERAGE_COMPLETENESS_ROOT_CERTIFICATE_REGISTRY_V1.json"
 MISSION_PATH = REPO_ROOT / "canonical/governance/CURRENT_MISSION_OBJECTIVE.json"
+CANONICAL_POINTER_PATH = REPO_ROOT / "canonical/CANONICAL_POINTER.json"
 
 BINDING_FIELDS = (
     "claim_id", "scope_sha256", "semantics_sha256", "carrier_schema_id",
