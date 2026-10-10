@@ -3,6 +3,7 @@ from __future__ import annotations
 from copy import deepcopy
 from pathlib import Path
 import ast
+import json
 import unittest
 
 from canonical.runtime import open_world_semantic_control_v1 as control
@@ -156,6 +157,51 @@ class ResidualSemanticControlTests(unittest.TestCase):
         self.assertFalse(out["semantic_truth_authority"])
         self.assertFalse(out["final_domain_action_authority"])
         self.assertFalse(out["terminal_authority"])
+
+    def test_governance_activation_preserves_semantic_residual(self):
+        activation = json.loads(
+            (
+                ROOT
+                / "canonical/governance/R2_OPEN_WORLD_SEMANTIC_CONTROL_ACTIVATION_20261010_V1.json"
+            ).read_text(encoding="utf-8")
+        )
+        self.assertEqual(
+            activation["status"],
+            "ACTIVE_LIVE_OPEN_WORLD_SEMANTIC_CONTROL_PROGRESS_ROUTE",
+        )
+        authority = activation["authority"]
+        self.assertTrue(authority["control_progress_closed_when_preconditions_hold"])
+        self.assertFalse(authority["semantic_identity_closed"])
+        self.assertFalse(authority["semantic_truth_authority"])
+        self.assertFalse(authority["final_domain_action_authority"])
+
+    def test_current_r2_v72_binds_control_capability_without_tail_closure(self):
+        current = json.loads(
+            (
+                ROOT / "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json"
+            ).read_text(encoding="utf-8")
+        )
+        self.assertIn("__V72__", current["status"])
+        self.assertIn(
+            "OPEN_WORLD_SEMANTIC_CONTROL_PROGRESS_BOUND",
+            current["status"],
+        )
+        bound = current["open_world_semantic_control_progress"]
+        self.assertTrue(bound["control_progress_closed"])
+        self.assertFalse(bound["semantic_identity_closed"])
+        self.assertFalse(bound["finance_semantic_tail_closed"])
+        self.assertEqual(bound["live_mode"], "OPEN_WORLD_SEMANTIC_CONTROL")
+
+    def test_scheduler_deduplicates_generic_control_work_only(self):
+        scheduler = json.loads(
+            (
+                ROOT / "canonical/governance/CURRENT_DEVELOPMENT_SCHEDULER.json"
+            ).read_text(encoding="utf-8")
+        )
+        row = scheduler["open_world_semantic_control_progress"]
+        self.assertIn("DO_NOT_REBUILD_GENERIC_OPEN_WORLD_INFORMATION_ORIGIN_CONTROL", row["scheduler_rule"])
+        self.assertFalse(row["semantic_closure_claimed"])
+        self.assertIn("SEMANTIC_IDENTITY_RESIDUAL_STILL_OPEN", row["status"])
 
 
 if __name__ == "__main__":
