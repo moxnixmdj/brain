@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK20_V5_EFFECTIVE_AUTHORITY_PROMOTION_20261010_V1",
+  "date": "2026-10-10",
+  "status": "AUTHORIZED_ZERO_EXPOSURE_PUBLIC_PROMOTION_ONLY__ACTIVATION_FORBIDDEN",
+  "slot_id": "terminal-bench-science/hysteretic-aquifer-control::trial-0",
+  "task_digest": "sha256:681df0c3b2ada03a933ac4d2e11f07983676f87a9f26b61e416987904b880289",
+  "logical_attempt_id": "c7a02ecc6b11f4338120f05cd922370d361ce79e104549f95b656df3b51cb2bb",
+  "execution_claim_binding_digest": "sha256:aa0d91d18bb597319414b7385a92248992c093e14bf9c8f5677b72c05cb09beb",
+  "canonical_authority": {
+    "path": "canonical/governance/TB_SCIENCE_RANK20_ONE_SLOT_EXECUTION_AUTHORITY_20261010_V5.json",
+    "git_blob_sha": "d50b123ed0df77fbd772e00331f278835d4bf35b"
+  },
+  "canonical_ledger": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V48.json",
+    "git_blob_sha": "2d8c04e85b4d611b2074a6fdcab71c031febe284"
+  },
+  "staged_reseal_verification": {
+    "path": "canonical/verification/TB_SCIENCE_RANK20_V5_PUBLIC_RESEAL_VERIFY_20261010_V1.json",
+    "git_blob_sha": "af8ccc669da3e2606c174c196cadaea30982dbb9"
+  },
+  "public_repository": "moxnixmdj/verification-capsule-runner",
+  "public_base_commit": "06c1695ed9964226c8c106afb1d07232e6470bab",
+  "staged_surface_git_blob_sha": "c206747c6db760ff523e1b5a269b966c7fd0440c",
+  "immutable_bindings": {
+    "workflow_git_blob_sha": "e4cb372e501790fd9ed5aa72193d18109a599102",
+    "behavior_git_blob_sha": "8c3d285161f356c9256375c9168e88cdaadd58e5",
+    "claim_binding_git_blob_sha": "7d94ac0b86053a31fd711dcb0652370041671e44",
+    "preflight_git_blob_sha": "74d55719d01f3f434b0b75001548f56a4ed83ff6",
+    "start_cas_git_blob_sha": "35cd4c7a31d5ffbafa755dcdf888c2dee1beeb1b",
+    "invariant_registry_git_blob_sha": "b9fbb776ed5cf0888f34809c94f78638d3d915c1"
+  },
+  "allowed_changes": [
+    "PUBLIC_AUTHORITY_BINDING_PROMOTION",
+    "PUBLIC_LEDGER_BINDING_PROMOTION",
+    "EPOCH_PROMOTION",
+    "EXECUTION_CLAIM_PROMOTION",
+    "CURRENT_SURFACE_EFFECTIVE_AUTHORITY_FLAGS",
+    "PROMOTION_VERIFICATION"
+  ],
+  "required_postconditions": {
+    "execution_authority": true,
+    "task_read_authority": true,
+    "activation_present": false,
+    "task_read_history": false,
+    "task_started": false,
+    "benchmark_trials_consumed": 0,
+    "logical_attempt_unchanged": true,
+    "workflow_unchanged": true,
+    "behavior_unchanged": true
+  },
+  "activation_authority": false,
+  "task_read_execution_authority_effective_before_public_verification": false,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
