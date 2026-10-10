@@ -1,0 +1,96 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_R12_SEMANTIC_CC_R3_REUSE_CUT_VERIFICATION_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_CANDIDATE_CONNECTOR_REDERIVATION_PLUS_ISOLATED_LOGIC_REPLAY_ON_EXACT_EVIDENCE__2_OF_8_REUSE_CUT_VALIDATED__EXACT_CANDIDATE_CLEAN_ROOM_BYTES_NOT_REPLAYED__ZERO_PROPERTY_OR_TERMINAL_CREDIT",
+  "subject": {
+    "cut": {
+      "path": "canonical/governance/PROFESSIONAL_R12_SEMANTIC_CC_R3_REUSE_CUT_20261010_V1.json",
+      "git_blob_sha": "4f71b36b76c3bab197fd42b6374f0825fcae6e15"
+    },
+    "verifier": {
+      "path": "canonical/runtime/professional_r12_semantic_cc_r3_reuse_cut_verify_v1.py",
+      "git_blob_sha": "40db8866ce5dba212521ffbffe6c6c69629e80d3"
+    },
+    "tests": {
+      "path": "canonical/tests/test_professional_r12_semantic_cc_r3_reuse_cut_verify_v1.py",
+      "git_blob_sha": "14eb289e3fdc06aa62a1b83e1a74c620b33c5681"
+    }
+  },
+  "exact_evidence_blobs": {
+    "decomposition": "d83ded1689ec636a2cda60f7c7419dd69a61cbd5",
+    "frozen_claim": "5e7c198da31b901bb4f53c4fc15cee7d6298c114",
+    "same_subject_composition": "4ee02c41acf64b1f47ebadec55b6bb5453d676ba",
+    "semantic_identity_carrier": "35a3ccf9ad454aa0318a4ed10edc065830c3874d",
+    "r12_execution_property_truth": "b2b9365ad4e7d34628d74f328507eecf01a13804",
+    "r12_root_subject_binding": "174bc362ff1f1b7935925c8d17e55d36288bdbad"
+  },
+  "verification": [
+    {
+      "method": "INDEPENDENT_CONNECTOR_REDERIVATION_OVER_EXACT_GITHUB_CANDIDATE_AND_EXACT_EVIDENCE_BYTES",
+      "implementation": "SEPARATE_JAVASCRIPT_CHECKER_NOT_THE_PYTHON_VERIFIER",
+      "result": "PASS",
+      "checks": {
+        "claim_identity_match": true,
+        "exact_eight_clause_decomposition": true,
+        "c2_same_subject_reuse": true,
+        "c3_identity_abstraction_reuse": true,
+        "proved_set_exactly_c2_c3": true,
+        "c8_remains_open_despite_two_synthetic_positive_execution_paths": true,
+        "stronger_unknown_defeater_residual_remains_open": true,
+        "derived_counts_2_proved_6_open": true,
+        "zero_credit": true
+      }
+    },
+    {
+      "method": "ISOLATED_SPRITE_PYTHON_LOGIC_REPLAY",
+      "carrier": {
+        "provider": "Sprites",
+        "sprite": "r12-reuse-audit-20261010-v1",
+        "sprite_id": "sprite-30c57794-f52e-4036-aa61-6e5eaf2b3427"
+      },
+      "exact_evidence_objects_used": true,
+      "exact_candidate_bytes_replayed": false,
+      "synthetic_equivalent_cut_used": true,
+      "checks_run": 4,
+      "checks_passed": 4,
+      "result": "PASS__SYNTHETIC_CUT_LOGIC_REPLAY_ON_EXACT_PINNED_EVIDENCE",
+      "adversarial_checks": [
+        "C8_SYNTHETIC_POSITIVE_PATHS_CANNOT_BE_PROMOTED_TO_SEMANTIC_NONVACUITY",
+        "UNKNOWN_DEFEATER_COMPLETENESS_CANNOT_BE_FLIPPED_TRUE",
+        "C2_PROVED_SET_CANNOT_BE_SILENTLY_DROPPED"
+      ]
+    }
+  ],
+  "discovered_and_repaired_during_verification": {
+    "issue": "PYTHON_VERIFIER_ORIGINALLY_READ_EXECUTION_POSITIVE_CASE_COUNTS_FROM_TOP_LEVEL_INSTEAD_OF_INDEPENDENT_REPLAY_OBSERVED_CASE_COUNTS",
+    "falsified_original_verifier": true,
+    "repair_commit": "5884b9e7b15ac594e3daed24a2f9c626967f1fd6",
+    "repaired_verifier_git_blob_sha": "40db8866ce5dba212521ffbffe6c6c69629e80d3",
+    "post_repair_connector_rederivation_passed": true,
+    "post_repair_isolated_logic_replay_passed": true
+  },
+  "proved": {
+    "root_contract_clause_count": 8,
+    "proved_by_reuse_count": 2,
+    "proved_clause_ids": [
+      "R12C2_SAME_SUBJECT_ROOT_CONJUNCTION",
+      "R12C3_ABSTRACTION_SOUNDNESS"
+    ],
+    "open_root_contract_clause_count": 6,
+    "stronger_material_defeater_obligation_open": true,
+    "cc_r3_terminal_closure_proved": false
+  },
+  "hard_nonclaims": [
+    "NO_EXACT_CANDIDATE_BYTE_CLEAN_ROOM_REPLAY",
+    "NO_CC_R3_TERMINAL_CLOSURE",
+    "NO_R12_SEMANTIC_PROPERTY_TRUTH",
+    "NO_UNKNOWN_DEFEATER_COMPLETENESS",
+    "NO_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "property_truth_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
