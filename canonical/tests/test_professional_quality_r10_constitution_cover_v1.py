@@ -88,7 +88,13 @@ class R10ConstitutionCoverV1Tests(unittest.TestCase):
 
     def test_new_canonical_r10_defeater_without_guard_route_fails_closed(self):
         catalog = deepcopy(self.catalog)
-        rows = catalog["defeaters"]
+        rows = (
+            catalog.get("defeaters")
+            or catalog.get("attack_classes")
+            or catalog.get("nodes")
+            or catalog.get("challenges")
+        )
+        self.assertIsInstance(rows, list)
         rows.append({
             "id": "C999_NEW_R10_ATTACK",
             "root_ids": [cover.ROOT_ID],
