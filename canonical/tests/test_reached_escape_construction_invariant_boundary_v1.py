@@ -6,6 +6,7 @@ from unittest.mock import patch
 from canonical.runtime import unified_cognitive_fabric_v1 as fabric
 from canonical.runtime import reached_escape_finite_totality_certificate_v1 as certificate
 from canonical.runtime import reached_escape_repair_cycle_v1 as repair_cycle
+from canonical.runtime import certified_reached_escape_state_constructor_v2 as truth
 
 
 def counterexample_state():
@@ -34,6 +35,65 @@ def counterexample_state():
     }
 
 
+def _truth_receipt(claim, kind, verified):
+    core = {
+        "schema": truth.RECEIPT_SCHEMA,
+        "pass": True,
+        "claim_sha256": truth._digest(claim),
+        "candidate_state_sha256": claim["candidate_state_sha256"],
+        "authority_kind": kind,
+        "authority_id": "TEST_REACHED_ESCAPE_TRUTH_AUTHORITY",
+        "verification_authority_mutated": False,
+        "verified": verified,
+    }
+    return {**core, "receipt_sha256": truth._digest(core)}
+
+
+def semantic_verifier(request):
+    if request.get("schema") == truth.CLAIM_SCHEMA:
+        kind = request["claim_type"]
+        if kind == "POLICY_ADEQUACY_SAFETY_AND_RESOURCE":
+            return _truth_receipt(
+                request,
+                kind,
+                {
+                    "safe": True,
+                    "adequate_region_ids": list(request["adequate_region_ids"]),
+                    "resource_bound": {"amount": 3, "unit": "WORK_UNIT"},
+                },
+            )
+        if kind == "DISCRIMINATOR_TRUTH_SAFETY_COMPLETENESS_AND_RESOURCE":
+            return _truth_receipt(
+                request,
+                kind,
+                {
+                    "safe": True,
+                    "truthful": True,
+                    "complete": True,
+                    "outcomes": dict(request["outcomes"]),
+                    "resource_bound": {"amount": 2, "unit": "WORK_UNIT"},
+                },
+            )
+    if request.get("schema") == repair_cycle.VERIFY_REQUEST_SCHEMA:
+        return {
+            "schema": repair_cycle.VERIFY_SCHEMA,
+            "pass": True,
+            "state_sha256": request["state_sha256"],
+            "repair_sha256": request["repair_sha256"],
+            "repair_dispatch_sha256": request["repair_dispatch_sha256"],
+            "alternative_id": request["alternative_id"],
+            "candidate_sha256": request["candidate_sha256"],
+            "candidate_kind": request["candidate_kind"],
+            "verified_properties": [request["required_verified_property"]],
+            "independent_verification": True,
+            "verifier_id": "TEST_INDEPENDENT_REACHED_ESCAPE_VERIFIER",
+            "promotion_authority": False,
+            "acceptance_authority": False,
+            "terminal_authority": False,
+        }
+    return None
+
+
 class ReachedEscapeConstructionInvariantBoundaryV1Tests(unittest.TestCase):
     def test_live_fabric_rejects_uncertified_state_with_exact_repair(self):
         state = counterexample_state()
@@ -52,7 +112,8 @@ class ReachedEscapeConstructionInvariantBoundaryV1Tests(unittest.TestCase):
                     "mode": "REACHED_ESCAPE_STATE",
                     "payload": state,
                     "options": {"learn": False},
-                }
+                },
+                semantic_authority_verifier=semantic_verifier,
             )
 
         self.assertEqual(out["status"], "FABRIC_DISPATCH_COMPLETE", out)
@@ -114,7 +175,8 @@ class ReachedEscapeConstructionInvariantBoundaryV1Tests(unittest.TestCase):
                     "mode": "REACHED_ESCAPE_STATE",
                     "payload": state,
                     "options": {"learn": False},
-                }
+                },
+                semantic_authority_verifier=semantic_verifier,
             )
 
         self.assertEqual(out["status"], "FABRIC_DISPATCH_COMPLETE", out)
@@ -189,24 +251,6 @@ class ReachedEscapeConstructionInvariantBoundaryV1Tests(unittest.TestCase):
                 },
                 "truth_authority": False,
                 "verification_authority": False,
-                "promotion_authority": False,
-                "acceptance_authority": False,
-                "terminal_authority": False,
-            }
-
-        def semantic_verifier(request):
-            return {
-                "schema": repair_cycle.VERIFY_SCHEMA,
-                "pass": True,
-                "state_sha256": request["state_sha256"],
-                "repair_sha256": request["repair_sha256"],
-                "repair_dispatch_sha256": request["repair_dispatch_sha256"],
-                "alternative_id": request["alternative_id"],
-                "candidate_sha256": request["candidate_sha256"],
-                "candidate_kind": request["candidate_kind"],
-                "verified_properties": [request["required_verified_property"]],
-                "independent_verification": True,
-                "verifier_id": "TEST_INDEPENDENT_REACHED_ESCAPE_VERIFIER",
                 "promotion_authority": False,
                 "acceptance_authority": False,
                 "terminal_authority": False,
