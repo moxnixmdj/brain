@@ -15,7 +15,8 @@ from copy import deepcopy
 from pathlib import Path
 from typing import Any, Mapping
 
-from canonical.runtime import coverage_claim_scope_guard_v1 as claim_guard
+from canonical.runtime import coverage_claim_scope_guard_v1 as claim_guard_v1
+from canonical.runtime import coverage_claim_scope_guard_v2 as claim_guard_v2
 from canonical.runtime import professional_semantic_totality_claim_pack_v2 as v2
 
 ROOT=Path(__file__).resolve().parents[2]
@@ -69,7 +70,13 @@ def resolve_mission_authority(
     }
 
 
-def rebind_source_pack(source:Mapping[str,Any],*,mission_authority_blob_sha:str)->dict[str,Any]:
+def rebind_source_pack(
+    source:Mapping[str,Any],
+    *,
+    mission_authority_blob_sha:str,
+    current_pointer:Mapping[str,Any],
+    mission_authority:Mapping[str,Any],
+)->dict[str,Any]:
     if source.get("pass") is not True or source.get("semantic_claim_count")!=12:
         return _fail("V2_SOURCE_PACK_NOT_VALID_CURRENT_SHAPE")
     claims=source.get("claims")
@@ -97,10 +104,13 @@ def rebind_source_pack(source:Mapping[str,Any],*,mission_authority_blob_sha:str)
             "epoch":EPOCH,
             "authority_id":AUTHORITY_ID,
         }
-        claim["claim_id"]=claim_guard.compute_claim_id(claim)
+        claim["claim_id"]=claim_guard_v1.compute_claim_id(claim)
         claim["terminal_credit_delta"]=0
-        verdict=claim_guard.validate_claim(
-            claim,current_mission_blob_sha=mission_authority_blob_sha
+        verdict=claim_guard_v2.validate_claim(
+            claim,
+            current_pointer=current_pointer,
+            mission_authority=mission_authority,
+            mission_authority_blob_sha=mission_authority_blob_sha,
         )
         if verdict.get("pass") is not True:
             return _fail("V3_CLAIM_GUARD_REJECTED",leaf_id=row.get("leaf_id"),verdict=verdict)
@@ -167,7 +177,12 @@ def verify(*,repo_root:str|Path|None=None)->dict[str,Any]:
     source=v2.verify(repo_root=root)
     if source.get("pass") is not True:
         return _fail("V2_SOURCE_VALIDATION_FAILED",source_status=source.get("status"),source_reason=source.get("reason"))
-    out=rebind_source_pack(source,mission_authority_blob_sha=EXPECTED_MISSION_AUTHORITY_BLOB)
+    out=rebind_source_pack(
+        source,
+        mission_authority_blob_sha=EXPECTED_MISSION_AUTHORITY_BLOB,
+        current_pointer=pointer,
+        mission_authority=authority,
+    )
     if out.get("pass") is not True:
         return out
     out["mission_resolution"]=resolved
