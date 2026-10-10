@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_SAME_SUBJECT_MULTISCOPE_CURRENT_MAIN_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "INDEPENDENT_SPRITE_PASS__12_OF_12__CURRENT_MAIN_21_SCOPES_24_BOUNDED_LEAVES__MULTISCOPE_ROOT_COVER_SOUND__ZERO_QUALITY_CREDIT",
+  "exact_state": {
+    "scoped_overlay": {
+      "path": "canonical/runtime/professional_quality_scoped_evidence_overlay_v1.py",
+      "git_blob_sha": "19c11df8b011fa2c72c755f421edcd38a89f0a07"
+    },
+    "scoped_registry": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_REGISTRY_20261010_V1.json",
+      "git_blob_sha": "b9ddf7cbe7fbfad0e81fe068a0c19b48703b5aba"
+    },
+    "projection_runtime": {
+      "path": "canonical/runtime/professional_quality_leaf_coverage_projection_v2.py",
+      "git_blob_sha": "b316d103d7134e58b8b5b838627ba7946742b2c4"
+    },
+    "projection_tests": {
+      "path": "canonical/tests/test_professional_quality_leaf_coverage_projection_v2.py",
+      "git_blob_sha": "c99bd8f7c079fb749ca243c21240850d60243c03"
+    },
+    "composition_runtime": {
+      "path": "canonical/runtime/professional_quality_same_subject_composition_gate_v1.py",
+      "git_blob_sha": "229e37e96e2e61fd207a6bef7e69ad8d3e72e9c6"
+    },
+    "composition_tests": {
+      "path": "canonical/tests/test_professional_quality_same_subject_composition_gate_v1.py",
+      "git_blob_sha": "38ecaab5f5c8010e0eb2ce138c39da171020960e"
+    },
+    "normal_form": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_CLOSURE_NORMAL_FORM_20261009_V1.json",
+      "git_blob_sha": "ebcfe5a48efce9df7fbc69a3817ac2f9adb1ff93"
+    }
+  },
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "working_directory": "/home/sprite/professional-frontier-main-verify-v2"
+  },
+  "replay": {
+    "projection_tests_passed": 3,
+    "same_subject_gate_tests_passed": 9,
+    "tests_passed": 12,
+    "tests_total": 12,
+    "tests_failed": 0
+  },
+  "proved": [
+    "CURRENT_MAIN_PROJECTS_21_ADMITTED_SCOPES_TO_ALL_24_BOUNDED_LEAVES",
+    "NO_SEMANTIC_LEAF_REMAINS_WITHOUT_SCOPED_EVIDENCE",
+    "MULTIPLE_SCOPED_CAPABILITIES_PER_ROOT_ARE_ALLOWED",
+    "EXACT_TWELVE_ROOT_SET_REMAINS_REQUIRED",
+    "MISSING_ROOT_SPLIT_SUBJECT_STALE_BINDING_SELF_AUTHORITY_AND_GLOBAL_AUTHORITY_SHORTCUTS_FAIL_CLOSED"
+  ],
+  "hard_nonclaims": [
+    "NO_ROOT_SUBJECT_BINDING_AUTHORITY_FROM_SCOPED_EVIDENCE_ALONE",
+    "NO_GLOBAL_LEAF_OR_ROOT_CLOSURE",
+    "NO_SAME_SUBJECT_COMPOSITION_PASS_ON_REAL_SYSTEM_YET",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
