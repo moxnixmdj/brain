@@ -122,6 +122,13 @@ def check_direct_assertion(
     ):
         return _base("FAIL_CLOSED", reason="SOURCE_SPAN_INVALID")
 
+    selected_surface = source_text[start:end]
+    if _contains_balanced_quote(selected_surface):
+        return _base(
+            "UNRESOLVED__QUOTED_SCOPE",
+            selected_span=[start, end],
+        )
+
     found = containing_sentence(source_text, start=start, end=end)
     if found is None:
         return _base("FAIL_CLOSED", reason="CONTAINING_SENTENCE_NOT_FOUND")
