@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_WHOLE_LEAF_DOMAIN_EQUIVALENCE_V1_INDEPENDENT_VERIFY",
+  "date": "2026-10-10",
+  "status": "PASS__PYCOMPILE__8_OF_8_ADVERSARIAL_TESTS__24_OF_24_REAL_MANIFEST_LEAVES__24_UNIQUE_CLAIM_IDS__ZERO_PROPERTY_OR_TERMINAL_CREDIT",
+  "subject": {
+    "runtime_path": "canonical/runtime/professional_quality_whole_leaf_domain_equivalence_v1.py",
+    "runtime_git_blob_sha": "76bf7e1a6f26ff3664ed8c355dff8a688b074159",
+    "tests_path": "canonical/tests/test_professional_quality_whole_leaf_domain_equivalence_v1.py",
+    "tests_git_blob_sha": "38678fcf59ee3fa87b223156748a1b29660764e1",
+    "leaf_manifest_path": "canonical/governance/PROFESSIONAL_QUALITY_LEAF_BINDING_MANIFEST_20261010_V1.json",
+    "leaf_manifest_git_blob_sha": "a7cad32c9fd969ff2c3857bb924c7bd746237ec2",
+    "subject_path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V7_DECLARED_SYSTEM_SUBJECT_20261010_V6.json",
+    "subject_git_blob_sha": "1d598bc8757017ceb34928d0df9f5fce859ef868",
+    "mission_authority_path": "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+    "mission_authority_git_blob_sha": "13c470645b037bbb46245c687dd35197b420d51a",
+    "claim_guard_path": "canonical/runtime/coverage_claim_scope_guard_v1.py",
+    "claim_guard_git_blob_sha": "d1de61aa9bc00a184772a50f7ec9d5ee2853d747"
+  },
+  "independent_replay": {
+    "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/whole-leaf-domain-equivalence-v1",
+    "py_compile": "PASS",
+    "unit_tests_run": 8,
+    "unit_tests_passed": 8,
+    "unit_tests_failed": 0,
+    "real_manifest_leaf_count": 24,
+    "real_manifest_passed": 24,
+    "unique_claim_id_count": 24,
+    "transcript_sha256": "11e7bd16c42d66035ffe2989f365f56392d963f187b6f35c4f8a1c047a3779dc"
+  },
+  "proves": [
+    "EXACT_FROZEN_MANIFEST_BINDING_DEFINES_ONE_WHOLE_ADMISSIBLE_DOMAIN_PER_PROFESSIONAL_LEAF",
+    "FILTER_OR_EXCLUSION_NARROWING_FAILS_CLOSED",
+    "ACCEPTANCE_SUBJECT_CONTRACT_OR_CLAIM_CONTENT_DRIFT_FAILS_CLOSED",
+    "SEMANTIC_AND_EXECUTION_LEAF_DOMAINS_REMAIN_DISTINCT",
+    "ALL_24_CURRENT_LEAVES_HAVE_DETERMINISTIC_EXACT_WHOLE_DOMAIN_CLAIM_SCOPES",
+    "ALL_24_CURRENT_CLAIM_IDS_ARE_UNIQUE"
+  ],
+  "hard_nonclaims": [
+    "NO_LEAF_PROPERTY_TRUTH",
+    "NO_SCOPE_CERTIFICATE_ADMISSION_FROM_DOMAIN_EQUIVALENCE_ALONE",
+    "NO_SEMANTIC_OR_EXECUTION_AUTHORITY",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
