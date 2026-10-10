@@ -469,8 +469,11 @@ class ProfessionalQualityScopedEvidenceV1Tests(unittest.TestCase):
             "FAIL_CLOSED_ASSURANCE_GRAPH_META_COMPOSITION_AND_ORDER_INDEPENDENT_DEFEATER_ROUTING",
         )
         self.assertEqual(
-            row["contributes_to_leaf_ids"],
-            ["PQ::R12_META_COMPOSITION_CLOSURE::EXECUTION"],
+            set(row["contributes_to_leaf_ids"]),
+            {
+                "PQ::R12_META_COMPOSITION_CLOSURE::SEMANTIC",
+                "PQ::R12_META_COMPOSITION_CLOSURE::EXECUTION",
+            },
         )
         self.assertIn(
             "NO_UNKNOWN_DEFEATER_COMPLETENESS",
