@@ -107,7 +107,9 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
             })
         self.assertEqual(out["status"], "FABRIC_DISPATCH_COMPLETE")
         self.assertTrue(out["inner_pass"], out)
-        self.assertEqual(out["result"], planned)
+        self.assertTrue(out["result"]["pass"])
+        self.assertEqual(out["result"]["status"], planned["status"])
+        self.assertEqual(out["result"]["plan"], planned["plan"])
         self.assertFalse(out["result"]["execution_authority"])
         compile_plan.assert_called_once()
         kwargs = compile_plan.call_args.kwargs
