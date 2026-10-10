@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_V10_SEMANTIC_EVIDENCE_REGISTRY_V1",
+  "date": "2026-10-11",
+  "status": "ACTIVE_CANDIDATE__R1_OF_12_CURRENT_V10_SEMANTIC_RECEIPTS__ZERO_GLOBAL_OR_TERMINAL_AUTHORITY",
+  "manifest": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_LEAF_BINDING_MANIFEST_20261011_V2.json",
+    "git_blob_sha": "8ae72d7d44047ac9dec1b014c34a44f9933f0215"
+  },
+  "claim_batch": {
+    "path": "canonical/runtime/professional_semantic_v2_v10_claim_batch_v1.py",
+    "git_blob_sha": "75fcbaf92a2b84b0d670ef7d784107590c5f1d08"
+  },
+  "semantic_binder": {
+    "path": "canonical/runtime/professional_quality_semantic_admission_binder_v3.py",
+    "git_blob_sha": "6e8e5ac7c4cf4cc38e5e7a6f0ad6a0c80f0683be"
+  },
+  "semantic_receipts": {
+    "PQ::R1_TARGET_SPECIFICATION::SEMANTIC": [
+      {
+        "path": "canonical/verification/PROFESSIONAL_QUALITY_R1_V10_SEMANTIC_LEAF_RECEIPT_20261011_V1.json",
+        "git_blob_sha": "f92f13ed8bcdb71fe050734429f53d8dcb1f3c3f"
+      }
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_R2_THROUGH_R12_SEMANTIC_RECEIPTS_ADMITTED",
+    "NO_24_OF_24_PROPERTY_TRUTH",
+    "NO_GLOBAL_PROFESSIONAL_QUALITY_CLOSURE",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
