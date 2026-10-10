@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 from typing import Any,Mapping
 from canonical.runtime import professional_quality_same_subject_composition_gate_v3 as gate
+from canonical.runtime import professional_quality_root_binding_compat_v1 as compat
 
 SCHEMA="PROJECT_BRAIN_PROFESSIONAL_QUALITY_V7_REAL_12_OF_12_COMPOSITION_VERIFY_V1"
 WORKLIST="canonical/governance/PROFESSIONAL_QUALITY_P1_V7_SAME_SUBJECT_ROOT_BINDING_WORKLIST_20261010_V18.json"
@@ -73,8 +74,9 @@ def verify(*,repo_root:str|Path|None=None):
   vd=_read(root,vr.get("path",""),vr.get("git_blob_sha",""))
   if bd is None or vd is None:return _fail("ROOT_RECEIPT_BYTES_INVALID",root_id=rid)
   if bd.get("root_id")!=rid:return _fail("ROOT_BINDING_ID_MISMATCH",root_id=rid)
-  if bd.get("global_subject_identity_authority") is not False or bd.get("terminal_authority") is not False:return _fail("ROOT_BINDING_SELF_AUTHORITY_FORBIDDEN",root_id=rid)
-  kind=bd.get("subject_kind");sid=bd.get("subject_id");sha=bd.get("subject_sha256")
+  norm=compat.normalize(bd)
+  if norm.get("pass") is not True:return _fail(norm.get("reason","ROOT_BINDING_COMPAT_FAILED"),root_id=rid)
+  kind=norm.get("subject_kind");sid=norm.get("subject_id");sha=norm.get("subject_sha256")
   err=gate._verification_receipt_error(root_id=rid,verification=vd,binding_blob=br.get("git_blob_sha"),subject_kind=kind,subject_id=sid,subject_sha=sha)
   if err is not None:return _fail(err,root_id=rid)
   subject_keys.add((kind,sid,sha));verified.append(rid)
