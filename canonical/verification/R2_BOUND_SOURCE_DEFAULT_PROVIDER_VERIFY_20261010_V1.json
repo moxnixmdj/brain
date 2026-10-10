@@ -1,20 +1,20 @@
 {
   "schema": "PROJECT_BRAIN_R2_BOUND_SOURCE_DEFAULT_PROVIDER_VERIFY_20261010_V1",
   "date": "2026-10-10",
-  "status": "PASS__EXACT_BOUND_SOURCE_DEFAULT_ACQUISITION__5_OF_5_NEW_PLUS_28_OF_28_CONTROLLER_REGRESSION__ZERO_CREDIT",
+  "status": "PASS__EXACT_BOUND_SOURCE_DEFAULT_ACQUISITION__6_OF_6_NEW_PLUS_28_OF_28_CONTROLLER_REGRESSION__ZERO_CREDIT",
   "branch": "successor/r2-bound-source-default-provider-20261010-v1",
   "exact_blobs": {
     "provider": "c1d1864df799cb1b5803eed9387dfe9999fe1cb3",
-    "controller": "00b6c373bbb0f367435705ce4492bf2c249e1b0e",
+    "controller": "e1520774bb6d054c8bd0d9cbfa10d8230cc114c5",
     "provider_tests": "6d9f3e91c033edb8e2f652e392b43a4cd20f8866",
-    "controller_seam_tests": "26e988f5306a8d7d1a7ec2f5df5315c04c31643b",
+    "controller_seam_tests": "ab13c3c4e4aae120c77a493f6b4624ba4926f1b7",
     "controller_regression_tests": "9e0a784be82e47ebc7eb23985f56e83c98afe555"
   },
   "independent_execution": {
     "carrier": "brain-live-runtime-v1-verify-20261008",
-    "new_provider_and_seam": "PASS__5_OF_5",
+    "new_provider_and_seam": "PASS__6_OF_6",
     "existing_controller_regression": "PASS__28_OF_28",
-    "combined_relevant_checks": "PASS__33_OF_33",
+    "combined_relevant_checks": "PASS__34_OF_34",
     "python_compile": "PASS__4_CHANGED_FILES"
   },
   "proved": [
@@ -28,7 +28,8 @@
     "BOUND_SOURCE_PROVIDER_DOES_NOT_DECLARE_PREDICATE_TRUTH_OR_SEMANTIC_AUTHORITY",
     "DOWNSTREAM_CHECKER_OWNED_TWO_BOOLEAN_COMPILATION_AND_TRUTH_RECOMPUTATION_REMAIN_LOAD_BEARING",
     "EXPLICIT_CUSTOM_INFORMATION_PROVIDER_OVERRIDES_DEFAULT_BOUND_SOURCE_PROVIDER",
-    "UNKNOWN_AND_USER_CONTROLLED_INFORMATION_ORIGINS_PRESERVE_EXISTING_ASK_USER_BEHAVIOR"
+    "UNKNOWN_AND_USER_CONTROLLED_INFORMATION_ORIGINS_PRESERVE_EXISTING_ASK_USER_BEHAVIOR",
+    "BOUND_SOURCE_PROVIDER_FAILURE_RECORDS_REMAIN_OPEN_AND_NEVER_ENTER_TRUTH_PAYLOADS"
   ],
   "boundaries": [
     "ONLY_EXACT_ALREADY_BOUND_SOURCE_ACQUISITION_IS_CLOSED",
