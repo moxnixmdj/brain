@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_PQ_REPAIRED_V7_SUBJECT_CLOSURE_OVERLAY_V1",
+  "status": "CLOSED__REPAIRED_V7_23_COMPONENT_SUBJECT",
+  "base_v6_closure": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_SUBJECT_DEPENDENCY_CLOSURE_WORKLIST_20261010_V1.json",
+    "roots_dependency_classified": 12,
+    "missing_components": 0
+  },
+  "repaired_subject": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V7_DECLARED_SYSTEM_SUBJECT_20261010_V7.json",
+    "git_blob_sha": "5609e3ceafce91ff9cf4e7de6b0f208e46a22f33",
+    "subject_sha256": "7e2904f3205b283a3a0f9e7583b36599cc2da4a96fd31b1777c226ca5c16c9e4",
+    "component_count": 23
+  },
+  "predecessor_subject": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V7_DECLARED_SYSTEM_SUBJECT_20261010_V6.json",
+    "git_blob_sha": "1d598bc8757017ceb34928d0df9f5fce859ef868",
+    "component_count": 22
+  },
+  "exact_delta": {
+    "added": [
+      "canonical/runtime/professional_quality_declared_system_subject_verify_v1.py"
+    ],
+    "removed": [],
+    "changed": []
+  },
+  "inherited_components_byte_identical": true,
+  "dependency_closure_complete": true,
+  "terminal_credit_delta": 0
+}

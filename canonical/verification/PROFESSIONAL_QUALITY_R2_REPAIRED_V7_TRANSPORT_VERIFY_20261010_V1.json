@@ -1,0 +1,23 @@
+{
+  "schema": "PROJECT_BRAIN_PQ_R2_REPAIRED_V7_TRANSPORT_VERIFY_V1",
+  "status": "PASS__R2_BINDING_TRANSPORTED_TO_REPAIRED_V7",
+  "new_binding": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_R2_ROOT_SUBJECT_BINDING_20261010_V3.json",
+    "git_blob_sha": "6095feb4dbe2e98742832334af8836444dfbb8b5"
+  },
+  "old_verification": {
+    "path": "canonical/verification/PROFESSIONAL_QUALITY_R2_V7_ROOT_SUBJECT_BINDING_VERIFY_20261010_V1.json",
+    "git_blob_sha": "07cb2ac6b48a6d03dc55b923b217a095c0ee86fc"
+  },
+  "rekey_verification": {
+    "path": "canonical/verification/PROFESSIONAL_QUALITY_R2_REPAIRED_V7_REKEY_VERIFY_20261010_V1.json",
+    "git_blob_sha": "10e2cef3c8a79c4baf8f6ce7a264985a9e6c8950"
+  },
+  "new_subject_sha256": "7e2904f3205b283a3a0f9e7583b36599cc2da4a96fd31b1777c226ca5c16c9e4",
+  "root_subject_binding_authority": true,
+  "global_candidate_search_complete": false,
+  "real_task_step_receipt_proved": false,
+  "quality_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0
+}
