@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_LEAF_VERIFICATION_RECEIPT_V1",
+  "date": "2026-10-10",
+  "leaf_id": "PQ::R1_TARGET_SPECIFICATION::EXECUTION",
+  "root_id": "R1_TARGET_SPECIFICATION",
+  "leaf_kind": "EXECUTION",
+  "verdict": "PASS",
+  "closure_scope": "EXACT_LEAF",
+  "acceptance_sha256": "fae7b1ccf4f94a91a1fb4caa4a634e6883538a28382991d97c69278e574b67ce",
+  "root_contract_sha256": "d854a1154c180557d2e6bf76d8b26db16866ef59dbfe1a56463691d91375e282",
+  "manifest_git_blob_sha": "a7cad32c9fd969ff2c3857bb924c7bd746237ec2",
+  "leaf_execution_satisfied": true,
+  "leaf_semantic_satisfied": false,
+  "property_truth_basis": "INDEPENDENTLY_REPLAYED_46_CASE_R1_EXECUTION_ACCEPTANCE_ON_EXACT_CURRENT_CONTRACT_AND_STRUCTURAL_GATE_BYTES",
+  "verification_basis": [
+    {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R1_EXECUTION_PROPERTY_TRUTH_INDEPENDENT_VERIFY_20261010_V1.json",
+      "git_blob_sha": "c7831ee5157fcddc48c44034bca19a57d9ce314b"
+    },
+    {
+      "path": "canonical/runtime/professional_quality_r1_execution_property_truth_verify_v1.py",
+      "git_blob_sha": "bba1798a8a977830dd410ec60bb19acf42927a85"
+    },
+    {
+      "path": "canonical/tests/test_professional_quality_r1_execution_property_truth_verify_v1.py",
+      "git_blob_sha": "6b21b931d197fe8c7ce41dc6649643059de726b3"
+    },
+    {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_SCOPE_BATCH_VERIFY_20261010_V1.json",
+      "git_blob_sha": "4c2d40a262f18f34bb35f94b59660d60972d45ef"
+    }
+  ],
+  "detection_completeness_proved": false,
+  "semantic_leaf_closed": false,
+  "root_closed": false,
+  "source_extraction_completeness_proved": false,
+  "policy_adequacy_proved": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "hard_nonclaims": [
+    "NO_R1_DEFEATER_DETECTION_COMPLETENESS",
+    "NO_R1_SEMANTIC_LEAF_CLOSURE",
+    "NO_R1_ROOT_CLOSURE",
+    "NO_SOURCE_EXTRACTION_COMPLETENESS",
+    "NO_POLICY_ADEQUACY",
+    "NO_GLOBAL_PROFESSIONAL_PROPERTY_TRUTH",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ]
+}
