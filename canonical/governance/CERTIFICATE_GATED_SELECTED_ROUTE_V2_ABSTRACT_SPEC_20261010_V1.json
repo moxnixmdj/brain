@@ -1,0 +1,90 @@
+{
+  "schema": "PROJECT_BRAIN_CERTIFICATE_GATED_SELECTED_ROUTE_V2_ABSTRACT_SPEC_V1",
+  "date": "2026-10-10",
+  "subject": {
+    "path": "canonical/runtime/certificate_gated_selected_route_runtime_entrypoint_v2.py",
+    "git_blob_sha": "e6cce56b50bea1261fb3473389a28e8263417930"
+  },
+  "router_dependency": {
+    "path": "canonical/runtime/certificate_gated_selected_route_router_v1.py",
+    "git_blob_sha": "4b99ef1e95e033badfb21ab7af7355122933224a",
+    "status": "ASSUME_GUARANTEE_DEPENDENCY__SEPARATE_REFINEMENT_OBLIGATION"
+  },
+  "current_registry_snapshot": {
+    "path": "canonical/governance/CERTIFICATE_GATED_SELECTED_ROUTE_RUNTIME_REGISTRY_V1.json",
+    "git_blob_sha": "78ef7174fd7cdebb24f97882e8c325a5164f18cb",
+    "current_creditable_row_count": 0
+  },
+  "claim_scope": "CREDITABLE_EXECUTION_AUTHORITY_CUT_PLUS_SUCCESS_WRAPPER_SEMANTICS",
+  "creditable_requirements": {
+    "payload_validator_fields": [
+      "payload_validator_path",
+      "payload_validator_blob_sha",
+      "payload_validator_callable"
+    ],
+    "refinement_fields": [
+      "refinement_certificate_path",
+      "refinement_certificate_blob_sha",
+      "refinement_receipt_path",
+      "refinement_receipt_blob_sha"
+    ],
+    "refinement_receipt_requirements": [
+      "SUBJECT_ID_EQUALS_ROUTE_ID",
+      "REFINEMENT_VERIFIED_TRUE",
+      "CERTIFICATE_GIT_BLOB_SHA_EQUALS_BOUND_CERTIFICATE",
+      "CONCRETE_ROUTE_GIT_BLOB_SHA_EQUALS_ROUTE_BLOB",
+      "TERMINAL_CREDIT_DELTA_ZERO"
+    ],
+    "payload_attestation_requirements": [
+      "ADMITTED_TRUE",
+      "CELL_ID_MATCH",
+      "CONTEXT_DIGEST_MATCH",
+      "PAYLOAD_DIGEST_MATCH"
+    ]
+  },
+  "critical_fail_reasons": [
+    "CREDITABLE_PAYLOAD_VALIDATOR_BINDING_MISSING",
+    "PAYLOAD_VALIDATOR_BLOB_DRIFT",
+    "ADMISSION_PAYLOAD_VALIDATOR_BINDING_MISMATCH",
+    "CREDITABLE_REFINEMENT_BINDING_MISSING",
+    "REFINEMENT_CERTIFICATE_BLOB_DRIFT",
+    "REFINEMENT_RECEIPT_BLOB_DRIFT",
+    "REFINEMENT_CERTIFICATE_SUBJECT_MISMATCH",
+    "REFINEMENT_RECEIPT_SUBJECT_MISMATCH",
+    "REFINEMENT_RECEIPT_NOT_VERIFIED",
+    "REFINEMENT_RECEIPT_CERTIFICATE_BINDING_MISMATCH",
+    "REFINEMENT_RECEIPT_ROUTE_BINDING_MISMATCH",
+    "REFINEMENT_RECEIPT_NONZERO_TERMINAL_CREDIT",
+    "PAYLOAD_ATTESTATION_NOT_MAPPING",
+    "PAYLOAD_NOT_ADMITTED_TO_SELECTED_CELL",
+    "PAYLOAD_ATTESTATION_CELL_MISMATCH",
+    "PAYLOAD_ATTESTATION_CONTEXT_MISMATCH",
+    "PAYLOAD_ATTESTATION_DIGEST_MISMATCH",
+    "SELECTED_RECEIPT_WITHOUT_VERIFIED_RUNTIME_ROW",
+    "ROUTE_RESULT_NOT_MAPPING"
+  ],
+  "success_projection": {
+    "schema": "PROJECT_BRAIN_CERTIFICATE_GATED_SELECTED_ROUTE_RUNTIME_ENTRYPOINT_V2",
+    "status": "PASS__CERTIFICATE_GATED_ROUTE_EXECUTED",
+    "creditable": true,
+    "selected_cover_complete": false,
+    "terminal_credit_delta": 0,
+    "rule": "NO_CREDITABLE_ROUTE_EXECUTION_BEFORE_CONTENT_ADDRESSED_SELECTION_EXECUTABLE_REFINEMENT_PROOF_AND_CONTEXT_PAYLOAD_MEMBERSHIP_ATTESTATION"
+  },
+  "noncreditable_compatibility": {
+    "may_execute_without_payload_validator": true,
+    "may_execute_without_refinement_binding": true,
+    "creditable": false,
+    "payload_sha256": null,
+    "terminal_credit_delta": 0
+  },
+  "root_assumptions": [
+    "CPYTHON_IMPORTLIB_EXECUTION_SEMANTICS",
+    "JSON_CANONICALIZATION_AND_SHA256_SEMANTICS",
+    "GIT_BLOB_SHA1_IDENTITY_SEMANTICS",
+    "PATHLIB_FILE_IDENTITY_SEMANTICS"
+  ],
+  "semantic_refinement_proved": false,
+  "repository_wide_refinement": false,
+  "terminal_credit_delta": 0
+}
