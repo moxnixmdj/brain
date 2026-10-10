@@ -159,6 +159,64 @@ def test_unknown_truth_localizes_proof_coverage():
     assert out["status"]=="OPEN__SELECTED_PREDICATE_PROOF_COVERAGE_REQUIRED"
 
 
+def test_unknown_truth_preserves_single_actionable_information_request():
+    p=base_payload()
+    p["truth_payloads_by_discriminator_id"]={"d":{"x":1}}
+    request={
+        "request_kind":"ACQUIRE_ONE_AUTHENTICATED_GOVERNING_REQUIREMENT_OBSERVATION",
+        "minimum_observation_count":1,
+        "independent_verification_required":True,
+    }
+    unknown={
+        "pass":False,
+        "status":"UNKNOWN__SELECTED_PREDICATE_NOT_PROVED",
+        "predicate_truth":"UNKNOWN",
+        "truthful_precommitment_observation":False,
+        "next_information_request":request,
+        "next_required_edge":"REGCAP_LOSS_CUSHION_MINIMUM_POLICY_CHANGING_INFORMATION",
+    }
+    with patch("canonical.runtime.p3_bound_relevance_cegar_loop_v1.solve_cegar",return_value=selected()), patch(
+        "canonical.runtime.p3_bound_relevance_cegar_loop_v1.evaluate_truth",return_value=unknown
+    ):
+        out=evaluate(p)
+    assert out["status"]=="OPEN__SELECTED_PREDICATE_PROOF_COVERAGE_REQUIRED"
+    assert out["next_information_request"]==request
+    assert out["next_required_edge"]=="REGCAP_LOSS_CUSHION_MINIMUM_POLICY_CHANGING_INFORMATION"
+    assert "next_information_request" not in out.get("detail",{})
+
+
+def test_conflicting_actionable_truth_requests_remain_candidates():
+    p=base_payload()
+    p["truth_payloads_by_discriminator_id"]={"d":[{"x":1},{"x":2}]}
+    requests=[
+        {"request_kind":"A","minimum_observation_count":1},
+        {"request_kind":"B","minimum_observation_count":1},
+    ]
+    returned=iter([
+        {
+            "pass":False,"status":"UNKNOWN__A","predicate_truth":"UNKNOWN",
+            "truthful_precommitment_observation":False,
+            "next_information_request":requests[0],
+            "next_required_edge":"EDGE_A",
+        },
+        {
+            "pass":False,"status":"UNKNOWN__B","predicate_truth":"UNKNOWN",
+            "truthful_precommitment_observation":False,
+            "next_information_request":requests[1],
+            "next_required_edge":"EDGE_B",
+        },
+    ])
+    with patch("canonical.runtime.p3_bound_relevance_cegar_loop_v1.solve_cegar",return_value=selected()), patch(
+        "canonical.runtime.p3_bound_relevance_cegar_loop_v1.evaluate_truth",
+        side_effect=lambda payload: next(returned),
+    ):
+        out=evaluate(p)
+    assert out["status"]=="OPEN__SELECTED_PREDICATE_PROOF_COVERAGE_REQUIRED"
+    assert out["next_information_request_candidates"]==requests
+    assert out["next_required_edge"]=="DISAMBIGUATE_SELECTED_PREDICATE_INFORMATION_REQUEST"
+    assert "next_information_request" not in out
+
+
 def test_composite_selected_formula_is_proved_from_authoritative_atoms_with_short_circuit():
     a="source-condition-sha256:a"
     b="source-condition-sha256:b"
