@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_EXECUTABLE_REFINEMENT_VERIFICATION_V1",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_EXECUTABLE_REFINEMENT_VERIFICATION",
+  "pass": true,
+  "verifier_protocol": "EXECUTABLE_REFINEMENT_VERIFIER_V1",
+  "independent": true,
+  "refinement_claim_verified": true,
+  "subject_id": "CURRENT_UNIFIED_COGNITIVE_FABRIC_AUTO_ROUTE_CLASSIFIER",
+  "proof_mode": "INDEPENDENT_REPLAY",
+  "certificate": {
+    "path": "canonical/governance/UNIFIED_COGNITIVE_FABRIC_AUTO_ROUTE_REFINEMENT_CERTIFICATE_20261010_V1.json",
+    "git_blob_sha": "1f12def91f51890d915656fd6de2a3add4e8ae91"
+  },
+  "semantic_verifier": {
+    "path": "canonical/runtime/unified_cognitive_fabric_auto_route_refinement_v1.py",
+    "git_blob_sha": "7d457d877ed1f6e5dacfb36e4495b13a201706bb"
+  },
+  "verifier_result_sha256": "515c3f747252874830906e1ce5df7047ff529291a7bcc5d5b9231d5d9060a74a",
+  "verifier_result_summary": {
+    "pass": true,
+    "refinement_fact": "EXHAUSTIVE_FINITE_AUTO_ROUTE_MODEL_MATCH",
+    "cases_checked": 98304,
+    "mismatch_count": 0,
+    "liveness_preserved": false
+  },
+  "verifier_tests": {
+    "path": "canonical/tests/test_unified_cognitive_fabric_auto_route_refinement_v1.py",
+    "git_blob_sha": "272ec5d81b3122109d6af6a6e55cb13d6d3420d3",
+    "py_compile": "PASS",
+    "tests_passed": 7,
+    "tests_failed": 0,
+    "exhaustive_test_cases_checked": 98304
+  },
+  "remote_verifier": {
+    "sprite": "brain-live-runtime-v1-verify-20261008",
+    "sprite_id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13",
+    "working_directory": "/home/sprite/unified-auto-route-refinement-v1",
+    "method": "EXACT_GIT_BLOBS__FRESH_EXECUTABLE_RERUN"
+  },
+  "errors": [],
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
