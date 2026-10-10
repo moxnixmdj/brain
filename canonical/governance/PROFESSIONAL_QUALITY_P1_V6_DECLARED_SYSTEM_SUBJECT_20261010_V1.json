@@ -5,7 +5,7 @@
   "source_main_commit": "737eac49eef4cf0ad0a1a3a8b2cfdbf158985ef3",
   "subject_kind": "DECLARED_SYSTEM",
   "subject_id": "PROFESSIONAL_QUALITY_P1_V6_DEPENDENCY_CLOSED_SYSTEM_20261010_V1",
-  "subject_sha256": "dc55c7496012816b569d4ef7efe8cd836c8024b43cbbe31355bd38aebeb0627d",
+  "subject_sha256": "1b3fd164a617ae91c7d6caa26d6fdaba3300a64ab2677ff585da3482fc166e79",
   "subject_hash_rule": "SHA256_OF_RFC8259_JSON_CANONICALIZED_BY_SORTED_KEYS_NO_WHITESPACE_UTF8_OVER_SYSTEM_MATERIAL_OBJECT",
   "entrypoint": "canonical/runtime/professional_quality_p1_router_v6.py",
   "system_material": {
@@ -38,10 +38,6 @@
       {
         "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_EXECUTION_PROFILE_20261010_V3.json",
         "git_blob_sha": "f7e89eafbb691c16d1bdf5b8d295a468d5e3bec5"
-      },
-      {
-        "path": "canonical/governance/PROFESSIONAL_QUALITY_SAME_SUBJECT_COMPOSITION_GATE_20261010_V1.json",
-        "git_blob_sha": "f7a4496a6579041c6e2606243732c23b22bcf89c"
       },
       {
         "path": "canonical/governance/PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_REGISTRY_20261010_V1.json",
@@ -123,7 +119,9 @@
     "component_inclusion_does_not_imply_root_satisfaction": true,
     "subject_refresh_invalidates_prior_root_bindings": true,
     "root_subject_binding_requires_independent_reverification": true,
-    "global_subject_identity_authority": false
+    "global_subject_identity_authority": false,
+    "non_load_bearing_governance_excluded_from_subject_identity": true,
+    "external_composition_governance_path": "canonical/governance/PROFESSIONAL_QUALITY_SAME_SUBJECT_COMPOSITION_GATE_20261010_V1.json"
   },
   "candidate_generation": true,
   "dependency_closed_generation": true,
