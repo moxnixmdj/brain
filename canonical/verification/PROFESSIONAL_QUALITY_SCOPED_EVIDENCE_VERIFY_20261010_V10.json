@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_VERIFY_V10",
+  "date": "2026-10-10",
+  "status": "PASS__PINNED_EXACT_BYTES__PYCOMPILE__21_OF_21__TEN_SCOPED_CAPABILITIES__ZERO_GLOBAL_LEAF_CREDIT",
+  "pinned_main_commit": "11d73d1c5a19cd29eb69c36c97f06080a13a47f4",
+  "carrier": {
+    "name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/pq-scoped-r9-admit-11d73d1"
+  },
+  "exact_blobs": {
+    "runtime": "674f5bbe0f08e7ae5c70bb2d0f333853527b2a11",
+    "tests": "0d166f5af7433980d7d0a9784f0f17af5d3d90fc",
+    "registry": "ecf17421bbd1ad5fc0624a8403a7a6f73a64bfbb",
+    "r9_source": "7081a52621a1bb8f1ad07d1da23b40c8e57e16c2",
+    "r9_governance": "7755bc709169abe0db35a6418fd8568ed14131b7"
+  },
+  "replay": {
+    "py_compile": "PASS",
+    "tests_run": 21,
+    "tests_passed": 21,
+    "tests_failed": 0,
+    "execution_log_sha256": "17818202a20d8568a915c44b0d44b2ccb71cf3192dd54d309582ccfcb1453325"
+  },
+  "admitted_scope_count": 10,
+  "admitted_roots": [
+    "R1_TARGET_SPECIFICATION",
+    "R2_CANDIDATE_SEARCH",
+    "R3_REALIZATION_OBSERVATION",
+    "R4_MEASUREMENT_CONSTRUCT",
+    "R5_EVALUATOR_REFERENCE",
+    "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+    "R7_CAUSAL_PRESCRIPTIVE",
+    "R9_TEMPORAL_DEPLOYMENT",
+    "R10_ANALYSIS_DECISION",
+    "R11_ADAPTIVE_INTEGRITY_SECURITY"
+  ],
+  "hard_nonclaims": [
+    "NO_GLOBAL_LEAF_CLOSURE",
+    "NO_GLOBAL_ROOT_CLOSURE",
+    "NO_DOMAIN_SEMANTIC_CLOSURE",
+    "NO_DOMAIN_EXECUTION_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
