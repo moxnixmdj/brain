@@ -6,7 +6,7 @@ from canonical.runtime.tb_science_rank19_capability_first_admission_v1 import ve
 
 ROOT = Path(__file__).resolve().parents[2]
 ADMISSION = "canonical/governance/TB_SCIENCE_RANK19_CAPABILITY_FIRST_CHECKPOINT_ADMISSION_20261010_V1.json"
-VERIFY = "canonical/verification/TB_SCIENCE_RANK19_CAPABILITY_FIRST_ADMISSION_INDEPENDENT_VERIFICATION_20261010_V1.json"
+VERIFY = "canonical/verification/TB_SCIENCE_RANK19_CAPABILITY_FIRST_ADMISSION_INDEPENDENT_VERIFICATION_20261010_V2.json"
 AUTHORITY = "canonical/governance/TB_SCIENCE_RANK19_ONE_SLOT_EXECUTION_AUTHORITY_20261010_V2.json"
 CURRENT = "canonical/governance/CURRENT_TB_SCIENCE_EXECUTION.json"
 
