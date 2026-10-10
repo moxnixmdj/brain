@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_V10_POSTCOMPOSITION_ACTIVATION_VERIFY_20261010_V1",
+  "status": "PASS__INDEPENDENT_SPRITE__16_OF_16_DISPATCH_ASSERTIONS__SEVEN_READ_ONLY_LANES_DERIVED__FULL_EXECUTION_FALSE__ZERO_CREDIT",
+  "exact_blobs": {
+    "activation": "bde42dfb68f718b11e37491cc2d006b3c1f98048",
+    "scheduler": "cee1de07eefcda05e865091a5bbfa01e18a5231c",
+    "frontier": "f772c1cfd787d49d38b12e5649a41b96f121ef93",
+    "runtime": "209d8d11494645432354636a3dc17e7b515abaf8",
+    "implementation_verification": "a0568e6aff736462f359d1c222c0ac519bc6482a"
+  },
+  "derived_read_only_lanes": [
+    "BYTES_EXACT_SYMBOLIC_V24_NEXT_PHYSICAL_CUT",
+    "ESCAPE_GAP_A_AUTHENTICATED_ROW_PROOFS",
+    "ESCAPE_GAP_B_STRICT_PROGRESS_ROW_PROOFS",
+    "PROFESSIONAL_QUALITY_V7_WHOLE_LEAF_DOMAIN_EVIDENCE",
+    "R2_FINANCE_TYPED_NEXT_INFORMATION_REQUEST",
+    "REPOSITORY_PROMOTION_ENFORCEMENT",
+    "TB_SCIENCE_RANK20_V3_ACTIVATION_PRESTART"
+  ],
+  "verified": {
+    "assertion_count": 16,
+    "failures": 0,
+    "full_execution_plan_authorized": false,
+    "generic_r2_sleeping": true,
+    "interval_robust_runtime_bound": true,
+    "every_dispatched_lane_interval_incomplete": true
+  },
+  "hard_nonclaims": [
+    "NO_FULL_EXECUTION_DISPATCH",
+    "NO_COMPLETE_INTERVAL_VECTORS",
+    "NO_GENERIC_R2_OPEN_WORLD_WAKE",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "terminal_credit_delta": 0
+}
