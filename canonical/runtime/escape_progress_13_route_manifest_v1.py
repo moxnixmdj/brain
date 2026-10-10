@@ -65,6 +65,30 @@ def validate_manifest(
             if str(required) not in text:
                 errors.append(f"{oid}:SUPPORT_STRING_MISSING:{required}")
 
+        evidence_semantics = row.get("evidence_semantics")
+        if evidence_semantics is not None:
+            if not isinstance(evidence_semantics, Mapping):
+                errors.append(f"{oid}:EVIDENCE_SEMANTICS_INVALID")
+            else:
+                binding_mode = str(evidence_semantics.get("binding_mode") or "")
+                if binding_mode != "FROZEN_SNAPSHOT":
+                    errors.append(f"{oid}:EVIDENCE_BINDING_MODE_UNSUPPORTED")
+                else:
+                    source_pointer = str(
+                        evidence_semantics.get("source_current_pointer") or ""
+                    )
+                    snapshot_base = str(
+                        evidence_semantics.get("snapshot_base_commit") or ""
+                    )
+                    if not source_pointer:
+                        errors.append(f"{oid}:FROZEN_SNAPSHOT_SOURCE_POINTER_MISSING")
+                    if str(path) == source_pointer:
+                        errors.append(
+                            f"{oid}:FROZEN_SNAPSHOT_MUST_NOT_BIND_MUTABLE_SOURCE_POINTER"
+                        )
+                    if snapshot_base != str(manifest.get("canonical_base_commit") or ""):
+                        errors.append(f"{oid}:FROZEN_SNAPSHOT_BASE_COMMIT_DRIFT")
+
         if row.get("externality_proved") is not False:
             errors.append(f"{oid}:EXTERNALITY_MUST_REMAIN_FALSE_WITHOUT_CERTIFICATE")
         if row.get("strict_progress_witness_bound") is not False:
