@@ -1,0 +1,75 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_ESCAPE_O_OBJECTIVE_ACCEPTANCE_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__TDD_RED_GREEN__CURRENT_O11_SUBSET_PROVED__INDEPENDENT_PYCOMPILE__16_PASS_1_LEGACY_FIXTURE_SKIPPED__EXACT_BLOBS__ZERO_ROW_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "brain/current-o11-scope-lift-binding-20261010-v1",
+    "exact_git_blobs": {
+      "canonical/runtime/current_escape_o_objective_acceptance_v1.py": "a329ce2d14dd6f23d06f981c090b535bfd43fb52",
+      "canonical/tests/test_current_escape_o_objective_acceptance_v1.py": "69993946c3e364a9097cb5fac46c45421023776b",
+      "canonical/governance/ESCAPE_O_OBJECTIVE_ACCEPTANCE_SHARED_LAW_ACTIVATION_20261010_V1.json": "95278c5850ccba2087b686b7bb9bc2cc7af93b96",
+      "canonical/governance/CURRENT_ESCAPE_OQ_FRONTIER_REDUCTION_20261010_V1.json": "06ed743742a919615841a77fc9b1cc4e6fadf7f8",
+      "canonical/governance/FROZEN_O_OBJECTIVE_ACCEPTANCE_SCOPE_LIFT_NORMAL_FORM_20261007_V1.json": "2ce4b7fdcb5556072b936f04887ac6a05e92dce3",
+      "canonical/governance/ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_20261010_V2.json": "f3a566a982dcd867c583eafd24c6f5dd3baa0530",
+      "canonical/runtime/acceptance_proof_transmuter_v1.py": "39b5611e53485674b29e2a05da91b89801bc5aa6"
+    }
+  },
+  "tdd": {
+    "red": "IMPORT_ERROR__CURRENT_O_PROJECTION_RUNTIME_ABSENT",
+    "green": "CORE_CURRENT_O_SUBSET_AND_UNKNOWN_ROW_FAIL_CLOSED_TESTS_PASS",
+    "governance_red": "ACTIVATION_TEST_BLOB_BINDING_STALE__REGRESSION_TEST_FAILED",
+    "governance_green": "ACTIVATION_REBOUND_TO_FINAL_TEST_BLOB__REGRESSION_PASS"
+  },
+  "independent_verification": {
+    "carrier": "Sprites",
+    "sprite": "brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "py_compile": "PASS",
+    "unittest_command": "python -m unittest canonical.tests.test_current_escape_o_objective_acceptance_v1 canonical.tests.test_acceptance_proof_transmuter_v1 -v",
+    "tests_run": 17,
+    "tests_passed": 16,
+    "tests_skipped": 1,
+    "skipped_test": "test_live_repo_stays_2_17_without_typed_witnesses",
+    "skip_reason": "INTEGRATION_FIXTURES_ABSENT_IN_ISOLATED_VERIFIER_SNAPSHOT",
+    "failures": 0,
+    "errors": 0
+  },
+  "proved": [
+    "ALL_11_CURRENT_O_ROWS_ARE_MEMBERS_OF_THE_ALREADY_PROVED_FROZEN_15_ROW_O_SCOPE_LIFT_THEOREM_UNIVERSE",
+    "CURRENT_O_Q_PARTITION_IS_EXHAUSTIVE_11_O_2_Q_WITH_ZERO_MIXED_AND_ZERO_UNCLASSIFIED",
+    "SHARED_O_ACCEPTANCE_IMPLICATION_NEEDS_NO_NEW_ACCEPTANCE_PRIMITIVE",
+    "UNKNOWN_CURRENT_O_ROW_OUTSIDE_THE_FROZEN_THEOREM_UNIVERSE_FAILS_CLOSED",
+    "ACTIVATION_CONTENT_ADDRESSES_EXACT_RUNTIME_AND_TEST_BYTES",
+    "CURRENT_O_ROW_ACCEPTANCE_REMAINS_ZERO_UNTIL_REAL_SCOPE_COMPLETE_BRAIN_PROOF_INSTANTIATIONS_ARE_BOUND"
+  ],
+  "research_frontier_effect": {
+    "before": [
+      "O_OBJECTIVE_ACCEPTANCE_SHARED_LAW",
+      "Q_QUALITATIVE_RELATIVE_ORDER_SHARED_LAW"
+    ],
+    "after": [
+      "O_ROW_SCOPE_COMPLETE_PROOF_INSTANTIATION",
+      "Q_QUALITATIVE_RELATIVE_ORDER_SHARED_LAW"
+    ],
+    "o_shared_law_research_closed": true,
+    "o_row_acceptance_closed_count": 0,
+    "q_shared_law_closed": false
+  },
+  "hard_nonclaims": [
+    "NO_CURRENT_O_ROW_ACCEPTANCE_CREDIT",
+    "NO_Q_SHARED_LAW_CLOSURE",
+    "NO_CC_R3_OR_ESCAPE_PROGRESS_TOTALITY",
+    "NO_FULL_PRIVATE_REPOSITORY_REGRESSION",
+    "ONE_LEGACY_INTEGRATION_FIXTURE_TEST_SKIPPED_IN_ISOLATED_REPLAY",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "row_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
