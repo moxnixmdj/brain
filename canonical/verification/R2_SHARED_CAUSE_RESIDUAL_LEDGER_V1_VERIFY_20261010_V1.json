@@ -12,7 +12,7 @@
       "canonical/tests/test_r2_semantic_residual_ledger_v1.py": "5b07dd3a452fea3a051940aef3d0421ad740f099",
       "canonical/tests/test_capability_first_scheduler_v1.py": "70dadb18d6eb84ea1c3ae690951d585affef7845",
       "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json": "31e3469774ab38656facda19e05ca3aa8a2468c1",
-      "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V4.json": "57abd2e49e66eecf1895bbe7eaa78c6e7df9b36c"
+      "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V4.json": "9c286a67fc5e61dc671682771d5590ce0cbfd6b7"
     }
   },
   "isolated_verification": {
