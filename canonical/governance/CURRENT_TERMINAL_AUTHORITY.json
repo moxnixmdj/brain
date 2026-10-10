@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V38",
   "date": "2026-10-10",
-  "status": "ACTIVE_FAIL_CLOSED_REAL_MISSION_BOUND__STRICT_EXTERNALITY_RECONCILED__R3_ZERO_RESIDUAL_RECONCILED__OPUS_5_5_CHECKPOINT_TERMINAL_FALSE__CURRENT_R2_V69_AND_CODING_V4_FIVE_REGION_PROJECTION_BOUND__COVERAGE_R1_R4_LIVE_BINDING_REPAIRED__CLAIM_SCOPED_COMPLETENESS_THEOREM_BOUND__ROOT_NAMESPACE_COLLISION_GUARDED__TB_SCIENCE_RANK18_V3_SAME_ATTEMPT_RESEAL_VERIFIED__ACTIVATION_READY__TB_SCIENCE_RANK18_V4_FRESH_ACTIVATION_RESEAL_VERIFIED__BRAIN_V3_EFFECTIVE__V2_ACTIVATION_NOT_ARMED__TB_SCIENCE_RANK18_V2_DURABLE_START_COMMITTED__RESULT_PENDING__SCHEDULER_FROZEN",
+  "status": "ACTIVE_FAIL_CLOSED_REAL_MISSION_BOUND__STRICT_EXTERNALITY_RECONCILED__R3_ZERO_RESIDUAL_RECONCILED__OPUS_5_5_CHECKPOINT_TERMINAL_FALSE__CURRENT_R2_V69_AND_CODING_V4_FIVE_REGION_PROJECTION_BOUND__COVERAGE_R1_R4_LIVE_BINDING_REPAIRED__CLAIM_SCOPED_COMPLETENESS_THEOREM_BOUND__ROOT_NAMESPACE_COLLISION_GUARDED__TB_SCIENCE_RANK18_V3_SAME_ATTEMPT_RESEAL_VERIFIED__ACTIVATION_READY__TB_SCIENCE_RANK18_V4_FRESH_ACTIVATION_RESEAL_VERIFIED__BRAIN_V3_EFFECTIVE__V2_ACTIVATION_NOT_ARMED__TB_SCIENCE_RANK18_V2_DURABLE_START_COMMITTED__RESULT_PENDING__SCHEDULER_FROZEN__EXECUTABLE_REFINEMENT_ANTI_BYPASS_VERIFIED__CURRENT_RUNTIME_BYTE_COHERENCE_OPEN",
   "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "authoritative_sources": {
     "universal_escape_resolver_v2_active_planning_overlay": {
@@ -248,7 +248,9 @@
     "creditable_router_context_payload_v2": {
       "runtime": {
         "path": "canonical/runtime/certificate_gated_selected_route_runtime_entrypoint_v2.py",
-        "git_blob_sha": "ba260cd997adb8df97417e5f03eaf547b5365379"
+        "git_blob_sha": "e6cce56b50bea1261fb3473389a28e8263417930",
+        "current_byte_binding_verified": true,
+        "refinement_anti_bypass_verified": true
       },
       "independent_verification": {
         "path": "canonical/verification/CREDITABLE_ROUTER_CONTEXT_PAYLOAD_BINDING_SPRITE_VERIFICATION_20261007_V1.json",
@@ -591,7 +593,8 @@
     },
     "terminal_candidate_donor_independence_audit": {
       "path": "canonical/runtime/terminal_candidate_donor_independence_audit_v1.py",
-      "git_blob_sha": "0ed69641693538f15b7e1658f5ac5e80031afb26"
+      "git_blob_sha": "7b3713267d32f9b4ae7e2ca56ea17c5859bdec71",
+      "current_byte_binding_verified": true
     },
     "adaptive_positive_cover_fixed_point_v2": {
       "path": "canonical/governance/ADAPTIVE_ABSTRACT_POSITIVE_COVER_FIXED_POINT_THEOREM_20261007_V2.json"
@@ -770,13 +773,16 @@
       },
       "runtime": {
         "path": "canonical/runtime/terminal_autopilot_executor_v1.py",
-        "git_blob_sha": "657a94d00833ad91403070132ef4e1f0d7337336"
+        "git_blob_sha": "6f828ce5631db582ea4d4a3d73c59b08f232abf0",
+        "current_byte_binding_verified": true
       },
       "planner": {
         "path": "canonical/runtime/terminal_autopilot_v1.py",
         "git_blob_sha": "bb72c160f3be00efedbd5d111b77d956bed2cb11"
       },
-      "role": "ACTIVE_GATED_CONCURRENT_EXECUTOR__REVERSIBLE_ZERO_REALITY_AND_INDEPENDENT_VERIFY__PER_TASK_CONTENT_BOUND_PROMOTION__NO_IRREVERSIBLE_BENCHMARK_AUTOEXECUTION"
+      "role": "ACTIVE_GATED_CONCURRENT_EXECUTOR__REVERSIBLE_ZERO_REALITY_AND_INDEPENDENT_VERIFY__PER_TASK_CONTENT_BOUND_PROMOTION__NO_IRREVERSIBLE_BENCHMARK_AUTOEXECUTION",
+      "current_byte_binding_verified": false,
+      "current_byte_status": "PARTIAL__EXECUTOR_VERIFIED__PLANNER_CURRENT_BYTES_UNVERIFIED"
     },
     "gdpval_public_220_composed_semantic_localization_public_execution": {
       "path": "canonical/evidence/GDPVAL_PUBLIC_220_COMPOSED_SEMANTIC_LOCALIZATION_PUBLIC_EXECUTION_RECEIPT_20261007_V1.json",
@@ -1437,6 +1443,43 @@
         "git_blob_sha": "5a10547706a1b46dcb11d32122490efd927d30b0"
       },
       "note": "CURRENT_HIGHEST_LEVERAGE_ALL_OPEN_ROUTE__13_OBLIGATIONS__ONE_REMAINING_VERIFIED_PREMISE_ESCAPE_PROGRESS_TOTALITY__ZERO_CREDIT"
+    },
+    "executable_refinement_terminal_dependency_graph": {
+      "path": "canonical/governance/CURRENT_TERMINAL_DEPENDENCY_GRAPH_V1.json",
+      "git_blob_sha": "7249d3979cce6d10ab589d8bdc3310c15d32cbf5",
+      "note": "CURRENT_MAIN_TERMINAL_DEPENDENCY_INVENTORY__OPEN_WORLD_COMPLETENESS_NOT_SELF_PROVED__ZERO_TERMINAL_CREDIT"
+    },
+    "executable_refinement_structural_verifier": {
+      "path": "canonical/runtime/executable_refinement_verifier_v1.py",
+      "git_blob_sha": "65569581716d5378929a900fa0a2045e1785fabf",
+      "note": "STRUCTURAL_BINDING_VERIFIER_ONLY__DOES_NOT_SELF_CERTIFY_SEMANTIC_REFINEMENT"
+    },
+    "creditable_route_refinement_admission_guard": {
+      "path": "canonical/runtime/certificate_gated_selected_route_runtime_entrypoint_v2.py",
+      "git_blob_sha": "e6cce56b50bea1261fb3473389a28e8263417930",
+      "note": "CURRENT_MAIN_EXACT_BYTES__6_OF_6_ANTI_BYPASS_CHECKS_PASS__ZERO_CURRENT_CREDITABLE_ROWS"
+    },
+    "selected_route_refinement_current_main_verification": {
+      "path": "canonical/verification/SELECTED_ROUTE_EXECUTABLE_REFINEMENT_CURRENT_MAIN_SPRITE_VERIFICATION_20261010_V1.json",
+      "git_blob_sha": "1ecd3c71d645fe09f7f240d83f1ed1794f9d04d2"
+    },
+    "executable_refinement_structural_framework_independent_verification": {
+      "path": "canonical/verification/EXECUTABLE_REFINEMENT_STRUCTURAL_FRAMEWORK_SPRITE_VERIFICATION_20261009_V1.json",
+      "git_blob_sha": "81984fda2a10856c55cc46ce6a85e7d4fcaa54e2"
+    },
+    "current_authority_runtime_binding_census_verifier": {
+      "path": "canonical/runtime/current_authority_runtime_binding_census_v1.py",
+      "git_blob_sha": "e8746d141989f5279c66931d9cc9167504034b98"
+    },
+    "current_authority_runtime_binding_connector_census_20261010_v2": {
+      "path": "canonical/verification/CURRENT_AUTHORITY_RUNTIME_BINDING_CONNECTOR_CENSUS_20261010_V2.json",
+      "git_blob_sha": "797b37d297166eb56c3da4a7d518677eb12a1207",
+      "note": "PRE_RESEAL_EXACT_GIT_TREE_CENSUS__17_ERRORS__16_DRIFT__1_MISSING__2_CONFLICTS"
+    },
+    "current_main_runtime_verified_byte_subset": {
+      "path": "canonical/verification/CURRENT_MAIN_RUNTIME_VERIFIED_BYTE_SUBSET_SPRITE_20261010_V1.json",
+      "git_blob_sha": "88524c9872e38fef8a434a87a1fe6f615dc28c44",
+      "note": "FOUR_CURRENT_RUNTIME_COMPONENTS__32_OF_32_FOCUSED_CHECKS"
     }
   },
   "live_truth": {
@@ -2368,7 +2411,31 @@
       "CURSOR_OWNER_ACCESS_POLICY_OR_EXTERNAL_EVALUATION_INTERFACE_MATERIALLY_CHANGES",
       "CONTENT_ADDRESSED_ACTUAL_CURSORBENCH_TARGET_CONTEXT_OR_GRADER_EVIDENCE_BECOMES_AVAILABLE",
       "A_NEW_BRAIN_OWNED_CODING_POLICY_WITH_AN_INDEPENDENTLY_VERIFIED_CONSTRUCTIVE_ADEQUACY_THEOREM_STRICTLY_EXPANDS_THE_FIVE_REGION_UNION"
-    ]
+    ],
+    "executable_refinement_structural_binding_framework_present": true,
+    "selected_route_executable_refinement_anti_bypass_verified": true,
+    "creditable_route_refinement_receipt_required_by_candidate_admission": true,
+    "current_selected_route_registry_creditable_row_count": 0,
+    "all_current_creditable_selected_routes_refinement_requirement_satisfied": true,
+    "router_canary_structural_refinement_binding_bound": true,
+    "router_canary_refinement_verified": false,
+    "brain_owned_semantic_edge_structural_refinement_binding_bound": true,
+    "brain_owned_semantic_edge_bounded_refinement_verified": false,
+    "repository_wide_executable_refinement_closed": false,
+    "all_creditable_live_routes_refinement_verified": false,
+    "non_selected_runtime_executable_refinement_coverage_closed": false,
+    "terminal_executable_refinement_gap_closed": false,
+    "executable_refinement_missing_is_external_impossibility": false,
+    "executable_refinement_current_classification": "INTERNAL_UNRESOLVED__SELECTED_ROUTE_ANTI_BYPASS_VERIFIED__SEMANTIC_REFINEMENT_AND_NON_SELECTED_RUNTIME_COVERAGE_OPEN",
+    "current_authority_runtime_byte_binding_coherence": false,
+    "current_authority_runtime_pre_reseal_error_count": 17,
+    "current_authority_runtime_pre_reseal_drift_count": 16,
+    "current_authority_runtime_pre_reseal_missing_binding_count": 1,
+    "current_authority_runtime_pre_reseal_conflicting_path_count": 2,
+    "current_authority_runtime_verified_reseal_path_count": 5,
+    "current_authority_runtime_unverified_unique_path_count": 8,
+    "current_authority_runtime_binding_classification": "INTERNAL_UNRESOLVED__VERIFIED_SUBSET_RESEALED__EIGHT_UNIQUE_RUNTIME_PATHS_REQUIRE_FRESH_EXECUTION",
+    "r1_current_byte_drift_lock_valid": false
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -2533,7 +2600,13 @@
     "NO_CLAIM_R1_R2_R3_OR_R4_IS_GLOBALLY_CLOSED_BY_THE_LIVE_BINDING_REPAIR.",
     "NO_CLAIM_THE_R1_R4_META_CONTROL_GRANTS_TERMINAL_ACCEPTANCE_CAPABILITY_OR_OWNERSHIP_CREDIT.",
     "NO_CLAIM_A_SOUND_FROZEN_CHECKPOINT_OR_SUBGOAL_CERTIFICATE_IMPLIES_THE_OPEN_ENDED_GLOBAL_MISSION_IS_COMPLETE.",
-    "NO_CLAIM_THE_R1_R4_ROOT_THEOREM_BY_ITSELF_PROVES_GLOBAL_OPTIMALITY_OR_MAXIMUM_CAPABILITY."
+    "NO_CLAIM_THE_R1_R4_ROOT_THEOREM_BY_ITSELF_PROVES_GLOBAL_OPTIMALITY_OR_MAXIMUM_CAPABILITY.",
+    "NO_CLAIM_DECLARATIVE_EXECUTABLE_REFINEMENT_CERTIFICATES_SELF_PROVE_REFINEMENT.",
+    "NO_CLAIM_SELECTED_ROUTE_ANTI_BYPASS_PROVES_SEMANTIC_EXECUTABLE_REFINEMENT.",
+    "NO_CLAIM_ZERO_CURRENT_CREDITABLE_SELECTED_ROUTES_CLOSES_NON_SELECTED_RUNTIME_REFINEMENT.",
+    "NO_CLAIM_REPOSITORY_WIDE_EXECUTABLE_REFINEMENT_IS_CLOSED.",
+    "NO_CLAIM_PRE_RESEAL_RUNTIME_BYTE_CENSUS_ERRORS_ARE_CLOSED_BY_UPDATING_HASHES_WITHOUT_CURRENT_BYTE_EXECUTION.",
+    "NO_CLAIM_THE_FIVE_VERIFIED_CURRENT_RUNTIME_PATHS_CLOSE_THE_EIGHT_UNVERIFIED_CURRENT_RUNTIME_PATHS."
   ],
   "accounting": {
     "incremental_spend_usd": 0,
@@ -2601,7 +2674,8 @@
     "git_blob_sha": "e70f662d27e0b917eaf6ef8ba9da3bebc5ab7ee0",
     "runtime_gate": {
       "path": "canonical/runtime/terminal_root_decision_gate_v1.py",
-      "git_blob_sha": "7c7e0c34cc599c7114fb83421307db2433e2b269"
+      "git_blob_sha": "6f546f657900405c628c1eb3575bc1e4ac220aeb",
+      "current_byte_binding_verified": true
     },
     "tests": {
       "path": "canonical/tests/test_terminal_root_decision_gate_v1.py",
@@ -3038,7 +3112,9 @@
       "path": "canonical/governance/OPTION_PRESERVING_CAPABILITY_OPTIMIZATION_20261008_V1.json"
     },
     "runtime": {
-      "path": "canonical/runtime/option_preserving_capability_optimizer_v1.py"
+      "path": "canonical/runtime/option_preserving_capability_optimizer_v1.py",
+      "git_blob_sha": "367478e71b015fb2f4b7cc40dad34f88a7f47238",
+      "current_byte_binding_verified": true
     },
     "physical_deletion_requires_separate_proof": true,
     "terminal_credit_delta": 0,
@@ -3074,7 +3150,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 128,
+  "pointer_revision": 129,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
@@ -4883,5 +4959,23 @@
     "terminal_credit_delta": 0,
     "acceptance_credit_delta": 0,
     "ownership_credit_delta": 0
+  },
+  "executable_refinement_terminal_closure_reconciliation_20261010_v2": {
+    "state": "INTERNAL_UNRESOLVED",
+    "structural_verifier_bound": true,
+    "terminal_dependency_graph_bound": true,
+    "selected_route_refinement_anti_bypass_verified": true,
+    "selected_route_anti_bypass_check_count": 6,
+    "current_selected_route_registry_creditable_row_count": 0,
+    "verified_current_runtime_path_count": 5,
+    "unverified_current_runtime_unique_path_count": 8,
+    "pre_reseal_runtime_binding_error_count": 17,
+    "pre_reseal_conflicting_current_path_count": 2,
+    "semantic_refinement_proof_route_closed": false,
+    "non_selected_runtime_refinement_coverage_closed": false,
+    "repository_wide_refinement_closed": false,
+    "current_authority_runtime_byte_binding_coherence": false,
+    "external_impossibility_claimed": false,
+    "terminal_credit_delta": 0
   }
 }
