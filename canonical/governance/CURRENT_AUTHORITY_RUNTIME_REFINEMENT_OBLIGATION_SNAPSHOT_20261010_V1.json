@@ -208,7 +208,11 @@
       "git_blob_sha": "34e559b81e08ff67281a2feb401ebc24bb663741",
       "classification": "NON_SELECTED_CURRENT_RUNTIME",
       "refinement_obligation_present": true,
-      "semantic_refinement_status": "UNRESOLVED"
+      "semantic_refinement_status": "PROVED",
+      "semantic_refinement_verification": {
+        "path": "canonical/verification/R1_LIVE_ARCHITECTURE_CLOSURE_GATE_EXECUTABLE_REFINEMENT_VERIFY_20261010_V1.json",
+        "git_blob_sha": "bdab5dd620dd7fba8cdeb7311984ead1ccded3bc"
+      }
     },
     {
       "path": "canonical/runtime/selected_discriminator_policy_cover_bridge_verifier_v1.py",
@@ -310,6 +314,6 @@
   "semantic_refinement_proved": false,
   "repository_wide_refinement_proved": false,
   "terminal_credit_delta": 0,
-  "semantic_refinement_proved_count": 2,
-  "semantic_refinement_unresolved_count": 38
+  "semantic_refinement_proved_count": 3,
+  "semantic_refinement_unresolved_count": 37
 }
