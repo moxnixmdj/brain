@@ -1,0 +1,86 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V33",
+  "date": "2026-10-10",
+  "status": "CURRENT_POST_RANK17_V4_FINAL_ZERO__SEVENTEEN_CONSUMED__RANK18_NEXT__ACCEPTANCE_ACTION_COVERAGE_REPAIR_REQUIRED__ZERO_ACCEPTANCE_CREDIT",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "predecessor": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261009_V32.json",
+    "git_blob_sha": "9c2f95b2d7946e374811321cde58d11f53704fd2"
+  },
+  "rank17_result": {
+    "path": "canonical/verification/TB_SCIENCE_RANK17_V4_IRREVERSIBLE_RESULT_TRUTH_20261010_V1.json",
+    "git_blob_sha": "07c826cb6d13f417c6998b2b7a85abaccf15434c",
+    "result": "FINAL_ZERO",
+    "reward": 0,
+    "task_started": true,
+    "benchmark_trials_consumed": 1,
+    "rerun_authority": false
+  },
+  "frozen_manifest": {
+    "path": "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json",
+    "git_blob_sha": "6dfa880b1f68881531afbba6ca211681801fd19b",
+    "verification_git_blob_sha": "e9bca17092cecbb7d2611d5c081bae8336c2083f"
+  },
+  "current_counts": {
+    "consumed_slots": 17,
+    "consumed_successes": 0,
+    "consumed_final_failures": 17,
+    "required_successes": 124,
+    "successes_remaining_for_pass_lock": 124,
+    "additional_failures_before_fail_lock": 70,
+    "maximum_possible_successes_remaining": 193,
+    "minimum_required_success_rate_over_remaining_slots": 0.6424870466321243,
+    "pass_still_mathematically_reachable": true,
+    "next_unconsumed_slot": {
+      "ledger_schedule_rank": 18,
+      "frozen_manifest_schedule_order": 17,
+      "task_rank": 17,
+      "slot_id": "terminal-bench-science/longitudinal-clinical-agent::trial-0",
+      "task_digest": "sha256:e9a166b2173f7014d4f1559505397b221f94bc446eab031f94791b35e0e5f1c9"
+    }
+  },
+  "rank17": {
+    "slot_id": "terminal-bench-science/variable-star-vetting::trial-0",
+    "task_digest": "sha256:51bf2b9d8e87a428772d92c6765d83ad3edc7c24283d2ff75af5f050aaee0c67",
+    "activation_pr": 2540,
+    "workflow_run_id": 38024152007,
+    "artifact_id": 11659272369,
+    "artifact_sha256": "9d10376279742fc735b3e787f11257167623f2775926f66da596fd7f4d1cb856",
+    "task_read": true,
+    "task_started": true,
+    "execution_authority_consumed": true,
+    "benchmark_trials_consumed": 1,
+    "reward": 0,
+    "final_status": "FINAL_ZERO",
+    "rerun_authority": false,
+    "replacement_carrier_authority": false,
+    "causal_root": "INTERNAL_ACCEPTANCE_TO_POSITIVE_ACTION_COVERAGE_GAP"
+  },
+  "rank18": {
+    "slot_id": "terminal-bench-science/longitudinal-clinical-agent::trial-0",
+    "task_digest": "sha256:e9a166b2173f7014d4f1559505397b221f94bc446eab031f94791b35e0e5f1c9",
+    "task_read": false,
+    "task_started": false,
+    "benchmark_trials_consumed": 0,
+    "execution_authority": false,
+    "task_read_authority": false
+  },
+  "scheduler": [
+    "DO_NOT_RERUN_OR_MERGE_RANK17_V4_ACTIVATION_PR_2540_FOR_CREDIT.",
+    "COUNT_RANK17_V4_AS_ONE_IRREVERSIBLE_FINAL_FAILURE.",
+    "PRESERVE_RANK18_UNREAD_UNSTARTED.",
+    "REPAIR_ACCEPTANCE_TO_POSITIVE_ACTION_COVERAGE_USING_SPENT_RANK17_OR_SYNTHETIC_EVIDENCE_ONLY.",
+    "REQUIRE_EVERY_UNPROVED_ACTION_RELEVANT_RAW_OBLIGATION_TO_HAVE_AT_LEAST_ONE_DECLARED_DISCHARGE_ACTION.",
+    "FORBID_SUBMISSION_READY_WHILE_RAW_TASK_ACCEPTANCE_RECEIPTS_ARE_FALSE.",
+    "FRESH_PROOF_CARRYING_PUBLIC_RESEAL_REQUIRED_BEFORE_ANY_RANK18_TASK_READ."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_trials_consumed_delta": 1,
+    "consumed_successes_delta": 0,
+    "consumed_final_failures_delta": 1,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
