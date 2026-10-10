@@ -1,0 +1,112 @@
+{
+  "schema": "PROJECT_BRAIN_ESCAPE_ACTIVE_GAP_B_CAUSAL_RECLASSIFICATION_20261010_V1",
+  "date": "2026-10-10",
+  "status": "CAUSAL_RECLASSIFICATION__NO_CURRENT_ACTIVE_GAP_B_ROW_HAS_BOUND_ALL_OUTCOME_STRICT_PROGRESS__GDPVAL_AND_CHARTOGRAPHY_MOVE_TO_ACQUISITION_EVIDENCE_FRONTIER__TB_REMAINS_PARKED__ZERO_CREDIT",
+  "frozen_universe_rule": "PRESERVE_THE_13_FROZEN_OBLIGATION_IDS__RECLASSIFY_CURRENT_ROUTE_STATE_ONLY",
+  "prior_current_state": {
+    "source": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
+    "active_gap_b_count": 2,
+    "active_gap_b_rows": [
+      "PROWORK_GDPVAL_GE_1846",
+      "CHARTOGRAPHY_TOOLS_GE_89"
+    ],
+    "parked_unresolved_rows": [
+      "TB_SCIENCE_GE_58_7"
+    ]
+  },
+  "row_reclassifications": [
+    {
+      "obligation_id": "PROWORK_GDPVAL_GE_1846",
+      "prior_current_class": "GAP_B_INTERNAL_ROUTE_STRICT_PROGRESS",
+      "corrected_current_class": "GAP_A_ACQUISITION_TOTALITY",
+      "evidence": [
+        {
+          "path": "canonical/governance/GDPVAL_FIRST_RESIDUAL_MECHANICAL_ROUTE_EXPANSION_20261009_V2.json",
+          "git_blob_sha": "c38ca6ee010a63d6dc218aa2c9d85831e39441ed"
+        },
+        {
+          "path": "canonical/governance/GDPVAL_EVALUATION_LAW_MINIMUM_INFORMATION_CUT_20261008_V1.json",
+          "git_blob_sha": "7bf8b2ffc8186e14380da080e5a9832a2fd9a2a8"
+        }
+      ],
+      "proved_current_facts": [
+        "92_OF_220_FIRST_RESIDUALS_HAVE_MACHINE_COMPILABLE_VERIFIER_ROUTES",
+        "ROUTE_AVAILABILITY_IS_EXPLICITLY_NOT_CRITERION_SATISFACTION",
+        "VERIFIER_EXECUTION_IS_CONDITIONAL_ON_A_GDPVAL_CANDIDATE_OR_SCOPE_COMPLETE_CONSTRUCTIVE_PROOF_BECOMING_AVAILABLE",
+        "CURRENT_BOUND_PUBLIC_INFORMATION_DOES_NOT_IDENTIFY_BRAIN_VS_OPUS55_NONINFERIORITY",
+        "ONE_AUTHENTIC_SEPARATOR_OR_STRONGER_CERTIFICATE_IS_THE_LOCALIZED_DECISION_CHANGING_FRONTIER"
+      ],
+      "gap_b_falsifier": "NO_BOUND_PROOF_SHOWS_EVERY_ALLOWED_RESULT_OF_RUNNING_THE_PARTIAL_MECHANICAL_VERIFIER_TERMINALIZES_OR_STRICTLY_DECREASES_ONE_FINITE_ACCEPTANCE_RELEVANT_PROGRESS_MEASURE__ROUTE_EXISTENCE_ALONE_CANNOT_SATISFY_GAP_B",
+      "corrected_route_class": "CANDIDATE_OR_SCOPE_COMPLETE_ACCEPTANCE_PROOF_OR_AUTHENTIC_SEPARATOR_ACQUISITION",
+      "current_route_available": "INPUT_AND_ACCEPTANCE_EVIDENCE_GATED",
+      "row_credit": false
+    },
+    {
+      "obligation_id": "CHARTOGRAPHY_TOOLS_GE_89",
+      "prior_current_class": "GAP_B_INTERNAL_ROUTE_STRICT_PROGRESS",
+      "corrected_current_class": "GAP_A_ACQUISITION_TOTALITY",
+      "evidence": [
+        {
+          "path": "canonical/governance/CHARTOGRAPHY_QWEN3_VL4B_VISION_ACQUISITION_ACTIVATION_V1.json",
+          "git_blob_sha": "d5b46fc2f784a206cda9bb7c6f1ee951300eccc0"
+        },
+        {
+          "path": "canonical/verification/CHARTOGRAPHY_QWEN3VL4B_ZERO_CASE_PREFLIGHT_V2_RECONCILIATION_20261010_V1.json",
+          "git_blob_sha": "ea260cd10e29379fc148ec6f281e1006bf5bdbfa"
+        }
+      ],
+      "proved_current_facts": [
+        "EXACT_QWEN3VL4B_Q4_RUNTIME_FIT_ON_FREE_PUBLIC_RUNNER_IS_NOW_CLOSED",
+        "SYNTHETIC_MULTIMODAL_IMAGE_TEXT_SMOKE_IS_NOW_CLOSED",
+        "ZERO_TERMINAL_CASES_AND_ZERO_INCREMENTAL_SPEND",
+        "NEXT_OPEN_LOAD_BEARING_OBJECTS_ARE_SCOPE_RELEVANT_CHART_REASONING_QUALIFICATION_JUDGE_CAPACITY_ADAPTER_BINDING_AND_THRESHOLD_CERTIFICATE"
+      ],
+      "gap_b_falsifier": "THE_COMPLETED_PREFLIGHT_TERMINATES_ONLY_THE_FIT_AND_SYNTHETIC_SMOKE_SUBPROBLEMS__NO_BOUND_FINITE_RANK_PROOF_SHOWS_EVERY_ALLOWED_OUTCOME_OF_THE_REMAINING_QUALIFICATION_OR_JUDGE_PATH_TERMINALIZES_OR_STRICTLY_DECREASES_THE_CHARTOGRAPHY_ACCEPTANCE_REGION",
+      "corrected_route_class": "NONTERMINAL_SCOPE_RELEVANT_QUALIFICATION_OR_STRONGER_THRESHOLD_EVIDENCE_ACQUISITION",
+      "current_route_available": "EVIDENCE_ACQUISITION_AFTER_VERIFIED_RUNTIME_FIT",
+      "row_credit": false
+    }
+  ],
+  "parked_row": {
+    "obligation_id": "TB_SCIENCE_GE_58_7",
+    "evidence": {
+      "path": "canonical/governance/ESCAPE_TB_SCIENCE_CURRENT_ROUTE_RECLASSIFICATION_20261010_V2.json",
+      "git_blob_sha": "2639f4e58ef71502707ab6b2bb37efb592b1a234"
+    },
+    "current_scheduler_class": "PARKED_AUTHORITY_LIMITED__UNRESOLVED_TARGET__NO_CURRENT_EXECUTABLE_INTERNAL_ROUTE",
+    "reclassified_into_gap_a": false,
+    "reason": "WAKE_REQUIRES_FRESH_CAPABILITY_FIRST_ADMISSION_AND_NEW_NONRETRY_EXECUTION_AUTHORITY__CURRENT_ACQUIRABILITY_NOT_PROVED",
+    "row_credit": false
+  },
+  "corrected_scheduler_cut": {
+    "active_gap_b_count": 0,
+    "active_gap_b_rows": [],
+    "acquisition_evidence_rows_added": [
+      "PROWORK_GDPVAL_GE_1846",
+      "CHARTOGRAPHY_TOOLS_GE_89"
+    ],
+    "effective_gap_a_active_count": 12,
+    "parked_unresolved_count": 1,
+    "parked_unresolved_rows": [
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "total_frozen_obligation_count": 13
+  },
+  "theorem_effect": "DELETE_GAP_B_AS_AN_ACTIVE_CURRENT_RESEARCH_FAMILY__DO_NOT_GRANT_ANY_ROW_PROOF__CONTINUE_WITH_GAP_A_ACQUISITION_OR_TERMINAL_COMMON_POLICY_REALIZATION_FOR_12_ACTIVE_ROWS_AND_SEPARATE_WAKE_TOTALITY_FOR_THE_PARKED_TB_ROW",
+  "hard_nonclaims": [
+    "NO_GDPVAL_ROW_PROOF",
+    "NO_CHARTOGRAPHY_ROW_PROOF",
+    "NO_TB_ROW_PROOF",
+    "NO_CLAIM_ANY_GAP_A_ACQUISITION_IS_CURRENTLY_ACQUIRABLE",
+    "NO_CC_R3_OR_GLOBAL_ESCAPE_PROGRESS_TOTALITY",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "row_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
