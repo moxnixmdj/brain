@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_RWA_CAPITAL_MEASUREMENT_SOURCE_PACK_V1",
+  "scope_id": "BASEL_CURRENT_RWA_CAPITAL_MEASUREMENT_V1",
+  "sources": [
+    {
+      "schema": "PROJECT_BRAIN_HTTPS_SOURCE_FRAGMENT_PROJECTION_PACK_V2",
+      "source_id": "BIS_DIS20_CURRENT_2023",
+      "url": "https://www.bis.org/committees/bcbs/basel-framework/standard/dis/20/inforce/2023-01-01/published/2020-03-27",
+      "retrieval_user_agent": "ProjectBrainSourceProjectionVerifier/2.0",
+      "fragments": [
+        {
+          "fragment_id": "RISK_BASED_CAPITAL_RATIOS_PERCENT_RWA",
+          "section_anchor": "Template KM1: Key metrics (at consolidated group level)",
+          "text": "Risk-based capital ratios as a percentage of RWA",
+          "max_chars_after_anchor": 18000
+        },
+        {
+          "fragment_id": "CET1_TIER1_TOTAL_CAPITAL_RATIO_ROWS",
+          "section_anchor": "Template KM1: Key metrics (at consolidated group level)",
+          "text": "CET1 ratio (%)",
+          "max_chars_after_anchor": 22000
+        }
+      ]
+    },
+    {
+      "schema": "PROJECT_BRAIN_HTTPS_SOURCE_FRAGMENT_PROJECTION_PACK_V2",
+      "source_id": "BIS_RBC20_CURRENT_2023",
+      "url": "https://www.bis.org/committees/bcbs/basel-framework/standard/rbc/20/inforce/2023-01-01/published/2020-11-26",
+      "retrieval_user_agent": "ProjectBrainSourceProjectionVerifier/2.0",
+      "fragments": [
+        {
+          "fragment_id": "RBC20_REGULATORY_CAPITAL_REQUIREMENTS_AND_RWA",
+          "section_anchor": "Calculation of minimum risk-based capital requirements",
+          "text": "This chapter sets out the minimum regulatory capital requirements under the risk-based framework and how banks must calculate risk-weighted assets.",
+          "max_chars_after_anchor": 4000
+        },
+        {
+          "fragment_id": "RBC20_MINIMUM_CAPITAL_PERCENT_RWA",
+          "section_anchor": "Minimum risk-based capital requirements",
+          "text": "Common Equity Tier 1 must be at least 4.5% of risk-weighted assets (RWA).",
+          "max_chars_after_anchor": 5000
+        }
+      ]
+    }
+  ]
+}
