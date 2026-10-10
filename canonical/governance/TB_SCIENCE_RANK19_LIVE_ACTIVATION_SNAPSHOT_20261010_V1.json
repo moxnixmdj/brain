@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK19_LIVE_ACTIVATION_SNAPSHOT_20261010_V1",
+  "date": "2026-10-10",
+  "status": "RANK19_EXACT_ONE_FILE_ACTIVATION_PR_LIVE__WORKFLOW_IN_PROGRESS_PRE_TASK_READ_AT_LAST_OBSERVATION__ZERO_TRIALS_AT_LAST_OBSERVATION",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "activation_authority": {
+    "path": "canonical/governance/TB_SCIENCE_RANK19_ACTIVATION_AUTHORITY_20261010_V1.json",
+    "git_blob_sha": "18e70560b79336b04ac3c6d6abf35e7552f0aca6"
+  },
+  "public_execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "base_branch": "terminal-execution-v1",
+    "base_commit": "c82abe2be6028408b5cd148b1dd20717db661572",
+    "execution_branch": "execute/tb-science-rank19-20261010-v1",
+    "head_commit": "a388f5be1aefb962f6e238a1ae91fa3aef5ddcbd",
+    "pull_request": 2593,
+    "activation_path": "capsules/tb_science_rank19_20261010_v1/ACTIVATE_RANK19_V1_PR.json",
+    "activation_git_blob_sha": "febdc43f066cbc144f8e0fd41f4b48e6ddd0aa9b",
+    "changed_file_count": 1,
+    "workflow_run_id": 38038077030,
+    "workflow_job_id": 114172615158,
+    "run_attempt": 1
+  },
+  "last_observation": {
+    "workflow_job_status": "in_progress",
+    "exact_activation_gate": "PASS",
+    "harbor_install": "PASS",
+    "llama_cpp_build": "IN_PROGRESS",
+    "carrier_qualification": "PENDING",
+    "durable_start_cas_absence_check": "PENDING",
+    "task_read_step": "PENDING",
+    "execution_step": "PENDING",
+    "finalizer": "PENDING",
+    "task_read": false,
+    "task_started": false,
+    "durable_start_cas_acquired": false,
+    "benchmark_trials_consumed": 0,
+    "result_present": false,
+    "immutable_history_only": true,
+    "live_state_must_be_rederived_before_any_result_or_credit_claim": true
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_RUN_REMAINS_PRE_TASK_READ_AFTER_THIS_OBSERVATION",
+    "NO_BENCHMARK_RESULT",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT",
+    "NO_RETRY_OR_REPLACEMENT_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_trials_consumed_delta_at_last_observation": 0,
+    "terminal_credit_delta": 0
+  }
+}
