@@ -177,7 +177,7 @@
       "id": "CURRENT_AUTHORITY_RUNTIME_BYTE_BINDING_COHERENCE",
       "kind": "LEAF",
       "status": "PROVED",
-      "note": "CLOSED__ALL_SIX_DECLARED_CURRENT_RUNTIME TARGET BYTES EXECUTED GREEN__67_TESTS_ZERO_FAILURES_ERRORS__CURRENT_TERMINAL_AUTHORITY REVISION_95 BINDS EXACT CURRENT BYTES__DRIFT_AND_MISSING_BINDING_COUNTS_ZERO",
+      "note": "BOUNDED_CURRENT_TARGET_BYTE_COHERENCE_RESEALED__SIX_DECLARED_CURRENT_RUNTIME_BLOBS_EXECUTED_ON_SPRITE__67_TESTS__0_FAILURES__0_ERRORS__CURRENT_AUTHORITY_POINTER_REPORTS_ZERO_STALE_OR_MISSING_RUNTIME_BINDINGS__DOES_NOT_PROVE_TRANSITIVE_DEPENDENCY_CONE_OR_EXECUTABLE_REFINEMENT",
       "attack_families": [
         "VERSION_DRIFT",
         "COMPOSITION_MISMATCH",
@@ -186,26 +186,25 @@
       ],
       "subobligations": [
         {
-          "id": "CURRENT_RUNTIME_TARGET_BYTES_EXECUTED",
+          "id": "CURRENT_BYTE_REEXECUTE_TEST_BACKED_RUNTIME_PATHS",
           "status": "PROVED",
           "verification_path": "canonical/verification/CURRENT_RUNTIME_BYTE_COHERENCE_SPRITE_VERIFICATION_20261010_V1.json",
-          "verification_git_blob_sha": "52de2370122ca2eb1e934425c963a918ea72a24f",
-          "tests_run": 67,
-          "failures": 0,
-          "errors": 0
+          "exact_target_count": 5,
+          "scope": "BOUNDED_COMPONENT_BEHAVIOR_SURFACES_ONLY"
         },
         {
-          "id": "CURRENT_AUTHORITY_RUNTIME_RESEAL_PROJECTION",
+          "id": "DONOR_INDEPENDENCE_AUDIT_CURRENT_BYTE_VERIFICATION",
           "status": "PROVED",
-          "projection_path": "canonical/governance/CURRENT_RUNTIME_BYTE_BINDING_RESEAL_PROJECTION_20261010_V1.json",
-          "projection_git_blob_sha": "c5ef86a5253cdf5514e428a1e8937552a143df43",
-          "target_path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
-          "expected_target_git_blob_sha": "7a8458d51aa703e2103b89ca741276fecfae1338",
-          "requirement": "APPLY_EXACT_PROJECTION_IF_AND_ONLY_IF_EXPECTED_TARGET_AND_OLD_VALUES_MATCH",
-          "applied_target_git_blob_sha": "b3d053e1451c053af2bf75ad9f31a091b101be39",
-          "applied_pointer_revision": 95
+          "verification_path": "canonical/verification/CURRENT_RUNTIME_BYTE_COHERENCE_SPRITE_VERIFICATION_20261010_V1.json",
+          "exact_target_count": 1,
+          "test_path": "canonical/tests/test_terminal_candidate_donor_independence_audit_v1.py",
+          "test_git_blob_sha": "1b70c9494993e894d45605f8fecffa3781ea1541"
         }
-      ]
+      ],
+      "verification": {
+        "path": "canonical/verification/CURRENT_RUNTIME_BYTE_COHERENCE_SPRITE_VERIFICATION_20261010_V1.json",
+        "git_blob_sha": "52de2370122ca2eb1e934425c963a918ea72a24f"
+      }
     }
   ],
   "terminal_closure": false,
