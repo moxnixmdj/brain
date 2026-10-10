@@ -4,7 +4,6 @@
   "status": "PASS__CURRENT_MAIN_RUNTIME_AND_DEPENDENCY_CLOSURE__POINTER_INDEPENDENT_RANK19_NEW_CAPABILITY_VALIDATION_ADMISSION__ZERO_EXPOSURE_ZERO_CREDIT",
   "subject": {
     "branch": "successor/rank19-capability-first-admission-20261010-v2",
-    "base_main_commit": "7f86e0be3aae4315dedbf504929631b9e46c72b4",
     "admission": {
       "path": "canonical/governance/TB_SCIENCE_RANK19_CAPABILITY_FIRST_CHECKPOINT_ADMISSION_20261010_V1.json",
       "git_blob_sha": "49e4f9c232f876546b2c72fb32ba19a3e487e1c9"
@@ -24,7 +23,8 @@
     "scheduler_residual_ledger": {
       "path": "canonical/runtime/r2_semantic_residual_ledger_v1.py",
       "git_blob_sha": "f732f511913a7fecd197d73496f156f9bcadff9a"
-    }
+    },
+    "verification_basis": "EXACT_CONTENT_ADDRESSED_SUBJECT_AND_IMMUTABLE_SOURCE_BLOBS__NOT_BRANCH_BASE_IDENTITY"
   },
   "inherited_tdd_evidence": {
     "predecessor_branch": "successor/rank19-capability-first-admission-20261010-v1",
