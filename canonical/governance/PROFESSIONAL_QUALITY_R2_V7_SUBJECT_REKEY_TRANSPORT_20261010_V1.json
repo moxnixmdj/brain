@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_PQ_R2_V7_SUBJECT_REKEY_TRANSPORT_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_SUBJECT_REFRESH_REKEY_TRANSPORT",
+  "old_subject": {
+    "id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+    "sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e"
+  },
+  "new_subject": {
+    "id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V7",
+    "sha256": "7e2904f3205b283a3a0f9e7583b36599cc2da4a96fd31b1777c226ca5c16c9e4"
+  },
+  "subject_delta": {
+    "added": [
+      "canonical/runtime/professional_quality_declared_system_subject_verify_v1.py"
+    ],
+    "removed": [],
+    "changed": [],
+    "execution_profile_unchanged": true
+  },
+  "generator": {
+    "path": "canonical/runtime/professional_quality_r2_candidate_branch_basis_v2.py",
+    "git_blob_sha": "99c8ed7585d57c6c9fb831fc71e0a302a337cbaa"
+  },
+  "replay": {
+    "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "old_count": 22,
+    "new_count": 22,
+    "same_operator_sequence": true,
+    "same_ordinals": true,
+    "same_target_sha": true,
+    "same_incumbent_sha": true,
+    "ids_rekeyed": true,
+    "global_candidate_search_complete": false
+  },
+  "transport_scope": "BRANCH_DESCRIPTOR_SET_AND_ORDER_ONLY__CANDIDATE_IDS_REKEY_TO_NEW_SUBJECT",
+  "root_subject_binding_authority": false,
+  "quality_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0
+}
