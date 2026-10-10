@@ -23,5 +23,34 @@
   "accounting": {
     "incremental_spend_usd": 0,
     "terminal_credit_delta": 0
-  }
+  },
+  "row_overrides": {
+    "TB_SCIENCE_GE_58_7": {
+      "route_group": "GAP_B_INTERNAL_ROUTE_STRICT_PROGRESS",
+      "route_class": "INTERNAL_V13_PUBLIC_EXECUTION_SURFACE_RESEAL_BEFORE_EFFECTIVE_RANK19_AUTHORITY",
+      "evidence_path": "canonical/governance/TB_SCIENCE_RANK19_ONE_SLOT_EXECUTION_AUTHORITY_20261010_V1.json",
+      "evidence_git_blob_sha": "ea76756ea30084c7f8291747ae9d204485a0186a",
+      "required_status": "STAGED_FRESH_RANK19_V13_AUTHORITY__ZERO_TASK_READ__ZERO_TRIALS_CONSUMED__EFFECTIVE_ONLY_AFTER_FULL_PUBLIC_V13_RESEAL",
+      "required_precondition": "FULL_PUBLIC_EXECUTION_SURFACE_RESEALED_AROUND_PLANNER_V7_AGENT_V13",
+      "current_route_available": "INTERNAL_PUBLIC_V13_RESEAL_AVAILABLE",
+      "strict_progress_witness_bound": false,
+      "externality_proved": false
+    }
+  },
+  "effective_reduction": {
+    "row_count": 13,
+    "gap_a_provenance_rows": 9,
+    "gap_b_provenance_rows": 4,
+    "row_specific_progress_measure_invention_required": false,
+    "shared_progress_measure_bound": true,
+    "surviving_global_premise": "GLOBAL_REPAIR_ACQUIRABILITY_OR_ACTUAL_SUPPORT_EXCLUSION"
+  },
+  "next_load_bearing_object": "PROVE_OR_REFUTE_GLOBAL_REPAIR_ACQUIRABILITY_OR_ACTUAL_SUPPORT_EXCLUSION_FOR_THE_THREE_REPAIR_CLASSES",
+  "hard_nonclaims": [
+    "NO_GAP_B_ACTION_BINDING_CREDIT_FROM_SHARED_MEASURE",
+    "NO_GLOBAL_REPAIR_ACQUIRABILITY_FROM_PROGRESS_MEASURE",
+    "NO_GLOBAL_ESCAPE_PROGRESS_TOTALITY",
+    "NO_CC_R3_CERTIFICATE",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ]
 }
