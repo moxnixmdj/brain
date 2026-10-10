@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_FINAL_SUBJECT_DEPENDENCY_CLOSURE_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__FINAL_V6_SUBJECT_DEPENDENCY_CLOSED__12_OF_12_ROOTS_CLASSIFIED__ZERO_MISSING_COMPONENTS__ZERO_ROOT_OR_QUALITY_AUTHORITY",
+  "subject": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V6_DECLARED_SYSTEM_SUBJECT_20261010_V5.json",
+    "git_blob_sha": "994a6a6aef44b6bb33161f7179d1983a1b50b633",
+    "subject_sha256": "353978ba4866d1e35794390968a14500ee1d8a4f0bddfb8f081e9a1a71ba468d",
+    "component_count": 20
+  },
+  "subject_verification": {
+    "path": "canonical/verification/PROFESSIONAL_QUALITY_DECLARED_SYSTEM_SUBJECT_V5_VERIFY_20261010_V1.json",
+    "git_blob_sha": "3b4213f114ae8d6842f1e2b5ddccab61f4b91078"
+  },
+  "closure_compiler": {
+    "path": "canonical/runtime/professional_quality_subject_dependency_closure_v2.py",
+    "git_blob_sha": "52eafdc40a5024bb950750c0198c7655b513141c"
+  },
+  "independent_carrier": {
+    "provider": "Sprites",
+    "sprite": "brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/pq-final-v6-verify"
+  },
+  "replay": {
+    "pass": true,
+    "status": "PASS__DECLARED_SYSTEM_DEPENDENCY_CLASSIFICATION_COMPLETE__SUBJECT_CLOSED",
+    "roots_total": 12,
+    "roots_dependency_classified": 12,
+    "subject_component_count": 20,
+    "subject_runtime_root_count": 11,
+    "transitive_runtime_closure_file_count": 11,
+    "missing_subject_component_count": 0,
+    "missing_subject_components": [],
+    "runtime_external_evidence_references": []
+  },
+  "authority": {
+    "root_subject_binding_authority": false,
+    "quality_authority": false,
+    "acceptance_authority": false,
+    "promotion_authority": false,
+    "terminal_authority": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

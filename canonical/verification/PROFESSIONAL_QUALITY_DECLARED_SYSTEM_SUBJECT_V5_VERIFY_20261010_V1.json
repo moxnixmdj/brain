@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_DECLARED_SYSTEM_SUBJECT_V5_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__V6_DEPENDENCY_CLOSED_AUTHENTICATED_TARGET_SYSTEM__20_OF_20_COMPONENT_CURRENTNESS__INDEPENDENT_SPRITE_REPLAY__ZERO_ROOT_OR_QUALITY_AUTHORITY",
+  "subject": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V6_DECLARED_SYSTEM_SUBJECT_20261010_V5.json",
+    "git_blob_sha": "994a6a6aef44b6bb33161f7179d1983a1b50b633",
+    "subject_kind": "DECLARED_SYSTEM",
+    "subject_id": "PROFESSIONAL_QUALITY_P1_V6_DEPENDENCY_CLOSED_AUTHENTICATED_TARGET_SYSTEM_20261010_V5",
+    "subject_sha256": "353978ba4866d1e35794390968a14500ee1d8a4f0bddfb8f081e9a1a71ba468d"
+  },
+  "verifier": {
+    "path": "canonical/runtime/professional_quality_declared_system_subject_verify_v1.py",
+    "git_blob_sha": "2936df1590077f4e97c82adaf79046a1221cef99"
+  },
+  "independent_carrier": {
+    "provider": "Sprites",
+    "sprite": "brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/pq-final-v6-verify"
+  },
+  "real_subject_replay": {
+    "pass": true,
+    "status": "PASS__DECLARED_SYSTEM_SUBJECT_CURRENT_AND_CONTENT_ADDRESSED",
+    "component_count": 20,
+    "component_currentness_verified": true,
+    "subject_identity_verified": true,
+    "subject_git_blob_sha": "994a6a6aef44b6bb33161f7179d1983a1b50b633",
+    "subject_sha256": "353978ba4866d1e35794390968a14500ee1d8a4f0bddfb8f081e9a1a71ba468d"
+  },
+  "proves": [
+    "EXACT_20_COMPONENT_SUBJECT_HASH_MATCHES_CANONICAL_MATERIAL",
+    "ALL_20_COMPONENT_BLOBS_MATCH_CURRENT_REPOSITORY_BYTES_AT_FREEZE",
+    "V6_MINIMAL_GOAL_BINDING_KERNEL_REPLACES_BROAD_GENERAL_CONTROLLER_IN_SUBJECT",
+    "DEPENDENCY_CLOSURE_ADDS_ALL_FIVE_PREVIOUSLY_MISSING_V4_SYSTEM_COMPONENTS",
+    "COMPONENT_MEMBERSHIP_DOES_NOT_GRANT_ROOT_SATISFACTION"
+  ],
+  "authority": {
+    "root_subject_binding_authority": false,
+    "semantic_truth_authority": false,
+    "execution_authority": false,
+    "quality_authority": false,
+    "acceptance_authority": false,
+    "promotion_authority": false,
+    "terminal_authority": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
