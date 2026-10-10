@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_SHARED_SEMANTIC_CONTRACT_TRUTH_REPAIR_INDEPENDENT_VERIFY_V1",
+  "date": "2026-10-11",
+  "status": "PASS__SECOND_INDEPENDENT_SPRITE__5_OF_5__12_OF_12_ACCEPTANCES_REPAIRED__NO_ROOT_EXECUTION_OR_OBLIGATION_CHANGE__ZERO_PROPERTY_CREDIT",
+  "subject": {
+    "predecessor_manifest": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_LEAF_BINDING_MANIFEST_20261010_V1.json",
+      "git_blob_sha": "a7cad32c9fd969ff2c3857bb924c7bd746237ec2"
+    },
+    "successor_manifest": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_LEAF_BINDING_MANIFEST_20261011_V2.json",
+      "git_blob_sha": "8ae72d7d44047ac9dec1b014c34a44f9933f0215"
+    },
+    "verifier": {
+      "path": "canonical/runtime/professional_semantic_contract_truth_repair_verify_v1.py",
+      "git_blob_sha": "03ab74bbe1f181cc68f18ffa4ab0da57ec674338"
+    },
+    "tests": {
+      "path": "canonical/tests/test_professional_semantic_contract_truth_repair_verify_v1.py",
+      "git_blob_sha": "c4e50404930d2d23f67ad5be5c8e86ed40e72b39"
+    }
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-professional-hard-defect-verify-20261010",
+    "carrier_id": "sprite-1bbb86ed-1f7c-409f-8397-fadc4de7a62a",
+    "workspace": "/home/sprite/r12-universal-positive-gate-v1",
+    "tests_run": 5,
+    "tests_passed": 5,
+    "tests_failed": 0
+  },
+  "proved": {
+    "repaired_semantic_leaf_count": 12,
+    "root_contracts_changed": 0,
+    "execution_leaves_changed": 0,
+    "semantic_obligations_changed": 0,
+    "unresolved_evidence_blocks_positive_instead_of_falsifying_whole_system_property": true,
+    "positive_nonvacuity_required": true,
+    "old_v1_semantic_claims_should_not_be_scheduled_for_closure": true
+  },
+  "hard_nonclaims": [
+    "NO_V2_LEAF_PROPERTY_TRUTH",
+    "NO_AUTOMATIC_V1_TO_V2_CLAIM_AUTHORITY_TRANSPORT",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}

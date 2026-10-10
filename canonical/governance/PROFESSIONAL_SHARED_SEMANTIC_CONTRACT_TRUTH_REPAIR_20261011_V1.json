@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_SHARED_SEMANTIC_CONTRACT_TRUTH_REPAIR_V1",
+  "date": "2026-10-11",
+  "status": "CURRENT__12_OF_12_SHARED_SEMANTIC_CONTRACTS_REPAIRED__OLD_V1_CLAIMS_RETIRED_FROM_SCHEDULING__V2_SUCCESSOR_CLAIMS_PENDING__ZERO_PROPERTY_CREDIT",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "predecessor_manifest": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_LEAF_BINDING_MANIFEST_20261010_V1.json",
+    "git_blob_sha": "a7cad32c9fd969ff2c3857bb924c7bd746237ec2"
+  },
+  "successor_manifest": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_LEAF_BINDING_MANIFEST_20261011_V2.json",
+    "git_blob_sha": "8ae72d7d44047ac9dec1b014c34a44f9933f0215"
+  },
+  "verifier": {
+    "path": "canonical/runtime/professional_semantic_contract_truth_repair_verify_v1.py",
+    "git_blob_sha": "03ab74bbe1f181cc68f18ffa4ab0da57ec674338"
+  },
+  "independent_verification": {
+    "path": "canonical/verification/PROFESSIONAL_SHARED_SEMANTIC_CONTRACT_TRUTH_REPAIR_INDEPENDENT_VERIFY_20261011_V1.json",
+    "git_blob_sha": "8530da5dded055bb65a1314953ddeb408cb1f57a"
+  },
+  "causal_defect": "V1_SHARED_SEMANTIC_ACCEPTANCE_UNCONDITIONALLY_REQUIRED_SUCCESSFUL_RESOLUTION_OF_ALL_ROOT_RELEVANT_DEFEATERS_FOR_EVERY_ADMISSIBLE_INPUT__WHILE_THE_RUNTIME_INTENTIONALLY_AND_CORRECTLY_SUPPORTS_FAIL_CLOSED_ABSTENTION_WHEN_DECISION_RELEVANT_EVIDENCE_IS_UNRESOLVED",
+  "repair": "PRESERVE_EXACT_POSITIVE_SEMANTIC_BAR__REQUIRE_UNRESOLVED_CASES_TO_FAIL_CLOSED_NONPOSITIVE_WITH_EXPLICIT_BLOCKING_DIAGNOSTIC__REQUIRE_REAL_POSITIVE_NONVACUITY",
+  "invariants": {
+    "root_contracts_changed": 0,
+    "execution_leaves_changed": 0,
+    "semantic_obligations_changed": 0,
+    "repaired_semantic_acceptances": 12,
+    "no_goal_weakening": true,
+    "property_truth_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "scheduling": {
+    "v1_semantic_claims_schedulable": false,
+    "v2_successor_claims_generated": false,
+    "exact_next": "PROFESSIONAL:GENERATE_12_SUCCESSOR_SEMANTIC_WHOLE_LEAF_PROPERTY_CLAIMS_FROM_V2_MANIFEST__BIND_EXACT_SUCCESSOR_SUBJECT_AND_WHOLE_ADMISSIBLE_DOMAIN__REUSE_EXISTING_CERTIFY_OR_FAIL_CLOSED_TOTALITY__TYPED_EVIDENCE__LOSSLESS_GENERATOR__POLICY_COVER__AND_NONVACUITY_MACHINERY__VERIFY_INDEPENDENTLY__DO_NOT_TRANSPORT_V1_PROPERTY_AUTHORITY"
+  },
+  "hard_nonclaims": [
+    "NO_V2_SEMANTIC_LEAF_PROPERTY_TRUTH_YET",
+    "NO_AUTOMATIC_V1_TO_V2_AUTHORITY_TRANSPORT",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "incremental_spend_usd": 0
+}
