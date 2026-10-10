@@ -1,0 +1,93 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK19_ONE_SLOT_EXECUTION_AUTHORITY_20261010_V4",
+  "date": "2026-10-10",
+  "status": "CANONICAL_EFFECTIVE_AUTHORITY__PUBLIC_V14_RESEAL_MERGED_AND_VERIFIED__SAME_CLAIM_BOUND_LOGICAL_ATTEMPT__PUBLIC_PROMOTION_PENDING__ZERO_TASK_READ",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "slot": {
+    "ledger_schedule_rank": 19,
+    "frozen_manifest_schedule_order": 18,
+    "task_rank": 18,
+    "id": "terminal-bench-science/diag-chipseq::trial-0",
+    "digest": "sha256:437bfacaebda9ce9905d54bdfe7247aec9649038206512c64547021f42e3950b"
+  },
+  "logical_attempt": {
+    "id": "a3672b9d77c8fa0b7d3f0610ac2c008d2888e566d8a75ac92aa7078c1523abe6",
+    "identity_basis": "SLOT_ID_PLUS_TASK_DIGEST_PLUS_EXECUTION_CLAIM_BINDING_DIGEST",
+    "execution_claim_binding_digest": "sha256:4e9cae8c879a8122f11fe6ae7eea775fcc4fb0ae62b3a87e208a95d28ea4d05f",
+    "claim_epoch_id": "RANK19_V14_CLAIM_BOUND_IDENTITY_20261010_V1",
+    "carrier_independent": true,
+    "prior_model_reasoning_samples": 0,
+    "prior_durable_start": false,
+    "fresh_slot": true
+  },
+  "public_reseal_verification": {
+    "path": "canonical/verification/TB_SCIENCE_RANK19_V14_FINAL_PUBLIC_RESEAL_VERIFICATION_20261010_V2.json",
+    "git_blob_sha": "c0a723a39c1fcfb3e25a4d72ef9543f0e8f8f17f",
+    "public_repository": "moxnixmdj/verification-capsule-runner",
+    "public_branch": "terminal-execution-v1",
+    "public_commit_sha": "12491be6f20c28027a768352e60550a2b49e3bcd",
+    "surface_git_blob_sha": "1676dac31b031dea7fe07aef2749197346f40908",
+    "behavior_git_blob_sha": "79daaa2dd70fe2119b92160e57bd58970ee1bf0d",
+    "invariant_registry_git_blob_sha": "b9fbb776ed5cf0888f34809c94f78638d3d915c1",
+    "execution_workflow_git_blob_sha": "b3c905ad39667edac9bed11068bf412560c3f198"
+  },
+  "logical_attempt_claim_binding": {
+    "path": "canonical/governance/TB_SCIENCE_RANK19_LOGICAL_ATTEMPT_CLAIM_BINDING_20261010_V1.json",
+    "git_blob_sha": "ecccf062b79894fcc2b06ecdf0413676a3a9ac2f",
+    "canonical_sha256": "4e9cae8c879a8122f11fe6ae7eea775fcc4fb0ae62b3a87e208a95d28ea4d05f"
+  },
+  "predecessor_authority": {
+    "path": "canonical/governance/TB_SCIENCE_RANK19_ONE_SLOT_EXECUTION_AUTHORITY_20261010_V3.json",
+    "git_blob_sha": "0630b5d1e8e9aebbd58adf63567b61f0036887ca"
+  },
+  "predecessor_ledger": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V39.json",
+    "git_blob_sha": "3f52aecc4ce2a3d4fbb95ceafae85ab27c0b2f9d"
+  },
+  "controls": {
+    "logical_attempts_authorized_total": 1,
+    "retries_authorized": 0,
+    "replacement_allowed": false,
+    "different_task_or_digest_forbidden": true,
+    "model_reasoning_before_durable_start_forbidden": true,
+    "task_start_requires_prestart_guard_agent_ready_and_durable_start_cas": true,
+    "action_effect_requires_durable_intent_ack": true,
+    "next_action_requires_durable_state_commit_ack": true,
+    "uncertain_effect_replay_authority": false,
+    "prestart_failure_before_durable_start_consumes_slot": false,
+    "post_start_result_irreversible": true,
+    "logical_attempt_identity_must_bind_execution_claim_epoch": true,
+    "logical_attempt_identity_must_exclude_carrier_identity": true,
+    "public_surface_promotion_must_remain_zero_exposure": true
+  },
+  "state": {
+    "task_read_history": false,
+    "task_started": false,
+    "start_cas_acquired": false,
+    "benchmark_trials_consumed": 0,
+    "result_present": false,
+    "reward_observed": false
+  },
+  "execution_authority": true,
+  "execution_authority_effective": true,
+  "public_surface_promotion_authority": true,
+  "task_read_authority": true,
+  "task_read_authority_effective": false,
+  "activation_authority": false,
+  "fresh_reality_authority": false,
+  "promotion_authority": true,
+  "remaining_activation_preconditions": [
+    "PUBLIC_EFFECTIVE_AUTHORITY_SURFACE_PROMOTION_VERIFIED_ZERO_EXPOSURE",
+    "EXACT_ONE_FILE_ACTIVATION_BRANCH_WITH_NO_PRIOR_ACTIVE_RUN",
+    "DURABLE_START_CAS_ABSENT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_trials_consumed_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0,
+    "capability_credit_delta": 0
+  }
+}
