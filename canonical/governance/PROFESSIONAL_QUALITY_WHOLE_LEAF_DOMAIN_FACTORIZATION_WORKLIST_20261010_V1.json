@@ -1,0 +1,385 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_WHOLE_LEAF_DOMAIN_FACTORIZATION_WORKLIST_20261010_V1",
+  "date": "2026-10-10",
+  "status": "MECHANICALLY_DERIVED_V2__12_ROOT_PAIRS__24_LEAVES__12_DOMAIN_EQUIVALENCE_TESTS_REQUIRED__ZERO_SCOPE_PROPERTY_OR_PROMOTION_CREDIT",
+  "sources": {
+    "leaf_manifest": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_LEAF_BINDING_MANIFEST_20261010_V1.json",
+      "git_blob_sha": "a7cad32c9fd969ff2c3857bb924c7bd746237ec2"
+    },
+    "uncovered_complements": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_UNCOVERED_PARTITION_WORKLIST_20261010_V1.json",
+      "git_blob_sha": "07dee32099a252cad07e5630504dcb2fc252180f",
+      "role": "BOUNDED_WITNESS_AND_UNPROVED_COMPLEMENT_SOURCE_ONLY__ITS_V1_GATE_METADATA_IS_NONAUTHORITATIVE_FOR_V2_ADMISSION"
+    },
+    "v2_gate_activation": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_CERTIFICATE_GATE_ACTIVATION_20261010_V2.json",
+      "git_blob_sha": "34fdaf7f4a91d0e28d446a9d554c3aa0fbec8222"
+    },
+    "v2_gate_verification": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_CLAIM_SCOPE_GATE_V2_VERIFY_20261010_V1.json",
+      "git_blob_sha": "cb91d94dd89ec7c67aae54db3cd5319612cd43d5"
+    },
+    "v2_readiness_verification": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_CERTIFICATE_READINESS_AUDIT_V2_VERIFY_20261010_V1.json",
+      "git_blob_sha": "2d28d932d08753fdf14c56aa24011e625518a4ef"
+    },
+    "compiler": {
+      "path": "canonical/runtime/professional_quality_whole_leaf_domain_factorization_v1.py",
+      "git_blob_sha": "db7ccc96a5b06e26f621e8b5b47f93299220da2c"
+    },
+    "tests": {
+      "path": "canonical/tests/test_professional_quality_whole_leaf_domain_factorization_v1.py",
+      "git_blob_sha": "29efff092a85801741dab7b0b69e798c52c6c896"
+    }
+  },
+  "counts": {
+    "root_count": 12,
+    "leaf_count": 24,
+    "root_pair_candidate_count": 12,
+    "pair_domain_equivalence_proved_count": 0,
+    "pair_domain_equivalence_required_count": 12,
+    "v2_admissible_claim_scope_chain_count": 0
+  },
+  "shared_claim_invariants": {
+    "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+    "subject_kind": "DECLARED_SYSTEM",
+    "coordination_only": true,
+    "domain_equivalence_authority": false
+  },
+  "roots": [
+    {
+      "root_id": "R1_TARGET_SPECIFICATION",
+      "root_contract": "Freeze objective, audience, hard constraints, plausible interpretations, target construct and claim scope; block goal substitution and unresolved decision-relevant ambiguity.",
+      "semantic_leaf": {
+        "leaf_id": "PQ::R1_TARGET_SPECIFICATION::SEMANTIC",
+        "obligation": "PROVE_DOMAIN_SEMANTIC_SUFFICIENCY_FOR_R1_TARGET_SPECIFICATION",
+        "acceptance": "DOMAIN_SPECIFIC_CLAIM_SEMANTICS_GROUNDING_SCOPE_UNCERTAINTY_AND_ALL_ROOT_RELEVANT_DEFEATERS_RESOLVED_WITH_TYPED_EVIDENCE",
+        "uncovered_partition_id": "PQ::R1_TARGET_SPECIFICATION::SEMANTIC::UNPROVED_COMPLEMENT",
+        "bounded_witness_scope_ids": [
+          "PQ::R1::TARGET_SEMANTICS::PROFESSIONAL_ARTIFACT_PLAN"
+        ]
+      },
+      "execution_leaf": {
+        "leaf_id": "PQ::R1_TARGET_SPECIFICATION::EXECUTION",
+        "obligation": "VERIFY_DOMAIN_EXECUTION_FOR_R1_TARGET_SPECIFICATION",
+        "acceptance": "RUN_ROOT_RELEVANT_POSITIVE_NEAR_MISS_AND_ADVERSARIAL_CASES_ON_EXACT_ARTIFACT_OR_RUNTIME_BYTES_AND_BIND_OBSERVED_OUTCOMES_TO_THE_ROOT_CONTRACT",
+        "uncovered_partition_id": "PQ::R1_TARGET_SPECIFICATION::EXECUTION::UNPROVED_COMPLEMENT",
+        "bounded_witness_scope_ids": [
+          "PQ::R1::TARGET_CONTRACT::STRUCTURAL_COMPLETENESS_GATE"
+        ]
+      },
+      "domain_reuse_candidate": true,
+      "semantic_execution_domain_equivalence_proved": false,
+      "domain_reuse_authority": false,
+      "exact_next": "FREEZE_SEMANTIC_AND_EXECUTION_DOMAIN_DEFINITIONS__INDEPENDENTLY_PROVE_EQUIVALENT_OR_KEEP_SEPARATE__THEN_BUILD_V2_CLAIM_SCOPES"
+    },
+    {
+      "root_id": "R2_CANDIDATE_SEARCH",
+      "root_contract": "Separate artifact acceptance from search closure; require sufficient candidate diversity, anti-fixation search and novelty-safe escape before claiming no materially better candidate remains.",
+      "semantic_leaf": {
+        "leaf_id": "PQ::R2_CANDIDATE_SEARCH::SEMANTIC",
+        "obligation": "PROVE_DOMAIN_SEMANTIC_SUFFICIENCY_FOR_R2_CANDIDATE_SEARCH",
+        "acceptance": "DOMAIN_SPECIFIC_CLAIM_SEMANTICS_GROUNDING_SCOPE_UNCERTAINTY_AND_ALL_ROOT_RELEVANT_DEFEATERS_RESOLVED_WITH_TYPED_EVIDENCE",
+        "uncovered_partition_id": "PQ::R2_CANDIDATE_SEARCH::SEMANTIC::UNPROVED_COMPLEMENT",
+        "bounded_witness_scope_ids": [
+          "PQ::R2::SEARCH_SEMANTICS::FINITE_SCOPE"
+        ]
+      },
+      "execution_leaf": {
+        "leaf_id": "PQ::R2_CANDIDATE_SEARCH::EXECUTION",
+        "obligation": "VERIFY_DOMAIN_EXECUTION_FOR_R2_CANDIDATE_SEARCH",
+        "acceptance": "RUN_ROOT_RELEVANT_POSITIVE_NEAR_MISS_AND_ADVERSARIAL_CASES_ON_EXACT_ARTIFACT_OR_RUNTIME_BYTES_AND_BIND_OBSERVED_OUTCOMES_TO_THE_ROOT_CONTRACT",
+        "uncovered_partition_id": "PQ::R2_CANDIDATE_SEARCH::EXECUTION::UNPROVED_COMPLEMENT",
+        "bounded_witness_scope_ids": [
+          "PQ::R2::FINITE_REGION_SEARCH::COMMON_POLICY_OR_MINIMAX_DISCRIMINATOR"
+        ]
+      },
+      "domain_reuse_candidate": true,
+      "semantic_execution_domain_equivalence_proved": false,
+      "domain_reuse_authority": false,
+      "exact_next": "FREEZE_SEMANTIC_AND_EXECUTION_DOMAIN_DEFINITIONS__INDEPENDENTLY_PROVE_EQUIVALENT_OR_KEEP_SEPARATE__THEN_BUILD_V2_CLAIM_SCOPES"
+    },
+    {
+      "root_id": "R3_REALIZATION_OBSERVATION",
+      "root_contract": "Bind every quality claim to exact artifact/system bytes, delivery environment, experienced realization and sufficient observation channels; block render, hidden-surface, multiscale and TOCTOU substitution failures.",
+      "semantic_leaf": {
+        "leaf_id": "PQ::R3_REALIZATION_OBSERVATION::SEMANTIC",
+        "obligation": "PROVE_DOMAIN_SEMANTIC_SUFFICIENCY_FOR_R3_REALIZATION_OBSERVATION",
+        "acceptance": "DOMAIN_SPECIFIC_CLAIM_SEMANTICS_GROUNDING_SCOPE_UNCERTAINTY_AND_ALL_ROOT_RELEVANT_DEFEATERS_RESOLVED_WITH_TYPED_EVIDENCE",
+        "uncovered_partition_id": "PQ::R3_REALIZATION_OBSERVATION::SEMANTIC::UNPROVED_COMPLEMENT",
+        "bounded_witness_scope_ids": [
+          "PQ::R3::REALIZATION_SEMANTICS::PINNED_NATIVE_RENDER"
+        ]
+      },
+      "execution_leaf": {
+        "leaf_id": "PQ::R3_REALIZATION_OBSERVATION::EXECUTION",
+        "obligation": "VERIFY_DOMAIN_EXECUTION_FOR_R3_REALIZATION_OBSERVATION",
+        "acceptance": "RUN_ROOT_RELEVANT_POSITIVE_NEAR_MISS_AND_ADVERSARIAL_CASES_ON_EXACT_ARTIFACT_OR_RUNTIME_BYTES_AND_BIND_OBSERVED_OUTCOMES_TO_THE_ROOT_CONTRACT",
+        "uncovered_partition_id": "PQ::R3_REALIZATION_OBSERVATION::EXECUTION::UNPROVED_COMPLEMENT",
+        "bounded_witness_scope_ids": [
+          "PQ::R3::NATIVE_ARTIFACT::BOUNDED_RENDER_PRESERVATION"
+        ]
+      },
+      "domain_reuse_candidate": true,
+      "semantic_execution_domain_equivalence_proved": false,
+      "domain_reuse_authority": false,
+      "exact_next": "FREEZE_SEMANTIC_AND_EXECUTION_DOMAIN_DEFINITIONS__INDEPENDENTLY_PROVE_EQUIVALENT_OR_KEEP_SEPARATE__THEN_BUILD_V2_CLAIM_SCOPES"
+    },
+    {
+      "root_id": "R4_MEASUREMENT_CONSTRUCT",
+      "root_contract": "Establish construct validity, criterion ontology, absolute professional floor, decision resolution and challenge validity; block rubric, scale, normalization and proxy gaming.",
+      "semantic_leaf": {
+        "leaf_id": "PQ::R4_MEASUREMENT_CONSTRUCT::SEMANTIC",
+        "obligation": "PROVE_DOMAIN_SEMANTIC_SUFFICIENCY_FOR_R4_MEASUREMENT_CONSTRUCT",
+        "acceptance": "DOMAIN_SPECIFIC_CLAIM_SEMANTICS_GROUNDING_SCOPE_UNCERTAINTY_AND_ALL_ROOT_RELEVANT_DEFEATERS_RESOLVED_WITH_TYPED_EVIDENCE",
+        "uncovered_partition_id": "PQ::R4_MEASUREMENT_CONSTRUCT::SEMANTIC::UNPROVED_COMPLEMENT",
+        "bounded_witness_scope_ids": [
+          "PQ::R4::MEASUREMENT_SEMANTICS::CONTENT_ADDRESSED_TYPED_MECHANICAL"
+        ]
+      },
+      "execution_leaf": {
+        "leaf_id": "PQ::R4_MEASUREMENT_CONSTRUCT::EXECUTION",
+        "obligation": "VERIFY_DOMAIN_EXECUTION_FOR_R4_MEASUREMENT_CONSTRUCT",
+        "acceptance": "RUN_ROOT_RELEVANT_POSITIVE_NEAR_MISS_AND_ADVERSARIAL_CASES_ON_EXACT_ARTIFACT_OR_RUNTIME_BYTES_AND_BIND_OBSERVED_OUTCOMES_TO_THE_ROOT_CONTRACT",
+        "uncovered_partition_id": "PQ::R4_MEASUREMENT_CONSTRUCT::EXECUTION::UNPROVED_COMPLEMENT",
+        "bounded_witness_scope_ids": [
+          "PQ::R4::MECHANICAL_ARTIFACT_MEASUREMENT::CONTENT_ADDRESSED_TYPED_ACCEPTANCE"
+        ]
+      },
+      "domain_reuse_candidate": true,
+      "semantic_execution_domain_equivalence_proved": false,
+      "domain_reuse_authority": false,
+      "exact_next": "FREEZE_SEMANTIC_AND_EXECUTION_DOMAIN_DEFINITIONS__INDEPENDENTLY_PROVE_EQUIVALENT_OR_KEEP_SEPARATE__THEN_BUILD_V2_CLAIM_SCOPES"
+    },
+    {
+      "root_id": "R5_EVALUATOR_REFERENCE",
+      "root_contract": "Qualify evaluators and references locally by criterion, artifact class, difficulty, state and relevant provenance; preserve disagreement and treat reference standards as fallible evidence rather than truth.",
+      "semantic_leaf": {
+        "leaf_id": "PQ::R5_EVALUATOR_REFERENCE::SEMANTIC",
+        "obligation": "PROVE_DOMAIN_SEMANTIC_SUFFICIENCY_FOR_R5_EVALUATOR_REFERENCE",
+        "acceptance": "DOMAIN_SPECIFIC_CLAIM_SEMANTICS_GROUNDING_SCOPE_UNCERTAINTY_AND_ALL_ROOT_RELEVANT_DEFEATERS_RESOLVED_WITH_TYPED_EVIDENCE",
+        "uncovered_partition_id": "PQ::R5_EVALUATOR_REFERENCE::SEMANTIC::UNPROVED_COMPLEMENT",
+        "bounded_witness_scope_ids": [
+          "PQ::R5::EVALUATOR_SEMANTICS::CONDITIONAL_ROBUSTNESS"
+        ]
+      },
+      "execution_leaf": {
+        "leaf_id": "PQ::R5_EVALUATOR_REFERENCE::EXECUTION",
+        "obligation": "VERIFY_DOMAIN_EXECUTION_FOR_R5_EVALUATOR_REFERENCE",
+        "acceptance": "RUN_ROOT_RELEVANT_POSITIVE_NEAR_MISS_AND_ADVERSARIAL_CASES_ON_EXACT_ARTIFACT_OR_RUNTIME_BYTES_AND_BIND_OBSERVED_OUTCOMES_TO_THE_ROOT_CONTRACT",
+        "uncovered_partition_id": "PQ::R5_EVALUATOR_REFERENCE::EXECUTION::UNPROVED_COMPLEMENT",
+        "bounded_witness_scope_ids": [
+          "PQ::R5::EVALUATOR_UNCERTAINTY::CONDITIONAL_ROBUST_MARGIN"
+        ]
+      },
+      "domain_reuse_candidate": true,
+      "semantic_execution_domain_equivalence_proved": false,
+      "domain_reuse_authority": false,
+      "exact_next": "FREEZE_SEMANTIC_AND_EXECUTION_DOMAIN_DEFINITIONS__INDEPENDENTLY_PROVE_EQUIVALENT_OR_KEEP_SEPARATE__THEN_BUILD_V2_CLAIM_SCOPES"
+    },
+    {
+      "root_id": "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+      "root_contract": "Admit typed evidence with provenance, grounding, independence/common-cause accounting, freshness and uncertainty semantics; forbid circular meta-evaluation and type laundering.",
+      "semantic_leaf": {
+        "leaf_id": "PQ::R6_EVIDENCE_GROUNDING_DEPENDENCE::SEMANTIC",
+        "obligation": "PROVE_DOMAIN_SEMANTIC_SUFFICIENCY_FOR_R6_EVIDENCE_GROUNDING_DEPENDENCE",
+        "acceptance": "DOMAIN_SPECIFIC_CLAIM_SEMANTICS_GROUNDING_SCOPE_UNCERTAINTY_AND_ALL_ROOT_RELEVANT_DEFEATERS_RESOLVED_WITH_TYPED_EVIDENCE",
+        "uncovered_partition_id": "PQ::R6_EVIDENCE_GROUNDING_DEPENDENCE::SEMANTIC::UNPROVED_COMPLEMENT",
+        "bounded_witness_scope_ids": [
+          "PQ::R6::LEAF_EVIDENCE::CONTENT_ADDRESSED_SCOPE_MATCHED_ADMISSION"
+        ]
+      },
+      "execution_leaf": {
+        "leaf_id": "PQ::R6_EVIDENCE_GROUNDING_DEPENDENCE::EXECUTION",
+        "obligation": "VERIFY_DOMAIN_EXECUTION_FOR_R6_EVIDENCE_GROUNDING_DEPENDENCE",
+        "acceptance": "RUN_ROOT_RELEVANT_POSITIVE_NEAR_MISS_AND_ADVERSARIAL_CASES_ON_EXACT_ARTIFACT_OR_RUNTIME_BYTES_AND_BIND_OBSERVED_OUTCOMES_TO_THE_ROOT_CONTRACT",
+        "uncovered_partition_id": "PQ::R6_EVIDENCE_GROUNDING_DEPENDENCE::EXECUTION::UNPROVED_COMPLEMENT",
+        "bounded_witness_scope_ids": [
+          "PQ::R6::LEAF_EVIDENCE::CONTENT_ADDRESSED_SCOPE_MATCHED_ADMISSION"
+        ]
+      },
+      "domain_reuse_candidate": true,
+      "semantic_execution_domain_equivalence_proved": false,
+      "domain_reuse_authority": false,
+      "exact_next": "FREEZE_SEMANTIC_AND_EXECUTION_DOMAIN_DEFINITIONS__INDEPENDENTLY_PROVE_EQUIVALENT_OR_KEEP_SEPARATE__THEN_BUILD_V2_CLAIM_SCOPES"
+    },
+    {
+      "root_id": "R7_CAUSAL_PRESCRIPTIVE",
+      "root_contract": "Separate quality prediction from causal explanation and edit prescription; require intervention fidelity, causal attribution, version/dose scope and post-edit regression checks before promoting reusable design rules.",
+      "semantic_leaf": {
+        "leaf_id": "PQ::R7_CAUSAL_PRESCRIPTIVE::SEMANTIC",
+        "obligation": "PROVE_DOMAIN_SEMANTIC_SUFFICIENCY_FOR_R7_CAUSAL_PRESCRIPTIVE",
+        "acceptance": "DOMAIN_SPECIFIC_CLAIM_SEMANTICS_GROUNDING_SCOPE_UNCERTAINTY_AND_ALL_ROOT_RELEVANT_DEFEATERS_RESOLVED_WITH_TYPED_EVIDENCE",
+        "uncovered_partition_id": "PQ::R7_CAUSAL_PRESCRIPTIVE::SEMANTIC::UNPROVED_COMPLEMENT",
+        "bounded_witness_scope_ids": [
+          "PQ::R7::SINGLE_EDIT::UVCK_DEFEATER_ORDER_REPAIR"
+        ]
+      },
+      "execution_leaf": {
+        "leaf_id": "PQ::R7_CAUSAL_PRESCRIPTIVE::EXECUTION",
+        "obligation": "VERIFY_DOMAIN_EXECUTION_FOR_R7_CAUSAL_PRESCRIPTIVE",
+        "acceptance": "RUN_ROOT_RELEVANT_POSITIVE_NEAR_MISS_AND_ADVERSARIAL_CASES_ON_EXACT_ARTIFACT_OR_RUNTIME_BYTES_AND_BIND_OBSERVED_OUTCOMES_TO_THE_ROOT_CONTRACT",
+        "uncovered_partition_id": "PQ::R7_CAUSAL_PRESCRIPTIVE::EXECUTION::UNPROVED_COMPLEMENT",
+        "bounded_witness_scope_ids": [
+          "PQ::R7::SINGLE_EDIT::UVCK_DEFEATER_ORDER_REPAIR"
+        ]
+      },
+      "domain_reuse_candidate": true,
+      "semantic_execution_domain_equivalence_proved": false,
+      "domain_reuse_authority": false,
+      "exact_next": "FREEZE_SEMANTIC_AND_EXECUTION_DOMAIN_DEFINITIONS__INDEPENDENTLY_PROVE_EQUIVALENT_OR_KEEP_SEPARATE__THEN_BUILD_V2_CLAIM_SCOPES"
+    },
+    {
+      "root_id": "R8_POPULATION_CONTEXT_OPERATOR",
+      "root_contract": "Bind claims to the correct constituency, subgroup, evaluator assignment, presenter/operator, context and protocol; account for representation, invariance, social influence, strategic reporting and reactivity.",
+      "semantic_leaf": {
+        "leaf_id": "PQ::R8_POPULATION_CONTEXT_OPERATOR::SEMANTIC",
+        "obligation": "PROVE_DOMAIN_SEMANTIC_SUFFICIENCY_FOR_R8_POPULATION_CONTEXT_OPERATOR",
+        "acceptance": "DOMAIN_SPECIFIC_CLAIM_SEMANTICS_GROUNDING_SCOPE_UNCERTAINTY_AND_ALL_ROOT_RELEVANT_DEFEATERS_RESOLVED_WITH_TYPED_EVIDENCE",
+        "uncovered_partition_id": "PQ::R8_POPULATION_CONTEXT_OPERATOR::SEMANTIC::UNPROVED_COMPLEMENT",
+        "bounded_witness_scope_ids": [
+          "PQ::R8::POPULATION_SEMANTICS::FROZEN_512"
+        ]
+      },
+      "execution_leaf": {
+        "leaf_id": "PQ::R8_POPULATION_CONTEXT_OPERATOR::EXECUTION",
+        "obligation": "VERIFY_DOMAIN_EXECUTION_FOR_R8_POPULATION_CONTEXT_OPERATOR",
+        "acceptance": "RUN_ROOT_RELEVANT_POSITIVE_NEAR_MISS_AND_ADVERSARIAL_CASES_ON_EXACT_ARTIFACT_OR_RUNTIME_BYTES_AND_BIND_OBSERVED_OUTCOMES_TO_THE_ROOT_CONTRACT",
+        "uncovered_partition_id": "PQ::R8_POPULATION_CONTEXT_OPERATOR::EXECUTION::UNPROVED_COMPLEMENT",
+        "bounded_witness_scope_ids": [
+          "PQ::R8::DELEGATION_POPULATION::FROZEN_512_CASE_PRE_BEACON_BINDING"
+        ]
+      },
+      "domain_reuse_candidate": true,
+      "semantic_execution_domain_equivalence_proved": false,
+      "domain_reuse_authority": false,
+      "exact_next": "FREEZE_SEMANTIC_AND_EXECUTION_DOMAIN_DEFINITIONS__INDEPENDENTLY_PROVE_EQUIVALENT_OR_KEEP_SEPARATE__THEN_BUILD_V2_CLAIM_SCOPES"
+    },
+    {
+      "root_id": "R9_TEMPORAL_DEPLOYMENT",
+      "root_contract": "Bind quality to target horizons and deployment dynamics; account for drift, carryover, missing outcomes, rare failures, distribution tails, transport, performativity and path-dependent equilibria.",
+      "semantic_leaf": {
+        "leaf_id": "PQ::R9_TEMPORAL_DEPLOYMENT::SEMANTIC",
+        "obligation": "PROVE_DOMAIN_SEMANTIC_SUFFICIENCY_FOR_R9_TEMPORAL_DEPLOYMENT",
+        "acceptance": "DOMAIN_SPECIFIC_CLAIM_SEMANTICS_GROUNDING_SCOPE_UNCERTAINTY_AND_ALL_ROOT_RELEVANT_DEFEATERS_RESOLVED_WITH_TYPED_EVIDENCE",
+        "uncovered_partition_id": "PQ::R9_TEMPORAL_DEPLOYMENT::SEMANTIC::UNPROVED_COMPLEMENT",
+        "bounded_witness_scope_ids": [
+          "PQ::R9::TEMPORAL_SEMANTICS::FROZEN_CONSERVATIVE_CENSORING"
+        ]
+      },
+      "execution_leaf": {
+        "leaf_id": "PQ::R9_TEMPORAL_DEPLOYMENT::EXECUTION",
+        "obligation": "VERIFY_DOMAIN_EXECUTION_FOR_R9_TEMPORAL_DEPLOYMENT",
+        "acceptance": "RUN_ROOT_RELEVANT_POSITIVE_NEAR_MISS_AND_ADVERSARIAL_CASES_ON_EXACT_ARTIFACT_OR_RUNTIME_BYTES_AND_BIND_OBSERVED_OUTCOMES_TO_THE_ROOT_CONTRACT",
+        "uncovered_partition_id": "PQ::R9_TEMPORAL_DEPLOYMENT::EXECUTION::UNPROVED_COMPLEMENT",
+        "bounded_witness_scope_ids": [
+          "PQ::R9::CENSORING::FIXED_DENOMINATOR_CONSERVATIVE_ACCOUNTING"
+        ]
+      },
+      "domain_reuse_candidate": true,
+      "semantic_execution_domain_equivalence_proved": false,
+      "domain_reuse_authority": false,
+      "exact_next": "FREEZE_SEMANTIC_AND_EXECUTION_DOMAIN_DEFINITIONS__INDEPENDENTLY_PROVE_EQUIVALENT_OR_KEEP_SEPARATE__THEN_BUILD_V2_CLAIM_SCOPES"
+    },
+    {
+      "root_id": "R10_ANALYSIS_DECISION",
+      "root_contract": "Freeze or robustify admissible analysis, aggregation, compensation, risk and normative policy; preserve Pareto/incomparability structure and model multiplicity rather than selecting convenient scalarizations after outcomes are known.",
+      "semantic_leaf": {
+        "leaf_id": "PQ::R10_ANALYSIS_DECISION::SEMANTIC",
+        "obligation": "PROVE_DOMAIN_SEMANTIC_SUFFICIENCY_FOR_R10_ANALYSIS_DECISION",
+        "acceptance": "DOMAIN_SPECIFIC_CLAIM_SEMANTICS_GROUNDING_SCOPE_UNCERTAINTY_AND_ALL_ROOT_RELEVANT_DEFEATERS_RESOLVED_WITH_TYPED_EVIDENCE",
+        "uncovered_partition_id": "PQ::R10_ANALYSIS_DECISION::SEMANTIC::UNPROVED_COMPLEMENT",
+        "bounded_witness_scope_ids": [
+          "PQ::R10::DECISION_SUFFICIENCY_SEMANTICS::LOSSLESS_MINIMUM_INFORMATION"
+        ]
+      },
+      "execution_leaf": {
+        "leaf_id": "PQ::R10_ANALYSIS_DECISION::EXECUTION",
+        "obligation": "VERIFY_DOMAIN_EXECUTION_FOR_R10_ANALYSIS_DECISION",
+        "acceptance": "RUN_ROOT_RELEVANT_POSITIVE_NEAR_MISS_AND_ADVERSARIAL_CASES_ON_EXACT_ARTIFACT_OR_RUNTIME_BYTES_AND_BIND_OBSERVED_OUTCOMES_TO_THE_ROOT_CONTRACT",
+        "uncovered_partition_id": "PQ::R10_ANALYSIS_DECISION::EXECUTION::UNPROVED_COMPLEMENT",
+        "bounded_witness_scope_ids": [
+          "PQ::R10::DECISION_SUFFICIENCY::LOSSLESS_MINIMUM_INFORMATION"
+        ]
+      },
+      "domain_reuse_candidate": true,
+      "semantic_execution_domain_equivalence_proved": false,
+      "domain_reuse_authority": false,
+      "exact_next": "FREEZE_SEMANTIC_AND_EXECUTION_DOMAIN_DEFINITIONS__INDEPENDENTLY_PROVE_EQUIVALENT_OR_KEEP_SEPARATE__THEN_BUILD_V2_CLAIM_SCOPES"
+    },
+    {
+      "root_id": "R11_ADAPTIVE_INTEGRITY_SECURITY",
+      "root_contract": "Protect development, selection and certification boundaries against adaptive optimization, leakage, acquired contamination, evaluation awareness, prompt/control-plane attacks, holdout reuse and evaluator-policy selection bias.",
+      "semantic_leaf": {
+        "leaf_id": "PQ::R11_ADAPTIVE_INTEGRITY_SECURITY::SEMANTIC",
+        "obligation": "PROVE_DOMAIN_SEMANTIC_SUFFICIENCY_FOR_R11_ADAPTIVE_INTEGRITY_SECURITY",
+        "acceptance": "DOMAIN_SPECIFIC_CLAIM_SEMANTICS_GROUNDING_SCOPE_UNCERTAINTY_AND_ALL_ROOT_RELEVANT_DEFEATERS_RESOLVED_WITH_TYPED_EVIDENCE",
+        "uncovered_partition_id": "PQ::R11_ADAPTIVE_INTEGRITY_SECURITY::SEMANTIC::UNPROVED_COMPLEMENT",
+        "bounded_witness_scope_ids": [
+          "PQ::R11::FIREWALL_SEMANTICS::POST_IDENTITY_REVOCATION"
+        ]
+      },
+      "execution_leaf": {
+        "leaf_id": "PQ::R11_ADAPTIVE_INTEGRITY_SECURITY::EXECUTION",
+        "obligation": "VERIFY_DOMAIN_EXECUTION_FOR_R11_ADAPTIVE_INTEGRITY_SECURITY",
+        "acceptance": "RUN_ROOT_RELEVANT_POSITIVE_NEAR_MISS_AND_ADVERSARIAL_CASES_ON_EXACT_ARTIFACT_OR_RUNTIME_BYTES_AND_BIND_OBSERVED_OUTCOMES_TO_THE_ROOT_CONTRACT",
+        "uncovered_partition_id": "PQ::R11_ADAPTIVE_INTEGRITY_SECURITY::EXECUTION::UNPROVED_COMPLEMENT",
+        "bounded_witness_scope_ids": [
+          "PQ::R11::EVAL_FIREWALL::POST_IDENTITY_DISCOVERY_REVOCATION"
+        ]
+      },
+      "domain_reuse_candidate": true,
+      "semantic_execution_domain_equivalence_proved": false,
+      "domain_reuse_authority": false,
+      "exact_next": "FREEZE_SEMANTIC_AND_EXECUTION_DOMAIN_DEFINITIONS__INDEPENDENTLY_PROVE_EQUIVALENT_OR_KEEP_SEPARATE__THEN_BUILD_V2_CLAIM_SCOPES"
+    },
+    {
+      "root_id": "R12_META_COMPOSITION_CLOSURE",
+      "root_contract": "Require assumption-guarantee composition, same-subject root conjunction, abstraction soundness, independent defeater search, coverage accounting, proof-search honesty, meta-controller falsification and nonvacuity.",
+      "semantic_leaf": {
+        "leaf_id": "PQ::R12_META_COMPOSITION_CLOSURE::SEMANTIC",
+        "obligation": "PROVE_DOMAIN_SEMANTIC_SUFFICIENCY_FOR_R12_META_COMPOSITION_CLOSURE",
+        "acceptance": "DOMAIN_SPECIFIC_CLAIM_SEMANTICS_GROUNDING_SCOPE_UNCERTAINTY_AND_ALL_ROOT_RELEVANT_DEFEATERS_RESOLVED_WITH_TYPED_EVIDENCE",
+        "uncovered_partition_id": "PQ::R12_META_COMPOSITION_CLOSURE::SEMANTIC::UNPROVED_COMPLEMENT",
+        "bounded_witness_scope_ids": [
+          "PQ::R12::UVCK::FAIL_CLOSED_META_COMPOSITION"
+        ]
+      },
+      "execution_leaf": {
+        "leaf_id": "PQ::R12_META_COMPOSITION_CLOSURE::EXECUTION",
+        "obligation": "VERIFY_DOMAIN_EXECUTION_FOR_R12_META_COMPOSITION_CLOSURE",
+        "acceptance": "RUN_ROOT_RELEVANT_POSITIVE_NEAR_MISS_AND_ADVERSARIAL_CASES_ON_EXACT_ARTIFACT_OR_RUNTIME_BYTES_AND_BIND_OBSERVED_OUTCOMES_TO_THE_ROOT_CONTRACT",
+        "uncovered_partition_id": "PQ::R12_META_COMPOSITION_CLOSURE::EXECUTION::UNPROVED_COMPLEMENT",
+        "bounded_witness_scope_ids": [
+          "PQ::R12::UVCK::FAIL_CLOSED_META_COMPOSITION"
+        ]
+      },
+      "domain_reuse_candidate": true,
+      "semantic_execution_domain_equivalence_proved": false,
+      "domain_reuse_authority": false,
+      "exact_next": "FREEZE_SEMANTIC_AND_EXECUTION_DOMAIN_DEFINITIONS__INDEPENDENTLY_PROVE_EQUIVALENT_OR_KEEP_SEPARATE__THEN_BUILD_V2_CLAIM_SCOPES"
+    }
+  ],
+  "execution_policy": {
+    "preferred_parallelism": "RUN_12_ROOT_PAIR_DOMAIN_EQUIVALENCE_DECISIONS_IN_PARALLEL_WHERE_NONCONFLICTING",
+    "on_equivalent": "REUSE_ONE_CONTENT_ADDRESSED_DOMAIN_DEFINITION_FOR_BOTH_LEAF_CLAIMS__STILL_BUILD_AND_VERIFY_TWO_CLAIM_IDENTITIES",
+    "on_not_equivalent": "KEEP_TWO_DOMAIN_DEFINITIONS_AND_TWO_V2_CLAIM_SCOPES",
+    "property_truth_rule": "BLOCK_UNTIL_V2_SCOPE_ADMISSION_PER_LEAF",
+    "evidence_rule": "SEARCH_EXISTING_BOUNDED_WITNESSES_FIRST__ACQUIRE_ONLY_UNCOVERED_PARTITIONS"
+  },
+  "hard_nonclaims": [
+    "NO_SEMANTIC_EXECUTION_DOMAIN_EQUIVALENCE_PROVED",
+    "NO_WHOLE_LEAF_SCOPE_CERTIFICATE_ADMITTED",
+    "NO_PROPERTY_TRUTH",
+    "NO_DOMAIN_SEMANTIC_OR_EXECUTION_CLOSURE",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
