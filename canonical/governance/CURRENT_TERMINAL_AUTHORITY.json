@@ -1437,6 +1437,26 @@
         "git_blob_sha": "5a10547706a1b46dcb11d32122490efd927d30b0"
       },
       "note": "CURRENT_HIGHEST_LEVERAGE_ALL_OPEN_ROUTE__13_OBLIGATIONS__ONE_REMAINING_VERIFIED_PREMISE_ESCAPE_PROGRESS_TOTALITY__ZERO_CREDIT"
+    },
+    "current_claim_scoped_coverage_root_closure_20261010_v1": {
+      "registry": {
+        "path": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_CERTIFICATE_REGISTRY_V1.json",
+        "git_blob_sha": "7552290f57d478d4cf48ba42e392f71a23a91264"
+      },
+      "current_pointer": {
+        "path": "canonical/governance/CURRENT_COVERAGE_COMPLETENESS_ROOT_CERTIFICATES.json",
+        "git_blob_sha": "6bbf64e0ad5cb158e8edb6a561dceb7babaef116"
+      },
+      "active_claim": {
+        "path": "canonical/governance/COVERAGE_COMPLETENESS_FROZEN_CLAIM_R3_PROMOTION_SAFETY_20261010_V1.json",
+        "git_blob_sha": "ace6ad8b44c3b571746f3f229ca76d68a88c3dab",
+        "claim_id": "e1c519109c4b2c46a9225686fc2c5c5490564d1cc62d5c6ff3c6c436bfca4314"
+      },
+      "mission_pointer": {
+        "path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
+        "git_blob_sha": "6ab2147306a138f9ea327d8e19cb4a5bc76e89df"
+      },
+      "note": "CLAIM_SCOPED_ONLY__R3_PROMOTION_SAFETY_PROPERTY_CC_R1_CC_R2_CC_R3_PROVED_CURRENT__R4_PROOF_CLOSURE_TRUE__ZERO_ACCEPTANCE_AND_TERMINAL_CREDIT"
     }
   },
   "live_truth": {
@@ -2352,7 +2372,19 @@
     "tb_science_rank18_prestart_abort_run_id": 38027841300,
     "tb_science_rank18_prestart_abort_truth_blob": "fd53eecbf4d974e45c936d592005f5f7d518e87d",
     "tb_science_rank18_prestart_abort_cause": "TASK_ARTIFACT_PATH_INVALID",
-    "tb_science_rank18_required_repair": "HARBOR_0_23_ARTIFACTCONFIG_TABLE_TO_MAIN_SERVICE_SOURCE_PATH_BRIDGE"
+    "tb_science_rank18_required_repair": "HARBOR_0_23_ARTIFACTCONFIG_TABLE_TO_MAIN_SERVICE_SOURCE_PATH_BRIDGE",
+    "coverage_active_claim_id": "e1c519109c4b2c46a9225686fc2c5c5490564d1cc62d5c6ff3c6c436bfca4314",
+    "coverage_active_claim_kind": "PROPERTY_CERTIFICATE",
+    "coverage_active_claim_path": "canonical/governance/COVERAGE_COMPLETENESS_FROZEN_CLAIM_R3_PROMOTION_SAFETY_20261010_V1.json",
+    "coverage_claim_scoped_root_registry_valid": true,
+    "coverage_claim_scoped_proved_root_count": 3,
+    "coverage_claim_scoped_open_root_count": 0,
+    "coverage_claim_scoped_r4_proof_closure": true,
+    "r3_promotion_safety_property_root_chain_closed": true,
+    "r3_promotion_safety_property_global_mission_completion": false,
+    "r3_promotion_safety_property_opus_checkpoint_completion": false,
+    "r3_promotion_safety_property_acceptance_credit_delta": 0,
+    "r3_promotion_safety_property_terminal_credit_delta": 0
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -3058,7 +3090,7 @@
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
   },
-  "pointer_revision": 127,
+  "pointer_revision": 128,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
@@ -4334,15 +4366,26 @@
     "terminal_credit_delta": 0
   },
   "r4_live_binding_currentness": {
-    "status": "REFRESHED_CURRENT_BYTES_WITH_CLAIM_SCOPED_ROOT_REGISTRY__ZERO_CREDIT",
-    "live_binding_sha": "149891188b32fd7e52460b1536c6a52cb4bf5919",
-    "mission_sha": "7ad5f82d8434966781bf97c725d482e10133fc7c",
-    "claim_scope_sha": "05b555f4f9a0227ee0b3e6121246172078857279",
-    "root_registry_sha": "fa395c54a9f5c7d93eff01dd8ccf28575c0a0361",
-    "current_root_certificate_pointer_sha": "b5ecc5a30abd046fb4f034e9ac1972ebdcf73c66",
-    "active_claim": null,
-    "registry_guard_sha": "508df599e111e9aec47cbd175ce4f760299da786",
-    "registry_tests_sha": "7944f9c4fa46de905f7f6976b9dd2968f174733c",
+    "status": "REFRESHED_CURRENT_BYTES__ACTIVE_R3_PROMOTION_SAFETY_CLAIM_3_OF_3_ROOTS_PROVED__R4_TRUE_FOR_CLAIM_ONLY__ZERO_CREDIT",
+    "mission_sha": "6ab2147306a138f9ea327d8e19cb4a5bc76e89df",
+    "root_registry_sha": "7552290f57d478d4cf48ba42e392f71a23a91264",
+    "current_root_certificate_pointer_sha": "6bbf64e0ad5cb158e8edb6a561dceb7babaef116",
+    "active_claim": {
+      "claim_id": "e1c519109c4b2c46a9225686fc2c5c5490564d1cc62d5c6ff3c6c436bfca4314",
+      "claim_kind": "PROPERTY_CERTIFICATE",
+      "path": "canonical/governance/COVERAGE_COMPLETENESS_FROZEN_CLAIM_R3_PROMOTION_SAFETY_20261010_V1.json",
+      "git_blob_sha": "ace6ad8b44c3b571746f3f229ca76d68a88c3dab"
+    },
+    "proved_root_ids": [
+      "CC_R1_REALITY_CONTAINMENT_V1",
+      "CC_R2_MISSION_SOUNDNESS_V1",
+      "CC_R3_TERMINAL_CLOSURE_V1"
+    ],
+    "open_root_ids": [],
+    "r4_proof_closure": true,
+    "global_mission_completion": false,
+    "opus_checkpoint_completion": false,
+    "acceptance_credit_delta": 0,
     "terminal_credit_delta": 0
   },
   "r2_v61_sec_issuer_extension_cross_filing_reconciliation_20261009_v1": {
@@ -4749,6 +4792,21 @@
     "prior_authority_retired": true,
     "fresh_execution_authority": false,
     "repair_required": "HARBOR_0_23_ARTIFACTCONFIG_TABLE_TO_MAIN_SERVICE_SOURCE_PATH_BRIDGE",
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "r3_promotion_safety_claim_scoped_r4_reconciliation_20261010_v1": {
+    "active_claim_id": "e1c519109c4b2c46a9225686fc2c5c5490564d1cc62d5c6ff3c6c436bfca4314",
+    "registry_path": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_CERTIFICATE_REGISTRY_V1.json",
+    "registry_git_blob_sha": "7552290f57d478d4cf48ba42e392f71a23a91264",
+    "current_pointer_path": "canonical/governance/CURRENT_COVERAGE_COMPLETENESS_ROOT_CERTIFICATES.json",
+    "current_pointer_git_blob_sha": "6bbf64e0ad5cb158e8edb6a561dceb7babaef116",
+    "proved_root_count": 3,
+    "open_root_count": 0,
+    "r4_proof_closure": true,
+    "scope": "R3_PROMOTION_SAFETY_CURRENT_GENERATION_20261010_V1_PROPERTY_CERTIFICATE_ONLY",
+    "global_mission_completion": false,
+    "opus_checkpoint_completion": false,
     "acceptance_credit_delta": 0,
     "terminal_credit_delta": 0
   }
