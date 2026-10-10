@@ -1,0 +1,55 @@
+{
+  "acceptance_authority": false,
+  "date": "2026-10-10",
+  "hard_nonclaims": [
+    "NO_SEMANTIC_LEAF_PROPERTY_TRUTH_PROVED_BY_THIS_GATE",
+    "NO_CLAIM_ANY_CURRENT_SEMANTIC_CANDIDATE_PASSES",
+    "NO_ROOT_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "incremental_spend_usd": 0,
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "carrier_name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "py_compile": "PASS",
+    "tests_failed": 0,
+    "tests_passed": 8,
+    "tests_run": 8,
+    "transcript_sha256": "f7cece69c529675ad09df0dd74af3b201b94286e8a4f41d1359c14ef4dc2fb49"
+  },
+  "promotion_authority": false,
+  "proved": [
+    "SEMANTIC_PROPERTY_TRUTH_MUST_BIND_THE_CURRENT_SEMANTIC_TOTALITY_CLAIM_ID",
+    "ALL_FOUR_SHARED_SEMANTIC_ACCEPTANCE_ATOMS_REQUIRE_UNIVERSAL_TOTALITY_PROOF",
+    "CLAIM_SCOPED_ROOT_ROUTE_REQUIRES_CARRIER_CC_R1_CC_R2_CC_R3_AND_R4",
+    "INDEPENDENT_DIRECT_UNIVERSAL_PROOF_IS_A_VALID_STRONGER_ALTERNATIVE",
+    "SAFE_IN_SCOPE_ABSTENTION_DOES_NOT_IMPLY_THE_CURRENT_UNIVERSAL_POSITIVE_TARGET_PREDICATE",
+    "ONE_POSITIVE_WITNESS_DOES_NOT_REPLACE_UNIVERSAL_POSITIVE_ISSUANCE_TOTALITY",
+    "MISSION_POINTER_DRIFT_FAILS_CLOSED",
+    "LEGACY_R10_WHOLE_LEAF_SCOPE_CLAIM_ID_IS_REJECTED"
+  ],
+  "quality_authority": false,
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_SEMANTIC_PROPERTY_TRUTH_ADMISSION_VERIFY_20261010_V1",
+  "semantic_truth_authority": false,
+  "status": "PASS__INDEPENDENT_SPRITE__PYCOMPILE__8_OF_8__CURRENT_CLAIM_ID_AND_UNIVERSAL_POSITIVE_PROPERTY_GATE__ZERO_SEMANTIC_CREDIT",
+  "subject": {
+    "mission_pointer": {
+      "git_blob_sha": "51327d24f82809279e37e51cf3d994d13a6f1ff3",
+      "path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json"
+    },
+    "runtime": {
+      "git_blob_sha": "86c2d7d336d49979a2aed2d1b6d596fc2b93508b",
+      "path": "canonical/runtime/professional_semantic_property_truth_admission_v1.py"
+    },
+    "semantic_claim_pack": {
+      "git_blob_sha": "f16aab3760d4f5958da986782632f3cb2bbd2646",
+      "path": "canonical/governance/PROFESSIONAL_SEMANTIC_TOTALITY_FROZEN_CLAIM_PACK_20261010_V2.json"
+    },
+    "tests": {
+      "git_blob_sha": "528fa7bf8d82a64bc4ea0185fb7ac3bc5ac2fc16",
+      "path": "canonical/tests/test_professional_semantic_property_truth_admission_v1.py"
+    }
+  },
+  "terminal_authority": false,
+  "terminal_credit_delta": 0
+}
