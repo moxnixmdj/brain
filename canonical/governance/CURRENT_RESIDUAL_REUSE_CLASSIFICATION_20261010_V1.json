@@ -175,7 +175,7 @@
       "reached_state_v2_reuse": "canonical/governance/ESCAPE_PROGRESS_REACHED_STATE_V2_REUSE_RECONCILIATION_20261010_V1.json",
       "executable_audit_git_blob_sha": "e556880aa216673e0e316e11fc6f4ab25d644ce6",
       "audit_verification": "canonical/verification/ESCAPE_V3_DYNAMIC_CURRENT_BINDING_STACK_SEAL_VERIFY_20261010_V1.json",
-      "audit_verification_git_blob_sha": "58b9ec6b03b72b20f568b6d704f125fe2ee9c7a1",
+      "audit_verification_git_blob_sha": "927dcb226e48e62366d322b39206f8f0d2ffc605",
       "audit_current_binding_mode": "MUTABLE_CURRENT_CLASSIFIER_PATH_IDENTITY__GAP_A_B_BINDING_CONSENSUS_REQUIRED"
     },
     {
@@ -200,7 +200,7 @@
       "reached_state_v2_reuse": "canonical/governance/ESCAPE_PROGRESS_REACHED_STATE_V2_REUSE_RECONCILIATION_20261010_V1.json",
       "executable_audit_git_blob_sha": "e556880aa216673e0e316e11fc6f4ab25d644ce6",
       "audit_verification": "canonical/verification/ESCAPE_V3_DYNAMIC_CURRENT_BINDING_STACK_SEAL_VERIFY_20261010_V1.json",
-      "audit_verification_git_blob_sha": "58b9ec6b03b72b20f568b6d704f125fe2ee9c7a1",
+      "audit_verification_git_blob_sha": "927dcb226e48e62366d322b39206f8f0d2ffc605",
       "audit_current_binding_mode": "MUTABLE_CURRENT_CLASSIFIER_PATH_IDENTITY__GAP_A_B_BINDING_CONSENSUS_REQUIRED"
     },
     {
