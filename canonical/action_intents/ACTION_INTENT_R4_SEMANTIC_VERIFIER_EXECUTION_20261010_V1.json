@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V12_INSTANCE",
+  "action_id": "R4_SEMANTIC_VERIFIER_EXECUTION_20261010_V1",
+  "date": "2026-10-10",
+  "status": "ACTIVE_PROOF_ONLY__ZERO_FRESH_REALITY__ZERO_TERMINAL_CREDIT",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "canonical_base_commit": "ecd831a3a0cc031ec148f2d0db531187b68f10a0",
+  "action_kind": "R4_EXECUTABLE_ROOT_CERTIFICATE_SEMANTICS_REPAIR",
+  "causal_blocker": "CENTRAL_R4_AUTHORITY_PATH_VALIDATES_ROOT_REGISTRY_STRUCTURE_AND_CONTENT_ADDRESSES_BUT_DOES_NOT_EXECUTE_THE_REGISTRY_DECLARED_SEMANTIC_VERIFIER_FOR_EACH_PROVED_ROOT_SLOT",
+  "expected_parent_frontier_change": "NO_TERMINAL_CREDIT__MAKE_PROVED_ROOT_CERTIFICATES_SEMANTICALLY_EXECUTABLE_NOT_MERELY_STRUCTURALLY_PRESENT",
+  "theory_invariants": {
+    "root_theorem_unchanged": true,
+    "no_new_root": true,
+    "unknown_fails_closed": true,
+    "hard_zero_incremental_spend": true,
+    "no_fresh_target_reality": true,
+    "no_acceptance_or_ownership_promotion": true
+  },
+  "recursive_obs": {
+    "live_canonical_refreshed": true,
+    "current_terminal_authority_read": true,
+    "related_open_prs_empty": true,
+    "prior_work_reused": [
+      "canonical/runtime/coverage_root_semantic_receipt_v1.py",
+      "canonical/runtime/coverage_root_certificate_registry_guard_v1.py",
+      "canonical/runtime/root_theorem_falsifier_v1.py"
+    ],
+    "selected_route": "CALL_EXISTING_SEMANTIC_ROOT_SLOT_VALIDATOR_FROM_EXISTING_R4_AUTHORITY_PATH__NO_PARALLEL_VERIFIER"
+  },
+  "behavioral_contract": {
+    "behavior_id": "R4_EXECUTABLE_SEMANTIC_ROOT_CERTIFICATES_V1",
+    "inputs": [
+      "canonical proved root slot",
+      "active frozen claim",
+      "content-addressed semantic verifier",
+      "independent semantic verification receipt"
+    ],
+    "environment_state": [
+      "current repo bytes",
+      "current mission authority",
+      "active claim"
+    ],
+    "required_output_or_action": "R4_ROOT_SLOT_COUNTS_AS_PROVED_ONLY_IF_EXECUTABLE_SEMANTIC_VALIDATION_PASSES_ON_EXACT_CERTIFICATE_AND_VERIFIER_BYTES",
+    "success_condition": "SEMANTICALLY_WRONG_OR_UNRUNNABLE_CERTIFICATE_CANNOT_CLOSE_R4",
+    "failure_condition": "STRUCTURALLY_VALID_CONTENT_ADDRESSED_CERTIFICATE_WITH_FAILING_SEMANTIC_VERIFIER_CAN_STILL_CLOSE_CANONICAL_R4",
+    "terminal_consequence": "PREVENT_PROOF_AUTHORITY_FROM_COLLAPSING_TO_EXISTENCE_OF_FILES",
+    "verification_route": "DETERMINISTIC_MUTATIONS_PLUS_REMOTE_EXACT_BYTE_REPLAY",
+    "scope": "PROOF_ARCHITECTURE_ONLY"
+  },
+  "reality_query_admission": {
+    "verdict": "NO_REALITY_QUERY_REQUIRED",
+    "fresh_reality_units": 0
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
