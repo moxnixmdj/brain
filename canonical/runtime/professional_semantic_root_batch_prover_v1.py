@@ -41,9 +41,13 @@ M_VERIFY="FAIL_CLOSED_NO_PROGRESS_CREDIT_WITHOUT_SOUND_VERIFICATION"
 def _blob(p:Path)->str:
  d=p.read_bytes();return sha1(b"blob "+str(len(d)).encode()+b"\0"+d).hexdigest()
 
-def _load(root:Path,rel:str,blob:str)->dict[str,Any]:
+def _pin(root:Path,rel:str,blob:str)->Path:
  p=root/rel
  if not p.is_file() or p.is_symlink() or _blob(p)!=blob:raise ValueError("PIN_INVALID:"+rel)
+ return p
+
+def _load(root:Path,rel:str,blob:str)->dict[str,Any]:
+ p=_pin(root,rel,blob)
  o=json.loads(p.read_text(encoding="utf-8"))
  if not isinstance(o,dict):raise ValueError("PIN_NOT_OBJECT:"+rel)
  return o
@@ -61,7 +65,7 @@ def verify(*,repo_root:str|Path|None=None)->dict[str,Any]:
  try:
   mission=_load(root,MISSION_PATH,MISSION_BLOB)
   normal=_load(root,NORMAL_PATH,NORMAL_BLOB)
-  _load(root,REFINEMENT_PATH,REFINEMENT_BLOB)
+  _pin(root,REFINEMENT_PATH,REFINEMENT_BLOB)
  except Exception as exc:return _fail(type(exc).__name__+":"+str(exc))
 
  pack=claim_pack.verify(repo_root=root)
