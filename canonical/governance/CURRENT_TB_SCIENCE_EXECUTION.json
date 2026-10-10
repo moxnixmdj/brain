@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_TB_SCIENCE_EXECUTION_POINTER_V2",
   "date": "2026-10-10",
-  "status": "RANK19_STAGED_UNREAD_UNSTARTED__V14_PUBLIC_RESEAL_MERGED_AND_VERIFIED__CANONICAL_EXECUTION_AUTHORITY_EFFECTIVE__PUBLIC_EFFECTIVE_AUTHORITY_SURFACE_PROMOTION_PENDING__ZERO_TASK_READ",
+  "status": "RANK19_UNREAD_UNSTARTED__PUBLIC_EFFECTIVE_AUTHORITY_VERIFIED__SAME_CLAIM_BOUND_LOGICAL_ATTEMPT__TASK_READ_AUTHORITY_EFFECTIVE_BUT_UNEXERCISED__ACTIVATION_NOT_ARMED__ZERO_TASK_READ",
   "current_result": {
     "path": "canonical/verification/TB_SCIENCE_RANK18_V6_IRREVERSIBLE_RESULT_TRUTH_20261010_V1.json",
     "git_blob_sha": "2459d821057d6f7178ffea440fb19966e56a3d89"
@@ -11,8 +11,8 @@
     "git_blob_sha": "2bb3967dfe894d1dd0e11e190a956faf1fdfcc46"
   },
   "verification": {
-    "path": "canonical/verification/TB_SCIENCE_RANK19_V14_FINAL_PUBLIC_RESEAL_VERIFICATION_20261010_V2.json",
-    "git_blob_sha": "c0a723a39c1fcfb3e25a4d72ef9543f0e8f8f17f"
+    "path": "canonical/verification/TB_SCIENCE_RANK19_EFFECTIVE_PUBLIC_AUTHORITY_PROMOTION_VERIFY_20261010_V1.json",
+    "git_blob_sha": "0c26880a76957d5e9da51910cfe00b79dfa77c95"
   },
   "counts": {
     "benchmark_trials_consumed": 18,
@@ -29,7 +29,7 @@
   },
   "acceptance_credit_delta": 0,
   "terminal_credit_delta": 0,
-  "next": "PROMOTE_PUBLIC_RANK19_EFFECTIVE_AUTHORITY_SURFACE_WITH_ZERO_EXPOSURE_PROOF__NO_TASK_READ",
+  "next": "MINT_CANONICAL_RANK19_ACTIVATION_AUTHORITY_BOUND_TO_VERIFIED_PUBLIC_V3_V40_SURFACE__THEN_EXACT_ONE_FILE_ACTIVATION_BRANCH__NO_TASK_READ_BEFORE_LIVE_CARRIER_QUALIFICATION_AND_CAS_ABSENCE",
   "finalized_rank18": {
     "ledger_schedule_rank": 18,
     "slot_id": "terminal-bench-science/longitudinal-clinical-agent::trial-0",
@@ -59,16 +59,17 @@
     "task_started": false,
     "benchmark_trials_consumed": 0,
     "execution_authority_effective": true,
-    "task_read_authority_effective": false,
+    "task_read_authority_effective": true,
     "activation_authority": false,
-    "public_surface_promotion_authority": true,
+    "public_surface_promotion_authority": false,
     "logical_attempt_identity_basis": "SLOT_ID_PLUS_TASK_DIGEST_PLUS_EXECUTION_CLAIM_BINDING_DIGEST",
     "execution_claim_binding_digest": "sha256:4e9cae8c879a8122f11fe6ae7eea775fcc4fb0ae62b3a87e208a95d28ea4d05f",
     "logical_attempt_claim_binding": {
       "path": "canonical/governance/TB_SCIENCE_RANK19_LOGICAL_ATTEMPT_CLAIM_BINDING_20261010_V1.json",
       "git_blob_sha": "ecccf062b79894fcc2b06ecdf0413676a3a9ac2f",
       "canonical_sha256": "4e9cae8c879a8122f11fe6ae7eea775fcc4fb0ae62b3a87e208a95d28ea4d05f"
-    }
+    },
+    "public_surface_promoted": true
   },
   "capability_first_checkpoint_admission": {
     "path": "canonical/governance/TB_SCIENCE_RANK19_CAPABILITY_FIRST_CHECKPOINT_ADMISSION_20261010_V1.json",
@@ -80,10 +81,28 @@
     "benchmark_role": "NEW_CAPABILITY_VALIDATION"
   },
   "hard_nonclaims": [
-    "NO_PUBLIC_EFFECTIVE_RANK19_EXECUTION_AUTHORITY_YET",
     "NO_TASK_READ",
     "NO_DURABLE_START",
     "NO_BENCHMARK_RESULT",
-    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
-  ]
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT",
+    "NO_ACTIVATION_ARMED_YET"
+  ],
+  "public_effective_authority_promotion": {
+    "reconciliation_path": "canonical/governance/TB_SCIENCE_RANK19_EFFECTIVE_PUBLIC_AUTHORITY_PROMOTION_RECONCILIATION_20261010_V1.json",
+    "reconciliation_git_blob_sha": "ec42b77544566329e8b735ec7bdb0829aeb30fa3",
+    "verification_path": "canonical/verification/TB_SCIENCE_RANK19_EFFECTIVE_PUBLIC_AUTHORITY_PROMOTION_VERIFY_20261010_V1.json",
+    "verification_git_blob_sha": "0c26880a76957d5e9da51910cfe00b79dfa77c95",
+    "public_repository": "moxnixmdj/verification-capsule-runner",
+    "public_pull_request": 2591,
+    "public_merge_commit_sha": "c82abe2be6028408b5cd148b1dd20717db661572",
+    "public_surface_git_blob_sha": "c70895390c12ea1d32b586f07b51e892d2a99321",
+    "public_authority_v3_git_blob_sha": "31cd7ac44fcdac4dbf1dbcc3e9509aa263d64eac",
+    "public_ledger_v40_git_blob_sha": "62a9aeccbdeea3dd8f51446ddfdd65f993c1c282",
+    "execution_authority_effective": true,
+    "task_read_authority_effective": true,
+    "activation_armed": false,
+    "task_read": false,
+    "task_started": false,
+    "benchmark_trials_consumed": 0
+  }
 }
