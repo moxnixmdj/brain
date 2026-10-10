@@ -126,8 +126,8 @@
     {
       "id": "CURRENT_AUTHORITY_RUNTIME_BYTE_BINDING_COHERENCE",
       "kind": "LEAF",
-      "status": "UNRESOLVED",
-      "note": "EXACT_BRANCH_CENSUS FOUND SIX STALE REFERENCES ACROSS FIVE RUNTIME PATHS PLUS ONE CURRENT RUNTIME WITHOUT BLOB BINDING. ALL SIX NOW HAVE BOUNDED TEST SURFACES OR EXISTING COMPONENT TESTS. NO EXISTING SPRITE SNAPSHOT CONTAINS THE FULL CURRENT SIX-PATH CONE. DO NOT RESEAL UNTIL FRESH CURRENT-BYTE EXECUTION.",
+      "status": "PROVED",
+      "note": "EXACT DIRECT RUNTIME BINDINGS RESEALED TO CURRENT TESTED BLOBS VIA CURRENT_RUNTIME_BYTE_COHERENCE_SPRITE_VERIFICATION_20261010_V1. THIS CLOSES ONLY THE DIRECT CURRENT-BYTE BINDING COHERENCE OBLIGATION. TRANSITIVE DEPENDENCY CURRENT-BYTE COHERENCE AND EXECUTABLE REFINEMENT REMAIN OPEN.",
       "attack_families": [
         "VERSION_DRIFT",
         "COMPOSITION_MISMATCH",
@@ -137,7 +137,7 @@
       "subobligations": [
         {
           "id": "CURRENT_BYTE_REEXECUTE_TEST_BACKED_RUNTIME_PATHS",
-          "status": "UNRESOLVED",
+          "status": "PROVED",
           "paths": [
             "canonical/runtime/terminal_autopilot_executor_v1.py",
             "canonical/runtime/terminal_autopilot_v1.py",
@@ -146,20 +146,23 @@
             "canonical/runtime/option_preserving_capability_optimizer_v1.py"
           ],
           "evidence_available": "COMPONENT_TEST_SURFACES_PRESENT",
-          "requirement": "FRESH_CURRENT_BYTE_EXECUTION_AND_CONTENT_BOUND_RECEIPT"
+          "requirement": "FRESH_CURRENT_BYTE_EXECUTION_AND_CONTENT_BOUND_RECEIPT",
+          "verification_receipt": "canonical/verification/CURRENT_RUNTIME_BYTE_COHERENCE_SPRITE_VERIFICATION_20261010_V1.json"
         },
         {
           "id": "DONOR_INDEPENDENCE_AUDIT_CURRENT_BYTE_VERIFICATION",
-          "status": "UNRESOLVED",
+          "status": "PROVED",
           "paths": [
             "canonical/runtime/terminal_candidate_donor_independence_audit_v1.py"
           ],
           "evidence_available": "DEDICATED_BOUNDED_TEST_SURFACE_ADDED__NOT_YET_EXECUTED_ON_CURRENT_BYTES",
           "requirement": "FRESH_CURRENT_BYTE_EXECUTION_AND_CONTENT_BOUND_RECEIPT",
           "test_path": "canonical/tests/test_terminal_candidate_donor_independence_audit_v1.py",
-          "test_git_blob_sha": "1b70c9494993e894d45605f8fecffa3781ea1541"
+          "test_git_blob_sha": "1b70c9494993e894d45605f8fecffa3781ea1541",
+          "verification_receipt": "canonical/verification/CURRENT_RUNTIME_BYTE_COHERENCE_SPRITE_VERIFICATION_20261010_V1.json"
         }
-      ]
+      ],
+      "verification_receipt": "canonical/verification/CURRENT_RUNTIME_BYTE_COHERENCE_SPRITE_VERIFICATION_20261010_V1.json"
     }
   ],
   "terminal_closure": false,
