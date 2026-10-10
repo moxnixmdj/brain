@@ -1,0 +1,43 @@
+{
+  "artifact_paths": [
+    "output.docx"
+  ],
+  "decision_payload": {
+    "context_id": "PQ_R12_V9_REAL_DOCX_20261010_V1",
+    "professional_target_instance": {
+      "artifact_type": "docx",
+      "audience": "A document reader viewing the rendered DOCX.",
+      "constraints": [
+        "Exactly one OLD314159 occurrence exists in the source and is replaced by NEW314159.",
+        "No unrelated ZIP member bytes may change.",
+        "The output must remain a valid nonempty DOCX.",
+        "The rendered visible change must remain localized to the edited token region."
+      ],
+      "current_draft_or_render": {
+        "source_docx_sha256": "1db684b36a66b59f5a8a748036f21a9b7b4e4ff83db6904adfa34137089eb94e",
+        "source_png_sha256": "314dc1a10dd9242046d082ab38c826912e9c8a5c143a96d0e2a3e13c80264f94"
+      },
+      "objective": "Apply exactly one bounded visible text replacement OLD314159 -> NEW314159.",
+      "source_evidence": {
+        "fresh_render_report": "fresh_render_report.json",
+        "source_docx_sha256": "1db684b36a66b59f5a8a748036f21a9b7b4e4ff83db6904adfa34137089eb94e",
+        "source_token": "OLD314159",
+        "source_token_count": 1
+      }
+    }
+  },
+  "detected_triggers": [],
+  "evidence_sha256": "2cb97029578a3c1f5544c568ab064cbc1dd6c081f1e1664f667badbe0d48d57c",
+  "goal": "Replace the single visible token OLD314159 with NEW314159 in the exact DOCX, preserving all unrelated package structure and audience-visible layout outside the localized edit.",
+  "hard_defect_profile_id": "BRAIN_PROFESSIONAL_OOXML_SANITY_V1",
+  "run_context_sha256": "sha256:103249e3cca5a0166b810752f44f265ed5fdafa4ead23b8a87c77768362638ca",
+  "steps": [
+    "GENERATE_DIVERSE_CANDIDATE_BRANCHES_WITH_INCUMBENT_PRESERVATION",
+    "RUN_DETERMINISTIC_FACT_STRUCTURE_FORMAT_AND_GROUNDING_CHECKS",
+    "RENDER_EXACT_AUDIENCE_VIEW_AND_BIND_OBSERVATION_CHANNELS",
+    "RUN_CRITERION_SPECIFIC_PLUS_HOLISTIC_COMPARATIVE_EVALUATION",
+    "ATTACK_FINALISTS_WITH_RELEVANT_INVARIANCE_DEFEATER_HIDDEN_CHANNEL_AND_COUNTEREXAMPLE_PROBES",
+    "FREEZE_WINNER_AND_USE_FRESH_OR_SELECTION_AWARE_TERMINAL_EVIDENCE",
+    "ISSUE_SCOPED_CERTIFICATE_OR_ABSTAIN_WITH_MINIMUM_BLOCKING_CUT"
+  ]
+}
