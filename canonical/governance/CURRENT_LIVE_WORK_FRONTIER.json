@@ -9,7 +9,7 @@
     "source_set": [
       {
         "path": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
-        "git_blob_sha": "10c1b215a7f2104a597b46c03e889fe68da2804c"
+        "git_blob_sha": "d5435c09d5021adba11e77d6ada5890535adb5d9"
       },
       {
         "path": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
@@ -300,7 +300,7 @@
       "vector_evidence": {},
       "read_only_evidence": {
         "source": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
-        "source_git_blob_sha": "10c1b215a7f2104a597b46c03e889fe68da2804c",
+        "source_git_blob_sha": "d5435c09d5021adba11e77d6ada5890535adb5d9",
         "active_gap_a_count": 12,
         "active_gap_b_count": 0,
         "parked_unresolved_count": 1,
@@ -337,7 +337,7 @@
       "vector_evidence": {},
       "read_only_evidence": {
         "source": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
-        "source_git_blob_sha": "10c1b215a7f2104a597b46c03e889fe68da2804c",
+        "source_git_blob_sha": "d5435c09d5021adba11e77d6ada5890535adb5d9",
         "active_gap_b_count": 0,
         "parked_unresolved_count": 1,
         "parked_rows": [
