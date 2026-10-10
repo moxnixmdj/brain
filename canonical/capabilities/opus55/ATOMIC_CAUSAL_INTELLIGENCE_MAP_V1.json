@@ -320,10 +320,10 @@
     "cases": 6
   },
   "bytes_minimization_control": {
-    "status": "ACTIVE__NEW_SPECIALPOLYS_SUCCESSOR_BYTE_FRONTIER__ZERO_CAPABILITY_CREDIT_FROM_RESEARCH_CHECKPOINT_ALONE",
+    "status": "ACTIVE__RINGSERIES_ATAN_REPAIRED_BYTE_FRONTIER__ZERO_CAPABILITY_CREDIT_FROM_RESEARCH_CHECKPOINT_ALONE",
     "law": "canonical/laws/BYTES_RESOURCE_BOUNDED_MINIMUM_MECHANISM_LAW_V1.md",
     "white_box_law": "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V1.md",
-    "current_research_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_SPECIALPOLYS_SUCCESSOR_EXECUTION_20261010_V1.json",
+    "current_research_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_RINGSERIES_ATAN_SUCCESSOR_EXECUTION_20261010_V1.json",
     "objective": "MINIMUM_RESOURCE_FEASIBLE_EXECUTABLE_DESCRIPTION_CONDITIONAL_ON_ALREADY_OWNED_BRAIN_SUBSTRATE",
     "accounting": [
       "B_EXEC",
@@ -339,37 +339,49 @@
       "LARGER_MODULE_ONLY_IF_REQUIRED"
     ],
     "global_rule": "OPTIMIZE_JOINT_DEPENDENCY_CLOSED_MECHANISM_COVER__COUNT_SHARED_SUBSTRATE_ONCE",
-    "current_exact_symbolic_bottleneck": "POLYS__SUCCESSOR_TRACE_RAW_1548495__FACTOR__COEFFICIENT__EXACT_ROOTS_DEGREE_LE_4",
-    "truth_boundary": "NEW_PHYSICAL_POLYS_BYTE_FRONTIER_AND_BOUNDED_DONOR_EQUIVALENCE_ARE_MEASURED__NO_OPUS_FAMILY_PROMOTION_CREDIT__NO_UNIVERSAL_MINIMUM_CLAIM__ARCHIVE_SIZE_COMPARABLE_NOT_IDENTITY_PROOF",
+    "current_exact_symbolic_bottleneck": "POLYS__SUCCESSOR_TRACE_RAW_1462108__FACTOR__COEFFICIENT__EXACT_ROOTS_DEGREE_LE_4",
+    "truth_boundary": "FRESH_PHYSICAL_BYTE_FRONTIER_AND_BOUNDED_DONOR_EQUIVALENCE_MEASURED__PREDECESSOR_QUARTIC_COVERAGE_HOLE_REPAIRED__NO_OPUS_FAMILY_PROMOTION_CREDIT__NO_UNIVERSAL_MINIMUM_CLAIM",
     "current_fresh_exact_symbolic_candidate": {
-      "package_raw_python_source_bytes": 6642500,
-      "B_exec_raw_python_source_bytes": 6645260,
-      "persistent_xz_comparable_bytes": 1131868,
-      "qualification": "2300/2300",
-      "stock_donor_positive_control": "2300/2300",
-      "clean_room_execution": "2300/2300",
-      "archive_replay": "2300/2300",
-      "manifest_sha256": "be585f90c2f99287e6f6d06d45525af2f0127a07c8b04cd2959d3f0c75ac98c3",
-      "comparable_archive_sha256": "fdc78a7633277ed45de1e4c2a0d31598edcaa77463c89c0d2b639c19e669d842",
+      "package_raw_python_source_bytes": 6556199,
+      "B_exec_raw_python_source_bytes": 6558959,
+      "persistent_xz_comparable_bytes": 1118488,
+      "qualification": "2990/2990",
+      "stock_donor_positive_control": "2990/2990",
+      "clean_room_execution": "2990/2990",
+      "archive_replay": "2990/2990",
+      "manifest_sha256": "48062708f5f89363fb89fef800776652d13752f860ce56cc0621083fc9f874af",
+      "comparable_archive_sha256": "e1f6a7fed4a0f14d6e66ef375ff2b2e3e005b56c2160e97feb63b6b9c8ef3353",
       "promotion_credit": 0
     },
     "latest_structural_cut": {
-      "id": "POLYS_SPECIALPOLYS_BRANCH_LOCAL_IMPORTS",
-      "removed_raw_file_bytes": 11038,
-      "net_package_reduction_bytes": 10821,
-      "removed_files": 1,
-      "causal_result": "SPECIALPOLYS_HELPERS_NOT_REACHED_BY_BOUNDED_ROUTE__IMPORTS_DEFERRED_TO_EXACT_BRANCHES"
+      "id": "POLYS_MINPOLY_RING_SERIES_BRANCH_LOCAL_IMPORT",
+      "removed_raw_file_bytes": 86395,
+      "net_package_reduction_bytes": 86301,
+      "removed_files": 2,
+      "removed": [
+        "sympy/polys/ring_series.py",
+        "sympy/polys/puiseux.py"
+      ],
+      "causal_result": "ADDITIVE_COMPOSITION_RING_SERIES_BRANCH_NOT_REACHED_BY_BOUNDED_ROUTE"
     },
     "previous_fresh_frontier": {
-      "raw_python_source_bytes": 6653321,
-      "persistent_xz_bytes": 1133884,
-      "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_POLYS_SUCCESSOR_EXECUTION_20261010_V1.json"
+      "raw_python_source_bytes": 6642500,
+      "persistent_xz_comparable_bytes": 1131868,
+      "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_SPECIALPOLYS_SUCCESSOR_EXECUTION_20261010_V1.json"
     },
     "next_frozen_qualification": {
-      "id": "QUAL_SUCCESSOR_NEXT3_20261010_V1",
-      "cases": 2530,
-      "corpus_sha256": "bd01a61e1eb7b53bfc141239ef90f3879a2abe8891b4c691c25ca8a17b375730",
+      "id": "QUAL_SUCCESSOR_NEXT6_20261010_V1",
+      "cases": 3220,
+      "corpus_sha256": "0320387ab3679d3374df2228f5249ef2606c974ac35c6667f1270d3d27a888e7",
       "spent": false
+    },
+    "current_falsification_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_NEXT3_FALSIFICATION_20261010_V1.json",
+    "latest_coverage_repair": {
+      "id": "BOUNDED_MPMATH_ATAN_REPAIR",
+      "trigger": "QUAL_SUCCESSOR_NEXT3 case 868 degree-4 roots",
+      "source_byte_cost": 86,
+      "new_dependency_files": 0,
+      "result": "NEXT3 spent replay 2530/2530; final fresh NEXT5 2990/2990"
     }
   }
 }
