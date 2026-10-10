@@ -1,0 +1,141 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_POLYS_SUCCESSOR_EXECUTION_V1",
+  "status": "FRESH_SUCCESSOR_EXECUTION__NEW_POLYS_BYTE_FRONTIER__ZERO_PROMOTION_CREDIT",
+  "recorded_at": "2026-10-10",
+  "mission": "Minimum resource-feasible executable description conditional on already-owned Brain substrate.",
+  "governing_laws": [
+    "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V1.md",
+    "canonical/laws/BYTES_RESOURCE_BOUNDED_MINIMUM_MECHANISM_LAW_V1.md"
+  ],
+  "predecessor": {
+    "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_SUCCESSOR_EXECUTION_20261010_V1.json",
+    "package_raw_python_source_bytes": 6743077,
+    "B_exec_raw_python_source_bytes": 6745837,
+    "package_xz_bytes": 1147192,
+    "full_exec_xz_bytes": 1147796,
+    "fresh_qualification": "3450/3450"
+  },
+  "structural_cut": {
+    "id": "POLYS_MATRIX_EIGEN_FINITE_EXTENSION_LAZY_BOUNDARY",
+    "file": "sympy/polys/matrices/eigen.py",
+    "change": "Move FiniteExtension import from module load into the algebraic-eigenvector branch that actually requires it.",
+    "causal_reason": "The bounded exact-symbolic contract uses exact linear solve and determinant but not algebraic eigenvector construction. Import-time FiniteExtension pulled the AGCA closure into every route that initialized matrix eigen machinery.",
+    "physically_removed_files": [
+      [
+        "sympy/polys/agca/modules.py",
+        47240
+      ],
+      [
+        "sympy/polys/agca/homomorphisms.py",
+        21937
+      ],
+      [
+        "sympy/polys/agca/ideals.py",
+        11073
+      ],
+      [
+        "sympy/polys/agca/extensions.py",
+        9388
+      ],
+      [
+        "sympy/polys/agca/__init__.py",
+        130
+      ]
+    ],
+    "removed_raw_python_source_bytes": 89768,
+    "spent_calibration_before_fresh_qualification": "632/632"
+  },
+  "measured_candidate": {
+    "status": "PHYSICALLY_DELETED_RESEARCH_CANDIDATE__NOT_PROMOTED",
+    "python_files": 300,
+    "package_raw_python_source_bytes": 6653321,
+    "router_raw_python_source_bytes": 2760,
+    "B_exec_raw_python_source_bytes": 6656081,
+    "B_verify_semantic_digest_raw_bytes": 1446,
+    "raw_reduction_from_original_fraction": 0.763236043094726,
+    "raw_improvement_vs_immediate_predecessor_bytes": 89756,
+    "raw_improvement_vs_immediate_predecessor_fraction": 0.013310837174186206,
+    "raw_improvement_vs_6828853_frontier_bytes": 175532,
+    "package_manifest_sha256": "a66deebf626390b49d6891d946308a41fc7407587c1f13d78efdf7d25481fdd3",
+    "package_deterministic_xz_bytes": 1133884,
+    "package_deterministic_xz_sha256": "9e0c7cebdd6e8c5e1be5fa077329d1be7e7fef67ca0f49fad45bbf062051b570",
+    "full_exec_deterministic_xz_bytes": 1134488,
+    "full_exec_deterministic_xz_sha256": "5ce543f187e1324d4086fd4bac509ab3ebb28c422cf2971e08a16ca2372c8ecd",
+    "xz_improvement_vs_immediate_predecessor_bytes": 13308,
+    "router_sha256": "5500e1606a6158312b69d3f9ef8884c525ab345aa9fd8595d92623e9f8e0e884",
+    "semantic_digest_sha256": "67e778d3b17604929259fa0059364ca3f646f45c979e7b6b8d5746fc6cf9360f"
+  },
+  "qualification": {
+    "spent_pre_cut_calibration": {
+      "cases": 632,
+      "passed": 632,
+      "corpus_sha256": "febe5a0b93915bd672c2382e54031427716fceed19f7fce3537d00e05a465c1a"
+    },
+    "fresh_successor_corpus": {
+      "id": "QUAL_SUCCESSOR_NEXT_20261010_V1",
+      "seed": 2718281,
+      "per_operation_budget": 180,
+      "cases": 2070,
+      "corpus_sha256": "f07f672bc48cfe20d5f9f3076d2ba2dc1f48a4683e7be937a4be8001b384adff",
+      "status": "SPENT_ONCE_AS_FRESH_CANDIDATE_QUALIFICATION",
+      "physical_candidate": "2070/2070",
+      "execution_environment": "python -S; user site disabled; stripped environment; candidate and canonical verifier/route only",
+      "observed_sympy_root": "PHYSICAL_POLYS_SUCCESSOR_SLICE/sympy/__init__.py",
+      "observed_mpmath_root": "PHYSICAL_POLYS_SUCCESSOR_SLICE/mpmath/__init__.py",
+      "stock_donor_replay": "2070/2070"
+    }
+  },
+  "polys_state": {
+    "previous_trace_raw_python_source_bytes": 1649240,
+    "current_trace_raw_python_source_bytes": 1559484,
+    "measured_reduction_bytes": 89756,
+    "status": "STILL_PRIMARY_BYTE_BOTTLENECK",
+    "required_surface": [
+      "factor",
+      "coefficient",
+      "exact roots degree <= 4"
+    ],
+    "interpretation": "The cut removes AGCA algebraic-eigenvector packaging from the loaded polys closure without changing the bounded operation results."
+  },
+  "reproducibility": {
+    "baseline_reconstruction": "canonical/research/bytes/tools/rebuild_candidate_v1.py",
+    "successor_reconstruction": "canonical/research/bytes/tools/rebuild_candidate_v2.py",
+    "route": "canonical/research/bytes/tools/exact_symbolic_route_v1.py",
+    "semantic_digest": "canonical/research/bytes/tools/semantic_digest_v1.py",
+    "qualification_generator": "canonical/research/bytes/tools/generate_qualification_v1.py",
+    "loaded_trace_tool": "canonical/research/bytes/tools/trace_loaded_v1.py",
+    "physical_slice_tool": "canonical/research/bytes/tools/build_physical_slice_v1.py",
+    "qualification_runner": "canonical/research/bytes/tools/run_qualification_v1.py"
+  },
+  "next_frozen_qualification": {
+    "id": "QUAL_SUCCESSOR_NEXT2_20261010_V1",
+    "seed": 3141592,
+    "per_operation_budget": 200,
+    "cases": 2300,
+    "corpus_sha256": "491ba6d19abca5b04c5cfa851e4e1e2e4c61641518ec8b4f33c2f3dd638becb9",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_STRUCTURAL_POLYS_CUT"
+  },
+  "preexisting_canonical_qual8": {
+    "cases": 2640,
+    "corpus_sha256": "640f06e78cd3394e00713084ec6a3aafbd7b1ba0f0dcaa17140c74bb920b79fc",
+    "status": "PRESERVED_UNSPENT__DISTINCT_FROM_SUCCESSOR_CORPORA"
+  },
+  "durable_artifact_persistence": {
+    "canonical_evidence_and_reconstruction_tools": "PERSISTED_IN_GITHUB",
+    "binary_execution_bundle": {
+      "local_package_xz_bytes": 1133884,
+      "local_full_exec_xz_bytes": 1134488,
+      "durable_library_status": "NOT_PERSISTED__PRIOR_LIBRARY_UPLOAD_CHANNEL_RETURNED_CONTAINER_SESSION_EXPIRED"
+    },
+    "rule": "Hashes and exact reconstruction tools are canonical. Do not claim the binary bundle is durably stored until a supported persistence path succeeds."
+  },
+  "truth_boundary": [
+    "MEASURED: the 6,653,321-byte physical package passed the 2,070-case frozen successor corpus with no failures in a stripped python -S environment.",
+    "MEASURED: the stock donor passed the same spent corpus 2,070/2,070.",
+    "MEASURED: the cut removes 89,756 loaded polys bytes and 89,756 package bytes relative to the immediate physical predecessor.",
+    "INFERRED: AGCA finite-extension machinery is not required by this bounded route because its physical deletion preserved fresh qualification.",
+    "NOT CLAIMED: general eigenvector correctness without the deferred branch, universal SymPy correctness, all exact-symbolic capability, absolute information-theoretic minimality, or Opus-family promotion.",
+    "PROMOTION CREDIT: 0."
+  ],
+  "next_action": "Make the next operation-level polys structural cut before touching QUAL_SUCCESSOR_NEXT2_20261010_V1; physically delete the resulting closure, spend that corpus once, and rerank."
+}
