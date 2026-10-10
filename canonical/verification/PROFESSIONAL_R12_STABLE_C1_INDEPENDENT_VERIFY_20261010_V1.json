@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_R12_STABLE_C1_INDEPENDENT_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_SPRITE__PYCOMPILE__6_OF_6__STABLE_V3_R12_C1_REINSTANTIATED__ZERO_PROPERTY_OR_TERMINAL_CREDIT",
+  "repository": "moxnixmdj/brain",
+  "verification_branch": "successor/r12-stable-c1-20261010-v1",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/professional_r12_semantic_stable_c1_v1.py",
+      "git_blob_sha": "2ea9cd1967c45b6487318d800b3e1c07082618cc"
+    },
+    "tests": {
+      "path": "canonical/tests/test_professional_r12_semantic_stable_c1_v1.py",
+      "git_blob_sha": "0b7fb6f422e777c1a664284d165e73a499b2d1e6"
+    },
+    "fresh_v3_current_bytes": {
+      "path": "canonical/verification/PROFESSIONAL_SEMANTIC_V3_CURRENT_BYTES_INDEPENDENT_VERIFY_20261010_V1.json",
+      "git_blob_sha": "42ae47b7d38743a827da8616751d4290dd310b55"
+    },
+    "composition": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_V7_12_OF_12_COMPOSITION_INDEPENDENT_VERIFY_20261010_V1.json",
+      "git_blob_sha": "4ee02c41acf64b1f47ebadec55b6bb5453d676ba"
+    },
+    "decomposition": {
+      "path": "canonical/governance/PROFESSIONAL_R12_SEMANTIC_CC_R3_CONTRACT_DECOMPOSITION_20261010_V1.json",
+      "git_blob_sha": "d83ded1689ec636a2cda60f7c7419dd69a61cbd5"
+    }
+  },
+  "stable_claim": {
+    "leaf_id": "PQ::R12_META_COMPOSITION_CLOSURE::SEMANTIC",
+    "claim_id": "11870f850b46bcfcc31094f764fc4f45c911aaac413979ceb62679ff19a53162",
+    "old_v2_claim_id": "97ff74650749db87f378d5926ed820e004f3f792583c2c8455e51c3ccacbe7f7",
+    "old_v2_authority_transported": false
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/v3-semantic-current-verify",
+    "py_compile": "PASS",
+    "tests_run": 6,
+    "tests_passed": 6,
+    "tests_failed": 0
+  },
+  "proves": [
+    "THE_STABLE_V3_R12_CLAIM_RECOMPUTES_C1_FROM_THE_EXACT_CURRENT_12_OF_12_SAME_SUBJECT_COMPOSITION_THEOREM",
+    "THE_C1_GUARANTEE_IS_SAME_SUBJECT_COMPOSITION_ADMISSIBILITY_WITHOUT_SCOPE_OR_AUTHORITY_WIDENING",
+    "OLD_V2_CLAIM_SUBSTITUTION_COMPOSITION_FALSEHOOD_SUBJECT_DRIFT_CLAUSE_DRIFT_AND_AUTHORITY_OVERCLAIM_FAIL_CLOSED"
+  ],
+  "hard_nonclaims": [
+    "NO_CC_R3_TERMINAL_CLOSURE",
+    "NO_STRONGER_MATERIAL_DEFEATER_TOTALITY",
+    "NO_R12_SEMANTIC_PROPERTY_TRUTH",
+    "NO_R4_PROOF_CLOSURE",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "c1_assumption_guarantee_composition_proved": true,
+  "cc_r3_terminal_closure_proved": false,
+  "r4_proof_closure": false,
+  "semantic_property_truth_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
