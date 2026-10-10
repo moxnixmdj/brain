@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK20_V3_PRESTART_ABORT_DIAGNOSIS_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PROVEN__PREEXPOSURE_ABORT_NONCONSUMING__POST_READY_START_CAS_CALLER_VERSION_SKEW",
+  "slot_id": "terminal-bench-science/hysteretic-aquifer-control::trial-0",
+  "task_digest": "sha256:681df0c3b2ada03a933ac4d2e11f07983676f87a9f26b61e416987904b880289",
+  "logical_attempt_id": "aeadf4a998d2392b4aa277f1fdd6d31f057a81305dd98f9038f3a8b8bb14be68",
+  "execution_claim_binding_digest": "sha256:bc4522cfc367a3fd250ce53d0812b8a856f575dcf7eb00e8104781cfe0d29a15",
+  "activation_pull_request": 2632,
+  "workflow_run_id": 38061639841,
+  "workflow_job_id": 114240929023,
+  "workflow_head_sha": "1a5f776f4a4607a3143e4201f7f6d5b2e66391b0",
+  "workflow_merge_sha": "99212669ba376830ce28b7cf230a5a22cfe4860d",
+  "artifact": {
+    "id": 11672953599,
+    "digest": "sha256:f25c0e387ba8ea673cd3156c70994d8e813a245f250f7f3d4e0473646ba3abc3",
+    "slot_receipt_sha256": "c03ad000a77a5708f01b7fd0310394b609a377b7cc2cc0894d7387e788aeb8e9",
+    "cas_acquire_receipt_sha256": "1ef9329e5c624ea4a7eb7337c3f3e683d0c66cbe4f09a6d4215e85b27c742133",
+    "cas_absence_receipt_sha256": "e4cff27d684006a124f2c6234b447e10f7b59506569aa1cb3fad2b8659a3a605",
+    "status_runner_receipt_sha256": "603db2c62f4c509954376bf9659c1a50ee7719b196fad350b962994262eaa9d3",
+    "prestart_guard_sha256": "5551450f0714a17074e1eb4d61748d0ebed72255b2d4c3b5f437ee5d6f994d5b",
+    "agent_ready_sha256": "874547197f06a0a8bab344404d554ddc6a9c99eb5a27e9d2a512aede55f323e2"
+  },
+  "observed_sequence": {
+    "pre_task_read_start_cas_absence_check": "PASS",
+    "task_read": true,
+    "prestart_guard_pass": true,
+    "agent_ready": true,
+    "start_cas_acquire": false,
+    "task_started": false,
+    "benchmark_trials_consumed": 0,
+    "result_present": false,
+    "reward": null,
+    "final_classification": "PREEXPOSURE_ABORT_NONCONSUMING"
+  },
+  "failure": {
+    "start_cas_error": "EPOCH_OR_CLAIM_HEAD_REF_MISMATCH",
+    "exact_root_cause": "STATUS_JOURNAL_RUNNER_INVOKED_STALE_RANK20_START_CAS_V7_AFTER_WORKFLOW_PRECHECK_USED_V8",
+    "stale_caller_path": "capsules/tb_science_rank20_20261010_v1/rank20_v7_status_journal_runner.py",
+    "stale_caller_blob": "d9cb9eb3cc58521eb246c8bc6efeda4388a5e11e",
+    "invoked_stale_cas_path": "capsules/tb_science_rank20_20261010_v1/rank20_start_cas_v7.py",
+    "stale_cas_expected_head": "execute/tb-science-rank20-20261010-v2",
+    "stale_cas_activation_filename": "ACTIVATE_RANK20_V2_PR.json",
+    "current_bound_cas_path": "capsules/tb_science_rank20_20261010_v1/rank20_start_cas_v8.py",
+    "current_bound_cas_blob": "99d81c7d1316d1767c688e12c2c05790c69662f3"
+  },
+  "falsification": {
+    "merge_ref_surface_blob": "97be39ba9bf645532491524fe54ca5ae84f252cb",
+    "public_authority_blob": "696bf1cc8a5bcb38648288b6c6561a8b397c1912",
+    "public_epoch_blob": "1ae81185657fbdc8c07605dd2d79dce4a167c1fc",
+    "public_execution_claim_blob": "2a7e018daf466779be7d86d389a6fbf1231b17c9",
+    "authority_execution_branch": "execute/tb-science-rank20-20261010-v3",
+    "epoch_execution_branch": "execute/tb-science-rank20-20261010-v3",
+    "claim_execution_branch": "execute/tb-science-rank20-20261010-v3",
+    "conclusion": "STATIC_CONTENT_ADDRESSED_AUTHORITY_EPOCH_AND_CLAIM_AGREE__MISMATCH_ORIGINATES_FROM_STALE_V7_RUNTIME_CONSTANTS"
+  },
+  "authority": {
+    "retry_authority": false,
+    "replacement_authority": false,
+    "activation_authority_retired": true
+  },
+  "accounting": {
+    "benchmark_trials_consumed_delta": 0,
+    "consumed_successes_delta": 0,
+    "consumed_failures_delta": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0,
+    "incremental_spend_usd": 0
+  },
+  "repair_policy": "REPAIR_GENERAL_BOUND_RUNTIME_CALLER_VERSION_SKEW_ZERO_EXPOSURE__DO_NOT_RERUN_RANK20_V3"
+}
