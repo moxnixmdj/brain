@@ -81,6 +81,11 @@ def evaluate_canonical_registry_authority() -> Dict[str, Any]:
     try:
         registry = json.loads(ROOT_REGISTRY_PATH.read_text(encoding="utf-8"))
         mission_pointer = json.loads(MISSION_PATH.read_text(encoding="utf-8"))
+        canonical_pointer = json.loads(CANONICAL_POINTER_PATH.read_text(encoding="utf-8"))
+        mission_pointer_sha = _git_blob_sha(MISSION_PATH)
+        current_generation = canonical_pointer.get("canonical_generation")
+        if not isinstance(current_generation, str) or not current_generation:
+            raise ValueError("CANONICAL_GENERATION_MISSING")
         authority_rel = (mission_pointer.get("authoritative_source") or {}).get("path")
         if not isinstance(authority_rel, str) or not authority_rel:
             raise ValueError("MISSION_AUTHORITY_PATH_MISSING")
@@ -98,6 +103,7 @@ def evaluate_canonical_registry_authority() -> Dict[str, Any]:
         registry,
         current_mission_pointer=mission_pointer,
         current_mission_authority_blob_sha=mission_authority_sha,
+        current_mission_pointer_blob_sha=mission_pointer_sha,
     )
     if checked["pass"]:
         for slot in registry.get("certificate_slots", []):
@@ -138,6 +144,9 @@ def evaluate_canonical_registry_authority() -> Dict[str, Any]:
             "status": "R4_CANONICAL_REGISTRY_INVALID",
             "authorized": False,
             "registry": checked,
+            "active_claim": registry.get("active_claim"),
+            "canonical_generation": current_generation,
+            "mission_pointer_blob_sha": mission_pointer_sha,
             "terminal_credit": 0,
         }
     if not checked["r4_proof_closure"]:
@@ -145,12 +154,61 @@ def evaluate_canonical_registry_authority() -> Dict[str, Any]:
             "status": "R4_CANONICAL_ROOT_CERTIFICATES_OPEN",
             "authorized": False,
             "registry": checked,
+            "active_claim": registry.get("active_claim"),
+            "canonical_generation": current_generation,
+            "mission_pointer_blob_sha": mission_pointer_sha,
             "terminal_credit": 0,
         }
     return {
         "status": "PASS_CANONICAL_ROOT_CERTIFICATE_AUTHORITY",
         "authorized": True,
         "registry": checked,
+        "active_claim": registry.get("active_claim"),
+        "canonical_generation": current_generation,
+        "mission_pointer_blob_sha": mission_pointer_sha,
+        "terminal_credit": 0,
+    }
+
+
+def evaluate_registry_claim_alignment(
+    data: Mapping[str, Any],
+    registry_authority: Optional[Mapping[str, Any]] = None,
+) -> Dict[str, Any]:
+    authority = registry_authority or evaluate_canonical_registry_authority()
+    authorized = authority.get("authorized")
+    if authorized is None:
+        return {"status": "UNKNOWN_FAIL_CLOSED", "aligned": None, "terminal_credit": 0}
+    if authorized is False:
+        return {"status": "R4_CANONICAL_REGISTRY_NOT_AUTHORIZED", "aligned": False, "terminal_credit": 0}
+
+    active = authority.get("active_claim")
+    expected = data.get("expected_binding")
+    if not isinstance(active, Mapping) or _binding_key(expected) is None:
+        return {"status": "R4_REGISTRY_CLAIM_BINDING_MISSING", "aligned": False, "terminal_credit": 0}
+
+    mismatches = []
+    for local_field, claim_field in (
+        ("claim_id", "claim_id"),
+        ("scope_sha256", "scope_sha256"),
+        ("semantics_sha256", "semantics_sha256"),
+        ("epoch_id", "epoch"),
+    ):
+        if expected.get(local_field) != active.get(claim_field):
+            mismatches.append(f"{local_field}:{claim_field}")
+
+    if expected.get("canonical_generation") != authority.get("canonical_generation"):
+        mismatches.append("canonical_generation")
+
+    if mismatches:
+        return {
+            "status": "R4_REGISTRY_CLAIM_MISMATCH",
+            "aligned": False,
+            "mismatches": mismatches,
+            "terminal_credit": 0,
+        }
+    return {
+        "status": "PASS_REGISTRY_CLAIM_ALIGNMENT",
+        "aligned": True,
         "terminal_credit": 0,
     }
 
@@ -158,10 +216,12 @@ def evaluate_canonical_registry_authority() -> Dict[str, Any]:
 def _effective_r4(value: Any, data: Mapping[str, Any]) -> Optional[bool]:
     trust = _tri(value)
     coherent = evaluate_binding_coherence(data)["coherent"]
-    registry = evaluate_canonical_registry_authority()["authorized"]
-    if trust is False or coherent is False or registry is False:
+    registry_authority = evaluate_canonical_registry_authority()
+    registry = registry_authority["authorized"]
+    aligned = evaluate_registry_claim_alignment(data, registry_authority)["aligned"]
+    if trust is False or coherent is False or registry is False or aligned is False:
         return False
-    if trust is None or coherent is None or registry is None:
+    if trust is None or coherent is None or registry is None or aligned is None:
         return None
     return True
 
