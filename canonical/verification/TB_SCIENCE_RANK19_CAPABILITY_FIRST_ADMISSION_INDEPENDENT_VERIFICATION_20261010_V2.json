@@ -1,0 +1,102 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK19_CAPABILITY_FIRST_ADMISSION_INDEPENDENT_VERIFICATION_V2",
+  "date": "2026-10-10",
+  "status": "PASS__CURRENT_MAIN_RUNTIME_AND_DEPENDENCY_CLOSURE__POINTER_INDEPENDENT_RANK19_NEW_CAPABILITY_VALIDATION_ADMISSION__ZERO_EXPOSURE_ZERO_CREDIT",
+  "subject": {
+    "branch": "successor/rank19-capability-first-admission-20261010-v2",
+    "base_main_commit": "7f86e0be3aae4315dedbf504929631b9e46c72b4",
+    "admission": {
+      "path": "canonical/governance/TB_SCIENCE_RANK19_CAPABILITY_FIRST_CHECKPOINT_ADMISSION_20261010_V1.json",
+      "git_blob_sha": "49e4f9c232f876546b2c72fb32ba19a3e487e1c9"
+    },
+    "verifier": {
+      "path": "canonical/runtime/tb_science_rank19_capability_first_admission_v1.py",
+      "git_blob_sha": "a31049008dca063650e716f47ad284fa20660267"
+    },
+    "regression_test": {
+      "path": "canonical/tests/test_tb_science_rank19_capability_first_admission_v1.py",
+      "git_blob_sha": "5326d4c9fa6b70902036068afe0e6baa6162f63c"
+    },
+    "scheduler_runtime": {
+      "path": "canonical/runtime/capability_first_scheduler_v1.py",
+      "git_blob_sha": "63be50dacedec96809b9f3b40faaeab411741c39"
+    },
+    "scheduler_residual_ledger": {
+      "path": "canonical/runtime/r2_semantic_residual_ledger_v1.py",
+      "git_blob_sha": "f732f511913a7fecd197d73496f156f9bcadff9a"
+    }
+  },
+  "inherited_tdd_evidence": {
+    "predecessor_branch": "successor/rank19-capability-first-admission-20261010-v1",
+    "observed_red_classes": [
+      "MISSING_VERIFIER_MODULE",
+      "MUTABLE_CURRENT_POINTER_CAUSED_SOURCE_DRIFT",
+      "CANONICAL_V38_LEDGER_SCHEMA_ASSUMPTION_MISMATCH",
+      "MUTABLE_SCHEDULER_AND_TERMINAL_POINTER_BINDINGS_FORBIDDEN"
+    ],
+    "predecessor_final_green": true
+  },
+  "current_main_rebase_tdd": [
+    {
+      "phase": "RED_REBASE_1",
+      "result": "EXPECTED_FAIL",
+      "failure": "ImportError: cannot import name r2_semantic_residual_ledger_v1",
+      "cause": "CURRENT_SCHEDULER_RUNTIME_GAINED_NEW_IMPORT_DEPENDENCY"
+    },
+    {
+      "phase": "RED_REBASE_2",
+      "result": "EXPECTED_FAIL",
+      "failure": "REGRESSION_ASSERTION_SCHEDULER_RESIDUAL_LEDGER_BINDING_MISSING",
+      "cause": "NEW_SCHEDULER_DEPENDENCY_NOT_YET_CONTENT_ADDRESSED_BY_ADMISSION"
+    },
+    {
+      "phase": "GREEN_REBASE_FINAL",
+      "result": "PASS",
+      "note": "CURRENT_SCHEDULER_RUNTIME_PLUS_EXACT_RESIDUAL_LEDGER_DEPENDENCY_MATERIALIZED_AND_BOUND"
+    }
+  ],
+  "independent_carrier": {
+    "provider": "Sprites",
+    "sprite_name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "isolated_root": "/tmp/rank19_admission_green",
+    "execution": "EXACT_CURRENT_BRANCH_BYTES_PLUS_CURRENT_MAIN_SCHEDULER_DEPENDENCY_CLOSURE"
+  },
+  "result": {
+    "pass": true,
+    "errors": [],
+    "scheduler_eligibility": "ELIGIBLE",
+    "benchmark_role": "NEW_CAPABILITY_VALIDATION",
+    "scheduler_test_checkpoint_open_obligation_count": 0,
+    "slot_id": "terminal-bench-science/diag-chipseq::trial-0",
+    "task_digest": "sha256:437bfacaebda9ce9905d54bdfe7247aec9649038206512c64547021f42e3950b",
+    "logical_attempt_id": "def7e2921acf58d4ef03e3183512996c718a5a13069482cb825464c0c963a8b4",
+    "task_read": false,
+    "task_started": false,
+    "benchmark_trials_consumed": 0,
+    "execution_authority": false
+  },
+  "verified": [
+    "VERSIONED_CAPABILITY_FIRST_V3_POLICY_ALLOWS_NEW_CAPABILITY_VALIDATION",
+    "CURRENT_SCHEDULER_RUNTIME_AND_IMPORT_DEPENDENCY_ARE_CONTENT_ADDRESSED",
+    "STRUCTURAL_SCHEDULER_ELIGIBILITY_REPLAYS_WITHOUT_MUTABLE_PROJECT_POINTERS",
+    "RANK18_PLANNER_TIMEOUT_DEFECT_AND_PLANNER_V7_REAL_ZERO_EXPOSURE_REPAIR_PROOF_REMAIN_EXACT",
+    "IMMUTABLE_V38_LEDGER_PROVES_RANK19_UNREAD_UNSTARTED_UNCONSUMED",
+    "ADMISSION_MINTS_CHECKPOINT_DISPATCH_ROLE_ONLY_NOT_EXECUTION_AUTHORITY",
+    "ONE_LOGICAL_ATTEMPT_ZERO_RETRY_ZERO_REPLACEMENT_CONTROLS_REMAIN_BOUND"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_trials_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_PUBLIC_RANK19_RESEAL_CREDIT",
+    "NO_RANK19_TASK_READ_OR_START",
+    "NO_BENCHMARK_RESULT",
+    "NO_TERMINAL_OR_CAPABILITY_CREDIT"
+  ]
+}
