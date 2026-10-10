@@ -22,11 +22,14 @@ from typing import Any, Mapping
 from canonical.runtime import professional_quality_p1_router_v6 as base
 from canonical.runtime import professional_step_binding_authority_v1 as step_auth
 from canonical.runtime import professional_quality_declared_system_subject_verify_v1 as subject_verify
+from canonical.runtime import professional_candidate_selection_universe_v1 as candidate_universe
 
 SCHEMA="PROJECT_BRAIN_PROFESSIONAL_QUALITY_P1_ROUTER_V7"
 BEHAVIOR_ID="PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001"
 SUBJECT_REF_KEY="declared_system_subject"
 STEP_BINDINGS_KEY="professional_step_bindings"
+CANDIDATE_UNIVERSE_KEY="candidate_selection_universe"
+CANDIDATE_STEP="GENERATE_DIVERSE_CANDIDATE_BRANCHES_WITH_INCUMBENT_PRESERVATION"
 
 AUTHENTICATED_STEPS=(
     "GENERATE_DIVERSE_CANDIDATE_BRANCHES_WITH_INCUMBENT_PRESERVATION",
@@ -40,6 +43,8 @@ AUTHENTICATED_STEPS=(
 REQUIRED_SUBJECT_COMPONENT_PATHS=frozenset({
     "canonical/runtime/professional_quality_p1_router_v7.py",
     "canonical/runtime/professional_step_binding_authority_v1.py",
+    "canonical/runtime/professional_quality_declared_system_subject_verify_v1.py",
+    "canonical/runtime/professional_candidate_selection_universe_v1.py",
 })
 
 
@@ -146,6 +151,47 @@ def route(state:Mapping[str,Any],*,repo_root:str|Path|None=None)->dict[str,Any]:
         detected_triggers=state.get("detected_triggers",[]),
     )
 
+    raw_universe=state.get(CANDIDATE_UNIVERSE_KEY)
+    if raw_universe is None:
+        return _open(
+            "CANDIDATE_SELECTION_UNIVERSE_REQUIRED",
+            blocking_steps=[CANDIDATE_STEP],
+            declared_system_subject=subject_state,
+        )
+    universe=candidate_universe.validate_frozen(raw_universe)
+    if universe.get("pass") is not True:
+        return _fail(
+            "CANDIDATE_SELECTION_UNIVERSE_INVALID",
+            candidate_universe_result=universe,
+            declared_system_subject=subject_state,
+        )
+    manifest=universe.get("manifest")
+    if not isinstance(manifest,Mapping):
+        return _fail("CANDIDATE_SELECTION_UNIVERSE_MANIFEST_INVALID")
+    for field,expected in {
+        "behavior_id":BEHAVIOR_ID,
+        "subject_id":str(subject_id),
+        "subject_sha256":str(subject_sha),
+        "run_context_sha256":run_context,
+    }.items():
+        if manifest.get(field)!=expected:
+            return _fail(
+                "CANDIDATE_SELECTION_UNIVERSE_BINDING_MISMATCH",
+                mismatch_field=field,
+                declared_system_subject=subject_state,
+            )
+    if int(universe.get("candidate_count") or 0)<2:
+        return _open(
+            "CANDIDATE_BRANCH_SET_NOT_YET_PLURAL",
+            blocking_steps=[CANDIDATE_STEP],
+            candidate_count=universe.get("candidate_count"),
+            declared_system_subject=subject_state,
+        )
+    universe_digest=str(universe.get("candidate_universe_sha256") or "")
+    if not universe_digest.startswith("sha256:") or len(universe_digest)!=71:
+        return _fail("CANDIDATE_SELECTION_UNIVERSE_DIGEST_INVALID")
+    expected_candidate_evidence_sha=universe_digest[7:]
+
     authenticated={}
     for step in AUTHENTICATED_STEPS:
         result=step_auth.authenticate_step_binding(
@@ -171,11 +217,20 @@ def route(state:Mapping[str,Any],*,repo_root:str|Path|None=None)->dict[str,Any]:
                 step_binding_result=result,
                 declared_system_subject=subject_state,
             )
+        if step==CANDIDATE_STEP and result.get("evidence_sha256")!=expected_candidate_evidence_sha:
+            return _fail(
+                "CANDIDATE_STEP_EVIDENCE_UNIVERSE_MISMATCH",
+                blocking_step=step,
+                candidate_universe_sha256=universe_digest,
+                step_evidence_sha256=result.get("evidence_sha256"),
+                declared_system_subject=subject_state,
+            )
         authenticated[step]=result
 
     delegated=deepcopy(dict(state))
     delegated.pop(SUBJECT_REF_KEY,None)
     delegated.pop(STEP_BINDINGS_KEY,None)
+    delegated.pop(CANDIDATE_UNIVERSE_KEY,None)
     delegated["step_results"]={step:"PASS" for step in AUTHENTICATED_STEPS}
 
     out=base.route(delegated,repo_root=root)
@@ -193,6 +248,15 @@ def route(state:Mapping[str,Any],*,repo_root:str|Path|None=None)->dict[str,Any]:
     result["caller_step_results_allowed"]=False
     result["authenticated_step_ids"]=list(AUTHENTICATED_STEPS)
     result["run_context_sha256"]=run_context
+    result["candidate_selection_universe"]={
+        "candidate_universe_sha256":universe_digest,
+        "candidate_count":universe.get("candidate_count"),
+        "incumbent_candidate_id":universe.get("incumbent_candidate_id"),
+        "finite_selection_universe_complete_by_construction":True,
+        "open_world_generation_complete":False,
+        "policy_generation_complete":False,
+    }
+    result["candidate_generation_evidence_bound_to_selection_universe"]=True
     result["step_binding_receipts"]={
         step:{
             "receipt_path":row.get("receipt_path"),
