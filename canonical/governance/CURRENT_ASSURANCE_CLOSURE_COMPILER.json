@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_ASSURANCE_CLOSURE_COMPILER_POINTER_V1",
   "date": "2026-10-09",
-  "status": "CURRENT_UVCK_V2_CANDIDATE__PROFESSIONAL_FIRST_WHOLE_LEAF_SCOPE_ADMITTED_R10_EXECUTION__PROPERTY_TRUTH_READY_1_OF_24__DOMAIN_SEMANTIC_EXECUTION_EVIDENCE_AND_FULL_CURRENT_MAIN_REGRESSION_OPEN__NOT_LIVE_DEFAULT",
+  "status": "CURRENT_UVCK_V2_CANDIDATE__R10_EXECUTION_SCOPE_ADMITTED__DETECTED_DEFEATER_ENFORCEMENT_35_OF_35_PASS__DETECTION_COMPLETENESS_AND_PROOF_SLOT_EVIDENCE_OPEN__PROPERTY_TRUTH_0_OF_24__NOT_LIVE_DEFAULT",
   "governance": {
     "path": "canonical/governance/UVCK_V2_ASSURANCE_CLOSURE_COMPILER_20261009_V1.json",
     "git_blob_sha": "b7197be29b49c55c81e1a18572cd22020510fa5e"
@@ -331,5 +331,19 @@
     "global_leaf_closed_count": 0,
     "domain_semantic_closure": false,
     "domain_execution_closure": false
+  },
+  "professional_quality_r10_execution_enforcement": {
+    "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_R10_EXECUTION_GUARD_VERIFY_20261010_V1.json",
+    "verification_git_blob_sha": "7a29d67c77c8961b238e7f9b3bf74d278984452e",
+    "claim_id": "205a864e7d7a56a14a46bb75923cc9b11126d479676d26d88803831da1197294",
+    "known_r10_defeater_count": 17,
+    "known_defeaters_block_when_detected": true,
+    "near_miss_signal_classes": 5,
+    "near_misses_escalate": true,
+    "detection_completeness_proved": false,
+    "required_proof_slots_complete": false,
+    "whole_leaf_property_truth_proved": false,
+    "property_truth_credit": false,
+    "terminal_credit_delta": 0
   }
 }
