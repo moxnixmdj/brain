@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_PROPERTY_TRUTH_FRONTIER_RECONCILIATION_20261010_V1",
+  "date": "2026-10-10",
+  "status": "DERIVED_CURRENTNESS_RECONCILIATION__8_OF_24_VERIFIED__4_EXECUTION_AND_12_SEMANTIC_OPEN__ZERO_NEW_CREDIT",
+  "sources": {
+    "current_professional": {
+      "path": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
+      "git_blob_sha": "59eced2dc3bdbba7da78734f86c8e674dbf29e1b"
+    },
+    "leaf_registry": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_LEAF_EVIDENCE_REGISTRY_20261010_V1.json",
+      "git_blob_sha": "840c5418c8149787c73f4c9b35b52dc9b9ea6c03"
+    },
+    "independent_registry_verification": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_LEAF_REGISTRY_PROPERTY_TRUTH_VERIFY_20261010_V6.json",
+      "git_blob_sha": "c0449b1afe7856ac95acea34f8a1f26702da3385"
+    }
+  },
+  "derived": {
+    "verified_leaf_count": 8,
+    "total_leaf_count": 24,
+    "verified_execution_leaf_count": 8,
+    "open_execution_leaf_count": 4,
+    "verified_semantic_leaf_count": 0,
+    "open_semantic_leaf_count": 12,
+    "verified_leaf_ids": [
+      "PQ::R1_TARGET_SPECIFICATION::EXECUTION",
+      "PQ::R2_CANDIDATE_SEARCH::EXECUTION",
+      "PQ::R3_REALIZATION_OBSERVATION::EXECUTION",
+      "PQ::R4_MEASUREMENT_CONSTRUCT::EXECUTION",
+      "PQ::R6_EVIDENCE_GROUNDING_DEPENDENCE::EXECUTION",
+      "PQ::R7_CAUSAL_PRESCRIPTIVE::EXECUTION",
+      "PQ::R10_ANALYSIS_DECISION::EXECUTION",
+      "PQ::R12_META_COMPOSITION_CLOSURE::EXECUTION"
+    ],
+    "next": "INSTANTIATE_CLAIM_SCOPED_TOTALITY_REUSE_FOR_TWELVE_SEMANTIC_LEAVES__IN_PARALLEL_DEPLET_R5_R8_R9_R11_EXECUTION_LEAVES_WITH_REUSE_FIRST_CASE_CHALLENGES__RUN_FULL_CURRENT_MAIN_REGRESSION__PROMOTE_ONLY_AFTER_REQUIRED_EVIDENCE"
+  },
+  "hard_nonclaims": [
+    "NO_NEW_PROPERTY_TRUTH_CREDIT_FROM_RECONCILIATION",
+    "NO_SEMANTIC_LEAF_CLOSURE",
+    "NO_ROOT_CLOSURE",
+    "NO_GLOBAL_PROFESSIONAL_QUALITY_CLOSURE",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
