@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_V40_RECONCILIATION_20261010_V1",
+  "date": "2026-10-10",
+  "status": "RECONCILED__TB_PLANNER_V7_V13_REPAIR_VERIFIED__RANK19_FROZEN_ONLY_ON_FRESH_V13_SURFACE_RESEAL__FINITE_REACHED_STATE_TOTALITY_BOUND__BROAD_LIVE_FABRIC_CONSTRUCTION_INVARIANT_FALSIFIED__MISSION_CONSTRUCTOR_INVARIANT_OPEN__ZERO_CREDIT",
+  "predecessor_terminal_pointer": {
+    "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+    "git_blob_sha": "4991e2557a656b29561435c193f0ac1f15665003"
+  },
+  "tb_science": {
+    "current_execution_path": "canonical/governance/CURRENT_TB_SCIENCE_EXECUTION.json",
+    "current_execution_git_blob_sha": "896419d5c85f84af49a886efb02f3f2391c563f3",
+    "current_ledger_path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V38.json",
+    "current_ledger_git_blob_sha": "254f91dd9791c7e978917bfcac636289f2c64d0b",
+    "runtime_guard_path": "canonical/governance/CURRENT_TB_SCIENCE_RUNTIME_GUARD.json",
+    "runtime_guard_git_blob_sha": "cdc639c418c6c5a3ee5a1538f4c328e243883261",
+    "planner_repair_verification_path": "canonical/verification/TB_SCIENCE_PLANNER_V7_ZERO_EXPOSURE_VERIFICATION_20261010_V1.json",
+    "planner_repair_verification_git_blob_sha": "9797cc625e3e33bb905cf23fa6c79f66dc9794db",
+    "planner_v7_git_blob_sha": "e5d6ab78b6cf5bacee568cd3701410a8745b9ce8",
+    "agent_v13_git_blob_sha": "8deede8adb960b6ebf7ee747a5e9ff1016238b7e",
+    "planner_repair_closed": true,
+    "rank18_retry_authority": false,
+    "rank19_task_read_authority": false,
+    "rank19_execution_authority": false,
+    "next": "FRESH_V13_PROOF_CARRYING_PUBLIC_EXECUTION_SURFACE_RESEAL"
+  },
+  "reached_escape": {
+    "finite_totality_activation_path": "canonical/governance/REACHED_ESCAPE_FINITE_TOTALITY_CERTIFICATE_ACTIVATION_20261010_V1.json",
+    "finite_totality_activation_git_blob_sha": "a2b775c960fa6e33d97e75535656fcd4f09e87bb",
+    "construction_boundary_path": "canonical/governance/REACHED_ESCAPE_STATE_CONSTRUCTION_INVARIANT_BOUNDARY_20261010_V1.json",
+    "construction_boundary_git_blob_sha": "f9dd240a5ee9d5da2fa842c8f7f2af00f4c370bd",
+    "construction_boundary_verification_path": "canonical/verification/REACHED_ESCAPE_CONSTRUCTION_INVARIANT_BOUNDARY_SPRITE_VERIFY_20261010_V1.json",
+    "construction_boundary_verification_git_blob_sha": "8525ec9f9795e417cda95bd6d6d56421c4184674",
+    "exact_state_future_outcome_totality_bound": true,
+    "broad_live_fabric_state_constructor_invariant": false,
+    "mission_owned_state_constructor_invariant_proved": false,
+    "next": "PROVE_OR_FALSIFY_MISSION_OWNED_ESCAPE_STATE_CONSTRUCTOR_INVARIANT__NO_CERTIFIED_REACHED_STATE_WITH_UNCOVERED_REGION_OR_UNRESOLVED_DISCRIMINATOR_EQUIVALENCE_CLASS_WITHOUT_CONTENT_ADDRESSED_REPAIR_OBLIGATION"
+  },
+  "scheduler_effect": {
+    "delete": [
+      "TB_SCIENCE_ZERO_EXPOSURE_PLANNER_REPAIR_PENDING",
+      "PROVE_ALL_LIVE_FABRIC_REACHABLE_ESCAPE_STATES_SATISFY_FINITE_TOTALITY_PRECONDITIONS"
+    ],
+    "preserve": [
+      "RANK19_NO_TASK_READ_OR_EXECUTION_BEFORE_FRESH_V13_SURFACE_RESEAL",
+      "GLOBAL_ESCAPE_PROGRESS_TOTALITY_OPEN",
+      "UNIVERSAL_POLICY_OR_DISCRIMINATOR_ACQUIRABILITY_OPEN",
+      "MISSION_OWNED_STATE_CONSTRUCTION_INVARIANT_OPEN"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_RANK19_EXECUTION_AUTHORITY",
+    "NO_TB_SCIENCE_SUCCESS_CREDIT",
+    "NO_GLOBAL_ESCAPE_PROGRESS_TOTALITY",
+    "NO_UNIVERSAL_REPAIR_ACQUIRABILITY",
+    "NO_TERMINAL_GOAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false,
+  "terminal_credit_delta": 0
+}
