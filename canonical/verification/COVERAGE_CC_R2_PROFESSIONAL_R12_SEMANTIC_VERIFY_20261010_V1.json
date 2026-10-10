@@ -3,8 +3,8 @@
   "date": "2026-10-10",
   "status": "PASS__INDEPENDENT_SPRITE__PYCOMPILE__12_OF_12_FALSIFICATION_TESTS__CC_R2_R12_SEMANTIC_MISSION_SOUNDNESS_ONLY__ZERO_PROPERTY_OR_TERMINAL_CREDIT",
   "repository": "moxnixmdj/brain",
-  "verification_branch": "successor/professional-r12-semantic-cc-r2-20261010-v1",
-  "base_main_commit": "2cff61c33e158ec139e765892054574160b4b8db",
+  "verification_branch": "successor/professional-r12-semantic-cc-r2-20261010-v2",
+  "base_main_commit": "4520b46b4a8a66f66add0b8fb54977dcffd0168f",
   "subject": {
     "root_id": "CC_R2_MISSION_SOUNDNESS_V1",
     "leaf_id": "PQ::R12_META_COMPOSITION_CLOSURE::SEMANTIC",
@@ -30,13 +30,13 @@
     "carrier": "SPRITE",
     "carrier_name": "brain-professional-hard-defect-verify-20261010",
     "carrier_id": "sprite-1bbb86ed-1f7c-409f-8397-fadc4de7a62a",
-    "workspace": "/home/sprite/r12-cc-r2-v1",
+    "workspace": "/home/sprite/r12-cc-r2-v2",
     "exact_branch_bytes_copied_from_github": true,
     "py_compile": "PASS",
     "tests_run": 12,
     "tests_passed": 12,
     "tests_failed": 0,
-    "transcript_sha256": "bee8672fbf982d13aab506e68728ae1bcfc94b99a89604ce71039979c1c642d9",
+    "transcript_sha256": "ee30341579a01386bd3e76edaffe3f5277732c21d9b554673d0ecea55ead0664",
     "transcript_bytes": 1982
   },
   "proves": [
