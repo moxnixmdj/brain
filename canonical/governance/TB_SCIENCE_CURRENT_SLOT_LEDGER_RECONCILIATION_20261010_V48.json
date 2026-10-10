@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V48",
+  "date": "2026-10-10",
+  "status": "CURRENT_RANK20_CLAIM_V5_PUBLIC_RESEALED__INDEPENDENT_ZERO_EXPOSURE_REPLAY_PASS__EFFECTIVE_AUTHORITY_PROMOTION_NEXT",
+  "predecessor": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V47.json",
+    "git_blob_sha": "3f561524395e85ffb20f86cd5e6ec60c20a45d8b"
+  },
+  "rank20_authority": {
+    "path": "canonical/governance/TB_SCIENCE_RANK20_ONE_SLOT_EXECUTION_AUTHORITY_20261010_V5.json",
+    "git_blob_sha": "d50b123ed0df77fbd772e00331f278835d4bf35b"
+  },
+  "reseal_verification": {
+    "path": "canonical/verification/TB_SCIENCE_RANK20_V5_PUBLIC_RESEAL_VERIFY_20261010_V1.json",
+    "git_blob_sha": "3800ad76385f7b6b9d14d51bb8393b06f346be7b"
+  },
+  "counts": {
+    "benchmark_trials_consumed": 18,
+    "consumed_successes_final": 0,
+    "consumed_failures_final": 18,
+    "started_result_pending": 0,
+    "finalized_slots": 18,
+    "active_in_flight_slot_count": 0
+  },
+  "next_slot": {
+    "ledger_schedule_rank": 20,
+    "frozen_manifest_schedule_order": 19,
+    "task_rank": 19,
+    "slot_id": "terminal-bench-science/hysteretic-aquifer-control::trial-0",
+    "task_digest": "sha256:681df0c3b2ada03a933ac4d2e11f07983676f87a9f26b61e416987904b880289"
+  },
+  "logical_attempt_id": "c7a02ecc6b11f4338120f05cd922370d361ce79e104549f95b656df3b51cb2bb",
+  "execution_claim_binding_digest": "sha256:aa0d91d18bb597319414b7385a92248992c093e14bf9c8f5677b72c05cb09beb",
+  "claim_epoch_id": "RANK20_V13_WORKFLOW_IMPORT_REPAIR_V2_IDENTITY_20261010_V5",
+  "public_reseal": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "merge_commit_sha": "06c1695ed9964226c8c106afb1d07232e6470bab",
+    "merge_tree_sha": "b15cd105119591f6893295411426ea55bf12e7d7",
+    "execution_surface_git_blob_sha": "c206747c6db760ff523e1b5a269b966c7fd0440c",
+    "public_authority_binding_git_blob_sha": "808d00885bfbc4348006c28f3b51fcfa450f6bf9",
+    "public_ledger_binding_git_blob_sha": "3dad0171b52a2ce548958a05a2da224bf4912ba7",
+    "workflow_git_blob_sha": "e4cb372e501790fd9ed5aa72193d18109a599102",
+    "behavior_git_blob_sha": "8c3d285161f356c9256375c9168e88cdaadd58e5"
+  },
+  "rank20_task_read_history": false,
+  "rank20_task_started": false,
+  "rank20_start_cas_acquired": false,
+  "rank20_benchmark_trials_consumed": 0,
+  "public_execution_authority_candidate": true,
+  "public_execution_authority_effective": false,
+  "public_task_read_authority_effective": false,
+  "activation_present": false,
+  "scheduler": {
+    "frozen": true,
+    "reason": "RANK20_V5_PUBLIC_RESEAL_COMPLETE__EFFECTIVE_AUTHORITY_PROMOTION_NOT_YET_PROVED",
+    "only_authorized_transition": "DERIVE_AND_VERIFY_PUBLIC_EFFECTIVE_AUTHORITY_V5_PRE_ACTIVATION"
+  },
+  "execution_authority": false,
+  "activation_authority": false,
+  "repair_authority": "ZERO_EXPOSURE_ONLY",
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
