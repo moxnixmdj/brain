@@ -1,43 +1,248 @@
 from __future__ import annotations
+
 import json
 from pathlib import Path
 from typing import Any
+
 from canonical.runtime import professional_quality_scoped_evidence_v1 as b
-from canonical.runtime import professional_candidate_search_semantic_certificate_v1 as c
-ROOT=b.ROOT
-REGISTRY=b.REGISTRY
-SCHEMA="PROJECT_BRAIN_PQ_SCOPED_EVIDENCE_OVERLAY_V1"
-K=c.CLAIM_KIND
-L={"PQ::R2_CANDIDATE_SEARCH::SEMANTIC"}
-SS="PROJECT_BRAIN_PROFESSIONAL_QUALITY_R2_SEARCH_SEMANTIC_VERIFY_V1"
-GS="PROJECT_BRAIN_PROFESSIONAL_QUALITY_R2_SEARCH_SEMANTIC_SCOPE_V1"
-ST="PASS__PINNED_EXACT_BYTES__PYCOMPILE__8_OF_8__BOUNDED_R2_SEARCH_SEMANTICS__ZERO_GLOBAL_LEAF_CREDIT"
-GT="ACTIVE_SCOPED_FINITE_SCOPE_COMPLETE_CANDIDATE_SEARCH_SEMANTICS__8_OF_8_INDEPENDENT_REPLAY__ZERO_GLOBAL_LEAF_CREDIT"
+from canonical.runtime import professional_candidate_search_semantic_certificate_v1 as r2c
+from canonical.runtime import professional_r9_temporal_semantic_certificate_v1 as r9c
 
-def _r(e:dict[str,Any],root:Path)->dict[str,Any]:
-    x=b._common_checks(e,c.ROOT_ID,L)
-    s,z=b._read_bound(root,e.get("source_receipt"),"SOURCE");x+=z
-    g,z=b._read_bound(root,e.get("scope_governance"),"SCOPE");x+=z
-    q=e.get("reusable_compiler");p=b._resolve(root,q.get("path") if isinstance(q,dict) else None);h=q.get("git_blob_sha") if isinstance(q,dict) else None
-    if p is None or not p.exists() or b.git_blob_sha(p)!=h:x.append("COMPILER_INVALID")
-    if s is None or s.get("schema")!=SS or s.get("status")!=ST:x.append("SOURCE_INVALID")
-    elif (s.get("exact_blobs") or {}).get("runtime")!=h or (s.get("replay") or {}).get("tests_passed")!=8:x.append("SOURCE_BINDING_INVALID")
-    sem=None
-    if g is None or g.get("schema")!=GS or g.get("status")!=GT:x.append("SCOPE_INVALID")
+ROOT = b.ROOT
+REGISTRY = b.REGISTRY
+SCHEMA = "PROJECT_BRAIN_PQ_SCOPED_EVIDENCE_OVERLAY_V1"
+
+R2_LEAVES = {"PQ::R2_CANDIDATE_SEARCH::SEMANTIC"}
+R2_SOURCE_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R2_SEARCH_SEMANTIC_VERIFY_V1"
+R2_SCOPE_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R2_SEARCH_SEMANTIC_SCOPE_V1"
+R2_SOURCE_STATUS = "PASS__PINNED_EXACT_BYTES__PYCOMPILE__8_OF_8__BOUNDED_R2_SEARCH_SEMANTICS__ZERO_GLOBAL_LEAF_CREDIT"
+R2_SCOPE_STATUS = "ACTIVE_SCOPED_FINITE_SCOPE_COMPLETE_CANDIDATE_SEARCH_SEMANTICS__8_OF_8_INDEPENDENT_REPLAY__ZERO_GLOBAL_LEAF_CREDIT"
+
+R9_LEAVES = {"PQ::R9_TEMPORAL_DEPLOYMENT::SEMANTIC"}
+R9_SOURCE_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R9_TEMPORAL_SEMANTIC_VERIFY_V1"
+R9_SCOPE_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R9_TEMPORAL_SEMANTIC_SCOPE_V1"
+R9_SOURCE_STATUS = "PASS__PINNED_EXACT_BYTES__PYCOMPILE__8_OF_8__BOUNDED_R9_FROZEN_TEMPORAL_ACCOUNTING_SEMANTICS__ZERO_GLOBAL_LEAF_CREDIT"
+R9_SCOPE_STATUS = "ACTIVE_SCOPED_FROZEN_POPULATION_CONSERVATIVE_CENSORING_SEMANTICS__8_OF_8_INDEPENDENT_REPLAY__ZERO_GLOBAL_LEAF_CREDIT"
+
+
+def _compiler_binding(
+    entry: dict[str, Any],
+    root: Path,
+    errors: list[str],
+) -> tuple[str | None, Path | None]:
+    row = entry.get("reusable_compiler")
+    path = b._resolve(root, row.get("path") if isinstance(row, dict) else None)
+    declared = row.get("git_blob_sha") if isinstance(row, dict) else None
+    if path is None or not path.exists() or b.git_blob_sha(path) != declared:
+        errors.append("COMPILER_INVALID")
+    return declared, path
+
+
+def _result(
+    entry: dict[str, Any],
+    errors: list[str],
+    semantic: dict[str, Any] | None,
+) -> dict[str, Any]:
+    return {
+        "scope_id": entry.get("scope_id"),
+        "root_id": entry.get("root_id"),
+        "claim_kind": entry.get("claim_kind"),
+        "admitted": not errors,
+        "errors": sorted(set(errors)),
+        "claim_scope": semantic.get("claim_scope") if isinstance(semantic, dict) else None,
+        "contributes_to_leaf_ids": sorted(entry.get("contributes_to_leaf_ids") or []),
+        "global_leaf_credit": False,
+        "global_root_credit": False,
+        "semantic_leaf_credit": False,
+        "execution_leaf_credit": False,
+        "terminal_credit_delta": 0,
+    }
+
+
+def _validate_r2(entry: dict[str, Any], root: Path) -> dict[str, Any]:
+    errors = b._common_checks(entry, r2c.ROOT_ID, R2_LEAVES)
+    source, e = b._read_bound(root, entry.get("source_receipt"), "SOURCE")
+    errors.extend(e)
+    scope, e = b._read_bound(root, entry.get("scope_governance"), "SCOPE")
+    errors.extend(e)
+    compiler_sha, _ = _compiler_binding(entry, root, errors)
+
+    if (
+        source is None
+        or source.get("schema") != R2_SOURCE_SCHEMA
+        or source.get("status") != R2_SOURCE_STATUS
+    ):
+        errors.append("SOURCE_INVALID")
+    elif (
+        (source.get("exact_blobs") or {}).get("runtime") != compiler_sha
+        or (source.get("replay") or {}).get("tests_passed") != 8
+    ):
+        errors.append("SOURCE_BINDING_INVALID")
+
+    semantic = None
+    if (
+        scope is None
+        or scope.get("schema") != R2_SCOPE_SCHEMA
+        or scope.get("status") != R2_SCOPE_STATUS
+    ):
+        errors.append("SCOPE_INVALID")
     else:
-        d=g.get("exact_components") or {}
-        a,z=b._read_bound(root,d.get("source_scope"),"SOURCE_SCOPE");x+=z
-        v,z=b._read_bound(root,d.get("source_execution_verification"),"SOURCE_VERIFY");x+=z
-        if a is not None and v is not None:
-            m={"root_id":c.ROOT_ID,"claim_kind":c.CLAIM_KIND,"scope_sha256":c.digest(a),"verification_sha256":c.digest(v),"semantic_roles":dict(c.SEMANTIC_ROLES),"boundaries":{"global_candidate_search_complete":False,"escape_progress_totality":False,"open_world_hypothesis_complete":False,"policy_generation_complete":False,"discriminator_plan_authorizes_u_subtraction":False,"unresolved_outside_bound_scope_stays_open":True}}
-            sem=c.certify(a,v,m)
-            if sem.get("pass") is not True:x.append("SEMANTIC_REPLAY_FAILED")
-            if s is not None and s.get("claim_scope")!=sem.get("claim_scope"):x.append("CLAIM_SCOPE_MISMATCH")
-    return {"scope_id":e.get("scope_id"),"root_id":e.get("root_id"),"claim_kind":e.get("claim_kind"),"admitted":not x,"errors":sorted(set(x)),"claim_scope":sem.get("claim_scope") if isinstance(sem,dict) else None,"contributes_to_leaf_ids":sorted(e.get("contributes_to_leaf_ids") or []),"global_leaf_credit":False,"global_root_credit":False,"semantic_leaf_credit":False,"execution_leaf_credit":False,"terminal_credit_delta":0}
+        parts = scope.get("exact_components") or {}
+        source_scope, e = b._read_bound(root, parts.get("source_scope"), "SOURCE_SCOPE")
+        errors.extend(e)
+        source_verify, e = b._read_bound(
+            root, parts.get("source_execution_verification"), "SOURCE_VERIFY"
+        )
+        errors.extend(e)
+        sem_verify = parts.get("semantic_verification")
+        declared_source = (
+            (entry.get("source_receipt") or {}).get("git_blob_sha")
+            if isinstance(entry.get("source_receipt"), dict)
+            else None
+        )
+        if (
+            not isinstance(sem_verify, dict)
+            or sem_verify.get("git_blob_sha") != declared_source
+        ):
+            errors.append("SCOPE_SEMANTIC_VERIFICATION_MISMATCH")
+        if source_scope is not None and source_verify is not None:
+            binding = {
+                "root_id": r2c.ROOT_ID,
+                "claim_kind": r2c.CLAIM_KIND,
+                "scope_sha256": r2c.digest(source_scope),
+                "verification_sha256": r2c.digest(source_verify),
+                "semantic_roles": dict(r2c.SEMANTIC_ROLES),
+                "boundaries": {
+                    "global_candidate_search_complete": False,
+                    "escape_progress_totality": False,
+                    "open_world_hypothesis_complete": False,
+                    "policy_generation_complete": False,
+                    "discriminator_plan_authorizes_u_subtraction": False,
+                    "unresolved_outside_bound_scope_stays_open": True,
+                },
+            }
+            semantic = r2c.certify(source_scope, source_verify, binding)
+            if semantic.get("pass") is not True:
+                errors.append("SEMANTIC_REPLAY_FAILED")
+            if source is not None and source.get("claim_scope") != semantic.get("claim_scope"):
+                errors.append("CLAIM_SCOPE_MISMATCH")
 
-def validate_entry(e:dict[str,Any],*,repo_root:Path=ROOT)->dict[str,Any]:
-    return _r(e,repo_root) if isinstance(e,dict) and e.get("claim_kind")==K else b.validate_entry(e,repo_root=repo_root)
+    return _result(entry, errors, semantic)
 
-def evaluate(*,registry_path:Path=REGISTRY,repo_root:Path=ROOT)->dict[str,Any]:
-    d=json.loads(registry_path.read_text());e=d.get("entries") if isinstance(d.get("entries"),list) else [];r=[validate_entry(x,repo_root=repo_root) for x in e if isinstance(x,dict)];ids=[x.get("scope_id") for x in r];bad=[] if len(ids)==len(set(ids)) else ["DUPLICATE_SCOPE_ID"];rej=[x for x in r if not x.get("admitted")]
-    return {"schema":SCHEMA,"pass":not bad and not rej,"status":"PASS__SCOPED_CAPABILITIES_ADMITTED_WITH_ZERO_GLOBAL_LEAF_CREDIT" if not bad and not rej else "OPEN__SCOPED_EVIDENCE_REGISTRY_ERRORS","structural_errors":bad,"admitted_scope_count":sum(x.get("admitted") is True for x in r),"rejected_scope_count":len(rej),"admitted_scopes":[x for x in r if x.get("admitted") is True],"rejected_scopes":rej,"global_leaf_closure":False,"global_root_closure":False,"domain_semantic_closure":False,"domain_execution_closure":False,"terminal_authority":False,"terminal_credit_delta":0,"incremental_spend_usd":0}
+
+def _validate_r9(entry: dict[str, Any], root: Path) -> dict[str, Any]:
+    errors = b._common_checks(entry, r9c.ROOT_ID, R9_LEAVES)
+    source, e = b._read_bound(root, entry.get("source_receipt"), "SOURCE")
+    errors.extend(e)
+    scope, e = b._read_bound(root, entry.get("scope_governance"), "SCOPE")
+    errors.extend(e)
+    compiler_sha, _ = _compiler_binding(entry, root, errors)
+
+    if (
+        source is None
+        or source.get("schema") != R9_SOURCE_SCHEMA
+        or source.get("status") != R9_SOURCE_STATUS
+    ):
+        errors.append("SOURCE_INVALID")
+    elif (
+        (source.get("exact_blobs") or {}).get("runtime") != compiler_sha
+        or (source.get("replay") or {}).get("tests_passed") != 8
+    ):
+        errors.append("SOURCE_BINDING_INVALID")
+
+    semantic = None
+    if (
+        scope is None
+        or scope.get("schema") != R9_SCOPE_SCHEMA
+        or scope.get("status") != R9_SCOPE_STATUS
+    ):
+        errors.append("SCOPE_INVALID")
+    else:
+        parts = scope.get("exact_components") or {}
+        source_scope, e = b._read_bound(root, parts.get("source_scope"), "SOURCE_SCOPE")
+        errors.extend(e)
+        source_verify, e = b._read_bound(
+            root, parts.get("source_execution_verification"), "SOURCE_VERIFY"
+        )
+        errors.extend(e)
+        sem_verify = parts.get("semantic_verification")
+        declared_source = (
+            (entry.get("source_receipt") or {}).get("git_blob_sha")
+            if isinstance(entry.get("source_receipt"), dict)
+            else None
+        )
+        if (
+            not isinstance(sem_verify, dict)
+            or sem_verify.get("git_blob_sha") != declared_source
+        ):
+            errors.append("SCOPE_SEMANTIC_VERIFICATION_MISMATCH")
+        if source_scope is not None and source_verify is not None:
+            binding = {
+                "root_id": r9c.ROOT_ID,
+                "claim_kind": r9c.CLAIM_KIND,
+                "scope_sha256": r9c.digest(source_scope),
+                "verification_sha256": r9c.digest(source_verify),
+                "semantic_roles": dict(r9c.SEMANTIC_ROLES),
+                "boundaries": {
+                    "multihorizon_deployment_validity": False,
+                    "rare_event_coverage": False,
+                    "distribution_shift_transport": False,
+                    "performative_equilibrium_stability": False,
+                    "global_r9_semantic_leaf_closed": False,
+                    "unobserved_final_slots_may_create_positive_credit": False,
+                    "outside_frozen_population_stays_unclaimed": True,
+                },
+            }
+            semantic = r9c.certify(source_scope, source_verify, binding)
+            if semantic.get("pass") is not True:
+                errors.append("SEMANTIC_REPLAY_FAILED")
+            if source is not None and source.get("claim_scope") != semantic.get("claim_scope"):
+                errors.append("CLAIM_SCOPE_MISMATCH")
+
+    return _result(entry, errors, semantic)
+
+
+def validate_entry(entry: dict[str, Any], *, repo_root: Path = ROOT) -> dict[str, Any]:
+    if isinstance(entry, dict):
+        kind = entry.get("claim_kind")
+        if kind == r2c.CLAIM_KIND:
+            return _validate_r2(entry, repo_root)
+        if kind == r9c.CLAIM_KIND:
+            return _validate_r9(entry, repo_root)
+    return b.validate_entry(entry, repo_root=repo_root)
+
+
+def evaluate(*, registry_path: Path = REGISTRY, repo_root: Path = ROOT) -> dict[str, Any]:
+    registry = json.loads(registry_path.read_text())
+    entries = registry.get("entries") if isinstance(registry.get("entries"), list) else []
+    results = [
+        validate_entry(entry, repo_root=repo_root)
+        for entry in entries
+        if isinstance(entry, dict)
+    ]
+    scope_ids = [row.get("scope_id") for row in results]
+    structural_errors = (
+        [] if len(scope_ids) == len(set(scope_ids)) else ["DUPLICATE_SCOPE_ID"]
+    )
+    rejected = [row for row in results if row.get("admitted") is not True]
+    return {
+        "schema": SCHEMA,
+        "pass": not structural_errors and not rejected,
+        "status": (
+            "PASS__SCOPED_CAPABILITIES_ADMITTED_WITH_ZERO_GLOBAL_LEAF_CREDIT"
+            if not structural_errors and not rejected
+            else "OPEN__SCOPED_EVIDENCE_REGISTRY_ERRORS"
+        ),
+        "structural_errors": structural_errors,
+        "admitted_scope_count": sum(row.get("admitted") is True for row in results),
+        "rejected_scope_count": len(rejected),
+        "admitted_scopes": [row for row in results if row.get("admitted") is True],
+        "rejected_scopes": rejected,
+        "global_leaf_closure": False,
+        "global_root_closure": False,
+        "domain_semantic_closure": False,
+        "domain_execution_closure": False,
+        "terminal_authority": False,
+        "terminal_credit_delta": 0,
+        "incremental_spend_usd": 0,
+    }
