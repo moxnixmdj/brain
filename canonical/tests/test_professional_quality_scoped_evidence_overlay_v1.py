@@ -9,10 +9,10 @@ from canonical.runtime import professional_quality_scoped_evidence_overlay_v1 as
 
 
 class ProfessionalQualityScopedEvidenceOverlayV1Tests(unittest.TestCase):
-    def test_current_overlay_admits_r2_r3_r5_and_r9_semantic_scopes_without_global_credit(self):
+    def test_current_overlay_admits_r2_r3_r4_r5_and_r9_semantic_scopes_without_global_credit(self):
         out = scoped.evaluate()
         self.assertTrue(out["pass"], out)
-        self.assertEqual(out["admitted_scope_count"], 20, out)
+        self.assertEqual(out["admitted_scope_count"], 21, out)
 
         r2 = next(
             x for x in out["admitted_scopes"]
@@ -21,6 +21,10 @@ class ProfessionalQualityScopedEvidenceOverlayV1Tests(unittest.TestCase):
         r3 = next(
             x for x in out["admitted_scopes"]
             if x["claim_kind"] == "PINNED_NATIVE_ARTIFACT_RENDER_REALIZATION_SEMANTICS"
+        )
+        r4 = next(
+            x for x in out["admitted_scopes"]
+            if x["claim_kind"] == "CONTENT_ADDRESSED_TYPED_MECHANICAL_MEASUREMENT_SEMANTICS"
         )
         r5 = next(
             x for x in out["admitted_scopes"]
@@ -33,6 +37,7 @@ class ProfessionalQualityScopedEvidenceOverlayV1Tests(unittest.TestCase):
 
         self.assertEqual(r2["root_id"], "R2_CANDIDATE_SEARCH")
         self.assertEqual(r3["root_id"], "R3_REALIZATION_OBSERVATION")
+        self.assertEqual(r4["root_id"], "R4_MEASUREMENT_CONSTRUCT")
         self.assertEqual(r5["root_id"], "R5_EVALUATOR_REFERENCE")
         self.assertEqual(r9["root_id"], "R9_TEMPORAL_DEPLOYMENT")
 
@@ -43,6 +48,10 @@ class ProfessionalQualityScopedEvidenceOverlayV1Tests(unittest.TestCase):
         self.assertEqual(
             r3["contributes_to_leaf_ids"],
             ["PQ::R3_REALIZATION_OBSERVATION::SEMANTIC"],
+        )
+        self.assertEqual(
+            r4["contributes_to_leaf_ids"],
+            ["PQ::R4_MEASUREMENT_CONSTRUCT::SEMANTIC"],
         )
         self.assertEqual(
             r5["contributes_to_leaf_ids"],
@@ -62,6 +71,10 @@ class ProfessionalQualityScopedEvidenceOverlayV1Tests(unittest.TestCase):
             r3["claim_scope"]["limitations"],
         )
         self.assertIn(
+            "NO_AUTOMATIC_FIELD_TO_RUBRIC_OR_CONSTRUCT_SEMANTIC_ALIGNMENT",
+            r4["claim_scope"]["limitations"],
+        )
+        self.assertIn(
             "NO_PROOF_THE_TRUE_CURRENT_OWNER_EVALUATOR_IS_IN_ANY_PROPOSED_DECOMPOSITION",
             r5["claim_scope"]["limitations"],
         )
@@ -74,7 +87,7 @@ class ProfessionalQualityScopedEvidenceOverlayV1Tests(unittest.TestCase):
             r9["claim_scope"]["limitations"],
         )
 
-        for row in (r2, r3, r5, r9):
+        for row in (r2, r3, r4, r5, r9):
             self.assertFalse(row["semantic_leaf_credit"])
             self.assertFalse(row["global_leaf_credit"])
         self.assertFalse(out["global_leaf_closure"])
@@ -229,6 +242,38 @@ class ProfessionalQualityScopedEvidenceOverlayV1Tests(unittest.TestCase):
         row = next(
             x for x in out["rejected_scopes"]
             if x.get("claim_kind") == "CONDITIONAL_EVALUATOR_REFERENCE_ROBUSTNESS_SEMANTICS"
+        )
+        self.assertIn("SCOPE_STALE", row["errors"])
+
+
+    def test_r4_semantic_global_credit_attempt_fails_closed(self):
+        out = self._mutated(
+            "CONTENT_ADDRESSED_TYPED_MECHANICAL_MEASUREMENT_SEMANTICS",
+            "global_root_closure",
+            True,
+        )
+        self.assertFalse(out["pass"], out)
+        row = next(
+            x for x in out["rejected_scopes"]
+            if x.get("claim_kind") == "CONTENT_ADDRESSED_TYPED_MECHANICAL_MEASUREMENT_SEMANTICS"
+        )
+        self.assertIn("GLOBAL_ROOT_CLOSURE_FORBIDDEN", row["errors"])
+
+    def test_r4_semantic_stale_scope_fails_closed(self):
+        registry = json.loads(scoped.REGISTRY.read_text())
+        r4 = next(
+            x for x in registry["entries"]
+            if x.get("claim_kind") == "CONTENT_ADDRESSED_TYPED_MECHANICAL_MEASUREMENT_SEMANTICS"
+        )
+        r4["scope_governance"]["git_blob_sha"] = "0" * 40
+        with tempfile.TemporaryDirectory() as td:
+            p = Path(td) / "registry.json"
+            p.write_text(json.dumps(registry, indent=2) + "\n")
+            out = scoped.evaluate(registry_path=p)
+        self.assertFalse(out["pass"], out)
+        row = next(
+            x for x in out["rejected_scopes"]
+            if x.get("claim_kind") == "CONTENT_ADDRESSED_TYPED_MECHANICAL_MEASUREMENT_SEMANTICS"
         )
         self.assertIn("SCOPE_STALE", row["errors"])
 

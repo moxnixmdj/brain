@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R4_SEMANTIC_SCOPED_INTEGRATION_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_BRANCH_BYTES__R4_SEMANTIC_8_OF_8__SCOPED_ADMISSION_3_OF_3__ZERO_GLOBAL_LEAF_CREDIT",
+  "carrier": {
+    "name": "oq-verify-20261010",
+    "id": "sprite-f5cbeee2-cf40-428b-b1f0-dfda7d3bd5a2",
+    "workspace_kernel": "/home/sprite/r4-semantic-current",
+    "workspace_integration": "/home/sprite/pq-r5-integration",
+    "dependency_installation": false
+  },
+  "exact_blobs": {
+    "semantic_runtime": "349afbd3f5b118bc7da56b5d04c7fdba761b77ec",
+    "semantic_tests": "f76976962ff42bb1ee19e5592eba1ee724e63efb",
+    "semantic_source_verification": "c91074f2f187834936c0b7297579a6b8ba125fae",
+    "semantic_scope": "a5b3e1984da25b09a5cb503b615806acdbf88e81",
+    "scoped_overlay": "19c11df8b011fa2c72c755f421edcd38a89f0a07",
+    "scoped_registry": "b9ddf7cbe7fbfad0e81fe068a0c19b48703b5aba",
+    "focused_integration_tests": "e757ba999ac8a14c41c088628d7b9303e3a46987",
+    "source_governance": "a174825b4c10fefa06c3a7ba09eb68c0d40af14a",
+    "source_execution_verification": "34c64ed759d2e70df48a76d7a254047ac5fe9e2b"
+  },
+  "replay": {
+    "semantic_kernel_tests_run": 8,
+    "semantic_kernel_tests_passed": 8,
+    "semantic_kernel_tests_failed": 0,
+    "semantic_kernel_tests_errored": 0,
+    "scoped_admission_tests_run": 3,
+    "scoped_admission_tests_passed": 3,
+    "scoped_admission_tests_failed": 0,
+    "py_compile_pass": true
+  },
+  "proved": [
+    "R4_CONTENT_ADDRESSED_MECHANICAL_MEASUREMENT_SEMANTICS_ARE_EXPLICIT_AND_REPLAYABLE",
+    "PROPOSAL_SUPPLIED_VALUES_DO_NOT_GAIN_ARTIFACT_FACT_AUTHORITY",
+    "RUBRIC_CONSTRUCT_AND_HOLISTIC_QUALITY_OVERCLAIMS_FAIL_CLOSED",
+    "R4_SEMANTIC_SCOPE_IS_ADMITTED_ONLY_WITH_EXACT_CONTENT_BINDINGS",
+    "STALE_SCOPE_AND_GLOBAL_ROOT_OVERCLAIM_FAIL_CLOSED"
+  ],
+  "not_proved": [
+    "AUTOMATIC_FIELD_TO_RUBRIC_SEMANTIC_ALIGNMENT",
+    "HOLISTIC_OR_VISUAL_QUALITY_MEASUREMENT",
+    "OPEN_WORLD_MEASUREMENT_COMPLETENESS",
+    "GLOBAL_R4_SEMANTIC_LEAF_OR_ROOT_CLOSURE",
+    "PROFESSIONAL_QUALITY_ACCEPTANCE",
+    "OPUS55_NONINFERIORITY",
+    "TERMINAL_AUTHORITY"
+  ],
+  "semantic_leaf_credit": false,
+  "global_leaf_closure": false,
+  "quality_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "pass": true,
+  "predecessor_integration": {
+    "path": "canonical/verification/PROFESSIONAL_QUALITY_R5_SEMANTIC_SCOPED_INTEGRATION_VERIFY_20261010_V1.json",
+    "git_blob_sha": "4442cb4d69eb4218be8be0b3c8acf70ac83bd3f6",
+    "verified_scope_count": 20,
+    "predecessor_overlay_git_blob_sha": "e72ed8049bc64a0ff894dda8f2b784dc5e801ee6",
+    "predecessor_registry_git_blob_sha": "acca826e510b249acac3708436b5e9afd95030ba"
+  },
+  "composition": {
+    "inherited_predecessor_scope_count": 20,
+    "newly_admitted_scope_count": 1,
+    "resulting_scoped_capability_count": 21,
+    "new_root_semantic_leaf": "PQ::R4_MEASUREMENT_CONSTRUCT::SEMANTIC",
+    "existing_predecessor_authority_not_upgraded": true,
+    "global_leaf_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
