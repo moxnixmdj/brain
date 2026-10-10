@@ -2265,7 +2265,9 @@
     "final_domain_action_authority": false,
     "downstream_reverification_required": true,
     "finance_semantic_tail_closed": false,
-    "terminal_credit_delta": 0
+    "terminal_credit_delta": 0,
+    "live_integration_verification_path": "canonical/verification/R2_OPEN_WORLD_SEMANTIC_CONTROL_LIVE_VERIFY_20261010_V2.json",
+    "live_integration_verification_git_blob_sha": "929c4d125f1ed29fc62a13c96f5fa997402ae083"
   },
   "r2_v72_open_world_semantic_control_reconciliation": {
     "status": "RECONCILED__V71_SEMANTIC_AUTHORITY_PRESERVED__PAIRWISE_NONIDENTIFIABILITY_COMPLEMENTARY__NEW_CONTROL_ONLY_PROGRESS_ROUTE_BOUND__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_REMAINS__ZERO_CREDIT",
@@ -2276,6 +2278,7 @@
     "primary_internal_unsolved_count": 1,
     "finance_tail_closed": false,
     "acceptance_credit_delta": 0,
-    "terminal_credit_delta": 0
+    "terminal_credit_delta": 0,
+    "live_integration_verified": true
   }
 }
