@@ -1,0 +1,10 @@
+{
+  "schema": "PROJECT_BRAIN_UNIFIED_FABRIC_DELEGATION_SPEC_V1",
+  "date": "2026-10-10",
+  "subject": {
+    "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
+    "git_blob_sha": "31b9a227dba79f069045e915e416bcc370900af6"
+  },
+  "component_receipt": "canonical/verification/CURRENT_RUNTIME_BYTE_COHERENCE_SPRITE_VERIFICATION_20261010_V1.json",
+  "terminal_credit_delta": 0
+}
