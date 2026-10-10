@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_REACHED_ESCAPE_LIVE_NO_BYPASS_VERIFY_20261010_V1",
   "date": "2026-10-10",
-  "status": "PASS__COMPLETE_STATIC_PYTHON_RUNTIME_CENSUS_EXTENDED_BY_COMPLETE_DELTA__1672_POST_REPAIR__ZERO_CREDIT",
+  "status": "PASS__CANONICAL_MAIN_STATIC_PYTHON_RUNTIME_NO_BYPASS__1673_OF_1673__ZERO_CREDIT",
   "branch": "successor/reached-escape-live-no-bypass-20261010-v5",
   "base_commit": "b8671d2fdb4fb6cebe197fe507a7007e03f1c8a0",
   "runtime_census_basis": {
@@ -54,7 +54,7 @@
     "live_bypass": "canonical/runtime/live_brain_runtime_v1.py -> reached_escape_state_kernel_v1.evaluate"
   },
   "post_repair": {
-    "runtime_python_files": 1672,
+    "runtime_python_files": 1673,
     "complete_guard_errors": [],
     "status": "PASS__STATIC_PYTHON_RUNTIME_NO_LOW_LEVEL_REACHED_ESCAPE_BYPASS",
     "live_entrypoints": [
@@ -87,6 +87,13 @@
       "passed": true,
       "runtime_python_file_count": 1669,
       "note": "Direct full-tree replay was at exhaustive-census tree plus repair; the three subsequently added and two modified runtime files were completely delta-screened and contain zero low-level reached-state tokens."
+    },
+    "canonical_main_guard": {
+      "commit": "410f2f6bb490039a549cb8ae771e6e79c2aa146e",
+      "passed": true,
+      "runtime_python_file_count": 1673,
+      "error_count": 0,
+      "status": "PASS__STATIC_PYTHON_RUNTIME_NO_LOW_LEVEL_REACHED_ESCAPE_BYPASS"
     }
   },
   "github_actions_observation": {
@@ -100,7 +107,8 @@
     "REPAIR_REMOVES_THAT_BYPASS",
     "COMPLETE_STATIC_RUNTIME_UNIVERSE_IS_COVERED_BY_EXHAUSTIVE_CENSUS_PLUS_COMPLETE_RUNTIME_DELTA_SCREEN",
     "BOTH_LIVE_REACHED_STATE_ENTRYPOINTS_ROUTE_THROUGH_CERTIFIED_CONSTRUCTOR",
-    "ROGUE_LOW_LEVEL_CONSUMER_AND_MIXED_SAFE_PLUS_RAW_LIVE_REFERENCE_MUTATIONS_FAIL_CLOSED"
+    "ROGUE_LOW_LEVEL_CONSUMER_AND_MIXED_SAFE_PLUS_RAW_LIVE_REFERENCE_MUTATIONS_FAIL_CLOSED",
+    "CANONICAL_MAIN_AT_VERIFIED_CURRENT_HEAD_PASSES_COMPLETE_STATIC_PYTHON_RUNTIME_NO_BYPASS_GUARD"
   ],
   "nonclaims": [
     "NO_ARBITRARY_DYNAMIC_CODE_NO_BYPASS_PROOF",
@@ -116,6 +124,22 @@
     "acceptance_credit_delta": 0,
     "promotion_credit_delta": 0,
     "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "deployment_currentness": {
+    "merged_pr": 3971,
+    "merge_commit": "5cbbbf57844c0c257a55260a34fc1e8451994d6a",
+    "verified_current_main": "410f2f6bb490039a549cb8ae771e6e79c2aa146e",
+    "current_git_tree_truncated": false,
+    "current_runtime_python_file_count": 1673,
+    "current_guard_status": "PASS__STATIC_PYTHON_RUNTIME_NO_LOW_LEVEL_REACHED_ESCAPE_BYPASS",
+    "current_guard_error_count": 0,
+    "current_sensitive_reference_files": [
+      "canonical/runtime/certified_reached_escape_state_constructor_v1.py",
+      "canonical/runtime/reached_escape_finite_totality_certificate_v1.py",
+      "canonical/runtime/reached_escape_live_no_bypass_guard_v1.py"
+    ],
+    "live_entrypoint_low_level_reference_count": 0,
     "terminal_credit_delta": 0
   }
 }
