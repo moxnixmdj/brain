@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_FRONTIER_CURRENTNESS_RECONCILIATION_V2_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_SPRITE__EXACT_BRANCH_BLOBS__12_OF_24_EXECUTION_COMPLETE__ZERO_REJECTED_RECEIPTS__CURRENTNESS_CHAIN_COHERENT__BYTES_V32__ZERO_CREDIT",
+  "repository": "moxnixmdj/brain",
+  "verification_branch": "successor/professional-property-truth-12-of-24-20261010-v2",
+  "reconciliation": {
+    "path": "canonical/governance/CAPABILITY_FRONTIER_CURRENTNESS_RECONCILIATION_20261010_V2.json",
+    "git_blob_sha": "b418706276ebc71709f5e1f80e1031ab8f2ecad1"
+  },
+  "exact_blobs": {
+    "registry": "2541554d456921888b519f9c01579ce83a38497d",
+    "registry_verification_v9": "184609b800c01021da2f2d9bc815e8bb205bbb5e",
+    "professional": "c639748637ea30b0e4d698a0aea1052366f5194a",
+    "residual": "6955b25eff17bf8fbd8dd8e8a8d0d063d64d7c63",
+    "live_frontier": "ea1a701008803034998ef24d3a869c9dee626b37",
+    "scheduler": "809fdc4b7eb9c5a70b6638580bdb7292323cd96d",
+    "mission": "581820dbe7a2e006edbd2fc329677ccbe2686378",
+    "bytes_current": "22bb42347a8c823f057dc1dcbe38e1e9b2d3c5b1"
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/r9-registry-integration-v1",
+    "currentness_chain_check": "PASS",
+    "registry_unittest": "2_OF_2_PASS",
+    "binder_existing_evidence_current": true,
+    "binder_structural_errors": [],
+    "binder_rejected_receipt_count": 0,
+    "verified_execution_leaf_count": 12,
+    "open_execution_leaf_count": 0,
+    "verified_semantic_leaf_count": 0,
+    "open_semantic_leaf_count": 12,
+    "verified_leaf_count": 12,
+    "open_leaf_count": 12,
+    "promotion_ready": false,
+    "bytes_frontier": "V32",
+    "bytes_raw_python_source_bytes": 1844477
+  },
+  "proves": [
+    "ALL_12_EXECUTION_LEAF_RECEIPTS_ARE_ADMITTED_BY_THE_EXISTING_CONTENT_ADDRESSED_BINDER",
+    "R5_IS_NO_LONGER_AN_ACTIVE_PROFESSIONAL_EXECUTION_LEAF",
+    "ALL_12_SEMANTIC_LEAVES_REMAIN_OPEN",
+    "LIVE_FRONTIER_SCHEDULER_AND_MISSION_POINTERS_BIND_THE_SAME_PROFESSIONAL_12_OF_24_STATE",
+    "R2_REMAINS_WAKE_GATED_AND_TB_SCIENCE_REMAINS_PARKED",
+    "BYTES_SAFE_PARALLEL_FRONTIER_IS_V32"
+  ],
+  "hard_nonclaims": [
+    "NO_SEMANTIC_LEAF_PROPERTY_TRUTH",
+    "NO_ROOT_CLOSURE_FROM_EXECUTION_LEAF_COMPLETENESS",
+    "NO_GLOBAL_PROFESSIONAL_QUALITY_CLOSURE",
+    "NO_ASSURANCE_PROMOTION",
+    "NO_ACCEPTANCE_OR_TERMINAL_AUTHORITY"
+  ],
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
