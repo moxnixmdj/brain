@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_ESCAPE_PROGRESS_SHARED_GAP_EXECUTABLE_AUDIT_V3_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_BYTE_18_OF_18__GAP_A_TERMINAL_OR_STRICT__CC_R3_OPEN__ZERO_CREDIT",
+  "blobs": {
+    "runtime": "14adf2c1a431285a542340a740e27e764edb1ce5",
+    "tests": "b5861a10ce69bfb2d9be171560cf66f22cd43961",
+    "binding": "a0199c9fa26340effa8a8e2d4bca503a837eafe0",
+    "manifest": "f3a566a982dcd867c583eafd24c6f5dd3baa0530",
+    "predecessor_runtime": "4023b1d9cdd40b1217e1947ea81aee606f3ce52b",
+    "predecessor_binding": "ecab2da83c1f21a2a9723221a74bc94514a04f32"
+  },
+  "carrier": {
+    "type": "SPRITE",
+    "id": "sprite-e24ab09a-a44f-45c6-816a-521154d8c1cc",
+    "workspace": "/home/sprite/escape_audit_v3_verify",
+    "py_compile": true,
+    "tests_passed": 18,
+    "tests_failed": 0
+  },
+  "proved": {
+    "terminal_common_policy_mode_load_bearing": true,
+    "terminal_mode_requires_region_wide_safety_and_scope_authentication": true,
+    "terminal_mode_cannot_fake_discriminator_shrink": true,
+    "strict_mode_cannot_mix_terminal_fields": true,
+    "invalid_mode_fails_closed": true,
+    "gap_b_progress_gate_preserved": true,
+    "cc_r3_proved": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "pass": true
+}
