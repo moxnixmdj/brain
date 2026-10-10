@@ -5,7 +5,7 @@
   "source_main_commit": "b677086527f8c712c22246c4422d81f36a352b44",
   "subject_kind": "DECLARED_SYSTEM",
   "subject_id": "PROFESSIONAL_QUALITY_P1_V10_PARAMETERIZED_SEMANTIC_ADMISSION_SYSTEM_20261011_V9",
-  "subject_sha256": "fed249344ddd91fa1b4140addf4e4b3f57dafbe0aafb4d02c9900f5edd0b3a28",
+  "subject_sha256": "0f6d54242b7e3e1eeb484b1c3b7384a8ce72246ef1e840687be2fe20de69e6b4",
   "subject_hash_rule": "SHA256_OF_RFC8259_JSON_CANONICALIZED_BY_SORTED_KEYS_NO_WHITESPACE_UTF8_OVER_SYSTEM_MATERIAL_OBJECT",
   "system_material": {
     "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_P1_V3_DECLARED_SYSTEM_SUBJECT_MATERIAL_V2",
@@ -36,7 +36,7 @@
       {"path":"canonical/runtime/professional_quality_declared_system_subject_verify_v2.py","git_blob_sha":"f03cde3ff2891bccf1098ad3020a674c1f252045"},
       {"path":"canonical/runtime/professional_quality_p1_router_v9.py","git_blob_sha":"27f0df972a08a2497802865e46bdccdcb1c720ae"},
       {"path":"canonical/runtime/professional_r12_totality_semantic_receipt_v1.py","git_blob_sha":"cfb264b92004c55acf73719cd9c54cec6a609a34"},
-      {"path":"canonical/runtime/professional_quality_semantic_admission_binder_v3.py","git_blob_sha":"327b6d5d1c4b9b17273980aa12055de43d052528"},
+      {"path":"canonical/runtime/professional_quality_semantic_admission_binder_v3.py","git_blob_sha":"6e8e5ac7c4cf4cc38e5e7a6f0ad6a0c80f0683be"},
       {"path":"canonical/governance/PROFESSIONAL_QUALITY_LEAF_BINDING_MANIFEST_20261011_V2.json","git_blob_sha":"8ae72d7d44047ac9dec1b014c34a44f9933f0215"}
     ]
   },
@@ -48,7 +48,7 @@
   "dependency_closure": {
     "inherited_v9_subject":{"path":"canonical/governance/PROFESSIONAL_QUALITY_P1_V9_DECLARED_SYSTEM_SUBJECT_20261010_V8.json","git_blob_sha":"2ff32e4bb78e63635244c86d47fa369d7ba53900","inherited_component_count":27},
     "semantic_admission_authority":{
-      "binder":{"path":"canonical/runtime/professional_quality_semantic_admission_binder_v3.py","git_blob_sha":"327b6d5d1c4b9b17273980aa12055de43d052528"},
+      "binder":{"path":"canonical/runtime/professional_quality_semantic_admission_binder_v3.py","git_blob_sha":"6e8e5ac7c4cf4cc38e5e7a6f0ad6a0c80f0683be"},
       "semantic_contract":{"path":"canonical/governance/PROFESSIONAL_QUALITY_LEAF_BINDING_MANIFEST_20261011_V2.json","git_blob_sha":"8ae72d7d44047ac9dec1b014c34a44f9933f0215"},
       "claim_pack_hardcoded":false,
       "exact_current_claim_required":true,
