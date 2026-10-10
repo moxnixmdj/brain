@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK20_V4_START_CAS_IMPORT_REPAIR_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__ZERO_EXPOSURE_START_CAS_IMPORT_CLOSURE_REPAIR__BEHAVIOR_V4_STRICT_REFINEMENT",
+  "predecessor_result": {
+    "path": "canonical/verification/TB_SCIENCE_RANK20_V2_START_CAS_IMPORT_ABORT_TRUTH_20261010_V1.json",
+    "git_blob_sha": "ef93d358f4eb67aade536e886ae1a6cadb13adb0"
+  },
+  "current_ledger": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V50.json",
+    "git_blob_sha": "2075c175f9d8c97422c57db1318837bfb004e032"
+  },
+  "public_candidate": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2608,
+    "branch": "repair/rank20-cas-import-closure-v1",
+    "head_sha": "2cfe6f863e7e3f686a3a396d5eb0ac5497daf80d",
+    "repaired_start_cas_path": "capsules/tb_science_rank20_20261010_v1/rank20_start_cas_v7.py",
+    "repaired_start_cas_git_blob_sha": "0476919d1619c34168b25df98bcd93f6c64585ce",
+    "import_regression_path": "execution_guard/tests/test_rank20_start_cas_import_closure_v1.py",
+    "import_regression_git_blob_sha": "db16ce3f5440bb3ad8fc1c271d152a08fde1d0e7",
+    "candidate_behavior_path": "execution_guard/TB_SCIENCE_RANK20_EXECUTION_BEHAVIOR_V4.json",
+    "candidate_behavior_git_blob_sha": "e0c43d4771a73679f2ac45fa5164aeab9760d1b6",
+    "refinement_verifier_path": "capsules/tb_science_rank20_20261010_v1/rank20_behavior_v4_refinement_verify_v1.py",
+    "refinement_verifier_git_blob_sha": "58b016e6785538830c0aa90a03d657aaecbe9c4b"
+  },
+  "independent_replay": {
+    "carrier": "sprite-93d373e8-d2f6-4abd-a546-cf9257957d65",
+    "production_shape_pythonpath_unset_import_pass": true,
+    "unittest_count": 1,
+    "unittest_pass_count": 1,
+    "behavior_refinement_pass": true
+  },
+  "verified_properties": [
+    "REPOSITORY_ROOT_ADDED_BEFORE_EXECUTION_GUARD_PACKAGE_IMPORT",
+    "DIRECT_START_CAS_SCRIPT_IMPORTS_WITH_PYTHONPATH_UNSET",
+    "BEHAVIOR_V3_TO_V4_DIFF_IS_START_CAS_BINDING_ONLY",
+    "REPAIRED_START_CAS_BLOB_IS_CONTENT_ADDRESSED",
+    "TASK_UNREAD",
+    "TASK_UNSTARTED",
+    "BENCHMARK_TRIALS_CONSUMED_ZERO",
+    "ACTIVATION_ABSENT"
+  ],
+  "task_read": false,
+  "task_started": false,
+  "benchmark_trials_consumed": 0,
+  "execution_authority": false,
+  "task_read_authority": false,
+  "activation_authority": false,
+  "pass": true,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
