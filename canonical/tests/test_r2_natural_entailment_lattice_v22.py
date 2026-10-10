@@ -226,7 +226,7 @@ class Tests(unittest.TestCase):
             def drift(goal):
                 calls["n"]+=1
                 out=original(goal)
-                if calls["n"]>=3:
+                if calls["n"]>=2:
                     changed=json.loads(json.dumps(out))
                     changed["acceptance_contract"]["required_obligation_ids"]=[
                         "DRIFTED"
