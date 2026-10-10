@@ -50,7 +50,7 @@ class R10SemanticPropertyTruthV1Tests(unittest.TestCase):
 
  def test_catalog_loss_fails_closed(self):
   d=docs()
-  rows=d["catalog"].get("defeaters") or []
+  rows=(d["catalog"].get("defeaters") or d["catalog"].get("attack_classes") or d["catalog"].get("nodes") or d["catalog"].get("challenges") or [])
   target=next(x for x in rows if x.get("id")=="C48_ANALYSIS_CHERRY_PICK")
   target["root_ids"]=[x for x in target["root_ids"] if x!=v.ROOT_ID]
   out=evaluate(d)
