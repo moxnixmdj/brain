@@ -22,7 +22,7 @@ from canonical.runtime.https_source_fragment_projection_authority_v2 import (
 SCHEMA="PROJECT_BRAIN_ARM_MARGIN_CONTEXT_IDENTITY_V1"
 PACK_SCHEMA="PROJECT_BRAIN_ARM_MARGIN_CONTEXT_SOURCE_PACK_V1"
 PACK_PATH="canonical/evidence/ARM_MARGIN_CONTEXT_SOURCE_PACK_V1.json"
-PACK_GIT_BLOB_SHA="a510477a94fae74e0acb24ce726992a9331abe0b"
+PACK_GIT_BLOB_SHA="56e126d2fb74dc24b5c2e5011713480090f8e209"
 SCOPE_ID="FINANCE_ARM_MARGIN_CONTEXT_IDENTITY_V1"
 CONCEPT_ID="FINANCE::ARM_INDEX_MARGIN"
 ROOT=Path(__file__).resolve().parents[2]
@@ -179,14 +179,14 @@ def resolve_occurrence(
         if not isinstance(source,Mapping) or source.get("pass") is not True:
             return _base(
                 "FAIL_CLOSED",
-                reason="PINNED_CFPB_ARM_MARGIN_SOURCE_AUTHORITY_FAILED",
+                reason="PINNED_FED_ARM_MARGIN_SOURCE_AUTHORITY_FAILED",
                 source_result=source,
             )
         ids=set(str(x) for x in source.get("receipt",{}).get("fragment_ids",[]))
-        if "CFPB_ARM_MARGIN_DEFINITION" not in ids:
+        if "FED_ARM_INDEX_PLUS_MARGIN" not in ids:
             return _base(
                 "FAIL_CLOSED",
-                reason="CFPB_ARM_MARGIN_FRAGMENT_NOT_AUTHENTICATED",
+                reason="FED_ARM_MARGIN_FRAGMENT_NOT_AUTHENTICATED",
                 source_result=source,
             )
 
