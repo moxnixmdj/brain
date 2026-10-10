@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_PROFESSIONAL_QUALITY_EXECUTION_POINTER_V1",
   "date": "2026-10-10",
-  "status": "P1_V3_EXECUTION_PROFILE_BOUND__VERIFIED_HARD_DEFECT_PREFLIGHT__TWELVE_SCOPED_CAPABILITIES_INDEPENDENTLY_VERIFIED__ROUTER_V3_CANDIDATE__NO_INDEPENDENT_ROUTER_V3_REPLAY__NOT_LIVE_DEFAULT",
+  "status": "P1_V3_EXECUTION_PROFILE_BOUND__HARD_DEFECT_PREFLIGHT_VERIFIED__TWELVE_SCOPED_CAPABILITIES_VERIFIED__ROUTER_V3_INDEPENDENT_11_OF_11_PASS__DOMAIN_LEAVES_STILL_OPEN__NOT_LIVE_DEFAULT",
   "profile_path": "canonical/governance/PROFESSIONAL_QUALITY_P1_EXECUTION_PROFILE_20261010_V3.json",
   "profile_sha": "f7e89eafbb691c16d1bdf5b8d295a468d5e3bec5",
   "router_path": "canonical/runtime/professional_quality_p1_router_v3.py",
@@ -46,22 +46,31 @@
     "domain_execution_closure": false
   },
   "profile_execution_authority": true,
-  "router_v3_independent_replay": false,
-  "independent_replay": false,
+  "router_v3_independent_replay": true,
+  "independent_replay": true,
   "live_default": false,
   "promotion_authority": false,
   "quality_authority": false,
   "terminal_authority": false,
   "terminal_credit_delta": 0,
-  "next": "INDEPENDENTLY_REPLAY_ROUTER_V3__BIND_DOMAIN_SEMANTIC_AND_EXECUTION_EVIDENCE__PROMOTE_ONLY_AFTER_EXACT_PASS",
+  "next": "BIND_DOMAIN_SEMANTIC_AND_EXECUTION_EVIDENCE__KEEP_24_GLOBAL_LEAVES_FAIL_CLOSED__PROMOTE_LIVE_DEFAULT_ONLY_AFTER_EXACT_LEAF_AND_INTEGRATION_GATES",
   "hard_nonclaims": [
     "NO_PROFESSIONAL_QUALITY_COMPLETENESS_PROOF",
     "NO_GLOBAL_LEAF_OR_ROOT_CLOSURE_FROM_TWELVE_SCOPED_CAPABILITIES",
-    "NO_ROUTER_V3_INDEPENDENT_REPLAY_YET",
     "NO_DOMAIN_SEMANTIC_CLOSURE",
     "NO_DOMAIN_EXECUTION_CLOSURE",
     "NO_LIVE_DEFAULT_PROMOTION",
     "NO_OPUS_5_5_NONINFERIORITY",
     "NO_TERMINAL_AUTHORITY"
-  ]
+  ],
+  "router_v3_independent_verification": {
+    "path": "canonical/verification/PROFESSIONAL_QUALITY_P1_ROUTER_V3_INDEPENDENT_VERIFY_20261010_V1.json",
+    "git_blob_sha": "1e793db5919be8a75e1599ba974bd06afaae6e91",
+    "result": "PYCOMPILE_PASS__11_OF_11_PASS",
+    "exact_router_git_blob_sha": "cdb6716ac6d562d1ab222242d07aeecc5cdfac78",
+    "exact_tests_git_blob_sha": "7fd496e9200d1408d561cadcf40b8f4bf536c898",
+    "actual_clean_and_hard_defect_docx_integration": true,
+    "quality_authority": false,
+    "terminal_credit_delta": 0
+  }
 }
