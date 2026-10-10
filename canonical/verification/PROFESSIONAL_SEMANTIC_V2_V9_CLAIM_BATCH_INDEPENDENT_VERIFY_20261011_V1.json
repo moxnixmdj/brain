@@ -1,0 +1,122 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_SEMANTIC_V2_V9_CLAIM_BATCH_INDEPENDENT_VERIFY_V1",
+  "date": "2026-10-11",
+  "status": "PASS__INDEPENDENT_SPRITE__PYCOMPILE__4_OF_4__12_OF_12_V2_SEMANTIC_CLAIMS_REBOUND_TO_EXACT_V9__12_OF_12_WHOLE_DOMAIN__12_OF_12_SCOPE_COMPLETE__ZERO_PROPERTY_TRUTH",
+  "base_main_commit": "eb90bfb74982e81068b7ed0d79b048656d5d2817",
+  "subject": {
+    "domain_runtime": {
+      "path": "canonical/runtime/professional_quality_whole_leaf_domain_equivalence_v2.py",
+      "git_blob_sha": "8e99e973fbed969abbbb9128bce966681cad9312"
+    },
+    "batch_runtime": {
+      "path": "canonical/runtime/professional_semantic_v2_v9_claim_batch_v1.py",
+      "git_blob_sha": "d65f58b8b4988b96590619d8eb86d3343095e66d"
+    },
+    "tests": {
+      "path": "canonical/tests/test_professional_semantic_v2_v9_claim_batch_v1.py",
+      "git_blob_sha": "0a86e1101f3cae432501a67362be3b74e7b32c02"
+    },
+    "manifest": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_LEAF_BINDING_MANIFEST_20261011_V2.json",
+      "git_blob_sha": "8ae72d7d44047ac9dec1b014c34a44f9933f0215"
+    },
+    "v9_subject_id": "PROFESSIONAL_QUALITY_P1_V9_EXECUTABLE_TOTALITY_SEMANTICS_SYSTEM_20261010_V8",
+    "v9_subject_sha256": "adf7f09e1913526e460b7350c02cd148c2cd14de90eed33fa7fae84d395d9912"
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-professional-hard-defect-verify-20261010",
+    "carrier_id": "sprite-1bbb86ed-1f7c-409f-8397-fadc4de7a62a",
+    "workspace": "/home/sprite/v8-current-replay",
+    "py_compile": "PASS",
+    "tests_run": 4,
+    "tests_passed": 4,
+    "tests_failed": 0
+  },
+  "truth": {
+    "semantic_leaf_count": 12,
+    "claim_count": 12,
+    "unique_claim_id_count": 12,
+    "whole_domain_equivalence_count": 12,
+    "whole_leaf_scope_complete_count": 12,
+    "property_truth_count": 0,
+    "exact_v9_subject_bound": true,
+    "old_v7_claim_authority_transported": false,
+    "new_primitive_required": false
+  },
+  "claims": [
+    {
+      "leaf_id": "PQ::R10_ANALYSIS_DECISION::SEMANTIC",
+      "root_id": "R10_ANALYSIS_DECISION",
+      "claim_id": "446763ca09e25c0eb272d4b9101638a8253ee77c64dbb906e96d6b296bff0c85"
+    },
+    {
+      "leaf_id": "PQ::R11_ADAPTIVE_INTEGRITY_SECURITY::SEMANTIC",
+      "root_id": "R11_ADAPTIVE_INTEGRITY_SECURITY",
+      "claim_id": "faccc180b774d0d15219ce12d0cf9531dfcabca7a492ff3349c62f4d00013364"
+    },
+    {
+      "leaf_id": "PQ::R12_META_COMPOSITION_CLOSURE::SEMANTIC",
+      "root_id": "R12_META_COMPOSITION_CLOSURE",
+      "claim_id": "f3e8ed6d251d51876a0590fb99453d2f72c3bdc24db5e63c2bd0cd1663dc0426"
+    },
+    {
+      "leaf_id": "PQ::R1_TARGET_SPECIFICATION::SEMANTIC",
+      "root_id": "R1_TARGET_SPECIFICATION",
+      "claim_id": "de46e13777ebcc07eb971502dfdacb018e286c7ff87d4386c6e511efc704aafd"
+    },
+    {
+      "leaf_id": "PQ::R2_CANDIDATE_SEARCH::SEMANTIC",
+      "root_id": "R2_CANDIDATE_SEARCH",
+      "claim_id": "f3a59c3cffe20ed256ccfdf8a555ebc161180416cf3879c3739712ce41abc225"
+    },
+    {
+      "leaf_id": "PQ::R3_REALIZATION_OBSERVATION::SEMANTIC",
+      "root_id": "R3_REALIZATION_OBSERVATION",
+      "claim_id": "0e969224b59ab031eeed5472578b2e5c3de767609fea25e00abdb331c47cabd6"
+    },
+    {
+      "leaf_id": "PQ::R4_MEASUREMENT_CONSTRUCT::SEMANTIC",
+      "root_id": "R4_MEASUREMENT_CONSTRUCT",
+      "claim_id": "04a6e58f9a4870d8494cb1bca9972a8f16db9f318e423edf1451a88d4d6d8b3d"
+    },
+    {
+      "leaf_id": "PQ::R5_EVALUATOR_REFERENCE::SEMANTIC",
+      "root_id": "R5_EVALUATOR_REFERENCE",
+      "claim_id": "0fb2b62a6c35f169f73845c10805c9e10a1b078d550b94632ff13e5020e2a714"
+    },
+    {
+      "leaf_id": "PQ::R6_EVIDENCE_GROUNDING_DEPENDENCE::SEMANTIC",
+      "root_id": "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+      "claim_id": "f8e3447b74947b5625b89b91ba8fc42238c87c3bbdf25e006deaf1ac37b82e3e"
+    },
+    {
+      "leaf_id": "PQ::R7_CAUSAL_PRESCRIPTIVE::SEMANTIC",
+      "root_id": "R7_CAUSAL_PRESCRIPTIVE",
+      "claim_id": "e49e47db88ced83064ccec3d990f5ab4b3554a6a8fe9a95ac4c46eee9d404b4e"
+    },
+    {
+      "leaf_id": "PQ::R8_POPULATION_CONTEXT_OPERATOR::SEMANTIC",
+      "root_id": "R8_POPULATION_CONTEXT_OPERATOR",
+      "claim_id": "c9d68d355b1c2ae5dc8a1b8c8f1d8957fa52cdffd656e40aed00912b93bb033c"
+    },
+    {
+      "leaf_id": "PQ::R9_TEMPORAL_DEPLOYMENT::SEMANTIC",
+      "root_id": "R9_TEMPORAL_DEPLOYMENT",
+      "claim_id": "a7b4a42ebc46b1bdff6e188d1d46493b5cea65ad27d5859aef8ab147d0b61021"
+    }
+  ],
+  "exact_next": "PROVE_SHARED_V2_V9_SEMANTIC_PROPERTY_TRUTH_USING_HARDENED_ADMISSION_PLUS_EXISTING_ROOT_SCOPED_SEMANTIC_WITNESSES__DO_NOT_REOPEN_CLAIM_OR_SCOPE_CONSTRUCTION",
+  "hard_nonclaims": [
+    "NO_V2_V9_SEMANTIC_PROPERTY_TRUTH",
+    "NO_V7_TO_V9_PROPERTY_AUTHORITY_TRANSPORT",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "semantic_truth_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
