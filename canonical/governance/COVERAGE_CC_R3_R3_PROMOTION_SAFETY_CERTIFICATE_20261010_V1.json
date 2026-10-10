@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_CC_R3_R3_PROMOTION_SAFETY_CERTIFICATE_V1",
+  "date": "2026-10-10",
+  "status": "CANDIDATE_CC_R3_CERTIFICATE__EXACT_CURRENT_GENERATION_R3_PROMOTION_SAFETY__ZERO_TERMINAL_CREDIT",
+  "root_id": "CC_R3_TERMINAL_CLOSURE_V1",
+  "claim_id": "e1c519109c4b2c46a9225686fc2c5c5490564d1cc62d5c6ff3c6c436bfca4314",
+  "active_claim": {
+    "path": "canonical/governance/COVERAGE_COMPLETENESS_FROZEN_CLAIM_R3_PROMOTION_SAFETY_20261010_V1.json",
+    "git_blob_sha": "ace6ad8b44c3b571746f3f229ca76d68a88c3dab"
+  },
+  "bounded_surface": {
+    "canonical/runtime/autonomous_verified_self_improvement_v1.py": "665190356fca7e7c599db3abce0dfc800df9e0ff",
+    "canonical/runtime/r3_improvement_queue_driver_v1.py": "870cd665fffb5398e452b4ede81e54adbe2d9f0d",
+    "canonical/runtime/r3_independent_learning_verifier_v1.py": "b38b5315ef79a215976144866514cb2a95076c9e",
+    "canonical/runtime/r3_distinguishing_evidence_acquisition_v1.py": "81abd20f37b3a22bd6a7b97e3a71d6a1e81c6f76",
+    "canonical/runtime/r3_retained_distinguishing_evidence_provider_v1.py": "c713276a1dafa33b233982a4257167757a348a69",
+    "canonical/runtime/r3_bound_success_adapter_v1.py": "8c73e1ab3486df9ed56fff778ec35401720eb1e7",
+    "canonical/runtime/r3_raw_success_adapter_v1.py": "80a2599a31501db18754e913b763254966b4923e",
+    "canonical/runtime/r3_checkpoint_reconstruction_success_adapter_v1.py": "e1df1252ffe356426a7840e5b6a8334d1a2e8a37",
+    "canonical/runtime/r3_structural_bound_success_adapter_v1.py": "1329f9c8f3d854db3b1dbf1373fecd20cbf8aba9",
+    "canonical/runtime/r3_structural_bound_rule_acquisition_v1.py": "a6b6ab5b008d0769a4e20cc66f791f5261267765"
+  },
+  "semantic_invariants": [
+    "NO_IN_SCOPE_DIRECT_PROMOTION_VERIFICATION_OR_TERMINAL_AUTHORITY_TRUE_ASSIGNMENT",
+    "ONLY_AUTONOMOUS_VERIFIED_SELF_IMPROVEMENT_WRITES_DURABLE_EPISODE_SKILL_OR_PARETO_STORES",
+    "EPISODE_PERSISTENCE_REQUIRES_REAUTHENTICATE_EPISODE_RECORD_PASS",
+    "SKILL_PERSISTENCE_AND_PARETO_ADMISSION_REQUIRE_REAUTHENTICATE_SKILL_RECORD_PASS_AND_VERIFIED_REUSE_AUTHORIZED_SKILL",
+    "IMPROVEMENT_QUEUE_SKILL_PATH_REQUIRES_AUTHENTICATE_SKILL_VERIFICATION_BEFORE_CENTRAL_INTEGRATION",
+    "STRUCTURAL_RULE_ACQUISITION_RETAINS_CANDIDATE_ONLY_AND_ZERO_VERIFICATION_PROMOTION_TERMINAL_AUTHORITY",
+    "FAILURE_OR_MISSING_EVIDENCE_PATHS_DO_NOT_WRITE_DURABLE_PROMOTED_EPISODE_SKILL_OR_PARETO_STATE"
+  ],
+  "theorem": {
+    "statement": "WITHIN_THE_EXACT_TEN_FILE_ACTIVE_CLAIM_SURFACE__ALL_DURABLE_LEARNED_EPISODE_AND_REUSABLE_SKILL_PROMOTION_EFFECTS_FLOW_THROUGH_CONTENT_AUTHENTICATION_OR_REAUTHENTICATION_GATES__AND_CANDIDATE_ACQUISITION_PATHS_HAVE_NO_DIRECT_PROMOTION_OR_TERMINAL_AUTHORITY__THEREFORE_NO_UNVERIFIED_CANDIDATE_BECOMES_PROMOTED_LEARNED_OR_TERMINAL_TRUTH_WITHIN_SCOPE",
+    "proof_mode": "KERNEL_CHECKED",
+    "future_bytes_covered": false,
+    "arbitrary_task_success_claimed": false,
+    "global_mission_completion_claimed": false
+  },
+  "accounting": {
+    "fresh_reality_units_consumed": 0,
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "promotion_authority": false,
+  "terminal_authority": false
+}
