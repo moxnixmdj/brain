@@ -18,6 +18,12 @@ def _module_file(root: Path, module: str) -> Path | None:
     if init.exists(): return init
     return None
 
+def _namespace_package(root: Path, module: str) -> Path | None:
+    p=root.joinpath(*module.split("."))
+    if p.is_dir() and _module_file(root,module) is None:
+        return p
+    return None
+
 def _canonical_imports(source: str, root: Path | None = None) -> tuple[set[str], set[str]]:
     tree=ast.parse(source)
     owned=set(); external=set()
@@ -25,7 +31,12 @@ def _canonical_imports(source: str, root: Path | None = None) -> tuple[set[str],
         if isinstance(node,ast.Import):
             for a in node.names:
                 name=a.name
-                (owned if name=="canonical" or name.startswith("canonical.") else external).add(name)
+                if name=="canonical" or name.startswith("canonical."):
+                    if root is not None and _namespace_package(root,name) is not None:
+                        continue
+                    owned.add(name)
+                else:
+                    external.add(name)
         elif isinstance(node,ast.ImportFrom):
             module=node.module or ""
             if module=="canonical" or module.startswith("canonical."):
@@ -36,6 +47,8 @@ def _canonical_imports(source: str, root: Path | None = None) -> tuple[set[str],
                         child=module+"."+a.name
                         if _module_file(root,child) is not None:
                             owned.add(child)
+                            resolved_child=True
+                        elif _namespace_package(root,child) is not None:
                             resolved_child=True
                 if not resolved_child:
                     if module.endswith(".runtime"):
