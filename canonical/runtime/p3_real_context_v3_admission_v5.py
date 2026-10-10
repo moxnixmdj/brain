@@ -17,6 +17,7 @@ from canonical.runtime.p3_mechanically_closed_common_policy_cell_v1 import evalu
 from canonical.runtime.p3_explicit_weighted_salience_cell_v1 import evaluate as evaluate_weighted_cell
 from canonical.runtime.p3_required_claim_grounded_realization_cell_v2 import evaluate as evaluate_required_realization
 from canonical.runtime.p3_real_context_v3_admission_v2 import evaluate as evaluate_v2
+from canonical.runtime.p3_declared_contract_surface_guard_v1 import validate_outer
 
 SCHEMA="PROJECT_BRAIN_P3_REAL_CONTEXT_V3_ADMISSION_V5"
 
@@ -56,29 +57,21 @@ def _required_boundary_ok(r:Mapping[str,Any])->bool:
     )
 
 def evaluate(payload:Mapping[str,Any])->dict[str,Any]:
-    if not isinstance(payload,Mapping):return _fail("PAYLOAD_MAPPING_REQUIRED")
+    contract_failure=validate_outer(payload)
+    if contract_failure is not None:return _fail(contract_failure)
     context_id=payload.get("context_id")
     if not isinstance(context_id,str) or not context_id.strip():return _fail("CONTEXT_ID_REQUIRED")
     v3_input=payload.get("v3_input")
     if not isinstance(v3_input,Mapping):return _fail("V3_INPUT_REQUIRED")
 
-    closed=evaluate_closed_cell({"v3_input":v3_input})
-    if closed.get("pass") is True:
-        if not _legacy_boundary_ok(closed):return _fail("CLOSED_CELL_AUTHORITY_BOUNDARY_INVALID")
-        return {
-          "schema":SCHEMA,"pass":True,
-          "status":"PASS__P3_REAL_CONTEXT_STRUCTURAL_COMMON_POLICY_FAST_PATH",
-          "route":"MECHANICALLY_CLOSED_COMMON_POLICY_CELL_V1","context_id":context_id,
-          "v3_admission_authorized":True,"p3_contract_cell_authorized":True,"top_law_eligible":True,
-          "source_authorization_verified":False,"policy_adequacy_authority":False,
-          "db_admission_authority":False,"u_subtraction_authority":False,
-          "terminal_authority":False,"terminal_credit_delta":0,"route_receipt":closed,
-        }
-
-    weights=payload.get("objective_weights")
     weighted=None
-    if isinstance(weights,Mapping):
+    if "objective_weights" in payload:
+        weights=payload["objective_weights"]
+        if not isinstance(weights,Mapping):return _fail("OBJECTIVE_WEIGHTS_INVALID")
         weighted=evaluate_weighted_cell({"v3_input":v3_input,"objective_weights":weights})
+        if weighted.get("pass") is not True:
+            return _fail("OBJECTIVE_WEIGHTS_UNSATISFIED",
+                         weighted_reason=weighted.get("reason") or weighted.get("status"))
         if weighted.get("pass") is True:
             if not _legacy_boundary_ok(weighted):return _fail("WEIGHTED_CELL_AUTHORITY_BOUNDARY_INVALID")
             return {
@@ -93,6 +86,19 @@ def evaluate(payload:Mapping[str,Any])->dict[str,Any]:
               "db_admission_authority":False,"u_subtraction_authority":False,
               "terminal_authority":False,"terminal_credit_delta":0,"route_receipt":weighted,
             }
+
+    closed=evaluate_closed_cell({"v3_input":v3_input})
+    if closed.get("pass") is True:
+        if not _legacy_boundary_ok(closed):return _fail("CLOSED_CELL_AUTHORITY_BOUNDARY_INVALID")
+        return {
+          "schema":SCHEMA,"pass":True,
+          "status":"PASS__P3_REAL_CONTEXT_STRUCTURAL_COMMON_POLICY_FAST_PATH",
+          "route":"MECHANICALLY_CLOSED_COMMON_POLICY_CELL_V1","context_id":context_id,
+          "v3_admission_authorized":True,"p3_contract_cell_authorized":True,"top_law_eligible":True,
+          "source_authorization_verified":False,"policy_adequacy_authority":False,
+          "db_admission_authority":False,"u_subtraction_authority":False,
+          "terminal_authority":False,"terminal_credit_delta":0,"route_receipt":closed,
+        }
 
     required=evaluate_required_realization({"v3_input":v3_input})
     if required.get("pass") is True:
