@@ -320,10 +320,10 @@
     "cases": 6
   },
   "bytes_minimization_control": {
-    "status": "ACTIVE__CANONICAL_AST_REPRESENTATION_FRONTIER__ZERO_CAPABILITY_CREDIT_FROM_RESEARCH_CHECKPOINT_ALONE",
+    "status": "ACTIVE__PROFILE_PRUNED_REPAIRED_FRONTIER__ZERO_CAPABILITY_CREDIT_FROM_RESEARCH_CHECKPOINT_ALONE",
     "law": "canonical/laws/BYTES_RESOURCE_BOUNDED_MINIMUM_MECHANISM_LAW_V1.md",
     "white_box_law": "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V1.md",
-    "current_research_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_CANONICAL_AST_SUCCESSOR_EXECUTION_20261010_V1.json",
+    "current_research_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_PROFILE_PRUNED_REPAIRED_SUCCESSOR_EXECUTION_20261010_V1.json",
     "objective": "MINIMUM_RESOURCE_FEASIBLE_EXECUTABLE_DESCRIPTION_CONDITIONAL_ON_ALREADY_OWNED_BRAIN_SUBSTRATE",
     "accounting": [
       "B_EXEC",
@@ -339,53 +339,57 @@
       "LARGER_MODULE_ONLY_IF_REQUIRED"
     ],
     "global_rule": "OPTIMIZE_JOINT_DEPENDENCY_CLOSED_MECHANISM_COVER__COUNT_SHARED_SUBSTRATE_ONCE",
-    "current_exact_symbolic_bottleneck": "POLYS__SUCCESSOR_TRACE_RAW_414035__FACTOR__COEFFICIENT__EXACT_ROOTS_DEGREE_LE_4",
-    "truth_boundary": "FRESH_PHYSICAL_BYTE_FRONTIER_MEASURED__CANONICAL_AST_REPRESENTATION__NO_OPUS_FAMILY_PROMOTION_CREDIT__NO_UNIVERSAL_MINIMUM_CLAIM",
+    "current_exact_symbolic_bottleneck": "CORE__SUCCESSOR_TRACE_RAW_546379__COMPLETE_BOUNDED_EXACT_SYMBOLIC_ROUTE",
+    "truth_boundary": "FRESH_PHYSICAL_BYTE_FRONTIER_MEASURED__FINITE_PROFILE_NONUSE_NOT_UNIVERSAL_PROOF__NO_OPUS_FAMILY_PROMOTION_CREDIT__NO_UNIVERSAL_MINIMUM_CLAIM",
     "current_fresh_exact_symbolic_candidate": {
-      "package_raw_python_source_bytes": 3328632,
-      "B_exec_raw_python_source_bytes": 3331392,
+      "package_raw_python_source_bytes": 2251793,
+      "B_exec_raw_python_source_bytes": 2254553,
       "B_verify_semantic_digest_raw_bytes": 1358,
-      "persistent_xz_comparable_bytes": 519732,
-      "qualification": "5520/5520",
-      "stock_donor_positive_control": "5520/5520",
-      "clean_room_execution": "5520/5520",
-      "archive_replay": "5520/5520",
-      "manifest_sha256": "89b2b2d8cfed14ef37442a87ff95a861362f50bf3a2e8210d2c4a6abb0891a14",
-      "comparable_archive_sha256": "b06c800a7055026efaa415bf3b2321f2e0227b4aa832d029ec30d6f19d80eb44",
+      "persistent_xz_comparable_bytes": 336148,
+      "qualification": "6440/6440",
+      "stock_donor_positive_control": "6440/6440",
+      "clean_room_execution": "6440/6440",
+      "archive_replay": "6440/6440",
+      "manifest_sha256": "9dc4ad75c82f466c197b070d99935828bb6c62bf278fa864d57e3c420e2c14ed",
+      "comparable_archive_sha256": "38783665686a5bb24e0484a00f6e651ecd492d3054663b02d874770dbef99eac",
       "promotion_credit": 0
     },
     "latest_structural_cut": {
-      "id": "CANONICAL_AST_SERIALIZATION_WITH_DOCSTRING_OBSOLESCENCE_V13",
-      "files_reserialized": 277,
-      "docstrings_removed": 3566,
-      "removed_raw_bytes": 2462103,
-      "causal_result": "EXECUTABLE_AST_PRESERVED__COMMENTS_FORMATTING_AND_DOCSTRINGS_REMOVED__FRESH_NEXT16_PASS"
+      "id": "SPENT_PROFILE_BODY_PRUNING_V16_PLUS_QUARTIC_REPAIR_V17",
+      "stubbed_function_bodies": 4865,
+      "module_restore_exemptions": 41,
+      "net_raw_reduction_vs_v13_bytes": 1076839,
+      "fresh_counterexample_repairs": [
+        "Domain.unify_with_symbols",
+        "DMP.sub",
+        "DMP_Python._sub"
+      ],
+      "causal_result": "FRESH_NEXT20_6440_OF_6440_AFTER_NEXT19_FALSIFICATION_AND_MINIMAL_REPAIR"
     },
     "previous_fresh_frontier": {
-      "raw_python_source_bytes": 5790735,
-      "persistent_xz_comparable_bytes": 1028560,
-      "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_SHARED_FAILCLOSED_SUCCESSOR_EXECUTION_20261010_V1.json"
+      "raw_python_source_bytes": 3328632,
+      "persistent_xz_comparable_bytes": 519732,
+      "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_CANONICAL_AST_SUCCESSOR_EXECUTION_20261010_V1.json"
     },
     "next_frozen_qualification": {
-      "id": "QUAL_SUCCESSOR_NEXT17_20261010_V1",
-      "cases": 5750,
-      "corpus_sha256": "803f0b09c230add603162e3fe30990076ce94653c1c30bb688dc1a8124e0358f",
+      "id": "QUAL_SUCCESSOR_NEXT21_20261010_V1",
+      "cases": 6670,
+      "corpus_sha256": "91f7409c6f377db62c6ee1c2e3ebd858ce34145df58b8c74f62692912fc6fa71",
       "spent": false
     },
-    "current_falsification_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_NEXT10_EXPRESSIONDOMAIN_FALSIFICATION_20261010_V1.json",
+    "current_falsification_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_PROFILE_PRUNE_NEXT19_FALSIFICATION_20261010_V1.json",
     "latest_coverage_repair": {
-      "id": "BOUNDED_MPMATH_ATAN_REPAIR",
-      "trigger": "QUAL_SUCCESSOR_NEXT3 case 868 degree-4 roots",
-      "source_byte_cost": 86,
+      "id": "QUARTIC_ROOT_DECOMPOSITION_REPAIR_V17",
+      "source_byte_cost": 265,
       "new_dependency_files": 0,
-      "result": "NEXT3 spent replay 2530/2530; final fresh NEXT5 2990/2990"
+      "result": "NEXT19_SPENT_6210_OF_6210__FRESH_NEXT20_6440_OF_6440"
     },
     "latest_falsified_cut": {
-      "id": "MATRIX_INVERSE_EXPRESSIONDOMAIN_LAZY_DELETION",
-      "attempted_candidate_raw_bytes": 6298675,
-      "result": "REJECTED__NEXT10_4136_OF_4140",
-      "root_cause": "EXPRESSIONDOMAIN_REQUIRED_BY_FOUR_IN_SCOPE_QUARTIC_ROOT_CASES",
-      "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_NEXT10_EXPRESSIONDOMAIN_FALSIFICATION_20261010_V1.json"
+      "id": "FINITE_SPENT_PROFILE_BODY_PRUNING_V16",
+      "attempted_candidate_raw_bytes": 2251528,
+      "result": "REJECTED__NEXT19_6209_OF_6210",
+      "root_cause": "VALID_QUARTIC_ROOT_DECOMPOSITION_REQUIRES_DOMAIN_UNIFY_WITH_SYMBOLS_AND_DMP_SUBTRACTION",
+      "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_PROFILE_PRUNE_NEXT19_FALSIFICATION_20261010_V1.json"
     }
   }
 }
