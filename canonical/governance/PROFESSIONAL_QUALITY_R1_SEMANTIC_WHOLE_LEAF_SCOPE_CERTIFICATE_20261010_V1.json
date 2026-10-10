@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_WHOLE_LEAF_SCOPE_CERTIFICATE_V2",
+  "date": "2026-10-10",
+  "status": "CANDIDATE__R1_SEMANTIC_EXACT_WHOLE_DOMAIN_SCOPE_COVER__ZERO_PROPERTY_CREDIT",
+  "leaf_id": "PQ::R1_TARGET_SPECIFICATION::SEMANTIC",
+  "claim_id": "3e651d35ae8ab99189e6b768866d9a02f8135dd1a1638dbb2d0332d14e6de93e",
+  "claim_scope_git_blob_sha": "5b027682b211f879d9b0f06cfa041b158634743d",
+  "scope_certificate": {
+    "id": "R1_SEMANTIC_WHOLE_DOMAIN_SCOPE_V1",
+    "target_scope_id": "scope://professional-quality/whole-leaf/3e651d35ae8ab99189e6b768866d9a02f8135dd1a1638dbb2d0332d14e6de93e",
+    "claim_id": "3e651d35ae8ab99189e6b768866d9a02f8135dd1a1638dbb2d0332d14e6de93e",
+    "basis": "UNIVERSAL_FORMAL_SCOPE_PROOF",
+    "verified": true,
+    "independent": true,
+    "scope_relation": "EXACT",
+    "formal_completeness": true,
+    "all_admissible_target_inputs_proved": true,
+    "premise_set_id": "behavior-contract-domain:0076c47349177f5331e2100501f98991f489b47b7ef3fecac2983fb5c0cb3f27"
+  },
+  "evidence_refs": [
+    {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_R1_SEMANTIC_WHOLE_LEAF_CLAIM_SCOPE_20261010_V1.json",
+      "git_blob_sha": "5b027682b211f879d9b0f06cfa041b158634743d"
+    },
+    {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R1_SEMANTIC_WHOLE_LEAF_CLAIM_SCOPE_VERIFY_20261010_V1.json",
+      "git_blob_sha": "1d6efe21c71c08f3ba2a25184a597210e00e83ee"
+    },
+    {
+      "path": "canonical/runtime/professional_quality_whole_leaf_behavior_contract_domain_v1.py",
+      "git_blob_sha": "2a2ad9697fba7f92d67492ba49c7fa637afeaaff"
+    }
+  ],
+  "semantic_truth_authority": false,
+  "execution_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "hard_nonclaims": [
+    "NO_R1_SEMANTIC_PROPERTY_TRUTH",
+    "NO_DOMAIN_SEMANTIC_CLOSURE",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ]
+}
