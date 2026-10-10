@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_PROPERTY_TRUTH_3_OF_24_PROJECTION_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_SECOND_SPRITE__16_OF_16_AUTHORITY_COHERENCE_CHECKS__R1_R7_R10_EXECUTION_PROPERTY_TRUTH_3_OF_24__ZERO_GLOBAL_CREDIT",
+  "exact_blobs": {
+    "current_professional": "b6675e0e9e2d2b1598ae31712c0a93faed094307",
+    "current_assurance": "6dc6807b7e9d9e25de4395a2019639f90b6a2d22",
+    "current_residual": "6a384a1d7aa5ed4f35478b22de906d91e65a838d",
+    "current_frontier": "a11a2dded2e479e96f9439ee99b663de309c6e9a",
+    "current_scheduler": "08707e0ae0028cb3eaa2a6ae738a3bf32224295c",
+    "current_mission": "69966a96c9f6cff821001f6b71a3a0898cdecced",
+    "leaf_registry": "676ac145b1723003b36ca3e0aa31e9498149a035",
+    "r1_leaf_receipt": "6a10585f2976a603097c2f8602c2db313a6d4572",
+    "r1_property_verification": "c7831ee5157fcddc48c44034bca19a57d9ce314b"
+  },
+  "independent_replay": {
+    "carrier": "brain-professional-hard-defect-verify-20261010",
+    "checks_run": 16,
+    "checks_passed": 16,
+    "checks_failed": 0,
+    "verified_leaf_ids": [
+      "PQ::R1_TARGET_SPECIFICATION::EXECUTION",
+      "PQ::R7_CAUSAL_PRESCRIPTIVE::EXECUTION",
+      "PQ::R10_ANALYSIS_DECISION::EXECUTION"
+    ],
+    "verified_leaf_count": 3,
+    "total_leaf_count": 24,
+    "open_execution_leaf_count": 9,
+    "open_semantic_leaf_count": 12
+  },
+  "proved": [
+    "ALL_SIX_LIVE_AUTHORITY_VIEWS_AGREE_ON_PROPERTY_TRUTH_3_OF_24",
+    "ALL_DOWNSTREAM_OBSERVED_SHA_BINDINGS_MATCH_EXACT_UPSTREAM_GIT_BLOBS",
+    "LEAF_EVIDENCE_REGISTRY_BINDS_EXACT_R1_RECEIPT",
+    "R1_R7_R10_ARE_THE_ONLY_VERIFIED_EXECUTION_LEAVES",
+    "NINE_EXECUTION_AND_TWELVE_SEMANTIC_LEAVES_REMAIN_OPEN"
+  ],
+  "hard_nonclaims": [
+    "NO_SEMANTIC_LEAF_CLOSURE",
+    "NO_R1_R7_R10_ROOT_CLOSURE",
+    "NO_GLOBAL_PROFESSIONAL_QUALITY_CLOSURE",
+    "NO_FULL_CURRENT_MAIN_REGRESSION_CLAIM",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
