@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_ASSURANCE_CLOSURE_COMPILER_POINTER_V1",
   "date": "2026-10-09",
-  "status": "CURRENT_UVCK_V2_CANDIDATE__FINAL_V6_PROFESSIONAL_SUBJECT_FROZEN__R1_FINAL_V6_ROOT_BINDING_VERIFIED__1_OF_12_CURRENT_ROOT_SUBJECT_BINDINGS__R2_NEXT__DOMAIN_SEMANTIC_AND_EXECUTION_CLOSURE_STILL_OPEN__NOT_LIVE_DEFAULT",
+  "status": "CURRENT_UVCK_V2_CANDIDATE__PROFESSIONAL_V7_PROOF_BOUND_EXECUTION_SUBJECT_FROZEN__0_OF_12_CURRENT_ROOT_SUBJECT_BINDINGS_AFTER_MATERIAL_REFRESH__R1_REBIND_FIRST__DOMAIN_SEMANTIC_AND_EXECUTION_CLOSURE_STILL_OPEN__NOT_LIVE_DEFAULT",
   "governance": {
     "path": "canonical/governance/UVCK_V2_ASSURANCE_CLOSURE_COMPILER_20261009_V1.json",
     "git_blob_sha": "b7197be29b49c55c81e1a18572cd22020510fa5e"
@@ -234,38 +234,42 @@
   },
   "professional_quality_same_subject_frontier": {
     "current_professional_execution_path": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
-    "current_professional_execution_git_blob_sha": "8881190942e60051fa3588f31a0d996ad53636b3",
+    "current_professional_execution_git_blob_sha": "ca97efce3df3ba8124dae6f2715f36d771ba7857",
     "declared_system_subject": {
-      "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V6_DECLARED_SYSTEM_SUBJECT_20261010_V5.json",
-      "git_blob_sha": "994a6a6aef44b6bb33161f7179d1983a1b50b633",
-      "subject_id": "PROFESSIONAL_QUALITY_P1_V6_DEPENDENCY_CLOSED_AUTHENTICATED_TARGET_SYSTEM_20261010_V5",
-      "subject_sha256": "353978ba4866d1e35794390968a14500ee1d8a4f0bddfb8f081e9a1a71ba468d",
-      "component_count": 20,
-      "dependency_closure_complete": true
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V7_DECLARED_SYSTEM_SUBJECT_20261010_V6.json",
+      "git_blob_sha": "1d598bc8757017ceb34928d0df9f5fce859ef868",
+      "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+      "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+      "component_count": 22,
+      "dependency_closure_complete": true,
+      "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_DECLARED_SYSTEM_SUBJECT_V7_VERIFY_20261010_V1.json",
+      "verification_git_blob_sha": "9bca985bfcef8f5cc6d62b42a51ccc72a6abfd2c"
     },
     "root_binding_worklist": {
-      "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V6_SAME_SUBJECT_ROOT_BINDING_WORKLIST_20261010_V5.json",
-      "git_blob_sha": "1f7fd6744c9c383e0c47827ab9f80c3c2aa3f40c",
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V7_SAME_SUBJECT_ROOT_BINDING_WORKLIST_20261010_V6.json",
+      "git_blob_sha": "1a7238420d12b043026a5367769eb610d9b08495",
       "required_root_count": 12,
-      "verified_root_subject_binding_count": 1,
+      "verified_root_subject_binding_count": 0,
       "composition_admissible": false
     },
-    "current_verified_root_bindings": {
-      "R1_TARGET_SPECIFICATION": {
-        "binding_path": "canonical/governance/PROFESSIONAL_QUALITY_R1_ROOT_SUBJECT_BINDING_20261010_V3.json",
-        "binding_git_blob_sha": "25f02a605da31c8f9d2c6208b82597e85f00be87",
-        "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_R1_FINAL_V6_ROOT_SUBJECT_BINDING_VERIFY_20261010_V1.json",
-        "verification_git_blob_sha": "7887c58604d822b42a020ebada137f16bbf13b98"
-      }
+    "v7_profile_step_provenance": {
+      "router_git_blob_sha": "765b5994c2fcb5eb669b5fd0d989cc79c1609908",
+      "kernel_git_blob_sha": "27f3c137dae7f00925083a0824d008c2b4d10f0a",
+      "verification_git_blob_sha": "b7a9df36780513ad73fd14c6a2756c8474d8434d",
+      "caller_step_results_allowed": false,
+      "proof_bound_remaining_step_count": 7
     },
-    "status": "FINAL_V6_SUBJECT_FROZEN__R1_VERIFIED__1_OF_12_CURRENT_BINDINGS__R2_NEXT",
-    "assurance_effect": "ONLY_R1_CURRENT_ROOT_SUBJECT_BINDING_CREDIT_EXISTS_FOR_FINAL_V6__R2_R12_REMAIN_OPEN"
+    "current_verified_root_bindings": {},
+    "status": "V7_PROOF_BOUND_EXECUTION_SUBJECT_FROZEN__0_OF_12_CURRENT_BINDINGS__R1_REBIND_FIRST",
+    "assurance_effect": "V6_ROOT_BINDING_CREDIT_REVOKED_BY_MATERIAL_V7_SUBJECT_REFRESH__NO_CURRENT_ROOT_BINDING_UNTIL_REVERIFIED"
   },
   "hard_nonclaims": [
     "NO_PROFESSIONAL_SAME_SUBJECT_COMPOSITION_PASS",
     "NO_PROFESSIONAL_GLOBAL_LEAF_OR_ROOT_CLOSURE_FROM_DECLARED_SYSTEM_IDENTITY",
     "NO_PROFESSIONAL_GLOBAL_ROOT_CLOSURE",
-    "NO_R2_THROUGH_R12_CURRENT_PROFESSIONAL_ROOT_SUBJECT_BINDINGS_YET"
+    "NO_R2_THROUGH_R12_CURRENT_PROFESSIONAL_ROOT_SUBJECT_BINDINGS_YET",
+    "NO_CURRENT_PROFESSIONAL_ROOT_SUBJECT_BINDING_AFTER_V7_REFRESH",
+    "NO_CLAIM_REAL_TASK_STEP_EXECUTION_WITHOUT_PROOF_BOUND_RECEIPTS"
   ],
   "professional_quality_r1_target_semantic": {
     "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_R1_SEMANTIC_SCOPED_INTEGRATION_VERIFY_20261010_V1.json",
