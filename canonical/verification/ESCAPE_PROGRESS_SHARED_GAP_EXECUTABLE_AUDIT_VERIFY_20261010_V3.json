@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ESCAPE_PROGRESS_SHARED_GAP_EXECUTABLE_AUDIT_VERIFY_20261010_V3",
   "date": "2026-10-10",
-  "status": "PASS__CURRENT_V2_10_3_PARTITION__FRESH_ISOLATED_EXACT_BYTE_10_OF_10__CC_R3_OPEN__ZERO_CREDIT",
+  "status": "PASS__CURRENT_V2_10_3_PARTITION__REACHED_STATE_V2_BINDING__FRESH_ISOLATED_EXACT_BYTE_10_OF_10__CC_R3_OPEN__ZERO_CREDIT",
   "exact_blobs": {
     "runtime": {
       "path": "canonical/runtime/escape_progress_shared_gap_audit_v2.py",
@@ -17,14 +17,15 @@
     },
     "binding": {
       "path": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V3.json",
-      "git_blob_sha": "f38058d2343163075296ff3f2140225c181c1de8"
+      "git_blob_sha": "ecab2da83c1f21a2a9723221a74bc94514a04f32"
     }
   },
   "isolated_carrier": {
     "type": "SPRITE",
     "name": "brain-escape-audit-verify-20261010-v1",
     "id": "sprite-e24ab09a-a44f-45c6-816a-521154d8c1cc",
-    "workspace": "/home/sprite/escape_audit_v2_verify"
+    "workspace": "/home/sprite/escape_audit_v2_verify",
+    "current_binding_replay": "PASS"
   },
   "tests": {
     "total": 10,
