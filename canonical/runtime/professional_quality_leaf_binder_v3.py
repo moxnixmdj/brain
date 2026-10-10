@@ -98,23 +98,12 @@ def harden_base_output(
         else:
             row["semantic_property_truth_admission"] = verdict
 
-    manifest_path = base.MANIFEST
-    try:
-        manifest = base._load(manifest_path)
-    except Exception:
-        manifest = {}
-    semantic_leaf_ids: set[str] = set()
-    execution_leaf_ids: set[str] = set()
-    for root in manifest.get("roots") or []:
-        if not isinstance(root, Mapping):
-            continue
-        for kind, field, sink in (
-            ("SEMANTIC", "semantic_leaf", semantic_leaf_ids),
-            ("EXECUTION", "execution_leaf", execution_leaf_ids),
-        ):
-            leaf = root.get(field)
-            if isinstance(leaf, Mapping) and isinstance(leaf.get("id"), str):
-                sink.add(leaf["id"])
+    semantic_leaf_ids = set(out.get("verified_semantic_leaf_ids") or []) | set(
+        out.get("open_semantic_leaf_ids") or []
+    )
+    execution_leaf_ids = set(out.get("verified_execution_leaf_ids") or []) | set(
+        out.get("open_execution_leaf_ids") or []
+    )
 
     admitted_by_leaf: dict[str, bool] = {
         leaf: False for leaf in semantic_leaf_ids | execution_leaf_ids
