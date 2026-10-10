@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_R2_CANDIDATE_UNIVERSE_V7_SPRITE_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__CLEAN_SPRITE__PYCOMPILE_4_OF_4__CANDIDATE_UNIVERSE_9_OF_9__V7_INTEGRATION_13_OF_13__ZERO_QUALITY_OR_TERMINAL_CREDIT",
+  "branch": "successor/pq-r2-candidate-universe-v1",
+  "exact_blobs": {
+    "canonical/runtime/professional_candidate_selection_universe_v1.py": "7a1924200a1d5ee6c54e3e57bd3afe92fb578694",
+    "canonical/tests/test_professional_candidate_selection_universe_v1.py": "5324b0c5da3e0a2ee24ac6f4c555876368c285c2",
+    "canonical/runtime/professional_quality_p1_router_v7.py": "27489de3061a3e46d38e5ce4ed365f5f6d5a3391",
+    "canonical/tests/test_professional_quality_p1_router_v7.py": "26104ae26133cf3ced92cb36cda31b8c04e66c78",
+    "canonical/runtime/professional_step_binding_authority_v1.py": "27f3c137dae7f00925083a0824d008c2b4d10f0a",
+    "canonical/tests/test_professional_step_binding_authority_v1.py": "11eec64dc6be27e304c6507461d4fa3c91af6122"
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "sprite": "pq-r2-universe-verify",
+    "sprite_id": "sprite-dc8c662b-31e8-4ef4-842d-33ac406e31b4",
+    "workspace": "/home/sprite/pq-r2-universe",
+    "py_compile": {
+      "passed": 4,
+      "failed": 0
+    },
+    "candidate_universe_tests": {
+      "passed": 9,
+      "failed": 0
+    },
+    "v7_integration_tests": {
+      "passed": 13,
+      "failed": 0
+    }
+  },
+  "proved": [
+    "FINITE_SELECTION_UNIVERSE_IS_EXACTLY_FROZEN_MANIFEST_MEMBERS",
+    "INCUMBENT_IS_PRESERVED_AS_EXACTLY_ONE_MANIFEST_MEMBER",
+    "GENERATED_CANDIDATES_REQUIRE_CONTENT_DIGEST_AND_GENERATOR_TRACE_DIGEST",
+    "FORGED_PASS_OBJECTS_ARE_REVALIDATED_AND_NOT_TRUSTED",
+    "DOWNSTREAM_SELECTION_OUTSIDE_THE_FROZEN_MANIFEST_FAILS_CLOSED",
+    "V7_FORBIDS_CALLER_SUPPLIED_PROFILE_STEP_RESULTS",
+    "V7_REQUIRES_EXACT_SUBJECT_AND_RUN_CONTEXT_BOUND_STEP_RECEIPTS",
+    "V7_REVALIDATES_THE_R2_CANDIDATE_SELECTION_UNIVERSE",
+    "V7_REQUIRES_CANDIDATE_GENERATION_EVIDENCE_DIGEST_TO_EQUAL_THE_EXACT_UNIVERSE_DIGEST",
+    "V7_REQUIRES_AT_LEAST_INCUMBENT_PLUS_ONE_DISTINCT_CANDIDATE_BEFORE_CANDIDATE_GENERATION_STEP_CAN_PASS"
+  ],
+  "hard_nonclaims": [
+    "NO_OPEN_WORLD_CANDIDATE_GENERATION_COMPLETENESS",
+    "NO_POLICY_GENERATION_COMPLETENESS",
+    "NO_CANDIDATE_ADEQUACY_OR_QUALITY_INFERENCE",
+    "NO_R2_ROOT_SUBJECT_BINDING_YET",
+    "NO_PROFESSIONAL_QUALITY_ACCEPTANCE_OR_PROMOTION",
+    "NO_TERMINAL_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0
+  }
+}
