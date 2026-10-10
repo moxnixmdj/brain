@@ -52,5 +52,12 @@
     "NO_GLOBAL_ESCAPE_PROGRESS_TOTALITY",
     "NO_CC_R3_CERTIFICATE",
     "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
-  ]
+  ],
+  "currentness": {
+    "tb_pointer_path": "canonical/governance/CURRENT_TB_SCIENCE_EXECUTION.json",
+    "tb_pointer_git_blob_sha": "0522034857112617e4dacd4cfe340eee7e5cb51f",
+    "required_rank19_authority_path": "canonical/governance/TB_SCIENCE_RANK19_ONE_SLOT_EXECUTION_AUTHORITY_20261010_V1.json",
+    "required_rank19_authority_git_blob_sha": "ea76756ea30084c7f8291747ae9d204485a0186a"
+  },
+  "supersedes_for_current_scheduling": "canonical/governance/ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_20261010_V1.json"
 }
