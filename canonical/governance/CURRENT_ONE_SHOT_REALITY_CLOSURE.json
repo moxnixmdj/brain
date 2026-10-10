@@ -1,15 +1,15 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_ONE_SHOT_REALITY_CLOSURE_POINTER_V1",
   "date": "2026-10-09",
-  "status": "ACTIVE_VERIFIED_ORCHESTRATOR__CANONICAL_FRONTDOOR_META_MODE_LIVE__STRICT_EXTERNALITY_LAW_VERIFIED__ACTUAL_LIVE_R3_INTERNAL_FIXED_POINT__NO_RESIDUAL__CURRENT_R2_V56_AND_CODING_V3_PROJECTION_BOUND__INFRASTRUCTURE_FAILURES_INTERNAL_AND_RETRYABLE__DYNAMIC_CURRENT_PROJECTION__FINAL_CLEANROOM_GATE_BOUND__AUTO_DEFAULT_FALLBACK_LIVE__PROOF_CARRYING_DIRECT_ROUTE_AUTO_PROMOTION_LIVE__EXACT_DECISION_REPLAY_REQUIRED__DYNAMIC_ADMISSION_POINTER_TARGET_FOLLOW_BOUND__PROMOTION_CONCURRENCY_GUARD_BOUND__ROUTE_NONINTERFERENCE_GATE_BOUND",
+  "status": "ACTIVE_VERIFIED_ORCHESTRATOR__CANONICAL_FRONTDOOR_META_MODE_LIVE__STRICT_EXTERNALITY_LAW_VERIFIED__ACTUAL_LIVE_R3_INTERNAL_FIXED_POINT__NO_RESIDUAL__CURRENT_R2_V56_AND_CODING_V3_PROJECTION_BOUND__INFRASTRUCTURE_FAILURES_INTERNAL_AND_RETRYABLE__DYNAMIC_CURRENT_PROJECTION__FINAL_CLEANROOM_GATE_BOUND__AUTO_DEFAULT_FALLBACK_LIVE__PROOF_CARRYING_DIRECT_ROUTE_AUTO_PROMOTION_LIVE__EXACT_DECISION_REPLAY_REQUIRED__DYNAMIC_ADMISSION_POINTER_TARGET_FOLLOW_BOUND__PROMOTION_CONCURRENCY_GUARD_BOUND__ROUTE_NONINTERFERENCE_GATE_BOUND__ROOT1_STRUCTURAL_ADAPTER_ACQUISITION_BOUND__V1_POINTER_REBOUND",
   "runtime": {
     "path": "canonical/runtime/one_shot_reality_closure_v2.py",
     "git_blob_sha": "b8347a3993f96aa5e6fa2f1fe68d7c8afccb8bec"
   },
   "predecessor": {
     "path": "canonical/runtime/one_shot_verified_closure_v1.py",
-    "git_blob_sha": "117d85bec1e5fb49428271aa9883e89d0ef1aa0a",
-    "role": "LOAD_BEARING_INNER_FIXED_POINT__STRICT_EXTERNALITY__STRUCTURED_R2_HANDOFF__GENERALIZED_R3_VERIFICATION_FRONTIER_GAP_CLASSIFICATION"
+    "git_blob_sha": "367a232ef5438bea976607ed607fd4f02c9c2d5d",
+    "role": "LOAD_BEARING_INNER_FIXED_POINT__STRICT_EXTERNALITY__STRUCTURED_R2_HANDOFF__GENERALIZED_R3_VERIFICATION_FRONTIER_GAP_CLASSIFICATION__DEFAULT_ROOT1_STRUCTURAL_ADAPTER_ACQUISITION_PROVIDER_BOUND"
   },
   "verification": {
     "path": "canonical/verification/ONE_SHOT_R2_STRUCTURED_ACQUISITION_HANDOFF_VERIFY_20261009_V1.json",
@@ -51,6 +51,19 @@
       "status": "PASS__EXACT_BLOBS__PUBLIC_ISOLATED_3_OF_3__DYNAMIC_POINTER_TARGET_FOLLOW__STALE_SNAPSHOT_NONAUTHORITATIVE__ZERO_CREDIT",
       "public_run_id": 38024724095,
       "tests_passed": 3,
+      "terminal_credit_delta": 0
+    },
+    "latest_r3_structural_adapter_acquisition": {
+      "path": "canonical/verification/R3_STRUCTURAL_ADAPTER_RULE_ACQUISITION_PROVIDER_VERIFY_20261010_V1.json",
+      "git_blob_sha": "aa5942e4c1385db0db8048a2f02f0a0f7515fdac",
+      "status": "FOCUSED_ISOLATED_VERIFICATION_PASS__5_OF_5",
+      "exact_v1_git_blob_sha": "367a232ef5438bea976607ed607fd4f02c9c2d5d",
+      "terminal_credit_delta": 0
+    },
+    "latest_predecessor_pointer_rebind": {
+      "path": "canonical/verification/ONE_SHOT_PREDECESSOR_POINTER_REBIND_VERIFY_20261010_V1.json",
+      "git_blob_sha": "fb129f11fd6e9ea4e6d5446c576075d1f43a16c8",
+      "status": "STATIC_AUTHORITY_COHERENCE_REPAIR__EXACT_V1_BLOB_REBOUND__RUNTIME_PREEXISTING_5_OF_5_ISOLATED_VERIFICATION__ZERO_TERMINAL_CREDIT",
       "terminal_credit_delta": 0
     }
   },
@@ -176,7 +189,11 @@
     "auto_default_fallback_trigger": "AUTO_ADEQUATE_DECISION_UNRESOLVED__USER_CLARIFICATION_EXCLUDED",
     "auto_default_fallback_exact_replay_required": true,
     "auto_default_fallback_externality_is_not_task_success": true,
-    "auto_default_fallback_explicit_adequate_decision": false
+    "auto_default_fallback_explicit_adequate_decision": false,
+    "root1_structural_adapter_acquisition_provider_bound": true,
+    "root1_structural_adapter_provider_verification_authority": false,
+    "root1_structural_adapter_provider_promotion_authority": false,
+    "root1_structural_adapter_provider_terminal_authority": false
   },
   "next_load_bearing_roots": [
     "FOLLOW_CURRENT_TERMINAL_AUTHORITY__R3_NOT_CURRENT_BLOCKER__PROVE_ONE_SOUND_TERMINAL_ACCEPTANCE_ROUTE",
