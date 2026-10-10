@@ -493,7 +493,7 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
         self.assertTrue(pointer["reuse_first_residual_runtime_enforced"])
         self.assertEqual(
             pointer["authoritative_activation"],
-            "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V4.json",
+            "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V6.json",
         )
         self.assertEqual(
             mission["current_development_scheduler"]["status"],
