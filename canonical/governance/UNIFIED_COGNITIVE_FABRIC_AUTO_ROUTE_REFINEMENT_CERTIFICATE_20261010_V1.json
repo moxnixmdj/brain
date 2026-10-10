@@ -1,0 +1,29 @@
+{
+  "schema": "PROJECT_BRAIN_UNIFIED_COGNITIVE_FABRIC_AUTO_ROUTE_REFINEMENT_CERTIFICATE_V1",
+  "date": "2026-10-10",
+  "subject_id": "CURRENT_UNIFIED_COGNITIVE_FABRIC_AUTO_ROUTE_CLASSIFIER",
+  "status": "CANDIDATE_EXECUTABLE_REFINEMENT__REQUIRES_SEMANTIC_RERUN_AND_INDEPENDENT_RECEIPT",
+  "abstract_spec": {
+    "path": "canonical/governance/UNIFIED_COGNITIVE_FABRIC_AUTO_ROUTE_ABSTRACT_MODEL_20261010_V1.json",
+    "git_blob_sha": "edc9e55efbb90020536f7b167cda26e04cc4080c"
+  },
+  "concrete_implementation": {
+    "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
+    "git_blob_sha": "c3dbea74679450273bd07689251499bcd9609212",
+    "entrypoint": "_auto_mode"
+  },
+  "claimed_domain": {
+    "exhaustive_state_count": 98304
+  },
+  "liveness_preserved_claim": false,
+  "nonclaims": [
+    "DOES_NOT_PROVE_FULL_UNIFIED_FABRIC_RUN_DISPATCH",
+    "DOES_NOT_PROVE_TRANSITIVE_ENGINE_CORRECTNESS",
+    "DOES_NOT_PROVE_REACHED_ESCAPE_REPAIR_SEMANTICS",
+    "DOES_NOT_GRANT_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
