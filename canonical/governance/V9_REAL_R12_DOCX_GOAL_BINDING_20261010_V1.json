@@ -1,0 +1,9 @@
+{
+  "binding_proved": true,
+  "decision_context_semantically_sufficient": true,
+  "decision_payload_sha256": "sha256:ef7610c8ef640fbc840f75c60c49da8baa29fe6a453e4f60d0f4c85538d49916",
+  "goal_sha256": "4b2d8b031a4752280e7244a42ec6925e3ab04d5a99cf1e5f4efbfe965e5128e9",
+  "load_bearing_constraints_preserved": true,
+  "producer_id": "v9-real-docx-producer-20261010-v1",
+  "schema": "PROJECT_BRAIN_GOAL_TO_DECISION_CONTEXT_BINDING_V1"
+}
