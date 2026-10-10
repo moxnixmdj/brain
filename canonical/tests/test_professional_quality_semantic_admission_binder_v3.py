@@ -6,7 +6,14 @@ from canonical.runtime import professional_quality_semantic_admission_binder_v3 
 CLAIM={"claim":{"claim_kind":"PROPERTY_CERTIFICATE","claim_id":"c"*64,
  "scope_sha256":"s"*64,"target_predicate_sha256":"t"*64,"semantics_sha256":"m"*64}}
 def receipt(root:Path):
- p=root/"canonical/evidence/x.json";p.parent.mkdir(parents=True,exist_ok=True);p.write_text("{}")
+ p=root/"canonical/evidence/x.json";p.parent.mkdir(parents=True,exist_ok=True)
+ basis={"pass":True,"independent_verified":True,"leaf_id":"L","root_id":"R",
+  "semantic_claim_id":"c"*64,"semantic_scope_sha256":"s"*64,
+  "semantic_target_predicate_sha256":"t"*64,"semantic_semantics_sha256":"m"*64,
+  "claim_scoped_totality_proved":True,"cc_r1_reality_containment_proved":True,
+  "cc_r2_mission_soundness_proved":True,"cc_r3_terminal_closure_proved":True,
+  "r4_proof_realization_authority":True}
+ import json;p.write_text(json.dumps(basis))
  return {"schema":b.RECEIPT_SCHEMA,"leaf_id":"L","root_id":"R","leaf_kind":"SEMANTIC",
   "verdict":"PASS","closure_scope":"EXACT_LEAF","acceptance_sha256":b.semantic_sha("A"),
   "root_contract_sha256":b.semantic_sha("C"),"manifest_git_blob_sha":"g",
@@ -43,6 +50,12 @@ class Tests(unittest.TestCase):
   with tempfile.TemporaryDirectory() as d:
    root=Path(d);r=receipt(root);r["verification_basis"][0]["git_blob_sha"]="0"*40
    self.assertFalse(check(r,root)["pass"])
+ def test_current_but_semantically_unverified_basis_fails(self):
+  with tempfile.TemporaryDirectory() as d:
+   root=Path(d);r=receipt(root);p=root/"canonical/evidence/x.json";p.write_text("{}")
+   r["verification_basis"][0]["git_blob_sha"]=b.git_blob_sha(p)
+   o=check(r,root);self.assertFalse(o["pass"])
+   self.assertIn("INDEPENDENT_SEMANTIC_TOTALITY_BASIS_REQUIRED",o["errors"])
  def test_bad_leaf_root_acceptance_contract_and_authority_fail(self):
   with tempfile.TemporaryDirectory() as d:
    root=Path(d)
