@@ -339,6 +339,70 @@ class GeneralAdequateDecisionControllerV1Tests(unittest.TestCase):
         self.assertFalse(out["next_information_request"]["external_research_authorized"])
         self.assertFalse(out["actual_goal_satisfaction_verified"])
 
+    def test_concrete_truth_request_survives_into_controller_acquisition_packet(self):
+        request = self._base_request()
+        predicate_id = "source-condition-sha256:critical"
+        concrete = {
+            "request_kind": "ACQUIRE_ONE_AUTHENTICATED_GOVERNING_REQUIREMENT_OBSERVATION",
+            "minimum_observation_count": 1,
+            "independent_verification_required": True,
+        }
+        opened = self._information_open(predicate_id)
+        loop = opened["detail"]["loop_result"]
+        loop["status"] = "OPEN__SELECTED_PREDICATE_PROOF_COVERAGE_REQUIRED"
+        loop["reason"] = "SELECTED_SEMANTIC_TRUTH_CERTIFICATE_RETURNED_UNKNOWN_OR_FAILED"
+        loop["next_information_request"] = concrete
+        loop["next_required_edge"] = (
+            "REGCAP_LOSS_CUSHION_MINIMUM_POLICY_CHANGING_INFORMATION"
+        )
+        with patch.object(controller, "compile_contract", return_value=self._raw_contract()), \
+             patch.object(controller, "_authenticate_goal_binding", return_value=self._goal_binding_pass()), \
+             patch.object(controller, "evaluate_p3", return_value=opened):
+            out = controller.run(request)
+
+        self.assertFalse(out["pass"])
+        packet = out["next_information_request"]
+        self.assertEqual(packet["predicate_id"], predicate_id)
+        self.assertEqual(packet["truth_next_information_request"], concrete)
+        self.assertEqual(
+            packet["truth_next_required_edge"],
+            "REGCAP_LOSS_CUSHION_MINIMUM_POLICY_CHANGING_INFORMATION",
+        )
+        self.assertFalse(packet["information_authority"])
+        self.assertFalse(packet["semantic_truth_authority"])
+        self.assertFalse(out["terminal_authority"])
+
+    def test_concrete_truth_request_is_preserved_for_information_provider(self):
+        request = self._base_request()
+        predicate_id = "source-condition-sha256:critical"
+        concrete = {
+            "request_kind": "ACQUIRE_ONE_AUTHENTICATED_GOVERNING_REQUIREMENT_OBSERVATION",
+            "minimum_observation_count": 1,
+            "independent_verification_required": True,
+        }
+        opened = self._information_open(predicate_id)
+        loop = opened["detail"]["loop_result"]
+        loop["status"] = "OPEN__SELECTED_PREDICATE_PROOF_COVERAGE_REQUIRED"
+        loop["next_information_request"] = concrete
+        loop["next_required_edge"] = (
+            "REGCAP_LOSS_CUSHION_MINIMUM_POLICY_CHANGING_INFORMATION"
+        )
+        provider = Mock(return_value=None)
+        with patch.object(controller, "compile_contract", return_value=self._raw_contract()), \
+             patch.object(controller, "_authenticate_goal_binding", return_value=self._goal_binding_pass()), \
+             patch.object(controller, "evaluate_p3", return_value=opened):
+            out = controller.run(request, information_provider=provider)
+
+        self.assertFalse(out["pass"])
+        provider.assert_called_once()
+        packet = provider.call_args.args[0]
+        self.assertEqual(packet["truth_next_information_request"], concrete)
+        self.assertEqual(
+            packet["truth_next_required_edge"],
+            "REGCAP_LOSS_CUSHION_MINIMUM_POLICY_CHANGING_INFORMATION",
+        )
+
+
     def test_positive_adequacy_gap_is_preserved_as_exact_policy_repair(self):
         request = self._base_request()
         opened = {

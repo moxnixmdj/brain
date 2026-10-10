@@ -46,6 +46,14 @@ def _fail(reason:str, **detail:Any)->dict[str,Any]:
 
 
 def _open(status:str, *, reason:str, trace:list[dict[str,Any]], **detail:Any)->dict[str,Any]:
+    control={}
+    for key in (
+        "next_information_request",
+        "next_required_edge",
+        "next_information_request_candidates",
+    ):
+        if key in detail:
+            control[key]=deepcopy(detail.pop(key))
     out={
         "schema":SCHEMA,
         "pass":False,
@@ -59,6 +67,7 @@ def _open(status:str, *, reason:str, trace:list[dict[str,Any]], **detail:Any)->d
         "u_subtraction_authority":False,
         "terminal_authority":False,
         "terminal_credit_delta":0,
+        **control,
     }
     if detail:
         out["detail"]=detail
@@ -270,13 +279,24 @@ def evaluate(payload:Mapping[str,Any], *, repo_root:str|Path|None=None)->dict[st
                 )
             successes=[]
             attempts=[]
+            actionable_requests=[]
+            actionable_edges=[]
             for candidate_payload in candidates:
                 truth=evaluate_truth(candidate_payload)
+                request=truth.get("next_information_request")
+                edge=truth.get("next_required_edge")
+                if isinstance(request,Mapping):
+                    request_copy=deepcopy(dict(request))
+                    if not any(existing==request_copy for existing in actionable_requests):
+                        actionable_requests.append(request_copy)
+                if isinstance(edge,str) and edge and edge not in actionable_edges:
+                    actionable_edges.append(edge)
                 attempts.append({
                     "status":truth.get("status"),
                     "reason":truth.get("reason"),
                     "predicate_id":truth.get("predicate_id"),
                     "predicate_truth":truth.get("predicate_truth"),
+                    "actionable_information_request":isinstance(request,Mapping),
                 })
                 if truth.get("pass") is not True or truth.get("truthful_precommitment_observation") is not True:
                     continue
@@ -299,7 +319,21 @@ def evaluate(payload:Mapping[str,Any], *, repo_root:str|Path|None=None)->dict[st
                     "selected_discriminator_id":discriminator_id,
                     "attempts":attempts,
                     "result":"UNKNOWN",
+                    "actionable_information_request_count":len(actionable_requests),
                 })
+                control={}
+                if len(actionable_requests)==1:
+                    control["next_information_request"]=actionable_requests[0]
+                    control["next_required_edge"]=(
+                        actionable_edges[0]
+                        if len(actionable_edges)==1
+                        else "SELECTED_PREDICATE_MINIMUM_INFORMATION"
+                    )
+                elif len(actionable_requests)>1:
+                    control["next_information_request_candidates"]=actionable_requests
+                    control["next_required_edge"]=(
+                        "DISAMBIGUATE_SELECTED_PREDICATE_INFORMATION_REQUEST"
+                    )
                 return None,_open(
                     "OPEN__SELECTED_PREDICATE_PROOF_COVERAGE_REQUIRED",
                     reason="SELECTED_SEMANTIC_TRUTH_CERTIFICATE_RETURNED_UNKNOWN_OR_FAILED",
@@ -307,6 +341,7 @@ def evaluate(payload:Mapping[str,Any], *, repo_root:str|Path|None=None)->dict[st
                     selected_discriminator=selected,
                     predicate_id=atom_id,
                     attempts=attempts,
+                    **control,
                 )
             values={x["predicate_truth"] for x in successes}
             if len(values)!=1:
