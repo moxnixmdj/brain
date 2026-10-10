@@ -1,0 +1,10 @@
+{
+  "schema": "PROJECT_BRAIN_REASONING_RECEIPT_V1",
+  "date": "2026-10-10",
+  "status": "VERIFIED_CURRENTNESS_REPAIR",
+  "problem": "The V1 same-subject composition gate imported the obsolete base scoped-evidence evaluator and required exactly one admitted scope per root. The current registry has 21 independently admitted scopes across 12 roots, causing the current gate to fail closed with SCOPED_EVIDENCE_REGISTRY_NOT_CURRENT.",
+  "deeper_identity_defect": "The V1 declared-system subject content-addressed an older scoped registry and V1 gate generation, so mutating its references would have falsely preserved identity across a materially different system.",
+  "repair": "Add V2 gate over the current overlay with root-set coverage rather than one-scope-per-root cardinality; freeze a new V2 declared-system identity; rebuild the root-binding worklist from all 21 admitted scopes; preserve 0/12 verified root-subject bindings.",
+  "verification": "canonical/verification/PROFESSIONAL_QUALITY_SAME_SUBJECT_COMPOSITION_GATE_V2_CURRENT_VERIFY_20261010_V1.json",
+  "terminal_credit_delta": 0
+}
