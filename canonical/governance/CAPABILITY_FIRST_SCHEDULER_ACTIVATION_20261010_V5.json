@@ -1,15 +1,14 @@
 {
   "schema": "PROJECT_BRAIN_CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V5",
   "date": "2026-10-10",
-  "status": "ACTIVE_PRIMARY_CAPABILITY_FIRST_DEVELOPMENT_SCHEDULER__REUSE_FIRST_RESIDUAL_ADMISSION_BOUND",
+  "status": "ACTIVE_PRIMARY_CAPABILITY_FIRST_DEVELOPMENT_SCHEDULER",
   "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "terminal_milestone": "OPUS_5_5_FIRST_FRONTIER_CHECKPOINT__NOT_TERMINAL_OBJECTIVE",
   "scheduler_runtime": "canonical/runtime/capability_first_scheduler_v1.py",
-  "scheduler_runtime_git_blob_sha": "63be50dacedec96809b9f3b40faaeab411741c39",
+  "scheduler_runtime_git_blob_sha": "6d2091cc1581b9aa1fd2c74e8a76519a41d9d957",
   "canonical_primary_entrypoint": "rank_live_work",
   "supersedes": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V4.json",
-  "superseded_activation_git_blob_sha": "9c286a67fc5e61dc671682771d5590ce0cbfd6b7",
-  "reason": "V5 preserves V4 capability-resource and shared-cause ordering while adding a mandatory reuse-first residual admission contract so unresolved exact cases are not mislabeled as new capability primitives without verified reuse exhaustion.",
+  "reason": "V5 binds fail-closed reuse-first admission for explicit new-primitive claims while preserving capability-first scoring, R2 shared-cause tie-breaks, and Opus checkpoint subordination.",
   "primary_work_rule": {
     "objective": "MAXIMIZE_REUSABLE_VERIFIED_CAPABILITY_GENERALIZATION_RELIABILITY_AND_EFFICIENCY_PER_RESOURCE",
     "primary_score": "CAPABILITY_RESOURCE_LEVERAGE",
@@ -18,43 +17,47 @@
     "checkpoint_obligations_are_primary_gate": false,
     "generic_reusable_capability_work_is_demoted_while_checkpoint_open": false,
     "shared_cause_fanout_can_wake_open_world_frontier": false,
-    "benchmark_bookkeeping_without_allowed_role": "DEMOTED"
+    "benchmark_bookkeeping_without_allowed_role": "DEMOTED",
+    "allowed_benchmark_roles": [
+      "CAPABILITY_DEFECT_LOCALIZATION",
+      "NEW_CAPABILITY_VALIDATION",
+      "CAPABILITY_CLAIM_FALSIFICATION",
+      "MILESTONE_CERTIFICATION"
+    ],
+    "new_primitive_claim_without_reuse_exhaustion_proof": "DEMOTED_UNPROVED_NEW_PRIMITIVE_CLAIM",
+    "new_primitive_admission_requires": [
+      "EXACT_UNSATISFIED_PREDICATE",
+      "EXISTING_MECHANISMS_SEARCHED",
+      "WHY_EACH_EXISTING_MECHANISM_CANNOT_SOUNDLY_CLOSE_THE_PREDICATE",
+      "INDEPENDENTLY_VERIFIED_MISSING_PRIMITIVE_OR_COUNTEREXAMPLE",
+      "MINIMUM_NEW_PRIMITIVE_SCOPE",
+      "FALSIFIER_AND_PROMOTION_CRITERIA"
+    ]
   },
-  "reuse_first_residual_admission": {
-    "policy_path": "canonical/governance/REUSE_FIRST_RESIDUAL_EXECUTION_POLICY_20261010_V1.json",
-    "policy_git_blob_sha": "e230e9c243ac79b7909dac86071b5cad536f1666",
-    "status": "ACTIVE_MANDATORY_GOVERNANCE_CONTRACT_FOR_RESIDUAL_CLASSIFICATION",
-    "default_rule": "SEARCH_AND_REUSE_EXISTING_VERIFIED_BRAIN_MECHANISMS_BEFORE_INVENTION",
-    "new_primitive_gate": "NEW_PRIMITIVE_CLASSIFICATION_REQUIRES_EXACT_UNSATISFIED_PREDICATE__EXISTING_MECHANISMS_SEARCHED__SOUNDNESS_PRESERVING_REJECTION_FOR_EACH__INDEPENDENT_MISSING_PRIMITIVE_EVIDENCE__MINIMUM_SCOPE__FALSIFIER__PROMOTION_CRITERIA",
-    "absent_gate_evidence": "ROUTE_TO_ADAPT_EXISTING_OR_PROMOTE_EXISTING_OR_VERIFY_EXISTING_OR_ACQUIRE_EVIDENCE",
-    "scheduler_runtime_enforcement": "NOT_YET_MECHANICALLY_IMPLEMENTED_IN_CAPABILITY_FIRST_SCHEDULER_V1__GOVERNANCE_PRECONDITION_ONLY",
-    "fail_closed_truth": "DO_NOT_CLAIM_MECHANICAL_RUNTIME_ENFORCEMENT_UNTIL_CODE_AND_TEST_RECEIPT_EXIST"
-  },
-  "escape_shared_gap_binding": {
-    "path": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V1.json",
-    "git_blob_sha": "28602e7f3c945695259c1cf589e4146e6af96d83",
-    "rule": "GAP_A_AND_GAP_B_ARE_SHARED_REUSE_ADAPTATION_PROOF_TARGETS__NOT_THIRTEEN_DEFAULT_NEW_SOLVERS"
+  "r2_shared_cause_ledger": {
+    "pointer": "canonical/governance/CURRENT_R2_SHARED_CAUSE_RESIDUAL_LEDGER.json",
+    "runtime": "canonical/runtime/r2_semantic_residual_ledger_v1.py",
+    "source_authority": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+    "fail_closed_on_unclassified_residual": true,
+    "fail_closed_on_unknown_cause_id": true
   },
   "canonical_learning_loop": [
-    "SEARCH_REUSE",
     "SOLVE",
     "VERIFY",
     "EXTRACT_MECHANISM",
     "GENERALIZE",
     "COMPRESS",
     "PRESERVE_OPTIONS",
-    "PROMOTE_WITH_SEPARATE_AUTHORITY",
-    "FALSIFY_ON_FRESH_REAL_TASK",
     "REUSE_CHEAPER"
   ],
   "hard_nonclaims": [
     "NO_TERMINAL_CREDIT_FROM_PRIORITY_SCORE",
     "NO_ACCEPTANCE_CREDIT_FROM_SHARED_CAUSE_FANOUT",
-    "NO_NEW_PRIMITIVE_CREDIT_FROM_AN_OPEN_RESIDUAL",
-    "NO_CLAIM_EVERY_RESIDUAL_IS_ALREADY_SOLVED",
-    "NO_CLAIM_REUSE_FIRST_IS_MECHANICALLY_ENFORCED_BY_THE_CURRENT_SCHEDULER_RUNTIME",
-    "NO_GLOBAL_ESCAPE_PROGRESS_TOTALITY_CREDIT",
-    "OPUS_5_5_REMAINS_A_FRONTIER_CHECKPOINT_NOT_THE_GLOBAL_OBJECTIVE"
+    "NO_SHARED_CAUSE_FANOUT_OVERRIDE_OF_PRIMARY_CAPABILITY_RESOURCE_SCORE",
+    "NO_OPEN_WORLD_FRONTIER_WAKE_FROM_FANOUT_ALONE",
+    "NO_BENCHMARK_PASS_IS_REUSABLE_CAPABILITY_BY_ITSELF",
+    "OPUS_5_5_REMAINS_A_FRONTIER_CHECKPOINT_NOT_THE_GLOBAL_OBJECTIVE",
+    "NO_CLAIM_A_NEW_PRIMITIVE_IS_REQUIRED_WITHOUT_ALL_SIX_PROOF_OBLIGATIONS"
   ],
   "accounting": {
     "incremental_spend_usd": 0,
@@ -62,5 +65,25 @@
     "capability_credit_delta": 0,
     "ownership_credit_delta": 0,
     "terminal_credit_delta": 0
+  },
+  "terminal_autopilot_policy": {
+    "role": "SUBORDINATE_CHECKPOINT_AUDITOR",
+    "new_dispatch_requires_explicit_capability_first_checkpoint_admission": true,
+    "verification_of_already_present_results_may_continue": true,
+    "promotion_remains_separately_authorized": true,
+    "default_repo_mode_new_dispatch": "PARKED"
+  },
+  "r3_state": {
+    "status": "SUFFICIENT_CONTROL_LOOP_CLOSURE_UNDER_AVAILABLE_EVIDENCE",
+    "observability_boundary_policy": "PARK_AND_REOPEN_ON_NEW_EFFECT_DISTINGUISHING_EVIDENCE"
+  },
+  "verification": {
+    "path": "canonical/verification/CAPABILITY_FIRST_REUSE_FIRST_ADMISSION_VERIFY_20261010_V1.json",
+    "role": "FOCUSED_ISOLATED_RED_GREEN_SCHEDULER_REGRESSION_RECEIPT"
+  },
+  "reuse_first_policy": {
+    "path": "canonical/governance/REUSE_FIRST_RESIDUAL_EXECUTION_POLICY_20261010_V1.json",
+    "git_blob_sha": "e230e9c243ac79b7909dac86071b5cad536f1666",
+    "enforced_by_runtime": true
   }
 }
