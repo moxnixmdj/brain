@@ -9,7 +9,7 @@
     "source_set": [
       {
         "path": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
-        "git_blob_sha": "fdb5361d34c1f3fe0a1c6372aa12288c401437b9"
+        "git_blob_sha": "e00f4564c52016510482a45515a09036eaf622d6"
       },
       {
         "path": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
