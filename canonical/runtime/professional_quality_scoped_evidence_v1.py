@@ -51,6 +51,13 @@ R6_LEAVES = {"PQ::R6_EVIDENCE_GROUNDING_DEPENDENCE::EXECUTION"}
 R6_SOURCE_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_LEAF_BINDER_V2_VERIFY_V1"
 R6_REGISTRY_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_LEAF_EVIDENCE_REGISTRY_V1"
 
+R4_KIND = "CONTENT_ADDRESSED_TYPED_MECHANICAL_ARTIFACT_MEASUREMENT_AND_ACCEPTANCE"
+R4_ROOT = "R4_MEASUREMENT_CONSTRUCT"
+R4_LEAVES = {"PQ::R4_MEASUREMENT_CONSTRUCT::EXECUTION"}
+R4_SOURCE_SCHEMA = "PROJECT_BRAIN_ARTIFACT_MEASUREMENT_VERIFY_V1"
+R4_GOVERNANCE_SCHEMA = "PROJECT_BRAIN_ARTIFACT_MEASUREMENT_BINDING_V1"
+R4_MEASUREMENT_RUNTIME = "canonical/runtime/content_addressed_artifact_measurement_v1.py"
+
 
 def git_blob_sha(path: Path) -> str:
     data = path.read_bytes()
@@ -442,6 +449,105 @@ def _validate_r6(
     return errors, claim_scope
 
 
+
+def _validate_r4(
+    entry: dict[str, Any],
+    source: dict[str, Any] | None,
+    governance: dict[str, Any] | None,
+    compiler_declared: Any,
+    repo_root: Path,
+) -> tuple[list[str], Any]:
+    errors = _common_checks(entry, R4_ROOT, R4_LEAVES)
+    claim_scope = None
+    measurement_binding = entry.get("measurement_runtime")
+    measurement_path = _resolve(
+        repo_root,
+        measurement_binding.get("path") if isinstance(measurement_binding, dict) else None,
+    )
+    measurement_declared = (
+        measurement_binding.get("git_blob_sha")
+        if isinstance(measurement_binding, dict)
+        else None
+    )
+    if measurement_path is None:
+        errors.append("MEASUREMENT_RUNTIME_PATH_INVALID")
+    elif not measurement_path.exists():
+        errors.append("MEASUREMENT_RUNTIME_MISSING")
+    elif git_blob_sha(measurement_path) != measurement_declared:
+        errors.append("MEASUREMENT_RUNTIME_STALE")
+
+    if source is not None:
+        if source.get("schema") != R4_SOURCE_SCHEMA:
+            errors.append("SOURCE_SCHEMA_INVALID")
+        if source.get("status") != "INDEPENDENT_SPRITE_PASS__8_OF_8__ZERO_CREDIT":
+            errors.append("SOURCE_STATUS_NOT_ADMITTED")
+        result = source.get("result")
+        if not isinstance(result, dict) or result.get("passed") != 8 or result.get("total") != 8:
+            errors.append("SOURCE_REPLAY_INVALID")
+        blobs = source.get("blobs")
+        if not isinstance(blobs, dict):
+            errors.append("SOURCE_EXACT_BLOBS_INVALID")
+        else:
+            if blobs.get("measured_acceptance") != compiler_declared:
+                errors.append("SOURCE_MEASURED_ACCEPTANCE_RUNTIME_MISMATCH")
+            if blobs.get("measurement") != measurement_declared:
+                errors.append("SOURCE_MEASUREMENT_RUNTIME_MISMATCH")
+        required_verified = {
+            "ARTIFACT_SHA_AND_MEASUREMENTS_DERIVED_FROM_REAL_BYTES",
+            "XLSX_DOCX_PPTX_MECHANICAL_FACTS_MEASURED",
+            "FAILED_XLSX_PROPERTY_FALSIFIES_ACCEPTANCE",
+            "PATH_ESCAPE_FAILS_CLOSED",
+            "FIELD_TYPE_MISMATCH_FAILS_CLOSED",
+        }
+        if not required_verified <= set(source.get("verified") or []):
+            errors.append("SOURCE_REQUIRED_MEASUREMENT_ASSERTIONS_MISSING")
+
+    if governance is not None:
+        if governance.get("schema") != R4_GOVERNANCE_SCHEMA:
+            errors.append("MEASUREMENT_GOVERNANCE_SCHEMA_INVALID")
+        if governance.get("status") != "CANDIDATE_MEASUREMENT_BRIDGE__INDEPENDENT_REPLAY_PASS__ZERO_TERMINAL_CREDIT":
+            errors.append("MEASUREMENT_GOVERNANCE_STATUS_INVALID")
+        repair = governance.get("repair")
+        if not isinstance(repair, dict):
+            errors.append("MEASUREMENT_GOVERNANCE_REPAIR_INVALID")
+        else:
+            if repair.get("measurement_runtime") != R4_MEASUREMENT_RUNTIME:
+                errors.append("MEASUREMENT_GOVERNANCE_RUNTIME_PATH_MISMATCH")
+            if repair.get("measured_acceptance_runtime") != "canonical/runtime/measured_typed_acceptance_program_v1.py":
+                errors.append("MEASUREMENT_GOVERNANCE_ACCEPTANCE_PATH_MISMATCH")
+            supported = set(repair.get("supported_v1") or [])
+            required_kinds = {
+                "FILE_BASENAME", "FILE_SUFFIX", "FILE_SIZE_BYTES",
+                "OOXML_MEMBER_EXISTS", "XLSX_SHEET_EXISTS", "XLSX_SHEET_COUNT",
+                "DOCX_TEXT_CONTAINS", "DOCX_PARAGRAPH_COUNT", "DOCX_TABLE_COUNT",
+                "PPTX_SLIDE_COUNT", "PPTX_TEXT_CONTAINS",
+            }
+            if not required_kinds <= supported:
+                errors.append("MEASUREMENT_GOVERNANCE_SUPPORTED_KINDS_MISSING")
+        nonclaims = set(governance.get("hard_nonclaims") or [])
+        required_nonclaims = {
+            "NO_CLAIM_FIELD_TO_RUBRIC_SEMANTIC_ALIGNMENT_IS_AUTOMATIC",
+            "NO_CLAIM_HOLISTIC_OR_VISUAL_QUALITY_IS_MEASURED",
+            "NO_TERMINAL_CREDIT",
+        }
+        if not required_nonclaims <= nonclaims:
+            errors.append("MEASUREMENT_GOVERNANCE_SCOPE_LIMITATIONS_MISSING")
+        claim_scope = {
+            "kind": R4_KIND,
+            "measurement_kinds": sorted((governance.get("repair") or {}).get("supported_v1") or []),
+            "guarantees": [
+                "MECHANICAL_VALUES_DERIVED_FROM_CONTENT_ADDRESSED_ARTIFACT_BYTES",
+                "MEASURED_FIELD_SET_AND_TYPES_MUST_MATCH_TYPED_ACCEPTANCE_PROGRAM",
+                "PATH_ESCAPE_AND_FIELD_TYPE_MISMATCH_FAIL_CLOSED",
+            ],
+            "limitations": [
+                "NO_AUTOMATIC_RUBRIC_OR_CONSTRUCT_SEMANTIC_ALIGNMENT",
+                "NO_HOLISTIC_OR_VISUAL_QUALITY_MEASUREMENT",
+                "NO_GLOBAL_R4_LEAF_OR_ROOT_CLOSURE",
+            ],
+        }
+    return errors, claim_scope
+
 def validate_entry(entry: dict[str, Any], *, repo_root: Path = ROOT) -> dict[str, Any]:
     errors: list[str] = []
     if not isinstance(entry, dict):
@@ -481,6 +587,10 @@ def validate_entry(entry: dict[str, Any], *, repo_root: Path = ROOT) -> dict[str
         handler_errors, claim_scope = _validate_r10(entry, source, verifier, compiler_declared)
     elif kind == R6_KIND:
         handler_errors, claim_scope = _validate_r6(entry, source, verifier, compiler_declared)
+    elif kind == R4_KIND:
+        handler_errors, claim_scope = _validate_r4(
+            entry, source, verifier, compiler_declared, repo_root
+        )
     else:
         handler_errors, claim_scope = ["CLAIM_KIND_UNSUPPORTED"], None
     errors.extend(handler_errors)
