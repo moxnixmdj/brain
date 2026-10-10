@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_R2_DECISION_INTELLIGENCE_POINTER_V1",
   "date": "2026-10-10",
-  "status": "ACTIVE_CURRENT_R2_AUTHORITY__V71__FORTY_DIRECT_ROUTES__THIRTY_SIX_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__DERIVED_TYPED_TERMINAL_SIGNATURES_ROUTE_BOUND__MREL_NECESSARY_PROPERTY_AUTHORITY_BOUND__TLAC_MREL_SHARED_SIGNATURE_NONSEPARATION_AND_BOUNDED_IDENTITY_DISCRIMINATOR_BOUND__OEWN_DECISION_MANIFEST_LATTICE_LIVE_DYNAMIC_ROUTE_BOUND__REGCAP_NO_DESCRIPTOR_DIRECT_SIGNATURE_CONTEXT_BOUND__SCOPED_DOMAIN_EQUIVALENCE_INTERNALIZED__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_REMAINS",
+  "status": "ACTIVE_CURRENT_R2_AUTHORITY__V72__FORTY_DIRECT_ROUTES__THIRTY_SIX_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__DERIVED_TYPED_TERMINAL_SIGNATURES_ROUTE_BOUND__MREL_NECESSARY_PROPERTY_AUTHORITY_BOUND__LOSS_CUSHION_MREL_BOUND_FRONTIER_REPAIRED__TLAC_MREL_SHARED_SIGNATURE_NONSEPARATION_AND_BOUNDED_IDENTITY_DISCRIMINATOR_BOUND__OEWN_DECISION_MANIFEST_LATTICE_LIVE_DYNAMIC_ROUTE_BOUND__REGCAP_NO_DESCRIPTOR_DIRECT_SIGNATURE_CONTEXT_BOUND__SCOPED_DOMAIN_EQUIVALENCE_INTERNALIZED__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_REMAINS",
   "mission_objective": {
     "path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json"
   },
@@ -1766,7 +1766,8 @@
   "hard_nonclaims": [
     "NO_CLAIM_SOURCE_BOUND_CCOB_IDENTITY_GENERALIZES_TO_OTHER_LOSS_ABSORBING_CUSHION_CONTEXTS.",
     "NO_CLAIM_LOCAL_APPOSITIVE_IDENTITY_CREATES_A_GLOBAL_ALIAS.",
-    "NO_CLAIM_REGCAP_CANDIDATE_AMBIGUITY_CONTROL_CLOSES_OPEN_WORLD_ONTOLOGY_OR_THE_FINANCE_FAMILY."
+    "NO_CLAIM_REGCAP_CANDIDATE_AMBIGUITY_CONTROL_CLOSES_OPEN_WORLD_ONTOLOGY_OR_THE_FINANCE_FAMILY.",
+    "NO_CLAIM_MREL_AWARE_FOUR_CONCEPT_LOSS_CUSHION_FRONTIER_IS_OPEN_WORLD_COMPLETE_OR_PROVES_NAKED_PHRASE_IDENTITY."
   ],
   "assurance_closure_compiler_v2": {
     "path": "canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json",
@@ -1818,23 +1819,37 @@
     "terminal_authority": false
   },
   "regcap_loss_cushion_contextual_relative_selection": {
-    "status": "BOUND__SAME_SENTENCE_CONTEXT_CAN_SELECT_ONE_CCOB_CCYB_TLAC_RIVAL_RELATIVE_TO_BOUND_SET__NO_GLOBAL_IDENTITY",
+    "status": "BOUND__MREL_AWARE_FOUR_CONCEPT_CANDIDATE_FRONTIER__LEGACY_THREE_RIVAL_RELATIVE_SELECTION_REVOKED_FOR_GENERIC_LOSS_CUSHION__EXPLICIT_THREE_RIVAL_SCOPE_PRESERVED",
     "compiler_path": "canonical/runtime/regcap_context_signature_v1.py",
     "compiler_git_blob_sha": "3f13e690148c44e00ed266d583ce561f01694793",
-    "grounding_path": "canonical/runtime/loss_absorbing_cushion_regcap_grounding_v3.py",
-    "grounding_git_blob_sha": "7ebdfedf15bcfe937c230c931109b746ec4a2e34",
-    "truth_certificate_path": "canonical/runtime/regcap_loss_cushion_truth_certificate_v1.py",
-    "truth_certificate_git_blob_sha": "db330888e9410762f2fd7b8e9cdefdc9df360eb7",
+    "grounding_path": "canonical/runtime/loss_absorbing_cushion_regcap_grounding_v4.py",
+    "grounding_git_blob_sha": "a5d23350a3ee038850f6faa7fdc56298506bf9b9",
+    "candidate_discovery_path": "canonical/runtime/regcap_property_candidate_discovery_v2.py",
+    "candidate_discovery_git_blob_sha": "cfaec0349bf5f8075600da2be2a6b6cecd1fdf65",
+    "truth_certificate_path": "canonical/runtime/regcap_loss_cushion_truth_certificate_v2.py",
+    "truth_certificate_git_blob_sha": "b02d2173804ef83929cdafb542f2c6cb4b2fb736",
     "semantic_truth_dispatch_path": "canonical/runtime/semantic_truth_dispatch_v1.py",
-    "semantic_truth_dispatch_git_blob_sha": "a210405d9febdc69d13d7cbef43eece3d072f53b",
-    "verification_path": "canonical/verification/LOSS_CUSHION_CONTEXT_V3_SEMANTIC_TRUTH_VERIFY_20261009_V1.json",
-    "verification_git_blob_sha": "c8a02335df533584217bc60ee03080e25c8ea655",
-    "focused_replay": "55_OF_55_PASS",
-    "relative_selection_authority": true,
+    "semantic_truth_dispatch_git_blob_sha": "e653c376d9612eac8925f0db928405e79538de1a",
+    "verification_path": "canonical/verification/R2_LOSS_CUSHION_MREL_FRONTIER_CURRENT_VERIFY_20261010_V1.json",
+    "verification_git_blob_sha": "29a3bb3d61a56f0a604d2d87d63cd3448c908736",
+    "focused_replay": "PYCOMPILE_PASS__19_OF_19_PASS",
+    "bound_candidate_concept_ids": [
+      "REGCAP::CCOB",
+      "REGCAP::CCYB",
+      "REGCAP::TLAC",
+      "REGCAP::MREL"
+    ],
+    "candidate_set_complete_relative_to_declared_four_concept_inventory": true,
+    "open_world_candidate_universe_complete": false,
+    "relative_selection_authority": false,
+    "legacy_three_rival_relative_selection_authority": false,
+    "explicit_three_rival_scope_relative_selection_authority_preserved": true,
+    "explicit_three_rival_scope_id": "REGCAP_CCOB_CCYB_TLAC_BOUNDED_RIVAL_TASK_V1",
+    "source_local_identity_authority_preserved": true,
     "semantic_identity_authority": false,
     "global_identity_authority": false,
-    "candidate_universe_complete": false,
-    "terminal_credit_delta": 0
+    "terminal_credit_delta": 0,
+    "candidate_universe_complete": false
   },
   "regcap_contextual_fact_proofs": {
     "status": "BOUND__THREE_EXACT_REGCAP_CONTEXT_FACT_FAMILIES__NO_REVERSE_CLASSIFICATION",
@@ -2239,5 +2254,23 @@
     "terminal_credit_delta": 0,
     "wake_cut_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261010_V64.json",
     "wake_cut_git_blob_sha": "88d62359c8e3cd4c4c6c775355e4370c63ea251b"
+  },
+  "r2_v72_loss_cushion_mrel_frontier_reconciliation": {
+    "status": "RECONCILED__CURRENT_R2_V72_BINDS_MREL_AWARE_LOSS_CUSHION_FRONTIER__ROOT2_V64_UNCHANGED__ZERO_CREDIT",
+    "prior_version": "V71",
+    "current_version": "V72",
+    "reconciliation_path": "canonical/governance/R2_LOSS_CUSHION_MREL_AUTHORITY_RECONCILIATION_20261010_V1.json",
+    "runtime_merge_commit": "8bbab859c4bc3116b2f7112bfddd22f4b4121121",
+    "verification_path": "canonical/verification/R2_LOSS_CUSHION_MREL_FRONTIER_CURRENT_VERIFY_20261010_V1.json",
+    "verification_git_blob_sha": "29a3bb3d61a56f0a604d2d87d63cd3448c908736",
+    "scheduler_cut_path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261010_V64.json",
+    "scheduler_cut_git_blob_sha": "88d62359c8e3cd4c4c6c775355e4370c63ea251b",
+    "direct_route_count_delta": 0,
+    "bounded_family_count_delta": 0,
+    "primary_internal_unsolved_count_delta": 0,
+    "finance_tail_closed": false,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0,
+    "reconciliation_git_blob_sha": "68c0223695ce9c5f9770d10027525f90a16d227a"
   }
 }
