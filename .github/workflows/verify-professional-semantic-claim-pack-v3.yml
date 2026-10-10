@@ -1,0 +1,46 @@
+name: Verify professional semantic claim pack V3
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "canonical/runtime/professional_semantic_totality_claim_pack_v3.py"
+      - "canonical/tests/test_professional_semantic_totality_claim_pack_v3.py"
+      - ".github/workflows/verify-professional-semantic-claim-pack-v3.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/runtime/professional_semantic_totality_claim_pack_v3.py"
+      - "canonical/tests/test_professional_semantic_totality_claim_pack_v3.py"
+      - ".github/workflows/verify-professional-semantic-claim-pack-v3.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Compile
+        run: python -m py_compile canonical/runtime/professional_semantic_totality_claim_pack_v3.py canonical/tests/test_professional_semantic_totality_claim_pack_v3.py
+      - name: Run V3 regression
+        run: PYTHONPATH=. python canonical/tests/test_professional_semantic_totality_claim_pack_v3.py
+      - name: Recompute V3 pack
+        run: |
+          PYTHONPATH=. python canonical/runtime/professional_semantic_totality_claim_pack_v3.py > /tmp/v3.json
+          python - <<'PY'
+          import json
+          x=json.load(open("/tmp/v3.json"))
+          assert x["pass"] is True, x
+          assert x["semantic_claim_count"] == 12, x
+          assert x["unique_claim_id_count"] == 12, x
+          assert x["mission_blob_sha"] == "13c470645b037bbb46245c687dd35197b420d51a", x
+          assert x["semantic_truth_authority"] is False, x
+          assert x["terminal_authority"] is False, x
+          print(x["status"])
+          print(x["r12_claim_id"])
+          PY
