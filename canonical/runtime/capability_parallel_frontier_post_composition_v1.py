@@ -6,6 +6,7 @@ validates the professional lane by current semantic invariants, not by one
 historical work-id or stale immutable snapshot.
 """
 from __future__ import annotations
+import json
 from typing import Any, Mapping
 from canonical.runtime import capability_parallel_frontier_v2 as core
 
@@ -90,6 +91,34 @@ def _assert_post_composition(frontier: Mapping[str, Any]) -> Mapping[str, Any]:
         raise PostCompositionFrontierError("PROFESSIONAL_SEMANTIC_BLOCKER_NOT_VERIFIED")
     if ev.get("semantic_catalog_alone_can_close") is not False:
         raise PostCompositionFrontierError("PROFESSIONAL_SEMANTIC_CATALOG_BOUNDARY_DRIFT")
+
+    professional_path = core.ROOT / PROF_SOURCE
+    if not professional_path.is_file() or professional_path.is_symlink():
+        raise PostCompositionFrontierError("PROFESSIONAL_CURRENT_SOURCE_MISSING")
+    try:
+        professional_doc = json.loads(professional_path.read_text(encoding="utf-8"))
+    except Exception as exc:
+        raise PostCompositionFrontierError(
+            "PROFESSIONAL_CURRENT_SOURCE_INVALID:" + type(exc).__name__
+        ) from exc
+    live = professional_doc.get("property_truth_frontier")
+    if not isinstance(live, Mapping):
+        raise PostCompositionFrontierError("PROFESSIONAL_CURRENT_FRONTIER_MISSING")
+    comparisons = {
+        "verified_leaf_count": closed,
+        "open_execution_leaf_count": open_exec,
+        "open_semantic_leaf_count": open_sem,
+    }
+    for key, expected in comparisons.items():
+        if live.get(key) != expected:
+            raise PostCompositionFrontierError(
+                "PROFESSIONAL_CURRENT_EVIDENCE_DRIFT:" + key
+            )
+    live_ids = live.get("verified_leaf_ids")
+    if not isinstance(live_ids, list) or live_ids != ids:
+        raise PostCompositionFrontierError(
+            "PROFESSIONAL_CURRENT_EVIDENCE_DRIFT:verified_leaf_ids"
+        )
 
     return {
         "property_truth_closed_count": closed,
