@@ -1,0 +1,103 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_V7_12_OF_12_COMPOSITION_INDEPENDENT_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "INDEPENDENT_SPRITE_EXACT_PUBLIC_CAPSULE_REPLAY_PASS__BINDING_COMPAT_9_OF_9__RECEIPT_COMPAT_8_OF_8__REAL_12_OF_12_COMPOSITION_PASS__ADVERSARIAL_7_OF_7__ZERO_QUALITY_OR_TERMINAL_CREDIT",
+  "public_capsule": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify-professional-v7-12of12-composition-20261010",
+    "commit": "eb2482f298df0c0a9145d92e59c7b78ba17cd960",
+    "pull_request": 2630,
+    "github_actions": {
+      "run_id": 38058970571,
+      "status": "queued",
+      "conclusion": null,
+      "counted_as_verification_evidence": false,
+      "reason": "RUN_NOT_COMPLETED_AT_PROMOTION_EVIDENCE_FREEZE"
+    }
+  },
+  "independent_replay": {
+    "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/pq-v7-12of12-public-replay",
+    "exact_public_capsule_commit": "eb2482f298df0c0a9145d92e59c7b78ba17cd960",
+    "binding_compatibility_tests": {
+      "run": 9,
+      "passed": 9,
+      "failed": 0
+    },
+    "receipt_compatibility_tests": {
+      "run": 8,
+      "passed": 8,
+      "failed": 0
+    },
+    "composition_verifier": {
+      "pass": true,
+      "status": "PASS__REAL_V7_12_OF_12_SAME_SUBJECT_COMPOSITION_ADMISSIBLE",
+      "composition_admissible": true,
+      "verified_root_subject_binding_count": 12,
+      "scoped_root_count": 12,
+      "scoped_capability_count": 21,
+      "subject_kind": "DECLARED_SYSTEM",
+      "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+      "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+      "professional_quality_closed": false,
+      "quality_authority": false,
+      "terminal_authority": false
+    },
+    "composition_adversarial_tests": {
+      "run": 7,
+      "passed": 7,
+      "failed": 0
+    }
+  },
+  "exact_promoted_blobs": {
+    "worklist_v18": "0d6efbd19f1b7d30853234a0e1f2633b52539f76",
+    "root_binding_compat_runtime": "21bcd114cd031823fb929a7be50a6efa00f898d7",
+    "root_binding_compat_tests": "9bc59e66b87821c11f34f0ad2aabe37c278d1577",
+    "root_receipt_compat_runtime": "7294be045e56081a846700ed5f2ce2dd4fd37a5e",
+    "root_receipt_compat_tests": "c5ebbf5457aafd83761f380ca727e7417bbdee52",
+    "real_12_of_12_composition_runtime": "07c64c87dea89cab346ed4c0ae1146f2250a4c73",
+    "real_12_of_12_composition_tests": "d75c2a7476ed9bdd66af1d0dbc7c0fc2429006e9"
+  },
+  "load_bearing_external_blobs": {
+    "scoped_evidence_registry": "b9ddf7cbe7fbfad0e81fe068a0c19b48703b5aba",
+    "scoped_evidence_integration_verify": "664c22bfdfc51ea4058e4e2d3c3efe9d8def907b",
+    "same_subject_gate_v3": "ddbe6ec92fef405b8909a161ef9acd685ec7317b",
+    "same_subject_gate_v3_public_verify": "79910bf40700ddf000630a7169566fef91e6c939",
+    "r12_public_verify": "174bc362ff1f1b7935925c8d17e55d36288bdbad",
+    "r3_v1_binding": "c49c120a61620d400e372884266b63ec34a054d2",
+    "r3_v1_verify": "92cacbd5f7b37cb515db9ebbc3685c961fc9e34e",
+    "closure_normal_form": "ebcfe5a48efce9df7fbc69a3817ac2f9adb1ff93"
+  },
+  "falsification_history": {
+    "first_public_run_id": 38058380263,
+    "first_run_result": "FAIL",
+    "first_decisive_failure": "R3_V2_BINDING_OMITTED_LEGACY_GLOBAL_SUBJECT_NONAUTHORITY_FIELD",
+    "repair": "REQUIRE_EXACT_CONTENT_ADDRESSED_INDEPENDENTLY_VERIFIED_R3_V1_INHERITANCE__PLUS_ROOT_RECEIPT_SCHEMA_NORMALIZATION",
+    "repaired_independent_replay": "PASS"
+  },
+  "proves": [
+    "ALL_TWELVE_CURRENT_ROOT_SUBJECT_BINDINGS_RESOLVE_TO_ONE_IDENTICAL_FROZEN_V7_DECLARED_SYSTEM_SUBJECT",
+    "ALL_TWELVE_VERIFICATION_RECEIPTS_PASS_THE_RECEIPT_AWARE_V3_IDENTITY_AND_AUTHORITY_BOUNDARY",
+    "SCOPED_EVIDENCE_REGISTRY_COVERS_ALL_TWELVE_ROOTS_WITH_21_VERIFIED_SCOPED_CAPABILITIES",
+    "SAME_SUBJECT_ROOT_COMPOSITION_IS_ADMISSIBLE_FOR_THE_EXACT_V7_SUBJECT"
+  ],
+  "hard_nonclaims": [
+    "NO_PROFESSIONAL_QUALITY_CLOSURE",
+    "NO_GLOBAL_LEAF_OR_ROOT_CLOSURE",
+    "NO_DOMAIN_SEMANTIC_OR_EXECUTION_CLOSURE",
+    "NO_UNKNOWN_DEFEATER_COMPLETENESS",
+    "NO_LIVE_DEFAULT_PROMOTION",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "composition_admissible": true,
+  "professional_quality_closed": false,
+  "semantic_truth_authority": false,
+  "execution_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
