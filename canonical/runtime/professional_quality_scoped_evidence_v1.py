@@ -45,6 +45,12 @@ R10_LEAVES = {"PQ::R10_ANALYSIS_DECISION::EXECUTION"}
 R10_SOURCE_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R10_DECISION_SUFFICIENCY_SCOPED_VERIFY_V1"
 R10_HISTORY_SCHEMA = "PROJECT_BRAIN_ONE_SHOT_DECISION_SUFFICIENT_GATE_VERIFY_20261009_V2"
 
+R6_KIND = "CONTENT_ADDRESSED_SCOPE_MATCHED_LEAF_EVIDENCE_ADMISSION_WITH_STATUS_NONAUTHORITY"
+R6_ROOT = "R6_EVIDENCE_GROUNDING_DEPENDENCE"
+R6_LEAVES = {"PQ::R6_EVIDENCE_GROUNDING_DEPENDENCE::EXECUTION"}
+R6_SOURCE_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_LEAF_BINDER_V2_VERIFY_V1"
+R6_REGISTRY_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_LEAF_EVIDENCE_REGISTRY_V1"
+
 
 def git_blob_sha(path: Path) -> str:
     data = path.read_bytes()
@@ -374,6 +380,68 @@ def _validate_r10(
     return errors, claim_scope
 
 
+def _validate_r6(
+    entry: dict[str, Any],
+    source: dict[str, Any] | None,
+    governance: dict[str, Any] | None,
+    compiler_declared: Any,
+) -> tuple[list[str], Any]:
+    errors = _common_checks(entry, R6_ROOT, R6_LEAVES)
+    claim_scope = None
+    if source is not None:
+        if source.get("schema") != R6_SOURCE_SCHEMA:
+            errors.append("SOURCE_SCHEMA_INVALID")
+        if source.get("status") != "PASS__PINNED_EXACT_BYTES__PYCOMPILE__5_OF_5__MANIFEST_STATUS_SELF_CERTIFICATION_KILLED__ZERO_TERMINAL_CREDIT":
+            errors.append("SOURCE_STATUS_NOT_ADMITTED")
+        blobs = source.get("exact_blobs")
+        if not isinstance(blobs, dict):
+            errors.append("SOURCE_EXACT_BLOBS_INVALID")
+        elif blobs.get("runtime") != compiler_declared:
+            errors.append("SOURCE_RUNTIME_MISMATCH")
+        proved = set(source.get("proved") or [])
+        required = {
+            "MANIFEST_VERIFIED_STATUS_HAS_ZERO_PROMOTION_AUTHORITY",
+            "LEAF_CLOSURE_REQUIRES_SCOPE_MATCHED_CONTENT_ADDRESSED_RECEIPT",
+            "RECEIPT_MUST_BIND_EXACT_ROOT_CONTRACT_AND_EXACT_LEAF_ACCEPTANCE",
+            "RECEIPT_VERIFICATION_BASIS_MUST_BE_CONTENT_ADDRESSED_AND_CURRENT",
+            "UNKNOWN_REGISTRY_LEAF_IDS_FAIL_STRUCTURE",
+        }
+        if not required <= proved:
+            errors.append("SOURCE_REQUIRED_EVIDENCE_ADMISSION_PROPERTIES_MISSING")
+        state = source.get("current_state")
+        if not isinstance(state, dict):
+            errors.append("SOURCE_CURRENT_STATE_INVALID")
+        else:
+            if state.get("verified_leaf_count") != 0:
+                errors.append("SOURCE_UNEXPECTED_GLOBAL_LEAF_CREDIT")
+            if state.get("domain_semantic_closure") is not False:
+                errors.append("SOURCE_DOMAIN_SEMANTIC_OVERCLAIM")
+            if state.get("domain_execution_closure") is not False:
+                errors.append("SOURCE_DOMAIN_EXECUTION_OVERCLAIM")
+        claim_scope = {
+            "kind": R6_KIND,
+            "guarantees": sorted(required),
+            "limitations": [
+                "NO_GENERAL_EVIDENCE_TRUTH_CLOSURE",
+                "NO_GENERAL_EVIDENCE_INDEPENDENCE_CLOSURE",
+                "NO_GENERAL_UNCERTAINTY_SEMANTICS_CLOSURE",
+                "NO_GLOBAL_R6_LEAF_OR_ROOT_CLOSURE",
+            ],
+        }
+
+    if governance is not None:
+        if governance.get("schema") != R6_REGISTRY_SCHEMA:
+            errors.append("EVIDENCE_REGISTRY_SCHEMA_INVALID")
+        if governance.get("receipt_schema") != "PROJECT_BRAIN_PROFESSIONAL_QUALITY_LEAF_VERIFICATION_RECEIPT_V1":
+            errors.append("EVIDENCE_REGISTRY_RECEIPT_SCHEMA_INVALID")
+        law = str(governance.get("admission_law") or "")
+        if "MANIFEST_STATUS_STRINGS_HAVE_ZERO_PROMOTION_AUTHORITY" not in law:
+            errors.append("EVIDENCE_REGISTRY_STATUS_NONAUTHORITY_LAW_MISSING")
+        if governance.get("terminal_authority") is not False:
+            errors.append("EVIDENCE_REGISTRY_TERMINAL_AUTHORITY_INVALID")
+    return errors, claim_scope
+
+
 def validate_entry(entry: dict[str, Any], *, repo_root: Path = ROOT) -> dict[str, Any]:
     errors: list[str] = []
     if not isinstance(entry, dict):
@@ -411,6 +479,8 @@ def validate_entry(entry: dict[str, Any], *, repo_root: Path = ROOT) -> dict[str
         handler_errors, claim_scope = _validate_r11(entry, source, verifier, compiler_declared)
     elif kind == R10_KIND:
         handler_errors, claim_scope = _validate_r10(entry, source, verifier, compiler_declared)
+    elif kind == R6_KIND:
+        handler_errors, claim_scope = _validate_r6(entry, source, verifier, compiler_declared)
     else:
         handler_errors, claim_scope = ["CLAIM_KIND_UNSUPPORTED"], None
     errors.extend(handler_errors)
