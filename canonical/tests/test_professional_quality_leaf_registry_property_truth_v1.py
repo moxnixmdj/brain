@@ -6,6 +6,8 @@ from canonical.runtime import professional_quality_leaf_binder_v2 as binder
 
 EXPECTED_EXECUTION={
     "PQ::R1_TARGET_SPECIFICATION::EXECUTION",
+    "PQ::R4_MEASUREMENT_CONSTRUCT::EXECUTION",
+    "PQ::R6_EVIDENCE_GROUNDING_DEPENDENCE::EXECUTION",
     "PQ::R7_CAUSAL_PRESCRIPTIVE::EXECUTION",
     "PQ::R10_ANALYSIS_DECISION::EXECUTION",
     "PQ::R12_META_COMPOSITION_CLOSURE::EXECUTION",
@@ -20,8 +22,8 @@ class ProfessionalLeafRegistryPropertyTruthV1Tests(unittest.TestCase):
         self.assertEqual(out["rejected_receipt_count"],0)
         self.assertEqual(set(out["verified_execution_leaf_ids"]),EXPECTED_EXECUTION)
         self.assertEqual(out["verified_semantic_leaf_ids"],[])
-        self.assertEqual(out["verified_leaf_count"],4)
-        self.assertEqual(out["open_leaf_count"],20)
+        self.assertEqual(out["verified_leaf_count"],6)
+        self.assertEqual(out["open_leaf_count"],18)
         self.assertFalse(out["promotion_ready"])
         self.assertFalse(out["pass"])
 
