@@ -1,0 +1,79 @@
+{
+  "schema": "PROJECT_BRAIN_R2_MECHANISM_CLOSURE_OPEN_WORLD_FRONTIER_POLICY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "ACTIVE_CANDIDATE__GENERAL_R2_MECHANISM_CLOSED__OPEN_WORLD_EVIDENCE_FRONTIER_NOT_PRIMARY_WITHOUT_CURRENT_DEFECT_BINDING",
+  "mission_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "sources": {
+    "current_r2": {
+      "path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+      "git_blob_sha": "c94c84aaf3c759abd6827c1ff93181c04033b6a1"
+    },
+    "adequate_decision_controller": {
+      "path": "canonical/runtime/general_adequate_decision_controller_v1.py",
+      "git_blob_sha": "b0cab3da36d89af202d6a95aa80701ad61372001"
+    },
+    "adequate_decision_fixed_point": {
+      "path": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
+      "git_blob_sha": "cabe3bd1ec3748a595f3a959718c38accdacfb2f"
+    },
+    "one_shot_v1": {
+      "path": "canonical/runtime/one_shot_verified_closure_v1.py",
+      "git_blob_sha": "117d85bec1e5fb49428271aa9883e89d0ef1aa0a"
+    },
+    "one_shot_v2": {
+      "path": "canonical/runtime/one_shot_reality_closure_v2.py",
+      "git_blob_sha": "b8347a3993f96aa5e6fa2f1fe68d7c8afccb8bec"
+    },
+    "unified_fabric": {
+      "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
+      "git_blob_sha": "e6713badf2a240daa019ab7d3eb4cfabeea76485"
+    },
+    "capability_first_scheduler_candidate": {
+      "path": "canonical/runtime/capability_first_scheduler_v1.py",
+      "git_blob_sha": "b74f967038ae5f71d45468b4233452cd134fd699"
+    }
+  },
+  "verified_current_truth": {
+    "r2_declares_general_mechanism_closed": true,
+    "r2_primary_internal_unsolved_count": 1,
+    "remaining_cell_id": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
+    "remaining_cell_state": "INTERNAL_UNSOLVED__PENDING_ACQUISITION_OR_EXPERIMENT",
+    "information_theoretic_externality_proved": false,
+    "task_local_controller_emits_minimum_information_requests": true,
+    "task_local_controller_can_use_information_provider_then_reverify": true,
+    "fixed_point_reenters_verified_controller_after_repair": true,
+    "one_shot_preserves_structured_r2_acquisition_requests": true,
+    "one_shot_minimum_information_contract_forbids_broad_acquisition_without_minimality_proof": true
+  },
+  "classification": {
+    "r2_general_control_mechanism": "SUFFICIENTLY_CLOSED_FOR_CAPABILITY_FIRST_SCHEDULING_UNDER_CURRENT_VERIFIED_ARCHITECTURE",
+    "finance_global_residual": "OPEN_WORLD_EVIDENCE_FRONTIER__WAKE_GATED__NOT_GLOBAL_MECHANISM_FAILURE_BY_EXISTENCE_ALONE",
+    "why": "The live task-local R2 loop can preserve unknown semantics, select a minimum policy-changing discriminator, acquire task-local information through a zero-authority provider, and rerun the verified decision authority. Therefore global completion of every future finance meaning/source/ontology case is not required before useful general capability development may proceed."
+  },
+  "scheduler_rule": {
+    "frontier_class": "OPEN_WORLD_EVIDENCE_FRONTIER",
+    "default_eligibility": "DEMOTED_OPEN_WORLD_EVIDENCE_FRONTIER_WITHOUT_CURRENT_CAPABILITY_DEFECT",
+    "wake_if_any": [
+      "TASK_LOCAL_COUNTEREXAMPLE_BOUND",
+      "INDEPENDENTLY_VERIFIED_CAPABILITY_DEFECT_BOUND"
+    ],
+    "wake_does_not_grant_truth": true,
+    "wake_does_not_grant_capability_credit": true,
+    "concrete_failure_may_outrank_other_work_under_normal_capability_resource_scoring": true
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_GLOBAL_FINANCE_SEMANTICS_ARE_CLOSED",
+    "NO_CLAIM_OPEN_WORLD_ONTOLOGY_MAPPING_IS_SOLVED",
+    "NO_CLAIM_INFORMATION_THEORETIC_EXTERNALITY_FOR_THE_FINANCE_TAIL",
+    "NO_CLAIM_TASK_LOCAL_INFORMATION_PROVIDER_OUTPUT_HAS_SEMANTIC_AUTHORITY",
+    "NO_CLAIM_R2_CAN_SUCCEED_ON_EVERY_FUTURE_TASK_WITHOUT_NEW_INFORMATION",
+    "NO_OPUS_CHECKPOINT_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
