@@ -35,6 +35,7 @@ from canonical.runtime import semantic_relation_control_v2 as semantic_relation
 from canonical.runtime import oewn_decision_sense_control_v1 as oewn_decision_sense
 from canonical.runtime import finance_bounded_concept_registry_verify_v1 as finance_concept_verify
 from canonical.runtime import one_shot_reality_closure_v2 as one_shot_reality_closure
+from canonical.runtime import certified_reached_escape_state_constructor_v1 as certified_reached_escape_state
 
 SCHEMA = "PROJECT_BRAIN_UNIFIED_COGNITIVE_FABRIC_V1"
 ROOT = Path(__file__).resolve().parents[2]
@@ -54,7 +55,7 @@ ENGINE_DESCRIPTORS = {
     "REPAIR_SYNTHESIS": "live_brain_runtime_v1.synthesize_failure_repair",
     "REPAIR_CYCLE": "live_brain_runtime_v1.execute_failure_repair_cycle",
     "UNIVERSAL_ESCAPE": "universal_escape_resolver_v1.resolve",
-    "REACHED_ESCAPE_STATE": "reached_escape_state_kernel_v1.evaluate",
+    "REACHED_ESCAPE_STATE": "certified_reached_escape_state_constructor_v1.construct",
     "CERTIFIED_ROUTE": "certificate_gated_selected_route_runtime_entrypoint_v5",
     "TERMINAL_AUTOPILOT": "terminal_autopilot_v1",
     "TERMINAL_ROOT": "terminal_root_decision_gate_v1.evaluate",
@@ -614,8 +615,7 @@ def run(
         elif mode == "UNIVERSAL_ESCAPE":
             out = universal_escape.resolve(**dict(payload))
         elif mode == "REACHED_ESCAPE_STATE":
-            from canonical.runtime import reached_escape_state_kernel_v1 as reached_escape_state
-            out = reached_escape_state.evaluate(payload)
+            out = certified_reached_escape_state.construct(payload)
         elif mode == "CERTIFIED_ROUTE":
             operation = str(payload.get("operation") or "").strip().upper()
             if operation == "PREFLIGHT":
