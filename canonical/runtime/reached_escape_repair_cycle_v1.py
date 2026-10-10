@@ -214,6 +214,11 @@ def _verify_candidate(
         return False, None, "REPAIR_VERIFIER_RETURNED_NO_RECEIPT"
     if receipt.get("schema") != VERIFY_SCHEMA or receipt.get("pass") is not True:
         return False, receipt, "REPAIR_VERIFICATION_NOT_PASS"
+    if receipt.get("independent_verification") is not True:
+        return False, receipt, "REPAIR_VERIFICATION_NOT_INDEPENDENT"
+    verifier_id = str(receipt.get("verifier_id") or "").strip()
+    if not verifier_id:
+        return False, receipt, "REPAIR_VERIFIER_ID_MISSING"
     for key in ("promotion_authority", "acceptance_authority", "terminal_authority"):
         if receipt.get(key) is True:
             return False, receipt, "REPAIR_VERIFIER_AUTHORITY_ESCALATION:" + key
@@ -271,6 +276,12 @@ def run(
         or max_rounds > 16
     ):
         return _base("FAIL_CLOSED", reason="MAX_REPAIR_ROUNDS_INVALID")
+
+    if provider is verifier:
+        return _base(
+            "FAIL_CLOSED__REPAIR_PROVIDER_AND_VERIFIER_NOT_INDEPENDENT",
+            reason="PROVIDER_AND_VERIFIER_CALLABLE_IDENTICAL",
+        )
 
     current = deepcopy(dict(state)) if isinstance(state, Mapping) else state
     trace: list[dict[str, Any]] = []
@@ -386,6 +397,8 @@ def run(
             "verified_property": verify_request["required_verified_property"],
             "provider_truth_authority": False,
             "verification_receipt_bound": True,
+            "verifier_id": str(receipt.get("verifier_id") or "").strip(),
+            "independent_verification": True,
         })
         current = next_state
 
