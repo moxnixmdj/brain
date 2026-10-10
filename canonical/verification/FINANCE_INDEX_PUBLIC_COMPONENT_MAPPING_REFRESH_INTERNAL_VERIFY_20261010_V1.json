@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_FINANCE_INDEX_PUBLIC_COMPONENT_MAPPING_REFRESH_INTERNAL_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_REMOTE_EXACT_BYTE_INTERNAL_REPLAY__PUBLIC_MAPPING_BOUNDARY_FAIL_CLOSED__ZERO_CREDIT",
+  "subject": {
+    "governance_path": "canonical/governance/FINANCE_INDEX_PUBLIC_COMPONENT_MAPPING_REFRESH_20261010_V1.json",
+    "governance_git_blob_sha": "08234ffe4fdea57329106547e1b1cfae60d08908",
+    "test_path": "canonical/tests/test_finance_index_public_component_mapping_refresh_v1.py",
+    "test_git_blob_sha": "f2fb1154cd884484a2e08dfdd1e2adfc6cf819c4"
+  },
+  "carrier": {
+    "type": "SPRITE",
+    "name": "brain-escape-audit-verify-20261010-v1",
+    "id": "sprite-e24ab09a-a44f-45c6-816a-521154d8c1cc",
+    "workspace": "/tmp/finance_index_mapping_refresh_verify",
+    "incremental_spend_usd": 0
+  },
+  "replay": {
+    "py_compile_pass": true,
+    "tests_run": 1,
+    "tests_passed": 1,
+    "tests_failed": 0,
+    "verified_invariants": [
+      "OUTER_COMPONENT_WEIGHTS_AND_EVALUATION_MEMBERSHIP_MAY_BE_PUBLIC_WHILE_INNER_COMPONENT_TRANSFORM_REMAINS_UNBOUND",
+      "PUBLIC_UNDERLYING_BENCHMARK_SCORE_ALONE_CANNOT_MINT_A_NORMALIZED_FINANCE_COMPONENT_LOWER_BOUND",
+      "DEFAULT_COMPONENT_FLOORS_REMAIN_FORBIDDEN",
+      "CROSS_BENCHMARK_SCORE_TRANSFER_WITHOUT_EXACT_NORMALIZATION_REMAINS_FORBIDDEN",
+      "ROW_REMAINS_OPEN_BLOCKED",
+      "ZERO_ACCEPTANCE_AND_TERMINAL_CREDIT"
+    ]
+  },
+  "scope_boundary": "THIS_RECEIPT_VERIFIES_INTERNAL_ARTIFACT_LOGIC_AND_EXACT_BYTES_ONLY__THE_FIRST_PARTY_WEB_OBSERVATIONS_WERE_RETRIEVED_SEPARATELY_AND_ARE_NOT_REFETCHED_BY_THIS_SPRITE_RECEIPT",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
