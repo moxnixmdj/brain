@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_AUTHORITY_RUNTIME_REFINEMENT_OBLIGATION_COVERAGE_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__CURRENT_RUNTIME_OBLIGATION_COVERAGE_COMPLETE__SEMANTIC_REFINEMENT_OPEN",
+  "implementation": {
+    "path": "canonical/runtime/current_authority_runtime_refinement_obligation_registry_v1.py",
+    "git_blob_sha": "c27cf9cfe1bd5e98d3e9100d4d6549c48300f95f"
+  },
+  "tests": {
+    "path": "canonical/tests/test_current_authority_runtime_refinement_obligation_registry_v1.py",
+    "git_blob_sha": "408b933083a5197eac8f43d71bd6272099cc73c4",
+    "run": 6,
+    "passed": 6,
+    "failed": 0
+  },
+  "snapshot": {
+    "path": "canonical/governance/CURRENT_AUTHORITY_RUNTIME_REFINEMENT_OBLIGATION_SNAPSHOT_20261010_V1.json",
+    "git_blob_sha": "a7d0b0b4327b13a000177990e0940601d439e0bf"
+  },
+  "current_authority": {
+    "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+    "git_blob_sha": "b3d053e1451c053af2bf75ad9f31a091b101be39",
+    "pointer_revision": 95
+  },
+  "independent_connector_census": {
+    "current_binding_reference_count": 46,
+    "superseded_binding_reference_count": 2,
+    "unique_current_runtime_path_count": 40,
+    "selected_current_runtime_path_count": 0,
+    "non_selected_current_runtime_path_count": 40,
+    "exact_blob_matches": 40,
+    "exact_blob_mismatches": 0
+  },
+  "claims": {
+    "every_current_runtime_path_has_refinement_obligation": true,
+    "quantifier_coverage_complete": true,
+    "current_byte_identity_bound": true,
+    "semantic_refinement_proved": false,
+    "repository_wide_refinement_proved": false,
+    "terminal_closure_proved": false
+  },
+  "terminal_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "acceptance_credit_delta": 0
+}
