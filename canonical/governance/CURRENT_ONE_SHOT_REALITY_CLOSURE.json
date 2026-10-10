@@ -1,10 +1,10 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_ONE_SHOT_REALITY_CLOSURE_POINTER_V1",
   "date": "2026-10-09",
-  "status": "ACTIVE_VERIFIED_ORCHESTRATOR__CANONICAL_FRONTDOOR_META_MODE_LIVE__STRICT_EXTERNALITY_LAW_VERIFIED__ACTUAL_LIVE_R3_INTERNAL_FIXED_POINT__NO_RESIDUAL__CURRENT_R2_V56_AND_CODING_V3_PROJECTION_BOUND__INFRASTRUCTURE_FAILURES_INTERNAL_AND_RETRYABLE__DYNAMIC_CURRENT_PROJECTION__FINAL_CLEANROOM_GATE_BOUND__AUTO_DEFAULT_FALLBACK_LIVE__PROOF_CARRYING_DIRECT_ROUTE_AUTO_PROMOTION_LIVE__EXACT_DECISION_REPLAY_REQUIRED__DYNAMIC_ADMISSION_POINTER_TARGET_FOLLOW_BOUND__PROMOTION_CONCURRENCY_GUARD_BOUND__ROUTE_NONINTERFERENCE_GATE_BOUND",
+  "status": "ACTIVE_VERIFIED_ORCHESTRATOR__CANONICAL_FRONTDOOR_META_MODE_LIVE__STRICT_EXTERNALITY_LAW_VERIFIED__ACTUAL_LIVE_R3_INTERNAL_FIXED_POINT__NO_RESIDUAL__CURRENT_R2_V56_AND_CODING_V3_PROJECTION_BOUND__INFRASTRUCTURE_FAILURES_INTERNAL_AND_RETRYABLE__DYNAMIC_CURRENT_PROJECTION__FINAL_CLEANROOM_GATE_BOUND__AUTO_DEFAULT_FALLBACK_LIVE__PROOF_CARRYING_DIRECT_ROUTE_AUTO_PROMOTION_LIVE__EXACT_DECISION_REPLAY_REQUIRED__DYNAMIC_ADMISSION_POINTER_TARGET_FOLLOW_BOUND__PROMOTION_CONCURRENCY_GUARD_BOUND__ROUTE_NONINTERFERENCE_GATE_BOUND__ROUTE_DEPLOYMENT_PROVIDER_CONTRACT_BOUND",
   "runtime": {
     "path": "canonical/runtime/one_shot_reality_closure_v2.py",
-    "git_blob_sha": "b8347a3993f96aa5e6fa2f1fe68d7c8afccb8bec"
+    "git_blob_sha": "a3842ba9e5314d250d4dff1b59ac37adbe62882b"
   },
   "predecessor": {
     "path": "canonical/runtime/one_shot_verified_closure_v1.py",
@@ -51,6 +51,15 @@
       "status": "PASS__EXACT_BLOBS__PUBLIC_ISOLATED_3_OF_3__DYNAMIC_POINTER_TARGET_FOLLOW__STALE_SNAPSHOT_NONAUTHORITATIVE__ZERO_CREDIT",
       "public_run_id": 38024724095,
       "tests_passed": 3,
+      "terminal_credit_delta": 0
+    },
+    "latest_r2_route_deployment_provider_contract": {
+      "path": "canonical/verification/ONE_SHOT_R2_ROUTE_DEPLOYMENT_PROVIDER_CONTRACT_VERIFY_20261010_V1.json",
+      "git_blob_sha": "5c136c543ec9f813f19df0eb6fbe03c03f4d53dd",
+      "status": "PASS__EXACT_BLOBS__PUBLIC_ISOLATED_7_OF_7__CURRENT_ROUTE_PROOF_CONTRACT_EXPOSED__PROMOTION_REGRESSION_PASS__ZERO_CREDIT",
+      "public_run_id": 38028481950,
+      "public_job_id": 114144269831,
+      "tests_passed": 7,
       "terminal_credit_delta": 0
     }
   },
@@ -418,6 +427,18 @@
     },
     "stale_noninterference_proof_policy": "FAIL_CLOSED",
     "missing_noninterference_proof_policy": "FAIL_CLOSED",
-    "existing_exact_live_binding_repromotion_policy": "IDEMPOTENT_GRANDFATHERED"
+    "existing_exact_live_binding_repromotion_policy": "IDEMPOTENT_GRANDFATHERED",
+    "synthesis_provider_contract_live": true,
+    "synthesis_provider_contract_schema": "PROJECT_BRAIN_R2_DIRECT_ROUTE_DEPLOYMENT_PROVIDER_CONTRACT_V2",
+    "synthesis_provider_contract_re_resolves_current_pointer_each_attempt": true,
+    "synthesis_provider_contract_verification": {
+      "path": "canonical/verification/ONE_SHOT_R2_ROUTE_DEPLOYMENT_PROVIDER_CONTRACT_VERIFY_20261010_V1.json",
+      "git_blob_sha": "5c136c543ec9f813f19df0eb6fbe03c03f4d53dd",
+      "status": "PASS__EXACT_BLOBS__PUBLIC_ISOLATED_7_OF_7__CURRENT_ROUTE_PROOF_CONTRACT_EXPOSED__PROMOTION_REGRESSION_PASS__ZERO_CREDIT",
+      "public_run_id": 38028481950,
+      "public_job_id": 114144269831,
+      "tests_passed": 7,
+      "terminal_credit_delta": 0
+    }
   }
 }

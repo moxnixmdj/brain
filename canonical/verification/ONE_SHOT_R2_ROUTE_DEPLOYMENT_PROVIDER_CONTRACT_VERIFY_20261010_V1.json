@@ -1,0 +1,91 @@
+{
+  "schema": "PROJECT_BRAIN_ONE_SHOT_R2_ROUTE_DEPLOYMENT_PROVIDER_CONTRACT_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_BLOBS__PUBLIC_ISOLATED_7_OF_7__CURRENT_ROUTE_PROOF_CONTRACT_EXPOSED__PROMOTION_REGRESSION_PASS__ZERO_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "codex/one-shot-route-promotion-contract-v1",
+    "candidate_base_main_sha": "8222895be7f82351fb087daa796b4a35e2d6d184",
+    "observed_current_main_sha": "a6e7681446b5ef6e8b75809e65d658cae93c870f",
+    "exact_candidate_blobs": {
+      "canonical/runtime/one_shot_reality_closure_v2.py": "a3842ba9e5314d250d4dff1b59ac37adbe62882b",
+      "canonical/runtime/promote_r2_direct_route_v1.py": "fa6f423837c7f9e8d50d18922f86ca1131c9fa7f",
+      "canonical/runtime/r2_direct_route_dynamic_admission_v1.py": "e31c0612a905271a5a8e72865afd08cfe13d8cc1",
+      "canonical/tests/test_one_shot_r2_route_deployment_contract_v1.py": "167b4f532fd3cda867dd4413e6e869c009be12b6",
+      "canonical/tests/test_one_shot_auto_direct_route_promotion_v1.py": "10a31678c2b54405e3866bb59ab3be7498f101fd"
+    }
+  },
+  "problem": {
+    "downstream_promoter_requires_noninterference_proof": true,
+    "prior_synthesis_request_exposed_required_proof_contract": false,
+    "failure_mode": "PROVIDER_FOLLOWS_REQUEST_LITERAL__RETURNS_VERIFIED_ROUTE_RECEIPT_WITHOUT_CURRENT_NONINTERFERENCE_PROOF__PROMOTION_FAILS_PREVENTABLY"
+  },
+  "repair": {
+    "provider_contract_schema": "PROJECT_BRAIN_R2_DIRECT_ROUTE_DEPLOYMENT_PROVIDER_CONTRACT_V2",
+    "compiled_before_each_capability_synthesis_provider_call": true,
+    "pointer_resolved_at_each_attempt": true,
+    "exact_current_fields_exposed": [
+      "BASELINE_DYNAMIC_MANIFEST_GIT_BLOB_SHA",
+      "BASELINE_DYNAMIC_ROUTE_IDS",
+      "BASELINE_LIVE_WRAPPER_PATH",
+      "BASELINE_LIVE_WRAPPER_GIT_BLOB_SHA",
+      "NONINTERFERENCE_PROOF_SCHEMA",
+      "NONINTERFERENCE_PROOF_STATUS",
+      "NONINTERFERENCE_PROOF_CLASS",
+      "DEPLOYMENT_RECEIPT_REQUIRED_PROOF_FIELDS",
+      "STALENESS_RULE"
+    ],
+    "provider_deployment_authority": false,
+    "verification_authority_mutation_allowed": false,
+    "existing_exact_binding_repromotion_exempt": true
+  },
+  "public_isolated_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2549,
+    "workflow": "Isolated verification dispatcher",
+    "workflow_run_id": 38028481950,
+    "workflow_job_id": 114144269831,
+    "conclusion": "success",
+    "exact_blob_check": true,
+    "python_compile": true,
+    "tests_run": 7,
+    "tests_passed": 7,
+    "verified_properties": [
+      "CONTRACT_RE_RESOLVES_POINTER_AT_EACH_PROVIDER_ATTEMPT",
+      "SYNTHESIS_PROVIDER_RECEIVES_EXACT_CURRENT_NONINTERFERENCE_CONTRACT",
+      "INCOMPLETE_ROUTE_BINDING_FAILS_CLOSED",
+      "PROMOTER_REJECTION_CANNOT_BE_LAUNDERED_INTO_PROVIDER_SUCCESS",
+      "PROVIDER_WITHOUT_ROUTE_PROPOSAL_PRESERVES_EXISTING_BEHAVIOR",
+      "REAL_PROMOTER_TRANSACTION_UPDATES_DYNAMIC_POINTER_BEFORE_RETRY",
+      "VERIFIED_CANDIDATE_AND_RECEIPT_ARE_PROMOTED_BEFORE_RETRY"
+    ]
+  },
+  "current_main_nonoverlap_lease": {
+    "verified_candidate_base_sha": "8222895be7f82351fb087daa796b4a35e2d6d184",
+    "observed_main_sha": "a6e7681446b5ef6e8b75809e65d658cae93c870f",
+    "intervening_commit_count": 13,
+    "checked_paths": [
+      "canonical/runtime/one_shot_reality_closure_v2.py",
+      "canonical/tests/test_one_shot_r2_route_deployment_contract_v1.py",
+      "canonical/governance/CURRENT_DEFAULT_RUNTIME_INTEGRATION.json",
+      "canonical/governance/CURRENT_ONE_SHOT_REALITY_CLOSURE.json"
+    ],
+    "overlaps": [],
+    "exact_candidate_blobs_unchanged": true
+  },
+  "authority_boundaries": {
+    "provider_deployment_authority": false,
+    "semantic_truth_authority": false,
+    "policy_adequacy_authority": false,
+    "terminal_authority": false,
+    "terminal_credit_delta": 0
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}

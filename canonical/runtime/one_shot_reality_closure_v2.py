@@ -674,6 +674,65 @@ def _validate_provider_receipt(
     return receipt
 
 
+def _r2_direct_route_deployment_contract(
+    *,
+    repo_root: str | Path,
+) -> dict[str, Any]:
+    """Describe the exact current proof obligations for an optional new live route."""
+    root = Path(repo_root).resolve()
+    admission = r2_direct_route_promoter.admission
+    current = admission.load_current_admissions(repo_root=root)
+
+    wrapper_rel = admission.LIVE_WRAPPER_PATH
+    wrapper = (root / wrapper_rel).resolve()
+    if wrapper == root or root not in wrapper.parents or not wrapper.is_file():
+        raise RealityClosureError("R2_DIRECT_ROUTE_LIVE_WRAPPER_MISSING")
+    wrapper_sha = admission.git_blob_sha(wrapper)
+
+    route_ids = sorted(
+        str(row["route_id"]) for row in current["admissions"]
+    )
+    return {
+        "schema": "PROJECT_BRAIN_R2_DIRECT_ROUTE_DEPLOYMENT_PROVIDER_CONTRACT_V2",
+        "optional_direct_route_proposal": True,
+        "provider_deployment_authority": False,
+        "provider_receipt_proposal_fields": [
+            "r2_direct_route_candidate_path",
+            "r2_direct_route_independent_receipt_path",
+        ],
+        "new_route_noninterference_required": True,
+        "existing_exact_binding_repromotion_exempt": True,
+        "noninterference": {
+            "proof_schema": admission.NONINTERFERENCE_SCHEMA,
+            "proof_status": "INDEPENDENT_PASS__R2_DIRECT_ROUTE_NONINTERFERENCE",
+            "proof_class": admission.NONINTERFERENCE_PROOF_CLASS,
+            "deployment_receipt_required_fields": [
+                "noninterference_verification_path",
+                "noninterference_verification_git_blob_sha",
+            ],
+            "required_propositions": [
+                "legacy_overlap_absent_verified",
+                "dynamic_overlap_absent_verified",
+                "scope_complete_for_candidate_match_domain",
+                "independent_verified",
+            ],
+            "baseline_dynamic_manifest_git_blob_sha": current[
+                "target_git_blob_sha"
+            ],
+            "baseline_dynamic_route_ids": route_ids,
+            "baseline_live_wrapper_path": wrapper_rel,
+            "baseline_live_wrapper_git_blob_sha": wrapper_sha,
+            "staleness_rule": (
+                "PROMOTER_REJECTS_IF_CURRENT_MANIFEST_OR_ROUTE_SET_DIFFERS_"
+                "FROM_PROOF_BASELINE"
+            ),
+        },
+        "verification_authority_mutation_allowed": False,
+        "terminal_authority": False,
+        "terminal_credit": False,
+    }
+
+
 def _maybe_promote_verified_r2_direct_route(
     receipt: Mapping[str, Any],
     *,
@@ -932,10 +991,16 @@ def run(
                     "terminal_authority": False,
                 }
             try:
+                deployment_contract = _r2_direct_route_deployment_contract(
+                    repo_root=repo_root
+                )
                 receipt = _validate_provider_receipt(
                     capability_synthesis_provider({
                         **deepcopy(contract),
                         "decision_sufficient_contract": deepcopy(decision_contract),
+                        "r2_direct_route_deployment_contract": deepcopy(
+                            deployment_contract
+                        ),
                     }),
                     provider_kind="CAPABILITY_SYNTHESIS",
                 )
