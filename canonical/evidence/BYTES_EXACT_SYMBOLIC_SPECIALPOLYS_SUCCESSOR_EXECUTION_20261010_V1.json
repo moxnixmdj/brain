@@ -1,0 +1,129 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_SPECIALPOLYS_SUCCESSOR_EXECUTION_V1",
+  "status": "FRESH_SUCCESSOR_EXECUTION__NEW_POLYS_BYTE_FRONTIER__ZERO_PROMOTION_CREDIT",
+  "recorded_at": "2026-10-10",
+  "mission": "Minimum resource-feasible executable description conditional on already-owned Brain substrate.",
+  "governing_laws": [
+    "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V1.md",
+    "canonical/laws/BYTES_RESOURCE_BOUNDED_MINIMUM_MECHANISM_LAW_V1.md"
+  ],
+  "predecessor": {
+    "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_POLYS_SUCCESSOR_EXECUTION_20261010_V1.json",
+    "package_raw_python_source_bytes": 6653321,
+    "B_exec_raw_python_source_bytes": 6656081,
+    "package_xz_bytes": 1133884,
+    "fresh_qualification": "2070/2070"
+  },
+  "environment": {
+    "python": "3.13.5",
+    "donor": "SymPy 1.14.0 plus mpmath 1.3.0",
+    "clean_room_python_site_packages_disabled": true,
+    "clean_room_user_site_disabled": true,
+    "clean_room_environment_stripped": true
+  },
+  "bounded_contract": [
+    "rational arithmetic",
+    "factor",
+    "coefficient",
+    "exact roots degree 2/3",
+    "exact roots degree 4",
+    "differentiation",
+    "exact integral of sin(x)^(2n) on [0,pi]",
+    "Hilbert determinant",
+    "binomial identity",
+    "limits",
+    "exact linear solve",
+    "power-series coefficient"
+  ],
+  "structural_cut": {
+    "id": "POLYS_SPECIALPOLYS_BRANCH_LOCAL_IMPORTS",
+    "change": "Move specialpolys imports from eager module load into the exact trigonometric, hyperbolic, interpolation, Viete, and cyclotomic branches that require them.",
+    "causal_reason": "The bounded route loads trigonometric/hyperbolic/polyfuncs/minpoly surfaces but does not execute special-polynomial helpers; eager imports therefore made sympy/polys/specialpolys.py resident without a bounded-contract causal use.",
+    "physically_removed_files": [
+      [
+        "sympy/polys/specialpolys.py",
+        11038
+      ]
+    ],
+    "package_net_reduction_bytes": 10821,
+    "polys_loaded_trace_reduction_bytes": 10989,
+    "exploratory_calibration": {
+      "cases": 1150,
+      "passed": 1150,
+      "seed": 8675309,
+      "corpus_sha256": "c7d1e49b59b1f57b9be70838b916d92e627603f7818e0d8c597da8ad7a4c1b51"
+    },
+    "exploratory_profile": "specialpolys.py executed module initialization only; no specialpolys function calls in the 1,150-case exploratory corpus."
+  },
+  "measured_candidate": {
+    "status": "PHYSICALLY_DELETED_RESEARCH_CANDIDATE__NOT_PROMOTED",
+    "python_files": 299,
+    "package_raw_python_source_bytes": 6642500,
+    "router_raw_python_source_bytes": 2760,
+    "B_exec_raw_python_source_bytes": 6645260,
+    "package_manifest_sha256": "be585f90c2f99287e6f6d06d45525af2f0127a07c8b04cd2959d3f0c75ac98c3",
+    "raw_improvement_vs_immediate_predecessor_bytes": 10821,
+    "polys_loaded_trace_raw_python_source_bytes": 1548495,
+    "comparable_source_archive_xz_bytes": 1131868,
+    "comparable_source_archive_sha256": "fdc78a7633277ed45de1e4c2a0d31598edcaa77463c89c0d2b639c19e669d842",
+    "comparable_xz_improvement_vs_predecessor_bytes": 2016,
+    "compression_identity_boundary": "The documented tar+xz procedure reproduces the predecessor's recorded xz byte COUNT exactly (1,133,884) but not its recorded digest, so the new xz size is a comparable storage measurement, not a claim of canonical archive-identity reproduction."
+  },
+  "qualification": {
+    "frozen_successor_corpus": {
+      "id": "QUAL_SUCCESSOR_NEXT2_20261010_V1",
+      "seed": 3141592,
+      "per_operation_budget": 200,
+      "cases": 2300,
+      "corpus_sha256": "491ba6d19abca5b04c5cfa851e4e1e2e4c61641518ec8b4f33c2f3dd638becb9",
+      "reconstructed_sha_matches_canonical": true,
+      "stock_donor_positive_control": "2300/2300",
+      "physical_candidate": "2300/2300",
+      "clean_room_replay": "2300/2300",
+      "extracted_archive_replay": "2300/2300",
+      "status": "SPENT_ONCE_AS_FRESH_CANDIDATE_QUALIFICATION"
+    }
+  },
+  "observed_roots": {
+    "sympy": "physical_v3_speciallazy/sympy/__init__.py",
+    "mpmath": "physical_v3_speciallazy/mpmath/__init__.py"
+  },
+  "reproducibility": {
+    "predecessor_reconstruction": "canonical/research/bytes/tools/rebuild_candidate_v2.py",
+    "successor_reconstruction": "canonical/research/bytes/tools/rebuild_candidate_v3.py",
+    "route": "canonical/research/bytes/tools/exact_symbolic_route_v1.py",
+    "semantic_digest": "canonical/research/bytes/tools/semantic_digest_v1.py",
+    "qualification_generator": "canonical/research/bytes/tools/generate_qualification_v1.py",
+    "loaded_trace_tool": "canonical/research/bytes/tools/trace_loaded_v1.py",
+    "physical_slice_tool": "canonical/research/bytes/tools/build_physical_slice_v1.py",
+    "qualification_runner": "canonical/research/bytes/tools/run_qualification_v1.py"
+  },
+  "next_frozen_qualification": {
+    "id": "QUAL_SUCCESSOR_NEXT3_20261010_V1",
+    "seed": 1414213,
+    "per_operation_budget": 220,
+    "cases": 2530,
+    "corpus_sha256": "bd01a61e1eb7b53bfc141239ef90f3879a2abe8891b4c691c25ca8a17b375730",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_STRUCTURAL_POLYS_CUT"
+  },
+  "durable_artifact_persistence": {
+    "canonical_evidence_and_reconstruction_tools": "PERSISTED_IN_GITHUB",
+    "binary_execution_bundle": {
+      "local_bytes": 1131868,
+      "sha256": "fdc78a7633277ed45de1e4c2a0d31598edcaa77463c89c0d2b639c19e669d842",
+      "extracted_replay": "2300/2300",
+      "library_upload_status": "FAILED__CONTAINER_SESSION_EXPIRED"
+    },
+    "rule": "Do not claim binary Library durability. GitHub reconstruction tooling, measurements, hashes, and evidence are durable; promotion credit remains zero."
+  },
+  "truth_boundary": [
+    "MEASURED: the 6,642,500-byte physical package passed the 2,300-case frozen successor corpus with no failures in a stripped python -S environment.",
+    "MEASURED: the stock donor passed the same corpus 2,300/2,300.",
+    "MEASURED: an independent copy replay and an extracted source-archive replay each passed 2,300/2,300.",
+    "MEASURED: the structural cut removes specialpolys.py from the loaded physical closure and reduces package raw source by 10,821 bytes.",
+    "INFERRED: eager specialpolys loading is packaging overhead for this bounded contract because physical deletion preserved fresh qualification.",
+    "NOT CLAIMED: universal SymPy correctness, all exact-symbolic capability, absolute information-theoretic minimality, exact reproduction of the predecessor archive digest, or Opus-family promotion.",
+    "PROMOTION CREDIT: 0."
+  ],
+  "next_action": "Attack the next loaded-but-unexecuted polys concentration using spent/exploratory corpora only; ring_series/minpoly import-time coupling is the current highest measured candidate. Do not touch QUAL_SUCCESSOR_NEXT3_20261010_V1 until a new structural cut is physically frozen."
+}
