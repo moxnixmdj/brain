@@ -33,10 +33,10 @@ class Tests(unittest.TestCase):
   o=v.verify_preserved_c1_c7()
   self.assertTrue(o["pass"],o);self.assertTrue(o["preserved_c1_c7_v9_reverified"])
   self.assertFalse(o["v9_c8_nonvacuity_proved"]);self.assertFalse(o["terminal_authority"])
- def test_cover_closes_cc_r3_but_never_mints_c8(self):
+ def test_cover_proves_bound_state_totality_but_not_claim_wide_cc_r3(self):
   p=problem();o=v.evaluate_v9_totality_cover(p,verify_for(p),r12_reconciliation=r12())
   self.assertTrue(o["pass"],o);self.assertTrue(o["v9_material_defeater_totality_proved"])
-  self.assertTrue(o["cc_r3_terminal_closure_proved"]);self.assertFalse(o["v9_c8_nonvacuity_proved"])
+  self.assertTrue(o["v9_bound_state_material_defeater_totality_proved"]);self.assertFalse(o["cc_r3_terminal_closure_proved"]);self.assertFalse(o["v9_c8_nonvacuity_proved"])
   self.assertFalse(o["semantic_property_truth_authority"])
  def test_positive_route_boolean_cannot_mint_c8(self):
   p=problem();iv=verify_for(p);iv["positive_route_observed"]=True
