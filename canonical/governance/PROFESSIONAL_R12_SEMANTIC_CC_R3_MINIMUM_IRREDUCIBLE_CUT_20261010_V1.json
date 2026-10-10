@@ -12,7 +12,7 @@
     "runtime_path": "canonical/runtime/professional_r12_semantic_cc_r3_evidence_cut_v1.py",
     "runtime_git_blob_sha": "df0a722b5cd0456b32b3ab1e4e4bb82a8896fe08",
     "verification_path": "canonical/verification/PROFESSIONAL_R12_SEMANTIC_CC_R3_EVIDENCE_CUT_VERIFY_20261010_V1.json",
-    "verification_git_blob_sha": "2ba5c2630218c4a3fab16c984406ad6665a421cc",
+    "verification_git_blob_sha": "f0a4ab092d1ec5ae86c63e9a8f62117aa8ee6da1",
     "observed": "6_OF_8_CONTRACT_CLAUSES_VERIFIED__C1_AND_C3_PARTIAL__STRONGER_MATERIAL_DEFEATER_TOTALITY_OPEN"
   },
   "cut": [
