@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_WHOLE_LEAF_SCOPE_SEMANTIC_VERIFY_V2",
+  "date": "2026-10-10",
+  "status": "PASS__R1_SEMANTIC_EXACT_WHOLE_DOMAIN_SCOPE_COVER_INDEPENDENTLY_REPLAYED__ZERO_PROPERTY_CREDIT",
+  "leaf_id": "PQ::R1_TARGET_SPECIFICATION::SEMANTIC",
+  "claim_id": "3e651d35ae8ab99189e6b768866d9a02f8135dd1a1638dbb2d0332d14e6de93e",
+  "claim_scope_git_blob_sha": "5b027682b211f879d9b0f06cfa041b158634743d",
+  "certificate_git_blob_sha": "c1c142f481bd1cf9bcccc127924d1c1f8824ce95",
+  "scope_compiler_git_blob_sha": "b208255789b14e44e86c82c196e06b5c41b3d039",
+  "semantic_verifier": {
+    "path": "canonical/runtime/professional_quality_whole_leaf_behavior_contract_domain_v1.py",
+    "git_blob_sha": "2a2ad9697fba7f92d67492ba49c7fa637afeaaff"
+  },
+  "semantic_tests": {
+    "path": "canonical/tests/test_professional_quality_whole_leaf_behavior_contract_domain_v1.py",
+    "git_blob_sha": "833e4aea760f02c8ce1af00b66dca674b1571044"
+  },
+  "semantic_verifier_git_blob_sha": "2a2ad9697fba7f92d67492ba49c7fa637afeaaff",
+  "semantic_tests_git_blob_sha": "833e4aea760f02c8ce1af00b66dca674b1571044",
+  "scope_complete": true,
+  "verified_basis": "UNIVERSAL_FORMAL_SCOPE_PROOF",
+  "independent_replay": {
+    "pass": true,
+    "carrier": "SPRITE",
+    "carrier_name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "result_status": "PASS__EXACT_BEHAVIOR_CONTRACT_DOMAIN_SCOPE_COVER",
+    "transcript_sha256": "3f2d79121434b5c0e5de80f9eec00583b07d4e075fcd9e9e5aa7cdc17bf68176",
+    "exact_certificate_blob_sha": "c1c142f481bd1cf9bcccc127924d1c1f8824ce95"
+  },
+  "semantic_truth_authority": false,
+  "execution_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "hard_nonclaims": [
+    "NO_R1_SEMANTIC_PROPERTY_TRUTH",
+    "NO_DOMAIN_SEMANTIC_CLOSURE",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ]
+}
