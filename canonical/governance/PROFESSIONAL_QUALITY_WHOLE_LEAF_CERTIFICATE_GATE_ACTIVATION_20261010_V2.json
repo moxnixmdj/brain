@@ -1,0 +1,73 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_WHOLE_LEAF_CERTIFICATE_GATE_ACTIVATION_20261010_V2",
+  "date": "2026-10-10",
+  "status": "ACTIVE_CANDIDATE__INDEPENDENTLY_VERIFIED_CLAIM_SCOPED_WHOLE_LEAF_GATE__DOMAIN_EQUIVALENCE_AND_SCOPE_COVER_SEPARATED__ZERO_PROPERTY_OR_TERMINAL_CREDIT",
+  "supersedes": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_CERTIFICATE_GATE_ACTIVATION_20261010_V1.json",
+    "git_blob_sha": "4b010aae1e741bbbdf7d1431f85b246a6a80c66f",
+    "reason": "V1_CONTENT_ADDRESSED_CERTIFICATES_BUT_DID_NOT_REQUIRE_AN_EXPLICIT_CONTENT_ADDRESSED_WHOLE_LEAF_DOMAIN_EQUIVALENCE_CLAIM_BEFORE_SCOPE_COVER_ADMISSION"
+  },
+  "runtime": {
+    "path": "canonical/runtime/professional_quality_whole_leaf_claim_scope_gate_v2.py",
+    "git_blob_sha": "d76b922e8d5c86f10568a3582759f8c23e69b2e0"
+  },
+  "tests": {
+    "path": "canonical/tests/test_professional_quality_whole_leaf_claim_scope_gate_v2.py",
+    "git_blob_sha": "dba858e5a67ecf210f3777c8c18a29dcfe6c0961"
+  },
+  "verification": {
+    "path": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_CLAIM_SCOPE_GATE_V2_VERIFY_20261010_V1.json",
+    "git_blob_sha": "cb91d94dd89ec7c67aae54db3cd5319612cd43d5",
+    "result": "PYCOMPILE_PASS__16_OF_16_PASS"
+  },
+  "reused_authorities": {
+    "claim_scope_guard": {
+      "path": "canonical/runtime/coverage_claim_scope_guard_v1.py",
+      "git_blob_sha": "d1de61aa9bc00a184772a50f7ec9d5ee2853d747"
+    },
+    "universal_scope_compiler": {
+      "path": "canonical/runtime/universal_scope_closure_compiler_v1.py",
+      "git_blob_sha": "b208255789b14e44e86c82c196e06b5c41b3d039"
+    },
+    "leaf_manifest": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_LEAF_BINDING_MANIFEST_20261010_V1.json",
+      "git_blob_sha": "a7cad32c9fd969ff2c3857bb924c7bd746237ec2"
+    },
+    "v7_subject": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V7_DECLARED_SYSTEM_SUBJECT_20261010_V6.json",
+      "git_blob_sha": "1d598bc8757017ceb34928d0df9f5fce859ef868"
+    },
+    "mission_authority": {
+      "path": "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "git_blob_sha": "13c470645b037bbb46245c687dd35197b420d51a"
+    }
+  },
+  "admission_sequence": [
+    "FREEZE_EXACT_LEAF_CLAIM_SCOPE_WITH_CONTENT_ADDRESSED_DOMAIN_DEFINITION_AND_ACCEPTANCE",
+    "INDEPENDENTLY_VERIFY_SCOPE_DEFINITION_EQUALS_THE_WHOLE_ADMISSIBLE_LEAF_DOMAIN",
+    "BIND_SCOPE_CERTIFICATE_TO_THE_CLAIM_SPECIFIC_SCOPE_ID",
+    "INDEPENDENTLY_VERIFY_SCOPE_COVERAGE_WITH_EXISTING_UNIVERSAL_SCOPE_COMPILER",
+    "ONLY_THEN_ADMIT_WHOLE_LEAF_SCOPE_COMPLETENESS",
+    "KEEP_LEAF_PROPERTY_TRUTH_AND_DOMAIN_EXECUTION_SEPARATE"
+  ],
+  "current_state": {
+    "expected_leaf_count": 24,
+    "admitted_claim_scopes": 0,
+    "admitted_whole_leaf_scope_certificates": 0,
+    "property_truth_closed_count": 0
+  },
+  "hard_nonclaims": [
+    "NO_LEAF_SCOPE_CLOSED_BY_GATE_ACTIVATION",
+    "NO_WHOLE_LEAF_PROPERTY_TRUTH",
+    "NO_DOMAIN_SEMANTIC_OR_EXECUTION_CLOSURE",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "semantic_truth_authority": false,
+  "execution_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
