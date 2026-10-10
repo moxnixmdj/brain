@@ -23,3 +23,5 @@ jobs:
         run: python canonical/runtime/reached_escape_live_no_bypass_guard_v1.py
       - name: Run no-bypass regression suite
         run: python -m unittest -v canonical.tests.test_reached_escape_live_no_bypass_guard_v1
+      - name: Run constructor V2 and verified repair-cycle regressions
+        run: python -m unittest -v canonical.tests.test_certified_reached_escape_state_constructor_v2 canonical.tests.test_reached_escape_repair_cycle_v1 canonical.tests.test_reached_escape_construction_invariant_boundary_v1
