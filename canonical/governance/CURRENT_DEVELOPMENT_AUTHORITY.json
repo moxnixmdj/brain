@@ -12,8 +12,10 @@
     },
     "residual_reuse_source": {
       "path": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
-      "observed_git_blob_sha": "fa5355528c6104c1768499b9dc657ea0b895e3ee",
-      "role": "CURRENT_REUSE_FIRST_CLASSIFICATION"
+      "observed_git_blob_sha": "c90f9b8226d2ffa7fb2049614b39286f85403ff8",
+      "role": "CURRENT_REUSE_FIRST_CLASSIFICATION",
+      "binding": "MUTABLE_CURRENT_POINTER_PATH_IDENTITY__OBSERVED_BLOB_DIAGNOSTIC",
+      "observed_blob_is_load_bearing": false
     },
     "goal_gate": "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V12.json",
     "optimizer": "canonical/governance/EXECUTION_FIRST_SELF_PROVING_OPTIMIZER_V2.json"
@@ -79,7 +81,7 @@
   "new_primitive_admission": {
     "default_authorized": false,
     "required": "SPECIFIC_FALSIFICATION_OR_PROOF_OF_INSUFFICIENCY_OF_RELEVANT_EXISTING_MECHANISMS_AND_TRANSFORMS",
-    "current_reuse_authority_status": "DERIVED_CURRENT_CLASSIFICATION__REUSE_ADAPTATION_PROMOTION_EVIDENCE_AND_VERIFIED_EXECUTION_FIRST__NO_VERIFIED_NEW_PRIMITIVE_CURRENTLY_ESTABLISHED__ZERO_CREDIT"
+    "current_reuse_authority_status": "DERIVED_CURRENT_CLASSIFICATION__SHARED_O_Q_LAWS_BOUND__ROW_INSTANTIATION_REUSE_FIRST__NO_VERIFIED_NEW_PRIMITIVE_CURRENTLY_ESTABLISHED__ZERO_CREDIT"
   },
   "development_loop": [
     "UNDERSTAND",
