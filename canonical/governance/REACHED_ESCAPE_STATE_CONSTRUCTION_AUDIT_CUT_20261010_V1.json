@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_REACHED_ESCAPE_STATE_CONSTRUCTION_AUDIT_CUT_V1",
+  "date": "2026-10-10",
+  "status": "CANDIDATE__KNOWN_LIVE_REACHED_STATE_ENTRYPOINTS_POSTDOMINATED_BY_FINITE_TOTALITY_AUDIT__GLOBAL_NO_BYPASS_OPEN__ZERO_CREDIT",
+  "objective": "TURN_EACH_LIVE_REACHED_ESCAPE_STATE_INTO_EITHER_AN_ALL_FUTURE_CURRENT_OUTCOMES_CERTIFICATE_OR_AN_EXACT_MACHINE_CHECKABLE_CONSTRUCTION_COUNTEREXAMPLE",
+  "theorem_dependency": {
+    "activation": [
+      "canonical/governance/REACHED_ESCAPE_FINITE_TOTALITY_CERTIFICATE_ACTIVATION_20261010_V1.json",
+      "a2b775c960fa6e33d97e75535656fcd4f09e87bb"
+    ],
+    "runtime": [
+      "canonical/runtime/reached_escape_finite_totality_certificate_v1.py",
+      "85487335b7e774ac9084b34c60e0175842771036"
+    ],
+    "verification": [
+      "canonical/verification/REACHED_ESCAPE_FINITE_TOTALITY_CERTIFICATE_PUBLIC_VERIFY_20261010_V1.json",
+      "db0b0bb8c72712422b992bac4846901ff61857cc"
+    ]
+  },
+  "new_boundary": {
+    "runtime": "canonical/runtime/reached_escape_state_construction_audit_v1.py",
+    "semantics": [
+      "CERTIFICATE_PASS__ADMIT_AS_CERTIFIED_REACHED_STATE_FOR_ALL_FUTURE_CURRENT_DISCRIMINATOR_OUTCOMES",
+      "UNCOVERED_REGION__EMIT_EXACT_REGION_WITHOUT_AUTHENTICATED_SAFE_ADEQUATE_POLICY_COUNTEREXAMPLE",
+      "INDISTINGUISHABLE_POLICY_CONFLICT__EMIT_EXACT_EQUIVALENCE_CLASS_COUNTEREXAMPLE",
+      "MALFORMED_OR_UNAUTHENTICATED_STATE__FAIL_CLOSED"
+    ]
+  },
+  "known_live_entrypoints": [
+    {
+      "path": "canonical/runtime/live_brain_runtime_v1.py",
+      "surface": "mode=reached_escape_state",
+      "required_postdominator": "reached_escape_state_construction_audit_v1.audit"
+    },
+    {
+      "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
+      "surface": "mode=REACHED_ESCAPE_STATE",
+      "required_postdominator": "reached_escape_state_construction_audit_v1.audit"
+    }
+  ],
+  "global_invariant_status": {
+    "all_actually_reached_nonterminal_states_certified": false,
+    "no_bypass_proved": false,
+    "exact_remaining_counterexample_class": "ANY_REACHED_ESCAPE_STATE_CONSTRUCTED_OR_CONSUMED_OUTSIDE_THE_TWO_KNOWN_LIVE_ENTRYPOINTS_WITHOUT_THE_CONSTRUCTION_AUDIT",
+    "reason": "PRIVATE_REPOSITORY_CODE_SEARCH_RETURNED_FALSE_EMPTY_RESULTS_FOR_KNOWN_REFERENCES__THEREFORE_GLOBAL_ABSENCE_CANNOT_BE_INFERRED_FROM_CODE_SEARCH",
+    "next": "BUILD_A_REPOSITORY_LOCAL_REFERENCE_CENSUS_OR_OTHER_COMPLETE_CALL_GRAPH_AND_PROVE_EVERY_REACHED_ESCAPE_STATE_CONSTRUCTION_OR_CONSUMPTION_PATH_IS_POSTDOMINATED_BY_THE_AUDIT"
+  },
+  "hard_nonclaims": [
+    "NO_GLOBAL_ESCAPE_PROGRESS_TOTALITY",
+    "NO_REPOSITORY_WIDE_NO_BYPASS_PROOF",
+    "NO_CLAIM_EVERY_ACTUALLY_REACHED_STATE_SATISFIES_CERTIFICATE_PRECONDITIONS",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
