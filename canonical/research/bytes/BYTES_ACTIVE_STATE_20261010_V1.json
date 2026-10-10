@@ -1,40 +1,38 @@
 {
   "schema": "PROJECT_BRAIN_BYTES_ACTIVE_STATE_V1",
-  "status": "ACTIVE_RESEARCH__NONCORE_REPAIRED_V21_FRONTIER__SUCCESSOR_READY",
+  "status": "ACTIVE_RESEARCH__FULL_PROFILE_V22_FRONTIER__SUCCESSOR_READY",
   "date": "2026-10-10",
   "mission_lock": "Find the minimum resource-feasible executable description of the required capability set conditional on already-owned Brain substrate.",
   "governing_laws": [
     "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V1.md",
     "canonical/laws/BYTES_RESOURCE_BOUNDED_MINIMUM_MECHANISM_LAW_V1.md"
   ],
-  "source_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_NONCORE_REPAIRED_V21_SUCCESSOR_EXECUTION_20261010_V1.json",
+  "source_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_FULL_PROFILE_V22_SUCCESSOR_EXECUTION_20261010_V1.json",
   "exact_symbolic_state": {
-    "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_NONCORE_REPAIRED_V21_SUCCESSOR_EXECUTION_20261010_V1.json",
-    "falsification_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_NEXT25_FALSIFICATION_20261010_V1.json",
+    "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_FULL_PROFILE_V22_SUCCESSOR_EXECUTION_20261010_V1.json",
     "status": "FRESH_MEASURED_PHYSICAL_RESEARCH_CANDIDATE__NOT_PROMOTED",
-    "raw_python_source_bytes": 2122982,
-    "B_exec_raw_python_source_bytes": 2125742,
+    "raw_python_source_bytes": 2089068,
+    "B_exec_raw_python_source_bytes": 2091828,
     "B_verify_semantic_digest_raw_bytes": 1358,
     "python_files": 277,
-    "final_untouched_qualification": "7820/7820",
-    "stock_donor_positive_control": "7820/7820",
-    "clean_room_execution": "7820/7820",
-    "archive_replay": "7820/7820",
-    "manifest_sha256": "0fa7fd19f6a674e493954d48f7438285dbab4fd9eefe559a3d537ca9834c6022",
-    "comparable_archive_bytes": 317236,
-    "comparable_archive_sha256": "5f9ba609d1dfab1e416cbf51e5517ecdd617463617d7fa06ceb88b450e98ee9e",
-    "raw_improvement_vs_previous_frontier_bytes": 49437,
+    "final_untouched_qualification": "8050/8050",
+    "stock_donor_positive_control": "8050/8050",
+    "clean_room_execution": "8050/8050",
+    "archive_replay": "8050/8050",
+    "manifest_sha256": "84a4947df1815c9dd5e9a82ba25670ee051f6a7bb3e05f904e17445fe8abd6e4",
+    "comparable_archive_bytes": 311496,
+    "comparable_archive_sha256": "a9b60efb8f12cadbd42a72a173b533ed291e4183f3cb80a41111ae959a5323f3",
+    "raw_improvement_vs_previous_frontier_bytes": 33914,
     "promotion_credit_from_this_record": 0
   },
   "current_bottleneck": {
-    "subsystem": "POST_V21_RERANK_PENDING",
-    "last_structural_cut": "NONCORE_SPENT_NEXT24_ZERO_HIT_FUNCTION_PRUNE_V21",
-    "paired_coverage_repair": "NEXT25_MPC_SQUARE_DIVMOD_NUM_DIGITS_INTEGER_LOG_REPAIR",
+    "subsystem": "POST_V22_RERANK_PENDING",
+    "last_structural_cut": "FULL_SPENT_NEXT26_ZERO_HIT_FUNCTION_PRUNE_V22",
     "required_surface": [
       "complete bounded exact-symbolic route"
     ],
-    "next_action": "Rerank exact V21 loaded/function concentrations using spent NEXT26 only; make the next physical cut before touching QUAL_SUCCESSOR_NEXT27_20261010_V1.",
-    "note": "NEXT25 falsified V20 itself on two roots cases; V21 repairs only the exposed donor-derived functions and retains a 49,437-byte raw reduction."
+    "next_action": "Rerank exact V22 using spent NEXT27 only; make a new physical cut before touching QUAL_SUCCESSOR_NEXT28_20261010_V1.",
+    "note": "22 function bodies selected by complete spent NEXT26 profiling were stubbed fail-closed; fresh NEXT27 passed all four lanes."
   },
   "rejected_do_not_reopen_without_new_evidence": [
     "parameter count as terminal metric",
@@ -68,17 +66,15 @@
   },
   "fresh_local_donor_evidence": "canonical/evidence/BYTES_SYMPY_1_14_DEPENDENCY_CENSUS_20261010_V1.json",
   "execution_reconciliation": {
-    "stock_donor_available_in_current_runtime": "SymPy 1.14.0 plus mpmath 1.3.0",
-    "predecessor_2172419_byte_candidate_superseded": true,
-    "predecessor_V20_falsified_on_NEXT25": true,
-    "fresh_candidate_raw_python_source_bytes": 2122982,
-    "fresh_candidate_B_exec_raw_python_source_bytes": 2125742,
-    "untouched_qualification": "7820/7820",
-    "stock_donor_positive_control": "7820/7820",
-    "clean_room_execution": "7820/7820",
-    "archive_replay": "7820/7820",
-    "action_taken": "Used spent NEXT24 to select 14 zero-hit function bodies; NEXT25 then exposed two pre-existing V20 quartic-root holes. Restored exactly mpc_square, Number.__divmod__, num_digits, and integer_log, rebuilt byte-preservingly, and qualified the exact final V21 identity on fresh NEXT26.",
-    "physical_next_step": "Continue from 2,122,982 bytes using spent NEXT26 only; rerank before selecting the next cut."
+    "predecessor_2122982_byte_candidate_superseded": true,
+    "fresh_candidate_raw_python_source_bytes": 2089068,
+    "fresh_candidate_B_exec_raw_python_source_bytes": 2091828,
+    "untouched_qualification": "8050/8050",
+    "stock_donor_positive_control": "8050/8050",
+    "clean_room_execution": "8050/8050",
+    "archive_replay": "8050/8050",
+    "action_taken": "Used complete spent NEXT26 execution profiling to select 22 zero-hit out-of-contract function bodies, rewrote only those bodies fail-closed with manifest guards, and qualified exact V22 on fresh NEXT27.",
+    "physical_next_step": "Continue from 2,089,068 bytes using spent NEXT27 only; rerank before selecting the next cut."
   },
   "historical_reported_predecessor": {
     "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_DONOR_SLICE_CHECKPOINT_20261010_V1.json",
@@ -87,13 +83,13 @@
     "qualification": "1854/1854",
     "provenance": "USER_SUPPLIED_TRANSCRIPT_CHECKPOINT"
   },
-  "fresh_execution_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_NONCORE_REPAIRED_V21_SUCCESSOR_EXECUTION_20261010_V1.json",
+  "fresh_execution_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_FULL_PROFILE_V22_SUCCESSOR_EXECUTION_20261010_V1.json",
   "next_frozen_qualification": {
-    "id": "QUAL_SUCCESSOR_NEXT27_20261010_V1",
-    "cases": 8050,
-    "seed": 5196152,
-    "per_operation_budget": 700,
-    "corpus_sha256": "bac8ef513a82f91c59ae2afb503703df2fc23cfcacefb5c36c414f2ae6405702",
+    "id": "QUAL_SUCCESSOR_NEXT28_20261010_V1",
+    "cases": 8280,
+    "seed": 5291502,
+    "per_operation_budget": 720,
+    "corpus_sha256": "6b6841e6a62185bfaa397358f14af68474c5d9a9be6290b166ec09b6ab890549",
     "generator": "canonical/research/bytes/tools/generate_qualification_v1.py",
     "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT",
     "spent": false
@@ -101,17 +97,17 @@
   "durable_artifact_persistence": {
     "candidate_manifest_and_measurements": "PERSISTED_IN_CANONICAL_GITHUB_EVIDENCE",
     "reconstruction_tools": [
-      "canonical/research/bytes/tools/rebuild_candidate_v20.py",
-      "canonical/research/bytes/tools/noncore_profile_repair_v21.py",
-      "canonical/research/bytes/tools/rebuild_candidate_v21.py"
+      "canonical/research/bytes/tools/rebuild_candidate_v21.py",
+      "canonical/research/bytes/tools/profile_prune_v22.py",
+      "canonical/research/bytes/tools/rebuild_candidate_v22.py"
     ],
     "exact_route": "canonical/research/bytes/tools/exact_symbolic_route_v1.py",
     "qualification_generator": "canonical/research/bytes/tools/generate_qualification_v1.py",
     "library_binary_status": "PERSISTED_IN_CHATGPT_LIBRARY",
-    "library_file_id": "libfile_9997eaa91c7c81919efaeeeabde9c7ce",
-    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V21_SUCCESSOR_20261010_V1.tar.xz",
-    "library_binary_bytes": 317236,
-    "library_binary_sha256": "5f9ba609d1dfab1e416cbf51e5517ecdd617463617d7fa06ceb88b450e98ee9e",
+    "library_file_id": "libfile_f53468713a74819196bace3c801167a5",
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V22_SUCCESSOR_20261010_V1.tar.xz",
+    "library_binary_bytes": 311496,
+    "library_binary_sha256": "a9b60efb8f12cadbd42a72a173b533ed291e4183f3cb80a41111ae959a5323f3",
     "rule": "GitHub reconstruction/evidence and exact qualified archive are durable; promotion credit remains zero."
   },
   "predecessor_fresh_execution_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_RECOVERY_EXECUTION_20261010_V1.json",
@@ -122,15 +118,15 @@
     "generator_sha256": "de6cf261f4e78b010c2454347409a309880066e18f89f7953bb477a7502f59e4",
     "spent": false
   },
-  "previous_fresh_execution_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_CORE_PROFILE_REPAIRED_V20_SUCCESSOR_EXECUTION_20261010_V1.json",
+  "previous_fresh_execution_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_NONCORE_REPAIRED_V21_SUCCESSOR_EXECUTION_20261010_V1.json",
   "spent_successor_qualification": {
-    "id": "QUAL_SUCCESSOR_NEXT26_20261010_V1",
-    "cases": 7820,
-    "corpus_sha256": "537684c7693774cee934b3a36399f891c1b28a0747eea7721bdcf98ef93ff9b1",
-    "candidate_result": "7820/7820",
-    "stock_donor_replay": "7820/7820",
-    "clean_room_replay": "7820/7820",
-    "archive_replay": "7820/7820",
+    "id": "QUAL_SUCCESSOR_NEXT27_20261010_V1",
+    "cases": 8050,
+    "corpus_sha256": "bac8ef513a82f91c59ae2afb503703df2fc23cfcacefb5c36c414f2ae6405702",
+    "candidate_result": "8050/8050",
+    "stock_donor_replay": "8050/8050",
+    "clean_room_replay": "8050/8050",
+    "archive_replay": "8050/8050",
     "spent": true
   },
   "fresh_falsification_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_NEXT25_FALSIFICATION_20261010_V1.json",
