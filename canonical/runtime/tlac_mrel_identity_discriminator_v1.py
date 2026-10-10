@@ -27,7 +27,7 @@ from canonical.runtime.https_source_fragment_projection_authority_v2 import (
 SCHEMA = "PROJECT_BRAIN_TLAC_MREL_IDENTITY_DISCRIMINATOR_V1"
 PACK_SCHEMA = "PROJECT_BRAIN_TLAC_MREL_IDENTITY_DISCRIMINATOR_SOURCE_PACK_V1"
 PACK_PATH = "canonical/evidence/TLAC_MREL_IDENTITY_DISCRIMINATOR_SOURCE_PACK_V1.json"
-PACK_GIT_BLOB_SHA = "5fee8efbd4ca57013400bfbc53051df292057cd4"
+PACK_GIT_BLOB_SHA = "549fc8a58d930765b53b28c5ae7702f340f4b3ef"
 SCOPE_ID = "REGCAP_TLAC_MREL_BOUNDED_RIVAL_TASK_V1"
 
 TLAC = "REGCAP::TLAC"
@@ -134,7 +134,7 @@ def load_pack(*, repo_root: str | Path | None = None) -> dict[str, Any]:
         by_id[sid] = dict(row)
     required = {
         "EBA_MREL_CASE_BY_CASE_2015",
-        "FSB_TLAC_STANDARD_2015",
+        "FSB_TLAC_PRESS_RELEASE_2015",
     }
     if set(by_id) != required:
         raise ValueError("PACK_SOURCE_SET_INVALID")
@@ -159,8 +159,8 @@ def verify_authority(
                 "MREL_CASE_BY_CASE_RESOLUTION_AUTHORITY",
             },
             "FSB_TLAC_STANDARD_2015": {
-                "TLAC_FSB_GSIB_SCOPE",
-                "TLAC_MINIMUM_EXTERNAL_REQUIREMENT",
+                "TLAC_FSB_GSIB_STANDARD",
+                "TLAC_ALONGSIDE_BASEL_MINIMUMS",
             },
         }
         for sid, pack in checked["sources_by_id"].items():
