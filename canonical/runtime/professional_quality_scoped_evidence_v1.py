@@ -82,6 +82,19 @@ R9_LEAVES = {"PQ::R9_TEMPORAL_DEPLOYMENT::EXECUTION"}
 R9_SOURCE_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R9_CONSERVATIVE_CENSORING_VERIFY_V1"
 R9_GOVERNANCE_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R9_CONSERVATIVE_CENSORING_SCOPE_V1"
 
+R8_KIND = "FROZEN_512_CASE_PRE_BEACON_DELEGATION_POPULATION_BINDING"
+R8_ROOT = "R8_POPULATION_CONTEXT_OPERATOR"
+R8_LEAVES = {"PQ::R8_POPULATION_CONTEXT_OPERATOR::EXECUTION"}
+R8_SOURCE_SCHEMA = "PROJECT_BRAIN_DELEGATION_TERMINAL_POPULATION_BINDING_PUBLIC_RUNNER_VERIFICATION_20261002_V1"
+R8_GOVERNANCE_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R8_POPULATION_CONTEXT_SCOPE_V1"
+
+R12_KIND = "FAIL_CLOSED_ASSURANCE_GRAPH_META_COMPOSITION_AND_ORDER_INDEPENDENT_DEFEATER_ROUTING"
+R12_ROOT = "R12_META_COMPOSITION_CLOSURE"
+R12_LEAVES = {"PQ::R12_META_COMPOSITION_CLOSURE::EXECUTION"}
+R12_SOURCE_SCHEMA = "PROJECT_BRAIN_UVCK_V2_CURRENT_GENERATION_INDEPENDENT_REPLAY_VERIFY_V1"
+R12_GOVERNANCE_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R12_META_COMPOSITION_SCOPE_V1"
+R12_ORDER_VERIFY_SCHEMA = "PROJECT_BRAIN_UVCK_V2_DEFEATER_ORDER_VERIFY_V1"
+
 
 def git_blob_sha(path: Path) -> str:
     data = path.read_bytes()
@@ -995,6 +1008,195 @@ def _validate_r9(
     return errors, claim_scope
 
 
+
+def _validate_r8(
+    entry: dict[str, Any],
+    source: dict[str, Any] | None,
+    governance: dict[str, Any] | None,
+    compiler_declared: Any,
+) -> tuple[list[str], Any]:
+    errors = _common_checks(entry, R8_ROOT, R8_LEAVES)
+    claim_scope = None
+    if source is not None:
+        if source.get("schema") != R8_SOURCE_SCHEMA:
+            errors.append("SOURCE_SCHEMA_INVALID")
+        if source.get("status") != "INDEPENDENT_PASS__EXACT_CURRENT_512_CASE_BINDING_PREFLIGHT__ZERO_TERMINAL_RESULT":
+            errors.append("SOURCE_STATUS_NOT_ADMITTED")
+        blobs = source.get("exact_bound_blobs")
+        if not isinstance(blobs, dict):
+            errors.append("SOURCE_EXACT_BLOBS_INVALID")
+        elif blobs.get("canonical/runtime/delegation_terminal_population_binding_v1.py") != compiler_declared:
+            errors.append("SOURCE_RUNTIME_MISMATCH")
+        required_verified = {
+            "EXACT_CURRENT_BRAIN_BLOBS_BOUND",
+            "FROZEN_BINDING_MANIFEST_INVARIANTS_PASS",
+            "CURRENT_SCOPE_GATE_RECEIPT_ADMISSIBLE_WITH_ZERO_ERRORS",
+            "CANONICAL_BINDING_REGRESSIONS_PASS",
+            "FRESH_512_CASE_PRE_BEACON_POPULATION_PASSES",
+            "ALL_SIX_FROZEN_DELEGATION_CASE_CLASSES_PRESENT",
+            "ZERO_CASE_REPLACEMENT",
+            "ZERO_ADAPTIVE_CASE_SELECTION",
+            "ZERO_TUNING_REPLAY",
+        }
+        if not required_verified <= set(source.get("verified") or []):
+            errors.append("SOURCE_REQUIRED_POPULATION_PROPERTIES_MISSING")
+        if source.get("terminal_results_observed") != 0:
+            errors.append("SOURCE_TERMINAL_RESULT_OBSERVED")
+        if source.get("fresh_terminal_evidence_consumed") != 0:
+            errors.append("SOURCE_FRESH_TERMINAL_EVIDENCE_CONSUMED")
+        if source.get("capability_credit_delta") != 0 or source.get("family_credit_delta") != 0:
+            errors.append("SOURCE_CREDIT_NONZERO")
+
+    if governance is not None:
+        if governance.get("schema") != R8_GOVERNANCE_SCHEMA:
+            errors.append("R8_GOVERNANCE_SCHEMA_INVALID")
+        if governance.get("status") != "ACTIVE_SCOPED_FROZEN_512_CASE_DELEGATION_POPULATION_BINDING__ZERO_GLOBAL_LEAF_CREDIT":
+            errors.append("R8_GOVERNANCE_STATUS_INVALID")
+        components = governance.get("exact_components")
+        if not isinstance(components, dict):
+            errors.append("R8_GOVERNANCE_COMPONENTS_INVALID")
+        else:
+            runtime_row = components.get("runtime")
+            source_row = components.get("source_receipt")
+            if not isinstance(runtime_row, dict) or runtime_row.get("git_blob_sha") != compiler_declared:
+                errors.append("R8_GOVERNANCE_RUNTIME_MISMATCH")
+            source_declared = (
+                (entry.get("source_receipt") or {}).get("git_blob_sha")
+                if isinstance(entry.get("source_receipt"), dict)
+                else None
+            )
+            if not isinstance(source_row, dict) or source_row.get("git_blob_sha") != source_declared:
+                errors.append("R8_GOVERNANCE_SOURCE_MISMATCH")
+        required_limits = {
+            "PREFLIGHT_ONLY__NO_POST_FREEZE_TERMINAL_RESULT",
+            "NO_CONSTITUENCY_SUPPORT_CLAIM",
+            "NO_PRESENTER_OR_OPERATOR_GENERALIZATION",
+            "NO_MEASUREMENT_INVARIANCE_CLAIM",
+            "NO_SOCIAL_INFLUENCE_OR_REACTIVITY_CLOSURE",
+            "NO_GLOBAL_R8_SEMANTIC_OR_EXECUTION_LEAF_CLOSURE",
+            "NO_GLOBAL_R8_ROOT_CLOSURE",
+        }
+        if not required_limits <= set(governance.get("limitations") or []):
+            errors.append("R8_GOVERNANCE_SCOPE_LIMITATIONS_MISSING")
+        claim_scope = {
+            "kind": R8_KIND,
+            "guarantees": list(governance.get("guarantees") or []),
+            "limitations": sorted(required_limits),
+        }
+    return errors, claim_scope
+
+
+def _validate_r12(
+    entry: dict[str, Any],
+    source: dict[str, Any] | None,
+    governance: dict[str, Any] | None,
+    compiler_declared: Any,
+    repo_root: Path,
+) -> tuple[list[str], Any]:
+    errors = _common_checks(entry, R12_ROOT, R12_LEAVES)
+    claim_scope = None
+    if source is not None:
+        if source.get("schema") != R12_SOURCE_SCHEMA:
+            errors.append("SOURCE_SCHEMA_INVALID")
+        if source.get("status") != "PASS__PINNED_CURRENT_GENERATION__PYCOMPILE__18_OF_18__ZERO_TERMINAL_CREDIT":
+            errors.append("SOURCE_STATUS_NOT_ADMITTED")
+        exact = source.get("exact_blobs")
+        if not isinstance(exact, dict):
+            errors.append("SOURCE_EXACT_BLOBS_INVALID")
+        elif exact.get("uvck_runtime") != compiler_declared:
+            errors.append("SOURCE_RUNTIME_MISMATCH")
+        replay = source.get("replay")
+        if (
+            not isinstance(replay, dict)
+            or replay.get("py_compile") != "PASS"
+            or replay.get("tests_run") != 18
+            or replay.get("tests_passed") != 18
+            or replay.get("tests_failed") != 0
+        ):
+            errors.append("SOURCE_REPLAY_INVALID")
+        required_proves = {
+            "SUPPORTED_DEFEATER_DOMINANCE_IS_ORDER_INDEPENDENT_ON_CURRENT_GENERATION",
+            "GENERIC_GRAPH_STILL_CANNOT_SELF_CERTIFY_EXECUTION_OR_ADVERSARIAL_CLOSURE",
+            "ALL_80_DECLARED_PROFESSIONAL_QUALITY_DEFEATERS_BIND_TO_EXISTING_ROOTS",
+            "EACH_DECLARED_PROFESSIONAL_QUALITY_DEFEATER_COUNTERPROVES_WHEN_ACTIVATED",
+            "UNMAPPED_CHALLENGE_FAILS_CLOSED",
+            "KNOWN_PROFESSIONAL_QUALITY_ATTACK_SET_REQUIRES_NO_NEW_UVCK_PRIMITIVE",
+        }
+        if not required_proves <= set(source.get("proves") or []):
+            errors.append("SOURCE_REQUIRED_META_PROPERTIES_MISSING")
+        required_not_proved = {
+            "UNKNOWN_DEFEATER_COMPLETENESS",
+            "PROFESSIONAL_QUALITY_DOMAIN_PROOF_CLOSURE",
+            "PROFESSIONAL_QUALITY_DOMAIN_EXECUTION_CLOSURE",
+            "FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION",
+            "LIVE_DEFAULT_PROMOTION",
+            "TERMINAL_AUTHORITY",
+        }
+        if not required_not_proved <= set(source.get("not_proved") or []):
+            errors.append("SOURCE_SCOPE_NONCLAIMS_MISSING")
+
+    if governance is not None:
+        if governance.get("schema") != R12_GOVERNANCE_SCHEMA:
+            errors.append("R12_GOVERNANCE_SCHEMA_INVALID")
+        if governance.get("status") != "ACTIVE_SCOPED_UVCK_META_COMPOSITION_AND_DEFEATER_SOUNDNESS__ZERO_GLOBAL_LEAF_CREDIT":
+            errors.append("R12_GOVERNANCE_STATUS_INVALID")
+        components = governance.get("exact_components")
+        if not isinstance(components, dict):
+            errors.append("R12_GOVERNANCE_COMPONENTS_INVALID")
+        else:
+            runtime_row = components.get("runtime")
+            current_row = components.get("current_generation_replay")
+            order_row = components.get("order_soundness_verification")
+            if not isinstance(runtime_row, dict) or runtime_row.get("git_blob_sha") != compiler_declared:
+                errors.append("R12_GOVERNANCE_RUNTIME_MISMATCH")
+            source_declared = (
+                (entry.get("source_receipt") or {}).get("git_blob_sha")
+                if isinstance(entry.get("source_receipt"), dict)
+                else None
+            )
+            if not isinstance(current_row, dict) or current_row.get("git_blob_sha") != source_declared:
+                errors.append("R12_GOVERNANCE_SOURCE_MISMATCH")
+            order_doc, order_errors = _read_bound(
+                repo_root,
+                order_row,
+                "R12_ORDER_SOUNDNESS_VERIFICATION",
+            )
+            errors.extend(order_errors)
+            if order_doc is not None:
+                if order_doc.get("schema") != R12_ORDER_VERIFY_SCHEMA:
+                    errors.append("R12_ORDER_VERIFY_SCHEMA_INVALID")
+                if order_doc.get("status") != "PASS__EXACT_BLOBS__PYCOMPILE__11_OF_11__ZERO_CREDIT":
+                    errors.append("R12_ORDER_VERIFY_STATUS_INVALID")
+                if order_doc.get("runtime_git_blob_sha") != compiler_declared:
+                    errors.append("R12_ORDER_VERIFY_RUNTIME_MISMATCH")
+                order_replay = order_doc.get("replay")
+                if (
+                    not isinstance(order_replay, dict)
+                    or order_replay.get("py_compile") != "PASS"
+                    or order_replay.get("tests_run") != 11
+                    or order_replay.get("failures") != 0
+                    or order_replay.get("errors") != 0
+                ):
+                    errors.append("R12_ORDER_VERIFY_REPLAY_INVALID")
+        required_limits = {
+            "NO_UNKNOWN_DEFEATER_COMPLETENESS",
+            "NO_DOMAIN_SEMANTIC_CLOSURE",
+            "NO_DOMAIN_EXECUTION_CLOSURE",
+            "NO_FULL_PRIVATE_REPOSITORY_REGRESSION",
+            "NO_LIVE_DEFAULT_PROMOTION",
+            "NO_GLOBAL_R12_SEMANTIC_OR_EXECUTION_LEAF_CLOSURE",
+            "NO_GLOBAL_R12_ROOT_CLOSURE",
+        }
+        if not required_limits <= set(governance.get("limitations") or []):
+            errors.append("R12_GOVERNANCE_SCOPE_LIMITATIONS_MISSING")
+        claim_scope = {
+            "kind": R12_KIND,
+            "guarantees": list(governance.get("guarantees") or []),
+            "limitations": sorted(required_limits),
+        }
+    return errors, claim_scope
+
+
 def validate_entry(entry: dict[str, Any], *, repo_root: Path = ROOT) -> dict[str, Any]:
     errors: list[str] = []
     if not isinstance(entry, dict):
@@ -1051,6 +1253,14 @@ def validate_entry(entry: dict[str, Any], *, repo_root: Path = ROOT) -> dict[str
     elif kind == R9_KIND:
         handler_errors, claim_scope = _validate_r9(
             entry, source, verifier, compiler_declared
+        )
+    elif kind == R8_KIND:
+        handler_errors, claim_scope = _validate_r8(
+            entry, source, verifier, compiler_declared
+        )
+    elif kind == R12_KIND:
+        handler_errors, claim_scope = _validate_r12(
+            entry, source, verifier, compiler_declared, repo_root
         )
     else:
         handler_errors, claim_scope = ["CLAIM_KIND_UNSUPPORTED"], None
