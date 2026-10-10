@@ -7,8 +7,9 @@ import unittest
 from canonical.runtime import brain_owned_semantic_relation_edge_registry_v4 as registry_v4
 from canonical.runtime import brain_owned_semantic_relation_edge_registry_v5 as registry_v5
 from canonical.runtime.certified_document_effect_field_edge_v1 import field_concept_id
-from canonical.runtime.cross_document_effect_semantic_lattice_v8 import evaluate
-from canonical.runtime.cross_document_effect_semantic_lattice_verify_v8 import verify
+from canonical.runtime.cross_document_effect_semantic_lattice_v8 import evaluate as evaluate_v8
+from canonical.runtime.cross_document_effect_semantic_lattice_v9 import evaluate as evaluate_v9
+from canonical.runtime.cross_document_effect_semantic_lattice_verify_v9 import verify as verify_v9
 from canonical.runtime.oewn_release_sense_universe_v1 import (
     RELEASE_ID, RELEASE_SHA256, SCHEMA as OEWN_SCHEMA,
 )
