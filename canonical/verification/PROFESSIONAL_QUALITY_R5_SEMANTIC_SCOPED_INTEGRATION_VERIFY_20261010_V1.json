@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R5_SEMANTIC_SCOPED_INTEGRATION_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_BRANCH_BYTES__R5_SEMANTIC_6_OF_6__SCOPED_ADMISSION_3_OF_3__ZERO_GLOBAL_LEAF_CREDIT",
+  "carrier": {
+    "name": "oq-verify-20261010",
+    "id": "sprite-f5cbeee2-cf40-428b-b1f0-dfda7d3bd5a2",
+    "workspace_kernel": "/home/sprite/pq-r5",
+    "workspace_integration": "/home/sprite/pq-r5-integration",
+    "dependency_installation": false
+  },
+  "exact_blobs": {
+    "semantic_runtime": "d391f1e66462e740e9869e7dc73429bb77733234",
+    "semantic_tests": "348821e1c4559df6cb25edb5d6d4adb152d368b2",
+    "semantic_source_verification": "33d5e8c11e07e4a153edf3970503c6753c5343d2",
+    "semantic_scope": "dc10374849f5c26e354e9c396aa1f581b5f56d63",
+    "scoped_overlay": "e72ed8049bc64a0ff894dda8f2b784dc5e801ee6",
+    "scoped_registry": "acca826e510b249acac3708436b5e9afd95030ba",
+    "focused_integration_tests": "75b847f5cc6a3a5e9a85fa410835abcd886da88f",
+    "source_governance": "1b61fa4eb98e0039a46f349d31da725bb02c16e0",
+    "source_execution_verification": "e852c4fbc14147c17469f1a4ede4e274d768bbf7"
+  },
+  "replay": {
+    "semantic_kernel_tests_run": 6,
+    "semantic_kernel_tests_passed": 6,
+    "semantic_kernel_tests_failed": 0,
+    "scoped_admission_tests_run": 3,
+    "scoped_admission_tests_passed": 3,
+    "scoped_admission_tests_failed": 0
+  },
+  "proved": [
+    "R5_CONDITIONAL_EVALUATOR_REFERENCE_SEMANTICS_ARE_EXPLICIT_AND_REPLAYABLE",
+    "PUBLIC_RUBRIC_ONLY_DOES_NOT_GAIN_OWNER_SEMANTIC_AUTHORITY",
+    "TRUE_OWNER_EVALUATOR_CLASS_MEMBERSHIP_REMAINS_AN_EXTERNAL_INDEPENDENT_PREMISE",
+    "R5_SEMANTIC_SCOPE_IS_ADMITTED_ONLY_WITH_EXACT_CONTENT_BINDINGS",
+    "STALE_SCOPE_AND_GLOBAL_ROOT_OVERCLAIM_FAIL_CLOSED"
+  ],
+  "not_proved": [
+    "TRUE_CURRENT_GDPVAL_OWNER_EVALUATOR_CONTAINMENT",
+    "PUBLIC_RUBRIC_OWNER_MONOTONICITY",
+    "CURRENT_BRAIN_VS_OPUS55_DIFFERENCE_VECTOR",
+    "GLOBAL_R5_SEMANTIC_LEAF_OR_ROOT_CLOSURE",
+    "GDPVAL_OR_AA_BRIEFCASE_QUALITY_ACCEPTANCE",
+    "OPUS55_NONINFERIORITY",
+    "TERMINAL_AUTHORITY"
+  ],
+  "semantic_leaf_credit": false,
+  "global_leaf_closure": false,
+  "quality_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "pass": true
+}

@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R5_EVALUATOR_SEMANTIC_SCOPE_V1",
+  "date": "2026-10-10",
+  "status": "ACTIVE_SCOPED_CONDITIONAL_EVALUATOR_REFERENCE_ROBUSTNESS_SEMANTICS__6_OF_6_INDEPENDENT_REPLAY__ZERO_GLOBAL_LEAF_CREDIT",
+  "root_id": "R5_EVALUATOR_REFERENCE",
+  "claim_kind": "CONDITIONAL_EVALUATOR_REFERENCE_ROBUSTNESS_SEMANTICS",
+  "exact_components": {
+    "runtime": {
+      "path": "canonical/runtime/professional_r5_evaluator_semantic_certificate_v1.py",
+      "git_blob_sha": "d391f1e66462e740e9869e7dc73429bb77733234"
+    },
+    "source_governance": {
+      "path": "canonical/governance/GDPVAL_HYBRID_EVALUATOR_UNCERTAINTY_20261008_V1.json",
+      "git_blob_sha": "1b61fa4eb98e0039a46f349d31da725bb02c16e0"
+    },
+    "source_execution_verification": {
+      "path": "canonical/verification/GDPVAL_HYBRID_EVALUATOR_UNCERTAINTY_SPRITE_VERIFICATION_20261008_V1.json",
+      "git_blob_sha": "e852c4fbc14147c17469f1a4ede4e274d768bbf7"
+    },
+    "semantic_verification": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R5_EVALUATOR_SEMANTIC_VERIFY_20261010_V1.json",
+      "git_blob_sha": "33d5e8c11e07e4a153edf3970503c6753c5343d2"
+    }
+  },
+  "guarantees": [
+    "ROBUST_MARGIN_MEANING_IS_CONDITIONAL_ON_AN_INDEPENDENTLY_AUTHENTICATED_EVALUATOR_OUTER_CLASS",
+    "ROBUST_MARGIN_IS_CHECKED_BY_EXACT_RATIONAL_ARITHMETIC",
+    "UNPROVED_OR_NONINDEPENDENT_EVALUATOR_CLASS_MEMBERSHIP_FAILS_CLOSED",
+    "PUBLIC_RUBRIC_ONLY_CANNOT_BIND_OWNER_PREFERENCE_SEMANTICS",
+    "ARBITRARY_LINEALITY_REQUIRES_EXACT_ORTHOGONALITY",
+    "BOUNDED_UNCERTAINTY_MUST_FIT_INSIDE_THE_CERTIFIED_MARGIN"
+  ],
+  "limitations": [
+    "NO_PROOF_THE_TRUE_CURRENT_OWNER_EVALUATOR_IS_IN_ANY_PROPOSED_DECOMPOSITION",
+    "NO_PROOF_PUBLIC_RUBRIC_DIRECTIONS_ARE_OWNER_MONOTONE",
+    "NO_CURRENT_BRAIN_VS_OPUS55_DIFFERENCE_VECTOR_BINDING",
+    "NO_GLOBAL_R5_SEMANTIC_LEAF_OR_ROOT_CLOSURE",
+    "NO_GDPVAL_OR_AA_BRIEFCASE_QUALITY_ACCEPTANCE_CREDIT"
+  ],
+  "global_leaf_closure": false,
+  "global_root_closure": false,
+  "domain_semantic_closure": false,
+  "domain_execution_closure": false,
+  "quality_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
