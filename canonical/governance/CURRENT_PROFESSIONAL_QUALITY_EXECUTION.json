@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_PROFESSIONAL_QUALITY_EXECUTION_POINTER_V1",
   "date": "2026-10-10",
-  "status": "P1_V3_LIVE_UNCHANGED__V7_12_OF_12_COMPOSED__24_OF_24_SCOPE_VERIFIED__PROPERTY_TRUTH_9_OF_24__R1_R2_R3_R4_R6_R7_R8_R10_R12_EXECUTION_VERIFIED__12_SEMANTIC_LEAVES_REDUCED_TO_CLAIM_SCOPED_TOTALITY_REUSE__3_OTHER_EXECUTION_LEAVES_OPEN__NOT_LIVE_DEFAULT",
+  "status": "P1_V3_LIVE_UNCHANGED__V7_12_OF_12_COMPOSED__24_OF_24_SCOPE_VERIFIED__PROPERTY_TRUTH_12_OF_24__ALL_12_EXECUTION_LEAVES_VERIFIED__12_SEMANTIC_LEAVES_REDUCED_TO_CLAIM_SCOPED_TOTALITY_REUSE__NO_EXECUTION_LEAF_OPEN__NOT_LIVE_DEFAULT",
   "profile_path": "canonical/governance/PROFESSIONAL_QUALITY_P1_EXECUTION_PROFILE_20261010_V3.json",
   "profile_sha": "f7e89eafbb691c16d1bdf5b8d295a468d5e3bec5",
   "router_path": "canonical/runtime/professional_quality_p1_router_v3.py",
@@ -69,7 +69,7 @@
   "quality_authority": false,
   "terminal_authority": false,
   "terminal_credit_delta": 0,
-  "next": "INSTANTIATE_CLAIM_SCOPED_TOTALITY_REUSE_FOR_TWELVE_SEMANTIC_LEAVES__IN_PARALLEL_DEPLET_R5_R9_R11_EXECUTION_LEAVES_WITH_REUSE_FIRST_CASE_CHALLENGES__RUN_FULL_CURRENT_MAIN_REGRESSION__PROMOTE_ONLY_AFTER_REQUIRED_EVIDENCE",
+  "next": "INSTANTIATE_AND_VERIFY_CLAIM_SCOPED_TOTALITY_REUSE_FOR_TWELVE_SEMANTIC_LEAVES__RUN_FULL_CURRENT_MAIN_REGRESSION__PROMOTE_ONLY_AFTER_REQUIRED_EVIDENCE",
   "hard_nonclaims": [
     "NO_PROFESSIONAL_QUALITY_COMPLETENESS_PROOF",
     "NO_GLOBAL_LEAF_OR_ROOT_CLOSURE_FROM_12_OF_12_COMPOSITION_ADMISSIBILITY",
@@ -91,13 +91,20 @@
     "NO_MULTI_EDIT_SEQUENCE_OR_TREATMENT_GENERALIZATION_FROM_R7_EXECUTION_PROPERTY_TRUTH",
     "NO_SEMANTIC_LEAF_PROPERTY_TRUTH_FROM_AN_EXPLICITLY_INCOMPLETE_DEFEATER_CATALOG",
     "NO_R1_OR_R12_SEMANTIC_OR_ROOT_CLOSURE_FROM_EXECUTION_PROPERTY_TRUTH",
-    "NO_GLOBAL_PROFESSIONAL_QUALITY_CLOSURE_FROM_PROPERTY_TRUTH_9_OF_24",
+    "NO_GLOBAL_PROFESSIONAL_QUALITY_CLOSURE_FROM_PROPERTY_TRUTH_12_OF_24",
     "NO_R4_SEMANTIC_OR_ROOT_CLOSURE_FROM_R4_EXECUTION_PROPERTY_TRUTH",
     "NO_R4_DEFEATER_DETECTION_OR_CONSTRUCT_VALIDITY_COMPLETENESS",
     "NO_R6_SEMANTIC_OR_ROOT_CLOSURE_FROM_R6_EXECUTION_PROPERTY_TRUTH",
     "NO_GLOBAL_EVIDENCE_COMPLETENESS_FROM_R6_EXECUTION_PROPERTY_TRUTH",
     "NO_R8_SEMANTIC_OR_ROOT_CLOSURE_FROM_R8_EXECUTION_PROPERTY_TRUTH",
-    "NO_R8_DEFEATER_DETECTION_CONSTITUENCY_OPERATOR_OR_MEASUREMENT_INVARIANCE_COMPLETENESS"
+    "NO_R8_DEFEATER_DETECTION_CONSTITUENCY_OPERATOR_OR_MEASUREMENT_INVARIANCE_COMPLETENESS",
+    "NO_R5_SEMANTIC_OR_ROOT_CLOSURE_FROM_R5_EXECUTION_PROPERTY_TRUTH",
+    "NO_R5_TRUE_OWNER_EVALUATOR_REFERENCE_OR_CROSS_MODEL_CALIBRATION_COMPLETENESS",
+    "NO_R9_SEMANTIC_OR_ROOT_CLOSURE_FROM_R9_EXECUTION_PROPERTY_TRUTH",
+    "NO_R9_DEFEATER_DETECTION_MULTIHORIZON_DISTRIBUTION_SHIFT_OR_EQUILIBRIUM_COMPLETENESS",
+    "NO_R11_SEMANTIC_OR_ROOT_CLOSURE_FROM_R11_EXECUTION_PROPERTY_TRUTH",
+    "NO_R11_DEFEATER_DETECTION_PROMPT_INJECTION_GOODHART_HOLDOUT_OR_CROSS_LANE_COMPLETENESS",
+    "NO_DOMAIN_EXECUTION_CLOSURE_FROM_TWELVE_EXECUTION_LEAF_RECEIPTS_ALONE"
   ],
   "router_v3_independent_verification": {
     "path": "canonical/verification/PROFESSIONAL_QUALITY_P1_ROUTER_V3_INDEPENDENT_VERIFY_20261010_V1.json",
@@ -117,24 +124,27 @@
     "execution_partial_coverage_leaf_count": 12,
     "no_scoped_evidence_leaf_count": 0,
     "no_scoped_evidence_leaf_ids": [],
-    "verified_global_leaf_count": 9,
-    "open_global_leaf_count": 15,
+    "verified_global_leaf_count": 12,
+    "open_global_leaf_count": 12,
     "global_leaf_closure": false,
     "domain_semantic_closure": false,
     "domain_execution_closure": false,
     "whole_leaf_domain_equivalence_count": 24,
     "whole_leaf_scope_complete_count": 24,
-    "property_truth_closed_count": 9,
+    "property_truth_closed_count": 12,
     "verified_property_truth_leaf_ids": [
       "PQ::R10_ANALYSIS_DECISION::EXECUTION",
+      "PQ::R11_ADAPTIVE_INTEGRITY_SECURITY::EXECUTION",
       "PQ::R12_META_COMPOSITION_CLOSURE::EXECUTION",
       "PQ::R1_TARGET_SPECIFICATION::EXECUTION",
       "PQ::R2_CANDIDATE_SEARCH::EXECUTION",
       "PQ::R3_REALIZATION_OBSERVATION::EXECUTION",
       "PQ::R4_MEASUREMENT_CONSTRUCT::EXECUTION",
+      "PQ::R5_EVALUATOR_REFERENCE::EXECUTION",
       "PQ::R6_EVIDENCE_GROUNDING_DEPENDENCE::EXECUTION",
       "PQ::R7_CAUSAL_PRESCRIPTIVE::EXECUTION",
-      "PQ::R8_POPULATION_CONTEXT_OPERATOR::EXECUTION"
+      "PQ::R8_POPULATION_CONTEXT_OPERATOR::EXECUTION",
+      "PQ::R9_TEMPORAL_DEPLOYMENT::EXECUTION"
     ]
   },
   "same_subject_composition": {
@@ -518,22 +528,25 @@
     "terminal_credit_delta": 0
   },
   "property_truth_frontier": {
-    "verified_leaf_count": 9,
+    "verified_leaf_count": 12,
     "total_leaf_count": 24,
     "verified_leaf_ids": [
       "PQ::R10_ANALYSIS_DECISION::EXECUTION",
+      "PQ::R11_ADAPTIVE_INTEGRITY_SECURITY::EXECUTION",
       "PQ::R12_META_COMPOSITION_CLOSURE::EXECUTION",
       "PQ::R1_TARGET_SPECIFICATION::EXECUTION",
       "PQ::R2_CANDIDATE_SEARCH::EXECUTION",
       "PQ::R3_REALIZATION_OBSERVATION::EXECUTION",
       "PQ::R4_MEASUREMENT_CONSTRUCT::EXECUTION",
+      "PQ::R5_EVALUATOR_REFERENCE::EXECUTION",
       "PQ::R6_EVIDENCE_GROUNDING_DEPENDENCE::EXECUTION",
       "PQ::R7_CAUSAL_PRESCRIPTIVE::EXECUTION",
-      "PQ::R8_POPULATION_CONTEXT_OPERATOR::EXECUTION"
+      "PQ::R8_POPULATION_CONTEXT_OPERATOR::EXECUTION",
+      "PQ::R9_TEMPORAL_DEPLOYMENT::EXECUTION"
     ],
-    "open_leaf_count": 15,
-    "verified_execution_leaf_count": 9,
-    "open_execution_leaf_count": 3,
+    "open_leaf_count": 12,
+    "verified_execution_leaf_count": 12,
+    "open_execution_leaf_count": 0,
     "verified_semantic_leaf_count": 0,
     "open_semantic_leaf_count": 12,
     "r10_execution": {
@@ -586,10 +599,10 @@
       "unknown_defeater_completeness_proved": false
     },
     "registry_verification": {
-      "path": "canonical/verification/PROFESSIONAL_QUALITY_LEAF_REGISTRY_PROPERTY_TRUTH_VERIFY_20261010_V7.json",
-      "git_blob_sha": "1a60d418d18149dc5bcc82f5655a08f4891d3901",
-      "verified_leaf_count": 9,
-      "open_leaf_count": 15
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_LEAF_REGISTRY_PROPERTY_TRUTH_VERIFY_20261010_V9.json",
+      "git_blob_sha": "6dfa1c624a9c92a9ca62bacdab981df1ecc31d11",
+      "verified_leaf_count": 12,
+      "open_leaf_count": 12
     },
     "r3_execution": {
       "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_R3_EXECUTION_PROPERTY_TRUTH_INDEPENDENT_VERIFY_20261010_V1.json",
@@ -627,6 +640,42 @@
       "constituency_support_proved": false,
       "operator_generalization_proved": false,
       "measurement_invariance_proved": false
+    },
+    "r5_execution": {
+      "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_R5_EXECUTION_PROPERTY_TRUTH_INDEPENDENT_VERIFY_20261010_V1.json",
+      "verification_git_blob_sha": "0e2e02313594563118498cbe41c23e4251208d6f",
+      "leaf_property_truth_authority": true,
+      "root_closed": false,
+      "semantic_leaf_closed": false,
+      "detection_completeness_proved": false,
+      "true_owner_evaluator_containment_proved": false,
+      "reference_correctness_proved": false,
+      "cross_model_calibration_proved": false,
+      "real_task_comparative_evaluation_step_receipt_proved": false
+    },
+    "r9_execution": {
+      "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_R9_EXECUTION_PROPERTY_TRUTH_INDEPENDENT_VERIFY_20261010_V1.json",
+      "verification_git_blob_sha": "84d820469e776dddbe152988658640d8e3498635",
+      "leaf_property_truth_authority": true,
+      "observed_case_count": 26,
+      "root_closed": false,
+      "semantic_leaf_closed": false,
+      "detection_completeness_proved": false,
+      "multihorizon_deployment_validity_proved": false,
+      "distribution_shift_transport_proved": false
+    },
+    "r11_execution": {
+      "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_R11_EXECUTION_PROPERTY_TRUTH_INDEPENDENT_VERIFY_20261010_V1.json",
+      "verification_git_blob_sha": "934a13fb13c70f5cf6e38da2e64bb9fe0eeecbf7",
+      "leaf_property_truth_authority": true,
+      "observed_case_count": 44,
+      "root_closed": false,
+      "semantic_leaf_closed": false,
+      "detection_completeness_proved": false,
+      "general_prompt_injection_closure_proved": false,
+      "general_goodhart_closure_proved": false,
+      "holdout_lifecycle_closure_proved": false,
+      "cross_lane_security_generalization_proved": false
     }
   },
   "leaf_registry_verification": {
@@ -668,10 +717,10 @@
     "terminal_credit_delta": 0
   },
   "latest_leaf_property_truth_verification": {
-    "path": "canonical/verification/PROFESSIONAL_QUALITY_LEAF_REGISTRY_PROPERTY_TRUTH_VERIFY_20261010_V7.json",
-    "git_blob_sha": "1a60d418d18149dc5bcc82f5655a08f4891d3901",
-    "verified_leaf_count": 9,
-    "open_leaf_count": 15,
+    "path": "canonical/verification/PROFESSIONAL_QUALITY_LEAF_REGISTRY_PROPERTY_TRUTH_VERIFY_20261010_V9.json",
+    "git_blob_sha": "6dfa1c624a9c92a9ca62bacdab981df1ecc31d11",
+    "verified_leaf_count": 12,
+    "open_leaf_count": 12,
     "rejected_receipt_count": 0,
     "promotion_ready": false
   }
