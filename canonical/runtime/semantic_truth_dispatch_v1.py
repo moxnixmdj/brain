@@ -24,6 +24,11 @@ def evaluate_regcap_context_atom(payload: Mapping[str, Any]) -> dict[str, Any]:
     return evaluate(payload)
 
 
+def evaluate_margin_context_identity(payload: Mapping[str, Any]) -> dict[str, Any]:
+    from canonical.runtime.margin_context_identity_truth_certificate_v1 import evaluate
+    return evaluate(payload)
+
+
 SCHEMA = "PROJECT_BRAIN_SEMANTIC_TRUTH_DISPATCH_V1"
 
 
@@ -56,6 +61,8 @@ def evaluate(payload: Mapping[str, Any]) -> dict[str, Any]:
         return evaluate_regcap_loss_cushion(payload)
     if kind == "REGCAP_CONTEXT_ATOM":
         return evaluate_regcap_context_atom(payload)
+    if kind == "MARGIN_CONTEXT_IDENTITY":
+        return evaluate_margin_context_identity(payload)
     return {
         "schema": SCHEMA,
         "pass": False,
