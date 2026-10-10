@@ -1,0 +1,101 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_FIRST_CHECKPOINT_ADMISSION_V1",
+  "date": "2026-10-10",
+  "status": "ADMIT_RANK19_ONE_SHOT__NEW_CAPABILITY_VALIDATION__CURRENT_SCHEDULER_RUNTIME_BOUND__ZERO_CREDIT",
+  "authorized": true,
+  "decision": "ADMIT_CHECKPOINT_AUDIT_EXECUTION",
+  "authorized_scope": "CHECKPOINT_AUDIT_DISPATCH_ONLY",
+  "objective": "MAXIMIZE_REUSABLE_VERIFIED_CAPABILITY_GENERALIZATION_RELIABILITY_AND_EFFICIENCY_PER_RESOURCE",
+  "benchmark_role": "NEW_CAPABILITY_VALIDATION",
+  "rationale": "RANK18_CAUSALLY_LOCALIZED_A_REUSABLE_PLANNER_DEADLINE_DEFECT_BEFORE_FIRST_ACTION__PLANNER_V7_REPAIRS_AND_ZERO_EXPOSURE_VERIFIES_THE_GENERIC_GENERATION_COMPLETE_DEADLINE__ONE_FRESH_RANK19_SLOT_IS_ADMITTED_ONLY_TO_FALSIFY_OR_VALIDATE_THAT_RELIABILITY_REPAIR_UNDER_REAL_TASK_EXECUTION__ALL_ADMISSION_PREMISES_ARE_IMMUTABLE_VERSIONED_EVIDENCE_RUNTIME_OR_LEDGER_BYTES",
+  "slot_id": "terminal-bench-science/diag-chipseq::trial-0",
+  "task_digest": "sha256:437bfacaebda9ce9905d54bdfe7247aec9649038206512c64547021f42e3950b",
+  "logical_attempt_id": "def7e2921acf58d4ef03e3183512996c718a5a13069482cb825464c0c963a8b4",
+  "source_bindings": {
+    "scheduler_activation": {
+      "path": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V3.json",
+      "git_blob_sha": "472c98a195c4b98d340e9bb397fa8766e3b47928"
+    },
+    "scheduler_runtime": {
+      "path": "canonical/runtime/capability_first_scheduler_v1.py",
+      "git_blob_sha": "63be50dacedec96809b9f3b40faaeab411741c39"
+    },
+    "rank18_diagnosis": {
+      "path": "canonical/verification/TB_SCIENCE_RANK18_PLANNER_TIMEOUT_CAUSAL_DIAGNOSIS_20261010_V1.json",
+      "git_blob_sha": "97697c3c7868644d36b317dc7e4e80dfd8f97647"
+    },
+    "planner_v7_verification": {
+      "path": "canonical/verification/TB_SCIENCE_PLANNER_V7_ZERO_EXPOSURE_VERIFICATION_20261010_V1.json",
+      "git_blob_sha": "9797cc625e3e33bb905cf23fa6c79f66dc9794db"
+    },
+    "rank19_one_slot_authority": {
+      "path": "canonical/governance/TB_SCIENCE_RANK19_ONE_SLOT_EXECUTION_AUTHORITY_20261010_V1.json",
+      "git_blob_sha": "ea76756ea30084c7f8291747ae9d204485a0186a"
+    },
+    "rank19_ledger": {
+      "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V38.json",
+      "git_blob_sha": "137a2f61d911321365bd80613e3806a77dbe7eca"
+    }
+  },
+  "scheduler_work_item": {
+    "work_id": "TB_SCIENCE_RANK19_PLANNER_V7_LIVE_VALIDATION",
+    "work_type": "BENCHMARK_INSTRUMENTATION",
+    "benchmark_role": "NEW_CAPABILITY_VALIDATION",
+    "expected_capability_gain_lcb": 0,
+    "expected_efficiency_gain_lcb": 0,
+    "expected_reliability_gain_lcb": 0,
+    "reuse_breadth_lcb": 1,
+    "generalization_lcb": 1,
+    "success_probability_lcb": 1,
+    "wall_clock_cost_ub": 1,
+    "compute_cost_ub": 1,
+    "memory_cost_ub": 1,
+    "complexity_cost_ub": 1,
+    "verified_capability_defect_ids": [
+      "TB_SCIENCE_RANK18_PLANNER_TIMEOUT_UNDERBUDGET"
+    ],
+    "task_local_counterexample_ids": [
+      "terminal-bench-science/longitudinal-clinical-agent::trial-0"
+    ]
+  },
+  "validation_target": {
+    "defect_class": "PLANNER_TIMEOUT_UNDERBUDGET",
+    "repaired_capability": "GENERATION_COMPLETE_NON_STREAMING_PLANNER_DEADLINE",
+    "planner_git_blob_sha": "e5d6ab78b6cf5bacee568cd3701410a8745b9ce8",
+    "agent_git_blob_sha": "8deede8adb960b6ebf7ee747a5e9ff1016238b7e",
+    "prior_zero_exposure_real_local_qwen_pass": true
+  },
+  "controls": {
+    "logical_attempts_authorized_total": 1,
+    "retries_authorized": 0,
+    "replacement_allowed": false,
+    "incremental_spend_usd_max": 0,
+    "model_reasoning_before_durable_start_forbidden": true,
+    "durable_start_cas_required": true,
+    "post_start_result_irreversible": true,
+    "uncertain_effect_replay_authority": false
+  },
+  "logical_attempts_authorized_total": 1,
+  "retries_authorized": 0,
+  "replacement_allowed": false,
+  "task_read": false,
+  "task_started": false,
+  "benchmark_trials_consumed": 0,
+  "checkpoint_dispatch_admission": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "hard_nonclaims": [
+    "NO_TERMINAL_OR_ACCEPTANCE_CREDIT_FROM_ADMISSION",
+    "NO_CAPABILITY_CREDIT_FROM_ONE_BENCHMARK_RESULT",
+    "NO_EXECUTION_AUTHORITY_MINTED_BY_THIS_SCHEDULER_ADMISSION",
+    "NO_RETRY_OR_REPLACEMENT_AUTHORITY",
+    "NO_TASK_READ_OR_START_BEFORE_PUBLIC_RESEAL_AND_EXISTING_ONE_SLOT_AUTHORITY_PRECONDITIONS",
+    "NO_CLAIM_RANK19_IS_PRIMARY_PROJECT_OBJECTIVE"
+  ],
+  "independent_verification_required": true
+}
