@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_R12_UNIVERSAL_POSITIVE_GATE_CC_R3_COMPOSITION_INDEPENDENT_VERIFY_V1",
+  "date": "2026-10-11",
+  "status": "PASS__INDEPENDENT_SPRITE__PYCOMPILE__13_OF_13__UNIVERSAL_FORMAL_SCOPE_PROOF_ACCEPTED_BY_EXISTING_GENERATOR_CLOSURE__CC_R3_RUNTIME_TRUE__ZERO_PROPERTY_OR_TERMINAL_CREDIT",
+  "base_main_commit": "607b0e97bacf43e12405374daef788ba27244472",
+  "subject": {
+    "candidate_runtime": {
+      "path": "canonical/runtime/professional_r12_universal_positive_gate_totality_v1.py",
+      "git_blob_sha": "d1030eaf687110f5ca34de24c37e595973a596ac"
+    },
+    "candidate_tests": {
+      "path": "canonical/tests/test_professional_r12_universal_positive_gate_totality_v1.py",
+      "git_blob_sha": "5efd27bfa4e7a8738033ca25a1b775bf5802dc03"
+    },
+    "verified_runtime": {
+      "path": "canonical/runtime/professional_r12_universal_positive_gate_totality_verified_v1.py",
+      "git_blob_sha": "6e71ad867307b8d905dd998183562e2e7c3cf52a"
+    },
+    "verified_tests": {
+      "path": "canonical/tests/test_professional_r12_universal_positive_gate_totality_verified_v1.py",
+      "git_blob_sha": "3ab5e3d1ff5d62ef6841366214ffec1d8cd1be2e"
+    },
+    "generator_closure": {
+      "path": "canonical/runtime/professional_r12_material_defeater_generator_closure_v1.py",
+      "git_blob_sha": "fb1c80a25a387085da0c3a3b570d34f3bc5a455a"
+    },
+    "prior_independent_receipt": {
+      "path": "canonical/verification/PROFESSIONAL_R12_UNIVERSAL_POSITIVE_GATE_TOTALITY_INDEPENDENT_VERIFY_20261011_V1.json",
+      "git_blob_sha": "415ffd01600487a3fd46bf3ee0962924358d8b62"
+    }
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-professional-hard-defect-verify-20261010",
+    "carrier_id": "sprite-1bbb86ed-1f7c-409f-8397-fadc4de7a62a",
+    "workspace": "/home/sprite/r12-universal-positive-gate-v1",
+    "py_compile": "PASS",
+    "tests_run": 13,
+    "tests_passed": 13,
+    "tests_failed": 0,
+    "transcript_sha256": "b799349b78e3a4a368760a60647b59cebfebf87335c3976f47fc54912ddbf562",
+    "transcript_bytes": 2512
+  },
+  "truth": {
+    "proof_basis": "UNIVERSAL_FORMAL_SCOPE_PROOF",
+    "material_defeater_totality_proved": true,
+    "cc_r3_terminal_closure_proved": true,
+    "stable_c8_nonvacuity_proved": true,
+    "finite_catalog_only": false,
+    "cross_subject_property_authority_transport": false,
+    "semantic_property_truth_authority": false,
+    "r4_proof_realization_authority": false
+  },
+  "exact_next": "MINT_EXACT_STABLE_R12_CC_R3_ROOT_CERTIFICATE__INDEPENDENTLY_REPLAY_ROOT_SEMANTIC_VERIFIER__UPDATE_ROOT_REGISTRY__RERUN_R4",
+  "hard_nonclaims": [
+    "NO_R12_SEMANTIC_PROPERTY_TRUTH_FROM_CC_R3_RUNTIME_ALONE",
+    "NO_R4_PROOF_REALIZATION_AUTHORITY",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
