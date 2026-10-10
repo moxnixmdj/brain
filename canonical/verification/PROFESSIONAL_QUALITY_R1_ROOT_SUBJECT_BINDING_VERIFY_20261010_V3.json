@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R1_ROOT_SUBJECT_BINDING_VERIFY_20261010_V3",
+  "date": "2026-10-10",
+  "status": "PASS__R1_BOUND_TO_FINAL_V6_DEPENDENCY_CLOSED_SUBJECT__6_OF_6_ADVERSARIAL_TESTS__REAL_EXACT_BINDING_REPLAY_PASS__ZERO_QUALITY_OR_TERMINAL_AUTHORITY",
+  "subject": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V6_DECLARED_SYSTEM_SUBJECT_20261010_V5.json",
+    "git_blob_sha": "994a6a6aef44b6bb33161f7179d1983a1b50b633",
+    "subject_id": "PROFESSIONAL_QUALITY_P1_V6_DEPENDENCY_CLOSED_AUTHENTICATED_TARGET_SYSTEM_20261010_V5",
+    "subject_sha256": "353978ba4866d1e35794390968a14500ee1d8a4f0bddfb8f081e9a1a71ba468d"
+  },
+  "binding": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_R1_ROOT_SUBJECT_BINDING_20261010_V3.json",
+    "git_blob_sha": "97d13dfdf767e9a2bd882c4793ee49a4c32856cb"
+  },
+  "verifier": {
+    "path": "canonical/runtime/professional_quality_r1_root_subject_binding_verify_v3.py",
+    "git_blob_sha": "45912487ccc6878caa5978a9344837a56e121aac"
+  },
+  "tests": {
+    "path": "canonical/tests/test_professional_quality_r1_root_subject_binding_verify_v3.py",
+    "git_blob_sha": "1c1d81ccc53331a5940f5c1584a5a0ee409e5d4d"
+  },
+  "independent_carrier": {
+    "provider": "Sprites",
+    "sprite": "brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/pq-final-v6-verify"
+  },
+  "replay": {
+    "adversarial_tests_run": 6,
+    "adversarial_tests_passed": 6,
+    "adversarial_tests_failed": 0,
+    "real_binding_pass": true,
+    "real_status": "PASS__R1_BOUND_TO_FINAL_V6_DEPENDENCY_CLOSED_SUBJECT",
+    "root_subject_binding_authority": true
+  },
+  "proves": [
+    "FINAL_V6_SUBJECT_TUPLE_MATCHES_BINDING",
+    "FINAL_SUBJECT_CONTAINS_REQUIRED_R1_LOAD_BEARING_MATERIAL",
+    "V6_MINIMAL_BINDING_KERNEL_PRESERVES_LEGACY_AUTHENTICATED_BINDING_BEHAVIOR",
+    "AUTHENTICATED_TARGET_HANDOFF_HAS_DISTINCT_PRODUCER_AND_INDEPENDENT_VERIFIER",
+    "R1_TARGET_SEMANTIC_SCOPE_AND_STRUCTURAL_TARGET_RECEIPTS_REPLAY",
+    "BINDING_CANNOT_SELF_AUTHORIZE",
+    "R1_ROOT_SUBJECT_BINDING_AUTHORITY_ONLY"
+  ],
+  "authority": {
+    "root_subject_binding_authority": true,
+    "global_subject_identity_authority": false,
+    "semantic_truth_authority": false,
+    "execution_authority": false,
+    "quality_authority": false,
+    "acceptance_authority": false,
+    "promotion_authority": false,
+    "terminal_authority": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
