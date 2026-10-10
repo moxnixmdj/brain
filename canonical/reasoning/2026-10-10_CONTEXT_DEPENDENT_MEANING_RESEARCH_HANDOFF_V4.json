@@ -5,7 +5,7 @@
   "supersedes": "canonical/reasoning/2026-10-10_CONTEXT_DEPENDENT_MEANING_RESEARCH_HANDOFF_V3.json",
   "authoritative_state": {
     "r2_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
-    "r2_git_blob_sha": "7a1662225f7bf93dcd7d6a782964e821c40751b2",
+    "r2_git_blob_sha": "6952867fcf9f234061f9cc9c53dbcbf9be7e0ec1",
     "live_front_door": "canonical/runtime/unified_cognitive_fabric_v2.py",
     "live_front_door_git_blob_sha": "afb8b5c30957168dd8ba8684afb94b31c9118ed5",
     "one_primary_finance_semantic_residual_remains": true
