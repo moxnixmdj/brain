@@ -1,0 +1,17 @@
+{
+  "schema": "PROJECT_BRAIN_R2_DIRECT_ROUTE_DEPLOYMENT_CANDIDATE_V1",
+  "date": "2026-10-10",
+  "route_id": "DIRECT_ADEQUACY::CROSS_DOCUMENT_MULTI_EFFECT_NATURAL_LATTICE_V9",
+  "capability_id": "cross_document.multi_effect_natural_lattice.stdlib",
+  "runtime_path": "canonical/runtime/r2_cross_document_multi_effect_natural_direct_adequacy_v1.py",
+  "runtime_git_blob_sha": "7faa792e68c8b1aa8b8fbca1fe2941a9b2930a79",
+  "preflight_callable": "preflight",
+  "run_callable": "run",
+  "route_verification_path": "canonical/verification/R2_MULTI_EFFECT_NATURAL_LATTICE_VERIFY_20261010_V1.json",
+  "route_verification_git_blob_sha": "236fde3fec51df69262bf49d4c22d674868cd616",
+  "scope": "BOUNDED_COMPLETE_MULTI_EFFECT_SAME_TARGET_NATURAL_CROSS_DOCUMENT_LATTICE__CLOSED_CASES_ONLY",
+  "selection_class": "UNIQUE_MATCH_REQUIRED",
+  "deployment_requested": true,
+  "incremental_spend_usd": 0,
+  "terminal_authority": false
+}
