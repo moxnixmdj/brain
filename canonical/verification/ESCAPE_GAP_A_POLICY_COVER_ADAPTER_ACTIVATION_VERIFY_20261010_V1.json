@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_ESCAPE_GAP_A_POLICY_COVER_ADAPTER_ACTIVATION_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__CURRENT_MAIN_OQ_COHERENCE__5_OF_5__ZERO_CREDIT",
+  "subject": {
+    "action_intent_v2": [
+      "canonical/action_intents/ESCAPE_GAP_A_POLICY_COVER_ADAPTER_ACTION_INTENT_20261010_V2.json",
+      "a7a5041b35fc2a599f8c8958e5cafc21ed185bcc"
+    ],
+    "activation": [
+      "canonical/governance/ESCAPE_GAP_A_POLICY_COVER_ADAPTER_ACTIVATION_20261010_V1.json",
+      "7eaa5c0a403cfd9e6d131cecdc7cb9a243843872"
+    ],
+    "shared_binding_v6": [
+      "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V6.json",
+      "a6fe5eda7b596d5a24cf75bc9b046bf53f4fe7be"
+    ],
+    "runtime_verification": [
+      "canonical/verification/ESCAPE_GAP_A_POLICY_COVER_ADAPTER_VERIFY_20261010_V1.json",
+      "4c1ad0d785d4a4d354c01a4d09e412d294304195"
+    ],
+    "activation_tests": [
+      "canonical/tests/test_escape_gap_a_policy_cover_adapter_activation_v1.py",
+      "5b53101d405ea768312b455a04fd83320bc8301a"
+    ],
+    "current_oq_authority": [
+      "canonical/governance/CURRENT_ESCAPE_OQ_FRONTIER_REDUCTION_20261010_V1.json",
+      "e355f3c168429c96ff0dfa142428ada6c97c47e9"
+    ]
+  },
+  "independent_verification": {
+    "carrier": "Sprites",
+    "sprite": "brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "runner": "python3 -m unittest -v canonical.tests.test_escape_gap_a_policy_cover_adapter_activation_v1",
+    "tests_run": 5,
+    "failures": 0,
+    "errors": 0
+  },
+  "proved": [
+    "EXACT_RUNTIME_TEST_AND_RUNTIME_VERIFICATION_BINDINGS_MATCH",
+    "V6_PRESERVES_10_GAP_A_3_GAP_B_AND_ZERO_REAL_ROW_CREDIT",
+    "CURRENT_OQ_REDUCTION_IS_PRIMARY_SHARED_ACCEPTANCE_RESEARCH_COMPRESSION",
+    "V2_LEASE_WAS_REVALIDATED_AFTER_OQ_FRONTIER_UPDATE",
+    "ADAPTER_IS_REALIZATION_BRIDGE_NOT_O_OR_Q_ACCEPTANCE_CLOSURE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "row_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

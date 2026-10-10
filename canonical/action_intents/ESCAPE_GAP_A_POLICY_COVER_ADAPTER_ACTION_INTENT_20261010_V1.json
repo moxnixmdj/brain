@@ -1,0 +1,92 @@
+{
+  "schema": "PROJECT_BRAIN_ESCAPE_GAP_A_POLICY_COVER_ADAPTER_ACTION_INTENT_20261010_V1",
+  "date": "2026-10-10",
+  "status": "ACTIVE_IMPLEMENTATION_INTENT__REUSE_FIRST__NO_FRESH_REALITY__ZERO_CREDIT",
+  "action_id": "ESCAPE_GAP_A_POLICY_COVER_ADAPTER_V1",
+  "canonical_generation": "b01d419caa0c5d1c4802d6d0489e1aa217c03553",
+  "canonical_base_commit": "b01d419caa0c5d1c4802d6d0489e1aa217c03553",
+  "capability_target": "GENERAL_REUSABLE_ESCAPE_TOTALITY_CERTIFICATE_ADAPTATION",
+  "causal_blocker": "GAP_A_TARGET_FREE_SCOPE_COMPLETE_POLICY_COVER_TO_ROW_PROOF_ADAPTER_MISSING",
+  "blocker_lease_key": "b01d419caa0c5d1c4802d6d0489e1aa217c03553::GENERAL_REUSABLE_ESCAPE_TOTALITY_CERTIFICATE_ADAPTATION::GAP_A_TARGET_FREE_SCOPE_COMPLETE_POLICY_COVER_TO_ROW_PROOF_ADAPTER_MISSING",
+  "action_kind": "REUSE_ADAPT_EXISTING_VERIFIED_MECHANISM",
+  "real_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "parent_authorities": [
+    "canonical/governance/CURRENT_DEVELOPMENT_AUTHORITY.json",
+    "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
+    "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V5.json",
+    "canonical/governance/ESCAPE_PROGRESS_SUCCESSOR_SHARED_ROUTE_REDUCTION_20261010_V1.json"
+  ],
+  "expected_parent_frontier_change": "ENABLE_ONE_GENERIC_VERIFIED_ADAPTER_FROM_EXISTING_OBSERVABLE_POLICY_COVER_TOTALITY_PROOFS_TO_GAP_A_ROW_PROOFS__NO_ROW_CREDIT_WITHOUT_REAL_PREMISES",
+  "selected_route": {
+    "route_order_position": "ADAPT_EXISTING",
+    "reused_runtime": "canonical/runtime/observable_policy_cover_totality_gate_v1.py",
+    "reused_runtime_git_blob_sha": "2b09c856297e506fb6dc303c0f2cca2b6e89c07b",
+    "reused_verification": "canonical/verification/R2_POLICY_COVER_SAFETY_REPAIR_INDEPENDENT_REPLAY_VERIFY_20261010_V1.json",
+    "reason": "THE_EXISTING_GATE_ALREADY_PROVES_BOUND_STATE_COMMON_POLICY_OR_STRICT_REFINEMENT_TOTALITY_WITH_REGION_WIDE_SAFETY; ONLY_GAP_A_SCHEMA_ADAPTATION_AND_CURRENT_AVAILABILITY_RESOURCE_ADMISSIBILITY_BINDING_ARE_MISSING"
+  },
+  "rejected_material_alternatives": [
+    "TEN_ROW_SPECIFIC_SOLVERS",
+    "NEW_POLICY_COVER_PRIMITIVE",
+    "PRIVATE_INFORMATION_ACQUISITION_BEFORE_TARGET_FREE_ROUTE_EXHAUSTION",
+    "CALLER_ASSERTED_SCOPE_COMPLETENESS_OR_SAFETY_FLAGS"
+  ],
+  "behavioral_contract": {
+    "behavior_id": "ESCAPE_GAP_A_POLICY_COVER_ADAPTER_001",
+    "inputs": "ONE_GAP_A_OBLIGATION_ID_PLUS_ONE_POLICY_COVER_PROBLEM_PLUS_INDEPENDENT_CURRENT_AVAILABILITY_OR_ACQUIRABILITY_RECEIPTS",
+    "environment_state": "CURRENT_REPOSITORY_BYTES_ONLY__NO_UNTOUCHED_TARGET_READ",
+    "allowed_information": "CONTENT_ADDRESSED_EXISTING_BRAIN_CERTIFICATES_AND_RECEIPTS",
+    "required_output_or_action": "EMIT_ONE_CONTENT_ADDRESSED_GAP_A_TERMINAL_COMMON_POLICY_OR_STRICT_DISCRIMINATOR_PROOF_ONLY_IF_ALL_REQUIRED_PREMISES_ARE_RECOMPUTED_TRUE",
+    "success_condition": "OUTPUT_PASSES_ESCAPE_PROGRESS_SHARED_GAP_AUDIT_V3_WITH_NO_CALLER_AUTHORITY_ESCALATION",
+    "failure_condition": "MISSING_STALE_UNSAFE_UNOWNED_UNAVAILABLE_OR_RESOURCE_INADMISSIBLE_PREMISE_RETURNS_OPEN_OR_FAIL_CLOSED_WITHOUT_ROW_PROOF",
+    "terminal_consequence": "NONE__ROW_LEVEL_PROOF_ONLY__CC_R3_REQUIRES_13_OF_13",
+    "verification_route": "FOCUSED_UNIT_TESTS_PLUS_EXISTING_GAP_A_AUDIT_ACCEPTANCE",
+    "dependency_boundary": "OBSERVABLE_POLICY_COVER_TOTALITY_GATE_V1_AND_CONTENT_ADDRESSED_RECEIPTS",
+    "scope": "GENERIC_GAP_A_ROWS_ONLY"
+  },
+  "terminal_proof_control": {
+    "proof_obligation": "SOUNDLY_ADAPT_EXISTING_BOUND_POLICY_COVER_TOTALITY_TO_CURRENT_GAP_A_ROW_PROOF_SCHEMA",
+    "hole_type": "INTEGRATION_ADAPTER",
+    "expected_certificate_or_receipt": "CONTENT_ADDRESSED_ROW_PROOF_ACCEPTED_BY_ESCAPE_PROGRESS_SHARED_GAP_AUDIT_V3",
+    "validator": "canonical/runtime/escape_progress_shared_gap_audit_v3.py",
+    "maximum_cheap_test_cost": "LOCAL_STDLIB_UNIT_TESTS",
+    "prerequisites": [
+      "CURRENT_VERIFIED_POLICY_COVER_GATE",
+      "NO_DUPLICATE_OPEN_PR_INTENT"
+    ],
+    "contamination_risk": "NONE__NO_TARGET_TASK_READ_OR_EXECUTION",
+    "reversibility": true,
+    "falsification_condition": "ADAPTER_CAN_MINT_PROOF_WITHOUT_INDEPENDENT_AVAILABILITY_RESOURCE_OR_POLICY_COVER_AUTHORITY",
+    "critical_path_relation": "SHARED_10_ROW_GAP_A_ROUTE"
+  },
+  "recursive_obs": {
+    "required": true,
+    "current_parent_blocker": "GAP_A_ACQUISITION_TOTALITY_10",
+    "reuse_first_pass": true,
+    "new_primitive_required": false,
+    "open_pr_duplicate_search": "PASS__NO_EQUIVALENT_TARGET_FREE_POLICY_COVER_ADAPTER_PR_FOUND"
+  },
+  "reality_query_admission": {
+    "admission_verdict": "NO_REALITY_QUERY_REQUIRED",
+    "reason": "ALL_WORK_REUSES_EXISTING_REPOSITORY_EVIDENCE_AND_VERIFIED_RUNTIME; NO_NEW_TARGET_INFORMATION_IS_ACQUIRED"
+  },
+  "global_terminal_proof_cut": {
+    "untouched_source_read": false,
+    "task_execution": false,
+    "terminal_verification": false,
+    "new_terminal_relevant_observation": false
+  },
+  "hard_nonclaims": [
+    "NO_GAP_A_ROW_IS_CLOSED_BY_ADAPTER_EXISTENCE",
+    "NO_CC_R3_CREDIT",
+    "NO_GLOBAL_ESCAPE_TOTALITY",
+    "NO_BENCHMARK_ACCEPTANCE_OR_TERMINAL_CREDIT",
+    "NO_NEW_PRIMITIVE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
