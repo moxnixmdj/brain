@@ -74,6 +74,7 @@ def ground(
     start: int,
     end: int,
     repo_root: Any = None,
+    pair_projection_verifier=pair.verify_projection_pack,
 ) -> dict[str, Any]:
     base = v4.ground(
         source_text,
@@ -111,6 +112,7 @@ def ground(
         source_id=source_id,
         candidate_concept_ids=list(PAIR),
         repo_root=repo_root,
+        projection_verifier=pair_projection_verifier,
     )
     out["pair_recomposition_attempted"] = True
     out["tlac_mrel_pair_result"] = resolved
