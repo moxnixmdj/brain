@@ -35,7 +35,7 @@ V9_SUBJECT_BLOB="2ff32e4bb78e63635244c86d47fa369d7ba53900"
 V9_SUBJECT_ID="PROFESSIONAL_QUALITY_P1_V9_EXECUTABLE_TOTALITY_SEMANTICS_SYSTEM_20261010_V8"
 V9_SUBJECT_SHA256="adf7f09e1913526e460b7350c02cd148c2cd14de90eed33fa7fae84d395d9912"
 REFINE_VERIFY_PATH="canonical/verification/PROFESSIONAL_V8_TO_V9_R12_POSITIVE_REFINEMENT_INDEPENDENT_VERIFY_20261010_V1.json"
-REFINE_VERIFY_BLOB="abac74e96b2340e4f239d4dd6b4fde65473a592c"
+REFINE_VERIFY_BLOB="555f8b37ff9b02d4a313121b531f12c60914cf44"
 V8_REUSE_VERIFY_PATH="canonical/verification/PROFESSIONAL_V8_R12_REUSE_CLOSURE_INDEPENDENT_VERIFY_20261010_V1.json"
 V8_REUSE_VERIFY_BLOB="b01d8ea91f17313bb78feb0dcec0cbd302b671f6"
 R12_RECON_PATH=v8_reuse.R12_RECON_PATH
@@ -85,7 +85,7 @@ def verify_preserved_c1_c7(*,repo_root:str|Path|None=None)->dict[str,Any]:
  if tuple(r.get("preserved_clause_ids") or ())!=PRESERVED_CLAUSES:
   return _fail("V9_PRESERVED_CLAUSE_SET_DRIFT")
  truth=refv.get("truth") or {}
- if not str(refv.get("status") or "").startswith("PASS__SECOND_SPRITE"):
+ if not str(refv.get("status") or "").startswith(("PASS__SECOND_SPRITE","PASS__INDEPENDENT_SPRITE")):
   return _fail("V8_TO_V9_REFINEMENT_INDEPENDENT_VERIFY_NOT_PASS")
  if truth.get("positive_route_refinement_proved") is not True:
   return _fail("REFINEMENT_VERIFY_MISSING_POSITIVE_ROUTE_REFINEMENT")
