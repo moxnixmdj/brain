@@ -158,7 +158,7 @@ def verify_authority(
                 "MREL_NOT_FIXED_FIGURE",
                 "MREL_CASE_BY_CASE_RESOLUTION_AUTHORITY",
             },
-            "FSB_TLAC_STANDARD_2015": {
+            "FSB_TLAC_PRESS_RELEASE_2015": {
                 "TLAC_FSB_GSIB_STANDARD",
                 "TLAC_ALONGSIDE_BASEL_MINIMUMS",
             },
