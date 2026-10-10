@@ -262,37 +262,71 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
             ["verified-defect-1"],
         )
 
-    def test_r2_mechanism_policy_is_content_bound_and_preserves_open_frontier_truth(self):
-        policy_path = (
-            ROOT
-            / "canonical/governance/R2_MECHANISM_CLOSURE_OPEN_WORLD_FRONTIER_POLICY_20261010_V1.json"
+    def test_r2_mechanism_policy_binds_mutable_current_r2_by_path_and_rechecks_invariants(self):
+        pointer = json.loads(
+            (ROOT / "canonical/governance/CURRENT_DEVELOPMENT_SCHEDULER.json").read_text()
         )
-        policy = json.loads(policy_path.read_text())
-        for row in policy["sources"].values():
+        policy_rel = pointer["r2_mechanism_policy"]["path"]
+        self.assertEqual(
+            policy_rel,
+            "canonical/governance/R2_MECHANISM_CLOSURE_OPEN_WORLD_FRONTIER_POLICY_20261010_V2.json",
+        )
+        policy = json.loads((ROOT / policy_rel).read_text())
+
+        current = policy["sources"]["current_r2"]
+        self.assertEqual(
+            current["path"],
+            "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+        )
+        self.assertEqual(
+            current["binding"],
+            "MUTABLE_CURRENT_POINTER_PATH_IDENTITY__LIVE_INVARIANTS_RECHECKED",
+        )
+        self.assertFalse(current["activation_observed_blob_is_load_bearing"])
+        self.assertNotIn("git_blob_sha", current)
+
+        for source_id, row in policy["sources"].items():
             source = ROOT / row["path"]
             self.assertTrue(source.is_file(), row["path"])
+            if source_id == "current_r2":
+                continue
             self.assertEqual(_git_blob_sha(source), row["git_blob_sha"], row["path"])
 
         r2 = json.loads(
             (ROOT / "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json").read_text()
         )
-        self.assertIn("GENERAL_MECHANISM_CLOSED", r2["status"])
-        finance = r2["current_cell_classifications"]["FINANCE_SEMANTIC_ADEQUACY_TAIL"]
+        required = policy["required_current_r2_invariants"]
+        self.assertIn(required["status_contains"], r2["status"])
+        self.assertEqual(
+            r2["general_mechanism_missing"],
+            required["general_mechanism_missing"],
+        )
+        self.assertEqual(
+            r2["scheduler_result"]["primary_cell"],
+            required["primary_internal_cell"],
+        )
+        finance = r2["current_cell_classifications"][required["primary_internal_cell"]]
         self.assertEqual(
             finance["state"],
-            "INTERNAL_UNSOLVED__PENDING_ACQUISITION_OR_EXPERIMENT",
+            required["primary_internal_cell_state"],
         )
-        self.assertFalse(finance["information_theoretic_externality_proved"])
+        self.assertEqual(
+            r2["scheduler_result"][
+                "primary_internal_unsolved_pending_acquisition_or_experiment_cell_count"
+            ],
+            required["primary_internal_unsolved_count"],
+        )
+        self.assertEqual(
+            finance["information_theoretic_externality_proved"],
+            required["information_theoretic_externality_proved"],
+        )
+        self.assertEqual(
+            r2["global_open_world_closure_claimed"],
+            required["global_open_world_closure_claimed"],
+        )
         self.assertEqual(
             policy["classification"]["finance_global_residual"],
             "OPEN_WORLD_EVIDENCE_FRONTIER__WAKE_GATED__NOT_GLOBAL_MECHANISM_FAILURE_BY_EXISTENCE_ALONE",
-        )
-        pointer = json.loads(
-            (ROOT / "canonical/governance/CURRENT_DEVELOPMENT_SCHEDULER.json").read_text()
-        )
-        self.assertEqual(
-            pointer["r2_mechanism_policy"]["path"],
-            "canonical/governance/R2_MECHANISM_CLOSURE_OPEN_WORLD_FRONTIER_POLICY_20261010_V1.json",
         )
 
     def test_verified_reusable_candidate_enters_pareto_frontier(self):
