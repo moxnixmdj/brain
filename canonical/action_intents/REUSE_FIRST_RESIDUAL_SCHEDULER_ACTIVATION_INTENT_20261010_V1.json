@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_REUSE_FIRST_RESIDUAL_ACTIVATION_INTENT_20261010_V1",
+  "date": "2026-10-10",
+  "status": "READY_FAIL_CLOSED__POINTER_MUTATION_BLOCKED_IN_CURRENT_CONNECTOR_SESSION",
+  "purpose": "ACTIVATE_STAGED_REUSE_FIRST_SCHEDULER_GOVERNANCE_WITHOUT_REDISCOVERY",
+  "prerequisites": [
+    {
+      "path": "canonical/governance/REUSE_FIRST_RESIDUAL_EXECUTION_POLICY_20261010_V1.json",
+      "git_blob_sha": "e230e9c243ac79b7909dac86071b5cad536f1666"
+    },
+    {
+      "path": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V1.json",
+      "git_blob_sha": "28602e7f3c945695259c1cf589e4146e6af96d83"
+    },
+    {
+      "path": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V5.json",
+      "git_blob_sha": "70b855e71c3a68d0c6b600142437c001184392df"
+    }
+  ],
+  "mutations": [
+    {
+      "path": "canonical/governance/CURRENT_DEVELOPMENT_SCHEDULER.json",
+      "expected_current_blob_sha": "cae07e2109c2ebc89f283dabe01df24445b9557e",
+      "required_changes": {
+        "authoritative_activation": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V5.json",
+        "authoritative_activation_git_blob_sha": "70b855e71c3a68d0c6b600142437c001184392df",
+        "residual_policy": "SEARCH_REUSE_MINIMAL_ADAPTATION_VERIFY_GENERALIZE_PROMOTE_FALSIFY_BEFORE_NEW_PRIMITIVE_INVENTION",
+        "reuse_first_residual_policy_path": "canonical/governance/REUSE_FIRST_RESIDUAL_EXECUTION_POLICY_20261010_V1.json",
+        "escape_progress_shared_gap_binding_path": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V1.json"
+      },
+      "cas_rule": "ABORT_IF_EXPECTED_CURRENT_BLOB_SHA_DIFFERS__RECONCILE_NEWER_POINTER_FIRST"
+    },
+    {
+      "path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
+      "expected_current_blob_sha": "f8c3089e2184196d0f94028696db597cc9ce20b0",
+      "required_changes": {
+        "current_development_scheduler_activation": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V5.json",
+        "scheduler_precedence_suffix": "REUSE_EXISTING_VERIFIED_CAPABILITY_BEFORE_NEW_PRIMITIVE_INVENTION"
+      },
+      "cas_rule": "ABORT_IF_EXPECTED_CURRENT_BLOB_SHA_DIFFERS__RECONCILE_NEWER_POINTER_FIRST"
+    }
+  ],
+  "postconditions": [
+    "REFETCH_BOTH_CURRENT_POINTERS",
+    "VERIFY_V5_IS_SELECTED_BY_CURRENT_DEVELOPMENT_SCHEDULER",
+    "VERIFY_CURRENT_MISSION_OBJECTIVE_REFERENCES_V5",
+    "DO_NOT_CLAIM_RUNTIME_MECHANICAL_ENFORCEMENT_UNTIL_CODE_AND_TEST_RECEIPT_EXIST"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
