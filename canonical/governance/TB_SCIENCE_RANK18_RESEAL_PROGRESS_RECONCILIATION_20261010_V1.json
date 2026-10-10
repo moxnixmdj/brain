@@ -1,0 +1,78 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK18_RESEAL_PROGRESS_RECONCILIATION_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PARTIAL_ZERO_EXPOSURE_RESEAL__V12_RUNTIME_PREREQUISITES_STAGED__CONTROL_PLANE_INCOMPLETE__RANK18_TASK_READ_FORBIDDEN__ZERO_CREDIT",
+  "predicate": "TB_SCIENCE_GE_58_7",
+  "canonical_state": {
+    "ledger_path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V33.json",
+    "ledger_git_blob_sha": "c2d405754e51254aa2eee8e6eb9413a298cdf90b",
+    "consumed_slots": 17,
+    "consumed_successes": 0,
+    "consumed_final_failures": 17,
+    "next_rank": 18,
+    "next_slot_id": "terminal-bench-science/longitudinal-clinical-agent::trial-0",
+    "next_task_digest": "sha256:e9a166b2173f7014d4f1559505397b221f94bc446eab031f94791b35e0e5f1c9",
+    "rank18_task_read": false,
+    "rank18_task_started": false,
+    "rank18_benchmark_trials_consumed": 0
+  },
+  "repair_closure": {
+    "governance_path": "canonical/governance/TB_SCIENCE_V12_AUTHORITATIVE_ARTIFACT_FINISH_GATE_REPAIR_20261010_V1.json",
+    "governance_git_blob_sha": "72cd6e1797a2a6e51e07cef27469ae7017592a9c",
+    "verification_path": "canonical/verification/TB_SCIENCE_V12_AUTHORITATIVE_ARTIFACT_FINISH_GATE_SPRITE_VERIFY_20261010_V1.json",
+    "verification_git_blob_sha": "6470f6bf071cbf89bfbc95e86eb457cb0d10abdf",
+    "agent_v12_git_blob_sha": "e5ccaab049d22c0b3cc59e36c050ce2f6e83404f",
+    "typed_action_protocol_v2_git_blob_sha": "fa10b92942b92ab6c7f2f1831f660f2a2e3bd6e3",
+    "independent_tests": "13_OF_13_PASS"
+  },
+  "rank18_authority": {
+    "path": "canonical/governance/TB_SCIENCE_RANK18_ONE_SLOT_EXECUTION_AUTHORITY_20261010_V1.json",
+    "git_blob_sha": "0cbf7ffb571c0f411a5ba44c751b1c833059c83c",
+    "verification_path": "canonical/verification/TB_SCIENCE_RANK18_ONE_SLOT_AUTHORITY_VERIFY_20261010_V1.json",
+    "verification_git_blob_sha": "4c829d9e5dc878fd0ef002221f9b27170c853aa5",
+    "execution_authority": true,
+    "task_read_authority": false,
+    "public_v12_surface_resealed": false
+  },
+  "public_reseal_progress": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "base": "terminal-execution-v1",
+    "staging_branch": "reseal/tb-science-rank18-v1-20261010",
+    "staging_head_sha": "3ebcbc5ed36e3576a691edb045ad108f6fc2294a",
+    "staged_exact_blobs": {
+      "capsules/tb_science_rank15_20261009_v1/canonical/runtime/harbor_science_agent_v12.py": "e5ccaab049d22c0b3cc59e36c050ce2f6e83404f",
+      "capsules/tb_science_rank15_20261009_v1/canonical/runtime/science_typed_action_protocol_v2.py": "fa10b92942b92ab6c7f2f1831f660f2a2e3bd6e3",
+      "capsules/tb_science_rank15_20261009_v1/canonical/tests/test_harbor_science_agent_v12_artifact_finish_gate.py": "4cc352b58a71127a4e524b58818c25c34e57a7cf",
+      "capsules/tb_science_rank18_20261010_v1/rank18_prestart_token_guard_v4.py": "e19b017a285db9b7b96feb86423522cdde12731f",
+      "capsules/tb_science_rank18_20261010_v1/rank18_v6_status_journal_runner.py": "30f3a5b6e72afb33bdeba54514b1d6620e128027"
+    },
+    "artifact_metadata_handoff": "STATUS_JOURNAL_RUNNER_PARSES_TOP_LEVEL_TASK_TOML_ARTIFACTS_WITH_TOMLLIB_AND_INJECTS_BRAIN_TASK_ARTIFACTS_JSON_INTO_CREDENTIAL_FREE_CHILD",
+    "activation_file_present": false,
+    "rank18_task_read": false,
+    "rank18_task_started": false,
+    "blocker": "CONNECTOR_SAFETY_LAYER_BLOCKED_NEXT_CONTROL_PLANE_WRITE__DO_NOT_TREAT_PARTIAL_STAGING_BRANCH_AS_EXECUTION_CANDIDATE"
+  },
+  "scheduler": [
+    "DO_NOT_READ_OR_START_RANK18_FROM_THE_PARTIAL_STAGING_BRANCH.",
+    "COMPLETE_RANK18_PREFLIGHT_START_CAS_FINALIZER_WORKFLOW_BEHAVIOR_PUBLIC_BINDINGS_EPOCH_CLAIM_SURFACE_AND_ZERO_EXPOSURE_VERIFICATION_BEFORE_TASK_READ_AUTHORITY.",
+    "PRESERVE_AGENT_V12_AND_TYPED_ACTION_PROTOCOL_V2_EXACT_BLOBS.",
+    "PRESERVE_TRUSTED_PARENT_TASK_TOML_ARTIFACT_EXTRACTION_AND_CHILD_GITHUB_CREDENTIAL_ISOLATION.",
+    "ONLY_AFTER_PUBLIC_ZERO_EXPOSURE_RESEAL_PASS_MAY_A_FRESH_ONE_FILE_RANK18_ACTIVATION_PR_BE_CREATED."
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_PUBLIC_RANK18_RESEAL_IS_COMPLETE.",
+    "NO_RANK18_TASK_READ_OR_START_AUTHORITY_FROM_THIS_PROGRESS_RECORD.",
+    "NO_RANK18_BENCHMARK_TRIAL_CONSUMED.",
+    "NO_ACCEPTANCE_FAMILY_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_trials_consumed_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "execution_authority": false,
+  "task_read_authority": false,
+  "promotion_authority": false
+}
