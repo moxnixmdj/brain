@@ -133,20 +133,20 @@ class ResidualSemanticControlTests(unittest.TestCase):
         self.assertTrue(receipt["control_action_authority"])
 
     def test_live_front_door_source_binds_new_control_mode(self):
-        path = ROOT / "canonical/runtime/unified_cognitive_fabric_v1.py"
+        path = ROOT / "canonical/runtime/unified_cognitive_fabric_v2.py"
         source = path.read_text(encoding="utf-8")
         ast.parse(source)
         self.assertIn(
-            "from canonical.runtime import open_world_semantic_control_v1 as open_world_semantic_control",
+            "from canonical.runtime import open_world_semantic_control_v1 as open_world_control",
             source,
         )
         self.assertIn(
-            '"OPEN_WORLD_SEMANTIC_CONTROL": "open_world_semantic_control_v1.resolve"',
+            'OPEN_WORLD_MODE = "OPEN_WORLD_SEMANTIC_CONTROL"',
             source,
         )
-        self.assertIn('return "OPEN_WORLD_SEMANTIC_CONTROL"', source)
-        self.assertIn('elif mode == "OPEN_WORLD_SEMANTIC_CONTROL":', source)
-        self.assertIn("open_world_semantic_control.resolve(", source)
+        self.assertIn("_is_open_world_control_payload(payload)", source)
+        self.assertIn("requested == OPEN_WORLD_MODE", source)
+        self.assertIn("open_world_control.resolve(", source)
 
     def test_control_mode_is_learning_observable_without_terminal_authority(self):
         path = ROOT / "canonical/runtime/unified_cognitive_fabric_v1.py"
