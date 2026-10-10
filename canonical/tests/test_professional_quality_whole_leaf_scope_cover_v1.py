@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-from copy import deepcopy
 import unittest
 
 from canonical.runtime import professional_quality_whole_leaf_scope_cover_v1 as s
@@ -37,8 +36,22 @@ def certificate():
         "leaf_id": LEAF,
         "claim_id": CLAIM_ID,
         "claim_scope_git_blob_sha": CLAIM_SCOPE_BLOB,
-        "claim_verification_git_blob_sha": CLAIM_VERIFY_BLOB,
-        "scope_certificate": s.expected_scope_certificate(CLAIM_ID, CLAIM_VERIFY_BLOB),
+        "scope_certificate": {
+            "id": LEAF + "::WHOLE_LEAF_SCOPE_V1",
+            "target_scope_id": "scope://professional-quality/whole-leaf/" + CLAIM_ID,
+            "claim_id": CLAIM_ID,
+            "basis": s.UNIVERSAL,
+            "verified": True,
+            "independent": True,
+            "scope_relation": "EXACT",
+            "formal_completeness": True,
+            "all_admissible_target_inputs_proved": True,
+            "premise_set_id": "claim-verification:" + CLAIM_VERIFY_BLOB,
+        },
+        "evidence_refs": [{
+            "path": "canonical/verification/CLAIM_VERIFY.json",
+            "git_blob_sha": CLAIM_VERIFY_BLOB,
+        }],
         "semantic_truth_authority": False,
         "execution_authority": False,
         "quality_authority": False,
@@ -83,20 +96,25 @@ class ScopeCoverV1Tests(unittest.TestCase):
         cv["claim_scope_git_blob_sha"] = "0" * 40
         self.assertEqual(evaluate(cv=cv)["reason"], "CLAIM_VERIFY_SCOPE_BLOB_MISMATCH")
 
-    def test_certificate_claim_verify_blob_drift_fails(self):
+    def test_missing_exact_claim_verification_evidence_fails(self):
         cert = certificate()
-        cert["claim_verification_git_blob_sha"] = "0" * 40
-        self.assertEqual(evaluate(cert=cert)["reason"], "CERT_CLAIM_VERIFY_BLOB_MISMATCH")
+        cert["evidence_refs"][0]["git_blob_sha"] = "0" * 40
+        self.assertEqual(evaluate(cert=cert)["reason"], "CERT_EXACT_CLAIM_VERIFICATION_EVIDENCE_REQUIRED")
 
     def test_scope_target_narrowing_fails(self):
         cert = certificate()
         cert["scope_certificate"]["target_scope_id"] = "scope://professional-quality/whole-leaf/narrow"
-        self.assertEqual(evaluate(cert=cert)["reason"], "SCOPE_CERTIFICATE_NOT_EXACT")
+        self.assertEqual(evaluate(cert=cert)["reason"], "SCOPE_CERTIFICATE_BINDING_MISMATCH:target_scope_id")
 
     def test_scope_basis_tamper_fails(self):
         cert = certificate()
         cert["scope_certificate"]["basis"] = "EXACT_COMPLETE_TARGET_CASE_UNIVERSE"
-        self.assertEqual(evaluate(cert=cert)["reason"], "SCOPE_CERTIFICATE_NOT_EXACT")
+        self.assertEqual(evaluate(cert=cert)["reason"], "SCOPE_CERTIFICATE_BINDING_MISMATCH:basis")
+
+    def test_premise_rebinding_fails(self):
+        cert = certificate()
+        cert["scope_certificate"]["premise_set_id"] = "claim-verification:" + ("0" * 40)
+        self.assertEqual(evaluate(cert=cert)["reason"], "SCOPE_CERTIFICATE_BINDING_MISMATCH:premise_set_id")
 
     def test_authority_overclaim_fails(self):
         cert = certificate()
