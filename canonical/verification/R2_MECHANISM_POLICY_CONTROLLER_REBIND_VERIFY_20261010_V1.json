@@ -1,0 +1,74 @@
+{
+  "schema": "PROJECT_BRAIN_R2_MECHANISM_POLICY_CONTROLLER_REBIND_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__CURRENT_MAIN_STALE_CONTROLLER_BINDING_REPRODUCED__V4_REBIND_23_OF_23_DEVELOPMENT__23_OF_23_INDEPENDENT__PYCOMPILE_PASS__ZERO_CREDIT",
+  "defect": {
+    "policy_path": "canonical/governance/R2_MECHANISM_CLOSURE_OPEN_WORLD_FRONTIER_POLICY_20261010_V3.json",
+    "stale_controller_git_blob_sha": "b0cab3da36d89af202d6a95aa80701ad61372001",
+    "current_controller_git_blob_sha": "368c6ac07e8feaf1a0c880de5388b618def912e2",
+    "observed_failure": "test_r2_mechanism_policy_binds_mutable_current_r2_by_path_and_rechecks_invariants",
+    "classification": "DOWNSTREAM_IMMUTABLE_DEPENDENCY_BINDING_DRIFT_AFTER_VERIFIED_POLICY_COVER_SAFETY_REPAIR"
+  },
+  "verified_controller_change": {
+    "reconciliation_path": "canonical/governance/R2_POLICY_COVER_HARD_CONSTRAINT_SAFETY_RECONCILIATION_20261010_V1.json",
+    "reconciliation_git_blob_sha": "9f8aef7837edc9decded63e26f597f12471dd3d3",
+    "verification_path": "canonical/verification/R2_POLICY_COVER_SAFETY_REPAIR_INDEPENDENT_REPLAY_VERIFY_20261010_V1.json",
+    "verification_git_blob_sha": "a08173e74c2247f0ad344285336377281f7708f6",
+    "verified_controller_git_blob_sha": "368c6ac07e8feaf1a0c880de5388b618def912e2",
+    "focused_tests_passed": 32,
+    "focused_tests_failed": 0,
+    "py_compile_passed": true
+  },
+  "subject": {
+    "branch": "brain/r2-policy-v4-controller-rebind-20261010",
+    "exact_git_blobs": {
+      "canonical/governance/R2_MECHANISM_CLOSURE_OPEN_WORLD_FRONTIER_POLICY_20261010_V4.json": "617c848f8d803e0b46353e4e83e67b0b04cd55af",
+      "canonical/governance/CURRENT_DEVELOPMENT_SCHEDULER.json": "005a4b13d31a34139df9a1589885f1b3f0c7a218",
+      "canonical/tests/test_capability_first_scheduler_v1.py": "9789f3127920d704f76a002accad4d5050bb2ef0",
+      "canonical/runtime/capability_first_scheduler_v1.py": "6d2091cc1581b9aa1fd2c74e8a76519a41d9d957",
+      "canonical/runtime/general_adequate_decision_controller_v1.py": "368c6ac07e8feaf1a0c880de5388b618def912e2",
+      "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json": "8ed410ab753ca1d86de37b721da30e805a1e4ec9"
+    }
+  },
+  "development_verification": {
+    "verifier": "brain-r3-structural-provider-verify-20261010",
+    "sprite_id": "sprite-4c7dc4a8-ac7d-44a7-b49d-0fdf1f321004",
+    "workspace": "/home/sprite/brain-current-replay",
+    "command": "python -m unittest canonical.tests.test_capability_first_scheduler_v1 -v",
+    "result": "23_OF_23_PASS",
+    "py_compile_pass": true
+  },
+  "independent_verification": {
+    "verifier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/policy-v4-independent",
+    "command": "python -m unittest canonical.tests.test_capability_first_scheduler_v1 -v",
+    "result": "23_OF_23_PASS",
+    "py_compile_pass": true
+  },
+  "proved": [
+    "CURRENT_POLICY_V3_STALE_CONTROLLER_BINDING_FAILS_CLOSED",
+    "CURRENT_CONTROLLER_BYTES_ARE_SEPARATELY_VERIFIED_BY_POLICY_COVER_SAFETY_REPAIR",
+    "POLICY_V4_BINDS_EXACT_CURRENT_CONTROLLER_BYTES",
+    "MUTABLE_CURRENT_R2_REMAINS_PATH_AUTHORITATIVE_AND_INVARIANT_RECHECKED",
+    "SCHEDULER_RUNTIME_BEHAVIOR_UNCHANGED",
+    "REUSE_FIRST_V6_ENFORCEMENT_REMAINS_GREEN",
+    "FULL_SCHEDULER_REGRESSION_23_OF_23_PASSES_IN_TWO_SEPARATE_SPRITES"
+  ],
+  "hard_nonclaims": [
+    "NO_NEW_RUNTIME_BEHAVIOR",
+    "NO_NEW_SEMANTIC_ROUTE",
+    "NO_CAPABILITY_CREDIT",
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_CREDIT",
+    "NO_FULL_PRIVATE_REPOSITORY_REGRESSION_SUITE_EXECUTED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
