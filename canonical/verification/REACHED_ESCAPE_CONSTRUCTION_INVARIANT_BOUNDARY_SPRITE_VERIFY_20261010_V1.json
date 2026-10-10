@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_REACHED_ESCAPE_CONSTRUCTION_INVARIANT_BOUNDARY_SPRITE_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_CURRENT_BLOBS__FABRIC_FORWARDING_BOUND__LIVE_REACHABLE_COUNTEREXAMPLE_CLASS_PROVED__BOTH_REPAIR_CLASSES_REPLAYED__ZERO_CREDIT",
+  "subject": {
+    "governance_path": "canonical/governance/REACHED_ESCAPE_STATE_CONSTRUCTION_INVARIANT_BOUNDARY_20261010_V1.json",
+    "governance_git_blob_sha": "f9dd240a5ee9d5da2fa842c8f7f2af00f4c370bd",
+    "regression_test_path": "canonical/tests/test_reached_escape_construction_invariant_boundary_v1.py",
+    "regression_test_git_blob_sha": "8993a3070652466446e202b5562a838e302e70c8"
+  },
+  "exact_runtime_blobs": {
+    "unified_cognitive_fabric_v1": "a56de06be6e1263e577d8f3bb586ec42439593d8",
+    "reached_escape_state_kernel_v1": "b1435d90f039bd1d809ff364c325c3d0858d3afd",
+    "reached_escape_finite_totality_certificate_v1": "85487335b7e774ac9084b34c60e0175842771036"
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-reached-escape-boundary-verify-20261010",
+    "sprite_id": "sprite-2e517bec-d836-4425-9142-095075b337e9",
+    "workspace": "/home/sprite",
+    "incremental_spend_usd": 0
+  },
+  "executed_checks": [
+    "GIT_BLOB_IDENTITIES_MATCH_EXACT_CURRENT_BRAIN_BYTES",
+    "CURRENT_FABRIC_REACHED_ESCAPE_STATE_BRANCH_FORWARDS_PAYLOAD_TO_REACHED_ESCAPE_STATE_KERNEL_EVALUATE",
+    "COUNTEREXAMPLE_NORMALIZES_AND_KERNEL_RETURNS_UNSPLITTABLE_POLICY_CONFLICT",
+    "FINITE_TOTALITY_CERTIFICATE_RETURNS_OPEN_INDISTINGUISHABLE_CLASS_WITHOUT_COMMON_ADEQUATE_POLICY",
+    "ADDING_COMMON_ADEQUATE_POLICY_REPAIRS_CERTIFICATE",
+    "ADDING_AUTHENTICATED_SAFE_TRUTHFUL_COMPLETE_NONCONSTANT_DISCRIMINATOR_REPAIRS_CERTIFICATE"
+  ],
+  "result": {
+    "broad_live_fabric_state_invariant_falsified": true,
+    "counterexample_kernel_status": "UNSPLITTABLE_POLICY_CONFLICT",
+    "counterexample_certificate_status": "OPEN__INDISTINGUISHABLE_CLASS_WITHOUT_COMMON_ADEQUATE_POLICY",
+    "common_policy_repair_pass": true,
+    "truthful_splitter_repair_pass": true,
+    "mission_owned_constructor_invariant_proved": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_MISSION_AUTOPILOT_EMITS_THE_COUNTEREXAMPLE",
+    "NO_GLOBAL_REPAIR_ACQUIRABILITY",
+    "NO_GLOBAL_ESCAPE_PROGRESS_TOTALITY",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "terminal_authority": false,
+  "terminal_credit_delta": 0
+}
