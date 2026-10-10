@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V13",
+  "date": "2026-10-10",
+  "status": "ACTIVE_POST_COMPOSITION_V13__CLAIM_SCOPED_WHOLE_LEAF_V2_GATE_AND_READINESS_BOUND__READ_ONLY_ONLY__ZERO_CREDIT",
+  "supersedes": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V12.json",
+  "runtime": {
+    "path": "canonical/runtime/capability_parallel_frontier_post_composition_v1.py",
+    "git_blob_sha": "249b08767cdf4f940ba98ea3e8fe3aff0601e349",
+    "entrypoint": "plan_current_post_composition_frontier"
+  },
+  "frontier": {
+    "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
+    "git_blob_sha": "79139c18e4b99f3e8db33828625553898c680a5c",
+    "frontier_id": "LIVE_WORK_FRONTIER_20261010_PROF12_CLAIM_SCOPE_V2_V14"
+  },
+  "whole_leaf": {
+    "ledger_path": "canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_RESIDUAL_LEDGER_20261010_V1.json",
+    "ledger_git_blob_sha": "ae5503829ad340cccef287f37ff70e4ab9288d33",
+    "expected_leaf_count": 24,
+    "closed_leaf_count": 0,
+    "shared_residual_class": "WHOLE_LEAF_INPUT_DOMAIN_TOTALITY_OR_INDEPENDENT_CERTIFIED_COMPLETE_UNION",
+    "certificate_gate_activation_path": "canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_CERTIFICATE_GATE_ACTIVATION_20261010_V2.json",
+    "certificate_gate_activation_git_blob_sha": "34fdaf7f4a91d0e28d446a9d554c3aa0fbec8222",
+    "certificate_gate_runtime_path": "canonical/runtime/professional_quality_whole_leaf_claim_scope_gate_v2.py",
+    "certificate_gate_runtime_git_blob_sha": "d76b922e8d5c86f10568a3582759f8c23e69b2e0",
+    "certificate_gate_verification_path": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_CLAIM_SCOPE_GATE_V2_VERIFY_20261010_V1.json",
+    "certificate_gate_verification_git_blob_sha": "cb91d94dd89ec7c67aae54db3cd5319612cd43d5",
+    "admitted_scope_certificate_count": 0,
+    "property_truth_closed_count": 0,
+    "readiness_audit_runtime_path": "canonical/runtime/professional_quality_whole_leaf_certificate_readiness_audit_v2.py",
+    "readiness_audit_runtime_git_blob_sha": "dad5f50eba397985580c8559302b6d2bf0f268aa",
+    "readiness_audit_tests_path": "canonical/tests/test_professional_quality_whole_leaf_certificate_readiness_audit_v2.py",
+    "readiness_audit_tests_git_blob_sha": "b516c0ca2b8fd55fafc18e463beba43d2f728880",
+    "readiness_audit_verification_path": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_CERTIFICATE_READINESS_AUDIT_V2_VERIFY_20261010_V1.json",
+    "readiness_audit_verification_git_blob_sha": "2d28d932d08753fdf14c56aa24011e625518a4ef",
+    "admitted_v2_chain_count": 0,
+    "claim_scope_construction_required_count": 24,
+    "property_truth_ready_count": 0,
+    "admission_order": [
+      "FREEZE_EXACT_WHOLE_LEAF_CLAIM_SCOPE",
+      "INDEPENDENTLY_PROVE_WHOLE_ADMISSIBLE_DOMAIN_EQUIVALENCE",
+      "INDEPENDENTLY_PROVE_SCOPE_COVER",
+      "ONLY_THEN_RUN_PROPERTY_TRUTH_AND_EXECUTION_VERIFICATION"
+    ]
+  },
+  "independent_plan_replay": {
+    "carried_forward_from_v12": true,
+    "prior_plan_sha256": "0ca533770920d0960980d7177803bad32f8e98d2aa680d7d9e1f08da900166e2",
+    "current_v13_exact_plan_replay": false,
+    "reason": "V13_CHANGES_CURRENTNESS_BINDINGS_ONLY__FRESH_V13_PROJECTION_VERIFICATION_REQUIRED_BEFORE_ANY_STRONGER_PLAN_CLAIM"
+  },
+  "authority": {
+    "read_only_evidence_plan": true,
+    "full_execution": false,
+    "promotion": false,
+    "terminal": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
