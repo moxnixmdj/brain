@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1",
   "date": "2026-10-10",
-  "status": "DERIVED_CURRENT_CLASSIFICATION__REUSE_ADAPTATION_PROMOTION_EVIDENCE_AND_VERIFIED_EXECUTION_FIRST__NO_VERIFIED_NEW_PRIMITIVE_CURRENTLY_ESTABLISHED__ZERO_CREDIT",
+  "status": "DERIVED_CURRENT_CLASSIFICATION__ESCAPE_TOPOLOGY_RECONCILED_TO_12_ACTIVE_ACQUISITION_ROWS_PLUS_1_PARKED_TB_ROW__NO_ACTIVE_GAP_B__ZERO_CREDIT",
   "purpose": "COLLAPSE_APPARENT_BLOCKERS_ONTO_EXISTING_BRAIN_MACHINERY_AND_PREVENT_OPEN_CASE_EQUALS_MISSING_CAPABILITY_CONFUSION",
   "sources": [
     {
@@ -165,6 +165,11 @@
       "path": "canonical/verification/ESCAPE_PROGRESS_SHARED_GAP_EXECUTABLE_AUDIT_V5_VERIFY_20261010_V1.json",
       "git_blob_sha": "db0d6ae5c19193f2966c9ec4cb47980652e2405e",
       "role": "INDEPENDENT_ESCAPE_V5_CURRENTNESS_GATE_VERIFICATION"
+    },
+    {
+      "path": "canonical/governance/ESCAPE_ACTIVE_GAP_B_CAUSAL_RECLASSIFICATION_20261010_V1.json",
+      "git_blob_sha": "c793b7f57b13a936646a2825cd67f26c28bf3744",
+      "role": "CURRENT_ESCAPE_GAP_TOPOLOGY_CAUSAL_RECLASSIFICATION"
     }
   ],
   "classifications": [
@@ -232,10 +237,10 @@
         "ADAPT_EXISTING"
       ],
       "existing_binding": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V6.json",
-      "exact_remaining_class": "10_INFORMATION_DEPENDENT_ROWS__SHARED_CONTENT_AUTHENTICATED_POLICY_COVER_REALIZATION_ADAPTER_LIVE_AND_VERIFIED__REAL_ROW_PROOFS_0_OF_10__O_Q_IS_PRIMARY_SHARED_ACCEPTANCE_RESEARCH_COMPRESSION__ROW_PROOF_STILL_REQUIRES_REAL_CURRENT_AVAILABILITY_OR_ACQUIRABILITY_EVIDENCE",
+      "exact_remaining_class": "12_ACTIVE_ACQUISITION_EVIDENCE_ROWS__GDPVAL_AND_CHARTOGRAPHY_RECLASSIFIED_FROM_STALE_GAP_B_AFTER_CAUSAL_FALSIFICATION__SHARED_CONTENT_AUTHENTICATED_POLICY_COVER_REALIZATION_ADAPTER_LIVE_AND_VERIFIED__REAL_AUTHENTICATED_ROW_PROOFS_REMAIN_OPEN__PLUS_1_SEPARATELY_PARKED_TB_ROW_OUTSIDE_ACTIVE_GAP_A",
       "new_primitive_status": "NOT_ESTABLISHED",
       "executable_audit": "canonical/runtime/escape_progress_shared_gap_audit_v5.py",
-      "current_gate_status": "V6_POLICY_COVER_ADAPTER_PLUS_CURRENTNESS_AWARE_AUTHENTICATED_V5_GATE_VERIFIED__REAL_AUTHENTICATED_ROW_PROOFS_0_OF_10__ROW_PREMISES_OPEN",
+      "current_gate_status": "CURRENT_TOPOLOGY_RECONCILED__ACTIVE_GAP_A_ROWS_12__POLICY_COVER_ADAPTER_AND_CURRENTNESS_AWARE_V5_GATE_VERIFIED__REAL_AUTHENTICATED_ROW_PROOFS_REMAIN_OPEN",
       "causal_reclassification": {
         "path": "canonical/governance/ESCAPE_PROGRESS_FINANCE_INDEX_CAUSAL_RECLASSIFICATION_20261010_V1.json",
         "git_blob_sha": "ea256418ec1f8048c7566c6ecc74206d9d1ac529",
@@ -261,7 +266,21 @@
       "currentness_activation": {
         "path": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_AUDIT_V5_ACTIVATION_20261010_V1.json",
         "git_blob_sha": "41a50db02a1b60a4ab47a02ddb29d5f9f3338019"
-      }
+      },
+      "active_gap_a_count": 12,
+      "parked_unresolved_count": 1,
+      "parked_unresolved_rows": [
+        "TB_SCIENCE_GE_58_7"
+      ],
+      "latest_causal_reclassification": {
+        "path": "canonical/governance/ESCAPE_ACTIVE_GAP_B_CAUSAL_RECLASSIFICATION_20261010_V1.json",
+        "git_blob_sha": "c793b7f57b13a936646a2825cd67f26c28bf3744",
+        "effective_gap_a_active_count": 12,
+        "effective_gap_b_active_count": 0,
+        "parked_unresolved_count": 1
+      },
+      "historical_successor_manifest_gap_a_count": 10,
+      "successor_count_is_current_topology_authority": false
     },
     {
       "residual_id": "ESCAPE_GAP_B_INTERNAL_ROUTE_STRICT_PROGRESS",
@@ -270,10 +289,10 @@
         "VERIFY_EXISTING"
       ],
       "existing_binding": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V6.json",
-      "exact_remaining_class": "2_CURRENT_EXECUTABLE_INTERNAL_ROWS_PLUS_1_PARKED_UNRESOLVED_TB_ROW__TB_RANK20_V3_RETIRED_NONCONSUMING__GENERAL_BOUND_RUNTIME_REPAIR_VERIFIED_AND_PROMOTED__TB_REQUIRES_FRESH_CAPABILITY_FIRST_ADMISSION_BEFORE_REENTERING_ACTIVE_GAP_B",
+      "exact_remaining_class": "0_ACTIVE_GAP_B_ROWS__GDPVAL_AND_CHARTOGRAPHY_CAUSALLY_RECLASSIFIED_TO_ACQUISITION_EVIDENCE_FRONTIER__1_PARKED_UNRESOLVED_TB_ROW_OUTSIDE_ACTIVE_GAP_B__NO_STRICT_PROGRESS_WITNESS_SCHEDULED_NOW",
       "new_primitive_status": "NOT_ESTABLISHED",
       "executable_audit": "canonical/runtime/escape_progress_shared_gap_audit_v5.py",
-      "current_gate_status": "CURRENTNESS_AWARE_AUTHENTICATED_V5_GATE_VERIFIED__ACTIVE_GAP_B_ROWS_2__REAL_AUTHENTICATED_ACTIVE_ROW_PROOFS_0_OF_2__TB_ROW_PARKED_UNRESOLVED",
+      "current_gate_status": "CURRENT_TOPOLOGY_RECONCILED__ACTIVE_GAP_B_ROWS_0__TB_ROW_PARKED_UNRESOLVED__NO_ACTIVE_STRICT_PROGRESS_RESEARCH_FAMILY",
       "causal_reclassification": {
         "path": "canonical/governance/ESCAPE_PROGRESS_FINANCE_INDEX_CAUSAL_RECLASSIFICATION_20261010_V1.json",
         "git_blob_sha": "ea256418ec1f8048c7566c6ecc74206d9d1ac529",
@@ -301,26 +320,32 @@
         "wake_condition": "FRESH_EXPLICIT_CAPABILITY_FIRST_ADMISSION_AND_NEW_NONRETRY_EXECUTION_AUTHORITY_FOR_A_FUTURE_UNEXPOSED_VALIDATION_SUBJECT"
       },
       "historical_effective_gap_b_count": 3,
-      "effective_gap_b_count": 2,
+      "effective_gap_b_count": 0,
       "parked_unresolved_gap_b_count": 1,
-      "active_gap_b_rows": [
-        "PROWORK_GDPVAL_GE_1846",
-        "CHARTOGRAPHY_TOOLS_GE_89"
-      ],
+      "active_gap_b_rows": [],
       "parked_unresolved_rows": [
         "TB_SCIENCE_GE_58_7"
       ],
-      "active_gap_b_count": 2,
+      "active_gap_b_count": 0,
       "parked_unresolved_count": 1,
       "parked_rows": [
         "TB_SCIENCE_GE_58_7"
       ],
       "scheduling_effect": {
-        "active_gap_b_rows": 2,
+        "active_gap_b_rows": 0,
         "parked_unresolved_rows": 1,
         "tb_strict_progress_witness_required_now": false,
-        "rule": "DO_NOT_SCHEDULE_PARKED_TB_AS_ACTIVE_GAP_B__RECHECK_CURRENT_TB_PATH_BEFORE_ANY_WAKE"
-      }
+        "rule": "DELETE_GAP_B_AS_ACTIVE_CURRENT_RESEARCH_FAMILY__GDPVAL_AND_CHARTOGRAPHY_ROUTE_TO_GAP_A_ACQUISITION__KEEP_TB_PARKED_UNTIL_FRESH_EXPLICIT_CAPABILITY_FIRST_ADMISSION_AND_NEW_NONRETRY_EXECUTION_AUTHORITY"
+      },
+      "latest_causal_reclassification": {
+        "path": "canonical/governance/ESCAPE_ACTIVE_GAP_B_CAUSAL_RECLASSIFICATION_20261010_V1.json",
+        "git_blob_sha": "c793b7f57b13a936646a2825cd67f26c28bf3744",
+        "effective_gap_a_active_count": 12,
+        "effective_gap_b_active_count": 0,
+        "parked_unresolved_count": 1
+      },
+      "historical_successor_manifest_gap_b_count": 3,
+      "successor_count_is_current_topology_authority": false
     },
     {
       "residual_id": "ASSURANCE_CLOSURE_COMPILER_NOT_LIVE_DEFAULT",
@@ -613,5 +638,18 @@
     "version_or_rank_labels_inside_rows": "PROVENANCE_OR_OBSERVATION_ONLY__NOT_CURRENTNESS_AUTHORITY",
     "fail_closed_rule": "IF_CURRENT_SOURCE_REDERIVATION_CONFLICTS_WITH_STORED_SUMMARY__CURRENT_SOURCE_WINS_AND_STORED_SUMMARY_MUST_NOT_AUTHORIZE_EXECUTION_OR_NEW_PRIMITIVE_CLASSIFICATION"
   },
-  "terminal_credit_delta": 0
+  "terminal_credit_delta": 0,
+  "escape_current_topology": {
+    "frozen_obligation_count": 13,
+    "active_gap_a_acquisition_rows": 12,
+    "active_gap_b_strict_progress_rows": 0,
+    "parked_unresolved_rows": 1,
+    "parked_obligation_ids": [
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "source": "canonical/governance/ESCAPE_ACTIVE_GAP_B_CAUSAL_RECLASSIFICATION_20261010_V1.json",
+    "source_git_blob_sha": "c793b7f57b13a936646a2825cd67f26c28bf3744",
+    "row_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
 }
