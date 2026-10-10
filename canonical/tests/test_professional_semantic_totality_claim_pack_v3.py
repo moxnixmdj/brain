@@ -40,5 +40,41 @@ class V3Tests(unittest.TestCase):
         out=v3.resolve_mission_authority(p,a,authority_blob_sha="0"*40)
         self.assertFalse(out["pass"])
 
+
+    def test_mutable_projection_churn_preserves_v3_claim_ids(self):
+        current=v3.verify(repo_root=ROOT)
+        self.assertTrue(current["pass"],current)
+        p=json.loads((ROOT/v3.MISSION_POINTER_PATH).read_text())
+        a=json.loads((ROOT/v3.MISSION_AUTHORITY_PATH).read_text())
+        source=v3.v2.verify(repo_root=ROOT)
+        p=deepcopy(p)
+        p["synthetic_non_authoritative_projection"]={"generation":999}
+        out=v3.rebind_source_pack(
+            source,
+            mission_authority_blob_sha=v3.EXPECTED_MISSION_AUTHORITY_BLOB,
+            current_pointer=p,
+            mission_authority=a,
+        )
+        self.assertTrue(out["pass"],out)
+        self.assertEqual(
+            [x["frozen_claim"]["claim_id"] for x in current["claims"]],
+            [x["frozen_claim"]["claim_id"] for x in out["claims"]],
+        )
+
+    def test_authoritative_source_substitution_rejects_rebind(self):
+        p=json.loads((ROOT/v3.MISSION_POINTER_PATH).read_text())
+        a=json.loads((ROOT/v3.MISSION_AUTHORITY_PATH).read_text())
+        source=v3.v2.verify(repo_root=ROOT)
+        p=deepcopy(p)
+        p["authoritative_source"]["path"]="canonical/governance/OTHER.json"
+        out=v3.rebind_source_pack(
+            source,
+            mission_authority_blob_sha=v3.EXPECTED_MISSION_AUTHORITY_BLOB,
+            current_pointer=p,
+            mission_authority=a,
+        )
+        self.assertFalse(out["pass"])
+        self.assertEqual(out["reason"],"V3_CLAIM_GUARD_REJECTED")
+
 if __name__=="__main__":
     unittest.main(verbosity=2)
