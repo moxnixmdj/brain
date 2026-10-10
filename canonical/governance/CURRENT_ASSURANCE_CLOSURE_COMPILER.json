@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_ASSURANCE_CLOSURE_COMPILER_POINTER_V1",
   "date": "2026-10-09",
-  "status": "UVCK_V2_CANDIDATE__PROPERTY_TRUTH_5_OF_24__SEMANTIC_TOTALITY_REUSE_AND_FULL_REGRESSION_OPEN__NOT_LIVE_DEFAULT",
+  "status": "UVCK_V2_CANDIDATE__PROPERTY_TRUTH_8_OF_24__SEMANTIC_TOTALITY_REUSE_AND_FULL_REGRESSION_OPEN__NOT_LIVE_DEFAULT",
   "governance": {
     "path": "canonical/governance/UVCK_V2_ASSURANCE_CLOSURE_COMPILER_20261009_V1.json",
     "git_blob_sha": "b7197be29b49c55c81e1a18572cd22020510fa5e"
@@ -419,21 +419,33 @@
   },
   "latest_professional_property_truth": {
     "current_professional_execution_path": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
-    "current_professional_execution_git_blob_sha": "779ce69c3364cdf6a7090d216d4a3c7b1a8d7f9c",
-    "verified_leaf_count": 5,
+    "current_professional_execution_git_blob_sha": "6287785b8ec8cffb639d655e4198781e8e0449f7",
+    "verified_leaf_count": 8,
     "total_leaf_count": 24,
     "verified_execution_leaf_ids": [
       "PQ::R1_TARGET_SPECIFICATION::EXECUTION",
+      "PQ::R2_CANDIDATE_SEARCH::EXECUTION",
+      "PQ::R3_REALIZATION_OBSERVATION::EXECUTION",
       "PQ::R4_MEASUREMENT_CONSTRUCT::EXECUTION",
+      "PQ::R6_EVIDENCE_GROUNDING_DEPENDENCE::EXECUTION",
       "PQ::R7_CAUSAL_PRESCRIPTIVE::EXECUTION",
       "PQ::R10_ANALYSIS_DECISION::EXECUTION",
       "PQ::R12_META_COMPOSITION_CLOSURE::EXECUTION"
     ],
-    "open_execution_leaf_count": 7,
+    "open_execution_leaf_count": 4,
     "open_semantic_leaf_count": 12,
-    "registry_verification_path": "canonical/verification/PROFESSIONAL_QUALITY_LEAF_REGISTRY_PROPERTY_TRUTH_VERIFY_20261010_V3.json",
-    "registry_verification_git_blob_sha": "f491a215fee5310b54c37eea694af642bbe12d6e",
+    "registry_verification_path": "canonical/verification/PROFESSIONAL_QUALITY_LEAF_REGISTRY_PROPERTY_TRUTH_VERIFY_20261010_V6.json",
+    "registry_verification_git_blob_sha": "c0449b1afe7856ac95acea34f8a1f26702da3385",
     "live_default_credit": false,
     "terminal_credit_delta": 0
+  },
+  "professional_quality_r6_execution_property_truth": {
+    "path": "canonical/verification/PROFESSIONAL_QUALITY_R6_EXECUTION_PROPERTY_TRUTH_INDEPENDENT_VERIFY_20261010_V1.json",
+    "git_blob_sha": "040a937aecced1bc40d9a38f26108cb88c0a7e4d",
+    "leaf_id": "PQ::R6_EVIDENCE_GROUNDING_DEPENDENCE::EXECUTION",
+    "leaf_property_truth_authority": true,
+    "semantic_leaf_closed": false,
+    "root_closed": false,
+    "global_evidence_completeness_proved": false
   }
 }
