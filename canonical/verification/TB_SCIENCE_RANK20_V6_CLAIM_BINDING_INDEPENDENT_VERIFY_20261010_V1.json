@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK20_V6_CLAIM_BINDING_INDEPENDENT_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_BRANCH_BYTES__FRESH_CLAIM_IDENTITY_3_OF_3__PUBLIC_START_CAS_IMPORT_CANARY_PASS__ZERO_EXPOSURE",
+  "subject": {
+    "claim_path": "canonical/governance/TB_SCIENCE_RANK20_LOGICAL_ATTEMPT_CLAIM_BINDING_20261010_V6.json",
+    "claim_git_blob_sha": "8b416b8dc6702cec573b2247050d16f07d3a3dc8",
+    "test_path": "canonical/tests/test_tb_science_rank20_claim_binding_v6.py",
+    "test_git_blob_sha": "8394e1b7980b69c5f24a961995966f79ba0fe237"
+  },
+  "derived_identity": {
+    "execution_claim_binding_digest": "sha256:3c4801910a41d14fc31bc7ec5e4b0f3467154aed5e8ac914f727cb6773d10860",
+    "logical_attempt_id": "f3d4e55a96b3d2dddb85e4f3c5e085d83ab9f7e6c186bba00b0146a528f339b7",
+    "prior_execution_claim_binding_digest": "sha256:aa0d91d18bb597319414b7385a92248992c093e14bf9c8f5677b72c05cb09beb",
+    "prior_logical_attempt_id": "c7a02ecc6b11f4338120f05cd922370d361ce79e104549f95b656df3b51cb2bb",
+    "fresh_identity_proved": true
+  },
+  "canonical_replay": {
+    "carrier": "SPRITE",
+    "sprite_name": "brain-live-runtime-v1-verify-20261008",
+    "sprite_id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13",
+    "exact_files_materialized": 5,
+    "tests_run": 3,
+    "tests_passed": 3,
+    "tests_failed": 0
+  },
+  "public_repair_replay": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "base": "terminal-execution-v1",
+    "start_cas_path": "capsules/tb_science_rank20_20261010_v1/rank20_start_cas_v7.py",
+    "start_cas_git_blob_sha": "35cd4c7a31d5ffbafa755dcdf888c2dee1beeb1b",
+    "import_canary": "PASS__RANK20_START_CAS_V7_IMPORT_CANARY__NO_TASK_ACCESS",
+    "zero_exposure_reseal": "PASS__TB_SCIENCE_RANK20_V2_V13_CLAIM_BOUND_PUBLIC_RESEAL__ZERO_EXPOSURE",
+    "promoted_preactivation": "PASS__RANK20_V5_PROMOTED_EFFECTIVE_AUTHORITY__PREACTIVATION__ZERO_EXPOSURE"
+  },
+  "state": {
+    "task_read": false,
+    "task_started": false,
+    "durable_start_cas_acquired": false,
+    "benchmark_trials_consumed": 0,
+    "execution_authority_effective": false,
+    "activation_present": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "pass": true
+}
