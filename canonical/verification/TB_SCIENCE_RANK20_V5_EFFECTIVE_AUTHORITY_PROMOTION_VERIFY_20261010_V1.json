@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK20_V5_EFFECTIVE_AUTHORITY_PROMOTION_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__RANK20_V5_EFFECTIVE_AUTHORITY_PROMOTION__PREACTIVATION__ZERO_EXPOSURE",
+  "authority": {
+    "path": "canonical/governance/TB_SCIENCE_RANK20_ONE_SLOT_EXECUTION_AUTHORITY_20261010_V6.json",
+    "git_blob_sha": "7496ada1e61be5f8526e0e49cb62536a92045e6e"
+  },
+  "ledger": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V49.json",
+    "git_blob_sha": "af9efbfdcf82e42f16058258603f0e27cb39aa0e"
+  },
+  "predecessor_reseal": {
+    "path": "canonical/verification/TB_SCIENCE_RANK20_V5_PUBLIC_RESEAL_VERIFY_20261010_V1.json",
+    "git_blob_sha": "af8ccc669da3e2606c174c196cadaea30982dbb9"
+  },
+  "public": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "promotion_pull_request": 2605,
+    "promotion_merge_commit_sha": "ee3436705ea801a45bfc08d6b5d77f0b199e6c9c",
+    "surface_git_blob_sha": "ddec26f44e4b97eb2b8f76029b889164648fd109",
+    "authority_git_blob_sha": "ed796d6bb51e14fcacdea9222124897321856ef8",
+    "ledger_git_blob_sha": "317b6997344d8fa588a20a73b3c7978bae2f2616",
+    "epoch_git_blob_sha": "e7446cbc8ef2b655a51fc59134dff12d6161052e",
+    "execution_claim_git_blob_sha": "5f3deca2d53910dba1622ec1e23d3b45e47af2b1",
+    "promotion_verifier_git_blob_sha": "f07db19277f883787d078db89247e6e24256b566"
+  },
+  "independent_replay": {
+    "provider": "Sprites",
+    "sprite_name": "brain-rank20-v5-verify-20261010",
+    "sprite_id": "sprite-0a480fe6-286d-4f66-ae52-5424304afebf",
+    "exact_branch_head_sha": "8b8defc1b1f5bb4f1cca697e9d18815d761428ec",
+    "promotion_verifier_pass": true,
+    "admission_without_activation_pass": true,
+    "preflight_pass": true,
+    "require_activation_fail_closed": true,
+    "activation_failure_reason": "ACTIVATION_FILE_MISSING"
+  },
+  "coherence": {
+    "slot_identity_equal": true,
+    "task_digest_equal": true,
+    "logical_attempt_id_equal": true,
+    "execution_claim_binding_digest_equal": true,
+    "claim_epoch_equal": true,
+    "public_surface_content_addressed": true,
+    "execution_authority_effective": true,
+    "task_read_authority_effective": true,
+    "activation_authority": false,
+    "activation_present": false,
+    "task_read": false,
+    "task_started": false,
+    "durable_start_cas_acquired": false,
+    "benchmark_trials_consumed": 0
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_trials_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_RANK20_TASK_READ",
+    "NO_RANK20_TASK_START",
+    "NO_RANK20_DURABLE_START_CAS",
+    "NO_RANK20_ACTIVATION",
+    "NO_ACCEPTANCE_CAPABILITY_OR_TERMINAL_CREDIT"
+  ],
+  "pass": true,
+  "next": "MINT_EXACT_RANK20_V5_ACTIVATION_AUTHORITY__THEN_ONE_FILE_ACTIVATION_BRANCH__NO_TASK_READ_BEFORE_LIVE_PREFLIGHT"
+}
