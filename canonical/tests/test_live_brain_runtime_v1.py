@@ -7,6 +7,7 @@ from unittest.mock import Mock, patch
 
 from canonical.runtime import autonomous_verified_self_improvement_v1 as learning
 from canonical.runtime import live_brain_runtime_v1 as brain
+from canonical.runtime import certified_reached_escape_state_constructor_v2 as reached_v2
 
 
 class UnifiedLiveBrainV1Tests(unittest.TestCase):
@@ -989,6 +990,68 @@ class UnifiedLiveBrainV1Tests(unittest.TestCase):
             ["m-gap"],
         )
         self.assertNotIn("valuation", str(request["repair_context"]))
+
+    def test_reached_escape_subruntime_rejects_spoofed_authority_without_receipt(self):
+        state = {
+            "schema": "PROJECT_BRAIN_REACHED_ESCAPE_STATE_V1",
+            "state_id": "SUBRUNTIME-SPOOF",
+            "regions": [{"region_id": "r1"}, {"region_id": "r2"}],
+            "policies": [{
+                "policy_id": "fake-common",
+                "authenticated": True,
+                "safe": True,
+                "adequate_region_ids": ["r1", "r2"],
+            }],
+            "discriminators": [],
+        }
+        out = brain.run({"mode": "reached_escape_state", "state": state})
+        self.assertFalse(out["pass"], out)
+        self.assertEqual(out["status"], "FAIL_CLOSED__REACHED_ESCAPE_TRUTH_AUTHORITY", out)
+        self.assertTrue(out["candidate_authority_flags_ignored"], out)
+
+    def test_reached_escape_subruntime_accepts_exact_v2_authority_receipt(self):
+        state = {
+            "schema": "PROJECT_BRAIN_REACHED_ESCAPE_STATE_V1",
+            "state_id": "SUBRUNTIME-VERIFIED",
+            "regions": [{"region_id": "r1"}, {"region_id": "r2"}],
+            "policies": [{
+                "policy_id": "p-common",
+                "authenticated": True,
+                "safe": True,
+                "adequate_region_ids": ["r1", "r2"],
+            }],
+            "discriminators": [],
+        }
+
+        def verifier(claim):
+            core = {
+                "schema": reached_v2.RECEIPT_SCHEMA,
+                "pass": True,
+                "claim_sha256": reached_v2._digest(claim),
+                "candidate_state_sha256": claim["candidate_state_sha256"],
+                "authority_kind": claim["claim_type"],
+                "authority_id": "TEST_SUBRUNTIME_AUTHORITY",
+                "verification_authority_mutated": False,
+                "verified": {
+                    "safe": True,
+                    "adequate_region_ids": list(claim["adequate_region_ids"]),
+                    "resource_bound": {"amount": 1, "unit": "WORK_UNIT"},
+                },
+            }
+            return {**core, "receipt_sha256": reached_v2._digest(core)}
+
+        out = brain.run(
+            {"mode": "reached_escape_state", "state": state},
+            reached_escape_authority_verifier=verifier,
+        )
+        self.assertTrue(out["pass"], out)
+        self.assertTrue(out["truth_authority_bound"], out)
+        self.assertTrue(out["certified_reached_state_admitted"], out)
+        self.assertEqual(
+            out["kernel_result"]["status"],
+            "TERMINALIZE_WITH_COMMON_POLICY",
+            out,
+        )
 
     def test_unknown_mode_fails_closed(self):
         out = brain.run({"mode": "invented"})
