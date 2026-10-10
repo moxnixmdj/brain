@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_REACHED_ESCAPE_FINITE_TOTALITY_CERTIFICATE_ACTIVATION_V1",
+  "date": "2026-10-10",
+  "status": "ACTIVE_BOUNDED_REACHED_STATE_FUTURE_OUTCOME_TOTALITY_CERTIFICATE__GLOBAL_ESCAPE_TOTALITY_OPEN__ZERO_CREDIT",
+  "mission_relation": "LOAD_BEARING_SUBTHEOREM_FOR_ESCAPE_POLICY_ADEQUACY",
+  "runtime": {
+    "path": "canonical/runtime/reached_escape_finite_totality_certificate_v1.py",
+    "git_blob_sha": "85487335b7e774ac9084b34c60e0175842771036"
+  },
+  "dependency": {
+    "path": "canonical/runtime/reached_escape_state_kernel_v1.py",
+    "git_blob_sha": "b1435d90f039bd1d809ff364c325c3d0858d3afd"
+  },
+  "verification": {
+    "path": "canonical/verification/REACHED_ESCAPE_FINITE_TOTALITY_CERTIFICATE_PUBLIC_VERIFY_20261010_V1.json",
+    "git_blob_sha": "db0b0bb8c72712422b992bac4846901ff61857cc",
+    "result": "7_OF_7_PASS"
+  },
+  "theorem": {
+    "exact_state_preconditions": [
+      "FINITE_EXACT_NORMALIZED_REACHED_STATE",
+      "EVERY_REGION_HAS_AT_LEAST_ONE_AUTHENTICATED_SAFE_ADEQUATE_POLICY",
+      "EVERY_EQUIVALENCE_CLASS_UNDER_ALL_CURRENT_AUTHENTICATED_SAFE_TRUTHFUL_COMPLETE_DISCRIMINATORS_HAS_A_COMMON_AUTHENTICATED_SAFE_ADEQUATE_POLICY"
+    ],
+    "conclusion": "EVERY_POSSIBLE_OUTCOME_PATH_OF_RECURSIVE_EXISTING_KERNEL_SPLITTER_SELECTION_TERMINATES_IN_A_COMMON_POLICY_CELL",
+    "split_depth_upper_bound": "REGION_COUNT_MINUS_ONE",
+    "proof_method": "FINITE_STRICT_DESCENT_PLUS_DISCRIMINATOR_EQUIVALENCE_CLASS_COMMON_POLICY"
+  },
+  "scheduler_effect": {
+    "delete": [
+      "FOR_AN_EXACT_REACHED_STATE_SATISFYING_THE_CERTIFICATE_PRECONDITIONS__DO_NOT_REPROVE_EACH_FUTURE_BRANCH_SEPARATELY",
+      "DO_NOT_TREAT_ONE_STEP_STRICT_PROGRESS_AS_THE_STRONGEST_AVAILABLE_BOUND_ON_CERTIFIED_STATES"
+    ],
+    "preserve": [
+      "GLOBAL_ESCAPE_PROGRESS_TOTALITY",
+      "UNIVERSAL_POLICY_OR_DISCRIMINATOR_ACQUIRABILITY",
+      "FUTURE_STATE_CONSTRUCTION_COMPLETENESS",
+      "NORMAL_ACCEPTANCE_AND_EXECUTION_AUTHORITY"
+    ],
+    "next_global_question": "PROVE_STATE_CONSTRUCTION_INVARIANT_THAT_EVERY_ACTUALLY_REACHED_NONTERMINAL_ESCAPE_STATE_SATISFIES_THE_BOUNDED_CERTIFICATE_PRECONDITIONS__OR_RETURN_AN_EXACT_COUNTEREXAMPLE_CLASS"
+  },
+  "hard_nonclaims": [
+    "NO_GLOBAL_ESCAPE_PROGRESS_TOTALITY",
+    "NO_CLAIM_ALL_REACHED_STATES_SATISFY_THE_CERTIFICATE",
+    "NO_CLAIM_NEW_POLICY_OR_DISCRIMINATOR_ACQUISITION_IS_ALWAYS_POSSIBLE",
+    "NO_OPEN_ENDED_MISSION_TERMINAL_CLAIM",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false
+}
