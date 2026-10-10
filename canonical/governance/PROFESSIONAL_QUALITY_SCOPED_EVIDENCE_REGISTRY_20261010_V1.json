@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_REGISTRY_V1",
   "date": "2026-10-10",
-  "status": "ACTIVE__TWO_CLAIM_SCOPED_CAPABILITIES__ZERO_GLOBAL_LEAF_CREDIT",
+  "status": "ACTIVE__THREE_CLAIM_SCOPED_CAPABILITIES__ZERO_GLOBAL_LEAF_CREDIT",
   "entries": [
     {
       "scope_id": "PQ::R7::SINGLE_EDIT::UVCK_DEFEATER_ORDER_REPAIR",
@@ -51,12 +51,37 @@
       "semantic_leaf_credit": false,
       "execution_leaf_credit": false,
       "terminal_credit_delta": 0
+    },
+    {
+      "scope_id": "PQ::R11::EVAL_FIREWALL::POST_IDENTITY_DISCOVERY_REVOCATION",
+      "root_id": "R11_ADAPTIVE_INTEGRITY_SECURITY",
+      "contributes_to_leaf_ids": [
+        "PQ::R11_ADAPTIVE_INTEGRITY_SECURITY::EXECUTION"
+      ],
+      "claim_kind": "CLEAN_EVALUATION_LANE_POST_IDENTITY_DISCOVERY_REVOCATION",
+      "source_receipt": {
+        "path": "canonical/verification/PROFESSIONAL_QUALITY_R11_EVALUATION_FIREWALL_SCOPED_VERIFY_20261010_V1.json",
+        "git_blob_sha": "346d369a811aa77af02be901a5b04458fb528667"
+      },
+      "reusable_compiler": {
+        "path": "canonical/runtime/evaluation_information_firewall_v1.py",
+        "git_blob_sha": "11776f87f41c66802a28a417c344cccb394eb2aa"
+      },
+      "compiler_verification": {
+        "path": "canonical/governance/EVALUATION_INFORMATION_FIREWALL_V1.json",
+        "git_blob_sha": "902c19851629bfb2342eea29e73f4a7ab5d212c5"
+      },
+      "global_leaf_closure": false,
+      "global_root_closure": false,
+      "semantic_leaf_credit": false,
+      "execution_leaf_credit": false,
+      "terminal_credit_delta": 0
     }
   ],
   "admission_law": "CLAIM_SCOPED_EVIDENCE_MAY_BE_REUSED_ONLY_INSIDE_ITS_PROVED_SCOPE_AND_NEVER_COUNTS_AS_GLOBAL_LEAF_OR_ROOT_CLOSURE",
   "hard_nonclaims": [
-    "NO_GLOBAL_R3_OR_R7_LEAF_CLOSURE",
-    "NO_GLOBAL_R3_OR_R7_ROOT_CLOSURE",
+    "NO_GLOBAL_R3_R7_OR_R11_LEAF_CLOSURE",
+    "NO_GLOBAL_R3_R7_OR_R11_ROOT_CLOSURE",
     "NO_DOMAIN_SEMANTIC_CLOSURE",
     "NO_DOMAIN_EXECUTION_CLOSURE",
     "NO_TERMINAL_CREDIT"
