@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_RESIDUAL_OQ_ADAPTER_RECONCILIATION_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_CANDIDATE_CLASSIFICATION__5_OF_5__O11_Q2_PRIMARY__ADAPTER_LIVE__ZERO_CREDIT",
+  "subject": {
+    "current_candidate": [
+      "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
+      "75c826de1575985481b8e7b010eb63b135d64d14"
+    ],
+    "tests": [
+      "canonical/tests/test_current_residual_oq_adapter_reconciliation_v1.py",
+      "5215d230a658609f285da2160fd30b93451e6c98"
+    ],
+    "oq": [
+      "canonical/governance/CURRENT_ESCAPE_OQ_FRONTIER_REDUCTION_20261010_V1.json",
+      "e355f3c168429c96ff0dfa142428ada6c97c47e9"
+    ],
+    "v6": [
+      "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V6.json",
+      "a6fe5eda7b596d5a24cf75bc9b046bf53f4fe7be"
+    ],
+    "adapter_activation": [
+      "canonical/governance/ESCAPE_GAP_A_POLICY_COVER_ADAPTER_ACTIVATION_20261010_V1.json",
+      "7eaa5c0a403cfd9e6d131cecdc7cb9a243843872"
+    ]
+  },
+  "independent_verification": {
+    "carrier": "Sprites",
+    "sprite": "brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "runner": "python3 -m unittest -v canonical.tests.test_current_residual_oq_adapter_reconciliation_v1",
+    "tests_run": 5,
+    "failures": 0,
+    "errors": 0
+  },
+  "proved": [
+    "O11_Q2_IS_PRIMARY_ESCAPE_ACCEPTANCE_RESEARCH_COMPRESSION",
+    "GAP_A_ADAPTER_CONSTRUCTION_IS_CLOSED_WHILE_REAL_ROWS_REMAIN_0_OF_10",
+    "GAP_B_REUSES_V6_BINDING",
+    "NEW_SCHEDULER_SOURCES_ARE_EXACT_CONTENT_BOUND",
+    "REUSE_FIRST_AND_ZERO_CREDIT_ARE_PRESERVED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
