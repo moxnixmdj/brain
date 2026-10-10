@@ -1,0 +1,75 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK20_V2_ACTIVATION_PREEXPOSURE_ABORT_TRUTH_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__PREEXPOSURE_ABORT_NONCONSUMING__START_CAS_IMPORT_BOOTSTRAP_DEFECT__ACTIVATION_V2_RETIRED",
+  "slot_id": "terminal-bench-science/hysteretic-aquifer-control::trial-0",
+  "task_digest": "sha256:681df0c3b2ada03a933ac4d2e11f07983676f87a9f26b61e416987904b880289",
+  "logical_attempt_id": "c7a02ecc6b11f4338120f05cd922370d361ce79e104549f95b656df3b51cb2bb",
+  "execution_claim_binding_digest": "sha256:aa0d91d18bb597319414b7385a92248992c093e14bf9c8f5677b72c05cb09beb",
+  "activation": {
+    "public_repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2606,
+    "head_sha": "843efd89ad09c5adc737a7a867a87cf5e449c021",
+    "merge_ref_sha": "d9d9a638f1e6bd0ebfb1ba4ecc155917113e07a1",
+    "activation_git_blob_sha": "455b06aae6255706363a855e6781729d5aaae776",
+    "workflow_run_id": 38045888545,
+    "workflow_job_id": 114195221191,
+    "run_attempt": 1
+  },
+  "carrier": {
+    "exact_harbor_installed": true,
+    "current_runner_llama_clean_build": true,
+    "model_sha256_verified": true,
+    "synthetic_inference_passed": true,
+    "carrier_ready": true
+  },
+  "receipt": {
+    "status": "PREEXPOSURE_ABORT_NONCONSUMING",
+    "artifact_id": 11666873859,
+    "artifact_digest": "sha256:c34e557e18319987bfa5b9989a0b35bf50ec016be5955fabddcd75bdc3ad0212",
+    "task_read": false,
+    "task_started": false,
+    "start_cas_acquired": false,
+    "benchmark_trials_consumed": 0,
+    "reward": null,
+    "execution_authority_consumed": false
+  },
+  "root_cause": {
+    "class": "START_CAS_IMPORT_BOOTSTRAP_DEFECT",
+    "exact_error": "ModuleNotFoundError: No module named 'execution_guard'",
+    "failing_step": "Prove durable start CAS is absent before any task read",
+    "failing_command": "python \"$C/rank20_start_cas_v7.py\" --check-absent",
+    "mechanism": "rank20_start_cas_v7.py inserted only ROOT/execution_guard into sys.path, then rank20_claim_bound_identity_v1 imported package-qualified execution_guard.logical_attempt_identity_v2, which requires repository ROOT on sys.path",
+    "task_read_started": false,
+    "required_repair": "BOOTSTRAP_REPOSITORY_ROOT_AND_EXECUTION_GUARD_BEFORE_START_CAS_IMPORTS"
+  },
+  "repair_candidate": {
+    "public_repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2607,
+    "branch": "repair/rank20-start-cas-root-bootstrap-20261010-v1",
+    "commit_sha": "05e40fbcc28cccef11844c07f83d7f0742272aef",
+    "repaired_start_cas_git_blob_sha": "dac9dc9e136c5b10ac25ee7987acbc2c11e9e979",
+    "activation_present": false,
+    "execution_authority_effective": false,
+    "task_read": false,
+    "task_started": false,
+    "benchmark_trials_consumed": 0
+  },
+  "revocations": {
+    "activation_authority_v2_spent_for_completed_activation_run": true,
+    "old_activation_file_reuse": false,
+    "old_activation_branch_reuse": false,
+    "old_claim_epoch_replay_authority": false,
+    "replacement_authority": false
+  },
+  "accounting": {
+    "benchmark_trials_consumed_delta": 0,
+    "consumed_successes_delta": 0,
+    "consumed_final_failures_delta": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0,
+    "incremental_spend_usd": 0
+  },
+  "pass": true
+}
