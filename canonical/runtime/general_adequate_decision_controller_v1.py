@@ -651,6 +651,10 @@ def _extract_information_gap(decision: Mapping[str, Any]) -> dict[str, Any] | No
         return None
     concrete_request=loop.get("next_information_request")
     request_candidates=loop.get("next_information_request_candidates")
+    materialization_template=loop.get("checker_materialization_template")
+    materialization_template_candidates=loop.get(
+        "checker_materialization_template_candidates"
+    )
     return {
         "predicate_id": predicate_id,
         "loop_status": status,
@@ -671,6 +675,20 @@ def _extract_information_gap(decision: Mapping[str, Any]) -> dict[str, Any] | No
             if isinstance(loop.get("next_required_edge"), str)
             and loop.get("next_required_edge")
             else None
+        ),
+        "checker_materialization_template": (
+            deepcopy(dict(materialization_template))
+            if isinstance(materialization_template, Mapping)
+            else None
+        ),
+        "checker_materialization_template_candidates": (
+            deepcopy(list(materialization_template_candidates))
+            if isinstance(materialization_template_candidates, list)
+            and all(
+                isinstance(x, Mapping)
+                for x in materialization_template_candidates
+            )
+            else []
         ),
     }
 
@@ -1523,6 +1541,20 @@ def run(
                 request_packet["truth_next_required_edge"] = gap[
                     "truth_next_required_edge"
                 ]
+            if isinstance(gap.get("checker_materialization_template"), Mapping):
+                request_packet["checker_materialization_template"] = deepcopy(
+                    dict(gap["checker_materialization_template"])
+                )
+            materialization_candidates = gap.get(
+                "checker_materialization_template_candidates"
+            )
+            if (
+                isinstance(materialization_candidates, list)
+                and materialization_candidates
+            ):
+                request_packet["checker_materialization_template_candidates"] = (
+                    deepcopy(materialization_candidates)
+                )
 
             if acquisition_plan.get("action") == "REUSE_BOUND_CONTEXT":
                 bound_truth_payload = origin.get("bound_truth_payload")
