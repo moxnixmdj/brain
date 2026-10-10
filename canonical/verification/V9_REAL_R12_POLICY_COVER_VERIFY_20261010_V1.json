@@ -1,0 +1,13 @@
+{
+  "independent_verified": true,
+  "independent_verifier_id": "sprite-v9-real-docx-independent-20261010-v1",
+  "pass": true,
+  "policy_cover_replay_pass": true,
+  "policy_relevant_world_set_complete": true,
+  "problem_sha256": "b15b57cb2b6cf150b7ec3fb7623e11139a1324be20554cdd45aea52592c41f76",
+  "semantic_obligation": "ALL_ROOT_RELEVANT_MATERIAL_DEFEATERS_RESOLVED_OR_PROVED_DECISION_NULL_BEFORE_POSITIVE_CERTIFICATION",
+  "semantic_property_claim_id": "11870f850b46bcfcc31094f764fc4f45c911aaac413979ceb62679ff19a53162",
+  "semantic_scope_claim_id": "05b74983836dd1f6a13a0db72443246fb74f99548f0d982a769a6a7e572e9e85",
+  "v9_subject_id": "PROFESSIONAL_QUALITY_P1_V9_EXECUTABLE_TOTALITY_SEMANTICS_SYSTEM_20261010_V8",
+  "v9_subject_sha256": "adf7f09e1913526e460b7350c02cd148c2cd14de90eed33fa7fae84d395d9912"
+}
