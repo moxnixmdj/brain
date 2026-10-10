@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_DECLARED_SYSTEM_SUBJECT_VERIFY_RECEIPT_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_CURRENT_SUBJECT_V2__PYCOMPILE__5_OF_5_ADVERSARIAL_PASS__REAL_10_OF_10_COMPONENT_CURRENTNESS_PASS__ZERO_ROOT_OR_QUALITY_AUTHORITY",
+  "subject": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V3_DECLARED_SYSTEM_SUBJECT_20261010_V2.json",
+    "git_blob_sha": "d6d54f237d060b9f3b2ca0c6b8dd93b78dd5f73f",
+    "subject_kind": "DECLARED_SYSTEM",
+    "subject_id": "PROFESSIONAL_QUALITY_P1_V3_INTEGRATED_SYSTEM_20261010_V2",
+    "subject_sha256": "c9eaaf114522b58545c9a09bf6983f5f4277038ad736dab44228e7685f7ecfde"
+  },
+  "verifier": {
+    "path": "canonical/runtime/professional_quality_declared_system_subject_verify_v1.py",
+    "git_blob_sha": "2936df1590077f4e97c82adaf79046a1221cef99"
+  },
+  "tests": {
+    "path": "canonical/tests/test_professional_quality_declared_system_subject_verify_v1.py",
+    "git_blob_sha": "03464487f4792bba919da59ac4efbfb634380068",
+    "tests_run": 5,
+    "tests_passed": 5,
+    "tests_failed": 0
+  },
+  "real_subject_replay": {
+    "carrier": "brain-pq-p1-v2-independent-verify-20261010",
+    "carrier_id": "sprite-5fb5e414-e2f5-4a49-b424-3443341d9d09",
+    "component_count": 10,
+    "component_currentness_verified": true,
+    "subject_identity_verified": true,
+    "pass": true
+  },
+  "proves": [
+    "SUBJECT_HASH_RECOMPUTES_FROM_CANONICAL_SYSTEM_MATERIAL",
+    "ALL_TEN_DECLARED_COMPONENT_BLOBS_MATCH_THE_VERIFIED_REPLAY_WORKSPACE",
+    "STALE_COMPONENT_HASHES_FAIL_CLOSED",
+    "PATH_ESCAPE_FAILS_CLOSED",
+    "COMPONENT_MEMBERSHIP_CANNOT_SELF_GRANT_ROOT_SUBJECT_BINDING_AUTHORITY"
+  ],
+  "hard_nonclaims": [
+    "NO_ROOT_SUBJECT_BINDING",
+    "NO_SAME_SUBJECT_COMPOSITION_PASS",
+    "NO_DOMAIN_SEMANTIC_OR_EXECUTION_CLOSURE",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "root_subject_binding_authority": false,
+  "quality_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
