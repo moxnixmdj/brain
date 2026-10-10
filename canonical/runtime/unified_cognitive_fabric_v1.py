@@ -614,8 +614,8 @@ def run(
         elif mode == "UNIVERSAL_ESCAPE":
             out = universal_escape.resolve(**dict(payload))
         elif mode == "REACHED_ESCAPE_STATE":
-            from canonical.runtime import reached_escape_state_kernel_v1 as reached_escape_state
-            out = reached_escape_state.evaluate(payload)
+            from canonical.runtime import certified_reached_escape_state_constructor_v1 as reached_escape_state
+            out = reached_escape_state.construct(payload)
         elif mode == "CERTIFIED_ROUTE":
             operation = str(payload.get("operation") or "").strip().upper()
             if operation == "PREFLIGHT":
