@@ -1,0 +1,18 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_R5_REGISTRY_ADMISSION_HASH_CORRECTION_20261010_V1",
+  "date": "2026-10-10",
+  "status": "CORRECTION__CURRENT_PROFESSIONAL_POINTER_R5_REGISTRY_ADMISSION_HASH_STALE__EXACT_CURRENT_HASH_BOUND",
+  "pointer_path": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
+  "pointer_git_blob_sha": "91161517b00078f50c17ead7276a8f54e213d45c",
+  "field_path": "property_truth_frontier.registry_verification.git_blob_sha",
+  "stale_value": "c26b54c6cc2df5389028fd4be927a96ce33bb220",
+  "authoritative_path": "canonical/verification/PROFESSIONAL_QUALITY_R5_REGISTRY_V2_ADMISSION_VERIFY_20261010_V1.json",
+  "authoritative_git_blob_sha": "f74bb2f791d8990147f0f5718ee4a3f3f25f4bc2",
+  "consequence": {
+    "professional_execution_leaf_count": 12,
+    "professional_open_execution_leaf_count": 0,
+    "professional_open_semantic_leaf_count": 12,
+    "authority_change": false
+  },
+  "terminal_credit_delta": 0
+}
