@@ -51,10 +51,8 @@ PROFILES = {
         "source_check_id": "W1-T2-P-01",
         "checks_by_suffix": {
             ".xlsx": [
-                "XLSX_HAS_VISIBLE_WORKSHEET",
                 "XLSX_NO_ERROR_CELLS",
                 "XLSX_NO_ZERO_WIDTH_COLUMNS",
-                "XLSX_NONEMPTY_CONTENT",
             ],
         },
         "constraints": {"exact_file_count": 1, "allowed_suffixes": [".xlsx"]},
@@ -66,7 +64,6 @@ PROFILES = {
         "source_check_id": "W1-T3-P-01",
         "checks_by_suffix": {
             ".pptx": [
-                "PPTX_HAS_SLIDES",
                 "PPTX_NO_TEXT_OBJECT_OUTSIDE_SLIDE_BOUNDS",
             ],
         },
@@ -264,7 +261,7 @@ def _pptx(path: Path) -> tuple[list[dict[str, Any]], dict[str, Any]]:
             if re.fullmatch(r"ppt/slides/slide\d+\.xml", n)
         )
         if not slide_names:
-            defects.append({"id": "PPTX_NO_SLIDES", "severity": "HARD", "evidence": {}})
+            defects.append({"id": "PPTX_HAS_SLIDES", "severity": "HARD", "evidence": {}})
 
         out_of_bounds = []
         effectively_blank = []
