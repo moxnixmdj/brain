@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_AUTHORITY_RUNTIME_BYTE_RESEAL_VERIFICATION_V1",
+  "date": "2026-10-10",
+  "status": "PASS__FIVE_OF_SIX_CURRENT_RUNTIME_PATHS__UNIFIED_FABRIC_OPEN",
+  "carrier": {
+    "type": "SPRITE",
+    "name": "brain-live-runtime-v1-verify-20261008",
+    "sprite_id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13",
+    "incremental_spend_usd": 0
+  },
+  "verified": [
+    [
+      "canonical/runtime/terminal_candidate_donor_independence_audit_v1.py",
+      "7b3713267d32f9b4ae7e2ca56ea17c5859bdec71",
+      "canonical/tests/test_terminal_candidate_donor_independence_audit_v1.py",
+      "1b70c9494993e894d45605f8fecffa3781ea1541",
+      6
+    ],
+    [
+      "canonical/runtime/terminal_autopilot_executor_v1.py",
+      "6f828ce5631db582ea4d4a3d73c59b08f232abf0",
+      "canonical/tests/test_terminal_autopilot_executor_v1.py",
+      "674798880e04003f435e534b9b15aad863c6d18a",
+      6
+    ],
+    [
+      "canonical/runtime/terminal_autopilot_v1.py",
+      "78fa2cbabf8ed5e70de8b3ed987b510ca033076b",
+      "canonical/tests/test_terminal_autopilot_v1.py",
+      "0d21826088c58bf5d3d885610c82061bd5f148b4",
+      10
+    ],
+    [
+      "canonical/runtime/terminal_root_decision_gate_v1.py",
+      "6f546f657900405c628c1eb3575bc1e4ac220aeb",
+      "canonical/tests/test_terminal_root_decision_gate_v1.py",
+      "4d8a4aae55562e772730bb71d37ef08bf0385c6e",
+      8
+    ],
+    [
+      "canonical/runtime/option_preserving_capability_optimizer_v1.py",
+      "367478e71b015fb2f4b7cc40dad34f88a7f47238",
+      "canonical/tests/test_option_preserving_capability_optimizer_v1.py",
+      "fdafe7757abf62dbdb4fc8f4e2e9c60cfedee0f7",
+      12
+    ]
+  ],
+  "aggregate": {
+    "paths_verified": 5,
+    "tests_passed": 42,
+    "tests_failed": 0
+  },
+  "unresolved": {
+    "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
+    "git_blob_sha": "31b9a227dba79f069045e915e416bcc370900af6",
+    "status": "UNRESOLVED__NO_COMPLETE_CURRENT_DEPENDENCY_CARRIER"
+  },
+  "terminal_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "acceptance_credit_delta": 0
+}
