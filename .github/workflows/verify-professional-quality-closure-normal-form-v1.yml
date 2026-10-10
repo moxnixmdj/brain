@@ -7,6 +7,9 @@ on:
       - canonical/governance/PROFESSIONAL_QUALITY_ADVERSARIAL_CHALLENGE_MATRIX_20261009_V1.json
       - canonical/runtime/professional_quality_closure_normal_form_v1.py
       - canonical/tests/test_professional_quality_closure_normal_form_v1.py
+      - canonical/governance/PROFESSIONAL_QUALITY_R12_ROOT_SUBJECT_BINDING_20261010_V1.json
+      - canonical/runtime/professional_quality_r12_root_subject_binding_verify_v1.py
+      - canonical/tests/test_professional_quality_r12_root_subject_binding_verify_v1.py
       - .github/workflows/verify-professional-quality-closure-normal-form-v1.yml
 permissions:
   contents: read
