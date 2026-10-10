@@ -48,5 +48,12 @@
     "file_id": "1iSGwawxceR81ssMCfAmkXJNLoFlLaEfda8QiggnOnq4",
     "url": "https://docs.google.com/document/d/1iSGwawxceR81ssMCfAmkXJNLoFlLaEfda8QiggnOnq4/edit?usp=drivesdk",
     "authority": "NONCANONICAL_EVIDENCE_MIRROR__GITHUB_REMAINS_CANONICAL"
+  },
+  "fresh_local_donor_evidence": "canonical/evidence/BYTES_SYMPY_1_14_DEPENDENCY_CENSUS_20261010_V1.json",
+  "execution_reconciliation": {
+    "stock_donor_available_in_current_runtime": "SymPy 1.14.0",
+    "reduced_7044219_byte_candidate_artifact_found_in_accessible_github_or_drive": false,
+    "action_taken": "Persisted fresh stock-donor dependency evidence and kept the reported reduced candidate as a source-derived checkpoint rather than fabricating a rerun.",
+    "physical_next_step": "Reproduce or recover the exact reduced candidate before claiming further byte reductions; then continue from polys."
   }
 }
