@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_ROOT_SUBJECT_BINDING_V1",
+  "date": "2026-10-10",
+  "status": "CANDIDATE_R11_V7_ROOT_SUBJECT_BINDING__ADAPTIVE_CONTAMINATION_HOLDOUT_ESCALATION_PLUS_CLEAN_LANE_POST_IDENTITY_REVOCATION_SCOPE__AWAITING_INDEPENDENT_VERIFICATION__ZERO_QUALITY_OR_TERMINAL_AUTHORITY",
+  "root_id": "R11_ADAPTIVE_INTEGRITY_SECURITY",
+  "subject_kind": "DECLARED_SYSTEM",
+  "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+  "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+  "subject": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V7_DECLARED_SYSTEM_SUBJECT_20261010_V6.json",
+    "git_blob_sha": "1d598bc8757017ceb34928d0df9f5fce859ef868"
+  },
+  "bridge_evidence": {
+    "execution_profile": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_EXECUTION_PROFILE_20261010_V3.json",
+      "git_blob_sha": "f7e89eafbb691c16d1bdf5b8d295a468d5e3bec5"
+    },
+    "firewall_scope": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_R11_FIREWALL_SEMANTIC_SCOPE_20261010_V1.json",
+      "git_blob_sha": "76494c75e3f2c5af87b77c99ce9984eafec60e32"
+    },
+    "firewall_execution_verification": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R11_EVALUATION_FIREWALL_SCOPED_VERIFY_20261010_V1.json",
+      "git_blob_sha": "346d369a811aa77af02be901a5b04458fb528667"
+    },
+    "firewall_semantic_verification": {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R11_FIREWALL_SEMANTIC_VERIFY_20261010_V1.json",
+      "git_blob_sha": "7f0468c4abae22504d71ef627efeaf57e85f02a6"
+    }
+  },
+  "binding_scope": {
+    "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+    "escalation_trigger": "ADAPTIVE_CONTAMINATION_OR_HOLDOUT_EXPOSURE",
+    "claim": "FOR_THE_EXACT_V7_SUBJECT__ADAPTIVE_CONTAMINATION_OR_HOLDOUT_EXPOSURE_IS_AN_EXPLICIT_ESCALATION_TRIGGER__AND_R11_SUPPORT_IS_BOUND_TO_CLEAN_EVALUATION_LANE_POST_IDENTITY_DISCOVERY_REVOCATION_SEMANTICS_WITH_MONOTONIC_EXPOSURE_AND_SAME_LANE_NONRESTORATION",
+    "guarantees": [
+      "EXACT_V7_SUBJECT_TUPLE_BOUND",
+      "V7_PROFILE_EXPLICITLY_DECLARES_ADAPTIVE_CONTAMINATION_OR_HOLDOUT_EXPOSURE",
+      "TASK_IDENTITY_EXPOSURE_IS_MONOTONIC_WITHIN_A_LANE",
+      "POST_EXPOSURE_BROAD_DISCOVERY_CAPABILITIES_ARE_REVOKED",
+      "REVOKED_CAPABILITIES_CANNOT_BE_RESTORED_WITHIN_THE_SAME_LANE",
+      "DEACTIVATING_CLEAN_MODE_DOES_NOT_REENABLE_DISCOVERY_IN_THE_SAME_LANE",
+      "UNKNOWN_CAPABILITY_DENIES_FAIL_CLOSED",
+      "ALLOW_AND_REVOKE_CAPABILITY_CLASSES_ARE_DISJOINT"
+    ],
+    "limitations": [
+      "NO_GENERAL_PROMPT_INJECTION_CLOSURE",
+      "NO_GENERAL_GOODHART_CLOSURE",
+      "NO_HOLDOUT_LIFECYCLE_CLOSURE",
+      "NO_CROSS_LANE_SECURITY_GENERALIZATION",
+      "NO_GLOBAL_R11_SEMANTIC_LEAF_CLOSURE",
+      "NO_GLOBAL_R11_ROOT_CLOSURE",
+      "NO_DOMAIN_SEMANTIC_OR_EXECUTION_CLOSURE",
+      "NO_SAME_SUBJECT_COMPOSITION_PASS",
+      "NO_LIVE_DEFAULT_PROMOTION"
+    ]
+  },
+  "clean_lane_revocation_support": true,
+  "prompt_injection_closure_proved": false,
+  "goodhart_closure_proved": false,
+  "holdout_lifecycle_closure_proved": false,
+  "cross_lane_security_proved": false,
+  "global_subject_identity_authority": false,
+  "root_subject_binding_authority": false,
+  "semantic_truth_authority": false,
+  "execution_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
