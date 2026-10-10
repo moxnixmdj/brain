@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - canonical/governance/ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_20261010_V1.json
+      - canonical/governance/TB_SCIENCE_RANK18_V6_RANK19_FROZEN_EXECUTION_SNAPSHOT_20261010_V1.json
       - canonical/governance/ESCAPE_PROGRESS_TOTALITY_FROZEN_13_CLAIM_20261010_V3.json
       - canonical/runtime/escape_progress_13_route_manifest_v1.py
       - canonical/tests/test_escape_progress_13_route_manifest_v1.py
