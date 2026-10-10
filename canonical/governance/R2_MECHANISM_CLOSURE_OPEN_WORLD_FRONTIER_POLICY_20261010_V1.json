@@ -24,10 +24,6 @@
       "path": "canonical/runtime/one_shot_reality_closure_v2.py",
       "git_blob_sha": "b8347a3993f96aa5e6fa2f1fe68d7c8afccb8bec"
     },
-    "unified_fabric": {
-      "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-      "git_blob_sha": "e6713badf2a240daa019ab7d3eb4cfabeea76485"
-    },
     "capability_first_scheduler_candidate": {
       "path": "canonical/runtime/capability_first_scheduler_v1.py",
       "git_blob_sha": "b74f967038ae5f71d45468b4233452cd134fd699"
