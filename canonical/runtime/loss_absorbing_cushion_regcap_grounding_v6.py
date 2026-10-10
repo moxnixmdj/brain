@@ -20,6 +20,7 @@ from canonical.runtime import regcap_necessary_property_authority_v1 as regcap
 from canonical.runtime import mrel_necessary_property_authority_v1 as mrel
 from canonical.runtime import regcap_mrel_pair_discriminator_v1 as pair
 from canonical.runtime import regcap_four_way_loss_absorption_nonseparation_guard_v1 as nonsep
+from canonical.runtime import regcap_four_way_minimum_discriminator_request_v1 as four_request
 
 SCHEMA = "PROJECT_BRAIN_LOSS_ABSORBING_CUSHION_REGCAP_GROUNDING_V6"
 FOUR = tuple(sorted((regcap.CCOB, regcap.CCYB, regcap.TLAC, mrel.MREL)))
@@ -115,10 +116,16 @@ def ground(
             "anchor_mrel_revalidation_reason": reason,
         })
         if shared_nonseparation.get("pass") is True:
+            request = four_request.compile_request(list(FOUR), repo_root=repo_root)
+            out["minimum_policy_changing_information_request"] = request
+            out["minimum_policy_changing_information_request_available"] = (
+                request.get("pass") is True
+            )
             out["boundary"] = (
                 str(out.get("boundary") or "")
                 + "__FOUR_WAY_LOSS_ABSORPTION_PROPERTY_AUTHENTICATED_"
-                "NONSEPARATING__ADDITIONAL_AUTHENTICATED_DISCRIMINATOR_REQUIRED"
+                "NONSEPARATING__MINIMUM_AUTHENTICATED_GOVERNING_REQUIREMENT_"
+                "OBSERVATION_REQUEST_COMPILED"
             ).strip("_")
         return out
 
