@@ -15,6 +15,7 @@ from sympy.integrals.trigonometry import _sin_pow_integrate
 x = Symbol('x')
 
 def _canon_roots(d):
+    # Avoid any printing dependency in the executable path.
     from sympy.core.sorting import default_sort_key
     return tuple((r, int(m)) for r, m in sorted(d.items(), key=lambda kv: default_sort_key(kv[0])))
 
@@ -25,6 +26,7 @@ def execute(case):
         a,b,c,d,e,f = p
         return Rational(a,b) + Rational(c,d) * Rational(e,f)
     if op == 'factor':
+        # p = coefficient list, high to low
         expr = Add(*[Integer(c)*Pow(x, len(p)-1-i) for i,c in enumerate(p)])
         return factor(expr)
     if op == 'coeff':
@@ -58,6 +60,7 @@ def execute(case):
         k = p[0]
         return limit(sin(Integer(k)*x)/x, x, Integer(0))
     if op == 'linear_solve':
+        # p = n, flattened A, b
         n, flat, vec = p
         A = MutableDenseMatrix(n,n,[Integer(v) for v in flat])
         b = MutableDenseMatrix(n,1,[Integer(v) for v in vec])
