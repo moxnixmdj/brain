@@ -59,7 +59,7 @@ class ExecutableSkillVerificationAuthenticatorV1Tests(unittest.TestCase):
             "behavior_preserving_on_claimed_scope": True,
             "candidate_reexecuted_or_equivalently_checked": True,
             "source_episode_lineage_reverified": True,
-            "independent_verifier_id": "independent-test-verifier",
+            "independent_verifier_id": "R3_INDEPENDENT_EVIDENCE_RECOMPUTATION_V1",
         }
 
         def resolve(ref, *, repo_root):
@@ -111,7 +111,40 @@ class ExecutableSkillVerificationAuthenticatorV1Tests(unittest.TestCase):
         )
         self.assertEqual(
             skill["independent_verifier_id"],
-            "independent-test-verifier",
+            "R3_INDEPENDENT_EVIDENCE_RECOMPUTATION_V1",
+        )
+
+    def test_unadmitted_verifier_id_cannot_mint_reuse_authority(self):
+        candidate = self.candidate()
+        binding = {
+            "receipt": {"path": "receipt.json"},
+            "verification": {"path": "verification.json"},
+        }
+        resolver = self.resolver(candidate)
+
+        def unadmitted(ref, *, repo_root):
+            out = resolver(ref, repo_root=repo_root)
+            if str((ref or {}).get("path") or "") == "verification.json":
+                document = dict(out["document"])
+                document["independent_verifier_id"] = "FORGED_VERIFIER"
+                out = {**out, "document": document}
+            return out
+
+        with mock.patch.object(
+            auth,
+            "resolve_receipt_bytes",
+            side_effect=unadmitted,
+        ):
+            out = auth.authenticate_and_verify(
+                candidate,
+                binding,
+                repo_root=Path("."),
+            )
+
+        self.assertFalse(out["pass"], out)
+        self.assertIn(
+            "SKILL_INDEPENDENT_VERIFIER_NOT_ADMITTED",
+            out["reason"],
         )
 
     def test_durable_verified_skill_reauthenticates_and_tampering_fails_closed(self):

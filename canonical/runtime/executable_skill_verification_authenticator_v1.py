@@ -28,6 +28,9 @@ from canonical.runtime.executable_skill_program_v7 import (
 SCHEMA = "PROJECT_BRAIN_EXECUTABLE_SKILL_VERIFICATION_AUTHENTICATOR_V1"
 RECEIPT_SCHEMA = "PROJECT_BRAIN_EXECUTABLE_SKILL_BEHAVIOR_VERIFICATION_V1"
 VERIFY_SCHEMA = "PROJECT_BRAIN_EXECUTABLE_SKILL_INDEPENDENT_VERIFICATION_V1"
+ADMITTED_INDEPENDENT_VERIFIER_IDS = frozenset({
+    "R3_INDEPENDENT_EVIDENCE_RECOMPUTATION_V1",
+})
 
 
 class SkillVerificationError(ValueError):
@@ -112,9 +115,14 @@ def authenticate_and_verify(
         for key, value in required_verify.items():
             if vd.get(key) != value:
                 raise SkillVerificationError("SKILL_VERIFY_CLAIM_INVALID:" + key)
-        verifier_id = vd.get("independent_verifier_id")
-        if not isinstance(verifier_id, str) or not verifier_id.strip():
+        raw_verifier_id = vd.get("independent_verifier_id")
+        if not isinstance(raw_verifier_id, str) or not raw_verifier_id.strip():
             raise SkillVerificationError("SKILL_INDEPENDENT_VERIFIER_ID_MISSING")
+        verifier_id = raw_verifier_id.strip()
+        if verifier_id not in ADMITTED_INDEPENDENT_VERIFIER_IDS:
+            raise SkillVerificationError(
+                "SKILL_INDEPENDENT_VERIFIER_NOT_ADMITTED:" + verifier_id
+            )
 
         legacy = {
             "independent_verified": True,
@@ -139,7 +147,7 @@ def authenticate_and_verify(
                 "receipt": receipt_ref,
                 "verification": verification_ref,
             },
-            "independent_verifier_id": verifier_id.strip(),
+            "independent_verifier_id": verifier_id,
         }
         return {
             "schema": SCHEMA,
@@ -148,7 +156,7 @@ def authenticate_and_verify(
             "verified_skill": verified,
             "receipt": receipt_ref,
             "verification": verification_ref,
-            "independent_verifier_id": verifier_id.strip(),
+            "independent_verifier_id": verifier_id,
             "terminal_authority": False,
         }
     except (Exception, ReceiptResolutionError, ExecutableSkillProgramError) as exc:
