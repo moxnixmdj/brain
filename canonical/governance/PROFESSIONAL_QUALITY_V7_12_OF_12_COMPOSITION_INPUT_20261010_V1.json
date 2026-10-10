@@ -1,0 +1,161 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_V7_12_OF_12_COMPOSITION_INPUT_V1",
+  "date": "2026-10-10",
+  "status": "CANDIDATE__TWELVE_INDEPENDENT_ROOT_BINDINGS_BOUND__COMPOSITION_GATE_NOT_YET_RUN__ZERO_QUALITY_OR_TERMINAL_AUTHORITY",
+  "subject_kind": "DECLARED_SYSTEM",
+  "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+  "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
+  "source_worklist": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V7_SAME_SUBJECT_ROOT_BINDING_WORKLIST_20261010_V17.json",
+    "git_blob_sha": "ac7750ee9d7cc8e839bf454a2835ad14c9472c0e"
+  },
+  "r12_public_verification": {
+    "path": "canonical/verification/PROFESSIONAL_QUALITY_R12_V7_ROOT_SUBJECT_BINDING_PUBLIC_VERIFY_20261010_V1.json",
+    "git_blob_sha": "174bc362ff1f1b7935925c8d17e55d36288bdbad"
+  },
+  "gate_runtime": {
+    "path": "canonical/runtime/professional_quality_same_subject_composition_gate_v3.py",
+    "git_blob_sha": "ddbe6ec92fef405b8909a161ef9acd685ec7317b"
+  },
+  "root_subject_bindings": [
+    {
+      "root_id": "R1_TARGET_SPECIFICATION",
+      "binding": {
+        "path": "canonical/governance/PROFESSIONAL_QUALITY_R1_ROOT_SUBJECT_BINDING_20261010_V4.json",
+        "git_blob_sha": "4e29f1a01832158d9897f3c71c81e015b5e51b05"
+      },
+      "verification": {
+        "path": "canonical/verification/PROFESSIONAL_QUALITY_R1_V7_ROOT_SUBJECT_BINDING_VERIFY_20261010_V1.json",
+        "git_blob_sha": "723e408841020b5430a9934eb92f232a1036d98b"
+      }
+    },
+    {
+      "root_id": "R2_CANDIDATE_SEARCH",
+      "binding": {
+        "path": "canonical/governance/PROFESSIONAL_QUALITY_R2_ROOT_SUBJECT_BINDING_20261010_V2.json",
+        "git_blob_sha": "d16ec4ce481880e7b3ca85dab64ba2ead744f088"
+      },
+      "verification": {
+        "path": "canonical/verification/PROFESSIONAL_QUALITY_R2_V7_ROOT_SUBJECT_BINDING_VERIFY_20261010_V1.json",
+        "git_blob_sha": "07cb2ac6b48a6d03dc55b923b217a095c0ee86fc"
+      }
+    },
+    {
+      "root_id": "R3_REALIZATION_OBSERVATION",
+      "binding": {
+        "path": "canonical/governance/PROFESSIONAL_QUALITY_R3_ROOT_SUBJECT_BINDING_20261010_V2.json",
+        "git_blob_sha": "2fe91ecba3830641ed800d04b70279a3f84283bf"
+      },
+      "verification": {
+        "path": "canonical/verification/PROFESSIONAL_QUALITY_R3_V7_ROOT_SUBJECT_BINDING_VERIFY_20261010_V2.json",
+        "git_blob_sha": "870bb85fbd00d670ec36e86b4b0b510f5bb9225c"
+      }
+    },
+    {
+      "root_id": "R4_MEASUREMENT_CONSTRUCT",
+      "binding": {
+        "path": "canonical/governance/PROFESSIONAL_QUALITY_R4_ROOT_SUBJECT_BINDING_20261010_V1.json",
+        "git_blob_sha": "5a99d72d8a6c8fe01241e8a611cceb528fb8c512"
+      },
+      "verification": {
+        "path": "canonical/verification/PROFESSIONAL_QUALITY_R4_V7_ROOT_SUBJECT_BINDING_VERIFY_20261010_V1.json",
+        "git_blob_sha": "96f1ffea9973f06b66d815b3d2e9fb90deeae6db"
+      }
+    },
+    {
+      "root_id": "R5_EVALUATOR_REFERENCE",
+      "binding": {
+        "path": "canonical/governance/PROFESSIONAL_QUALITY_R5_ROOT_SUBJECT_BINDING_20261010_V1.json",
+        "git_blob_sha": "adad696b4ce4ed62063e871e42ad91300f4590e1"
+      },
+      "verification": {
+        "path": "canonical/verification/PROFESSIONAL_QUALITY_R5_V7_ROOT_SUBJECT_BINDING_VERIFY_20261010_V1.json",
+        "git_blob_sha": "d4dc698d89738470cf3b41fe860b8c3f666a56a9"
+      }
+    },
+    {
+      "root_id": "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+      "binding": {
+        "path": "canonical/governance/PROFESSIONAL_QUALITY_R6_ROOT_SUBJECT_BINDING_20261010_V1.json",
+        "git_blob_sha": "0a6626c3378b471bff70de0ae3ea53e1e784276e"
+      },
+      "verification": {
+        "path": "canonical/verification/PROFESSIONAL_QUALITY_R6_V7_ROOT_SUBJECT_BINDING_VERIFY_20261010_V1.json",
+        "git_blob_sha": "abb4a251345e2701dc42578a1695f5e59f4bb665"
+      }
+    },
+    {
+      "root_id": "R7_CAUSAL_PRESCRIPTIVE",
+      "binding": {
+        "path": "canonical/governance/PROFESSIONAL_QUALITY_R7_ROOT_SUBJECT_BINDING_20261010_V1.json",
+        "git_blob_sha": "d1b4af80e94048ec4093192d2b8203d47eff56ed"
+      },
+      "verification": {
+        "path": "canonical/verification/PROFESSIONAL_QUALITY_R7_V7_ROOT_SUBJECT_BINDING_VERIFY_20261010_V1.json",
+        "git_blob_sha": "26e0e3f6570ae08057d868b0300386b34de7881f"
+      }
+    },
+    {
+      "root_id": "R8_POPULATION_CONTEXT_OPERATOR",
+      "binding": {
+        "path": "canonical/governance/PROFESSIONAL_QUALITY_R8_ROOT_SUBJECT_BINDING_20261010_V1.json",
+        "git_blob_sha": "e5b0b434fb040b77443e541e80c6f5e0890ff7aa"
+      },
+      "verification": {
+        "path": "canonical/verification/PROFESSIONAL_QUALITY_R8_V7_ROOT_SUBJECT_BINDING_VERIFY_20261010_V1.json",
+        "git_blob_sha": "e3e6a3e1cc09779ec59903a721d03a94b6ab441d"
+      }
+    },
+    {
+      "root_id": "R9_TEMPORAL_DEPLOYMENT",
+      "binding": {
+        "path": "canonical/governance/PROFESSIONAL_QUALITY_R9_ROOT_SUBJECT_BINDING_20261010_V1.json",
+        "git_blob_sha": "7c9f22e80110389768d4c16876571d54304b4536"
+      },
+      "verification": {
+        "path": "canonical/verification/PROFESSIONAL_QUALITY_R9_V7_ROOT_SUBJECT_BINDING_VERIFY_20261010_V1.json",
+        "git_blob_sha": "5724af9be96af15810c74c20c0f6f17098222545"
+      }
+    },
+    {
+      "root_id": "R10_ANALYSIS_DECISION",
+      "binding": {
+        "path": "canonical/governance/PROFESSIONAL_QUALITY_R10_ROOT_SUBJECT_BINDING_20261010_V1.json",
+        "git_blob_sha": "6d8cc56e9273f15f199a624c4a11f1482c76e039"
+      },
+      "verification": {
+        "path": "canonical/verification/PROFESSIONAL_QUALITY_R10_V7_ROOT_SUBJECT_BINDING_VERIFY_20261010_V1.json",
+        "git_blob_sha": "c8a9ecdea133c4eec1c6b9b7f2b374240efc8b66"
+      }
+    },
+    {
+      "root_id": "R11_ADAPTIVE_INTEGRITY_SECURITY",
+      "binding": {
+        "path": "canonical/governance/PROFESSIONAL_QUALITY_R11_ROOT_SUBJECT_BINDING_20261010_V1.json",
+        "git_blob_sha": "43007547e14da89b0aef9fad7d0f89cad2bbf77f"
+      },
+      "verification": {
+        "path": "canonical/verification/PROFESSIONAL_QUALITY_R11_V7_ROOT_SUBJECT_BINDING_PUBLIC_VERIFY_20261010_V1.json",
+        "git_blob_sha": "7fa5857f6f15633172a6c46c7edcd33c2058bfc6"
+      }
+    },
+    {
+      "root_id": "R12_META_COMPOSITION_CLOSURE",
+      "binding": {
+        "path": "canonical/governance/PROFESSIONAL_QUALITY_R12_ROOT_SUBJECT_BINDING_20261010_V1.json",
+        "git_blob_sha": "6eb32264e98bf0b36d48ad3519f9c7c88757d0d7"
+      },
+      "verification": {
+        "path": "canonical/verification/PROFESSIONAL_QUALITY_R12_V7_ROOT_SUBJECT_BINDING_PUBLIC_VERIFY_20261010_V1.json",
+        "git_blob_sha": "174bc362ff1f1b7935925c8d17e55d36288bdbad"
+      }
+    }
+  ],
+  "required_root_count": 12,
+  "composition_admissible": false,
+  "professional_quality_closed": false,
+  "quality_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
