@@ -47,8 +47,8 @@
     "terminal_credit_delta": 0
   },
   "verification": {
-    "path": "canonical/verification/R2_SHARED_CAUSE_RESIDUAL_LEDGER_V2_REUSE_FIRST_VERIFY_20261010_V1.json",
-    "status": "PENDING_EXACT_BRANCH_REPLAY_BEFORE_MERGE"
+    "path": "canonical/verification/R2_REUSE_FIRST_RESIDUAL_RUNTIME_ENFORCEMENT_VERIFY_20261010_V1.json",
+    "status": "PASS__EXACT_BRANCH_PYCOMPILE__LEDGER_AND_SCHEDULER_32_OF_32__LIVE_V76_CLASSIFICATION_COMPLETE__ZERO_CREDIT"
   },
   "supersedes": {
     "path": "canonical/governance/R2_SHARED_CAUSE_RESIDUAL_LEDGER_ACTIVATION_20261010_V1.json",
