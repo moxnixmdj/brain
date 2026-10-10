@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_MAIN_RUNTIME_VERIFIED_BYTE_SUBSET_SPRITE_V1",
+  "date": "2026-10-10",
+  "status": "PASS__FOUR_CURRENT_RUNTIME_COMPONENTS__32_OF_32_FOCUSED_CHECKS",
+  "subject_branch": "integrate-executable-refinement-current-main-20261010",
+  "execution_carrier": {
+    "sprite": "brain-live-runtime-v1-verify-20261008",
+    "incremental_spend_usd": 0
+  },
+  "components": [
+    {
+      "path": "canonical/runtime/terminal_candidate_donor_independence_audit_v1.py",
+      "git_blob_sha": "7b3713267d32f9b4ae7e2ca56ea17c5859bdec71",
+      "test_path": "canonical/tests/test_terminal_candidate_donor_independence_audit_v1.py",
+      "test_git_blob_sha": "1b70c9494993e894d45605f8fecffa3781ea1541",
+      "focused_checks": 6,
+      "result": "PASS"
+    },
+    {
+      "path": "canonical/runtime/terminal_autopilot_executor_v1.py",
+      "git_blob_sha": "6f828ce5631db582ea4d4a3d73c59b08f232abf0",
+      "test_path": "canonical/tests/test_terminal_autopilot_executor_v1.py",
+      "test_git_blob_sha": "674798880e04003f435e534b9b15aad863c6d18a",
+      "focused_checks": 6,
+      "result": "PASS",
+      "execution_dependencies": [
+        "canonical/runtime/same_identity_supervisor.py",
+        "canonical/runtime/continuous_obs_runtime.py"
+      ],
+      "note": "INITIAL_IMPORT_FAILURE_WAS_STALE_CARRIER_MISSING_DEPENDENCIES__AFTER_EXACT_CURRENT_DEPENDENCY_OVERLAY_6_OF_6_PASS"
+    },
+    {
+      "path": "canonical/runtime/terminal_root_decision_gate_v1.py",
+      "git_blob_sha": "6f546f657900405c628c1eb3575bc1e4ac220aeb",
+      "test_path": "canonical/tests/test_terminal_root_decision_gate_v1.py",
+      "test_git_blob_sha": "4d8a4aae55562e772730bb71d37ef08bf0385c6e",
+      "focused_checks": 8,
+      "result": "PASS",
+      "runner": "DIRECT_PLAIN_PYTHON_ASSERTION_HARNESS_EQUIVALENT_TO_ZERO_ARG_TEST_FUNCTIONS"
+    },
+    {
+      "path": "canonical/runtime/option_preserving_capability_optimizer_v1.py",
+      "git_blob_sha": "367478e71b015fb2f4b7cc40dad34f88a7f47238",
+      "test_path": "canonical/tests/test_option_preserving_capability_optimizer_v1.py",
+      "test_git_blob_sha": "fdafe7757abf62dbdb4fc8f4e2e9c60cfedee0f7",
+      "focused_checks": 12,
+      "result": "PASS"
+    }
+  ],
+  "total_focused_checks": 32,
+  "current_byte_identity_reconfirmed_against_integration_branch": true,
+  "semantic_refinement_proved": false,
+  "repository_wide_byte_coherence_proved": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0
+}
