@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_REACHED_ESCAPE_REPAIR_POTENTIAL_VERIFICATION_20261010_V2",
+  "date": "2026-10-10",
+  "status": "PASS__CURRENT_BASE_EXACT_BYTES__11_OF_11_FOCUSED__PRIOR_EXHAUSTIVE_SUBJECT_BYTES_IDENTICAL__ZERO_CREDIT",
+  "branch": "successor/escape-repair-potential-20261010-v2",
+  "base_commit": "f6cc6d5c39fbb474af22034d11711c87e3567bdb",
+  "subject": {
+    "kernel": {
+      "path": "canonical/runtime/reached_escape_state_kernel_v1.py",
+      "git_blob_sha": "b1435d90f039bd1d809ff364c325c3d0858d3afd"
+    },
+    "finite_totality": {
+      "path": "canonical/runtime/reached_escape_finite_totality_certificate_v1.py",
+      "git_blob_sha": "85487335b7e774ac9084b34c60e0175842771036"
+    },
+    "repair_potential": {
+      "path": "canonical/runtime/reached_escape_repair_potential_v1.py",
+      "git_blob_sha": "865848d3dd2b61e2385934868d6106e2b04dedcd"
+    },
+    "focused_tests": {
+      "path": "canonical/tests/test_reached_escape_repair_potential_v1.py",
+      "git_blob_sha": "9cd5a3e93ef90e2d3afdb3f5a45048e7e4da7afa"
+    }
+  },
+  "current_exact_byte_replay": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "focused_tests_run": 11,
+    "focused_tests_passed": 11,
+    "focused_tests_failed": 0,
+    "py_compile_pass": true,
+    "dependency_install_performed": false
+  },
+  "prior_exhaustive_diagnostic_by_exact_subject_identity": {
+    "subject_blobs_identical": true,
+    "finite_regions": 3,
+    "states_checked": 32768,
+    "single_step_extensions_checked": 245760,
+    "conflict_splitting_discriminator_cases_checked": 6144,
+    "zero_potential_iff_certificate_preconditions_pass": true,
+    "every_monotone_single_extension_nonincreasing": true,
+    "every_conflict_splitting_discriminator_strictly_decreasing": true,
+    "fresh_rerun_attempted": true,
+    "fresh_rerun_result": "SPRITE_TRANSPORT_TIMEOUT_TWICE__NO_NEW_PASS_CLAIM",
+    "authority_role": "SUPPORTING_DIAGNOSTIC__CURRENT_11_OF_11_EXACT_BYTE_REPLAY_IS_FRESH"
+  },
+  "theorem": {
+    "potential": "U*(N+1)+SUM_CONFLICT_CLASSES(|C|-1)",
+    "zero_iff_existing_finite_totality_certificate_preconditions": true,
+    "strict_repair_well_founded": true,
+    "maximum_repair_steps_if_every_step_strict": "INITIAL_POTENTIAL",
+    "global_repair_acquirability_proved": false,
+    "global_escape_progress_totality_proved": false,
+    "cc_r3_proved": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
