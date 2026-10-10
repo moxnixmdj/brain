@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_ONE_SHOT_REALITY_CLOSURE_POINTER_V1",
   "date": "2026-10-09",
-  "status": "ACTIVE_VERIFIED_ORCHESTRATOR__CANONICAL_FRONTDOOR_META_MODE_LIVE__STRICT_EXTERNALITY_LAW_VERIFIED__ACTUAL_LIVE_R3_INTERNAL_FIXED_POINT__NO_RESIDUAL__CURRENT_R2_V56_AND_CODING_V3_PROJECTION_BOUND__INFRASTRUCTURE_FAILURES_INTERNAL_AND_RETRYABLE__DYNAMIC_CURRENT_PROJECTION__FINAL_CLEANROOM_GATE_BOUND__AUTO_DEFAULT_FALLBACK_LIVE__PROOF_CARRYING_DIRECT_ROUTE_AUTO_PROMOTION_LIVE__EXACT_DECISION_REPLAY_REQUIRED",
+  "status": "ACTIVE_VERIFIED_ORCHESTRATOR__CANONICAL_FRONTDOOR_META_MODE_LIVE__STRICT_EXTERNALITY_LAW_VERIFIED__ACTUAL_LIVE_R3_INTERNAL_FIXED_POINT__NO_RESIDUAL__CURRENT_R2_V56_AND_CODING_V3_PROJECTION_BOUND__INFRASTRUCTURE_FAILURES_INTERNAL_AND_RETRYABLE__DYNAMIC_CURRENT_PROJECTION__FINAL_CLEANROOM_GATE_BOUND__AUTO_DEFAULT_FALLBACK_LIVE__PROOF_CARRYING_DIRECT_ROUTE_AUTO_PROMOTION_LIVE__EXACT_DECISION_REPLAY_REQUIRED__DYNAMIC_ADMISSION_POINTER_TARGET_FOLLOW_BOUND",
   "runtime": {
     "path": "canonical/runtime/one_shot_reality_closure_v2.py",
     "git_blob_sha": "b8347a3993f96aa5e6fa2f1fe68d7c8afccb8bec"
@@ -44,6 +44,14 @@
       "execution_log_sha256": "d581e5f0798b4eea143892c718ae86ee7dee4dea4a847f1accc2c3581b23854d",
       "tests_run": 39,
       "tests_passed": 39
+    },
+    "latest_dynamic_admission_pointer_follow": {
+      "path": "canonical/verification/CURRENT_ONE_SHOT_DYNAMIC_ADMISSION_POINTER_FOLLOW_VERIFY_20261010_V1.json",
+      "git_blob_sha": "35439b60d01c84427ed677998770ef93d9221149",
+      "status": "PASS__EXACT_BLOBS__PUBLIC_ISOLATED_3_OF_3__DYNAMIC_POINTER_TARGET_FOLLOW__STALE_SNAPSHOT_NONAUTHORITATIVE__ZERO_CREDIT",
+      "public_run_id": 38024724095,
+      "tests_passed": 3,
+      "terminal_credit_delta": 0
     }
   },
   "authority": {
@@ -107,7 +115,7 @@
     "static_projection_snapshots_authoritative": false,
     "dynamic_current_projection": {
       "path": "canonical/runtime/current_one_shot_projection_v1.py",
-      "git_blob_sha": "0c4b39b0a4fb90778a7c13a1d0830896fda632a3",
+      "git_blob_sha": "18ca8958632625c8562e47adca87bfd1d4fdc4b7",
       "authoritative_for_moving_r2_and_terminal": true,
       "stable_v1_v2_pointer_mismatch_fails_closed": true,
       "snapshot_drift_is_observable_not_failure": true,
@@ -125,7 +133,19 @@
       "effective_default_static_backend_projection_dynamic": true,
       "dynamic_admission_manifest_projection_dynamic": true,
       "default_runtime_projection_semantic_truth_authority": false,
-      "default_runtime_projection_terminal_authority": false
+      "default_runtime_projection_terminal_authority": false,
+      "dynamic_admission_pointer_target_resolved_at_call_time": true,
+      "dynamic_admission_snapshot_drift_nonauthoritative": true,
+      "dynamic_admission_target_blob_fail_closed": true,
+      "dynamic_admission_target_namespace_fail_closed": true,
+      "verification": {
+        "path": "canonical/verification/CURRENT_ONE_SHOT_DYNAMIC_ADMISSION_POINTER_FOLLOW_VERIFY_20261010_V1.json",
+        "git_blob_sha": "35439b60d01c84427ed677998770ef93d9221149",
+        "status": "PASS__EXACT_BLOBS__PUBLIC_ISOLATED_3_OF_3__DYNAMIC_POINTER_TARGET_FOLLOW__STALE_SNAPSHOT_NONAUTHORITATIVE__ZERO_CREDIT",
+        "public_run_id": 38024724095,
+        "tests_passed": 3,
+        "terminal_credit_delta": 0
+      }
     },
     "current_terminal_authority_git_blob_sha_role": "LAST_VERIFIED_SNAPSHOT_ONLY__DYNAMIC_CURRENT_PROJECTION_IS_CURRENT_AUTHORITY",
     "current_terminal_authority_pointer_revision_role": "LAST_VERIFIED_SNAPSHOT_ONLY__DYNAMIC_CURRENT_PROJECTION_IS_CURRENT_AUTHORITY",
@@ -331,13 +351,23 @@
     "pointer_semantics": "MUTABLE_CURRENT_PATH_IDENTITY_AUTHORITATIVE",
     "dynamic_projection": {
       "path": "canonical/runtime/current_one_shot_projection_v1.py",
-      "git_blob_sha": "0c4b39b0a4fb90778a7c13a1d0830896fda632a3",
+      "git_blob_sha": "18ca8958632625c8562e47adca87bfd1d4fdc4b7",
       "reads_current_pointer_at_call_time": true,
       "exact_descendant_blob_validation": true,
       "scheduler_baseline_distinguished_from_effective_default_runtime": true,
       "semantic_truth_authority": false,
       "terminal_authority": false,
-      "terminal_credit_delta": 0
+      "terminal_credit_delta": 0,
+      "dynamic_admission_pointer_target_resolved_at_call_time": true,
+      "dynamic_admission_snapshot_drift_nonauthoritative": true,
+      "verification": {
+        "path": "canonical/verification/CURRENT_ONE_SHOT_DYNAMIC_ADMISSION_POINTER_FOLLOW_VERIFY_20261010_V1.json",
+        "git_blob_sha": "35439b60d01c84427ed677998770ef93d9221149",
+        "status": "PASS__EXACT_BLOBS__PUBLIC_ISOLATED_3_OF_3__DYNAMIC_POINTER_TARGET_FOLLOW__STALE_SNAPSHOT_NONAUTHORITATIVE__ZERO_CREDIT",
+        "public_run_id": 38024724095,
+        "tests_passed": 3,
+        "terminal_credit_delta": 0
+      }
     }
   },
   "direct_route_auto_promotion": {

@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_ONE_SHOT_DYNAMIC_ADMISSION_POINTER_FOLLOW_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_BLOBS__PUBLIC_ISOLATED_3_OF_3__DYNAMIC_POINTER_TARGET_FOLLOW__STALE_SNAPSHOT_NONAUTHORITATIVE__ZERO_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "codex/dynamic-admission-projection-pointer-v1",
+    "base_main_sha": "6a9f7ab13f43e219a11abe8e7c3ccb7a631de331",
+    "exact_candidate_blobs": {
+      "canonical/runtime/current_one_shot_projection_v1.py": "18ca8958632625c8562e47adca87bfd1d4fdc4b7",
+      "canonical/tests/test_current_one_shot_dynamic_admission_pointer_synthetic_v1.py": "b2c7988c28f1322c71585a43b9b2985ac4ea1ed4"
+    }
+  },
+  "observed_live_drift": {
+    "current_default_runtime_integration_blob": "ecc5732c200d72cd2c7c3f8df812d73ab115268f",
+    "current_admissions_pointer_blob": "8d8a5cf09a433c2df9f578bb689e5743971346a0",
+    "current_admissions_target_path": "canonical/governance/R2_DIRECT_ROUTE_DYNAMIC_ADMISSIONS_4b1e16a2f20130c8.json",
+    "current_admissions_target_blob": "4b1e16a2f20130c8463a7ed1031524814a2f834e",
+    "stale_snapshot_manifest_path": "canonical/governance/R2_DIRECT_ROUTE_DYNAMIC_ADMISSIONS_8e2418aecd87bbea.json",
+    "stale_snapshot_manifest_blob": "8e2418aecd87bbeaece8025d6bbb6c03f52c8b8e",
+    "live_dynamic_route_count": 3,
+    "snapshot_dynamic_route_count": 2
+  },
+  "public_isolated_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2541,
+    "workflow": "Isolated verification dispatcher",
+    "workflow_run_id": 38024724095,
+    "workflow_job_id": 114133019769,
+    "conclusion": "success",
+    "result_status": "PASS__DYNAMIC_ADMISSION_POINTER_TARGET_PROJECTION",
+    "exact_blob_check": true,
+    "python_compile": true,
+    "tests_run": 3,
+    "tests_passed": 3,
+    "verified_properties": [
+      "CURRENT_DYNAMIC_ADMISSION_POINTER_TARGET_IS_RESOLVED_AT_CALL_TIME",
+      "STALE_DEFAULT_RUNTIME_MANIFEST_SNAPSHOT_IS_OBSERVABLE_NOT_AUTHORITATIVE",
+      "TARGET_GIT_BLOB_TAMPER_FAILS_CLOSED",
+      "DYNAMIC_ADMISSION_TARGET_NAMESPACE_ESCAPE_FAILS_CLOSED"
+    ]
+  },
+  "authority_boundaries": {
+    "runtime_routing_semantics_changed": false,
+    "semantic_truth_authority": false,
+    "policy_adequacy_authority": false,
+    "terminal_authority": false,
+    "terminal_credit_delta": 0
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false,
+  "private_actions_carrier": {
+    "classification": "INFRASTRUCTURE_FAILURE_BEFORE_STEP_EXECUTION__NOT_A_TEST_FAILURE",
+    "attempts": [
+      {
+        "workflow_run_id": 38024818468,
+        "workflow_job_id": 114133312642,
+        "status": "completed",
+        "conclusion": "failure",
+        "steps": null,
+        "python_execution_credit": false
+      }
+    ]
+  }
+}
