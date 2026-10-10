@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK18_V1_PUBLIC_RESEAL_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_PUBLIC_RESEAL_BYTES__DEDICATED_ZERO_EXPOSURE_WORKFLOW_SUCCESS__TASK_UNREAD_UNSTARTED__ZERO_CREDIT",
+  "public_repository": "moxnixmdj/verification-capsule-runner",
+  "public_pull_request": 2545,
+  "public_merge_commit": "ff74920b8827243910da297420222c789e5b751c",
+  "verified_head_sha": "cc12378d8bb5d094a32307c9be832e33282f4597",
+  "workflow_run_id": 38027734978,
+  "workflow_job_id": 114142058444,
+  "conclusion": "success",
+  "verified": {
+    "exact_brain_v12_agent_blob": true,
+    "exact_brain_typed_action_v2_blob": true,
+    "exact_rank18_control_plane_blobs": true,
+    "zero_exposure_falsifier_passed": true,
+    "proof_carrying_admission_passed": true,
+    "staged_preflight_passed": true,
+    "trusted_parent_task_toml_artifact_handoff_synthetic_passed": true,
+    "child_github_credentials_stripped": true,
+    "activation_file_absent": true,
+    "task_read": false,
+    "task_started": false,
+    "benchmark_trials_consumed": 0
+  },
+  "boundaries": {
+    "execution_authority": true,
+    "task_read_authority": true,
+    "activation_armed": false,
+    "promotion_authority": false,
+    "acceptance_authority": false,
+    "terminal_authority": false,
+    "terminal_credit_delta": 0
+  }
+}
