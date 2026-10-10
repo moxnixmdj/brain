@@ -1,0 +1,35 @@
+name: Verify regcap contextual single authority
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/runtime/regcap_contextual_fact_compiler_v1.py
+      - canonical/runtime/regcap_contextual_discriminator_binding_v1.py
+      - canonical/runtime/regcap_contextual_observation_compiler_v1.py
+      - canonical/runtime/regcap_contextual_resolution_v1.py
+      - canonical/runtime/regcap_context_atom_truth_certificate_v2.py
+      - canonical/tests/test_regcap_contextual_fact_compiler_v1.py
+      - canonical/tests/test_regcap_contextual_discriminator_binding_v1.py
+      - canonical/tests/test_regcap_contextual_observation_compiler_v1.py
+      - canonical/tests/test_regcap_contextual_resolution_v1.py
+      - canonical/tests/test_regcap_contextual_single_authority_v1.py
+      - canonical/governance/REGCAP_CONTEXTUAL_SINGLE_AUTHORITY_SUPERSESSION_20261010_V2.json
+      - .github/workflows/verify-regcap-contextual-single-authority.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Compile canonical regcap context runtime
+        run: |
+          python -m py_compile             canonical/runtime/regcap_contextual_observation_compiler_v1.py             canonical/runtime/regcap_contextual_resolution_v1.py             canonical/runtime/regcap_context_atom_truth_certificate_v2.py
+      - name: Verify canonical single authority and existing regressions
+        run: |
+          python -m unittest -v             canonical.tests.test_regcap_contextual_single_authority_v1             canonical.tests.test_regcap_contextual_observation_compiler_v1             canonical.tests.test_regcap_contextual_resolution_v1             canonical.tests.test_regcap_context_atom_truth_certificate_v2             canonical.tests.test_semantic_truth_dispatch_regcap_context_v2
