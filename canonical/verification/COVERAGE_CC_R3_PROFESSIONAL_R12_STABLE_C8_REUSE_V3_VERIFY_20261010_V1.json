@@ -1,0 +1,37 @@
+{
+  "schema": "PROJECT_BRAIN_CC_R3_R12_STABLE_C8_REUSE_V3_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_SPRITE__PYCOMPILE__11_OF_11__ZERO_CREDIT",
+  "subject": {
+    "runtime": [
+      "canonical/runtime/coverage_cc_r3_professional_r12_semantic_verify_v3.py",
+      "e6a65e3b2fc1ddfdc1698a98e5d7783b7fa56276"
+    ],
+    "tests": [
+      "canonical/tests/test_coverage_cc_r3_professional_r12_semantic_verify_v3.py",
+      "18a41c13e63c1a634c9f910bd6d9833fd89f467f"
+    ],
+    "stable_c8": [
+      "canonical/verification/PROFESSIONAL_R12_STABLE_C8_NONVACUITY_VERIFY_20261010_V1.json",
+      "6ed0f5d253d0fc734af2998e86ad72f73fe8c073"
+    ]
+  },
+  "replay": {
+    "carrier": "SPRITE",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "py_compile": "PASS",
+    "tests_run": 11,
+    "tests_passed": 11
+  },
+  "truth": {
+    "stable_c8_current": true,
+    "stable_c8_real_route": true,
+    "stable_c8_independently_replayed": true,
+    "new_v9_positive_route_required": false,
+    "v3_mechanism_verified": true,
+    "material_defeater_totality_bound": false,
+    "cc_r3_proved": false
+  },
+  "exact_next": "PROVE_EXECUTABLE_CLAIM_WIDE_MATERIAL_DEFEATER_TOTALITY__THEN_CC_R3_CERTIFICATE_AND_R4",
+  "terminal_credit_delta": 0
+}
