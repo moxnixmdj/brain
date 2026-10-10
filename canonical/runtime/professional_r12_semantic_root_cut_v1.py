@@ -75,11 +75,12 @@ def evaluate(
 
     if not _starts(scope_batch_verification, EXPECTED["scope_status_prefix"]):
         return _fail("WHOLE_LEAF_SCOPE_BATCH_NOT_VERIFIED")
-    if scope_batch_verification.get("domain_equivalence_pass_count") != 24:
+    srep = scope_batch_verification.get("independent_replay") or {}
+    if srep.get("domain_equivalence_pass_count") != 24:
         return _fail("SCOPE_BATCH_DOMAIN_COUNT_DRIFT")
-    if scope_batch_verification.get("scope_complete_count") != 24:
+    if srep.get("scope_complete_count") != 24:
         return _fail("SCOPE_BATCH_COVER_COUNT_DRIFT")
-    if scope_batch_verification.get("property_truth_count") not in (0, None):
+    if srep.get("property_truth_count") != 0:
         return _fail("SCOPE_BATCH_PROPERTY_SELF_PROMOTION")
 
     if not _starts(identity_verification, EXPECTED["identity_status_prefix"]):
