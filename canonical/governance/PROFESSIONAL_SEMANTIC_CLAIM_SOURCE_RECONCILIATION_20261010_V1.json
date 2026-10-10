@@ -1,0 +1,26 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_SEMANTIC_CLAIM_SOURCE_RECONCILIATION_V1",
+  "date": "2026-10-10",
+  "status": "CURRENT_CLAIM_SOURCE_V3__STABLE_MISSION_AUTHORITY__12_DISTINCT_CLAIMS__ZERO_PROPERTY_TRUTH",
+  "generator": {
+    "path": "canonical/runtime/professional_semantic_totality_claim_pack_v3.py",
+    "git_blob_sha": "803bda772beaa11318ebaafb7f47e45512150e0b"
+  },
+  "independent_verification": {
+    "path": "canonical/verification/PROFESSIONAL_SEMANTIC_TOTALITY_CLAIM_PACK_V3_INDEPENDENT_VERIFY_20261010_V1.json",
+    "git_blob_sha": "b1e01cedfc064ea18a21d6a563c9e6132ae6e7f5"
+  },
+  "claim_guard": {
+    "path": "canonical/runtime/coverage_claim_scope_guard_v2.py",
+    "git_blob_sha": "f28a25ad29cec75fd76f50754ce9a36618583c8d",
+    "verify_git_blob_sha": "f54e555de1dd7fbbba5e83e2d58c6860452f5308"
+  },
+  "mission_authority_git_blob_sha": "13c470645b037bbb46245c687dd35197b420d51a",
+  "semantic_claim_count": 12,
+  "r12_claim_id": "11870f850b46bcfcc31094f764fc4f45c911aaac413979ceb62679ff19a53162",
+  "v2_claim_authority_transport": false,
+  "property_truth_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0
+}
