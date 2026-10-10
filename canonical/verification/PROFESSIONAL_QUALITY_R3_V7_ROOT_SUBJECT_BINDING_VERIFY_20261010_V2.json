@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R3_V7_ROOT_SUBJECT_BINDING_VERIFY_20261010_V2",
+  "date": "2026-10-10",
+  "status": "PASS__CURRENT_MAIN_V1_PLUS_ONE_EXACT_REAL_TASK_RENDER_STEP_RECEIPT__INDEPENDENT_SPRITE_REPLAY__ZERO_QUALITY_OR_TERMINAL_AUTHORITY",
+  "root_id": "R3_REALIZATION_OBSERVATION",
+  "exact_blobs": {
+    "base_v1_binding": "c49c120a61620d400e372884266b63ec34a054d2",
+    "base_v1_verifier": "9d2ff75fa8333395d356f841cfe45e3b56d47efe",
+    "base_v1_verification": "92cacbd5f7b37cb515db9ebbc3685c961fc9e34e",
+    "v2_binding": "2fe91ecba3830641ed800d04b70279a3f84283bf",
+    "v2_verifier": "d7f6a16619618a15962f63e9867488bdf724c015",
+    "step_auth_kernel": "27f3c137dae7f00925083a0824d008c2b4d10f0a",
+    "exact_instance_evidence": "13e7e58b3621b3cabb7abdebe23689f3a72678d2",
+    "exact_step_receipt": "8a524bd90cee783d9d342b80a95b990d23a413e0",
+    "exact_step_verification": "734f88f5d201e778f59133c9e22f29ae4d451121"
+  },
+  "replay": {
+    "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/pq-r3-v2-strengthening-verify",
+    "py_compile": "PASS",
+    "package_execution": "PASS",
+    "verifier_status": "PASS__R3_V2_V7_STRUCTURAL_BINDING_PLUS_ONE_EXACT_REAL_TASK_RENDER_RECEIPT",
+    "transcript_sha256": "59605564248ec6d8677bb1b7329efb02a0e95755a24242cdbc6c160949776bb1"
+  },
+  "proves": [
+    "CURRENT_MAIN_R3_V1_STRUCTURAL_BINDING_REMAINS_VALID",
+    "ONE_EXACT_V7_RUN_CONTEXT_HAS_AN_AUTHENTICATED_CONTENT_ADDRESSED_RENDER_STEP_RECEIPT",
+    "RUN_CONTEXT_DIGEST_RECOMPUTES_EXACTLY",
+    "STEP_RECEIPT_PASSES_THE_EXISTING_PROFESSIONAL_STEP_BINDING_AUTHORITY_KERNEL",
+    "SOURCE_OUTPUT_AND_AUDIENCE_VIEW_IDENTITIES_ARE_BOUND",
+    "VISIBLE_CHANGE_IS_LOCALIZED_WITHIN_DECLARED_PIXEL_AND_BBOX_THRESHOLDS",
+    "PRODUCER_AND_INDEPENDENT_VERIFIER_ARE_DISTINCT"
+  ],
+  "hard_nonclaims": [
+    "NO_ADDITIONAL_ROOT_COUNT_CREDIT_BEYOND_EXISTING_R3_BINDING",
+    "NO_GENERIC_RENDERER_VERSION_TRANSPORT",
+    "NO_GLOBAL_R3_ROOT_CLOSURE",
+    "NO_ARBITRARY_SEMANTIC_TARGET_CORRECTNESS",
+    "NO_SAME_SUBJECT_COMPOSITION_PASS",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "root_subject_binding_authority": true,
+  "real_task_render_step_receipt_bound": true,
+  "exact_real_task_receipt_count": 1,
+  "global_r3_root_closed": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "next": "PRESERVE_PROFESSIONAL_FRONTIER_AT_3_OF_12__R4_MEASUREMENT_CONSTRUCT_REMAINS_NEXT"
+}
