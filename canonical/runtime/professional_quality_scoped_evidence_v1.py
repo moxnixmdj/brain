@@ -39,6 +39,12 @@ R11_LEAVES = {"PQ::R11_ADAPTIVE_INTEGRITY_SECURITY::EXECUTION"}
 R11_SOURCE_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R11_EVALUATION_FIREWALL_SCOPED_VERIFY_V1"
 R11_GOVERNANCE_SCHEMA = "PROJECT_BRAIN_EVALUATION_INFORMATION_FIREWALL_GOVERNANCE_V1"
 
+R10_KIND = "LOSSLESS_DECISION_SUFFICIENT_GAP_REPRESENTATION_AND_MINIMUM_POLICY_CHANGING_INFORMATION_ROUTING"
+R10_ROOT = "R10_ANALYSIS_DECISION"
+R10_LEAVES = {"PQ::R10_ANALYSIS_DECISION::EXECUTION"}
+R10_SOURCE_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R10_DECISION_SUFFICIENCY_SCOPED_VERIFY_V1"
+R10_HISTORY_SCHEMA = "PROJECT_BRAIN_ONE_SHOT_DECISION_SUFFICIENT_GATE_VERIFY_20261009_V2"
+
 
 def git_blob_sha(path: Path) -> str:
     data = path.read_bytes()
@@ -293,6 +299,81 @@ def _validate_r11(
     return errors, claim_scope
 
 
+def _validate_r10(
+    entry: dict[str, Any],
+    source: dict[str, Any] | None,
+    history: dict[str, Any] | None,
+    compiler_declared: Any,
+) -> tuple[list[str], Any]:
+    errors = _common_checks(entry, R10_ROOT, R10_LEAVES)
+    claim_scope = None
+    if source is not None:
+        if source.get("schema") != R10_SOURCE_SCHEMA:
+            errors.append("SOURCE_SCHEMA_INVALID")
+        if source.get("status") != "PASS__PINNED_CURRENT_BYTES__PYCOMPILE__23_OF_23__BOUNDED_DECISION_SUFFICIENCY_AND_MINIMUM_INFORMATION_ROUTING__ZERO_GLOBAL_LEAF_CREDIT":
+            errors.append("SOURCE_STATUS_NOT_ADMITTED")
+        blobs = source.get("exact_blobs")
+        if not isinstance(blobs, dict):
+            errors.append("SOURCE_EXACT_BLOBS_INVALID")
+        elif blobs.get("runtime") != compiler_declared:
+            errors.append("SOURCE_RUNTIME_MISMATCH")
+        replay = source.get("replay")
+        if not isinstance(replay, dict) or replay.get("tests_passed") != 23 or replay.get("tests_failed") != 0:
+            errors.append("SOURCE_REPLAY_INVALID")
+        scope = source.get("claim_scope")
+        claim_scope = scope
+        if not isinstance(scope, dict) or scope.get("kind") != R10_KIND:
+            errors.append("SOURCE_CLAIM_SCOPE_INVALID")
+        else:
+            guarantees = set(scope.get("guarantees") or [])
+            required = {
+                "DECISION_SUFFICIENT_BASELINE_IS_LOSSLESS_IDENTITY_AND_CONTENT_ADDRESSED",
+                "NO_EVIDENCE_IS_OMITTED_WITHOUT_A_FUTURE_OMISSION_CERTIFICATE",
+                "MINIMUM_INFORMATION_REQUESTS_DEDUPLICATE_EVIDENCE_BLOCKERS",
+                "BROAD_ACQUISITION_IS_FORBIDDEN_WITHOUT_MINIMALITY_PROOF",
+                "FULL_EMPIRICAL_EVALUATION_REMAINS_LAST",
+                "PROVIDERS_CANNOT_MUTATE_VERIFICATION_AUTHORITY",
+                "FALSE_PROGRESS_WITH_UNCHANGED_FRONTIER_FAILS_CLOSED",
+            }
+            if not required <= guarantees:
+                errors.append("SOURCE_REQUIRED_DECISION_GUARANTEES_MISSING")
+            limitations = set(scope.get("limitations") or [])
+            required_limits = {
+                "NO_GENERAL_PROFESSIONAL_RISK_POLICY_CLOSURE",
+                "NO_NORMATIVE_AGGREGATION_CLOSURE",
+                "NO_MODEL_MULTIPLICITY_DECISION_CLOSURE",
+                "NO_GLOBAL_R10_LEAF_OR_ROOT_CLOSURE",
+            }
+            if not required_limits <= limitations:
+                errors.append("SOURCE_SCOPE_LIMITATIONS_MISSING")
+        state = source.get("current_state")
+        if not isinstance(state, dict):
+            errors.append("SOURCE_CURRENT_STATE_INVALID")
+        else:
+            for field in ("global_leaf_credit", "global_r10_root_closed", "domain_semantic_closure", "domain_execution_closure"):
+                if state.get(field) is not False:
+                    errors.append("SOURCE_GLOBAL_OVERCLAIM:" + field)
+
+    if history is not None:
+        if history.get("schema") != R10_HISTORY_SCHEMA:
+            errors.append("HISTORY_SCHEMA_INVALID")
+        if history.get("status") != "PASS__FOCUSED_18_OF_18__CURRENT_V1_ADJACENT_7_OF_7__PY_COMPILE_PASS":
+            errors.append("HISTORY_STATUS_NOT_ADMITTED")
+        guarantees = set(history.get("guarantees") or [])
+        historical_required = {
+            "BUILTIN_DECISION_REDUCTION_IS_LOSSLESS_IDENTITY__NO_UNVERIFIED_OMISSION",
+            "FUTURE_COMPRESSION_REQUIRES_OMISSION_CERTIFICATE",
+            "EVIDENCE_ACQUISITION_RECEIVES_DEDUPLICATED_MINIMUM_POLICY_CHANGING_INFORMATION_CONTRACT",
+            "FULL_EMPIRICAL_EVALUATION_REMAINS_LAST",
+            "SYNTHESIS_AND_ACQUISITION_CANNOT_MUTATE_VERIFICATION_AUTHORITY",
+        }
+        if not historical_required <= guarantees:
+            errors.append("HISTORY_REQUIRED_FEATURES_MISSING")
+        if "NO_OPEN_WORLD_TERMINAL_CLOSURE_CLAIM" not in set(history.get("nonclaims") or []):
+            errors.append("HISTORY_GLOBAL_NONCLAIM_MISSING")
+    return errors, claim_scope
+
+
 def validate_entry(entry: dict[str, Any], *, repo_root: Path = ROOT) -> dict[str, Any]:
     errors: list[str] = []
     if not isinstance(entry, dict):
@@ -328,6 +409,8 @@ def validate_entry(entry: dict[str, Any], *, repo_root: Path = ROOT) -> dict[str
         handler_errors, claim_scope = _validate_r3(entry, source, verifier, compiler_declared)
     elif kind == R11_KIND:
         handler_errors, claim_scope = _validate_r11(entry, source, verifier, compiler_declared)
+    elif kind == R10_KIND:
+        handler_errors, claim_scope = _validate_r10(entry, source, verifier, compiler_declared)
     else:
         handler_errors, claim_scope = ["CLAIM_KIND_UNSUPPORTED"], None
     errors.extend(handler_errors)
