@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_SUBJECT_DEPENDENCY_CLOSURE_V2_INDEPENDENT_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "INDEPENDENT_SPRITE_PASS__5_OF_5_UNIT_TESTS__REAL_CURRENT_DECLARED_SYSTEM_DEPENDENCY_CLASSIFICATION_12_OF_12__FIVE_MISSING_SYSTEM_COMPONENTS__ZERO_CREDIT",
+  "exact_branch": {
+    "runtime": {
+      "path": "canonical/runtime/professional_quality_subject_dependency_closure_v2.py",
+      "git_blob_sha": "52eafdc40a5024bb950750c0198c7655b513141c"
+    },
+    "tests": {
+      "path": "canonical/tests/test_professional_quality_subject_dependency_closure_v2.py",
+      "git_blob_sha": "8db07620103079d07ab882bfa907f27996c32419"
+    },
+    "reused_transitive_closure": {
+      "path": "canonical/runtime/python_transitive_runtime_closure_v1.py",
+      "git_blob_sha": "43d502c621c219632fa0f9a19632dfc0228e4847"
+    }
+  },
+  "independent_carrier": {
+    "provider": "Sprites",
+    "sprite": "brain-capability-first-scheduler-verify-20261008-v1",
+    "unit_tests": {
+      "passed": 5,
+      "run": 5,
+      "result": "OK"
+    },
+    "real_projection": {
+      "roots_dependency_classified": 12,
+      "roots_total": 12,
+      "transitive_runtime_closure_file_count": 9,
+      "missing_subject_component_count": 5,
+      "missing_subject_components": [
+        "canonical/governance/PROFESSIONAL_QUALITY_ASSURANCE_GRAPH_20261009_V2.json",
+        "canonical/governance/PROFESSIONAL_QUALITY_LEAF_EVIDENCE_REGISTRY_20261010_V1.json",
+        "canonical/governance/PROFESSIONAL_QUALITY_P1_EXECUTION_PROFILE_20261010_V1.json",
+        "canonical/runtime/professional_quality_p1_router_v2.py",
+        "canonical/runtime/professional_quality_scoped_evidence_v1.py"
+      ],
+      "classification_law": "SYSTEM_IDENTITY_IS_DERIVED_FROM_THE_DECLARED_SYSTEM_RUNTIME_AND_CONFIGURATION_DEPENDENCY_CONE__ROOT_VERIFIERS_AND_RECEIPTS_REMAIN_EXTERNAL_UNLESS_THE_DECLARED_SYSTEM_ACTUALLY_IMPORTS_OR_READS_THEM"
+    },
+    "caveat": "REAL_PROJECTION_USED_EXACT_RUNTIME_BYTES_AND_EXACT_CURRENT_SUBJECT_COMPONENT_LIST_AND_SCOPED_BINDINGS__NON_LOAD_BEARING_GOVERNANCE_REFERENCE_BODIES_WERE_EXISTENCE_STUBBED_DUE_HOST_TRANSFER_GUARD__FINAL_COMPONENT_HASHES_MUST_BE_BOUND_FROM_GITHUB_BEFORE_SUBJECT_FREEZE"
+  },
+  "github_actions": {
+    "run_id": 38047074881,
+    "conclusion": "failure",
+    "runner_id": 0,
+    "steps": 0,
+    "interpretation": "INFRASTRUCTURE_ONLY__NO_TEST_EXECUTION"
+  },
+  "authority": {
+    "dependency_classification_authority": false,
+    "root_subject_binding_authority": false,
+    "quality_authority": false,
+    "acceptance_authority": false,
+    "promotion_authority": false,
+    "terminal_authority": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
