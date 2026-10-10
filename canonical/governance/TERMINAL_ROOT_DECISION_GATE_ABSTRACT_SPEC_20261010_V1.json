@@ -1,0 +1,106 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_ROOT_DECISION_GATE_ABSTRACT_SPEC_V1",
+  "date": "2026-10-10",
+  "subject": {
+    "path": "canonical/runtime/terminal_root_decision_gate_v1.py",
+    "git_blob_sha": "40a6f984013d0d701edba498c2a122edcb9a8103",
+    "function": "evaluate"
+  },
+  "scope": "GOAL_RELEVANT_BRANCH_SURFACE_RELATIVE_TO_PYTHON_PATHLIB_JSON_SHA1_ROOT_SEMANTICS",
+  "input_contract": {
+    "payload_type": "Mapping",
+    "closure_receipt_required": true,
+    "repo_root_required_for_bound_artifact_reads": true,
+    "authority_pointer_path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+    "scope_id": "scope://opus55/observable-trace"
+  },
+  "allowed_proof_kinds": [
+    "FULL_SCOPE_DB_COVER",
+    "TARGET_ESCAPE_NONOCCUPANCY",
+    "GENERATOR_CLOSURE_SCOPE_COMPLETE",
+    "SELECTED_COVER_COMPLEMENT_UNSAT"
+  ],
+  "fail_reasons": [
+    "PAYLOAD_MAPPING_REQUIRED",
+    "CLOSURE_RECEIPT_REQUIRED",
+    "CONTENT_ADDRESSED_PROOF_AND_VERIFIER_REQUIRED",
+    "CURRENT_AUTHORITY_POINTER_INVALID",
+    "CURRENT_AUTHORITY_PROOF_VERIFIER_ADMISSION_REQUIRED",
+    "PROOF_KIND_INVALID",
+    "SUCCESS_CONCLUSION_REQUIRED",
+    "SCOPE_ID_REQUIRED",
+    "INDEPENDENT_VERIFICATION_REQUIRED",
+    "EXACT_BYTE_BINDING_REQUIRED",
+    "VERIFIER_SUCCESS_CONCLUSION_REQUIRED",
+    "VERIFIER_PROOF_BINDING_MISMATCH",
+    "DECLARATION_PROOF_MISMATCH",
+    "FULL_SCOPE_DB_COVER_UNPROVED",
+    "TARGET_ESCAPE_NONOCCUPANCY_UNPROVED",
+    "GENERATOR_CLOSURE_PREMISES_UNPROVED",
+    "SELECTED_COVER_COMPLEMENT_PREMISES_UNPROVED"
+  ],
+  "fail_projection": {
+    "schema": "PROJECT_BRAIN_TERMINAL_ROOT_DECISION_GATE_V1",
+    "pass": false,
+    "status": "FAIL_CLOSED",
+    "x_decided": false,
+    "x": null,
+    "u_empty": false,
+    "abc_closed": false,
+    "d_finality_required": true,
+    "terminal": false,
+    "terminal_credit_delta": 0
+  },
+  "success_cases": {
+    "FULL_SCOPE_DB_COVER": {
+      "required_true": [
+        "s_trace_subset_db"
+      ],
+      "proof_rule": "S_TRACE_SUBSET_DB_IMPLIES_U_SUBSET_DB_IMPLIES_U_INTERSECTION_E_EMPTY"
+    },
+    "TARGET_ESCAPE_NONOCCUPANCY": {
+      "required_true": [
+        "u_intersection_escape_empty"
+      ],
+      "proof_rule": "DIRECT_TARGET_ESCAPE_NONOCCUPANCY"
+    },
+    "GENERATOR_CLOSURE_SCOPE_COMPLETE": {
+      "required_true": [
+        "generator_basis_complete",
+        "all_generators_covered",
+        "all_transforms_abc_preserving",
+        "all_useful_contexts_reachable"
+      ],
+      "proof_rule": "SCOPE_COMPLETE_GENERATOR_INDUCTION_COVERS_ALL_USEFUL_CONTEXTS"
+    },
+    "SELECTED_COVER_COMPLEMENT_UNSAT": {
+      "required_true": [
+        "every_admission_sound",
+        "residual_complement_unsat"
+      ],
+      "proof_rule": "SOUND_ADMISSION_UNION_PLUS_UNSAT_COMPLEMENT_COVERS_SCOPE"
+    }
+  },
+  "success_projection": {
+    "schema": "PROJECT_BRAIN_TERMINAL_ROOT_DECISION_GATE_V1",
+    "pass": true,
+    "status": "PASS__TERMINAL_ROOT_NOT_X_PROVED",
+    "x_decided": true,
+    "x": false,
+    "u_empty": true,
+    "abc_closed": true,
+    "d_finality_required": true,
+    "terminal": false,
+    "terminal_credit_delta": 0
+  },
+  "diagnostic_detail_is_goal_relevant": false,
+  "root_assumptions": [
+    "CPYTHON_LANGUAGE_SEMANTICS",
+    "PATHLIB_RESOLVE_AND_FILE_READ_SEMANTICS",
+    "JSON_PARSER_SEMANTICS",
+    "SHA1_GIT_BLOB_IDENTITY_SEMANTICS"
+  ],
+  "claim": "BRANCH_SURFACE_SEMANTIC_REFINEMENT_ONLY",
+  "repository_wide_refinement": false,
+  "terminal_credit_delta": 0
+}
