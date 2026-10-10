@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_SEMANTIC_IDENTITY_CARRIER_ACTIVATION_20261010_V2",
+  "date": "2026-10-10",
+  "status": "ACTIVE_CURRENT_V2__INDEPENDENTLY_VERIFIED_12_OF_12_CURRENT_SEMANTIC_PROPERTY_CLAIM_IDENTITY_FACTORIZATION__ZERO_PROPERTY_TRUTH_CREDIT",
+  "objective": "REMOVE_MISSION_SUFFICIENT_CARRIER_FACTORIZATION_FROM_THE_CURRENT_12_PROFESSIONAL_SEMANTIC_PROPERTY_CLAIM_CUT_WITHOUT_TRANSPORTING_STALE_WHOLE_LEAF_CLAIM_AUTHORITY",
+  "supersedes": "canonical/governance/PROFESSIONAL_SEMANTIC_IDENTITY_CARRIER_ACTIVATION_20261010_V1.json",
+  "runtime": {
+    "path": "canonical/runtime/professional_semantic_identity_carrier_v2.py",
+    "git_blob_sha": "66d0cc279c581f82e703af8b878fcbe15af7fd01"
+  },
+  "tests": {
+    "path": "canonical/tests/test_professional_semantic_identity_carrier_v2.py",
+    "git_blob_sha": "053ebf9a770cbc1bdb29acee06defa879e001126"
+  },
+  "verification": {
+    "path": "canonical/verification/PROFESSIONAL_SEMANTIC_IDENTITY_CARRIER_VERIFY_20261010_V2.json",
+    "git_blob_sha": "943e0706761baa7be0b6e1b10c5a8f7e4f49f030",
+    "result": "PYCOMPILE_PASS__7_OF_7__SECOND_SPRITE__CURRENT_V2_12_OF_12"
+  },
+  "current_claim_pack": {
+    "path": "canonical/governance/PROFESSIONAL_SEMANTIC_TOTALITY_FROZEN_CLAIM_PACK_20261010_V2.json",
+    "git_blob_sha": "f16aab3760d4f5958da986782632f3cb2bbd2646",
+    "mission_blob_sha": "51327d24f82809279e37e51cf3d994d13a6f1ff3",
+    "semantic_claim_count": 12
+  },
+  "formal_basis": {
+    "world_space": "W_C",
+    "carrier_space": "OMEGA_C_EQUALS_W_C",
+    "projection": "PI_C_EQUALS_IDENTITY_ON_W_C",
+    "theorem": "PI_C_W1_EQUALS_PI_C_W2_IMPLIES_W1_EQUALS_W2_IMPLIES_M_C_W1_EQUALS_M_C_W2",
+    "proof_mode": "FORMAL_REDUCTION__IDENTITY_FUNCTION_CONGRUENCE",
+    "finite_sampling_authority": false,
+    "semantic_information_loss": false
+  },
+  "current_state": {
+    "semantic_leaf_count": 12,
+    "current_v2_claim_factorization_proved_count": 12,
+    "r12_current_property_claim_id": "97ff74650749db87f378d5926ed820e004f3f792583c2c8455e51c3ccacbe7f7",
+    "stale_v1_r12_whole_leaf_scope_claim_id": "05b74983836dd1f6a13a0db72443246fb74f99548f0d982a769a6a7e572e9e85",
+    "stale_v1_claim_authority_transported": false,
+    "semantic_property_truth_count_delta": 0
+  },
+  "next": "REMOVE_CARRIER_FACTORIZATION_FROM_ALL_CURRENT_SEMANTIC_RESIDUALS__RANK_CLAIM_SPECIFIC_CC_R1_CC_R2_CC_R3_R4_REUSE__R12_FIRST_BY_EXISTING_PROOF_DENSITY",
+  "hard_nonclaims": [
+    "NO_SEMANTIC_LEAF_PROPERTY_TRUTH",
+    "NO_COVERAGE_ROOT_CLOSURE",
+    "NO_CROSS_CLAIM_CERTIFICATE_TRANSPORT",
+    "NO_PROFESSIONAL_QUALITY_ACCEPTANCE",
+    "NO_PROMOTION_OR_TERMINAL_AUTHORITY",
+    "NO_CARRIER_COMPRESSION_OR_RESOURCE_EFFICIENCY_CLAIM"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "property_truth_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
