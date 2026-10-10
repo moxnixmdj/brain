@@ -1,36 +1,41 @@
 {
   "schema": "PROJECT_BRAIN_BYTES_ACTIVE_STATE_V1",
-  "status": "ACTIVE_RESEARCH__SUCCESSOR_READY",
+  "status": "ACTIVE_RESEARCH__NEW_SUCCESSOR_FRONTIER__SUCCESSOR_READY",
   "date": "2026-10-10",
   "mission_lock": "Find the minimum resource-feasible executable description of the required capability set conditional on already-owned Brain substrate.",
   "governing_laws": [
     "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V1.md",
     "canonical/laws/BYTES_RESOURCE_BOUNDED_MINIMUM_MECHANISM_LAW_V1.md"
   ],
-  "source_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_RECOVERY_EXECUTION_20261010_V1.json",
+  "source_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_SUCCESSOR_EXECUTION_20261010_V1.json",
   "exact_symbolic_state": {
-    "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_RECOVERY_EXECUTION_20261010_V1.json",
-    "status": "FRESH_MEASURED_RESEARCH_CANDIDATE__NOT_PROMOTED",
-    "raw_python_source_bytes": 6828853,
-    "persistent_xz_bytes": 1179804,
-    "python_files": 316,
-    "final_untouched_qualification": "2520/2520",
-    "clean_room_replay": "2520/2520",
-    "manifest_sha256": "ebecc222feb7ec428e7ac9e667319d41f943358a454df6d288efae0c10ac940c",
-    "deterministic_xz_sha256": "7656418768655ffc67889bb5b9cafc27a7fb59320b0ce7b86efcc012cb30dcfc",
-    "raw_improvement_vs_historical_reported_bytes": 215366,
-    "xz_improvement_vs_historical_reported_bytes": 27848,
+    "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_SUCCESSOR_EXECUTION_20261010_V1.json",
+    "status": "FRESH_MEASURED_PHYSICAL_RESEARCH_CANDIDATE__NOT_PROMOTED",
+    "raw_python_source_bytes": 6743077,
+    "B_exec_raw_python_source_bytes": 6745837,
+    "persistent_xz_bytes": 1147192,
+    "full_exec_xz_bytes": 1147796,
+    "python_files": 305,
+    "final_untouched_qualification": "3450/3450",
+    "stock_donor_positive_control": "3450/3450",
+    "clean_room_replay": "3450/3450",
+    "manifest_sha256": "d002d42ff677ae9d6c481f7cf9e1312728daba39158c2d053f228ee563a5a22b",
+    "deterministic_xz_sha256": "8712e0be012535741954429e58c38dcb7cdcb6eb3b27616b4c2683bb66b3070f",
+    "full_exec_xz_sha256": "16f61b951428a041a930267a2f0bdfa1a8c433fe5e2716492417c999403dea21",
+    "raw_improvement_vs_previous_frontier_bytes": 85776,
+    "raw_improvement_vs_previous_frontier_fraction": 0.012560820975352669,
     "promotion_credit_from_this_record": 0
   },
   "current_bottleneck": {
     "subsystem": "polys",
-    "fresh_loaded_raw_python_source_bytes": 1517336,
+    "successor_trace_raw_python_source_bytes": 1649240,
     "required_surface": [
       "factor",
       "coefficient",
       "exact roots degree <= 4"
     ],
-    "next_action": "QUAL8 is frozen and untouched (2,640 cases; SHA-256 640f06e78cd3394e00713084ec6a3aafbd7b1ba0f0dcaa17140c74bb920b79fc). Decompose remaining polys by factor/coefficient/exact-roots<=4 use, make one structural cut, physically delete it, spend QUAL8 once, then rerank."
+    "next_action": "Use only the frozen unspent successor qualification after making the next operation-level polys structural cut. Prioritize import-only generic machinery around factor/coefficient/exact-roots<=4, physically delete the accepted cut, spend the frozen corpus once, then rerank.",
+    "note": "The successor reduced total B_exec primarily by deleting mpmath/documentation/matrix compatibility baggage; polys remains the primary byte bottleneck."
   },
   "rejected_do_not_reopen_without_new_evidence": [
     "parameter count as terminal metric",
@@ -61,14 +66,15 @@
   "fresh_local_donor_evidence": "canonical/evidence/BYTES_SYMPY_1_14_DEPENDENCY_CENSUS_20261010_V1.json",
   "execution_reconciliation": {
     "stock_donor_available_in_current_runtime": "SymPy 1.14.0 plus mpmath 1.3.0",
-    "historical_7044219_byte_candidate_recovery_required": false,
-    "recovery_status": "SUPERSEDED_BY_FRESH_SMALLER_PHYSICAL_CANDIDATE",
-    "fresh_candidate_raw_python_source_bytes": 6828853,
-    "fresh_candidate_persistent_xz_bytes": 1179804,
-    "untouched_qualification": "2520/2520",
-    "clean_room_replay": "2520/2520",
-    "action_taken": "Reconstructed donor-derived exact-symbolic slice from stock donor, reproduced the major historical dependency cuts, found additional eager-dependency cuts, physically deleted the resulting unreachable closure, and surpassed the historical reported byte frontier.",
-    "physical_next_step": "Continue from the fresh 6,828,853-byte candidate, not the old transcript-only artifact; freeze a new untouched corpus before the next polys cut."
+    "predecessor_6828853_byte_candidate_superseded": true,
+    "fresh_candidate_raw_python_source_bytes": 6743077,
+    "fresh_candidate_B_exec_raw_python_source_bytes": 6745837,
+    "fresh_candidate_persistent_xz_bytes": 1147192,
+    "untouched_qualification": "3450/3450",
+    "stock_donor_positive_control": "3450/3450",
+    "clean_room_replay": "3450/3450",
+    "action_taken": "Removed non-executable mpmath documentation metadata, replaced the eager broad mpmath facade with a bounded low-level fail-closed compatibility surface, removed out-of-contract mpmath-matrix conversion coupling, physically sliced the calibrated reachable closure, and passed a fresh untouched donor-equivalence corpus in an isolated replay.",
+    "physical_next_step": "Continue from the 6,743,077-byte physical candidate. Attack polys only; do not reopen the removed mpmath/compatibility baggage without new evidence."
   },
   "historical_reported_predecessor": {
     "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_DONOR_SLICE_CHECKPOINT_20261010_V1.json",
@@ -77,19 +83,34 @@
     "qualification": "1854/1854",
     "provenance": "USER_SUPPLIED_TRANSCRIPT_CHECKPOINT"
   },
-  "fresh_execution_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_RECOVERY_EXECUTION_20261010_V1.json",
+  "fresh_execution_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_SUCCESSOR_EXECUTION_20261010_V1.json",
   "next_frozen_qualification": {
+    "id": "QUAL_SUCCESSOR_NEXT_20261010_V1",
+    "cases": 2070,
+    "seed": 2718281,
+    "per_operation_budget": 180,
+    "corpus_sha256": "f07f672bc48cfe20d5f9f3076d2ba2dc1f48a4683e7be937a4be8001b384adff",
+    "generator": "canonical/research/bytes/tools/generate_qualification_v1.py",
+    "status": "FROZEN_UNSPENT__RECONSTRUCTABLE_FROM_CANONICAL_GENERATOR__DO_NOT_EXECUTE_BEFORE_NEXT_POLYS_CUT",
+    "spent": false
+  },
+  "durable_artifact_persistence": {
+    "candidate_manifest_and_measurements": "PERSISTED_IN_CANONICAL_GITHUB_EVIDENCE",
+    "reconstruction_tools": "PERSISTED_IN_CANONICAL_GITHUB",
+    "exact_route": "canonical/research/bytes/tools/exact_symbolic_route_v1.py",
+    "qualification_generator": "canonical/research/bytes/tools/generate_qualification_v1.py",
+    "reconstruction_recipe": "canonical/research/bytes/tools/rebuild_candidate_v1.py",
+    "binary_execution_bundle": "NOT_DURABLY_SAVED__LIBRARY_UPLOAD_FAILED_CONTAINER_SESSION_EXPIRED",
+    "binary_execution_bundle_sha256": "16f61b951428a041a930267a2f0bdfa1a8c433fe5e2716492417c999403dea21",
+    "binary_execution_bundle_bytes": 1147796,
+    "rule": "Do not claim the binary bundle is durable. Canonical reconstruction tooling, hashes, measurements, and evidence are durable; promotion credit remains zero."
+  },
+  "predecessor_fresh_execution_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_RECOVERY_EXECUTION_20261010_V1.json",
+  "reserved_predecessor_qualification_qual8": {
     "id": "QUAL8",
     "cases": 2640,
     "corpus_sha256": "640f06e78cd3394e00713084ec6a3aafbd7b1ba0f0dcaa17140c74bb920b79fc",
     "generator_sha256": "de6cf261f4e78b010c2454347409a309880066e18f89f7953bb477a7502f59e4",
     "spent": false
-  },
-  "durable_artifact_persistence": {
-    "candidate_manifest_and_measurements": "PERSISTED_IN_CANONICAL_GITHUB_EVIDENCE",
-    "binary_execution_bundle": "NOT_DURABLY_SAVED__LIBRARY_UPLOAD_FAILED_CONTAINER_SESSION_EXPIRED",
-    "exact_reconstruction_recipe": "LOCALLY_VERIFIED__GITHUB_UPLOAD_BLOCKED_BY_CONNECTOR_SAFETY_CHECK",
-    "incomplete_encoded_payload": "ORPHANED_NONAUTHORITATIVE_ARTIFACT__DELETE_ATTEMPT_BLOCKED_BY_CONNECTOR_SAFETY_CHECK",
-    "rule": "No successor may treat a blocked/failed persistence action as successful. Canonical measured state is durable; exact candidate bytes still require supported artifact persistence or reconstruction from this execution environment."
   }
 }
