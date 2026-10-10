@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_R2_V74_BOUNDED_SEMANTIC_POSITIVE_RECONCILIATION_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_R2_V74_BYTES__BOUND_SEMANTIC_AUTHORITIES__8_OF_8_ISOLATED_RECONCILIATION_TESTS__OPEN_RESIDUAL_PRESERVED__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "r2-v74-bounded-semantic-positive-reconcile",
+    "exact_blobs": {
+      "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json": "ed6f74e9edadef2339d6bc2db7ce3020e1c7db2b",
+      "canonical/governance/R2_V74_BOUNDED_SEMANTIC_POSITIVE_RECONCILIATION_20261010_V1.json": "3d1eef656966bc7f4fd9ea37b1e23b2fdede87a2",
+      "canonical/tests/test_r2_v74_bounded_semantic_positive_reconciliation_v1.py": "ebe9fa0e34ec38c7b1e14283b4540d19f8d6c940",
+      "canonical/runtime/margin_context_identity_truth_certificate_v1.py": "9bb8723e34fb4a05b0e1f1a0fa875c0bd6cf3446",
+      "canonical/runtime/regcap_facet_role_projection_v1.py": "80a6fac864895e98bd7ac6272b0854bd3cc6c1cc",
+      "canonical/runtime/regcap_facet_role_truth_certificate_v1.py": "7219d92c8dcce3e6b858f348fcb88589f503dc42",
+      "canonical/runtime/semantic_truth_dispatch_v1.py": "fc6d96aabd9735e17a799986950bb4331e7af9a5",
+      "canonical/verification/MARGIN_CONTEXT_TRUTH_DISPATCH_VERIFY_20261010_V1.json": "fc0a9ea1796c40608997d3f5622b3175ad57f07a",
+      "canonical/verification/REGCAP_FACET_ROLE_PROJECTION_VERIFY_20261010_V1.json": "a39fa0b5e9dd76ddc09ecb736c49fbadb967e15f"
+    }
+  },
+  "isolated_verification": {
+    "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "command": "python3 -m unittest -v canonical.tests.test_r2_v74_bounded_semantic_positive_reconciliation_v1",
+    "tests_run": 8,
+    "failures": 0,
+    "errors": 0,
+    "result": "PASS"
+  },
+  "proved": [
+    "R2_STATUS_ADVANCES_V73_TO_V74_WITHOUT_GLOBAL_OPEN_WORLD_CLOSURE",
+    "PREDECESSOR_FINANCE_REMAINING_BOUNDARY_IS_EXACTLY_PRESERVED",
+    "PRIMARY_PRIMITIVE_STATE_AND_SCHEDULER_COUNTS_ARE_PRESERVED",
+    "ONE_PRIMARY_INTERNAL_FINANCE_SEMANTIC_RESIDUAL_REMAINS",
+    "MARGIN_CONTEXT_IDENTITY_RUNTIME_DISPATCH_AND_RECEIPT_BLOBS_MATCH",
+    "BARE_MARGIN_UNIQUE_SENSE_REMAINS_UNAUTHORIZED",
+    "REGCAP_FACET_ROLE_RUNTIME_DISPATCH_AND_RECEIPT_BLOBS_MATCH",
+    "FACET_ROLE_PROJECTION_DOES_NOT_MINT_EXCLUSIVE_FACET_OR_CONCEPT_IDENTITY",
+    "CURRENT_SHARED_CAUSE_LEDGER_REMAINS_COMPLETE_AT_5_4_2_PARENT_FANOUT"
+  ],
+  "authority": {
+    "semantic_truth_delta": "BOUNDED_POSITIVE_SUBREGIONS_ALREADY_VERIFIED_AND_LIVE_ONLY",
+    "policy_adequacy": false,
+    "execution": false,
+    "acceptance": false,
+    "terminal": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_R2_V74_BOUNDED_SEMANTIC_POSITIVE_RECONCILIATION_20261010_V1",
+  "date": "2026-10-10",
+  "status": "RECONCILE_TWO_ALREADY_VERIFIED_LIVE_BOUNDED_SEMANTIC_AUTHORITIES__PRESERVE_OPEN_WORLD_RESIDUAL",
+  "predecessor": {
+    "current_r2_git_blob_sha": "31e3469774ab38656facda19e05ca3aa8a2468c1",
+    "version": "V73",
+    "status": "ACTIVE_CURRENT_R2_AUTHORITY__V73__FORTY_DIRECT_ROUTES__THIRTY_SIX_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__DERIVED_TYPED_TERMINAL_SIGNATURES_ROUTE_BOUND__MREL_NECESSARY_PROPERTY_AUTHORITY_BOUND__LOSS_CUSHION_MREL_BOUND_FRONTIER_REPAIRED__LOSS_CUSHION_TLAC_MREL_PAIR_RECOMPOSITION_BOUND__TLAC_MREL_SHARED_SIGNATURE_NONSEPARATION_AND_BOUNDED_IDENTITY_DISCRIMINATOR_BOUND__OEWN_DECISION_MANIFEST_LATTICE_LIVE_DYNAMIC_ROUTE_BOUND__REGCAP_NO_DESCRIPTOR_DIRECT_SIGNATURE_CONTEXT_BOUND__SCOPED_DOMAIN_EQUIVALENCE_INTERNALIZED__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_REMAINS",
+    "remaining_boundary": "FINANCE_COREFERENCE_CASES_OUTSIDE_VERIFIED_STRUCTURALLY_COMPLETE_TYPED_MARKED_MENTION_UNIVERSE_SCOPE_OR_WITH_MISSING_COMPLETE_CANDIDATE_TERMINAL_SIGNATURES_OUTSIDE_VERIFIED_DERIVED_TYPED_DECISION_PROBLEM_COVER_SCOPE_OR_WITH_INCOMPLETE_TYPED_DECISION_PROBLEM_COVER_OR_UNAVAILABLE_DECISIVE_OBSERVATIONS__OEWN_SENSE_CASES_OUTSIDE_VERIFIED_SOURCE_PROVED_RELEASE_RELATIVE_DECISION_MANIFEST_LATTICE_SCOPE_OR_WITH_ANY_TERMINAL_OR_OBSERVATION_TOP_REMAINING_OR_WITH_UNRECOGNIZED_PROSE_REQUIRING_SENSE_INFERENCE__TERMS_OR_DOMAIN_CONCEPTS_OUTSIDE_VERIFIED_REGCAP_CCOB_CCYB_TLAC_BOUNDED_RIVAL_DESCRIPTOR_OR_DIRECT_SIGNATURE_CONTEXT_SCOPE_AND_OUTSIDE_BOUND_EU_MREL_NECESSARY_PROPERTY_SCOPE_WITHOUT_VERIFIER_BACKED_SCOPED_DOMAIN_MAPPING_OR_PROVED_COMPLETE_BOUNDED_UNIVERSE__NONEXPLICIT_SEMANTIC_RELATIONS_OUTSIDE_VERIFIED_REGCAP_CCOB_CCYB_TLAC_BOUNDED_RIVAL_DESCRIPTOR_OR_DIRECT_SIGNATURE_CONTEXT_SCOPE_AND_OUTSIDE_BOUND_MREL_TO_NECESSARY_PROPERTY_ENTAILMENTS_WHEN_NO_VERIFIER_BACKED_DOMAIN_MAPPING_AUTHENTICATED_SCOPED_ENTAILMENT_DAG_COMPLETE_BOUNDED_DENOTATION_OR_PROVABLE_SET_RELATION_EVIDENCE_IS_AVAILABLE__OPEN_WORLD_ONTOLOGY_MAPPING_WITHOUT_AUTHENTICATED_BOUNDED_AUTHORITY__CROSS_DOCUMENT_CASES_WITH_UNPROVED_QUERY_RELEVANT_EFFECT_ID_INVENTORY_OR_ANY_REQUIRED_EFFECT_FIELD_REMAINING_AT_SEMANTIC_TOP__STRONGER_EXTERNAL_FACT_AUTHENTICATION_BEYOND_BOUND_OBSERVATION_CHANNELS__CROSS_FILING_ISSUER_EXTENSION_SEMANTIC_STABILITY_OUTSIDE_VERIFIED_BOUNDED_SAME_ISSUER_EXACT_SUPPLIED_FILING_SET_SCOPE__TLAC_MREL_IDENTITY_CASES_OUTSIDE_VERIFIED_EXACT_TLAC_MREL_PAIR_SCOPE_OR_WITHOUT_AUTHENTICATED_MREL_CASE_BY_CASE_RESOLUTION_AUTHORITY_OR_TLAC_FSB_GSIB_STANDARD_MARKERS_REQUIRE_AN_ADDITIONAL_AUTHENTICATED_IDENTITY_DISCRIMINATOR",
+    "primary_primitive_state": "OPEN__ADEQUACY_COVERAGE_AND_OBSERVABILITY_ONLY__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL__SCOPED_PROOF_CARRYING_DOMAIN_MAPPING_BOUND__GDPVAL_DORMANT",
+    "scheduler_state": "GENERAL_CONTROL_MECHANISM_CLOSED__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL__FORTY_DIRECT_ROUTES__THIRTY_SIX_BOUNDED_FAMILIES__DERIVED_TYPED_TERMINALS_REFINED__MREL_NECESSARY_PROPERTIES_REFINED__TLAC_MREL_NONSEPARATION_AND_BOUNDED_IDENTITY_DISCRIMINATOR_REFINED__OEWN_DECISION_MANIFEST_LATTICE_REFINED__GDPVAL_OWNER_RELATION_DORMANT",
+    "direct_route_count": 40,
+    "bounded_family_count": 36
+  },
+  "margin_context_identity": {
+    "truth_certificate_path": "canonical/runtime/margin_context_identity_truth_certificate_v1.py",
+    "truth_certificate_git_blob_sha": "9bb8723e34fb4a05b0e1f1a0fa875c0bd6cf3446",
+    "arm_runtime_path": "canonical/runtime/arm_margin_context_identity_v1.py",
+    "arm_runtime_git_blob_sha": "c289131994c6b2f478661767757ee35dc1066a20",
+    "original_live_dispatch_verification_path": "canonical/verification/MARGIN_CONTEXT_TRUTH_DISPATCH_VERIFY_20261010_V1.json",
+    "original_live_dispatch_verification_git_blob_sha": "fc0a9ea1796c40608997d3f5622b3175ad57f07a",
+    "current_dispatch_path": "canonical/runtime/semantic_truth_dispatch_v1.py",
+    "current_dispatch_git_blob_sha": "fc6d96aabd9735e17a799986950bb4331e7af9a5",
+    "current_dispatch_extension_verification_path": "canonical/verification/REGCAP_FACET_ROLE_PROJECTION_VERIFY_20261010_V1.json",
+    "current_dispatch_extension_verification_git_blob_sha": "a39fa0b5e9dd76ddc09ecb736c49fbadb967e15f",
+    "closed_scope": [
+      "NET_INTEREST_MARGIN_OCCURRENCE_IDENTITY",
+      "INITIAL_MARGIN_OCCURRENCE_IDENTITY",
+      "ARM_INDEX_MARGIN_OCCURRENCE_IDENTITY"
+    ],
+    "bare_margin_unique_sense_closed": false,
+    "global_word_sense_closed": false,
+    "policy_adequacy_authority": false,
+    "terminal_authority": false
+  },
+  "regcap_facet_role": {
+    "projection_path": "canonical/runtime/regcap_facet_role_projection_v1.py",
+    "projection_git_blob_sha": "80a6fac864895e98bd7ac6272b0854bd3cc6c1cc",
+    "truth_certificate_path": "canonical/runtime/regcap_facet_role_truth_certificate_v1.py",
+    "truth_certificate_git_blob_sha": "7219d92c8dcce3e6b858f348fcb88589f503dc42",
+    "live_dispatch_path": "canonical/runtime/semantic_truth_dispatch_v1.py",
+    "live_dispatch_git_blob_sha": "fc6d96aabd9735e17a799986950bb4331e7af9a5",
+    "verification_path": "canonical/verification/REGCAP_FACET_ROLE_PROJECTION_VERIFY_20261010_V1.json",
+    "verification_git_blob_sha": "a39fa0b5e9dd76ddc09ecb736c49fbadb967e15f",
+    "closed_scope": [
+      "CCOB_QUANTIFIED_LEVEL_COMPOSITION_POSITION",
+      "CCYB_STATE_TRANSITION_OR_TRIGGER",
+      "TLAC_FUNCTION_OR_CAPACITY_REGIME_SUBJECT_SCOPE"
+    ],
+    "exclusive_single_facet_authority": false,
+    "concept_identity_authority": false,
+    "policy_adequacy_authority": false,
+    "terminal_authority": false
+  },
+  "preservation": {
+    "remaining_boundary_must_equal_predecessor": true,
+    "primary_primitive_state_must_equal_predecessor": true,
+    "scheduler_direct_route_count_must_equal_predecessor": true,
+    "scheduler_bounded_family_count_must_equal_predecessor": true,
+    "primary_internal_unsolved_count_must_remain_one": true,
+    "global_open_world_closure_must_remain_false": true,
+    "terminal_credit_delta": 0
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
