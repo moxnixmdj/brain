@@ -1,0 +1,26 @@
+name: verify-professional-quality-same-subject-current-v2
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/runtime/professional_quality_same_subject_composition_gate_v1.py
+      - canonical/tests/test_professional_quality_same_subject_composition_gate_v1.py
+      - canonical/governance/PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_REGISTRY_20261010_V1.json
+      - canonical/runtime/professional_quality_scoped_evidence_overlay_v1.py
+      - canonical/governance/PROFESSIONAL_QUALITY_SAME_SUBJECT_COMPOSITION_GATE_20261010_V2.json
+      - canonical/governance/PROFESSIONAL_QUALITY_P1_V3_DECLARED_SYSTEM_SUBJECT_20261010_V2.json
+      - canonical/governance/PROFESSIONAL_QUALITY_P1_V3_SAME_SUBJECT_ROOT_BINDING_WORKLIST_20261010_V2.json
+      - .github/workflows/verify-professional-quality-same-subject-current-v2.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Run current same-subject gate suite
+        run: python -m unittest canonical.tests.test_professional_quality_same_subject_composition_gate_v1 -v
