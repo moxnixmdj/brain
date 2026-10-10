@@ -51,6 +51,14 @@ WORK_TYPES = frozenset(
 LOAD_BEARING_PRIMARY_LANE = "LOAD_BEARING_PRIMARY"
 SECONDARY_CAPABILITY_LANE = "SECONDARY_CAPABILITY"
 OPEN_WORLD_EVIDENCE_FRONTIER = "OPEN_WORLD_EVIDENCE_FRONTIER"
+NEW_PRIMITIVE_ADMISSION_FIELDS = (
+    "exact_unsatisfied_predicate",
+    "existing_mechanisms_searched",
+    "existing_mechanism_unsoundness_reasons",
+    "independently_verified_missing_primitive_or_counterexample",
+    "minimum_new_primitive_scope",
+    "falsifier_and_promotion_criteria",
+)
 CURRENT_TERMINAL_AUTHORITY = (
     Path(__file__).resolve().parents[1] / "governance" / "CURRENT_TERMINAL_AUTHORITY.json"
 )
@@ -63,6 +71,37 @@ def _ids(raw: Mapping[str, Any], key: str) -> list[str]:
     if not isinstance(value, list) or not all(isinstance(x, str) and _s(x) for x in value):
         raise CapabilityFirstSchedulerError(key.upper() + "_INVALID")
     return sorted(set(_s(x) for x in value))
+
+
+def _new_primitive_admission(
+    raw: Mapping[str, Any],
+) -> tuple[bool, list[str]]:
+    """Require proof before treating a residual as a genuinely new primitive gap."""
+    if raw.get("claims_new_primitive") is not True:
+        return True, []
+
+    missing: list[str] = []
+    if not _s(raw.get("exact_unsatisfied_predicate")):
+        missing.append("EXACT_UNSATISFIED_PREDICATE")
+
+    mechanisms = _ids(raw, "existing_mechanisms_searched")
+    if not mechanisms:
+        missing.append("EXISTING_MECHANISMS_SEARCHED")
+
+    reasons = raw.get("existing_mechanism_unsoundness_reasons")
+    if not isinstance(reasons, Mapping):
+        missing.append("WHY_EACH_EXISTING_MECHANISM_CANNOT_SOUNDLY_CLOSE_THE_PREDICATE")
+    elif mechanisms and any(not _s(reasons.get(mid)) for mid in mechanisms):
+        missing.append("WHY_EACH_EXISTING_MECHANISM_CANNOT_SOUNDLY_CLOSE_THE_PREDICATE")
+
+    if not _s(raw.get("independently_verified_missing_primitive_or_counterexample")):
+        missing.append("INDEPENDENTLY_VERIFIED_MISSING_PRIMITIVE_OR_COUNTEREXAMPLE")
+    if not _s(raw.get("minimum_new_primitive_scope")):
+        missing.append("MINIMUM_NEW_PRIMITIVE_SCOPE")
+    if not _s(raw.get("falsifier_and_promotion_criteria")):
+        missing.append("FALSIFIER_AND_PROMOTION_CRITERIA")
+
+    return not missing, missing
 
 
 def _current_open_obligation_count() -> int:
@@ -187,6 +226,10 @@ def _eligible(
     if work_type not in WORK_TYPES:
         raise CapabilityFirstSchedulerError("WORK_TYPE_INVALID")
 
+    new_primitive_ok, _ = _new_primitive_admission(raw)
+    if not new_primitive_ok:
+        return False, "DEMOTED_UNPROVED_NEW_PRIMITIVE_CLAIM"
+
     # Open-world incompleteness is not, by itself, a capability defect. Once a
     # general mechanism can acquire minimum task-local information on demand,
     # endless global ontology/evidence completion must not consume primary
@@ -258,6 +301,7 @@ def rank_work(
         seen.add(work_id)
 
         eligible, eligibility = _eligible(raw, checkpoint_open_obligation_count)
+        new_primitive_proof_complete, new_primitive_missing = _new_primitive_admission(raw)
         shared_residual_score, shared_residual_cause_ids = _shared_residual_fanout(raw)
         capability_score = _score(raw) if eligible else Fraction(0)
         if not eligible:
@@ -277,6 +321,9 @@ def rank_work(
                 "benchmark_role": _s(raw.get("benchmark_role")) or None,
                 "scheduling_lane": _s(raw.get("scheduling_lane")) or None,
                 "frontier_class": _s(raw.get("frontier_class")) or None,
+                "claims_new_primitive": raw.get("claims_new_primitive") is True,
+                "new_primitive_proof_complete": new_primitive_proof_complete,
+                "new_primitive_missing_requirements": new_primitive_missing,
                 "task_local_counterexample_ids": _ids(
                     raw, "task_local_counterexample_ids"
                 ),
@@ -326,11 +373,16 @@ def rank_work(
             "REUSABLE_CAPABILITY_RESOURCE_LEVERAGE_IS_PRIMARY__"
             "CURRENT_R2_SHARED_CAUSE_FANOUT_BREAKS_EQUAL_CAPABILITY_TIES__"
             "OPUS_CHECKPOINT_LEVERAGE_IS_TERTIARY_AUDIT_SIGNAL__"
-            "BENCHMARK_BOOKKEEPING_REMAINS_DEMOTED"
+            "BENCHMARK_BOOKKEEPING_REMAINS_DEMOTED__"
+            "NEW_PRIMITIVE_CLAIMS_REQUIRE_REUSE_FIRST_EXHAUSTION_PROOF"
         ),
         "checkpoint_policy": (
             "OPEN_CHECKPOINT_OBLIGATIONS_DO_NOT_DEMOTE_GENERAL_CAPABILITY_WORK__"
             "CHECKPOINT_SCORE_BREAKS_TIES_ONLY"
+        ),
+        "reuse_first_policy": (
+            "UNSUPPORTED_NEW_PRIMITIVE_CLAIMS_ARE_DEMOTED_TO_REUSE_ADAPTATION_"
+            "PROMOTION_VERIFICATION_OR_EVIDENCE_ACQUISITION"
         ),
         "open_world_frontier_policy": (
             "GLOBAL_OPEN_WORLD_EVIDENCE_INCOMPLETENESS_IS_NOT_A_PRIMARY_"
@@ -348,6 +400,9 @@ def rank_work(
                 "benchmark_role": row["benchmark_role"],
                 "scheduling_lane": row["scheduling_lane"],
                 "frontier_class": row["frontier_class"],
+                "claims_new_primitive": row["claims_new_primitive"],
+                "new_primitive_proof_complete": row["new_primitive_proof_complete"],
+                "new_primitive_missing_requirements": row["new_primitive_missing_requirements"],
                 "task_local_counterexample_ids": row[
                     "task_local_counterexample_ids"
                 ],
