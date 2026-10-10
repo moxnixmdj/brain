@@ -189,6 +189,8 @@ class ReachedEscapeConstructionInvariantBoundaryV1Tests(unittest.TestCase):
                 "candidate_sha256": request["candidate_sha256"],
                 "candidate_kind": request["candidate_kind"],
                 "verified_properties": [request["required_verified_property"]],
+                "independent_verification": True,
+                "verifier_id": "TEST_INDEPENDENT_REACHED_ESCAPE_VERIFIER",
                 "promotion_authority": False,
                 "acceptance_authority": False,
                 "terminal_authority": False,
