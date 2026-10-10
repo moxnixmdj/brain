@@ -33,6 +33,12 @@ R3_LEAVES = {"PQ::R3_REALIZATION_OBSERVATION::EXECUTION"}
 R3_SOURCE_SCHEMA = "PROJECT_BRAIN_NATIVE_ARTIFACT_RENDER_PRESERVATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1"
 R3_PREFLIGHT_SCHEMA = "PROJECT_BRAIN_NATIVE_ARTIFACT_RENDER_PRESERVATION_PREFLIGHT_V1"
 
+R11_KIND = "CLEAN_EVALUATION_LANE_POST_IDENTITY_DISCOVERY_REVOCATION"
+R11_ROOT = "R11_ADAPTIVE_INTEGRITY_SECURITY"
+R11_LEAVES = {"PQ::R11_ADAPTIVE_INTEGRITY_SECURITY::EXECUTION"}
+R11_SOURCE_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R11_EVALUATION_FIREWALL_SCOPED_VERIFY_V1"
+R11_GOVERNANCE_SCHEMA = "PROJECT_BRAIN_EVALUATION_INFORMATION_FIREWALL_GOVERNANCE_V1"
+
 
 def git_blob_sha(path: Path) -> str:
     data = path.read_bytes()
@@ -225,6 +231,68 @@ def _validate_r3(
     return errors, claim_scope
 
 
+def _validate_r11(
+    entry: dict[str, Any],
+    source: dict[str, Any] | None,
+    governance: dict[str, Any] | None,
+    compiler_declared: Any,
+) -> tuple[list[str], Any]:
+    errors = _common_checks(entry, R11_ROOT, R11_LEAVES)
+    claim_scope = None
+    if source is not None:
+        if source.get("schema") != R11_SOURCE_SCHEMA:
+            errors.append("SOURCE_SCHEMA_INVALID")
+        if source.get("status") != "PASS__PINNED_EXACT_BYTES__PYCOMPILE__4_OF_4__BOUNDED_POST_IDENTITY_DISCOVERY_REVOCATION__ZERO_GLOBAL_LEAF_CREDIT":
+            errors.append("SOURCE_STATUS_NOT_ADMITTED")
+        blobs = source.get("exact_blobs")
+        if not isinstance(blobs, dict):
+            errors.append("SOURCE_EXACT_BLOBS_INVALID")
+        elif blobs.get("runtime") != compiler_declared:
+            errors.append("SOURCE_RUNTIME_MISMATCH")
+        scope = source.get("claim_scope")
+        claim_scope = scope
+        if not isinstance(scope, dict) or scope.get("kind") != R11_KIND:
+            errors.append("SOURCE_CLAIM_SCOPE_INVALID")
+        else:
+            guarantees = set(scope.get("guarantees") or [])
+            required = {
+                "POST_EXPOSURE_REPO_SEARCH_DENIED",
+                "POST_EXPOSURE_EXACT_FROZEN_BLOB_READ_ALLOWED",
+                "TASK_IDENTITY_EXPOSURE_CANNOT_REVERSE",
+                "REVOKED_DISCOVERY_CAPABILITY_CANNOT_BE_RESTORED_IN_SAME_LANE",
+            }
+            if not required <= guarantees:
+                errors.append("SOURCE_REQUIRED_FIREWALL_GUARANTEES_MISSING")
+            limitations = set(scope.get("limitations") or [])
+            if "NO_GLOBAL_R11_LEAF_OR_ROOT_CLOSURE" not in limitations:
+                errors.append("SOURCE_GLOBAL_SCOPE_LIMIT_MISSING")
+        state = source.get("current_state")
+        if not isinstance(state, dict):
+            errors.append("SOURCE_CURRENT_STATE_INVALID")
+        else:
+            for field in ("global_leaf_credit", "global_r11_root_closed", "domain_semantic_closure", "domain_execution_closure"):
+                if state.get(field) is not False:
+                    errors.append("SOURCE_GLOBAL_OVERCLAIM:" + field)
+
+    if governance is not None:
+        if governance.get("schema") != R11_GOVERNANCE_SCHEMA:
+            errors.append("FIREWALL_GOVERNANCE_SCHEMA_INVALID")
+        if governance.get("status") != "ACTIVE_FAIL_CLOSED__POST_IDENTITY_DISCOVERY_REVOCATION__ZERO_CREDIT":
+            errors.append("FIREWALL_GOVERNANCE_STATUS_INVALID")
+        if governance.get("runtime") != "canonical/runtime/evaluation_information_firewall_v1.py":
+            errors.append("FIREWALL_RUNTIME_PATH_MISMATCH")
+        hard_rules = set(governance.get("hard_rules") or [])
+        required_rules = {
+            "TASK_IDENTITY_EXPOSURE_IS_MONOTONIC_WITHIN_A_LANE",
+            "REVOKED_CAPABILITIES_CANNOT_BE_RESTORED_WITHIN_THE_SAME_LANE",
+            "UNKNOWN_CAPABILITY_FAILS_CLOSED",
+            "NO_CAPABILITY_OR_FAMILY_CREDIT_FROM_FIREWALL_STATE",
+        }
+        if not required_rules <= hard_rules:
+            errors.append("FIREWALL_REQUIRED_RULES_MISSING")
+    return errors, claim_scope
+
+
 def validate_entry(entry: dict[str, Any], *, repo_root: Path = ROOT) -> dict[str, Any]:
     errors: list[str] = []
     if not isinstance(entry, dict):
@@ -258,6 +326,8 @@ def validate_entry(entry: dict[str, Any], *, repo_root: Path = ROOT) -> dict[str
         handler_errors, claim_scope = _validate_r7(entry, source, verifier, compiler_declared)
     elif kind == R3_KIND:
         handler_errors, claim_scope = _validate_r3(entry, source, verifier, compiler_declared)
+    elif kind == R11_KIND:
+        handler_errors, claim_scope = _validate_r11(entry, source, verifier, compiler_declared)
     else:
         handler_errors, claim_scope = ["CLAIM_KIND_UNSUPPORTED"], None
     errors.extend(handler_errors)
