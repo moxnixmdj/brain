@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R10_CONSTITUTION_COVER_VERIFY_20261010_V3",
+  "date": "2026-10-10",
+  "status": "PASS__PROPERTY_TRUTH_FRONTIER_BASE__8_OF_8__11_OF_11_CONSTITUTION_LAWS_MAPPED__9_OF_9_PROOF_SLOTS_JUSTIFIED__17_OF_17_CANONICAL_R10_DEFEATERS_ENFORCED_WHEN_DETECTED__ZERO_PROPERTY_CREDIT",
+  "base_commit": "d680992ff65f94395a5b4db356ac7e0f8481f5b9",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/professional_quality_r10_constitution_cover_v1.py",
+      "git_blob_sha": "20f9274af1feace53590e41a10b57869f42f27ce"
+    },
+    "tests": {
+      "path": "canonical/tests/test_professional_quality_r10_constitution_cover_v1.py",
+      "git_blob_sha": "1db7e4a5351e61a439bbaead6363190e455f6407"
+    }
+  },
+  "exact_dependencies": {
+    "constitution": "a087db2645b03e589965d50eb51d32a3049dc2fe",
+    "proof_slot_verifier": "04957e2e385f8169e7d8aff5b0e1f2009e848666",
+    "integrated_execution_guard": "83ae7bc81660bd4be7f66b9454de5d007c0db959",
+    "leaf_manifest": "a7cad32c9fd969ff2c3857bb924c7bd746237ec2",
+    "defeater_catalog": "8b92e5cf76f767054f55414b87014e03d43460b8"
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "py_compile": "PASS",
+    "tests_run": 8,
+    "tests_passed": 8,
+    "tests_failed": 0,
+    "transcript_sha256": "b0c3cdfeeb97bd3a316c499e07280498e588d6c0a682ff2677b975a93e606dd9"
+  },
+  "proves": [
+    "ALL_11_CURRENT_R10_CONSTITUTION_LAWS_HAVE_EXPLICIT_EXECUTABLE_MECHANISM_MAPPING",
+    "ALL_9_STRUCTURAL_PROOF_SLOTS_ARE_JUSTIFIED_BY_THE_CONSTITUTION",
+    "NO_PROOF_SLOT_IS_ORPHANED",
+    "ALL_17_CANONICAL_R10_DEFEATERS_MATCH_THE_CURRENT_INTEGRATED_GUARD",
+    "NEW_LOAD_BEARING_CONSTITUTION_LAW_SLOT_OR_DEFEATER_FAILS_CLOSED_UNTIL_MAPPED"
+  ],
+  "open_residual": {
+    "blocker": "UNDERLYING_SLOT_EVIDENCE_TRUTH_AND_CROSS_ROOT_DETECTOR_COMPLETENESS",
+    "structural_policy_compliance_complete": true,
+    "underlying_fact_truth_authority": false,
+    "detection_completeness_proved": false,
+    "whole_leaf_property_truth_proved": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
