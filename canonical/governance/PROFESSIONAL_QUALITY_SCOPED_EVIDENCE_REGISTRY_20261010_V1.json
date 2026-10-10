@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_REGISTRY_V1",
   "date": "2026-10-10",
-  "status": "ACTIVE__SIX_CLAIM_SCOPED_CAPABILITIES__ZERO_GLOBAL_LEAF_CREDIT",
+  "status": "ACTIVE__SEVEN_CLAIM_SCOPED_CAPABILITIES__ZERO_GLOBAL_LEAF_CREDIT",
   "entries": [
     {
       "scope_id": "PQ::R7::SINGLE_EDIT::UVCK_DEFEATER_ORDER_REPAIR",
@@ -155,12 +155,37 @@
       "semantic_leaf_credit": false,
       "execution_leaf_credit": false,
       "terminal_credit_delta": 0
+    },
+    {
+      "scope_id": "PQ::R5::EVALUATOR_UNCERTAINTY::CONDITIONAL_ROBUST_MARGIN",
+      "root_id": "R5_EVALUATOR_REFERENCE",
+      "contributes_to_leaf_ids": [
+        "PQ::R5_EVALUATOR_REFERENCE::EXECUTION"
+      ],
+      "claim_kind": "CONDITIONAL_EVALUATOR_UNCERTAINTY_ROBUST_MARGIN_CERTIFICATE",
+      "source_receipt": {
+        "path": "canonical/verification/GDPVAL_HYBRID_EVALUATOR_UNCERTAINTY_SPRITE_VERIFICATION_20261008_V1.json",
+        "git_blob_sha": "e852c4fbc14147c17469f1a4ede4e274d768bbf7"
+      },
+      "reusable_compiler": {
+        "path": "canonical/runtime/gdpval_hybrid_evaluator_uncertainty_v1.py",
+        "git_blob_sha": "7adf19997ec90913fb70e618eb4e3adda055deac"
+      },
+      "compiler_verification": {
+        "path": "canonical/governance/GDPVAL_HYBRID_EVALUATOR_UNCERTAINTY_20261008_V1.json",
+        "git_blob_sha": "1b61fa4eb98e0039a46f349d31da725bb02c16e0"
+      },
+      "global_leaf_closure": false,
+      "global_root_closure": false,
+      "semantic_leaf_credit": false,
+      "execution_leaf_credit": false,
+      "terminal_credit_delta": 0
     }
   ],
   "admission_law": "CLAIM_SCOPED_EVIDENCE_MAY_BE_REUSED_ONLY_INSIDE_ITS_PROVED_SCOPE_AND_NEVER_COUNTS_AS_GLOBAL_LEAF_OR_ROOT_CLOSURE",
   "hard_nonclaims": [
-    "NO_GLOBAL_R3_R4_R6_R7_R10_OR_R11_LEAF_CLOSURE",
-    "NO_GLOBAL_R3_R4_R6_R7_R10_OR_R11_ROOT_CLOSURE",
+    "NO_GLOBAL_R3_R4_R5_R6_R7_R10_OR_R11_LEAF_CLOSURE",
+    "NO_GLOBAL_R3_R4_R5_R6_R7_R10_OR_R11_ROOT_CLOSURE",
     "NO_DOMAIN_SEMANTIC_CLOSURE",
     "NO_DOMAIN_EXECUTION_CLOSURE",
     "NO_TERMINAL_CREDIT"
