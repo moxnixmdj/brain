@@ -75,5 +75,35 @@
     "capability_credit_delta": 0,
     "ownership_credit_delta": 0,
     "terminal_credit_delta": 0
+  },
+  "r2_shared_cause_ledger": {
+    "pointer": "canonical/governance/CURRENT_R2_SHARED_CAUSE_RESIDUAL_LEDGER.json",
+    "runtime": "canonical/runtime/r2_semantic_residual_ledger_v1.py",
+    "source_authority": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+    "fail_closed_on_unclassified_residual": true,
+    "fail_closed_on_unknown_cause_id": true
+  },
+  "terminal_autopilot_policy": {
+    "role": "SUBORDINATE_CHECKPOINT_AUDITOR",
+    "new_dispatch_requires_explicit_capability_first_checkpoint_admission": true,
+    "verification_of_already_present_results_may_continue": true,
+    "promotion_remains_separately_authorized": true,
+    "default_repo_mode_new_dispatch": "PARKED"
+  },
+  "r3_state": {
+    "status": "SUFFICIENT_CONTROL_LOOP_CLOSURE_UNDER_AVAILABLE_EVIDENCE",
+    "observability_boundary_policy": "PARK_AND_REOPEN_ON_NEW_EFFECT_DISTINGUISHING_EVIDENCE"
+  },
+  "inheritance": {
+    "preserved_from_v4": {
+      "activation_path": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V4.json",
+      "activation_git_blob_sha": "9c286a67fc5e61dc671682771d5590ce0cbfd6b7",
+      "fields": [
+        "r2_shared_cause_ledger",
+        "terminal_autopilot_policy",
+        "r3_state"
+      ]
+    },
+    "v5_role": "GOVERNANCE_PRECONDITION_DESIGN_SOURCE__V6_SUPERSEDES_V5_WITH_MECHANICAL_ENFORCEMENT"
   }
 }
