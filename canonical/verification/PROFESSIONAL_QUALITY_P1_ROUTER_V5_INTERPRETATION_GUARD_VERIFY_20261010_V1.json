@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_P1_ROUTER_V5_INTERPRETATION_GUARD_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__REMOTE_ISOLATED_EXACT_BRANCH_BYTES__7_OF_7__REAL_AMBIGUITY_CONTROLLER_AND_INFORMATION_FRONTIER__ZERO_ROOT_OR_QUALITY_CREDIT",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/professional_quality_p1_router_v5.py",
+      "git_blob_sha": "17221f5551b110b79989ec6e8f8a61d435459b7c"
+    },
+    "tests": {
+      "path": "canonical/tests/test_professional_quality_p1_router_v5.py",
+      "git_blob_sha": "30c9c7f92328f981e58005c1802b14de346efd7d"
+    },
+    "ambiguity_controller": {
+      "path": "canonical/runtime/semantic_ambiguity_control_v1.py",
+      "git_blob_sha": "d9a29eb161a0f3b7e14334857f548e416bb460a0"
+    },
+    "information_frontier": {
+      "path": "canonical/runtime/semantic_information_frontier_v1.py",
+      "git_blob_sha": "b16e2c40dec3030868c37adad880b8601f565e46"
+    }
+  },
+  "carrier": {
+    "name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/pq-p1-v5-verify"
+  },
+  "replay": {
+    "tests_run": 7,
+    "tests_passed": 7,
+    "tests_failed": 0,
+    "ambiguity_controller": "REAL_EXACT_BLOB",
+    "information_frontier": "REAL_EXACT_BLOB",
+    "router_v4_dependency": "STUBBED_AT_DELEGATION_BOUNDARY__WRAPPER_ONLY_REPLAY",
+    "inherited_v4_evidence": "canonical/verification/PROFESSIONAL_QUALITY_P1_ROUTER_V4_INHERITED_REGRESSION_VERIFY_20261010_V1.json"
+  },
+  "proves": [
+    "INCOMPLETE_INTERPRETATION_UNIVERSE_FAILS_CLOSED",
+    "TERMINALLY_EQUIVALENT_COMPLETE_INTERPRETATIONS_DELEGATE_WITH_CONTENT_BOUND_MODEL",
+    "DECISION_RELEVANT_SEPARABLE_AMBIGUITY_RETURNS_MINIMUM_DISCRIMINATOR",
+    "INSEPARABLE_USER_INTENT_AMBIGUITY_RETURNS_MINIMUM_CLARIFICATION",
+    "EXTERNAL_WORLD_UNDERDETERMINATION_DOES_NOT_MISROUTE_TO_USER_CLARIFICATION",
+    "INTERPRETATION_MODEL_BYTES_ARE_CONTENT_BOUND",
+    "NO_ROOT_SUBJECT_BINDING_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY_IS_CREATED"
+  ],
+  "residual_after_verification": "AUTHENTICATED_COMPLETENESS_OF_THE_INTERPRETATION_UNIVERSE_FOR_THE_EXACT_TARGET_INSTANCE_IS_NOT_CREATED_BY_THE_CONTROLLER_OR_V5_WRAPPER",
+  "hard_nonclaims": [
+    "NO_SELF_CERTIFIED_HYPOTHESIS_SET_COMPLETENESS",
+    "NO_R1_ROOT_SUBJECT_BINDING",
+    "NO_GLOBAL_R1_ROOT_OR_LEAF_CLOSURE",
+    "NO_FULL_V5_PLUS_REAL_V4_END_TO_END_REPLAY_IN_THIS_RECEIPT",
+    "NO_LIVE_DEFAULT_PROMOTION",
+    "NO_QUALITY_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "root_subject_binding_authority": false,
+  "quality_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
