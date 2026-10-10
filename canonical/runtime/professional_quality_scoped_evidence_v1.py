@@ -50,6 +50,11 @@ R10_LEAVES = {"PQ::R10_ANALYSIS_DECISION::EXECUTION"}
 R10_SOURCE_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R10_DECISION_SUFFICIENCY_SCOPED_VERIFY_V1"
 R10_HISTORY_SCHEMA = "PROJECT_BRAIN_ONE_SHOT_DECISION_SUFFICIENT_GATE_VERIFY_20261009_V2"
 
+R10_SEMANTIC_KIND = "LOSSLESS_MINIMUM_INFORMATION_DECISION_SUFFICIENCY_SEMANTICS"
+R10_SEMANTIC_LEAVES = {"PQ::R10_ANALYSIS_DECISION::SEMANTIC"}
+R10_SEMANTIC_SOURCE_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R10_DECISION_SEMANTIC_VERIFY_V1"
+R10_SEMANTIC_SCOPE_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R10_DECISION_SEMANTIC_SCOPE_V1"
+
 R6_KIND = "CONTENT_ADDRESSED_SCOPE_MATCHED_LEAF_EVIDENCE_ADMISSION_WITH_STATUS_NONAUTHORITY"
 R6_ROOT = "R6_EVIDENCE_GROUNDING_DEPENDENCE"
 R6_LEAVES = {
@@ -455,6 +460,104 @@ def _validate_r11(
         }
         if not required_rules <= hard_rules:
             errors.append("FIREWALL_REQUIRED_RULES_MISSING")
+    return errors, claim_scope
+
+
+def _validate_r10_semantic(
+    entry: dict[str, Any],
+    source: dict[str, Any] | None,
+    verifier: dict[str, Any] | None,
+    compiler_declared: Any,
+    repo_root: Path,
+) -> tuple[list[str], Any]:
+    errors = _common_checks(entry, R10_ROOT, R10_SEMANTIC_LEAVES)
+    claim_scope = None
+    scope, e = _read_bound(repo_root, entry.get("scope_governance"), "SCOPE_GOVERNANCE")
+    errors.extend(e)
+
+    expected_guarantees = {
+        "DECISION_SUFFICIENT_BASELINE_IS_LOSSLESS_IDENTITY_AND_CONTENT_ADDRESSED",
+        "NO_EVIDENCE_IS_OMITTED_WITHOUT_A_FUTURE_OMISSION_CERTIFICATE",
+        "MINIMUM_INFORMATION_REQUESTS_DEDUPLICATE_EVIDENCE_BLOCKERS",
+        "BROAD_ACQUISITION_IS_FORBIDDEN_WITHOUT_MINIMALITY_PROOF",
+        "FULL_EMPIRICAL_EVALUATION_REMAINS_LAST",
+        "PROVIDERS_CANNOT_MUTATE_VERIFICATION_AUTHORITY",
+        "FALSE_PROGRESS_WITH_UNCHANGED_FRONTIER_FAILS_CLOSED",
+        "STRUCTURED_R2_ACQUISITION_SURVIVES_MINIMUM_INFORMATION_COMPILATION",
+    }
+    expected_limits = {
+        "NO_GENERAL_PROFESSIONAL_RISK_POLICY_CLOSURE",
+        "NO_NORMATIVE_AGGREGATION_CLOSURE",
+        "NO_MODEL_MULTIPLICITY_DECISION_CLOSURE",
+        "NO_GENERAL_SEMANTIC_COMPRESSION_CLAIM",
+        "NO_GLOBAL_R10_LEAF_OR_ROOT_CLOSURE",
+    }
+
+    if source is not None:
+        if source.get("schema") != R10_SEMANTIC_SOURCE_SCHEMA:
+            errors.append("SOURCE_SCHEMA_INVALID")
+        if source.get("status") != "PASS__PINNED_EXACT_BYTES__PYCOMPILE__6_OF_6__BOUNDED_R10_DECISION_SUFFICIENCY_SEMANTICS__ZERO_GLOBAL_LEAF_CREDIT":
+            errors.append("SOURCE_STATUS_NOT_ADMITTED")
+        exact = source.get("exact_blobs")
+        if not isinstance(exact, dict) or exact.get("runtime") != compiler_declared:
+            errors.append("SOURCE_RUNTIME_MISMATCH")
+        replay = source.get("replay")
+        if not isinstance(replay, dict) or replay.get("tests_run") != 6 or replay.get("tests_passed") != 6 or replay.get("tests_failed") != 0:
+            errors.append("SOURCE_REPLAY_INVALID")
+        cscope = source.get("claim_scope")
+        claim_scope = cscope
+        if not isinstance(cscope, dict) or cscope.get("kind") != R10_SEMANTIC_KIND:
+            errors.append("SOURCE_CLAIM_SCOPE_INVALID")
+        else:
+            if not expected_guarantees <= set(cscope.get("guarantees") or []):
+                errors.append("SOURCE_REQUIRED_GUARANTEES_MISSING")
+            if not expected_limits <= set(cscope.get("limitations") or []):
+                errors.append("SOURCE_REQUIRED_LIMITATIONS_MISSING")
+        if source.get("semantic_leaf_credit") is not False:
+            errors.append("SOURCE_SEMANTIC_LEAF_CREDIT_FORBIDDEN")
+        if source.get("global_leaf_closure") is not False:
+            errors.append("SOURCE_GLOBAL_LEAF_CLOSURE_FORBIDDEN")
+
+    if verifier is not None:
+        if verifier.get("schema") != R10_SEMANTIC_SOURCE_SCHEMA:
+            errors.append("VERIFIER_SCHEMA_INVALID")
+        exact = verifier.get("exact_blobs")
+        if not isinstance(exact, dict) or exact.get("runtime") != compiler_declared:
+            errors.append("VERIFIER_RUNTIME_MISMATCH")
+
+    if scope is not None:
+        if scope.get("schema") != R10_SEMANTIC_SCOPE_SCHEMA:
+            errors.append("SCOPE_SCHEMA_INVALID")
+        if scope.get("status") != "ACTIVE_SCOPED_LOSSLESS_MINIMUM_INFORMATION_DECISION_SUFFICIENCY_SEMANTICS__6_OF_6_INDEPENDENT_REPLAY__ZERO_GLOBAL_LEAF_CREDIT":
+            errors.append("SCOPE_STATUS_INVALID")
+        components = scope.get("exact_components")
+        if not isinstance(components, dict):
+            errors.append("SCOPE_COMPONENTS_INVALID")
+        else:
+            runtime = components.get("runtime")
+            verification = components.get("verification")
+            source_receipt = components.get("source_receipt")
+            history = components.get("historical_design_verification")
+            if not isinstance(runtime, dict) or runtime.get("git_blob_sha") != compiler_declared:
+                errors.append("SCOPE_RUNTIME_MISMATCH")
+            source_declared = (entry.get("source_receipt") or {}).get("git_blob_sha") if isinstance(entry.get("source_receipt"), dict) else None
+            if not isinstance(verification, dict) or verification.get("git_blob_sha") != source_declared:
+                errors.append("SCOPE_VERIFICATION_MISMATCH")
+            source_exact = source.get("exact_blobs") if isinstance(source, dict) else None
+            if not isinstance(source_receipt, dict) or not isinstance(source_exact, dict) or source_receipt.get("git_blob_sha") != source_exact.get("scoped_source"):
+                errors.append("SCOPE_SCOPED_SOURCE_MISMATCH")
+            if not isinstance(history, dict) or not isinstance(source_exact, dict) or history.get("git_blob_sha") != source_exact.get("historical_design_verification"):
+                errors.append("SCOPE_HISTORY_MISMATCH")
+        if not expected_guarantees <= set(scope.get("guarantees") or []):
+            errors.append("SCOPE_REQUIRED_GUARANTEES_MISSING")
+        if not expected_limits <= set(scope.get("limitations") or []):
+            errors.append("SCOPE_REQUIRED_LIMITATIONS_MISSING")
+        if claim_scope is None:
+            claim_scope = {
+                "kind": R10_SEMANTIC_KIND,
+                "guarantees": sorted(expected_guarantees),
+                "limitations": sorted(expected_limits),
+            }
     return errors, claim_scope
 
 
@@ -1418,6 +1521,10 @@ def validate_entry(entry: dict[str, Any], *, repo_root: Path = ROOT) -> dict[str
         )
     elif kind == R11_KIND:
         handler_errors, claim_scope = _validate_r11(entry, source, verifier, compiler_declared)
+    elif kind == R10_SEMANTIC_KIND:
+        handler_errors, claim_scope = _validate_r10_semantic(
+            entry, source, verifier, compiler_declared, repo_root
+        )
     elif kind == R10_KIND:
         handler_errors, claim_scope = _validate_r10(entry, source, verifier, compiler_declared)
     elif kind == R6_KIND:
