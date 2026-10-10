@@ -21,13 +21,19 @@
     "canonical/runtime/r3_improvement_queue_driver_v1.py": "870cd665fffb5398e452b4ede81e54adbe2d9f0d",
     "canonical/runtime/r3_independent_learning_verifier_v1.py": "b38b5315ef79a215976144866514cb2a95076c9e",
     "canonical/runtime/r3_distinguishing_evidence_acquisition_v1.py": "81abd20f37b3a22bd6a7b97e3a71d6a1e81c6f76",
-    "canonical/runtime/r3_retained_distinguishing_evidence_provider_v1.py": "c713276a1dafa33b233982a4257167757a348a69"
+    "canonical/runtime/r3_retained_distinguishing_evidence_provider_v1.py": "c713276a1dafa33b233982a4257167757a348a69",
+    "canonical/runtime/r3_bound_success_adapter_v1.py": "8c73e1ab3486df9ed56fff778ec35401720eb1e7",
+    "canonical/runtime/r3_raw_success_adapter_v1.py": "80a2599a31501db18754e913b763254966b4923e",
+    "canonical/runtime/r3_checkpoint_reconstruction_success_adapter_v1.py": "e1df1252ffe356426a7840e5b6a8334d1a2e8a37",
+    "canonical/runtime/r3_structural_bound_success_adapter_v1.py": "1329f9c8f3d854db3b1dbf1373fecd20cbf8aba9",
+    "canonical/runtime/r3_structural_bound_rule_acquisition_v1.py": "a6b6ab5b008d0769a4e20cc66f791f5261267765"
   },
   "proof_dependency_blobs": {
     "canonical/runtime/executable_skill_verification_authenticator_v1.py": "c0a9a991726294cc7e34a5453533ce92631f0e11",
     "canonical/runtime/universal_solver_episode_verification_authenticator_v1.py": "6a2fc8f26d1908eb7a35006f3a550fe2cd55c171",
     "canonical/runtime/r3_bound_success_checkpoint_verifier_v1.py": "dc1412451d3dbc6747fd51388137a3ac1bba0d4b",
-    "canonical/runtime/r3_raw_success_checkpoint_verifier_v1.py": "3afceda23369a23b2619aabdc8a06f4e749be6c5"
+    "canonical/runtime/r3_raw_success_checkpoint_verifier_v1.py": "3afceda23369a23b2619aabdc8a06f4e749be6c5",
+    "canonical/runtime/R3_STRUCTURAL_BOUND_ADAPTER_RULES_V1.json": "aa23f701f1089958b57ae5906f66b01454f2b219"
   },
   "proof_claim": "ON_EXACT_BOUND_BYTES_EVERY_DURABLE_EPISODE_OR_SKILL_PROMOTION_PATH_REQUIRES_INDEPENDENT_VERIFICATION_AND_REAUTHENTICATION; PROVIDER_AUTHORITY_ESCALATION_OR_VERIFIER_AUTHORITY_REWRITE_FAILS_CLOSED",
   "terminal_credit_delta": 0
