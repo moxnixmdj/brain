@@ -1,19 +1,19 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_LIVE_WORK_FRONTIER_V1",
   "date": "2026-10-10",
-  "status": "CURRENT_POST_COMPOSITION_FRONTIER__PROFESSIONAL_SCOPE_24_OF_24__PROPERTY_TRUTH_4_OF_24__R1_R7_R10_R12_EXECUTION_CLOSED__EIGHT_EXECUTION_LEAVES_OPEN__TWELVE_SEMANTIC_LEAVES_REDUCED_TO_CLAIM_SCOPED_TOTALITY_REUSE__GAP_A_GAP_B_BYTES_PARALLEL_EVIDENCE__ZERO_GLOBAL_CREDIT",
-  "frontier_id": "LIVE_WORK_FRONTIER_20261010_PROF24_PROPERTY_TRUTH_4_V19",
+  "status": "CURRENT_POST_COMPOSITION_FRONTIER__PROFESSIONAL_SCOPE_24_OF_24__PROPERTY_TRUTH_4_OF_24__EIGHT_EXECUTION_LEAVES_OPEN__TWELVE_SEMANTIC_LEAVES_REDUCED_TO_CLAIM_SCOPED_TOTALITY_REUSE__ESCAPE_PROJECTED_GAP_A_12__ACTIVE_GAP_B_0__TB_PARKED__BYTES_AND_GAP_A_PARALLEL_EVIDENCE__ZERO_GLOBAL_CREDIT",
+  "frontier_id": "LIVE_WORK_FRONTIER_20261010_PROF24_PROPERTY_TRUTH_4_GAPB0_V20",
   "scope": {
-    "base_main_commit": "3303bcc94c43081cc6da555ad4549e2183d911a5",
+    "base_main_commit": "4520b46b4a8a66f66add0b8fb54977dcffd0168f",
     "completeness_semantics": "COMPLETE_FOR_EXPLICIT_CURRENT_ACTIONABLE_OR_SCHEDULABLE_WORK_EXPOSED_BY_THE_BOUND_CURRENT_AUTHORITY_SOURCES__NOT_COMPLETE_FOR_UNKNOWN_FUTURE_WORK_OR_UNDISCOVERED_CAPABILITIES",
     "source_set": [
       {
         "path": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
-        "git_blob_sha": "06b58989ac040f82554a28400ae8da38de96e4bc"
+        "git_blob_sha": "ef3dc6cce1e54a6b1fa31f10d458c4d227160d30"
       },
       {
         "path": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
-        "git_blob_sha": "c6bf0e57d0660e0a804ae0ab31d3bae8b51eed59"
+        "git_blob_sha": "78bf42381101b23d6b1537d0ddfc4956841e17a7"
       },
       {
         "path": "canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json",
@@ -33,7 +33,7 @@
       },
       {
         "path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
-        "git_blob_sha": "af80fd1c9845730cbbdd68413dcb9427428427b5"
+        "git_blob_sha": "ee03f3fe71383d1bf12e0797bf568e6b5eeeaca4"
       }
     ]
   },
@@ -90,9 +90,9 @@
       "vector_evidence": {},
       "read_only_evidence": {
         "source": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
-        "source_git_blob_sha": "c6bf0e57d0660e0a804ae0ab31d3bae8b51eed59",
+        "source_git_blob_sha": "78bf42381101b23d6b1537d0ddfc4956841e17a7",
         "whole_leaf_scope_complete_count": 24,
-        "property_truth_closed_count": 2,
+        "property_truth_closed_count": 4,
         "verified_property_truth_leaf_ids": [
           "PQ::R10_ANALYSIS_DECISION::EXECUTION",
           "PQ::R7_CAUSAL_PRESCRIPTIVE::EXECUTION"
@@ -110,7 +110,7 @@
         "registry_verification_v2": "canonical/verification/PROFESSIONAL_QUALITY_LEAF_REGISTRY_PROPERTY_TRUTH_VERIFY_20261010_V2.json",
         "registry_verification_v2_git_blob_sha": "bdde7b52793272623773b07bf774c0a74c6be7af",
         "verified_property_truth_leaf_count": 4,
-        "semantic_totality_reduction": "canonical/verification/PROFESSIONAL_SEMANTIC_TOTALITY_REDUCTION_VERIFY_20261010_V1.json"
+        "semantic_totality_reduction": "CLAIM_SCOPED_TOTALITY_REUSE_FOR_TWELVE_SEMANTIC_LEAVES"
       }
     },
     {
@@ -196,7 +196,7 @@
       "frontier_class": "OPEN_WORLD_EVIDENCE_FRONTIER",
       "source": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
       "causal_role": "ONE_PRIMARY_OPEN_WORLD_FINANCE_SEMANTIC_RESIDUAL",
-      "readiness": "SLEEPING_UNLESS_TASK_LOCAL_COUNTEREXAMPLE_OR_VERIFIED_DEFECT_WAKES_IT__V86_BOUND_TRUTH_REENTRY_CONSUMPTION_VERIFIED__ONE_PRIMARY_FINANCE_RESIDUAL_REMAINS",
+      "readiness": "SLEEPING_UNLESS_TASK_LOCAL_COUNTEREXAMPLE_OR_VERIFIED_DEFECT_WAKES_IT__V87_CHECKER_OWNED_RAW_SOURCE_INGESTION_RESTORED__ONE_PRIMARY_FINANCE_RESIDUAL_REMAINS",
       "claims_new_primitive": false,
       "score_state": "INELIGIBLE_WHILE_WAKE_GATE_FALSE",
       "scheduler_state": "SLEEPING",
@@ -217,7 +217,7 @@
       "vector_evidence": {},
       "read_only_evidence": {
         "source": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
-        "source_git_blob_sha": "af80fd1c9845730cbbdd68413dcb9427428427b5",
+        "source_git_blob_sha": "ee03f3fe71383d1bf12e0797bf568e6b5eeeaca4",
         "general_mechanism_closed": true,
         "finance_tail_closed": false,
         "concrete_truth_request_propagation_bound": true,
@@ -226,7 +226,8 @@
         "downstream_reverification_required": true,
         "minimum_authenticated_observation_count": 1,
         "wake_gate": false,
-        "vector_bounds_complete": false
+        "vector_bounds_complete": false,
+        "checker_owned_raw_source_ingestion_restored": true
       }
     },
     {
@@ -259,8 +260,8 @@
       "work_id": "ESCAPE_GAP_A_AUTHENTICATED_ROW_PROOFS",
       "work_type": "FALSIFICATION",
       "source": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
-      "causal_role": "TEN_INFORMATION_DEPENDENT_ROWS_REQUIRE_REAL_CURRENT_AVAILABILITY_OR_ACQUIRABILITY_EVIDENCE",
-      "readiness": "EVIDENCE_ACQUISITION_OR_FALSIFICATION_WITH_EXISTING_ADAPTER",
+      "causal_role": "TWELVE_CURRENT_ACQUISITION_ROWS_REQUIRE_AUTHENTICATED_SCOPE_COMPLETE_COMMON_POLICY_OR_SAFE_FINITE_STRICT_DISCRIMINATOR_EVIDENCE",
+      "readiness": "TWELVE_PROJECTED_GAP_A_ROWS_READY_FOR_EVIDENCE_ACQUISITION_OR_FALSIFICATION_WITH_EXISTING_ADAPTER",
       "claims_new_primitive": false,
       "score_state": "UNBOUND",
       "scheduler_state": "READY_EVIDENCE",
@@ -279,26 +280,30 @@
       "vector_evidence": {},
       "read_only_evidence": {
         "source": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
-        "source_git_blob_sha": "9d4112927880bf18132083c0e841e6133cb125ab",
-        "effective_gap_a_count": 10,
+        "source_git_blob_sha": "ef3dc6cce1e54a6b1fa31f10d458c4d227160d30",
+        "effective_gap_a_count": 12,
         "real_authenticated_row_proofs": 0,
         "existing_realization_bridge": "ESCAPE_GAP_A_POLICY_COVER_ADAPTER_ACTIVATION_20261010_V1",
         "new_primitive_established": false,
         "vector_bounds_complete": false,
-        "current_gate_status": "V6_POLICY_COVER_ADAPTER_PLUS_CURRENTNESS_AWARE_AUTHENTICATED_V5_GATE_VERIFIED__REAL_AUTHENTICATED_ROW_PROOFS_0_OF_10__ROW_PREMISES_OPEN"
+        "current_gate_status": "CURRENT_CAUSAL_PROJECTION_V6_VERIFIED__PROJECTED_GAP_A_ROWS_12__AUTHENTICATED_CURRENT_ROW_PROOFS_0_OF_13__CC_R3_OPEN",
+        "current_projection_binding": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V7.json",
+        "current_projection_binding_git_blob_sha": "2119d0bc2b5c06399da49adb5a86b4e9faf7e08f"
       }
     },
     {
       "work_id": "ESCAPE_GAP_B_STRICT_PROGRESS_ROW_PROOFS",
       "work_type": "RELIABILITY_IMPROVEMENT",
       "source": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
-      "causal_role": "TWO_CURRENT_EXECUTABLE_INTERNAL_ROWS_REQUIRE_EXECUTABLE_VERIFIED_ACTION_PLUS_WELL_FOUNDED_ACCEPTANCE_RELEVANT_STRICT_PROGRESS__TB_ROW_PARKED_UNRESOLVED_AFTER_NONCONSUMING_RANK20_V3_AND_VERIFIED_GENERAL_REPAIR",
-      "readiness": "TWO_ACTIVE_INTERNAL_ROWS_READY_FOR_READ_ONLY_STRICT_PROGRESS_EVIDENCE__TB_SCIENCE_PARKED_UNTIL_FRESH_CAPABILITY_FIRST_ADMISSION",
+      "causal_role": "ZERO_ACTIVE_GAP_B_ROWS__ONE_STRUCTURAL_TB_ROW_PARKED_UNRESOLVED_UNTIL_FRESH_CAPABILITY_FIRST_ADMISSION_AND_NEW_NONRETRY_AUTHORITY",
+      "readiness": "PARKED_ONLY__NO_ACTIVE_GAP_B_RESEARCH_NOW",
       "claims_new_primitive": false,
       "score_state": "UNBOUND",
-      "scheduler_state": "READY_EVIDENCE",
-      "prerequisites_satisfied": true,
-      "prerequisite_work_ids": [],
+      "scheduler_state": "BLOCKED",
+      "prerequisites_satisfied": false,
+      "prerequisite_work_ids": [
+        "FRESH_EXPLICIT_CAPABILITY_FIRST_ADMISSION_AND_NEW_NONRETRY_EXECUTION_AUTHORITY_FOR_FUTURE_UNEXPOSED_TB_VALIDATION_SUBJECT"
+      ],
       "mutation_keys": [
         "canonical:escape-gap-b"
       ],
@@ -307,32 +312,24 @@
       ],
       "explicit_conflict_work_ids": [],
       "evidence_conflict_keys": [],
-      "evidence_acquisition_mode": "READ_ONLY",
+      "evidence_acquisition_mode": "NONE",
       "vector_evidence_state": "PARTIAL",
       "vector_evidence": {},
       "read_only_evidence": {
         "source": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
-        "source_git_blob_sha": "d4a5283288e3477c117f1d75533d0f963abf076d",
-        "active_gap_b_count": 2,
-        "parked_unresolved_count": 1,
-        "active_gap_b_rows": [
-          "PROWORK_GDPVAL_GE_1846",
-          "CHARTOGRAPHY_TOOLS_GE_89"
-        ],
+        "source_git_blob_sha": "ef3dc6cce1e54a6b1fa31f10d458c4d227160d30",
+        "projected_gap_b_structural_count": 1,
+        "active_gap_b_count": 0,
+        "parked_gap_b_count": 1,
         "parked_rows": [
           "TB_SCIENCE_GE_58_7"
         ],
-        "real_authenticated_active_row_proofs": 0,
-        "current_gate_status": "CURRENTNESS_AWARE_AUTHENTICATED_V5_GATE_VERIFIED__ACTIVE_GAP_B_ROWS_2__TB_ROW_PARKED_UNRESOLVED",
-        "new_primitive_established": false,
-        "vector_bounds_complete": false,
-        "current_tb_git_blob_sha": "7678d9a56461b121ffd52dd4c9c8df464fda08d2",
-        "tb_current_route_reclassification": {
-          "path": "canonical/governance/ESCAPE_TB_SCIENCE_CURRENT_ROUTE_RECLASSIFICATION_20261010_V2.json",
-          "git_blob_sha": "2639f4e58ef71502707ab6b2bb37efb592b1a234",
-          "active_gap_b_membership": false,
-          "strict_progress_witness_required_now": false
-        }
+        "current_projection_binding": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V7.json",
+        "current_projection_binding_git_blob_sha": "2119d0bc2b5c06399da49adb5a86b4e9faf7e08f",
+        "public_verification": "canonical/verification/ESCAPE_PROGRESS_SHARED_GAP_AUDIT_V6_PUBLIC_VERIFY_20261010_V1.json",
+        "public_verification_git_blob_sha": "4ed53bcc8ae18caed6cc82d1460592d077d628f7",
+        "cc_r3_proved": false,
+        "vector_bounds_complete": false
       }
     },
     {
@@ -422,8 +419,8 @@
   },
   "live_selection": {
     "authorized": false,
-    "reason": "NO_COMPLETE_COMMON_CALIBRATED_VECTOR__PROPERTY_TRUTH_2_OF_24__TEN_EXECUTION_LEAVES_AND_ONE_SHARED_SEMANTIC_COMPLETENESS_PROBLEM_REMAIN__FULL_REGRESSION_AND_GAP_LANES_PARTIALLY_CALIBRATED",
-    "exact_next": "DERIVE_NEXT_HIGHEST_REUSE_EXECUTION_PROPERTY_CHALLENGE__IN_PARALLEL_BUILD_INDEPENDENT_SHARED_SEMANTIC_COMPLETENESS_BLOCKER_RECEIPT_AND_REMOTE_FULL_REGRESSION_CARRIER__CONTINUE_GAP_A_GAP_B_BYTES_NONCONFLICTING_EVIDENCE__RERUN_PARETO"
+    "reason": "NO_COMPLETE_COMMON_CALIBRATED_VECTOR__PROFESSIONAL_PROPERTY_TRUTH_4_OF_24_WITH_8_EXECUTION_AND_12_SEMANTIC_LEAVES_OPEN__ESCAPE_ACTIVE_GAP_B_ZERO__12_GAP_A_ACQUISITION_ROWS_OPEN__FULL_REGRESSION_AND_VECTOR_BOUNDS_OPEN",
+    "exact_next": "IN_PARALLEL__DEPLET_NEXT_HIGHEST_REUSE_PROFESSIONAL_EXECUTION_LEAF__INSTANTIATE_SHARED_CLAIM_SCOPED_TOTALITY_REUSE_FOR_12_SEMANTIC_LEAVES__ATTACK_12_CURRENT_GAP_A_ROWS__CONTINUE_BYTES_CURRENT_PHYSICAL_CUT__RUN_REMOTE_FULL_CURRENT_MAIN_REGRESSION__RERUN_PARETO"
   },
   "hard_nonclaims": [
     "NO_GLOBAL_UNKNOWN_WORK_COMPLETENESS_CLAIM",
