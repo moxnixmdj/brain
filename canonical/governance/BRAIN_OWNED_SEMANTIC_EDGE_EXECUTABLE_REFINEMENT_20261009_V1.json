@@ -1,0 +1,116 @@
+{
+  "schema": "PROJECT_BRAIN_EXECUTABLE_REFINEMENT_CERTIFICATE_V1",
+  "proof_class": "DECLARATIVE_BOUNDING",
+  "subject_id": "brain-owned-semantic-edge-authority",
+  "abstract_spec": {
+    "path": "canonical/governance/BRAIN_OWNED_SEMANTIC_EDGE_ABSTRACT_SPEC_20261009_V1.json",
+    "git_blob_sha": "5ec3678cec3316bbc3383b32db296227272c15b4",
+    "semantic_version": "BRAIN_OWNED_SEMANTIC_EDGE_ABSTRACT_V1"
+  },
+  "concrete_implementation": [
+    {
+      "path": "canonical/runtime/brain_owned_semantic_relation_edge_authority_v1.py",
+      "git_blob_sha": "01305c41e79189e3ea13f1a6343427ee31eda566"
+    }
+  ],
+  "state_mapping": {
+    "proved": true,
+    "mode": "STATELESS"
+  },
+  "input_binding": {
+    "proved": true,
+    "mode": "DIRECT_TYPED_MAPPING"
+  },
+  "transition_refinement": {
+    "coverage_mode": "DECLARED_FINITE_PARTITION",
+    "unsupported_behavior": "FAIL_CLOSED",
+    "classes": [
+      {
+        "case_id": "EVIDENCE_NOT_OBJECT",
+        "kind": "FAIL_CLOSED"
+      },
+      {
+        "case_id": "EVIDENCE_FIELD_SET_INVALID",
+        "kind": "FAIL_CLOSED"
+      },
+      {
+        "case_id": "EVIDENCE_SCHEMA_INVALID",
+        "kind": "FAIL_CLOSED"
+      },
+      {
+        "case_id": "PROOF_CLASS_UNSUPPORTED",
+        "kind": "FAIL_CLOSED"
+      },
+      {
+        "case_id": "SCOPE_ID_REQUIRED",
+        "kind": "FAIL_CLOSED"
+      },
+      {
+        "case_id": "DISTINCT_SOURCE_TARGET_IDS_REQUIRED",
+        "kind": "FAIL_CLOSED"
+      },
+      {
+        "case_id": "SOURCE_TARGET_SURFACES_REQUIRED",
+        "kind": "FAIL_CLOSED"
+      },
+      {
+        "case_id": "RELATION_UNSUPPORTED",
+        "kind": "FAIL_CLOSED"
+      },
+      {
+        "case_id": "EXPLICIT_DEFINITION_SOURCES_REQUIRED",
+        "kind": "FAIL_CLOSED"
+      },
+      {
+        "case_id": "DEFINITION_SOURCE_NOT_OBJECT",
+        "kind": "FAIL_CLOSED"
+      },
+      {
+        "case_id": "DEFINITION_SOURCE_FIELD_SET_INVALID",
+        "kind": "FAIL_CLOSED"
+      },
+      {
+        "case_id": "DEFINITION_SOURCE_BINDING_INVALID",
+        "kind": "FAIL_CLOSED"
+      },
+      {
+        "case_id": "SEMANTIC_IDENTITY_NOT_PROVED",
+        "kind": "FAIL_CLOSED"
+      },
+      {
+        "case_id": "NOT_ENTAILS_NOT_DERIVABLE_FROM_SEMANTIC_IDENTITY_PROOF",
+        "kind": "FAIL_CLOSED"
+      },
+      {
+        "case_id": "ENTAILS_SUCCESS",
+        "kind": "PASS"
+      }
+    ]
+  },
+  "observation_refinement": {
+    "proved": true,
+    "mode": "EXACT_GOAL_PROJECTION"
+  },
+  "nondeterminism_contract": {
+    "proved": true,
+    "mode": "DETERMINISTIC"
+  },
+  "safety_refinement": {
+    "proved": true
+  },
+  "liveness_refinement": {
+    "required": false,
+    "proved": false
+  },
+  "proof_dependencies": [
+    {
+      "path": "canonical/runtime/semantic_relation_control_v1.py",
+      "git_blob_sha": "13aa27ea19cefd8ce6059f037ff5491402d9fa68"
+    },
+    {
+      "path": "canonical/runtime/semantic_relation_entailment_dag_v1.py",
+      "git_blob_sha": "3e092ba1581f674c1302288b2800771a81b5bb02"
+    }
+  ],
+  "terminal_credit_delta": 0
+}

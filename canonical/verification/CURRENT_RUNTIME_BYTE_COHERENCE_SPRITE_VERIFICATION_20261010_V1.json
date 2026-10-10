@@ -1,0 +1,136 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_RUNTIME_BYTE_COHERENCE_VERIFICATION_V1",
+  "date": "2026-10-10",
+  "status": "CURRENT_TARGET_BYTES_EXECUTED__BOUNDED_COMPONENT_SURFACES_GREEN",
+  "subject": "CURRENT_TERMINAL_AUTHORITY_RUNTIME_BYTE_BINDING_COHERENCE",
+  "carrier": {
+    "sprite": "brain-live-runtime-v1-verify-20261008",
+    "sprite_id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13",
+    "incremental_spend_usd": 0,
+    "workdirs": [
+      "/home/sprite/current-byte-runtime-coherence-verify",
+      "/home/sprite/current-byte-runtime-coherence-verify-v2"
+    ]
+  },
+  "exact_runtime_blobs": [
+    {
+      "path": "canonical/runtime/terminal_candidate_donor_independence_audit_v1.py",
+      "git_blob_sha": "7b3713267d32f9b4ae7e2ca56ea17c5859bdec71",
+      "tests_run": 6,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "path": "canonical/runtime/terminal_autopilot_executor_v1.py",
+      "git_blob_sha": "6f828ce5631db582ea4d4a3d73c59b08f232abf0",
+      "tests_run": 6,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "path": "canonical/runtime/terminal_autopilot_v1.py",
+      "git_blob_sha": "78fa2cbabf8ed5e70de8b3ed987b510ca033076b",
+      "tests_run": 10,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "path": "canonical/runtime/terminal_root_decision_gate_v1.py",
+      "git_blob_sha": "6f546f657900405c628c1eb3575bc1e4ac220aeb",
+      "tests_run": 8,
+      "failures": 0,
+      "errors": 0,
+      "test_runner": "DIRECT_ASSERTION_HARNESS_OVER_EXACT_TEST_FUNCTIONS"
+    },
+    {
+      "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
+      "git_blob_sha": "31b9a227dba79f069045e915e416bcc370900af6",
+      "tests_run": 25,
+      "failures": 0,
+      "errors": 0,
+      "test_runner": "PROGRAMMATIC_UNITTEST_LOADER__SUCCESS_EXIT_REQUIRED_TESTS_RUN_GT_ZERO"
+    },
+    {
+      "path": "canonical/runtime/option_preserving_capability_optimizer_v1.py",
+      "git_blob_sha": "367478e71b015fb2f4b7cc40dad34f88a7f47238",
+      "tests_run": 12,
+      "failures": 0,
+      "errors": 0
+    }
+  ],
+  "exact_test_blobs": [
+    {
+      "path": "canonical/tests/test_terminal_candidate_donor_independence_audit_v1.py",
+      "git_blob_sha": "1b70c9494993e894d45605f8fecffa3781ea1541"
+    },
+    {
+      "path": "canonical/tests/test_terminal_autopilot_executor_v1.py",
+      "git_blob_sha": "674798880e04003f435e534b9b15aad863c6d18a"
+    },
+    {
+      "path": "canonical/tests/test_terminal_autopilot_v1.py",
+      "git_blob_sha": "0d21826088c58bf5d3d885610c82061bd5f148b4"
+    },
+    {
+      "path": "canonical/tests/test_terminal_root_decision_gate_v1.py",
+      "git_blob_sha": "4d8a4aae55562e772730bb71d37ef08bf0385c6e"
+    },
+    {
+      "path": "canonical/tests/test_unified_cognitive_fabric_v1.py",
+      "git_blob_sha": "91996514d1e0d572cfeefd5064e4f4bd10048f8e"
+    },
+    {
+      "path": "canonical/tests/test_option_preserving_capability_optimizer_v1.py",
+      "git_blob_sha": "fdafe7757abf62dbdb4fc8f4e2e9c60cfedee0f7"
+    }
+  ],
+  "aggregate": {
+    "tests_run": 67,
+    "failures": 0,
+    "errors": 0,
+    "py_compile_target_and_test_files": "PASS"
+  },
+  "carrier_repairs": [
+    {
+      "path": "canonical/runtime/same_identity_supervisor.py",
+      "git_blob_sha": "5c620b2e4e371333343e4f42e7340b8a9b4d1e3c",
+      "purpose": "IMPORT_CLOSURE_ONLY"
+    },
+    {
+      "path": "canonical/runtime/continuous_obs_runtime.py",
+      "git_blob_sha": "e2533a0335c4f6824b9542944d4682aeefb36b2b",
+      "purpose": "IMPORT_CLOSURE_ONLY"
+    },
+    {
+      "path": "canonical/runtime/p3_v3_contract_surface_guard_v1.py",
+      "git_blob_sha": "9b90380b444c6d58299dd97bc51ed4f96bdd9cf9",
+      "purpose": "UNIFIED_FABRIC_IMPORT_CLOSURE_ONLY"
+    },
+    {
+      "path": "canonical/runtime/synthesis_certified_visible_support_policy_v3.py",
+      "git_blob_sha": "cd81b812f30b46b9889826adbc39df8690bdb40d",
+      "purpose": "UNIFIED_FABRIC_IMPORT_CLOSURE_ONLY"
+    }
+  ],
+  "claims": {
+    "current_target_byte_coherence_verified": true,
+    "component_behavior_surfaces_green": true,
+    "repository_wide_refinement_verified": false,
+    "executable_refinement_closed": false,
+    "full_dependency_cone_current_byte_verified": false,
+    "terminal_goal_closed": false
+  },
+  "accounting": {
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "nonclaims": [
+    "THIS_RECEIPT_RESEALS_ONLY_THE_SIX_DECLARED_CURRENT_RUNTIME_BYTES_AGAINST_THEIR_BOUNDED_COMPONENT_TEST_SURFACES",
+    "IT_DOES_NOT_PROVE_REPOSITORY_WIDE_EXECUTABLE_REFINEMENT",
+    "IT_DOES_NOT_PROVE_ALL_TRANSITIVE_RUNTIME_DEPENDENCIES_MATCH_CURRENT_MAIN_BYTES",
+    "IT_DOES_NOT_GRANT_TERMINAL_OR_CAPABILITY_CREDIT",
+    "IT_DOES_NOT_CONVERT_COMPONENT_TESTS_INTO_OPEN_WORLD_COMPLETENESS"
+  ]
+}

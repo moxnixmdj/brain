@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_AUTHORITY_RUNTIME_BINDING_CENSUS_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-09",
+  "status": "PASS__RUNTIME_BINDING_CENSUS_VERIFIER_EXECUTED__7_OF_7_FOCUSED_CHECKS",
+  "carrier": {
+    "kind": "SPRITE",
+    "name": "brain-live-runtime-v1-verify-20261008",
+    "id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13",
+    "existing_carrier_reused": true,
+    "incremental_spend_usd": 0
+  },
+  "exact_blobs": {
+    "runtime": {
+      "path": "canonical/runtime/current_authority_runtime_binding_census_v1.py",
+      "git_blob_sha": "e8746d141989f5279c66931d9cc9167504034b98"
+    },
+    "tests": {
+      "path": "canonical/tests/test_current_authority_runtime_binding_census_v1.py",
+      "git_blob_sha": "4e4769b5635f4bb1cc99dda102934f798fd0f620"
+    }
+  },
+  "verification": {
+    "py_compile": "PASS",
+    "focused_checks_run": 7,
+    "focused_checks_passed": 7,
+    "checks": [
+      "conflicting_non_superseded_bindings_fail_closed",
+      "exact_current_binding_passes_and_superseded_stale_binding_is_ignored",
+      "missing_current_blob_binding_fails_closed",
+      "missing_runtime_file_fails_closed",
+      "non_runtime_paths_are_ignored",
+      "runtime_path_regex_matches_canonical_python_path",
+      "stale_current_binding_fails_closed"
+    ],
+    "negative_conflict_fixture": {
+      "runtime_binding_reference_count": 2,
+      "current_binding_count": 2,
+      "drift_count": 1,
+      "conflicting_current_path_count": 1,
+      "pass": false
+    }
+  },
+  "byte_binding_coherence_of_current_repo_proved": false,
+  "semantic_refinement_proved": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0
+}

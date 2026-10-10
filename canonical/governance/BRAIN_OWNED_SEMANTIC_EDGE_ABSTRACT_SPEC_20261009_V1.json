@@ -1,0 +1,110 @@
+{
+  "schema": "PROJECT_BRAIN_OWNED_SEMANTIC_EDGE_ABSTRACT_SPEC_V1",
+  "date": "2026-10-09",
+  "subject_id": "brain-owned-semantic-edge-authority",
+  "semantic_version": "BRAIN_OWNED_SEMANTIC_EDGE_ABSTRACT_V1",
+  "scope": "EXACT_TOP_LEVEL_BEHAVIOR_OF_BRAIN_OWNED_SEMANTIC_RELATION_EDGE_AUTHORITY_V1",
+  "input_schema": "PROJECT_BRAIN_SEMANTIC_RELATION_EDGE_EVIDENCE_V1",
+  "proof_class": "EXPLICIT_SOURCE_IDENTITY",
+  "transition_partition": [
+    {
+      "case_id": "EVIDENCE_NOT_OBJECT",
+      "kind": "FAIL_CLOSED",
+      "reason": "EVIDENCE_NOT_OBJECT"
+    },
+    {
+      "case_id": "EVIDENCE_FIELD_SET_INVALID",
+      "kind": "FAIL_CLOSED",
+      "reason": "EVIDENCE_FIELD_SET_INVALID"
+    },
+    {
+      "case_id": "EVIDENCE_SCHEMA_INVALID",
+      "kind": "FAIL_CLOSED",
+      "reason": "EVIDENCE_SCHEMA_INVALID"
+    },
+    {
+      "case_id": "PROOF_CLASS_UNSUPPORTED",
+      "kind": "FAIL_CLOSED",
+      "reason": "PROOF_CLASS_UNSUPPORTED"
+    },
+    {
+      "case_id": "SCOPE_ID_REQUIRED",
+      "kind": "FAIL_CLOSED",
+      "reason": "SCOPE_ID_REQUIRED"
+    },
+    {
+      "case_id": "DISTINCT_SOURCE_TARGET_IDS_REQUIRED",
+      "kind": "FAIL_CLOSED",
+      "reason": "DISTINCT_SOURCE_TARGET_IDS_REQUIRED"
+    },
+    {
+      "case_id": "SOURCE_TARGET_SURFACES_REQUIRED",
+      "kind": "FAIL_CLOSED",
+      "reason": "SOURCE_TARGET_SURFACES_REQUIRED"
+    },
+    {
+      "case_id": "RELATION_UNSUPPORTED",
+      "kind": "FAIL_CLOSED",
+      "reason": "RELATION_UNSUPPORTED"
+    },
+    {
+      "case_id": "EXPLICIT_DEFINITION_SOURCES_REQUIRED",
+      "kind": "FAIL_CLOSED",
+      "reason": "EXPLICIT_DEFINITION_SOURCES_REQUIRED"
+    },
+    {
+      "case_id": "DEFINITION_SOURCE_NOT_OBJECT",
+      "kind": "FAIL_CLOSED",
+      "reason": "DEFINITION_SOURCE_NOT_OBJECT"
+    },
+    {
+      "case_id": "DEFINITION_SOURCE_FIELD_SET_INVALID",
+      "kind": "FAIL_CLOSED",
+      "reason": "DEFINITION_SOURCE_FIELD_SET_INVALID"
+    },
+    {
+      "case_id": "DEFINITION_SOURCE_BINDING_INVALID",
+      "kind": "FAIL_CLOSED",
+      "reason": "DEFINITION_SOURCE_BINDING_INVALID"
+    },
+    {
+      "case_id": "SEMANTIC_IDENTITY_NOT_PROVED",
+      "kind": "FAIL_CLOSED",
+      "reason": "SEMANTIC_IDENTITY_NOT_PROVED"
+    },
+    {
+      "case_id": "NOT_ENTAILS_NOT_DERIVABLE_FROM_SEMANTIC_IDENTITY_PROOF",
+      "kind": "FAIL_CLOSED",
+      "reason": "NOT_ENTAILS_NOT_DERIVABLE_FROM_SEMANTIC_IDENTITY_PROOF"
+    },
+    {
+      "case_id": "ENTAILS_SUCCESS",
+      "kind": "PASS",
+      "reason": null
+    }
+  ],
+  "success_projection": {
+    "schema": "PROJECT_BRAIN_SEMANTIC_RELATION_EDGE_AUTHORITY_RECEIPT_V1",
+    "relation": "ENTAILS",
+    "source_semantics_authenticated": true,
+    "target_semantics_authenticated": true,
+    "relation_semantics_authenticated": true,
+    "verification_authority_mutated": false,
+    "semantic_truth_authority": false,
+    "execution_authority": false,
+    "acceptance_authority": false,
+    "terminal_authority": false
+  },
+  "delegated_semantics": {
+    "dependency": "canonical/runtime/semantic_relation_control_v1.py",
+    "requirement": "SUCCESS_REQUIRES_DEPENDENCY_TO_RECOMPUTE_SEMANTIC_IDENTITY_WITH_PASS_TRUE"
+  },
+  "nonclaims": [
+    "NO_GENERAL_LANGUAGE_UNDERSTANDING",
+    "NO_NOT_ENTAILS_INFERENCE_FROM_ABSENCE",
+    "NO_SCOPE_LEAKAGE",
+    "NO_EXECUTION_OR_TERMINAL_AUTHORITY",
+    "THIS_ABSTRACT_SPEC_DOES_NOT_PROVE_CONCRETE_REFINEMENT_BY_ITSELF"
+  ],
+  "terminal_credit_delta": 0
+}

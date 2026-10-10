@@ -1,0 +1,167 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_DEPENDENCY_GRAPH_V1",
+  "date": "2026-10-09",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "nodes": [
+    {
+      "id": "EXECUTABLE_REFINEMENT_STRUCTURAL_FRAMEWORK",
+      "kind": "LEAF",
+      "status": "PROVED",
+      "note": "STRUCTURAL_BINDING_VERIFIER_GRAPH_GUARD_RUNTIME_ANTI_BYPASS_AND_FALSIFIER_INDEPENDENTLY_EXECUTED__SEE_EXECUTABLE_REFINEMENT_STRUCTURAL_FRAMEWORK_SPRITE_VERIFICATION_20261009_V1__NO_SEMANTIC_REFINEMENT_CREDIT",
+      "attack_families": [
+        "COMPOSITION_MISMATCH",
+        "VERSION_DRIFT"
+      ]
+    },
+    {
+      "id": "router-deployment-canary",
+      "kind": "ROUTE",
+      "lifecycle": "IMPLEMENTED",
+      "creditable": false,
+      "terminal_authority": false,
+      "implementation": {
+        "path": "canonical/runtime/router_deployment_canary_v1.py",
+        "git_blob_sha": "de71202a17071c8af88ec7ac6e1f241fb42854c2"
+      },
+      "refinement": {
+        "status": "UNRESOLVED",
+        "certificate": {
+          "path": "canonical/governance/ROUTER_DEPLOYMENT_CANARY_EXECUTABLE_REFINEMENT_20261009_V1.json",
+          "git_blob_sha": "620385303adacb594694f46b0c42dd694eb680fc"
+        },
+        "verification_receipt": null
+      },
+      "live_authority_status": "UNRESOLVED",
+      "note": "NONCREDITABLE_CANARY__STRUCTURAL_BINDING_ONLY__NO_REFINEMENT_OR_TERMINAL_CREDIT",
+      "attack_families": [
+        "COMPOSITION_MISMATCH",
+        "VERSION_DRIFT",
+        "IMPLEMENTATION_REFINEMENT_MISMATCH"
+      ]
+    },
+    {
+      "id": "brain-owned-semantic-edge-authority",
+      "kind": "ROUTE",
+      "lifecycle": "IMPLEMENTED",
+      "creditable": false,
+      "terminal_authority": false,
+      "implementation": {
+        "path": "canonical/runtime/brain_owned_semantic_relation_edge_authority_v1.py",
+        "git_blob_sha": "01305c41e79189e3ea13f1a6343427ee31eda566"
+      },
+      "refinement": {
+        "status": "UNRESOLVED",
+        "certificate": {
+          "path": "canonical/governance/BRAIN_OWNED_SEMANTIC_EDGE_EXECUTABLE_REFINEMENT_20261009_V1.json",
+          "git_blob_sha": "e0e9c04a3d016b71ea5188f02735eb5fc26458f2"
+        },
+        "verification_receipt": null
+      },
+      "live_authority_status": "UNRESOLVED",
+      "note": "DECLARED_FINITE_BRANCH_PARTITION_AND_WITNESSES_EXIST__NO_EXECUTED_INDEPENDENT_REFINEMENT_RECEIPT__ZERO_TERMINAL_CREDIT",
+      "attack_families": [
+        "COMPOSITION_MISMATCH",
+        "HIDDEN_STATE",
+        "VERSION_DRIFT",
+        "IMPLEMENTATION_REFINEMENT_MISMATCH"
+      ]
+    },
+    {
+      "id": "ALL_CREDITABLE_SELECTED_ROUTES_EXECUTABLE_REFINEMENT",
+      "kind": "LEAF",
+      "status": "ENFORCED",
+      "note": "SELECTED_ROUTE_RUNTIME_V2_ENFORCES_REFINEMENT_CERTIFICATE_AND_VERIFIED_RECEIPT_FOR_EVERY_CREDITABLE_ROW__CURRENT_REGISTRY_HAS_ZERO_CREDITABLE_ROWS__SCOPE_DOES_NOT_INCLUDE_NON_SELECTED_RUNTIME_COMPONENTS",
+      "attack_families": [
+        "QUANTIFIER_SWAP",
+        "COMPOSITION_MISMATCH",
+        "VERSION_DRIFT",
+        "IMPLEMENTATION_REFINEMENT_MISMATCH"
+      ]
+    },
+    {
+      "id": "TERMINAL_DEPENDENCY_GRAPH_GENERATOR_COVERAGE",
+      "kind": "LEAF",
+      "status": "UNRESOLVED",
+      "note": "GRAPH_ENUMERATION_DOES_NOT_PROVE_OPEN_WORLD_COMPLETENESS",
+      "attack_families": [
+        "NEGATION",
+        "QUANTIFIER_SWAP",
+        "COMPOSITION_MISMATCH",
+        "NOVEL_DIMENSION"
+      ]
+    },
+    {
+      "id": "NON_SELECTED_RUNTIME_EXECUTABLE_REFINEMENT_COVERAGE",
+      "kind": "LEAF",
+      "status": "UNRESOLVED",
+      "note": "CURRENT_TERMINAL_AUTHORITY_REFERENCES_RUNTIME_COMPONENTS_OUTSIDE_SELECTED_ROUTE_REGISTRY__GENERAL_EXECUTABLE_REFINEMENT_COVERAGE_NOT_PROVED",
+      "attack_families": [
+        "QUANTIFIER_SWAP",
+        "COMPOSITION_MISMATCH",
+        "VERSION_DRIFT",
+        "IMPLEMENTATION_REFINEMENT_MISMATCH",
+        "NOVEL_DIMENSION"
+      ]
+    },
+    {
+      "id": "EXECUTABLE_REFINEMENT_SEMANTIC_PROOF_ROUTE",
+      "kind": "LEAF",
+      "status": "UNRESOLVED",
+      "note": "STRUCTURAL_CERTIFICATE_BINDING_DOES_NOT_ESTABLISH_BEHAVIORAL_REFINEMENT__SEMANTIC_PROOF_CHECKING_ROUTE_NOT_YET_CLOSED",
+      "attack_families": [
+        "COMPOSITION_MISMATCH",
+        "IMPLEMENTATION_REFINEMENT_MISMATCH",
+        "NOVEL_DIMENSION"
+      ]
+    },
+    {
+      "id": "EXECUTABLE_REFINEMENT_STRUCTURAL_RESOURCE_BOUND",
+      "kind": "LEAF",
+      "status": "UNRESOLVED",
+      "note": "FOCUSED_REPLAY_EXECUTED_BUT_NO_WORST_CASE_RESOURCE_BOUND_FOR_STRUCTURAL_VERIFICATION_PATH_IS_YET_PROVED",
+      "attack_families": [
+        "RESOURCE_EXHAUSTION"
+      ]
+    },
+    {
+      "id": "CURRENT_AUTHORITY_RUNTIME_BYTE_BINDING_COHERENCE",
+      "kind": "LEAF",
+      "status": "UNRESOLVED",
+      "note": "EXACT_BRANCH_CENSUS FOUND SIX STALE REFERENCES ACROSS FIVE RUNTIME PATHS PLUS ONE CURRENT RUNTIME WITHOUT BLOB BINDING. ALL SIX NOW HAVE BOUNDED TEST SURFACES OR EXISTING COMPONENT TESTS. NO EXISTING SPRITE SNAPSHOT CONTAINS THE FULL CURRENT SIX-PATH CONE. DO NOT RESEAL UNTIL FRESH CURRENT-BYTE EXECUTION.",
+      "attack_families": [
+        "VERSION_DRIFT",
+        "COMPOSITION_MISMATCH",
+        "IMPLEMENTATION_REFINEMENT_MISMATCH",
+        "NOVEL_DIMENSION"
+      ],
+      "subobligations": [
+        {
+          "id": "CURRENT_BYTE_REEXECUTE_TEST_BACKED_RUNTIME_PATHS",
+          "status": "UNRESOLVED",
+          "paths": [
+            "canonical/runtime/terminal_autopilot_executor_v1.py",
+            "canonical/runtime/terminal_autopilot_v1.py",
+            "canonical/runtime/terminal_root_decision_gate_v1.py",
+            "canonical/runtime/unified_cognitive_fabric_v1.py",
+            "canonical/runtime/option_preserving_capability_optimizer_v1.py"
+          ],
+          "evidence_available": "COMPONENT_TEST_SURFACES_PRESENT",
+          "requirement": "FRESH_CURRENT_BYTE_EXECUTION_AND_CONTENT_BOUND_RECEIPT"
+        },
+        {
+          "id": "DONOR_INDEPENDENCE_AUDIT_CURRENT_BYTE_VERIFICATION",
+          "status": "UNRESOLVED",
+          "paths": [
+            "canonical/runtime/terminal_candidate_donor_independence_audit_v1.py"
+          ],
+          "evidence_available": "DEDICATED_BOUNDED_TEST_SURFACE_ADDED__NOT_YET_EXECUTED_ON_CURRENT_BYTES",
+          "requirement": "FRESH_CURRENT_BYTE_EXECUTION_AND_CONTENT_BOUND_RECEIPT",
+          "test_path": "canonical/tests/test_terminal_candidate_donor_independence_audit_v1.py",
+          "test_git_blob_sha": "1b70c9494993e894d45605f8fecffa3781ea1541"
+        }
+      ]
+    }
+  ],
+  "terminal_closure": false,
+  "terminal_credit_delta": 0
+}

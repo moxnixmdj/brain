@@ -1,0 +1,76 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_AUTHORITY_RUNTIME_BINDING_CONNECTOR_CENSUS_20261009_V1",
+  "date": "2026-10-09",
+  "status": "OPEN__CURRENT_RUNTIME_BYTE_BINDING_DRIFT",
+  "source": {
+    "repository": "moxnixmdj/brain",
+    "branch": "impl-executable-refinement-terminal-closure-20261009",
+    "observed_head_sha": "191f779ae43b68cceec091a7991347023e0808a3",
+    "authority_pointer": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+      "git_blob_sha": "dbe2aacf6122e043274e5088bda5243f15cf93c3"
+    },
+    "method": "GITHUB_CONNECTOR_EXACT_FETCH_FILE_BLOB_COMPARISON"
+  },
+  "counts": {
+    "total_runtime_binding_references": 47,
+    "current_binding_references": 45,
+    "superseded_binding_references": 2,
+    "current_unique_runtime_paths": 39,
+    "current_binding_drift_references": 6,
+    "current_drift_unique_runtime_paths": 5,
+    "current_missing_blob_binding_references": 1,
+    "conflicting_current_path_count": 0
+  },
+  "drift": [
+    {
+      "key_path": "authoritative_sources.terminal_candidate_donor_independence_audit",
+      "path": "canonical/runtime/terminal_candidate_donor_independence_audit_v1.py",
+      "expected_git_blob_sha": "0ed69641693538f15b7e1658f5ac5e80031afb26",
+      "actual_git_blob_sha": "7b3713267d32f9b4ae7e2ca56ea17c5859bdec71"
+    },
+    {
+      "key_path": "authoritative_sources.terminal_autopilot_executor_v1.runtime",
+      "path": "canonical/runtime/terminal_autopilot_executor_v1.py",
+      "expected_git_blob_sha": "657a94d00833ad91403070132ef4e1f0d7337336",
+      "actual_git_blob_sha": "6f828ce5631db582ea4d4a3d73c59b08f232abf0"
+    },
+    {
+      "key_path": "authoritative_sources.terminal_autopilot_executor_v1.planner",
+      "path": "canonical/runtime/terminal_autopilot_v1.py",
+      "expected_git_blob_sha": "bb72c160f3be00efedbd5d111b77d956bed2cb11",
+      "actual_git_blob_sha": "78fa2cbabf8ed5e70de8b3ed987b510ca033076b"
+    },
+    {
+      "key_path": "terminal_execution_root.runtime_gate",
+      "path": "canonical/runtime/terminal_root_decision_gate_v1.py",
+      "expected_git_blob_sha": "7c7e0c34cc599c7114fb83421307db2433e2b269",
+      "actual_git_blob_sha": "6f546f657900405c628c1eb3575bc1e4ac220aeb"
+    },
+    {
+      "key_path": "live_capability_ownership_20261008_v1.unified_fabric",
+      "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
+      "expected_git_blob_sha": "5badd256e18ab4bad58be862c69ef9e272bf7eb1",
+      "actual_git_blob_sha": "31b9a227dba79f069045e915e416bcc370900af6"
+    },
+    {
+      "key_path": "r1_universal_live_capability_invocation_20261008_v1.unified_fabric",
+      "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
+      "expected_git_blob_sha": "5badd256e18ab4bad58be862c69ef9e272bf7eb1",
+      "actual_git_blob_sha": "31b9a227dba79f069045e915e416bcc370900af6"
+    }
+  ],
+  "missing_blob_bindings": [
+    {
+      "key_path": "current_option_preserving_optimization_20261008_v1.runtime",
+      "path": "canonical/runtime/option_preserving_capability_optimizer_v1.py",
+      "actual_git_blob_sha": "367478e71b015fb2f4b7cc40dad34f88a7f47238"
+    }
+  ],
+  "verified_matching_current_references": 38,
+  "byte_binding_coherence_proved": false,
+  "semantic_refinement_proved": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "rule": "DO_NOT_RESEAL_CHANGED_RUNTIME_BYTES_WITHOUT_CURRENT_BYTE_VERIFICATION"
+}
