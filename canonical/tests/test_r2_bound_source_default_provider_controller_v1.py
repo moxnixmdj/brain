@@ -117,6 +117,34 @@ class Tests(unittest.TestCase):
         self.assertEqual(len(inserted), 2)
         self.assertFalse(out["terminal_authority"])
 
+    def test_default_bound_source_failure_stays_open_and_is_not_ingested(self):
+        predicate_id = "source-condition-sha256:critical"
+        req = self.request(predicate_id)
+        failure = {
+            "schema": c.bound_source_provider.SCHEMA,
+            "pass": False,
+            "status": "FAIL_CLOSED",
+            "reason": "ValueError:BOUND_SOURCE_SHA256_MISMATCH",
+            "semantic_truth_authority": False,
+        }
+        default = Mock(return_value=failure)
+        opened = self.opened(predicate_id)
+
+        with patch.object(c, "compile_contract", return_value=self.raw_contract()), \
+             patch.object(c, "_authenticate_goal_binding", return_value=self.goal_binding()), \
+             patch.object(c, "evaluate_p3", return_value=opened) as p3, \
+             patch.object(c.bound_source_provider, "provide", default):
+            out = c.run(req)
+
+        self.assertFalse(out["pass"])
+        self.assertEqual(out["status"], "OPEN__BOUND_SOURCE_OBSERVATION_REQUIRED")
+        self.assertEqual(out["information_provider_failure"]["reason"], failure["reason"])
+        self.assertEqual(
+            out["information_trace"][-1]["ingestion_status"],
+            "BOUND_SOURCE_PROVIDER_FAIL_CLOSED",
+        )
+        p3.assert_called_once()
+
     def test_custom_provider_overrides_default_bound_source_provider(self):
         predicate_id = "source-condition-sha256:critical"
         req = self.request(predicate_id)
