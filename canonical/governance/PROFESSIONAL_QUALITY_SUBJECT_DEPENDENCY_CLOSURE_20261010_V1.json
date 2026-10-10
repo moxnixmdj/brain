@@ -763,14 +763,6 @@
       "git_blob_sha": "d25cb6fe746eef992f71b138446dc999c0f2a307"
     },
     {
-      "path": "canonical/governance/PROFESSIONAL_QUALITY_R1_STRUCTURAL_TARGET_SCOPE_20261010_V1.json",
-      "git_blob_sha": "b50ac48a805618f2f38b1e839e7a227058247b0b"
-    },
-    {
-      "path": "canonical/governance/PROFESSIONAL_QUALITY_R1_TARGET_SEMANTIC_SCOPE_20261010_V1.json",
-      "git_blob_sha": "9145121eb2cfbee43f94534864d30f32868e81de"
-    },
-    {
       "path": "canonical/governance/PROFESSIONAL_QUALITY_R10_DECISION_SEMANTIC_SCOPE_20261010_V1.json",
       "git_blob_sha": "40149db88374c054fd974cc121ee464a3d3996fd"
     },
@@ -781,6 +773,14 @@
     {
       "path": "canonical/governance/PROFESSIONAL_QUALITY_R12_META_COMPOSITION_SCOPE_20261010_V1.json",
       "git_blob_sha": "4c69313ae31905f6aa379361d515dffdfb41efae"
+    },
+    {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_R1_STRUCTURAL_TARGET_SCOPE_20261010_V1.json",
+      "git_blob_sha": "b50ac48a805618f2f38b1e839e7a227058247b0b"
+    },
+    {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_R1_TARGET_SEMANTIC_SCOPE_20261010_V1.json",
+      "git_blob_sha": "9145121eb2cfbee43f94534864d30f32868e81de"
     },
     {
       "path": "canonical/governance/PROFESSIONAL_QUALITY_R2_SCOPE_COMPLETE_SEARCH_SCOPE_20261010_V1.json",
@@ -847,14 +847,6 @@
       "git_blob_sha": "b65a67e8edaee925338fe3f2d61dad6b0f52d129"
     },
     {
-      "path": "canonical/verification/PROFESSIONAL_QUALITY_R1_STRUCTURAL_TARGET_VERIFY_20261010_V1.json",
-      "git_blob_sha": "dcee55ba17d15154117100de6aebd34716ad3e3e"
-    },
-    {
-      "path": "canonical/verification/PROFESSIONAL_QUALITY_R1_TARGET_SEMANTIC_VERIFY_20261010_V1.json",
-      "git_blob_sha": "dfffdd6eff129ce7498c4e4aa8a822cd4a5cda22"
-    },
-    {
       "path": "canonical/verification/PROFESSIONAL_QUALITY_R10_DECISION_SEMANTIC_VERIFY_20261010_V1.json",
       "git_blob_sha": "c298b2510e352d876c1abacc069e915447e97823"
     },
@@ -869,6 +861,14 @@
     {
       "path": "canonical/verification/PROFESSIONAL_QUALITY_R11_FIREWALL_SEMANTIC_VERIFY_20261010_V1.json",
       "git_blob_sha": "7f0468c4abae22504d71ef627efeaf57e85f02a6"
+    },
+    {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R1_STRUCTURAL_TARGET_VERIFY_20261010_V1.json",
+      "git_blob_sha": "dcee55ba17d15154117100de6aebd34716ad3e3e"
+    },
+    {
+      "path": "canonical/verification/PROFESSIONAL_QUALITY_R1_TARGET_SEMANTIC_VERIFY_20261010_V1.json",
+      "git_blob_sha": "dfffdd6eff129ce7498c4e4aa8a822cd4a5cda22"
     },
     {
       "path": "canonical/verification/PROFESSIONAL_QUALITY_R2_SCOPE_COMPLETE_SEARCH_VERIFY_20261010_V1.json",
@@ -1065,5 +1065,6 @@
     "capability_credit_delta": 0,
     "ownership_credit_delta": 0,
     "terminal_credit_delta": 0
-  }
+  },
+  "canonical_ordering_rule": "ASCII_PATH_CODEPOINT_ORDER_MATCHING_PYTHON_SORT_FOR_CANONICAL_REFERENCE_LISTS"
 }
