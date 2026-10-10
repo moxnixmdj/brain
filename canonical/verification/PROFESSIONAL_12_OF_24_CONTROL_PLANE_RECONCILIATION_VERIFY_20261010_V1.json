@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_12_OF_24_CONTROL_PLANE_RECONCILIATION_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__SEVEN_CURRENT_SURFACES_COHERENT__12_OF_24_PROPERTY_TRUTH__ALL_12_EXECUTION_LEAVES_CLOSED__12_SEMANTIC_LEAVES_OPEN__ZERO_PROMOTION_OR_TERMINAL_CREDIT",
+  "subject": {
+    "professional": {
+      "path": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
+      "git_blob_sha": "91161517b00078f50c17ead7276a8f54e213d45c"
+    },
+    "assurance": {
+      "path": "canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json",
+      "git_blob_sha": "eb18bb08b36b6b58a57cf6d08cf3b761597b9850"
+    },
+    "frontier": {
+      "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
+      "git_blob_sha": "f3297e5ff20122ca9bf5037f872a094736c81497"
+    },
+    "residual": {
+      "path": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
+      "git_blob_sha": "63475225eafa259c8a0abc2b709e740c98a9a587"
+    },
+    "currentness": {
+      "path": "canonical/governance/CAPABILITY_FRONTIER_CURRENTNESS_RECONCILIATION_20261010_V1.json",
+      "git_blob_sha": "9793137f3f84e2db110b14583c6a95942ace4a24"
+    },
+    "scheduler": {
+      "path": "canonical/governance/CURRENT_DEVELOPMENT_SCHEDULER.json",
+      "git_blob_sha": "e6be4293a66fb75b709314fb746876b6763f6a19"
+    },
+    "mission": {
+      "path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
+      "git_blob_sha": "14e2ac2989b543a26b3fbdb7a2454d5789dadb92"
+    }
+  },
+  "checks": {
+    "professional_counts": true,
+    "professional_authority": true,
+    "assurance_state": true,
+    "frontier_state": true,
+    "currentness_state": true,
+    "currentness_bindings": true,
+    "scheduler_binding": true,
+    "mission_bindings": true,
+    "mission_counts": true
+  },
+  "proved": [
+    "CURRENT_PROFESSIONAL_ASSURANCE_FRONTIER_RESIDUAL_CURRENTNESS_SCHEDULER_AND_MISSION_VIEWS_ARE_MUTUALLY_COHERENT",
+    "ALL_12_EXECUTION_LEAVES_ARE_CLOSED",
+    "ALL_12_SEMANTIC_LEAVES_REMAIN_OPEN",
+    "FULL_CURRENT_MAIN_REGRESSION_REMAINS_OPEN",
+    "NO_PROMOTION_OR_TERMINAL_AUTHORITY_IS_GRANTED"
+  ],
+  "hard_nonclaims": [
+    "NO_SEMANTIC_LEAF_PROPERTY_TRUTH",
+    "NO_ROOT_CLOSURE",
+    "NO_24_OF_24_PROPERTY_TRUTH",
+    "NO_LIVE_DEFAULT_PROMOTION",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "quality_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
