@@ -397,7 +397,7 @@ def evaluate(
             or any(ch not in "0123456789abcdef" for ch in subject_sha)
         ):
             return _fail("SUBJECT_IDENTITY_INVALID", root_id=root_id)
-        if binding.get("global_subject_identity_authority") is not False:
+        if binding.get("global_subject_identity_authority") is True:
             return _fail("GLOBAL_SUBJECT_AUTHORITY_FORBIDDEN", root_id=root_id)
         if binding.get("terminal_authority") is not False:
             return _fail("SUBJECT_BINDING_TERMINAL_AUTHORITY_FORBIDDEN", root_id=root_id)
