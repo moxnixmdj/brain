@@ -1,0 +1,24 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V10",
+  "status": "ACTIVE_INTERVAL_ROBUST_PARALLEL_FRONTIER__POST_COMPOSITION__ZERO_CREDIT",
+  "supersedes": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V9.json",
+  "runtime": {
+    "path": "canonical/runtime/capability_parallel_frontier_v2.py",
+    "git_blob_sha": "209d8d11494645432354636a3dc17e7b515abaf8",
+    "entrypoint": "plan_current_parallel_frontier"
+  },
+  "frontier": {
+    "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
+    "git_blob_sha": "f772c1cfd787d49d38b12e5649a41b96f121ef93"
+  },
+  "dominance": "BENEFIT_LCB_GE_OTHER_UCB__COST_UCB_LE_OTHER_LCB__ONE_STRICT",
+  "read_only_lanes": 7,
+  "full_execution": false,
+  "generic_r2": "SLEEPING",
+  "exact_r2_lane": "R2_FINANCE_TYPED_NEXT_INFORMATION_REQUEST",
+  "verification": {
+    "path": "canonical/verification/CAPABILITY_PARALLEL_FRONTIER_V10_INTERVAL_ROBUST_VERIFY_20261010_V1.json",
+    "git_blob_sha": "a0568e6aff736462f359d1c222c0ac519bc6482a"
+  },
+  "terminal_credit_delta": 0
+}
