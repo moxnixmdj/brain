@@ -58,6 +58,7 @@
   "activation": {
     "live_default": false,
     "required_before_promotion": [
+      "REAL_CONTENT_ADDRESSED_SAME_SUBJECT_BINDINGS_FOR_ALL_LOAD_BEARING_PROFESSIONAL_ROOTS",
       "FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION",
       "DOMAIN_SEMANTIC_AND_EXECUTION_EVIDENCE_BINDING"
     ]
@@ -222,6 +223,24 @@
     "global_leaf_closure": false,
     "domain_semantic_closure": false,
     "domain_execution_closure": false,
+    "terminal_credit_delta": 0
+  },
+  "professional_quality_same_subject_composition_gate": {
+    "runtime_path": "canonical/runtime/professional_quality_same_subject_composition_gate_v1.py",
+    "runtime_git_blob_sha": "46ab1a5bdf91e3559bfca89ee6059d0be7e89937",
+    "tests_path": "canonical/tests/test_professional_quality_same_subject_composition_gate_v1.py",
+    "tests_git_blob_sha": "9d265428c1ec3c3bfa6cea5d2c8c3b90b36edcd5",
+    "activation_path": "canonical/governance/PROFESSIONAL_QUALITY_SAME_SUBJECT_COMPOSITION_GATE_20261010_V1.json",
+    "activation_git_blob_sha": "f7a4496a6579041c6e2606243732c23b22bcf89c",
+    "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_SAME_SUBJECT_COMPOSITION_GATE_VERIFY_20261010_V1.json",
+    "verification_git_blob_sha": "56ab94e6f3cc68a34f1e73ebf9294d8639563522",
+    "result": "PYCOMPILE_PASS__9_OF_9_PASS__COMPOSITION_ADMISSIBILITY_ONLY",
+    "same_subject_normal_form_rule_enforced": true,
+    "real_all_root_subject_binding_proved": false,
+    "global_leaf_closure": false,
+    "domain_semantic_closure": false,
+    "domain_execution_closure": false,
+    "live_default_credit": false,
     "terminal_credit_delta": 0
   }
 }
