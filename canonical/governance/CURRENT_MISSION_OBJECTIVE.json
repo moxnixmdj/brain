@@ -32,13 +32,15 @@
     "primary_entrypoint": "plan_current_post_composition_frontier",
     "scalar_fallback_runtime": "canonical/runtime/capability_first_live_scheduler_v1.py",
     "status": "ACTIVE__POST_COMPOSITION_DYNAMIC_CURRENTNESS_V15__PROFESSIONAL_24_OF_24__CHECKPOINT_ROWS_ALL_WAKE_GATED__GITHUB_HOSTED_ACTIONS_BILLING_PRESTART_BLOCK__0_SAME_INFORMATION_CHECKPOINT_RUNS__CAPABILITY_FIRST_PRIMARY__ZERO_GLOBAL_CREDIT",
-    "observed_git_blob_sha": "c2bb0572f738d4c3ee26f6cfd842bd195c261bbc",
+    "observed_git_blob_sha": "8c787430e46ed3afa6b9956cd1a55b362fc4eb66",
     "semantic_reuse_policy": "canonical/governance/TWO_CLOCK_SEMANTIC_VALIDITY_AND_SCHEDULER_AUTHORITY_20261011_V4.json",
     "semantic_reuse_policy_git_blob_sha": "f08fd90474aa38f89db171c70e10a6d47e6d7ec5",
     "verified_improvement_loop": "canonical/governance/VERIFIED_IMPROVEMENT_LOOP_V2_ACTIVATION_20261011_V1.json",
     "verified_improvement_loop_git_blob_sha": "117aa82f7541ba98aa33e9d9462204a13dffff29",
     "proof_carrying_live_manifest": "canonical/governance/PROOF_CARRYING_LIVE_MANIFEST_V3_ACTIVATION_20261011_V1.json",
-    "proof_carrying_live_manifest_git_blob_sha": "72e65f91d82a94af6665c946eb7172c65c913292"
+    "proof_carrying_live_manifest_git_blob_sha": "72e65f91d82a94af6665c946eb7172c65c913292",
+    "d_finality_gate": "canonical/governance/D_FINALITY_GATE_V2_ACTIVATION_20261011_V1.json",
+    "d_finality_gate_git_blob_sha": "df07a961f7bbe4baba6f5c3f78ddbb19d71196d4"
   },
   "scheduler_precedence": "REAL_MISSION_CAPABILITY_RESOURCE_PARETO_LEVERAGE_IS_PRIMARY__SAFE_NONCONFLICTING_PARALLELISM_MINIMIZES_WALL_CLOCK__CURRENTNESS_AND_DEPENDENCY_GATES_PRECEDE_SELECTION__DIMENSIONWISE_PARETO_DOMINANCE_PRECEDES_ANY_SCALAR_TRADEOFF__SCALARIZATION_REQUIRES_PROVED_TRADEOFF_CONTRACT__CURRENT_R2_SHARED_CAUSE_FANOUT_IS_SECONDARY_DISCRIMINATION_SIGNAL__OPUS_5_5_CHECKPOINT_WORK_IS_TERTIARY_AUDIT__EXPLICIT_NEW_PRIMITIVE_CLAIMS_REQUIRE_REUSE_FIRST_EXHAUSTION_PROOF",
   "current_professional_quality_execution": {
