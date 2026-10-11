@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_RELATION_REQUIREMENT_COMPILER_INDEPENDENT_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_REPAIRED_BLOB__ZERO_HLE_CONSUMPTION",
+  "subject": {
+    "runtime_path": "canonical/runtime/hle_relation_requirement_compiler_v1.py",
+    "runtime_blob": "e922ba115ddf596bfcf78ae6988b67a0650e772d",
+    "tests_path": "canonical/tests/test_hle_relation_requirement_compiler_v1.py",
+    "tests_blob": "52b8570a2c1849f20aeb4e59fb2356bf856cf279"
+  },
+  "repair_history": {
+    "original_blob": "ab784ca199b454d0d80e11e9f4faf7812e1eec4d",
+    "first_repair_blob": "eea988a69e2426b085f45f5a5248b56665285ece",
+    "second_repair_blob": "4aeaa37f25061e0e8bf4d84746fbd07c360e0fce",
+    "final_blob": "e922ba115ddf596bfcf78ae6988b67a0650e772d",
+    "root_cause": "LITERAL_DOUBLE_BACKSLASH_REGEX_ESCAPING_PREVENTED_EXPLICIT_DEFINITION_INTENT_MATCH",
+    "final_rule": "DEFINITION_INTENT_READS_ORIGINAL_VISIBLE_QUESTION_AND_USES_REAL_WORD_BOUNDARIES"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2714,
+    "workflow_run_id": 38153589898,
+    "workflow_job_id": 114511890220,
+    "conclusion": "success"
+  },
+  "verified": {
+    "exact_runtime_blob_binding": true,
+    "exact_tests_blob_binding": true,
+    "tests_passed": 8,
+    "pairwise_relation": true,
+    "institution_relation": true,
+    "ordinal_identity": true,
+    "definition_relation": true,
+    "named_after_relation": true,
+    "descriptive_person_identity": true,
+    "alias_entity_relation": true,
+    "bounded_deduplicated": true
+  },
+  "hle_cases_consumed": 0,
+  "hle_gold_consumed": 0,
+  "external_model_calls_total": 0,
+  "model_dependency_count_total": 0,
+  "hle_score_credit": 0,
+  "hle_67_7_certified": false,
+  "incremental_spend_usd": 0
+}
