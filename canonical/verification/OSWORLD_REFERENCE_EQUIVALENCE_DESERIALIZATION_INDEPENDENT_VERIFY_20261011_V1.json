@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_REFERENCE_EQUIVALENCE_DESERIALIZATION_INDEPENDENT_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__EXACT_PUBLIC_HARNESS_BLOBS_REPLAYED__DIRECT_MATCHED_ROUTE_INDEPENDENT_OF_REFERENCE_EQUIVALENCE__TOCTOU_CAVEAT_PRESERVED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/OSWORLD_REFERENCE_EQUIVALENCE_DESERIALIZATION_20261011_V1.json",
+    "git_blob_sha": "e724c96a7d39046c312328e95d08d627d7c4cb12"
+  },
+  "public_harness": {
+    "repository": "cmgs-simular/OSWorld-V2",
+    "ref": "runner-v21",
+    "exact_blobs": {
+      "scripts/tools/verify_task_integrity.py": "df231bb260f63b700716e66a2cd7a92a09088c29",
+      "scripts/python/run_multienv_sai.py": "c7820d6e160785e289c63238c7867cb8db5b67d4",
+      "task_loader.py": "3e8ae06039c690e2c0e4916146acd94d783ca976",
+      "results_reporting.py": "1dac099bf5fdead3c7341b5dd4c8082ec1ebafaa"
+    }
+  },
+  "independent_replay": {
+    "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "result": "PASS",
+    "checks": {
+      "exact_git_blob_identity": true,
+      "hash_manifest_authentication_failure_is_fatal": true,
+      "per_task_file_hash_match_mismatch_missing_unofficial_accounting": true,
+      "clean_integrity_requires_zero_mismatch_missing_unofficial": true,
+      "runner_invokes_task_integrity_preflight": true,
+      "task_loader_resolves_task_class_from_same_base_tree": true,
+      "task_record_instruction_copied_from_live_task_object": true,
+      "run_manifest_embeds_task_integrity_summary": true
+    },
+    "caveat_preserved": {
+      "integrity_preflight_atomic_with_later_task_load_proved": false,
+      "exported_public_reference_run_manifest_bound_in_current_reference_artifact": false,
+      "theoretical_post_preflight_preload_mutation_cryptographically_excluded": false
+    }
+  },
+  "logical_verification": {
+    "direct_route_uses_public_reference_corpus_as_execution_input": false,
+    "direct_route_can_reverify_official_task_hashes_immediately_before_execution": true,
+    "reference_equivalence_required_before_direct_harness_work": false,
+    "conclusion": "REFERENCE_EQUIVALENCE_CANNOT_SOUNDLY_SERIALIZE_THE_DIRECT_MATCHED_OFFICIAL_ROUTE__THE_DIRECT_ROUTE_MUST_INSTEAD_BIND_OFFICIAL_PINNED_BYTES_REVERIFY_THEM_AT_POINT_OF_USE_BIND_MATCHED_PROTOCOL_AND_PRODUCE_AN_AUTHENTIC_SCORE"
+  },
+  "direct_route": [
+    "OBTAIN_MATERIAL_ACCESS_TO_OFFICIAL_PINNED_OSWORLD_V2_1_TASK_AND_ASSET_BYTES",
+    "FAIL_CLOSED_REVERIFY_ALL_108_TASK_IMPLEMENTATION_HASHES_IMMEDIATELY_BEFORE_EXECUTION",
+    "BIND_PUBLISHED_MATCHED_PROTOCOL_CONFIGURATION",
+    "BIND_BRAIN_PROTOCOL_EQUIVALENT_CONTROLLER_AND_ZERO_SPEND_RUNTIME_OR_STRONGER_CERTIFICATE",
+    "EXECUTE_AUTHENTIC_FIVE_RUN_PARTIAL_PROTOCOL",
+    "ACCEPT_ONLY_IF_CONTENT_ADDRESSED_CONSERVATIVE_SCORE_GE_81_8"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_REFERENCE_CORPUS_IS_OWNER_SIGNED",
+    "NO_CLAIM_REFERENCE_EXPORT_EXCLUDES_ALL_TOCTOU_MUTATION",
+    "NO_GATED_OWNER_TASK_BYTES_ACCESSED",
+    "NO_BRAIN_OSWORLD_SCORE",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
