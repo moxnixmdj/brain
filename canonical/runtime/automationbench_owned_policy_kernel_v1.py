@@ -409,6 +409,132 @@ def observation_plan(
     return out
 
 
+def followup_observation_plan(
+    prompt: str,
+    search_payloads: Iterable[str | Mapping[str, Any]],
+    observation_payloads: Iterable[Any],
+    *,
+    max_calls: int = 6,
+) -> list[dict[str, Any]]:
+    """Expand list/search results into safe record-detail GET calls.
+
+    V1 deliberately handles only endpoint families where the record identifier
+    was returned by an earlier benchmark read. This avoids inventing IDs while
+    enabling the common list -> get tool pattern.
+    """
+    endpoints: list[dict[str, Any]] = []
+    seen_eps: set[tuple[str, str]] = set()
+    for payload in search_payloads:
+        for ep in parse_search_payload(payload):
+            key = (str(ep.get("method") or ""), str(ep.get("url") or ""))
+            if key in seen_eps:
+                continue
+            seen_eps.add(key)
+            endpoints.append(ep)
+
+    records: list[dict[str, Any]] = []
+
+    def walk(value: Any) -> None:
+        if isinstance(value, str):
+            try:
+                walk(json.loads(value))
+            except Exception:
+                return
+            return
+        if isinstance(value, Mapping):
+            row = dict(value)
+            if any(str(k).lower() in {"id", "gid", "threadid", "thread_id"} for k in row):
+                records.append(row)
+            for child in row.values():
+                walk(child)
+            return
+        if isinstance(value, list):
+            for child in value:
+                walk(child)
+
+    for payload in observation_payloads:
+        walk(payload)
+
+    detailed_message_ids = {
+        str(row.get("id"))
+        for row in records
+        if row.get("id") is not None
+        and any(
+            row.get(k) not in (None, "", [], {})
+            for k in ("body", "body_plain", "payload", "subject", "from_", "from")
+        )
+    }
+    listed_message_ids = []
+    for row in records:
+        rid = row.get("id")
+        if rid is None:
+            continue
+        rid = str(rid)
+        has_thread = row.get("threadId") is not None or row.get("thread_id") is not None
+        if has_thread and rid not in detailed_message_ids and rid not in listed_message_ids:
+            listed_message_ids.append(rid)
+
+    out: list[dict[str, Any]] = []
+    for ep in rank_endpoints(prompt, endpoints):
+        if str(ep.get("method") or "").upper() != "GET":
+            continue
+        ep_id = str(ep.get("id") or "").lower()
+        ep_text = _endpoint_text(ep)
+
+        # Gmail list -> message detail. The candidate IDs come only from a
+        # prior list response and are skipped once a detailed record is seen.
+        is_gmail_message_get = (
+            "gmail" in ep_text
+            and "message" in ep_text
+            and (
+                ep_id.endswith("messages.get")
+                or "specific email message by its id" in ep_text
+            )
+        )
+        if not is_gmail_message_get or not listed_message_ids:
+            continue
+
+        for message_id in listed_message_ids:
+            url = str(ep.get("url") or "")
+            if not url:
+                continue
+            params: dict[str, str] = {}
+            ok = True
+            for name, spec in _required_parameters(ep):
+                compact = re.sub(r"[^a-z0-9]", "", name.lower())
+                value: Any = spec.get("default")
+                if value is None and compact in {"id", "messageid"}:
+                    value = message_id
+                if value is None:
+                    value = _ground_required_param(name, prompt)
+                if value is None:
+                    ok = False
+                    break
+                value = str(value)
+                if str(spec.get("location") or "").lower() == "path" or ("{" + name + "}") in url:
+                    placeholder = "{" + name + "}"
+                    if placeholder not in url:
+                        ok = False
+                        break
+                    url = url.replace(placeholder, quote(value, safe=""))
+                else:
+                    params[name] = value
+            if not ok or "{" in url or "}" in url:
+                continue
+            args: dict[str, Any] = {"method": "GET", "url": url}
+            if params:
+                args["params"] = json.dumps(params, sort_keys=True)
+            out.append({
+                "tool": "api_fetch",
+                "arguments": args,
+                "endpoint_id": ep.get("id"),
+                "grounded_from_observation_id": message_id,
+            })
+            if len(out) >= max_calls:
+                return out
+    return out
+
+
 def _parse_dt(value: Any) -> float:
     if value is None:
         return 0.0
