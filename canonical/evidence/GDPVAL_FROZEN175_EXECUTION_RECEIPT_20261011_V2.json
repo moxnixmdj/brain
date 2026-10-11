@@ -1,0 +1,37 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_FROZEN175_EXECUTION_RECEIPT_20261011_V2",
+  "date": "2026-10-11",
+  "status": "PASS__ONE_MORE_CANONICALLY_PRECOMMITTED_TASK_EXECUTED_AND_FROZEN__ZERO_OWNER_SCORE_CREDIT",
+  "benchmark": "GDPval-AA v2.1",
+  "population_precommit_commit": "c7ee545270e5781f25e6c39b3756229cd68b1b78",
+  "prior_receipt_commit": "f2d490d2f71696996158189dd5f7290e99cc619d",
+  "task": {
+    "row_idx": 40,
+    "task_id": "a0ef404e-82a6-4507-bff1-633d7c8e0004",
+    "prompt_sha256": "23cf99930245701ea15386114b9592b6da3507afe78350502886a30d4005bfca",
+    "packet_sha256": "85294bf7abe3a0e6c5480e1b04b31c6d0260ce6135c6335aa3747fceaa9e8cfe",
+    "output": {
+      "filename": "GDPval_a0ef404e_New_Rental_Agreement_Guide.docx",
+      "sha256": "4977c74f3358f4d92c42aece2ecb4d88c9b0e1b03dad29a50b9456bc80852a07"
+    },
+    "verification": {
+      "rendered_pages": 2,
+      "render_inspected_pages": 2,
+      "no_clipping_observed": true,
+      "forbidden_fields_exposed_before_output_freeze": false
+    }
+  },
+  "clean_stage1_count_delta": 1,
+  "clean_stage1_total_known_after_receipt": 8,
+  "hard_nonclaims": [
+    "NO_OWNER_ELO",
+    "NO_1846_CLAIM",
+    "NO_PUBLIC_RUBRIC_SCORE_YET_FOR_ROW_40",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "owner_score_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
