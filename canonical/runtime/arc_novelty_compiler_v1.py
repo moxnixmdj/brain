@@ -328,6 +328,32 @@ def _vcat(a: Grid, b: Grid) -> Grid | None:
     return tuple(tuple(row) for row in (*a, *b))
 
 
+def _self_kronecker(grid: Grid) -> Grid:
+    h, w = _shape(grid)
+    out: list[tuple[int, ...]] = []
+    zero_block = tuple(tuple(0 for _ in range(w)) for _ in range(h))
+    for br in range(h):
+        blocks = [grid if grid[br][bc] != 0 else zero_block for bc in range(w)]
+        for rr in range(h):
+            row: list[int] = []
+            for block in blocks:
+                row.extend(block[rr])
+            out.append(tuple(row))
+    return tuple(out)
+
+
+def _rotational_quad(grid: Grid) -> Grid | None:
+    tl = grid
+    tr = _rot90(grid)
+    bl = _rot270(grid)
+    br = _rot180(grid)
+    if not (_shape(tl) == _shape(tr) == _shape(bl) == _shape(br)):
+        return None
+    top = _hcat(tl, tr)
+    bottom = _hcat(bl, br)
+    return None if top is None or bottom is None else _vcat(top, bottom)
+
+
 def _repeat_grid(grid: Grid, row_repeats: int, col_repeats: int) -> Grid:
     if row_repeats < 1 or col_repeats < 1:
         raise ARCNoveltyCompilerError("REPEAT_FACTOR_INVALID")
@@ -839,6 +865,10 @@ def _predict(h: Mapping[str, Any], grid: Grid) -> Grid | None:
         return _scale_pixels(grid, int(h["row_factor"]), int(h["col_factor"]))
     if kind == "GRID_REPEAT":
         return _repeat_grid(grid, int(h["row_repeats"]), int(h["col_repeats"]))
+    if kind == "SELF_KRONECKER":
+        return _self_kronecker(grid)
+    if kind == "ROTATIONAL_QUAD_COMPLETION":
+        return _rotational_quad(grid)
     if kind == "MIRROR_EXTEND_HORIZONTAL":
         flipped = _flip_h(grid)
         return _hcat(flipped, grid) if h["side"] == "LEFT" else _hcat(grid, flipped)
@@ -952,6 +982,14 @@ def compile_hypotheses(
         h = {"kind": "GRID_REPEAT", "row_repeats": rr, "col_repeats": cc}
         if _consistent(h, pairs):
             candidates.append(h)
+
+    h = {"kind": "SELF_KRONECKER"}
+    if _consistent(h, pairs):
+        candidates.append(h)
+
+    h = {"kind": "ROTATIONAL_QUAD_COMPLETION"}
+    if _consistent(h, pairs):
+        candidates.append(h)
 
     for side in ("LEFT", "RIGHT"):
         h = {"kind": "MIRROR_EXTEND_HORIZONTAL", "side": side}
@@ -1101,6 +1139,8 @@ def compile_hypotheses(
             "POSITIONWISE_DETERMINISTIC_RECOLOR",
             "EXACT_INTEGER_PIXEL_SCALE",
             "WHOLE_GRID_INTEGER_REPEAT",
+            "SELF_KRONECKER_REPLICATION",
+            "ROTATIONAL_QUADRANT_COMPLETION",
             "HORIZONTAL_MIRROR_EXTENSION",
             "VERTICAL_MIRROR_EXTENSION",
             "TWO_AXIS_MIRROR_QUADRANT_EXTENSION",
