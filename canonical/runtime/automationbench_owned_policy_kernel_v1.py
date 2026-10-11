@@ -331,12 +331,21 @@ def _parse_dt(value: Any) -> float:
         return 0.0
 
 
-def rank_source_records(prompt: str, records: Sequence[Mapping[str, Any]]) -> list[dict[str, Any]]:
-    """Rank candidate source records without using hidden assertions.
+def rank_source_records(
+    prompt: str,
+    records: Sequence[Mapping[str, Any]],
+    *,
+    record_role: str = "action_candidate",
+) -> list[dict[str, Any]]:
+    """Rank source records without using hidden assertions.
 
-    Strong negative guards apply before relevance/recency scoring:
-    DRAFT, DO NOT ACTION, and SUPERSEDED records are ineligible.
+    Negative action markers (DRAFT, DO NOT ACTION, SUPERSEDED) disqualify
+    *action candidates* such as emails that might trigger a workflow. They do
+    not disqualify policy/evidence records merely because those records discuss
+    the words "draft" or "superseded".
     """
+    if record_role not in {"action_candidate", "evidence"}:
+        raise ValueError("record_role must be action_candidate or evidence")
     pterms = set(_content_terms(prompt))
     rows = []
     for idx, rec0 in enumerate(records):
@@ -346,7 +355,7 @@ def rank_source_records(prompt: str, records: Sequence[Mapping[str, Any]]) -> li
             for k in ("subject","title","body","body_plain","text","description","notes")
         )
         low = text.lower()
-        blocked = any(
+        blocked = record_role == "action_candidate" and any(
             marker in low
             for marker in ("draft", "do not action", "do not process", "superseded")
         )
