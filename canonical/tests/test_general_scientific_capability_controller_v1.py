@@ -55,6 +55,24 @@ class GeneralScientificCapabilityControllerV1Tests(unittest.TestCase):
         self.assertEqual(out["status"],"PASS__VERIFIED_BENCHMARK_INDEPENDENT_SCIENTIFIC_RESULT",out)
         self.assertLess(abs(out["result"]["period"]-p)/p,0.02,out["result"])
 
+    def test_periodic_true_fundamental_is_not_blindly_halved(self):
+        p=11.0; s1=[]; s2=[]
+        for i in range(180):
+            tt=i*0.27
+            # The real fundamental and its second harmonic are both present.
+            # A half-period model cannot reproduce the fundamental component.
+            s1.append([tt,1.0+3.0*math.sin(2*math.pi*tt/p+0.1)+0.8*math.sin(4*math.pi*tt/p-0.2)])
+            s2.append([tt,-0.5+1.7*math.cos(2*math.pi*tt/p-0.4)+0.5*math.sin(4*math.pi*tt/p+0.3)])
+        out=c.solve({"series":[{"name":"a","points":s1},{"name":"b","points":s2}],
+                     "acceptance":{"min_r2":0.98}})
+        self.assertEqual(out["status"],"PASS__VERIFIED_BENCHMARK_INDEPENDENT_SCIENTIFIC_RESULT",out)
+        self.assertLess(abs(out["result"]["period"]-p)/p,0.02,out["result"])
+        self.assertNotEqual(
+            out["result"].get("alias_resolution",{}).get("status"),
+            "HALF_PERIOD_SELECTED__SECOND_HARMONIC_ALIAS_RESOLVED",
+            out["result"],
+        )
+
     def test_untyped_natural_language_fails_closed(self):
         out=c.solve({"goal":"Solve this scientific task"})
         self.assertEqual((out["status"],out["reason"]),("FAIL_CLOSED","NO_TYPED_SCIENTIFIC_SIGNATURE"))
