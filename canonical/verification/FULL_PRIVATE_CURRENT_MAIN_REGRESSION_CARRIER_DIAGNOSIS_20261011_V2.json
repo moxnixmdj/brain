@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_FULL_PRIVATE_CURRENT_MAIN_REGRESSION_CARRIER_DIAGNOSIS_20261011_V2",
+  "date": "2026-10-11",
+  "status": "EXECUTION_CARRIER_ROOT_CAUSE_REFINED__REPOSITORY_WIDE_GITHUB_ACTIONS_PRESTEP_FAILURE__EXACT_REGRESSION_NOT_EXECUTED__EXTERNAL_SPRITE_PRIVATE_REPO_AUTH_UNAVAILABLE__MAIN_UNPROTECTED__GATE_OPEN__ZERO_CREDIT",
+  "observed_current_main_commit": "d321b9b53094114e2f3f859f4e733ce4734c1d57",
+  "required_gate": "FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION",
+  "supersedes": {
+    "path": "canonical/verification/FULL_PRIVATE_CURRENT_MAIN_REGRESSION_CARRIER_DIAGNOSIS_20261011_V1.json",
+    "git_blob_sha": "8dec86c9a39fd009ee25b8ca3b8ff7f905474f10"
+  },
+  "new_causal_evidence": {
+    "regression_workflow_specific_failure_hypothesis": "FALSIFIED_AS_PRIMARY_CAUSE",
+    "basis": "MULTIPLE_DISTINCT_REPOSITORY_WORKFLOWS_FAILED_IN_THE_SAME_WINDOW_WITH_SECOND_SCALE_PRESTEP_FAILURES__THE_FULL_REGRESSION_JOBS_RECORDED_ZERO_STEPS_AND_NO_ASSIGNED_RUNNER",
+    "repository_wide_actions_carrier_failure_class": "SUPPORTED",
+    "deeper_exact_github_cause": "UNKNOWN__ACTIONS_POLICY_QUOTA_BILLING_OR_PLATFORM_CAUSE_NOT_READABLE_THROUGH_CURRENT_CONNECTOR",
+    "identical_rerun_value": "ZERO_UNTIL_CARRIER_STATE_CHANGES"
+  },
+  "exact_regression_truth": {
+    "regression_executed": false,
+    "any_test_executed": false,
+    "semantic_failure_observed": false,
+    "regression_pass": false,
+    "regression_fail_proved": false
+  },
+  "alternate_carrier_probe": {
+    "carrier": "EXISTING_RUNNING_BRAIN_VERIFICATION_SPRITE",
+    "new_infrastructure_created": false,
+    "private_repo_clone_attempted": true,
+    "private_repo_clone_result": "FAILED__NO_GITHUB_CREDENTIAL_AVAILABLE_IN_SPRITE",
+    "materialized_snapshot_suitable_for_exact_current_main_gate": false,
+    "reason": "MATERIALIZED_SNAPSHOT_IS_NOT_AN_EXACT_CURRENT_MAIN_GIT_CHECKOUT__PYTEST_ABSENT__PRIVATE_CANONICAL_REPO_CANNOT_BE_CLONED_WITH_AVAILABLE_SPRITE_AUTH",
+    "promotion_credit": 0
+  },
+  "reuse_verification": {
+    "two_engine_partition_replay": "PASS__13_EQUALS_10_O_PLUS_2_Q_PLUS_1_PARKED__ZERO_AUTHORITY_INFLATION",
+    "tb4_reuse_mechanism_unittest": "PASS__9_OF_9",
+    "gdpval_reuse_mechanism_unittest": "PASS__8_OF_8",
+    "chartography_reuse_mechanism_unittest": "PASS__3_OF_3",
+    "interpretation": "EXISTING_MECHANISMS_REVERIFY__ROW_ACCEPTANCE_REMAINS_OPEN_PENDING_AUTHENTIC_TARGET_EVIDENCE_OR_STRONGER_SCOPE_COMPLETE_CERTIFICATE"
+  },
+  "repository_promotion_enforcement": {
+    "main_branch_protected": false,
+    "required_status_checks_enforcement": "OFF",
+    "source": "GITHUB_BRANCH_MAIN_READ_2026_10_11",
+    "mutation_authority_available_through_current_connector": false,
+    "interpretation": "PR_VALIDATOR_LOGIC_EXISTS_BUT_GITHUB_DOES_NOT_MECHANICALLY_ENFORCE_IT_ON_MAIN"
+  },
+  "scheduler_rule": "DO_NOT_REPEAT_IDENTICAL_GITHUB_HOSTED_ACTIONS_ATTEMPTS__DO_NOT_ACCEPT_MATERIALIZED_SNAPSHOT_AS_EXACT_CURRENT_MAIN_REGRESSION__CONTINUE_NONCONFLICTING_REUSE_FIRST_FRONTIER_WORK__WAKE_REGRESSION_ONLY_ON_REAL_CARRIER_STATE_CHANGE_OR_AUTHORIZED_EXACT_PRIVATE_MAIN_CARRIER",
+  "wake_conditions": [
+    "GITHUB_ACTIONS_REPOSITORY_WIDE_PRESTEP_FAILURE_CLASS_CLEARS_AND_A_JOB_RECORDS_REAL_STEP_EXECUTION",
+    "AN_AUTHORIZED_EXTERNAL_CARRIER_GAINS_READ_ACCESS_TO_THE_EXACT_PRIVATE_CURRENT_MAIN_COMMIT",
+    "A_STRONGER_VALID_CONTENT_ADDRESSED_FULL_PRIVATE_CURRENT_MAIN_REGRESSION_RECEIPT_APPEARS"
+  ],
+  "hard_nonclaims": [
+    "NO_REGRESSION_PASS",
+    "NO_REGRESSION_FAIL_FROM_ZERO_STEP_JOBS",
+    "NO_ROW_ACCEPTANCE_CREDIT_FROM_MECHANISM_ONLY_REPLAYS",
+    "NO_UVCK_V2_PROMOTION",
+    "NO_BRANCH_PROTECTION_ENFORCEMENT",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "promotion_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
