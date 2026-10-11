@@ -11,7 +11,7 @@ def test_action_compilation_exact_pyautogui_surface():
         "actions": [{"type": "CLICK", "x": 100, "y": 200}],
     })
     assert response == "click target"
-    assert actions == ["pyautogui.click(100, 200)"]
+    assert actions == ["pyautogui.click(x=100, y=200, button='left')"]
 
 
 def test_special_action_is_singleton():
