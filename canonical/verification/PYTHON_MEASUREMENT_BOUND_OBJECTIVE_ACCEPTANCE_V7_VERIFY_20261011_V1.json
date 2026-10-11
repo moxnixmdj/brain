@@ -1,0 +1,70 @@
+{
+  "schema": "PROJECT_BRAIN_PYTHON_MEASUREMENT_BOUND_OBJECTIVE_ACCEPTANCE_V7_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "INDEPENDENT_TWO_SPRITE_EXACT_BYTE_PASS__V7_MEASUREMENT_BOUND_OBJECTIVE_ACCEPTANCE_VERIFIED__ZERO_BENCHMARK_CREDIT",
+  "base_main_commit": "59b143e8b937d96681caf6eb8afd01a1a2a00a94",
+  "branch": "coding-v7-measured-acceptance-current-20261011-v1",
+  "exact_blobs": {
+    "v6_objective_acceptance_runtime": "c138171744406edd8e75e4867634febdb596014b",
+    "v6_objective_acceptance_tests": "00a1b23a80c12cdb38493de0de6335b62247fef4",
+    "repository_measurement_runtime": "8f5870418de5396b7ae82fbdceb5c51c70f3104c",
+    "repository_measurement_tests": "0c99781622b30b7067063f2be626e0c0f132be73",
+    "measured_objective_acceptance_runtime": "36f4d62e6d7c785e7da7ef90b511eafafc4c9919",
+    "measured_objective_acceptance_tests": "4402a85ca8fc4b6f35c16b76d5b637bdf0d32f5b",
+    "bound_capability_registry": "3801a79448e68e9de48c76bdfd79e7245e2fe8a6"
+  },
+  "dependency_identity": {
+    "current_main_matches_verified_v6_dependency_blobs": true,
+    "changed_dependency_count": 0
+  },
+  "replay": {
+    "primary": {
+      "carrier": "SPRITES:brain-capability-first-scheduler-verify-20261008-v1",
+      "combined_tests_passed": 28,
+      "combined_tests_total": 28
+    },
+    "independent": {
+      "carrier": "SPRITES:brain-canonical-apply-slice-verify-20261011-v1",
+      "combined_tests_passed": 28,
+      "combined_tests_total": 28
+    },
+    "v6_exact_replay_before_v7": {
+      "carrier": "SPRITES:brain-capability-first-scheduler-verify-20261008-v1",
+      "passed": 13,
+      "total": 13
+    }
+  },
+  "verified": [
+    "REPOSITORY_TEST_FACTS_ARE_MEASURED_FROM_AN_ISOLATED_COPY_NOT_CALLER_ASSERTED",
+    "SOURCE_SNAPSHOT_MEASUREMENT_PROGRAM_AND_MEASUREMENT_SPEC_ARE_CONTENT_ADDRESSED",
+    "ORIGINAL_SOURCE_ROOT_REMAINS_UNCHANGED_DURING_MEASUREMENT",
+    "TAMPERED_MEASUREMENT_RECEIPT_FAILS_CLOSED",
+    "MEASURED_TRUE_AND_FALSE_TEST_RESULTS_PROPAGATE_TO_OBJECTIVE_ACCEPTANCE",
+    "MULTIPLE_MEASUREMENT_PREDICATES_COMPOSE",
+    "SEMANTIC_RAW_TASK_RESIDUALS_STILL_BLOCK_ACCEPTANCE_EVEN_WHEN_TESTS_PASS",
+    "BOUND_RUNTIME_ACTION_WRITES_HASHED_VERIFIED_ACCEPTANCE_OUTPUT",
+    "ZERO_EXTERNAL_GENERAL_PURPOSE_MODEL_RUNTIME_COGNITION",
+    "ZERO_INCREMENTAL_SPEND"
+  ],
+  "authority": {
+    "capability_credit": "BOUNDED_V7_MEASUREMENT_AND_MEASUREMENT_BOUND_OBJECTIVE_ACCEPTANCE_ONLY",
+    "frontiercode_score_credit": 0,
+    "terminal_credit": 0,
+    "general_software_engineering_completeness": false,
+    "general_natural_language_semantic_completeness": false,
+    "mergeability_authority": false
+  },
+  "hard_nonclaims": [
+    "NO_FRONTIERCODE_SCORE_INFERENCE",
+    "NO_TEST_PASS_EQUALS_COMPLETE_REQUEST_SEMANTICS",
+    "NO_GENERAL_NATURAL_LANGUAGE_SEMANTIC_COMPLETENESS",
+    "NO_ARBITRARY_PATCH_CONSTRUCTION_COMPLETENESS",
+    "NO_NON_PYTHON_GENERALIZATION_CLAIM",
+    "NO_TERMINAL_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_score_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
