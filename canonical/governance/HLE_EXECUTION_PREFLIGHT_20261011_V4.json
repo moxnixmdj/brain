@@ -1,0 +1,92 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_EXECUTION_PREFLIGHT_20261011_V4",
+  "date": "2026-10-11",
+  "status": "DATASET_GATE_CLOSED__FIVE_TRIAL_PROTOCOL_SOURCE_BOUND__EXACT_SCORE_STILL_GRADER_BOUND__ZERO_CREDIT",
+  "target_predicate": "HLE_WITH_TOOLS_REPORTED_SCORE_GE_67_7_UNDER_TARGET_PROTOCOL",
+  "population": {
+    "scope": "FIXED_ORIGINAL_HLE_2500",
+    "revision": "5a81a4c7271a2a2a312b9a690f0c2fde837e4c29",
+    "local_ingest_verification": "canonical/governance/HLE_DATASET_INGEST_VERIFICATION_20261011_V1.json",
+    "artifact_sha256": "6d0ee0602e8aea6b159509577e884f48ecac7b8e3f6822a35f51335a446c726a",
+    "rows": 2500,
+    "unique_ids": 2500
+  },
+  "target_protocol": {
+    "headline_score_percent": 67.7,
+    "with_tools": ["web_search","web_fetch","programmatic_tool_calling","code_execution"],
+    "thinking": "auto",
+    "reported_effort": "max",
+    "total_tokens_across_contexts_cap": 1000000,
+    "context_compaction": false,
+    "model_grader": "Claude Opus 4.6",
+    "contamination_controls": [
+      "search_and_fetch_blocklist_for_HLE_sources",
+      "screen_every_correctly_answered_transcript_for_HLE_specific_source_signs",
+      "review_flagged_transcripts_and_regrade_confirmed_cheating_as_incorrect"
+    ],
+    "trials": 5,
+    "population_per_trial": 2500,
+    "total_slots": 12500,
+    "aggregation": "AVERAGE_OVER_FIVE_TRIALS",
+    "threshold_success_equivalent_if_each_slot_is_binary_and_no_missing_or_special_weighting": 8463,
+    "threshold_fraction_percent": 67.704,
+    "source_notes": [
+      "Anthropic Opus 5.5 announcement publishes HLE with-tools score 67.7 and states max adaptive thinking unless otherwise noted.",
+      "Opus 5.5 system-card text states HLE uses 2500 questions, tools, auto thinking, 1M token cap, no compaction, Claude Opus 4.6 grader, and contamination screening.",
+      "Capability summary table states standard results are averaged over five trials unless otherwise noted; HLE section does not override this.",
+      "The original first-party system-card PDF URL was identified, but this environment's web fetch rejected the 17.8MB PDF for size; the five-trial line was verified from a faithful HTML transcription linked to the original PDF."
+    ]
+  },
+  "dataset_gate": {
+    "status": "CLOSED",
+    "authenticated_access_obtained": true,
+    "artifact_acquired": true,
+    "structural_integrity_verified": true,
+    "questions_exposed_to_model": 0,
+    "answers_exposed_to_model": 0,
+    "terminal_cases_consumed": 0
+  },
+  "solver_protocol": {
+    "tool_adapter": "canonical/runtime/root2_hle_opus55_tool_adapter_v1.py",
+    "gold_isolation_required": true,
+    "contamination_controls_required": true,
+    "external_model_solver_substitution_forbidden": true,
+    "rule": "No output produced by another model may be represented as a Brain solver capability or Brain benchmark result."
+  },
+  "scoring": {
+    "reference_semantic_certificate": {
+      "runtime": "canonical/runtime/hle_exact_commit_semantic_certificate_v1.py",
+      "role": "SUPPLEMENTARY_STRICT_REFERENCE_CORRECTNESS_CERTIFICATE",
+      "threshold_exact_identities": 8463,
+      "sufficient_for_exact_target_benchmark_score": false
+    },
+    "target_benchmark_score": {
+      "required": true,
+      "remaining_load_bearing_gate": "TARGET_GRADER_BINDING_OR_SOUND_DIRECTIONAL_RELATION",
+      "acceptable_closure": [
+        "AUTHENTIC_CLAUDE_OPUS_4_6_TARGET_GRADER_RECEIPT_ON_BRAIN_TRANSCRIPTS",
+        "PROTOCOL_EQUIVALENT_CLAUDE_OPUS_4_6_GRADER_WITH_BOUND_PROMPT_DECODING_AND_EDGE_POLICY",
+        "PROVED_ONE_SIDED_CONSERVATIVE_SCORER_RELATION_TO_TARGET_GRADER"
+      ]
+    }
+  },
+  "remaining_blockers": ["TARGET_GRADER_BINDING_OR_SOUND_DIRECTIONAL_RELATION"],
+  "removed_from_critical_path": [
+    "HUGGINGFACE_AUTHENTICATED_ACCESS_AND_CAIS_HLE_TERMS_ACCEPTANCE",
+    "DATASET_POPULATION_AVAILABILITY",
+    "ORIGINAL_VS_ROLLING_VS_DIAMOND_POPULATION_AMBIGUITY",
+    "FIVE_TRIAL_AGGREGATION_AMBIGUITY"
+  ],
+  "hard_nonclaims": [
+    "NO_HLE_SCORE_EXISTS_YET",
+    "NO_TERMINAL_HLE_CASE_HAS_BEEN_RUN",
+    "NO_CLAIM_EXACT_GOLD_IDENTITY_FORCES_THE_TARGET_MODEL_GRADER_TO_RETURN_CORRECT",
+    "NO_EXTERNAL_MODEL_SOLVER_OUTPUT_COUNTS_AS_BRAIN_CAPABILITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
