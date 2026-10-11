@@ -55,7 +55,7 @@
   },
   "current_residual_reuse_classification": {
     "path": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
-    "observed_git_blob_sha": "fbc6d0517869923bbf0ee848d921db1f203a7a39",
+    "observed_git_blob_sha": "67d2b92f52c53d729c8943370ce79fbd45c41dfb",
     "status": "DERIVED_CURRENT_CLASSIFICATION__ESCAPE_TOPOLOGY_12_ACTIVE_ACQUISITION_PLUS_1_PARKED_TB__NO_ACTIVE_GAP_B__PROFESSIONAL_PROPERTY_TRUTH_24_OF_24__REGRESSION_CARRIER_WAKE_GATED__ZERO_CREDIT"
   },
   "professional_whole_leaf_control": {
@@ -268,5 +268,12 @@
     "remaining_professional_promotion_gate": "FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION",
     "regression_carrier_blocked": true,
     "live_default_promoted": false
+  },
+  "current_escape_two_engine_minimum_delta_cut": {
+    "path": "canonical/governance/CURRENT_ESCAPE_TWO_ENGINE_MINIMUM_DELTA_CUT_20261011_V1.json",
+    "observed_git_blob_sha": "ee4e082c02b2da84bb029bc0fe92660135aa2b49",
+    "verification_path": "canonical/verification/CURRENT_ESCAPE_TWO_ENGINE_MINIMUM_DELTA_VERIFY_20261011_V1.json",
+    "status": "CURRENT_ACTIVE_ESCAPE_COLLAPSED_TO_TWO_REUSE_ENGINES__O10_ACTIVE__Q2_ACTIVE__TB_PARKED__READY_MADE_O_CLAIM_SPECS_EXHAUSTED__ZERO_CREDIT",
+    "relation_to_row_specialization": "COMPRESSION_LAYER_ONLY__CURRENT_FRONTIER_REUSE_SPECIALIZATION_RETAINS_EXACT_ROW_DELTAS"
   }
 }
