@@ -5117,6 +5117,227 @@
         "heldout_chartography_cases_consumed": 0,
         "model_dependency_count": 0
       }
+    },
+    "python.software.repair.semantic_acceptance.v1": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "incremental_spend_usd": 0,
+      "cost": 1,
+      "requires": [
+        "python.source.file.available",
+        "python.test.corpus.available"
+      ],
+      "provides": [
+        "python.software.repair.semantic_acceptance",
+        "python.patch.candidate.semantic_acceptance_verified"
+      ],
+      "result_fields": [
+        "status",
+        "pass",
+        "repair_pass",
+        "acceptance_stop_authorized",
+        "repair_status",
+        "winner_mode",
+        "realized_patches",
+        "baseline_snapshot_sha256",
+        "candidate_subject_snapshot_sha256",
+        "measurement_receipt_payload_sha256",
+        "measurement_program_sha256",
+        "measurement_spec_sha256",
+        "measured_fields",
+        "acceptance_status",
+        "acceptance_payload_sha256",
+        "objective_route_obligation_ids",
+        "semantic_residual_obligation_ids",
+        "unbound_obligation_ids",
+        "failed_obligation_ids",
+        "obligation_results",
+        "source_restored",
+        "model_dependency_count",
+        "external_general_purpose_model_runtime_dependency_count",
+        "incremental_spend_usd",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "keywords": [
+        "python",
+        "software",
+        "repair",
+        "semantic",
+        "acceptance",
+        "raw-task",
+        "scope",
+        "file",
+        "content-addressed",
+        "candidate",
+        "verification"
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "python.software.repair.semantic_acceptance.v1",
+          "source_root": "${input.source_root}",
+          "test_paths": "${input.test_paths}",
+          "test_argv": "${input.test_argv}",
+          "task_text": "${input.goal}",
+          "output_path": "${input.output_path}",
+          "timeout_s": 20
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "python_repair_semantic_acceptance_controller_v1",
+      "entrypoint": "run",
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "limitations": [
+        "Extends verified V8 bounded Python repair with content-addressed repository measurement plus complete lossless obligation accounting across measured objective routes and explicit source-grounded semantic cells.",
+        "Supported semantic cells are bounded to exact file content presence/absence, file existence/absence, Python parse, unchanged-path, and allowed-changed-path directives.",
+        "Unrecognized or ambiguous raw-task segments remain explicit blocking residuals; the runtime does not guess their meaning.",
+        "Python only and inherited repair search remains bounded; no arbitrary patch depth, hidden-requirement coverage, cross-language generalization, general mergeability, or FrontierCode score authority."
+      ],
+      "source": {
+        "type": "python_stdlib_composition",
+        "modules": [
+          "hashlib",
+          "json",
+          "os",
+          "pathlib",
+          "sys",
+          "tempfile"
+        ],
+        "adapter_path": "canonical/runtime/bound_capabilities/python_repair_semantic_acceptance_controller_v1.py",
+        "composed_capabilities": [
+          "python.software.repair.measured_acceptance.v1",
+          "python.repository.acceptance.measure.v1",
+          "python.task.acceptance.measured.objective.v1"
+        ],
+        "composed_runtime": [
+          "canonical/runtime/python_request_acceptance_union_v1.py",
+          "canonical/runtime/bound_capabilities/python_request_semantic_acceptance_cells_v1.py"
+        ]
+      },
+      "verification": {
+        "status": "INDEPENDENT_TWO_SPRITE_FOCUSED_FALSIFICATION_PASS",
+        "primary_sprite": "brain-capability-first-scheduler-verify-20261008-v1",
+        "independent_sprite": "brain-canonical-apply-slice-verify-20261011-v1",
+        "exact_two_carrier_replay": "12_OF_12_EACH",
+        "runtime_git_blob_sha": "85b517117d537990bf3d7ae8205c8c71bc264a76",
+        "semantic_cells_git_blob_sha": "7358dcd9fbcca68724c72b53411628fceb9a96d0",
+        "acceptance_union_git_blob_sha": "5080a04c1e00428816046bae45afe209184244fd",
+        "test_git_blob_sha": "bf34315417e67b129b2e1999e04ff89019f62c39",
+        "receipt_path": "canonical/verification/PYTHON_SOFTWARE_REQUEST_SEMANTIC_ACCEPTANCE_V9_VERIFY_20261011_V1.json",
+        "model_dependency_count": 0,
+        "external_general_purpose_model_runtime_dependency_count": 0,
+        "incremental_spend_usd": 0
+      }
+    },
+    "python.software.request.semantic_behavior.compile.v1": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "incremental_spend_usd": 0,
+      "cost": 1,
+      "requires": [],
+      "provides": [
+        "python.software.request.semantic_behavior.acceptance_program_compiled"
+      ],
+      "result_fields": [
+        "schema",
+        "status",
+        "pass",
+        "coverage_complete",
+        "task_sha256",
+        "lossless_task_contract_sha256",
+        "required_obligation_ids",
+        "compiled_obligation_ids",
+        "residual_obligation_ids",
+        "cells",
+        "compile_errors",
+        "compiler_payload_sha256",
+        "acceptance_program_sha256",
+        "model_dependency_count",
+        "external_general_purpose_model_runtime_dependency_count",
+        "incremental_spend_usd",
+        "terminal_authority",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "keywords": [
+        "python",
+        "software",
+        "request",
+        "semantic",
+        "behavior",
+        "acceptance",
+        "call",
+        "exception",
+        "function",
+        "class",
+        "exact-text",
+        "compiler"
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "python.software.request.semantic_behavior.compile.v1",
+          "task_text": "${input.goal}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "python_software_request_semantic_acceptance_v1",
+      "entrypoint": "run",
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "limitations": [
+        "One-sided controlled semantic compiler for explicit Python callable equality/boolean/exception requirements, exact file text, and top-level function/class existence.",
+        "Compilation is complete only when every lossless raw-task obligation is covered by the supported line grammar; malformed, mixed unsupported, or ambiguous lines remain blocking residuals.",
+        "Generated acceptance programs resolve callables only to repository-local Python modules and reject injection-shaped callable syntax.",
+        "This compiler does not itself prove that a candidate passes the generated acceptance program and has no general natural-language, cross-language, mergeability, benchmark-score, promotion, or terminal authority."
+      ],
+      "source": {
+        "type": "python_stdlib",
+        "modules": [
+          "ast",
+          "builtins",
+          "hashlib",
+          "importlib",
+          "importlib.util",
+          "json",
+          "pathlib",
+          "re",
+          "sys"
+        ],
+        "adapter_path": "canonical/runtime/bound_capabilities/python_software_request_semantic_acceptance_v1.py",
+        "composed_runtime": [
+          "canonical/runtime/lossless_raw_task_contract_v1.py"
+        ]
+      },
+      "verification": {
+        "status": "INDEPENDENT_TWO_SPRITE_FOCUSED_FALSIFICATION_PASS",
+        "primary_sprite": "brain-capability-first-scheduler-verify-20261008-v1",
+        "independent_sprite": "brain-canonical-apply-slice-verify-20261011-v1",
+        "exact_two_carrier_replay": "12_OF_12_EACH",
+        "runtime_git_blob_sha": "3f4e23ab91e4b79c1e12ce8e1e3f0c985336ef31",
+        "test_git_blob_sha": "4f268918039e2b6e13ee73133dad46c4b3cc1165",
+        "receipt_path": "canonical/verification/PYTHON_SOFTWARE_REQUEST_SEMANTIC_ACCEPTANCE_V9_VERIFY_20261011_V1.json",
+        "model_dependency_count": 0,
+        "external_general_purpose_model_runtime_dependency_count": 0,
+        "incremental_spend_usd": 0
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
