@@ -1,0 +1,24 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_SCALE_ROW27_CONTAMINATION_TOMBSTONE_20261011_V1",
+  "date": "2026-10-11",
+  "status": "ROW27_SPENT_FOR_FRESH_PROMOTION_EVIDENCE__ZERO_SCORE_CREDIT",
+  "benchmark": "GDPval-AA v2.1",
+  "subject": {
+    "row_idx": 27,
+    "task_id": "2696757c-1f8a-4959-8f0d-f5597b9e70fc"
+  },
+  "precommit": "canonical/governance/GDPVAL_SCALE_FRESH_BATCH_ROWS25_34_PRECOMMIT_20261011_V1.json",
+  "cause": "PREOUTPUT_WEB_SEARCH_FOR_THE_CITED_VA_HANDBOOK_PARAGRAPHS_SURFACED_INDEXED_GDPVAL_SPECIFIC_RUBRIC_AND_THIRD_PARTY_MODEL_SUBMISSION_MATERIAL_FOR_THIS_EXACT_TASK",
+  "freshness_boundary": {
+    "official_prompt_read_after_precommit": true,
+    "brain_output_bytes_frozen": false,
+    "third_party_task_specific_evaluation_or_submission_exposure_before_output_freeze": true,
+    "consequence": "TASK_MAY_NOT_COUNT_AS_FRESH_SCALE_EVIDENCE"
+  },
+  "scheduler": "DO_NOT_COMPLETE_OR_REPAIR_ROW27_FOR_FRESH_CREDIT__CONTINUE_ASCENDING_WITH_ROW28_UNDER_EXISTING_PRECOMMIT_AND_FIELD_FIREWALL__FOR_FUTURE_CITED_PDF_TASKS_FETCH_THE_EXACT_OFFICIAL_SOURCE_BYTES_DIRECTLY_IN_ISOLATED_RUNTIME_BEFORE_ANY_WEB_SEARCH",
+  "accounting": {
+    "owner_score_credit": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
