@@ -111,6 +111,53 @@ class GroundedUpdateCompilerTests(unittest.TestCase):
         self.assertFalse(out["pass"])
         self.assertEqual(out["reason"], "SALESFORCE_FIELDS_REQUIRED")
 
+
+    def test_sheets_named_row_update_uses_benchmark_row_route(self):
+        out = compile_grounded_update({
+            "surface": SURFACE,
+            "app": "GOOGLE_SHEETS",
+            "spreadsheet_id": "ss_ic",
+            "worksheet_id": "ws_feb_ic",
+            "row_id": 2,
+            "cells": {"Status": "Processed"},
+            "grounding_complete": True,
+            "provenance_bound": True,
+            "provenance": ["ROW:2", "POLICY:APPROVED_ONLY"],
+        })
+        self.assertTrue(out["pass"], out)
+        call = out["tool_call"]["arguments"]
+        self.assertEqual(call["method"], "PUT")
+        self.assertTrue(call["url"].endswith("/values/ws_feb_ic/rows/2"))
+        self.assertEqual(json.loads(call["body"]), {"cells": {"Status": "Processed"}})
+
+    def test_sheets_named_row_update_rejects_missing_worksheet(self):
+        out = compile_grounded_update({
+            "surface": SURFACE,
+            "app": "GOOGLE_SHEETS",
+            "spreadsheet_id": "ss_ic",
+            "worksheet_id": "",
+            "row_id": 2,
+            "cells": {"Status": "Processed"},
+            "grounding_complete": True,
+            "provenance_bound": True,
+        })
+        self.assertFalse(out["pass"])
+        self.assertEqual(out["reason"], "WORKSHEET_ID_INVALID")
+
+    def test_sheets_named_row_update_rejects_empty_cells(self):
+        out = compile_grounded_update({
+            "surface": SURFACE,
+            "app": "GOOGLE_SHEETS",
+            "spreadsheet_id": "ss_ic",
+            "worksheet_id": "ws_feb_ic",
+            "row_id": 2,
+            "cells": {},
+            "grounding_complete": True,
+            "provenance_bound": True,
+        })
+        self.assertFalse(out["pass"])
+        self.assertEqual(out["reason"], "NAMED_CELLS_REQUIRED")
+
     def test_no_self_promotion_authority(self):
         for spec in (self.sf(), self.sheet()):
             out = compile_grounded_update(spec)
