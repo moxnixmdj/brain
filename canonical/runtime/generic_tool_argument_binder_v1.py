@@ -33,6 +33,7 @@ _FIELD_GROUPS = {
     "person": {"assignee","owner","user","member","contact","employee"},
     "email": {"email","recipient","to"},
     "amount": {"amount","total","price","cost","value"},
+    "query": {"query","q","search_query","searchquery","filter"},
     "id": _ID_KEYS,
 }
 _ALIAS_TO_GROUP = {
@@ -443,12 +444,42 @@ def _literal_id_for_semantic(semantic: str, goal: str, facts: Mapping[str, list[
     return None
 
 
+_QUERY_STOP = {
+    "a","an","the","to","of","for","from","with","in","on","at","by","as",
+    "it","its","this","that","these","those","and","or","then","please","our",
+    "my","your","their","all","any","each","into","onto","using","use","before",
+    "after","once","when","where","which","who","what","is","are","be","been",
+    "find","get","lookup","search","list","read","review","inspect","check",
+    "verify","confirm","create","add","log","record","post","schedule","open",
+    "make","submit","append","insert","update","mark","change","set","edit",
+    "correct","close","flag","send","notify","message","reply","alert","delete",
+    "remove","void","cancel","archive","unsubscribe","attach","assign","move",
+    "route","link","apply","do","not","must","should","can","could","would",
+    "will","just","sure","latest","current","recent",
+}
+
+
+def _query_from_text(value: str) -> str | None:
+    text = str(value or "")
+    tokens: list[str] = []
+    for raw in re.findall(r"[A-Za-z][A-Za-z0-9_-]*", text):
+        token = raw.lower()
+        if len(token) < 3 or token in _QUERY_STOP:
+            continue
+        if token not in tokens:
+            tokens.append(token)
+    if not tokens:
+        return None
+    return " ".join(tokens[:10])
+
+
 def _bind_semantic_value(
     semantic: str,
     *,
     goal: str,
     facts: Mapping[str, list[str]],
     records: Sequence[Mapping[str, Any]],
+    query_context: str | None = None,
 ) -> Any:
     relation_semantics = {"project","workspace","section","task","tag","person","id"}
     if semantic in relation_semantics:
@@ -484,6 +515,9 @@ def _bind_semantic_value(
         emails = _EMAIL.findall(goal)
         if emails:
             return emails[0]
+
+    if semantic == "query":
+        return _query_from_text(query_context or goal)
 
     return None
 
@@ -591,6 +625,7 @@ def bind_endpoint_call(
     goal: str,
     endpoint: Mapping[str, Any],
     observations: Sequence[Any],
+    context_text: str | None = None,
 ) -> dict[str, Any]:
     method = str(endpoint.get("method") or "").upper().strip()
     url = str(endpoint.get("url") or endpoint.get("path") or "").strip()
@@ -618,6 +653,7 @@ def bind_endpoint_call(
                 goal=goal,
                 facts=facts,
                 records=records,
+                query_context=context_text,
             )
             if value is not None:
                 source = "grounded"
@@ -666,6 +702,7 @@ def bind_endpoint_call(
             goal=goal,
             facts=facts,
             records=records,
+            query_context=context_text,
         )
         if value is None:
             if spec["required"]:
