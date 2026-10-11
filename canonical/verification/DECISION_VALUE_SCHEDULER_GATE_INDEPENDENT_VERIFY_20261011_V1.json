@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_DECISION_VALUE_SCHEDULER_GATE_INDEPENDENT_VERIFY_20261011_V1",
   "date": "2026-10-11",
-  "status": "PASS__CURRENT_24_OF_24_PROFESSIONAL_SEMANTICS_REPAIRED__ESCAPE_DECISION_VALUE_GATE__23_OF_23_COMBINED_TESTS__PYCOMPILE_PASS__CURRENT_PLAN_REPLAY_PASS__ZERO_CREDIT",
+  "status": "PASS__CURRENT_24_OF_24_PROFESSIONAL_SEMANTICS_REPAIRED__ESCAPE_DECISION_VALUE_GATE__SCALAR_FALLBACK_R2_DRIFT_FAIL_CLOSED__46_OF_46_SCHEDULER_SLICE_PASS__PYCOMPILE_PASS__CURRENT_PLAN_REPLAY_PASS__ZERO_CREDIT",
   "objective": "VERIFY_THE_ACTIVE_POST_COMPOSITION_SCHEDULER_FAILS_CLOSED_ON_CURRENT_TRUTH_AND_SCHEDULES_ONLY_DECISION_CHANGING_ESCAPE_WORK",
   "branch_base_main_commit": "3d0f7a0c8ff0c2a5c4144ede3435af3471db814f",
   "subjects": {
@@ -24,6 +24,10 @@
     "residual_classifier": {
       "path": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
       "git_blob_sha": "8086e42df231620a07823fca8a72cd4b47c9815e"
+    },
+    "capability_first_scheduler_tests": {
+      "path": "canonical/tests/test_capability_first_scheduler_v1.py",
+      "git_blob_sha": "c848c9e86e4f9fee5c13f655ec38bba18be59622"
     }
   },
   "independent_replay": {
@@ -38,7 +42,15 @@
       "canonical.tests.test_capability_parallel_frontier_v2",
       "canonical.tests.test_capability_parallel_frontier_post_composition_v2"
     ],
-    "current_plan_replay": "PASS"
+    "current_plan_replay": "PASS",
+    "scheduler_slice_tests_run": 46,
+    "scheduler_slice_tests_passed": 46,
+    "scheduler_slice_tests_failed": 0,
+    "scheduler_slice_suites": [
+      "canonical.tests.test_capability_first_scheduler_v1",
+      "canonical.tests.test_capability_parallel_frontier_v2",
+      "canonical.tests.test_capability_parallel_frontier_post_composition_v2"
+    ]
   },
   "current_plan_truth": {
     "professional_property_truth_closed_count": 24,
@@ -71,20 +83,35 @@
       "BYTES_EXACT_SYMBOLIC_V47_NEXT_PHYSICAL_CUT",
       "ESCAPE_GAP_A_AUTHENTICATED_ROW_PROOFS"
     ],
-    "parallel_full_execution_work_ids": []
+    "parallel_full_execution_work_ids": [],
+    "scalar_fallback_state": "BLOCKED_R2_POLICY_SOURCE_LOCK_DRIFT__PRIMARY_V16_ACTIVE",
+    "r2_scalar_fallback_drifted_sources": [
+      {
+        "path": "canonical/runtime/general_adequate_decision_controller_v1.py",
+        "policy_git_blob_sha": "368c6ac07e8feaf1a0c880de5388b618def912e2",
+        "current_git_blob_sha": "b5c609eb902cd0ea21d81710588dd538aa05cb4f"
+      },
+      {
+        "path": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
+        "policy_git_blob_sha": "cabe3bd1ec3748a595f3a959718c38accdacfb2f",
+        "current_git_blob_sha": "34d62b109b99f38e62995544871460b266d2c7df"
+      }
+    ]
   },
   "defects_repaired": [
     "POST_COMPOSITION_PROFESSIONAL_ADAPTER_EXPECTED_STALE_12_EXECUTION_0_SEMANTIC_PHASE_AND_REAWAKENED_CLOSED_PROPERTY_TRUTH_WORK",
     "BYTES_ADAPTER_EXPECTED_QUALIFICATION_CLEAN_ROOM_AND_ARCHIVE_FIELDS_TO_SHARE_ONE_STRING_DESPITE_CURRENT_V47_TYPED_FIELDS",
     "LIVE_FRONTIER_RESIDUAL_SOURCE_BINDING_WAS_STALE",
-    "ESCAPE_GAP_A_COARSE_READY_EVIDENCE_PROJECTION_IGNORED_NEWER_ROW_LEVEL_WAKE_GATES"
+    "ESCAPE_GAP_A_COARSE_READY_EVIDENCE_PROJECTION_IGNORED_NEWER_ROW_LEVEL_WAKE_GATES",
+    "SCALAR_FALLBACK_COULD_PRESENT_STALE_R2_POLICY_IMMUTABLE_SOURCE_LOCKS_AS_ELIGIBLE__NOW_FAIL_CLOSED_WHILE_PRIMARY_V16_REMAINS_ACTIVE"
   ],
   "hard_nonclaims": [
     "NO_CHECKPOINT_ACCEPTANCE_CREDIT",
     "NO_CAPABILITY_OWNERSHIP_OR_PROMOTION_CREDIT",
     "NO_CLAIM_GDPVAL_OR_HLE_IS_CLOSED",
     "NO_CLAIM_SLEEPING_ROWS_ARE_IMPOSSIBLE_TO_CLOSE",
-    "NO_FULL_EXECUTION_AUTHORITY_FROM_THIS_SCHEDULER_REPAIR"
+    "NO_FULL_EXECUTION_AUTHORITY_FROM_THIS_SCHEDULER_REPAIR",
+    "NO_REQUALIFICATION_CLAIM_FOR_DRIFTED_R2_SCALAR_FALLBACK_IMMUTABLE_DEPENDENCIES"
   ],
   "accounting": {
     "incremental_spend_usd": 0,
