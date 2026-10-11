@@ -1,0 +1,107 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_SCALE_BRAIN_SUBMISSION_RECEIPT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__FRESH_AUDIO_ZIP_SUBMISSION_FROZEN__TECHNICAL_QA_PASS__ZERO_OWNER_SCORE_CREDIT",
+  "benchmark": "GDPval-AA v2.1",
+  "subject": {
+    "row_idx": 12,
+    "task_id": "38889c3b-e3d4-49c8-816a-3cc8e5313aba",
+    "sector": "Information",
+    "occupation": "Audio and Video Technicians"
+  },
+  "precommit": "canonical/governance/GDPVAL_STAGE1_FRESH_BATCH_PRECOMMIT_20261011_V2.json",
+  "packet": {
+    "manifest_root_sha256": "f69af30fcea243ccb25d44c4a5380be0cdcac621287568525065034ce6cedae8",
+    "packet_sha256": "7525c13c9ccdbbf93c8005f0682e633a0d7fbf81f762bed7736e051e51543bdd",
+    "prompt_sha256": "cf0ddcc9be0c8e5e9e9e80f80434f01c54b1097faa11996be89abe1cff51fdd5",
+    "raw_obligation_count": 18,
+    "reference_count": 1
+  },
+  "freshness": {
+    "prompt_and_reference_allowed_after_precommit": true,
+    "rubric_read_before_output_freeze": false,
+    "human_gold_read_before_output_freeze": false,
+    "third_party_model_submission_read_before_output_freeze": false,
+    "judge_feedback_read_before_output_freeze": false
+  },
+  "reference": {
+    "filename": "DRUM REFERENCE TRACK.wav",
+    "sha256": "6d290de658f620fccd714a3406601fcf5a296e940f9f1a9f0bc2cee4399ce234",
+    "public_object_bytes": 33554432,
+    "decoded_frames": 5592392,
+    "riff_declared_frames": 6582858,
+    "samplerate": 48000,
+    "subtype": "PCM_24",
+    "corruption_finding": "PUBLIC_OBJECT_TRUNCATED_RELATIVE_TO_RIFF_DATA_LENGTH",
+    "repair": {
+      "source_complete_bars_preserved": 67,
+      "loop_source_bars": [
+        54,
+        67
+      ],
+      "target_declared_frames": 6582858,
+      "tail_filled_frames": 1069715,
+      "time_grid_bpm": 140
+    }
+  },
+  "deliverable": {
+    "filename": "Deja_Vu_Instrumental_Delivery.zip",
+    "sha256": "7701df47ddf91d33ef4d407e2c989a7250f2b50c6d23f9f0a22034e07918333f",
+    "bytes": 128574855,
+    "library_path": "/Project Brain/GDPval/stage1/38889c3b-e3d4-49c8-816a-3cc8e5313aba/Deja_Vu_Instrumental_Delivery.zip",
+    "library_file_id": "libfile_d98ab5a33b2c819184f600a8d3f2b384",
+    "members": [
+      "Deja_Vu_Master.wav",
+      "Guitars.wav",
+      "Synths.wav",
+      "Bridge.wav",
+      "Bass.wav",
+      "README.txt"
+    ]
+  },
+  "audio_files": [
+    {
+      "name": "Deja_Vu_Master.wav",
+      "sha256": "460b7dd5857737771792e5e1bdc1871b5dcd497be79623a8ca50919cb06d604f"
+    },
+    {
+      "name": "Guitars.wav",
+      "sha256": "ad9b1706233efd7d3e0cd4c5e34deda429aa83e90106112072ba92f4f66d26ea"
+    },
+    {
+      "name": "Synths.wav",
+      "sha256": "a4f42d6bc6410e2108058f251b1d29ded51b53df85ae6784163d6b6ede05471e"
+    },
+    {
+      "name": "Bridge.wav",
+      "sha256": "ac243b49c3ce79d0034005efacb2a6daea8cf3372c41f7a996f5bd6f5cced8fc"
+    },
+    {
+      "name": "Bass.wav",
+      "sha256": "1d48ed336413d1651fd9451795922b25e0a2572ee7229085661008fbb5fedaf2"
+    }
+  ],
+  "verification": {
+    "all_tracks_frames": 6582858,
+    "duration_seconds": 137.142875,
+    "channels": 2,
+    "samplerate": 48000,
+    "subtype": "PCM_24",
+    "clipping": "PASS__ALL_PEAKS_BELOW_1_0",
+    "bridge_window": "PASS__BRIDGE_STEM_EXACTLY_SILENT_OUTSIDE_82_TO_109_SECONDS",
+    "main_key_probe": "PASS__BASS_DOMINANT_100_HZ_NEAR_G2",
+    "bridge_key_probe": "PASS__BASS_DOMINANT_86_36_HZ_NEAR_F2_WITHIN_AB_MAJOR",
+    "timing_construction": "DRUM_COMPONENT_INSERTED_AT_IDENTICAL_SAMPLE_INDICES_WITH_140_BPM_GENERATED_STEM_GRID"
+  },
+  "hard_nonclaims": [
+    "NO_ARTIFICIAL_ANALYSIS_OWNER_SCORE",
+    "NO_GDPVAL_ELO",
+    "NO_1846_THRESHOLD_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
