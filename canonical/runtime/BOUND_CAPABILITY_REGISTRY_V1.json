@@ -3714,6 +3714,124 @@
         "external_capability_provider_count": 0,
         "incremental_spend_usd": 0
       }
+    },
+    "python.software_task.repair.explicit_tests.v1": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "incremental_spend_usd": 0,
+      "cost": 3,
+      "requires": [
+        "python.test.corpus.available"
+      ],
+      "provides": [
+        "software.task.explicit_test_bound.verified_candidate_patch"
+      ],
+      "result_fields": [
+        "status",
+        "pass",
+        "task_text",
+        "task_sha256",
+        "acceptance_status",
+        "acceptance_complete",
+        "acceptance_obligation_count",
+        "acceptance_bound_obligation_count",
+        "acceptance_obligations",
+        "acceptance_receipt_sha256",
+        "repair_executed",
+        "repair_action",
+        "repair_status",
+        "repair_receipt_sha256",
+        "repair_source_selection",
+        "repair_source_paths",
+        "repair_tested_candidate_count",
+        "source_restored",
+        "winning_edit_count",
+        "winning_chain",
+        "candidate_state_sha256",
+        "verification_replays",
+        "unified_diff",
+        "model_dependency_count",
+        "external_capability_provider_count",
+        "incremental_spend_usd",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "keywords": [
+        "software",
+        "task",
+        "repair",
+        "acceptance",
+        "patch",
+        "python",
+        "tests",
+        "multi-file",
+        "multi-edit",
+        "verified",
+        "orchestrator",
+        "repository"
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "python.software_task.repair.explicit_tests.v1",
+          "task_text": "${input.goal}",
+          "test_paths": "${input.test_paths}",
+          "output_path": "${input.output_path}",
+          "timeout_s": 60,
+          "max_sources": 12,
+          "max_candidates": 4000,
+          "beam_width": 12,
+          "max_edits": 2
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "software_task_repair_orchestrator_v1",
+      "entrypoint": "run",
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "limitations": [
+        "End-to-end only when every explicit task clause is exactly bound to structurally parsed Python test evidence.",
+        "Repair is forbidden when the acceptance contract is incomplete, ambiguous, or contains extra unbound semantics.",
+        "Downstream repair remains Python-only and bounded to a deterministic beam of at most two AST edits across localized source files.",
+        "Passing the explicit bound tests does not prove hidden requirements, broader regressions, code review quality, maintainability, or mergeability.",
+        "Candidate-only: repository source bytes are restored before return.",
+        "No FrontierCode score or acceptance credit by itself."
+      ],
+      "source": {
+        "type": "python_stdlib",
+        "modules": [
+          "hashlib",
+          "importlib.util",
+          "json",
+          "os",
+          "pathlib",
+          "tempfile"
+        ],
+        "adapter_path": "canonical/runtime/bound_capabilities/software_task_repair_orchestrator_v1.py",
+        "composed_verified_capabilities": [
+          "python.software_task.acceptance.explicit_tests.v1",
+          "python.repair.loop.test_guided.ast.v1"
+        ]
+      },
+      "verification": {
+        "status": "INDEPENDENT_TWO_CARRIER_FOCUSED_FALSIFICATION_PASS",
+        "receipt_path": "canonical/verification/SOFTWARE_TASK_REPAIR_ORCHESTRATOR_V1_VERIFY_20261011.json",
+        "first_carrier_test_count": 8,
+        "second_carrier_test_count": 8,
+        "runtime_git_blob_sha": "2e79d9fda71bb1186166d1850134deb8f236e3b0",
+        "runtime_sha256": "a08ccb1ecbec37145410fe35918e7a6bb2c41664617c8535d5fd9127bcb24931",
+        "test_git_blob_sha": "fa1d4fd82de4aa956752126dc5f94908986e7295",
+        "model_dependency_count": 0,
+        "external_capability_provider_count": 0,
+        "incremental_spend_usd": 0
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
