@@ -238,11 +238,11 @@
   "bytes_current_frontier": {
     "path": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
     "observed_git_blob_sha": "bd8ba8200c5bc59ee9b1bcc76f1f0abaf35bf806",
-    "status": "ACTIVE_RESEARCH__MPMATH_PERIPHERAL_V49_FRONTIER__SUCCESSOR_READY",
-    "raw_python_source_bytes": 1725064,
+    "status": "ACTIVE_RESEARCH__MPMATH_PERIPHERAL_V50_FRONTIER__SUCCESSOR_READY",
+    "raw_python_source_bytes": 1720680,
     "B_exec_raw_python_source_bytes": 1727824,
     "qualification": "14490/14490",
-    "next": "Rerank exact V49 using spent NEXT55 only; make a new physical cut before touching QUAL_SUCCESSOR_NEXT56_20261011_V1.",
+    "next": "Rerank exact V50 using spent NEXT56 only; make a new physical cut before touching QUAL_SUCCESSOR_NEXT57_20261011_V1.",
     "promotion_credit": 0,
     "observed_snapshot_is_non_authoritative_for_v15_runtime": true
   },
@@ -258,8 +258,8 @@
   "capability_frontier_currentness_reconciliation": {
     "path": "canonical/governance/CAPABILITY_FRONTIER_CURRENTNESS_RECONCILIATION_20261010_V1.json",
     "observed_git_blob_sha": "75b98646de035abe707180acc6f53d8868700e20",
-    "status": "CURRENTNESS_RECONCILED__PROFESSIONAL_24_OF_24__EXECUTION_12_OF_12__SEMANTIC_12_OF_12__REGRESSION_CARRIER_WAKE_GATED__ESCAPE_12_ACTIVE_ACQUISITION__BYTES_V49__R2_V91_WAKE_GATED__TB_PARKED__ZERO_CREDIT",
-    "next": "INSTANTIATE_EXISTING_ESCAPE_ROW_PROOF_MACHINERY__DO_NOT_REOPEN_PROFESSIONAL_PROPERTY_TRUTH__WAKE_REGRESSION_ONLY_ON_REAL_CARRIER_STATE_CHANGE__PARALLELIZE_BYTES_V49_RESOURCE_WORK"
+    "status": "CURRENTNESS_RECONCILED__PROFESSIONAL_24_OF_24__EXECUTION_12_OF_12__SEMANTIC_12_OF_12__REGRESSION_CARRIER_WAKE_GATED__ESCAPE_12_ACTIVE_ACQUISITION__BYTES_V50__R2_V91_WAKE_GATED__TB_PARKED__ZERO_CREDIT",
+    "next": "INSTANTIATE_EXISTING_ESCAPE_ROW_PROOF_MACHINERY__DO_NOT_REOPEN_PROFESSIONAL_PROPERTY_TRUTH__WAKE_REGRESSION_ONLY_ON_REAL_CARRIER_STATE_CHANGE__PARALLELIZE_BYTES_V50_RESOURCE_WORK"
   },
   "professional_regression_carrier_diagnosis": {
     "path": "canonical/verification/FULL_PRIVATE_CURRENT_MAIN_REGRESSION_CARRIER_DIAGNOSIS_20261011_V1.json",

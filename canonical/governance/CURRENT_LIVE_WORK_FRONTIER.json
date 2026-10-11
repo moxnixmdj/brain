@@ -156,11 +156,11 @@
       "ready": "BLOCKED_ONLY_BY_FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION"
     },
     {
-      "work_id": "BYTES_EXACT_SYMBOLIC_V49_NEXT_PHYSICAL_CUT",
+      "work_id": "BYTES_EXACT_SYMBOLIC_V50_NEXT_PHYSICAL_CUT",
       "work_type": "EFFICIENCY_IMPROVEMENT",
       "source": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-      "causal_role": "CONTINUE_RESOURCE_REDUCTION_FROM_1725064_RAW_PYTHON_BYTES_USING_SPENT_NEXT55_ONLY__RERANK_BEFORE_NEW_PHYSICAL_CUT__DO_NOT_TOUCH_FROZEN_NEXT56_BEFORE_CUT",
-      "readiness": "ACTIONABLE_WITH_EXISTING_RECONSTRUCTION_AND_QUALIFICATION_MACHINERY__V49_CURRENT__10_BODY_MPMATH_PERIPHERAL_PRUNE_VERIFIED",
+      "causal_role": "CONTINUE_RESOURCE_REDUCTION_FROM_1720680_RAW_PYTHON_BYTES_USING_SPENT_NEXT56_ONLY__RERANK_BEFORE_NEW_PHYSICAL_CUT__DO_NOT_TOUCH_FROZEN_NEXT57_BEFORE_CUT",
+      "readiness": "ACTIONABLE_WITH_EXISTING_RECONSTRUCTION_AND_QUALIFICATION_MACHINERY__V50_CURRENT__V49_RATIONAL_PRINTER_REPAIR_PLUS_10_BODY_MPMATH_PRUNE_VERIFIED",
       "claims_new_primitive": false,
       "score_state": "UNBOUND",
       "scheduler_state": "READY_EXECUTION",
@@ -180,16 +180,16 @@
       "read_only_evidence": {
         "source": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
         "source_git_blob_sha": "bd8ba8200c5bc59ee9b1bcc76f1f0abaf35bf806",
-        "raw_python_source_bytes": 1725064,
+        "raw_python_source_bytes": 1720680,
         "B_exec_raw_python_source_bytes": 1727824,
         "qualification": "14490/14490",
-        "next_action": "RERANK_EXACT_V49_USING_SPENT_NEXT55_ONLY__MAKE_NEW_PHYSICAL_CUT_BEFORE_QUAL_SUCCESSOR_NEXT56_20261011_V1",
-        "next_frozen_qualification": "QUAL_SUCCESSOR_NEXT56_20261011_V1",
+        "next_action": "RERANK_EXACT_V50_USING_SPENT_NEXT56_ONLY__MAKE_NEW_PHYSICAL_CUT_BEFORE_QUAL_SUCCESSOR_NEXT57_20261011_V1",
+        "next_frozen_qualification": "QUAL_SUCCESSOR_NEXT57_20261011_V1",
         "next_frozen_spent": false,
-        "independent_verification": "canonical/verification/BYTES_EXACT_SYMBOLIC_MPMATH_PERIPHERAL_V48_INDEPENDENT_VERIFY_20261011_V1.json",
+        "independent_verification": "canonical/verification/BYTES_EXACT_SYMBOLIC_MPMATH_PERIPHERAL_V50_INDEPENDENT_VERIFY_20261011_V1.json",
         "vector_bounds_complete": false
       },
-      "ready": "V49_CURRENT_AT_1725064_BYTES__CONTINUE_ONLY_NONCONFLICTING_RESOURCE_PARETO_CUT",
+      "ready": "V50_CURRENT_AT_1720680_BYTES__CONTINUE_ONLY_NONCONFLICTING_RESOURCE_PARETO_CUT",
       "source_git_blob_sha": "cc039dec0d7361bfb83c7121433eabcb82ce5581"
     },
     {
@@ -642,11 +642,11 @@
   "bytes_current_frontier": {
     "path": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
     "observed_git_blob_sha": "bd8ba8200c5bc59ee9b1bcc76f1f0abaf35bf806",
-    "status": "ACTIVE_RESEARCH__MPMATH_PERIPHERAL_V49_FRONTIER__SUCCESSOR_READY",
-    "raw_python_source_bytes": 1725064,
+    "status": "ACTIVE_RESEARCH__MPMATH_PERIPHERAL_V50_FRONTIER__SUCCESSOR_READY",
+    "raw_python_source_bytes": 1720680,
     "B_exec_raw_python_source_bytes": 1727824,
     "qualification": "14490/14490",
-    "next": "Rerank exact V49 using spent NEXT55 only; make a new physical cut before touching QUAL_SUCCESSOR_NEXT56_20261011_V1.",
+    "next": "Rerank exact V50 using spent NEXT56 only; make a new physical cut before touching QUAL_SUCCESSOR_NEXT57_20261011_V1.",
     "promotion_credit": 0,
     "observed_snapshot_is_non_authoritative_for_v15_runtime": true
   }
