@@ -1,0 +1,85 @@
+{
+  "schema": "PROJECT_BRAIN_EXACT_PRIVATE_MAIN_CARRIER_FEASIBILITY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "NO_AUTHORIZED_ZERO_INCREMENTAL_SPEND_EXACT_PRIVATE_MAIN_CARRIER_CURRENTLY_ESTABLISHED__GITHUB_HOSTED_PRESTEP_BLOCKED__RENDER_PRIVATE_FETCH_UNAVAILABLE__EXISTING_SPRITES_EXECUTE_BUT_LACK_PRIVATE_BRAIN_AUTH__ZERO_CREDIT",
+  "subject_main_commit_observed_before_branch": "9945cc757bbb6a2b59ef9e077393870ae1a9b120",
+  "required_subject": "EXACT_PRIVATE_MOXNIXMDJ_BRAIN_CURRENT_MAIN_BYTES",
+  "evidence": {
+    "github_actions": {
+      "hosted_runner_classes_tested": [
+        "ubuntu-latest",
+        "ubuntu-24.04",
+        "ubuntu-slim",
+        "ubuntu-22.04"
+      ],
+      "outcome": "ALL_OBSERVED_JOBS_FAIL_BEFORE_ANY_STEP",
+      "latest_ubuntu_22_04_run_id": 38107978144,
+      "latest_ubuntu_22_04_job_id": 114377429335,
+      "executed_steps": 0
+    },
+    "render_free": {
+      "monetary_plan": "free",
+      "repository_fetch_attempt": "https://github.com/moxnixmdj/brain",
+      "outcome": "REJECTED_AS_INVALID_OR_UNFETCHABLE_PRIVATE_REPOSITORY",
+      "service_created": false,
+      "incremental_spend_usd": 0
+    },
+    "sprites_existing_running": {
+      "examined": [
+        "brain-pq-p1-v2-independent-verify-20261010",
+        "brain-capability-first-scheduler-verify-20261008-v1",
+        "brain-live-runtime-v1-verify-20261008",
+        "brain-r3-root1-gap-verify-20261008"
+      ],
+      "arbitrary_command_execution_available": true,
+      "private_brain_git_auth_available": false,
+      "exact_probe": "git ls-remote https://github.com/moxnixmdj/brain HEAD",
+      "probe_result": "FATAL_COULD_NOT_READ_USERNAME_FOR_HTTPS_GITHUB_COM",
+      "gh_cli_auth": false,
+      "consequence": "CAN_EXECUTE_BUT_CANNOT_MATERIALIZE_EXACT_PRIVATE_MAIN_DIRECTLY"
+    },
+    "verification_capsule_runner": {
+      "fetchable_from_existing_sprites": true,
+      "current_head_observed": "5b4d378cb447e33160745bb625318f8726c1e6d8",
+      "canonical_blob_count_observed": 692,
+      "canonical_bytes_observed": 5159223,
+      "brain_exact_subject_canonical_blob_count_observed": 12169,
+      "brain_exact_subject_canonical_bytes_observed": 131084716,
+      "conclusion": "NOT_SCOPE_EQUIVALENT_TO_FULL_PRIVATE_CURRENT_MAIN"
+    }
+  },
+  "falsified_shortcuts": [
+    "CHANGE_GITHUB_HOSTED_UBUNTU_LABEL_ONLY",
+    "RUN_MINIMAL_GITHUB_HOSTED_ECHO_PROBE",
+    "USE_RENDER_FREE_WITH_PRIVATE_REPO_WITHOUT_REPO_CONNECTION",
+    "USE_EXISTING_SPRITE_WITHOUT_PRIVATE_BRAIN_CREDENTIALS",
+    "SUBSTITUTE_VERIFICATION_CAPSULE_RUNNER_FOR_EXACT_PRIVATE_MAIN"
+  ],
+  "surviving_exact_paths": [
+    "RESTORE_GITHUB_HOSTED_PRESTEP_CONTROL_PLANE_SO_A_REAL_STEP_EXECUTES",
+    "AUTHORIZE_OR_BIND_PRIVATE_BRAIN_REPOSITORY_ACCESS_TO_AN_EXISTING_ZERO_SPEND_REMOTE_CARRIER",
+    "MATERIALIZE_EXACT_CURRENT_MAIN_BYTES_INTO_AN_EXISTING_ZERO_SPEND_CARRIER_VIA_A_VERIFIED_SCOPE_COMPLETE_TRANSFER",
+    "PRODUCE_A_STRONGER_VALID_EXACT_CURRENT_MAIN_REGRESSION_RECEIPT_BY_ANOTHER_ALREADY_AUTHORIZED_ROUTE"
+  ],
+  "scheduler": {
+    "do_not_repeat": [
+      "MORE_GITHUB_RUNNER_LABEL_SWAPS_WITHOUT_CONTROL_PLANE_EVIDENCE",
+      "MORE_RENDER_FREE_PRIVATE_REPO_CREATION_ATTEMPTS_WITHOUT_PRIVATE_REPO_CONNECTION_CHANGE",
+      "MORE_SPRITE_DIRECT_CLONE_ATTEMPTS_WITHOUT_AUTH_STATE_CHANGE"
+    ],
+    "exact_next": "CONTINUE_NONCARRIER_REUSE_FIRST_FRONTIER_WORK_IN_PARALLEL__WAKE_REGRESSION_ON_CONTROL_PLANE_OR_PRIVATE_REPO_CARRIER_ACCESS_CHANGE__IF_SCOPE_COMPLETE_TRANSFER_BECOMES_CHEAPER_THAN_WAITING_BIND_AND_VERIFY_THAT_TRANSFER"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_EXACT_GITHUB_CONTROL_PLANE_CAUSE_IS_KNOWN",
+    "NO_CLAIM_NO_FUTURE_ZERO_SPEND_CARRIER_CAN_EXIST",
+    "NO_REGRESSION_PASS_OR_FAIL_FROM_PRESTEP_FAILURES",
+    "NO_ACCEPTANCE_CAPABILITY_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "promotion_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
