@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_CHARTOGRAPHY_BRAIN_NATIVE_CURRENT_V3_VERIFY_20261011",
+  "date": "2026-10-11",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__CURRENT_EXACT_SOLVER_BLOB__2_OF_2_OFFICIAL_NONHELDOUT_SAMPLES",
+  "authority_scope": "TWO_NARROW_PROFESSIONAL_CHART_CAPABILITY_ATOMS_ONLY",
+  "brain_pull_request": 4573,
+  "exact_brain_solver_blob_sha": "3c3280b4baf6f77bc4fee32d503114d8b199374d",
+  "verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2698,
+    "merged_commit_sha": "14d4c610fb6cdf6b29695db458e940a596cbf71a",
+    "workflow": "Chartography Brain-native current V3",
+    "workflow_run_id": 38147697520,
+    "workflow_job_id": 114494406200,
+    "workflow_conclusion": "success",
+    "artifact_id": 11704844753,
+    "artifact_zip_sha256": "a105942d39f4578b459cbde01b075502b6afc93d12e3f71fa992f61f53572135"
+  },
+  "response_seal": {
+    "responses_sha256": "4e01b7ff3d1440d619a01723b9127e30aff24099bf9f323a4dfa9b12648b9b97",
+    "official_harness_commit": "3f1bf837232d3918c2cc35c6e2418c9e70d2a57b",
+    "heldout_cases_consumed": 0,
+    "heldout_gold_consumed": 0
+  },
+  "runtime_ownership": {
+    "cognition_dependency_class": "MODEL_INDEPENDENT",
+    "general_purpose_model_dependency_count": 0,
+    "external_general_purpose_model_runtime_dependency_count": 0,
+    "donor_general_purpose_model_runtime_dependency_count": 0,
+    "online_teacher_call_count": 0,
+    "teacher_fallback_path_count": 0,
+    "bounded_learned_components": ["image.extract.ocr.tesseract"]
+  },
+  "results": [
+    {
+      "case": 1,
+      "capability_atom": "LEGEND_CODED_LINEAR_MULTI_SERIES_TARGET_INTERSECTION",
+      "value": 78.52857523904333,
+      "acceptable_range": [76.0, 79.0],
+      "pass": true
+    },
+    {
+      "case": 2,
+      "capability_atom": "BINARY_PHASE_DIAGRAM_PRECIPITATION_SOLVUS",
+      "value": 350.0,
+      "acceptable_range": [330.0, 370.0],
+      "pass": true
+    }
+  ],
+  "hard_nonclaims": [
+    "NO_CHARTOGRAPHY_GE_89_SCORE",
+    "NO_100_TASK_COVERAGE",
+    "NO_HELDOUT_TASK_CONSUMPTION",
+    "NO_EXTERNAL_GENERAL_PURPOSE_MODEL_COGNITION",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0
+}
