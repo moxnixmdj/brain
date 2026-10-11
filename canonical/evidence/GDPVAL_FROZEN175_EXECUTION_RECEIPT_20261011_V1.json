@@ -1,0 +1,70 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_FROZEN175_EXECUTION_RECEIPT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__2_ADDITIONAL_CANONICALLY_PRECOMMITTED_TASKS_EXECUTED_AND_FROZEN__ZERO_OWNER_SCORE_CREDIT",
+  "benchmark": "GDPval-AA v2.1",
+  "population_precommit": {
+    "path": "canonical/governance/GDPVAL_175_UNEXPOSED_POPULATION_PRECOMMIT_20261011_V1.json",
+    "commit": "c7ee545270e5781f25e6c39b3756229cd68b1b78",
+    "frozen_rows_root_sha256": "99d16a37e54139f3704f6ef7b289516af497687a8aa9ebc7eea5faf147060b3b"
+  },
+  "tasks": [
+    {
+      "row_idx": 125,
+      "task_id": "60221cd0-686e-4a08-985e-d9bb2fa18501",
+      "prompt_sha256": "d430ad2350523c00f342cf1130b32deef5a44a68281c8ccf6ec8ad5ae9f66a3d",
+      "packet_sha256": "d88238950f5d6de30c555e650f97d87b02351acce18de4e7ca68f76e26194674",
+      "output": {
+        "filename": "GDPval_60221cd0_Virginia_2025_Election_Guide.pdf",
+        "sha256": "5e64c01daa12f0cc4f5ff980b2c47be42e2b281393fe1ac8537fe2374987a0fa"
+      },
+      "verification": {
+        "pdf_pages": 1,
+        "article_word_count_before_source_line": 373,
+        "render_inspected": true,
+        "no_images": true
+      },
+      "evidence_sources": [
+        "Virginia Department of Elections 2025 political-party bulletin",
+        "Virginia Department of Elections November 2025 voter pocket guide",
+        "Virginia Department of Elections voting/absentee guidance"
+      ],
+      "forbidden_fields_exposed_before_output_freeze": false
+    },
+    {
+      "row_idx": 211,
+      "task_id": "a4a9195c-5ebe-4b8d-a0c2-4a6b7a49da8b",
+      "prompt_sha256": "b056483d4a7074c1bc45cee3694f99b0d98509085000b6b0fdbdea917d05a134",
+      "packet_sha256": "894fd64333cd38aea40cd58ea65904ac8c9030d4965076fdf2bb49784c269180",
+      "output": {
+        "filename": "GDPval_a4a9195c_ESD_Handling_and_Storage_SOP.docx",
+        "sha256": "f06d136a67a0b24d5af8b2128c52293892d2d8d083fffe6570691c8fb82eb5bc"
+      },
+      "verification": {
+        "rendered_pages": 2,
+        "max_pages_allowed": 5,
+        "render_inspected_pages": 2,
+        "no_clipping_observed": true
+      },
+      "evidence_sources": [
+        "IPC-A-610G table of contents Section 3 handling/EOS-ESD/protective materials/EPA",
+        "ANSI/ESD S541 protective packaging scope",
+        "ANSI/ESD S11.4 static-control bags scope"
+      ],
+      "forbidden_fields_exposed_before_output_freeze": false
+    }
+  ],
+  "clean_stage1_count_delta": 2,
+  "clean_stage1_total_known_after_receipt": 7,
+  "hard_nonclaims": [
+    "NO_OWNER_ELO",
+    "NO_1846_CLAIM",
+    "NO_PUBLIC_RUBRIC_SCORE_YET_FOR_THESE_TWO",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "owner_score_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
