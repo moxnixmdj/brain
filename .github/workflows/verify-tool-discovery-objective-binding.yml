@@ -1,0 +1,23 @@
+name: Verify tool discovery objective binding
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/governance/TOOL_DISCOVERY_T2_T3_OBJECTIVE_TERMINAL_BINDING_V1.json
+      - canonical/runtime/tool_discovery_information_safe_proof.py
+      - canonical/runtime/tool_discovery_information_safe_proof_v2.py
+      - canonical/runtime/tool_discovery_information_safe_candidate.py
+      - canonical/tests/test_tool_discovery_t2_t3_objective_binding.py
+      - .github/workflows/verify-tool-discovery-objective-binding.yml
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m unittest -v canonical.tests.test_tool_discovery_t2_t3_objective_binding
