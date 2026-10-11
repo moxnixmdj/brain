@@ -218,19 +218,27 @@ def _communication_obligations(clause: str, full_prompt: str) -> list[dict[str, 
     if not phones and len(all_phones) == 1:
         phones = all_phones
 
-    quoted = _quoted_literals(clause)
-    exact_content = [
-        q for q in quoted
-        if any(marker in low for marker in ("with", "saying", "message", "line", "subject"))
-    ]
+    # Only bind quoted text as message content when syntax explicitly says
+    # it is message content. A quoted worksheet/project name is not a message.
+    content_match = re.search(
+        r"(?:with\\s+(?:a|the)?\\s*(?:message|text|line|body)|saying|message\\s*:)\\s*[:=-]?\\s*(['\\"])(.*?)\\1",
+        clause,
+        re.I | re.S,
+    )
+    content = content_match.group(2).strip() if content_match else None
+    subject_match = re.search(
+        r"subject(?:\\s+(?:line|of|is))?\\s*[:=-]?\\s*(['\\"])(.*?)\\1",
+        clause,
+        re.I | re.S,
+    )
+    subject = subject_match.group(2).strip() if subject_match else None
 
     obligations: list[dict[str, Any]] = []
     for email in emails:
-        content = exact_content[-1] if exact_content else None
         obligations.append({
             "channel": "EMAIL",
             "destination": email,
-            "subject": None,
+            "subject": subject,
             "content_literal": content,
             "content_has_placeholder": _has_placeholder(content or ""),
             "grounding_complete": bool(content) and not _has_placeholder(content or ""),
@@ -243,7 +251,6 @@ def _communication_obligations(clause: str, full_prompt: str) -> list[dict[str, 
         })
 
     for channel in channels:
-        content = exact_content[-1] if exact_content else None
         obligations.append({
             "channel": "SLACK",
             "destination": channel,
@@ -259,7 +266,6 @@ def _communication_obligations(clause: str, full_prompt: str) -> list[dict[str, 
         })
 
     for phone in phones:
-        content = exact_content[-1] if exact_content else None
         obligations.append({
             "channel": "SMS",
             "destination": phone,
@@ -280,8 +286,8 @@ def _communication_obligations(clause: str, full_prompt: str) -> list[dict[str, 
         obligations.append({
             "channel": None,
             "destination": None,
-            "content_literal": exact_content[-1] if exact_content else None,
-            "content_has_placeholder": _has_placeholder(exact_content[-1] if exact_content else ""),
+            "content_literal": content,
+            "content_has_placeholder": _has_placeholder(content or ""),
             "grounding_complete": False,
             "missing": ["COMMUNICATION_DESTINATION", "MESSAGE_CONTENT"],
             "source_clause": clause,
