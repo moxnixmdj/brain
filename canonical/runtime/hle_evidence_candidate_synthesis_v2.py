@@ -160,8 +160,13 @@ def synthesize(*, contract: Mapping[str,Any], focus_terms: Sequence[str], eviden
         "model_dependency_count":0,"incremental_spend_usd":0,
         "terminal_authority":False,"terminal_credit_delta":0,
     }
-    min_matches = 1 if len(list(focus_terms)) <= 1 else 2
-    if len(matched) < min_matches:
+    # V1 required two matched anchors whenever a query had more than one term.
+    # That is too strict for short evidence windows: an explicit answer relation
+    # can be locally valid while only one discriminative query anchor survives
+    # into the same sentence/window. V2 therefore requires at least one visible
+    # objective anchor, while the relation extractor and focus-replay rejection
+    # remain the precision gates.
+    if len(matched) < 1:
         return {**base,"status":"NO_CANDIDATE__INSUFFICIENT_OBJECTIVE_ANCHOR_COVERAGE","candidates":[]}
 
     # Preserve every V1 relation that already worked.
