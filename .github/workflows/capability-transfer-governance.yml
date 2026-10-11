@@ -10,6 +10,7 @@ on:
     branches: [main]
     paths:
       - 'canonical/**'
+      - 'sitecustomize.py'
       - '.github/workflows/capability-transfer-governance.yml'
 
 concurrency:
