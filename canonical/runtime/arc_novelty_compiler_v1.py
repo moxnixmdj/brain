@@ -217,6 +217,69 @@ def _select_unique_color_panel(grid: Grid) -> Grid | None:
     return candidates[0] if len(candidates) == 1 else None
 
 
+def _split_equal_panels(grid: Grid, orientation: str) -> tuple[Grid, Grid] | None:
+    h, w = _shape(grid)
+    if orientation == "VERTICAL":
+        if w < 3 or w % 2 == 0:
+            return None
+        c = w // 2
+        sep = [grid[r][c] for r in range(h)]
+        if len(set(sep)) != 1:
+            return None
+        left = tuple(tuple(row[:c]) for row in grid)
+        right = tuple(tuple(row[c + 1 :]) for row in grid)
+        return left, right if _shape(left) == _shape(right) else None
+    if orientation == "HORIZONTAL":
+        if h < 3 or h % 2 == 0:
+            return None
+        r = h // 2
+        if len(set(grid[r])) != 1:
+            return None
+        top = tuple(tuple(row) for row in grid[:r])
+        bottom = tuple(tuple(row) for row in grid[r + 1 :])
+        return top, bottom if _shape(top) == _shape(bottom) else None
+    raise ARCNoveltyCompilerError("PANEL_ORIENTATION_INVALID")
+
+
+def _panel_relation_predict(grid: Grid, orientation: str, mapping: Mapping[str, int]) -> Grid | None:
+    split = _split_equal_panels(grid, orientation)
+    if split is None:
+        return None
+    a, b = split
+    out: list[tuple[int, ...]] = []
+    for r in range(len(a)):
+        row: list[int] = []
+        for c in range(len(a[0])):
+            key = f"{0 if a[r][c] == 0 else 1}{0 if b[r][c] == 0 else 1}"
+            if key not in mapping:
+                return None
+            row.append(int(mapping[key]))
+        out.append(tuple(row))
+    return tuple(out)
+
+
+def _infer_panel_relation(
+    pairs: Sequence[tuple[Grid, Grid]],
+    orientation: str,
+) -> dict[str, int] | None:
+    mapping: dict[str, int] = {}
+    for inp, out in pairs:
+        split = _split_equal_panels(inp, orientation)
+        if split is None:
+            return None
+        a, b = split
+        if _shape(out) != _shape(a):
+            return None
+        for r in range(len(a)):
+            for c in range(len(a[0])):
+                key = f"{0 if a[r][c] == 0 else 1}{0 if b[r][c] == 0 else 1}"
+                target = out[r][c]
+                if key in mapping and mapping[key] != target:
+                    return None
+                mapping[key] = target
+    return mapping if mapping else None
+
+
 def describe_scene(value: Sequence[Sequence[int]]) -> dict[str, Any]:
     grid = _grid(value)
     bg = _background(grid)
@@ -334,6 +397,8 @@ def _predict(h: Mapping[str, Any], grid: Grid) -> Grid | None:
         return _top_left_bbox_quadrant(grid)
     if kind == "SELECT_SEPARATOR_PANEL_UNIQUE_COLOR":
         return _select_unique_color_panel(grid)
+    if kind == "PANEL_CELLWISE_BINARY_RELATION":
+        return _panel_relation_predict(grid, h["orientation"], h["mapping"])
     raise ARCNoveltyCompilerError("HYPOTHESIS_KIND_UNSUPPORTED")
 
 
@@ -427,6 +492,17 @@ def compile_hypotheses(
     if _consistent(h, pairs):
         candidates.append(h)
 
+    for orientation in ("VERTICAL", "HORIZONTAL"):
+        mapping = _infer_panel_relation(pairs, orientation)
+        if mapping is not None:
+            h = {
+                "kind": "PANEL_CELLWISE_BINARY_RELATION",
+                "orientation": orientation,
+                "mapping": dict(sorted(mapping.items())),
+            }
+            if _consistent(h, pairs):
+                candidates.append(h)
+
     crop = {"kind": "CROP_NON_BACKGROUND"}
     if _consistent(crop, pairs):
         candidates.append(crop)
@@ -474,6 +550,7 @@ def compile_hypotheses(
             "TWO_AXIS_MIRROR_QUADRANT_EXTENSION",
             "BOUNDING_BOX_TOP_LEFT_QUADRANT_EXTRACTION",
             "SEPARATOR_PANEL_UNIQUE_COLOR_SELECTION",
+            "EQUAL_PANEL_CELLWISE_ZERO_NONZERO_RELATION",
             "NON_BACKGROUND_BOUNDING_BOX_CROP",
             "UNIQUE_LARGEST_OR_SMALLEST_COMPONENT_CROP",
         ],
