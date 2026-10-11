@@ -69,10 +69,15 @@ def normalize_history(messages: Sequence[Any]) -> list[dict[str, Any]]:
         if role == "assistant":
             metadata = getattr(msg, "metadata", None)
             if isinstance(metadata, Mapping) and metadata.get(_METADATA_KEY):
+                preserved = {
+                    str(k): v
+                    for k, v in metadata.items()
+                    if str(k).startswith("project_brain/")
+                }
                 out.append(
                     {
                         "kind": "assistant_state",
-                        "metadata": {_METADATA_KEY: str(metadata[_METADATA_KEY])},
+                        "metadata": preserved,
                     }
                 )
     return out
@@ -179,6 +184,14 @@ class ProjectBrainAutomationBenchClient:
         semantic = decision.get("semantic")
         if semantic:
             metadata[_METADATA_KEY] = str(semantic)
+        if isinstance(decision.get("generic_execution_receipt"), Mapping):
+            metadata["project_brain/generic_execution_receipt"] = dict(
+                decision["generic_execution_receipt"]
+            )
+        if isinstance(decision.get("generic_verification_receipts"), list):
+            metadata["project_brain/generic_verification_receipts"] = list(
+                decision["generic_verification_receipts"]
+            )
 
         return AssistantMessage(
             blocks=blocks,
