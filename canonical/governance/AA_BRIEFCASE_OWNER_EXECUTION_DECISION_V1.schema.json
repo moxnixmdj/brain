@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "PROJECT_BRAIN_AA_BRIEFCASE_OWNER_EXECUTION_DECISION_V1",
+  "title": "AA-Briefcase official owner execution decision",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "status",
+    "benchmark",
+    "benchmark_version",
+    "official_private_scope",
+    "independent_no_fee_coverage",
+    "full_agent_execution_supported",
+    "integration_route",
+    "interface_contract_sha256",
+    "interface_contract_uri",
+    "comparability_route",
+    "comparability_evidence_sha256",
+    "comparability_evidence_uri",
+    "owner_evidence_sha256",
+    "owner_source_uri"
+  ],
+  "properties": {
+    "schema": {
+      "const": "PROJECT_BRAIN_AA_BRIEFCASE_OWNER_EXECUTION_DECISION_V1"
+    },
+    "status": {
+      "const": "OWNER_CONFIRMED"
+    },
+    "benchmark": {
+      "const": "AA-Briefcase"
+    },
+    "benchmark_version": {
+      "const": "1.1"
+    },
+    "official_private_scope": {
+      "const": true
+    },
+    "independent_no_fee_coverage": {
+      "const": true
+    },
+    "full_agent_execution_supported": {
+      "const": true
+    },
+    "integration_route": {
+      "enum": [
+        "INDEPENDENT_OFFICIAL_CUSTOM_AGENT_HTTP",
+        "INDEPENDENT_OFFICIAL_OWNER_RUNS_PACKAGE",
+        "INDEPENDENT_OFFICIAL_FULL_STIRRUP_CONFIGURATION"
+      ]
+    },
+    "interface_contract_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "interface_contract_uri": {
+      "type": "string",
+      "pattern": "^https://(www\\\\.)?artificialanalysis\\\\.ai/"
+    },
+    "comparability_route": {
+      "enum": [
+        "EXACT_FROZEN_2026_09_22_RATING_EPOCH",
+        "DIRECT_MATCHED_FROZEN_OPUS55_COMPARISON",
+        "OWNER_VERIFIED_CROSS_EPOCH_TRANSFORM"
+      ]
+    },
+    "comparability_evidence_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "comparability_evidence_uri": {
+      "type": "string",
+      "pattern": "^https://(www\\\\.)?artificialanalysis\\\\.ai/"
+    },
+    "owner_evidence_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "owner_source_uri": {
+      "type": "string",
+      "pattern": "^https://(www\\\\.)?artificialanalysis\\\\.ai/"
+    }
+  },
+  "x_brain_note": "This schema is intentionally satisfiable only by a complete positive owner decision. Partial/negative replies remain OPEN and must not be coerced into this shape."
+}
