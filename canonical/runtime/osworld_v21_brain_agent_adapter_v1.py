@@ -20,6 +20,7 @@ from canonical.runtime.osworld_v21_host_guest_ops_v1 import (
     GuestOpsError,
     OSWorldHostGuestOps,
 )
+from canonical.runtime.osworld_computer_surface_v1 import Screen, compile_osworld_pyautogui
 
 SCHEMA = "PROJECT_BRAIN_OSWORLD_V21_AGENT_ADAPTER_V1"
 WIDTH = 1920
@@ -68,13 +69,8 @@ def _special(kind: str) -> str | None:
 def _compile_one(raw: Mapping[str, Any]) -> str:
     kind = str(raw.get("type") or "").strip().upper()
 
-    if kind.startswith("BROWSER_"):
-        return compile_browser_op(raw)
-
-    if kind == "STATE_OPS":
-        if set(raw) - {"type", "ops"}:
-            raise AdapterError("STATE_OPS_HAS_UNSUPPORTED_FIELDS")
-        return compile_state_ops({"ops": raw.get("ops")})
+    if kind in {"BROWSER_OP", "STATE_OPS"} or kind.startswith("BROWSER_"):
+        raise AdapterError("HOST_OPERATION_MUST_BE_SINGLETON_RUNTIME_ACTION:" + kind)
 
     if kind in {"WAIT", "DONE", "FAIL"}:
         if set(raw) - {"type", "reason"}:
@@ -91,32 +87,39 @@ def _compile_one(raw: Mapping[str, Any]) -> str:
     elif kind == "MOVE":
         typed = {"type": "move", "x": raw.get("x"), "y": raw.get("y")}
     elif kind == "DRAG_TO":
+        duration_ms = raw.get("duration_ms", 500)
+        if isinstance(duration_ms, bool) or not isinstance(duration_ms, (int, float)):
+            raise AdapterError("DURATION_MS_INVALID")
         typed = {
             "type": "drag",
             "path": [
                 {"x": raw.get("from_x", raw.get("x0", 0)), "y": raw.get("from_y", raw.get("y0", 0))},
                 {"x": raw.get("x"), "y": raw.get("y")},
             ],
-            "duration_per_segment": float(raw.get("duration_ms", 500)) / 1000.0,
+            "duration_per_segment": float(duration_ms) / 1000.0,
         }
     elif kind == "TYPE":
-        typed = {"type": "type", "text": raw.get("text"), "interval": float(raw.get("interval_ms", 10)) / 1000.0}
+        interval_ms = raw.get("interval_ms", 10)
+        if isinstance(interval_ms, bool) or not isinstance(interval_ms, (int, float)):
+            raise AdapterError("INTERVAL_MS_INVALID")
+        typed = {"type": "type", "text": raw.get("text"), "interval": float(interval_ms) / 1000.0}
     elif kind == "PRESS":
         key = raw.get("key")
         presses = raw.get("presses", 1)
         if isinstance(presses, bool) or not isinstance(presses, int) or not 1 <= presses <= 20:
             raise AdapterError("PRESSES_OUT_OF_RANGE")
-        if presses == 1:
-            typed = {"type": "keypress", "keys": [key]}
-        else:
-            # Preserve one OSWorld step while avoiding an unbounded action batch.
-            compiled = compile_osworld_pyautogui({"type": "keypress", "keys": [key]}, Screen(WIDTH, HEIGHT))
-            return "; ".join([compiled] * presses)
+        compiled = compile_osworld_pyautogui({"type": "keypress", "keys": [key]}, Screen(WIDTH, HEIGHT))
+        return "; ".join([compiled] * presses)
     elif kind == "HOTKEY":
         typed = {"type": "keypress", "keys": raw.get("keys")}
     elif kind == "SCROLL":
-        clicks = raw.get("clicks")
-        typed = {"type": "scroll", "x": WIDTH // 2, "y": HEIGHT // 2, "scroll_x": 0, "scroll_y": clicks}
+        typed = {
+            "type": "scroll",
+            "x": WIDTH // 2,
+            "y": HEIGHT // 2,
+            "scroll_x": 0,
+            "scroll_y": raw.get("clicks"),
+        }
     else:
         raise AdapterError("ACTION_TYPE_UNSUPPORTED:" + kind)
 
