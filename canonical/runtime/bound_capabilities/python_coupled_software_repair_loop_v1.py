@@ -103,7 +103,7 @@ def _edit(text,key,desc,replacer):
  if raw[start:end]==rb:return None
  return {"start":start,"end":end,"replacement":rb,"mutation":desc}
 def _pool(row,tests,per_file):
- p=row["path"]; text=p.read_text(encoding="utf-8");tree=ast.parse(text,filename=str(p));nums,strings=_PATCH._test_literals(tests)
+ p=row["path"]; text=p.read_bytes().decode("utf-8");tree=ast.parse(text,filename=str(p));nums,strings=_PATCH._test_literals(tests)
  ranges=[(s["lineno"],s["end_lineno"],s["score"]) for s in row["symbols"] if s["score"]>0]
  out=[]
  for key,desc,replacer in _PATCH._candidate_specs(tree,nums,strings):
