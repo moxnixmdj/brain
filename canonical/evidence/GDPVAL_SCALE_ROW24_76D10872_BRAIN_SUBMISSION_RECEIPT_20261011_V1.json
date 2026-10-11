@@ -1,0 +1,89 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_SCALE_BRAIN_SUBMISSION_RECEIPT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__FRESH_ROW24_NINE_PAGE_NEW_CASE_CREATION_REPORT_FROZEN__SOURCE_RECONCILIATION_AND_VISUAL_QA_PASS__ZERO_OWNER_SCORE_CREDIT",
+  "benchmark": "GDPval-AA v2.1",
+  "subject": {
+    "row_idx": 24,
+    "task_id": "76d10872-9ffa-4ede-83ee-e0f1ec5e2b8d",
+    "sector": "Government",
+    "occupation": "Child, Family, and School Social Workers"
+  },
+  "precommit": "canonical/governance/GDPVAL_SCALE_FRESH_BATCH_ROWS15_24_PRECOMMIT_20261011_V1.json",
+  "packet": {
+    "manifest_root_sha256": "f69af30fcea243ccb25d44c4a5380be0cdcac621287568525065034ce6cedae8",
+    "prompt_sha256": "f1fa797669919e4ddd7ab6efea35cf89b019548bcde8ee9b478a4d00812fdeb4",
+    "allowed_projection_sha256": "574edbfbe1b282d780f61c2f1fbf3826dd6de73cbde9ed34d2610c4d1155e2c8",
+    "reference_count": 4
+  },
+  "freshness": {
+    "task_id_frozen_before_prompt_read": true,
+    "official_dataset_field_firewall_used": true,
+    "rubric_read_before_output_freeze": false,
+    "human_gold_read_before_output_freeze": false,
+    "third_party_model_submission_read_before_output_freeze": false,
+    "judge_feedback_read_before_output_freeze": false
+  },
+  "reference_files": [
+    {
+      "name": "Paternity Test Results for Michael Reynolds (Case PT-2025-1782).pdf",
+      "sha256": "018aa1c14ee1d037b18e55d1b38b4efa2f915c87c1fe6638030f065fe1d37989",
+      "pages": 1
+    },
+    {
+      "name": "Order of Child Support for Michael Reynolds (Case PT-2025-1782).pdf",
+      "sha256": "e81944488c9ceebac52552098e35f3b711e7ab4f58d95a6a7540c367b2effa33",
+      "pages": 1
+    },
+    {
+      "name": "Case Detail Summary for Michael Reynolds (Case PT-2025-1782).pdf",
+      "sha256": "5ec3ba1a57dd92417f235a95bb7bbd038ada94af5a278f8a084c2ba300946b49",
+      "pages": 2
+    },
+    {
+      "name": "Case Creation Guide for Michael Reynolds (Case PT-2025-1782).pdf",
+      "sha256": "7bd7f89afe2ea208b44e1b5942bfa4c96da16d8ec4fc56351f9086408c47796b",
+      "pages": 8
+    }
+  ],
+  "deliverable": {
+    "format": "pdf",
+    "filename": "GDPval_76d10872_New_Case_Creation_Report.pdf",
+    "sha256": "6e53bd01f8084b3a39dae9bf3a735480295cd3803feff8d10723aa9d0289aa7a",
+    "library_path": "/Project Brain/GDPval/scale/76d10872-9ffa-4ede-83ee-e0f1ec5e2b8d/GDPval_76d10872_New_Case_Creation_Report.pdf",
+    "library_file_id": "libfile_e5c1764b20d08191b609474f66cd56da",
+    "rendered_page_count": 9
+  },
+  "verification": {
+    "first_render_detected_header_contrast_defect": true,
+    "header_contrast_defect_repaired_before_freeze": true,
+    "final_all_pages_visual_inspection": "PASS__9_OF_9__NO_CLIPPING_OVERLAP_BROKEN_GLYPHS_OR_LOW_CONTRAST_TABLE_HEADERS",
+    "guide_steps_1_through_7_preserved": true,
+    "critical_decision_points_preserved": true,
+    "participant_employer_paternity_order_withholding_and_medical_fields_captured": true,
+    "source_confirmed_vs_live_system_pending_states_distinguished": true,
+    "masked_ssn_boundary_preserved": true,
+    "unsupported_live_search_validation_and_transmission_completion_not_claimed": true,
+    "source_biweekly_withholding_amount_preserved": true,
+    "biweekly_arithmetic_discrepancy_explicitly_flagged_for_review": true,
+    "final_review_hold_conditions_explicit": true
+  },
+  "material_source_reconciliation": {
+    "source_stated_monthly_total": 1075,
+    "source_stated_biweekly_withholding": 495.38,
+    "simple_26_pay_period_conversion": 496.15384615384613,
+    "disposition": "PRESERVE_SOURCE_VALUE_AND_HOLD_IWO_TRANSMISSION_UNTIL_CONTROLLING_CALCULATOR_OR_ORDER_WORKSHEET_CONFIRMS_AMOUNT"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_DUPLICATE_SEARCH_FULL_SSN_VALIDATION_USPS_VALIDATION_OR_LIVE_DCS_ACES_TRANSMISSIONS_WERE_PERFORMED",
+    "NO_ARTIFICIAL_ANALYSIS_OWNER_SCORE",
+    "NO_GDPVAL_ELO",
+    "NO_1846_THRESHOLD_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
