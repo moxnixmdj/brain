@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_BENCHMARK_MEASUREMENT_MINIMUM_PROOF_COVER_LOCAL_VERIFICATION_V1",
+  "date": "2026-10-11",
+  "status": "PASS__LOCAL_CONNECTED_LAPTOP_REPLAY__NOT_INDEPENDENT_PUBLIC_RUNNER",
+  "branch": "governance/benchmark-measurement-min-proof-cover-20261011-v1",
+  "tested_commit": "242f2368361c795a7daed28e3d56144579ea67f2",
+  "test_target": "canonical/tests/test_minimum_capability_certificate_cover_v1.py",
+  "command": "py canonical\\\\tests\\\\test_minimum_capability_certificate_cover_v1.py",
+  "result": {
+    "tests_run": 9,
+    "failures": 0,
+    "errors": 0,
+    "exit_code": 0
+  },
+  "verified_invariants": [
+    "LITERAL_BENCHMARK_SCORE_AND_CAPABILITY_PROPOSITION_ARE_DISTINCT",
+    "BENCHMARK_PARENT_OBJECTIVE_IS_REJECTED",
+    "SHARED_LOWER_COST_CERTIFICATE_IS_SELECTED",
+    "DONOR_DEPENDENT_OR_UNBOUND_CERTIFICATES_ARE_INADMISSIBLE",
+    "HARD_ZERO_SPEND_EXCLUDES_PAID_CERTIFICATE",
+    "IMPLICATION_REQUIRES_EXPLICIT_EDGE",
+    "ALREADY_PROVED_OBLIGATION_REQUIRES_ZERO_NEW_CERTIFICATES",
+    "EXACT_SOLVER_LIMIT_FAILS_CLOSED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "benchmark_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NOT_AN_INDEPENDENT_PUBLIC_RUNNER_VERIFICATION",
+    "NO_BENCHMARK_SCORE_PROVED",
+    "NO_CAPABILITY_RELATION_PROVED_BY_THE_POLICY_RUNTIME_ITSELF",
+    "NO_TERMINAL_GOAL_ACHIEVED_CLAIM"
+  ]
+}
