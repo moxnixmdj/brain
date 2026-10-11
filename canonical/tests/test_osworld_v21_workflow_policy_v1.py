@@ -139,3 +139,88 @@ def test_workflow_policy_source_has_no_benchmark_or_model_runtime_dependency():
         "gemini",
     ):
         assert forbidden not in source
+
+
+def _web_app_receipt(out, result):
+    action = out["actions"][0]
+    assert action["type"] == "WEB_APP_OP"
+    return {
+        "screenshot_sha256": "s0",
+        "actions": ["WAIT"],
+        "policy_receipt": out["_policy_receipt"],
+        "submitted_web_app_operation": {
+            "app": action["app"],
+            "operation": action["operation"],
+            "args": action["args"],
+        },
+        "web_app_result": {
+            "type": "WEB_APP_OP",
+            "ok": True,
+            "app": action["app"],
+            "operation": action["operation"],
+            "result": result,
+        },
+    }
+
+
+def test_observe_then_use_unique_receipted_scalar_in_later_file_clause():
+    instruction = (
+        'Check Mailhub; then create "sender.txt" containing '
+        'the sender from the previous step'
+    )
+
+    first = decide(_state(instruction))
+    assert first["actions"] == [{
+        "type": "WEB_APP_OP",
+        "app": "mailhub",
+        "operation": "observe_mail",
+        "args": {},
+    }]
+    h1 = _web_app_receipt(first, {
+        "messages": [{"subject": "Hello", "sender": "alice@example.com"}]
+    })
+
+    second = decide(_state(instruction, [h1]))
+    assert second["_policy_receipt"]["clause_index"] == 1
+    assert second["_policy_receipt"]["dataflow"]["pass"] is True
+    assert second["_policy_receipt"]["dataflow"]["bindings"][0]["field"] == "sender"
+    assert second["actions"][0]["type"] == "STATE_OPS"
+    assert second["actions"][0]["ops"][0] == {
+        "type": "WRITE_TEXT",
+        "path": "/home/oai/share/sender.txt",
+        "text": "alice@example.com",
+    }
+
+    h2 = _guest_success(second, "/home/oai/share/sender.txt", "alice@example.com")
+    third = decide(_state(instruction, [h1, h2]))
+    assert third["actions"] == [{"type": "DONE"}]
+
+
+def test_ambiguous_prior_scalar_blocks_later_clause_instead_of_guessing():
+    instruction = (
+        'Check Mailhub; then create "sender.txt" containing '
+        'the sender from the previous step'
+    )
+    first = decide(_state(instruction))
+    h1 = _web_app_receipt(first, {
+        "messages": [
+            {"sender": "alice@example.com"},
+            {"sender": "bob@example.com"},
+        ]
+    })
+    second = decide(_state(instruction, [h1]))
+    assert second["actions"] == [{"type": "WAIT"}]
+    flow = second["_policy_receipt"]["dataflow"]
+    assert flow["pass"] is False
+    assert flow["resolution"]["status"] == "OPEN__FIELD_AMBIGUOUS"
+
+
+def test_observation_clause_with_mutation_verb_does_not_auto_advance():
+    instruction = (
+        'Check Mailhub and send a reply; then create "done.txt" containing "yes"'
+    )
+    first = decide(_state(instruction))
+    assert first["_policy_receipt"]["clause_index"] == 0
+    h1 = _web_app_receipt(first, {"messages": [{"sender": "alice@example.com"}]})
+    second = decide(_state(instruction, [h1]))
+    assert second["_policy_receipt"]["clause_index"] == 0
