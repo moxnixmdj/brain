@@ -41,16 +41,15 @@ assert slice_actual["all_used_component_interfaces_scoped_proved"] is False
 assert len(slice_actual["interfaces"]) == 12
 assert all(x["state"] == "OPEN" for x in slice_actual["interfaces"])
 
-ir = compile_ir(
-    load("canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json"),
-    load("canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json"),
-    hypergraph,
-)
-assert ir["proved_predicate_count"] == 9, ir
-assert ir["unresolved_predicate_count"] == 29, ir
+registry = load("canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json")
+evidence = load("canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json")
+ir = compile_ir(registry, evidence, hypergraph)
+expected_proved = sum(c.get("state") == "PROVED" for c in evidence["claims"])
+assert ir["proved_predicate_count"] == expected_proved, ir
+assert ir["unresolved_predicate_count"] == len(registry["predicates"]) - expected_proved, ir
 cut = cut_evaluate(ir)
 assert cut["status"] == "EXACT_TERMINAL_ACTION_CUT_COMPUTED", cut
-assert cut["covered_predicate_count"] == 29, cut
+assert cut["covered_predicate_count"] == ir["unresolved_predicate_count"], cut
 assert cut["uncovered_predicates"] == [], cut
 assert "RUN_COMPOSITION_COMPONENT_PROOF_SLICER" in cut["selected_actions"], cut
 assert cut["selected_new_reality_units"] == 0, cut
