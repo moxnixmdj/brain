@@ -1,0 +1,96 @@
+{
+  "schema": "PROJECT_BRAIN_DECISION_VALUE_SCHEDULER_GATE_INDEPENDENT_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__CURRENT_24_OF_24_PROFESSIONAL_SEMANTICS_REPAIRED__ESCAPE_DECISION_VALUE_GATE__23_OF_23_COMBINED_TESTS__PYCOMPILE_PASS__CURRENT_PLAN_REPLAY_PASS__ZERO_CREDIT",
+  "objective": "VERIFY_THE_ACTIVE_POST_COMPOSITION_SCHEDULER_FAILS_CLOSED_ON_CURRENT_TRUTH_AND_SCHEDULES_ONLY_DECISION_CHANGING_ESCAPE_WORK",
+  "branch_base_main_commit": "3d0f7a0c8ff0c2a5c4144ede3435af3471db814f",
+  "subjects": {
+    "runtime": {
+      "path": "canonical/runtime/capability_parallel_frontier_post_composition_v2.py",
+      "git_blob_sha": "6a1e02ab6154e18b706867582cc93d1eb571c423"
+    },
+    "focused_tests": {
+      "path": "canonical/tests/test_capability_parallel_frontier_post_composition_v2.py",
+      "git_blob_sha": "de52129ccf37dc4c55378647e2c22978e27eaf5d"
+    },
+    "live_frontier": {
+      "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
+      "git_blob_sha": "3f299eb32bc9e178360ba9adaeac546746f74314"
+    },
+    "specialization": {
+      "path": "canonical/governance/CURRENT_FRONTIER_REUSE_SPECIALIZATION_20261011_V1.json",
+      "git_blob_sha": "8a20db9ebf20852e5c5e0667f64d8142697861e8"
+    },
+    "residual_classifier": {
+      "path": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
+      "git_blob_sha": "8086e42df231620a07823fca8a72cd4b47c9815e"
+    }
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "sprite_name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "py_compile": "PASS",
+    "combined_tests_run": 23,
+    "combined_tests_passed": 23,
+    "combined_tests_failed": 0,
+    "suites": [
+      "canonical.tests.test_capability_parallel_frontier_v2",
+      "canonical.tests.test_capability_parallel_frontier_post_composition_v2"
+    ],
+    "current_plan_replay": "PASS"
+  },
+  "current_plan_truth": {
+    "professional_property_truth_closed_count": 24,
+    "professional_open_execution_leaf_count": 0,
+    "professional_open_semantic_leaf_count": 0,
+    "professional_full_current_main_regression_open": true,
+    "professional_scheduler_state": "BLOCKED",
+    "gap_a_actionable_row_ids": [
+      "PROWORK_GDPVAL_GE_1846",
+      "HLE_TOOLS_GE_67_7"
+    ],
+    "gap_a_sleeping_row_count": 10,
+    "gap_a_sleeping_row_ids": [
+      "CODING_TB4_GE_66_4",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_CURSORBENCH_GE_57_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER"
+    ],
+    "ready_candidate_ids": [
+      "BYTES_EXACT_SYMBOLIC_V47_NEXT_PHYSICAL_CUT",
+      "ESCAPE_GAP_A_AUTHENTICATED_ROW_PROOFS"
+    ],
+    "parallel_read_only_evidence_work_ids": [
+      "BYTES_EXACT_SYMBOLIC_V47_NEXT_PHYSICAL_CUT",
+      "ESCAPE_GAP_A_AUTHENTICATED_ROW_PROOFS"
+    ],
+    "parallel_full_execution_work_ids": []
+  },
+  "defects_repaired": [
+    "POST_COMPOSITION_PROFESSIONAL_ADAPTER_EXPECTED_STALE_12_EXECUTION_0_SEMANTIC_PHASE_AND_REAWAKENED_CLOSED_PROPERTY_TRUTH_WORK",
+    "BYTES_ADAPTER_EXPECTED_QUALIFICATION_CLEAN_ROOM_AND_ARCHIVE_FIELDS_TO_SHARE_ONE_STRING_DESPITE_CURRENT_V47_TYPED_FIELDS",
+    "LIVE_FRONTIER_RESIDUAL_SOURCE_BINDING_WAS_STALE",
+    "ESCAPE_GAP_A_COARSE_READY_EVIDENCE_PROJECTION_IGNORED_NEWER_ROW_LEVEL_WAKE_GATES"
+  ],
+  "hard_nonclaims": [
+    "NO_CHECKPOINT_ACCEPTANCE_CREDIT",
+    "NO_CAPABILITY_OWNERSHIP_OR_PROMOTION_CREDIT",
+    "NO_CLAIM_GDPVAL_OR_HLE_IS_CLOSED",
+    "NO_CLAIM_SLEEPING_ROWS_ARE_IMPOSSIBLE_TO_CLOSE",
+    "NO_FULL_EXECUTION_AUTHORITY_FROM_THIS_SCHEDULER_REPAIR"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
