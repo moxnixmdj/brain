@@ -42,7 +42,9 @@ _FEATURE_COSTS = {
     "ON_GRID_EDGE": 0.6,
     "ON_GRID_CORNER": 0.7,
     "N4_NONZERO": 0.7,
+    "N4_COLOR_COUNT": 0.75,
     "N8_NONZERO": 0.8,
+    "N8_COLOR_COUNT": 0.85,
     "ROW_NONZERO": 0.9,
     "COL_NONZERO": 0.9,
     "COMPONENT_AREA": 0.9,
@@ -170,10 +172,13 @@ def _features(grid: Grid, r: int, c: int, components: Mapping[tuple[int, int], M
     h, w = _shape(grid)
     n4 = 0
     n8 = 0
+    n4_colors: set[int] = set()
+    n8_colors: set[int] = set()
     for dr, dc in ((-1, 0), (1, 0), (0, -1), (0, 1)):
         rr, cc = r + dr, c + dc
         if 0 <= rr < h and 0 <= cc < w and grid[rr][cc] != 0:
             n4 += 1
+            n4_colors.add(grid[rr][cc])
     for dr in (-1, 0, 1):
         for dc in (-1, 0, 1):
             if dr == 0 and dc == 0:
@@ -181,6 +186,7 @@ def _features(grid: Grid, r: int, c: int, components: Mapping[tuple[int, int], M
             rr, cc = r + dr, c + dc
             if 0 <= rr < h and 0 <= cc < w and grid[rr][cc] != 0:
                 n8 += 1
+                n8_colors.add(grid[rr][cc])
 
     left = _visible(grid, r, c, 0, -1)
     right = _visible(grid, r, c, 0, 1)
@@ -193,7 +199,9 @@ def _features(grid: Grid, r: int, c: int, components: Mapping[tuple[int, int], M
         "ON_GRID_EDGE": str(r in (0, h - 1) or c in (0, w - 1)),
         "ON_GRID_CORNER": str(r in (0, h - 1) and c in (0, w - 1)),
         "N4_NONZERO": str(n4),
+        "N4_COLOR_COUNT": str(len(n4_colors)),
         "N8_NONZERO": str(n8),
+        "N8_COLOR_COUNT": str(len(n8_colors)),
         "ROW_NONZERO": str(sum(v != 0 for v in grid[r])),
         "COL_NONZERO": str(sum(grid[rr][c] != 0 for rr in range(h))),
         "VISIBLE_LEFT_COLOR": str(left[0]),
