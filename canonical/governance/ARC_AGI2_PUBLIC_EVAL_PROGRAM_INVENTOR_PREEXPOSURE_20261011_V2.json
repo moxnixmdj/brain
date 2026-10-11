@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_ARC_AGI2_PUBLIC_EVAL_PROGRAM_INVENTOR_PREEXPOSURE_V2",
+  "date": "2026-10-11",
+  "status": "FROZEN_AFTER_SCORER_ONLY_CORRECTION__BEFORE_ANY_VALID_ARC_AGI2_PUBLIC_EVAL_RESULT__AGGREGATE_ONLY",
+  "supersedes": "canonical/governance/ARC_AGI2_PUBLIC_EVAL_PROGRAM_INVENTOR_PREEXPOSURE_20261011_V1.json",
+  "dataset": {
+    "repository": "arcprize/ARC-AGI-2",
+    "commit": "f3283f727488ad98fe575ea6a5ac981e4a188e49",
+    "split": "data/evaluation",
+    "declared_public_evaluation_task_count": 120,
+    "role": "ONE_SHOT_UNSEEN_GENERALIZATION_AUDIT"
+  },
+  "subject": {
+    "branch": "successor/general-visual-program-inventor-v1-20261011",
+    "inventor_path": "canonical/runtime/finite_visual_program_inventor_v1.py",
+    "adapter_path": "canonical/runtime/arc_visual_program_invention_adapter_v1.py",
+    "solver_logic_changed_since_v1_preexposure": false,
+    "only_change": "ARC_TWO_ATTEMPT_SCORE_REDUCTION"
+  },
+  "frozen_search": {
+    "max_depth": 3,
+    "attempts": 2,
+    "max_semantic_states_per_depth": 4000,
+    "max_equivalent_programs_per_semantics": 4,
+    "max_grid_cells": 10000
+  },
+  "frozen_scoring_semantics": "FOR_EACH_TEST_INPUT__SUCCESS_IF_EITHER_OF_TWO_CANDIDATE_OUTPUTS_EXACTLY_MATCHES__TASK_SUCCESS_REQUIRES_SUCCESS_FOR_ALL_TEST_INPUTS",
+  "information_policy": {
+    "emit_task_ids": false,
+    "emit_task_grids": false,
+    "emit_task_programs": false,
+    "emit_per_task_results": false,
+    "allowed_output": "AGGREGATE_COUNTS_RATES_COSTS_AND_CONTENT_HASHES_ONLY",
+    "post_run_rule": "DO_NOT_SELECT_REPAIRS_FROM_ARC_AGI2_PUBLIC_EVAL_TASK_LEVEL_FAILURES"
+  },
+  "credit_policy": {
+    "positive_result_role": "UNSEEN_PUBLIC_GENERALIZATION_EVIDENCE_FOR_THE_FROZEN_SUBJECT_ONLY",
+    "negative_result_role": "AGGREGATE_FALSIFICATION_SIGNAL_ONLY",
+    "no_private_score_claim": true,
+    "no_opus_parity_claim": true,
+    "no_terminal_credit": true
+  },
+  "incremental_spend_usd": 0,
+  "promotion_authority": false,
+  "terminal_credit_delta": 0
+}
