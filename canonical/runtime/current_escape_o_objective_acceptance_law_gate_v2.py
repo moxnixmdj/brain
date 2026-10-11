@@ -180,20 +180,24 @@ def _current_projection(root: Path) -> tuple[set[str], set[str], set[str], Mappi
         raise ValueError("CURRENT_PARTITION_OVERLAP")
     if o | q | parked != all_ids:
         raise ValueError("CURRENT_PARTITION_NOT_EXHAUSTIVE")
-    if (
-        part.get("total_escape_rows") != 13
-        or part.get("active_rows") != 12
-        or part.get("active_o_rows") != 11
-        or part.get("active_q_rows") != 1
-        or part.get("parked_rows") != 1
-        or part.get("active_gap_b_rows") != 0
-        or len(o) != 11
-        or q != {AA_BRIEFCASE}
-        or parked != set(parked_ids)
-        or parked != {TB_SCIENCE}
-        or GDPVAL not in o
-    ):
-        raise ValueError("CURRENT_PARTITION_INVARIANT_FAILED")
+    if part.get("total_escape_rows") != 13:
+        raise ValueError("CURRENT_TOTAL_COUNT_MISMATCH")
+    if part.get("active_rows") != 12:
+        raise ValueError("CURRENT_ACTIVE_COUNT_MISMATCH")
+    if part.get("active_o_rows") != 11 or len(o) != 11:
+        raise ValueError("CURRENT_O_COUNT_MISMATCH")
+    if part.get("active_q_rows") != 1 or len(q) != 1:
+        raise ValueError("CURRENT_Q_COUNT_MISMATCH")
+    if part.get("parked_rows") != 1 or len(parked) != 1:
+        raise ValueError("CURRENT_PARKED_COUNT_MISMATCH")
+    if part.get("active_gap_b_rows") != 0:
+        raise ValueError("CURRENT_GAP_B_COUNT_MISMATCH")
+    if q != {AA_BRIEFCASE}:
+        raise ValueError("CURRENT_Q_IDENTITY_MISMATCH")
+    if parked != set(parked_ids) or parked != {TB_SCIENCE}:
+        raise ValueError("CURRENT_PARKED_IDENTITY_MISMATCH")
+    if GDPVAL not in o:
+        raise ValueError("GDPVAL_CURRENT_O_MEMBERSHIP_MISSING")
     return o, q, parked, cut
 
 def evaluate(
