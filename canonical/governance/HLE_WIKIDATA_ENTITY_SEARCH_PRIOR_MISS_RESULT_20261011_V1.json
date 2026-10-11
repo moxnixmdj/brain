@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_WIKIDATA_ENTITY_SEARCH_PRIOR_MISS_RESULT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "STRUCTURED_ENTITY_LABEL_DESCRIPTION_SEARCH_NO_RECALL_GAIN__BRANCH_DEMOTED_FOR_HLE_FRONTIER",
+  "subject": {
+    "runtime_blob": "7dd5004e03d5df95273e666b63dc3cf670fc5bc8",
+    "baseline_run_id": 38145869751,
+    "prior_miss_rows": [
+      27,
+      32,
+      36,
+      37,
+      38,
+      39,
+      41,
+      43,
+      44,
+      45
+    ]
+  },
+  "runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "diag-hle-wikidata-prior-misses-20261011-v1",
+    "head_sha": "8825c9e60eeae3307848a60fb610a57869ff8bdc",
+    "workflow_run_id": 38155879564,
+    "workflow_job_id": 114518639983,
+    "conclusion": "success",
+    "artifact_id": 11708058669,
+    "artifact_digest": "sha256:dbd1c0755b9d4c2e8620b27bc11f41992a89e59b7a2baca5c51d75be8d7ec613",
+    "trace_manifest_sha256": "7aa254aa98e5e067ce500e0500c0529600bb8bb0e3939a3484a14b0ae604e2ef"
+  },
+  "result": {
+    "candidate_count": 15,
+    "recovered": 0,
+    "combined_recall": 0.6,
+    "absolute_gain": 0
+  },
+  "conclusion": [
+    "WIKIDATA_ENTITY_LABEL_AND_DESCRIPTION_SEARCH_ALONE_DOES_NOT_CLOSE_THE_PRIOR_MISSES",
+    "STRUCTURED_RELATION_TRAVERSAL_REMAINS_UNTESTED_AND_IS_LOGICALLY_DISTINCT",
+    "DO_NOT_PROMOTE_ENTITY_SEARCH_AS_HLE_RECALL_REPAIR"
+  ],
+  "protected_state": {
+    "hle_questions_consumed": 0,
+    "hle_gold_consumed": 0,
+    "external_model_calls": 0,
+    "model_dependency_count": 0,
+    "hle_score_credit": 0
+  },
+  "incremental_spend_usd": 0
+}
