@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_EMPIRICAL_JUDGE_PROXY_MARGIN_20261011_V1",
+  "date": "2026-10-11",
+  "status": "EMPIRICAL_CALIBRATION_ONLY__NOT_DETERMINISTIC_TARGET_CLOSURE__ZERO_CREDIT",
+  "target_predicate": "HLE_WITH_TOOLS_REPORTED_SCORE_GE_67_7_UNDER_ANTHROPIC_TARGET_PROTOCOL",
+  "calibration": {
+    "source": "How Inference Compute Shapes Frontier LLM Evaluation__Appendix_A_5_2",
+    "paired_hle_labels": 2373,
+    "gpt_5_4_vs_claude_opus_4_6_disagreements": 3,
+    "observed_disagreement_fraction": 0.0012642225031605563,
+    "judge_prompt": "INSPECT_EVALS_HLE_JUDGE_PROMPT",
+    "direction_of_three_disagreements_publicly_bound": false
+  },
+  "statistics": {
+    "method": "ONE_SIDED_CLOPPER_PEARSON_ON_DISAGREEMENT_RATE_PLUS_BINOMIAL_FUTURE_COUNT_QUANTILE",
+    "calibration_confidence": 0.99,
+    "disagreement_rate_upper_bound": 0.004226808553793951,
+    "future_slots": 12500,
+    "future_count_quantile_confidence": 0.99,
+    "future_disagreement_count_upper_quantile_at_rate_bound": 70,
+    "target_successes": 8463,
+    "proxy_successes_required_for_worst_direction_margin": 8533,
+    "proxy_score_required_percent": 68.264
+  },
+  "interpretation": "Under the explicit statistical assumptions below, a proxy score of at least 68.264 percent across 12500 slots leaves room for 70 proxy-to-Opus-4.6 label changes in the harmful direction while retaining at least 8463 target-judge successes.",
+  "required_assumptions": [
+    "THE_TARGET_GRADER_USES_THE_SAME_INSPECT_HLE_JUDGE_PROMPT_AND_SEMANTICS_AS_THE_CALIBRATION_OPUS_4_6_JUDGE",
+    "BRAIN_TRANSCRIPTS_ARE_EXCHANGEABLE_WITH_THE_CALIBRATION_POPULATION_FOR_JUDGE_DISAGREEMENT",
+    "THE_DISAGREEMENT_PROCESS_IS_STATIONARY_ENOUGH_FOR_BINOMIAL_CALIBRATION",
+    "THE_PROXY_GRADER_IS_GPT_5_4_UNDER_THE_CALIBRATED_PROMPT_OR_ANOTHER_PROXY_WITH_SEPARATELY_BOUND_EQUIVALENT_DISAGREEMENT_STATISTICS"
+  ],
+  "why_not_target_closure_now": [
+    "ANTHROPIC_TARGET_OPUS_4_6_GRADER_PROMPT_IS_NOT_PUBLICLY_BOUND_TO_THE_INSPECT_PROMPT",
+    "EXCHANGEABILITY_OF_FUTURE_BRAIN_TRANSCRIPTS_IS_NOT_A_DETERMINISTIC_FACT",
+    "FINITE_CALIBRATION_CANNOT_PROVE_A_UNIVERSAL_ONE_SIDED_RELATION"
+  ],
+  "scheduler_effect": "USE_ONLY_IF_THE_TARGET_PROMPT_BINDING_IS_LATER_OBTAINED_AND_A_STATISTICAL_COMPARABILITY_STANDARD_IS_ACCEPTABLE__DO_NOT_PROMOTE_AS_THEOREM_LEVEL_SCORE_PROOF",
+  "hard_nonclaims": [
+    "NO_CLAIM_BRAIN_SCORE_IS_68_264_OR_HIGHER",
+    "NO_CLAIM_TARGET_SCORE_IS_GE_67_7",
+    "NO_CLAIM_99_PERCENT_PLUS_99_PERCENT_COMPOSES_TO_A_SINGLE_UNCONDITIONAL_99_PERCENT_GUARANTEE",
+    "NO_TERMINAL_CASES_READ_OR_CONSUMED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
