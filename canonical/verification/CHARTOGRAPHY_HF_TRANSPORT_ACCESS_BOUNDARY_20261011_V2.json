@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_CHARTOGRAPHY_HF_TRANSPORT_ACCESS_BOUNDARY_20261011_V2",
+  "date": "2026-10-11",
+  "status": "CURRENT_PUBLIC_RUNNER_OFFICIAL_HF_TRANSPORT_AUTH_GATED__NO_COMMON_HF_CREDENTIAL_PRESENT__GIT_RAW_DATASET_VIEWER_ALL_BLOCKED__ZERO_GOLD_PARSED__ZERO_MODEL_CALLS__ZERO_CREDIT",
+  "target_predicate": "CHARTOGRAPHY_TOOLS_GE_89",
+  "carrier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2645,
+    "head_sha": "db799ad9a0eb171f9562c5f7c5f4757a3054ef88",
+    "workflow_run_id": 38111765642,
+    "workflow_job_id": 114388633757,
+    "artifact_id": 11691901764,
+    "artifact_zip_sha256": "8769580edb12bc13f55988af9fb8a46fc1540029d40f5a666d1141421a336cfe"
+  },
+  "credential_probe": {
+    "HF_TOKEN_present": false,
+    "HUGGINGFACE_TOKEN_present": false,
+    "HUGGING_FACE_HUB_TOKEN_present": false,
+    "secret_values_emitted": false
+  },
+  "official_transport_probe": {
+    "git_ls_remote_rc": 128,
+    "git_clone_pointer_only_rc": 128,
+    "dataset_viewer_is_valid_http_status": 401,
+    "dataset_viewer_splits_http_status": 401,
+    "dataset_viewer_parquet_http_status": 401,
+    "dataset_viewer_rows_http_status": 401,
+    "raw_file_prior_http_status": 401,
+    "official_metadata_bytes_retrieved": false,
+    "official_chart_bytes_retrieved": false
+  },
+  "safety_and_contamination": {
+    "golden_answers_parsed": false,
+    "dataset_contents_printed": false,
+    "model_calls": 0,
+    "heldout_tuning_performed": false
+  },
+  "causal_conclusion": {
+    "reasoning_or_harness_gap": false,
+    "current_blocker": "AUTHORIZED_OFFICIAL_HUGGING_FACE_BYTE_ACCESS_ON_AN_EXECUTION_CARRIER",
+    "minimum_wake_conditions": [
+      "AN_AUTHORIZED_EXISTING_HUGGING_FACE_SESSION_OR_TOKEN_CAN_READ_SURGEAI_CHARTOGRAPHY",
+      "AN_OWNER_EQUIVALENT_CONTENT_ADDRESSED_OFFICIAL_100_TASK_PACK_BECOMES AVAILABLE",
+      "ANOTHER_AUTHORIZED_ZERO_SPEND_EXECUTION_CARRIER_CAN_READ_THE_SAME OFFICIAL DATASET BYTES",
+      "A_STRONGER_ACCEPTANCE_CERTIFICATE ELIMINATES THE NEED FOR DIRECT HELDOUT EXECUTION"
+    ]
+  },
+  "forbidden_repetition": [
+    "REPEAT_ANONYMOUS_HUGGING_FACE_GIT_CLONE_ON_THE_SAME_CARRIER_WITHOUT_AUTH_STATE_CHANGE",
+    "REPEAT_ANONYMOUS_RAW_DATASET_FILE_FETCH_WITHOUT_AUTH_STATE_CHANGE",
+    "REPEAT_ANONYMOUS_DATASET_VIEWER_ENDPOINTS_WITHOUT_AUTH_STATE_CHANGE",
+    "USE_UNOFFICIAL_MIRRORS_TO_BYPASS_OWNER_GATING"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_DATASET_IS_PRIVATE",
+    "NO_CLAIM_THE_USER_LACKS_A_HUGGING_FACE_ACCOUNT",
+    "NO_CLAIM_THE_USER_ACCOUNT_LACKS_DATASET_ACCESS",
+    "NO_HELDOUT_SCORE",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "golden_answers_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
