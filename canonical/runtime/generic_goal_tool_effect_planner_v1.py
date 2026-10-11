@@ -44,9 +44,12 @@ def _singular(token: str) -> str:
     t = token.lower().strip("_-.")
     if len(t) > 4 and t.endswith("ies"):
         return t[:-3] + "y"
-    if len(t) > 4 and t.endswith("sses"):
+    # Preserve common singular nouns whose lexical form ends in s.
+    if t.endswith(("status", "analysis", "basis", "crisis", "thesis", "diagnosis")):
         return t
-    if len(t) > 4 and t.endswith("s") and not t.endswith("ss"):
+    if len(t) > 4 and t.endswith(("sses", "ss")):
+        return t
+    if len(t) > 4 and t.endswith("s"):
         return t[:-1]
     return t
 
