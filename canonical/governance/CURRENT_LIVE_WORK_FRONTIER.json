@@ -37,7 +37,7 @@
       },
       {
         "path": "canonical/governance/CURRENT_FRONTIERCODE_CAPABILITY_FIRST_RECONCILIATION_20261011_V1.json",
-        "git_blob_sha": "4e9d824b5db53c3f6d3504655f17a45cfa7344dd"
+        "git_blob_sha": "580ad55314023eb440cf7d6619b6276ed3e6e4c7"
       },
       {
         "path": "canonical/governance/CHARTOGRAPHY_CAPABILITY_PROOF_FRONTIER_V1.json",
@@ -96,12 +96,12 @@
   ],
   "candidates": [
     {
-      "work_id": "CODING_GENERAL_SOFTWARE_REPAIR_LOOP_V6B",
+      "work_id": "CODING_GENERAL_SOFTWARE_REPAIR_LOOP_V6C",
       "work_type": "CAPABILITY_BUILD",
       "frontier_class": "GENERAL_SOFTWARE_ENGINEERING",
       "source": "canonical/governance/CURRENT_FRONTIERCODE_CAPABILITY_FIRST_RECONCILIATION_20261011_V1.json",
-      "causal_role": "CLOSE_GENERAL_RAW_SOFTWARE_REQUEST_TO_INDEPENDENT_EXECUTABLE_ACCEPTANCE_MODEL__OBJECTIVE_RAW_TASK_SUBSET_INDEPENDENTLY_VERIFIED__INDEPENDENT_MEASUREMENT_BINDING_AND_SEMANTIC_ACCEPTANCE_REMAIN",
-      "readiness": "READY_EXECUTION__V5_REPAIR_VERIFIED__V6_OBJECTIVE_RAW_TASK_ACCEPTANCE_PRIMARY_13_OF_13_SECOND_CARRIER_13_OF_13__SEMANTIC_ACCEPTANCE_AND_INDEPENDENT_MEASUREMENT_BINDING_REMAIN",
+      "causal_role": "COMPOSE_VERIFIED_PROVENANCE_GUIDED_REPAIR_WITH_VERIFIED_CONTENT_ADDRESSED_LOSSLESS_ACCEPTANCE_AND_EXPAND_ONLY_SOURCE_GROUNDED_SEMANTIC_FAMILIES__FRONTIERCODE_REMAINS_LATER_AUDIT",
+      "readiness": "READY_EXECUTION__V5_PROVENANCE_GUIDED_REPAIR_VERIFIED__V6B_CONTENT_ADDRESSED_INDEPENDENT_MEASUREMENT_AND_BOUNDED_COMPOSED_ACCEPTANCE_PRIMARY_44_OF_44_SECOND_CARRIER_44_OF_44__ACCEPTANCE_GUIDED_REPAIR_AND_BROADER_SEMANTIC_FAMILIES_REMAIN",
       "claims_new_primitive": true,
       "score_state": "NOT_A_BENCHMARK_SCORE_TASK",
       "scheduler_state": "READY_EXECUTION",
@@ -120,7 +120,7 @@
       "vector_evidence": {},
       "read_only_evidence": {
         "capability_frontier_path": "canonical/governance/CURRENT_FRONTIERCODE_CAPABILITY_FIRST_RECONCILIATION_20261011_V1.json",
-        "capability_frontier_git_blob_sha": "4e9d824b5db53c3f6d3504655f17a45cfa7344dd",
+        "capability_frontier_git_blob_sha": "580ad55314023eb440cf7d6619b6276ed3e6e4c7",
         "verified_patch_search_capability": "python.patch.search.test_guided.ast.v1",
         "verified_sequential_multi_edit_capability": "python.software.repair.loop.test_guided.ast.v1",
         "verified_strict_progress_capability": "python.software.repair.loop.strict_progress.ast.v1",
@@ -137,7 +137,7 @@
         "dynamic_localizer_verification_path": "canonical/verification/PYTHON_DYNAMIC_FAULT_LOCALIZER_V1_VERIFY_20261011_V1.json",
         "dynamic_localizer_replay": "PRIMARY_7_OF_7__SECOND_SPRITE_7_OF_7",
         "proved_localization": "FAILING_ONLY_EXECUTION_OUTRANKS_SHARED_OR_PASSING_ONLY_CODE__AST_SYMBOL_OWNERSHIP__INTRA_SYMBOL_BACKWARD_DEF_USE",
-        "bound_capability_registry_git_blob_sha": "b7efe33a8ad32c758e8ea7d9c98bdb5428938baa",
+        "bound_capability_registry_git_blob_sha": "036728889fcaf27081b99cc743a3a4d564ffc7d4",
         "verified_interprocedural_provenance": "python.fault.provenance.interprocedural.value.v1",
         "interprocedural_provenance_verification_path": "canonical/verification/PYTHON_INTERPROCEDURAL_VALUE_PROVENANCE_V1_VERIFY_20261011_V1.json",
         "interprocedural_provenance_replay": "PRIMARY_7_OF_7__SECOND_CARRIER_7_OF_7",
@@ -149,9 +149,17 @@
         "verified_objective_raw_task_acceptance": "task.acceptance.objective.lossless.v1",
         "objective_raw_task_acceptance_verification_path": "canonical/verification/RAW_TASK_OBJECTIVE_ACCEPTANCE_EXECUTOR_V1_INDEPENDENT_VERIFY_20261011_V1.json",
         "objective_raw_task_acceptance_replay": "PRIMARY_13_OF_13__SECOND_CARRIER_13_OF_13",
-        "objective_acceptance_boundary": "SEMANTIC_RESIDUALS_BLOCK__DIRECT_CANDIDATE_FIELDS_NOT_INDEPENDENT_MEASUREMENTS"
+        "objective_acceptance_boundary": "SEMANTIC_RESIDUALS_BLOCK__DIRECT_CANDIDATE_FIELDS_NOT_INDEPENDENT_MEASUREMENTS",
+        "verified_independent_measurement": "candidate.measurement.independent.content_addressed.v1",
+        "verified_measured_objective_acceptance": "task.acceptance.measured.objective.lossless.v1",
+        "verified_source_grounded_python_behavior": "python.acceptance.source_grounded.behavior_examples.v1",
+        "verified_composed_software_acceptance": "software.acceptance.composed.lossless.v1",
+        "v6b_verification_path": "canonical/verification/V6B_MEASURED_SEMANTIC_ACCEPTANCE_VERIFY_20261011_V1.json",
+        "v6b_replay": "PRIMARY_44_OF_44__SECOND_CARRIER_44_OF_44",
+        "proved_v6b_extension": "CONTENT_ADDRESSED_EXTERNAL_VERIFIER_MEASUREMENTS__BUILDER_FIELD_BYPASS_REJECTED__EXPLICIT_PYTHON_RETURN_RAISE_SEMANTICS__LOSSLESS_OBJECTIVE_PLUS_BEHAVIOR_COMPOSITION__ALL_RAW_OBLIGATIONS_ACCOUNTED",
+        "v6b_boundary": "ARBITRARY_NL_SEMANTICS_HIDDEN_REQUIREMENTS_MERGEABILITY_AND_ACCEPTANCE_GUIDED_REPAIR_LOOP_REMAIN"
       },
-      "ready": "BUILD_GENERAL_SOFTWARE_REPAIR_LOOP_V6B__TARGET_INDEPENDENT_MEASUREMENT_BINDING_AND_SOURCE_GROUNDED_SEMANTIC_ACCEPTANCE__DO_NOT_WAIT_FOR_BENCHMARK_OWNER"
+      "ready": "BUILD_GENERAL_SOFTWARE_REPAIR_LOOP_V6C__TARGET_ACCEPTANCE_GUIDED_PROVENANCE_REPAIR_AND_NEXT_SOURCE_GROUNDED_SEMANTIC_FAMILIES__DO_NOT_WAIT_FOR_BENCHMARK_OWNER"
     },
     {
       "work_id": "CHARTOGRAPHY_BRAIN_NATIVE_PROFESSIONAL_SEMANTICS_V2",
@@ -708,7 +716,7 @@
     "new_primitive_required": false,
     "terminal_credit_delta": 0
   },
-  "exact_next": "PARALLEL:CODING_GENERAL_SOFTWARE_REPAIR_LOOP_V6B_PLUS_CURRENT_BYTES_RESOURCE_PARETO_CUT_PLUS_OTHER_NONCONFLICTING_CAPABILITY_FIRST_GENERAL_DEVELOPMENT__PROFESSIONAL_WAKES_ONLY_ON_ZERO_SPEND_CARRIER_STATE_CHANGE_OR_STRONGER_VALID_REGRESSION_RECEIPT",
+  "exact_next": "PARALLEL:CODING_GENERAL_SOFTWARE_REPAIR_LOOP_V6CC_PLUS_CURRENT_BYTES_RESOURCE_PARETO_CUT_PLUS_OTHER_NONCONFLICTING_CAPABILITY_FIRST_GENERAL_DEVELOPMENT__PROFESSIONAL_WAKES_ONLY_ON_ZERO_SPEND_CARRIER_STATE_CHANGE_OR_STRONGER_VALID_REGRESSION_RECEIPT",
   "professional_semantic_v2_successor_claim_batch_current": {
     "status": "INDEPENDENTLY_VERIFIED__CLAIM_AND_SCOPE_GENERATION_COMPLETE__PROPERTY_TRUTH_NEXT",
     "batch": {
