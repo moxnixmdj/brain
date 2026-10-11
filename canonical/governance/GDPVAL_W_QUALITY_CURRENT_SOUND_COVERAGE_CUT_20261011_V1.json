@@ -1,0 +1,190 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_W_QUALITY_CURRENT_SOUND_COVERAGE_CUT_V1",
+  "date": "2026-10-11",
+  "status": "CURRENT_W_QUALITY_DECOMPOSITION__OWNER_PROTOCOL_ARCHITECTURE_BOUND__BRAIN_QUALITY_SUBREGIONS_PARTIAL__CURRENT_OWNER_PREFERENCE_CLASS_CONTAINMENT_UNPROVED__ZERO_GDPVAL_CREDIT",
+  "target": {
+    "predicate": "BRAIN_PROFESSIONAL_WORK_CAPABILITY_GE_CAPABILITY_EVIDENCED_BY_FROZEN_OPUS55_GDPVAL_AA_V2_1_1846",
+    "witness": "W_QUALITY",
+    "requirement": "SCOPE_COMPLETE_SOUND_POSITIVE_OUTPUT_QUALITY_ORDER_STRONG_ENOUGH_TO_ENTAIL_THE_DISCLOSED_GDPVAL_JUDGE_PREFERENCE_RELATION"
+  },
+  "owner_relation": {
+    "public_protocol_source": {
+      "path": "canonical/governance/GDPVAL_V21_PUBLIC_GRADING_PROTOCOL_CLOSURE_20261011_V1.json",
+      "git_blob_sha": "9073cca98109ea85a89715f9f94545a51ceaf2fb"
+    },
+    "current_public_semantics": [
+      "SAME_TASK_PAIRWISE_COMPARISON",
+      "RANDOM_A_B_ANONYMIZATION",
+      "TASK_REFERENCE_FILES_AND_BOTH_SUBMISSIONS_PROVIDED_TO_THE_JUDGE",
+      "DOCUMENTS_PARSED_AS_TEXT_AND_IMAGES",
+      "JUDGE_IS_ASKED_WHICH_SUBMISSION_BETTER_RESPONDS_TO_THE_TASK",
+      "THREE_JUDGE_PANEL_WITH_ONE_SAMPLED_PER_COMPARISON"
+    ],
+    "scoring_architecture_bound": true,
+    "exact_current_pairwise_prompt_bound": false,
+    "extensionally_equivalent_current_preference_relation_bound": false,
+    "scope_complete_monotone_owner_class_proved": false,
+    "exact_owner_judge_behavior_bound": false,
+    "consequence": "NO_SET_OF_BRAIN_QUALITY_COORDINATES_MAY_BE_PROMOTED_TO_OWNER_PREFERENCE_AUTHORITY_WITHOUT_A_SOUND_CONTAINMENT_OR_STRONGER_EVALUATOR_INDEPENDENT_PROOF"
+  },
+  "sound_brain_subregions": [
+    {
+      "id": "TARGET_SPECIFICATION_AND_TASK_BINDING",
+      "status": "BOUNDED_PARTIAL",
+      "source": {
+        "path": "canonical/governance/PROFESSIONAL_QUALITY_R1_ROOT_SUBJECT_BINDING_20261010_V1.json",
+        "git_blob_sha": "e702e0d0ea567db92869cfe0be7ca9745d94c8cc"
+      },
+      "proves": [
+        "EXACT_TARGET_INSTANCE_FIELDS_REQUIRED_BEFORE_ROUTING",
+        "CANONICAL_TARGET_CONTRACT_SEMANTICS_REPLAY",
+        "TARGET_INSTANCE_CONTENT_HASH"
+      ],
+      "missing": [
+        "ARBITRARY_USER_PROMPT_SEMANTIC_COMPLETENESS",
+        "SOURCE_EXTRACTION_COMPLETENESS",
+        "UNIQUE_BEST_PLAN"
+      ],
+      "owner_preference_authority": false
+    },
+    {
+      "id": "REALIZATION_AND_RENDER_OBSERVATION",
+      "status": "BOUNDED_PARTIAL",
+      "source": {
+        "path": "canonical/governance/PROFESSIONAL_QUALITY_R3_ROOT_SUBJECT_BINDING_20261010_V1.json",
+        "git_blob_sha": "c49c120a61620d400e372884266b63ec34a054d2"
+      },
+      "newly_extended_by": {
+        "path": "canonical/governance/PROFESSIONAL_QUALITY_R4_VISUAL_TECHNICAL_OBSERVATION_EXTENSION_20261011_V1.json",
+        "git_blob_sha": "651f5d70f92b348f5e71bf6030bdbe07b2c385cf"
+      },
+      "proves": [
+        "PINNED_NATIVE_RENDER_SCOPE",
+        "CONTENT_ADDRESSED_RENDERED_PAGE_OBSERVATION",
+        "BLANKNESS_TEXT_PRESENCE_OCR_CONFIDENCE_HARD_CROP_AND_MAJOR_LINE_OVERLAP"
+      ],
+      "missing": [
+        "HOLISTIC_AESTHETIC_OR_PRESENTATION_TOP",
+        "ARBITRARY_SEMANTIC_TARGET_CORRECTNESS",
+        "WHOLE_OPEN_ENDED_NATIVE_ARTIFACT_CONTRACT_EQUIVALENCE"
+      ],
+      "owner_preference_authority": false
+    },
+    {
+      "id": "EVIDENCE_GROUNDING_AND_DEPENDENCE",
+      "status": "BOUNDED_PARTIAL",
+      "source": {
+        "path": "canonical/governance/PROFESSIONAL_QUALITY_R6_ROOT_SUBJECT_BINDING_20261010_V1.json",
+        "git_blob_sha": "0a6626c3378b471bff70de0ae3ea53e1e784276e"
+      },
+      "proves": [
+        "CONTENT_ADDRESSED_SCOPE_MATCHED_EVIDENCE_ADMISSION",
+        "CALLER_SUPPLIED_STEP_RESULTS_HAVE_ZERO_AUTHORITY"
+      ],
+      "missing": [
+        "GLOBAL_EVIDENCE_COMPLETENESS",
+        "ALL_REAL_TASK_EVIDENCE_ADMITTED"
+      ],
+      "owner_preference_authority": false
+    },
+    {
+      "id": "VISIBLE_QUALITY_TOP_SUBREGION",
+      "status": "STRONG_BUT_SELECTED_SUBREGION_ONLY",
+      "source": {
+        "path": "canonical/governance/P2_STRONG_VISIBLE_QUALITY_SUBREGION_TOP_LAW_20261007_V1.json",
+        "git_blob_sha": "ec0831f086823995b671c33ff24cd76de3b0250e"
+      },
+      "proves": [
+        "SIX_FROZEN_DIRECT_PROFESSIONAL_QUALITY_GATES_AT_BOOLEAN_TOP_VALUES_FOR_ADMITTED_CONTEXTS"
+      ],
+      "missing": [
+        "GLOBAL_EQUIVALENCE_TO_GDPVAL_PAIRWISE_QUALITY",
+        "HIDDEN_OR_UNDECLARED_PROFESSIONAL_REQUIREMENT_DISCOVERY",
+        "CURRENT_GDPVAL_CONTEXT_ADMISSION_PRECONDITIONS"
+      ],
+      "owner_preference_authority": false
+    },
+    {
+      "id": "EVALUATOR_REFERENCE_AND_UNCERTAINTY",
+      "status": "LOAD_BEARING_OPEN",
+      "source": {
+        "path": "canonical/governance/PROFESSIONAL_QUALITY_R5_ROOT_SUBJECT_BINDING_20261010_V1.json",
+        "git_blob_sha": "adad696b4ce4ed62063e871e42ad91300f4590e1"
+      },
+      "proves": [
+        "FAIL_CLOSED_CONDITIONAL_EVALUATOR_CLASS_MECHANICS",
+        "PUBLIC_RUBRIC_ONLY_HAS_ZERO_OWNER_SEMANTIC_AUTHORITY"
+      ],
+      "missing": [
+        "TRUE_CURRENT_OWNER_EVALUATOR_CONTAINMENT",
+        "CURRENT_BRAIN_VS_OPUS55_DIFFERENCE_VECTOR_OR_TARGET_RELATIVE_EVIDENCE"
+      ],
+      "owner_preference_authority": false
+    }
+  ],
+  "historical_dimension_hypotheses": {
+    "source": {
+      "path": "canonical/governance/GDPVAL_EVALUATOR_TRICHOTOMY_AND_PROMPT_PROVENANCE_RECONCILIATION_20261008_V1.json",
+      "git_blob_sha": "2cc5dd79c255fe80973be6fdaa71e3119ac16f13"
+    },
+    "candidate_only": [
+      "CORRECT_AND_COMPLETE_TASK_FULFILLMENT",
+      "FACTUAL_ACCURACY",
+      "LOGICAL_CORRECTNESS",
+      "MISINTERPRETATION_AVOIDANCE",
+      "STRUCTURE_COHERENCE_READABILITY",
+      "PROFESSIONAL_FORMATTING"
+    ],
+    "authority": "CANDIDATE_DIMENSION_AND_ADVERSARIAL_COUNTEREXAMPLE_GENERATOR_ONLY",
+    "current_owner_semantic_authority": false
+  },
+  "current_minimum_blockers": [
+    {
+      "rank": 1,
+      "id": "OWNER_PREFERENCE_CLASS_CONTAINMENT",
+      "class": "EXTERNAL_OR_STRONGER_THEOREM",
+      "statement": "Bind the exact current owner preference relation, an independently verified restricted current owner class, or a stronger evaluator-independent complete order.",
+      "why_load_bearing": "WITHOUT_THIS_LINK_INTERNAL_QUALITY_COORDINATES_DO_NOT_ENTAIL_THE_OWNER_PAIRWISE_RELATION"
+    },
+    {
+      "rank": 2,
+      "id": "SEMANTIC_TASK_FULFILLMENT_TOTALITY",
+      "class": "INTERNAL_CAPABILITY",
+      "statement": "Extend exact target binding and grounded evidence into scope-complete positive semantic task-fulfillment evidence rather than fail-closed partial coverage.",
+      "why_load_bearing": "BETTER_RESPONSE_REQUIRES_MORE_THAN_FILE_INTEGRITY_AND_VISUAL_READABILITY"
+    },
+    {
+      "rank": 3,
+      "id": "HOLISTIC_PRESENTATION_QUALITY",
+      "class": "INTERNAL_CAPABILITY",
+      "statement": "Extend bounded technical visual observation beyond clipping/overlap/readability to sound professional presentation-quality evidence without heuristic self-certification.",
+      "why_load_bearing": "CURRENT_VISUAL_OBSERVER_EXPLICITLY_DOES_NOT_MEASURE_AESTHETIC_OR_HOLISTIC_PRESENTATION_TOP"
+    }
+  ],
+  "route_policy": {
+    "current_owner_prompt_search": "SLEEP_AFTER_TARGETED_CURRENT_FIRST_PARTY_AND_PUBLIC_SEARCH_UNLESS_SURFACE_CHANGES",
+    "primary_internal": "SEMANTIC_TASK_FULFILLMENT_TOTALITY",
+    "secondary_parallel": "HOLISTIC_PRESENTATION_QUALITY",
+    "forbidden": [
+      "PROMOTE_HISTORICAL_V1_DIMENSIONS_TO_CURRENT_OWNER_AUTHORITY",
+      "TREAT_PUBLIC_RUBRIC_AS_OWNER_PAIRWISE_LAW",
+      "TREAT_TECHNICAL_VISUAL_PASS_AS_AESTHETIC_TOP",
+      "TREAT_HIGH_LEVEL_CROWD_BT_AGGREGATION_AS_CURRENT_JUDGE_BEHAVIOR_CONTAINMENT",
+      "STOP_ALL_INTERNAL_QUALITY_WORK_BECAUSE_OWNER_CLASS_IS_UNBOUND"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_W_QUALITY_PROVED",
+    "NO_CLAIM_CURRENT_OWNER_EVALUATOR_CONTAINMENT",
+    "NO_CLAIM_SCOPE_COMPLETE_QUALITY_ORDER",
+    "NO_CLAIM_GDPVAL_GE_1846",
+    "NO_CLAIM_BRAIN_GE_OPUS55",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
