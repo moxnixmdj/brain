@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_GLOBAL_CLEAN_ACTOR_ROOT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "CANDIDATE__PRE_TB4_CAMPAIGN_ROOT_OF_TRUST_FROZEN__DEV_ONLY_MUTATION_POLICY__ZERO_TB4_CREDIT",
+  "target_predicate": "CODING_TB4_GE_66_4",
+  "actor_root": {
+    "superpowers": {
+      "brain_commit": "08b70901f883e97eeb2bc28fa89bd02b5fb93881",
+      "manifest_path": "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/INTERNALIZATION_MANIFEST.json",
+      "manifest_git_blob_sha": "ad23654d732109a2f1f4563e711b508d75746433",
+      "upstream_repository": "obra/superpowers",
+      "upstream_commit": "8ca22dba9a94f28898bbce59f2537ff4d87c747d",
+      "imported_blob_count": 14,
+      "exact_blob_match_count": 14
+    },
+    "mini_swe": {
+      "brain_commit": "ac8442245ed68a5716399dc80c4a9025b2e7de82",
+      "manifest_path": "canonical/capabilities/internalized/software_engineering/mini_swe_agent_2_4_6/INTERNALIZATION_MANIFEST.json",
+      "manifest_git_blob_sha": "fce0426cd85cd0af99f9c1f182a662f343c6d091",
+      "upstream_repository": "SWE-agent/mini-swe-agent",
+      "upstream_commit": "04d809ceab9df28f9adaed044884180159172930",
+      "upstream_source_tree_sha": "b8b43cbea0c9286a47badc81ac698079047a44e3",
+      "exact_git_blob_identity_preserved": true
+    }
+  },
+  "temporal_boundary": {
+    "superpowers_internalized_before_first_brain_tb4_task_campaign": true,
+    "mini_swe_internalized_before_first_brain_tb4_task_specific_contamination_sequence": true,
+    "later_composed_configuration_allowed_as_root": false,
+    "reason": "LATER_COMPOSITION_AND_REPAIR_ARTIFACTS_ARE_CAUSALLY_DOWNSTREAM_OF_TB4_SESSION_EVENTS__RECONSTRUCT_FROM_CLEAN_COMPONENT_ROOTS_INSTEAD"
+  },
+  "allowed_pre_freeze_mutations": [
+    "CHANGES_DERIVED_ONLY_FROM_THE_SEVEN_DISJOINT_V3_MINUS_V4_CPU_DEVELOPMENT_TASKS",
+    "GENERIC_UPSTREAM_SECURITY_OR_CORRECTNESS_FIXES_WITH_CONTENT_ADDRESSED_NON_TB4_PROVENANCE",
+    "FORMAL_GENERIC_POLICY_COMPONENTS_REDERIVED_FROM_NON_TB4_SOURCES_AND_INDEPENDENTLY_VERIFIED"
+  ],
+  "forbidden_pre_freeze_sources": [
+    "ANY_OF_THE_66_TB4_V4_TARGET_TASK_INSTRUCTIONS_AS_DEVELOPMENT_EVIDENCE",
+    "ANY_TB4_V4_TARGET_SOLUTION_OR_HIDDEN_VERIFIER_CONTENT",
+    "ANY_PRIOR_TB4_TARGET_REWARD_OR_FAILURE_CLASS_USED_TO_CHANGE_ACTOR_BEHAVIOR",
+    "ANY_TASK_SPECIFIC_REPAIR_DESCENDED_FROM_TB4_TARGET_FEEDBACK",
+    "THIS_CHAT_AS_AN_EVALUATION_ACTOR_OR_ACTOR_TUNING_SOURCE_WHERE_IT_CONTAINS_TB4_TARGET_HISTORY"
+  ],
+  "clean_dev_binding": {
+    "path": "canonical/governance/TB4_CLEAN_NEAR_DISTRIBUTION_DEVELOPMENT_SET_20261011_V1.json",
+    "rule": "ONLY_BOUND_CPU_DEV_SET_MAY_DRIVE_BENCHMARK_NEAR_TUNING"
+  },
+  "freeze_contract": [
+    "MATERIALIZE_EXACT_ACTOR_BYTES_CONFIG_PROMPTS_ROUTER_AND_TOOL_POLICY",
+    "CONTENT_ADDRESS_COMPLETE_ACTOR_DEPENDENCY_CLOSURE",
+    "INDEPENDENTLY_PROVE_NO_TB4_FORBIDDEN_PROVENANCE_REACHES_THE_ACTOR",
+    "FREEZE_BEFORE_FIRST_COUNTED_TB4_TRIAL",
+    "NO_MUTATION_FROM_ANY_COUNTED_TB4_RESULT"
+  ],
+  "runtime_substrate_requirement": "FRESH_COGNITION_IDENTITY_WITH_NO_TB4_HISTORY_AND_VERIFIED_ZERO_INCREMENTAL_SPEND_ENTITLEMENT",
+  "current_runtime_substrate_state": "OPEN__CURRENT_CHAT_IS_CONTAMINATED__PUBLIC_SESSION_BRIDGE_IS_MODEL_AGNOSTIC__NO_FRESH_ZERO_COST_IDENTITY_WITH_OBSERVABLE_ALLOWANCE_BOUND_YET",
+  "hard_nonclaims": [
+    "NO_CLAIM_CLEAN_ROOT_ALREADY_SCORES_219",
+    "NO_CLAIM_CURRENT_CHAT_CAN_SERVE_AS_CLEAN_RUNTIME",
+    "NO_TB4_SUCCESS_SCORE_ACCEPTANCE_OR_TERMINAL_CREDIT",
+    "NO_EXECUTION_AUTHORITY_ADDED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "independent_verification_required": true,
+  "promotion_authority": false
+}
