@@ -161,8 +161,8 @@
     "test": "canonical/tests/test_capability_parallel_frontier_post_composition_v2.py",
     "test_git_blob_sha": "de52129ccf37dc4c55378647e2c22978e27eaf5d",
     "verification": "canonical/verification/DECISION_VALUE_SCHEDULER_GATE_INDEPENDENT_VERIFY_20261011_V1.json",
-    "verification_git_blob_sha": "bf8951150a1f2ae4c8944d4c94fcd8ae06fd1bb8",
-    "primary_verification": "PYCOMPILE_PASS__23_OF_23_COMBINED_TESTS_PASS__CURRENT_PLAN_REPLAY_PASS",
+    "verification_git_blob_sha": "2bf2e6f734550edfea863247ee10b92b33ddd7d0",
+    "primary_verification": "PYCOMPILE_PASS__46_OF_46_SCHEDULER_SLICE_PASS__CURRENT_PLAN_REPLAY_PASS__R2_SCALAR_FALLBACK_SOURCE_DRIFT_FAIL_CLOSED",
     "execution_authority": false,
     "promotion_authority": false,
     "terminal_authority": false
@@ -234,7 +234,7 @@
   },
   "v16_activation": {
     "path": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261011_V16.json",
-    "git_blob_sha": "d30659e4b3385f299b98a5862a0e2f659c890c0c",
+    "git_blob_sha": "19134b0164849c0f3802ca5bf53d0e465ce3fef5",
     "full_execution_authority": false
   },
   "scalar_fallback_state": "BLOCKED_R2_POLICY_SOURCE_LOCK_DRIFT__PRIMARY_V16_ACTIVE"
