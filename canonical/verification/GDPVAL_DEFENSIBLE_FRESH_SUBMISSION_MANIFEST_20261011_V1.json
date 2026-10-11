@@ -1,14 +1,14 @@
 {
   "schema": "PROJECT_BRAIN_GDPVAL_DEFENSIBLE_FRESH_SUBMISSION_MANIFEST_20261011_V1",
   "date": "2026-10-11",
-  "status": "PARTIAL_CONTENT_ADDRESSED_MANIFEST__22_DEFENSIBLE_FRESH_SUBJECTS__FAIL_CLOSED_TOMBSTONES_PREVAIL",
+  "status": "PARTIAL_CONTENT_ADDRESSED_MANIFEST__23_DEFENSIBLE_FRESH_SUBJECTS__FAIL_CLOSED_TOMBSTONES_PREVAIL",
   "benchmark": "GDPval-AA v2.1",
   "dataset": {
     "revision_sha": "11e7900cdcac61bc4daf59e65feb238acda98fbf",
     "population_count": 220,
     "manifest_root_sha256": "f69af30fcea243ccb25d44c4a5380be0cdcac621287568525065034ce6cedae8"
   },
-  "fresh_subject_count": 22,
+  "fresh_subject_count": 23,
   "fresh_rows": [
     5,
     6,
@@ -31,6 +31,7 @@
     25,
     30,
     31,
+    36,
     40
   ],
   "fresh_subjects": [
@@ -224,6 +225,15 @@
       "status": "PASS__FRESH_ROW31_TWO_PAGE_CODING_STANDARDS_DOCX_FROZEN__RENDER_QA_PASS__ZERO_OWNER_SCORE_CREDIT"
     },
     {
+      "row_idx": 36,
+      "task_id": "fccaa4a1-1c39-49ac-b701-55361a19966b",
+      "receipt_path": "canonical/evidence/GDPVAL_SCALE_ROW36_FCCAA4A1_BRAIN_SUBMISSION_RECEIPT_20261011_V1.json",
+      "receipt_blob_sha": "08ecb3bcabe7c3df7db426ce970ec68d464c0281",
+      "precommit_commit": "c604f5006820ce3ca24d6afc2487a95a30886a6c",
+      "output_freeze_commit": "177e95587b45543e3c5a3a2f2a3af4f8d73675a1",
+      "status": "PASS__FRESH_ROW36_TWO_PAGE_STATUE_LIBERTY_ELLIS_ISLAND_PDF_FROZEN__LIVE_SOURCE_AND_RENDER_QA_PASS__ZERO_OWNER_SCORE_CREDIT"
+    },
+    {
       "row_idx": 40,
       "task_id": "a0ef404e-82a6-4507-bff1-633d7c8e0004",
       "receipt_path": "canonical/evidence/GDPVAL_SCALE_ROW40_A0EF404E_BRAIN_SUBMISSION_RECEIPT_20261011_V1.json",
@@ -280,10 +290,10 @@
     }
   ],
   "coverage": {
-    "fresh_frozen_tasks": 22,
+    "fresh_frozen_tasks": 23,
     "population_tasks": 220,
-    "fresh_fraction": 0.1,
-    "remaining_without_defensible_fresh_submission": 198
+    "fresh_fraction": 0.10454545454545454,
+    "remaining_without_defensible_fresh_submission": 197
   },
   "precedence_rule": "EXPLICIT_CONTAMINATION_OR_IDENTITY_TOMBSTONE_OVERRIDES_ANY_LATER_RECEIPT_LABELLED_FRESH_FOR_THE_SAME_ROW",
   "boundary": [
