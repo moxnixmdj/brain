@@ -337,9 +337,13 @@ def _format_evidence_submission(question: str, results: Sequence[tuple[str, str]
                 sources.append(url)
     contract = compile_question(question)
     deps = compile_dependencies(contract)
+    mechanically_closed = (
+        deps.get("mechanically_closed_candidate") is True
+        and contract.get("semantic_tail_required") is not True
+    )
     status = (
         "MECHANICALLY_CLOSED_CANDIDATE"
-        if deps.get("mechanically_closed_candidate") is True
+        if mechanically_closed
         else "SEMANTIC_OR_SOURCE_RESIDUAL_REMAINS"
     )
     body = [
