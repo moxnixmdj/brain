@@ -1,1 +1,57 @@
-{"status":"PENDING_REPLACEMENT"}
+{
+  "schema": "PROJECT_BRAIN_PYTHON_COUPLED_SOFTWARE_REPAIR_LOOP_V1_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__ATOMIC_CROSS_FILE_COUPLED_REPAIR__ZERO_MODEL__ZERO_SPEND",
+  "subject": {
+    "runtime_path": "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py",
+    "runtime_git_blob_sha": "18fbe4b6f7f84a850d193c6d4fcb5f9555edeb1c",
+    "runtime_sha256": "f6142e21a8572f75a37b9dcc0185c0815ba9d7f2b3c33140a5ed8732f32e7093",
+    "canonical_test_path": "canonical/tests/test_python_coupled_software_repair_loop_v1.py",
+    "canonical_test_git_blob_sha": "ccbe88f0d9a81e6be8b36db2f7e52bab33ba15c5",
+    "canonical_test_sha256": "d5b06e151be710e376dfba781d745943a78f5bdefa5c7797d59455309c4d3399"
+  },
+  "development_falsification": {
+    "carrier": "Sprites",
+    "initial_result": "5_OF_6__RECEIPT_BOOKKEEPING_DEFECT_FOUND",
+    "repair": "TRACK_TOUCHED_FILES_SEPARATELY_FROM_LOCALIZED_FILES",
+    "post_repair_result": "6_OF_6_PASS"
+  },
+  "independent_replay": {
+    "carrier": "LOCAL_SANDBOX",
+    "exact_runtime_bytes": true,
+    "exact_development_test_bytes": true,
+    "development_test_sha256": "de2671a5f1a65405bf02fe9edb7de474dd2eb7f21e8bc6c3af5e432607bcf844",
+    "result": "6_OF_6_PASS"
+  },
+  "canonical_path_replay": {
+    "runtime_git_blob_matches_branch": true,
+    "canonical_test_git_blob_matches_branch": true,
+    "result": "3_OF_3_TEST_METHODS_PASS"
+  },
+  "proved": [
+    "ATOMIC_CROSS_FILE_TWO_EDIT_SEARCH_CROSSES_FLAT_SINGLE_EDIT_FAILURE_PLATEAU",
+    "SYMBOL_AWARE_EVIDENCE_LOCALIZATION_RANKS_IMPORTED_CALLED_FILES_ABOVE_DISTRACTOR",
+    "FINAL_SUCCESS_DOUBLE_REPLAY",
+    "ONLY_TOUCHED_FILES_IN_PATCH_RECEIPT",
+    "SOURCE_BYTES_RESTORED",
+    "ZERO_MODEL_DEPENDENCY",
+    "ZERO_EXTERNAL_RUNTIME_CAPABILITY_PROVIDER",
+    "ZERO_INCREMENTAL_SPEND"
+  ],
+  "open": [
+    "GENERAL_SEMANTIC_FAULT_LOCALIZATION",
+    "SAME_FILE_COUPLED_EDITS",
+    "COUPLED_GROUPS_LARGER_THAN_TWO",
+    "ARBITRARY_EDIT_BASIS_COMPLETENESS",
+    "RAW_SOFTWARE_REQUEST_TO_SOUND_ACCEPTANCE_CONTRACT",
+    "NON_PYTHON_REPAIR",
+    "HIDDEN_REQUIREMENTS_AND_GENERAL_MERGEABILITY"
+  ],
+  "hard_nonclaims": [
+    "NO_GENERAL_SOFTWARE_ENGINEERING_CLAIM",
+    "NO_FRONTIERCODE_SCORE_OR_ACCEPTANCE_CREDIT",
+    "NO_SOURCE_WRITE_OR_PROMOTION_AUTHORITY"
+  ],
+  "frontiercode_score_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
