@@ -1,0 +1,74 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_SCALE_SUBMISSION_RECEIPT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__FRESH_ROW30_TWO_PAGE_TECHNICAL_DESIGN_DOCX_FROZEN__RENDER_QA_PASS__ZERO_OWNER_SCORE_CREDIT",
+  "benchmark": "GDPval-AA v2.1",
+  "row_idx": 30,
+  "task_id": "cebf301e-5ea7-41ae-b117-ad8f43e7ac22",
+  "sector": "Professional, Scientific, and Technical Services",
+  "occupation": "Computer and Information Systems Managers",
+  "freshness": {
+    "precommit": "canonical/governance/GDPVAL_SCALE_FRESH_BATCH_ROWS27_34_CORRECTED_PRECOMMIT_20261011_V1.json",
+    "precommit_commit": "1bdac6c8e4dae4f5624e5e30afeb380f085e3a65",
+    "official_allowed_projection_sha256": "fd71cf15e44e48c1b55bdf71088eaefc6e1586bfcc104bd9359920c96d187914",
+    "prompt_sha256": "ee6bc23eea5622dc6d99249c8681a3e5b655c6ff1f73991464347859a6bc8423",
+    "reference_count": 0,
+    "gold_deliverable_read_before_freeze": false,
+    "rubric_read_before_freeze": false,
+    "third_party_model_submission_read_before_freeze": false
+  },
+  "brain_execution_profile": {
+    "path": "canonical/capabilities/internalized/professional_work/stirrup_247f24d/BRAIN_EXECUTION_PROFILE_V1.json",
+    "candidate_id": "OPUS55_PROFESSIONAL_KNOWLEDGE_WORK_STIRRUP_CONFIGURATION_V1",
+    "cognition_surface": "CURRENT_CHATGPT_GPT_5_6_SOL_SESSION",
+    "incremental_spend_usd": 0
+  },
+  "submission": {
+    "library_path": "/Project Brain/GDPval/scale/cebf301e-5ea7-41ae-b117-ad8f43e7ac22/GDPval_row30_customer_portal_technical_design.docx",
+    "library_file_id": "libfile_3df5a13fa1f081918ade1537c5ec5d7a",
+    "bytes": 40492,
+    "sha256": "3d83e5bd34794b699504aae17b9a1eabd5eed98e90af93a7a91966cdd7dd25ee",
+    "format": "docx",
+    "render_page_count": 2,
+    "render_page_sha256": [
+      "1a2dcb237f0158c8069d52c8c8ad0a136dfb894fc3bf3753c6cdb0e3867140a4",
+      "e3ff31b01c692cfc7f2689c094202243104dd40b079f772dd063b90f3fe891a7"
+    ]
+  },
+  "prompt_requirement_checks": {
+    "word_document": "PASS",
+    "page_range_two_to_three": "PASS__2_PAGES",
+    "purpose_goals_scope": "PASS",
+    "functional_requirements": "PASS",
+    "technical_decisions": "PASS",
+    "six_week_constraints": "PASS",
+    "risks_and_open_questions": "PASS",
+    "totp_initial_release": "PASS",
+    "future_social_login_extensibility": "PASS",
+    "strict_customer_proposal_access_control": "PASS",
+    "postgres_and_object_storage": "PASS",
+    "in_browser_pdf_export": "PASS",
+    "mobile_responsive": "PASS",
+    "session_expiration": "PASS",
+    "scale": "PASS",
+    "github_actions_cicd": "PASS",
+    "repo_recommendation": "PASS",
+    "react_framework_recommendation": "PASS",
+    "sales_system_integration_points": "PASS",
+    "node_typescript_and_iac": "PASS"
+  },
+  "verification": {
+    "render_visual_inspection": "PASS__2_PAGES__NO_CLIPPING_OVERLAP_OR_BROKEN_TABLES"
+  },
+  "hard_nonclaims": [
+    "NO_ARTIFICIAL_ANALYSIS_OWNER_GRADE",
+    "NO_GDPVAL_ELO",
+    "NO_CLAIM_SINGLE_TASK_IMPLIES_1846",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
