@@ -1,0 +1,119 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_NATIVE_RESEARCH_SOLVER_V3_PREEXPOSURE_V1",
+  "date": "2026-10-11",
+  "status": "FROZEN_BEFORE_RUNTIME_IMPLEMENTATION__SYNTHETIC_NON_HLE__ZERO_CREDIT",
+  "objective": "Compose question-contract compilation, bounded web retrieval, relation-bound candidate extraction, and independent-host aggregation without models or gold.",
+  "cases": [
+    {
+      "id": "TWO_HOST_PERSON_AGREEMENT",
+      "task_id": "p1",
+      "question": "Who discovered the synthetic Zephyr particle in the fictional Alder experiment?",
+      "search_results": [
+        {
+          "url": "https://alpha.example/research"
+        },
+        {
+          "url": "https://beta.example/history"
+        }
+      ],
+      "fetches": {
+        "https://alpha.example/research": "The synthetic Zephyr particle was discovered by Dr. Mira Sol in the fictional Alder experiment.",
+        "https://beta.example/history": "Records of the fictional Alder experiment state that the synthetic Zephyr particle was discovered by Dr. Mira Sol."
+      },
+      "expected": "Dr. Mira Sol"
+    },
+    {
+      "id": "TWO_HOST_YEAR_AGREEMENT",
+      "task_id": "y1",
+      "question": "In what year was the synthetic Meridian protocol first published?",
+      "search_results": [
+        {
+          "url": "https://alpha.example/meridian"
+        },
+        {
+          "url": "https://gamma.example/archive"
+        }
+      ],
+      "fetches": {
+        "https://alpha.example/meridian": "The fictional Meridian protocol was first published in 2042.",
+        "https://gamma.example/archive": "Archive notes say the fictional Meridian protocol was first published in 2042."
+      },
+      "expected": "2042"
+    },
+    {
+      "id": "CONFLICTING_HOSTS_ABSTAIN",
+      "task_id": "c1",
+      "question": "Who discovered the synthetic Zephyr particle in the fictional Alder experiment?",
+      "search_results": [
+        {
+          "url": "https://alpha.example/a"
+        },
+        {
+          "url": "https://beta.example/b"
+        }
+      ],
+      "fetches": {
+        "https://alpha.example/a": "The synthetic Zephyr particle was discovered by Dr. Mira Sol in the fictional Alder experiment.",
+        "https://beta.example/b": "The synthetic Zephyr particle was discovered by Dr. Kian Vey in the fictional Alder experiment."
+      },
+      "expected": null
+    },
+    {
+      "id": "SINGLE_HIGH_COVERAGE_EXPLICIT_RELATION",
+      "task_id": "l1",
+      "question": "Where is the fictional Ardent observatory located?",
+      "search_results": [
+        {
+          "url": "https://official.example/ardent"
+        }
+      ],
+      "fetches": {
+        "https://official.example/ardent": "The fictional Ardent observatory is located in North Valora."
+      },
+      "expected": "North Valora"
+    },
+    {
+      "id": "IRRELEVANT_RESULTS_ABSTAIN",
+      "task_id": "i1",
+      "question": "Who discovered the synthetic Zephyr particle in the fictional Alder experiment?",
+      "search_results": [
+        {
+          "url": "https://noise.example/page"
+        }
+      ],
+      "fetches": {
+        "https://noise.example/page": "A museum in North Valora contains an exhibit about unrelated synthetic materials."
+      },
+      "expected": null
+    },
+    {
+      "id": "NEGATIVE_QUESTION_ABSTAIN_V3",
+      "task_id": "n1",
+      "question": "Which fictional compound is NOT produced by the synthetic pathway?",
+      "search_results": [
+        {
+          "url": "https://alpha.example/pathway"
+        }
+      ],
+      "fetches": {
+        "https://alpha.example/pathway": "The fictional pathway produces the compound called Tau inversion."
+      },
+      "expected": null
+    }
+  ],
+  "invariants": [
+    "NO_HLE_QUESTION_OR_GOLD_CONTENT",
+    "NO_EXTERNAL_REASONING_MODEL",
+    "SEARCH_QUERY_IS_COMPILED_RESEARCH_FOCUS_NOT_RAW_QUESTION",
+    "URL_HOSTS_ARE_DEDUPLICATED_BEFORE_FETCH",
+    "CANDIDATE_SUPPORT_IS_RELATION_BOUND_NOT_MERE_OCCURRENCE",
+    "CONFLICTING_TOP_CANDIDATES_FAIL_CLOSED",
+    "NEGATIVE_POLARITY_NOT_SOLVED_BY_POSITIVE_RELATION_V1",
+    "CANDIDATE_HAS_ZERO_CORRECTNESS_AND_TERMINAL_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
