@@ -23,6 +23,21 @@ class ProfessionalChartSemanticUnitTests(unittest.TestCase):
         self.assertAlmostEqual(b,-10.0,places=6)
         self.assertEqual(len(inliers),4)
 
+    def test_affine_consensus_rejects_duplicate_value_at_wrong_position(self):
+        points=[
+            (62.0,6.0),
+            (234.0,4.0),
+            (342.5,2.0),   # spurious plot annotation
+            (391.5,2.0),   # actual tick
+            (473.0,1.0),
+            (555.0,0.0),
+        ]
+        a,b,inliers=_fit_affine(points)
+        self.assertIn((391.5,2.0),inliers)
+        self.assertNotIn((342.5,2.0),inliers)
+        self.assertAlmostEqual(a,-0.01223,delta=0.0004)
+        self.assertAlmostEqual(b,6.80,delta=0.12)
+
     def test_axis_calibration_from_positioned_ocr(self):
         ocr={
             "page_width":1000,
