@@ -326,6 +326,7 @@ class BrainOSWorldAgent:
                     response=response,
                     actions=actions,
                     policy_receipt=policy_receipt,
+                    submitted_operation=dict(op),
                     browser_result=dict(result),
                 )
                 return response, actions
@@ -335,8 +336,13 @@ class BrainOSWorldAgent:
                     return self._recoverable_error(
                         state, raw, AdapterError("STATE_OPS_HAS_UNSUPPORTED_FIELDS")
                     )
+                raw_ops = first.get("ops")
+                if not isinstance(raw_ops, list) or any(not isinstance(x, Mapping) for x in raw_ops):
+                    return self._recoverable_error(
+                        state, raw, AdapterError("STATE_OPS_LIST_REQUIRED")
+                    )
                 try:
-                    result = self.guest_controller.run({"ops": first.get("ops")})
+                    result = self.guest_controller.run({"ops": raw_ops})
                 except (GuestOpsError, ValueError, RuntimeError) as exc:
                     return self._recoverable_error(state, raw, exc)
                 response = str(raw.get("response") or "").strip()
@@ -346,6 +352,7 @@ class BrainOSWorldAgent:
                     response=response,
                     actions=actions,
                     policy_receipt=policy_receipt,
+                    submitted_operations=[dict(x) for x in raw_ops],
                     guest_result=dict(result),
                 )
                 return response, actions
