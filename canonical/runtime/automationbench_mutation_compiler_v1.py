@@ -91,7 +91,14 @@ def compile_salesforce_mark_won(
 
     # Use informative capitalized phrase fragments near opportunity/deal wording.
     candidates = re.findall(r"([A-Z][A-Za-z0-9& .'-]{2,80}(?:Deal|Opportunity|Contract))", prompt)
-    terms = candidates[:2] or [x for x in re.findall(r"[A-Z][A-Za-z0-9&'-]+", prompt) if x not in {"Salesforce"}][:4]
+    source_phrases = candidates[:2] or [prompt]
+    generic = {"we","just","closed","the","mark","it","as","won","in","salesforce","opportunity","deal","contract"}
+    terms = [
+        tok.lower()
+        for phrase in source_phrases
+        for tok in re.findall(r"[A-Za-z0-9&'-]+", phrase)
+        if tok.lower() not in generic and len(tok) > 2
+    ]
     rec = _best_named_record(observations, name_terms=terms, id_prefix="006")
     if rec is None:
         return None
