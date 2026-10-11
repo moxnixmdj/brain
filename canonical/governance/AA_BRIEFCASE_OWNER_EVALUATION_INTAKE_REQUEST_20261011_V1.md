@@ -35,3 +35,12 @@ If the answer is positive, please provide the decision in the field structure de
 The schema intentionally requires all of the following before Brain will freeze an evaluation subject: official private AA-Briefcase v1.1 scope, independent no-fee coverage, full-agent execution support, one explicit integration route, a content-addressed interface contract, and a content-addressed frozen-1822 comparability route.
 
 A partial reply is still useful for discussion, but it will remain OPEN and will not be treated as benchmark authorization.
+
+
+## Delivery route
+
+Official public contact address: `contact@artificialanalysis.ai`
+
+Authority basis: Artificial Analysis publicly directs services/publication inquiries to this address and separately lists custom benchmarking / technical testing for models listed and not listed in its public benchmarks.
+
+This address is a contact route only. It does not itself prove eligibility, official benchmark access, no-fee coverage, or score comparability.
