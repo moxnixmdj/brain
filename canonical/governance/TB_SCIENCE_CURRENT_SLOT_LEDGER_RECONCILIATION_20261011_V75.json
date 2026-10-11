@@ -1,0 +1,75 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261011_V75",
+  "date": "2026-10-11",
+  "status": "RANK23_CLAIM_BOUND_STAGED__UNREAD_UNSTARTED__PUBLIC_ZERO_EXPOSURE_RESEAL_PENDING",
+  "predecessor": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261011_V74.json",
+    "git_blob_sha": "b570900dbf23c05948a68f2ae68f2cf74de1d3de"
+  },
+  "admission": {
+    "path": "canonical/governance/TB_SCIENCE_RANK23_CAPABILITY_FIRST_CHECKPOINT_ADMISSION_20261011_V1.json",
+    "git_blob_sha": "e81506b8f23e12199b1a6079052fe356cf3ef24e"
+  },
+  "verification": {
+    "path": "canonical/verification/TB_SCIENCE_DNA_STORAGE_HARBOR_ROUTE_V1_VERIFY_20261011_V1.json",
+    "git_blob_sha": "2a02191d1bcbe04a55c189792739274e50877e5c",
+    "pass": true
+  },
+  "claim": {
+    "path": "canonical/governance/TB_SCIENCE_RANK23_LOGICAL_ATTEMPT_CLAIM_BINDING_20261011_V1.json",
+    "git_blob_sha": "7173bfb6d14cd90ae6bd8399e35c0119e12d6c42",
+    "execution_claim_binding_digest": "sha256:babd5f94f2ecd1c3b11d0cf17426044fa2d094b87b101ed0b491244ddb8370cf",
+    "logical_attempt_id": "1dcaac7cec27f93edde5c3ebef2a4c9c3368bea18b3129acef697541121c9545"
+  },
+  "authority": {
+    "path": "canonical/governance/TB_SCIENCE_RANK23_ONE_SLOT_EXECUTION_AUTHORITY_20261011_V1.json",
+    "git_blob_sha": "ee4092875cfe187bb414fd4ca881c95ac73e6e24"
+  },
+  "counts": {
+    "benchmark_trials_consumed": 20,
+    "consumed_successes_final": 0,
+    "consumed_failures_final": 20,
+    "started_result_pending": 0,
+    "finalized_slots": 20,
+    "active_in_flight_slot_count": 0
+  },
+  "current_slot": {
+    "ledger_schedule_rank": 23,
+    "frozen_manifest_schedule_order": 22,
+    "task_rank": 22,
+    "slot_id": "terminal-bench-science/dna-storage-codec::trial-0",
+    "task_digest": "sha256:bde6852289db3f5474aedc96c54aca201d11be6c61f4fef019998b2b689e65ac",
+    "logical_attempt_id": "1dcaac7cec27f93edde5c3ebef2a4c9c3368bea18b3129acef697541121c9545",
+    "execution_claim_binding_digest": "sha256:babd5f94f2ecd1c3b11d0cf17426044fa2d094b87b101ed0b491244ddb8370cf",
+    "task_read": false,
+    "task_started": false,
+    "durable_start_cas_acquired": false,
+    "benchmark_trials_consumed": 0,
+    "result_present": false
+  },
+  "public_reseal": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "reseal/tb-science-rank23-dna-storage-20261011-v1",
+    "base_branch": "terminal-execution-v1",
+    "base_commit_at_staging": "3d97cba3e784d387ced47829b712595ba329e59d",
+    "workflow_git_blob_sha": "78aaaa1b072f0fba17c49ecde438adcfdd78aa09",
+    "behavior_git_blob_sha": "054b84605da1f6f1f7f867904d6f6a10a502a75c",
+    "zero_exposure_verifier_git_blob_sha": "887f090004868752e1545249315ee73f65bf2dd6",
+    "promotion_complete": false
+  },
+  "scheduler_state": "FROZEN_PENDING_EXACT_RANK23_PUBLIC_ZERO_EXPOSURE_RESEAL",
+  "execution_authority": true,
+  "execution_authority_effective": false,
+  "task_read_authority": true,
+  "task_read_authority_effective": false,
+  "activation_authority": false,
+  "retry_authority": false,
+  "replacement_authority": false,
+  "replay_authority": false,
+  "result_credit_authority": false,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "next": "COMPLETE_PUBLIC_RANK23_BINDINGS_AND_STAGED_SURFACE__INDEPENDENTLY_VERIFY_ZERO_EXPOSURE__MERGE_RESEAL__THEN_MAKE_AUTHORITY_EFFECTIVE"
+}
