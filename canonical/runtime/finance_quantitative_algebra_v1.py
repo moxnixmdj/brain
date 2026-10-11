@@ -9,6 +9,7 @@ All public entry points return Decimal values unless otherwise documented.
 """
 from __future__ import annotations
 
+from datetime import date
 from decimal import Decimal, InvalidOperation, getcontext
 from typing import Iterable, Mapping, Sequence
 
@@ -99,6 +100,19 @@ def cagr(end_value: object, start_value: object, periods: int) -> Decimal:
     exponent = D(1) / D(periods)
     growth_factor = getcontext().power(end / start, exponent)
     return (growth_factor - D(1)) * HUNDRED
+
+
+
+def actual_fiscal_days(start_date: str, end_date: str) -> int:
+    """Inclusive calendar-day count for a fiscal reporting period."""
+    try:
+        start = date.fromisoformat(str(start_date))
+        end = date.fromisoformat(str(end_date))
+    except Exception as exc:
+        raise FinanceAlgebraError("FISCAL_DATE_INVALID") from exc
+    if end < start:
+        raise FinanceAlgebraError("FISCAL_DATE_ORDER_INVALID")
+    return (end - start).days + 1
 
 
 def days_inventory_outstanding(
@@ -304,6 +318,7 @@ def conservative_guidance_dominance(
 
 __all__ = [
     "FinanceAlgebraError",
+    "actual_fiscal_days",
     "adjusted_ebitda",
     "adjusted_ebitdar",
     "average",
