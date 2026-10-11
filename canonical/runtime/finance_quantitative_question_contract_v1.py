@@ -85,8 +85,6 @@ _SEMANTIC_PATTERNS: tuple[str, ...] = (
     r"better positioned",
     r"more detailed disclosure",
     r"underlying cause",
-    r"market sentiment",
-    r"more conservative",
     r"more likely to",
 )
 
