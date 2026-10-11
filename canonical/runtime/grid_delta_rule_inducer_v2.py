@@ -23,7 +23,7 @@ from canonical.runtime.g0_finite_typed_rule_synthesis import (
 
 Grid = tuple[tuple[int, ...], ...]
 SCHEMA = "PROJECT_BRAIN_GRID_DELTA_RULE_INDUCER_V2"
-MAX_PACKS = 96
+MAX_PACKS = 192
 
 
 class GridDeltaRuleV2Error(ValueError):
@@ -166,12 +166,19 @@ def _all_attribute_values(context_sets: Sequence[Mapping[tuple[int, int], Contex
 def _candidate_packs(attribute_values: Mapping[str, Sequence[int]]) -> list[tuple[str, ...]]:
     attrs = [a for a in ATTRIBUTES if 0 < len(attribute_values[a]) <= 20]
     packs: list[tuple[str, ...]] = []
+    # Preserve structural coverage before richer conjunctions: every admissible
+    # singleton, then every admissible pair, only then triples. This prevents a
+    # cheap-cardinality sort from starving semantically distinct attributes.
     for size in (1, 2, 3):
+        tier: list[tuple[str, ...]] = []
         for subset in combinations(attrs, size):
             count = sum(len(attribute_values[a]) for a in subset)
             if count <= 20:
-                packs.append(subset)
-    packs.sort(key=lambda p: (sum(len(attribute_values[a]) for a in p), len(p), p))
+                tier.append(subset)
+        tier.sort(key=lambda p: (sum(len(attribute_values[a]) for a in p), p))
+        packs.extend(tier)
+        if len(packs) >= MAX_PACKS:
+            break
     return packs[:MAX_PACKS]
 
 
