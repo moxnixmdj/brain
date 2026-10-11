@@ -1,0 +1,94 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_EVALF_SUBS_V43_SUCCESSOR_EXECUTION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "VERIFIED_RESEARCH_FRONTIER__SPENT_NEXT47_AND_FRESH_NEXT48_PASS__NEXT49_FROZEN_UNSPENT__CURRENT_POINTER_ELIGIBLE__ZERO_PROMOTION_CREDIT",
+  "subject": {
+    "predecessor": "canonical/evidence/BYTES_EXACT_SYMBOLIC_ALGEBRAICNUMBER_V42_SUCCESSOR_EXECUTION_20261011_V1.json",
+    "predecessor_manifest_sha256": "11b996be90057f3a9e1c8adcad7d47688515a7a3fb1b15713b9e04be76ae1676",
+    "transform": "canonical/research/bytes/tools/conservative_evalf_subs_prune_v43.py",
+    "manifest_sha256": "def0459b04d0bcf848c3c06fb6f954fec7de8c7085fc69fe736936f20fe5b588",
+    "python_files": 277,
+    "raw_python_source_bytes": 1740113,
+    "B_exec_raw_python_source_bytes": 1742873,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "raw_delta_vs_v42_bytes": -3006,
+    "B_exec_delta_vs_v42_bytes": -3006
+  },
+  "selection": {
+    "id": "EVALF_TRIG_AND_SUBS_NEW_OUTSIDE_BOUNDED_CONTRACT_V43",
+    "method": "REUSE_EXISTING_FAIL_CLOSED_BOUNDED_CONTRACT_SPECIALIZATION__COMPOSE_TWO_NONCONFLICTING_BODIES",
+    "changed_body_count": 2,
+    "bodies": [
+      "sympy/core/evalf.py::evalf_trig",
+      "sympy/core/function.py::Subs.__new__"
+    ],
+    "exact_base_guard": true,
+    "exact_target_guard": true
+  },
+  "falsification_history": {
+    "sympy/functions/elementary/exponential.py::log._eval_expand_log": "REJECTED__SIX_ROOTS_CASES_REQUIRE_IT",
+    "sympy/polys/matrices/sdm.py::sdm_irref": "REJECTED__SEVEN_LINEAR_SOLVE_CASES_REQUIRE_IT",
+    "sympy/functions/elementary/trigonometric.py::atan.eval": "REJECTED__EIGHT_ROOTS_CASES_REQUIRE_IT",
+    "sympy/core/evalf.py::evalf_trig": "ACCEPTED",
+    "sympy/core/function.py::Subs.__new__": "ACCEPTED"
+  },
+  "qualification": {
+    "spent_NEXT47": {
+      "id": "QUAL_SUCCESSOR_NEXT47_20261011_V1",
+      "cases": 12650,
+      "corpus_sha256": "e4848f81bf1bbf1ebc795d1ee5e3c4db1035f8227272ed60afc9fb59662a6fef",
+      "candidate": "12650/12650",
+      "failures": 0,
+      "spent": true
+    },
+    "fresh_NEXT48": {
+      "id": "QUAL_SUCCESSOR_NEXT48_20261011_V1",
+      "cases": 12880,
+      "corpus_sha256": "7360ad57d9ded0269d40256aeab444125decf4ececbdc758a3bd095cdb05312f",
+      "candidate": "12880/12880",
+      "failures": 0,
+      "spent": true
+    }
+  },
+  "reproducibility": {
+    "clean_room_v42_to_v43_reconstruction": "PASS__EXACT_TARGET_MANIFEST",
+    "regenerated_manifest_sha256": "def0459b04d0bcf848c3c06fb6f954fec7de8c7085fc69fe736936f20fe5b588",
+    "external_second_carrier_verified": false
+  },
+  "durable_archive": {
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V43_SUCCESSOR_20261011_V1.tar.xz",
+    "library_file_id": "libfile_a20957eb36108191af001f4ea1e94cfc",
+    "bytes": 271652,
+    "sha256": "8bf44444f80ef2615540e8e6aa5c398441e3531e6ba2f790a22ddcb41d2c1137"
+  },
+  "next_frozen": {
+    "id": "QUAL_SUCCESSOR_NEXT49_20261011_V1",
+    "cases": 13110,
+    "seed": 3009360976,
+    "seed_derivation": "FIRST_32_BITS_SHA256_OF_QUAL_SUCCESSOR_NEXT49_20261011_V1_PIPE_V43_MANIFEST_IDENTITY",
+    "seed_material": "QUAL_SUCCESSOR_NEXT49_20261011_V1|def0459b04d0bcf848c3c06fb6f954fec7de8c7085fc69fe736936f20fe5b588",
+    "per_operation_budget": 1140,
+    "corpus_sha256": "7bfc5ebde7f8bb1c41d31967f6f74dafb20dd9b3d3db77e1e101ffb7dd968a34",
+    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT49_20261011_V1.jsonl",
+    "library_file_id": "libfile_4d46a8cb5dcc8191b3af844265fdc5d3",
+    "generation_provenance": "DETERMINISTIC_CHUNKED_EXPECTED_OUTPUT_ACCELERATOR__SAME_CANONICAL_GENERATOR_SEMANTICS",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT",
+    "spent": false
+  },
+  "truth_boundary": [
+    "MEASURED: V43 is 1,740,113 raw Python-source bytes, 3,006 bytes below V42.",
+    "MEASURED: V43 passes spent NEXT47 12,650/12,650 with zero failures.",
+    "MEASURED: previously untouched NEXT48 passes V43 12,880/12,880 with zero failures.",
+    "MEASURED: three larger/alternate cuts were falsified and rejected at exact operation-level counterexamples.",
+    "MEASURED: NEXT49 is durably frozen at 13,110 cases and remains unspent.",
+    "NOT PROVED: external second-carrier replay.",
+    "NOT PROMOTED: no capability, acceptance, ownership, quality, or terminal credit."
+  ],
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "quality_credit_delta": 0,
+  "promotion_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
