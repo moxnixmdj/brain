@@ -156,11 +156,11 @@
       "ready": "BLOCKED_ONLY_BY_FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION"
     },
     {
-      "work_id": "BYTES_EXACT_SYMBOLIC_V47_NEXT_PHYSICAL_CUT",
+      "work_id": "BYTES_EXACT_SYMBOLIC_V48_NEXT_PHYSICAL_CUT",
       "work_type": "EFFICIENCY_IMPROVEMENT",
       "source": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-      "causal_role": "CONTINUE_RESOURCE_REDUCTION_FROM_1738721_RAW_PYTHON_BYTES_USING_SPENT_NEXT53_ONLY__RERANK_BEFORE_NEW_PHYSICAL_CUT__DO_NOT_TOUCH_FROZEN_NEXT54_BEFORE_CUT",
-      "readiness": "ACTIONABLE_WITH_EXISTING_RECONSTRUCTION_AND_QUALIFICATION_MACHINERY__V47_CURRENT__MPMATH_FDOT_FAIL_CLOSED_PRUNE_VERIFIED",
+      "causal_role": "CONTINUE_RESOURCE_REDUCTION_FROM_1728741_RAW_PYTHON_BYTES_USING_SPENT_NEXT54_ONLY__RERANK_BEFORE_NEW_PHYSICAL_CUT__DO_NOT_TOUCH_FROZEN_NEXT55_BEFORE_CUT",
+      "readiness": "ACTIONABLE_WITH_EXISTING_RECONSTRUCTION_AND_QUALIFICATION_MACHINERY__V48_CURRENT__13_BODY_MPMATH_PERIPHERAL_FAIL_CLOSED_PRUNE_INDEPENDENTLY_REPLAYED",
       "claims_new_primitive": false,
       "score_state": "UNBOUND",
       "scheduler_state": "READY_EXECUTION",
@@ -179,17 +179,18 @@
       "vector_evidence": {},
       "read_only_evidence": {
         "source": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-        "source_git_blob_sha": "f04640bbd5df2e54ba64784c171cc4957410dfc9",
-        "raw_python_source_bytes": 1738721,
-        "B_exec_raw_python_source_bytes": 1741481,
-        "qualification": "14030/14030",
-        "next_action": "RERANK_EXACT_V47_USING_SPENT_NEXT53_ONLY__MAKE_NEW_PHYSICAL_CUT_BEFORE_QUAL_SUCCESSOR_NEXT54_20261011_V1",
-        "next_frozen_qualification": "QUAL_SUCCESSOR_NEXT54_20261011_V1",
+        "source_git_blob_sha": "cc039dec0d7361bfb83c7121433eabcb82ce5581",
+        "raw_python_source_bytes": 1728741,
+        "B_exec_raw_python_source_bytes": 1731501,
+        "qualification": "14260/14260",
+        "next_action": "RERANK_EXACT_V48_USING_SPENT_NEXT54_ONLY__MAKE_NEW_PHYSICAL_CUT_BEFORE_QUAL_SUCCESSOR_NEXT55_20261011_V1",
+        "next_frozen_qualification": "QUAL_SUCCESSOR_NEXT55_20261011_V1",
         "next_frozen_spent": false,
+        "independent_verification": "canonical/verification/BYTES_EXACT_SYMBOLIC_MPMATH_PERIPHERAL_V48_INDEPENDENT_VERIFY_20261011_V1.json",
         "vector_bounds_complete": false
       },
-      "ready": "V47_CURRENT_AT_1738721_BYTES__CONTINUE_ONLY_NONCONFLICTING_RESOURCE_PARETO_CUT",
-      "source_git_blob_sha": "2b313e296738b282e320f55c29a623eb773fa46f"
+      "ready": "V48_CURRENT_AT_1728741_BYTES__CONTINUE_ONLY_NONCONFLICTING_RESOURCE_PARETO_CUT",
+      "source_git_blob_sha": "cc039dec0d7361bfb83c7121433eabcb82ce5581"
     },
     {
       "work_id": "R2_FINANCE_SEMANTIC_ADEQUACY_TAIL",
@@ -640,12 +641,13 @@
   },
   "bytes_current_frontier": {
     "path": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-    "observed_git_blob_sha": "f04640bbd5df2e54ba64784c171cc4957410dfc9",
-    "status": "ACTIVE_RESEARCH__MPMATH_FDOT_V47_FRONTIER__SUCCESSOR_READY",
-    "raw_python_source_bytes": 1738721,
-    "B_exec_raw_python_source_bytes": 1741481,
-    "qualification": "14030/14030",
-    "next": "Rerank exact V47 using spent NEXT53 only; make a new physical cut before touching QUAL_SUCCESSOR_NEXT54_20261011_V1.",
+    "observed_git_blob_sha": "cc039dec0d7361bfb83c7121433eabcb82ce5581",
+    "status": "ACTIVE_RESEARCH__MPMATH_PERIPHERAL_V48_FRONTIER__SUCCESSOR_READY",
+    "raw_python_source_bytes": 1728741,
+    "B_exec_raw_python_source_bytes": 1731501,
+    "qualification": "14260/14260",
+    "next": "Rerank exact V48 using spent NEXT54 only; make a new physical cut before touching QUAL_SUCCESSOR_NEXT55_20261011_V1.",
+    "independent_verification_path": "canonical/verification/BYTES_EXACT_SYMBOLIC_MPMATH_PERIPHERAL_V48_INDEPENDENT_VERIFY_20261011_V1.json",
     "promotion_credit": 0,
     "observed_snapshot_is_non_authoritative_for_v15_runtime": true
   }
