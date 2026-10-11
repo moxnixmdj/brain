@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_HLE_RETRIEVAL_COMPONENT_FACTORIAL_HELDOUT_FREEZE_20261011_V1",
   "date": "2026-10-11",
-  "status": "FROZEN_BEFORE_FRESH_PUBLIC_FACTORIAL_HELDOUT__NO_POST_GOLD_TUNING",
+  "status": "FROZEN_WITH_FIXED_QUERY_AND_PAGE_BUDGETS_BEFORE_FRESH_PUBLIC_FACTORIAL_HELDOUT",
   "frozen_components": {
     "planner_v1_blob": "2386db287d08153ffb905f8cd89a76f4ebf19d9f",
     "relation_compiler_blob": "e922ba115ddf596bfcf78ae6988b67a0650e772d",
@@ -39,5 +39,14 @@
   ],
   "hle_questions_consumed": 0,
   "hle_gold_consumed": 0,
-  "incremental_spend_usd": 0
+  "incremental_spend_usd": 0,
+  "budgets": {
+    "planner_v1_max_views": 5,
+    "relation_max_queries": 4,
+    "bing_queries_per_question_max": 9,
+    "wikipedia_baseline_queries_per_question_max": 3,
+    "wikipedia_relation_queries_per_question_max": 2,
+    "wikipedia_pages_per_query": 1,
+    "worker_count_max": 4
+  }
 }
