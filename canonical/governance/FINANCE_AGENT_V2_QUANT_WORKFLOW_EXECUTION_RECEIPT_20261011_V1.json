@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_FINANCE_AGENT_V2_QUANT_WORKFLOW_EXECUTION_RECEIPT_V1",
+  "observed_at": "2026-10-11",
+  "branch": "finance-agent-v2-score-mass-20261011-v1",
+  "head_before_receipt_commit": "0712ef37d8e6fde0ca0d1c480ee2a4aabfb67c1d",
+  "environment": {
+    "device_label": "Mo",
+    "execution_surface": "isolated local verification directory",
+    "incremental_spend_usd": 0
+  },
+  "materialized_files": {
+    "canonical/runtime/finance_quantitative_algebra_v1.py": "efeecdb5faa595db75595bed2b87f9104e16882d",
+    "canonical/runtime/finance_modeling_workflows_v1.py": "a4cbd055df1771f278873e3d922a68d468442242",
+    "canonical/tests/test_finance_modeling_workflows_v1.py": "0d61a56bd644b020d8a41a2a5c368ca351df279c"
+  },
+  "command": "py -m pytest -q canonical/tests/test_finance_modeling_workflows_v1.py",
+  "observed_output": ".... [100%]\\n4 passed in 0.09s",
+  "tests_executed": 4,
+  "tests_passed": 4,
+  "tests_failed": 0,
+  "proves": [
+    "committed quantitative algebra imports successfully in isolated materialization",
+    "committed deterministic LBO/DCF workflow imports successfully in isolated materialization",
+    "the four committed workflow tests pass"
+  ],
+  "does_not_prove": [
+    "Finance Agent v2 private benchmark score",
+    "official Vals evaluation authorization",
+    "source fact binding on hidden tasks",
+    "semantic adequacy on hidden tasks",
+    "full PR regression health"
+  ],
+  "benchmark_score_credit": 0,
+  "terminal_authority": false
+}
