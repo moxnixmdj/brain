@@ -52,6 +52,14 @@ def _clean_seed(x:str)->str|None:
     if x.casefold() in _DROP:return None
     return x
 
+def _clean_quoted(x:str)->str|None:
+    # Quoted spans are entity/title candidates. Their leading words can be
+    # semantically essential ("When You Wish Upon a Star"), so never apply the
+    # interrogative/function-word stripping used for ordinary question text.
+    x=_canon(x).strip(" ,;:.()[]{}")
+    if not x or len(x)>160 or len(x.split())>14:return None
+    return x
+
 def _proper_seeds(q:str)->list[str]:
     out=[]
     for m in _PROPER.finditer(q):
@@ -80,7 +88,7 @@ def plan_queries(*,task_id:str,question:str,has_nonempty_image_payload:bool=Fals
     q=_canon(question)
     quoted=[]
     for raw in _QUOTED.findall(q):
-        x=_clean_seed(raw)
+        x=_clean_quoted(raw)
         if x and x.casefold() not in {z.casefold() for z in quoted}:quoted.append(x)
     proper=_proper_seeds(q)
     rel=[x for x in _tokens(q) if x in _RELATIONS]
