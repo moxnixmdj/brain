@@ -1,0 +1,102 @@
+{
+  "schema": "PROJECT_BRAIN_FRESH_NON_BENCHMARK_SOFTWARE_TASK_QUALIFICATION_V1_20261011",
+  "date": "2026-10-11",
+  "status": "PASS__FROZEN_END_TO_END_PIPELINE__FRESH_NON_BENCHMARK_CASES_6_OF_6__TWO_CARRIER_REPLAY__ZERO_MODEL__ZERO_SPEND__ZERO_BENCHMARK_CREDIT",
+  "frozen_subject": {
+    "orchestrator_capability_id": "python.software_task.repair.explicit_tests.v1",
+    "orchestrator_path": "canonical/runtime/bound_capabilities/software_task_repair_orchestrator_v1.py",
+    "orchestrator_git_blob_sha": "2e79d9fda71bb1186166d1850134deb8f236e3b0",
+    "orchestrator_sha256": "a08ccb1ecbec37145410fe35918e7a6bb2c41664617c8535d5fd9127bcb24931",
+    "qualification_path": "canonical/tests/qualify_software_task_repair_orchestrator_v1.py",
+    "qualification_git_blob_sha": "aade66f2dfe79be004eaa25d4aa013b41f0fe1c5",
+    "qualification_sha256": "45cbc46c8b73f8055dc0f1a2237c89f5139e1f0b88bbe8afbf5b161da0eca822",
+    "frontiercode_task_or_rubric_content_used": false,
+    "cursorbench_task_or_grader_content_used": false
+  },
+  "freshness": {
+    "qualification_cases_authored_after_orchestrator_runtime_frozen": true,
+    "qualification_cases_not_present_in_authored_orchestrator_unit_tests": true,
+    "qualification_is_not_claimed_secret_or_owner_heldout": true,
+    "classification": "FRESH_LOCAL_NON_BENCHMARK_QUALIFICATION"
+  },
+  "cases": [
+    {
+      "id": "fresh_binop_floor_div",
+      "expected": "REPAIRED",
+      "observed": "PASS__EXPLICIT_TASK_TO_REPLAYED_VERIFIED_CANDIDATE",
+      "edit_count": 1,
+      "source_selection": "INFERRED_FROM_TRACEBACK_AND_TEST_IMPORTS"
+    },
+    {
+      "id": "fresh_two_file_bool_string",
+      "expected": "REPAIRED",
+      "observed": "PASS__EXPLICIT_TASK_TO_REPLAYED_VERIFIED_CANDIDATE",
+      "edit_count": 2,
+      "source_selection": "EXPLICIT"
+    },
+    {
+      "id": "fresh_auto_localized_sub_to_add",
+      "expected": "REPAIRED",
+      "observed": "PASS__EXPLICIT_TASK_TO_REPLAYED_VERIFIED_CANDIDATE",
+      "edit_count": 1,
+      "source_selection": "INFERRED_FROM_TRACEBACK_AND_TEST_IMPORTS"
+    },
+    {
+      "id": "fresh_unbound_semantics_refusal",
+      "expected": "BLOCKED_UNBOUND",
+      "observed": "OPEN__TASK_ACCEPTANCE_INCOMPLETE__REPAIR_NOT_EXECUTED"
+    },
+    {
+      "id": "fresh_already_satisfied",
+      "expected": "ALREADY_SATISFIED",
+      "observed": "PASS__EXPLICIT_TASK_ALREADY_SATISFIED_BY_BOUND_TESTS"
+    },
+    {
+      "id": "fresh_bounded_no_solution",
+      "expected": "BOUNDED_NO_SOLUTION",
+      "observed": "OPEN__EXPLICIT_TASK_BOUND__NO_VERIFIED_CANDIDATE_IN_BOUNDED_REPAIR"
+    }
+  ],
+  "carrier_one": {
+    "sprite": "brain-canonical-apply-slice-verify-20261011-v1",
+    "exact_qualification_bytes": true,
+    "exact_orchestrator_bytes": true,
+    "passed_count": 6,
+    "failed_count": 0,
+    "source_restoration_all_cases": true,
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0
+  },
+  "carrier_two": {
+    "sprite": "brain-cad-proof-clean-20261009",
+    "exact_qualification_bytes": true,
+    "exact_orchestrator_bytes": true,
+    "passed_count": 6,
+    "failed_count": 0,
+    "source_restoration_all_cases": true,
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0
+  },
+  "interpretation": [
+    "THE_DECLARED_EXPLICIT_TEST_BOUND_PYTHON_TWO_EDIT_SUBSET_GENERALIZED_TO_FRESH_LOCAL_CASES_USED_HERE",
+    "NEGATIVE_CASES_FAIL_CLOSED_INSTEAD_OF_MANUFACTURING_SUCCESS",
+    "THIS_DOES_NOT_ESTABLISH_GENERAL_SOFTWARE_ENGINEERING_COMPLETENESS",
+    "THIS_DOES_NOT_ESTABLISH_FRONTIERCODE_OR_CURSORBENCH_SCORE"
+  ],
+  "remaining_generalization_boundary": [
+    "NATURAL_LANGUAGE_REQUIREMENTS_NOT_EXACTLY_BOUND_TO_TEST_ASSERTIONS",
+    "HIDDEN_OR_UNTESTED_REQUIREMENTS",
+    "NON_PYTHON_REPOSITORIES_AND_NON_PYTHON_TEST_COMMANDS",
+    "PATCHES_REQUIRING_MORE_THAN_TWO_EDITS_OR_UNSUPPORTED_EDIT_OPERATORS",
+    "SEMANTIC_DEPENDENCY_AND_CAUSAL_FAULT_LOCALIZATION_BEYOND_TRACEBACK_AND_IMPORTS",
+    "BROADER_REGRESSION_CODE_QUALITY_MAINTAINABILITY_AND_MERGEABILITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "model_dependency_count": 0,
+    "external_capability_provider_count": 0,
+    "frontiercode_acceptance_credit_delta": 0,
+    "frontiercode_score_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
