@@ -129,8 +129,7 @@ class OSWorldHostBrowser:
 
             raise BrowserOpsError("BROWSER_OP_UNSUPPORTED:" + kind)
         finally:
-            try:
-                browser.close()
-            except Exception:
-                pass
+            # Do not call browser.close() on a CDP-attached task Chrome: that can
+            # terminate the benchmark browser itself. Stopping Playwright only
+            # releases the client connection.
             pw.stop()
