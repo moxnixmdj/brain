@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_TB_SCIENCE_EXECUTION_POINTER_V2",
   "date": "2026-10-11",
-  "status": "RANK23_UNREAD_UNSTARTED__BENCHMARK_AUDIT_FROZEN__CAPABILITY_CLOSURE_REQUIRED",
+  "status": "RANK23_UNREAD_UNSTARTED__BENCHMARK_AUDIT_FROZEN__RAW_RESOURCE_BRIDGE_VERIFIED__GENERAL_CAPABILITY_CLOSURE_REQUIRED",
   "current_result": {
     "path": "canonical/verification/TB_SCIENCE_RANK22_FINAL_ZERO_VERIFY_20261011_V1.json",
     "git_blob_sha": "9c5e9a6ec8c67109e49913dabb512bb50a6482d7"
@@ -11,8 +11,8 @@
     "git_blob_sha": "08f1bdd52f53ceacfae639181269b6a957050e37"
   },
   "verification": {
-    "path": "canonical/verification/TB_SCIENCE_DNA_STORAGE_HARBOR_ROUTE_V1_VERIFY_20261011_V1.json",
-    "git_blob_sha": "2a02191d1bcbe04a55c189792739274e50877e5c"
+    "path": "canonical/verification/GENERAL_SCIENTIFIC_RAW_RESOURCE_PIPELINE_V1_VERIFY_20261011_V1.json",
+    "git_blob_sha": "f829709ae36ba9c97095d8189f9a3530589e974d"
   },
   "counts": {
     "benchmark_trials_consumed": 20,
@@ -29,7 +29,7 @@
   },
   "acceptance_credit_delta": 0,
   "terminal_credit_delta": 0,
-  "next": "CLOSE_GENERAL_RAW_TASK_AND_RESOURCE_TO_TYPED_SCIENTIFIC_CAPABILITY_COMPILATION__RUN_UNSEEN_SHADOW_GAUNTLET__ONLY_THEN_AUTHORIZE_ONE_FRESH_BENCHMARK_AUDIT",
+  "next": "EXPAND_TASK_INDEPENDENT_SCIENTIFIC_SEMANTIC_COMPILATION_AND_CAPABILITY_COMPOSITION_ON_SYNTHETIC_UNSEEN_CASES__KEEP_RANK23_UNREAD_UNSTARTED",
   "finalized_rank18": {
     "ledger_schedule_rank": 18,
     "slot_id": "terminal-bench-science/longitudinal-clinical-agent::trial-0",
@@ -118,7 +118,10 @@
     "NO_RANK23_PUBLIC_RESEAL_PROMOTION_WHILE_BENCHMARK_AUDIT_FREEZE_IS_ACTIVE",
     "NO_RANK23_TASK_READ_OR_START_WHILE_CAPABILITY_CLOSURE_IS_INCOMPLETE",
     "NO_HIDDEN_BENCHMARK_SUBJECT_MAY_BE_USED_AS_THE_CAPABILITY_DEBUGGING_LOOP",
-    "BENCHMARKS_ARE_AUDITS_NOT_CAPABILITY_SUBSTITUTES"
+    "BENCHMARKS_ARE_AUDITS_NOT_CAPABILITY_SUBSTITUTES",
+    "GENERAL_RAW_TASK_RESOURCE_TO_TYPED_SCIENTIFIC_BRIDGE_VERIFIED_FOR_FOUR_FAMILY_SCOPE",
+    "CROSS_FAMILY_SHADOW_GAUNTLET_11_OF_11_PASS_TWICE",
+    "RAW_RESOURCE_BRIDGE_CLOSURE_DOES_NOT_AUTHORIZE_RANK23"
   ],
   "public_effective_authority_reconciliation": {
     "path": "canonical/governance/TB_SCIENCE_RANK19_PUBLIC_EFFECTIVE_AUTHORITY_RECONCILIATION_20261010_V1.json",
@@ -709,5 +712,8 @@
     "retired_before_public_reseal": true,
     "retired_before_task_read": true,
     "retired_before_start": true
+  },
+  "capability_closure": {
+    "path": "canonical/governance/TB_SCIENCE_CAPABILITY_CLOSURE_RECONCILIATION_20261011_V1.json"
   }
 }
