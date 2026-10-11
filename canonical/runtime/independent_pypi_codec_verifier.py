@@ -3,8 +3,8 @@
 from __future__ import annotations
 import importlib,json,pathlib,re,subprocess,sys,tempfile
 
-import auto_pypi_library_acquisition as pypi_acq
-import capability_discovery
+from canonical.runtime import auto_pypi_library_acquisition as pypi_acq
+from canonical.runtime import capability_discovery
 
 
 class IndependentCodecVerifierFailure(RuntimeError):
