@@ -3678,6 +3678,103 @@
         "public_verifier_run_id": 38147697520,
         "verified_case": 2
       }
+    },
+    "python.software.repair.loop.test_guided.ast.v1": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "incremental_spend_usd": 0,
+      "cost": 2,
+      "requires": [
+        "python.source.file.available",
+        "python.test.corpus.available",
+        "python.patch.search.test_guided.ast.v1"
+      ],
+      "provides": [
+        "python.patch.candidate.multi_edit.test_verified"
+      ],
+      "result_fields": [
+        "status",
+        "pass",
+        "localized_source_paths",
+        "edits_applied",
+        "repair_history",
+        "tested_candidate_count",
+        "verification_replays",
+        "patches",
+        "source_restored",
+        "model_dependency_count",
+        "external_capability_provider_count",
+        "incremental_spend_usd",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "keywords": [
+        "python",
+        "software",
+        "repair",
+        "patch",
+        "multi-edit",
+        "multi-file",
+        "tests",
+        "counterexample",
+        "ast"
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "python.software.repair.loop.test_guided.ast.v1",
+          "test_paths": "${input.test_paths}",
+          "source_paths": "${input.source_paths}",
+          "output_path": "${input.output_path}",
+          "timeout_s": 20,
+          "max_edits": 6,
+          "max_candidates": 600
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "python_software_repair_loop_v1",
+      "entrypoint": "run",
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "limitations": [
+        "Composes the verified deterministic single-edit Python AST patch-search primitive across separate failing Python test witnesses.",
+        "Supports bounded sequential edits across one or more repository-local Python files when individual failing test files provide sufficient acceptance oracles.",
+        "Source localization is limited to explicit source paths and Python modules imported by the supplied tests; this is not general semantic fault localization.",
+        "Candidate-only: all source bytes are restored before return and no patch is promoted automatically.",
+        "No arbitrary software-repair completeness, no non-Python support, no semantic correctness beyond the supplied test witnesses, and no general mergeability guarantee.",
+        "Confers no FrontierCode score or benchmark acceptance credit by itself."
+      ],
+      "source": {
+        "type": "python_stdlib_composition",
+        "modules": [
+          "ast",
+          "hashlib",
+          "json",
+          "pathlib",
+          "sys"
+        ],
+        "adapter_path": "canonical/runtime/bound_capabilities/python_software_repair_loop_v1.py",
+        "composed_capability": "python.patch.search.test_guided.ast.v1"
+      },
+      "verification": {
+        "status": "EXACT_GIT_BLOB_FOCUSED_REPLAY_PASS",
+        "runtime_git_blob_sha": "eaf405b3ea6a387c573f8b3dd5a7197bfa024cd5",
+        "test_git_blob_sha": "59ec47e0392fbb32567f5c32567373bd039f6cc7",
+        "focused_test_count": 8,
+        "focused_tests_passed": 8,
+        "independent_semantic_verification": false,
+        "model_dependency_count": 0,
+        "external_capability_provider_count": 0,
+        "incremental_spend_usd": 0,
+        "receipt_path": "canonical/verification/PYTHON_SOFTWARE_REPAIR_LOOP_V1_FOCUSED_REPLAY_20261011_V1.json"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
