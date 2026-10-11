@@ -300,6 +300,15 @@ def _ground_required_param(name: str, prompt: str) -> str | None:
     if any(k in compact for k in ("date", "start", "end", "due")) and dates:
         return dates[0]
 
+    if compact in {"worksheetid", "worksheet", "range"}:
+        quoted_worksheet = re.search(
+            r"\bworksheet\s+['\"]([^'\"]+)['\"]",
+            text,
+            re.I,
+        )
+        if quoted_worksheet:
+            return quoted_worksheet.group(1).strip()
+
     # Prefer noun-bound identifiers, but inspect all matches. Natural language
     # can contain phrases like "Facilities project in Asana" before the actual
     # identifier phrase "project proj_facilities".
