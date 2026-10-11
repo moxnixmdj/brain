@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_CHARTOGRAPHY_CAPABILITY_PROOF_FRONTIER_V1",
-  "status": "ACTIVE__FAIL_CLOSED__CAPABILITY_FIRST",
+  "status": "ACTIVE__FAIL_CLOSED__CAPABILITY_FIRST__POSITIONED_OCR_AXIS_BINDING_VERIFIED",
   "target_path": "canonical/governance/CHARTOGRAPHY_MEASUREMENT_SEMANTIC_TARGET_V1.json",
   "ownership_subject_path": "canonical/governance/CHARTOGRAPHY_BRAIN_NATIVE_DETERMINISTIC_SUBJECT_V3.json",
   "benchmark_execution_policy": "LAST_RESORT_FOR_IRREDUCIBLE_DECISION_INFORMATION",
@@ -10,6 +10,13 @@
       "status": "VERIFIED_BOUNDED_COMPONENT",
       "evidence": "canonical/governance/TESSERACT_OCR_DEPENDENCY_ACCOUNTING_V1.json",
       "semantic_authority": false
+    },
+    {
+      "atom": "POSITIONED_OCR_NUMERIC_TICK_AXIS_BINDING",
+      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_BRAIN_BLOBS",
+      "evidence": "canonical/verification/CHART_POSITIONED_OCR_AXIS_BINDING_V1_VERIFY_20261011.json",
+      "semantic_authority": false,
+      "benchmark_score_authority": false
     }
   ],
   "chart_atoms_pending_current_blob_replay": [
@@ -38,10 +45,9 @@
     "SELF_CHECKED_READABILITY_PRECISION"
   ],
   "next_cut": [
-    "PROMOTE_AND_VERIFY_GENERIC_POSITIONED_OCR_OBSERVATION_CAPABILITY_USING_PINNED_TESSERACT_TSV",
-    "COMPOSE_POSITIONED_OCR_NUMERIC_TICKS_WITH_VERIFIED_SCENE_GRAPH",
-    "ADD_ROBUST_OUTLIER_AND_READABILITY_UNCERTAINTY_GATES",
-    "BUILD_MINIMAL_SEMANTIC_ADAPTERS_FOR_PUBLICLY_DECLARED_CHART_FAMILIES",
+    "COMPOSE_POSITIONED_OCR_WITH_LEGEND_STYLE_BINDING_USING_GEOMETRIC_PROXIMITY_AND_VERIFIED_COLOR_COMPONENTS",
+    "ADD_FAIL_CLOSED_ROTATED_OR_AMBIGUOUS_LABEL_HANDLING_BEFORE_PROMOTION",
+    "BUILD_MINIMAL_BRAIN_NATIVE_SEMANTIC_ADAPTERS_FOR_PUBLICLY_DECLARED_CHART_FAMILIES",
     "RECOMPUTE_CAPABILITY_RELATION_COVERAGE_BEFORE_ANY_GATED_BENCHMARK_EXECUTION"
   ],
   "external_general_purpose_model_runtime_credit_allowed": false,
@@ -54,7 +60,9 @@
     "image.extract.ocr.tesseract",
     "chart.read.legend_linear_intersection.v1",
     "chart.read.binary_phase_solvus.v1",
-    "chart.raster.scene_graph.v1"
+    "chart.raster.scene_graph.v1",
+    "image.extract.ocr.tesseract.positioned.tsv",
+    "chart.raster.positioned_ocr_axis_binding.v1"
   ],
   "verified_generic_primitives": [
     {
@@ -69,7 +77,7 @@
   ],
   "capability_class_progress": {
     "GENERIC_CHART_SCENE_GRAPH_FROM_RASTER": "PARTIAL__VERIFIED_PLOT_BOX_COLOR_COMPONENTS_AND_POLYLINES",
-    "LINEAR_AND_LOG_AXIS_CALIBRATION_WITH_UNCERTAINTY": "PARTIAL__LINEAR_LOG_CALIBRATION_VERIFIED_FROM_SUPPLIED_TICK_OBSERVATIONS",
+    "LINEAR_AND_LOG_AXIS_CALIBRATION_WITH_UNCERTAINTY": "VERIFIED_FOR_POSITIONED_NUMERIC_TICKS_WITH_ROBUST_OUTLIER_REJECTION__ROTATED_AND_NONNUMERIC_UNIT_LABEL_BINDING_OPEN",
     "CURVE_POLYLINE_AND_OVERLAP_TRACING": "PARTIAL__SATURATED_COLOR_POLYLINE_TRACING_VERIFIED",
     "LEGEND_AND_STYLE_BINDING_ACROSS_LAYOUTS": "OPEN",
     "CONTOUR_AND_ISOLINE_VALUE_QUERY": "OPEN",
@@ -78,6 +86,15 @@
     "SURVIVAL_AND_PERCENTILE_CURVE_QUERY": "OPEN",
     "BODE_MAGNITUDE_PHASE_QUERY": "OPEN",
     "DOMAIN_NATIVE_CALCULATION_AND_UNIT_REASONING": "OPEN",
-    "SELF_CHECKED_READABILITY_PRECISION": "OPEN"
+    "SELF_CHECKED_READABILITY_PRECISION": "PARTIAL__OCR_CONFIDENCE_AND_AXIS_CONSENSUS_RESIDUAL_GATES_VERIFIED__GENERAL_READABILITY_PRECISION_OPEN"
+  },
+  "positioned_ocr_axis_binding": {
+    "capability_id": "chart.raster.positioned_ocr_axis_binding.v1",
+    "verification": "canonical/verification/CHART_POSITIONED_OCR_AXIS_BINDING_V1_VERIFY_20261011.json",
+    "result": "PASS_5_OF_5__ZERO_MODEL__ZERO_HELDOUT",
+    "runtime_blob_sha": "1ccab094a14ae261a01912ad6e573ffc09fa8b35",
+    "tests_blob_sha": "f3d7655c1912ded1ef172dcaaa75a3684e9dd729",
+    "heldout_cases_consumed": 0,
+    "benchmark_score_credit": false
   }
 }
