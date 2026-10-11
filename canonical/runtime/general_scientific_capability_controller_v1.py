@@ -12,7 +12,6 @@ from canonical.runtime import h100_expression_tree_symbolic_regression_v1 as sym
 from canonical.runtime import g0_finite_typed_rule_synthesis as rules
 from canonical.runtime import abductive_residual_theorem_v1 as abduction
 from canonical.runtime import tb_science_zero_model_scientific_kernel_v1 as periodic
-from canonical.runtime import deterministic_decision_primitives as decisions
 from canonical.runtime.explicit_recovery_planner import RepairAction, plan_recovery
 
 SCHEMA="PROJECT_BRAIN_GENERAL_SCIENTIFIC_CAPABILITY_CONTROLLER_V1"
@@ -23,7 +22,6 @@ SYMBOLIC="SYMBOLIC_REGRESSION"
 RULE="FINITE_RULE_SYNTHESIS"
 ABDUCTION="ABDUCTIVE_RESIDUAL_ANALYSIS"
 PERIODIC="SHARED_PERIOD_FITTING"
-DECISION="EXPECTED_UTILITY_DECISION"
 
 def _fail(reason,details=None):
     out={"schema":SCHEMA,"status":"FAIL_CLOSED","reason":reason,"verified":False,
@@ -42,7 +40,6 @@ def infer_signature(problem:Mapping[str,Any])->dict[str,Any]:
     if isinstance(problem.get("abduction"),Mapping): hits.append(ABDUCTION)
     series=problem.get("series")
     if isinstance(series,Sequence) and not isinstance(series,(str,bytes)) and series: hits.append(PERIODIC)
-    if isinstance(problem.get("decision_actions"),Mapping) and problem.get("decision_actions"): hits.append(DECISION)
     if not hits: return _fail("NO_TYPED_SCIENTIFIC_SIGNATURE")
     if len(hits)!=1: return _fail("AMBIGUOUS_TYPED_SCIENTIFIC_SIGNATURE",{"matches":sorted(hits)})
     return {"schema":"PROJECT_BRAIN_SCIENTIFIC_PROBLEM_SIGNATURE_V1",
@@ -51,7 +48,7 @@ def infer_signature(problem:Mapping[str,Any])->dict[str,Any]:
 
 def _caps(family:str):
     solver={SYMBOLIC:"CAP_SCI_SYMBOLIC",RULE:"CAP_SCI_RULE",ABDUCTION:"CAP_SCI_ABDUCTION",
-            PERIODIC:"CAP_SCI_PERIODIC",DECISION:"CAP_SCI_DECISION"}[family]
+            PERIODIC:"CAP_SCI_PERIODIC"}[family]
     return [
       {"id":solver,"requires":["TYPED_PROBLEM"],"provides":["CANDIDATE"],"cost":1,
        "action":{"type":"invoke","args":{"family":family}},"result_fields":["result"]},
@@ -105,21 +102,11 @@ def _periodic(problem):
         ss.append({"source":str(row.get("name") or f"series_{i}"),"time_key":"time","value_key":"value","points":pts})
     return periodic.fit_shared_period(ss)
 
-def _decision(problem):
-    acts={}
-    for name,rows in problem["decision_actions"].items():
-        acts[str(name)]=[(float(x[0]),float(x[1])) for x in rows]
-    ranked=decisions.rank_actions_by_expected_utility(
-        acts,fixed_costs={str(k):float(v) for k,v in dict(problem.get("fixed_costs") or {}).items()})
-    return {"status":"EXPECTED_UTILITY_RANKING_COMPUTED",
-            "ranking":[{"action":a,"expected_utility":u} for a,u in ranked]}
-
 def _invoke(family,problem,trace):
     if family==SYMBOLIC: return _symbolic(problem,trace)
     if family==RULE: return _rule(problem)
     if family==ABDUCTION: return abduction.evaluate(problem["abduction"])
     if family==PERIODIC: return _periodic(problem)
-    if family==DECISION: return _decision(problem)
     raise ValueError("UNSUPPORTED_FAMILY")
 
 def _verify(family,result,problem):
@@ -135,9 +122,6 @@ def _verify(family,result,problem):
         fits=result.get("fits"); p=result.get("period")
         min_r2=float(problem.get("acceptance",{}).get("min_r2",0)) if isinstance(problem.get("acceptance"),Mapping) else 0
         ok=isinstance(p,(int,float)) and math.isfinite(float(p)) and float(p)>0 and isinstance(fits,list) and bool(fits) and all(float(x.get("r2",-math.inf))>=min_r2 for x in fits)
-    elif family==DECISION:
-        r=result.get("ranking")
-        ok=result.get("status")=="EXPECTED_UTILITY_RANKING_COMPUTED" and isinstance(r,list) and bool(r)
     else: ok=False
     return {"pass":bool(ok)}
 
