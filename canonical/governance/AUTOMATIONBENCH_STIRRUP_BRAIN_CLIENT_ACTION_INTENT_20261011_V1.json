@@ -1,0 +1,236 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_AUTOMATIONBENCH_STIRRUP_CLIENT_20261011_V1",
+  "date": "2026-10-11",
+  "action_id": "AUTOMATIONBENCH-STIRRUP-BRAIN-CLIENT-V1",
+  "status": "CURRENT_BASE_OBS_PASS__STAGE_A_PREEXPOSURE_INTEGRATION_AUTHORIZED__ZERO_ACCEPTANCE_CREDIT",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "canonical_base_commit": "caeebf3fccc3f2169216a905b45cbde317f9a7bd",
+  "capability_target": "GENERAL_REUSABLE_STATEFUL_TOOL_WORKFLOW_CONTROL_WITH_AUTOMATIONBENCH_AS_AUDIT_SURFACE",
+  "action_kind": "REUSE_COMPOSE_CONFIGURE_INTEGRATION_GLUE",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_STATEFUL_TOOL_WORKFLOW_CONTROL::NO_EVALUATOR_RUNNABLE_BRAIN_LLMCLIENT_CONFIGURATION",
+  "expected_parent_frontier_change": "CREATE_A_REUSABLE_EVALUATOR_INJECTABLE_BRAIN_AUTOMATION_CLIENT_WITHOUT_PRIVATE_TASK_EXPOSURE_OR_HOSTING_DEPENDENCY",
+  "theory_invariants": {
+    "terminal_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+    "knowledge_policy": "EXTERNAL_JIT",
+    "capability_policy": "REUSE_VERIFIED_BRAIN_MECHANISMS_AND_CONFIGURE_GENERAL_COGNITION_SUBSTRATE__NO_HIDDEN_TARGET_CAPABILITY_OUTSOURCING",
+    "general_computation_substrate": "MAY_BE_EXTERNAL_OR_EVALUATOR_INJECTED__MUST_NOT_BE_CREDITED_AS_BRAIN_TARGET_CAPABILITY",
+    "capability_invention": "FORBIDDEN__THIS_ACTION_ADDS_ONLY_CONFIGURATION_INTEGRATION_VALIDATION_AND_ROUTING_GLUE",
+    "benchmark_role": "AUDIT_FALSIFIER_CALIBRATION_ONLY_UNTIL_OWNER_PRIVATE_RECEIPT",
+    "incremental_spend_usd": 0
+  },
+  "ownership_tests": {
+    "BRAIN_ARTIFACT_TEST": "REQUIRED__WRAPPER_POLICY_AND_VALIDATION_LIVE_IN_CANONICAL_BRAIN",
+    "NO_HIDDEN_CAPABILITY_PROVIDER_TEST": "REQUIRED_AT_PROMOTION__BASE_MODEL_MUST_BE_DECLARED_AND_BRAIN_UPLIFT_MUST_BE_LOAD_BEARING",
+    "GENERAL_SUBSTRATE_TEST": "BASE_LLMCLIENT_IS_INJECTED_AS_GENERAL_COGNITION_SUBSTRATE",
+    "SPECIMEN_SEPARATION_TEST": "STANDALONE_MODEL_SCORES_HAVE_ZERO_BRAIN_CREDIT",
+    "REEXECUTION_WITHOUT_REDISCOVERY_TEST": "WRAPPER_CONFIGURATION_IS_DURABLE_AND_CALLABLE_WITH_ANY_PROTOCOL_COMPATIBLE_BASE_CLIENT",
+    "BRAIN_CONFIGURED_VERIFICATION_TEST": "PRIVATE_OR_PUBLIC AUDIT MUST EVALUATE WRAPPED ROUTE_ITSELF",
+    "OWNERSHIP_PACKAGE_TEST": "SUCCESS_REQUIRES_CONTENT_ADDRESSED_WRAPPER_PLUS_CONFIGURATION_PLUS_BASE_DEPENDENCY_DECLARATION"
+  },
+  "reasoning_durability": {
+    "receipt_required": true,
+    "real_objective": "REMOVE_EVALUATOR_INTEGRATION_LATENCY_WHILE_CREATING_A_GENERAL_REUSABLE_BRAIN_OWNED_WORKFLOW_CONTROL_CONFIGURATION",
+    "governing_invariants": [
+      "NO_PRIVATE_AUTOMATIONBENCH_TASK_CONTENT",
+      "NO_PUBLIC_TO_PRIVATE_SCORE_SUBSTITUTION",
+      "NO_STANDALONE_MODEL_SCORE_INHERITANCE",
+      "ZERO_INCREMENTAL_SPEND",
+      "ONE_BASE_GENERATION_CALL_PER_OUTER_GENERATE_CALL_IN_V1",
+      "NO_PRIVATE_RESULT_OR_ACCEPTANCE_CREDIT_FROM_IMPLEMENTATION"
+    ],
+    "material_premises": [
+      "STIRRUP_PUBLIC_LLMCLIENT_PROTOCOL_REQUIRES_generate_model_slug_context_window_tokens",
+      "CURRENT_BRAIN_OWNS_GENERIC_CAPABILITY_PLANNING_TOOL_DISCOVERY_DELEGATION_AND_RECOVERY_MECHANISMS_BUT_CURRENT_SUPERWORKER_IS_NOT_AN_LLM_CHAT_ENDPOINT",
+      "HISTORICAL_PR865_CONTROL_GATEWAY_IS_REUSABLE_AS_A_DESIGN_DONOR_BUT_ITS_POLLINATIONS_SUBSTRATE_IS_STALE_AND_NOT_CURRENT_CANONICAL_BRAIN",
+      "ZAPIER_AND_ARTIFICIAL_ANALYSIS_PRIVATE_EXECUTION_ACCEPTANCE_INTERFACES_REMAIN_UNCONFIRMED"
+    ],
+    "evidence_refs": [
+      "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json",
+      "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
+      "canonical/reasoning/2026-10-11_AUTOMATIONBENCH_PRIVATE_RECEIPT_CLOSURE_CONTRACT_V1.json",
+      "canonical/runtime/capability_planner.py",
+      "canonical/runtime/tool_discovery_information_safe_candidate.py",
+      "canonical/runtime/delegation_whole_scope_candidate_v2.py",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V3.md",
+      "https://github.com/ArtificialAnalysis/Stirrup/blob/main/docs/extending/clients.md"
+    ],
+    "conclusion": "A_GENERAL_STIRRUP_COMPATIBLE_BRAIN_AUTOMATION_WRAPPER_AROUND_AN_INJECTED_BASE_LLMCLIENT_IS_NONDOMINATED_STAGE_A_WORK_BECAUSE_IT_REMOVES_HOSTING_DEPENDENCE_REUSES_VERIFIED_BRAIN_CONTROL_IDEAS_AND_REMAINS_USEFUL_IF_THE_PRIVATE_EVALUATOR_INTERFACE_DIFFERS",
+    "selected_route": "EVALUATOR_NEUTRAL_BRAIN_AUTOMATION_LLMCLIENT_WRAPPER_WITH_INJECTED_BASE_LLMCLIENT",
+    "rejected_material_alternatives": {
+      "WAIT_ONLY": "DOMINATED__DOES_NOT_IMPROVE_READINESS",
+      "PUBLIC_600_PROMOTION": "INVALID_SCOPE",
+      "PRIME_INTELLECT_PRIVATE_RUN": "PUBLIC_600_ONLY",
+      "HISTORICAL_PR865_AS_CURRENT_BRAIN": "INVALID_STALE_SUBSTRATE_AND_UNMERGED",
+      "VERCEL_ZERO_COST_HOSTED_MODEL": "NO_CONNECTED_TEAM_OR_CONFIRMED_ZERO_SPEND_CAPACITY",
+      "RAW_ASTRA_OR_OTHER_PASSING_MODEL": "FAILS_OWNERSHIP_WITHOUT_LOAD_BEARING_BRAIN_CONFIGURATION",
+      "BUILD_HIDDEN_AA_RUNNER_ADAPTER": "FORBIDDEN__PRIVATE_RUNNER_NOT_PUBLIC",
+      "HUNT_PRIVATE_TASKS": "FORBIDDEN_CONTAMINATION_AND_INVALIDATES_CERTIFICATE"
+    },
+    "uncertainties": [
+      "WHETHER_ZAPIER_OR_AA_ACCEPTS_CUSTOM_CLIENT_OR_PACKAGE_SUBMISSIONS",
+      "WHICH_BASE_GENERAL_COGNITION_SUBSTRATE_EVALUATOR_WILL_AUTHORIZE",
+      "PRIVATE_SCORE_OF_WRAPPED_BRAIN",
+      "EXACT_RESOURCE_NETWORK_AND_SANDBOX_RESTRICTIONS"
+    ],
+    "assumptions": [
+      "PUBLIC_STIRRUP_LLMCLIENT_PROTOCOL_REMAINS_AVAILABLE_FOR_GENERAL_USE",
+      "NO_PRIVATE_TASK_INFORMATION_IS_NEEDED_TO_BUILD_GENERIC_WORKFLOW_POLICY"
+    ],
+    "non_goals": [
+      "CLAIMING_AUTOMATIONBENCH_GE_40",
+      "RUNNING_PRIVATE_OR_PUBLIC_BENCHMARK_TASKS_IN_THIS_ACTION",
+      "SELECTING_OR_PAYING_FOR_A_MODEL_PROVIDER",
+      "CREATING_A_HOSTED_ENDPOINT"
+    ],
+    "next_action": "IMPLEMENT_AND_UNIT_TEST_THE_GENERIC_WRAPPER_ON_MOCK_LLMCLIENTS_ONLY",
+    "supersession_conditions": [
+      "EVALUATOR_PUBLISHES_OR_REPLIES_WITH_A_DIFFERENT_MANDATORY_INTERFACE",
+      "CURRENT_MAIN_MATERIAL_CHANGE_INVALIDATES_REUSED_RUNTIME_OR_GOVERNANCE",
+      "A_FASTER_ZERO_SPEND_EVALUATOR_RUNNABLE_ROUTE_APPEARS"
+    ],
+    "supersedes": null
+  },
+  "recursive_obs": {
+    "OBS_GOAL": "PASS__GENERAL_REUSABLE_WORKFLOW_CONTROL_GAIN_IS_PARENT_GOAL__AUTOMATIONBENCH_IS_AUDIT",
+    "OBS_REQUIRED_CAPABILITY": "PASS__NEED_DURABLE_TOOL_WORKFLOW_POLICY_AROUND_GENERAL_COGNITION_SUBSTRATE",
+    "OBS_BLOCKER": "PASS__NO_EVALUATOR_RUNNABLE_BRAIN_LLMCLIENT_CONFIGURATION_AND_NO_CONFIRMED_PRIVATE_EXECUTION_INTERFACE",
+    "OBS_PROPOSED_SOLUTION": "PASS__GENERIC_STIRRUP_PROTOCOL_WRAPPER_REMOVES_HOSTING_DEPENDENCE_WITHOUT PRIVATE DATA",
+    "OBS_VERIFICATION": "PASS__MOCK_PROTOCOL_TESTS_NOW__OWNER_PRIVATE_RECEIPT_LATER",
+    "OBS_INHERITED_SYSTEM_AFTER_WIN": "PASS__REUSABLE_WITH_ANY_PROTOCOL_COMPATIBLE_BASE_CLIENT__MODEL_DEPENDENCY_DECLARED",
+    "OBS_THE_OBS_AND_SEARCH_PROCESS": "PASS__ZAPIER_AA_PRIME_VERCEL_HISTORICAL_GATEWAY_AND_CUSTOM_CLIENT_CHALLENGERS_REFRESHED_2026_10_11",
+    "challenger_frontier": {
+      "refreshed_at_utc": "2026-10-11T09:52:00Z",
+      "freshness_hours": 24,
+      "selected": "GENERIC_STIRRUP_LLMCLIENT_WRAPPER",
+      "plausible_unresolved_dominator": "NONE_FOR_STAGE_A_PACKAGE_READINESS__OWNER_INTERFACE_CAN_SUPERSEDE_BEFORE_PRIVATE_EXECUTION",
+      "stop_rule": "IMPLEMENT_CHEAP_REVERSIBLE_GENERAL_WRAPPER_NOW__DO_NOT_BUILD_PROVIDER_SPECIFIC_OR_PRIVATE_RUNNER_ADAPTER"
+    }
+  },
+  "behavioral_contract": {
+    "behavior_id": "BRAIN_STATEFUL_TOOL_WORKFLOW_CONTROL_STIRRUP_V1",
+    "inputs": "PUBLIC_USER_SYSTEM_TOOL_HISTORY_PLUS_PUBLIC_TOOL_SCHEMAS_PLUS_INJECTED_BASE_LLMCLIENT",
+    "environment_state": "NO_PRIVATE_EVALUATOR_STATE_ACCESSED_BY_WRAPPER_EXCEPT_WHAT_EVALUATOR_NORMALLY_PASSES_AS_MESSAGES_AND_TOOL_RESULTS",
+    "allowed_information": "CURRENT_MESSAGE_HISTORY_TOOL_SCHEMAS_PUBLIC_BRAIN_POLICY",
+    "required_output_or_action": "ONE_ASSISTANT_MESSAGE_FROM_ONE_BASE_GENERATE_CALL_UNDER_BRAIN_WORKFLOW_POLICY_WITH_DECLARED_VALIDATION",
+    "success_condition": "PRESERVE_VALID_BASE_OUTPUT_AND_REJECT_UNDECLARED_OR_SCHEMA_INVALID_TOOL_CALLS_FAIL_CLOSED_WITHOUT FABRICATING SIDE_EFFECTS",
+    "failure_condition": "MULTIPLE_OR_UNKNOWN_OR_SCHEMA_INVALID_TOOL_CALLS_OR_BASE_EXCEPTION",
+    "terminal_consequence": "NO_PROMOTION__ONLY_RUNTIME_READINESS",
+    "verification_route": "MOCK_BASE_CLIENT_UNIT_TESTS_PLUS_PUBLIC_STIRRUP_PROTOCOL_CONFORMANCE",
+    "dependency_boundary": "STIRRUP_PROTOCOL_PLUS_INJECTED_BASE_LLMCLIENT__NO_PROVIDER_KEY_OWNED_BY_WRAPPER",
+    "scope": "GENERAL_TOOL_USING_WORKFLOWS__NOT_PRIVATE_AUTOMATIONBENCH_SCOPE_PROOF"
+  },
+  "prequalification_controls": {
+    "qualification_stage": "STAGE_A_PRE_EXPOSURE",
+    "target_version_lock": "STIRRUP_PUBLIC_PROTOCOL_AT_COMMIT_247f24d56b2108235880ed2a2baea5d35b5a67ee__AUTOMATIONBENCH_TARGET_V1_0_6",
+    "feasibility_certificate": "MOCK_ONLY__NO_PRIVATE_EXECUTION",
+    "complete_requirement_graph": "WRAPPER_PROTOCOL_AND_OWNERSHIP_REQUIREMENTS_DECLARED",
+    "independent_acceptance_evidence": "NOT_APPLICABLE_TO_STAGE_A_RUNTIME_READINESS",
+    "requirement_mutation_evidence": "UNIT_TESTS_WILL_MUTATE_TOOL_NAME_SCHEMA_AND_MULTICALL",
+    "verifier_mutation_evidence": "UNIT_TESTS_WILL_KILL_INVALID_CALL_ACCEPTANCE",
+    "contamination_ledger": "ZERO_PRIVATE_TASKS_READ_OR_REQUESTED",
+    "execution_surface_certificate": "NOT_REQUIRED_BEFORE_MOCK_ONLY_STAGE_A",
+    "statistical_promotion_plan_if_applicable": "NONE__NO_SCORE",
+    "composition_qualification_plan": "PRIVATE_OWNER_RUN_ONLY_AFTER_INTERFACE_ACCEPTANCE",
+    "exact_active_carrier_authority": "NO_TERMINAL_CARRIER_OPENED",
+    "post_transition_authority_revalidation": "REQUIRED_BEFORE_ANY_PRIVATE_EXECUTION"
+  },
+  "qualification_stage": "STAGE_A_PRE_EXPOSURE",
+  "terminal_proof_control": {
+    "proof_obligation": "PROVE_PROTOCOL_COMPATIBLE_GENERAL_WRAPPER_AND_FAIL_CLOSED_TOOL_VALIDATION_ONLY",
+    "hole_type": "INTEGRATION_READINESS",
+    "expected_certificate_or_receipt": "UNIT_TEST_PASS_AND_CONTENT_ADDRESSED_SOURCE",
+    "validator": "PYTHON_UNIT_TESTS_WITH_MOCK_BASE_CLIENT_AND_TOOL_SCHEMAS",
+    "maximum_cheap_test_cost": "ZERO_INCREMENTAL_SPEND",
+    "prerequisites": [
+      "CURRENT_BASE_OBS",
+      "PUBLIC_STIRRUP_PROTOCOL"
+    ],
+    "contamination_risk": "ZERO_PRIVATE_DATA",
+    "reversibility": "FULLY_REVERSIBLE",
+    "falsification_condition": "WRAPPER_REQUIRES_PRIVATE_RUNNER_ASSUMPTIONS_OR_ALTERS_VALID_OUTPUT_UNNECESSARILY",
+    "critical_path_relation": "REMOVES_CANDIDATE_PACKAGING_DELAY_AFTER_OWNER_ACCEPTANCE"
+  },
+  "continuous_obs": {
+    "required": true,
+    "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+    "canonical_state_dependencies": [
+      "canonical/CANONICAL_POINTER.json",
+      "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json",
+      "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
+      "canonical/reasoning/2026-10-11_AUTOMATIONBENCH_PRIVATE_RECEIPT_CLOSURE_CONTRACT_V1.json"
+    ],
+    "dependency_inventory_complete": true,
+    "material_world_state_dependencies_complete": true,
+    "unknown_material_dependencies": [
+      "OWNER_PRIVATE_EVALUATION_ACCEPTANCE_INTERFACE"
+    ],
+    "obs_layers_current": true,
+    "stale_authority_absent": true,
+    "valid_proof_action_priority": true,
+    "information_boundary_complete": true,
+    "information_policy": "PUBLIC_ONLY_STAGE_A",
+    "dependencies": [
+      {
+        "dependency_id": "github_main",
+        "class": "CANONICAL_STATE",
+        "volatility": "VOLATILE",
+        "status": "READY",
+        "evidence": [
+          "caeebf3fccc3f2169216a905b45cbde317f9a7bd"
+        ]
+      },
+      {
+        "dependency_id": "stirrup_public_protocol",
+        "class": "EXTERNAL_LIBRARY_PROTOCOL",
+        "volatility": "VOLATILE",
+        "status": "READY",
+        "evidence": [
+          "ArtificialAnalysis/Stirrup@247f24d56b2108235880ed2a2baea5d35b5a67ee"
+        ]
+      },
+      {
+        "dependency_id": "private_evaluator_acceptance",
+        "class": "EXTERNAL_OWNER_DECISION",
+        "volatility": "VOLATILE",
+        "status": "UNKNOWN_NOT_REQUIRED_FOR_STAGE_A_IMPLEMENTATION",
+        "evidence": [
+          "Gmail outreach threads have no inbound reply"
+        ]
+      }
+    ]
+  },
+  "reality_query_admission": {
+    "proof_obligation": "STAGE_A_RUNTIME_READINESS_ONLY",
+    "existing_evidence_search": "COMPLETE_FOR_PUBLIC_STIRRUP_PROTOCOL_AND_BRAIN_REUSABLE_COMPONENTS",
+    "evidence_scope_equivalence": "NO_PRIVATE_SCORE_CLAIM",
+    "deductive_closure": "PRIVATE_THRESHOLD_CANNOT_BE_INFERRED_FROM_STAGE_A",
+    "counterfactual_terminal_distinctions": "NONE_RESOLVED_BY_MOCK_TEST",
+    "dominated_observations_deleted": [
+      "PUBLIC_600_SCORE_AS_PRIVATE_PROXY",
+      "RAW_MODEL_SCORE_INHERITANCE"
+    ],
+    "candidate_observations": [
+      "MOCK_PROTOCOL_CONFORMANCE"
+    ],
+    "minimum_reality_cut": "NO_TERMINAL_REALITY_QUERY_REQUIRED_FOR_STAGE_A",
+    "terminal_decision_value": "ZERO",
+    "admission_verdict": "NO_REALITY_QUERY_REQUIRED",
+    "global_cut_snapshot": "NO_PRIVATE_TASK_SELECTION_OR_EXECUTION",
+    "global_cut_membership": false
+  },
+  "global_terminal_proof_cut": {
+    "required_for_this_action": false,
+    "reason": "NO_UNTOUCHED_TASK_SELECTION_SOURCE_READ_TASK_EXECUTION_TERMINAL_VERIFICATION_OR_NEW_TERMINAL_RELEVANT_OBSERVATION",
+    "proposed_action_membership": false,
+    "terminal_decision_value": 0
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "private_tasks_exposed": 0,
+    "benchmark_runs": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
