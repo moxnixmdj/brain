@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_FROZEN_DAY_RUBRIC_CROWDBT_BINDING_20261011_V1",
+  "date": "2026-10-11",
+  "status": "FROZEN_DAY_V1_1_SCORER_PROSE_BOUND__RUBRIC_SYNTHETIC_COMPARISON_USES_DETERMINISTIC_CROWD_BT_QUALITY_CASE__PAIRWISE_SCOPE_ETA_VALUES_STILL_UNBOUND__ZERO_CREDIT",
+  "target": "AA-Briefcase v1.1 frozen 2026-09-22 Opus 5.5 max target",
+  "frozen_day_methodology_capture": {
+    "source_url": "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
+    "retrieved_at": "2026-09-22T07:47:17.990313+00:00",
+    "sha256": "3b2036f5dc54786604825be70dc3225f8fe0a382d168df4b55a82ef6bc426dc3",
+    "archive_repository": "fstandhartinger/model-market-comparison",
+    "archive_path": "data/raw/benchmarks/daily-evidence/2026-09-22T07-47-17-816Z/3b2036f5dc5478660482.gz",
+    "raw_uncompressed_bytes": 693367,
+    "exact_bound_prose": [
+      "AA-BRIEFCASE_V1_1_CHANGES_ONLY_HOW_ELO_RATINGS_ARE_FITTED",
+      "RATINGS_FIT_WITH_CROWD_BT",
+      "ANNOTATOR_QUALITY_IS_FITTED_PER_SCOPE_ON_PAST_AA_BRIEFCASE_JUDGEMENTS",
+      "RUBRIC_GRADING_TO_RATING_COMPARISON_IS_DETERMINISTIC_RATHER_THAN_A_JUDGE"
+    ],
+    "omitted_inline_math_note": "SERVER_HTML_CONTAINS_EMPTY_MATH_PLACEHOLDERS__OLD_NEXTJS_BUNDLE_PAGE_6de182177067e7ed_IS_NO_LONGER_PUBLICLY_RETRIEVABLE"
+  },
+  "crowd_bt_authority": {
+    "canonical": "canonical/governance/GDPVAL_AA_V21_CROWD_BT_PUBLIC_KERNEL_20261007_V1.json",
+    "primary_paper": "Pairwise Ranking Aggregation in a Crowdsourced Setting",
+    "parameter_semantics": {
+      "eta_1": "PERFECT_ANNOTATOR__OBSERVED_PREFERENCE_EQUALS_LATENT_BRADLEY_TERRY_PREFERENCE",
+      "eta_half": "NO_RANKING_INFORMATION",
+      "eta_0": "REVERSED_PREFERENCE"
+    }
+  },
+  "derivation": {
+    "premise_1": "AA_FROZEN_DAY_TEXT_IDENTIFIES_THE_RUBRIC_ELO_COMPARISON_AS_DETERMINISTIC_RATHER_THAN_JUDGE_NOISY",
+    "premise_2": "IN_CROWD_BT_ETA_1_IS_THE_PERFECT_DETERMINISTIC_COMPARISON_CASE",
+    "conclusion": "RUBRIC_SYNTHETIC_COMPARISON_SCOPE_USES_THE_ETA_1_CASE_FOR_THE_RATING_COMPARISON",
+    "important_distinction": "THIS_DOES_NOT_MAKE_THE_UPSTREAM_BINARY_RUBRIC_VERDICTS_DETERMINISTIC__THOSE_VERDICTS_ARE_SEPARATE_INPUTS_PRODUCED_BY_RUBRIC_GRADING"
+  },
+  "proof_effect": {
+    "closed": [
+      "RUBRIC_SYNTHETIC_CROWD_BT_JUDGE_QUALITY_AS_AN_UNKNOWN_NOISE_PARAMETER"
+    ],
+    "remains": [
+      "UPSTREAM_BINARY_RUBRIC_VERDICT_VECTOR",
+      "EXACT_SYNTHETIC_HEAD_TO_HEAD_CONSTRUCTION_FROM_RUBRIC_VERDICTS_OR_PASS_RATES",
+      "ANALYTICAL_QUALITY_SCOPE_FITTED_ETA",
+      "PRESENTATION_SCOPE_FITTED_ETA",
+      "COMPARISON_GRAPHS_AND_REALIZED_PAIRWISE_VERDICTS",
+      "REGULARIZATION_OPTIMIZER_AND_OTHER_LOAD_BEARING_FIT_CONVENTIONS",
+      "BRAIN_SCORE_BEARING_TRACE"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_RUBRIC_JUDGE_PANEL_HAS_PERFECT_ACCURACY",
+    "NO_CLAIM_ANALYTICAL_OR_PRESENTATION_ETA_EQUALS_ONE",
+    "NO_CLAIM_THE_MISSING_INLINE_MATH_WAS_DIRECTLY_RECOVERED",
+    "NO_BRAIN_SCORE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
