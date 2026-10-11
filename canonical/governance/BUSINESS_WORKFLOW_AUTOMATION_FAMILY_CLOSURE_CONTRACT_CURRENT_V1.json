@@ -1,18 +1,24 @@
 {
   "schema": "PROJECT_BRAIN_BUSINESS_WORKFLOW_AUTOMATION_FAMILY_CLOSURE_CONTRACT_CURRENT_V1",
-  "date": "2026-10-03",
-  "status": "FAIL_CLOSED__PUBLIC_600_PRIVATE_LEADERBOARD_SCOPE_MISMATCH__TARGET_PRESERVED__NO_FAMILY_CREDIT",
+  "date": "2026-10-11",
+  "status": "FAIL_CLOSED__CANONICAL_GENERAL_WORKFLOW_V2_CANDIDATE_BOUND__PRIVATE_657_SCORE_UNMEASURED__NO_FAMILY_CREDIT",
   "family": "BUSINESS_WORKFLOW_AUTOMATION",
   "remaining_predicate": "AUTOMATIONBENCH_GE_40",
   "acceptance": {
     "frozen_reference_bar_percent": 40,
     "reference_surface": "AutomationBench official leaderboard private held-out population",
-    "candidate_execution_surface": "AutomationBench public 600",
+    "candidate_execution_surface": "Canonical Brain general-workflow V2 candidate; public 600 is research/failure-generation surface only",
     "candidate_upstream_commit": "4a8e1061254004d9dac807054eed33fad7d1ff14",
     "candidate_population_size": 600,
     "binary_metric": "task_completed_correctly",
     "candidate_threshold_success_count_if_surface_were_admissible": 240,
-    "candidate_threshold_promotion_safe": false
+    "candidate_threshold_promotion_safe": false,
+    "reference_benchmark_version": "1.0.6",
+    "reference_population_size": 657,
+    "minimum_private_successes": 263,
+    "candidate_merge_sha": "4af3376324d98d6a945e83c817c507e969208247",
+    "candidate_binding": "canonical/governance/AUTOMATIONBENCH_CAPABILITY_FIRST_CANDIDATE_BINDING_20261011_V1.json",
+    "candidate_model_slug": "project-brain/general-workflow-field-grounding-v2"
   },
   "scope_cut": {
     "verification": "canonical/verification/AUTOMATIONBENCH_PUBLIC_PRIVATE_SCOPE_CUT_20261003_V1.json",
@@ -30,19 +36,30 @@
   "current_prerequisites": {
     "public_scope_binding": "canonical/governance/AUTOMATIONBENCH_PUBLIC_SCOPE_BINDING_V1.json",
     "public_route_preflight": "canonical/verification/AUTOMATIONBENCH_PUBLIC_ROUTE_PREFLIGHT_20261002_V1.json",
-    "public_private_scope_cut": "canonical/verification/AUTOMATIONBENCH_PUBLIC_PRIVATE_SCOPE_CUT_20261003_V1.json"
+    "public_private_scope_cut": "canonical/verification/AUTOMATIONBENCH_PUBLIC_PRIVATE_SCOPE_CUT_20261003_V1.json",
+    "private_receipt_closure_contract": "canonical/reasoning/2026-10-11_AUTOMATIONBENCH_PRIVATE_RECEIPT_CLOSURE_CONTRACT_V1.json",
+    "capability_first_candidate_binding": "canonical/governance/AUTOMATIONBENCH_CAPABILITY_FIRST_CANDIDATE_BINDING_20261011_V1.json",
+    "general_workflow_v2_replay": "canonical/verification/GENERAL_WORKFLOW_FIELD_GROUNDING_V2_INDEPENDENT_REPLAY_20261011_V1.json"
   },
   "terminal_execution_authority": false,
   "promotion_authority": false,
   "reactivation_conditions": [
-    "INDEPENDENT_EXACT_OR_SUPERSET_SCOPE_EQUIVALENCE_TO_THE_OFFICIAL_PRIVATE_ACCEPTANCE_POPULATION",
-    "OR_ADMISSIBLE_OPUS55_REFERENCE_ON_THE_EXACT_PUBLIC_600_SURFACE_FROZEN_BEFORE_BRAIN_RESULTS",
-    "OR_SCOPE_COMPLETE_STRONGER_PROOF_DIRECTLY_DISCHARGING_AUTOMATIONBENCH_GE_40"
+    "ZAPIER_OFFICIAL_PRIVATE_V1_0_6_657_BRAIN_RESULT_WITH_SUCCESS_COUNT_AT_LEAST_263",
+    "OR_ARTIFICIAL_ANALYSIS_AUTOMATIONBENCH_AA_EQUIVALENT_PRIVATE_657_BRAIN_RESULT_WITH_SUCCESS_COUNT_AT_LEAST_263",
+    "OR_NEW_SOUND_SCOPE_COMPLETE_STRONGER_PROOF_DIRECTLY_DISCHARGING_AUTOMATIONBENCH_GE_40"
   ],
-  "promotion_rule": "PUBLIC_600_RESULTS_HAVE_ZERO_ACCEPTANCE_CREDIT_UNTIL_ONE_REACTIVATION_CONDITION_IS_INDEPENDENTLY_PROVED__ONLY_THEN_MAY_AUTOMATIONBENCH_GE_40_PLUS_FAMILY_REDUCER_CHANGE_3_OF_19_TO_4_OF_19",
-  "next_action": "RERANK_TO_ANOTHER_ONE_PREDICATE_FAMILY_OR_STRONGER_PROOF_ROUTE__NO_PUBLIC_600_TERMINAL_SPEND_FOR_THIS_PRIVATE_BAR",
+  "promotion_rule": "CANONICAL_GENERAL_WORKFLOW_V2_CAPABILITY_REPLAY_AND_ANY_PUBLIC_600_RESULTS_HAVE_ZERO_ACCEPTANCE_CREDIT__PROMOTION_REQUIRES_AN_ADMISSIBLE_PRIVATE_657_RESULT_AT_OR_ABOVE_263_SUCCESSES_OR_A_SOUND_SCOPE_COMPLETE_STRONGER_PROOF",
+  "next_action": "USE_PUBLIC_OR_SYNTHETIC_TASKS_ONLY_AS_CAUSAL_FAILURE_GENERATORS_FOR_GENERAL_WORKFLOW_V2__REPAIR_GENERAL_FAILURE_CLASSES__WHEN_ZAPIER_OR_ARTIFICIAL_ANALYSIS_ACCEPTS_THE_INTERFACE_FREEZE_THE_EXACT_CONTENT_ADDRESSED_CANDIDATE_AND_RUN_PRIVATE_657",
   "controller_task_content_exposure": 0,
   "terminal_results_observed": 0,
   "incremental_spend_usd": 0,
-  "family_credit_delta": 0
+  "family_credit_delta": 0,
+  "candidate_capability_state": {
+    "canonical_merge_sha": "4af3376324d98d6a945e83c817c507e969208247",
+    "binding": "canonical/governance/AUTOMATIONBENCH_CAPABILITY_FIRST_CANDIDATE_BINDING_20261011_V1.json",
+    "focused_and_adjacent_replay": "81_OF_81_PASS",
+    "app_specific_mutation_fallback_reachable_from_active_v2": false,
+    "private_score_observed": false,
+    "private_scope_complete_proof": false
+  }
 }
