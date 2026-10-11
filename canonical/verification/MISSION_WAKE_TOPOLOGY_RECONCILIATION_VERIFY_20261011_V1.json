@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_MISSION_WAKE_TOPOLOGY_RECONCILIATION_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__MISSION_TOPOLOGY_MATCHES_WAKE_GATED_SCHEDULER__12_OPEN__12_WAKE_GATED__0_SAME_INFORMATION_RUNNABLE__ZERO_CREDIT",
+  "base_main_commit": "1e30f56a783032d0307a99bec3890582734f6951",
+  "mission_blob_sha": "48213c6789a5d1bd378d6d2c79982d8035236d2c",
+  "source": {
+    "path": "canonical/governance/CURRENT_ALL_OPEN_CHECKPOINT_WAKE_GATE_RECONCILIATION_20261011_V1.json",
+    "git_blob_sha": "e10c7ebe00dac3f60eee2845df16c58a1fdd5791"
+  },
+  "checks": {
+    "logically_open_checkpoint_rows": 12,
+    "wake_gated_checkpoint_rows": 12,
+    "row_specific_same_information_runnable_rows": 0,
+    "active_gap_a_acquisition_rows": 0,
+    "active_gap_b_strict_progress_rows": 0,
+    "parked_unresolved_rows": 1
+  },
+  "proved": [
+    "MISSION_POINTER_NO_LONGER_LABELS_WAKE_GATED_CHECKPOINT_ROWS_AS_ACTIVE_ACQUISITION",
+    "OPEN_CHECKPOINT_OBLIGATIONS_REMAIN_OPEN_WITHOUT_BECOMING_RUNNABLE",
+    "CAPABILITY_FIRST_GENERAL_DEVELOPMENT_REMAINS_PRIMARY_WITHOUT_WAKE_EVENT"
+  ],
+  "hard_nonclaims": [
+    "NO_CHECKPOINT_CLOSED",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}

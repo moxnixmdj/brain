@@ -227,16 +227,20 @@
     "status": "PASS__12_SEMANTIC_LEAVES_ONE_SHARED_ACCEPTANCE__CURRENT_CATALOG_EXPLICITLY_INCOMPLETE__CATALOG_ALONE_CANNOT_CLOSE_SEMANTIC_PROPERTY_TRUTH__NO_NEW_PRIMITIVE_ESTABLISHED"
   },
   "escape_current_topology": {
-    "active_gap_a_acquisition_rows": 12,
+    "logically_open_checkpoint_rows": 12,
+    "wake_gated_checkpoint_rows": 12,
+    "row_specific_same_information_runnable_rows": 0,
+    "active_gap_a_acquisition_rows": 0,
     "active_gap_b_strict_progress_rows": 0,
     "parked_unresolved_rows": 1,
     "parked_obligation_ids": [
       "TB_SCIENCE_GE_58_7"
     ],
-    "source": "canonical/governance/ESCAPE_ACTIVE_GAP_B_CAUSAL_RECLASSIFICATION_20261010_V1.json",
-    "source_git_blob_sha": "c793b7f57b13a936646a2825cd67f26c28bf3744",
-    "active_binding": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V7.json",
-    "active_binding_git_blob_sha": "2119d0bc2b5c06399da49adb5a86b4e9faf7e08f",
+    "current_wake_reconciliation": "canonical/governance/CURRENT_ALL_OPEN_CHECKPOINT_WAKE_GATE_RECONCILIATION_20261011_V1.json",
+    "current_wake_reconciliation_git_blob_sha": "e10c7ebe00dac3f60eee2845df16c58a1fdd5791",
+    "historical_gap_reclassification": "canonical/governance/ESCAPE_ACTIVE_GAP_B_CAUSAL_RECLASSIFICATION_20261010_V1.json",
+    "historical_gap_reclassification_git_blob_sha": "c793b7f57b13a936646a2825cd67f26c28bf3744",
+    "rule": "LOGICALLY_OPEN_DOES_NOT_MEAN_RUNNABLE__NO_ROW_SPECIFIC_EXECUTION_WITHOUT_CONTENT_ADDRESSED_POLICY_CHANGING_WAKE_EVENT",
     "terminal_credit_delta": 0
   },
   "bytes_current_frontier": {
