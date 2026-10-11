@@ -27,6 +27,10 @@ from typing import Any, Literal
 
 from canonical.runtime import finance_agent_v2_brain_native_llm_v1 as v1
 from canonical.runtime.finance_market_price_series_v1 import period_return
+from canonical.runtime.finance_native_evidence_synthesis_v1 import (
+    format_revenue_growth,
+    synthesize_revenue_growth,
+)
 from canonical.runtime.finance_quantitative_dependency_v1 import compile_dependencies
 from canonical.runtime.finance_quantitative_question_contract_v1 import compile_question
 
@@ -277,6 +281,31 @@ def _combined_submission(
         for url in v1._extract_urls(row.output):
             if url not in urls:
                 urls.append(url)
+
+    evidence_by_ticker: dict[str, str] = {}
+    for ticker in _tickers(contract):
+        retrieved = _retrieve_result_for(trace, _source_key(ticker))
+        if retrieved is not None and retrieved.output.strip():
+            evidence_by_ticker[ticker] = retrieved.output
+
+    revenue = synthesize_revenue_growth(question, evidence_by_ticker)
+    revenue_text = format_revenue_growth(revenue)
+    if revenue_text:
+        lines.append(revenue_text)
+        if (
+            market is not None
+            and revenue.get("all_entities_bound") is True
+            and len(market.get("ranking_high_to_low", [])) > 1
+            and len(revenue.get("ranking_high_to_low", [])) > 1
+            and re.search(r"(?i)rank|correlation|same", question)
+        ):
+            same = list(market["ranking_high_to_low"]) == list(
+                revenue["ranking_high_to_low"]
+            )
+            lines.append(
+                "The market-return and revenue-growth rankings are "
+                + ("the same." if same else "not the same.")
+            )
 
     if evidence_rows:
         lines.append("Source-bound extracted evidence:")
