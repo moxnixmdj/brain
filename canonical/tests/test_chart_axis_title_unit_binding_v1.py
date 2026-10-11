@@ -154,8 +154,10 @@ class ChartAxisTitleUnitBindingV1Tests(unittest.TestCase):
             Image.new("RGB",(400,300),"white").save(p)
             scene={"plot_box":[60,30,360,240]}
             calls=[]
+            sizes=[]
             def fake_ocr(_image,*,source):
                 calls.append(source)
+                sizes.append((source,_image.size))
                 if source=="BOTTOM_BAND":
                     return [cand("Age (years)",95,source)]
                 if source=="LEFT_BAND_ROTATE_90":
@@ -172,6 +174,11 @@ class ChartAxisTitleUnitBindingV1Tests(unittest.TestCase):
                 calls,
                 ["BOTTOM_BAND","LEFT_BAND_ROTATE_90","LEFT_BAND_ROTATE_270"],
             )
+            # Rotating the full-height left band swaps its dimensions. The
+            # first rotated dimension must therefore equal the source height,
+            # preventing vertical title clipping from being reintroduced.
+            self.assertEqual(sizes[1][1][0],300)
+            self.assertEqual(sizes[2][1][0],300)
 
     def test_source_declares_zero_external_cognition(self):
         self.assertEqual(c.MODEL_DEPENDENCY_COUNT,0)
