@@ -98,7 +98,7 @@ def compile_request(
     for index, clause in enumerate(clauses):
         pid = f"R{index+1}"
         lower = clause.casefold()
-        if re.search(r"(?:^|[\\s'\"\\x60])[.][.][\\\\/]", clause):
+        if "../" in clause or "..\\" in clause:
             predicates.append(_predicate(
                 pid,
                 clause,
@@ -281,6 +281,7 @@ def _run_verifier(spec: Mapping[str, Any], base: pathlib.Path) -> tuple[bool, st
                 text=True,
                 timeout=timeout,
                 check=False,
+                env={**os.environ, "PYTHONDONTWRITEBYTECODE": "1"},
             )
         except subprocess.TimeoutExpired:
             return False, "PYTHON_TEST_TIMEOUT"
