@@ -1,25 +1,25 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_TB_SCIENCE_EXECUTION_POINTER_V2",
   "date": "2026-10-11",
-  "status": "RANK22_ZERO_MODEL_EFFECTIVE__EXACT_ONE_FILE_ACTIVATION_AUTHORIZED__ACTIVATION_ABSENT__UNREAD_UNSTARTED__ZERO_CURRENT_TRIALS",
+  "status": "RANK22_FINAL_ZERO__TWENTY_CONSUMED__RANK23_UNREAD_UNSTARTED__CAPABILITY_REPAIR_REQUIRED",
   "current_result": {
-    "path": "canonical/verification/TB_SCIENCE_RANK21_FINAL_ZERO_NONCREDITABLE_VERIFY_20261011_V1.json",
-    "git_blob_sha": "3bbb3f32119e28f152c929a56ed43a70eda28b72"
+    "path": "canonical/verification/TB_SCIENCE_RANK22_FINAL_ZERO_VERIFY_20261011_V1.json",
+    "git_blob_sha": "9c5e9a6ec8c67109e49913dabb512bb50a6482d7"
   },
   "current_ledger": {
-    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261011_V72.json",
-    "git_blob_sha": "a3d5221a0207489a7d42a7524bad8437aab25346"
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261011_V73.json",
+    "git_blob_sha": "0ffeb04eef5286b70cd351a5b022ca50deba2d3d"
   },
   "verification": {
-    "path": "canonical/verification/TB_SCIENCE_RANK22_PUBLIC_EFFECTIVE_AUTHORITY_VERIFY_20261011_V1.json",
-    "git_blob_sha": "b60018e161d67de823787d12a0b8903ba3c7419d"
+    "path": "canonical/verification/TB_SCIENCE_RANK22_FINAL_ZERO_VERIFY_20261011_V1.json",
+    "git_blob_sha": "9c5e9a6ec8c67109e49913dabb512bb50a6482d7"
   },
   "counts": {
-    "benchmark_trials_consumed": 19,
+    "benchmark_trials_consumed": 20,
     "consumed_successes_final": 0,
-    "consumed_failures_final": 19,
+    "consumed_failures_final": 20,
     "started_result_pending": 0,
-    "finalized_slots": 19
+    "finalized_slots": 20
   },
   "stale_parallel_run": {
     "workflow_run_id": 38029667582,
@@ -29,7 +29,7 @@
   },
   "acceptance_credit_delta": 0,
   "terminal_credit_delta": 0,
-  "next": "CREATE_EXACT_RANK22_ACTIVATION_FILE_ON_BOUND_EXECUTION_BRANCH_AND_OPEN_PR__NO_MANUAL_MERGE",
+  "next": "REPAIR_AND_INDEPENDENTLY_QUALIFY_DONOR_FREE_TB_SCIENCE_CAPABILITY__KEEP_RANK23_UNREAD_UNSTARTED",
   "finalized_rank18": {
     "ledger_schedule_rank": 18,
     "slot_id": "terminal-bench-science/longitudinal-clinical-agent::trial-0",
@@ -166,18 +166,16 @@
     "rank19_retry_authority": false
   },
   "next_unexposed_validation_candidate": {
-    "ledger_schedule_rank": 22,
-    "manifest_schedule_order": 21,
-    "slot_id": "terminal-bench-science/rv-astrometry-fitting::trial-0",
-    "task_digest": "sha256:8e086e1f7245067eaa9a67c259c1519204fa058d8664983066cd582ef258a1ea",
-    "source_manifest": "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json",
-    "source_manifest_git_blob_sha": "6dfa880b1f68881531afbba6ca211681801fd19b",
+    "ledger_schedule_rank": 23,
+    "manifest_schedule_order": 22,
+    "slot_id": "terminal-bench-science/dna-storage-codec::trial-0",
+    "task_digest": "sha256:bde6852289db3f5474aedc96c54aca201d11be6c61f4fef019998b2b689e65ac",
     "task_read": false,
     "task_started": false,
+    "benchmark_trials_consumed": 0,
     "execution_authority": false,
     "task_read_authority": false,
-    "activation_authority": false,
-    "benchmark_trials_consumed": 0
+    "activation_authority": false
   },
   "agent_v13_identity_repair": {
     "path": "canonical/verification/AGENT_V13_IDENTITY_V2_REPAIR_VERIFY_20261010_V1.json",
@@ -622,5 +620,28 @@
     "activation_path": "capsules/tb_science_rank22_20261011_v1/ACTIVATE_RANK22_V1_PR.json",
     "manual_merge_forbidden": true,
     "activation_pr_merge_authority": false
+  },
+  "finalized_rank22": {
+    "ledger_schedule_rank": 22,
+    "slot_id": "terminal-bench-science/rv-astrometry-fitting::trial-0",
+    "task_digest": "sha256:8e086e1f7245067eaa9a67c259c1519204fa058d8664983066cd582ef258a1ea",
+    "logical_attempt_id": "3d130e1bca77cc5849a1bf40647f1e5c0964c1bffc5a6795069cbc7898afb674",
+    "activation_pull_request": 2681,
+    "workflow_run_id": 38142347152,
+    "workflow_job_id": 114478611498,
+    "artifact_id": 11703730564,
+    "artifact_sha256": "1c0bf8761c630099eb0122a6e10d5f62a92071d44e41844ef453990a4dee2a4a",
+    "task_read": true,
+    "task_started": true,
+    "durable_start_cas_acquired": true,
+    "benchmark_trials_consumed": 1,
+    "result_present": true,
+    "reward": 0,
+    "final_classification": "FINAL_ZERO",
+    "runtime_model_dependency_count": 0,
+    "external_model_runtime_calls": 0,
+    "result_credit_authority": true,
+    "retry_authority": false,
+    "replacement_authority": false
   }
 }
