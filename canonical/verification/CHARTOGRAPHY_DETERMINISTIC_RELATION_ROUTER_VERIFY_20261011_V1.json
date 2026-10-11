@@ -1,0 +1,82 @@
+{
+  "schema": "PROJECT_BRAIN_CHARTOGRAPHY_DETERMINISTIC_RELATION_ROUTER_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__QWEN8B_MODEL_ONLY_5_OF_6__LINE_CROSSING_FAIL__BRAIN_DETERMINISTIC_RELATION_ROUTER_6_OF_6_EXACT_PLUS_EFFECT_DISTINGUISHING_MUTATIONS__FAIL_CLOSED__ZERO_DIRECT_89_CREDIT",
+  "trigger": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2644,
+    "head_sha": "2eea4819415cd16dbf0a94f22dd968dde5786800",
+    "workflow_run_id": 38111353297,
+    "workflow_job_id": 114387412049,
+    "artifact_id": 11691897413,
+    "artifact_digest_sha256": "adfeee696051296496510ac6200ab1830aaa6eb6fbb36250f4ea63a94b95bb6e",
+    "result": {
+      "schema": "PROJECT_BRAIN_CHARTOGRAPHY_QWEN8B_TOOL_COMPOSITION_SIX_CASE_RESULT_V1",
+      "model_repository": "Qwen/Qwen3-VL-8B-Instruct-GGUF",
+      "model_revision": "f982a07559d4a2f6c8744d840bf6fccab30eea96",
+      "model_sha256": "67d1659bfe71b89d50b45a4ad1a9e5b997e5bb16ce5da66a6a6167abd569e9e2",
+      "projector_sha256": "c6ba85508d82f42590e6eb77d5340369ab6fecf107a7561d809523d8aa5f3bfd",
+      "llama_cpp_commit": "a7fb71fab83b474a0892b9a05aaa3a8ddca2729b",
+      "passed_count": 5,
+      "total_count": 6,
+      "failed_case": {
+        "case_id": 4,
+        "skill": "LINE_CROSSING",
+        "expected": "BLUE",
+        "observed": "RED"
+      },
+      "terminal_cases_consumed": 0
+    }
+  },
+  "causal_localization": {
+    "failed_tool_observation_already_contained_decisive_geometry": true,
+    "line_crossing_right_edge_raster_y_medians": {
+      "BLUE": 54,
+      "RED": 134
+    },
+    "smaller_raster_y_means_higher_plotted_value": true,
+    "deterministic_answer": "BLUE",
+    "model_interpretation_answer": "RED",
+    "conclusion": "THE_REMAINING_SYNTHETIC_FAILURE_IS_MODEL_CONSUMPTION_OF_ALREADY_DECISIVE_GEOMETRY__NOT_GEOMETRY_EXTRACTION"
+  },
+  "repair": {
+    "runtime_path": "canonical/runtime/chartography_deterministic_relation_router_v1.py",
+    "runtime_git_blob_sha": "1e93e6fa4d15b4dc1d19c7629e394657d4099949",
+    "tests_path": "canonical/tests/test_chartography_deterministic_relation_router_v1.py",
+    "tests_git_blob_sha": "a6f03298a81ee232a26b1cd1809268c329e0c229",
+    "geometry_runtime_path": "canonical/runtime/chartography_deterministic_geometry_v1.py",
+    "geometry_runtime_git_blob_sha": "4a4ac24dd63ad69b7ecf9e8c0aa0963903825e44",
+    "role": "FAIL_CLOSED_PROMPT_TO_VERIFIED_GEOMETRY_ROUTE_FOR_DECLARED_SIMPLE_EXACT_COLOR_CODED_BMP_RELATIONS__NO_VLM_INTERPRETATION_HOP"
+  },
+  "independent_verification": {
+    "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "router_unittest_result": "3_TEST_METHODS_PASS__EXACT_SIX_CASES_PLUS_3_EFFECT_DISTINGUISHING_MUTATIONS_PLUS_2_FAIL_CLOSED_ASSERTIONS",
+    "exact_six_relation_count": 6,
+    "effect_distinguishing_mutation_count": 3,
+    "fail_closed_assertion_count": 2,
+    "pycompile": true,
+    "predecessor_geometry_replay": "PASS_GEOMETRY_12_OF_12"
+  },
+  "scheduler_effect": [
+    "FOR_DECLARED_SIMPLE_EXACT_COLOR_CODED_BMP_RELATION_CLASS_USE_DETERMINISTIC_RELATION_ROUTER_BEFORE_ANY_VLM_INTERPRETATION",
+    "DO_NOT_REPEAT_QWEN4B_OR_QWEN8B_ON_THE_SAME_SIX_SIMPLE_RELATION_CASES",
+    "QWEN8B_5_OF_6_DOES_NOT_JUSTIFY_HELDOUT_SELECTION_BY_ITSELF",
+    "BROADER_REAL_WORLD_SEMANTIC_RECOGNITION_REQUIRES_NEW_NONOVERLAPPING_NON_HELDOUT_DIAGNOSTICS_ONLY_IF_STILL_LOAD_BEARING",
+    "OFFICIAL_100_TASK_HELDOUT_EXECUTION_REMAINS_AUTH_GATED__NO_HELDOUT_TUNING"
+  ],
+  "hard_nonclaims": [
+    "NO_GENERAL_CHARTOGRAPHY_CLOSURE",
+    "NO_CLAIM_ARBITRARY_RASTER_OR_COMPLEX_CHART_MEMBERSHIP_IS_AUTOMATIC",
+    "NO_HELDOUT_CHARTOGRAPHY_SCORE",
+    "NO_CHARTOGRAPHY_GE_89_ACCEPTANCE",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
