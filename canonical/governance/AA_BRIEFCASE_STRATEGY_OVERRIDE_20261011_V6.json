@@ -1,0 +1,110 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_STRATEGY_OVERRIDE_20261011_V6",
+  "date": "2026-10-11",
+  "status": "CAPABILITY_INFORMATION_PRIMARY__RANK1_REUSE_EXHAUSTED__ONE_INTEGRATED_CERTIFICATE_NEXT__LITERAL_AA_ELO_AUDIT_ONLY__ZERO_CREDIT",
+  "supersedes_for_active_research_priority": "canonical/governance/AA_BRIEFCASE_STRATEGY_OVERRIDE_20261011_V5.json",
+  "does_not_revoke": [
+    "canonical/governance/AA_BRIEFCASE_INTERNAL_ONLY_STRATEGY_OVERRIDE_20261011_V4.json",
+    "canonical/governance/AA_BRIEFCASE_INTERNAL_ONLY_ROUTE_EXHAUSTION_20261011_V4.json"
+  ],
+  "primary_goal": "OBTAIN_THE_CAPABILITY_COMPARISON_INFORMATION_FOR_WHICH_THE_FROZEN_OPUS_5_5_AA_BRIEFCASE_RESULT_WAS_BEING_USED_WITH_THE_MINIMUM_SUFFICIENT_ACTIONS",
+  "secondary_audit": {
+    "predicate": "AA_BRIEFCASE_V1_1_LITERAL_ELO_GE_1822",
+    "state": "OPEN_WAKE_GATED",
+    "same_information_retry_value": 0,
+    "capability_certificate_may_not_backpropagate_to_literal_score": true
+  },
+  "frozen_reference": {
+    "id": "OPUS_5_5_AA_BRIEFCASE_1822_REFERENCE",
+    "vector": {
+      "rubric_pass_rate": 0.6121212121212121,
+      "analytical_quality_elo": 2206.92,
+      "presentation_elo": 1709.91
+    },
+    "vector_sha256": "1e542d27e3282755bfba0c33f9cfe1398fb71409df3b543848cada6ce2e94879",
+    "source": "canonical/evidence/AA_BRIEFCASE_PUBLIC_SCORER_CONTRACT_V2_20261011.json"
+  },
+  "executed_state": {
+    "reduction_authority": {
+      "path": "canonical/governance/AA_BRIEFCASE_CAPABILITY_INFORMATION_REDUCTION_20261011_V1.json",
+      "git_blob_sha": "cf34672a697507f8c24441b0069e504be154b240"
+    },
+    "local_logic_verification": {
+      "path": "canonical/verification/AA_BRIEFCASE_CAPABILITY_INFORMATION_REDUCTION_LOCAL_VERIFY_20261011_V1.json",
+      "git_blob_sha": "e13c1d69c2af34f8e73c5e1dbfb768dfcb12d4b3",
+      "result": "PASS__10_OF_10_AUTHORED_CASES",
+      "independent_second_carrier": false
+    },
+    "current_probe": {
+      "path": "canonical/governance/AA_BRIEFCASE_CAPABILITY_INFORMATION_CURRENT_PROBE_20261011_V1.json",
+      "git_blob_sha": "59b353c1602414505b42256a7127cdaf779a517b",
+      "complete_basis_found": false
+    },
+    "rank1_reuse_search": {
+      "path": "canonical/governance/AA_BRIEFCASE_CAPABILITY_REUSE_SEARCH_20261011_V1.json",
+      "git_blob_sha": "66255e662a8863656d327aea56c8d52c2d95cf27",
+      "repository_exhaustive": false,
+      "complete_admissible_basis_found": false,
+      "repeat_without_new_authority_forbidden": true
+    }
+  },
+  "remaining_primary_obligation": {
+    "id": "ONE_INTEGRATED_REFERENCE_BOUND_CAPABILITY_CERTIFICATE",
+    "exact_subject_requirement": "ONE_CONTENT_ADDRESSED_BRAIN_SUBJECT_FOR_ALL_LOAD_BEARING_CLAIMS",
+    "must_eliminate": [
+      "RUBRIC_INFERIORITY",
+      "ANALYTICAL_QUALITY_INFERIORITY",
+      "PRESENTATION_INFERIORITY",
+      "EXECUTION_INTERFACE_FAILURE"
+    ],
+    "admission": [
+      "VERIFIED",
+      "CAUSAL",
+      "GENERALIZATION_BOUND",
+      "SUBJECT_BOUND",
+      "REFERENCE_BOUND_TO_EXACT_FROZEN_VECTOR",
+      "NO_EXTERNAL_RUNTIME_COGNITION_CREDIT",
+      "NO_ANSWER_LEAKAGE",
+      "FAIL_CLOSED_ON_ANY_UNBOUND_LOAD_BEARING_DIMENSION"
+    ],
+    "preferred_proof_form": "A_SINGLE_SCOPE_COMPLETE_TOP_OR_REFERENCE_NONINFERIORITY_CERTIFICATE_REUSING_EXISTING_PROFESSIONAL_P2_MEMBERSHIP_ABLATION_TOP_SUPPORT_AND_24_OF_24_PROPERTY_TRUTH_MACHINERY",
+    "fallback_only_if_integrated_route_is_falsified": "MULTIPLE_SAME_SUBJECT_CERTIFICATES_SELECTED_BY_EXACT_MINIMUM_ACTION_COST_SET_COVER"
+  },
+  "scheduler": {
+    "rank1": "INTEGRATED_CAPABILITY_CERTIFICATE",
+    "do_now": [
+      "REUSE_EXISTING_PARTIAL_AUTHORITIES_AS_COMPONENTS_OF_THE_INTEGRATED_CERTIFICATE",
+      "BIND_ONE_EXACT_CURRENT_BRAIN_SUBJECT",
+      "PROVE_OR_FALSIFY_REFERENCE_NONINFERIORITY_FOR_ALL_FOUR_FAILURE_CLASSES",
+      "STOP_IMMEDIATELY_IF_A_LOAD_BEARING_CLASS_REMAINS_UNBOUND"
+    ],
+    "do_not_do": [
+      "REPEAT_RANK1_REUSE_SEARCH_WITH_THE_SAME_AUTHORITIES",
+      "RECOVER_PRIVATE_91_TASKS_MERELY_TO_IMITATE_THE_BENCHMARK",
+      "RECONSTRUCT_NONINVERTIBLE_HEADLINE_ELO",
+      "BUILD_NEW_SCORER_MACHINERY",
+      "BUILD_UNRELATED_GENERIC_PROFESSIONAL_CAPABILITIES",
+      "RUN_LITERAL_SCORE_WORK_WITHOUT_A_WAKE_EVENT",
+      "CLAIM_PRIMARY_CAPABILITY_NONINFERIORITY_FROM_24_OF_24_PROPERTY_TRUTH_ALONE"
+    ]
+  },
+  "truth": {
+    "primary_capability_noninferiority_proved": false,
+    "literal_aa_elo_ge_1822_proved": false,
+    "rank1_reuse_complete_basis_found": false,
+    "new_capability_credit": 0,
+    "new_benchmark_score_credit": 0
+  },
+  "global_alignment": {
+    "current_live_frontier_policy": "CAPABILITY_FIRST_AND_RESOURCE_PARETO_WORK_PRIMARY",
+    "benchmark_rows": "AUDIT_ONLY_UNLESS_THEY_LOCALIZE_A_REAL_CAPABILITY_DEFECT",
+    "strategy_conflict": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "benchmark_score_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
