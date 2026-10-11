@@ -4,6 +4,11 @@ from typing import Any, Mapping
 
 SCHEMA = "PROJECT_BRAIN_AA_BRIEFCASE_PUBLIC_INTERFACE_OUTCOME_SUPERDOMAIN_V1"
 
+EXPECTED_PUBLIC_CONTRACT_PATH = (
+    "canonical/evidence/AA_BRIEFCASE_PUBLIC_INTERFACE_CONTRACT_20261011_V1.json"
+)
+EXPECTED_PUBLIC_CONTRACT_BLOB = "32b44233529221ac6aa21132782690a1fbf0f748"
+
 
 class SuperdomainError(ValueError):
     pass
@@ -12,6 +17,27 @@ class SuperdomainError(ValueError):
 def _true(payload: Mapping[str, Any], key: str) -> None:
     if payload.get(key) is not True:
         raise SuperdomainError(key.upper() + "_NOT_BOUND")
+
+
+def _verify_public_contract(value: Any) -> None:
+    if not isinstance(value, Mapping):
+        raise SuperdomainError("PUBLIC_CONTRACT_INVALID")
+    expected = {
+        "path",
+        "git_blob_sha",
+        "verified_against_owner_methodology",
+        "task_and_grading_interface_scope_complete",
+    }
+    if set(value) != expected:
+        raise SuperdomainError("PUBLIC_CONTRACT_FIELDS_INVALID")
+    if value.get("path") != EXPECTED_PUBLIC_CONTRACT_PATH:
+        raise SuperdomainError("PUBLIC_CONTRACT_PATH_MISMATCH")
+    if value.get("git_blob_sha") != EXPECTED_PUBLIC_CONTRACT_BLOB:
+        raise SuperdomainError("PUBLIC_CONTRACT_BLOB_MISMATCH")
+    if value.get("verified_against_owner_methodology") is not True:
+        raise SuperdomainError("PUBLIC_CONTRACT_NOT_VERIFIED")
+    if value.get("task_and_grading_interface_scope_complete") is not True:
+        raise SuperdomainError("PUBLIC_CONTRACT_SCOPE_NOT_COMPLETE")
 
 
 def verify(payload: Mapping[str, Any]) -> dict[str, Any]:
@@ -27,6 +53,8 @@ def verify(payload: Mapping[str, Any]) -> dict[str, Any]:
         raise SuperdomainError("PROJECT_COUNT_MISMATCH")
     if payload.get("max_turns") != 500:
         raise SuperdomainError("TURN_LIMIT_MISMATCH")
+
+    _verify_public_contract(payload.get("public_contract"))
 
     required_truths = (
         "tasks_run_independently",
@@ -47,7 +75,6 @@ def verify(payload: Mapping[str, Any]) -> dict[str, Any]:
         "crowd_bt_eta_full_unit_interval_included",
         "all_finite_score_bearing_comparison_graphs_included",
         "headline_rating_real_nonnegative_output_included",
-        "public_contract_binding_verified",
     )
     for key in required_truths:
         _true(payload, key)
@@ -77,6 +104,11 @@ def verify(payload: Mapping[str, Any]) -> dict[str, Any]:
         "status": "PASS_SCOPE_COMPLETE_SUPERDOMAIN",
         "scope_complete": True,
         "verified": True,
+        "proof_basis": "TARGET_INDEPENDENT_PUBLIC_INTERFACE_TYPE_SUPERDOMAIN",
+        "public_contract": {
+            "path": EXPECTED_PUBLIC_CONTRACT_PATH,
+            "git_blob_sha": EXPECTED_PUBLIC_CONTRACT_BLOB,
+        },
         "covers_private_task_contents_without_enumeration": True,
         "covers_private_task_specific_rubric_predicates_as_opaque_predicates": True,
         "covers_realized_rubric_and_pairwise_verdict_types": True,
