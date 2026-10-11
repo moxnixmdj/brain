@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_SCALE_BRAIN_SUBMISSION_RECEIPT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__FRESH_ROW16_THREE_PAGE_DOCX_SUBMISSION_FROZEN__COST_MODEL_AND_RENDER_QA_PASS__ZERO_OWNER_SCORE_CREDIT",
+  "benchmark": "GDPval-AA v2.1",
+  "subject": {
+    "row_idx": 16,
+    "task_id": "93b336f3-61f3-4287-86d2-87445e1e0f90",
+    "sector": "Manufacturing",
+    "occupation": "Buyers and Purchasing Agents"
+  },
+  "precommit": "canonical/governance/GDPVAL_SCALE_FRESH_BATCH_ROWS15_24_PRECOMMIT_20261011_V1.json",
+  "packet": {
+    "manifest_root_sha256": "f69af30fcea243ccb25d44c4a5380be0cdcac621287568525065034ce6cedae8",
+    "packet_sha256": "427e242b017ba2f1f7be47972273e8552223bc9690ddc1e2b640a21b965dbf07",
+    "prompt_sha256": "d07bb78bfaba89ef536bbc3ee0e6e8b18d8eb1c3ead57d8742076cd12fc1c165",
+    "raw_obligation_count": 35,
+    "reference_count": 0
+  },
+  "freshness": {
+    "task_id_frozen_before_prompt_read": true,
+    "rubric_read_before_output_freeze": false,
+    "human_gold_read_before_output_freeze": false,
+    "third_party_model_submission_read_before_output_freeze": false,
+    "judge_feedback_read_before_output_freeze": false
+  },
+  "economics": {
+    "usd_inr": 83,
+    "current_pack_inr": 830000,
+    "current_assembly_inr": 107900,
+    "current_overhead_inr": 16600,
+    "unchanged_imported_components_inr": 705500,
+    "local_assembly_inr": 20000,
+    "local_overhead_inr": 590,
+    "localized_pack_inr": 726090,
+    "saving_per_pack_inr": 103910,
+    "saving_fraction": 0.12519277108433735,
+    "annual_volume": 110000,
+    "annual_gross_saving_inr": 11430100000,
+    "five_year_volume": 550000,
+    "five_year_gross_saving_inr": 57150500000
+  },
+  "deliverable": {
+    "format": "docx",
+    "filename": "GDPval_93b336f3_EV_battery_localisation_partnership_proposal.docx",
+    "sha256": "b20104aaaf5fd64af18c550ab43557a3f4d3dc59bd66416feb3d5a2e08abc7c0",
+    "library_path": "/Project Brain/GDPval/scale/93b336f3-61f3-4287-86d2-87445e1e0f90/GDPval_93b336f3_EV_battery_localisation_partnership_proposal.docx",
+    "library_file_id": "libfile_4dfc88b817788191afe7d9483de9bc68",
+    "rendered_page_count": 3
+  },
+  "verification": {
+    "visual_inspection": "PASS__ALL_3_PAGES__NO_CLIPPING_OVERLAP_OR_BROKEN_GLYPHS",
+    "requested_page_range_2_to_3": "PASS__3_PAGES",
+    "partnership_split_49_51_evtronics_evbatteries": true,
+    "ev_batteries_technical_oversight": true,
+    "evtronics_delhi_assembly_operations": true,
+    "assembly_only_cost_scope": true,
+    "all_calculations_in_inr": true,
+    "pmp_phased_localisation_roadmap": true,
+    "benefits_and_named_risks_explicit": true,
+    "expected_volumes_explicit": true,
+    "clear_next_steps_and_decision_gate": true
+  },
+  "hard_nonclaims": [
+    "GROSS_SAVINGS_ARE_NOT_NET_NPV",
+    "NO_ARTIFICIAL_ANALYSIS_OWNER_SCORE",
+    "NO_GDPVAL_ELO",
+    "NO_1846_THRESHOLD_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {"incremental_spend_usd":0,"acceptance_credit_delta":0,"terminal_credit_delta":0}
+}
