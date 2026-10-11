@@ -228,6 +228,20 @@ def _browser_history(state: Mapping[str, Any]) -> tuple[Mapping[str, Any] | None
     return None, None
 
 
+def _recent_browser_submitted(state: Mapping[str, Any], limit: int = 8) -> list[Mapping[str, Any]]:
+    history = state.get("history")
+    if not isinstance(history, list):
+        return []
+    out = []
+    for row in reversed(history[-limit:]):
+        if not isinstance(row, Mapping):
+            continue
+        submitted = row.get("submitted_operation")
+        if isinstance(submitted, Mapping):
+            out.append(submitted)
+    return out
+
+
 def _url_equivalent(observed: Any, target: str) -> bool:
     if not isinstance(observed, str):
         return False
@@ -367,6 +381,15 @@ def _browser_state_machine(state: Mapping[str, Any], instruction: str) -> dict[s
 
     if isinstance(submitted, Mapping):
         submitted_type = str(submitted.get("type") or "").upper()
+
+        if re.search(r"\bsearch\b", instruction, re.I) and submitted_type in {
+            "FILL_LABEL", "FILL_PLACEHOLDER", "FILL_SELECTOR"
+        }:
+            return {
+                "response": "submit filled search",
+                "actions": [{"type": "BROWSER_OP", "op": {"type": "PRESS", "key": "Enter"}}],
+            }
+
         if submitted_type in {
             "NAVIGATE", "CLICK_TEXT", "CLICK_ROLE", "CLICK_SELECTOR",
             "FILL_LABEL", "FILL_PLACEHOLDER", "FILL_SELECTOR",
@@ -384,13 +407,19 @@ def _browser_state_machine(state: Mapping[str, Any], instruction: str) -> dict[s
         if re.search(r"\bsearch\b", instruction, re.I):
             value = _search_value(instruction)
             if value:
-                if isinstance(submitted, Mapping) and str(submitted.get("type") or "").upper() in {
-                    "FILL_LABEL", "FILL_PLACEHOLDER", "FILL_SELECTOR"
-                }:
-                    return {
-                        "response": "submit filled search",
-                        "actions": [{"type": "BROWSER_OP", "op": {"type": "PRESS", "key": "Enter"}}],
-                    }
+                recent = _recent_browser_submitted(state)
+                recent_types = [str(x.get("type") or "").upper() for x in recent]
+                if "PRESS" in recent_types and any(
+                    t in {"FILL_LABEL", "FILL_PLACEHOLDER", "FILL_SELECTOR"}
+                    for t in recent_types
+                ):
+                    visible = _norm(str(result.get("visible_text") or ""))
+                    if _norm(value) in visible:
+                        return {
+                            "response": "search result state observed",
+                            "actions": [{"type": "DONE"}],
+                        }
+                    return None
                 control = _browser_search_control(controls)
                 if control is not None:
                     action = _browser_fill_action(control, value)
