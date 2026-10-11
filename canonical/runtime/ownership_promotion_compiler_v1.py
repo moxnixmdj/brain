@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse, ast, hashlib, json, sys
 from pathlib import Path
 from typing import Any, Mapping
+from canonical.runtime import ownership_promotion_cognition_provenance_gate_v1 as cognition_provenance_gate
 
 OWNED="VERIFIED_OWNED_EQUAL_OR_BETTER"
 STDLIB=set(getattr(sys,"stdlib_module_names",()))|{"__future__","typing"}
@@ -71,6 +72,9 @@ def evaluate(root:Path,batch:Mapping[str,Any])->dict[str,Any]:
         c=cr.get(fam,{}); m=mr.get(fam,{})
         if m.get("status")==OWNED:
             out.append({"family":fam,"status":"ALREADY_OWNED","errors":[]}); continue
+        provenance = cognition_provenance_gate.evaluate(s)
+        if provenance.get("pass") is not True:
+            e.extend("COGNITION_PROVENANCE:" + x for x in provenance.get("errors", []))
         if not (c.get("opus55_acceptance_state")=="PASS" and
                 c.get("opus55_acceptance_calibrated") is True and c.get("unresolved")==[]):
             e.append("STRICT_ACCEPTANCE_NOT_PASS")
@@ -100,6 +104,7 @@ def evaluate(root:Path,batch:Mapping[str,Any])->dict[str,Any]:
         out.append({"family":fam,
                     "status":"PROMOTION_ELIGIBLE_ZERO_REALITY" if not e else "BLOCKED",
                     "provider_audit":"SELF_CONTAINED_STDLIB_ONLY" if not any("IMPORT" in x or "CALL" in x for x in e) else "FAIL",
+                    "cognition_provenance":provenance,
                     "errors":e})
     eligible=[x["family"] for x in out if x["status"]=="PROMOTION_ELIGIBLE_ZERO_REALITY"]
     blocked=[x["family"] for x in out if x["status"]=="BLOCKED"]
@@ -109,7 +114,7 @@ def evaluate(root:Path,batch:Mapping[str,Any])->dict[str,Any]:
       "families":out,"promotion_eligible_families":eligible,"blocked_families":blocked,
       "counts":{"eligible":len(eligible),"blocked":len(blocked)},
       "new_reality_units_consumed":0,"incremental_spend_usd":0,
-      "rule":"STRICT_ACCEPTANCE_AND_EXACT_CONTENT_BOUND_BRAIN_ARTIFACT_AND_INDEPENDENT_RECEIPTS_AND_CURRENT_SELF_CONTAINED_PROVIDER_AUDIT"
+      "rule":"STRICT_ACCEPTANCE_AND_EXACT_CONTENT_BOUND_BRAIN_ARTIFACT_AND_INDEPENDENT_RECEIPTS_AND_CURRENT_SELF_CONTAINED_PROVIDER_AUDIT_AND_FAIL_CLOSED_K1_K2_K3_COGNITION_PROVENANCE"
     }
 
 def main()->int:
