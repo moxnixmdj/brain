@@ -80,7 +80,7 @@ def _bytes(f:dict,root:Path):
  if not m or not all(isinstance(x,Mapping) for x in (st,bn,fr)): raise PostCompositionFrontierV2Error("BYTES_STATE")
  ver=int(m.group(1)); raw=st.get("raw_python_source_bytes"); be=st.get("B_exec_raw_python_source_bytes"); q=st.get("final_untouched_qualification")
  if any(isinstance(x,bool) or not isinstance(x,int) or x<=0 for x in (raw,be)) or not isinstance(q,str): raise PostCompositionFrontierV2Error("BYTES_VERIFY")
- qm=re.fullmatch(r"(\\d+)/(\\d+)",q)
+ qm=re.fullmatch(r"(\d+)/(\d+)",q)
  if not qm or qm.group(1)!=qm.group(2) or not str(st.get("clean_room_execution") or "").startswith("PASS__") or not str(st.get("archive_replay") or "").startswith("CONTENT_ADDRESSED"): raise PostCompositionFrontierV2Error("BYTES_VERIFY")
  if fr.get("spent") is not False or not isinstance(fr.get("id"),str): raise PostCompositionFrontierV2Error("BYTES_FROZEN")
  _source(f,BYTES)["git_blob_sha"]=sha; row=_cand_source(f,BYTES); row["work_id"]=f"BYTES_EXACT_SYMBOLIC_V{ver}_NEXT_PHYSICAL_CUT"; row["readiness"]=f"ACTIONABLE__V{ver}_CURRENT"
