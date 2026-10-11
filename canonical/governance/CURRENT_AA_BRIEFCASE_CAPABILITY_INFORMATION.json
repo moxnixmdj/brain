@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_AA_BRIEFCASE_CAPABILITY_INFORMATION_V1",
+  "date": "2026-10-11",
+  "status": "ACTIVE__TERMINAL_CAPABILITY_PREDICATE_BOUND__MINIMUM_INFORMATION_FRONTIER_DERIVED__CURRENT_PROOF_OPEN__LITERAL_SCORE_SEPARATE",
+  "target": {
+    "path": "canonical/governance/AA_BRIEFCASE_MEASUREMENT_SEMANTIC_TARGET_V1.json",
+    "git_blob_sha": "8f24ca30e6cceb8a58f619da1623037c0a4bda0b"
+  },
+  "minimum_information_frontier": {
+    "path": "canonical/governance/AA_BRIEFCASE_MINIMUM_INFORMATION_FRONTIER_20261011_V1.json"
+  },
+  "runtime": {
+    "path": "canonical/runtime/aa_briefcase_minimum_information_v1.py",
+    "git_blob_sha": "cbc756e86f8818ca60c45033e1a076af9aa6848c"
+  },
+  "local_verification": {
+    "path": "canonical/verification/AA_BRIEFCASE_MINIMUM_INFORMATION_LOCAL_VERIFY_20261011_V1.json",
+    "status": "LOCAL_10_OF_10_PASS__NOT_INDEPENDENT"
+  },
+  "truth": {
+    "capability_relation_proved": false,
+    "literal_aa_briefcase_elo_ge_1822_proved": false,
+    "private_91_task_execution_intrinsically_required_for_capability_relation": false,
+    "minimum_missing_decisive_object": "SCOPE_COMPLETE_CREDIT_BEARING_END_TO_END_PROFESSIONAL_QUALITY_AND_RELIABILITY_DOMINANCE_OR_EQUIVALENCE_CERTIFICATE"
+  },
+  "next": "REUSE_EXISTING_PROFESSIONAL_AND_TOP_SUPPORT_MACHINERY_TO_PROVE_OR_FALSIFY_THE_SINGLE_MISSING_END_TO_END_SCOPE_COMPLETE_BINDING__NO_BENCHMARK_RITUAL_AND_NO_NEW_GENERIC_MACHINERY",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "benchmark_score_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
