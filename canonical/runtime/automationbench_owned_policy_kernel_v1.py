@@ -262,7 +262,7 @@ def _ground_required_param(name: str, prompt: str) -> str | None:
 
     # Prefer literal identifier forms for *_id, gid, key, project/workspace/etc.
     if (
-        low_name.endswith("_id")
+        low_name.endswith(("_id", "_gid"))
         or low_name in {"id","gid","key","workspace","project","board","base","table","channel"}
     ):
         candidates = [
