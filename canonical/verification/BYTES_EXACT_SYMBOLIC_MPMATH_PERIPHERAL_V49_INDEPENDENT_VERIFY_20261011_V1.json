@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_MPMATH_PERIPHERAL_V49_INDEPENDENT_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__INDEPENDENT_V49_ARCHIVE_AND_CANONICAL_NEXT55_REPLAY__14490_OF_14490__ZERO_PROMOTION_OR_TERMINAL_CREDIT",
+  "subject": {
+    "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_MPMATH_PERIPHERAL_V49_SUCCESSOR_EXECUTION_20261011_V1.json",
+    "archive_library_file_id": "libfile_9eb2cb1838b88191a6c0314c95fc5ec7",
+    "archive_file_id": "file_0000000014248210b0293fde1a7db9c5",
+    "archive_sha256": "c2de8614bbdfa32aed47026a24b20c77ee22094a4851b4769d6cbf63b1fda498",
+    "manifest_sha256": "bdc69baf4e75991e6b5abd1ec271886c43a02ac08a422656374f19122ffb9bd0",
+    "python_files": 277,
+    "raw_python_source_bytes": 1725064
+  },
+  "reconstruction_check": {
+    "predecessor": "BYTES_EXACT_SYMBOLIC_V48_SUCCESSOR_20261011_V1",
+    "predecessor_raw_python_source_bytes": 1728741,
+    "changed_files": [
+      "mpmath/ctx_mp_python.py",
+      "mpmath/libmp/gammazeta.py",
+      "mpmath/libmp/libmpf.py"
+    ],
+    "selected_body_count": 10,
+    "all_selected_bodies_fail_closed_with_NotImplementedError": true,
+    "raw_delta_bytes": -3677,
+    "result": "PASS"
+  },
+  "qualification": {
+    "corpus_id": "QUAL_SUCCESSOR_NEXT55_20261011_V1",
+    "corpus_library_file_id": "libfile_d1957f056b44819184455112d1fdeb65",
+    "corpus_file_id": "file_00000000b8888210a90012f14e060abd",
+    "corpus_sha256": "dd008ccd38300031ed9839f45c758739af3291fbd6f53fe0f533eafe01c965c3",
+    "cases": 14490,
+    "passed": 14490,
+    "failed": 0,
+    "result": "PASS"
+  },
+  "independent_execution": {
+    "carrier": "CHATGPT_ISOLATED_CONTAINER",
+    "construction_workspace_not_reused": true,
+    "repository_checkout_not_used": true,
+    "candidate_source": "CONTENT_ADDRESSED_LIBRARY_ARCHIVE",
+    "expected_outputs_source": "CONTENT_ADDRESSED_CANONICAL_NEXT55_CORPUS",
+    "exact_route_semantics": "canonical/research/bytes/tools/exact_symbolic_route_v1.py",
+    "semantic_digest_semantics": "canonical/research/bytes/tools/semantic_digest_v1.py",
+    "parallel_workers": 12,
+    "replay_seconds": 17.222
+  },
+  "next_frozen_preserved": {
+    "id": "QUAL_SUCCESSOR_NEXT56_20261011_V1",
+    "corpus_sha256": "a7c0c40d1d5a587b0434ce7d675b0763b358aff8bbafdd4dc9b1a1559f20fbcb",
+    "spent": false,
+    "status": "FROZEN_UNSPENT"
+  },
+  "truth_boundary": [
+    "PROVED: V49 archive hash, manifest hash, 277 Python files, and raw byte count match the claimed candidate.",
+    "PROVED: the V48-to-V49 physical delta is exactly three Python files and ten selected fail-closed function bodies totaling minus 3,677 raw Python bytes.",
+    "PROVED: canonical NEXT55 replays 14,490/14,490 with zero failures on the V49 archive.",
+    "NOT PROVED: universal equivalence outside the bounded exact-symbolic route.",
+    "NO CREDIT: this verification grants no capability, acceptance, ownership, professional-quality, or terminal credit."
+  ],
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "acceptance_credit_delta": 0,
+  "promotion_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
