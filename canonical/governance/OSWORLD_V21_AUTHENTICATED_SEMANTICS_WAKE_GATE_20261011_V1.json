@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_V21_AUTHENTICATED_SEMANTICS_WAKE_GATE_20261011_V1",
+  "date": "2026-10-11",
+  "status": "OSWORLD_TASK_IDENTITY_CLOSED__PUBLIC_SEMANTICS_ROUTE_EXHAUSTED__AUTHENTICATED_TASK_AND_ASSET_ACCESS_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "OSWORLD_2_1_PARTIAL_GE_81_8",
+  "preserved_truth": {
+    "release": "osworld-v2.1",
+    "task_count": 108,
+    "exact_task_identity_closed": true,
+    "exact_task_hash_universe_closed": true,
+    "source_graph_reconciled": true
+  },
+  "public_surface": {
+    "public_test_v2_json": "TASK_IDS_ONLY_001_THROUGH_108",
+    "official_task_classes": "GATED_HUGGING_FACE_XLANGAI_OSWORLD_V2_TASKS",
+    "complete_assets": "GATED_HUGGING_FACE_XLANGAI_OSWORLD_V2_ASSETS_GATED",
+    "access_rule": "USER_MUST_ACCEPT_DATASET_TERMS_AND_AUTHENTICATE",
+    "public_loader_docs_provide_semantics": false
+  },
+  "consequence": {
+    "exact_task_semantics_closed": false,
+    "task_union_semantic_coverage_matrix_closed": false,
+    "public_unauthenticated_route_exhausted": true,
+    "active_acquisition_mode": "WAKE_GATED",
+    "wake_condition": [
+      "AUTHENTICATED_PINNED_TASK_CLASS_ACCESS",
+      "AUTHENTICATED_MATCHING_GATED_ASSET_SNAPSHOT_ACCESS",
+      "OWNER_PUBLISHED_EQUIVALENT_SEMANTIC_MANIFEST",
+      "STRONGER_SCOPE_COMPLETE_CERTIFICATE"
+    ]
+  },
+  "forbidden_work": [
+    "BYPASS_OFFICIAL_GATING_THROUGH_UNOFFICIAL_MIRRORS",
+    "INFER_TASK_SEMANTICS_FROM_IDS_OR_HASHES",
+    "REPEAT_PUBLIC_TASK_IDENTITY_DISCOVERY"
+  ],
+  "sources": [
+    "https://huggingface.co/datasets/xlangai/osworld_v2_tasks",
+    "https://github.com/xlang-ai/OSWorld-V2/blob/main/evaluation_examples/task_class/README.md",
+    "https://github.com/xlang-ai/OSWorld-V2/blob/main/.codex/skills/setup-osworld/references/tasks.md",
+    "https://raw.githubusercontent.com/xlang-ai/OSWorld-V2/main/evaluation_examples/test_v2.json"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "row_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
