@@ -221,13 +221,13 @@ def _communication_obligations(clause: str, full_prompt: str) -> list[dict[str, 
     # Only bind quoted text as message content when syntax explicitly says
     # it is message content. A quoted worksheet/project name is not a message.
     content_match = re.search(
-        r"(?:with\\s+(?:a|the)?\\s*(?:message|text|line|body)|saying|message\\s*:)\\s*[:=-]?\\s*(['\\"])(.*?)\\1",
+        r"(?:with\s+(?:a|the)?\s*(?:message|text|line|body)|saying|message\s*:)\s*[:=-]?\s*(['\\"])(.*?)\1",
         clause,
         re.I | re.S,
     )
     content = content_match.group(2).strip() if content_match else None
     subject_match = re.search(
-        r"subject(?:\\s+(?:line|of|is))?\\s*[:=-]?\\s*(['\\"])(.*?)\\1",
+        r"subject(?:\s+(?:line|of|is))?\s*[:=-]?\s*(['\\"])(.*?)\1",
         clause,
         re.I | re.S,
     )
