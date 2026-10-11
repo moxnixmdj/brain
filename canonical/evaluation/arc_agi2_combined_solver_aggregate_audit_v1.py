@@ -6,6 +6,7 @@ import hashlib
 import json
 import time
 from collections import Counter
+from concurrent.futures import ProcessPoolExecutor
 from pathlib import Path
 from typing import Any
 
@@ -35,10 +36,39 @@ def _exact_from_attempts(attempts: list[dict[str, Any]], expected: list[Any]) ->
     )
 
 
-def run(data_dir: Path) -> dict[str, Any]:
+def _score_one(path_s: str) -> dict[str, Any]:
+    path = Path(path_s)
+    task = json.loads(path.read_text(encoding="utf-8"))
+    result = score_public_task(
+        task,
+        attempts=2,
+        max_depth=3,
+        max_semantic_states_per_depth=4000,
+        max_equivalent_programs_per_semantics=4,
+        max_grid_cells=10000,
+    )
+    expected = [row.get("output") for row in task.get("test", [])]
+    attempts = result.get("attempts", [])
+    direct_attempts = [row for row in attempts if row.get("source") == "ARC_V16_DIRECT"]
+    exact = result.get("exact_task_solved") is True
+    direct_exact = _exact_from_attempts(direct_attempts, expected)
+    return {
+        "exact": exact,
+        "direct_exact": direct_exact,
+        "inventor_increment": exact and not direct_exact,
+        "inventor_used": result.get("inventor_used") is True,
+        "inventor_selected": any(row.get("source") == "PROGRAM_INVENTOR" for row in attempts),
+        "direct_bundle_count": min(int(result.get("direct_unique_bundle_count", 0)), 2),
+        "status": str(result.get("status")),
+    }
+
+
+def run(data_dir: Path, *, workers: int = 8) -> dict[str, Any]:
     files = sorted(data_dir.glob("*.json"))
     if not files:
         raise SystemExit("NO_TASK_FILES")
+    if isinstance(workers, bool) or not isinstance(workers, int) or workers < 1:
+        raise SystemExit("WORKERS_INVALID")
 
     solved = 0
     direct_only_solved = 0
@@ -49,29 +79,15 @@ def run(data_dir: Path) -> dict[str, Any]:
     status_counts: Counter[str] = Counter()
     start = time.perf_counter()
 
-    for path in files:
-        task = json.loads(path.read_text(encoding="utf-8"))
-        result = score_public_task(
-            task,
-            attempts=2,
-            max_depth=3,
-            max_semantic_states_per_depth=4000,
-            max_equivalent_programs_per_semantics=4,
-            max_grid_cells=10000,
-        )
-        expected = [row.get("output") for row in task.get("test", [])]
-        attempts = result.get("attempts", [])
-        direct_attempts = [row for row in attempts if row.get("source") == "ARC_V16_DIRECT"]
-
-        exact = result.get("exact_task_solved") is True
-        direct_exact = _exact_from_attempts(direct_attempts, expected)
-        solved += int(exact)
-        direct_only_solved += int(direct_exact)
-        inventor_increment += int(exact and not direct_exact)
-        inventor_used += int(result.get("inventor_used") is True)
-        inventor_selected += int(any(row.get("source") == "PROGRAM_INVENTOR" for row in attempts))
-        direct_bundle_counts[str(min(int(result.get("direct_unique_bundle_count", 0)), 2))] += 1
-        status_counts[str(result.get("status"))] += 1
+    with ProcessPoolExecutor(max_workers=workers) as pool:
+        for row in pool.map(_score_one, [str(path) for path in files]):
+            solved += int(row["exact"])
+            direct_only_solved += int(row["direct_exact"])
+            inventor_increment += int(row["inventor_increment"])
+            inventor_used += int(row["inventor_used"])
+            inventor_selected += int(row["inventor_selected"])
+            direct_bundle_counts[str(row["direct_bundle_count"])] += 1
+            status_counts[row["status"]] += 1
 
     elapsed = time.perf_counter() - start
     total = len(files)
@@ -90,6 +106,7 @@ def run(data_dir: Path) -> dict[str, Any]:
         "direct_unique_bundle_count_capped_at_two": dict(sorted(direct_bundle_counts.items())),
         "status_counts": dict(sorted(status_counts.items())),
         "wall_clock_seconds": elapsed,
+        "workers": workers,
         "corpus_sha256": _corpus_sha256(files),
         "search_config": {
             "max_depth": 3,
