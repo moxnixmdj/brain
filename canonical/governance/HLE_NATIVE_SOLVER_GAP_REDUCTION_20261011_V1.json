@@ -1,0 +1,77 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_NATIVE_SOLVER_GAP_REDUCTION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "ONE_NATIVE_COGNITION_GAP_ISOLATED__NO_EXTERNAL_MODEL_SUBSTITUTION__ZERO_CREDIT",
+  "target": "HLE_WITH_TOOLS_GE_67_7",
+  "observed_ready_layers": [
+    "AUTHORIZED_FIXED_ORIGINAL_HLE_2500_ARTIFACT",
+    "GOLD_ISOLATION_AND_CONTENT_ADDRESSED_COMMITMENTS",
+    "VERIFIED_HLE_CONTAMINATION_FILTERED_SEARCH_FETCH_CODE_TOOL_ADAPTER",
+    "MODEL_INDEPENDENT_OPEN_RESEARCH_SOURCE_DISCOVERY_AND_PROVENANCE",
+    "DETERMINISTIC_LEXICAL_RELEVANCE_AND_OBJECTIVE_GROUNDED_EVIDENCE_EXTRACTION",
+    "BOUNDED_SOURCE_ALIGNED_SEMANTIC_PROOF",
+    "SYMBOLIC_NUMERIC_AND_TYPED_EXPRESSION_EXECUTION",
+    "FINITE_TYPED_RULE_SYNTHESIS",
+    "VERIFIED_RESEARCH_LOOP_CONTROL",
+    "UNIVERSAL_VERIFIED_ADAPTIVE_SOLVER_WITH_ZERO_AUTHORITY_PROPOSAL_BOUNDARY"
+  ],
+  "not_ready_or_not_authoritative": {
+    "raw_hle_question_to_typed_semantic_contract": "NOT_PROVED_GENERAL",
+    "arbitrary_question_to_candidate_final_answer": "NO_VERIFIED_BRAIN_NATIVE_GENERAL_GENERATOR",
+    "universal_solver_host_proposal_provider": "OPTIONAL_EXTERNAL_OR_HOST_DONOR_BOUNDARY__NOT_BRAIN_CAPABILITY",
+    "cognitive_decision_kernel": "BOUNDED_YES_NO_JEV_ENDPOINT_ONLY__ARBITRARY_CANDIDATE_RANKING_EXPLICITLY_UNVERIFIED",
+    "open_research_frontend": "FACTUAL_CORRECTNESS_EVIDENCE_SUFFICIENCY_AND_DECISION_QUALITY_SYNTHESIS_EXPLICITLY_UNVERIFIED",
+    "structured_math_routes": "REQUIRE_ALREADY_NORMALIZED_TYPED_INPUTS__NATURAL_LANGUAGE_RULE_EXTRACTION_UPSTREAM"
+  },
+  "minimal_missing_function": {
+    "name": "HLE_NATIVE_SEMANTIC_COMPILER_AND_ANSWER_SYNTHESIZER",
+    "input": [
+      "raw_question",
+      "answer_type",
+      "optional_image",
+      "tool_observations_and_verified_evidence"
+    ],
+    "output": [
+      "typed_semantic_obligations",
+      "candidate_final_answer_string",
+      "provenance_or_derivation_trace",
+      "uncertainty_and_fail_closed_status"
+    ],
+    "hard_properties": [
+      "BRAIN_OWNED_OR_INTERNALIZED_CAPABILITY_ONLY",
+      "NO_EXTERNAL_MODEL_SOLVER_OUTPUT",
+      "NO_GOLD_ACCESS_BEFORE_GLOBAL_COMMIT_SEAL",
+      "HLE_SOURCE_BLOCKLIST_ENFORCED_ON_SEARCH_AND_FETCH",
+      "FAIL_CLOSED_WHEN_SEMANTIC_COMPILATION_UNRESOLVED",
+      "OUTPUT_MUST_BIND_TO_EXACT_TASK_ID_TRIAL_AND_INPUT_HASH"
+    ]
+  },
+  "why_this_is_load_bearing": "All currently verified downstream components require normalized predicates, explicit evidence relations, typed expressions, or candidate proposals. None proves a complete mapping from arbitrary HLE natural-language questions to the final answer representation.",
+  "existing_nearby_components_to_reuse": [
+    "canonical/runtime/bound_capabilities/open_research_source_frontend.py",
+    "canonical/runtime/m4_research_control.py",
+    "canonical/runtime/source_aligned_semantic_proof_v15.py",
+    "canonical/runtime/structured_method_expression_ast_candidate_v2.py",
+    "canonical/runtime/g0_finite_typed_rule_synthesis.py",
+    "canonical/runtime/deductive_closure_v7.py",
+    "canonical/runtime/universal_verified_adaptive_solver_v12.py",
+    "canonical/runtime/general_cognition_proposal_packet_v1.py"
+  ],
+  "population_geometry": "canonical/governance/HLE_SAFE_POPULATION_PROFILE_20261011_V1.json",
+  "anti_laundering": {
+    "external_model_as_solver_allowed": false,
+    "external_model_output_may_be_called_brain_capability": false,
+    "zero_authority_proposal_becomes_answer_authority_without_independent_task_complete_verification": false
+  },
+  "hard_nonclaims": [
+    "NO_HLE_TASK_SOLVED",
+    "NO_BRAIN_HLE_SCORE",
+    "NO_CLAIM_EXISTING_TYPED_SOLVERS_COVER_ARBITRARY_HLE",
+    "NO_CLAIM_JEV_IS_GENERAL_HLE_SOLVER"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
