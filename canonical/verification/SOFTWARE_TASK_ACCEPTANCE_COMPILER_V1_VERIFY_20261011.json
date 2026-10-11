@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_SOFTWARE_TASK_ACCEPTANCE_COMPILER_V1_VERIFY_20261011",
+  "date": "2026-10-11",
+  "status": "PASS__EXACT_BRANCH_BYTES__TWO_CARRIER_8_OF_8_PLUS_8_OF_8__FAIL_CLOSED__ZERO_MODEL__ZERO_SPEND",
+  "subject": {
+    "runtime_path": "canonical/runtime/bound_capabilities/software_task_acceptance_compiler_v1.py",
+    "runtime_git_blob_sha": "b4fbca159d3ff1a62ecbc7c63d5459a66d91c61f",
+    "runtime_sha256": "0fde73c1094fc9296f58336efb45b49a27ed105907678df26cea6c2d9800277c",
+    "test_path": "canonical/tests/test_software_task_acceptance_compiler_v1.py",
+    "test_git_blob_sha": "fcd6a41ab172d2b86ab1d644cd0a2b90a1984cb0",
+    "test_sha256": "b9918192bb38fb208769ab1504fb59d05f622e53d01151efac9c3c0202d690f6"
+  },
+  "contract": {
+    "input": "RAW_SOFTWARE_TASK_TEXT_PLUS_REPOSITORY_LOCAL_PYTHON_TEST_FILES",
+    "decomposition": "CONSERVATIVE_BULLET_SENTENCE_SEMICOLON_AND_ACTION_CONJUNCTION_SPLIT",
+    "positive_binding": "EXACT_SYMBOL_PLUS_EXPECTED_LITERAL_TO_STRUCTURALLY_PARSED_UNITTEST_OR_PYTEST_ASSERTION",
+    "fail_closed_states": [
+      "UNBOUND_SEMANTIC_REQUIREMENT",
+      "AMBIGUOUS_TEST_EVIDENCE",
+      "PARTIAL_TEST_MATCH_WITH_UNBOUND_SEMANTICS"
+    ],
+    "complete_only_when": "EVERY_EXPLICIT_CLAUSE_IS_BOUND_BY_EXACT_TEST_EVIDENCE"
+  },
+  "first_carrier": {
+    "sprite": "brain-capability-first-scheduler-verify-20261008-v1",
+    "exact_branch_bytes": true,
+    "tests_executed": 8,
+    "tests_passed": 8,
+    "runtime_sha256": "0fde73c1094fc9296f58336efb45b49a27ed105907678df26cea6c2d9800277c",
+    "test_sha256": "b9918192bb38fb208769ab1504fb59d05f622e53d01151efac9c3c0202d690f6"
+  },
+  "second_carrier": {
+    "sprite": "brain-cad-proof-clean-20261009",
+    "exact_branch_bytes": true,
+    "tests_executed": 8,
+    "tests_passed": 8,
+    "runtime_sha256": "0fde73c1094fc9296f58336efb45b49a27ed105907678df26cea6c2d9800277c",
+    "test_sha256": "b9918192bb38fb208769ab1504fb59d05f622e53d01151efac9c3c0202d690f6"
+  },
+  "covered_cases": [
+    "UNITTEST_NUMERIC_EXACT_BINDING",
+    "COMPOUND_REQUIREMENT_SPLIT_AND_COMPLETE_BINDING",
+    "EXTRA_UNTESTED_SEMANTICS_PRESERVED_AS_UNBOUND",
+    "PYTEST_STYLE_BOOLEAN_ASSERTION_BINDING",
+    "DUPLICATE_EVIDENCE_AMBIGUITY_REJECTED",
+    "EMPTY_TASK_REJECTED",
+    "PATH_ESCAPE_REJECTED",
+    "ZERO_MODEL_ZERO_SPEND_AND_UNBOUND_REQUIREMENT_PRESERVATION"
+  ],
+  "authority": {
+    "explicit_test_bound_acceptance_contract_verified": true,
+    "general_natural_language_semantics": false,
+    "hidden_requirement_inference": false,
+    "test_suite_completeness": false,
+    "mergeability_authority": false,
+    "frontiercode_score_authority": false,
+    "promotion_authority": false,
+    "terminal_authority": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "model_dependency_count": 0,
+    "external_capability_provider_count": 0
+  }
+}
