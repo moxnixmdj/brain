@@ -1,0 +1,105 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_175_UNEXPOSED_POPULATION_PRECOMMIT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "FROZEN_BEFORE_PROMPT_RUBRIC_GOLD_MODEL_SUBMISSION_OR_JUDGE_EXPOSURE__175_TASKS__ZERO_SCORE_CREDIT",
+  "benchmark": "GDPval-AA v2.1",
+  "dataset": {
+    "owner": "openai",
+    "name": "gdpval",
+    "revision_sha": "11e7900cdcac61bc4daf59e65feb238acda98fbf",
+    "population_count": 220
+  },
+  "source_manifest": {
+    "schema": "PROJECT_BRAIN_GDPVAL_220_PREOUTPUT_PACKET_MANIFEST_V1",
+    "manifest_root_sha256": "f69af30fcea243ccb25d44c4a5380be0cdcac621287568525065034ce6cedae8"
+  },
+  "set_definition": {
+    "algorithm": "TAKE_ALL_220_SOURCE_MANIFEST_PACKETS_SORTED_BY_ROW_IDX__EXCLUDE_EXACT_ROW_INDICES_LISTED_IN_excluded_rows__PROJECT_FIELDS_row_idx_task_id_occupation_reference_count_prompt_sha256_packet_sha256_raw_obligation_count__CANONICAL_JSON_SORT_KEYS_COMPACT__SHA256",
+    "excluded_rows": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      60,
+      61,
+      62,
+      83,
+      90,
+      107,
+      130,
+      186,
+      190,
+      217
+    ],
+    "excluded_count": 45,
+    "frozen_rows_count": 175,
+    "frozen_rows_root_sha256": "99d16a37e54139f3704f6ef7b289516af497687a8aa9ebc7eea5faf147060b3b",
+    "first_frozen_row": 35,
+    "last_frozen_row": 219
+  },
+  "exclusion_reason": "FAIL_CLOSED__ROWS_0_34_AND_SEPARATELY_EXPOSED_WAVE_ROWS_ARE_NOT_INCLUDED_EVEN_WHERE_SOME_MAY_STILL_BE_USABLE",
+  "field_firewall": {
+    "allowed_after_this_freeze": [
+      "task_id",
+      "sector",
+      "occupation",
+      "prompt",
+      "reference_files",
+      "reference_file_urls",
+      "reference_file_hf_uris"
+    ],
+    "forbidden_before_each_output_freeze": [
+      "deliverable_files",
+      "deliverable_file_urls",
+      "deliverable_file_hf_uris",
+      "rubric_pretty",
+      "rubric_json",
+      "model_submissions",
+      "judge_feedback"
+    ]
+  },
+  "promotion_rule": "A_FROZEN_TASK_MAY_COUNT_AS_CLEAN_STAGE1_EVIDENCE_ONLY_IF_OUTPUT_BYTES_ARE_FROZEN_AND_CONTENT_ADDRESSED_BEFORE_ANY_FORBIDDEN_FIELD_IS_EXPOSED",
+  "hard_nonclaims": [
+    "NO_175_OUTPUTS_YET",
+    "NO_220_COMPLETE_SUBMISSION_MANIFEST",
+    "NO_ARTIFICIAL_ANALYSIS_OWNER_SCORE",
+    "NO_ELO_1846_CLAIM",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "owner_score_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
