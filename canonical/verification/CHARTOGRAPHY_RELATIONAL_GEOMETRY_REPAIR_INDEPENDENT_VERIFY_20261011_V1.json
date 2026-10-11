@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CHARTOGRAPHY_RELATIONAL_GEOMETRY_REPAIR_INDEPENDENT_VERIFY_20261011_V1",
   "date": "2026-10-11",
-  "status": "PASS__QWEN_FAILURE_CAUSALLY_LOCALIZED__DETERMINISTIC_GEOMETRY_REPAIR_12_OF_12_FROZEN_PLUS_METAMORPHIC__ZERO_DIRECT_89_CREDIT",
+  "status": "PASS__QWEN_FAILURE_CAUSALLY_LOCALIZED__DETERMINISTIC_GEOMETRY_REPAIR_12_OF_12_FROZEN_PLUS_METAMORPHIC__INDEPENDENT_SPRITE_AND_PUBLIC_RUNNER_PASS__ZERO_DIRECT_89_CREDIT",
   "trigger": {
     "public_runner_repository": "moxnixmdj/verification-capsule-runner",
     "workflow_run_id": 38109910675,
@@ -77,5 +77,13 @@
     "acceptance_credit_delta": 0,
     "capability_credit_delta": 0,
     "terminal_credit_delta": 0
+  },
+  "public_runner_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "workflow_run_id": 38110538850,
+    "workflow": "Verify Chartography deterministic geometry V1",
+    "subject_commit": "0e6c6e7a6189be280c0f15208f1f46a8abfea3e9",
+    "conclusion": "success",
+    "relation": "SECOND_INDEPENDENT_EXECUTION_OF_THE_SAME_GENERIC_GEOMETRY_REPAIR_AND_12_CASE_VERIFICATION"
   }
 }
