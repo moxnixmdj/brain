@@ -61,4 +61,14 @@ def decide(state:Mapping[str,Any])->Mapping[str,Any]:
         candidate=_formula(instruction)
         if candidate is not None:
             return _finish_or_candidate(state,candidate)
+        if re.search(r"\bformula\b", instruction, re.I):
+            return {
+                "response":"formula request is not mechanically identified",
+                "actions":[{"type":"WAIT"}],
+                "_policy_receipt":{
+                    "route":"FORMULA_REQUEST_FAIL_CLOSED",
+                    "task_specific_policy_data":False,
+                    "external_model_dependency":False,
+                },
+            }
     return base_decide(state)
