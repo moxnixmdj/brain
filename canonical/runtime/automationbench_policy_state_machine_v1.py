@@ -29,7 +29,7 @@ from canonical.runtime.generic_goal_tool_effect_planner_v1 import (
     plan_goal_over_tool_schemas,
 )
 from canonical.runtime.generic_tool_argument_binder_v1 import bind_endpoint_call
-from canonical.runtime.generic_goal_state_verifier_v1 import verify_goal_state
+from canonical.runtime.generic_goal_state_verifier_v2 import verify_goal_state
 
 SCHEMA = "PROJECT_BRAIN_AUTOMATIONBENCH_POLICY_STATE_MACHINE_V1"
 
@@ -106,6 +106,45 @@ def _tool_results_after_semantic(
         if (
             seen
             and str(row.get("kind") or row.get("type") or "") == "tool_result"
+            and str(row.get("name") or row.get("tool") or "") == "api_fetch"
+        ):
+            out.append(_payload(row))
+    return out
+
+
+def _assistant_receipts(
+    history: Sequence[Mapping[str, Any]],
+    metadata_key: str,
+) -> list[Any]:
+    out: list[Any] = []
+    for row in history:
+        if not isinstance(row, Mapping):
+            continue
+        metadata = row.get("metadata")
+        if not isinstance(metadata, Mapping):
+            continue
+        value = metadata.get(metadata_key)
+        if isinstance(value, list):
+            out.extend(value)
+        elif value is not None:
+            out.append(value)
+    return out
+
+
+def _pre_generic_action_observations(
+    history: Sequence[Mapping[str, Any]],
+) -> list[Any]:
+    out: list[Any] = []
+    for row in history:
+        if not isinstance(row, Mapping):
+            continue
+        metadata = row.get("metadata")
+        if isinstance(metadata, Mapping):
+            semantic = str(metadata.get("project_brain/automationbench_semantic") or "")
+            if semantic.startswith("GENERIC_TOOL_EFFECT::"):
+                break
+        if (
+            str(row.get("kind") or row.get("type") or "") == "tool_result"
             and str(row.get("name") or row.get("tool") or "") == "api_fetch"
         ):
             out.append(_payload(row))
@@ -221,6 +260,13 @@ def next_policy_action(
                 "semantic": semantic,
                 "generic_capability_id": capability_id,
                 "generic_endpoint_id": endpoint_id,
+                "generic_execution_receipt": {
+                    "action_class": str(step.get("action_class") or ""),
+                    "capability_id": capability_id,
+                    "endpoint_id": endpoint_id,
+                    "bindings": dict(bound.get("bindings") or {}),
+                    "arguments": dict(bound.get("arguments") or {}),
+                },
                 "calls": [{"tool":"api_fetch","arguments":bound["arguments"]}],
             }
         generic_bind_failures.append(
@@ -259,6 +305,7 @@ def next_policy_action(
         if not _semantic_done(history, verify_semantic):
             selected_ids = set(generic_plan.get("observation_endpoint_ids") or [])
             verification_calls: list[dict[str, Any]] = []
+            verification_receipts: list[dict[str, Any]] = []
             seen_calls: set[str] = set()
             for endpoint_id in selected_ids:
                 endpoint = endpoint_by_id.get(endpoint_id)
@@ -279,6 +326,12 @@ def next_policy_action(
                     continue
                 seen_calls.add(signature)
                 verification_calls.append({"tool":"api_fetch","arguments":args})
+                verification_receipts.append({
+                    "endpoint_id": endpoint_id,
+                    "method": "GET",
+                    "bindings": dict(bound.get("bindings") or {}),
+                    "arguments": dict(args),
+                })
                 if len(verification_calls) >= max_parallel_calls:
                     break
             if verification_calls:
@@ -288,6 +341,7 @@ def next_policy_action(
                     "phase": "VERIFY_STATE",
                     "planner_mode": "GENERIC_GOAL_TOOL_EFFECT_PLANNER",
                     "semantic": verify_semantic,
+                    "generic_verification_receipts": verification_receipts,
                     "calls": verification_calls,
                 }
             return {
@@ -303,10 +357,20 @@ def next_policy_action(
             history,
             verify_semantic,
         )
+        execution_receipts = _assistant_receipts(
+            history,
+            "project_brain/generic_execution_receipt",
+        )
+        verification_receipts = _assistant_receipts(
+            history,
+            "project_brain/generic_verification_receipts",
+        )
         verification = verify_goal_state(
             goal=prompt,
-            context_observations=observations,
+            context_observations=_pre_generic_action_observations(history),
             verification_observations=verification_observations,
+            execution_receipts=execution_receipts,
+            verification_receipts=verification_receipts,
         )
         if verification.get("pass") is True:
             return {
