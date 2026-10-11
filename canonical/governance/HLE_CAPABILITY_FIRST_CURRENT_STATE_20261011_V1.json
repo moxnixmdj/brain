@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_CAPABILITY_FIRST_CURRENT_STATE_20261011_V1",
+  "date": "2026-10-11",
+  "status": "CAPABILITY_FIRST_ACTIVE__DATASET_ACCESS_CLOSED__MULTIBACKEND_RETRIEVAL_REPAIR_IMPLEMENTED",
+  "mission": {
+    "primary": "PROVE_OR_FALSIFY_BRAIN_CAPABILITY_NONINFERIORITY_TO_THE_CAPABILITY_DEMONSTRATED_BY_HLE_WITH_TOOLS_67_7",
+    "exact_score_branch": "AUDIT_ONLY_UNLESS_LITERAL_OWNER_PROTOCOL_SCORE_IS_REQUIRED",
+    "benchmark_execution_is_not_primary_work": true
+  },
+  "canonical_updates": {
+    "benchmark_information_output_law": "c91495a9852bc732bc736cad4a8ea308abb71b8b",
+    "hle_capability_first_lock": "4b7d713e257656855baf1eb5c4beefa1e8ded8f2",
+    "uploaded_dataset_quarantine": "2025ac372142973ac93a6aec25f1d0d7adae530f",
+    "open_web_fallback_runtime_commit": "d817eaa94f888980dae0e9d37432e9d4d8964c34",
+    "open_web_fallback_tests_commit": "bf034743294ba546b4d5df5ab831283e040f8bf4",
+    "open_web_fallback_preflight": "289a0afa542f84e09be78f916be74ca10f80d70d"
+  },
+  "dataset": {
+    "access_blocker_closed": true,
+    "rows": 2500,
+    "byte_size": 274276147,
+    "sha256": "6d0ee0602e8aea6b159509577e884f48ecac7b8e3f6822a35f51335a446c726a",
+    "original_gold_bearing_file_quarantined": true,
+    "brain_terminal_cases_consumed": 0
+  },
+  "current_bottleneck": {
+    "prior_consumed_public_retrieval_recall": 0.52,
+    "issue": "SOURCE_HEALTH_AND_RETRIEVAL_RECALL",
+    "repaired_mechanism": "ANSWER_BLIND_SEQUENTIAL_MULTI_BACKEND_OPEN_WEB_FALLBACK_WITH_EXPLICIT_BACKEND_HEALTH",
+    "runtime_blob": "f03db468c1b9a1d5425d1eaf49966e6c8484819a",
+    "tests_blob": "5e64895795f39e4a50e53664167dd0e3ec3bc3c4",
+    "local_tests": "4/4 PASS",
+    "independent_replay": "NOT_YET_OBSERVED"
+  },
+  "next_admissible_actions": [
+    "INDEPENDENTLY_REPLAY_EXACT_RUNTIME_AND_TEST_BLOBS_AT_ZERO_INCREMENTAL_SPEND",
+    "IF_PASS_RUN_ONLY_ALREADY_CONSUMED_TRIVIA_QA_ROWS_25_TO_49_TO_MEASURE_RETRIEVAL_RECALL_AND_BACKEND_HEALTH",
+    "PROMOTE_ONLY_IF_CAUSAL_IMPROVEMENT_IS_OBSERVED",
+    "DO_NOT_CONSUME_FRESH_HLE_FOR_DEVELOPMENT"
+  ],
+  "hard_nonclaims": [
+    "NO_HLE_SCORE_AT_OR_ABOVE_67_7_CLAIM",
+    "NO_TARGET_GRADER_EQUIVALENCE_CLAIM",
+    "NO_INDEPENDENT_PASS_FOR_THE_NEW_FALLBACK_YET",
+    "NO_EXTERNAL_MODEL_SOLVER_CREDIT"
+  ],
+  "hle_score_credit": 0,
+  "hle_67_7_certified": false,
+  "incremental_spend_usd": 0
+}
