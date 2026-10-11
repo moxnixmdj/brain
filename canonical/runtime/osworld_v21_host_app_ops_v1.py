@@ -8,6 +8,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 import json
+import re
 from pathlib import Path
 from typing import Any, Mapping
 
@@ -113,14 +114,47 @@ class OSWorldHostAppOps:
         if not cls.isidentifier() or not operation.isidentifier() or not app.isidentifier():
             raise AppOpsError("APP_OP_IDENTIFIER_INVALID")
 
-        # repr() makes the JSON blob data, never executable source supplied by policy.
-        program = (
-            "import json; "
-            f"from {app} import *; "
-            f"_a=json.loads({args_json!r}); "
-            f"_r={cls}.{operation}(**_a); "
-            "print(json.dumps({'result':_r},ensure_ascii=False,default=str))"
-        )
+        # Formula writes need a read-back postcondition. The policy still supplies
+        # only data; the executable program is fixed here.
+        if app == "libreoffice_calc" and operation == "set_cell_formula_verified":
+            cell = args.get("cell")
+            formula = args.get("formula")
+            if (
+                not isinstance(cell, str)
+                or re.fullmatch(r"[A-Z]{1,3}[1-9][0-9]{0,6}", cell.upper()) is None
+            ):
+                raise AppOpsError("FORMULA_CELL_INVALID")
+            if (
+                not isinstance(formula, str)
+                or not formula.startswith("=")
+                or len(formula) > 2000
+                or "\x00" in formula
+            ):
+                raise AppOpsError("FORMULA_INVALID")
+            normalized_args = {"cell": cell.upper(), "formula": formula}
+            formula_json = json.dumps(
+                normalized_args, ensure_ascii=False, separators=(",", ":")
+            )
+            program = (
+                "import json; "
+                "from libreoffice_calc import *; "
+                f"_a=json.loads({formula_json!r}); "
+                "_c=CalcTools.sheet.getCellRangeByName(_a['cell']); "
+                "_c.Formula=_a['formula']; "
+                "_actual=_c.Formula; "
+                "assert _actual==_a['formula'], 'FORMULA_READBACK_MISMATCH'; "
+                "print(json.dumps({'result':{'cell':_a['cell'],'formula':_actual,"
+                "'value':_c.Value}},ensure_ascii=False,default=str))"
+            )
+        else:
+            # repr() makes the JSON blob data, never executable source supplied by policy.
+            program = (
+                "import json; "
+                f"from {app} import *; "
+                f"_a=json.loads({args_json!r}); "
+                f"_r={cls}.{operation}(**_a); "
+                "print(json.dumps({'result':_r},ensure_ascii=False,default=str))"
+            )
 
         try:
             result = self.environment.controller.execute_python_command(program)
