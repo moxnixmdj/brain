@@ -1,0 +1,76 @@
+{
+  "schema": "PROJECT_BRAIN_FINANCE_AGENT_V2_DONOR_FREE_NATIVE_CORE_CURRENT_MAIN_VERIFICATION_20261011_V2",
+  "date": "2026-10-11",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__CURRENT_MAIN_EXACT_FINANCE_BLOBS__62_OF_62__ZERO_BENCHMARK_CREDIT",
+  "target": "FINANCE_AGENT_V2_GE_58_59",
+  "brain_main_observed_commit": "350b3a862a8262c060fc8d516c625058632def9a",
+  "supersedes": "canonical/verification/FINANCE_AGENT_V2_DONOR_FREE_NATIVE_CORE_PUBLIC_RUNNER_VERIFICATION_20261011_V1.json",
+  "verified_subjects": {
+    "canonical/runtime/finance_quantitative_algebra_v1.py": "efeecdb5faa595db75595bed2b87f9104e16882d",
+    "canonical/runtime/finance_quantitative_dependency_v1.py": "57d250414b1f064dd243d1d98e8cde7c85cf6858",
+    "canonical/runtime/finance_quantitative_question_contract_v1.py": "24a17cf65b0db07fedef9d1a99b1662b58c0448c",
+    "canonical/runtime/finance_metric_xbrl_registry_v1.py": "a64271e46811c8c1a440a344045ca1f38c30a519",
+    "canonical/runtime/finance_sec_ticker_cik_from_registry_v1.py": "55a72e8b4fdbadd14948857ca3d70b31d3c13629",
+    "canonical/runtime/finance_sec_fact_selector_v1.py": "03957a8bd33329db5102236c2acc6974b8a8a71c",
+    "canonical/runtime/finance_market_price_series_v1.py": "02fbcee19c186db6c832af7690b6118040bab567",
+    "canonical/runtime/finance_modeling_workflows_v1.py": "a4cbd055df1771f278873e3d922a68d468442242",
+    "canonical/tests/test_finance_quantitative_algebra_v1.py": "3a3ab3a5203fe10e25cb407e6454fa95ff9a27a0",
+    "canonical/tests/test_finance_quantitative_dependency_v1.py": "86f29998362b686d1fa314002517010c2b8d3ef6",
+    "canonical/tests/test_finance_quantitative_question_contract_v1.py": "ce7cfc058756ed3d498cba1d55b78b366c5b2a02",
+    "canonical/tests/test_finance_metric_xbrl_registry_v1.py": "967041308f07a4b57aee7c0bb90ab5ad4fed9bab",
+    "canonical/tests/test_finance_sec_ticker_cik_from_registry_v1.py": "a2e38c0cc92dd1e74c39b66c127ebd5d4f830d73",
+    "canonical/tests/test_finance_sec_fact_selector_v1.py": "92193ff9e25748edecd47d0fe9c05856087a4dc9",
+    "canonical/tests/test_finance_market_price_series_v1.py": "42f32b1e0f9d78d3c924527e1b579f135844d253",
+    "canonical/tests/test_finance_modeling_workflows_v1.py": "77fc1d9f641548b87aa81a7bd3630838c20a5e2b"
+  },
+  "q26_precision_repair": {
+    "existing_debt_million": "25.034",
+    "expected_initial_sponsor_equity_million": "6300.07",
+    "old_rounded_test_blob": "0d61a56bd644b020d8a41a2a5c368ca351df279c",
+    "current_exact_test_blob": "77fc1d9f641548b87aa81a7bd3630838c20a5e2b"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2672,
+    "head_commit": "a14165b2e213d80ca5511ce3e198df73fd3f3756",
+    "workflow_name": "Verify Finance Brain-native core",
+    "workflow_run_id": 38139763826,
+    "job_id": 114471023184,
+    "conclusion": "success",
+    "exact_blob_binding_step": "success",
+    "compile_step": "success",
+    "focused_tests_passed": 62,
+    "focused_tests_failed": 0,
+    "pytest_runtime_seconds": 0.46
+  },
+  "ownership_boundary": {
+    "external_general_purpose_model_cognition_in_verified_subject": false,
+    "qwen_or_other_model_runtime_required": false,
+    "donor_runtime_dependency_count": 0,
+    "benchmark_score_credit": 0
+  },
+  "proved": [
+    "THE_CURRENT_MAIN_FINANCE_NATIVE_CORE_BYTES_LISTED_ABOVE_MATCH_THE_INDEPENDENT_RUNNER_SUBJECT",
+    "EXACT_BLOB_BINDING_PASSED",
+    "THE_EIGHT_FINANCE_RUNTIME_MODULES_COMPILED",
+    "THE_FOCUSED_DONOR_FREE_FINANCE_SUITE_PASSED_62_OF_62",
+    "THE_Q26_DEBT_PRECISION_REPAIR_IS_INCLUDED_IN_THE_VERIFIED_SUBJECT"
+  ],
+  "hard_nonclaims": [
+    "NO_PRIVATE_FINANCE_AGENT_V2_TASK_WAS_EXECUTED",
+    "NO_FINANCE_AGENT_V2_SCORE_CREDIT",
+    "NO_CLAIM_FINANCE_AGENT_V2_GE_58_59",
+    "NO_TARGET_GRADER_EQUIVALENCE_CLAIM",
+    "NO_CLAIM_PUBLIC_CANARIES_OR_62_FOCUSED_TESTS_PROVE_PRIVATE_BENCHMARK_TRANSFER"
+  ],
+  "remaining_terminal_obligation": {
+    "certificate": "THREE_VALID_BRAIN_RUN_SCORE_LOWER_BOUNDS_SUM_TO_AT_LEAST_175_77_OR_EQUIVALENT_AUTHENTIC_SCORE_EVIDENCE",
+    "threshold_sum": 175.77
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "private_cases_exposed": 0,
+    "benchmark_score_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
