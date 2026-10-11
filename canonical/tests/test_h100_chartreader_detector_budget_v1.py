@@ -19,9 +19,11 @@ def test_exact_static_counts():
     assert GROUP.qchannels==75_854
 
 def test_h100_storage_race():
-    assert RESULT["first_q4_bytes"]==49_301_704\n    assert RESULT["first_int8_bytes"]==97_874_568
+    assert RESULT["first_q4_bytes"]==49_301_704
+    assert RESULT["first_int8_bytes"]==97_874_568
     assert RESULT["full_q4_bytes"]==98_793_680
     assert RESULT["group_q4_bytes"]==101_403_784
-    assert RESULT["first_q4_bytes"]<BUDGET\n    assert RESULT["first_int8_bytes"]<BUDGET
+    assert RESULT["first_q4_bytes"]<BUDGET
+    assert RESULT["first_int8_bytes"]<BUDGET
     assert RESULT["full_q4_bytes"]<BUDGET
     assert RESULT["group_q4_bytes"]>BUDGET
