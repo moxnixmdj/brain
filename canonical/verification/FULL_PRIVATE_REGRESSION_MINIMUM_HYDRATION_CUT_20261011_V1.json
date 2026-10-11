@@ -1,0 +1,989 @@
+{
+  "schema": "PROJECT_BRAIN_FULL_PRIVATE_REGRESSION_MINIMUM_HYDRATION_CUT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "MEASURED__EXACT_PRIVATE_TEST_RUNTIME_TRANSPORT_REDUCED_TO_MINIMUM_HASH_DELTA__NO_REGRESSION_RESULT__ZERO_CREDIT",
+  "objective": "Replace the false whole-repository/authentication-size blocker with the exact content-addressed byte delta required to reconstruct the private current regression test/runtime universe from the preserved private carrier snapshot.",
+  "observed_subject": {
+    "main_commit_sha": "63e58d35d7dc5993a58ed6add6b674830fedf891",
+    "root_tree_sha": "1b8924f259b3195a19055cae657f7fc6da65f935",
+    "canonical_tree_sha": "1069a7318953cdf08d1f6caa0a81cf4843e24b36",
+    "recursive_tree_truncated": false,
+    "regression_workflow_path": ".github/workflows/full-private-current-main-regression.yml",
+    "regression_workflow_git_blob_sha": "fb499e58f498161554ccf6677f02cd03e485479b"
+  },
+  "preserved_private_snapshot": {
+    "manifest_commit_sha": "d32a41dd0623cb5718381cb632a2e434bea7773a",
+    "manifest_canonical_tree_sha": "e49a983992362b8308b0e1e471553c15e19489d4",
+    "manifest_row_count": 3668,
+    "provenance": "PRESERVED_PRIVATE_REGRESSION_WORKTREE_MANIFEST__CHATGPT_CONNECTED_CARRIER_READ__NO_NEW_EXECUTION"
+  },
+  "exact_runtime_test_universe": {
+    "current_row_count": 3803,
+    "current_tests_count": 1851,
+    "current_runtime_count": 1952,
+    "current_total_bytes": 25285970,
+    "byte_identical_row_count": 3630,
+    "byte_identical_fraction": 0.95451,
+    "added_row_count": 136,
+    "changed_row_count": 37,
+    "deleted_row_count": 1,
+    "hydrate_row_count": 173,
+    "hydrate_bytes": 1348464,
+    "delete_bytes": 1391
+  },
+  "minimum_hydration_delta": {
+    "added": [
+      {
+        "path": "canonical/runtime/aa_briefcase_component_summary_noninversion_v1.py",
+        "git_blob_sha": "a171e04818a68e974fe156aa7fc4e3479289f685",
+        "size": 2670
+      },
+      {
+        "path": "canonical/runtime/aa_briefcase_crowdbt_exchange_dominance_v1.py",
+        "git_blob_sha": "6c8d117494d7676b362f601e7297fb8f73bcec23",
+        "size": 6774
+      },
+      {
+        "path": "canonical/runtime/aa_briefcase_crowdbt_internal_lower_bound_v1.py",
+        "git_blob_sha": "114f26a26e244188684f55698c6b413ef557b13e",
+        "size": 4131
+      },
+      {
+        "path": "canonical/runtime/aa_briefcase_frozen_epoch_result_bridge_v2.py",
+        "git_blob_sha": "112c8cc16896857fa57787834dcdc3ff83639ce7",
+        "size": 9648
+      },
+      {
+        "path": "canonical/runtime/aa_briefcase_internal_only_certification_gate_v1.py",
+        "git_blob_sha": "441b324a93f71805af59db3b32d6e496d573c524",
+        "size": 2522
+      },
+      {
+        "path": "canonical/runtime/aa_briefcase_internal_only_certification_gate_v2.py",
+        "git_blob_sha": "a3017301c7e005381c02f3c7d4a39d1eb859f047",
+        "size": 2536
+      },
+      {
+        "path": "canonical/runtime/aa_briefcase_internal_only_certification_gate_v3.py",
+        "git_blob_sha": "6262c6ac09d4cd9d41041481be5c7c9ba75437b0",
+        "size": 4349
+      },
+      {
+        "path": "canonical/runtime/aa_briefcase_internal_proof_route_completeness_v1.py",
+        "git_blob_sha": "8338237befc9eba0fde5b40203213185e8415ac9",
+        "size": 2306
+      },
+      {
+        "path": "canonical/runtime/aa_briefcase_internal_top_support_bridge_v1.py",
+        "git_blob_sha": "d1046ea238d07efc537b3d600410c18fbcf3c6ca",
+        "size": 5463
+      },
+      {
+        "path": "canonical/runtime/aa_briefcase_owner_handoff_gate_v1.py",
+        "git_blob_sha": "1e1ff8e87cd826a95254707979ffe7542b467e52",
+        "size": 10877
+      },
+      {
+        "path": "canonical/runtime/aa_briefcase_private_rubric_expressivity_cut_v1.py",
+        "git_blob_sha": "13222e2611888212f62d97afa2d6735bd4c00308",
+        "size": 3393
+      },
+      {
+        "path": "canonical/runtime/aa_briefcase_public_interface_outcome_superdomain_v1.py",
+        "git_blob_sha": "5369c1b03310a3c74095c60f5607c754dc5c403c",
+        "size": 5083
+      },
+      {
+        "path": "canonical/runtime/aa_briefcase_rubric_only_bypass_gate_v1.py",
+        "git_blob_sha": "1da14e3c40228fcba32a3d245167595a04d65745",
+        "size": 3177
+      },
+      {
+        "path": "canonical/runtime/aa_briefcase_score_bearing_sufficient_statistic_v1.py",
+        "git_blob_sha": "4b5e4292c2051e263da8dbd3a9758f461250d6f0",
+        "size": 6016
+      },
+      {
+        "path": "canonical/runtime/aa_briefcase_top_support_collapse_v1.py",
+        "git_blob_sha": "0c88d4346f028200259492a76e338e6d7086548f",
+        "size": 3768
+      },
+      {
+        "path": "canonical/runtime/aa_briefcase_trace_scorer_nonidentifiability_v1.py",
+        "git_blob_sha": "86e023a74c7aa53289ab3b5b292747d9d640279a",
+        "size": 5888
+      },
+      {
+        "path": "canonical/runtime/automationbench_mutation_compiler_v1.py",
+        "git_blob_sha": "a238968935bf760273a5125fc557c43989b9b427",
+        "size": 10637
+      },
+      {
+        "path": "canonical/runtime/automationbench_owned_policy_kernel_v1.py",
+        "git_blob_sha": "6cda2fc1fc80272546228017d255c9fe46bc085c",
+        "size": 14613
+      },
+      {
+        "path": "canonical/runtime/automationbench_policy_state_machine_v1.py",
+        "git_blob_sha": "c3b689157b6034c5e01a2618c45793fceb5a67a7",
+        "size": 5765
+      },
+      {
+        "path": "canonical/runtime/automationbench_private_owner_receipt_verifier_v1.py",
+        "git_blob_sha": "8b4bfbe87352479d9524b92a9948fcd0129ea337",
+        "size": 10025
+      },
+      {
+        "path": "canonical/runtime/automationbench_stirrup_client_v1.py",
+        "git_blob_sha": "f8096ba4a55e0b2a569e21c461c49431cc835894",
+        "size": 6342
+      },
+      {
+        "path": "canonical/runtime/capability_transfer_ownership_gate_v1.py",
+        "git_blob_sha": "00745fc91ff576cd90f5c57497eb03e244475599",
+        "size": 3337
+      },
+      {
+        "path": "canonical/runtime/chartography_brain_credit_subject_gate_v1.py",
+        "git_blob_sha": "a69d79f8420cbe58de942cefebc1bfef2aba1843",
+        "size": 4568
+      },
+      {
+        "path": "canonical/runtime/current_projection_consistency_guard_v1.py",
+        "git_blob_sha": "c38b4ee2ec52e793ebec4f3c3b56d64a9f4e172c",
+        "size": 4283
+      },
+      {
+        "path": "canonical/runtime/dna_storage_codec_v1.py",
+        "git_blob_sha": "3734ad7c4674d9ebe77dbaf0592ea10d0a6cb451",
+        "size": 18492
+      },
+      {
+        "path": "canonical/runtime/dna_storage_task_adapter_v1.py",
+        "git_blob_sha": "2009dabd5870218550fcc5af74dc6c4822269818",
+        "size": 9320
+      },
+      {
+        "path": "canonical/runtime/dna_storage_task_kernel_v1.py",
+        "git_blob_sha": "ade8e7ce619112f8d89d9c83f00d5b7b143e5bb1",
+        "size": 12474
+      },
+      {
+        "path": "canonical/runtime/field_scoped_work_unit_validity_guard_v1.py",
+        "git_blob_sha": "7afcc06a8071c5af9b6ac93e4ecceb8210e01d53",
+        "size": 18964
+      },
+      {
+        "path": "canonical/runtime/finance_agent_v2_brain_native_llm_v1.py",
+        "git_blob_sha": "9ec61256da933b91edad92620fd3d019ac141eff",
+        "size": 21803
+      },
+      {
+        "path": "canonical/runtime/finance_index_direct_result_bridge_v1.py",
+        "git_blob_sha": "d9a75f82e41b4b70052cf0974caacf7faef82e07",
+        "size": 9621
+      },
+      {
+        "path": "canonical/runtime/finance_market_price_series_v1.py",
+        "git_blob_sha": "02fbcee19c186db6c832af7690b6118040bab567",
+        "size": 4845
+      },
+      {
+        "path": "canonical/runtime/finance_metric_xbrl_registry_v1.py",
+        "git_blob_sha": "a64271e46811c8c1a440a344045ca1f38c30a519",
+        "size": 9047
+      },
+      {
+        "path": "canonical/runtime/finance_modeling_workflows_v1.py",
+        "git_blob_sha": "a4cbd055df1771f278873e3d922a68d468442242",
+        "size": 13685
+      },
+      {
+        "path": "canonical/runtime/finance_quantitative_algebra_v1.py",
+        "git_blob_sha": "efeecdb5faa595db75595bed2b87f9104e16882d",
+        "size": 11606
+      },
+      {
+        "path": "canonical/runtime/finance_quantitative_dependency_v1.py",
+        "git_blob_sha": "57d250414b1f064dd243d1d98e8cde7c85cf6858",
+        "size": 7844
+      },
+      {
+        "path": "canonical/runtime/finance_quantitative_question_contract_v1.py",
+        "git_blob_sha": "24a17cf65b0db07fedef9d1a99b1662b58c0448c",
+        "size": 6889
+      },
+      {
+        "path": "canonical/runtime/finance_sec_fact_selector_v1.py",
+        "git_blob_sha": "03957a8bd33329db5102236c2acc6974b8a8a71c",
+        "size": 7722
+      },
+      {
+        "path": "canonical/runtime/finance_sec_ticker_cik_from_registry_v1.py",
+        "git_blob_sha": "55a72e8b4fdbadd14948857ca3d70b31d3c13629",
+        "size": 2829
+      },
+      {
+        "path": "canonical/runtime/harbor_science_dna_storage_agent_v1.py",
+        "git_blob_sha": "ef4832b8fff0197cb9f0fe87196fbe2521e312f5",
+        "size": 9679
+      },
+      {
+        "path": "canonical/runtime/harbor_science_zero_model_agent_v1.py",
+        "git_blob_sha": "79d9f08b5d3bb1a75842247bd427dd417f5d5e21",
+        "size": 10032
+      },
+      {
+        "path": "canonical/runtime/hle_evidence_candidate_synthesis_v1.py",
+        "git_blob_sha": "4cd588212d12fdff726b6e153631dbef1282e14e",
+        "size": 10246
+      },
+      {
+        "path": "canonical/runtime/hle_evidence_candidate_synthesis_v2.py",
+        "git_blob_sha": "66b6a9e8292b2f1404abbd6b890e36e026b03d51",
+        "size": 10571
+      },
+      {
+        "path": "canonical/runtime/hle_evidence_candidate_synthesis_v3.py",
+        "git_blob_sha": "ed2e0b572b33a5ed3c84d748689ee71645460dbf",
+        "size": 9537
+      },
+      {
+        "path": "canonical/runtime/hle_exact_commit_semantic_certificate_v1.py",
+        "git_blob_sha": "b44e3c4803934a5661c4f5f58cfeb342ec43305c",
+        "size": 8004
+      },
+      {
+        "path": "canonical/runtime/hle_exact_retrieval_extract_v1.py",
+        "git_blob_sha": "11c6b01974b8c095a4243e000bb8e7bb579d7d54",
+        "size": 9205
+      },
+      {
+        "path": "canonical/runtime/hle_exact_retrieval_extract_v2.py",
+        "git_blob_sha": "1c9d1c9096af91e05f67c3ead3068b0daf0ab033",
+        "size": 4610
+      },
+      {
+        "path": "canonical/runtime/hle_exact_retrieval_span_v1.py",
+        "git_blob_sha": "44c6bd46a4ba238d1c62fbc973b89d8ab071fd91",
+        "size": 11444
+      },
+      {
+        "path": "canonical/runtime/hle_image_observation_v1.py",
+        "git_blob_sha": "bcc8e67319c54937745fb3d6d0934b838ec776a9",
+        "size": 3497
+      },
+      {
+        "path": "canonical/runtime/hle_mcq_retrieval_vote_v1.py",
+        "git_blob_sha": "600aed54c599dc5541ce1319a5b0a91df8876f41",
+        "size": 11523
+      },
+      {
+        "path": "canonical/runtime/hle_native_open_domain_research_v5.py",
+        "git_blob_sha": "ae6006af1e578b0690357756e0b899a10323a5f4",
+        "size": 22968
+      },
+      {
+        "path": "canonical/runtime/hle_native_question_contract_v1.py",
+        "git_blob_sha": "7acc064d880f266a28855eefe518ae40ff8ae49b",
+        "size": 9913
+      },
+      {
+        "path": "canonical/runtime/hle_native_question_contract_v2.py",
+        "git_blob_sha": "403091eeb32e20baceed38cbcbb5cfc823871ad9",
+        "size": 7798
+      },
+      {
+        "path": "canonical/runtime/hle_native_question_contract_v3.py",
+        "git_blob_sha": "0865d6baf59b465cf121963dbadd5409a1702671",
+        "size": 6934
+      },
+      {
+        "path": "canonical/runtime/hle_native_research_solver_v3.py",
+        "git_blob_sha": "d719d1eb4d288e2c1062c43d74dd83ad1ba50684",
+        "size": 10280
+      },
+      {
+        "path": "canonical/runtime/hle_native_research_solver_v4.py",
+        "git_blob_sha": "6e40197b55e387b83208095d2deb06da6f58ab57",
+        "size": 11900
+      },
+      {
+        "path": "canonical/runtime/hle_native_research_solver_v5.py",
+        "git_blob_sha": "6fd57f4f3591e4ab09b3e16ffbae399f7aaf93ae",
+        "size": 12172
+      },
+      {
+        "path": "canonical/runtime/hle_native_retrieval_query_planner_v1.py",
+        "git_blob_sha": "2386db287d08153ffb905f8cd89a76f4ebf19d9f",
+        "size": 6685
+      },
+      {
+        "path": "canonical/runtime/hle_native_semantic_compiler_v1.py",
+        "git_blob_sha": "238ebf2ffe23e527fceae919cbc30453a290fdd2",
+        "size": 9417
+      },
+      {
+        "path": "canonical/runtime/hle_native_total_solver_v1.py",
+        "git_blob_sha": "5061d7bc8af639420d3225dfb169821c64820cde",
+        "size": 7725
+      },
+      {
+        "path": "canonical/runtime/hle_native_total_solver_v2.py",
+        "git_blob_sha": "aba3541c400210686c33fff2a551b0f8a79785b5",
+        "size": 7082
+      },
+      {
+        "path": "canonical/runtime/hle_native_total_solver_v3.py",
+        "git_blob_sha": "d8184f34bdba058f6c23f6153a9f288727a7a705",
+        "size": 10324
+      },
+      {
+        "path": "canonical/runtime/hle_quarantine_builder_v1.py",
+        "git_blob_sha": "408919aaa198bcba477bc06a139bb77ea56650a6",
+        "size": 11171
+      },
+      {
+        "path": "canonical/runtime/hle_question_shape_router_v1.py",
+        "git_blob_sha": "7e0b84642dc22784c048fc1b2952c62ccbac83d1",
+        "size": 6293
+      },
+      {
+        "path": "canonical/runtime/hle_symbolic_lark_solver_v2.py",
+        "git_blob_sha": "889f1dab5161c286ed2cbef83188d80e5d038398",
+        "size": 8732
+      },
+      {
+        "path": "canonical/runtime/hle_symbolic_surface_solver_v1.py",
+        "git_blob_sha": "1c9c08d0a9bb08884d682f4071cf485b38699f27",
+        "size": 5897
+      },
+      {
+        "path": "canonical/runtime/ownership_promotion_cognition_provenance_gate_v1.py",
+        "git_blob_sha": "ba1eb3af966e521450a71a0808521876883de520",
+        "size": 2635
+      },
+      {
+        "path": "canonical/runtime/runtime_cognition_credit_guard_v1.py",
+        "git_blob_sha": "4b97298ac0691a40697bb029fcf490dad6afd340",
+        "size": 12653
+      },
+      {
+        "path": "canonical/runtime/tb_science_zero_model_scientific_kernel_v1.py",
+        "git_blob_sha": "fae27cd575296d70a160a0c7f72d5a8127d8b9c1",
+        "size": 17708
+      },
+      {
+        "path": "canonical/runtime/verify_capability_transfer_static_governance_v1.py",
+        "git_blob_sha": "783753159f8da4f6124fee806c13d1e7ce58b39e",
+        "size": 8215
+      },
+      {
+        "path": "canonical/runtime/verify_external_cognition_runtime_lock_v1.py",
+        "git_blob_sha": "7bf2ee3f685fc03a85322f1030e971361486bc99",
+        "size": 560
+      },
+      {
+        "path": "canonical/tests/test_aa_briefcase_component_summary_noninversion_v1.py",
+        "git_blob_sha": "6ed803e7c20d50fbbefb94b40b581305d09e3a6a",
+        "size": 2369
+      },
+      {
+        "path": "canonical/tests/test_aa_briefcase_crowdbt_exchange_dominance_v1.py",
+        "git_blob_sha": "5606c675ef2751a0aa3c0a7397d4f9d9e58891aa",
+        "size": 5002
+      },
+      {
+        "path": "canonical/tests/test_aa_briefcase_crowdbt_internal_lower_bound_v1.py",
+        "git_blob_sha": "b6263842bf661ec7f8d687c583e14556d61a0a75",
+        "size": 3231
+      },
+      {
+        "path": "canonical/tests/test_aa_briefcase_frozen_epoch_result_bridge_v2.py",
+        "git_blob_sha": "3bfc94c3ffe39e15d40611baa1d512a365d5b218",
+        "size": 7046
+      },
+      {
+        "path": "canonical/tests/test_aa_briefcase_internal_only_certification_gate_v1.py",
+        "git_blob_sha": "d820a094376b67d7ca22b683dc8eb16fed268a77",
+        "size": 3161
+      },
+      {
+        "path": "canonical/tests/test_aa_briefcase_internal_only_certification_gate_v2.py",
+        "git_blob_sha": "914c95d6a9988eaf26ca3145c2d96143fee501f7",
+        "size": 3873
+      },
+      {
+        "path": "canonical/tests/test_aa_briefcase_internal_only_certification_gate_v3.py",
+        "git_blob_sha": "2976d038d4dd39a610c96f7f402ba1b0c56a33ea",
+        "size": 4364
+      },
+      {
+        "path": "canonical/tests/test_aa_briefcase_internal_proof_route_completeness_v1.py",
+        "git_blob_sha": "c60b2af1aa4b4950bfed4c8b77a2eeef5c6bda20",
+        "size": 2637
+      },
+      {
+        "path": "canonical/tests/test_aa_briefcase_internal_top_support_bridge_v1.py",
+        "git_blob_sha": "f48ba98370934a18dbeba76df5e5e95346a6fba2",
+        "size": 3778
+      },
+      {
+        "path": "canonical/tests/test_aa_briefcase_owner_handoff_gate_v1.py",
+        "git_blob_sha": "8f290e99559d862927a8591b00c8bac7398b4cb6",
+        "size": 9371
+      },
+      {
+        "path": "canonical/tests/test_aa_briefcase_private_rubric_expressivity_cut_v1.py",
+        "git_blob_sha": "3e84c36db55a963e7b73678ef31edd500d87611b",
+        "size": 1811
+      },
+      {
+        "path": "canonical/tests/test_aa_briefcase_public_interface_outcome_superdomain_v1.py",
+        "git_blob_sha": "d1466f3ef88845019ad8bdc6b7fca8af79877631",
+        "size": 4812
+      },
+      {
+        "path": "canonical/tests/test_aa_briefcase_rubric_only_bypass_gate_v1.py",
+        "git_blob_sha": "4d078b73f33896971831dc2ae14681043381dd63",
+        "size": 2251
+      },
+      {
+        "path": "canonical/tests/test_aa_briefcase_score_bearing_sufficient_statistic_v1.py",
+        "git_blob_sha": "ee593e7d3ff01330d17dde0e9299d915eb09dae0",
+        "size": 4695
+      },
+      {
+        "path": "canonical/tests/test_aa_briefcase_top_support_collapse_v1.py",
+        "git_blob_sha": "1977e713860c4cc238b3201016edd7bd65e94eb3",
+        "size": 2682
+      },
+      {
+        "path": "canonical/tests/test_aa_briefcase_trace_scorer_nonidentifiability_v1.py",
+        "git_blob_sha": "025f187b4af699097afc72300f33b5f29eaceced",
+        "size": 3298
+      },
+      {
+        "path": "canonical/tests/test_automationbench_mutation_compiler_v1.py",
+        "git_blob_sha": "2d718d8b6f9b89d5576c9545def9c9b9225a2925",
+        "size": 3569
+      },
+      {
+        "path": "canonical/tests/test_automationbench_owned_policy_kernel_v1.py",
+        "git_blob_sha": "8c65dd77f5aa9dfcff45644728947ccd1fcbc63a",
+        "size": 6945
+      },
+      {
+        "path": "canonical/tests/test_automationbench_policy_state_machine_v1.py",
+        "git_blob_sha": "199ec81eb68d14beb4c47f42268eba47d2973e8a",
+        "size": 8119
+      },
+      {
+        "path": "canonical/tests/test_automationbench_private_owner_receipt_verifier_v1.py",
+        "git_blob_sha": "a618b44b011b12ae7a5168ff1941b2697cd08daa",
+        "size": 6693
+      },
+      {
+        "path": "canonical/tests/test_automationbench_stirrup_client_v1.py",
+        "git_blob_sha": "f2ddd77a800e51ca899e1a39f3c4ff85d24d07ac",
+        "size": 2622
+      },
+      {
+        "path": "canonical/tests/test_capability_transfer_ownership_gate_v1.py",
+        "git_blob_sha": "e839396653acde0f353a663d86f1c8111ae9ea62",
+        "size": 2955
+      },
+      {
+        "path": "canonical/tests/test_chartography_brain_credit_subject_gate_v1.py",
+        "git_blob_sha": "2722085ca820aab42f52c6f81a034a3447543594",
+        "size": 3409
+      },
+      {
+        "path": "canonical/tests/test_current_projection_consistency_guard_v1.py",
+        "git_blob_sha": "d76836cd5d08537c4b29c602e34dcab5ef345e23",
+        "size": 1961
+      },
+      {
+        "path": "canonical/tests/test_dna_storage_codec_v1.py",
+        "git_blob_sha": "cc4e9aadabb8ba4b146f2a5ace14fcb62488fca8",
+        "size": 6664
+      },
+      {
+        "path": "canonical/tests/test_dna_storage_task_adapter_v1.py",
+        "git_blob_sha": "0df88f2c40150d1861e3468515135b7087058a10",
+        "size": 4304
+      },
+      {
+        "path": "canonical/tests/test_dna_storage_task_kernel_v1.py",
+        "git_blob_sha": "ac4007f1c40303768875ec4068b44d2f91307f3c",
+        "size": 8065
+      },
+      {
+        "path": "canonical/tests/test_field_scoped_work_unit_validity_guard_v1.py",
+        "git_blob_sha": "fab007fce6caa12a85955fcb836349769d1a98a1",
+        "size": 9332
+      },
+      {
+        "path": "canonical/tests/test_finance_agent_v2_brain_native_llm_v1.py",
+        "git_blob_sha": "6ff9462721b99e82c3a09f680034051dac7a2c34",
+        "size": 5723
+      },
+      {
+        "path": "canonical/tests/test_finance_index_direct_result_bridge_v1.py",
+        "git_blob_sha": "c172caace8c5f6a35fe308eb937aaf6d2b792001",
+        "size": 4795
+      },
+      {
+        "path": "canonical/tests/test_finance_market_price_series_v1.py",
+        "git_blob_sha": "42f32b1e0f9d78d3c924527e1b579f135844d253",
+        "size": 1900
+      },
+      {
+        "path": "canonical/tests/test_finance_metric_xbrl_registry_v1.py",
+        "git_blob_sha": "967041308f07a4b57aee7c0bb90ab5ad4fed9bab",
+        "size": 1721
+      },
+      {
+        "path": "canonical/tests/test_finance_modeling_workflows_v1.py",
+        "git_blob_sha": "77fc1d9f641548b87aa81a7bd3630838c20a5e2b",
+        "size": 5030
+      },
+      {
+        "path": "canonical/tests/test_finance_quantitative_algebra_v1.py",
+        "git_blob_sha": "3a3ab3a5203fe10e25cb407e6454fa95ff9a27a0",
+        "size": 4492
+      },
+      {
+        "path": "canonical/tests/test_finance_quantitative_dependency_v1.py",
+        "git_blob_sha": "86f29998362b686d1fa314002517010c2b8d3ef6",
+        "size": 2176
+      },
+      {
+        "path": "canonical/tests/test_finance_quantitative_question_contract_v1.py",
+        "git_blob_sha": "ce7cfc058756ed3d498cba1d55b78b366c5b2a02",
+        "size": 5637
+      },
+      {
+        "path": "canonical/tests/test_finance_sec_fact_selector_v1.py",
+        "git_blob_sha": "92193ff9e25748edecd47d0fe9c05856087a4dc9",
+        "size": 3722
+      },
+      {
+        "path": "canonical/tests/test_finance_sec_ticker_cik_from_registry_v1.py",
+        "git_blob_sha": "a2e38c0cc92dd1e74c39b66c127ebd5d4f830d73",
+        "size": 1566
+      },
+      {
+        "path": "canonical/tests/test_harbor_science_dna_storage_agent_v1.py",
+        "git_blob_sha": "43432e4b118842046b76b9f5d2074125db4c704c",
+        "size": 4124
+      },
+      {
+        "path": "canonical/tests/test_hle_evidence_candidate_synthesis_v1.py",
+        "git_blob_sha": "147065ada36cbe7ca4118eb1a009192baf36e394",
+        "size": 3245
+      },
+      {
+        "path": "canonical/tests/test_hle_evidence_candidate_synthesis_v2.py",
+        "git_blob_sha": "3b057a3869e1c184679e54b9ac9dc58891026297",
+        "size": 2734
+      },
+      {
+        "path": "canonical/tests/test_hle_evidence_candidate_synthesis_v3.py",
+        "git_blob_sha": "8353389de0d820458263545769adadeac24fb0dd",
+        "size": 2744
+      },
+      {
+        "path": "canonical/tests/test_hle_exact_commit_semantic_certificate_v1.py",
+        "git_blob_sha": "0f528eda70a7bc9124164786d2393d93d8a02343",
+        "size": 2612
+      },
+      {
+        "path": "canonical/tests/test_hle_exact_retrieval_extract_v1.py",
+        "git_blob_sha": "c6dc758f37274348e1043c82f4bb77641f143c19",
+        "size": 2384
+      },
+      {
+        "path": "canonical/tests/test_hle_exact_retrieval_extract_v2.py",
+        "git_blob_sha": "e5e239f1a5f6c4c0e2659d21ba731565e7869bcf",
+        "size": 1504
+      },
+      {
+        "path": "canonical/tests/test_hle_exact_retrieval_span_v1.py",
+        "git_blob_sha": "99f94db8d0fefb09344a177df108607534c76e64",
+        "size": 3071
+      },
+      {
+        "path": "canonical/tests/test_hle_image_observation_v1.py",
+        "git_blob_sha": "9a1be711db708abb8ec553a38eea0d5ab12e29cf",
+        "size": 1310
+      },
+      {
+        "path": "canonical/tests/test_hle_mcq_retrieval_vote_v1.py",
+        "git_blob_sha": "97148fd21058a4e9766457fd816a9988d058ce5b",
+        "size": 2994
+      },
+      {
+        "path": "canonical/tests/test_hle_native_question_contract_v1.py",
+        "git_blob_sha": "506feb40e8b0a0ba84c33d683a1ccc03a16c5e2f",
+        "size": 3570
+      },
+      {
+        "path": "canonical/tests/test_hle_native_question_contract_v2.py",
+        "git_blob_sha": "e5d3f3dd57d93eeeb86280ccc6cd8e0b91507b8e",
+        "size": 1891
+      },
+      {
+        "path": "canonical/tests/test_hle_native_question_contract_v3.py",
+        "git_blob_sha": "905bd448d54c602dd0c31a36a852ac43c0737f9d",
+        "size": 1864
+      },
+      {
+        "path": "canonical/tests/test_hle_native_research_solver_v3.py",
+        "git_blob_sha": "551830b7c239f0176fe09c320162a1cc818dec44",
+        "size": 4081
+      },
+      {
+        "path": "canonical/tests/test_hle_native_research_solver_v4.py",
+        "git_blob_sha": "de3ea5ece9f0579ab2d5e268b1802d36879ea292",
+        "size": 2717
+      },
+      {
+        "path": "canonical/tests/test_hle_native_research_solver_v5.py",
+        "git_blob_sha": "40fd1ba846f5815a6be9b0949a85a366fa0051ac",
+        "size": 3397
+      },
+      {
+        "path": "canonical/tests/test_hle_native_retrieval_query_planner_v1.py",
+        "git_blob_sha": "4e8dc179fa9ff534b38ce715a81040726c5daccf",
+        "size": 1672
+      },
+      {
+        "path": "canonical/tests/test_hle_native_semantic_compiler_v1.py",
+        "git_blob_sha": "723d7070e26c81eaf1365e922c68f2bb5226c5a8",
+        "size": 3706
+      },
+      {
+        "path": "canonical/tests/test_hle_native_total_solver_v1.py",
+        "git_blob_sha": "873628fcf208163eec2c78933065bd7ff09adeab",
+        "size": 3468
+      },
+      {
+        "path": "canonical/tests/test_hle_native_total_solver_v2.py",
+        "git_blob_sha": "45b658fa4fb614c754a874a6c670b8cff4606242",
+        "size": 3349
+      },
+      {
+        "path": "canonical/tests/test_hle_native_total_solver_v3.py",
+        "git_blob_sha": "c106d10119ff57ed378b7ba732edc188eb649580",
+        "size": 5957
+      },
+      {
+        "path": "canonical/tests/test_hle_question_shape_router_v1.py",
+        "git_blob_sha": "0c2948e7707816d8bda4142a9e819e81caabd058",
+        "size": 2905
+      },
+      {
+        "path": "canonical/tests/test_hle_symbolic_lark_solver_v2.py",
+        "git_blob_sha": "277835241e3899ed0e6bd5e566e81ce3eb591431",
+        "size": 1243
+      },
+      {
+        "path": "canonical/tests/test_hle_symbolic_surface_solver_v1.py",
+        "git_blob_sha": "147321f30dda7f241485b0cf1758b592cce85eb9",
+        "size": 1433
+      },
+      {
+        "path": "canonical/tests/test_ownership_promotion_cognition_provenance_gate_v1.py",
+        "git_blob_sha": "30bbf65f6041b9b5ad3be3269016f320ec8b458d",
+        "size": 3291
+      },
+      {
+        "path": "canonical/tests/test_runtime_cognition_credit_guard_v1.py",
+        "git_blob_sha": "fcfbe418abc5f75df1f4f1f9bee6111fbdda4537",
+        "size": 3872
+      },
+      {
+        "path": "canonical/tests/test_tb_science_zero_model_scientific_kernel_v1.py",
+        "git_blob_sha": "e3bd23bab6697adb50237718e7632c1d61e3c392",
+        "size": 4631
+      },
+      {
+        "path": "canonical/tests/test_terminal_candidate_donor_independence_scope_v2.py",
+        "git_blob_sha": "13fede3185e80de038d74d6adb413a9953fef4c4",
+        "size": 612
+      }
+    ],
+    "changed": [
+      {
+        "path": "canonical/runtime/acceptance_capability_source_gate_v2.py",
+        "from_git_blob_sha": "b168b131f6383e158bdc0d931439d14e61f2a5de",
+        "to_git_blob_sha": "4ce3fde56117b5665109d8ce4281d69fae52b1be",
+        "size": 3025
+      },
+      {
+        "path": "canonical/runtime/autonomous_verified_self_improvement_v1.py",
+        "from_git_blob_sha": "665190356fca7e7c599db3abce0dfc800df9e0ff",
+        "to_git_blob_sha": "cdee841c90f819105877537447ade60abfba4126",
+        "size": 105746
+      },
+      {
+        "path": "canonical/runtime/brain_witness_normalization_verifier_v3.py",
+        "from_git_blob_sha": "b056cd99dce49d09060de130eeb08c1d879b5a39",
+        "to_git_blob_sha": "c697cd912e59d837de52d8547850314ed83d1106",
+        "size": 3555
+      },
+      {
+        "path": "canonical/runtime/continuous_obs_runtime.py",
+        "from_git_blob_sha": "e2533a0335c4f6824b9542944d4682aeefb36b2b",
+        "to_git_blob_sha": "45ffa99025b733e500d42c823b7b633d706c13f0",
+        "size": 11648
+      },
+      {
+        "path": "canonical/runtime/final_terminal_cleanroom_gate_v1.py",
+        "from_git_blob_sha": "1055f4dc1c59e5c0d49af0be3b0262f151af477e",
+        "to_git_blob_sha": "bde4d62bd4f1dc9e949a8631810d76e9a954c96c",
+        "size": 12042
+      },
+      {
+        "path": "canonical/runtime/live_integrated_brain_v1.py",
+        "from_git_blob_sha": "efb8dabf727d0fd98617f19fae96e85ec1c70003",
+        "to_git_blob_sha": "a78a32919668c7fdfe48cd3c9cddfa9e4e220f32",
+        "size": 27209
+      },
+      {
+        "path": "canonical/runtime/livebench_langdetect_failopen_reduction_v1.py",
+        "from_git_blob_sha": "933a3e277dd7d5ab87c3df24a3a9e3ee9267dd73",
+        "to_git_blob_sha": "c952371a7db1766e2a40c74adee72c178c437968",
+        "size": 11423
+      },
+      {
+        "path": "canonical/runtime/livebench_langdetect_prefix_shield_reduction_v2.py",
+        "from_git_blob_sha": "e522b58776a6b863661f15846f145efc6967da2b",
+        "to_git_blob_sha": "61dba6ce334569a19480f61a486011db5838e38f",
+        "size": 10377
+      },
+      {
+        "path": "canonical/runtime/ownership_promotion_compiler_v1.py",
+        "from_git_blob_sha": "3bc0be3ecb84896001df1aa87985613ea07a9dc5",
+        "to_git_blob_sha": "a887cc686ecda6f5b5408f5621f671d8f882ac16",
+        "size": 6670
+      },
+      {
+        "path": "canonical/runtime/terminal_candidate_donor_independence_audit_v1.py",
+        "from_git_blob_sha": "7b3713267d32f9b4ae7e2ca56ea17c5859bdec71",
+        "to_git_blob_sha": "2c368172b65220104f51b56c3a4352be624ddca6",
+        "size": 11593
+      },
+      {
+        "path": "canonical/runtime/terminal_closure_reducer.py",
+        "from_git_blob_sha": "27b51e53db5063756ff3046f978c0087fd4a9256",
+        "to_git_blob_sha": "bb852cd7541ee895aabc1a85a06b1e4b5ef7ae9c",
+        "size": 22521
+      },
+      {
+        "path": "canonical/runtime/terminal_global_ownership_postconditions_reducer_v1.py",
+        "from_git_blob_sha": "fa5bb7eaac06820376c41f12df2cc4e777c88213",
+        "to_git_blob_sha": "8268e340f71c9b93aa154947243612214dd17ce6",
+        "size": 9165
+      },
+      {
+        "path": "canonical/runtime/terminal_kstar_promotion_bridge_v1.py",
+        "from_git_blob_sha": "48fc8ecd073e46ccc0ca92d2dc90fa7ee9ea14d9",
+        "to_git_blob_sha": "4e1d068afdaf73957744a553e7c5101e5c539eef",
+        "size": 11338
+      },
+      {
+        "path": "canonical/runtime/test_continuous_obs_runtime.py",
+        "from_git_blob_sha": "feb06bb22aed791aee2df3e3bba8bfc670336b9b",
+        "to_git_blob_sha": "98fe18ca7fd5f99913606b09823a30a052dc38e2",
+        "size": 4649
+      },
+      {
+        "path": "canonical/runtime/test_terminal_closure_reducer.py",
+        "from_git_blob_sha": "48be2865a2002d9cd7d8a12b3c67a109950c6533",
+        "to_git_blob_sha": "062628885455b2783927bc83cc7663078a926a26",
+        "size": 5433
+      },
+      {
+        "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
+        "from_git_blob_sha": "c3dbea74679450273bd07689251499bcd9609212",
+        "to_git_blob_sha": "f0586c433fb98896610d11c029ad32b26b899856",
+        "size": 50770
+      },
+      {
+        "path": "canonical/runtime/universal_verified_adaptive_solver_v12.py",
+        "from_git_blob_sha": "e85b4127a7cf53124114db89c651a22cdc51ee53",
+        "to_git_blob_sha": "187dbe0a5154a56459a3f66c5590b2f819b02adf",
+        "size": 44596
+      },
+      {
+        "path": "canonical/tests/test_acceptance_capability_source_gate_v2.py",
+        "from_git_blob_sha": "b4e185a3692009fd477b88dae64ca0903f4ae60c",
+        "to_git_blob_sha": "ad0c9182c73b6401e885fca4e48ed641bf563900",
+        "size": 3631
+      },
+      {
+        "path": "canonical/tests/test_acceptance_ir_compiler_v1.py",
+        "from_git_blob_sha": "d784ad978878472b04e8f08facc3be7c1e242810",
+        "to_git_blob_sha": "a65172d8c552df96fe58c9cff0443aa7d661a899",
+        "size": 1861
+      },
+      {
+        "path": "canonical/tests/test_action_hypergraph_v2_reconciliation.py",
+        "from_git_blob_sha": "01ac492bd5028d28e0852d067357fdca8162dc98",
+        "to_git_blob_sha": "900ac520146eeeb12b5a07c056bace1959d093f5",
+        "size": 2998
+      },
+      {
+        "path": "canonical/tests/test_autonomous_verified_self_improvement_v1.py",
+        "from_git_blob_sha": "ff34f980105c337988cfc0dc1bcb416f57b85a88",
+        "to_git_blob_sha": "4a3aef8cab6b45c434a735ab83c135c97d04d6ef",
+        "size": 63024
+      },
+      {
+        "path": "canonical/tests/test_brain_witness_normalization_v2.py",
+        "from_git_blob_sha": "aaabc6e55ba87e663ae600b1009a9bca05c486b0",
+        "to_git_blob_sha": "d53e612e06a788afb9a39bf0febcfb296f736b24",
+        "size": 1609
+      },
+      {
+        "path": "canonical/tests/test_brain_witness_normalization_v3.py",
+        "from_git_blob_sha": "2e6609a1547a9ae6ac910e0a286e9dedb6d832c3",
+        "to_git_blob_sha": "ae9649f959fe158748f9a9fb0c5d8702171f947f",
+        "size": 1712
+      },
+      {
+        "path": "canonical/tests/test_composition_interface_activation_v1.py",
+        "from_git_blob_sha": "5db70e92120162e6b361cbef6281793e883515de",
+        "to_git_blob_sha": "1c1385bd184686bba1edffc8f0b4b7830b26297a",
+        "size": 3300
+      },
+      {
+        "path": "canonical/tests/test_current_acceptance_fixed_point_v2.py",
+        "from_git_blob_sha": "dfdb73ddbdf156c39604f36832505a173a008080",
+        "to_git_blob_sha": "a80c9775bf852668e6be070b7638bc3855d3b613",
+        "size": 2495
+      },
+      {
+        "path": "canonical/tests/test_final_terminal_cleanroom_gate_v1.py",
+        "from_git_blob_sha": "a7b2fe043f2b2e1e01dfb588bd67661f6ff44f5b",
+        "to_git_blob_sha": "adcfa7af5e4b5e64edc7fcbf042f0fd32d2bbd24",
+        "size": 10945
+      },
+      {
+        "path": "canonical/tests/test_h100_chartreader_detector_budget_v1.py",
+        "from_git_blob_sha": "39fd1ca8c11426a7b281edb36c7ae23e4e82199f",
+        "to_git_blob_sha": "a0e763c81341ab757d847b802c4d73be0f87335c",
+        "size": 1106
+      },
+      {
+        "path": "canonical/tests/test_live_integrated_brain_v1.py",
+        "from_git_blob_sha": "5123ce4c9d6582cde3b2005add7a34cd6bce4cb5",
+        "to_git_blob_sha": "41566cba736c255e457615b82629dbc93ebbe720",
+        "size": 11286
+      },
+      {
+        "path": "canonical/tests/test_matched_target_normalization_activation_v1.py",
+        "from_git_blob_sha": "9c6d4ba9a4520a5792a9bc63e1bbea8ce248fb42",
+        "to_git_blob_sha": "6d31a14823ae44db4254e1abf92d094e7d0af4e2",
+        "size": 3420
+      },
+      {
+        "path": "canonical/tests/test_minimum_terminal_cut_solver_v1.py",
+        "from_git_blob_sha": "0eb91a92df56cf5678e2435e42a5c18491f7ca26",
+        "to_git_blob_sha": "bb8896f92a1b677b3a11444dd54423ae384cd2ac",
+        "size": 2380
+      },
+      {
+        "path": "canonical/tests/test_protocol_implication_gate_refinement_v1.py",
+        "from_git_blob_sha": "7574b8cf461020092abd5c2a071c6fc177cf7275",
+        "to_git_blob_sha": "f451b97b1020eb23ec2660eb1351bd23591acc3c",
+        "size": 2972
+      },
+      {
+        "path": "canonical/tests/test_terminal_closure_reducer_v2.py",
+        "from_git_blob_sha": "8d272cd8bac84ac1615384716c16ba520ad295f4",
+        "to_git_blob_sha": "4f049f6436dc92e65add5ebed1e1ee1c97d56581",
+        "size": 7589
+      },
+      {
+        "path": "canonical/tests/test_terminal_global_ownership_postconditions_reducer_v1.py",
+        "from_git_blob_sha": "796c6a368d1df89119aa37c6da65186f2974e991",
+        "to_git_blob_sha": "fc2cd6eefe1f432b6c7ba6365aad84722f1a7a26",
+        "size": 7128
+      },
+      {
+        "path": "canonical/tests/test_terminal_kstar_promotion_bridge_v1.py",
+        "from_git_blob_sha": "390cce96ab0cc5fcf5b3c827e917a888c6671518",
+        "to_git_blob_sha": "9af4108243116cc4d6919fd5b8a38826935c536c",
+        "size": 811
+      },
+      {
+        "path": "canonical/tests/test_terminal_scheduling_activation_v5.py",
+        "from_git_blob_sha": "a303360eeab64df37ebe1e6104c46f03d53d2c02",
+        "to_git_blob_sha": "2de596c4fa2d2fb8453b6d7b162cb7118c55fa2e",
+        "size": 2222
+      },
+      {
+        "path": "canonical/tests/test_unified_cognitive_fabric_v1.py",
+        "from_git_blob_sha": "91996514d1e0d572cfeefd5064e4f4bd10048f8e",
+        "to_git_blob_sha": "9eb10dfd78a56aae6b5413fe3e22c41bc0d9e786",
+        "size": 26371
+      },
+      {
+        "path": "canonical/tests/test_universal_verified_adaptive_solver_v12.py",
+        "from_git_blob_sha": "1f6ed89cc8409f59cd3148c9e3bd824bc282a5de",
+        "to_git_blob_sha": "2798bf00fe9d6d8627e58d1f85d8bfaf87367beb",
+        "size": 4960
+      }
+    ],
+    "deleted": [
+      {
+        "path": "canonical/tests/test_native_artifact_information_safe.py",
+        "old_git_blob_sha": "bb62c81f17787b985a164f387d8421e604c1deb3",
+        "size": 1391
+      }
+    ]
+  },
+  "regression_subject_semantics": {
+    "exact_subject_bound_by_workflow": true,
+    "workflow_expected_subject": "github.sha for main push/workflow_dispatch; PR base SHA for pull_request",
+    "receipt_requires_recorded_actual_expected_sha_equality": true,
+    "tests_must_execute_gt_zero": true,
+    "pytest_returncode_zero_required": true,
+    "assurance_returncode_zero_required": true,
+    "artifact_upload_required_for_validity": false,
+    "interpretation": "THE_GATE_ALREADY_SUPPORTS_A_FROZEN_CONTENT_ADDRESSED_SUBJECT__NO NEED TO CHASE A MOVING MAIN DURING EXECUTION"
+  },
+  "carrier_truth": {
+    "github_actions_account_gate": "BLOCKED_PRESTART_BY_ACCOUNT_BILLING_OR_SPENDING_LIMIT_CLASS_PER_CANONICAL_V3_DIAGNOSIS",
+    "sprite_route": "FORBIDDEN_UNDER_HARD_ZERO_INCREMENTAL_SPEND_UNLESS A SEPARATE POSITIVE ZERO_SPEND ENTITLEMENT/ALLOWANCE PROOF EXISTS FOR THE EXACT EXECUTION",
+    "sprite_public_rate_card_observation": "METERED_ACTIVE_CPU_MEMORY_AND_HOT_STORAGE__THEREFORE EXISTING HISTORICAL ZERO_SPEND RECEIPTS DO NOT PROVE FUTURE EXECUTION IS ZERO_INCREMENTAL_SPEND",
+    "user_laptop": "DO_NOT_USE",
+    "public_disclosure": "FORBIDDEN"
+  },
+  "exact_next": [
+    "USE_ONLY_A_ZERO_INCREMENTAL_SPEND_PRIVATE BYTE-TRANSPORT AND EXECUTION CARRIER",
+    "HYDRATE EXACTLY THE ADDED_AND_CHANGED BLOB SET AND DELETE EXACTLY THE DELETED SET AGAINST THE PRESERVED SNAPSHOT",
+    "RECOMPUTE THE FULL TEST_RUNTIME MANIFEST AND REQUIRE EXACT EQUALITY TO THE SUBJECT COMMIT BEFORE TEST EXECUTION",
+    "RUN THE CANONICAL WORKFLOW COMMANDS ON THE EXACT FROZEN SUBJECT",
+    "EMIT A CONTENT_ADDRESSED REGRESSION RECEIPT WITH TESTS_EXECUTED_GT_ZERO",
+    "ONLY THEN CONSIDER UVCK V2 PROMOTION"
+  ],
+  "hard_nonclaims": [
+    "NO_REGRESSION_PASS",
+    "NO_REGRESSION_FAIL_FROM_THE_PRIOR_STALE_OR_INCOMPLETE_MATERIALIZATION",
+    "NO_CLAIM_THE_173_BLOB_DELTA REMAINS CURRENT AFTER THE OBSERVED SUBJECT SHA",
+    "NO_SPRITE_ZERO_SPEND_AUTHORIZATION",
+    "NO_UVCK_PROMOTION",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd_from_repository_operations": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "promotion_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
