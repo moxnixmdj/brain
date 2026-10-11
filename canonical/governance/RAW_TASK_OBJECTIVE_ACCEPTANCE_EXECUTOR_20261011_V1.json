@@ -1,0 +1,107 @@
+{
+  "schema": "PROJECT_BRAIN_RAW_TASK_OBJECTIVE_ACCEPTANCE_EXECUTOR_20261011_V1",
+  "date": "2026-10-11",
+  "status": "CANDIDATE_V6_REUSE_COMPOSITION__OBJECTIVE_RAW_TASK_ACCEPTANCE_EXECUTABLE__SEMANTIC_RESIDUALS_FAIL_CLOSED__ZERO_CREDIT",
+  "mission_role": {
+    "real_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "coding_frontier": "GENERAL_SOFTWARE_REPAIR_LOOP_V6__SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL",
+    "benchmark_role": "AUDIT_ONLY"
+  },
+  "candidate": {
+    "capability_id": "task.acceptance.objective.lossless.v1",
+    "runtime": {
+      "path": "canonical/runtime/raw_task_objective_acceptance_executor_v1.py",
+      "git_blob_sha": "c138171744406edd8e75e4867634febdb596014b"
+    },
+    "tests": {
+      "path": "canonical/tests/test_raw_task_objective_acceptance_executor_v1.py",
+      "git_blob_sha": "00a1b23a80c12cdb38493de0de6335b62247fef4"
+    }
+  },
+  "reuse_chain": [
+    {
+      "path": "canonical/runtime/lossless_raw_task_contract_v1.py",
+      "git_blob_sha": "53a440fccf91aa08f18abfff4f283e5fd18d9fcd",
+      "role": "LOSSLESS_RAW_SOURCE_TO_ACCEPTANCE_OBLIGATIONS"
+    },
+    {
+      "path": "canonical/runtime/raw_task_acceptance_residual_localizer_v1.py",
+      "git_blob_sha": "f29616cf7726959aa28db4ed6541a9fc0bc2ac76",
+      "role": "PARTITION_EVERY_RAW_OBLIGATION_INTO_OBJECTIVE_ROUTE_OR_SEMANTIC_RESIDUAL"
+    },
+    {
+      "path": "canonical/runtime/instruction_constraint_compiler_v1.py",
+      "git_blob_sha": "a4a3f87f827bd6f0f85fe70c77a1de5aa3237c6f",
+      "role": "EXECUTABLE_EXPLICIT_RESPONSE_FORM_CONSTRAINTS"
+    },
+    {
+      "path": "canonical/runtime/source_aligned_acceptance_program_v1.py",
+      "git_blob_sha": "742c183cccc2ec4bb5f94e88048590e2991dacd4",
+      "role": "CONTROLLED_SOURCE_ALIGNED_FIELD_REQUIREMENT_TO_TYPED_PROGRAM"
+    },
+    {
+      "path": "canonical/runtime/typed_acceptance_program_v1.py",
+      "git_blob_sha": "7fd2e575bd2d5c36f48c713f15177d5b0d7e68c5",
+      "role": "EXECUTE_TYPED_ACCEPTANCE_PROGRAM_FAIL_CLOSED"
+    },
+    {
+      "path": "canonical/governance/CODING_VISIBLE_COMPLETE_ACCEPTANCE_CONTRACT_ADEQUACY_THEOREM_20261009_V1.json",
+      "git_blob_sha": "c52c9b15811c60b80db0a69b2d974657ebec61cd",
+      "role": "CONDITIONAL_ALL_MEMBERS_ACCEPTANCE_ADEQUACY_THEOREM"
+    }
+  ],
+  "new_composition_truth_candidate": [
+    "EVERY_NONWHITESPACE_RAW_TASK_SEGMENT_REMAINS_AN_EXPLICIT_ACCEPTANCE_OBLIGATION",
+    "EVERY_OBLIGATION_IS_ACCOUNTED_FOR_AS_OBJECTIVE_ROUTE_AVAILABLE_OR_EXPLICIT_SEMANTIC_RESIDUAL",
+    "OBJECTIVE_ROUTE_AVAILABILITY_IS_NOT_ITSELF_ACCEPTANCE",
+    "SUPPORTED_OBJECTIVE_ROUTES_ARE_EXECUTED_AGAINST_THE_EXACT_CANDIDATE",
+    "ACCEPTANCE_STOP_IS_AUTHORIZED_ONLY_IF_ZERO_SEMANTIC_RESIDUALS_REMAIN_AND_EVERY_OBJECTIVE_OBLIGATION_PASSES",
+    "EXISTING_TEST_SUCCESS_OR_ARBITRARY_CANDIDATE_EVIDENCE_CANNOT_OVERRIDE_UNBOUND_RAW_REQUEST_SEMANTICS",
+    "MISSING_OR_UNKNOWN_ACCEPTANCE_SEMANTICS_FAIL_CLOSED"
+  ],
+  "qualification_plan": {
+    "authored_test_count": 13,
+    "required": [
+      "EXACT_RESPONSE_POSITIVE_AND_NEGATIVE",
+      "NUMERIC_FIELD_POSITIVE_AND_NEGATIVE",
+      "BOOLEAN_FIELD_NEGATIVE_CONTROL",
+      "MIXED_OBJECTIVE_AND_SEMANTIC_REQUEST_BLOCKS_STOP",
+      "EXISTING_TEST_PASS_EVIDENCE_CANNOT_REPLACE_REQUEST_SEMANTICS",
+      "MISSING_FIELD_FAILS_CLOSED",
+      "UNKNOWN_CANDIDATE_FIELD_FAILS_CLOSED",
+      "DETERMINISTIC_REPLAY",
+      "MULTI_OBLIGATION_OBJECTIVE_COMPOSITION",
+      "LOSSLESS_RAW_OBLIGATION_ACCOUNTING",
+      "ZERO_EXTERNAL_RUNTIME_COGNITION"
+    ],
+    "promotion_requires_independent_or_stronger_replay": true
+  },
+  "ownership": {
+    "brain_owned": true,
+    "model_dependency_count": 0,
+    "external_general_purpose_model_runtime_dependency_count": 0,
+    "incremental_spend_usd": 0
+  },
+  "residual_after_candidate": {
+    "full_v6_closed": false,
+    "primary_remaining": "BIND_OBJECTIVE_CANDIDATE_FIELDS_TO_CONTENT_ADDRESSED_INDEPENDENT_MEASUREMENTS_AND_COMPOSE_ACCEPTANCE_STOP_WITH_PROVENANCE_GUIDED_REPAIR",
+    "secondary_remaining": "EXPAND_SOUND_SOURCE_GROUNDED_ACCEPTANCE_COMPILATION_ONLY_WHERE_NEW_SEMANTIC_CELLS_ARE_CAUSALLY_JUSTIFIED",
+    "semantic_residuals_are_not_silently_dropped": true
+  },
+  "hard_nonclaims": [
+    "NO_GENERAL_NATURAL_LANGUAGE_SEMANTIC_COMPLETENESS",
+    "NO_CLAIM_DIRECT_CANDIDATE_FIELDS_ARE_INDEPENDENT_CONTENT_ADDRESSED_MEASUREMENTS",
+    "NO_CLAIM_GENERAL_SOFTWARE_REPAIR_V6_IS_CLOSED",
+    "NO_BENCHMARK_SCORE_CREDIT",
+    "NO_CAPABILITY_PROMOTION_BEFORE_INDEPENDENT_OR_STRONGER_REPLAY",
+    "NO_TERMINAL_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "benchmark_score_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "promotion_authority": false,
+  "terminal_authority": false
+}
