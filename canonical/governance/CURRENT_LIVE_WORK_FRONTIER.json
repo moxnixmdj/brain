@@ -2,7 +2,7 @@
   "schema": "PROJECT_BRAIN_CURRENT_LIVE_WORK_FRONTIER_V1",
   "date": "2026-10-11",
   "status": "CURRENT_PROFESSIONAL_24_OF_24__FULL_PRIVATE_REGRESSION_GATE_OPEN__GITHUB_HOSTED_ACTIONS_BILLING_OR_SPENDING_LIMIT_PRESTART_BLOCK__12_CHECKPOINT_ROWS_WAKE_GATED__CAPABILITY_FIRST_AND_RESOURCE_PARETO_WORK_PRIMARY__ZERO_CREDIT__CODING_CAPABILITY_FIRST_ACTIVE",
-  "frontier_id": "LIVE_WORK_FRONTIER_20261011_PROF_PROPERTY_24_OF_24_V28",
+  "frontier_id": "LIVE_WORK_FRONTIER_20261011_PROF_PROPERTY_24_OF_24_V29",
   "scope": {
     "base_main_commit": "8916f4b00768329eb101be88ad6effbfd3704d67",
     "completeness_semantics": "COMPLETE_FOR_EXPLICIT_CURRENT_ACTIONABLE_OR_SCHEDULABLE_WORK_EXPOSED_BY_THE_BOUND_CURRENT_AUTHORITY_SOURCES__NOT_COMPLETE_FOR_UNKNOWN_FUTURE_WORK_OR_UNDISCOVERED_CAPABILITIES",
@@ -37,7 +37,7 @@
       },
       {
         "path": "canonical/governance/CURRENT_FRONTIERCODE_CAPABILITY_FIRST_RECONCILIATION_20261011_V1.json",
-        "git_blob_sha": "46f0c2d5376a3e34ef24e7f6f4b75e99e4b5fcd3"
+        "git_blob_sha": "bddfa6bbad23bd4167c653925d0196b0af02a3be"
       }
     ],
     "base_main_commit_role": "OBSERVED_BEFORE_RECONCILIATION_COMMIT__DIAGNOSTIC_ONLY__CURRENT_POINTER_PATHS_WIN_ON_DRIFT"
@@ -80,12 +80,12 @@
   ],
   "candidates": [
     {
-      "work_id": "CODING_SOFTWARE_TASK_ACCEPTANCE_COMPILER_V1",
+      "work_id": "CODING_SOFTWARE_TASK_REPAIR_ORCHESTRATOR_V1",
       "work_type": "CAPABILITY_BUILD",
       "frontier_class": "GENERAL_SOFTWARE_ENGINEERING",
       "source": "canonical/governance/CURRENT_FRONTIERCODE_CAPABILITY_FIRST_RECONCILIATION_20261011_V1.json",
-      "causal_role": "CLOSE_RAW_SOFTWARE_REQUEST_TO_EXPLICIT_FAIL_CLOSED_ACCEPTANCE_CONTRACT__USE_VERIFIED_MULTI_FILE_REPAIR_LOOP_DOWNSTREAM",
-      "readiness": "READY_EXECUTION__MULTI_FILE_TWO_EDIT_REPAIR_LOOP_VERIFIED__TASK_SEMANTICS_AND_ACCEPTANCE_COMPLETENESS_NOW_TOP_CODING_RESIDUAL",
+      "causal_role": "COMPOSE_VERIFIED_EXPLICIT_TASK_ACCEPTANCE_WITH_VERIFIED_MULTI_FILE_REPAIR_INTO_ONE_FAIL_CLOSED_END_TO_END_PATH",
+      "readiness": "READY_EXECUTION__ACCEPTANCE_COMPILER_AND_MULTI_FILE_TWO_EDIT_REPAIR_LOOP_TWO_CARRIER_VERIFIED",
       "claims_new_primitive": true,
       "score_state": "NOT_A_BENCHMARK_SCORE_TASK",
       "scheduler_state": "READY_EXECUTION",
@@ -104,17 +104,15 @@
       "vector_evidence": {},
       "read_only_evidence": {
         "capability_frontier_path": "canonical/governance/CURRENT_FRONTIERCODE_CAPABILITY_FIRST_RECONCILIATION_20261011_V1.json",
-        "capability_frontier_git_blob_sha": "46f0c2d5376a3e34ef24e7f6f4b75e99e4b5fcd3",
-        "registry_git_blob_sha": "2116ea2454720111f338aa6832b209ea0a5cbea2",
-        "verified_single_edit_capability": "python.patch.search.test_guided.ast.v1",
-        "verified_multi_file_two_edit_capability": "python.repair.loop.test_guided.ast.v1",
-        "repair_loop_verification": "canonical/verification/PYTHON_TEST_GUIDED_REPAIR_LOOP_V1_VERIFY_20261011.json",
-        "repair_loop_two_carrier_tests": "8_OF_8_PLUS_8_OF_8",
+        "capability_frontier_git_blob_sha": "bddfa6bbad23bd4167c653925d0196b0af02a3be",
+        "registry_git_blob_sha": "54f25876128ed4d629321c6fd756592b925ee1fa",
+        "acceptance_capability": "python.software_task.acceptance.explicit_tests.v1",
+        "repair_capability": "python.repair.loop.test_guided.ast.v1",
         "model_dependency_count": 0,
         "incremental_spend_usd": 0,
         "frontiercode_score_credit": 0
       },
-      "ready": "BUILD_SOFTWARE_TASK_ACCEPTANCE_COMPILER_V1__BENCHMARK_REMAINS_AUDIT_ONLY"
+      "ready": "BUILD_SOFTWARE_TASK_REPAIR_ORCHESTRATOR_V1__BENCHMARK_REMAINS_AUDIT_ONLY"
     },
     {
       "work_id": "PROFESSIONAL_QUALITY_V7_PROPERTY_TRUTH_DEPLETION",
