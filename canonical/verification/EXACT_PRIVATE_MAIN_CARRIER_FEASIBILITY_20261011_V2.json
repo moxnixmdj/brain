@@ -1,0 +1,101 @@
+{
+  "schema": "PROJECT_BRAIN_EXACT_PRIVATE_MAIN_CARRIER_FEASIBILITY_20261011_V2",
+  "date": "2026-10-11",
+  "status": "EXACT_PRIVATE_MAIN_VERIFIER_AND_PRIVATE_SOURCE_BINDING_EXIST_ON_RAILWAY__EXECUTION_CURRENTLY_BLOCKED_BY_FREE_PLAN_PROVISION_CEILING__GITHUB_HOSTED_PRESTEP_BLOCKED__ZERO_PAID_SPEND__ZERO_REGRESSION_CREDIT",
+  "subject_main_commit_observed_before_branch": "c5ce5a5625173c5772b3b677940abb8272b23540",
+  "objective": "MINIMIZE_TIME_TO_VALID_EXACT_PRIVATE_CURRENT_MAIN_REGRESSION_WITHOUT_PAID_SPEND_OR_SCOPE_SUBSTITUTION",
+  "evidence": {
+    "github_actions": {
+      "runner_classes_tested": [
+        "ubuntu-latest",
+        "ubuntu-24.04",
+        "ubuntu-slim",
+        "ubuntu-22.04"
+      ],
+      "outcome": "FAILURE_BEFORE_ANY_STEP_ACROSS_FULL_REGRESSION_MINIMAL_PROBE_AND_UNRELATED_WORKFLOWS",
+      "latest_full_regression_run_id": 38107978144,
+      "latest_full_regression_job_id": 114377429335,
+      "executed_steps": 0,
+      "exact_control_plane_cause_bound": false
+    },
+    "railway_existing_exact_carrier": {
+      "project_id": "9d2e8ee8-0eb8-414c-b7e0-a93d90eed54d",
+      "environment_id": "256bcc63-cebd-4079-9a61-c0e9cdbbeeb8",
+      "service_id": "b1976f11-f248-4de2-9467-db2b8f80a294",
+      "service_name": "heldout-002-git-carrier-v2",
+      "source_repo": "moxnixmdj/brain",
+      "source_private_main_capable_by_persisted_service_configuration": true,
+      "build_verifier_present": true,
+      "verifier_properties": [
+        "BINDS_GIT_HEAD_TO_PB_FULL_REGRESSION_SUBJECT_SHA",
+        "BINDS_RAILWAY_GIT_COMMIT_SHA_TO_SUBJECT_SHA",
+        "BINDS_GIT_HEAD_CANONICAL_TREE_TO_PB_FULL_REGRESSION_CANONICAL_TREE_SHA",
+        "REQUIRES_PYTHON_3_12",
+        "PY_COMPILE_LOAD_BEARING_ASSURANCE_AND_PROFESSIONAL_RUNTIMES",
+        "RUNS_PYTEST_Q_CANONICAL_TESTS_DISABLE_WARNINGS",
+        "RUNS_FOCUSED_ASSURANCE_UNITTEST_REPLAY",
+        "EMITS_CONTENT_HASHED_REGRESSION_RECEIPT",
+        "PASS_REQUIRES_COMPILE_ZERO_PYTEST_ZERO_ASSURANCE_ZERO"
+      ],
+      "deployments_observed": 0,
+      "current_connector_repin_attempt": "REJECTED_USER_DOES_NOT_HAVE_ACCESS_TO_REPO",
+      "variable_trigger_attempt": "NO_FIRST_DEPLOYMENT_CREATED",
+      "new_service_attempt": "REJECTED_FREE_PLAN_RESOURCE_PROVISION_LIMIT_EXCEEDED",
+      "paid_upgrade_performed": false,
+      "incremental_paid_spend_usd": 0
+    },
+    "render_free": {
+      "plan": "free",
+      "private_repo_fetch": "REJECTED_INVALID_OR_UNFETCHABLE",
+      "service_created": false,
+      "incremental_paid_spend_usd": 0
+    },
+    "sprites_existing": {
+      "arbitrary_execution_available": true,
+      "private_brain_git_auth": false,
+      "direct_git_probe": "FATAL_COULD_NOT_READ_USERNAME",
+      "verification_capsule_runner_not_scope_equivalent": true
+    }
+  },
+  "causal_reduction": {
+    "already_solved": [
+      "FULL_REGRESSION_COMMAND_DESIGN",
+      "EXACT_SUBJECT_BINDING",
+      "CANONICAL_TREE_BINDING",
+      "RESULT_RECEIPT_CONSTRUCTION",
+      "ALTERNATE_REMOTE_COMPUTE_RUNTIME_DESIGN",
+      "PRIVATE_BRAIN_SOURCE_CONFIGURATION_ON_EXISTING_RAILWAY_SERVICE"
+    ],
+    "current_execution_bottleneck": "OBTAIN_ONE_ALLOWED_ZERO_PAID_SPEND_FIRST_PROVISION_OR_RESTORE_AN_ALREADY_PROVISIONED_EXACT_PRIVATE_MAIN_CARRIER",
+    "not_currently_a_reasoning_gap": true,
+    "new_primitive_required": false
+  },
+  "forbidden_repetition": [
+    "MORE_GITHUB_RUNNER_LABEL_SWAPS_WITHOUT_CONTROL_PLANE_STATE_CHANGE",
+    "MORE_RENDER_PRIVATE_REPO_FETCH_ATTEMPTS_WITHOUT_REPO_CONNECTION_CHANGE",
+    "MORE_SPRITE_DIRECT_PRIVATE_CLONE_ATTEMPTS_WITHOUT_AUTH_CHANGE",
+    "SUBSTITUTE_VERIFICATION_CAPSULE_RUNNER_FOR_EXACT_PRIVATE_MAIN",
+    "PAID_UPGRADE"
+  ],
+  "wake_conditions": [
+    "RAILWAY_FREE_RESOURCE_SLOT_BECOMES_AVAILABLE_WITHOUT_PAID_UPGRADE",
+    "EXISTING_RAILWAY_EXACT_CARRIER_RECEIVES_A_FIRST_DEPLOYMENT",
+    "GITHUB_HOSTED_JOB_RECORDS_AT_LEAST_ONE_REAL_STEP",
+    "AUTHORIZED_ZERO_SPEND_CARRIER_GAINS_PRIVATE_BRAIN_SOURCE_ACCESS",
+    "STRONGER_VALID_EXACT_CURRENT_MAIN_REGRESSION_RECEIPT_APPEARS"
+  ],
+  "hard_nonclaims": [
+    "NO_FULL_PRIVATE_CURRENT_MAIN_REGRESSION_PASS",
+    "NO_FULL_PRIVATE_CURRENT_MAIN_REGRESSION_FAIL_FROM_PRESTEP_INFRASTRUCTURE_FAILURES",
+    "NO_CLAIM_RAILWAY_FREE_RESOURCE_LIMIT_CAN_BE_BYPASSED_WITHOUT_RESOURCE_CHANGE",
+    "NO_UVCK_V2_PROMOTION",
+    "NO_QUALITY_ACCEPTANCE_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_paid_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "promotion_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
