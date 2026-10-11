@@ -1,0 +1,75 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_DNA_TASK_KERNEL_V1_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "pass": true,
+  "status": "PASS__DONOR_FREE_DNA_TASK_KERNEL_V1_INDEPENDENTLY_VERIFIED__RANK23_UNREAD_UNSTARTED",
+  "subject": {
+    "codec_runtime": {
+      "path": "canonical/runtime/dna_storage_codec_v1.py",
+      "git_blob_sha": "3734ad7c4674d9ebe77dbaf0592ea10d0a6cb451"
+    },
+    "codec_tests": {
+      "path": "canonical/tests/test_dna_storage_codec_v1.py",
+      "git_blob_sha": "cc4e9aadabb8ba4b146f2a5ace14fcb62488fca8"
+    },
+    "task_runtime": {
+      "path": "canonical/runtime/dna_storage_task_kernel_v1.py",
+      "git_blob_sha": "ade8e7ce619112f8d89d9c83f00d5b7b143e5bb1"
+    },
+    "task_tests": {
+      "path": "canonical/tests/test_dna_storage_task_kernel_v1.py",
+      "git_blob_sha": "ac4007f1c40303768875ec4068b44d2f91307f3c"
+    }
+  },
+  "independent_public_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2692,
+    "base_branch": "verify/tb-science-dna-task-kernel-isolated-base-20261011",
+    "head_branch": "verify/tb-science-dna-task-kernel-isolated-run-20261011",
+    "head_sha": "05d8b383fe8c41bf456cc8f9b0c754823a8057c0",
+    "checked_merge_sha": "dc55af21f87994ad6aee1bbfddc8dfd88897e6c1",
+    "workflow_run_id": 38144671276,
+    "workflow_job_id": 114485416462,
+    "conclusion": "success",
+    "tests_run": 23,
+    "tests_passed": 23,
+    "exact_blob_binding_pass": true,
+    "runner": "ubuntu-24.04",
+    "python_version": "3.12"
+  },
+  "verified": [
+    "GENERIC_DNA_STORAGE_CONTRACT_CLASSIFICATION_ENCODE_DECODE_ROUNDTRIP_IMPLEMENTATION",
+    "EXPLICIT_IMPLEMENTATION_DOMINATES_INTERFACE_DESCRIPTION_VERBS",
+    "ARTIFACT_ROOT_SAFE_OUTPUT_ROUTING",
+    "INPUT_ROLE_EXTRACTION_FROM_INSTRUCTION_PATHS",
+    "FASTA_FASTQ_JSON_AND_PLAIN_DNA_READ_INPUT",
+    "AMBIGUOUS_BASE_READ_REJECTED_AS_PACKET_ERASURE",
+    "IMPLEMENTATION_MODE_REQUIRES_NO_INPUT_DISCOVERY",
+    "INACCESSIBLE_INPUT_ROOTS_FAIL_SAFE",
+    "EXACT_CLI_ENTRYPOINT_EXECUTION",
+    "ZERO_MODEL_AND_ZERO_NETWORK_RUNTIME_DEPENDENCIES"
+  ],
+  "ownership": {
+    "model_dependency_count": 0,
+    "external_model_runtime_calls": 0,
+    "network_dependency_count": 0,
+    "donor_model_required": false,
+    "benchmark_specific_answer_leakage": false
+  },
+  "benchmark_state": {
+    "rank23_slot_id": "terminal-bench-science/dna-storage-codec::trial-0",
+    "rank23_task_digest": "sha256:bde6852289db3f5474aedc96c54aca201d11be6c61f4fef019998b2b689e65ac",
+    "rank23_task_read": false,
+    "rank23_task_started": false,
+    "rank23_trials_consumed": 0
+  },
+  "hard_nonclaims": [
+    "NO_RANK23_SUCCESS_CLAIM",
+    "NO_HIDDEN_RANK23_CONTRACT_COVERAGE_CLAIM",
+    "NO_RANK23_TASK_READ_OR_START",
+    "NO_EXECUTION_OR_ACTIVATION_AUTHORITY"
+  ],
+  "acceptance_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
