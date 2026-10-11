@@ -25,6 +25,12 @@ class PositionedOCRBridgeTests(unittest.TestCase):
         out = parse_tsv_positioned(raw)
         self.assertEqual(out["word_count"], 3)
         self.assertEqual(out["line_count"], 2)
+        self.assertEqual([w["text"] for w in out["word_items"]], ["25", "mm", "DEPTH"])
+        self.assertEqual(
+            out["word_items"][0]["box"],
+            {"x0": 10, "y0": 10, "x1_exclusive": 25, "y1_exclusive": 20},
+        )
+        self.assertEqual(out["word_items"][0]["line_source_id"], "ocr:p1:b1:par1:l1")
         self.assertEqual(out["text_items"][0]["text"], "25 mm")
         self.assertEqual(
             out["text_items"][0]["box"],
