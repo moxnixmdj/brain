@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_FRONTIERCODE_CAPABILITY_FIRST_RECONCILIATION_20261011_V1",
   "date": "2026-10-11",
-  "status": "ACTIVE_CAPABILITY_FIRST__BENCHMARK_DEMOTED_TO_AUDIT__V5_REPAIR_VERIFIED__V6_OBJECTIVE_RAW_TASK_ACCEPTANCE_SUBSET_VERIFIED__SEMANTIC_ACCEPTANCE_REMAINS__FRONTIERCODE_SCORE_STILL_UNPROVED",
+  "status": "ACTIVE_CAPABILITY_FIRST__BENCHMARK_DEMOTED_TO_AUDIT__V6B_CONTENT_ADDRESSED_INDEPENDENT_MEASUREMENT_AND_BOUNDED_SOURCE_GROUNDED_COMPOSED_ACCEPTANCE_VERIFIED__GENERAL_SEMANTIC_AND_MERGEABILITY_REMAINS__FRONTIERCODE_SCORE_STILL_UNPROVED",
   "mission_lock": {
     "primary_objective": "MAKE_THE_UNDERLYING_SOFTWARE_ENGINEERING_CAPABILITY_REAL_INSIDE_BRAIN",
     "capability_target": "UNSEEN_REPOSITORY_PLUS_SOFTWARE_TASK_TO_INDEPENDENTLY_VERIFIED_MERGEABLE_PATCH",
@@ -107,6 +107,50 @@
         "model_dependency_count": 0,
         "external_capability_provider_count": 0,
         "incremental_spend_usd": 0
+      },
+      {
+        "capability_id": "candidate.measurement.independent.content_addressed.v1",
+        "runtime_git_blob_sha": "c4264a52f9c9ade5569a18fde9a61721d3a5fd1e",
+        "test_git_blob_sha": "7a3142ba9a31ffee3c4fec838f4a97fc582b2764",
+        "registry_git_blob_sha": "036728889fcaf27081b99cc743a3a4d564ffc7d4",
+        "independent_replay": "canonical/verification/V6B_MEASURED_SEMANTIC_ACCEPTANCE_VERIFY_20261011_V1.json",
+        "capability_truth": "CONTENT_ADDRESSED_CANDIDATE_TREE_AND_STRUCTURALLY_EXTERNAL_VERIFIER_EXECUTION__TYPED_MEASUREMENT_RECEIPT__BUILDER_DECLARATIONS_NOT_TRUSTED",
+        "model_dependency_count": 0,
+        "external_capability_provider_count": 0,
+        "incremental_spend_usd": 0
+      },
+      {
+        "capability_id": "task.acceptance.measured.objective.lossless.v1",
+        "runtime_git_blob_sha": "8aa3615418b1b118ec55e9f9bd16c51b1b5a4fd6",
+        "test_git_blob_sha": "e26ea8f3a0356c4f5ee98cbad8ed3e40698cbd7b",
+        "registry_git_blob_sha": "036728889fcaf27081b99cc743a3a4d564ffc7d4",
+        "independent_replay": "canonical/verification/V6B_MEASURED_SEMANTIC_ACCEPTANCE_VERIFY_20261011_V1.json",
+        "capability_truth": "LOSSLESS_OBJECTIVE_RAW_TASK_ACCEPTANCE_WITH_TYPED_FIELDS_ONLY_FROM_INDEPENDENT_CONTENT_ADDRESSED_MEASUREMENT_RECEIPTS",
+        "model_dependency_count": 0,
+        "external_capability_provider_count": 0,
+        "incremental_spend_usd": 0
+      },
+      {
+        "capability_id": "python.acceptance.source_grounded.behavior_examples.v1",
+        "runtime_git_blob_sha": "230f18380804ed7c4b2598badce20eefe3a73795",
+        "test_git_blob_sha": "8b55f0298e6da3ecab8a3dbf66eab7ff0b8e415a",
+        "registry_git_blob_sha": "036728889fcaf27081b99cc743a3a4d564ffc7d4",
+        "independent_replay": "canonical/verification/V6B_MEASURED_SEMANTIC_ACCEPTANCE_VERIFY_20261011_V1.json",
+        "capability_truth": "EXACT_RAW_SOURCE_SEGMENT_TO_DETERMINISTIC_PYTHON_FUNCTION_RETURN_OR_BUILTIN_EXCEPTION_VERIFIER__AMBIGUOUS_TEXT_REMAINS_RESIDUAL",
+        "model_dependency_count": 0,
+        "external_capability_provider_count": 0,
+        "incremental_spend_usd": 0
+      },
+      {
+        "capability_id": "software.acceptance.composed.lossless.v1",
+        "runtime_git_blob_sha": "d2b59e09824fd57b3dd9139808f4d209dca69559",
+        "test_git_blob_sha": "c0642222e8d1ee0d982daf1a9198d7f139241888",
+        "registry_git_blob_sha": "036728889fcaf27081b99cc743a3a4d564ffc7d4",
+        "independent_replay": "canonical/verification/V6B_MEASURED_SEMANTIC_ACCEPTANCE_VERIFY_20261011_V1.json",
+        "capability_truth": "ONE_LOSSLESS_RAW_OBLIGATION_LEDGER_COMPOSING_OBJECTIVE_AND_EXPLICIT_PYTHON_BEHAVIOR_ROUTES__ALL_MEASUREMENTS_BIND_ONE_CANDIDATE_SNAPSHOT__ACCEPTANCE_STOP_ONLY_WHEN_EVERY_OBLIGATION_COVERED_AND_PASSES",
+        "model_dependency_count": 0,
+        "external_capability_provider_count": 0,
+        "incremental_spend_usd": 0
       }
     ]
   },
@@ -114,13 +158,16 @@
     {
       "stage": "RAW_TASK_SEMANTICS",
       "target": "RAW_SOFTWARE_REQUEST_TO_SOUND_EXPLICIT_BEHAVIORAL_AND_ACCEPTANCE_CONTRACT",
-      "state": "PARTIAL_LOSSLESS_OBJECTIVE_ACCEPTANCE_EXECUTABLE",
+      "state": "PARTIAL_COMPOSED_SOURCE_GROUNDED_ACCEPTANCE_VERIFIED",
       "existing_support": [
         "goal_compiler.py",
         "plain_goal.bound_capability.grounding.stdlib",
-        "task.acceptance.objective.lossless.v1"
+        "task.acceptance.objective.lossless.v1",
+        "task.acceptance.measured.objective.lossless.v1",
+        "python.acceptance.source_grounded.behavior_examples.v1",
+        "software.acceptance.composed.lossless.v1"
       ],
-      "residual": "OBJECTIVE_SOURCE_GROUNDED_ACCEPTANCE_ROUTES_ARE_EXECUTABLE__GENERAL_SEMANTIC_RAW_REQUEST_OBLIGATIONS_AND_INDEPENDENT_MEASUREMENT_BINDING_REMAIN"
+      "residual": "CURRENT_SOUND_COVERAGE_INCLUDES_OBJECTIVE_CONSTRAINTS_PLUS_EXPLICIT_TOP_LEVEL_PYTHON_FUNCTION_JSON_RETURN_OR_BUILTIN_EXCEPTION_EXAMPLES__BROADER_NATURAL_LANGUAGE_SEMANTIC_FAMILIES_REMAIN"
     },
     {
       "stage": "REPOSITORY_UNDERSTANDING_AND_LOCALIZATION",
@@ -161,18 +208,20 @@
         "python.fault.provenance.interprocedural.value.v1",
         "python.software.repair.guided.provenance.coupled.v1"
       ],
-      "residual": "REPAIR_REMAINS_BOUND_TO_EXISTING_TEST_ORACLE_AND_BOUNDED_PYTHON_EDIT_BASIS__RAW_REQUEST_TO_INDEPENDENT_ACCEPTANCE_SEMANTICS_REMAINS_OPEN"
+      "residual": "V5_PROVENANCE_GUIDED_REPAIR_AND_V6B_ACCEPTANCE_CONTROLLER_ARE_BOTH_VERIFIED_BUT_NOT_YET_CAUSALLY_COMPOSED_INTO_ONE_ACCEPTANCE_GUIDED_REPAIR_LOOP"
     },
     {
       "stage": "INDEPENDENT_VERIFICATION",
       "target": "REQUESTED_BEHAVIOR_PLUS_REGRESSION_PLUS_SCOPE_DISCIPLINE_PLUS_CODEBASE_STANDARDS",
-      "state": "PARTIAL_OBJECTIVE_ACCEPTANCE_MODEL_VERIFIED",
+      "state": "PARTIAL_CONTENT_ADDRESSED_INDEPENDENT_ACCEPTANCE_VERIFIED",
       "existing_support": [
         "python.tests.audit.unittest",
         "professional quality property stack",
-        "task.acceptance.objective.lossless.v1"
+        "task.acceptance.objective.lossless.v1",
+        "candidate.measurement.independent.content_addressed.v1",
+        "software.acceptance.composed.lossless.v1"
       ],
-      "residual": "OBJECTIVE_ACCEPTANCE_EXECUTES_BOUND_PREDICATES__DIRECT_CANDIDATE_FIELDS_ARE_NOT_YET_CONTENT_ADDRESSED_INDEPENDENT_MEASUREMENTS__SEMANTIC_RESIDUALS_REMAIN"
+      "residual": "CURRENT_BOUND_ACCEPTANCE_MEASUREMENTS_ARE_INDEPENDENT_AND_CONTENT_ADDRESSED__GENERAL_HIDDEN_REQUIREMENTS_CODEBASE_STANDARDS_AND_COMPLETE_MERGEABILITY_REMAIN"
     },
     {
       "stage": "GENERALIZATION",
@@ -186,14 +235,15 @@
     "primary_work_class": "CAPABILITY_BUILD",
     "benchmark_instrumentation_state": "AUDIT_ONLY",
     "owner_wait_state": "NONBLOCKING_OPTIONAL_WAKE_EVENT",
-    "highest_leverage_next_build": "GENERAL_SOFTWARE_REPAIR_LOOP_V6B__INDEPENDENT_MEASUREMENT_BINDING_AND_SEMANTIC_ACCEPTANCE",
+    "highest_leverage_next_build": "GENERAL_SOFTWARE_REPAIR_LOOP_V6C__ACCEPTANCE_GUIDED_REPAIR_AND_SEMANTIC_FAMILY_EXPANSION",
     "next_build_contract": [
-      "BIND_OBJECTIVE_ACCEPTANCE_FIELDS_TO_CONTENT_ADDRESSED_INDEPENDENT_MEASUREMENTS_INSTEAD_OF_BUILDER_DECLARATIONS",
-      "COMPILE_ONLY_SOURCE_GROUNDED_SEMANTIC_ACCEPTANCE_CELLS_WITH_EXPLICIT_SOUNDNESS_BOUNDARIES",
-      "KEEP_EVERY_UNBOUND_RAW_SOURCE_SEGMENT_AS_AN_EXPLICIT_BLOCKING_RESIDUAL",
-      "COMPOSE_ACCEPTANCE_STOP_WITH_VERIFIED_PROVENANCE_GUIDED_REPAIR_WITHOUT_BUILDER_CORRELATED_CHECKS",
-      "INDEPENDENT_FALSIFICATION_REPLAY_AND_ZERO_EXTERNAL_GENERAL_PURPOSE_MODEL_RUNTIME_COGNITION",
-      "NO_BENCHMARK_SCORE_INFERENCE"
+      "USE_SOFTWARE_ACCEPTANCE_COMPOSED_LOSSLESS_V1_AS_THE_LOAD_BEARING_STOP_ORACLE_FOR_PROVENANCE_GUIDED_REPAIR",
+      "PROVE_REPAIR_ITERATIONS_CANNOT_ACCEPT_BUILDER_CORRELATED_OR_STALE_MEASUREMENTS",
+      "ADD_NEW_SOURCE_GROUNDED_SEMANTIC_FAMILIES_ONLY_WITH_EXACT_GRAMMAR_AND_INDEPENDENT_EXECUTABLE_VERIFIERS",
+      "PRIORITIZE_STATE_TRANSITION_SIDE_EFFECT_AND_CLI_API_FILE_IO_BEHAVIOR_BY_REUSE_AND_COUNTEREXAMPLE_VALUE",
+      "KEEP_ALL_UNSUPPORTED_RAW_SOURCE_SEGMENTS_AS_BLOCKING_RESIDUALS",
+      "INDEPENDENT_FALSIFICATION_REPLAY_ZERO_EXTERNAL_GENERAL_PURPOSE_MODEL_RUNTIME_COGNITION",
+      "NO_FRONTIERCODE_SCORE_INFERENCE"
     ],
     "stop_conditions": [
       "DO_NOT_SPEND_PRIMARY_CYCLES_ON_PRIVATE_BENCHMARK_ARCHAEOLOGY",
@@ -221,7 +271,11 @@
     "NO_CLAIM_V5_REPAIR_CLOSES_RAW_REQUEST_ACCEPTANCE_SEMANTICS",
     "NO_CLAIM_OBJECTIVE_ACCEPTANCE_SUBSET_CLOSES_GENERAL_V6",
     "NO_CLAIM_BUILDER_DECLARED_CANDIDATE_FIELDS_ARE_INDEPENDENT_MEASUREMENTS",
-    "NO_CLAIM_ARBITRARY_NATURAL_LANGUAGE_SEMANTIC_ACCEPTANCE_IS_SOLVED"
+    "NO_CLAIM_ARBITRARY_NATURAL_LANGUAGE_SEMANTIC_ACCEPTANCE_IS_SOLVED",
+    "NO_CLAIM_V6B_BOUNDED_ACCEPTANCE_COVERS_ARBITRARY_NATURAL_LANGUAGE_SOFTWARE_REQUESTS",
+    "NO_CLAIM_CURRENT_BEHAVIOR_GRAMMAR_COVERS_SIDE_EFFECT_STATEFUL_ASYNC_OBJECT_METHOD_CLI_API_OR_FILE_IO_SEMANTICS",
+    "NO_CLAIM_ACCEPTANCE_CONTROLLER_IS_YET_LOAD_BEARING_INSIDE_PROVENANCE_GUIDED_REPAIR_LOOP",
+    "NO_CLAIM_GENERAL_HIDDEN_REQUIREMENTS_OR_MERGEABILITY_IS_SOLVED"
   ],
   "accounting": {
     "incremental_spend_usd": 0,
