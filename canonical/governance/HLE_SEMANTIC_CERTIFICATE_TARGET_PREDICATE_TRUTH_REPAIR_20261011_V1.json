@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_SEMANTIC_CERTIFICATE_TARGET_PREDICATE_TRUTH_REPAIR_20261011_V1",
+  "date": "2026-10-11",
+  "status": "ACTIVE_TRUTH_REPAIR__SEMANTIC_CERTIFICATE_DEMOTED_FROM_EXACT_BENCHMARK_CLOSURE__ZERO_CREDIT",
+  "target_predicate": "HLE_WITH_TOOLS_REPORTED_SCORE_GE_67_7_UNDER_TARGET_PROTOCOL",
+  "supersedes_claims_in": [
+    "canonical/governance/HLE_STRONGER_SEMANTIC_CERTIFICATE_ROUTE_20261011_V1.json",
+    "canonical/governance/HLE_EXACT_COMMIT_EXECUTION_PREFLIGHT_20261011_V2.json"
+  ],
+  "defect": {
+    "statement": "The exact-hidden-gold identity certificate proves reference-answer semantic correctness on the certified slots, but the published HLE metric is produced by a model grader whose binary correct labels are aggregated. Therefore semantic correctness alone does not logically entail the exact reported target score unless evaluator identity or a sound directional relation is also bound.",
+    "countermodel": "A solver can answer the official hidden gold string exactly while a stochastic or defective target grader outputs correct=no. Such a world is inconsistent with ideal grading but is not excluded by the published protocol. Therefore exact-gold identity does not force the target benchmark score bit."
+  },
+  "primary_public_scorer_evidence": {
+    "source": "centerforaisafety/hle@22ed3074b1e7b134bcbc09028d0ba320839b0655/hle_eval/run_judge_results.py",
+    "facts": [
+      "JUDGE_MODEL_EMITS_STRUCTURED_FIELD_correct_yes_or_no",
+      "METRIC_COUNTS_yes_IN_JUDGE_RESPONSE_correct",
+      "NO_MACHINE_EXACT_MATCH_PREPASS_OR_OVERRIDE_EXISTS_IN_THE_PUBLIC_SCORER",
+      "PROMPT_INSTRUCTS_THE_JUDGE_TO_MARK_MATCHING_ANSWERS_yes_BUT_PROMPT_INTENT_IS_NOT_A_DETERMINISTIC_THEOREM_ABOUT_MODEL_OUTPUT"
+    ]
+  },
+  "anthropic_target_evidence": {
+    "facts": [
+      "OPUS_5_5_HLE_WITH_TOOLS_TARGET_IS_67_7",
+      "CLAUDE_OPUS_4_6_SERVED_AS_MODEL_GRADER",
+      "NO_PUBLIC_DETERMINISTIC_EXACT_MATCH_OVERRIDE_BOUND_IN_CURRENT_EVIDENCE"
+    ]
+  },
+  "preserved_value_of_exact_commit_route": [
+    "PROVES_A_STRICT_REFERENCE_SEMANTIC_CORRECTNESS_LOWER_BOUND",
+    "PROVIDES_GRADER_INDEPENDENT_CAPABILITY_EVIDENCE",
+    "CAN_BE_USED_AS_A_FALSIFICATION_OR_SANITY_CERTIFICATE",
+    "CAN_CLOSE_THE_TARGET_ONLY_IF_A_FUTURE_PROOF_BINDS_THE_TARGET_METRIC_TO_REFERENCE_SEMANTIC_CORRECTNESS"
+  ],
+  "restored_load_bearing_requirement_for_exact_benchmark_predicate": [
+    "AUTHENTIC_TARGET_GRADER_RESULT_OR",
+    "PROVED_TARGET_EQUIVALENT_GRADER_OR",
+    "PROVED_ONE_SIDED_RELATION_FROM_A_CONSERVATIVE_SCORER_TO_TARGET_GRADER"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_CURRENT_BRAIN_HLE_SCORE_GE_67_7",
+    "NO_CLAIM_EXACT_GOLD_IDENTITY_FORCES_CLAUDE_OPUS_4_6_correct_yes",
+    "NO_TERMINAL_CASES_READ_OR_CONSUMED",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false
+}
