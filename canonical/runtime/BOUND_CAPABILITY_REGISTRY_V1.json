@@ -4664,6 +4664,65 @@
         "benchmark_cases_consumed": 0,
         "external_general_purpose_model_runtime_dependency_count": 0
       }
+    },
+    "task.acceptance.objective.lossless.v1": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "cost": 1,
+      "incremental_spend_usd": 0,
+      "requires": [
+        "raw_task.text.available",
+        "candidate.response_or_fields.available"
+      ],
+      "provides": [
+        "raw_task.objective_acceptance.model",
+        "raw_task.objective_acceptance.verdict",
+        "raw_task.semantic_residual.ids"
+      ],
+      "keywords": [
+        "acceptance",
+        "raw task",
+        "specification",
+        "objective",
+        "verifier",
+        "semantic residual",
+        "software"
+      ],
+      "adapter_module": "raw_task_objective_acceptance_executor_v1",
+      "entrypoint": "run",
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "limitations": [
+        "Preserves every non-whitespace raw-task segment and executes only source-grounded objective acceptance routes already supported by the Brain.",
+        "Any semantic residual blocks candidate acceptance and acceptance-stop authorization.",
+        "Direct candidate fields are inputs to typed predicates and are not by themselves independently measured or content-addressed observations.",
+        "Existing tests, builder success, or candidate evidence cannot substitute for unresolved raw-request semantics.",
+        "No general natural-language semantic completeness, general V6 closure, benchmark score, or terminal authority."
+      ],
+      "source": {
+        "type": "brain_owned_python_composition",
+        "adapter_path": "canonical/runtime/raw_task_objective_acceptance_executor_v1.py",
+        "donor_capabilities": [
+          "lossless_raw_task_contract_v1",
+          "raw_task_acceptance_residual_localizer_v1",
+          "instruction_constraint_compiler_v1",
+          "source_aligned_acceptance_program_v1",
+          "typed_acceptance_program_v1"
+        ]
+      },
+      "verification": {
+        "independently_verified": true,
+        "primary_test_count": 13,
+        "independent_test_count": 13,
+        "receipt_path": "canonical/verification/RAW_TASK_OBJECTIVE_ACCEPTANCE_EXECUTOR_V1_INDEPENDENT_VERIFY_20261011_V1.json",
+        "runtime_git_blob_sha": "c138171744406edd8e75e4867634febdb596014b",
+        "test_git_blob_sha": "00a1b23a80c12cdb38493de0de6335b62247fef4",
+        "model_dependency_count": 0,
+        "external_general_purpose_model_runtime_dependency_count": 0,
+        "incremental_spend_usd": 0
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
