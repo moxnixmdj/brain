@@ -111,6 +111,18 @@ class MeasuredObjectiveAcceptanceV1Tests(unittest.TestCase):
             self.assertFalse(out["pass"], out)
             self.assertFalse(out["acceptance_stop_authorized"])
 
+    def test_bound_run_writes_verified_output(self):
+        td, root = self.fixture(1)
+        with td:
+            out = a.run({
+                "task_text": "tests_pass must be true.",
+                "measurement_receipt_path": "receipt.json",
+                "output_path": "acceptance.json",
+            }, root)
+            self.assertTrue(out["pass"], out)
+            self.assertTrue(out["output_verified"])
+            self.assertTrue((root / "acceptance.json").is_file())
+
     def test_zero_external_runtime_cognition(self):
         self.assertEqual(a.MODEL_DEPENDENCY_COUNT, 0)
         self.assertEqual(a.EXTERNAL_MODEL_RUNTIME_CALLS, 0)
