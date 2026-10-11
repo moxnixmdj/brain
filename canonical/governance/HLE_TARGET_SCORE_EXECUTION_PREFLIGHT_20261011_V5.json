@@ -1,0 +1,89 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_TARGET_SCORE_EXECUTION_PREFLIGHT_20261011_V5",
+  "date": "2026-10-11",
+  "status": "G1_DATASET_GATE_CLOSED__NATIVE_SOLVER_BINDING_NOT_YET_PROVED__G2_TARGET_GRADER_WAKE_GATED__ZERO_CREDIT",
+  "target_predicate": "ANTHROPIC_COMPARABLE_HLE_WITH_TOOLS_SCORE_GE_67_7",
+  "target_scope": {
+    "population": "FIXED_ORIGINAL_HLE_2500",
+    "revision": "5a81a4c7271a2a2a312b9a690f0c2fde837e4c29",
+    "artifact_sha256": "6d0ee0602e8aea6b159509577e884f48ecac7b8e3f6822a35f51335a446c726a",
+    "population_scope_closure": "canonical/governance/HLE_TARGET_POPULATION_SCOPE_CLOSURE_20261011_V1.json",
+    "ingest_verification": "canonical/governance/HLE_DATASET_INGEST_VERIFICATION_20261011_V1.json",
+    "safe_population_profile": "canonical/governance/HLE_SAFE_POPULATION_PROFILE_20261011_V1.json"
+  },
+  "protocol": {
+    "trials": 5,
+    "questions_per_trial": 2500,
+    "total_slots": 12500,
+    "target_percent": 67.7,
+    "minimum_binary_successes_at_slot_level": 8463,
+    "tools": ["web_search","web_fetch","programmatic_tool_calling","code_execution"],
+    "thinking": "auto",
+    "total_tokens_across_contexts_cap": 1000000,
+    "context_compaction": false,
+    "model_grader": "Claude Opus 4.6"
+  },
+  "gates": [
+    {
+      "id": "G1_AUTHORIZED_POPULATION_ACCESS",
+      "state": "CLOSED__AUTHORIZED_ARTIFACT_ACQUIRED_AND_STRUCTURALLY_VERIFIED",
+      "evidence": "canonical/governance/HLE_DATASET_INGEST_VERIFICATION_20261011_V1.json"
+    },
+    {
+      "id": "G1B_BRAIN_NATIVE_SOLVER_BINDING",
+      "state": "OPEN__ONE_SEMANTIC_COMPILATION_AND_ANSWER_SYNTHESIS_RESIDUAL_ISOLATED",
+      "predicate": "REAL_BRAIN_NATIVE_SOLVER_CAN_MAP_RAW_HLE_INPUTS_TO_PRECOMMITTED_FINAL_ANSWERS_WITHOUT_EXTERNAL_MODEL_SOLVER_OUTPUT_OR_GOLD",
+      "reduction": "canonical/governance/HLE_NATIVE_SOLVER_GAP_REDUCTION_20261011_V1.json"
+    },
+    {
+      "id": "G2_TARGET_GRADER_BINDING",
+      "state": "OPEN__WAKE_GATED",
+      "predicate": "REPRODUCIBLE_CLAUDE_OPUS_4_6_TARGET_GRADER_PROTOCOL_OR_SCOPE_COMPLETE_PROVED_DIRECTIONAL_RELATION_TO_AN_AVAILABLE_SCORER",
+      "reconciliation": "canonical/governance/HLE_G2_TARGET_GRADER_BINDING_RECONCILIATION_20261011_V1.json"
+    }
+  ],
+  "phase_separation": {
+    "solver_commitment_phase": {
+      "may_start_when": "G1_CLOSED_AND_G1B_CLOSED",
+      "does_not_require_G2": true,
+      "reason": "Target grading is post-commit; delaying clean solver commitments for an unavailable grader wastes wall-clock time.",
+      "must_not_start_with_external_model_substitution": true
+    },
+    "target_grading_and_promotion_phase": {
+      "may_start_when": "G2_CLOSED_AND_ALL_SOLVER_COMMITMENTS_SEALED",
+      "requires_authentic_or_proved_comparable_target_grader": true
+    }
+  },
+  "ready_components": [
+    "AUTHORIZED_FIXED_ORIGINAL_HLE_2500",
+    "VERIFIED_HLE_TOOL_ADAPTER_AND_CONTAMINATION_BLOCKLIST",
+    "GOLD_ISOLATION_AND_CONTENT_ADDRESSED_COMMITMENT_SCHEME",
+    "FIVE_TRIAL_PROTOCOL_BINDING",
+    "SUPPLEMENTARY_EXACT_GOLD_SEMANTIC_CERTIFICATE",
+    "MODEL_INDEPENDENT_RESEARCH_RETRIEVAL_EVIDENCE_AND_TYPED_SYMBOLIC_SUBCAPABILITIES"
+  ],
+  "remaining_load_bearing_residuals": [
+    "G1B_BRAIN_NATIVE_GENERAL_SEMANTIC_COMPILER_AND_ANSWER_SYNTHESIZER",
+    "G2_TARGET_GRADER_BINDING_OR_SOUND_DIRECTIONAL_RELATION"
+  ],
+  "scheduler": {
+    "G1": "DONE__DO_NOT_REPEAT_HUGGINGFACE_AUTH_OR_DATASET_SEARCH",
+    "G1B": "ACTIVE_CRITICAL_PATH__REUSE_AND_PROMOTE_EXISTING_BRAIN_OWNED_TYPED_RESEARCH_AND_SYMBOLIC_COMPONENTS",
+    "G2": "WAKE_GATED__DO_NOT_REPEAT_GENERIC_PUBLIC_SEARCH_UNTIL_VALID_WAKE_EVENT"
+  },
+  "hard_nonclaims": [
+    "NO_HLE_TERMINAL_EXECUTION",
+    "NO_CURRENT_BRAIN_HLE_TARGET_SCORE",
+    "NO_GRADER_EQUIVALENCE_CLAIM",
+    "NO_TARGET_SCORE_CREDIT_FROM_EXACT_MATCH_ONLY",
+    "NO_EXTERNAL_MODEL_SOLVER_OUTPUT_COUNTS_AS_BRAIN_CAPABILITY",
+    "NO_CLAIM_THE_CURRENT_VERIFIED_REGISTRY_ALREADY_SOLVES_ARBITRARY_HLE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "model_inference_requests": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
