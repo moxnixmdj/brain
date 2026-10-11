@@ -1,0 +1,104 @@
+{
+  "schema": "PROJECT_BRAIN_FINANCE_AGENT_V2_PUBLIC_Q25_DONOR_FREE_DCF_CANARY_V1",
+  "date": "2026-10-11",
+  "status": "PUBLIC_CANARY_MUST_PASS_MATCH__DONOR_FREE_SEC_FACTS_PLUS_CONSTANT_RATIO_DCF__ZERO_BENCHMARK_CREDIT",
+  "target_predicate": "FINANCE_AGENT_V2_GE_58_59",
+  "scope": "PUBLIC_QUESTION_ONLY__FINANCIAL_MODELING_CRM_DCF_MUST_PASS",
+  "benchmark_binding": {
+    "repository": "vals-ai/finance-agent-v2",
+    "commit": "502aab6fdaa3fb9294905c7453f89882baa8d39b",
+    "public_csv_path": "data/public.csv",
+    "public_csv_git_blob_sha": "fca7ec52abce7ca8351d0692d00a4aa74f680855",
+    "public_question_ordinal_1_based": 25,
+    "category": "Financial Modeling",
+    "public_must_pass": {
+      "fy2031_projected_revenue_million_usd": "66585.80",
+      "enterprise_value_million_usd": "239207.07"
+    }
+  },
+  "primary_sources": [
+    {
+      "type": "SALESFORCE_FY2026_10K",
+      "url": "https://www.sec.gov/Archives/edgar/data/1108524/000110852426000060/crm-20260131.htm",
+      "facts_million_usd": {
+        "fy2024_revenue": "34857",
+        "fy2026_revenue": "41525",
+        "fy2026_operating_income": "8331",
+        "fy2026_restructuring": "586",
+        "fy2026_depreciation_and_amortization": "3631",
+        "fy2026_amortization_capitalized_contract_costs": "2197",
+        "fy2026_stock_based_compensation": "3509",
+        "fy2026_change_nwc": "-781",
+        "fy2026_capex": "594"
+      },
+      "derived": {
+        "question_defined_d_and_a": "5828",
+        "question_defined_adjusted_ebitda": "14745"
+      }
+    },
+    {
+      "type": "SALESFORCE_Q4_FY2026_RELEASE",
+      "url": "https://www.sec.gov/Archives/edgar/data/1108524/000110852426000056/crm-q4fy26xexhibit991.htm",
+      "fy2027_revenue_guidance_billion_usd": [
+        "45.8",
+        "46.2"
+      ],
+      "fy2027_midpoint_million_usd": "46000"
+    }
+  ],
+  "conventions": {
+    "d_and_a": "DEPRECIATION_AND_AMORTIZATION_PLUS_AMORTIZATION_OF_COSTS_CAPITALIZED_TO_OBTAIN_REVENUE_CONTRACTS",
+    "change_nwc": "SUM_OF_CASH_FLOW_STATEMENT_WORKING_CAPITAL_ASSET_AND_LIABILITY_CHANGES_EXCLUDING_NONWORKING_CAPITAL_ITEMS",
+    "adjusted_ebitda": "OPERATING_INCOME_PLUS_QUESTION_DEFINED_D_AND_A_PLUS_RESTRUCTURING",
+    "projection": "HOLD_FY2026_OPERATING_INCOME_MARGIN_ADJUSTED_EBITDA_MARGIN_SBC_CHANGE_NWC_AND_CAPEX_AS_PERCENT_OF_REVENUE_CONSTANT_FOR_FY2027_TO_FY2031",
+    "future_d_and_a": "PROJECTED_ADJUSTED_EBITDA_MINUS_PROJECTED_OPERATING_INCOME__NO_FUTURE_RESTRUCTURING_ADD_BACK",
+    "fcf": "AFTER_TAX_OPERATING_INCOME_PLUS_D_AND_A_PLUS_SBC_PLUS_CHANGE_NWC_MINUS_CAPEX",
+    "terminal": "FY2031_PROJECTED_ADJUSTED_EBITDA_TIMES_10",
+    "discount_rate_percent": "8",
+    "tax_rate_percent": "25"
+  },
+  "recomputation": {
+    "fy2024_to_fy2027_cagr_decimal": "0.0968719783343671349604309107428333859442084811677",
+    "revenues_million_usd": [
+      "46000",
+      "50456.111003380888208179821894170335753433590133714",
+      "55343.894295336824813749017564808408566785684128877",
+      "60705.166824454198582781076971626932897265972401532",
+      "66585.796429856868278287626793236235036232181373930"
+    ],
+    "fy2031_display_revenue_million_usd": "66585.80",
+    "pv_projected_fcf_million_usd": "78291.538179123979074138768006276859992791427725613",
+    "terminal_value_million_usd": "236437.70460162300367570163926942041796730728822603",
+    "pv_terminal_value_million_usd": "160915.52889709471566513908139417404888135279130197",
+    "enterprise_value_million_usd": "239207.06707621869473927784940045090887414421902758",
+    "display_enterprise_value_million_usd": "239207.07",
+    "public_must_pass_match": true
+  },
+  "brain_route": {
+    "sec_metric_registry": "canonical/runtime/finance_metric_xbrl_registry_v1.py",
+    "sec_fact_selector": "canonical/runtime/finance_sec_fact_selector_v1.py",
+    "question_compiler": "canonical/runtime/finance_quantitative_question_contract_v1.py",
+    "dependency_compiler": "canonical/runtime/finance_quantitative_dependency_v1.py",
+    "algebra": "canonical/runtime/finance_quantitative_algebra_v1.py",
+    "runtime_external_model_cognition_required": false
+  },
+  "proved": [
+    "BOTH_PUBLIC_MUST_PASS_CHECKS_FOR_Q25_RECOMPUTE_FROM_FIRST_PARTY_SEC_FACTS_AND_LITERAL_QUESTION_ASSUMPTIONS",
+    "THE_D_AND_A_5828_CONVENTION_IS_EXPLICITLY_3631_PLUS_2197",
+    "THE_CHANGE_NWC_NEGATIVE_781_IS_REPRODUCIBLE_FROM_THE_FY2026_CASH_FLOW_WORKING_CAPITAL_LINES",
+    "THE_DCF_ENTERPRISE_VALUE_MATCHES_THE_PUBLIC_RUBRIC_TO_TWO_DECIMALS",
+    "NO_PRIVATE_TEST_OR_VALIDATION_CASE_WAS_ACCESSED"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_PUBLIC_Q25_PROVES_PRIVATE_TEST_TRANSFER",
+    "NO_CLAIM_ALL_PRIVATE_DCF_TASKS_USE_IDENTICAL_FCF_CONVENTIONS",
+    "NO_CLAIM_FINANCE_AGENT_V2_SCORE_GE_58_59",
+    "NO_ACCEPTANCE_FAMILY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "private_cases_exposed": 0,
+    "benchmark_score_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
