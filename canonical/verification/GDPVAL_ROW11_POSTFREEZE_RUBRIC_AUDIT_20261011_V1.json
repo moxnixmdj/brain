@@ -1,0 +1,43 @@
+{
+  "schema":"PROJECT_BRAIN_GDPVAL_ROW11_POSTFREEZE_RUBRIC_AUDIT_20261011_V1",
+  "date":"2026-10-11",
+  "status":"NEAR_COMPLETE_FRESH_STAGE_PLOT_TRANSFER__FROZEN_OUTPUT_POSTFREEZE_AUDIT__ZERO_OWNER_SCORE_CREDIT",
+  "benchmark":"GDPval-AA v2.1",
+  "task_id":"f9a1c16c-53fd-4c8f-88cc-5c325ec2f0bb",
+  "public_rubric_total_points":79,
+  "conservative_points_satisfied":78,
+  "conservative_fraction":0.9873417721518988,
+  "not_an_owner_score":true,
+  "passes":[
+    "SINGLE_PAGE_LANDSCAPE_PDF",
+    "FRONT_OF_STAGE_BOTTOM",
+    "SIDE_BY_SIDE_NUMBERED_INPUT_OUTPUT_LISTS",
+    "COUNTERCLOCKWISE_WEDGE_NUMBERING_FROM_STAGE_RIGHT",
+    "ALL_SIX_REQUIRED_INPUTS",
+    "ALL_FIVE_WEDGE_OUTPUTS",
+    "TWO_DISTINCT_IEM_SPLIT_OUTPUTS",
+    "CORRECT_MONITOR_SEND_CONTENT",
+    "CORRECT_BASS_VOX1_VOX2_GUITAR_STAGE_PLACEMENT",
+    "CENTER_DRUM_KIT",
+    "DRUMMER_WEDGE_FRONT_LEFT_ABOUT_10_OCLOCK",
+    "FOUR_DOWNSTAGE_WEDGES",
+    "BASS_AND_GUITAR_AMPS_BEHIND_PLAYERS",
+    "TWO_BASS_ASSOCIATED_DI_BOXES",
+    "TWO_VOCAL_XLR_SPLITS_WITH_FOH_AND_IEM_DESTINATIONS",
+    "REQUIRED_MIC_AND_WEDGE_TITLE_LABELS_EXCEPT_DRUMS_WEDGE_TITLE",
+    "CLEAN_ONE_PAGE_VISUAL_FORMAT"
+  ],
+  "conservative_gap":{
+    "points":1,
+    "criterion":"DRUMMER_MONITOR_WEDGE_HAS_DRUMS_TITLE_ADJACENT",
+    "observed":"W5_IS_ADJACENT_TO_OUTPUT_5_VOX1_PLUS_VOX2_AND_10_OCLOCK_NOTE_BUT_DOES_NOT_REPEAT_THE_TITLE_DRUMS",
+    "classification":"EXPLICIT_LABEL_COMPLETENESS"
+  },
+  "causal_conclusion":{
+    "lossless_prompt_contract_transfer":"PASS",
+    "cross_domain_visual_layout_transfer":"PASS",
+    "remaining_failure_class":"LOCAL_LABEL_COMPLETENESS_NOT_REASONING_OR_LAYOUT_COLLAPSE"
+  },
+  "hard_rule":"DO_NOT_EDIT_ROW11_AND_COUNT_REPLAY_AS_FRESH",
+  "accounting":{"owner_score_credit":0,"acceptance_credit_delta":0,"terminal_credit_delta":0}
+}
