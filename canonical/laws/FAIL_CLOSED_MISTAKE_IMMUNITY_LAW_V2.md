@@ -15,8 +15,8 @@ Unknown cognition provenance fails closed.
 Model-assisted results may be retained only as explicitly contaminated diagnostics or specimens with zero Brain credit.
 
 Executable enforcement:
-- canonical/runtime/external_cognition_donor_gate_v1.py
 - canonical/runtime/enforce_goal_hierarchy.py
+- public terminal admission guard in moxnixmdj/verification-capsule-runner
 
 Ownership authority:
 - canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md
