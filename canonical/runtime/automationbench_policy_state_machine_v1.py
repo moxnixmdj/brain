@@ -13,6 +13,7 @@ import json
 from typing import Any, Mapping, Sequence
 
 from canonical.runtime.automationbench_mutation_compiler_v1 import (
+    compile_asana_add_to_section,
     compile_asana_create_task,
     compile_salesforce_mark_won,
     validate_nonnegative_action,
