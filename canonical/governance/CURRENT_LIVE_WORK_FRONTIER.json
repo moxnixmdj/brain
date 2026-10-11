@@ -154,8 +154,8 @@
       "work_type": "CAPABILITY_BUILD",
       "frontier_class": "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
       "source": "canonical/governance/CHARTOGRAPHY_CAPABILITY_PROOF_FRONTIER_V1.json",
-      "causal_role": "BUILD_AND_VERIFY_BRAIN_NATIVE_CURVE_X_AT_Y_INTERSECTION__HIGHEST_REUSE_TO_WALL_CLOCK_RESIDUAL_FROM_PUBLIC_DECLARATION_COVERAGE__THEN_RECOMPUTE",
-      "readiness": "READY_EXECUTION__CURVE_Y_AT_X_VERIFIED_16_OF_16__INVERSE_CURVE_QUERY_IS_SMALL_SHARED_RESIDUAL",
+      "causal_role": "BUILD_AND_VERIFY_DIRECT_CURVE_LABEL_BINDING_AND_FAMILY_RANK__NEXT_HIGHEST_REUSE_TO_WALL_CLOCK_RESIDUAL_AFTER_BIDIRECTIONAL_CURVE_QUERY_VERIFICATION__BENCHMARK_SCORE_REMAINS_LATER_AUDIT",
+      "readiness": "READY_EXECUTION__CURVE_Y_AT_X_VERIFIED_16_OF_16__CURVE_X_AT_Y_VERIFIED_17_OF_17__DIRECT_CURVE_LABEL_AND_FAMILY_RANK_NEXT",
       "claims_new_primitive": true,
       "score_state": "NOT_A_BENCHMARK_SCORE_TASK",
       "scheduler_state": "READY_EXECUTION",
@@ -191,9 +191,13 @@
         "public_declaration_coverage": "canonical/governance/CHARTOGRAPHY_PUBLIC_DECLARATION_CAPABILITY_COVERAGE_V1.json",
         "curve_value_query_verification": "canonical/verification/CHART_CURVE_VALUE_QUERY_V1_VERIFY_20261011.json",
         "curve_value_query_verifier_run_id": 38152570909,
-        "curve_value_query_tests": "10_AUTHOR_PLUS_6_INDEPENDENT_PASS"
+        "curve_value_query_tests": "10_AUTHOR_PLUS_6_INDEPENDENT_PASS",
+        "inverse_curve_query_verification": "canonical/verification/CHART_CURVE_X_AT_Y_QUERY_V1_VERIFY_20261011.json",
+        "inverse_curve_query_runtime_blob_sha": "04866f3aee99d9fd964f13571d8af278dfa6fe5e",
+        "inverse_curve_query_tests": "11_AUTHOR_PLUS_6_INDEPENDENT_PASS",
+        "inverse_curve_query_verifier_run_id": 38153488048
       },
-      "ready": "BUILD_AND_INDEPENDENTLY_VERIFY_BRAIN_NATIVE_CURVE_X_AT_Y_INTERSECTION__NO_GATED_BENCHMARK_EXECUTION"
+      "ready": "BUILD_AND_INDEPENDENTLY_VERIFY_DIRECT_CURVE_LABEL_BINDING_AND_FAMILY_RANK__NO_GATED_BENCHMARK_EXECUTION"
     },
     {
       "work_id": "PROFESSIONAL_QUALITY_V7_PROPERTY_TRUTH_DEPLETION",
