@@ -400,6 +400,42 @@ def build_planning_problem(
     }
 
 
+
+def _verification_endpoint_ids(
+    contract: Mapping[str, Any],
+    profiles: Sequence[Mapping[str, Any]],
+) -> list[str]:
+    """Choose read surfaces that can independently observe mutated resources."""
+    out: list[str] = []
+    positive = [
+        x for x in (contract.get("intents") or [])
+        if not x.get("forbidden") and x.get("action_class") != "observe"
+    ]
+    for intent in positive:
+        ranked: list[tuple[int, str]] = []
+        for profile in profiles:
+            if profile.get("action_class") != "observe":
+                continue
+            overlap = _resource_overlap(intent, profile)
+            if not overlap:
+                continue
+            semantics = set(str(x) for x in profile.get("response_semantics") or [])
+            score = 4 * len(overlap)
+            if "id" in semantics:
+                score += 3
+            if "name" in semantics:
+                score += 2
+            if "status" in semantics:
+                score += 2
+            if "text" in semantics:
+                score += 1
+            ranked.append((score, str(profile["id"])))
+        ranked.sort(key=lambda x: (-x[0], x[1]))
+        for _, endpoint_id in ranked[:2]:
+            if endpoint_id not in out:
+                out.append(endpoint_id)
+    return out
+
 def plan_goal_over_tool_schemas(
     goal: str,
     endpoints: Sequence[Mapping[str, Any]],
@@ -465,4 +501,8 @@ def plan_goal_over_tool_schemas(
         "mutation_endpoint_ids": [
             x["endpoint_id"] for x in steps if x.get("role") == "mutation"
         ],
+        "verification_endpoint_ids": _verification_endpoint_ids(
+            built["contract"],
+            built["endpoint_profiles"],
+        ),
     }
