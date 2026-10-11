@@ -350,6 +350,81 @@ def _infer_recolor(pairs: Sequence[tuple[Grid, Grid]]) -> dict[int, int] | None:
     return mapping if mapping else None
 
 
+def _zero_components(grid: Grid) -> list[Component]:
+    h, w = _shape(grid)
+    seen: set[tuple[int, int]] = set()
+    out: list[Component] = []
+    for r in range(h):
+        for c in range(w):
+            color = grid[r][c]
+            if color == 0 or (r, c) in seen:
+                continue
+            q = deque([(r, c)])
+            seen.add((r, c))
+            cells: list[tuple[int, int]] = []
+            while q:
+                rr, cc = q.popleft()
+                cells.append((rr, cc))
+                for nr, nc in ((rr - 1, cc), (rr + 1, cc), (rr, cc - 1), (rr, cc + 1)):
+                    if 0 <= nr < h and 0 <= nc < w and (nr, nc) not in seen and grid[nr][nc] == color:
+                        seen.add((nr, nc))
+                        q.append((nr, nc))
+            cells.sort()
+            rs = [x[0] for x in cells]
+            cs = [x[1] for x in cells]
+            out.append(Component(color, tuple(cells), (min(rs), min(cs), max(rs), max(cs))))
+    out.sort(key=lambda x: (x.color, x.bbox, x.cells))
+    return out
+
+
+def _object_feature(component: Component, feature: str) -> str:
+    r0, c0, r1, c1 = component.bbox
+    h = r1 - r0 + 1
+    w = c1 - c0 + 1
+    if feature == "BBOX":
+        return f"{h}x{w}"
+    if feature == "DENSITY":
+        return f"{component.area}/{h*w}"
+    raise ARCNoveltyCompilerError("OBJECT_FEATURE_UNSUPPORTED")
+
+
+def _infer_object_recolor(
+    pairs: Sequence[tuple[Grid, Grid]],
+    feature: str,
+) -> dict[str, int] | None:
+    mapping: dict[str, int] = {}
+    for inp, out in pairs:
+        if _shape(inp) != _shape(out):
+            return None
+        h, w = _shape(inp)
+        for r in range(h):
+            for c in range(w):
+                if inp[r][c] == 0 and out[r][c] != 0:
+                    return None
+        for component in _zero_components(inp):
+            targets = {out[r][c] for r, c in component.cells}
+            if len(targets) != 1:
+                return None
+            key = _object_feature(component, feature)
+            target = next(iter(targets))
+            if key in mapping and mapping[key] != target:
+                return None
+            mapping[key] = target
+    return mapping if mapping else None
+
+
+def _object_recolor_predict(grid: Grid, feature: str, mapping: Mapping[str, int]) -> Grid | None:
+    out = [list(row) for row in grid]
+    for component in _zero_components(grid):
+        key = _object_feature(component, feature)
+        if key not in mapping:
+            return None
+        target = int(mapping[key])
+        for r, c in component.cells:
+            out[r][c] = target
+    return tuple(tuple(row) for row in out)
+
+
 def _component_crop(grid: Grid, which: str) -> Grid | None:
     comps = _components(grid)
     if not comps:
@@ -399,6 +474,8 @@ def _predict(h: Mapping[str, Any], grid: Grid) -> Grid | None:
         return _select_unique_color_panel(grid)
     if kind == "PANEL_CELLWISE_BINARY_RELATION":
         return _panel_relation_predict(grid, h["orientation"], h["mapping"])
+    if kind == "OBJECT_PROPERTY_RECOLOR":
+        return _object_recolor_predict(grid, h["feature"], h["mapping"])
     raise ARCNoveltyCompilerError("HYPOTHESIS_KIND_UNSUPPORTED")
 
 
@@ -503,6 +580,17 @@ def compile_hypotheses(
             if _consistent(h, pairs):
                 candidates.append(h)
 
+    for feature in ("BBOX", "DENSITY"):
+        mapping = _infer_object_recolor(pairs, feature)
+        if mapping is not None:
+            h = {
+                "kind": "OBJECT_PROPERTY_RECOLOR",
+                "feature": feature,
+                "mapping": dict(sorted(mapping.items())),
+            }
+            if _consistent(h, pairs):
+                candidates.append(h)
+
     crop = {"kind": "CROP_NON_BACKGROUND"}
     if _consistent(crop, pairs):
         candidates.append(crop)
@@ -551,6 +639,7 @@ def compile_hypotheses(
             "BOUNDING_BOX_TOP_LEFT_QUADRANT_EXTRACTION",
             "SEPARATOR_PANEL_UNIQUE_COLOR_SELECTION",
             "EQUAL_PANEL_CELLWISE_ZERO_NONZERO_RELATION",
+            "CONNECTED_OBJECT_PROPERTY_RECOLOR",
             "NON_BACKGROUND_BOUNDING_BOX_CROP",
             "UNIQUE_LARGEST_OR_SMALLEST_COMPONENT_CROP",
         ],
