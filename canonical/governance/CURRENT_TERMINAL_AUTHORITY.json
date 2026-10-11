@@ -591,7 +591,7 @@
     },
     "terminal_candidate_donor_independence_audit": {
       "path": "canonical/runtime/terminal_candidate_donor_independence_audit_v1.py",
-      "git_blob_sha": "0ed69641693538f15b7e1658f5ac5e80031afb26",
+      "git_blob_sha": "2c368172b65220104f51b56c3a4352be624ddca6",
       "authority_scope": "STATIC_SOURCE_CLOSURE_PREFLIGHT_ONLY",
       "donor_independence_authority": false,
       "runtime_cognition_provenance_authority": false,
