@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_CLEANROOM_UNSPENT_SLOT_RECOVERY_GATE_INDEPENDENT_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__INDEPENDENT_SPRITE__6_OF_6__FAIL_CLOSED_LEAKAGE_GUARDS__ZERO_SUCCESS_CREDIT",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/tb4_cleanroom_unspent_slot_recovery_v1.py",
+      "git_blob_sha": "7e42145480c58aeac593f683472ca73df2c68a04"
+    },
+    "tests": {
+      "path": "canonical/tests/test_tb4_cleanroom_unspent_slot_recovery_v1.py",
+      "git_blob_sha": "4bafcf857ff6b1455c296af16e6374c479a96104"
+    }
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "sprite_name": "brain-field-projection-verify-20261011-v1",
+    "sprite_id": "sprite-f7ddb46b-7a9b-437e-8079-e815b9ab6fb5",
+    "python": "3.14.4",
+    "tests_run": 6,
+    "tests_passed": 6,
+    "tests_failed": 0,
+    "marker": "TB4_CLEANROOM_RECOVERY_GATE_PASS_6_OF_6"
+  },
+  "proved": [
+    "CONSUMED_TRIAL_SLOT_CANNOT_BE_RECOVERED",
+    "POSTRESULT_ARTIFACT_ACCESS_FAILS_CLOSED",
+    "HIDDEN_VERIFIER_ACCESS_DURING_ACTOR_PHASE_FAILS_CLOSED",
+    "CROSS_TRIAL_RESULT_ADAPTATION_FAILS_CLOSED",
+    "UNVERIFIED_PREVERIFIER_ROOTS_FAIL_CLOSED",
+    "VALID_CLEANROOM_RECOVERY_CHANGES_CAPACITY_ONLY_AND_GRANTS_ZERO_SUCCESS_CREDIT"
+  ],
+  "hard_nonclaims": [
+    "NO_REAL_CAD_MODEL_SLOT_RECOVERED_BY_THIS_MECHANISM_TEST",
+    "NO_TB4_SUCCESS_CREDIT",
+    "NO_EXECUTION_AUTHORITY",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "success_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
