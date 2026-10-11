@@ -10,7 +10,7 @@ from __future__ import annotations
 import re
 from typing import Any, Mapping
 
-from canonical.runtime.osworld_v21_app_policy_overlay_v3 import decide as base_decide
+from canonical.runtime.osworld_v21_app_policy_overlay_v4 import decide as base_decide
 
 SCHEMA = "PROJECT_BRAIN_OSWORLD_V21_WEB_APP_POLICY_OVERLAY_V1"
 
