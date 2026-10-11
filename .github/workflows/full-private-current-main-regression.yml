@@ -20,7 +20,7 @@ permissions:
 
 jobs:
   full-regression:
-    runs-on: [self-hosted, Linux, X64, brain-low-ram]
+    runs-on: [self-hosted, Linux, X64, brain-regression]
     timeout-minutes: 30
     env:
       EXPECTED_SUBJECT_SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.sha }}
