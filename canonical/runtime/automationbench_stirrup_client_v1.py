@@ -15,7 +15,7 @@ from typing import Any, Mapping, Sequence
 
 from canonical.runtime.automationbench_policy_state_machine_v1 import next_policy_action
 
-MODEL_SLUG = "project-brain/automationbench-owned-policy-v1"
+MODEL_SLUG = "project-brain/generic-goal-state-tool-effect-v1"
 CONTEXT_WINDOW_TOKENS = 200_000
 _METADATA_KEY = "project_brain/automationbench_semantic"
 
@@ -105,6 +105,16 @@ class ProjectBrainAutomationBenchClient:
             prompt=prompt,
             history=normalize_history(messages),
         )
+
+        if decision.get("status") == "DONE_VERIFIED":
+            return AssistantMessage(
+                blocks=[TextBlock(text="Task complete.")],
+                token_usage=TokenUsage(),
+                metadata={
+                    "project_brain/status": "DONE_VERIFIED",
+                    "project_brain/phase": str(decision.get("phase") or "COMPLETE"),
+                },
+            )
 
         if decision.get("status") != "CALL_TOOLS":
             return AssistantMessage(
