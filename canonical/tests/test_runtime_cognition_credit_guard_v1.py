@@ -22,6 +22,8 @@ def _materials():
             "canonical/runtime/terminal_closure_reducer.py",
             "canonical/runtime/ownership_promotion_compiler_v1.py",
             "canonical/runtime/final_terminal_cleanroom_gate_v1.py",
+            "canonical/runtime/terminal_global_ownership_postconditions_reducer_v1.py",
+            "canonical/runtime/terminal_kstar_promotion_bridge_v1.py",
         )
     }
     return pointer, startup, runtime, bindings
@@ -99,3 +101,39 @@ def test_removed_final_cleanroom_guard_binding_fails_closed():
     out = evaluate_materials(pointer, startup, runtime, mutated)
     assert out["pass"] is False
     assert any(path in e for e in out["errors"])
+
+
+def test_removed_kstar_guard_binding_fails_closed():
+    pointer, startup, runtime, bindings = _materials()
+    mutated = dict(bindings)
+    path = "canonical/runtime/terminal_kstar_promotion_bridge_v1.py"
+    source = mutated[path]
+    mutated[path] = source.replace(
+        "assert_credit_path_cognition_governance(root)",
+        "pass  # removed cognition guard",
+        1,
+    )
+    out = evaluate_materials(pointer, startup, runtime, mutated)
+    assert out["pass"] is False
+    assert any(
+        e == "COGNITION_GUARD_CALL_COUNT_WEAKENED:" + path
+        for e in out["errors"]
+    )
+
+
+def test_removed_global_ownership_guard_binding_fails_closed():
+    pointer, startup, runtime, bindings = _materials()
+    mutated = dict(bindings)
+    path = "canonical/runtime/terminal_global_ownership_postconditions_reducer_v1.py"
+    source = mutated[path]
+    mutated[path] = source.replace(
+        "assert_credit_path_cognition_governance(ROOT)",
+        "pass  # removed cognition guard",
+        1,
+    )
+    out = evaluate_materials(pointer, startup, runtime, mutated)
+    assert out["pass"] is False
+    assert any(
+        e == "COGNITION_GUARD_CALL_COUNT_WEAKENED:" + path
+        for e in out["errors"]
+    )
