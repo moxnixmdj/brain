@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_RETRIEVAL_QUERY_PLANNER_V2_PREEXPOSURE_20261011_V1",
+  "date": "2026-10-11",
+  "status": "FROZEN_BEFORE_CONSUMED_REPLAY__SYNTHETIC_INDEPENDENT_REPLAY_PENDING",
+  "subject": {
+    "runtime_path": "canonical/runtime/hle_native_retrieval_query_planner_v2.py",
+    "runtime_blob": "0a0b1e70ba90bb6e29cbd8316343c10c2dcb1908",
+    "tests_path": "canonical/tests/test_hle_native_retrieval_query_planner_v2.py",
+    "tests_blob": "0c4803c46d639945c65ade3075faf910fffdd2b1",
+    "v1_base_blob": "2386db287d08153ffb905f8cd89a76f4ebf19d9f",
+    "question_contract_v3_blob": "0865d6baf59b465cf121963dbadd5409a1702671"
+  },
+  "general_repairs": [
+    "NORMALIZE_INTERROGATIVE_PUNCTUATION_BEFORE_QUERY_CONSTRUCTION",
+    "PRESERVE_ORDINAL_SUPERLATIVE_AND_NUMERIC_CLUES",
+    "PRIORITIZE_MULTIWORD_ENTITY_SEEDS_OVER_GENERIC_SINGLETONS",
+    "ADD_SLOT_AWARE_SUBJECT_RELATION_QUERIES",
+    "ADD_MULTI_ENTITY_RELATION_QUERIES",
+    "ADD_DEFINITION_QUERIES_FOR_TERM_AND_ENTITY_OR_TERM_ANSWER_SLOTS",
+    "PRESERVE_V1_HIGH_PRECISION_ANCHORS_AND_REMAINING_V1_VIEWS"
+  ],
+  "derivation_boundary": {
+    "development_evidence": "ONLY_ALREADY_CONSUMED_TRIVIA_QA_ROWS_25_TO_49_FAILURE_FAMILIES_AND_SYNTHETIC_CASES",
+    "fresh_public_rows_50_to_74_used": 0,
+    "hle_questions_used": 0,
+    "hle_gold_used": 0
+  },
+  "next_gates": [
+    "EXACT_BLOB_INDEPENDENT_SYNTHETIC_REPLAY_MUST_PASS",
+    "THEN_REPLAY_ROWS_25_TO_49_ALREADY_CONSUMED_WITH_SAME_RETRIEVAL_SURFACES",
+    "PROMOTE_ONLY_IF_UNIQUE_RETRIEVAL_HITS_OR_UNION_RECALL_EXCEED_0_52_WITHOUT_MODEL_COGNITION",
+    "DO_NOT_RUN_FRESH_HLE_FOR_DEVELOPMENT"
+  ],
+  "verification_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify-hle-query-planner-v2-20261011",
+    "workflow_run_id": 38149961888,
+    "state_at_freeze": "QUEUED"
+  },
+  "external_model_calls_total": 0,
+  "model_dependency_count_total": 0,
+  "hle_score_credit": 0,
+  "hle_67_7_certified": false,
+  "incremental_spend_usd": 0
+}
