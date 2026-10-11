@@ -16,7 +16,6 @@ import json
 from typing import Any, Callable, Mapping, Sequence
 
 from canonical.runtime import certified_reached_escape_state_constructor_v1 as constructor
-from canonical.runtime import reached_escape_state_kernel_v1 as kernel
 
 SCHEMA = "PROJECT_BRAIN_REACHED_ESCAPE_REPAIR_CYCLE_V1"
 CANDIDATE_SCHEMA = "PROJECT_BRAIN_REACHED_ESCAPE_REPAIR_CANDIDATE_V1"
@@ -168,14 +167,73 @@ def _selected_alternative(
     return row, None
 
 
+def _state_identity_sets(
+    state: Mapping[str, Any],
+) -> tuple[set[str], set[str], set[str]]:
+    if not isinstance(state, Mapping):
+        raise ValueError("STATE_NOT_OBJECT")
+    if state.get("schema") != "PROJECT_BRAIN_REACHED_ESCAPE_STATE_V1":
+        raise ValueError("STATE_SCHEMA_INVALID")
+
+    region_ids: set[str] = set()
+    rows = state.get("regions")
+    if not isinstance(rows, Sequence) or isinstance(rows, (str, bytes, bytearray)):
+        raise ValueError("STATE_REGIONS_INVALID")
+    for row in rows:
+        if not isinstance(row, Mapping):
+            raise ValueError("STATE_REGION_ROW_INVALID")
+        rid = row.get("region_id")
+        if not isinstance(rid, str) or not rid.strip() or rid.strip() in region_ids:
+            raise ValueError("STATE_REGION_ID_INVALID_OR_DUPLICATE")
+        region_ids.add(rid.strip())
+    if not region_ids:
+        raise ValueError("STATE_REGIONS_EMPTY")
+
+    policy_ids: set[str] = set()
+    policies = state.get("policies", [])
+    if not isinstance(policies, Sequence) or isinstance(
+        policies, (str, bytes, bytearray)
+    ):
+        raise ValueError("STATE_POLICIES_INVALID")
+    for row in policies:
+        if not isinstance(row, Mapping):
+            raise ValueError("STATE_POLICY_ROW_INVALID")
+        pid = row.get("policy_id")
+        if not isinstance(pid, str) or not pid.strip() or pid.strip() in policy_ids:
+            raise ValueError("STATE_POLICY_ID_INVALID_OR_DUPLICATE")
+        policy_ids.add(pid.strip())
+
+    discriminator_ids: set[str] = set()
+    discriminators = state.get("discriminators", [])
+    if not isinstance(discriminators, Sequence) or isinstance(
+        discriminators, (str, bytes, bytearray)
+    ):
+        raise ValueError("STATE_DISCRIMINATORS_INVALID")
+    for row in discriminators:
+        if not isinstance(row, Mapping):
+            raise ValueError("STATE_DISCRIMINATOR_ROW_INVALID")
+        did = row.get("discriminator_id")
+        if (
+            not isinstance(did, str)
+            or not did.strip()
+            or did.strip() in discriminator_ids
+        ):
+            raise ValueError("STATE_DISCRIMINATOR_ID_INVALID_OR_DUPLICATE")
+        discriminator_ids.add(did.strip())
+
+    return region_ids, policy_ids, discriminator_ids
+
+
 def _validate_candidate_structure(
     state: Mapping[str, Any],
     repair: Mapping[str, Any],
     candidate_kind: str,
     candidate: Mapping[str, Any],
 ) -> tuple[bool, str | None]:
-    normalized = kernel._normalize(state)
-    region_ids = {row["region_id"] for row in normalized["regions"]}
+    try:
+        region_ids, policy_ids, discriminator_ids = _state_identity_sets(state)
+    except ValueError as exc:
+        return False, str(exc)
 
     if candidate_kind == "DISCRIMINATOR":
         if repair.get("kind") != "UNSPLITTABLE_EQUIVALENCE_CLASS_REPAIR":
@@ -183,7 +241,7 @@ def _validate_candidate_structure(
         did = candidate.get("discriminator_id")
         if not isinstance(did, str) or not did.strip():
             return False, "DISCRIMINATOR_ID_INVALID"
-        if any(row["discriminator_id"] == did.strip() for row in normalized["discriminators"]):
+        if did.strip() in discriminator_ids:
             return False, "DISCRIMINATOR_ID_COLLISION"
         outcomes = candidate.get("outcomes")
         if not isinstance(outcomes, Mapping) or {str(k) for k in outcomes} != region_ids:
@@ -209,7 +267,7 @@ def _validate_candidate_structure(
         pid = candidate.get("policy_id")
         if not isinstance(pid, str) or not pid.strip():
             return False, "POLICY_ID_INVALID"
-        if any(row["policy_id"] == pid.strip() for row in normalized["policies"]):
+        if pid.strip() in policy_ids:
             return False, "POLICY_ID_COLLISION"
         raw = candidate.get("adequate_region_ids")
         if (

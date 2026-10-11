@@ -17,9 +17,9 @@ import math
 from typing import Any, Callable, Mapping, Sequence
 
 from canonical.runtime import certified_reached_escape_state_constructor_v1 as v1
-from canonical.runtime import reached_escape_state_kernel_v1 as kernel
 
 SCHEMA = "PROJECT_BRAIN_CERTIFIED_REACHED_ESCAPE_STATE_CONSTRUCTOR_V2"
+STATE_SCHEMA = "PROJECT_BRAIN_REACHED_ESCAPE_STATE_V1"
 CLAIM_SCHEMA = "PROJECT_BRAIN_REACHED_ESCAPE_AUTHORITY_CLAIM_V1"
 RECEIPT_SCHEMA = "PROJECT_BRAIN_REACHED_ESCAPE_AUTHORITY_RECEIPT_V1"
 
@@ -121,7 +121,7 @@ def _resource_bound(receipt: Mapping[str, Any], *, label: str) -> tuple[float, s
 
 
 def _prepare_candidate(state: Mapping[str, Any]) -> tuple[str, list[str], list[dict[str, Any]], list[dict[str, Any]]]:
-    if not isinstance(state, Mapping) or state.get("schema") != kernel.STATE_SCHEMA:
+    if not isinstance(state, Mapping) or state.get("schema") != STATE_SCHEMA:
         raise ReachedEscapeAuthorityError("STATE_SCHEMA_INVALID")
     state_id = _sid(state.get("state_id"), "STATE_ID")
 
@@ -204,7 +204,7 @@ def construct(
     try:
         state_id, region_ids, policies, discriminators = _prepare_candidate(state)
         candidate_state_core = {
-            "schema": kernel.STATE_SCHEMA,
+            "schema": STATE_SCHEMA,
             "state_id": state_id,
             "regions": [{"region_id": rid} for rid in region_ids],
             "policies": deepcopy(policies),
@@ -303,7 +303,7 @@ def construct(
         resource_unit = resource_units[0] if resource_units else None
 
         verified_state = {
-            "schema": kernel.STATE_SCHEMA,
+            "schema": STATE_SCHEMA,
             "state_id": state_id,
             "regions": [{"region_id": rid} for rid in region_ids],
             "policies": verified_policies,

@@ -50,9 +50,10 @@ LIVE_ENTRYPOINT_MARKERS = {
         '"CERTIFIED_REACHED_ESCAPE_STATE_CONSTRUCTOR_V1"',
     ),
     "canonical/runtime/unified_cognitive_fabric_v1.py": (
-        '"REACHED_ESCAPE_STATE": "certified_reached_escape_state_constructor_v1.construct"',
+        '"REACHED_ESCAPE_STATE": "certified_reached_escape_state_constructor_v1.construct + reached_escape_repair_cycle_v1.run"',
         "from canonical.runtime import certified_reached_escape_state_constructor_v1 as reached_escape_state",
         "out = reached_escape_state.construct(payload)",
+        "out = reached_escape_repair.run(",
     ),
 }
 

@@ -5,6 +5,9 @@ on:
     paths:
       - "canonical/runtime/**"
       - "canonical/tests/test_reached_escape_live_no_bypass_guard_v1.py"
+      - "canonical/tests/test_certified_reached_escape_state_constructor_v2.py"
+      - "canonical/tests/test_reached_escape_repair_cycle_v1.py"
+      - "canonical/tests/test_reached_escape_construction_invariant_boundary_v1.py"
       - ".github/workflows/verify-reached-escape-no-bypass.yml"
   workflow_dispatch:
 
@@ -12,14 +15,48 @@ permissions:
   contents: read
 
 jobs:
-  verify:
+  diagnose-and-verify:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.13"
-      - name: Run repository-local reached-state census
-        run: python canonical/runtime/reached_escape_live_no_bypass_guard_v1.py
-      - name: Run no-bypass regression suite
-        run: python -m unittest -v canonical.tests.test_reached_escape_live_no_bypass_guard_v1
+      - name: Run boundary checks and capture exact reports
+        id: checks
+        shell: bash
+        run: |
+          set +e
+          python canonical/runtime/reached_escape_live_no_bypass_guard_v1.py > static.txt 2>&1
+          s1=$?
+          python -m unittest -v canonical.tests.test_reached_escape_live_no_bypass_guard_v1 > guard-tests.txt 2>&1
+          s2=$?
+          python -m unittest -v canonical.tests.test_certified_reached_escape_state_constructor_v2 > constructor-v2.txt 2>&1
+          s3=$?
+          python -m unittest -v canonical.tests.test_reached_escape_repair_cycle_v1 > repair-cycle.txt 2>&1
+          s4=$?
+          python -m unittest -v canonical.tests.test_reached_escape_construction_invariant_boundary_v1 > live-boundary.txt 2>&1
+          s5=$?
+          printf '{"static":%s,"guard_tests":%s,"constructor_v2":%s,"repair_cycle":%s,"live_boundary":%s}\n' "$s1" "$s2" "$s3" "$s4" "$s5" > exit-codes.json
+          exit 0
+      - name: Upload exact diagnostic reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: reached-escape-boundary-diagnostics
+          path: |
+            static.txt
+            guard-tests.txt
+            constructor-v2.txt
+            repair-cycle.txt
+            live-boundary.txt
+            exit-codes.json
+          if-no-files-found: error
+      - name: Enforce all checks
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, sys
+          data=json.load(open("exit-codes.json"))
+          print(data)
+          sys.exit(0 if all(v == 0 for v in data.values()) else 1)
+          PY
