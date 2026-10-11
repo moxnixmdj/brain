@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_LIVE_WORK_FRONTIER_V1",
   "date": "2026-10-10",
-  "status": "CURRENT_PROFESSIONAL_SEMANTIC_V10_PARAMETERIZED_ADMISSION_AND_SCOPE_CLOSED__12_OF_12_TRUTH_REPAIRED_CLAIMS_BOUND_TO_EXACT_V10__PROPERTY_TRUTH_12_OF_24__AUTHENTIC_POSITIVE_SEMANTIC_RECEIPTS_OPEN__ZERO_GLOBAL_CREDIT",
+  "status": "CURRENT_PROFESSIONAL_V10_SEMANTIC_PROPERTY_TRUTH_CLOSED__24_OF_24_PROFESSIONAL_LEAF_PROPERTY_TRUTHS_VERIFIED__FULL_PRIVATE_CURRENT_MAIN_REGRESSION_OPEN__ZERO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT",
   "frontier_id": "LIVE_WORK_FRONTIER_20261010_PROF_PROPERTY_12_OF_24_V24",
   "scope": {
     "base_main_commit": "3303bcc94c43081cc6da555ad4549e2183d911a5",
@@ -587,7 +587,7 @@
     "new_primitive_required": false,
     "terminal_credit_delta": 0
   },
-  "exact_next": "PROFESSIONAL:COMPILE_EXISTING_12_BOUNDED_SEMANTIC_WITNESSES_INTO_EXACT_V10_CLAIM_BOUND_INDEPENDENT_TOTALITY_VERIFICATIONS__ADMIT_ONE_AUTHENTIC_POSITIVE_SEMANTIC_RECEIPT_PER_ROOT_THROUGH_BINDER_V3__KEEP_PROPERTY_TRUTH_12_OF_24_UNCHANGED_UNTIL_ALL_REQUIRED RECEIPTS_PASS",
+  "exact_next": "PROFESSIONAL:RUN_FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION__ONLY_ON_PASS_PROMOTE_UVCK_V2_ASSURANCE_COMPILER_THROUGH_EXISTING_GATE__DO_NOT_REOPEN_SEMANTIC_SCOPE_TOTALITY_OR_RECEIPT_CONSTRUCTION",
   "professional_semantic_v2_successor_claim_batch_current": {
     "status": "INDEPENDENTLY_VERIFIED__CLAIM_AND_SCOPE_GENERATION_COMPLETE__PROPERTY_TRUTH_NEXT",
     "batch": {
@@ -633,5 +633,21 @@
     "scope_complete_count": 12,
     "property_truth_count": 0,
     "positive_semantic_receipt_count": 0
+  },
+  "professional_property_truth": {
+    "verified_leaf_count": 24,
+    "total_leaf_count": 24,
+    "verified_execution_leaf_count": 12,
+    "verified_semantic_leaf_count": 12,
+    "open_leaf_count": 0,
+    "semantic_v10_totality_batch": {
+      "batch_path": "canonical/governance/PROFESSIONAL_SEMANTIC_V10_AUTHENTIC_POSITIVE_RECEIPT_BATCH_20261011_V1.json",
+      "batch_git_blob_sha": "be9b8d1f441675ba0e275f582b144c0e5c662119",
+      "independent_verification_path": "canonical/verification/PROFESSIONAL_SEMANTIC_V10_TOTALITY_BATCH_INDEPENDENT_VERIFY_20261011_V1.json",
+      "independent_verification_git_blob_sha": "618b43baa389fd4cf4c5a1a7dc1164419f91a61b"
+    },
+    "full_current_main_regression_open": true,
+    "quality_authority": false,
+    "terminal_authority": false
   }
 }
