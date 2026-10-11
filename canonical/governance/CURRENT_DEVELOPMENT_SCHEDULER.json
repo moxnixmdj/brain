@@ -141,7 +141,21 @@
     "runtime_path": "canonical/runtime/capability_parallel_frontier_post_composition_v2.py",
     "runtime_git_blob_sha": "b8a86551545a3ecfe8ba8d6fa44d2347703aa42d",
     "focused_test_path": "canonical/tests/test_capability_parallel_frontier_post_composition_v2.py",
-    "rule": "SUPPORTED_PROFESSIONAL_ASSURANCE_BYTES_R2_CURRENT_POINTERS_ARE_REPROJECTED_ONLY_AFTER_FAMILY_INVARIANTS_PASS__UNMODELED_SOURCE_DRIFT_REMAINS_EXACT_HASH_FAIL_CLOSED"
+    "rule": "SUPPORTED_PROFESSIONAL_ASSURANCE_BYTES_R2_CURRENT_POINTERS_ARE_REPROJECTED_ONLY_AFTER_FAMILY_INVARIANTS_PASS__UNMODELED_SOURCE_DRIFT_REMAINS_EXACT_HASH_FAIL_CLOSED",
+    "field_scoped_zero_reality_reuse": {
+      "authority": "canonical/governance/TWO_CLOCK_SEMANTIC_VALIDITY_AND_SCHEDULER_AUTHORITY_20261011_V3.json",
+      "authority_git_blob_sha": "655c45c560fa846215c3e3727387951a93d7c8e7",
+      "pure_capsule_runtime": "canonical/runtime/pure_field_projection_capsule_v1.py",
+      "pure_capsule_git_blob_sha": "793fcd21d3544ffc6316eb029753fdbc7a9d9a39",
+      "pure_currentness_runtime": "canonical/runtime/pure_field_projection_currentness_v1.py",
+      "pure_currentness_git_blob_sha": "79c47fa4838e28b1889358e4cb26245f8510fecb",
+      "pure_consumer_guard": "canonical/runtime/pure_projection_consumer_guard_v1.py",
+      "pure_consumer_guard_git_blob_sha": "9b623c5219cfe4b6037323fd5e8fc4dbd2b32907",
+      "sealed_consumer_runtime": "canonical/runtime/sealed_field_projection_consumer_v1.py",
+      "sealed_consumer_git_blob_sha": "348cc225d0a114ef73e549e368c6554272fcb598",
+      "independent_verification": "canonical/verification/FIELD_SCOPED_SEMANTIC_REUSE_STACK_INDEPENDENT_VERIFY_20261011_V3.json",
+      "rule": "DECLARED_FIELD_CHURN_ONLY__ZERO_REALITY_SEMANTIC_CURRENTNESS__PRIOR_VERIFICATION_SEPARATE__UNDECLARED_READS_STRUCTURALLY_EXCLUDED__ALL_CONSEQUENTIAL_AUTHORITY_LIVE"
+    }
   },
   "dynamic_post_composition_v2": {
     "runtime": "canonical/runtime/capability_parallel_frontier_post_composition_v2.py",
@@ -217,5 +231,19 @@
     "wake_gated_open_checkpoint_count": 12,
     "parked_checkpoint_count": 1,
     "primary_without_wake_event": "CAPABILITY_FIRST_GENERAL_DEVELOPMENT_AND_RESOURCE_PARETO_IMPROVEMENT"
+  },
+  "two_clock_semantic_validity_v3": {
+    "path": "canonical/governance/TWO_CLOCK_SEMANTIC_VALIDITY_AND_SCHEDULER_AUTHORITY_20261011_V3.json",
+    "git_blob_sha": "655c45c560fa846215c3e3727387951a93d7c8e7",
+    "status": "ACTIVE_ZERO_REALITY_SEMANTIC_CURRENTNESS_REFINEMENT__PURE_CAPSULE_CURRENTNESS_PLUS_SEALED_GENERAL_FALLBACK_VERIFIED__ZERO_CREDIT",
+    "rule": "ZERO_REALITY_WORK_MAY_SURVIVE_UNRELATED_AUTHORITY_FIELD_CHURN_ONLY_WHEN_LOAD_BEARING_FIELDS_ARE_EXPLICITLY_PROJECTED__CURRENT_SEMANTIC_IDENTITY_IS_OBJECTIVELY_RECOMPUTED__PRIOR_INDEPENDENT_VERIFICATION_REMAINS_BOUND__AND_UNDECLARED_READS_ARE_STRUCTURALLY_EXCLUDED",
+    "fallback": "V2_EXACT_CONTENT_ADDRESSED_DEPENDENCY_CURRENTNESS_FAIL_CLOSED",
+    "live_authority_preserved_for": [
+      "FRESH_REALITY",
+      "EXECUTION",
+      "PROMOTION",
+      "ACTIVE_AUTHORITY_MUTATION",
+      "IRREVERSIBLE_EXTERNAL_ACTION"
+    ]
   }
 }
