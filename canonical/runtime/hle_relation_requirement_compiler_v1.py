@@ -144,6 +144,8 @@ def compile_requirements(*,task_id:str,question:str,max_queries:int=8)->dict[str
     max_queries=max(1,min(int(max_queries),12))
 
     slot=classify_answer_slot(question)
+    raw_q=_canon(question)
+    raw_low=raw_q.casefold()
     q=_canon(slot.get("normalized_scope") or question)
     low=q.casefold()
     kind=str(slot.get("kind") or "OPEN_TEXT")
@@ -185,8 +187,9 @@ def compile_requirements(*,task_id:str,question:str,max_queries:int=8)->dict[str
 
     # Definition/name questions: turn the visible descriptive clause into a
     # definition lookup. This is intentionally generic and answer-blind.
-    if kind in {"TERM","ENTITY_OR_TERM"} or re.search(r"\\bterm\\b|\\bcalled\\b|\\bwhat name\\b",low):
-        definition=[x for x in discr if x not in {"term","name"}]
+    definition_intent = kind in {"TERM","ENTITY_OR_TERM"} or bool(re.search(r"\\bterm\\b|\\bcalled\\b|\\bwhat name\\b",raw_low))
+    if definition_intent:
+        definition=[x for x in _discriminators(raw_q) if x not in {"term","name"}]
         _add(out,"DEFINITION_RELATION",definition[:12]+["called term definition"],"DEFINITION")
         if quoted or proper:
             _add(out,"ALIAS_ENTITY_RELATION",[_quote(x) for x in quoted[:2]+proper[:3]]+rel[:5]+["known as called"],"ALIAS_OR_NAME")
