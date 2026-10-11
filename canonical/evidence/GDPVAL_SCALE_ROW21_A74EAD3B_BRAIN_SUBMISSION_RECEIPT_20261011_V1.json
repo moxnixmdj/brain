@@ -1,0 +1,91 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_SCALE_BRAIN_SUBMISSION_RECEIPT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__FRESH_ROW21_TWO_PPTX_SUBMISSION_FROZEN__PROGRAM_SOURCE_FIDELITY_AND_RENDER_QA_PASS__ZERO_OWNER_SCORE_CREDIT",
+  "benchmark": "GDPval-AA v2.1",
+  "subject": {
+    "row_idx": 21,
+    "task_id": "a74ead3b-f67d-4b1c-9116-f6bb81b29d4f",
+    "sector": "Government",
+    "occupation": "Child, Family, and School Social Workers"
+  },
+  "precommit": "canonical/governance/GDPVAL_SCALE_FRESH_BATCH_ROWS15_24_PRECOMMIT_20261011_V1.json",
+  "packet": {
+    "manifest_root_sha256": "f69af30fcea243ccb25d44c4a5380be0cdcac621287568525065034ce6cedae8",
+    "prompt_sha256": "4cd01527c7aa807db783ba3a91e5cbb89660c17e9e3b30b1e314724f2d53d1f4",
+    "reference_count": 0,
+    "public_program_links_in_prompt": 2
+  },
+  "freshness": {
+    "task_id_frozen_before_prompt_read": true,
+    "rubric_read_before_output_freeze": false,
+    "human_gold_read_before_output_freeze": false,
+    "third_party_model_submission_read_before_output_freeze": false,
+    "judge_feedback_read_before_output_freeze": false
+  },
+  "source_binding": {
+    "program_product_page": "https://www.nurturingparenting.com/shop/c/1:3:5/families-in-substance-abuse-treatment-and-recovery#gallery-5",
+    "topic_13_public_sample_pdf": "https://www.nurturingparenting.com/files/np11-amplesson13updted.pdf",
+    "ntcrc_program_manual_pdf": "https://ntcrc.org/wp-content/uploads/2022/01/Nurturing_Program_for_Families_in_Substance_Abuse_Treatment_and_Recovery.pdf",
+    "content_use": [
+      "TOPIC_13_SAFETY_AND_PROTECTING_CHILDREN_GOALS_SEQUENCE_PROTECTION_PLANNING_SAFE_PRACTICES_HOME_SAFETY_RESPONSE_TO_HARM_AND_WRAP_UP",
+      "TOPIC_14_GUIDING_BEHAVIOR_GOALS_PRAISE_SPECIAL_TIME_SELF_CONTROL_REDIRECTION_REWARDS_PRIVILEGES_RESTITUTION_LIMITS_AND_WRAP_UP"
+    ]
+  },
+  "brain_only_capability_boundary": {
+    "final_artifact_uses_external_opaque_image_generation": false,
+    "final_visual_assets": "LOCAL_NOTO_COLOR_EMOJI_PICTOGRAMS_PLUS_BRAIN_OWNED_LAYOUT_AND_TEXT",
+    "discarded_precredit_draft": "AN_EARLIER_VISUAL_DRAFT_USED_GENERATED_PHOTOS__IT_WAS_REJECTED_BEFORE_RECEIPT_FREEZE_AND_OVERWRITTEN__ITS_HASHES_ARE_NOT_ADMISSIBLE_SUBMISSION_BYTES",
+    "final_subject_identity": "OPUS55_PROFESSIONAL_KNOWLEDGE_WORK_STIRRUP_CONFIGURATION_V1_ON_APPROVED_GENERAL_COGNITION_SUBSTRATE"
+  },
+  "deliverables": [
+    {
+      "format": "pptx",
+      "filename": "GDPval_a74ead3b_Session13_Safety_and_Protecting_Children.pptx",
+      "sha256": "92f38337b54fa4a8048cd1f14cbc0a4102b6124a917d1b9b0d92cbe57012150f",
+      "bytes": 226143,
+      "slides": 9,
+      "session_minutes": 90,
+      "library_path": "/Project Brain/GDPval/scale/a74ead3b-f67d-4b1c-9116-f6bb81b29d4f/GDPval_a74ead3b_Session13_Safety_and_Protecting_Children.pptx",
+      "library_file_id": "libfile_6b143f3140608191b8a95f308ecf7414"
+    },
+    {
+      "format": "pptx",
+      "filename": "GDPval_a74ead3b_Session14_Guiding_Behavior.pptx",
+      "sha256": "eca06361fc4c7308fe0b0af9dd83b5e2f76de1406fab5bafe5e413b571a0377c",
+      "bytes": 237873,
+      "slides": 10,
+      "session_minutes": 90,
+      "library_path": "/Project Brain/GDPval/scale/a74ead3b-f67d-4b1c-9116-f6bb81b29d4f/GDPval_a74ead3b_Session14_Guiding_Behavior.pptx",
+      "library_file_id": "libfile_84984c7e02a8819199fcaa519e5cc378"
+    }
+  ],
+  "verification": {
+    "session_13_all_slides_rendered_and_visually_inspected": true,
+    "session_13_overflow_test": "PASS__NO_OVERFLOW_DETECTED",
+    "session_14_all_slides_rendered_and_visually_inspected": true,
+    "session_14_overflow_test": "PASS__NO_OVERFLOW_DETECTED",
+    "no_clipping_overlap_or_broken_glyphs": true,
+    "both_decks_have_title_slide": true,
+    "both_decks_have_icebreaker": true,
+    "both_decks_cover_key_session_points": true,
+    "both_decks_have_wrap_up": true,
+    "accessible_participant_facing_language": true,
+    "neutral_visual_pictograms_present": true,
+    "session_13_age_five_examples_and_protection_plan": true,
+    "session_13_safety_trust_home_scan_people_body_fire_emergency_and_harm_response": true,
+    "session_14_guidance_not_control_praise_special_time_self_control_redirection_rewards_privileges_repair_and_limits": true,
+    "session_14_age_five_behavior_practice_scenario": true
+  },
+  "hard_nonclaims": [
+    "NO_ARTIFICIAL_ANALYSIS_OWNER_SCORE",
+    "NO_GDPVAL_ELO",
+    "NO_1846_THRESHOLD_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
