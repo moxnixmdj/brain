@@ -15,6 +15,7 @@ No tool is executed here. Unknown, ambiguous, or ungroundable routes fail closed
 from __future__ import annotations
 
 import json
+import math
 import re
 from typing import Any, Mapping, Sequence
 
@@ -96,7 +97,37 @@ def _compatibility(
         return None
     else:
         base = 30
-    return base + min(20, 4 * len(overlap)), overlap
+
+    score = base + min(20, 4 * len(overlap))
+    specificity = profile.get("resource_specificity") or {}
+    score += min(18, sum(int(specificity.get(term, 0)) for term in overlap))
+
+    trigger = str(intent.get("trigger") or "").lower()
+    operation_terms = {str(x).lower() for x in (profile.get("operation_terms") or [])}
+    if trigger and trigger in operation_terms:
+        score += 8
+    return score, overlap
+
+
+def _annotate_profile_specificity(profiles: Sequence[dict[str, Any]]) -> None:
+    count = max(1, len(profiles))
+    df: dict[str, int] = {}
+    for profile in profiles:
+        for term in set(str(x) for x in (profile.get("resource_terms") or [])):
+            df[term] = df.get(term, 0) + 1
+    for profile in profiles:
+        weights: dict[str, int] = {}
+        for term in set(str(x) for x in (profile.get("resource_terms") or [])):
+            # Bounded IDF-like integer weight. Common transport vocabulary gets
+            # almost no bonus; rare object/service identity breaks lexical ties.
+            raw = 4.0 * math.log((count + 1.0) / (df.get(term, count) + 1.0))
+            weights[term] = max(0, min(8, int(round(raw))))
+        profile["resource_specificity"] = weights
+
+
+def _preobservation_groundable(goal: str, profile: Mapping[str, Any]) -> bool:
+    contract = endpoint_grounding_contract(goal=goal, endpoint=profile["raw"])
+    return not bool(contract.get("required_evidence_semantics") or [])
 
 
 def _done(intent_id: str) -> str:
@@ -257,6 +288,7 @@ def build_planning_problem(
             profiles.append(profile_endpoint(endpoint))
         except ValueError:
             continue
+    _annotate_profile_specificity(profiles)
 
     if not positive:
         forbidden = [
@@ -268,6 +300,8 @@ def build_planning_problem(
             ranked: list[tuple[int, str]] = []
             for profile in profiles:
                 if profile.get("action_class") != "observe":
+                    continue
+                if not _preobservation_groundable(goal, profile):
                     continue
                 overlap = _resource_overlap(intent, profile)
                 if not overlap:
@@ -308,6 +342,8 @@ def build_planning_problem(
     # field-level evidence required by later mutations.
     for profile in profiles:
         if profile["action_class"] != "observe":
+            continue
+        if not _preobservation_groundable(goal, profile):
             continue
         provides: set[str] = set()
         matched_intents: list[str] = []
