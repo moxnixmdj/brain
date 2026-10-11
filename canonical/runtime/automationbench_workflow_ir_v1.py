@@ -22,7 +22,7 @@ _DATE = re.compile(r"\b20\d{2}-\d{2}-\d{2}\b")
 _AMOUNT = re.compile(r"(?<!\w)\$\s?\d[\d,]*(?:\.\d{1,2})?")
 _ID = re.compile(r"\b(?:[A-Za-z]{1,12}[_-])[A-Za-z0-9_-]{2,}\b")
 _PHONE = re.compile(r"(?<!\d)\+\d{8,15}\b")
-_QUOTED = re.compile(r"(['\"])(.+?)\1", re.S)
+_QUOTED = re.compile(r"(?<!\w)(['\"])(.+?)\1(?!\w)", re.S)
 
 _APP_TERMS = {
     "gmail": ("gmail", "email", "mail"),
