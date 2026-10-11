@@ -14,6 +14,7 @@ from dataclasses import dataclass
 from typing import Any, Callable, Mapping, Sequence
 
 from canonical.runtime.osworld_v21_state_ops_v1 import compile_state_ops
+from canonical.runtime.osworld_v21_host_browser_ops_v1 import OSWorldHostBrowser
 
 SCHEMA = "PROJECT_BRAIN_OSWORLD_V21_AGENT_ADAPTER_V1"
 WIDTH = 1920
@@ -151,6 +152,7 @@ class BrainOSWorldAgent:
         policy_id: str,
         screen_width: int = WIDTH,
         screen_height: int = HEIGHT,
+        browser_controller: Any | None = None,
     ) -> None:
         if not callable(policy_provider):
             raise AdapterError("POLICY_PROVIDER_NOT_CALLABLE")
@@ -160,9 +162,16 @@ class BrainOSWorldAgent:
             raise AdapterError("MATCHED_PROTOCOL_REQUIRES_1920x1080")
         self.policy_provider = policy_provider
         self.policy_id = policy_id.strip()
+        self.browser_controller = browser_controller if browser_controller is not None else OSWorldHostBrowser()
         self.history: list[dict[str, Any]] = []
         self.runtime_logger = None
         self.task_current_date = None
+
+    def bind_environment(self, environment: Any) -> None:
+        binder = getattr(self.browser_controller, "bind_environment", None)
+        if not callable(binder):
+            raise AdapterError("BROWSER_CONTROLLER_BIND_UNAVAILABLE")
+        binder(environment)
 
     def reset(self, runtime_logger=None, **_: Any) -> None:
         self.history.clear()
@@ -193,6 +202,38 @@ class BrainOSWorldAgent:
     def predict(self, instruction: str, obs: Mapping[str, Any]) -> tuple[str, list[str]]:
         state = self._observation(instruction, obs)
         raw = self.policy_provider(state)
+        if not isinstance(raw, Mapping):
+            raise AdapterError("POLICY_OUTPUT_NOT_OBJECT")
+        raw_actions = raw.get("actions")
+        if (
+            isinstance(raw_actions, list)
+            and len(raw_actions) == 1
+            and isinstance(raw_actions[0], Mapping)
+            and str(raw_actions[0].get("type") or "").strip().upper() == "BROWSER_OP"
+        ):
+            if set(raw_actions[0]) - {"type", "op"}:
+                raise AdapterError("BROWSER_OP_HAS_UNSUPPORTED_FIELDS")
+            op = raw_actions[0].get("op")
+            if not isinstance(op, Mapping):
+                raise AdapterError("BROWSER_OP_OBJECT_REQUIRED")
+            result = self.browser_controller.run(op)
+            response = str(raw.get("response") or "").strip()
+            actions = ["WAIT"]
+            fingerprint = hashlib.sha256(
+                ("BROWSER_OP\n" + repr(sorted(result.items()))).encode("utf-8")
+            ).hexdigest()
+            receipt = {
+                "screenshot_sha256": state["screenshot_sha256"],
+                "action_fingerprint": fingerprint,
+                "actions": list(actions),
+                "response": response,
+                "browser_result": dict(result),
+            }
+            self.history.append(receipt)
+            if len(self.history) > MAX_HISTORY:
+                del self.history[:-MAX_HISTORY]
+            return response, actions
+
         response, actions = compile_actions(raw)
         fingerprint = hashlib.sha256("\n".join(actions).encode("utf-8")).hexdigest()
 
