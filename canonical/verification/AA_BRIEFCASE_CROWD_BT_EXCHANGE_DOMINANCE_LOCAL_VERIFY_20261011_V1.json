@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_CROWD_BT_EXCHANGE_DOMINANCE_LOCAL_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__10_OF_10__CONDITIONAL_STRICT_RATING_ORDER_THEOREM__ZERO_CREDIT",
+  "subject": {
+    "runtime": "canonical/runtime/aa_briefcase_crowdbt_exchange_dominance_v1.py",
+    "tests": "canonical/tests/test_aa_briefcase_crowdbt_exchange_dominance_v1.py"
+  },
+  "replay": {
+    "tests_run": 10,
+    "tests_passed": 10,
+    "tests_failed": 0,
+    "verified": [
+      "STRICT_MATCHED_ADVANTAGE_PLUS_SAME_FIT_OPUS_1822_FLOOR_IMPLIES_NUMERIC_THRESHOLD",
+      "RELATIVE_ORDER_WITHOUT_SAME_FIT_FLOOR_DOES_NOT_CLAIM_1822",
+      "MISSING_FINITE_GLOBAL_MLE_REJECTED",
+      "BRAIN_WORSE_MATCHED_ROW_REJECTED",
+      "ETA_BELOW_HALF_REJECTED",
+      "ALL_TIES_REJECT_STRICT_ORDER_CERTIFICATE",
+      "STRICT_ADVANTAGE_AT_ETA_HALF_IS_INFORMATIONLESS",
+      "UNMATCHED_INCIDENT_SCHEDULE_REJECTED",
+      "DIRECT_BRAIN_OVER_OPUS_WIN_CAN_SUPPLY_STRICT_INFORMATION",
+      "DIRECT_BRAIN_LOSS_REJECTED"
+    ]
+  },
+  "truth": {
+    "conditional_same_fit_rating_order_theorem_verified_locally": true,
+    "current_aa_premises_bound": false,
+    "aa_briefcase_ge_1822_currently_certified": false
+  },
+  "hard_nonclaims": [
+    "NO_OWNER_SCORER_EQUIVALENCE_CLAIM",
+    "NO_MATCHED_REALIZED_OUTCOMES_CLAIM",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
