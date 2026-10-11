@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_LIVE_WORK_FRONTIER_V1",
-  "date": "2026-10-10",
+  "date": "2026-10-11",
   "status": "CURRENT_PROFESSIONAL_V10_PROPERTY_TRUTH_24_OF_24__FULL_PRIVATE_REGRESSION_GATE_OPEN__REPOSITORY_WIDE_GITHUB_ACTIONS_PRESTEP_CARRIER_FAILURE__PARALLEL_REUSE_FIRST_FRONTIER_CONTINUES__ZERO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT",
   "frontier_id": "LIVE_WORK_FRONTIER_20261011_PROF_PROPERTY_24_OF_24_V26",
   "scope": {
@@ -33,7 +33,7 @@
       },
       {
         "path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
-        "git_blob_sha": "91a2000e0972bc5ce4c03f9a2dcaed13a822ad58"
+        "git_blob_sha": "9e839c5d2bd8657fdbfb2c10af306baa135d12c3"
       }
     ],
     "base_main_commit_role": "OBSERVED_BEFORE_RECONCILIATION_COMMIT__DIAGNOSTIC_ONLY__CURRENT_POINTER_PATHS_WIN_ON_DRIFT"
@@ -197,7 +197,7 @@
       "frontier_class": "OPEN_WORLD_EVIDENCE_FRONTIER",
       "source": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
       "causal_role": "ONE_PRIMARY_OPEN_WORLD_FINANCE_SEMANTIC_RESIDUAL",
-      "readiness": "SLEEPING_UNLESS_TASK_LOCAL_COUNTEREXAMPLE_OR_VERIFIED_DEFECT_WAKES_IT__V87_CHECKER_OWNED_SOURCE_INGESTION_RESTORED__ONE_PRIMARY_FINANCE_RESIDUAL_REMAINS",
+      "readiness": "SLEEPING_UNLESS_TASK_LOCAL_COUNTEREXAMPLE_OR_VERIFIED_DEFECT_WAKES_IT__V90_TYPED_FOUR_WAY_REGCAP_AUTHORITY_CANDIDATE_TO_CHECKER_SEAM_CLOSED__GENERIC_OPEN_WORLD_MATERIALIZATION_REMAINS_OPEN__ONE_PRIMARY_FINANCE_RESIDUAL_REMAINS",
       "claims_new_primitive": false,
       "score_state": "INELIGIBLE_WHILE_WAKE_GATE_FALSE",
       "scheduler_state": "SLEEPING",
@@ -218,7 +218,7 @@
       "vector_evidence": {},
       "read_only_evidence": {
         "source": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
-        "source_git_blob_sha": "ee03f3fe71383d1bf12e0797bf568e6b5eeeaca4",
+        "source_git_blob_sha": "9e839c5d2bd8657fdbfb2c10af306baa135d12c3",
         "general_mechanism_closed": true,
         "finance_tail_closed": false,
         "concrete_truth_request_propagation_bound": true,
@@ -227,7 +227,13 @@
         "downstream_reverification_required": true,
         "minimum_authenticated_observation_count": 1,
         "wake_gate": false,
-        "vector_bounds_complete": false
+        "vector_bounds_complete": false,
+        "r2_current_version": "V90",
+        "typed_four_way_regcap_candidate_to_checker_materialization_closed": true,
+        "generic_unbound_retrieval_candidate_to_checker_materialization_closed": false,
+        "provider_semantic_truth_authority": false,
+        "verification_path": "canonical/verification/R2_AUTHORITY_CANDIDATE_FOUR_WAY_CONSUMPTION_VERIFY_20261011_V1.json",
+        "verification_git_blob_sha": "7979a84040c392bee05b502238e1bf23549dc9d0"
       }
     },
     {
