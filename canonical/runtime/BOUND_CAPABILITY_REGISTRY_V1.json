@@ -3402,6 +3402,106 @@
         "model_dependency_count": 0,
         "incremental_spend_usd": 0
       }
+    },
+    "python.patch.search.test_guided.ast.v1": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "incremental_spend_usd": 0,
+      "cost": 1,
+      "requires": [
+        "python.source.file.available",
+        "python.test.corpus.available"
+      ],
+      "provides": [
+        "python.patch.candidate.test_verified"
+      ],
+      "result_fields": [
+        "status",
+        "pass",
+        "source_path",
+        "source_sha256",
+        "test_paths",
+        "test_sha256",
+        "tested_candidate_count",
+        "model_dependency_count",
+        "external_capability_provider_count",
+        "incremental_spend_usd",
+        "source_restored",
+        "winning_mutation",
+        "candidate_source_sha256",
+        "verification_replays",
+        "unified_diff",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "keywords": [
+        "python",
+        "patch",
+        "repair",
+        "bug",
+        "test",
+        "ast",
+        "mutation",
+        "candidate",
+        "repository"
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "python.patch.search.test_guided.ast.v1",
+          "source_path": "${input.source_path}",
+          "test_paths": "${input.test_paths}",
+          "test_argv": "${input.test_argv}",
+          "output_path": "${input.output_path}",
+          "timeout_s": 60,
+          "max_candidates": 2000
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "python_test_guided_patch_search_v1",
+      "entrypoint": "run",
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "limitations": [
+        "Searches one repository-local Python source file using deterministic single-node AST mutations and test-corpus literal substitutions.",
+        "Requires a failing Python test command as the acceptance oracle; an already-passing baseline fails closed.",
+        "Candidate-only: source bytes are restored after every trial and before return; no source write or promotion authority.",
+        "No universal patch-search completeness, no multi-edit completeness, no non-Python support, and no semantic-correctness claim beyond the bound test oracle.",
+        "Confers no FrontierCode score or acceptance credit by itself."
+      ],
+      "source": {
+        "type": "python_stdlib",
+        "modules": [
+          "ast",
+          "difflib",
+          "hashlib",
+          "importlib.util",
+          "json",
+          "pathlib",
+          "subprocess",
+          "sys",
+          "time"
+        ],
+        "adapter_path": "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py"
+      },
+      "verification": {
+        "status": "INDEPENDENT_TWO_CARRIER_FOCUSED_FALSIFICATION_PASS",
+        "local_test_count": 8,
+        "independent_sprite": "brain-capability-first-scheduler-verify-20261008-v1",
+        "independent_test_count": 8,
+        "model_dependency_count": 0,
+        "external_capability_provider_count": 0,
+        "incremental_spend_usd": 0,
+        "discovered_and_repaired_defect": "STALE_PYTHON_BYTECODE_CACHE_ON_SAME_SIZE_RAPID_MUTATIONS",
+        "runtime_sha256": "76ba334b9539def530b780c359d62d5ace90590f09c340148cec44f6c0c2c08b"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
