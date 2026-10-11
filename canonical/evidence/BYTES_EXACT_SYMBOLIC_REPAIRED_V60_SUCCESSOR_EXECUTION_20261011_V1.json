@@ -1,0 +1,189 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_REPAIRED_V60_SUCCESSOR_EXECUTION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "VERIFIED_RESEARCH_FRONTIER__DIRECT_V58_TO_REPAIRED_V60__SPENT_NEXT66_AND_FRESH_NEXT67_PASS__CLEAN_ARCHIVE_NEXT67_PASS__NEXT68_DURABLY_FROZEN_UNSPENT__ZERO_CREDIT",
+  "predecessor": {
+    "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_TWO_UTILITY_V58_SUCCESSOR_EXECUTION_20261011_V1.json",
+    "evidence_git_blob_sha": "fe968f3e1ff8715ef7b98b29f74f413880407039",
+    "manifest_sha256": "409dd682c47e2a25acc2915af689650757f02cf828826a9854d06c0e386bb1c1",
+    "raw_python_source_bytes": 1713212,
+    "durable_archive": {
+      "path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V58_SUCCESSOR_20261011_V1.tar.xz",
+      "library_file_id": "libfile_76ad2423f52881918b428e1df4e39d69",
+      "sha256": "c4ca2d876e762b887c81d5eac0b40fd21ca1e06e39b8fec3dfef399739182517",
+      "bytes": 264156
+    }
+  },
+  "subject": {
+    "transform": "canonical/research/bytes/tools/conservative_direct_v58_to_repaired_v60.py",
+    "transform_git_blob_sha": "7cb021481930631c59432f7cb795011ddfe843ee",
+    "transform_sha256": "f5e92096567d247903acd78bd8582a90bbecc8d00c0f5d80685f04928f52421b",
+    "manifest_sha256": "6ab3ad3366fe10d0d081784d61838d097eac1c242cee729453d78d48ede5033e",
+    "python_files": 277,
+    "raw_python_source_bytes": 1713090,
+    "B_exec_raw_python_source_bytes": 1715850,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "raw_delta_vs_v58_bytes": -122
+  },
+  "falsification_first": {
+    "experimental_v59": {
+      "manifest_sha256": "694f9c52e40530f4c41fe46e4ba01001f8d0a672c8e1cf2024d2cee15bda757c",
+      "raw_python_source_bytes": 1713085,
+      "result_on_fresh_NEXT66": "17018/17020",
+      "disposition": "REJECTED__DO_NOT_PROMOTE"
+    },
+    "NEXT66": {
+      "id": "QUAL_SUCCESSOR_NEXT66_20261011_V1",
+      "cases": 17020,
+      "corpus_sha256": "6721df00b28a1d18d5efb16ae8a270b4dde24ebca33ded0e1d55d6655114e7f4",
+      "library_file_id": "libfile_a302cc7eab4081919d74cc4abdc29178",
+      "failures": [
+        {
+          "global_index": 5040,
+          "op": "roots",
+          "p": [
+            -1,
+            4,
+            -6,
+            4,
+            -4
+          ],
+          "root_cause": "EXPERIMENTAL_V59_MPF_ABS_SPECIALIZATION_DROPPED_PRECISION_SPECIFIED_NORMALIZATION"
+        },
+        {
+          "global_index": 5890,
+          "op": "roots",
+          "p": [
+            -2,
+            1,
+            -6,
+            -4,
+            -4
+          ],
+          "root_cause": "INHERITED_V55_MPF_PERTURB_FONE_ONLY_SPECIALIZATION_REJECTED_REQUIRED_POSITIVE_NONFONE_ROUND_DOWN_CLASS"
+        }
+      ],
+      "causal_bisect": [
+        "V54_PASSES_BOTH_CASES",
+        "V55_PASSES_CASE_5040_AND_FAILS_CASE_5890",
+        "V56_V57_V58_PASS_CASE_5040_AND_FAIL_CASE_5890",
+        "EXPERIMENTAL_V59_FAILS_BOTH_CASES"
+      ]
+    }
+  },
+  "repair": {
+    "direct_lineage": "CANONICAL_V58_PLUS_ONE_EXACT_GUARDED_TRANSFORM__NO_EXPERIMENTAL_V59_DEPENDENCY",
+    "changes": [
+      {
+        "function": "mpf_abs",
+        "role": "PRESERVE_OBSERVED_PRECISION_SPECIFIED_NORMALIZATION_AND_SIGNED_NO_PREC_ROUTE__FAIL_CLOSE_UNOBSERVED_ZERO_MAN_OR_NO_PREC_POSITIVE_ROUTE"
+      },
+      {
+        "function": "mpf_perturb",
+        "role": "PRESERVE_POSITIVE_NONZERO_ROUND_DOWN_EPS_SIGN_0_OR_1__FAIL_CLOSE_OTHER_CLASSES"
+      },
+      {
+        "function": "mpf_nint",
+        "role": "FAIL_CLOSED"
+      },
+      {
+        "function": "mpf_ceil",
+        "role": "FAIL_CLOSED"
+      },
+      {
+        "function": "mpf_floor",
+        "role": "FAIL_CLOSED"
+      },
+      {
+        "function": "to_bstr",
+        "role": "FAIL_CLOSED"
+      },
+      {
+        "function": "to_man_exp",
+        "role": "FAIL_CLOSED"
+      },
+      {
+        "function": "mpf_eq",
+        "role": "FAIL_CLOSED"
+      }
+    ],
+    "direct_transform_target_exact": true
+  },
+  "qualification": {
+    "spent_NEXT66": {
+      "cases": 17020,
+      "corpus_sha256": "6721df00b28a1d18d5efb16ae8a270b4dde24ebca33ded0e1d55d6655114e7f4",
+      "candidate": "17020/17020",
+      "failures": 0,
+      "spent": true
+    },
+    "fresh_NEXT67": {
+      "cases": 17250,
+      "corpus_sha256": "aab6e4fb65f266211585f9d60c88c3dcc2834ca832d91c50357edd7bd2ac20be",
+      "candidate": "17250/17250",
+      "failures": 0,
+      "spent": true,
+      "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT67_20261011_V1.jsonl",
+      "library_file_id": "libfile_f6aae9e669348191ac8c057faff368fd"
+    },
+    "clean_archive_NEXT67": {
+      "candidate": "17250/17250",
+      "failures": 0,
+      "carrier": "SEPARATE_CLEAN_ARCHIVE_EXTRACTION_AND_SHARDED_PYTHON_EXECUTION",
+      "note": "Same spent NEXT67 evidence replayed from a clean extraction; no new freshness credit."
+    }
+  },
+  "reproducibility": {
+    "direct_v58_to_v60_transform_target_manifest_exact": true,
+    "clean_room_reconstruction": "PASS__278_OF_278_FILES_BYTE_IDENTICAL",
+    "durable_archive": {
+      "path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V60_REPAIRED_SUCCESSOR_20261011_V1.tar.xz",
+      "library_file_id": "libfile_afa0d53808cc8191976782dc3e9ea40a",
+      "bytes": 267260,
+      "sha256": "7ebb193e07a2a1e18265ebf4b1ef76b4c011b665bf100d35550033b894d96dd9",
+      "computed_internal_manifest_sha256": "6ab3ad3366fe10d0d081784d61838d097eac1c242cee729453d78d48ede5033e",
+      "internal_file_count": 278,
+      "internal_python_file_count": 277,
+      "internal_raw_python_source_bytes": 1713090
+    },
+    "equivalent_archive_copies_audited": 3,
+    "equivalent_archive_rule": "COMPRESSED_TAR_METADATA_MAY_DIFFER__INTERNAL_CONTENT_ADDRESSED_278_FILE_SET_IS_AUTHORITATIVE"
+  },
+  "next_frozen": {
+    "id": "QUAL_SUCCESSOR_NEXT68_20261011_V1",
+    "cases": 17480,
+    "seed": 1452486686,
+    "seed_derivation": "FIRST_32_BITS_BIG_ENDIAN_SHA256_OF_QUAL_ID_PIPE_V60_MANIFEST_IDENTITY",
+    "per_operation_budget": 1520,
+    "sha256": "ee4eb1b62ce24c1c31e39c19585ce5a04e01fc6099b88c65a7530840a6c15e70",
+    "bytes": 2066007,
+    "generator": "canonical/research/bytes/tools/generate_qualification_v1.py",
+    "generator_git_blob_sha": "1a97ca1f7b93affc50ae7d22276672e4b74c4e30",
+    "generation_provenance": "STOCK_SYMPY_1_14_0_MPMATH_1_3_0_EXACT_ROUTE_EXPECTED_OUTPUTS__VALIDATED_PARALLEL_ACCELERATOR_BYTE_IDENTICAL_TO_CANONICAL_GENERATOR",
+    "byte_identical_regeneration_verified": true,
+    "regeneration_sha256": "ee4eb1b62ce24c1c31e39c19585ce5a04e01fc6099b88c65a7530840a6c15e70",
+    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT68_20261011_V1.jsonl",
+    "library_file_id": "libfile_3f5ba0e0123481919cc240491ebd5cb2",
+    "spent": false,
+    "status": "FROZEN_UNSPENT__DURABLY_PERSISTED__BYTE_IDENTICAL_REGENERATION_VERIFIED__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT"
+  },
+  "truth_boundary": [
+    "MEASURED: repaired V60 is 122 raw Python bytes below canonical V58.",
+    "MEASURED: experimental V59 was falsified by exactly two fresh NEXT66 roots cases and is rejected.",
+    "MEASURED: direct canonical V58-to-V60 guarded transform reconstructs exact manifest 6ab3ad33....",
+    "MEASURED: repaired V60 passes complete spent NEXT66 17020/17020.",
+    "MEASURED: previously untouched NEXT67 passes exact repaired V60 17250/17250.",
+    "MEASURED: clean archive extraction replays spent NEXT67 17250/17250.",
+    "MEASURED: durable Library V60 archive contains the exact 278-file V60 manifest.",
+    "MEASURED: NEXT68 is durably frozen unspent and independently regenerated byte-identical.",
+    "NOT PROVED: universal SymPy/mpmath equivalence outside the bounded exact-symbolic route.",
+    "NOT CLAIMED: external organizationally independent second-carrier verification.",
+    "NO capability, acceptance, professional-quality, promotion, ownership, or terminal credit."
+  ],
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "acceptance_credit_delta": 0,
+  "promotion_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
