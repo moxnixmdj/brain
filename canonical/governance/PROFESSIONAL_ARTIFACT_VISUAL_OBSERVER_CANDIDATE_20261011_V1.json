@@ -1,0 +1,131 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_ARTIFACT_VISUAL_OBSERVER_CANDIDATE_V1",
+  "date": "2026-10-11",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_REPAIRED_BRAIN_BLOBS__11_OF_11_FOCUSED_PLUS_REAL_PDF_DOCX_PPTX_XLSX_COMPOSITION__BOUNDED_TECHNICAL_VISUAL_OBSERVATION__ZERO_SCORE_OR_TERMINAL_CREDIT",
+  "capability_id": "professional.artifact.visual_observer.v1",
+  "objective": "Replace self-asserted visual-inspection checkboxes with Brain-generated rendered-page observations for common professional artifacts, while preserving the boundary between objective technical readability evidence and subjective/owner quality judgment.",
+  "exact_candidate": {
+    "runtime": {
+      "path": "canonical/runtime/professional_artifact_visual_observer_v1.py",
+      "git_blob_sha": "27be857789160e6971fb4d20265eae30468ea063"
+    },
+    "tests": {
+      "path": "canonical/tests/test_professional_artifact_visual_observer_v1.py",
+      "git_blob_sha": "24db6f10c71df9ec20ca34ac6bd6a64b90c89ce1"
+    }
+  },
+  "reused_verified_substrates": [
+    {
+      "path": "canonical/runtime/native_artifact_render_preservation_proof_v1.py",
+      "git_blob_sha": "39374e775d54cdc58315d7a1f877d834282a64f7",
+      "role": "DOCX_XLSX_PPTX_TO_PDF_WITH_LIBREOFFICE_AND_PDF_TO_PAGE_RASTERS_WITH_POPPLER"
+    },
+    {
+      "path": "canonical/runtime/bound_capabilities/image_ocr_tesseract_positioned.py",
+      "git_blob_sha": "19f3087489ce7f6f935fc7baaebdc8cd672f4b62",
+      "role": "PINNED_ENGLISH_POSITIONED_TEXT_GEOMETRY_AND_CONFIDENCE_OBSERVATION"
+    },
+    {
+      "path": "canonical/governance/P2_STRONG_VISIBLE_QUALITY_SUBREGION_TOP_LAW_20261007_V1.json",
+      "git_blob_sha": "ec0831f086823995b671c33ff24cd76de3b0250e",
+      "role": "EXISTING_BOUNDED_VISIBLE_QUALITY_TOP_LAW_REQUIRES_INDEPENDENT_NONOBSCURING_LAYOUT_EVIDENCE"
+    }
+  ],
+  "brain_owned_observations": [
+    "PAGE_NOT_BLANK",
+    "TEXT_PRESENT_WHEN_REQUIRED",
+    "OCR_LINE_CONFIDENCE_BOUNDED",
+    "TEXT_NOT_TOUCHING_HARD_CROP",
+    "NO_MAJOR_OCR_LINE_OVERLAP",
+    "CONTENT_ADDRESSED_PAGE_AND_SOURCE_IDENTITIES"
+  ],
+  "supported_inputs": [
+    "PDF",
+    "DOCX",
+    "PPTX",
+    "XLSX",
+    "PNG",
+    "JPG",
+    "JPEG"
+  ],
+  "causal_delta": {
+    "before": "Professional release assurance could require visual inspection receipts but did not itself generate the page-level observation.",
+    "after_candidate": "The Brain can render common professional artifact formats, obtain positioned OCR observations, and deterministically derive a bounded technical readability/crop/overlap/blankness receipt.",
+    "professional_r4_effect": "REDUCES_THE_OBJECTIVE_RENDERED_PAGE_OBSERVATION_SUBGAP_ONLY__DOES_NOT_CLOSE_HOLISTIC_VISUAL_OR_AESTHETIC_QUALITY",
+    "gdpval_absolute_dominance_effect": "ADVANCES_ONE_LOAD_BEARING_MEASUREMENT_COMPONENT_BUT_ABSOLUTE_DOMINANCE_REMAINS_FALSE",
+    "aa_briefcase_effect": "REUSABLE_FOR_PROFESSIONAL_ARTIFACT_QUALITY_EVIDENCE_BUT_DOES_NOT_PROVE_PRIVATE_RUBRIC_COVERAGE_OR_OWNER_PREFERENCE"
+  },
+  "author_verification": {
+    "environment": "ISOLATED_LOCAL_PACKAGE_WITH_IMPORT_STUBS_FOR_EXTERNAL_RENDER_OCR_CALLS",
+    "focused_tests": "11_OF_11_PASS_AFTER_XLSX_DERIVED_CAUSAL_REPAIR",
+    "tested_logic": [
+      "CLEAN_BOUNDED_PAGE_PASS",
+      "BLANK_PAGE_REJECT",
+      "REQUIRED_TEXT_ABSENCE_REJECT",
+      "HARD_CROP_CONTACT_REJECT",
+      "MAJOR_LINE_OVERLAP_REJECT",
+      "LOW_GLOBAL_OCR_CONFIDENCE_REJECT",
+      "OCR_IMAGE_GEOMETRY_MISMATCH_REJECT",
+      "RUN_PATH_COMPOSITION_WITH_OCR_SENSOR_MOCK",
+      "PATH_ESCAPE_REJECT",
+      "SINGLE_ZERO_CONFIDENCE_SENSOR_OUTLIER_DOES_NOT_VETO_READABLE_PAGE",
+      "SPARSE_CONFIDENT_TEXT_PAGE_IS_NOT_MISCLASSIFIED_BLANK"
+    ],
+    "exact_branch_blob_independent_replay": true,
+    "credit_role": "AUTHOR_DEBUG_EVIDENCE_ONLY"
+  },
+  "next_required_verification": [
+    "INTEGRATE_THIS_VERIFIED_OBSERVER_INTO_CURRENT_PROFESSIONAL_RELEASE_OR_R4_MEASUREMENT_PATH_WITH_CALLER_SELF_ATTESTATION_FORBIDDEN",
+    "KEEP_HOLISTIC_AESTHETIC_SEMANTIC_RELEVANCE_OWNER_EVALUATOR_AND_NORMATIVE_AGGREGATION_AS_SEPARATE_OPEN_OBLIGATIONS"
+  ],
+  "hard_nonclaims": [
+    "NO_HOLISTIC_AESTHETIC_QUALITY_TOP",
+    "NO_SEMANTIC_RELEVANCE_OR_CORRECTNESS_TOP",
+    "NO_OWNER_EVALUATOR_CONTAINMENT",
+    "NO_NORMATIVE_AGGREGATION_CLOSURE",
+    "NO_GDPVAL_OR_AA_BRIEFCASE_SCORE_CREDIT",
+    "NO_OPUS55_NONINFERIORITY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "external_general_purpose_model_runtime_dependency_count": 0,
+    "benchmark_score_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2716,
+    "head_commit": "20ee182f0a5e92f17283d3d9eecb1749fe51b022",
+    "workflow_run_id": 38153807927,
+    "workflow_job_id": 114512510133,
+    "workflow_conclusion": "success",
+    "artifact_id": 11707950964,
+    "artifact_digest": "sha256:356b4375e669286466f9381c29b4e2fcff110a121d67d8bc93a4b081d5364124",
+    "status": "PASS__EXACT_BRAIN_CANDIDATE_BLOBS__FOCUSED_TESTS__REAL_NATIVE_FORMAT_COMPOSITION",
+    "focused_test_count": 11,
+    "real_formats": [
+      "pdf",
+      "docx",
+      "pptx",
+      "xlsx"
+    ],
+    "real_format_pass_count": 4,
+    "pinned_tesseract_surface_verified": true,
+    "positioned_ocr_blob": "19f3087489ce7f6f935fc7baaebdc8cd672f4b62",
+    "base_ocr_blob": "45714d7a0160802d986042910da1c4c6462676e5",
+    "verification_render_shim_blob": "9728fc59b85115925a982e3fb3f5f483dd05cb4e",
+    "render_verification_relation": "INDEPENDENT_EQUIVALENT_LIBREOFFICE_TO_PDF_TO_POPPLER_SHIM__NOT_BYTE_IDENTITY_TO_BRAIN_RENDER_MODULE",
+    "benchmark_cases_consumed": 0,
+    "external_general_purpose_model_runtime_dependency_count": 0
+  },
+  "causal_repair": {
+    "first_independent_run_id": 38153554981,
+    "first_failure": "XLSX_EXPOSED_ONE_ZERO_CONFIDENCE_OCR_OUTLIER_AND_ONE_SPARSE_CONFIDENT_TEXT_PAGE",
+    "repair": "USE_MEDIAN_PLUS_MAJORITY_CONFIDENCE_FOR_SENSOR_RELIABILITY_AND_TREAT_CONFIDENT_POSITIONED_TEXT_AS_NONBLANK_EVIDENCE",
+    "new_regressions": 2,
+    "second_independent_run_id": 38153807927,
+    "second_run_result": "PASS"
+  }
+}
