@@ -77,6 +77,16 @@ class FinalTerminalCleanroomGateV1Tests(unittest.TestCase):
             "network_denied": True,
             "behavior_preserved": True,
             "resource_constraints_satisfied": True,
+            "external_contribution_census_complete": True,
+            "full_runtime_dependency_inventory_complete": True,
+            "runtime_cognition_dependency_class": "MODEL_INDEPENDENT",
+            "model_dependency_count": 0,
+            "external_model_runtime_dependency_count": 0,
+            "online_teacher_call_count": 0,
+            "teacher_fallback_path_count": 0,
+            "copied_or_rehosted_teacher_present": False,
+            "brain_owned_operative_artifact": True,
+            "operative_solver_role": "BRAIN_OWNED_NATIVE_MECHANISM",
             "undeclared_dependency_count": 0,
             "candidate_sha256": candidate,
         }
@@ -219,6 +229,41 @@ class FinalTerminalCleanroomGateV1Tests(unittest.TestCase):
 
         self.assertFalse(out["pass"])
         self.assertIn("CONJUNCT_RELIABILITY:CANDIDATE_MISMATCH", out["errors"])
+
+    def test_cleanroom_with_local_rehosted_model_fails(self):
+        with TemporaryDirectory() as td:
+            root = Path(td)
+            manifest = self._fixture(root)
+            binding = manifest["cleanroom"]
+            path = root / binding["path"]
+            receipt = json.loads(path.read_text(encoding="utf-8"))
+            receipt["copied_or_rehosted_teacher_present"] = True
+            receipt["model_dependency_count"] = 1
+            receipt["external_model_runtime_dependency_count"] = 1
+            receipt["runtime_cognition_dependency_class"] = "MODEL_DEPENDENT"
+            path.write_text(json.dumps(receipt, sort_keys=True) + "\\n", encoding="utf-8")
+            binding["git_blob_sha"] = gate._git_blob(path)
+            with patch.object(gate.projection, "evaluate", return_value=self._projection_pass()):
+                out = gate.evaluate(manifest, repo_root=root)
+        self.assertFalse(out["pass"])
+        self.assertFalse(out["terminal_authority"])
+        self.assertIn("CLEANROOM:MODEL_DEPENDENCY_COUNT_NOT_ZERO", out["errors"])
+        self.assertIn("CLEANROOM:COPIED_OR_REHOSTED_TEACHER_NOT_EXPLICITLY_FALSE", out["errors"])
+
+    def test_cleanroom_unknown_model_dependency_inventory_fails(self):
+        with TemporaryDirectory() as td:
+            root = Path(td)
+            manifest = self._fixture(root)
+            binding = manifest["cleanroom"]
+            path = root / binding["path"]
+            receipt = json.loads(path.read_text(encoding="utf-8"))
+            receipt.pop("full_runtime_dependency_inventory_complete")
+            path.write_text(json.dumps(receipt, sort_keys=True) + "\\n", encoding="utf-8")
+            binding["git_blob_sha"] = gate._git_blob(path)
+            with patch.object(gate.projection, "evaluate", return_value=self._projection_pass()):
+                out = gate.evaluate(manifest, repo_root=root)
+        self.assertFalse(out["pass"])
+        self.assertIn("CLEANROOM:RUNTIME_DEPENDENCY_INVENTORY_INCOMPLETE", out["errors"])
 
 
 if __name__ == "__main__":
