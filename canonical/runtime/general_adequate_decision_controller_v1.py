@@ -32,6 +32,7 @@ from canonical.runtime.r2_existing_policy_cover_observation_reuse_v1 import (
 from canonical.runtime import r2_raw_source_proof_material_adapter_v1 as source_proof_material
 from canonical.runtime import r2_bound_source_information_provider_v1 as bound_source_provider
 from canonical.runtime import r2_authority_domain_discovery_provider_v1 as authority_discovery_provider
+from canonical.runtime import r2_authority_candidate_materializer_v1 as authority_candidate_materializer
 from canonical.runtime import r2_grounded_candidate_policy_frontier_v1 as grounded_policy_frontier
 from canonical.runtime.minimum_information_origin_policy_v1 import (
     route as route_minimum_information_origin,
@@ -1647,16 +1648,56 @@ def run(
                     information_trace[-1]["ingestion_status"] = (
                         "AUTHORITY_DISCOVERY_CANDIDATE_ONLY"
                     )
+                    materialized = authority_candidate_materializer.materialize(
+                        request_packet,
+                        provided,
+                    )
+                    information_trace.append(
+                        {
+                            "round": round_index,
+                            "predicate_id": gap["predicate_id"],
+                            "kind": "AUTHORITY_CANDIDATE_MATERIALIZATION",
+                            "materialization_status": materialized.get("status"),
+                            "materialization_verified": (
+                                materialized.get("pass") is True
+                                and materialized.get(
+                                    "retrieval_materialization_verified"
+                                )
+                                is True
+                            ),
+                            "provider_authority": False,
+                            "semantic_truth_authority": False,
+                        }
+                    )
+                    if materialized.get("pass") is not True:
+                        return _open(
+                            "OPEN__RETRIEVAL_CANDIDATE_MATERIALIZATION_REQUIRED",
+                            task_id=task_id,
+                            goal=goal,
+                            raw_contract=raw_contract,
+                            next_required_edge=(
+                                "CHECKER_CONSUMABLE_MATERIALIZATION_FROM_AUTHORITY_CANDIDATE"
+                            ),
+                            next_information_request=request_packet,
+                            retrieval_candidate=deepcopy(dict(provided)),
+                            information_provider_failure=deepcopy(
+                                dict(materialized)
+                            ),
+                            decision_result=decision,
+                            information_trace=information_trace,
+                            goal_to_decision_binding=goal_binding,
+                        )
                     return _open(
-                        "OPEN__RETRIEVAL_CANDIDATE_MATERIALIZATION_REQUIRED",
+                        "OPEN__MATERIALIZED_AUTHORITY_SOURCE_CHECKER_ADAPTER_REQUIRED",
                         task_id=task_id,
                         goal=goal,
                         raw_contract=raw_contract,
                         next_required_edge=(
-                            "CHECKER_CONSUMABLE_MATERIALIZATION_FROM_AUTHORITY_CANDIDATE"
+                            "CHECKER_SPECIFIC_AUTHENTICATED_SOURCE_INTERPRETATION"
                         ),
                         next_information_request=request_packet,
                         retrieval_candidate=deepcopy(dict(provided)),
+                        materialized_authority_source=deepcopy(dict(materialized)),
                         decision_result=decision,
                         information_trace=information_trace,
                         goal_to_decision_binding=goal_binding,
