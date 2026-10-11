@@ -119,9 +119,9 @@ def _unique_exact_target(instruction: str, elements: list[UiElement], *, editabl
 
 def _search_value(instruction: str) -> str | None:
     patterns = (
-        r"\bsearch(?:\s+for)?\s+["“”']?(.+?)["“”']?(?:\s+(?:and|then)\b|$)",
-        r"\btype\s+["“”'](.+?)["“”']",
-        r"\benter\s+["“”'](.+?)["“”']",
+        r'\bsearch(?:\s+for)?\s+["“”\']?(.+?)["“”\']?(?:\s+(?:and|then)\b|$)',
+        r'\btype\s+["“”\'](.+?)["“”\']',
+        r'\benter\s+["“”\'](.+?)["“”\']',
     )
     for pattern in patterns:
         m = re.search(pattern, instruction, re.I)
