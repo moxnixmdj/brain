@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_SOFTWARE_SEMANTIC_ACCEPTANCE_SHARED_RESIDUAL_MULTIPLEX_V1",
+  "date": "2026-10-11",
+  "status": "CANDIDATE__ONE_GENERAL_CAPABILITY_REDUCES_TWO_BENCHMARK_DERIVED_RESIDUALS__ZERO_SCORE_CREDIT",
+  "control_plane": {
+    "benchmark_measurement_policy": "canonical/governance/BENCHMARK_MEASUREMENT_MINIMUM_PROOF_COVER_POLICY_20261011_V1.json",
+    "rule": "BENCHMARKS_ARE_MEASUREMENT_INSTRUMENTS__GENERAL_CAPABILITY_WORK_PRECEDES_BENCHMARK_SPECIFIC_ACCESS_WHEN_IT_SOUNDLY_SERVES_MULTIPLE_OBLIGATIONS"
+  },
+  "shared_capability": {
+    "capability_id": "python.software.repair.semantic_acceptance.v1",
+    "runtime": "canonical/runtime/bound_capabilities/python_semantic_repair_acceptance_controller_v1.py",
+    "compiler": "canonical/runtime/bound_capabilities/python_software_request_semantic_acceptance_v1.py",
+    "verified_local_region": "EXPLICIT_REPOSITORY_LOCAL_PYTHON_CALL_FILE_TEXT_FUNCTION_AND_CLASS_ACCEPTANCE_CELLS_WITH_WITHHELD_POST_REPAIR_SEMANTIC_CHECK",
+    "model_dependency_count": 0,
+    "external_general_purpose_model_runtime_dependency_count": 0,
+    "incremental_spend_usd": 0
+  },
+  "frontiercode": {
+    "source_path": "canonical/governance/CURRENT_FRONTIERCODE_CAPABILITY_FIRST_RECONCILIATION_20261011_V1.json",
+    "observed_git_blob_sha": "d3c58c6ef48ada0900e4754fecc8a2c5b75c1762",
+    "capability_target": "UNSEEN_REPOSITORY_PLUS_SOFTWARE_TASK_TO_INDEPENDENTLY_VERIFIED_MERGEABLE_PATCH",
+    "measurement_predicate": "CODING_FRONTIERCODE_GE_54_4",
+    "shared_residual": "RAW_SOFTWARE_REQUEST_TO_SOUND_EXPLICIT_BEHAVIORAL_AND_ACCEPTANCE_CONTRACT",
+    "effect": "V9_ADDS_A_SOUND_EXECUTABLE_SUBREGION_FOR_EXPLICIT_PYTHON_REQUESTS__GENERAL_SEMANTIC_RAW_REQUEST_RESIDUAL_REMAINS_OPEN",
+    "literal_score_proved": false
+  },
+  "cursorbench": {
+    "source_path": "canonical/governance/CURSORBENCH_V5_ADVANCED_CODING_RESIDUAL_BASIS_REDUCTION_20261009_V1.json",
+    "observed_git_blob_sha": "7d2d2e2a271bd893a59c33e6cb7ce5e2e505dbf8",
+    "family": "ADVANCED_AGENTIC_CODING",
+    "measurement_predicate": "CODING_CURSORBENCH_GE_57_8",
+    "shared_residual": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
+    "effect": "V9_PROVES_ONLY_A_BOUNDED_EXPLICIT_PYTHON_SUBREGION_OF_THE_RESIDUAL__WHOLE_RESIDUAL_AND_HIDDEN_TASK_MEMBERSHIP_REMAIN_OPEN",
+    "literal_score_proved": false
+  },
+  "minimum_proof_cover_consequence": {
+    "preferred_development_action": "GENERALIZE_SOURCE_GROUNDED_SEMANTIC_ACCEPTANCE_CELLS_ON_UNSEEN_NON_BENCHMARK_SOFTWARE_TASKS",
+    "dominated_actions": [
+      "REPEATED_FRONTIERCODE_OWNER_ACCESS_HUNT_AS_PARENT_DEVELOPMENT_WORK",
+      "REPEATED_CURSORBENCH_SAME_INFORMATION_SCORE_SEARCH",
+      "BENCHMARK_SPECIFIC_PATCHING_WITHOUT_GENERAL_TRANSFER"
+    ],
+    "next_generalization_frontier": [
+      "EXPAND_EXPLICIT_SOFTWARE_CHANGE_DIRECTIVES_TO_SOUND_EXECUTABLE_POSTCONDITIONS",
+      "PRESERVE_UNRECOGNIZED_OR_AMBIGUOUS_SPANS_AS_BLOCKING_RESIDUALS",
+      "EXPAND_PATCH_DEPTH_OR_LANGUAGE_SUPPORT_ONLY_FROM_CAUSALLY_LOCALIZED_REAL_FAILURES",
+      "QUALIFY_ON_UNSEEN_NON_BENCHMARK_SOFTWARE_TASKS_AND_ADVERSARIAL_NEIGHBORS"
+    ]
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "frontiercode_score_credit_delta": 0,
+    "cursorbench_score_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_FULL_SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001_CLOSURE",
+    "NO_WHOLE_FRONTIERCODE_CAPABILITY_CLOSURE",
+    "NO_WHOLE_CURSORBENCH_ADVANCED_CODING_CLOSURE",
+    "NO_HIDDEN_BENCHMARK_TASK_MEMBERSHIP_INFERENCE",
+    "NO_LITERAL_BENCHMARK_SCORE_INFERENCE"
+  ]
+}
