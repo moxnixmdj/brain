@@ -1,0 +1,73 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_MPF_POW_INT_V52_INDEPENDENT_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__EXACT_V51_TO_V52_TRANSFORM__SPENT_NEXT57_14950_OF_14950__FRESH_NEXT58_15180_OF_15180__CLEAN_ARCHIVE_SECOND_EXECUTION_CARRIER_NEXT58_15180_OF_15180__NEXT59_HASH_FROZEN_PERSISTENCE_GATED__ZERO_CREDIT",
+  "subject": {
+    "producer_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_MPF_POW_INT_V52_SUCCESSOR_EXECUTION_20261011_V1.json",
+    "transform": "canonical/research/bytes/tools/conservative_mpf_pow_int_square_only_prune_v52.py",
+    "transform_git_blob_sha": "ff448350fb3047e8eb9aed3dbca4736f6cc12e8c",
+    "predecessor_manifest_sha256": "bab0e710a20ac41743feadf3a979e2c9d8d08fd621a42e4799ba658badb7ef37",
+    "candidate_manifest_sha256": "5cfdaf054fafabd04894396739defc82fed40ec3aba24b2f1b06030421b9c62f",
+    "candidate_raw_python_source_bytes": 1717827
+  },
+  "replay": {
+    "transform_application": {
+      "result": "PASS",
+      "saved_raw_python_bytes": 1736,
+      "candidate_manifest_sha256": "5cfdaf054fafabd04894396739defc82fed40ec3aba24b2f1b06030421b9c62f"
+    },
+    "spent_NEXT57": {
+      "passed": 14950,
+      "total": 14950,
+      "failures": 0
+    },
+    "fresh_NEXT58": {
+      "passed": 15180,
+      "total": 15180,
+      "failures": 0
+    },
+    "clean_archive_second_execution_carrier_NEXT58": {
+      "passed": 15180,
+      "total": 15180,
+      "failures": 0
+    },
+    "next59_frozen_definition": {
+      "cases": 15410,
+      "seed": 1601787694,
+      "sha256": "5c7cf733614d58648dbe4fbfc855e7451651c652555eb895fcdcef39df780c92",
+      "spent": false,
+      "durable_persistence": false
+    }
+  },
+  "falsification": {
+    "whole_function_fail_close_rejected": true,
+    "fresh_NEXT57_failures": 2,
+    "failing_global_case_indexes": [
+      4678,
+      4962
+    ],
+    "corrected_specialization_preserves_exact_square_branch": true
+  },
+  "proved": [
+    "THE_V51_TO_V52_TRANSFORM_IS_EXACTLY_BASE_AND_TARGET_MANIFEST_GUARDED",
+    "THE_EXACT_V52_CANDIDATE_PASSES_COMPLETE_SPENT_NEXT57",
+    "THE_PREVIOUSLY_UNSPENT_NEXT58_CORPUS_PASSES_EXACT_V52_COMPLETELY",
+    "A_CLEAN_ARCHIVE_EXTRACTION_REPLAYS_COMPLETE_NEXT58_WITH_ZERO_FAILURES",
+    "THE_REJECTED_WHOLE_FUNCTION_CUT_IS_RETAINED_AS_FALSIFICATION_EVIDENCE",
+    "NEXT59_ID_SEED_CASE_COUNT_AND_CONTENT_SHA256_ARE_FROZEN"
+  ],
+  "truth_boundary": [
+    "BOUNDED_EXACT_SYMBOLIC_ROUTE_ONLY",
+    "NO_UNIVERSAL_MPMATH_EQUIVALENCE",
+    "NO_EXTERNAL_ORGANIZATIONALLY_INDEPENDENT_SECOND_CARRIER CLAIM",
+    "NEXT59_DURABLE_PERSISTENCE_MUST_CLOSE_BEFORE_ANOTHER_PHYSICAL_CUT",
+    "NO_CAPABILITY_ACCEPTANCE_PROFESSIONAL_QUALITY_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "promotion_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
