@@ -3775,6 +3775,199 @@
         "incremental_spend_usd": 0,
         "receipt_path": "canonical/verification/PYTHON_SOFTWARE_REPAIR_LOOP_V1_FOCUSED_REPLAY_20261011_V1.json"
       }
+    },
+    "python.failure.localize.observable.v1": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "incremental_spend_usd": 0,
+      "cost": 1,
+      "requires": [
+        "python.test.corpus.available"
+      ],
+      "provides": [
+        "python.failure.candidate_loci.observable"
+      ],
+      "result_fields": [
+        "status",
+        "pass",
+        "failure_count",
+        "failures",
+        "candidate_count",
+        "candidates",
+        "model_dependency_count",
+        "external_capability_provider_count",
+        "incremental_spend_usd",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "keywords": [
+        "python",
+        "failure",
+        "traceback",
+        "localization",
+        "candidate",
+        "symbol",
+        "test"
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "python.failure.localize.observable.v1",
+          "test_paths": "${input.test_paths}",
+          "output_path": "${input.output_path}",
+          "timeout_s": 20
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "python_failure_localizer_v1",
+      "entrypoint": "run",
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "limitations": [
+        "Maps failing-test tracebacks and local test imports to repository-local candidate files, lines, and enclosing Python symbols.",
+        "Candidate loci are observable evidence only; no causal diagnosis is inferred.",
+        "Does not perform semantic fault localization, dynamic dependency tracing, or non-Python localization.",
+        "Confers no benchmark score or acceptance credit."
+      ],
+      "source": {
+        "type": "python_stdlib",
+        "modules": [
+          "ast",
+          "hashlib",
+          "json",
+          "pathlib",
+          "re",
+          "subprocess",
+          "sys"
+        ],
+        "adapter_path": "canonical/runtime/bound_capabilities/python_failure_localizer_v1.py"
+      },
+      "verification": {
+        "status": "EXACT_GIT_BLOB_FOCUSED_REPLAY_PASS",
+        "runtime_git_blob_sha": "c27528134ab9cbf973d9961297c1843945809277",
+        "test_git_blob_sha": "dc6e2006dcb9878906a44219892b3c651e23e74b",
+        "focused_test_count": 7,
+        "focused_tests_passed": 7,
+        "independent_semantic_verification": false,
+        "model_dependency_count": 0,
+        "external_capability_provider_count": 0,
+        "incremental_spend_usd": 0,
+        "receipt_path": "canonical/verification/PYTHON_CODING_V2_FOCUSED_REPLAY_20261011_V1.json"
+      }
+    },
+    "python.patch.search.coupled.ast.v1": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "incremental_spend_usd": 0,
+      "cost": 3,
+      "requires": [
+        "python.source.file.available",
+        "python.test.corpus.available",
+        "python.failure.localize.observable.v1",
+        "python.patch.search.test_guided.ast.v1"
+      ],
+      "provides": [
+        "python.patch.candidate.coupled.test_verified"
+      ],
+      "result_fields": [
+        "status",
+        "pass",
+        "localized_source_paths",
+        "max_depth",
+        "beam_width",
+        "max_states",
+        "tested_state_count",
+        "winning_depth",
+        "repair_history",
+        "verification_replays",
+        "patches",
+        "source_restored",
+        "model_dependency_count",
+        "external_capability_provider_count",
+        "incremental_spend_usd",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "keywords": [
+        "python",
+        "patch",
+        "repair",
+        "coupled",
+        "multi-edit",
+        "multi-file",
+        "bounded-search",
+        "ast",
+        "tests"
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "python.patch.search.coupled.ast.v1",
+          "test_paths": "${input.test_paths}",
+          "source_paths": "${input.source_paths}",
+          "output_path": "${input.output_path}",
+          "timeout_s": 20,
+          "max_depth": 2,
+          "beam_width": 40,
+          "max_states": 1500,
+          "max_mutations_per_source": 80
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "python_coupled_patch_search_v1",
+      "entrypoint": "run",
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "limitations": [
+        "Explores a deterministic bounded breadth-first prefix of AST edit sequences over localized repository-local Python sources.",
+        "Intermediate states need not pass any witness, allowing some coupled defects to be solved only after multiple edits.",
+        "Search completeness is limited by declared depth, beam, state, mutation, and localization bounds.",
+        "Final candidates must pass all supplied test witnesses and replay twice; all source bytes are restored before return.",
+        "No causal claim from localization alone, no non-Python support, no semantic correctness beyond supplied tests, and no general mergeability guarantee.",
+        "Confers no FrontierCode score or benchmark acceptance credit."
+      ],
+      "source": {
+        "type": "python_stdlib_composition",
+        "modules": [
+          "ast",
+          "difflib",
+          "hashlib",
+          "json",
+          "pathlib",
+          "sys"
+        ],
+        "adapter_path": "canonical/runtime/bound_capabilities/python_coupled_patch_search_v1.py",
+        "composed_capabilities": [
+          "python.failure.localize.observable.v1",
+          "python.patch.search.test_guided.ast.v1"
+        ]
+      },
+      "verification": {
+        "status": "EXACT_GIT_BLOB_FOCUSED_REPLAY_PASS",
+        "runtime_git_blob_sha": "73419e4b3255515ef0477a3f260ccfd9fd265814",
+        "test_git_blob_sha": "16eae044eee4ac2f7ea6f4be7eec6062543dfbb4",
+        "focused_test_count": 8,
+        "focused_tests_passed": 8,
+        "independent_semantic_verification": false,
+        "model_dependency_count": 0,
+        "external_capability_provider_count": 0,
+        "incremental_spend_usd": 0,
+        "receipt_path": "canonical/verification/PYTHON_CODING_V2_FOCUSED_REPLAY_20261011_V1.json"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
