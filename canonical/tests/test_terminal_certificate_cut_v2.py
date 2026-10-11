@@ -12,7 +12,7 @@ assert out["unresolved_predicate_count"] == 31, out
 assert out["certificate_candidate_count"] == 15, out
 assert out["covered_predicate_count"] == 31, out
 assert out["uncovered_predicates"] == [], out
-assert out["selected_certificate_count"] == 13, out
+assert out["selected_certificate_count"] == 15, out
 assert out["selected_new_reality_units"] == 0, out
 assert "MATCHED_SCOPE_BINDING_CERTIFICATE" in out["selected_certificates"], out
 assert "TOOL_DISCOVERY_PROTOCOL_SCOPE_COMPLETENESS_CERTIFICATE" not in out["selected_certificates"], out
