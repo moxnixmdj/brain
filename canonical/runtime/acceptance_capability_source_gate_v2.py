@@ -1,14 +1,14 @@
 """Fail-closed source gate for Opus 5.5 acceptance execution.
 
-Canonical ownership allows models as general cognition substrates. It does not
-allow an opaque external model/service to be credited as the target capability.
-This gate distinguishes those cases before any clean acceptance case is spent.
+Canonical ownership forbids another model from supplying producer cognition
+for any Brain-credited acceptance result. Model locality, openness, hosting,
+wrapping, or content addressing does not change attribution.
 """
 from __future__ import annotations
 from typing import Any, Mapping
 
 SCHEMA = "PROJECT_BRAIN_ACCEPTANCE_CAPABILITY_SOURCE_GATE_V2"
-ALLOWED_MODEL_ROLES = {"NONE", "GENERAL_COGNITION_SUBSTRATE"}
+ALLOWED_MODEL_ROLES = {"NONE"}
 
 def evaluate(route: Mapping[str, Any]) -> dict[str, Any]:
     errors: list[str] = []
@@ -40,17 +40,12 @@ def evaluate(route: Mapping[str, Any]) -> dict[str, Any]:
     model_count = route.get("model_dependency_count")
     if model_role not in ALLOWED_MODEL_ROLES:
         errors.append("MODEL_ROLE_UNCLASSIFIED")
-    if type(model_count) is not int or model_count < 0:
+    if type(model_count) is not int:
         errors.append("MODEL_DEPENDENCY_COUNT_INVALID")
-    elif model_role == "NONE" and model_count != 0:
-        errors.append("MODEL_ROLE_NONE_CONTRADICTS_DEPENDENCY_COUNT")
-    elif model_role == "GENERAL_COGNITION_SUBSTRATE":
-        if model_count < 1:
-            errors.append("GENERAL_SUBSTRATE_ROLE_REQUIRES_DECLARED_MODEL_DEPENDENCY")
-        if route.get("model_dependencies_declared") is not True:
-            errors.append("MODEL_DEPENDENCIES_NOT_DECLARED")
-        if route.get("general_substrate_test_pass") is not True:
-            errors.append("GENERAL_SUBSTRATE_TEST_NOT_PROVEN")
+    elif model_count != 0:
+        errors.append("EXTERNAL_MODEL_COGNITION_DEPENDENCY_FORBIDDEN")
+    if model_role != "NONE":
+        errors.append("MODEL_PRODUCER_ROLE_FORBIDDEN")
 
     ok = not errors
     return {
@@ -62,9 +57,8 @@ def evaluate(route: Mapping[str, Any]) -> dict[str, Any]:
         "capability_credit_delta": 0,
         "family_credit_delta": 0,
         "rule": (
-            "MODEL_PRESENCE_IS_NOT_DISQUALIFYING__"
-            "BRAIN_MUST_OWN_AND_MATERIALLY_SUPPLY_THE_OPERATIVE_CAPABILITY_CONFIGURATION__"
-            "OPAQUE_HIDDEN_TARGET_CAPABILITY_PROVIDER_IS_FORBIDDEN__"
-            "DECLARED_GENERAL_COGNITION_SUBSTRATE_IS_ALLOWED"
+            "ZERO_EXTERNAL_MODEL_COGNITION_REQUIRED_IN_BRAIN_CREDITED_PRODUCER_PATH__"
+            "MODEL_ROLE_MUST_BE_NONE__MODEL_DEPENDENCY_COUNT_MUST_BE_ZERO__"
+            "UNKNOWN_OR_MODEL_ASSISTED_PROVENANCE_FAILS_CLOSED"
         ),
     }
