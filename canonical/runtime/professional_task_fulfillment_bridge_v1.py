@@ -129,9 +129,6 @@ def verify(bundle:Any,*,repo_root:str|Path)->dict[str,Any]:
         if not isinstance(scope_binding,Mapping): raise ValueError("OBLIGATION_SCOPE_BINDING_REQUIRED")
         scope_cert,scope_path,scope_blob=_bound_json(root,scope_binding.get("certificate"),BOUND_PREFIXES)
         scope_verify,scope_verify_path,scope_verify_blob=_bound_json(root,scope_binding.get("verification"),VERIFY_PREFIXES)
-        scope_out=scope_compiler.evaluate(scope_cert)
-        if scope_out.get("scope_complete") is not True: raise ValueError("OBLIGATION_SCOPE_NOT_COMPLETE")
-        if scope_out.get("target_scope_id")!=expected_scope: raise ValueError("OBLIGATION_SCOPE_TARGET_MISMATCH")
         if scope_cert.get("obligation_universe_digest")!=digest:
             raise ValueError("OBLIGATION_SCOPE_DIGEST_MISMATCH")
         if scope_cert.get("basis")=="EXACT_COMPLETE_TARGET_CASE_UNIVERSE" and scope_cert.get("case_universe_digest")!=digest:
@@ -152,6 +149,12 @@ def verify(bundle:Any,*,repo_root:str|Path)->dict[str,Any]:
         if not scope_verifier: raise ValueError("OBLIGATION_SCOPE_VERIFIER_REQUIRED")
         if scope_verifier==scope_producer:
             raise ValueError("OBLIGATION_SCOPE_PRODUCER_VERIFIER_NOT_INDEPENDENT")
+        scope_eval_input=dict(scope_cert)
+        scope_eval_input["verified"]=True
+        scope_eval_input["independent"]=True
+        scope_out=scope_compiler.evaluate(scope_eval_input)
+        if scope_out.get("scope_complete") is not True: raise ValueError("OBLIGATION_SCOPE_NOT_COMPLETE")
+        if scope_out.get("target_scope_id")!=expected_scope: raise ValueError("OBLIGATION_SCOPE_TARGET_MISMATCH")
 
         bindings=bundle.get("obligation_bindings")
         if not isinstance(bindings,list): raise ValueError("OBLIGATION_BINDINGS_NOT_LIST")
