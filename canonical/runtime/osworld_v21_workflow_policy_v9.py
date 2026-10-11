@@ -20,23 +20,15 @@ def decide(state:Mapping[str,Any])->Mapping[str,Any]:
     out=base_decide(local)
     if not isinstance(out,Mapping):
         raise ValueError("BASE_POLICY_OUTPUT_NOT_OBJECT")
+
     result=dict(out)
     if norm["changed"]:
         receipt=result.get("_policy_receipt")
+        info={"schema":SCHEMA,"applied_rules":list(norm["applied_rules"])}
         if isinstance(receipt,Mapping):
             receipt=dict(receipt)
-            receipt["semantic_normalization"]={
-                "schema":SCHEMA,
-                "applied_rules":list(norm["applied_rules"]),
-                "task_specific_policy_data":False,
-                "external_model_dependency":False,
-            }
+            receipt["semantic_normalization"]=info
             result["_policy_receipt"]=receipt
         else:
-            result["_semantic_normalization"]={
-                "schema":SCHEMA,
-                "applied_rules":list(norm["applied_rules"]),
-                "task_specific_policy_data":False,
-                "external_model_dependency":False,
-            }
+            result["_semantic_normalization"]=info
     return result
