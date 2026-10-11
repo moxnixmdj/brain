@@ -211,6 +211,12 @@
           "required": [
             "position"
           ]
+        },
+        "set_cell_formula_verified": {
+          "required": [
+            "cell",
+            "formula"
+          ]
         }
       }
     },
