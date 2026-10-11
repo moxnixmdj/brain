@@ -1,0 +1,95 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_TOKEN_SAFE_BLANKLINE_V72_SUCCESSOR_EXECUTION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "VERIFIED_RESEARCH_FRONTIER__TOKEN_SAFE_NONSEMANTIC_SOURCE_COMPACTION__SPENT_NEXT78_AND_FRESH_NEXT79_PASS__NEXT80_FROZEN_UNSPENT__CURRENT_POINTER_ELIGIBLE__ZERO_PROMOTION_CREDIT",
+  "subject": {
+    "predecessor": "canonical/evidence/BYTES_EXACT_SYMBOLIC_NORMALIZE1_DELEGATE_V71_SUCCESSOR_EXECUTION_20261011_V1.json",
+    "predecessor_manifest_sha256": "0145aceb14e86c89ab4a2b52bfc581d92650ed7bed4905ef98918434bc7c4f1d",
+    "transform": "canonical/research/bytes/tools/conservative_token_safe_blankline_compact_v72.py",
+    "manifest_sha256": "9da2ae566f6faa2db8ccaaac3b60423feb790115952c386a68df2c09ff140abc",
+    "python_files": 277,
+    "raw_python_source_bytes": 1699106,
+    "B_exec_raw_python_source_bytes": 1701866,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "raw_delta_vs_v71_bytes": -8332,
+    "B_exec_delta_vs_v71_bytes": -8332
+  },
+  "selection": {
+    "id": "TOKEN_SAFE_NONSEMANTIC_BLANKLINE_COMPACTION_V72",
+    "method": "DELETE_ONLY_WHITESPACE_ONLY_PHYSICAL_LINES_OUTSIDE_ALL_TOKENIZED_STRING_SPANS__PRESERVE_COMMENTS_STRINGS_EXECUTABLE_TOKENS_AND_FILE_SET__COMPILE_EVERY_TOUCHED_FILE__VERIFY_SPENT_THEN_FRESH",
+    "changed_python_file_count": 257,
+    "deleted_source_bytes": 8332,
+    "comments_removed": false,
+    "string_content_modified": false,
+    "exact_base_guard": true,
+    "exact_target_guard": true
+  },
+  "qualification": {
+    "spent_NEXT78": {
+      "id": "QUAL_SUCCESSOR_NEXT78_20261011_V1",
+      "cases": 19780,
+      "corpus_sha256": "ef36e2dcccd3bf47d71b8b85b08be07d1b710fef6ea51df421e6a31b0840a68e",
+      "candidate": "19780/19780",
+      "failures": 0,
+      "spent": true
+    },
+    "fresh_NEXT79": {
+      "id": "QUAL_SUCCESSOR_NEXT79_20261011_V1",
+      "cases": 20010,
+      "corpus_sha256": "e859f33b5cf145301efb8f69b53d07f23ca01818b227ba29a0a44396f75e7365",
+      "candidate": "20010/20010",
+      "failures": 0,
+      "spent": true
+    }
+  },
+  "reproducibility": {
+    "clean_room_v71_to_v72_reconstruction": "PASS__278_OF_278_DURABLE_FILES_BYTE_IDENTICAL",
+    "regenerated_manifest_sha256": "9da2ae566f6faa2db8ccaaac3b60423feb790115952c386a68df2c09ff140abc",
+    "external_second_carrier_verified": false
+  },
+  "durable_archive": {
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V72_SUCCESSOR_20261011_V1.tar(1).xz",
+    "library_file_id": "libfile_384e5a25c7448191b789e7424601daef",
+    "bytes": 266588,
+    "sha256": "d1d02a1d8c38a0c3c7bf427fa2ef39c2e3bad22223decb73098b4f82a7824a11"
+  },
+  "next_frozen": {
+    "id": "QUAL_SUCCESSOR_NEXT80_20261011_V1",
+    "cases": 20240,
+    "seed": 2146785713,
+    "seed_derivation": "FIRST_32_BITS_SHA256_OF_QUAL_SUCCESSOR_NEXT80_20261011_V1_PIPE_V72_MANIFEST_IDENTITY",
+    "seed_material": "QUAL_SUCCESSOR_NEXT80_20261011_V1|9da2ae566f6faa2db8ccaaac3b60423feb790115952c386a68df2c09ff140abc",
+    "per_operation_budget": 1760,
+    "corpus_sha256": "58825331f9ce635a244510f312d7d9827d6e1d2659c49ce95ceb6b31d85d4186",
+    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT80_20261011_V1(1).jsonl",
+    "library_file_id": "libfile_c4fe1ecec9188191b1772488a24448b2",
+    "generation_provenance": "STOCK_SYMPY_1_14_0_MPMATH_1_3_0__CANONICAL_SERIAL_RNG_PARAMETER_STREAM__PARALLEL_EXPECTED_OUTPUT_EVALUATION__CANONICAL_ROW_REASSEMBLY",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT",
+    "spent": false
+  },
+  "dominance_note": {
+    "alternate_library_only_v72_raw_python_source_bytes": 1707222,
+    "this_candidate_raw_python_source_bytes": 1699106,
+    "relation": "THIS_VERIFIED_CANDIDATE_IS_8116_BYTES_SMALLER_THAN_THE_OBSERVED_LIBRARY_ONLY_ALTERNATE_V72_ARTIFACT__NO_AUTHORITY_CLAIM_OVER_UNMERGED_ARTIFACT"
+  },
+  "truth_boundary": [
+    "MEASURED: V72 is 1,699,106 raw Python-source bytes, 8,332 bytes below canonical V71.",
+    "MEASURED: only whitespace-only physical lines outside tokenized string spans were removed; comments and string bytes were retained.",
+    "MEASURED: every touched Python file compiled after transformation.",
+    "MEASURED: V72 passes spent NEXT78 19,780/19,780 with zero failures.",
+    "MEASURED: previously untouched canonical NEXT79 passes V72 20,010/20,010 with zero failures.",
+    "MEASURED: clean-room V71-to-V72 reconstruction is 278/278 durable files byte-identical.",
+    "MEASURED: NEXT80 is durably frozen at 20,240 cases and remains unspent.",
+    "NOT PROVED: universal observational equivalence for arbitrary source-introspection or traceback-line-number consumers outside the bounded exact-symbolic route.",
+    "NOT PROVED: external second-carrier replay.",
+    "NOT PROMOTED: no capability, acceptance, ownership, professional, quality, promotion, or terminal credit."
+  ],
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "professional_credit_delta": 0,
+  "quality_credit_delta": 0,
+  "promotion_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
