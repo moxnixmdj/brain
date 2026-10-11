@@ -33,6 +33,17 @@ class OwnershipPostconditionsTests(unittest.TestCase):
         donor={
             "status":"INDEPENDENT_PUBLIC_RUNNER_PASS__DONOR_DENIED_IDENTICAL_FROZEN_QUALIFICATION__BEHAVIOR_PRESERVED",
             "behavior_preserved":True,"byte_identical_terminal_result":True,"undeclared_dependency_count":0,
+            "donor_deletion_protocol":"canonical/governance/DONOR_DELETION_AND_DEPENDENCY_ACCOUNTING_PROTOCOL_V2.json",
+            "external_contribution_census_complete":True,
+            "full_runtime_dependency_inventory_complete":True,
+            "runtime_cognition_dependency_class":"MODEL_INDEPENDENT",
+            "model_dependency_count":0,
+            "external_model_runtime_dependency_count":0,
+            "online_teacher_call_count":0,
+            "teacher_fallback_path_count":0,
+            "copied_or_rehosted_teacher_present":False,
+            "brain_owned_operative_artifact":True,
+            "operative_solver_role":"BRAIN_OWNED_NATIVE_MECHANISM",
             "predeletion_result":{"full_result_sha256":TERMINAL_SHA},
             "postdeletion_result":{"full_result_sha256":TERMINAL_SHA},
         }
@@ -70,6 +81,35 @@ class OwnershipPostconditionsTests(unittest.TestCase):
         out=evaluate_documents(*args)
         self.assertFalse(out["pass"])
         self.assertIn("VERIFIER_MUTATION_PREFLIGHT_INCOMPLETE",out["errors"])
+
+    def test_legacy_offline_only_donor_receipt_no_longer_closes_ownership(self):
+        args=list(self.fixture())
+        donor=args[6]
+        for key in (
+            "donor_deletion_protocol","external_contribution_census_complete",
+            "full_runtime_dependency_inventory_complete","runtime_cognition_dependency_class",
+            "model_dependency_count","external_model_runtime_dependency_count",
+            "online_teacher_call_count","teacher_fallback_path_count",
+            "copied_or_rehosted_teacher_present","brain_owned_operative_artifact",
+            "operative_solver_role",
+        ):
+            donor.pop(key,None)
+        out=evaluate_documents(*args)
+        self.assertFalse(out["pass"])
+        self.assertIn("DONOR_CLEANROOM_PROTOCOL_V2_NOT_BOUND",out["errors"])
+        self.assertIn("DONOR_CLEANROOM_RUNTIME_DEPENDENCY_INVENTORY_INCOMPLETE",out["errors"])
+
+    def test_local_rehosted_teacher_donor_receipt_fails(self):
+        args=list(self.fixture())
+        donor=args[6]
+        donor["model_dependency_count"]=1
+        donor["external_model_runtime_dependency_count"]=1
+        donor["runtime_cognition_dependency_class"]="MODEL_DEPENDENT"
+        donor["copied_or_rehosted_teacher_present"]=True
+        out=evaluate_documents(*args)
+        self.assertFalse(out["pass"])
+        self.assertIn("DONOR_CLEANROOM_MODEL_DEPENDENCY_COUNT_NOT_ZERO",out["errors"])
+        self.assertIn("DONOR_CLEANROOM_COPIED_OR_REHOSTED_TEACHER_NOT_EXPLICITLY_FALSE",out["errors"])
 
 if __name__=="__main__":
     unittest.main(verbosity=2)
