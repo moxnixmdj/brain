@@ -302,3 +302,40 @@ def test_ocr_failure_is_fail_soft_observation_not_agent_crash():
     assert seen[0]["ocr"]["status"] == "UNAVAILABLE"
     assert "tesseract unavailable" in seen[0]["ocr"]["reason"]
     assert seen[0]["ocr"]["terminal_semantic_authority"] is False
+
+
+def test_done_after_text_contains_verification_is_allowed():
+    calls = {"n": 0}
+    class GuestContains(_FakeGuest):
+        def run(self, payload):
+            self.payloads.append(dict(payload))
+            return {
+                "type": "STATE_OPS",
+                "ok": True,
+                "status": "ok",
+                "output": "ASSERT_TEXT_CONTAINS:PASS:/home/oai/share/a.txt",
+            }
+
+    guest = GuestContains()
+    def policy(_state):
+        calls["n"] += 1
+        if calls["n"] == 1:
+            return {
+                "response": "verify",
+                "actions": [{
+                    "type": "STATE_OPS",
+                    "ops": [{"type": "ASSERT_TEXT_CONTAINS", "path": "/home/oai/share/a.txt", "text": "omega"}],
+                }],
+            }
+        return {"response": "done", "actions": [{"type": "DONE"}]}
+
+    agent = BrainOSWorldAgent(
+        policy,
+        policy_id="contains-guard",
+        browser_controller=_FakeBrowser(),
+        guest_controller=guest,
+    )
+    _, first = agent.predict("verify contains", {"screenshot": b"same"})
+    assert first == ["WAIT"]
+    _, second = agent.predict("verify contains", {"screenshot": b"same"})
+    assert second == ["DONE"]
