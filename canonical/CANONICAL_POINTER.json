@@ -33,7 +33,8 @@
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
     "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
     "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
-    "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V2.md",
+    "canonical/laws/CAPABILITY_TRANSFER_VS_COGNITION_OUTSOURCING_LAW_V1.md",
+    "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
     "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md"
   ],
   "boot_requirements": {
@@ -177,8 +178,8 @@
     "brain_configured_route_itself_must_be_verified_ge_opus55": true,
     "general_cognition_substrate_law_path": "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
     "white_box_capability_harvesting_required": true,
-    "white_box_capability_harvesting_law_path": "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V2.md",
-    "white_box_capability_capsule_schema_path": "canonical/governance/WHITE_BOX_CAPABILITY_CAPSULE_SCHEMA_V2.json",
+    "white_box_capability_harvesting_law_path": "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+    "white_box_capability_capsule_schema_path": "canonical/governance/WHITE_BOX_CAPABILITY_CAPSULE_SCHEMA_V3.json",
     "resource_bounded_capability_bytes_required": true,
     "resource_bounded_capability_bytes_law_path": "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
     "verified_mechanism_cover_optimizer_path": "canonical/runtime/verified_mechanism_cover_optimizer.py",
@@ -234,7 +235,19 @@
     "runtime_cognition_provenance_required_for_all_brain_credit": true,
     "unknown_cognition_provenance_fails_closed": true,
     "local_open_weight_self_hosted_or_content_addressed_model_still_counts_as_model_dependency": true,
-    "benchmark_credit_requires_zero_external_model_cognition_dependencies": true
+    "benchmark_credit_requires_zero_external_model_cognition_dependencies": true,
+    "capability_transfer_vs_cognition_outsourcing_law_required": true,
+    "capability_transfer_vs_cognition_outsourcing_law_path": "canonical/laws/CAPABILITY_TRANSFER_VS_COGNITION_OUTSOURCING_LAW_V1.md",
+    "capability_transfer_ownership_gate_required": true,
+    "capability_transfer_ownership_gate_path": "canonical/runtime/capability_transfer_ownership_gate_v1.py",
+    "donor_deletion_protocol_required_for_all_donor_derived_promotions": true,
+    "donor_deletion_protocol_path": "canonical/governance/DONOR_DELETION_AND_DEPENDENCY_ACCOUNTING_PROTOCOL_V2.json",
+    "distillation_allowed_only_as_acquisition_time_transfer": true,
+    "teacher_or_donor_runtime_cognition_forbidden": true,
+    "teacher_fallback_rerank_critique_online_planning_forbidden": true,
+    "copied_or_rehosted_teacher_is_not_transfer": true,
+    "post_donor_removal_heldout_qualification_required": true,
+    "all_donor_derived_promotions_require_zero_external_model_runtime_dependencies": true
   },
   "active_agent": {
     "agent_id": "ASTRA-OPERATIONAL-1",
