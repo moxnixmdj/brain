@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_FINANCE_AGENT_V2_VALKYRIE_NATIVE_ADAPTER_VERIFICATION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "INDEPENDENT_EXACT_BLOB_PASS__COMPILE_PASS__6_OF_6_TESTS_PASS__ZERO_BENCHMARK_CREDIT",
+  "target": "FINANCE_AGENT_V2_GE_58_59",
+  "brain_subject": {
+    "adapter_branch_verified_head": "3e58234a6e6f5fa68443e400e2589c419155c4b8",
+    "runtime_blobs": {
+      "canonical/runtime/finance_agent_v2_brain_native_llm_v1.py": "9ec61256da933b91edad92620fd3d019ac141eff",
+      "canonical/runtime/finance_quantitative_dependency_v1.py": "57d250414b1f064dd243d1d98e8cde7c85cf6858",
+      "canonical/runtime/finance_quantitative_question_contract_v1.py": "24a17cf65b0db07fedef9d1a99b1662b58c0448c",
+      "canonical/runtime/finance_metric_xbrl_registry_v1.py": "a64271e46811c8c1a440a344045ca1f38c30a519",
+      "canonical/runtime/finance_agent_v2_zero_spend_adapter_v1.py": "c90d2e693621ae0a268e3c4f96bbdbfdcc827ec2",
+      "canonical/runtime/zero_spend_provider_guard_v1.py": "356af559fc74ac3eab5532b2d8fee9ddfb98f962"
+    },
+    "adapter_blobs": {
+      "canonical/integrations/brain_fabv2_native_v1/run_agent.py": "bc8c5a98e52acf4d5df5922806b1d1f7f3580697",
+      "canonical/integrations/brain_fabv2_native_v1/setup.sh": "fa13ff711cb3d53b189f12b8e867a55ba128ae50",
+      "canonical/integrations/brain_fabv2_native_v1/contract.yaml": "344d5b8726c7c4ada28d7c73df51eb734474e512",
+      "canonical/tests/test_finance_agent_v2_valkyrie_native_bundle_v1.py": "81e616679a4c90b4b3a003f7688fa53de6a10fe7"
+    }
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2696,
+    "head_commit": "1972b7c41c6f18ce518001bbdbfc9ce917b654de",
+    "workflow_name": "Verify Finance Brain-native core",
+    "workflow_run_id": 38146131627,
+    "job_id": 114489758658,
+    "exact_blob_binding": "PASS",
+    "compile": "PASS",
+    "tests_passed": 6,
+    "tests_failed": 0,
+    "unittest_runtime_seconds": 0.163
+  },
+  "proved": [
+    "VALKYRIE_ADAPTER_EXACT_BLOBS_MATCH_INDEPENDENT_RUNNER_SUBJECT",
+    "LOAD_BEARING_BRAIN_FINANCE_RUNTIME_EXACT_BLOBS_MATCH_INDEPENDENT_RUNNER_SUBJECT",
+    "ADAPTER_AND_RUNTIME_COMPILE_UNDER_PYTHON_3_12",
+    "FOCUSED_ADAPTER_SUITE_PASSES_6_OF_6",
+    "BUNDLE_TESTS_ENFORCE_NO_PROVIDER_MODEL_DEPENDENCY_AND_FAIL_CLOSED_ZERO_SPEND_SNAPSHOTS",
+    "VENDORED_BRAIN_RUNTIME_IS_BYTE_IDENTICAL_TO_CANONICAL_RUNTIME"
+  ],
+  "hard_nonclaims": [
+    "NO_PRIVATE_FINANCE_AGENT_V2_TASK_EXECUTED",
+    "NO_VALS_TENANT_AUTHORIZATION_PROVED",
+    "NO_EXTERNAL_TOOL_ACCOUNT_READINESS_PROVED",
+    "NO_FINANCE_AGENT_V2_SCORE_CREDIT",
+    "NO_CLAIM_FINANCE_AGENT_V2_GE_58_59"
+  ],
+  "remaining_terminal_obligation": "AUTHENTIC_THREE_RUN_SCORE_LOWER_BOUND_MASS_GE_175_77_OR_EQUIVALENT_SOUND_CERTIFICATE",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "private_cases_exposed": 0,
+    "benchmark_score_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
