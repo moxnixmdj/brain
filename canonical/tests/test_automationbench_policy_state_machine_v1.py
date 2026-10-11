@@ -174,6 +174,66 @@ class AutomationBenchPolicyStateMachineV1Tests(unittest.TestCase):
         self.assertEqual(out["semantic"], "ASANA_TASK_ADD_TO_SECTION")
         self.assertIn("/sections/sec_feb/addTask", out["calls"][0]["arguments"]["url"])
 
+    def test_literal_email_advances_to_communication(self):
+        history = [
+            {"kind":"tool_result","name":"api_search","content":'{"results":[]}'},
+            {"kind":"tool_result","name":"api_fetch","content":'{"records":[]}'},
+        ]
+        out = next_policy_action(
+            prompt=(
+                "Email ops@example.com with the message "
+                "'Maintenance window confirmed'."
+            ),
+            history=history,
+        )
+        self.assertEqual(out["phase"], "COMMUNICATE")
+        self.assertEqual(out["semantic_family"], "COMMUNICATE_EMAIL")
+        call = out["calls"][0]
+        self.assertEqual(call["tool"], "api_fetch")
+        self.assertEqual(call["arguments"]["method"], "POST")
+        self.assertIn("/messages/send", call["arguments"]["url"])
+
+    def test_derived_placeholder_message_does_not_execute(self):
+        history = [
+            {"kind":"tool_result","name":"api_search","content":'{"results":[]}'},
+            {"kind":"tool_result","name":"api_fetch","content":'{"records":[]}'},
+        ]
+        out = next_policy_action(
+            prompt=(
+                "Email a summary to ap-lead@company.example.com with a line "
+                "'Logged total: $X' where X is the sum of all invoice amounts."
+            ),
+            history=history,
+        )
+        self.assertNotEqual(out.get("phase"), "COMMUNICATE")
+        self.assertEqual(out["status"], "NEEDS_POLICY_EXTENSION")
+
+    def test_literal_communications_are_content_addressed_and_sequential(self):
+        prompt = (
+            "Email ops@example.com with the message 'Ready'. "
+            "Then post to #ops-updates with the message 'Ready'."
+        )
+        base = [
+            {"kind":"tool_result","name":"api_search","content":'{"results":[]}'},
+            {"kind":"tool_result","name":"api_fetch","content":'{"records":[]}'},
+        ]
+        first = next_policy_action(prompt=prompt, history=base)
+        self.assertEqual(first["phase"], "COMMUNICATE")
+        first_semantic = first["semantic"]
+
+        second = next_policy_action(
+            prompt=prompt,
+            history=base + [{
+                "kind":"assistant_state",
+                "metadata":{
+                    "project_brain/automationbench_semantic":first_semantic
+                },
+            }],
+        )
+        self.assertEqual(second["phase"], "COMMUNICATE")
+        self.assertNotEqual(second["semantic"], first_semantic)
+        self.assertEqual(second["semantic_family"], "COMMUNICATE_SLACK")
+
     def test_unsupported_semantics_fail_closed(self):
         history = [
             {"kind":"tool_result","name":"api_search","content":'{"results":[]}'},
