@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_HLE_WIKIPEDIA_BING_TRANSPORT_PREFLIGHT_20261011_V1",
   "date": "2026-10-11",
-  "status": "IMPLEMENTED__EXACT_INDEPENDENT_RUNS_QUEUED__ZERO_CREDIT_PENDING_CAUSAL_RESULT",
+  "status": "HARDENED_IMPLEMENTATION__EXACT_INDEPENDENT_RUNS_QUEUED__ZERO_CREDIT_PENDING_CAUSAL_RESULT",
   "causal_target": {
     "prior_result_commit": "e36e3ac08a27be40c367ec718a9b711bb600b080",
     "shared_miss_ids": [
@@ -22,13 +22,15 @@
   },
   "subject": {
     "runtime_path": "canonical/runtime/hle_wikipedia_bing_transport_v1.py",
-    "runtime_blob": "f544eceed4cec7635f54efc4dda3aed3dd6d6f55",
+    "runtime_blob": "eace56be88b0047aaebfe713c61ddf6acea59296",
     "tests_path": "canonical/tests/test_hle_wikipedia_bing_transport_v1.py",
-    "tests_blob": "07a9a30dd80487e8d51627e51ed5e7297b87316b"
+    "tests_blob": "7ec2a287396b59a77d92d4c1ab4a3a683f36d0fd"
   },
   "design": [
-    "DISCOVER_EN_WIKIPEDIA_ARTICLE_URLS_THROUGH_EXISTING_WEB_SEARCH_TRANSPORT",
-    "FETCH_ORDINARY_WIKIPEDIA_ARTICLE_PAGES_INSTEAD_OF_MEDIAWIKI_SEARCH_API",
+    "BING_RSS_DISCOVERS_EN_WIKIPEDIA_ARTICLE_URLS_WITH_CONTAMINATION_POLICY_FILTERING",
+    "FETCH_ORDINARY_WIKIPEDIA_ARTICLE_PAGE_BODY_DIRECTLY_UP_TO_ONE_MEGABYTE",
+    "REJECT_ONLY_TRUE_WIKIPEDIA_NAMESPACE_PAGES_NOT_ALL_COLON_TITLES",
+    "AVOID_MEDIAWIKI_SEARCH_API_ENTIRELY",
     "BOUND_PAGE_COUNT_PER_QUERY",
     "FAILED_SEARCH_OR_PAGE_FETCH_IS_RETRYABLE",
     "EMPTY_RESULT_DOES_NOT_AUTHORIZE_NONEXISTENCE",
@@ -38,9 +40,9 @@
     "repository": "moxnixmdj/verification-capsule-runner",
     "pull_request": 2711,
     "branch": "verify-hle-wikipedia-bing-transport-v1-20261011",
-    "head_sha": "68d29eca9e3c38a8dd5d7bba3023c380ede5e060",
-    "exact_test_workflow_run_id": 38152274577,
-    "consumed_nine_miss_workflow_run_id": 38152274534,
+    "head_sha": "b88a91971f87e98a72f6798ad1358273d80c969e",
+    "exact_test_workflow_run_id": 38152518230,
+    "consumed_nine_miss_workflow_run_id": 38152517963,
     "observed_status_at_seal": "QUEUED"
   },
   "causal_pass_condition": "AT_LEAST_ONE_OF_THE_NINE_ALREADY_CONSUMED_SHARED_MISSES_GAINS_A_GOLD_BEARING_RETRIEVAL_SURFACE",
@@ -53,5 +55,10 @@
   "capability_credit_delta": 0,
   "hle_score_credit": 0,
   "hle_67_7_certified": false,
-  "incremental_spend_usd": 0
+  "incremental_spend_usd": 0,
+  "superseded_runner_runs": [
+    38152274577,
+    38152274534
+  ],
+  "truth_repair": "EARLIER_PREFLIGHT_BLOBS_F544.../07A9... ARE SUPERSEDED_AND_MUST_NOT_RECEIVE CREDIT"
 }
