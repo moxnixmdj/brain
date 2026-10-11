@@ -25,7 +25,7 @@
       },
       {
         "path": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-        "git_blob_sha": "1ca06da1c13dd9819f1576f64945db0c7a88f095"
+        "git_blob_sha": "6fc3b5b57770a5d463351c4fc86b705b84c4d710"
       },
       {
         "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
@@ -156,11 +156,11 @@
       "ready": "BLOCKED_ONLY_BY_FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION"
     },
     {
-      "work_id": "BYTES_EXACT_SYMBOLIC_V75_NEXT_PHYSICAL_CUT",
+      "work_id": "BYTES_EXACT_SYMBOLIC_V76_NEXT_PHYSICAL_CUT",
       "work_type": "EFFICIENCY_IMPROVEMENT",
       "source": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-      "causal_role": "CONTINUE_RESOURCE_REDUCTION_FROM_1616922_RAW_PYTHON_BYTES_USING_INHERITED_SPENT_NEXT81_UNDER_STRONG_EXECUTABLE_EQUIVALENCE__RERANK_BEFORE_NEW_PHYSICAL_CUT__DO_NOT_TOUCH_CORRECTED_FROZEN_NEXT82_BEFORE_CUT",
-      "readiness": "ACTIONABLE_WITH_EXISTING_RECONSTRUCTION_AND_PROOF_CARRYING_EQUIVALENCE_MACHINERY__V75_CURRENT__COMMENT_STRIP_STRONG_EQUIVALENCE_VERIFIED",
+      "causal_role": "CONTINUE_RESOURCE_REDUCTION_FROM_1615553_RAW_PYTHON_BYTES_USING_SPENT_CORRECTED_NEXT82_ONLY__RERANK_BEFORE_NEW_PHYSICAL_CUT__DO_NOT_TOUCH_FROZEN_NEXT83_BEFORE_CUT",
+      "readiness": "ACTIONABLE_WITH_EXISTING_RECONSTRUCTION_AND_QUALIFICATION_MACHINERY__V76_CURRENT__DOCSTRING_STRIP_VERIFIED_BY_EXECUTABLE_EQUIVALENCE",
       "claims_new_primitive": false,
       "score_state": "UNBOUND",
       "scheduler_state": "READY_EXECUTION",
@@ -179,19 +179,19 @@
       "vector_evidence": {},
       "read_only_evidence": {
         "source": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-        "source_git_blob_sha": "1ca06da1c13dd9819f1576f64945db0c7a88f095",
-        "raw_python_source_bytes": 1616922,
-        "B_exec_raw_python_source_bytes": 1619682,
-        "qualification": "20470/20470__TRANSFERRED_BY_STRONG_EXECUTABLE_EQUIVALENCE",
-        "next_action": "RERANK_EXACT_V75_USING_INHERITED_SPENT_NEXT81_UNDER_STRONG_EXECUTABLE_EQUIVALENCE__MAKE_NEW_PHYSICAL_CUT_BEFORE_CORRECTED_QUAL_SUCCESSOR_NEXT82_20261011_V1",
-        "next_frozen_qualification": "QUAL_SUCCESSOR_NEXT82_20261011_V1",
+        "source_git_blob_sha": "6fc3b5b57770a5d463351c4fc86b705b84c4d710",
+        "raw_python_source_bytes": 1615553,
+        "B_exec_raw_python_source_bytes": 1618313,
+        "qualification": "20700/20700__TRANSFERRED_BY_EXECUTABLE_EQUIVALENCE",
+        "next_action": "RERANK_EXACT_V76_USING_SPENT_CORRECTED_NEXT82_ONLY__MAKE_NEW_PHYSICAL_CUT_BEFORE_QUAL_SUCCESSOR_NEXT83_20261011_V1",
+        "next_frozen_qualification": "QUAL_SUCCESSOR_NEXT83_20261011_V1",
         "next_frozen_library_file_id": "libfile_d16a034393bc81919a35bacdfacbb058",
         "independent_verification": "canonical/verification/BYTES_EXACT_SYMBOLIC_MPF_PERTURB_V55_VERIFY_20261011_V1.json",
         "vector_bounds_complete": false,
         "next_frozen_spent": false,
         "strong_equivalence_verification": "canonical/verification/BYTES_EXACT_SYMBOLIC_COMMENT_STRIP_V75_STRONG_EQUIVALENCE_VERIFY_20261011_V1.json"
       },
-      "ready": "V75_CURRENT_AT_1616922_BYTES__CONTINUE_ONLY_NONCONFLICTING_RESOURCE_PARETO_CUT",
+      "ready": "V76_CURRENT_AT_1615553_BYTES__CONTINUE_ONLY_NONCONFLICTING_RESOURCE_PARETO_CUT",
       "source_git_blob_sha": "1ca06da1c13dd9819f1576f64945db0c7a88f095"
     },
     {
@@ -646,12 +646,12 @@
   },
   "bytes_current_frontier": {
     "path": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-    "observed_git_blob_sha": "1ca06da1c13dd9819f1576f64945db0c7a88f095",
-    "status": "ACTIVE_RESEARCH__PROOF_EQUIVALENT_COMMENT_STRIP_V75_FRONTIER__SUCCESSOR_READY",
-    "raw_python_source_bytes": 1616922,
-    "B_exec_raw_python_source_bytes": 1619682,
-    "qualification": "20470/20470__TRANSFERRED_BY_STRONG_EXECUTABLE_EQUIVALENCE",
-    "next": "Rerank exact V75 using inherited spent NEXT81 under strong executable equivalence; make a new physical cut before touching corrected QUAL_SUCCESSOR_NEXT82_20261011_V1.",
+    "observed_git_blob_sha": "6fc3b5b57770a5d463351c4fc86b705b84c4d710",
+    "status": "ACTIVE_RESEARCH__DOCSTRING_STRIP_V76_FRONTIER__SUCCESSOR_READY",
+    "raw_python_source_bytes": 1615553,
+    "B_exec_raw_python_source_bytes": 1618313,
+    "qualification": "20700/20700__TRANSFERRED_BY_EXECUTABLE_EQUIVALENCE",
+    "next": "Rerank exact V76 using spent corrected NEXT82 only; make a new physical cut before touching QUAL_SUCCESSOR_NEXT83_20261011_V1.",
     "promotion_credit": 0,
     "observed_snapshot_is_non_authoritative_for_v15_runtime": true
   }
