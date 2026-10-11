@@ -19,6 +19,16 @@ from canonical.runtime.benchmark_witness_elimination_compiler_v4 import (
 SCHEMA = "PROJECT_BRAIN_CURRENT_ESCAPE_O11_OBJECTIVE_ACCEPTANCE_LAW_GATE_V1"
 OQ_SCHEMA = "PROJECT_BRAIN_CURRENT_ESCAPE_OQ_FRONTIER_REDUCTION_20261010_V1"
 MANIFEST_SCHEMA = "PROJECT_BRAIN_ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_V2"
+CURRENT_RESIDUAL_SCHEMA = "PROJECT_BRAIN_CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1"
+ENGINE_CUT_SCHEMA = "PROJECT_BRAIN_CURRENT_ESCAPE_TWO_ENGINE_MINIMUM_DELTA_CUT_20261011_V1"
+GDPVAL_RECLASS_SCHEMA = "PROJECT_BRAIN_GDPVAL_CURRENT_FIXED_BAR_ENGINE_RECLASSIFICATION_20261011_V1"
+GDPVAL_VERIFY_SCHEMA = "PROJECT_BRAIN_GDPVAL_FIXED_BAR_OWNER_PAIRWISE_NONNECESSITY_VERIFICATION_20261009_V1"
+
+OQ_PATH = "canonical/governance/CURRENT_ESCAPE_OQ_FRONTIER_REDUCTION_20261010_V1.json"
+CURRENT_RESIDUAL_PATH = "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json"
+GDPVAL = "PROWORK_GDPVAL_GE_1846"
+AA_BRIEFCASE = "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT"
+TB_SCIENCE = "TB_SCIENCE_GE_58_7"
 
 
 def _git_blob(path: Path) -> str:
@@ -34,7 +44,14 @@ def _load(path: Path) -> Mapping[str, Any]:
 
 
 def _frontier(root: Path) -> tuple[set[str], set[str], Mapping[str, Any]]:
-    oq_path = root / "canonical/governance/CURRENT_ESCAPE_OQ_FRONTIER_REDUCTION_20261010_V1.json"
+    """Resolve active O/Q membership through the current two-engine projection.
+
+    The historical O/Q reduction remains the base acceptance-law classification.
+    Current routing then applies the mutable residual pointer's exact two-engine cut,
+    which may park rows or admit independently verified reclassifications. This
+    prevents stale O11/Q2 snapshots from routing current work.
+    """
+    oq_path = root / OQ_PATH
     oq = _load(oq_path)
     if oq.get("schema") != OQ_SCHEMA:
         raise ValueError("OQ_SCHEMA_INVALID")
@@ -56,6 +73,7 @@ def _frontier(root: Path) -> tuple[set[str], set[str], Mapping[str, Any]]:
     rows = manifest.get("rows")
     if not isinstance(rows, list) or len(rows) != 13:
         raise ValueError("CURRENT_ESCAPE_ROW_SET_INVALID")
+
     all_ids: set[str] = set()
     for row in rows:
         if not isinstance(row, Mapping):
@@ -71,19 +89,176 @@ def _frontier(root: Path) -> tuple[set[str], set[str], Mapping[str, Any]]:
     q_rows = reduction.get("Q_rows")
     if not isinstance(q_rows, list) or any(not isinstance(x, str) or not x for x in q_rows):
         raise ValueError("Q_ROWS_INVALID")
-    q = set(q_rows)
-    if not q.issubset(all_ids):
-        raise ValueError("Q_ROWS_OUTSIDE_CURRENT_ESCAPE_SCOPE")
-    o = all_ids - q
+    base_q = set(q_rows)
+    base_o = all_ids - base_q
     if (
         reduction.get("O_OBJECTIVE_ACCEPTANCE") != 11
         or reduction.get("Q_QUALITATIVE_RELATIVE_ORDER") != 2
-        or len(o) != 11
-        or len(q) != 2
+        or len(base_o) != 11
+        or base_q != {GDPVAL, AA_BRIEFCASE}
     ):
-        raise ValueError("OQ_CURRENT_COUNT_INVARIANT_FAILED")
-    return o, q, oq
+        raise ValueError("OQ_BASE_CLASSIFICATION_INVARIANT_FAILED")
 
+    current_path = root / CURRENT_RESIDUAL_PATH
+    current = _load(current_path)
+    if current.get("schema") != CURRENT_RESIDUAL_SCHEMA:
+        raise ValueError("CURRENT_RESIDUAL_SCHEMA_INVALID")
+
+    topology = current.get("escape_current_topology")
+    if not isinstance(topology, Mapping):
+        raise ValueError("CURRENT_ESCAPE_TOPOLOGY_MISSING")
+    parked_rows = topology.get("parked_obligation_ids")
+    if (
+        topology.get("frozen_obligation_count") != 13
+        or topology.get("active_gap_a_acquisition_rows") != 12
+        or topology.get("active_gap_b_strict_progress_rows") != 0
+        or topology.get("parked_unresolved_rows") != 1
+        or not isinstance(parked_rows, list)
+        or any(not isinstance(x, str) or not x for x in parked_rows)
+    ):
+        raise ValueError("CURRENT_ESCAPE_TOPOLOGY_INVARIANT_FAILED")
+    parked = set(parked_rows)
+    if parked != {TB_SCIENCE}:
+        raise ValueError("CURRENT_PARKED_SET_UNEXPECTED")
+
+    cut_ref = current.get("current_escape_two_engine_minimum_delta_cut")
+    if not isinstance(cut_ref, Mapping):
+        raise ValueError("CURRENT_TWO_ENGINE_CUT_REFERENCE_MISSING")
+    cut_rel = cut_ref.get("path")
+    cut_sha = cut_ref.get("git_blob_sha")
+    if not isinstance(cut_rel, str) or not cut_rel:
+        raise ValueError("CURRENT_TWO_ENGINE_CUT_PATH_INVALID")
+    if not isinstance(cut_sha, str) or len(cut_sha) != 40:
+        raise ValueError("CURRENT_TWO_ENGINE_CUT_SHA_INVALID")
+    cut_path = root / cut_rel
+    if _git_blob(cut_path) != cut_sha:
+        raise ValueError("CURRENT_TWO_ENGINE_CUT_BLOB_DRIFT")
+    cut = _load(cut_path)
+    if cut.get("schema") != ENGINE_CUT_SCHEMA:
+        raise ValueError("CURRENT_TWO_ENGINE_CUT_SCHEMA_INVALID")
+    if cut.get("status") != cut_ref.get("status"):
+        raise ValueError("CURRENT_TWO_ENGINE_CUT_STATUS_MISMATCH")
+
+    bindings = cut.get("source_bindings")
+    if not isinstance(bindings, Mapping):
+        raise ValueError("CURRENT_TWO_ENGINE_SOURCE_BINDINGS_MISSING")
+
+    def _pair(name: str) -> tuple[str, str]:
+        value = bindings.get(name)
+        if (
+            not isinstance(value, list)
+            or len(value) != 2
+            or not isinstance(value[0], str)
+            or not value[0]
+            or not isinstance(value[1], str)
+            or len(value[1]) != 40
+        ):
+            raise ValueError("CURRENT_TWO_ENGINE_BINDING_INVALID:" + name)
+        return value[0], value[1]
+
+    manifest_rel, manifest_sha = _pair("manifest")
+    if manifest_rel != rel or manifest_sha != expected_sha:
+        raise ValueError("CURRENT_TWO_ENGINE_MANIFEST_BINDING_MISMATCH")
+    oq_rel, oq_sha = _pair("oq")
+    if oq_rel != OQ_PATH or _git_blob(oq_path) != oq_sha:
+        raise ValueError("CURRENT_TWO_ENGINE_OQ_BINDING_MISMATCH")
+
+    reclass_rel, reclass_sha = _pair("gdpval_fixed_bar_reclassification")
+    reclass_path = root / reclass_rel
+    if _git_blob(reclass_path) != reclass_sha:
+        raise ValueError("GDPVAL_RECLASSIFICATION_BLOB_DRIFT")
+    reclass = _load(reclass_path)
+    if reclass.get("schema") != GDPVAL_RECLASS_SCHEMA:
+        raise ValueError("GDPVAL_RECLASSIFICATION_SCHEMA_INVALID")
+    if reclass.get("target_obligation") != GDPVAL:
+        raise ValueError("GDPVAL_RECLASSIFICATION_TARGET_MISMATCH")
+    shape = reclass.get("current_acceptance_shape")
+    effect = reclass.get("engine_effect")
+    if (
+        not isinstance(shape, Mapping)
+        or shape.get("acceptance_relation_class") != "OBJECTIVE_FIXED_BAR"
+        or shape.get("hidden_owner_pairwise_relation_is_free_variable_of_decision") is not False
+        or not isinstance(effect, Mapping)
+        or effect.get("previous") != "Q_ACCEPTANCE_RELATION_ROBUST_COMMON_POLICY"
+        or effect.get("current") != "O_OBJECTIVE_ACCEPTANCE_INSTANTIATION"
+        or effect.get("new_primitive_required") is not False
+    ):
+        raise ValueError("GDPVAL_RECLASSIFICATION_SEMANTICS_INVALID")
+
+    verify_ref = (
+        reclass.get("source_bindings", {}).get("fixed_bar_nonnecessity_verification")
+        if isinstance(reclass.get("source_bindings"), Mapping)
+        else None
+    )
+    if not isinstance(verify_ref, Mapping):
+        raise ValueError("GDPVAL_RECLASSIFICATION_VERIFICATION_BINDING_MISSING")
+    verify_rel = verify_ref.get("path")
+    verify_sha = verify_ref.get("git_blob_sha")
+    if not isinstance(verify_rel, str) or not verify_rel:
+        raise ValueError("GDPVAL_RECLASSIFICATION_VERIFICATION_PATH_INVALID")
+    if not isinstance(verify_sha, str) or len(verify_sha) != 40:
+        raise ValueError("GDPVAL_RECLASSIFICATION_VERIFICATION_SHA_INVALID")
+    verify_path = root / verify_rel
+    if _git_blob(verify_path) != verify_sha:
+        raise ValueError("GDPVAL_RECLASSIFICATION_VERIFICATION_BLOB_DRIFT")
+    verify = _load(verify_path)
+    if (
+        verify.get("schema") != GDPVAL_VERIFY_SCHEMA
+        or not str(verify.get("status") or "").startswith("PASS__")
+        or "NOT_NECESSARY" not in str(verify.get("conclusion") or "")
+    ):
+        raise ValueError("GDPVAL_RECLASSIFICATION_VERIFICATION_INVALID")
+
+    partition = cut.get("current_partition")
+    if not isinstance(partition, Mapping):
+        raise ValueError("CURRENT_TWO_ENGINE_PARTITION_MISSING")
+    o_rows = partition.get("active_o_obligation_ids")
+    q_rows = partition.get("active_q_obligation_ids")
+    cut_parked_rows = partition.get("parked_obligation_ids")
+    for name, value in (
+        ("ACTIVE_O_ROWS", o_rows),
+        ("ACTIVE_Q_ROWS", q_rows),
+        ("PARKED_ROWS", cut_parked_rows),
+    ):
+        if (
+            not isinstance(value, list)
+            or any(not isinstance(x, str) or not x for x in value)
+            or len(value) != len(set(value))
+        ):
+            raise ValueError(name + "_INVALID")
+
+    o = set(o_rows)
+    q = set(q_rows)
+    cut_parked = set(cut_parked_rows)
+    if (
+        partition.get("total_escape_rows") != 13
+        or partition.get("active_rows") != 12
+        or partition.get("parked_rows") != 1
+        or partition.get("active_gap_b_rows") != 0
+        or partition.get("active_o_rows") != 11
+        or partition.get("active_q_rows") != 1
+        or len(o) != 11
+        or q != {AA_BRIEFCASE}
+        or cut_parked != parked
+        or (o & q)
+        or (o & parked)
+        or (q & parked)
+        or (o | q | parked) != all_ids
+    ):
+        raise ValueError("CURRENT_TWO_ENGINE_PARTITION_INVARIANT_FAILED")
+
+    expected_o = (base_o | {GDPVAL}) - parked
+    expected_q = base_q - {GDPVAL}
+    if o != expected_o or q != expected_q:
+        raise ValueError("CURRENT_TWO_ENGINE_RECLASSIFICATION_DELTA_INVALID")
+
+    return o, q, {
+        "status": cut.get("status"),
+        "historical_oq_status": oq.get("status"),
+        "parked_obligation_ids": sorted(parked),
+        "current_cut_path": cut_rel,
+        "current_cut_git_blob_sha": cut_sha,
+    }
 
 def evaluate(
     payload: Mapping[str, Any],
@@ -120,7 +295,15 @@ def evaluate(
             return {**base, "status": "FAIL_CLOSED", "reason": "CLAIM_SPEC_REQUIRED"}
 
         root = Path(repo_root).resolve() if repo_root is not None else Path(__file__).resolve().parents[2]
-        o_rows, q_rows, oq = _frontier(root)
+        o_rows, q_rows, frontier = _frontier(root)
+        parked_rows = set(frontier.get("parked_obligation_ids") or [])
+        if obligation_id in parked_rows:
+            return {
+                **base,
+                "status": "NOT_APPLICABLE__CURRENT_PARKED_ROW",
+                "reason": "CURRENT_FRONTIER_EXPLICITLY_PARKED",
+                "obligation_id": obligation_id,
+            }
         if obligation_id in q_rows:
             return {
                 **base,
@@ -169,7 +352,8 @@ def evaluate(
                 "kernel_verdict": verdict,
                 "current_o_count": len(o_rows),
                 "current_q_count": len(q_rows),
-                "oq_status": oq.get("status"),
+                "oq_status": frontier.get("historical_oq_status"),
+                "current_partition_status": frontier.get("status"),
                 "rule": (
                     "CURRENT_O_MEMBERSHIP_PLUS_EXISTING_V4_KERNEL_PROVEN__"
                     "CURRENT_IDENTITY_SCOPE_PROVENANCE_EVALUATOR_FAILURE_ACCOUNTING_AND_"
@@ -194,6 +378,8 @@ def evaluate(
             "kernel_verdict": verdict,
             "current_o_count": len(o_rows),
             "current_q_count": len(q_rows),
+            "oq_status": frontier.get("historical_oq_status"),
+            "current_partition_status": frontier.get("status"),
         }
     except Exception as exc:
         return {
