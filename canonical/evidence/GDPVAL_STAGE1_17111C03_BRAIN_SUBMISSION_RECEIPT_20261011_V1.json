@@ -1,0 +1,68 @@
+{
+  "schema":"PROJECT_BRAIN_GDPVAL_STAGE1_BRAIN_SUBMISSION_RECEIPT_20261011_V1",
+  "date":"2026-10-11",
+  "status":"PASS__FROZEN_CROSS_ARTIFACT_BRAIN_SUBMISSION_EXISTS__PDF_AND_XLSX_VERIFIED__ZERO_BENCHMARK_SCORE_CREDIT",
+  "benchmark":"GDPval-AA v2.1",
+  "stage":1,
+  "subject":{"row_idx":8,"task_id":"17111c03-aac7-45c2-857d-c06d8223d6ad","sector":"Government","occupation":"Administrative Services Managers","reference_files_count":1},
+  "precommit":"canonical/governance/GDPVAL_STAGE1_FRESH_BATCH_PRECOMMIT_20261011_V2.json",
+  "freshness":{
+    "task_id_only_frozen_before_prompt_read":true,
+    "official_dataset_allowed_field_projection_only":true,
+    "human_gold_deliverables_read_before_output_freeze":false,
+    "rubric_read_before_output_freeze":false,
+    "third_party_model_submissions_read_before_output_freeze":false,
+    "judge_feedback_read_before_output_freeze":false
+  },
+  "reference":{
+    "filename":"TENTATIVE CLEANUP SCHEDULE.pdf",
+    "source":"official openai/gdpval dataset",
+    "sha256":"3be25f7e2b43b0c89d048dcf5ec3a949f0e044737f1799a25a03e4cdf35750f5",
+    "rendered_page_count":3,
+    "schedule_transcription_rows":51
+  },
+  "brain_execution_identity":{
+    "candidate_id":"OPUS55_PROFESSIONAL_KNOWLEDGE_WORK_STIRRUP_CONFIGURATION_V1",
+    "profile":"canonical/capabilities/internalized/professional_work/stirrup_247f24d/BRAIN_EXECUTION_PROFILE_V1.json",
+    "cognition_substrate":"CURRENT_CHATGPT_GPT_5_6_SOL_SESSION",
+    "substrate_role":"GENERAL_COGNITION_SUBSTRATE_ONLY",
+    "incremental_spend_usd":0
+  },
+  "deliverables":[
+    {
+      "format":"pdf",
+      "filename":"GDPval_17111c03_cleanup_schedule_memo.pdf",
+      "sha256":"a3e3c612efb1d5c19c4652f7fff7245f6e84378fb1009d204d3d9ddb5f02a721",
+      "library_path":"/Project Brain/GDPval/stage1/17111c03-aac7-45c2-857d-c06d8223d6ad/GDPval_17111c03_cleanup_schedule_memo.pdf",
+      "library_file_id":"libfile_f5a9a4bfce0c81918a09c290d260b9c0"
+    },
+    {
+      "format":"xlsx",
+      "filename":"GDPval_17111c03_tentative_cleanup_schedule.xlsx",
+      "sha256":"0a4b47618f81fb9d3dcab34b96f023e1655a7947e2100f01357c3e876c3a2c36",
+      "library_path":"/Project Brain/GDPval/stage1/17111c03-aac7-45c2-857d-c06d8223d6ad/GDPval_17111c03_tentative_cleanup_schedule.xlsx",
+      "library_file_id":"libfile_08f584862a048191bcbd9e49eea07d44"
+    }
+  ],
+  "verification":{
+    "pdf_rendered_page_count":1,
+    "pdf_visual_inspection":"PASS__NO_CLIPPING_OVERLAP_OR_BROKEN_GLYPHS",
+    "xlsx_structural_inspection":"PASS__ALL_51_REFERENCE_DATE_SECTION_ROWS_PRESERVED",
+    "xlsx_formula_error_scan":"PASS__ZERO_MATCHES",
+    "xlsx_visual_preview":"PASS__READABLE_HEADER_TABLE_AND_WEATHER_NOTE",
+    "weather_disruption_guidance_present":true,
+    "return_or_reschedule_guidance_present":true,
+    "placeholder_text_removed":true
+  },
+  "scope":{
+    "proves":[
+      "FRESH_GDPVAL_PDF_MEMO_PATH_EXECUTABLE",
+      "FRESH_GDPVAL_XLSX_REFERENCE_TRANSCODING_PATH_EXECUTABLE",
+      "STAGE1_NOW_COVERS_DOCX_PDF_XLSX_ARTIFACT_CLASSES"
+    ],
+    "does_not_prove":[
+      "NO_OWNER_SCORE","NO_1846_THRESHOLD_CLOSURE","NO_FULL_220_MANIFEST","NO_TASK_RUBRIC_PASS_UNTIL_POSTFREEZE_GRADING"
+    ]
+  },
+  "accounting":{"acceptance_credit_delta":0,"terminal_credit_delta":0}
+}
