@@ -1,0 +1,186 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_CAPABILITY_COMPARISON_LEDGER_V1",
+  "date": "2026-10-11",
+  "status": "ACTIVE_FAIL_CLOSED__NO_HEURISTIC_PROJECTION_CREDIT",
+  "authority_law": "canonical/laws/BENCHMARK_MEASUREMENT_VS_CAPABILITY_PROOF_LAW_V1.md",
+  "rows": [
+    {
+      "benchmark_id": "CODING_TB4_GE_66_4",
+      "comparison_predicate": "BRAIN_CAPABILITY_NONINFERIOR_TO_TARGET_ON_BOUND_SCOPE__CODING_TB4_GE_66_4",
+      "relation": "SCHEDULING_HEURISTIC_ONLY",
+      "projected_families": [
+        "ADVANCED_AGENTIC_CODING",
+        "COMPLEX_MULTI_TOOL_AGENCY",
+        "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+        "MULTI_CAPABILITY_COMPOSITION"
+      ],
+      "state": "OPEN_UNBOUND_RELATION",
+      "capability_credit": 0
+    },
+    {
+      "benchmark_id": "CODING_FRONTIERCODE_GE_54_4",
+      "comparison_predicate": "BRAIN_CAPABILITY_NONINFERIOR_TO_TARGET_ON_BOUND_SCOPE__CODING_FRONTIERCODE_GE_54_4",
+      "relation": "SCHEDULING_HEURISTIC_ONLY",
+      "projected_families": [
+        "ADVANCED_AGENTIC_CODING",
+        "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT"
+      ],
+      "state": "OPEN_UNBOUND_RELATION",
+      "capability_credit": 0
+    },
+    {
+      "benchmark_id": "CODING_CURSORBENCH_GE_57_8",
+      "comparison_predicate": "BRAIN_CAPABILITY_NONINFERIOR_TO_TARGET_ON_BOUND_SCOPE__CODING_CURSORBENCH_GE_57_8",
+      "relation": "SCHEDULING_HEURISTIC_ONLY",
+      "projected_families": [
+        "ADVANCED_AGENTIC_CODING",
+        "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+        "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY"
+      ],
+      "state": "OPEN_UNBOUND_RELATION",
+      "capability_credit": 0
+    },
+    {
+      "benchmark_id": "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "comparison_predicate": "BRAIN_CAPABILITY_NONINFERIOR_TO_TARGET_ON_BOUND_SCOPE__MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "relation": "SCHEDULING_HEURISTIC_ONLY",
+      "projected_families": [
+        "UNKNOWN_DOMAIN_ADAPTATION",
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT"
+      ],
+      "state": "OPEN_UNBOUND_RELATION",
+      "capability_credit": 0
+    },
+    {
+      "benchmark_id": "PROWORK_GDPVAL_GE_1846",
+      "comparison_predicate": "BRAIN_CAPABILITY_NONINFERIOR_TO_TARGET_ON_BOUND_SCOPE__PROWORK_GDPVAL_GE_1846",
+      "relation": "SCHEDULING_HEURISTIC_ONLY",
+      "projected_families": [
+        "PROFESSIONAL_KNOWLEDGE_WORK",
+        "COMMUNICATION_AND_SYNTHESIS",
+        "ARTIFACT_CREATION",
+        "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT"
+      ],
+      "state": "OPEN_UNBOUND_RELATION",
+      "capability_credit": 0
+    },
+    {
+      "benchmark_id": "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "comparison_predicate": "BRAIN_CAPABILITY_NONINFERIOR_TO_TARGET_ON_BOUND_SCOPE__PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "relation": "SCHEDULING_HEURISTIC_ONLY",
+      "projected_families": [
+        "PROFESSIONAL_KNOWLEDGE_WORK",
+        "ARTIFACT_CREATION",
+        "COMMUNICATION_AND_SYNTHESIS",
+        "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT"
+      ],
+      "state": "OPEN_UNBOUND_RELATION",
+      "capability_credit": 0
+    },
+    {
+      "benchmark_id": "AUTOMATIONBENCH_GE_40",
+      "comparison_predicate": "BRAIN_CAPABILITY_NONINFERIOR_TO_TARGET_ON_BOUND_SCOPE__AUTOMATIONBENCH_GE_40",
+      "relation": "SCHEDULING_HEURISTIC_ONLY",
+      "projected_families": [
+        "BUSINESS_WORKFLOW_AUTOMATION",
+        "COMPUTER_AND_BROWSER_USE",
+        "COMPLEX_MULTI_TOOL_AGENCY",
+        "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+        "MULTI_CAPABILITY_COMPOSITION"
+      ],
+      "state": "OPEN_UNBOUND_RELATION",
+      "capability_credit": 0
+    },
+    {
+      "benchmark_id": "HLE_TOOLS_GE_67_7",
+      "comparison_predicate": "BRAIN_CAPABILITY_NONINFERIOR_TO_TARGET_ON_BOUND_SCOPE__HLE_TOOLS_GE_67_7",
+      "relation": "SCHEDULING_HEURISTIC_ONLY",
+      "projected_families": [
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "UNKNOWN_DOMAIN_ADAPTATION",
+        "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+        "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+        "MULTI_CAPABILITY_COMPOSITION"
+      ],
+      "state": "OPEN_UNBOUND_RELATION",
+      "capability_credit": 0
+    },
+    {
+      "benchmark_id": "CHARTOGRAPHY_TOOLS_GE_89",
+      "comparison_predicate": "BRAIN_CAPABILITY_NONINFERIOR_TO_TARGET_ON_BOUND_SCOPE__CHARTOGRAPHY_TOOLS_GE_89",
+      "relation": "SCHEDULING_HEURISTIC_ONLY",
+      "projected_families": [
+        "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+        "ARTIFACT_CREATION",
+        "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT"
+      ],
+      "state": "OPEN_UNBOUND_RELATION",
+      "capability_credit": 0
+    },
+    {
+      "benchmark_id": "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "comparison_predicate": "BRAIN_CAPABILITY_NONINFERIOR_TO_TARGET_ON_BOUND_SCOPE__OSWORLD_2_1_PARTIAL_GE_81_8",
+      "relation": "SCHEDULING_HEURISTIC_ONLY",
+      "projected_families": [
+        "COMPUTER_AND_BROWSER_USE",
+        "COMPLEX_MULTI_TOOL_AGENCY",
+        "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+        "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+        "MULTI_CAPABILITY_COMPOSITION"
+      ],
+      "state": "OPEN_UNBOUND_RELATION",
+      "capability_credit": 0
+    },
+    {
+      "benchmark_id": "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "comparison_predicate": "BRAIN_CAPABILITY_NONINFERIOR_TO_TARGET_ON_BOUND_SCOPE__FINANCE_ACCOUNTING_INDEX_GE_61",
+      "relation": "SCHEDULING_HEURISTIC_ONLY",
+      "projected_families": [
+        "FINANCIAL_ANALYSIS",
+        "PROFESSIONAL_KNOWLEDGE_WORK",
+        "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT"
+      ],
+      "state": "OPEN_UNBOUND_RELATION",
+      "capability_credit": 0
+    },
+    {
+      "benchmark_id": "FINANCE_AGENT_V2_GE_58_59",
+      "comparison_predicate": "BRAIN_CAPABILITY_NONINFERIOR_TO_TARGET_ON_BOUND_SCOPE__FINANCE_AGENT_V2_GE_58_59",
+      "relation": "SCHEDULING_HEURISTIC_ONLY",
+      "projected_families": [
+        "FINANCIAL_ANALYSIS",
+        "PROFESSIONAL_KNOWLEDGE_WORK",
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+        "COMMUNICATION_AND_SYNTHESIS",
+        "MULTI_CAPABILITY_COMPOSITION"
+      ],
+      "state": "OPEN_UNBOUND_RELATION",
+      "capability_credit": 0
+    },
+    {
+      "benchmark_id": "TB_SCIENCE_GE_58_7",
+      "comparison_predicate": "BRAIN_CAPABILITY_NONINFERIOR_TO_TARGET_ON_BOUND_SCOPE__TB_SCIENCE_GE_58_7",
+      "relation": "SCHEDULING_HEURISTIC_ONLY",
+      "projected_families": [
+        "AGENTIC_SCIENTIFIC_RESEARCH",
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "UNKNOWN_DOMAIN_ADAPTATION",
+        "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+        "COMPLEX_MULTI_TOOL_AGENCY",
+        "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+        "MULTI_CAPABILITY_COMPOSITION"
+      ],
+      "state": "OPEN_UNBOUND_RELATION",
+      "capability_credit": 0
+    }
+  ],
+  "closed_comparison_count": 0,
+  "rule": "NO_ROW_CLOSES_FROM_FAMILY_NAME_OVERLAP_OR_BENCHMARK_PROJECTION_ALONE__EXPLICIT_TYPED_ENTAILMENT_REQUIRED",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
