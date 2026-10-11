@@ -1,0 +1,110 @@
+{
+  "schema": "PROJECT_BRAIN_SCIENTIFIC_NUMERIC_RESOURCE_PIPELINE_V1_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__TWO_ENVIRONMENT_PRIVATE_CLEAN_ROOM_REPLAY__UNIQUE_RESOURCE_BINDING_TO_VERIFIED_SCIENCE_PIPELINE",
+  "subject": {
+    "runtime_path": "canonical/runtime/scientific_numeric_resource_pipeline_v1.py",
+    "runtime_git_blob_sha": "4025e2664a3919c4ca938923e79a1ffa78262949",
+    "test_path": "canonical/tests/test_scientific_numeric_resource_pipeline_v1.py",
+    "test_git_blob_sha": "bdd1abe53a6dbf72e7127a5e279e2ec1918c2a8d"
+  },
+  "dependency_closure": [
+    [
+      "canonical/runtime/scientific_numeric_task_pipeline_v1.py",
+      "4844513b3c20381e57da4df8251f5b8fbf4973ff"
+    ],
+    [
+      "canonical/runtime/scientific_numeric_task_compiler_v1.py",
+      "570f7a4d08ee9c6663111df37c04080ee8f4562f"
+    ],
+    [
+      "canonical/runtime/general_scientific_capability_controller_v1.py",
+      "992345186cc51fff143a74f1e76f01ae897ac967"
+    ],
+    [
+      "canonical/runtime/scientific_artifact_contract_v1.py",
+      "ada3a42ddce7e6d899cfb9a8fc2c56049e0de583"
+    ],
+    [
+      "canonical/runtime/capability_planner.py",
+      "629766f8a1194fd298e0809b64a5e9c5a39fa3ea"
+    ],
+    [
+      "canonical/runtime/h100_expression_tree_symbolic_regression_v1.py",
+      "14e8f11c73e5fc0439016dbcd5b5a5a8d2c46490"
+    ],
+    [
+      "canonical/runtime/g0_finite_typed_rule_synthesis.py",
+      "5fcd8101d65367f7c0e53bd245979ba01fb73a26"
+    ],
+    [
+      "canonical/runtime/abductive_residual_theorem_v1.py",
+      "aef25c462163170defd9d6c81beec628b350b51f"
+    ],
+    [
+      "canonical/runtime/tb_science_zero_model_scientific_kernel_v1.py",
+      "fae27cd575296d70a160a0c7f72d5a8127d8b9c1"
+    ],
+    [
+      "canonical/runtime/explicit_recovery_planner.py",
+      "6db2913d4da6505e3151829787ce54e348369d4f"
+    ]
+  ],
+  "verification": {
+    "environment_1": {
+      "kind": "PRIVATE_EXISTING_SPRITE",
+      "sprite": "brain-live-runtime-v1-verify-20261008",
+      "sprite_id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13",
+      "pre_replay_checkpoint": "v71",
+      "tests_run": 9,
+      "tests_passed": 9,
+      "tests_failed": 0,
+      "errors": 0
+    },
+    "environment_2": {
+      "kind": "PRIVATE_EXISTING_SPRITE",
+      "sprite": "brain-canonical-apply-slice-verify-20261011-v1",
+      "sprite_id": "sprite-03e2d6c1-6a52-4c21-817f-eae043fd842c",
+      "pre_replay_checkpoint": "v13",
+      "tests_run": 9,
+      "tests_passed": 9,
+      "tests_failed": 0,
+      "errors": 0
+    },
+    "exact_runtime_blob_replayed": true,
+    "exact_test_blob_replayed": true,
+    "exact_dependency_blobs_replayed": true
+  },
+  "verified_behaviors": [
+    "bounded local CSV TSV TXT DAT JSON discovery",
+    "instruction-conditioned unique compilable resource binding",
+    "irrelevant table rejection",
+    "multiple plausible table ambiguity fails closed",
+    "no plausible table fails closed",
+    "output-root exclusion prevents generated-artifact input contamination",
+    "symbolic CSV end-to-end",
+    "periodic TSV end-to-end with error-column exclusion",
+    "JSON records end-to-end",
+    "deterministic binding and execution",
+    "zero model network and benchmark routing dependencies"
+  ],
+  "ownership": {
+    "model_dependency_count": 0,
+    "external_model_runtime_calls": 0,
+    "network_dependency_count": 0,
+    "dynamic_code_execution": false
+  },
+  "hard_nonclaims": [
+    "NOT_GENERAL_RESOURCE_SEMANTICS",
+    "NOT_GENERAL_NATURAL_LANGUAGE_UNDERSTANDING",
+    "NOT_NONNUMERIC_SCIENCE_COVERAGE",
+    "NO_BENCHMARK_SCORE_CLAIM",
+    "NO_BENCHMARK_TASK_READ_OR_START",
+    "NO_TERMINAL_AUTHORITY"
+  ],
+  "acceptance_credit_delta": 0,
+  "benchmark_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "execution_authority": false,
+  "activation_authority": false
+}
