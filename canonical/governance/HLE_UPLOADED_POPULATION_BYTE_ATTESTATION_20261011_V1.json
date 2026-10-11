@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_UPLOADED_POPULATION_BYTE_ATTESTATION_V1",
+  "source_filename": "test-00000-of-00001.parquet",
+  "size_bytes": 274276147,
+  "sha256": "6d0ee0602e8aea6b159509577e884f48ecac7b8e3f6822a35f51335a446c726a",
+  "parquet_rows": 2500,
+  "parquet_row_groups": 25,
+  "parquet_created_by": "parquet-cpp-arrow version 16.1.0",
+  "observed_top_level_fields": [
+    "id",
+    "question",
+    "image",
+    "image_preview",
+    "answer",
+    "answer_type",
+    "author_name",
+    "rationale",
+    "rationale_image",
+    "raw_subject",
+    "category",
+    "canary"
+  ],
+  "gold_bearing_fields": [
+    "answer",
+    "rationale",
+    "rationale_image"
+  ],
+  "solver_visible_fields": [
+    "id",
+    "question",
+    "image",
+    "image_preview",
+    "answer_type",
+    "author_name",
+    "raw_subject",
+    "category",
+    "canary"
+  ],
+  "inspection_mode": "PARQUET_FOOTER_METADATA_ONLY__NO_ROW_VALUES_DECODED",
+  "gold_exposure_to_solver": false,
+  "target_population": "FIXED_ORIGINAL_HLE_2500",
+  "preferred_revision": "5a81a4c7271a2a2a312b9a690f0c2fde837e4c29"
+}
