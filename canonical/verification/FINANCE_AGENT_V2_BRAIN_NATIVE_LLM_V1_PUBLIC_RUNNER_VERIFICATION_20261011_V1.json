@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_FINANCE_AGENT_V2_BRAIN_NATIVE_LLM_V1_PUBLIC_RUNNER_VERIFICATION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_BLOBS__ZERO_EXTERNAL_MODEL_RUNTIME_COGNITION__ZERO_BENCHMARK_SCORE_CREDIT",
+  "target": "FINANCE_AGENT_V2_GE_58_59",
+  "verified_subjects": {
+    "canonical/runtime/finance_agent_v2_brain_native_llm_v1.py": "9ec61256da933b91edad92620fd3d019ac141eff",
+    "canonical/tests/test_finance_agent_v2_brain_native_llm_v1.py": "6ff9462721b99e82c3a09f680034051dac7a2c34",
+    "canonical/runtime/finance_quantitative_dependency_v1.py": "57d250414b1f064dd243d1d98e8cde7c85cf6858",
+    "canonical/runtime/finance_quantitative_question_contract_v1.py": "24a17cf65b0db07fedef9d1a99b1662b58c0448c",
+    "canonical/runtime/finance_metric_xbrl_registry_v1.py": "a64271e46811c8c1a440a344045ca1f38c30a519"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2679,
+    "head_commit": "15bb5f0e0311278e8962de0f17c17473f025e9da",
+    "workflow_name": "Verify Finance Brain-native LLM V1",
+    "workflow_run_id": 38142272327,
+    "job_id": 114478396101,
+    "conclusion": "success"
+  },
+  "verified_scope": [
+    "EXACT_GIT_BLOB_BINDING",
+    "PYTHON_COMPILE",
+    "FOCUSED_POLICY_AND_STATE_MACHINE_TESTS_10_OF_10_PASS",
+    "NO_EXTERNAL_MODEL_OR_NETWORK_PROVIDER_RUNTIME_IMPORTS_IN_BOUNDARY_MODULE",
+    "SEMANTIC_TAIL_FAIL_CLOSED_REPAIR"
+  ],
+  "ownership": {
+    "external_model_runtime_cognition": 0,
+    "external_reasoning_model_runtime_cognition": 0,
+    "custom_model_endpoint_required": false,
+    "teacher_runtime_calls": 0,
+    "retrieve_information_helper": "SAME_BRAIN_NATIVE_DETERMINISTIC_LLM"
+  },
+  "hard_nonclaims": [
+    "NO_PRIVATE_FINANCE_AGENT_V2_TASK_EXECUTED",
+    "NO_FINANCE_AGENT_V2_SCORE_CREDIT",
+    "NO_CLAIM_SCORE_GE_58_59",
+    "NO_CLAIM_PINNED_VALS_HARNESS_RUNTIME_INTEGRATION_EXECUTED_BY_THIS_VERIFICATION",
+    "NO_CLAIM_V1_SEMANTIC_SYNTHESIS_IS ADEQUATE_FOR_HIDDEN_TASKS"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "private_cases_exposed": 0,
+    "benchmark_score_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
