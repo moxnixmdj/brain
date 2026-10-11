@@ -48,14 +48,41 @@ def _path(value: Any) -> str:
     return text
 
 
-def _ops(value: Any) -> list[Mapping[str, Any]]:
+def normalize_state_op(value: Mapping[str, Any]) -> dict[str, Any]:
+    if not isinstance(value, Mapping):
+        raise StateOpsError("OP_NOT_OBJECT")
+    out = dict(value)
+    primary = str(out.get("type") or "").strip().upper()
+    alias = str(out.get("op") or "").strip().upper()
+    if primary and alias and primary != alias:
+        raise StateOpsError("OP_TYPE_ALIAS_CONFLICT")
+    kind = primary or alias
+    if not kind:
+        raise StateOpsError("OP_TYPE_REQUIRED")
+    out["type"] = kind
+    out.pop("op", None)
+
+    if kind == "RUN_CLI":
+        argv = out.get("argv")
+        args = out.get("args")
+        if argv is not None and args is not None and argv != args:
+            raise StateOpsError("RUN_CLI_ARGV_ALIAS_CONFLICT")
+        if argv is None and args is not None:
+            out["argv"] = args
+        out.pop("args", None)
+    return out
+
+
+def normalize_state_ops(value: Any) -> list[dict[str, Any]]:
     if not isinstance(value, list) or not value:
         raise StateOpsError("OPS_REQUIRED")
     if len(value) > MAX_OPS:
         raise StateOpsError("TOO_MANY_OPS")
-    if any(not isinstance(x, Mapping) for x in value):
-        raise StateOpsError("OP_NOT_OBJECT")
-    return value
+    return [normalize_state_op(x) for x in value]
+
+
+def _ops(value: Any) -> list[Mapping[str, Any]]:
+    return normalize_state_ops(value)
 
 
 def _compile_op(op: Mapping[str, Any]) -> str:
