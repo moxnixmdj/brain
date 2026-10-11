@@ -1,0 +1,87 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_INTERNAL_ONLY_ROUTE_EXHAUSTION_20261011_V4",
+  "date": "2026-10-11",
+  "status": "ZERO_EXTERNAL_FIXED_POINT_STRENGTHENED__COMPONENT_AND_PUBLIC_API_ROUTES_PROVED_NONCLOSING__TWO_EXACT_BLOCKERS_REMAIN__ZERO_CREDIT",
+  "supersedes": "canonical/governance/AA_BRIEFCASE_INTERNAL_ONLY_ROUTE_EXHAUSTION_20261011_V3.json",
+  "canonical_strategy": "canonical/governance/AA_BRIEFCASE_INTERNAL_ONLY_STRATEGY_OVERRIDE_20261011_V4.json",
+  "exact_target": {
+    "benchmark": "AA-Briefcase",
+    "version": "1.1",
+    "literal_threshold_elo": 1822,
+    "frozen_reference_owner_unrounded_elo": 1821.85,
+    "required_margin_elo": 0.15
+  },
+  "fixed_point_basis": [
+    "canonical/governance/AA_BRIEFCASE_INTERNAL_PROOF_ROUTE_COMPLETENESS_20261011_V1.json",
+    "canonical/governance/AA_BRIEFCASE_SCORE_BEARING_SUFFICIENT_STATISTIC_THEOREM_20261011_V1.json",
+    "canonical/governance/AA_BRIEFCASE_TRACE_SCORER_NONIDENTIFIABILITY_CUT_20261011_V1.json",
+    "canonical/governance/AA_BRIEFCASE_COMPONENT_SUMMARY_NONINVERSION_20261011_V1.json",
+    "canonical/governance/AA_BRIEFCASE_PUBLIC_DATA_API_TRACE_BOUNDARY_20261011_V1.json",
+    "canonical/governance/AA_BRIEFCASE_PRIVATE_RUBRIC_EXPRESSIVITY_CUT_20261011_V1.json",
+    "canonical/governance/AA_BRIEFCASE_TOP_SUPPORT_COLLAPSE_20261011_V1.json",
+    "canonical/governance/AA_BRIEFCASE_CROWD_BT_INTERNAL_LOWER_BOUND_CUT_20261011_V1.json",
+    "canonical/governance/AA_BRIEFCASE_RUBRIC_ONLY_BYPASS_FALSIFIER_20261011_V1.json"
+  ],
+  "rank1_search": {
+    "scorer_public_source_search_exhausted_for_current_source_generation": true,
+    "complete_score_bearing_trace_found": false,
+    "explicit_owner_scorer_program_found": false,
+    "complete_owner_aggregation_formula_and_fit_state_found": false,
+    "public_data_api_raw_aa_trace_endpoint_found": false,
+    "displayed_component_summary_invertible": false,
+    "preexisting_brain_numeric_floor_ge_1822_found": false,
+    "blockers": [
+      "SCORER_BINDING",
+      "BRAIN_NUMERIC_FLOOR"
+    ]
+  },
+  "rank2_search": {
+    "public_interface_outcome_superdomain_scope_complete": true,
+    "nontrivial_complete_material_order_proved": false,
+    "brain_global_top_support_proved": false,
+    "hidden_evaluator_score_monotonicity_sufficient_for_literal_1822": false,
+    "reason": "OPAQUE_PRIVATE_RUBRIC_CLASS_AND_UNBOUND_FINITE_JUDGMENT_SCORE_STATE_ADMIT_THRESHOLD_OPPOSITE_WORLDS"
+  },
+  "newly_strengthened_nogo_results": {
+    "component_noninversion": {
+      "same_per_scope_summaries_can_have_different_combined_fit": true,
+      "exact_counterexample_combined_elo_difference": 88.73949984654246,
+      "empirical_public_rows": 217,
+      "best_simple_interior_affine_rmse_elo": 4.138692615660763,
+      "required_margin_elo": 0.15,
+      "regression_rmse_over_margin_multiple": 27.591284104405087
+    },
+    "public_api": {
+      "documented_aa_raw_rubric_endpoint": false,
+      "documented_aa_pairwise_comparison_endpoint": false,
+      "documented_aa_score_trace_endpoint": false,
+      "documented_model_result_field": "aa_briefcase_elo",
+      "raw_measurements_endpoint_is_performance_telemetry_not_benchmark_trace": true
+    }
+  },
+  "logical_conclusion": [
+    "CURRENT_BOUND_INTERNAL_AND_PUBLIC_EVIDENCE_DOES_NOT_ENTAIL_BRAIN_AA_BRIEFCASE_ELO_GE_1822",
+    "CURRENT_BOUND_INTERNAL_AND_PUBLIC_EVIDENCE_DOES_NOT_ENTAIL_BRAIN_AA_BRIEFCASE_ELO_LT_1822",
+    "NO_SOUND_DERIVATION_REMAINS_FROM_DISPLAYED_COMPONENTS_PUBLIC_DATA_API_GENERIC_PROFESSIONAL_PROPERTY_TRUTH_OR_PUBLIC_LITE",
+    "ANY_SOUND_NEW_ZERO_EXTERNAL_CLOSURE_MUST_ADD_A_DISTINGUISHING_PREMISE_THAT_DISCHARGES_SCORER_BINDING_BRAIN_NUMERIC_FLOOR_OR_THE_ALL_WORLD_THRESHOLD_ROUTE"
+  ],
+  "exact_reopen_events": [
+    "NEW_PREEXISTING_OWNER_AUTHORED_SCORER_SOURCE_OR_COMPLETE_FIT_STATE_DISCOVERED",
+    "NEW_PREEXISTING_CONTENT_ADDRESSED_BRAIN_NUMERIC_SCORE_CERTIFICATE_GE_1822_DISCOVERED",
+    "NEW_SOUND_RESTRICTION_OF_PRIVATE_RUBRIC_OR_JUDGE_CLASS_DISCOVERED",
+    "NEW_PUBLIC_SOURCE_GENERATION_OR_API_SCHEMA_EXPOSES_SCORE_BEARING_STATE",
+    "NEW_PROOF_REDUCES_TO_THE_COMPLETE_TWO_FAMILY_LOGIC_WITH_WEAKER_ALREADY_SATISFIED_PREMISES"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_BRAIN_WOULD_FAIL_AN_ACTUAL_OWNER_RUN",
+    "NO_CLAIM_FUTURE_NEW_INFORMATION_CANNOT_DECIDE_THE_TARGET",
+    "NO_CLAIM_A_PRIVATE_OR_UNDOCUMENTED_SCORER_IMPLEMENTATION_DOES_NOT_EXIST",
+    "NO_SCORE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
