@@ -1,0 +1,84 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_RETRIEVAL_QUERY_PLANNER_V2_PAIRED_RESULT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "INDEPENDENT_PAIRED_DIAGNOSTIC__NO_V2_UNIQUE_RETRIEVAL_GAIN__DO_NOT_PROMOTE_AS_RECALL_REPAIR",
+  "subject": {
+    "v2_runtime_blob": "0a0b1e70ba90bb6e29cbd8316343c10c2dcb1908",
+    "v1_runtime_blob": "2386db287d08153ffb905f8cd89a76f4ebf19d9f",
+    "v2_independent_verify_commit": "f7c0b8a4fd85dc83506001b57a8d3f900af967f1",
+    "diagnostic_harness_blob": "41c810f021aaaf26f2515a51522c78ec092955e7"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "diag-hle-query-planner-v2-shared-misses-20261011",
+    "head_sha": "534e53f73d697744323cb02eb864606f76e56dae",
+    "workflow_run_id": 38150333478,
+    "workflow_job_id": 114502281464,
+    "conclusion": "success",
+    "artifact_id": 11705959018,
+    "artifact_sha256": "ac11c2d73795704aaeb15cd70c609df989cda92c51621af5e039046df049afa6"
+  },
+  "causal_design": {
+    "target_ids": [
+      27,
+      29,
+      32,
+      35,
+      36,
+      37,
+      38,
+      39,
+      41,
+      43,
+      44,
+      45
+    ],
+    "population": "ONLY_ALREADY_CONSUMED_SHARED_MISSES",
+    "same_query_budget": 7,
+    "paired_union_retrieval_snapshot": true,
+    "duplicate_queries_fetched_once": true,
+    "retrieval_surfaces": [
+      "BING_RSS",
+      "WIKIPEDIA_SEARCH",
+      "WIKIPEDIA_EXTRACT"
+    ],
+    "gold_loaded_only_after_both_traces_sealed": true,
+    "external_model_calls": 0
+  },
+  "diagnostic": {
+    "sample_size": 12,
+    "v1_hits": 3,
+    "v2_hits": 3,
+    "v1_unique_hit_ids": [],
+    "v2_unique_hit_ids": [],
+    "identical_hit_ids": [
+      29,
+      35,
+      36
+    ],
+    "union_hit_count": 3,
+    "remaining_shared_miss_ids": [
+      27,
+      32,
+      37,
+      38,
+      39,
+      41,
+      43,
+      44,
+      45
+    ]
+  },
+  "conclusion": [
+    "V2_SYNTHETIC_QUERY_CONSTRUCTION_REPAIRS_ARE_REAL_BUT_DO_NOT_CREATE_MEASURED_RETRIEVAL_GAIN_ON_THE_SHARED_MISS_SET",
+    "V1_AND_V2_HIT_EXACTLY_THE_SAME_THREE_ROWS_IN_THE_PAIRED_LIVE_SNAPSHOT",
+    "QUERY_PLANNER_V2_IS_NOT_PROMOTED_AS_THE_NEXT_HLE_RECALL_CAPABILITY",
+    "DO_NOT_SPEND_MORE_DEVELOPMENT_CYCLES_TUNING_THESE_V2_QUERY_RULES_ON_THIS_EVIDENCE"
+  ],
+  "next_bottleneck": "ORTHOGONAL_SOURCE_ACCESS_AND_TRANSPORT__ESPECIALLY_WIKIPEDIA_429_THROTTLING_ON_THE_REMAINING_NINE_MISSES",
+  "hle_questions_consumed": 0,
+  "hle_gold_consumed": 0,
+  "hle_score_credit": 0,
+  "hle_67_7_certified": false,
+  "incremental_spend_usd": 0
+}
