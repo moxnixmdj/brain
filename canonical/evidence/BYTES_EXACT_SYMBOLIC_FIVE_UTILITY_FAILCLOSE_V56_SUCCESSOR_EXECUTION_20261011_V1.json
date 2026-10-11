@@ -1,0 +1,117 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_FIVE_UTILITY_FAILCLOSE_V56_SUCCESSOR_EXECUTION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "VERIFIED_RESEARCH_FRONTIER__REUSED_FIVE_NONOVERLAPPING_UTILITY_FAILCLOSE_CUTS__SPENT_NEXT61_AND_FRESH_NEXT62_PASS__NEXT63_FROZEN_DURABLE__CURRENT_POINTER_ELIGIBLE__ZERO_PROMOTION_CREDIT",
+  "source_lock": {
+    "canonical_base_commit": "41e848d1a0e5ea68bab029ee124f0736115a08ba",
+    "predecessor": "canonical/evidence/BYTES_EXACT_SYMBOLIC_MPF_PERTURB_V55_SUCCESSOR_EXECUTION_20261011_V1.json",
+    "predecessor_git_blob_sha": "605a7a991148aa30c0dae6a2f146c2e93e980caf",
+    "predecessor_manifest_sha256": "a401c2d9595af738a360f9df69da3162c4663e1624917e3d5d6a2b6bcd2ba3ef"
+  },
+  "subject": {
+    "transform": "canonical/research/bytes/tools/conservative_mpmath_five_utility_failclose_prune_v56.py",
+    "manifest_sha256": "589f1dea175b4e541634ca6bcf252db889507da4a9fd318acb5d684fa297221c",
+    "python_files": 277,
+    "raw_python_source_bytes": 1714166,
+    "B_exec_raw_python_source_bytes": 1716926,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "raw_delta_vs_v55_bytes": -583,
+    "B_exec_delta_vs_v55_bytes": -583
+  },
+  "reuse_first_discovery": {
+    "origin": "DISCARDED_PARALLEL_V54_SEARCH_ON_OLDER_V53_BASE__REUSED_ONLY_AS_NONAUTHORITATIVE_EFFECT_DISTINGUISHING_SPECIMEN",
+    "transplant_rule": "REAPPLY_ONLY_NONOVERLAPPING_FIVE_BODY_FAIL_CLOSE_DELTAS_ONTO_CANONICAL_V55__REVERIFY_COMPLETE_SPENT_AND_FRESH_CORPORA",
+    "rejected_during_discovery": {
+      "mpmath/libmp/libmpf.py::from_float": "IMPORT_TIME_LOAD_BEARING__LIBMPC_CONSTANT_CONSTRUCTION",
+      "mpmath/libmp/libmpf.py::to_float": "IMPORT_TIME_LOAD_BEARING__SYMPY_EVALF_INF_CONSTRUCTION",
+      "mpmath/libmp/libmpf.py::mpf_rdiv_int": "ROOTS_COUNTEREXAMPLE",
+      "mpmath/libmp/libmpf.py::mpf_hypot": "ROOTS_COUNTEREXAMPLE",
+      "mpmath/libmp/libmpf.py::mpf_perturb": "RARE_ROOTS_COUNTEREXAMPLES_ON_PRE_V55_SUBJECT__SUPERSEDED_BY_CANONICAL_V55_BRANCH_SPECIALIZATION"
+    },
+    "accepted_transplant_bodies": [
+      "mpmath/libmp/libmpf.py::from_bstr",
+      "mpmath/libmp/libmpf.py::mpf_rand",
+      "mpmath/libmp/libmpf.py::mpf_min_max",
+      "mpmath/libmp/libmpf.py::to_rational",
+      "mpmath/libmp/libmpf.py::from_Decimal"
+    ]
+  },
+  "selection": {
+    "id": "MPMATH_FIVE_UTILITY_FAILCLOSE_TRANSPLANT_V56",
+    "changed_body_count": 5,
+    "bodies": [
+      "mpmath/libmp/libmpf.py::from_bstr",
+      "mpmath/libmp/libmpf.py::mpf_rand",
+      "mpmath/libmp/libmpf.py::mpf_min_max",
+      "mpmath/libmp/libmpf.py::to_rational",
+      "mpmath/libmp/libmpf.py::from_Decimal"
+    ],
+    "saved_raw_python_bytes": 583,
+    "exact_base_guard": true,
+    "exact_target_guard": true,
+    "nonoverlap_with_v55_mpf_perturb_specialization": true
+  },
+  "qualification": {
+    "spent_NEXT61": {
+      "id": "QUAL_SUCCESSOR_NEXT61_20261011_V1",
+      "cases": 15870,
+      "corpus_sha256": "dd5fbbf9c9aced49b1280d31202af14c4797b21baf3b35b7c0e61decc8157df6",
+      "candidate": "15870/15870",
+      "failures": 0,
+      "spent": true
+    },
+    "fresh_NEXT62": {
+      "id": "QUAL_SUCCESSOR_NEXT62_20261011_V1",
+      "cases": 16100,
+      "corpus_sha256": "7714d5ed1852f9099f2fd160f9cb6f0a43718c66426bc0a9d0dfafb4742d767f",
+      "candidate": "16100/16100",
+      "failures": 0,
+      "spent": true
+    }
+  },
+  "reproducibility": {
+    "v55_to_v56_transform_target_manifest_exact": true,
+    "clean_archive_identity": "278/278",
+    "sealed_archive_files": 278,
+    "sealed_archive_bytes": 267172,
+    "sealed_archive_sha256": "2c44504ed62931836755335f08fe97e69faaa348748b5f74ebe263c208342567",
+    "external_organizational_second_carrier_verified": false
+  },
+  "durable_archive": {
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V56_SUCCESSOR_20261011_V1.tar.xz",
+    "library_file_id": "libfile_fc355c4537ec819192b925b066b78ed0",
+    "file_id": "file_00000000b5c48210872457471f788a7d",
+    "persistence_status": "PERSISTED",
+    "bytes": 267172,
+    "sha256": "2c44504ed62931836755335f08fe97e69faaa348748b5f74ebe263c208342567"
+  },
+  "next_frozen": {
+    "id": "QUAL_SUCCESSOR_NEXT63_20261011_V1",
+    "cases": 16330,
+    "seed": 2176592650,
+    "seed_derivation": "FIRST_32_BITS_BIG_ENDIAN_SHA256_OF_QUAL_ID_PIPE_V56_MANIFEST_IDENTITY",
+    "per_operation_budget": 1420,
+    "corpus_sha256": "6efce0ec04745f39dac6fef3060587f9f92a3edf86ff35fd137fe8e8803ff11e",
+    "generated_bytes": 1930784,
+    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT63_20261011_V1.jsonl",
+    "library_file_id": "libfile_ebd09ea53ca0819191fdaee6ab10c268",
+    "file_id": "file_0000000092508210adaa4baf100b4ffd",
+    "status": "FROZEN_UNSPENT__DURABLY_PERSISTED__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT",
+    "spent": false
+  },
+  "truth_boundary": [
+    "MEASURED: exact V56 raw Python bytes are 1,714,166, 583 bytes below canonical V55.",
+    "MEASURED: complete spent NEXT61 passes exact V56 15,870/15,870.",
+    "MEASURED: previously untouched NEXT62 passes exact V56 16,100/16,100.",
+    "MEASURED: clean archive extraction is 278/278 byte-identical.",
+    "MEASURED: NEXT63 is durably frozen unspent at 16,330 cases.",
+    "NOT PROVED: universal mpmath equivalence outside the bounded exact-symbolic route.",
+    "NOT CLAIMED: external organizationally independent second carrier.",
+    "NOT PROMOTED: zero capability, acceptance, professional-quality, promotion, or terminal credit."
+  ],
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "acceptance_credit_delta": 0,
+  "promotion_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
