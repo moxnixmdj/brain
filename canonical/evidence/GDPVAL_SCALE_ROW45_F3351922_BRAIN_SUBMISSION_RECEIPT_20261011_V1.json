@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_SCALE_BRAIN_SUBMISSION_RECEIPT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__FRESH_ROW45_TSP_TRANSITION_EMAIL_DOCX_FROZEN__CURRENT_FEDERAL_SOURCE_AND_RENDER_QA_PASS__ZERO_OWNER_SCORE_CREDIT",
+  "benchmark": "GDPval-AA v2.1",
+  "subject": {
+    "row_idx": 45,
+    "task_id": "f3351922-dbdd-45da-85c5-e7110696bbe5",
+    "sector": "Finance and Insurance",
+    "occupation": "Customer Service Representatives"
+  },
+  "freshness": {
+    "precommit": "canonical/governance/GDPVAL_SCALE_FRESH_BATCH_ROWS35_219_PRECOMMIT_20261011_V1.json",
+    "precommit_commit": "c604f5006820ce3ca24d6afc2487a95a30886a6c",
+    "task_identity_frozen_before_prompt_reference_rubric_gold_model_output_or_judge_exposure": true,
+    "public_rubric_or_gold_used_before_output_freeze": false
+  },
+  "brain_execution_profile": {
+    "path": "canonical/capabilities/internalized/professional_work/stirrup_247f24d/BRAIN_EXECUTION_PROFILE_V1.json",
+    "cognition_surface": "CURRENT_CHATGPT_GPT_5_6_SOL_SESSION_OR_EQUIVALENT_ZERO_INCREMENTAL_BRAIN_APPROVED_SUBSTRATE",
+    "opaque_target_model_runtime_cognition": false,
+    "incremental_spend_usd": 0
+  },
+  "submission": {
+    "library_path": "/Project Brain/GDPval/scale/row45/GDPval_row45_TSP_transition_email.docx",
+    "library_file_id": "libfile_15b391beb9bc819196af8c193fc7e928",
+    "sha256": "6dbee44af79235dee4f95ce82808fd62ef74977b0166e5b37a65a1409e6f884e",
+    "format": "docx",
+    "render_page_count": 2
+  },
+  "prompt_requirements_qa": {
+    "required_subject_exact": true,
+    "g_f_c_s_i_and_l_funds_covered": true,
+    "military_to_federal_civilian_transition_benefits_covered": true,
+    "account_combination_constraints_covered": true,
+    "current_i_fund_index_identified": "MSCI_ACWI_IMI_EX_USA_EX_CHINA_EX_HONG_KONG",
+    "current_federal_sources_bound": true,
+    "clickable_reference_links_present": true,
+    "visual_render_inspected_all_pages": true,
+    "clipping_overlap_or_missing_glyphs_observed": false
+  },
+  "source_evidence": [
+    "https://www.tsp.gov/funds-individual/",
+    "https://www.tsp.gov/funds-lifecycle/",
+    "https://www.ecfr.gov/current/title-5/chapter-VI/part-1600/section-1600.33",
+    "https://www.dfas.mil/CivilianEmployees/employeebenefits/TSP/",
+    "https://www.govinfo.gov/content/pkg/CMR-Y3_F31_25-00199981/pdf/CMR-Y3_F31_25-00199981.pdf"
+  ],
+  "boundary": [
+    "NO_ARTIFICIAL_ANALYSIS_PAIRWISE_RESULT",
+    "NO_OWNER_ELO",
+    "NO_MATCHED_EPOCH_SCORE",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ]
+}
