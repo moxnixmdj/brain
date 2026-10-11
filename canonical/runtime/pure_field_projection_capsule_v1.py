@@ -97,6 +97,8 @@ def compile_capsule(
 
         return {
             **semantic_core,
+            "pass": True,
+            "status": "PASS__PURE_FIELD_PROJECTION_SEMANTIC_CAPSULE",
             "semantic_identity_sha256": semantic_identity,
             "source_count": bundle["source_count"],
             "selected_field_count": sum(
