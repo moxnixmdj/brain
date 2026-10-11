@@ -13,6 +13,8 @@ import xml.etree.ElementTree as ET
 from dataclasses import dataclass
 from typing import Any, Mapping
 
+from canonical.runtime.text_ui_grounding_v1 import compile_click_action
+
 STATE_NS = "https://accessibility.ubuntu.example.org/ns/state"
 COMP_NS = "https://accessibility.ubuntu.example.org/ns/component"
 
@@ -156,6 +158,62 @@ def _fill_value(instruction: str, field: UiElement) -> str | None:
     return None
 
 
+def _explicit_action_target(instruction: str) -> str | None:
+    quoted = _quoted(instruction)
+    action = re.search(
+        r"\b(click|press|open|choose|select|check|enable|disable|submit|confirm)\b",
+        instruction,
+        re.I,
+    )
+    if not action:
+        return None
+    if quoted:
+        # Quoted labels are the strongest explicit target evidence.
+        after = [q for q in quoted if instruction.find(q) >= action.end()]
+        if len(after) == 1:
+            return after[0]
+        if len(quoted) == 1:
+            return quoted[0]
+    tail = instruction[action.end():]
+    m = re.match(
+        r"\s+(?:the\s+)?(.+?)(?=\s+(?:and|then)\b|[.;]|$)",
+        tail,
+        re.I,
+    )
+    if not m:
+        return None
+    value = m.group(1).strip().strip('"“”\'')
+    value = re.sub(
+        r"\s+(?:button|link|menu|menu item|tab|item|option)$",
+        "",
+        value,
+        flags=re.I,
+    ).strip()
+    return value or None
+
+
+def _ocr_click(instruction: str, ocr: Any) -> dict[str, Any] | None:
+    target = _explicit_action_target(instruction)
+    if not target or not isinstance(ocr, Mapping):
+        return None
+    try:
+        grounded = compile_click_action(ocr, target, match_mode="exact")
+    except Exception:
+        return None
+    if grounded.get("pass") is not True:
+        return None
+    point = grounded.get("click_point")
+    if not isinstance(point, Mapping):
+        return None
+    x, y = point.get("x"), point.get("y")
+    if not isinstance(x, int) or isinstance(x, bool) or not isinstance(y, int) or isinstance(y, bool):
+        return None
+    return {
+        "response": "click uniquely grounded OCR target",
+        "actions": [{"type": "CLICK", "x": x, "y": y}],
+    }
+
+
 def _same_state_repeat(state: Mapping[str, Any]) -> bool:
     history = state.get("history")
     if not isinstance(history, list) or not history:
@@ -202,6 +260,11 @@ def decide(state: Mapping[str, Any]) -> dict[str, Any]:
             "response": "click uniquely grounded target",
             "actions": [{"type": "CLICK", "x": target.x, "y": target.y}],
         }
+
+    if action_verbs and not _same_state_repeat(state):
+        ocr_action = _ocr_click(instruction, state.get("ocr"))
+        if ocr_action is not None:
+            return ocr_action
 
     if _same_state_repeat(state):
         return {"response": "no progress from previous action", "actions": [{"type": "WAIT"}]}
