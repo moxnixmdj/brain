@@ -4244,7 +4244,124 @@
         "runtime_git_blob_sha": "7e9a0201b89b5d2edf4647c868858288fd1a9820",
         "test_git_blob_sha": "82af855fc384d3d8193cf1426fd58e9a1a1443c8",
         "runtime_sha256": "cfa9b3f5446a5c88d5d08b699c2af27e1470cb65620e0fae9b62d1d50182d477",
-        "test_sha256": "b4233d1843bdcc911d4ab1f5e24ca48bd28697efb2f3d52e2b86fd14fc790f9f",
+        "test_sha256": "94bb177c68eb1a48402b43e50108d4ebdada336763417ea5ff38b41e9bc19cbb",
+        "model_dependency_count": 0,
+        "external_capability_provider_count": 0,
+        "incremental_spend_usd": 0,
+        "exact_branch_layout_combined_replay": "14_OF_14_PASS"
+      }
+    },
+    "python.software.repair.guided.provenance.coupled.v1": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "incremental_spend_usd": 0,
+      "cost": 1,
+      "requires": [
+        "python.source.file.available",
+        "python.test.corpus.available"
+      ],
+      "provides": [
+        "python.software.repair.provenance_guided",
+        "python.software.repair.coupled_candidate_verified"
+      ],
+      "result_fields": [
+        "status",
+        "pass",
+        "baseline_failure_score",
+        "guidance",
+        "guided_localization",
+        "provenance_hypothesis_count",
+        "single_candidates_tested",
+        "pair_candidates_tested",
+        "winner_mode",
+        "crossed_nonmonotonic_valley",
+        "verification_replays",
+        "patches",
+        "source_restored",
+        "model_dependency_count",
+        "external_capability_provider_count",
+        "incremental_spend_usd",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "keywords": [
+        "python",
+        "software",
+        "repair",
+        "guided",
+        "provenance",
+        "dynamic",
+        "localization",
+        "coupled",
+        "patch",
+        "search",
+        "fault"
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "python.software.repair.guided.provenance.coupled.v1",
+          "source_root": "${input.source_root}",
+          "test_paths": "${input.test_paths}",
+          "test_argv": "${input.test_argv}",
+          "output_path": "${input.output_path}",
+          "timeout_s": 20,
+          "max_guided_files": 4,
+          "max_guided_symbols_per_file": 6,
+          "mutations_per_file": 24,
+          "max_pair_candidates": 1000,
+          "max_control_files": 12,
+          "max_control_symbols_per_file": 12
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "python_provenance_guided_coupled_repair_v1",
+      "entrypoint": "run",
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "limitations": [
+        "Combines verified dynamic spectrum localization and bounded interprocedural provenance to restrict an existing two-edit Python repair search.",
+        "Can accept a verified guided single edit or a bounded guided coupled pair, with final double replay and source restoration.",
+        "Guidance reduction is task-dependent; the capability reports control-vs-guided candidate-space measurements and does not claim guidance always reduces search.",
+        "Search remains bounded to the inherited Python AST mutation basis and does not establish arbitrary patch completeness, hidden requirements, general mergeability, or FrontierCode score authority."
+      ],
+      "source": {
+        "type": "python_stdlib_composition",
+        "modules": [
+          "hashlib",
+          "importlib.util",
+          "json",
+          "math",
+          "os",
+          "pathlib",
+          "sys"
+        ],
+        "adapter_path": "canonical/runtime/bound_capabilities/python_provenance_guided_coupled_repair_v1.py",
+        "composed_capabilities": [
+          "python.patch.search.test_guided.ast.v1",
+          "python.software.repair.loop.coupled.ast.v1",
+          "python.fault.localize.dynamic.dataflow.v1",
+          "python.fault.provenance.interprocedural.value.v1"
+        ]
+      },
+      "verification": {
+        "status": "INDEPENDENT_TWO_CARRIER_FOCUSED_FALSIFICATION_PASS",
+        "primary_sprite": "brain-capability-first-scheduler-verify-20261008-v1",
+        "primary_test_count": 7,
+        "independent_sprite": "brain-canonical-apply-slice-verify-20261011-v1",
+        "independent_test_count": 7,
+        "exact_branch_layout_combined_replay": "14_OF_14_PASS",
+        "runtime_git_blob_sha": "0b779992f229dbe27f665a8f68c89cbb5a39fc28",
+        "test_git_blob_sha": "4702f3d252e6047cfadc28a1e3363357e0541ec7",
+        "runtime_sha256": "111e1a5c30a529a0e0ab2b727c74313b9b2b1875348cc11fae12690f91b15324",
+        "test_sha256": "f4f133f246f1e6adf37225b0f5acad1bf3fc375b8dc0a74ebbed37b2f9df8149",
         "model_dependency_count": 0,
         "external_capability_provider_count": 0,
         "incremental_spend_usd": 0
