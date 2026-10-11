@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_CHARTOGRAPHY_89_WITH_TOOLS_PROTOCOL_BINDING_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PUBLIC_PROTOCOL_SUBSTANTIALLY_BOUND__DISCLOSED_TOOL_SURFACE_IMPLEMENTED__REAL_QWEN_INTEGRATION_REPLAY_PENDING__SCORE_GE_89_UNPROVED__ZERO_CREDIT",
+  "target_predicate": "CHARTOGRAPHY_TOOLS_GE_89",
+  "objective": "Replace protocol-identity uncertainty with the smallest truthful remaining Chartography acceptance delta.",
+  "public_methodology_observations": [
+    "ANTHROPIC_LAUNCH_REPORTS_CHARTOGRAPHY_89_0_WITH_TOOLS_FOR_OPUS_5_5",
+    "SYSTEM_CARD_METHODOLOGY_STATES_INTERNAL_GRADING_MATCHES_OFFICIAL_SURGE_TASKS_AND_EXPERT_ACCEPTABLE_RANGES",
+    "WITH_TOOLS_MODEL_RECEIVES_CONTAINER_WITH_IMAGE_FILE_AND_STANDARD_LIBRARIES_PLUS_IMAGE_CROPPING_TOOL",
+    "TARGET_CLAUDE_RUNS_USE_ADAPTIVE_THINKING_AND_MAX_EFFORT",
+    "GEMINI_3_5_FLASH_IS_USED_AS_GRADER_TO_MATCH_SURGE",
+    "SCORES_ARE_AVERAGED_OVER_FIVE_RUNS"
+  ],
+  "source_refs": [
+    "ANTHROPIC_CLAUDE_OPUS_5_5_LAUNCH_2026_09_22",
+    "ANTHROPIC_OPUS_5_5_SYSTEM_CARD_SECTION_8_13_1",
+    "SURGE_AI_CHARTOGRAPHY_OFFICIAL_REPOSITORY",
+    "PUBLIC_SYSTEM_CARD_TEXT_MIRROR_CROSS_CHECK"
+  ],
+  "bound_protocol": {
+    "task_population": "OFFICIAL_SURGE_CHARTOGRAPHY_100_TASK_SET",
+    "accepted_answer_semantics": "EXPERT_DETERMINED_ACCEPTABLE_RANGES_FROM_OFFICIAL_REPOSITORY",
+    "target_model_run_config": "ADAPTIVE_THINKING_MAX_EFFORT",
+    "with_tools_surface": [
+      "CONTAINER",
+      "IMAGE_FILE_PRESENT",
+      "STANDARD_LIBRARIES",
+      "IMAGE_CROPPING_TOOL"
+    ],
+    "judge": "GEMINI_3_5_FLASH",
+    "aggregation": "MEAN_OVER_FIVE_RUNS",
+    "historical_target_percent": 89
+  },
+  "brain_reuse": {
+    "verified_multimodal_execution": "canonical/verification/CHARTOGRAPHY_QWEN3VL4B_ZERO_CASE_PREFLIGHT_V2_RECONCILIATION_20261010_V1.json",
+    "crop_runtime": "canonical/runtime/chartography_crop_tool_v1.py",
+    "tool_loop_runtime": "canonical/runtime/chartography_with_tools_adapter_v1.py",
+    "isolated_sprite_mechanism_test": "PASS__PIXEL_EXACT_BOUNDED_CROP__PASS__BOUNDED_CROP_TOOL_LOOP",
+    "real_qwen_crop_loop_external_replay": "PENDING_PUBLIC_RUNNER_RECEIPT"
+  },
+  "causal_reduction": {
+    "deleted_unknowns": [
+      "TASK_POPULATION_IDENTITY_UNKNOWN",
+      "ACCEPTABLE_RANGE_SCORING_IDENTITY_UNKNOWN",
+      "HIGH_LEVEL_WITH_TOOLS_SURFACE_UNKNOWN",
+      "TARGET_MODEL_EFFORT_CONFIG_UNKNOWN",
+      "JUDGE_IDENTITY_UNKNOWN",
+      "RUN_AGGREGATION_UNKNOWN"
+    ],
+    "still_open": [
+      "REAL_BRAIN_VISUAL_SUBJECT_BOUND_IN_THE_DISCLOSED_CROP_TOOL_LOOP",
+      "AUTHENTIC_SCORE_EVIDENCE_ESTABLISHING_BRAIN_GE_89_UNDER_THE_BOUND_PROTOCOL_OR_STRONGER_SCOPE_COMPLETE_CERTIFICATE"
+    ],
+    "new_primitive_required": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_ANTHROPIC_INTERNAL_CROP_IMPLEMENTATION_IS_BYTE_OR_API_IDENTICAL_TO_BRAIN_CROP_RUNTIME",
+    "NO_CLAIM_QWEN3_VL4B_OR_ANY_BRAIN_SUBJECT_SCORES_GE_89",
+    "NO_CHARTOGRAPHY_BENCHMARK_CASE_CONSUMED_BY_THIS_PROTOCOL_BINDING",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "row_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
