@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_V3_PUBLIC_NONHLE_CALIBRATION_FREEZE_20261011_V1",
+  "date": "2026-10-11",
+  "status": "FROZEN_BEFORE_CALIBRATION_DATA_FETCH__ZERO_HLE_CREDIT",
+  "purpose": "Falsify the native HLE V3 research lane on a public non-HLE open-domain QA population before any HLE terminal execution.",
+  "dataset": {
+    "repository": "ai-safety-institute/trivia_qa_verified",
+    "split": "validation",
+    "population_reported_rows": 3381,
+    "sample_rule": "FIRST_25_ROWS_IN_DATASET_SERVER_CANONICAL_ORDER",
+    "sample_size": 25
+  },
+  "execution": {
+    "solver": "canonical/runtime/hle_native_research_solver_v3.py",
+    "model_calls_forbidden": true,
+    "external_reasoning_model_calls_forbidden": true,
+    "web_tools": "canonical/runtime/root2_hle_opus55_tool_adapter_v1.py",
+    "gold_hidden_until_all_25_candidate_outputs_are_sealed": true
+  },
+  "scoring": {
+    "rule": "TRIVIAQA_STYLE_NORMALIZED_EXACT_AGAINST_SINGLE_VERIFIED_ANSWER",
+    "normalization": [
+      "UNICODE_NFKD",
+      "LOWERCASE",
+      "REMOVE_PUNCTUATION",
+      "REMOVE_ARTICLES_A_AN_THE",
+      "COLLAPSE_WHITESPACE"
+    ],
+    "note": "Single-answer scoring may undercount semantically equivalent alternatives; this is a calibration signal, not HLE credit."
+  },
+  "promotion_gate": {
+    "minimum_attempt_rate_for_next_stage": 0.25,
+    "minimum_normalized_exact_among_all_25": 0.2,
+    "if_gate_fails": "REPAIR_ON_PUBLIC_NONHLE_DATA__DO_NOT_RUN_HLE"
+  },
+  "invariants": [
+    "NO_HLE_QUESTION_OR_GOLD_CONTENT",
+    "NO_EXTERNAL_REASONING_MODEL",
+    "NO_TUNING_ON_THESE_25_BEFORE_OUTPUT_SEAL",
+    "NO_HLE_SCORE_CREDIT_FROM_THIS_CALIBRATION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_hle_cases_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
