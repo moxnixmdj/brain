@@ -1,0 +1,78 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_V21_PUBLIC_GRADING_PROTOCOL_CLOSURE_V1",
+  "date": "2026-10-11",
+  "status": "PUBLIC_GRADING_ARCHITECTURE_SUBSTANTIALLY_BOUND__OWNER_COMPARISON_OUTCOMES_AND_EXACT_FIT_STATE_STILL_MISSING__ZERO_CREDIT",
+  "source": {
+    "url": "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
+    "section": "GDPval-AA v2.1",
+    "authority": "FIRST_PARTY_ARTIFICIAL_ANALYSIS"
+  },
+  "publicly_disclosed_submission_protocol": {
+    "task_count": 220,
+    "turn_limit": 250,
+    "sandbox": "E2B isolated Linux sandbox",
+    "submission_harness": "Stirrup",
+    "finish_required": true,
+    "context_compaction_threshold": "70 percent"
+  },
+  "publicly_disclosed_pairwise_protocol": {
+    "sampling": {
+      "phase_1": "balanced sampling across tasks, judges, opponents to seed ratings",
+      "phase_2": "Elo-informed active sampling emphasizing similar-rated opponents while maintaining task balance"
+    },
+    "anonymization": "Submissions randomly labeled A/B",
+    "judges": [
+      "GPT-5.6 Sol at medium reasoning",
+      "Gemini 3.8 Flash at high reasoning",
+      "Claude Opus 5 at high effort"
+    ],
+    "judge_assignment": "one judge sampled from the panel per comparison",
+    "judge_context": [
+      "initial task",
+      "all reference files",
+      "all submission files"
+    ],
+    "document_parsing": "document files parsed as both text and images; zip files extracted; audio/video routed to Gemini 3.8 Flash",
+    "comparison_semantics": "judge is asked which of Submission A and B better responds to the task"
+  },
+  "publicly_disclosed_scoring_protocol": {
+    "pairwise_outcome_values": "win/loss with ties counted as half-win per side",
+    "fit_family_public_text": [
+      "GDPval-AA v2.1 methodology describes Crowd-BT maximum-likelihood fitting with annotator quality",
+      "grading section describes final score as Bradley-Terry maximum-likelihood rating"
+    ],
+    "anchor": "DeepSeek V4.1 Flash (max) pinned at 1600",
+    "uncertainty": "95 percent confidence intervals using sandwich estimator",
+    "important_precision_boundary": "The public text substantially identifies the scoring architecture but does not provide the complete content-addressed judgment graph, fitted annotator/reference parameters, or an executable owner scorer state."
+  },
+  "closure_delta": {
+    "previously_overbroad_missing_item": "NORMATIVE_AGGREGATION_CLOSURE",
+    "new_state": "HIGH_LEVEL_AGGREGATION_AND_PAIRWISE_PROTOCOL_PUBLICLY_BOUND__EXACT_OWNER_FIT_STATE_NOT_BOUND",
+    "still_not_closed": [
+      "AUTHENTIC_BRAIN_VS_TARGET_PAIRWISE_OUTCOMES",
+      "TARGET_OPUS55_DELIVERABLES_OR_EQUIVALENT_OWNER_RELATION_ON_SUFFICIENT_SCOPE",
+      "EXACT_JUDGE_RESPONSE_BEHAVIOR_OR_PROVED_EVALUATOR_CONTAINMENT",
+      "CONTENT_ADDRESSED_OWNER_JUDGEMENT_GRAPH_AND_FIT_STATE_FOR_EXACT_NUMERICAL_REPLAY"
+    ]
+  },
+  "proof_effect": {
+    "MATCHED_SCORE_AVAILABLE": false,
+    "TARGET_RELATIVE_PAIRWISE_AVAILABLE": false,
+    "ABSOLUTE_DOMINANCE_AVAILABLE": false,
+    "why_this_is_progress": "The benchmark's high-level grader and aggregation mechanics no longer need to be rediscovered. The irreducible target-relative unknown is comparative evidence, not the existence of a scoring rule."
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_PUBLIC_TEXT_IS_AN_EXACT_OWNER_SCORER_BINARY",
+    "NO_CLAIM_JUDGE_MODELS_ARE_DETERMINISTIC_OR_REPRODUCIBLE_FROM_MODEL_NAMES_ALONE",
+    "NO_CLAIM_BRAIN_GE_OPUS55",
+    "NO_CLAIM_GDPVAL_GE_1846",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
