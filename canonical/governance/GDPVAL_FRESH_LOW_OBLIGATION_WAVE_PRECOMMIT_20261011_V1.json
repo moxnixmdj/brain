@@ -1,0 +1,116 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_FRESH_LOW_OBLIGATION_WAVE_PRECOMMIT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "FROZEN_BEFORE_PROMPT_RUBRIC_GOLD_OR_MODEL_SUBMISSION_EXPOSURE__ZERO_SCORE_CREDIT",
+  "benchmark": "GDPval-AA v2.1",
+  "dataset": {
+    "owner": "openai",
+    "name": "gdpval",
+    "revision_sha": "11e7900cdcac61bc4daf59e65feb238acda98fbf",
+    "population_count": 220
+  },
+  "source_preoutput_manifest": {
+    "schema": "PROJECT_BRAIN_GDPVAL_220_PREOUTPUT_PACKET_MANIFEST_V1",
+    "manifest_root_sha256": "f69af30fcea243ccb25d44c4a5380be0cdcac621287568525065034ce6cedae8"
+  },
+  "selection_rule": "AMONG_ROWS_NOT_ALREADY_USED_OR_EXPOSED_IN_THIS_EXECUTION_WORKSPACE__SELECT_10_REFERENCE_COUNT_ZERO_TASKS_WITH_LOWEST_RAW_OBLIGATION_COUNT__TIE_BREAK_ROW_IDX_ASCENDING",
+  "selected_subjects": [
+    {
+      "row_idx": 217,
+      "task_id": "854f3814-681c-4950-91ac-55b0db0e3781",
+      "occupation": "Software Developers",
+      "raw_obligation_count": 4,
+      "packet_sha256": "84866daf5a28d4ee8fa34936bf4b17c2acda67a8b389dedfcfb0550e6a7eaa0a"
+    },
+    {
+      "row_idx": 60,
+      "task_id": "8079e27d-b6f3-4f75-a9b5-db27903c798d",
+      "occupation": "Financial and Investment Analysts",
+      "raw_obligation_count": 6,
+      "packet_sha256": "f5a085641968c50c39d7b4502f8d596d6ec24d0c8d591f9ec8d20aaaf8294b1e"
+    },
+    {
+      "row_idx": 62,
+      "task_id": "9e8607e7-a38a-491f-ace1-e5ea7dc477cb",
+      "occupation": "Financial and Investment Analysts",
+      "raw_obligation_count": 6,
+      "packet_sha256": "26a1f5048475534cf0c439fda8f98618ff83693f9b0b9a7293def2e27ac5dfb0"
+    },
+    {
+      "row_idx": 61,
+      "task_id": "e21cd746-404d-4602-b9d2-01d2812c5b87",
+      "occupation": "Financial and Investment Analysts",
+      "raw_obligation_count": 7,
+      "packet_sha256": "ff48fcdda8a950e575012c5b1ff5fd6c3f418e459e587e752765f1a7c03dd88c"
+    },
+    {
+      "row_idx": 130,
+      "task_id": "1a78e076-445e-4c5d-b8ce-387d2fe5e715",
+      "occupation": "Nurse Practitioners",
+      "raw_obligation_count": 7,
+      "packet_sha256": "006fee39c498b821bbf3f5bf00813612902ecba9865a15d7f25cfe4bf162effc"
+    },
+    {
+      "row_idx": 186,
+      "task_id": "8384083a-c31b-4194-80ba-4d335a444918",
+      "occupation": "Pharmacists",
+      "raw_obligation_count": 7,
+      "packet_sha256": "7287bacc77301daa3bb1aca4daa460fb0ea687efdd7157855d1a4824cc697875"
+    },
+    {
+      "row_idx": 83,
+      "task_id": "a95a5829-34bb-40f3-993b-558aed6dcdef",
+      "occupation": "First-Line Supervisors of Police and Detectives",
+      "raw_obligation_count": 9,
+      "packet_sha256": "6873ccfe19d068be49c9f1451e4aed72c7e31628ba49d3c22292ca8e5331d98f"
+    },
+    {
+      "row_idx": 90,
+      "task_id": "bd72994f-5659-4084-9fab-fc547d1efe3b",
+      "occupation": "First-Line Supervisors of Retail Sales Workers",
+      "raw_obligation_count": 9,
+      "packet_sha256": "f3585ea5c48952235d2325a38c9b6806843f2dc1ade820c49fca4d8f9e054aa9"
+    },
+    {
+      "row_idx": 107,
+      "task_id": "3f625cb2-f40e-4ead-8a97-6924356d5989",
+      "occupation": "Lawyers",
+      "raw_obligation_count": 9,
+      "packet_sha256": "aab3733f56ea677f2de91cbd5260ce62a37207c23cc15eaf66ad76a0d50dc84d"
+    },
+    {
+      "row_idx": 190,
+      "task_id": "b3573f20-5d3e-4954-948f-9461fda693d2",
+      "occupation": "Sales Managers",
+      "raw_obligation_count": 9,
+      "packet_sha256": "e0714816eb4039f71e44fcc15384aaa9c2887555abd0ea7b583204e8eea6ab1c"
+    }
+  ],
+  "field_firewall": {
+    "allowed": [
+      "task_id",
+      "sector",
+      "occupation",
+      "prompt",
+      "reference_files",
+      "reference_file_urls",
+      "reference_file_hf_uris"
+    ],
+    "forbidden_before_output_freeze": [
+      "deliverable_files",
+      "deliverable_file_urls",
+      "deliverable_file_hf_uris",
+      "rubric_pretty",
+      "rubric_json",
+      "model_submissions",
+      "judge_feedback"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_PROMPTS_READ_AT_FREEZE_TIME",
+    "NO_OUTPUTS_YET",
+    "NO_GDPVAL_SCORE",
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ]
+}
