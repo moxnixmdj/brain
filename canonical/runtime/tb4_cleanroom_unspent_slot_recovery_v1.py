@@ -86,6 +86,37 @@ def evaluate(spec: Mapping[str, Any]) -> dict[str, Any]:
     if not set(requested).issubset(expected_remaining):
         return _fail("RECOVERY_OUTSIDE_UNSPENT_SLOTS")
 
+    cognition = spec.get("actor_cognition_isolation")
+    if not isinstance(cognition, Mapping):
+        return _fail("ACTOR_COGNITION_ISOLATION_MISSING")
+    mode = cognition.get("mode")
+    if mode not in {"DETERMINISTIC_BRAIN_ACTOR", "STATELESS_PINNED_EXTERNAL_COGNITION"}:
+        return _fail("ACTOR_COGNITION_MODE_INVALID")
+    if cognition.get("postverifier_user_or_chat_state_available") is not False:
+        return _fail("POSTVERIFIER_COGNITIVE_STATE_EXPOSURE_NOT_FALSE")
+    if cognition.get("task_specific_postresult_memory_available") is not False:
+        return _fail("TASK_SPECIFIC_POSTRESULT_MEMORY_EXPOSURE_NOT_FALSE")
+    if cognition.get("context_constructed_only_from_preverifier_root_and_current_trial_surface") is not True:
+        return _fail("COGNITIVE_CONTEXT_BOUNDARY_UNPROVED")
+    if cognition.get("independently_verified") is not True:
+        return _fail("ACTOR_COGNITION_ISOLATION_UNVERIFIED")
+    if not _hex(cognition.get("verification_receipt_sha256"), 64):
+        return _fail("ACTOR_COGNITION_RECEIPT_INVALID")
+    if mode == "DETERMINISTIC_BRAIN_ACTOR":
+        if not _hex(cognition.get("actor_program_sha256"), 64):
+            return _fail("DETERMINISTIC_ACTOR_PROGRAM_INVALID")
+        if cognition.get("all_trial_relevant_randomness_disabled_or_content_addressed") is not True:
+            return _fail("DETERMINISTIC_ACTOR_RANDOMNESS_UNBOUND")
+    else:
+        if not isinstance(cognition.get("model_id"), str) or not cognition.get("model_id").strip():
+            return _fail("PINNED_MODEL_ID_MISSING")
+        if not isinstance(cognition.get("model_configuration_id"), str) or not cognition.get("model_configuration_id").strip():
+            return _fail("PINNED_MODEL_CONFIGURATION_MISSING")
+        if cognition.get("provider_conversation_memory_disabled") is not True:
+            return _fail("PROVIDER_CONVERSATION_MEMORY_NOT_DISABLED")
+        if cognition.get("fresh_session_per_trial") is not True:
+            return _fail("FRESH_SESSION_PER_TRIAL_NOT_PROVED")
+
     isolation = spec.get("cleanroom_isolation")
     if not isinstance(isolation, Mapping):
         return _fail("CLEANROOM_ISOLATION_MISSING")
@@ -151,6 +182,7 @@ def evaluate(spec: Mapping[str, Any]) -> dict[str, Any]:
         "success_credit_delta": 0,
         "requires_separate_official_verifier_receipt_per_recovered_slot": True,
         "same_task_identity_replay_rule_replaced_by_causal_no_leakage_rule": True,
+        "cognition_isolation_mode": mode,
         "execution_authority": False,
         "promotion_authority": False,
     }
