@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_BENCHMARK_CAPABILITY_DOMINANCE_FRONTIER_V1",
   "date": "2026-10-11",
-  "status": "ACTIVE_CANDIDATE__CAPABILITY_FIRST__12_CHECKPOINT_ROWS_WAKE_GATED__1_TB_SCIENCE_PARKED__ZERO_SCORE_OR_CAPABILITY_CREDIT_FROM_PROJECTION",
+  "status": "ACTIVE_CANDIDATE__CAPABILITY_FIRST__PROOF_LATTICE_V2__12_CHECKPOINT_ROWS_WAKE_GATED__1_TB_SCIENCE_PARKED__ZERO_SCORE_OR_CAPABILITY_CREDIT_FROM_PROJECTION",
   "mission": {
     "terminal_goal": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
     "benchmark_role": "MILESTONE_MEASUREMENT_AND_AUDIT",
@@ -37,7 +37,10 @@
       "CONSERVATIVE_DOMINANCE",
       "OWNER_ACCEPTED_RELATION"
     ],
-    "rule": "HEURISTIC_PROJECTION_RANKS_ONLY__NEVER_CREATES_SCORE_OR_CAPABILITY_CREDIT"
+    "rule": "HEURISTIC_PROJECTION_RANKS_ONLY__NEVER_CREATES_SCORE_OR_CAPABILITY_CREDIT",
+    "proved_proposition_edges_required_for_closure": true,
+    "minimum_proof_cover_required_when_complete_cover_exists": true,
+    "heuristic_family_projection_has_zero_proposition_closure_authority": true
   },
   "benchmark_rows": [
     {
@@ -220,7 +223,7 @@
   "current_expected_plan": {
     "benchmark_specific_same_information_selected": false,
     "capability_work_selected_from_benchmark_projection_only": false,
-    "actual_execution_selection": "DERIVE_FROM_CURRENT_LIVE_WORK_FRONTIER_AT_PLAN_TIME"
+    "actual_execution_selection": "DERIVE_FROM_CURRENT_LIVE_WORK_FRONTIER_THROUGH_V2_PROOF_LATTICE__HEURISTIC_PROJECTIONS_ZERO_CLOSURE_AUTHORITY"
   },
   "ledgers": {
     "CAPABILITY_COMPARISON_LEDGER": {
@@ -246,5 +249,21 @@
     "capability_credit_delta": 0,
     "ownership_credit_delta": 0,
     "terminal_credit_delta": 0
+  },
+  "controller_version": "V2_PROOF_LATTICE_ACTIVE_CANDIDATE",
+  "proof_lattice_control": {
+    "law_path": "canonical/laws/BENCHMARK_MEASUREMENT_VS_CAPABILITY_PROOF_LAW_V2.md",
+    "law_git_blob_sha": "cf2b8f056112bcefdba2ac3f8c0d2feb925e236f",
+    "runtime_path": "canonical/runtime/benchmark_capability_dominance_scheduler_v2.py",
+    "runtime_git_blob_sha": "ac3520bf11168f5ff2b446402d72019ef3433649",
+    "minimum_proof_cover_compiler_path": "canonical/runtime/proof_coverage_compiler.py",
+    "minimum_proof_cover_compiler_git_blob_sha": "f9b7eb23ec749d542392f36d89ddf69d9f8d3c87",
+    "activation_path": "canonical/governance/CAPABILITY_PROOF_LATTICE_ACTIVATION_20261011_V1.json",
+    "activation_git_blob_sha": "9361d1a014015b7a5789ed2b33d780c0221c55b0",
+    "verification_path": "canonical/verification/BENCHMARK_CAPABILITY_DOMINANCE_V2_LOCAL_VERIFICATION_20261011_V1.json",
+    "verification_git_blob_sha": "c0c9accf846ada31060d053d96857efd21d37277",
+    "selection_rule": "EXACT_MINIMUM_PROOF_COVER_IF_AVAILABLE__ELSE_MAX_VERIFIED_MARGINAL_PROPOSITION_CLOSURE__THEN_REUSABLE_CAPABILITY_BREADTH__THEN_WALL_CLOCK_AND_REALITY_COST",
+    "execution_authority": false,
+    "promotion_authority": false
   }
 }
