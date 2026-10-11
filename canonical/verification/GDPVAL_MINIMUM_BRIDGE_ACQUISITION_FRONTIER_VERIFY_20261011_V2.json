@@ -1,0 +1,73 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_MINIMUM_BRIDGE_ACQUISITION_FRONTIER_VERIFY_V2",
+  "date": "2026-10-11",
+  "status": "PASS__OWNER_SURFACE_DELTA_PRESERVES_FAIL_CLOSED_THREE_ROUTE_LOGIC_AND_FROZEN_1846_TARGET__ZERO_CREDIT",
+  "subjects": [
+    {
+      "path": "canonical/governance/GDPVAL_OWNER_EXAMPLE_SUBMISSION_SURFACE_DELTA_20261011_V1.json",
+      "git_blob_sha": "0d8711478d6e805d522176748aba69065b1280b3"
+    },
+    {
+      "path": "canonical/governance/GDPVAL_MINIMUM_BRIDGE_ACQUISITION_FRONTIER_20261011_V2.json",
+      "git_blob_sha": "86f53f7194032a4f4a99a4be0c249f456c949ee5"
+    }
+  ],
+  "first_party_surface_checks": {
+    "page": "https://artificialanalysis.ai/evaluations/gdpval-aa",
+    "example_tasks_and_submissions_section_observed": true,
+    "page_states_deliverables_produced_by_each_model": true,
+    "task_1_owner_cdn_asset_observed": "https://artificialanalysiscdn.com/gdpval_example_files/band-stage-plot-foh-io/claude-fable-5.pdf",
+    "task_1_observed_submission_count": 8,
+    "task_1_claude_opus_5_5_in_observed_submission_list": false,
+    "task_2_or_3_opus55_asset_recovered_by_zero_spend_static_extraction": false,
+    "global_opus55_artifact_nonexistence_inferred": false
+  },
+  "frozen_target_checks": {
+    "frozen_elo": 1846,
+    "live_page_elo_observed": 1866,
+    "live_page_anchor_observed": "DeepSeek V4.1 Flash (max) at 1600",
+    "frozen_target_mutated": false,
+    "cross_epoch_transport_claimed": false
+  },
+  "route_checks": {
+    "MATCHED_SCORE": {
+      "before": false,
+      "after": false,
+      "why": "No Brain owner-score receipt or zero-spend owner scoring endpoint was added."
+    },
+    "TARGET_RELATIVE_PAIRWISE": {
+      "before": false,
+      "after": false,
+      "progress": "First-party owner-hosted model deliverable surface exists.",
+      "why_still_false": "No observed Opus 5.5 task deliverable on the exposed Task 1 set, no scope-sufficient Brain-vs-Opus relation, no authentic owner pairwise outcome set, and no owner-evaluator containment."
+    },
+    "ABSOLUTE_DOMINANCE": {
+      "before": false,
+      "after": false,
+      "why": "No new holistic measurement, evaluator-containment, normative-aggregation, or global pairwise-equivalence theorem was added."
+    },
+    "any_admissible_bridge_after": false
+  },
+  "scheduler_checks": {
+    "remaining_public_submission_generation_default_off": true,
+    "public_rubric_as_owner_quality_forbidden": true,
+    "unchanged_broad_surface_search_default_off": true,
+    "targeted_decision_changing_owner_surface_probe_only": true,
+    "first_sound_route_wins": true
+  },
+  "verified_conclusion": "The previous frontier's substantive three-route closure remains valid, while its owner-public-surface wording is narrowed. First-party example submissions exist, but the currently observed surface does not yet supply a sound bridge to the frozen Opus 5.5 1846 capability relation.",
+  "hard_nonclaims": [
+    "NO_GDPVAL_SCORE_CREDIT",
+    "NO_OPUS_NONINFERIORITY",
+    "NO_SCOPE_SUFFICIENCY_FROM_EXAMPLES",
+    "NO_GLOBAL_ABSENCE_CLAIM_FOR_OPUS55_ARTIFACTS",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
