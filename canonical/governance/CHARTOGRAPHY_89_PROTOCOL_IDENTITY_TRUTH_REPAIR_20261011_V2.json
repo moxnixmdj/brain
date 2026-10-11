@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_CHARTOGRAPHY_89_PROTOCOL_IDENTITY_TRUTH_REPAIR_20261011_V2",
+  "date": "2026-10-11",
+  "status": "ANTHROPIC_WITH_TOOLS_PROTOCOL_PUBLICLY_SUBSTANTIALLY_BOUND__SURGE_CURRENT_NO_TOOLS_REMAINS_DISTINCT__DIRECT_89_ROUTE_REDUCED_TO_BRAIN_EQUIVALENT_HARNESS_PLUS_AUTHENTIC_SCORE_OR_STRONGER_CERTIFICATE__ZERO_CREDIT",
+  "target_predicate": "CHARTOGRAPHY_TOOLS_GE_89",
+  "supersedes": "canonical/governance/CHARTOGRAPHY_89_PROTOCOL_IDENTITY_TRUTH_REPAIR_20261011_V1.json",
+  "protocol_public_binding": "canonical/governance/CHARTOGRAPHY_WITH_TOOLS_PROTOCOL_PUBLIC_BINDING_20261011_V1.json",
+  "historical_target": {
+    "publisher": "Anthropic",
+    "publication_date": "2026-09-22",
+    "reported_result_percent": 89.0,
+    "label": "with tools"
+  },
+  "published_with_tools_protocol": {
+    "task_population": "SURGE_AI_CHARTOGRAPHY_OFFICIAL_100_TASKS_WITH_EXPERT_DETERMINED_ACCEPTABLE_ANSWER_RANGES",
+    "adaptive_thinking": true,
+    "effort": "max",
+    "tools": [
+      "CONTAINER",
+      "IMAGE_FILE",
+      "STANDARD_LIBRARIES",
+      "IMAGE_CROPPING_TOOL"
+    ],
+    "grader": "Gemini 3.5 Flash",
+    "aggregation": "AVERAGE_OVER_FIVE_RUNS"
+  },
+  "current_surge_public_no_tools_protocol": {
+    "same_as_anthropic_with_tools": false,
+    "role": "SEPARATE_MATCHED_NO_TOOLS_EVIDENCE_OR_QUALIFICATION_ONLY"
+  },
+  "proof": {
+    "task_population_identity_bound": true,
+    "tool_authority_class_bound": true,
+    "model_effort_configuration_bound": true,
+    "grader_identity_bound": true,
+    "aggregation_bound": true,
+    "brain_protocol_equivalent_harness_bound": false,
+    "brain_authentic_ge_89_score_bound": false
+  },
+  "direct_89_irreducible_delta": "BIND_A_BRAIN_HARNESS_EQUIVALENT_TO_THE_PUBLISHED_ANTHROPIC_WITH_TOOLS_PROTOCOL_AND_OBTAIN_AN_AUTHENTIC_FIVE_RUN_CHARTOGRAPHY_SCORE_RECEIPT_GE_89__OR_PROVE_A_STRONGER_SCOPE_COMPLETE_CERTIFICATE",
+  "scheduler_effect": {
+    "delete": [
+      "SEARCH_FOR_ANTHROPIC_WITH_TOOLS_TASK_POPULATION_IDENTITY",
+      "SEARCH_FOR_ANTHROPIC_WITH_TOOLS_TOOLSET_CLASS",
+      "SEARCH_FOR_ANTHROPIC_WITH_TOOLS_GRADER_IDENTITY",
+      "SEARCH_FOR_ANTHROPIC_WITH_TOOLS_AGGREGATION_RULE",
+      "TREAT_SURGE_CURRENT_NO_TOOLS_HARNESS_AS_THE_ANTHROPIC_WITH_TOOLS_HARNESS"
+    ],
+    "activate": [
+      "BIND_PROTOCOL_EQUIVALENT_BRAIN_WITH_TOOLS_HARNESS",
+      "OBTAIN_AUTHENTIC_FIVE_RUN_MATCHED_SCORE_ONLY_AFTER_ZERO_SPEND_EXECUTION_AND_GRADER_CAPACITY_ARE_BOUND",
+      "OR_DISCHARGE_BY_STRONGER_SCOPE_COMPLETE_CERTIFICATE"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_BRAIN_CHARTOGRAPHY_SCORE",
+    "NO_CHARTOGRAPHY_GE_89_ACCEPTANCE",
+    "NO_CLAIM_CURRENT_SIX_CASE_SYNTHETIC_QUALIFICATION_IS_THE_OFFICIAL_100_TASK_PROTOCOL",
+    "NO_CLAIM_UNPUBLISHED_CONTAINER_PACKAGE_VERSIONS_ARE_KNOWN",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
