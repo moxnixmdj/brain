@@ -1,0 +1,92 @@
+{
+  "failed": 0,
+  "fixture_schema": "PROJECT_BRAIN_FINITE_AFFINE_GRID_OPERATOR_FROZEN_GENERALIZATION_V1",
+  "pass_all": true,
+  "passed": 10,
+  "promotion_authority": false,
+  "rows": [
+    {
+      "induction_status": "EXACT_OPERATORS",
+      "minimum_description_cost": 3.5,
+      "operator_count": 3,
+      "pass": true,
+      "prediction_status": "PREDICTED",
+      "task_id": "AFFINE_FROZEN_R90"
+    },
+    {
+      "induction_status": "EXACT_OPERATORS",
+      "minimum_description_cost": 4.0,
+      "operator_count": 5,
+      "pass": true,
+      "prediction_status": "PREDICTED",
+      "task_id": "AFFINE_FROZEN_R180"
+    },
+    {
+      "induction_status": "EXACT_OPERATORS",
+      "minimum_description_cost": 3.5,
+      "operator_count": 3,
+      "pass": true,
+      "prediction_status": "PREDICTED",
+      "task_id": "AFFINE_FROZEN_R270"
+    },
+    {
+      "induction_status": "EXACT_OPERATORS",
+      "minimum_description_cost": 3.0,
+      "operator_count": 2,
+      "pass": true,
+      "prediction_status": "PREDICTED",
+      "task_id": "AFFINE_FROZEN_FLIP_H"
+    },
+    {
+      "induction_status": "EXACT_OPERATORS",
+      "minimum_description_cost": 3.0,
+      "operator_count": 2,
+      "pass": true,
+      "prediction_status": "PREDICTED",
+      "task_id": "AFFINE_FROZEN_FLIP_V"
+    },
+    {
+      "induction_status": "EXACT_OPERATORS",
+      "minimum_description_cost": 2.5,
+      "operator_count": 1,
+      "pass": true,
+      "prediction_status": "PREDICTED",
+      "task_id": "AFFINE_FROZEN_TRANSPOSE"
+    },
+    {
+      "induction_status": "EXACT_OPERATORS",
+      "minimum_description_cost": 4.0,
+      "operator_count": 1,
+      "pass": true,
+      "prediction_status": "PREDICTED",
+      "task_id": "AFFINE_FROZEN_ANTI"
+    },
+    {
+      "induction_status": "EXACT_OPERATORS",
+      "minimum_description_cost": 4.0,
+      "operator_count": 1,
+      "pass": true,
+      "prediction_status": "PREDICTED",
+      "task_id": "AFFINE_FROZEN_BBOX"
+    },
+    {
+      "induction_status": "EXACT_OPERATORS",
+      "minimum_description_cost": 4.0,
+      "operator_count": 1,
+      "pass": true,
+      "prediction_status": "PREDICTED",
+      "task_id": "AFFINE_FROZEN_BBOX_R90"
+    },
+    {
+      "induction_status": "EXACT_OPERATORS",
+      "minimum_description_cost": 4.0,
+      "operator_count": 1,
+      "pass": true,
+      "prediction_status": "PREDICTED",
+      "task_id": "AFFINE_FROZEN_BBOX_FH"
+    }
+  ],
+  "schema": "PROJECT_BRAIN_FINITE_AFFINE_GRID_OPERATOR_FROZEN_GENERALIZATION_RECEIPT_V1",
+  "task_count": 10,
+  "terminal_authority": false
+}
