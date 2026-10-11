@@ -11,6 +11,10 @@ on:
       - ".github/workflows/full-private-current-main-regression.yml"
   workflow_dispatch:
 
+concurrency:
+  group: full-private-current-main-regression-latest
+  cancel-in-progress: true
+
 permissions:
   contents: read
 
@@ -18,10 +22,12 @@ jobs:
   full-regression:
     runs-on: [self-hosted, Linux, X64, brain-low-ram]
     timeout-minutes: 30
+    env:
+      EXPECTED_SUBJECT_SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.sha }}
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.sha }}
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.sha }}
           fetch-depth: 0
 
       - uses: actions/setup-python@v5
@@ -30,30 +36,46 @@ jobs:
 
       - name: Install exact test runner
         run: |
-          python -m pip install --disable-pip-version-check pytest==9.1.1 numpy "pydantic>=2,<3" python-docx Pillow opencv-python-headless langdetect cadquery==2.6.1 pypdf==6.19.0 pypdf cadquery
+          python -m pip install --disable-pip-version-check pytest==9.1.1 numpy "pydantic>=2,<3" python-docx Pillow opencv-python-headless langdetect cadquery==2.6.1 pypdf==6.19.0
 
       - name: Record exact subject
+        shell: bash
         run: |
-          mkdir -p /tmp/brain-regression
-          git rev-parse HEAD | tee /tmp/brain-regression/subject_sha.txt
-          test "$(git rev-parse HEAD)" = "${GITHUB_SHA}"
-          python --version | tee /tmp/brain-regression/python_version.txt
-          python -m pytest --version | tee /tmp/brain-regression/pytest_version.txt
-          printf '%s\n' "${RUNNER_NAME}" | tee /tmp/brain-regression/runner_name.txt
+          set -euo pipefail
+          root="${RUNNER_TEMP}/brain-regression-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          rm -rf "${root}"
+          mkdir -p "${root}"
+          git rev-parse HEAD | tee "${root}/subject_sha.txt"
+          test "$(git rev-parse HEAD)" = "${EXPECTED_SUBJECT_SHA}"
+          printf '%s\n' "${GITHUB_RUN_ID}" > "${root}/run_id.txt"
+          printf '%s\n' "${GITHUB_RUN_ATTEMPT}" > "${root}/run_attempt.txt"
+          python --version | tee "${root}/python_version.txt"
+          python -m pytest --version | tee "${root}/pytest_version.txt"
+          printf '%s\n' "${RUNNER_NAME}" | tee "${root}/runner_name.txt"
 
       - name: Compile assurance and professional load-bearing runtimes
         run: |
-          python -m py_compile             canonical/runtime/assurance_closure_compiler_v1.py             canonical/runtime/assurance_closure_reference_checker_v1.py             canonical/runtime/assurance_closure_adversary_v1.py             canonical/runtime/professional_semantic_v10_totality_compiler_v1.py
+          python -m py_compile \
+            canonical/runtime/assurance_closure_compiler_v1.py \
+            canonical/runtime/assurance_closure_reference_checker_v1.py \
+            canonical/runtime/assurance_closure_adversary_v1.py \
+            canonical/runtime/professional_semantic_v10_totality_compiler_v1.py
 
       - name: Full private current-main full-system regression
         id: full
         shell: bash
         run: |
           set +e
-          python -m pytest -q canonical/tests             --disable-warnings             --junitxml=/tmp/brain-regression/pytest.xml             > /tmp/brain-regression/pytest.txt 2>&1
+          root="${RUNNER_TEMP}/brain-regression-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          printf 'started\n' > "${root}/pytest_started.txt"
+          python -m pytest -q canonical/tests \
+            --disable-warnings \
+            --junitxml="${root}/pytest.xml" \
+            > "${root}/pytest.txt" 2>&1
           rc=$?
-          printf '%s\n' "$rc" | tee /tmp/brain-regression/pytest_rc.txt
-          tail -n 250 /tmp/brain-regression/pytest.txt
+          printf '%s\n' "$rc" > "${root}/pytest_rc.txt"
+          printf 'completed\n' > "${root}/pytest_completed.txt"
+          tail -n 250 "${root}/pytest.txt"
           exit "$rc"
 
       - name: Focused assurance differential replay
@@ -61,10 +83,17 @@ jobs:
         shell: bash
         run: |
           set +e
-          python -m unittest             canonical.tests.test_assurance_closure_compiler_v1             canonical.tests.test_assurance_closure_independent_adversary_v1             -v > /tmp/brain-regression/assurance.txt 2>&1
+          root="${RUNNER_TEMP}/brain-regression-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          mkdir -p "${root}"
+          printf 'started\n' > "${root}/assurance_started.txt"
+          python -m unittest \
+            canonical.tests.test_assurance_closure_compiler_v1 \
+            canonical.tests.test_assurance_closure_independent_adversary_v1 \
+            -v > "${root}/assurance.txt" 2>&1
           rc=$?
-          printf '%s\n' "$rc" > /tmp/brain-regression/assurance_rc.txt
-          tail -n 100 /tmp/brain-regression/assurance.txt
+          printf '%s\n' "$rc" > "${root}/assurance_rc.txt"
+          printf 'completed\n' > "${root}/assurance_completed.txt"
+          tail -n 100 "${root}/assurance.txt"
           exit "$rc"
 
       - name: Build regression receipt
@@ -72,51 +101,66 @@ jobs:
         shell: bash
         run: |
           python - <<'PY'
-          import hashlib, json, pathlib, subprocess, xml.etree.ElementTree as ET
-          root=pathlib.Path("/tmp/brain-regression")
+          import hashlib, json, os, pathlib, subprocess, xml.etree.ElementTree as ET
+          root=pathlib.Path(os.environ["RUNNER_TEMP"])/f"brain-regression-{os.environ['GITHUB_RUN_ID']}-{os.environ['GITHUB_RUN_ATTEMPT']}"
           def read(name):
               p=root/name
               return p.read_text(errors="replace") if p.exists() else ""
           sha=subprocess.check_output(["git","rev-parse","HEAD"],text=True).strip()
+          expected=os.environ["EXPECTED_SUBJECT_SHA"]
+          recorded=read("subject_sha.txt").strip()
           pytest_out=read("pytest.txt")
           assurance_out=read("assurance.txt")
           pytest_rc=int((read("pytest_rc.txt") or "999").strip())
           assurance_rc=int((read("assurance_rc.txt") or "999").strip())
+          subject_binding=bool(recorded) and recorded==sha==expected
+          pytest_started=read("pytest_started.txt").strip()=="started"
+          pytest_completed=read("pytest_completed.txt").strip()=="completed"
+          assurance_started=read("assurance_started.txt").strip()=="started"
+          assurance_completed=read("assurance_completed.txt").strip()=="completed"
           tests_executed=0
           xml_path=root/"pytest.xml"
-          if xml_path.exists():
+          if subject_binding and pytest_started and pytest_completed and xml_path.exists():
               doc=ET.parse(xml_path).getroot()
               suites=[doc] if doc.tag=="testsuite" else list(doc.findall("testsuite"))
               tests_executed=sum(int(s.attrib.get("tests","0")) for s in suites)
+          passed=(subject_binding and pytest_started and pytest_completed and assurance_started and assurance_completed and tests_executed>0 and pytest_rc==0 and assurance_rc==0)
           receipt={
-            "schema":"PROJECT_BRAIN_FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION_V1",
+            "schema":"PROJECT_BRAIN_FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION_V2",
             "subject_commit_sha":sha,
+            "expected_subject_sha":expected,
+            "subject_binding":subject_binding,
+            "github_run_id":os.environ["GITHUB_RUN_ID"],
+            "github_run_attempt":os.environ["GITHUB_RUN_ATTEMPT"],
             "python_version":read("python_version.txt").strip(),
             "pytest_version":read("pytest_version.txt").strip(),
             "runner_name":read("runner_name.txt").strip(),
-            "full_pytest_command":"python -m pytest -q canonical/tests --disable-warnings --junitxml=/tmp/brain-regression/pytest.xml",
+            "pytest_started":pytest_started,
+            "pytest_completed":pytest_completed,
+            "full_pytest_command":"python -m pytest -q canonical/tests --disable-warnings --junitxml=<isolated-run-root>/pytest.xml",
             "pytest_tests_executed":tests_executed,
             "pytest_returncode":pytest_rc,
             "pytest_output_sha256":hashlib.sha256(pytest_out.encode()).hexdigest(),
-            "pytest_tail":pytest_out[-12000:],
+            "assurance_started":assurance_started,
+            "assurance_completed":assurance_completed,
             "assurance_command":"python -m unittest canonical.tests.test_assurance_closure_compiler_v1 canonical.tests.test_assurance_closure_independent_adversary_v1 -v",
             "assurance_returncode":assurance_rc,
             "assurance_output_sha256":hashlib.sha256(assurance_out.encode()).hexdigest(),
-            "assurance_tail":assurance_out[-6000:],
-            "full_private_current_main_regression_pass":tests_executed>0 and pytest_rc==0 and assurance_rc==0,
+            "full_private_current_main_regression_pass":passed,
+            "artifact_upload_required_for_validity":False,
             "quality_authority":False,
             "acceptance_authority":False,
             "terminal_authority":False
           }
+          summary=json.dumps(receipt,sort_keys=True)
           (root/"receipt.json").write_text(json.dumps(receipt,indent=2,sort_keys=True)+"\n")
-          print(json.dumps({k:v for k,v in receipt.items() if k not in {"pytest_tail","assurance_tail"}},sort_keys=True))
+          print("REGRESSION_RECEIPT_JSON="+summary)
+          with open(os.environ["GITHUB_STEP_SUMMARY"],"a",encoding="utf-8") as f:
+              f.write("Full private current-main regression receipt\n\n")
+              f.write(json.dumps(receipt,indent=2,sort_keys=True)+"\n")
+          if not passed:
+              raise SystemExit(1)
           PY
 
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: full-private-current-main-regression
-          path: /tmp/brain-regression/
-          if-no-files-found: error
-
-# carrier: self-hosted-linux-x64-low-ram-exact-sha-20261011-v3
+# carrier: isolated-self-hosted-linux-x64-low-ram-exact-subject-20261011-v4
+# receipt: log-and-check-summary-authoritative-for-canonicalization__artifact-storage-not-required
