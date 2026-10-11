@@ -9,6 +9,10 @@ CLASSES = {"NONE", "K1_INFORMATION_ONLY", "K2_TRANSFER_DERIVED", "K3_RUNTIME_COG
 def evaluate(row: Mapping[str, Any]) -> dict[str, Any]:
     errors: list[str] = []
     cls = row.get("external_contribution_classification")
+    if row.get("external_contribution_census_complete") is not True:
+        errors.append("EXTERNAL_CONTRIBUTION_CENSUS_INCOMPLETE")
+    if row.get("full_runtime_dependency_inventory_complete") is not True:
+        errors.append("RUNTIME_DEPENDENCY_INVENTORY_INCOMPLETE")
     if cls not in CLASSES:
         errors.append("EXTERNAL_CONTRIBUTION_CLASSIFICATION_MISSING_OR_INVALID")
     elif cls == "K3_RUNTIME_COGNITION":
@@ -28,10 +32,12 @@ def evaluate(row: Mapping[str, Any]) -> dict[str, Any]:
             errors.append("K1_TARGET_SOLVING_COGNITION_NOT_EXCLUDED")
     elif cls == "NONE":
         provenance = row.get("acquisition_donor_provenance")
-        if isinstance(provenance, Mapping) and provenance.get("used") is True:
-            errors.append("NONE_CLASS_CONTRADICTS_DONOR_PROVENANCE")
-        if row.get("external_runtime_cognition") is True:
-            errors.append("NONE_CLASS_CONTRADICTS_RUNTIME_COGNITION")
+        if not isinstance(provenance, Mapping):
+            errors.append("NONE_CLASS_DONOR_PROVENANCE_MISSING")
+        elif provenance.get("used") is not False:
+            errors.append("NONE_CLASS_DONOR_PROVENANCE_NOT_EXPLICITLY_FALSE")
+        if row.get("external_runtime_cognition") is not False:
+            errors.append("NONE_CLASS_RUNTIME_COGNITION_NOT_EXPLICITLY_FALSE")
     passed = not errors
     return {
         "schema": SCHEMA,
