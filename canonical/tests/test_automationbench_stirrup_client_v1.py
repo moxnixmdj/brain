@@ -40,14 +40,21 @@ class StirrupAdapterPureTests(unittest.TestCase):
             "Mark the Salesforce deal as won.",
         )
 
-    def test_history_keeps_tool_results_and_owned_semantic_only(self):
+    def test_history_keeps_tool_results_and_all_project_brain_receipts_only(self):
         messages = [
             Msg(role="user", kind="user", content="task"),
             Msg(
                 role="assistant",
                 metadata={
                     "project_brain/automationbench_semantic":
-                        "SALESFORCE_OPPORTUNITY_MARK_WON",
+                        "GENERIC_TOOL_EFFECT::act::intent_0::opaque.modify",
+                    "project_brain/generic_execution_receipt":{
+                        "action_class":"update",
+                        "capability_id":"act::intent_0::opaque.modify",
+                        "endpoint_id":"opaque.modify",
+                        "bindings":{"parameter.id":{"value":"x_1","source":"grounded"}},
+                        "arguments":{"method":"PATCH","url":"https://x.invalid/x_1"},
+                    },
                     "irrelevant": "x",
                 },
             ),
@@ -62,8 +69,10 @@ class StirrupAdapterPureTests(unittest.TestCase):
         self.assertEqual(out[0]["kind"], "assistant_state")
         self.assertEqual(
             out[0]["metadata"]["project_brain/automationbench_semantic"],
-            "SALESFORCE_OPPORTUNITY_MARK_WON",
+            "GENERIC_TOOL_EFFECT::act::intent_0::opaque.modify",
         )
+        self.assertIn("project_brain/generic_execution_receipt", out[0]["metadata"])
+        self.assertNotIn("irrelevant", out[0]["metadata"])
         self.assertEqual(out[1]["kind"], "tool_result")
         self.assertEqual(out[1]["name"], "api_fetch")
 
