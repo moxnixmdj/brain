@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_O_PROJECTION_GATE_V2_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__CURRENT_PROJECTION_AWARE_O_GATE_AND_SEARCH__12_OF_12_REMOTE_REPLAY__GDPVAL_O__AA_Q__TB_PARKED__ZERO_CREDIT",
+  "subject": {
+    "gate_runtime": [
+      "canonical/runtime/current_escape_o_objective_acceptance_law_gate_v2.py",
+      "81655c567a1635986db7a4fed272f9ebdb0c50e4"
+    ],
+    "gate_tests": [
+      "canonical/tests/test_current_escape_o_objective_acceptance_law_gate_v2.py",
+      "86770c038a77da6fcf92e2b5e3235405e731a8ab"
+    ],
+    "search_runtime": [
+      "canonical/runtime/current_escape_o_proof_instantiation_search_v2.py",
+      "30ba7cdaab11da93dad7f07dc1ce84dca579a611"
+    ],
+    "search_tests": [
+      "canonical/tests/test_current_escape_o_proof_instantiation_search_v2.py",
+      "a454318a7dd47cbfae72930f01a2994031de114f"
+    ]
+  },
+  "independent_replay": {
+    "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "result": "PASS__12_OF_12",
+    "failures": 0,
+    "errors": 0
+  },
+  "proved": [
+    "CURRENT_O_Q_PARKED_MEMBERSHIP_IS_RESOLVED_FROM_CURRENT_TWO_ENGINE_CUT_NOT_HISTORICAL_O11_Q2",
+    "GDPVAL_CURRENT_FIXED_BAR_ROW_IS_ADMITTED_TO_O_KERNEL",
+    "AA_BRIEFCASE_REMAINS_Q_ONLY",
+    "TB_SCIENCE_REMAINS_PARKED_AND_CANNOT_ENTER_O",
+    "CURRENT_PARTITION_AND_MANIFEST_DRIFT_FAIL_CLOSED",
+    "O_PROOF_SEARCH_SCANS_ONLY_CURRENT_ACTIVE_O_MEMBERSHIP",
+    "EXISTING_V4_PROOF_KERNEL_SEMANTICS_UNCHANGED",
+    "NO_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "hard_nonclaims": [
+    "NO_GDPVAL_SCORE_OR_ACCEPTANCE",
+    "NO_NEW_O_ROW_PROOF_CREATED_BY_GATE_REPAIR",
+    "NO_CC_R3_OR_U_EMPTY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "promotion_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
