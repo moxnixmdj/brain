@@ -4,6 +4,8 @@ import argparse, hashlib, json
 from pathlib import Path
 from typing import Any
 
+from canonical.runtime.runtime_cognition_credit_guard_v1 import assert_credit_path_cognition_governance
+
 RESULT_SCHEMA="PROJECT_BRAIN_TERMINAL_KSTAR_RESULT_V1"
 VERIFY_SCHEMA="PROJECT_BRAIN_TERMINAL_KSTAR_INDEPENDENT_VERIFICATION_V1"
 ALLOWED={"FULL_SCOPE_DB_COVER","TARGET_ESCAPE_NONOCCUPANCY","GENERATOR_CLOSURE_SCOPE_COMPLETE","SELECTED_COVER_COMPLEMENT_UNSAT"}
@@ -44,6 +46,7 @@ def fail(root:Path,errs:list[str])->int:
     return 2
 
 def promote(root:Path)->int:
+    assert_credit_path_cognition_governance(root)
     errs=[]
     rp=root/RESULT; vp=root/INDEP; mp=root/MANIFEST
     for p,label in ((rp,"KSTAR_RESULT_MISSING"),(vp,"KSTAR_INDEPENDENT_VERIFICATION_MISSING"),(mp,"TERMINAL_MANIFEST_MISSING")):
