@@ -6,6 +6,11 @@ It does not parse prose, strip whitespace, normalize case, apply numeric toleran
 or call an LLM judge. A slot succeeds iff the solver's already-committed final
 answer string is exactly identical to the hidden official gold answer string.
 
+IMPORTANT: this is supplementary semantic/reference evidence only. It is NOT the
+published HLE model-grader score and MUST NOT be promoted as one. Exact hidden-gold
+identity does not logically force an external stochastic/model grader to emit a
+"correct" label.
+
 The solver must run in a separate phase that cannot read the reference file.
 This scorer is post-commit only.
 """
@@ -15,13 +20,14 @@ import hashlib
 import json
 from collections import Counter
 from dataclasses import dataclass
-from typing import Iterable, Mapping, Sequence
+from typing import Mapping, Sequence
 
 POPULATION_SIZE = 2500
 TRIALS = 5
 TOTAL_SLOTS = POPULATION_SIZE * TRIALS
 TARGET_NUMERATOR = 8463
 TARGET_DENOMINATOR = TOTAL_SLOTS
+TRUTH_REPAIR = "canonical/governance/HLE_SEMANTIC_CERTIFICATE_TARGET_PREDICATE_TRUTH_REPAIR_20261011_V1.json"
 
 
 @dataclass(frozen=True)
@@ -39,6 +45,20 @@ def _sha256_text(value: str) -> str:
 def _canonical_sha256(value: object) -> str:
     raw = json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
     return hashlib.sha256(raw).hexdigest()
+
+
+def _canonical_references(references: Sequence[Mapping[str, object]]) -> list[dict[str, object]]:
+    return [dict(row) for row in sorted(references, key=lambda row: str(row["id"]))]
+
+
+def _canonical_commitments(commitments: Sequence[Mapping[str, object]]) -> list[dict[str, object]]:
+    return [
+        dict(row)
+        for row in sorted(
+            commitments,
+            key=lambda row: (int(row["trial"]), str(row["id"])),
+        )
+    ]
 
 
 def validate_references(references: Sequence[Mapping[str, object]]) -> dict[str, str]:
@@ -112,6 +132,7 @@ def score_exact_commitments(
             )
         )
 
+    canonical_verdicts = sorted(verdicts, key=lambda v: (v.trial, v.task_id))
     result = {
         "schema": "PROJECT_BRAIN_HLE_EXACT_COMMIT_SEMANTIC_CERTIFICATE_RESULT_V1",
         "correct_exact_gold_identities": correct,
@@ -122,8 +143,8 @@ def score_exact_commitments(
         "threshold_denominator": TARGET_DENOMINATOR,
         "threshold_met": correct >= TARGET_NUMERATOR,
         "per_trial_correct": {str(t): per_trial_correct[t] for t in range(1, TRIALS + 1)},
-        "commitments_manifest_sha256": _canonical_sha256(list(commitments)),
-        "references_manifest_sha256": _canonical_sha256(list(references)),
+        "commitments_manifest_sha256": _canonical_sha256(_canonical_commitments(commitments)),
+        "references_manifest_sha256": _canonical_sha256(_canonical_references(references)),
         "verdict_manifest_sha256": _canonical_sha256(
             [
                 {
@@ -132,11 +153,15 @@ def score_exact_commitments(
                     "correct": v.correct,
                     "answer_sha256": v.answer_sha256,
                 }
-                for v in verdicts
+                for v in canonical_verdicts
             ]
         ),
+        "supplementary_only": True,
         "grader_equivalence_claimed": False,
+        "target_model_grader_score_claimed": False,
         "semantic_certificate_role": "EXACT_HIDDEN_GOLD_IDENTITY_ONLY",
+        "prohibited_inference": "EXACT_GOLD_IDENTITY_DOES_NOT_IMPLY_TARGET_MODEL_GRADER_CORRECT",
+        "truth_repair": TRUTH_REPAIR,
         "required_external_condition": "REFERENCES_WERE_INACCESSIBLE_TO_SOLVER_UNTIL_ALL_FINAL_ANSWER_COMMITMENTS_WERE_IRREVOCABLY_SEALED",
     }
     return result
@@ -159,6 +184,12 @@ def self_test() -> None:
     out = score_exact_commitments(commits, refs)
     assert out["correct_exact_gold_identities"] == TOTAL_SLOTS
     assert out["threshold_met"] is True
+    assert out["supplementary_only"] is True
+    assert out["target_model_grader_score_claimed"] is False
+
+    out_permuted = score_exact_commitments(list(reversed(commits)), list(reversed(refs)))
+    for key in ("commitments_manifest_sha256", "references_manifest_sha256", "verdict_manifest_sha256"):
+        assert out_permuted[key] == out[key]
 
     bad = [dict(x) for x in commits]
     bad[0]["final_answer"] = " a0"
