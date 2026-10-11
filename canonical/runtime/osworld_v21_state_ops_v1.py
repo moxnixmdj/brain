@@ -18,9 +18,14 @@ MAX_TEXT_BYTES = 1_000_000
 MAX_ARGS = 64
 ALLOWED_CLI = frozenset({
     "libreoffice", "soffice", "ffmpeg", "ffprobe",
-    "blender", "freecadcmd", "FreeCADCmd", "tar", "unzip", "zip",
     "convert", "magick", "identify", "pdftotext", "pandoc",
 })
+
+FORBIDDEN_CLI_ARGUMENTS = {
+    "pandoc": frozenset({"--filter", "--lua-filter", "-F", "-L"}),
+    "libreoffice": frozenset({"--accept"}),
+    "soffice": frozenset({"--accept"}),
+}
 
 
 class StateOpsError(ValueError):
@@ -152,9 +157,18 @@ def _compile_op(op: Mapping[str, Any]) -> str:
         exe = PurePosixPath(argv[0]).name
         if exe not in ALLOWED_CLI:
             raise StateOpsError("RUN_CLI_EXECUTABLE_NOT_ALLOWED:" + exe)
-        for arg in argv[1:]:
+        forbidden_args = FORBIDDEN_CLI_ARGUMENTS.get(exe, frozenset())
+        for index, arg in enumerate(argv[1:], start=1):
+            if arg in forbidden_args or any(
+                arg.startswith(prefix + "=")
+                for prefix in forbidden_args
+                if prefix.startswith("--")
+            ):
+                raise StateOpsError("RUN_CLI_ARGUMENT_NOT_ALLOWED:" + exe + ":" + arg)
             if arg.startswith("/"):
                 _path(arg)
+            if exe == "pandoc" and index > 0 and argv[index - 1] in {"--filter", "--lua-filter", "-F", "-L"}:
+                raise StateOpsError("RUN_CLI_ARGUMENT_NOT_ALLOWED:pandoc:" + argv[index - 1])
         timeout = op.get("timeout_s", 60)
         if isinstance(timeout, bool) or not isinstance(timeout, int) or not 1 <= timeout <= 300:
             raise StateOpsError("RUN_CLI_TIMEOUT_INVALID")
