@@ -8,6 +8,8 @@ class Agent:
         self.bound = None
     def bind_environment(self, env):
         self.bound = env
+    def set_result_dir(self, path):
+        self.result_dir = path
 
 
 def test_install_binds_before_exact_delegate():
@@ -35,3 +37,20 @@ def test_install_is_idempotent():
     assert first["status"] == "INSTALLED"
     assert second["status"] == "ALREADY_INSTALLED"
     assert module.run_single_example is wrapped
+
+
+def test_install_binds_native_result_dir_before_delegate():
+    seen = []
+    def original(agent, env, example, max_steps, instruction, args, result_dir, scores):
+        seen.append((agent.bound is env, agent.result_dir, result_dir))
+        return "ok"
+
+    module = SimpleNamespace(run_single_example=original)
+    install(module)
+    env = object()
+    agent = Agent()
+    out = module.run_single_example(
+        agent, env, {}, 500, "task", SimpleNamespace(), "/tmp/result", []
+    )
+    assert out == "ok"
+    assert seen == [(True, "/tmp/result", "/tmp/result")]
