@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261011_V16",
+  "date": "2026-10-11",
+  "status": "ACTIVE_CANDIDATE__CURRENT_24_OF_24_PROFESSIONAL_SEMANTICS__ESCAPE_DECISION_VALUE_GATE__ZERO_CREDIT",
+  "objective": "MAKE_THE_ACTIVE_CAPABILITY_FIRST_SCHEDULER_CONSUME_CURRENT_TRUTH_AND_FORBID_SAME_INFORMATION_ESCAPE_WORK",
+  "base_main_commit": "3d0f7a0c8ff0c2a5c4144ede3435af3471db814f",
+  "runtime": {
+    "path": "canonical/runtime/capability_parallel_frontier_post_composition_v2.py",
+    "git_blob_sha": "6a1e02ab6154e18b706867582cc93d1eb571c423",
+    "entrypoint": "plan_current_post_composition_frontier"
+  },
+  "current_live_frontier": {
+    "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
+    "git_blob_sha": "3f299eb32bc9e178360ba9adaeac546746f74314"
+  },
+  "decision_value_authority": {
+    "path": "canonical/governance/CURRENT_FRONTIER_REUSE_SPECIALIZATION_20261011_V1.json",
+    "git_blob_sha": "8a20db9ebf20852e5c5e0667f64d8142697861e8",
+    "rule": "ROWS_WHOSE_CURRENT_MODE_IS_WAKE_GATED_EVENT_DRIVEN_OR_PARKED_MUST_NOT_CONSUME_SAME_INFORMATION_WORK__ONLY_CURRENT_NONWAKE_ROWS_ENTER_GAP_A_EVIDENCE_SCHEDULING"
+  },
+  "current_projection": {
+    "professional": "PROPERTY_TRUTH_24_OF_24_CLOSED__FULL_PRIVATE_CURRENT_MAIN_REGRESSION_WAKE_GATED",
+    "gap_a_actionable_row_ids": [
+      "PROWORK_GDPVAL_GE_1846",
+      "HLE_TOOLS_GE_67_7"
+    ],
+    "gap_a_sleeping_row_count": 10,
+    "bytes": "V47_CURRENT__RERANK_BEFORE_FROZEN_NEXT54",
+    "r2": "GENERAL_MECHANISM_CLOSED__TASK_SPECIFIC_EXTERNAL_FRONTIER_SLEEPING"
+  },
+  "independent_verification": {
+    "path": "canonical/verification/DECISION_VALUE_SCHEDULER_GATE_INDEPENDENT_VERIFY_20261011_V1.json",
+    "git_blob_sha": "bf8951150a1f2ae4c8944d4c94fcd8ae06fd1bb8",
+    "result": "PYCOMPILE_PASS__23_OF_23_COMBINED_TESTS_PASS__CURRENT_PLAN_REPLAY_PASS"
+  },
+  "scheduling_precedence": [
+    "CURRENTNESS_AND_DEPENDENCY_GATES",
+    "DECISION_VALUE_WAKE_GATE",
+    "DIMENSIONWISE_PARETO_DOMINANCE",
+    "SAFE_NONCONFLICTING_PARALLELISM",
+    "CHECKPOINT_AUDIT_TERTIARY"
+  ],
+  "execution_authority": false,
+  "promotion_authority": false,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "hard_nonclaims": [
+    "NO_BENCHMARK_ROW_CLOSED_BY_THIS_ACTIVATION",
+    "NO_EXTERNAL_PRIVATE_FACT_INFERRED",
+    "NO_FULL_EXECUTION_AUTHORITY",
+    "NO_TERMINAL_CREDIT"
+  ]
+}
