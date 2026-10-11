@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_SOFTWARE_REQUEST_EXPLICIT_ACCEPTANCE_V1_VERIFY_20261011",
+  "date": "2026-10-11",
+  "status": "PASS__INDEPENDENT_TWO_CARRIER_FOCUSED_FALSIFICATION",
+  "capabilities": [
+    "software.request.acceptance.compile.explicit.v1",
+    "software.request.acceptance.execute.explicit.v1"
+  ],
+  "artifacts": {
+    "compiler": {
+      "path": "canonical/runtime/bound_capabilities/software_request_acceptance_compile_v1.py",
+      "git_blob_sha": "ce806d2e7be26adf7ff17160fb670e888e6ede94",
+      "sha256": "07d9814ddf0b22f59252ea72ef8dcbe89786863054d12fcec3643fae3d5538ef"
+    },
+    "executor": {
+      "path": "canonical/runtime/bound_capabilities/software_request_acceptance_execute_v1.py",
+      "git_blob_sha": "c4ac67437d10054f027a5f718ae5ea59aef43782",
+      "sha256": "e705d41eb69acdd2dd77d687948e187031e0fe56ccc3c8a86f8cbf287c3ff18d"
+    },
+    "tests": {
+      "path": "canonical/tests/test_software_request_acceptance_v1.py",
+      "git_blob_sha": "bede013901d48c8832b6e1b4d74181d181234aa7",
+      "sha256": "2ab4889ff79d9f7d025f104a81269a4aa120ed08eddb95792e416d1dc90baecb"
+    }
+  },
+  "carriers": [
+    {
+      "name": "brain-capability-first-scheduler-verify-20261008-v1",
+      "focused_tests": "12/12 PASS"
+    },
+    {
+      "name": "brain-canonical-apply-slice-verify-20261011-v1",
+      "focused_tests": "12/12 PASS",
+      "additional_falsification": "6/6 PASS",
+      "canonical_layout_replay": "12/12 PASS"
+    }
+  ],
+  "proved": [
+    "EXPLICIT_BACKTICK_PYTHON_CALL_RETURN_REQUIREMENT_TO_BOUND_EXECUTABLE_PREDICATE",
+    "EXPLICIT_BACKTICK_PYTHON_CALL_RAISE_REQUIREMENT_TO_BOUND_EXECUTABLE_PREDICATE",
+    "EXPLICIT_REPOSITORY_LOCAL_FILE_EXISTENCE_AND_NONEXISTENCE_REQUIREMENTS",
+    "UNIQUE_OR_MODULE_HINTED_TOP_LEVEL_FUNCTION_BINDING_FAILS_CLOSED_ON_AMBIGUITY",
+    "MULTIPLE_EXPLICIT_OBLIGATIONS_ON_ONE_LINE_ARE_NOT_COLLAPSED",
+    "UNSUPPORTED_OR_UNDERSEGMENTED_NORMATIVE_AND_DECLARATIVE_BEHAVIOR_BLOCKS_ACCEPTANCE",
+    "EXISTING_TEST_EVIDENCE_CANNOT_CLOSE_A_SPECIFICATION_HOLE",
+    "BOUND_PREDICATE_FAILURE_IS_DETECTED",
+    "ZERO_EXTERNAL_RUNTIME_COGNITION",
+    "ZERO_INCREMENTAL_SPEND"
+  ],
+  "hard_nonclaims": [
+    "NO_ARBITRARY_NATURAL_LANGUAGE_SPECIFICATION_COMPLETENESS",
+    "NO_GENERAL_SEMANTIC_INTERPRETATION_AUTHORITY",
+    "NO_REPAIR_LOOP_GUIDANCE_OR_STOPPING_INTEGRATION_YET",
+    "NO_GENERAL_PATCH_CORRECTNESS_OR_MERGEABILITY_PROOF",
+    "NO_FRONTIERCODE_SCORE_OR_ACCEPTANCE_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_score_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
