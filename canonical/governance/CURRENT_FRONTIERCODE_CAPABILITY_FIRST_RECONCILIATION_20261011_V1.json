@@ -143,7 +143,7 @@
       },
       {
         "capability_id": "python.software.repair.semantic_acceptance.v1",
-        "registry_git_blob_sha": "22824833b4c1d25c4a80cc3d67956bf1fa2f1bea",
+        "registry_git_blob_sha": "256186c0bc83944e4ff945876835681f3bea22e7",
         "runtime_git_blob_sha": "85b517117d537990bf3d7ae8205c8c71bc264a76",
         "semantic_cells_git_blob_sha": "7358dcd9fbcca68724c72b53411628fceb9a96d0",
         "acceptance_union_git_blob_sha": "5080a04c1e00428816046bae45afe209184244fd",
@@ -156,7 +156,7 @@
       },
       {
         "capability_id": "python.software.request.semantic_behavior.compile.v1",
-        "registry_git_blob_sha": "22824833b4c1d25c4a80cc3d67956bf1fa2f1bea",
+        "registry_git_blob_sha": "256186c0bc83944e4ff945876835681f3bea22e7",
         "runtime_git_blob_sha": "3f4e23ab91e4b79c1e12ce8e1e3f0c985336ef31",
         "test_git_blob_sha": "4f268918039e2b6e13ee73133dad46c4b3cc1165",
         "independent_replay": "canonical/verification/PYTHON_SOFTWARE_REQUEST_SEMANTIC_ACCEPTANCE_V9_VERIFY_20261011_V1.json",
