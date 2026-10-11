@@ -1,0 +1,100 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_V81_REPAIRED_SUCCESSOR_EXECUTION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "VERIFIED_REPAIRED_SUCCESSOR__DURABLE_LIBRARY_ARTIFACT__CANONICAL_PROMOTION_CANDIDATE",
+  "subject": {
+    "canonical_predecessor_version": "V78",
+    "canonical_predecessor_manifest_sha256": "e4e5e57c5c41f738ced105271d4e4bb907eaa1afe33e01788204009d49315f60",
+    "manifest_sha256": "c06813a7a46bb8dcbd172d4de02a3ba432408efa355971a6373f765b1d99a021",
+    "python_files": 277,
+    "durable_files": 278,
+    "raw_python_source_bytes": 1574321,
+    "B_exec_raw_python_source_bytes": 1577081,
+    "raw_delta_vs_canonical_v78_bytes": -14885,
+    "rebuild_script": "canonical/research/bytes/tools/rebuild_v81_from_v78.py",
+    "rebuild_script_sha256": "ac2ed4fd62d630b5837c4eb6daeb619f97d512af5bacdc792d2ce2a0a28520ce",
+    "clean_room_reconstruction": "PASS__278_OF_278_DURABLE_FILES_BYTE_IDENTICAL"
+  },
+  "composition": [
+    {
+      "stage": "V79",
+      "path": "sympy/core/mul.py",
+      "mechanism": "TOKEN_COMPACTION_WITH_AST_IDENTITY_GUARD",
+      "manifest_sha256": "0a646be1990d7ed4cfe0b8cc918d2fae3856be6bdca0cec9e65a7002b434dea5",
+      "delta_bytes": -7923
+    },
+    {
+      "stage": "V80",
+      "path": "sympy/core/power.py",
+      "mechanism": "TOKEN_COMPACTION_WITH_AST_IDENTITY_GUARD",
+      "manifest_sha256": "11d1de653b4168c3d8bbba669ffb7d363d636f18accccb8531a84a8a3e9fd761",
+      "delta_bytes": -7071
+    },
+    {
+      "stage": "V81",
+      "path": "mpmath/ctx_mp_python.py::MPContext.convert",
+      "mechanism": "MINIMAL_INTEGER_CONVERSION_REPAIR",
+      "manifest_sha256": "c06813a7a46bb8dcbd172d4de02a3ba432408efa355971a6373f765b1d99a021",
+      "delta_bytes": 109
+    }
+  ],
+  "falsifier": {
+    "population_id": "QUAL_SUCCESSOR_NEXT85_20261011_V1",
+    "failing_global_one_based_index": 6725,
+    "op": "roots",
+    "p": [
+      4,
+      0,
+      4,
+      0,
+      5
+    ],
+    "expected_digest": "f97096b5e95d6526e039e184d7aa0bcd9ec689364071238e9bca5581ed13c1dc",
+    "V78": "NotImplementedError",
+    "V79": "NotImplementedError",
+    "V80": "NotImplementedError",
+    "V81": "RETURN_EXPECTED_DIGEST",
+    "root_cause": "INHERITED_CANONICAL_V78_CAPABILITY_DEFECT__MISSING_BUILTIN_INT_CONVERSION"
+  },
+  "qualification": {
+    "NEXT85": {
+      "cases": 21390,
+      "result": "21390/21390",
+      "spent": true
+    },
+    "NEXT86": {
+      "cases": 21620,
+      "corpus_sha256": "7a57b8aa3b2666e4f107dc1038d9adc6cfcd861a80edbe7914e09b1567ab8a69",
+      "result": "21620/21620",
+      "failures": 0,
+      "spent": true,
+      "exactly_once_execution_proved": false,
+      "nonproof_reason": "carrier timeouts caused receipt-missing shard replays without candidate mutation"
+    },
+    "NEXT87": {
+      "cases": 21850,
+      "corpus_sha256": "f63d6eb3d8d556cf61b012e04715f1073a2c3e0a8a6d5f5cd36dc4e99396568f",
+      "status": "FROZEN_UNSPENT",
+      "spent": false
+    }
+  },
+  "durable_archive": {
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V81_REPAIRED_SUCCESSOR_20261011_V1.tar.xz",
+    "library_file_id": "libfile_02e90850fd5c8191bc3978930a598adb",
+    "bytes": 263396,
+    "sha256": "48ef04c2137a5af4a5bfc61e860b4caab84e90cd34dbffc29a3a2ccf92d5288c"
+  },
+  "source_library_receipt": {
+    "path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V81_REPAIRED_SUCCESSOR_EXECUTION_20261011_V1.json",
+    "library_file_id": "libfile_ccbc651b36d8819190a95680327bd3e0"
+  },
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "acceptance_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "hard_nonclaims": [
+    "NO_UNIVERSAL_SYMPY_MPMATH_EQUIVALENCE",
+    "NO_EXACTLY_ONCE_NEXT86_EXECUTION_PROOF",
+    "NO_TERMINAL_CAPABILITY_CREDIT"
+  ]
+}
