@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_SCALE_ROW29_OUTPUT_FREEZE_20261011_V1",
+  "date": "2026-10-11",
+  "status": "OUTPUTS_FROZEN_BEFORE_ANY_POSTFREEZE_EVALUATION__ZERO_SCORE_CREDIT",
+  "benchmark": "GDPval-AA v2.1",
+  "row_idx": 29,
+  "task_id": "4c18ebae-dfaa-4b76-b10c-61fcdf26734c",
+  "precommit_commit": "1bdac6c8e4dae4f5624e5e30afeb380f085e3a65",
+  "outputs": [
+    {
+      "role": "PRIMARY_DOCX",
+      "sha256": "559c676f207b7c28d39cb0dc5a1c58eaa76c8905ed061c54a8d278bfd062903c",
+      "bytes": 40582,
+      "render_pages": 2,
+      "visual_check": "PASS"
+    },
+    {
+      "role": "SUPPORTING_XLSX",
+      "sha256": "2cde5d02ed0fe7a61037c0a1bed6dee362597d788b3eb4e97f05886bdf0a763a",
+      "bytes": 55026,
+      "source_preservation": "BYTE_IDENTICAL"
+    }
+  ],
+  "exposure_at_freeze": {
+    "rubric": false,
+    "gold": false,
+    "other_model_output": false,
+    "judge_feedback": false
+  },
+  "retrieval_boundary": "OFFICIAL_REFERENCE_BYTES_AND_PROMPT_SUPPLIED_FIRST_PARTY_GUIDANCE_ONLY__NO_GENERIC_SEARCH",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
