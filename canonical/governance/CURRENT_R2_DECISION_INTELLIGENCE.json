@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_R2_DECISION_INTELLIGENCE_POINTER_V1",
-  "date": "2026-10-10",
-  "status": "ACTIVE_CURRENT_R2_AUTHORITY__V87__FORTY_DIRECT_ROUTES__THIRTY_SIX_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__DERIVED_TYPED_TERMINAL_SIGNATURES_ROUTE_BOUND__MREL_NECESSARY_PROPERTY_AUTHORITY_BOUND__LOSS_CUSHION_MREL_BOUND_FRONTIER_REPAIRED__LOSS_CUSHION_TLAC_MREL_PAIR_RECOMPOSITION_BOUND__LOSS_CUSHION_CCOB_CCYB_MREL_PAIR_REVALIDATION_BOUND__TLAC_MREL_SHARED_SIGNATURE_NONSEPARATION_AND_BOUNDED_IDENTITY_DISCRIMINATOR_BOUND__OEWN_DECISION_MANIFEST_LATTICE_LIVE_DYNAMIC_ROUTE_BOUND__REGCAP_NO_DESCRIPTOR_DIRECT_SIGNATURE_CONTEXT_BOUND__SCOPED_DOMAIN_EQUIVALENCE_INTERNALIZED__MARGIN_CONTEXT_IDENTITY_LIVE_BOUND__REGCAP_FACET_ROLE_LIVE_BOUND__REGCAP_DEFINITE_BUFFER_REFERENCE_LIVE_BOUND__SPREAD_RELATION_IDENTITY_LIVE_BOUND__REGCAP_MREL_NO_DESCRIPTOR_PAIR_DOMAIN_TRUTH_BOUND__FOUR_WAY_SHARED_LOSS_ABSORPTION_NONSEPARATION_BOUND__FOUR_WAY_MINIMUM_INFORMATION_ROUTING_BOUND__ALL_PAIRS_MREL_CONTEXT_LIFT_BOUND__V7_LIVE_TRUTH_DISPATCH_BOUND__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_REMAINS__FOUR_WAY_GOVERNING_REQUIREMENT_ONE_OBSERVATION_REQUEST_BOUND__V7_REQUEST_LIFECYCLE_COHERENT__REGCAP_TRUTH_TYPED_NEXT_INFORMATION_REQUEST_BOUND__P3_CONTROLLER_CONCRETE_TRUTH_REQUEST_PROPAGATION_BOUND__FIXED_POINT_MONOTONIC_BOUND_TRUTH_ORIGIN_REPAIR_BOUND__BOUND_TRUTH_REENTRY_CONSUMPTION_VERIFIED__CHECKER_OWNED_RAW_SOURCE_INGESTION_RESTORED",
+  "date": "2026-10-11",
+  "status": "ACTIVE_CURRENT_R2_AUTHORITY__V90__FORTY_DIRECT_ROUTES__THIRTY_SIX_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__DERIVED_TYPED_TERMINAL_SIGNATURES_ROUTE_BOUND__MREL_NECESSARY_PROPERTY_AUTHORITY_BOUND__LOSS_CUSHION_MREL_BOUND_FRONTIER_REPAIRED__LOSS_CUSHION_TLAC_MREL_PAIR_RECOMPOSITION_BOUND__LOSS_CUSHION_CCOB_CCYB_MREL_PAIR_REVALIDATION_BOUND__TLAC_MREL_SHARED_SIGNATURE_NONSEPARATION_AND_BOUNDED_IDENTITY_DISCRIMINATOR_BOUND__OEWN_DECISION_MANIFEST_LATTICE_LIVE_DYNAMIC_ROUTE_BOUND__REGCAP_NO_DESCRIPTOR_DIRECT_SIGNATURE_CONTEXT_BOUND__SCOPED_DOMAIN_EQUIVALENCE_INTERNALIZED__MARGIN_CONTEXT_IDENTITY_LIVE_BOUND__REGCAP_FACET_ROLE_LIVE_BOUND__REGCAP_DEFINITE_BUFFER_REFERENCE_LIVE_BOUND__SPREAD_RELATION_IDENTITY_LIVE_BOUND__REGCAP_MREL_NO_DESCRIPTOR_PAIR_DOMAIN_TRUTH_BOUND__FOUR_WAY_SHARED_LOSS_ABSORPTION_NONSEPARATION_BOUND__FOUR_WAY_MINIMUM_INFORMATION_ROUTING_BOUND__ALL_PAIRS_MREL_CONTEXT_LIFT_BOUND__V8_LIVE_TRUTH_DISPATCH_BOUND__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_REMAINS__FOUR_WAY_GOVERNING_REQUIREMENT_ONE_OBSERVATION_REQUEST_BOUND__V7_REQUEST_LIFECYCLE_COHERENT__REGCAP_TRUTH_TYPED_NEXT_INFORMATION_REQUEST_BOUND__P3_CONTROLLER_CONCRETE_TRUTH_REQUEST_PROPAGATION_BOUND__FIXED_POINT_MONOTONIC_BOUND_TRUTH_ORIGIN_REPAIR_BOUND__BOUND_TRUTH_REENTRY_CONSUMPTION_VERIFIED__CHECKER_OWNED_RAW_SOURCE_INGESTION_RESTORED__TYPED_FOUR_WAY_REGCAP_AUTHORITY_CANDIDATE_TO_CHECKER_CONSUMPTION_BOUND",
   "mission_objective": {
     "path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json"
   },
@@ -12,7 +12,7 @@
   "controller": {
     "path": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
     "authority_kernel": "canonical/runtime/general_adequate_decision_controller_v1.py",
-    "authority_kernel_git_blob_sha": "29872fc55a5ec577feea769cc919dc889899c2bd",
+    "authority_kernel_git_blob_sha": "b5c609eb902cd0ea21d81710588dd538aa05cb4f",
     "fixed_point_git_blob_sha": "7c6b28754fa8851f220395df1615dd6afe193b3a",
     "fixed_point_native_control_policy_total": true,
     "fixed_point_regression_test_path": "canonical/tests/test_general_adequate_decision_fixed_point_v2.py",
@@ -240,7 +240,12 @@
     "bound_truth_payload_reverification_required": true,
     "bound_truth_reentry_consumption_verified": true,
     "bound_truth_reentry_requires_real_controller_reverification": true,
-    "bound_truth_reentry_provider_semantic_truth_authority": false
+    "bound_truth_reentry_provider_semantic_truth_authority": false,
+    "typed_four_way_regcap_authority_candidate_to_checker_materialization": true,
+    "typed_four_way_regcap_authority_candidate_original_predicate_identity_preserved": true,
+    "typed_four_way_regcap_authority_candidate_checker_owned_refetch": true,
+    "typed_four_way_regcap_authority_candidate_conflict_fail_closed": true,
+    "generic_unbound_retrieval_candidate_to_checker_materialization_closed": false
   },
   "judgment_model_policy": {
     "path": "canonical/governance/R2_BRAIN_OWNED_ADVISORY_JUDGMENT_POLICY_20261008_V1.json"
@@ -1402,7 +1407,7 @@
     "primary_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
     "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER",
     "state": "GENERAL_CONTROL_MECHANISM_CLOSED__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL__FORTY_DIRECT_ROUTES__THIRTY_SIX_BOUNDED_FAMILIES__DERIVED_TYPED_TERMINALS_REFINED__MREL_NECESSARY_PROPERTIES_REFINED__TLAC_MREL_NONSEPARATION_AND_BOUNDED_IDENTITY_DISCRIMINATOR_REFINED__OEWN_DECISION_MANIFEST_LATTICE_REFINED__GDPVAL_OWNER_RELATION_DORMANT__MARGIN_CONTEXT_IDENTITY_AND_REGCAP_FACET_ROLE_POSITIVE_SUBREGIONS_BOUND__REGCAP_BUFFER_REFERENCE_AND_SPREAD_RELATION_POSITIVE_SUBREGIONS_BOUND",
-    "rule": "REUSE_SOURCE_PROVED_OEWN_DECISION_MANIFEST_LATTICE_WHEN_CLOSED__REUSE_R2_V65_DERIVED_TYPED_TERMINALS_BEFORE_GENERIC_SIGNATURE_ACQUISITION__REUSE_MREL_ONE_WAY_ENTAILMENTS__REJECT_SHARED_TLAC_MREL_SIGNATURE_ALONE__REUSE_BOUND_TLAC_MREL_GOVERNING_REQUIREMENT_DISCRIMINATOR_IN_EXACT_PAIR_SCOPE__PRESERVE_OPEN_WORLD_RESIDUALS__ACQUIRE_ONLY_MINIMUM_POLICY_CHANGING_EVIDENCE__REUSE_LIVE_MARGIN_CONTEXT_IDENTITY_AND_REGCAP_FACET_ROLE_TRUTH_BEFORE_NEW_SEMANTIC_ACQUISITION__REUSE_LIVE_REGCAP_DEFINITE_BUFFER_REFERENCE_AND_SPREAD_RELATION_IDENTITY_BEFORE_NEW_SEMANTIC_ACQUISITION__REUSE_CONCRETE_FOUR_WAY_GOVERNING_REQUIREMENT_OBSERVATION_REQUEST_BEFORE_UNSCOPED_SEMANTIC_ACQUISITION__CONSUME_TRUTH_NEXT_INFORMATION_REQUEST_AS_ACQUIRE_MINIMUM_DECISION_INFORMATION__PRESERVE_CONCRETE_TRUTH_REQUEST_THROUGH_P3_AND_CONTROLLER__ALLOW_MONOTONIC_BOUND_TRUTH_ORIGIN_REPAIR_THEN_REVERIFY__AUTO_OBSERVE_EXACT_BOUND_SOURCE_WITH_SHA256_BEFORE_UNBOUND_DISCOVERY__AUTO_DISCOVER_DELEGATED_AUTHORITY_DOMAIN_CANDIDATE_BEFORE_EXTERNAL_MATERIALIZATION",
+    "rule": "REUSE_SOURCE_PROVED_OEWN_DECISION_MANIFEST_LATTICE_WHEN_CLOSED__REUSE_R2_V65_DERIVED_TYPED_TERMINALS_BEFORE_GENERIC_SIGNATURE_ACQUISITION__REUSE_MREL_ONE_WAY_ENTAILMENTS__REJECT_SHARED_TLAC_MREL_SIGNATURE_ALONE__REUSE_BOUND_TLAC_MREL_GOVERNING_REQUIREMENT_DISCRIMINATOR_IN_EXACT_PAIR_SCOPE__PRESERVE_OPEN_WORLD_RESIDUALS__ACQUIRE_ONLY_MINIMUM_POLICY_CHANGING_EVIDENCE__REUSE_LIVE_MARGIN_CONTEXT_IDENTITY_AND_REGCAP_FACET_ROLE_TRUTH_BEFORE_NEW_SEMANTIC_ACQUISITION__REUSE_LIVE_REGCAP_DEFINITE_BUFFER_REFERENCE_AND_SPREAD_RELATION_IDENTITY_BEFORE_NEW_SEMANTIC_ACQUISITION__REUSE_CONCRETE_FOUR_WAY_GOVERNING_REQUIREMENT_OBSERVATION_REQUEST_BEFORE_UNSCOPED_SEMANTIC_ACQUISITION__CONSUME_TRUTH_NEXT_INFORMATION_REQUEST_AS_ACQUIRE_MINIMUM_DECISION_INFORMATION__PRESERVE_CONCRETE_TRUTH_REQUEST_THROUGH_P3_AND_CONTROLLER__ALLOW_MONOTONIC_BOUND_TRUTH_ORIGIN_REPAIR_THEN_REVERIFY__AUTO_OBSERVE_EXACT_BOUND_SOURCE_WITH_SHA256_BEFORE_UNBOUND_DISCOVERY__AUTO_DISCOVER_DELEGATED_AUTHORITY_DOMAIN_CANDIDATE_BEFORE_EXTERNAL_MATERIALIZATION__REUSE_V90_TYPED_FOUR_WAY_AUTHORITY_CANDIDATE_CONSUMPTION_BEFORE_REQUESTING_NEW_GENERIC_MATERIALIZATION",
     "direct_route_count": 40,
     "bounded_family_count": 36
   },
@@ -2672,7 +2677,7 @@
     "terminal_credit_delta": 0
   },
   "regcap_loss_cushion_truth_v5_live_binding": {
-    "status": "LIVE__SEMANTIC_TRUTH_DISPATCH_NOW_BINDS_V5_CERTIFICATE_TO_V7_GROUNDING__ZERO_CREDIT",
+    "status": "SUPERSEDED__V6_CERTIFICATE_AND_V8_GROUNDING_NOW_LIVE__V5_CHECKED_PREDICATE_IDENTITY_FUNCTION_PRESERVED",
     "truth_kind": "REGCAP_LOSS_CUSHION_GROUNDING",
     "truth_certificate_path": "canonical/runtime/regcap_loss_cushion_truth_certificate_v5.py",
     "truth_certificate_git_blob_sha": "657d5c04bba76cf1806e12ae1e29df2c79b3a8cc",
@@ -2694,7 +2699,8 @@
     "typed_next_information_request_field": "next_information_request",
     "typed_next_required_edge": "REGCAP_LOSS_CUSHION_MINIMUM_POLICY_CHANGING_INFORMATION",
     "typed_next_information_verification_path": "canonical/verification/R2_TRUTH_NEXT_INFORMATION_REQUEST_VERIFY_20261010_V1.json",
-    "typed_next_information_verification_git_blob_sha": "777b5733a8fd8bd5b5dd7b34347e5e9118c493a3"
+    "typed_next_information_verification_git_blob_sha": "777b5733a8fd8bd5b5dd7b34347e5e9118c493a3",
+    "superseded_by": "regcap_loss_cushion_truth_v6_live_binding"
   },
   "r2_v81_live_v7_truth_dispatch_reconciliation": {
     "status": "RECONCILED__V80_CAPABILITY_NOW_REACHABLE_THROUGH_CANONICAL_SEMANTIC_TRUTH_FRONT_DOOR__ONE_PRIMARY_RESIDUAL_REMAINS__ZERO_CREDIT",
@@ -2761,14 +2767,15 @@
   "general_adequate_decision_truth_request_propagation": {
     "status": "LIVE__CONCRETE_TRUTH_REQUEST_PRESERVED_INSIDE_STANDARD_MINIMUM_INFORMATION_PACKET__ZERO_CREDIT",
     "runtime_path": "canonical/runtime/general_adequate_decision_controller_v1.py",
-    "runtime_git_blob_sha": "3737baedb87c6b4212ba55826b7f58d2955920c7",
+    "runtime_git_blob_sha": "b5c609eb902cd0ea21d81710588dd538aa05cb4f",
     "tests_path": "canonical/tests/test_general_adequate_decision_controller_v1.py",
     "tests_git_blob_sha": "f23f30976ea62675c4c5b135f5dfcbe785e52dd5",
     "concrete_request_field": "truth_next_information_request",
     "concrete_request_candidates_field": "truth_next_information_request_candidates",
     "concrete_required_edge_field": "truth_next_required_edge",
     "provider_semantic_truth_authority": false,
-    "terminal_credit_delta": 0
+    "terminal_credit_delta": 0,
+    "typed_four_way_authority_candidate_reentry_live": true
   },
   "r2_v84_p3_controller_truth_request_propagation_reconciliation": {
     "status": "RECONCILED__V83_TYPED_TRUTH_REQUEST_PRESERVED__P3_AND_CONTROLLER_NOW_KEEP_CONCRETE_REQUEST_PAYLOAD__FIXED_POINT_STANDARD_INFORMATION_ACTION_REUSED__ONE_PRIMARY_FINANCE_RESIDUAL_REMAINS__ZERO_CREDIT",
@@ -2871,8 +2878,7 @@
     "global_open_world_closure_delta": false,
     "acceptance_credit_delta": 0,
     "terminal_credit_delta": 0
-  }
-,
+  },
   "r2_v89_authority_domain_discovery_reconciliation": {
     "status": "RECONCILED__V88_BOUND_SOURCE_ACQUISITION_PRESERVED__DELEGATED_AUTHORITY_DOMAIN_DISCOVERY_NOW_DEFAULT_AUTONOMOUS_CANDIDATE_ONLY__MATERIALIZATION_REMAINS_OPEN__ZERO_CREDIT",
     "prior_version": "V88",
@@ -2893,6 +2899,45 @@
     "global_open_world_closure_delta": false,
     "acceptance_credit_delta": 0,
     "terminal_credit_delta": 0
+  },
+  "regcap_loss_cushion_truth_v6_live_binding": {
+    "status": "LIVE__V6_CERTIFICATE_BINDS_V8_GROUNDING__EXACT_V5_CHECKED_PREDICATE_IDENTITY_PRESERVED__ZERO_CREDIT",
+    "truth_kind": "REGCAP_LOSS_CUSHION_GROUNDING",
+    "truth_certificate_path": "canonical/runtime/regcap_loss_cushion_truth_certificate_v6.py",
+    "truth_certificate_git_blob_sha": "cabab00d1af35755424d7231ac9459750f3b8713",
+    "grounding_path": "canonical/runtime/loss_absorbing_cushion_regcap_grounding_v8.py",
+    "grounding_git_blob_sha": "2bda846def2f69380725bad107a6e148d93bae4a",
+    "dispatcher_path": "canonical/runtime/semantic_truth_dispatch_v1.py",
+    "dispatcher_git_blob_sha": "7670414b0188764c3e72b7f88002e319efee9bb2",
+    "candidate_adapter_path": "canonical/runtime/r2_regcap_authority_candidate_adapter_v1.py",
+    "candidate_adapter_git_blob_sha": "2ab15ccca4de3fbe6d322d80689d8a43d5166545",
+    "candidate_observer_path": "canonical/runtime/regcap_four_way_authority_candidate_observation_v1.py",
+    "candidate_observer_git_blob_sha": "13a501a497b0078a61db6b3be0f8b197f559fc9a",
+    "exact_v5_checked_predicate_identity_preserved": true,
+    "provider_semantic_truth_authority": false,
+    "generic_unbound_materialization_closed": false,
+    "finance_tail_closed": false,
+    "terminal_credit_delta": 0
+  },
+  "r2_v90_four_way_authority_candidate_consumption_reconciliation": {
+    "status": "RECONCILED__V89_DISCOVERY_PRESERVED__TYPED_FOUR_WAY_REGCAP_CANDIDATE_TO_CHECKER_SEAM_CLOSED__GENERIC_MATERIALIZATION_REMAINS_OPEN__ONE_PRIMARY_FINANCE_RESIDUAL_REMAINS__ZERO_CREDIT",
+    "prior_version": "V89",
+    "current_version": "V90",
+    "reconciliation_path": "canonical/governance/R2_V90_FOUR_WAY_AUTHORITY_CANDIDATE_CONSUMPTION_RECONCILIATION_20261011_V1.json",
+    "reconciliation_git_blob_sha": "57b88ec5a11013b83b2bd0efc170c947784c73f9",
+    "verification_path": "canonical/verification/R2_AUTHORITY_CANDIDATE_FOUR_WAY_CONSUMPTION_VERIFY_20261011_V1.json",
+    "verification_git_blob_sha": "7979a84040c392bee05b502238e1bf23549dc9d0",
+    "merge_commit": "d6bf7e01f6d2edc1171d4faa7fe722b7696b5dcc",
+    "focused_remote_authored_tests": "20_OF_20_PASS",
+    "typed_four_way_regcap_candidate_to_checker_materialization_closed": true,
+    "generic_unbound_retrieval_candidate_to_checker_materialization_closed": false,
+    "original_predicate_identity_preserved": true,
+    "checker_owned_refetch": true,
+    "provider_semantic_truth_authority": false,
+    "live_external_finance_fact_bound": false,
+    "finance_tail_closed": false,
+    "global_open_world_closure_delta": false,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
   }
-
 }
