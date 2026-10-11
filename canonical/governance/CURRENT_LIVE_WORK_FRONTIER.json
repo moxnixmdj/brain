@@ -2,7 +2,7 @@
   "schema": "PROJECT_BRAIN_CURRENT_LIVE_WORK_FRONTIER_V1",
   "date": "2026-10-11",
   "status": "CURRENT_PROFESSIONAL_24_OF_24__FULL_PRIVATE_REGRESSION_GATE_OPEN__GITHUB_HOSTED_ACTIONS_BILLING_OR_SPENDING_LIMIT_PRESTART_BLOCK__12_CHECKPOINT_ROWS_WAKE_GATED__CAPABILITY_FIRST_AND_RESOURCE_PARETO_WORK_PRIMARY__ZERO_CREDIT__CODING_CAPABILITY_FIRST_ACTIVE",
-  "frontier_id": "LIVE_WORK_FRONTIER_20261011_PROF_PROPERTY_24_OF_24_V29",
+  "frontier_id": "LIVE_WORK_FRONTIER_20261011_PROF_PROPERTY_24_OF_24_V30",
   "scope": {
     "base_main_commit": "8916f4b00768329eb101be88ad6effbfd3704d67",
     "completeness_semantics": "COMPLETE_FOR_EXPLICIT_CURRENT_ACTIONABLE_OR_SCHEDULABLE_WORK_EXPOSED_BY_THE_BOUND_CURRENT_AUTHORITY_SOURCES__NOT_COMPLETE_FOR_UNKNOWN_FUTURE_WORK_OR_UNDISCOVERED_CAPABILITIES",
@@ -80,39 +80,37 @@
   ],
   "candidates": [
     {
-      "work_id": "CODING_SOFTWARE_TASK_REPAIR_ORCHESTRATOR_V1",
-      "work_type": "CAPABILITY_BUILD",
+      "work_id": "CODING_FRESH_NON_BENCHMARK_QUALIFICATION_V1",
+      "work_type": "CAPABILITY_QUALIFICATION",
       "frontier_class": "GENERAL_SOFTWARE_ENGINEERING",
       "source": "canonical/governance/CURRENT_FRONTIERCODE_CAPABILITY_FIRST_RECONCILIATION_20261011_V1.json",
-      "causal_role": "COMPOSE_VERIFIED_EXPLICIT_TASK_ACCEPTANCE_WITH_VERIFIED_MULTI_FILE_REPAIR_INTO_ONE_FAIL_CLOSED_END_TO_END_PATH",
-      "readiness": "READY_EXECUTION__ACCEPTANCE_COMPILER_AND_MULTI_FILE_TWO_EDIT_REPAIR_LOOP_TWO_CARRIER_VERIFIED",
-      "claims_new_primitive": true,
+      "causal_role": "QUALIFY_FROZEN_END_TO_END_CODING_PIPELINE_ON_FRESH_NON_BENCHMARK_TASKS_AND_USE_COUNTEREXAMPLES_TO_DRIVE_NEXT_GENERALIZATION",
+      "readiness": "READY_EXECUTION__END_TO_END_ORCHESTRATOR_TWO_CARRIER_VERIFIED",
+      "claims_new_primitive": false,
       "score_state": "NOT_A_BENCHMARK_SCORE_TASK",
       "scheduler_state": "READY_EXECUTION",
       "prerequisites_satisfied": true,
       "prerequisite_work_ids": [],
       "mutation_keys": [
-        "canonical:coding-capability"
+        "canonical:coding-qualification"
       ],
       "authority_keys": [
         "authority:coding-capability-first"
       ],
       "explicit_conflict_work_ids": [],
       "evidence_conflict_keys": [],
-      "evidence_acquisition_mode": "READ_ONLY",
+      "evidence_acquisition_mode": "FRESH_LOCAL_FIXTURES",
       "vector_evidence_state": "PARTIAL",
       "vector_evidence": {},
       "read_only_evidence": {
         "capability_frontier_path": "canonical/governance/CURRENT_FRONTIERCODE_CAPABILITY_FIRST_RECONCILIATION_20261011_V1.json",
-        "capability_frontier_git_blob_sha": "bddfa6bbad23bd4167c653925d0196b0af02a3be",
-        "registry_git_blob_sha": "54f25876128ed4d629321c6fd756592b925ee1fa",
-        "acceptance_capability": "python.software_task.acceptance.explicit_tests.v1",
-        "repair_capability": "python.repair.loop.test_guided.ast.v1",
+        "orchestrator_capability": "python.software_task.repair.explicit_tests.v1",
+        "orchestrator_verification": "canonical/verification/SOFTWARE_TASK_REPAIR_ORCHESTRATOR_V1_VERIFY_20261011.json",
         "model_dependency_count": 0,
         "incremental_spend_usd": 0,
         "frontiercode_score_credit": 0
       },
-      "ready": "BUILD_SOFTWARE_TASK_REPAIR_ORCHESTRATOR_V1__BENCHMARK_REMAINS_AUDIT_ONLY"
+      "ready": "RUN_FRESH_NON_BENCHMARK_SOFTWARE_TASK_QUALIFICATION_V1"
     },
     {
       "work_id": "PROFESSIONAL_QUALITY_V7_PROPERTY_TRUTH_DEPLETION",
