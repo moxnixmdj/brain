@@ -66,6 +66,8 @@ REQUIRED_TRUE = (
     "runtime_cognition_credit_guard_terminal_closure_binding_required",
     "runtime_cognition_credit_guard_ownership_promotion_binding_required",
     "runtime_cognition_credit_guard_final_cleanroom_binding_required",
+    "runtime_cognition_credit_guard_kstar_promotion_binding_required",
+    "runtime_cognition_credit_guard_global_ownership_binding_required",
     "local_runner_for_cognition_governance_forbidden",
 )
 
@@ -80,6 +82,8 @@ REQUIRED_BINDINGS = {
     "canonical/runtime/terminal_closure_reducer.py": 2,
     "canonical/runtime/ownership_promotion_compiler_v1.py": 1,
     "canonical/runtime/final_terminal_cleanroom_gate_v1.py": 1,
+    "canonical/runtime/terminal_global_ownership_postconditions_reducer_v1.py": 1,
+    "canonical/runtime/terminal_kstar_promotion_bridge_v1.py": 1,
 }
 
 REQUIRED_PRECEDENCE = [
