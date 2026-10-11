@@ -208,14 +208,15 @@
         "VERIFY_EXISTING"
       ],
       "current_authority": "canonical/governance/CURRENT_ESCAPE_TWO_ENGINE_MINIMUM_DELTA_CUT_20261011_V1.json",
-      "current_truth": "CURRENT_13_ESCAPE_ACCEPTANCE_FRONTIER__O11_ACTIVE__Q1_ACTIVE__GDPVAL_FIXED_BAR_E1_RECLASSIFIED_Q_TO_O__AA_BRIEFCASE_ONLY_PRIMARY_Q_ROW__ROW_PROOF_INSTANTIATIONS_OPEN__ZERO_CREDIT",
+      "current_truth": "CURRENT_13_ESCAPE_ACCEPTANCE_FRONTIER__O11_ACTIVE__Q1_ACTIVE__GDPVAL_FIXED_BAR_E1_RECLASSIFIED_Q_TO_O__CURRENT_O_EXECUTOR_V2_ALIGNED_AND_REMOTE_REPLAY_VERIFIED__AA_BRIEFCASE_ONLY_PRIMARY_Q_ROW__ROW_PROOF_INSTANTIATIONS_OPEN__ZERO_CREDIT",
       "existing_mechanisms": [
         "COVERAGE_COMPLETENESS_ROOT_CERTIFICATES",
         "SCOPE_COMPLETE_POLICY_ADEQUACY_COVER",
         "OBSERVABLE_POLICY_COVER_TOTALITY",
         "GAP_A_POLICY_COVER_REALIZATION_ADAPTER",
         "PROFESSIONAL_QUALITY_SCOPED_EVIDENCE_AND_SAME_SUBJECT_COMPOSITION",
-        "DIRECT_END_TO_END_ADEQUACY_CERTIFICATES"
+        "DIRECT_END_TO_END_ADEQUACY_CERTIFICATES",
+        "CURRENT_PROJECTION_AWARE_O_GATE_AND_SEARCH_V2"
       ],
       "exact_remaining_class": "SHARED_O_AND_Q_LAWS_BOUND__ELEVEN_ACTIVE_O_ROWS_USE_OBJECTIVE_ACCEPTANCE_INSTANTIATION__ONE_ACTIVE_Q_ROW_AA_BRIEFCASE_REQUIRES_MATCHED_EPOCH_RESULT_OR_SCOPE_COMPLETE_ROBUST_COMMON_POLICY_CERTIFICATE__GDPVAL_OWNER_PAIRWISE_RELATION_IS_DORMANT_ALTERNATIVE_NOT_PRIMARY",
       "new_primitive_status": "NOT_ESTABLISHED__SHARED_O_Q_TERMINAL_ACCEPTANCE_PRIMITIVES_ALREADY_BOUND__INSTANTIATE_EXISTING_PROOF_MACHINERY",
@@ -238,6 +239,13 @@
         "path": "canonical/verification/GDPVAL_Q_TO_O_CURRENT_PARTITION_CONNECTOR_AND_SPRITE_VERIFY_20261011_V1.json",
         "git_blob_sha": "c7fe3df4c0a01021ad61d586d362f83dd1d6a4a7",
         "result": "PASS__13_EQUALS_11O_PLUS_1Q_PLUS_1PARKED"
+      },
+      "o_executor_currentness": {
+        "gate": "canonical/runtime/current_escape_o_objective_acceptance_law_gate_v2.py",
+        "search": "canonical/runtime/current_escape_o_proof_instantiation_search_v2.py",
+        "verification": "canonical/verification/CURRENT_O_PROJECTION_GATE_V2_VERIFY_20261011_V1.json",
+        "verification_git_blob_sha": "2210f23a9691ddd2b848fecdb62137998d54e559",
+        "current_projection_replay": "12_OF_12_PASS"
       }
     },
     {
@@ -703,7 +711,11 @@
       "r1_workflow_repair_is_separate_carrier": true
     },
     "gdpval_fixed_bar_engine_reclassification": "canonical/governance/GDPVAL_CURRENT_FIXED_BAR_ENGINE_RECLASSIFICATION_20261011_V1.json",
-    "gdpval_q_to_o_partition_verification": "canonical/verification/GDPVAL_Q_TO_O_CURRENT_PARTITION_CONNECTOR_AND_SPRITE_VERIFY_20261011_V1.json"
+    "gdpval_q_to_o_partition_verification": "canonical/verification/GDPVAL_Q_TO_O_CURRENT_PARTITION_CONNECTOR_AND_SPRITE_VERIFY_20261011_V1.json",
+    "current_o_executor_v2": {
+      "verification_git_blob_sha": "2210f23a9691ddd2b848fecdb62137998d54e559",
+      "result": "PASS__12_OF_12__GDPVAL_O__AA_Q__TB_PARKED__ZERO_CREDIT"
+    }
   },
   "current_source_binding_law": {
     "mutable_current_authorities": "CANONICAL_PATH_IDENTITY_AUTHORITATIVE__OBSERVED_BLOB_IS_DIAGNOSTIC_ONLY__RECHECK_CURRENT_BYTES_BEFORE_SCHEDULING_OR_TRUTH_CLAIM",
