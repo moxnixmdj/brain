@@ -10,6 +10,9 @@ class DNAStorageTaskKernelV1Tests(unittest.TestCase):
         c=k.classify_contract("Implement a DNA storage codec as /results/codec.py.",["/results"])
         d=k.classify_contract("Fit a stellar spectrum.",["/results"])
         self.assertEqual(a['mode'],'encode'); self.assertEqual(b['mode'],'decode'); self.assertEqual(c['mode'],'implementation'); self.assertFalse(d['supported'])
+        e=k.classify_contract("Implement a DNA storage codec that encodes bytes and decodes noisy reads as /results/codec.py.",["/results"])
+        f=k.classify_contract("Encode then decode /data/payload.bin using DNA storage and save outputs in /results.",["/results"])
+        self.assertEqual(e['mode'],'implementation'); self.assertEqual(f['mode'],'roundtrip')
 
     def test_encode_synthetic_task(self):
         with tempfile.TemporaryDirectory() as td:
