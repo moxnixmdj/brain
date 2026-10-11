@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_ESCAPE_O11_SPARSE_WORKSPACE_TRUTH_REPAIR_20261011_V1",
+  "date": "2026-10-11",
+  "status": "TRUTH_REPAIR__PREDECESSOR_170_FILE_SCAN_WAS_SPARSE_WORKSPACE_ONLY__REPOSITORY_WIDE_EXHAUSTION_INTERPRETATION_REVOKED__CURRENT_O11_Q1_PROJECTION_GATE_UNAFFECTED__ZERO_CREDIT",
+  "predecessor": {
+    "path": "canonical/verification/CURRENT_ESCAPE_O11_PROOF_INSTANTIATION_SEARCH_VERIFY_20261011_V1.json",
+    "git_blob_sha": "1c3d782908890aa683968f892e8288360b32bb8d",
+    "claimed_scan_file_count": 170,
+    "predecessor_subject_main_commit": "21ce41c63619dec25eb8ca8f34d8add33d1a34ef"
+  },
+  "falsifying_observation": {
+    "later_full_tree_observation_head": "00e29b1d95b30d259596ff3d3af9e932ef97fbdb",
+    "later_full_tree_sha": "bf41b6b35b85548f4af67ef0756f02df650f1c35",
+    "github_recursive_tree_truncated": false,
+    "github_blob_count": 12559,
+    "verifier_sprite": "brain-capability-first-scheduler-verify-20261008-v1",
+    "verifier_sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace_comparison": {
+      "exact_matching_tracked_blobs": 278,
+      "missing_tracked_blobs": 12248,
+      "mismatched_tracked_blobs": 33
+    }
+  },
+  "corrected_interpretation": {
+    "sound_claim": "THE_V1_SEARCH_EXECUTION_FOUND_ZERO_CANDIDATES_AMONG_THE_JSON_FILES_PRESENT_IN_THE_MATERIALIZED_SPARSE_VERIFIER_WORKSPACE_AT_EXECUTION_TIME",
+    "revoked_claim": "NO_EXISTING_CANONICAL_JSON_CLAIM_SPEC_EXISTS_ANYWHERE_IN_THE_FULL_CANONICAL_REPOSITORY",
+    "repository_wide_exhaustion_proved": false,
+    "old_scan_scheduler_exhaustion_authority": false
+  },
+  "current_authority_boundary": {
+    "current_partition": "O11_ACTIVE__Q1_ACTIVE__TB_PARKED",
+    "current_projection_gate_path": "canonical/verification/CURRENT_O_PROJECTION_GATE_V2_VERIFY_20261011_V1.json",
+    "current_projection_gate_git_blob_sha": "2210f23a9691ddd2b848fecdb62137998d54e559",
+    "current_o_search_runtime_path": "canonical/runtime/current_escape_o_proof_instantiation_search_v2.py",
+    "current_o_search_runtime_git_blob_sha": "30ba7cdaab11da93dad7f07dc1ce84dca579a611",
+    "current_membership_logic_depends_on_old_sparse_scan": false,
+    "acceptance_credit_from_old_scan": 0
+  },
+  "scheduler_effect": [
+    "DO_NOT_USE_THE_170_FILE_V1_SCAN_AS_REPOSITORY_WIDE_REUSE_EXHAUSTION",
+    "DO_NOT_REPEAT_A_FULL_REPOSITORY_SCAN_UNLESS_IT_IS_ON_A_COMPLETE_EXACT_CURRENT_TREE_AND_THE_RESULT_CAN_CHANGE_A_LIVE_DECISION",
+    "PRESERVE_CURRENT_O11_Q1_MEMBERSHIP_AND_REUSE_FIRST_GATES",
+    "NEW_PRIMITIVE_CLAIMS_STILL_REQUIRE_REAL_REUSE_EXHAUSTION_AND_EFFECT_DISTINGUISHING_EVIDENCE"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_A_READY_O_ROW_PROOF_EXISTS",
+    "NO_CLAIM_A_READY_O_ROW_PROOF_DOES_NOT_EXIST",
+    "NO_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

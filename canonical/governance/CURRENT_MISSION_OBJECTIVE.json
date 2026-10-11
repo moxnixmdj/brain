@@ -57,8 +57,8 @@
   },
   "current_residual_reuse_classification": {
     "path": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
-    "observed_git_blob_sha": "56a0a18bf5a51be60c60ef4015f7407f275e5d3b",
-    "status": "DERIVED_CURRENT_CLASSIFICATION__ESCAPE_TOPOLOGY_12_ACTIVE_ACQUISITION_PLUS_1_PARKED_TB__O11_Q1_TWO_ENGINE_CURRENTNESS_BOUND__NO_ACTIVE_GAP_B__PROFESSIONAL_PROPERTY_TRUTH_24_OF_24__REGRESSION_CARRIER_WAKE_GATED__ZERO_CREDIT"
+    "observed_git_blob_sha": "8086e42df231620a07823fca8a72cd4b47c9815e",
+    "status": "DERIVED_CURRENT_CLASSIFICATION__O11_Q1_TWO_ENGINE_CURRENTNESS_BOUND__HISTORICAL_O11_SPARSE_SCAN_TRUTH_REPAIRED__CHECKPOINT_ROWS_WAKE_GATED_ON_DECISION_CHANGING_REALITY__PROFESSIONAL_24_OF_24__ZERO_CREDIT"
   },
   "professional_whole_leaf_control": {
     "scope_batch_activation": "canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_SCOPE_BATCH_ACTIVATION_20261010_V1.json",
@@ -274,10 +274,10 @@
   },
   "current_escape_two_engine_minimum_delta_cut": {
     "path": "canonical/governance/CURRENT_ESCAPE_TWO_ENGINE_MINIMUM_DELTA_CUT_20261011_V1.json",
-    "observed_git_blob_sha": "b460c7386a2f7859f5c2c304f996d3c649e0acdf",
+    "observed_git_blob_sha": "5e60e7eeaa679d315438a39bf7a26d484b6b2095",
     "verification_path": "canonical/verification/CURRENT_ESCAPE_TWO_ENGINE_MINIMUM_DELTA_VERIFY_20261011_V2.json",
     "verification_git_blob_sha": "42d03bfc7a69009fa6c30bdcbadc4dc3359012c1",
-    "status": "CURRENT_ACTIVE_ESCAPE_COLLAPSED_TO_TWO_REUSE_ENGINES__O11_ACTIVE__Q1_ACTIVE__TB_PARKED__GDPVAL_FIXED_BAR_RECLASSIFIED_Q_TO_O__CURRENT_O_EXECUTOR_V2_ALIGNED__ZERO_CREDIT",
+    "status": "CURRENT_O11_Q1_PLUS_PARKED_TB__CURRENT_V2_EXECUTOR__HISTORICAL_SPARSE_SCAN_ZERO_EXHAUSTION_AUTHORITY__ZERO_CREDIT",
     "relation_to_row_specialization": "COMPRESSION_LAYER_ONLY__CURRENT_FRONTIER_REUSE_SPECIALIZATION_RETAINS_EXACT_ROW_DELTAS"
   },
   "r2_v91_independent_generic_materialization_replay": {
@@ -287,5 +287,23 @@
     "passed": 11,
     "internal_r2_mechanism_unsolved_count": 0,
     "terminal_credit_delta": 0
+  },
+  "current_frontier_reuse_specialization": {
+    "path": "canonical/governance/CURRENT_FRONTIER_REUSE_SPECIALIZATION_20261011_V1.json",
+    "observed_git_blob_sha": "173c4960d7d18d5061c2cf175bd3ef1054aea180",
+    "status": "CHECKPOINT_ROWS_WAKE_GATED_WHERE_NO_DECISION_CHANGING_CURRENT_INPUT__OSWORLD_DIRECT_ROUTE_DESERIALIZED__CAPACITY_RETURNS_TO_CAPABILITY_FIRST_GENERAL_DEVELOPMENT",
+    "authority": "SCHEDULER_SPECIALIZATION_ONLY__ZERO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  },
+  "osworld_direct_route_deserialization": {
+    "path": "canonical/governance/OSWORLD_REFERENCE_EQUIVALENCE_DESERIALIZATION_20261011_V1.json",
+    "observed_git_blob_sha": "e724c96a7d39046c312328e95d08d627d7c4cb12",
+    "independent_verification_path": "canonical/verification/OSWORLD_REFERENCE_EQUIVALENCE_DESERIALIZATION_INDEPENDENT_VERIFY_20261011_V1.json",
+    "independent_verification_git_blob_sha": "63062f4d09ebcb9b724a952a984e175854ab0779",
+    "status": "INDEPENDENTLY_VERIFIED__REFERENCE_EQUIVALENCE_AUXILIARY_NOT_SERIAL__DIRECT_OFFICIAL_BYTE_ROUTE_WAKE_GATED"
+  },
+  "o11_sparse_scan_truth_repair": {
+    "path": "canonical/verification/CURRENT_ESCAPE_O11_SPARSE_WORKSPACE_TRUTH_REPAIR_20261011_V1.json",
+    "observed_git_blob_sha": "560d7e25c717edcc68676d98be90ea2a6bef3ceb",
+    "status": "REPOSITORY_WIDE_EXHAUSTION_INTERPRETATION_REVOKED__CURRENT_O11_Q1_PROJECTION_GATE_UNAFFECTED"
   }
 }
