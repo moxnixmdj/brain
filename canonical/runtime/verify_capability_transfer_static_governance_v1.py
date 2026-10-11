@@ -18,6 +18,12 @@ assert b["donor_derived_skill_verifier_must_not_run_before_transfer_gate_pass"] 
 assert b["transfer_gate_pass_never_grants_reuse_by_itself"] is True
 assert b["donor_derived_skill_requires_independent_skill_verification_after_transfer_gate"] is True
 assert b["temporal_provenance_laundering_forbidden"] is True
+assert b["external_contribution_three_way_classification_required"] is True
+assert b["external_knowledge_must_be_non_authoritative_observation_or_evidence"] is True
+assert b["external_knowledge_target_solving_policy_or_answer_forbidden"] is True
+assert b["acquisition_donor_must_remain_transfer_gated_until_donor_deletion"] is True
+assert b["runtime_cognition_provider_forbidden_regardless_of_label_hosting_or_cost"] is True
+assert b["ambiguous_external_contribution_classification_fails_closed"] is True
 s=J("canonical/governance/WHITE_BOX_CAPABILITY_CAPSULE_SCHEMA_V3.json")
 assert s["promotion_requires_transfer_gate_pass"] is True
 d=J("canonical/governance/DONOR_DELETION_AND_DEPENDENCY_ACCOUNTING_PROTOCOL_V2.json")
