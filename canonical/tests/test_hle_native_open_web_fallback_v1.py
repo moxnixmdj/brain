@@ -57,5 +57,33 @@ class HLENativeOpenWebFallbackV1Tests(unittest.TestCase):
         with self.assertRaises(ValueError):
             fallback.retrieve(task_id="x",question="visible",plan_fn=lambda **k:{"views":[]},discover_fn=mixed_discover)
 
+    def test_diverse_selection_prevents_bing_starvation(self):
+        pools={
+          "BING_RSS":[{"url":"https://a.example/1"},{"url":"https://a.example/2"},{"url":"https://a.example/3"}],
+          "DUCKDUCKGO_HTML":[{"url":"https://d.example/1"},{"url":"https://d.example/2"}],
+          "CROSSREF":[{"url":"https://c.example/1"}],
+        }
+        rows,blocked=fallback._select_diverse_candidates(
+            pools,limit=3,policy={"blocklist_patterns":["never-match"]}
+        )
+        self.assertEqual(blocked,0)
+        self.assertEqual(
+            [x["discovery_backend"] for x in rows],
+            ["BING_RSS","DUCKDUCKGO_HTML","CROSSREF"],
+        )
+
+    def test_blocklisted_candidates_never_enter_diverse_pool(self):
+        pools={
+          "BING_RSS":[{"url":"https://lastexam.ai/leak"},{"url":"https://safe.example/a"}],
+          "DUCKDUCKGO_HTML":[{"url":"https://safe.example/d"}],
+          "CROSSREF":[],
+        }
+        rows,blocked=fallback._select_diverse_candidates(
+            pools,limit=3,policy={"blocklist_patterns":["lastexam.ai"]}
+        )
+        self.assertEqual(blocked,1)
+        self.assertNotIn("lastexam.ai"," ".join(x["url"] for x in rows))
+        self.assertEqual({x["discovery_backend"] for x in rows},{"BING_RSS","DUCKDUCKGO_HTML"})
+
 if __name__=="__main__":
     unittest.main(verbosity=2)
