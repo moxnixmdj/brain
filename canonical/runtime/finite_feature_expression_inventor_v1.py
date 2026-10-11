@@ -264,7 +264,8 @@ def invent(rows:Sequence[LabeledRow])->dict[str,Any]:
             "status":"NO_SYNTHESIZED_DISCRIMINATOR",
             "g0_status":result.get("status"),
             "predicate_frontier_complete":frontier_complete,
-            "predicate_count":len(informative),\n        "predicate_behavior_class_count":len(behavior_classes),
+            "predicate_count":len(informative),
+            "predicate_behavior_class_count":len(behavior_classes),
             "terminal_authority":False,
         }
 
