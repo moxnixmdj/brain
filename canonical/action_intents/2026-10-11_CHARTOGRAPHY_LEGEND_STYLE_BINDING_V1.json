@@ -1,0 +1,27 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "date": "2026-10-11",
+  "status": "CANDIDATE__ZERO_CREDIT_UNTIL_INDEPENDENTLY_VERIFIED",
+  "action_id": "CHARTOGRAPHY_LEGEND_STYLE_BINDING_V1",
+  "source_frontier": "canonical/governance/CHARTOGRAPHY_CAPABILITY_PROOF_FRONTIER_V1.json",
+  "mission": "Compose verified positioned OCR with verified raster color geometry to bind textual legend labels to plotted color styles without external model cognition.",
+  "mechanism": [
+    "eligible positioned OCR label",
+    "nearby compact saturated sample on either horizontal side",
+    "vertical overlap and bounded gap",
+    "same color bucket must have independent in-plot polyline or component evidence",
+    "near-tie style candidates fail closed",
+    "one color mapped to multiple labels fails closed"
+  ],
+  "external_general_purpose_model_runtime_dependency_count": 0,
+  "donor_general_purpose_model_runtime_dependency_count": 0,
+  "heldout_chartography_cases_consumed": 0,
+  "benchmark_score_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "hard_nonclaims": [
+    "NO_SERIES_VALUE_OR_DOMAIN_SEMANTIC_AUTHORITY",
+    "NO_PATTERN_OR_DASH_STYLE_BINDING",
+    "NO_ROTATED_LABEL_AUTHORITY",
+    "NO_CHARTOGRAPHY_SCORE"
+  ]
+}
