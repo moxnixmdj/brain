@@ -74,3 +74,23 @@ def test_existing_product_receipt_is_not_reobserved_forever():
         and first.get("app") == "teamchat"
         and first.get("operation") == "observe_workspace"
     )
+
+
+def test_budgetwise_routes_to_product_session():
+    out = decide(_state("Switch us to BudgetWise and find the cheapest suitable plan."))
+    assert out["actions"][0] == {
+        "type": "WEB_APP_OP",
+        "app": "budgetwise",
+        "operation": "observe_session",
+        "args": {},
+    }
+
+
+def test_ds160_routes_to_validated_visa_application_projection():
+    out = decide(_state("Complete my DS-160 visa application using the supplied files."))
+    assert out["actions"][0] == {
+        "type": "WEB_APP_OP",
+        "app": "visaapplication",
+        "operation": "observe_application",
+        "args": {},
+    }
