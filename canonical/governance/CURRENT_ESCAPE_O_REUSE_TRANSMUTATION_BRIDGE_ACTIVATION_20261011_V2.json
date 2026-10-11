@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_ESCAPE_O_REUSE_TRANSMUTATION_BRIDGE_ACTIVATION_20261011_V2",
+  "date": "2026-10-11",
+  "status": "ACTIVE_CANDIDATE__STRICT_PLUS_LEGACY_REUSE_DISCOVERY__11_OF_11_ACTIVE_O_ROWS_HAVE_SOURCE_LOCKED_ADAPTATION_DONORS__ZERO_CREDIT",
+  "objective": "REMOVE_SCHEMA_BLINDNESS_FROM_CURRENT_O_REUSE_BEFORE_ANY_NEW_REALITY_ACQUISITION",
+  "defect_closed": "V1_ONLY_DISCOVERED_PRENORMALIZED_TRANSMUTATION_EVIDENCE__STRONG_ROW_TARGETED_PREDECESSOR_SOLUTIONS_IN_LEGACY_CANONICAL_SCHEMAS_COULD_BE_INVISIBLE_AND_MISCLASSIFIED_AS_EMPTY_RESEARCH_FRONTIERS",
+  "runtime": {
+    "path": "canonical/runtime/current_escape_o_reuse_transmutation_bridge_v2.py",
+    "git_blob_sha": "7a41bdffcacb3320e2d7c7e7ef9d5b2caa62b37b"
+  },
+  "tests": {
+    "path": "canonical/tests/test_current_escape_o_reuse_transmutation_bridge_v2.py",
+    "git_blob_sha": "c30a1ecaa64f8905e751b1700ef7f31896a34883"
+  },
+  "verification": {
+    "path": "canonical/verification/CURRENT_ESCAPE_O_REUSE_TRANSMUTATION_BRIDGE_V2_INDEPENDENT_VERIFY_20261011_V1.json",
+    "git_blob_sha": "882c09fdae68aa5e84c2244b3857b8dda18fde90"
+  },
+  "predecessor_bridge": {
+    "path": "canonical/runtime/current_escape_o_reuse_transmutation_bridge_v1.py",
+    "git_blob_sha": "d9c4f488a00270fba7e5d340329441235e8f2fe8"
+  },
+  "generic_reuse_composer": {
+    "path": "canonical/runtime/frontier_solution_transplant_v2.py",
+    "git_blob_sha": "d891aafc289995e86b052c95a1dd61234e9a3dc6",
+    "role": "SOURCE_LOCKED_DONOR_SELECTION_AND_FINE_TUNE_PLAN_AFTER_DISCOVERY_NORMALIZATION"
+  },
+  "verified_current_o_reuse_coverage": {
+    "active_o_rows": 11,
+    "strict_transmutation_ready_rows": 0,
+    "legacy_adaptation_donor_rows": 11,
+    "reuse_uncovered_rows": 0
+  },
+  "execution_order": [
+    "RUN_EXISTING_CURRENT_O_V4_CLAIM_SPEC_SEARCH",
+    "RUN_CURRENT_O_REUSE_TRANSMUTATION_BRIDGE_V2__PRESERVE_STRICT_LANE_AND_SURFACE_LEGACY_ADAPTATION_DONORS",
+    "NORMALIZE_ONLY_THE_MINIMUM_REQUIRED_IDENTITY_SCOPE_PROVENANCE_EVALUATOR_AND_EVIDENCE_LOCKS",
+    "USE_FRONTIER_SOLUTION_TRANSPLANT_V2_WHERE_MULTIPLE_SOURCE_LOCKED_DONORS_MUST_BE_COMPOSED",
+    "PACKAGE_CURRENT_V4_CLAIM_AND_INDEPENDENTLY_VERIFY_THE_CURRENT_ROW",
+    "ONLY_IF_REUSE_NORMALIZATION_AND_COMPOSITION_FAIL_LOCALIZE_THE_MINIMUM_POLICY_CHANGING_EXTERNAL_DELTA"
+  ],
+  "authority_boundary": "DISCOVERY_NORMALIZATION_AND_PACKAGING_PLANNING_ONLY__NO_ROW_ACCEPTANCE_FROM_DONOR_EXISTENCE",
+  "new_primitive_required": false,
+  "hard_nonclaims": [
+    "NO_ACTIVE_O_ROW_CLOSED_BY_11_OF_11_DONOR_COVERAGE",
+    "NO_REPOSITORY_WIDE_REUSE_EXHAUSTION_CLAIM",
+    "NO_EXTERNAL_FACT_IS_INFERRED_FROM_AN_INTERNAL_DONOR",
+    "NO_ACCEPTANCE_PROMOTION_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
