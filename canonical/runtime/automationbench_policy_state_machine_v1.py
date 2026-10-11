@@ -29,7 +29,7 @@ from canonical.runtime.generic_goal_tool_effect_planner_v1 import (
     plan_goal_over_tool_schemas,
 )
 from canonical.runtime.generic_tool_argument_binder_v1 import bind_endpoint_call
-from canonical.runtime.generic_goal_state_verifier_v1 import verify_goal_state
+from canonical.runtime.generic_goal_state_verifier_v2 import verify_goal_state
 
 SCHEMA = "PROJECT_BRAIN_AUTOMATIONBENCH_POLICY_STATE_MACHINE_V1"
 
