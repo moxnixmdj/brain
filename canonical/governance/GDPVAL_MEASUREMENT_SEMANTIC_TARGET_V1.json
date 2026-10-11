@@ -1,0 +1,70 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_MEASUREMENT_SEMANTIC_TARGET_V1",
+  "date": "2026-10-11",
+  "status": "ACTIVE__CAPABILITY_INFORMATION_TARGET__FROZEN_1846_REFERENCE__ZERO_SCORE_OVERCLAIM",
+  "benchmark_surface": {
+    "benchmark": "GDPval-AA",
+    "version": "2.1",
+    "reference_model": "Claude Opus 5.5",
+    "frozen_reference_elo": 1846,
+    "frozen_bar_predicate": "PROWORK_GDPVAL_GE_1846"
+  },
+  "terminal_predicate": {
+    "type": "CAPABILITY_RELATION",
+    "decision_output": "BRAIN_PROFESSIONAL_WORK_CAPABILITY_GE_CAPABILITY_EVIDENCED_BY_FROZEN_OPUS55_GDPVAL_AA_V2_1_1846",
+    "goal_substitution_allowed": false
+  },
+  "interpretation": {
+    "benchmark_is_measurement_instrument": true,
+    "exact_official_brain_gdpval_elo_is_not_this_terminal_predicate": true,
+    "native_220_task_execution_intrinsically_required": false,
+    "matched_epoch_score_receipt_is_sufficient_but_not_logically_necessary": true,
+    "strictly_stronger_scope_complete_certificate_is_admissible_only_with_proved_entailment": true,
+    "cross_epoch_raw_score_transport_without_bridge_forbidden": true
+  },
+  "current_evidence": {
+    "professional_property_truth": "24_OF_24_VERIFIED",
+    "professional_whole_leaf_scope": "24_OF_24_VERIFIED",
+    "professional_quality_authority": false,
+    "opus55_noninferiority": false,
+    "full_private_current_main_regression": "OPEN__ZERO_STEP_CARRIER_BLOCKED",
+    "gdpval_public_submission_scale_evidence": "SUPPORTING_FALSIFICATION_ONLY__NOT_TERMINAL_PROOF"
+  },
+  "hard_nonclaims": [
+    "DOES_NOT_CLAIM_OFFICIAL_BRAIN_GDPVAL_ELO_GE_1846",
+    "DOES_NOT_CLAIM_24_OF_24_PROPERTY_TRUTH_IMPLIES_OPUS55_NONINFERIORITY",
+    "DOES_NOT_CLAIM_PUBLIC_RUBRIC_SUPPORT_EQUALS_OWNER_CROWD_BT_SCORE",
+    "DOES_NOT_AUTHORIZE_PROXY_METRIC_SUBSTITUTION",
+    "DOES_NOT_AUTHORIZE_PRIVATE_TASK_OR_ANSWER_RECONSTRUCTION",
+    "DOES_NOT_GRANT_ACCEPTANCE_CAPABILITY_OWNERSHIP_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "source_bindings": {
+    "benchmark_information_equivalence_law": {
+      "path": "canonical/laws/BENCHMARK_OUTPUT_INFORMATION_EQUIVALENCE_LAW_V1.md",
+      "git_blob_sha": "3dcb30e5eb8f6b3b6dd707ce54cba34fb23d20ee"
+    },
+    "benchmark_information_equivalence_gate": {
+      "path": "canonical/runtime/benchmark_output_information_equivalence_gate_v1.py",
+      "git_blob_sha": "3b0237ddca07967cc7b793abe633b2734d3ddd14"
+    },
+    "gdpval_fixed_bar_route": {
+      "path": "canonical/governance/GDPVAL_CURRENT_FIXED_BAR_ENGINE_RECLASSIFICATION_20261011_V1.json",
+      "git_blob_sha": "c16a49726507d6611a24bde323e0436a65870b59"
+    },
+    "gdpval_frozen_bar_provenance": {
+      "path": "canonical/governance/GDPVAL_OPUS55_FIXED_BAR_PROVENANCE_RECONCILIATION_20261004_V1.json",
+      "git_blob_sha": "fd854342e2d1a75596d261dfacc2990faf24eee0"
+    },
+    "professional_current": {
+      "path": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
+      "git_blob_sha": "34f2583ae019ec4730f0841cb0b32016ec968645"
+    }
+  },
+  "incremental_spend_usd": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
