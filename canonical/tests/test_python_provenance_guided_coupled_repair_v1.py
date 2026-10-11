@@ -40,4 +40,14 @@ class T(unittest.TestCase):
   td,r=self.fixture({"m.py":"def f(x): return x < 3\n","trace_fail.py":"from m import f\nassert f(3)\n","test_all.py":"from m import f\nassert f(3)\n"})
   with td:
    o=self.runr(r,["trace_fail.py"],max_guided_files=1);self.assertEqual(o["model_dependency_count"],0);self.assertEqual(o["external_capability_provider_count"],0);self.assertEqual(o["incremental_spend_usd"],0)
+ def test_crlf_source_repairs_and_restores_byte_identically(self):
+  td=tempfile.TemporaryDirectory();r=pathlib.Path(td.name)
+  with td:
+   raw=b"def f(x):\r\n    return x < 3\r\n";(r/"m.py").write_bytes(raw)
+   (r/"trace_fail.py").write_text("from m import f\nassert f(3)\n")
+   (r/"trace_pass.py").write_text("from m import f\nassert f(2)\n")
+   (r/"test_all.py").write_text("from m import f\nassert f(3)\nassert f(2)\nassert not f(4)\n")
+   o=self.runr(r,["trace_fail.py","trace_pass.py"],max_guided_files=1)
+   self.assertTrue(o["pass"],o);self.assertEqual(o["winner_mode"],"SINGLE_GUIDED")
+   self.assertEqual((r/"m.py").read_bytes(),raw);self.assertTrue(o["source_restored"])
 if __name__=="__main__":unittest.main(verbosity=2)
