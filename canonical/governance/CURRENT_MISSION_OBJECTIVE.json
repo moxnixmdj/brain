@@ -231,12 +231,12 @@
   },
   "bytes_current_frontier": {
     "path": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-    "observed_git_blob_sha": "15e9027074ee70dd0f933399eb29ba8c6feb2e19",
-    "status": "ACTIVE_RESEARCH__CONSERVATIVE_SPECIALPOLY_PROFILE_V37_FRONTIER__SUCCESSOR_READY",
-    "raw_python_source_bytes": 1775463,
-    "B_exec_raw_python_source_bytes": 1778223,
-    "qualification": "11500/11500",
-    "next": "Rerank exact V37 using spent NEXT42 only; make a new physical cut before touching QUAL_SUCCESSOR_NEXT43_20261011_V1.",
+    "observed_git_blob_sha": "42c671f9ab9b06545f5ccb41f4e808edbb492409",
+    "status": "ACTIVE_RESEARCH__CONSERVATIVE_CROSSPROFILE_V38_FRONTIER__SUCCESSOR_READY",
+    "raw_python_source_bytes": 1769319,
+    "B_exec_raw_python_source_bytes": 1772079,
+    "qualification": "11730/11730",
+    "next": "Rerank exact V38 using spent NEXT43 only; make a new physical cut before touching QUAL_SUCCESSOR_NEXT44_20261011_V1.",
     "promotion_credit": 0,
     "observed_snapshot_is_non_authoritative_for_v15_runtime": true
   },
@@ -252,7 +252,7 @@
   "capability_frontier_currentness_reconciliation": {
     "path": "canonical/governance/CAPABILITY_FRONTIER_CURRENTNESS_RECONCILIATION_20261010_V1.json",
     "observed_git_blob_sha": "7fb78b746ca52818edd43b9e1a69c3437091e8b1",
-    "status": "CURRENTNESS_RECONCILED__PROFESSIONAL_24_OF_24__EXECUTION_12_OF_12__SEMANTIC_12_OF_12__REGRESSION_CARRIER_WAKE_GATED__ESCAPE_12_ACTIVE_ACQUISITION__BYTES_V37__R2_V87_WAKE_GATED__TB_PARKED__ZERO_CREDIT",
+    "status": "CURRENTNESS_RECONCILED__PROFESSIONAL_24_OF_24__EXECUTION_12_OF_12__SEMANTIC_12_OF_12__REGRESSION_CARRIER_WAKE_GATED__ESCAPE_12_ACTIVE_ACQUISITION__BYTES_V38__R2_V87_WAKE_GATED__TB_PARKED__ZERO_CREDIT",
     "next": "INSTANTIATE_EXISTING_ESCAPE_ROW_PROOF_MACHINERY__DO_NOT_REOPEN_PROFESSIONAL_PROPERTY_TRUTH__WAKE_REGRESSION_ONLY_ON_REAL_CARRIER_STATE_CHANGE"
   },
   "professional_regression_carrier_diagnosis": {
