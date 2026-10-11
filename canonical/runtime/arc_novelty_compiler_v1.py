@@ -483,6 +483,77 @@ def _fill_enclosed_zero(grid: Grid, color: int) -> Grid:
     return tuple(tuple(row) for row in out)
 
 
+def _row_col_gravity(grid: Grid, direction: str) -> Grid:
+    h, w = _shape(grid)
+    out = [[0 for _ in range(w)] for _ in range(h)]
+    if direction in ("LEFT", "RIGHT"):
+        for r, row in enumerate(grid):
+            values = [v for v in row if v != 0]
+            start = 0 if direction == "LEFT" else w - len(values)
+            for j, value in enumerate(values):
+                out[r][start + j] = value
+    elif direction in ("UP", "DOWN"):
+        for c in range(w):
+            values = [grid[r][c] for r in range(h) if grid[r][c] != 0]
+            start = 0 if direction == "UP" else h - len(values)
+            for j, value in enumerate(values):
+                out[start + j][c] = value
+    else:
+        raise ARCNoveltyCompilerError("GRAVITY_DIRECTION_UNSUPPORTED")
+    return tuple(tuple(row) for row in out)
+
+
+def _visible_color(grid: Grid, r: int, c: int, dr: int, dc: int) -> int:
+    h, w = _shape(grid)
+    rr, cc = r + dr, c + dc
+    while 0 <= rr < h and 0 <= cc < w:
+        if grid[rr][cc] != 0:
+            return grid[rr][cc]
+        rr += dr
+        cc += dc
+    return -1
+
+
+def _ray_color_feature(grid: Grid, r: int, c: int) -> str:
+    values = [
+        _visible_color(grid, r, c, 0, -1),
+        _visible_color(grid, r, c, 0, 1),
+        _visible_color(grid, r, c, -1, 0),
+        _visible_color(grid, r, c, 1, 0),
+    ]
+    return f"{grid[r][c]}|" + ",".join(str(v) for v in values)
+
+
+def _infer_ray_color_rule(pairs: Sequence[tuple[Grid, Grid]]) -> dict[str, int] | None:
+    mapping: dict[str, int] = {}
+    for inp, out in pairs:
+        if _shape(inp) != _shape(out):
+            return None
+        h, w = _shape(inp)
+        for r in range(h):
+            for c in range(w):
+                key = _ray_color_feature(inp, r, c)
+                target = out[r][c]
+                if key in mapping and mapping[key] != target:
+                    return None
+                mapping[key] = target
+    return mapping if mapping else None
+
+
+def _ray_color_predict(grid: Grid, mapping: Mapping[str, int]) -> Grid | None:
+    h, w = _shape(grid)
+    out: list[tuple[int, ...]] = []
+    for r in range(h):
+        row: list[int] = []
+        for c in range(w):
+            key = _ray_color_feature(grid, r, c)
+            if key not in mapping:
+                return None
+            row.append(int(mapping[key]))
+        out.append(tuple(row))
+    return tuple(out)
+
+
 def _local_feature(grid: Grid, r: int, c: int, feature: str) -> str:
     h, w = _shape(grid)
     v = grid[r][c]
@@ -807,6 +878,10 @@ def _predict(h: Mapping[str, Any], grid: Grid) -> Grid | None:
         return _select_largest_frame_interior(grid)
     if kind == "COMPOSED_SIMPLE_TRANSFORM":
         return _compose_simple(grid, h["first"], h["second"])
+    if kind == "ROW_COLUMN_GRAVITY":
+        return _row_col_gravity(grid, h["direction"])
+    if kind == "CARDINAL_VISIBILITY_RULE":
+        return _ray_color_predict(grid, h["mapping"])
     raise ARCNoveltyCompilerError("HYPOTHESIS_KIND_UNSUPPORTED")
 
 
@@ -973,6 +1048,17 @@ def compile_hypotheses(
             if _consistent(h, pairs):
                 candidates.append(h)
 
+    for direction in ("LEFT", "RIGHT", "UP", "DOWN"):
+        h = {"kind": "ROW_COLUMN_GRAVITY", "direction": direction}
+        if _consistent(h, pairs):
+            candidates.append(h)
+
+    ray_mapping = _infer_ray_color_rule(pairs)
+    if ray_mapping is not None:
+        h = {"kind": "CARDINAL_VISIBILITY_RULE", "mapping": dict(sorted(ray_mapping.items()))}
+        if _consistent(h, pairs):
+            candidates.append(h)
+
     crop = {"kind": "CROP_NON_BACKGROUND"}
     if _consistent(crop, pairs):
         candidates.append(crop)
@@ -1031,6 +1117,8 @@ def compile_hypotheses(
             "ODD_COLOR_COMPONENT_SELECTION",
             "MONOCHROME_FRAME_INTERIOR_EXTRACTION",
             "DEPTH_TWO_SIMPLE_TRANSFORM_COMPOSITION",
+            "ROW_COLUMN_GRAVITY",
+            "CARDINAL_VISIBILITY_OUTPUT_RULE",
             "NON_BACKGROUND_BOUNDING_BOX_CROP",
             "UNIQUE_LARGEST_OR_SMALLEST_COMPONENT_CROP",
         ],
