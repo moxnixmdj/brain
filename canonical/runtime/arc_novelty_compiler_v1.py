@@ -1753,6 +1753,103 @@ def _cap_bottom_marker_predict(grid: Grid, marker: int) -> Grid | None:
     return tuple(tuple(row) for row in out)
 
 
+def _fill_immediate_equal_gap(
+    grid: Grid,
+    axis: str,
+    source_color: int,
+    fill_color: int,
+) -> Grid:
+    h, w = _shape(grid)
+    out = [list(row) for row in grid]
+    if axis in ("HORIZONTAL", "BOTH"):
+        for r in range(h):
+            for c in range(1, w - 1):
+                if (
+                    grid[r][c] == 0
+                    and grid[r][c - 1] == source_color
+                    and grid[r][c + 1] == source_color
+                ):
+                    out[r][c] = fill_color
+    if axis in ("VERTICAL", "BOTH"):
+        for r in range(1, h - 1):
+            for c in range(w):
+                if (
+                    grid[r][c] == 0
+                    and grid[r - 1][c] == source_color
+                    and grid[r + 1][c] == source_color
+                ):
+                    if out[r][c] not in (0, fill_color):
+                        raise ARCNoveltyCompilerError("IMMEDIATE_GAP_CONFLICT")
+                    out[r][c] = fill_color
+    return tuple(tuple(row) for row in out)
+
+
+def _infer_immediate_equal_gap(
+    pairs: Sequence[tuple[Grid, Grid]],
+) -> tuple[str, int, int] | None:
+    input_colors = sorted({v for inp, _ in pairs for row in inp for v in row if v != 0})
+    output_colors = sorted({v for _, out in pairs for row in out for v in row if v != 0})
+    matches: list[tuple[str, int, int]] = []
+    for axis in ("HORIZONTAL", "VERTICAL", "BOTH"):
+        for source_color in input_colors:
+            for fill_color in output_colors:
+                try:
+                    ok = all(
+                        _fill_immediate_equal_gap(inp, axis, source_color, fill_color) == out
+                        for inp, out in pairs
+                    )
+                except ARCNoveltyCompilerError:
+                    ok = False
+                if ok:
+                    matches.append((axis, source_color, fill_color))
+    return matches[0] if len(matches) == 1 else None
+
+
+def _extend_core_diagonal_seeds(grid: Grid) -> Grid | None:
+    components = _zero_components(grid)
+    cores = [
+        component
+        for component in components
+        if component.area == 4
+        and component.bbox[2] - component.bbox[0] + 1 == 2
+        and component.bbox[3] - component.bbox[1] + 1 == 2
+    ]
+    if len(cores) != 1:
+        return None
+    core = cores[0]
+    color = core.color
+    r0, c0, r1, c1 = core.bbox
+    corners = {
+        (r0, c0): (-1, -1),
+        (r0, c1): (-1, 1),
+        (r1, c0): (1, -1),
+        (r1, c1): (1, 1),
+    }
+    seeds: list[tuple[int, int, int, int]] = []
+    for component in components:
+        if component.color != color or component.area != 1:
+            continue
+        sr, sc = component.cells[0]
+        for (cr, cc), (dr, dc) in corners.items():
+            if (sr, sc) == (cr + dr, cc + dc):
+                seeds.append((sr, sc, dr, dc))
+                break
+    if not seeds:
+        return None
+
+    h, w = _shape(grid)
+    out = [list(row) for row in grid]
+    for sr, sc, dr, dc in seeds:
+        r, c = sr + dr, sc + dc
+        while 0 <= r < h and 0 <= c < w:
+            if out[r][c] not in (0, color):
+                return None
+            out[r][c] = color
+            r += dr
+            c += dc
+    return tuple(tuple(row) for row in out)
+
+
 def _component_crop(grid: Grid, which: str) -> Grid | None:
     comps = _components(grid)
     if not comps:
@@ -1881,6 +1978,15 @@ def _predict(h: Mapping[str, Any], grid: Grid) -> Grid | None:
         return _complete_bbox_quarter_turn_orbit(grid)
     if kind == "CAP_BOTTOM_MARKER_PROJECTION":
         return _cap_bottom_marker_predict(grid, int(h["marker"]))
+    if kind == "FILL_IMMEDIATE_EQUAL_GAP":
+        return _fill_immediate_equal_gap(
+            grid,
+            h["axis"],
+            int(h["source_color"]),
+            int(h["fill_color"]),
+        )
+    if kind == "EXTEND_CORE_DIAGONAL_SEEDS":
+        return _extend_core_diagonal_seeds(grid)
     raise ARCNoveltyCompilerError("HYPOTHESIS_KIND_UNSUPPORTED")
 
 
