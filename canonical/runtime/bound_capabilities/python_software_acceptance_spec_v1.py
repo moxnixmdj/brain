@@ -98,6 +98,15 @@ def compile_request(
     for index, clause in enumerate(clauses):
         pid = f"R{index+1}"
         lower = clause.casefold()
+        if re.search(r"(?:^|[\\s'\"\\x60])[.][.][\\\\/]", clause):
+            predicates.append(_predicate(
+                pid,
+                clause,
+                "UNSAFE_PATH_REFERENCE",
+                None,
+                reason="PATH_TRAVERSAL_REFERENCE_REJECTED",
+            ))
+            continue
         paths = _paths(clause)
         quoted = _QUOTED_RE.findall(clause)
 
@@ -264,7 +273,7 @@ def _run_verifier(spec: Mapping[str, Any], base: pathlib.Path) -> tuple[bool, st
         timeout = float(spec.get("timeout_s", 20))
         try:
             cp = subprocess.run(
-                [sys.executable, str(p)],
+                [sys.executable, "-m", "unittest", str(p.relative_to(base))],
                 cwd=str(base),
                 stdin=subprocess.DEVNULL,
                 stdout=subprocess.PIPE,
