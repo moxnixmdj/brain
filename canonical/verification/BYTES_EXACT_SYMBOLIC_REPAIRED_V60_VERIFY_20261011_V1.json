@@ -1,0 +1,86 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_REPAIRED_V60_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__DIRECT_V58_TO_REPAIRED_V60__SPENT_NEXT66_17020_OF_17020__FRESH_NEXT67_17250_OF_17250__CLEAN_ARCHIVE_NEXT67_17250_OF_17250__NEXT68_DURABLE_UNSPENT__ZERO_CREDIT",
+  "subject": {
+    "producer_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_REPAIRED_V60_SUCCESSOR_EXECUTION_20261011_V1.json",
+    "producer_evidence_git_blob_sha": "c29a0edff3feeec0cf20515afc6946134692ad90",
+    "transform": "canonical/research/bytes/tools/conservative_direct_v58_to_repaired_v60.py",
+    "transform_git_blob_sha": "7cb021481930631c59432f7cb795011ddfe843ee",
+    "predecessor_manifest_sha256": "409dd682c47e2a25acc2915af689650757f02cf828826a9854d06c0e386bb1c1",
+    "candidate_manifest_sha256": "6ab3ad3366fe10d0d081784d61838d097eac1c242cee729453d78d48ede5033e",
+    "candidate_raw_python_source_bytes": 1713090
+  },
+  "replay": {
+    "direct_transform": {
+      "result": "PASS",
+      "predecessor": "DURABLE_CANONICAL_V58",
+      "target_manifest_sha256": "6ab3ad3366fe10d0d081784d61838d097eac1c242cee729453d78d48ede5033e",
+      "raw_delta_vs_v58_bytes": -122
+    },
+    "spent_NEXT66": {
+      "passed": 17020,
+      "total": 17020,
+      "failures": 0
+    },
+    "fresh_NEXT67": {
+      "passed": 17250,
+      "total": 17250,
+      "failures": 0
+    },
+    "clean_archive_NEXT67": {
+      "passed": 17250,
+      "total": 17250,
+      "failures": 0
+    },
+    "durable_archive_audit": {
+      "library_file_id": "libfile_afa0d53808cc8191976782dc3e9ea40a",
+      "archive_sha256": "7ebb193e07a2a1e18265ebf4b1ef76b4c011b665bf100d35550033b894d96dd9",
+      "internal_manifest_sha256": "6ab3ad3366fe10d0d081784d61838d097eac1c242cee729453d78d48ede5033e",
+      "file_count": 278,
+      "python_file_count": 277,
+      "raw_python_source_bytes": 1713090
+    },
+    "next68": {
+      "cases": 17480,
+      "seed": 1452486686,
+      "sha256": "ee4eb1b62ce24c1c31e39c19585ce5a04e01fc6099b88c65a7530840a6c15e70",
+      "library_file_id": "libfile_3f5ba0e0123481919cc240491ebd5cb2",
+      "spent": false,
+      "byte_identical_regeneration_verified": true
+    }
+  },
+  "falsification": {
+    "experimental_v59_rejected": true,
+    "fresh_NEXT66_failures": 2,
+    "repaired_failures": 0,
+    "causal_repair_bound_to_exact_counterexample_classes": true
+  },
+  "proved": [
+    "THE_DIRECT_V58_TO_V60_TRANSFORM_IS_EXACT_BASE_AND_TARGET_MANIFEST_GUARDED",
+    "THE_EXACT_REPAIRED_V60_CANDIDATE_PASSES_COMPLETE_SPENT_NEXT66",
+    "THE_PREVIOUSLY_UNTOUCHED_NEXT67_CORPUS_PASSES_EXACT_REPAIRED_V60_COMPLETELY",
+    "A_CLEAN_ARCHIVE_EXTRACTION_REPLAYS_COMPLETE_SPENT_NEXT67_WITH_ZERO_FAILURES",
+    "THE_DURABLE_LIBRARY_ARCHIVE_CONTAINS_THE_EXACT_V60_278_FILE_MANIFEST",
+    "NEXT68_IS_DURABLY_FROZEN_UNSPENT_AND_BYTE_IDENTICALLY_REGENERATED"
+  ],
+  "independence_boundary": {
+    "process_isolated_second_execution_carrier": true,
+    "external_organizational_independence_claimed": false,
+    "no_external_second_carrier_credit": true
+  },
+  "truth_boundary": [
+    "BOUNDED_EXACT_SYMBOLIC_ROUTE_ONLY",
+    "NO_UNIVERSAL_SYMPY_OR_MPMATH_EQUIVALENCE",
+    "NO_EXTERNAL_ORGANIZATIONALLY_INDEPENDENT_SECOND_CARRIER CLAIM",
+    "NO_CAPABILITY_ACCEPTANCE_PROFESSIONAL_QUALITY_PROMOTION_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "promotion_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
