@@ -1,0 +1,95 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_MPMATH_PERIPHERAL_V49_SUCCESSOR_EXECUTION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "VERIFIED_RESEARCH_FRONTIER__10_BODY_MPMATH_PERIPHERAL_FAIL_CLOSED_PRUNE__SPENT_NEXT54_AND_FRESH_NEXT55_PASS__NEXT56_FROZEN_UNSPENT__CURRENT_POINTER_ELIGIBLE__ZERO_PROMOTION_CREDIT",
+  "subject": {
+    "predecessor": "canonical/evidence/BYTES_EXACT_SYMBOLIC_MPMATH_PERIPHERAL_V48_SUCCESSOR_EXECUTION_20261011_V1.json",
+    "predecessor_manifest_sha256": "cbe7d34fc17168b975a9b38097c3b4e75f8ee509c39f84e2c23852347ee0038d",
+    "transform": "canonical/research/bytes/tools/conservative_mpmath_peripheral_prune_v49.py",
+    "manifest_sha256": "bdc69baf4e75991e6b5abd1ec271886c43a02ac08a422656374f19122ffb9bd0",
+    "python_files": 277,
+    "raw_python_source_bytes": 1725064,
+    "B_exec_raw_python_source_bytes": 1727824,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "raw_delta_vs_v48_bytes": -3677,
+    "B_exec_delta_vs_v48_bytes": -3677
+  },
+  "selection": {
+    "id": "MPMATH_10_BODY_PERIPHERAL_FAIL_CLOSED_PRUNE_V49",
+    "changed_body_count": 10,
+    "bodies": [
+      "PythonMPContext.convert",
+      "euler_fixed",
+      "mertens_fixed",
+      "catalan_fixed",
+      "apery_fixed",
+      "PythonMPContext.npconvert",
+      "PythonMPContext.isinf",
+      "PythonMPContext.isnan",
+      "_constant.__call__",
+      "from_npfloat"
+    ],
+    "exact_base_guard": true,
+    "exact_target_guard": true
+  },
+  "discovery_evidence": {
+    "corpus": "QUAL_SUCCESSOR_NEXT54_20261011_V1",
+    "role": "SPENT_DISCOVERY_AND_CALIBRATION_ONLY",
+    "individual_smoke": "10/10 candidates pass 192/192",
+    "complete_spent_replay": "14260/14260"
+  },
+  "qualification": {
+    "spent_NEXT54": {
+      "cases": 14260,
+      "corpus_sha256": "a429b6448d1a72ccf533b6a89b845561fd6a4b9a2ddb9e61d9dc00d8abedbaad",
+      "candidate": "14260/14260",
+      "failures": 0,
+      "spent": true
+    },
+    "fresh_NEXT55": {
+      "cases": 14490,
+      "corpus_sha256": "dd008ccd38300031ed9839f45c758739af3291fbd6f53fe0f533eafe01c965c3",
+      "candidate": "14490/14490",
+      "failures": 0,
+      "spent": true
+    }
+  },
+  "reproducibility": {
+    "clean_room_v48_to_v49_reconstruction": "PASS__278_OF_278_DURABLE_FILES_BYTE_IDENTICAL",
+    "regenerated_manifest_sha256": "bdc69baf4e75991e6b5abd1ec271886c43a02ac08a422656374f19122ffb9bd0",
+    "external_second_carrier_verified": false
+  },
+  "durable_archive": {
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V49_SUCCESSOR_20261011_V1.tar.xz",
+    "library_file_id": "libfile_9eb2cb1838b88191a6c0314c95fc5ec7",
+    "file_id": "file_0000000014248210b0293fde1a7db9c5",
+    "bytes": 269260,
+    "sha256": "c2de8614bbdfa32aed47026a24b20c77ee22094a4851b4769d6cbf63b1fda498"
+  },
+  "next_frozen": {
+    "id": "QUAL_SUCCESSOR_NEXT56_20261011_V1",
+    "cases": 14720,
+    "seed": 2330404869,
+    "per_operation_budget": 1280,
+    "corpus_sha256": "a7c0c40d1d5a587b0434ce7d675b0763b358aff8bbafdd4dc9b1a1559f20fbcb",
+    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT56_20261011_V1.jsonl",
+    "library_file_id": "libfile_75507f624680819189f937ebf58dd9e2",
+    "file_id": "file_00000000eca48210bcf93bc7a916ee50",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT",
+    "spent": false
+  },
+  "truth_boundary": [
+    "MEASURED: V49 raw Python bytes 1,725,064 (-3,677 vs V48).",
+    "MEASURED: spent NEXT54 14,260/14,260 PASS.",
+    "MEASURED: fresh NEXT55 14,490/14,490 PASS.",
+    "MEASURED: clean-room 278/278 durable files byte-identical.",
+    "MEASURED: NEXT56 frozen 14,720 cases and unspent.",
+    "NOT PROVED: universal equivalence outside bounded route.",
+    "NOT PROMOTED: zero capability/acceptance/promotion/terminal credit."
+  ],
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "promotion_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
