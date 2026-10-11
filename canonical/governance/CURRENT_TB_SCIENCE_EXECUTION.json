@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_TB_SCIENCE_EXECUTION_POINTER_V2",
   "date": "2026-10-11",
-  "status": "RANK21_STARTED__ONE_TRIAL_CONSUMED__RESULT_PENDING__NO_RETRY",
+  "status": "RANK21_CONSUMED_BUT_PERMANENTLY_NONCREDITABLE__EXTERNAL_QWEN_COGNITION_CONTAMINATION",
   "current_result": {
     "path": "canonical/verification/TB_SCIENCE_RANK20_V3_FINAL_NONCONSUMING_VERIFY_20261010_V1.json",
     "git_blob_sha": "8f77186beeb582c5aef8bbead0d7a98e32f818fa"
@@ -29,7 +29,7 @@
   },
   "acceptance_credit_delta": 0,
   "terminal_credit_delta": 0,
-  "next": "FINALIZE_CURRENT_RANK21_RUN__NO_RETRY_OR_REPLACEMENT",
+  "next": "DO_NOT_INGEST_RANK21_RESULT_FOR_BRAIN_CREDIT__REBUILD_ONLY_ZERO_MODEL_COGNITION_TB_SCIENCE_ROUTE",
   "finalized_rank18": {
     "ledger_schedule_rank": 18,
     "slot_id": "terminal-bench-science/longitudinal-clinical-agent::trial-0",
@@ -98,7 +98,9 @@
     "NO_RANK21_DURABLE_START_YET",
     "NO_RANK21_BENCHMARK_TRIAL_CONSUMPTION_YET",
     "NO_RANK21_ACTIVATION_FILE_PRESENT",
-    "NO_ACCEPTANCE_CAPABILITY_OR_TERMINAL_CREDIT_FROM_PREACTIVATION_AUTHORITY"
+    "NO_ACCEPTANCE_CAPABILITY_OR_TERMINAL_CREDIT_FROM_PREACTIVATION_AUTHORITY",
+    "NO_RANK21_RESULT_MAY_RECEIVE_BRAIN_CAPABILITY_BENCHMARK_ACCEPTANCE_OWNERSHIP_PROMOTION_OR_TERMINAL_CREDIT",
+    "NO_LOCAL_OPEN_WEIGHT_OR_SELF_HOSTED_MODEL_COGNITION_COUNTS_AS_BRAIN_COGNITION"
   ],
   "public_effective_authority_reconciliation": {
     "path": "canonical/governance/TB_SCIENCE_RANK19_PUBLIC_EFFECTIVE_AUTHORITY_RECONCILIATION_20261010_V1.json",
@@ -509,9 +511,9 @@
     "public_pull_request": 2650,
     "public_merge_commit_sha": "231ad9835f90c16955076b6e40d52b09b60ce959",
     "public_execution_surface_git_blob_sha": "d83d9400a2d5f1f34d9b69d41b89cc1dcfa2d9c8",
-    "execution_authority_effective": true,
-    "task_read_authority_effective": true,
-    "activation_authority": true,
+    "execution_authority_effective": false,
+    "task_read_authority_effective": false,
+    "activation_authority": false,
     "activation_present": false,
     "task_read_history": false,
     "task_started": false,
@@ -523,6 +525,16 @@
     "activation_authority_git_blob_sha": "567002a1da3c10ff90a880f1e5b2650b8dbf5a26",
     "execution_branch": "execute/tb-science-rank21-20261011-v1",
     "activation_path": "capsules/tb_science_rank21_20261011_v1/ACTIVATE_RANK21_V1_PR.json",
-    "ready_for_exact_activation": true
+    "ready_for_exact_activation": false,
+    "result_credit_authority": false,
+    "revoked_reason": "EXTERNAL_QWEN_COGNITION_PRODUCER_PATH"
+  },
+  "model_cognition_contamination_revocation": {
+    "path": "canonical/governance/TB_SCIENCE_RANK21_QWEN_COGNITION_CONTAMINATION_REVOCATION_20261011_V1.json",
+    "result_credit_authority": false,
+    "benchmark_trial_consumed": true,
+    "activation_pr_closed_unmerged": true,
+    "public_runner_future_execution_fail_closed": true,
+    "live_result_may_arrive_but_must_remain_noncreditable": true
   }
 }
