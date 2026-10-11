@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_CHART_DIRECT_CURVE_LABEL_FAMILY_RANK_20261011_V1",
+  "date": "2026-10-11",
+  "status": "CANDIDATE__BRAIN_NATIVE_DIRECT_ENDPOINT_LABEL_BINDING_AND_FAMILY_RANK__FOCUSED_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "capability": {
+    "capability_id": "chart.raster.direct_curve_label_family_rank.v1",
+    "runtime": {
+      "path": "canonical/runtime/bound_capabilities/chart_direct_curve_label_family_rank_v1.py",
+      "git_blob_sha": "e3be28bd83ce0a9359a2ce9cedc8415dbcf745d2"
+    },
+    "tests": {
+      "path": "canonical/tests/test_chart_direct_curve_label_family_rank_v1.py",
+      "git_blob_sha": "4c8fc60d72e160f9995c5df1b0af75b97d9a1eb9"
+    }
+  },
+  "reuses": [
+    "chart.raster.scene_graph.v1",
+    "chart.raster.positioned_ocr_axis_binding.v1",
+    "image.ocr.tesseract.positioned"
+  ],
+  "bounded_truth_candidate": [
+    "OCR_ALPHA_LABEL_NEAR_A_UNIQUE_POLYLINE_ENDPOINT_CAN_BE_BOUND_TO_THAT_EXACT_POLYLINE_INDEX_WITH_EXPLICIT_DISTANCE_AND_AMBIGUITY_GUARDS",
+    "DIRECT_LABEL_BINDING_CAN_DISTINGUISH_SAME_COLOR_CURVES_BY_POLYLINE_GEOMETRY",
+    "BOUND_CURVE_FAMILIES_CAN_BE_RANKED_HIGH_TO_LOW_AT_A_CALIBRATED_X_VALUE",
+    "A_NEAREST_BOUND_CURVE_AT_X_AND_Y_CAN_BE_SELECTED_WHEN_UNIQUE",
+    "LINEAR_AND_LOG10_Y_AXIS_VALUE_TRANSFORMS_ARE_SUPPORTED",
+    "AMBIGUOUS_ENDPOINTS_DUPLICATE_LABELS_MULTIPLE_LABELS_PER_CURVE_UNBRACKETED_QUERIES_AND_LARGE_INTERPOLATION_GAPS_FAIL_CLOSED"
+  ],
+  "qualification": {
+    "authored_check_count": 13,
+    "focused_verification_required": true,
+    "independent_or_stronger_replay_required_for_promotion": true
+  },
+  "ownership": {
+    "brain_owned": true,
+    "model_dependency_count": 0,
+    "external_general_purpose_model_runtime_dependency_count": 0,
+    "donor_general_purpose_model_runtime_dependency_count": 0,
+    "incremental_spend_usd": 0
+  },
+  "relation_to_chartography": {
+    "public_residual": "DIRECT_CURVE_LABEL_BINDING_AND_FAMILY_RANK",
+    "candidate_reuse_families": [
+      "GROWTH_CHART",
+      "KAPLAN_MEIER"
+    ],
+    "contour_note": "V1_ENDPOINT_ADJACENCY_DOES_NOT_CLAIM_INLINE_CONTOUR_LABEL_BINDING",
+    "typed_entailment_to_chartography_ge_89": false,
+    "benchmark_score_credit": 0,
+    "capability_comparison_credit": 0
+  },
+  "hard_nonclaims": [
+    "NO_INLINE_CONTOUR_LABEL_AUTHORITY",
+    "NO_ARBITRARY_DIRECT_LABEL_PLACEMENT_AUTHORITY",
+    "NO_DOMAIN_SEMANTIC_INTERPRETATION",
+    "NO_SAME_CURVE_MULTI_LABEL_RESOLUTION",
+    "NO_CHARTOGRAPHY_GE89_ENTAILMENT",
+    "NO_BRANDED_BENCHMARK_SCORE",
+    "NO_PROMOTION_BEFORE_FOCUSED_VERIFICATION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "benchmark_score_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "promotion_authority": false,
+  "terminal_authority": false
+}
