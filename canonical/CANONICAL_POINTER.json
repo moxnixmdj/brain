@@ -247,7 +247,13 @@
     "teacher_fallback_rerank_critique_online_planning_forbidden": true,
     "copied_or_rehosted_teacher_is_not_transfer": true,
     "post_donor_removal_heldout_qualification_required": true,
-    "all_donor_derived_promotions_require_zero_external_model_runtime_dependencies": true
+    "all_donor_derived_promotions_require_zero_external_model_runtime_dependencies": true,
+    "donor_provenance_must_persist_across_verified_episodes": true,
+    "donor_derived_skill_candidate_requires_exact_candidate_bound_transfer_record": true,
+    "donor_derived_skill_verifier_must_not_run_before_transfer_gate_pass": true,
+    "transfer_gate_pass_never_grants_reuse_by_itself": true,
+    "donor_derived_skill_requires_independent_skill_verification_after_transfer_gate": true,
+    "temporal_provenance_laundering_forbidden": true
   },
   "active_agent": {
     "agent_id": "ASTRA-OPERATIONAL-1",
