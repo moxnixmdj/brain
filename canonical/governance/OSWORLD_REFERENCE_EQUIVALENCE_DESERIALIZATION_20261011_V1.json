@@ -1,0 +1,104 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_REFERENCE_EQUIVALENCE_DESERIALIZATION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PROVED__PUBLIC_REFERENCE_TO_OWNER_EQUIVALENCE_IS_AUXILIARY_NOT_A_SERIAL_PREREQUISITE_TO_DIRECT_MATCHED_OSWORLD_EXECUTION__PROVENANCE_CHAIN_STRONGLY_BINDS_REFERENCE_SEMANTICS__TOCTOU_CAVEAT_PRESERVED__ZERO_CREDIT",
+  "target_predicate": "OSWORLD_2_1_PARTIAL_GE_81_8",
+  "objective": "Delete the unnecessary serial dependency from public-reference semantic equivalence authentication to the direct official matched OSWorld score route, while preserving official-byte integrity, protocol equivalence, and authentic score requirements.",
+  "direct_acceptance_law": {
+    "route": "MATCHED_OFFICIAL_OSWORLD_V2_1_PROTOCOL_SCORE_OR_STRONGER_SCOPE_COMPLETE_CERTIFICATE",
+    "bar": 81.8,
+    "task_population": 108,
+    "public_reference_corpus_is_execution_input": false
+  },
+  "public_reference_provenance": {
+    "dataset": "simular-ai/sai-osworld-v21-reference-runs",
+    "dataset_revision": "abfb5852189f49e81255c38d98287df29ae53658",
+    "public_scorecard_sha256": "61781c076bd5ce850b35bfeb41b7ca626688c1c4b8f14dab27bf62ca9857df1d",
+    "official_task_hash_manifest_sha256": "c54d428329be5ca72742a6becd49ee83cf739df5dea429bba182e1f3f21badfb",
+    "scorecard_attestation": [
+      "TASK_RELEASE_OSWORLD_V2_1",
+      "TASK_INTEGRITY_MATCHED_108",
+      "TASK_HASH_MANIFEST_MATCHES_CANONICAL_OFFICIAL_RELEASE",
+      "INTEGRITY_CHECKED_BEFORE_EVERY_RUN",
+      "EACH_RUN_MANIFEST_CARRIES_THE_SAME_INTEGRITY_VALUES"
+    ]
+  },
+  "independent_public_harness_code_bindings": {
+    "repository": "cmgs-simular/OSWorld-V2",
+    "ref": "runner-v21",
+    "verify_task_integrity_py": {
+      "git_blob_sha": "df231bb260f63b700716e66a2cd7a92a09088c29",
+      "proved": [
+        "OFFICIAL_TASK_IMPLEMENTATIONS_VERIFIED_BYTE_FOR_BYTE",
+        "HASH_MANIFEST_AUTHENTICITY_FAILURE_IS_FATAL_TO_VERIFICATION",
+        "REPORT_INCLUDES_MATCHED_MISMATCHED_MISSING_UNOFFICIAL_AND_TREE_DIGEST"
+      ]
+    },
+    "run_multienv_sai_py": {
+      "git_blob_sha": "c7820d6e160785e289c63238c7867cb8db5b67d4",
+      "proved": [
+        "PREFLIGHT_HASHES_THE_SELECTED_EVALUATION_EXAMPLES_TASK_CLASS_DIRECTORY",
+        "RUN_MANIFEST_IS_WRITTEN_BEFORE_ANY_TASK_STARTS",
+        "RUN_MANIFEST_EMBEDS_TASK_INTEGRITY_REPORT",
+        "WORKERS_LOAD_TASKS_FROM_THE_SAME_BASE_DIR_TASK_CLASS_PATH"
+      ],
+      "caveat": "TASK_INTEGRITY_PREFLIGHT_IS_RECORDED_AND_ADVISORY_RATHER_THAN_A_HARD_ABORT_FOR_NON_ASSET_INTEGRITY_CHECKS"
+    },
+    "task_loader_py": {
+      "git_blob_sha": "3e8ae06039c690e2c0e4916146acd94d783ca976",
+      "proved": [
+        "LOAD_TASK_CONFIG_PREFERS_TASK_CLASS",
+        "FIND_TASK_CLASS_PATH_RESOLVES_ROOT_TASK_CLASS_TASK_ID_PY_FROM_THE_SAME_BASE_DIRECTORY",
+        "LIVE_TASK_OBJECT_IS_INSTANTIATED_FROM_THAT_FILE"
+      ]
+    },
+    "results_reporting_py": {
+      "git_blob_sha": "1dac099bf5fdead3c7341b5dd4c8082ec1ebafaa",
+      "proved": [
+        "RUN_MANIFEST_EMBEDS_TASK_INTEGRITY_SUMMARY",
+        "TASK_RECORD_INSTRUCTION_IS_COPIED_FROM_THE_LIVE_EXECUTED_TASK_OBJECT"
+      ]
+    }
+  },
+  "deduction": {
+    "reference_semantic_authentication_strength": "STRONG_INDEPENDENT_CONTENT_ADDRESSED_PROVENANCE_BINDING__NOT_OWNER_SIGNATURE",
+    "remaining_reference_caveat": "THE_PUBLISHED_EXPORT_OMITS_RUN_MANIFEST_JSON_AND_THE_INTEGRITY_CHECK_IS_NOT_A_HARD_ABORT__A_THEORETICAL_POST_PREFLIGHT_PRELOAD_TASK_FILE_MUTATION_IS_NOT_CRYPTOGRAPHICALLY_EXCLUDED_BY_THE_EXPORTED_RECEIPTS",
+    "serial_gate_result": "NOT_NECESSARY_FOR_DIRECT_MATCHED_EXECUTION",
+    "reason": "A direct Brain evaluation loads the official pinned task bytes and can re-verify their canonical hashes immediately before execution. Its acceptance decision does not depend on the Simular reference corpus. Therefore any residual uncertainty about the reference corpus cannot rationally block construction or execution of the direct official route.",
+    "auxiliary_use": "PUBLIC_REFERENCE_CORPUS_REMAINS_VALID_SCOPE_DIAGNOSTIC_AND_STRONG_SUPPORTING_EVIDENCE_WITH_THE_STATED_CAVEAT"
+  },
+  "direct_route_after_cut": [
+    "OBTAIN_MATERIAL_ACCESS_TO_OFFICIAL_PINNED_OSWORLD_V2_1_TASK_AND_ASSET_BYTES",
+    "FAIL_CLOSED_REVERIFY_ALL_108_TASK_IMPLEMENTATION_HASHES_IMMEDIATELY_BEFORE_EXECUTION",
+    "BIND_ALREADY_PUBLISHED_OPUS55_MATCHED_PROTOCOL_CONFIGURATION",
+    "BIND_BRAIN_OWNED_PROTOCOL_EQUIVALENT_CONTROLLER_AND_REQUIRED_ZERO_SPEND_RUNTIME_OR_SOUND_STRONGER_CERTIFICATE",
+    "EXECUTE_AUTHENTIC_FIVE_RUN_PARTIAL_PROTOCOL",
+    "ACCEPT_ONLY_IF_CONTENT_ADDRESSED_CONSERVATIVE_SCORE_GE_81_8"
+  ],
+  "scheduler_effect": {
+    "delete": [
+      "SERIALIZE_OSWORLD_DIRECT_HARNESS_WORK_BEHIND_PUBLIC_REFERENCE_TO_OWNER_EQUIVALENCE",
+      "TREAT_REFERENCE_CORPUS_AUTHENTICATION_AS_A_MANDATORY_PRECONDITION_TO_DIRECT_OWNER_BYTE_EXECUTION",
+      "RESEARCH_REFERENCE_SEMANTIC_EQUIVALENCE_BEFORE_BUILDING_THE_DIRECT_HARNESS"
+    ],
+    "preserve": [
+      "REFERENCE_CORPUS_PROVENANCE_HARDENING_AS_AUXILIARY_NONBLOCKING_WORK",
+      "OFFICIAL_TASK_BYTE_HASH_VERIFICATION_AS_LOAD_BEARING_DIRECT_RUN_GATE",
+      "MATCHED_PROTOCOL_AND_AUTHENTIC_SCORE_REQUIREMENTS"
+    ]
+  },
+  "new_primitive_required": false,
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_SIMULAR_REFERENCE_CORPUS_IS_OWNER_SIGNED",
+    "NO_CLAIM_THEORETICAL_TOCTOU_MUTATION_IS_CRYPTOGRAPHICALLY_EXCLUDED_FOR_THE_EXPORTED_REFERENCE_RUNS",
+    "NO_GATED_OWNER_TASK_BYTES_ACCESSED_IN_THIS_PROOF",
+    "NO_BRAIN_OSWORLD_SCORE",
+    "NO_OSWORLD_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
