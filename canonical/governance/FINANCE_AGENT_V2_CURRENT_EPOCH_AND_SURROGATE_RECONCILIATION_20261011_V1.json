@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_FINANCE_AGENT_V2_CURRENT_EPOCH_AND_SURROGATE_RECONCILIATION_V1",
+  "date": "2026-10-11",
+  "status": "CURRENT_VALS_EPOCH_RECONFIRMED__NEMO_SURROGATE_NONACCEPTANCE_BOUND__TASK_MASS_ROUTE_STILL_CONDITIONAL__ZERO_CREDIT",
+  "target_predicate": "FINANCE_AGENT_V2_GE_58_59",
+  "current_vals_epoch": {
+    "leaderboard_updated": "2026-10-07",
+    "target_model": "Claude Opus 5.5",
+    "target_partial_credit_percent": 58.59,
+    "first_party_repo": "vals-ai/finance-agent-v2",
+    "current_public_main_commit": "502aab6fdaa3fb9294905c7453f89882baa8d39b",
+    "current_get_agent_blob": "22c012241a430975266fb7f8d2fe7af8e9f1b8d4",
+    "max_time_seconds": 7200,
+    "test_questions": 450,
+    "runs": 3,
+    "reported_score_rule": "MEAN_OF_RUNS_WITH_STANDARD_ERROR_OF_MEAN",
+    "grading": "DEALBREAKER_GATED_SEVERITY_WEIGHTED_PARTIAL_CREDIT_PER_QUESTION"
+  },
+  "score_mass": {
+    "unconditional_run_score_mass_threshold_percentage_points": 175.77,
+    "proof": "58.59 * 3",
+    "task_run_execution_count": 1350,
+    "equal_task_weighting_authoritatively_bound": false,
+    "conditional_task_score_mass_threshold": 790.965,
+    "conditional_only_reason": "FIRST_PARTY_PUBLIC_METHODOLOGY_DOES_NOT_EXPLICITLY_BIND_EACH_RUN_SCORE_AS_THE_EQUAL_ARITHMETIC_MEAN_OF_ALL_450_QUESTION_SCORES"
+  },
+  "nemo_gym": {
+    "repository": "NVIDIA-NeMo/Gym",
+    "observed_commit": "4a9236e48c82f0dc23365a4c0088b1e54d00d3a8",
+    "vals_upstream_pin": "bb460b524472ae0955abdf243bbbac06958dc8c9",
+    "vals_pin_date": "2026-08-05",
+    "pinned_max_time_seconds": 3600,
+    "relation_to_current_vals": "OLDER_UPSTREAM_SNAPSHOT",
+    "useful_for": [
+      "PUBLIC_27Q_CAPABILITY_DEVELOPMENT",
+      "OFFICIAL_TOOL_SURFACE_REUSE",
+      "UPSTREAM_POLICY_DRIFT_DETECTION",
+      "ZERO_WAIT_SURROGATE_DEBUGGING"
+    ],
+    "forbidden_inference": [
+      "NEMO_SCORE_IS_NOT_A_VALS_OFFICIAL_SCORE",
+      "NEMO_JUDGE_IS_NOT_THE_VALS_PRIVATE_THREE_JUDGE_JURY",
+      "NEMO_ONE_HOUR_CAP_DOES_NOT_OVERRIDE_CURRENT_VALS_TWO_HOUR_CAP",
+      "PUBLIC_27Q_SUCCESS_DOES_NOT_PROVE_PRIVATE_TEST_THRESHOLD"
+    ]
+  },
+  "corrected_conclusion": "THE_CURRENT_EXACT_HARNESS_PIN_TO_502AAB6_REMAINS_VALID_ON_TIME_POLICY__NO_REPIN_REQUIRED__USE_NEMO_ONLY_TO_HARDEN_BRAIN_BEFORE_OFFICIAL_VALS_SCORE_RECEIPT",
+  "acceptance_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false
+}
