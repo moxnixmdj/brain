@@ -1,0 +1,17 @@
+{
+  "capability_credit_delta": 0,
+  "carrier": "brain-cad-proof-clean-20261009",
+  "exact_blob_sha256": {
+    "finite_grid_program_inducer_v1.py": "b7496c25ac372d73b351696248c83c12f41a0afe8cfc8b91a82d35028047c99d",
+    "grid_delta_rule_inducer_v1.py": "dc6504fddcc100f0da7d8f5b1b8030e5d99d654055426d76524f526aeacb0a3d",
+    "grid_delta_rule_inducer_v2.py": "e1c08623892dc39fe4f3b6df505172a55ec21c6c55c6d76097d29ef5162f3af1",
+    "test_finite_grid_program_inducer_v1.py": "b820eba4c8288cff4fe198d0ef1c32b5cd3f929d92bfc87c8f8d4b6029264033",
+    "test_grid_delta_rule_inducer_v1.py": "c857f1de64d94ea263f1f6dd87db326b334dc2b88473232a36a68e17ef19d5dc",
+    "test_grid_delta_rule_inducer_v2.py": "d0b5c9e6cd512dbbb259207e295b03e02b2ee9f89552b7ddf8454a27f26ffb63"
+  },
+  "failed": 0,
+  "pass_all": true,
+  "passed": 14,
+  "schema": "PROJECT_BRAIN_GENERAL_GRID_SYNTHESIS_INDEPENDENT_REPLAY_V1",
+  "terminal_authority": false
+}
