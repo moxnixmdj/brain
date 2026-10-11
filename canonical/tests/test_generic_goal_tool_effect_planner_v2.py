@@ -369,5 +369,42 @@ class GenericGoalToolEffectPlannerV2Tests(unittest.TestCase):
         self.assertEqual(out["observation_endpoint_ids"], ["records.list"])
 
 
+    def test_endpoint_object_identity_beats_incidental_field_vocabulary(self):
+        endpoints = [
+            {
+                "id":"opaque.objects.lead.update",
+                "method":"PATCH",
+                "url":"https://opaque.invalid/objects/lead/{id}",
+                "description":"Update lead fields.",
+                "parameters":{"id":{"required":True,"location":"path"}},
+                "request":"Lead fields to update: {Status, Description}",
+            },
+            {
+                "id":"opaque.objects.contact.update",
+                "method":"PATCH",
+                "url":"https://opaque.invalid/objects/contact/{id}",
+                "description":"Update contact fields.",
+                "parameters":{"id":{"required":True,"location":"path"}},
+                "request":"Contact fields to update: {LeadSource, Description}",
+            },
+            {
+                "id":"opaque.objects.lead.list",
+                "method":"GET",
+                "url":"https://opaque.invalid/objects/lead",
+                "description":"List lead records with id and status.",
+                "response":"{records:[{id,status}]}",
+            },
+        ]
+        out = plan_goal_over_tool_schemas(
+            "Find the cobalt lead, then update the lead status to active.",
+            endpoints,
+        )
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(
+            out["mutation_endpoint_ids"],
+            ["opaque.objects.lead.update"],
+        )
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
