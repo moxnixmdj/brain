@@ -689,6 +689,174 @@
         "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-RUNTIME-PYPI-ACQUIRE-MSGPACK-002__msgpack__9f0974d98983__AUTO_VERIFY.json"
       }
     },
+    "decision.synthesis.typed.stdlib": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "incremental_spend_usd": 0,
+      "cost": 1,
+      "requires": [
+        "structured.decision_evidence.available"
+      ],
+      "provides": [
+        "decision.synthesis.typed"
+      ],
+      "result_fields": [
+        "status",
+        "selected_alternative",
+        "decision_confidence",
+        "input_path",
+        "output_path",
+        "output_sha256"
+      ],
+      "keywords": [
+        "decision",
+        "evidence",
+        "synthesis",
+        "support",
+        "contradiction",
+        "constraint",
+        "uncertainty",
+        "conflict",
+        "provenance",
+        "trace",
+        "terminal",
+        "rank"
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "decision.synthesis.typed.stdlib",
+          "input_path": "${input.input_path}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "evidence_decision_synthesis",
+      "entrypoint": "run",
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "limitations": [
+        "Consumes already-typed decision evidence; it does not interpret arbitrary natural language.",
+        "Hard constraints must be explicitly represented as SATISFIED, VIOLATED, or UNKNOWN.",
+        "Evidence relations are explicit SUPPORTS or CONTRADICTS and duplicate independence groups are not double-counted."
+      ],
+      "source": {
+        "type": "python_stdlib",
+        "modules": [
+          "json",
+          "hashlib",
+          "math",
+          "pathlib"
+        ],
+        "adapter_path": "canonical/runtime/bound_capabilities/evidence_decision_synthesis.py"
+      },
+      "verification": {
+        "independently_verified_by": "decision.synthesis.verify.stdlib",
+        "mission_id": "ASTRA-MODEL-INDEPENDENT-EVIDENCE-DECISION-REAL-TASKS-001",
+        "model_dependency_count": 0,
+        "real_tasks": [
+          "REAL-TASK-A-ZERO-SPEND-CARRIER-20260930",
+          "REAL-TASK-B-CLICK-REPAIR-ROUTE-20260930"
+        ],
+        "status": "INDEPENDENT_REMOTE_VERIFICATION_PASS",
+        "public_run_id": 36642428325,
+        "public_job_id": 109657545598,
+        "public_head_sha": "c96efa66a27a32169a074993b2a39f4ebf6e2d4a",
+        "receipt_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_EVIDENCE_DECISION_REMOTE_VERIFICATION_20260930_V1.json",
+        "producer_git_blob": "7690b26800b2701dac9e187a92c5561d79d831dd"
+      }
+    },
+    "decision.synthesis.verify.stdlib": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "incremental_spend_usd": 0,
+      "cost": 1,
+      "requires": [
+        "decision.synthesis.typed"
+      ],
+      "provides": [
+        "decision.synthesis.verified"
+      ],
+      "result_fields": [
+        "verified",
+        "reason",
+        "status",
+        "selected_alternative"
+      ],
+      "keywords": [
+        "decision",
+        "verify",
+        "independent",
+        "evidence",
+        "synthesis",
+        "audit",
+        "trace"
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "decision.synthesis.verify.stdlib",
+          "input_path": "${input.input_path}",
+          "result_path": "${input.result_path}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "verified",
+          "value": true
+        }
+      },
+      "adapter_module": "evidence_decision_verify",
+      "entrypoint": "run",
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "limitations": [
+        "Verifies the typed-decision result by recomputing decision-relevant values without importing the producer module.",
+        "Input and result must be repository-local JSON."
+      ],
+      "source": {
+        "type": "python_stdlib",
+        "modules": [
+          "json",
+          "hashlib",
+          "math",
+          "pathlib"
+        ],
+        "adapter_path": "canonical/runtime/bound_capabilities/evidence_decision_verify.py"
+      },
+      "verification": {
+        "producer_independent": true,
+        "mission_id": "ASTRA-MODEL-INDEPENDENT-EVIDENCE-DECISION-REAL-TASKS-001",
+        "model_dependency_count": 0,
+        "status": "INDEPENDENT_REMOTE_VERIFICATION_PASS",
+        "public_run_id": 36642428325,
+        "public_job_id": 109657545598,
+        "public_head_sha": "c96efa66a27a32169a074993b2a39f4ebf6e2d4a",
+        "receipt_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_EVIDENCE_DECISION_REMOTE_VERIFICATION_20260930_V1.json",
+        "verifier_git_blob": "63cf325320c7b91bf48ea2f2769c999c5a090929"
+      },
+      "proposal_bindings": {
+        "input_path": {
+          "type": "effect_result",
+          "effect": "decision.synthesis.typed",
+          "field": "input_path",
+          "container": "scalar"
+        },
+        "result_path": {
+          "type": "effect_result",
+          "effect": "decision.synthesis.typed",
+          "field": "output_path",
+          "container": "scalar"
+        }
+      }
+    },
     "document.convert.markdown_pdf.pandoc_weasyprint": {
       "action_template": {
         "args": {
@@ -749,75 +917,6 @@
         "independent_verifier_capability": "pdf.extract.text.pypdf",
         "mission_id": "ASTRA-VERIFY-MARKDOWN-PDF-001",
         "verification_evidence": "canonical/astra_runtime/evidence/ASTRA-VERIFY-MARKDOWN-PDF-001__INDEPENDENT.json"
-      }
-    },
-    "docx.document.create_from_json_record": {
-      "action_template": {
-        "args": {
-          "capability_id": "docx.document.create_from_json_record",
-          "goal": "${input.goal}",
-          "json_path": "${input.json_path}",
-          "output_path": "${input.output_path}"
-        },
-        "expect": {
-          "field": "output_verified",
-          "type": "field_equals",
-          "value": true
-        },
-        "type": "invoke_capability"
-      },
-      "adapter_module": "docx_report_from_json",
-      "cost": 2,
-      "entrypoint": "run",
-      "incremental_spend_usd": 0,
-      "keywords": [
-        "docx",
-        "document",
-        "report",
-        "json",
-        "record",
-        "normalized",
-        "field",
-        "value",
-        "table",
-        "create"
-      ],
-      "limitations": [
-        "Consumes exactly one unambiguous structured JSON record containing all requested fields.",
-        "Builds a two-column field/value report by composing the independently verified DOCX producer."
-      ],
-      "platforms": [
-        "linux"
-      ],
-      "provides": [
-        "docx.document.create_from_json_record"
-      ],
-      "requires": [
-        "structured.json.available"
-      ],
-      "source": {
-        "origin": "Ubuntu",
-        "packages": [
-          {
-            "name": "python3-docx",
-            "sha256": "8dec367f86be44b86bb3c7329ccc6af165854008fd23e185f44500ece39bdb80",
-            "version": "1.1.0+dfsg-2"
-          }
-        ],
-        "type": "apt"
-      },
-      "status": "VERIFIED_BOUND_CAPABILITY",
-      "verification": {
-        "independently_verified_by": "docx.document.verify.intent_ooxml",
-        "mission_id": "ASTRA-VERIFY-DOCX-JSON-ROUNDTRIP-001",
-        "observed_effect": {
-          "output_path": "canonical/astra_runtime/tmp/DOCX_JSON_ROUNDTRIP_VERIFY.docx",
-          "output_sha256": "ebd1ca200e7aed9befb0cdd78ebb099014c289b8774d743e52b0a6e34543dc25",
-          "rows": 4,
-          "title": "Browser Submission Report"
-        },
-        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DOCX-JSON-ROUNDTRIP-001__RECEIPT.json",
-        "source_record_verified": true
       }
     },
     "docx.document.create.python_docx": {
@@ -896,6 +995,75 @@
           "title": "Project Brain Report"
         },
         "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DOCX-LIBRARY-BINDING-001__RECEIPT.json"
+      }
+    },
+    "docx.document.create_from_json_record": {
+      "action_template": {
+        "args": {
+          "capability_id": "docx.document.create_from_json_record",
+          "goal": "${input.goal}",
+          "json_path": "${input.json_path}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "docx_report_from_json",
+      "cost": 2,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "docx",
+        "document",
+        "report",
+        "json",
+        "record",
+        "normalized",
+        "field",
+        "value",
+        "table",
+        "create"
+      ],
+      "limitations": [
+        "Consumes exactly one unambiguous structured JSON record containing all requested fields.",
+        "Builds a two-column field/value report by composing the independently verified DOCX producer."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "docx.document.create_from_json_record"
+      ],
+      "requires": [
+        "structured.json.available"
+      ],
+      "source": {
+        "origin": "Ubuntu",
+        "packages": [
+          {
+            "name": "python3-docx",
+            "sha256": "8dec367f86be44b86bb3c7329ccc6af165854008fd23e185f44500ece39bdb80",
+            "version": "1.1.0+dfsg-2"
+          }
+        ],
+        "type": "apt"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified_by": "docx.document.verify.intent_ooxml",
+        "mission_id": "ASTRA-VERIFY-DOCX-JSON-ROUNDTRIP-001",
+        "observed_effect": {
+          "output_path": "canonical/astra_runtime/tmp/DOCX_JSON_ROUNDTRIP_VERIFY.docx",
+          "output_sha256": "ebd1ca200e7aed9befb0cdd78ebb099014c289b8774d743e52b0a6e34543dc25",
+          "rows": 4,
+          "title": "Browser Submission Report"
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DOCX-JSON-ROUNDTRIP-001__RECEIPT.json",
+        "source_record_verified": true
       }
     },
     "docx.document.verify.intent_ooxml": {
@@ -1013,6 +1181,163 @@
         },
         "producer_independent": true,
         "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DOCX-LIBRARY-BINDING-001__RECEIPT.json"
+      }
+    },
+    "evidence.claim_relation.generic_units.stdlib": {
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "evidence.claim_relation.generic_units.stdlib",
+          "extraction_path": "${input.extraction_path}",
+          "spec": "${input.spec}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "generic_evidence_claim_relation",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "evidence",
+        "claim",
+        "support",
+        "verbatim",
+        "relation",
+        "numeric",
+        "compare",
+        "predicate",
+        "objective",
+        "grounded",
+        "unit"
+      ],
+      "limitations": [
+        "Claim support is exact normalized substring occurrence only; paraphrase and semantic entailment are not inferred.",
+        "Numeric relations operate only on explicitly caller-referenced numeric literals inside integrity-checked generic V2 evidence units.",
+        "Units must match exactly; no unit conversion or semantic-role inference is performed.",
+        "Does not establish factual correctness, causality, evidence quality, sufficiency, source independence, or parent completion."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "evidence.claim.exact_text_support",
+        "evidence.numeric_relation.explicit"
+      ],
+      "requires": [
+        "source.evidence.objective_grounded_units"
+      ],
+      "source": {
+        "type": "python_stdlib",
+        "modules": [
+          "decimal",
+          "hashlib",
+          "json",
+          "pathlib",
+          "re"
+        ],
+        "adapter_path": "canonical/runtime/bound_capabilities/generic_evidence_claim_relation.py"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "capability_receipt": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_V2_EVIDENCE_CLAIM_RELATION_PROMOTION_20260930_V1.json",
+        "public_run_id": 36682488104,
+        "job_id": 109780804595,
+        "artifact_id": 11082521746,
+        "artifact_digest": "sha256:31563f342c6751d7f4f486c9ae2033af13bc47c9dfb1a3e877461e85b6ca4cfd",
+        "exact_producer_blob": "d66a7eb30774f66160b698d8082947776888293d",
+        "exact_regression_blob": "590a1e50f11bc2903b56d41a00c5354ec2501c44",
+        "independent_fresh_live_generic_v2_status": "PASS"
+      }
+    },
+    "evidence.claim_spec.bind.explicit_comparison.stdlib": {
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "evidence.claim_spec.bind.explicit_comparison.stdlib",
+          "objective": "${input.objective}",
+          "extraction_path": "${input.extraction_path}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "objective_claim_operand_binding",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "objective",
+        "claim",
+        "relation",
+        "operand",
+        "binding",
+        "compare",
+        "higher",
+        "lower",
+        "greater",
+        "less",
+        "exceed",
+        "evidence",
+        "numeric",
+        "at least",
+        "at most",
+        "equal",
+        "different",
+        "differ",
+        "threshold",
+        "quoted",
+        "exact text"
+      ],
+      "limitations": [
+        "Supports only explicit bounded binary comparison forms for GT/LT/GTE/LTE/EQ/NE/ABS_DIFF_LTE and explicit exact quoted-claim support forms covered by the verified grammar.",
+        "Each semantic numeric role must bind uniquely to a distinct evidence unit by lexical anchors.",
+        "Operand selection requires one unique exact-unit-compatible numeric-literal pair; ambiguity fails closed.",
+        "ABS_DIFF_LTE accepts only an explicit finite nonnegative literal threshold whose unit surface exactly matches both operands.",
+        "Exact quoted claims bind only by exact normalized substring occurrence and require one unique evidence unit.",
+        "No unit conversion, paraphrase/semantic entailment, factual correctness, causality, evidence sufficiency, source independence, or latent semantic-role inference."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "evidence.claim_spec.explicit_bounded",
+        "evidence.numeric_relation.objective_bound",
+        "evidence.claim.exact_quoted_bound"
+      ],
+      "requires": [
+        "source.evidence.objective_grounded_units",
+        "evidence.numeric_relation.explicit"
+      ],
+      "source": {
+        "type": "python_stdlib",
+        "modules": [
+          "re",
+          "pathlib",
+          "importlib.util"
+        ],
+        "adapter_path": "canonical/runtime/bound_capabilities/objective_claim_operand_binding.py"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "capability_receipt": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_CLAIM_SPEC_OPERAND_BINDING_PROMOTION_20260930_V1.json",
+        "public_repository": "moxnixmdj/verification-capsule-runner",
+        "public_pr": 166,
+        "public_run_id": 36685279194,
+        "public_job_id": 109789596373,
+        "artifact_id": 11083292341,
+        "artifact_digest": "sha256:1be53e3c01d1c80e12effb3743a4f4befb23f7a071d1adb65ab7b0e1b318635b",
+        "exact_producer_blob": "48fd058430d8d361fc75beced567c7b6d1166531",
+        "exact_regression_blob": "467a9f4f9b835ca8f65fd19b9335770e7b0ef31b",
+        "inherited_relation_blob": "d66a7eb30774f66160b698d8082947776888293d",
+        "independent_full_surface_cross_domain_status": "PASS"
       }
     },
     "http.json.fetch_from_state": {
@@ -1141,6 +1466,78 @@
         "mission_id": "ASTRA-VERIFY-ZBAR-MULTIFORMAT-001",
         "payload": "PROJECT BRAIN",
         "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-ZBAR-MULTIFORMAT-001__RECEIPT.json"
+      }
+    },
+    "image.extract.ocr.tesseract.positioned.tsv": {
+      "action_template": {
+        "args": {
+          "capability_id": "image.extract.ocr.tesseract.positioned.tsv",
+          "path": "${input.image_path}",
+          "language": "eng",
+          "psm_values": [
+            "6",
+            "11",
+            "3",
+            "7"
+          ]
+        },
+        "expect": {
+          "field": "text_items",
+          "type": "field_nonempty"
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "image_ocr_tesseract_positioned",
+      "cost": 2,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "image",
+        "ocr",
+        "positioned",
+        "text",
+        "tsv",
+        "bounding boxes",
+        "chart",
+        "labels",
+        "ticks"
+      ],
+      "limitations": [
+        "Exact pinned English Tesseract surface only; fails closed on binary/package/traineddata drift.",
+        "Produces positioned text observations only and has no chart, engineering, or semantic interpretation authority.",
+        "Allowed PSM values are 3, 6, 7, and 11."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "image.text.positioned",
+        "image.ocr.bounding_boxes"
+      ],
+      "requires": [
+        "image.raster.available"
+      ],
+      "source": {
+        "type": "verified_brain_owned_bounded_component",
+        "adapter_path": "canonical/runtime/bound_capabilities/image_ocr_tesseract_positioned.py",
+        "base_adapter_path": "canonical/runtime/bound_capabilities/image_ocr_tesseract.py",
+        "dependency_accounting_path": "canonical/governance/TESSERACT_OCR_DEPENDENCY_ACCOUNTING_V1.json",
+        "pinned_component_receipt": "canonical/capabilities/opus55/PINNED_IMAGE_OCR_TESSERACT_001.json",
+        "tesseract_version": "5.3.4",
+        "tesseract_package_version": "5.3.4-1build5",
+        "eng_traineddata_sha256": "7d4322bd2a7749724879683fc3912cb542f19906c83bcc1a52132556427170b2",
+        "donor_runtime_required": false,
+        "external_frontier_model_required": false
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independent_verified": true,
+        "verification_path": "canonical/verification/M1A_POSITIONED_OCR_TSV_BRIDGE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+        "workflow_run_id": 36967063281,
+        "workflow_job_id": 110713001347,
+        "exact_runtime_blob_sha": "19f3087489ce7f6f935fc7baaebdc8cd672f4b62",
+        "exact_base_runtime_blob_sha": "45714d7a0160802d986042910da1c4c6462676e5",
+        "no_semantic_authority": true
       }
     },
     "image.qr.generate.qrencode": {
@@ -1603,6 +2000,105 @@
         }
       }
     },
+    "math.numeric_expression.sympy": {
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "math.numeric_expression.sympy",
+          "expression": "${input.expression}",
+          "variables": "${input.variables}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "numeric_expression_sympy",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "numeric",
+        "scalar",
+        "expression",
+        "arithmetic",
+        "multiply",
+        "multiplication",
+        "exponent",
+        "exponentiation",
+        "power",
+        "calculate",
+        "compute"
+      ],
+      "limitations": [
+        "Accepts only numeric literals, named typed scalar inputs, unary +/- and binary + - * / ** through a restricted Python AST.",
+        "Numeric JSON strings are accepted only when they match a strict decimal/scientific-number grammar.",
+        "Calls, attributes, subscripts, containers, comparisons, arbitrary code, eval/exec and arbitrary string sympify are rejected.",
+        "Exponent magnitude is bounded to 32 and expression size/depth are bounded."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "numeric.scalar.expression.evaluate"
+      ],
+      "requires": [
+        "typed.scalar.inputs.available"
+      ],
+      "source": {
+        "type": "pypi",
+        "project": "sympy",
+        "version": "1.14.0",
+        "wheel_filename": "sympy-1.14.0-py3-none-any.whl",
+        "wheel_sha256": "e091cc3e99d2141a0ba2847328f5479b05d94a6635cb96148ccb3f34671bd8f5",
+        "metadata_url": "https://pypi.org/pypi/sympy/1.14.0/json",
+        "dependency_closure": {
+          "schema": "PROJECT_BRAIN_PYPI_WHEEL_CLOSURE_V1",
+          "root_project": "sympy",
+          "root_version": "1.14.0",
+          "resolver": "pip-download-only-binary",
+          "source_only_artifacts_allowed": false,
+          "network_required_for_install": false,
+          "wheel_count": 2,
+          "wheels": [
+            {
+              "project": "sympy",
+              "version": "1.14.0",
+              "filename": "sympy-1.14.0-py3-none-any.whl",
+              "sha256": "e091cc3e99d2141a0ba2847328f5479b05d94a6635cb96148ccb3f34671bd8f5",
+              "metadata_url": "https://pypi.org/pypi/sympy/1.14.0/json",
+              "url": "https://files.pythonhosted.org/packages/a2/09/77d55d46fd61b4a135c444fc97158ef34a095e5681d0a6c10b75bf356191/sympy-1.14.0-py3-none-any.whl"
+            },
+            {
+              "project": "mpmath",
+              "version": "1.3.0",
+              "filename": "mpmath-1.3.0-py3-none-any.whl",
+              "sha256": "a0b2b9fe80bbcd81a6647ff13108738cfb482d481d826cc0e02f5b35e5c88d2c",
+              "metadata_url": "https://pypi.org/pypi/mpmath/1.3.0/json",
+              "url": "https://files.pythonhosted.org/packages/43/e3/7d92a15f894aa0c9c4b49b8ee9ac9850d6e63b03c9c32c0367a13ae62209/mpmath-1.3.0-py3-none-any.whl"
+            }
+          ],
+          "closure_sha256": "4ec35feca806fd8634f50c07cf5b4ae5e0f405c369d0d42e3f3bcb84cb931a07"
+        }
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "inherited_supplier_evidence": "canonical/capabilities/obsolescence/EXACT_SYMBOLIC_COMPUTATION_V1_ADJUDICATION.json",
+        "inherited_supplier_status": "SymPy 1.14.0 exact-symbolic route independently adjudicated 12/12",
+        "mission_id": "PR296-TYPED-SCALAR-EXPRESSION-QUALIFICATION-001",
+        "public_run_id": 36666659921,
+        "public_job_id": 109732664034,
+        "artifact_id": 11076347530,
+        "artifact_digest": "sha256:1bf6628bff366eb6fa3d277042798c956eec1c5fca7d7bace1237d13ce832cc0",
+        "fresh_domain": "DEMOGRAPHY_PUBLIC_STATISTICS",
+        "independent_recomputation": true,
+        "unsafe_rejection_pass": true,
+        "model_dependency_count": 0,
+        "incremental_spend_usd": 0
+      }
+    },
     "pdf.extract.ocr.tesseract": {
       "action_template": {
         "args": {
@@ -1733,6 +2229,172 @@
         "receipt_path": "canonical/astra_runtime/evidence/ASTRA-RUNTIME-BOUND-PDF-TEXT-001__RECEIPT.json",
         "state_path": "canonical/astra_runtime/state/ASTRA-RUNTIME-BOUND-PDF-TEXT-001.json",
         "workflow_run_id": 36060830384
+      }
+    },
+    "plain_goal.bound_capability.grounding.stdlib": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "incremental_spend_usd": 0,
+      "cost": 1,
+      "requires": [],
+      "provides": [
+        "plain_goal.bound_capability.grounding"
+      ],
+      "result_fields": [
+        "output_path",
+        "output_sha256",
+        "grounded_clause_count",
+        "candidate_capability_ids",
+        "unresolved_clause_indexes",
+        "model_dependency_count"
+      ],
+      "keywords": [
+        "plain",
+        "goal",
+        "grounding",
+        "bound",
+        "capability",
+        "semantic",
+        "existing",
+        "registry",
+        "reuse",
+        "ambiguity"
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "plain_goal.bound_capability.grounding.stdlib",
+          "goal": "${input.goal}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "plain_goal_bound_grounding",
+      "entrypoint": "run",
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "limitations": [
+        "Grounds only to capabilities already marked VERIFIED_BOUND_CAPABILITY in the canonical registry.",
+        "Preserves multiple plausible matches as AMBIGUOUS_BOUNDED and leaves unsupported clauses UNRESOLVED.",
+        "Does not plan, execute, acquire suppliers, or treat constraint-only vocabulary as capability evidence.",
+        "External discovery remains allowed only for unresolved clauses after bound grounding."
+      ],
+      "source": {
+        "type": "python_stdlib",
+        "modules": [
+          "difflib",
+          "hashlib",
+          "json",
+          "re",
+          "pathlib"
+        ],
+        "adapter_path": "canonical/runtime/bound_capabilities/plain_goal_bound_grounding.py"
+      },
+      "verification": {
+        "independently_verified_by": "plain_goal.bound_capability.grounding.verify.stdlib",
+        "model_dependency_count": 0,
+        "incremental_spend_usd": 0,
+        "regression_run_id": 36646224008,
+        "real_task_A_run_id": 36646322912,
+        "real_task_A_artifact_id": 11068403761,
+        "real_task_A_artifact_digest": "sha256:a46ae56de001b9cb3f4d4b544914672556b67bd5f5597cf8ca4bad71e52b60f3",
+        "fresh_reuse_B_run_id": 36646400507,
+        "fresh_reuse_B_artifact_id": 11067819136,
+        "fresh_reuse_B_artifact_digest": "sha256:4b12f80bb0cf68539ede066a66a9aa0a81310374f9bc03aaa52d379678772d48",
+        "producer_git_blob": "00f5d0c1c742f444ad876103f251bb4476017dc1",
+        "receipt_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_PLAIN_GOAL_BOUND_GROUNDING_ACQUISITION_20260930_V1.json",
+        "exact_final_head_validation_run_id": 36646452335,
+        "exact_final_head_validation_artifact_id": 11068728150,
+        "exact_final_head_validation_artifact_digest": "sha256:3969e625a3239fed6fc5abdf3f6d3992b1685202e20bc8ef402cab194b7963b9",
+        "astra_runtime_integration_blob": "801d226ab589595f376da54833de6b925ff96f15"
+      }
+    },
+    "plain_goal.bound_capability.grounding.verify.stdlib": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "incremental_spend_usd": 0,
+      "cost": 1,
+      "requires": [
+        "plain_goal.bound_capability.grounding"
+      ],
+      "provides": [
+        "plain_goal.bound_capability.grounding.verified"
+      ],
+      "result_fields": [
+        "verified",
+        "reason",
+        "producer_independent",
+        "model_dependency_count"
+      ],
+      "keywords": [
+        "plain",
+        "goal",
+        "grounding",
+        "verify",
+        "independent",
+        "bound",
+        "capability",
+        "registry",
+        "evidence"
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "plain_goal.bound_capability.grounding.verify.stdlib",
+          "goal": "${input.goal}",
+          "result_path": "${input.result_path}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "verified",
+          "value": true
+        }
+      },
+      "adapter_module": "plain_goal_bound_grounding_verify",
+      "entrypoint": "run",
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "limitations": [
+        "Verifies grounding structure, goal hash, candidate registry status, zero-spend status, clause-supported match evidence, ambiguity cardinality, and discovery policy.",
+        "Does not import the producer module."
+      ],
+      "source": {
+        "type": "python_stdlib",
+        "modules": [
+          "hashlib",
+          "json",
+          "pathlib",
+          "re"
+        ],
+        "adapter_path": "canonical/runtime/bound_capabilities/plain_goal_bound_grounding_verify.py"
+      },
+      "verification": {
+        "producer_independent": true,
+        "model_dependency_count": 0,
+        "regression_run_id": 36646224008,
+        "real_task_A_run_id": 36646322912,
+        "fresh_reuse_B_run_id": 36646400507,
+        "verifier_git_blob": "d4aa64dc995845fcf8045f14f476f84b7f1d9cb8",
+        "receipt_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_PLAIN_GOAL_BOUND_GROUNDING_ACQUISITION_20260930_V1.json",
+        "exact_final_head_validation_run_id": 36646452335,
+        "exact_final_head_validation_artifact_id": 11068728150,
+        "exact_final_head_validation_artifact_digest": "sha256:3969e625a3239fed6fc5abdf3f6d3992b1685202e20bc8ef402cab194b7963b9"
+      },
+      "proposal_bindings": {
+        "result_path": {
+          "type": "effect_result",
+          "effect": "plain_goal.bound_capability.grounding",
+          "field": "output_path",
+          "container": "scalar"
+        }
       }
     },
     "pypi.provenance.audit_live_artifact": {
@@ -1923,6 +2585,291 @@
         "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-PYTHON-TEST-AUDIT-005.json"
       }
     },
+    "source.authority.identity.ror": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "incremental_spend_usd": 0,
+      "cost": 1,
+      "requires": [
+        "source.candidate.provenance.verified"
+      ],
+      "provides": [
+        "source.authority.host_organization_identity"
+      ],
+      "result_fields": [
+        "status",
+        "verified_candidate_count",
+        "verified_candidates",
+        "authority_claim_scope",
+        "primary_source_verification",
+        "relevance_verification",
+        "evidence_sufficiency_verification",
+        "output_path",
+        "output_verified"
+      ],
+      "keywords": [
+        "source",
+        "authority",
+        "identity",
+        "organization",
+        "ror",
+        "domain",
+        "host",
+        "research",
+        "funding",
+        "provenance"
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "source.authority.identity.ror",
+          "discovery_path": "${input.discovery_path}",
+          "output_path": "${input.output_path}",
+          "timeout_s": 20,
+          "max_candidates": 12
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "source_authority_binding_ror",
+      "entrypoint": "run",
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "limitations": [
+        "VERIFIED means only exact candidate-domain to one active ROR organization identity binding.",
+        "No parent-domain inference and no fuzzy identity matching.",
+        "Unsupported, unavailable, or ambiguous domains fail closed.",
+        "Does not establish primary-source status, objective relevance, factual correctness, evidence sufficiency, or claim endorsement."
+      ],
+      "source": {
+        "type": "python_stdlib",
+        "modules": [
+          "json",
+          "pathlib",
+          "re",
+          "urllib.parse",
+          "urllib.request"
+        ],
+        "adapter_path": "canonical/runtime/bound_capabilities/source_authority_binding_ror.py",
+        "external_registry": "ROR v2 API"
+      },
+      "verification": {
+        "status": "INDEPENDENT_REMOTE_VERIFICATION_PASS",
+        "public_repository": "moxnixmdj/verification-capsule-runner",
+        "public_pr": 132,
+        "public_run_id": 36676947006,
+        "public_head_sha": "25d2bbe6703f745d23b45dab87fd0952aa648324",
+        "producer_git_blob": "9396ff7169b274af9bbfbe736e004587631e3b05",
+        "model_dependency_count": 0,
+        "incremental_spend_usd": 0,
+        "receipt_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_ROR_SOURCE_AUTHORITY_IDENTITY_PROMOTION_20260930_V1.json"
+      }
+    },
+    "source.evidence.extract.objective_grounded.stdlib": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "incremental_spend_usd": 0,
+      "cost": 1,
+      "requires": [
+        "source.candidate.provenance.verified",
+        "source.objective_relevance.lexical_ranked"
+      ],
+      "provides": [
+        "source.evidence.objective_grounded_units",
+        "source.evidence.verbatim_provenance_bound"
+      ],
+      "result_fields": [
+        "status",
+        "evidence_extraction_status",
+        "source_url",
+        "page_raw_sha256",
+        "visible_text_sha256",
+        "evidence_unit_count",
+        "evidence_units",
+        "claim_relation_status",
+        "factual_correctness_status",
+        "evidence_sufficiency_status",
+        "model_dependency_count",
+        "output_path",
+        "output_verified"
+      ],
+      "keywords": [
+        "source",
+        "evidence",
+        "extract",
+        "objective",
+        "grounded",
+        "verbatim",
+        "provenance",
+        "bm25",
+        "relevance",
+        "hash",
+        "offset",
+        "research"
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "source.evidence.extract.objective_grounded.stdlib",
+          "input_path": "${input.input_path}",
+          "output_path": "${input.output_path}",
+          "timeout": 20,
+          "max_units": 10
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "objective_evidence_unit_extract",
+      "entrypoint": "run",
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "limitations": [
+        "Requires a live-retrieval provenance receipt and independently-qualified objective-relevance receipt bound to the same candidate.",
+        "Fresh retrieval must resolve to the exact admitted source URL; source identity drift fails closed.",
+        "ROR/organization identity is optional metadata and is not an admission prerequisite.",
+        "Proves verbatim objective-grounded evidence units only; support, entailment, factual correctness, causality, quality, sufficiency, and independence remain unverified."
+      ],
+      "source": {
+        "type": "python_stdlib",
+        "modules": [
+          "hashlib",
+          "html",
+          "ipaddress",
+          "json",
+          "pathlib",
+          "re",
+          "urllib.parse",
+          "urllib.request",
+          "html.parser"
+        ],
+        "adapter_path": "canonical/runtime/bound_capabilities/objective_evidence_unit_extract.py"
+      },
+      "verification": {
+        "status": "REQUALIFIED_AFTER_MODERN_CONTAINER_REPAIR",
+        "current_authority": "VERIFIED",
+        "public_repository": "moxnixmdj/verification-capsule-runner",
+        "public_pr": 159,
+        "public_run_id": 36681368306,
+        "public_job_id": 109777319500,
+        "artifact_id": 11081458134,
+        "artifact_digest": "sha256:5711d014ef9b444eb8eba57d36c929843cec81b3f9feba633f0fd43f20b67887",
+        "producer_git_blob": "fc45fb583f6aeac91f7c88f918644c38fbc70e34",
+        "parent_frontend_git_blob": "46fe82d74a35d9318a134fb95e1d5cecfc2dd485",
+        "modern_container_regression_git_blob": "8dc3a5d350173d57f67c8e1ac50ab243d42f2214",
+        "exact_runner_blob_match": true,
+        "live_domains": [
+          "sqlite.org",
+          "rfc-editor.org"
+        ],
+        "ror_admission_required": false,
+        "independent_refetch_oracle": true,
+        "preserved_falsification": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_EVIDENCE_EXTRACTION_MODERN_CONTAINER_FALSIFICATION_20260930_V1.json",
+        "receipt_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_EVIDENCE_EXTRACTION_MODERN_CONTAINER_REQUALIFICATION_20260930_V1.json",
+        "model_dependency_count": 0,
+        "incremental_spend_usd": 0
+      }
+    },
+    "source.objective_relevance.rank.bm25": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "incremental_spend_usd": 0,
+      "cost": 1,
+      "requires": [
+        "source.candidates.available"
+      ],
+      "provides": [
+        "source.objective_relevance.lexical_ranked"
+      ],
+      "result_fields": [
+        "status",
+        "relevance_claim_scope",
+        "top_candidate_original_index",
+        "ranked_candidates",
+        "semantic_entailment_status",
+        "primary_source_status",
+        "model_dependency_count",
+        "output_path",
+        "output_verified"
+      ],
+      "keywords": [
+        "source",
+        "objective",
+        "relevance",
+        "rank",
+        "bm25",
+        "evidence",
+        "candidate",
+        "lexical",
+        "research"
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "source.objective_relevance.rank.bm25",
+          "input_path": "${input.input_path}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "objective_relevance_bm25",
+      "entrypoint": "run",
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "limitations": [
+        "Ranks lexical relevance only; does not prove semantic entailment.",
+        "Does not establish primary-source status, authority, factual correctness, or evidence sufficiency.",
+        "Fails closed when the objective has no discriminative tokens or candidates contain no overlapping lexical evidence.",
+        "Designed for small candidate sets emitted by the qualified open research source frontend."
+      ],
+      "source": {
+        "type": "python_stdlib",
+        "modules": [
+          "json",
+          "math",
+          "pathlib",
+          "re"
+        ],
+        "algorithm": "BM25 Robertson/Sparck Jones positive-IDF variant",
+        "parameters": {
+          "k1": 1.5,
+          "b": 0.75,
+          "title_weight_approximation": 2
+        },
+        "adapter_path": "canonical/runtime/bound_capabilities/objective_relevance_bm25.py"
+      },
+      "verification": {
+        "status": "INDEPENDENT_PUBLIC_CROSS_DOMAIN_QUALIFICATION_PASS",
+        "public_runner_pr": 143,
+        "workflow_run_id": 36678278264,
+        "runner_issue": 144,
+        "exact_producer_blob": "95d2b6bac6f6ffb5db97526407fcd22cbcc6c790",
+        "independent_oracle": "rank-bm25 0.2.2 BM25Okapi",
+        "domains": [
+          "AEROSPACE",
+          "DATABASE_SYSTEMS",
+          "CLIMATE_SCIENCE"
+        ],
+        "no_overlap_fail_closed": true,
+        "model_dependency_count": 0,
+        "incremental_spend_usd": 0
+      }
+    },
     "sqlite.table.create_from_json_records": {
       "action_template": {
         "args": {
@@ -2062,6 +3009,94 @@
         },
         "producer_source": "python_stdlib:sqlite3",
         "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-SQLITE-ROUNDTRIP-002__RESULT.json"
+      }
+    },
+    "terminal.kstar.root.assess.stdlib": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "incremental_spend_usd": 0,
+      "cost": 1,
+      "requires": [],
+      "provides": [
+        "terminal.kstar.root.assessment",
+        "terminal.scope_complete.proof_or_minimum_residual",
+        "terminal.tournament.failure.witness"
+      ],
+      "result_fields": [
+        "status",
+        "outcome",
+        "result_path",
+        "output_verified",
+        "u_empty",
+        "abc_closed",
+        "missing_premises",
+        "model_dependency_count"
+      ],
+      "keywords": [
+        "terminal",
+        "kstar",
+        "scope",
+        "complete",
+        "proof",
+        "brain",
+        "opus",
+        "capability",
+        "falsify",
+        "tournament",
+        "policy",
+        "adequacy",
+        "discriminator",
+        "generator",
+        "basis",
+        "transform",
+        "runtime",
+        "ownership",
+        "residual",
+        "counterexample",
+        "evidence",
+        "reuse",
+        "universal",
+        "cover",
+        "context",
+        "semantic",
+        "composition"
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "terminal.kstar.root.assess.stdlib"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "terminal_kstar_root_assess",
+      "entrypoint": "run",
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "limitations": [
+        "Thin deterministic adapter over current canonical terminal authority and U frontier; does not invent proof premises.",
+        "Writes SCOPE_COMPLETE_PROOF only when every load-bearing universal predicate is already proved in current canonical truth; otherwise writes UNRESOLVED with exact missing premises.",
+        "Never edits terminal authority, terminal manifest, ownership state, or promotion state."
+      ],
+      "source": {
+        "type": "python_stdlib",
+        "modules": [
+          "hashlib",
+          "json",
+          "pathlib"
+        ],
+        "adapter_path": "canonical/runtime/bound_capabilities/terminal_kstar_root_assess.py"
+      },
+      "verification": {
+        "status": "BOUND_WITH_FAIL_CLOSED_REGRESSION_TEST",
+        "independent_verification_required_for_any_scope_complete_promotion": true,
+        "model_dependency_count": 0,
+        "incremental_spend_usd": 0
       }
     },
     "web.browser.rendered.capture.chromedriver": {
@@ -2438,969 +3473,6 @@
           ]
         },
         "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-YAML-JSON-YQ-001__RECEIPT.json"
-      }
-    },
-    "decision.synthesis.typed.stdlib": {
-      "status": "VERIFIED_BOUND_CAPABILITY",
-      "incremental_spend_usd": 0,
-      "cost": 1,
-      "requires": [
-        "structured.decision_evidence.available"
-      ],
-      "provides": [
-        "decision.synthesis.typed"
-      ],
-      "result_fields": [
-        "status",
-        "selected_alternative",
-        "decision_confidence",
-        "input_path",
-        "output_path",
-        "output_sha256"
-      ],
-      "keywords": [
-        "decision",
-        "evidence",
-        "synthesis",
-        "support",
-        "contradiction",
-        "constraint",
-        "uncertainty",
-        "conflict",
-        "provenance",
-        "trace",
-        "terminal",
-        "rank"
-      ],
-      "action_template": {
-        "type": "invoke_capability",
-        "args": {
-          "capability_id": "decision.synthesis.typed.stdlib",
-          "input_path": "${input.input_path}",
-          "output_path": "${input.output_path}"
-        },
-        "expect": {
-          "type": "field_equals",
-          "field": "output_verified",
-          "value": true
-        }
-      },
-      "adapter_module": "evidence_decision_synthesis",
-      "entrypoint": "run",
-      "platforms": [
-        "linux",
-        "windows",
-        "darwin"
-      ],
-      "limitations": [
-        "Consumes already-typed decision evidence; it does not interpret arbitrary natural language.",
-        "Hard constraints must be explicitly represented as SATISFIED, VIOLATED, or UNKNOWN.",
-        "Evidence relations are explicit SUPPORTS or CONTRADICTS and duplicate independence groups are not double-counted."
-      ],
-      "source": {
-        "type": "python_stdlib",
-        "modules": [
-          "json",
-          "hashlib",
-          "math",
-          "pathlib"
-        ],
-        "adapter_path": "canonical/runtime/bound_capabilities/evidence_decision_synthesis.py"
-      },
-      "verification": {
-        "independently_verified_by": "decision.synthesis.verify.stdlib",
-        "mission_id": "ASTRA-MODEL-INDEPENDENT-EVIDENCE-DECISION-REAL-TASKS-001",
-        "model_dependency_count": 0,
-        "real_tasks": [
-          "REAL-TASK-A-ZERO-SPEND-CARRIER-20260930",
-          "REAL-TASK-B-CLICK-REPAIR-ROUTE-20260930"
-        ],
-        "status": "INDEPENDENT_REMOTE_VERIFICATION_PASS",
-        "public_run_id": 36642428325,
-        "public_job_id": 109657545598,
-        "public_head_sha": "c96efa66a27a32169a074993b2a39f4ebf6e2d4a",
-        "receipt_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_EVIDENCE_DECISION_REMOTE_VERIFICATION_20260930_V1.json",
-        "producer_git_blob": "7690b26800b2701dac9e187a92c5561d79d831dd"
-      }
-    },
-    "decision.synthesis.verify.stdlib": {
-      "status": "VERIFIED_BOUND_CAPABILITY",
-      "incremental_spend_usd": 0,
-      "cost": 1,
-      "requires": [
-        "decision.synthesis.typed"
-      ],
-      "provides": [
-        "decision.synthesis.verified"
-      ],
-      "result_fields": [
-        "verified",
-        "reason",
-        "status",
-        "selected_alternative"
-      ],
-      "keywords": [
-        "decision",
-        "verify",
-        "independent",
-        "evidence",
-        "synthesis",
-        "audit",
-        "trace"
-      ],
-      "action_template": {
-        "type": "invoke_capability",
-        "args": {
-          "capability_id": "decision.synthesis.verify.stdlib",
-          "input_path": "${input.input_path}",
-          "result_path": "${input.result_path}"
-        },
-        "expect": {
-          "type": "field_equals",
-          "field": "verified",
-          "value": true
-        }
-      },
-      "adapter_module": "evidence_decision_verify",
-      "entrypoint": "run",
-      "platforms": [
-        "linux",
-        "windows",
-        "darwin"
-      ],
-      "limitations": [
-        "Verifies the typed-decision result by recomputing decision-relevant values without importing the producer module.",
-        "Input and result must be repository-local JSON."
-      ],
-      "source": {
-        "type": "python_stdlib",
-        "modules": [
-          "json",
-          "hashlib",
-          "math",
-          "pathlib"
-        ],
-        "adapter_path": "canonical/runtime/bound_capabilities/evidence_decision_verify.py"
-      },
-      "verification": {
-        "producer_independent": true,
-        "mission_id": "ASTRA-MODEL-INDEPENDENT-EVIDENCE-DECISION-REAL-TASKS-001",
-        "model_dependency_count": 0,
-        "status": "INDEPENDENT_REMOTE_VERIFICATION_PASS",
-        "public_run_id": 36642428325,
-        "public_job_id": 109657545598,
-        "public_head_sha": "c96efa66a27a32169a074993b2a39f4ebf6e2d4a",
-        "receipt_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_EVIDENCE_DECISION_REMOTE_VERIFICATION_20260930_V1.json",
-        "verifier_git_blob": "63cf325320c7b91bf48ea2f2769c999c5a090929"
-      },
-      "proposal_bindings": {
-        "input_path": {
-          "type": "effect_result",
-          "effect": "decision.synthesis.typed",
-          "field": "input_path",
-          "container": "scalar"
-        },
-        "result_path": {
-          "type": "effect_result",
-          "effect": "decision.synthesis.typed",
-          "field": "output_path",
-          "container": "scalar"
-        }
-      }
-    },
-    "plain_goal.bound_capability.grounding.stdlib": {
-      "status": "VERIFIED_BOUND_CAPABILITY",
-      "incremental_spend_usd": 0,
-      "cost": 1,
-      "requires": [],
-      "provides": [
-        "plain_goal.bound_capability.grounding"
-      ],
-      "result_fields": [
-        "output_path",
-        "output_sha256",
-        "grounded_clause_count",
-        "candidate_capability_ids",
-        "unresolved_clause_indexes",
-        "model_dependency_count"
-      ],
-      "keywords": [
-        "plain",
-        "goal",
-        "grounding",
-        "bound",
-        "capability",
-        "semantic",
-        "existing",
-        "registry",
-        "reuse",
-        "ambiguity"
-      ],
-      "action_template": {
-        "type": "invoke_capability",
-        "args": {
-          "capability_id": "plain_goal.bound_capability.grounding.stdlib",
-          "goal": "${input.goal}",
-          "output_path": "${input.output_path}"
-        },
-        "expect": {
-          "type": "field_equals",
-          "field": "output_verified",
-          "value": true
-        }
-      },
-      "adapter_module": "plain_goal_bound_grounding",
-      "entrypoint": "run",
-      "platforms": [
-        "linux",
-        "windows",
-        "darwin"
-      ],
-      "limitations": [
-        "Grounds only to capabilities already marked VERIFIED_BOUND_CAPABILITY in the canonical registry.",
-        "Preserves multiple plausible matches as AMBIGUOUS_BOUNDED and leaves unsupported clauses UNRESOLVED.",
-        "Does not plan, execute, acquire suppliers, or treat constraint-only vocabulary as capability evidence.",
-        "External discovery remains allowed only for unresolved clauses after bound grounding."
-      ],
-      "source": {
-        "type": "python_stdlib",
-        "modules": [
-          "difflib",
-          "hashlib",
-          "json",
-          "re",
-          "pathlib"
-        ],
-        "adapter_path": "canonical/runtime/bound_capabilities/plain_goal_bound_grounding.py"
-      },
-      "verification": {
-        "independently_verified_by": "plain_goal.bound_capability.grounding.verify.stdlib",
-        "model_dependency_count": 0,
-        "incremental_spend_usd": 0,
-        "regression_run_id": 36646224008,
-        "real_task_A_run_id": 36646322912,
-        "real_task_A_artifact_id": 11068403761,
-        "real_task_A_artifact_digest": "sha256:a46ae56de001b9cb3f4d4b544914672556b67bd5f5597cf8ca4bad71e52b60f3",
-        "fresh_reuse_B_run_id": 36646400507,
-        "fresh_reuse_B_artifact_id": 11067819136,
-        "fresh_reuse_B_artifact_digest": "sha256:4b12f80bb0cf68539ede066a66a9aa0a81310374f9bc03aaa52d379678772d48",
-        "producer_git_blob": "00f5d0c1c742f444ad876103f251bb4476017dc1",
-        "receipt_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_PLAIN_GOAL_BOUND_GROUNDING_ACQUISITION_20260930_V1.json",
-        "exact_final_head_validation_run_id": 36646452335,
-        "exact_final_head_validation_artifact_id": 11068728150,
-        "exact_final_head_validation_artifact_digest": "sha256:3969e625a3239fed6fc5abdf3f6d3992b1685202e20bc8ef402cab194b7963b9",
-        "astra_runtime_integration_blob": "801d226ab589595f376da54833de6b925ff96f15"
-      }
-    },
-    "plain_goal.bound_capability.grounding.verify.stdlib": {
-      "status": "VERIFIED_BOUND_CAPABILITY",
-      "incremental_spend_usd": 0,
-      "cost": 1,
-      "requires": [
-        "plain_goal.bound_capability.grounding"
-      ],
-      "provides": [
-        "plain_goal.bound_capability.grounding.verified"
-      ],
-      "result_fields": [
-        "verified",
-        "reason",
-        "producer_independent",
-        "model_dependency_count"
-      ],
-      "keywords": [
-        "plain",
-        "goal",
-        "grounding",
-        "verify",
-        "independent",
-        "bound",
-        "capability",
-        "registry",
-        "evidence"
-      ],
-      "action_template": {
-        "type": "invoke_capability",
-        "args": {
-          "capability_id": "plain_goal.bound_capability.grounding.verify.stdlib",
-          "goal": "${input.goal}",
-          "result_path": "${input.result_path}"
-        },
-        "expect": {
-          "type": "field_equals",
-          "field": "verified",
-          "value": true
-        }
-      },
-      "adapter_module": "plain_goal_bound_grounding_verify",
-      "entrypoint": "run",
-      "platforms": [
-        "linux",
-        "windows",
-        "darwin"
-      ],
-      "limitations": [
-        "Verifies grounding structure, goal hash, candidate registry status, zero-spend status, clause-supported match evidence, ambiguity cardinality, and discovery policy.",
-        "Does not import the producer module."
-      ],
-      "source": {
-        "type": "python_stdlib",
-        "modules": [
-          "hashlib",
-          "json",
-          "pathlib",
-          "re"
-        ],
-        "adapter_path": "canonical/runtime/bound_capabilities/plain_goal_bound_grounding_verify.py"
-      },
-      "verification": {
-        "producer_independent": true,
-        "model_dependency_count": 0,
-        "regression_run_id": 36646224008,
-        "real_task_A_run_id": 36646322912,
-        "fresh_reuse_B_run_id": 36646400507,
-        "verifier_git_blob": "d4aa64dc995845fcf8045f14f476f84b7f1d9cb8",
-        "receipt_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_PLAIN_GOAL_BOUND_GROUNDING_ACQUISITION_20260930_V1.json",
-        "exact_final_head_validation_run_id": 36646452335,
-        "exact_final_head_validation_artifact_id": 11068728150,
-        "exact_final_head_validation_artifact_digest": "sha256:3969e625a3239fed6fc5abdf3f6d3992b1685202e20bc8ef402cab194b7963b9"
-      },
-      "proposal_bindings": {
-        "result_path": {
-          "type": "effect_result",
-          "effect": "plain_goal.bound_capability.grounding",
-          "field": "output_path",
-          "container": "scalar"
-        }
-      }
-    },
-    "math.numeric_expression.sympy": {
-      "action_template": {
-        "type": "invoke_capability",
-        "args": {
-          "capability_id": "math.numeric_expression.sympy",
-          "expression": "${input.expression}",
-          "variables": "${input.variables}",
-          "output_path": "${input.output_path}"
-        },
-        "expect": {
-          "type": "field_equals",
-          "field": "output_verified",
-          "value": true
-        }
-      },
-      "adapter_module": "numeric_expression_sympy",
-      "cost": 1,
-      "entrypoint": "run",
-      "incremental_spend_usd": 0,
-      "keywords": [
-        "numeric",
-        "scalar",
-        "expression",
-        "arithmetic",
-        "multiply",
-        "multiplication",
-        "exponent",
-        "exponentiation",
-        "power",
-        "calculate",
-        "compute"
-      ],
-      "limitations": [
-        "Accepts only numeric literals, named typed scalar inputs, unary +/- and binary + - * / ** through a restricted Python AST.",
-        "Numeric JSON strings are accepted only when they match a strict decimal/scientific-number grammar.",
-        "Calls, attributes, subscripts, containers, comparisons, arbitrary code, eval/exec and arbitrary string sympify are rejected.",
-        "Exponent magnitude is bounded to 32 and expression size/depth are bounded."
-      ],
-      "platforms": [
-        "linux"
-      ],
-      "provides": [
-        "numeric.scalar.expression.evaluate"
-      ],
-      "requires": [
-        "typed.scalar.inputs.available"
-      ],
-      "source": {
-        "type": "pypi",
-        "project": "sympy",
-        "version": "1.14.0",
-        "wheel_filename": "sympy-1.14.0-py3-none-any.whl",
-        "wheel_sha256": "e091cc3e99d2141a0ba2847328f5479b05d94a6635cb96148ccb3f34671bd8f5",
-        "metadata_url": "https://pypi.org/pypi/sympy/1.14.0/json",
-        "dependency_closure": {
-          "schema": "PROJECT_BRAIN_PYPI_WHEEL_CLOSURE_V1",
-          "root_project": "sympy",
-          "root_version": "1.14.0",
-          "resolver": "pip-download-only-binary",
-          "source_only_artifacts_allowed": false,
-          "network_required_for_install": false,
-          "wheel_count": 2,
-          "wheels": [
-            {
-              "project": "sympy",
-              "version": "1.14.0",
-              "filename": "sympy-1.14.0-py3-none-any.whl",
-              "sha256": "e091cc3e99d2141a0ba2847328f5479b05d94a6635cb96148ccb3f34671bd8f5",
-              "metadata_url": "https://pypi.org/pypi/sympy/1.14.0/json",
-              "url": "https://files.pythonhosted.org/packages/a2/09/77d55d46fd61b4a135c444fc97158ef34a095e5681d0a6c10b75bf356191/sympy-1.14.0-py3-none-any.whl"
-            },
-            {
-              "project": "mpmath",
-              "version": "1.3.0",
-              "filename": "mpmath-1.3.0-py3-none-any.whl",
-              "sha256": "a0b2b9fe80bbcd81a6647ff13108738cfb482d481d826cc0e02f5b35e5c88d2c",
-              "metadata_url": "https://pypi.org/pypi/mpmath/1.3.0/json",
-              "url": "https://files.pythonhosted.org/packages/43/e3/7d92a15f894aa0c9c4b49b8ee9ac9850d6e63b03c9c32c0367a13ae62209/mpmath-1.3.0-py3-none-any.whl"
-            }
-          ],
-          "closure_sha256": "4ec35feca806fd8634f50c07cf5b4ae5e0f405c369d0d42e3f3bcb84cb931a07"
-        }
-      },
-      "status": "VERIFIED_BOUND_CAPABILITY",
-      "verification": {
-        "inherited_supplier_evidence": "canonical/capabilities/obsolescence/EXACT_SYMBOLIC_COMPUTATION_V1_ADJUDICATION.json",
-        "inherited_supplier_status": "SymPy 1.14.0 exact-symbolic route independently adjudicated 12/12",
-        "mission_id": "PR296-TYPED-SCALAR-EXPRESSION-QUALIFICATION-001",
-        "public_run_id": 36666659921,
-        "public_job_id": 109732664034,
-        "artifact_id": 11076347530,
-        "artifact_digest": "sha256:1bf6628bff366eb6fa3d277042798c956eec1c5fca7d7bace1237d13ce832cc0",
-        "fresh_domain": "DEMOGRAPHY_PUBLIC_STATISTICS",
-        "independent_recomputation": true,
-        "unsafe_rejection_pass": true,
-        "model_dependency_count": 0,
-        "incremental_spend_usd": 0
-      }
-    },
-    "source.authority.identity.ror": {
-      "status": "VERIFIED_BOUND_CAPABILITY",
-      "incremental_spend_usd": 0,
-      "cost": 1,
-      "requires": [
-        "source.candidate.provenance.verified"
-      ],
-      "provides": [
-        "source.authority.host_organization_identity"
-      ],
-      "result_fields": [
-        "status",
-        "verified_candidate_count",
-        "verified_candidates",
-        "authority_claim_scope",
-        "primary_source_verification",
-        "relevance_verification",
-        "evidence_sufficiency_verification",
-        "output_path",
-        "output_verified"
-      ],
-      "keywords": [
-        "source",
-        "authority",
-        "identity",
-        "organization",
-        "ror",
-        "domain",
-        "host",
-        "research",
-        "funding",
-        "provenance"
-      ],
-      "action_template": {
-        "type": "invoke_capability",
-        "args": {
-          "capability_id": "source.authority.identity.ror",
-          "discovery_path": "${input.discovery_path}",
-          "output_path": "${input.output_path}",
-          "timeout_s": 20,
-          "max_candidates": 12
-        },
-        "expect": {
-          "type": "field_equals",
-          "field": "output_verified",
-          "value": true
-        }
-      },
-      "adapter_module": "source_authority_binding_ror",
-      "entrypoint": "run",
-      "platforms": [
-        "linux",
-        "windows",
-        "darwin"
-      ],
-      "limitations": [
-        "VERIFIED means only exact candidate-domain to one active ROR organization identity binding.",
-        "No parent-domain inference and no fuzzy identity matching.",
-        "Unsupported, unavailable, or ambiguous domains fail closed.",
-        "Does not establish primary-source status, objective relevance, factual correctness, evidence sufficiency, or claim endorsement."
-      ],
-      "source": {
-        "type": "python_stdlib",
-        "modules": [
-          "json",
-          "pathlib",
-          "re",
-          "urllib.parse",
-          "urllib.request"
-        ],
-        "adapter_path": "canonical/runtime/bound_capabilities/source_authority_binding_ror.py",
-        "external_registry": "ROR v2 API"
-      },
-      "verification": {
-        "status": "INDEPENDENT_REMOTE_VERIFICATION_PASS",
-        "public_repository": "moxnixmdj/verification-capsule-runner",
-        "public_pr": 132,
-        "public_run_id": 36676947006,
-        "public_head_sha": "25d2bbe6703f745d23b45dab87fd0952aa648324",
-        "producer_git_blob": "9396ff7169b274af9bbfbe736e004587631e3b05",
-        "model_dependency_count": 0,
-        "incremental_spend_usd": 0,
-        "receipt_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_ROR_SOURCE_AUTHORITY_IDENTITY_PROMOTION_20260930_V1.json"
-      }
-    },
-    "source.objective_relevance.rank.bm25": {
-      "status": "VERIFIED_BOUND_CAPABILITY",
-      "incremental_spend_usd": 0,
-      "cost": 1,
-      "requires": [
-        "source.candidates.available"
-      ],
-      "provides": [
-        "source.objective_relevance.lexical_ranked"
-      ],
-      "result_fields": [
-        "status",
-        "relevance_claim_scope",
-        "top_candidate_original_index",
-        "ranked_candidates",
-        "semantic_entailment_status",
-        "primary_source_status",
-        "model_dependency_count",
-        "output_path",
-        "output_verified"
-      ],
-      "keywords": [
-        "source",
-        "objective",
-        "relevance",
-        "rank",
-        "bm25",
-        "evidence",
-        "candidate",
-        "lexical",
-        "research"
-      ],
-      "action_template": {
-        "type": "invoke_capability",
-        "args": {
-          "capability_id": "source.objective_relevance.rank.bm25",
-          "input_path": "${input.input_path}",
-          "output_path": "${input.output_path}"
-        },
-        "expect": {
-          "type": "field_equals",
-          "field": "output_verified",
-          "value": true
-        }
-      },
-      "adapter_module": "objective_relevance_bm25",
-      "entrypoint": "run",
-      "platforms": [
-        "linux",
-        "windows",
-        "darwin"
-      ],
-      "limitations": [
-        "Ranks lexical relevance only; does not prove semantic entailment.",
-        "Does not establish primary-source status, authority, factual correctness, or evidence sufficiency.",
-        "Fails closed when the objective has no discriminative tokens or candidates contain no overlapping lexical evidence.",
-        "Designed for small candidate sets emitted by the qualified open research source frontend."
-      ],
-      "source": {
-        "type": "python_stdlib",
-        "modules": [
-          "json",
-          "math",
-          "pathlib",
-          "re"
-        ],
-        "algorithm": "BM25 Robertson/Sparck Jones positive-IDF variant",
-        "parameters": {
-          "k1": 1.5,
-          "b": 0.75,
-          "title_weight_approximation": 2
-        },
-        "adapter_path": "canonical/runtime/bound_capabilities/objective_relevance_bm25.py"
-      },
-      "verification": {
-        "status": "INDEPENDENT_PUBLIC_CROSS_DOMAIN_QUALIFICATION_PASS",
-        "public_runner_pr": 143,
-        "workflow_run_id": 36678278264,
-        "runner_issue": 144,
-        "exact_producer_blob": "95d2b6bac6f6ffb5db97526407fcd22cbcc6c790",
-        "independent_oracle": "rank-bm25 0.2.2 BM25Okapi",
-        "domains": [
-          "AEROSPACE",
-          "DATABASE_SYSTEMS",
-          "CLIMATE_SCIENCE"
-        ],
-        "no_overlap_fail_closed": true,
-        "model_dependency_count": 0,
-        "incremental_spend_usd": 0
-      }
-    },
-    "source.evidence.extract.objective_grounded.stdlib": {
-      "status": "VERIFIED_BOUND_CAPABILITY",
-      "incremental_spend_usd": 0,
-      "cost": 1,
-      "requires": [
-        "source.candidate.provenance.verified",
-        "source.objective_relevance.lexical_ranked"
-      ],
-      "provides": [
-        "source.evidence.objective_grounded_units",
-        "source.evidence.verbatim_provenance_bound"
-      ],
-      "result_fields": [
-        "status",
-        "evidence_extraction_status",
-        "source_url",
-        "page_raw_sha256",
-        "visible_text_sha256",
-        "evidence_unit_count",
-        "evidence_units",
-        "claim_relation_status",
-        "factual_correctness_status",
-        "evidence_sufficiency_status",
-        "model_dependency_count",
-        "output_path",
-        "output_verified"
-      ],
-      "keywords": [
-        "source",
-        "evidence",
-        "extract",
-        "objective",
-        "grounded",
-        "verbatim",
-        "provenance",
-        "bm25",
-        "relevance",
-        "hash",
-        "offset",
-        "research"
-      ],
-      "action_template": {
-        "type": "invoke_capability",
-        "args": {
-          "capability_id": "source.evidence.extract.objective_grounded.stdlib",
-          "input_path": "${input.input_path}",
-          "output_path": "${input.output_path}",
-          "timeout": 20,
-          "max_units": 10
-        },
-        "expect": {
-          "type": "field_equals",
-          "field": "output_verified",
-          "value": true
-        }
-      },
-      "adapter_module": "objective_evidence_unit_extract",
-      "entrypoint": "run",
-      "platforms": [
-        "linux",
-        "windows",
-        "darwin"
-      ],
-      "limitations": [
-        "Requires a live-retrieval provenance receipt and independently-qualified objective-relevance receipt bound to the same candidate.",
-        "Fresh retrieval must resolve to the exact admitted source URL; source identity drift fails closed.",
-        "ROR/organization identity is optional metadata and is not an admission prerequisite.",
-        "Proves verbatim objective-grounded evidence units only; support, entailment, factual correctness, causality, quality, sufficiency, and independence remain unverified."
-      ],
-      "source": {
-        "type": "python_stdlib",
-        "modules": [
-          "hashlib",
-          "html",
-          "ipaddress",
-          "json",
-          "pathlib",
-          "re",
-          "urllib.parse",
-          "urllib.request",
-          "html.parser"
-        ],
-        "adapter_path": "canonical/runtime/bound_capabilities/objective_evidence_unit_extract.py"
-      },
-      "verification": {
-        "status": "REQUALIFIED_AFTER_MODERN_CONTAINER_REPAIR",
-        "current_authority": "VERIFIED",
-        "public_repository": "moxnixmdj/verification-capsule-runner",
-        "public_pr": 159,
-        "public_run_id": 36681368306,
-        "public_job_id": 109777319500,
-        "artifact_id": 11081458134,
-        "artifact_digest": "sha256:5711d014ef9b444eb8eba57d36c929843cec81b3f9feba633f0fd43f20b67887",
-        "producer_git_blob": "fc45fb583f6aeac91f7c88f918644c38fbc70e34",
-        "parent_frontend_git_blob": "46fe82d74a35d9318a134fb95e1d5cecfc2dd485",
-        "modern_container_regression_git_blob": "8dc3a5d350173d57f67c8e1ac50ab243d42f2214",
-        "exact_runner_blob_match": true,
-        "live_domains": [
-          "sqlite.org",
-          "rfc-editor.org"
-        ],
-        "ror_admission_required": false,
-        "independent_refetch_oracle": true,
-        "preserved_falsification": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_EVIDENCE_EXTRACTION_MODERN_CONTAINER_FALSIFICATION_20260930_V1.json",
-        "receipt_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_EVIDENCE_EXTRACTION_MODERN_CONTAINER_REQUALIFICATION_20260930_V1.json",
-        "model_dependency_count": 0,
-        "incremental_spend_usd": 0
-      }
-    },
-    "evidence.claim_relation.generic_units.stdlib": {
-      "action_template": {
-        "type": "invoke_capability",
-        "args": {
-          "capability_id": "evidence.claim_relation.generic_units.stdlib",
-          "extraction_path": "${input.extraction_path}",
-          "spec": "${input.spec}",
-          "output_path": "${input.output_path}"
-        },
-        "expect": {
-          "type": "field_equals",
-          "field": "output_verified",
-          "value": true
-        }
-      },
-      "adapter_module": "generic_evidence_claim_relation",
-      "cost": 1,
-      "entrypoint": "run",
-      "incremental_spend_usd": 0,
-      "keywords": [
-        "evidence",
-        "claim",
-        "support",
-        "verbatim",
-        "relation",
-        "numeric",
-        "compare",
-        "predicate",
-        "objective",
-        "grounded",
-        "unit"
-      ],
-      "limitations": [
-        "Claim support is exact normalized substring occurrence only; paraphrase and semantic entailment are not inferred.",
-        "Numeric relations operate only on explicitly caller-referenced numeric literals inside integrity-checked generic V2 evidence units.",
-        "Units must match exactly; no unit conversion or semantic-role inference is performed.",
-        "Does not establish factual correctness, causality, evidence quality, sufficiency, source independence, or parent completion."
-      ],
-      "platforms": [
-        "linux"
-      ],
-      "provides": [
-        "evidence.claim.exact_text_support",
-        "evidence.numeric_relation.explicit"
-      ],
-      "requires": [
-        "source.evidence.objective_grounded_units"
-      ],
-      "source": {
-        "type": "python_stdlib",
-        "modules": [
-          "decimal",
-          "hashlib",
-          "json",
-          "pathlib",
-          "re"
-        ],
-        "adapter_path": "canonical/runtime/bound_capabilities/generic_evidence_claim_relation.py"
-      },
-      "status": "VERIFIED_BOUND_CAPABILITY",
-      "verification": {
-        "capability_receipt": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_V2_EVIDENCE_CLAIM_RELATION_PROMOTION_20260930_V1.json",
-        "public_run_id": 36682488104,
-        "job_id": 109780804595,
-        "artifact_id": 11082521746,
-        "artifact_digest": "sha256:31563f342c6751d7f4f486c9ae2033af13bc47c9dfb1a3e877461e85b6ca4cfd",
-        "exact_producer_blob": "d66a7eb30774f66160b698d8082947776888293d",
-        "exact_regression_blob": "590a1e50f11bc2903b56d41a00c5354ec2501c44",
-        "independent_fresh_live_generic_v2_status": "PASS"
-      }
-    },
-    "evidence.claim_spec.bind.explicit_comparison.stdlib": {
-      "action_template": {
-        "type": "invoke_capability",
-        "args": {
-          "capability_id": "evidence.claim_spec.bind.explicit_comparison.stdlib",
-          "objective": "${input.objective}",
-          "extraction_path": "${input.extraction_path}",
-          "output_path": "${input.output_path}"
-        },
-        "expect": {
-          "type": "field_equals",
-          "field": "output_verified",
-          "value": true
-        }
-      },
-      "adapter_module": "objective_claim_operand_binding",
-      "cost": 1,
-      "entrypoint": "run",
-      "incremental_spend_usd": 0,
-      "keywords": [
-        "objective",
-        "claim",
-        "relation",
-        "operand",
-        "binding",
-        "compare",
-        "higher",
-        "lower",
-        "greater",
-        "less",
-        "exceed",
-        "evidence",
-        "numeric",
-        "at least",
-        "at most",
-        "equal",
-        "different",
-        "differ",
-        "threshold",
-        "quoted",
-        "exact text"
-      ],
-      "limitations": [
-        "Supports only explicit bounded binary comparison forms for GT/LT/GTE/LTE/EQ/NE/ABS_DIFF_LTE and explicit exact quoted-claim support forms covered by the verified grammar.",
-        "Each semantic numeric role must bind uniquely to a distinct evidence unit by lexical anchors.",
-        "Operand selection requires one unique exact-unit-compatible numeric-literal pair; ambiguity fails closed.",
-        "ABS_DIFF_LTE accepts only an explicit finite nonnegative literal threshold whose unit surface exactly matches both operands.",
-        "Exact quoted claims bind only by exact normalized substring occurrence and require one unique evidence unit.",
-        "No unit conversion, paraphrase/semantic entailment, factual correctness, causality, evidence sufficiency, source independence, or latent semantic-role inference."
-      ],
-      "platforms": [
-        "linux"
-      ],
-      "provides": [
-        "evidence.claim_spec.explicit_bounded",
-        "evidence.numeric_relation.objective_bound",
-        "evidence.claim.exact_quoted_bound"
-      ],
-      "requires": [
-        "source.evidence.objective_grounded_units",
-        "evidence.numeric_relation.explicit"
-      ],
-      "source": {
-        "type": "python_stdlib",
-        "modules": [
-          "re",
-          "pathlib",
-          "importlib.util"
-        ],
-        "adapter_path": "canonical/runtime/bound_capabilities/objective_claim_operand_binding.py"
-      },
-      "status": "VERIFIED_BOUND_CAPABILITY",
-      "verification": {
-        "capability_receipt": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_CLAIM_SPEC_OPERAND_BINDING_PROMOTION_20260930_V1.json",
-        "public_repository": "moxnixmdj/verification-capsule-runner",
-        "public_pr": 166,
-        "public_run_id": 36685279194,
-        "public_job_id": 109789596373,
-        "artifact_id": 11083292341,
-        "artifact_digest": "sha256:1be53e3c01d1c80e12effb3743a4f4befb23f7a071d1adb65ab7b0e1b318635b",
-        "exact_producer_blob": "48fd058430d8d361fc75beced567c7b6d1166531",
-        "exact_regression_blob": "467a9f4f9b835ca8f65fd19b9335770e7b0ef31b",
-        "inherited_relation_blob": "d66a7eb30774f66160b698d8082947776888293d",
-        "independent_full_surface_cross_domain_status": "PASS"
-      }
-    },
-    "terminal.kstar.root.assess.stdlib": {
-      "status": "VERIFIED_BOUND_CAPABILITY",
-      "incremental_spend_usd": 0,
-      "cost": 1,
-      "requires": [],
-      "provides": [
-        "terminal.kstar.root.assessment",
-        "terminal.scope_complete.proof_or_minimum_residual",
-        "terminal.tournament.failure.witness"
-      ],
-      "result_fields": [
-        "status",
-        "outcome",
-        "result_path",
-        "output_verified",
-        "u_empty",
-        "abc_closed",
-        "missing_premises",
-        "model_dependency_count"
-      ],
-      "keywords": [
-        "terminal",
-        "kstar",
-        "scope",
-        "complete",
-        "proof",
-        "brain",
-        "opus",
-        "capability",
-        "falsify",
-        "tournament",
-        "policy",
-        "adequacy",
-        "discriminator",
-        "generator",
-        "basis",
-        "transform",
-        "runtime",
-        "ownership",
-        "residual",
-        "counterexample",
-        "evidence",
-        "reuse",
-        "universal",
-        "cover",
-        "context",
-        "semantic",
-        "composition"
-      ],
-      "action_template": {
-        "type": "invoke_capability",
-        "args": {
-          "capability_id": "terminal.kstar.root.assess.stdlib"
-        },
-        "expect": {
-          "type": "field_equals",
-          "field": "output_verified",
-          "value": true
-        }
-      },
-      "adapter_module": "terminal_kstar_root_assess",
-      "entrypoint": "run",
-      "platforms": [
-        "linux",
-        "windows",
-        "darwin"
-      ],
-      "limitations": [
-        "Thin deterministic adapter over current canonical terminal authority and U frontier; does not invent proof premises.",
-        "Writes SCOPE_COMPLETE_PROOF only when every load-bearing universal predicate is already proved in current canonical truth; otherwise writes UNRESOLVED with exact missing premises.",
-        "Never edits terminal authority, terminal manifest, ownership state, or promotion state."
-      ],
-      "source": {
-        "type": "python_stdlib",
-        "modules": [
-          "hashlib",
-          "json",
-          "pathlib"
-        ],
-        "adapter_path": "canonical/runtime/bound_capabilities/terminal_kstar_root_assess.py"
-      },
-      "verification": {
-        "status": "BOUND_WITH_FAIL_CLOSED_REGRESSION_TEST",
-        "independent_verification_required_for_any_scope_complete_promotion": true,
-        "model_dependency_count": 0,
-        "incremental_spend_usd": 0
       }
     }
   },
