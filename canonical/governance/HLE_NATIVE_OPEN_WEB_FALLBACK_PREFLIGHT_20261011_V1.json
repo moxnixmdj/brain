@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_NATIVE_OPEN_WEB_FALLBACK_PREFLIGHT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "IMPLEMENTED_LOCAL_PREFLIGHT_PASS__INDEPENDENT_REPLAY_REQUIRED__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "runtime_path": "canonical/runtime/hle_native_open_web_fallback_v1.py",
+    "runtime_blob": "f03db468c1b9a1d5425d1eaf49966e6c8484819a",
+    "tests_path": "canonical/tests/test_hle_native_open_web_fallback_v1.py",
+    "tests_blob": "5e64895795f39e4a50e53664167dd0e3ec3bc3c4",
+    "query_planner_blob": "2386db287d08153ffb905f8cd89a76f4ebf19d9f",
+    "open_web_discovery_blob": "81f73bca882d35603e5be43e8c40dd57e73ffce0",
+    "reused_retrieval_v5_executor_blob": "96497b15a9c096b8e5cc471313ae165fceaedd07",
+    "reused_retrieval_v5_independent_receipt_blob": "cd1501e167a5429ad0d918e080c527e6d43b8a4d"
+  },
+  "local_preflight": {
+    "tests_executed": 4,
+    "tests_passed": 4,
+    "tests_failed": 0,
+    "cases": [
+      "MIXED_BACKEND_HEALTH_AND_URL_DEDUPLICATION",
+      "TOTAL_BACKEND_OUTAGE_IS_RETRYABLE_NOT_NEGATIVE_EVIDENCE",
+      "SUCCESSFUL_EMPTY_RESULT_DOES_NOT_AUTHORIZE_NONEXISTENCE",
+      "INVALID_QUERY_PLAN_FAILS_CLOSED"
+    ],
+    "independent": false
+  },
+  "capability_delta": [
+    "HLE_SHORT_SEED_QUERIES_CAN_USE_THREE_BRAIN_OWNED_ZERO_MODEL_OPEN_WEB_BACKENDS_SEQUENTIALLY",
+    "BACKEND_FAILURES_ARE_EXPLICITLY_RETRYABLE",
+    "BACKEND_HEALTH_IS_RECORDED_PER_BACKEND",
+    "CANDIDATE_RESULTS_HAVE_ZERO_ANSWER_OR_CORRECTNESS_AUTHORITY"
+  ],
+  "next_experiment": {
+    "dataset": "ai-safety-institute/trivia_qa_verified",
+    "split": "validation",
+    "slice": "rows_25_to_49_ALREADY_CONSUMED",
+    "purpose": "COMPARE_RETRIEVAL_ANY_HIT_AND_BACKEND_HEALTH_AGAINST_0_52_CURRENT_BASELINE",
+    "fresh_hle_cases_allowed": 0,
+    "fresh_public_rows_50_to_74_allowed": 0,
+    "pass_condition": "CAUSAL_RETRIEVAL_RECALL_OR_SOURCE_RELIABILITY_IMPROVEMENT_WITH_EXACT_BLOB_BINDING",
+    "fail_condition": "NO_IMPROVEMENT_OR_REGRESSION__DO_NOT_CONSUME_FRESH_HLE"
+  },
+  "github_ci_status_on_test_commit": "NO_STATUS_OR_PR_WORKFLOW_RUNS_OBSERVED",
+  "independent_verification_claimed": false,
+  "brain_capability_credit_delta": 0,
+  "hle_score_credit": 0,
+  "hle_67_7_certified": false,
+  "incremental_spend_usd": 0
+}
