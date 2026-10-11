@@ -1,0 +1,70 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_RELATION_REQUIREMENTS_CONSUMED_CAUSAL_RESULT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "INDEPENDENT_PAIRED_CONSUMED_DIAGNOSTIC__UNIQUE_RETRIEVAL_GAIN_CONFIRMED",
+  "subject": {
+    "relation_compiler_blob": "e922ba115ddf596bfcf78ae6988b67a0650e772d",
+    "planner_v1_blob": "2386db287d08153ffb905f8cd89a76f4ebf19d9f",
+    "v5_bing_retrieval_blob": "ae6006af1e578b0690357756e0b899a10323a5f4",
+    "diagnostic_harness_blob": "b55815678570276c172aab0662353545489c445f"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2714,
+    "workflow_run_id": 38153589898,
+    "workflow_job_id": 114511890220,
+    "conclusion": "success",
+    "artifact_id": 11707801473,
+    "artifact_zip_sha256": "20542ffe358ef68ac275a8793165cf0a66f4cd64d7723371d0b6a057e1140135",
+    "trace_manifest_sha256": "1bb7a17b5e0dc1331237d7be7174aa711e44f7cdd3aed354f220cd28948353bb"
+  },
+  "causal_design": {
+    "population": "ONLY_NINE_ALREADY_CONSUMED_SHARED_MISSES",
+    "target_ids": [
+      27,
+      32,
+      37,
+      38,
+      39,
+      41,
+      43,
+      44,
+      45
+    ],
+    "paired_same_live_retrieval_snapshot": true,
+    "baseline": "V1_QUERY_PLAN",
+    "treatment": "V1_QUERY_PLAN_PLUS_RELATION_REQUIREMENTS",
+    "unique_queries_fetched_once": true,
+    "gold_loaded_only_after_both_traces_sealed": true,
+    "external_model_calls": 0
+  },
+  "diagnostic": {
+    "baseline_hits": 0,
+    "baseline_hit_ids": [],
+    "augmented_hits": 1,
+    "augmented_hit_ids": [
+      39
+    ],
+    "relation_unique_gain_count": 1,
+    "relation_unique_gain_ids": [
+      39
+    ],
+    "baseline_unique_loss_ids": [],
+    "relation_queries_added": 24,
+    "unique_query_count": 62
+  },
+  "causal_conclusion": [
+    "RELATION_PRESERVING_QUERY_REQUIREMENTS_CREATE_A_REAL_BING_RSS_RETRIEVAL_GAIN_ON_THE_CONSUMED_RESIDUAL",
+    "THE_GAIN_IS_ADDITIVE_AND_DOES_NOT_DELETE_ANY_BASELINE_HIT_ON_THIS_PAIRED_SNAPSHOT",
+    "THE_MEASURED_GAIN_IS_ONE_OF_NINE_SHARED_MISSES_NOT A_GENERAL_ACCURACY_CLAIM",
+    "RELATION_COMPILER_IS_PROMOTABLE_AS_A_REUSABLE_RETRIEVAL_QUERY_COMPONENT_SUBJECT_TO_HELD_OUT_GENERALIZATION"
+  ],
+  "next_gate": "FREEZE_EXACT_BLOB_THEN_TEST_ON_FRESH_PUBLIC_NON_HLE_HELD_OUT_SLICE_WITH_NO_POST_GOLD_TUNING",
+  "hle_questions_consumed": 0,
+  "hle_gold_consumed": 0,
+  "external_model_calls_total": 0,
+  "model_dependency_count_total": 0,
+  "hle_score_credit": 0,
+  "hle_67_7_certified": false,
+  "incremental_spend_usd": 0
+}
