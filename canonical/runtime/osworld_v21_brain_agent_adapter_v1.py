@@ -67,66 +67,63 @@ def _special(kind: str) -> str | None:
 
 def _compile_one(raw: Mapping[str, Any]) -> str:
     kind = str(raw.get("type") or "").strip().upper()
-    special = _special(kind)
-    if special is not None:
+
+    if kind.startswith("BROWSER_"):
+        return compile_browser_op(raw)
+
+    if kind == "STATE_OPS":
+        if set(raw) - {"type", "ops"}:
+            raise AdapterError("STATE_OPS_HAS_UNSUPPORTED_FIELDS")
+        return compile_state_ops({"ops": raw.get("ops")})
+
+    if kind in {"WAIT", "DONE", "FAIL"}:
         if set(raw) - {"type", "reason"}:
             raise AdapterError(f"{kind}_HAS_UNSUPPORTED_FIELDS")
-        return special
+        return compile_osworld_pyautogui({"type": kind.lower()}, Screen(WIDTH, HEIGHT))
 
-    if kind in {"BROWSER_OP", "STATE_OPS"}:
-        raise AdapterError(kind + "_MUST_BE_SINGLETON_HOST_OPERATION")
+    typed: dict[str, Any]
+    if kind == "CLICK":
+        typed = {"type": "click", "x": raw.get("x"), "y": raw.get("y"), "button": "left"}
+    elif kind == "DOUBLE_CLICK":
+        typed = {"type": "double_click", "x": raw.get("x"), "y": raw.get("y")}
+    elif kind == "RIGHT_CLICK":
+        typed = {"type": "click", "x": raw.get("x"), "y": raw.get("y"), "button": "right"}
+    elif kind == "MOVE":
+        typed = {"type": "move", "x": raw.get("x"), "y": raw.get("y")}
+    elif kind == "DRAG_TO":
+        typed = {
+            "type": "drag",
+            "path": [
+                {"x": raw.get("from_x", raw.get("x0", 0)), "y": raw.get("from_y", raw.get("y0", 0))},
+                {"x": raw.get("x"), "y": raw.get("y")},
+            ],
+            "duration_per_segment": float(raw.get("duration_ms", 500)) / 1000.0,
+        }
+    elif kind == "TYPE":
+        typed = {"type": "type", "text": raw.get("text"), "interval": float(raw.get("interval_ms", 10)) / 1000.0}
+    elif kind == "PRESS":
+        key = raw.get("key")
+        presses = raw.get("presses", 1)
+        if isinstance(presses, bool) or not isinstance(presses, int) or not 1 <= presses <= 20:
+            raise AdapterError("PRESSES_OUT_OF_RANGE")
+        if presses == 1:
+            typed = {"type": "keypress", "keys": [key]}
+        else:
+            # Preserve one OSWorld step while avoiding an unbounded action batch.
+            compiled = compile_osworld_pyautogui({"type": "keypress", "keys": [key]}, Screen(WIDTH, HEIGHT))
+            return "; ".join([compiled] * presses)
+    elif kind == "HOTKEY":
+        typed = {"type": "keypress", "keys": raw.get("keys")}
+    elif kind == "SCROLL":
+        clicks = raw.get("clicks")
+        typed = {"type": "scroll", "x": WIDTH // 2, "y": HEIGHT // 2, "scroll_x": 0, "scroll_y": clicks}
+    else:
+        raise AdapterError("ACTION_TYPE_UNSUPPORTED:" + kind)
 
-    if kind in {"CLICK", "DOUBLE_CLICK", "RIGHT_CLICK", "MOVE"}:
-        x = _int(raw.get("x"), "X", 0, WIDTH - 1)
-        y = _int(raw.get("y"), "Y", 0, HEIGHT - 1)
-        if kind == "CLICK":
-            return f"pyautogui.click({x}, {y})"
-        if kind == "DOUBLE_CLICK":
-            return f"pyautogui.doubleClick({x}, {y}, interval=0.15)"
-        if kind == "RIGHT_CLICK":
-            return f"pyautogui.rightClick({x}, {y})"
-        return f"pyautogui.moveTo({x}, {y}, duration=0.2)"
-
-    if kind == "DRAG_TO":
-        x = _int(raw.get("x"), "X", 0, WIDTH - 1)
-        y = _int(raw.get("y"), "Y", 0, HEIGHT - 1)
-        duration_ms = _int(raw.get("duration_ms", 500), "DURATION_MS", 50, 5000)
-        return f"pyautogui.dragTo({x}, {y}, duration={duration_ms / 1000.0:.3f}, button='left')"
-
-    if kind == "TYPE":
-        value = _text(raw.get("text"), "TEXT")
-        interval_ms = _int(raw.get("interval_ms", 10), "INTERVAL_MS", 0, 500)
-        return f"pyautogui.write({value!r}, interval={interval_ms / 1000.0:.3f})"
-
-    if kind == "PRESS":
-        key = _text(raw.get("key"), "KEY", 64).strip().lower()
-        if not key or any(ch not in "abcdefghijklmnopqrstuvwxyz0123456789_+-" for ch in key):
-            raise AdapterError("KEY_INVALID")
-        presses = _int(raw.get("presses", 1), "PRESSES", 1, 20)
-        return f"pyautogui.press({key!r}, presses={presses})"
-
-    if kind == "HOTKEY":
-        keys = raw.get("keys")
-        if not isinstance(keys, Sequence) or isinstance(keys, (str, bytes)):
-            raise AdapterError("KEYS_MUST_BE_SEQUENCE")
-        if not 1 <= len(keys) <= 5:
-            raise AdapterError("HOTKEY_KEY_COUNT_INVALID")
-        normalized = []
-        for item in keys:
-            key = _text(item, "KEY", 64).strip().lower()
-            if not key or any(ch not in "abcdefghijklmnopqrstuvwxyz0123456789_+-" for ch in key):
-                raise AdapterError("KEY_INVALID")
-            normalized.append(key)
-        return "pyautogui.hotkey(" + ", ".join(repr(k) for k in normalized) + ")"
-
-    if kind == "SCROLL":
-        clicks = _int(raw.get("clicks"), "CLICKS", -100, 100)
-        if clicks == 0:
-            raise AdapterError("SCROLL_ZERO")
-        return f"pyautogui.scroll({clicks})"
-
-    raise AdapterError("ACTION_TYPE_UNSUPPORTED:" + kind)
-
+    try:
+        return compile_osworld_pyautogui(typed, Screen(WIDTH, HEIGHT))
+    except Exception as exc:
+        raise AdapterError(type(exc).__name__ + ":" + str(exc)) from exc
 
 def compile_actions(policy_output: Mapping[str, Any]) -> tuple[str, list[str]]:
     if not isinstance(policy_output, Mapping):
