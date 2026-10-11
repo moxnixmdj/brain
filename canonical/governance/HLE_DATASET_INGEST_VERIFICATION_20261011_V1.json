@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_DATASET_INGEST_VERIFICATION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "AUTHENTICATED_GATED_ARTIFACT_ACQUIRED_AND_STRUCTURALLY_VERIFIED__NO_CONTENT_EXPOSURE__ZERO_CREDIT",
+  "source": {
+    "dataset": "cais/hle",
+    "intended_revision": "5a81a4c7271a2a2a312b9a690f0c2fde837e4c29",
+    "uploaded_filename": "test-00000-of-00001.parquet",
+    "local_file_sha256": "6d0ee0602e8aea6b159509577e884f48ecac7b8e3f6822a35f51335a446c726a",
+    "size_bytes": 274276147
+  },
+  "parquet_footer": {
+    "magic": "PAR1",
+    "metadata_len": 141078,
+    "format_version": 2,
+    "created_by": "parquet-cpp-arrow version 16.1.0",
+    "row_count": 2500,
+    "row_group_count": 25,
+    "rows_per_group": [100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100],
+    "schema_root_children": 12,
+    "top_level_fields": ["id","question","image","image_preview","answer","answer_type","author_name","rationale","rationale_image","raw_subject","category","canary"]
+  },
+  "id_integrity": {
+    "non_null_ids": 2500,
+    "unique_ids": 2500,
+    "id_set_sha256_sorted_newline_joined": "349240c058f5a2918bb784b39852bcf0f69b231e4b5d92060d731725d1c80b42",
+    "id_sequence_sha256_newline_joined": "5bde146febc1f5b862455a650e7ab7353c8093233c1ef0633083776ef2b1f053"
+  },
+  "benchmark_hygiene": {
+    "questions_printed_or_sampled": 0,
+    "answers_printed_or_sampled": 0,
+    "rationales_printed_or_sampled": 0,
+    "gold_fields_observed_by_model": false,
+    "validation_method": "Parquet footer decoded directly via Thrift Compact Protocol; id column decoded programmatically only for null/uniqueness/hashes; raw id values were not emitted."
+  },
+  "quarantine_policy": {
+    "solver_visible": ["id","question","image","image_preview","answer_type","raw_subject","category"],
+    "gold_or_non_solver": ["answer","rationale","rationale_image"],
+    "review_only_or_optional_metadata": ["author_name","canary"],
+    "hard_rule": "No gold/non-solver field may enter solver context, search queries, tool inputs, traces, caches, or prompts before answer commitments are sealed."
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "No HLE task has been solved.",
+    "No HLE target score exists.",
+    "Structural validation does not establish grader equivalence."
+  ]
+}
