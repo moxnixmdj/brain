@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_PYTHON_INTERPROCEDURAL_VALUE_PROVENANCE_V1_VERIFY_20261011",
+  "date": "2026-10-11",
+  "status": "PASS__INDEPENDENT_TWO_CARRIER_FOCUSED_FALSIFICATION",
+  "capability_id": "python.fault.provenance.interprocedural.value.v1",
+  "branch": "capability/frontiercode-v5-interprocedural-provenance-20261011",
+  "runtime_path": "canonical/runtime/bound_capabilities/python_interprocedural_value_provenance_v1.py",
+  "runtime_git_blob_sha": "7e9a0201b89b5d2edf4647c868858288fd1a9820",
+  "runtime_sha256": "cfa9b3f5446a5c88d5d08b699c2af27e1470cb65620e0fae9b62d1d50182d477",
+  "test_path": "canonical/tests/test_python_interprocedural_value_provenance_v1.py",
+  "test_git_blob_sha": "82af855fc384d3d8193cf1426fd58e9a1a1443c8",
+  "test_sha256": "b4233d1843bdcc911d4ab1f5e24ca48bd28697efb2f3d52e2b86fd14fc790f9f",
+  "carriers": [
+    {
+      "name": "brain-capability-first-scheduler-verify-20261008-v1",
+      "focused_tests": "7/7 PASS"
+    },
+    {
+      "name": "brain-canonical-apply-slice-verify-20261011-v1",
+      "focused_tests": "7/7 PASS",
+      "exact_branch_layout_replay": "7/7 PASS"
+    }
+  ],
+  "proved": [
+    "BOUNDED_REPOSITORY_LOCAL_DYNAMIC_CALL_AND_RETURN_OBSERVATION",
+    "PRIMITIVE_SAFE_ARGUMENT_AND_RETURN_FINGERPRINTS",
+    "FAILING_VS_PASSING_CALL_EDGE_RANKING",
+    "STATIC_CALLSITE_ASSIGNMENT_BINDING",
+    "BOUNDED_INTERPROCEDURAL_VALUE_PROVENANCE_HYPOTHESES",
+    "DETERMINISTIC_REPLAY",
+    "ZERO_EXTERNAL_RUNTIME_COGNITION",
+    "ZERO_INCREMENTAL_SPEND"
+  ],
+  "hard_nonclaims": [
+    "NO_GENERAL_SEMANTIC_CAUSALITY_PROOF",
+    "NO_COMPLETE_INTERPROCEDURAL_DEF_USE_GRAPH",
+    "NO_OBJECT_INTERNAL_STATE_PROVENANCE",
+    "NO_NON_PYTHON_SUPPORT",
+    "NO_PATCH_CORRECTNESS_OR_MERGEABILITY_CLAIM",
+    "NO_FRONTIERCODE_SCORE_OR_ACCEPTANCE_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_score_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
