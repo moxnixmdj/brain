@@ -77,7 +77,7 @@ class AutoAcquisitionReplanTests(unittest.TestCase):
             "verification_mission_path":"canonical/astra_runtime/missions/VERIFY_AUTO_TEST.json",
         }
         auto=types.SimpleNamespace(dispatch=mock.Mock(return_value=dispatch))
-        completed={"verified":True}
+        completed={"verified":True,"controller_mode":"MODEL_INDEPENDENT_ACTION_PLAN"}
         with (
             mock.patch.object(runtime,"_run_verified_capability_proposal",return_value=None),
             mock.patch.object(runtime,"_run_capability_planned_goal",return_value=None),
@@ -112,7 +112,10 @@ class AutoAcquisitionReplanTests(unittest.TestCase):
                     "_runtime_mission_path":"canonical/astra_runtime/missions/TEST.json",
                 },
             )
-        self.assertIs(out,completed)
+        self.assertTrue(out["verified"])
+        self.assertEqual(out["controller_mode"],"MODEL_INDEPENDENT_ACTION_PLAN")
+        self.assertEqual(out["model_dependency_count"],0)
+        self.assertEqual(out["cognition_dependency_class"],"MODEL_INDEPENDENT")
         self.assertEqual(compile_mock.call_count,2)
         execute_mock.assert_called_once_with(
             {"goal_ref":"goal"},
