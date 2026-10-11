@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_V5_CONSUMED_PUBLIC_DIAGNOSTIC_RESULT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "EXECUTED_ON_ALREADY_CONSUMED_PUBLIC_NONHLE_SLICE__FAILED_PREDECLARED_GATE__RETIRE_FROM_LIVE_HLE_PATH__ZERO_HLE_CREDIT",
+  "subject": {
+    "path": "canonical/runtime/hle_native_open_domain_research_v5.py",
+    "git_blob_sha": "ae6006af1e578b0690357756e0b899a10323a5f4",
+    "creation_commit": "d63352054045a756b871d022b69ac720869fa082"
+  },
+  "verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2683,
+    "workflow_run_id": 38142392857,
+    "workflow_job_id": 114478744478,
+    "conclusion": "success",
+    "exact_solver_blob_bound": true,
+    "exact_tool_adapter_blob": "fa955ccc5e4f3d29aa79e2b380f713d30ee46e8f"
+  },
+  "dataset": {
+    "name": "ai-safety-institute/trivia_qa_verified",
+    "split": "validation",
+    "slice": "rows_25_to_49",
+    "status": "ALREADY_CONSUMED_DIAGNOSTIC_ONLY",
+    "sample_size": 25
+  },
+  "result": {
+    "attempted": 9,
+    "attempt_rate": 0.36,
+    "normalized_exact": 2,
+    "normalized_exact_rate": 0.08,
+    "predeclared_minimum_attempt_rate": 0.25,
+    "predeclared_minimum_normalized_exact_rate": 0.20,
+    "gate_passed": false,
+    "commitments_manifest_sha256": "90aea7aa9df18cb115207e481466c4350c7d292ae68838b31f20f77e35ead1b4"
+  },
+  "failure_classes": [
+    "RETRIEVAL_ZERO_EVIDENCE_ON_MANY_SLOTS",
+    "GENERIC_SPAN_RANKER_CONFUSED_CLUE_ENTITIES_WITH_ANSWER_ENTITIES",
+    "FIRST_CANDIDATE_RELATION_HEURISTICS_PRODUCED_FALSE_POSITIVES"
+  ],
+  "decision": {
+    "v5_live_hle_solver_eligible": false,
+    "do_not_tune_on_fresh_rows_50_to_74": true,
+    "next_move": "REUSE_EXISTING_BRAIN_EXACT_RETRIEVAL_V2_AND_TOTAL_SOLVER_COMPOSITION_BEFORE_NEW_INVENTION"
+  },
+  "benchmark_integrity": {
+    "fresh_rows_50_to_74_consumed": 0,
+    "hle_questions_consumed": 0,
+    "hle_gold_consumed": 0,
+    "hle_score_credit": 0
+  },
+  "external_model_calls_total": 0,
+  "external_reasoning_model_calls_total": 0,
+  "model_dependency_count_total": 0,
+  "target_score_claimed": false,
+  "hle_67_7_certified": false
+}
