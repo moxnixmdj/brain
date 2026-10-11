@@ -462,7 +462,7 @@ def decide(state: Mapping[str, Any]) -> dict[str, Any]:
     ni = _norm(instruction)
 
     browser_action = _browser_state_machine(state, instruction)
-    if browser_action is not None and not _same_state_repeat(state):
+    if browser_action is not None:
         return browser_action
 
     searchboxes = [e for e in elements if e.editable and ("search" in _norm(e.label) or e.tag.endswith("searchbox"))]
