@@ -474,6 +474,43 @@ def _candidate_timeout(value: Any, *, default: int, maximum: int, field: str) ->
     return value
 
 
+_RECOVERABLE_PLANNER_PROPOSAL_ERROR_CODES = frozenset({
+    "SCIENCE_PLANNER_OUTPUT_TRUNCATED",
+    "SCIENCE_PLANNER_NO_JSON",
+    "SCIENCE_PLANNER_JSON_INVALID",
+    "SCIENCE_PLANNER_OBJECT_REQUIRED",
+    "SCIENCE_PLANNER_ONE_CHOICE_REQUIRED",
+    "SCIENCE_PLANNER_CHOICE_REQUIRED",
+    "SCIENCE_PLANNER_MESSAGE_REQUIRED",
+    "SCIENCE_PLANNER_TOOL_CALL_REQUIRED",
+    "SCIENCE_PLANNER_TOOL_ARGUMENTS_JSON_INVALID",
+    "SCIENCE_PLANNER_TOOL_ARGUMENTS_OBJECT_REQUIRED",
+    "SCIENCE_PLANNER_EXACTLY_ONE_PROPOSAL_TOOL_CALL_REQUIRED",
+    "SCIENCE_PLANNER_CANDIDATES_BOUND_INVALID",
+    "SCIENCE_PLANNER_CANDIDATE_OBJECT_REQUIRED",
+    "SCIENCE_PLANNER_EVIDENCE_REQUESTS_INVALID",
+    "SCIENCE_PLANNER_EVIDENCE_REQUEST_OBJECT_REQUIRED",
+    "SCIENCE_PLANNER_EVIDENCE_ID_INVALID",
+    "SCIENCE_PLANNER_EVIDENCE_CHUNK_INDEX_INVALID",
+    "SCIENCE_PLANNER_EVIDENCE_REQUEST_DUPLICATE",
+})
+_RECOVERABLE_PLANNER_PROPOSAL_ERROR_PREFIXES = (
+    "SCIENCE_PLANNER_ACTION_ID_",
+    "SCIENCE_PLANNER_COMMAND_",
+    "SCIENCE_PLANNER_VERIFY_COMMAND_",
+)
+
+
+def _recoverable_planner_proposal_error_code(exc: Exception) -> str | None:
+    raw = str(exc or "").strip()
+    head = raw.split(":", 1)[0].strip()
+    if head in _RECOVERABLE_PLANNER_PROPOSAL_ERROR_CODES:
+        return head
+    if any(head.startswith(prefix) for prefix in _RECOVERABLE_PLANNER_PROPOSAL_ERROR_PREFIXES):
+        return head
+    return None
+
+
 _SAFE_CANDIDATE_VALIDATION_CODES = frozenset({
     "EXECUTOR_KIND_INVALID",
     "EXECUTOR_SOURCE_REQUIRED",
@@ -1093,18 +1130,47 @@ async def run_science_goal(
             logical_attempt_id=logical_attempt_id,
             cycle=cycle,
         )
-        planned = science_planner.plan(
-            prompt,
-            logical_attempt_id=logical_attempt_id,
-            cycle=cycle,
-            timeout_s=PLANNER_TIMEOUT_S,
-        )
-        planned["evidence_frontier"] = prompt_fit
-        raw = science_planner.normalize_proposal_object(
-            science_planner.extract_json_object(planned.get("text", ""))
-        )
-        if not isinstance(raw, dict):
-            raise RuntimeError("SCIENCE_PLANNER_OBJECT_REQUIRED")
+        try:
+            planned = science_planner.plan(
+                prompt,
+                logical_attempt_id=logical_attempt_id,
+                cycle=cycle,
+                timeout_s=PLANNER_TIMEOUT_S,
+            )
+            planned["evidence_frontier"] = prompt_fit
+            raw = science_planner.normalize_proposal_object(
+                science_planner.extract_json_object(planned.get("text", ""))
+            )
+            if not isinstance(raw, dict):
+                raise RuntimeError("SCIENCE_PLANNER_OBJECT_REQUIRED")
+        except science_planner.SciencePlannerError as exc:
+            proposal_error_code = _recoverable_planner_proposal_error_code(exc)
+            if proposal_error_code is None:
+                raise
+            requested_evidence_context = []
+            rejected_proposal = {
+                "cycle": cycle,
+                "kind": "BRAIN_PLANNER_PROPOSAL_REJECTED",
+                "reason": "RECOVERABLE_DETERMINISTIC_PROPOSAL_OUTPUT_ERROR",
+                "validation_error_code": proposal_error_code,
+                "error_type": type(exc).__name__,
+                "error_sha256": hashlib.sha256(
+                    str(exc).encode("utf-8", "replace")
+                ).hexdigest(),
+                "executable": False,
+                "promotable": False,
+                "effect_authority": False,
+                "finish_authority": False,
+            }
+            trace.append(rejected_proposal)
+            record_observation(rejected_proposal)
+            if journal_session is not None:
+                await asyncio.to_thread(
+                    journal_session.append,
+                    "PLANNER_PROPOSAL_REJECTED",
+                    rejected_proposal,
+                )
+            continue
         # Exact evidence chunks from the previous cognition turn have now been consumed.
         requested_evidence_context = []
         requirements, candidates, finish_summary, candidate_rejections = _extract_contract(
