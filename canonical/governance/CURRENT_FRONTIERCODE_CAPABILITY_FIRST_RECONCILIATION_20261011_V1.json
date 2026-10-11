@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_FRONTIERCODE_CAPABILITY_FIRST_RECONCILIATION_20261011_V1",
   "date": "2026-10-11",
-  "status": "ACTIVE_CAPABILITY_FIRST__BENCHMARK_DEMOTED_TO_AUDIT__BOUNDED_DONOR_FREE_PATCH_SEARCH_VERIFIED__FRONTIERCODE_SCORE_STILL_UNPROVED",
+  "status": "ACTIVE_CAPABILITY_FIRST__BENCHMARK_DEMOTED_TO_AUDIT__MULTI_FILE_TWO_EDIT_REPAIR_VERIFIED__FRONTIERCODE_SCORE_STILL_UNPROVED",
   "mission_lock": {
     "primary_objective": "MAKE_THE_UNDERLYING_SOFTWARE_ENGINEERING_CAPABILITY_REAL_INSIDE_BRAIN",
     "capability_target": "UNSEEN_REPOSITORY_PLUS_SOFTWARE_TASK_TO_INDEPENDENTLY_VERIFIED_MERGEABLE_PATCH",
@@ -29,6 +29,17 @@
       "target_proven": false,
       "owner_or_partner_evaluation_required_for_capability_development": false,
       "owner_or_partner_evaluation_optional_for_later_measurement": true
+    },
+    "new_verified_successor": {
+      "capability_id": "python.repair.loop.test_guided.ast.v1",
+      "runtime_git_blob_sha": "8c426254bd0dc70394fab4c5f2f0d1b1bd90bcef",
+      "runtime_sha256": "29a182828b894bf5bd081c14b7b1bb061a231632ca97f3218a2f5f6b1459669e",
+      "test_git_blob_sha": "294ce114bb70c8e770d37d3769d7d7fe3e269041",
+      "verification": "canonical/verification/PYTHON_TEST_GUIDED_REPAIR_LOOP_V1_VERIFY_20261011.json",
+      "capability_truth": "MULTI_FILE__UP_TO_TWO_AST_EDITS__BOUNDED_BEAM__TRACEBACK_AND_TEST_IMPORT_SOURCE_INFERENCE__TEST_VERIFIED_CANDIDATE_ONLY",
+      "model_dependency_count": 0,
+      "external_capability_provider_count": 0,
+      "incremental_spend_usd": 0
     }
   },
   "capability_chain": [
@@ -45,28 +56,32 @@
     {
       "stage": "REPOSITORY_UNDERSTANDING_AND_LOCALIZATION",
       "target": "CONTRACT_PLUS_REPOSITORY_TO_CAUSALLY_RELEVANT_FILES_SYMBOLS_AND_EXECUTION_PATHS",
-      "state": "PARTIAL",
+      "state": "PARTIAL_BOUNDED_VERIFIED",
       "existing_support": [
         "python.source.audit.ast",
-        "python.tests.audit.unittest"
+        "python.tests.audit.unittest",
+        "python.repair.loop.test_guided.ast.v1"
       ],
-      "residual": "STRUCTURAL_AUDIT_IS_NOT_GENERAL_SEMANTIC_FAULT_LOCALIZATION"
+      "residual": "TRACEBACK_AND_TEST_IMPORT_LOCALIZATION_IS_USEFUL_BUT_NOT_GENERAL_SEMANTIC_DEPENDENCY_OR_FAULT_LOCALIZATION"
     },
     {
       "stage": "PATCH_CONSTRUCTION",
       "target": "RELEVANT_CONTEXT_TO_CORRECT_REPOSITORY_PATCH",
-      "state": "PARTIAL_BOUNDED_VERIFIED",
+      "state": "PARTIAL_BOUNDED_MULTI_FILE_TWO_EDIT_VERIFIED",
       "existing_support": [
-        "python.patch.search.test_guided.ast.v1"
+        "python.patch.search.test_guided.ast.v1",
+        "python.repair.loop.test_guided.ast.v1"
       ],
-      "residual": "SINGLE_FILE_SINGLE_EDIT_PYTHON_SEARCH_IS_NOT_ARBITRARY_MULTI_FILE_MULTI_EDIT_PATCH_CONSTRUCTION"
+      "residual": "UP_TO_TWO_AST_EDITS_WITH_A_TEST_ORACLE_IS_NOT_ARBITRARY_PATCH_CONSTRUCTION"
     },
     {
       "stage": "ACTIVE_DIAGNOSIS_AND_REPAIR",
       "target": "FAILURE_EVIDENCE_TO_CAUSAL_HYPOTHESIS_TO_NEXT_PATCH_UNTIL_ACCEPTANCE_OR_FAIL_CLOSED",
-      "state": "OPEN_GENERAL_CASE",
-      "existing_support": [],
-      "residual": "NO_GENERAL_BRAIN_OWNED_ITERATIVE_SOFTWARE_REPAIR_LOOP"
+      "state": "PARTIAL_BOUNDED_VERIFIED_BEAM",
+      "existing_support": [
+        "python.repair.loop.test_guided.ast.v1"
+      ],
+      "residual": "FAILURE_COUNT_BEAM_SEARCH_IS_NOT_GENERAL_CAUSAL_DIAGNOSIS_OR_UNBOUNDED_ITERATIVE_REPAIR"
     },
     {
       "stage": "INDEPENDENT_VERIFICATION",
@@ -90,14 +105,14 @@
     "primary_work_class": "CAPABILITY_BUILD",
     "benchmark_instrumentation_state": "AUDIT_ONLY",
     "owner_wait_state": "NONBLOCKING_OPTIONAL_WAKE_EVENT",
-    "highest_leverage_next_build": "GENERAL_SOFTWARE_REPAIR_LOOP_V1",
+    "highest_leverage_next_build": "SOFTWARE_TASK_ACCEPTANCE_COMPILER_V1",
     "next_build_contract": [
-      "REPOSITORY_LOCAL_FAILING_TEST_EVIDENCE_TO_FILE_AND_SYMBOL_LOCALIZATION",
-      "MULTI_FILE_MULTI_EDIT_CANDIDATE_CONSTRUCTION_OVER_A_SYNTACTICALLY_UNIVERSAL_FINITE_EDIT_BASIS",
-      "BOUNDED_COUNTEREXAMPLE_GUIDED_SEARCH_WITH_EXPLICIT_RESOURCE_LIMITS",
-      "INDEPENDENT_REPLAY_AND_SOURCE_RESTORATION",
-      "NO_EXTERNAL_GENERAL_PURPOSE_MODEL_RUNTIME_COGNITION",
-      "FAIL_CLOSED_WHEN_ACCEPTANCE_EVIDENCE_IS_INSUFFICIENT"
+      "RAW_SOFTWARE_REQUEST_PLUS_REPOSITORY_EVIDENCE_TO_EXPLICIT_ATOMIC_ACCEPTANCE_OBLIGATIONS",
+      "BIND_EACH_OBLIGATION_TO_EXISTING_TEST_STATIC_OR_RUNTIME_EVIDENCE_WHERE_POSSIBLE",
+      "MARK_UNBOUND_SEMANTIC_REQUIREMENTS_EXPLICITLY_INSTEAD_OF_GUESSING",
+      "SEPARATE_TEST_PASS_FROM_REQUEST_COMPLETENESS_AND_MERGEABILITY",
+      "OUTPUT_A_TYPED_FAIL_CLOSED_ACCEPTANCE_CONTRACT_CONSUMABLE_BY_REPAIR_AND_VERIFICATION_LOOPS",
+      "NO_EXTERNAL_GENERAL_PURPOSE_MODEL_RUNTIME_COGNITION"
     ],
     "stop_conditions": [
       "DO_NOT_SPEND_PRIMARY_CYCLES_ON_PRIVATE_BENCHMARK_ARCHAEOLOGY",
