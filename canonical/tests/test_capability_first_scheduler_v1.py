@@ -531,7 +531,7 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
             "WAKE_GATED_EVENT_DRIVEN_AND_PARKED_CHECKPOINT_ROWS_MUST_NOT_CONSUME_SAME_INFORMATION_WORK__ONLY_POLICY_CHANGING_STATE_CHANGES_MAY_WAKE_THEM",
         )
         self.assertEqual(
-            v17["current_projection"]["gap_a_actionable_row_ids"],
+            v17["current_projection"]["checkpoint_actionable_row_ids"],
             [],
         )
         self.assertEqual(
