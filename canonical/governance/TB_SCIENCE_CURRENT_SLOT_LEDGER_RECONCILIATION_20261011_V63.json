@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261011_V63",
+  "date": "2026-10-11",
+  "status": "RANK20_RETIRED_EXPOSED_NONCONSUMING__RANK21_STAGED_UNEXPOSED__PUBLIC_RESEAL_PENDING",
+  "predecessor": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V62.json",
+    "git_blob_sha": "f7dfbc4504d03854425cea426f8cc9b63751b536"
+  },
+  "counts": {
+    "benchmark_trials_consumed": 18,
+    "consumed_successes_final": 0,
+    "consumed_failures_final": 18,
+    "started_result_pending": 0,
+    "finalized_slots": 18,
+    "active_in_flight_slot_count": 0
+  },
+  "retired_rank20": {
+    "slot_id": "terminal-bench-science/hysteretic-aquifer-control::trial-0",
+    "task_read_history": true,
+    "task_started": false,
+    "benchmark_trials_consumed": 0,
+    "retry_allowed": false
+  },
+  "next_slot": {
+    "ledger_schedule_rank": 21,
+    "frozen_manifest_schedule_order": 20,
+    "task_rank": 20,
+    "slot_id": "terminal-bench-science/ode-law-discovery::trial-0",
+    "task_digest": "sha256:767d16a0a6226f391208b1b4bb126a6f957e5d0c8156342b5c9410a755142d65",
+    "task_read_history": false,
+    "task_started": false,
+    "benchmark_trials_consumed": 0
+  },
+  "capability_first_admission": {
+    "path": "canonical/governance/TB_SCIENCE_RANK21_CAPABILITY_FIRST_CHECKPOINT_ADMISSION_20261011_V1.json",
+    "git_blob_sha": "2753d59268d6aac32f1f880b1c959ca8fa079445"
+  },
+  "logical_attempt_claim_binding": {
+    "path": "canonical/governance/TB_SCIENCE_RANK21_LOGICAL_ATTEMPT_CLAIM_BINDING_20261011_V1.json",
+    "git_blob_sha": "8d8465e8e2635c8051eed5ee3c10579e061e428f",
+    "canonical_sha256": "fb99e7f9d8d23a789c57506dc61e31c2abd25c442245f0309d94d65b29421697"
+  },
+  "logical_attempt_id": "7eb619d40a65597b2b2dccbcf409c143aa47e1663ca4c0d8f098167cb252811a",
+  "repair_verification": {
+    "path": "canonical/verification/TB_SCIENCE_BOUND_START_CAS_CALLER_REPAIR_VERIFY_20261010_V1.json",
+    "git_blob_sha": "bf5aa5cddf6c1272a9664320273d39725470b2e5"
+  },
+  "public_reseal": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "reseal/tb-science-rank21-20261011-v1",
+    "base_branch": "terminal-execution-v1",
+    "workflow_git_blob_sha": "1950ebf30e1431ba9e23c97491ecf9b7d9ae0480",
+    "behavior_git_blob_sha": "54011a7b4005ca8998a5987892b7ecaa9bf3f884",
+    "claim_binding_git_blob_sha": "8d8465e8e2635c8051eed5ee3c10579e061e428f",
+    "zero_exposure_verifier_git_blob_sha": "61e6e41b9b77139c4a286b3f31704fe4a953139f",
+    "activation_present": false
+  },
+  "state": "FROZEN_UNTIL_EXACT_PUBLIC_RESEAL",
+  "task_read": false,
+  "task_started": false,
+  "benchmark_trials_consumed": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
