@@ -1,0 +1,53 @@
+name: verify-chart-direct-curve-label-family-rank-v1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/verify-chart-direct-curve-label-family-rank-v1.yml"
+      - "canonical/runtime/bound_capabilities/chart_direct_curve_label_family_rank_v1.py"
+      - "canonical/tests/test_chart_direct_curve_label_family_rank_v1.py"
+      - "canonical/governance/CHART_DIRECT_CURVE_LABEL_FAMILY_RANK_20261011_V1.json"
+  workflow_dispatch:
+
+concurrency:
+  group: chart-direct-label-family-rank-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  focused:
+    runs-on: [self-hosted, Linux, X64, brain-regression]
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install focused test runner
+        shell: bash
+        run: |
+          set -euo pipefail
+          venv="${RUNNER_TEMP}/chart-direct-label-rank-venv"
+          python -m venv --clear "${venv}"
+          "${venv}/bin/python" -m pip install --disable-pip-version-check pytest==9.1.1 Pillow
+          printf '%s\n' "${venv}/bin" >> "${GITHUB_PATH}"
+
+      - name: Compile exact candidate
+        run: |
+          python -m py_compile canonical/runtime/bound_capabilities/chart_direct_curve_label_family_rank_v1.py
+
+      - name: Focused capability and neighboring regression replay
+        run: |
+          python -m pytest -q \
+            canonical/tests/test_chart_direct_curve_label_family_rank_v1.py \
+            canonical/tests/test_chart_curve_value_query_v1.py \
+            canonical/tests/test_chart_curve_x_at_y_query_v1.py \
+            canonical/tests/test_chart_legend_style_binding_v1.py \
+            canonical/tests/test_chart_raster_scene_graph_v1.py
+
+# zero-credit verification carrier; promotion requires content-addressed receipt
