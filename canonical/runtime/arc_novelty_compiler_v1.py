@@ -189,6 +189,17 @@ def _apply_recolor(grid: Grid, mapping: Mapping[int, int]) -> Grid:
     return tuple(tuple(mapping.get(v, v) for v in row) for row in grid)
 
 
+def _scale_pixels(grid: Grid, row_factor: int, col_factor: int) -> Grid:
+    if row_factor < 1 or col_factor < 1:
+        raise ARCNoveltyCompilerError("SCALE_FACTOR_INVALID")
+    rows: list[tuple[int, ...]] = []
+    for row in grid:
+        expanded = tuple(v for v in row for _ in range(col_factor))
+        for _ in range(row_factor):
+            rows.append(expanded)
+    return tuple(rows)
+
+
 def _infer_recolor(pairs: Sequence[tuple[Grid, Grid]]) -> dict[int, int] | None:
     mapping: dict[int, int] = {}
     for inp, out in pairs:
@@ -228,6 +239,8 @@ def _predict(h: Mapping[str, Any], grid: Grid) -> Grid | None:
     if kind == "RECOLOR":
         mapping = {int(k): int(v) for k, v in h["mapping"].items()}
         return _apply_recolor(grid, mapping)
+    if kind == "PIXEL_SCALE":
+        return _scale_pixels(grid, int(h["row_factor"]), int(h["col_factor"]))
     if kind == "CROP_NON_BACKGROUND":
         bbox = _non_background_bbox(grid)
         return None if bbox is None else _crop_bbox(grid, bbox)
@@ -276,6 +289,20 @@ def compile_hypotheses(
         if _consistent(h, pairs):
             candidates.append(h)
 
+    scale_factors: set[tuple[int, int]] = set()
+    for inp, out in pairs:
+        ih, iw = _shape(inp)
+        oh, ow = _shape(out)
+        if oh % ih == 0 and ow % iw == 0:
+            rf, cf = oh // ih, ow // iw
+            if rf >= 1 and cf >= 1 and (rf > 1 or cf > 1):
+                scale_factors.add((rf, cf))
+    if len(scale_factors) == 1:
+        rf, cf = next(iter(scale_factors))
+        h = {"kind": "PIXEL_SCALE", "row_factor": rf, "col_factor": cf}
+        if _consistent(h, pairs):
+            candidates.append(h)
+
     crop = {"kind": "CROP_NON_BACKGROUND"}
     if _consistent(crop, pairs):
         candidates.append(crop)
@@ -316,6 +343,7 @@ def compile_hypotheses(
         "grammar": [
             "GLOBAL_DIHEDRAL_GEOMETRY",
             "POSITIONWISE_DETERMINISTIC_RECOLOR",
+            "EXACT_INTEGER_PIXEL_SCALE",
             "NON_BACKGROUND_BOUNDING_BOX_CROP",
             "UNIQUE_LARGEST_OR_SMALLEST_COMPONENT_CROP",
         ],
