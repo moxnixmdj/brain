@@ -29,12 +29,21 @@ class IndependentNpmVerifierBridgeTests(unittest.TestCase):
             (root/"canonical"/"input.json").parent.mkdir(parents=True)
             (root/"canonical"/"input.json").write_text('{"x":1}\n',encoding="utf-8")
             (root/"canonical"/"out.ubj").write_bytes(b"{}")
-            bridge=root/"bridge"
-            with mock.patch.dict(os.environ,{
-                "PROJECT_BRAIN_EXTERNAL_TOOL_BRIDGE_DIR":str(bridge),
-                "PROJECT_BRAIN_AGENT_ID":"SUPERWORKER-UNIFIED-1",
-                "PROJECT_BRAIN_TASK_ID":"SI-REAL-UBJSON-SNAPSHOT-001",
-            },clear=False):
+            task_id="SI-REAL-UBJSON-SNAPSHOT-001"
+            bridge=(
+                root/"canonical"/"same_identity_worker"/"external_tool_bridge"/task_id
+            )
+            with mock.patch.object(verifier.astra_runtime,"ROOT",root), \
+                 mock.patch.object(
+                     verifier.astra_runtime,
+                     "_authorize_external_information",
+                     return_value={"pass":True},
+                 ), \
+                 mock.patch.dict(os.environ,{
+                     "PROJECT_BRAIN_EXTERNAL_TOOL_BRIDGE_DIR":str(bridge),
+                     "PROJECT_BRAIN_AGENT_ID":"SUPERWORKER-UNIFIED-1",
+                     "PROJECT_BRAIN_TASK_ID":task_id,
+                 },clear=False):
                 with self.assertRaisesRegex(
                     verifier.IndependentNpmCodecVerifierFailure,
                     "EXTERNAL_TOOL_REQUEST_PENDING"
