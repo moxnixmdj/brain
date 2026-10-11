@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_SAFE_POPULATION_PROFILE_20261011_V1",
+  "date": "2026-10-11",
+  "status": "SAFE_METADATA_ONLY__NO_QUESTION_OR_GOLD_CONTENT_EXPOSED",
+  "dataset_binding": {
+    "artifact_sha256": "6d0ee0602e8aea6b159509577e884f48ecac7b8e3f6822a35f51335a446c726a",
+    "rows": 2500,
+    "unique_ids": 2500
+  },
+  "answer_type_counts": {
+    "exactMatch": 1909,
+    "multipleChoice": 591
+  },
+  "category_counts": {
+    "Math": 1021,
+    "Biology/Medicine": 280,
+    "Computer Science/AI": 241,
+    "Other": 233,
+    "Physics": 230,
+    "Humanities/Social Science": 219,
+    "Chemistry": 165,
+    "Engineering": 111
+  },
+  "nonempty_image_payload_count": 342,
+  "empty_image_payload_count": 2158,
+  "category_by_answer_type": {
+    "Math": {"exactMatch": 927, "multipleChoice": 94},
+    "Biology/Medicine": {"exactMatch": 114, "multipleChoice": 166},
+    "Computer Science/AI": {"exactMatch": 170, "multipleChoice": 71},
+    "Other": {"exactMatch": 176, "multipleChoice": 57},
+    "Physics": {"exactMatch": 190, "multipleChoice": 40},
+    "Humanities/Social Science": {"exactMatch": 133, "multipleChoice": 86},
+    "Chemistry": {"exactMatch": 122, "multipleChoice": 43},
+    "Engineering": {"exactMatch": 77, "multipleChoice": 34}
+  },
+  "derivation": {
+    "method": "Parquet metadata/dictionary/index decoding in private execution environment; aggregate counts only.",
+    "question_values_emitted": 0,
+    "answer_values_emitted": 0,
+    "rationale_values_emitted": 0,
+    "raw_ids_emitted": 0
+  },
+  "target_arithmetic": {
+    "reported_target_percent": 67.7,
+    "questions_per_trial": 2500,
+    "minimum_binary_successes_per_single_trial_if_integer_thresholded": 1693,
+    "five_trial_slots": 12500,
+    "minimum_total_binary_successes_for_average_at_least_67_7_percent": 8463
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
