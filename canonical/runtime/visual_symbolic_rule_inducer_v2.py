@@ -217,7 +217,8 @@ def induce(
             yes = tuple(
                 i for i in ids if _eval_predicate(predicate, feature_maps[i])
             )
-            no = tuple(i for i in ids if i not in set(yes))
+            yes_set = set(yes)
+            no = tuple(i for i in ids if i not in yes_set)
             if not yes or not no:
                 continue
             yes_leaf = v1._leaf_action([record_map[i] for i in yes]) is not None
