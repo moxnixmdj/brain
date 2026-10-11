@@ -4212,6 +4212,79 @@
         "heldout_chartography_cases_consumed": 0,
         "model_dependency_count": 0
       }
+    },
+    "chart.raster.curve_value_query.v1": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "adapter_module": "chart_curve_value_query_v1",
+      "entrypoint": "run",
+      "cost": 2,
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "chart",
+        "curve",
+        "series",
+        "value",
+        "interpolation",
+        "axis",
+        "legend",
+        "raster"
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "requires": [
+        "image.file.available",
+        "chart.series.label.available",
+        "chart.query.x_value.available"
+      ],
+      "provides": [
+        "chart.raster.curve.y_at_x"
+      ],
+      "limitations": [
+        "Requires a uniquely legend-bound color series and calibrated x/y axes.",
+        "Supports linear and log10 axis transforms and bounded interpolation only.",
+        "Same-color multi-series ambiguity, vertical overlap at the query, missing labels, out-of-range queries, and large interpolation gaps fail closed.",
+        "No chart-family/domain semantic interpretation and no Chartography score authority."
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "chart.raster.curve_value_query.v1",
+          "path": "${input.path}",
+          "label": "${input.label}",
+          "x_value": "${input.x_value}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "pass",
+          "value": true
+        }
+      },
+      "source": {
+        "type": "brain_native_deterministic_composition",
+        "adapter_path": "canonical/runtime/bound_capabilities/chart_curve_value_query_v1.py",
+        "composed_capabilities": [
+          "image.extract.ocr.tesseract.positioned.tsv",
+          "chart.raster.scene_graph.v1",
+          "chart.raster.legend_style_binding.v1"
+        ],
+        "external_general_purpose_model_runtime_dependency_count": 0
+      },
+      "verification": {
+        "independently_verified": true,
+        "exact_runtime_blob_sha": "107e20dd66840ecaba32e9e9f6cbfc764da1ae0b",
+        "exact_test_blob_sha": "21870c05e9a8533305168cad65edd1977aeb047b",
+        "receipt_path": "canonical/verification/CHART_CURVE_VALUE_QUERY_V1_VERIFY_20261011.json",
+        "verifier_repository": "moxnixmdj/verification-capsule-runner",
+        "verifier_pull_request": 2713,
+        "verifier_merge_sha": "757a8a9648c82953238aec6c0e481de99ab98ad4",
+        "workflow_run_id": 38152570909,
+        "workflow_job_id": 114508865515,
+        "author_tests_passed": 10,
+        "independent_falsification_passed": 6,
+        "heldout_chartography_cases_consumed": 0,
+        "model_dependency_count": 0
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"

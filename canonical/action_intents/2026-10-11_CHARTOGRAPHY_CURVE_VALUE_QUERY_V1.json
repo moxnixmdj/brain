@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "date": "2026-10-11",
+  "status": "PROMOTED_BOUNDED_CAPABILITY__INDEPENDENT_PUBLIC_REPLAY_PASS",
+  "action_id": "CHARTOGRAPHY_CURVE_VALUE_QUERY_V1",
+  "source_frontier": "canonical/governance/CHARTOGRAPHY_CAPABILITY_PROOF_FRONTIER_V1.json",
+  "mission": "Build the highest-reuse Brain-native residual chart primitive: calibrated y-value query from a uniquely legend-bound colored raster curve at a requested x value.",
+  "rationale": [
+    "Public Chartography scope explicitly includes multiple curve-read families such as Kaplan-Meier, growth charts, and Bode plots.",
+    "This primitive composes already-verified positioned OCR axis binding, legend-to-color binding, and raster polyline geometry.",
+    "It grants no domain semantics; later adapters must prove family-specific interpretation separately."
+  ],
+  "historical_reuse_source": {
+    "brain_pr": 4519,
+    "source_module": "canonical/runtime/chartography_series_intersection_v1.py",
+    "role": "DESIGN_SEED_ONLY__NO_RUNTIME_DEPENDENCY__CURRENT_IMPLEMENTATION_REBUILT_ON_VERIFIED_PRIMITIVES"
+  },
+  "external_general_purpose_model_runtime_dependency_count": 0,
+  "donor_general_purpose_model_runtime_dependency_count": 0,
+  "heldout_chartography_cases_consumed": 0,
+  "benchmark_score_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "hard_nonclaims": [
+    "NO_KAPLAN_MEIER_DOMAIN_AUTHORITY",
+    "NO_GROWTH_PERCENTILE_DOMAIN_AUTHORITY",
+    "NO_BODE_DOMAIN_AUTHORITY",
+    "NO_OVERLAPPING_SAME_COLOR_MULTI_SERIES_AUTHORITY",
+    "NO_CHARTOGRAPHY_SCORE"
+  ],
+  "verification": "canonical/verification/CHART_CURVE_VALUE_QUERY_V1_VERIFY_20261011.json",
+  "verifier_run_id": 38152570909,
+  "verifier_job_id": 114508865515,
+  "author_tests": "10_OF_10_PASS",
+  "independent_falsification": "6_OF_6_PASS"
+}
