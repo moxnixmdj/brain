@@ -1,6 +1,41 @@
 from copy import deepcopy
+from hashlib import sha1
+import json
 
 from canonical.runtime.terminal_closure_reducer import evaluate_manifest
+
+def _git_blob_sha(path):
+    data=path.read_bytes()
+    digest=sha1()
+    digest.update(f"blob {len(data)}".encode("ascii")+bytes([0]))
+    digest.update(data)
+    return digest.hexdigest()
+
+
+def bind_current_donor_authority(manifest,tmp_path):
+    reducer=tmp_path/"canonical/runtime/terminal_global_ownership_postconditions_reducer_v1.py"
+    reducer.parent.mkdir(parents=True,exist_ok=True)
+    reducer.write_text("# hardened synthetic reducer\n",encoding="utf-8")
+    predicates={
+        "final_donor_deletion_cleanroom_pass":True,
+        "donor_deletion_protocol_v2_bound":True,
+        "runtime_cognition_model_independent":True,
+        "zero_external_model_runtime_cognition_dependencies":True,
+        "copied_or_rehosted_teacher_absent":True,
+        "runtime_dependency_inventory_complete":True,
+    }
+    receipt=tmp_path/"global-ownership.json"
+    receipt.write_text(json.dumps({
+        "status":"INDEPENDENT_PUBLIC_RUNNER_PASS__SYNTHETIC",
+        "brain_reducer_blob_sha":_git_blob_sha(reducer),
+        "result":{"terminal_predicates":predicates},
+    },sort_keys=True)+"\n",encoding="utf-8")
+    manifest["global_ownership_postconditions"]={
+        "status":"INDEPENDENT_PASS",
+        "evidence":"global-ownership.json",
+        "evidence_blob_sha":_git_blob_sha(receipt),
+    }
+    return manifest
 
 
 def passing_manifest():
@@ -47,8 +82,9 @@ def passing_manifest():
     }
 
 
-def test_exact_complete_manifest_passes():
-    out = evaluate_manifest(passing_manifest())
+def test_exact_complete_manifest_passes(tmp_path):
+    manifest=bind_current_donor_authority(passing_manifest(),tmp_path)
+    out = evaluate_manifest(manifest,repo_root=tmp_path)
     assert out["achieved"] is True
     assert out["failed_predicates"] == []
 
