@@ -31,37 +31,47 @@ def clean_transfer():
 def test_missing_class_fails_closed():
     assert evaluate({})["pass"] is False
 
+def base(cls):
+    return {
+        "external_contribution_classification":cls,
+        "external_contribution_census_complete":True,
+        "full_runtime_dependency_inventory_complete":True,
+    }
+
 def test_k3_always_fails():
-    assert evaluate({"external_contribution_classification":"K3_RUNTIME_COGNITION"})["pass"] is False
+    assert evaluate(base("K3_RUNTIME_COGNITION"))["pass"] is False
 
 def test_k2_requires_transfer_record():
-    assert evaluate({"external_contribution_classification":"K2_TRANSFER_DERIVED"})["pass"] is False
+    assert evaluate(base("K2_TRANSFER_DERIVED"))["pass"] is False
 
 def test_clean_k2_passes_gate_but_grants_no_credit():
-    out=evaluate({"external_contribution_classification":"K2_TRANSFER_DERIVED","capability_transfer_record":clean_transfer()})
+    row=base("K2_TRANSFER_DERIVED"); row["capability_transfer_record"]=clean_transfer()
+    out=evaluate(row)
     assert out["pass"] is True
     assert out["promotion_authority"] is False
     assert out["ownership_credit_delta"] == 0
 
 def test_k1_requires_non_authoritative_information_only():
-    assert evaluate({
-        "external_contribution_classification":"K1_INFORMATION_ONLY",
+    row=base("K1_INFORMATION_ONLY"); row.update({
         "external_knowledge_non_authoritative":True,
         "external_knowledge_target_solving_policy_or_answer":False,
-    })["pass"] is True
+    })
+    assert evaluate(row)["pass"] is True
 
 def test_k1_answer_provider_fails():
-    assert evaluate({
-        "external_contribution_classification":"K1_INFORMATION_ONLY",
+    row=base("K1_INFORMATION_ONLY"); row.update({
         "external_knowledge_non_authoritative":True,
         "external_knowledge_target_solving_policy_or_answer":True,
-    })["pass"] is False
+    })
+    assert evaluate(row)["pass"] is False
 
 def test_none_rejects_hidden_donor_use():
-    assert evaluate({
-        "external_contribution_classification":"NONE",
-        "acquisition_donor_provenance":{"used":True},
-    })["pass"] is False
+    row=base("NONE"); row.update({"acquisition_donor_provenance":{"used":True},"external_runtime_cognition":False})
+    assert evaluate(row)["pass"] is False
 
 def test_none_clean_passes():
-    assert evaluate({"external_contribution_classification":"NONE"})["pass"] is True
+    row=base("NONE"); row.update({"acquisition_donor_provenance":{"used":False},"external_runtime_cognition":False})
+    assert evaluate(row)["pass"] is True
+
+def test_none_without_complete_census_fails():
+    assert evaluate({"external_contribution_classification":"NONE","acquisition_donor_provenance":{"used":False},"external_runtime_cognition":False})["pass"] is False
