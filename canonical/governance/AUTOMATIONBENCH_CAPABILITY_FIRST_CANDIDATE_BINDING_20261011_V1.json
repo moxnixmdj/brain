@@ -1,15 +1,15 @@
 {
   "schema": "PROJECT_BRAIN_AUTOMATIONBENCH_CAPABILITY_FIRST_CANDIDATE_BINDING_20261011_V1",
   "date": "2026-10-11",
-  "status": "PASS__CANONICAL_GENERAL_WORKFLOW_V2_CANDIDATE_BOUND__PRIVATE_SCORE_OPEN__ZERO_ACCEPTANCE_CREDIT",
+  "status": "PASS__CANONICAL_GENERAL_WORKFLOW_V2_PLUS_CAPABILITY_PURITY_V3_BOUND__PRIVATE_SCORE_OPEN__ZERO_ACCEPTANCE_CREDIT",
   "target_predicate": "AUTOMATIONBENCH_GE_40",
   "mission_lock": "CAPABILITY_FIRST__BENCHMARK_IS_MEASUREMENT_SURFACE",
   "candidate": {
-    "canonical_merge_sha": "4af3376324d98d6a945e83c817c507e969208247",
+    "canonical_merge_sha": "840fdbfe3d5de6a267032b9eb50502c3dde36d2a",
     "model_slug": "project-brain/general-workflow-field-grounding-v2",
     "transport_state_machine": {
       "path": "canonical/runtime/automationbench_policy_state_machine_v2.py",
-      "git_blob_sha": "3277536091d6bae1d713c1edbf303b365bb896d7"
+      "git_blob_sha": "78ceb000468a5868f51eec922e677be292bd083a"
     },
     "evaluator_adapter": {
       "path": "canonical/runtime/automationbench_stirrup_client_v1.py",
@@ -26,6 +26,10 @@
     "general_state_verifier": {
       "path": "canonical/runtime/generic_goal_state_verifier_v2.py",
       "git_blob_sha": "afba1addef46aca8a2052e7777cb4794a7d02fa1"
+    },
+    "generic_schema_discovery": {
+      "path": "canonical/runtime/generic_tool_schema_discovery_v1.py",
+      "git_blob_sha": "c8065f1d481beb6360251b0fcaef1f90da027157"
     }
   },
   "architecture": {
@@ -42,7 +46,9 @@
     ],
     "benchmark_specific_mutation_compiler_reachable_from_v2": false,
     "vendor_specific_reasoning_load_bearing": false,
-    "private_benchmark_content_load_bearing": false
+    "private_benchmark_content_load_bearing": false,
+    "generic_discovery_load_bearing": true,
+    "benchmark_specific_discovery_reasoning_reachable_from_v2": false
   },
   "verification": {
     "receipt_path": "canonical/verification/GENERAL_WORKFLOW_FIELD_GROUNDING_V2_INDEPENDENT_REPLAY_20261011_V1.json",
@@ -63,7 +69,18 @@
       "tests": 81,
       "failures": 0
     },
-    "github_ci_pre_runner_failures_are_not_code_pass_or_fail_evidence": true
+    "github_ci_pre_runner_failures_are_not_code_pass_or_fail_evidence": true,
+    "capability_purity_v3_receipt": {
+      "path": "canonical/verification/GENERAL_WORKFLOW_CAPABILITY_PURITY_V3_INDEPENDENT_REPLAY_20261011_V1.json",
+      "git_blob_sha": "314539f7041560de45fe95400bfe5f859800be0f",
+      "focused_replay": "62_OF_62_PASS",
+      "full_compatibility_replay": "88_OF_88_PASS"
+    },
+    "baseline_field_grounding_v2_receipt": "canonical/verification/GENERAL_WORKFLOW_FIELD_GROUNDING_V2_INDEPENDENT_REPLAY_20261011_V1.json",
+    "baseline_adjacent_compatibility_replay": {
+      "tests": 81,
+      "failures": 0
+    }
   },
   "private_acceptance": {
     "benchmark_version": "1.0.6",
@@ -82,7 +99,8 @@
     "public_600_role": "FAILURE_GENERATOR_AND_RESEARCH_SURFACE_ONLY",
     "public_600_acceptance_credit": 0,
     "repair_rule": "REPAIR_GENERAL_CAUSAL_FAILURE_CLASS__NOT_PUBLIC_TASK_INSTANCE",
-    "private_route_rule": "FREEZE_EXACT_CONTENT_ADDRESSED_CANDIDATE_ONLY_WHEN_OWNER_EXECUTION_INTERFACE_IS_AVAILABLE"
+    "private_route_rule": "FREEZE_EXACT_CONTENT_ADDRESSED_CANDIDATE_ONLY_WHEN_OWNER_EXECUTION_INTERFACE_IS_AVAILABLE",
+    "discovery_rule": "DERIVE_SCHEMA_SEARCH_QUERIES_ONLY_FROM_GENERIC_ACTION_CLASSES_AND_RESOURCE_TERMS__NO_VENDOR_APP_ALIAS_TABLES_IN_CREDITED_V2_PATH"
   },
   "accounting": {
     "incremental_spend_usd": 0,
@@ -98,6 +116,8 @@
     "NO_CLAIM_81_TEST_REPLAY_IS_SCOPE_COMPLETE_FOR_PRIVATE_657",
     "NO_PUBLIC_TO_PRIVATE_SCORE_TRANSFER_CLAIM",
     "NO_PRIVATE_TASK_CONTENT_USED",
-    "NO_ACCEPTANCE_OR_FAMILY_PROMOTION_FROM_THIS_BINDING"
+    "NO_ACCEPTANCE_OR_FAMILY_PROMOTION_FROM_THIS_BINDING",
+    "NO_CLAIM_88_TEST_CAPABILITY_PURITY_REPLAY_IS_SCOPE_COMPLETE_FOR_PRIVATE_657",
+    "NO_CLAIM_UNSUPPORTED_NEGATIVE_ACTION_CLASSES_OTHER_THAN_DELETE_ARE_SOLVED"
   ]
 }
