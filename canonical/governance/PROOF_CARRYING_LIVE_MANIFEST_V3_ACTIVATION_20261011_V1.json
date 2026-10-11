@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_PROOF_CARRYING_LIVE_MANIFEST_V3_ACTIVATION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "ACTIVE_REQUIRED_GATE_FOR_LIVE_MANIFEST_CANDIDACY__SELF_VALIDATING__18_OF_18__SEPARATE_LIVE_AUTHORITY_REQUIRED__ZERO_CREDIT",
+  "objective": "ALLOW_ONLY_EXACT_SELF_VALIDATING_PROOF_CARRYING_ROUTE_SETS_TO_BECOME_LIVE_MANIFEST_ACTIVATION_CANDIDATES__NEVER_CONFUSE_CANDIDACY_WITH_PROMOTION_AUTHORITY",
+  "current": {
+    "runtime": {
+      "path": "canonical/runtime/proof_carrying_live_manifest_v3.py",
+      "git_blob_sha": "7f53a86e4fb5ee8794674fb97adabe8858b7f9d2"
+    },
+    "tests": {
+      "path": "canonical/tests/test_proof_carrying_live_manifest_v3.py",
+      "git_blob_sha": "225a042989cd253fb22d70e8950337898ab0ad4a"
+    },
+    "verification": {
+      "path": "canonical/verification/PROOF_CARRYING_LIVE_MANIFEST_V3_INDEPENDENT_VERIFY_20261011_V1.json",
+      "git_blob_sha": "ee0c1e2f08ae9dead9a5f96f42b36cf54f985067",
+      "status": "PASS__PYCOMPILE__18_OF_18"
+    }
+  },
+  "predecessor": {
+    "id": "PROOF_CARRYING_LIVE_MANIFEST_V2",
+    "load_bearing": false,
+    "reason": "FORGED_OR_MUTATED_CANDIDATE_MANIFEST_COULD_SURVIVE_ACTIVATION_IF_EXTERNAL_RECEIPTS_ECHOED_THE_CALLER_SUPPLIED_HASH__RECEIPTS_NOT_SELF_DIGESTED__PROMOTION_AUTHORITY_GRANTED_WITHOUT_SEPARATE_LIVE_GLOBAL_AUTHORITY"
+  },
+  "required_for": [
+    "NEW_LIVE_MANIFEST_CANDIDATE_COMPILATION",
+    "LEARNED_V2_ROUTE_LIVE_MANIFEST_CANDIDACY",
+    "STATIC_VERIFIED_ROUTE_SET_REPLACEMENT",
+    "LIVE_MANIFEST_CANARY_RUNTIME_ACK_AND_FRONT_DOOR_REPLAY_CANDIDACY"
+  ],
+  "composition_rule": "LEARNED_V2_ROUTE_REQUIRES_VERIFIED_IMPROVEMENT_LOOP_V2_PROMOTION_CANDIDATE_RECEIPT__THEN_V3_MANIFEST_COMPILE__THEN_EXACT_CANARY_RUNTIME_ACK_FRONT_DOOR_REPLAY__THEN_SEPARATE_LIVE_GLOBAL_AUTHORITY_AND_ATOMIC_TRANSACTION_BEFORE_PROMOTION",
+  "authority_boundary": {
+    "activation_candidate": true,
+    "activation_authority": false,
+    "promotion_authority": false,
+    "execution_authority": false,
+    "fresh_reality_authority": false,
+    "terminal_authority": false
+  },
+  "scheduler_rule": "NO_MANIFEST_PROMOTION_FROM_V1_OR_V2_STYLE_OPAQUE_RECEIPTS__V3_CANDIDACY_MUST_PASS__LIVE_GLOBAL_AUTHORITY_AND_ATOMIC_CURRENTNESS_RECHECK_REMAIN_SEPARATE_AND_LOAD_BEARING",
+  "hard_nonclaims": [
+    "NO_ROUTE_IS_ACTIVATED_BY_THIS_POLICY",
+    "NO_PROMOTION_EXECUTION_OR_FRESH_REALITY_AUTHORITY",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
