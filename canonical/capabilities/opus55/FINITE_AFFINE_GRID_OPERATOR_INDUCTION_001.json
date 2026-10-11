@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_FINITE_AFFINE_GRID_OPERATOR_INDUCTION_001",
+  "date": "2026-10-11",
+  "status": "VERIFIED_BRAIN_OWNED_BOUNDED_OPERATOR_INDUCTION_CAPABILITY__ZERO_WHOLE_ARC_OR_OPEN_WORLD_CREDIT",
+  "capability_id": "FINITE_AFFINE_GRID_OPERATOR_INDUCTION_001",
+  "implementation": {
+    "runtime": "canonical/runtime/finite_affine_grid_operator_inducer_v1.py",
+    "runtime_blob_sha": "e302ba06d6a48080e1f7bc0614626dc516cd296c",
+    "tests": "canonical/tests/test_finite_affine_grid_operator_inducer_v1.py",
+    "tests_blob_sha": "2ed0465da493516ee3e0dcf245f4ac45ec9d7f48"
+  },
+  "verified_scope": [
+    "FROM_GRID_INPUT_OUTPUT_DEMONSTRATIONS_SYNTHESIZE_ALL_MINIMUM_DESCRIPTION_COST_EXACT_OPERATORS_WITHIN_THE_DECLARED_UNIMODULAR_INTEGER_AFFINE_COORDINATE_CLASS",
+    "SYMBOLIC_OFFSETS_INCLUDE_GRID_DIMENSION_AND_NONZERO_BOUNDING_BOX_COORDINATES",
+    "OUTPUT_SHAPE_RULES_INCLUDE_SAME_SWAP_NONZERO_BBOX_AND_NONZERO_BBOX_SWAP",
+    "CONTENT_RELATIVE_BBOX_EXTRACTION_TRANSFERS_ACROSS_POSITIONS_AND_SIZES",
+    "UNNAMED_BBOX_PLUS_ROTATION_AND_BBOX_PLUS_FLIP_COMPOSITES_CAN_BE_SYNTHESIZED_WITHOUT_NAMED_COMPOSITE_OPERATORS",
+    "EQUAL_MINIMUM_OPERATOR_AMBIGUITY_IS_PRESERVED_AND_UNSEEN_DISAGREEMENT_ABSTAINS",
+    "SEARCH_BOUND_OVERFLOW_FAILS_CLOSED"
+  ],
+  "independent_frozen_generalization": {
+    "fixture": "canonical/evaluation/FINITE_AFFINE_GRID_OPERATOR_FROZEN_GENERALIZATION_20261011_V1.json",
+    "fixture_blob_sha": "bcbfd95a02cfd5e63dd52d4a7a81dbc3e728d5eb",
+    "fixture_sha256": "f0f5a026aee28459a9d9fe4f495864b931d025f0c7abd15b40320b7ab34360cd",
+    "receipt": "canonical/verification/FINITE_AFFINE_GRID_OPERATOR_FROZEN_GENERALIZATION_RECEIPT_20261011_V1.json",
+    "receipt_blob_sha": "daa77bf56f11a3511622ee2b9f6c3dc85c051962",
+    "receipt_sha256": "0a03db488d0cd9513b35ce95a4368233e4b670856a3fff1d8c06fd6ff64a7508",
+    "independent_carrier": "brain-cad-proof-clean-20261009",
+    "task_count": 10,
+    "passed": 10,
+    "failed": 0,
+    "pass_all": true
+  },
+  "prior_exact_blob_tests": {
+    "carrier": "brain-arc-donor-verify-20261011-v1",
+    "passed": 5,
+    "failed": 0
+  },
+  "ownership": {
+    "donor_runtime_required": false,
+    "external_frontier_model_runtime_cognition": false,
+    "external_learned_capability_calls": 0,
+    "incremental_spend_usd": 0
+  },
+  "exclusions": [
+    "NO_GENERAL_PROGRAM_SYNTHESIS",
+    "NO_OPEN_WORLD_OPERATOR_INVENTION",
+    "NO_NON_AFFINE_SPATIAL_OR_SEMANTIC_OPERATOR_CLAIM",
+    "NO_ARC_AGI_SCORE_OR_PARITY_CLAIM",
+    "NO_WHOLE_UNKNOWN_DOMAIN_OR_ABSTRACT_GENERALIZATION_FAMILY_CREDIT"
+  ],
+  "causal_role": {
+    "prior_missing_effect": "INVENT_NEW_GRID_OPERATOR_FROM_DEMONSTRATIONS",
+    "discharged_subeffect": "INVENT_BOUNDED_CONTENT_RELATIVE_AFFINE_GRID_OPERATOR_FROM_DEMONSTRATIONS",
+    "remaining_residual": "INVENT_OPERATOR_CLASSES_OUTSIDE_THE_VERIFIED_AFFINE_CONTENT_RELATIVE_HYPOTHESIS_CLASS"
+  },
+  "accounting": {
+    "terminal_credit_delta": 0,
+    "family_credit_delta": 0,
+    "whole_goal_credit_delta": 0
+  }
+}
