@@ -28,6 +28,11 @@ MAX_PROJECTION_BYTES = 65_536
 MAX_AST_NODES = 1_000
 MAX_FUNCTIONS = 32
 
+FORBIDDEN_CALL_TARGETS = {
+    "globals", "locals", "eval", "exec", "compile", "__import__",
+    "getattr", "setattr", "delattr", "vars", "dir", "input",
+}
+
 SAFE_BUILTINS: dict[str, Any] = {
     "abs": abs,
     "all": all,
@@ -211,6 +216,10 @@ def _validate_function(
 
     calls: set[str] = set()
     body_nodes = list(ast.walk(fn))
+
+    # Shape errors have stable precedence over semantic call/name errors.
+    # This keeps diagnostics deterministic even when ast.walk encounters a
+    # parent Call before its forbidden Attribute child.
     for node in body_nodes:
         if type(node) not in _ALLOWED_NODE_TYPES:
             raise PureProjectionConsumerError(
@@ -220,6 +229,7 @@ def _validate_function(
                 + type(node).__name__
             )
 
+    for node in body_nodes:
         if isinstance(node, ast.Expr) and not _docstring_expr(node):
             raise PureProjectionConsumerError(
                 "EXPRESSION_STATEMENT_FORBIDDEN:" + fn.name
@@ -248,8 +258,12 @@ def _validate_function(
                 )
             target = node.func.id
             if target not in SAFE_BUILTINS and target not in local_functions:
+                if target in FORBIDDEN_CALL_TARGETS:
+                    raise PureProjectionConsumerError(
+                        "CALL_TARGET_FORBIDDEN:" + fn.name + ":" + target
+                    )
                 raise PureProjectionConsumerError(
-                    "CALL_TARGET_FORBIDDEN:" + fn.name + ":" + target
+                    "UNKNOWN_GLOBAL_NAME:" + fn.name + ":" + target
                 )
             if any(keyword.arg is None for keyword in node.keywords):
                 raise PureProjectionConsumerError(
