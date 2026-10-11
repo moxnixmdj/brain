@@ -1,0 +1,130 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_LIBMPF_COMPOSED_V70_SUCCESSOR_EXECUTION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "VERIFIED_RESEARCH_FRONTIER__COMPOSED_STRONGER_THAN_V69__SPENT_NEXT76_AND_FRESH_NEXT77_PASS__NEXT78_FROZEN_UNSPENT__CURRENT_POINTER_ELIGIBLE__ZERO_PROMOTION_CREDIT",
+  "subject": {
+    "predecessor": "canonical/evidence/BYTES_EXACT_SYMBOLIC_LIBMPF_LOCAL_ALIAS_COMPACT_V69_SUCCESSOR_EXECUTION_20261011_V1.json",
+    "predecessor_manifest_sha256": "7e9e0f0d8147057268ae0992ac16e8e3fa86388c5e08cf5580df60b85cd18ab3",
+    "transform": "canonical/research/bytes/tools/conservative_libmpf_composed_v70.py",
+    "manifest_sha256": "9f36c6de3186c6d72f0c24284426d4c5441e6e64e9c89404421359cc0ef8bfed",
+    "python_files": 277,
+    "raw_python_source_bytes": 1707801,
+    "B_exec_raw_python_source_bytes": 1710561,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "raw_delta_vs_v69_bytes": -137,
+    "B_exec_delta_vs_v69_bytes": -137
+  },
+  "selection": {
+    "id": "LIBMPF_COMPOSED_STRONGER_BINDING_COMPRESSION_V70",
+    "method": "COMPOSE_CANONICAL_V69_WITH_STRONGER_NONCONFLICTING_LOCAL_BINDING_REWRITES__KEEP_CANONICAL_BETTER_MPF_RDIV_INT",
+    "changed_body_count": 7,
+    "bodies": [
+      "_normalize",
+      "_normalize1",
+      "from_man_exp",
+      "mpf_neg",
+      "mpf_pow_int",
+      "mpf_perturb",
+      "mpf_hypot"
+    ],
+    "deltas": [
+      [
+        "_normalize",
+        -10
+      ],
+      [
+        "_normalize1",
+        -8
+      ],
+      [
+        "from_man_exp",
+        -1
+      ],
+      [
+        "mpf_neg",
+        -49
+      ],
+      [
+        "mpf_pow_int",
+        -8
+      ],
+      [
+        "mpf_perturb",
+        -43
+      ],
+      [
+        "mpf_hypot",
+        -18
+      ]
+    ],
+    "exact_base_guard": true,
+    "exact_target_guard": true
+  },
+  "qualification": {
+    "spent_NEXT76": {
+      "id": "QUAL_SUCCESSOR_NEXT76_20261011_V1",
+      "cases": 19320,
+      "corpus_sha256": "ac2a6919fe23ce788b26270183a2508d5283b20a9d6e799b1c4108d8942b6734",
+      "candidate": "19320/19320",
+      "failures": 0,
+      "spent": true,
+      "workers": 16,
+      "seconds": 25.75052762031555
+    },
+    "fresh_NEXT77": {
+      "id": "QUAL_SUCCESSOR_NEXT77_20261011_V1",
+      "cases": 19550,
+      "corpus_sha256": "f07baeaf5828b2aadfb5369399f60ea2ddbc4864120a276b024fff0f4e06e956",
+      "candidate": "19550/19550",
+      "failures": 0,
+      "spent": true,
+      "workers": 16,
+      "seconds": 26.326385498046875
+    }
+  },
+  "reproducibility": {
+    "clean_room_v69_to_v70_reconstruction": "PASS__278_OF_278_DURABLE_FILES_BYTE_IDENTICAL",
+    "regenerated_manifest_sha256": "9f36c6de3186c6d72f0c24284426d4c5441e6e64e9c89404421359cc0ef8bfed",
+    "generated_bytecode_cache_excluded_from_durable_subject": true,
+    "external_second_carrier_verified": false
+  },
+  "durable_archive": {
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V70_SUCCESSOR_20261011_V1.tar.xz",
+    "library_file_id": "libfile_2b5c56916a4c81918e3357d1b0f64961",
+    "bytes": 267084,
+    "sha256": "3781440e2d11152b31d303de2598a6dcf9e96f4bdcef09ec6ad6a8a7065c02f0"
+  },
+  "next_frozen": {
+    "id": "QUAL_SUCCESSOR_NEXT78_20261011_V1",
+    "cases": 19780,
+    "seed": 379256867,
+    "seed_derivation": "FIRST_32_BITS_SHA256_OF_QUAL_SUCCESSOR_NEXT78_20261011_V1_PIPE_V70_MANIFEST_IDENTITY",
+    "seed_material": "QUAL_SUCCESSOR_NEXT78_20261011_V1|9f36c6de3186c6d72f0c24284426d4c5441e6e64e9c89404421359cc0ef8bfed",
+    "per_operation_budget": 1720,
+    "corpus_sha256": "ef36e2dcccd3bf47d71b8b85b08be07d1b710fef6ea51df421e6a31b0840a68e",
+    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT78_20261011_V1.jsonl",
+    "library_file_id": "libfile_c62b3ff36d948191ac17dc909bb2a7b5",
+    "generation_provenance": "STOCK_SYMPY_1_14_0_MPMATH_1_3_0__CANONICAL_SERIAL_RNG_PARAMETER_STREAM__PARALLEL_EXPECTED_OUTPUT_EVALUATION__CANONICAL_ROW_REASSEMBLY",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT",
+    "spent": false
+  },
+  "truth_boundary": [
+    "MEASURED: V70 is 1,707,801 raw Python bytes, 137 bytes below canonical V69.",
+    "MEASURED: V70 passes spent NEXT76 19,320/19,320 with zero failures.",
+    "MEASURED: previously untouched canonical NEXT77 passes V70 19,550/19,550 with zero failures.",
+    "MEASURED: clean-room canonical-V69-to-V70 reconstruction is 278/278 durable files byte-identical.",
+    "MEASURED: NEXT78 is durably frozen at 19,780 cases and remains unspent.",
+    "INFERRED: composed rewrites preserve public signatures and arithmetic branch structure; finite qualification is not universal equivalence proof.",
+    "NOT PROVED: universal SymPy/mpmath equivalence outside the bounded exact-symbolic route.",
+    "NOT PROVED: external second-carrier replay.",
+    "NOT PROMOTED: no capability, acceptance, ownership, professional, quality, promotion, or terminal credit."
+  ],
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "professional_credit_delta": 0,
+  "quality_credit_delta": 0,
+  "promotion_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
