@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261011_V66",
+  "date": "2026-10-11",
+  "status": "CURRENT_RANK21_STARTED__ONE_TRIAL_CONSUMED__RESULT_PENDING__NO_RETRY__NINETEEN_CONSUMED",
+  "predecessor": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261011_V65.json",
+    "git_blob_sha": "71292566147b0d8423b87af77e596a0ad4e33cb5"
+  },
+  "verification": {
+    "path": "canonical/verification/TB_SCIENCE_RANK21_DURABLE_START_VERIFY_20261011_V1.json",
+    "git_blob_sha": "99adaccaf9753e60ef8b98fcdb42b7ea6d9381ad",
+    "pass": true
+  },
+  "counts": {
+    "benchmark_trials_consumed": 19,
+    "consumed_successes_final": 0,
+    "consumed_failures_final": 18,
+    "started_result_pending": 1,
+    "finalized_slots": 18,
+    "active_in_flight_slot_count": 1
+  },
+  "current_slot": {
+    "ledger_schedule_rank": 21,
+    "slot_id": "terminal-bench-science/ode-law-discovery::trial-0",
+    "task_digest": "sha256:767d16a0a6226f391208b1b4bb126a6f957e5d0c8156342b5c9410a755142d65",
+    "logical_attempt_id": "7eb619d40a65597b2b2dccbcf409c143aa47e1663ca4c0d8f098167cb252811a",
+    "task_read": true,
+    "task_started": true,
+    "durable_start_cas_acquired": true,
+    "benchmark_trials_consumed": 1,
+    "result_present": false,
+    "reward": null
+  },
+  "activation": {
+    "pull_request": 2651,
+    "workflow_run_id": 38127556325,
+    "workflow_job_id": 114434971313
+  },
+  "retry_authority": false,
+  "replacement_authority": false,
+  "replay_authority": false,
+  "execution_authority": false,
+  "task_read_authority": false,
+  "activation_authority": false,
+  "finalization_authority": true,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
