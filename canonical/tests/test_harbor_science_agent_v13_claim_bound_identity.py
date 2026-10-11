@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import os
 import unittest
-from canonical.tests.test_harbor_science_agent_v14_typed_action_feedback import TypedActionFeedbackV14Tests
+from canonical.runtime import harbor_science_agent_v14 as agent_v14
 from unittest.mock import patch
 
 from canonical.runtime import harbor_science_agent_v13 as agent
@@ -85,3 +85,20 @@ class AgentV13ClaimBoundIdentityTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
+
+
+class AgentV14SmokeTests(unittest.TestCase):
+    def test_v14_import_and_syntax_rejection_feedback(self):
+        rows, rejected = agent_v14._candidate_rows([{
+            "action_id": "a",
+            "covers": ["R1"],
+            "executor": "python",
+            "command": "for",
+            "verify_executor": "shell",
+            "verify_command": "true",
+        }], {"R1"})
+        self.assertEqual(rows, [])
+        self.assertEqual(
+            rejected[0].get("validation_error_code"),
+            "PYTHON_SOURCE_SYNTAX_INVALID",
+        )
