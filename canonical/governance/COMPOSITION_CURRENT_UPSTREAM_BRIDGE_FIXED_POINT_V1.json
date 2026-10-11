@@ -1,8 +1,8 @@
 {
   "schema": "PROJECT_BRAIN_COMPOSITION_CURRENT_UPSTREAM_BRIDGE_FIXED_POINT_V1",
-  "date": "2026-10-05",
-  "status": "CANDIDATE__CURRENT_VERIFIED_OWNED_SOURCE_SET_SATURATED_AT_4_OF_12__8_OPEN__SCHEDULING_ONLY__ZERO_CREDIT",
-  "objective": "Prove that no additional frozen Composition component can be discharged from the current five verified-owned families under the already-active exact-binding and no-analogy bridge rules.",
+  "date": "2026-10-11",
+  "status": "CANDIDATE__CURRENT_7_VERIFIED_OWNED_SOURCE_SET_SATURATED_AT_4_OF_12__8_OPEN__SCHEDULING_ONLY__ZERO_CREDIT",
+  "objective": "Prove that no additional frozen Composition component can be discharged from the current seven verified-owned families under the already-active exact-binding and no-analogy bridge rules.",
   "authority": {
     "composition_current_authority": {
       "path": "canonical/governance/COMPOSITION_COMPONENT_PROOF_CURRENT_AUTHORITY_V6.json",
@@ -14,7 +14,7 @@
     },
     "ownership_matrix": {
       "path": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
-      "git_blob_sha": "01abb91c114576ac340816b052724150258726ff"
+      "git_blob_sha": "a5f5e15c25f617d36a18cc157f068d078d4235c9"
     },
     "memory_bridge": {
       "path": "canonical/governance/COMPOSITION_MEMORY_OWNED_FAMILY_BRIDGE_V2.json",
@@ -34,11 +34,13 @@
     }
   },
   "current_verified_owned_families": [
+    "COMPLEX_MULTI_TOOL_AGENCY",
+    "EXACT_SYMBOLIC_COMPUTATION",
+    "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
     "LONG_HORIZON_MEMORY_AND_CONTINUITY",
-    "SUBAGENT_DELEGATION_AND_COORDINATION",
     "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
-    "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-    "EXACT_SYMBOLIC_COMPUTATION"
+    "SUBAGENT_DELEGATION_AND_COORDINATION",
+    "TOOL_DISCOVERY_SELECTION_AND_LEARNING"
   ],
   "current_admissible_component_bridges": [
     {
@@ -114,7 +116,7 @@
     "FROZEN_COMPOSITION_PROTOCOL_OR_COMPONENT_MANIFEST_CHANGES"
   ],
   "scheduler_effect_if_verified": [
-    "DELETE_REPEAT_GENERIC_SEARCH_FOR_ADDITIONAL_COMPOSITION_COMPONENT_BRIDGES_FROM_THE_CURRENT_FIVE_VERIFIED_OWNED_FAMILIES",
+    "DELETE_REPEAT_GENERIC_SEARCH_FOR_ADDITIONAL_COMPOSITION_COMPONENT_BRIDGES_FROM_THE_CURRENT_SEVEN_VERIFIED_OWNED_FAMILIES",
     "KEEP_COMPOSITION_COMPONENT_SCOPED_PROOFS_OPEN_AT_4_OF_12",
     "RESUME_COMPONENT_RECOMPUTE_ONLY_ON_A_DECLARED_WAKE_CONDITION"
   ],
@@ -138,5 +140,17 @@
   "execution_authority": false,
   "promotion_authority": false,
   "fresh_reality_authority": false,
-  "connector_recomputation_required": true
+  "connector_recomputation_required": true,
+  "additional_unmatched_verified_owned_families": [
+    {
+      "source_family": "COMPLEX_MULTI_TOOL_AGENCY",
+      "reason": "NO_EXACT_CONTENT_ADDRESSED_COMPONENT_BINDING_TO_ANY_OPEN_FROZEN_COMPOSITION_LITERAL__NAME_OR_BEHAVIORAL_ANALOGY_FORBIDDEN",
+      "component_credit": 0
+    },
+    {
+      "source_family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+      "reason": "NO_EXACT_CONTENT_ADDRESSED_COMPONENT_BINDING_TO_ANY_OPEN_FROZEN_COMPOSITION_LITERAL__NAME_OR_BEHAVIORAL_ANALOGY_FORBIDDEN",
+      "component_credit": 0
+    }
+  ]
 }
