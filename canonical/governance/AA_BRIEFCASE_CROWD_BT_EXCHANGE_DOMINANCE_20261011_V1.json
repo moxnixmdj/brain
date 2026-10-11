@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_CROWD_BT_EXCHANGE_DOMINANCE_20261011_V1",
+  "date": "2026-10-11",
+  "status": "CONDITIONAL_SCORER_MONOTONICITY_THEOREM__D_REDUCED_NOT_CLOSED__ZERO_CREDIT",
+  "mission_lock": "PROVE_AA_BRIEFCASE_V1_1_BRAIN_ELO_GE_1822_ONLY",
+  "theorem": {
+    "model": "FIXED_QUALITY_CROWD_BT_EQ5",
+    "premises": [
+      "SAME_EPOCH_SAME_SCORER",
+      "ALL_BRAIN_AND_OPUS_INCIDENT_NON_DIRECT_COMPARISONS_BIJECTIVELY_MATCHED_BY_OPPONENT_JUDGE_AND_ROLE",
+      "NO_UNMATCHED_BRAIN_OR_OPUS_INCIDENT_COMPARISONS",
+      "ALL_MATCHED_JUDGE_QUALITY_ETA_GE_0_5",
+      "BRAIN_REALIZED_OUTCOME_GE_OPUS_REALIZED_OUTCOME_ON_EVERY_MATCHED_ROW",
+      "AT_LEAST_ONE_STRICT_BRAIN_ADVANTAGE_WITH_ETA_GT_0_5_OR_DIRECT_BRAIN_OVER_OPUS_WIN_WITH_ETA_GT_0_5",
+      "BRAIN_OPUS_SYMMETRIC_REGULARIZATION",
+      "FINITE_GLOBAL_MLE_EXISTS"
+    ],
+    "conclusion": "EVERY_FINITE_GLOBAL_MLE_HAS_R_BRAIN_GT_R_OPUS",
+    "exchange_identity": "FOR_MATCHED_THIRD_PARTY_ROWS__SWAP_GAIN=(Y_B-Y_O)*(LOGIT_Q_O-LOGIT_Q_B)__NONNEGATIVE_WHEN_R_B<R_O__Y_B>=Y_O__ETA>=0_5",
+    "equality_exclusion": "AT_R_B=R_O__ANY_STRICT_INFORMATIVE_ADVANTAGE_GIVES_POSITIVE_ANTISYMMETRIC_SCORE_DIRECTION__SO_A_FINITE_INTERIOR_GLOBAL_MLE_CANNOT_TIE",
+    "threshold_corollary": "IF_THE_SAME_BOUND_FIT_ALSO_PROVES_R_OPUS_GE_1822__THEN_R_BRAIN_GT_R_OPUS_GE_1822"
+  },
+  "implementation": {
+    "runtime": "canonical/runtime/aa_briefcase_crowdbt_exchange_dominance_v1.py",
+    "tests": "canonical/tests/test_aa_briefcase_crowdbt_exchange_dominance_v1.py"
+  },
+  "d_reduction": {
+    "prior": "NEED_FULL_FROZEN_SCORER_MONOTONICITY_TO_1822",
+    "reduced_to": [
+      "MATCHED_REALIZED_OUTCOME_DOMINANCE_CERTIFICATE",
+      "JUDGE_QUALITY_NONREVERSAL_BOUND_ETA_GE_0_5_WITH_AT_LEAST_ONE_STRICT_INFORMATIVE_ROW",
+      "MATCHED_INCIDENT_SCHEDULE_AND_SYMMETRIC_SCORER_BINDING",
+      "FINITE_GLOBAL_MLE_EXISTENCE",
+      "SAME_FIT_OPUS_RATING_LOWER_BOUND_GE_1822"
+    ],
+    "current_closed": false
+  },
+  "current_aa_state": {
+    "matched_realized_outcome_dominance_bound": false,
+    "frozen_judge_quality_nonreversal_bound": false,
+    "matched_incident_schedule_bound": false,
+    "finite_global_mle_bound": false,
+    "same_fit_opus_rating_floor_1822_bound": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_ARTIFICIAL_ANALYSIS_CURRENT_OWNER_FIT_SATISFIES_THE_PREMISES",
+    "NO_CLAIM_BRAIN_HAS_MATCHED_REALIZED_PAIRWISE_OUTCOMES",
+    "NO_CLAIM_FROZEN_OPUS_1822_IS_PRESERVED_AFTER_ADDING_BRAIN_TO_AN_AUGMENTED_REFIT",
+    "NO_AA_BRIEFCASE_SCORE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
