@@ -4577,6 +4577,93 @@
         "heldout_chartography_cases_consumed": 0,
         "model_dependency_count": 0
       }
+    },
+    "professional.artifact.visual_observer.v1": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "adapter_module": "professional_artifact_visual_observer_v1",
+      "entrypoint": "run",
+      "cost": 2,
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "professional",
+        "artifact",
+        "visual",
+        "render",
+        "readability",
+        "crop",
+        "overlap",
+        "blank",
+        "docx",
+        "pptx",
+        "xlsx",
+        "pdf"
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "requires": [
+        "artifact.file.available"
+      ],
+      "provides": [
+        "professional.artifact.visual.technical_observation"
+      ],
+      "result_fields": [
+        "pass",
+        "status",
+        "page_count",
+        "pages",
+        "source_sha256"
+      ],
+      "limitations": [
+        "Verified only for bounded objective rendered-page technical observation: blankness, required text presence, OCR-confidence robustness, hard-crop text contact, and major OCR-line overlap.",
+        "PDF/DOCX/PPTX/XLSX real composition was independently verified; PNG/JPG/JPEG are code-supported but were not part of the real native-format public replay.",
+        "No holistic aesthetic-quality authority, semantic relevance/correctness authority, owner-evaluator containment, normative aggregation closure, benchmark-score authority, or terminal authority.",
+        "English positioned OCR is bound to the pinned Tesseract 5.3.4 dependency surface; dependency drift fails closed."
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "professional.artifact.visual_observer.v1",
+          "path": "${input.path}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "pass",
+          "value": true
+        }
+      },
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/professional_artifact_visual_observer_v1.py",
+        "exact_adapter_git_blob_sha": "27be857789160e6971fb4d20265eae30468ea063",
+        "composed_verified_substrates": [
+          "canonical/runtime/native_artifact_render_preservation_proof_v1.py",
+          "image.extract.ocr.tesseract.positioned.tsv"
+        ],
+        "external_general_purpose_model_runtime_dependency_count": 0
+      },
+      "verification": {
+        "independent_verified": true,
+        "receipt_path": "canonical/verification/PROFESSIONAL_ARTIFACT_VISUAL_OBSERVER_V1_VERIFY_20261011.json",
+        "verifier_repository": "moxnixmdj/verification-capsule-runner",
+        "verifier_pull_request": 2716,
+        "workflow_run_id": 38153807927,
+        "workflow_job_id": 114512510133,
+        "artifact_id": 11707950964,
+        "artifact_digest": "sha256:356b4375e669286466f9381c29b4e2fcff110a121d67d8bc93a4b081d5364124",
+        "exact_runtime_git_blob_sha": "27be857789160e6971fb4d20265eae30468ea063",
+        "exact_test_git_blob_sha": "24db6f10c71df9ec20ca34ac6bd6a64b90c89ce1",
+        "focused_tests_passed": 11,
+        "real_native_formats_passed": [
+          "pdf",
+          "docx",
+          "pptx",
+          "xlsx"
+        ],
+        "first_failure_run_id": 38153554981,
+        "causal_repair_verified": true,
+        "benchmark_cases_consumed": 0,
+        "external_general_purpose_model_runtime_dependency_count": 0
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
