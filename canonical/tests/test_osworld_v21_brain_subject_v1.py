@@ -27,11 +27,28 @@ def test_subject_manifest_pins_local_model_and_no_external_generation():
 
 
 def test_subject_composition_accepts_injected_synthetic_policy():
+    calls = {"n": 0}
+    def policy(_state):
+        calls["n"] += 1
+        if calls["n"] == 1:
+            return {"response": "click", "actions": [{"type": "CLICK", "x": 10, "y": 10}]}
+        return {"response": "done", "actions": [{"type": "DONE"}]}
+
+    class FakeGuest:
+        def bind_environment(self, _env):
+            pass
+        def run(self, _payload):
+            return {"type": "STATE_OPS", "ok": True}
+
     agent = build_subject(
-        policy_provider=lambda _state: {"response": "done", "actions": [{"type": "DONE"}]},
+        policy_provider=policy,
         ocr_provider=None,
         browser_controller=FakeBrowser(),
     )
+    agent.guest_controller = FakeGuest()
     response, actions = agent.predict("synthetic task", {"screenshot": b"x"})
-    assert response == "done"
-    assert actions == ["DONE"]
+    assert response == "click"
+    assert actions == ["pyautogui.click(10, 10)"]
+    response2, actions2 = agent.predict("synthetic task", {"screenshot": b"y"})
+    assert response2 == "done"
+    assert actions2 == ["DONE"]
