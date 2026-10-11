@@ -1,0 +1,91 @@
+{
+  "schema": "PROJECT_BRAIN_CHARTOGRAPHY_ZERO_MODEL_PROFESSIONAL_SAMPLES_PUBLIC_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__2_OF_2_OFFICIAL_NONHELDOUT_SAMPLES__ZERO_GENERAL_PURPOSE_MODEL_COGNITION",
+  "target_predicate": "CHARTOGRAPHY_TOOLS_GE_89",
+  "authority_scope": "CAPABILITY_ATOMS_ONLY__NOT_FULL_BENCHMARK_SCORE",
+  "brain_exact_blobs": {
+    "canonical/runtime/chartography_deterministic_professional_solver_v1.py": "37baec468cd126cd47ae10d40428ef184c4285cc",
+    "canonical/tests/test_chartography_deterministic_professional_solver_v1.py": "e79d2e4d2e06192c26daf1be6eab3e72e015a6ab",
+    "canonical/runtime/chartography_brain_credit_subject_gate_v2.py": "146d8110196bf254386fdd20d64b20daf4b25f54",
+    "canonical/tests/test_chartography_brain_credit_subject_gate_v2.py": "c5e4b1c95df02ff588452bf77cc73d88f1606888",
+    "canonical/runtime/bound_capabilities/image_ocr_tesseract.py": "45714d7a0160802d986042910da1c4c6462676e5"
+  },
+  "verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2662,
+    "merged_commit_sha": "8b7506c6c7e3f0311cb873b0a398a3248b477afb",
+    "workflow": "Chartography zero-model professional samples V1",
+    "workflow_run_id": 38138348341,
+    "workflow_job_id": 114466800372,
+    "workflow_conclusion": "success",
+    "artifact_id": 11701103946,
+    "artifact_zip_sha256": "37ea927fb31b6d696c3661f43f1238e62902bebcfd70236f27fa67ab301bd281"
+  },
+  "response_seal": {
+    "generated_before_gold": true,
+    "responses_sha256": "cfe5b4d9401ec5db353770742f45a59d62e29abe0e0a980958c7e7a32052c0ba",
+    "official_harness_commit": "3f1bf837232d3918c2cc35c6e2418c9e70d2a57b",
+    "heldout_cases_consumed": 0,
+    "heldout_gold_consumed": 0
+  },
+  "results": [
+    {
+      "sample_task": "sample_task_1",
+      "family_atom": "LEGEND_CODED_APPROX_LINEAR_MULTI_SERIES__TARGET_SERIES_PLUS_TARGET_Y_TO_X",
+      "answer": "78.5 years",
+      "raw_value": 78.52857523904333,
+      "accepted_range": [
+        76,
+        79
+      ],
+      "pass": true
+    },
+    {
+      "sample_task": "sample_task_2",
+      "family_atom": "BINARY_PHASE_DIAGRAM__PRECIPITATION_SOLVUS_AT_COMPOSITION",
+      "answer": "350C",
+      "raw_value": 350,
+      "accepted_range": [
+        330,
+        370
+      ],
+      "pass": true
+    }
+  ],
+  "ownership": {
+    "cognition_dependency_class": "MODEL_INDEPENDENT",
+    "general_purpose_model_dependency_count": 0,
+    "external_general_purpose_model_runtime_dependency_count": 0,
+    "donor_general_purpose_model_runtime_dependency_count": 0,
+    "online_teacher_call_count": 0,
+    "teacher_fallback_path_count": 0,
+    "bounded_learned_components": [
+      "image.extract.ocr.tesseract.positioned.tsv"
+    ],
+    "bounded_component_classification": "VERIFIED_BRAIN_OWNED_BOUNDED_COMPONENT",
+    "ownership_gate_v2_status": "PASS__BRAIN_CREDIT_SUBJECT_ATTRIBUTION_ONLY"
+  },
+  "supported_scope": [
+    "LEGEND_CODED_APPROX_LINEAR_MULTI_SERIES_WITH_NUMERIC_AXES_AND_TARGET_SERIES_IDENTIFIED_BY_TEMPERATURE_GRADIENT_LEGEND",
+    "TARGET_VERTICAL_VALUE_TO_HORIZONTAL_VALUE_INTERSECTION_ON_SUPPORTED_LINEAR_SERIES",
+    "BINARY_PHASE_DIAGRAM_WITH_NUMERIC_COMPOSITION_AND_TEMPERATURE_AXES",
+    "PRECIPITATION_TEMPERATURE_AS_LOWEST_INTERIOR_SOLVUS_INTERSECTION_AT_REQUESTED_COMPOSITION"
+  ],
+  "explicit_nonclaims": [
+    "NO_CHARTOGRAPHY_GE_89_SCORE",
+    "NO_100_TASK_COVERAGE",
+    "NO_CLAIM_ALL_PROFESSIONAL_CHART_SEMANTICS_ARE_CLOSED",
+    "NO_HELDOUT_OR_PRIVATE_TASK_CONSUMPTION",
+    "NO_GENERAL_PURPOSE_MODEL_COGNITION",
+    "NO_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT_FOR_THE_FULL_TARGET"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": "TWO_NARROW_PROFESSIONAL_CHART_FAMILY_ATOMS_ONLY",
+    "benchmark_score_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "ownership_credit_delta": "SUPPORTED_SCOPE_ONLY",
+    "terminal_credit_delta": 0
+  }
+}
