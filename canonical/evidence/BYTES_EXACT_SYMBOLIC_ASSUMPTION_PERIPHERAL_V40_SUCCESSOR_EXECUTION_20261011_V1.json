@@ -1,0 +1,118 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_ASSUMPTION_PERIPHERAL_V40_SUCCESSOR_EXECUTION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "VERIFIED_RESEARCH_FRONTIER__SPENT_NEXT44_AND_FRESH_NEXT45_PASS__ZERO_PROMOTION_CREDIT",
+  "subject": {
+    "predecessor": "canonical/evidence/BYTES_EXACT_SYMBOLIC_PERIPHERAL_PROFILE_V39_SUCCESSOR_EXECUTION_20261011_V1.json",
+    "predecessor_git_blob_sha": "0e2ff697d1f2b869d825ed8ecc860fcc7395a6c9",
+    "transform": "canonical/research/bytes/tools/conservative_assumption_peripheral_prune_v40.py",
+    "transform_git_blob_sha": "8ac2e572a7341141102b78b9dfd433e63038260c",
+    "predecessor_manifest_sha256": "c93cd3aabe9fc5d1a66cf3e6090ab1f937c63e1eaa83beb68040a1a8faa99dee",
+    "manifest_sha256": "f6c950d49791f05fbfc1e8985fde4c1b623b8087b62f89fc7d4a30f78e39e97a",
+    "python_files": 277,
+    "raw_python_source_bytes": 1746554,
+    "router_raw_python_source_bytes": 2760,
+    "B_exec_raw_python_source_bytes": 1749314,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "raw_delta_vs_v39_bytes": -14953,
+    "B_exec_delta_vs_v39_bytes": -14953
+  },
+  "selection": {
+    "id": "CONSERVATIVE_ASSUMPTION_PERIPHERAL_SPENT_NEXT44_V40",
+    "method": "SELECT_PERIPHERAL_ASSUMPTION_TRIG_EXP_COMPLEX_TENSOR_SET_BODIES__ITERATIVELY_RESTORE_ONLY_CAUSALLY_LOAD_BEARING_BODIES__REQUIRE_FULL_SPENT_NEXT44_REPLAY",
+    "selected_body_count": 46,
+    "behavior": "REPLACE_SELECTED_OUTSIDE_TESTED_BOUNDED_CONTRACT_BODIES_WITH_FAIL_CLOSED_NOTIMPLEMENTEDERROR",
+    "exact_base_guard": true,
+    "exact_target_guard": true,
+    "full_spent_replay_is_load_bearing": true
+  },
+  "falsified_alternatives": [
+    {
+      "id": "INITIAL_50_BODY_CUT",
+      "proposed_raw_delta_bytes": -15888,
+      "result": "6827_OF_11960_PASS__5133_FAIL",
+      "causal_localization": "SET_INFIMUM_KEY_LOAD_BEARING_FOR_FUNCTION_NARGS_FINITESET_ORDERING_IN_ROOTS_AND_DIFF_PATHS",
+      "repair": "RESTORE_SET_INFIMUM_KEY"
+    },
+    {
+      "id": "49_BODY_AFTER_INFIMUM_REPAIR",
+      "proposed_raw_delta_bytes": -15710,
+      "result": "10929_OF_11960_PASS__1031_FAIL",
+      "causal_localization": "ATAN_LOOKUP_TABLE_LOAD_BEARING_FOR_QUARTIC_ROOT_COMPLEX_ARGUMENT_PATH__LOG_RATIONAL_ASSUMPTION_LOAD_BEARING_FOR_DIFF_PATH",
+      "repair": "RESTORE_INVERSE_TRIG_ATAN_TABLE_AND_LOG_RATIONAL_ASSUMPTION"
+    },
+    {
+      "id": "47_BODY_AFTER_ATAN_AND_RATIONAL_REPAIR",
+      "proposed_raw_delta_bytes": -15190,
+      "result": "10931_OF_11960_PASS__1029_FAIL",
+      "causal_localization": "LOG_ALGEBRAIC_ASSUMPTION_LOAD_BEARING_FOR_DIFF_FINITE_ASSUMPTION_PROPAGATION",
+      "repair": "RESTORE_LOG_ALGEBRAIC_ASSUMPTION_ONLY"
+    }
+  ],
+  "qualification": {
+    "spent_NEXT44": {
+      "id": "QUAL_SUCCESSOR_NEXT44_20261011_V1",
+      "cases": 11960,
+      "corpus_sha256": "5e9bc78d3cf38924765c948efe25873fd11d87420569b71af13c6bff453d25be",
+      "candidate": "11960/11960",
+      "failures": 0,
+      "spent": true
+    },
+    "fresh_NEXT45": {
+      "id": "QUAL_SUCCESSOR_NEXT45_20261011_V1",
+      "cases": 12190,
+      "corpus_sha256": "beb3a6a84ea00f6c6d3a84b990b8e96a7e2d808bd91a4f39c1ea2643d073b3a1",
+      "candidate": "12190/12190",
+      "clean_room_reconstruction": "12190/12190",
+      "extracted_archive_replay": "12190/12190",
+      "failures": 0,
+      "spent": true
+    }
+  },
+  "reproducibility": {
+    "clean_room_V39_to_V40_noncache_file_reconstruction": "PASS__278_OF_278_NONCACHE_FILES_BYTE_IDENTICAL__ZERO_MISMATCH",
+    "regenerated_manifest_sha256": "f6c950d49791f05fbfc1e8985fde4c1b623b8087b62f89fc7d4a30f78e39e97a",
+    "route": "canonical/research/bytes/tools/exact_symbolic_route_v1.py",
+    "semantic_digest": "canonical/research/bytes/tools/semantic_digest_v1.py",
+    "replay_carrier": "CHATGPT_CONTAINER_FORKED_8_WORKER_EXACT_ROUTE_REPLAY",
+    "external_second_carrier_verified": false
+  },
+  "durable_archive": {
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V40_SUCCESSOR_20261011_V1.tar.xz",
+    "library_file_id": "libfile_ee2b09d4c40481918cb3115f6aece94c",
+    "bytes": 272636,
+    "sha256": "b61d4064b6e10785116a10c1d0b5a17d9ea3d5cf5222a53086b70beb558020be",
+    "archive_size_is_not_used_as_B_exec": true
+  },
+  "next_frozen": {
+    "id": "QUAL_SUCCESSOR_NEXT46_20261011_V1",
+    "cases": 12420,
+    "seed": 1480999762,
+    "seed_derivation": "FIRST_32_BITS_SHA256_OF_QUAL_SUCCESSOR_NEXT46_20261011_V1_PIPE_V40_MANIFEST_IDENTITY",
+    "seed_material": "QUAL_SUCCESSOR_NEXT46_20261011_V1|f6c950d49791f05fbfc1e8985fde4c1b623b8087b62f89fc7d4a30f78e39e97a",
+    "per_operation_budget": 1080,
+    "corpus_sha256": "bc22c8306594b851f38f0374e91775fbc2d9670bcc57d048e582561c243836f3",
+    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT46_20261011_V1.jsonl",
+    "library_file_id": "libfile_970403f8a0148191bd0747b733b79ff2",
+    "generation_provenance": "PARALLEL_ACCELERATOR_BYTE_EQUIVALENCE_CROSSCHECKED_AGAINST_CANONICAL_SERIAL_GENERATOR_ON_INDEPENDENT_TEST_CORPUS",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT",
+    "spent": false
+  },
+  "truth_boundary": [
+    "MEASURED: exact V40 source is 1,746,554 raw Python-source bytes, 14,953 bytes below exact V39.",
+    "MEASURED: V40 passes full spent NEXT44 11,960/11,960 with zero failures.",
+    "MEASURED: previously frozen untouched NEXT45 passes V40 12,190/12,190; clean-room reconstruction and extracted archive also pass.",
+    "MEASURED: three larger candidate cuts were falsified and repaired by restoring only Set._infimum_key, the inverse-trig atan table, log rational assumption handling, and log algebraic assumption handling.",
+    "MEASURED: NEXT46 is frozen only after the V40 physical cut and NEXT45 qualification and remains unspent.",
+    "NOT PROVED: external second-carrier replay of V40.",
+    "NOT PROVED: universal SymPy semantic equivalence outside the bounded exact-symbolic route.",
+    "NOT PROMOTED: no Opus-family capability, acceptance, ownership, quality, or terminal credit."
+  ],
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "quality_credit_delta": 0,
+  "promotion_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
