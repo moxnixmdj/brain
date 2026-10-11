@@ -156,11 +156,11 @@
       "ready": "BLOCKED_ONLY_BY_FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION"
     },
     {
-      "work_id": "BYTES_EXACT_SYMBOLIC_V53_NEXT_PHYSICAL_CUT",
+      "work_id": "BYTES_EXACT_SYMBOLIC_V54_NEXT_PHYSICAL_CUT",
       "work_type": "EFFICIENCY_IMPROVEMENT",
       "source": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-      "causal_role": "CONTINUE_RESOURCE_REDUCTION_FROM_1715881_RAW_PYTHON_BYTES_USING_SPENT_NEXT59_ONLY__NEXT60_IS_DURABLY_FROZEN_UNSPENT__MAKE_NEW_PHYSICAL_CUT_BEFORE_SPENDING_NEXT60",
-      "readiness": "ACTIONABLE_WITH_EXISTING_RECONSTRUCTION_AND_QUALIFICATION_MACHINERY__V53_CURRENT__NINE_BODY_SOURCE_LOCKED_FAILCLOSE_TRANSPLANT_VERIFIED",
+      "causal_role": "CONTINUE_RESOURCE_REDUCTION_FROM_1714808_RAW_PYTHON_BYTES_USING_SPENT_NEXT60_ONLY__NEXT61_IS_DURABLY_FROZEN_UNSPENT__MAKE_NEW_PHYSICAL_CUT_BEFORE_SPENDING_NEXT61",
+      "readiness": "ACTIONABLE_WITH_EXISTING_RECONSTRUCTION_AND_QUALIFICATION_MACHINERY__V54_CURRENT__MPF_POW_INT_AND_BOUNDED_EXPONENTIAL_SERIES_SPECIALIZATIONS_VERIFIED",
       "claims_new_primitive": false,
       "score_state": "UNBOUND",
       "scheduler_state": "READY_EXECUTION",
@@ -180,19 +180,19 @@
       "read_only_evidence": {
         "source": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
         "source_git_blob_sha": "a47697971500f36c18247706a766be28b0031ed1",
-        "raw_python_source_bytes": 1715881,
-        "B_exec_raw_python_source_bytes": 1718641,
+        "raw_python_source_bytes": 1714808,
+        "B_exec_raw_python_source_bytes": 1717568,
         "qualification": "15180/15180",
-        "next_action": "RERANK_EXACT_V53_USING_SPENT_NEXT59_ONLY__MAKE_NEW_PHYSICAL_CUT_BEFORE_SPENDING_NEXT60",
-        "next_frozen_qualification": "QUAL_SUCCESSOR_NEXT60_20261011_V1",
+        "next_action": "RERANK_EXACT_V54_USING_SPENT_NEXT60_ONLY__MAKE_NEW_PHYSICAL_CUT_BEFORE_SPENDING_NEXT61",
+        "next_frozen_qualification": "QUAL_SUCCESSOR_NEXT61_20261011_V1",
         "next_frozen_sha256": "5c7cf733614d58648dbe4fbfc855e7451651c652555eb895fcdcef39df780c92",
         "next_frozen_spent": false,
         "next_frozen_durable_reconstruction_verified": true,
-        "independent_verification": "canonical/verification/BYTES_EXACT_SYMBOLIC_NINE_BODY_FAILCLOSE_V53_INDEPENDENT_VERIFY_20261011_V1.json",
-        "next_frozen_reconstruction_verification": "NOT_REQUIRED__NEXT60_DIRECT_LIBRARY_PERSISTENCE",
+        "independent_verification": "canonical/verification/BYTES_EXACT_SYMBOLIC_MPF_POW_INT_EXPONENTIAL_SERIES_V54_INDEPENDENT_VERIFY_20261011_V1.json",
+        "next_frozen_reconstruction_verification": "NOT_REQUIRED__NEXT61_DIRECT_LIBRARY_PERSISTENCE",
         "vector_bounds_complete": false
       },
-      "ready": "V53_CURRENT_AT_1715881_BYTES__CONTINUE_ONLY_NONCONFLICTING_RESOURCE_PARETO_CUT_USING_SPENT_NEXT59",
+      "ready": "V54_CURRENT_AT_1714808_BYTES__CONTINUE_ONLY_NONCONFLICTING_RESOURCE_PARETO_CUT_USING_SPENT_NEXT60",
       "source_git_blob_sha": "cc039dec0d7361bfb83c7121433eabcb82ce5581"
     },
     {
@@ -426,7 +426,7 @@
   "live_selection": {
     "authorized": false,
     "reason": "PROFESSIONAL_PROPERTY_TRUTH_IS_24_OF_24__FULL_PRIVATE_CURRENT_MAIN_REGRESSION_IS_THE_ONLY_PROFESSIONAL_PROMOTION_GATE__MULTIPLE_DISTINCT_REPOSITORY_WORKFLOWS_FAIL_PRESTEP_IN_THE_SAME_WINDOW__FULL_REGRESSION_EXECUTED_ZERO_STEPS__EXISTING_SPRITE_ALTERNATE_CARRIER_CANNOT_AUTHENTICATE_PRIVATE_CANONICAL_REPO__OTHER_NONCONFLICTING_REUSE_FIRST_FRONTIERS_CONTINUE",
-    "exact_next": "PARALLEL:BYTES_V53_RESOURCE_PARETO_CUT_PLUS_OTHER_NONCONFLICTING_CAPABILITY_FIRST_GENERAL_DEVELOPMENT__PROFESSIONAL_WAKES_ONLY_ON_ZERO_SPEND_CARRIER_STATE_CHANGE_OR_STRONGER_VALID_REGRESSION_RECEIPT"
+    "exact_next": "PARALLEL:BYTES_V54_RESOURCE_PARETO_CUT_PLUS_OTHER_NONCONFLICTING_CAPABILITY_FIRST_GENERAL_DEVELOPMENT__PROFESSIONAL_WAKES_ONLY_ON_ZERO_SPEND_CARRIER_STATE_CHANGE_OR_STRONGER_VALID_REGRESSION_RECEIPT"
   },
   "hard_nonclaims": [
     "NO_GLOBAL_UNKNOWN_WORK_COMPLETENESS_CLAIM",
@@ -572,7 +572,7 @@
     "new_primitive_required": false,
     "terminal_credit_delta": 0
   },
-  "exact_next": "NO_SAME_INFORMATION_CHECKPOINT_WORK__DO_NOT_REPEAT_HOSTED_ACTIONS__RERANK_EXACT_BYTES_V53_USING_SPENT_NEXT59_AND_MAKE_ONE_NEW_PHYSICAL_CUT_BEFORE_SPENDING_NEXT60__CONTINUE_OTHER_NONCONFLICTING_CAPABILITY_FIRST_GENERAL_DEVELOPMENT",
+  "exact_next": "NO_SAME_INFORMATION_CHECKPOINT_WORK__DO_NOT_REPEAT_HOSTED_ACTIONS__RERANK_EXACT_BYTES_V54_USING_SPENT_NEXT60_AND_MAKE_ONE_NEW_PHYSICAL_CUT_BEFORE_SPENDING_NEXT61__CONTINUE_OTHER_NONCONFLICTING_CAPABILITY_FIRST_GENERAL_DEVELOPMENT",
   "professional_semantic_v2_successor_claim_batch_current": {
     "status": "INDEPENDENTLY_VERIFIED__CLAIM_AND_SCOPE_GENERATION_COMPLETE__PROPERTY_TRUTH_NEXT",
     "batch": {
@@ -647,15 +647,15 @@
   },
   "bytes_current_frontier": {
     "path": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-    "observed_git_blob_sha": "a7a56cb16c7591f2d2f362cfdb9c309b717080bd",
-    "status": "ACTIVE_RESEARCH__NINE_BODY_FAILCLOSE_V53_FRONTIER__SUCCESSOR_READY",
-    "raw_python_source_bytes": 1715881,
-    "B_exec_raw_python_source_bytes": 1718641,
-    "qualification": "15410/15410",
-    "next": "Rerank exact V53 using spent NEXT59 only; make a new physical cut before spending frozen NEXT60.",
-    "independent_verification_path": "canonical/verification/BYTES_EXACT_SYMBOLIC_NINE_BODY_FAILCLOSE_V53_INDEPENDENT_VERIFY_20261011_V1.json",
-    "next_frozen_qualification": "QUAL_SUCCESSOR_NEXT60_20261011_V1",
-    "next_frozen_library_file_id": "libfile_ef7b3652581c819188d30268264cb2e9",
+    "observed_git_blob_sha": "2bd2929fd723d1a13deb1b5ebfcc3893eb2be3da",
+    "status": "ACTIVE_RESEARCH__MPF_POW_INT_EXPONENTIAL_SERIES_V54_FRONTIER__SUCCESSOR_READY",
+    "raw_python_source_bytes": 1714808,
+    "B_exec_raw_python_source_bytes": 1717568,
+    "qualification": "15640/15640",
+    "next": "Rerank exact V54 using spent NEXT60 only; make a new physical cut before spending frozen NEXT61.",
+    "independent_verification_path": "canonical/verification/BYTES_EXACT_SYMBOLIC_MPF_POW_INT_EXPONENTIAL_SERIES_V54_INDEPENDENT_VERIFY_20261011_V1.json",
+    "next_frozen_qualification": "QUAL_SUCCESSOR_NEXT61_20261011_V1",
+    "next_frozen_library_file_id": "libfile_7b499ff50314819192f6c5a8fd334e51",
     "promotion_credit": 0,
     "observed_snapshot_is_non_authoritative_for_v15_runtime": true
   }
