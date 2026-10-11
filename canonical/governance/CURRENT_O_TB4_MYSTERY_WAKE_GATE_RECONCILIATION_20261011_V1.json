@@ -1,0 +1,94 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_O_TB4_MYSTERY_WAKE_GATE_RECONCILIATION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__TB4_THRESHOLD_SAME_INFORMATION_EXHAUSTED__MYSTERY_ACCEPTANCE_SCOPE_ROUTE_WAKE_GATED__GENERAL_MYSTERY_CAPABILITY_DEVELOPMENT_PRESERVED__ZERO_CREDIT",
+  "objective": "SEPARATE_CHECKPOINT_ACCEPTANCE_WORK_FROM_GENERAL_CAPABILITY_DEVELOPMENT_AND_DELETE_SAME_INFORMATION_RETRIES",
+  "rows": [
+    {
+      "obligation_id": "CODING_TB4_GE_66_4",
+      "sources": {
+        "frontier": {
+          "path": "canonical/governance/TB4_CURRENT_RESEARCH_FRONTIER_20261008_V1.json",
+          "git_blob_sha": "24c68a809cf356f1d37aabbeebff8f2a8fe55e91"
+        },
+        "threshold_cut": {
+          "path": "canonical/governance/TB4_THRESHOLD_INDISTINGUISHABILITY_CUT_20261008_V1.json",
+          "git_blob_sha": "8d85800e6371ae0de79a8833459499b1bba28008"
+        },
+        "existing_success_exhaustion": {
+          "path": "canonical/governance/TB4_EXISTING_SUCCESS_EVIDENCE_EXHAUSTION_20261008_V1.json",
+          "git_blob_sha": "d8fe4e8d121bfbf2211277b62a548cef2a301114"
+        },
+        "verifier_theorem": {
+          "path": "canonical/governance/TB4_TASK_LEVEL_VERIFIER_ACCEPTANCE_THEOREM_20261008_V1.json",
+          "git_blob_sha": "24f79e326d530e1944edee1392d2d50245db5f29"
+        }
+      },
+      "current_truth": [
+        "ONE_ADMISSIBLE_REAL_SUCCESS_SLOT_IS_CURRENTLY_BOUND",
+        "CURRENT_OWNER_THRESHOLD_REQUIRES_219_SUCCESS_SLOTS",
+        "CURRENT_CREDITABLE_CAPACITY_IS_NOT_OBSERVED_SUCCESS",
+        "PASS_AND_FAIL_COMPLETIONS_BOTH_SATISFY_CURRENT_BOUND_EVIDENCE",
+        "CURRENT_INTERNAL_THRESHOLD_DERIVATION_AND_EXISTING_SUCCESS_EVIDENCE_SEARCH_ARE_EXHAUSTED"
+      ],
+      "scheduler_state": "WAKE_GATED_DISTINGUISHING_INFORMATION",
+      "wake_conditions": [
+        "DISTINCT_FROZEN_OFFICIAL_VERIFIER_SLOT_OUTCOMES",
+        "GENUINELY_NEW_SOUND_SCOPE_COMPLETE_CROSS_SLOT_PREMISE",
+        "CANONICAL_TREE_CHANGE_THAT_ADDS_ADMISSIBLE_SUCCESS_EVIDENCE"
+      ],
+      "same_information_retry_authority": false
+    },
+    {
+      "obligation_id": "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "sources": {
+        "represented_scope_witness": {
+          "path": "canonical/governance/MYSTERYMECHANISM_REPRESENTED_SCOPE_ACTOR_ATTRIBUTED_WITNESS_20261007_V1.json",
+          "git_blob_sha": "40812f82ba6cdb82697c6acca395ddd51223b545"
+        },
+        "public_scope_saturation": {
+          "path": "canonical/governance/MYSTERYMECHANISM_PUBLIC_SCOPE_SUPERSET_SEARCH_SATURATION_20261005_V1.json",
+          "git_blob_sha": "a8b142d5a38683018f0f86d748338b51c9054d02"
+        },
+        "exact_polytope": {
+          "path": "canonical/governance/MYSTERYMECHANISM_EXACT_LINEAR_PARAMETER_POLYTOPE_20261008_V1.json",
+          "git_blob_sha": "093a778d1e72dffe40bd619eb2444e40b787969e"
+        },
+        "interval_frontier": {
+          "path": "canonical/governance/MYSTERYMECHANISM_INTERVAL_INFORMATION_FRONTIER_20261008_V1.json",
+          "git_blob_sha": "779f09fa1faae687aa87055bbd0c8863eba565c4"
+        }
+      },
+      "current_truth": [
+        "PUBLIC_OWNER_SCOPE_DOES_NOT_BIND_AN_EXHAUSTIVE_PRIVATE_MECHANISM_GRAMMAR_OR_SUFFICIENT_PRIVATE_SUCCESS_MASS",
+        "CURRENT_SCOPE_SUPERSET_ACCEPTANCE_ROUTE_IS_SATURATED_ON_THE_UNCHANGED_PUBLIC_SOURCE_SET",
+        "BRAIN_ALREADY_HAS_AN_EXACT_LINEAR_PARAMETER_POLYTOPE_KERNEL_AND_A_NOISY_MINIMAX_INFORMATION_KERNEL",
+        "THOSE_KERNELS_ARE_GENERAL_CAPABILITY_ASSETS_BUT_DO_NOT_CREATE_PRIVATE_222_TASK_SCOPE_OR_SCORE EVIDENCE"
+      ],
+      "checkpoint_scheduler_state": "WAKE_GATED_TARGET_SCOPE_OR_AUTHENTIC_RESULT",
+      "capability_development_state": "PRESERVE_IF_IT_ADVANCES_GENERAL_UNKNOWN_MECHANISM_IDENTIFICATION_INDEPENDENT_OF_BENCHMARK_CREDIT",
+      "wake_conditions": [
+        "NEW_OWNER_EXHAUSTIVE_TEST_MECHANISM_CLASS_OR_GENERATOR",
+        "NEW_OWNER_OR_PUBLIC_SCOPE_RELATION_SUFFICIENT_TO_LOWER_BOUND_REQUIRED_SUCCESS_MASS",
+        "PERMITTED_COMPARABLE_TARGET_RESULT_RECEIPT",
+        "MATERIAL_BENCHMARK_SCHEMA_OR_SCORING_CHANGE"
+      ],
+      "same_public_scope_retry_authority": false
+    }
+  ],
+  "scheduler_rule": "CHECKPOINT_ACCEPTANCE_ROWS_WAKE_ONLY_ON_POLICY_CHANGING_EVIDENCE__GENERAL_CAPABILITY_DEVELOPMENT_MAY_CONTINUE_WHEN_MISSION_PARETO_POSITIVE_AND_MUST_NOT_BE_MISCOUNTED_AS_BENCHMARK_ACCEPTANCE_PROGRESS",
+  "new_primitive_required": false,
+  "hard_nonclaims": [
+    "NO_CLAIM_TB4_OR_MYSTERYMECHANISM_IS_IMPOSSIBLE_TO_CLOSE",
+    "NO_CLAIM_GENERAL_MYSTERYMECHANISM_CAPABILITY_WORK_SHOULD_STOP",
+    "NO_PRIVATE_SCORE_OR_SLOT_OUTCOME_INFERENCE",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
