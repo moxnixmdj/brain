@@ -4,7 +4,7 @@ import json
 import re
 from pathlib import Path
 
-_VERSION = re.compile(r"\bV(\d+)\b")
+_VERSION = re.compile(r"V(\d+)")
 
 def _load(path):
     return json.loads(Path(path).read_text(encoding="utf-8"))
@@ -61,7 +61,7 @@ def check_projection_consistency(scheduler, live_frontier, wake_gate, bytes_stat
             errors.append("BYTES_CANDIDATE_VERSION_MISMATCH")
 
         policy_versions = {
-            int(v) for v in re.findall(r"\bV(\d+)\b", str(post.get("professional_parallel_policy", "")))
+            int(v) for v in re.findall(r"V(\d+)", str(post.get("professional_parallel_policy", "")))
         }
         if any(v != bytes_version for v in policy_versions):
             errors.append("STALE_BYTES_VERSION_IN_PARALLEL_POLICY")
