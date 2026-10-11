@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261011_V67",
+  "date": "2026-10-11",
+  "status": "RANK21_FINAL_ZERO__NINETEEN_CONSUMED_NINETEEN_FINAL_FAILURES__NO_PENDING__NO_RETRY__NONCREDITABLE",
+  "predecessor": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261011_V66.json",
+    "git_blob_sha": "75ab2e5e8a79c31fba24d0efbbda1b40d8690614"
+  },
+  "verification": {
+    "path": "canonical/verification/TB_SCIENCE_RANK21_FINAL_ZERO_NONCREDITABLE_VERIFY_20261011_V1.json",
+    "pass": true
+  },
+  "counts": {
+    "benchmark_trials_consumed": 19,
+    "consumed_successes_final": 0,
+    "consumed_failures_final": 19,
+    "started_result_pending": 0,
+    "finalized_slots": 19,
+    "active_in_flight_slot_count": 0
+  },
+  "finalized_current_slot": {
+    "ledger_schedule_rank": 21,
+    "slot_id": "terminal-bench-science/ode-law-discovery::trial-0",
+    "task_digest": "sha256:767d16a0a6226f391208b1b4bb126a6f957e5d0c8156342b5c9410a755142d65",
+    "logical_attempt_id": "7eb619d40a65597b2b2dccbcf409c143aa47e1663ca4c0d8f098167cb252811a",
+    "task_read": true,
+    "task_started": true,
+    "durable_start_cas_acquired": true,
+    "benchmark_trials_consumed": 1,
+    "result_present": true,
+    "reward": 0,
+    "final_classification": "FINAL_ZERO",
+    "result_credit_authority": false
+  },
+  "next_unexposed_candidate": {
+    "ledger_schedule_rank": 22,
+    "manifest_schedule_order": 21,
+    "slot_id": "terminal-bench-science/rv-astrometry-fitting::trial-0",
+    "task_digest": "sha256:8e086e1f7245067eaa9a67c259c1519204fa058d8664983066cd582ef258a1ea",
+    "source_manifest": "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json",
+    "source_manifest_git_blob_sha": "6dfa880b1f68881531afbba6ca211681801fd19b",
+    "task_read": false,
+    "task_started": false,
+    "benchmark_trials_consumed": 0,
+    "execution_authority": false,
+    "task_read_authority": false,
+    "activation_authority": false
+  },
+  "scheduler_state": "FROZEN_PENDING_ZERO_EXTERNAL_MODEL_COGNITION_ROUTE_VERIFICATION",
+  "retry_authority": false,
+  "replacement_authority": false,
+  "replay_authority": false,
+  "execution_authority": false,
+  "task_read_authority": false,
+  "activation_authority": false,
+  "finalization_authority": false,
+  "result_credit_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
