@@ -5235,7 +5235,9 @@
         "receipt_path": "canonical/verification/PYTHON_SOFTWARE_REQUEST_SEMANTIC_ACCEPTANCE_V9_VERIFY_20261011_V1.json",
         "model_dependency_count": 0,
         "external_general_purpose_model_runtime_dependency_count": 0,
-        "incremental_spend_usd": 0
+        "incremental_spend_usd": 0,
+        "post_merge_current_dependency_replay": "12_OF_12_EACH",
+        "current_coupled_repair_dependency_git_blob_sha": "ab626e85d9075a4c0d3490e2774ac9fb6d2ccdfd"
       }
     },
     "python.software.request.semantic_behavior.compile.v1": {
@@ -5330,13 +5332,14 @@
         "status": "INDEPENDENT_TWO_SPRITE_FOCUSED_FALSIFICATION_PASS",
         "primary_sprite": "brain-capability-first-scheduler-verify-20261008-v1",
         "independent_sprite": "brain-canonical-apply-slice-verify-20261011-v1",
-        "exact_two_carrier_replay": "12_OF_12_EACH",
+        "exact_two_carrier_replay": "13_OF_13_EACH",
         "runtime_git_blob_sha": "3f4e23ab91e4b79c1e12ce8e1e3f0c985336ef31",
         "test_git_blob_sha": "4f268918039e2b6e13ee73133dad46c4b3cc1165",
         "receipt_path": "canonical/verification/PYTHON_SOFTWARE_REQUEST_SEMANTIC_ACCEPTANCE_V9_VERIFY_20261011_V1.json",
         "model_dependency_count": 0,
         "external_general_purpose_model_runtime_dependency_count": 0,
-        "incremental_spend_usd": 0
+        "incremental_spend_usd": 0,
+        "post_merge_current_dependency_replay": "13_OF_13_EACH"
       }
     }
   },

@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_PYTHON_SOFTWARE_REQUEST_SEMANTIC_ACCEPTANCE_V9_VERIFY_20261011_V1",
   "date": "2026-10-11",
-  "status": "INDEPENDENT_TWO_CARRIER_PASS__BOUNDED_V9_SEMANTIC_ACCEPTANCE_VERIFIED",
+  "status": "INDEPENDENT_TWO_CARRIER_POST_MERGE_CURRENT_DEPENDENCY_REQUALIFICATION_PASS__BOUNDED_V9_SEMANTIC_ACCEPTANCE_VERIFIED",
   "capability_first_role": "EXPAND_REAL_RAW_SOFTWARE_REQUEST_ACCEPTANCE_SEMANTICS__BENCHMARK_AUDIT_ONLY",
   "canonical_subjects": {
     "repository_scope_family": {
@@ -48,13 +48,13 @@
       ],
       "primary_replay": {
         "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
-        "tests_passed": 12,
-        "tests_total": 12
+        "tests_passed": 13,
+        "tests_total": 13
       },
       "independent_replay": {
         "carrier": "brain-canonical-apply-slice-verify-20261011-v1",
-        "tests_passed": 12,
-        "tests_total": 12
+        "tests_passed": 13,
+        "tests_total": 13
       }
     }
   },
@@ -98,5 +98,31 @@
     "NO_HIDDEN_REQUIREMENT_COVERAGE",
     "NO_GENERAL_MERGEABILITY_AUTHORITY",
     "NO_FRONTIERCODE_SCORE_OR_TERMINAL_AUTHORITY"
-  ]
+  ],
+  "post_merge_current_dependency_requalification": {
+    "merged_v9_commit": "5f0171d25a0e5492dbb8429f1fb9f1987e04efe7",
+    "changed_underlying_dependency": {
+      "path": "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py",
+      "current_git_blob_sha": "ab626e85d9075a4c0d3490e2774ac9fb6d2ccdfd"
+    },
+    "exact_merged_subject_blobs": {
+      "repository_scope_semantic_cells": "7358dcd9fbcca68724c72b53411628fceb9a96d0",
+      "acceptance_union": "5080a04c1e00428816046bae45afe209184244fd",
+      "semantic_repair_controller": "85b517117d537990bf3d7ae8205c8c71bc264a76",
+      "repository_scope_test": "bf34315417e67b129b2e1999e04ff89019f62c39",
+      "behavior_semantic_compiler": "3f4e23ab91e4b79c1e12ce8e1e3f0c985336ef31",
+      "behavior_semantic_test": "4f268918039e2b6e13ee73133dad46c4b3cc1165"
+    },
+    "primary_sprite": {
+      "name": "brain-capability-first-scheduler-verify-20261008-v1",
+      "repository_scope_suite": "12_OF_12_PASS",
+      "behavior_semantic_suite": "13_OF_13_PASS"
+    },
+    "independent_sprite": {
+      "name": "brain-canonical-apply-slice-verify-20261011-v1",
+      "repository_scope_suite": "12_OF_12_PASS",
+      "behavior_semantic_suite": "13_OF_13_PASS"
+    },
+    "result": "PASS"
+  }
 }
