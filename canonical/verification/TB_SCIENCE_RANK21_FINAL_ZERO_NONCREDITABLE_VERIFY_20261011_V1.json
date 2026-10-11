@@ -1,0 +1,81 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK21_FINAL_ZERO_NONCREDITABLE_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "pass": true,
+  "status": "PASS__AUTHENTIC_RANK21_FINAL_ZERO__PERMANENTLY_NONCREDITABLE_EXTERNAL_COGNITION__NO_RETRY",
+  "subject": {
+    "ledger_schedule_rank": 21,
+    "slot_id": "terminal-bench-science/ode-law-discovery::trial-0",
+    "task_digest": "sha256:767d16a0a6226f391208b1b4bb126a6f957e5d0c8156342b5c9410a755142d65",
+    "logical_attempt_id": "7eb619d40a65597b2b2dccbcf409c143aa47e1663ca4c0d8f098167cb252811a"
+  },
+  "execution_receipt": {
+    "public_repository": "moxnixmdj/verification-capsule-runner",
+    "activation_commit": "eeedc643f2ee71c128a6786beb66b20fb84e0987",
+    "workflow_run_id": 38127556325,
+    "workflow_job_id": 114434971313,
+    "workflow_conclusion": "failure",
+    "harbor_execution_step_conclusion": "success",
+    "conservative_finalizer_step_conclusion": "failure",
+    "artifact_id": 11700062806,
+    "artifact_name": "tb-science-ode-law-discovery-trial-0-rank21-v3-claim-bound",
+    "artifact_sha256": "0ff11e6a4ff26b3aea871d09b2fff0d01c2bed7c5748d8ef8430a1ffd1c9f43a"
+  },
+  "benchmark_result": {
+    "task_read": true,
+    "task_started": true,
+    "durable_start_cas_acquired": true,
+    "benchmark_trials_consumed": 1,
+    "result_present": true,
+    "trial_completed": true,
+    "trial_errored": false,
+    "retries": 0,
+    "reward": 0,
+    "cost_usd": 0,
+    "final_classification": "FINAL_ZERO",
+    "required_outputs_observed": false,
+    "missing_required_outputs": [
+      "/results/equations.json",
+      "/results/predictions.csv",
+      "/results/report.md"
+    ]
+  },
+  "controller_diagnosis": {
+    "agent_status": "BLOCKED_INTERNAL_CONTROLLER_OR_TRANSPORT_EXCEPTION",
+    "internal_unsolved": true,
+    "exception_type": "SciencePlannerError",
+    "exception_sha256": "106bfa84a08a1b06203e361308f2aec3ccc4431ecbdcc611fbcad33f24174eae",
+    "exception_exact_message": "SCIENCE_PLANNER_OUTPUT_TRUNCATED",
+    "planner_cycle_failure": "cycle_7_generation_reached_exact_4096_token_completion_cap",
+    "prior_cycles": "cycles_0_through_6_produced_no_executable_admitted_task_action",
+    "cycle_5_candidate_rejections": 4,
+    "cycle_6_candidate_rejections": 2,
+    "failure_root_class": "TYPED_ACTION_ADMISSION_MISMATCH_THEN_PLANNER_OUTPUT_TRUNCATION"
+  },
+  "finalizer_diagnosis": {
+    "independent_from_benchmark_reward": true,
+    "error_type": "ModuleNotFoundError",
+    "exact_error": "No module named 'rank21_start_cas_v7'",
+    "bound_start_cas_wrapper": "rank21_start_cas_v8.py",
+    "failure_root_class": "FINALIZER_STALE_START_CAS_IMPORT_V7_VS_BOUND_V8"
+  },
+  "contamination": {
+    "path": "canonical/governance/TB_SCIENCE_RANK21_QWEN_COGNITION_CONTAMINATION_REVOCATION_20261011_V1.json",
+    "git_blob_sha": "a67be1d49b9ec420960c30cc3fd44dbc84fe634e",
+    "result_credit_authority": false,
+    "brain_capability_credit": 0,
+    "brain_benchmark_credit": 0,
+    "allowed_use": "CONTAMINATED_DIAGNOSTIC_OR_SPECIMEN_ONLY"
+  },
+  "authority": {
+    "retry_authority": false,
+    "replacement_authority": false,
+    "replay_authority": false,
+    "execution_authority": false,
+    "task_read_authority": false,
+    "activation_authority": false,
+    "result_credit_authority": false
+  },
+  "terminal_credit_delta": 0,
+  "acceptance_credit_delta": 0
+}
