@@ -11,6 +11,7 @@ import re
 from typing import Any, Mapping
 
 from canonical.runtime.osworld_v21_web_app_policy_overlay_v1 import decide as base_decide
+from canonical.runtime.osworld_v21_receipt_dataflow_v1 import materialize_explicit_references
 
 SCHEMA = "PROJECT_BRAIN_OSWORLD_V21_WORKFLOW_POLICY_V1"
 MAX_CLAUSES = 12
@@ -120,6 +121,44 @@ def _current_index(state: Mapping[str, Any], workflow_sha: str, count: int) -> i
     return 0
 
 
+_OBSERVE_VERBS = re.compile(r"\\b(check|review|read|inspect|look up|lookup|find|identify|retrieve|list|show|see|examine)\\b", re.I)
+_MUTATE_VERBS = re.compile(
+    r"\\b(send|reply|update|change|edit|create|delete|remove|submit|post|like|add|"
+    r"schedule|book|purchase|buy|pay|attach|upload|download|fill|set|write|replace|"
+    r"install|uninstall|disable|enable|export|save|move|rename)\\b",
+    re.I,
+)
+
+
+def _prior_clause_rows(
+    state: Mapping[str, Any], *, workflow_sha: str, before_index: int
+) -> list[Mapping[str, Any]]:
+    rows: list[Mapping[str, Any]] = []
+    for row in _history(state):
+        receipt = _workflow_receipt(row)
+        if (
+            receipt is not None
+            and receipt.get("workflow_sha256") == workflow_sha
+            and isinstance(receipt.get("clause_index"), int)
+            and receipt.get("clause_index") < before_index
+        ):
+            rows.append(row)
+    return rows
+
+
+def _observation_only_clause_complete(
+    instruction: str,
+    rows: list[Mapping[str, Any]],
+) -> bool:
+    if not _OBSERVE_VERBS.search(instruction) or _MUTATE_VERBS.search(instruction):
+        return False
+    return any(
+        isinstance(row.get("web_app_result"), Mapping)
+        and row["web_app_result"].get("ok") is True
+        for row in rows
+    )
+
+
 def _clause_history(
     state: Mapping[str, Any], *, workflow_sha: str, clause_index: int
 ) -> list[Mapping[str, Any]]:
@@ -151,6 +190,7 @@ def _wrap(
     workflow_sha: str,
     clauses: list[str],
     clause_index: int,
+    dataflow: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     result = dict(out)
     base_receipt = result.get("_policy_receipt")
@@ -166,6 +206,8 @@ def _wrap(
     }
     if isinstance(base_receipt, Mapping):
         receipt["base_policy_receipt"] = dict(base_receipt)
+    if isinstance(dataflow, Mapping):
+        receipt["dataflow"] = dict(dataflow)
     result["_policy_receipt"] = receipt
     return result
 
@@ -188,11 +230,35 @@ def decide(state: Mapping[str, Any]) -> Mapping[str, Any]:
     # explicit completion evidence. For non-final clauses, consume that local
     # completion and immediately ask the next clause for its first sound action.
     for _ in range(len(clauses)):
-        local = dict(state)
-        local["instruction"] = clauses[index]
-        local["history"] = _clause_history(
+        clause_rows = _clause_history(
             state, workflow_sha=workflow_sha, clause_index=index
         )
+        if (
+            index < len(clauses) - 1
+            and _observation_only_clause_complete(clauses[index], clause_rows)
+        ):
+            index += 1
+            continue
+
+        prior_rows = _prior_clause_rows(
+            state, workflow_sha=workflow_sha, before_index=index
+        )
+        dataflow = materialize_explicit_references(clauses[index], prior_rows)
+        if dataflow.get("pass") is not True:
+            return _wrap(
+                {
+                    "response": "cross-clause reference unresolved",
+                    "actions": [{"type": "WAIT"}],
+                },
+                workflow_sha=workflow_sha,
+                clauses=clauses,
+                clause_index=index,
+                dataflow=dataflow,
+            )
+
+        local = dict(state)
+        local["instruction"] = str(dataflow.get("text") or clauses[index])
+        local["history"] = clause_rows
         out = base_decide(local)
         if not isinstance(out, Mapping):
             raise ValueError("BASE_POLICY_OUTPUT_NOT_OBJECT")
@@ -204,6 +270,7 @@ def decide(state: Mapping[str, Any]) -> Mapping[str, Any]:
             workflow_sha=workflow_sha,
             clauses=clauses,
             clause_index=index,
+            dataflow=dataflow,
         )
 
     raise RuntimeError("WORKFLOW_ADVANCE_LOOP_EXHAUSTED")
