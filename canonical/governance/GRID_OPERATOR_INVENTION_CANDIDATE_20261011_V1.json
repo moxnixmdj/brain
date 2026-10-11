@@ -1,0 +1,77 @@
+{
+  "schema": "PROJECT_BRAIN_GRID_OPERATOR_INVENTION_CANDIDATE_V1",
+  "date": "2026-10-11",
+  "status": "CANDIDATE__BOUNDED_AFFINE_CONTENT_RELATIVE_OPERATOR_INVENTION__EXACT_BLOB_SINGLE_CARRIER_TESTED__ZERO_CAPABILITY_CREDIT",
+  "causal_residual": "INVENT_NEW_GRID_OPERATOR_FROM_DEMONSTRATIONS",
+  "implementation": {
+    "runtime": "canonical/runtime/finite_affine_grid_operator_inducer_v1.py",
+    "blob_sha": "e302ba06d6a48080e1f7bc0614626dc516cd296c",
+    "tests": "canonical/tests/test_finite_affine_grid_operator_inducer_v1.py",
+    "tests_blob_sha": "2ed0465da493516ee3e0dcf245f4ac45ec9d7f48"
+  },
+  "mechanism": {
+    "hypothesis_class": "BOUNDED_UNIMODULAR_2D_INTEGER_AFFINE_COORDINATE_MAPS",
+    "coefficient_domain": [
+      -1,
+      0,
+      1
+    ],
+    "symbolic_offsets": [
+      "ZERO",
+      "H_MINUS_1",
+      "W_MINUS_1",
+      "BBOX_R0",
+      "BBOX_C0",
+      "BBOX_R1",
+      "BBOX_C1",
+      "CONST_-3",
+      "CONST_-2",
+      "CONST_-1",
+      "CONST_1",
+      "CONST_2",
+      "CONST_3"
+    ],
+    "output_shape_rules": [
+      "SAME",
+      "SWAP",
+      "NONZERO_BBOX",
+      "NONZERO_BBOX_SWAP"
+    ],
+    "selection": "MINIMUM_DESCRIPTION_COST_WITH_SHARED_CONTENT_LATENT_REUSE",
+    "ambiguity": "PRESERVE_EQUAL_MINIMUM_OPERATORS__ABSTAIN_IF_UNSEEN_PREDICTIONS_DISAGREE",
+    "search": "EXHAUSTIVE_WITHIN_DECLARED_FINITE_CLASS_AND_MAX_CANDIDATE_BOUND"
+  },
+  "exact_blob_single_carrier_tests": {
+    "passed": 5,
+    "failed": 0,
+    "covered": [
+      "ROTATION_TRANSFER_ACROSS_DIFFERENT_GRID_SIZES",
+      "CONTENT_RELATIVE_BBOX_EXTRACTION_TRANSFER_ACROSS_POSITIONS_AND_SIZES",
+      "BBOX_EXTRACTION_PLUS_ROTATION_WITHOUT_NAMED_COMPOSITE_OPERATOR",
+      "NON_AFFINE_RECOLOR_FAILS_TO_NO_OPERATOR",
+      "SEARCH_BOUND_OVERFLOW_FAILS_CLOSED"
+    ]
+  },
+  "causal_effects_provided": [
+    "INVENT_BOUNDED_SPATIAL_OPERATOR_FROM_DEMONSTRATIONS",
+    "GENERALIZE_CONTENT_RELATIVE_COORDINATES_ACROSS_GRID_SIZES",
+    "SYNTHESIZE_UNNAMED_BBOX_PLUS_AFFINE_COMPOSITE",
+    "PRESERVE_OPERATOR_AMBIGUITY",
+    "FAIL_CLOSED_OUTSIDE_DECLARED_OPERATOR_CLASS"
+  ],
+  "hard_nonclaims": [
+    "NO_OPEN_WORLD_OPERATOR_INVENTION",
+    "NO_ARBITRARY_PROGRAM_SYNTHESIS",
+    "NO_ARC_SCORE_CREDIT",
+    "NO_TERMINAL_CAPABILITY_CREDIT",
+    "NO_PROMOTION_BEFORE_INDEPENDENT_FROZEN_GENERALIZATION_AUDIT"
+  ],
+  "accounting": {
+    "external_frontier_model_runtime_cognition": 0,
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0,
+    "capability_credit_delta": 0
+  },
+  "promotion_authority": false,
+  "independent_verification_required": true
+}
