@@ -31,6 +31,20 @@ class AutomationBenchOwnedPolicyKernelV1Tests(unittest.TestCase):
         self.assertTrue(any("salesforce" in q for q in qs))
         self.assertTrue(any("messages" in q for q in qs))
 
+    def test_fire_drill_app_detection_does_not_invent_airtable(self):
+        prompt = (
+            "Add it to Asana workspace ws_ops, project proj_facilities. "
+            "Check the latest unread email about a fire drill. "
+            "Check policy in spreadsheet ss_ops_policy and preserve source records verbatim."
+        )
+        apps = classify(prompt)["apps"]
+        self.assertIn("asana", apps)
+        self.assertIn("gmail", apps)
+        self.assertIn("google_sheets", apps)
+        self.assertNotIn("airtable", apps)
+        self.assertNotIn("trello", apps)
+        self.assertNotIn("hubspot", apps)
+
     def test_ops_draft_and_superseded_records_are_never_ranked_eligible(self):
         prompt = "Check the latest unread facilities email about a fire drill."
         records = [
