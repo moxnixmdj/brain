@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_SCIENTIFIC_NUMERIC_TASK_COMPILER_V1_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__PRIVATE_COMPOSITION_REPLAY__BOUNDED_NUMERIC_COMPILER",
+  "runtime": {
+    "path": "canonical/runtime/scientific_numeric_task_compiler_v1.py",
+    "git_blob_sha": "570f7a4d08ee9c6663111df37c04080ee8f4562f"
+  },
+  "tests": {
+    "path": "canonical/tests/test_scientific_numeric_task_compiler_v1.py",
+    "git_blob_sha": "8da64ac48059ff710a3af2af7a5012ac01790f03"
+  },
+  "reused_verified_components": [
+    {
+      "path": "canonical/verification/GENERAL_SCIENTIFIC_CAPABILITY_CONTROLLER_V1_VERIFY_20261011_V1.json",
+      "git_blob_sha": "0678e71f72a5a7e92e2aa148a3e980dfeb2ff97d"
+    },
+    {
+      "path": "canonical/verification/SCIENTIFIC_ARTIFACT_CONTRACT_V1_VERIFY_20261011_V1.json",
+      "git_blob_sha": "469d59fa896848cc10543fa72601ee22d8f77710"
+    }
+  ],
+  "replay_1": {
+    "environment": "brain-canonical-apply-slice-verify-20261011-v1",
+    "tests_run": 8,
+    "tests_passed": 8,
+    "tests_failed": 0
+  },
+  "replay_2": {
+    "environment": "brain-live-runtime-v1-verify-20261008",
+    "compiler_controller_core": "PASS"
+  },
+  "verified_behaviors": [
+    "symbolic target cue plus numeric schema compilation",
+    "period cue plus time schema compilation",
+    "error column exclusion",
+    "bounded sparse-row handling",
+    "ambiguous intent rejection",
+    "unsupported vague instruction rejection",
+    "composition with verified controller",
+    "composition with verified artifact layer"
+  ],
+  "nonclaims": [
+    "not general natural-language understanding",
+    "not nonnumeric science coverage",
+    "not a benchmark score"
+  ]
+}
