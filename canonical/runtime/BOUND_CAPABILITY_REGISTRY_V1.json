@@ -4148,6 +4148,70 @@
         "external_capability_provider_count": 0,
         "incremental_spend_usd": 0
       }
+    },
+    "chart.raster.legend_style_binding.v1": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "adapter_module": "chart_legend_style_binding_v1",
+      "entrypoint": "run",
+      "cost": 1,
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "chart",
+        "legend",
+        "label",
+        "color",
+        "style",
+        "series",
+        "raster"
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "requires": [
+        "image.file.available"
+      ],
+      "provides": [
+        "chart.raster.legend.label_to_color_style"
+      ],
+      "limitations": [
+        "Verified for horizontal textual legend labels adjacent to compact saturated color samples with independent matching in-plot color evidence.",
+        "Ambiguous swatches, low-confidence labels, numeric-only labels, and samples without an independent plot counterpart fail closed.",
+        "No pattern or dash-style binding authority, no rotated-label authority, no domain semantic authority, and no Chartography score authority."
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "chart.raster.legend_style_binding.v1",
+          "path": "${input.path}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "pass",
+          "value": true
+        }
+      },
+      "source": {
+        "type": "brain_native_deterministic",
+        "adapter_path": "canonical/runtime/bound_capabilities/chart_legend_style_binding_v1.py",
+        "composed_capabilities": [
+          "image.extract.ocr.tesseract.positioned.tsv",
+          "chart.raster.scene_graph.v1"
+        ],
+        "external_general_purpose_model_runtime_dependency_count": 0
+      },
+      "verification": {
+        "independently_verified": true,
+        "exact_runtime_blob_sha": "aeed8dc4dc231d1d1a794188974930e9457c7ecb",
+        "exact_test_blob_sha": "d517466f2b5319246a4116c0c85c9f4f3598b5cf",
+        "receipt_path": "canonical/verification/CHART_LEGEND_STYLE_BINDING_V1_VERIFY_20261011.json",
+        "verifier_repository": "moxnixmdj/verification-capsule-runner",
+        "verifier_pull_request": 2709,
+        "workflow_run_id": 38151766527,
+        "workflow_job_id": 114506507835,
+        "focused_tests_passed": 7,
+        "heldout_chartography_cases_consumed": 0,
+        "model_dependency_count": 0
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
