@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_LIVE_WORK_FRONTIER_V1",
   "date": "2026-10-11",
-  "status": "CURRENT_PROFESSIONAL_V10_PROPERTY_TRUTH_24_OF_24__FULL_PRIVATE_REGRESSION_GATE_OPEN__REPOSITORY_WIDE_GITHUB_ACTIONS_PRESTEP_CARRIER_FAILURE__PARALLEL_REUSE_FIRST_FRONTIER_CONTINUES__ZERO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT",
+  "status": "CURRENT_PROFESSIONAL_24_OF_24__ALL_12_CHECKPOINT_ROWS_DECISION_VALUE_SLEEPING__BYTES_V48_CONTINUES__ZERO_CREDIT",
   "frontier_id": "LIVE_WORK_FRONTIER_20261011_PROF_PROPERTY_24_OF_24_V26",
   "scope": {
     "base_main_commit": "8916f4b00768329eb101be88ad6effbfd3704d67",
@@ -9,7 +9,7 @@
     "source_set": [
       {
         "path": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
-        "git_blob_sha": "a56af90a3af965d6be7f9bc5aac1312919626b28"
+        "git_blob_sha": "8086e42df231620a07823fca8a72cd4b47c9815e"
       },
       {
         "path": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
@@ -34,6 +34,10 @@
       {
         "path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
         "git_blob_sha": "eaeb22cef6a8d85d6bbcad2e06706457cb573d1a"
+      },
+      {
+        "path": "canonical/governance/CURRENT_FRONTIER_REUSE_SPECIALIZATION_20261011_V1.json",
+        "git_blob_sha": "fd829dd1f2c959302f346f74c72a65d8d24e7f7e"
       }
     ],
     "base_main_commit_role": "OBSERVED_BEFORE_RECONCILIATION_COMMIT__DIAGNOSTIC_ONLY__CURRENT_POINTER_PATHS_WIN_ON_DRIFT"
@@ -265,11 +269,11 @@
       "work_id": "ESCAPE_GAP_A_AUTHENTICATED_ROW_PROOFS",
       "work_type": "FALSIFICATION",
       "source": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
-      "causal_role": "TWELVE_ACTIVE_INFORMATION_ACQUISITION_ROWS_REQUIRE_REAL_CURRENT_AVAILABILITY_OR_ACQUIRABILITY_EVIDENCE__ONE_TB_ROW_SEPARATELY_PARKED",
-      "readiness": "TWELVE_ACTIVE_ACQUISITION_ROWS__EVIDENCE_ACQUISITION_OR_FALSIFICATION_WITH_EXISTING_ADAPTER",
+      "causal_role": "NO_ROW_SPECIFIC_SAME_INFORMATION_WORK__WAKE_ONLY_ON_CONTENT_ADDRESSED_POLICY_CHANGING_REALITY_OR_STRONGER_SCOPE_COMPLETE_CERTIFICATE_OR_EFFECT_DISTINGUISHING_COUNTEREXAMPLE",
+      "readiness": "DECISION_VALUE_GATED__0_ACTIONABLE__12_SLEEPING",
       "claims_new_primitive": false,
       "score_state": "UNBOUND",
-      "scheduler_state": "READY_EVIDENCE",
+      "scheduler_state": "SLEEPING",
       "prerequisites_satisfied": true,
       "prerequisite_work_ids": [],
       "mutation_keys": [
@@ -280,12 +284,12 @@
       ],
       "explicit_conflict_work_ids": [],
       "evidence_conflict_keys": [],
-      "evidence_acquisition_mode": "READ_ONLY",
+      "evidence_acquisition_mode": "NONE",
       "vector_evidence_state": "PARTIAL",
       "vector_evidence": {},
       "read_only_evidence": {
-        "source": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
-        "source_git_blob_sha": "f1f2f636802c34bdc15079be3e13fb29374dc0fc",
+        "source": "canonical/governance/CURRENT_FRONTIER_REUSE_SPECIALIZATION_20261011_V1.json",
+        "source_git_blob_sha": "fd829dd1f2c959302f346f74c72a65d8d24e7f7e",
         "active_gap_a_count": 12,
         "active_gap_b_count": 0,
         "parked_unresolved_count": 1,
@@ -295,7 +299,23 @@
         "active_binding": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V7.json",
         "active_binding_git_blob_sha": "2119d0bc2b5c06399da49adb5a86b4e9faf7e08f",
         "real_authenticated_row_proofs": 0,
-        "vector_bounds_complete": false
+        "vector_bounds_complete": false,
+        "decision_value_gate": true,
+        "actionable_row_ids": [],
+        "sleeping_row_ids": [
+          "CODING_TB4_GE_66_4",
+          "CODING_FRONTIERCODE_GE_54_4",
+          "CODING_CURSORBENCH_GE_57_8",
+          "PROWORK_GDPVAL_GE_1846",
+          "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+          "AUTOMATIONBENCH_GE_40",
+          "HLE_TOOLS_GE_67_7",
+          "CHARTOGRAPHY_TOOLS_GE_89",
+          "OSWORLD_2_1_PARTIAL_GE_81_8",
+          "FINANCE_ACCOUNTING_INDEX_GE_61",
+          "FINANCE_AGENT_V2_GE_58_59",
+          "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER"
+        ]
       }
     },
     {
