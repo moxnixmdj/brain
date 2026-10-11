@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_BENCHMARK_CAPABILITY_DOMINANCE_FRONTIER_V1",
   "date": "2026-10-11",
-  "status": "ACTIVE_CANDIDATE__CAPABILITY_FIRST__PROOF_LATTICE_V2__12_CHECKPOINT_ROWS_WAKE_GATED__1_TB_SCIENCE_PARKED__ZERO_SCORE_OR_CAPABILITY_CREDIT_FROM_PROJECTION",
+  "status": "ACTIVE_CANDIDATE__CAPABILITY_FIRST__PROOF_LATTICE_V2__POST_LATTICE_WALL_CLOCK_OPTIMIZER_BOUND__12_CHECKPOINT_ROWS_WAKE_GATED__1_TB_SCIENCE_PARKED__ZERO_SCORE_OR_CAPABILITY_CREDIT_FROM_PROJECTION",
   "mission": {
     "terminal_goal": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
     "benchmark_role": "MILESTONE_MEASUREMENT_AND_AUDIT",
@@ -223,14 +223,16 @@
   "current_expected_plan": {
     "benchmark_specific_same_information_selected": false,
     "capability_work_selected_from_benchmark_projection_only": false,
-    "actual_execution_selection": "DERIVE_FROM_CURRENT_LIVE_WORK_FRONTIER_THROUGH_V2_PROOF_LATTICE__HEURISTIC_PROJECTIONS_ZERO_CLOSURE_AUTHORITY"
+    "actual_execution_selection": "DERIVE_FROM_CURRENT_LIVE_WORK_FRONTIER_THROUGH_V2_PROOF_LATTICE__THEN_MINIMIZE_TOTAL_WALL_CLOCK_ACROSS_ALREADY_ADMISSIBLE_PROOF_ROUTES__HEURISTIC_PROJECTIONS_ZERO_CLOSURE_AUTHORITY"
   },
   "ledgers": {
     "CAPABILITY_COMPARISON_LEDGER": {
+      "path": "canonical/governance/CURRENT_CAPABILITY_COMPARISON_LEDGER.json",
       "closed_by_this_projection": [],
       "open_relations_require_typed_entailment": true
     },
     "BRANDED_BENCHMARK_RECEIPT_LEDGER": {
+      "path": "canonical/governance/CURRENT_BRANDED_BENCHMARK_RECEIPT_LEDGER.json",
       "closed_by_this_projection": [],
       "open_checkpoint_rows": 12,
       "parked_checkpoint_rows": 1
@@ -265,5 +267,18 @@
     "selection_rule": "EXACT_MINIMUM_PROOF_COVER_IF_AVAILABLE__ELSE_MAX_VERIFIED_MARGINAL_PROPOSITION_CLOSURE__THEN_REUSABLE_CAPABILITY_BREADTH__THEN_WALL_CLOCK_AND_REALITY_COST",
     "execution_authority": false,
     "promotion_authority": false
+  },
+  "post_lattice_optimization": {
+    "prerequisite": "ONLY_ROUTES_WITH_PROVED_SCOPE_BOUND_PROPOSITION_EDGES_AND_EXISTING_V2_ADMISSION_MAY_ENTER",
+    "runtime": "canonical/runtime/capability_proof_compression_optimizer_v1.py",
+    "role": "SELECT_MINIMUM_TOTAL_WALL_CLOCK_EVIDENCE_SET_AMONG_ALREADY_ADMISSIBLE_PROOF_ROUTES__DOES_NOT_VALIDATE_ENTAILMENT_OR_CREATE_CREDIT",
+    "objective_order": [
+      "MINIMUM_TOTAL_WALL_CLOCK",
+      "MAXIMUM_REUSABLE_PROPOSITION_OR_CAPABILITY_COVERAGE_AT_EQUAL_WALL_CLOCK",
+      "MINIMUM_EXTERNAL_DEPENDENCY_RISK",
+      "MINIMUM_COMPUTE_RESOURCE_COST",
+      "DETERMINISTIC_ID_TIEBREAK"
+    ],
+    "proof_credit_authority": false
   }
 }
