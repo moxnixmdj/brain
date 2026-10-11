@@ -75,6 +75,18 @@ def normalize_history(messages: Sequence[Any]) -> list[dict[str, Any]]:
                         "metadata": {_METADATA_KEY: str(metadata[_METADATA_KEY])},
                     }
                 )
+            for block in getattr(msg, "blocks", []) or []:
+                if str(getattr(block, "kind", "")) != "tool_call":
+                    continue
+                name = str(getattr(block, "name", ""))
+                arguments = getattr(block, "arguments", "{}")
+                out.append(
+                    {
+                        "kind": "tool_call",
+                        "name": name,
+                        "arguments": str(arguments),
+                    }
+                )
     return out
 
 
