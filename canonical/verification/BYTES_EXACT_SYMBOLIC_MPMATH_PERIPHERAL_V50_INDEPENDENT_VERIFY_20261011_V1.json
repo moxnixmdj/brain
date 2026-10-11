@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_MPMATH_PERIPHERAL_V50_INDEPENDENT_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__V50_CONTENT_ADDRESSED_ARCHIVE_CLEAN_ROOM__NEXT56_14720_OF_14720__NEXT57_UNSPENT__ZERO_CONSEQUENTIAL_CREDIT",
+  "subject": {
+    "archive_library_file_id": "libfile_020550c6747c81919e3ec0c3761d86c8",
+    "archive_file_id": "file_000000009bec821099a85309fd4ac6c1",
+    "archive_sha256": "a57376b8f9afb23ae7fd4a6b838045f887856b1503e913ebbb09ba5daea3c68e",
+    "manifest_sha256": "719e9d956c4b24f54474ebd0dea30fe3e2352e6037743ec5a07b911cdec071e2",
+    "python_files": 277,
+    "durable_files": 278,
+    "raw_python_source_bytes": 1720680
+  },
+  "structural_replay": {
+    "source_files": 278,
+    "clean_room_files": 278,
+    "byte_identical": true,
+    "v49_to_v50_net_delta_bytes": -4384,
+    "new_fail_closed_bodies": 10,
+    "inherited_repair": "StrPrinter._print_Rational from owned stock SymPy 1.14.0"
+  },
+  "qualification_replay": {
+    "corpus_id": "QUAL_SUCCESSOR_NEXT56_20261011_V1",
+    "corpus_sha256": "a7c0c40d1d5a587b0434ce7d675b0763b358aff8bbafdd4dc9b1a1559f20fbcb",
+    "cases": 14720,
+    "passed": 14720,
+    "failed": 0,
+    "result": "PASS"
+  },
+  "next_frozen_preserved": {
+    "id": "QUAL_SUCCESSOR_NEXT57_20261011_V1",
+    "corpus_sha256": "874b316cb3cb39d27371195ffbedf2542187e842e383d53bf635e4d42a97e8e4",
+    "cases": 14950,
+    "spent": false
+  },
+  "generator_reproducibility": {
+    "seed_rule": "FIRST_32_BITS_BIG_ENDIAN_SHA256(QUAL_ID + '|' + PREDECESSOR_MANIFEST_SHA256)",
+    "NEXT56_regeneration": "BYTE_IDENTICAL__SHA256_A7C0C40D1D5A587B0434CE7D675B0763B358AFF8BBAFDD4DC9B1A1559F20FBCB",
+    "NEXT57_seed": 296607256
+  },
+  "independent_execution": {
+    "carrier": "CHATGPT_ISOLATED_CONTAINER_CLEAN_EXTRACTION",
+    "construction_working_tree_not_used_for_final_replay": true,
+    "repository_checkout_not_used": true
+  },
+  "truth_boundary": [
+    "PROVED: sealed V50 archive, clean extraction, manifest, byte count, and NEXT56 replay agree.",
+    "PROVED: NEXT57 was generated and persisted but not executed.",
+    "NOT PROVED: universal equivalence outside the bounded exact-symbolic route.",
+    "NO CREDIT: no capability, acceptance, professional-quality, or terminal credit is granted."
+  ],
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "acceptance_credit_delta": 0,
+  "promotion_credit_delta": 0,
+  "terminal_credit_delta": 0
+}

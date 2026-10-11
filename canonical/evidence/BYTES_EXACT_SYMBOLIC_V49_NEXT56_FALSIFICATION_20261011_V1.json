@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_V49_NEXT56_FALSIFICATION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "V49_FALSIFIED_ON_FRESH_NEXT56__14719_OF_14720__INHERITED_STRPRINTER_RATIONAL_PATH_EXPOSED__NEXT56_SPENT",
+  "subject": {
+    "frontier": "V49",
+    "manifest_sha256": "bdc69baf4e75991e6b5abd1ec271886c43a02ac08a422656374f19122ffb9bd0",
+    "raw_python_source_bytes": 1725064
+  },
+  "qualification": {
+    "id": "QUAL_SUCCESSOR_NEXT56_20261011_V1",
+    "cases": 14720,
+    "corpus_sha256": "a7c0c40d1d5a587b0434ce7d675b0763b358aff8bbafdd4dc9b1a1559f20fbcb",
+    "passed": 14719,
+    "failed": 1,
+    "spent": true
+  },
+  "counterexample": {
+    "global_case_index_zero_based": 4539,
+    "op": "roots",
+    "p": [
+      2,
+      -4,
+      3,
+      -1,
+      4
+    ],
+    "expected_digest": "ff03c905b58935911f50f4207fe3366def9d16f5045da4c431abb069894de333",
+    "observed": "NotImplementedError: outside Brain bounded exact-symbolic contract",
+    "traceback_root": "sympy/printing/str.py::StrPrinter._print_Rational"
+  },
+  "causal_localization": {
+    "new_v50_mpmath_cut_causal": false,
+    "inherited_v49_cut_causal": true,
+    "exact_missing_behavior": "StrPrinter._print_Rational",
+    "repair_source": "owned stock SymPy 1.14.0 donor body",
+    "goal_substitution": false
+  },
+  "truth_boundary": [
+    "PROVED: V49 itself fails the same NEXT56 case before any V50 mpmath cut is considered.",
+    "PROVED: the observed exception is raised by the inherited fail-closed StrPrinter._print_Rational body.",
+    "NOT PROVED: broader equivalence outside the bounded route."
+  ],
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "promotion_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
