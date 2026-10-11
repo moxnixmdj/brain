@@ -32,7 +32,7 @@
     "primary_entrypoint": "plan_current_post_composition_frontier",
     "scalar_fallback_runtime": "canonical/runtime/capability_first_live_scheduler_v1.py",
     "status": "ACTIVE__POST_COMPOSITION_DYNAMIC_CURRENTNESS_V17__ALL_12_CHECKPOINT_ROWS_DECISION_VALUE_SLEEPING__BYTES_V48_PRIMARY_RESOURCE_WORK__ZERO_GLOBAL_CREDIT",
-    "observed_git_blob_sha": "90bdea95ad16e161746cd68bedb52ebf116241f6",
+    "observed_git_blob_sha": "0160fb3c53cf3114441dafbccbc46c3268e482e1",
     "scalar_fallback_state": "BLOCKED_R2_POLICY_SOURCE_LOCK_DRIFT__PRIMARY_V17_ACTIVE"
   },
   "scheduler_precedence": "REAL_MISSION_CAPABILITY_RESOURCE_PARETO_LEVERAGE_IS_PRIMARY__CURRENTNESS_AND_DEPENDENCY_GATES_PRECEDE_SELECTION__DECISION_VALUE_WAKE_GATE_PRECEDES_PARETO_AND_EXTERNAL_ACQUISITION__SAFE_NONCONFLICTING_PARALLELISM_MINIMIZES_WALL_CLOCK__DIMENSIONWISE_PARETO_DOMINANCE_PRECEDES_ANY_SCALAR_TRADEOFF__OPUS_5_5_CHECKPOINT_WORK_IS_TERTIARY_AUDIT__EXPLICIT_NEW_PRIMITIVE_CLAIMS_REQUIRE_REUSE_FIRST_EXHAUSTION_PROOF",
@@ -248,7 +248,7 @@
     "runtime_path": "canonical/runtime/capability_parallel_frontier_post_composition_v2.py",
     "runtime_git_blob_sha": "6a1e02ab6154e18b706867582cc93d1eb571c423",
     "verification_path": "canonical/verification/DECISION_VALUE_SCHEDULER_GATE_INDEPENDENT_VERIFY_20261011_V2.json",
-    "verification_git_blob_sha": "5caee10ef902f5d8c57900fb1343d6552f126294",
+    "verification_git_blob_sha": "9535a7288b2ed26a4a83057538b9634e5cb121e2",
     "rule": "SUPPORTED_CURRENT_POINTERS_FOLLOW_ONLY_AFTER_EXPLICIT_INVARIANTS__ALL_UNCHANGED_CHECKPOINT_ROWS_SLEEP__OTHER_DRIFT_FAILS_CLOSED",
     "full_execution_authority": false,
     "terminal_credit_delta": 0
@@ -310,10 +310,10 @@
   },
   "decision_value_scheduler_v17": {
     "activation_path": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261011_V17.json",
-    "activation_git_blob_sha": "6d4650ed8871911a25c61d5d708cd9858fd6b1a2",
+    "activation_git_blob_sha": "5f930f90968c42770ef804aee9b88f2c5c180e3b",
     "verification_path": "canonical/verification/DECISION_VALUE_SCHEDULER_GATE_INDEPENDENT_VERIFY_20261011_V2.json",
-    "verification_git_blob_sha": "5caee10ef902f5d8c57900fb1343d6552f126294",
-    "dynamic_tests": "23_OF_23_PASS",
+    "verification_git_blob_sha": "9535a7288b2ed26a4a83057538b9634e5cb121e2",
+    "dynamic_tests": "46_OF_46_SCHEDULER_SLICE_PASS",
     "current_plan_replay": "PASS",
     "checkpoint_actionable_rows": 0,
     "checkpoint_sleeping_rows": 12,
