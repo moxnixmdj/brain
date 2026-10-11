@@ -18,7 +18,7 @@ MAX_TEXT_BYTES = 1_000_000
 MAX_ARGS = 64
 ALLOWED_CLI = frozenset({
     "libreoffice", "soffice", "ffmpeg", "ffprobe",
-    "blender", "freecadcmd", "FreeCADCmd", "git", "tar", "unzip", "zip",
+    "blender", "freecadcmd", "FreeCADCmd", "tar", "unzip", "zip",
     "convert", "magick", "identify", "pdftotext", "pandoc",
 })
 
@@ -97,6 +97,39 @@ def _compile_op(op: Mapping[str, Any]) -> str:
             "shutil.rmtree(_p) if _p.is_dir() else (_p.unlink() if _p.exists() else None)"
         )
 
+    if kind == "READ_TEXT":
+        p = _path(op.get("path"))
+        max_chars = op.get("max_chars", 8000)
+        if isinstance(max_chars, bool) or not isinstance(max_chars, int) or not 1 <= max_chars <= 20000:
+            raise StateOpsError("READ_TEXT_MAX_CHARS_INVALID")
+        return f"_p=pathlib.Path({p!r}); print(_p.read_text(encoding='utf-8')[:{max_chars}])"
+
+    if kind == "ASSERT_PATH_EXISTS":
+        p = _path(op.get("path"))
+        return (
+            f"_p=pathlib.Path({p!r}); "
+            f"assert _p.exists(), 'PATH_MISSING:{p}'; print('ASSERT_PATH_EXISTS:PASS:{p}')"
+        )
+
+    if kind == "ASSERT_TEXT_EQUALS":
+        p = _path(op.get("path"))
+        text = op.get("text")
+        if not isinstance(text, str):
+            raise StateOpsError("ASSERT_TEXT_EQUALS_TEXT_REQUIRED")
+        if len(text.encode("utf-8")) > MAX_TEXT_BYTES:
+            raise StateOpsError("ASSERT_TEXT_EQUALS_TEXT_TOO_LARGE")
+        return (
+            f"_p=pathlib.Path({p!r}); _got=_p.read_text(encoding='utf-8'); "
+            f"assert _got=={text!r}, 'TEXT_MISMATCH'; print('ASSERT_TEXT_EQUALS:PASS:{p}')"
+        )
+
+    if kind == "SHA256_FILE":
+        p = _path(op.get("path"))
+        return (
+            f"_p=pathlib.Path({p!r}); "
+            "print(hashlib.sha256(_p.read_bytes()).hexdigest())"
+        )
+
     if kind == "JSON_SET":
         p = _path(op.get("path"))
         key = op.get("key")
@@ -138,5 +171,5 @@ def compile_state_ops(payload: Mapping[str, Any]) -> str:
         raise StateOpsError("PAYLOAD_NOT_OBJECT")
     ops = _ops(payload.get("ops"))
     statements = [_compile_op(op) for op in ops]
-    prelude = "import json,pathlib,shutil,subprocess"
+    prelude = "import hashlib,json,pathlib,shutil,subprocess"
     return prelude + "; " + "; ".join(statements)
