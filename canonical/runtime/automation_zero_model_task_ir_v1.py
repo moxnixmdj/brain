@@ -22,38 +22,55 @@ SCHEMA = "PROJECT_BRAIN_ZERO_MODEL_WORKFLOW_TASK_IR_V1"
 ACTION_CANON = {
     "add": "add",
     "apply": "apply",
+    "approve": "approve",
     "archive": "archive",
     "assign": "assign",
+    "attach": "attach",
+    "calculate": "calculate",
     "cancel": "cancel",
     "check": "check",
     "close": "close",
+    "compare": "compare",
+    "confirm": "check",
     "convert": "convert",
+    "copy": "copy",
     "create": "create",
     "delete": "delete",
+    "download": "download",
     "draft": "draft",
-    "email": "send",
+    "escalate": "send",
     "extract": "extract",
     "find": "find",
     "flag": "flag",
     "get": "get",
     "inspect": "inspect",
     "label": "label",
+    "link": "link",
     "list": "list",
     "log": "create",
     "mark": "update",
+    "merge": "merge",
     "move": "move",
     "notify": "send",
     "post": "send",
+    "publish": "publish",
     "read": "read",
+    "reconcile": "reconcile",
+    "record": "create",
+    "reject": "reject",
     "remove": "remove",
+    "rename": "rename",
     "reply": "send",
+    "route": "send",
     "schedule": "create",
     "search": "search",
     "send": "send",
     "set": "update",
     "share": "share",
+    "sync": "sync",
     "tag": "tag",
     "update": "update",
+    "upload": "upload",
     "verify": "verify",
     "write": "create",
 }
@@ -81,6 +98,7 @@ _GENERIC_QUERY_DROP = {
     "please","right","correct","relevant","needed","need","using","use","per","our",
     "their","your","all","any","each","every","latest","newest","recent","most",
     "information","details","appropriate","requested","request","task","workflow",
+    "it","this","that","them","those","one","thing","things",
 }
 
 
@@ -135,14 +153,19 @@ def _literal_rows(clause: str) -> list[dict[str, Any]]:
 
 
 def _action_tokens(clause: str) -> list[str]:
+    # Entity literals may contain words such as "email" or "record"; they are
+    # values, not action verbs. Mask them before lexical action detection.
+    masked = clause
+    for row in sorted(_literal_rows(clause), key=lambda x: x["span"][0], reverse=True):
+        a, b = row["span"]
+        masked = masked[:a] + " " + masked[b:]
     found: list[str] = []
-    for tok in retrieval.tokens(clause):
+    for tok in retrieval.tokens(masked):
         if tok in ACTION_CANON:
             canonical = ACTION_CANON[tok]
             if canonical not in found:
                 found.append(canonical)
     return found
-
 
 def _constraint_flags(clause: str) -> list[str]:
     return [name for name, rx in _CONSTRAINT_PATTERNS if rx.search(clause)]
@@ -190,18 +213,22 @@ def compile_task_ir(prompt: str) -> dict[str, Any]:
     for ordinal, clause in enumerate(raw_clauses):
         actions = _action_tokens(clause)
         if not actions:
-            # Preserve explicit conditional/negative/recency context that
-            # grammatically scopes the next action instead of silently dropping it.
-            if _constraint_flags(clause):
-                pending_context.append(clause)
+            # Preserve explicit facts/policies immediately preceding an action.
+            # This is needed for anaphora such as "the deal ... Mark it as won"
+            # and for policy text that scopes the following mutation.
+            pending_context.append(clause)
+            pending_context = pending_context[-3:]
             continue
 
         context_text = " ".join(pending_context).strip()
         pending_context = []
         scoped_text = (context_text + ", " + clause).strip(", ") if context_text else clause
         literals = _literal_rows(scoped_text)
-        query_literals = _literal_rows(clause)
-        query = _discovery_query(clause, query_literals, actions)
+        query_source = clause
+        if context_text and re.search(r"\b(?:it|this|that|them|those|one)\b", clause, re.I):
+            query_source = context_text + " " + clause
+        query_literals = _literal_rows(query_source)
+        query = _discovery_query(query_source, query_literals, actions)
         if not query:
             continue
 
