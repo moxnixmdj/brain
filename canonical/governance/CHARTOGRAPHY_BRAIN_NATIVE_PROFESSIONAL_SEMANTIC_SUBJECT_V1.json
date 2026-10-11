@@ -1,0 +1,17 @@
+{
+  "schema": "PROJECT_BRAIN_CHARTOGRAPHY_CREDIT_SUBJECT_V1",
+  "repository": "moxnixmdj/brain",
+  "operative_solver_role": "BRAIN_OWNED_NATIVE_MECHANISM",
+  "brain_owned_operative_artifact": true,
+  "cognition_dependency_class": "MODEL_INDEPENDENT",
+  "producer_cognition_provenance_complete": true,
+  "runtime_dependency_inventory_complete": true,
+  "model_dependency_count": 0,
+  "external_model_runtime_dependency_count": 0,
+  "donor_runtime_dependency_count": 0,
+  "online_teacher_call_count": 0,
+  "teacher_fallback_path_count": 0,
+  "acquisition_donor_used": false,
+  "qualification_after_donor_removal": true,
+  "student_or_derived_artifact_distinct_from_donor": true
+}
