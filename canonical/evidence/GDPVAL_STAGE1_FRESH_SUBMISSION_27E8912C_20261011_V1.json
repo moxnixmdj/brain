@@ -1,0 +1,92 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_STAGE1_FRESH_SUBMISSION_RECEIPT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "FROZEN_UNSCORED_BRAIN_SUBMISSION__CROSS_ARTIFACT_FORMAT_VERIFIED__ZERO_BENCHMARK_CREDIT",
+  "benchmark": "GDPval-AA v2.1",
+  "task": {
+    "row_idx": 7,
+    "task_id": "27e8912c-8bd5-44ba-ad87-64066ea05264",
+    "sector": "Government",
+    "occupation": "Administrative Services Managers",
+    "requested_artifacts": [
+      "WORKSTATION_ERGONOMICS_CHECKLIST_PDF_MAX_5_PAGES",
+      "ORGANIZATIONAL_ACTION_ITEMS_WORD_DOCUMENT"
+    ],
+    "reference_file_count": 0
+  },
+  "freshness": {
+    "precommit_path": "canonical/governance/GDPVAL_STAGE1_NONWORD_SUBJECT_PRECOMMIT_20261011_V1.json",
+    "precommit_commit": "6a928a1b6cc1e5bc028775a9a4a1db371e285c0e",
+    "human_gold_read_before_freeze": false,
+    "third_party_model_submission_read_before_freeze": false,
+    "judge_feedback_read_before_freeze": false,
+    "task_specific_rubric_read_before_freeze": false
+  },
+  "brain_execution_profile": {
+    "path": "canonical/capabilities/internalized/professional_work/stirrup_247f24d/BRAIN_EXECUTION_PROFILE_V1.json",
+    "candidate_id": "OPUS55_PROFESSIONAL_KNOWLEDGE_WORK_STIRRUP_CONFIGURATION_V1",
+    "cognition_surface": "CURRENT_CHATGPT_GPT_5_6_SOL_SESSION",
+    "incremental_spend_usd": 0
+  },
+  "public_guidance_sources": [
+    {
+      "name": "NIH Computer Workstation Ergonomics: Self-Assessment Checklist",
+      "url": "https://ors.od.nih.gov/sr/dohs/Documents/checklist-ergonomics-computer-workstation-self-assessment.pdf"
+    },
+    {
+      "name": "OSHA Computer Workstations eTool - Chairs",
+      "url": "https://www.osha.gov/etools/computer-workstations/components/chairs"
+    },
+    {
+      "name": "OSHA Computer Workstations eTool - Keyboards",
+      "url": "https://www.osha.gov/etools/computer-workstations/components/keyboards"
+    },
+    {
+      "name": "OSHA Computer Workstations eTool - Pointer/Mouse",
+      "url": "https://www.osha.gov/etools/computer-workstations/components/pointer-mouse"
+    },
+    {
+      "name": "OSHA Computer Workstations eTool - Desks",
+      "url": "https://www.osha.gov/etools/computer-workstations/components/desks"
+    }
+  ],
+  "deliverables": [
+    {
+      "file_name": "Workstation_Ergonomics_Checklist.pdf",
+      "sha256": "d76ceb373621931a592856c25a8f36c1e033bcd45dc320d3f3a0a4737c837d29",
+      "page_count": 3,
+      "max_page_count": 5,
+      "visual_inspection": "PASS__ALL_3_PAGES__NO_CLIPPING_OVERLAP_OR_BROKEN_TABLES",
+      "library_path": "/Project Brain/GDPval/stage1/27e8912c-8bd5-44ba-ad87-64066ea05264/Workstation_Ergonomics_Checklist.pdf",
+      "library_file_id": "libfile_ef9e9992e39881918bdc18aad58f06f3"
+    },
+    {
+      "file_name": "Organizational_Action_Items.docx",
+      "sha256": "f4367fb90c667b5abc30446438aea489ae850f947ddb0fc1d29c431e20c05cd1",
+      "rendered_page_count": 1,
+      "visual_inspection": "PASS__NO_CLIPPING_OVERLAP_OR_BROKEN_TABLES",
+      "library_path": "/Project Brain/GDPval/stage1/27e8912c-8bd5-44ba-ad87-64066ea05264/Organizational_Action_Items.docx",
+      "library_file_id": "libfile_c81f3d38477c8191aaa11969365fea86"
+    }
+  ],
+  "requirement_checks": {
+    "checklist_scope_only_chair_keyboard_mouse_work_surface": true,
+    "checklist_goal_stated": true,
+    "name_position_email_date_fields": true,
+    "ergonomic_setup_schematics_source_grounded": true,
+    "action_tracker_employee_workstation_fields": true,
+    "action_tracker_organizational_action_status_comments_and_resolution_fields": true,
+    "process_determine_alternate_equipment_on_site": true,
+    "process_vendor_of_record": true,
+    "process_people_leader_approval_and_cost_centre": true,
+    "process_confirm_resolution_with_employee": true
+  },
+  "hard_nonclaims": [
+    "NO_ARTIFICIAL_ANALYSIS_SCORE",
+    "NO_OWNER_PAIRWISE_JUDGMENT",
+    "NO_RUBRIC_SCORE",
+    "NO_CLAIM_THIS_TASK_PROVES_GDPVAL_GE_1846",
+    "NO_BENCHMARK_ACCEPTANCE_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ]
+}
