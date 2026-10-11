@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_PYTHON_PROVENANCE_GUIDED_COUPLED_REPAIR_V1_VERIFY_20261011",
+  "date": "2026-10-11",
+  "status": "PASS__INDEPENDENT_TWO_CARRIER_FOCUSED_FALSIFICATION",
+  "capability_id": "python.software.repair.guided.provenance.coupled.v1",
+  "branch": "capability/frontiercode-v5-interprocedural-provenance-20261011",
+  "runtime_path": "canonical/runtime/bound_capabilities/python_provenance_guided_coupled_repair_v1.py",
+  "runtime_git_blob_sha": "0b779992f229dbe27f665a8f68c89cbb5a39fc28",
+  "runtime_sha256": "111e1a5c30a529a0e0ab2b727c74313b9b2b1875348cc11fae12690f91b15324",
+  "test_path": "canonical/tests/test_python_provenance_guided_coupled_repair_v1.py",
+  "test_git_blob_sha": "4702f3d252e6047cfadc28a1e3363357e0541ec7",
+  "test_sha256": "f4f133f246f1e6adf37225b0f5acad1bf3fc375b8dc0a74ebbed37b2f9df8149",
+  "carriers": [
+    {
+      "name": "brain-capability-first-scheduler-verify-20261008-v1",
+      "focused_tests": "7/7 PASS"
+    },
+    {
+      "name": "brain-canonical-apply-slice-verify-20261011-v1",
+      "focused_tests": "7/7 PASS",
+      "exact_branch_combined_replay": "14/14 PASS"
+    }
+  ],
+  "proved": [
+    "DYNAMIC_LOCALIZATION_AND_INTERPROCEDURAL_PROVENANCE_COMPOSE_INTO_REPAIR_SEARCH",
+    "GUIDED_SINGLE_EDIT_REPAIR_CAN_BE_ACCEPTED_AFTER_VERIFICATION",
+    "GUIDED_NONMONOTONIC_CROSS_FILE_TWO_EDIT_REPAIR_CAN_BE_FOUND",
+    "CONTROLLED_CASE_SHOWS_GUIDED_CANDIDATE_ITEM_AND_PAIR_SPACE_REDUCTION_WITH_VALID_REPAIR_PRESERVED",
+    "FINAL_DOUBLE_REPLAY",
+    "SOURCE_RESTORATION",
+    "DETERMINISTIC_REPLAY",
+    "ZERO_EXTERNAL_RUNTIME_COGNITION",
+    "ZERO_INCREMENTAL_SPEND"
+  ],
+  "hard_nonclaims": [
+    "NO_UNIVERSAL_SOFTWARE_REPAIR_COMPLETENESS",
+    "NO_GENERAL_SEMANTIC_CAUSALITY_PROOF",
+    "NO_CLAIM_GUIDANCE_ALWAYS_REDUCES_SEARCH",
+    "NO_ARBITRARY_EDIT_BASIS_COMPLETENESS",
+    "NO_NON_PYTHON_SUPPORT",
+    "NO_HIDDEN_REQUIREMENTS_OR_GENERAL_MERGEABILITY_PROOF",
+    "NO_FRONTIERCODE_SCORE_OR_ACCEPTANCE_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_score_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
