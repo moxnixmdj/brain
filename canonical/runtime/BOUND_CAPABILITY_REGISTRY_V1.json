@@ -4723,6 +4723,91 @@
         "external_general_purpose_model_runtime_dependency_count": 0,
         "incremental_spend_usd": 0
       }
+    },
+    "python.software.request.acceptance.independent.v1": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "cost": 1,
+      "incremental_spend_usd": 0,
+      "requires": [
+        "raw_task.text.available",
+        "repository.tree.available"
+      ],
+      "provides": [
+        "python.software.request.acceptance.executable_or_unbound",
+        "python.software.request.acceptance.independent_file_measurement",
+        "python.software.request.acceptance.baseline_scope_measurement",
+        "python.software.request.acceptance.stop_gate"
+      ],
+      "keywords": [
+        "python",
+        "software",
+        "request",
+        "acceptance",
+        "specification",
+        "scope",
+        "negative requirement",
+        "baseline",
+        "independent verification",
+        "test oracle",
+        "file",
+        "ast"
+      ],
+      "adapter_module": "python_request_acceptance_model_v3",
+      "entrypoint": "run",
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "limitations": [
+        "Bounded source-grounded request grammar only: file existence/absence, literal presence/absence, Python parse, explicit Python test-file pass, exact changed-path subset, and path-unchanged requirements.",
+        "Unsupported or ambiguous request semantics remain explicit UNBOUND and block repair-stop authorization; passing existing tests cannot erase them.",
+        "Scope verification requires an exact content-addressed repository baseline manifest. The baseline hash proves content identity, not that capture occurred before repair; pre-repair freshness/time authority must come from the calling execution protocol.",
+        "Explicit test predicates require the test file to be unchanged from the baseline and reject repository side effects during execution.",
+        "No arbitrary natural-language semantic completeness, arbitrary patch-search completeness, cross-language generalization, general mergeability proof, FrontierCode score authority, or terminal authority."
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "python.software.request.acceptance.independent.v1",
+          "request_text": "${input.request_text}",
+          "baseline_manifest": "${input.baseline_manifest}",
+          "timeout_s": 20
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "repair_stop_authorized_by_this_capability",
+          "value": true
+        }
+      },
+      "source": {
+        "type": "brain_owned_python_composition",
+        "adapter_path": "canonical/runtime/bound_capabilities/python_request_acceptance_model_v3.py",
+        "exact_adapter_git_blob_sha": "e0e2e5e2fd5c34e5a9b79dcada24a63f84123249",
+        "composed_verified_substrates": [
+          "canonical/runtime/lossless_raw_task_contract_v1.py",
+          "canonical/runtime/explicit_requirement_index_v2.py",
+          "canonical/runtime/instruction_constraint_compiler_v1.py"
+        ],
+        "helper_paths": [
+          "canonical/runtime/bound_capabilities/python_request_acceptance_model_v1.py",
+          "canonical/runtime/bound_capabilities/python_request_acceptance_model_v2.py"
+        ],
+        "model_dependency_count": 0,
+        "external_general_purpose_model_runtime_dependency_count": 0
+      },
+      "verification": {
+        "independently_verified": true,
+        "receipt_path": "canonical/verification/PYTHON_REQUEST_ACCEPTANCE_MODEL_V3_VERIFY_20261011_V1.json",
+        "runtime_git_blob_sha": "e0e2e5e2fd5c34e5a9b79dcada24a63f84123249",
+        "heldout_test_git_blob_sha": "57b535b8356a62b6af7bbc73e95d36744bb6e25b",
+        "heldout_tests_passed": 10,
+        "verifier_authored_adversarial_passed": 5,
+        "model_dependency_count": 0,
+        "external_general_purpose_model_runtime_dependency_count": 0,
+        "incremental_spend_usd": 0,
+        "benchmark_cases_consumed": 0
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
