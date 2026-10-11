@@ -171,3 +171,4 @@ jobs:
 
 # carrier: isolated-self-hosted-linux-x64-brain-regression-exact-subject-auto-restart-on-canonical-drift-20261011-v6
 # receipt: log-and-check-summary-authoritative-for-canonicalization__artifact-storage-not-required
+# verification-probe: full-current-main-stable-pr-20261011-v1
