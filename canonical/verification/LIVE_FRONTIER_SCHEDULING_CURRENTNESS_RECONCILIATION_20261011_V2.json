@@ -1,0 +1,129 @@
+{
+  "schema": "PROJECT_BRAIN_LIVE_FRONTIER_SCHEDULING_CURRENTNESS_RECONCILIATION_20261011_V2",
+  "date": "2026-10-11",
+  "status": "PASS__RESIDUAL_LIVE_SCHEDULING_CURRENTNESS_RECONCILED__NATIVE_GIT_TREE_BOUND__INDEPENDENT_SEMANTIC_REPLAY_47_OF_47__ZERO_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "base_main_commit": "31f82e6ee004cbf2f08a9c9b5ff6c6f45d2fed06",
+    "base_reconciliation": "canonical/verification/V10_PROFESSIONAL_CURRENTNESS_RECONCILIATION_VERIFY_20261011_V1.json",
+    "base_reconciliation_git_blob_sha": "2b4e494a5c15f3f3c741ae399c129622c3158eb6",
+    "branch": "successor/live-frontier-residual-currentness-20261011-v2",
+    "pre_receipt_head": "e2abb5d102b4cbe9ab7f093f4074d04c93c7fa55",
+    "tree_sha": "78ba01c223ff53ba4275ebd734bb817da2ff72ea"
+  },
+  "residual_problem": {
+    "already_closed_by_base_reconciliation": [
+      "PROFESSIONAL_PROPERTY_TRUTH_24_OF_24",
+      "PROFESSIONAL_OPEN_EXECUTION_AND_SEMANTIC_LEAVES_ZERO",
+      "PROFESSIONAL_PRIMARY_EDGE_REDUCED_TO_FULL_PRIVATE_CURRENT_MAIN_REGRESSION",
+      "ZERO_STEP_CARRIER_FAILURE_CLASSIFIED_AS_EXTERNALITY"
+    ],
+    "still_stale_after_base_reconciliation": [
+      "LIVE_FRONTIER_ID_ENCODED_12_OF_24",
+      "SOLVED_PROFESSIONAL_PROPERTY_TRUTH_DEPLETION_REMAINED_ACTIVE_CANDIDATE_WITH_9_OF_24_SNAPSHOT",
+      "ASSURANCE_CANDIDATE_RETAINED_SUPERSEDED_PROFESSIONAL_DOMAIN_SEMANTIC_EVIDENCE_PREREQUISITE",
+      "BYTES_ACTIVE_CANDIDATE_AND_MISSION_SNAPSHOT_REMAINED_V31_WHILE_CURRENT_BYTES_AUTHORITY_IS_V32",
+      "R2_AND_ESCAPE_CANDIDATE_SOURCE_BLOBS_WERE_STALE",
+      "LIVE_PARALLEL_CONTROL_REFERENCED_POST_COMPOSITION_V1_INSTEAD_OF_CURRENT_VERIFIED_V2",
+      "DOWNSTREAM_SCHEDULER_AND_MISSION_POINTERS_REQUIRED_REBIND_AFTER_LIVE_FRONTIER_REPAIR"
+    ]
+  },
+  "current_authorities": {
+    "professional": {
+      "path": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
+      "git_blob_sha": "219fcd3aab318bde5d64e955a430ea7e60d7bf8e",
+      "property_truth": 24,
+      "open_execution": 0,
+      "open_semantic": 0
+    },
+    "assurance": {
+      "path": "canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json",
+      "git_blob_sha": "27acc7e80c0b85a778b8f8dbbd77aefe312ceef8",
+      "remaining_gate": "FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION",
+      "carrier_wake_required": true
+    },
+    "residual_reuse": {
+      "path": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
+      "git_blob_sha": "fbc6d0517869923bbf0ee848d921db1f203a7a39",
+      "active_gap_a": 12,
+      "active_gap_b": 0,
+      "parked": 1
+    },
+    "r2": {
+      "path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+      "git_blob_sha": "91a2000e0972bc5ce4c03f9a2dcaed13a822ad58",
+      "general_mechanism_closed": true
+    },
+    "bytes": {
+      "path": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
+      "git_blob_sha": "22bb42347a8c823f057dc1dcbe38e1e9b2d3c5b1",
+      "frontier": "V32",
+      "raw_python_source_bytes": 1844477,
+      "qualification": "10350/10350"
+    },
+    "parallel_runtime": {
+      "path": "canonical/runtime/capability_parallel_frontier_post_composition_v2.py",
+      "git_blob_sha": "b8a86551545a3ecfe8ba8d6fa44d2347703aa42d"
+    },
+    "parallel_verification": {
+      "path": "canonical/verification/CAPABILITY_PARALLEL_POST_COMPOSITION_V2_VERIFY_20261010_V1.json",
+      "git_blob_sha": "e14810a95bd2cfdeecc3fc1737a26c1dd738449d"
+    }
+  },
+  "repaired_native_git_blobs": {
+    "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json": "ca65fd89a12c89b592944b11507a3bc00ec5340c",
+    "canonical/governance/CURRENT_DEVELOPMENT_SCHEDULER.json": "9a3ca93013543e3c0944bd2f16d17a69c8727da3",
+    "canonical/governance/CURRENT_MISSION_OBJECTIVE.json": "3a35d3e688ba343c50287ff17f38decd8c299735"
+  },
+  "native_git_tree_verification": {
+    "method": "GITHUB_NATIVE_COMMIT_TREE_READ",
+    "tree_sha": "78ba01c223ff53ba4275ebd734bb817da2ff72ea",
+    "result": "PASS__ALL_REPAIRED_PATHS_PRESENT_AT_DECLARED_NATIVE_GIT_BLOB_IDS"
+  },
+  "repairs": [
+    "REMOVE_SOLVED_PROFESSIONAL_PROPERTY_TRUTH_DEPLETION_FROM_ACTIVE_LIVE_CANDIDATES",
+    "MARK_SOLVED_PROFESSIONAL_DEPLETION_EXCLUDED_CLOSED_24_OF_24",
+    "REDUCE_ASSURANCE_LIVE_CANDIDATE_TO_FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION_ONLY",
+    "BIND_ASSURANCE_CARRIER_WAKE_WITHOUT_REGRESSION_PASS_OR_FAIL_INFERENCE",
+    "ADVANCE_BYTES_LIVE_CANDIDATE_AND_MISSION_SNAPSHOT_FROM_V31_TO_CURRENT_V32",
+    "REBIND_R2_ESCAPE_PROFESSIONAL_ASSURANCE_AND_BYTES_SOURCE_BLOBS_IN_LIVE_SCOPE",
+    "BIND_LIVE_PARALLEL_CONTROL_TO_VERIFIED_POST_COMPOSITION_V2",
+    "REBIND_SCHEDULER_TO_REPAIRED_LIVE_FRONTIER_AND_MARK_V9_R12_EDGE_HISTORICAL",
+    "REBIND_MISSION_LIVE_SCHEDULER_R2_AND_BYTES_CURRENTNESS_POINTERS"
+  ],
+  "independent_semantic_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-professional-hard-defect-verify-20261010",
+    "carrier_id": "sprite-1bbb86ed-1f7c-409f-8397-fadc4de7a62a",
+    "isolated_path": "/home/sprite/verify-live-frontier-v2",
+    "status": "PASS__INDEPENDENT_SEMANTIC_REPLAY__47_OF_47__ZERO_CREDIT",
+    "checks_run": 47,
+    "checks_passed": 47,
+    "transport_limitation": "CONNECTOR_MATERIALIZATION_IS_NOT_NATIVE_GIT_BYTE_PRESERVING__SPRITE_REPLAY_PROVES_PARSED_SEMANTIC_INVARIANTS_ONLY__NATIVE_GIT_OBJECT_IDS_ARE_BOUND_SEPARATELY_BY_GITHUB_TREE_READ"
+  },
+  "preserved_gates": {
+    "full_private_current_main_regression_open": true,
+    "regression_execution_carrier_blocked": true,
+    "regression_pass": false,
+    "regression_fail_proved": false,
+    "uvck_live_default": false,
+    "execution_authority": false,
+    "promotion_authority": false,
+    "terminal_authority": false
+  },
+  "hard_nonclaims": [
+    "NO_NEW_PROFESSIONAL_PROPERTY_TRUTH_CREDIT",
+    "NO_FULL_PRIVATE_CURRENT_MAIN_REGRESSION_PASS",
+    "NO_FULL_PRIVATE_CURRENT_MAIN_REGRESSION_FAIL",
+    "NO_UVCK_PROMOTION",
+    "NO_NEW_CAPABILITY_OR_PRIMITIVE_CREDIT",
+    "NO_EXACT_BYTE_SPRITE_REPLAY_CLAIM"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "promotion_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
