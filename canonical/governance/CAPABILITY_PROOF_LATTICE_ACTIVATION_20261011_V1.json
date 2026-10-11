@@ -36,5 +36,6 @@
     "ownership_credit_delta": 0,
     "terminal_credit_delta": 0
   },
-  "rebase_current_main_commit": "df18292bdec1df6c2a5fa717fa86f7875b0c9b1f"
+  "rebase_current_main_commit": "df18292bdec1df6c2a5fa717fa86f7875b0c9b1f",
+  "merged_current_main_commit": "1b220e06ba5f4319d18cdbe26fd78fd6f1111284"
 }

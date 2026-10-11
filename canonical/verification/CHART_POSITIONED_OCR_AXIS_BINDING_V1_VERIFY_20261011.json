@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_CHART_POSITIONED_OCR_AXIS_BINDING_V1_VERIFY_20261011",
+  "date": "2026-10-11",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_BRAIN_BLOBS__5_OF_5",
+  "capability_id": "chart.raster.positioned_ocr_axis_binding.v1",
+  "brain": {
+    "repository": "moxnixmdj/brain",
+    "pull_request": 4598,
+    "head_commit": "28e8a5b080e64bac02281e81f0337453f24cab0e",
+    "runtime_blob_sha": "1ccab094a14ae261a01912ad6e573ffc09fa8b35",
+    "tests_blob_sha": "f3d7655c1912ded1ef172dcaaa75a3684e9dd729",
+    "positioned_ocr_blob_sha": "19f3087489ce7f6f935fc7baaebdc8cd672f4b62",
+    "base_ocr_blob_sha": "45714d7a0160802d986042910da1c4c6462676e5",
+    "scene_graph_blob_sha": "258999b07287287db2037af777973d5bbb39116d"
+  },
+  "independent_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2704,
+    "merged_commit_sha": "87fcfd67ae33801f76bb7efdae63fe843a44c04f",
+    "workflow": "Verify Chartography Brain-native positioned OCR axis binding V1",
+    "workflow_run_id": 38150013801,
+    "workflow_job_id": 114501323448,
+    "conclusion": "success",
+    "artifact_id": 11706208084,
+    "artifact_name": "chart-positioned-ocr-axis-binding-v1-verification",
+    "artifact_zip_sha256": "05f7101d04d3ee4d7c556845f5326166252142c468b43030ac425e9ac999e4de"
+  },
+  "verified_properties": [
+    "EXACT_BRAIN_RUNTIME_AND_DEPENDENCY_BLOBS_BOUND",
+    "NUMERIC_TICK_GEOMETRIC_AXIS_CLASSIFICATION",
+    "LINEAR_AXIS_CALIBRATION",
+    "LOG10_AXIS_CALIBRATION",
+    "ROBUST_OCR_OUTLIER_REJECTION",
+    "CONFLICTING_PIXEL_LABELS_FAIL_CLOSED",
+    "NONNUMERIC_LABELS_NOT_PROMOTED_TO_TICKS",
+    "MODEL_INDEPENDENT_RUNTIME",
+    "ZERO_EXTERNAL_GENERAL_PURPOSE_MODEL_RUNTIME_COGNITION",
+    "ZERO_HELDOUT_CHARTOGRAPHY_CONSUMPTION"
+  ],
+  "focused_tests": {
+    "passed": 5,
+    "failed": 0
+  },
+  "external_general_purpose_model_runtime_dependency_count": 0,
+  "donor_general_purpose_model_runtime_dependency_count": 0,
+  "heldout_chartography_cases_consumed": 0,
+  "heldout_chartography_gold_consumed": 0,
+  "incremental_spend_usd": 0,
+  "benchmark_score_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "hard_nonclaims": [
+    "NO_CHARTOGRAPHY_GE_89_SCORE",
+    "NO_100_TASK_COVERAGE",
+    "NO_GENERAL_CHART_DOMAIN_SEMANTIC_AUTHORITY",
+    "NO_GENERAL_LEGEND_BINDING_AUTHORITY",
+    "NO_TERMINAL_CREDIT"
+  ]
+}

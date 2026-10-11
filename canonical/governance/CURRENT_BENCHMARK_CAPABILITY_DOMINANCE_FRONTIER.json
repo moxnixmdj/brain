@@ -259,9 +259,9 @@
     "minimum_proof_cover_compiler_path": "canonical/runtime/proof_coverage_compiler.py",
     "minimum_proof_cover_compiler_git_blob_sha": "f9b7eb23ec749d542392f36d89ddf69d9f8d3c87",
     "activation_path": "canonical/governance/CAPABILITY_PROOF_LATTICE_ACTIVATION_20261011_V1.json",
-    "activation_git_blob_sha": "f839337c43cdf07944cece6841bf679ff0e79073",
+    "activation_git_blob_sha": "29f4630da045a63cceea8158681bd55c228c04c2",
     "verification_path": "canonical/verification/BENCHMARK_CAPABILITY_DOMINANCE_V2_LOCAL_VERIFICATION_20261011_V1.json",
-    "verification_git_blob_sha": "dbc88d23fb69ecad753954b7fabe5a1c0112f906",
+    "verification_git_blob_sha": "16b9e8ae6b336655d6eca0e4f2c766158f048e74",
     "selection_rule": "EXACT_MINIMUM_PROOF_COVER_IF_AVAILABLE__ELSE_MAX_VERIFIED_MARGINAL_PROPOSITION_CLOSURE__THEN_REUSABLE_CAPABILITY_BREADTH__THEN_WALL_CLOCK_AND_REALITY_COST",
     "execution_authority": false,
     "promotion_authority": false

@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261011_V76",
+  "date": "2026-10-11",
+  "status": "RANK23_UNREAD_UNSTARTED__BENCHMARK_AUDIT_FROZEN__CAPABILITY_CLOSURE_REQUIRED",
+  "predecessor": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261011_V75.json",
+    "git_blob_sha": "a4e0622f8b7a62a5a738909dde3daf358224e731"
+  },
+  "freeze": {
+    "path": "canonical/governance/TB_SCIENCE_BENCHMARK_AUDIT_FREEZE_20261011_V1.json",
+    "git_blob_sha": "277dfaecf8fba6bf0bdd2abef8a6a255ade7225e"
+  },
+  "current_result": {
+    "path": "canonical/verification/TB_SCIENCE_RANK22_FINAL_ZERO_VERIFY_20261011_V1.json",
+    "git_blob_sha": "9c5e9a6ec8c67109e49913dabb512bb50a6482d7",
+    "reward": 0,
+    "final_classification": "FINAL_ZERO"
+  },
+  "counts": {
+    "benchmark_trials_consumed": 20,
+    "consumed_successes_final": 0,
+    "consumed_failures_final": 20,
+    "started_result_pending": 0,
+    "finalized_slots": 20,
+    "active_in_flight_slot_count": 0
+  },
+  "current_slot": {
+    "ledger_schedule_rank": 23,
+    "frozen_manifest_schedule_order": 22,
+    "task_rank": 22,
+    "slot_id": "terminal-bench-science/dna-storage-codec::trial-0",
+    "task_digest": "sha256:bde6852289db3f5474aedc96c54aca201d11be6c61f4fef019998b2b689e65ac",
+    "logical_attempt_id": "1dcaac7cec27f93edde5c3ebef2a4c9c3368bea18b3129acef697541121c9545",
+    "execution_claim_binding_digest": "sha256:babd5f94f2ecd1c3b11d0cf17426044fa2d094b87b101ed0b491244ddb8370cf",
+    "task_read": false,
+    "task_started": false,
+    "durable_start_cas_acquired": false,
+    "benchmark_trials_consumed": 0,
+    "result_present": false
+  },
+  "retired_staged_rank23_authority": {
+    "path": "canonical/governance/TB_SCIENCE_RANK23_ONE_SLOT_EXECUTION_AUTHORITY_20261011_V1.json",
+    "git_blob_sha": "ee4092875cfe187bb414fd4ca881c95ac73e6e24",
+    "was_effective": false,
+    "retired_before_public_reseal": true,
+    "retired_before_task_read": true,
+    "retired_before_start": true
+  },
+  "scheduler_state": "FROZEN_FOR_BENCHMARK_INDEPENDENT_CAPABILITY_DEVELOPMENT",
+  "execution_authority": false,
+  "execution_authority_effective": false,
+  "task_read_authority": false,
+  "task_read_authority_effective": false,
+  "activation_authority": false,
+  "retry_authority": false,
+  "replacement_authority": false,
+  "replay_authority": false,
+  "result_credit_authority": false,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "benchmark_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "next": "CLOSE_GENERAL_RAW_TASK_AND_RESOURCE_TO_TYPED_SCIENTIFIC_CAPABILITY_COMPILATION__RUN_UNSEEN_SHADOW_GAUNTLET__ONLY_THEN_AUTHORIZE_ONE_FRESH_BENCHMARK_AUDIT"
+}

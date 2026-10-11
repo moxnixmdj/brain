@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_V5_CORRECTED_TRANSPORT_RESULT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "CORRECTED_EXACT_POLICY_TRANSPORT_PROBE__BING_HEALTHY__WIKIPEDIA_RATE_LIMIT_CONFIRMED",
+  "subject": {
+    "v5_blob": "ae6006af1e578b0690357756e0b899a10323a5f4",
+    "adapter_blob": "fa955ccc5e4f3d29aa79e2b380f713d30ee46e8f",
+    "policy_blob": "d2a2427b483fe1c06c6b1e6bc98d72bf07e7a730"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2689,
+    "branch": "diag-hle-v5-transport-receipts-20261011",
+    "head_sha": "6e46a51d30288aa9ce2e89d98f88bf001c6d22b9",
+    "workflow_run_id": 38149923561,
+    "workflow_job_id": 114501055976,
+    "conclusion": "success"
+  },
+  "probe": {
+    "already_consumed_rows": [
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34
+    ],
+    "bing": {
+      "queries": 35,
+      "passed": 35,
+      "failed": 0,
+      "total_results": 245
+    },
+    "wikipedia": {
+      "queries": 35,
+      "passed": 10,
+      "failed": 25,
+      "total_results": 48
+    },
+    "wikipedia_failure": {
+      "error_class": "HTTPError",
+      "http_code": 429,
+      "observed_retry_after_seconds_range": [
+        37,
+        42
+      ],
+      "first_observed_on_row": 27
+    }
+  },
+  "causal_conclusion": [
+    "THE_OLD_BING_FILENOTFOUND_RECEIPTS_WERE_A_MISSING_POLICY_PACKAGING_BUG_AND_ARE_DEMOTED",
+    "WITH_THE_EXACT_POLICY_PRESENT_BING_RSS_IS_HEALTHY_ON_ALL_35_PROBED_QUERIES",
+    "WIKIPEDIA_SEARCH_API_THROTTLES_AFTER_A_SMALL_BURST_WITH_EXPLICIT_HTTP_429",
+    "PER_QUERY_WIKIPEDIA_API_SEARCH_IS_NOT_A_SCALABLE_HLE_RETRIEVAL_TRANSPORT",
+    "SLEEPING_FOR_RETRY_AFTER_ON_EVERY_BURST_IS_NOT_THE_MINIMUM_WALL_CLOCK_REPAIR"
+  ],
+  "next_action": "REPLACE_PER_QUERY_WIKIPEDIA_API_SEARCH_WITH_A_NONTHROTTLED_OR_BOUNDED_ALTERNATIVE_THAT_PRESERVES_ORTHOGONAL_WIKIPEDIA_EVIDENCE",
+  "external_model_calls_total": 0,
+  "hle_questions_consumed": 0,
+  "hle_gold_consumed": 0,
+  "hle_score_credit": 0,
+  "incremental_spend_usd": 0
+}

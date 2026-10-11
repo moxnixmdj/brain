@@ -5,7 +5,7 @@
   "branch_base_main_commit": "df18292bdec1df6c2a5fa717fa86f7875b0c9b1f",
   "tested_snapshot_commit": "574e0b0c556d4eb100398ab54a93488de2327b20",
   "current_main_dependency_revalidation": {
-    "status": "PASS__ALL_LOAD_BEARING_DEPENDENCY_BLOBS_IDENTICAL_TO_TESTED_SNAPSHOT_AND_CURRENT_BRANCH_BASE",
+    "status": "PASS__ALL_LOAD_BEARING_DEPENDENCY_BLOBS_IDENTICAL_TO_TESTED_SNAPSHOT_AND_MERGED_CURRENT_MAIN",
     "benchmark_capability_dominance_scheduler_v1": "c230258768141d44dc986f6d72d0e6a307532655",
     "proof_coverage_compiler": "f9b7eb23ec749d542392f36d89ddf69d9f8d3c87",
     "benchmark_output_information_equivalence_gate_v1": "3b0237ddca07967cc7b793abe633b2734d3ddd14"
@@ -60,5 +60,6 @@
     "ownership_credit_delta": 0,
     "terminal_credit_delta": 0
   },
-  "rebase_current_main_commit": "df18292bdec1df6c2a5fa717fa86f7875b0c9b1f"
+  "rebase_current_main_commit": "df18292bdec1df6c2a5fa717fa86f7875b0c9b1f",
+  "merged_current_main_commit": "1b220e06ba5f4319d18cdbe26fd78fd6f1111284"
 }
