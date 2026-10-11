@@ -14,7 +14,7 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: full-private-current-main-regression-latest
+  group: full-private-current-main-regression-${{ github.event_name }}-${{ github.event_name == 'pull_request' && github.event.pull_request.number || 'main' }}
   cancel-in-progress: true
 
 permissions:
