@@ -149,7 +149,7 @@ def _calc(instruction: str):
     match = re.search(r"(?:set|put|write).*?\b([A-Z]+\d+)\b.*?(?:to|as|=)\s+[\x22\x27]?([^\x22\x27;]+)", instruction, re.I)
     if match:
         return _app_op("libreoffice_calc", "set_cell_value", {
-            "cell": match.group(1).upper(), "value": match.group(2).strip()
+            "cell": match.group(1).upper(), "value": match.group(2).strip().rstrip(".,")
         })
     match = re.search(r"sort.*?column\s+([A-Z]+).*?\b(ascending|descending)\b", instruction, re.I)
     if match:
@@ -220,7 +220,7 @@ def _code(instruction: str):
             "uninstall": "uninstall_extension",
             "disable": "disable_extension",
         }[match.group(1).lower()]
-        return _app_op("code", operation, {"extension_id": match.group(2)})
+        return _app_op("code", operation, {"extension_id": match.group(2).rstrip(".")})
     match = re.search(r"(?:sync|synchronization).*?\b(on|off)\b", instruction, re.I)
     if match:
         return _app_op("code", "toggle_sync", {"state": match.group(1).lower()})
