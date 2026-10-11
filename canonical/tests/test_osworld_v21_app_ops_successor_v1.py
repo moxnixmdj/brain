@@ -65,7 +65,7 @@ def test_overlay_impress_code_vlc_routes():
 
     out=action(decide(state("Install extension ms-python.python.", "Visual Studio Code")))
     assert out["operation"]=="install_extension"
-    assert out["args"]["extension_id"]=="ms-python.python."
+    assert out["args"]["extension_id"]=="ms-python.python"
 
     out=action(decide(state("Pause the video.", "VLC media player")))
     assert out["operation"]=="pause"
@@ -167,3 +167,9 @@ def test_adapter_v2_executes_app_op_once_and_returns_wait():
     assert response=="do it"
     assert actions==["WAIT"]
     assert fake.calls==[{"app":"vlc","operation":"pause","args":{}}]
+
+
+def test_calc_unquoted_value_drops_sentence_punctuation():
+    out=action(decide(state("Set A1 to 42.", "LibreOffice Calc")))
+    assert out["operation"]=="set_cell_value"
+    assert out["args"]=={"cell":"A1","value":"42"}
