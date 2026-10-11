@@ -6,7 +6,7 @@
   "mission_lock": "SOLVE_ONLY_AUTOMATIONBENCH_GE_40",
   "target_reference": {
     "reference_system": "Claude Opus 5.5",
-    "reference_score_percent": 40.0,
+    "reference_score_percent": 40,
     "reference_origin": "ZAPIER_RUN_REPORTED_BY_ANTHROPIC",
     "fallback_models_used": false,
     "publicly_bound_facts": [
@@ -86,7 +86,10 @@
     "exact_official_candidate_private_result_observed": false,
     "owner_reference_epoch_match_or_bridge_observed": false,
     "zapier_owner_run_reply_observed": false,
-    "predicate_closed": false
+    "predicate_closed": false,
+    "private_evaluation_route_publicly_confirmed": true,
+    "request_acceptance_observed": false,
+    "submission_interface_observed": false
   },
   "accounting": {
     "incremental_spend_usd": 0,
@@ -106,5 +109,26 @@
     "NO_CLAIM_OPUS55_40_0_IS_PUBLICLY_BOUND_TO_657_TASKS",
     "NO_CLAIM_PUBLIC_600_PREDICTS_PRIVATE_PERFORMANCE",
     "NO_PRIVATE_TASK_CONTENT_WAS_READ"
-  ]
+  ],
+  "official_request_route": {
+    "status": "PUBLICLY_CONFIRMED_BY_ZAPIER__ELIGIBILITY_AND_EXECUTION_DETAILS_PENDING",
+    "primary_source_url": "https://zapier.com/blog/introducing-automationbench/",
+    "primary_source_observation_date": "2026-10-11",
+    "primary_source_fact": "VERIFIED_PRIVATE_SET_EVALUATION_IS_AVAILABLE_TO_MODEL_PROVIDERS_BY_REQUEST",
+    "implications": [
+      "PRIVATE_EVALUATION_ROUTE_EXISTENCE_IS_NO_LONGER_UNKNOWN",
+      "NO_NEED_TO_SEARCH_FOR_A_PUBLIC_PRIVATE_TASK_DOWNLOAD",
+      "NEXT_EXTERNAL_DECISION_IS_REQUEST_ACCEPTANCE_AND_SUBMISSION_INTERFACE"
+    ],
+    "still_unknown": [
+      "WHETHER_AN_INDEPENDENTLY_CONFIGURED_EXTERNAL_SYSTEM_COUNTS_AS_AN_ELIGIBLE_MODEL_PROVIDER_OR_PARTNER",
+      "EXACT_SUBMISSION_OR_INTEGRATION_INTERFACE",
+      "WHETHER_THE_OWNER_RUN_CAN_BE_PERFORMED_AT_ZERO_INCREMENTAL_COST",
+      "EXACT_OPUS55_40_0_REFERENCE_EPOCH_POPULATION_AND_PROTOCOL_BINDING_OR_BRIDGE",
+      "WHEN_OR_WHETHER_ZAPIER_WILL_ACCEPT_THIS_REQUEST"
+    ],
+    "request_already_sent": true,
+    "request_channel": "DIRECT_EMAIL_TO_AUTOMATIONBENCH_AUTHORS",
+    "request_requires_private_task_disclosure": false
+  }
 }
