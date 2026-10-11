@@ -1,0 +1,100 @@
+{
+  "schema": "PROJECT_BRAIN_SCIENTIFIC_SEMANTIC_COMPILER_AND_RAW_RESOURCE_V2_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__TWO_ENVIRONMENT_CLEAN_REPLAY__BOUNDED_SEMANTIC_PARAPHRASE_AND_STRUCTURED_ROUTING",
+  "subjects": {
+    "semantic_compiler": {
+      "path": "canonical/runtime/scientific_semantic_compiler_v1.py",
+      "git_blob_sha": "f4e78691d049ad01dc5d1cf827e4a295051e1f4f",
+      "test_path": "canonical/tests/test_scientific_semantic_compiler_v1.py",
+      "test_git_blob_sha": "ecbcc8f463be5b36b2145913e3da721ff0c73f6a"
+    },
+    "raw_resource_v2": {
+      "path": "canonical/runtime/general_scientific_raw_resource_pipeline_v2.py",
+      "git_blob_sha": "51e7b8c75a2b62d5aa765661809276a38d11b114",
+      "test_path": "canonical/tests/test_general_scientific_raw_resource_pipeline_v2.py",
+      "test_git_blob_sha": "b8d0b16c4157d533d8ef33cc8d75eefc336372b9"
+    }
+  },
+  "key_dependencies": [
+    [
+      "canonical/runtime/h100_zero_learned_semantic_paraphrase_v1.py",
+      "db4e836b4104a9b311c2c08ab2d8675bfc0d0760"
+    ],
+    [
+      "canonical/runtime/scientific_numeric_task_compiler_v1.py",
+      "570f7a4d08ee9c6663111df37c04080ee8f4562f"
+    ],
+    [
+      "canonical/runtime/general_scientific_raw_resource_pipeline_v1.py",
+      "442feb08dbbae2647af15601e4bb378fb1f2d5e6"
+    ],
+    [
+      "canonical/runtime/general_scientific_capability_controller_v1.py",
+      "992345186cc51fff143a74f1e76f01ae897ac967"
+    ],
+    [
+      "canonical/runtime/lossless_raw_task_contract_v1.py",
+      "53a440fccf91aa08f18abfff4f283e5fd18d9fcd"
+    ],
+    [
+      "canonical/runtime/scientific_artifact_contract_v1.py",
+      "ada3a42ddce7e6d899cfb9a8fc2c56049e0de583"
+    ]
+  ],
+  "verification": {
+    "environment_1": {
+      "kind": "PRIVATE_EXISTING_SPRITE",
+      "sprite": "brain-canonical-apply-slice-verify-20261011-v1",
+      "sprite_id": "sprite-03e2d6c1-6a52-4c21-817f-eae043fd842c",
+      "tests_run": 19,
+      "tests_passed": 19,
+      "tests_failed": 0,
+      "errors": 0
+    },
+    "environment_2": {
+      "kind": "PRIVATE_EXISTING_SPRITE",
+      "sprite": "brain-live-runtime-v1-verify-20261008",
+      "sprite_id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13",
+      "tests_run": 19,
+      "tests_passed": 19,
+      "tests_failed": 0,
+      "errors": 0
+    },
+    "exact_new_runtime_blobs_replayed": true,
+    "exact_new_test_blobs_replayed": true
+  },
+  "verified_behaviors": [
+    "existing explicit numeric routes preserved",
+    "zero-learned finite role paraphrase maps multiple input/target phrasings",
+    "semantic roles must ground to actual numeric columns",
+    "one-sided or unsupported semantic cues abstain",
+    "structured rule resources route from structure plus generic scientific action cue",
+    "structured abductive resources route from structure plus generic scientific action cue",
+    "generic nonscientific text abstains",
+    "semantic ambiguity remains fail closed",
+    "paraphrased numeric route executes through verified solver",
+    "generic structured rule and abductive language execute end to end",
+    "periodic route remains verified",
+    "verified artifacts materialize after paraphrased solve"
+  ],
+  "ownership": {
+    "model_dependency_count": 0,
+    "external_model_runtime_calls": 0,
+    "network_dependency_count": 0,
+    "dynamic_code_execution": false,
+    "benchmark_identifier_used_for_routing": false
+  },
+  "hard_nonclaims": [
+    "FINITE_BOUNDED_SEMANTIC_ONTOLOGY_IS_NOT_OPEN_WORLD_NATURAL_LANGUAGE_UNDERSTANDING",
+    "STRUCTURE_PLUS_GENERIC_ACTION_CUE_IS_NOT_ARBITRARY_RESOURCE_SEMANTICS",
+    "NOT_GENERAL_SCIENTIFIC_INTELLIGENCE",
+    "NO_BENCHMARK_SCORE_CLAIM",
+    "NO_RANK23_TASK_READ_OR_START",
+    "NO_TERMINAL_AUTHORITY"
+  ],
+  "benchmark_audit_freeze_preserved": true,
+  "acceptance_credit_delta": 0,
+  "benchmark_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
