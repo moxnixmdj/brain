@@ -70,18 +70,54 @@
       "RUBRIC_SYNTHETIC_MATCH_TRACE",
       "PAIRWISE_JUDGE_ASSIGNMENTS_AND_VERDICTS",
       "FROZEN_SCORER_IMPLEMENTATION_EQUIVARIANCE_OR_UNIQUE_FIT"
+    ],
+    "newly_closed": [
+      "FROZEN_DAY_V1_1_PROTOCOL_IDENTITY",
+      "FROZEN_DAY_HEADLINE_1822",
+      "RUBRIC_SYNTHETIC_COMPARISON_IS_DETERMINISTIC_CROWD_BT_CASE",
+      "FROZEN_ERA_OPUS55_COMPONENT_MAGNITUDES"
+    ],
+    "still_open": [
+      "EXACT_2026_09_22_NUMERIC_COMPONENT_VECTOR_TIMESTAMP_BINDING",
+      "UPSTREAM_BINARY_RUBRIC_VERDICT_VECTOR",
+      "EXACT_RUBRIC_SYNTHETIC_HEAD_TO_HEAD_CONSTRUCTION",
+      "ANALYTICAL_QUALITY_AND_PRESENTATION_FITTED_ETA_VALUES",
+      "PAIRWISE_COMPARISON_GRAPHS_JUDGE_ASSIGNMENTS_AND_REALIZED_VERDICTS",
+      "LOAD_BEARING_FIT_REGULARIZATION_OPTIMIZER_AND_EQUIVARIANCE_FACTS",
+      "BRAIN_SCORE_BEARING_TRACE"
     ]
   },
   "hard_nonclaims": [
     "NO_CLAIM_THE_2026_09_23_COMPONENT_ROW_WAS_BYTE_IDENTICAL_ON_2026_09_22",
     "NO_CLAIM_COMPONENTWISE_MATCH_ALONE_ENTAILS_HEADLINE_1822_WITHOUT_A_BOUND_MONOTONICITY_OR_AGGREGATION_THEOREM",
     "NO_BRAIN_AA_BRIEFCASE_SCORE",
-    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT",
+    "NO_CLAIM_101_OVER_165_OR_606_OVER_990_IS_THE_OFFICIAL_RUBRIC_CHECK_COUNT_WITHOUT_OWNER_OR_PUBLIC_COUNT_AUTHORITY",
+    "NO_CLAIM_SIMPLE_ARITHMETIC_MEAN_OF_COMPONENT_SUMMARIES_REPRODUCES_HEADLINE_ELO"
   ],
   "accounting": {
     "incremental_spend_usd": 0,
     "acceptance_credit_delta": 0,
     "terminal_credit_delta": 0
   },
-  "terminal_authority": false
+  "terminal_authority": false,
+  "frozen_day_protocol": {
+    "aa_methodology_source_url": "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
+    "aa_methodology_retrieved_at": "2026-09-22T07:47:17.990313+00:00",
+    "aa_methodology_sha256": "3b2036f5dc54786604825be70dc3225f8fe0a382d168df4b55a82ef6bc426dc3",
+    "aa_methodology_archive_path": "data/raw/benchmarks/daily-evidence/2026-09-22T07-47-17-816Z/3b2036f5dc5478660482.gz",
+    "aa_methodology_archive_repository": "fstandhartinger/model-market-comparison",
+    "exact_version": "AA-Briefcase v1.1",
+    "crowd_bt": true,
+    "anchor": "GPT-5.5 (medium) at 1000",
+    "rubric_synthetic_comparison_deterministic": true
+  },
+  "frozen_day_headline_archive": {
+    "date": "2026-09-22",
+    "source": "Anthropic Claude Opus 5.5 launch/system-card evidence",
+    "exact_displayed_elo": 1822,
+    "archive_repository": "fstandhartinger/model-market-comparison",
+    "archive_folder": "data/raw/benchmarks/daily-evidence/2026-09-22-claude-opus-5-5/",
+    "note": "DEDICATED_2026_09_22_ARCHIVE_BINDS_HEADLINE_1822_BUT_NOT_NUMERIC_COMPONENT_BREAKDOWN"
+  }
 }
