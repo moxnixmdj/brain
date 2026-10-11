@@ -25,7 +25,7 @@
       },
       {
         "path": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-        "git_blob_sha": "05b0e4abf6c3f329cc34f11be6c0fc1bca55e53c"
+        "git_blob_sha": "513e010a65d9f83a42cff395ad4b196f43305296"
       },
       {
         "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
@@ -156,11 +156,11 @@
       "ready": "BLOCKED_ONLY_BY_FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION"
     },
     {
-      "work_id": "BYTES_EXACT_SYMBOLIC_V71_NEXT_PHYSICAL_CUT",
+      "work_id": "BYTES_EXACT_SYMBOLIC_V72_NEXT_PHYSICAL_CUT",
       "work_type": "EFFICIENCY_IMPROVEMENT",
       "source": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-      "causal_role": "CONTINUE_RESOURCE_REDUCTION_FROM_1707438_RAW_PYTHON_BYTES_USING_SPENT_NEXT78_ONLY__RERANK_BEFORE_NEW_PHYSICAL_CUT__DO_NOT_TOUCH_FROZEN_NEXT79_BEFORE_CUT",
-      "readiness": "ACTIONABLE_WITH_EXISTING_RECONSTRUCTION_AND_QUALIFICATION_MACHINERY__V71_CURRENT__NORMALIZE1_DELEGATION_VERIFIED",
+      "causal_role": "CONTINUE_RESOURCE_REDUCTION_FROM_1699106_RAW_PYTHON_BYTES_USING_SPENT_NEXT79_ONLY__RERANK_BEFORE_NEW_PHYSICAL_CUT__DO_NOT_TOUCH_FROZEN_NEXT80_BEFORE_CUT",
+      "readiness": "ACTIONABLE_WITH_EXISTING_RECONSTRUCTION_AND_QUALIFICATION_MACHINERY__V72_CURRENT__TOKEN_SAFE_NONSEMANTIC_SOURCE_COMPACTION_VERIFIED",
       "claims_new_primitive": false,
       "score_state": "UNBOUND",
       "scheduler_state": "READY_EXECUTION",
@@ -179,19 +179,19 @@
       "vector_evidence": {},
       "read_only_evidence": {
         "source": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-        "source_git_blob_sha": "05b0e4abf6c3f329cc34f11be6c0fc1bca55e53c",
-        "raw_python_source_bytes": 1707438,
-        "B_exec_raw_python_source_bytes": 1710198,
-        "qualification": "19780/19780",
-        "next_action": "RERANK_EXACT_V71_USING_SPENT_NEXT78_ONLY__MAKE_NEW_PHYSICAL_CUT_BEFORE_QUAL_SUCCESSOR_NEXT79_20261011_V1",
-        "next_frozen_qualification": "QUAL_SUCCESSOR_NEXT79_20261011_V1",
-        "next_frozen_library_file_id": "libfile_1da4cb7d823c8191bff1264673c09860",
+        "source_git_blob_sha": "513e010a65d9f83a42cff395ad4b196f43305296",
+        "raw_python_source_bytes": 1699106,
+        "B_exec_raw_python_source_bytes": 1701866,
+        "qualification": "20010/20010",
+        "next_action": "RERANK_EXACT_V72_USING_SPENT_NEXT79_ONLY__MAKE_NEW_PHYSICAL_CUT_BEFORE_QUAL_SUCCESSOR_NEXT80_20261011_V1",
+        "next_frozen_qualification": "QUAL_SUCCESSOR_NEXT80_20261011_V1",
+        "next_frozen_library_file_id": "libfile_c4fe1ecec9188191b1772488a24448b2",
         "independent_verification": "canonical/verification/BYTES_EXACT_SYMBOLIC_MPF_PERTURB_V55_VERIFY_20261011_V1.json",
         "vector_bounds_complete": false,
         "next_frozen_spent": false
       },
-      "ready": "V71_CURRENT_AT_1707438_BYTES__CONTINUE_ONLY_NONCONFLICTING_RESOURCE_PARETO_CUT",
-      "source_git_blob_sha": "05b0e4abf6c3f329cc34f11be6c0fc1bca55e53c"
+      "ready": "V72_CURRENT_AT_1699106_BYTES__CONTINUE_ONLY_NONCONFLICTING_RESOURCE_PARETO_CUT",
+      "source_git_blob_sha": "513e010a65d9f83a42cff395ad4b196f43305296"
     },
     {
       "work_id": "R2_FINANCE_SEMANTIC_ADEQUACY_TAIL",
@@ -570,7 +570,7 @@
     "new_primitive_required": false,
     "terminal_credit_delta": 0
   },
-  "exact_next": "PARALLEL:BYTES_V68_RESOURCE_PARETO_CUT_PLUS_OTHER_NONCONFLICTING_CAPABILITY_FIRST_GENERAL_DEVELOPMENT__PROFESSIONAL_WAKES_ONLY_ON_ZERO_SPEND_CARRIER_STATE_CHANGE_OR_STRONGER_VALID_REGRESSION_RECEIPT",
+  "exact_next": "PARALLEL:BYTES_V72_RESOURCE_PARETO_CUT_PLUS_OTHER_NONCONFLICTING_CAPABILITY_FIRST_GENERAL_DEVELOPMENT__PROFESSIONAL_WAKES_ONLY_ON_ZERO_SPEND_CARRIER_STATE_CHANGE_OR_STRONGER_VALID_REGRESSION_RECEIPT",
   "professional_semantic_v2_successor_claim_batch_current": {
     "status": "INDEPENDENTLY_VERIFIED__CLAIM_AND_SCOPE_GENERATION_COMPLETE__PROPERTY_TRUTH_NEXT",
     "batch": {
@@ -645,12 +645,12 @@
   },
   "bytes_current_frontier": {
     "path": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-    "observed_git_blob_sha": "05b0e4abf6c3f329cc34f11be6c0fc1bca55e53c",
-    "status": "ACTIVE_RESEARCH__NORMALIZE1_DELEGATE_V71_FRONTIER__SUCCESSOR_READY",
-    "raw_python_source_bytes": 1707438,
-    "B_exec_raw_python_source_bytes": 1710198,
-    "qualification": "19780/19780",
-    "next": "Rerank exact V71 using spent NEXT78 only; make a new physical cut before touching QUAL_SUCCESSOR_NEXT79_20261011_V1.",
+    "observed_git_blob_sha": "513e010a65d9f83a42cff395ad4b196f43305296",
+    "status": "ACTIVE_RESEARCH__TOKEN_SAFE_BLANKLINE_V72_FRONTIER__SUCCESSOR_READY",
+    "raw_python_source_bytes": 1699106,
+    "B_exec_raw_python_source_bytes": 1701866,
+    "qualification": "20010/20010",
+    "next": "Rerank exact V72 using spent NEXT79 only; make a new physical cut before touching QUAL_SUCCESSOR_NEXT80_20261011_V1.",
     "promotion_credit": 0,
     "observed_snapshot_is_non_authoritative_for_v15_runtime": true
   }
