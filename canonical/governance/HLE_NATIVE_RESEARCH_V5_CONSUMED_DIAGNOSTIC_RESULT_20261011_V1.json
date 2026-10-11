@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_NATIVE_RESEARCH_V5_CONSUMED_DIAGNOSTIC_RESULT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "CONSUMED_PUBLIC_DIAGNOSTIC_FAILED__NO_FRESH_HOLDOUT_OR_HLE_EXECUTION",
+  "frozen_subject": {
+    "preexposure_v2_commit": "33d151ab53993da45962856a118e7fb77ff95ac2",
+    "research_solver_v5_blob": "6fd57f4f3591e4ab09b3e16ffbae399f7aaf93ae",
+    "evidence_synthesis_v3_blob": "ed2e0b572b33a5ed3c84d748689ee71645460dbf",
+    "question_contract_v3_blob": "0865d6baf59b465cf121963dbadd5409a1702671"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2691,
+    "workflow_run_id": 38144893143,
+    "workflow_job_id": 114486075479,
+    "exact_blob_binding_passed": true,
+    "compile_passed": true,
+    "synthetic_tests": {
+      "question_contract_v3": "11/11 PASS",
+      "evidence_synthesis_v3": "10/10 PASS",
+      "research_solver_v5": "5/5 PASS"
+    }
+  },
+  "diagnostic": {
+    "dataset": "ai-safety-institute/trivia_qa_verified",
+    "split": "validation",
+    "slice": "rows_25_to_49_ALREADY_CONSUMED",
+    "sample_size": 25,
+    "attempted": 8,
+    "attempt_rate": 0.32,
+    "normalized_exact": 0,
+    "normalized_exact_rate": 0,
+    "required_attempt_rate": 0.25,
+    "required_normalized_exact_rate": 0.2,
+    "gate_passed": false,
+    "artifact_id": 11704351330,
+    "artifact_zip_sha256": "1cbfbcdda29a526694c0c04c06a62049bc12447a8dfed95ae95a497e18822366"
+  },
+  "causal_findings": [
+    "ANSWER_SLOT_CLASSIFICATION_IMPROVED_BUT_DID_NOT_REPAIR_SELECTION_ACCURACY",
+    "SINGLE_TYPED_RELATION_SOURCE_REMAINS_TOO_WEAK_TO_ESTABLISH_OBJECTIVE_RELEVANCE",
+    "COUNTRY_DEMONYM_EXTRACTION_CAN_SELECT_INCIDENTAL_COUNTRIES_FROM_RETRIEVED_TEXT",
+    "TERM_RELATION_EXTRACTION_CAN_SELECT_DICTIONARY_OR_META_TEXT",
+    "CROSS_VIEW_TITLE_ROUTE_ABSTAINED_ON_MANY_SIMPLE_FACTUAL_ITEMS",
+    "EXACT_RETRIEVAL_V2_WAS_OBSERVED_TO_GENERATE_AT_LEAST_ONE_CANDIDATE_WHERE_V5_ABSTAINED_BUT_WAS_SUPPRESSED_BY_AGREEMENT_RULE",
+    "NEXT_CAUSAL_TEST_IS_TO_MEASURE_EXISTING_EXACT_RETRIEVAL_V2_IN_ISOLATION_ON_THE_SAME_CONSUMED_ROWS"
+  ],
+  "decision": [
+    "DO_NOT_RUN_FRESH_ROWS_50_TO_74_WITH_V5",
+    "DO_NOT_RUN_HLE_TERMINAL_CASES_WITH_V5",
+    "MEASURE_EXISTING_EXACT_RETRIEVAL_V2_STANDALONE_BEFORE_MORE INVENTION"
+  ],
+  "exposure": {
+    "fresh_public_rows_50_to_74": 0,
+    "hle_questions": 0,
+    "hle_gold": 0
+  },
+  "external_model_calls_total": 0,
+  "external_reasoning_model_calls_total": 0,
+  "model_dependency_count_total": 0,
+  "hle_score_credit": 0,
+  "hle_67_7_certified": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
