@@ -23,10 +23,10 @@ from collections.abc import Mapping
 from typing import Any
 
 SCHEMA = "PROJECT_BRAIN_PURE_PROJECTION_CONSUMER_GUARD_V1"
-MAX_SOURCE_BYTES = 65_536
-MAX_PROJECTION_BYTES = 1_000_000
-MAX_AST_NODES = 5_000
-MAX_FUNCTIONS = 64
+MAX_SOURCE_BYTES = 32_768
+MAX_PROJECTION_BYTES = 65_536
+MAX_AST_NODES = 1_000
+MAX_FUNCTIONS = 32
 
 SAFE_BUILTINS: dict[str, Any] = {
     "abs": abs,
@@ -65,23 +65,14 @@ _ALLOWED_NODE_TYPES = {
     ast.List,
     ast.Tuple,
     ast.Dict,
-    ast.BinOp,
     ast.BoolOp,
     ast.UnaryOp,
     ast.Compare,
     ast.IfExp,
     ast.Call,
     ast.keyword,
-    ast.JoinedStr,
-    ast.FormattedValue,
     ast.Load,
     ast.Store,
-    ast.Add,
-    ast.Sub,
-    ast.Mult,
-    ast.Div,
-    ast.FloorDiv,
-    ast.Mod,
     ast.And,
     ast.Or,
     ast.Not,
