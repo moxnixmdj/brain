@@ -91,6 +91,37 @@ def _rule(problem):
         for x in problem["examples"]]
     return rules.synthesize_minimal_conjunctive_rule(predicates=ps,examples=es,emit=dict(problem["emit"]))
 
+def _periodic_result(series, period, scored, *, alias_resolution):
+    score,fits=scored
+    rows=[]
+    for source,fit in zip(series,fits):
+        rows.append({
+            "source":source["source"],"time_key":source["time_key"],"value_key":source["value_key"],
+            "amplitude":fit["amplitude"],"second_harmonic_amplitude":fit["second_harmonic_amplitude"],
+            "phase_rad":fit["phase_rad"],"offset":fit["coef"][0],
+            "linear_trend_per_span":fit["coef"][1],"rmse":fit["rmse"],"r2":fit["r2"],
+            "coefficients":fit["coef"],"predictions":fit["predictions"],
+        })
+    return {"period":period,"frequency":1.0/period,"score":score,"fits":rows,
+            "alias_resolution":alias_resolution}
+
+
+def _refine_period_candidate(series, center, *, fractional_window=0.06, steps=161):
+    if not isinstance(center,(int,float)) or isinstance(center,bool) or not math.isfinite(float(center)) or center<=0:
+        return None
+    lo=float(center)/(1.0+float(fractional_window))
+    hi=float(center)*(1.0+float(fractional_window))
+    best=None
+    for candidate in periodic._grid(lo,hi,steps):
+        scored=periodic._score_period(series,candidate)
+        if scored is None:
+            continue
+        key=(float(scored[0]),float(candidate))
+        if best is None or key<best[0]:
+            best=(key,scored)
+    return best
+
+
 def _periodic(problem):
     ss=[]
     for i,row in enumerate(problem["series"]):
@@ -100,7 +131,41 @@ def _periodic(problem):
             if not math.isfinite(t) or not math.isfinite(y): raise ValueError("SERIES_POINT_NONFINITE")
             pts.append((t,y,j))
         ss.append({"source":str(row.get("name") or f"series_{i}"),"time_key":"time","value_key":"value","points":pts})
-    return periodic.fit_shared_period(ss)
+
+    base=periodic.fit_shared_period(ss)
+    base_period=float(base["period"])
+    base_score=float(base["score"])
+
+    # A two-harmonic basis can represent a true period P as the second harmonic
+    # of 2P. Resolve only that mathematically induced alias, and only when the
+    # shorter candidate is empirically indistinguishable in normalized SSE.
+    half=_refine_period_candidate(ss,base_period/2.0)
+    if half is None:
+        base["alias_resolution"]={"status":"NO_HALF_PERIOD_CANDIDATE","selected_period":base_period}
+        return base
+
+    half_score=float(half[0][0])
+    half_period=float(half[0][1])
+    tolerance=max(1e-8,abs(base_score)*0.05)
+    equivalent=half_score<=base_score+tolerance
+    if not equivalent:
+        base["alias_resolution"]={
+            "status":"HALF_PERIOD_REJECTED__MATERIALLY_WORSE_FIT",
+            "base_period":base_period,"base_score":base_score,
+            "half_period":half_period,"half_score":half_score,"score_tolerance":tolerance,
+            "selected_period":base_period,
+        }
+        return base
+
+    return _periodic_result(
+        ss,half_period,half[1],
+        alias_resolution={
+            "status":"HALF_PERIOD_SELECTED__SECOND_HARMONIC_ALIAS_RESOLVED",
+            "base_period":base_period,"base_score":base_score,
+            "half_period":half_period,"half_score":half_score,"score_tolerance":tolerance,
+            "selected_period":half_period,
+        },
+    )
 
 def _invoke(family,problem,trace):
     if family==SYMBOLIC: return _symbolic(problem,trace)
