@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_V60_RECONSTRUCTION_NEXT67_REGEN_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__V59_TO_V60_TARGET_MANIFEST_EXACT__NEXT67_REGEN_EXACT__LIBRARY_UPLOAD_TRANSPORT_BLOCKED__ZERO_CREDIT",
+  "objective": "Prove the preserved V60 repair and frozen NEXT67 corpus are reproducible from already-durable inputs without spending NEXT67, while isolating the remaining blocker to Library upload transport.",
+  "source_v59": {
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V59_SUCCESSOR_20261011_V1.tar.xz",
+    "library_file_id": "libfile_708521dbd4348191a0a5c48228684218",
+    "raw_python_source_bytes": 1713085,
+    "manifest_sha256": "694f9c52e40530f4c41fe46e4ba01001f8d0a672c8e1cf2024d2cee15bda757c"
+  },
+  "reconstruction": {
+    "transform_path": "canonical/research/bytes/tools/conservative_repaired_eight_delta_v60.py",
+    "transform_git_blob_sha": "9bc73b1a82acfb38f006e0233bf93e59fe9e9abc",
+    "python_file_count": 277,
+    "durable_file_count": 278,
+    "raw_python_source_bytes": 1713090,
+    "target_manifest_sha256": "6ab3ad3366fe10d0d081784d61838d097eac1c242cee729453d78d48ede5033e",
+    "target_manifest_exact": true,
+    "manifest_file_bytes_reextraction_match": true,
+    "fresh_normalized_archive": {
+      "bytes": 263596,
+      "sha256": "930bae2b01507eea476e08cc5da9eb3dbc2d8555f1c84c13ebb359f142b2b62e",
+      "metadata_policy": "USTAR__SORTED_PATHS__MTIME_0__UID_GID_0__XZ_9E_T1",
+      "note": "Fresh archive container hash intentionally differs from the prior ephemeral candidate archive because archive metadata is normalized; all 278 durable payload files re-extract to the exact target content identity."
+    }
+  },
+  "next67_regeneration": {
+    "canonical_id": "QUAL_SUCCESSOR_NEXT67_20261011_V1",
+    "seed": 3765437090,
+    "per_operation_budget": 1500,
+    "cases": 17250,
+    "bytes": 2039910,
+    "expected_sha256": "aab6e4fb65f266211585f9d60c88c3dcc2834ca832d91c50357edd7bd2ac20be",
+    "regenerated_sha256": "aab6e4fb65f266211585f9d60c88c3dcc2834ca832d91c50357edd7bd2ac20be",
+    "exact_hash_match": true,
+    "canonical_generator_path": "canonical/research/bytes/tools/generate_qualification_v1.py",
+    "canonical_generator_git_blob_sha": "1a97ca1f7b93affc50ae7d22276672e4b74c4e30",
+    "donor_environment": "SymPy 1.14.0 + mpmath 1.3.0",
+    "generation_replay": "SERIAL_RNG_PARAMETER_STREAM_PRESERVED__EXPECTED_VALUE_EVALUATION_PARALLELIZED__EXACT_OUTPUT_HASH_MATCH",
+    "candidate_execution_against_next67": false,
+    "spent": false
+  },
+  "persistence_attempts": {
+    "target_archive_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V60_REPAIRED_SUCCESSOR_20261011_V1.tar.xz",
+    "target_next67_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT67_20261011_V1.jsonl",
+    "files_manage_library_attempts": 3,
+    "repeated_result": "FAILED__container_session_expired",
+    "fresh_materialize_before_final_retry": true,
+    "blocker_localization": "FILES_LIBRARY_UPLOAD_CONTAINER_SESSION_TRANSPORT",
+    "artifact_generation_or_identity_failure": false
+  },
+  "hard_nonclaims": [
+    "NO_LIBRARY_PERSISTENCE_SUCCESS",
+    "NO_V60_CANONICAL_FRONTIER_PROMOTION",
+    "NO_NEXT67_CANDIDATE_EXECUTION_OR_FRESHNESS_CONSUMPTION",
+    "NO_CAPABILITY_ACCEPTANCE_OWNERSHIP_QUALITY_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "promotion_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
