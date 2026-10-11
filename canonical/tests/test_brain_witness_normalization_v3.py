@@ -19,7 +19,7 @@ source=load(SOURCE)
 normalized=load(NORMALIZED)
 out=evaluate(source,normalized,blob(SOURCE))
 assert out["pass"] is True,out
-assert out["witness_count"]==14,out
+assert out["witness_count"]==normalized["witness_count"]==sum(1 for x in source["claims"] if isinstance(x,dict) and x.get("state")=="PROVED"),out
 assert out["semantic_implication_verified"] is False
 assert out["scope_relation_verified"] is False
 
