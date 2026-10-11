@@ -67,7 +67,7 @@ class Tests(unittest.TestCase):
             },
         }
 
-    def test_default_delegated_discovery_returns_candidate_materialization_edge_only(self):
+    def test_default_delegated_discovery_materializes_before_checker_handoff(self):
         predicate_id = "source-condition-sha256:critical"
         req = self.request(predicate_id)
         candidate = {
@@ -79,13 +79,91 @@ class Tests(unittest.TestCase):
             "chosen_host": "data.worldbank.org",
             "semantic_truth_authority": False,
         }
+        materialized = {
+            "schema": c.authority_candidate_materializer.SCHEMA,
+            "kind": c.authority_candidate_materializer.KIND,
+            "pass": True,
+            "status": "PASS__AUTHORITY_CANDIDATE_CONTENT_ADDRESSED_MATERIALIZED",
+            "retrieval_materialization_verified": True,
+            "source_text": "materialized bytes",
+            "source_id": "https://data.worldbank.org/indicator/SP.POP.TOTL",
+            "source_sha256": "a" * 64,
+            "provider_authority": False,
+            "semantic_truth_authority": False,
+        }
         default = Mock(return_value=candidate)
         opened = self.opened(predicate_id)
 
         with patch.object(c, "compile_contract", return_value=self.raw_contract()), \
              patch.object(c, "_authenticate_goal_binding", return_value=self.goal_binding()), \
              patch.object(c, "evaluate_p3", return_value=opened) as p3, \
-             patch.object(c.authority_discovery_provider, "provide", default):
+             patch.object(c.authority_discovery_provider, "provide", default), \
+             patch.object(
+                 c.authority_candidate_materializer,
+                 "materialize",
+                 return_value=materialized,
+             ) as materialize:
+            out = c.run(req)
+
+        self.assertFalse(out["pass"])
+        self.assertEqual(
+            out["status"],
+            "OPEN__MATERIALIZED_AUTHORITY_SOURCE_CHECKER_ADAPTER_REQUIRED",
+        )
+        self.assertEqual(
+            out["next_required_edge"],
+            "CHECKER_SPECIFIC_AUTHENTICATED_SOURCE_INTERPRETATION",
+        )
+        self.assertEqual(out["retrieval_candidate"], candidate)
+        self.assertEqual(out["materialized_authority_source"], materialized)
+        self.assertEqual(
+            out["information_trace"][-1]["kind"],
+            "AUTHORITY_CANDIDATE_MATERIALIZATION",
+        )
+        self.assertTrue(
+            out["information_trace"][-1]["materialization_verified"]
+        )
+        default.assert_called_once()
+        materialize.assert_called_once()
+        packet = default.call_args.args[0]
+        self.assertTrue(packet["external_research_authorized"])
+        self.assertEqual(
+            packet["source_scope"],
+            req["information_origin_by_predicate_id"][predicate_id]["source_scope"],
+        )
+        p3.assert_called_once()
+
+    def test_materialization_failure_preserves_candidate_edge(self):
+        predicate_id = "source-condition-sha256:critical"
+        req = self.request(predicate_id)
+        candidate = {
+            "schema": c.authority_discovery_provider.SCHEMA,
+            "pass": True,
+            "status": "PASS__AUTHORITY_DOMAIN_SOURCE_CANDIDATE_DISCOVERED",
+            "candidate_only": True,
+            "chosen_url": "https://data.worldbank.org/indicator/SP.POP.TOTL",
+            "chosen_host": "data.worldbank.org",
+            "semantic_truth_authority": False,
+        }
+        materialization_failure = {
+            "schema": c.authority_candidate_materializer.SCHEMA,
+            "kind": c.authority_candidate_materializer.KIND,
+            "pass": False,
+            "status": "FAIL_CLOSED",
+            "reason": "AUTHORITY_REDIRECT_OUTSIDE_AUTHORITY_DOMAINS",
+            "semantic_truth_authority": False,
+        }
+        default = Mock(return_value=candidate)
+
+        with patch.object(c, "compile_contract", return_value=self.raw_contract()), \
+             patch.object(c, "_authenticate_goal_binding", return_value=self.goal_binding()), \
+             patch.object(c, "evaluate_p3", return_value=self.opened(predicate_id)), \
+             patch.object(c.authority_discovery_provider, "provide", default), \
+             patch.object(
+                 c.authority_candidate_materializer,
+                 "materialize",
+                 return_value=materialization_failure,
+             ):
             out = c.run(req)
 
         self.assertFalse(out["pass"])
@@ -97,16 +175,10 @@ class Tests(unittest.TestCase):
             out["next_required_edge"],
             "CHECKER_CONSUMABLE_MATERIALIZATION_FROM_AUTHORITY_CANDIDATE",
         )
-        self.assertEqual(out["retrieval_candidate"], candidate)
         self.assertEqual(
-            out["information_trace"][-1]["ingestion_status"],
-            "AUTHORITY_DISCOVERY_CANDIDATE_ONLY",
+            out["information_provider_failure"],
+            materialization_failure,
         )
-        default.assert_called_once()
-        packet = default.call_args.args[0]
-        self.assertTrue(packet["external_research_authorized"])
-        self.assertEqual(packet["source_scope"], req["information_origin_by_predicate_id"][predicate_id]["source_scope"])
-        p3.assert_called_once()
 
     def test_default_discovery_failure_stays_research_open(self):
         predicate_id = "source-condition-sha256:critical"
