@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_SCALE_SUBMISSION_RECEIPT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__FRESH_ROW31_TWO_PAGE_CODING_STANDARDS_DOCX_FROZEN__RENDER_QA_PASS__ZERO_OWNER_SCORE_CREDIT",
+  "benchmark": "GDPval-AA v2.1",
+  "row_idx": 31,
+  "task_id": "c2e8f271-7858-412f-b460-472463ad81d9",
+  "sector": "Professional, Scientific, and Technical Services",
+  "occupation": "Computer and Information Systems Managers",
+  "freshness": {
+    "precommit": "canonical/governance/GDPVAL_SCALE_FRESH_BATCH_ROWS27_34_CORRECTED_PRECOMMIT_20261011_V1.json",
+    "precommit_commit": "1bdac6c8e4dae4f5624e5e30afeb380f085e3a65",
+    "official_allowed_projection_sha256": "04c6bbf8f372e186cbfa6764ac9fdf021f6b932cdc4a02de7acd62e3f7e8049d",
+    "prompt_sha256": "4ec521edcf3227b92ebc330d755fc5f9a03128a019dd0471245d48a7cc55f6fe",
+    "reference_count": 0,
+    "gold_deliverable_read_before_freeze": false,
+    "rubric_read_before_freeze": false,
+    "third_party_model_submission_read_before_freeze": false
+  },
+  "brain_execution_profile": {
+    "path": "canonical/capabilities/internalized/professional_work/stirrup_247f24d/BRAIN_EXECUTION_PROFILE_V1.json",
+    "candidate_id": "OPUS55_PROFESSIONAL_KNOWLEDGE_WORK_STIRRUP_CONFIGURATION_V1",
+    "cognition_surface": "CURRENT_CHATGPT_GPT_5_6_SOL_SESSION",
+    "incremental_spend_usd": 0
+  },
+  "submission": {
+    "library_path": "/Project Brain/GDPval/scale/c2e8f271-7858-412f-b460-472463ad81d9/GDPval_row31_engineering_coding_standards.docx",
+    "library_file_id": "libfile_d6e66ead82c081918c9ff337a6f88401",
+    "bytes": 40509,
+    "sha256": "910fe82e623afacada68d300e35e436c1cf61d9fcf4e1fd57b112e4fd0cedf32",
+    "format": "docx",
+    "render_page_count": 2,
+    "render_page_sha256": [
+      "41fdf8732954b4009d5498ce009d3555d1ddf560e61d7069f4479cfedd644aee",
+      "6c07a22e9b21f44130042e35820e8ac9499317feceaab2af00a041d0bb11f168"
+    ]
+  },
+  "prompt_requirement_checks": {
+    "word_document": "PASS",
+    "page_limit_six_or_less": "PASS__2_PAGES",
+    "maintainable_reference_structure": "PASS",
+    "common_pitfalls_foundation": "PASS",
+    "testing": "PASS",
+    "documentation": "PASS",
+    "pr_titles": "PASS",
+    "branch_naming": "PASS",
+    "commit_messages": "PASS",
+    "community_style_baseline": "PASS",
+    "stack_specific_typescript_node_react_next_postgres_drizzle": "PASS",
+    "staged_rollout": "PASS",
+    "source_of_truth_positioning": "PASS"
+  },
+  "verification": {
+    "render_visual_inspection": "PASS__2_PAGES__NO_CLIPPING_OVERLAP_OR_ORPHAN_TABLE_HEADER"
+  },
+  "hard_nonclaims": [
+    "NO_ARTIFICIAL_ANALYSIS_OWNER_GRADE",
+    "NO_GDPVAL_ELO",
+    "NO_CLAIM_SINGLE_TASK_IMPLIES_1846",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
