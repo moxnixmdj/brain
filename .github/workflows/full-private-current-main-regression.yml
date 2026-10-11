@@ -173,5 +173,5 @@ jobs:
               raise SystemExit(1)
           PY
 
-# carrier: isolated-self-hosted-linux-x64-low-ram-exact-subject-20261011-v4
+# carrier: isolated-self-hosted-linux-x64-brain-regression-exact-subject-20261011-v5
 # receipt: log-and-check-summary-authoritative-for-canonicalization__artifact-storage-not-required
