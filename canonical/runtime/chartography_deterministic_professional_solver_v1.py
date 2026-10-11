@@ -289,11 +289,17 @@ def _group_legend_rows(words: list[dict[str, Any]], right: int, top: int, bottom
             continue
         tm = re.search(r"(\d{3,4})\s*degc", low)
         gm = re.search(r"(0\.\d+)\s*k\s*/?\s*m", low)
+        semantic_words = [
+            w for w in ws
+            if re.search(r"[A-Za-z0-9]", str(w["text"]))
+        ]
+        if not semantic_words:
+            continue
         rows.append({
             "key": key,
             "text": text,
-            "cy": _median(w["cy"] for w in ws),
-            "x0": min(w["x0"] for w in ws),
+            "cy": _median(w["cy"] for w in semantic_words),
+            "x0": min(w["x0"] for w in semantic_words),
             "temperature": float(tm.group(1)) if tm else None,
             "gradient": float(gm.group(1)) if gm else None,
         })
