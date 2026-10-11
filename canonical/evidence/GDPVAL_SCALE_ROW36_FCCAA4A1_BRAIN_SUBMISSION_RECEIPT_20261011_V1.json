@@ -1,0 +1,99 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_SCALE_SUBMISSION_RECEIPT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__FRESH_ROW36_TWO_PAGE_STATUE_LIBERTY_ELLIS_ISLAND_PDF_FROZEN__LIVE_SOURCE_AND_RENDER_QA_PASS__ZERO_OWNER_SCORE_CREDIT",
+  "benchmark": "GDPval-AA v2.1",
+  "row_idx": 36,
+  "task_id": "fccaa4a1-1c39-49ac-b701-55361a19966b",
+  "sector": "Real Estate and Rental and Leasing",
+  "occupation": "Concierges",
+  "freshness": {
+    "precommit": "canonical/governance/GDPVAL_SCALE_FRESH_BATCH_ROWS35_219_PRECOMMIT_20261011_V1.json",
+    "precommit_commit": "c604f5006820ce3ca24d6afc2487a95a30886a6c",
+    "official_allowed_projection_sha256": "ad97bd51fadfecb59144939bf9ee48ddbaf2b0ef52063e886c00db48f531dd07",
+    "prompt_sha256": "944c0758a8226a389ffed09f7387c1d30007ad8d9e373065fba30d96312020a2",
+    "reference_count": 0,
+    "gold_deliverable_read_before_freeze": false,
+    "rubric_read_before_freeze": false,
+    "third_party_model_submission_read_before_freeze": false
+  },
+  "brain_execution_profile": {
+    "path": "canonical/capabilities/internalized/professional_work/stirrup_247f24d/BRAIN_EXECUTION_PROFILE_V1.json",
+    "candidate_id": "OPUS55_PROFESSIONAL_KNOWLEDGE_WORK_STIRRUP_CONFIGURATION_V1",
+    "cognition_surface": "CURRENT_CHATGPT_GPT_5_6_SOL_SESSION",
+    "artifact_execution_surface": "ISOLATED_SPRITE_PLUS_LOCAL_INDEPENDENT_PDF_RENDER_INSPECTION",
+    "incremental_spend_usd": 0
+  },
+  "submission": {
+    "library_path": "/Project Brain/GDPval/scale/fccaa4a1-1c39-49ac-b701-55361a19966b/GDPval_fccaa4a1_Early_Access_Statue_Liberty_Ellis_Island_Tour.pdf",
+    "library_file_id": "libfile_fbb3e8c96f748191a750fa02b8bbaba7",
+    "bytes": 2051858,
+    "sha256": "595710671764294861310204a26f3d3b91be185169f39273e434f75b17bbc512",
+    "format": "pdf",
+    "render_page_count": 2,
+    "render_page_sha256": [
+      "6e6df2ab080f6c77c439a87531a4187174b4ce832d2d8d370cb82c63f11c7665",
+      "47be42930802bdc8237e2486c0c3062605f9320b0e00a694d8e9cce908135a6e"
+    ]
+  },
+  "source_binding": {
+    "operator_surface": "Walks / WalksDevour / Walks - USA current New York tour listings plus current reseller product metadata",
+    "operator_facts_bound": [
+      "4_HOUR_OPTION",
+      "EARLIEST_SLOT_FIRST_FERRY",
+      "ENGLISH_GUIDE",
+      "MAX_25",
+      "LIBERTY_AND_ELLIS_ACCESS",
+      "CROWN_AND_PEDESTAL_NOT_INCLUDED"
+    ],
+    "nps_surface": "U.S. National Park Service current Statue of Liberty safety/security and visitor guidance",
+    "public_domain_photo": {
+      "source": "Wikimedia Commons / National Park Service",
+      "file": "Statueofliberty_nps.jpg",
+      "source_sha256": "0a88d579dad8baf6d8caccacdd29526c58e4ef3e12b549db25940398cef46e1f",
+      "license": "PUBLIC_DOMAIN_US_FEDERAL_NPS_WORK"
+    }
+  },
+  "prompt_requirement_checks": {
+    "exact_title": "PASS",
+    "pdf": "PASS",
+    "two_pages": "PASS",
+    "location": "PASS",
+    "duration_four_hours": "PASS",
+    "overview_of_activities_header": "PASS",
+    "inclusions_header": "PASS",
+    "requirements_header": "PASS",
+    "first_group_of_day": "PASS",
+    "licensed_new_york_guide": "PASS",
+    "max_25": "PASS",
+    "ellis_island": "PASS",
+    "nyc_skyline": "PASS",
+    "operator_and_sites_description": "PASS",
+    "step_by_step_itinerary": "PASS",
+    "meeting_location_harbor_house_22_battery_place": "PASS",
+    "end_point_options": "PASS",
+    "english": "PASS",
+    "crown_and_pedestal_excluded": "PASS",
+    "gratuities_excluded": "PASS",
+    "hotel_pickup_dropoff_excluded": "PASS",
+    "moderate_difficulty": "PASS",
+    "clear_container_rule": "PASS",
+    "age_2_14_requirement": "PASS__CHILD_CATEGORY_NOTED_AND_16_YEAR_OLD_PLANNED_AS_ADULT_CATEGORY",
+    "customary_items": "PASS",
+    "small_photo": "PASS__PUBLIC_DOMAIN_NPS_PHOTO"
+  },
+  "verification": {
+    "render_visual_inspection": "PASS__EXACTLY_2_PAGES__NO_CLIPPING_OVERLAP_OR_BROKEN_TABLES__PHOTO_VISIBLE"
+  },
+  "hard_nonclaims": [
+    "NO_ARTIFICIAL_ANALYSIS_OWNER_GRADE",
+    "NO_GDPVAL_ELO",
+    "NO_CLAIM_SINGLE_TASK_IMPLIES_1846",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
