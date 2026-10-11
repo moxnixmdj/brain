@@ -25,7 +25,7 @@
       },
       {
         "path": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-        "git_blob_sha": "10256df2a1e94d72f4b2c7f6ab368b99e8fe1670"
+        "git_blob_sha": "12c50f2b83a10a1d9ff77ad369bed25d3aa9932d"
       },
       {
         "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
@@ -156,11 +156,11 @@
       "ready": "BLOCKED_ONLY_BY_FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION"
     },
     {
-      "work_id": "BYTES_EXACT_SYMBOLIC_V39_NEXT_PHYSICAL_CUT",
+      "work_id": "BYTES_EXACT_SYMBOLIC_V40_NEXT_PHYSICAL_CUT",
       "work_type": "EFFICIENCY_IMPROVEMENT",
       "source": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-      "causal_role": "CONTINUE_RESOURCE_REDUCTION_FROM_1761507_RAW_PYTHON_BYTES_USING_SPENT_NEXT44_ONLY__RERANK_BEFORE_NEW_PHYSICAL_CUT__DO_NOT_TOUCH_FROZEN_NEXT45_BEFORE_CUT",
-      "readiness": "ACTIONABLE_WITH_EXISTING_RECONSTRUCTION_AND_QUALIFICATION_MACHINERY__V39_CURRENT",
+      "causal_role": "CONTINUE_RESOURCE_REDUCTION_FROM_1746554_RAW_PYTHON_BYTES_USING_SPENT_NEXT45_ONLY__RERANK_BEFORE_NEW_PHYSICAL_CUT__DO_NOT_TOUCH_FROZEN_NEXT46_BEFORE_CUT",
+      "readiness": "ACTIONABLE_WITH_EXISTING_RECONSTRUCTION_AND_QUALIFICATION_MACHINERY__V40_CURRENT",
       "claims_new_primitive": false,
       "score_state": "UNBOUND",
       "scheduler_state": "READY_EXECUTION",
@@ -179,17 +179,17 @@
       "vector_evidence": {},
       "read_only_evidence": {
         "source": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-        "source_git_blob_sha": "10256df2a1e94d72f4b2c7f6ab368b99e8fe1670",
-        "raw_python_source_bytes": 1761507,
-        "B_exec_raw_python_source_bytes": 1764267,
-        "qualification": "11960/11960",
-        "next_action": "RERANK_EXACT_V39_USING_SPENT_NEXT44_ONLY__MAKE_NEW_PHYSICAL_CUT_BEFORE_QUAL_SUCCESSOR_NEXT45_20261011_V1",
-        "next_frozen_qualification": "QUAL_SUCCESSOR_NEXT45_20261011_V1",
+        "source_git_blob_sha": "12c50f2b83a10a1d9ff77ad369bed25d3aa9932d",
+        "raw_python_source_bytes": 1746554,
+        "B_exec_raw_python_source_bytes": 1749314,
+        "qualification": "12190/12190",
+        "next_action": "RERANK_EXACT_V40_USING_SPENT_NEXT45_ONLY__MAKE_NEW_PHYSICAL_CUT_BEFORE_QUAL_SUCCESSOR_NEXT46_20261011_V1",
+        "next_frozen_qualification": "QUAL_SUCCESSOR_NEXT46_20261011_V1",
         "next_frozen_spent": false,
         "vector_bounds_complete": false
       },
-      "ready": "V39_CURRENT_AT_1761507_BYTES__CONTINUE_ONLY_NONCONFLICTING_RESOURCE_PARETO_CUT",
-      "source_git_blob_sha": "10256df2a1e94d72f4b2c7f6ab368b99e8fe1670"
+      "ready": "V40_CURRENT_AT_1746554_BYTES__CONTINUE_ONLY_NONCONFLICTING_RESOURCE_PARETO_CUT",
+      "source_git_blob_sha": "12c50f2b83a10a1d9ff77ad369bed25d3aa9932d"
     },
     {
       "work_id": "R2_FINANCE_SEMANTIC_ADEQUACY_TAIL",
