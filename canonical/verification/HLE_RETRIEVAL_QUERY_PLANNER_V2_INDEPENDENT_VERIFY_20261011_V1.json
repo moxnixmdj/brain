@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_RETRIEVAL_QUERY_PLANNER_V2_INDEPENDENT_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_BLOBS__CONSUMED_REPLAY_NOW_ELIGIBLE",
+  "subject": {
+    "runtime_path": "canonical/runtime/hle_native_retrieval_query_planner_v2.py",
+    "runtime_blob": "0a0b1e70ba90bb6e29cbd8316343c10c2dcb1908",
+    "tests_path": "canonical/tests/test_hle_native_retrieval_query_planner_v2.py",
+    "tests_blob": "0c4803c46d639945c65ade3075faf910fffdd2b1",
+    "v1_base_blob": "2386db287d08153ffb905f8cd89a76f4ebf19d9f",
+    "question_contract_v3_blob": "0865d6baf59b465cf121963dbadd5409a1702671"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify-hle-query-planner-v2-20261011",
+    "head_sha": "286ae295d0e5b18a1ae9890921cdc66b7e0771ca",
+    "workflow_run_id": 38149961888,
+    "workflow_job_id": 114501170126,
+    "conclusion": "success"
+  },
+  "verified": {
+    "exact_blob_binding": true,
+    "compile": true,
+    "synthetic_suite": "7/7 PASS",
+    "self_test": true,
+    "gold_accessed": false,
+    "external_model_calls": 0,
+    "model_dependency_count": 0
+  },
+  "next_gate": "V1_VS_V2_RETRIEVAL_REPLAY_ON_ONLY_THE_12_ALREADY_CONSUMED_SHARED_MISSES",
+  "fresh_hle_cases_allowed": 0,
+  "hle_score_credit": 0,
+  "hle_67_7_certified": false,
+  "incremental_spend_usd": 0
+}
