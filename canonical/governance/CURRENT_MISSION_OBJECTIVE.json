@@ -32,7 +32,7 @@
     "primary_entrypoint": "plan_current_post_composition_frontier",
     "scalar_fallback_runtime": "canonical/runtime/capability_first_live_scheduler_v1.py",
     "status": "ACTIVE__POST_COMPOSITION_DYNAMIC_CURRENTNESS_V15__PROFESSIONAL_24_OF_24__CHECKPOINT_ROWS_ALL_WAKE_GATED__GITHUB_HOSTED_ACTIONS_BILLING_PRESTART_BLOCK__0_SAME_INFORMATION_CHECKPOINT_RUNS__CAPABILITY_FIRST_PRIMARY__ZERO_GLOBAL_CREDIT",
-    "observed_git_blob_sha": "2619dfcca6bfc388e073e36fb1e5a369c6d180e4",
+    "observed_git_blob_sha": "a85903acc226ce71463a0d289d66eb4c89deb7f3",
     "semantic_reuse_policy": "canonical/governance/TWO_CLOCK_SEMANTIC_VALIDITY_AND_SCHEDULER_AUTHORITY_20261011_V4.json",
     "semantic_reuse_policy_git_blob_sha": "f08fd90474aa38f89db171c70e10a6d47e6d7ec5",
     "verified_improvement_loop": "canonical/governance/VERIFIED_IMPROVEMENT_LOOP_V2_ACTIVATION_20261011_V1.json",
@@ -58,7 +58,7 @@
   },
   "current_parallel_frontier_control": {
     "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
-    "observed_git_blob_sha": "5f4939a478ff197b5a75b6ff324dbc0444a4306a",
+    "observed_git_blob_sha": "74038dc9f189ee1d0183d6239a3a4d9766926e49",
     "status": "CURRENT_CAPABILITY_FIRST__CODING_NONMONOTONIC_COUPLED_PAIR_AND_SYMBOL_LOCALIZATION_VERIFIED__EXECUTION_TRACE_DATAFLOW_SEMANTIC_LOCALIZATION_NEXT__ZERO_SCORE_CREDIT",
     "binding": "MUTABLE_CURRENT_PATH_IDENTITY__SUPPORTED_PROFESSIONAL_ASSURANCE_BYTES_R2_PROJECTIONS_REFRESHED_AT_CALL_TIME__OTHER_SOURCE_DRIFT_FAILS_CLOSED",
     "snapshot_is_runtime_authority_for_supported_dynamic_families": false
@@ -245,12 +245,12 @@
   },
   "bytes_current_frontier": {
     "path": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-    "observed_git_blob_sha": "1b7fcc5548e4b23d1f048f50bdeabe57106b8691",
-    "status": "ACTIVE_RESEARCH__OPERATOR_WHITESPACE_V78_FRONTIER__SUCCESSOR_READY",
-    "raw_python_source_bytes": 1589206,
-    "B_exec_raw_python_source_bytes": 1591966,
-    "qualification": "CORRECTED_NEXT82_TRANSFERRED_BY_TOKEN_AST_EQUIVALENCE__V78_STRATIFIED_240_OF_240",
-    "next": "Rerank exact V78 using inherited spent corrected NEXT82; make a non-equivalence physical cut before touching QUAL_SUCCESSOR_NEXT83_20261011_V1.",
+    "observed_git_blob_sha": "d81dabb033b14c71bb0867218cb84938219fb1b1",
+    "status": "ACTIVE_RESEARCH__SEVEN_BODY_V79_FRONTIER__SUCCESSOR_READY",
+    "raw_python_source_bytes": 1582702,
+    "B_exec_raw_python_source_bytes": 1585462,
+    "qualification": "20930/20930",
+    "next": "Rerank exact V79 using spent NEXT83 only; make a new non-equivalence physical cut before touching V79-bound NEXT84.",
     "promotion_credit": 0,
     "observed_snapshot_is_non_authoritative_for_v15_runtime": true
   },
@@ -265,8 +265,8 @@
   },
   "capability_frontier_currentness_reconciliation": {
     "path": "canonical/governance/CAPABILITY_FRONTIER_CURRENTNESS_RECONCILIATION_20261010_V1.json",
-    "observed_git_blob_sha": "3b61557091b56e64103cd665d227d01be7b82b7e",
-    "status": "CURRENTNESS_RECONCILED__PROFESSIONAL_24_OF_24__EXECUTION_12_OF_12__SEMANTIC_12_OF_12__REGRESSION_HOSTED_ACTIONS_BILLING_PRESTART_BLOCK__ESCAPE_WAKE_GATED__BYTES_V78_READY__R2_V91_WAKE_GATED__TB_CURRENT_PATH_DYNAMIC__ZERO_CREDIT",
+    "observed_git_blob_sha": "db95217aa6dba94b76a0cd3a156df25ecc8d8f0d",
+    "status": "CURRENTNESS_RECONCILED__PROFESSIONAL_24_OF_24__EXECUTION_12_OF_12__SEMANTIC_12_OF_12__REGRESSION_HOSTED_ACTIONS_BILLING_PRESTART_BLOCK__ESCAPE_WAKE_GATED__BYTES_V79_READY__R2_V91_WAKE_GATED__TB_CURRENT_PATH_DYNAMIC__ZERO_CREDIT",
     "next": "RERANK_EXACT_V77_USING_INHERITED_SPENT_CORRECTED_NEXT82_UNDER_FAILCLOSED_MESSAGE_DECISION_EQUIVALENCE__MAKE_NEW_PHYSICAL_CUT_BEFORE_SPENDING_FROZEN_NEXT83__CONTINUE_OTHER_CAPABILITY_FIRST_GENERAL_DEVELOPMENT__DO_NOT_RUN_SAME_INFORMATION_CHECKPOINT_WORK"
   },
   "professional_regression_carrier_diagnosis": {
