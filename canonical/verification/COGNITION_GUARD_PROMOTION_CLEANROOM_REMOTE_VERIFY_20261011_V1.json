@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_COGNITION_GUARD_PROMOTION_CLEANROOM_REMOTE_VERIFY_V1",
+  "date": "2026-10-11",
+  "status": "REMOTE_ZERO_SPEND_PASS__ENFORCEMENT_ONLY__ZERO_CREDIT",
+  "branch": "governance/cognition-guard-promotion-cleanroom-20261011-v1",
+  "verifier": {
+    "provider": "Sprites",
+    "sprite_name": "brain-canonical-apply-slice-verify-20261011-v1",
+    "sprite_id": "sprite-03e2d6c1-6a52-4c21-817f-eae043fd842c",
+    "local_laptop_or_wsl_used": false,
+    "incremental_spend_usd": 0
+  },
+  "checks": [
+    {
+      "id": "PY_COMPILE",
+      "pass": true
+    },
+    {
+      "id": "BASELINE_GUARD",
+      "pass": true,
+      "observed_status": "PASS__COGNITION_GOVERNANCE_INTACT",
+      "errors": []
+    },
+    {
+      "id": "DIRECT_REGRESSION",
+      "pass": true,
+      "test_count": 7,
+      "includes": [
+        "REMOVE_OWNERSHIP_PROMOTION_GUARD_BINDING_FAILS_CLOSED",
+        "REMOVE_FINAL_CLEANROOM_GUARD_BINDING_FAILS_CLOSED"
+      ]
+    }
+  ],
+  "new_enforcement_bindings": [
+    "canonical/runtime/ownership_promotion_compiler_v1.py",
+    "canonical/runtime/final_terminal_cleanroom_gate_v1.py"
+  ],
+  "capability_credit_delta": 0,
+  "benchmark_credit_delta": 0,
+  "acceptance_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "promotion_credit_delta": 0,
+  "terminal_credit_delta": 0
+}

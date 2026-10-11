@@ -4,6 +4,7 @@ import argparse, ast, hashlib, json, sys
 from pathlib import Path
 from typing import Any, Mapping
 from canonical.runtime import ownership_promotion_cognition_provenance_gate_v1 as cognition_provenance_gate
+from canonical.runtime.runtime_cognition_credit_guard_v1 import assert_credit_path_cognition_governance
 
 OWNED="VERIFIED_OWNED_EQUAL_OR_BETTER"
 STDLIB=set(getattr(sys,"stdlib_module_names",()))|{"__future__","typing"}
@@ -63,6 +64,7 @@ def audit_source(source:str)->list[str]:
     return sorted(set(e))
 
 def evaluate(root:Path,batch:Mapping[str,Any])->dict[str,Any]:
+    assert_credit_path_cognition_governance(root)
     closure=load(root/batch["closure_manifest"])
     matrix=load(root/batch["ownership_matrix"])
     cr=rows(closure,"families","id"); mr=rows(matrix,"rows","family")
