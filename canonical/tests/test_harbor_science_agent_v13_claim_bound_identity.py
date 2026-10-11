@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import os
 import unittest
+from canonical.tests.test_harbor_science_agent_v14_typed_action_feedback import TypedActionFeedbackV14Tests
 from unittest.mock import patch
 
 from canonical.runtime import harbor_science_agent_v13 as agent
