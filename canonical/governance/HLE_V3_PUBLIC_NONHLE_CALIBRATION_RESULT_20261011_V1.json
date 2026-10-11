@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_V3_PUBLIC_NONHLE_CALIBRATION_RESULT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "FAILED_PUBLIC_NONHLE_CALIBRATION__TERMINAL_HLE_PROMOTION_FORBIDDEN__ZERO_HLE_CASES_CONSUMED",
+  "subject": {
+    "solver_path": "canonical/runtime/hle_native_research_solver_v3.py",
+    "solver_git_blob_sha": "d719d1eb4d288e2c1062c43d74dd83ad1ba50684",
+    "calibration_freeze_commit": "962bfb377b8bfbb27583363b7cbc7fc3ed9d5451"
+  },
+  "independent_public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2673,
+    "workflow_run_id": 38139891157,
+    "workflow_job_id": 114471395568,
+    "conclusion": "failure_at_precommitted_promotion_gate",
+    "artifact_id": 11702785490,
+    "artifact_zip_sha256": "61f37fb8c52fb9f9df0d5e34fbdec0079865797a1cc5b07977df15d79ae46533"
+  },
+  "calibration": {
+    "dataset": "ai-safety-institute/trivia_qa_verified",
+    "split": "validation",
+    "sample_rule": "FIRST_25_ROWS_IN_DATASET_SERVER_CANONICAL_ORDER",
+    "sample_size": 25,
+    "questions_manifest_sha256": "db62af833e12a4db57a5a7e2d5c6cc0f72bae2b70753a3dbd2d8bc3f0e6947c2",
+    "commitments_manifest_sha256": "2a6d32481a69a7db13ec67767ba5911e700c962b5efc64977cddb0d96de95bd8",
+    "attempted": 0,
+    "attempt_rate": 0,
+    "normalized_exact": 0,
+    "normalized_exact_rate": 0,
+    "required_attempt_rate": 0.25,
+    "required_normalized_exact_rate": 0.2,
+    "promotion_gate_passed": false,
+    "status_counts": {
+      "NO_CANDIDATE__QUESTION_CONTRACT_UNRESOLVED": 12,
+      "NO_CANDIDATE__NO_RELATION_BOUND_WEB_EVIDENCE": 13
+    }
+  },
+  "cognition_accounting": {
+    "external_model_calls_total": 0,
+    "external_reasoning_model_calls_total": 0,
+    "model_dependency_count_total": 0,
+    "cognition_outsourcing_detected": false
+  },
+  "benchmark_integrity": {
+    "gold_hidden_from_solver_until_commitments_sealed": true,
+    "hle_questions_consumed": 0,
+    "hle_gold_consumed": 0,
+    "hle_score_credit": 0
+  },
+  "causal_diagnosis": [
+    "QUESTION_CONTRACT_V1_UNDERCOVERS_ORDINARY_INTERROGATIVE_SURFACES",
+    "RELATION_BOUND_EXTRACTION_IS_TOO_NARROW_FOR_OPEN_DOMAIN_FACTUAL_QA",
+    "LEGACY_HLE_WEB_ADAPTER_CAN_STOP_AFTER_ONE_PROVIDER_RETURNS_ENOUGH_URLS_EVEN_WHEN_RESULTS_ARE_SEMANTICALLY_POOR"
+  ],
+  "hard_rules": [
+    "V3_MUST_NOT_BE_PROMOTED_TO_TERMINAL_HLE_EXECUTION",
+    "PUBLIC_CALIBRATION_FAILURE_IS_NOT_AN_HLE_SCORE",
+    "NO_HLE_CASE_MAY_BE_CONSUMED_TO_DEBUG_V3",
+    "REPAIR_ON_PUBLIC_NON_HLE_DATA_THEN_REQUIRE_A_FRESH_UNTOUCHED_PUBLIC_HOLDOUT",
+    "EXTERNAL_GENERAL_PURPOSE_MODEL_COGNITION_MUST_REMAIN_ZERO_FOR_BRAIN_CAPABILITY_CREDIT"
+  ],
+  "target_score_claimed": false,
+  "hle_67_7_certified": false,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0
+}
