@@ -689,6 +689,91 @@
         "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-RUNTIME-PYPI-ACQUIRE-MSGPACK-002__msgpack__9f0974d98983__AUTO_VERIFY.json"
       }
     },
+    "chart.solve.professional.deterministic.v1": {
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "chart.solve.professional.deterministic.v1",
+          "path": "${input.image_path}",
+          "prompt": "${input.prompt}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "pass",
+          "value": true
+        }
+      },
+      "adapter_module": "chartography_deterministic_professional_v1",
+      "entrypoint": "run",
+      "cost": 3,
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "chart",
+        "professional chart",
+        "line chart",
+        "phase diagram",
+        "legend",
+        "axis",
+        "solvus",
+        "intersection"
+      ],
+      "limitations": [
+        "Verified only for two explicit professional-chart family atoms; unsupported chart/question classes fail closed.",
+        "Supported family 1: legend-coded approximately linear multi-series chart with numeric axes, target series selected by temperature/gradient legend, and target vertical value converted to horizontal value.",
+        "Supported family 2: binary phase diagram with numeric composition/temperature axes and precipitation temperature taken from the lowest interior solvus intersection at requested composition.",
+        "Does not imply Chartography 100-task coverage or score >=89.",
+        "Uses only the verified bounded positioned Tesseract OCR component as learned perception; zero general-purpose model cognition."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "chart.answer.professional.supported_atom",
+        "chart.answer.interpretable_receipt"
+      ],
+      "requires": [
+        "image.raster.available",
+        "chart.prompt.available"
+      ],
+      "result_fields": [
+        "answer",
+        "answer_numeric",
+        "route",
+        "cognition_dependency_class",
+        "general_purpose_model_dependency_count",
+        "bounded_learned_components"
+      ],
+      "source": {
+        "type": "system_tool",
+        "name": "project-brain-native-chartography-professional-v1",
+        "command": "python",
+        "version": "brain-owned",
+        "verification_command": [
+          "python",
+          "--version"
+        ],
+        "accepted_output_regex": "^Python 3[.]",
+        "bounded_learned_component": "image.extract.ocr.tesseract.positioned.tsv",
+        "donor_runtime_required": false,
+        "external_frontier_model_required": false
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independent_verified": true,
+        "verification_path": "canonical/verification/CHARTOGRAPHY_ZERO_MODEL_PROFESSIONAL_SAMPLES_PUBLIC_VERIFY_20261011_V1.json",
+        "workflow_run_id": 38138348341,
+        "workflow_job_id": 114466800372,
+        "verifier_repository": "moxnixmdj/verification-capsule-runner",
+        "verifier_merged_commit": "8b7506c6c7e3f0311cb873b0a398a3248b477afb",
+        "exact_solver_blob_sha": "37baec468cd126cd47ae10d40428ef184c4285cc",
+        "response_set_sha256": "cfe5b4d9401ec5db353770742f45a59d62e29abe0e0a980958c7e7a32052c0ba",
+        "official_nonheldout_samples_passed": 2,
+        "official_nonheldout_samples_total": 2,
+        "general_purpose_model_dependency_count": 0,
+        "heldout_cases_consumed": 0,
+        "full_benchmark_authority": false
+      }
+    },
     "decision.synthesis.typed.stdlib": {
       "status": "VERIFIED_BOUND_CAPABILITY",
       "incremental_spend_usd": 0,
