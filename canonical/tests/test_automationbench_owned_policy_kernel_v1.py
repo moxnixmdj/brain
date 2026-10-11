@@ -44,6 +44,29 @@ class AutomationBenchOwnedPolicyKernelV1Tests(unittest.TestCase):
         self.assertNotIn("draft", ids)
         self.assertNotIn("sup", ids)
 
+    def test_requested_sender_beats_newer_wrong_sender(self):
+        prompt = "Check the latest unread email from the facilities team about a fire drill."
+        records = [
+            {
+                "id":"correct",
+                "from_":"facilities@company.example.com",
+                "subject":"Fire drill reminder",
+                "body_plain":"Create task: Monthly Fire Drill Checklist - February. Due: 2026-02-18.",
+                "date":"2026-01-28T09:15:00Z",
+                "is_read":False,
+            },
+            {
+                "id":"wrong",
+                "from_":"maintenance@company.example.com",
+                "subject":"Fire drill reminder",
+                "body_plain":"Create task: Monthly Fire Drill Checklist - Annex. Due: 2026-02-19.",
+                "date":"2026-01-28T11:00:00Z",
+                "is_read":False,
+            },
+        ]
+        ranked = rank_source_records(prompt, records)
+        self.assertEqual(ranked[0]["id"], "correct")
+
     def test_api_search_payload_parsing_is_fail_closed(self):
         self.assertEqual(parse_search_payload("not-json"), [])
         self.assertEqual(parse_search_payload('{"x": []}'), [])
