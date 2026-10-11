@@ -143,8 +143,8 @@
     "focused_test_path": "canonical/tests/test_capability_parallel_frontier_post_composition_v2.py",
     "rule": "SUPPORTED_PROFESSIONAL_ASSURANCE_BYTES_R2_CURRENT_POINTERS_ARE_REPROJECTED_ONLY_AFTER_FAMILY_INVARIANTS_PASS__UNMODELED_SOURCE_DRIFT_REMAINS_EXACT_HASH_FAIL_CLOSED",
     "field_scoped_zero_reality_reuse": {
-      "authority": "canonical/governance/TWO_CLOCK_SEMANTIC_VALIDITY_AND_SCHEDULER_AUTHORITY_20261011_V3.json",
-      "authority_git_blob_sha": "655c45c560fa846215c3e3727387951a93d7c8e7",
+      "authority": "canonical/governance/TWO_CLOCK_SEMANTIC_VALIDITY_AND_SCHEDULER_AUTHORITY_20261011_V4.json",
+      "authority_git_blob_sha": "f08fd90474aa38f89db171c70e10a6d47e6d7ec5",
       "pure_capsule_runtime": "canonical/runtime/pure_field_projection_capsule_v1.py",
       "pure_capsule_git_blob_sha": "793fcd21d3544ffc6316eb029753fdbc7a9d9a39",
       "pure_currentness_runtime": "canonical/runtime/pure_field_projection_currentness_v1.py",
@@ -153,8 +153,8 @@
       "pure_consumer_guard_git_blob_sha": "9b623c5219cfe4b6037323fd5e8fc4dbd2b32907",
       "sealed_consumer_runtime": "canonical/runtime/sealed_field_projection_consumer_v1.py",
       "sealed_consumer_git_blob_sha": "348cc225d0a114ef73e549e368c6554272fcb598",
-      "independent_verification": "canonical/verification/FIELD_SCOPED_SEMANTIC_REUSE_STACK_INDEPENDENT_VERIFY_20261011_V3.json",
-      "rule": "DECLARED_FIELD_CHURN_ONLY__ZERO_REALITY_SEMANTIC_CURRENTNESS__PRIOR_VERIFICATION_SEPARATE__UNDECLARED_READS_STRUCTURALLY_EXCLUDED__ALL_CONSEQUENTIAL_AUTHORITY_LIVE"
+      "independent_verification": "canonical/verification/FIELD_SCOPED_ZERO_REALITY_REUSE_GATE_INDEPENDENT_VERIFY_20261011_V1.json",
+      "rule": "V4_EXECUTABLE_BINDING__SEMANTIC_CURRENTNESS_PLUS_PURE_SEALED_EXECUTION_PLUS_PRIOR_INDEPENDENT_RESULT_VERIFICATION__ALL_CONSEQUENTIAL_AUTHORITY_LIVE"
     }
   },
   "dynamic_post_composition_v2": {

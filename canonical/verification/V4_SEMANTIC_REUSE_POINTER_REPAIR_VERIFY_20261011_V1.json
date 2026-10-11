@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_V4_SEMANTIC_REUSE_POINTER_REPAIR_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__LOAD_BEARING_NESTED_POINTER_REBOUND_TO_V4__V3_HISTORICAL_ONLY__ZERO_CREDIT",
+  "base_main_commit": "a19eebf960244e942c2bbf5d43a21dcae476cd1c",
+  "repaired_scheduler_blob_sha": "b0d4e75a5a2f784080ad09fd8fe51ee30223008a",
+  "repaired_mission_blob_sha": "33ff3ca7f1efc7c9b526001a9d8a8312af965041",
+  "checks": {
+    "nested_post_composition_authority": "canonical/governance/TWO_CLOCK_SEMANTIC_VALIDITY_AND_SCHEDULER_AUTHORITY_20261011_V4.json",
+    "nested_authority_blob_sha": "f08fd90474aa38f89db171c70e10a6d47e6d7ec5",
+    "nested_independent_verification": "canonical/verification/FIELD_SCOPED_ZERO_REALITY_REUSE_GATE_INDEPENDENT_VERIFY_20261011_V1.json",
+    "top_level_v4_status": "ACTIVE__EXECUTABLE_FIELD_SCOPED_ZERO_REALITY_VERIFICATION_REUSE_BINDING__61_OF_61__ZERO_CREDIT",
+    "v3_role": "SUPERSEDED_HISTORICAL_FALLBACK_CONTEXT_ONLY",
+    "mission_semantic_reuse_v4_binding_preserved": true
+  },
+  "proved": [
+    "CURRENT_SCHEDULER_NO_LONGER_HAS_A_LOAD_BEARING_NESTED_V3_FIELD_SCOPED_REUSE_AUTHORITY",
+    "V4_EXECUTABLE_REUSE_GATE_AND_61_OF_61_INDEPENDENT_VERIFICATION_ARE_THE_ACTIVE_FIELD_SCOPED_REUSE_BINDING",
+    "V3_REMAINS_ONLY_AS_EXPLICIT_HISTORICAL_FALLBACK_CONTEXT"
+  ],
+  "hard_nonclaims": [
+    "NO_EXECUTION_PROMOTION_FRESH_REALITY_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT",
+    "NO_CHANGE_TO_EXTERNAL_CHECKPOINT_WAKE_GATES",
+    "NO_CHANGE_TO_HOSTED_ACTIONS_BILLING_PRESTART_BLOCK"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
