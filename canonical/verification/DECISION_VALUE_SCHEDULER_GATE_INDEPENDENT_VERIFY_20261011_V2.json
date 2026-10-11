@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_DECISION_VALUE_SCHEDULER_GATE_INDEPENDENT_VERIFY_20261011_V2",
   "date": "2026-10-11",
-  "status": "PASS__ALL_12_CHECKPOINT_ROWS_WAKE_GATED__0_SAME_INFORMATION_CHECKPOINT_RUNS__BYTES_V48_ONLY_READY_LANE__23_OF_23_DYNAMIC_SCHEDULER_TESTS_PASS__CURRENT_PLAN_REPLAY_PASS__ZERO_CREDIT",
+  "status": "PASS__ALL_12_CHECKPOINT_ROWS_WAKE_GATED__0_SAME_INFORMATION_CHECKPOINT_RUNS__BYTES_V48_ONLY_READY_LANE__46_OF_46_SCHEDULER_SLICE_PASS__CURRENT_PLAN_REPLAY_PASS__R2_SCALAR_FALLBACK_DRIFT_FAIL_CLOSED__ZERO_CREDIT",
   "objective": "VERIFY_CURRENT_MAIN_DECISION_VALUE_PROJECTION_AFTER_ALL_OPEN_CHECKPOINT_WAKE_GATING_AND_BYTES_V48_PROMOTION",
   "base_main_commit": "7b9912b847f7a647afe034a749b111bfa55fc6d3",
   "subjects": {
@@ -24,6 +24,10 @@
     "bytes": {
       "path": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
       "git_blob_sha": "cc039dec0d7361bfb83c7121433eabcb82ce5581"
+    },
+    "capability_first_scheduler_tests": {
+      "path": "canonical/tests/test_capability_first_scheduler_v1.py",
+      "git_blob_sha": "a9f7c285d72ef2282552ec335de93cab1ad59aab"
     }
   },
   "independent_replay": {
@@ -33,7 +37,10 @@
     "dynamic_scheduler_tests_run": 23,
     "dynamic_scheduler_tests_passed": 23,
     "dynamic_scheduler_tests_failed": 0,
-    "current_plan_replay": "PASS"
+    "current_plan_replay": "PASS",
+    "scheduler_slice_tests_run": 46,
+    "scheduler_slice_tests_passed": 46,
+    "scheduler_slice_tests_failed": 0
   },
   "current_plan_truth": {
     "checkpoint_actionable_row_ids": [],
@@ -48,7 +55,20 @@
     "professional_property_truth_closed_count": 24,
     "professional_open_execution_leaf_count": 0,
     "professional_open_semantic_leaf_count": 0,
-    "professional_full_current_main_regression_open": true
+    "professional_full_current_main_regression_open": true,
+    "r2_scalar_fallback_state": "BLOCKED_R2_POLICY_SOURCE_LOCK_DRIFT__PRIMARY_V17_ACTIVE",
+    "r2_scalar_fallback_drifted_sources": [
+      {
+        "path": "canonical/runtime/general_adequate_decision_controller_v1.py",
+        "policy_git_blob_sha": "368c6ac07e8feaf1a0c880de5388b618def912e2",
+        "current_git_blob_sha": "b5c609eb902cd0ea21d81710588dd538aa05cb4f"
+      },
+      {
+        "path": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
+        "policy_git_blob_sha": "cabe3bd1ec3748a595f3a959718c38accdacfb2f",
+        "current_git_blob_sha": "34d62b109b99f38e62995544871460b266d2c7df"
+      }
+    ]
   },
   "hard_nonclaims": [
     "NO_CHECKPOINT_ACCEPTANCE_CREDIT",
