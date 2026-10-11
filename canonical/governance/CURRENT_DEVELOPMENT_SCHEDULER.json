@@ -1,8 +1,8 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_DEVELOPMENT_SCHEDULER_POINTER_V1",
-  "date": "2026-10-10",
-  "status": "ACTIVE__POST_COMPOSITION_DYNAMIC_CURRENTNESS_V15__PROFESSIONAL_24_OF_24__CHECKPOINT_ROWS_ALL_WAKE_GATED__0_SAME_INFORMATION_CHECKPOINT_RUNS__CAPABILITY_FIRST_PRIMARY__ZERO_GLOBAL_CREDIT",
-  "authoritative_activation": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V15.json",
+  "date": "2026-10-11",
+  "status": "ACTIVE__POST_COMPOSITION_DYNAMIC_CURRENTNESS_V17__PROFESSIONAL_24_OF_24__ALL_12_CHECKPOINT_ROWS_DECISION_VALUE_SLEEPING__BYTES_V48_PRIMARY_RESOURCE_WORK__ZERO_GLOBAL_CREDIT",
+  "authoritative_activation": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261011_V17.json",
   "runtime": "canonical/runtime/capability_parallel_frontier_post_composition_v2.py",
   "primary_entrypoint": "canonical.runtime.capability_parallel_frontier_post_composition_v2.plan_current_post_composition_frontier",
   "objective": "MAXIMIZE_REUSABLE_VERIFIED_CAPABILITY_GENERALIZATION_RELIABILITY_AND_EFFICIENCY_PER_RESOURCE_AND_MINIMIZE_WALL_CLOCK_THROUGH_SAFE_PARALLELISM",
@@ -11,7 +11,21 @@
   "r2_mechanism_policy": {
     "path": "canonical/governance/R2_MECHANISM_CLOSURE_OPEN_WORLD_FRONTIER_POLICY_20261010_V4.json",
     "status": "GENERAL_R2_MECHANISM_CLOSED__OPEN_WORLD_EVIDENCE_FRONTIER_WAKE_GATED__POLICY_COVER_SAFETY_CONTROLLER_REBOUND",
-    "scheduler_rule": "OPEN_WORLD_EVIDENCE_FRONTIER_IS_DEMOTED_UNLESS_BOUND_TO_TASK_LOCAL_COUNTEREXAMPLE_OR_VERIFIED_CAPABILITY_DEFECT"
+    "scheduler_rule": "OPEN_WORLD_EVIDENCE_FRONTIER_IS_DEMOTED_UNLESS_BOUND_TO_TASK_LOCAL_COUNTEREXAMPLE_OR_VERIFIED_CAPABILITY_DEFECT",
+    "currentness_state": "FAIL_CLOSED_IMMUTABLE_SOURCE_DRIFT",
+    "drifted_sources": [
+      {
+        "path": "canonical/runtime/general_adequate_decision_controller_v1.py",
+        "policy_git_blob_sha": "368c6ac07e8feaf1a0c880de5388b618def912e2",
+        "current_git_blob_sha": "b5c609eb902cd0ea21d81710588dd538aa05cb4f"
+      },
+      {
+        "path": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
+        "policy_git_blob_sha": "cabe3bd1ec3748a595f3a959718c38accdacfb2f",
+        "current_git_blob_sha": "34d62b109b99f38e62995544871460b266d2c7df"
+      }
+    ],
+    "operational_rule": "SCALAR_FALLBACK_INELIGIBLE_UNTIL_R2_POLICY_SOURCE_LOCKS_ARE_REQUALIFIED__PRIMARY_POST_COMPOSITION_V17_ACTIVE"
   },
   "shared_cause_residual_ledger": {
     "path": "canonical/governance/CURRENT_R2_SHARED_CAUSE_RESIDUAL_LEDGER.json",
@@ -27,8 +41,8 @@
   "planning_entrypoint": "canonical.runtime.capability_first_scheduler_v1.rank_work",
   "current_live_work_frontier": {
     "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
-    "git_blob_sha": "8ed055de5aa597a507b5870a847382b8825de6ff",
-    "status": "CURRENT_PROFESSIONAL_V10_PROPERTY_TRUTH_24_OF_24__FULL_PRIVATE_REGRESSION_GATE_OPEN__EXECUTION_CARRIER_BLOCKED_ZERO_STEPS__PARALLEL_FRONTIER_CONTINUES__ZERO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT",
+    "git_blob_sha": "cbd9c5abe080f13d34b1ee99de6fc95bfe2a86ee",
+    "status": "CURRENT_PROFESSIONAL_24_OF_24__ALL_12_CHECKPOINT_ROWS_DECISION_VALUE_SLEEPING__BYTES_V48_CONTINUES__ZERO_CREDIT",
     "professional_verified_root_subject_binding_count": 12,
     "professional_same_subject_composition_admissible": true,
     "professional_whole_leaf_scope_complete_count": 24,
@@ -45,7 +59,7 @@
     "git_blob_sha": "1b8a9cbb14dc70de35c0acd12573593488978670",
     "status": "ACTIVE_FAIL_CLOSED_CONTRACT__NO_CALIBRATED_COMPLETE_FRONTIER_BOUND_YET"
   },
-  "live_selection_rule": "CURRENTNESS_AND_DEPENDENCY_FIRST__CHECKPOINT_ROWS_EVENT_DRIVEN_WAKE_ONLY__NO_SAME_INFORMATION_CHECKPOINT_RETRY__CAPABILITY_AND_RESOURCE_PARETO_FRONTIER_PRIMARY_WHEN_NO_WAKE_EVENT__NO_INVENTED_SCALAR_WEIGHTS",
+  "live_selection_rule": "CURRENTNESS_AND_DEPENDENCY_FIRST__DECISION_VALUE_WAKE_GATE_SECOND__PARETO_DOMINANCE_THIRD__SAFE_NONCONFLICTING_PARALLELISM__UNCHANGED_WAKE_GATED_EVENT_DRIVEN_AND_PARKED_ROWS_INELIGIBLE__NO_INVENTED_SCALAR_WEIGHTS",
   "independent_live_scheduler_verification": {
     "path": "canonical/verification/CAPABILITY_FIRST_LIVE_SCHEDULER_V7_INDEPENDENT_VERIFY_20261010_V1.json",
     "git_blob_sha": "9b6a17d38a9285db63a6a760648a0567aa8a47ef",
@@ -145,15 +159,12 @@
   },
   "dynamic_post_composition_v2": {
     "runtime": "canonical/runtime/capability_parallel_frontier_post_composition_v2.py",
-    "runtime_git_blob_sha": "b8a86551545a3ecfe8ba8d6fa44d2347703aa42d",
+    "runtime_git_blob_sha": "6a1e02ab6154e18b706867582cc93d1eb571c423",
     "test": "canonical/tests/test_capability_parallel_frontier_post_composition_v2.py",
-    "test_git_blob_sha": "16c46ce3c7f812d7cb9814a07a4683c1b5e5cca3",
-    "verification": "canonical/verification/CAPABILITY_PARALLEL_POST_COMPOSITION_V2_VERIFY_20261010_V1.json",
-    "verification_git_blob_sha": "e14810a95bd2cfdeecc3fc1737a26c1dd738449d",
-    "primary_verification": "PYCOMPILE_PASS__21_OF_21_PASS",
-    "execution_authority": false,
-    "promotion_authority": false,
-    "terminal_authority": false
+    "test_git_blob_sha": "7fc3d5fe59d4757b7471b9412c6a33c1bad6582e",
+    "verification": "canonical/verification/DECISION_VALUE_SCHEDULER_GATE_INDEPENDENT_VERIFY_20261011_V2.json",
+    "verification_git_blob_sha": "5caee10ef902f5d8c57900fb1343d6552f126294",
+    "primary_verification": "23_OF_23_DYNAMIC_SCHEDULER_TESTS_PASS__CURRENT_PLAN_REPLAY_PASS"
   },
   "v15_activation": {
     "path": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V15.json",
@@ -217,5 +228,19 @@
     "wake_gated_open_checkpoint_count": 12,
     "parked_checkpoint_count": 1,
     "primary_without_wake_event": "CAPABILITY_FIRST_GENERAL_DEVELOPMENT_AND_RESOURCE_PARETO_IMPROVEMENT"
-  }
+  },
+  "decision_value_gate": {
+    "status": "ACTIVE_LOAD_BEARING_V17",
+    "authority_path": "canonical/governance/CURRENT_FRONTIER_REUSE_SPECIALIZATION_20261011_V1.json",
+    "authority_git_blob_sha": "fd829dd1f2c959302f346f74c72a65d8d24e7f7e",
+    "rule": "SCHEDULE_CHECKPOINT_WORK_ONLY_AFTER_BOUND_POLICY_CHANGING_WAKE_CONDITION_CHANGES",
+    "current_actionable_row_ids": [],
+    "current_sleeping_row_count": 12
+  },
+  "v17_activation": {
+    "path": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261011_V17.json",
+    "git_blob_sha": "6d4650ed8871911a25c61d5d708cd9858fd6b1a2",
+    "full_execution_authority": false
+  },
+  "scalar_fallback_state": "BLOCKED_R2_POLICY_SOURCE_LOCK_DRIFT__PRIMARY_V17_ACTIVE"
 }
