@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_NATIVE_MCQ_COMPILER_VERIFICATION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "EXACT_TESTED_BYTES_BOUND__591_OF_591_REAL_MCQ_STRUCTURES_COMPILED__ZERO_ANSWER_AUTHORITY",
+  "runtime": {
+    "path": "canonical/runtime/hle_native_semantic_compiler_v1.py",
+    "git_blob_sha1": "238ebf2ffe23e527fceae919cbc30453a290fdd2",
+    "sha256": "ffc396b5b1541f44cd8c2cd630b080af57834fdf65ef6ebf27496b1b3c0c9f35",
+    "creation_commit": "de6c3a0addb38e37e741b38e2fe043252bb4b814"
+  },
+  "tests": {
+    "path": "canonical/tests/test_hle_native_semantic_compiler_v1.py",
+    "git_blob_sha1": "723d7070e26c81eaf1365e922c68f2bb5226c5a8",
+    "sha256": "f7fbcc5709679a375f0d5f1ce78055b26e305d5c90c5b0f3e85a853c0a785504",
+    "synthetic_tests": 8,
+    "synthetic_passed": 8,
+    "repository_ci_claimed": false
+  },
+  "real_population_structural_validation": {
+    "dataset_sha256": "6d0ee0602e8aea6b159509577e884f48ecac7b8e3f6822a35f51335a446c726a",
+    "multiple_choice_total": 591,
+    "compiled": 591,
+    "failed": 0,
+    "nonempty_image_payload_mcq": 78,
+    "text_only_mcq": 513,
+    "choice_count_distribution": {
+      "5": 319, "6": 59, "7": 44, "8": 50, "9": 28, "10": 33,
+      "11": 9, "12": 8, "13": 3, "14": 7, "15": 4, "16": 9,
+      "17": 2, "18": 2, "19": 2, "20": 4, "21": 1, "22": 1,
+      "23": 2, "26": 4
+    },
+    "category_counts": {
+      "Biology/Medicine": 166,
+      "Math": 94,
+      "Humanities/Social Science": 86,
+      "Computer Science/AI": 71,
+      "Other": 57,
+      "Chemistry": 43,
+      "Physics": 40,
+      "Engineering": 34
+    },
+    "validation_mode": "Question values were decoded and passed only inside private programmatic execution. No question strings, option strings, task IDs, answers, or rationales were emitted to the model or user.",
+    "question_text_emitted": 0,
+    "option_text_emitted": 0,
+    "gold_accessed": false
+  },
+  "authority_boundary": {
+    "semantic_layer_closed": "MCQ_INLINE_OPTION_SYNTAX_TO_TYPED_ALTERNATIVES",
+    "answer_selection_closed": false,
+    "candidate_answer_authority": false,
+    "next_required_capability": "VERIFIED_OPTION_RELATION_EVIDENCE_TO_TYPED_DECISION",
+    "external_model_solver_output_allowed": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "model_inference_requests": 0,
+    "terminal_cases_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
