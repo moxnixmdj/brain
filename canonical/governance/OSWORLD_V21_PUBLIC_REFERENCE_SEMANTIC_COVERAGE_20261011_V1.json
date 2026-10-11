@@ -1,0 +1,1771 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_V21_PUBLIC_REFERENCE_SEMANTIC_COVERAGE_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PUBLIC_REFERENCE_SEMANTICS_ACQUIRED_108_OF_108__EXACT_RELEASE_HASH_ATTESTATION_MATCHES_CANONICAL_PIN__SIX_TARGET_ATOMS_SUPPORTED_OVER_FINITE_UNION__OWNER_GATED_BYTE_EQUIVALENCE_AND_ARBITRARY_APP_TRANSFER_REMAIN__ZERO_CREDIT",
+  "target_predicate": "OSWORLD_2_1_PARTIAL_GE_81_8",
+  "objective": "Replace the broad claim that exact pinned OSWorld v2.1 task semantics are unavailable in public evidence with a content-addressed 108-task public reference-run semantic corpus, while preserving owner-byte authentication, arbitrary-application transfer, comparator protocol, and performance residuals.",
+  "canonical_release_identity": {
+    "release": "osworld-v2.1",
+    "official_task_count": 108,
+    "official_task_revision": "0a1aadad95aa79b00b3783e717d865089ab06e26",
+    "canonical_hash_manifest_sha256": "c54d428329be5ca72742a6becd49ee83cf739df5dea429bba182e1f3f21badfb",
+    "prior_verification_path": "canonical/verification/OSWORLD_V21_PINNED_TASK_UNIVERSE_IDENTITY_VERIFY_20261010_V1.json"
+  },
+  "public_reference_source": {
+    "publisher": "Simular AI",
+    "dataset": "simular-ai/sai-osworld-v21-reference-runs",
+    "dataset_url": "https://huggingface.co/datasets/simular-ai/sai-osworld-v21-reference-runs",
+    "observed_dataset_revision": "abfb5852189f49e81255c38d98287df29ae53658",
+    "index_sha256": "5e61c44f94a91a73e40213f55fc9c9b50ae55922bb7c81ffe7eab79523e413ee",
+    "scorecard_osworld_v21_sha256": "61781c076bd5ce850b35bfeb41b7ca626688c1c4b8f14dab27bf62ca9857df1d",
+    "scorecard_release": "osworld-v2.1",
+    "scorecard_task_integrity_hash_manifest_sha256": "c54d428329be5ca72742a6becd49ee83cf739df5dea429bba182e1f3f21badfb",
+    "scorecard_matched_task_count": 108,
+    "source_claim": "TASK_INTEGRITY_HASH_CHECKED_BEFORE_EVERY_RUN__EACH_RUN_MANIFEST_CARRIES_SAME_VALUES",
+    "semantics_files_used": [
+      "instruction.txt",
+      "task_record.json",
+      "traj.jsonl"
+    ],
+    "selected_runs": "FIRST_CLEAN_NUMERIC_RUN_PER_TASK_IN_PUBLIC_INDEX"
+  },
+  "acquisition_result": {
+    "task_ids_acquired": 108,
+    "unique_task_ids": 108,
+    "instruction_files": 108,
+    "task_record_files": 108,
+    "trajectory_files": 108,
+    "instruction_manifest_sha256": "12b87249b4ec04ed44170f431037447f49d812e55a64f418363deb5056ced49d",
+    "enriched_manifest_sha256": "5aee69b2080db571d339bca8bc150efce06a50fab09fa0d31eebf99be7428100"
+  },
+  "classification_rules": {
+    "browser_surface": "RELATED_APPS_OR_INSTRUCTION_EXPLICITLY_BINDS_BROWSER_WEBPAGE_OR_WEBSITE",
+    "multi_step_observed": "ACTIONS_EXECUTED_GE_2",
+    "visual_state_observed": "AT_LEAST_ONE_SCREENSHOT_SAVED_IN_PUBLIC_RUN_RECORD",
+    "planning_semantics_explicit": "INSTRUCTION_HAS_EXPLICIT_SEQUENCE_CONDITIONAL_DEPENDENCY_OR_MULTI_CLAUSE_OPERATION_STRUCTURE",
+    "judgment_semantics_explicit": "INSTRUCTION_EXPLICITLY_REQUIRES_SELECTION_IDENTIFICATION_COMPARISON_CRITERIA_PRIORITY_MATCHING_VERIFICATION_OR_RELEVANCE_JUDGMENT",
+    "transfer_class": "CROSS_APP_WHEN_TWO_OR_MORE_RELATED_APP_LABELS__OTHERWISE_SINGLE_OR_UNDECLARED"
+  },
+  "coverage_summary": {
+    "task_count": 108,
+    "unique_app_labels": 46,
+    "cross_app_tasks": 48,
+    "browser_surface_tasks": 55,
+    "multi_step_observed_tasks": 108,
+    "visual_state_observed_tasks": 108,
+    "planning_semantics_explicit_tasks": 105,
+    "judgment_semantics_explicit_tasks": 77,
+    "minimum_actions_observed": 23,
+    "median_actions_observed": 105.5,
+    "maximum_actions_observed": 497
+  },
+  "target_atom_result": {
+    "MULTI_STEP_WORKFLOW": "SUPPORTED_OVER_EXACT_FINITE_108_UNION__108_OF_108_OBSERVED_MULTI_ACTION",
+    "BROWSER_SURFACE": "SUPPORTED_OVER_EXACT_FINITE_108_UNION__55_TASKS_EXPLICIT_BROWSER_OR_WEB_SURFACE",
+    "APPLICATION_BREADTH": "SUPPORTED_OVER_EXACT_FINITE_108_UNION__46_RELATED_APP_LABELS__48_CROSS_APP_TASKS",
+    "PLANNING": "SUPPORTED_OVER_EXACT_FINITE_108_UNION__105_TASKS_EXPLICIT_SEQUENCE_CONDITIONAL_OR_MULTI_OPERATION_STRUCTURE",
+    "VISUAL_GROUNDING": "SUPPORTED_AS_VISUAL_STATE_EXECUTION_EVIDENCE_OVER_EXACT_FINITE_108_UNION__108_TASKS_HAVE_SAVED_SCREENSHOT_STATE",
+    "JUDGMENT": "SUPPORTED_OVER_EXACT_FINITE_108_UNION__77_TASKS_EXPLICIT_SELECTION_COMPARISON_CRITERIA_OR_RELEVANCE_JUDGMENT"
+  },
+  "semantic_coverage_matrix": [
+    {
+      "task_id": "001",
+      "related_apps": [
+        "thunderbird",
+        "calendar"
+      ],
+      "browser_surface": false,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "CROSS_APP",
+      "actions_executed": 49,
+      "screenshots_saved": 49,
+      "instruction_sha256": "fcc759db0dd6f0b28ecbf2a7fe4eff2cece276eaae7bc0f16e4e98b031485f10"
+    },
+    {
+      "task_id": "002",
+      "related_apps": [
+        "chrome"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 124,
+      "screenshots_saved": 124,
+      "instruction_sha256": "076d79d94d7225066f531c0512e11232837b6e70841d5d7b6665ffc4acc536f7"
+    },
+    {
+      "task_id": "003",
+      "related_apps": [
+        "gimp"
+      ],
+      "browser_surface": false,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 42,
+      "screenshots_saved": 42,
+      "instruction_sha256": "f4b1b26cefb8166a86aa2e1671268a362efe0b6f7f5803dad13545c68e6b2186"
+    },
+    {
+      "task_id": "004",
+      "related_apps": [
+        "libreoffice_impress"
+      ],
+      "browser_surface": false,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": false,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 48,
+      "screenshots_saved": 48,
+      "instruction_sha256": "d09c358a01bc5e321cd5cd26b5b01cb2ccfcb9d142d1400a7845f8caece7bb46"
+    },
+    {
+      "task_id": "005",
+      "related_apps": [
+        "chrome"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 127,
+      "screenshots_saved": 127,
+      "instruction_sha256": "2e92030ed35e36c27a2618b3d9a892ffbba7f9a45108c5c379ed24a3f0aab109"
+    },
+    {
+      "task_id": "006",
+      "related_apps": [],
+      "browser_surface": false,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 79,
+      "screenshots_saved": 79,
+      "instruction_sha256": "8e0aa322b52f568b11421f5854159e4696d4d847e0f93b2e7c234f12d5c15213"
+    },
+    {
+      "task_id": "007",
+      "related_apps": [
+        "excel",
+        "mailhub"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "CROSS_APP",
+      "actions_executed": 97,
+      "screenshots_saved": 97,
+      "instruction_sha256": "2b21bc5bb1fcb7cd2f104ff00a4336c604ffa89f04cdb5c237e81cc38d3e1449"
+    },
+    {
+      "task_id": "008",
+      "related_apps": [],
+      "browser_surface": false,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 317,
+      "screenshots_saved": 317,
+      "instruction_sha256": "95957449faac44d9b30b5f05c61a56a92fa5f63473053e53b190ed435d9755ec"
+    },
+    {
+      "task_id": "009",
+      "related_apps": [
+        "chrome"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": false,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 145,
+      "screenshots_saved": 145,
+      "instruction_sha256": "80da3200cce0c08f8f942ad65d548efeb09db2c724884a65b49d42e5e5019191"
+    },
+    {
+      "task_id": "010",
+      "related_apps": [
+        "writer",
+        "calc",
+        "pdfviewer",
+        "thunderbird"
+      ],
+      "browser_surface": false,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "CROSS_APP",
+      "actions_executed": 69,
+      "screenshots_saved": 69,
+      "instruction_sha256": "34f81bbe971547e53ddcaa83ab4e022d11d6ce4975894731101b32eb7b26642f"
+    },
+    {
+      "task_id": "011",
+      "related_apps": [
+        "chrome",
+        "zotero"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "CROSS_APP",
+      "actions_executed": 179,
+      "screenshots_saved": 179,
+      "instruction_sha256": "10832dfa4ec18a1abddba13cf004ac196e51828f98ba4f482d1e417ed0eaf945"
+    },
+    {
+      "task_id": "012",
+      "related_apps": [],
+      "browser_surface": false,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 42,
+      "screenshots_saved": 42,
+      "instruction_sha256": "1d82cd100fab6b3077a658e524dcb0bd5bfc045208262b4eac89f3fbb53b0ff4"
+    },
+    {
+      "task_id": "013",
+      "related_apps": [
+        "chrome"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": false,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 83,
+      "screenshots_saved": 83,
+      "instruction_sha256": "b86d71d968b280547d229b994a867df9dfc12045f211294cb97c315b6aa86472"
+    },
+    {
+      "task_id": "014",
+      "related_apps": [
+        "libreoffice_writer"
+      ],
+      "browser_surface": false,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 51,
+      "screenshots_saved": 51,
+      "instruction_sha256": "fcafb77aab6379bcdcc821049687be47a3f4ccf68e32b75ba75adc4c6b3887e2"
+    },
+    {
+      "task_id": "015",
+      "related_apps": [
+        "libreoffice_writer",
+        "pdf_viewer",
+        "labplot",
+        "chrome"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "CROSS_APP",
+      "actions_executed": 54,
+      "screenshots_saved": 54,
+      "instruction_sha256": "b05bcd6838f64d88c3f84646d6c50d6c971d208ec8a9b9fd52ec2eec573dc2f6"
+    },
+    {
+      "task_id": "016",
+      "related_apps": [
+        "chrome",
+        "mailhub",
+        "careerlink"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "CROSS_APP",
+      "actions_executed": 144,
+      "screenshots_saved": 144,
+      "instruction_sha256": "735bf9bb927d55e8ceb4c3a8627dec574dcf24f31038c3872aff1b6e1a53a1e8"
+    },
+    {
+      "task_id": "017",
+      "related_apps": [
+        "chrome"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": false,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 47,
+      "screenshots_saved": 47,
+      "instruction_sha256": "2a51cfed0e83269cd180221244bc33c81d168043917c63441746096a0308b5b8"
+    },
+    {
+      "task_id": "018",
+      "related_apps": [
+        "mailhub",
+        "calendar"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "CROSS_APP",
+      "actions_executed": 155,
+      "screenshots_saved": 155,
+      "instruction_sha256": "1bf8a5d2cb0a6f4e2532ae9224e27d9b087ba32dd408d6744143aa82987a609b"
+    },
+    {
+      "task_id": "019",
+      "related_apps": [
+        "studio.streamview"
+      ],
+      "browser_surface": false,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": false,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 112,
+      "screenshots_saved": 112,
+      "instruction_sha256": "f7210b2170d7f47a43f3b4ccbc332c7d35368ceda5c949320b2f522bd3a0d48b"
+    },
+    {
+      "task_id": "020",
+      "related_apps": [
+        "chrome"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 91,
+      "screenshots_saved": 91,
+      "instruction_sha256": "69a6126e6d50c955e6fc2482557ece9154b2820528022fb497367d5077c6ca98"
+    },
+    {
+      "task_id": "021",
+      "related_apps": [
+        "chrome"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 97,
+      "screenshots_saved": 97,
+      "instruction_sha256": "21e810c0da825e61106b0d8902a3c5907506bfce1cc25a53d56d62ba23dd6a8e"
+    },
+    {
+      "task_id": "022",
+      "related_apps": [
+        "chrome",
+        "nautilus",
+        "evince"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "CROSS_APP",
+      "actions_executed": 131,
+      "screenshots_saved": 131,
+      "instruction_sha256": "a895e15f55a349f12901b075f726d98d391b1b73d1f15bd980e06fd7ef112d1c"
+    },
+    {
+      "task_id": "023",
+      "related_apps": [],
+      "browser_surface": false,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": false,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 59,
+      "screenshots_saved": 59,
+      "instruction_sha256": "80a2523f68d70d0c78cee1887b1af25d6c693caf23cc7f186cf268775cc044d2"
+    },
+    {
+      "task_id": "024",
+      "related_apps": [
+        "chrome"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 134,
+      "screenshots_saved": 134,
+      "instruction_sha256": "9d282e2aeb69ee5851ace990b18e974c29a6fe9f1e07435e8cdf83ba3fcef5b0"
+    },
+    {
+      "task_id": "025",
+      "related_apps": [],
+      "browser_surface": false,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 114,
+      "screenshots_saved": 114,
+      "instruction_sha256": "5fa5ac347c6f88eb25de88e9540604ae1a791bbe3b640302d3abb6d2b2f85ef3"
+    },
+    {
+      "task_id": "026",
+      "related_apps": [
+        "vscode",
+        "libreoffice_impress",
+        "google-chrome"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "CROSS_APP",
+      "actions_executed": 137,
+      "screenshots_saved": 137,
+      "instruction_sha256": "d0f0dc728510068939e42cfa59f4349e0880c15c599a57a644d4990e5c924bf2"
+    },
+    {
+      "task_id": "027",
+      "related_apps": [
+        "excel"
+      ],
+      "browser_surface": false,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": false,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 45,
+      "screenshots_saved": 45,
+      "instruction_sha256": "f5c0d3bd4debc5659f30630d8d7b77cd9be86033ed365a3f9765662ac966914d"
+    },
+    {
+      "task_id": "028",
+      "related_apps": [
+        "chrome"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 109,
+      "screenshots_saved": 109,
+      "instruction_sha256": "f350fe56e5ed5252926e085a1462487ee7845d4ef87c5871aa848542f295501b"
+    },
+    {
+      "task_id": "029",
+      "related_apps": [
+        "chrome",
+        "vscode"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": false,
+      "transfer_class": "CROSS_APP",
+      "actions_executed": 161,
+      "screenshots_saved": 161,
+      "instruction_sha256": "3560d56a457ef0cb15105d76533f5fc332bdb8609bf498f0361ecf99a7b3e9bd"
+    },
+    {
+      "task_id": "030",
+      "related_apps": [
+        "vscode",
+        "terminal"
+      ],
+      "browser_surface": false,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "CROSS_APP",
+      "actions_executed": 105,
+      "screenshots_saved": 105,
+      "instruction_sha256": "75c4b978b61dc8547733e559c1f9eb60f32ec339fbd73060bbfb399112fee136"
+    },
+    {
+      "task_id": "031",
+      "related_apps": [
+        "teamchat"
+      ],
+      "browser_surface": false,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 88,
+      "screenshots_saved": 88,
+      "instruction_sha256": "ebba66134e1b09ad28edf089e6820f6b1486fefa37b188f630d5e01aabbef003"
+    },
+    {
+      "task_id": "032",
+      "related_apps": [],
+      "browser_surface": false,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": false,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 89,
+      "screenshots_saved": 89,
+      "instruction_sha256": "43c130adae428c7c95e83eb31f8e735da9271df4d89b072dccc24212de01d7b4"
+    },
+    {
+      "task_id": "033",
+      "related_apps": [],
+      "browser_surface": false,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": false,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 81,
+      "screenshots_saved": 81,
+      "instruction_sha256": "7d89c94e7c122374195545c4a5695cada290dee135d29a68e12d7038f85af4ad"
+    },
+    {
+      "task_id": "034",
+      "related_apps": [
+        "chrome"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": false,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 103,
+      "screenshots_saved": 103,
+      "instruction_sha256": "57d2cf3386dbd1c28e9729180655a4bc368a4f18801f19eba2d19ce643c5f0b5"
+    },
+    {
+      "task_id": "035",
+      "related_apps": [
+        "chrome"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 70,
+      "screenshots_saved": 70,
+      "instruction_sha256": "7928b7b98decd2cb08730482b98c7c19189fce2b52e62f371f6d3b2b36f4da7d"
+    },
+    {
+      "task_id": "036",
+      "related_apps": [
+        "chrome",
+        "zotero"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "CROSS_APP",
+      "actions_executed": 170,
+      "screenshots_saved": 170,
+      "instruction_sha256": "64a9f5be29fdac336b7687f756cd636e1fb880f6ec334e2ffe989d3b1eab4c76"
+    },
+    {
+      "task_id": "037",
+      "related_apps": [
+        "vscode",
+        "chrome"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "CROSS_APP",
+      "actions_executed": 80,
+      "screenshots_saved": 80,
+      "instruction_sha256": "1a631345e87973a9d6aa768829d0d213b02118508e8675db0b02d384cd7aa0c7"
+    },
+    {
+      "task_id": "038",
+      "related_apps": [
+        "chrome",
+        "cloudcrm",
+        "teamchat"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "CROSS_APP",
+      "actions_executed": 173,
+      "screenshots_saved": 173,
+      "instruction_sha256": "158afb78ff191422b10483c8f4824b094b26009880b51fa3245c5d11366320e4"
+    },
+    {
+      "task_id": "039",
+      "related_apps": [
+        "browser",
+        "file_manager"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "CROSS_APP",
+      "actions_executed": 497,
+      "screenshots_saved": 497,
+      "instruction_sha256": "02711a3b733813ba2e2f4dd4879ab0dbde0679e833d80951ab6ad9de3ff35582"
+    },
+    {
+      "task_id": "040",
+      "related_apps": [
+        "excel"
+      ],
+      "browser_surface": false,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 55,
+      "screenshots_saved": 55,
+      "instruction_sha256": "b43b94cf9f28f73d87644fa7586042441ab8bfb38f6b5f3eba86693b28978bbb"
+    },
+    {
+      "task_id": "041",
+      "related_apps": [],
+      "browser_surface": false,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": false,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 125,
+      "screenshots_saved": 125,
+      "instruction_sha256": "faedf33e9301493febba5418674b6710322635c8e4361e8c073757c24277dfca"
+    },
+    {
+      "task_id": "042",
+      "related_apps": [
+        "shotcut"
+      ],
+      "browser_surface": false,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 191,
+      "screenshots_saved": 191,
+      "instruction_sha256": "6850c9f546656ceaf0dd8a657fe9608369e9dbb5217ab77ef3a665d1f5bce740"
+    },
+    {
+      "task_id": "043",
+      "related_apps": [
+        "chrome",
+        "calendar"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "CROSS_APP",
+      "actions_executed": 102,
+      "screenshots_saved": 102,
+      "instruction_sha256": "160730d4ff75b102bd0d5c0406edd87b14cef66682a5734e6155d39ec238fbcd"
+    },
+    {
+      "task_id": "044",
+      "related_apps": [
+        "shotcut"
+      ],
+      "browser_surface": false,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": false,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 72,
+      "screenshots_saved": 69,
+      "instruction_sha256": "ad3c4cf830d5f4b7741d120181c0419fb0742a823005952c6614403bfd95f15d"
+    },
+    {
+      "task_id": "045",
+      "related_apps": [
+        "chrome"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 23,
+      "screenshots_saved": 23,
+      "instruction_sha256": "4a2ab693b3d4efe1dfb0dff4445edfacf7a36d2e7959808bdefc678333a0df5f"
+    },
+    {
+      "task_id": "046",
+      "related_apps": [
+        "chrome",
+        "mailhub",
+        "vaultbank",
+        "teamchat",
+        "file_manager",
+        "gimp"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "CROSS_APP",
+      "actions_executed": 88,
+      "screenshots_saved": 88,
+      "instruction_sha256": "c1b763567a679cfaf6d5072cbe93528e9a8d712a3711650a7206f953375b4a8b"
+    },
+    {
+      "task_id": "047",
+      "related_apps": [],
+      "browser_surface": false,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": false,
+      "judgment_semantics_explicit": false,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 219,
+      "screenshots_saved": 219,
+      "instruction_sha256": "aa52c1b8445eb3afd2db72bd0cb64e575f0cb9328af80654e195f0b21dc8ec4e"
+    },
+    {
+      "task_id": "048",
+      "related_apps": [
+        "chrome"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": false,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 493,
+      "screenshots_saved": 493,
+      "instruction_sha256": "d43c407d5ef77b078ec7cbc9fbd41b7fff0d419319122ec9bb32b213b6c22e6c"
+    },
+    {
+      "task_id": "049",
+      "related_apps": [
+        "wps"
+      ],
+      "browser_surface": false,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 54,
+      "screenshots_saved": 54,
+      "instruction_sha256": "d79df73c2608adbc380169747d4b44c834c53f12a41026c8dd659288408dda82"
+    },
+    {
+      "task_id": "050",
+      "related_apps": [
+        "reaper",
+        "chrome",
+        "libreoffice_calc"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "CROSS_APP",
+      "actions_executed": 146,
+      "screenshots_saved": 146,
+      "instruction_sha256": "2f0c2fcab325c55fcc9e953e6d791b2e6e8f916dd0c1ca48be9f0f1474213e6b"
+    },
+    {
+      "task_id": "051",
+      "related_apps": [
+        "gimp",
+        "file_manager"
+      ],
+      "browser_surface": false,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "CROSS_APP",
+      "actions_executed": 39,
+      "screenshots_saved": 39,
+      "instruction_sha256": "b001524f81d69d66c3c0a42a237c15f2069c8155bf1546d54794a34ff9f4b5be"
+    },
+    {
+      "task_id": "052",
+      "related_apps": [],
+      "browser_surface": false,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 224,
+      "screenshots_saved": 224,
+      "instruction_sha256": "ca340ab910c89924a90d178a81847142d879480b3fe9c78778fb9a2ddc872b7c"
+    },
+    {
+      "task_id": "053",
+      "related_apps": [
+        "shotcut"
+      ],
+      "browser_surface": false,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": false,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 103,
+      "screenshots_saved": 103,
+      "instruction_sha256": "04f09308e663114f5a50eefd7267f7b3e5e99f14e8e64be324822084f3dab8e6"
+    },
+    {
+      "task_id": "054",
+      "related_apps": [
+        "gimp",
+        "file_manager"
+      ],
+      "browser_surface": false,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": false,
+      "transfer_class": "CROSS_APP",
+      "actions_executed": 63,
+      "screenshots_saved": 63,
+      "instruction_sha256": "54120589743d4f52658b4cf91180313fa98b284a867c5197f34944419a9e8a67"
+    },
+    {
+      "task_id": "055",
+      "related_apps": [
+        "shotcut"
+      ],
+      "browser_surface": false,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 224,
+      "screenshots_saved": 224,
+      "instruction_sha256": "80e5743f34b8c6711a1eacc5a4441652d4e977597c3ff7b0cd10a32aafb5114c"
+    },
+    {
+      "task_id": "056",
+      "related_apps": [
+        "shotcut",
+        "chrome"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "CROSS_APP",
+      "actions_executed": 423,
+      "screenshots_saved": 423,
+      "instruction_sha256": "c47ea7a34c40d2cf7b558ff9e916e00f202181a7d99b7cba0004cbbd1d7810c1"
+    },
+    {
+      "task_id": "057",
+      "related_apps": [
+        "chrome",
+        "terminal",
+        "vscode"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "CROSS_APP",
+      "actions_executed": 87,
+      "screenshots_saved": 87,
+      "instruction_sha256": "904837a370b0888c10f877b5f2d57eccdc6a119555afb77317a23cc4a12e592f"
+    },
+    {
+      "task_id": "058",
+      "related_apps": [
+        "wps"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 142,
+      "screenshots_saved": 142,
+      "instruction_sha256": "52e6d28722e4eee22884363a377ee9e022e9e400e129b71540a0bdfac640c1aa"
+    },
+    {
+      "task_id": "059",
+      "related_apps": [
+        "geogebra"
+      ],
+      "browser_surface": false,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 85,
+      "screenshots_saved": 85,
+      "instruction_sha256": "70ce0b837303de16f3633b45a773462270bbbc218658a6efc79a21763084ef87"
+    },
+    {
+      "task_id": "060",
+      "related_apps": [
+        "wps"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 113,
+      "screenshots_saved": 113,
+      "instruction_sha256": "186646cca277eeee0115d5ec0c1bea3efbfa770d335918dd23fc380af4b1bd4a"
+    },
+    {
+      "task_id": "061",
+      "related_apps": [
+        "gimp"
+      ],
+      "browser_surface": false,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 30,
+      "screenshots_saved": 30,
+      "instruction_sha256": "0570136747f58b6f8211eddb865adda909182648ee5d88c8fe6c071de4afc8af"
+    },
+    {
+      "task_id": "062",
+      "related_apps": [
+        "chrome",
+        "zotero"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": false,
+      "transfer_class": "CROSS_APP",
+      "actions_executed": 67,
+      "screenshots_saved": 67,
+      "instruction_sha256": "f4cdf58801d11cb19e0b60baddaf0b2f536f32a6244b81d6125fc0d1dbd72815"
+    },
+    {
+      "task_id": "063",
+      "related_apps": [
+        "wps"
+      ],
+      "browser_surface": false,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": false,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 40,
+      "screenshots_saved": 40,
+      "instruction_sha256": "25bb85bf49c346cead936c339c0c4d6d7e95e462e9372aeca717185e42a845c4"
+    },
+    {
+      "task_id": "064",
+      "related_apps": [
+        "vscode",
+        "libero"
+      ],
+      "browser_surface": false,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "CROSS_APP",
+      "actions_executed": 179,
+      "screenshots_saved": 179,
+      "instruction_sha256": "a0b12d7c2beab0096029c682a27efaf943210991a938a613f9b39bc7bb08d6b4"
+    },
+    {
+      "task_id": "065",
+      "related_apps": [
+        "chrome"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": false,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 174,
+      "screenshots_saved": 174,
+      "instruction_sha256": "e3128cff995f24e0e4acd450a67534d58214cb72722badcc07062e30fd1318e4"
+    },
+    {
+      "task_id": "066",
+      "related_apps": [
+        "wps"
+      ],
+      "browser_surface": false,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 58,
+      "screenshots_saved": 58,
+      "instruction_sha256": "27996d42d957f24883df9ed841e6bbfbcba71518684213150a914c247265d7cb"
+    },
+    {
+      "task_id": "067",
+      "related_apps": [
+        "musescore"
+      ],
+      "browser_surface": false,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 312,
+      "screenshots_saved": 312,
+      "instruction_sha256": "e3b475b7574bcc43f4305116683466575b8fe59051e86af1ce087e2226b7582b"
+    },
+    {
+      "task_id": "068",
+      "related_apps": [
+        "chrome"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 23,
+      "screenshots_saved": 23,
+      "instruction_sha256": "f5e8ac02ae336d1670252f5a7dda35aab6e068f9471685c9d71cee125e3698ff"
+    },
+    {
+      "task_id": "069",
+      "related_apps": [
+        "chrome",
+        "mailhub",
+        "calendar",
+        "libreoffice_writer"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "CROSS_APP",
+      "actions_executed": 106,
+      "screenshots_saved": 106,
+      "instruction_sha256": "b6282d1c50aabd1b027e93a09db2fdf91add1343915fa094a0cf78135e652264"
+    },
+    {
+      "task_id": "070",
+      "related_apps": [
+        "chrome"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 132,
+      "screenshots_saved": 132,
+      "instruction_sha256": "0c27c0268b8a3a092d538a790a89cbbb015d94f62b806ac327cf64049e2426fa"
+    },
+    {
+      "task_id": "071",
+      "related_apps": [
+        "musescore"
+      ],
+      "browser_surface": false,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 154,
+      "screenshots_saved": 154,
+      "instruction_sha256": "9756ac3af8f98f0809a3eb7bdf4c1ac750c13ead4f971e607e92e879679757be"
+    },
+    {
+      "task_id": "072",
+      "related_apps": [
+        "chrome"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 139,
+      "screenshots_saved": 139,
+      "instruction_sha256": "ec19d8626a2f282f1f0042aed17656aeba2032ecd995ee3f094bdae7f5299669"
+    },
+    {
+      "task_id": "073",
+      "related_apps": [
+        "chrome"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": false,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 109,
+      "screenshots_saved": 109,
+      "instruction_sha256": "acfa5b9e0fa8a63f94316dfc26dde3408d2e64f60a1f54f20747c872717f31ec"
+    },
+    {
+      "task_id": "074",
+      "related_apps": [
+        "chrome",
+        "vs_code"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": false,
+      "transfer_class": "CROSS_APP",
+      "actions_executed": 110,
+      "screenshots_saved": 110,
+      "instruction_sha256": "9a94f36a94e2b0529094e7a7936e2e1e114c35a264fa2c2fede2408dddd2c3bc"
+    },
+    {
+      "task_id": "075",
+      "related_apps": [
+        "chrome",
+        "vs_code"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "CROSS_APP",
+      "actions_executed": 61,
+      "screenshots_saved": 61,
+      "instruction_sha256": "71b4bfad85118bc4b31b308dd07057d3cc9236adbfa5a750474a54f72d79499a"
+    },
+    {
+      "task_id": "076",
+      "related_apps": [
+        "wps"
+      ],
+      "browser_surface": false,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 81,
+      "screenshots_saved": 81,
+      "instruction_sha256": "62c0e6a547e9c74d5777a7c4b8b3c13a48f09a2f260af08cfc4288965d8c6e49"
+    },
+    {
+      "task_id": "077",
+      "related_apps": [
+        "wps",
+        "chrome"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "CROSS_APP",
+      "actions_executed": 235,
+      "screenshots_saved": 235,
+      "instruction_sha256": "b1a2915bcc25b22c439b67ec1bb9e33ad0d4b962dbae5e12ef7293f7d47708df"
+    },
+    {
+      "task_id": "078",
+      "related_apps": [
+        "chrome",
+        "vs_code"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "CROSS_APP",
+      "actions_executed": 172,
+      "screenshots_saved": 172,
+      "instruction_sha256": "3ccf0b336677ff31193acf453ff7b410ecb3b3a42e3059e0a1f99733aaf7b9a2"
+    },
+    {
+      "task_id": "079",
+      "related_apps": [
+        "wps",
+        "chrome"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "CROSS_APP",
+      "actions_executed": 457,
+      "screenshots_saved": 457,
+      "instruction_sha256": "b1c865685983d9d54db0861815ff5eec34199fce572bd3409e0e2e78aeb5f98b"
+    },
+    {
+      "task_id": "080",
+      "related_apps": [
+        "wps"
+      ],
+      "browser_surface": false,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 142,
+      "screenshots_saved": 142,
+      "instruction_sha256": "64cad49f754e69d6238841bf0eee75c4a3989833fe47b6c8c2897daac6b04f45"
+    },
+    {
+      "task_id": "081",
+      "related_apps": [
+        "chrome"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 262,
+      "screenshots_saved": 262,
+      "instruction_sha256": "4d45c21757a7ef048642d8bfa24ed7b473ea4510deb59d00778d5d86238e7adb"
+    },
+    {
+      "task_id": "082",
+      "related_apps": [
+        "chrome",
+        "mailhub",
+        "terminal"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": false,
+      "transfer_class": "CROSS_APP",
+      "actions_executed": 65,
+      "screenshots_saved": 65,
+      "instruction_sha256": "8504ebc06c458809172f59cdb2b743d3a6b199f9ac03f14ff282443f515e08ba"
+    },
+    {
+      "task_id": "083",
+      "related_apps": [
+        "chrome",
+        "zotero",
+        "obsidian"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "CROSS_APP",
+      "actions_executed": 79,
+      "screenshots_saved": 79,
+      "instruction_sha256": "e806fa75f17b78ce1c21695f4bf1cf36268731bd3fcaf952bfcadad8e6c7767f"
+    },
+    {
+      "task_id": "084",
+      "related_apps": [
+        "vscode",
+        "reaper"
+      ],
+      "browser_surface": false,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "CROSS_APP",
+      "actions_executed": 48,
+      "screenshots_saved": 48,
+      "instruction_sha256": "492b9ec94890cfee67ca3d1b11a7ce4642fc5e39ef2d10b138e744b9793e14e3"
+    },
+    {
+      "task_id": "085",
+      "related_apps": [
+        "reaper"
+      ],
+      "browser_surface": false,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 28,
+      "screenshots_saved": 28,
+      "instruction_sha256": "c5cb93d9743dcc94ff145a39007f2693fa0cb716d8899f23f5f19c6b2190b1cf"
+    },
+    {
+      "task_id": "086",
+      "related_apps": [
+        "chrome",
+        "logisim"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "CROSS_APP",
+      "actions_executed": 132,
+      "screenshots_saved": 132,
+      "instruction_sha256": "ae3a912ec7b5fcb3b2085453cfa10a7257fb2720dd233364e68b85d4f2ca7c76"
+    },
+    {
+      "task_id": "087",
+      "related_apps": [
+        "wps"
+      ],
+      "browser_surface": false,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 365,
+      "screenshots_saved": 365,
+      "instruction_sha256": "6fcc7cbc72c73c2b6966cee0c24903da0606606a31f2227cdd440c0fccb49288"
+    },
+    {
+      "task_id": "088",
+      "related_apps": [
+        "libreoffice",
+        "thunderbird"
+      ],
+      "browser_surface": false,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "CROSS_APP",
+      "actions_executed": 61,
+      "screenshots_saved": 61,
+      "instruction_sha256": "a7b5645a53a5c97d2d96619189cad8fd526fc40e3b9fda0785bea784d554f87f"
+    },
+    {
+      "task_id": "089",
+      "related_apps": [
+        "chrome",
+        "vs_code"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "CROSS_APP",
+      "actions_executed": 83,
+      "screenshots_saved": 83,
+      "instruction_sha256": "9bc90c40bc52016002001ac51bb506b119155e9aecc894c59c2256b1a567ee6d"
+    },
+    {
+      "task_id": "090",
+      "related_apps": [
+        "wps"
+      ],
+      "browser_surface": false,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 371,
+      "screenshots_saved": 371,
+      "instruction_sha256": "0a3e627cfd9e9e5d7abb417e6993b53fa7d80f29cc871faa4bf11d3ed2a6c06e"
+    },
+    {
+      "task_id": "091",
+      "related_apps": [
+        "wps",
+        "chrome"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "CROSS_APP",
+      "actions_executed": 263,
+      "screenshots_saved": 263,
+      "instruction_sha256": "2d524b0c9627eb1a8ae0ad6a24794cdb4399213d41f55fdd2e1feb64be8e7ff0"
+    },
+    {
+      "task_id": "092",
+      "related_apps": [
+        "blender",
+        "libreoffice_impress"
+      ],
+      "browser_surface": false,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": false,
+      "transfer_class": "CROSS_APP",
+      "actions_executed": 107,
+      "screenshots_saved": 107,
+      "instruction_sha256": "2acb7c3ad471ca129befa16f7e8eb1dd9069cdbaf94eaff3b1df3a0a5a19206b"
+    },
+    {
+      "task_id": "093",
+      "related_apps": [
+        "libreoffice_impress",
+        "openboard"
+      ],
+      "browser_surface": false,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "CROSS_APP",
+      "actions_executed": 68,
+      "screenshots_saved": 68,
+      "instruction_sha256": "ef477da317e413456eda00907852bc2edbfde0be37d4977caa06b2dcf9b93431"
+    },
+    {
+      "task_id": "094",
+      "related_apps": [
+        "solvespace",
+        "mpv"
+      ],
+      "browser_surface": false,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": false,
+      "transfer_class": "CROSS_APP",
+      "actions_executed": 103,
+      "screenshots_saved": 103,
+      "instruction_sha256": "aa7e75620da58fa02846fd2c379635e3c8d0d103a695c52ee4b310697ca11206"
+    },
+    {
+      "task_id": "095",
+      "related_apps": [
+        "shotcut"
+      ],
+      "browser_surface": false,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": false,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 140,
+      "screenshots_saved": 140,
+      "instruction_sha256": "c1ace6a536f3d58aa8cee2bd61c592d95acc367d3b7fc9bae3485bb30f94ca9a"
+    },
+    {
+      "task_id": "096",
+      "related_apps": [
+        "wps"
+      ],
+      "browser_surface": false,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 188,
+      "screenshots_saved": 188,
+      "instruction_sha256": "d0fa7ab384591a24864e20f6695d0da70db91d346e226e7cc4007c25b20b62f8"
+    },
+    {
+      "task_id": "097",
+      "related_apps": [
+        "zotero",
+        "vscode"
+      ],
+      "browser_surface": false,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "CROSS_APP",
+      "actions_executed": 96,
+      "screenshots_saved": 96,
+      "instruction_sha256": "1fdf766f93647f979048c00fda4ab41ee6c1077545997574ed1f97871fc38a07"
+    },
+    {
+      "task_id": "098",
+      "related_apps": [
+        "chrome"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": false,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 233,
+      "screenshots_saved": 233,
+      "instruction_sha256": "1445fbfb6a79427fee95c125ab4e26f1d2da30ec8ea7e27de054b6b455421e17"
+    },
+    {
+      "task_id": "099",
+      "related_apps": [
+        "chrome",
+        "image_viewer"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "CROSS_APP",
+      "actions_executed": 77,
+      "screenshots_saved": 77,
+      "instruction_sha256": "b38fe3833f13f684599283202934c127f78be51d789b61a6bc3ec2dd5ab84894"
+    },
+    {
+      "task_id": "100",
+      "related_apps": [
+        "chrome"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": false,
+      "judgment_semantics_explicit": false,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 41,
+      "screenshots_saved": 41,
+      "instruction_sha256": "481437454d63577ab89a732d5bafb98c892646484438fa9e5ed0b77f41e337c5"
+    },
+    {
+      "task_id": "101",
+      "related_apps": [
+        "chrome",
+        "libreoffice_calc"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": false,
+      "transfer_class": "CROSS_APP",
+      "actions_executed": 481,
+      "screenshots_saved": 481,
+      "instruction_sha256": "bdc5adbc5b63f0c0619c36cd03fac08e6e04ef8f17b77fdcd98073a9b8a69bcb"
+    },
+    {
+      "task_id": "102",
+      "related_apps": [
+        "chrome",
+        "libreoffice_writer"
+      ],
+      "browser_surface": true,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": false,
+      "transfer_class": "CROSS_APP",
+      "actions_executed": 139,
+      "screenshots_saved": 139,
+      "instruction_sha256": "a8090e0f37208c8bbd4f38c61ae4e16f416781b8822292b1119d0699d6c8a1e0"
+    },
+    {
+      "task_id": "103",
+      "related_apps": [
+        "freecad",
+        "pdf_viewer"
+      ],
+      "browser_surface": false,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "CROSS_APP",
+      "actions_executed": 105,
+      "screenshots_saved": 105,
+      "instruction_sha256": "6feec2ba2ac2bbac5a5a470ad18622ebd72b7857e80ea64145a4a274aaa3d6f0"
+    },
+    {
+      "task_id": "104",
+      "related_apps": [
+        "freecad",
+        "pdf_viewer",
+        "image_viewer"
+      ],
+      "browser_surface": false,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "CROSS_APP",
+      "actions_executed": 83,
+      "screenshots_saved": 83,
+      "instruction_sha256": "81a40c0a7390bcca845ac960214a6eca8a6697051cd2f9fe97002e31b4b271ce"
+    },
+    {
+      "task_id": "105",
+      "related_apps": [
+        "3d-slicer",
+        "file-manager"
+      ],
+      "browser_surface": false,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "CROSS_APP",
+      "actions_executed": 44,
+      "screenshots_saved": 44,
+      "instruction_sha256": "9c033570ce79fa1e5919dfa38f576e0b7d3a54e01e33c4a3a3058d3b328021e9"
+    },
+    {
+      "task_id": "106",
+      "related_apps": [
+        "3d-slicer",
+        "file-manager",
+        "libreoffice_writer"
+      ],
+      "browser_surface": false,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": false,
+      "transfer_class": "CROSS_APP",
+      "actions_executed": 162,
+      "screenshots_saved": 162,
+      "instruction_sha256": "7f78f6052e45ee22fe47c710ff8e3b31e6da223197b9f1de13c3600c702f7ff2"
+    },
+    {
+      "task_id": "107",
+      "related_apps": [
+        "kicad"
+      ],
+      "browser_surface": false,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": false,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 195,
+      "screenshots_saved": 195,
+      "instruction_sha256": "f36e926dffbbd7f389a68381696d87752cef65194dfc96a60686f99dacee97ac"
+    },
+    {
+      "task_id": "108",
+      "related_apps": [
+        "kicad"
+      ],
+      "browser_surface": false,
+      "multi_step_observed": true,
+      "visual_state_observed": true,
+      "planning_semantics_explicit": true,
+      "judgment_semantics_explicit": true,
+      "transfer_class": "SINGLE_APP_OR_APP_UNDECLARED",
+      "actions_executed": 346,
+      "screenshots_saved": 346,
+      "instruction_sha256": "1c23d4c66f6f11aac24e25a4bbc3c0d226afe21a8af002fc1a65fb3a26c34f97"
+    }
+  ],
+  "deduction": {
+    "delete": [
+      "BROAD_CLAIM_NO_PUBLIC_TASK_SEMANTICS_SOURCE_EXISTS",
+      "TASK_UNIVERSE_SEMANTIC_COVERAGE_MATRIX_CANNOT_BE_CONSTRUCTED_WITHOUT_READING_GATED_TASK_IMPLEMENTATIONS"
+    ],
+    "preserve": [
+      "OFFICIAL_OWNER_GATED_TASK_IMPLEMENTATION_BYTES_NOT_ACCESSED",
+      "PUBLIC_REFERENCE_CORPUS_IS_THIRD_PARTY_NOT_OWNER_SIGNATURE",
+      "UNIVERSAL_ARBITRARY_APPLICATION_TRANSFER_NOT_PROVED_BY_FINITE_46_APP_108_TASK_SUPPORT",
+      "ANTHROPIC_EXACT_RUN_POPULATION_AND_HARNESS_EQUIVALENCE_OPEN",
+      "BRAIN_OSWORLD_SCORE_OR_STRONGER_ACCEPTANCE_CERTIFICATE_OPEN"
+    ],
+    "minimum_scope_residual": "UNIVERSAL_ARBITRARY_APPLICATION_TRANSFER_BEYOND_FINITE_108_TASK_46_APP_OBSERVED_SUPPORT__OR_A_SCOPE_SAFE_THEOREM_THAT_FINITE_COVERAGE_GENERATES_THE_CLAIMED_APPLICATION_CLASS",
+    "minimum_semantic_authentication_residual": "BIND_OWNER_OR_INDEPENDENTLY_STRONGER_EQUIVALENCE_BETWEEN_PUBLIC_REFERENCE_INSTRUCTIONS_TASK_RECORDS_AND_THE_PINNED_GATED_TASK_IMPLEMENTATION_SEMANTICS__THE_MATCHING_RELEASE_HASH_ATTESTATION_IS_STRONG_SUPPORT_BUT_NOT_OWNER_BYTE_ACCESS"
+  },
+  "hard_nonclaims": [
+    "NO_OFFICIAL_GATED_TASK_IMPLEMENTATION_BYTES_ACCESSED",
+    "NO_OWNER_SIGNATURE_ON_THE_PUBLIC_REFERENCE_CORPUS",
+    "NO_UNIVERSAL_ARBITRARY_APPLICATION_TRANSFER",
+    "NO_ANTHROPIC_EXACT_HARNESS_OR_POPULATION_EQUIVALENCE",
+    "NO_BRAIN_OSWORLD_SCORE",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
