@@ -300,23 +300,47 @@ def _ground_required_param(name: str, prompt: str) -> str | None:
     if any(k in compact for k in ("date", "start", "end", "due")) and dates:
         return dates[0]
 
-    # Prefer noun-bound identifiers before prefix heuristics.
+    # Prefer noun-bound identifiers, but inspect all matches. Natural language
+    # can contain phrases like "Facilities project in Asana" before the actual
+    # identifier phrase "project proj_facilities".
+    prefix_by_param = {
+        "spreadsheetid": "ss_",
+        "worksheetid": "ws_",
+        "projectgid": "proj_",
+        "projectid": "proj_",
+        "workspacegid": "ws_",
+        "workspaceid": "ws_",
+        "sectiongid": "sec_",
+        "sectionid": "sec_",
+    }
     noun_patterns = (
         (("spreadsheetid", "spreadsheet"), r"\bspreadsheet\s+([A-Za-z0-9_-]+)\b"),
-        (("worksheetid", "worksheet", "range"), r"\bworksheet\s+['\"]?([A-Za-z0-9 _-]+?)['\"]?(?=\s|[),.;]|$)"),
+        (("worksheetid", "worksheet", "range"), r"\bworksheet\s+['\"]?([A-Za-z0-9_-]+)['\"]?"),
         (("projectgid", "projectid", "project"), r"\bproject\s+([A-Za-z0-9_-]+)\b"),
         (("workspacegid", "workspaceid", "workspace"), r"\bworkspace\s+([A-Za-z0-9_-]+)\b"),
         (("sectiongid", "sectionid", "section"), r"\bsection\s+([A-Za-z0-9_-]+)\b"),
         (("channelid", "channel"), r"\bchannel\s+([A-Za-z0-9_-]+)\b"),
     )
     for names, pattern in noun_patterns:
-        if compact in names:
-            match = re.search(pattern, text, re.I)
-            if match:
-                return match.group(1).strip().strip("'\"")
+        if compact not in names:
+            continue
+        matches = [
+            value.strip().strip("'\"")
+            for value in re.findall(pattern, text, re.I)
+            if value and value.lower() not in _STOP
+        ]
+        expected_prefix = prefix_by_param.get(compact)
+        if expected_prefix:
+            preferred = [
+                value for value in matches
+                if value.lower().startswith(expected_prefix)
+            ]
+            if len(preferred) == 1:
+                return preferred[0]
+        if len(matches) == 1:
+            return matches[0]
 
     # API-specific stable prefixes used by the public benchmark state.
-    prefix_by_param = {
         "spreadsheetid": "ss_",
         "worksheetid": "ws_",
         "projectgid": "proj_",
