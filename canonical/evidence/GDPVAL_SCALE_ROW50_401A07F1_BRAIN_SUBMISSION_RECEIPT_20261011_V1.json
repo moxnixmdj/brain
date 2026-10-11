@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_SCALE_BRAIN_SUBMISSION_RECEIPT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__FRESH_ROW50_514_WORD_SCIENCE_EDITORIAL_DOCX_FROZEN__LINK_AND_RENDER_QA_PASS__ZERO_OWNER_SCORE_CREDIT",
+  "benchmark": "GDPval-AA v2.1",
+  "subject": {
+    "row_idx": 50,
+    "task_id": "401a07f1-d57e-4bb0-889b-22de8c900f0e",
+    "sector": "Information",
+    "occupation": "Editors"
+  },
+  "freshness": {
+    "precommit": "canonical/governance/GDPVAL_SCALE_FRESH_BATCH_ROWS35_219_PRECOMMIT_20261011_V1.json",
+    "precommit_commit": "c604f5006820ce3ca24d6afc2487a95a30886a6c",
+    "task_identity_frozen_before_prompt_reference_rubric_gold_model_output_or_judge_exposure": true,
+    "public_rubric_or_gold_used_before_output_freeze": false
+  },
+  "brain_execution_profile": {
+    "path": "canonical/capabilities/internalized/professional_work/stirrup_247f24d/BRAIN_EXECUTION_PROFILE_V1.json",
+    "cognition_surface": "CURRENT_CHATGPT_GPT_5_6_SOL_SESSION_OR_EQUIVALENT_ZERO_INCREMENTAL_BRAIN_APPROVED_SUBSTRATE",
+    "opaque_target_model_runtime_cognition": false,
+    "incremental_spend_usd": 0
+  },
+  "submission": {
+    "library_path": "/Project Brain/GDPval/scale/row50/GDPval_row50_microplastics_editorial.docx",
+    "library_file_id": "libfile_f6db60e4f0d4819190ef789b66597d0f",
+    "sha256": "7bdd114242a4191696bba3ab6aebcba19a8a1651d0332040de81b6d10bdb50fd",
+    "format": "docx",
+    "render_page_count": 2,
+    "word_count_including_reference_labels": 514
+  },
+  "prompt_requirements_qa": {
+    "headline_present": true,
+    "standfirst_present": true,
+    "clear_editorial_opinion_present": true,
+    "call_to_action_present": true,
+    "fact_checked_reporting_links_present": true,
+    "nature_news_reference_present": true,
+    "guardian_news_reference_present": true,
+    "guardian_style_guide_link_present": true,
+    "visual_render_inspected_all_pages": true,
+    "clipping_overlap_or_missing_glyphs_observed": false
+  },
+  "source_evidence": [
+    "https://www.nature.com/articles/d41586-026-02866-x",
+    "https://www.theguardian.com/environment/2026/jan/13/microplastics-human-body-doubt",
+    "https://www.theguardian.com/info/series/the-guardian-style-guide"
+  ],
+  "boundary": [
+    "NO_ARTIFICIAL_ANALYSIS_PAIRWISE_RESULT",
+    "NO_OWNER_ELO",
+    "NO_MATCHED_EPOCH_SCORE",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ]
+}
