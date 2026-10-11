@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_QUAL_SUCCESSOR_NEXT59_DETERMINISTIC_RECONSTRUCTION_V1",
+  "date": "2026-10-11",
+  "status": "DURABLE_CONTENT_ADDRESSED_DETERMINISTIC_RECONSTRUCTION__TWO_GENERATIONS_BYTE_IDENTICAL__UNSPENT",
+  "qualification_id": "QUAL_SUCCESSOR_NEXT59_20261011_V1",
+  "bound_predecessor": {
+    "frontier": "V52",
+    "manifest_sha256": "5cfdaf054fafabd04894396739defc82fed40ec3aba24b2f1b06030421b9c62f"
+  },
+  "generation": {
+    "seed": 1601787694,
+    "seed_derivation": "FIRST_32_BITS_BIG_ENDIAN_SHA256_OF_QUAL_ID_PIPE_V52_MANIFEST_IDENTITY",
+    "per_operation_budget": 1340,
+    "cases": 15410,
+    "bytes": 1822027,
+    "corpus_sha256": "5c7cf733614d58648dbe4fbfc855e7451651c652555eb895fcdcef39df780c92",
+    "generator_path": "canonical/research/bytes/tools/generate_qualification_v1.py",
+    "generator_git_blob_sha": "1a97ca1f7b93affc50ae7d22276672e4b74c4e30",
+    "exact_route_path": "canonical/research/bytes/tools/exact_symbolic_route_v1.py",
+    "exact_route_git_blob_sha": "7a0cd948e002b5e4b6feea55f75777b0886da238",
+    "semantic_digest_path": "canonical/research/bytes/tools/semantic_digest_v1.py",
+    "semantic_digest_git_blob_sha": "214b5b950f6c966e89318276e49341db521a1ef7",
+    "python": "3.13",
+    "sympy": "1.14.0",
+    "mpmath": "1.3.0"
+  },
+  "replay": {
+    "first_generation": {
+      "cases": 15410,
+      "sha256": "5c7cf733614d58648dbe4fbfc855e7451651c652555eb895fcdcef39df780c92"
+    },
+    "independent_regeneration": {
+      "cases": 15410,
+      "sha256": "5c7cf733614d58648dbe4fbfc855e7451651c652555eb895fcdcef39df780c92"
+    },
+    "byte_identity": true
+  },
+  "durability_semantics": "THE_DURABLE_OBJECT_IS_THE_CONTENT_ADDRESSED_RECONSTRUCTION_RECIPE_AND_EXPECTED_CORPUS_HASH__THE_LARGE_JSONL_NEED_NOT_BE_STORED_IF_REGENERATION_FROM_THE_PINNED_RECIPE_REPRODUCES_THE_BOUND_HASH_BEFORE_USE",
+  "use_rule": "BEFORE_SPENDING_NEXT59__REGENERATE_FROM_THE_PINNED_RECIPE__REQUIRE_EXACT_CASE_COUNT_BYTE_COUNT_AND_SHA256_MATCH__FAIL_CLOSED_ON_ANY_DRIFT",
+  "spent": false,
+  "hard_nonclaims": [
+    "NO_NEXT59_CASE_HAS_BEEN_EXECUTED_AGAINST_A_POST_V52_PHYSICAL_CUT",
+    "NO_CLAIM_PACKAGE_NAME_AND_VERSION_ALONE_REPLACE_THE_CONTENT_HASH_CHECK",
+    "NO_CAPABILITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "promotion_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
