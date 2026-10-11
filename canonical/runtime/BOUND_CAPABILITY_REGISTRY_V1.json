@@ -4868,6 +4868,118 @@
         "external_general_purpose_model_runtime_dependency_count": 0,
         "incremental_spend_usd": 0
       }
+    },
+    "python.software.repair.measured_acceptance.v1": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "incremental_spend_usd": 0,
+      "cost": 1,
+      "requires": [
+        "python.source.file.available",
+        "python.test.corpus.available"
+      ],
+      "provides": [
+        "python.software.repair.measured_acceptance",
+        "python.patch.candidate.objective_acceptance_verified"
+      ],
+      "result_fields": [
+        "status",
+        "pass",
+        "repair_pass",
+        "acceptance_stop_authorized",
+        "repair_status",
+        "winner_mode",
+        "realized_patches",
+        "candidate_subject_snapshot_sha256",
+        "measurement_receipt_payload_sha256",
+        "measurement_program_sha256",
+        "measurement_spec_sha256",
+        "measured_fields",
+        "acceptance_status",
+        "semantic_residual_obligation_ids",
+        "source_restored",
+        "model_dependency_count",
+        "external_general_purpose_model_runtime_dependency_count",
+        "incremental_spend_usd",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "keywords": [
+        "python",
+        "software",
+        "repair",
+        "measured",
+        "acceptance",
+        "content-addressed",
+        "candidate",
+        "verification",
+        "atomic",
+        "patch"
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "python.software.repair.measured_acceptance.v1",
+          "source_root": "${input.source_root}",
+          "test_paths": "${input.test_paths}",
+          "test_argv": "${input.test_argv}",
+          "task_text": "${input.goal}",
+          "output_path": "${input.output_path}",
+          "timeout_s": 20
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "python_repair_measured_acceptance_controller_v1",
+      "entrypoint": "run",
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "limitations": [
+        "Composes verified provenance-guided bounded Python repair with isolated candidate realization, content-addressed repository measurement, and measurement-bound objective raw-task acceptance.",
+        "Repair patches are realized only in a temporary copied source root; candidate hashes and patch source hashes are verified and original source bytes remain restored.",
+        "Acceptance stop is authorized only for raw-task obligations that compile to the existing bounded objective acceptance routes; semantic residual obligations still block success.",
+        "Python only and inherited repair search remains bounded to the verified AST mutation/search families; no arbitrary patch completeness.",
+        "Passing measured tests does not establish hidden requirements, general mergeability, or FrontierCode score authority."
+      ],
+      "source": {
+        "type": "python_stdlib_composition",
+        "modules": [
+          "hashlib",
+          "importlib.util",
+          "json",
+          "os",
+          "pathlib",
+          "re",
+          "shutil",
+          "sys",
+          "tempfile"
+        ],
+        "adapter_path": "canonical/runtime/bound_capabilities/python_repair_measured_acceptance_controller_v1.py",
+        "composed_capabilities": [
+          "python.software.repair.guided.provenance.coupled.v1",
+          "python.repository.acceptance.measure.v1",
+          "python.task.acceptance.measured.objective.v1"
+        ]
+      },
+      "verification": {
+        "status": "INDEPENDENT_TWO_SPRITE_FOCUSED_FALSIFICATION_PASS",
+        "primary_sprite": "brain-capability-first-scheduler-verify-20261008-v1",
+        "primary_test_count": 8,
+        "independent_sprite": "brain-canonical-apply-slice-verify-20261011-v1",
+        "independent_test_count": 8,
+        "exact_two_carrier_replay": "8_OF_8_EACH",
+        "runtime_git_blob_sha": "0c9578042949e483e00136cd166c9209a110008d",
+        "test_git_blob_sha": "7cd60d37aa8e10496fa9ae9a0c73484bd2609d5a",
+        "model_dependency_count": 0,
+        "external_general_purpose_model_runtime_dependency_count": 0,
+        "incremental_spend_usd": 0
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
