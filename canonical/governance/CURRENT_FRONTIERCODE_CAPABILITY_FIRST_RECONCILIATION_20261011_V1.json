@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_FRONTIERCODE_CAPABILITY_FIRST_RECONCILIATION_20261011_V1",
   "date": "2026-10-11",
-  "status": "ACTIVE_CAPABILITY_FIRST__BENCHMARK_DEMOTED_TO_AUDIT__V5_INTERPROCEDURAL_PROVENANCE_AND_PROVENANCE_GUIDED_REPAIR_VERIFIED__FRONTIERCODE_SCORE_STILL_UNPROVED",
+  "status": "ACTIVE_CAPABILITY_FIRST__BENCHMARK_AUDIT_ONLY__V7_MEASUREMENT_BOUND_OBJECTIVE_ACCEPTANCE_VERIFIED__FRONTIERCODE_SCORE_STILL_UNPROVED",
   "mission_lock": {
     "primary_objective": "MAKE_THE_UNDERLYING_SOFTWARE_ENGINEERING_CAPABILITY_REAL_INSIDE_BRAIN",
     "capability_target": "UNSEEN_REPOSITORY_PLUS_SOFTWARE_TASK_TO_INDEPENDENTLY_VERIFIED_MERGEABLE_PATCH",
@@ -96,6 +96,38 @@
         "model_dependency_count": 0,
         "external_capability_provider_count": 0,
         "incremental_spend_usd": 0
+      },
+      {
+        "capability_id": "task.acceptance.objective.lossless.v1",
+        "runtime_git_blob_sha": "c138171744406edd8e75e4867634febdb596014b",
+        "test_git_blob_sha": "00a1b23a80c12cdb38493de0de6335b62247fef4",
+        "independent_replay": "canonical/verification/PYTHON_MEASUREMENT_BOUND_OBJECTIVE_ACCEPTANCE_V7_VERIFY_20261011_V1.json",
+        "capability_truth": "LOSSLESS_RAW_TASK_OBLIGATION_ACCOUNTING_PLUS_BOUNDED_OBJECTIVE_ACCEPTANCE_EXECUTION__UNBOUND_SEMANTIC_RESIDUALS_FAIL_CLOSED",
+        "model_dependency_count": 0,
+        "external_capability_provider_count": 0,
+        "incremental_spend_usd": 0
+      },
+      {
+        "capability_id": "python.repository.acceptance.measure.v1",
+        "registry_git_blob_sha": "3801a79448e68e9de48c76bdfd79e7245e2fe8a6",
+        "runtime_git_blob_sha": "8f5870418de5396b7ae82fbdceb5c51c70f3104c",
+        "test_git_blob_sha": "0c99781622b30b7067063f2be626e0c0f132be73",
+        "independent_replay": "canonical/verification/PYTHON_MEASUREMENT_BOUND_OBJECTIVE_ACCEPTANCE_V7_VERIFY_20261011_V1.json",
+        "capability_truth": "CONTENT_ADDRESSED_REPOSITORY_SNAPSHOT_PLUS_ISOLATED_PYTHON_TEST_AND_PARSE_MEASUREMENTS__ORIGINAL_SOURCE_UNCHANGED",
+        "model_dependency_count": 0,
+        "external_capability_provider_count": 0,
+        "incremental_spend_usd": 0
+      },
+      {
+        "capability_id": "python.task.acceptance.measured.objective.v1",
+        "registry_git_blob_sha": "3801a79448e68e9de48c76bdfd79e7245e2fe8a6",
+        "runtime_git_blob_sha": "36f4d62e6d7c785e7da7ef90b511eafafc4c9919",
+        "test_git_blob_sha": "4402a85ca8fc4b6f35c16b76d5b637bdf0d32f5b",
+        "independent_replay": "canonical/verification/PYTHON_MEASUREMENT_BOUND_OBJECTIVE_ACCEPTANCE_V7_VERIFY_20261011_V1.json",
+        "capability_truth": "OBJECTIVE_ACCEPTANCE_FIELDS_COME_ONLY_FROM_VALIDATED_CONTENT_ADDRESSED_REPOSITORY_MEASUREMENT_RECEIPT__SEMANTIC_RESIDUALS_BLOCK_STOP",
+        "model_dependency_count": 0,
+        "external_capability_provider_count": 0,
+        "incremental_spend_usd": 0
       }
     ]
   },
@@ -103,12 +135,14 @@
     {
       "stage": "RAW_TASK_SEMANTICS",
       "target": "RAW_SOFTWARE_REQUEST_TO_SOUND_EXPLICIT_BEHAVIORAL_AND_ACCEPTANCE_CONTRACT",
-      "state": "OPEN_GENERAL_CASE",
+      "state": "PARTIAL_LOSSLESS_RAW_TASK_ACCOUNTING_AND_OBJECTIVE_ACCEPTANCE_VERIFIED",
       "existing_support": [
         "goal_compiler.py",
-        "plain_goal.bound_capability.grounding.stdlib"
+        "plain_goal.bound_capability.grounding.stdlib",
+        "task.acceptance.objective.lossless.v1",
+        "python.task.acceptance.measured.objective.v1"
       ],
-      "residual": "ARBITRARY_SOFTWARE_REQUEST_SEMANTICS_NOT_SCOPE_COMPLETE"
+      "residual": "ARBITRARY_SOFTWARE_REQUEST_SEMANTIC_OBLIGATIONS_REMAIN_FAIL_CLOSED_WHEN_NO_SOUND_OBJECTIVE_COMPILER_ROUTE_EXISTS"
     },
     {
       "stage": "REPOSITORY_UNDERSTANDING_AND_LOCALIZATION",
@@ -140,26 +174,30 @@
     {
       "stage": "ACTIVE_DIAGNOSIS_AND_REPAIR",
       "target": "FAILURE_EVIDENCE_TO_CAUSAL_HYPOTHESIS_TO_NEXT_PATCH_UNTIL_ACCEPTANCE_OR_FAIL_CLOSED",
-      "state": "PARTIAL_INTERPROCEDURAL_PROVENANCE_GUIDED_REPAIR_VERIFIED",
+      "state": "PARTIAL_PROVENANCE_GUIDED_REPAIR_PLUS_MEASUREMENT_BOUND_ACCEPTANCE_VERIFIED_SEPARATELY",
       "existing_support": [
         "python.software.repair.loop.test_guided.ast.v1",
         "python.software.repair.loop.strict_progress.ast.v1",
         "python.software.repair.loop.coupled.ast.v1",
         "python.fault.localize.dynamic.dataflow.v1",
         "python.fault.provenance.interprocedural.value.v1",
-        "python.software.repair.guided.provenance.coupled.v1"
+        "python.software.repair.guided.provenance.coupled.v1",
+        "python.repository.acceptance.measure.v1",
+        "python.task.acceptance.measured.objective.v1"
       ],
-      "residual": "REPAIR_REMAINS_BOUND_TO_EXISTING_TEST_ORACLE_AND_BOUNDED_PYTHON_EDIT_BASIS__RAW_REQUEST_TO_INDEPENDENT_ACCEPTANCE_SEMANTICS_REMAINS_OPEN"
+      "residual": "REPAIR_CANDIDATE_OUTPUT_IS_NOT_YET_COMPOSED_INTO_ONE_ATOMIC_REPAIR_TO_MEASUREMENT_BOUND_ACCEPTANCE_CONTROLLER__EDIT_BASIS_REMAINS_BOUNDED"
     },
     {
       "stage": "INDEPENDENT_VERIFICATION",
       "target": "REQUESTED_BEHAVIOR_PLUS_REGRESSION_PLUS_SCOPE_DISCIPLINE_PLUS_CODEBASE_STANDARDS",
-      "state": "PARTIAL_TEST_ORACLE_AND_PROFESSIONAL_PROPERTY_SUPPORT",
+      "state": "PARTIAL_MEASUREMENT_BOUND_OBJECTIVE_ACCEPTANCE_VERIFIED",
       "existing_support": [
         "python.tests.audit.unittest",
+        "python.repository.acceptance.measure.v1",
+        "python.task.acceptance.measured.objective.v1",
         "professional quality property stack"
       ],
-      "residual": "PASSING_BOUND_TESTS_AND_BOUNDED_REPAIR_REPLAY_DO_NOT_ESTABLISH_COMPLETE_REQUEST_SEMANTICS__INDEPENDENT_ACCEPTANCE_MODEL_REMAINS_OPEN"
+      "residual": "ONLY_OBJECTIVELY_COMPILED_RAW_TASK_REQUIREMENTS_HAVE_CONTENT_ADDRESSED_REPOSITORY_MEASUREMENTS__UNBOUND_SEMANTIC_REQUIREMENTS_AND_GENERAL_MERGEABILITY_REMAIN_OPEN"
     },
     {
       "stage": "GENERALIZATION",
@@ -173,13 +211,14 @@
     "primary_work_class": "CAPABILITY_BUILD",
     "benchmark_instrumentation_state": "AUDIT_ONLY",
     "owner_wait_state": "NONBLOCKING_OPTIONAL_WAKE_EVENT",
-    "highest_leverage_next_build": "GENERAL_SOFTWARE_REPAIR_LOOP_V6__SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL",
+    "highest_leverage_next_build": "GENERAL_SOFTWARE_REPAIR_LOOP_V8__ATOMIC_REPAIR_TO_MEASUREMENT_BOUND_ACCEPTANCE_AND_SOUND_SEMANTIC_CELL_EXPANSION",
     "next_build_contract": [
-      "RAW_SOFTWARE_REQUEST_TO_EXPLICIT_BEHAVIORAL_PREDICATES_CONSTRAINTS_NEGATIVE_REQUIREMENTS_AND_SCOPE",
-      "BIND_EACH_ACCEPTANCE_PREDICATE_TO_AN_INDEPENDENT_EXECUTABLE_VERIFIER_OR_MARK_IT_UNBOUND",
-      "SEPARATE_EXISTING_TEST_EVIDENCE_FROM_REQUEST_SEMANTICS__TEST_PASS_MUST_NOT_IMPLY_COMPLETE_ACCEPTANCE",
-      "USE_ACCEPTANCE_PREDICATES_TO_GUIDE_AND_STOP_REPAIR_ONLY_WHEN_BOUND_VERIFICATION_CLEARS",
-      "QUALIFY_ON_UNSEEN_NON_BENCHMARK_SOFTWARE_TASKS_WITH_HELD_OUT_ACCEPTANCE_CASES",
+      "COMPOSE_PROVENANCE_GUIDED_REPAIR_OUTPUT_WITH_ISOLATED_CANDIDATE_REALIZATION",
+      "MEASURE_THE_REALIZED_CANDIDATE_WITH_CONTENT_ADDRESSED_REPOSITORY_MEASUREMENT",
+      "AUTHORIZE_REPAIR_STOP_ONLY_THROUGH_MEASUREMENT_BOUND_OBJECTIVE_ACCEPTANCE",
+      "KEEP_EVERY_UNBOUND_RAW_TASK_SEMANTIC_OBLIGATION_EXPLICIT_AND_FAIL_CLOSED",
+      "EXPAND_SEMANTIC_ACCEPTANCE_CELLS_ONLY_FROM_SOURCE_GROUNDED_RULES_OR_INDEPENDENT_EXECUTABLE_MEASUREMENTS",
+      "QUALIFY_THE_COMPOSED_LOOP_ON_UNSEEN_NON_BENCHMARK_SOFTWARE_TASKS",
       "NO_EXTERNAL_GENERAL_PURPOSE_MODEL_RUNTIME_COGNITION",
       "NO_BENCHMARK_SCORE_INFERENCE"
     ],
@@ -206,7 +245,10 @@
     "NO_CLAIM_INTRA_SYMBOL_BACKWARD_DEF_USE_IS_INTERPROCEDURAL_VALUE_PROVENANCE",
     "NO_CLAIM_INTERPROCEDURAL_VALUE_PROVENANCE_IS_COMPLETE_SEMANTIC_CAUSALITY",
     "NO_CLAIM_PROVENANCE_GUIDANCE_ALWAYS_REDUCES_SEARCH",
-    "NO_CLAIM_V5_REPAIR_CLOSES_RAW_REQUEST_ACCEPTANCE_SEMANTICS"
+    "NO_CLAIM_V5_REPAIR_CLOSES_RAW_REQUEST_ACCEPTANCE_SEMANTICS",
+    "NO_CLAIM_V7_CLOSES_GENERAL_NATURAL_LANGUAGE_SEMANTICS",
+    "NO_CLAIM_V7_TEST_MEASUREMENTS_PROVE_GENERAL_MERGEABILITY",
+    "NO_CLAIM_V7_IS_ALREADY_ATOMICALLY_COMPOSED_WITH_REPAIR_OUTPUT"
   ],
   "accounting": {
     "incremental_spend_usd": 0,
