@@ -1,41 +1,41 @@
 {
   "schema": "PROJECT_BRAIN_BYTES_ACTIVE_STATE_V1",
-  "status": "ACTIVE_RESEARCH__PROOF_EQUIVALENT_COMMENT_STRIP_V75_FRONTIER__SUCCESSOR_READY",
+  "status": "ACTIVE_RESEARCH__FAILCLOSED_MESSAGE_V76_FRONTIER__SUCCESSOR_READY",
   "date": "2026-10-11",
   "mission_lock": "Find the minimum resource-feasible executable description of the required capability set conditional on already-owned Brain substrate.",
   "governing_laws": [
     "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V1.md",
     "canonical/laws/BYTES_RESOURCE_BOUNDED_MINIMUM_MECHANISM_LAW_V1.md"
   ],
-  "source_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_COMMENT_STRIP_V75_SUCCESSOR_EXECUTION_20261011_V1.json",
+  "source_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_FAILCLOSED_MESSAGE_V76_SUCCESSOR_EXECUTION_20261011_V1.json",
   "exact_symbolic_state": {
-    "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_COMMENT_STRIP_V75_SUCCESSOR_EXECUTION_20261011_V1.json",
-    "evidence_git_blob_sha": "3d210db33e82ff43d7b80ba2e93147a21a4be8ff",
-    "status": "CURRENT_VERIFIED_BYTES_RESEARCH_FRONTIER__PROOF_CARRYING_COMMENT_STRIP_V75__NOT_PROMOTED_TO_OPUS_CAPABILITY",
-    "raw_python_source_bytes": 1616922,
-    "B_exec_raw_python_source_bytes": 1619682,
+    "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_FAILCLOSED_MESSAGE_V76_SUCCESSOR_EXECUTION_20261011_V1.json",
+    "evidence_git_blob_sha": "e16ebf592044dd004bcdb41f7bbd5078368d52cf",
+    "status": "CURRENT_VERIFIED_BYTES_RESEARCH_FRONTIER__FAILCLOSED_MESSAGE_DECISION_EQUIVALENCE_V76__NOT_PROMOTED_TO_OPUS_CAPABILITY",
+    "raw_python_source_bytes": 1595020,
+    "B_exec_raw_python_source_bytes": 1597780,
     "B_verify_semantic_digest_raw_bytes": 1358,
     "python_files": 277,
-    "final_untouched_qualification": "20470/20470__TRANSFERRED_FROM_V74_BY_STRONG_EXECUTABLE_EQUIVALENCE",
+    "final_untouched_qualification": "V75_NEXT81_20470_OF_20470__TRANSFERRED_BY_FAILCLOSED_MESSAGE_DECISION_EQUIVALENCE__V76_STRATIFIED_NEXT81_240_OF_240",
     "clean_room_execution": "PASS__278_OF_278_DURABLE_FILES_BYTE_IDENTICAL",
     "archive_replay": "CONTENT_ADDRESSED_ARCHIVE",
-    "manifest_sha256": "42c3255fe51bc6e7c30afd912d3fd3aabc422742b4671eed1e7b7fc50ce290f9",
-    "durable_archive_bytes": 266076,
-    "durable_archive_sha256": "95eb0eeb6cecd9c91b36c791739220fcd84896cba556557a0ff77a04e8c1a7c3",
+    "manifest_sha256": "407e9c792852d45212362356c7ccbb9faffc491426dc4d7b166a84fa0be8e5b9",
+    "durable_archive_bytes": 265392,
+    "durable_archive_sha256": "c55cb88310a65020c5389a4becb5de6cd5cf5a5fed08138a2b1e0713f7f5fc8a",
     "durable_archive_persisted": true,
-    "durable_archive_library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V75_SUCCESSOR_20261011_V1.tar.xz",
-    "durable_archive_library_file_id": "libfile_2e9cd9083d308191a82c4349b9c82d3f",
-    "raw_improvement_vs_previous_frontier_bytes": 144,
+    "durable_archive_library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V76_FAILCLOSED_SUCCESSOR_20261011_V1.tar.xz",
+    "durable_archive_library_file_id": "libfile_ca022a44a5fc8191947d9536ecdba603",
+    "raw_improvement_vs_previous_frontier_bytes": 21902,
     "promotion_credit_from_this_record": 0
   },
   "current_bottleneck": {
-    "subsystem": "POST_V75_RERANK_PENDING",
-    "last_structural_cut": "PROOF_CARRYING_COMMENT_AND_TRAILING_WHITESPACE_COMPACTION_V75",
+    "subsystem": "POST_V76_RERANK_PENDING",
+    "last_structural_cut": "FAILCLOSED_NOTIMPLEMENTEDERROR_MESSAGE_COMPACTION_V76",
     "required_surface": [
       "complete bounded exact-symbolic route"
     ],
-    "next_action": "Rerank exact V75 using inherited spent NEXT81 under strong executable equivalence; make a new physical cut before touching corrected QUAL_SUCCESSOR_NEXT82_20261011_V1.",
-    "note": "V75 changes only three modules and proves significant-token, AST, and recursive executable-code identity to V74. Partial direct NEXT81 replay is 16,760/16,760; remaining cases were not executed. Corrected NEXT82 remains frozen unspent."
+    "next_action": "Rerank exact V76 using inherited spent NEXT81 under fail-closed decision equivalence; make a new physical cut before touching corrected QUAL_SUCCESSOR_NEXT82_20261011_V1.",
+    "note": "V76 collapses 466 identical fail-closed NotImplementedError messages across 61 files while preserving exception type. The bounded qualification harness treats any exception as failure independent of message text. Stratified NEXT81 support replay is 240/240; corrected NEXT82 remains frozen unspent."
   },
   "rejected_do_not_reopen_without_new_evidence": [
     "parameter count as terminal metric",
@@ -69,16 +69,16 @@
   "fresh_local_donor_evidence": "canonical/evidence/BYTES_SYMPY_1_14_DEPENDENCY_CENSUS_20261010_V1.json",
   "execution_reconciliation": {
     "stock_donor_available_in_current_runtime": "SymPy 1.14.0 plus mpmath 1.3.0",
-    "fresh_candidate_raw_python_source_bytes": 1616922,
-    "fresh_candidate_B_exec_raw_python_source_bytes": 1619682,
-    "untouched_qualification": "20470/20470__TRANSFERRED_BY_STRONG_EXECUTABLE_EQUIVALENCE",
+    "fresh_candidate_raw_python_source_bytes": 1595020,
+    "fresh_candidate_B_exec_raw_python_source_bytes": 1597780,
+    "untouched_qualification": "V75_NEXT81_20470_OF_20470__TRANSFERRED_BY_FAILCLOSED_MESSAGE_DECISION_EQUIVALENCE",
     "clean_room_execution": "PASS__278_OF_278_DURABLE_FILES_BYTE_IDENTICAL",
     "archive_replay": "CONTENT_ADDRESSED_ARCHIVE",
-    "action_taken": "Removed 144 bytes of comments/trailing whitespace from three modules only after significant-token, AST, and recursive executable-code identity checks; partial NEXT81 replay 16,760/16,760 supports the stronger proof.",
-    "physical_next_step": "Continue from 1,616,922 bytes using inherited spent NEXT81 only; rerank before the next physical cut; do not spend corrected NEXT82 first.",
-    "predecessor_v74_superseded": true,
-    "spent_NEXT81_replay": "20470/20470__INHERITED_BY_STRONG_EXECUTABLE_EQUIVALENCE",
-    "direct_partial_NEXT81_replay": "16760/16760"
+    "action_taken": "Collapsed 466 identical fail-closed NotImplementedError messages to the same exception type across 61 files; no explicit NotImplementedError handler binds the message; qualification scoring is message-independent. Stratified NEXT81 support replay 240/240.",
+    "physical_next_step": "Continue from 1,595,020 bytes using inherited spent NEXT81 under fail-closed decision equivalence; rerank before next physical cut; do not spend corrected NEXT82 first.",
+    "predecessor_v75_superseded": true,
+    "spent_NEXT81_replay": "20470/20470__INHERITED_BY_FAILCLOSED_MESSAGE_DECISION_EQUIVALENCE",
+    "direct_stratified_NEXT81_replay": "240/240"
   },
   "historical_reported_predecessor": {
     "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_DONOR_SLICE_CHECKPOINT_20261010_V1.json",
@@ -87,7 +87,7 @@
     "qualification": "1854/1854",
     "provenance": "USER_SUPPLIED_TRANSCRIPT_CHECKPOINT"
   },
-  "fresh_execution_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_COMMENT_STRIP_V75_SUCCESSOR_EXECUTION_20261011_V1.json",
+  "fresh_execution_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_FAILCLOSED_MESSAGE_V76_SUCCESSOR_EXECUTION_20261011_V1.json",
   "next_frozen_qualification": {
     "id": "QUAL_SUCCESSOR_NEXT82_20261011_V1",
     "cases": 20700,
@@ -104,18 +104,18 @@
   },
   "durable_artifact_persistence": {
     "candidate_manifest_and_measurements": "PERSISTED_IN_CANONICAL_GITHUB_EVIDENCE",
-    "predecessor_reconstruction": "canonical/research/bytes/tools/conservative_ast_identical_inline_compact_v74.py",
-    "transform": "canonical/research/bytes/tools/conservative_comment_semantic_compact_v75.py",
+    "predecessor_reconstruction": "canonical/research/bytes/tools/conservative_comment_semantic_compact_v75.py",
+    "transform": "canonical/research/bytes/tools/conservative_failclosed_message_compact_v76.py",
     "exact_route": "canonical/research/bytes/tools/exact_symbolic_route_v1.py",
     "qualification_generator": "canonical/research/bytes/tools/generate_qualification_v1.py",
     "library_binary_status": "PERSISTED_IN_CHATGPT_LIBRARY",
-    "library_file_id": "libfile_2e9cd9083d308191a82c4349b9c82d3f",
-    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V75_SUCCESSOR_20261011_V1.tar.xz",
-    "library_binary_bytes": 266076,
-    "library_binary_sha256": "95eb0eeb6cecd9c91b36c791739220fcd84896cba556557a0ff77a04e8c1a7c3",
-    "proof_library_file_id": "libfile_dbbb5fc8527c8191bbafbf8744ecf39c",
+    "library_file_id": "libfile_ca022a44a5fc8191947d9536ecdba603",
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V76_FAILCLOSED_SUCCESSOR_20261011_V1.tar.xz",
+    "library_binary_bytes": 265392,
+    "library_binary_sha256": "c55cb88310a65020c5389a4becb5de6cd5cf5a5fed08138a2b1e0713f7f5fc8a",
+    "proof_library_file_id": "libfile_682843fbeb2881919d3d0da1d2b2dbdd",
     "next_frozen_corpus_library_file_id": "libfile_d16a034393bc81919a35bacdfacbb058",
-    "rule": "GitHub V75 evidence + verification, exact V75 archive, strong-equivalence proof, and corrected frozen NEXT82 are durable; capability promotion credit remains zero."
+    "rule": "GitHub V76 evidence + verification, exact V76 archive, fail-closed decision-equivalence proof, and corrected frozen NEXT82 are durable; capability promotion credit remains zero."
   },
   "predecessor_fresh_execution_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_RECOVERY_EXECUTION_20261010_V1.json",
   "reserved_predecessor_qualification_qual8": {
@@ -130,9 +130,9 @@
     "id": "QUAL_SUCCESSOR_NEXT81_20261011_V1",
     "cases": 20470,
     "corpus_sha256": "f6ce8c05e6c7c4a4df436d03176a4d824555ddc6abeaa557eb1d3fd1912f57a1",
-    "predecessor_V74_result": "20470/20470",
-    "candidate_V75_direct_partial_result": "16760/16760",
-    "candidate_V75_full_result": "TRANSFERRED_BY_STRONG_EXECUTABLE_EQUIVALENCE__NOT_FULLY_REEXECUTED",
+    "predecessor_V75_result": "20470/20470__TRANSFERRED_BY_STRONG_EXECUTABLE_EQUIVALENCE",
+    "candidate_V76_direct_stratified_result": "240/240",
+    "candidate_V76_full_result": "TRANSFERRED_BY_FAILCLOSED_MESSAGE_DECISION_EQUIVALENCE__NOT_FULLY_REEXECUTED",
     "failures_observed": 0,
     "external_second_carrier_verified": false,
     "spent": true
@@ -168,11 +168,11 @@
   "independent_verification_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_SECONDARY_PROFILE_V25_INDEPENDENT_VERIFICATION_20261010_V1.json",
   "prior_fresh_falsification_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_NEXT25_FALSIFICATION_20261010_V1.json",
   "current_frontier_independent_verification": {
-    "path": "canonical/verification/BYTES_EXACT_SYMBOLIC_COMMENT_STRIP_V75_STRONG_EQUIVALENCE_VERIFY_20261011_V1.json",
-    "git_blob_sha": "957131ce0b053cec0ede2cd3da99b80f84ae3392",
-    "status": "PASS__CHANGED_SURFACE_3_OF_3_SIGNIFICANT_TOKEN_AST_RECURSIVE_CODE_IDENTICAL__CLEAN_RECONSTRUCTION_278_OF_278__PARTIAL_NEXT81_16760_OF_16760__NEXT82_UNSPENT",
+    "path": "canonical/verification/BYTES_EXACT_SYMBOLIC_FAILCLOSED_MESSAGE_V76_VERIFY_20261011_V1.json",
+    "git_blob_sha": "cd17e0743231ba4cf030c2b1a0b39a0d4de15579",
+    "status": "PASS__466_OF_466_EXACT_FAILCLOSED_MESSAGE_COLLAPSES__61_FILES__SAME_EXCEPTION_TYPE__HARNESS_DECISION_EQUIVALENT__CLEAN_RECONSTRUCTION_278_OF_278__STRATIFIED_NEXT81_240_OF_240__NEXT82_UNSPENT",
     "independent_second_carrier_verified": false,
-    "carrier": "CHATGPT_CONTAINER_STRONG_EQUIVALENCE_REPLAY",
+    "carrier": "CHATGPT_CONTAINER_FAILCLOSED_DECISION_EQUIVALENCE_AUDIT",
     "promotion_credit_delta": 0
   },
   "next_frozen_reconstruction_verification": {
