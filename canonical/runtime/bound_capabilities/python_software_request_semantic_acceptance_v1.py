@@ -222,7 +222,7 @@ def compile_request(task_text:str)->dict[str,Any]:
     contract=_LOSSLESS.compile_contract(
         task_text,
         source_id="PYTHON_SOFTWARE_REQUEST_SEMANTIC_ACCEPTANCE_V1",
-        routing_target_effects=[],
+        routing_target_effects=["software.task.semantic_acceptance"],
         semantic_goal_contract=None,
     )
     if contract.get("pass") is not True:
