@@ -478,9 +478,7 @@
     "batch_path": "canonical/governance/PROFESSIONAL_SEMANTIC_V10_AUTHENTIC_POSITIVE_RECEIPT_BATCH_20261011_V1.json",
     "batch_git_blob_sha": "be9b8d1f441675ba0e275f582b144c0e5c662119",
     "independent_verification_path": "canonical/verification/PROFESSIONAL_SEMANTIC_V10_TOTALITY_BATCH_INDEPENDENT_VERIFY_20261011_V1.json",
-    "independent_verification_git_blob_sha": "618b43baa389fd4cf4c5a1a7dc1164419f91a61b",
-    "admitted_semantic_leaf_count": 12,
-    "semantic_property_truth_count": 12
+    "independent_verification_git_blob_sha": "618b43baa389fd4cf4c5a1a7dc1164419f91a61b"
   },
   "professional_property_truth_current": {
     "verified_leaf_count": 24,
