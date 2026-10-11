@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_CAPABILITY_FIRST_MISSION_LOCK_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PRIMARY_CAPABILITY_BRANCH_ACTIVE__EXACT_SCORE_BRANCH_AUDIT_ONLY",
+  "target_reference": {
+    "benchmark": "Humanity's Last Exam with tools",
+    "reference_score": 67.7
+  },
+  "primary_claim": "BRAIN_HAS_AT_LEAST_THE_GENERAL_CAPABILITY_DEMONSTRATED_BY_THE_REFERENCE_HLE_WITH_TOOLS_RESULT",
+  "exact_score_claim": "BRAIN_SCORED_AT_LEAST_67_7_UNDER_THE_REFERENCE_OWNER_PROTOCOL",
+  "branch_policy": {
+    "capability_branch": {
+      "priority": "PRIMARY",
+      "method": "REUSE_VERIFIED_BRAIN_OWNED_CAPABILITIES_THEN_RUN_MINIMUM_MISSING_ADVERSARIAL_WITNESSES",
+      "exact_target_grader_required": false,
+      "official_score_credit": 0
+    },
+    "exact_score_branch": {
+      "priority": "AUDIT_ONLY_UNLESS_EXACT_SCORE_IS_EXPLICITLY_REQUIRED",
+      "still_requires": [
+        "MATCHED_REFERENCE_PROTOCOL",
+        "REFERENCE_GRADER_BINDING_OR_PROVED_EQUIVALENCE"
+      ],
+      "certified": false,
+      "score_credit": 0
+    }
+  },
+  "current_capability_bottleneck": {
+    "evidence_commit": "63e58d35d7dc5993a58ed6add6b674830fedf891",
+    "consumed_public_diagnostic_sample": 25,
+    "retrieval_any_hit_rate": 0.52,
+    "conclusion": "RETRIEVAL_RECALL_AND_SOURCE_HEALTH_REMAIN_CURRENT_GENERAL_CAPABILITY_BOTTLENECK",
+    "next_action": "MEASURE_AND_REPAIR_SOURCE_HEALTH_AND_FALLBACK_BEHAVIOR_BEFORE_CONSUMING_FRESH_HLE"
+  },
+  "terminal_hle_policy": [
+    "DO_NOT_CONSUME_HLE_CASES_FOR_QUERY_TUNING",
+    "DO_NOT_READ_HLE_GOLD_BEFORE_SOLVER_COMMITMENTS",
+    "USE_HLE_ONLY_AS_A_LATE_AUDIT_AFTER_GENERAL_CAPABILITY_REPAIR_OR_WHEN_LITERAL_SCORE_IS_EXPLICITLY_REQUIRED"
+  ],
+  "external_model_solver_credit": 0,
+  "hle_67_7_certified": false,
+  "incremental_spend_usd": 0
+}
