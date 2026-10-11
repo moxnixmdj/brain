@@ -201,6 +201,7 @@ def compile_goal_contract(goal: str) -> dict[str, Any]:
             pending_context = pending_context[-12:]
             continue
 
+        prior_terms_in_clause: list[str] = []
         for hit_index, (start, action, trigger, forbidden) in enumerate(hits):
             # Give each action its own lexical scope instead of assigning every
             # noun in a long compound clause to every action.
@@ -221,6 +222,18 @@ def compile_goal_contract(goal: str) -> dict[str, Any]:
                         merged.append(term)
                 terms = merged
 
+            # Preserve the referent across adjacent actions in one compound
+            # clause only when the later action is explicitly anaphoric or
+            # shares a resource noun with the preceding action.
+            if hit_index > 0 and prior_terms_in_clause:
+                shares_resource = bool(set(terms) & set(prior_terms_in_clause))
+                if _ANAPHOR.search(scope) is not None or shares_resource:
+                    merged = []
+                    for term in [*prior_terms_in_clause, *terms]:
+                        if term not in merged:
+                            merged.append(term)
+                    terms = merged
+
             intent_id = "intent_" + str(len(intents))
             intents.append({
                 "id": intent_id,
@@ -231,6 +244,7 @@ def compile_goal_contract(goal: str) -> dict[str, Any]:
                 "resource_terms": terms,
                 "forbidden": forbidden,
             })
+            prior_terms_in_clause = list(terms)
         pending_context = []
     if not intents:
         return {
