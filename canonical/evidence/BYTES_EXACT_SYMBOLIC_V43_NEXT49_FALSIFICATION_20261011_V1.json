@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_V43_NEXT49_FALSIFICATION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "FRESH_NEXT49_FALSIFIES_PROMOTED_V43__EVALF_TRIG_CUT_REJECTED__SUBS_NEW_CUT_SURVIVES_CAUSAL_SPLIT__CURRENT_V43_AUTHORITY_MUST_BE_SUPERSEDED__ZERO_CREDIT",
+  "subject": {
+    "promoted_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_EVALF_SUBS_V43_SUCCESSOR_EXECUTION_20261011_V1.json",
+    "promoted_manifest_sha256": "def0459b04d0bcf848c3c06fb6f954fec7de8c7085fc69fe736936f20fe5b588",
+    "promoted_raw_python_source_bytes": 1740113,
+    "frozen_corpus_id": "QUAL_SUCCESSOR_NEXT49_20261011_V1",
+    "frozen_corpus_cases": 13110,
+    "frozen_corpus_sha256": "7bfc5ebde7f8bb1c41d31967f6f74dafb20dd9b3d3db77e1e101ffb7dd968a34"
+  },
+  "falsifying_case": {
+    "operation": "roots",
+    "roots_local_zero_based_index": 560,
+    "corpus_global_zero_based_index": 3980,
+    "parameters": [
+      -2,
+      0,
+      -1,
+      0,
+      -5
+    ],
+    "expected_semantic_digest": "45c7f2e20fddd7458ea40390d69e9dae277fc226f378522d3b5dfebd68869922",
+    "v43_observed": "EXC:NotImplementedError",
+    "result": "FAIL"
+  },
+  "causal_split": {
+    "evalf_trig_only_cut": "FAIL__SAME_NEXT49_ROOTS_COUNTEREXAMPLE",
+    "subs_new_only_cut": "PASS__SAME_COUNTEREXAMPLE",
+    "root_cause": "sympy/core/evalf.py::evalf_trig deletion is load-bearing for at least the falsifying quartic-roots path",
+    "safe_surviving_cut": "sympy/core/function.py::Subs.__new__"
+  },
+  "truth_boundary": [
+    "MEASURED: V43 passed spent NEXT47 and then-fresh NEXT48 but is falsified by the subsequently frozen NEXT49 corpus.",
+    "MEASURED: the exact NEXT49 roots case [-2,0,-1,0,-5] raises NotImplementedError under V43 where the stock-donor semantic digest is 45c7f2e20fddd7458ea40390d69e9dae277fc226f378522d3b5dfebd68869922.",
+    "MEASURED: restoring evalf_trig while keeping the Subs.__new__ cut repairs the counterexample.",
+    "MEASURED: restoring Subs.__new__ while keeping the evalf_trig cut does not repair the counterexample.",
+    "REJECTED: V43 as a valid current Bytes frontier.",
+    "NO CLAIM: NEXT49 is fresh evidence for the repaired successor, because the repaired successor was designed after observing this counterexample."
+  ],
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "quality_credit_delta": 0,
+  "promotion_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
