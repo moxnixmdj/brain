@@ -5,16 +5,12 @@ on:
     branches: [main]
     paths:
       - ".github/workflows/full-private-current-main-regression.yml"
-      - "canonical/runtime/raw_task_objective_acceptance_executor_v1.py"
-      - "canonical/tests/test_raw_task_objective_acceptance_executor_v1.py"
-      - "canonical/governance/RAW_TASK_OBJECTIVE_ACCEPTANCE_EXECUTOR_20261011_V1.json"
+      - "canonical/**"
   push:
     branches: [main]
     paths:
       - ".github/workflows/full-private-current-main-regression.yml"
-      - "canonical/runtime/raw_task_objective_acceptance_executor_v1.py"
-      - "canonical/tests/test_raw_task_objective_acceptance_executor_v1.py"
-      - "canonical/governance/RAW_TASK_OBJECTIVE_ACCEPTANCE_EXECUTOR_20261011_V1.json"
+      - "canonical/**"
   workflow_dispatch:
 
 concurrency:
@@ -173,5 +169,5 @@ jobs:
               raise SystemExit(1)
           PY
 
-# carrier: isolated-self-hosted-linux-x64-brain-regression-exact-subject-20261011-v5
+# carrier: isolated-self-hosted-linux-x64-brain-regression-exact-subject-auto-restart-on-canonical-drift-20261011-v6
 # receipt: log-and-check-summary-authoritative-for-canonicalization__artifact-storage-not-required
