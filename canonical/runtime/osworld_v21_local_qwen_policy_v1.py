@@ -145,6 +145,11 @@ Use generic state tools before pixel clicking when they are sufficient:
   CLICK/DOUBLE_CLICK/RIGHT_CLICK/MOVE/DRAG_TO/TYPE/PRESS/HOTKEY/SCROLL.
 - Use WAIT only when a state change needs time.
 - Use DONE only when current observations support task completion.
+- If recent history already contains a passing ASSERT_PATH_EXISTS or ASSERT_TEXT_EQUALS
+  receipt that directly verifies the requested file/state outcome, return DONE instead
+  of repeating the mutation.
+- If a post-mutation browser OBSERVE receipt visibly shows the requested goal state,
+  return DONE instead of repeating the prior click/fill/navigation.
 - Use FAIL only when the task is genuinely impossible from available tools/state.
 
 Never reference task IDs, benchmark source files, evaluator internals, hidden answers,
