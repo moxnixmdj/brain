@@ -1,14 +1,14 @@
 {
   "schema": "PROJECT_BRAIN_GDPVAL_DEFENSIBLE_FRESH_SUBMISSION_MANIFEST_20261011_V1",
   "date": "2026-10-11",
-  "status": "PARTIAL_CONTENT_ADDRESSED_MANIFEST__24_DEFENSIBLE_FRESH_SUBJECTS__FAIL_CLOSED_TOMBSTONES_PREVAIL",
+  "status": "PARTIAL_CONTENT_ADDRESSED_MANIFEST__25_DEFENSIBLE_FRESH_SUBJECTS__FAIL_CLOSED_TOMBSTONES_PREVAIL",
   "benchmark": "GDPval-AA v2.1",
   "dataset": {
     "revision_sha": "11e7900cdcac61bc4daf59e65feb238acda98fbf",
     "population_count": 220,
     "manifest_root_sha256": "f69af30fcea243ccb25d44c4a5380be0cdcac621287568525065034ce6cedae8"
   },
-  "fresh_subject_count": 24,
+  "fresh_subject_count": 25,
   "fresh_rows": [
     5,
     6,
@@ -33,6 +33,7 @@
     31,
     36,
     40,
+    211,
     217
   ],
   "fresh_subjects": [
@@ -244,6 +245,15 @@
       "status": "PASS__FRESH_ROW40_RENTAL_AGREEMENT_SELF_SERVICE_GUIDE_DOCX_FROZEN__RENDER_QA_PASS__ZERO_OWNER_SCORE_CREDIT"
     },
     {
+      "row_idx": 211,
+      "task_id": "a4a9195c-5ebe-4b8d-a0c2-4a6b7a49da8b",
+      "receipt_path": "canonical/evidence/GDPVAL_SCALE_ROW211_A4A9195C_BRAIN_SUBMISSION_RECEIPT_20261011_V1.json",
+      "receipt_blob_sha": "af620d6093e096e4b6088b76522829d674d227ec",
+      "precommit_commit": "c604f5006820ce3ca24d6afc2487a95a30886a6c",
+      "output_freeze_commit": "60850ec994d75b6f8b20346551fb6c0dab4e825b",
+      "status": "PASS__FRESH_ROW211_FOUR_PAGE_ESD_WAREHOUSE_SOP_DOCX_FROZEN__AUTHORITATIVE_STANDARD_AND_RENDER_QA_PASS__ZERO_OWNER_SCORE_CREDIT"
+    },
+    {
       "row_idx": 217,
       "task_id": "854f3814-681c-4950-91ac-55b0db0e3781",
       "receipt_path": "canonical/evidence/GDPVAL_SCALE_ROW217_854F3814_BRAIN_SUBMISSION_RECEIPT_20261011_V1.json",
@@ -300,10 +310,10 @@
     }
   ],
   "coverage": {
-    "fresh_frozen_tasks": 24,
+    "fresh_frozen_tasks": 25,
     "population_tasks": 220,
-    "fresh_fraction": 0.10909090909090909,
-    "remaining_without_defensible_fresh_submission": 196
+    "fresh_fraction": 0.11363636363636363,
+    "remaining_without_defensible_fresh_submission": 195
   },
   "precedence_rule": "EXPLICIT_CONTAMINATION_OR_IDENTITY_TOMBSTONE_OVERRIDES_ANY_LATER_RECEIPT_LABELLED_FRESH_FOR_THE_SAME_ROW",
   "boundary": [
