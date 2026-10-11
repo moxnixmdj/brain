@@ -33,19 +33,68 @@ def write(p:Path,obj):
 
 def frontier(root:Path):
     ids=O+[AA,TB]
-    m=root/"canonical/governance/ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_20261010_V2.json"
+    manifest_rel="canonical/governance/ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_20261010_V2.json"
+    m=root/manifest_rel
     write(m,{"schema":search.gate.MANIFEST_SCHEMA,"rows":[{"obligation_id":x} for x in ids]})
-    write(root/search.gate.CUT_PATH,{
+
+    verify_rel="canonical/verification/GDPVAL_FIXED_BAR_OWNER_PAIRWISE_NONNECESSITY_VERIFICATION_20261009_V1.json"
+    verify_path=root/verify_rel
+    write(verify_path,{
+      "schema":search.gate.GDPVAL_VERIFY_SCHEMA,
+      "status":"PASS__SOURCE_BINDINGS_CURRENT__WOLFRAM_SYMBOLIC_NONNECESSITY_TRUE__ZERO_CREDIT",
+      "conclusion":"EXACT_OWNER_PAIRWISE_SEMANTICS_IS_NOT_NECESSARY_FOR_CURRENT_FIXED_BAR_E1_ACCEPTANCE__PRESERVE_AS_DORMANT_ALTERNATIVE_ROUTE_ONLY",
+    })
+
+    reclass_rel="canonical/governance/GDPVAL_CURRENT_FIXED_BAR_ENGINE_RECLASSIFICATION_20261011_V1.json"
+    reclass_path=root/reclass_rel
+    write(reclass_path,{
+      "schema":search.gate.GDPVAL_RECLASS_SCHEMA,
+      "target_obligation":GDP,
+      "source_bindings":{"fixed_bar_nonnecessity_verification":{"path":verify_rel,"git_blob_sha":blob(verify_path)}},
+      "current_acceptance_shape":{
+        "acceptance_relation_class":"OBJECTIVE_FIXED_BAR",
+        "hidden_owner_pairwise_relation_is_free_variable_of_decision":False,
+      },
+      "engine_effect":{
+        "previous":"Q_ACCEPTANCE_RELATION_ROBUST_COMMON_POLICY",
+        "current":"O_OBJECTIVE_ACCEPTANCE_INSTANTIATION",
+        "new_primitive_required":False,
+      },
+    })
+
+    cut_rel=search.gate.CUT_PATH.as_posix()
+    cut_path=root/cut_rel
+    cut_status="TEST_O11_Q1_PARKED1"
+    write(cut_path,{
       "schema":search.gate.CUT_SCHEMA,
-      "status":"TEST_O11_Q1_PARKED1",
-      "source_bindings":{"manifest":[m.relative_to(root).as_posix(),blob(m)]},
+      "status":cut_status,
+      "source_bindings":{
+        "manifest":[manifest_rel,blob(m)],
+        "gdpval_fixed_bar_reclassification":[reclass_rel,blob(reclass_path)],
+      },
       "current_partition":{
-        "total_escape_rows":13,"active_rows":12,"parked_rows":1,
+        "total_escape_rows":13,"active_rows":12,"parked_rows":1,"active_gap_b_rows":0,
         "active_o_rows":11,"active_q_rows":1,
         "active_o_obligation_ids":O,"active_q_obligation_ids":[AA],"parked_obligation_ids":[TB],
       },
     })
 
+    write(root/search.gate.CURRENT_RESIDUAL_PATH,{
+      "schema":search.gate.CURRENT_RESIDUAL_SCHEMA,
+      "status":"TEST_CURRENT_RESIDUAL",
+      "escape_current_topology":{
+        "frozen_obligation_count":13,
+        "active_gap_a_acquisition_rows":12,
+        "active_gap_b_strict_progress_rows":0,
+        "parked_unresolved_rows":1,
+        "parked_obligation_ids":[TB],
+      },
+      "current_escape_two_engine_minimum_delta_cut":{
+        "path":cut_rel,
+        "git_blob_sha":blob(cut_path),
+        "status":cut_status,
+      },
+    })
 
 def claim(pid:str):
     return {"policy":{"predicate_id":pid},"evidence":{},"current_identity":{}}
