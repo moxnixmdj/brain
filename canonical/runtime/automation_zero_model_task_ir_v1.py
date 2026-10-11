@@ -185,28 +185,43 @@ def compile_task_ir(prompt: str) -> dict[str, Any]:
     raw_clauses = _action_split(normalized)
     clauses: list[dict[str, Any]] = []
     cursor = 0
+    pending_context: list[str] = []
 
     for ordinal, clause in enumerate(raw_clauses):
         actions = _action_tokens(clause)
         if not actions:
+            # Preserve explicit conditional/negative/recency context that
+            # grammatically scopes the next action instead of silently dropping it.
+            if _constraint_flags(clause):
+                pending_context.append(clause)
             continue
-        literals = _literal_rows(clause)
-        query = _discovery_query(clause, literals, actions)
+
+        context_text = " ".join(pending_context).strip()
+        pending_context = []
+        scoped_text = (context_text + ", " + clause).strip(", ") if context_text else clause
+        literals = _literal_rows(scoped_text)
+        query_literals = _literal_rows(clause)
+        query = _discovery_query(clause, query_literals, actions)
         if not query:
             continue
+
         pos = normalized.casefold().find(clause.casefold(), cursor)
         if pos < 0:
             pos = normalized.casefold().find(clause.casefold())
         span = [pos, pos + len(clause)] if pos >= 0 else None
         if pos >= 0:
             cursor = pos + len(clause)
+
         clauses.append({
             "ordinal": ordinal,
             "source_text": clause,
+            "context_text": context_text,
+            "scoped_text": scoped_text,
             "normalized_source_span": span,
             "source_text_sha256": _sha(clause),
+            "scoped_text_sha256": _sha(scoped_text),
             "action_tokens": actions,
-            "constraint_flags": _constraint_flags(clause),
+            "constraint_flags": _constraint_flags(scoped_text),
             "literals": literals,
             "discovery_query": query,
             "discovery_query_features": retrieval.features(query),
@@ -238,6 +253,5 @@ def compile_task_ir(prompt: str) -> dict[str, Any]:
         "terminal_authority": False,
         "acceptance_authority": False,
     }
-
 
 __all__ = ["SCHEMA", "compile_task_ir"]
