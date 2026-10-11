@@ -38,6 +38,13 @@
       "evidence": "canonical/verification/CHART_CURVE_X_AT_Y_QUERY_V1_VERIFY_20261011.json",
       "semantic_authority": "UNIQUE_LEGEND_BOUND_COLOR_CURVE_X_AT_Y_ONLY",
       "benchmark_score_authority": false
+    },
+    {
+      "atom": "ENDPOINT_DIRECT_CURVE_LABEL_AND_FAMILY_RANK",
+      "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__27_OF_27_TOTAL_CHECKS",
+      "evidence": "canonical/verification/CHART_DIRECT_CURVE_LABEL_FAMILY_RANK_V1_INDEPENDENT_VERIFY_20261011.json",
+      "semantic_authority": "ENDPOINT_ADJACENT_LABEL_TO_POLYLINE_AND_BOUND_FAMILY_RANK_ONLY",
+      "benchmark_score_authority": false
     }
   ],
   "chart_atoms_pending_current_blob_replay": [
@@ -87,7 +94,8 @@
     "chart.raster.positioned_ocr_axis_binding.v1",
     "chart.raster.legend_style_binding.v1",
     "chart.raster.curve_value_query.v1",
-    "chart.raster.curve_x_at_y_query.v1"
+    "chart.raster.curve_x_at_y_query.v1",
+    "chart.raster.direct_curve_label_family_rank.v1"
   ],
   "verified_generic_primitives": [
     {
@@ -156,13 +164,19 @@
   "direct_curve_label_family_rank": {
     "capability_id": "chart.raster.direct_curve_label_family_rank.v1",
     "verification": "canonical/verification/CHART_DIRECT_CURVE_LABEL_FAMILY_RANK_V1_VERIFY_20261011.json",
-    "result": "PASS__13_OF_13_CANDIDATE_PLUS_34_OF_34_NEIGHBORING_REGRESSION",
+    "result": "PASS__13_OF_13_CANDIDATE_PLUS_34_OF_34_NEIGHBORING_REGRESSION__SECOND_CARRIER_27_OF_27_PASS",
     "runtime_blob_sha": "e3be28bd83ce0a9359a2ce9cedc8415dbcf745d2",
     "tests_blob_sha": "4c8fc60d72e160f9995c5df1b0af75b97d9a1eb9",
     "verifier_run_id": 38155272543,
     "heldout_cases_consumed": 0,
     "benchmark_score_credit": false,
-    "second_carrier_independent": false,
-    "proved_scope": "ENDPOINT_ADJACENT_DIRECT_ALPHA_LABEL_TO_EXACT_POLYLINE__BOUND_FAMILY_RANK_AND_NEAREST_QUERY__LINEAR_OR_LOG10_Y"
+    "second_carrier_independent": true,
+    "proved_scope": "ENDPOINT_ADJACENT_DIRECT_ALPHA_LABEL_TO_EXACT_POLYLINE__BOUND_FAMILY_RANK_AND_NEAREST_QUERY__LINEAR_OR_LOG10_Y",
+    "independent_verification": "canonical/verification/CHART_DIRECT_CURVE_LABEL_FAMILY_RANK_V1_INDEPENDENT_VERIFY_20261011.json",
+    "independent_verifier_pr": 2723,
+    "independent_verifier_run_id": 38167990652,
+    "independent_verifier_job_id": 114554450529,
+    "independent_artifact_id": 11713120076,
+    "independent_tests": "13_AUTHORED_PLUS_14_VERIFIER_AUTHORED_PASS"
   }
 }
