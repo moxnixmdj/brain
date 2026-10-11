@@ -1,0 +1,79 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_V21_REFERENCE_RELEASE_EQUIVALENCE_20261011_V1",
+  "date": "2026-10-11",
+  "status": "REFERENCE_TO_OFFICIAL_V21_PUBLIC_INSTRUCTION_SEMANTICS_AUTHENTICATED__ANTHROPIC_SEP10_POPULATION_HARNESS_AND_SCORE_REMAIN_OPEN__ZERO_CREDIT",
+  "target_predicate": "OSWORLD_2_1_PARTIAL_GE_81_8",
+  "objective": "Reuse the existing content-addressed identity and semantic-coverage machinery to separate the already-proved public-reference-to-official-v2.1 release identity from the genuinely open Anthropic September-10 population/harness/score boundary.",
+  "reused_mechanisms": [
+    "CONTENT_ADDRESSED_RELEASE_IDENTITY",
+    "EXACT_TASK_HASH_MANIFEST_BINDING",
+    "INDEPENDENT_108_OF_108_PUBLIC_SEMANTIC_REPLAY",
+    "INSTRUCTION_TO_TASK_RECORD_IDENTITY_CHECK",
+    "FAIL_CLOSED_EQUIVALENCE_ADAPTER"
+  ],
+  "owner_release_source": {
+    "repository": "xlang-ai/OSWorld-V2",
+    "tag": "osworld-v2.1",
+    "path": "benchmark_releases/osworld-v2.1.json",
+    "release": "osworld-v2.1",
+    "task_repository": "xlangai/osworld_v2_tasks",
+    "task_commit": "0a1aadad95aa79b00b3783e717d865089ab06e26",
+    "task_hash_manifest_sha256": "c54d428329be5ca72742a6becd49ee83cf739df5dea429bba182e1f3f21badfb",
+    "task_count": 108,
+    "owner_verification_statement": "ALL_108_UNMODIFIED_TASK_FILES_AT_SELECTED_COMMIT_VERIFIED__REGENERATED_MANIFEST_IN_MAIN_CODE_REPOSITORY"
+  },
+  "independent_reference_source": {
+    "dataset": "simular-ai/sai-osworld-v21-reference-runs",
+    "observed_dataset_revision": "abfb5852189f49e81255c38d98287df29ae53658",
+    "scorecard_path": "scorecard/osworld-v2.1.json",
+    "scorecard_sha256": "61781c076bd5ce850b35bfeb41b7ca626688c1c4b8f14dab27bf62ca9857df1d",
+    "task_release": "osworld-v2.1",
+    "hash_manifest_sha256": "c54d428329be5ca72742a6becd49ee83cf739df5dea429bba182e1f3f21badfb",
+    "task_tree_sha256": "df7c64b5f849a4336ab2c6616d017a379e46f91511f4a33da1b6a1a373ffb945",
+    "matched": 108,
+    "integrity_checked_before_every_run": true,
+    "each_run_manifest_carries_same_values": true
+  },
+  "brain_public_replay": {
+    "path": "canonical/verification/OSWORLD_V21_PUBLIC_REFERENCE_SEMANTIC_COVERAGE_INDEPENDENT_VERIFY_20261011_V1.json",
+    "unique_tasks_replayed": 108,
+    "instruction_task_record_identity_checks_passed": 108,
+    "canonical_release_hash_match": true
+  },
+  "adapter": {
+    "runtime_path": "canonical/runtime/osworld_v21_reference_release_equivalence_v1.py",
+    "tests_path": "canonical/tests/test_osworld_v21_reference_release_equivalence_v1.py",
+    "expected_result": "PASS__PUBLIC_INSTRUCTION_SEMANTICS_AUTHENTICATED_TO_OFFICIAL_OSWORLD_V21_RELEASE"
+  },
+  "deduction": {
+    "closed": [
+      "PUBLIC_REFERENCE_CORPUS_RELEASE_IDENTITY_TO_OFFICIAL_OSWORLD_V21",
+      "PUBLIC_REFERENCE_108_TASK_INSTRUCTION_SEMANTICS_PROVENANCE_TO_EXACT_INTEGRITY_CHECKED_OFFICIAL_V21_TASK_RELEASE"
+    ],
+    "deleted_work": [
+      "REACQUIRE_OWNER_GATED_TASK_BYTES_SOLELY_TO_AUTHENTICATE_THE_ALREADY_INTEGRITY_BOUND_PUBLIC_INSTRUCTION_CORPUS",
+      "TREAT_PUBLIC_REFERENCE_TO_OFFICIAL_V21_RELEASE_IDENTITY_AS_OPEN"
+    ],
+    "preserve": [
+      "NO_CLAIM_HIDDEN_GATED_IMPLEMENTATION_BYTES_WERE_READ",
+      "NO_CLAIM_ANTHROPIC_2026_09_10_TARGET_POPULATION_EQUALS_OSWORLD_V21",
+      "NO_PROTOCOL_EQUIVALENT_BRAIN_HARNESS_YET",
+      "NO_AUTHENTIC_BRAIN_PARTIAL_SCORE_GE_81_8_YET"
+    ],
+    "new_irreducible_delta": "BIND_ANTHROPIC_2026_09_10_TARGET_POPULATION_TO_OFFICIAL_OSWORLD_V21_OR_A_SOUND_EQUIVALENT_ACCEPTED_POPULATION__THEN_BIND_PROTOCOL_EQUIVALENT_BRAIN_HARNESS_AND_AUTHENTIC_PARTIAL_SCORE_GE_81_8__OR_STRONGER_SCOPE_COMPLETE_CERTIFICATE"
+  },
+  "hard_nonclaims": [
+    "NO_OWNER_GATED_TASK_IMPLEMENTATION_BYTES_ACCESSED",
+    "NO_HIDDEN_IMPLEMENTATION_BYTE_EQUIVALENCE_CLAIM",
+    "NO_ANTHROPIC_SEP10_POPULATION_EQUIVALENCE",
+    "NO_BRAIN_OSWORLD_SCORE",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
