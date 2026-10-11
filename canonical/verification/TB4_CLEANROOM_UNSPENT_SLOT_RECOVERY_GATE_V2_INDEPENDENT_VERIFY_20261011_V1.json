@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_CLEANROOM_UNSPENT_SLOT_RECOVERY_GATE_V2_INDEPENDENT_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__INDEPENDENT_SPRITE__8_OF_8__FILES_AND_COGNITION_ISOLATION_REQUIRED__ZERO_SUCCESS_CREDIT",
+  "supersedes": "canonical/verification/TB4_CLEANROOM_UNSPENT_SLOT_RECOVERY_GATE_INDEPENDENT_VERIFY_20261011_V1.json",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/tb4_cleanroom_unspent_slot_recovery_v1.py",
+      "git_blob_sha": "8ad3af369173ce76c63d151c2b0966f97e45b891"
+    },
+    "tests": {
+      "path": "canonical/tests/test_tb4_cleanroom_unspent_slot_recovery_v1.py",
+      "git_blob_sha": "5ce91f34b8209dc43a086a5626c09ea864e5c078"
+    }
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "sprite_name": "brain-field-projection-verify-20261011-v1",
+    "sprite_id": "sprite-f7ddb46b-7a9b-437e-8079-e815b9ab6fb5",
+    "python": "3.14.4",
+    "tests_run": 8,
+    "tests_passed": 8,
+    "tests_failed": 0,
+    "marker": "TB4_CLEANROOM_RECOVERY_GATE_COGNITIVE_PASS_8_OF_8"
+  },
+  "truth_repair": {
+    "prior_gap": "V1_ISOLATED_FILES_BUT_DID_NOT_BIND_ACTOR_COGNITIVE_STATE",
+    "correction": "RECOVERY_REQUIRES_FILE_ISOLATION_AND_COGNITIVE_ISOLATION",
+    "admissible_cognition_modes": [
+      "DETERMINISTIC_BRAIN_ACTOR_WITH_CONTENT_ADDRESSED_PROGRAM_AND_BOUND_RANDOMNESS",
+      "STATELESS_PINNED_EXTERNAL_COGNITION_WITH_FRESH_SESSION_AND_CONVERSATION_MEMORY_DISABLED"
+    ]
+  },
+  "proved": [
+    "POSTVERIFIER_USER_OR_CHAT_STATE_CAUSES_FAIL_CLOSED",
+    "TASK_SPECIFIC_POSTRESULT_MEMORY_CAUSES_FAIL_CLOSED",
+    "EXTERNAL_COGNITION_REQUIRES_PINNED_MODEL_AND_CONFIGURATION",
+    "EXTERNAL_COGNITION_REQUIRES_PROVIDER_CONVERSATION_MEMORY_DISABLED",
+    "EXTERNAL_COGNITION_REQUIRES_FRESH_SESSION_PER_TRIAL",
+    "DETERMINISTIC_ACTOR_REQUIRES_CONTENT_ADDRESSED_PROGRAM_AND_BOUND_RANDOMNESS",
+    "ALL_V1_FILE_LEAKAGE_AND_CONSUMED_SLOT_GUARDS_REMAIN"
+  ],
+  "hard_nonclaims": [
+    "NO_REAL_HISTORICAL_SLOT_RECOVERED",
+    "NO_CLAIM_CURRENT_CAMBER_OR_ANY_PROVIDER_MEETS_ACCOUNT_SPECIFIC_ZERO_SPEND_GATE",
+    "NO_TB4_SUCCESS_CREDIT",
+    "NO_EXECUTION_AUTHORITY",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "recovered_creditable_slots": 0,
+    "success_credit_delta": 0
+  }
+}
