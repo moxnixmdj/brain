@@ -130,5 +130,12 @@ def score_public_task(
         return {**result, "exact_task_solved": False}
 
     expected = [row.get("output") for row in test]
-    exact = any(row.get("predictions") == expected for row in attempts_rows)
+    exact = all(
+        any(
+            len(candidate.get("predictions", [])) > i
+            and candidate["predictions"][i] == expected[i]
+            for candidate in attempts_rows
+        )
+        for i in range(len(expected))
+    )
     return {**result, "exact_task_solved": bool(exact)}
