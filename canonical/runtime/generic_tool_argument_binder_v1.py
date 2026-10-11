@@ -437,6 +437,23 @@ def _bind_semantic_value(
     return None
 
 
+def resolve_semantic_reference(
+    *,
+    semantic: str,
+    goal: str,
+    observations: Sequence[Any],
+) -> Any:
+    """Resolve one semantic value using the same fail-closed grounding rules as execution."""
+    facts = _cue_facts(goal, observations)
+    records = extract_records(observations)
+    return _bind_semantic_value(
+        semantic,
+        goal=goal,
+        facts=facts,
+        records=records,
+    )
+
+
 def bind_endpoint_call(
     *,
     goal: str,
