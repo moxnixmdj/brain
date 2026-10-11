@@ -1,0 +1,81 @@
+{
+  "schema": "PROJECT_BRAIN_CHARTOGRAPHY_RELATIONAL_GEOMETRY_REPAIR_INDEPENDENT_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__QWEN_FAILURE_CAUSALLY_LOCALIZED__DETERMINISTIC_GEOMETRY_REPAIR_12_OF_12_FROZEN_PLUS_METAMORPHIC__ZERO_DIRECT_89_CREDIT",
+  "trigger": {
+    "public_runner_repository": "moxnixmdj/verification-capsule-runner",
+    "workflow_run_id": 38109910675,
+    "job_id": 114383144067,
+    "exact_subject": {
+      "model_sha256": "66358cb18bb6b3b1b6675aa412c7a88ef01d228f481184d13668e5201c730a0a",
+      "projector_sha256": "30ba2c7dd3127a4561b6cba9d13d0f711c91bdb38742e2f56d73c8cb596bd06d",
+      "llama_cpp_commit": "a7fb71fab83b474a0892b9a05aaa3a8ddca2729b"
+    },
+    "frozen_case_result": {
+      "passed": 4,
+      "total": 6,
+      "failures": [
+        {
+          "case_id": 4,
+          "skill": "LINE_CROSSING",
+          "expected": "BLUE",
+          "observed": "RED"
+        },
+        {
+          "case_id": 6,
+          "skill": "GROUPED_BAR_COMPARISON",
+          "expected": "RIGHT",
+          "observed": "LEFT"
+        }
+      ],
+      "artifact_id": 11690919231,
+      "artifact_zip_sha256": "e9f1b1ec63acad393511fc454d14bda7e53fe95a06b33a184e293221e7770b7a"
+    },
+    "interpretation": "GENUINE_RELATIONAL_VISUAL_GEOMETRY_DEFECTS_UNDER_THE_EXACT_PINNED_COMPACT_VLM_ROUTE__NOT_RUNTIME_BUILD_HASH_OR_OUTPUT_PARSER_FAILURE"
+  },
+  "repair": {
+    "runtime_path": "canonical/runtime/chartography_deterministic_geometry_v1.py",
+    "runtime_git_blob_sha": "4a4ac24dd63ad69b7ecf9e8c0aa0963903825e44",
+    "test_path": "canonical/tests/test_chartography_deterministic_geometry_v1.py",
+    "test_git_blob_sha": "7930eb26151f91c04d3b1f8de6cf2ed936c5f63d",
+    "composition_role": "DETERMINISTIC_GEOMETRY_FALLBACK_FOR_SIMPLE_COLOR_CODED_CHART_RELATIONS__MULTIMODAL_ROUTE_RETAINED_FOR_SEMANTIC_RECOGNITION"
+  },
+  "verification": {
+    "carrier": "brain-v5-audit-cleanroom-20261010",
+    "carrier_id": "sprite-679c5189-f043-48df-931c-ba50deee342c",
+    "canonical_exact_blob_replay": "PASS CANONICAL_CHARTOGRAPHY_GEOMETRY_V1 12_OF_12",
+    "frozen_cases": 6,
+    "metamorphic_cases": 6,
+    "metamorphic_changes": [
+      "CHANGE_TALLEST_BAR_COLOR",
+      "CHANGE_BAR_HEIGHT_RATIO",
+      "REVERSE_LINE_TREND",
+      "SWAP_LINE_RIGHT_SIDE_ORDER",
+      "ADD_SCATTER_POINT",
+      "SWAP_GROUPED_BAR_WINNING_SIDE"
+    ]
+  },
+  "proved": [
+    "THE_TWO_OBSERVED_QWEN_RELATIONAL_ERRORS_HAVE_A_DETERMINISTIC_BRAIN_OWNED_REPAIR_FOR_THE_TESTED_GEOMETRY_CLASS",
+    "THE_REPAIR_GENERALIZES_ACROSS_EFFECT_DISTINGUISHING_METAMORPHIC_VARIANTS_OF_ALL_SIX_SYNTHETIC_SKILLS",
+    "THE_REPAIR_USES_STDLIB_ONLY_AND_NO_EXTERNAL_MODEL_OR_JUDGE_CALLS"
+  ],
+  "remaining": [
+    "REAL_WORLD_CHART_SEMANTIC_RECOGNITION_AND_NON_CLEAN_GEOMETRY_REMAIN_BROADER_THAN_THIS_COMPONENT",
+    "HISTORICAL_ANTHROPIC_89_WITH_TOOLS_PROTOCOL_IDENTITY_AND_EQUIVALENT_BRAIN_CONFIGURATION_REMAIN_WAKE_GATED",
+    "NO_DIRECT_CHARTOGRAPHY_THRESHOLD_SCORE_EXISTS"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_QWEN3VL4B_ALONE_PASSES_SIX_OF_SIX",
+    "NO_CLAIM_THIS_SIMPLE_GEOMETRY_COMPONENT_SOLVES_ARBITRARY_CHARTOGRAPHY",
+    "NO_DIRECT_89_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "judge_calls": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
