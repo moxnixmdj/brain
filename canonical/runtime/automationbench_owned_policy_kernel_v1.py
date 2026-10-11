@@ -21,6 +21,7 @@ import json
 import re
 from datetime import datetime
 from typing import Any, Iterable, Mapping, Sequence
+from urllib.parse import quote
 
 SCHEMA = "PROJECT_BRAIN_AUTOMATIONBENCH_OWNED_POLICY_KERNEL_V1"
 
@@ -232,17 +233,18 @@ def rank_endpoints(prompt: str, endpoints: Sequence[Mapping[str, Any]]) -> list[
     return [ep for _, _, ep in scored]
 
 
-def _required_parameter_names(ep: Mapping[str, Any]) -> list[str]:
+def _required_parameters(ep: Mapping[str, Any]) -> list[tuple[str, dict[str, Any]]]:
     params = ep.get("parameters") or {}
-    out: list[str] = []
+    out: list[tuple[str, dict[str, Any]]] = []
     if isinstance(params, Mapping):
-        for name, spec in params.items():
-            if isinstance(spec, Mapping) and spec.get("required") is True:
-                out.append(str(name))
+        for name, spec0 in params.items():
+            if isinstance(spec0, Mapping) and spec0.get("required") is True:
+                out.append((str(name), dict(spec0)))
     elif isinstance(params, list):
-        for spec in params:
-            if isinstance(spec, Mapping) and spec.get("required") is True and spec.get("name"):
-                out.append(str(spec["name"]))
+        for spec0 in params:
+            if isinstance(spec0, Mapping) and spec0.get("required") is True and spec0.get("name"):
+                spec = dict(spec0)
+                out.append((str(spec["name"]), spec))
     return out
 
 
@@ -302,13 +304,23 @@ def observation_plan(
             continue
         params: dict[str, str] = {}
         ok = True
-        for name in _required_parameter_names(ep):
-            value = _ground_required_param(name, prompt)
+        for name, spec in _required_parameters(ep):
+            value = spec.get("default")
+            if value is None:
+                value = _ground_required_param(name, prompt)
             if value is None:
                 ok = False
                 break
-            params[name] = value
-        if not ok:
+            value = str(value)
+            if str(spec.get("location") or "").lower() == "path" or ("{" + name + "}") in url:
+                placeholder = "{" + name + "}"
+                if placeholder not in url:
+                    ok = False
+                    break
+                url = url.replace(placeholder, quote(value, safe=""))
+            else:
+                params[name] = value
+        if not ok or "{" in url or "}" in url:
             continue
         args: dict[str, Any] = {"method": "GET", "url": url}
         if params:
