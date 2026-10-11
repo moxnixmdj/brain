@@ -204,6 +204,8 @@ def run(request: Mapping[str, Any]) -> dict[str, Any]:
             or len(trace) != len(planned["plan"]) + 1
             or controller.get("returncode") != 0
             or controller.get("controller_mode") != "MODEL_INDEPENDENT_ACTION_PLAN"
+            or controller.get("cognition_dependency_class") != "MODEL_INDEPENDENT"
+            or controller.get("model_dependency_count") != 0
         ):
             return {
                 "schema": SCHEMA,
@@ -392,6 +394,8 @@ def run_raw_goal(request: Mapping[str, Any]) -> dict[str, Any]:
                 isinstance(controller, Mapping)
                 and controller.get("returncode") == 0
                 and controller.get("controller_mode") == "MODEL_INDEPENDENT_ACTION_PLAN"
+                and controller.get("cognition_dependency_class") == "MODEL_INDEPENDENT"
+                and controller.get("model_dependency_count") == 0
                 and isinstance(controller.get("final_summary"), str)
                 and bool(controller.get("final_summary").strip())
             )
@@ -511,6 +515,8 @@ def run_raw_goal(request: Mapping[str, Any]) -> dict[str, Any]:
             isinstance(controller, Mapping)
             and controller.get("returncode") == 0
             and controller.get("controller_mode") == "MODEL_INDEPENDENT_ACTION_PLAN"
+            and controller.get("cognition_dependency_class") == "MODEL_INDEPENDENT"
+            and controller.get("model_dependency_count") == 0
             and isinstance(controller.get("final_summary"), str)
             and bool(controller.get("final_summary").strip())
             and isinstance(first_result, Mapping)

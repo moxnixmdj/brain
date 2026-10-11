@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import unittest
+from unittest.mock import patch
 
 from canonical.runtime.live_integrated_brain_v1 import ROOT, run, run_raw_goal
 
@@ -55,6 +56,30 @@ class LiveIntegratedBrainV1Tests(unittest.TestCase):
         output.unlink()
         manifest.unlink()
         source.unlink()
+
+    def test_model_assisted_controller_cannot_be_laundered_by_mode_label(self):
+        cid = "archive.tar_gz.create_from_manifest"
+        fake = {
+            "returncode": 0,
+            "controller_mode": "MODEL_INDEPENDENT_ACTION_PLAN",
+            "cognition_dependency_class": "MODEL_ASSISTED",
+            "model_dependency_count": 1,
+            "final_summary": "fake",
+            "trace": [
+                {"result": {"pass": True, "status": "PASS"}},
+                {"result": {"summary": "fake"}},
+            ],
+        }
+        with patch("canonical.runtime.live_integrated_brain_v1.astra_runtime.run_goal", return_value=fake):
+            result = run({
+                "task_id": "LIVE_BRAIN_MODEL_ASSISTED_LAUNDERING_REJECT_001",
+                "initial_facts": ["manifest.json.available"],
+                "target_effects": ["archive.tar_gz.create_from_manifest"],
+                "capability_inputs": {cid: {"manifest_path": "x", "output_path": "y"}},
+            })
+        self.assertFalse(result["pass"], result)
+        self.assertEqual(result["status"], "FAIL__VERIFIED_CAPABILITY_EXECUTION")
+        self.assertEqual(result["failure_class"], "EXECUTION_OR_BOUND_CONTRACT_FAILURE")
 
     def test_missing_inputs_localizes_task_contract_compilation_gap(self):
         cid = "archive.tar_gz.create_from_manifest"
