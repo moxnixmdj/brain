@@ -1,14 +1,14 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_TB_SCIENCE_EXECUTION_POINTER_V2",
   "date": "2026-10-11",
-  "status": "RANK21_FRESH_ONE_SHOT_PUBLIC_EFFECTIVE_AUTHORITY__PREACTIVATION__ZERO_EXPOSURE__RANK20_RETIRED_NO_RETRY",
+  "status": "RANK21_FRESH_ONE_SHOT_READY_FOR_EXACT_ACTIVATION__EXECUTION_AUTHORITY_EFFECTIVE__ACTIVATION_AUTHORIZED__ACTIVATION_ABSENT__ZERO_EXPOSURE__RANK20_RETIRED_NO_RETRY",
   "current_result": {
     "path": "canonical/verification/TB_SCIENCE_RANK20_V3_FINAL_NONCONSUMING_VERIFY_20261010_V1.json",
     "git_blob_sha": "8f77186beeb582c5aef8bbead0d7a98e32f818fa"
   },
   "current_ledger": {
-    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261011_V64.json",
-    "git_blob_sha": "0b78e231c0273cf672de8db53efca9c0185ddd53"
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261011_V65.json",
+    "git_blob_sha": "71292566147b0d8423b87af77e596a0ad4e33cb5"
   },
   "verification": {
     "path": "canonical/verification/TB_SCIENCE_RANK21_PUBLIC_EFFECTIVE_AUTHORITY_VERIFY_20261011_V1.json",
@@ -29,7 +29,7 @@
   },
   "acceptance_credit_delta": 0,
   "terminal_credit_delta": 0,
-  "next": "MINT_FRESH_EXACT_ONE_FILE_RANK21_V1_ACTIVATION_AUTHORITY__NO_TASK_READ__THEN_EXECUTION_MAY_BE_TRIGGERED_ONLY_BY_THE_EXACT_FRESH_ACTIVATION_PR",
+  "next": "CREATE_ONLY_CAPSULES_TB_SCIENCE_RANK21_20261011_V1_ACTIVATE_RANK21_V1_PR_JSON_ON_THE_ALREADY_FRESH_EXECUTION_BRANCH__OPEN_PR_TO_TERMINAL_EXECUTION_V1__NO_OTHER_DIFF__DO_NOT_MANUALLY_MERGE",
   "finalized_rank18": {
     "ledger_schedule_rank": 18,
     "slot_id": "terminal-bench-science/longitudinal-clinical-agent::trial-0",
@@ -511,13 +511,18 @@
     "public_execution_surface_git_blob_sha": "d83d9400a2d5f1f34d9b69d41b89cc1dcfa2d9c8",
     "execution_authority_effective": true,
     "task_read_authority_effective": true,
-    "activation_authority": false,
+    "activation_authority": true,
     "activation_present": false,
     "task_read_history": false,
     "task_started": false,
     "durable_start_cas_acquired": false,
     "benchmark_trials_consumed": 0,
     "retries_authorized": 0,
-    "replacement_allowed": false
+    "replacement_allowed": false,
+    "activation_authority_path": "canonical/governance/TB_SCIENCE_RANK21_ACTIVATION_AUTHORITY_20261011_V1.json",
+    "activation_authority_git_blob_sha": "567002a1da3c10ff90a880f1e5b2650b8dbf5a26",
+    "execution_branch": "execute/tb-science-rank21-20261011-v1",
+    "activation_path": "capsules/tb_science_rank21_20261011_v1/ACTIVATE_RANK21_V1_PR.json",
+    "ready_for_exact_activation": true
   }
 }
