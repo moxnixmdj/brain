@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_GRID_REPRESENTATION_INVENTION_FRESH_SUITE_PRECOMMIT_V1",
+  "date": "2026-10-11",
+  "status": "FROZEN_BEFORE_SUITE_OUTCOMES__ZERO_CREDIT",
+  "objective": "Test whether the fixed generic representation-invention machinery generalizes to fresh structural relation families without ARC-task-specific operator additions.",
+  "suite": {
+    "path": "canonical/evaluation/grid_representation_invention_fresh_suite_v1.py",
+    "blob_sha": "72bc8ef85f595af99e1ed067321564280ef62605",
+    "task_count": 8,
+    "in_scope_families": [
+      "UPPER_TRIANGLE",
+      "LOWER_TRIANGLE",
+      "OFF_DIAGONAL_BAND",
+      "SQUARE_COMPONENT",
+      "SINGLE_COMPONENT_COLOR",
+      "ROW_NZ_LT_COL_NZ"
+    ],
+    "boundary_families": [
+      "ANTI_DIAGONAL_SIZE_RELATION",
+      "EXACT_CENTER_SIZE_RELATION"
+    ],
+    "rule": "SOLVER_RECEIVES_ONLY_TRAINING_PAIRS__TEST_OUTPUTS_EVALUATOR_ONLY"
+  },
+  "frozen_implementation": {
+    "feature_inventor_blob_sha": "441be03665a20f7da112ca457c86469a7fa5ebc2",
+    "grid_delta_v3_blob_sha": "b971b2ef6cb7a3e0cf709b97584c8101f4e8b0b3"
+  },
+  "pass_gate": [
+    "ALL_6_IN_SCOPE_FAMILIES_EXACT_ON_FRESH_TEST_INPUT",
+    "NO_TEST_OUTPUT_PASSED_TO_INDUCER",
+    "NO_CODE_OR_GRAMMAR_CHANGE_AFTER_OUTCOME_BEFORE_GATE_DECISION"
+  ],
+  "boundary_measurement": "REPORT_ONLY__NO_REPAIR_FROM_BOUNDARY_OUTCOMES_IN_THIS_GATE",
+  "hard_nonclaims": [
+    "SYNTHETIC_FRESH_SUITE_IS_NOT_ARC_PARITY",
+    "PASS_DOES_NOT_PROVE_OPEN_WORLD_REPRESENTATION_INVENTION",
+    "BOUNDARY_FAILURE_DOES_NOT_AUTHORIZE_TASK_SPECIFIC_PATCHING",
+    "NO_CAPABILITY_PROMOTION_WITHOUT_INDEPENDENT_REPLAY"
+  ],
+  "terminal_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "promotion_authority": false
+}
