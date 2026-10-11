@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_HIDDEN_RUBRIC_INDISTINGUISHABILITY_LOCAL_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "LOCAL_ISOLATED_LOGIC_REPLAY_PASS__8_OF_8__NOT_INDEPENDENT__ZERO_CREDIT",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/aa_briefcase_hidden_rubric_indistinguishability_v1.py",
+      "git_blob_sha": "5372ef55d9ef048d898468830ce90654a625169a"
+    },
+    "tests": {
+      "path": "canonical/tests/test_aa_briefcase_hidden_rubric_indistinguishability_v1.py",
+      "git_blob_sha": "3c9248e046f375506480970eeeffb2c45aee6f3e"
+    },
+    "public_contract_git_blob_sha": "32b44233529221ac6aa21132782690a1fbf0f748",
+    "public_superdomain_git_blob_sha": "cf612adf37da0cf5d7d1940b4656fd72e483481e"
+  },
+  "replay": {
+    "carrier": "LOCAL_ISOLATED_PYTHON_LOGIC_REPLAY",
+    "tests_run": 8,
+    "tests_passed": 8,
+    "tests_failed": 0,
+    "tests_errored": 0,
+    "independent_second_carrier": false
+  },
+  "verified_behaviors": [
+    "DETERMINISTIC_OUTPUT_A_FAILS_IN_WORLD_B",
+    "DETERMINISTIC_OUTPUT_B_FAILS_IN_WORLD_A",
+    "RANDOMIZED_SUPPORT_A_B_IS_NOT_TOP_IN_EITHER_SINGLETON_TOP_WORLD",
+    "THIRD_OUTPUT_FAILS_BOTH_WORLDS",
+    "EMPTY_POLICY_SUPPORT_REJECTED",
+    "IDENTICAL_OUTPUT_COUNTERMODEL_REJECTED",
+    "PUBLIC_CONTRACT_BLOB_MISMATCH_REJECTED",
+    "CUT_DOES_NOT_CLAIM_ACTUAL_PRIVATE_RUBRICS_ARE_ADVERSARIAL_OR_DISPROVE_ACTUAL_NONINFERIORITY"
+  ],
+  "hard_nonclaims": [
+    "NO_INDEPENDENT_VERIFICATION_CLAIM",
+    "NO_ACTUAL_PRIVATE_RUBRIC_SEMANTICS_CLAIM",
+    "NO_CAPABILITY_NONINFERIORITY_CREDIT",
+    "NO_LITERAL_SCORE_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "benchmark_score_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
