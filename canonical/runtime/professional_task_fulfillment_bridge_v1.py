@@ -28,6 +28,8 @@ RECEIPT_SCHEMA="PROJECT_BRAIN_PROFESSIONAL_TASK_OBLIGATION_SEMANTIC_RECEIPT_V1"
 VERIFY_SCHEMA="PROJECT_BRAIN_PROFESSIONAL_TASK_OBLIGATION_SEMANTIC_VERIFY_V1"
 BOUND_PREFIXES=("canonical/governance/","canonical/evidence/","canonical/verification/")
 VERIFY_PREFIXES=("canonical/verification/",)
+SCOPE_COMPILER_PATH="canonical/runtime/universal_scope_closure_compiler_v1.py"
+SCOPE_COMPILER_BLOB="b208255789b14e44e86c82c196e06b5c41b3d039"
 
 
 def _canon(value:Any)->str:
@@ -118,6 +120,11 @@ def verify(bundle:Any,*,repo_root:str|Path)->dict[str,Any]:
         expected_scope=task_scope_id(task_id=task_id,task_sha256=task_sha,obligation_digest=digest)
 
         root=Path(repo_root)
+        scope_compiler_file=root/SCOPE_COMPILER_PATH
+        if not scope_compiler_file.is_file() or scope_compiler_file.is_symlink():
+            raise ValueError("SCOPE_COMPILER_FILE_INVALID")
+        if git_blob_sha(scope_compiler_file)!=SCOPE_COMPILER_BLOB:
+            raise ValueError("SCOPE_COMPILER_BLOB_DRIFT")
         scope_binding=task.get("obligation_scope_binding")
         if not isinstance(scope_binding,Mapping): raise ValueError("OBLIGATION_SCOPE_BINDING_REQUIRED")
         scope_cert,scope_path,scope_blob=_bound_json(root,scope_binding.get("certificate"),BOUND_PREFIXES)
@@ -208,6 +215,7 @@ def verify(bundle:Any,*,repo_root:str|Path)->dict[str,Any]:
           scope_certificate_path=scope_path,scope_certificate_git_blob_sha=scope_blob,
           scope_verification_path=scope_verify_path,scope_verification_git_blob_sha=scope_verify_blob,
           scope_producer_id=scope_producer,scope_independent_verifier_id=scope_verifier,
+          scope_compiler_path=SCOPE_COMPILER_PATH,scope_compiler_git_blob_sha=SCOPE_COMPILER_BLOB,
           obligation_count=len(obligations),verified_obligation_count=len(verified),
           obligation_receipts=verified,
           hard_boundary=[
