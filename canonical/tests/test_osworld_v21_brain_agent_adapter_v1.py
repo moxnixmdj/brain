@@ -275,3 +275,26 @@ def test_done_after_receipted_state_verification_is_allowed():
     assert first == ["WAIT"]
     _, second = agent.predict("verify then finish", {"screenshot": b"same"})
     assert second == ["DONE"]
+
+
+def test_ocr_failure_is_fail_soft_observation_not_agent_crash():
+    seen = []
+    def broken_ocr(_image):
+        raise RuntimeError("tesseract unavailable")
+    def policy(state):
+        seen.append(state)
+        return {"response": "continue", "actions": [{"type": "WAIT"}]}
+
+    agent = BrainOSWorldAgent(
+        policy,
+        policy_id="ocr-soft",
+        browser_controller=_FakeBrowser(),
+        guest_controller=_FakeGuest(),
+        ocr_provider=broken_ocr,
+    )
+    response, actions = agent.predict("continue task", {"screenshot": b"image"})
+    assert response == "continue"
+    assert actions == ["WAIT"]
+    assert seen[0]["ocr"]["status"] == "UNAVAILABLE"
+    assert "tesseract unavailable" in seen[0]["ocr"]["reason"]
+    assert seen[0]["ocr"]["terminal_semantic_authority"] is False
