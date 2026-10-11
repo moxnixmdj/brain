@@ -1,0 +1,110 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_SCALE_SUBMISSION_RECEIPT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__FRESH_ROW211_FOUR_PAGE_ESD_WAREHOUSE_SOP_DOCX_FROZEN__AUTHORITATIVE_STANDARD_AND_RENDER_QA_PASS__ZERO_OWNER_SCORE_CREDIT",
+  "benchmark": "GDPval-AA v2.1",
+  "row_idx": 211,
+  "task_id": "a4a9195c-5ebe-4b8d-a0c2-4a6b7a49da8b",
+  "sector": "Manufacturing",
+  "occupation": "Shipping, Receiving, and Inventory Clerks",
+  "freshness": {
+    "precommit": "canonical/governance/GDPVAL_SCALE_FRESH_BATCH_ROWS35_219_PRECOMMIT_20261011_V1.json",
+    "precommit_commit": "c604f5006820ce3ca24d6afc2487a95a30886a6c",
+    "chronology_reconciliation": "canonical/governance/GDPVAL_PREOUTPUT_PACKET_PRECOMMIT_ORDER_RECONCILIATION_20261011_V1.json",
+    "official_allowed_projection_sha256": "40ac964e91f6d43e64036c0a6edd2352f8c73704dddc899d0dbbe9ea07efdde6",
+    "prompt_sha256": "b056483d4a7074c1bc45cee3694f99b0d98509085000b6b0fdbdea917d05a134",
+    "reference_count": 0,
+    "gold_deliverable_read_before_freeze": false,
+    "rubric_read_before_freeze": false,
+    "third_party_model_submission_read_before_freeze": false
+  },
+  "brain_execution_profile": {
+    "path": "canonical/capabilities/internalized/professional_work/stirrup_247f24d/BRAIN_EXECUTION_PROFILE_V1.json",
+    "candidate_id": "OPUS55_PROFESSIONAL_KNOWLEDGE_WORK_STIRRUP_CONFIGURATION_V1",
+    "cognition_surface": "CURRENT_CHATGPT_GPT_5_6_SOL_SESSION",
+    "incremental_spend_usd": 0
+  },
+  "submission": {
+    "library_path": "/Project Brain/GDPval/scale/a4a9195c-5ebe-4b8d-a0c2-4a6b7a49da8b/GDPval_a4a9195c_ESD_Handling_and_Storage_SOP_fresh.docx",
+    "library_file_id": "libfile_047cedbe83908191bc62aa3addbdace2",
+    "bytes": 45324,
+    "sha256": "5a8d0090c6ede264dd5e96eb1886205796b6674cb65f244b82dbf47fc355b6e9",
+    "format": "docx",
+    "render_page_count": 4,
+    "render_page_sha256": [
+      "e7476f72a71a36ed131470a3138ba4f69daa5df8410ce99abdc3c14640eb94f5",
+      "339a76baab0ac54ae8a0f07e6487f1d608f62f8dab4fbb77eb6d690c4bcd69cf",
+      "2c98056f277c0a3ff50d830c142afa7884bf7f4821a4b13f361322ce471b2764",
+      "4aca868d416ff6d8f8148d64c41b264969d2b899c81e7d6407ae7655e3cb3dc7"
+    ]
+  },
+  "authoritative_sources": {
+    "ipc_a_610g": {
+      "source": "IPC official table of contents",
+      "url": "https://www.electronics.org/TOC/IPC-A-610G.pdf",
+      "bound_scope": [
+        "CHAPTER_3_PROTECTING_ASSEMBLY_EOS_ESD_AND_HANDLING",
+        "ESD_PREVENTION",
+        "WARNING_LABELS",
+        "PROTECTIVE_MATERIALS",
+        "ESD_SAFE_WORKSTATION_EPA",
+        "HANDLING_CONSIDERATIONS"
+      ]
+    },
+    "ansi_esd_s20_20_2021": {
+      "source": "EOS/ESD Association official standard page",
+      "url": "https://www.esda.org/store/standards/product/314/ansiesd-s20-20-2021/",
+      "bound_scope": [
+        "ESD_CONTROL_PROGRAM",
+        "PERSONNEL_GROUNDING",
+        "EPA",
+        "TRAINING",
+        "QUALIFICATION_AND_COMPLIANCE_VERIFICATION"
+      ]
+    },
+    "ansi_esd_s541_2026": {
+      "source": "EOS/ESD Association official standard page",
+      "url": "https://www.esda.org/store/standards/product/463/ansiesd-s541-2026/",
+      "bound_scope": [
+        "ESD_PROTECTIVE_PACKAGING",
+        "PRODUCTION",
+        "TRANSPORT",
+        "STORAGE"
+      ]
+    }
+  },
+  "prompt_requirement_checks": {
+    "word_format": "PASS",
+    "page_limit_no_more_than_5": "PASS__4_PAGES",
+    "handling_esd_sensitive_items": "PASS",
+    "storage_esd_sensitive_items": "PASS",
+    "warehouse_daily_process_guidance": "PASS",
+    "personnel_training_support": "PASS",
+    "ipc_a_610g_used_as_reference": "PASS",
+    "receiving_inspection": "PASS",
+    "protective_packaging": "PASS",
+    "epa_controls": "PASS",
+    "personnel_grounding": "PASS",
+    "picking_kitting_issue_returns": "PASS",
+    "housekeeping": "PASS",
+    "quarantine_incident_process": "PASS",
+    "training_records_compliance_verification": "PASS",
+    "start_of_shift_checklist": "PASS",
+    "no_invented_numeric_esd_limits": "PASS__SITE_LIMITS_DEFERRED_TO_QUALIFIED_ESD_CONTROL_PLAN"
+  },
+  "verification": {
+    "renderer": "/home/oai/skills/docx/render_docx.py",
+    "visual_inspection": "PASS__ALL_4_PAGES_INSPECTED__NO_CLIPPING_OVERLAP_BROKEN_TABLES_OR_MISSING_GLYPHS"
+  },
+  "hard_nonclaims": [
+    "NO_ARTIFICIAL_ANALYSIS_OWNER_GRADE",
+    "NO_GDPVAL_ELO",
+    "NO_CLAIM_SINGLE_TASK_IMPLIES_1846",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
