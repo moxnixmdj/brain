@@ -1,0 +1,105 @@
+{
+  "schema": "PROJECT_BRAIN_FINANCE_AGENT_V2_PUBLIC_Q6_DONOR_FREE_DIO_CANARY_V1",
+  "date": "2026-10-11",
+  "status": "PUBLIC_CANARY_MATCH__DONOR_FREE_SEC_SOURCE_PLUS_INCLUSIVE_PERIOD_DAYS_PLUS_DECIMAL_DIO__ZERO_BENCHMARK_CREDIT",
+  "target_predicate": "FINANCE_AGENT_V2_GE_58_59",
+  "scope": "PUBLIC_QUESTION_ONLY__GENERAL_QUANTITATIVE_DIO",
+  "benchmark_binding": {
+    "repository": "vals-ai/finance-agent-v2",
+    "commit": "502aab6fdaa3fb9294905c7453f89882baa8d39b",
+    "public_csv_path": "data/public.csv",
+    "public_csv_git_blob_sha": "fca7ec52abce7ca8351d0692d00a4aa74f680855",
+    "public_question_ordinal_1_based": 6,
+    "public_question_sha256": "57ce1541fa872bb5a1e01d470be717ec268dd6921d041ce28fc913b06c468046",
+    "category": "General Quantitative Analysis",
+    "rubric_targets": {
+      "hd_actual_fiscal_days": 371,
+      "hd_average_inventory_million_usd": "22213.50",
+      "hd_dio_days": "77.60",
+      "low_actual_fiscal_days": 364,
+      "low_average_inventory_million_usd": "17151.50",
+      "low_dio_days": "111.89",
+      "faster_company": "HD",
+      "dio_difference_days": "34.29"
+    }
+  },
+  "primary_sources": [
+    {
+      "issuer": "The Home Depot, Inc.",
+      "ticker": "HD",
+      "cik": 354950,
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/354950/000035495025000085/hd-20250202.htm",
+      "fiscal_period_start": "2024-01-29",
+      "fiscal_period_end": "2025-02-02",
+      "inventory_million_usd": {
+        "begin": "20976",
+        "end": "23451"
+      },
+      "cost_of_sales_million_usd": "106206"
+    },
+    {
+      "issuer": "Lowe's Companies, Inc.",
+      "ticker": "LOW",
+      "cik": 60667,
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/60667/000006066725000049/low-20250131.htm",
+      "fiscal_period_start": "2024-02-03",
+      "fiscal_period_end": "2025-01-31",
+      "inventory_million_usd": {
+        "begin": "16894",
+        "end": "17409"
+      },
+      "cost_of_sales_million_usd": "55797"
+    }
+  ],
+  "recomputation": {
+    "formulas": [
+      "FISCAL_DAYS=(END_DATE-START_DATE)+1",
+      "AVERAGE_INVENTORY=(BEGIN_INVENTORY+END_INVENTORY)/2",
+      "DIO=AVERAGE_INVENTORY/COST_OF_SALES*FISCAL_DAYS"
+    ],
+    "hd": {
+      "actual_days": 371,
+      "average_inventory": "22213.5",
+      "dio_unrounded": "77.596449353143890175696288345291226484379413592454",
+      "dio_display": "77.60"
+    },
+    "low": {
+      "actual_days": 364,
+      "average_inventory": "17151.5",
+      "dio_unrounded": "111.89035252791368711579475599046543720988583615607",
+      "dio_display": "111.89"
+    },
+    "low_minus_hd_unrounded_days": "34.293903174769796940098467645174210725506422563616",
+    "difference_display_days": "34.29",
+    "public_rubric_match": true
+  },
+  "brain_route": {
+    "question_compiler": "canonical/runtime/finance_quantitative_question_contract_v1.py",
+    "dependency_compiler": "canonical/runtime/finance_quantitative_dependency_v1.py",
+    "metric_registry": "canonical/runtime/finance_metric_xbrl_registry_v1.py",
+    "ticker_identity": "canonical/runtime/finance_sec_ticker_cik_from_registry_v1.py",
+    "existing_sec_source_native": "canonical/runtime/bound_capabilities/sec_companyconcept_source_native.py",
+    "fact_selector": "canonical/runtime/finance_sec_fact_selector_v1.py",
+    "algebra": "canonical/runtime/finance_quantitative_algebra_v1.py",
+    "runtime_external_model_cognition_required": false
+  },
+  "proved": [
+    "SECOND_PUBLIC_GENERAL_QUANTITATIVE_TASK_RECOMPUTES_FROM_PRIMARY_SEC_FACTS_WITHOUT_MODEL_COGNITION",
+    "THE_ROUTE_HANDLES_DIFFERENT_52_53_WEEK_FISCAL_PERIOD_LENGTHS_BY_INCLUSIVE_DATE_ARITHMETIC",
+    "THE_RECOMPUTED_DIO_VALUES_AND_DIFFERENCE_MATCH_THE_PUBLIC_RUBRIC_AFTER_DISPLAY_ROUNDING",
+    "NO_PRIVATE_TEST_OR_VALIDATION_CASE_WAS_ACCESSED"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_NEW_BRANCH_TESTS_HAVE_EXECUTED__CURRENT_GITHUB_ACTIONS_FAILED_BEFORE_STEPS",
+    "NO_CLAIM_TWO_PUBLIC_CANARIES_PROVE_PRIVATE_TEST_TRANSFER",
+    "NO_CLAIM_ALL_INVENTORY_OR_COST_OF_SALES_CONCEPT_CASES_ARE_UNAMBIGUOUS",
+    "NO_CLAIM_FINANCE_AGENT_V2_SCORE_GE_58_59",
+    "NO_ACCEPTANCE_FAMILY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "private_cases_exposed": 0,
+    "benchmark_score_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

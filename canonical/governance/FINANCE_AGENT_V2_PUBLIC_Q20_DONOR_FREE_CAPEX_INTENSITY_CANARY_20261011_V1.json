@@ -1,0 +1,116 @@
+{
+  "schema": "PROJECT_BRAIN_FINANCE_AGENT_V2_PUBLIC_Q20_DONOR_FREE_CAPEX_INTENSITY_CANARY_V1",
+  "date": "2026-10-11",
+  "status": "PUBLIC_CANARY_MUST_PASS_MATCH__DONOR_FREE_GUIDANCE_MIDPOINT_PLUS_ACTUAL_CAPEX_INTENSITY__ZERO_BENCHMARK_CREDIT",
+  "target_predicate": "FINANCE_AGENT_V2_GE_58_59",
+  "scope": "PUBLIC_QUESTION_ONLY__EARNINGS_ANALYSIS_BROS_CAPEX_INTENSITY_MUST_PASS",
+  "benchmark_binding": {
+    "repository": "vals-ai/finance-agent-v2",
+    "commit": "502aab6fdaa3fb9294905c7453f89882baa8d39b",
+    "public_csv_path": "data/public.csv",
+    "public_csv_git_blob_sha": "fca7ec52abce7ca8351d0692d00a4aa74f680855",
+    "public_question_ordinal_1_based": 20,
+    "category": "Earnings Analysis",
+    "public_must_pass": {
+      "q4_2024_guided_intensity_percent": "15.97",
+      "q1_2025_guided_intensity_percent": "15.97",
+      "q2_2025_guided_intensity_percent": "15.67",
+      "q3_2025_guided_intensity_percent": "15.50",
+      "fy2025_actual_intensity_percent": "14.72"
+    }
+  },
+  "primary_sources": [
+    {
+      "period": "Q4_2024_RELEASE",
+      "url": "https://www.sec.gov/Archives/edgar/data/1866581/000186658125000035/a2024-q4_ex991.htm",
+      "revenue_guidance_million_usd": [
+        "1555",
+        "1575"
+      ],
+      "capex_guidance_million_usd": [
+        "240",
+        "260"
+      ]
+    },
+    {
+      "period": "Q1_2025_RELEASE",
+      "url": "https://www.sec.gov/Archives/edgar/data/1866581/000186658125000129/a2025-q1_ex991.htm",
+      "revenue_guidance_million_usd": [
+        "1555",
+        "1575"
+      ],
+      "capex_guidance_million_usd": [
+        "240",
+        "260"
+      ]
+    },
+    {
+      "period": "Q2_2025_RELEASE",
+      "url": "https://www.sec.gov/Archives/edgar/data/1866581/000186658125000185/a2025-q2_ex991.htm",
+      "revenue_guidance_million_usd": [
+        "1590",
+        "1600"
+      ],
+      "capex_guidance_million_usd": [
+        "240",
+        "260"
+      ]
+    },
+    {
+      "period": "Q3_2025_RELEASE",
+      "url": "https://www.sec.gov/Archives/edgar/data/1866581/000186658125000226/a2025-q3_ex991.htm",
+      "revenue_guidance_million_usd": [
+        "1610",
+        "1615"
+      ],
+      "capex_guidance_million_usd": [
+        "240",
+        "260"
+      ]
+    },
+    {
+      "period": "FY2025_10K",
+      "url": "https://www.sec.gov/Archives/edgar/data/1866581/000186658126000006/bros-20251231.htm",
+      "actual_revenue_thousand_usd": "1638159",
+      "purchases_property_and_equipment_thousand_usd": "241134"
+    }
+  ],
+  "recomputation": {
+    "formula": "CAPEX_INTENSITY_PERCENT=CAPEX_MIDPOINT_OR_ACTUAL_CAPEX/REVENUE_MIDPOINT_OR_ACTUAL_REVENUE*100",
+    "q4_2024_unrounded": "15.974440894568690095846645367412140575079872204473",
+    "q1_2025_unrounded": "15.974440894568690095846645367412140575079872204473",
+    "q2_2025_unrounded": "15.673981191222570532915360501567398119122257053292",
+    "q3_2025_unrounded": "15.503875968992248062015503875968992248062015503876",
+    "actual_fy2025_unrounded": "14.719816574581588234109143251662384420559909019820",
+    "display": [
+      "15.97",
+      "15.97",
+      "15.67",
+      "15.50",
+      "14.72"
+    ],
+    "public_must_pass_match": true
+  },
+  "brain_route": {
+    "midpoint_and_intensity_algebra": "canonical/runtime/finance_quantitative_algebra_v1.py",
+    "question_compiler": "canonical/runtime/finance_quantitative_question_contract_v1.py",
+    "dependency_compiler": "canonical/runtime/finance_quantitative_dependency_v1.py",
+    "runtime_external_model_cognition_required": false
+  },
+  "proved": [
+    "ALL_FIVE_PUBLIC_MUST_PASS_CHECKS_FOR_Q20_RECOMPUTE_FROM_FIRST_PARTY_SEC_RELEASES_AND_10K",
+    "GUIDANCE_MIDPOINT_SELECTION_AND_ACTUAL_CAPEX_INTENSITY_REQUIRE_NO_GENERAL_MODEL_COGNITION",
+    "NO_PRIVATE_TEST_OR_VALIDATION_CASE_WAS_ACCESSED"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_PUBLIC_Q20_PROVES_PRIVATE_TEST_TRANSFER",
+    "NO_CLAIM_FINANCE_AGENT_V2_SCORE_GE_58_59",
+    "NO_ACCEPTANCE_FAMILY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "private_cases_exposed": 0,
+    "benchmark_score_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

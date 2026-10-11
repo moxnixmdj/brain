@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_FINANCE_AGENT_V2_PUBLIC_Q13_DONOR_FREE_PREMIUM_CANARY_V1",
+  "date": "2026-10-11",
+  "status": "PUBLIC_CANARY_MUST_PASS_MATCH__DONOR_FREE_FIRST_PARTY_TRANSACTION_TERM_PLUS_UNAFFECTED_CLOSE__ZERO_BENCHMARK_CREDIT",
+  "target_predicate": "FINANCE_AGENT_V2_GE_58_59",
+  "scope": "PUBLIC_QUESTION_ONLY__PRECEDENTS_TRANSACTION_PREMIUM_MUST_PASS",
+  "benchmark_binding": {
+    "repository": "vals-ai/finance-agent-v2",
+    "commit": "502aab6fdaa3fb9294905c7453f89882baa8d39b",
+    "public_csv_path": "data/public.csv",
+    "public_csv_git_blob_sha": "fca7ec52abce7ca8351d0692d00a4aa74f680855",
+    "public_question_ordinal_1_based": 13,
+    "public_question_sha256": "de40be04086b6fded09ef7596db0a4db33b1fb78ecf70bfd21cef570c709abe2",
+    "category": "Precedents",
+    "public_must_pass_criteria": [
+      "Calculate the premium offered by Baker Hughes to be 22.34%"
+    ]
+  },
+  "primary_sources": [
+    {
+      "type": "SEC_8K_MERGER_TERM",
+      "issuer": "Baker Hughes Company",
+      "url": "https://www.sec.gov/Archives/edgar/data/1701605/000119312525167118/d912206d8k.htm",
+      "fact": "MERGER_CONSIDERATION_PER_SHARE_USD",
+      "value": "210.00"
+    },
+    {
+      "type": "SEC_DEFINITIVE_PROXY_MARKET_PRICE",
+      "issuer": "Chart Industries, Inc.",
+      "url": "https://www.sec.gov/Archives/edgar/data/892553/000119312525191284/d52397dprem14a.htm",
+      "fact": "GTLS_CLOSING_PRICE_2025_07_28_USD",
+      "value": "171.65"
+    }
+  ],
+  "recomputation": {
+    "formula": "PREMIUM_PERCENT=(MERGER_CONSIDERATION/UNAFFECTED_CLOSE-1)*100",
+    "unrounded_percent": "22.341974949024177104573259539761141858432857558990",
+    "display_percent": "22.34",
+    "public_must_pass_match": true
+  },
+  "brain_route": {
+    "question_compiler": "canonical/runtime/finance_quantitative_question_contract_v1.py",
+    "dependency_compiler": "canonical/runtime/finance_quantitative_dependency_v1.py",
+    "transaction_premium_algebra": "canonical/runtime/finance_quantitative_algebra_v1.py",
+    "runtime_external_model_cognition_required": false
+  },
+  "proved": [
+    "THE_ONLY_PUBLIC_MUST_PASS_CHECK_FOR_Q13_RECOMPUTES_EXACTLY_FROM_FIRST_PARTY_SEC_SOURCES",
+    "NO_OPTIONAL_STRATEGIC_OR_NON_OIL_GAS_NARRATIVE_IS_REQUIRED_TO_PASS_Q13_PUBLIC_DEALBREAKER_GATE",
+    "NO_PRIVATE_TEST_OR_VALIDATION_CASE_WAS_ACCESSED"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_OPTIONAL_Q13_RUBRIC_ITEMS_ARE_CLOSED",
+    "NO_CLAIM_PUBLIC_MUST_PASS_GEOMETRY_TRANSFERS_IDENTICALLY_TO_PRIVATE_TEST",
+    "NO_CLAIM_FINANCE_AGENT_V2_SCORE_GE_58_59",
+    "NO_ACCEPTANCE_FAMILY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "private_cases_exposed": 0,
+    "benchmark_score_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
