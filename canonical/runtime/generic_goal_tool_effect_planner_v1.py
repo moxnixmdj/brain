@@ -45,7 +45,7 @@ _GENERIC_RESOURCE = {
     "data","record","records","item","items","thing","things","field","fields",
     "value","values","api","endpoint","endpoints","tool","tools","workspace",
 }
-_NEGATION = re.compile(r"(?:do\s+not|don't|dont|must\s+not|never)\s+$", re.I)
+_NEGATION = re.compile(r"(?:do\s+not|don't|dont|must\s+not|never)\s*$", re.I)
 
 
 def _singular(token: str) -> str:
@@ -91,6 +91,12 @@ def _split_clauses(goal: str) -> list[str]:
 def _ambiguous_word_is_verb(low: str, start: int) -> bool:
     prefix = low[:start].strip()
     if not prefix:
+        return True
+    # A negation phrase immediately before an ambiguous action word is itself
+    # strong verb evidence: "do not update", "never record", etc. Without this,
+    # the noun-vs-verb ambiguity filter can erase the forbidden intent before
+    # the negation detector gets a chance to classify it.
+    if _NEGATION.search(prefix):
         return True
     words = re.findall(r"[a-z]+", prefix)
     if not words:
