@@ -1,0 +1,32 @@
+name: brain_fabv2_native-v1.0.0
+
+install_cmd: bash setup.sh
+
+run_cmd: >-
+  /app/.venv/bin/python
+  /bundle/brain_fabv2_native-v1.0.0/run_agent.py
+  "{problem_statement_path}"
+  "{task_id}"
+
+final_output: /app/results/brain_fabv2_native
+
+output_artifacts:
+  - path: vals_format/config.json
+    source: /app/results/brain_fabv2_native/{task_id}/config.json
+  - path: vals_format/result.json
+    source: /app/results/brain_fabv2_native/{task_id}/result.json
+  - path: brain/zero_spend_receipt.json
+    source: /app/results/brain_fabv2_native/{task_id}/zero_spend_receipt.json
+
+install_egress:
+  - https://codeload.github.com
+
+provided:
+  task_id:
+    type: str
+    required: false
+    description: "Benchmark task id."
+  problem_statement_path:
+    type: str
+    required: true
+    description: "Path to the task question."
