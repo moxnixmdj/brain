@@ -32,7 +32,7 @@
       "complete bounded exact-symbolic route"
     ],
     "next_action": "Rerank exact V40 using spent NEXT45 only; make a new physical cut before touching QUAL_SUCCESSOR_NEXT46_20261011_V1.",
-    "note": "Three larger variants were falsified; only the four causally load-bearing bodies were restored before the accepted 46-body V40 cut."
+    "note": "Three larger variants were falsified; only four causally load-bearing bodies were restored before the accepted 46-body V40 cut."
   },
   "rejected_do_not_reopen_without_new_evidence": [
     "parameter count as terminal metric",
@@ -71,8 +71,8 @@
     "untouched_qualification": "12190/12190",
     "clean_room_execution": "12190/12190",
     "archive_replay": "12190/12190",
-    "action_taken": "Applied exact BASE/TARGET-guarded V40 peripheral-assumption cut to verified V39; larger cuts exposed Set._infimum_key, inverse-trig atan lookup, and log rational/algebraic assumption handling as load-bearing; restoring only those bodies yielded a 46-body cut passing spent NEXT44 and previously untouched NEXT45.",
-    "physical_next_step": "Continue from 1,746,554 bytes using spent NEXT45 only; rerank before selecting the next physical cut.",
+    "action_taken": "Applied the exact guarded V40 cut to V39; larger candidates exposed four load-bearing bodies, which were restored; the accepted 46-body cut passes spent NEXT44 and previously untouched NEXT45.",
+    "physical_next_step": "Continue from 1,746,554 bytes using spent NEXT45 only; rerank before the next cut.",
     "predecessor_v39_superseded": true,
     "spent_NEXT44_replay": "11960/11960"
   },
