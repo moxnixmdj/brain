@@ -52,6 +52,12 @@
     {
       "capability_id": "chart.raster.curve_x_at_y_query.v1",
       "verification": "canonical/verification/CHART_CURVE_X_AT_Y_QUERY_V1_VERIFY_20261011.json"
+    },
+    {
+      "capability_id": "chart.raster.direct_curve_label_family_rank.v1",
+      "verification": "canonical/verification/CHART_DIRECT_CURVE_LABEL_FAMILY_RANK_V1_VERIFY_20261011.json",
+      "independent_verification": "canonical/verification/CHART_DIRECT_CURVE_LABEL_FAMILY_RANK_V1_INDEPENDENT_VERIFY_20261011.json",
+      "verification_state": "INDEPENDENT_PUBLIC_RUNNER_PASS__27_OF_27_TOTAL_CHECKS"
     }
   ],
   "declared_family_coverage": [
@@ -62,7 +68,9 @@
         "CALIBRATED_AXES",
         "LEGEND_COLOR_BINDING",
         "UNIQUE_CURVE_Y_AT_X",
-        "UNIQUE_CURVE_X_AT_Y_OR_THRESHOLD_INTERSECTION"
+        "UNIQUE_CURVE_X_AT_Y_OR_THRESHOLD_INTERSECTION",
+        "DIRECT_ENDPOINT_CURVE_LABEL_BINDING_WHERE_PRESENT",
+        "DIRECT_LABELED_CURVE_FAMILY_RANK_OR_NEAREST_QUERY"
       ],
       "open": [
         "SURVIVAL_DOMAIN_SEMANTICS",
@@ -89,11 +97,11 @@
       "verified_support": [
         "CALIBRATED_AXES",
         "RASTER_CURVE_GEOMETRY",
-        "UNIQUE_CURVE_X_AT_Y_OR_THRESHOLD_INTERSECTION"
+        "UNIQUE_CURVE_X_AT_Y_OR_THRESHOLD_INTERSECTION",
+        "DIRECT_ENDPOINT_CURVE_LABEL_BINDING",
+        "DIRECT_LABELED_CURVE_FAMILY_RANK_OR_NEAREST_QUERY"
       ],
       "open": [
-        "DIRECT_CURVE_LABEL_BINDING",
-        "CURVE_FAMILY_RANK_OR_NEAREST_QUERY",
         "GROWTH_PERCENTILE_DOMAIN_SEMANTICS"
       ]
     },
@@ -162,8 +170,12 @@
         "CONTOUR_MAP"
       ],
       "estimated_implementation_wall_clock_class": "MEDIUM",
-      "selection_state": "SELECTED_NEXT_BY_REUSE_TO_WALL_CLOCK",
-      "proposition_closure_authority": false
+      "selection_state": "VERIFIED_PROMOTED__FOCUSED_47_OF_47__SECOND_CARRIER_27_OF_27",
+      "proposition_closure_authority": false,
+      "verification": "canonical/verification/CHART_DIRECT_CURVE_LABEL_FAMILY_RANK_V1_VERIFY_20261011.json",
+      "independent_verification": "canonical/verification/CHART_DIRECT_CURVE_LABEL_FAMILY_RANK_V1_INDEPENDENT_VERIFY_20261011.json",
+      "second_carrier_independent": true,
+      "scope_note": "ENDPOINT_ADJACENT_DIRECT_LABELS_ONLY__NO_INLINE_CONTOUR_LABEL_AUTHORITY"
     },
     {
       "id": "MULTI_PANEL_PLOT_DECOMPOSITION",
@@ -202,7 +214,7 @@
       "proposition_closure_authority": false
     }
   ],
-  "selected_next_action": "BUILD_AND_INDEPENDENTLY_VERIFY_DIRECT_CURVE_LABEL_BINDING_AND_FAMILY_RANK",
+  "selected_next_action": "RECOMPUTE_POST_DIRECT_LABEL_CAPABILITY_COVERAGE_AND_RERANK_HIGHEST_REUSE_TO_WALL_CLOCK_RESIDUAL",
   "relation_to_target": {
     "comparison_predicate": "BRAIN_CAPABILITY_NONINFERIOR_TO_TARGET_ON_BOUND_SCOPE__CHARTOGRAPHY_TOOLS_GE_89",
     "current_relation": "OPEN_UNBOUND_RELATION",
