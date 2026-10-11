@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_AA_BRIEFCASE_CAPABILITY_INFORMATION_V1",
   "date": "2026-10-11",
-  "status": "ACTIVE__MINIMUM_INFORMATION_V3__IDENTIFICATION_FIXED_POINT__W_IDENTIFY_OPEN__ZERO_CREDIT",
+  "status": "ACTIVE__MINIMUM_INFORMATION_V3__IDENTIFICATION_FIXED_POINT__SECOND_CARRIER_REVALIDATED__W_IDENTIFY_OPEN__ZERO_CREDIT",
   "target": {
     "path": "canonical/governance/AA_BRIEFCASE_MEASUREMENT_SEMANTIC_TARGET_V1.json",
     "git_blob_sha": "8f24ca30e6cceb8a58f619da1623037c0a4bda0b"
@@ -20,6 +20,11 @@
     "path": "canonical/governance/AA_BRIEFCASE_IDENTIFICATION_PROOF_RECONCILIATION_20261011_V1.json",
     "git_blob_sha": "37947265536f0d7e52de3293236119ececba8956"
   },
+  "second_carrier_revalidation": {
+    "path": "canonical/verification/AA_BRIEFCASE_IDENTIFICATION_FIXED_POINT_SECOND_CARRIER_VERIFY_20261011_V1.json",
+    "git_blob_sha": "ebd676959dc465e1861a846e65921c14afb10d93",
+    "status": "SECOND_CARRIER_REPLAY_PASS__CONTENT_ADDRESSED_READBACK_PASS__NOT_INDEPENDENT_REVIEWER__ZERO_CREDIT"
+  },
   "truth": {
     "capability_relation_proved": false,
     "literal_aa_briefcase_elo_ge_1822_proved": false,
@@ -31,7 +36,8 @@
       "W_COVER",
       "W_QUALITY"
     ],
-    "w_cover_and_w_quality_terminal_credit_blocked_until_w_identify": true
+    "w_cover_and_w_quality_terminal_credit_blocked_until_w_identify": true,
+    "same_information_aa_specific_action_has_positive_expected_information_gain": false
   },
   "next": "NO_SAME_INFORMATION_AA_SPECIFIC_ACTION_HAS_POSITIVE_EXPECTED_INFORMATION_GAIN__REOPEN_ONLY_ON_A_NEW_SOUND_PRIVATE_RUBRIC_OR_JUDGE_CLASS_RESTRICTION_MATCHED_REFERENCE_RELATION_OR_OWNER_ACCEPTED_PROTOCOL_EQUIVALENT_BRIDGE",
   "accounting": {
