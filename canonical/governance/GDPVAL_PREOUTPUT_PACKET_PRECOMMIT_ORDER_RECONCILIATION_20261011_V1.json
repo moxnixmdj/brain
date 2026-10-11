@@ -1,0 +1,79 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_PREOUTPUT_PACKET_PRECOMMIT_ORDER_RECONCILIATION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__MACHINE_PROMPT_HASH_PASS_PREDATED_ROWS35_219_FREEZE__NO_COGNITIVE_EXPOSURE_OR_SELECTION_LEAKAGE__LITERAL_NO_PROMPT_READ_WORDING_CORRECTED",
+  "benchmark": "GDPval-AA v2.1",
+  "affected_scope": "ROWS_35_THROUGH_219",
+  "chronology": {
+    "deterministic_packet_builder_observed_mtime_utc": "2026-10-11T10:40:39.888Z",
+    "deterministic_packet_manifest_observed_mtime_utc": "2026-10-11T10:40:40.016Z",
+    "rows35_219_task_id_freeze_commit": "c604f5006820ce3ca24d6afc2487a95a30886a6c",
+    "rows35_219_task_id_freeze_commit_time_utc": "2026-10-11T13:05:46Z",
+    "order": "DETERMINISTIC_MACHINE_HASH_PASS_PRECEDED_TASK_ID_FREEZE"
+  },
+  "earlier_builder": {
+    "source": "gdpval_220_preoutput_packet_builder_v1.py",
+    "behavior": [
+      "FETCH_OFFICIAL_OPENAI_GDPVAL_ROWS",
+      "PROJECT_ONLY_FIELD_FIREWALL_ALLOWED_FIELDS",
+      "SHA256_PROMPT_BYTES",
+      "DETERMINISTIC_CHARACTER_BOUNDARY_SENTENCE_SEGMENTATION",
+      "SHA256_SEGMENT_BYTES",
+      "SHA256_REFERENCE_MANIFEST"
+    ],
+    "no_model_calls": true,
+    "no_prompt_text_emitted_in_manifest": true,
+    "no_reference_file_content_read": true,
+    "forbidden_fields_not_emitted": [
+      "deliverable_files",
+      "deliverable_file_urls",
+      "deliverable_file_hf_uris",
+      "rubric_pretty",
+      "rubric_json",
+      "model_submissions",
+      "judge_feedback"
+    ],
+    "manifest_schema": "PROJECT_BRAIN_GDPVAL_220_PREOUTPUT_PACKET_MANIFEST_V1",
+    "manifest_file_sha256": "d01caa26da3f4fa2e0b42f0684a54eeff5f79275e8dba6b8cd9a27a07a5626f6",
+    "manifest_root_sha256": "f69af30fcea243ccb25d44c4a5380be0cdcac621287568525065034ce6cedae8"
+  },
+  "selection_nonleakage": {
+    "later_selection_rule": "ALL_OFFICIAL_ROWS_35_THROUGH_219_IN_ASCENDING_ORDER_BY_PREEXISTING_ROW_INDEX_AND_TASK_ID",
+    "selected_count": 185,
+    "prompt_dependent_selection": false,
+    "packet_derived_selection": false,
+    "consequence": "THE_EARLIER_HASH_PASS_COULD_NOT_CHANGE_MEMBERSHIP_OR_ORDER_OF_THE_FROZEN_ROWS35_219_SCOPE"
+  },
+  "corrected_interpretation": {
+    "false_literal_to_retire": "NO_PROMPT_READ_FOR_ROWS35_219_AT_THIS_FREEZE",
+    "replacement": [
+      "NO_PROMPT_CONTENT_EXPOSED_TO_BRAIN_COGNITION_OR_OUTPUT_GENERATOR_BEFORE_THE_ROWS35_219_TASK_ID_FREEZE",
+      "NO_REFERENCE_FILE_CONTENT_EXPOSED_TO_BRAIN_COGNITION_OR_OUTPUT_GENERATOR_BEFORE_THE_FREEZE",
+      "A_DETERMINISTIC_NONCOGNITIVE_MACHINE_PASS_HAD_PREVIOUSLY_READ_ALLOWED_PROMPT_BYTES_ONLY_TO_COMPUTE_CONTENT_HASHES_AND_RAW_SEGMENT_HASHES",
+      "NO_GOLD_RUBRIC_MODEL_SUBMISSION_OR_JUDGE_FEEDBACK_WAS_EMITTED_BY_THAT_PASS"
+    ]
+  },
+  "admissible_use_of_earlier_manifest": [
+    "VERIFY_OFFICIAL_DATASET_REVISION_IDENTITY",
+    "VERIFY_TASK_ID_AND_PROMPT_CONTENT_ADDRESS_AFTER_FREEZE",
+    "VERIFY_REFERENCE_MANIFEST_IDENTITY",
+    "VERIFY_DETERMINISTIC_RAW_OBLIGATION_SEGMENT_ROOT"
+  ],
+  "forbidden_use_of_earlier_manifest": [
+    "CLAIM_IT_IS_THE_ROWS35_219_FRESHNESS_PRECOMMIT",
+    "CLAIM_NO_MACHINE_EVER_READ_PROMPT_BYTES_BEFORE_TASK_ID_FREEZE",
+    "CLAIM_ANY_BENCHMARK_SCORE_OR_OWNER_GRADE"
+  ],
+  "freshness_decision": "ROWS35_219_REMAIN_ADMISSIBLE_FOR_FRESH_BRAIN_OUTPUT_GENERATION_BECAUSE_NO_PROMPT_CONTENT_WAS_EXPOSED_TO_COGNITION_OR_OUTPUT_GENERATION_BEFORE_FULL_POPULATION_SCOPE_FREEZE_AND_SELECTION_WAS_PROMPT_INDEPENDENT",
+  "hard_nonclaims": [
+    "NO_OWNER_SCORE",
+    "NO_GDPVAL_ELO",
+    "NO_1846_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
