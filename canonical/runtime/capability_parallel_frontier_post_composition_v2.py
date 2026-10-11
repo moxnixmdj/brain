@@ -10,9 +10,11 @@ PROF="canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json"
 ASSURANCE="canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json"
 BYTES="canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json"
 R2="canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json"
+WAKE="canonical/governance/CURRENT_ALL_OPEN_CHECKPOINT_WAKE_GATE_RECONCILIATION_20261011_V1.json"
 PROF_WORK="PROFESSIONAL_QUALITY_V7_PROPERTY_TRUTH_DEPLETION"
 ASSURANCE_WORK="ASSURANCE_UVCK_V2_PROMOTION_GATES"
 R2_WORK="R2_FINANCE_SEMANTIC_ADEQUACY_TAIL"
+GAP_A_WORK="ESCAPE_GAP_A_AUTHENTICATED_ROW_PROOFS"
 
 class PostCompositionFrontierV2Error(ValueError): pass
 
@@ -32,6 +34,16 @@ def _source(f:dict,rel:str):
  rows=[x for x in f.get("scope",{}).get("source_set",[]) if isinstance(x,dict) and x.get("path")==rel]
  if len(rows)!=1: raise PostCompositionFrontierV2Error("SOURCE_CARDINALITY:"+rel)
  return rows[0]
+
+def _ensure_source(f:dict,rel:str,sha:str):
+ rows=[x for x in f.get("scope",{}).get("source_set",[]) if isinstance(x,dict) and x.get("path")==rel]
+ if len(rows)>1: raise PostCompositionFrontierV2Error("SOURCE_CARDINALITY:"+rel)
+ if rows:
+  rows[0]["git_blob_sha"]=sha
+ else:
+  source_set=f.get("scope",{}).get("source_set")
+  if not isinstance(source_set,list): raise PostCompositionFrontierV2Error("SOURCE_SET_MISSING")
+  source_set.append({"path":rel,"git_blob_sha":sha})
 
 def _cand_source(f:dict,rel:str):
  rows=[x for x in f.get("candidates",[]) if isinstance(x,dict) and x.get("source")==rel]
@@ -93,12 +105,36 @@ def _r2(f:dict,root:Path):
  ev=dict(row.get("read_only_evidence") or {}); ev.update({"source":R2,"source_git_blob_sha":sha,"general_mechanism_closed":True,"finance_tail_closed":False,"wake_gate":False,"vector_bounds_complete":False,"dynamic_current_pointer_follow":True}); row["read_only_evidence"]=ev
  return {"git_blob_sha":sha,"version":ver}
 
+def _wake(f:dict,root:Path):
+ d,sha=_load(root,WAKE)
+ if d.get("schema")!="PROJECT_BRAIN_ALL_OPEN_CHECKPOINT_ROWS_WAKE_GATE_RECONCILIATION_20261011_V1": raise PostCompositionFrontierV2Error("WAKE_SCHEMA")
+ rec=d.get("scheduler_reconciliation")
+ if not isinstance(rec,Mapping): raise PostCompositionFrontierV2Error("WAKE_RECONCILIATION")
+ keys=("open_checkpoint_obligation_count","row_specific_same_information_runnable_count","wake_gated_open_checkpoint_count","parked_checkpoint_count")
+ vals=[rec.get(k) for k in keys]
+ if any(isinstance(x,bool) or not isinstance(x,int) or x<0 for x in vals): raise PostCompositionFrontierV2Error("WAKE_COUNTS")
+ open_n,runnable,wake_n,parked=vals
+ if runnable+wake_n!=open_n: raise PostCompositionFrontierV2Error("WAKE_PARTITION")
+ if rec.get("primary_when_no_wake_event")!="CAPABILITY_FIRST_GENERAL_DEVELOPMENT_AND_RESOURCE_PARETO_IMPROVEMENT": raise PostCompositionFrontierV2Error("WAKE_PRIMARY")
+ _ensure_source(f,WAKE,sha)
+ row=_cand_id(f,GAP_A_WORK)
+ ev=dict(row.get("read_only_evidence") or {})
+ ev.update({"source":WAKE,"source_git_blob_sha":sha,"open_checkpoint_obligation_count":open_n,"row_specific_same_information_runnable_count":runnable,"wake_gated_open_checkpoint_count":wake_n,"parked_checkpoint_count":parked,"dynamic_current_pointer_follow":True,"vector_bounds_complete":False})
+ row["read_only_evidence"]=ev
+ if runnable==0:
+  row["scheduler_state"]="SLEEPING"; row["prerequisites_satisfied"]=False; row["evidence_acquisition_mode"]="NONE"
+  row["readiness"]=f"WAKE_GATED__{open_n}_OPEN__0_SAME_INFORMATION_RUNNABLE__WAIT_FOR_POLICY_CHANGING_REALITY_OR_STRONGER_CERTIFICATE"
+ else:
+  row["scheduler_state"]="READY_EVIDENCE"; row["prerequisites_satisfied"]=True; row["evidence_acquisition_mode"]="READ_ONLY"
+  row["readiness"]=f"WAKE_EVENT_PRESENT__{runnable}_POLICY_CHANGING_ROW_PATHS_RUNNABLE__REENTER_EXISTING_VERIFIERS_ONLY"
+ return {"git_blob_sha":sha,"open_checkpoint_obligation_count":open_n,"row_specific_same_information_runnable_count":runnable,"wake_gated_open_checkpoint_count":wake_n,"parked_checkpoint_count":parked}
+
 def refresh_post_composition_currentness(frontier:Mapping[str,Any],*,root:Path=core.ROOT):
- f=json.loads(json.dumps(frontier)); p=_prof(f,root); a=_assurance(f,p,root); b=_bytes(f,root); r=_r2(f,root)
+ f=json.loads(json.dumps(frontier)); p=_prof(f,root); a=_assurance(f,p,root); b=_bytes(f,root); r=_r2(f,root); w=_wake(f,root)
  for row in f.get("candidates",[]):
   if isinstance(row,dict) and row.get("scheduler_state")=="PARKED":
    row["original_scheduler_state"]="PARKED"; row["scheduler_state"]="BLOCKED"
- f["dynamic_currentness"]={"professional_pointer_follow":True,"assurance_pointer_follow":True,"bytes_pointer_follow":True,"r2_pointer_follow":True,"parked_normalized_to_nonprimary":True,"professional":p,"assurance":a,"bytes":b,"r2":r,"other_source_families_dynamic_follow":False}
+ f["dynamic_currentness"]={"professional_pointer_follow":True,"assurance_pointer_follow":True,"bytes_pointer_follow":True,"r2_pointer_follow":True,"checkpoint_wake_gate_follow":True,"parked_normalized_to_nonprimary":True,"professional":p,"assurance":a,"bytes":b,"r2":r,"checkpoint_wake_gate":w,"other_source_families_dynamic_follow":False}
  return f
 
 def plan_current_post_composition_frontier():

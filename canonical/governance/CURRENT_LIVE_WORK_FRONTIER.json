@@ -266,11 +266,11 @@
       "work_type": "FALSIFICATION",
       "source": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
       "causal_role": "TWELVE_ACTIVE_INFORMATION_ACQUISITION_ROWS_REQUIRE_REAL_CURRENT_AVAILABILITY_OR_ACQUIRABILITY_EVIDENCE__ONE_TB_ROW_SEPARATELY_PARKED",
-      "readiness": "TWELVE_ACTIVE_ACQUISITION_ROWS__EVIDENCE_ACQUISITION_OR_FALSIFICATION_WITH_EXISTING_ADAPTER",
+      "readiness": "WAKE_GATED__12_OPEN_CHECKPOINT_ROWS__0_SAME_INFORMATION_RUNNABLE__WAIT_FOR_POLICY_CHANGING_REALITY_OR_STRONGER_SCOPE_COMPLETE_CERTIFICATE",
       "claims_new_primitive": false,
       "score_state": "UNBOUND",
-      "scheduler_state": "READY_EVIDENCE",
-      "prerequisites_satisfied": true,
+      "scheduler_state": "SLEEPING",
+      "prerequisites_satisfied": false,
       "prerequisite_work_ids": [],
       "mutation_keys": [
         "canonical:escape-gap-a"
@@ -280,7 +280,7 @@
       ],
       "explicit_conflict_work_ids": [],
       "evidence_conflict_keys": [],
-      "evidence_acquisition_mode": "READ_ONLY",
+      "evidence_acquisition_mode": "NONE",
       "vector_evidence_state": "PARTIAL",
       "vector_evidence": {},
       "read_only_evidence": {
