@@ -26,6 +26,7 @@ from canonical.runtime.generic_goal_tool_effect_planner_v1 import (
     profile_endpoint as _profile_v1,
 )
 from canonical.runtime.generic_tool_argument_binder_v1 import (
+    bind_endpoint_call,
     canonical_field,
     endpoint_grounding_contract,
 )
@@ -134,8 +135,13 @@ def _annotate_profile_specificity(profiles: Sequence[dict[str, Any]]) -> None:
 
 
 def _preobservation_groundable(goal: str, profile: Mapping[str, Any]) -> bool:
-    contract = endpoint_grounding_contract(goal=goal, endpoint=profile["raw"])
-    return not bool(contract.get("required_evidence_semantics") or [])
+    bound = bind_endpoint_call(
+        goal=goal,
+        endpoint=profile["raw"],
+        observations=[],
+        context_text=goal,
+    )
+    return bound.get("pass") is True
 
 
 def _done(intent_id: str) -> str:
