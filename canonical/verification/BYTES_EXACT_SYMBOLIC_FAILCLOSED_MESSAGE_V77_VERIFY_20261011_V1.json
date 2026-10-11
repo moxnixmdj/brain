@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_FAILCLOSED_MESSAGE_V77_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__466_OF_466_FAILCLOSED_MESSAGE_COLLAPSES__61_FILES__SAME_EXCEPTION_TYPE__17_HANDLERS_ZERO_BOUND__HARNESS_DECISION_EQUIVALENT__CLEAN_RECONSTRUCTION_278_OF_278__STRATIFIED_NEXT82_240_OF_240__NEXT83_UNSPENT",
+  "subject_manifest_sha256": "b03d2329afd48ac7f66fa8c90bd52d1bd454cf15547b67e305fabb2e1fb3111a",
+  "predecessor_manifest_sha256": "ea2958321bf8c5b35f6f3f6d98bee0f8498a52f51dff6826d76632e8b5a61940",
+  "replacement_count": 466,
+  "changed_file_count": 61,
+  "saved_bytes": 21902,
+  "same_exception_type": true,
+  "all_replacements_inside_function_bodies": true,
+  "explicit_NotImplementedError_handler_count": 17,
+  "explicit_NotImplementedError_handlers_bind_message_count": 0,
+  "qualification_harness": {
+    "path": "canonical/research/bytes/tools/run_qualification_v1.py",
+    "git_blob_sha": "9e04430af5b0b49a30c76737547c9c1a42fb5df6",
+    "exception_message_affects_pass_fail": false
+  },
+  "proof_artifact": {
+    "library_file_id": "libfile_3d931c7e53e48191aa7adce9d83282f1",
+    "sha256": "e77461ee91c82040629a1460f1a5223d4da2cc92bf564329309354765d74c616"
+  },
+  "clean_room_reconstruction": "PASS__278_OF_278_DURABLE_FILES_BYTE_IDENTICAL",
+  "direct_stratified_corrected_NEXT82": {
+    "passed": 240,
+    "total": 240,
+    "failures": 0,
+    "sampling": "20_EVENLY_SPACED_PER_OPERATION_X_12"
+  },
+  "full_NEXT82_candidate_execution": false,
+  "qualification_transfer_valid_for_bounded_route": true,
+  "next83_spent": false,
+  "external_second_carrier_verified": false,
+  "hard_nonclaims": [
+    "NO_CLAIM_FULL_NEXT82_EXECUTED_ON_V77",
+    "NO_NEXT83_EXECUTION",
+    "NO_EXTERNAL_MESSAGE_OBSERVER_EQUIVALENCE",
+    "NO_CAPABILITY_OR_TERMINAL_CREDIT"
+  ],
+  "incremental_spend_usd": 0
+}
