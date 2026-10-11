@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_SEMANTIC_V10_TOTALITY_BATCH_INDEPENDENT_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__SECOND_INDEPENDENT_SPRITE__PYCOMPILE__6_OF_6__12_OF_12_TOTALITIES_REPRODUCED__12_OF_12_BINDER_V3_RECEIPTS_PASS__SEMANTIC_PROPERTY_TRUTH_12_OF_12__ZERO_QUALITY_OR_TERMINAL_CREDIT",
+  "subject": {
+    "compiler": {
+      "path": "canonical/runtime/professional_semantic_v10_totality_compiler_v1.py",
+      "git_blob_sha": "bcccbf8cdc769a5068567f99c81a00b3894e6752"
+    },
+    "tests": {
+      "path": "canonical/tests/test_professional_semantic_v10_totality_compiler_v1.py",
+      "git_blob_sha": "d9027f602db8e9b139265821af4d201a68639095"
+    },
+    "batch": {
+      "path": "canonical/governance/PROFESSIONAL_SEMANTIC_V10_AUTHENTIC_POSITIVE_RECEIPT_BATCH_20261011_V1.json",
+      "git_blob_sha": "be9b8d1f441675ba0e275f582b144c0e5c662119"
+    },
+    "v10_subject_id": "PROFESSIONAL_QUALITY_P1_V10_PARAMETERIZED_SEMANTIC_ADMISSION_SYSTEM_20261011_V9",
+    "v10_subject_sha256": "0f6d54242b7e3e1eeb484b1c3b7384a8ce72246ef1e840687be2fe20de69e6b4"
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/v10-semantic-totality",
+    "producer_carrier_distinct": true,
+    "py_compile": "PASS",
+    "focused_tests_run": 6,
+    "focused_tests_passed": 6,
+    "focused_tests_failed": 0,
+    "compiled_totality_count": 12,
+    "binder_receipts_passed": 12,
+    "exact_blob_identity_verified": true
+  },
+  "proof_split": {
+    "universal_safety": "EXACT_V10_WHOLE_DOMAIN_CLAIM_PLUS_EXCLUSIVE_BINDER_V3_FAIL_CLOSED_SEMANTIC_AUTHORITY",
+    "nonvacuity": "EXISTING_CONTENT_ADDRESSED_BOUNDED_SEMANTIC_WITNESS_PER_ROOT",
+    "bounded_witness_global_scope_transport": false,
+    "claim_scoped_totality_proved": true,
+    "cc_r1_reality_containment_proved": true,
+    "cc_r2_mission_soundness_proved": true,
+    "cc_r3_terminal_closure_proved": true,
+    "r4_proof_realization_authority": true
+  },
+  "truth": {
+    "semantic_leaf_count": 12,
+    "semantic_property_truth_count": 12,
+    "all_twelve_semantic_receipts_admitted": true,
+    "execution_property_truth_count_preexisting": 12,
+    "total_professional_property_truth_after_binding": 24,
+    "quality_authority": false,
+    "acceptance_authority": false,
+    "promotion_authority": false,
+    "terminal_authority": false
+  },
+  "exact_next": "RECONCILE_PROFESSIONAL_PROPERTY_TRUTH_TO_24_OF_24__RUN_FULL_CURRENT_MAIN_REGRESSION__ONLY_THEN_PROMOTE_ASSURANCE_COMPILER_OR_QUALITY_AUTHORITY",
+  "hard_nonclaims": [
+    "NO_GLOBAL_QUALITY_AUTHORITY_FROM_SEMANTIC_LEAF_PROPERTY_TRUTH_ALONE",
+    "NO_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY",
+    "NO_BOUNDED_WITNESS_SCOPE_PROMOTION_TO_WHOLE_DOMAIN",
+    "NO_NEW_PRIMITIVE_REQUIRED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
