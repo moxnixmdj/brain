@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_FIELD_SCOPED_PROJECTION_CONSUMER_INDEPENDENT_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__INDEPENDENT_SPRITE__EXACT_CURRENT_MAIN_BYTES__16_OF_16__ZERO_AUTHORITY_SUBSTRATE_VERIFIED__ZERO_CREDIT",
+  "subject_base_main_commit": "db6d2f94e827a2820998d88d4ffe5174a6d8bbc7",
+  "source_bindings": {
+    "canonical/runtime/field_scoped_authority_projection_gate_v1.py": "770174d3f70e18d35dfe18449c613df0259c6dd2",
+    "canonical/runtime/sealed_field_projection_consumer_v1.py": "348cc225d0a114ef73e549e368c6554272fcb598",
+    "canonical/runtime/honesty_closed_world_input_manifest_v1.py": "0b7b84ed9b9cf77558a88b9871209d5d8bf7d8c9",
+    "canonical/runtime/zero_ambient_namespace_launcher_v1.py": "6e687527e9c4da82fb5d974a729aaa263ee73ea8",
+    "canonical/tests/test_field_scoped_authority_projection_gate_v1.py": "fa34d56005cb8546e488bca60ad0fb5b762860e9",
+    "canonical/tests/test_sealed_field_projection_consumer_v1.py": "3c52d4fa485a802c08f2f0368637f4657af087f1"
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "sprite_name": "brain-field-projection-verify-20261011-v1",
+    "sprite_id": "sprite-f7ddb46b-7a9b-437e-8079-e815b9ab6fb5",
+    "python": "3.13.7",
+    "pytest": "9.1.1",
+    "tests": [
+      "canonical/tests/test_field_scoped_authority_projection_gate_v1.py",
+      "canonical/tests/test_sealed_field_projection_consumer_v1.py"
+    ],
+    "tests_run": 16,
+    "tests_passed": 16,
+    "tests_failed": 0
+  },
+  "proved": [
+    "FIELD_SCOPED_AUTHORITY_PROJECTION_GATE_FOCUSED_TESTS_PASS_ON_INDEPENDENT_CARRIER",
+    "SEALED_FIELD_PROJECTION_CONSUMER_FOCUSED_TESTS_PASS_ON_INDEPENDENT_CARRIER",
+    "EXACT_CURRENT_MAIN_RUNTIME_AND_TEST_BLOBS_WERE_TRANSFERRED_BY_CONTENT_FROM_CURRENT_MAIN",
+    "DEPENDENCY_IMPLEMENTATIONS_HONESTY_CLOSED_WORLD_INPUT_MANIFEST_AND_ZERO_AMBIENT_NAMESPACE_LAUNCHER_WERE_BOUND_BY_EXACT_CURRENT_MAIN_BLOB_SHA"
+  ],
+  "authority_boundary": "VERIFICATION_ONLY__NO_EXECUTION_PROMOTION_ACCEPTANCE_CAPABILITY_OWNERSHIP_FRESH_REALITY_OR_TERMINAL_AUTHORITY",
+  "hard_nonclaims": [
+    "NO_CLAIM_ALL_CONSUMER_PROGRAMS_ARE_SAFE",
+    "NO_CLAIM_FIELD_PROJECTION_GRANTS_SOURCE_AUTHORITY",
+    "NO_CAPABILITY_OR_ACCEPTANCE_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
