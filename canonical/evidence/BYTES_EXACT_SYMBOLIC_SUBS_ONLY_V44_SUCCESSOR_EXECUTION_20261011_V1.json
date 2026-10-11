@@ -1,0 +1,103 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_SUBS_ONLY_V44_SUCCESSOR_EXECUTION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "VERIFIED_REPAIR_FRONTIER__V43_FALSIFIED__SUBS_ONLY_SURVIVES__SPENT_NEXT48_PASS__ADAPTIVE_NEXT49_PASS__FRESH_NEXT50_PASS__NEXT51_FROZEN_UNSPENT__CURRENT_POINTER_ELIGIBLE__ZERO_PROMOTION_CREDIT",
+  "subject": {
+    "predecessor": "canonical/evidence/BYTES_EXACT_SYMBOLIC_ALGEBRAICNUMBER_V42_SUCCESSOR_EXECUTION_20261011_V1.json",
+    "predecessor_manifest_sha256": "11b996be90057f3a9e1c8adcad7d47688515a7a3fb1b15713b9e04be76ae1676",
+    "falsified_intermediate": "canonical/evidence/BYTES_EXACT_SYMBOLIC_EVALF_SUBS_V43_SUCCESSOR_EXECUTION_20261011_V1.json",
+    "falsification": "canonical/evidence/BYTES_EXACT_SYMBOLIC_V43_NEXT49_FALSIFICATION_20261011_V1.json",
+    "transform": "canonical/research/bytes/tools/conservative_subs_prune_v44.py",
+    "manifest_sha256": "0a7f6fdc38cd3db7a265ac74181e4367b3b88c98c66950c2c0ed2ae3d355a5d5",
+    "python_files": 277,
+    "raw_python_source_bytes": 1741630,
+    "B_exec_raw_python_source_bytes": 1744390,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "raw_delta_vs_v42_bytes": -1489,
+    "B_exec_delta_vs_v42_bytes": -1489,
+    "raw_delta_vs_falsified_v43_bytes": 1517
+  },
+  "selection": {
+    "id": "SUBS_NEW_OUTSIDE_BOUNDED_CONTRACT_V44_REPAIR",
+    "method": "CAUSAL_SPLIT_AFTER_FRESH_V43_FALSIFICATION__RETAIN_ONLY_THE_NONFAILING_EXISTING_FAIL_CLOSED_SPECIALIZATION",
+    "changed_body_count": 1,
+    "body": "sympy/core/function.py::Subs.__new__",
+    "rejected_body": "sympy/core/evalf.py::evalf_trig",
+    "exact_base_guard": true,
+    "exact_target_guard": true
+  },
+  "qualification": {
+    "spent_NEXT48": {
+      "id": "QUAL_SUCCESSOR_NEXT48_20261011_V1",
+      "cases": 12880,
+      "corpus_sha256": "7360ad57d9ded0269d40256aeab444125decf4ececbdc758a3bd095cdb05312f",
+      "candidate": "12880/12880",
+      "failures": 0,
+      "spent": true
+    },
+    "adaptive_NEXT49": {
+      "id": "QUAL_SUCCESSOR_NEXT49_20261011_V1",
+      "cases": 13110,
+      "corpus_sha256": "7bfc5ebde7f8bb1c41d31967f6f74dafb20dd9b3d3db77e1e101ffb7dd968a34",
+      "candidate": "13110/13110",
+      "failures": 0,
+      "spent": true,
+      "fresh_for_v44": false,
+      "reason": "V44 was designed after V43 was falsified on NEXT49"
+    },
+    "fresh_NEXT50": {
+      "id": "QUAL_SUCCESSOR_NEXT50_20261011_V1",
+      "cases": 13340,
+      "corpus_sha256": "93c0ea4bebb7f794db1a674b22ee6fc35df3ab4822afb34c205c78d5f16efd82",
+      "candidate": "13340/13340",
+      "failures": 0,
+      "spent": true,
+      "expected_output_reference": "stock SymPy 1.14.0 + mpmath 1.3.0",
+      "frozen_bytes_crosscheck": "BYTE_IDENTICAL_TO_INDEPENDENT_STOCK_DONOR_EXPECTED_OUTPUT_RECOMPUTATION"
+    }
+  },
+  "reproducibility": {
+    "clean_room_v42_to_v44_reconstruction": "PASS__277_OF_277_PYTHON_FILES_BYTE_IDENTICAL",
+    "regenerated_manifest_sha256": "0a7f6fdc38cd3db7a265ac74181e4367b3b88c98c66950c2c0ed2ae3d355a5d5",
+    "external_second_carrier_verified": false
+  },
+  "durable_archive": {
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V44_SUCCESSOR_20261011_V1.tar.xz",
+    "library_file_id": "libfile_a24a102bc5108191bcc3a4758fa62180",
+    "bytes": 268828,
+    "sha256": "5e04b2b139b01613daef5b4fcee741fbc73abacf80b8ef93380f67676e73ea52"
+  },
+  "next_frozen": {
+    "id": "QUAL_SUCCESSOR_NEXT51_20261011_V1",
+    "cases": 13570,
+    "seed": 195142782,
+    "seed_derivation": "FIRST_32_BITS_SHA256_OF_QUAL_SUCCESSOR_NEXT51_20261011_V1_PIPE_V44_MANIFEST_IDENTITY",
+    "seed_material": "QUAL_SUCCESSOR_NEXT51_20261011_V1|0a7f6fdc38cd3db7a265ac74181e4367b3b88c98c66950c2c0ed2ae3d355a5d5",
+    "per_operation_budget": 1180,
+    "corpus_sha256": "451f0b3f885c05d7d939b143bfe638b9e034283c0398c9ae80aac234775a90e5",
+    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT51_20261011_V1.jsonl",
+    "library_file_id": "libfile_21a794dcd574819188f3fe17218cbdcd",
+    "generation_provenance": "STOCK_SYMPY_1_14_0_MPMATH_1_3_0_EXACT_ROUTE_EXPECTED_OUTPUTS__DETERMINISTIC_CHUNKED_ACCELERATION",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT",
+    "spent": false
+  },
+  "truth_boundary": [
+    "MEASURED: V44 is 1,741,630 raw Python-source bytes, 1,489 below valid V42 and 1,517 above falsified V43.",
+    "MEASURED: V44 passes spent NEXT48 12,880/12,880.",
+    "MEASURED: V44 passes adaptive repair corpus NEXT49 13,110/13,110; this is not treated as fresh validation.",
+    "MEASURED: previously untouched NEXT50 passes V44 13,340/13,340 with zero failures.",
+    "MEASURED: NEXT50 frozen expected outputs are byte-identical to an independent stock SymPy 1.14.0 + mpmath 1.3.0 recomputation.",
+    "MEASURED: clean-room V42-to-V44 reconstruction yields 277/277 Python files byte-identical.",
+    "MEASURED: NEXT51 is durably frozen at 13,570 cases and remains unspent.",
+    "REJECTED: evalf_trig deletion from V43.",
+    "NOT PROVED: external second-carrier replay.",
+    "NOT PROMOTED: no capability, acceptance, ownership, quality, or terminal credit."
+  ],
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "quality_credit_delta": 0,
+  "promotion_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
