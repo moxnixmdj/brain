@@ -45,11 +45,17 @@ def classify_contract(instruction: str, artifact_paths: Iterable[str]) -> dict[s
     family=bool(re.search(r"\bdna\b",low)) and any(k in low for k in ("storage","codec","oligo","sequence","encode","decode","recover"))
     explicit_encode=any(k in low for k in ("encode","encoding","to dna"))
     explicit_decode=any(k in low for k in ("decode","decoding","recover","reconstruct","restore","from dna"))
+    explicit_implement=any(k in low for k in (
+        "implement", "implementation", "write a codec", "build a dna",
+        "develop a dna", "create a dna", "provide a dna",
+    ))
     encode=sum(k in low for k in ("encode","encoding","store","to dna"))
     decode=sum(k in low for k in ("decode","decoding","recover","reconstruct","restore","from dna","reads"))
     implement=sum(k in low for k in ("implement","implementation","write a codec","codec.py","encoder","decoder"))
     if not family or not artifacts:
         mode=None
+    elif explicit_implement:
+        mode="implementation"
     elif implement >= 2 and not explicit_encode and not explicit_decode:
         mode="implementation"
     elif explicit_encode and explicit_decode:
