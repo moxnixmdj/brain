@@ -1,0 +1,19 @@
+{
+  "schema": "PROJECT_BRAIN_CHART_RASTER_SCENE_GRAPH_V1_INDEPENDENT_VERIFY",
+  "status": "PASS__EXACT_BLOB__SYNTHETIC_SCOPE",
+  "exact_module_blob_sha": "258999b07287287db2037af777973d5bbb39116d",
+  "verifier_repository": "moxnixmdj/verification-capsule-runner",
+  "verifier_pull_request": 2699,
+  "verifier_merge_sha": "f2b87c2491fb826f6e3c1f12d53fc14abda1a96d",
+  "workflow_run_id": 38148601394,
+  "workflow_job_id": 114497092015,
+  "geometry_cases_passed": 40,
+  "axis_cases_passed": 13,
+  "general_purpose_model_dependency_count": 0,
+  "external_runtime_cognition": 0,
+  "semantic_authority": false,
+  "benchmark_score_authority": false,
+  "heldout_cases_consumed": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}

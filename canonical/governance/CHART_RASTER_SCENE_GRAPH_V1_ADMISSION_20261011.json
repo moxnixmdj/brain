@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_CHART_RASTER_SCENE_GRAPH_V1_ADMISSION",
+  "date": "2026-10-11",
+  "status": "ADMITTED__GENERIC_CAPABILITY_DISCRIMINATOR__ZERO_BENCHMARK_CREDIT",
+  "cause": {
+    "type": "PROVED_SCOPE_GAP",
+    "current_solver_path": "canonical/runtime/chartography_deterministic_professional_solver_v1.py",
+    "current_solver_blob": "3c3280b4baf6f77bc4fee32d503114d8b199374d",
+    "current_verified_atoms": [
+      "LEGEND_CODED_LINEAR_MULTI_SERIES_TARGET_INTERSECTION",
+      "BINARY_PHASE_DIAGRAM_PRECIPITATION_SOLVUS"
+    ],
+    "public_required_scope_source": {
+      "repository": "surge-ai/chartography",
+      "commit": "3f1bf837232d3918c2cc35c6e2418c9e70d2a57b",
+      "formats_explicitly_named": [
+        "KAPLAN_MEIER",
+        "CANDLESTICK",
+        "CONTOUR_MAP",
+        "SANKEY",
+        "BODE_PLOT"
+      ]
+    }
+  },
+  "candidate": {
+    "id": "GENERIC_CHART_RASTER_SCENE_GRAPH_V1",
+    "type": "CAPABILITY",
+    "authorized_discriminating_experiment": true,
+    "proved_live_defect": false,
+    "verified_counterexample": false,
+    "reusable_family_count": 5,
+    "projected_benchmark_row_count": 1,
+    "wall_clock_rank": 1,
+    "waits_for_external_event": false,
+    "incremental_spend_usd": 0,
+    "external_runtime_cognition": 0
+  },
+  "allowed_evidence": [
+    "SYNTHETIC_BRAIN_GENERATED_RASTER_CASES",
+    "PUBLIC_NONHELDOUT_CHARTOGRAPHY_SAMPLES",
+    "EXISTING_PINNED_TESSERACT_SENSOR"
+  ],
+  "forbidden": [
+    "HELDOUT_OR_GATED_CHARTOGRAPHY_TASK_CONTENT",
+    "EXTERNAL_GENERAL_PURPOSE_MODEL_RUNTIME_COGNITION",
+    "BENCHMARK_SCORE_INFERENCE_FROM_PRIMITIVE_PASS",
+    "TASK_SPECIFIC_HIDDEN_ANSWER_RECONSTRUCTION"
+  ],
+  "incremental_spend_usd": 0,
+  "benchmark_score_credit_delta": 0,
+  "terminal_credit_delta": 0
+}

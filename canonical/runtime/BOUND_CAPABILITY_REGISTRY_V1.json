@@ -3876,6 +3876,72 @@
         "external_capability_provider_count": 0,
         "incremental_spend_usd": 0
       }
+    },
+    "chart.raster.scene_graph.v1": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "adapter_module": "chart_raster_scene_graph_v1",
+      "entrypoint": "run",
+      "cost": 1,
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "chart",
+        "raster",
+        "scene",
+        "geometry",
+        "axis",
+        "log",
+        "polyline",
+        "component"
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "requires": [
+        "image.file.available"
+      ],
+      "provides": [
+        "chart.raster.plot_box",
+        "chart.raster.scene_graph",
+        "chart.raster.color_components",
+        "chart.raster.color_polylines",
+        "chart.axis.linear_or_log.calibration"
+      ],
+      "limitations": [
+        "Axis calibration requires supplied numeric tick observations.",
+        "Independently qualified on deterministic synthetic chart geometry only.",
+        "No chart-domain semantic authority and no benchmark-score authority."
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "chart.raster.scene_graph.v1",
+          "path": "${input.path}",
+          "x_ticks": "${input.x_ticks}",
+          "y_ticks": "${input.y_ticks}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "pass",
+          "value": true
+        }
+      },
+      "source": {
+        "type": "brain_native_deterministic",
+        "adapter_path": "canonical/runtime/bound_capabilities/chart_raster_scene_graph_v1.py",
+        "external_general_purpose_model_runtime_dependency_count": 0
+      },
+      "verification": {
+        "independent_verified": true,
+        "exact_module_blob_sha": "258999b07287287db2037af777973d5bbb39116d",
+        "receipt_path": "canonical/verification/CHART_RASTER_SCENE_GRAPH_V1_INDEPENDENT_VERIFY_20261011.json",
+        "verifier_repository": "moxnixmdj/verification-capsule-runner",
+        "verifier_pull_request": 2699,
+        "verifier_merge_sha": "f2b87c2491fb826f6e3c1f12d53fc14abda1a96d",
+        "workflow_run_id": 38148601394,
+        "workflow_job_id": 114497092015,
+        "geometry_cases_passed": 40,
+        "axis_cases_passed": 13
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
