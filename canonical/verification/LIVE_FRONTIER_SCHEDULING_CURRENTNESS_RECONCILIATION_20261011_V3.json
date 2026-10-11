@@ -1,0 +1,89 @@
+{
+  "schema": "PROJECT_BRAIN_LIVE_FRONTIER_SCHEDULING_CURRENTNESS_RECONCILIATION_20261011_V3",
+  "date": "2026-10-11",
+  "status": "PASS__CROSS_LAYER_CAPABILITY_FRONTIER_ALIGNMENT__NATIVE_GIT_TREE_BOUND__INDEPENDENT_SEMANTIC_REPLAY_58_OF_58__ZERO_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "base_main_commit": "21ce41c63619dec25eb8ca8f34d8add33d1a34ef",
+    "branch": "successor/live-frontier-scheduling-currentness-20261011-v3",
+    "pre_receipt_head": "3d4ecd499010085d1c4bb457d797736ce9edf188",
+    "tree_sha": "f9b7c7e0d45fa04990a206034aa8aae91401a9a6"
+  },
+  "canonical_parent_reconciliation": {
+    "path": "canonical/governance/CAPABILITY_FRONTIER_CURRENTNESS_RECONCILIATION_20261010_V1.json",
+    "git_blob_sha": "7fb78b746ca52818edd43b9e1a69c3437091e8b1",
+    "primary_ready": [
+      "ESCAPE_12_ACTIVE_ACQUISITION_ROW_PROOF_INSTANTIATION_REUSE"
+    ],
+    "safe_parallel_ready": [
+      "BYTES_V32_RESOURCE_PARETO_CUT"
+    ],
+    "professional_property_truth_closed": 24,
+    "professional_open_semantic_leaf_count": 0
+  },
+  "residual_closed": [
+    "REMOVE_SOLVED_PROFESSIONAL_PROPERTY_TRUTH_DEPLETION_FROM_LIVE_CANDIDATES",
+    "REDUCE_ASSURANCE_LIVE_PREREQUISITES_TO_FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION_ONLY",
+    "REBIND_ASSURANCE_TO_CURRENT_24_OF_24_ZERO_OPEN_AUTHORITY_AND_CARRIER_WAKE",
+    "ADVANCE_LIVE_AND_MISSION_BYTES_PROJECTION_FROM_V31_TO_CURRENT_V32",
+    "REBIND_R2_ESCAPE_PROFESSIONAL_ASSURANCE_BYTES_SOURCE_BLOBS",
+    "BIND_LIVE_PARALLEL_CONTROL_TO_VERIFIED_POST_COMPOSITION_V2",
+    "MARK_HISTORICAL_V9_R12_EDGE_NON_SCHEDULABLE",
+    "REBIND_SCHEDULER_AND_MISSION_TO_CLEANED_LIVE_FRONTIER"
+  ],
+  "repaired_native_git_blobs": {
+    "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json": "d6745cdd39692308ec8f573be52371f03a5a12a9",
+    "canonical/governance/CURRENT_DEVELOPMENT_SCHEDULER.json": "75fdd47f1e14613f9168b9094b698534ac97a1e7",
+    "canonical/governance/CURRENT_MISSION_OBJECTIVE.json": "0894a1b16cf707c4098232d52ae1218e5fd94fb6",
+    "canonical/governance/CAPABILITY_FRONTIER_CURRENTNESS_RECONCILIATION_20261010_V1.json": "7fb78b746ca52818edd43b9e1a69c3437091e8b1"
+  },
+  "native_git_tree_verification": {
+    "method": "GITHUB_NATIVE_COMMIT_TREE_READ",
+    "tree_sha": "f9b7c7e0d45fa04990a206034aa8aae91401a9a6",
+    "result": "PASS__FOUR_CROSS_LAYER_PATHS_PRESENT_AT_DECLARED_NATIVE_GIT_BLOB_IDS"
+  },
+  "independent_semantic_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-professional-hard-defect-verify-20261010",
+    "carrier_id": "sprite-1bbb86ed-1f7c-409f-8397-fadc4de7a62a",
+    "isolated_path": "/home/sprite/verify-live-frontier-v3",
+    "status": "PASS__CROSS_LAYER_CAPABILITY_FRONTIER_ALIGNMENT__58_OF_58__ZERO_CREDIT",
+    "checks_run": 58,
+    "checks_passed": 58,
+    "scope": [
+      "CAPABILITY_FRONTIER_24_OF_24_ESCAPE_PRIMARY_BYTES_V32_SAFE_PARALLEL",
+      "LIVE_CANDIDATE_SET_HAS_NO_SOLVED_PROFESSIONAL_DEPLETION",
+      "ASSURANCE_ONE_REMAINING_GATE_AND_CARRIER_WAKE",
+      "CURRENT_SOURCE_BLOB_BINDINGS",
+      "POST_COMPOSITION_V2_BINDING",
+      "SCHEDULER_LIVE_FRONTIER_AND_V32_COHERENCE",
+      "MISSION_CAPABILITY_LIVE_SCHEDULER_R2_BYTES_COHERENCE",
+      "ZERO_EXECUTION_PROMOTION_TERMINAL_AUTHORITY"
+    ],
+    "transport_limitation": "SPRITE_MATERIALIZATION_VIA_CONNECTOR_IS_SEMANTIC_NOT_NATIVE_GIT_BYTE_PRESERVING__NATIVE_GIT_OBJECT_IDENTITY_BOUND_SEPARATELY_BY_GITHUB_TREE_READ"
+  },
+  "preserved_truth": {
+    "full_private_current_main_regression_open": true,
+    "regression_execution_carrier_blocked": true,
+    "regression_pass": false,
+    "regression_fail_proved": false,
+    "uvck_v2_promoted": false,
+    "execution_authority": false,
+    "promotion_authority": false,
+    "terminal_authority": false
+  },
+  "hard_nonclaims": [
+    "NO_FULL_PRIVATE_CURRENT_MAIN_REGRESSION_PASS",
+    "NO_FULL_PRIVATE_CURRENT_MAIN_REGRESSION_FAIL",
+    "NO_UVCK_V2_PROMOTION",
+    "NO_NEW_PROFESSIONAL_PROPERTY_TRUTH_OR_CAPABILITY_CREDIT",
+    "NO_EXACT_BYTE_SPRITE_REPLAY_CLAIM"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "promotion_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
