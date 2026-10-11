@@ -109,6 +109,20 @@ def _contains_any(text: str, terms: tuple[str, ...]) -> bool:
     return any(t in low for t in terms)
 
 
+def _has_communication_intent(clause: str) -> bool:
+    low = _low(clause)
+    if any(re.search(rf"\b{re.escape(v)}\b", low) for v in _COMM_VERBS):
+        return True
+    # Destination-bound idiom: "let #ops know", "let user@example.com know".
+    if re.search(r"\blet\b.+\bknow\b", low):
+        return bool(
+            _EMAIL.search(clause)
+            or _CHANNEL.search(clause)
+            or _PHONE.search(clause)
+        )
+    return False
+
+
 def _ordered_unique(values: list[str]) -> list[str]:
     seen: set[str] = set()
     out: list[str] = []
@@ -178,7 +192,7 @@ def _operation_kind(clause: str) -> str | None:
     low = _low(clause)
     if any(re.search(rf"\b{re.escape(v)}\b", low) for v in _DELETE_VERBS):
         return "DELETE_STATE"
-    if any(re.search(rf"\b{re.escape(v)}\b", low) for v in _COMM_VERBS):
+    if _has_communication_intent(clause):
         return "COMMUNICATE"
     if any(re.search(rf"\b{re.escape(v)}\b", low) for v in _CREATE_VERBS):
         return "CREATE_STATE"
@@ -199,7 +213,7 @@ def _object_hint(clause: str) -> str | None:
 
 def _communication_obligations(clause: str, full_prompt: str) -> list[dict[str, Any]]:
     low = _low(clause)
-    if not any(re.search(rf"\b{re.escape(v)}\b", low) for v in _COMM_VERBS):
+    if not _has_communication_intent(clause):
         return []
 
     emails = _ordered_unique(_EMAIL.findall(clause))
