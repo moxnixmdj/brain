@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_MISSION_OBJECTIVE_POINTER_V1",
-  "date": "2026-10-09",
+  "date": "2026-10-11",
   "status": "ACTIVE",
   "authoritative_source": {
     "path": "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json"
@@ -16,10 +16,10 @@
   "current_assurance_closure_compiler": {
     "path": "canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json",
     "binding": "MUTABLE_CURRENT_POINTER_PATH_IDENTITY__OBSERVED_BLOB_IS_CURRENTNESS_EVIDENCE_NOT_IMMUTABLE_AUTHORITY",
-    "observed_git_blob_sha": "27acc7e80c0b85a778b8f8dbbd77aefe312ceef8",
+    "observed_git_blob_sha": "e421e0fec8d09f1359bafceb1bf215df8571f501",
     "status": "UVCK_V2_CANDIDATE__PROPERTY_TRUTH_24_OF_24__FULL_PRIVATE_CURRENT_MAIN_REGRESSION_GATE_OPEN__EXECUTION_CARRIER_BLOCKED_WITH_ZERO_TEST_STEPS__NOT_LIVE_DEFAULT",
     "terminal_authority": false,
-    "observed_snapshot_is_non_authoritative_for_v15_runtime": true
+    "observed_snapshot_is_non_authoritative_for_v16_runtime": true
   },
   "current_option_preserving_optimization": {
     "path": "canonical/governance/CURRENT_OPTION_PRESERVING_OPTIMIZATION.json"
@@ -27,21 +27,21 @@
   "optimization_precedence": "EFFICIENCY_OPTIMIZATION_MUST_PRESERVE_SEMANTIC_CAPABILITY_FUTURE_OPTION_VALUE_AND_RECONSTRUCTIBILITY__CURRENT_DOMINANCE_IS_NOT_DELETION_AUTHORITY",
   "current_development_scheduler": {
     "path": "canonical/governance/CURRENT_DEVELOPMENT_SCHEDULER.json",
-    "activation": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V15.json",
+    "activation": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261011_V16.json",
     "primary_runtime": "canonical/runtime/capability_parallel_frontier_post_composition_v2.py",
     "primary_entrypoint": "plan_current_post_composition_frontier",
     "scalar_fallback_runtime": "canonical/runtime/capability_first_live_scheduler_v1.py",
-    "status": "ACTIVE__POST_COMPOSITION_DYNAMIC_CURRENTNESS_V15__PROFESSIONAL_V10_24_OF_24__REGRESSION_CARRIER_WAKE_GATED__OTHER_REUSE_FIRST_FRONTIERS_CONTINUE__ZERO_GLOBAL_CREDIT",
-    "observed_git_blob_sha": "459f3b57994d26130b1ee575d6296487bffb84de"
+    "status": "ACTIVE__POST_COMPOSITION_DYNAMIC_CURRENTNESS_V16__PROFESSIONAL_24_OF_24_WAKE_GATED__ESCAPE_DECISION_VALUE_GATED__GDPVAL_HLE_ACTIONABLE__ZERO_GLOBAL_CREDIT",
+    "observed_git_blob_sha": "905795aff2cd85b791632c49ba28c81b641ff2ac"
   },
-  "scheduler_precedence": "REAL_MISSION_CAPABILITY_RESOURCE_PARETO_LEVERAGE_IS_PRIMARY__SAFE_NONCONFLICTING_PARALLELISM_MINIMIZES_WALL_CLOCK__CURRENTNESS_AND_DEPENDENCY_GATES_PRECEDE_SELECTION__DIMENSIONWISE_PARETO_DOMINANCE_PRECEDES_ANY_SCALAR_TRADEOFF__SCALARIZATION_REQUIRES_PROVED_TRADEOFF_CONTRACT__CURRENT_R2_SHARED_CAUSE_FANOUT_IS_SECONDARY_DISCRIMINATION_SIGNAL__OPUS_5_5_CHECKPOINT_WORK_IS_TERTIARY_AUDIT__EXPLICIT_NEW_PRIMITIVE_CLAIMS_REQUIRE_REUSE_FIRST_EXHAUSTION_PROOF",
+  "scheduler_precedence": "REAL_MISSION_CAPABILITY_RESOURCE_PARETO_LEVERAGE_IS_PRIMARY__CURRENTNESS_AND_DEPENDENCY_GATES_PRECEDE_SELECTION__DECISION_VALUE_WAKE_GATE_PRECEDES_PARETO_AND_EXTERNAL_ACQUISITION__SAFE_NONCONFLICTING_PARALLELISM_MINIMIZES_WALL_CLOCK__DIMENSIONWISE_PARETO_DOMINANCE_PRECEDES_ANY_SCALAR_TRADEOFF__SCALARIZATION_REQUIRES_PROVED_TRADEOFF_CONTRACT__OPUS_5_5_CHECKPOINT_WORK_IS_TERTIARY_AUDIT__EXPLICIT_NEW_PRIMITIVE_CLAIMS_REQUIRE_REUSE_FIRST_EXHAUSTION_PROOF",
   "current_professional_quality_execution": {
     "path": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
     "binding": "MUTABLE_CURRENT_POINTER_PATH_IDENTITY__OBSERVED_BLOB_IS_CURRENTNESS_EVIDENCE_NOT_IMMUTABLE_AUTHORITY",
-    "observed_git_blob_sha": "219fcd3aab318bde5d64e955a430ea7e60d7bf8e",
+    "observed_git_blob_sha": "34f2583ae019ec4730f0841cb0b32016ec968645",
     "status": "P1_V3_LIVE_UNCHANGED__V10_PROPERTY_TRUTH_24_OF_24__FULL_PRIVATE_CURRENT_MAIN_REGRESSION_GATE_OPEN__EXECUTION_CARRIER_BLOCKED_ZERO_STEPS__NOT_LIVE_DEFAULT",
     "terminal_authority": false,
-    "observed_snapshot_is_non_authoritative_for_v15_runtime": true
+    "observed_snapshot_is_non_authoritative_for_v16_runtime": true
   },
   "professional_quality_currentness_reconciliation": {
     "path": "canonical/verification/PROFESSIONAL_QUALITY_V7_12_OF_12_COMPOSITION_INDEPENDENT_VERIFY_20261010_V1.json",
@@ -50,9 +50,9 @@
   },
   "current_parallel_frontier_control": {
     "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
-    "observed_git_blob_sha": "8ed055de5aa597a507b5870a847382b8825de6ff",
-    "status": "CURRENT_R2_V91_GENERIC_MATERIALIZATION_SECOND_CARRIER_11_OF_11_PASS__ZERO_INTERNAL_R2_MECHANISM_RESIDUALS__PROFESSIONAL_24_OF_24__FULL_PRIVATE_REGRESSION_CARRIER_WAKE_GATED__PARALLEL_REUSE_FIRST_FRONTIERS_CONTINUE__ZERO_TERMINAL_CREDIT",
-    "binding": "MUTABLE_CURRENT_PATH_IDENTITY__SUPPORTED_PROFESSIONAL_ASSURANCE_BYTES_R2_PROJECTIONS_REFRESHED_AT_CALL_TIME__OTHER_SOURCE_DRIFT_FAILS_CLOSED",
+    "observed_git_blob_sha": "3f299eb32bc9e178360ba9adaeac546746f74314",
+    "status": "CURRENT_PROFESSIONAL_24_OF_24__REGRESSION_WAKE_GATED__ESCAPE_DECISION_VALUE_GATED__GDPVAL_HLE_ACTIONABLE__SAME_INFORMATION_ROWS_SLEEPING__ZERO_TERMINAL_CREDIT",
+    "binding": "MUTABLE_CURRENT_PATH_IDENTITY__SUPPORTED_PROFESSIONAL_ASSURANCE_BYTES_R2_AND_ESCAPE_SPECIALIZATION_PROJECTIONS_REFRESHED_AT_CALL_TIME__OTHER_SOURCE_DRIFT_FAILS_CLOSED",
     "snapshot_is_runtime_authority_for_supported_dynamic_families": false
   },
   "current_residual_reuse_classification": {
@@ -219,16 +219,20 @@
     "status": "PASS__12_SEMANTIC_LEAVES_ONE_SHARED_ACCEPTANCE__CURRENT_CATALOG_EXPLICITLY_INCOMPLETE__CATALOG_ALONE_CANNOT_CLOSE_SEMANTIC_PROPERTY_TRUTH__NO_NEW_PRIMITIVE_ESTABLISHED"
   },
   "escape_current_topology": {
-    "active_gap_a_acquisition_rows": 12,
+    "total_active_checkpoint_rows": 12,
+    "decision_value_actionable_rows": 2,
+    "decision_value_sleeping_rows": 10,
     "active_gap_b_strict_progress_rows": 0,
     "parked_unresolved_rows": 1,
+    "actionable_obligation_ids": [
+      "PROWORK_GDPVAL_GE_1846",
+      "HLE_TOOLS_GE_67_7"
+    ],
     "parked_obligation_ids": [
       "TB_SCIENCE_GE_58_7"
     ],
-    "source": "canonical/governance/ESCAPE_ACTIVE_GAP_B_CAUSAL_RECLASSIFICATION_20261010_V1.json",
-    "source_git_blob_sha": "c793b7f57b13a936646a2825cd67f26c28bf3744",
-    "active_binding": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V7.json",
-    "active_binding_git_blob_sha": "2119d0bc2b5c06399da49adb5a86b4e9faf7e08f",
+    "source": "canonical/governance/CURRENT_FRONTIER_REUSE_SPECIALIZATION_20261011_V1.json",
+    "source_git_blob_sha": "8a20db9ebf20852e5c5e0667f64d8142697861e8",
     "terminal_credit_delta": 0
   },
   "bytes_current_frontier": {
@@ -244,10 +248,10 @@
   },
   "scheduler_currentness_invariant": {
     "runtime_path": "canonical/runtime/capability_parallel_frontier_post_composition_v2.py",
-    "runtime_git_blob_sha": "b8a86551545a3ecfe8ba8d6fa44d2347703aa42d",
-    "verification_path": "canonical/verification/CAPABILITY_PARALLEL_POST_COMPOSITION_V2_VERIFY_20261010_V1.json",
-    "verification_git_blob_sha": "e14810a95bd2cfdeecc3fc1737a26c1dd738449d",
-    "rule": "SUPPORTED_PROFESSIONAL_ASSURANCE_BYTES_R2_POINTERS_FOLLOW_CURRENT_ONLY_AFTER_EXPLICIT_INVARIANTS__OTHER_DRIFT_FAILS_CLOSED",
+    "runtime_git_blob_sha": "6a1e02ab6154e18b706867582cc93d1eb571c423",
+    "verification_path": "canonical/verification/DECISION_VALUE_SCHEDULER_GATE_INDEPENDENT_VERIFY_20261011_V1.json",
+    "verification_git_blob_sha": "bf8951150a1f2ae4c8944d4c94fcd8ae06fd1bb8",
+    "rule": "SUPPORTED_PROFESSIONAL_ASSURANCE_BYTES_R2_AND_ESCAPE_SPECIALIZATION_POINTERS_FOLLOW_CURRENT_ONLY_AFTER_EXPLICIT_INVARIANTS__SAME_INFORMATION_ESCAPE_ROWS_SLEEP__OTHER_DRIFT_FAILS_CLOSED",
     "full_execution_authority": false,
     "terminal_credit_delta": 0
   },
@@ -290,9 +294,9 @@
   },
   "current_frontier_reuse_specialization": {
     "path": "canonical/governance/CURRENT_FRONTIER_REUSE_SPECIALIZATION_20261011_V1.json",
-    "observed_git_blob_sha": "a54ded02d7351a4c24b75182c655f273deb5eb1b",
-    "status": "ACTIVE_REUSE_FIRST_SPECIALIZATION__SOURCE_LOCKED_CONTROL_STACK__O11_LEGACY_ADAPTATION_DONOR_COVERAGE_11_OF_11__Q1_ACTIVE__TB_PARKED__NO_NEW_PRIMITIVE_ESTABLISHED__ZERO_CREDIT",
-    "authority": "SCHEDULER_SPECIALIZATION_ONLY__ZERO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+    "observed_git_blob_sha": "8a20db9ebf20852e5c5e0667f64d8142697861e8",
+    "status": "ACTIVE_REUSE_FIRST_SPECIALIZATION__O11_DONORS_11_OF_11__DECISION_VALUE_GATE_2_ACTIONABLE_10_SLEEPING__Q1_WAKE_GATED__TB_PARKED__ZERO_CREDIT",
+    "authority": "LOAD_BEARING_SCHEDULER_SPECIALIZATION__ZERO_ACCEPTANCE_OR_TERMINAL_CREDIT"
   },
   "osworld_direct_route_deserialization": {
     "path": "canonical/governance/OSWORLD_REFERENCE_EQUIVALENCE_DESERIALIZATION_20261011_V1.json",
@@ -305,5 +309,16 @@
     "path": "canonical/verification/CURRENT_ESCAPE_O11_SPARSE_WORKSPACE_TRUTH_REPAIR_20261011_V1.json",
     "observed_git_blob_sha": "560d7e25c717edcc68676d98be90ea2a6bef3ceb",
     "status": "REPOSITORY_WIDE_EXHAUSTION_INTERPRETATION_REVOKED__CURRENT_O11_Q1_PROJECTION_GATE_UNAFFECTED"
+  },
+  "decision_value_scheduler_v16": {
+    "activation_path": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261011_V16.json",
+    "activation_git_blob_sha": "d30659e4b3385f299b98a5862a0e2f659c890c0c",
+    "verification_path": "canonical/verification/DECISION_VALUE_SCHEDULER_GATE_INDEPENDENT_VERIFY_20261011_V1.json",
+    "verification_git_blob_sha": "bf8951150a1f2ae4c8944d4c94fcd8ae06fd1bb8",
+    "combined_tests": "23_OF_23_PASS",
+    "py_compile": "PASS",
+    "current_plan_replay": "PASS",
+    "gap_a_actionable_rows": 2,
+    "gap_a_sleeping_rows": 10
   }
 }
