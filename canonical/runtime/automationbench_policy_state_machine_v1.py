@@ -221,6 +221,13 @@ def next_policy_action(
                 "semantic": semantic,
                 "generic_capability_id": capability_id,
                 "generic_endpoint_id": endpoint_id,
+                "generic_execution_receipt": {
+                    "action_class": str(step.get("action_class") or ""),
+                    "capability_id": capability_id,
+                    "endpoint_id": endpoint_id,
+                    "bindings": dict(bound.get("bindings") or {}),
+                    "arguments": dict(bound.get("arguments") or {}),
+                },
                 "calls": [{"tool":"api_fetch","arguments":bound["arguments"]}],
             }
         generic_bind_failures.append(
