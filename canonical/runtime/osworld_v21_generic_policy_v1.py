@@ -7,6 +7,7 @@ external model/provider calls.
 """
 from __future__ import annotations
 
+import json
 import re
 import unicodedata
 import xml.etree.ElementTree as ET
@@ -444,6 +445,157 @@ def _browser_state_machine(state: Mapping[str, Any], instruction: str) -> dict[s
     return None
 
 
+_TEXT_FILE_EXTENSIONS = ("txt", "md", "csv", "json")
+_DEFAULT_SHARE_ROOT = "/home/oai/share"
+
+
+def _explicit_file_name(instruction: str) -> str | None:
+    ext = "|".join(_TEXT_FILE_EXTENSIONS)
+    quoted = re.findall(
+        rf'["“”\']([^"“”\']+\.(?:{ext}))["“”\']',
+        instruction,
+        flags=re.I,
+    )
+    if len(quoted) == 1:
+        return quoted[0].strip()
+    absolute = re.findall(
+        rf'(/[^\s"“”\']+\.(?:{ext}))',
+        instruction,
+        flags=re.I,
+    )
+    if len(absolute) == 1:
+        return absolute[0].strip()
+    tokens = re.findall(
+        rf'(?<![\w.-])([A-Za-z0-9][A-Za-z0-9_.-]*\.(?:{ext}))(?![\w.-])',
+        instruction,
+        flags=re.I,
+    )
+    unique = []
+    for value in tokens:
+        if value.casefold() not in {x.casefold() for x in unique}:
+            unique.append(value)
+    return unique[0] if len(unique) == 1 else None
+
+
+def _latest_guest_receipt(state: Mapping[str, Any]) -> tuple[Mapping[str, Any] | None, list[Mapping[str, Any]]]:
+    history = state.get("history")
+    if not isinstance(history, list):
+        return None, []
+    for row in reversed(history):
+        if not isinstance(row, Mapping):
+            continue
+        result = row.get("guest_result")
+        if isinstance(result, Mapping):
+            submitted = row.get("submitted_operations")
+            ops = [x for x in submitted if isinstance(x, Mapping)] if isinstance(submitted, list) else []
+            return result, ops
+    return None, []
+
+
+def _listing_rows(output: str, root: str = _DEFAULT_SHARE_ROOT) -> list[Mapping[str, Any]] | None:
+    prefix = "LIST_DIR:PASS:" + root + ":"
+    for line in output.splitlines():
+        if line.startswith(prefix):
+            raw = line[len(prefix):]
+            try:
+                value = json.loads(raw)
+            except Exception:
+                return None
+            if isinstance(value, list):
+                return [x for x in value if isinstance(x, Mapping)]
+    return None
+
+
+def _resolved_text_path(instruction: str, filename: str, guest_result: Mapping[str, Any] | None) -> str | None:
+    if filename.startswith("/"):
+        return filename
+    output = str((guest_result or {}).get("output") or "")
+    rows = _listing_rows(output)
+    if rows is not None:
+        matches = [
+            str(row.get("path"))
+            for row in rows
+            if isinstance(row.get("name"), str)
+            and str(row.get("name")).casefold() == filename.casefold()
+            and row.get("is_file") is True
+        ]
+        if len(matches) == 1:
+            return matches[0]
+        return None
+    if re.search(r"\b(create|write|make|save)\b", instruction, re.I):
+        return _DEFAULT_SHARE_ROOT + "/" + filename
+    return None
+
+
+def _quoted_values_excluding_filename(instruction: str, filename: str) -> list[str]:
+    values = _quoted(instruction)
+    return [x for x in values if _norm(x) != _norm(filename)]
+
+
+def _file_state_machine(state: Mapping[str, Any], instruction: str) -> dict[str, Any] | None:
+    filename = _explicit_file_name(instruction)
+    if not filename:
+        return None
+    guest_result, submitted = _latest_guest_receipt(state)
+    output = str((guest_result or {}).get("output") or "")
+
+    if filename.casefold() in output.casefold() and (
+        "ASSERT_TEXT_EQUALS:PASS:" in output
+        or "ASSERT_TEXT_CONTAINS:PASS:" in output
+    ):
+        return {"response": "file postcondition verified", "actions": [{"type": "DONE"}]}
+
+    path = _resolved_text_path(instruction, filename, guest_result)
+    quoted = _quoted_values_excluding_filename(instruction, filename)
+
+    if re.search(r"\breplace\b", instruction, re.I) and re.search(r"\bwith\b", instruction, re.I):
+        if path is None:
+            if _listing_rows(output) is None:
+                return {
+                    "response": "discover target file",
+                    "actions": [{
+                        "type": "STATE_OPS",
+                        "ops": [{"type": "LIST_DIR", "path": _DEFAULT_SHARE_ROOT, "max_entries": 200}],
+                    }],
+                }
+            return None
+        if len(quoted) == 2:
+            old, new = quoted
+            return {
+                "response": "perform exact text replacement and verify",
+                "actions": [{
+                    "type": "STATE_OPS",
+                    "ops": [
+                        {
+                            "type": "TEXT_REPLACE",
+                            "path": path,
+                            "old": old,
+                            "new": new,
+                            "replace_all": True,
+                        },
+                        {"type": "ASSERT_TEXT_CONTAINS", "path": path, "text": new},
+                    ],
+                }],
+            }
+        return None
+
+    create_like = re.search(r"\b(create|write|make|save)\b", instruction, re.I)
+    content_signal = re.search(r"\b(containing|contains|content|contents|text|with)\b", instruction, re.I)
+    if create_like and content_signal and path is not None and len(quoted) == 1:
+        value = quoted[0]
+        return {
+            "response": "write explicit file content and verify",
+            "actions": [{
+                "type": "STATE_OPS",
+                "ops": [
+                    {"type": "WRITE_TEXT", "path": path, "text": value},
+                    {"type": "ASSERT_TEXT_EQUALS", "path": path, "text": value},
+                ],
+            }],
+        }
+    return None
+
+
 def _same_state_repeat(state: Mapping[str, Any]) -> bool:
     history = state.get("history")
     if not isinstance(history, list) or not history:
@@ -458,6 +610,10 @@ def decide(state: Mapping[str, Any]) -> dict[str, Any]:
     instruction = state.get("instruction")
     if not isinstance(instruction, str) or not instruction.strip():
         raise GenericPolicyError("INSTRUCTION_REQUIRED")
+    file_action = _file_state_machine(state, instruction)
+    if file_action is not None:
+        return file_action
+
     elements = parse_a11y(state.get("a11y_tree"))
     ni = _norm(instruction)
 
