@@ -94,7 +94,7 @@ class DNAStorageTaskKernelV1Tests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as td:
             root=pathlib.Path(td); results=root/'results'
             outp=results/'codec.py'
-            result=k.execute({'instruction':f"Implement a DNA storage codec as {outp}.",'artifacts':[str(results)],'roots':[]})
+            result=k.execute({'instruction':f"Implement a DNA storage codec as {outp}.",'artifacts':[str(results)],'roots':['/root/data','/definitely/inaccessible/or/missing']})
             self.assertEqual(result['mode'],'implementation')
             source=outp.read_text(encoding='utf-8')
             self.assertIn('def encode_bytes',source)
