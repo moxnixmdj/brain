@@ -328,10 +328,7 @@ class BrainOSWorldAgent:
                 )
                 return response, actions
 
-            if kind.startswith("BROWSER_"):
-        return compile_browser_op(raw)
-
-    if kind == "STATE_OPS":
+            if kind == "STATE_OPS":
                 if set(first) - {"type", "ops"}:
                     return self._recoverable_error(
                         state, raw, AdapterError("STATE_OPS_HAS_UNSUPPORTED_FIELDS")
