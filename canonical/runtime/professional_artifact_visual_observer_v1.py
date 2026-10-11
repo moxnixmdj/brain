@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import math
+import statistics
 import tempfile
 from pathlib import Path
 from typing import Any, Mapping
@@ -130,10 +131,26 @@ def analyze_page(
                 overlaps.append({"a": i, "b": j, "fraction": frac})
 
     min_conf = min(confidences) if confidences else None
+    median_conf = statistics.median(confidences) if confidences else None
+    confident_count = sum(1 for x in confidences if x >= minimum_line_confidence)
+    confident_fraction = confident_count / len(confidences) if confidences else 0.0
+
+    # A sparse page is not blank when positioned OCR supplies at least one
+    # sufficiently confident textual observation. Conversely, one noisy
+    # zero-confidence OCR line must not veto an otherwise strong page.
+    page_not_blank = ink_fraction >= blank_ink_fraction or confident_count > 0
+    confidence_bounded = (
+        (not items)
+        or (
+            median_conf is not None
+            and median_conf >= minimum_line_confidence
+            and confident_fraction >= 0.5
+        )
+    )
     gates = {
-        "PAGE_NOT_BLANK": ink_fraction >= blank_ink_fraction,
+        "PAGE_NOT_BLANK": page_not_blank,
         "TEXT_PRESENT_WHEN_REQUIRED": (not require_text) or bool(items),
-        "OCR_LINE_CONFIDENCE_BOUNDED": (not items) or (min_conf is not None and min_conf >= minimum_line_confidence),
+        "OCR_LINE_CONFIDENCE_BOUNDED": confidence_bounded,
         "TEXT_NOT_TOUCHING_HARD_CROP": not crop_contacts,
         "NO_MAJOR_OCR_LINE_OVERLAP": not overlaps,
     }
@@ -148,6 +165,8 @@ def analyze_page(
         "ink_fraction": ink_fraction,
         "line_count": len(items),
         "minimum_line_confidence": min_conf,
+        "median_line_confidence": median_conf,
+        "confident_line_fraction": confident_fraction,
         "crop_contact_line_indices": crop_contacts,
         "major_line_overlaps": overlaps,
         "gates": gates,
