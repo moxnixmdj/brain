@@ -11,7 +11,7 @@ from canonical.runtime import capability_parallel_frontier_v2 as core
 ROOT=Path(__file__).resolve().parents[2]
 
 def _copy_sources(tmp:Path):
- for rel in (p.PROF,p.ASSURANCE,p.BYTES,p.R2):
+ for rel in (p.PROF,p.ASSURANCE,p.BYTES,p.R2,p.WAKE):
   src=ROOT/rel; dst=tmp/rel; dst.parent.mkdir(parents=True,exist_ok=True); dst.write_bytes(src.read_bytes())
 
 class PostCompositionFrontierV2Tests(unittest.TestCase):
@@ -22,6 +22,10 @@ class PostCompositionFrontierV2Tests(unittest.TestCase):
   self.assertTrue(out["dynamic_currentness"]["assurance_pointer_follow"])
   self.assertTrue(out["dynamic_currentness"]["bytes_pointer_follow"])
   self.assertTrue(out["dynamic_currentness"]["r2_pointer_follow"])
+  self.assertTrue(out["dynamic_currentness"]["checkpoint_wake_gate_follow"])
+  self.assertEqual(out["dynamic_currentness"]["checkpoint_wake_gate"]["row_specific_same_information_runnable_count"],0)
+  self.assertIn(p.GAP_A_WORK,out["nonprimary_candidate_ids"])
+  self.assertNotIn(p.GAP_A_WORK,out["parallel_read_only_evidence_work_ids"])
   self.assertTrue(out["dynamic_currentness"]["parked_normalized_to_nonprimary"])
   self.assertFalse(out["execution_authority"])
   self.assertFalse(out["promotion_authority"])
@@ -39,6 +43,36 @@ class PostCompositionFrontierV2Tests(unittest.TestCase):
   self.assertEqual(prow["read_only_evidence"]["property_truth_closed_count"],count)
   self.assertEqual(prow["read_only_evidence"]["verified_property_truth_leaf_ids"],cur["property_truth_frontier"]["verified_leaf_ids"])
   self.assertEqual(arow["read_only_evidence"]["professional_property_truth_closed_count"],count)
+
+ def test_checkpoint_same_information_work_is_mechanically_sleeping(self):
+  f=p.refresh_post_composition_currentness(core.load_current_frontier())
+  row=next(x for x in f["candidates"] if x.get("work_id")==p.GAP_A_WORK)
+  self.assertEqual(row["scheduler_state"],"SLEEPING")
+  self.assertFalse(row["prerequisites_satisfied"])
+  self.assertEqual(row["evidence_acquisition_mode"],"NONE")
+  self.assertEqual(row["read_only_evidence"]["row_specific_same_information_runnable_count"],0)
+  bound={x["path"]:x["git_blob_sha"] for x in f["scope"]["source_set"]}
+  self.assertEqual(bound[p.WAKE],p._git_blob_sha(ROOT/p.WAKE))
+
+ def test_checkpoint_wake_event_reenables_only_existing_evidence_path(self):
+  with tempfile.TemporaryDirectory() as td:
+   root=Path(td); _copy_sources(root)
+   q=root/p.WAKE; d=json.loads(q.read_text()); rec=d["scheduler_reconciliation"]
+   rec["row_specific_same_information_runnable_count"]=1
+   rec["wake_gated_open_checkpoint_count"]=rec["open_checkpoint_obligation_count"]-1
+   q.write_text(json.dumps(d))
+   f=p.refresh_post_composition_currentness(core.load_current_frontier(),root=root)
+   row=next(x for x in f["candidates"] if x.get("work_id")==p.GAP_A_WORK)
+   self.assertEqual(row["scheduler_state"],"READY_EVIDENCE")
+   self.assertTrue(row["prerequisites_satisfied"])
+   self.assertEqual(row["evidence_acquisition_mode"],"READ_ONLY")
+
+ def test_incoherent_wake_partition_fails_closed(self):
+  with tempfile.TemporaryDirectory() as td:
+   root=Path(td); _copy_sources(root)
+   q=root/p.WAKE; d=json.loads(q.read_text()); d["scheduler_reconciliation"]["wake_gated_open_checkpoint_count"]=11; q.write_text(json.dumps(d))
+   with self.assertRaisesRegex(p.PostCompositionFrontierV2Error,"WAKE_PARTITION"):
+    p.refresh_post_composition_currentness(core.load_current_frontier(),root=root)
 
  def test_parked_is_preserved_as_nonprimary_not_execution(self):
   f=p.refresh_post_composition_currentness(core.load_current_frontier())
