@@ -3500,7 +3500,123 @@
         "external_capability_provider_count": 0,
         "incremental_spend_usd": 0,
         "discovered_and_repaired_defect": "STALE_PYTHON_BYTECODE_CACHE_ON_SAME_SIZE_RAPID_MUTATIONS",
-        "runtime_sha256": "76ba334b9539def530b780c359d62d5ace90590f09c340148cec44f6c0c2c08b"
+        "runtime_sha256": "a85691068c4eeff53c2d787ddb5a799462ea867cd6b92c4573bf58e0846f7dc0",
+        "runtime_git_blob_sha": "9bd33aca208fca26270765e18b3563abcf841e0b",
+        "hash_reconciliation": "CORRECT_STALE_PRE_FREEZE_RUNTIME_SHA256__TWO_INDEPENDENT_CARRIERS_HASH_EXACT_CURRENT_BLOB_TO_A85691068C4E..."
+      }
+    },
+    "python.repair.loop.test_guided.ast.v1": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "incremental_spend_usd": 0,
+      "cost": 2,
+      "requires": [
+        "python.test.corpus.available"
+      ],
+      "provides": [
+        "python.repair.candidate.multi_file.test_verified"
+      ],
+      "result_fields": [
+        "status",
+        "pass",
+        "source_selection",
+        "source_paths",
+        "source_sha256",
+        "test_paths",
+        "test_sha256",
+        "baseline_returncode",
+        "baseline_metric",
+        "tested_candidate_count",
+        "max_candidates",
+        "beam_width",
+        "max_edits",
+        "model_dependency_count",
+        "external_capability_provider_count",
+        "incremental_spend_usd",
+        "source_restored",
+        "winning_chain",
+        "winning_edit_count",
+        "candidate_state_sha256",
+        "verification_replays",
+        "unified_diff",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "keywords": [
+        "python",
+        "repair",
+        "patch",
+        "multi-file",
+        "multi-edit",
+        "test",
+        "beam",
+        "fault",
+        "localization",
+        "candidate",
+        "repository"
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "python.repair.loop.test_guided.ast.v1",
+          "test_paths": "${input.test_paths}",
+          "output_path": "${input.output_path}",
+          "timeout_s": 60,
+          "max_sources": 12,
+          "max_candidates": 4000,
+          "beam_width": 12,
+          "max_edits": 2
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "python_test_guided_repair_loop_v1",
+      "entrypoint": "run",
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "limitations": [
+        "Python-only bounded candidate constructor.",
+        "Infers repository-local source candidates from traceback frames and local imports in the bound test corpus, or accepts explicit source paths when invoked directly.",
+        "Searches deterministic single-AST-mutation states and a bounded beam of up to two edits across multiple source files.",
+        "Passing the caller-bound Python test command is the only positive acceptance oracle; natural-language task semantics, hidden requirements, mergeability, code review, and broader regression completeness are not inferred.",
+        "Candidate-only: all source bytes are restored before return.",
+        "No FrontierCode score or acceptance credit by itself."
+      ],
+      "source": {
+        "type": "python_stdlib",
+        "modules": [
+          "ast",
+          "difflib",
+          "hashlib",
+          "importlib.util",
+          "json",
+          "os",
+          "pathlib",
+          "re",
+          "subprocess",
+          "sys",
+          "time"
+        ],
+        "adapter_path": "canonical/runtime/bound_capabilities/python_test_guided_repair_loop_v1.py",
+        "composed_verified_basis": "python.patch.search.test_guided.ast.v1"
+      },
+      "verification": {
+        "status": "INDEPENDENT_TWO_CARRIER_FOCUSED_FALSIFICATION_PASS",
+        "receipt_path": "canonical/verification/PYTHON_TEST_GUIDED_REPAIR_LOOP_V1_VERIFY_20261011.json",
+        "first_carrier_test_count": 8,
+        "second_carrier_test_count": 8,
+        "runtime_git_blob_sha": "8c426254bd0dc70394fab4c5f2f0d1b1bd90bcef",
+        "runtime_sha256": "29a182828b894bf5bd081c14b7b1bb061a231632ca97f3218a2f5f6b1459669e",
+        "test_git_blob_sha": "294ce114bb70c8e770d37d3769d7d7fe3e269041",
+        "model_dependency_count": 0,
+        "external_capability_provider_count": 0,
+        "incremental_spend_usd": 0
       }
     }
   },
