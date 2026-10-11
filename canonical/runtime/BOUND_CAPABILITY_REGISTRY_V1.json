@@ -4503,6 +4503,186 @@
         "external_capability_provider_count": 0,
         "incremental_spend_usd": 0
       }
+    },
+    "software.request.acceptance.compile.explicit.v1": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "incremental_spend_usd": 0,
+      "cost": 1,
+      "requires": [],
+      "provides": [
+        "software.request.acceptance.plan.explicit"
+      ],
+      "result_fields": [
+        "schema",
+        "status",
+        "request_sha256",
+        "source_root",
+        "requirements",
+        "requirement_count",
+        "bound_requirement_count",
+        "specification_holes",
+        "admission_ready",
+        "existing_test_evidence_authority",
+        "model_dependency_count",
+        "external_capability_provider_count",
+        "incremental_spend_usd",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "keywords": [
+        "software",
+        "request",
+        "specification",
+        "acceptance",
+        "requirement",
+        "compile",
+        "explicit",
+        "predicate",
+        "fail-closed"
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "software.request.acceptance.compile.explicit.v1",
+          "request_text": "${input.request_text}",
+          "source_root": "${input.source_root}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "software_request_acceptance_compile_v1",
+      "entrypoint": "run",
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "limitations": [
+        "Compiles only a bounded explicit request grammar: backtick Python call must/should return literal, call must/should raise named exception, and repository-local file must/should exist or not exist.",
+        "Unsupported or under-segmented normative/declarative behavior is emitted as a blocking specification hole rather than inferred.",
+        "Function binding is structural and fail-closed: an unqualified function name must resolve to exactly one top-level definition; a one-component module hint may disambiguate.",
+        "Existing test evidence has zero authority to close request semantics.",
+        "No arbitrary natural-language semantic completeness, patch correctness, mergeability, or FrontierCode score authority."
+      ],
+      "source": {
+        "type": "python_stdlib",
+        "modules": [
+          "ast",
+          "hashlib",
+          "json",
+          "os",
+          "pathlib",
+          "re"
+        ],
+        "adapter_path": "canonical/runtime/bound_capabilities/software_request_acceptance_compile_v1.py"
+      },
+      "verification": {
+        "status": "INDEPENDENT_TWO_CARRIER_FOCUSED_FALSIFICATION_PASS",
+        "primary_test_count": 12,
+        "independent_test_count": 12,
+        "independent_additional_falsification_count": 6,
+        "exact_canonical_layout_test_count": 12,
+        "runtime_git_blob_sha": "ce806d2e7be26adf7ff17160fb670e888e6ede94",
+        "runtime_sha256": "07d9814ddf0b22f59252ea72ef8dcbe89786863054d12fcec3643fae3d5538ef",
+        "test_git_blob_sha": "bede013901d48c8832b6e1b4d74181d181234aa7",
+        "test_sha256": "2ab4889ff79d9f7d025f104a81269a4aa120ed08eddb95792e416d1dc90baecb",
+        "model_dependency_count": 0,
+        "external_capability_provider_count": 0,
+        "incremental_spend_usd": 0
+      }
+    },
+    "software.request.acceptance.execute.explicit.v1": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "incremental_spend_usd": 0,
+      "cost": 1,
+      "requires": [
+        "software.request.acceptance.plan.explicit"
+      ],
+      "provides": [
+        "software.request.acceptance.bound_predicates.verified"
+      ],
+      "result_fields": [
+        "schema",
+        "status",
+        "pass",
+        "admission_ready",
+        "results",
+        "existing_test_evidence_observed_but_nonauthoritative",
+        "model_dependency_count",
+        "external_capability_provider_count",
+        "incremental_spend_usd",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "keywords": [
+        "software",
+        "acceptance",
+        "execute",
+        "verify",
+        "request",
+        "predicate",
+        "independent",
+        "test"
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "software.request.acceptance.execute.explicit.v1",
+          "plan_path": "${input.plan_path}",
+          "existing_test_evidence": "${input.existing_test_evidence}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "software_request_acceptance_execute_v1",
+      "entrypoint": "run",
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "limitations": [
+        "Executes only predicates emitted by the bounded explicit request compiler.",
+        "A plan with any specification/binding hole is blocked before acceptance.",
+        "Python call checks load repository-local modules and compare exact bounded literal results or exception class names; file predicates check repository-local existence.",
+        "Existing test-suite evidence is observed only as non-authoritative metadata and cannot change acceptance.",
+        "Does not prove arbitrary request semantic completeness, general independent interpretation, mergeability, or FrontierCode score authority."
+      ],
+      "source": {
+        "type": "python_stdlib",
+        "modules": [
+          "hashlib",
+          "importlib.util",
+          "json",
+          "os",
+          "pathlib"
+        ],
+        "adapter_path": "canonical/runtime/bound_capabilities/software_request_acceptance_execute_v1.py"
+      },
+      "verification": {
+        "status": "INDEPENDENT_TWO_CARRIER_FOCUSED_FALSIFICATION_PASS",
+        "primary_test_count": 12,
+        "independent_test_count": 12,
+        "independent_additional_falsification_count": 6,
+        "exact_canonical_layout_test_count": 12,
+        "runtime_git_blob_sha": "c4ac67437d10054f027a5f718ae5ea59aef43782",
+        "runtime_sha256": "e705d41eb69acdd2dd77d687948e187031e0fe56ccc3c8a86f8cbf287c3ff18d",
+        "test_git_blob_sha": "bede013901d48c8832b6e1b4d74181d181234aa7",
+        "test_sha256": "2ab4889ff79d9f7d025f104a81269a4aa120ed08eddb95792e416d1dc90baecb",
+        "model_dependency_count": 0,
+        "external_capability_provider_count": 0,
+        "incremental_spend_usd": 0
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
