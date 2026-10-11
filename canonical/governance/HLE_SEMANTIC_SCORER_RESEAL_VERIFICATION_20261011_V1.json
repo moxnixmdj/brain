@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_SEMANTIC_SCORER_RESEAL_VERIFICATION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "EXACT_COMMITTED_BYTES_LOCALLY_VERIFIED__NO_REPOSITORY_CI_RUN__SUPPLEMENTARY_ONLY",
+  "runtime": {
+    "path": "canonical/runtime/hle_exact_commit_semantic_certificate_v1.py",
+    "git_blob_sha1": "b44e3c4803934a5661c4f5f58cfeb342ec43305c",
+    "sha256": "6b8bd95603252389336c54c65ef8523489535bd5124ab8b3ec46220a0cd6e4cd",
+    "commit": "c0dd92c6126078ff126490c5eda85ebf23a73787"
+  },
+  "tests": {
+    "path": "canonical/tests/test_hle_exact_commit_semantic_certificate_v1.py",
+    "git_blob_sha1": "0f528eda70a7bc9124164786d2393d93d8a02343",
+    "sha256": "cc9898b4220059a1314e3d69391c761e3b8a6a716e5c9dad207d5ad56853747c",
+    "test_count": 6,
+    "passed": 6,
+    "failed": 0,
+    "coverage_claims": [
+      "exact_identity_only",
+      "commit_hash_mandatory",
+      "complete_five_trial_matrix",
+      "threshold_8463",
+      "no_grader_equivalence_or_target_score_claim",
+      "manifest_hashes_permutation_invariant"
+    ]
+  },
+  "verification_environment": {
+    "method": "standard-library Python unittest in repo-shaped canonical package layout",
+    "repository_ci_status": "NO_STATUS_OR_WORKFLOW_RUN_ATTACHED_TO_COMMIT",
+    "claim_repository_ci_passed": false
+  },
+  "anti_regression": {
+    "supplementary_only": true,
+    "target_model_grader_score_claimed": false,
+    "prohibited_inference": "EXACT_GOLD_IDENTITY_DOES_NOT_IMPLY_TARGET_MODEL_GRADER_CORRECT",
+    "truth_repair": "canonical/governance/HLE_SEMANTIC_CERTIFICATE_TARGET_PREDICATE_TRUTH_REPAIR_20261011_V1.json"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
