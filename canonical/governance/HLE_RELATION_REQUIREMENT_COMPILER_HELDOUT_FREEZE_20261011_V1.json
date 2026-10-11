@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_RELATION_REQUIREMENT_COMPILER_HELDOUT_FREEZE_20261011_V1",
+  "date": "2026-10-11",
+  "status": "FROZEN_BEFORE_FRESH_PUBLIC_HELDOUT__NO_POST_GOLD_TUNING",
+  "subject": {
+    "runtime_path": "canonical/runtime/hle_relation_requirement_compiler_v1.py",
+    "runtime_blob": "e922ba115ddf596bfcf78ae6988b67a0650e772d",
+    "tests_blob": "52b8570a2c1849f20aeb4e59fb2356bf856cf279",
+    "independent_verify_commit": "6e3ca0ceacb6485eb62ff6d3dbc5b2ad2c9fd6c9",
+    "consumed_causal_result_commit": "dc63c06b28186f786139186ab587d40c7f80fa22"
+  },
+  "heldout": {
+    "dataset": "ai-safety-institute/trivia_qa_verified",
+    "split": "validation",
+    "rows": "50_TO_74",
+    "sample_size": 25,
+    "previously_consumed": false,
+    "hle": false,
+    "paired_design": "V1_BASELINE_VS_V1_PLUS_FROZEN_RELATION_REQUIREMENTS_ON_SAME_RETRIEVAL_SNAPSHOT",
+    "gold_rule": "GOLD_LOADED_ONLY_AFTER_BOTH_RETRIEVAL_TRACES_ARE_SEALED"
+  },
+  "decision_rule": {
+    "positive_generalization": "AT_LEAST_ONE_RELATION_UNIQUE_RETRIEVAL_HIT_AND_ZERO_BASELINE_UNIQUE_LOSSES",
+    "no_applicable_questions": "INCONCLUSIVE_NOT_FAILURE",
+    "no_unique_gain_with_applicable_questions": "NO_HELDOUT_GENERALIZATION_GAIN_OBSERVED__DO_NOT_TUNE_ON_THIS_SLICE"
+  },
+  "prohibited": [
+    "NO_CODE_OR_RULE_CHANGES_AFTER_HELDOUT_QUESTIONS_OR_GOLD_ARE_OBSERVED",
+    "NO_RETRY_WITH_MODIFIED_QUERY_RULES_ON_ROWS_50_TO_74",
+    "NO_FRESH_HLE_CONSUMPTION",
+    "NO_EXTERNAL_MODEL_COGNITION"
+  ],
+  "hle_questions_consumed": 0,
+  "hle_gold_consumed": 0,
+  "incremental_spend_usd": 0
+}
