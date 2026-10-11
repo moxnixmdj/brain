@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_INTERNAL_TOP_SUPPORT_BRIDGE_LOCAL_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__8_OF_8__CURRENT_30_CASE_TOP_LAW_FAILS_CLOSED_FOR_AA_WIDE_LIFT__ZERO_CREDIT",
+  "subject": {
+    "runtime": "canonical/runtime/aa_briefcase_internal_top_support_bridge_v1.py",
+    "tests": "canonical/tests/test_aa_briefcase_internal_top_support_bridge_v1.py"
+  },
+  "replay": {
+    "tests_run": 8,
+    "tests_passed": 8,
+    "tests_failed": 0,
+    "verified": [
+      "COMPLETE_UNIVERSAL_SOURCE_DOMAIN_PLUS_SCOPE_COMPLETE_AA_SUPERSET_MAPPING_PASSES_MATERIAL_TOP_SUPPORT_BRIDGE",
+      "CURRENT_30_CASE_SELECTED_CELL_FAILS_CLOSED_WHILE_PRESERVING_ITS_LOCAL_TOP_LAW",
+      "NONUNIVERSAL_SOURCE_TOP_LAW_REJECTED",
+      "PARTIAL_91_TASK_SCOPE_REJECTED",
+      "MISSING_PRESENTATION_DIMENSION_REJECTED",
+      "SOURCE_DOMAIN_HASH_MISMATCH_REJECTED",
+      "PRIVATE_TASK_CONTENT_INFERENCE_REJECTED",
+      "BRIDGE_EXPLICITLY_DOES_NOT_CLAIM_CROWD_BT_ELO_OR_1822"
+    ]
+  },
+  "truth": {
+    "selected_30_case_top_law_preserved": true,
+    "selected_30_case_top_law_sufficient_for_aa_wide_material_top_support": false,
+    "aa_material_top_support_currently_proved": false,
+    "missing_bridge_premise": "UNIVERSAL_SOURCE_DOMAIN_TOP_LAW_PLUS_FORMAL_EXACT_OR_SUPERSET_MAPPING_COVERING_ALL_91_TASKS_AND_RUBRIC_ANALYTICAL_QUALITY_PRESENTATION",
+    "private_task_contents_needed_in_principle": false
+  },
+  "hard_nonclaims": [
+    "NO_AA_BRIEFCASE_SCORE",
+    "NO_CROWD_BT_ELO_LOWER_BOUND",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
