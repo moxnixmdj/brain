@@ -69,7 +69,7 @@
   "quality_authority": false,
   "terminal_authority": false,
   "terminal_credit_delta": 0,
-  "next": "PROFESSIONAL:PROVE_PROPERTY_TRUTH_FOR_THE_12_V2_SUCCESSOR_SEMANTIC_CLAIMS__REUSE_SHARED_CERTIFY_OR_FAIL_CLOSED_TOTALITY__TYPED_EVIDENCE__LOSSLESS_GENERATOR__POLICY_COVER__AND_NONVACUITY_MACHINERY__DO_NOT_REOPEN_CLAIM_OR_SCOPE_CONSTRUCTION__KEEP_PROPERTY_TRUTH_12_OF_24_UNCHANGED_UNTIL_INDEPENDENT_RECEIPTS_PASS",
+  "next": "SLEEP_FULL_PRIVATE_CURRENT_MAIN_REGRESSION_WHILE_GITHUB_HOSTED_EXECUTION_IS_PROVED_PRESTEP_BLOCKED_ACROSS_MULTIPLE_RUNNER_CLASSES__CONTINUE_NONCONFLICTING_REUSE_FIRST_WORK__WAKE_ON_REAL_STEP_CONTROL_PLANE_CHANGE_AUTHORIZED_ALTERNATE_CARRIER_OR_STRONGER_VALID_RECEIPT",
   "hard_nonclaims": [
     "NO_PROFESSIONAL_QUALITY_COMPLETENESS_PROOF",
     "NO_GLOBAL_LEAF_OR_ROOT_CLOSURE_FROM_12_OF_12_COMPOSITION_ADMISSIBILITY",
@@ -141,7 +141,9 @@
       "PQ::R6_EVIDENCE_GROUNDING_DEPENDENCE::EXECUTION",
       "PQ::R7_CAUSAL_PRESCRIPTIVE::EXECUTION",
       "PQ::R8_POPULATION_CONTEXT_OPERATOR::EXECUTION"
-    ]
+    ],
+    "current_authority": false,
+    "role": "HISTORICAL_INTERMEDIATE_PROJECTION__PRESERVED_FOR_PROVENANCE__SUPERSEDED_BY_PROPERTY_TRUTH_FRONTIER_FOR_CURRENT_COUNTS"
   },
   "same_subject_composition": {
     "runtime_path": "canonical/runtime/professional_quality_same_subject_composition_gate_v4.py",
@@ -780,7 +782,9 @@
     "verified_leaf_count": 9,
     "open_leaf_count": 15,
     "rejected_receipt_count": 0,
-    "promotion_ready": false
+    "promotion_ready": false,
+    "current_authority": false,
+    "role": "HISTORICAL_V7_REGISTRY_SNAPSHOT__PRESERVED_FOR_PROVENANCE__SUPERSEDED_BY_PROPERTY_TRUTH_FRONTIER_AND_V10_TOTALITY_BATCH_FOR_CURRENT_COUNTS"
   },
   "router_v8_independent_replay": true,
   "v8_totality_mediation": {
@@ -972,5 +976,24 @@
     "path": "canonical/verification/GITHUB_ACTIONS_PRESTEP_EXECUTION_BOUNDARY_20261011_V1.json",
     "binding": "MULTI_WORKFLOW_MULTI_RUNNER_CLASS_ZERO_STEP_LOCALIZATION__EXACT_CONTROL_PLANE_CAUSE_UNBOUND__ZERO_CREDIT",
     "full_regression_carrier_state": "SLEEP_UNTIL_REAL_RUNNER_STEP_EXECUTION_OR_CONTROL_PLANE_CHANGE_OR_AUTHORIZED_ALTERNATE_CARRIER"
+  },
+  "current_projection_precedence": {
+    "status": "CURRENT_AUTHORITY_EXPLICIT__LEGACY_PROJECTIONS_PRESERVED_AS_PROVENANCE_ONLY",
+    "current_property_truth_authority": "property_truth_frontier",
+    "current_verified_leaf_count": 24,
+    "current_total_leaf_count": 24,
+    "current_verified_execution_leaf_count": 12,
+    "current_verified_semantic_leaf_count": 12,
+    "current_open_leaf_count": 0,
+    "legacy_non_authoritative_paths": [
+      "leaf_coverage_projection",
+      "latest_leaf_property_truth_verification"
+    ],
+    "legacy_projection_semantics": "HISTORICAL_INTERMEDIATE_SNAPSHOTS__MUST_NOT_OVERRIDE_CURRENT_PROPERTY_TRUTH_FRONTIER",
+    "scheduling_authority": "exact_next",
+    "full_private_current_main_regression_open": true,
+    "quality_authority": false,
+    "promotion_authority": false,
+    "terminal_authority": false
   }
 }
