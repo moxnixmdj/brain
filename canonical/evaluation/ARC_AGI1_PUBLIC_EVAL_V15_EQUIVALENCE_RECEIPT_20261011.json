@@ -1,0 +1,92 @@
+{
+  "schema": "PROJECT_BRAIN_ARC_AGI1_PUBLIC_EVAL_V15_EQUIVALENCE_RECEIPT_V1",
+  "generated_at": "2026-10-11",
+  "status": "PASS_EQUIVALENCE_CERTIFICATE",
+  "brain": {
+    "repository": "moxnixmdj/brain",
+    "branch": "successor/arc-symbolic-ensemble-v15-20261011",
+    "integration_commit": "eed4270a3aec369b7d5f5ba290d89291ba3b26d1",
+    "adapter_path": "canonical/runtime/arc_symbolic_ensemble_v15.py",
+    "adapter_blob_sha": "d239d1353c442215beb037a933b20ec2317825cd",
+    "vendor_path": "canonical/vendor/arc_symbolic_ensemble_v1.zip",
+    "vendor_git_blob_sha": "c7b9e80bd28446d7527b2eb4ad6c20225d800cdb",
+    "vendor_sha256": "95c01e84e5db7ee6e7323d8d7dc72f1e0c8462b59d7f846ab7c204a0585b34cc"
+  },
+  "donor": {
+    "repository": "tanmaybisen31/arc-agi-solver",
+    "commit": "e151937e34c8b34f953833a0dab75797fc737ba4",
+    "license": "MIT",
+    "external_model_dependency": false,
+    "detector_count": 321,
+    "independently_executed_result": {
+      "benchmark": "ARC-AGI-1 public evaluation",
+      "arc_repo_commit": "399030444e0ab0cc8b4e199870fb20b863846f34",
+      "tasks_solved": 207,
+      "task_count": 400,
+      "task_accuracy": 0.5175,
+      "outputs_solved": 221,
+      "output_count": 419,
+      "output_pass_at_2": 0.5274,
+      "receipt_sha256": "3f18e6b5d0770815b2c45a81268c69335c7a627ab617d244fe1090c1d4a9ee0f"
+    }
+  },
+  "equivalence_proof": {
+    "execution_source_files_byte_identical": 45,
+    "execution_source_file_count": 45,
+    "source_mismatches": [],
+    "zip_content_mismatches": [],
+    "registry_only_change": "dynamic filesystem discovery replaced by pinned static sorted module list",
+    "static_registry_module_count": 41,
+    "static_registry_contains_all_modules": true,
+    "original_detector_count": 321,
+    "brain_vendor_detector_count": 321,
+    "detector_order_identical": true,
+    "detector_order_sha256": "e9e945a25f609f8bb367c749818bfcf0819704af3c30095575561f617323f96f",
+    "direct_candidate_differential": {
+      "task_count": 8,
+      "candidate_outputs_identical": true,
+      "original_candidate_stream_sha256": "3414d97947fecf2fc38f26a193bf4425a41b07727f2545e2e11c7bd2dfe54032",
+      "brain_adapter_candidate_stream_sha256": "3414d97947fecf2fc38f26a193bf4425a41b07727f2545e2e11c7bd2dfe54032"
+    },
+    "runtime_import_surface": [
+      "collections",
+      "glob",
+      "heapq",
+      "importlib",
+      "itertools",
+      "json",
+      "numpy",
+      "os",
+      "detectors"
+    ],
+    "forbidden_model_or_network_reference_scan_matches": 0,
+    "adapter_smoke_test": {
+      "detector_count": 321,
+      "all_candidates_demo_verified": true,
+      "external_model_used": false,
+      "external_inference_service_used": false,
+      "expected_identity_candidate_observed": true
+    }
+  },
+  "certified_result": {
+    "benchmark": "ARC-AGI-1 public evaluation",
+    "tasks_solved": 207,
+    "task_count": 400,
+    "task_accuracy": 0.5175,
+    "proof_route": "DETERMINISTIC_IMPLEMENTATION_EQUIVALENCE_TO_INDEPENDENTLY_EXECUTED_PINNED_DONOR"
+  },
+  "interpretation": {
+    "capability_internalized": true,
+    "external_model_called_at_inference": false,
+    "external_service_called_at_inference": false,
+    "note": "This is capability transfer by vendored executable symbolic code, not attribution of an external model's answer to Brain.",
+    "caveat": "The donor was iterated against ARC-AGI-1 public evaluation, so 51.75% is an in-distribution public benchmark result, not a clean unseen-generalization estimate."
+  },
+  "nonclaims": [
+    "official private ARC score",
+    "ARC-AGI-2 score",
+    "clean ARC-AGI-1 unseen generalization",
+    "Opus parity",
+    "terminal global promotion"
+  ]
+}
