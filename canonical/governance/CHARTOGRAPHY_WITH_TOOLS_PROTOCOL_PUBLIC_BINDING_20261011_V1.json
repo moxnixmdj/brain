@@ -1,0 +1,91 @@
+{
+  "schema": "PROJECT_BRAIN_CHARTOGRAPHY_WITH_TOOLS_PROTOCOL_PUBLIC_BINDING_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PUBLIC_PROTOCOL_SUBSTANTIALLY_BOUND__ANTHROPIC_OPUS55_SYSTEM_CARD_SECTION_8_13_1__DIRECT_89_PROTOCOL_IDENTITY_WAKE_CLOSED__BRAIN_SCORE_STILL_OPEN__ZERO_CREDIT",
+  "target_predicate": "CHARTOGRAPHY_TOOLS_GE_89",
+  "objective": "DELETE_THE_STALE_ASSUMPTION_THAT_ANTHROPIC_CHARTOGRAPHY_WITH_TOOLS_PROTOCOL_IS_PUBLICLY_UNBOUND_AND_REDUCE_THE_DIRECT_89_ROUTE_TO_PROTOCOL_EQUIVALENT_BRAIN_HARNESS_PLUS_AUTHENTIC_SCORE_OR_STRONGER_CERTIFICATE",
+  "source_provenance": {
+    "owner": "Anthropic",
+    "owner_system_card_title": "Claude Opus 5.5 System Card",
+    "owner_system_card_date": "2026-09-22",
+    "owner_system_card_section": "8.13.1 Chartography",
+    "owner_system_card_url": "https://www.anthropic.com/claude-opus-5-5-system-card",
+    "owner_launch_url": "https://www.anthropic.com/claude-opus-5-5",
+    "observed_faithful_html_rendering": "https://malob.github.io/ai-system-cards/anthropic/claude-opus-5-5/",
+    "retrieval_note": "THE_CURRENT_RESEARCH_TOOL_COULD_NOT_INGEST_THE_17_8MB_OWNER_PDF_DIRECTLY__THE_EXACT_SECTION_WAS_OBSERVED_IN_A_FAITHFUL_HTML_RENDERING_LINKED_TO_THE_OWNER_PDF_AND_THE_89_0_SCORE_IS_CORROBORATED_BY_THE_OWNER_LAUNCH_PAGE"
+  },
+  "bound_protocol": {
+    "task_population": {
+      "count": 100,
+      "identity": "SURGE_AI_CHARTOGRAPHY_OFFICIAL_TASKS_AND_EXPERT_DETERMINED_ACCEPTABLE_ANSWER_RANGES",
+      "owner_statement": "ANTHROPIC_INTERNAL_GRADING_IMPLEMENTATION_MATCHES_THE_TASKS_AND_EXPERT_DETERMINED_ACCEPTABLE_ANSWER_RANGES_IN_THE_OFFICIAL_REPOSITORY"
+    },
+    "model_configuration": {
+      "adaptive_thinking": true,
+      "effort": "max"
+    },
+    "with_tools_environment": {
+      "container": true,
+      "image_file_present": true,
+      "standard_libraries_installed": true,
+      "image_cropping_tool": true
+    },
+    "grader": {
+      "model": "Gemini 3.5 Flash",
+      "reason": "ANTHROPIC_FOLLOWS_THE_SURGE_AI_LEADERBOARD_GRADER_FOR_COMPARABILITY"
+    },
+    "aggregation": {
+      "independent_runs_per_task": 5,
+      "reported_score": "AVERAGE_OVER_FIVE_RUNS"
+    },
+    "opus_5_5_reported_result_percent": 89.0
+  },
+  "reconciliation": {
+    "prior_false_or_stale_state": [
+      "EXACT_ANTHROPIC_WITH_TOOLS_TASK_POPULATION_UNBOUND",
+      "ANTHROPIC_WITH_TOOLS_TOOLSET_UNBOUND",
+      "ANTHROPIC_WITH_TOOLS_AGENT_OR_HARNESS_CONFIGURATION_UNBOUND",
+      "ANTHROPIC_WITH_TOOLS_SCORER_AND_AGGREGATION_UNBOUND"
+    ],
+    "now_bound": [
+      "OFFICIAL_100_TASK_POPULATION_AND_ACCEPTABLE_RANGE_IDENTITY",
+      "ADAPTIVE_THINKING_MAX_EFFORT",
+      "CONTAINER_PLUS_IMAGE_FILE_PLUS_STANDARD_LIBRARIES_PLUS_IMAGE_CROPPING_TOOL_AUTHORITY",
+      "GEMINI_3_5_FLASH_GRADER",
+      "FIVE_RUN_MEAN_AGGREGATION"
+    ],
+    "still_open": [
+      "BRAIN_PROTOCOL_EQUIVALENT_WITH_TOOLS_HARNESS_BINDING",
+      "AUTHENTIC_BRAIN_FIVE_RUN_CHARTOGRAPHY_SCORE_RECEIPT_GE_89_OR_STRONGER_SCOPE_COMPLETE_CERTIFICATE"
+    ]
+  },
+  "direct_89_irreducible_delta": "BIND_A_BRAIN_HARNESS_EQUIVALENT_TO_THE_PUBLISHED_ANTHROPIC_WITH_TOOLS_PROTOCOL_AND_OBTAIN_AN_AUTHENTIC_FIVE_RUN_CHARTOGRAPHY_SCORE_RECEIPT_GE_89__OR_PROVE_A_STRONGER_SCOPE_COMPLETE_CERTIFICATE",
+  "scheduler_effect": {
+    "delete": [
+      "WAKE_GATE_DIRECT_89_ON_DISCOVERY_OF_ANTHROPIC_TASK_POPULATION_IDENTITY",
+      "WAKE_GATE_DIRECT_89_ON_DISCOVERY_OF_ANTHROPIC_TOOLSET",
+      "WAKE_GATE_DIRECT_89_ON_DISCOVERY_OF_ANTHROPIC_GRADER_IDENTITY",
+      "WAKE_GATE_DIRECT_89_ON_DISCOVERY_OF_ANTHROPIC_AGGREGATION_RULE",
+      "TREAT_CURRENT_SURGE_NO_TOOLS_MODEL_HARNESS_AS_THE_WITH_TOOLS_HARNESS"
+    ],
+    "activate": [
+      "BUILD_OR_BIND_PROTOCOL_EQUIVALENT_WITH_TOOLS_BRAIN_HARNESS_USING_EXISTING_CHARTOGRAPHY_TASKS_AND_GRADER",
+      "REUSE_CURRENT_QWEN3VL4B_RUNTIME_AND_SIX_CASE_QUALIFICATION_ONLY_AS_SUBJECT_AND_TRANSPORT_EVIDENCE",
+      "RUN_DIRECT_SCORE_ONLY_WHEN_ZERO_SPEND_EXECUTION_AND_GRADER_CAPACITY_ARE_VALIDLY_BOUND"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_BRAIN_CHARTOGRAPHY_SCORE",
+    "NO_CLAIM_THE_CURRENT_SIX_CASE_SYNTHETIC_SUITE_IS_THE_OFFICIAL_100_TASK_PROTOCOL",
+    "NO_CLAIM_PROTOCOL_BINDING_ALONE_PROVES_GE_89",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_PROMOTION_OR_TERMINAL_CREDIT",
+    "NO_CLAIM_UNPUBLISHED_CONTAINER_PACKAGE_VERSIONS_ARE_KNOWN"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
