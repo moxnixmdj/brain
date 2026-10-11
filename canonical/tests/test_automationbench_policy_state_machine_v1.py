@@ -35,6 +35,45 @@ class AutomationBenchPolicyStateMachineV1Tests(unittest.TestCase):
         self.assertTrue(out["calls"])
         self.assertTrue(all(x["arguments"]["method"] == "GET" for x in out["calls"]))
 
+    def test_list_results_expand_to_detail_observation_phase(self):
+        history = [
+            {
+                "kind":"tool_result",
+                "name":"api_search",
+                "content":json.dumps({
+                    "results":[
+                        {
+                            "id":"gmail.users.messages.get",
+                            "method":"GET",
+                            "url":"https://gmail.googleapis.com/gmail/v1/users/{userId}/messages/{id}",
+                            "description":"Fetch a specific email message by its ID.",
+                            "parameters":{
+                                "userId":{"required":True,"location":"path","default":"me"},
+                                "id":{"required":True,"location":"path"},
+                            },
+                        }
+                    ]
+                }),
+            },
+            {
+                "kind":"tool_result",
+                "name":"api_fetch",
+                "content":json.dumps({
+                    "messages":[
+                        {"id":"msg_fac_011","threadId":"thr_fac_011"},
+                        {"id":"msg_fac_012","threadId":"thr_fac_012"},
+                    ]
+                }),
+            },
+        ]
+        out = next_policy_action(
+            prompt="Check the latest unread facilities email about a fire drill.",
+            history=history,
+        )
+        self.assertEqual(out["phase"], "OBSERVE_DETAILS")
+        self.assertEqual(len(out["calls"]), 2)
+        self.assertTrue(all("/messages/msg_fac_" in x["arguments"]["url"] for x in out["calls"]))
+
     def test_third_phase_compiles_salesforce_mutation(self):
         prompt = "We just closed the Meridian Corp Platform Deal! Mark it as won in Salesforce."
         history = [
