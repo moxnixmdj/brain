@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_STAGE1_FRESH_SUBJECT_PRECOMMIT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "FROZEN_BEFORE_PROMPT_OR_REFERENCE_FILE_READ__ZERO_SCORE_CREDIT",
+  "benchmark": "GDPval-AA v2.1",
+  "dataset": {
+    "owner": "openai",
+    "name": "gdpval",
+    "revision_sha": "11e7900cdcac61bc4daf59e65feb238acda98fbf",
+    "population_count": 220
+  },
+  "execution_profile": {
+    "path": "canonical/capabilities/internalized/professional_work/stirrup_247f24d/BRAIN_EXECUTION_PROFILE_V1.json",
+    "candidate_id": "OPUS55_PROFESSIONAL_KNOWLEDGE_WORK_STIRRUP_CONFIGURATION_V1",
+    "approved_cognition_surface": "CURRENT_CHATGPT_GPT_5_6_SOL_SESSION_OR_EQUIVALENT_ZERO_INCREMENTAL_BRAIN_APPROVED_SUBSTRATE",
+    "incremental_spend_usd": 0
+  },
+  "selection_rule": "TAKE_THE_FIRST_THREE_PUBLIC_POPULATION_ROWS_AFTER_ROW_0_THAT_HAVE_NOT_HAD_PROMPT_REFERENCE_GOLD_OR_JUDGE_FEEDBACK_READ_IN_THIS_EXECUTION_THREAD",
+  "selected_subjects": [
+    {"row_idx": 1, "task_id": "7b08cd4d-df60-41ae-9102-8aaa49306ba2"},
+    {"row_idx": 2, "task_id": "7d7fc9a7-21a7-4b83-906f-416dea5ad04f"},
+    {"row_idx": 3, "task_id": "43dc9778-450b-4b46-b77e-b6d82b202035"}
+  ],
+  "exclusions": [
+    {
+      "row_idx": 0,
+      "task_id": "83d10b06-26d1-4636-a32c-23f92c57f30b",
+      "reason": "PROMPT_AND_TASK_SPECIFIC_PUBLIC_RUBRIC_SURFACE_ALREADY_READ_DURING_PREFLIGHT__NOT_FRESH_STAGE1_PROMOTION_EVIDENCE"
+    }
+  ],
+  "contamination_lock": {
+    "human_gold_deliverables_before_submission": "FORBIDDEN",
+    "model_submissions_before_submission": "FORBIDDEN",
+    "task_specific_solution_or_judge_feedback_before_submission": "FORBIDDEN",
+    "public_task_prompt_and_reference_files_after_this_freeze": "ALLOWED"
+  },
+  "stage1_rule": "EXECUTE_SELECTED_SUBJECTS_WITH_BRAIN_OWNED_PROFILE__FAIL_CLOSED_ON_SYSTEMIC_HARNESS_OR_CAPABILITY_GAP__DO_NOT_REPAIR_A_GRADED_SUBJECT_AND_COUNT_REPLAY_AS_FRESH",
+  "hard_nonclaims": [
+    "NO_TASK_PROMPT_READ_FOR_SELECTED_SUBJECTS_AT_FREEZE_TIME",
+    "NO_REFERENCE_FILE_READ_FOR_SELECTED_SUBJECTS_AT_FREEZE_TIME",
+    "NO_SUBMISSION_EXISTS",
+    "NO_GDPVAL_SCORE",
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ]
+}
