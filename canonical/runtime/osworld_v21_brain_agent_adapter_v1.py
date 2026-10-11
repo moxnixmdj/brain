@@ -7,7 +7,9 @@ receipted back into the next policy cycle; graphical actions remain the fallback
 from __future__ import annotations
 
 import hashlib
+import json
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Any, Callable, Mapping, Sequence
 
 from canonical.runtime.osworld_v21_host_browser_ops_v1 import (
@@ -172,6 +174,7 @@ class BrainOSWorldAgent:
         self.history: list[dict[str, Any]] = []
         self.runtime_logger = None
         self.task_current_date = None
+        self.result_dir: Path | None = None
 
     def bind_environment(self, environment: Any) -> None:
         for name, controller in (
@@ -182,6 +185,11 @@ class BrainOSWorldAgent:
             if not callable(binder):
                 raise AdapterError(name + "_CONTROLLER_BIND_UNAVAILABLE")
             binder(environment)
+
+    def set_result_dir(self, path: str | Path) -> None:
+        target = Path(path)
+        target.mkdir(parents=True, exist_ok=True)
+        self.result_dir = target
 
     def reset(self, runtime_logger=None, **_: Any) -> None:
         self.history.clear()
@@ -237,6 +245,24 @@ class BrainOSWorldAgent:
         self.history.append(receipt)
         if len(self.history) > MAX_HISTORY:
             del self.history[:-MAX_HISTORY]
+        if self.result_dir is not None:
+            durable = {
+                "schema": "PROJECT_BRAIN_OSWORLD_V21_ACTION_RECEIPT_V1",
+                "policy_id": self.policy_id,
+                **receipt,
+            }
+            with (self.result_dir / "brain_action_receipts.jsonl").open(
+                "a", encoding="utf-8"
+            ) as stream:
+                stream.write(
+                    json.dumps(
+                        durable,
+                        ensure_ascii=False,
+                        sort_keys=True,
+                        default=str,
+                    )
+                    + "\n"
+                )
 
     def _recoverable_error(
         self,
