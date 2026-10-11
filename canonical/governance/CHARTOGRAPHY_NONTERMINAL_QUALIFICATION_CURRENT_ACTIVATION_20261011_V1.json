@@ -1,0 +1,79 @@
+{
+  "schema": "PROJECT_BRAIN_CHARTOGRAPHY_NONTERMINAL_QUALIFICATION_CURRENT_ACTIVATION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "ACTIVE__EXACT_QWEN3VL4B_RUNTIME_FIT_PRECONDITION_ALREADY_SATISFIED__SIX_CASE_NONTERMINAL_QUALIFICATION_IN_FLIGHT__ZERO_CREDIT",
+  "target_predicate": "CHARTOGRAPHY_TOOLS_GE_89",
+  "objective": "CLOSE_ONLY_THE_NONTERMINAL_SCOPE_RELEVANT_CHART_IMAGE_REASONING_QUALIFICATION_SUBBLOCKER_USING_THE_ALREADY_VERIFIED_EXACT_COMPACT_QWEN3VL_EXECUTION_SUBJECT_AND_SIX_DETERMINISTIC_ZERO_TERMINAL_CHART_CASES",
+  "runtime_fit_authority": {
+    "path": "canonical/verification/CHARTOGRAPHY_QWEN3VL4B_ZERO_CASE_PREFLIGHT_V2_RECONCILIATION_20261010_V1.json",
+    "git_blob_sha": "ea260cd10e29379fc148ec6f281e1006bf5bdbfa",
+    "status": "PASS__EXACT_PUBLIC_RUNNER_PREFLIGHT_RECONCILED__RUNTIME_FIT_AND_SYNTHETIC_MULTIMODAL_SMOKE_CLOSED__ZERO_TERMINAL_CASES__ZERO_CREDIT",
+    "precondition_satisfied": true
+  },
+  "exact_execution_subject": {
+    "model_repository": "Qwen/Qwen3-VL-4B-Instruct-GGUF",
+    "model_revision": "1cd86afb9a95c410a6038ab3b40d8b578c892266",
+    "model_file": "Qwen3VL-4B-Instruct-Q4_K_M.gguf",
+    "model_sha256": "66358cb18bb6b3b1b6675aa412c7a88ef01d228f481184d13668e5201c730a0a",
+    "projector_file": "mmproj-Qwen3VL-4B-Instruct-Q8_0.gguf",
+    "projector_sha256": "30ba2c7dd3127a4561b6cba9d13d0f711c91bdb38742e2f56d73c8cb596bd06d",
+    "llama_cpp_commit": "a7fb71fab83b474a0892b9a05aaa3a8ddca2729b"
+  },
+  "qualification_suite": {
+    "case_count": 6,
+    "skills": [
+      "BAR_ORDERING",
+      "BAR_RATIO",
+      "LINE_TREND",
+      "LINE_CROSSING",
+      "SCATTER_COUNT",
+      "GROUPED_BAR_COMPARISON"
+    ],
+    "terminal_cases_consumed": 0,
+    "external_dataset_cases_consumed": 0,
+    "model_judge_calls": 0,
+    "pass_rule": "SIX_OF_SIX_EXACT_FINAL_NORMALIZED_TOKENS",
+    "case_sha256": [
+      "c68d78abd05fc9101fe8112d35f2af95fb29be783ac6751d3bb44d0aa1ff7144",
+      "554d3a72a1b14e267fe36233a6c0a45486823436a39911cc2287648ee2f3479c",
+      "0c76e5f3157425f155acdc5a02f271f9706ae8e4d154aa74782a0da939dc4c9a",
+      "ff92368272340426cce84c6db1d30868fe7b24c8daac7fc413800e8b27693ea1",
+      "dad9460416cd783a1205e061e471fe09fbae0007629adc03c04a1e43d634dbb2",
+      "33099ac52b5b17f0b5071cf1db02fb1c27a5001c3f0546fbcb54a26aa209f57c"
+    ]
+  },
+  "execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "chartography-sixcase-qual-20261011-v1",
+    "commit": "88fc3b44a7ae32aff422362071a378251861dfb7",
+    "pull_request": 2640,
+    "workflow": ".github/workflows/chartography-qwen3vl4b-sixcase-qualification-v1.yml",
+    "workflow_run_id": 38109910675,
+    "observed_state_at_activation": "QUEUED"
+  },
+  "current_subblockers": {
+    "exact_runtime_fit": "CLOSED",
+    "synthetic_multimodal_transport": "CLOSED",
+    "nonterminal_scope_relevant_chart_reasoning_qualification": "IN_FLIGHT",
+    "project_specific_gemini_judge_capacity_or_sound_equivalent_evaluator_relation": "OPEN",
+    "thin_official_chartography_adapter_if_still_required": "OPEN",
+    "chartography_threshold_certificate_ge_89": "OPEN"
+  },
+  "scheduler_rule": "DO_NOT_REDOWNLOAD_OR_REPROVE_RUNTIME_FIT__DO_NOT_READ_CHARTOGRAPHY_TERMINAL_CASES_FOR_QUALIFICATION__WAIT_ONLY_FOR_THE_ALREADY_TRIGGERED_SIX_CASE_RECEIPT__IF_SIX_OF_SIX_PASSES_CLOSE_NONTERMINAL_SCOPE_RELEVANT_QUALIFICATION_AND_CONTINUE_TO_EVALUATOR_RELATION_ADAPTER_AND_THRESHOLD_CERTIFICATE",
+  "hard_nonclaims": [
+    "NO_CHARTOGRAPHY_SCORE",
+    "NO_CHARTOGRAPHY_GE_89_CERTIFICATE",
+    "NO_GENERAL_CHART_REASONING_CLAIM",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT_BEFORE_RESULT",
+    "NO_GEMINI_JUDGE_CAPACITY_CLAIM"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "judge_calls": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
