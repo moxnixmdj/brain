@@ -83,10 +83,7 @@
         "runtime_fit_closed": true,
         "terminal_cases_consumed": 0
       },
-      "protocol_identity_repair": {
-        "path": "canonical/governance/CHARTOGRAPHY_89_PROTOCOL_IDENTITY_TRUTH_REPAIR_20261011_V1.json",
-        "git_blob_sha": "c82810702fd2a9d47b1ec267024defad58f4dc8b"
-      },
+      "protocol_identity_repair": "canonical/governance/CHARTOGRAPHY_89_PROTOCOL_IDENTITY_TRUTH_REPAIR_20261011_V2.json",
       "protocol_public_binding": {
         "path": "canonical/governance/CHARTOGRAPHY_WITH_TOOLS_PROTOCOL_PUBLIC_BINDING_20261011_V1.json"
       }
