@@ -1,0 +1,95 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_NINE_BODY_PERIPHERAL_V53_SUCCESSOR_EXECUTION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "VERIFIED_RESEARCH_FRONTIER__NINE_BODY_MPMATH_PERIPHERAL_FAIL_CLOSED_PRUNE__SPENT_NEXT58_AND_FRESH_NEXT59_PASS__NEXT60_FROZEN_UNSPENT__CURRENT_POINTER_ELIGIBLE__ZERO_PROMOTION_CREDIT",
+  "subject": {
+    "predecessor": "canonical/evidence/BYTES_EXACT_SYMBOLIC_MPF_POW_INT_V52_SUCCESSOR_EXECUTION_20261011_V1.json",
+    "predecessor_manifest_sha256": "5cfdaf054fafabd04894396739defc82fed40ec3aba24b2f1b06030421b9c62f",
+    "transform": "canonical/research/bytes/tools/conservative_mpmath_nine_body_prune_v53.py",
+    "manifest_sha256": "ae9187bc15193fe340e77a88d9d400f51ec798dec638ac435aca1f2862c14cfe",
+    "python_files": 277,
+    "raw_python_source_bytes": 1715881,
+    "B_exec_raw_python_source_bytes": 1718641,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "raw_delta_vs_v52_bytes": -1946,
+    "B_exec_delta_vs_v52_bytes": -1946
+  },
+  "selection": {
+    "id": "MPMATH_NINE_BODY_PERIPHERAL_FAIL_CLOSED_PRUNE_V53",
+    "method": "COMPOSE_NINE_NONCONFLICTING_FAIL_CLOSED_PERIPHERAL_CUTS_ON_CANONICAL_V52__VERIFY_COMPLETE_SPENT_NEXT58__THEN_PREVIOUSLY_UNTOUCHED_CANONICAL_NEXT59",
+    "changed_body_count": 9,
+    "bodies": [
+      "mpmath/ctx_mp_python.py::_mpf.__rsub__",
+      "mpmath/ctx_mp_python.py::_mpf.__rdiv__",
+      "mpmath/ctx_mp_python.py::_mpc.__new__",
+      "mpmath/ctx_mp_python.py::_mpc.__eq__",
+      "mpmath/ctx_mp_python.py::_mpc.__rmul__",
+      "mpmath/libmp/libmpf.py::strict_normalize1",
+      "mpmath/libmp/libmpf.py::gmpy_mpf_mul_int",
+      "mpmath/libmp/libmpf.py::python_mpf_mul_int",
+      "mpmath/libmp/libmpf.py::str_to_man_exp"
+    ],
+    "exact_base_guard": true,
+    "exact_target_guard": true
+  },
+  "qualification": {
+    "spent_NEXT58": {
+      "id": "QUAL_SUCCESSOR_NEXT58_20261011_V1",
+      "cases": 15180,
+      "corpus_sha256": "fd7a32a07356c87a18e884f851320fd5d87dc316ca2436a4191275e5f3f57e0c",
+      "candidate": "15180/15180",
+      "failures": 0,
+      "spent": true
+    },
+    "fresh_NEXT59": {
+      "id": "QUAL_SUCCESSOR_NEXT59_20261011_V1",
+      "cases": 15410,
+      "corpus_sha256": "5c7cf733614d58648dbe4fbfc855e7451651c652555eb895fcdcef39df780c92",
+      "candidate": "15410/15410",
+      "failures": 0,
+      "spent": true
+    }
+  },
+  "reproducibility": {
+    "clean_room_v52_to_v53_reconstruction": "PASS__278_OF_278_DURABLE_FILES_BYTE_IDENTICAL",
+    "regenerated_manifest_sha256": "ae9187bc15193fe340e77a88d9d400f51ec798dec638ac435aca1f2862c14cfe",
+    "parallel_worker_convergence": "INDEPENDENT_LIBRARY_ARTIFACT_CONVERGED_TO_SAME_277_PYTHON_FILE_MANIFEST_AND_RAW_BYTE_COUNT",
+    "external_second_carrier_verified": false
+  },
+  "durable_archive": {
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V53_SUCCESSOR_20261011_V1.tar(1).xz",
+    "library_file_id": "libfile_576ad2992b0c819199291a9b013107e2",
+    "file_id": "file_00000000fe5c8210a1e6a7801342d424",
+    "bytes": 267936,
+    "sha256": "806684f2f9815e5b1275a789512ce77cee7c5035e9fe7d69765596cc7327e912"
+  },
+  "next_frozen": {
+    "id": "QUAL_SUCCESSOR_NEXT60_20261011_V1",
+    "cases": 15640,
+    "seed": 1044270352,
+    "seed_derivation": "FIRST_32_BITS_BIG_ENDIAN_SHA256_OF_QUAL_ID_PIPE_V53_MANIFEST_IDENTITY",
+    "per_operation_budget": 1360,
+    "corpus_sha256": "f2d40bb97ade73179631aac6c94134eeab9fc529889bfabe75e01dd2dadfbc99",
+    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT60_20261011_V1(3).jsonl",
+    "library_file_id": "libfile_0736691c4c8c8191b0766d6e5913e2d9",
+    "file_id": "file_0000000099f881f49134612f1348f6cd",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT",
+    "spent": false
+  },
+  "truth_boundary": [
+    "MEASURED: V53 raw Python bytes are 1,715,881, 1,946 bytes below canonical V52.",
+    "MEASURED: complete spent NEXT58 passes exact V53 15,180/15,180 with zero failures.",
+    "MEASURED: previously untouched canonical NEXT59 passes exact V53 15,410/15,410 with zero failures.",
+    "MEASURED: clean-room V52-to-V53 reconstruction is 278/278 durable files byte-identical.",
+    "MEASURED: a parallel worker artifact independently converged to the same Python manifest and raw byte count; this is convergence evidence, not organizationally independent verification.",
+    "MEASURED: NEXT60 is durably frozen at 15,640 cases and remains unspent.",
+    "NOT PROVED: universal mpmath equivalence outside the bounded exact-symbolic route.",
+    "NOT CLAIMED: external organizationally independent second carrier.",
+    "NOT PROMOTED: zero capability, acceptance, professional-quality, promotion, or terminal credit."
+  ],
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "acceptance_credit_delta": 0,
+  "promotion_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
