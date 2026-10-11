@@ -76,18 +76,25 @@ _ANAPHOR = re.compile(r"\b(?:it|them|this|that|these|those|one|ones)\b", re.I)
 
 def _tokens(value: Any) -> list[str]:
     text = str(value or "")
-    # Normalize schema identifiers as language without depending on any vendor:
-    # foo.bar, foo_bar, foo-bar and camelCase all expose their lexical atoms.
-    text = re.sub(r"([a-z0-9])([A-Z])", r"\1 \2", text)
-    text = re.sub(r"[._/:{}\[\]()-]+", " ", text)
-    raw = re.findall(r"[A-Za-z][A-Za-z0-9]*", text)
+    # Preserve both the compact identity and decomposed lexical atoms.
+    # Example shape: NovaGraph -> novagraph + nova + graph;
+    # batchUpdate -> batchupdate + batch + update.
+    # This is schema-agnostic and prevents camel-case identity loss.
+    chunks = re.findall(r"[A-Za-z][A-Za-z0-9]*", text)
     out: list[str] = []
-    for token in raw:
-        t = _singular(token)
+
+    def add(token: str) -> None:
+        t = _singular(token.lower())
         if len(t) < 2 or t in _STOP:
-            continue
+            return
         if t not in out:
             out.append(t)
+
+    for chunk in chunks:
+        add(chunk)
+        decomposed = re.sub(r"([a-z0-9])([A-Z])", r"\1 \2", chunk)
+        for atom in re.findall(r"[A-Za-z][A-Za-z0-9]*", decomposed):
+            add(atom)
     return out
 
 
