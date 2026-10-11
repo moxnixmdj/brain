@@ -1,0 +1,93 @@
+{
+  "schema": "PROJECT_BRAIN_CHARTOGRAPHY_89_WITH_TOOLS_PROTOCOL_BINDING_20261011_V2",
+  "date": "2026-10-11",
+  "status": "PUBLIC_PROTOCOL_BOUND__BRAIN_TOOLING_PARTIAL__EXTERNAL_MODEL_REPLAYS_QUARANTINED__BRAIN_OWNED_BROADER_SEMANTIC_CAPABILITY_OPEN__ZERO_CREDIT",
+  "target_predicate": "CHARTOGRAPHY_TOOLS_GE_89",
+  "objective": "Preserve the public 89-with-tools protocol while enforcing Brain ownership: no external/general-purpose model may supply credited producer cognition.",
+  "public_methodology_observations": [
+    "ANTHROPIC_LAUNCH_REPORTS_CHARTOGRAPHY_89_0_WITH_TOOLS_FOR_OPUS_5_5",
+    "SYSTEM_CARD_METHODOLOGY_STATES_INTERNAL_GRADING_MATCHES_OFFICIAL_SURGE_TASKS_AND_EXPERT_ACCEPTABLE_RANGES",
+    "WITH_TOOLS_MODEL_RECEIVES_CONTAINER_WITH_IMAGE_FILE_AND_STANDARD_LIBRARIES_PLUS_IMAGE_CROPPING_TOOL",
+    "TARGET_CLAUDE_RUNS_USE_ADAPTIVE_THINKING_AND_MAX_EFFORT",
+    "GEMINI_3_5_FLASH_IS_USED_AS_GRADER_TO_MATCH_SURGE",
+    "SCORES_ARE_AVERAGED_OVER_FIVE_RUNS"
+  ],
+  "source_refs": [
+    "ANTHROPIC_CLAUDE_OPUS_5_5_LAUNCH_2026_09_22",
+    "ANTHROPIC_OPUS_5_5_SYSTEM_CARD_SECTION_8_13_1",
+    "SURGE_AI_CHARTOGRAPHY_OFFICIAL_REPOSITORY",
+    "PUBLIC_SYSTEM_CARD_TEXT_MIRROR_CROSS_CHECK"
+  ],
+  "bound_protocol": {
+    "task_population": "OFFICIAL_SURGE_CHARTOGRAPHY_100_TASK_SET",
+    "accepted_answer_semantics": "EXPERT_DETERMINED_ACCEPTABLE_RANGES_FROM_OFFICIAL_REPOSITORY",
+    "target_model_run_config": "ADAPTIVE_THINKING_MAX_EFFORT",
+    "with_tools_surface": [
+      "CONTAINER",
+      "IMAGE_FILE_PRESENT",
+      "STANDARD_LIBRARIES",
+      "IMAGE_CROPPING_TOOL"
+    ],
+    "judge": "GEMINI_3_5_FLASH",
+    "aggregation": "MEAN_OVER_FIVE_RUNS",
+    "historical_target_percent": 89
+  },
+  "brain_reuse": {
+    "crop_runtime": "canonical/runtime/chartography_crop_tool_v1.py",
+    "deterministic_geometry_runtime": "canonical/runtime/chartography_deterministic_geometry_v1.py",
+    "deterministic_relation_router": "canonical/runtime/chartography_deterministic_relation_router_v1.py",
+    "deterministic_lower_bound_scorer": "canonical/runtime/chartography_deterministic_lower_bound_scorer_v1.py",
+    "ownership_gate": "canonical/runtime/chartography_brain_credit_subject_gate_v1.py",
+    "external_model_replays": {
+      "qwen3vl4b_crop_loop": "CONTAMINATED_DIAGNOSTIC_ONLY__ZERO_BRAIN_CREDIT",
+      "qwen3vl8b": "CONTAMINATED_DIAGNOSTIC_ONLY__ZERO_BRAIN_CREDIT",
+      "minicpm_v45": "CONTAMINATED_DIAGNOSTIC_ONLY__ZERO_BRAIN_CREDIT"
+    }
+  },
+  "causal_reduction": {
+    "closed": [
+      "PUBLIC_WITH_TOOLS_PROTOCOL_IDENTITY",
+      "BRAIN_BOUNDED_CROP",
+      "BRAIN_SIMPLE_EXACT_COLOR_RELATIONAL_GEOMETRY",
+      "FAIL_CLOSED_DETERMINISTIC_LOWER_BOUND_SCORING",
+      "BRAIN_CREDIT_OWNERSHIP_GATE"
+    ],
+    "still_open": [
+      "BRAIN_OWNED_MODEL_INDEPENDENT_BROADER_PROFESSIONAL_CHART_SEMANTIC_RECOGNITION",
+      "AUTHORIZED_OFFICIAL_100_TASK_AND_IMAGE_BYTES_OR_OWNER_EQUIVALENT_SCORE_BEARING_SERVICE",
+      "FIVE_RUN_CONTENT_ADDRESSED_BRAIN_SCORE_GE_89_OR_STRONGER_SCOPE_COMPLETE_CERTIFICATE"
+    ],
+    "external_model_runtime_route_can_close_open_semantic_gap": false
+  },
+  "hard_nonclaims": [
+    "NO_EXTERNAL_MODEL_ASSISTED_RUN_COUNTS_AS_BRAIN_CHARTOGRAPHY_CAPABILITY_OR_SCORE",
+    "NO_CLAIM_CURRENT_BRAIN_OWNED_DETERMINISTIC_ROUTE_COVERS_BROADER_PROFESSIONAL_CHART_SEMANTICS",
+    "NO_CHARTOGRAPHY_GE_89_SCORE",
+    "NO_HELDOUT_TASK_CONSUMPTION_BY_THIS_BINDING",
+    "NO_ACCEPTANCE_OWNERSHIP_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "row_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "supersedes": [
+    "canonical/governance/CHARTOGRAPHY_89_WITH_TOOLS_PROTOCOL_BINDING_20261011_V1.json"
+  ],
+  "ownership_boundary": {
+    "required": true,
+    "law_paths": [
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/CAPABILITY_TRANSFER_VS_COGNITION_OUTSOURCING_LAW_V1.md"
+    ],
+    "executable_gate": "canonical/runtime/chartography_brain_credit_subject_gate_v1.py",
+    "cognition_dependency_class_required": "MODEL_INDEPENDENT",
+    "model_dependency_count_required": 0,
+    "external_model_runtime_dependency_count_required": 0,
+    "qwen_or_minicpm_or_other_general_model_at_target_inference": "FORBIDDEN_FOR_BRAIN_CREDIT"
+  }
+}
