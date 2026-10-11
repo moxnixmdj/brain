@@ -11,9 +11,19 @@ class ChartSemanticUtilityError(ValueError):
     pass
 
 
-def prompt_numbers(text: str) -> list[float]:
+def prompt_numbers(text: str, *, exclude_formatting: bool = False) -> list[float]:
+    normalized = text.replace("−", "-")
+    blocked: list[tuple[int, int]] = []
+    if exclude_formatting:
+        for pattern in (
+            r"\\b\\d+\\s*decimal places?\\b",
+            r"\\bnearest\\s+\\d+(?:\\.\\d+)?\\b",
+        ):
+            blocked.extend((m.start(), m.end()) for m in re.finditer(pattern, normalized, flags=re.I))
     out: list[float] = []
-    for match in _NUM.finditer(text.replace("−", "-")):
+    for match in _NUM.finditer(normalized):
+        if any(a <= match.start() and match.end() <= b for a, b in blocked):
+            continue
         try:
             value = float(match.group(1))
         except ValueError:
