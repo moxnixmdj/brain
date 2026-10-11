@@ -1,0 +1,102 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_MINIMUM_INFORMATION_FRONTIER_20261011_V2",
+  "date": "2026-10-11",
+  "status": "CAPABILITY_COMPARISON_IDENTIFICATION_FIRST__RAW_SUPERDOMAIN_TOP_SUPPORT_ROUTE_CUT__ZERO_CREDIT",
+  "supersedes_for_active_strategy": {
+    "path": "canonical/governance/AA_BRIEFCASE_MINIMUM_INFORMATION_FRONTIER_20261011_V1.json",
+    "git_blob_sha": "b9e262163c872b34b3b261a96f71e20cd35e5f7a"
+  },
+  "terminal_target": {
+    "path": "canonical/governance/AA_BRIEFCASE_MEASUREMENT_SEMANTIC_TARGET_V1.json",
+    "git_blob_sha": "8f24ca30e6cceb8a58f619da1623037c0a4bda0b",
+    "predicate": "BRAIN_PROFESSIONAL_WORK_CAPABILITY_GE_CAPABILITY_EVIDENCED_BY_FROZEN_OPUS55_AA_BRIEFCASE_1822"
+  },
+  "new_decisive_cut": {
+    "path": "canonical/governance/AA_BRIEFCASE_RAW_SUPERDOMAIN_TOP_SUPPORT_CUT_20261011_V1.json",
+    "git_blob_sha": "f8ce8ddbf1740066a6e2241a75c6c46de11b29d3",
+    "local_verification": {
+      "path": "canonical/verification/AA_BRIEFCASE_HIDDEN_RUBRIC_INDISTINGUISHABILITY_LOCAL_VERIFY_20261011_V1.json",
+      "git_blob_sha": "420d29e292854326341c700308e49c1d533e97a5",
+      "status": "LOCAL_8_OF_8_PASS__NOT_INDEPENDENT"
+    }
+  },
+  "reasoning_state": {
+    "public_task_and_outcome_type_superdomain_complete": true,
+    "private_rubric_material_semantics_known": false,
+    "raw_superdomain_includes_arbitrary_finite_hidden_binary_predicates": true,
+    "raw_superdomain_global_top_support_route_valid": false,
+    "why": "THE_SAME_VISIBLE_TASK_CAN_BE_CONSISTENT_WITH_TWO_HIDDEN_RUBRIC_WORLDS_REWARDING_DISJOINT_OUTPUTS__NO_POLICY_WITHOUT_RUBRIC_ACCESS_CAN_BE_TOP_IN_BOTH",
+    "actual_private_rubrics_claimed_adversarial": false
+  },
+  "minimum_proof_carrying_information_now": {
+    "stage_1_identification": {
+      "id": "W_IDENTIFY",
+      "required": "BIND_A_CREDIT_BEARING_RELATION_THAT_IDENTIFIES_WHAT_CAPABILITY_ORDER_OR_REFERENCE_RELATION_THE_FROZEN_AA_RESULT_SUPPORTS",
+      "one_of": [
+        "ACTUAL_HIDDEN_RUBRIC_CLASS_RESTRICTED_TO_A_PROVED_SOUND_MATERIAL_QUALITY_ORDER",
+        "MATCHED_REFERENCE_RELATION_ON_THE_ACTUAL_SCORE_BEARING_SCOPE",
+        "OWNER_ACCEPTED_OR_PROTOCOL_EQUIVALENT_RELATION_WITH_TERMINAL_ENTAILMENT"
+      ],
+      "current_state": "OPEN"
+    },
+    "stage_2_coverage": {
+      "id": "W_COVER",
+      "required": "BRAIN_COVERAGE_OR_REFERENCE_RELATIVE_RELIABILITY_DOMINANCE_ON_THE_IDENTIFIED_SCOPE",
+      "current_state": "BLOCKED_ON_W_IDENTIFY_FOR_TERMINAL_CREDIT",
+      "note": "GENERIC_ESCAPE_PROGRESS_TOTALITY_MAY_BE_REUSED_ONLY_IF_IT_APPLIES_TO_THE_IDENTIFIED_SCOPE__DO_NOT_PROVE_GLOBAL_ESCAPE_TOTALITY_MERELY_FOR_AA"
+    },
+    "stage_3_quality": {
+      "id": "W_QUALITY",
+      "required": "TASK_REQUIREMENT_ANALYTICAL_AND_PRESENTATION_QUALITY_NONINFERIORITY_OR_TOP_SUPPORT_ON_THE_IDENTIFIED_ORDER",
+      "current_state": "BLOCKED_ON_W_IDENTIFY_FOR_TERMINAL_CREDIT",
+      "note": "P2_VISIBLE_TOP_LAW_IS_A_REUSABLE_SUBREGION_ONLY__NOT_A_SCOPE_COMPLETE_ORDER"
+    },
+    "composition": {
+      "same_exact_brain_subject_required": true,
+      "brain_owned_donor_free_required": true,
+      "typed_terminal_entailment_required": true,
+      "selector": "canonical/runtime/aa_briefcase_minimum_information_v1.py"
+    }
+  },
+  "reuse_search": {
+    "material_order_or_hidden_rubric_bridge_found": false,
+    "searched_authority_classes": [
+      "AA_COMPLETE_MATERIAL_ORDER",
+      "AA_BRIEFCASE_MATERIAL_ORDER",
+      "AA_BRIEFCASE_RUBRIC_SEMANTICS",
+      "AA_RUBRIC_MONOTONICITY",
+      "AA_PROFESSIONAL_QUALITY_ORDER",
+      "AA_HIDDEN_RUBRIC_SEMANTICS"
+    ],
+    "closest_existing_artifact": {
+      "path": "canonical/evidence/AA_BRIEFCASE_FROZEN_DAY_RUBRIC_CROWDBT_BINDING_20261011_V1.json",
+      "role": "SCORER_SEMANTICS_ONLY",
+      "why_not_bridge": "EXPLICITLY_LEAVES_UPSTREAM_BINARY_RUBRIC_VERDICT_VECTOR_AND_TASK_SPECIFIC_RUBRIC_SEMANTICS_UNBOUND"
+    }
+  },
+  "optimal_scheduler": {
+    "rank_1": "W_IDENTIFY",
+    "do_not_schedule_before_w_identify": [
+      "GLOBAL_ESCAPE_PROGRESS_TOTALITY_FOR_AA",
+      "GLOBAL_PROFESSIONAL_TOP_SUPPORT",
+      "MORE_GENERIC_24_OF_24_PROPERTY_WORK",
+      "RAW_SUPERDOMAIN_TOP_SUPPORT",
+      "LITERAL_CROWD_BT_RECONSTRUCTION"
+    ],
+    "stop_rule": "IF_NO_INTERNAL_W_IDENTIFY_BRIDGE_EXISTS_AND_NO_NEW_REFERENCE_INFORMATION_IS_ALLOWED__THE_EXACT_AA_RELATIVE_CAPABILITY_COMPARISON_REMAINS_INFORMATION_THEORETICALLY_UNIDENTIFIED__DO_NOT_SUBSTITUTE_A_DIFFERENT_CAPABILITY_TARGET"
+  },
+  "truth": {
+    "capability_relation_proved": false,
+    "literal_aa_briefcase_elo_ge_1822_proved": false,
+    "w_identify_proved": false,
+    "w_cover_proved_for_terminal_target": false,
+    "w_quality_proved_for_terminal_target": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "benchmark_score_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
