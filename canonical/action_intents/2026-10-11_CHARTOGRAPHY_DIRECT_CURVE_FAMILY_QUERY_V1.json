@@ -1,0 +1,26 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "date": "2026-10-11",
+  "status": "CANDIDATE__ZERO_CREDIT_UNTIL_INDEPENDENTLY_VERIFIED",
+  "action_id": "CHARTOGRAPHY_DIRECT_CURVE_FAMILY_QUERY_V1",
+  "source_coverage": "canonical/governance/CHARTOGRAPHY_PUBLIC_DECLARATION_CAPABILITY_COVERAGE_V1.json",
+  "mission": "Bind right-end direct OCR labels to uniquely adjacent saturated raster curve endpoints, then query and rank that labeled curve family at a requested x with optional nearest-to-y selection.",
+  "selection_reason": "NEXT_HIGHEST_REUSE_TO_WALL_CLOCK_AFTER_BIDIRECTIONAL_CURVE_QUERY",
+  "public_declared_family_support": [
+    "GROWTH_CHART",
+    "KAPLAN_MEIER",
+    "CONTOUR_MAP"
+  ],
+  "external_general_purpose_model_runtime_dependency_count": 0,
+  "donor_general_purpose_model_runtime_dependency_count": 0,
+  "heldout_chartography_cases_consumed": 0,
+  "benchmark_score_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "hard_nonclaims": [
+    "NO_PERCENTILE_SURVIVAL_OR_CONTOUR_DOMAIN_SEMANTICS",
+    "NO_LEFT_ENDPOINT_OR_ROTATED_LABEL_BINDING_AUTHORITY",
+    "NO_BLACK_OR_GRAYSCALE_CURVE_FAMILY_AUTHORITY",
+    "NO_TIED_OR_UNREADABLE_RANK_SELECTION",
+    "NO_CHARTOGRAPHY_SCORE"
+  ]
+}
