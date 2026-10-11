@@ -144,6 +144,18 @@ class PythonSoftwareRequestSemanticAcceptanceV1Tests(unittest.TestCase):
             self.assertNotEqual(proc.returncode,0)
             self.assertIn("SEMANTIC_MODULE_NOT_UNIQUE_REPOSITORY_LOCAL",proc.stderr)
 
+    def test_bound_run_writes_content_addressed_compilation(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=pathlib.Path(td)
+            out=v9.run({
+                "task_text":"Calling m.f with JSON arguments [3] must be true.",
+                "output_path":"semantic.json",
+            },root)
+            self.assertTrue(out["coverage_complete"],out)
+            self.assertTrue(out["output_verified"])
+            self.assertTrue(out["acceptance_program_sha256"])
+            self.assertTrue((root/"semantic.json").is_file())
+
     def test_deterministic_compilation_and_rendering(self):
         task='Python function f must exist in file "m.py".\nCalling m.f with JSON arguments [2] must equal 4.'
         a=v9.compile_request(task)
