@@ -1,0 +1,76 @@
+{
+  "schema": "PROJECT_BRAIN_PYTHON_TEST_GUIDED_REPAIR_LOOP_V1_VERIFY_20261011",
+  "date": "2026-10-11",
+  "status": "PASS__EXACT_BRANCH_BYTES__TWO_CARRIER_8_OF_8_PLUS_8_OF_8__ZERO_MODEL__ZERO_SPEND",
+  "subject": {
+    "base_main_commit": "c63837840e0a53eb0920b15679d8773c2a9f7550",
+    "basis_capability_id": "python.patch.search.test_guided.ast.v1",
+    "basis_path": "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py",
+    "basis_git_blob_sha": "9bd33aca208fca26270765e18b3563abcf841e0b",
+    "basis_sha256": "a85691068c4eeff53c2d787ddb5a799462ea867cd6b92c4573bf58e0846f7dc0",
+    "runtime_path": "canonical/runtime/bound_capabilities/python_test_guided_repair_loop_v1.py",
+    "runtime_git_blob_sha": "8c426254bd0dc70394fab4c5f2f0d1b1bd90bcef",
+    "runtime_sha256": "29a182828b894bf5bd081c14b7b1bb061a231632ca97f3218a2f5f6b1459669e",
+    "test_path": "canonical/tests/test_python_test_guided_repair_loop_v1.py",
+    "test_git_blob_sha": "294ce114bb70c8e770d37d3769d7d7fe3e269041",
+    "test_sha256": "ed3e91576616d6fc0a3db64b2983e9064e8ffaa0d13496b6ec6ab7579983964f"
+  },
+  "contract": {
+    "source_scope": "REPOSITORY_LOCAL_PYTHON",
+    "source_selection": [
+      "EXPLICIT_SOURCE_PATHS",
+      "TRACEBACK_AND_TEST_IMPORT_INFERENCE"
+    ],
+    "search_depth_max_edits": 2,
+    "multi_file": true,
+    "search_policy": "BOUNDED_DETERMINISTIC_BEAM_OVER_SINGLE_AST_MUTATION_BASIS",
+    "acceptance_oracle": "CALLER_BOUND_FAILING_PYTHON_TEST_COMMAND",
+    "persistent_source_mutation": false
+  },
+  "first_carrier": {
+    "sprite": "brain-capability-first-scheduler-verify-20261008-v1",
+    "exact_branch_bytes": false,
+    "exact_semantically_identical_pre_freeze_bytes": true,
+    "tests_executed": 8,
+    "tests_passed": 8,
+    "elapsed_reported_s": 5.632
+  },
+  "second_carrier": {
+    "sprite": "brain-cad-proof-clean-20261009",
+    "exact_branch_bytes": true,
+    "tests_executed": 8,
+    "tests_passed": 8,
+    "tests_failed": 0,
+    "elapsed_reported_s": 4.708
+  },
+  "excluded_infrastructure_attempt": {
+    "sprite": "brain-c2-independent-replay-v3",
+    "tests_executed": 0,
+    "reason": "FILESYSTEM_IO_ERROR_BEFORE_RUNTIME_WRITE",
+    "capability_result": "NO_RESULT"
+  },
+  "covered_cases": [
+    "TWO_FILE_TWO_EDIT_REPAIR",
+    "AUTOMATIC_SOURCE_INFERENCE_FROM_TEST_IMPORTS",
+    "ONE_EDIT_REPAIR",
+    "NO_SOLUTION_FAIL_CLOSED",
+    "ALREADY_PASSING_BASELINE_REJECTED",
+    "PATH_ESCAPE_REJECTED",
+    "DETERMINISTIC_REPLAY",
+    "ZERO_MODEL_ZERO_SPEND"
+  ],
+  "authority": {
+    "bounded_candidate_construction_verified": true,
+    "general_software_repair_complete": false,
+    "natural_language_task_semantics": false,
+    "mergeability_authority": false,
+    "frontiercode_score_authority": false,
+    "promotion_authority": false,
+    "terminal_authority": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "model_dependency_count": 0,
+    "external_capability_provider_count": 0
+  }
+}
