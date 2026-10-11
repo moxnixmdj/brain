@@ -1,0 +1,88 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_PUBLIC_MODEL_PAYLOAD_BOUNDARY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PUBLIC_OWNER_PAYLOAD_STRUCTURED_RESULT_FIELDS_BOUND__SCORER_STATE_NOT_EXPOSED__EMPIRICAL_REVERSE_ENGINEERING_NONAUTHORITATIVE__ZERO_CREDIT",
+  "mission_lock": "PROVE_AA_BRIEFCASE_V1_1_BRAIN_ELO_GE_1822_ONLY",
+  "source_archive": {
+    "repository": "fstandhartinger/model-market-comparison",
+    "commit": "f41e79c44f3d154c8d89487b2cdd23014edf0828",
+    "evidence_packet": "data/raw/benchmarks/daily-evidence/2026-09-25T08-50-35-039Z/gauntlet/protocol-aa-briefcase-1.1/packet-r1.md",
+    "captured_owner_model_page": "https://artificialanalysis.ai/models/gpt-5-6-sol",
+    "captured_payload_sha256": "8b5327aa8a700df5b699cb1df822a8e7bf8314e632a01789da18e0ab098247ae",
+    "retrieved_at": "2026-09-25T08:39:11.380Z"
+  },
+  "public_owner_payload_projection": {
+    "root_field": "briefcaseBreakdown",
+    "observed_schema": {
+      "overall": [
+        "elo",
+        "lower95ci",
+        "upper95ci"
+      ],
+      "rubricPassRate": "NUMBER",
+      "analyticalQuality": [
+        "elo",
+        "lower95ci",
+        "upper95ci"
+      ],
+      "presentation": [
+        "elo",
+        "lower95ci",
+        "upper95ci"
+      ]
+    },
+    "headline_registry_mapping": "briefcaseBreakdown.overall.elo",
+    "interpretation": "OVERALL_ELO_IS_SERVED_AS_AN_OWNER_COMPUTED_SOURCE_FIELD__NOT_RECOMPUTED_BY_THE_ARCHIVE_FROM_DISPLAYED_COMPONENTS"
+  },
+  "owner_methodology_binding": {
+    "sources": [
+      "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
+      "https://artificialanalysis.ai/evaluations/aa-briefcase",
+      "https://huggingface.co/datasets/ArtificialAnalysis/AA-Briefcase-Lite"
+    ],
+    "facts": [
+      "AA_BRIEFCASE_ELO_AGGREGATES_ANALYTICAL_QUALITY_PRESENTATION_AND_RUBRIC_TASK_SUCCESS",
+      "RUBRIC_PERFORMANCE_IS_CONVERTED_TO_ELO_VIA_SYNTHETIC_HEAD_TO_HEAD_MATCHES_USING_MAXIMUM_LIKELIHOOD_ELO_AGGREGATION",
+      "EACH_SCOPE_IS_FITTED_WITH_CROWD_BT",
+      "GPT_5_5_MEDIUM_IS_ANCHORED_AT_1000"
+    ],
+    "missing_from_public_rendered_contract": [
+      "EXACT_SYNTHETIC_RUBRIC_HEAD_TO_HEAD_ROW_CONSTRUCTION",
+      "FROZEN_SCOPE_JUDGE_QUALITY_PARAMETERS_FOR_AQ_AND_PRESENTATION",
+      "FROZEN_COMPARISON_GRAPH_AND_REALIZED_JUDGE_ASSIGNMENTS",
+      "EXACT_OVERALL_FIT_ROW_CONSTRUCTION_OR_CROSS_SCOPE_COMBINATION_PROGRAM",
+      "REGULARIZATION_OPTIMIZER_AND_ANY_LOAD_BEARING_POSTFIT_DETAILS"
+    ]
+  },
+  "identification_result": {
+    "model_payload_contains_complete_scorer_state": false,
+    "displayed_component_vector_determines_headline_by_publicly_bound_formula": false,
+    "finite_public_rows_can_empirically_fit_candidate_formula": true,
+    "empirical_fit_is_terminally_authoritative": false,
+    "reason": "FINITE_INPUT_OUTPUT_ROWS_DO_NOT_IDENTIFY_AN_UNPUBLISHED_SCORER_PROGRAM__AND_OVERALL_ELO_IS_ALREADY_A_SEPARATELY_SERVED_OWNER_RESULT_FIELD"
+  },
+  "scheduler_effect": {
+    "delete": [
+      "SEARCH_MODEL_PAGE_PAYLOAD_FOR_HIDDEN_SCORER_PARAMETERS_ALREADY_SHOWN_ABSENT_FROM_BOUND_SCHEMA",
+      "PROMOTE_EQUAL_AVERAGE_OR_OTHER_REGRESSION_HYPOTHESIS_FROM_FINITE_COMPONENT_ROWS",
+      "TREAT_BRIEFCASE_BREAKDOWN_AS_A_REPRODUCIBLE_OWNER_SCORER"
+    ],
+    "preserve": [
+      "SEARCH_FOR_AN_EXPLICIT_OWNER_AUTHORED_SCORER_IMPLEMENTATION_OR_FORMULA_IF_PREEXISTING_PUBLICLY",
+      "SEARCH_FOR_A_CONTENT_ADDRESSED_BRAIN_UNROUNDED_ELO_FLOOR_GE_1822",
+      "SOUND_ALL_WORLD_INVARIANCE_ROUTE_IF_A_NEW_RESTRICTED_RUBRIC_OR_JUDGE_CLASS_IS_PROVED"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_OVERALL_ELO_IS_OR_IS_NOT_AN_ARITHMETIC_AVERAGE_OF_COMPONENT_ELOS",
+    "NO_CLAIM_PUBLIC_PAYLOAD_PROVES_OWNER_SCORER_EQUIVARIANCE_OR_UNIQUE_FIT",
+    "NO_BRAIN_SCORE",
+    "NO_LITERAL_1822_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
