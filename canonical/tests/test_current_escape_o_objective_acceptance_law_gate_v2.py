@@ -43,24 +43,60 @@ def make_repo(root: Path, *, o=None, q=None, parked=None, corrupt_count=False) -
     q = [AA] if q is None else list(q)
     parked = [TB] if parked is None else list(parked)
     all_ids = o + q + parked
-    manifest = root / "canonical/governance/ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_20261010_V2.json"
+
+    manifest_rel = "canonical/governance/ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_20261010_V2.json"
+    manifest = root / manifest_rel
     _write(manifest, {
         "schema": gate.MANIFEST_SCHEMA,
         "rows": [{"obligation_id": x} for x in all_ids],
     })
-    _write(root / gate.CUT_PATH, {
-        "schema": gate.CUT_SCHEMA,
-        "status": "CURRENT_ACTIVE_ESCAPE_COLLAPSED_TO_TWO_REUSE_ENGINES__O11_ACTIVE__Q1_ACTIVE__TB_PARKED",
+
+    verify_rel = "canonical/verification/GDPVAL_FIXED_BAR_OWNER_PAIRWISE_NONNECESSITY_VERIFICATION_20261009_V1.json"
+    verify_path = root / verify_rel
+    _write(verify_path, {
+        "schema": gate.GDPVAL_VERIFY_SCHEMA,
+        "status": "PASS__SOURCE_BINDINGS_CURRENT__WOLFRAM_SYMBOLIC_NONNECESSITY_TRUE__ZERO_CREDIT",
+        "conclusion": "EXACT_OWNER_PAIRWISE_SEMANTICS_IS_NOT_NECESSARY_FOR_CURRENT_FIXED_BAR_E1_ACCEPTANCE__PRESERVE_AS_DORMANT_ALTERNATIVE_ROUTE_ONLY",
+    })
+
+    reclass_rel = "canonical/governance/GDPVAL_CURRENT_FIXED_BAR_ENGINE_RECLASSIFICATION_20261011_V1.json"
+    reclass_path = root / reclass_rel
+    _write(reclass_path, {
+        "schema": gate.GDPVAL_RECLASS_SCHEMA,
+        "status": "CURRENT_PRIMARY_ROUTE_RECLASSIFIED__GDPVAL_MOVED_Q_TO_O_FOR_FIXED_BAR_E1__ZERO_CREDIT",
+        "target_obligation": GDP,
         "source_bindings": {
-            "manifest": [
-                "canonical/governance/ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_20261010_V2.json",
-                _blob(manifest),
-            ]
+            "fixed_bar_nonnecessity_verification": {
+                "path": verify_rel,
+                "git_blob_sha": _blob(verify_path),
+            }
+        },
+        "current_acceptance_shape": {
+            "acceptance_relation_class": "OBJECTIVE_FIXED_BAR",
+            "hidden_owner_pairwise_relation_is_free_variable_of_decision": False,
+        },
+        "engine_effect": {
+            "previous": "Q_ACCEPTANCE_RELATION_ROBUST_COMMON_POLICY",
+            "current": "O_OBJECTIVE_ACCEPTANCE_INSTANTIATION",
+            "new_primitive_required": False,
+        },
+    })
+
+    cut_rel = gate.CUT_PATH.as_posix()
+    cut_path = root / cut_rel
+    cut_status = "CURRENT_ACTIVE_ESCAPE_COLLAPSED_TO_TWO_REUSE_ENGINES__O11_ACTIVE__Q1_ACTIVE__TB_PARKED__GDPVAL_FIXED_BAR_RECLASSIFIED_Q_TO_O__ZERO_CREDIT"
+    _write(cut_path, {
+        "schema": gate.CUT_SCHEMA,
+        "status": cut_status,
+        "source_bindings": {
+            "manifest": [manifest_rel, _blob(manifest)],
+            "gdpval_fixed_bar_reclassification": [reclass_rel, _blob(reclass_path)],
         },
         "current_partition": {
             "total_escape_rows": len(all_ids),
             "active_rows": (len(o) + len(q) + 1) if corrupt_count else len(o) + len(q),
             "parked_rows": len(parked),
+            "active_gap_b_rows": 0,
             "active_o_rows": len(o),
             "active_q_rows": len(q),
             "active_o_obligation_ids": o,
@@ -69,6 +105,22 @@ def make_repo(root: Path, *, o=None, q=None, parked=None, corrupt_count=False) -
         },
     })
 
+    _write(root / gate.CURRENT_RESIDUAL_PATH, {
+        "schema": gate.CURRENT_RESIDUAL_SCHEMA,
+        "status": "DERIVED_CURRENT_CLASSIFICATION__TEST",
+        "escape_current_topology": {
+            "frozen_obligation_count": 13,
+            "active_gap_a_acquisition_rows": 12,
+            "active_gap_b_strict_progress_rows": 0,
+            "parked_unresolved_rows": 1,
+            "parked_obligation_ids": [TB],
+        },
+        "current_escape_two_engine_minimum_delta_cut": {
+            "path": cut_rel,
+            "git_blob_sha": _blob(cut_path),
+            "status": cut_status,
+        },
+    })
 
 def claim(oid: str) -> dict:
     return {"policy": {"predicate_id": oid}, "evidence": {}, "current_identity": {}}
@@ -158,6 +210,28 @@ class CurrentProjectionGateTests(unittest.TestCase):
             out = gate.evaluate({"obligation_id": GDP, "claim_spec": claim(GDP)}, repo_root=root)
         self.assertFalse(out["pass"])
         self.assertIn("CURRENT_CUT_MANIFEST_BLOB_DRIFT", out["reason"])
+
+    def test_current_residual_cut_pointer_drift_fails_closed(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d); make_repo(root)
+            current_path = root / gate.CURRENT_RESIDUAL_PATH
+            current = json.loads(current_path.read_text(encoding="utf-8"))
+            current["current_escape_two_engine_minimum_delta_cut"]["git_blob_sha"] = "0" * 40
+            _write(current_path, current)
+            out = gate.evaluate({"obligation_id": GDP, "claim_spec": claim(GDP)}, repo_root=root)
+        self.assertFalse(out["pass"])
+        self.assertEqual(out["status"], "FAIL_CLOSED")
+        self.assertIn("CURRENT_TWO_ENGINE_CUT_BLOB_DRIFT", out["reason"])
+
+    def test_gdpval_reclassification_verification_drift_fails_closed(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d); make_repo(root)
+            verify_path = root / "canonical/verification/GDPVAL_FIXED_BAR_OWNER_PAIRWISE_NONNECESSITY_VERIFICATION_20261009_V1.json"
+            verify_path.write_text(verify_path.read_text(encoding="utf-8") + "\n", encoding="utf-8")
+            out = gate.evaluate({"obligation_id": GDP, "claim_spec": claim(GDP)}, repo_root=root)
+        self.assertFalse(out["pass"])
+        self.assertEqual(out["status"], "FAIL_CLOSED")
+        self.assertIn("GDPVAL_RECLASSIFICATION_VERIFICATION_BLOB_DRIFT", out["reason"])
 
 
 if __name__ == "__main__":
