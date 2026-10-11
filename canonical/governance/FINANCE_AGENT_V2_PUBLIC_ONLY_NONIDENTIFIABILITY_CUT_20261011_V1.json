@@ -43,14 +43,24 @@
     "q26_q27_precision_coverage_merged_commit": "7979d9c1e636ca0b4e07871d7dc8c2a1cd492989",
     "independent_native_core_tests": "62/62 PASS",
     "explicit_public_donor_free_canaries": 12,
-    "vals_api_key_current_probe": "ABSENT_2026_10_11",
+    "vals_api_key_current_probe": "UNKNOWN__WORKFLOW_NEVER_EXECUTED_ANY_STEP",
     "vals_private_test_authority": "NOT_OBTAINED",
-    "target_proved": false
+    "target_proved": false,
+    "vals_api_key_probe_evidence": {
+      "workflow_runs": [
+        37566568173,
+        37608643801
+      ],
+      "observed_job_steps": 0,
+      "retrievable_job_logs": false,
+      "inference": "NO_VALID_EVIDENCE_OF_PRESENT_OR_ABSENT_SECRET"
+    }
   },
   "mission_lock": "DO_NOT_SPEND_CRITICAL_PATH_TIME_ACCUMULATING_PUBLIC_MATCHES ONCE THEY NO_LONGER CHANGE A UNIVERSAL_PROOF_OBLIGATION. PRIORITIZE AUTHENTIC SCORE AUTHORITY OR A TRUE HIDDEN_SCOPE_ENTAILMENT THEOREM.",
   "hard_nonclaims": [
     "THIS_CUT_DOES_NOT_PROVE_BRAIN_FAILS_FINANCE_AGENT_V2",
     "THIS_CUT_DOES_NOT_PROVE_BRAIN_PASSES_FINANCE_AGENT_V2",
-    "PUBLIC_CANARY_COUNT_IS_CAPABILITY_EVIDENCE_NOT_PRIVATE_SCORE_MASS"
+    "PUBLIC_CANARY_COUNT_IS_CAPABILITY_EVIDENCE_NOT_PRIVATE_SCORE_MASS",
+    "FAILED_ZERO_STEP_VALS_CREDENTIAL_PROBES_MUST_NOT_BE_INTERPRETED_AS_CREDENTIAL_ABSENCE"
   ]
 }
