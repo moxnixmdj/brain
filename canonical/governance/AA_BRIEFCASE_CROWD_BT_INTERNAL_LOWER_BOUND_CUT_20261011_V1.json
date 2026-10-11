@@ -1,0 +1,85 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_CROWD_BT_INTERNAL_LOWER_BOUND_CUT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "INTERNAL_ONLY_ROUTE_SHARPENED__CROWD_BT_INFORMATION_ERASURE_WITNESS__NO_FINITE_1822_LOWER_BOUND_FROM_CURRENT_INTERNAL_EVIDENCE__ZERO_CREDIT",
+  "mission_lock": "PROVE_AA_BRIEFCASE_V1_1_BRAIN_ELO_GE_1822_ONLY",
+  "authorities": {
+    "aa_scope": "canonical/governance/AA_BRIEFCASE_ARTIFACT_SCOPE_COVERAGE_MAP_V1.json",
+    "aa_wake_gate": "canonical/governance/AA_BRIEFCASE_Q1_WAKE_GATE_TRUTH_REPAIR_20261011_V1.json",
+    "professional_state": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
+    "top_support_theorem": "canonical/governance/HIDDEN_EVALUATOR_TARGET_FREE_TOP_SUPPORT_DOMINANCE_V1.json",
+    "top_support_verification": "canonical/verification/HIDDEN_EVALUATOR_TARGET_FREE_TOP_SUPPORT_DOMINANCE_WOLFRAM_VERIFICATION_20261005_V1.json",
+    "crowd_bt_kernel": "canonical/runtime/gdpval_aa_v21_crowd_bt_kernel_v1.py"
+  },
+  "theorem": {
+    "crowd_bt_observed_preference": "P_OBS=ETA*P_TRUE+(1-ETA)*(1-P_TRUE)",
+    "derivative_with_respect_to_true_preference": "2*ETA-1",
+    "information_erasure_witness": {
+      "judge_quality_eta": 0.5,
+      "consequence": "P_OBS=0.5_FOR_ALL_P_TRUE_IN_[0,1]",
+      "meaning": "EVEN_PERFECT_LATENT_MATERIAL_SUPERIORITY_CANNOT_FORCE_AN_OBSERVED_PAIRWISE_ADVANTAGE_WHEN_ETA_HALF_REMAINS_ADMISSIBLE"
+    },
+    "finite_realization_witness": {
+      "statement": "FOR_ANY_0<P_OBS<1_AND_ANY_FINITE_N__PROBABILITY_OF_N_OBSERVED_LOSSES_IS_(1-P_OBS)^N>0",
+      "consequence": "EXPECTED_PAIRWISE_SUPERIORITY_ALONE_CANNOT_DETERMINISTICALLY_FORCE_A_REALIZED_FINITE_RATING_FLOOR"
+    },
+    "conclusion": "WITHOUT_BOUND_FROZEN_JUDGE_SIGNAL__REALIZED_PAIRWISE_OUTCOMES__AND_FROZEN_SCORER_RELATION__CURRENT_INTERNAL_CAPABILITY_EVIDENCE_HAS_NO_SOUND_FINITE_AA_BRIEFCASE_ELO_LOWER_BOUND"
+  },
+  "current_internal_route_obligations": [
+    {
+      "id": "A_TASK_SCOPE_COMPLETE",
+      "current": false,
+      "reason": "PRIVATE_91_TASK_CONTENT_AND_TASK_SPECIFIC_RUBRIC_TRUTHS_ARE_NOT_SCOPE_COMPLETE"
+    },
+    {
+      "id": "B_UNIVERSAL_BRAIN_TOP_SUPPORT",
+      "current": false,
+      "reason": "24_OF_24_PROFESSIONAL_PROPERTY_TRUTHS_PROVE_CONTRACT_BEHAVIOR_AND_FAIL_CLOSED_TOTALITY__NOT_UNIVERSAL_TOP_QUALITY_OUTPUT_FOR_EVERY_ADMISSIBLE_AA_TASK"
+    },
+    {
+      "id": "C_FROZEN_JUDGE_SIGNAL_AND_REALIZED_OUTCOME_BOUND",
+      "current": false,
+      "reason": "NO_BOUND_FROZEN_AA_BRIEFCASE_JUDGE_QUALITY_LOWER_BOUND_OR_REALIZED_PAIRWISE_OUTCOME_STATE"
+    },
+    {
+      "id": "D_FROZEN_SCORER_MONOTONICITY_TO_1822",
+      "current": false,
+      "reason": "NO_SCOPE_COMPLETE_PROOF_THAT_THE_FROZEN_CROWD_BT_FIT_STATE_MAPS_THE_AVAILABLE_INTERNAL_MATERIAL_ORDER_TO_A_DETERMINISTIC_ELO_FLOOR_GE_1822"
+    }
+  ],
+  "runtime": {
+    "path": "canonical/runtime/aa_briefcase_crowdbt_internal_lower_bound_v1.py"
+  },
+  "tests": {
+    "path": "canonical/tests/test_aa_briefcase_crowdbt_internal_lower_bound_v1.py",
+    "declared_case_count": 8
+  },
+  "local_arithmetic_checks": {
+    "eta_half_erases_signal": true,
+    "signal_slope_signs_correct": true,
+    "finite_all_loss_probability_positive_at_p_obs_0_999_n_91": true,
+    "certainty_requires_p_obs_1": true
+  },
+  "scheduler_effect": {
+    "delete": [
+      "TRY_TO_DERIVE_1822_DIRECTLY_FROM_24_OF_24_PROFESSIONAL_PROPERTY_TRUTHS",
+      "TRY_TO_DERIVE_REALIZED_ELO_FROM_LATENT_MATERIAL_SUPERIORITY_WITH_UNBOUND_JUDGE_NOISE",
+      "BUILD_MORE_GENERIC_PROFESSIONAL_QUALITY_MACHINERY_WITHOUT_CLOSING_A_B_C_OR_D"
+    ],
+    "only_internal_reopen_condition": "PROVE_ALL_A_B_C_D_FROM_EXISTING_INTERNAL_INFORMATION_WITHOUT_ASSUMING_PRIVATE_FACTS",
+    "current_internal_only_terminal_route_open": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_BRAIN_WOULD_SCORE_BELOW_1822",
+    "NO_CLAIM_BRAIN_WOULD_SCORE_ABOVE_1822",
+    "NO_CLAIM_CROWD_BT_JUDGES_ACTUALLY_HAVE_ETA_HALF",
+    "ETA_HALF_IS_AN_ADMISSIBLE_INFORMATION_ERASURE_COUNTERMODEL_WHEN_NO_STRONGER_FROZEN_BOUND_IS_PRESENT",
+    "NO_SCORE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
