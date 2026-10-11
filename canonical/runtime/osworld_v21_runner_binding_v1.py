@@ -26,6 +26,18 @@ def bind_agent_environment(agent: Any, env: Any) -> bool:
     return True
 
 
+def bind_result_dir(agent: Any, result_dir: Any) -> bool:
+    setter = getattr(agent, "set_result_dir", None)
+    if setter is None:
+        return False
+    if not callable(setter):
+        raise RunnerBindingError("AGENT_SET_RESULT_DIR_NOT_CALLABLE")
+    if not isinstance(result_dir, (str, bytes)) and not hasattr(result_dir, "__fspath__"):
+        raise RunnerBindingError("RESULT_DIR_INVALID")
+    setter(result_dir)
+    return True
+
+
 def install(lib_run_single_module: Any) -> dict[str, Any]:
     original = getattr(lib_run_single_module, "run_single_example", None)
     if not callable(original):
@@ -35,6 +47,11 @@ def install(lib_run_single_module: Any) -> dict[str, Any]:
 
     def run_single_example_bound(agent, env, *args, **kwargs):
         bind_agent_environment(agent, env)
+        result_dir = kwargs.get("result_dir")
+        if result_dir is None and len(args) >= 5:
+            result_dir = args[4]
+        if result_dir is not None:
+            bind_result_dir(agent, result_dir)
         return original(agent, env, *args, **kwargs)
 
     setattr(run_single_example_bound, _MARKER, True)
@@ -44,7 +61,7 @@ def install(lib_run_single_module: Any) -> dict[str, Any]:
     return {
         "schema": SCHEMA,
         "status": "INSTALLED",
-        "changed_surface": "PRE_CALL_AGENT_ENVIRONMENT_BINDING_ONLY",
+        "changed_surface": "PRE_CALL_AGENT_ENVIRONMENT_AND_RESULT_DIR_BINDING_ONLY",
         "task_setup_changed": False,
         "step_semantics_changed": False,
         "evaluator_changed": False,
