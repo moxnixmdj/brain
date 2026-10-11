@@ -358,5 +358,21 @@ class GenericGoalToolEffectPlannerV1Tests(unittest.TestCase):
 
 
 
+    def test_compound_identity_preserves_whole_and_atoms(self):
+        contract = compile_goal_contract(
+            "Find the NovaGraph customer and update its batchUpdate status."
+        )
+        resources = {
+            token
+            for intent in contract["intents"]
+            for token in intent["resource_terms"]
+        }
+        self.assertIn("novagraph", resources)
+        self.assertIn("nova", resources)
+        self.assertIn("graph", resources)
+        self.assertIn("batchupdate", resources)
+        self.assertIn("batch", resources)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
