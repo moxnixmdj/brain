@@ -158,7 +158,7 @@ def test_malformed_mixed_browser_action_is_recoverable():
     response, actions = agent.predict("x", {"screenshot": b"x"})
     assert response == ""
     assert actions == ["WAIT"]
-    assert "ACTION_TYPE_UNSUPPORTED:BROWSER_OP" in agent.history[-1]["operation_error"]
+    assert "BROWSER_OP_MUST_BE_SINGLETON_HOST_OPERATION" in agent.history[-1]["operation_error"]
 
 
 def test_browser_failure_becomes_recovery_receipt():
