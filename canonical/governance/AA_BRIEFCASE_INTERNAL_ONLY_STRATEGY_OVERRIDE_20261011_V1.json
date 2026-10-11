@@ -1,0 +1,143 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_INTERNAL_ONLY_STRATEGY_OVERRIDE_20261011_V1",
+  "date": "2026-10-11",
+  "status": "INTERNAL_ONLY_ROUTE_ACTIVE__EXTERNAL_OWNER_HELP_DEACTIVATED__EXACT_1822_REMAINS_OPEN__ZERO_CREDIT",
+  "user_constraint": {
+    "external_help_allowed": false,
+    "waiting_for_owner_response_allowed": false,
+    "goal_substitution_allowed": false
+  },
+  "exact_target": {
+    "predicate_ids": [
+      "PROWORK_AA_BRIEFCASE_GE_1822",
+      "ARTIFACT_AA_BRIEFCASE_GE_1822"
+    ],
+    "benchmark": "AA-Briefcase",
+    "version": "1.1",
+    "frozen_threshold_elo": 1822,
+    "comparator": "Claude Opus 5.5 Max",
+    "observation_date": "2026-09-22"
+  },
+  "admissible_internal_routes": [
+    {
+      "id": "OBSERVATIONAL_EQUIVALENCE",
+      "theorem_basis": "canonical/governance/HIDDEN_EVALUATOR_DOMINANCE_BOUNDARY_V1.json",
+      "requirement": "WHOLE_HIDDEN_SCOPE_BRAIN_OUTPUT_DISTRIBUTION_EQUALS_OR_SOUNDLY_REFINES_TARGET_DISTRIBUTION_PLUS_FROZEN_1822_SCORE_IMPLICATION",
+      "current_state": "NOT_PROVED"
+    },
+    {
+      "id": "UNIVERSAL_TOP_SUPPORT",
+      "theorem_basis": [
+        "canonical/governance/HIDDEN_EVALUATOR_MONOTONE_COUPLING_DOMINANCE_V1.json",
+        "canonical/governance/HIDDEN_EVALUATOR_TARGET_FREE_TOP_SUPPORT_DOMINANCE_V1.json",
+        "canonical/runtime/hidden_evaluator_top_support_dominance_v1.py"
+      ],
+      "requirement": [
+        "TARGET_INDEPENDENT_SCOPE_COMPLETE_OUTCOME_SUPERDOMAIN_COVERING_ALL_AA_ADMISSIBLE_TASK_AND_GRADING_OUTCOMES",
+        "SOUND_COMPLETE_MATERIAL_ORDER_OVER_ALL_LOAD_BEARING_RUBRIC_ANALYTICAL_PRESENTATION_AND_GRADER_RELEVANT_DIMENSIONS",
+        "SCOPE_COMPLETE_PROOF_BRAIN_OUTPUT_SUPPORT_IS_CONFINED_TO_GLOBAL_TOP_CLASS",
+        "SOUND_HIDDEN_EVALUATOR_MONOTONICITY_OR_EQUIVALENT_JUDGE_OUTCOME_DOMINANCE",
+        "SOUND_FROZEN_SCORE_MONOTONICITY_IMPLICATION_TO_ELO_GE_1822"
+      ],
+      "current_state": "NOT_PROVED"
+    }
+  ],
+  "strongest_current_internal_evidence": {
+    "professional_property_truth": {
+      "semantic": 12,
+      "execution": 12,
+      "total": 24,
+      "source": "canonical/verification/PROFESSIONAL_SEMANTIC_V10_TOTALITY_BATCH_INDEPENDENT_VERIFY_20261011_V1.json",
+      "limitation": "PROPERTY_TRUTH_PROVES_CERTIFICATION_AND_FAIL_CLOSED_MACHINERY__NOT_UNIVERSAL_TOP_PERFORMANCE_ON_ALL_PROFESSIONAL_TASKS"
+    },
+    "selected_professional_top_law": {
+      "source": "canonical/governance/V14_P2_PROFESSIONAL_TOP_LAW_SELECTED_CELL_20261007_V1.json",
+      "exact_case_count": 30,
+      "selected_cell_top": true,
+      "global_professional_scope_complete": false,
+      "aa_briefcase_score_claim": false
+    },
+    "public_aa_scope": {
+      "task_count": 91,
+      "project_count": 4,
+      "graded_dimensions": [
+        "BINARY_RUBRIC",
+        "PAIRWISE_ANALYTICAL_QUALITY",
+        "PAIRWISE_PRESENTATION"
+      ],
+      "private_task_and_rubric_contents": true,
+      "source": "canonical/governance/AA_BRIEFCASE_ARTIFACT_SCOPE_COVERAGE_MAP_V1.json"
+    }
+  },
+  "public_scoring_semantics_refresh": {
+    "methodology_version": "4.3.2",
+    "v1_1_change": "PAIRWISE_SCOPES_FITTED_WITH_CROWD_BT",
+    "anchor": "GPT-5.5 (medium)",
+    "anchor_elo": 1000,
+    "rubric_to_elo": "RUBRIC_PASS_RATE_CONVERTED_TO_SYNTHETIC_HEAD_TO_HEAD_MATCHES",
+    "combined_metric": "AGGREGATES_RUBRIC_ANALYTICAL_QUALITY_AND_PRESENTATION",
+    "judge_assignment": "ONE_JUDGE_SAMPLED_FROM_THREE_MODEL_PANEL_PER_VERDICT_WITH_BALANCED_SAMPLING",
+    "implication": "MATERIAL_ARTIFACT_DOMINANCE_ALONE_DOES_NOT_FORMALLY_FIX_REALIZED_HIDDEN_JUDGE_OUTPUTS_WITHOUT_A_JUDGE_MONOTONICITY_CORRECTNESS_OR_OBSERVATIONAL_EQUIVALENCE_PROOF",
+    "sources": [
+      "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
+      "https://artificialanalysis.ai/evaluations/aa-briefcase"
+    ]
+  },
+  "exact_current_internal_missing_premises": [
+    {
+      "id": "AA_SUPERDOMAIN_COMPLETE",
+      "state": "MISSING",
+      "reason": "NO_CONTENT_ADDRESSED_UNIVERSAL_FORMAL_PROOF_CURRENTLY_COVERS_ALL_ADMISSIBLE_AA_TASK_INPUTS_OUTPUTS_AND_GRADING_OUTCOMES"
+    },
+    {
+      "id": "AA_COMPLETE_MATERIAL_ORDER",
+      "state": "MISSING",
+      "reason": "PUBLIC_HIGH_LEVEL_DIMENSIONS_AND_LITE_EXAMPLES_DO_NOT_PROVE_ALL_PRIVATE_TASK_SPECIFIC_RUBRIC_OR_PAIRWISE_DIMENSIONS"
+    },
+    {
+      "id": "BRAIN_GLOBAL_TOP_SUPPORT",
+      "state": "MISSING",
+      "reason": "CURRENT_24_OF_24_PROPERTY_TRUTH_IS_NOT_A_SCOPE_COMPLETE_PERFORMANCE_PROOF_AND_THE_EXISTING_TOP_LAW_IS_ONLY_THE_EXACT_SELECTED_30_CASE_CELL"
+    },
+    {
+      "id": "AA_HIDDEN_JUDGE_MONOTONICITY",
+      "state": "MISSING",
+      "reason": "OFFICIAL_VERDICTS_ARE_REALIZED_BY_SAMPLED_LLM_JUDGES__NO_INTERNAL_PROOF_GUARANTEES_JUDGES_ALWAYS_RESPECT_THE_PROPOSED_MATERIAL_ORDER"
+    },
+    {
+      "id": "FROZEN_1822_SCORE_IMPLICATION",
+      "state": "PARTIAL_NOT_PROVED",
+      "reason": "PUBLIC_CROWD_BT_ANCHOR_AND_AGGREGATION_CLASS_ARE_KNOWN__BUT_NO_COMPLETE_INTERNAL_PROOF_CURRENTLY_MAPS_THE_ABOVE_UNPROVED_WHOLE_SCOPE_DOMINANCE_TO_THE_EXACT_FROZEN_1822_RESULT"
+    }
+  ],
+  "logical_result": {
+    "exact_predicate_proved_now": false,
+    "exact_predicate_disproved": false,
+    "current_internal_evidence_decides_predicate": false,
+    "reason": "TWO_WORLDS_REMAIN_CONSISTENT_WITH_ALL_CURRENT_INTERNAL_EVIDENCE__ONE_WHERE_HIDDEN_TASK_JUDGE_OUTCOMES_YIELD_BELOW_1822_AND_ONE_WHERE_THEY_YIELD_AT_OR_ABOVE_1822",
+    "forbidden_inference": "DO_NOT_TURN_24_OF_24_PROPERTY_TRUTH_OR_LOCAL_30_CASE_TOP_LAW_INTO_AA_1822_CREDIT"
+  },
+  "scheduler_override": {
+    "deactivate": [
+      "WAIT_FOR_ARTIFICIAL_ANALYSIS_REPLY",
+      "OWNER_SIDE_AA_BRIEFCASE_RUN_AS_ACTIVE_PLAN",
+      "NEW_EXTERNAL_OUTREACH"
+    ],
+    "activate": [
+      "PROVE_AA_TARGET_INDEPENDENT_SCOPE_COMPLETE_SUPERDOMAIN",
+      "PROVE_COMPLETE_AA_MATERIAL_ORDER_OR_STRONGER_EVALUATOR_CLASS_RESTRICTION",
+      "PROVE_BRAIN_GLOBAL_TOP_SUPPORT_OVER_THAT_SUPERDOMAIN",
+      "PROVE_HIDDEN_JUDGE_AND_FROZEN_SCORE_MONOTONICITY_OR_OBSERVATIONAL_EQUIVALENCE"
+    ],
+    "stop_rule": "NO_AA_1822_CREDIT_UNTIL_ONE_INTERNAL_ROUTE_PASSES_CANONICAL_INTERNAL_ONLY_GATE"
+  },
+  "internal_gate": {
+    "path": "canonical/runtime/aa_briefcase_internal_only_certification_gate_v1.py"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
