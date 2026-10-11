@@ -551,6 +551,46 @@ def run(
                 finished["capability_expansion_attempts"] = expansion_attempts
                 finished["expanded_capability_ids"] = list(expanded_capability_ids)
                 finished["expanded_problem"] = deepcopy(problem)
+
+                proposal_donors = sorted({
+                    str(row.get("source_id") or "")
+                    for attempt in attempts
+                    if isinstance(attempt, Mapping)
+                    for row in (attempt.get("autonomous_proposal_attempts") or [])
+                    if isinstance(row, Mapping)
+                    and row.get("status") == "PACKET_BOUND"
+                    and str(row.get("source_id") or "")
+                })
+                expansion_donors = sorted({
+                    str(row.get("source_id") or "")
+                    for attempt in expansion_attempts
+                    if isinstance(attempt, Mapping)
+                    for row in (attempt.get("admitted") or [])
+                    if isinstance(row, Mapping)
+                    and str(row.get("source_id") or "")
+                })
+                donor_used = bool(proposal_donors or expansion_donors)
+                finished["acquisition_donor_provenance"] = {
+                    "used": donor_used,
+                    "proposal_source_ids": proposal_donors,
+                    "capability_expansion_source_ids": expansion_donors,
+                    "donor_role": (
+                        "ACQUISITION_SOURCE_ONLY" if donor_used else "NONE"
+                    ),
+                    "runtime_credit_authority": False,
+                    "transfer_gate_required_before_reuse": donor_used,
+                }
+                if donor_used:
+                    if finished.get("verified_executable_skill") is not None:
+                        finished["donor_contaminated_pretransfer_skill_verification"] = (
+                            finished.get("skill_verification_authentication")
+                        )
+                    finished["verified_executable_skill"] = None
+                    finished["skill_verification_authentication"] = None
+                    finished["verified_skill_reuse_authorized"] = False
+                    finished["skill_candidate_reuse_authorized"] = False
+                    finished["capability_credit_delta"] = 0
+                    finished["ownership_credit_delta"] = 0
                 if resume_auth is not None:
                     finished["resume_authentication"] = {
                         "receipt": resume_auth["receipt"],

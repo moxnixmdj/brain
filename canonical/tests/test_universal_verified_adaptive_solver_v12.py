@@ -99,6 +99,11 @@ def test_zero_graph_can_expand_and_solve(tmp_path):
     assert out["verified_facts"] == ["GOAL"]
     assert out["expanded_capability_ids"] == ["new-route"]
     assert out["capability_expansion_attempts"][0]["status"] == "EXPANSION_ADMITTED"
+    provenance = out["acquisition_donor_provenance"]
+    assert provenance["used"] is True
+    assert provenance["capability_expansion_source_ids"] == ["test-expander"]
+    assert provenance["runtime_credit_authority"] is False
+    assert provenance["transfer_gate_required_before_reuse"] is True
 
 
 
