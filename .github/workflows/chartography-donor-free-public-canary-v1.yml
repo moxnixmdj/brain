@@ -1,0 +1,74 @@
+name: Chartography donor-free public canary V1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/chartography-donor-free-public-canary-v1.yml"
+      - "canonical/runtime/chartography_professional_semantics_v1.py"
+      - "canonical/verification/run_chartography_donor_free_public_canary_v1.py"
+      - "canonical/tests/test_chartography_professional_semantics_v1.py"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install pinned OCR and Pillow
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends tesseract-ocr tesseract-ocr-eng libtesseract5
+          python -m pip install --disable-pip-version-check --no-input "pillow>=10,<13"
+      - name: Reject general-purpose model runtime references
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          p=Path("canonical/runtime/chartography_professional_semantics_v1.py").read_text().lower()
+          forbidden=["transformers","torch","llama","qwen","minicpm","anthropic","openai","gemini","ollama"]
+          hits=[x for x in forbidden if x in p]
+          if hits: raise SystemExit("FORBIDDEN_RUNTIME_MODEL_REFERENCE:"+",".join(hits))
+          print("PASS_ZERO_GENERAL_PURPOSE_MODEL_REFERENCES")
+          PY
+      - name: Unit tests
+        run: python -m unittest -v canonical.tests.test_chartography_professional_semantics_v1
+      - name: Enforce Brain credit subject attribution gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from canonical.runtime.chartography_brain_credit_subject_gate_v1 import admit_brain_credit_subject
+          p=Path("canonical/governance/CHARTOGRAPHY_BRAIN_NATIVE_PROFESSIONAL_SEMANTIC_SUBJECT_V1.json")
+          out=admit_brain_credit_subject(json.loads(p.read_text()))
+          assert out["brain_credit_subject_admissible"] is True
+          assert out["model_dependency_count"] == 0
+          assert out["external_model_runtime_dependency_count"] == 0
+          assert out["benchmark_score_proved"] is False
+          print("PASS_BRAIN_CREDIT_SUBJECT_ATTRIBUTION_ONLY")
+          PY
+      - name: Bind exact Surge public samples
+        shell: bash
+        run: |
+          set -euo pipefail
+          git clone --filter=blob:none https://github.com/surge-ai/chartography.git _chartography_official
+          cd _chartography_official
+          git checkout --detach 3f1bf837232d3918c2cc35c6e2418c9e70d2a57b
+          test "$(git rev-parse HEAD)" = "3f1bf837232d3918c2cc35c6e2418c9e70d2a57b"
+      - name: Run donor-free public canary
+        run: python canonical/verification/run_chartography_donor_free_public_canary_v1.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: chartography-donor-free-public-canary-v1
+          path: _chartography_out/result.json
+          if-no-files-found: warn
