@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_V5_PUBLIC_NONHLE_FRESH_HOLDOUT_FREEZE_20261011_V1",
+  "date": "2026-10-11",
+  "status": "FROZEN_PREEXPOSURE__UNTOUCHED_PUBLIC_HOLDOUT_ROWS_50_TO_74__ZERO_HLE_CASES",
+  "subject": {
+    "path": "canonical/runtime/hle_native_open_domain_research_v5.py",
+    "git_blob_sha": "ae6006af1e578b0690357756e0b899a10323a5f4",
+    "introduced_commit": "d63352054045a756b871d022b69ac720869fa082",
+    "architecture": "ZERO_MODEL_MULTISOURCE_EVIDENCE_SPAN_RANKER"
+  },
+  "diagnostic_history": {
+    "dataset": "ai-safety-institute/trivia_qa_verified",
+    "split": "validation",
+    "consumed_slices": ["rows_0_to_24", "rows_25_to_49"],
+    "rows_0_to_24_v4_diagnostic_pass_but_tuned": true,
+    "rows_25_to_49_v4_fresh_holdout_failed": true,
+    "all_rows_0_to_49_now_diagnostic_only": true
+  },
+  "fresh_holdout": {
+    "dataset": "ai-safety-institute/trivia_qa_verified",
+    "split": "validation",
+    "offset": 50,
+    "length": 25,
+    "slice": "rows_50_to_74",
+    "questions_inspected_before_freeze": false,
+    "gold_inspected_before_freeze": false,
+    "minimum_attempt_rate": 0.25,
+    "minimum_normalized_exact_rate": 0.20,
+    "solver_must_not_receive_gold": true,
+    "gold_may_be_refetched_only_after_all_25_commitments_are_sealed": true
+  },
+  "solver_invariants": [
+    "NO_EXTERNAL_GENERAL_PURPOSE_MODEL_COGNITION",
+    "NO_EXTERNAL_MODEL_SOLVER_OUTPUT_COUNTS_AS_BRAIN_CAPABILITY",
+    "HLE_CONTAMINATION_BLOCKLIST_APPLIED_TO_GENERAL_WEB_RESULTS",
+    "NO_HLE_QUESTION_OR_GOLD_CONTENT_USED_FOR_V5_DEVELOPMENT",
+    "CANDIDATE_OUTPUT_HAS_ZERO_CORRECTNESS_AUTHORITY_BEFORE_SCORING"
+  ],
+  "promotion_rule": {
+    "if_fresh_holdout_passes": "V5_MAY_ADVANCE_TO_NEXT_PRETERMINAL_QUALIFICATION_STAGE_BUT_NOT_HLE_SCORE_CREDIT",
+    "if_fresh_holdout_fails": "ROWS_50_TO_74_BECOME_DIAGNOSTIC_ONLY__REPAIR_TO_NEW_VERSION__USE_NEW_UNTOUCHED_SLICE",
+    "public_holdout_pass_is_hle_score": false
+  },
+  "benchmark_integrity": {
+    "hle_questions_consumed": 0,
+    "hle_gold_consumed": 0,
+    "hle_score_credit": 0
+  },
+  "target_score_claimed": false,
+  "hle_67_7_certified": false,
+  "incremental_spend_usd": 0
+}
