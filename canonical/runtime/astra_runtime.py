@@ -4270,7 +4270,7 @@ def _goal_action(action):
         producer_capability_id=str(args.get("producer_capability_id") or "").strip()
         if not all((fmt,json_path,binary_path,producer_project,producer_capability_id)):
             return {"type":typ,"verified":False,"error":"INDEPENDENT_CODEC_VERIFIER_ARGS_INCOMPLETE"}
-        import independent_pypi_codec_verifier
+        from canonical.runtime import independent_pypi_codec_verifier
         evidence=independent_pypi_codec_verifier.verify(
             fmt,json_path,binary_path,producer_project,ROOT
         )
@@ -4299,7 +4299,7 @@ def _goal_action(action):
         producer_capability_id=str(args.get("producer_capability_id") or "").strip()
         if not all((fmt,json_path,binary_path,producer_project,producer_capability_id)):
             return {"type":typ,"verified":False,"error":"INDEPENDENT_NPM_CODEC_VERIFIER_ARGS_INCOMPLETE"}
-        import independent_npm_codec_verifier
+        from canonical.runtime import independent_npm_codec_verifier
         evidence=independent_npm_codec_verifier.verify(
             fmt,json_path,binary_path,producer_project,ROOT
         )
