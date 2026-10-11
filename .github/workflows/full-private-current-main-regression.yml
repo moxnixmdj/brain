@@ -30,7 +30,7 @@ jobs:
 
       - name: Install exact test runner
         run: |
-          python -m pip install --disable-pip-version-check pytest==9.1.1 numpy pydantic python-docx Pillow opencv-python-headless langdetect
+          python -m pip install --disable-pip-version-check pytest==9.1.1 numpy pydantic python-docx Pillow opencv-python-headless langdetect pypdf cadquery
 
       - name: Record exact subject
         run: |
