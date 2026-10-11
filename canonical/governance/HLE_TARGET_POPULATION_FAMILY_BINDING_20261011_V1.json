@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_TARGET_POPULATION_FAMILY_BINDING_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PRIMARY_SOURCE_POPULATION_FAMILY_REDUCTION__ORIGINAL_HLE_BOUND__EXACT_REVISION_STILL_OPEN__ZERO_CREDIT",
+  "target_predicate": "HLE_TOOLS_GE_67_7",
+  "target_public_description": {
+    "anthropic_target_name": "Humanity's Last Exam (HLE)",
+    "anthropic_target_question_count": 2500,
+    "target_score": 0.677
+  },
+  "official_population_families": [
+    {
+      "id": "cais/hle",
+      "role": "ORIGINAL_HLE",
+      "question_count": 2500,
+      "official_load_path": "load_dataset('cais/hle', split='test')",
+      "current_public_file": "data/test-00000-of-00001.parquet",
+      "current_public_size_bytes": 274276147,
+      "current_readme_revision_short": "f22d109",
+      "access": "HUGGINGFACE_AUTO_GATE__LOGIN_CONTACT_SHARING_AND_CONDITION_ACCEPTANCE_REQUIRED"
+    },
+    {
+      "id": "cais/hle-rolling",
+      "role": "DYNAMIC_FORK_OF_ORIGINAL_HLE",
+      "excluded_from_67_7_target_family": true
+    },
+    {
+      "id": "cais/hle-diamond",
+      "role": "REFINED_1000_QUESTION_SUBSET_OR_DERIVATIVE",
+      "question_count": 1000,
+      "excluded_from_67_7_target_family": true
+    }
+  ],
+  "deduction": {
+    "statement": "Anthropic explicitly reports the 67.7 result on 2500-question HLE. CAIS separately names the dynamic HLE-Rolling fork and the 1000-question HLE-Diamond dataset. Therefore the target population family is the original HLE family represented publicly by cais/hle, not HLE-Rolling or HLE-Diamond.",
+    "remaining_revision_obligation": "ANTHROPIC_DOES_NOT_PUBLICLY_NAME_A_CONTENT_HASH_OR_HUGGINGFACE_REVISION_FOR_THE_2500_QUESTION_RUN_IN_THE_CURRENTLY_BOUND_EVIDENCE__SO_EXACT_BYTE_REVISION_IDENTITY_REMAINS_OPEN_UNTIL_AUTHORIZED_ACCESS_AND_REVISION_BINDING_OR_A_STRONGER_EQUIVALENCE_CERTIFICATE"
+  },
+  "scheduler_effect": {
+    "delete": [
+      "AMBIGUITY_BETWEEN_ORIGINAL_HLE_AND_HLE_DIAMOND",
+      "AMBIGUITY_BETWEEN_ORIGINAL_HLE_AND_HLE_ROLLING"
+    ],
+    "preserve": [
+      "AUTHORIZED_CAIS_HLE_MATERIAL_ACCESS",
+      "EXACT_TARGET_REVISION_OR_SCOPE_COMPLETE_EQUIVALENCE_BINDING",
+      "SOLVER_GOLD_SEPARATION",
+      "AUTHENTIC_FIVE_TRIAL_EXECUTION",
+      "CONTENT_ADDRESSED_SCORE_CERTIFICATE"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_CURRENT_CAIS_HLE_MAIN_BYTES_EQUAL_ANTHROPIC_PRIVATE_EVALUATION_BYTES_WITHOUT_A_REVISION_RECEIPT",
+    "NO_HLE_CASE_CONTENT_READ",
+    "NO_HLE_SCORE_OR_ACCEPTANCE_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
