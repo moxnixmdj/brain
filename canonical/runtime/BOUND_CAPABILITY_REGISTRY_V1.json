@@ -3830,7 +3830,14 @@
         "test_git_blob_sha": "fa1d4fd82de4aa956752126dc5f94908986e7295",
         "model_dependency_count": 0,
         "external_capability_provider_count": 0,
-        "incremental_spend_usd": 0
+        "incremental_spend_usd": 0,
+        "fresh_non_benchmark_qualification": {
+          "status": "PASS_6_OF_6_TWO_CARRIER_REPLAY",
+          "receipt_path": "canonical/verification/FRESH_NON_BENCHMARK_SOFTWARE_TASK_QUALIFICATION_V1_20261011.json",
+          "qualification_git_blob_sha": "aade66f2dfe79be004eaa25d4aa013b41f0fe1c5",
+          "qualification_sha256": "45cbc46c8b73f8055dc0f1a2237c89f5139e1f0b88bbe8afbf5b161da0eca822",
+          "benchmark_credit_delta": 0
+        }
       }
     }
   },
