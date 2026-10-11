@@ -1646,8 +1646,21 @@ def compile_hypotheses(
         "COLORS_BY_PIXEL_COUNT_DESC",
         "DOMINANT_EXCLUSION_COUNT_DESC",
         "MAX_FREQUENCY_COLORS_LEFT_RIGHT",
+        "CENTROID_AXIS_SEQUENCE",
+        "UNIQUE_ENCLOSURE_COLOR",
+        "ANOMALY_DENSE_REGION_COLOR",
+        "PERIODIC_MISSING_PATCH",
     ):
         h = {"kind": kind}
+        if _consistent(h, pairs):
+            candidates.append(h)
+
+    symmetry_mapping = _infer_symmetry_scalar(pairs)
+    if symmetry_mapping is not None:
+        h = {
+            "kind": "SYMMETRY_SCALAR_CLASSIFIER",
+            "mapping": dict(sorted(symmetry_mapping.items())),
+        }
         if _consistent(h, pairs):
             candidates.append(h)
 
@@ -1721,6 +1734,11 @@ def compile_hypotheses(
             "MARKER_POSITION_ROW_FILL",
             "EIGHT_NEIGHBOR_COLOR_MULTISET_RULE",
             "COUNT_AND_FREQUENCY_REDUCTIONS",
+            "CENTROID_AXIS_SEQUENCE_REDUCTION",
+            "SYMMETRY_SCALAR_CLASSIFICATION",
+            "UNIQUE_ENCLOSURE_COLOR_SELECTION",
+            "ANOMALY_DENSE_REGION_SELECTION",
+            "PERIODIC_MISSING_PATCH_RECONSTRUCTION",
             "NON_BACKGROUND_BOUNDING_BOX_CROP",
             "UNIQUE_LARGEST_OR_SMALLEST_COMPONENT_CROP",
         ],
