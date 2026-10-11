@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_ARC_AGI2_COMBINED_SOLVER_PUBLIC_EVAL_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "FALSIFICATION_COMPLETE__ZERO_OF_120__V16_PLUS_PROGRAM_INVENTOR_NO_TRANSFER",
+  "preexposure": "canonical/governance/ARC_AGI2_PUBLIC_EVAL_COMBINED_SOLVER_PREEXPOSURE_20261011_V1.json",
+  "dataset": {
+    "repository": "arcprize/ARC-AGI-2",
+    "commit": "f3283f727488ad98fe575ea6a5ac981e4a188e49",
+    "split": "data/evaluation",
+    "task_count": 120,
+    "corpus_sha256": "ddb0a9f8794407f47ff9dc692ef7d3e578ddd503c92f555a4f38b509b0ba05aa"
+  },
+  "subject": {
+    "branch": "successor/general-visual-program-inventor-v1-20261011",
+    "combined_solver_blob_sha": "c560a96332c34fe259496bf3cb47de53e6953274",
+    "arc_v16_runtime_blob_sha": "f48469c2d54b6698cadabef05f9078dd5902853c",
+    "inventor_blob_sha": "c090fb50b00bdc285680b49ca7c95ce618e23826",
+    "adapter_blob_sha": "617e9b97f2092af4e2c31e3cfcbc0bae4dd9ffd7",
+    "aggregate_evaluator_blob_sha": "b16c251dd4a2dd5b59a11291ef1d592379cabc66"
+  },
+  "result": {
+    "exact_tasks_solved_combined": 0,
+    "exact_task_solve_rate_combined": 0.0,
+    "exact_tasks_solved_by_selected_direct_attempts": 0,
+    "exact_task_solve_rate_selected_direct_attempts": 0.0,
+    "program_inventor_incremental_tasks_solved": 0,
+    "program_inventor_incremental_rate": 0.0,
+    "tasks_where_inventor_was_invoked": 120,
+    "tasks_where_inventor_attempt_was_selected": 0,
+    "direct_unique_bundle_count_capped_at_two": {
+      "0": 120
+    },
+    "status_counts": {
+      "NO_CANDIDATE_ATTEMPTS": 120
+    },
+    "wall_clock_seconds": 119.79646311000033,
+    "workers": 8,
+    "result_sha256": "274f29278dcb28ac0d25b449528fb1962dee99dac0ad35fa3142859047b44b37"
+  },
+  "causal_interpretation": {
+    "falsified": [
+      "ARC_AGI1_V16_RULE_STACK_HAS_MEANINGFUL_ZERO_SHOT_CANDIDATE_COVERAGE_ON_ARC_AGI2_PUBLIC_EVAL",
+      "DEPTH3_COMPOSITION_OF_PARAMETER_FREE_V16_PRIMITIVES_REPAIRS_THAT_TRANSFER_GAP"
+    ],
+    "supported_next_move": "USE_ARC_AGI2_PUBLIC_TRAINING_AS_ACQUISITION_DATA_TO_BUILD_A_MORE_GENERAL_SYMBOLIC_REPRESENTATION_AND_RULE_INDUCTION_SUBSTRATE__THEN_VALIDATE_ON_A_PREDECLARED_UNTOUCHED_TRAINING_HOLDOUT_OR_OTHER_FRESH_SCOPE",
+    "do_not_do": [
+      "DO_NOT_TUNE_ON_ARC_AGI2_PUBLIC_EVAL_FAILURES",
+      "DO_NOT_CONTINUE_ARC_AGI1_SCORE_HILL_CLIMB",
+      "DO_NOT_MISTAKE_DEEPER_FIXED_GRAMMAR_SEARCH_FOR_REPRESENTATION_INVENTION"
+    ]
+  },
+  "information_policy_observed": {
+    "task_ids_emitted": false,
+    "task_grids_emitted": false,
+    "task_programs_emitted": false,
+    "per_task_results_emitted": false
+  },
+  "external_learned_capability_calls": 0,
+  "donor_runtime_required": false,
+  "capability_credit_delta": 0,
+  "arc_parity_credit_delta": 0,
+  "promotion_authority": false,
+  "terminal_credit_delta": 0
+}
