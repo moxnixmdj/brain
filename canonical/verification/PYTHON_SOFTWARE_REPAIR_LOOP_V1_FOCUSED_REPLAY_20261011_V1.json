@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_PYTHON_SOFTWARE_REPAIR_LOOP_V1_FOCUSED_REPLAY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__EXACT_GIT_BLOBS__FOCUSED_REPLAY_8_OF_8__ZERO_MODEL__ZERO_SPEND",
+  "subject": {
+    "head": "4220abb7dac268885ebbe42f525950a20d685b11",
+    "runtime_path": "canonical/runtime/bound_capabilities/python_software_repair_loop_v1.py",
+    "runtime_git_blob_sha": "eaf405b3ea6a387c573f8b3dd5a7197bfa024cd5",
+    "test_path": "canonical/tests/test_python_software_repair_loop_v1.py",
+    "test_git_blob_sha": "59ec47e0392fbb32567f5c32567373bd039f6cc7",
+    "dependency_path": "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py",
+    "dependency_git_blob_sha": "9bd33aca208fca26270765e18b3563abcf841e0b"
+  },
+  "replay": {
+    "python_version": "3.14.7",
+    "tests_executed": 8,
+    "tests_passed": 8,
+    "tests_failed": 0,
+    "temporary_checkout_removed": true
+  },
+  "authority": {
+    "bounded_multi_edit_python_patch_candidate_capability_verified": true,
+    "arbitrary_software_repair_completeness": false,
+    "semantic_correctness_beyond_bound_tests": false,
+    "mergeability_authority": false,
+    "non_python_authority": false,
+    "frontiercode_score_authority": false,
+    "independent_semantic_verification": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "model_dependency_count": 0,
+    "external_capability_provider_count": 0,
+    "benchmark_score_credit_delta": 0
+  }
+}
