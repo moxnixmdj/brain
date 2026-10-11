@@ -639,22 +639,20 @@ def compile_hypotheses(
             if _consistent(h, pairs):
                 candidates.append(h)
 
-    for feature in ("COLOR_COUNTS", "BIN_CROSS"):
-        mapping = _infer_local_rule(pairs, feature)
+    ordered_structural_hypotheses = (
+        ("LOCAL_NEIGHBORHOOD_RULE", "COLOR_COUNTS"),
+        ("OBJECT_PROPERTY_RECOLOR", "BBOX"),
+        ("LOCAL_NEIGHBORHOOD_RULE", "BIN_CROSS"),
+        ("OBJECT_PROPERTY_RECOLOR", "DENSITY"),
+    )
+    for kind, feature in ordered_structural_hypotheses:
+        if kind == "LOCAL_NEIGHBORHOOD_RULE":
+            mapping = _infer_local_rule(pairs, feature)
+        else:
+            mapping = _infer_object_recolor(pairs, feature)
         if mapping is not None:
             h = {
-                "kind": "LOCAL_NEIGHBORHOOD_RULE",
-                "feature": feature,
-                "mapping": dict(sorted(mapping.items())),
-            }
-            if _consistent(h, pairs):
-                candidates.append(h)
-
-    for feature in ("BBOX", "DENSITY"):
-        mapping = _infer_object_recolor(pairs, feature)
-        if mapping is not None:
-            h = {
-                "kind": "OBJECT_PROPERTY_RECOLOR",
+                "kind": kind,
                 "feature": feature,
                 "mapping": dict(sorted(mapping.items())),
             }
