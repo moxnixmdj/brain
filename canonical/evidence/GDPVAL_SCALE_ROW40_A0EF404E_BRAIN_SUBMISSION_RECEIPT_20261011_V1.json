@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_SCALE_SUBMISSION_RECEIPT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__FRESH_ROW40_RENTAL_AGREEMENT_SELF_SERVICE_GUIDE_DOCX_FROZEN__RENDER_QA_PASS__ZERO_OWNER_SCORE_CREDIT",
+  "benchmark": "GDPval-AA v2.1",
+  "row_idx": 40,
+  "task_id": "a0ef404e-82a6-4507-bff1-633d7c8e0004",
+  "sector": "Real Estate and Rental and Leasing",
+  "occupation": "Counter and Rental Clerks",
+  "freshness": {
+    "precommit": "canonical/governance/GDPVAL_SCALE_FRESH_BATCH_ROWS35_219_PRECOMMIT_20261011_V1.json",
+    "precommit_commit": "c604f5006820ce3ca24d6afc2487a95a30886a6c",
+    "official_allowed_projection_sha256": "b71909022bec23058c603e4d117369e73074d7fad01ea4bd0f718f0fc928dae8",
+    "prompt_sha256": "05e47a245e9f70b3011ad0aeceec42c9c717438143cb5ff85bea8ad3de0ee41f",
+    "reference_count": 0,
+    "gold_deliverable_read_before_freeze": false,
+    "rubric_read_before_freeze": false,
+    "third_party_model_submission_read_before_freeze": false
+  },
+  "brain_execution_profile": {
+    "path": "canonical/capabilities/internalized/professional_work/stirrup_247f24d/BRAIN_EXECUTION_PROFILE_V1.json",
+    "candidate_id": "OPUS55_PROFESSIONAL_KNOWLEDGE_WORK_STIRRUP_CONFIGURATION_V1",
+    "cognition_surface": "CURRENT_CHATGPT_GPT_5_6_SOL_SESSION",
+    "incremental_spend_usd": 0
+  },
+  "submission": {
+    "library_path": "/Project Brain/GDPval/scale/a0ef404e-82a6-4507-bff1-633d7c8e0004/GDPval_row40_new_rental_agreement_guide.docx",
+    "library_file_id": "libfile_26475ae2e9048191aea7001b02c8279b",
+    "bytes": 40668,
+    "sha256": "eb544c0209e7adf7245b2752edeb184b96ce50745c3a677854c13ed2fd102578",
+    "format": "docx",
+    "render_page_count": 2,
+    "render_page_sha256": [
+      "0a67d9b0302b07abeffe16f38a66822369281a82a69d5a92dd556c2cf85e73af",
+      "98b7b68b718b6287bbb59155f7bb41f68c4345fb7335bb305086e1b91d1561ec"
+    ]
+  },
+  "prompt_requirement_checks": {
+    "word_document": "PASS",
+    "step_by_step_new_rental_agreement": "PASS",
+    "welcome_customer": "PASS",
+    "reservation_identification": "PASS",
+    "id_required_documents": "PASS",
+    "contact_details": "PASS",
+    "payment_method": "PASS",
+    "vehicle_assignment": "PASS",
+    "rental_terms_review": "PASS",
+    "why_each_step": "PASS",
+    "efficiency_tips": "PASS",
+    "common_mistakes": "PASS",
+    "troubleshooting": "PASS",
+    "generic_system_no_vendor_specific_dependency": "PASS"
+  },
+  "verification": {
+    "render_visual_inspection": "PASS__2_PAGES__NO_CLIPPING_OVERLAP_OR_SPLIT_PROCEDURE_ROWS"
+  },
+  "hard_nonclaims": [
+    "NO_ARTIFICIAL_ANALYSIS_OWNER_GRADE",
+    "NO_GDPVAL_ELO",
+    "NO_CLAIM_SINGLE_TASK_IMPLIES_1846",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
