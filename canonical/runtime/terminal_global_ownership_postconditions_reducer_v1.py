@@ -135,6 +135,11 @@ def evaluate_documents(
             "unresolved_verifier_mutations_zero":True,
             "unresolved_composition_failures_zero":True,
             "final_donor_deletion_cleanroom_pass":True,
+            "donor_deletion_protocol_v2_bound":True,
+            "runtime_cognition_model_independent":True,
+            "zero_external_model_runtime_cognition_dependencies":True,
+            "copied_or_rehosted_teacher_absent":True,
+            "runtime_dependency_inventory_complete":True,
         },
         "basis":{
             "donor":"PROTOCOL_V2_BOUND__MODEL_INDEPENDENT__ZERO_MODEL_DEPENDENCIES__DONOR_DENIED_BYTE_IDENTICAL_FROZEN_QUALIFICATION",
