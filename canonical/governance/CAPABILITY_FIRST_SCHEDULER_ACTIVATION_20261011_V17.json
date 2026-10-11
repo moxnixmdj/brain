@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261011_V17",
+  "date": "2026-10-11",
+  "status": "ACTIVE_CANDIDATE__ALL_12_CHECKPOINT_ROWS_WAKE_GATED__0_SAME_INFORMATION_CHECKPOINT_RUNS__BYTES_V48_GENERAL_RESOURCE_WORK_CONTINUES__ZERO_CREDIT",
+  "objective": "MAKE_CURRENT_WAKE_GATE_TRUTH_LOAD_BEARING_IN_THE_PRIMARY_CAPABILITY_FIRST_SCHEDULER",
+  "base_main_commit": "7b9912b847f7a647afe034a749b111bfa55fc6d3",
+  "runtime": {
+    "path": "canonical/runtime/capability_parallel_frontier_post_composition_v2.py",
+    "git_blob_sha": "6a1e02ab6154e18b706867582cc93d1eb571c423",
+    "entrypoint": "plan_current_post_composition_frontier"
+  },
+  "live_frontier": {
+    "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
+    "git_blob_sha": "cbd9c5abe080f13d34b1ee99de6fc95bfe2a86ee"
+  },
+  "decision_value_authority": {
+    "path": "canonical/governance/CURRENT_FRONTIER_REUSE_SPECIALIZATION_20261011_V1.json",
+    "git_blob_sha": "fd829dd1f2c959302f346f74c72a65d8d24e7f7e",
+    "rule": "WAKE_GATED_EVENT_DRIVEN_AND_PARKED_CHECKPOINT_ROWS_MUST_NOT_CONSUME_SAME_INFORMATION_WORK__ONLY_POLICY_CHANGING_STATE_CHANGES_MAY_WAKE_THEM"
+  },
+  "current_projection": {
+    "checkpoint_actionable_row_ids": [],
+    "checkpoint_sleeping_row_count": 12,
+    "bytes": "V48_CURRENT__RERANK_USING_SPENT_NEXT54__NEXT55_FROZEN",
+    "professional": "PROPERTY_TRUTH_24_OF_24_CLOSED__FULL_PRIVATE_CURRENT_MAIN_REGRESSION_WAKE_GATED",
+    "r2": "GENERAL_MECHANISM_CLOSED__TASK_SPECIFIC_EXTERNAL_FRONTIER_SLEEPING"
+  },
+  "independent_verification": {
+    "path": "canonical/verification/DECISION_VALUE_SCHEDULER_GATE_INDEPENDENT_VERIFY_20261011_V2.json",
+    "git_blob_sha": "5caee10ef902f5d8c57900fb1343d6552f126294",
+    "result": "23_OF_23_DYNAMIC_SCHEDULER_TESTS_PASS__CURRENT_PLAN_REPLAY_PASS"
+  },
+  "scheduling_precedence": [
+    "CURRENTNESS_AND_DEPENDENCY_GATES",
+    "DECISION_VALUE_WAKE_GATE",
+    "DIMENSIONWISE_PARETO_DOMINANCE",
+    "SAFE_NONCONFLICTING_PARALLELISM",
+    "CHECKPOINT_AUDIT_TERTIARY"
+  ],
+  "full_execution_authority": false,
+  "promotion_authority": false,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
