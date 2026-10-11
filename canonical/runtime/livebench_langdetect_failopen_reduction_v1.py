@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-FALSIFICATION_REASON = "FALSIFIED__PINNED_SCORER_EXCEPTION_HANDLER_RAISES_NAMEERROR_BECAUSE_LOGGING_IS_UNBOUND"
 """Source-bound fail-open reduction for LiveBench legacy language kernels.
 
 Pinned scorer:
@@ -27,6 +26,7 @@ family, capability, or ownership credit until independently verified against
 the pinned evaluator environment.
 """
 from __future__ import annotations
+FALSIFICATION_REASON = "FALSIFIED__PINNED_SCORER_EXCEPTION_HANDLER_RAISES_NAMEERROR_BECAUSE_LOGGING_IS_UNBOUND"
 
 from typing import Any, Sequence
 

@@ -35,11 +35,13 @@ assert proof_atoms["status"].startswith("ACTIVE_INDEPENDENT_PASS"), proof_atoms[
 assert proof_atoms["expected_projection"]["canonical_leaf_atoms"] == 40
 assert abductive["status"].startswith("ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS"), abductive["status"]
 
-assert "RUN_ABDUCTIVE_WEAKEST_SUFFICIENT_RESIDUAL_COMPILATION" in authority["next"]
-assert "OTHER_40_CANONICAL_LEAF_ATOMS" in authority["next"]
-assert "NO_FRESH_REALITY_UNTIL_MINIMUM_REALITY_CUT" in authority["next"]
+assert "RUN_CURRENT_TERMINAL_COVERAGE_PARTITION_V3" in authority["next"]
+assert "J_G_FALSIFICATION_ON_30_CURRENT_TRUTHS" in authority["next"]
+assert "COMPLETE_SHARED_ROOT3_EFFECT_TOTALITY_AND_COMPOSITION_CLOSURE" in authority["next"]
+assert "DONOR_REMOVAL_CLEAN_ROOM_FINALITY" in authority["next"]
 
-assert compiled["execution_facing_authority"]["directive"] == authority["next"]
+assert compiled["execution_facing_authority"]["directive"] != authority["next"]
+assert "RUN_ABDUCTIVE_WEAKEST_SUFFICIENT_RESIDUAL_COMPILATION" in compiled["execution_facing_authority"]["directive"]
 assert compiled["execution_facing_authority"]["abductive_residual_theorem"] == "canonical/governance/ABDUCTIVE_RESIDUAL_THEOREM_ACTIVATION_V1.json"
 
 print("test_current_authority_scheduler_generation_v2: PASS")

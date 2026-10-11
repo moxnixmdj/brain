@@ -9,6 +9,11 @@ graph = json.loads((ROOT / "canonical/governance/GLOBAL_TERMINAL_OBLIGATION_GRAP
 prequalification = json.loads((ROOT / "canonical/governance/EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_V1.json").read_text())
 
 assert u == frozen
+# A later prequalification file cannot silently promote this frozen universe;
+# authority changes require an explicit content-addressed universe reseal.
+assert frozen["terminal_prequalification"]["execution_authority"] is False
+assert prequalification["execution_authority"] is True
+assert u["execution_authority"]["fresh_terminal_evidence_allowed"] is False
 assert u["counts"]["families_total"] == 19
 assert u["counts"]["families_closed"] == 2
 assert u["counts"]["families_open_proof"] == 17
@@ -51,14 +56,11 @@ if "open_shared_cross_lane_mechanism_primitive_count" in u["counts"]:
 # the exact portfolios that measure them.
 if not open_mechanisms and not shared_open and not gate_mech:
     assert u["global_cut"]["exact_cut_ready"] is True
-    assert u["global_cut"]["prequalification_ready"] is bool(prequalification["execution_authority"])
-    assert u["global_cut"]["execution_ready"] is bool(prequalification["execution_authority"])
-    assert u["execution_authority"]["fresh_terminal_evidence_allowed"] is bool(prequalification["execution_authority"])
-    if prequalification["execution_authority"]:
-        assert u["execution_authority"]["immediate_zero_reality_work"] == []
-    else:
-        assert u["execution_authority"]["immediate_zero_reality_work"] == prequalification["next"]
-        assert u["status"].endswith("PREQUALIFICATION_BLOCKED")
+    frozen_prequalification = frozen["terminal_prequalification"]
+    assert u["global_cut"]["prequalification_ready"] is bool(frozen_prequalification["execution_authority"])
+    assert u["global_cut"]["execution_ready"] is bool(frozen_prequalification["execution_authority"])
+    assert u["execution_authority"]["fresh_terminal_evidence_allowed"] is bool(frozen_prequalification["execution_authority"])
+    assert u["execution_authority"]["immediate_zero_reality_work"] == frozen["execution_authority"]["immediate_zero_reality_work"]
 else:
     assert u["global_cut"]["exact_cut_ready"] is False
     assert u["global_cut"]["execution_ready"] is False
@@ -68,7 +70,7 @@ else:
         + [f"CLOSE_{x}" for x in gate_mech]
     )
 assert u["terminal_prequalification"]["source"] == "canonical/governance/EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_V1.json"
-assert u["terminal_prequalification"]["execution_authority"] is bool(prequalification["execution_authority"])
+assert u["terminal_prequalification"]["execution_authority"] is bool(frozen["terminal_prequalification"]["execution_authority"])
 assert u["local_v6_subcut"]["exact_minimum"] is True
 assert u["local_v6_subcut"]["globally_authorized"] is False
 assert len(u["local_v6_subcut"]["selected_observations"]) == 2

@@ -19,6 +19,17 @@ def build_universe():
     frozen = _load("canonical/governance/GLOBAL_TERMINAL_UNIVERSE_V1.json")
     prequalification = _load("canonical/governance/EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_V1.json")
 
+    # GLOBAL_TERMINAL_UNIVERSE_V1 is a frozen authority snapshot. A later
+    # mutation of the path-only prequalification dependency must never
+    # auto-promote execution authority without an explicit universe reseal.
+    frozen_prequalification = frozen.get("terminal_prequalification", {})
+    if (
+        prequalification.get("status") != frozen_prequalification.get("status")
+        or bool(prequalification.get("execution_authority", False))
+        != bool(frozen_prequalification.get("execution_authority", False))
+    ):
+        return copy.deepcopy(frozen)
+
     proof_only = set(graph.get("proof_only_mechanism_obligations", []))
     open_lane_ids = set(graph.get("open_mechanism_residuals", []))
     shared_open = list(graph.get("shared_cross_lane_open_mechanisms", []))

@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-FALSIFICATION_REASON = "FALSIFIED__PINNED_SCORER_EXCEPTION_HANDLER_RAISES_NAMEERROR_BECAUSE_LOGGING_IS_UNBOUND"
 """Prefix-shield reduction for the pinned LiveBench language checker.
 
 This strengthens V1. V1 required the whole constructed response to stay inside
@@ -25,6 +24,7 @@ records the installed langdetect code/version and reproduces the behavior.
 Zero acceptance/capability credit is granted here.
 """
 from __future__ import annotations
+FALSIFICATION_REASON = "FALSIFIED__PINNED_SCORER_EXCEPTION_HANDLER_RAISES_NAMEERROR_BECAUSE_LOGGING_IS_UNBOUND"
 
 from typing import Any, Sequence
 
