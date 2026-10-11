@@ -1,0 +1,86 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_EXPONENTIAL_SERIES_V54_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__EXACT_V53_TO_V54_TRANSFORM__SPENT_NEXT59_15410_OF_15410__FRESH_NEXT60_15640_OF_15640__CLEAN_ARCHIVE_NEXT60_15640_OF_15640__NEXT61_DURABLY_FROZEN_UNSPENT__ZERO_CREDIT",
+  "subject": {
+    "producer_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_EXPONENTIAL_SERIES_V54_SUCCESSOR_EXECUTION_20261011_V1.json",
+    "producer_evidence_git_blob_sha": "5434e4f30ae705f6a06076f46947811ba397e06e",
+    "transform": "canonical/research/bytes/tools/conservative_exponential_series_type2_prune_v54.py",
+    "transform_git_blob_sha": "83071a3ecf9bf837935678c429a45cb6f82c86f7",
+    "predecessor_manifest_sha256": "ae9187bc15193fe340e77a88d9d400f51ec798dec638ac435aca1f2862c14cfe",
+    "candidate_manifest_sha256": "0580cb1632eed1142a6b01580898c3736a1d7c9a65b4dbdf277699fd821dc803",
+    "candidate_raw_python_source_bytes": 1714886
+  },
+  "replay": {
+    "transform_application": {
+      "result": "PASS",
+      "saved_raw_python_bytes": 995,
+      "candidate_manifest_sha256": "0580cb1632eed1142a6b01580898c3736a1d7c9a65b4dbdf277699fd821dc803",
+      "reconstruction_identity": "278/278"
+    },
+    "spent_NEXT59": {
+      "passed": 15410,
+      "total": 15410,
+      "failures": 0
+    },
+    "fresh_NEXT60": {
+      "passed": 15640,
+      "total": 15640,
+      "failures": 0,
+      "corpus_sha256": "f2d40bb97ade73179631aac6c94134eeab9fc529889bfabe75e01dd2dadfbc99",
+      "durable_library_file_id": "libfile_ef7b3652581c819188d30268264cb2e9"
+    },
+    "clean_archive_second_execution_carrier_NEXT60": {
+      "passed": 15640,
+      "total": 15640,
+      "failures": 0
+    },
+    "archive_identity": {
+      "durable_files": 278,
+      "byte_identical_files": 278,
+      "archive_bytes": 267728,
+      "archive_sha256": "9d8a2604967c7f9ec83b149025ed0edfab9b1dc5616031bbbdad8b58a5421d94",
+      "library_file_id": "libfile_aa98662e397081918d53f4879bf8e843"
+    },
+    "next61_frozen_definition": {
+      "cases": 15870,
+      "seed": 43886164,
+      "per_operation_budget": 1380,
+      "sha256": "dd5fbbf9c9aced49b1280d31202af14c4797b21baf3b35b7c0e61decc8157df6",
+      "library_file_id": "libfile_2c04b66a336c8191ab8c784f3ae8bc15",
+      "spent": false,
+      "durable_persistence": true
+    }
+  },
+  "falsification": {
+    "guarded_unobserved_routes_fail_closed": true,
+    "observed_spent_NEXT59_roots_call_class": {
+      "calls": 324,
+      "x_negative": false,
+      "type": 2,
+      "prec": 410
+    },
+    "universal_equivalence_claimed": false
+  },
+  "proved": [
+    "THE_V53_TO_V54_TRANSFORM_IS_EXACTLY_BASE_AND_TARGET_MANIFEST_GUARDED",
+    "THE_EXACT_V54_CANDIDATE_PASSES_COMPLETE_SPENT_NEXT59",
+    "THE_PREVIOUSLY_UNSPENT_NEXT60_CORPUS_PASSES_EXACT_V54_COMPLETELY",
+    "A_CLEAN_ARCHIVE_EXTRACTION_IS_278_OF_278_BYTE_IDENTICAL_AND_REPLAYS_COMPLETE_NEXT60_WITH_ZERO_FAILURES",
+    "NEXT61_ID_SEED_CASE_COUNT_CONTENT_SHA256_AND_LIBRARY_ARTIFACT_ARE_FROZEN_UNSPENT"
+  ],
+  "truth_boundary": [
+    "BOUNDED_EXACT_SYMBOLIC_ROUTE_ONLY",
+    "NO_UNIVERSAL_MPMATH_EQUIVALENCE",
+    "NO_EXTERNAL_ORGANIZATIONALLY_INDEPENDENT_SECOND_CARRIER CLAIM",
+    "NEXT61_MUST_REMAIN_UNSPENT_UNTIL_A_NEW_PHYSICAL_CUT_EXISTS",
+    "NO_CAPABILITY_ACCEPTANCE_PROFESSIONAL_QUALITY_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "promotion_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
