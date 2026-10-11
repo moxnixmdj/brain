@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_FINANCE_AGENT_V2_DONOR_FREE_NATIVE_CORE_PUBLIC_RUNNER_VERIFICATION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_BLOBS__62_TESTS__ZERO_BENCHMARK_CREDIT",
+  "target": "FINANCE_AGENT_V2_GE_58_59",
+  "verified_subjects": {
+    "canonical/runtime/finance_quantitative_algebra_v1.py": "efeecdb5faa595db75595bed2b87f9104e16882d",
+    "canonical/runtime/finance_quantitative_dependency_v1.py": "57d250414b1f064dd243d1d98e8cde7c85cf6858",
+    "canonical/runtime/finance_quantitative_question_contract_v1.py": "24a17cf65b0db07fedef9d1a99b1662b58c0448c",
+    "canonical/runtime/finance_metric_xbrl_registry_v1.py": "a64271e46811c8c1a440a344045ca1f38c30a519",
+    "canonical/runtime/finance_sec_ticker_cik_from_registry_v1.py": "55a72e8b4fdbadd14948857ca3d70b31d3c13629",
+    "canonical/runtime/finance_sec_fact_selector_v1.py": "03957a8bd33329db5102236c2acc6974b8a8a71c",
+    "canonical/runtime/finance_market_price_series_v1.py": "02fbcee19c186db6c832af7690b6118040bab567",
+    "canonical/runtime/finance_modeling_workflows_v1.py": "a4cbd055df1771f278873e3d922a68d468442242",
+    "canonical/tests/test_finance_quantitative_algebra_v1.py": "3a3ab3a5203fe10e25cb407e6454fa95ff9a27a0",
+    "canonical/tests/test_finance_quantitative_dependency_v1.py": "86f29998362b686d1fa314002517010c2b8d3ef6",
+    "canonical/tests/test_finance_quantitative_question_contract_v1.py": "ce7cfc058756ed3d498cba1d55b78b366c5b2a02",
+    "canonical/tests/test_finance_metric_xbrl_registry_v1.py": "967041308f07a4b57aee7c0bb90ab5ad4fed9bab",
+    "canonical/tests/test_finance_sec_ticker_cik_from_registry_v1.py": "a2e38c0cc92dd1e74c39b66c127ebd5d4f830d73",
+    "canonical/tests/test_finance_sec_fact_selector_v1.py": "92193ff9e25748edecd47d0fe9c05856087a4dc9",
+    "canonical/tests/test_finance_market_price_series_v1.py": "42f32b1e0f9d78d3c924527e1b579f135844d253",
+    "canonical/tests/test_finance_modeling_workflows_v1.py": "0d61a56bd644b020d8a41a2a5c368ca351df279c"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2669,
+    "head_commit": "dd496aac0f0c16927e93751aa768613422548db2",
+    "workflow_name": "Verify Finance Brain-native core",
+    "workflow_run_id": 38139135502,
+    "job_id": 114469163266,
+    "conclusion": "success",
+    "focused_tests_passed": 62,
+    "focused_tests_failed": 0
+  },
+  "verified_scope": [
+    "EXACT_GIT_BLOB_BINDING",
+    "PYTHON_COMPILE",
+    "FOCUSED_DONOR_FREE_NATIVE_FINANCE_TESTS"
+  ],
+  "ownership_boundary": {
+    "external_general_purpose_model_cognition_in_verified_subject": false,
+    "qwen_or_other_model_runtime_required": false,
+    "benchmark_score_credit": 0
+  },
+  "hard_nonclaims": [
+    "NO_PRIVATE_FINANCE_AGENT_V2_TASK_WAS_EXECUTED",
+    "NO_FINANCE_AGENT_V2_SCORE_CREDIT",
+    "NO_CLAIM_FINANCE_AGENT_V2_GE_58_59",
+    "NO_TARGET_GRADER_EQUIVALENCE_CLAIM",
+    "PUBLIC_CANARIES_AND_FOCUSED_TESTS_DO_NOT_PROVE_PRIVATE_BENCHMARK_TRANSFER"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "private_cases_exposed": 0,
+    "benchmark_score_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
