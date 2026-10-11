@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - 'canonical/**'
+      - 'sitecustomize.py'
       - '.github/workflows/capability-transfer-governance.yml'
   push:
     branches: [main]
@@ -13,7 +14,7 @@ on:
 
 jobs:
   verify:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, Linux, X64, brain-low-ram]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
