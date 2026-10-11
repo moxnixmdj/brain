@@ -1,0 +1,80 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_COMPARISON_PROGRAM_V1",
+  "date": "2026-10-11",
+  "status": "ACTIVE_CANDIDATE__CAPABILITY_FIRST__BENCHMARKS_MEASUREMENT_ONLY__ZERO_CREDIT",
+  "objective": "Minimize wall-clock to truthful target-relative capability conclusions by deduplicating benchmark audit obligations into shared capability propositions and selecting only evidence that changes those propositions.",
+  "source_bindings": {
+    "development_authority": {
+      "path": "canonical/governance/CURRENT_DEVELOPMENT_AUTHORITY.json",
+      "git_blob_sha": "bc3f3d509f7294261265aad0489d949d4b14112c"
+    },
+    "acceptance_quotient": {
+      "path": "canonical/governance/FROZEN_19_ACCEPTANCE_PROOF_SHAPE_QUOTIENT_20261007_V1.json",
+      "git_blob_sha": "b20c5cd6965f7ea7e5ca019d1e828ac6eced042c"
+    },
+    "predicate_registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    }
+  },
+  "semantic_separation": {
+    "capability_proposition": "BRAIN_HAS_TARGET_RELATIVE_CAPABILITY_AT_OR_ABOVE_REFERENCE_SCOPE",
+    "benchmark_receipt_proposition": "BRAIN_OBTAINS_THE_NAMED_BENCHMARK_RESULT_UNDER_AN_ADMISSIBLE_PROTOCOL",
+    "rule": "NEITHER_PROPOSITION_IMPLIES_THE_OTHER_UNLESS_AN_EXPLICIT_SCOPE_COMPLETE_ENTAILMENT_PROOF_BINDS_THEM"
+  },
+  "audit_obligations": [
+    {"audit_id":"TB4","quotient_obligation_id":"CODING_TB4_GE_66_4","predicate_ids":["CODING_TB4_GE_66_4"],"capability_families":["ADVANCED_AGENTIC_CODING"]},
+    {"audit_id":"FRONTIERCODE","quotient_obligation_id":"CODING_FRONTIERCODE_GE_54_4","predicate_ids":["CODING_FRONTIERCODE_GE_54_4"],"capability_families":["ADVANCED_AGENTIC_CODING"]},
+    {"audit_id":"CURSORBENCH","quotient_obligation_id":"CODING_CURSORBENCH_GE_57_8","predicate_ids":["CODING_CURSORBENCH_GE_57_8"],"capability_families":["ADVANCED_AGENTIC_CODING"]},
+    {"audit_id":"GDPVAL","quotient_obligation_id":"PROWORK_GDPVAL_GE_1846","predicate_ids":["PROWORK_GDPVAL_GE_1846"],"capability_families":["PROFESSIONAL_KNOWLEDGE_WORK"]},
+    {"audit_id":"AA_BRIEFCASE","quotient_obligation_id":"PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT","predicate_ids":["PROWORK_AA_BRIEFCASE_GE_1822","ARTIFACT_AA_BRIEFCASE_GE_1822"],"capability_families":["PROFESSIONAL_KNOWLEDGE_WORK","ARTIFACT_CREATION"]},
+    {"audit_id":"AUTOMATIONBENCH","quotient_obligation_id":"AUTOMATIONBENCH_GE_40","predicate_ids":["AUTOMATIONBENCH_GE_40"],"capability_families":["BUSINESS_WORKFLOW_AUTOMATION"]},
+    {"audit_id":"HLE_TOOLS","quotient_obligation_id":"HLE_TOOLS_GE_67_7","predicate_ids":["HLE_TOOLS_GE_67_7"],"capability_families":["MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING"]},
+    {"audit_id":"TB_SCIENCE","quotient_obligation_id":"TB_SCIENCE_GE_58_7","predicate_ids":["TB_SCIENCE_GE_58_7"],"capability_families":["AGENTIC_SCIENTIFIC_RESEARCH"]},
+    {"audit_id":"CHARTOGRAPHY","quotient_obligation_id":"CHARTOGRAPHY_TOOLS_GE_89","predicate_ids":["CHARTOGRAPHY_TOOLS_GE_89"],"capability_families":["VISION_AND_DENSE_DOCUMENT_UNDERSTANDING"]},
+    {"audit_id":"OSWORLD","quotient_obligation_id":"OSWORLD_2_1_PARTIAL_GE_81_8","predicate_ids":["OSWORLD_2_1_PARTIAL_GE_81_8"],"capability_families":["COMPUTER_AND_BROWSER_USE"]},
+    {"audit_id":"FINANCE_INDEX","quotient_obligation_id":"FINANCE_ACCOUNTING_INDEX_GE_61","predicate_ids":["FINANCE_ACCOUNTING_INDEX_GE_61"],"capability_families":["FINANCIAL_ANALYSIS"]},
+    {"audit_id":"FINANCE_AGENT_V2","quotient_obligation_id":"FINANCE_AGENT_V2_GE_58_59","predicate_ids":["FINANCE_AGENT_V2_GE_58_59"],"capability_families":["FINANCIAL_ANALYSIS"]},
+    {"audit_id":"MYSTERYMECHANISM","quotient_obligation_id":"MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER","predicate_ids":["MYSTERYMECHANISM_GE_49_55"],"capability_families":["UNKNOWN_DOMAIN_ADAPTATION"]}
+  ],
+  "scheduling_policy": {
+    "primary_unit": "CAPABILITY_PROPOSITION_OR_STRONGER_MULTI_CAPABILITY_WITNESS",
+    "benchmark_obligation_is_independent_development_job": false,
+    "rank_first": [
+      "NUMBER_OF_UNRESOLVED_CAPABILITY_PROPOSITIONS_SOUNDLY_CLOSED",
+      "NUMBER_OF_AUDIT_OBLIGATIONS_EXPLICITLY_ENTAILED",
+      "REUSE_BREADTH",
+      "CAUSAL_CONFIDENCE"
+    ],
+    "minimize": [
+      "WALL_CLOCK",
+      "EXTERNAL_DEPENDENCY",
+      "COMPUTE",
+      "MEMORY",
+      "INCREMENTAL_SPEND",
+      "EVIDENCE_RISK"
+    ],
+    "exact_portfolio_solver": "canonical/runtime/capability_comparison_scheduler_v1.py",
+    "no_cost_guessing": true,
+    "rule": "UNKNOWN_COST_OR_COVERAGE_FIELDS_FAIL_CLOSED_INSTEAD_OF_BEING_OPTIMISTICALLY_FILLED"
+  },
+  "promotion_rules": [
+    "A_BENCHMARK_SCORE_CAN_CLOSE_ONLY_ITS_BOUND_RECEIPT_PROPOSITION_UNLESS_A_SEPARATE_SCOPE_COMPLETE_CAPABILITY_ENTAILMENT_EXISTS",
+    "A_CAPABILITY_WITNESS_CAN_PREEMPT_ONE_OR_MORE_BENCHMARK_AUDITS_ONLY_WHEN_EXPLICIT_ENTAILMENT_IS_BOUND_FOR_EACH_AUDIT",
+    "EXTERNAL_OR_GENERAL_PURPOSE_RUNTIME_COGNITION_IN_THE_CREDITED_BRAIN_PATH_GIVES_ZERO_BRAIN_CAPABILITY_CREDIT",
+    "PUBLIC_EXAMPLES_OR_SURROGATES_DO_NOT_TRANSFER_PRIVATE_SCORE_CREDIT_WITHOUT_A_SOUND_TRANSFER_PROOF"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_TEN_CAPABILITY_FAMILIES_ARE_ALL_PROVED_NONINFERIOR",
+    "NO_CLAIM_ANY_BRANDED_BENCHMARK_SCORE_IS UNNECESSARY_WHEN_THE_BRANDED_SCORE_ITSELF_IS_THE_REQUIRED_PROPOSITION",
+    "NO_CLAIM_FAMILY_MEMBERSHIP_ALONE_PROVES_ONE_BENCHMARK_FROM_ANOTHER",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT_FROM_THIS_PROGRAM"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
