@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_ESCAPE_TWO_ENGINE_MINIMUM_DELTA_VERIFY_20261011_V2",
+  "date": "2026-10-11",
+  "status": "PASS__CURRENT_PARTITION_13_EQUALS_O11_ACTIVE_PLUS_Q1_ACTIVE_PLUS_TB1_PARKED__GDPVAL_FIXED_BAR_IN_O__AA_ONLY_Q__ZERO_AUTHORITY_INFLATION__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/CURRENT_ESCAPE_TWO_ENGINE_MINIMUM_DELTA_CUT_20261011_V1.json",
+    "git_blob_sha": "b460c7386a2f7859f5c2c304f996d3c649e0acdf"
+  },
+  "source_bindings": {
+    "current_frontier_specialization": [
+      "canonical/governance/CURRENT_FRONTIER_REUSE_SPECIALIZATION_20261011_V1.json",
+      "4de50f0f7976a88c4e905370ade04f3cd5ff8aab"
+    ],
+    "gdpval_reclassification": [
+      "canonical/governance/GDPVAL_CURRENT_FIXED_BAR_ENGINE_RECLASSIFICATION_20261011_V1.json",
+      "c16a49726507d6611a24bde323e0436a65870b59"
+    ],
+    "current_o_projection_gate_verify": [
+      "canonical/verification/CURRENT_O_PROJECTION_GATE_V2_VERIFY_20261011_V1.json",
+      "2210f23a9691ddd2b848fecdb62137998d54e559"
+    ]
+  },
+  "verified": {
+    "total_escape_rows": 13,
+    "active_rows": 12,
+    "active_o_rows": 11,
+    "active_q_rows": 1,
+    "parked_rows": 1,
+    "gdpval_current_primary_engine": "O_OBJECTIVE_ACCEPTANCE_INSTANTIATION",
+    "aa_briefcase_current_primary_engine": "Q_ACCEPTANCE_RELATION_ROBUST_COMMON_POLICY",
+    "parked_obligation_id": "TB_SCIENCE_GE_58_7",
+    "active_sets_disjoint_and_exhaustive": true,
+    "execution_authority": false,
+    "promotion_authority": false,
+    "acceptance_authority": false,
+    "terminal_authority": false
+  },
+  "historical_truth_repair": {
+    "supersedes_verification_path": "canonical/verification/CURRENT_ESCAPE_TWO_ENGINE_MINIMUM_DELTA_VERIFY_20261011_V1.json",
+    "predecessor_partition": "O10_ACTIVE_PLUS_Q2_ACTIVE_PLUS_TB1_PARKED",
+    "predecessor_is_current_authority": false,
+    "reason": "GDPVAL_FIXED_BAR_E1_OWNER_PAIRWISE_NONNECESSITY_RECLASSIFIED_GDPVAL_FROM_PRIMARY_Q_TO_PRIMARY_O_AND_CURRENT_PROJECTION_AWARE_O_EXECUTOR_V2_IS_BOUND"
+  },
+  "hard_nonclaims": [
+    "NO_ACTIVE_ROW_CLOSED",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT",
+    "NO_CLAIM_HISTORICAL_OQ_BASELINE_FILE_WAS_MUTATED",
+    "NO_NEW_PRIMITIVE_REQUIRED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
