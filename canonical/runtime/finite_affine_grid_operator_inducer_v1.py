@@ -44,23 +44,50 @@ def _shape(g: Grid) -> tuple[int,int]:
     return len(g),len(g[0])
 
 
+def _nonzero_bbox(g:Grid)->tuple[int,int,int,int]|None:
+    pts=[(r,c) for r,row in enumerate(g) for c,v in enumerate(row) if v!=0]
+    if not pts:
+        return None
+    rs=[r for r,_ in pts]; cs=[c for _,c in pts]
+    return min(rs),min(cs),max(rs),max(cs)
+
+
 @dataclass(frozen=True)
 class ShapeRule:
     rule_id: str
 
-    def apply(self,h:int,w:int)->tuple[int,int]:
+    def apply(self,g:Grid)->tuple[int,int]|None:
+        h,w=_shape(g)
         if self.rule_id=="SAME": return h,w
         if self.rule_id=="SWAP": return w,h
+        bbox=_nonzero_bbox(g)
+        if bbox is None:
+            return None
+        r0,c0,r1,c1=bbox
+        bh,bw=r1-r0+1,c1-c0+1
+        if self.rule_id=="NONZERO_BBOX": return bh,bw
+        if self.rule_id=="NONZERO_BBOX_SWAP": return bw,bh
         raise AffineGridOperatorError("SHAPE_RULE_UNSUPPORTED")
 
 
-OFFSET_RULES=("ZERO","H_MINUS_1","W_MINUS_1","CONST_-3","CONST_-2","CONST_-1","CONST_1","CONST_2","CONST_3")
+OFFSET_RULES=(
+    "ZERO","H_MINUS_1","W_MINUS_1",
+    "BBOX_R0","BBOX_C0","BBOX_R1","BBOX_C1",
+    "CONST_-3","CONST_-2","CONST_-1","CONST_1","CONST_2","CONST_3"
+)
 
 
-def _offset_value(rule:str,h:int,w:int)->int:
+def _offset_value(rule:str,g:Grid)->int|None:
+    h,w=_shape(g)
     if rule=="ZERO": return 0
     if rule=="H_MINUS_1": return h-1
     if rule=="W_MINUS_1": return w-1
+    if rule.startswith("BBOX_"):
+        bbox=_nonzero_bbox(g)
+        if bbox is None:
+            return None
+        r0,c0,r1,c1=bbox
+        return {"BBOX_R0":r0,"BBOX_C0":c0,"BBOX_R1":r1,"BBOX_C1":c1}[rule]
     if rule.startswith("CONST_"): return int(rule.removeprefix("CONST_"))
     raise AffineGridOperatorError("OFFSET_RULE_UNSUPPORTED")
 
@@ -76,9 +103,14 @@ class AffineOperator:
 
 def _apply(g:Grid, op:AffineOperator)->Grid|None:
     ih,iw=_shape(g)
-    oh,ow=ShapeRule(op.shape_rule).apply(ih,iw)
-    e=_offset_value(op.e_rule,ih,iw)
-    f=_offset_value(op.f_rule,ih,iw)
+    shape=ShapeRule(op.shape_rule).apply(g)
+    if shape is None:
+        return None
+    oh,ow=shape
+    e=_offset_value(op.e_rule,g)
+    f=_offset_value(op.f_rule,g)
+    if e is None or f is None:
+        return None
     out=[]
     for r in range(oh):
         row=[]
@@ -119,8 +151,8 @@ def induce(
         return {"schema":SCHEMA,"status":"FAIL_CLOSED","reason":"COEFFICIENT_DOMAIN_INVALID"}
 
     shape_rules=[]
-    for rule in ("SAME","SWAP"):
-        if all(ShapeRule(rule).apply(*_shape(i))==_shape(o) for i,o in pairs):
+    for rule in ("SAME","SWAP","NONZERO_BBOX","NONZERO_BBOX_SWAP"):
+        if all(ShapeRule(rule).apply(i)==_shape(o) for i,o in pairs):
             shape_rules.append(rule)
     if not shape_rules:
         return {"schema":SCHEMA,"status":"NO_OPERATOR","reason":"NO_SUPPORTED_OUTPUT_SHAPE_RULE"}
@@ -154,7 +186,7 @@ def induce(
             "schema":SCHEMA,"status":"NO_OPERATOR",
             "candidates_evaluated":evaluated,
             "complete_within_declared_bound":True,
-            "completeness_scope":"UNIMODULAR_2D_INTEGER_AFFINE_MAPS_COEFF_NEG1_0_1_X_SYMBOLIC_OFFSETS_X_SAME_OR_SWAP_SHAPE",
+            "completeness_scope":"UNIMODULAR_2D_INTEGER_AFFINE_MAPS_COEFF_NEG1_0_1_X_SYMBOLIC_CONTENT_RELATIVE_OFFSETS_X_DECLARED_SHAPE_RULES",
             "terminal_authority":False,
         }
 
