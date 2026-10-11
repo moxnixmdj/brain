@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TB4_UNSPENT_SLOT_RECOVERY_CENSUS_20261011_V1",
   "date": "2026-10-11",
-  "status": "CANDIDATE_CENSUS__SEVEN_NONOVERLAPPING_HISTORICAL_TASKS__31_CONDITIONAL_UNSPENT_SLOTS__ZERO_RECOVERED_CREDIT",
+  "status": "CANDIDATE_CENSUS_V2__FIFTEEN_RECOVERY_CANDIDATES__70_CONDITIONAL_UNSPENT_SLOTS__COGNITION_ISOLATION_OPEN__ZERO_RECOVERED_CREDIT",
   "target_predicate": "CODING_TB4_GE_66_4",
   "current_bound": {
     "creditable_task_count": 44,
@@ -21,89 +21,140 @@
   ],
   "historical_recovery_candidates": [
     {
+      "task": "mp-checkpoint-consolidation",
+      "sample_rank": 2,
+      "prior_authoritative_reward_slots": 0,
+      "conditional_unspent_slots": 5,
+      "basis": "PUBLIC_SOLUTION_EXPOSURE__NO_HIDDEN_VERIFIER_FOR_PROMOTION"
+    },
+    {
       "task": "hof-topology-interpenetration",
       "sample_rank": 3,
-      "clean_lease_commit": "ba1b46042a0ffefb415ad2985b3ccfbf5828c8db",
-      "disposition_commit": "c6c74e0b5a8b1a21f32f6c878eb97ee10bf1608e",
-      "prior_official_verifier_attempts": 0,
-      "disposition": "CONTAMINATED_BY_PUBLIC_REFERENCE_BEFORE_TERMINAL_VERIFIER",
-      "conditional_unspent_slots": 5
+      "prior_authoritative_reward_slots": 0,
+      "conditional_unspent_slots": 5,
+      "basis": "PUBLIC_REFERENCE_CONTAMINATION_BEFORE_TERMINAL_VERIFIER"
     },
     {
       "task": "gsea-proteomics",
       "sample_rank": 4,
-      "clean_lease_commit": "cb684f8019272f944d5deb4154688f735acd97fa",
-      "disposition_commit": "8fd32fc00a867005e7efb51b5cf77dfca314bda2",
-      "prior_official_verifier_attempts": 1,
-      "disposition": "AUTHORITATIVE_REWARD_ZERO_AFTER_ONE_CLEAN_ATTEMPT",
-      "conditional_unspent_slots": 4
+      "prior_authoritative_reward_slots": 1,
+      "prior_reward": 0,
+      "conditional_unspent_slots": 4,
+      "basis": "ONE_AUTHORITATIVE_REWARD_ZERO_ATTEMPT"
     },
     {
       "task": "batched-eval-parity",
       "sample_rank": 5,
-      "clean_lease_commit": "0c8ce477a079ccd72f310681526718cdffe8b418",
-      "disposition_commit": "e79c917927533a125de33a8abcd051efdd11f7be",
-      "prior_official_verifier_attempts": 0,
-      "disposition": "CONTAMINATED_BY_TASK_TOML_SOLUTION_EXPOSURE_BEFORE_HIDDEN_VERIFIER",
-      "conditional_unspent_slots": 5
+      "prior_authoritative_reward_slots": 0,
+      "conditional_unspent_slots": 5,
+      "basis": "TASK_TOML_SOLUTION_EXPOSURE__NO_HIDDEN_VERIFIER"
     },
     {
       "task": "glycan-ms2-elucidation",
       "sample_rank": 6,
-      "clean_lease_commit": "446478a1043b2ff10b1be50ad18d0c44d40759aa",
-      "disposition_commit": "6a301e021c08dfe1acc32786b3e42abbfa52bece",
-      "prior_official_verifier_attempts": 1,
-      "disposition": "REWARD_ZERO_TRANSPORT_INADMISSIBLE__VERIFIER_DID_NOT_CONSUME_CANDIDATE",
-      "conditional_unspent_slots": 4
+      "prior_authoritative_reward_slots": 1,
+      "prior_reward": 0,
+      "conditional_unspent_slots": 4,
+      "basis": "ONE_REWARD_ZERO_TRANSPORT_INADMISSIBLE_ATTEMPT__CONSERVATIVELY_HELD_ZERO"
     },
     {
       "task": "intrastat-meldung",
       "sample_rank": 8,
-      "clean_lease_commit": "33c120ee12d0da60ab20568a6dfdc8caad1fde7f",
-      "disposition_commit": "9ee1d5794dace0d4e3da183ed1fa3d3491b7cba6",
-      "prior_official_verifier_attempts": 0,
-      "disposition": "SOLUTION_SNIPPET_EXPOSURE_BEFORE_TASK_INSTRUCTION__RUNNER_FAILED_BEFORE_READY",
-      "conditional_unspent_slots": 5
+      "prior_authoritative_reward_slots": 0,
+      "conditional_unspent_slots": 5,
+      "basis": "SOLUTION_SNIPPET_EXPOSURE__RUNNER_FAILED_BEFORE_READY"
     },
     {
       "task": "cad-model",
       "sample_rank": 10,
-      "clean_lease_commit": "2b02287599d6878952a4a355fd05c4c6f219a34e",
-      "disposition_commit": "a4b8e6bd5b03ece0c2cd6c223e7f4cbbe52f799e",
-      "prior_official_verifier_attempts": 1,
-      "disposition": "AUTHORITATIVE_REWARD_ZERO_AFTER_ONE_CLEAN_ATTEMPT",
+      "prior_authoritative_reward_slots": 1,
+      "prior_reward": 0,
       "conditional_unspent_slots": 4,
+      "basis": "ONE_AUTHORITATIVE_REWARD_ZERO_ATTEMPT",
       "preverification_root_receipt": "canonical/verification/TB4_CAD_MODEL_PREVERIFIER_ROOTS_INDEPENDENT_VERIFY_20261011_V1.json"
+    },
+    {
+      "task": "ontology-kg-querying",
+      "sample_rank": 12,
+      "prior_authoritative_reward_slots": 1,
+      "prior_reward": 0,
+      "conditional_unspent_slots": 4,
+      "basis": "ONE_AUTHORITATIVE_REWARD_ZERO_ATTEMPT"
     },
     {
       "task": "fin-saccr-rwa",
       "sample_rank": 13,
-      "clean_lease_commit": "f91684889a6aff9e606759ec17ccce7b3d10c35d",
-      "disposition_commit": "d8c3e8fd1f2aca88a6ea672f22d46c31502b1ca6",
-      "prior_official_verifier_attempts": 1,
-      "disposition": "AUTHORITATIVE_REWARD_ZERO_AFTER_ONE_CLEAN_ATTEMPT",
-      "conditional_unspent_slots": 4
+      "prior_authoritative_reward_slots": 1,
+      "prior_reward": 0,
+      "conditional_unspent_slots": 4,
+      "basis": "ONE_AUTHORITATIVE_REWARD_ZERO_ATTEMPT"
+    },
+    {
+      "task": "data-anonymization",
+      "sample_rank": 17,
+      "prior_authoritative_reward_slots": 0,
+      "conditional_unspent_slots": 5,
+      "basis": "STAGE_C_BURST_EXECUTED__NO_TERMINAL_VERIFIER"
+    },
+    {
+      "task": "satb-audio-transcription",
+      "sample_rank": 19,
+      "prior_authoritative_reward_slots": 0,
+      "conditional_unspent_slots": 5,
+      "basis": "EXECUTION_SURFACE_FAILURE__NO_TERMINAL_VERDICT"
+    },
+    {
+      "task": "vba-userform-port",
+      "sample_rank": 20,
+      "prior_authoritative_reward_slots": 0,
+      "conditional_unspent_slots": 5,
+      "basis": "CONTAMINATED_AFTER_STAGE_B__BUILDER_EXECUTION_REVOKED"
+    },
+    {
+      "task": "foodstuff-beta-activity",
+      "sample_rank": 21,
+      "prior_authoritative_reward_slots": 0,
+      "conditional_unspent_slots": 5,
+      "basis": "POST_STAGE_B_DISCOVERY_COLLISION__NO_TASK_EXECUTION"
+    },
+    {
+      "task": "layout-config-recreation2",
+      "sample_rank": 23,
+      "prior_authoritative_reward_slots": 0,
+      "conditional_unspent_slots": 5,
+      "basis": "POST_REVOCATION_SOURCE_EXPOSURE__TASK_EXECUTION_FORBIDDEN"
+    },
+    {
+      "task": "rs-archive-clone",
+      "sample_rank": 24,
+      "prior_authoritative_reward_slots": 0,
+      "conditional_unspent_slots": 5,
+      "basis": "POST_STAGE_B_DISCOVERY_SEARCH_VIOLATION__NO_TASK_EXECUTION"
     }
   ],
   "arithmetic": {
-    "conditional_recovery_slots": 31,
-    "conditional_total_creditable_slots": 251,
+    "conditional_recovery_slots": 70,
+    "permanently_held_prior_reward_zero_slots_within_candidates": 5,
+    "conditional_total_creditable_success_capacity": 290,
     "required_successes": 219,
-    "conditional_failure_slack": 32,
-    "proof": "5+4+5+4+5+4+4=31__AND__220+31=251__AND__251-219=32"
+    "conditional_failure_slack": 71,
+    "conditional_required_hit_rate_on_possible_slots_percent": 75.51724137931035,
+    "proof": "5+5+4+5+4+5+4+4+4+5+5+5+5+5+5=70__AND__220+70=290__AND__290-219=71__AND__100*219/290=75.517241..."
   },
   "overlap_check": {
     "candidate_tasks_disjoint_from_eight_resource_recovery_tasks": true,
     "double_counted_tasks": [],
     "result": "PASS"
   },
-  "admission_rule": "NO_SLOT_ENTERS_CURRENT_CAPACITY_FROM_THIS_CENSUS_ALONE__EACH_TASK_REQUIRES_EXACT_PREVERIFIER_ROOT_BINDING_PLUS_SHARED_CLEANROOM_CAUSAL_ISOLATION_GATE__CONSUMED_PRIOR_ATTEMPTS_REMAIN_ZERO",
-  "next_load_bearing_obligation": "PROVE_SHARED_HISTORICAL_ACTOR_ROUTE_REPRODUCIBILITY_AND_CLEANROOM_CAUSAL_ISOLATION__THEN_BIND_TASKS_ONE_BY_ONE_WITHOUT_EXECUTING_ACCEPTANCE_CASES",
+  "admission_rule": "CENSUS_IS_CAPACITY_POTENTIAL_ONLY__NO_SLOT_REENTERS_CURRENT_220_CAPACITY_UNTIL V2_FILE_AND_COGNITION_ISOLATION_GATE_PASSES_FOR_ITS_PREVERIFIER_ROOT__PRIOR_AUTHORITATIVE_REWARD_ZERO_SLOTS_REMAIN_ZERO",
+  "next_load_bearing_obligation": "SHARED_COGNITIVE_REPRODUCIBILITY_AND_CLEANROOM_ISOLATION_IS_NOW_THE_TOP_RECOVERY_PRIMITIVE__DO_NOT_VERIFY_FIFTEEN_TASK_ROOTS_ONE_BY_ONE_UNTIL_SHARED_COGNITION_ROUTE_EXISTS",
   "hard_nonclaims": [
-    "NO_CURRENT_CAPACITY_CHANGE",
+    "CURRENT_CAPACITY_REMAINS_220",
+    "CONDITIONAL_290_IS_NOT_CURRENT_CREDITABLE_CAPACITY",
     "NO_RECOVERED_SLOT_CREDIT",
     "NO_NEW_TB4_SUCCESS",
-    "NO_REPLAY_OF_PRIOR_FAILED_ATTEMPTS",
+    "NO_CLAIM_UNRESOLVED_RANK16_OR_RANK25_IS_RECOVERABLE",
+    "POLICY_INADMISSIBLE_RANK9_NOT_SCHEDULED",
     "NO_EXECUTION_AUTHORITY",
     "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
   ],
@@ -112,5 +163,25 @@
     "terminal_cases_consumed": 0,
     "recovered_creditable_slots": 0,
     "success_credit_delta": 0
-  }
+  },
+  "unresolved_or_excluded_historical_zero_tasks": [
+    {
+      "task": "atrx-vep-crispr",
+      "sample_rank": 9,
+      "max_slots": 5,
+      "state": "EXCLUDED_FROM_ACTIVE_RECOVERY__POLICY_INADMISSIBLE_SEQUENCE_SPECIFIC_HUMAN_GENOME_EDITING_DESIGN"
+    },
+    {
+      "task": "session-window-debug",
+      "sample_rank": 16,
+      "max_slots": 5,
+      "state": "UNRESOLVED__PRIOR_EXACT_TASK_EXPOSURE_PREDATES_CURRENT_CLEAN_ROUTE__EARLIER_COGNITIVE_ROOT_REQUIRED"
+    },
+    {
+      "task": "photonic-waveguide-routing",
+      "sample_rank": 25,
+      "max_slots": 5,
+      "state": "UNRESOLVED__PRIOR_RUNNER_EXPOSURE_PREDATES_V5_SAMPLE__EARLIER_COGNITIVE_ROOT_REQUIRED"
+    }
+  ]
 }
