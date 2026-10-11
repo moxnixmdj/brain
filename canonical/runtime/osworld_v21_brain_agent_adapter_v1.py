@@ -321,6 +321,26 @@ class BrainOSWorldAgent:
         except AdapterError as exc:
             return self._recoverable_error(state, raw, exc)
 
+        if actions == ["DONE"]:
+            if not self.history:
+                return self._recoverable_error(
+                    state, raw, AdapterError("DONE_WITHOUT_PRIOR_OBSERVED_ACTION")
+                )
+            prior = self.history[-1]
+            if prior.get("operation_error"):
+                return self._recoverable_error(
+                    state, raw, AdapterError("DONE_AFTER_UNRECOVERED_OPERATION_ERROR")
+                )
+            has_receipted_state = isinstance(prior.get("browser_result"), Mapping) or isinstance(
+                prior.get("guest_result"), Mapping
+            )
+            prior_sha = prior.get("screenshot_sha256")
+            current_sha = state.get("screenshot_sha256")
+            if not has_receipted_state and prior_sha == current_sha:
+                return self._recoverable_error(
+                    state, raw, AdapterError("DONE_WITHOUT_OBSERVABLE_STATE_CHANGE")
+                )
+
         self._record(
             state,
             response=response,
