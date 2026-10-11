@@ -1,5 +1,5 @@
 {
-  "schema": "PROJECT_BRAIN_AUTOMATIONBENCH_PRIVATE_RECEIPT_CLOSURE_CONTRACT_20261011_V4",
+  "schema": "PROJECT_BRAIN_AUTOMATIONBENCH_PRIVATE_RECEIPT_CLOSURE_CONTRACT_20261011_V5",
   "date": "2026-10-11",
   "status": "CANDIDATE__TWO_EXACT_PRIVATE_OWNER_ROUTES_BOUND__ZAPIER_OR_ARTIFICIAL_ANALYSIS_RESULT_ONLY_REMAINS__ZERO_CREDIT",
   "target_predicate": "AUTOMATIONBENCH_GE_40",
@@ -93,15 +93,23 @@
     "adapter_build_before_interface_known": "FORBIDDEN_AS_SPECULATIVE_CHURN",
     "next_if_provider_accepts": "ADAPT_CURRENT_CONTENT_ADDRESSED_RUNTIME_TO_EXACT_ACCEPTED_INTERFACE__FREEZE_ALL_COMPONENTS__RUN_OFFICIAL_PRIVATE_V1_0_6__VERIFY_RECEIPT",
     "generic_tool_effect_planner_exists": true,
-    "generic_tool_effect_planner_path": "canonical/runtime/generic_goal_tool_effect_planner_v1.py",
+    "generic_tool_effect_planner_path": "canonical/runtime/generic_goal_tool_effect_planner_v2.py",
     "automationbench_stirrup_adapter_exists": true,
     "automationbench_stirrup_adapter_path": "canonical/runtime/automationbench_stirrup_client_v1.py",
-    "current_candidate_capability_status": "DEVELOPMENT__GENERIC_GOAL_TOOL_EFFECT_PLANNING__GENERIC_SCHEMA_ARGUMENT_BINDING__FRESH_REOBSERVATION__INDEPENDENT_OBSERVE_UPDATE_CREATE_VERIFICATION_BOUND__ASSOCIATE_DELETE_NOTIFY_VERIFICATION_AND_FULL_GENERALIZATION_REMAIN_OPEN",
+    "current_candidate_capability_status": "CANONICAL_GENERAL_WORKFLOW_V2_BOUND__FIELD_LEVEL_CAUSAL_PLANNING__GENERIC_SCHEMA_ARGUMENT_BINDING__ERROR_AWARE_SEQUENTIAL_EXECUTION__INDEPENDENT_POST_STATE_VERIFICATION_FOR_OBSERVE_UPDATE_CREATE_DELETE_ASSOCIATE_NOTIFY__PRIVATE_SCOPE_COMPLETENESS_AND_PRIVATE_SCORE_REMAIN_OPEN",
     "generic_argument_binder_exists": true,
     "generic_argument_binder_path": "canonical/runtime/generic_tool_argument_binder_v1.py",
     "generic_independent_state_verifier_exists": true,
-    "generic_independent_state_verifier_path": "canonical/runtime/generic_goal_state_verifier_v1.py",
-    "generic_closed_loop_test_path": "canonical/tests/test_generic_workflow_closed_loop_v1.py"
+    "generic_independent_state_verifier_path": "canonical/runtime/generic_goal_state_verifier_v2.py",
+    "generic_closed_loop_test_path": "canonical/tests/test_generic_workflow_closed_loop_v1.py",
+    "current_automationbench_candidate_binding": "canonical/governance/AUTOMATIONBENCH_CAPABILITY_FIRST_CANDIDATE_BINDING_20261011_V1.json",
+    "current_automationbench_candidate_merge_sha": "4af3376324d98d6a945e83c817c507e969208247",
+    "current_automationbench_candidate_model_slug": "project-brain/general-workflow-field-grounding-v2",
+    "automationbench_policy_state_machine_path": "canonical/runtime/automationbench_policy_state_machine_v2.py",
+    "focused_and_adjacent_replay_receipt": "canonical/verification/GENERAL_WORKFLOW_FIELD_GROUNDING_V2_INDEPENDENT_REPLAY_20261011_V1.json",
+    "focused_and_adjacent_replay_result": "81_OF_81_PASS",
+    "exact_private_candidate_frozen_for_owner_run": false,
+    "freeze_rule": "WHEN_AN_OWNER_OR_DELEGATED_EVALUATOR_ACCEPTS_THE_CALLABLE_INTERFACE__FREEZE_EXACT_CANONICAL_MERGE_AND_ALL_EXECUTION_COMPONENTS_BEFORE_PRIVATE_EXECUTION"
   },
   "route_adjudication": {
     "PUBLIC_600_DIRECT_ROUTE": "KILLED_FOR_PRIVATE_PROMOTION",
@@ -122,7 +130,11 @@
     "generic_schema_argument_binding_bound": true,
     "generic_fresh_reobservation_bound": true,
     "generic_independent_state_verification_bound": true,
-    "private_predicate_still_open": true
+    "private_predicate_still_open": true,
+    "general_workflow_v2_canonical_merge_observed": true,
+    "general_workflow_v2_canonical_merge_sha": "4af3376324d98d6a945e83c817c507e969208247",
+    "general_workflow_v2_adjacent_replay": "81_OF_81_PASS",
+    "generic_associate_delete_notify_verification_bound": true
   },
   "accounting": {
     "incremental_spend_usd": 0,
@@ -142,8 +154,9 @@
     "NO_PRIVATE_TASK_CONTENT_WAS_READ",
     "NO_CLAIM_GENERIC_TOOL_EFFECT_PLANNER_IS_YET_SCOPE_COMPLETE_FOR_AUTOMATIONBENCH",
     "NO_CAPABILITY_OR_OWNERSHIP_CREDIT_FOR_APP_OR_TASK_SPECIFIC_MUTATION_BINDERS",
-    "NO_CLAIM_GENERIC_ASSOCIATE_DELETE_OR_NOTIFY_STATE_VERIFICATION_IS_COMPLETE",
-    "NO_CLAIM_FOCUSED_MIRROR_REPLAY_IS_AN_EXACT_FULL_REPOSITORY_TEST_RUN"
+    "NO_CLAIM_FOCUSED_MIRROR_REPLAY_IS_AN_EXACT_FULL_REPOSITORY_TEST_RUN",
+    "NO_CLAIM_81_TEST_REPLAY_IS_SCOPE_COMPLETE_FOR_PRIVATE_657",
+    "NO_CLAIM_GENERAL_WORKFLOW_V2_HAS_A_PRIVATE_AUTOMATIONBENCH_SCORE"
   ],
   "now_impossibility_certificate": {
     "status": "PROVED_FOR_CURRENT_INFORMATION_AND_CONSTRAINT_SET__EXACT_TARGET_REMAINS_OPEN",
@@ -198,13 +211,14 @@
   "development_causality": {
     "law": "canonical/laws/BENCHMARK_MEASUREMENT_AND_CAPABILITY_CAUSALITY_LAW_V1.md",
     "benchmark_role": "DOWNSTREAM_MEASUREMENT_AND_FAILURE_GENERATOR__NOT_CAPABILITY_DEFINITION",
-    "active_general_mechanism": "canonical/runtime/generic_goal_tool_effect_planner_v1.py",
+    "active_general_mechanism": "canonical/runtime/generic_goal_tool_effect_planner_v2.py",
     "reused_planning_substrate": "canonical/runtime/capability_planner.py",
-    "benchmark_adapter": "canonical/runtime/automationbench_policy_state_machine_v1.py",
+    "benchmark_adapter": "canonical/runtime/automationbench_policy_state_machine_v2.py",
     "evaluator_adapter": "canonical/runtime/automationbench_stirrup_client_v1.py",
     "transitional_zero_credit_scaffolding": [
       "canonical/runtime/automationbench_mutation_compiler_v1.py",
-      "legacy AutomationBench-specific observation fallback inside canonical/runtime/automationbench_policy_state_machine_v1.py"
+      "canonical/runtime/automationbench_policy_state_machine_v1.py",
+      "canonical/runtime/generic_goal_state_verifier_v1.py"
     ],
     "public_tasks_policy": "USE_AS_CAUSAL_FAILURE_GENERATORS_ONLY__REPAIR_GENERAL_MECHANISM__VERIFY_ON_RENAMED_NEIGHBOR_AND_ADVERSARIAL_CASES",
     "promotion_requirement": "BENCHMARK_AGNOSTIC_GOAL_STATE_TOOL_EFFECT_MECHANISM_MUST_REMAIN_LOAD_BEARING_AFTER_BENCHMARK_SPECIFIC_LITERALS_AND_TASK_TEMPLATES_ARE_ABLATED",
@@ -221,15 +235,22 @@
       "FAIL_CLOSED_OR_COMPLETE"
     ],
     "current_general_verifier_scope": [
-      "OBSERVE",
-      "UPDATE_EXACT_NORMALIZED_VALUE",
-      "CREATE_EXACT_NORMALIZED_NAME"
+      "OBSERVE_RELEVANT_POST_STATE",
+      "UPDATE_SAME_TARGET_IDENTITY_AND_EXACT_NORMALIZED_VALUE",
+      "CREATE_GROUNDED_IDENTITY_AND_EXPOSED_SCALARS",
+      "DELETE_STRONG_ABSENCE_EVIDENCE",
+      "ASSOCIATE_GROUNDED_RELATION_ANCHORS",
+      "NOTIFY_GROUNDED_RECIPIENT_POST_STATE",
+      "FORBIDDEN_DELETE_TARGET_SURVIVAL"
     ],
     "current_general_verifier_open_classes": [
-      "ASSOCIATE",
-      "DELETE",
-      "NOTIFY"
+      "FORBIDDEN_ACTION_CLASSES_OTHER_THAN_DELETE_WHEN_POST_STATE_CANNOT_INDEPENDENTLY_ESTABLISH_NON_EXECUTION",
+      "FULL_PRIVATE_657_SCOPE_COMPLETENESS"
     ],
-    "ambiguity_policy": "TIED_TOP_MUTATION_ROUTES_AND_TIED_TOP_ENTITY_IDS_FAIL_CLOSED"
+    "ambiguity_policy": "TIED_TOP_MUTATION_ROUTES_AND_TIED_TOP_ENTITY_IDS_FAIL_CLOSED",
+    "active_v2_reaches_app_specific_mutation_compiler": false,
+    "current_candidate_binding": "canonical/governance/AUTOMATIONBENCH_CAPABILITY_FIRST_CANDIDATE_BINDING_20261011_V1.json",
+    "current_candidate_merge_sha": "4af3376324d98d6a945e83c817c507e969208247",
+    "replay_evidence": "canonical/verification/GENERAL_WORKFLOW_FIELD_GROUNDING_V2_INDEPENDENT_REPLAY_20261011_V1.json"
   }
 }
