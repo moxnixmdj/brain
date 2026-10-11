@@ -18,10 +18,10 @@ registry = load("canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.js
 evidence = load("canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json")
 
 assert receipt["status"] == "INDEPENDENT_PUBLIC_RUNNER_PASS__11_OF_11_TARGETS__47_OF_47_ATOMS__10_OF_10_METRICS_SOURCE_BOUND__ZERO_CREDIT", receipt
-assert activation["status"] == "ACTIVE_INDEPENDENT_PASS__TARGET_SOURCE_PROVENANCE_VERIFIED__BRAIN_WITNESS_NORMALIZATION_OPEN__ZERO_CREDIT", activation
+assert activation["status"] == "ACTIVE_INDEPENDENT_PASS__TARGET_AND_BRAIN_WITNESS_NORMALIZATION_VERIFIED__SEMANTIC_IMPLICATION_OPEN__ZERO_CREDIT", activation
 assert activation["exact_state"]["target_source_provenance_verified"] is True
 assert activation["exact_state"]["semantic_implication_verified"] is False
-assert activation["exact_state"]["brain_witness_normalization_verified"] is False
+assert activation["exact_state"]["brain_witness_normalization_verified"] is True
 
 actions = {a["id"]: a for a in hypergraph["actions"]}
 imp = actions["RUN_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA"]
@@ -31,13 +31,15 @@ ip = {p["id"]: p for p in imp["preconditions"]}
 dp = {p["id"]: p for p in diff["preconditions"]}
 
 assert ip["MATCHED_TARGET_NORMALIZATION_INDEPENDENT_PASS"]["satisfied"] is True, ip
-assert ip["MATCHED_BRAIN_WITNESS_NORMALIZATION_INDEPENDENT_PASS"]["satisfied"] is False, ip
+assert ip["MATCHED_BRAIN_WITNESS_CATALOG_INDEPENDENT_PASS"]["satisfied"] is True, ip
+assert ip["MATCHED_BRAIN_WITNESS_TARGET_ATOM_METRIC_BINDINGS_INDEPENDENT_PASS"]["satisfied"] is False, ip
+assert ip["MATCHED_BRAIN_WITNESS_SCOPE_RELATIONS_INDEPENDENT_PASS"]["satisfied"] is False, ip
 assert dp["MATCHED_TARGET_NORMALIZATION_INDEPENDENT_PASS"]["satisfied"] is True, dp
 assert dp["COMPLETE_FROZEN_FINITE_SHARED_CRITERION_SCOPE_AVAILABLE_PER_TARGET"]["satisfied"] is False, dp
 
 ir = compile_ir(registry, evidence, hypergraph)
-assert ir["proved_predicate_count"] == 9, ir
-assert ir["unresolved_predicate_count"] == 29, ir
+assert ir["proved_predicate_count"] == 16, ir
+assert ir["unresolved_predicate_count"] == 22, ir
 ir_actions = {a["id"]: a for a in ir["actions"]}
 assert ir_actions["RUN_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA"]["available_now"] is False, ir_actions["RUN_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA"]
 assert ir_actions["RUN_FINITE_DIFFERENTIAL_DOMINANCE_ELIMINATION"]["available_now"] is False, ir_actions["RUN_FINITE_DIFFERENTIAL_DOMINANCE_ELIMINATION"]
@@ -45,7 +47,7 @@ assert ir_actions["SEARCH_SCOPE_COMPLETE_STRONGER_PROOFS_FOR_MATCHED_RESIDUAL"][
 
 cut = cut_evaluate(ir)
 assert cut["status"] == "EXACT_TERMINAL_ACTION_CUT_COMPUTED", cut
-assert cut["covered_predicate_count"] == 29, cut
+assert cut["covered_predicate_count"] == 22, cut
 assert cut["uncovered_predicates"] == [], cut
 assert "RUN_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA" not in cut["selected_actions"], cut
 assert "SEARCH_SCOPE_COMPLETE_STRONGER_PROOFS_FOR_MATCHED_RESIDUAL" in cut["selected_actions"], cut
