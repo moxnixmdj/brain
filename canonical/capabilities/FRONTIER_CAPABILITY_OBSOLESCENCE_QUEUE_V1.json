@@ -82,24 +82,23 @@
     "REOPENED_BY_REGRESSION"
   ],
   "immediate_frontier": {
-    "selected_capability": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+    "selected_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
     "parent_frontier_capability": null,
-    "objective": "Internalize existing equal-or-better capability mechanisms into Brain. Prefer deletion/reuse/substitution; white-box donors may supply only residual learned mechanisms. External models/services remain specimens or donors, not owned runtime implementations.",
-    "selection_metric": "GLOBAL_TERMINAL_PROOF_OBLIGATIONS_CLOSED_PER_NEW_REALITY_INFORMATION__THEN_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "TERMINAL_FALSE__14_OF_19_FAMILIES_OPEN__24_OF_38_ATOMIC_PREDICATES_UNRESOLVED__SEE_CURRENT_TERMINAL_AUTHORITY_NEXT_FOR_EXACT_ACTIVE_ROUTE",
+    "objective": "Maximize verified general, reusable, reliable, resource-efficient problem-solving capability. Reuse and adapt verified Brain mechanisms first; benchmarks and named frontier systems are audits, falsifiers, calibration surfaces, or capability specimens.",
+    "selection_metric": "EXPECTED_GENERAL_CAPABILITY_GAIN_X_REUSE_BREADTH_X_RELIABILITY_GAIN_X_CAUSAL_CONFIDENCE_PER_WALL_CLOCK_COMPUTE_MEMORY_COST_COMPLEXITY_EVIDENCE_RISK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
+    "exact_blocker": "GENERAL_CAPABILITY_FRONTIER_SELECTION__CHOOSE_HIGHEST_EXPECTED_VERIFIED_GENERAL_CAPABILITY_GAIN_PER_RESOURCE_FROM_CURRENT_CAUSAL_EVIDENCE",
     "evidence_paths": [
-      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V7.md",
-      "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
-      "canonical/capabilities/internalized/software_engineering/superpowers_6_4_2/INTERNALIZATION_MANIFEST.json",
-      "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/COMPOSED_CONFIGURATION_V1.json",
-      "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/EVALUATION_PROTOCOL_V2.json",
-      "canonical/capabilities/opus55/WAL_RECOVERY_ORDERING_TB4_VERIFICATION_PASS_20261001_V1.json"
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/governance/CURRENT_DEVELOPMENT_AUTHORITY.json",
+      "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json",
+      "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
+      "canonical/laws/BENCHMARK_MEASUREMENT_VS_CAPABILITY_PROOF_LAW_V1.md"
     ],
-    "next_action": "CONTINUE_ONLY_CURRENT_V22_INTERFACES__WITHIN_EXTERNAL_RESULT_OR_ACCESS_PRIORITIZE_BENCHMARK_WITNESS_ELIMINATION_CERTIFICATE_SYNTHESIS_AND_FALSIFICATION__TREAT_PROVIDER_OR_AUTHENTICATION_EVENTS_AS_OPPORTUNISTIC_WAKES_NOT_WAIT_STATES__ALSO_CONTINUE_UNIVERSAL_SCOPE_AND_COMPOSITION_AND_BEHAVIORAL_QUOTIENT_AND_TRANSFER__NO_FRESH_REALITY_WITHOUT_EXPLICIT_AUTHORITY",
+    "next_action": "SELECT_NONDOMINATED_GENERAL_CAPABILITY_ACTION__REUSE_ADAPT_VERIFY_PROMOTE_FIRST__BENCHMARK_ONLY_AS_AUDIT_FALSIFIER_CALIBRATION_OR_CAUSAL_PROBE",
     "whole_envelope_complete": false,
     "incremental_spend_usd": 0,
     "white_box_harvest_status": "CANONICAL_CHALLENGER_AVAILABLE__NOT_SELECTED_WHILE_CURRENT_V5_ROUTE_HAS_VERIFIED_PASS_AND_STAGE1_BREADTH_IS_THE_DIRECT_BLOCKER",
-    "white_box_harvest_law": "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V1.md",
+    "white_box_harvest_law": "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
     "wal_recovery_ordering_contamination_policy": "SPENT_AFTER_INDEPENDENT_VERIFIER__VERIFIED_REWARD_1__NO_REPLAY_FOR_PROMOTION",
     "current_stage_1_evidence": {
       "benchmark": "Terminal-Bench 4.0",
@@ -185,7 +184,7 @@
       "status": "SOURCE_READ_AFTER_REVOCATION__ZERO_CREDIT__NO_EXECUTION",
       "evidence_path": "canonical/governance/RANK23_POST_REVOKE_EXPOSURE_RECONCILIATION_V1.json"
     },
-    "next_progress_event_target": "CURRENT_TERMINAL_AUTHORITY_NEXT_PASS_OR_FALSIFICATION__OR_ANOTHER_CAUSALLY_BOUND_ZERO_REALITY_DELTA__NO_TERMINAL_PROMOTION_WITHOUT_SEPARATE_INDEPENDENT_REDUCTION",
+    "next_progress_event_target": "VERIFIED_GENERAL_CAPABILITY_GAIN_OR_CAUSAL_FALSIFICATION__THEN_OPTIONAL_MILESTONE_AUDIT",
     "open_mechanism_residual_count": 0,
     "open_mechanism_residuals": [],
     "m0b_closure": "canonical/governance/M0B_FROZEN_ENVELOPE_CLOSURE_V1.json",
@@ -249,7 +248,8 @@
       "v4_independent_verification": "PENDING"
     },
     "admissible_frozen_terminal_route_count": 1,
-    "remaining_terminal_route_count": 11
+    "remaining_terminal_route_count": 11,
+    "legacy_opus_5_5_evidence_role": "MILESTONE_AUDIT_AND_CAPABILITY_SPECIMEN__HISTORICAL_FIELDS_RETAINED_WITH_ZERO_PARENT_SCHEDULING_AUTHORITY"
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [
@@ -599,11 +599,12 @@
     "DELETE",
     "BYPASS",
     "REUSE",
+    "ADAPT",
     "SUBSTITUTE",
-    "WHITE_BOX_HARVEST",
     "COMPOSE",
     "CONFIGURE",
-    "INTEGRATE"
+    "INTEGRATE",
+    "SYNTHESIZE_NEW_PRIMITIVE"
   ],
   "delegation_acceptance_delta": {
     "status": "INDEPENDENTLY_PROMOTED__ONE_FAMILY_ONE_ATOMIC_PREDICATE",
