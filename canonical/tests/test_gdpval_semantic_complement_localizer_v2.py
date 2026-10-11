@@ -8,7 +8,7 @@ from canonical.runtime.gdpval_semantic_complement_localizer_v2 import (
 )
 
 
-class GDPvalSemanticComplementLocalizerV2Tests(unittest.TestCase):
+# Verification trigger: exact current-main V2 localizer replay.\nclass GDPvalSemanticComplementLocalizerV2Tests(unittest.TestCase):
     def test_flat_compound_candidate_is_diagnostic_not_credit(self):
         x = _compound_candidate("The report must include revenue and include expenses.")
         self.assertEqual(x["status"], "BOUNDED_COMPOUND_CANDIDATE")
