@@ -1,0 +1,88 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_OPERATOR_WHITESPACE_V78_SUCCESSOR_EXECUTION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "VERIFIED_RESEARCH_FRONTIER__TOKEN_AND_AST_EQUIVALENT_OPERATOR_WHITESPACE_COMPACTION__CORRECTED_NEXT82_TRANSFERRED__NEXT83_FROZEN_UNSPENT__CURRENT_POINTER_ELIGIBLE__ZERO_PROMOTION_CREDIT",
+  "subject": {
+    "predecessor": "canonical/evidence/BYTES_EXACT_SYMBOLIC_FAILCLOSED_MESSAGE_V77_SUCCESSOR_EXECUTION_20261011_V1.json",
+    "predecessor_manifest_sha256": "b03d2329afd48ac7f66fa8c90bd52d1bd454cf15547b67e305fabb2e1fb3111a",
+    "transform": "canonical/research/bytes/tools/conservative_operator_whitespace_compact_v78.py",
+    "transform_sha256": "88ad0927c95ebbfbecd991262dc48af287743be551a815020538d23554ef6e0a",
+    "manifest_sha256": "e4e5e57c5c41f738ced105271d4e4bb907eaa1afe33e01788204009d49315f60",
+    "python_files": 277,
+    "raw_python_source_bytes": 1589206,
+    "B_exec_raw_python_source_bytes": 1591966,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "raw_delta_vs_v77_bytes": -4445,
+    "B_exec_delta_vs_v77_bytes": -4445
+  },
+  "selection": {
+    "id": "OPERATOR_ADJACENT_INTERTOKEN_WHITESPACE_COMPACTION_V78",
+    "method": "DELETE_ONLY_SAME_PHYSICAL_LINE_SPACE_OR_TAB_GAPS_WHEN_EITHER_ADJACENT_TOKEN_IS_OPERATOR__PRESERVE_TOKEN_TYPES_TOKEN_STRINGS_NEWLINES_INDENTATION_LITERALS_AND_CONTROL_FLOW",
+    "changed_python_file_count": 129,
+    "removed_whitespace_gap_count": 4445,
+    "deleted_source_bytes": 4445
+  },
+  "equivalence": {
+    "proof_library_path": "/Brain Evidence/Bytes/BYTES_V78_OPERATOR_WHITESPACE_EQUIVALENCE_PROOF_20261011_V1.json",
+    "proof_library_file_id": "libfile_6477b3832e6c819187b243c51ecabc1f",
+    "proof_sha256": "a4ff22bdf0df0f9a523cddb7c74e46e8effb97c79bf3a2c2b048564100968168",
+    "python_files_checked": 277,
+    "token_type_and_string_sequence_mismatches": 0,
+    "ast_without_source_attributes_mismatches": 0,
+    "compile_failures": 0,
+    "source_position_boundary": "COLUMN_OFFSETS_CHANGE_ON_MODIFIED_LINES__BOUNDED_EXACT_SYMBOLIC_HARNESS_DOES_NOT_SCORE_SOURCE_COLUMNS_OR_TRACEBACK_LAYOUT"
+  },
+  "qualification": {
+    "inherited_corrected_NEXT82": {
+      "id": "QUAL_SUCCESSOR_NEXT82_20261011_V1",
+      "cases": 20700,
+      "candidate_V78_full_execution": false,
+      "transfer_basis": "IDENTICAL_TOKEN_TYPE_AND_STRING_STREAMS__IDENTICAL_AST_WITHOUT_SOURCE_POSITIONS"
+    },
+    "direct_stratified_corrected_NEXT82": {
+      "sampling": "20_EVENLY_SPACED_CASES_PER_OPERATION_ACROSS_ALL_12_OPERATIONS",
+      "candidate_V78": "240/240",
+      "failures": 0,
+      "status": "SUPPORTING_ONLY__PRIMARY_PROOF_IS_TOKEN_AND_AST_EQUIVALENCE"
+    }
+  },
+  "reproducibility": {
+    "clean_room_v77_to_v78_reconstruction": "PASS__EXACT_TARGET_MANIFEST_REPRODUCED_FROM_UNTOUCHED_V77_ARCHIVE",
+    "regenerated_manifest_sha256": "e4e5e57c5c41f738ced105271d4e4bb907eaa1afe33e01788204009d49315f60",
+    "external_second_carrier_verified": false
+  },
+  "durable_archive": {
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V78_WHITESPACE_SUCCESSOR_20261011_V1.tar.xz",
+    "library_file_id": "libfile_9c72d25362d08191829421c43d023c9b",
+    "bytes": 263280,
+    "sha256": "6995bcf7d300469d51d5f747ddeadc1fb6d48063737c0f34eee00df4b05b6464"
+  },
+  "next_frozen": {
+    "id": "QUAL_SUCCESSOR_NEXT83_20261011_V1",
+    "cases": 20930,
+    "seed": 3766788354,
+    "corpus_sha256": "31fa9c3a1bde80da7ba8928f784ada57f9761241a938bf9bb7551ebb0d9bb8b8",
+    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT83_20261011_V1.jsonl",
+    "library_file_id": "libfile_330aad6cf77081918195a59fbd5ddea9",
+    "status": "FROZEN_UNSPENT__INHERITED__DO_NOT_EXECUTE_BEFORE_NEXT_NON_EQUIVALENCE_PHYSICAL_CUT",
+    "spent": false
+  },
+  "truth_boundary": [
+    "MEASURED: V78 is 1,589,206 raw Python-source bytes, 4,445 bytes below V77.",
+    "MEASURED: 4,445 same-line operator-adjacent whitespace gaps across 129 Python files were removed.",
+    "MEASURED: all 277 Python files retain identical token type/string sequences and identical ASTs when source-position attributes are ignored.",
+    "MEASURED: corrected NEXT82 stratified support replay passes 240/240.",
+    "MEASURED: transform reproduces the exact V78 manifest from the untouched V77 archive.",
+    "MEASURED: NEXT83 remains frozen and unspent.",
+    "NOT PROVED: equivalence for consumers intentionally inspecting source columns, exact source text, or traceback column layout.",
+    "NOT PROMOTED: zero capability, acceptance, ownership, professional, quality, or terminal credit."
+  ],
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "professional_credit_delta": 0,
+  "quality_credit_delta": 0,
+  "promotion_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
