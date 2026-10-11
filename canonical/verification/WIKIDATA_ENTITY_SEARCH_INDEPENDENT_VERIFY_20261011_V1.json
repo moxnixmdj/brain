@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_WIKIDATA_ENTITY_SEARCH_INDEPENDENT_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__LIVE_WIKIDATA_API_HEALTHY__CANDIDATE_ONLY",
+  "subject": {
+    "runtime_path": "canonical/runtime/bound_capabilities/wikidata_entity_search_v1.py",
+    "runtime_blob": "7dd5004e03d5df95273e666b63dc3cf670fc5bc8",
+    "tests_path": "canonical/tests/test_wikidata_entity_search_v1.py",
+    "tests_blob": "f7c31c7a084603b4fc8f1f0a57a03a2806f76e85"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify-wikidata-entity-search-v1-20261011",
+    "head_sha": "1da8a76853d22d1faf45fce25c70708e783d6508",
+    "workflow_run_id": 38155768641,
+    "workflow_job_id": 114518311635,
+    "conclusion": "success"
+  },
+  "verified": {
+    "unit_tests": "5/5 PASS",
+    "exact_blob_binding": true,
+    "live_public_api": true,
+    "live_query": "New York",
+    "live_candidate_count": 3,
+    "malformed_response_fail_closed": true,
+    "empty_result_not_nonexistence": true,
+    "candidate_authority_zero": true,
+    "external_model_calls": 0,
+    "model_dependency_count": 0
+  },
+  "capability_scope": "MODEL_INDEPENDENT_WIKIDATA_ENTITY_LABEL_DESCRIPTION_DISCOVERY_ONLY",
+  "hard_nonclaims": [
+    "NO_FACTUAL_CORRECTNESS_AUTHORITY",
+    "NO_RELATION_INFERENCE_AUTHORITY",
+    "NO_HLE_SCORE_CREDIT"
+  ],
+  "incremental_spend_usd": 0
+}
