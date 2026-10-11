@@ -1,0 +1,73 @@
+{
+  "schema": "PROJECT_BRAIN_MYSTERYMECHANISM_BENCHMARK_AS_MEASUREMENT_REFRAME_V1",
+  "date": "2026-10-11",
+  "status": "CANDIDATE_CURRENT_REFRAME__CAPABILITY_FIRST__LITERAL_SCORE_SEPARATED__ZERO_CREDIT",
+  "benchmark": "MysteryMechanism",
+  "frozen_comparator": "Opus 5.5 represented-scope actor-attributed witness",
+  "benchmark_population": {
+    "private_task_count": 222,
+    "represented_scope_target_success_count": 109,
+    "note": "109_OF_222_IS_A_MATCHED_BENCHMARK_RECEIPT_ROUTE__NOT_THE_PARENT_CAPABILITY_OBJECTIVE"
+  },
+  "capability_proposition": {
+    "id": "BRAIN_BOUNDED_UNSEEN_MECHANISM_RECOVERY_GE_FROZEN_OPUS55",
+    "statement": "Under bounded experimentation on previously unseen mathematical mechanisms, Brain mechanism-recovery capability is noninferior to the frozen Opus 5.5 capability evidenced by the represented MysteryMechanism scope."
+  },
+  "literal_score_predicate": {
+    "id": "BRAIN_MYSTERYMECHANISM_MATCHED_SUCCESS_GE_109_OF_222",
+    "statement": "Brain has an authentic comparable matched MysteryMechanism success count of at least 109 of 222.",
+    "required_for_literal_official_or_matched_score_claim": true,
+    "required_for_general_capability_claim": false
+  },
+  "explicit_non_implications": [
+    "BRAIN_BOUNDED_UNSEEN_MECHANISM_RECOVERY_GE_FROZEN_OPUS55_DOES_NOT_BY_DEFAULT_IMPLY_BRAIN_MYSTERYMECHANISM_MATCHED_SUCCESS_GE_109_OF_222",
+    "PUBLIC_DEVELOPMENT_EXAMPLE_SUCCESS_DOES_NOT_IMPLY_PRIVATE_222_TASK_SUCCESS_MASS",
+    "SOLVER_IMPROVEMENT_DOES_NOT_ITSELF_GRANT_BENCHMARK_CREDIT"
+  ],
+  "admissible_capability_routes": [
+    "SCOPE_COMPLETE_DOMINANCE_OR_COVER_CERTIFICATE",
+    "INDEPENDENT_HIDDEN_ADVERSARIAL_MECHANISM_RECOVERY_EVALUATION_PLUS_SOUND_BRIDGE_TO_FROZEN_OPUS_CAPABILITY",
+    "MATCHED_MYSTERYMECHANISM_RESULT_IF_AVAILABLE_WITHOUT_DOMINATING_WAIT_OR_COST"
+  ],
+  "literal_score_routes": [
+    "AUTHENTIC_MATCHED_BRAIN_SUCCESS_COUNT_GE_109_OF_222",
+    "SOUND_EXPLICIT_THEOREM_ENTAILING_THE_LITERAL_SCORE_PREDICATE"
+  ],
+  "current_information_boundary": {
+    "official_service_known": true,
+    "private_population_publicly_exposed": false,
+    "immediate_self_service_unapproved_user_creation": false,
+    "vals_key_present_in_known_local_or_repo_runner_surfaces": false,
+    "public_overall_leaderboard_payload_has_task_level_private_breakdown": false,
+    "exact_private_scope_binding_ge_109_known": false,
+    "conclusion": "DO_NOT_SCHEDULE_VALS_ACCESS_HUNT_AS_PARENT_DEVELOPMENT_WORK__ONLY_REACTIVATE_IF_IMMEDIATE_AUTHORIZATION_OR_NEW_SCOPE_BINDING_APPEARS"
+  },
+  "current_solver_work": {
+    "adaptive_v3_candidate_branch": "research/mysterymechanism-adaptive-v3-20261011",
+    "observed_candidate_commits": [
+      "13937e192",
+      "2d8e95bca"
+    ],
+    "local_independent_test_observation": "5_OF_5_UNIT_TESTS_PASS",
+    "canonical_main_promotion_claim": false,
+    "private_benchmark_credit_delta": 0,
+    "role": "GENERAL_CAPABILITY_IMPROVEMENT_CANDIDATE__NOT_A_PRIVATE_SCORE_RECEIPT"
+  },
+  "scheduler_next": {
+    "parent_question": "WHAT_MINIMUM_SOUND_EVIDENCE_ESTABLISHES_THE_CAPABILITY_PROPOSITION",
+    "priority": [
+      "REUSE_OR_STRENGTHEN_BRAIN_OWNED_MECHANISM_RECOVERY_CAPABILITY",
+      "BUILD_CONTAMINATION_CONTROLLED_HIDDEN_ADVERSARIAL_CAPABILITY_MEASUREMENT_IF_IT_ADDS_INFORMATION",
+      "SEARCH_ONLY_GENUINELY_NEW_PUBLIC_SCOPE_BINDINGS_THAT_CAN_SOUNDLY_CONNECT_TO_THE_PRIVATE_TARGET",
+      "USE_OFFICIAL_MATCHED_BENCHMARK_ROUTE_ONLY_IF_AUTHORIZATION_BECOMES_IMMEDIATELY_AVAILABLE_OR_LITERAL_SCORE_IS_REQUIRED"
+    ],
+    "same_public_scope_research_loop_authorized": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "benchmark_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
