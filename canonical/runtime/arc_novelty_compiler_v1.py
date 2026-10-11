@@ -2011,7 +2011,38 @@ def compile_hypotheses(
         if _consistent(h, pairs):
             candidates.append(h)
 
-    for kind in ("BRIDGE_COMPONENT_SCALAR", "EXTEND_COLUMNS_DOWN"):
+    relative_area_mapping = _infer_relative_area_recolor(pairs)
+    if relative_area_mapping is not None:
+        h = {
+            "kind": "RELATIVE_AREA_RECOLOR",
+            "mapping": dict(sorted(relative_area_mapping.items())),
+        }
+        if _consistent(h, pairs):
+            candidates.append(h)
+
+    hollow_mapping = _infer_hollow_component_recolor(pairs)
+    if hollow_mapping is not None:
+        h = {
+            "kind": "HOLLOW_COMPONENT_RECOLOR",
+            "mapping": dict(sorted(hollow_mapping.items())),
+        }
+        if _consistent(h, pairs):
+            candidates.append(h)
+
+    between_mapping = _infer_between_same_rule(pairs)
+    if between_mapping is not None:
+        h = {
+            "kind": "BETWEEN_SAME_BACKGROUND_RULE",
+            "mapping": dict(sorted(between_mapping.items())),
+        }
+        if _consistent(h, pairs):
+            candidates.append(h)
+
+    for kind in (
+        "BRIDGE_COMPONENT_SCALAR",
+        "EXTEND_COLUMNS_DOWN",
+        "CROP_UNIQUE_MOST_FREQUENT_COLOR",
+    ):
         h = {"kind": kind}
         if _consistent(h, pairs):
             candidates.append(h)
@@ -2103,6 +2134,10 @@ def compile_hypotheses(
             "TOP_K_SQUARE_COMPONENT_LABEL_REDUCTION",
             "BRIDGE_COMPONENT_RELATION_CLASSIFICATION",
             "DOWNWARD_COLUMN_EXTENSION",
+            "RELATIVE_COMPONENT_AREA_RECOLOR",
+            "HOLLOW_COMPONENT_RECOLOR",
+            "BETWEEN_MATCHING_ENDPOINTS_BACKGROUND_RULE",
+            "MOST_FREQUENT_COLOR_CROP",
             "NON_BACKGROUND_BOUNDING_BOX_CROP",
             "UNIQUE_LARGEST_OR_SMALLEST_COMPONENT_CROP",
         ],
