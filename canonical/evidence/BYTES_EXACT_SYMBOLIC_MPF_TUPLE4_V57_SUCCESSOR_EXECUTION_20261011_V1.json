@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_MPF_TUPLE4_V57_SUCCESSOR_EXECUTION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "VERIFIED_RESEARCH_FRONTIER__SPENT_NEXT62_AND_FRESH_NEXT63_PASS__NEXT64_FROZEN_UNSPENT__ZERO_CREDIT",
+  "predecessor": {
+    "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_FIVE_UTILITY_FAILCLOSE_V56_SUCCESSOR_EXECUTION_20261011_V1.json",
+    "manifest_sha256": "589f1dea175b4e541634ca6bcf252db889507da4a9fd318acb5d684fa297221c"
+  },
+  "subject": {
+    "transform": "canonical/research/bytes/tools/conservative_mpf_tuple4_prune_v57.py",
+    "manifest_sha256": "5af543694a726b13666f7dbff68417eb8d4f600dc4d0e244c3e16e17ee6a2da3",
+    "python_files": 277,
+    "raw_python_source_bytes": 1713426,
+    "B_exec_raw_python_source_bytes": 1716186,
+    "raw_delta_vs_v56_bytes": -740
+  },
+  "specialization": {
+    "body": "mpmath/ctx_mp_python.py::_mpf.__new__",
+    "preserved": "tuple length 4, no kwargs, finite normalization plus inf/ninf/nan passthrough",
+    "fail_closed": "mpf-copy, tuple2, non-tuple conversion, keyword precision/dps/rounding, other tuple lengths",
+    "whole_body_delete_rejected": true,
+    "whole_body_counterexample_operation": "roots",
+    "whole_body_counterexample_count": 4,
+    "spent_roots_profile_cases": 1400,
+    "runtime_constructor_calls": 44,
+    "observed_runtime_call_class": "tuple4_no_kwargs"
+  },
+  "qualification": {
+    "spent_NEXT62": {
+      "cases": 16100,
+      "sha256": "7714d5ed1852f9099f2fd160f9cb6f0a43718c66426bc0a9d0dfafb4742d767f",
+      "passed": 16100,
+      "failed": 0
+    },
+    "fresh_NEXT63": {
+      "cases": 16330,
+      "sha256": "6efce0ec04745f39dac6fef3060587f9f92a3edf86ff35fd137fe8e8803ff11e",
+      "passed": 16330,
+      "failed": 0
+    }
+  },
+  "reproducibility": {
+    "clean_room_reconstruction": "278/278 durable files byte-identical",
+    "archive_sha256": "f6c6b28e1f4c3a411493c38815d0179378b76ce3edb18788bf8f1575b4963267",
+    "archive_bytes": 264248,
+    "archive_library_file_id": "libfile_e23dcc088f508191ba46d1e9f1648f64"
+  },
+  "next_frozen": {
+    "id": "QUAL_SUCCESSOR_NEXT64_20261011_V1",
+    "cases": 16560,
+    "seed": 4157185349,
+    "per_operation_budget": 1440,
+    "sha256": "2b010659915163dd631b761329671874754f9c28999ff26cff03646c2afa6706",
+    "bytes": 1958034,
+    "library_file_id": "libfile_14efdf2b01b48191a045dcd6ad8debd5",
+    "spent": false,
+    "generator_crosscheck": "parallel accelerator byte-identical to canonical serial generator on independent 240-case corpus"
+  },
+  "truth_boundary": [
+    "V57 is 740 raw Python bytes below V56.",
+    "Whole _mpf.__new__ deletion is invalid; four spent NEXT62 roots counterexamples require constructor behavior.",
+    "V57 passes complete spent NEXT62 16100/16100.",
+    "V57 passes previously untouched NEXT63 16330/16330.",
+    "NEXT64 is durably frozen unspent.",
+    "No universal mpmath equivalence or capability/acceptance/promotion/terminal credit is claimed."
+  ],
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "acceptance_credit_delta": 0,
+  "promotion_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
