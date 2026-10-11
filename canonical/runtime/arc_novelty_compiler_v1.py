@@ -581,6 +581,57 @@ def _object_recolor_predict(grid: Grid, feature: str, mapping: Mapping[str, int]
     return tuple(tuple(row) for row in out)
 
 
+def _dedupe_adjacent_lines(grid: Grid) -> Grid | None:
+    rows: list[tuple[int, ...]] = []
+    for row in grid:
+        if not rows or tuple(row) != rows[-1]:
+            rows.append(tuple(row))
+    if not rows:
+        return None
+    cols = list(zip(*rows))
+    kept: list[tuple[int, ...]] = []
+    for col in cols:
+        t = tuple(col)
+        if not kept or t != kept[-1]:
+            kept.append(t)
+    if not kept:
+        return None
+    return tuple(tuple(row) for row in zip(*kept))
+
+
+def _remove_zero_lines(grid: Grid) -> Grid | None:
+    rows = [tuple(row) for row in grid if any(v != 0 for v in row)]
+    if not rows:
+        return None
+    keep = [c for c in range(len(rows[0])) if any(row[c] != 0 for row in rows)]
+    if not keep:
+        return None
+    return tuple(tuple(row[c] for c in keep) for row in rows)
+
+
+_SIMPLE_TRANSFORMS = ("CROP", "DEDUPE", "REMOVE_ZERO", "FLIP_HORIZONTAL")
+
+
+def _apply_simple_transform(grid: Grid, name: str) -> Grid | None:
+    if name == "CROP":
+        bbox = _non_background_bbox(grid)
+        return None if bbox is None else _crop_bbox(grid, bbox)
+    if name == "DEDUPE":
+        return _dedupe_adjacent_lines(grid)
+    if name == "REMOVE_ZERO":
+        return _remove_zero_lines(grid)
+    if name == "FLIP_HORIZONTAL":
+        return _flip_h(grid)
+    raise ARCNoveltyCompilerError("SIMPLE_TRANSFORM_UNSUPPORTED")
+
+
+def _compose_simple(grid: Grid, first: str, second: str) -> Grid | None:
+    mid = _apply_simple_transform(grid, first)
+    if mid is None:
+        return None
+    return _apply_simple_transform(mid, second)
+
+
 def _shift_grid(grid: Grid, dr: int, dc: int) -> Grid:
     h, w = _shape(grid)
     out = [[0 for _ in range(w)] for _ in range(h)]
@@ -754,6 +805,8 @@ def _predict(h: Mapping[str, Any], grid: Grid) -> Grid | None:
         return _select_odd_color_component_crop(grid)
     if kind == "EXTRACT_LARGEST_MONOCHROME_FRAME_INTERIOR":
         return _select_largest_frame_interior(grid)
+    if kind == "COMPOSED_SIMPLE_TRANSFORM":
+        return _compose_simple(grid, h["first"], h["second"])
     raise ARCNoveltyCompilerError("HYPOTHESIS_KIND_UNSUPPORTED")
 
 
@@ -914,6 +967,12 @@ def compile_hypotheses(
         if _consistent(h, pairs):
             candidates.append(h)
 
+    for first in _SIMPLE_TRANSFORMS:
+        for second in _SIMPLE_TRANSFORMS:
+            h = {"kind": "COMPOSED_SIMPLE_TRANSFORM", "first": first, "second": second}
+            if _consistent(h, pairs):
+                candidates.append(h)
+
     crop = {"kind": "CROP_NON_BACKGROUND"}
     if _consistent(crop, pairs):
         candidates.append(crop)
@@ -971,6 +1030,7 @@ def compile_hypotheses(
             "COLOR_INVARIANT_SHAPE_TO_LABEL",
             "ODD_COLOR_COMPONENT_SELECTION",
             "MONOCHROME_FRAME_INTERIOR_EXTRACTION",
+            "DEPTH_TWO_SIMPLE_TRANSFORM_COMPOSITION",
             "NON_BACKGROUND_BOUNDING_BOX_CROP",
             "UNIQUE_LARGEST_OR_SMALLEST_COMPONENT_CROP",
         ],
