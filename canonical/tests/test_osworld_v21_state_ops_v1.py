@@ -108,3 +108,45 @@ def test_libreoffice_remote_accept_rejected():
             assert str(exc).startswith("RUN_CLI_ARGUMENT_NOT_ALLOWED:" + exe)
         else:
             raise AssertionError("expected office accept rejection")
+
+
+def test_model_schema_aliases_normalize_without_widening_surface():
+    src = compile_state_ops({
+        "ops": [
+            {"op": "MKDIR", "path": "/home/oai/share/x"},
+            {"op": "WRITE_TEXT", "path": "/home/oai/share/x/a.txt", "text": "hello"},
+            {
+                "op": "RUN_CLI",
+                "args": ["pandoc", "/home/oai/share/input.md", "-o", "/home/oai/share/output.pdf"],
+            },
+        ]
+    })
+    assert "mkdir" in src
+    assert "write_text('hello'" in src
+    assert "subprocess.run(['pandoc'" in src
+
+
+def test_state_op_alias_conflicts_fail_closed():
+    try:
+        compile_state_ops({
+            "ops": [{"type": "DELETE", "op": "READ_TEXT", "path": "/home/oai/share/a.txt"}]
+        })
+    except StateOpsError as exc:
+        assert str(exc) == "OP_TYPE_ALIAS_CONFLICT"
+    else:
+        raise AssertionError("expected alias conflict")
+
+
+def test_run_cli_argument_alias_conflicts_fail_closed():
+    try:
+        compile_state_ops({
+            "ops": [{
+                "type": "RUN_CLI",
+                "argv": ["pandoc", "a"],
+                "args": ["pandoc", "b"],
+            }]
+        })
+    except StateOpsError as exc:
+        assert str(exc) == "RUN_CLI_ARGV_ALIAS_CONFLICT"
+    else:
+        raise AssertionError("expected argv alias conflict")
