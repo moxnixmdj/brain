@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_DEVELOPMENT_SCHEDULER_POINTER_V1",
   "date": "2026-10-10",
-  "status": "ACTIVE__POST_COMPOSITION_DYNAMIC_CURRENTNESS_V15__PROFESSIONAL_24_OF_24__CHECKPOINT_ROWS_ALL_WAKE_GATED__0_SAME_INFORMATION_CHECKPOINT_RUNS__CAPABILITY_FIRST_PRIMARY__ZERO_GLOBAL_CREDIT",
+  "status": "ACTIVE__POST_COMPOSITION_DYNAMIC_CURRENTNESS_V15__PROFESSIONAL_24_OF_24__CHECKPOINT_ROWS_ALL_WAKE_GATED__GITHUB_HOSTED_ACTIONS_BILLING_PRESTART_BLOCK__0_SAME_INFORMATION_CHECKPOINT_RUNS__CAPABILITY_FIRST_PRIMARY__ZERO_GLOBAL_CREDIT",
   "authoritative_activation": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V15.json",
   "runtime": "canonical/runtime/capability_parallel_frontier_post_composition_v2.py",
   "primary_entrypoint": "canonical.runtime.capability_parallel_frontier_post_composition_v2.plan_current_post_composition_frontier",
@@ -27,8 +27,8 @@
   "planning_entrypoint": "canonical.runtime.capability_first_scheduler_v1.rank_work",
   "current_live_work_frontier": {
     "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
-    "git_blob_sha": "07969881b2d9747221f92f65f8a71a35f6020f90",
-    "status": "CURRENT_PROFESSIONAL_V10_PROPERTY_TRUTH_24_OF_24__FULL_PRIVATE_REGRESSION_GATE_OPEN__EXECUTION_CARRIER_BLOCKED_ZERO_STEPS__PARALLEL_FRONTIER_CONTINUES__ZERO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT",
+    "git_blob_sha": "240a46b3b28c5d32a38a19d453938f90492ae2f1",
+    "status": "CURRENT_PROFESSIONAL_24_OF_24__FULL_PRIVATE_REGRESSION_GATE_OPEN__GITHUB_HOSTED_ACTIONS_BILLING_OR_SPENDING_LIMIT_PRESTART_BLOCK__12_CHECKPOINT_ROWS_WAKE_GATED__CAPABILITY_FIRST_AND_RESOURCE_PARETO_WORK_PRIMARY__ZERO_CREDIT",
     "professional_verified_root_subject_binding_count": 12,
     "professional_same_subject_composition_admissible": true,
     "professional_whole_leaf_scope_complete_count": 24,
@@ -110,7 +110,7 @@
     "professional_scope_construction_complete": true,
     "professional_scope_complete_count": 24,
     "professional_property_truth_closed_count": 24,
-    "current_primary_professional_edge": "FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION__WAKE_ONLY_ON_EXECUTION_CARRIER_STATE_CHANGE__PROMOTE_UVCK_V2_IF_AND_ONLY_IF_PASS",
+    "current_primary_professional_edge": "FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION__GITHUB_HOSTED_ACTIONS_ACCOUNT_BILLING_OR_SPENDING_LIMIT_PRESTART_GATE__WAKE_ONLY_ON_ZERO_SPEND_GATE_CLEAR_WITH_REAL_STEPS_OR_AUTHORIZED_ZERO_SPEND_EXACT_PRIVATE_MAIN_CARRIER__PROMOTE_UVCK_V2_IF_AND_ONLY_IF_PASS",
     "full_current_main_regression_open": true,
     "r10_structural_guard_verification": {
       "path": "canonical/verification/PROFESSIONAL_QUALITY_R10_STRUCTURAL_GUARD_INDEPENDENT_VERIFY_20261010_V1.json",
@@ -132,7 +132,7 @@
     "professional_open_execution_leaf_count": 0,
     "professional_open_semantic_leaf_count": 0,
     "full_private_regression_execution_carrier_blocked": true,
-    "professional_parallel_policy": "WHILE_REGRESSION_CARRIER_BLOCKED_AND_NO_CHECKPOINT_WAKE_EVENT__RUN_CAPABILITY_FIRST_GENERAL_DEVELOPMENT_AND_RESOURCE_PARETO_IMPROVEMENT__DO_NOT_SPIN_ON_O11_Q1",
+    "professional_parallel_policy": "WHILE_REGRESSION_CARRIER_BILLING_PRESTART_GATE_IS_UNCHANGED_AND_NO_CHECKPOINT_WAKE_EVENT__RUN_CAPABILITY_FIRST_GENERAL_DEVELOPMENT_AND_RESOURCE_PARETO_IMPROVEMENT__DO_NOT_RETRY_HOSTED_ACTIONS__DO_NOT_SPIN_ON_O11_Q1",
     "escape_open_checkpoint_count": 12,
     "escape_row_specific_same_information_runnable_count": 0,
     "escape_wake_gated_open_count": 12
@@ -202,9 +202,9 @@
     "terminal_credit_delta": 0
   },
   "professional_regression_carrier_diagnosis": {
-    "path": "canonical/verification/FULL_PRIVATE_CURRENT_MAIN_REGRESSION_CARRIER_DIAGNOSIS_20261011_V1.json",
-    "git_blob_sha": "8dec86c9a39fd009ee25b8ca3b8ff7f905474f10",
-    "status": "EXECUTION_CARRIER_BLOCKED__FOUR_ZERO_STEP_ACTIONS_FAILURES__NO_REGRESSION_RESULT__GATE_OPEN__ZERO_CREDIT"
+    "path": "canonical/verification/FULL_PRIVATE_CURRENT_MAIN_REGRESSION_CARRIER_DIAGNOSIS_20261011_V3.json",
+    "git_blob_sha": "78d5a3a171cc0fa6ac3d72230591eca38470c89e",
+    "status": "GITHUB_HOSTED_ACTIONS_ACCOUNT_BILLING_OR_SPENDING_LIMIT_PRESTART_GATE_IDENTIFIED__HARD_ZERO_SPEND__NO_IDENTICAL_RETRY__EXACT_REGRESSION_NOT_EXECUTED__GATE_OPEN"
   },
   "r2_post_v91_externality_policy": {
     "internal_r2_mechanism_unsolved_count": 0,
