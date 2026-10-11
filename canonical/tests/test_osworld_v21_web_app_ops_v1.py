@@ -169,3 +169,27 @@ def test_v3_adapter_records_web_app_receipt_and_returns_wait():
     assert actions == ["WAIT"]
     assert agent.history[-1]["web_app_result"]["ok"] is True
     assert agent.history[-1]["submitted_web_app_operation"]["app"] == "mailhub"
+
+
+def test_budgetwise_observe_uses_product_session_endpoint():
+    ctl, _, browser = controller_with_pages("http://budgetwise.local/plans")
+    out = ctl.run({"app": "budgetwise", "operation": "observe_session", "args": {}})
+    assert out["path"] == "/api/budgetwise/session"
+    assert browser.contexts[0].request.calls[0][0] == "http://budgetwise.local/api/budgetwise/session"
+
+
+def test_visa_section_path_parameter_is_data_and_not_body_control():
+    ctl, _, browser = controller_with_pages("http://visaapplication.local/ds160")
+    out = ctl.run({
+        "app": "visaapplication",
+        "operation": "save_section",
+        "args": {
+            "section": "passport",
+            "fields": {"tbxPPT_NUM": "X12345"},
+        },
+    })
+    assert out["path"] == "/api/visa-application/sections/passport"
+    call = browser.contexts[0].request.calls[0]
+    assert call[0] == "http://visaapplication.local/api/visa-application/sections/passport"
+    assert call[1]["method"] == "PUT"
+    assert call[1]["data"] == {"fields": {"tbxPPT_NUM": "X12345"}}
