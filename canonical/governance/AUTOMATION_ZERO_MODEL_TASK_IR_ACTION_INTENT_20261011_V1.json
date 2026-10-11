@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_AUTOMATION_ZERO_MODEL_TASK_IR_20261011_V1",
+  "date": "2026-10-11",
+  "action_id": "AUTOMATION-ZERO-MODEL-TASK-IR-V1",
+  "status": "CURRENT_BASE_OBS_PASS__STAGE_A_PUBLIC_LANGUAGE_INTEGRATION_AUTHORIZED__ZERO_CREDIT",
+  "canonical_base_commit": "b2b3dfd8309b2c5f15e9692feb8412eb3f06f20c",
+  "real_objective": "BUILD_REUSABLE_MODEL_INDEPENDENT_WORKFLOW_TASK_INTERPRETATION_AND_TOOL_DISCOVERY_CONFIGURATION",
+  "checkpoint_audit": "AUTOMATIONBENCH_GE_40",
+  "action_kind": "REUSE_COMPOSE_CONFIGURE_INTEGRATION_GLUE",
+  "ownership_invariants": {
+    "model_role": "NONE",
+    "model_dependency_count": 0,
+    "zero_external_model_cognition_producer_path": true,
+    "brain_owned_operative_configuration_required": true,
+    "benchmark_score_not_inferred_from_public_language_coverage": true,
+    "private_task_content_allowed": false,
+    "incremental_spend_usd": 0
+  },
+  "reuse_first_evidence": {
+    "raw_goal_decomposition": "canonical/runtime/goal_compiler.py",
+    "model_independent_execution_spine": "canonical/runtime/live_integrated_brain_v1.py",
+    "lexical_fuzzy_features": "canonical/runtime/retrieval_real_hidden_witness_arena_v1.py",
+    "bounded_natural_effect_clauses": "canonical/runtime/certified_bounded_natural_effect_clause_v1.py",
+    "conditional_branching": "canonical/runtime/finance_normalized_if_branch_v1.py",
+    "planner": "canonical/runtime/capability_planner.py",
+    "rationale": "THE_ACTION_ADDS_ONLY_A_NORMALIZED_WORKFLOW_IR_AND_QUERY_BINDING_LAYER_AROUND_EXISTING_VERIFIED_MECHANISMS"
+  },
+  "recursive_obs": {
+    "OBS_GOAL": "PASS__GENERAL_MODEL_INDEPENDENT_STATEFUL_TOOL_WORKFLOW_CONTROL_IS_PRIMARY_CAPABILITY_GAIN",
+    "OBS_REQUIRED_CAPABILITY": "PASS__LOSSLESS_PROMPT_SEGMENTATION_LITERAL_CONSTRAINT_CAPTURE_AND_DISCOVERY_QUERY_COMPILATION",
+    "OBS_BLOCKER": "PASS__RAW_GOAL_SPINE_EXECUTES_REGISTERED_CAPABILITIES_BUT_AUTOMATION_ENDPOINTS_ARE_DYNAMIC_AND_NOT_YET_COMPILED_FROM_USER_WORKFLOW_TEXT",
+    "OBS_PROPOSED_SOLUTION": "PASS__COMPOSE_EXISTING_DECOMPOSITION_AND_FUZZY_RETRIEVAL_INTO_A_TYPED_TASK_IR_THAT_FAILS_CLOSED_ON_EMPTY_OR_AMBIGUOUS_ACTION_CLAUSES",
+    "OBS_VERIFICATION": "PASS__UNIT_TEST_PUBLIC_LANGUAGE_SHAPES_AND_NO_MODEL_DEPENDENCY__NO_BENCHMARK_SCORE",
+    "OBS_INHERITED_SYSTEM_AFTER_WIN": "PASS__IR_REUSABLE_FOR_ANY_SEARCHABLE_TOOL_CATALOG_NOT_AUTOMATIONBENCH_SPECIFIC",
+    "OBS_THE_OBS_AND_SEARCH_PROCESS": "PASS__MODEL_BACKED_ROUTE_KILLED_BY_V10__EXISTING_ZERO_MODEL_DONORS_REFRESHED_ON_CURRENT_MAIN"
+  },
+  "behavioral_contract": {
+    "input": "ONE_USER_WORKFLOW_PROMPT",
+    "output": "ORDERED_TYPED_CLAUSES_WITH_SOURCE_SPANS_ACTION_TOKENS_CONSTRAINT_FLAGS_LITERALS_AND_DISCOVERY_QUERY",
+    "allowed_information": "PROMPT_TEXT_PLUS_BRAIN_STATIC_PUBLIC_LANGUAGE_CONFIGURATION",
+    "prohibited_information": "PRIVATE_BENCHMARK_TASKS_ASSERTIONS_INITIAL_STATE_ANSWERS_OR_MODEL_OUTPUT",
+    "fail_closed_on": [
+      "EMPTY_PROMPT",
+      "ZERO_ACTION_BEARING_CLAUSES",
+      "EMPTY_DISCOVERY_QUERY"
+    ],
+    "model_dependency_count": 0
+  },
+  "stage_a_scope": {
+    "benchmark_tasks_executed": 0,
+    "private_tasks_exposed": 0,
+    "score_claim": false,
+    "next_if_pass": "BUILD_STIRRUP_LLMCLIENT_THAT_EMITS_API_SEARCH_FROM_IR_AND_TEST_ON_PUBLIC_NONSCORING_FIXTURES",
+    "next_if_fail": "KILL_ZERO_MODEL_LANGUAGE_ROUTE_OR_FIND_STRONGER_EXISTING_INTERNALIZED_PARSER"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_GENERAL_ENGLISH_UNDERSTANDING",
+    "NO_CLAIM_PUBLIC_600_COVERAGE_IMPLIES_PRIVATE_657_SCORE",
+    "NO_CLAIM_AUTOMATIONBENCH_GE_40",
+    "NO_NEW_PRIMITIVE_CREDIT",
+    "NO_PRIVATE_EXECUTION_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "private_tasks_exposed": 0,
+    "benchmark_runs": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
