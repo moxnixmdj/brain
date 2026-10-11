@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_SCALE_BRAIN_SUBMISSION_RECEIPT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__FRESH_ROW15_THREE_PAGE_DOCX_SUBMISSION_FROZEN__RENDER_QA_PASS__ZERO_OWNER_SCORE_CREDIT",
+  "benchmark": "GDPval-AA v2.1",
+  "subject": {
+    "row_idx": 15,
+    "task_id": "1b1ade2d-f9f6-4a04-baa5-aa15012b53be",
+    "sector": "Manufacturing",
+    "occupation": "Buyers and Purchasing Agents"
+  },
+  "precommit": "canonical/governance/GDPVAL_SCALE_FRESH_BATCH_ROWS15_24_PRECOMMIT_20261011_V1.json",
+  "packet": {
+    "manifest_root_sha256": "f69af30fcea243ccb25d44c4a5380be0cdcac621287568525065034ce6cedae8",
+    "packet_sha256": "d1904e2f85dc57c77bde0cb87941c3cdb27282aa3add5ba19cfb90d46a0c5e65",
+    "prompt_sha256": "b4a3397af569f28193afe1780ed2339c329480386eb04f446cefaeaa5707d77d",
+    "raw_obligation_count": 22,
+    "reference_count": 0
+  },
+  "freshness": {
+    "task_id_frozen_before_prompt_read": true,
+    "rubric_read_before_output_freeze": false,
+    "human_gold_read_before_output_freeze": false,
+    "third_party_model_submission_read_before_output_freeze": false,
+    "judge_feedback_read_before_output_freeze": false
+  },
+  "brain_execution_identity": {
+    "candidate_id": "OPUS55_PROFESSIONAL_KNOWLEDGE_WORK_STIRRUP_CONFIGURATION_V1",
+    "profile": "canonical/capabilities/internalized/professional_work/stirrup_247f24d/BRAIN_EXECUTION_PROFILE_V1.json",
+    "cognition_substrate": "CURRENT_CHATGPT_GPT_5_6_SOL_SESSION",
+    "substrate_role": "GENERAL_COGNITION_SUBSTRATE_ONLY",
+    "incremental_spend_usd": 0
+  },
+  "deliverable": {
+    "format": "docx",
+    "filename": "GDPval_1b1ade2d_revised_sourcing_nomination_workflow.docx",
+    "sha256": "aa369743e1d7760e045c5a3869fc4d8d4cfd90ff18a11584a96270c9ea41de7b",
+    "bytes": 43452,
+    "library_path": "/Project Brain/GDPval/scale/1b1ade2d-f9f6-4a04-baa5-aa15012b53be/GDPval_1b1ade2d_revised_sourcing_nomination_workflow.docx",
+    "library_file_id": "libfile_e5875bf8af048191937692c8370e0553",
+    "rendered_page_count": 3
+  },
+  "verification": {
+    "visual_inspection": "PASS__ALL_3_PAGES__NO_CLIPPING_OVERLAP_OR_BROKEN_GLYPHS",
+    "requested_page_range_2_to_3": "PASS__3_PAGES",
+    "modular_quotation_structure_explicit": true,
+    "cost_driver_modules_cover_features_design_elements_child_parts_raw_material_tooling_conversion_and_commercial_factors": true,
+    "process_steps_and_decision_gates_explicit": true,
+    "approval_layers_cover_finance_quality_er_program_and_purchase": true,
+    "post_nomination_design_change_fast_path_explicit": true,
+    "unchanged_modules_retain_prior_approval": true,
+    "traceability_and_version_history_explicit": true,
+    "techsol_data_objects_workflow_controls_and_governance_explicit": true
+  },
+  "hard_nonclaims": [
+    "NO_ARTIFICIAL_ANALYSIS_OWNER_SCORE",
+    "NO_GDPVAL_ELO",
+    "NO_1846_THRESHOLD_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
