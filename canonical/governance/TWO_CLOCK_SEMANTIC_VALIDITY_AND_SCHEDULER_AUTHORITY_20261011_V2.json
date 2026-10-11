@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_TWO_CLOCK_SEMANTIC_VALIDITY_AND_SCHEDULER_AUTHORITY_V2",
+  "date": "2026-10-11",
+  "status": "CANDIDATE__CURRENT_MAIN_TRANSPLANT__FAIL_CLOSED__ZERO_CREDIT",
+  "objective": "Preserve independently verified zero-reality semantic work across unrelated scheduler/control-plane churn without weakening any consequential live-authority gate.",
+  "clocks": {
+    "semantic_validity": "EXACT_WORK_PRODUCT_PLUS_INDEPENDENTLY_VERIFIED_COMPLETE_TRANSITIVE_SEMANTIC_DEPENDENCY_CONE",
+    "scheduler_authority": "LIVE_GLOBAL_AUTHORITY_EPOCH"
+  },
+  "semantic_reuse_requires": [
+    "WORK_PRODUCT_EXACT_GIT_BLOB_UNCHANGED",
+    "CANONICAL_VERIFICATION_CLOSURE_RECEIPT_EXACT_BYTES_UNCHANGED",
+    "CLOSURE_RECEIPT_INDEPENDENT_VERIFIED_TRUE",
+    "CLOSURE_RECEIPT_DEPENDENCY_CLOSURE_COMPLETE_TRUE",
+    "LEASE_DEPENDENCY_MAP_EXACTLY_MATCHES_RECEIPT",
+    "EVERY_DEPENDENCY_GIT_BLOB_UNCHANGED",
+    "ZERO_OPEN_DYNAMIC_OR_IMPLICIT_DEPENDENCIES",
+    "ZERO_OPEN_EXTERNAL_UNBOUND_DEPENDENCIES"
+  ],
+  "scheduler_drift_behavior": {
+    "zero_reality_derivation": "PRESERVE_SEMANTIC_RESULT__REPLAN_SCHEDULING",
+    "fresh_reality_action": "BLOCK_ACTION_UNTIL_GLOBAL_AUTHORITY_RECHECK",
+    "promotion_or_active_authority_mutation": "BLOCK_UNTIL_GLOBAL_AUTHORITY_RECHECK",
+    "irreversible_external_action": "BLOCK_UNTIL_GLOBAL_AUTHORITY_RECHECK"
+  },
+  "correction_from_v1": "LEASE_SIDE_INDEPENDENTLY_VERIFIED_BOOLEAN_IS_NOT_EVIDENCE__V2_RESOLVES_AND_VALIDATES_EXACT_CANONICAL_VERIFICATION_RECEIPT_AND_BINDS_EXACT_WORK_PRODUCT",
+  "runtime": "canonical/runtime/work_unit_validity_guard_v2.py",
+  "certificate_contract": "canonical/governance/WORK_UNIT_DEPENDENCY_CLOSURE_CERTIFICATE_SCHEMA_V1.json",
+  "donor_candidate": "PR_2116",
+  "reused_mechanisms": [
+    "canonical/runtime/authority_epoch_guard_v1.py",
+    "canonical/runtime/python_transitive_runtime_closure_v1.py",
+    "canonical/runtime/python_local_import_closure_v2.py"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_ARBITRARY_EXISTING_WORK_UNITS_ALREADY_HAVE_COMPLETE_DEPENDENCY_CERTIFICATES",
+    "NO_AUTOMATIC_PROMOTION_OF_STALE_WORK",
+    "NO_EXECUTION_AUTHORITY",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "terminal_authority": false
+}
