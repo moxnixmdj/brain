@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_V4_PUBLIC_NONHLE_DIAGNOSTIC_RESULT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "CONSUMED_PUBLIC_DIAGNOSTIC_GATE_PASS__FRESH_HOLDOUT_REQUIRED__ZERO_HLE_CASES",
+  "subject": {
+    "path": "canonical/runtime/hle_native_open_domain_research_v4.py",
+    "frozen_git_blob_sha": "f7cd848f4369fd5e8da53723a2b52d799596fc66",
+    "verification_repository": "moxnixmdj/verification-capsule-runner",
+    "verification_pull_request": 2673,
+    "workflow_run_id": 38140915510,
+    "workflow_job_id": 114474430958
+  },
+  "diagnostic": {
+    "dataset": "ai-safety-institute/trivia_qa_verified",
+    "split": "validation",
+    "slice": "rows_0_to_24",
+    "sample_size": 25,
+    "questions_manifest_sha256": "db62af833e12a4db57a5a7e2d5c6cc0f72bae2b70753a3dbd2d8bc3f0e6947c2",
+    "commitments_manifest_sha256": "c13712000c419a20933121c0cc5faacd441ce3f5a88635b08344b9ba6a785833",
+    "attempted": 7,
+    "attempt_rate": 0.28,
+    "normalized_exact": 5,
+    "normalized_exact_rate": 0.2,
+    "gate": {
+      "minimum_attempt_rate": 0.25,
+      "minimum_normalized_exact_rate": 0.2,
+      "passed": true
+    },
+    "tuned_or_consumed_before_final_result": true,
+    "generalization_evidence": false
+  },
+  "cognition_accounting": {
+    "external_model_calls_total": 0,
+    "external_reasoning_model_calls_total": 0,
+    "model_dependency_count_total": 0,
+    "cognition_outsourcing_detected": false
+  },
+  "benchmark_integrity": {
+    "gold_hidden_from_solver_until_commitments_sealed": true,
+    "hle_questions_consumed": 0,
+    "hle_gold_consumed": 0,
+    "hle_score_credit": 0
+  },
+  "next_required_proof": {
+    "type": "FRESH_UNTOUCHED_PUBLIC_NON_HLE_HOLDOUT",
+    "dataset": "ai-safety-institute/trivia_qa_verified",
+    "split": "validation",
+    "slice": "rows_25_to_49",
+    "verification_pr": 2675,
+    "solver_blob_must_remain": "f7cd848f4369fd5e8da53723a2b52d799596fc66"
+  },
+  "hard_rules": [
+    "DIAGNOSTIC_PASS_MUST_NOT_BE_RELABELLED_AS_GENERALIZATION",
+    "FRESH_HOLDOUT_MUST_USE_FROZEN_V4_BYTES",
+    "PUBLIC_NON_HLE_PASS_MUST_NOT_BE_RELABELLED_AS_HLE_SCORE",
+    "HLE_TERMINAL_CASES_REMAIN_ZERO_UNTIL_FRESH_PUBLIC_HOLDOUT_PASSES",
+    "EXTERNAL_GENERAL_PURPOSE_MODEL_COGNITION_MUST_REMAIN_ZERO"
+  ],
+  "target_score_claimed": false,
+  "hle_67_7_certified": false,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0
+}
