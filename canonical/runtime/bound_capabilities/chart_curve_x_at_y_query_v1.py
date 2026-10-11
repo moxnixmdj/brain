@@ -142,22 +142,17 @@ def query_curve_x_at_y(
                 candidates.append({"polyline_index":index,**cross})
 
     candidates.sort(key=lambda r:(r["pixel_x"],r["polyline_index"]))
-    unique=[]
-    for row in candidates:
-        if not unique or abs(row["pixel_x"]-unique[-1]["pixel_x"])>1.25:
-            unique.append(row)
-        else:
-            # Different rows/colors cannot happen here; same-color duplicate geometry is
-            # still ambiguous unless the crossing pixels coincide to rendering precision.
-            prev=unique[-1]
-            prev["coincident_candidate_count"]=int(prev.get("coincident_candidate_count",1))+1
 
     if horizontal_overlap:
         raise CurveXAtYQueryError("CURVE_OVERLAPS_TARGET_Y_OVER_INTERVAL")
-    if len(unique)!=1:
-        raise CurveXAtYQueryError("CURVE_X_AT_Y_NOT_UNIQUE:"+str(len(unique)))
+    # _crossings() already coalesces the two adjacent segments that meet at one
+    # exact vertex within a single polyline. Never coalesce across polyline rows:
+    # two rendered series remain semantically ambiguous even if they cross the
+    # requested y at the same pixel.
+    if len(candidates)!=1:
+        raise CurveXAtYQueryError("CURVE_X_AT_Y_NOT_UNIQUE:"+str(len(candidates)))
 
-    chosen=unique[0]
+    chosen=candidates[0]
     px=float(chosen["pixel_x"])
     try:
         x_value=_axis_value_from_pixel(axes["x"],px)
