@@ -25,7 +25,7 @@ def test_public_q26_like_epam_lbo_heavy_outputs_recompute_from_bound_inputs():
         base_revenue_million="5457.056",
         base_ebitda_million="644.814",
         starting_cash_million="1296.077",
-        existing_debt_million="25.034",
+        existing_debt_million="25",
         minimum_cash_million="500",
         entry_leverage_x="5.0",
         debt_interest_rate_percent="8.0",
@@ -39,7 +39,7 @@ def test_public_q26_like_epam_lbo_heavy_outputs_recompute_from_bound_inputs():
         exit_multiple_x="10.0",
     )
 
-    assert q2(out["initial_sponsor_equity_million"]) == Decimal("6300.07")
+    assert q2(out["initial_sponsor_equity_million"]) == Decimal("6300.04")
     assert q2(out["exit_enterprise_value_million"]) == Decimal("13483.54")
     assert q2(out["exit_equity_value_million"]) == Decimal("13976.13")
     assert q2(out["sponsor_moic_x"]) == Decimal("2.22")
