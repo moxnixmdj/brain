@@ -1,0 +1,189 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_V21_WEB_APP_OP_REGISTRY_V1",
+  "date": "2026-10-11",
+  "status": "CURATED_PRODUCT_NATIVE_API_REGISTRY__CONTROL_PLANE_STATE_WRITES_FORBIDDEN",
+  "source_pins": {
+    "osworld_web_repo": "Task-Web/OSWorld-web",
+    "osworld_web_commit": "60c89fe6a8ed934668619d8d26132848239eb8ee",
+    "mailhub_web": "6ea8fb2e8071a53a2d23c39bd206e848957f0f67",
+    "teamchat_web": "9c50b43bb7c1b03deba31eef234ed805f8014603",
+    "calendar_web": "5c96a0c57265e173ef3434f1667e2523ade1ed57",
+    "cloudcrm_web": "44c1d8650a9b262d2e903dcc31ff827d1120297c",
+    "vaultbank_web": "51dca9c6346ffa15095cfde5c1d87380cbc3bc79"
+  },
+  "apps": {
+    "mailhub": {
+      "url_hints": [
+        "mailhub"
+      ],
+      "operations": {
+        "observe_mail": {
+          "method": "GET",
+          "path": "/api/mail",
+          "path_params": [],
+          "body_mode": "none",
+          "required": [],
+          "optional": []
+        },
+        "send": {
+          "method": "POST",
+          "path": "/api/mail/send",
+          "path_params": [],
+          "body_mode": "fields",
+          "required": [
+            "to",
+            "subject",
+            "body"
+          ],
+          "optional": [
+            "cc",
+            "bcc",
+            "attachments",
+            "draft_id"
+          ]
+        },
+        "reply": {
+          "method": "POST",
+          "path": "/api/mail/reply",
+          "path_params": [],
+          "body_mode": "fields",
+          "required": [
+            "thread_id",
+            "body"
+          ],
+          "optional": [
+            "reply_all",
+            "reply_to_id",
+            "attachments"
+          ]
+        }
+      }
+    },
+    "teamchat": {
+      "url_hints": [
+        "teamchat"
+      ],
+      "operations": {
+        "observe_workspace": {
+          "method": "GET",
+          "path": "/api/teamchat/workspace",
+          "path_params": [],
+          "body_mode": "none",
+          "required": [],
+          "optional": []
+        },
+        "send_message": {
+          "method": "POST",
+          "path": "/api/teamchat/message",
+          "path_params": [],
+          "body_mode": "fields",
+          "required": [
+            "conversation_id",
+            "conversation_type",
+            "content"
+          ],
+          "optional": []
+        }
+      }
+    },
+    "calendar_web": {
+      "url_hints": [
+        "calendar"
+      ],
+      "operations": {
+        "observe_calendar": {
+          "method": "GET",
+          "path": "/api/calendar",
+          "path_params": [],
+          "body_mode": "none",
+          "required": [],
+          "optional": []
+        },
+        "action": {
+          "method": "POST",
+          "path": "/api/calendar/actions",
+          "path_params": [],
+          "body_mode": "object_arg",
+          "body_arg": "request",
+          "required": [
+            "request"
+          ],
+          "optional": []
+        }
+      }
+    },
+    "cloudcrm": {
+      "url_hints": [
+        "cloudcrm"
+      ],
+      "operations": {
+        "observe_workspace": {
+          "method": "GET",
+          "path": "/api/crm/workspace",
+          "path_params": [],
+          "body_mode": "none",
+          "required": [],
+          "optional": []
+        },
+        "update_lead": {
+          "method": "PATCH",
+          "path": "/api/crm/leads/{lead_id}",
+          "path_params": [
+            "lead_id"
+          ],
+          "body_mode": "object_arg",
+          "body_arg": "updates",
+          "required": [
+            "lead_id",
+            "updates"
+          ],
+          "optional": []
+        },
+        "convert_lead": {
+          "method": "POST",
+          "path": "/api/crm/leads/{lead_id}/convert",
+          "path_params": [
+            "lead_id"
+          ],
+          "body_mode": "object_arg",
+          "body_arg": "request",
+          "required": [
+            "lead_id",
+            "request"
+          ],
+          "optional": []
+        }
+      }
+    },
+    "vaultbank": {
+      "url_hints": [
+        "vaultbank"
+      ],
+      "operations": {
+        "observe_dashboard": {
+          "method": "GET",
+          "path": "/api/vaultbank/dashboard",
+          "path_params": [],
+          "body_mode": "none",
+          "required": [],
+          "optional": []
+        }
+      }
+    }
+  },
+  "forbidden_surfaces": [
+    "/api/state",
+    "/state-manage",
+    "arbitrary_url",
+    "arbitrary_http_method",
+    "raw_javascript",
+    "raw_python",
+    "raw_shell"
+  ],
+  "hard_nonclaims": [
+    "NO_TASK_ID_MAPPING",
+    "NO_REFERENCE_TRAJECTORY_INPUT",
+    "NO_EXTERNAL_MODEL_COGNITION",
+    "NO_OSWORLD_SCORE_CREDIT"
+  ]
+}
