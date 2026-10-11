@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_RAW_TASK_OBJECTIVE_ACCEPTANCE_EXECUTOR_V1_INDEPENDENT_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__EXACT_MAIN_BLOBS__PRIMARY_13_OF_13__SECOND_CARRIER_13_OF_13__ZERO_MODEL__ZERO_SPEND",
+  "subject": {
+    "runtime_path": "canonical/runtime/raw_task_objective_acceptance_executor_v1.py",
+    "runtime_git_blob_sha": "c138171744406edd8e75e4867634febdb596014b",
+    "test_path": "canonical/tests/test_raw_task_objective_acceptance_executor_v1.py",
+    "test_git_blob_sha": "00a1b23a80c12cdb38493de0de6335b62247fef4",
+    "candidate_governance_path": "canonical/governance/RAW_TASK_OBJECTIVE_ACCEPTANCE_EXECUTOR_20261011_V1.json",
+    "candidate_governance_git_blob_sha": "b493c7a7fe42b06b49a235dce49c7c8c46c5c753"
+  },
+  "replay": {
+    "primary": {
+      "carrier": "Sprites:brain-capability-first-scheduler-verify-20261008-v1",
+      "working_directory": "/home/sprite/v6-objective-acceptance-primary",
+      "passed": 13,
+      "total": 13
+    },
+    "independent": {
+      "carrier": "Sprites:brain-frontiercode-route-refresh-verify-20261008-v1",
+      "working_directory": "/home/sprite/v6-objective-acceptance-independent",
+      "passed": 13,
+      "total": 13
+    }
+  },
+  "proved": [
+    "EXACT_RESPONSE_POSITIVE_AND_NEGATIVE",
+    "NUMERIC_FIELD_POSITIVE_AND_NEGATIVE",
+    "BOOLEAN_FIELD_NEGATIVE_CONTROL",
+    "MIXED_OBJECTIVE_AND_SEMANTIC_REQUEST_BLOCKS_ACCEPTANCE_STOP",
+    "EXISTING_TEST_PASS_EVIDENCE_CANNOT_REPLACE_RAW_REQUEST_SEMANTICS",
+    "MISSING_REQUIRED_FIELD_FAILS_CLOSED",
+    "UNKNOWN_CANDIDATE_FIELD_FAILS_CLOSED",
+    "DETERMINISTIC_RECEIPTS",
+    "MULTI_OBLIGATION_OBJECTIVE_COMPOSITION",
+    "LOSSLESS_RAW_OBLIGATION_ACCOUNTING",
+    "ZERO_EXTERNAL_RUNTIME_COGNITION"
+  ],
+  "authority": {
+    "objective_raw_task_acceptance_subset_verified": true,
+    "general_natural_language_semantic_completeness": false,
+    "direct_candidate_fields_independently_measured": false,
+    "general_software_repair_v6_closed": false,
+    "frontiercode_score_authority": false,
+    "terminal_authority": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "model_dependency_count": 0,
+    "external_general_purpose_model_runtime_dependency_count": 0,
+    "benchmark_score_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
