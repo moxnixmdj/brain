@@ -105,6 +105,12 @@ def run(args:Mapping[str,Any], root:str|os.PathLike[str])->dict[str,Any]:
     if output==repo or repo not in output.parents:
         raise CoupledPatchSearchError("OUTPUT_PATH_OUTSIDE_REPOSITORY")
 
+    baseline=_evaluate(repo,tests,timeout_s)
+    if baseline["pass"]:
+        raise CoupledPatchSearchError("BASELINE_ALREADY_PASSES")
+    if baseline["timed_out"]:
+        raise CoupledPatchSearchError("BASELINE_TIMEOUT")
+
     explicit=args.get("source_paths")
     if explicit is not None and not isinstance(explicit,list):
         raise CoupledPatchSearchError("SOURCE_PATHS_NOT_LIST")
@@ -132,11 +138,6 @@ def run(args:Mapping[str,Any], root:str|os.PathLike[str])->dict[str,Any]:
     frontier=[(base,[])]
     try:
         _apply(base)
-        baseline=_evaluate(repo,tests,timeout_s)
-        if baseline["pass"]:
-            raise CoupledPatchSearchError("BASELINE_ALREADY_PASSES")
-        if baseline["timed_out"]:
-            raise CoupledPatchSearchError("BASELINE_TIMEOUT")
 
         for depth in range(1,max_depth+1):
             candidates=[]
