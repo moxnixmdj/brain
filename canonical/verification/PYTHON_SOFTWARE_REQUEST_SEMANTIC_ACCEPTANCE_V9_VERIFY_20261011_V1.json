@@ -1,0 +1,102 @@
+{
+  "schema": "PROJECT_BRAIN_PYTHON_SOFTWARE_REQUEST_SEMANTIC_ACCEPTANCE_V9_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "INDEPENDENT_TWO_CARRIER_PASS__BOUNDED_V9_SEMANTIC_ACCEPTANCE_VERIFIED",
+  "capability_first_role": "EXPAND_REAL_RAW_SOFTWARE_REQUEST_ACCEPTANCE_SEMANTICS__BENCHMARK_AUDIT_ONLY",
+  "canonical_subjects": {
+    "repository_scope_family": {
+      "semantic_cells_path": "canonical/runtime/bound_capabilities/python_request_semantic_acceptance_cells_v1.py",
+      "semantic_cells_git_blob_sha": "7358dcd9fbcca68724c72b53411628fceb9a96d0",
+      "acceptance_union_path": "canonical/runtime/python_request_acceptance_union_v1.py",
+      "acceptance_union_git_blob_sha": "5080a04c1e00428816046bae45afe209184244fd",
+      "atomic_controller_path": "canonical/runtime/bound_capabilities/python_repair_semantic_acceptance_controller_v1.py",
+      "atomic_controller_git_blob_sha": "85b517117d537990bf3d7ae8205c8c71bc264a76",
+      "test_path": "canonical/tests/test_python_repair_semantic_acceptance_v9.py",
+      "test_git_blob_sha": "bf34315417e67b129b2e1999e04ff89019f62c39",
+      "supported_semantic_cells": [
+        "FILE_CONTAINS_EXACT_LITERAL",
+        "FILE_NOT_CONTAINS_EXACT_LITERAL",
+        "FILE_EXISTS",
+        "FILE_ABSENT",
+        "PYTHON_AST_PARSE",
+        "PATH_UNCHANGED",
+        "CHANGED_PATHS_SUBSET"
+      ],
+      "primary_replay": {
+        "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+        "tests_passed": 12,
+        "tests_total": 12
+      },
+      "independent_replay": {
+        "carrier": "brain-canonical-apply-slice-verify-20261011-v1",
+        "tests_passed": 12,
+        "tests_total": 12
+      }
+    },
+    "behavior_semantic_compiler": {
+      "runtime_path": "canonical/runtime/bound_capabilities/python_software_request_semantic_acceptance_v1.py",
+      "runtime_git_blob_sha": "3f4e23ab91e4b79c1e12ce8e1e3f0c985336ef31",
+      "test_path": "canonical/tests/test_python_software_request_semantic_acceptance_v1.py",
+      "test_git_blob_sha": "4f268918039e2b6e13ee73133dad46c4b3cc1165",
+      "supported_semantic_cells": [
+        "PYTHON_CALL_EQUALS_JSON",
+        "PYTHON_CALL_BOOLEAN",
+        "PYTHON_CALL_RAISES_BUILTIN",
+        "FILE_TEXT_CONTAINS_EXACT",
+        "PYTHON_TOP_LEVEL_FUNCTION_EXISTS",
+        "PYTHON_TOP_LEVEL_CLASS_EXISTS"
+      ],
+      "primary_replay": {
+        "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+        "tests_passed": 12,
+        "tests_total": 12
+      },
+      "independent_replay": {
+        "carrier": "brain-canonical-apply-slice-verify-20261011-v1",
+        "tests_passed": 12,
+        "tests_total": 12
+      }
+    }
+  },
+  "falsification": {
+    "unsupported_or_ambiguous_raw_segments_remain_blocking": true,
+    "mixed_supported_and_unsupported_request_cannot_partially_accept": true,
+    "candidate_snapshot_mismatch_fails_closed": true,
+    "semantic_failure_can_falsify_objective_test_success": true,
+    "semantic_acceptance_withheld_from_repair_search_in_behavior_candidate_tests": true,
+    "injection_shaped_callable_rejected": true,
+    "external_module_cannot_satisfy_repository_local_call_cell": true
+  },
+  "excluded_candidate": {
+    "path": "canonical/runtime/bound_capabilities/python_semantic_repair_acceptance_controller_v1.py",
+    "tested_runtime_git_blob_sha": "f9d48bd9cb994a68ce1b30228ad215c77be00edb",
+    "tested_test_git_blob_sha": "3fb819a2bbf9143f6354ee57609e56ed0df5fdbd",
+    "primary_tests": "8_OF_8_PASS",
+    "independent_tests": "8_OF_8_PASS",
+    "promotion": false,
+    "reasons": [
+      "DUPLICATES_CAPABILITY_ID_OF_CLEANER_REPOSITORY_SCOPE_CONTROLLER",
+      "GENERATED_SEMANTIC_VERIFIER_FILES_ENTER_THE_MEASURED_CANDIDATE_WORKSPACE",
+      "KEEP_SMALLER_CLEANER_PROOF_SURFACE"
+    ]
+  },
+  "cognition_and_cost": {
+    "model_dependency_count": 0,
+    "external_general_purpose_model_runtime_dependency_count": 0,
+    "incremental_spend_usd": 0
+  },
+  "benchmark_accounting": {
+    "frozen_predicate": "CODING_FRONTIERCODE_GE_54_4",
+    "frontiercode_score_credit_delta": 0,
+    "target_proven": false,
+    "certified_score_lower_bound_fraction": 0
+  },
+  "hard_nonclaims": [
+    "NO_GENERAL_NATURAL_LANGUAGE_SEMANTIC_COMPLETENESS",
+    "NO_ARBITRARY_PATCH_SEARCH_COMPLETENESS",
+    "NO_NON_PYTHON_GENERALIZATION",
+    "NO_HIDDEN_REQUIREMENT_COVERAGE",
+    "NO_GENERAL_MERGEABILITY_AUTHORITY",
+    "NO_FRONTIERCODE_SCORE_OR_TERMINAL_AUTHORITY"
+  ]
+}
