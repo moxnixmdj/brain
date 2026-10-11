@@ -14,7 +14,15 @@ def _materials():
     pointer = json.loads((ROOT / "canonical/CANONICAL_POINTER.json").read_text(encoding="utf-8"))
     startup = (ROOT / "sitecustomize.py").read_text(encoding="utf-8")
     runtime = (ROOT / "canonical/runtime/astra_runtime.py").read_text(encoding="utf-8")
-    return pointer, startup, runtime
+    bindings = {
+        path: (ROOT / path).read_text(encoding="utf-8")
+        for path in (
+            "canonical/runtime/live_integrated_brain_v1.py",
+            "canonical/runtime/autonomous_verified_self_improvement_v1.py",
+            "canonical/runtime/terminal_closure_reducer.py",
+        )
+    }
+    return pointer, startup, runtime, bindings
 
 
 def test_current_repository_passes():
@@ -23,24 +31,41 @@ def test_current_repository_passes():
 
 
 def test_weakened_runtime_cognition_law_fails_closed():
-    pointer, startup, runtime = _materials()
+    pointer, startup, runtime, bindings = _materials()
     mutated = deepcopy(pointer)
     mutated["boot_requirements"]["runtime_cognition_provider_forbidden_regardless_of_label_hosting_or_cost"] = False
-    out = evaluate_materials(mutated, startup, runtime)
+    out = evaluate_materials(mutated, startup, runtime, bindings)
     assert out["pass"] is False
     assert any("runtime_cognition_provider_forbidden" in e for e in out["errors"])
 
 
 def test_removed_startup_kill_switch_fails_closed():
-    pointer, _startup, runtime = _materials()
-    out = evaluate_materials(pointer, "import os\n", runtime)
+    pointer, _startup, runtime, bindings = _materials()
+    out = evaluate_materials(pointer, "import os\n", runtime, bindings)
     assert out["pass"] is False
     assert "STARTUP_MODEL_PLANNER_KILL_SWITCH_MISSING" in out["errors"]
 
 
 def test_removed_runtime_kill_switch_check_fails_closed():
-    pointer, startup, runtime = _materials()
+    pointer, startup, runtime, bindings = _materials()
     stripped = runtime.replace("ASTRA_DISABLE_MODEL_PLANNER", "ASTRA_DISABLED_FLAG_REMOVED")
-    out = evaluate_materials(pointer, startup, stripped)
+    out = evaluate_materials(pointer, startup, stripped, bindings)
     assert out["pass"] is False
     assert "ASTRA_RUNTIME_KILL_SWITCH_CHECK_MISSING" in out["errors"]
+
+
+def test_removed_live_guard_binding_fails_closed():
+    pointer, startup, runtime, bindings = _materials()
+    mutated = dict(bindings)
+    live = mutated["canonical/runtime/live_integrated_brain_v1.py"]
+    mutated["canonical/runtime/live_integrated_brain_v1.py"] = live.replace(
+        "assert_credit_path_cognition_governance(ROOT)",
+        "pass  # removed cognition guard",
+        1,
+    )
+    out = evaluate_materials(pointer, startup, runtime, mutated)
+    assert out["pass"] is False
+    assert any(
+        e.startswith("COGNITION_GUARD_CALL_COUNT_WEAKENED:")
+        for e in out["errors"]
+    )

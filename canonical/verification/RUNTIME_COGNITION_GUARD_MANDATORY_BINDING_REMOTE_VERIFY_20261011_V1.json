@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_RUNTIME_COGNITION_GUARD_MANDATORY_BINDING_REMOTE_VERIFICATION_V1",
+  "date": "2026-10-11",
+  "status": "REMOTE_ZERO_SPEND_MANDATORY_BINDING_REPLAY_PASS__ENFORCEMENT_ONLY__ZERO_CREDIT",
+  "branch": "governance/mandatory-runtime-cognition-guard-20261011-v1",
+  "subject_commit_sha": "ba0d6a0a353dc79bae5efbee30d9fc3b0e20bca0",
+  "verifier": {
+    "provider": "Sprites",
+    "sprite_name": "brain-canonical-apply-slice-verify-20261011-v1",
+    "sprite_id": "sprite-03e2d6c1-6a52-4c21-817f-eae043fd842c",
+    "local_laptop_or_wsl_used": false,
+    "incremental_spend_usd": 0
+  },
+  "exact_material": {
+    "canonical/CANONICAL_POINTER.json": "86b3e402a5de57237ab8a237bd33fa12c22bcd63",
+    "canonical/runtime/runtime_cognition_credit_guard_v1.py": "531eb59ef202ba1bed9cb45082cdadb9dd983b2c",
+    "canonical/tests/test_runtime_cognition_credit_guard_v1.py": "e482b25cc5467f867f6f899d6898d36a28a5288b",
+    "canonical/runtime/verify_capability_transfer_static_governance_v1.py": "42e57e7d810cae7a2f45247ff7874e3d28e65273",
+    "canonical/runtime/live_integrated_brain_v1.py": "a78a32919668c7fdfe48cd3c9cddfa9e4e220f32",
+    "canonical/runtime/autonomous_verified_self_improvement_v1.py": "cdee841c90f819105877537447ade60abfba4126",
+    "canonical/runtime/terminal_closure_reducer.py": "bb852cd7541ee895aabc1a85a06b1e4b5ef7ae9c"
+  },
+  "checks": [
+    {
+      "id": "PY_COMPILE",
+      "pass": true,
+      "files": [
+        "canonical/runtime/runtime_cognition_credit_guard_v1.py",
+        "canonical/tests/test_runtime_cognition_credit_guard_v1.py",
+        "canonical/runtime/verify_capability_transfer_static_governance_v1.py"
+      ]
+    },
+    {
+      "id": "EXACT_GOVERNANCE_SLICE_BASELINE",
+      "pass": true,
+      "observed_status": "PASS__COGNITION_GOVERNANCE_INTACT",
+      "errors": []
+    },
+    {
+      "id": "DIRECT_PURE_PYTHON_REGRESSION",
+      "pass": true,
+      "test_count": 5,
+      "tests": [
+        "test_current_repository_passes",
+        "test_removed_live_guard_binding_fails_closed",
+        "test_removed_runtime_kill_switch_check_fails_closed",
+        "test_removed_startup_kill_switch_fails_closed",
+        "test_weakened_runtime_cognition_law_fails_closed"
+      ]
+    }
+  ],
+  "mandatory_boot_invariants": [
+    "runtime_cognition_credit_guard_required",
+    "runtime_cognition_credit_guard_fail_closed_before_credit",
+    "runtime_cognition_credit_guard_live_execution_binding_required",
+    "runtime_cognition_credit_guard_self_improvement_binding_required",
+    "runtime_cognition_credit_guard_terminal_closure_binding_required",
+    "local_runner_for_cognition_governance_forbidden"
+  ],
+  "hard_nonclaims": [
+    "THIS_RECEIPT_DOES_NOT_GRANT_CAPABILITY_BENCHMARK_ACCEPTANCE_OWNERSHIP_PROMOTION_OR_TERMINAL_CREDIT",
+    "THIS_RECEIPT_DOES_NOT_REPLACE_CONTINUOUS_DRIFT_MONITORING",
+    "THIS_RECEIPT_DOES_NOT_PROVE FUTURE_IMMUTABILITY_OF_REPOSITORY_BYTES"
+  ],
+  "capability_credit_delta": 0,
+  "benchmark_credit_delta": 0,
+  "acceptance_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "promotion_credit_delta": 0,
+  "terminal_credit_delta": 0
+}

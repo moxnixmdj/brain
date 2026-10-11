@@ -59,7 +59,24 @@ REQUIRED_TRUE = (
     "ambiguous_external_contribution_classification_fails_closed",
     "runtime_external_cognition_lock_verifier_required",
     "python_startup_model_planner_kill_switch_required",
+    "runtime_cognition_credit_guard_required",
+    "runtime_cognition_credit_guard_fail_closed_before_credit",
+    "runtime_cognition_credit_guard_live_execution_binding_required",
+    "runtime_cognition_credit_guard_self_improvement_binding_required",
+    "runtime_cognition_credit_guard_terminal_closure_binding_required",
+    "local_runner_for_cognition_governance_forbidden",
 )
+
+REQUIRED_PATHS = {
+    "runtime_cognition_credit_guard_path": "canonical/runtime/runtime_cognition_credit_guard_v1.py",
+    "runtime_cognition_credit_guard_verification_path": "canonical/verification/RUNTIME_COGNITION_CREDIT_GUARD_REMOTE_VERIFY_20261011_V1.json",
+}
+
+REQUIRED_BINDINGS = {
+    "canonical/runtime/live_integrated_brain_v1.py": 2,
+    "canonical/runtime/autonomous_verified_self_improvement_v1.py": 3,
+    "canonical/runtime/terminal_closure_reducer.py": 2,
+}
 
 REQUIRED_PRECEDENCE = [
     "TARGET_SOLVING_COGNITION=>K3_FORBIDDEN",
@@ -119,6 +136,7 @@ def evaluate_materials(
     pointer: Mapping[str, Any],
     startup_text: str,
     astra_runtime_text: str,
+    binding_sources: Mapping[str, str] | None = None,
 ) -> dict[str, Any]:
     errors: list[str] = []
 
@@ -139,6 +157,20 @@ def evaluate_materials(
             errors.append("BOOT_REQUIREMENT_NOT_TRUE:" + key)
     if boot.get("external_contribution_classification_precedence") != REQUIRED_PRECEDENCE:
         errors.append("EXTERNAL_CONTRIBUTION_PRECEDENCE_WEAKENED")
+    for key, expected in REQUIRED_PATHS.items():
+        if boot.get(key) != expected:
+            errors.append("BOOT_PATH_MISMATCH:" + key)
+
+    if binding_sources is not None:
+        for path, minimum_calls in REQUIRED_BINDINGS.items():
+            source = binding_sources.get(path)
+            if not isinstance(source, str):
+                errors.append("COGNITION_GUARD_BINDING_SOURCE_MISSING:" + path)
+                continue
+            if "runtime_cognition_credit_guard_v1" not in source:
+                errors.append("COGNITION_GUARD_IMPORT_MISSING:" + path)
+            if source.count("assert_credit_path_cognition_governance(") < minimum_calls:
+                errors.append("COGNITION_GUARD_CALL_COUNT_WEAKENED:" + path)
 
     if "ASTRA_DISABLE_MODEL_PLANNER" not in startup_text:
         errors.append("STARTUP_MODEL_PLANNER_KILL_SWITCH_MISSING")
@@ -198,6 +230,10 @@ def evaluate_repository(root: str | Path | None = None) -> dict[str, Any]:
         pointer = json.loads((base / "canonical/CANONICAL_POINTER.json").read_text(encoding="utf-8"))
         startup = (base / "sitecustomize.py").read_text(encoding="utf-8")
         runtime = (base / "canonical/runtime/astra_runtime.py").read_text(encoding="utf-8")
+        bindings = {
+            path: (base / path).read_text(encoding="utf-8")
+            for path in REQUIRED_BINDINGS
+        }
     except Exception as exc:
         return {
             "schema": SCHEMA,
@@ -216,7 +252,7 @@ def evaluate_repository(root: str | Path | None = None) -> dict[str, Any]:
             "external_model_runtime_cognition_credit_authority": False,
             "terminal_authority": False,
         }
-    return evaluate_materials(pointer, startup, runtime)
+    return evaluate_materials(pointer, startup, runtime, bindings)
 
 
 def assert_credit_path_cognition_governance(root: str | Path | None = None) -> dict[str, Any]:
