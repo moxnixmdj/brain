@@ -127,6 +127,7 @@ def test_browser_tool_loop_binds_environment_and_returns_wait():
     assert actions == ["WAIT"]
     assert browser.ops == [{"type": "CLICK_TEXT", "text": "Save"}]
     assert agent.history[-1]["browser_result"]["type"] == "CLICK_TEXT"
+    assert agent.history[-1]["submitted_operation"] == {"type": "CLICK_TEXT", "text": "Save"}
 
     response2, actions2 = agent.predict("inspect page", {"screenshot": b"two"})
     assert response2 == "observe browser"
@@ -208,6 +209,9 @@ def test_state_ops_execute_host_side_and_receipt_returns_to_next_cycle():
     _, actions = agent.predict("write file", {"screenshot": b"one"})
     assert actions == ["WAIT"]
     assert guest.payloads[0]["ops"][0]["type"] == "WRITE_TEXT"
+    assert agent.history[-1]["submitted_operations"] == [
+        {"type": "WRITE_TEXT", "path": "/home/oai/share/a.txt", "text": "alpha"}
+    ]
     assert "ASSERT_PATH_EXISTS:PASS" in agent.history[-1]["guest_result"]["output"]
     assert agent.history[-1]["policy_receipt"]["model"] == "brain-qwen3.5-9b"
 
