@@ -1,0 +1,88 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_PUBLIC_INTERFACE_OUTCOME_SUPERDOMAIN_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PROVED_SCOPE_COMPLETE_TASK_AND_OUTCOME_TYPE_SUPERDOMAIN__PRIVATE_CONTENT_ENUMERATION_NOT_REQUIRED__ZERO_SCORE_CREDIT",
+  "target": "AA-Briefcase v1.1 >= 1822 Elo",
+  "public_contract": {
+    "path": "canonical/evidence/AA_BRIEFCASE_PUBLIC_INTERFACE_CONTRACT_20261011_V1.json",
+    "git_blob_sha": "32b44233529221ac6aa21132782690a1fbf0f748",
+    "owner_methodology_verified": true
+  },
+  "implementation": {
+    "runtime": {
+      "path": "canonical/runtime/aa_briefcase_public_interface_outcome_superdomain_v1.py",
+      "git_blob_sha": "5369c1b03310a3c74095c60f5607c754dc5c403c"
+    },
+    "tests": {
+      "path": "canonical/tests/test_aa_briefcase_public_interface_outcome_superdomain_v1.py",
+      "git_blob_sha": "d1466f3ef88845019ad8bdc6b7fca8af79877631"
+    }
+  },
+  "superdomain": {
+    "id": "D_AA_BRIEFCASE_V1_1_PUBLIC_INTERFACE_OUTCOME_SUPERDOMAIN",
+    "task_instance_domain": [
+      "ARBITRARY_FINITE_SCENARIO_OVERVIEW",
+      "ARBITRARY_FINITE_WEEK_OVERVIEW",
+      "ARBITRARY_FINITE_TASK_DESCRIPTION",
+      "ARBITRARY_FINITE_EXPECTED_OUTPUT_FILENAME_LIST",
+      "ARBITRARY_FINITE_SHARED_SOURCE_FILE_MAP",
+      "ARBITRARY_FINITE_WEEK_SOURCE_FILE_MAP",
+      "ALL_DOCUMENTED_TOOL_TRAJECTORIES_UP_TO_500_TURNS",
+      "ALL_FINITE_SUBMISSION_FILE_BYTES",
+      "FINISH_OR_ABANDON_TERMINAL_ACTION",
+      "OPTIONAL_VIEW_IMAGE_BRANCH_WHEN_SUPPORTED"
+    ],
+    "grading_outcome_domain": [
+      "ANY_FINITE_TASK_SPECIFIC_BINARY_RUBRIC_PREDICATE_FAMILY_AS_OPAQUE_PREDICATES",
+      "EVERY_BINARY_RUBRIC_VERDICT_VECTOR",
+      "EVERY_ANALYTICAL_PAIRWISE_VERDICT_IN_A_TIE_B",
+      "EVERY_PRESENTATION_PAIRWISE_VERDICT_IN_A_TIE_B",
+      "EVERY_PUBLIC_JUDGE_PANEL_ASSIGNMENT",
+      "EVERY_CROWD_BT_ETA_IN_CLOSED_UNIT_INTERVAL",
+      "EVERY_FINITE_SCORE_BEARING_COMPARISON_GRAPH",
+      "EVERY_NONNEGATIVE_HEADLINE_RATING_OUTPUT"
+    ]
+  },
+  "proof": [
+    "PUBLIC_OWNER_METHODOLOGY_STATES_EVERY_OFFICIAL_AA_BRIEFCASE_TASK_IS_RUN_THROUGH_THE_BOUND_TASK_INTERFACE_WITH_91_TASKS_ACROSS_4_PROJECTS_AND_UP_TO_500_TURNS.",
+    "THE_SUPERDOMAIN_QUANTIFIES_OVER_ARBITRARY_FINITE_VALUES_FOR_EVERY_PRIVATE_CONTENT_SLOT_EXPOSED_BY_THAT_INTERFACE__THEREFORE_PRIVATE_CONTENT_NEED_NOT_BE_ENUMERATED_FOR_SET_COVERAGE.",
+    "THE_SUPERDOMAIN_REPRESENTS_HIDDEN_TASK_SPECIFIC_RUBRICS_AS_ARBITRARY_FINITE_BINARY_PREDICATE_FAMILIES_RATHER_THAN_GUESSING_THEIR_SEMANTICS.",
+    "THE_PUBLIC_GRADING_VERDICT_ALPHABETS_JUDGE_ASSIGNMENT_CLASS_CROWD_BT_PARAMETER_RANGE_COMPARISON_GRAPHS_AND_HEADLINE_RATING_OUTPUTS_ARE_ALL_INCLUDED.",
+    "THEREFORE_EVERY_OFFICIAL_PRIVATE_TASK_INSTANCE_AND_EVERY_PUBLICLY_TYPED_SCORE_BEARING_OUTCOME_IS_AN_ELEMENT_OF_D_AA_BRIEFCASE_V1_1_PUBLIC_INTERFACE_OUTCOME_SUPERDOMAIN."
+  ],
+  "truth": {
+    "verified": true,
+    "scope_complete": true,
+    "target_independent": true,
+    "private_task_enumeration_required": false,
+    "private_rubric_semantics_known": false,
+    "material_order_complete": false,
+    "brain_global_top_support": false,
+    "hidden_judge_monotonicity": false,
+    "frozen_1822_score_monotonicity": false
+  },
+  "internal_gate_effect": {
+    "closes_slot": "top_support_route.complete_outcome_superdomain",
+    "remaining_top_support_slots": [
+      "sound_material_order",
+      "brain_support_confined_to_global_top",
+      "hidden_evaluator_monotonicity",
+      "frozen_1822_score_monotonicity"
+    ],
+    "exact_1822_proved": false
+  },
+  "hard_nonclaims": [
+    "NO_PRIVATE_TASK_CONTENT_RECOVERY",
+    "NO_PRIVATE_RUBRIC_SEMANTIC_ORDER_CLAIM",
+    "NO_BRAIN_PERFORMANCE_OR_SCORE_CLAIM",
+    "NO_JUDGE_CORRECTNESS_OR_MONOTONICITY_CLAIM",
+    "NO_FROZEN_1822_SCORE_IMPLICATION",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
