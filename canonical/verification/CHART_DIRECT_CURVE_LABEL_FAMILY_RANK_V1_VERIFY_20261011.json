@@ -1,0 +1,89 @@
+{
+  "schema": "PROJECT_BRAIN_CHART_DIRECT_CURVE_LABEL_FAMILY_RANK_V1_VERIFY_20261011",
+  "date": "2026-10-11",
+  "status": "PASS__EXACT_CANDIDATE_BLOBS__FOCUSED_47_OF_47_PLUS_SECOND_CARRIER_INDEPENDENT_27_OF_27",
+  "capability_id": "chart.raster.direct_curve_label_family_rank.v1",
+  "subject": {
+    "origin_pr": 4666,
+    "origin_head_commit": "9b66360c52c0606040159cbb34d017a6c8ffdcb8",
+    "candidate_merge_commit": "1e095acda08f2f00859946db796d5f8d440ebe2c",
+    "runtime_path": "canonical/runtime/bound_capabilities/chart_direct_curve_label_family_rank_v1.py",
+    "runtime_git_blob_sha": "e3be28bd83ce0a9359a2ce9cedc8415dbcf745d2",
+    "test_path": "canonical/tests/test_chart_direct_curve_label_family_rank_v1.py",
+    "test_git_blob_sha": "4c8fc60d72e160f9995c5df1b0af75b97d9a1eb9",
+    "candidate_governance_path": "canonical/governance/CHART_DIRECT_CURVE_LABEL_FAMILY_RANK_20261011_V1.json"
+  },
+  "replay": {
+    "repository": "moxnixmdj/brain",
+    "workflow_run_id": 38155272543,
+    "workflow_job_id": 114516848546,
+    "runner": "Mo-WSL-Brain",
+    "python": "3.12.15",
+    "pytest": "9.1.1",
+    "pr_merge_subject_sha": "49c8d9aed5baae37a3fb94d0628f7223349a3f4d",
+    "candidate_tests_passed": 13,
+    "candidate_tests_total": 13,
+    "neighboring_tests_passed": 34,
+    "neighboring_tests_total": 34,
+    "total_passed": 47,
+    "total": 47,
+    "compile_step_passed": true,
+    "second_carrier_independent": true
+  },
+  "neighboring_regression_scope": [
+    "canonical/tests/test_chart_curve_value_query_v1.py",
+    "canonical/tests/test_chart_curve_x_at_y_query_v1.py",
+    "canonical/tests/test_chart_legend_style_binding_v1.py",
+    "canonical/tests/test_chart_raster_scene_graph_v1.py"
+  ],
+  "proved_bounded_scope": [
+    "UNIQUE_ENDPOINT_ADJACENT_ALPHA_OCR_LABEL_TO_EXACT_POLYLINE_BINDING",
+    "LEFT_AND_RIGHT_ENDPOINT_BINDING",
+    "SAME_COLOR_CURVES_REMAIN_DISTINCT_WHEN_DIRECT_LABELS_BIND_DIFFERENT_POLYLINE_INDICES",
+    "CALIBRATED_BOUND_CURVE_FAMILY_HIGH_TO_LOW_RANK_AT_X",
+    "UNIQUE_NEAREST_BOUND_CURVE_TO_REQUESTED_Y_AT_X",
+    "LINEAR_AND_LOG10_Y_AXIS_VALUE_TRANSFORMS",
+    "NUMERIC_LABEL_FAR_LABEL_AMBIGUOUS_ENDPOINT_MULTIPLE_LABEL_SAME_CURVE_LARGE_GAP_AND_NEAREST_TIE_FAIL_CLOSED",
+    "ZERO_EXTERNAL_GENERAL_PURPOSE_MODEL_RUNTIME_COGNITION"
+  ],
+  "authority": {
+    "bounded_capability_promotion_supported": true,
+    "chartography_ge_89": false,
+    "domain_semantic_authority": false,
+    "inline_contour_label_authority": false,
+    "general_direct_label_placement_authority": false,
+    "terminal_authority": false
+  },
+  "hard_nonclaims": [
+    "NO_INLINE_CONTOUR_LABEL_AUTHORITY",
+    "NO_ARBITRARY_DIRECT_LABEL_PLACEMENT_AUTHORITY",
+    "NO_DOMAIN_SEMANTIC_INTERPRETATION",
+    "NO_CHARTOGRAPHY_SCORE_OR_GE89_ENTAILMENT",
+    "NO_HELDOUT_CHARTOGRAPHY_COVERAGE_CLAIM"
+  ],
+  "accounting": {
+    "heldout_chartography_cases_consumed": 0,
+    "model_dependency_count": 0,
+    "external_general_purpose_model_runtime_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "benchmark_score_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "independent_verification": "canonical/verification/CHART_DIRECT_CURVE_LABEL_FAMILY_RANK_V1_INDEPENDENT_VERIFY_20261011.json",
+  "independent_replay": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2723,
+    "workflow_run_id": 38167990652,
+    "workflow_job_id": 114554450529,
+    "artifact_id": 11713120076,
+    "artifact_zip_sha256": "01db2835a3749ec4de880cd1793bb42776908aad508c243cf1a7388dc194e7c1",
+    "authored_tests_passed": 13,
+    "authored_tests_total": 13,
+    "verifier_authored_falsification_passed": 14,
+    "verifier_authored_falsification_total": 14,
+    "total_passed": 27,
+    "total": 27,
+    "exact_runtime_blob_sha": "e3be28bd83ce0a9359a2ce9cedc8415dbcf745d2",
+    "exact_test_blob_sha": "4c8fc60d72e160f9995c5df1b0af75b97d9a1eb9"
+  }
+}
