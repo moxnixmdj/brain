@@ -8,14 +8,12 @@ grounded. Otherwise it returns None.
 """
 from __future__ import annotations
 
-import base64
 import json
 import re
 from typing import Any, Mapping, Sequence
 
 SCHEMA = "PROJECT_BRAIN_AUTOMATIONBENCH_MUTATION_COMPILER_V1"
 
-_EMAIL = re.compile(r"\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b", re.I)
 _DATE = re.compile(r"\b20\d{2}-\d{2}-\d{2}\b")
 
 
@@ -196,38 +194,6 @@ def compile_sheets_append(
     }
 
 
-def compile_gmail_send(
-    *,
-    to: str,
-    subject: str,
-    body_text: str,
-    endpoint_url: str = "https://gmail.googleapis.com/gmail/v1/users/me/messages/send",
-) -> dict[str, Any] | None:
-    if not _EMAIL.fullmatch(_s(to)):
-        return None
-    if not _s(subject) or not _s(body_text):
-        return None
-    raw = (
-        f"To: {to}\r\n"
-        f"Subject: {subject}\r\n"
-        "Content-Type: text/plain; charset=utf-8\r\n"
-        "\r\n"
-        f"{body_text}"
-    ).encode("utf-8")
-    encoded = base64.urlsafe_b64encode(raw).decode("ascii").rstrip("=")
-    return {
-        "schema": SCHEMA,
-        "semantic": "GMAIL_SEND",
-        "tool": "api_fetch",
-        "arguments": {
-            "method": "POST",
-            "url": endpoint_url,
-            "body": json.dumps({"raw": encoded}, sort_keys=True),
-        },
-        "grounding": {"to": to, "subject": subject, "body_length": len(body_text)},
-    }
-
-
 def validate_nonnegative_action(prompt: str, action: Mapping[str, Any]) -> bool:
     """Reject obvious prompt-level negative constraints against an action.
 
@@ -236,10 +202,10 @@ def validate_nonnegative_action(prompt: str, action: Mapping[str, Any]) -> bool:
     """
     low = prompt.lower()
     semantic = _s(action.get("semantic")).lower()
-    if any(x in low for x in ("do not send", "don't send", "must not send")) and "gmail_send" in semantic:
-        return False
     if any(x in low for x in ("do not create", "don't create", "must not create")) and "create" in semantic:
         return False
     if any(x in low for x in ("do not update", "don't update", "must not update")) and ("update" in semantic or "mark_won" in semantic):
+        return False
+    if any(x in low for x in ("do not append", "don't append", "must not append")) and "append" in semantic:
         return False
     return True
