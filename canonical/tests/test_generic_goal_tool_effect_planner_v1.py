@@ -263,5 +263,100 @@ class GenericGoalToolEffectPlannerV1Tests(unittest.TestCase):
         )
 
 
+    def test_discourse_make_sure_does_not_create_phantom_intent(self):
+        out = compile_goal_contract(
+            "Make sure you're following the latest guidelines before starting."
+        )
+        self.assertEqual(out["intents"], [], out)
+        self.assertEqual(out["status"], "UNRESOLVED")
+
+    def test_abstract_apply_is_not_association_but_relation_apply_is(self):
+        abstract = compile_goal_contract("Apply our current market analysis methodology.")
+        self.assertEqual(abstract["intents"], [], abstract)
+        concrete = compile_goal_contract("Apply the compliance tag to the customer.")
+        self.assertEqual(
+            [x["action_class"] for x in concrete["intents"]],
+            ["associate"],
+        )
+
+    def test_same_class_actions_in_one_clause_are_preserved_with_local_resources(self):
+        out = compile_goal_contract(
+            "Log the invoice in the tracker and create the support ticket."
+        )
+        creates = [x for x in out["intents"] if x["action_class"] == "create"]
+        self.assertEqual(len(creates), 2, out)
+        self.assertIn("invoice", creates[0]["resource_terms"])
+        self.assertNotIn("ticket", creates[0]["resource_terms"])
+        self.assertIn("ticket", creates[1]["resource_terms"])
+
+    def test_action_local_scope_separates_create_and_update_objects(self):
+        out = compile_goal_contract(
+            "Match the requester, create the case with web origin, and set case priority high."
+        )
+        create_intent = next(x for x in out["intents"] if x["action_class"] == "create")
+        update_intent = next(x for x in out["intents"] if x["action_class"] == "update")
+        self.assertIn("case", create_intent["resource_terms"])
+        self.assertNotIn("priority", create_intent["resource_terms"])
+        self.assertIn("priority", update_intent["resource_terms"])
+
+    def test_post_to_channel_is_notification(self):
+        out = compile_goal_contract("Post the approved positions to #hiring-updates.")
+        self.assertEqual(
+            [x["action_class"] for x in out["intents"]],
+            ["notify"],
+        )
+        self.assertIn("channel", out["intents"][0]["resource_terms"])
+
+    def test_email_address_exposes_email_routing_semantic(self):
+        out = compile_goal_contract("Send the analysis to ceo@company.example.com.")
+        self.assertEqual(out["intents"][0]["action_class"], "notify")
+        self.assertIn("email", out["intents"][0]["resource_terms"])
+        for noise in ("company", "example", "com"):
+            self.assertNotIn(noise, out["intents"][0]["resource_terms"])
+
+    def test_endpoint_operation_name_can_override_http_method(self):
+        cases = [
+            (
+                {
+                    "id":"opaque.records.search",
+                    "method":"POST",
+                    "url":"https://opaque.invalid/records/search",
+                    "description":"Search records.",
+                },
+                "observe",
+            ),
+            (
+                {
+                    "id":"opaque.items.batchUpdate",
+                    "method":"POST",
+                    "url":"https://opaque.invalid/items:batchUpdate",
+                    "description":"Batch update items.",
+                },
+                "update",
+            ),
+            (
+                {
+                    "id":"opaque.requests.create",
+                    "method":"PUT",
+                    "url":"https://opaque.invalid/requests/create",
+                    "description":"Create a request.",
+                },
+                "create",
+            ),
+        ]
+        for endpoint, expected in cases:
+            self.assertEqual(profile_endpoint(endpoint)["action_class"], expected)
+
+    def test_common_discourse_tokens_do_not_drive_resource_overlap(self):
+        out = compile_goal_contract(
+            "We just closed the cobalt deal; mark it as won."
+        )
+        update = next(x for x in out["intents"] if x["action_class"] == "update")
+        for noise in ("we", "just"):
+            self.assertNotIn(noise, update["resource_terms"])
+        self.assertIn("deal", update["resource_terms"])
+
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
