@@ -248,3 +248,12 @@ def test_list_dir_protected_path_rejected():
         assert str(exc) == "PROTECTED_PATH_FORBIDDEN"
     else:
         raise AssertionError("expected protected path rejection")
+
+
+def test_assert_text_contains_compiles_and_executes(tmp_path):
+    target = tmp_path / "a.txt"
+    target.write_text("alpha omega", encoding="utf-8")
+    out = _execute_compiled({
+        "ops": [{"type": "ASSERT_TEXT_CONTAINS", "path": str(target), "text": "omega"}]
+    })
+    assert "ASSERT_TEXT_CONTAINS:PASS:" + str(target) in out
