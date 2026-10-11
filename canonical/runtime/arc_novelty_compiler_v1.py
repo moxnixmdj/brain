@@ -1628,6 +1628,131 @@ def _crop_unique_most_frequent_color(grid: Grid) -> Grid | None:
     return _crop_bbox(grid, (min(rs), min(cs), max(rs), max(cs)))
 
 
+def _move_singleton_toward(
+    grid: Grid,
+    source_color: int,
+    target_color: int,
+) -> Grid | None:
+    source = [(r, c) for r, row in enumerate(grid) for c, value in enumerate(row) if value == source_color]
+    target = [(r, c) for r, row in enumerate(grid) for c, value in enumerate(row) if value == target_color]
+    if len(source) != 1 or len(target) != 1:
+        return None
+    r, c = source[0]
+    tr, tc = target[0]
+    dr = 0 if tr == r else 1 if tr > r else -1
+    dc = 0 if tc == c else 1 if tc > c else -1
+    nr, nc = r + dr, c + dc
+    if not (0 <= nr < len(grid) and 0 <= nc < len(grid[0])):
+        return None
+    if grid[nr][nc] != 0:
+        return None
+    out = [list(row) for row in grid]
+    out[r][c] = 0
+    out[nr][nc] = source_color
+    return tuple(tuple(row) for row in out)
+
+
+def _infer_singleton_move_toward(
+    pairs: Sequence[tuple[Grid, Grid]],
+) -> tuple[int, int] | None:
+    colors = sorted({v for inp, _ in pairs for row in inp for v in row if v != 0})
+    matches: list[tuple[int, int]] = []
+    for source_color, target_color in permutations(colors, 2):
+        if all(
+            _move_singleton_toward(inp, source_color, target_color) == out
+            for inp, out in pairs
+        ):
+            matches.append((source_color, target_color))
+    return matches[0] if len(matches) == 1 else None
+
+
+def _complete_bbox_quarter_turn_orbit(grid: Grid) -> Grid | None:
+    pts = [(r, c) for r, row in enumerate(grid) for c, value in enumerate(row) if value != 0]
+    if not pts:
+        return None
+    h, w = _shape(grid)
+    rs = [r for r, _ in pts]
+    cs = [c for _, c in pts]
+    center_r2 = min(rs) + max(rs)
+    center_c2 = min(cs) + max(cs)
+    out = [list(row) for row in grid]
+    for r, c in pts:
+        color = grid[r][c]
+        rel_r2 = 2 * r - center_r2
+        rel_c2 = 2 * c - center_c2
+        for rr2, cc2 in (
+            (rel_r2, rel_c2),
+            (-rel_c2, rel_r2),
+            (-rel_r2, -rel_c2),
+            (rel_c2, -rel_r2),
+        ):
+            nr2, nc2 = rr2 + center_r2, cc2 + center_c2
+            if nr2 % 2 or nc2 % 2:
+                return None
+            nr, nc = nr2 // 2, nc2 // 2
+            if not (0 <= nr < h and 0 <= nc < w):
+                return None
+            if out[nr][nc] not in (0, color):
+                return None
+            out[nr][nc] = color
+    return tuple(tuple(row) for row in out)
+
+
+_CAP_COMPONENT_SHAPE = frozenset({(0, 0), (0, 1), (0, 2), (1, 0), (1, 2)})
+
+
+def _cap_components(grid: Grid) -> list[Component]:
+    return [
+        component
+        for component in _zero_components(grid)
+        if frozenset(component.normalized_cells) == _CAP_COMPONENT_SHAPE
+    ]
+
+
+def _infer_cap_bottom_marker_color(
+    pairs: Sequence[tuple[Grid, Grid]],
+) -> int | None:
+    marker: int | None = None
+    for inp, out in pairs:
+        if _shape(inp) != _shape(out):
+            return None
+        h, w = _shape(inp)
+        caps = _cap_components(inp)
+        if not caps:
+            return None
+        expected = {(h - 1, component.bbox[1] + 1) for component in caps}
+        changed = {
+            (r, c)
+            for r in range(h)
+            for c in range(w)
+            if inp[r][c] != out[r][c]
+        }
+        if changed != expected:
+            return None
+        values = {out[r][c] for r, c in changed}
+        if len(values) != 1:
+            return None
+        value = next(iter(values))
+        if marker is not None and marker != value:
+            return None
+        marker = value
+    return marker
+
+
+def _cap_bottom_marker_predict(grid: Grid, marker: int) -> Grid | None:
+    caps = _cap_components(grid)
+    if not caps:
+        return None
+    h, _ = _shape(grid)
+    out = [list(row) for row in grid]
+    for component in caps:
+        c = component.bbox[1] + 1
+        if out[h - 1][c] not in (0, marker):
+            return None
+        out[h - 1][c] = marker
+    return tuple(tuple(row) for row in out)
+
+
 def _component_crop(grid: Grid, which: str) -> Grid | None:
     comps = _components(grid)
     if not comps:
@@ -1750,6 +1875,12 @@ def _predict(h: Mapping[str, Any], grid: Grid) -> Grid | None:
         return _between_same_predict(grid, h["mapping"])
     if kind == "CROP_UNIQUE_MOST_FREQUENT_COLOR":
         return _crop_unique_most_frequent_color(grid)
+    if kind == "MOVE_SINGLETON_TOWARD":
+        return _move_singleton_toward(grid, int(h["source_color"]), int(h["target_color"]))
+    if kind == "COMPLETE_BBOX_QUARTER_TURN_ORBIT":
+        return _complete_bbox_quarter_turn_orbit(grid)
+    if kind == "CAP_BOTTOM_MARKER_PROJECTION":
+        return _cap_bottom_marker_predict(grid, int(h["marker"]))
     raise ARCNoveltyCompilerError("HYPOTHESIS_KIND_UNSUPPORTED")
 
 
