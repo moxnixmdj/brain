@@ -23,6 +23,13 @@ _STOP = {
     "it","its","this","that","these","those","and","or","then","please","our",
     "my","your","their","all","any","each","into","onto","using","use","before",
     "after","once","when","where","which","who","what","is","are","be","been",
+    "i","me","we","us","you","he","him","she","her","they","them",
+    "just","sure","actually","some","other","there","may","might","have","has","had",
+    "so","per","right","latest","current","recent","needed","need","if","about","over",
+    "re","not","must","should","can","could","would","will","one","done","accordingly",
+    "appropriate","required","follow","following","include","including","mention",
+    "mentioning","based","com","net","org","example","invalid","www","http","https",
+    "api","v1","v2","v3",
 }
 _ACTION_WORDS = {
     "observe": ("find","get","lookup","search","list","read","review","inspect","check","verify","confirm"),
@@ -35,7 +42,7 @@ _ACTION_WORDS = {
 _ALL_ACTION_TERMS = {x for xs in _ACTION_WORDS.values() for x in xs}
 _AMBIGUOUS_ACTION_WORDS = {
     "message","reply","alert","record","post","update","change","list",
-    "schedule","archive","open",
+    "schedule","archive","open","make","apply",
 }
 _VERB_PREFIX_TAILS = {
     "please","then","and","to","must","should","can","could","would",
@@ -62,20 +69,36 @@ def _singular(token: str) -> str:
     return t
 
 
+_EMAIL = re.compile(r"\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}\\b", re.I)
+_CHANNEL = re.compile(r"(?<!\\w)#([A-Za-z0-9][A-Za-z0-9_-]*)")
+
+
 def _tokens(value: Any) -> list[str]:
-    raw = re.findall(r"[A-Za-z][A-Za-z0-9_-]*", str(value or ""))
+    text = str(value or "")
+    # Normalize schema identifiers as language without depending on any vendor:
+    # foo.bar, foo_bar, foo-bar and camelCase all expose their lexical atoms.
+    text = re.sub(r"([a-z0-9])([A-Z])", r"\\1 \\2", text)
+    text = re.sub(r"[._/:{}\\[\\]()-]+", " ", text)
+    raw = re.findall(r"[A-Za-z][A-Za-z0-9]*", text)
     out: list[str] = []
     for token in raw:
         t = _singular(token)
         if len(t) < 2 or t in _STOP:
             continue
-        out.append(t)
+        if t not in out:
+            out.append(t)
     return out
 
 
 def _resource_terms(value: Any) -> list[str]:
+    text = str(value or "")
     out: list[str] = []
-    for t in _tokens(value):
+    # Transport semantics matter for routing but should be inferred generically.
+    if _EMAIL.search(text):
+        out.append("email")
+    if _CHANNEL.search(text):
+        out.append("channel")
+    for t in _tokens(text):
         if t in _ALL_ACTION_TERMS or t in _GENERIC_RESOURCE:
             continue
         if t not in out:
@@ -112,19 +135,40 @@ def _action_hits(clause: str) -> list[tuple[int, str, str, bool]]:
             for m in re.finditer(r"\b" + re.escape(word) + r"\b", low):
                 if word in _AMBIGUOUS_ACTION_WORDS and not _ambiguous_word_is_verb(low, m.start()):
                     continue
+
+                tail = low[m.end():m.end() + 120]
+                # Discourse-control phrases are not world mutations.
+                if word == "make" and re.match(r"\s+sure\b", tail):
+                    continue
+                # "apply" is relational only when it names a concrete relation.
+                if word == "apply" and not re.search(
+                    r"\b(?:tag|label|category|role|member|membership|assignment)\b",
+                    tail,
+                ):
+                    continue
+
                 resolved = action
                 if word == "add":
-                    tail = low[m.end():]
                     if re.search(r"\b(?:to|into|onto)\b", tail):
                         resolved = "associate"
+                elif word == "post":
+                    if _CHANNEL.search(tail) or re.search(
+                        r"\b(?:to|into|in)\s+(?:the\s+)?channel\b",
+                        tail,
+                    ):
+                        resolved = "notify"
+
                 prefix = low[max(0, m.start() - 24):m.start()]
                 forbidden = _NEGATION.search(prefix) is not None
                 hits.append((m.start(), resolved, word, forbidden))
+
     hits.sort(key=lambda x: (x[0], x[1], x[2]))
+    # Preserve distinct same-class actions in one clause. "log X and create Y"
+    # is two required effects, not one merely because both are create-class.
     dedup: list[tuple[int, str, str, bool]] = []
-    seen: set[tuple[str, bool]] = set()
+    seen: set[tuple[int, str, bool]] = set()
     for row in hits:
-        key = (row[1], row[3])
+        key = (row[0], row[1], row[3])
         if key in seen:
             continue
         seen.add(key)
@@ -137,13 +181,19 @@ def compile_goal_contract(goal: str) -> dict[str, Any]:
         raise ValueError("GOAL_REQUIRED")
     intents: list[dict[str, Any]] = []
     for clause_index, clause in enumerate(_split_clauses(goal)):
-        terms = _resource_terms(clause)
-        for _, action, trigger, forbidden in _action_hits(clause):
+        hits = _action_hits(clause)
+        for hit_index, (start, action, trigger, forbidden) in enumerate(hits):
+            # Give each action its own lexical scope instead of assigning every
+            # noun in a long compound clause to every action.
+            scope_start = 0 if hit_index == 0 else start
+            scope_end = hits[hit_index + 1][0] if hit_index + 1 < len(hits) else len(clause)
+            scope = clause[scope_start:scope_end]
+            terms = _resource_terms(scope)
             intent_id = "intent_" + str(len(intents))
             intents.append({
                 "id": intent_id,
                 "clause_index": clause_index,
-                "clause": clause,
+                "clause": scope.strip(" ,"),
                 "action_class": action,
                 "trigger": trigger,
                 "resource_terms": terms,
@@ -184,23 +234,37 @@ def _flatten_schema_text(endpoint: Mapping[str, Any]) -> str:
     return " ".join(str(x or "") for x in pieces)
 
 
-def _endpoint_action(method: str, text: str) -> str:
+def _endpoint_action(method: str, text: str, operation_hint: str = "") -> str:
     method = method.upper()
     low = text.lower()
+    hint = operation_hint.lower()
+    hint_tokens = set(_tokens(operation_hint))
+
     if method == "GET":
         return "observe"
     if method == "DELETE":
         return "delete"
+
+    # Operation names frequently carry stronger semantics than HTTP verbs.
+    # This handles POST /search, POST /batchUpdate, and PUT .../create without
+    # knowing any application or benchmark vocabulary.
+    if hint_tokens & {"search","find","list","get","lookup","query","read","retrieve"}:
+        return "observe"
+    if any(x in low for x in ("send", "deliver", "notify", "message", "reply")):
+        return "notify"
+    if any(x in low for x in (
+        "addtask","addtag","addlabel","add task","add tag","add label",
+        "attach","assign","move ","link ","associate","membership","copyto","copy to",
+    )):
+        return "associate"
+    if hint_tokens & {"update","patch","edit","set","mark","close","flag"}:
+        return "update"
+    if hint_tokens & {"create","append","insert","submit","schedule","open"}:
+        return "create"
+
     if method in {"PATCH", "PUT"}:
         return "update"
     if method == "POST":
-        if any(x in low for x in ("send", "deliver", "notify", "message", "reply")):
-            return "notify"
-        if any(x in low for x in (
-            "addtask","addtag","add task","add tag","attach","assign","move ",
-            "link ","apply ","associate","membership","copyto","copy to",
-        )):
-            return "associate"
         return "create"
     return "mutate"
 
@@ -214,11 +278,12 @@ def profile_endpoint(endpoint: Mapping[str, Any]) -> dict[str, Any]:
     if not eid or not method or not url:
         raise ValueError("ENDPOINT_ID_METHOD_URL_REQUIRED")
     text = _flatten_schema_text(endpoint)
+    operation_hint = " ".join((eid, url, str(endpoint.get("path") or "")))
     return {
         "id": eid,
         "method": method,
         "url": url,
-        "action_class": _endpoint_action(method, text),
+        "action_class": _endpoint_action(method, text, operation_hint),
         "resource_terms": _resource_terms(text),
         "raw": dict(endpoint),
     }
