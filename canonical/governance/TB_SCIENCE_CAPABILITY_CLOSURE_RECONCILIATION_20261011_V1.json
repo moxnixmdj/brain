@@ -1,0 +1,90 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CAPABILITY_CLOSURE_RECONCILIATION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__RAW_TASK_RESOURCE_TO_TYPED_SCIENTIFIC_CAPABILITY_BRIDGE_CLOSED_FOR_VERIFIED_FOUR_FAMILY_SCOPE__BENCHMARK_FREEZE_REMAINS",
+  "merged_capability": {
+    "merge_commit_sha": "d5a82b04831036a31e4b82f31eacedfd6aa52f7d",
+    "runtime_path": "canonical/runtime/general_scientific_raw_resource_pipeline_v1.py",
+    "runtime_git_blob_sha": "442feb08dbbae2647af15601e4bb378fb1f2d5e6",
+    "test_path": "canonical/tests/test_general_scientific_raw_resource_pipeline_v1.py",
+    "test_git_blob_sha": "850804631ed7286dfe30b45375b5a56c03dccf90",
+    "verification_path": "canonical/verification/GENERAL_SCIENTIFIC_RAW_RESOURCE_PIPELINE_V1_VERIFY_20261011_V1.json",
+    "verification_git_blob_sha": "f829709ae36ba9c97095d8189f9a3530589e974d"
+  },
+  "closed_capabilities": [
+    "LOSSLESS_RAW_INSTRUCTION_PRESERVATION",
+    "BOUNDED_LOCAL_RESOURCE_DISCOVERY",
+    "UNIQUE_FAIL_CLOSED_TYPED_ROUTE_SELECTION",
+    "RAW_NUMERIC_TO_SYMBOLIC_REGRESSION",
+    "RAW_NUMERIC_TO_SHARED_PERIOD_FITTING",
+    "STRUCTURED_RESOURCE_TO_FINITE_RULE_SYNTHESIS",
+    "STRUCTURED_RESOURCE_TO_ABDUCTIVE_RESIDUAL_ANALYSIS",
+    "VERIFIED_RESULT_TO_DECLARED_JSON_CSV_MARKDOWN_ARTIFACTS",
+    "TWO_ENVIRONMENT_EXACT_BLOB_REPLAY",
+    "TEN_CASE_CROSS_FAMILY_SYNTHETIC_SHADOW_MATRIX",
+    "AMBIGUITY_UNSUPPORTED_AND_RESOURCE_CONTAMINATION_NEGATIVE_CONTROLS"
+  ],
+  "remaining_frontier": [
+    {
+      "id": "GENERAL_NL_SCIENTIFIC_SEMANTIC_COMPILATION",
+      "status": "OPEN",
+      "reason": "Current compiler intentionally supports bounded explicit cues, not arbitrary scientific natural-language semantics."
+    },
+    {
+      "id": "NONNUMERIC_AND_UNSTRUCTURED_SCIENTIFIC_RESOURCE_SEMANTICS",
+      "status": "OPEN",
+      "reason": "Current raw-resource bridge covers bounded tabular numeric resources plus explicit structured JSON rule/abduction resources."
+    },
+    {
+      "id": "OPEN_ENDED_SCIENTIFIC_CAPABILITY_DISCOVERY_AND_COMPOSITION",
+      "status": "OPEN",
+      "reason": "Current verified controller routes among four frozen scientific capability families rather than arbitrary verified scientific operators."
+    },
+    {
+      "id": "TASK_DERIVED_ARTIFACT_SCHEMA_COMPILATION",
+      "status": "OPEN",
+      "reason": "Artifact materializer is verified but artifact specifications are still supplied explicitly."
+    },
+    {
+      "id": "BROAD_UNSEEN_TRANSFER_CLOSURE",
+      "status": "OPEN",
+      "reason": "Ten-case cross-family shadow transfer is positive evidence, not proof of general scientific intelligence."
+    }
+  ],
+  "benchmark_state": {
+    "next_candidate": "terminal-bench-science/dna-storage-codec::trial-0",
+    "task_read": false,
+    "task_started": false,
+    "benchmark_trials_consumed": 0,
+    "execution_authority": false,
+    "task_read_authority": false,
+    "activation_authority": false,
+    "benchmark_audit_frozen": true
+  },
+  "counts_unchanged": {
+    "benchmark_trials_consumed": 20,
+    "consumed_successes_final": 0,
+    "consumed_failures_final": 20,
+    "started_result_pending": 0,
+    "finalized_slots": 20
+  },
+  "ownership": {
+    "model_dependency_count": 0,
+    "external_model_runtime_calls": 0,
+    "network_dependency_count": 0,
+    "dynamic_code_execution": false
+  },
+  "next": "EXPAND_TASK_INDEPENDENT_SCIENTIFIC_SEMANTIC_COMPILATION_AND_CAPABILITY_COMPOSITION_ON_SYNTHETIC_UNSEEN_CASES__KEEP_RANK23_UNREAD_UNSTARTED",
+  "hard_nonclaims": [
+    "NOT_GENERAL_SCIENTIFIC_INTELLIGENCE",
+    "NO_ARBITRARY_NATURAL_LANGUAGE_UNDERSTANDING_CLAIM",
+    "NO_ARBITRARY_NONNUMERIC_RESOURCE_SEMANTICS_CLAIM",
+    "NO_BENCHMARK_SCORE_CLAIM",
+    "NO_RANK23_TASK_READ_OR_START",
+    "NO_RANK23_EXECUTION_OR_ACTIVATION_AUTHORITY",
+    "BENCHMARKS_REMAIN_AUDITS_NOT_CAPABILITY_DEBUGGING_LOOPS"
+  ],
+  "acceptance_credit_delta": 0,
+  "benchmark_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
