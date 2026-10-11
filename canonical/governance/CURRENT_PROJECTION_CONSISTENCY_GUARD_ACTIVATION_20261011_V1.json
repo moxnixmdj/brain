@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_PROJECTION_CONSISTENCY_GUARD_ACTIVATION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "ACTIVE_FAIL_CLOSED_CURRENT_PROJECTION_CONSISTENCY_GUARD__ZERO_CREDIT",
+  "objective": "PREVENT_MUTABLE_CURRENT_POINTER_ADVANCES_FROM_LEAVING_CONTRADICTORY_CHECKPOINT_TOPOLOGY_OR_BYTES_VERSION_PROJECTIONS_IN_LOAD_BEARING_SCHEDULER_STATE",
+  "runtime": "canonical/runtime/current_projection_consistency_guard_v1.py",
+  "tests": "canonical/tests/test_current_projection_consistency_guard_v1.py",
+  "checks": [
+    "WAKE_GATED_OPEN_RUNNABLE_AND_PARKED_COUNTS_MATCH_CURRENT_WAKE_GATE",
+    "ACTIVE_GAP_A_AND_GAP_B_COUNTS_REMAIN_ZERO_WHILE_ALL_CHECKPOINT_ROWS_ARE_WAKE_GATED",
+    "BYTES_VERSION_MATCHES_CURRENT_BYTES_STATE_SCHEDULER_FRONTIER_CANDIDATE_AND_PARALLEL_POLICY",
+    "LIVE_FRONTIER_STATUS_CARRIES_CURRENT_WAKE_GATED_COUNT"
+  ],
+  "authority_boundary": {
+    "execution_authority": false,
+    "promotion_authority": false,
+    "acceptance_authority": false,
+    "terminal_authority": false
+  },
+  "hard_nonclaims": [
+    "NO_CHECKPOINT_CLOSED",
+    "NO_BYTES_CAPABILITY_PROMOTION",
+    "NO_FULL_PRIVATE_REGRESSION_RESULT",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}

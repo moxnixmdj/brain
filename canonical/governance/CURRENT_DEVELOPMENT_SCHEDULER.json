@@ -132,7 +132,7 @@
     "professional_open_execution_leaf_count": 0,
     "professional_open_semantic_leaf_count": 0,
     "full_private_regression_execution_carrier_blocked": true,
-    "professional_parallel_policy": "WHILE_REGRESSION_CARRIER_BILLING_PRESTART_GATE_IS_UNCHANGED_AND_NO_CHECKPOINT_WAKE_EVENT__RUN_CAPABILITY_FIRST_GENERAL_DEVELOPMENT_AND_BYTES_V55_RESOURCE_PARETO_WORK__DO_NOT_RETRY_HOSTED_ACTIONS__DO_NOT_SPIN_ON_O11_Q1",
+    "professional_parallel_policy": "WHILE_REGRESSION_CARRIER_BILLING_PRESTART_GATE_IS_UNCHANGED_AND_NO_CHECKPOINT_WAKE_EVENT__RUN_CAPABILITY_FIRST_GENERAL_DEVELOPMENT_AND_BYTES_V58_RESOURCE_PARETO_WORK__DO_NOT_RETRY_HOSTED_ACTIONS__DO_NOT_SPIN_ON_O11_Q1",
     "escape_open_checkpoint_count": 12,
     "escape_row_specific_same_information_runnable_count": 0,
     "escape_wake_gated_open_count": 12,
@@ -290,5 +290,12 @@
     "status": "ACTIVE_DOWNSTREAM_ONLY__REQUIRED_WHEN_D_FINALITY_REACHABLE__15_OF_15__CURRENT_D_FINALITY_OPEN__ZERO_CREDIT",
     "readiness_rule": "DO_NOT_SCHEDULE_D_FINALITY_WHILE_UPSTREAM_ACCEPTANCE_OR_U_CLOSURE_REMAINS_OPEN__WHEN_REACHABLE_USE_V2_CONTENT_BOUND_CLOSURE_AND_DISTINCT_CLEAN_ROOM_REPLAY_GATE_ONLY",
     "terminal_authority": false
+  },
+  "current_projection_consistency_guard": {
+    "path": "canonical/governance/CURRENT_PROJECTION_CONSISTENCY_GUARD_ACTIVATION_20261011_V1.json",
+    "runtime": "canonical/runtime/current_projection_consistency_guard_v1.py",
+    "tests": "canonical/tests/test_current_projection_consistency_guard_v1.py",
+    "status": "ACTIVE_FAIL_CLOSED__CURRENT_WAKE_TOPOLOGY_AND_BYTES_VERSION_MUST_AGREE_BEFORE_STORED_PROJECTION_IS_TRUSTED",
+    "rule": "ON_MISMATCH_FAIL_CLOSED_AND_REPROJECT_FROM_CURRENT_MUTABLE_POINTERS__DO_NOT_AUTHORIZE_EXECUTION_FROM_STALE_SNAPSHOT"
   }
 }
