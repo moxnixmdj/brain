@@ -1,0 +1,188 @@
+{
+  "schema": "PROJECT_BRAIN_AUTOMATIONBENCH_PUBLIC_600_OPERATOR_CENSUS_V1",
+  "date": "2026-10-11",
+  "status": "PUBLIC_600_EXACT_MEMBERSHIP_PARSED__OPERATOR_ABSTRACTION_SCHEDULING_ONLY__ZERO_CREDIT",
+  "source": {
+    "repository": "zapier/AutomationBench",
+    "commit": "4a8e1061254004d9dac807054eed33fad7d1ff14",
+    "domain_task_blob_sha": {
+      "sales": "fbe405f5397d87132013b26324e6f1ce5d513047",
+      "marketing": "ee116a8969f0564acf05ebf19229247ce51a75b0",
+      "operations": "74b5f2fbe02f4fd4fd9025f1fbef21f917ca6c3e",
+      "support": "88ea72a065cd843cffcfbee60c1281db09974edb",
+      "finance": "e35e405f4ccf1364a9250bdc8cead7a3dc57353f",
+      "hr": "4d632ac06e2fa4a365ba4ed53ebefcbf8f8b386c"
+    }
+  },
+  "exact_dataset_membership": {
+    "sales": 100,
+    "marketing": 100,
+    "operations": 100,
+    "support": 100,
+    "finance": 100,
+    "hr": 100,
+    "total": 600
+  },
+  "scheduling_operator_abstraction": {
+    "method": "For each exact dataset member, map every rubric assertion type to a coarse final-state operator family. A task is family-covered only when every rubric assertion maps inside the selected family set.",
+    "caveat": "This is NOT a solver score and NOT evidence that satisfying the coarse family label is sufficient. Message bodies and created records can encode joins, calculations, recency, authority and formatting obligations that are invisible in the coarse label.",
+    "task_incidence": {
+      "COMMUNICATE": 529,
+      "NEGATIVE_GUARD": 588,
+      "CREATE_STATE": 295,
+      "UPDATE_STATE": 166,
+      "OTHER": 147,
+      "CALCULATE": 65,
+      "RELATE_OR_ROUTE": 21
+    },
+    "best_family_set_cover": [
+      {
+        "family_count": 1,
+        "families": [
+          "COMMUNICATE"
+        ],
+        "task_ceiling": 5
+      },
+      {
+        "family_count": 2,
+        "families": [
+          "COMMUNICATE",
+          "NEGATIVE_GUARD"
+        ],
+        "task_ceiling": 164
+      },
+      {
+        "family_count": 3,
+        "families": [
+          "COMMUNICATE",
+          "CREATE_STATE",
+          "NEGATIVE_GUARD"
+        ],
+        "task_ceiling": 307
+      },
+      {
+        "family_count": 4,
+        "families": [
+          "COMMUNICATE",
+          "CREATE_STATE",
+          "NEGATIVE_GUARD",
+          "UPDATE_STATE"
+        ],
+        "task_ceiling": 408
+      },
+      {
+        "family_count": 5,
+        "families": [
+          "COMMUNICATE",
+          "CREATE_STATE",
+          "NEGATIVE_GUARD",
+          "OTHER",
+          "UPDATE_STATE"
+        ],
+        "task_ceiling": 519
+      },
+      {
+        "family_count": 6,
+        "families": [
+          "CALCULATE",
+          "COMMUNICATE",
+          "CREATE_STATE",
+          "NEGATIVE_GUARD",
+          "OTHER",
+          "UPDATE_STATE"
+        ],
+        "task_ceiling": 579
+      },
+      {
+        "family_count": 7,
+        "families": [
+          "CALCULATE",
+          "COMMUNICATE",
+          "CREATE_STATE",
+          "NEGATIVE_GUARD",
+          "OTHER",
+          "RELATE_OR_ROUTE",
+          "UPDATE_STATE"
+        ],
+        "task_ceiling": 600
+      }
+    ],
+    "communicate_create_guard_ceiling_by_domain": {
+      "sales": 13,
+      "marketing": 62,
+      "operations": 76,
+      "support": 22,
+      "finance": 73,
+      "hr": 61,
+      "total": 307
+    },
+    "dominant_exact_signatures": [
+      {
+        "families": [
+          "COMMUNICATE",
+          "NEGATIVE_GUARD"
+        ],
+        "tasks": 159
+      },
+      {
+        "families": [
+          "COMMUNICATE",
+          "CREATE_STATE",
+          "NEGATIVE_GUARD"
+        ],
+        "tasks": 120
+      },
+      {
+        "families": [
+          "COMMUNICATE",
+          "NEGATIVE_GUARD",
+          "UPDATE_STATE"
+        ],
+        "tasks": 57
+      },
+      {
+        "families": [
+          "COMMUNICATE",
+          "CREATE_STATE",
+          "NEGATIVE_GUARD",
+          "UPDATE_STATE"
+        ],
+        "tasks": 33
+      },
+      {
+        "families": [
+          "COMMUNICATE",
+          "CREATE_STATE",
+          "NEGATIVE_GUARD",
+          "OTHER"
+        ],
+        "tasks": 32
+      }
+    ]
+  },
+  "architectural_conclusion": {
+    "highest_leverage_missing_primitive": "GENERIC_GROUNDED_COMMUNICATION",
+    "evidence": "529_of_600_exact_public_tasks_have_at_least_one_communication_assertion_while_current_owned_policy_has_no_generic_communication_executor",
+    "next_companion_primitives": [
+      "GENERIC_WORKFLOW_IR",
+      "AUTHORITY_AND_NEGATIVE_GUARD_RESOLUTION",
+      "GENERIC_CREATE_STATE_REALIZATION",
+      "GROUNDING_AND_DERIVATION_FOR_MESSAGE_CONTENT",
+      "FINAL_STATE_VERIFICATION_AND_REPLAN"
+    ],
+    "public_40_percent_task_count": 240,
+    "three_family_ceiling_exceeds_public_40_percent": true
+  },
+  "nonclaims": [
+    "NO_PUBLIC_SCORE_CLAIM",
+    "NO_PRIVATE_SCORE_CLAIM",
+    "NO_PUBLIC_TO_PRIVATE_EQUIVALENCE",
+    "NO_ASSERTION_FAMILY_SUFFICIENCY_THEOREM",
+    "NO_AUTOMATIONBENCH_ACCEPTANCE_CREDIT",
+    "NO_CAPABILITY_PROMOTION_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "promotion_authority": false
+}
