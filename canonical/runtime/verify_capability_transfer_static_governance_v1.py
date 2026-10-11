@@ -33,6 +33,8 @@ assert b["runtime_cognition_credit_guard_fail_closed_before_credit"] is True
 assert b["runtime_cognition_credit_guard_live_execution_binding_required"] is True
 assert b["runtime_cognition_credit_guard_self_improvement_binding_required"] is True
 assert b["runtime_cognition_credit_guard_terminal_closure_binding_required"] is True
+assert b["runtime_cognition_credit_guard_ownership_promotion_binding_required"] is True
+assert b["runtime_cognition_credit_guard_final_cleanroom_binding_required"] is True
 assert b["runtime_cognition_credit_guard_path"]=="canonical/runtime/runtime_cognition_credit_guard_v1.py"
 assert b["runtime_cognition_credit_guard_verification_path"]=="canonical/verification/RUNTIME_COGNITION_CREDIT_GUARD_REMOTE_VERIFY_20261011_V1.json"
 assert b["local_runner_for_cognition_governance_forbidden"] is True
@@ -41,6 +43,8 @@ for path, minimum in (
     ("canonical/runtime/live_integrated_brain_v1.py",2),
     ("canonical/runtime/autonomous_verified_self_improvement_v1.py",3),
     ("canonical/runtime/terminal_closure_reducer.py",2),
+    ("canonical/runtime/ownership_promotion_compiler_v1.py",1),
+    ("canonical/runtime/final_terminal_cleanroom_gate_v1.py",1),
 ):
     source=(R/path).read_text(encoding="utf-8")
     assert "runtime_cognition_credit_guard_v1" in source
