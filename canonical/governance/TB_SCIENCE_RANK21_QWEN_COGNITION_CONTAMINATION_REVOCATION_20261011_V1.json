@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK21_EXTERNAL_COGNITION_CONTAMINATION_REVOCATION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PERMANENTLY_NONCREDITABLE__MODEL_COGNITION_IN_PRODUCER_PATH",
+  "subject": {
+    "slot_id": "terminal-bench-science/ode-law-discovery::trial-0",
+    "activation_pull_request": 2651,
+    "activation_commit": "eeedc643f2ee71c128a6786beb66b20fb84e0987",
+    "workflow_run_id": 38127556325,
+    "workflow_job_id": 114434971313
+  },
+  "observed_state_at_revocation": {
+    "task_read": true,
+    "durable_start_cas_acquired": true,
+    "benchmark_trial_consumed": true,
+    "result_pending": true
+  },
+  "contamination": {
+    "model": "Qwen3.5-9B-M-TS-Q4_K_M",
+    "runtime": "llama.cpp",
+    "producer_roles": [
+      "reasoning",
+      "planning",
+      "generation",
+      "agent_cognition"
+    ],
+    "load_bearing": true,
+    "local_or_open_weight_does_not_change_classification": true
+  },
+  "corrective_actions": {
+    "activation_pr_closed_unmerged": true,
+    "public_terminal_admission_kill_switch_commit": "bf2d2256b65e6bfae419665a5580f3df841437fc",
+    "public_terminal_surface_revocation_commit": "2175d1792165e6b74b1d8883b7a8bb28797dc5dd",
+    "retry_authority": false,
+    "reactivation_authority": false
+  },
+  "attribution": {
+    "brain_capability_credit": 0,
+    "brain_benchmark_credit": 0,
+    "brain_acceptance_credit": 0,
+    "brain_ownership_credit": 0,
+    "brain_promotion_credit": 0,
+    "brain_terminal_credit": 0,
+    "result_credit_authority": false,
+    "allowed_use": "CONTAMINATED_DIAGNOSTIC_OR_SPECIMEN_ONLY",
+    "forbidden_claim": "BRAIN_PASSED_TB_SCIENCE_USING_THIS_RUN"
+  },
+  "permanence": {
+    "silent_supersession_forbidden": true,
+    "ordinary_scheduler_override_forbidden": true,
+    "model_rename_or_rehosting_bypass_forbidden": true,
+    "rescission_requires_explicit_owner_instruction_naming_this_prohibition": true
+  }
+}
