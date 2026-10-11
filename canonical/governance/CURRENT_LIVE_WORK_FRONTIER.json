@@ -235,7 +235,7 @@
         "decision_equivalence_verification": "canonical/verification/BYTES_EXACT_SYMBOLIC_FAILCLOSED_MESSAGE_V77_VERIFY_20261011_V1.json"
       },
       "ready": "V78_CURRENT_AT_1589206_BYTES__CONTINUE_ONLY_NONCONFLICTING_RESOURCE_PARETO_CUT",
-      "source_git_blob_sha": "ad0d4950424987ec6f57860cf1022fea818325ad"
+      "source_git_blob_sha": "1b7fcc5548e4b23d1f048f50bdeabe57106b8691"
     },
     {
       "work_id": "R2_FINANCE_SEMANTIC_ADEQUACY_TAIL",
