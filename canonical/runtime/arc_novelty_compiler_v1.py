@@ -504,6 +504,10 @@ def _local_feature(grid: Grid, r: int, c: int, feature: str) -> str:
     if feature == "BIN_CROSS":
         bits = ",".join(str(-1 if x == -1 else 0 if x == 0 else 1) for x in cross)
         return f"{0 if v == 0 else 1}|{bits}"
+    if feature == "COLOR_ROWCOL_SETS":
+        row_set = ",".join(str(x) for x in sorted(set(grid[r])))
+        col_set = ",".join(str(x) for x in sorted({grid[rr][c] for rr in range(h)}))
+        return f"{v}|R:{row_set}|C:{col_set}"
     raise ARCNoveltyCompilerError("LOCAL_FEATURE_UNSUPPORTED")
 
 
@@ -577,6 +581,114 @@ def _object_recolor_predict(grid: Grid, feature: str, mapping: Mapping[str, int]
     return tuple(tuple(row) for row in out)
 
 
+def _shift_grid(grid: Grid, dr: int, dc: int) -> Grid:
+    h, w = _shape(grid)
+    out = [[0 for _ in range(w)] for _ in range(h)]
+    for r in range(h):
+        for c in range(w):
+            nr, nc = r + dr, c + dc
+            if 0 <= nr < h and 0 <= nc < w:
+                out[nr][nc] = grid[r][c]
+    return tuple(tuple(row) for row in out)
+
+
+def _infer_unique_shift(pairs: Sequence[tuple[Grid, Grid]], limit: int = 5) -> tuple[int, int] | None:
+    possible: set[tuple[int, int]] | None = None
+    for inp, out in pairs:
+        if _shape(inp) != _shape(out):
+            return None
+        current = {
+            (dr, dc)
+            for dr in range(-limit, limit + 1)
+            for dc in range(-limit, limit + 1)
+            if (dr != 0 or dc != 0) and _shift_grid(inp, dr, dc) == out
+        }
+        possible = current if possible is None else possible & current
+        if not possible:
+            return None
+    return next(iter(possible)) if possible is not None and len(possible) == 1 else None
+
+
+def _binary_shape_key(grid: Grid) -> str:
+    base = tuple(tuple(0 if v == 0 else 1 for v in row) for row in grid)
+    variants: list[Grid] = []
+    current = base
+    for _ in range(4):
+        variants.append(current)
+        variants.append(_flip_h(current))
+        current = _rot90(current)
+    def encode(g: Grid) -> str:
+        return f"{len(g)}x{len(g[0])}:" + "/".join("".join(str(v) for v in row) for row in g)
+    return min(encode(g) for g in variants)
+
+
+def _infer_shape_label(pairs: Sequence[tuple[Grid, Grid]]) -> dict[str, int] | None:
+    mapping: dict[str, int] = {}
+    for inp, out in pairs:
+        if _shape(out) != (1, 1):
+            return None
+        key = _binary_shape_key(inp)
+        target = out[0][0]
+        if key in mapping and mapping[key] != target:
+            return None
+        mapping[key] = target
+    return mapping if mapping else None
+
+
+def _shape_label_predict(grid: Grid, mapping: Mapping[str, int]) -> Grid | None:
+    key = _binary_shape_key(grid)
+    if key not in mapping:
+        return None
+    return ((int(mapping[key]),),)
+
+
+def _select_odd_color_component_crop(grid: Grid) -> Grid | None:
+    comps = _zero_components(grid)
+    if not comps:
+        return None
+    counts = Counter(c.color for c in comps)
+    if not any(v >= 2 for v in counts.values()):
+        return None
+    odd_colors = {color for color, count in counts.items() if count == 1}
+    choices = [c for c in comps if c.color in odd_colors]
+    return _crop_bbox(grid, choices[0].bbox) if len(choices) == 1 else None
+
+
+def _monochrome_frames(grid: Grid) -> list[tuple[int, int, int, int, int]]:
+    h, w = _shape(grid)
+    frames: list[tuple[int, int, int, int, int]] = []
+    for r0 in range(h - 2):
+        for c0 in range(w - 2):
+            color = grid[r0][c0]
+            if color == 0:
+                continue
+            for c1 in range(c0 + 2, w):
+                if any(grid[r0][c] != color for c in range(c0, c1 + 1)):
+                    break
+                for r1 in range(r0 + 2, h):
+                    if grid[r1][c0] != color or grid[r1][c1] != color:
+                        continue
+                    if any(grid[r][c0] != color or grid[r][c1] != color for r in range(r0, r1 + 1)):
+                        continue
+                    if any(grid[r1][c] != color for c in range(c0, c1 + 1)):
+                        continue
+                    frames.append((r0, c0, r1, c1, color))
+    return frames
+
+
+def _select_largest_frame_interior(grid: Grid) -> Grid | None:
+    frames = _monochrome_frames(grid)
+    if not frames:
+        return None
+    areas = [(r1 - r0 + 1) * (c1 - c0 + 1) for r0, c0, r1, c1, _ in frames]
+    best = max(areas)
+    choices = [frame for frame, area in zip(frames, areas) if area == best]
+    if len(choices) != 1:
+        return None
+    r0, c0, r1, c1, _ = choices[0]
+    return tuple(tuple(grid[r][c0 + 1 : c1]) for r in range(r0 + 1, r1))
+
+
 def _component_crop(grid: Grid, which: str) -> Grid | None:
     comps = _components(grid)
     if not comps:
@@ -634,6 +746,14 @@ def _predict(h: Mapping[str, Any], grid: Grid) -> Grid | None:
         return _connect_both_same_color(grid)
     if kind == "FILL_ENCLOSED_ZERO_REGION":
         return _fill_enclosed_zero(grid, int(h["color"]))
+    if kind == "GLOBAL_SHIFT":
+        return _shift_grid(grid, int(h["dr"]), int(h["dc"]))
+    if kind == "COLOR_INVARIANT_SHAPE_LABEL":
+        return _shape_label_predict(grid, h["mapping"])
+    if kind == "SELECT_ODD_COLOR_COMPONENT_CROP":
+        return _select_odd_color_component_crop(grid)
+    if kind == "EXTRACT_LARGEST_MONOCHROME_FRAME_INTERIOR":
+        return _select_largest_frame_interior(grid)
     raise ARCNoveltyCompilerError("HYPOTHESIS_KIND_UNSUPPORTED")
 
 
@@ -743,6 +863,7 @@ def compile_hypotheses(
         ("OBJECT_PROPERTY_RECOLOR", "BBOX"),
         ("LOCAL_NEIGHBORHOOD_RULE", "BIN_CROSS"),
         ("OBJECT_PROPERTY_RECOLOR", "DENSITY"),
+        ("LOCAL_NEIGHBORHOOD_RULE", "COLOR_ROWCOL_SETS"),
     )
     for kind, feature in ordered_structural_hypotheses:
         if kind == "LOCAL_NEIGHBORHOOD_RULE":
@@ -765,6 +886,31 @@ def compile_hypotheses(
     fill_color = _infer_enclosed_zero_fill(pairs)
     if fill_color is not None:
         h = {"kind": "FILL_ENCLOSED_ZERO_REGION", "color": fill_color}
+        if _consistent(h, pairs):
+            candidates.append(h)
+
+    shift = _infer_unique_shift(pairs)
+    if shift is not None:
+        dr, dc = shift
+        h = {"kind": "GLOBAL_SHIFT", "dr": dr, "dc": dc}
+        if _consistent(h, pairs):
+            candidates.append(h)
+
+    shape_label = _infer_shape_label(pairs)
+    if shape_label is not None:
+        h = {
+            "kind": "COLOR_INVARIANT_SHAPE_LABEL",
+            "mapping": dict(sorted(shape_label.items())),
+        }
+        if _consistent(h, pairs):
+            candidates.append(h)
+
+    h = {"kind": "SELECT_ODD_COLOR_COMPONENT_CROP"}
+    if _consistent(h, pairs):
+        candidates.append(h)
+
+    if all(_shape(out)[0] < _shape(inp)[0] and _shape(out)[1] < _shape(inp)[1] for inp, out in pairs):
+        h = {"kind": "EXTRACT_LARGEST_MONOCHROME_FRAME_INTERIOR"}
         if _consistent(h, pairs):
             candidates.append(h)
 
@@ -820,6 +966,11 @@ def compile_hypotheses(
             "CONNECTED_OBJECT_PROPERTY_RECOLOR",
             "ALIGNED_SAME_COLOR_LINE_COMPLETION",
             "ENCLOSED_ZERO_REGION_FILL",
+            "ROW_COLUMN_CONTEXTUAL_LOCAL_RULE",
+            "BOUNDED_GLOBAL_SHIFT",
+            "COLOR_INVARIANT_SHAPE_TO_LABEL",
+            "ODD_COLOR_COMPONENT_SELECTION",
+            "MONOCHROME_FRAME_INTERIOR_EXTRACTION",
             "NON_BACKGROUND_BOUNDING_BOX_CROP",
             "UNIQUE_LARGEST_OR_SMALLEST_COMPONENT_CROP",
         ],
