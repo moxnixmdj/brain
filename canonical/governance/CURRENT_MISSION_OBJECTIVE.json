@@ -58,7 +58,7 @@
   },
   "current_parallel_frontier_control": {
     "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
-    "observed_git_blob_sha": "5da43b352ac9e0ebffb2bf351b3026561e814123",
+    "observed_git_blob_sha": "b624015f568d68b61351464ff79220f3a8c4c81c",
     "status": "CURRENT_PROFESSIONAL_24_OF_24__FULL_PRIVATE_REGRESSION_GATE_OPEN__GITHUB_HOSTED_ACTIONS_BILLING_OR_SPENDING_LIMIT_PRESTART_BLOCK__12_CHECKPOINT_ROWS_WAKE_GATED__CAPABILITY_FIRST_AND_RESOURCE_PARETO_WORK_PRIMARY__ZERO_CREDIT",
     "binding": "MUTABLE_CURRENT_PATH_IDENTITY__SUPPORTED_PROFESSIONAL_ASSURANCE_BYTES_R2_PROJECTIONS_REFRESHED_AT_CALL_TIME__OTHER_SOURCE_DRIFT_FAILS_CLOSED",
     "snapshot_is_runtime_authority_for_supported_dynamic_families": false
@@ -245,12 +245,12 @@
   },
   "bytes_current_frontier": {
     "path": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-    "observed_git_blob_sha": "0a16afd71335bf9193b4291a397935e6c9ec2887",
-    "status": "ACTIVE_RESEARCH__LIBMPF_SEMANTIC_COMPACT_V62_FRONTIER__SUCCESSOR_READY",
-    "raw_python_source_bytes": 1712634,
-    "B_exec_raw_python_source_bytes": 1715394,
-    "qualification": "17710/17710",
-    "next": "Rerank exact V62 using spent NEXT69 only; make a new physical cut before touching QUAL_SUCCESSOR_NEXT70_20261011_V1.",
+    "observed_git_blob_sha": "845dc6ede0f715df3e9b0412fb7842a7a6fad792",
+    "status": "ACTIVE_RESEARCH__LIBMPF_THREE_FUNCTION_COMPACT_V63_FRONTIER__SUCCESSOR_READY",
+    "raw_python_source_bytes": 1712413,
+    "B_exec_raw_python_source_bytes": 1715173,
+    "qualification": "17940/17940",
+    "next": "Rerank exact V63 using spent NEXT70 only; make a new physical cut before touching QUAL_SUCCESSOR_NEXT71_20261011_V1.",
     "promotion_credit": 0,
     "observed_snapshot_is_non_authoritative_for_v15_runtime": true
   },
@@ -265,9 +265,9 @@
   },
   "capability_frontier_currentness_reconciliation": {
     "path": "canonical/governance/CAPABILITY_FRONTIER_CURRENTNESS_RECONCILIATION_20261010_V1.json",
-    "observed_git_blob_sha": "8ae80b623972b01e95a4050e31f30bb7481829ed",
-    "status": "CURRENTNESS_RECONCILED__PROFESSIONAL_24_OF_24__EXECUTION_12_OF_12__SEMANTIC_12_OF_12__REGRESSION_HOSTED_ACTIONS_BILLING_PRESTART_BLOCK__ESCAPE_WAKE_GATED__BYTES_V62_READY__R2_V91_WAKE_GATED__TB_CURRENT_PATH_DYNAMIC__ZERO_CREDIT",
-    "next": "RERANK_EXACT_V62_USING_SPENT_NEXT69_ONLY__MAKE_NEW_PHYSICAL_CUT_BEFORE_SPENDING_FROZEN_NEXT70__CONTINUE_OTHER_CAPABILITY_FIRST_GENERAL_DEVELOPMENT__DO_NOT_RUN_SAME_INFORMATION_CHECKPOINT_WORK"
+    "observed_git_blob_sha": "fea65961d1b2ff8ab000a3fdcf3ec1b0572e86ba",
+    "status": "CURRENTNESS_RECONCILED__PROFESSIONAL_24_OF_24__EXECUTION_12_OF_12__SEMANTIC_12_OF_12__REGRESSION_HOSTED_ACTIONS_BILLING_PRESTART_BLOCK__ESCAPE_WAKE_GATED__BYTES_V63_READY__R2_V91_WAKE_GATED__TB_CURRENT_PATH_DYNAMIC__ZERO_CREDIT",
+    "next": "RERANK_EXACT_V63_USING_SPENT_NEXT70_ONLY__MAKE_NEW_PHYSICAL_CUT_BEFORE_SPENDING_FROZEN_NEXT71__CONTINUE_OTHER_CAPABILITY_FIRST_GENERAL_DEVELOPMENT__DO_NOT_RUN_SAME_INFORMATION_CHECKPOINT_WORK"
   },
   "professional_regression_carrier_diagnosis": {
     "path": "canonical/verification/FULL_PRIVATE_CURRENT_MAIN_REGRESSION_CARRIER_DIAGNOSIS_20261011_V3.json",
