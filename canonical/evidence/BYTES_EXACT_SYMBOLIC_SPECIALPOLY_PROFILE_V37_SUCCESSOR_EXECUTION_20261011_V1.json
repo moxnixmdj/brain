@@ -1,0 +1,111 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_SPECIALPOLY_PROFILE_V37_SUCCESSOR_EXECUTION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "VERIFIED_RESEARCH_FRONTIER__SPENT_NEXT41_AND_FRESH_NEXT42_PASS__ZERO_PROMOTION_CREDIT",
+  "subject": {
+    "predecessor": "canonical/evidence/BYTES_EXACT_SYMBOLIC_SPECIAL_PROFILE_V36_SUCCESSOR_EXECUTION_20261011_V1.json",
+    "predecessor_git_blob_sha": "dc233ca5d69a85e2f68b58fb3a8b613f9c66c2ee",
+    "transform": "canonical/research/bytes/tools/conservative_specialpoly_profile_prune_v37.py",
+    "transform_git_blob_sha": "56dadde44bbb3c02f5d6af9c88482fa26fadacbf",
+    "predecessor_manifest_sha256": "e0c2e96ab217bbcf5b14031f8c1b615d39259331382eaa17920a8766b207ce29",
+    "manifest_sha256": "d4523c1ea91070db972ad04143ddd48954224cfd964ad2be40a6d7c116533d47",
+    "python_files": 277,
+    "raw_python_source_bytes": 1775463,
+    "router_raw_python_source_bytes": 2760,
+    "B_exec_raw_python_source_bytes": 1778223,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "raw_delta_vs_v36_bytes": -6866,
+    "B_exec_delta_vs_v36_bytes": -6866
+  },
+  "selection": {
+    "id": "CONSERVATIVE_SPECIALPOLY_PROFILE_SPENT_NEXT41_V37",
+    "method": "PROFILE_BALANCED_1440_CASE_SPENT_NEXT41_SAMPLE__120_PER_OPERATION__SELECT_SPECIAL_POLYNOMIAL_ORTHOPOLY_AND_HYPERGEOMETRIC_BODIES__THEN_REQUIRE_FULL_SPENT_NEXT41_REPLAY",
+    "profiled_spent_NEXT41_cases": 1440,
+    "profile_sample_per_operation": 120,
+    "full_spent_replay_is_load_bearing": true,
+    "selected_body_count": 23,
+    "behavior": "REPLACE_SELECTED_OUTSIDE_TESTED_BOUNDED_CONTRACT_BODIES_WITH_FAIL_CLOSED_NOTIMPLEMENTEDERROR",
+    "exact_base_guard": true,
+    "exact_target_guard": true
+  },
+  "falsified_alternative": {
+    "id": "SPECIALPOLY_24_BODY_WITH_CHEBYSHEVT",
+    "proposed_raw_delta_bytes": -7331,
+    "spent_NEXT41_result": "11267/11270",
+    "failure_count": 3,
+    "failing_operations": [
+      "roots",
+      "series_coeff",
+      "series_coeff"
+    ],
+    "causal_localization": "CHEBYSHEVT_EVAL_REACHED_THROUGH_RARE_ROOTS_AND_SERIES_TRIGONOMETRIC_SIMPLIFICATION",
+    "repair": "RESTORE_CHEBYSHEVT_EVAL_ONLY__RETAIN_OTHER_23_CUTS",
+    "conclusion": "CHEBYSHEVT_EVAL_IS_RARE_BUT_LOAD_BEARING_FOR_THE_BOUND_ROUTE"
+  },
+  "qualification": {
+    "spent_NEXT41": {
+      "id": "QUAL_SUCCESSOR_NEXT41_20261011_V1",
+      "cases": 11270,
+      "corpus_sha256": "7d69f6b15c39ccee83d19bc44a684d8580fbd7a2f7c792f272dab7e54c2a7c68",
+      "candidate": "11270/11270",
+      "failures": 0,
+      "spent": true
+    },
+    "fresh_NEXT42": {
+      "id": "QUAL_SUCCESSOR_NEXT42_20261011_V1",
+      "cases": 11500,
+      "corpus_sha256": "734d6dbd1f50ace3425a7732f63b1d9d5f662620a3296a2612ada60c4a45e7d9",
+      "candidate": "11500/11500",
+      "clean_room_reconstruction": "11500/11500",
+      "extracted_archive_replay": "11500/11500",
+      "failures": 0,
+      "spent": true
+    }
+  },
+  "reproducibility": {
+    "clean_room_V36_to_V37_python_source_reconstruction": "PASS__277_OF_277_PYTHON_FILES_BYTE_IDENTICAL",
+    "regenerated_manifest_sha256": "d4523c1ea91070db972ad04143ddd48954224cfd964ad2be40a6d7c116533d47",
+    "route": "canonical/research/bytes/tools/exact_symbolic_route_v1.py",
+    "semantic_digest": "canonical/research/bytes/tools/semantic_digest_v1.py",
+    "qualification_generator": "canonical/research/bytes/tools/generate_qualification_v1.py",
+    "replay_carrier": "CHATGPT_CONTAINER_FORKED_5_WORKER_EXACT_ROUTE_REPLAY",
+    "external_second_carrier_verified": false
+  },
+  "durable_archive": {
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V37_SUCCESSOR_20261011_V1.tar.xz",
+    "library_file_id": "libfile_393b763fde308191a86bde01563eb995",
+    "bytes": 275912,
+    "sha256": "2faba205336c4f99cde056dac11ad37c777199e8176ba855335023da1407657a",
+    "archive_size_is_not_used_as_B_exec": true
+  },
+  "next_frozen": {
+    "id": "QUAL_SUCCESSOR_NEXT43_20261011_V1",
+    "cases": 11730,
+    "seed": 1605348570,
+    "seed_derivation": "FIRST_32_BITS_SHA256_OF_QUAL_SUCCESSOR_NEXT43_20261011_V1_PIPE_V37_MANIFEST_IDENTITY",
+    "seed_material": "QUAL_SUCCESSOR_NEXT43_20261011_V1|d4523c1ea91070db972ad04143ddd48954224cfd964ad2be40a6d7c116533d47",
+    "per_operation_budget": 1020,
+    "corpus_sha256": "b560c43f847cf80a30fdb4b96302a201cea1e7357195b502da00d4c28971e498",
+    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT43_20261011_V1.jsonl",
+    "library_file_id": "libfile_01e3f3f491ac8191b1a4b59695e402b8",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT",
+    "spent": false
+  },
+  "truth_boundary": [
+    "MEASURED: exact V37 source is 1,775,463 raw Python-source bytes, 6,866 bytes below exact V36.",
+    "MEASURED: V37 passes full spent NEXT41 11,270/11,270 with zero failures.",
+    "MEASURED: previously frozen untouched NEXT42 passes V37 11,500/11,500; clean-room reconstruction and extracted archive also pass.",
+    "MEASURED: a 24-body predecessor cut was falsified by three real spent cases; restoring only chebyshevt.eval repairs all three.",
+    "MEASURED: NEXT43 is frozen before any V38 physical cut and remains unspent.",
+    "NOT PROVED: external second-carrier replay of V37.",
+    "NOT PROVED: universal SymPy semantic equivalence outside the bounded exact-symbolic route.",
+    "NOT PROMOTED: no Opus-family capability, acceptance, ownership, quality, or terminal credit."
+  ],
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "quality_credit_delta": 0,
+  "promotion_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
