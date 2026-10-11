@@ -1,0 +1,42 @@
+name: Verify capsule referent binding truth repair
+
+on:
+  push:
+    branches:
+      - "chatgpt/capsule-referent-binding-truth-repair-20261005"
+    paths:
+      - "canonical/runtime/composition_state_capsule_v1.py"
+      - "canonical/tests/test_composition_state_capsule_referent_binding_counterexample_v1.py"
+      - "canonical/runtime/composition_state_capsule_referent_binding_v1.py"
+      - "canonical/tests/test_composition_state_capsule_referent_binding_v1.py"
+      - "canonical/governance/COMPOSITION_STATE_CAPSULE_REFERENT_BINDING_TRUTH_REPAIR_20261005_V1.json"
+      - ".github/workflows/verify-capsule-referent-binding-truth-repair.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/runtime/composition_state_capsule_v1.py"
+      - "canonical/tests/test_composition_state_capsule_referent_binding_counterexample_v1.py"
+      - "canonical/runtime/composition_state_capsule_referent_binding_v1.py"
+      - "canonical/tests/test_composition_state_capsule_referent_binding_v1.py"
+      - "canonical/governance/COMPOSITION_STATE_CAPSULE_REFERENT_BINDING_TRUTH_REPAIR_20261005_V1.json"
+      - ".github/workflows/verify-capsule-referent-binding-truth-repair.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Run existing capsule invariants
+        run: PYTHONPATH=. python -m unittest -v canonical.tests.test_composition_state_capsule_v1
+      - name: Reproduce referent-alias counterexamples
+        run: PYTHONPATH=. python -m unittest -v canonical.tests.test_composition_state_capsule_referent_binding_counterexample_v1
+      - name: Verify constructive content-bound referent adapter
+        run: PYTHONPATH=. python -m unittest -v canonical.tests.test_composition_state_capsule_referent_binding_v1
