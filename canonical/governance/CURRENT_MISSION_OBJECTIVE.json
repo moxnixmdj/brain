@@ -32,7 +32,7 @@
     "primary_entrypoint": "plan_current_post_composition_frontier",
     "scalar_fallback_runtime": "canonical/runtime/capability_first_live_scheduler_v1.py",
     "status": "ACTIVE__POST_COMPOSITION_DYNAMIC_CURRENTNESS_V15__PROFESSIONAL_24_OF_24__CHECKPOINT_ROWS_ALL_WAKE_GATED__GITHUB_HOSTED_ACTIONS_BILLING_PRESTART_BLOCK__0_SAME_INFORMATION_CHECKPOINT_RUNS__CAPABILITY_FIRST_PRIMARY__ZERO_GLOBAL_CREDIT",
-    "observed_git_blob_sha": "db789d65ae8d3ba19cba8776cad2fe745a82c2ee",
+    "observed_git_blob_sha": "ffef82730d3bc7dbdc476a25fa3ba2d6f8bb5908",
     "semantic_reuse_policy": "canonical/governance/TWO_CLOCK_SEMANTIC_VALIDITY_AND_SCHEDULER_AUTHORITY_20261011_V4.json",
     "semantic_reuse_policy_git_blob_sha": "f08fd90474aa38f89db171c70e10a6d47e6d7ec5",
     "verified_improvement_loop": "canonical/governance/VERIFIED_IMPROVEMENT_LOOP_V2_ACTIVATION_20261011_V1.json",
@@ -58,7 +58,7 @@
   },
   "current_parallel_frontier_control": {
     "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
-    "observed_git_blob_sha": "bcafc3b3ad2989a39631980f6d7dd91d7c9445a7",
+    "observed_git_blob_sha": "c146caf4c40f2d4601328d945e72379f477f4a00",
     "status": "CURRENT_PROFESSIONAL_24_OF_24__FULL_PRIVATE_REGRESSION_GATE_OPEN__GITHUB_HOSTED_ACTIONS_BILLING_OR_SPENDING_LIMIT_PRESTART_BLOCK__12_CHECKPOINT_ROWS_WAKE_GATED__CAPABILITY_FIRST_AND_RESOURCE_PARETO_WORK_PRIMARY__ZERO_CREDIT",
     "binding": "MUTABLE_CURRENT_PATH_IDENTITY__SUPPORTED_PROFESSIONAL_ASSURANCE_BYTES_R2_PROJECTIONS_REFRESHED_AT_CALL_TIME__OTHER_SOURCE_DRIFT_FAILS_CLOSED",
     "snapshot_is_runtime_authority_for_supported_dynamic_families": false
