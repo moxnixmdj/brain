@@ -9,7 +9,7 @@
     "source_set": [
       {
         "path": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
-        "git_blob_sha": "a56af90a3af965d6be7f9bc5aac1312919626b28"
+        "git_blob_sha": "55c170b51e0f20b73d644f896354bd8c078a74cc"
       },
       {
         "path": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
@@ -29,7 +29,7 @@
       },
       {
         "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
-        "git_blob_sha": "6f032216ebd04d3c4118567aa8a2da12aebe59cf"
+        "git_blob_sha": "c28978e0e3b958892cd056f7677870476fca20a8"
       },
       {
         "path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
