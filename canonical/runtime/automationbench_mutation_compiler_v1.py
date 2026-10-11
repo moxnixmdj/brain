@@ -216,3 +216,65 @@ def validate_nonnegative_action(prompt: str, action: Mapping[str, Any]) -> bool:
     if any(x in low for x in ("do not append", "don't append", "must not append")) and "append" in semantic:
         return False
     return True
+
+
+def compile_asana_add_to_section(
+    prompt: str,
+    observations: Sequence[Any],
+    *,
+    endpoint_url_template: str = "https://app.asana.com/api/1.0/sections/{section_gid}/addTask",
+) -> dict[str, Any] | None:
+    """Place the newly created Asana task into the explicitly requested section."""
+    low = prompt.lower()
+    if "asana" not in low or "section" not in low:
+        return None
+
+    # Public prompts commonly use either "'February' section" or "February section".
+    m_section = re.search(r"['\"]([^'\"]{2,40})['\"]\s+section", prompt, re.I)
+    if not m_section:
+        m_section = re.search(
+            r"\b(January|February|March|April|May|June|July|August|September|October|November|December)\s+section\b",
+            prompt,
+            re.I,
+        )
+    if not m_section:
+        return None
+    section_name = m_section.group(1).strip()
+
+    task_candidates: list[dict[str, Any]] = []
+    section_candidates: list[dict[str, Any]] = []
+    for rec in _records(observations):
+        gid = _s(_ci_get(rec, "gid", "id", "Id"))
+        name = _s(_ci_get(rec, "name", "title"))
+        if gid and name:
+            if name.lower() == section_name.lower():
+                section_candidates.append(rec)
+            if any(k in rec for k in ("due_on", "completed", "assignee", "workspace")):
+                task_candidates.append(rec)
+
+    if not task_candidates or not section_candidates:
+        return None
+
+    # Prefer the task whose name appears in a previously observed source line.
+    task = task_candidates[-1]
+    section = section_candidates[0]
+    task_gid = _s(_ci_get(task, "gid", "id", "Id"))
+    section_gid = _s(_ci_get(section, "gid", "id", "Id"))
+    if not task_gid or not section_gid:
+        return None
+
+    return {
+        "schema": SCHEMA,
+        "semantic": "ASANA_TASK_ADD_TO_SECTION",
+        "tool": "api_fetch",
+        "arguments": {
+            "method": "POST",
+            "url": endpoint_url_template.replace("{section_gid}", section_gid),
+            "body": json.dumps({"task": task_gid}, sort_keys=True),
+        },
+        "grounding": {
+            "task_gid": task_gid,
+            "section_gid": section_gid,
+            "section_name": section_name,
+        },
+    }
