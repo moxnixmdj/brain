@@ -1429,6 +1429,205 @@ def _extend_columns_down(grid: Grid) -> Grid | None:
     return tuple(tuple(row) for row in out)
 
 
+def _relative_area_features(grid: Grid) -> tuple[list[Component], list[tuple[int, int]]]:
+    components = _zero_components(grid)
+    areas = [component.area for component in components]
+    features = [
+        (
+            sum(area < component.area for area in areas),
+            sum(area == component.area for area in areas),
+        )
+        for component in components
+    ]
+    return components, features
+
+
+def _infer_relative_area_recolor(
+    pairs: Sequence[tuple[Grid, Grid]],
+) -> dict[str, int] | None:
+    mapping: dict[str, int] = {}
+    for inp, out in pairs:
+        if _shape(inp) != _shape(out):
+            return None
+        h, w = _shape(inp)
+        for r in range(h):
+            for c in range(w):
+                if inp[r][c] == 0 and out[r][c] != 0:
+                    return None
+        components, features = _relative_area_features(inp)
+        for component, feature in zip(components, features):
+            targets = {out[r][c] for r, c in component.cells}
+            if len(targets) != 1:
+                return None
+            key = f"{feature[0]}|{feature[1]}"
+            target = next(iter(targets))
+            if key in mapping and mapping[key] != target:
+                return None
+            mapping[key] = target
+    return mapping if mapping else None
+
+
+def _relative_area_recolor_predict(
+    grid: Grid,
+    mapping: Mapping[str, int],
+) -> Grid | None:
+    out = [list(row) for row in grid]
+    components, features = _relative_area_features(grid)
+    for component, feature in zip(components, features):
+        key = f"{feature[0]}|{feature[1]}"
+        if key not in mapping:
+            return None
+        target = int(mapping[key])
+        for r, c in component.cells:
+            out[r][c] = target
+    return tuple(tuple(row) for row in out)
+
+
+def _component_has_enclosed_zero(component: Component) -> bool:
+    r0, c0, r1, c1 = component.bbox
+    h = r1 - r0 + 1
+    w = c1 - c0 + 1
+    if h < 3 or w < 3:
+        return False
+    occupied = set(component.normalized_cells)
+    for sr in range(1, h - 1):
+        for sc in range(1, w - 1):
+            if (sr, sc) in occupied:
+                continue
+            seen = {(sr, sc)}
+            q = deque([(sr, sc)])
+            touches = False
+            while q:
+                r, c = q.popleft()
+                if r in (0, h - 1) or c in (0, w - 1):
+                    touches = True
+                    break
+                for nr, nc in ((r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)):
+                    if (
+                        0 <= nr < h
+                        and 0 <= nc < w
+                        and (nr, nc) not in occupied
+                        and (nr, nc) not in seen
+                    ):
+                        seen.add((nr, nc))
+                        q.append((nr, nc))
+            if not touches:
+                return True
+    return False
+
+
+def _infer_hollow_component_recolor(
+    pairs: Sequence[tuple[Grid, Grid]],
+) -> dict[str, int] | None:
+    mapping: dict[str, int] = {}
+    for inp, out in pairs:
+        if _shape(inp) != _shape(out):
+            return None
+        h, w = _shape(inp)
+        for r in range(h):
+            for c in range(w):
+                if inp[r][c] == 0 and out[r][c] != 0:
+                    return None
+        for component in _zero_components(inp):
+            targets = {out[r][c] for r, c in component.cells}
+            if len(targets) != 1:
+                return None
+            key = "1" if _component_has_enclosed_zero(component) else "0"
+            target = next(iter(targets))
+            if key in mapping and mapping[key] != target:
+                return None
+            mapping[key] = target
+    return mapping if mapping else None
+
+
+def _hollow_component_recolor_predict(
+    grid: Grid,
+    mapping: Mapping[str, int],
+) -> Grid | None:
+    out = [list(row) for row in grid]
+    for component in _zero_components(grid):
+        key = "1" if _component_has_enclosed_zero(component) else "0"
+        if key not in mapping:
+            return None
+        target = int(mapping[key])
+        for r, c in component.cells:
+            out[r][c] = target
+    return tuple(tuple(row) for row in out)
+
+
+def _between_same_feature(grid: Grid, r: int, c: int) -> str:
+    left = _visible_color(grid, r, c, 0, -1)
+    right = _visible_color(grid, r, c, 0, 1)
+    up = _visible_color(grid, r, c, -1, 0)
+    down = _visible_color(grid, r, c, 1, 0)
+    northwest = _visible_color(grid, r, c, -1, -1)
+    southeast = _visible_color(grid, r, c, 1, 1)
+    northeast = _visible_color(grid, r, c, -1, 1)
+    southwest = _visible_color(grid, r, c, 1, -1)
+    flags = (
+        grid[r][c] == 0,
+        left != -1 and left == right,
+        up != -1 and up == down,
+        northwest != -1 and northwest == southeast,
+        northeast != -1 and northeast == southwest,
+    )
+    return "|".join("1" if value else "0" for value in flags)
+
+
+def _infer_between_same_rule(
+    pairs: Sequence[tuple[Grid, Grid]],
+) -> dict[str, int] | None:
+    mapping: dict[str, int] = {}
+    for inp, out in pairs:
+        if _shape(inp) != _shape(out):
+            return None
+        h, w = _shape(inp)
+        for r in range(h):
+            for c in range(w):
+                if inp[r][c] != 0 and out[r][c] != inp[r][c]:
+                    return None
+                key = _between_same_feature(inp, r, c)
+                target = out[r][c]
+                if key in mapping and mapping[key] != target:
+                    return None
+                mapping[key] = target
+    return mapping if mapping else None
+
+
+def _between_same_predict(
+    grid: Grid,
+    mapping: Mapping[str, int],
+) -> Grid | None:
+    h, w = _shape(grid)
+    out: list[tuple[int, ...]] = []
+    for r in range(h):
+        row: list[int] = []
+        for c in range(w):
+            key = _between_same_feature(grid, r, c)
+            if key not in mapping:
+                return None
+            row.append(int(mapping[key]))
+        out.append(tuple(row))
+    return tuple(out)
+
+
+def _crop_unique_most_frequent_color(grid: Grid) -> Grid | None:
+    counts = _nonzero_color_counts(grid)
+    if not counts:
+        return None
+    best = max(counts.values())
+    colors = [color for color, count in counts.items() if count == best]
+    if len(colors) != 1:
+        return None
+    color = colors[0]
+    pts = [(r, c) for r, row in enumerate(grid) for c, value in enumerate(row) if value == color]
+    if not pts:
+        return None
+    rs = [r for r, _ in pts]
+    cs = [c for _, c in pts]
+    return _crop_bbox(grid, (min(rs), min(cs), max(rs), max(cs)))
+
+
 def _component_crop(grid: Grid, which: str) -> Grid | None:
     comps = _components(grid)
     if not comps:
@@ -1543,6 +1742,14 @@ def _predict(h: Mapping[str, Any], grid: Grid) -> Grid | None:
         return _bridge_component_scalar(grid)
     if kind == "EXTEND_COLUMNS_DOWN":
         return _extend_columns_down(grid)
+    if kind == "RELATIVE_AREA_RECOLOR":
+        return _relative_area_recolor_predict(grid, h["mapping"])
+    if kind == "HOLLOW_COMPONENT_RECOLOR":
+        return _hollow_component_recolor_predict(grid, h["mapping"])
+    if kind == "BETWEEN_SAME_BACKGROUND_RULE":
+        return _between_same_predict(grid, h["mapping"])
+    if kind == "CROP_UNIQUE_MOST_FREQUENT_COLOR":
+        return _crop_unique_most_frequent_color(grid)
     raise ARCNoveltyCompilerError("HYPOTHESIS_KIND_UNSUPPORTED")
 
 
