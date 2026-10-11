@@ -245,6 +245,21 @@ def evaluate(
         for key in required_true:
             if cleanroom.get(key) is not True:
                 errors.append("CLEANROOM:" + key.upper() + "_NOT_TRUE")
+        if cleanroom.get("external_contribution_census_complete") is not True:
+            errors.append("CLEANROOM:EXTERNAL_CONTRIBUTION_CENSUS_INCOMPLETE")
+        if cleanroom.get("full_runtime_dependency_inventory_complete") is not True:
+            errors.append("CLEANROOM:RUNTIME_DEPENDENCY_INVENTORY_INCOMPLETE")
+        if cleanroom.get("runtime_cognition_dependency_class") != "MODEL_INDEPENDENT":
+            errors.append("CLEANROOM:RUNTIME_COGNITION_NOT_MODEL_INDEPENDENT")
+        for key in ("model_dependency_count","external_model_runtime_dependency_count","online_teacher_call_count","teacher_fallback_path_count"):
+            if cleanroom.get(key) != 0:
+                errors.append("CLEANROOM:" + key.upper() + "_NOT_ZERO")
+        if cleanroom.get("copied_or_rehosted_teacher_present") is not False:
+            errors.append("CLEANROOM:COPIED_OR_REHOSTED_TEACHER_NOT_EXPLICITLY_FALSE")
+        if cleanroom.get("brain_owned_operative_artifact") is not True:
+            errors.append("CLEANROOM:BRAIN_OWNED_OPERATIVE_ARTIFACT_NOT_TRUE")
+        if cleanroom.get("operative_solver_role") not in {"BRAIN_OWNED_NATIVE_MECHANISM","BRAIN_OWNED_DERIVED_MECHANISM"}:
+            errors.append("CLEANROOM:OPERATIVE_SOLVER_ROLE_NOT_BRAIN_OWNED")
         if cleanroom.get("undeclared_dependency_count") != 0:
             errors.append("CLEANROOM:UNDECLARED_DEPENDENCY_COUNT_NOT_ZERO")
         if str(cleanroom.get("candidate_sha256") or "").lower() != candidate_sha256:
