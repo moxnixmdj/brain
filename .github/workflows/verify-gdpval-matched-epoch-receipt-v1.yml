@@ -1,0 +1,36 @@
+name: Verify GDPval matched-epoch receipt gate
+
+on:
+  push:
+    branches:
+      - gdpval/matched-epoch-receipt-gate-20261011-v1
+  pull_request:
+    paths:
+      - canonical/runtime/gdpval_matched_epoch_receipt_gate_v1.py
+      - canonical/tests/test_gdpval_matched_epoch_receipt_gate_v1.py
+      - canonical/governance/GDPVAL_MATCHED_EPOCH_RECEIPT_GATE_BINDING_20261011_V1.json
+      - .github/workflows/verify-gdpval-matched-epoch-receipt-v1.yml
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile exact runtime and tests
+        run: |
+          python -m py_compile canonical/runtime/gdpval_matched_epoch_receipt_gate_v1.py
+          python -m py_compile canonical/tests/test_gdpval_matched_epoch_receipt_gate_v1.py
+          python -m json.tool canonical/governance/GDPVAL_MATCHED_EPOCH_RECEIPT_GATE_BINDING_20261011_V1.json >/dev/null
+      - name: Run focused tests without external dependencies
+        run: |
+          python - <<'PY'
+          import canonical.tests.test_gdpval_matched_epoch_receipt_gate_v1 as t
+          tests = sorted(
+              (name, fn) for name, fn in vars(t).items()
+              if name.startswith("test_") and callable(fn)
+          )
+          for name, fn in tests:
+              fn()
+              print("PASS", name)
+          print(f"PASS {len(tests)}/{len(tests)} focused tests")
+          PY

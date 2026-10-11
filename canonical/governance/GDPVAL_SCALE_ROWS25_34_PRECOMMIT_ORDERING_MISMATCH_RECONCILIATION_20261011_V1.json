@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_SCALE_PRECOMMIT_ORDERING_MISMATCH_RECONCILIATION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "FAIL_CLOSED__ROWS25_34_PRECOMMIT_VALID_FOR_ROW25_ONLY__ROWS26_34_ROW_IDENTITY_MAPPING_TOMBSTONED",
+  "benchmark": "GDPval-AA v2.1",
+  "dataset_binding": {
+    "owner": "openai",
+    "name": "gdpval",
+    "revision_sha": "11e7900cdcac61bc4daf59e65feb238acda98fbf",
+    "population_receipt": "canonical/evidence/GDPVAL_PUBLIC_220_POPULATION_REALITY_RECEIPT_20261007_V1.json",
+    "population_manifest_root_sha256": "f69af30fcea243ccb25d44c4a5380be0cdcac621287568525065034ce6cedae8"
+  },
+  "superseded_precommit": "canonical/governance/GDPVAL_SCALE_FRESH_BATCH_ROWS25_34_PRECOMMIT_20261011_V1.json",
+  "observed_official_rows_api_task_ids": [
+    {"row_idx":20,"task_id":"575f8679-b4c1-47a2-8e96-d570d4ed9269"},
+    {"row_idx":21,"task_id":"a74ead3b-f67d-4b1c-9116-f6bb81b29d4f"},
+    {"row_idx":22,"task_id":"bbe0a93b-ebf0-40b0-98dc-8d9243099034"},
+    {"row_idx":23,"task_id":"85d95ce5-b20c-41e2-834e-e788ce9622b6"},
+    {"row_idx":24,"task_id":"76d10872-9ffa-4ede-83ee-e0f1ec5e2b8d"},
+    {"row_idx":25,"task_id":"36d567ba-e205-4313-9756-931c6e4691fe"},
+    {"row_idx":26,"task_id":"7bbfcfe9-132d-4194-82bb-d6f29d001b01"},
+    {"row_idx":27,"task_id":"2696757c-1f8a-4959-8f0d-f5597b9e70fc"},
+    {"row_idx":28,"task_id":"dfb4e0cd-a0b7-454e-b943-0dd586c2764c"},
+    {"row_idx":29,"task_id":"4c18ebae-dfaa-4b76-b10c-61fcdf26734c"},
+    {"row_idx":30,"task_id":"cebf301e-5ea7-41ae-b117-ad8f43e7ac22"},
+    {"row_idx":31,"task_id":"c2e8f271-7858-412f-b460-472463ad81d9"},
+    {"row_idx":32,"task_id":"2ea2e5b5-257f-42e6-a7dc-93763f28b19d"},
+    {"row_idx":33,"task_id":"c357f0e2-963d-4eb7-a6fa-3078fe55b3ba"},
+    {"row_idx":34,"task_id":"a45bc83b-22f9-4def-8d89-9c5661b2b86f"}
+  ],
+  "comparison": {
+    "rows_20_25_match_existing_canonical_receipts_or_precommit": true,
+    "row_25_match": true,
+    "rows_26_34_match_old_precommit": false,
+    "first_divergence_row": 26,
+    "consequence": "OLD_ROW_INDEX_TO_TASK_ID_BINDINGS_FOR_ROWS26_34_MUST_NOT_AUTHORIZE_PROMPT_EXPOSURE_OR_FRESH_CREDIT"
+  },
+  "row26": {
+    "official_task_id": "7bbfcfe9-132d-4194-82bb-d6f29d001b01",
+    "prompt_exposed_during_mismatch_diagnosis": true,
+    "fresh_promotion_eligibility": false,
+    "scale_submission_manifest_eligibility": "MAY_BE_GENERATED_ONCE_WITHOUT_RUBRIC_GOLD_OR_JUDGE_FEEDBACK__LABEL_NONFRESH_DUE_PRECOMMIT_DEFECT",
+    "credit_delta": 0
+  },
+  "scheduler_effect": [
+    "TOMBSTONE_ROWS26_34_BINDINGS_IN_GDPVAL_SCALE_FRESH_BATCH_ROWS25_34_PRECOMMIT_20261011_V1",
+    "USE_CORRECTED_ROWS27_34_PRECOMMIT_BEFORE_ANY_FURTHER_PROMPT_EXPOSURE",
+    "DO_NOT_COUNT_ROW26_AS_FRESH_STAGE_EVIDENCE",
+    "ROW25_EXISTING_RECEIPT_REMAINS_UNAFFECTED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

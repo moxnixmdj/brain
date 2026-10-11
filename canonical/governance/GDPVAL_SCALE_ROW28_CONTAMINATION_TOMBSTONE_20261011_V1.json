@@ -1,0 +1,18 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_SCALE_ROW28_CONTAMINATION_TOMBSTONE_20261011_V1",
+  "date": "2026-10-11",
+  "status": "ROW28_SPENT_FOR_FRESH_PROMOTION_EVIDENCE__ZERO_SCORE_CREDIT",
+  "benchmark": "GDPval-AA v2.1",
+  "subject": {"row_idx":28,"task_id":"dfb4e0cd-a0b7-454e-b943-0dd586c2764c"},
+  "precommit": "canonical/governance/GDPVAL_SCALE_FRESH_BATCH_ROWS25_34_PRECOMMIT_20261011_V1.json",
+  "cause": "PREOUTPUT_ATTEMPT_TO_LOCATE_THE_OFFICIAL_REFERENCE_XLSX_VIA_WEB_SEARCH_SURFACED_INDEXED_THIRD_PARTY_GDPVAL_OUTPUTS_AND_TASK_SPECIFIC_RESULT_INFORMATION",
+  "freshness_boundary": {
+    "official_prompt_read_after_precommit": true,
+    "official_reference_file_contents_read": false,
+    "brain_output_bytes_frozen": false,
+    "third_party_model_submission_or_task_specific_result_exposure_before_output_freeze": true,
+    "consequence": "TASK_MAY_NOT_COUNT_AS_FRESH_SCALE_EVIDENCE"
+  },
+  "scheduler": "DO_NOT_COMPLETE_ROW28_FOR_FRESH_CREDIT__FOR_ALL_REMAINING_REFERENCE_FILE_TASKS_DOWNLOAD_EXACT_OFFICIAL_REFERENCE_URLS_DIRECTLY_INSIDE_ISOLATED_SPRITE_WITHOUT_WEB_SEARCH_OR_SEARCH_ENGINE_DISCOVERY",
+  "accounting": {"owner_score_credit":0,"acceptance_credit_delta":0,"terminal_credit_delta":0}
+}

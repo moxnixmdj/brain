@@ -1,0 +1,95 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_SCALE_BRAIN_SUBMISSION_RECEIPT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__FRESH_ROW18_FORMULA_DRIVEN_NPV_XLSX_SUBMISSION_FROZEN__FORMULA_AND_VISUAL_QA_PASS__ZERO_OWNER_SCORE_CREDIT",
+  "benchmark": "GDPval-AA v2.1",
+  "subject": {
+    "row_idx": 18,
+    "task_id": "24d1e93f-9018-45d4-b522-ad89dfd78079",
+    "sector": "Manufacturing",
+    "occupation": "Buyers and Purchasing Agents"
+  },
+  "precommit": "canonical/governance/GDPVAL_SCALE_FRESH_BATCH_ROWS15_24_PRECOMMIT_20261011_V1.json",
+  "packet": {
+    "manifest_root_sha256": "f69af30fcea243ccb25d44c4a5380be0cdcac621287568525065034ce6cedae8",
+    "packet_sha256": "7eea1abb2a9b50c57f8804e26233bfcf3ea37aa65819daba51ba579aa5d67c5c",
+    "prompt_sha256": "08f8dfb44b0f0a36d8982e5920253c319943c09e71a5187b8bb3488936765345",
+    "raw_obligation_count": 15,
+    "reference_count": 1
+  },
+  "freshness": {
+    "task_id_frozen_before_prompt_read": true,
+    "rubric_read_before_output_freeze": false,
+    "human_gold_read_before_output_freeze": false,
+    "third_party_model_submission_read_before_output_freeze": false,
+    "judge_feedback_read_before_output_freeze": false
+  },
+  "reference": {
+    "filename": "Quotations and volume projection for model I headlamp.docx",
+    "sha256": "787218a67c75e5c2f6dc405027a2f07c087f1c1260cdba6c2adc4465085adbb6",
+    "bytes": 14948,
+    "extraction": "OFFICIAL_DATASET_BYTES__OOXML_STANDARD_LIBRARY_PARSE"
+  },
+  "model_assumptions": [
+    "QUOTED_PART_PRICES_TREATED_AS_INR_PER_INDIVIDUAL_HEADLAMP__ANNUAL_SET_VOLUMES_MULTIPLIED_BY_TWO_HEADLAMPS_PER_SET",
+    "TOOLING_AMORTIZED_OVER_FIRST_100000_SETS__YEAR1_VOLUME_EQUALS_100000_SO_FULL_TOOLING_ALLOCATED_TO_YEAR1",
+    "R_AND_D_PAID_FULLY_UPFRONT_IN_YEAR1_AND_SPLIT_50_50_BETWEEN_BASE_AND_TOP_VARIANTS",
+    "YEAR1_UNDISCOUNTED__YEARS2_3_4_DISCOUNTED_AT_10_PERCENT_WITH_EXPONENTS_1_2_3",
+    "SOLIMOTO_EXACT_100000_THRESHOLD_UNDEFINED_BY_SOURCE__YEAR1_USES_LOW_VOLUME_TIER__YEARS2_4_USE_OVER_100000_TIER",
+    "INFLATION_IGNORED_AS_INSTRUCTED"
+  ],
+  "results": {
+    "Autolantic": {
+      "npv_cost_inr": 4557664545.454545,
+      "undiscounted_cost_inr": 5320818000,
+      "lead_time_weeks": 12,
+      "fx_exposure": "High",
+      "premium_vs_lowest_npv": 0.24331523850412173
+    },
+    "Vendocrat": {
+      "npv_cost_inr": 3665735289.2561975,
+      "undiscounted_cost_inr": 4283906000,
+      "lead_time_weeks": 6,
+      "fx_exposure": "Low",
+      "premium_vs_lowest_npv": 0
+    },
+    "Solimoto": {
+      "npv_cost_inr": 3873022479.3388424,
+      "undiscounted_cost_inr": 4515720000,
+      "lead_time_weeks": 6,
+      "fx_exposure": "Low-Medium",
+      "premium_vs_lowest_npv": 0.05654723369965553
+    },
+    "recommendation": "VENDOCRAT_SUBJECT_TO_FINAL_ENGINEERING_AND_QUALITY_CONFIRMATION_OF_PREMIUM_LED_PROJECTOR_AND_DYNAMIC_DRL_CAPABILITY__SOLIMOTO_IS_PREFERRED_FALLBACK_IF_TECHNICAL_RISK_IS_UNACCEPTABLE"
+  },
+  "deliverable": {
+    "format": "xlsx",
+    "filename": "GDPval_24d1e93f_Model_I_headlamp_NPV_analysis.xlsx",
+    "sha256": "9dc1cb9ed65f9dc930ae3a54f1ca4bb5110c09c9acf4922b1c5bf606d760f662",
+    "library_path": "/Project Brain/GDPval/scale/24d1e93f-9018-45d4-b522-ad89dfd78079/GDPval_24d1e93f_Model_I_headlamp_NPV_analysis.xlsx",
+    "library_file_id": "libfile_a0d13693573c8191ba0bf7400c3e0b09",
+    "sheets": ["Summary", "Autolantic", "Vendocrat", "Solimoto"]
+  },
+  "verification": {
+    "formula_driven_vendor_sheets": true,
+    "dedicated_npv_sheet_per_vendor": true,
+    "summary_side_by_side_comparison": true,
+    "summary_recommendation_and_comments": true,
+    "formula_error_scan": "PASS__ZERO_REF_DIV0_VALUE_NAME_NA_ERRORS",
+    "summary_visual_render": "PASS__READABLE__NO_LAYOUT_FAILURE",
+    "vendocrat_sheet_visual_render": "PASS__READABLE__NO_LAYOUT_FAILURE",
+    "source_hash_and_model_interpretation_documented": true
+  },
+  "hard_nonclaims": [
+    "LOWEST_COST_NPV_IS_NOT_A_TECHNICAL_QUALIFICATION_CERTIFICATE",
+    "NO_ARTIFICIAL_ANALYSIS_OWNER_SCORE",
+    "NO_GDPVAL_ELO",
+    "NO_1846_THRESHOLD_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

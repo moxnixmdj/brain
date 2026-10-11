@@ -1,0 +1,59 @@
+{
+  "schema":"PROJECT_BRAIN_GDPVAL_STAGE1_CROSS_DOMAIN_CAPABILITY_FALSIFICATION_CERTIFICATE_20261011_V1",
+  "date":"2026-10-11",
+  "status":"PASS_FOR_SCALE__FRESH_CROSS_DOMAIN_PUBLIC_TASK_FALSIFICATION_COMPLETED__NOT_A_GDPVAL_SCORE__ZERO_TERMINAL_CREDIT",
+  "benchmark":"GDPval-AA v2.1",
+  "candidate_id":"OPUS55_PROFESSIONAL_KNOWLEDGE_WORK_STIRRUP_CONFIGURATION_V1",
+  "execution_profile":"canonical/capabilities/internalized/professional_work/stirrup_247f24d/BRAIN_EXECUTION_PROFILE_V1.json",
+  "fresh_subject_count":6,
+  "subjects":[
+    {"row_idx":5,"task_id":"f84ea6ac-8f9f-428c-b96c-d0884e30f7c7","domain":"Government / Administrative Services Managers","primary_artifacts":["DOCX"],"conservative_public_rubric":[58,58]},
+    {"row_idx":6,"task_id":"a328feea-47db-4856-b4be-2bdc63dd88fb","domain":"Government / Administrative Services Managers","primary_artifacts":["DOCX"],"conservative_public_rubric":[22,24]},
+    {"row_idx":8,"task_id":"17111c03-aac7-45c2-857d-c06d8223d6ad","domain":"Government / Administrative Services Managers","primary_artifacts":["PDF","XLSX"],"conservative_public_rubric":[56,61]},
+    {"row_idx":9,"task_id":"c44e9b62-7cd8-4f72-8ad9-f8fbddb94083","domain":"Government / Administrative Services Managers","primary_artifacts":["PDF","XLSX","DOCX"],"conservative_public_rubric":[104,122]},
+    {"row_idx":10,"task_id":"99ac6944-4ec6-4848-959c-a460ac705c6f","domain":"Information / Audio and Video Technicians","primary_artifacts":["PDF"],"embedded_or_supporting_artifacts":["PNG","XLSX"],"conservative_public_rubric":[73,82]},
+    {"row_idx":11,"task_id":"f9a1c16c-53fd-4c8f-88cc-5c325ec2f0bb","domain":"Information / Audio and Video Technicians","primary_artifacts":["PDF"],"conservative_public_rubric":[78,79]}
+  ],
+  "aggregate_public_rubric_self_audit":{
+    "points_satisfied":391,
+    "points_available":426,
+    "fraction":0.9178403755868545,
+    "meaning":"CHEAP_POSTFREEZE_PUBLIC_RUBRIC_FALSIFICATION_ONLY",
+    "not_meaning":["NOT_ARTIFICIAL_ANALYSIS_OWNER_SCORE","NOT_CROWD_BT_ELO","NOT_DIRECT_EVIDENCE_OF_1846_THRESHOLD"]
+  },
+  "verified_capability_surface":[
+    "PUBLIC_ACADEMIC_RESEARCH_SYNTHESIS",
+    "ONE_PAGE_POLICY_WRITING",
+    "REFERENCE_PDF_TO_XLSX_TRANSCODING",
+    "MULTI_ARTIFACT_WORKFORCE_PLANNING_WITH_NUMERIC_RECONCILIATION",
+    "LIVE_AUDIO_SYSTEM_DESIGN_AND_BUDGETING",
+    "ONE_PAGE_VISUAL_STAGE_PLOT",
+    "DOCX_CREATION_AND_RENDER_QA",
+    "PDF_CREATION_AND_RENDER_QA",
+    "XLSX_CREATION_FORMULA_QA_AND_VISUAL_RENDER",
+    "PNG_TECHNICAL_DIAGRAM_AND_EMBEDDED_SPREADSHEET_RENDER"
+  ],
+  "general_repairs_validated":[
+    "LOSSLESS_RAW_TASK_ACCEPTANCE_CONTRACT_PREVENTS_LOW_SALIENCE_EXPLICIT_PROMPT_DROPS",
+    "POSTFREEZE_RUBRIC_AUDIT_CAN_SEPARATE_PROMPT_FAILURES_FROM_UNSTATED_EVALUATOR_CONVENTIONS",
+    "GENERAL_PROFESSIONAL_DEFAULTS_TRANSFER_ACROSS_GOVERNMENT_ADMIN_AND_LIVE_AUDIO_TASKS"
+  ],
+  "remaining_known_failure_classes":[
+    "UNSTATED_TASK_SPECIFIC_EVALUATOR_CONVENTIONS",
+    "LOCAL_LABEL_OR_EVIDENCE_TRACEABILITY_OMISSIONS",
+    "NO_OWNER_SCORING_ACCESS"
+  ],
+  "stage_transition":{
+    "stage1_decision":"PASS_FOR_SCALE",
+    "next_primary_work":"BUILD_COMPLETE_CONTENT_ADDRESSED_220_BRAIN_SUBMISSION_MANIFEST_USING_THE_LOSSLESS_PREOUTPUT_CONTRACT_AND_FRESHNESS_FIREWALL",
+    "parallel_external_residual":"OBTAIN_AUTHENTIC_ARTIFICIAL_ANALYSIS_MATCHED_SCORE_RECEIPT_OR_STRONGER_OWNER_COMPATIBLE_CERTIFICATE",
+    "do_not_repeat":"MORE_STAGE1_SAMPLING_UNLESS_A_NEW_SYSTEMIC_FAILURE_IS_DISCOVERED"
+  },
+  "hard_nonclaims":[
+    "NO_GDPVAL_AA_OWNER_ELO",
+    "NO_1846_THRESHOLD_CLOSURE",
+    "NO_COMPLETE_220_SUBMISSION_MANIFEST",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting":{"incremental_spend_usd":0,"acceptance_credit_delta":0,"terminal_credit_delta":0}
+}

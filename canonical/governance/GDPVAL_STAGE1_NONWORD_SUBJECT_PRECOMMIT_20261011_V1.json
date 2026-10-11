@@ -1,0 +1,26 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_STAGE1_NONWORD_SUBJECT_PRECOMMIT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "FROZEN_BEFORE_PROMPT_OR_REFERENCE_FILE_READ__NONWORD_BREADTH_SEARCH__ZERO_SCORE_CREDIT",
+  "benchmark": "GDPval-AA v2.1",
+  "selection_rule": "FREEZE_ROWS_7_THROUGH_12_IN_ASCENDING_PUBLIC_POPULATION_ORDER_BEFORE_READING_ANY_PROMPT__INSPECT_ONLY_ALLOWED_FIELDS__EXECUTE_THE_FIRST_SUBJECT_REQUESTING_A_NON_DOCX_PRIMARY_DELIVERABLE",
+  "subjects": [
+    {"row_idx": 7, "task_id": "27e8912c-8bd5-44ba-ad87-64066ea05264"},
+    {"row_idx": 8, "task_id": "17111c03-aac7-45c2-857d-c06d8223d6ad"},
+    {"row_idx": 9, "task_id": "c44e9b62-7cd8-4f72-8ad9-f8fbddb94083"},
+    {"row_idx": 10, "task_id": "99ac6944-4ec6-4848-959c-a460ac705c6f"},
+    {"row_idx": 11, "task_id": "f9a1c16c-53fd-4c8f-88cc-5c325ec2f0bb"},
+    {"row_idx": 12, "task_id": "38889c3b-e3d4-49c8-816a-3cc8e5313aba"}
+  ],
+  "field_firewall": {
+    "allowed_to_cognition_surface": ["task_id", "sector", "occupation", "prompt", "reference_files", "reference_file_urls", "reference_file_hf_uris"],
+    "forbidden_before_submission": ["deliverable_files", "deliverable_file_urls", "deliverable_file_hf_uris", "rubric_pretty", "rubric_json", "third_party_model_submissions", "judge_feedback"]
+  },
+  "stop_rule": "ON_FIRST_NON_DOCX_PRIMARY_DELIVERABLE__STOP_PROMPT_EXPOSURE_OF_LATER_RESERVED_ROWS_AND_EXECUTE_THAT_SUBJECT",
+  "hard_nonclaims": [
+    "NO_PROMPTS_READ_AT_PRECOMMIT_TIME",
+    "NO_REFERENCE_FILES_READ_AT_PRECOMMIT_TIME",
+    "NO_GDPVAL_SCORE",
+    "NO_BENCHMARK_ACCEPTANCE_CREDIT"
+  ]
+}

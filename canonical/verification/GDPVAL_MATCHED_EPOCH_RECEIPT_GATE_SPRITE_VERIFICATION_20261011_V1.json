@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_MATCHED_EPOCH_RECEIPT_GATE_SPRITE_VERIFICATION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__INDEPENDENT_SPRITE_REPLAY__8_OF_8_FOCUSED_TESTS__ZERO_ACCEPTANCE_CREDIT",
+  "target_predicate": "PROWORK_GDPVAL_GE_1846",
+  "verification_surface": {
+    "provider": "SPRITES",
+    "sprite_name": "gdpval-receipt-gate-verify-20261011-v1",
+    "sprite_id": "sprite-ec09047c-5fb4-4deb-9e94-c58adea805df",
+    "working_directory": "/work"
+  },
+  "verified_bytes": [
+    {
+      "path": "canonical/runtime/gdpval_matched_epoch_receipt_gate_v1.py",
+      "sha256": "93dfed82680f7cc39c3f2609630c6d437ff3a641431fe42ba1bf0599db7e3645"
+    },
+    {
+      "path": "canonical/tests/test_gdpval_matched_epoch_receipt_gate_v1.py",
+      "sha256": "a9870f60c3ddc2c7700bb4a97ecf2263cc26a580bc5e27d15a5611bd585660e1"
+    },
+    {
+      "path": "canonical/governance/GDPVAL_MATCHED_EPOCH_RECEIPT_GATE_BINDING_20261011_V1.json",
+      "sha256": "59588d64d5afaf03ca7973bd10d2df0d6ef7fca1e7a32c54bc45b15a5366640f"
+    }
+  ],
+  "replay": {
+    "python_compile_runtime": "PASS",
+    "python_compile_tests": "PASS",
+    "governance_json_parse": "PASS",
+    "focused_tests_total": 8,
+    "focused_tests_passed": 8,
+    "focused_tests_failed": 0,
+    "tests": [
+      "test_historical_below_bar_fails",
+      "test_historical_cross_epoch_fails",
+      "test_historical_exact_bar_passes",
+      "test_missing_content_address_fails",
+      "test_same_fit_brain_below_opus_fails",
+      "test_same_fit_comparator_below_1846_does_not_bridge",
+      "test_same_fit_stronger_route_passes",
+      "test_third_party_score_owner_fails"
+    ]
+  },
+  "proved": [
+    "THE_GATE_ACCEPTS_A_MATCHED_HISTORICAL_GDPVAL_AA_V2_1_BRAIN_SCORE_AT_OR_ABOVE_1846",
+    "THE_GATE_REJECTS_CROSS_EPOCH_NUMERIC_SCORE_SUBSTITUTION",
+    "THE_GATE_ACCEPTS_A_STRONGER_SAME_FIT_BRAIN_GE_OPUS55_CERTIFICATE_ONLY_WHEN_THE_SAME_FIT_OPUS55_SCORE_IS_ITSELF_AT_OR_ABOVE_1846",
+    "THE_GATE_FAILS_CLOSED_ON_MISSING_CONTENT_ADDRESSES_OR_NON_OWNER_SCORE_IDENTITY"
+  ],
+  "not_proved": [
+    "NO_BRAIN_GDPVAL_SCORE",
+    "NO_BRAIN_COMPLETE_220_SUBMISSION_MANIFEST",
+    "NO_ARTIFICIAL_ANALYSIS_OWNER_SCORING_ACCESS",
+    "NO_ROW_ACCEPTANCE",
+    "NO_PROMOTION_AUTHORITY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

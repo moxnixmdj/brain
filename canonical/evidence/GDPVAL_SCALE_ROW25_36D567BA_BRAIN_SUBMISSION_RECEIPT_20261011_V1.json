@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_SCALE_BRAIN_SUBMISSION_RECEIPT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__FRESH_ROW25_TWO_PAGE_FEDERAL_APPLICANT_RISK_ASSESSMENT_TOOL_FROZEN__CURRENT_ECFR_BINDING_AND_VISUAL_QA_PASS__ZERO_OWNER_SCORE_CREDIT",
+  "benchmark": "GDPval-AA v2.1",
+  "subject": {
+    "row_idx": 25,
+    "task_id": "36d567ba-e205-4313-9756-931c6e4691fe",
+    "sector": "Government",
+    "occupation": "Compliance Officers"
+  },
+  "precommit": "canonical/governance/GDPVAL_SCALE_FRESH_BATCH_ROWS25_34_PRECOMMIT_20261011_V1.json",
+  "packet": {
+    "manifest_root_sha256": "f69af30fcea243ccb25d44c4a5380be0cdcac621287568525065034ce6cedae8",
+    "prompt_sha256": "3d1a01872dd5ca43bc1ac71eb1e994ab08b1a0fd31414692600fae6bfe4e2910",
+    "allowed_projection_sha256": "58cc94a330a608544cd026a3f6f1efa5ca297d0484f29d2131caefc93538545a",
+    "reference_count": 0
+  },
+  "freshness": {
+    "task_id_frozen_before_prompt_read": true,
+    "official_dataset_field_firewall_used": true,
+    "rubric_read_before_output_freeze": false,
+    "human_gold_read_before_output_freeze": false,
+    "third_party_model_submission_read_before_output_freeze": false,
+    "judge_feedback_read_before_output_freeze": false
+  },
+  "authoritative_regulatory_bindings": [
+    {"topic":6,"section":"2 CFR 200.334","role":"records retention"},
+    {"topic":7,"section":"2 CFR 200.112","role":"conflicts of interest"},
+    {"topic":8,"section":"2 CFR 200.303(b)-(c)","role":"compliance and internal-control monitoring knowledge"},
+    {"topic":9,"section":"2 CFR 200.332","role":"subrecipient risk assessment monitoring and corrective action"},
+    {"topic":10,"section":"2 CFR 200.430(g)","role":"records supporting compensation for personal services"}
+  ],
+  "deliverable": {
+    "format": "docx",
+    "filename": "Federal Applicant - Risk Assessment Tool.docx",
+    "sha256": "ba3cb57625194f09e04d9d36affa88aec359e3508bcf8e6cd1c5efd81dc7756b",
+    "library_path": "/Project Brain/GDPval/scale/36d567ba-e205-4313-9756-931c6e4691fe/Federal Applicant - Risk Assessment Tool.docx",
+    "library_file_id": "libfile_1c2b466fcf048191bfafa09850d9c079",
+    "rendered_page_count": 2
+  },
+  "verification": {
+    "final_all_pages_visual_inspection": "PASS__2_OF_2__NO_CLIPPING_OVERLAP_TABLE_SPLIT_OR_BROKEN_GLYPHS",
+    "title_exactly_matches_requested_tool_name": true,
+    "requested_topic_count": 11,
+    "all_requested_topics_present": true,
+    "yes_no_opening_present_for_all_applicable_topics": true,
+    "open_ended_detail_request_present_for_all_two_part_topics": true,
+    "conflict_of_interest_exception_preserved": true,
+    "topics_6_through_10_have_uniform_guidance_resource_references": true,
+    "broad_applicant_type_applicability_preserved": true,
+    "agency_risk_review_notes_space_present": true
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THIS_TOOL_REPLACES_AGENCY_SPECIFIC_PREAWARD_RISK_PROCEDURES_OR_PROGRAM_SPECIFIC_REQUIREMENTS",
+    "NO_ARTIFICIAL_ANALYSIS_OWNER_SCORE",
+    "NO_GDPVAL_ELO",
+    "NO_1846_THRESHOLD_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

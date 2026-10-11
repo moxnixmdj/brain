@@ -1,0 +1,144 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_SCALE_BRAIN_SUBMISSION_RECEIPT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__FRESH_BASS_EDIT_MIX_FROZEN__NONBASS_MIX_PRESERVATION_VERIFIED__ZERO_OWNER_SCORE_CREDIT",
+  "benchmark": "GDPval-AA v2.1",
+  "subject": {
+    "row_idx": 14,
+    "task_id": "4b894ae3-1f23-4560-b13d-07ed1132074e",
+    "sector": "Information",
+    "occupation": "Audio and Video Technicians"
+  },
+  "packet": {
+    "manifest_root_sha256": "f69af30fcea243ccb25d44c4a5380be0cdcac621287568525065034ce6cedae8",
+    "packet_sha256": "48554bdca75de934aa07ad293f48ec2b5d6e181c1d9d5471f891fa70513c6be6",
+    "prompt_sha256": "d6161907f7f89592bbfb854f740702fc7c33ec7981d245098db2519c894b81e8",
+    "raw_obligation_count": 18,
+    "reference_count": 6
+  },
+  "references": {
+    "rough": {
+      "sha256": "2adacf89b84661aadd0c80d91a81fb73b395f037ca251ffd2580b5e3dcb31292",
+      "duration_s": 204,
+      "complete": true
+    },
+    "bass": {
+      "sha256": "157c0500975f01c5256d7b8288d9c29096e69ca3f925b4b274249e57425009fa",
+      "decoded_duration_s": 116.504875,
+      "riff_declared_duration_s": 204,
+      "public_object_truncated_at_bytes": 33554432
+    },
+    "acgtr": {
+      "sha256": "151356e97565977d9633140f8165f8c12f06f444f4c8b250716537ac818fb4ef",
+      "decoded_duration_s": 116.504875,
+      "riff_declared_duration_s": 204,
+      "public_object_truncated_at_bytes": 33554432
+    },
+    "organ": {
+      "sha256": "88944520f1ce15927dd5a6a08d3ee9b277c03766a467e7b14722123a0b04486a",
+      "duration_s": 204,
+      "complete": true
+    },
+    "drums": {
+      "sha256": "10844d4ba6b1f18120245109db76f4038665ce43cf74534225d346a57f2aa674",
+      "duration_s": 204,
+      "complete": true
+    },
+    "edit_spots_docx": {
+      "sha256": "5940a94634a27388fbbcebb96df50f0327533d8860327b5b57d9f6623b411768",
+      "timestamps_s": [
+        35.142,
+        50.785,
+        77.571,
+        93.428,
+        105.709
+      ]
+    }
+  },
+  "method": {
+    "stem_regression_overlap_correlation": [
+      0.9998517999160573,
+      0.9998517372137176
+    ],
+    "rough_mix_bass_gains": [
+      0.9645881652832031,
+      0.9641063809394836
+    ],
+    "donor_pairs_s": [
+      [
+        35.142,
+        89.696
+      ],
+      [
+        50.785,
+        102.133
+      ],
+      [
+        77.571,
+        42.229
+      ],
+      [
+        93.428,
+        37.28
+      ],
+      [
+        105.709,
+        73.973
+      ]
+    ],
+    "donor_context_similarities": [
+      0.92236,
+      0.92342,
+      0.93193,
+      0.86293,
+      0.96371
+    ],
+    "edit_window_seconds": 0.56,
+    "crossfade_seconds": 0.025,
+    "donor_rms_matched": true,
+    "final_mix_formula": "ROUGH_MIX_PLUS_BOUND_BASS_GAIN_TIMES_EDITED_BASS_MINUS_RAW_BASS",
+    "reason": "PRESERVES_ALL_NONBASS_INSTRUMENT_LEVELS_AND_COMPLETE_204_SECOND_TAIL_EXACTLY"
+  },
+  "deliverable": {
+    "filename": "State of Affairs_FULL_EDIT_MIX.wav",
+    "sha256": "08b4fff499c008bec5ac2841fa6dabb7ebad3d4cd503e232e94dbe6e5bb40b1e",
+    "bytes": 58752044,
+    "frames": 9792000,
+    "duration_s": 204,
+    "samplerate": 48000,
+    "channels": 2,
+    "subtype": "PCM_24",
+    "peak_dbfs_left": -0.29474549490182933,
+    "peak_dbfs_right": -0.13554947109369084,
+    "library_path": "/Project Brain/GDPval/stage1/4b894ae3-1f23-4560-b13d-07ed1132074e/State of Affairs_FULL_EDIT_MIX.wav",
+    "library_file_id": "libfile_34c77deda0148191aa6679c66f41816f"
+  },
+  "verification": {
+    "outside_five_edit_windows_max_abs_delta_from_rough": 0,
+    "after_available_bass_tail_max_abs_delta_from_rough": 0,
+    "changed_sample_fraction": 0.013724162581699346,
+    "edit_boundary_click_test": "PASS__EVERY_BOUNDARY_JUMP_BELOW_LOCAL_50MS_NATURAL_MAX",
+    "rough_lufs": -17.45191040929369,
+    "final_lufs": -17.452676565725803,
+    "lufs_delta": -0.0007661564321139736,
+    "rough_stereo_balance_db": -0.21616326792418913,
+    "final_stereo_balance_db": -0.21479005180541472,
+    "rough_lr_corr": 0.713546249011031,
+    "final_lr_corr": 0.7134952018066291,
+    "first_second_max_delta": 0,
+    "last_second_max_delta": 0,
+    "time_stretch_used": false,
+    "tempo_change_used": false
+  },
+  "hard_nonclaims": [
+    "NO_ARTIFICIAL_ANALYSIS_OWNER_SCORE",
+    "NO_GDPVAL_ELO",
+    "NO_1846_THRESHOLD_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_SCALE_PREFREEZE_CONTAMINATION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "ROW27_SPENT_FOR_FRESH_COMPARABLE_EVIDENCE__NO_OUTPUT_FROZEN",
+  "benchmark": "GDPval-AA v2.1",
+  "row_idx": 27,
+  "task_id": "2696757c-1f8a-4959-8f0d-f5597b9e70fc",
+  "valid_precommit": "canonical/governance/GDPVAL_SCALE_FRESH_BATCH_ROWS27_34_CORRECTED_PRECOMMIT_20261011_V1.json",
+  "cause": "GENERIC_WEB_SEARCH_FOR_OFFICIAL_VA_CLAUSE_TEXT_RETURNED_THIRD_PARTY_GDPVAL_TASK_PAGES_CONTAINING_PUBLIC_RUBRIC_AND_MODEL_OUTPUT_INFORMATION_BEFORE_OUTPUT_FREEZE",
+  "exposure": {
+    "prompt_already_allowed_by_precommit": true,
+    "official_source_research_intended": true,
+    "rubric_or_model_output_search_results_inadvertently_exposed": true,
+    "output_generated_before_exposure": false
+  },
+  "decision": {
+    "fresh_stage_or_matched_score_eligibility": false,
+    "do_not_generate_and_count_as_clean_after_leakage": true,
+    "may_be_filled_later_only_as_explicit_nonfresh_manifest_coverage": true,
+    "credit_delta": 0
+  },
+  "new_firewall_rule": [
+    "FOR_PRECOMMITTED_GDPVAL_TASKS_DO_NOT_USE_GENERIC_WEB_SEARCH_AFTER_PROMPT_EXPOSURE",
+    "OPEN_PROMPT_SUPPLIED_OFFICIAL_URLS_DIRECTLY_OR_USE_DOMAIN_FILTERED_SEARCH_LIMITED_TO_THE_PROMPT_NAMED_AUTHORITY",
+    "IF_OFFICIAL_SOURCE_IS_UNREACHABLE_FAIL_CLOSED_OR_USE_A_PREBOUND_PRIMARY_SOURCE_SNAPSHOT__DO_NOT_SEARCH_THE_TASK_ID_PROMPT_TEXT_OR_CLAUSE_ON_THE_OPEN_WEB"
+  ],
+  "hard_nonclaims": [
+    "NO_ROW27_BRAIN_SUBMISSION",
+    "NO_FRESH_ROW27_EVIDENCE",
+    "NO_GDPVAL_SCORE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

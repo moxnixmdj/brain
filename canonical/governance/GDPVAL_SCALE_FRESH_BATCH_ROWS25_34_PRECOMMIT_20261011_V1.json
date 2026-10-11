@@ -1,0 +1,31 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_SCALE_FRESH_BATCH_PRECOMMIT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "FROZEN_BY_TASK_ID_ONLY_BEFORE_PROMPT_REFERENCE_GOLD_RUBRIC_OR_MODEL_SUBMISSION_EXPOSURE__ZERO_SCORE_CREDIT",
+  "benchmark": "GDPval-AA v2.1",
+  "dataset": {
+    "revision_sha": "11e7900cdcac61bc4daf59e65feb238acda98fbf",
+    "packet_manifest_root_sha256": "f69af30fcea243ccb25d44c4a5380be0cdcac621287568525065034ce6cedae8"
+  },
+  "selection_rule": "ROWS_25_THROUGH_34_ASCENDING_FROM_ALREADY_BOUND_220_POPULATION__TASK_ID_ONLY_EXPOSURE_BEFORE_FREEZE",
+  "subjects": [
+    {"row_idx":25,"task_id":"36d567ba-e205-4313-9756-931c6e4691fe"},
+    {"row_idx":26,"task_id":"7bbfcfe9-132d-4194-82bb-d6f29d001b01"},
+    {"row_idx":27,"task_id":"2696757c-1f8a-4959-8f0d-f5597b9e70fc"},
+    {"row_idx":28,"task_id":"dfb4e0cd-a0b7-454e-b943-0dd586c2764c"},
+    {"row_idx":29,"task_id":"4c18ebae-dfaa-4b76-b10c-61fcdf26734c"},
+    {"row_idx":30,"task_id":"cebf301e-5ea7-41ae-b117-ad8f43e7ac22"},
+    {"row_idx":31,"task_id":"c2e8f271-7858-412f-b460-472463ad81d9"},
+    {"row_idx":32,"task_id":"2ea2e5b5-257f-42e6-a7dc-93763f28b19d"},
+    {"row_idx":33,"task_id":"c357f0e2-963d-4eb7-a6fa-3078fe55b3ba"},
+    {"row_idx":34,"task_id":"a45bc83b-22f9-4def-8d89-9c5661b2b86f"}
+  ],
+  "field_firewall": {
+    "allowed_after_freeze": ["task_id","sector","occupation","prompt","reference_files","reference_file_urls","reference_file_hf_uris"],
+    "forbidden_before_each_submission_freeze": ["deliverable_files","deliverable_file_urls","deliverable_file_hf_uris","rubric_pretty","rubric_json","third_party_model_submissions","judge_feedback"]
+  },
+  "execution_rule": "EXECUTE_IN_ASCENDING_ROW_ORDER_UNLESS_A_SYSTEMIC_FAILURE_DEMOTES_THE_ROUTE__FREEZE_OUTPUT_BYTES_BEFORE_PUBLIC_RUBRIC_READ",
+  "retrieval_rule": "PREFER_OFFICIAL_DATASET_BYTES_AND_DIRECT_AUTHORITATIVE_SOURCES__DO_NOT_SEARCH_BY_TASK_ID_OR_FULL_BENCHMARK_PROMPT_BEFORE_OUTPUT_FREEZE",
+  "hard_nonclaims": ["NO_PROMPTS_READ_AT_PRECOMMIT_TIME","NO_REFERENCE_FILES_READ_AT_PRECOMMIT_TIME","NO_NEW_SUBMISSIONS_FROM_THIS_PRECOMMIT","NO_OWNER_SCORE","NO_TERMINAL_CREDIT"],
+  "accounting": {"incremental_spend_usd":0,"acceptance_credit_delta":0,"terminal_credit_delta":0}
+}

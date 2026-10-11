@@ -1,0 +1,22 @@
+{
+  "schema":"PROJECT_BRAIN_GDPVAL_STAGE1_FRESH_BATCH_PRECOMMIT_20261011_V2",
+  "date":"2026-10-11",
+  "status":"FROZEN_BY_TASK_ID_ONLY_BEFORE_PROMPT_OR_REFERENCE_EXPOSURE__ZERO_CREDIT",
+  "benchmark":"GDPval-AA v2.1",
+  "selection_rule":"ROWS_8_THROUGH_14_ASCENDING__TASK_ID_ONLY_DISCOVERY__NO_PROMPT_REFERENCE_GOLD_RUBRIC_OR_MODEL_SUBMISSION_FIELDS_EXPOSED",
+  "subjects":[
+    {"row_idx":8,"task_id":"17111c03-aac7-45c2-857d-c06d8223d6ad"},
+    {"row_idx":9,"task_id":"c44e9b62-7cd8-4f72-8ad9-f8fbddb94083"},
+    {"row_idx":10,"task_id":"99ac6944-4ec6-4848-959c-a460ac705c6f"},
+    {"row_idx":11,"task_id":"f9a1c16c-53fd-4c8f-88cc-5c325ec2f0bb"},
+    {"row_idx":12,"task_id":"38889c3b-e3d4-49c8-816a-3cc8e5313aba"},
+    {"row_idx":13,"task_id":"ff85ee58-bc9f-4aa2-806d-87edeabb1b81"},
+    {"row_idx":14,"task_id":"4b894ae3-1f23-4560-b13d-07ed1132074e"}
+  ],
+  "objective":"FIND_AND_EXECUTE_A_FRESH_NON_DOCX_GDPVAL_SUBJECT_TO_COMPLETE_CROSS_ARTIFACT_STAGE1_FALSIFICATION",
+  "exposure_policy":{
+    "allowed_after_freeze":["task_id","sector","occupation","prompt","reference_files","reference_file_urls","reference_file_hf_uris"],
+    "forbidden_before_submission":["deliverable_files","deliverable_file_urls","deliverable_file_hf_uris","rubric_pretty","rubric_json","third_party_model_submissions","judge_feedback"]
+  },
+  "accounting":{"incremental_spend_usd":0,"acceptance_credit_delta":0,"terminal_credit_delta":0}
+}

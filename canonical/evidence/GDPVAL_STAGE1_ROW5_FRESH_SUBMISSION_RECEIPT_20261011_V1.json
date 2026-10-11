@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_STAGE1_SUBMISSION_RECEIPT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__FRESH_BRAIN_SUBMISSION_FROZEN__PROMPT_REQUIREMENTS_AND_RENDER_QA_PASS__NO_OWNER_SCORE_CREDIT",
+  "benchmark": "GDPval-AA v2.1",
+  "row_idx": 5,
+  "task_id": "f84ea6ac-8f9f-428c-b96c-d0884e30f7c7",
+  "sector": "Government",
+  "occupation": "Administrative Services Managers",
+  "freshness": {
+    "precommit_chain": [
+      "canonical/governance/GDPVAL_STAGE1_FRESH_SUBJECT_PRECOMMIT_20261011_V1.json",
+      "canonical/governance/GDPVAL_STAGE1_CONTAMINATION_REPAIR_20261011_V1.json",
+      "canonical/governance/GDPVAL_STAGE1_OFFICIAL_ROW_FIELD_FIREWALL_REPAIR_20261011_V1.json"
+    ],
+    "official_allowed_projection_sha256": "be4e76b1f39574b4e0cafa7d6fcc5219e088e43a36b06d264893030fe791cb2c",
+    "prompt_sha256": "984971c6137e367487e4fe7720ec148ce4280f4f1d50dc9c5d0b5c250af52606",
+    "gold_deliverable_read_before_freeze": false,
+    "rubric_read_before_freeze": false,
+    "third_party_model_submission_read_before_freeze": false
+  },
+  "brain_execution_profile": {
+    "path": "canonical/capabilities/internalized/professional_work/stirrup_247f24d/BRAIN_EXECUTION_PROFILE_V1.json",
+    "candidate_id": "OPUS55_PROFESSIONAL_KNOWLEDGE_WORK_STIRRUP_CONFIGURATION_V1",
+    "cognition_surface": "CURRENT_CHATGPT_GPT_5_6_SOL_SESSION",
+    "incremental_spend_usd": 0
+  },
+  "submission": {
+    "library_path": "/Project Brain/GDPval/stage1/f84ea6ac-8f9f-428c-b96c-d0884e30f7c7/GDPval_f84ea6ac_research_summary.docx",
+    "library_file_id": "libfile_df35ff3645148191afee99163a044e06",
+    "bytes": 39738,
+    "sha256": "a0b9b445c50394e43ea4c2b41cdcfb2b0ffa9212b5301dd5b82a44b8c94bf56a",
+    "format": "docx",
+    "render_page_count": 1,
+    "render_page_1_sha256": "aebf0259704392d7a4bef12def5f5666f0585c746926cd683435bb8baa300903"
+  },
+  "prompt_requirement_checks": {
+    "five_academic_articles": "PASS__EXACTLY_5_ROWS",
+    "published_after_2020": "PASS__2021_2022_2022_2023_2024",
+    "publicly_available": "PASS__PUBLIC_OR_OPEN_COPY_BOUND_FOR_EACH",
+    "government_ai_automation_relevance": "PASS",
+    "administrative_service_jobs_functions_relevance": "PASS",
+    "concise_point_form": "PASS",
+    "tabular_format": "PASS",
+    "one_page_word_document": "PASS__RENDERED_1_PAGE",
+    "required_columns_study_information_key_findings_implications": "PASS"
+  },
+  "research_sources": [
+    {"title": "Changing tasks and changing public servants? The digitalisation and automation of public administrative work", "year": 2024, "public_locator": "https://doi.org/10.1177/13837605241289773"},
+    {"title": "Automation in the future of public sector employment: the case of Brazilian Federal Government", "year": 2021, "public_locator": "https://repositorio.pucrs.br/dspace/handle/10923/20872"},
+    {"title": "Artificial Intelligence (AI) and Automation in Administrative Procedures: Potentials, Limitations, and Framework Conditions", "year": 2023, "public_locator": "https://doi.org/10.1007/s13132-023-01433-3"},
+    {"title": "Exploring artificial intelligence adoption in public organizations: a comparative case study", "year": 2022, "public_locator": "https://doi.org/10.1080/14719037.2022.2048685"},
+    {"title": "Public value creation and robotic process automation: normative, descriptive and prescriptive issues in municipal administration", "year": 2022, "public_locator": "https://doi.org/10.1108/TG-11-2021-0193"}
+  ],
+  "verification": {
+    "docx_xml_content_review": "PASS",
+    "render_visual_inspection": "PASS__NO_CLIPPING_OVERLAP_OR_BROKEN_TABLE",
+    "library_rematerialized_exact_bytes_sha256_match": true
+  },
+  "hard_nonclaims": [
+    "NO_ARTIFICIAL_ANALYSIS_OWNER_GRADE",
+    "NO_GDPVAL_ELO",
+    "NO_CLAIM_THIS_SINGLE_TASK_IMPLIES_1846",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {"incremental_spend_usd": 0, "acceptance_credit_delta": 0, "terminal_credit_delta": 0}
+}

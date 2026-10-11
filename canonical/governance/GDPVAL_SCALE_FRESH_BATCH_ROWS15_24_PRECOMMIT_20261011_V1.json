@@ -1,0 +1,86 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_SCALE_FRESH_BATCH_PRECOMMIT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "FROZEN_BY_TASK_ID_ONLY_BEFORE_PROMPT_REFERENCE_GOLD_RUBRIC_OR_MODEL_SUBMISSION_EXPOSURE__ZERO_SCORE_CREDIT",
+  "benchmark": "GDPval-AA v2.1",
+  "dataset": {
+    "revision_sha": "11e7900cdcac61bc4daf59e65feb238acda98fbf",
+    "packet_manifest_root_sha256": "f69af30fcea243ccb25d44c4a5380be0cdcac621287568525065034ce6cedae8"
+  },
+  "selection_rule": "ROWS_15_THROUGH_24_ASCENDING_FROM_ALREADY_BOUND_220_POPULATION__TASK_ID_ONLY_EXPOSURE_BEFORE_FREEZE",
+  "subjects": [
+    {
+      "row_idx": 15,
+      "task_id": "1b1ade2d-f9f6-4a04-baa5-aa15012b53be"
+    },
+    {
+      "row_idx": 16,
+      "task_id": "93b336f3-61f3-4287-86d2-87445e1e0f90"
+    },
+    {
+      "row_idx": 17,
+      "task_id": "15ddd28d-8445-4baa-ac7f-f41372e1344e"
+    },
+    {
+      "row_idx": 18,
+      "task_id": "24d1e93f-9018-45d4-b522-ad89dfd78079"
+    },
+    {
+      "row_idx": 19,
+      "task_id": "05389f78-589a-473c-a4ae-67c61050bfca"
+    },
+    {
+      "row_idx": 20,
+      "task_id": "575f8679-b4c1-47a2-8e96-d570d4ed9269"
+    },
+    {
+      "row_idx": 21,
+      "task_id": "a74ead3b-f67d-4b1c-9116-f6bb81b29d4f"
+    },
+    {
+      "row_idx": 22,
+      "task_id": "bbe0a93b-ebf0-40b0-98dc-8d9243099034"
+    },
+    {
+      "row_idx": 23,
+      "task_id": "85d95ce5-b20c-41e2-834e-e788ce9622b6"
+    },
+    {
+      "row_idx": 24,
+      "task_id": "76d10872-9ffa-4ede-83ee-e0f1ec5e2b8d"
+    }
+  ],
+  "field_firewall": {
+    "allowed_after_freeze": [
+      "task_id",
+      "sector",
+      "occupation",
+      "prompt",
+      "reference_files",
+      "reference_file_urls",
+      "reference_file_hf_uris"
+    ],
+    "forbidden_before_each_submission_freeze": [
+      "deliverable_files",
+      "deliverable_file_urls",
+      "deliverable_file_hf_uris",
+      "rubric_pretty",
+      "rubric_json",
+      "third_party_model_submissions",
+      "judge_feedback"
+    ]
+  },
+  "execution_rule": "EXECUTE_IN_ASCENDING_ROW_ORDER_UNLESS_A_SYSTEMIC_FAILURE_DEMOTES_THE_ROUTE__FREEZE_OUTPUT_BYTES_BEFORE_PUBLIC_RUBRIC_READ",
+  "hard_nonclaims": [
+    "NO_PROMPTS_READ_AT_PRECOMMIT_TIME",
+    "NO_REFERENCE_FILES_READ_AT_PRECOMMIT_TIME",
+    "NO_NEW_SUBMISSIONS_FROM_THIS_PRECOMMIT",
+    "NO_OWNER_SCORE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_SCALE_FRESH_BATCH_PRECOMMIT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "FROZEN_BEFORE_PROMPT_REFERENCE_GOLD_RUBRIC_OR_JUDGE_EXPOSURE__CORRECTED_OFFICIAL_ROW_IDENTITIES",
+  "benchmark": "GDPval-AA v2.1",
+  "dataset": {
+    "owner": "openai",
+    "name": "gdpval",
+    "revision_sha": "11e7900cdcac61bc4daf59e65feb238acda98fbf",
+    "population_manifest_root_sha256": "f69af30fcea243ccb25d44c4a5380be0cdcac621287568525065034ce6cedae8"
+  },
+  "selection_rule": "OFFICIAL_PUBLIC_POPULATION_ROWS_27_THROUGH_34_IN_ASCENDING_ORDER_AFTER_ROW26_WAS_SPENT_BY_PRECOMMIT_MISMATCH_DIAGNOSIS",
+  "selected_subjects": [
+    {"row_idx":27,"task_id":"2696757c-1f8a-4959-8f0d-f5597b9e70fc"},
+    {"row_idx":28,"task_id":"dfb4e0cd-a0b7-454e-b943-0dd586c2764c"},
+    {"row_idx":29,"task_id":"4c18ebae-dfaa-4b76-b10c-61fcdf26734c"},
+    {"row_idx":30,"task_id":"cebf301e-5ea7-41ae-b117-ad8f43e7ac22"},
+    {"row_idx":31,"task_id":"c2e8f271-7858-412f-b460-472463ad81d9"},
+    {"row_idx":32,"task_id":"2ea2e5b5-257f-42e6-a7dc-93763f28b19d"},
+    {"row_idx":33,"task_id":"c357f0e2-963d-4eb7-a6fa-3078fe55b3ba"},
+    {"row_idx":34,"task_id":"a45bc83b-22f9-4def-8d89-9c5661b2b86f"}
+  ],
+  "field_firewall": {
+    "allowed_after_this_freeze": ["task_id","sector","occupation","prompt","reference_files","reference_file_urls","reference_file_hf_uris"],
+    "forbidden_before_each_output_freeze": ["deliverable_files","deliverable_file_urls","deliverable_file_hf_uris","rubric_pretty","rubric_json","third_party_model_submissions","judge_feedback"]
+  },
+  "source_of_row_identity": "OFFICIAL_HUGGINGFACE_DATASETS_SERVER_ROWS_API_TASK_ID_ONLY_PROJECTION_OBSERVED_2026_10_11",
+  "supersedes_for_rows_27_34": "canonical/governance/GDPVAL_SCALE_FRESH_BATCH_ROWS25_34_PRECOMMIT_20261011_V1.json",
+  "hard_nonclaims": [
+    "NO_PROMPT_READ_FOR_ROWS27_34_AT_THIS_FREEZE",
+    "NO_REFERENCE_FILE_READ_FOR_ROWS27_34_AT_THIS_FREEZE",
+    "NO_GOLD_RUBRIC_MODEL_SUBMISSION_OR_JUDGE_FEEDBACK_READ",
+    "NO_OUTPUT_EXISTS_FOR_THESE_ROWS_BY_THIS_PRECOMMIT",
+    "NO_GDPVAL_SCORE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
