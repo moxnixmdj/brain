@@ -15,10 +15,10 @@
     "git_blob_sha": "99adaccaf9753e60ef8b98fcdb42b7ea6d9381ad"
   },
   "counts": {
-    "benchmark_trials_consumed": 18,
+    "benchmark_trials_consumed": 19,
     "consumed_successes_final": 0,
     "consumed_failures_final": 18,
-    "started_result_pending": 0,
+    "started_result_pending": 1,
     "finalized_slots": 18
   },
   "stale_parallel_run": {
@@ -94,13 +94,11 @@
   },
   "hard_nonclaims": [
     "NO_RANK20_V3_RETRY_OR_REPLACEMENT_AUTHORITY",
-    "NO_RANK21_TASK_CONTENT_READ_YET",
-    "NO_RANK21_DURABLE_START_YET",
-    "NO_RANK21_BENCHMARK_TRIAL_CONSUMPTION_YET",
-    "NO_RANK21_ACTIVATION_FILE_PRESENT",
-    "NO_ACCEPTANCE_CAPABILITY_OR_TERMINAL_CREDIT_FROM_PREACTIVATION_AUTHORITY",
     "NO_RANK21_RESULT_MAY_RECEIVE_BRAIN_CAPABILITY_BENCHMARK_ACCEPTANCE_OWNERSHIP_PROMOTION_OR_TERMINAL_CREDIT",
-    "NO_LOCAL_OPEN_WEIGHT_OR_SELF_HOSTED_MODEL_COGNITION_COUNTS_AS_BRAIN_COGNITION"
+    "NO_LOCAL_OPEN_WEIGHT_OR_SELF_HOSTED_MODEL_COGNITION_COUNTS_AS_BRAIN_COGNITION",
+    "RANK21_TASK_WAS_READ_AND_DURABLE_START_OCCURRED_BEFORE_REVOCATION",
+    "RANK21_ONE_TRIAL_WAS_CONSUMED_BUT_HAS_ZERO_BRAIN_CREDIT_AUTHORITY",
+    "RANK21_RESULT_IF_IT_ARRIVES_IS_DIAGNOSTIC_ONLY_AND_MUST_NOT_BE_INGESTED_AS_BRAIN_CAPABILITY"
   ],
   "public_effective_authority_reconciliation": {
     "path": "canonical/governance/TB_SCIENCE_RANK19_PUBLIC_EFFECTIVE_AUTHORITY_RECONCILIATION_20261010_V1.json",
@@ -515,10 +513,10 @@
     "task_read_authority_effective": false,
     "activation_authority": false,
     "activation_present": false,
-    "task_read_history": false,
-    "task_started": false,
-    "durable_start_cas_acquired": false,
-    "benchmark_trials_consumed": 0,
+    "task_read_history": true,
+    "task_started": true,
+    "durable_start_cas_acquired": true,
+    "benchmark_trials_consumed": 1,
     "retries_authorized": 0,
     "replacement_allowed": false,
     "activation_authority_path": "canonical/governance/TB_SCIENCE_RANK21_ACTIVATION_AUTHORITY_20261011_V1.json",
