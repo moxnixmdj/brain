@@ -1,0 +1,146 @@
+{
+  "schema": "PROJECT_BRAIN_PYTHON_REQUEST_ACCEPTANCE_MODEL_V3_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "INDEPENDENT_HELDOUT_AND_ADVERSARIAL_PASS__BOUNDED_REQUEST_TO_EXECUTABLE_OR_UNBOUND_ACCEPTANCE_MODEL_VERIFIED__ZERO_BENCHMARK_OR_TERMINAL_CREDIT",
+  "capability_id": "python.software.request.acceptance.independent.v1",
+  "target": "GENERAL_SOFTWARE_REPAIR_LOOP_V6__SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL",
+  "exact_subjects": {
+    "v1_runtime": {
+      "path": "canonical/runtime/bound_capabilities/python_request_acceptance_model_v1.py",
+      "git_blob_sha": "dc5311d09e45d22895232e600bc222b61fe0af03",
+      "role": "DIAGNOSTIC_SUBSTRATE__NOT_PROMOTED"
+    },
+    "v2_runtime": {
+      "path": "canonical/runtime/bound_capabilities/python_request_acceptance_model_v2.py",
+      "git_blob_sha": "78a5f797ca0d41231f31a3df069893c456d47ce3",
+      "role": "QUOTE_AWARE_RAW_OBLIGATION_MAPPING_SUBSTRATE__NOT_PROMOTED"
+    },
+    "v3_runtime": {
+      "path": "canonical/runtime/bound_capabilities/python_request_acceptance_model_v3.py",
+      "git_blob_sha": "e0e2e5e2fd5c34e5a9b79dcada24a63f84123249",
+      "role": "PROMOTION_SUBJECT"
+    },
+    "v3_heldout_tests": {
+      "path": "canonical/tests/test_python_request_acceptance_model_v3.py",
+      "git_blob_sha": "57b535b8356a62b6af7bbc73e95d36744bb6e25b",
+      "role": "POST_V3_FREEZE_HELDOUT"
+    },
+    "v2_regression_tests": {
+      "path": "canonical/tests/test_python_request_acceptance_model_v2.py",
+      "git_blob_sha": "cf5a8c7a0e1cf056d562bdffbf3d527788864056",
+      "role": "REGRESSION_DIAGNOSTIC"
+    },
+    "v2_fresh_supplemental": {
+      "path": "canonical/tests/test_python_request_acceptance_model_v2_supplemental.py",
+      "git_blob_sha": "c12498186c41768ac808ac6d64cccb5bc5ff9a4a",
+      "role": "FRESH_V2_SUPPLEMENTAL_REGRESSION"
+    }
+  },
+  "reused_verified_substrates": [
+    {
+      "path": "canonical/runtime/lossless_raw_task_contract_v1.py",
+      "git_blob_sha": "53a440fccf91aa08f18abfff4f283e5fd18d9fcd"
+    },
+    {
+      "path": "canonical/runtime/explicit_requirement_index_v2.py",
+      "git_blob_sha": "525fac941302254a47710aaae30b0174fab2cb40"
+    },
+    {
+      "path": "canonical/runtime/instruction_constraint_compiler_v1.py",
+      "git_blob_sha": "a4a3f87f827bd6f0f85fe70c77a1de5aa3237c6f"
+    },
+    {
+      "path": "canonical/runtime/bounded_predicate_argument_semantics.py",
+      "git_blob_sha": "c7f190927e31fa2ab32f129b43402e98ea836498"
+    },
+    {
+      "path": "canonical/runtime/bounded_imperative_directive_semantics_v1.py",
+      "git_blob_sha": "3f08b2703723537e5a146346eead6a387424687f"
+    },
+    {
+      "path": "canonical/runtime/bounded_task_directive_semantics_v1.py",
+      "git_blob_sha": "e3a4c01cc08e7a569692a5d6f03a6feec69934bf"
+    }
+  ],
+  "causal_development_history": {
+    "v1": "REJECTED_FOR_PROMOTION__DIAGNOSTIC_FILENAME_PERIOD_INSIDE_QUOTES_SPLIT_ONE_LOGICAL_REQUEST_INTO_TWO_UNBOUND_FRAGMENTS",
+    "v2": "VERIFIED_INTERMEDIATE__QUOTE_AWARE_LOGICAL_SEGMENT_TO_ALL_RAW_OBLIGATION_MAPPING__BUT_CALLER_SUPPLIED_CHANGED_PATHS_NOT_INDEPENDENT_SCOPE_AUTHORITY_AND_CHANGED_TEST_COULD_SELF_CERTIFY",
+    "v3": "PROMOTION_SUBJECT__CONTENT_ADDRESSED_BASELINE_DIFF_FOR_SCOPE__UNCHANGED_BASELINE_TEST_VERIFIER_REQUIRED__TEST_SIDE_EFFECTS_REJECTED"
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "working_directory": "/home/sprite/coding-v6-request-acceptance-verify",
+    "package_install_performed": false,
+    "external_general_purpose_model_runtime_dependency_count": 0,
+    "incremental_spend_usd": 0
+  },
+  "verification_results": {
+    "py_compile": "PASS__V1_V2_V3_EXACT_RUNTIME_FILES",
+    "v3_post_freeze_heldout": {
+      "passed": 10,
+      "total": 10,
+      "failed": 0
+    },
+    "verifier_authored_adversarial": {
+      "passed": 5,
+      "total": 5,
+      "failed": 0
+    },
+    "v2_current_regression_suite": {
+      "passed": 13,
+      "total": 13,
+      "failed": 0,
+      "note": "ONE_ORIGINAL_V2_TEST_ASSERTION_WAS_DIAGNOSTICALLY_OVERCONSTRAINED_AND_CORRECTED_WITHOUT_RUNTIME_CHANGE__NOT_COUNTED_AS_FRESH_PROMOTION_EVIDENCE"
+    },
+    "v2_fresh_supplemental": {
+      "passed": 3,
+      "total": 3,
+      "failed": 0
+    }
+  },
+  "verified_properties": [
+    "EVERY_NONWHITESPACE_RAW_REQUEST_OBLIGATION_REMAINS_CONTENT_ADDRESSED_AND_MUST_BE_COVERED",
+    "QUOTE_AWARE_LOGICAL_PREDICATES_MAP_BACK_TO_ALL_RAW_OBLIGATIONS_THEY_COVER",
+    "SUPPORTED_BOUNDED_REQUEST_PREDICATES_COMPILE_TO_EXECUTABLE_VERIFIERS",
+    "UNSUPPORTED_OR_AMBIGUOUS_REQUEST_SEMANTICS_REMAIN_EXPLICIT_UNBOUND",
+    "PASSING_EXISTING_TESTS_CANNOT_BIND_OR_DELETE_AN_UNBOUND_REQUEST_OBLIGATION",
+    "REPAIR_STOP_IS_FALSE_WHILE_ANY_RAW_OBLIGATION_IS_UNBOUND_OR_ANY_BOUND_VERIFIER_FAILS",
+    "SCOPE_PREDICATES_USE_CONTENT_ADDRESSED_BASELINE_TREE_DIFF_NOT_CALLER_SUPPLIED_CHANGED_PATHS",
+    "TEST_PREDICATE_REQUIRES_TEST_FILE_TO_EXIST_UNCHANGED_IN_THE_BASELINE_MANIFEST",
+    "SIDE_EFFECTING_TEST_VERIFIERS_FAIL_CLOSED",
+    "DIRECT_SYMLINK_VERIFIER_PATHS_FAIL_CLOSED",
+    "TAMPERED_BASELINE_MANIFESTS_FAIL_CLOSED",
+    "BASELINE_CONTENT_CAPTURE_DOES_NOT_SELF_CERTIFY_PRE_REPAIR_FRESHNESS_OR_TIME_AUTHORITY"
+  ],
+  "bounded_supported_predicate_classes": [
+    "FILE_EXISTS",
+    "FILE_ABSENT",
+    "FILE_CONTAINS_LITERAL",
+    "FILE_NOT_CONTAINS_LITERAL",
+    "PYTHON_AST_PARSE",
+    "PYTHON_TEST_FILE_PASS_WITH_UNCHANGED_BASELINE_TEST_AND_NO_REPOSITORY_SIDE_EFFECT",
+    "CHANGED_PATHS_SUBSET_FROM_BASELINE_DIFF",
+    "PATH_UNCHANGED_FROM_BASELINE_DIFF"
+  ],
+  "hard_nonclaims": [
+    "NO_ARBITRARY_NATURAL_LANGUAGE_SEMANTIC_COMPLETENESS",
+    "NO_CLAIM_EVERY_SOFTWARE_REQUEST_PREDICATE_IS_EXECUTABLY_BOUND",
+    "NO_CLAIM_BASELINE_CONTENT_HASH_CAPTURE_PROVES_IT_WAS_CAPTURED_BEFORE_REPAIR",
+    "NO_GENERAL_PATCH_SEARCH_COMPLETENESS",
+    "NO_GENERAL_MERGEABILITY_PROOF",
+    "NO_CROSS_LANGUAGE_GENERALIZATION_CLAIM",
+    "NO_FRONTIERCODE_SCORE_ACCEPTANCE_OR_BENCHMARK_CREDIT",
+    "NO_TERMINAL_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_cases_consumed": 0,
+    "external_general_purpose_model_runtime_dependency_count": 0,
+    "capability_credit_delta": 1,
+    "acceptance_credit_delta": 0,
+    "benchmark_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
