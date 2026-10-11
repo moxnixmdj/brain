@@ -1,0 +1,127 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_REPAIRED_EIGHT_DELTA_V60_SUCCESSOR_EXECUTION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "VERIFIED_RESEARCH_FRONTIER__V59_FALSIFICATION_REPAIRED__SPENT_NEXT66_AND_FRESH_NEXT67_PASS__NEXT68_FROZEN_UNSPENT__CURRENT_POINTER_ELIGIBLE__ZERO_PROMOTION_CREDIT",
+  "subject": {
+    "canonical_predecessor_version": "V58",
+    "canonical_predecessor_manifest_sha256": "409dd682c47e2a25acc2915af689650757f02cf828826a9854d06c0e386bb1c1",
+    "experimental_predecessor_version": "V59",
+    "experimental_predecessor_manifest_sha256": "694f9c52e40530f4c41fe46e4ba01001f8d0a672c8e1cf2024d2cee15bda757c",
+    "experimental_predecessor_status": "FALSIFIED_BY_NEXT66__NOT_CANONICAL_AUTHORITY",
+    "transform": "canonical/research/bytes/tools/conservative_repaired_eight_delta_v60.py",
+    "transform_git_blob_sha": "9bc73b1a82acfb38f006e0233bf93e59fe9e9abc",
+    "manifest_sha256": "6ab3ad3366fe10d0d081784d61838d097eac1c242cee729453d78d48ede5033e",
+    "python_files": 277,
+    "durable_files": 278,
+    "raw_python_source_bytes": 1713090,
+    "B_exec_raw_python_source_bytes": 1715850,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "raw_delta_vs_canonical_v58_bytes": -122,
+    "B_exec_delta_vs_canonical_v58_bytes": -122
+  },
+  "repair": {
+    "reason": "NEXT66_FALSIFIED_EXPERIMENTAL_V59_AND_EXPOSED_ONE_INHERITED_V55_MPF_PERTURB_OVERPRUNE",
+    "changes": [
+      {
+        "function": "mpf_abs",
+        "role": "RESTORE_PRECISION_SPECIFIED_NORMALIZATION_AND_OBSERVED_SIGNED_NO_PREC_ROUTE"
+      },
+      {
+        "function": "mpf_perturb",
+        "role": "WIDEN_POSITIVE_NONZERO_ROUND_DOWN_EPS_SIGN_0_OR_1"
+      },
+      {
+        "function": "mpf_nint",
+        "role": "FAIL_CLOSED"
+      },
+      {
+        "function": "mpf_ceil",
+        "role": "FAIL_CLOSED"
+      },
+      {
+        "function": "mpf_floor",
+        "role": "FAIL_CLOSED"
+      },
+      {
+        "function": "to_bstr",
+        "role": "FAIL_CLOSED"
+      },
+      {
+        "function": "to_man_exp",
+        "role": "FAIL_CLOSED"
+      },
+      {
+        "function": "mpf_eq",
+        "role": "FAIL_CLOSED"
+      }
+    ],
+    "exact_base_guard": true,
+    "exact_target_guard": true
+  },
+  "qualification": {
+    "spent_NEXT66": {
+      "id": "QUAL_SUCCESSOR_NEXT66_20261011_V1",
+      "cases": 17020,
+      "corpus_sha256": "6721df00b28a1d18d5efb16ae8a270b4dde24ebca33ded0e1d55d6655114e7f4",
+      "candidate": "17020/17020",
+      "failures": 0,
+      "spent": true
+    },
+    "fresh_NEXT67": {
+      "id": "QUAL_SUCCESSOR_NEXT67_20261011_V1",
+      "cases": 17250,
+      "corpus_sha256": "aab6e4fb65f266211585f9d60c88c3dcc2834ca832d91c50357edd7bd2ac20be",
+      "candidate": "17250/17250",
+      "failures": 0,
+      "spent": true,
+      "execution_carrier": "CHATGPT_CONTAINER_AUDIT_REPLAY",
+      "donor_or_external_model_cognition_used": false
+    }
+  },
+  "reproducibility": {
+    "clean_room_v59_to_v60_reconstruction": "PASS__278_OF_278_DURABLE_FILES_PAYLOAD_IDENTITY",
+    "regenerated_manifest_sha256": "6ab3ad3366fe10d0d081784d61838d097eac1c242cee729453d78d48ede5033e",
+    "canonical_reconstruction_verification": "canonical/verification/BYTES_V60_RECONSTRUCTION_NEXT67_REGEN_VERIFY_20261011_V1.json",
+    "external_second_carrier_verified": false
+  },
+  "durable_archive": {
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V60_REPAIRED_SUCCESSOR_20261011_V1.tar.xz",
+    "library_file_id": "libfile_afa0d53808cc8191976782dc3e9ea40a",
+    "bytes": 267260,
+    "archive_sha256": "7ebb193e07a2a1e18265ebf4b1ef76b4c011b665bf100d35550033b894d96dd9",
+    "payload_manifest_sha256": "6ab3ad3366fe10d0d081784d61838d097eac1c242cee729453d78d48ede5033e",
+    "payload_reextraction_verified": true,
+    "note": "Archive wrapper hash differs from earlier ephemeral/normalized wrappers; authoritative capability identity is the exact re-extracted payload manifest."
+  },
+  "next_frozen": {
+    "id": "QUAL_SUCCESSOR_NEXT68_20261011_V1",
+    "cases": 17480,
+    "seed": 1452486686,
+    "seed_derivation": "FIRST_32_BITS_BIG_ENDIAN_SHA256_OF_QUAL_ID_PIPE_V60_MANIFEST_IDENTITY",
+    "per_operation_budget": 1520,
+    "corpus_sha256": "ee4eb1b62ce24c1c31e39c19585ce5a04e01fc6099b88c65a7530840a6c15e70",
+    "bytes": 2066007,
+    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT68_20261011_V1.jsonl",
+    "library_file_id": "libfile_3f5ba0e0123481919cc240491ebd5cb2",
+    "generation_provenance": "STOCK_SYMPY_1_14_0_MPMATH_1_3_0__CANONICAL_PARAMETER_STREAM__CHUNKED_EXPECTED_OUTPUT_EVALUATION__CANONICAL_ROW_REASSEMBLY",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT",
+    "spent": false
+  },
+  "truth_boundary": [
+    "MEASURED: V60 exact payload manifest is 6ab3ad3366fe10d0d081784d61838d097eac1c242cee729453d78d48ede5033e and contains 1,713,090 raw Python bytes.",
+    "MEASURED: repaired V60 passes spent NEXT66 17,020/17,020.",
+    "MEASURED: previously unspent NEXT67 passes repaired V60 17,250/17,250.",
+    "MEASURED: V60 archive and exact NEXT67/NEXT68 corpora are durably persisted in Library.",
+    "MEASURED: NEXT68 is frozen at 17,480 cases and remains unspent.",
+    "REJECTED: experimental V59 as canonical frontier.",
+    "NOT PROVED: external second-carrier replay.",
+    "NOT PROMOTED: no capability, acceptance, ownership, quality, or terminal credit."
+  ],
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "quality_credit_delta": 0,
+  "promotion_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
