@@ -1,0 +1,14 @@
+name: Actions carrier probe ubuntu-slim
+on:
+  push:
+    branches:
+      - successor/actions-carrier-probe-ubuntu-slim-20261011-v1
+jobs:
+  probe:
+    runs-on: ubuntu-slim
+    timeout-minutes: 2
+    steps:
+      - name: Carrier started
+        run: |
+          echo "carrier_started=true"
+          uname -a
