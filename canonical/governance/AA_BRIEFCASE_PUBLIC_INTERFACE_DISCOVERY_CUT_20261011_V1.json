@@ -1,0 +1,82 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_PUBLIC_INTERFACE_DISCOVERY_CUT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PUBLIC_SURFACE_SEARCHED__FULL_AGENT_OFFICIAL_HTTP_CONTRACT_NOT_FOUND__OWNER_RESPONSE_STILL_REQUIRED__ZERO_CREDIT",
+  "mission_lock": "PROVE_AA_BRIEFCASE_V1_1_BRAIN_ELO_GE_1822_ONLY",
+  "public_findings": [
+    {
+      "surface": "Artificial Analysis Optima product page",
+      "fact": "Bring-your-own agent can compete in the same Optima run over HTTP.",
+      "limitation": "No request/response/authentication/file-lifecycle endpoint schema is published on the visible product page.",
+      "source": "https://artificialanalysis.ai/optima"
+    },
+    {
+      "surface": "Artificial Analysis Optima launch article",
+      "fact": "Optima uses Artificial Analysis benchmarking infrastructure and supports agentic benchmark construction/grading.",
+      "limitation": "Does not publish the BYO-agent HTTP protocol and does not make Optima results equivalent to official private AA-Briefcase v1.1.",
+      "source": "https://artificialanalysis.ai/articles/optima"
+    },
+    {
+      "surface": "Optima application entry",
+      "fact": "The public Try Optima path redirects through account login.",
+      "limitation": "No unauthenticated public endpoint contract was exposed there.",
+      "source": "https://artificialanalysis.ai/optima-redirect"
+    },
+    {
+      "surface": "ArtificialAnalysis/optima public GitHub repository",
+      "pinned_commit": "28c7b9e1c0f428607c6a5a79334da86815956008",
+      "fact": "Public repo contains Optima benchmark-prep skills and ZIP upload handoff instructions.",
+      "searched_terms": [
+        "agent_url",
+        "endpoint_url",
+        "base_url",
+        "bring your own agent",
+        "HTTP agent",
+        "agent endpoint",
+        "webhook",
+        "api_key",
+        "agentic"
+      ],
+      "result": "NO_PUBLIC_BYO_AGENT_ENDPOINT_SCHEMA_FOUND",
+      "limitation": "The repo documents eval-prep/upload, not the runtime HTTP agent contract.",
+      "source": "https://github.com/ArtificialAnalysis/optima"
+    },
+    {
+      "surface": "ArtificialAnalysis/Stirrup",
+      "pinned_commit": "247f24d56b2108235880ed2a2baea5d35b5a67ee",
+      "fact": "Stirrup custom clients implement generate(messages, tools), model_slug, and context_window_tokens.",
+      "limitation": "This is an LLM client protocol, not proof that official AA-Briefcase accepts Brain's entire full-agent system over that boundary.",
+      "source": "https://github.com/ArtificialAnalysis/Stirrup"
+    },
+    {
+      "surface": "Artificial Analysis contact",
+      "fact": "Custom benchmarking explicitly includes technical testing for models listed and not listed in public benchmarks.",
+      "limitation": "The contact page does not itself confirm independent no-fee AA-Briefcase acceptance or the full-agent transport contract.",
+      "source": "https://artificialanalysis.ai/contact"
+    }
+  ],
+  "conclusion": {
+    "public_information_sufficient_to_build_exact_official_full_agent_carrier": false,
+    "reason": "The only published full-agent transport fact is 'over HTTP'; the authoritative endpoint contract, official-AA-Briefcase eligibility, no-fee acceptance, and frozen-1822 comparability binding remain owner-controlled.",
+    "next_information_class": "AUTHENTICATED_ARTIFICIAL_ANALYSIS_OWNER_DECISION_SATISFYING_AA_BRIEFCASE_OWNER_EXECUTION_DECISION_V1_SCHEMA"
+  },
+  "reusable_artifacts": {
+    "owner_decision_schema": "canonical/governance/AA_BRIEFCASE_OWNER_EXECUTION_DECISION_V1.schema.json",
+    "owner_handoff_gate": "canonical/runtime/aa_briefcase_owner_handoff_gate_v1.py",
+    "frozen_result_bridge": "canonical/runtime/aa_briefcase_frozen_epoch_result_bridge_v2.py",
+    "owner_intake_request": "canonical/governance/AA_BRIEFCASE_OWNER_EVALUATION_INTAKE_REQUEST_20261011_V1.md"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_PRIVATE_OPTIMA_APP_HAS_NO_ADDITIONAL_DOCUMENTATION_AFTER_LOGIN",
+    "NO_CLAIM_ARTIFICIAL_ANALYSIS_WILL_ACCEPT_BRAIN",
+    "NO_CLAIM_THE_OFFICIAL_AA_BRIEFCASE_TRANSPORT_MUST_EQUAL_OPTIMA_TRANSPORT",
+    "NO_CALLABLE_CARRIER_CREATED_FROM_GUESSED_PROTOCOL_FIELDS",
+    "NO_SCORE_OR_ACCEPTANCE_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
