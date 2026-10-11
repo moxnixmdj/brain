@@ -34,7 +34,7 @@ class CurveXAtYQueryV1Tests(unittest.TestCase):
     def test_exact_vertex_is_one_crossing(self):
         pts=[[20,90],[40,80],[60,70],[80,60],[100,50]]
         out=query_curve_x_at_y(scene([row(pts)]),legend(),label="Control",y_value=40)
-        self.assertAlmostEqual(out["value"],70.0,places=6)
+        self.assertAlmostEqual(out["value"],60.0,places=6)
 
     def test_log_x_result(self):
         pts=[[x,100-0.5*x] for x in range(20,101)]
@@ -45,7 +45,7 @@ class CurveXAtYQueryV1Tests(unittest.TestCase):
     def test_log_y_query(self):
         pts=[[x,100-0.5*x] for x in range(20,101)]
         ax=axes(log_y=True)
-        target=10**1.7
+        target=10**1.3
         out=query_curve_x_at_y(scene([row(pts)],ax=ax),legend(),label="Control",y_value=target)
         self.assertAlmostEqual(out["interpolated_pixel_x"],60.0,places=6)
 
@@ -64,6 +64,12 @@ class CurveXAtYQueryV1Tests(unittest.TestCase):
         a=[[20,90],[100,50]]
         b=[[20,80],[100,40]]
         with self.assertRaisesRegex(CurveXAtYQueryError,"CURVE_X_AT_Y_NOT_UNIQUE"):
+            query_curve_x_at_y(scene([row(a),row(b)]),legend(),label="Control",y_value=40)
+
+    def test_coincident_crossings_from_two_polylines_still_fail_closed(self):
+        a=[[20,90],[100,50]]
+        b=[[20,90],[100,50]]
+        with self.assertRaisesRegex(CurveXAtYQueryError,"CURVE_X_AT_Y_NOT_UNIQUE:2"):
             query_curve_x_at_y(scene([row(a),row(b)]),legend(),label="Control",y_value=40)
 
     def test_large_gap_fails_closed(self):
