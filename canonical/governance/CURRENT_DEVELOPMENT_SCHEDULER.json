@@ -132,7 +132,7 @@
     "professional_open_execution_leaf_count": 0,
     "professional_open_semantic_leaf_count": 0,
     "full_private_regression_execution_carrier_blocked": true,
-    "professional_parallel_policy": "WHILE_REGRESSION_CARRIER_BILLING_PRESTART_GATE_IS_UNCHANGED_AND_NO_CHECKPOINT_WAKE_EVENT__RUN_CAPABILITY_FIRST_GENERAL_DEVELOPMENT_AND_BYTES_V71_RESOURCE_PARETO_WORK__DO_NOT_RETRY_HOSTED_ACTIONS__DO_NOT_SPIN_ON_O11_Q1",
+    "professional_parallel_policy": "WHILE_REGRESSION_CARRIER_BILLING_PRESTART_GATE_IS_UNCHANGED_AND_NO_CHECKPOINT_WAKE_EVENT__RUN_CAPABILITY_FIRST_GENERAL_DEVELOPMENT_AND_BYTES_V72_RESOURCE_PARETO_WORK__DO_NOT_RETRY_HOSTED_ACTIONS__DO_NOT_SPIN_ON_O11_Q1",
     "escape_open_checkpoint_count": 12,
     "escape_row_specific_same_information_runnable_count": 0,
     "escape_wake_gated_open_count": 12,
@@ -296,6 +296,10 @@
     "runtime": "canonical/runtime/current_projection_consistency_guard_v1.py",
     "tests": "canonical/tests/test_current_projection_consistency_guard_v1.py",
     "status": "ACTIVE_FAIL_CLOSED__CURRENT_WAKE_TOPOLOGY_AND_BYTES_VERSION_MUST_AGREE_BEFORE_STORED_PROJECTION_IS_TRUSTED",
-    "rule": "ON_MISMATCH_FAIL_CLOSED_AND_REPROJECT_FROM_CURRENT_MUTABLE_POINTERS__DO_NOT_AUTHORIZE_EXECUTION_FROM_STALE_SNAPSHOT"
+    "rule": "ON_MISMATCH_FAIL_CLOSED_AND_REPROJECT_FROM_CURRENT_MUTABLE_POINTERS__DO_NOT_AUTHORIZE_EXECUTION_FROM_STALE_SNAPSHOT",
+    "enforcement_gap_detected_at": "2026-10-11T14:33:00+02:00",
+    "enforcement_gap": "BYTES_V72_PROMOTION_ADVANCED_CANONICAL_BYTES_AND_BYTES_CURRENT_FRONTIER_BUT_LEFT_PROFESSIONAL_PARALLEL_POLICY_AT_V71",
+    "strengthened_rule": "ANY_MUTATION_ADVANCING_BYTES_ACTIVE_STATE_MUST_ATOMICALLY_UPDATE_ALL_BYTES_VERSION_PROJECTIONS_OR_FAIL_CLOSED__POST_WRITE_REPLAY_REQUIRED_BEFORE_POINTER_IS_TRUSTED",
+    "latest_reconciled_bytes_version": "V72"
   }
 }
