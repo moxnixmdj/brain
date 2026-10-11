@@ -1,14 +1,14 @@
 {
   "schema": "PROJECT_BRAIN_GDPVAL_DEFENSIBLE_FRESH_SUBMISSION_MANIFEST_20261011_V1",
   "date": "2026-10-11",
-  "status": "PARTIAL_CONTENT_ADDRESSED_MANIFEST__19_DEFENSIBLE_FRESH_SUBJECTS__FAIL_CLOSED_TOMBSTONES_PREVAIL",
+  "status": "PARTIAL_CONTENT_ADDRESSED_MANIFEST__22_DEFENSIBLE_FRESH_SUBJECTS__FAIL_CLOSED_TOMBSTONES_PREVAIL",
   "benchmark": "GDPval-AA v2.1",
   "dataset": {
     "revision_sha": "11e7900cdcac61bc4daf59e65feb238acda98fbf",
     "population_count": 220,
     "manifest_root_sha256": "f69af30fcea243ccb25d44c4a5380be0cdcac621287568525065034ce6cedae8"
   },
-  "fresh_subject_count": 19,
+  "fresh_subject_count": 22,
   "fresh_rows": [
     5,
     6,
@@ -28,7 +28,10 @@
     20,
     22,
     24,
-    25
+    25,
+    30,
+    31,
+    40
   ],
   "fresh_subjects": [
     {
@@ -201,6 +204,33 @@
       "precommit_commit": "5e28505c2dec20d09310cf1ed5097d73944ed1d8",
       "output_freeze_commit": "80065b7a9e2eb082f2e3f029e9b1524e2e43636a",
       "status": "PASS__FRESH_ROW25_TWO_PAGE_FEDERAL_APPLICANT_RISK_ASSESSMENT_TOOL_FROZEN__CURRENT_ECFR_BINDING_AND_VISUAL_QA_PASS__ZERO_OWNER_SCORE_CREDIT"
+    },
+    {
+      "row_idx": 30,
+      "task_id": "cebf301e-5ea7-41ae-b117-ad8f43e7ac22",
+      "receipt_path": "canonical/evidence/GDPVAL_SCALE_ROW30_CEBF301E_BRAIN_SUBMISSION_RECEIPT_20261011_V1.json",
+      "receipt_blob_sha": "22c92fc3d75813f307aea1ebffec423bf0f9e1e2",
+      "precommit_commit": "1bdac6c8e4dae4f5624e5e30afeb380f085e3a65",
+      "output_freeze_commit": "0041722b2652ebbb2cb1a8e98b5763915e22bbba",
+      "status": "PASS__FRESH_ROW30_TWO_PAGE_TECHNICAL_DESIGN_DOCX_FROZEN__RENDER_QA_PASS__ZERO_OWNER_SCORE_CREDIT"
+    },
+    {
+      "row_idx": 31,
+      "task_id": "c2e8f271-7858-412f-b460-472463ad81d9",
+      "receipt_path": "canonical/evidence/GDPVAL_SCALE_ROW31_C2E8F271_BRAIN_SUBMISSION_RECEIPT_20261011_V1.json",
+      "receipt_blob_sha": "46302b34ab72c13f029a1f9df0fd3465955b505c",
+      "precommit_commit": "1bdac6c8e4dae4f5624e5e30afeb380f085e3a65",
+      "output_freeze_commit": "836179d4a387c4a0dfb517d218e7251557483250",
+      "status": "PASS__FRESH_ROW31_TWO_PAGE_CODING_STANDARDS_DOCX_FROZEN__RENDER_QA_PASS__ZERO_OWNER_SCORE_CREDIT"
+    },
+    {
+      "row_idx": 40,
+      "task_id": "a0ef404e-82a6-4507-bff1-633d7c8e0004",
+      "receipt_path": "canonical/evidence/GDPVAL_SCALE_ROW40_A0EF404E_BRAIN_SUBMISSION_RECEIPT_20261011_V1.json",
+      "receipt_blob_sha": "056c00ed305585a222592dccf6a863870726525e",
+      "precommit_commit": "c604f5006820ce3ca24d6afc2487a95a30886a6c",
+      "output_freeze_commit": "d1a0f98c88aa3db238c7b2d044c21ef030a35d50",
+      "status": "PASS__FRESH_ROW40_RENTAL_AGREEMENT_SELF_SERVICE_GUIDE_DOCX_FROZEN__RENDER_QA_PASS__ZERO_OWNER_SCORE_CREDIT"
     }
   ],
   "excluded_or_spent": [
@@ -250,10 +280,10 @@
     }
   ],
   "coverage": {
-    "fresh_frozen_tasks": 19,
+    "fresh_frozen_tasks": 22,
     "population_tasks": 220,
-    "fresh_fraction": 0.08636363636363636,
-    "remaining_without_defensible_fresh_submission": 201
+    "fresh_fraction": 0.1,
+    "remaining_without_defensible_fresh_submission": 198
   },
   "precedence_rule": "EXPLICIT_CONTAMINATION_OR_IDENTITY_TOMBSTONE_OVERRIDES_ANY_LATER_RECEIPT_LABELLED_FRESH_FOR_THE_SAME_ROW",
   "boundary": [
