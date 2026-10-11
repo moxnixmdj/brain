@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_PYTHON_STRICT_PROGRESS_REPAIR_LOOP_V1_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__LOCAL_6_OF_6__SPRITE_6_OF_6__ZERO_MODEL__ZERO_SPEND",
+  "subject": {
+    "runtime_path": "canonical/runtime/bound_capabilities/python_iterative_software_repair_loop_v1.py",
+    "runtime_git_blob_sha": "352867cf8ce00dab65b17b96d098b6ea4b32f40d",
+    "test_path": "canonical/tests/test_python_iterative_software_repair_loop_v1.py",
+    "test_git_blob_sha": "1828328eeb385e379f8d6f3d2cff17dc1e3e3e54",
+    "dependency_git_blob_sha": "9bd33aca208fca26270765e18b3563abcf841e0b"
+  },
+  "local": {"passed": 6, "total": 6, "elapsed_s": 20.339},
+  "independent": {
+    "carrier": "Sprites",
+    "directory": "/home/sprite/general-repair-loop-v1-exact",
+    "passed": 6,
+    "total": 6,
+    "elapsed_s": 1.893
+  },
+  "proved": [
+    "TWO_FILES_TWO_ROUNDS_ONE_TEST_COMMAND_FAILURE_SCORE_2_TO_1_TO_0",
+    "STRICT_FAILURE_SCORE_IMPROVEMENT_PER_ACCEPTED_EDIT",
+    "FINAL_SUCCESS_REPLAYED_TWICE",
+    "SOURCE_BYTES_RESTORED_BEFORE_RETURN",
+    "NO_SOLUTION_FAILS_CLOSED",
+    "PATH_ESCAPE_REJECTED",
+    "ZERO_MODEL_DEPENDENCY",
+    "ZERO_INCREMENTAL_SPEND"
+  ],
+  "open": [
+    "NON_MONOTONIC_COUPLED_EDITS_WITH_NO_SINGLE_STEP_IMPROVEMENT",
+    "GENERAL_SEMANTIC_FAULT_LOCALIZATION",
+    "ARBITRARY_EDIT_BASIS_COMPLETENESS",
+    "NON_PYTHON_REPAIR",
+    "HIDDEN_REQUIREMENTS_AND_GENERAL_MERGEABILITY"
+  ],
+  "frontiercode_score_credit_delta": 0
+}
