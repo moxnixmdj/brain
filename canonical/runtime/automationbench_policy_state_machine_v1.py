@@ -19,9 +19,12 @@ from canonical.runtime.automationbench_mutation_compiler_v1 import (
     validate_nonnegative_action,
 )
 from canonical.runtime.automationbench_owned_policy_kernel_v1 import (
-    observation_plan,
     rank_source_records,
-    search_queries,
+)
+from canonical.runtime.automationbench_multihop_observation_v1 import (
+    call_fingerprint,
+    discovery_search_queries,
+    observation_expansion_plan,
 )
 
 SCHEMA = "PROJECT_BRAIN_AUTOMATIONBENCH_POLICY_STATE_MACHINE_V1"
@@ -75,6 +78,29 @@ def _semantic_done(history: Sequence[Mapping[str, Any]], semantic: str) -> bool:
     return False
 
 
+def _called_read_fingerprints(history: Sequence[Mapping[str, Any]]) -> set[str]:
+    out: set[str] = set()
+    for item in history:
+        if not isinstance(item, Mapping):
+            continue
+        if str(item.get("kind") or "") != "tool_call":
+            continue
+        if str(item.get("name") or item.get("tool") or "") != "api_fetch":
+            continue
+        arguments = item.get("arguments")
+        if isinstance(arguments, str):
+            try:
+                arguments = json.loads(arguments)
+            except Exception:
+                continue
+        if not isinstance(arguments, Mapping):
+            continue
+        if str(arguments.get("method") or "").upper() != "GET":
+            continue
+        out.add(call_fingerprint("api_fetch", arguments))
+    return out
+
+
 def next_policy_action(
     *,
     prompt: str,
@@ -88,7 +114,7 @@ def next_policy_action(
     if not searches:
         calls = [
             {"tool":"api_search","arguments":{"query":q,"top_k":5}}
-            for q in search_queries(prompt, max_queries=max_parallel_calls)
+            for q in discovery_search_queries(prompt, max_queries=max_parallel_calls)
         ]
         return {
             "schema": SCHEMA,
@@ -97,9 +123,16 @@ def next_policy_action(
             "calls": calls,
         }
 
+    search_payloads = [_payload(x) for x in searches]
+    called_reads = _called_read_fingerprints(history)
+
     if not fetches:
-        payloads = [_payload(x) for x in searches]
-        calls = observation_plan(prompt, payloads, max_calls=max_parallel_calls)
+        calls = observation_expansion_plan(
+            prompt,
+            search_payloads,
+            already_called=called_reads,
+            max_calls=max_parallel_calls,
+        )
         return {
             "schema": SCHEMA,
             "status": "CALL_TOOLS" if calls else "NEEDS_POLICY_EXTENSION",
@@ -151,6 +184,26 @@ def next_policy_action(
                     "semantic": action["semantic"],
                     "calls": [{"tool":action["tool"],"arguments":action["arguments"]}],
                 }
+
+    # No grounded write matched yet. Expand the read graph using IDs and
+    # metadata learned from prior observations before declaring a policy gap.
+    continuation_calls = observation_expansion_plan(
+        prompt,
+        search_payloads,
+        observations=observations,
+        already_called=called_reads,
+        max_calls=max_parallel_calls,
+    )
+    if continuation_calls:
+        return {
+            "schema": SCHEMA,
+            "status": "CALL_TOOLS",
+            "phase": "CONTINUE_OBSERVATION",
+            "calls": [
+                {"tool": item["tool"], "arguments": item["arguments"]}
+                for item in continuation_calls
+            ],
+        }
 
     return {
         "schema": SCHEMA,
