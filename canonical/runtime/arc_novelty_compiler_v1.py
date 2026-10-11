@@ -921,6 +921,46 @@ def _infer_row_shift_period_target(
     return target
 
 
+def _infer_marker_position_row_fill(
+    pairs: Sequence[tuple[Grid, Grid]],
+) -> dict[int, int] | None:
+    mapping: dict[int, int] = {}
+    for inp, out in pairs:
+        if _shape(inp) != _shape(out):
+            return None
+        h, w = _shape(inp)
+        for r in range(h):
+            nz = [(c, v) for c, v in enumerate(inp[r]) if v != 0]
+            if len(nz) != 1:
+                return None
+            c, _ = nz[0]
+            values = set(out[r])
+            if len(values) != 1:
+                return None
+            target = next(iter(values))
+            if c in mapping and mapping[c] != target:
+                return None
+            mapping[c] = target
+    return mapping if mapping else None
+
+
+def _marker_position_row_fill_predict(
+    grid: Grid,
+    mapping: Mapping[int, int],
+) -> Grid | None:
+    h, w = _shape(grid)
+    out: list[tuple[int, ...]] = []
+    for r in range(h):
+        nz = [(c, v) for c, v in enumerate(grid[r]) if v != 0]
+        if len(nz) != 1:
+            return None
+        c, _ = nz[0]
+        if c not in mapping:
+            return None
+        out.append(tuple(int(mapping[c]) for _ in range(w)))
+    return tuple(out)
+
+
 def _shift_grid(grid: Grid, dr: int, dc: int) -> Grid:
     h, w = _shape(grid)
     out = [[0 for _ in range(w)] for _ in range(h)]
@@ -1115,6 +1155,9 @@ def _predict(h: Mapping[str, Any], grid: Grid) -> Grid | None:
         return _fill_each_color_bbox(grid)
     if kind == "CONNECT_SAME_COLOR_DIAGONALS":
         return _connect_same_color_diagonals(grid)
+    if kind == "MARKER_POSITION_ROW_FILL":
+        mapping = {int(k): int(v) for k, v in h["mapping"].items()}
+        return _marker_position_row_fill_predict(grid, mapping)
     raise ARCNoveltyCompilerError("HYPOTHESIS_KIND_UNSUPPORTED")
 
 
@@ -1332,6 +1375,15 @@ def compile_hypotheses(
     if _consistent(h, pairs):
         candidates.append(h)
 
+    marker_row_mapping = _infer_marker_position_row_fill(pairs)
+    if marker_row_mapping is not None:
+        h = {
+            "kind": "MARKER_POSITION_ROW_FILL",
+            "mapping": {str(k): v for k, v in sorted(marker_row_mapping.items())},
+        }
+        if _consistent(h, pairs):
+            candidates.append(h)
+
     crop = {"kind": "CROP_NON_BACKGROUND"}
     if _consistent(crop, pairs):
         candidates.append(crop)
@@ -1399,6 +1451,7 @@ def compile_hypotheses(
             "SYMMETRY_COMPLETION",
             "PER_COLOR_BOUNDING_BOX_FILL",
             "SAME_COLOR_DIAGONAL_CONNECTION",
+            "MARKER_POSITION_ROW_FILL",
             "NON_BACKGROUND_BOUNDING_BOX_CROP",
             "UNIQUE_LARGEST_OR_SMALLEST_COMPONENT_CROP",
         ],
