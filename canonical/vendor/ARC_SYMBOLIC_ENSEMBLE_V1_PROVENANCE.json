@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_ARC_SYMBOLIC_ENSEMBLE_VENDOR_V1",
+  "source_repository": "tanmaybisen31/arc-agi-solver",
+  "source_commit": "e151937e34c8b34f953833a0dab75797fc737ba4",
+  "source_license": "MIT",
+  "vendor_bundle_sha256": "95c01e84e5db7ee6e7323d8d7dc72f1e0c8462b59d7f846ab7c204a0585b34cc",
+  "vendor_bundle_bytes": 181221,
+  "imported_scope": [
+    "harness.py",
+    "detectors.py",
+    "registry.py with static zipimport registry patch",
+    "gen/*.py",
+    "LICENSE"
+  ],
+  "excluded_scope": [
+    "ttt/",
+    "model-assisted paths",
+    "datasets",
+    "result logs",
+    "docs"
+  ],
+  "registry_patch": "FILESYSTEM_DISCOVERY_ONLY_REPLACED_BY_PINNED_STATIC_MODULE_LIST",
+  "external_model_dependency": false,
+  "capability_type": "MODEL_FREE_SYMBOLIC_RULE_DETECTOR_ENSEMBLE",
+  "donor_detector_count": 321,
+  "independent_preimport_verification": {
+    "environment": "isolated Sprite",
+    "benchmark": "ARC-AGI-1 public evaluation",
+    "arc_repo_commit": "399030444e0ab0cc8b4e199870fb20b863846f34",
+    "tasks_solved": 207,
+    "tasks_total": 400,
+    "task_accuracy": 0.5175,
+    "outputs_solved": 221,
+    "outputs_total": 419,
+    "output_pass_at_2": 0.5274
+  },
+  "nonclaims": [
+    "official hidden score",
+    "ARC-AGI-2 score",
+    "Opus parity",
+    "terminal promotion"
+  ]
+}
