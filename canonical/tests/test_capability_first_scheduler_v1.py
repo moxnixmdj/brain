@@ -528,7 +528,7 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
         )
         self.assertEqual(
             v17["decision_value_authority"]["rule"],
-            "ROWS_WHOSE_CURRENT_MODE_IS_WAKE_GATED_EVENT_DRIVEN_OR_PARKED_MUST_NOT_CONSUME_SAME_INFORMATION_WORK__ONLY_CURRENT_NONWAKE_ROWS_ENTER_GAP_A_EVIDENCE_SCHEDULING",
+            "WAKE_GATED_EVENT_DRIVEN_AND_PARKED_CHECKPOINT_ROWS_MUST_NOT_CONSUME_SAME_INFORMATION_WORK__ONLY_POLICY_CHANGING_STATE_CHANGES_MAY_WAKE_THEM",
         )
         self.assertEqual(
             v17["current_projection"]["gap_a_actionable_row_ids"],
