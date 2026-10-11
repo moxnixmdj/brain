@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_CROSS_SYSTEM_INFORMATION_IRREDUCIBILITY_WOLFRAM_VERIFY_V1",
+  "date": "2026-10-11",
+  "status": "INDEPENDENT_LOGIC_PASS__CROSS_SYSTEM_BRIDGE_NECESSITY_VERIFIED__ZERO_CAPABILITY_CREDIT",
+  "subject": {
+    "path": "canonical/governance/GDPVAL_CROSS_SYSTEM_INFORMATION_IRREDUCIBILITY_20261011_V1.json",
+    "branch_commit": "90d53ccc61893fab661b9d3dd4052df254c53497"
+  },
+  "verifier": {
+    "provider": "WOLFRAM_LANGUAGE",
+    "expression": "{SatisfiableQ[e && r,{e,r}],SatisfiableQ[e && !r,{e,r}],TautologyQ[Implies[e,r],{e,r}],SatisfiabilityInstances[e && r,{e,r}],SatisfiabilityInstances[e && !r,{e,r}]}",
+    "result": [
+      true,
+      true,
+      false,
+      [
+        [
+          true,
+          true
+        ]
+      ],
+      [
+        [
+          true,
+          false
+        ]
+      ]
+    ]
+  },
+  "interpretation": {
+    "e": "CURRENT_EVIDENCE_WITH_NO_CROSS_SYSTEM_CONSTRAINT_ON_THE_TARGET_RELATION",
+    "r": "BRAIN_GE_FROZEN_OPUS55_GDPVAL_1846_CAPABILITY_RELATION",
+    "both_worlds_satisfiable": true,
+    "current_evidence_alone_entails_r": false,
+    "verified_consequence": "A_SOUND_CROSS_SYSTEM_BRIDGE_OR_STRONGER_ABSOLUTE_CERTIFICATE_IS_LOGICALLY_NECESSARY_TO_DECIDE_R"
+  },
+  "boundary": [
+    "THIS_VERIFIES_ONLY_THE_PROPOSITIONAL_INFORMATION_ARGUMENT",
+    "IT_DOES_NOT_ESTABLISH_WHICH_REAL_WORLD_IS_TRUE",
+    "IT_DOES_NOT_ESTABLISH_BRAIN_GDPVAL_SCORE_OR_OPUS_NONINFERIORITY",
+    "EMPIRICAL_PREMISE_THAT_CURRENT_EVIDENCE_LACKS_A_SUFFICIENT_CROSS_SYSTEM_BRIDGE_REMAINS_GROUNDED_BY_CANONICAL_GDPVAL_FRONTIER_AND_COMPARATOR_FILES"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
