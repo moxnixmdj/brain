@@ -84,6 +84,11 @@ else:
     assert isinstance(invalidation,str) and (R/invalidation).is_file()
     assert mdc.get("invalidation")==invalidation
 
+terminal_reducer=(R/"canonical/runtime/terminal_closure_reducer.py").read_text(encoding="utf-8")
+assert "GLOBAL_OWNERSHIP_RECEIPT_REDUCER_BLOB_STALE" in terminal_reducer
+assert "DONOR_AUTHORITY_REPOSITORY_ROOT_REQUIRED" in terminal_reducer
+assert "GLOBAL_OWNERSHIP_ZERO_MODEL_PREDICATE_NOT_TRUE" in terminal_reducer
+
 legacy=J("canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json")
 if (legacy.get("truth") or {}).get("donor_cleanroom")=="INDEPENDENT_PASS":
     assert mtp.get("final_donor_deletion_cleanroom_pass") is True
