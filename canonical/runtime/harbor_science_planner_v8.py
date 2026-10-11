@@ -225,7 +225,7 @@ def _seedless_request_payload(prompt: str) -> dict[str, Any]:
                 "content": (
                     "You are an optional proposal source inside Project Brain. "
                     "Use the provided submit_science_proposal tool exactly once. "
-                    "Return one to four terse candidate actions per proposal. Use short requirement IDs, "
+                    "Prefer one or two terse candidate actions per proposal; use more only when a true same-cycle dependency requires it. Use short requirement IDs, "
                     "declare depends_on when an action requires a prior proposed action, and request only the "
                     "smallest sufficient timeout_sec / verify_timeout_sec when defaults may be insufficient. "
                     "Every candidate must explicitly type executor and verify_executor as shell or python. "
@@ -233,7 +233,8 @@ def _seedless_request_payload(prompt: str) -> dict[str, Any]:
                     "Brain statically checks literal mapping-key reads. Every such key must be backed by an authentic schema_requirements JSON/NPZ declaration; otherwise avoid that literal mapping-key read. "
                     "If recent Brain evidence contains validation_error_code, repair that exact validation class in the next proposal instead of repeating it. "
                     "Declare exact deliverable path/format postconditions for artifacts the action claims to create. "
-                    f"Keep command and verify_command under {MAX_COMMAND_CHARS} characters each, and use no explanatory prose. "
+                    f"Keep command and verify_command under {MAX_COMMAND_CHARS} characters each; strongly prefer under 1800 characters each, never duplicate large source across candidates, and use no explanatory prose. "
+                    "If a task needs longer code, split work across cycles through verified artifacts rather than emitting one huge proposal. "
                     "If a BRAIN_EVIDENCE_DIRECTORY is present and omitted exact evidence is needed, "
                     "request it with evidence_requests instead of guessing. "
                     "Never claim execution or finish authority."
