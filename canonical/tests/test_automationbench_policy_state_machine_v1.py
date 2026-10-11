@@ -35,6 +35,39 @@ class AutomationBenchPolicyStateMachineV1Tests(unittest.TestCase):
         self.assertTrue(out["calls"])
         self.assertTrue(all(x["arguments"]["method"] == "GET" for x in out["calls"]))
 
+    def test_generic_planner_selects_renamed_observation_endpoint(self):
+        history = [{
+            "kind":"tool_result",
+            "name":"api_search",
+            "content":json.dumps({
+                "results":[
+                    {
+                        "id":"opaque.lookup",
+                        "method":"GET",
+                        "url":"https://opaque.invalid/shipments",
+                        "description":"Find shipment orders and delivery status.",
+                        "parameters":{}
+                    },
+                    {
+                        "id":"opaque.modify",
+                        "method":"PATCH",
+                        "url":"https://opaque.invalid/shipments/{id}",
+                        "description":"Update shipment delivery status.",
+                        "parameters":{"id":{"required":True,"location":"path"}}
+                    }
+                ]
+            })
+        }]
+        out = next_policy_action(
+            prompt="Find the shipment order, then set shipment status to delivered.",
+            history=history,
+        )
+        self.assertEqual(out["planner_mode"], "GENERIC_GOAL_TOOL_EFFECT_PLANNER")
+        self.assertEqual(out["generic_plan_status"], "PLANNED")
+        self.assertEqual(len(out["calls"]), 1)
+        self.assertEqual(out["calls"][0]["arguments"]["method"], "GET")
+        self.assertIn("opaque.invalid/shipments", out["calls"][0]["arguments"]["url"])
+
     def test_third_phase_compiles_salesforce_mutation(self):
         prompt = "We just closed the Meridian Corp Platform Deal! Mark it as won in Salesforce."
         history = [

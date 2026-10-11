@@ -9,6 +9,7 @@ assertions. Unsupported mutation semantics fail closed as NEEDS_POLICY_EXTENSION
 """
 from __future__ import annotations
 
+import hashlib
 import json
 from typing import Any, Mapping, Sequence
 
@@ -23,6 +24,12 @@ from canonical.runtime.automationbench_owned_policy_kernel_v1 import (
     rank_source_records,
     search_queries,
 )
+from canonical.runtime.generic_goal_tool_effect_planner_v1 import (
+    endpoint_rows_from_search_payloads,
+    plan_goal_over_tool_schemas,
+)
+from canonical.runtime.generic_tool_argument_binder_v1 import bind_endpoint_call
+from canonical.runtime.generic_goal_state_verifier_v1 import verify_goal_state
 
 SCHEMA = "PROJECT_BRAIN_AUTOMATIONBENCH_POLICY_STATE_MACHINE_V1"
 
@@ -75,6 +82,36 @@ def _semantic_done(history: Sequence[Mapping[str, Any]], semantic: str) -> bool:
     return False
 
 
+def _plan_token(plan: Sequence[Any]) -> str:
+    raw = json.dumps(list(plan), sort_keys=True, separators=(",", ":")).encode("utf-8")
+    return hashlib.sha256(raw).hexdigest()[:20]
+
+
+def _tool_results_after_semantic(
+    history: Sequence[Mapping[str, Any]],
+    semantic: str,
+) -> list[Any]:
+    seen = False
+    out: list[Any] = []
+    for row in history:
+        if not isinstance(row, Mapping):
+            continue
+        metadata = row.get("metadata")
+        if (
+            isinstance(metadata, Mapping)
+            and metadata.get("project_brain/automationbench_semantic") == semantic
+        ):
+            seen = True
+            continue
+        if (
+            seen
+            and str(row.get("kind") or row.get("type") or "") == "tool_result"
+            and str(row.get("name") or row.get("tool") or "") == "api_fetch"
+        ):
+            out.append(_payload(row))
+    return out
+
+
 def next_policy_action(
     *,
     prompt: str,
@@ -97,17 +134,213 @@ def next_policy_action(
             "calls": calls,
         }
 
+    search_payloads = [_payload(x) for x in searches]
+    endpoint_rows = endpoint_rows_from_search_payloads(search_payloads)
+    generic_plan = plan_goal_over_tool_schemas(prompt, endpoint_rows)
+
+    if generic_plan.get("status") == "NO_POSITIVE_ACTION_REQUIRED":
+        return {
+            "schema": SCHEMA,
+            "status": "DONE_VERIFIED",
+            "phase": "NO_ACTION_REQUIRED",
+            "calls": [],
+            "planner_mode": "GENERIC_GOAL_TOOL_EFFECT_PLANNER",
+            "verification": "NO_POSITIVE_ACTION_TARGETS",
+        }
+
     if not fetches:
-        payloads = [_payload(x) for x in searches]
-        calls = observation_plan(prompt, payloads, max_calls=max_parallel_calls)
+        selected_ids = set(generic_plan.get("observation_endpoint_ids") or [])
+        selected_rows = [
+            row for row in endpoint_rows
+            if str(row.get("id") or row.get("name") or "") in selected_ids
+        ]
+        calls = observation_plan(
+            prompt,
+            [{"results": selected_rows}] if selected_rows else search_payloads,
+            max_calls=max_parallel_calls,
+        )
         return {
             "schema": SCHEMA,
             "status": "CALL_TOOLS" if calls else "NEEDS_POLICY_EXTENSION",
             "phase": "OBSERVE_STATE",
+            "planner_mode": (
+                "GENERIC_GOAL_TOOL_EFFECT_PLANNER"
+                if selected_rows
+                else "LEGACY_OBSERVATION_FALLBACK_ZERO_CREDIT"
+            ),
+            "generic_plan_status": generic_plan.get("status"),
+            "generic_plan": generic_plan.get("plan") or [],
             "calls": [{"tool":x["tool"],"arguments":x["arguments"]} for x in calls],
         }
 
     observations = [_payload(x) for x in fetches]
+
+    # Primary mutation route: generic planner chooses the endpoint and the generic
+    # schema binder grounds its concrete arguments from goal + observed state.
+    endpoint_by_id = {
+        str(row.get("id") or row.get("name") or ""): row
+        for row in endpoint_rows
+    }
+    generic_bind_failures: list[str] = []
+    generic_mutation_steps = [
+        step for step in (generic_plan.get("steps") or [])
+        if step.get("role") == "mutation"
+    ]
+    generic_progress = any(
+        _semantic_done(
+            history,
+            "GENERIC_TOOL_EFFECT::" + str(step.get("capability_id") or ""),
+        )
+        for step in generic_mutation_steps
+        if step.get("capability_id")
+    )
+    for step in generic_mutation_steps:
+        if step.get("role") != "mutation":
+            continue
+        capability_id = str(step.get("capability_id") or "")
+        semantic = "GENERIC_TOOL_EFFECT::" + capability_id
+        if not capability_id or _semantic_done(history, semantic):
+            continue
+        endpoint_id = str(step.get("endpoint_id") or "")
+        endpoint = endpoint_by_id.get(endpoint_id)
+        if endpoint is None:
+            generic_bind_failures.append(capability_id + ":ENDPOINT_MISSING")
+            break
+        bound = bind_endpoint_call(
+            goal=prompt,
+            endpoint=endpoint,
+            observations=observations,
+        )
+        if bound.get("pass") is True:
+            return {
+                "schema": SCHEMA,
+                "status": "CALL_TOOLS",
+                "phase": "MUTATE",
+                "planner_mode": "GENERIC_GOAL_TOOL_EFFECT_PLANNER",
+                "binder_mode": "GENERIC_SCHEMA_DRIVEN_ARGUMENT_BINDER",
+                "semantic": semantic,
+                "generic_capability_id": capability_id,
+                "generic_endpoint_id": endpoint_id,
+                "calls": [{"tool":"api_fetch","arguments":bound["arguments"]}],
+            }
+        generic_bind_failures.append(
+            capability_id + ":" + str(bound.get("reason") or bound.get("status"))
+        )
+        # Plan order is causal. Do not skip an ungrounded earlier mutation.
+        break
+
+    all_generic_mutations_done = bool(generic_mutation_steps) and all(
+        _semantic_done(
+            history,
+            "GENERIC_TOOL_EFFECT::" + str(step.get("capability_id") or ""),
+        )
+        for step in generic_mutation_steps
+        if step.get("capability_id")
+    )
+
+    if not generic_mutation_steps and generic_plan.get("pass") is True:
+        verification = verify_goal_state(
+            goal=prompt,
+            context_observations=observations,
+            verification_observations=observations,
+        )
+        if verification.get("pass") is True:
+            return {
+                "schema": SCHEMA,
+                "status": "DONE_VERIFIED",
+                "phase": "COMPLETE",
+                "calls": [],
+                "planner_mode": "GENERIC_GOAL_TOOL_EFFECT_PLANNER",
+                "verification": verification,
+            }
+
+    if all_generic_mutations_done:
+        verify_semantic = "GENERIC_VERIFY::" + _plan_token(generic_plan.get("plan") or [])
+        if not _semantic_done(history, verify_semantic):
+            selected_ids = set(generic_plan.get("observation_endpoint_ids") or [])
+            verification_calls: list[dict[str, Any]] = []
+            seen_calls: set[str] = set()
+            for endpoint_id in selected_ids:
+                endpoint = endpoint_by_id.get(endpoint_id)
+                if endpoint is None:
+                    continue
+                bound = bind_endpoint_call(
+                    goal=prompt,
+                    endpoint=endpoint,
+                    observations=observations,
+                )
+                if bound.get("pass") is not True:
+                    continue
+                args = bound.get("arguments") or {}
+                if str(args.get("method") or "").upper() != "GET":
+                    continue
+                signature = json.dumps(args, sort_keys=True)
+                if signature in seen_calls:
+                    continue
+                seen_calls.add(signature)
+                verification_calls.append({"tool":"api_fetch","arguments":args})
+                if len(verification_calls) >= max_parallel_calls:
+                    break
+            if verification_calls:
+                return {
+                    "schema": SCHEMA,
+                    "status": "CALL_TOOLS",
+                    "phase": "VERIFY_STATE",
+                    "planner_mode": "GENERIC_GOAL_TOOL_EFFECT_PLANNER",
+                    "semantic": verify_semantic,
+                    "calls": verification_calls,
+                }
+            return {
+                "schema": SCHEMA,
+                "status": "NEEDS_POLICY_EXTENSION",
+                "phase": "VERIFY_STATE",
+                "calls": [],
+                "reason": "NO_GROUNDED_INDEPENDENT_VERIFICATION_READ",
+                "planner_mode": "GENERIC_GOAL_TOOL_EFFECT_PLANNER",
+            }
+
+        verification_observations = _tool_results_after_semantic(
+            history,
+            verify_semantic,
+        )
+        verification = verify_goal_state(
+            goal=prompt,
+            context_observations=observations,
+            verification_observations=verification_observations,
+        )
+        if verification.get("pass") is True:
+            return {
+                "schema": SCHEMA,
+                "status": "DONE_VERIFIED",
+                "phase": "COMPLETE",
+                "calls": [],
+                "planner_mode": "GENERIC_GOAL_TOOL_EFFECT_PLANNER",
+                "verification": verification,
+            }
+        return {
+            "schema": SCHEMA,
+            "status": "NEEDS_POLICY_EXTENSION",
+            "phase": "VERIFY_STATE",
+            "calls": [],
+            "reason": "GENERIC_POST_ACTION_STATE_UNVERIFIED",
+            "planner_mode": "GENERIC_GOAL_TOOL_EFFECT_PLANNER",
+            "verification": verification,
+        }
+
+    if generic_progress:
+        return {
+            "schema": SCHEMA,
+            "status": "NEEDS_POLICY_EXTENSION",
+            "phase": "MUTATION_OR_VERIFICATION",
+            "calls": [],
+            "reason": "GENERIC_TRAJECTORY_STARTED_BUT_NEXT_GENERIC_STEP_COULD_NOT_BE_GROUNDED",
+            "planner_mode": "GENERIC_GOAL_TOOL_EFFECT_PLANNER",
+            "generic_bind_failures": generic_bind_failures,
+        }
+
+    # Transitional typed binders below are argument-binding scaffolding only.
+    # Generic route choice lives in generic_goal_tool_effect_planner_v1.
+    # These binders carry zero capability/ownership credit.
 
     # Typed compiler 1: Salesforce mark-won.
     action = compile_salesforce_mark_won(prompt, observations)
@@ -157,5 +390,10 @@ def next_policy_action(
         "status": "NEEDS_POLICY_EXTENSION",
         "phase": "MUTATION_OR_VERIFICATION",
         "calls": [],
-        "reason": "NO_GROUNDED_TYPED_MUTATION_COMPILER_MATCHED_CURRENT_OBSERVATIONS",
+        "reason": "NO_GROUNDED_GENERIC_EXECUTOR_OR_TRANSITIONAL_BINDER_MATCHED_CURRENT_OBSERVATIONS",
+        "planner_mode": "GENERIC_GOAL_TOOL_EFFECT_PLANNER_WITH_ZERO_CREDIT_BINDER_FALLBACK",
+        "generic_plan_status": generic_plan.get("status"),
+        "generic_plan": generic_plan.get("plan") or [],
+        "generic_mutation_endpoint_ids": generic_plan.get("mutation_endpoint_ids") or [],
+        "generic_bind_failures": generic_bind_failures,
     }
