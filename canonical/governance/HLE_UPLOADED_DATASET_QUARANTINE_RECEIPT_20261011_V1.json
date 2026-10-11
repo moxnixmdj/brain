@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_UPLOADED_DATASET_QUARANTINE_RECEIPT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "DATASET_ACCESS_CLOSED__SOURCE_QUARANTINED__OPERATOR_CONTEXT_CONTAMINATION_FLAGGED",
+  "local_source": {
+    "filename": "test-00000-of-00001.parquet",
+    "byte_size": 274276147,
+    "sha256": "6d0ee0602e8aea6b159509577e884f48ecac7b8e3f6822a35f51335a446c726a",
+    "parquet_magic_head": "PAR1",
+    "parquet_magic_tail": "PAR1",
+    "parquet_footer_metadata_length": 141078,
+    "metadata_row_count": 2500,
+    "schema_names": [
+      "schema",
+      "id",
+      "question",
+      "image",
+      "image_preview",
+      "bytes",
+      "path",
+      "answer",
+      "answer_type",
+      "author_name",
+      "rationale",
+      "rationale_image",
+      "bytes",
+      "path",
+      "raw_subject",
+      "category",
+      "canary"
+    ]
+  },
+  "quarantine": {
+    "forbidden_solver_fields": [
+      "answer",
+      "rationale",
+      "rationale_image"
+    ],
+    "solver_visible_fields_may_be_derived_only_by_answer_blind_transform": true,
+    "original_gold_bearing_file_must_never_be_mounted_into_solver_runtime": true,
+    "source_file_must_not_be_committed_to_git": true
+  },
+  "exposure_incident": {
+    "operator_context_contaminated": true,
+    "cause": "LOW_LEVEL_STRINGS_METADATA_PROBE_SURFACED_A_RAW_ANSWER_RATIONALE_FRAGMENT",
+    "scope": "OPERATOR_CHAT_CONTEXT_ONLY",
+    "brain_solver_executed_on_hle": false,
+    "brain_solver_gold_accessed": false,
+    "exact_number_of_gold_rows_exposed_to_operator_not_asserted": true,
+    "remediation": [
+      "DO_NOT_USE_THIS_CHAT_MODEL_OR_TRANSCRIPT_AS_HLE_SOLVER_INPUT",
+      "RUN_ANY_TERMINAL_HLE_SOLVER_IN_A_CLEAN_PROCESS_WITH_NO_ACCESS_TO_CHAT_TRANSCRIPT_OR_GOLD_COLUMNS",
+      "SEAL_SOLVER_OUTPUTS_BEFORE_ANY_GOLD_GRADING",
+      "RECORD_CLEAN_RUNTIME_HASH_AND_DEPENDENCY_CLOSURE"
+    ]
+  },
+  "dataset_access_blocker_closed": true,
+  "hle_cases_consumed_by_brain_solver": 0,
+  "hle_score_credit": 0,
+  "hle_67_7_certified": false,
+  "incremental_spend_usd": 0
+}
