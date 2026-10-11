@@ -1,0 +1,124 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_ESCAPE_O_REUSE_TRANSMUTATION_BRIDGE_V2_INDEPENDENT_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__INDEPENDENT_SPRITE__EXACT_BRANCH_BYTES__PYCOMPILE__16_OF_16__ACTIVE_O_REUSE_ADAPTATION_COVERAGE_11_OF_11__ZERO_CREDIT",
+  "objective": "VERIFY_V2_PRESERVES_STRICT_TRANSMUTATION_FAIL_CLOSED_SEMANTICS_WHILE_SURFACING_EXPLICIT_LEGACY_ROW_DONORS_FOR_ALL_CURRENT_ACTIVE_O_ROWS",
+  "branch_base_main_commit": "2617cf5c22615e2a85f70916e12a430d74e7388c",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/current_escape_o_reuse_transmutation_bridge_v2.py",
+      "git_blob_sha": "7a41bdffcacb3320e2d7c7e7ef9d5b2caa62b37b"
+    },
+    "tests": {
+      "path": "canonical/tests/test_current_escape_o_reuse_transmutation_bridge_v2.py",
+      "git_blob_sha": "c30a1ecaa64f8905e751b1700ef7f31896a34883"
+    },
+    "predecessor_bridge": {
+      "path": "canonical/runtime/current_escape_o_reuse_transmutation_bridge_v1.py",
+      "git_blob_sha": "d9c4f488a00270fba7e5d340329441235e8f2fe8"
+    },
+    "reused_transmuter": {
+      "path": "canonical/runtime/acceptance_proof_transmuter_v1.py",
+      "git_blob_sha": "39b5611e53485674b29e2a05da91b89801bc5aa6"
+    },
+    "current_cut": {
+      "path": "canonical/governance/CURRENT_ESCAPE_TWO_ENGINE_MINIMUM_DELTA_CUT_20261011_V1.json",
+      "git_blob_sha": "54e8d27a870c0e0f317c154346fa7a168eec8c82"
+    }
+  },
+  "exact_current_main_donor_inputs": [
+    [
+      "CODING_TB4_GE_66_4",
+      "canonical/governance/TB4_TASK_LEVEL_VERIFIER_ACCEPTANCE_THEOREM_20261008_V1.json",
+      "24f79e326d530e1944edee1392d2d50245db5f29"
+    ],
+    [
+      "CODING_FRONTIERCODE_GE_54_4",
+      "canonical/governance/FRONTIERCODE_ROBUST_SCORE_LOWER_BOUND_RECONCILIATION_20261008_V1.json",
+      "569335b3c715e2188aef29e64873dd6d8e3232b2"
+    ],
+    [
+      "CODING_CURSORBENCH_GE_57_8",
+      "canonical/governance/CURSORBENCH_TYPED_ACCEPTANCE_PLAN_POLICY_ADEQUACY_CERTIFICATE_20261009_V2.json",
+      "bddb8f51f6dc91f98759c5c3b92c1257ca8b9577"
+    ],
+    [
+      "PROWORK_GDPVAL_GE_1846",
+      "canonical/governance/GDPVAL_FIXED_BAR_OWNER_PAIRWISE_NONNECESSITY_20261009_V1.json",
+      "a56313d4c099e293fa7190c6bd60d3fc422c1d3f"
+    ],
+    [
+      "AUTOMATIONBENCH_GE_40",
+      "canonical/governance/AUTOMATIONBENCH_PUBLIC_600_ZERO_COST_RUNTIME_BINDING_20261011_V1.json",
+      "760eeca36230ba10a73fa4b5e645a64d22ab38b4"
+    ],
+    [
+      "HLE_TOOLS_GE_67_7",
+      "canonical/governance/HLE_STRICT_LOWER_BOUND_PROOF_V1.json",
+      "e4bee08f9ecf50ebb172750455ab99e3c2d473ff"
+    ],
+    [
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "canonical/governance/CHARTOGRAPHY_89_WITH_TOOLS_PROTOCOL_BINDING_20261011_V1.json",
+      "9fac9d927f31fe1726db9357d7ef2f90a2292416"
+    ],
+    [
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "canonical/governance/OSWORLD_REFERENCE_EQUIVALENCE_DESERIALIZATION_20261011_V1.json",
+      "e724c96a7d39046c312328e95d08d627d7c4cb12"
+    ],
+    [
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "canonical/governance/FINANCE_ACCOUNTING_INDEX_IDENTITY_RECONCILIATION_V1.json",
+      "dcd910e2af97c1648ab29d614552b072c66d647e"
+    ],
+    [
+      "FINANCE_AGENT_V2_GE_58_59",
+      "canonical/governance/FINANCE_AGENT_V2_HELDOUT_EXECUTION_MASS_REDUCTION_20261004_V1.json",
+      "ec36936e92a6111aed6b1813a45225fb4ca867dc"
+    ],
+    [
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "canonical/governance/MYSTERYMECHANISM_EXACT_LINEAR_PARAMETER_POLYTOPE_20261008_V1.json",
+      "093a778d1e72dffe40bd619eb2444e40b787969e"
+    ]
+  ],
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "sprite_name": "brain-escape-audit-verify-20261010-v1",
+    "sprite_id": "sprite-e24ab09a-a44f-45c6-816a-521154d8c1cc",
+    "bundle_sha256": "6f522dc264ce2d71a2e67a703c249facef8d91982dab72bf41953b794af935ad",
+    "bundle_file_count": 17,
+    "py_compile": "PASS",
+    "tests_run": 16,
+    "tests_passed": 16,
+    "tests_failed": 0,
+    "active_o_count": 11,
+    "strict_transmutation_candidate_count": 0,
+    "legacy_adaptation_candidate_obligation_count": 11,
+    "reuse_covered_obligation_count": 11,
+    "reuse_uncovered_obligation_count": 0
+  },
+  "proved": [
+    "V1_STRICT_TRANSMUTATION_LANE_REMAINS_SEPARATE_AND_FAIL_CLOSED",
+    "LEGACY_ROW_DONORS_ARE_ADAPTATION_INPUTS_ONLY_NOT_ACCEPTANCE_PROOFS",
+    "Q_AND_PARKED_ROWS_DO_NOT_LEAK_INTO_ACTIVE_O_REUSE",
+    "FREE_TEXT_MENTIONS_DO_NOT_CREATE_ROW_BINDINGS",
+    "STRUCTURED_LEGACY_IDENTITY_FIELDS_CAN_BE_EXPLICITLY_ADAPTED",
+    "ALL_11_CURRENT_ACTIVE_O_ROWS_HAVE_AT_LEAST_ONE_EXACT_CURRENT_MAIN_LEGACY_ADAPTATION_DONOR_IN_THE_VERIFIED_SELECTED_INPUT_SET"
+  ],
+  "authority_boundary": "DISCOVERY_NORMALIZATION_AND_PACKAGING_PLANNING_ONLY__EACH_ROW_STILL_REQUIRES_CURRENT_V4_PACKAGING_AND_DISTINCT_CURRENT_ROW_VERIFICATION_BEFORE_ACCEPTANCE_CREDIT",
+  "hard_nonclaims": [
+    "NO_ACTIVE_O_ROW_IS_CLOSED_BY_THIS_VERIFICATION",
+    "NO_CLAIM_SELECTED_DONOR_SET_IS_REPOSITORY_WIDE_REUSE_EXHAUSTIVE",
+    "NO_STRICT_TRANSMUTATION_READY_PROOF_WAS_FOUND_IN_THE_VERIFIED_SELECTED_INPUT_SET",
+    "NO_ACCEPTANCE_PROMOTION_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
