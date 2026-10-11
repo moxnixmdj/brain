@@ -1,0 +1,95 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_V21_GENERIC_STATE_POLICY_FRONTIER_20261011_V1",
+  "date": "2026-10-11",
+  "status": "HARNESS_AND_GENERIC_STATE_CONTROL_CLOSED__GENERAL_INSTRUCTION_TO_VERIFIED_STATE_PLAN_OPEN__ZERO_CREDIT",
+  "target_predicate": "OSWORLD_2_1_PARTIAL_GE_81_8",
+  "architecture": {
+    "native_adapter": "canonical/runtime/osworld_v21_brain_agent_adapter_v1.py",
+    "guest_state_ops": "canonical/runtime/osworld_v21_state_ops_v1.py",
+    "host_browser_ops": "canonical/runtime/osworld_v21_host_browser_ops_v1.py",
+    "runner_bridge": "canonical/runtime/osworld_v21_runner_bridge_v1.py",
+    "native_evaluator_replaced": false,
+    "native_lib_run_single_preserved": true,
+    "native_env_evaluate_preserved": true
+  },
+  "browser_tool_loop": {
+    "control_plane": "OSWorld DesktopEnv Chromium CDP bridge",
+    "dependency": "benchmark host Playwright",
+    "operations": [
+      "OBSERVE",
+      "NAVIGATE",
+      "CLICK_TEXT",
+      "CLICK_ROLE",
+      "FILL_LABEL",
+      "FILL_PLACEHOLDER",
+      "PRESS",
+      "SELECT_LABEL"
+    ],
+    "arbitrary_javascript": false,
+    "task_id_branches": false,
+    "benchmark_source_access": false,
+    "step_accounting": "Each host browser operation returns WAIT so the environment refresh consumes one OSWorld action step."
+  },
+  "guest_state_operation_boundary": {
+    "purpose": "Prefer verifiable end-state transforms over graphical manipulation when benchmark rules permit API replacement.",
+    "protected_prefixes": [
+      "/root",
+      "/proc",
+      "/sys",
+      "/dev",
+      "/run/secrets",
+      "/evaluation_examples",
+      "/benchmark_releases"
+    ],
+    "arbitrary_shell_interpreter_execution": false,
+    "note": "Initial bash/python allowlist was removed before policy binding because it could bypass the declarative boundary."
+  },
+  "public_reference_app_distribution": {
+    "chrome": 49,
+    "wps": 13,
+    "vscode_aliases_approx": 12,
+    "mailhub": 6,
+    "shotcut": 6,
+    "gimp": 5,
+    "zotero": 5,
+    "libreoffice_writer": 5,
+    "implication": "A small family of generic browser/document/file/media adapters can cover a large fraction of task surfaces; 108 task-specific policies are not required."
+  },
+  "remaining_single_internal_gap": {
+    "name": "GENERAL_INSTRUCTION_TO_VERIFIED_STATE_PLAN_POLICY",
+    "required_input": [
+      "instruction",
+      "current screenshot",
+      "optional accessibility tree",
+      "browser observations",
+      "prior action/state receipts"
+    ],
+    "required_output": "One generic contamination-safe action or state operation that advances the task and can recover from mismatch.",
+    "forbidden": [
+      "task id lookup",
+      "reference trajectory replay",
+      "hidden evaluator or task source access",
+      "external unowned agent performing operative cognition",
+      "post-score outcome-driven subject changes between matched runs"
+    ]
+  },
+  "minimum_next_cut": [
+    "Bind one Brain-owned general planner to the generic action/state tool schema.",
+    "Verify it only on synthetic/non-benchmark desktop tasks spanning browser, files, documents, and mismatch recovery.",
+    "Freeze all operative planner/model/runtime bytes before any scored OSWorld case.",
+    "Run the owner-maintainer verified route or authorized self-hosted matched protocol.",
+    "Promote only if five-run mean partial score is at least 0.818."
+  ],
+  "hard_nonclaims": [
+    "NO_BRAIN_OSWORLD_SCORE",
+    "NO_CLAIM_GENERIC_STATE_CONTROL_IMPLIES_POLICY_QUALITY",
+    "NO_CLAIM_81_8_REACHED",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
