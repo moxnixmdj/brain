@@ -37,7 +37,7 @@
       },
       {
         "path": "canonical/governance/CURRENT_FRONTIERCODE_CAPABILITY_FIRST_RECONCILIATION_20261011_V1.json",
-        "git_blob_sha": "6a708375e542de18e07f81a457af0a97d832b80d"
+        "git_blob_sha": "b0f968b9c78bbf01b71864feb078e6d8dbba26fe"
       }
     ],
     "base_main_commit_role": "OBSERVED_BEFORE_RECONCILIATION_COMMIT__DIAGNOSTIC_ONLY__CURRENT_POINTER_PATHS_WIN_ON_DRIFT"
@@ -80,12 +80,12 @@
   ],
   "candidates": [
     {
-      "work_id": "CODING_GENERAL_SOFTWARE_REPAIR_LOOP_V4",
+      "work_id": "CODING_GENERAL_SOFTWARE_REPAIR_LOOP_V5",
       "work_type": "CAPABILITY_BUILD",
       "frontier_class": "GENERAL_SOFTWARE_ENGINEERING",
       "source": "canonical/governance/CURRENT_FRONTIERCODE_CAPABILITY_FIRST_RECONCILIATION_20261011_V1.json",
-      "causal_role": "EXTEND_VERIFIED_NONMONOTONIC_COUPLED_PAIR_REPAIR_AND_SYMBOL_RANKING_TO_DYNAMIC_EXECUTION_TRACE_AND_DATAFLOW_SEMANTIC_LOCALIZATION__FRONTIERCODE_REMAINS_LATER_AUDIT",
-      "readiness": "READY_EXECUTION__NONMONOTONIC_SAME_AND_CROSS_FILE_TWO_EDIT_REPAIR_INDEPENDENTLY_VERIFIED__SYMBOL_RANKING_VERIFIED__GENERAL_SEMANTIC_CAUSAL_LOCALIZATION_REMAINS",
+      "causal_role": "COMPOSE_VERIFIED_DYNAMIC_SPECTRUM_SYMBOL_DEF_USE_LOCALIZATION_WITH_COUPLED_REPAIR_AND_EXTEND_TO_INTERPROCEDURAL_VALUE_PROVENANCE__FRONTIERCODE_REMAINS_LATER_AUDIT",
+      "readiness": "READY_EXECUTION__NONMONOTONIC_COUPLED_PAIR_REPAIR_VERIFIED__DYNAMIC_FAILING_VS_PASSING_SPECTRUM_SYMBOL_OWNERSHIP_AND_BACKWARD_DEF_USE_INDEPENDENTLY_VERIFIED__INTERPROCEDURAL_VALUE_PROVENANCE_REMAINS",
       "claims_new_primitive": true,
       "score_state": "NOT_A_BENCHMARK_SCORE_TASK",
       "scheduler_state": "READY_EXECUTION",
@@ -104,7 +104,7 @@
       "vector_evidence": {},
       "read_only_evidence": {
         "capability_frontier_path": "canonical/governance/CURRENT_FRONTIERCODE_CAPABILITY_FIRST_RECONCILIATION_20261011_V1.json",
-        "capability_frontier_git_blob_sha": "6a708375e542de18e07f81a457af0a97d832b80d",
+        "capability_frontier_git_blob_sha": "b0f968b9c78bbf01b71864feb078e6d8dbba26fe",
         "verified_patch_search_capability": "python.patch.search.test_guided.ast.v1",
         "verified_sequential_multi_edit_capability": "python.software.repair.loop.test_guided.ast.v1",
         "verified_strict_progress_capability": "python.software.repair.loop.strict_progress.ast.v1",
@@ -116,9 +116,13 @@
         "frontiercode_score_credit": 0,
         "verified_coupled_capability": "python.software.repair.loop.coupled.ast.v1",
         "coupled_verification_path": "canonical/verification/PYTHON_COUPLED_REPAIR_LOOP_V1_VERIFY_20261011_V1.json",
-        "coupled_replay": "PRIMARY_8_OF_8__SECOND_SPRITE_8_OF_8"
+        "coupled_replay": "PRIMARY_8_OF_8__SECOND_SPRITE_8_OF_8",
+        "verified_dynamic_localizer": "python.fault.localize.dynamic.dataflow.v1",
+        "dynamic_localizer_verification_path": "canonical/verification/PYTHON_DYNAMIC_FAULT_LOCALIZER_V1_VERIFY_20261011_V1.json",
+        "dynamic_localizer_replay": "PRIMARY_7_OF_7__SECOND_SPRITE_7_OF_7",
+        "proved_localization": "FAILING_ONLY_EXECUTION_OUTRANKS_SHARED_OR_PASSING_ONLY_CODE__AST_SYMBOL_OWNERSHIP__INTRA_SYMBOL_BACKWARD_DEF_USE"
       },
-      "ready": "BUILD_GENERAL_SOFTWARE_REPAIR_LOOP_V4__TARGET_DYNAMIC_EXECUTION_TRACE_AND_DATAFLOW_SEMANTIC_LOCALIZATION__DO_NOT_WAIT_FOR_BENCHMARK_OWNER"
+      "ready": "BUILD_GENERAL_SOFTWARE_REPAIR_LOOP_V5__TARGET_INTERPROCEDURAL_VALUE_PROVENANCE_AND_LOCALIZER_GUIDED_COUPLED_REPAIR__DO_NOT_WAIT_FOR_BENCHMARK_OWNER"
     },
     {
       "work_id": "PROFESSIONAL_QUALITY_V7_PROPERTY_TRUTH_DEPLETION",
@@ -620,7 +624,7 @@
     "new_primitive_required": false,
     "terminal_credit_delta": 0
   },
-  "exact_next": "PARALLEL:CODING_GENERAL_SOFTWARE_REPAIR_LOOP_V4_PLUS_CURRENT_BYTES_RESOURCE_PARETO_CUT_PLUS_OTHER_NONCONFLICTING_CAPABILITY_FIRST_GENERAL_DEVELOPMENT__PROFESSIONAL_WAKES_ONLY_ON_ZERO_SPEND_CARRIER_STATE_CHANGE_OR_STRONGER_VALID_REGRESSION_RECEIPT",
+  "exact_next": "PARALLEL:CODING_GENERAL_SOFTWARE_REPAIR_LOOP_V5_PLUS_CURRENT_BYTES_RESOURCE_PARETO_CUT_PLUS_OTHER_NONCONFLICTING_CAPABILITY_FIRST_GENERAL_DEVELOPMENT__PROFESSIONAL_WAKES_ONLY_ON_ZERO_SPEND_CARRIER_STATE_CHANGE_OR_STRONGER_VALID_REGRESSION_RECEIPT",
   "professional_semantic_v2_successor_claim_batch_current": {
     "status": "INDEPENDENTLY_VERIFIED__CLAIM_AND_SCOPE_GENERATION_COMPLETE__PROPERTY_TRUTH_NEXT",
     "batch": {
