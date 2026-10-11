@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_TARGET_TRIAL_AGGREGATION_CLOSURE_20261011_V1",
+  "date": "2026-10-11",
+  "status": "CLOSED__FIVE_TRIAL_STANDARD_CONFIG_APPLIES_TO_HLE__CONSERVATIVE_RAW_THRESHOLD_8463_OF_12500__GRADER_BINDING_STILL_OPEN",
+  "target": {
+    "benchmark": "Humanity's Last Exam",
+    "variant": "with tools",
+    "reported_percent": 67.7,
+    "population_per_trial": 2500,
+    "trials": 5,
+    "total_graded_slots": 12500
+  },
+  "evidence": {
+    "first_party_launch": {
+      "url": "https://www.anthropic.com/claude-opus-5-5",
+      "claim": "HLE with tools is reported as 67.7%; Opus 5.5 results use adaptive thinking at max effort unless otherwise noted."
+    },
+    "system_card_text_mirror": {
+      "repository": "malob/ai-system-cards",
+      "commit": "282a67c3c79617b23a1a23ed0869239b6e28d139",
+      "path": "cards/anthropic/claude-opus-5-5/sections/08a-capabilities-1.md",
+      "git_blob_sha1": "ea5e613fcbed1153e797c28f5fc4429f60587f4e",
+      "table_8_1_a_claim": "Unless otherwise noted, all Claude Opus 5.5 results use adaptive thinking at max effort, default sampling settings, averaged over five trials; HLE no-tools and with-tools rows are in this table and HLE is not marked as a trial-count exception.",
+      "hle_section_claim": "Section 8.11.1 states 2,500 questions; with-tools uses web search, web fetch, programmatic tool calling and code execution; thinking auto; total tokens across contexts capped at 1M; no context compaction; Claude Opus 4.6 is model grader."
+    }
+  },
+  "arithmetic": {
+    "raw_target_fraction": 0.677,
+    "raw_target_success_mass": 8462.5,
+    "conservative_min_integer_successes": 8463,
+    "conservative_raw_percent": 67.704,
+    "rule": "Use ceil(0.677*12500). Do not exploit publication rounding; proving >=67.7 raw is strictly sufficient."
+  },
+  "resolved": [
+    "TARGET_TRIAL_COUNT_IS_FIVE",
+    "TARGET_POPULATION_IS_2500_PER_TRIAL",
+    "TARGET_TOTAL_SLOT_COUNT_IS_12500",
+    "CONSERVATIVE_RAW_SUCCESS_THRESHOLD_IS_8463"
+  ],
+  "still_open": [
+    "EXACT_CLAUDE_OPUS_4_6_GRADER_PROMPT_DECODING_AND_EDGE_POLICY_OR_EQUIVALENT_RECEIPT",
+    "BRAIN_NATIVE_SOLVER_SCORE_ADEQUACY",
+    "AUTHORIZED_ZERO_COST_EXECUTION_CHANNEL_COMBINING_GATED_DATASET_WITH_WEB_RETRIEVAL"
+  ],
+  "hard_nonclaims": [
+    "NO_BRAIN_HLE_SCORE_CLAIM",
+    "NO_TERMINAL_HLE_RUN_CLAIM",
+    "NO_CLAIM_THE_UNPUBLISHED_TARGET_GRADER_IS_REPRODUCED",
+    "NO_USE_OF_ROUNDED_REPORTING_TO_LOWER_THE_8463_CONSERVATIVE_THRESHOLD"
+  ],
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
