@@ -29,8 +29,7 @@
   },
   "first_carrier": {
     "sprite": "brain-capability-first-scheduler-verify-20261008-v1",
-    "exact_branch_bytes": false,
-    "exact_semantically_identical_pre_freeze_bytes": true,
+    "exact_branch_bytes": true,
     "tests_executed": 8,
     "tests_passed": 8,
     "elapsed_reported_s": 5.632
