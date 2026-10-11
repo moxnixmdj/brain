@@ -2305,6 +2305,22 @@ def compile_hypotheses(
         if _consistent(h, pairs):
             candidates.append(h)
 
+    immediate_gap = _infer_immediate_equal_gap(pairs)
+    if immediate_gap is not None:
+        axis, source_color, fill_color = immediate_gap
+        h = {
+            "kind": "FILL_IMMEDIATE_EQUAL_GAP",
+            "axis": axis,
+            "source_color": source_color,
+            "fill_color": fill_color,
+        }
+        if _consistent(h, pairs):
+            candidates.append(h)
+
+    h = {"kind": "EXTEND_CORE_DIAGONAL_SEEDS"}
+    if _consistent(h, pairs):
+        candidates.append(h)
+
     crop = {"kind": "CROP_NON_BACKGROUND"}
     if _consistent(crop, pairs):
         candidates.append(crop)
@@ -2399,6 +2415,8 @@ def compile_hypotheses(
             "SINGLETON_MOVE_TOWARD_RELATION",
             "BOUNDING_BOX_QUARTER_TURN_ORBIT_COMPLETION",
             "CAP_COMPONENT_BOTTOM_MARKER_PROJECTION",
+            "IMMEDIATE_EQUAL_NEIGHBOR_GAP_FILL",
+            "CORE_DIAGONAL_SEED_RAY_EXTENSION",
             "NON_BACKGROUND_BOUNDING_BOX_CROP",
             "UNIQUE_LARGEST_OR_SMALLEST_COMPONENT_CROP",
         ],
