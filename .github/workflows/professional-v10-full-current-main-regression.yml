@@ -1,0 +1,31 @@
+name: Professional V10 full current-main regression
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'canonical/**'
+      - 'tests/**'
+      - '.github/workflows/professional-v10-full-current-main-regression.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  full-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Compile canonical Python
+        run: python -m compileall -q canonical
+      - name: Run full canonical unittest corpus
+        run: python -m unittest discover -s canonical/tests -p 'test_*.py' -v
+      - name: Run root unittest corpus
+        run: |
+          if [ -d tests ]; then
+            python -m unittest discover -s tests -p 'test_*.py' -v
+          fi
