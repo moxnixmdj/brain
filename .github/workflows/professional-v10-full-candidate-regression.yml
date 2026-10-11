@@ -1,0 +1,31 @@
+name: Professional V10 full candidate regression
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'canonical/**'
+      - '.github/workflows/professional-v10-full-candidate-regression.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  full-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Compile canonical Python
+        run: python -m compileall -q canonical
+      - name: Run canonical test corpus
+        run: python -m unittest discover -s canonical/tests -p 'test_*.py' -v
+      - name: Run repository root tests
+        run: |
+          if [ -d tests ]; then
+            python -m unittest discover -s tests -p 'test_*.py' -v
+          fi
