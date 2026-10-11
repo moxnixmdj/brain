@@ -671,6 +671,15 @@ def _local_feature(grid: Grid, r: int, c: int, feature: str) -> str:
         row_set = ",".join(str(x) for x in sorted(set(grid[r])))
         col_set = ",".join(str(x) for x in sorted({grid[rr][c] for rr in range(h)}))
         return f"{v}|R:{row_set}|C:{col_set}"
+    if feature == "COLOR_MULTISET_8":
+        values: list[int] = []
+        for dr in (-1, 0, 1):
+            for dc in (-1, 0, 1):
+                if dr == 0 and dc == 0:
+                    continue
+                rr, cc = r + dr, c + dc
+                values.append(grid[rr][cc] if 0 <= rr < h and 0 <= cc < w else -1)
+        return f"{v}|" + ",".join(str(x) for x in sorted(values))
     raise ARCNoveltyCompilerError("LOCAL_FEATURE_UNSUPPORTED")
 
 
@@ -1276,6 +1285,7 @@ def compile_hypotheses(
         ("LOCAL_NEIGHBORHOOD_RULE", "BIN_CROSS"),
         ("OBJECT_PROPERTY_RECOLOR", "DENSITY"),
         ("LOCAL_NEIGHBORHOOD_RULE", "COLOR_ROWCOL_SETS"),
+        ("LOCAL_NEIGHBORHOOD_RULE", "COLOR_MULTISET_8"),
     )
     for kind, feature in ordered_structural_hypotheses:
         if kind == "LOCAL_NEIGHBORHOOD_RULE":
