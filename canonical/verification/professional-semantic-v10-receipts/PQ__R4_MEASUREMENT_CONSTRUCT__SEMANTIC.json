@@ -1,0 +1,29 @@
+{
+  "acceptance_sha256": "630ee7e848b2a7306f23bd995840d8613d76441919fc79d3ef7a0035201bcb88",
+  "cc_r1_reality_containment_proved": true,
+  "cc_r2_mission_soundness_proved": true,
+  "cc_r3_terminal_closure_proved": true,
+  "claim_scoped_totality_proved": true,
+  "closure_scope": "EXACT_LEAF",
+  "leaf_id": "PQ::R4_MEASUREMENT_CONSTRUCT::SEMANTIC",
+  "leaf_kind": "SEMANTIC",
+  "leaf_semantic_satisfied": true,
+  "manifest_git_blob_sha": "8ae72d7d44047ac9dec1b014c34a44f9933f0215",
+  "r4_proof_realization_authority": true,
+  "root_contract_sha256": "3eb55ad1bf6c8724c403cb5f6bfc41a1616c500277377151a5ed2f6e9e87f603",
+  "root_id": "R4_MEASUREMENT_CONSTRUCT",
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_LEAF_VERIFICATION_RECEIPT_V1",
+  "semantic_claim_id": "16a5ea4270e1a575ed9c071bfcbed2f591e7da0f249bbe04ef1d2d73cf420325",
+  "semantic_scope_sha256": "2df4393971d590adeec30b0fdeff9b171337508e95e182092ddaf08f180c9443",
+  "semantic_semantics_sha256": "a625568bec830825131c0fcab91f320df315f0c2eceef04c19c984eddef003ad",
+  "semantic_target_predicate_sha256": "630ee7e848b2a7306f23bd995840d8613d76441919fc79d3ef7a0035201bcb88",
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "verdict": "PASS",
+  "verification_basis": [
+    {
+      "git_blob_sha": "5df7f2b20a8b0dc7657fb92f978eb409816356b0",
+      "path": "canonical/verification/professional-semantic-v10-totality/PQ__R4_MEASUREMENT_CONSTRUCT__SEMANTIC.json"
+    }
+  ]
+}

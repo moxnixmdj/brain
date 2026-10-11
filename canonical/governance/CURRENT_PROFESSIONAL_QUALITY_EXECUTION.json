@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_PROFESSIONAL_QUALITY_EXECUTION_POINTER_V1",
   "date": "2026-10-10",
-  "status": "P1_V3_LIVE_UNCHANGED__V10_PARAMETERIZED_SEMANTIC_ADMISSION_VERIFIED__12_OF_12_TRUTH_REPAIRED_V10_SEMANTIC_CLAIMS_SCOPE_COMPLETE__PROPERTY_TRUTH_12_OF_24__ALL_12_EXECUTION_LEAVES_VERIFIED__AUTHENTIC_POSITIVE_SEMANTIC_RECEIPTS_OPEN__NOT_LIVE_DEFAULT",
+  "status": "P1_V3_LIVE_UNCHANGED__V10_SEMANTIC_TOTALITY_BATCH_SECOND_CARRIER_VERIFIED__PROPERTY_TRUTH_24_OF_24__ALL_12_EXECUTION_AND_12_SEMANTIC_LEAVES_VERIFIED__FULL_PRIVATE_CURRENT_MAIN_REGRESSION_OPEN__NOT_LIVE_DEFAULT",
   "profile_path": "canonical/governance/PROFESSIONAL_QUALITY_P1_EXECUTION_PROFILE_20261010_V3.json",
   "profile_sha": "f7e89eafbb691c16d1bdf5b8d295a468d5e3bec5",
   "router_path": "canonical/runtime/professional_quality_p1_router_v3.py",
@@ -528,27 +528,39 @@
     "terminal_credit_delta": 0
   },
   "property_truth_frontier": {
-    "verified_leaf_count": 12,
+    "verified_leaf_count": 24,
     "total_leaf_count": 24,
     "verified_leaf_ids": [
       "PQ::R10_ANALYSIS_DECISION::EXECUTION",
+      "PQ::R10_ANALYSIS_DECISION::SEMANTIC",
       "PQ::R11_ADAPTIVE_INTEGRITY_SECURITY::EXECUTION",
+      "PQ::R11_ADAPTIVE_INTEGRITY_SECURITY::SEMANTIC",
       "PQ::R12_META_COMPOSITION_CLOSURE::EXECUTION",
+      "PQ::R12_META_COMPOSITION_CLOSURE::SEMANTIC",
       "PQ::R1_TARGET_SPECIFICATION::EXECUTION",
+      "PQ::R1_TARGET_SPECIFICATION::SEMANTIC",
       "PQ::R2_CANDIDATE_SEARCH::EXECUTION",
+      "PQ::R2_CANDIDATE_SEARCH::SEMANTIC",
       "PQ::R3_REALIZATION_OBSERVATION::EXECUTION",
+      "PQ::R3_REALIZATION_OBSERVATION::SEMANTIC",
       "PQ::R4_MEASUREMENT_CONSTRUCT::EXECUTION",
+      "PQ::R4_MEASUREMENT_CONSTRUCT::SEMANTIC",
       "PQ::R5_EVALUATOR_REFERENCE::EXECUTION",
+      "PQ::R5_EVALUATOR_REFERENCE::SEMANTIC",
       "PQ::R6_EVIDENCE_GROUNDING_DEPENDENCE::EXECUTION",
+      "PQ::R6_EVIDENCE_GROUNDING_DEPENDENCE::SEMANTIC",
       "PQ::R7_CAUSAL_PRESCRIPTIVE::EXECUTION",
+      "PQ::R7_CAUSAL_PRESCRIPTIVE::SEMANTIC",
       "PQ::R8_POPULATION_CONTEXT_OPERATOR::EXECUTION",
-      "PQ::R9_TEMPORAL_DEPLOYMENT::EXECUTION"
+      "PQ::R8_POPULATION_CONTEXT_OPERATOR::SEMANTIC",
+      "PQ::R9_TEMPORAL_DEPLOYMENT::EXECUTION",
+      "PQ::R9_TEMPORAL_DEPLOYMENT::SEMANTIC"
     ],
-    "open_leaf_count": 12,
+    "open_leaf_count": 0,
     "verified_execution_leaf_count": 12,
     "open_execution_leaf_count": 0,
-    "verified_semantic_leaf_count": 0,
-    "open_semantic_leaf_count": 12,
+    "verified_semantic_leaf_count": 12,
+    "open_semantic_leaf_count": 0,
     "r10_execution": {
       "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_R10_EXECUTION_PROPERTY_TRUTH_INDEPENDENT_VERIFY_20261010_V1.json",
       "verification_git_blob_sha": "cfa1f178e149dbd987a52e9825dc67960dbade4c",
@@ -573,7 +585,7 @@
       "current_defeater_catalog_git_blob_sha": "8b92e5cf76f767054f55414b87014e03d43460b8",
       "catalog_explicit_complete_claim": false,
       "catalog_hard_nonclaim": "NO_CLAIM_DEFEATER_SET_COMPLETE",
-      "consequence": "V2_SUCCESSOR_CLAIMS_AND_WHOLE_SCOPE_ARE_NOW_CLOSED__DO_NOT_REOPEN_SCOPE__PROVE_PROPERTY_TRUTH_ON_THE_12_FRESH_CLAIMS_USING_SHARED_CERTIFY_OR_FAIL_CLOSED_REUSE_MACHINERY__KEEP_12_OF_24_UNCHANGED_UNTIL_RECEIPTS_PASS",
+      "consequence": "RESOLVED_FOR_EXACT_V10_CLAIMS_BY_SECOND_CARRIER_VERIFIED_FAIL_CLOSED_WHOLE_DOMAIN_TOTALITY_PLUS_BOUNDED_POSITIVE_NONVACUITY__NO_QUALITY_OR_TERMINAL_CREDIT",
       "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_SEMANTIC_SHARED_BLOCKER_INDEPENDENT_VERIFY_20261010_V1.json",
       "verification_git_blob_sha": "d5218f612e282f1b9339b5b3e84b5c74282b7042",
       "independently_verified": true,
@@ -601,7 +613,16 @@
         "git_blob_sha": "6f2464d8020c2561e1a721887de9dc59f1f0981b"
       },
       "successor_claim_count": 12,
-      "successor_scope_complete_count": 12
+      "successor_scope_complete_count": 12,
+      "semantic_property_truth_closed": true,
+      "resolution_verification": {
+        "batch_path": "canonical/governance/PROFESSIONAL_SEMANTIC_V10_AUTHENTIC_POSITIVE_RECEIPT_BATCH_20261011_V1.json",
+        "batch_git_blob_sha": "be9b8d1f441675ba0e275f582b144c0e5c662119",
+        "independent_verification_path": "canonical/verification/PROFESSIONAL_SEMANTIC_V10_TOTALITY_BATCH_INDEPENDENT_VERIFY_20261011_V1.json",
+        "independent_verification_git_blob_sha": "618b43baa389fd4cf4c5a1a7dc1164419f91a61b",
+        "admitted_semantic_leaf_count": 12,
+        "semantic_property_truth_count": 12
+      }
     },
     "r1_execution": {
       "verification_path": "canonical/verification/PROFESSIONAL_QUALITY_R1_EXECUTION_PROPERTY_TRUTH_INDEPENDENT_VERIFY_20261010_V1.json",
@@ -695,6 +716,15 @@
       "leaf_property_truth_authority": true,
       "root_closed": false,
       "semantic_leaf_closed": false
+    },
+    "full_current_main_regression_open": true,
+    "semantic_v10_totality_batch": {
+      "batch_path": "canonical/governance/PROFESSIONAL_SEMANTIC_V10_AUTHENTIC_POSITIVE_RECEIPT_BATCH_20261011_V1.json",
+      "batch_git_blob_sha": "be9b8d1f441675ba0e275f582b144c0e5c662119",
+      "independent_verification_path": "canonical/verification/PROFESSIONAL_SEMANTIC_V10_TOTALITY_BATCH_INDEPENDENT_VERIFY_20261011_V1.json",
+      "independent_verification_git_blob_sha": "618b43baa389fd4cf4c5a1a7dc1164419f91a61b",
+      "admitted_semantic_leaf_count": 12,
+      "semantic_property_truth_count": 12
     }
   },
   "leaf_registry_verification": {
@@ -786,7 +816,7 @@
     "quality_authority": false,
     "terminal_authority": false
   },
-  "exact_next": "PROFESSIONAL:COMPILE_EXISTING_12_BOUNDED_SEMANTIC_WITNESSES_INTO_EXACT_V10_CLAIM_BOUND_INDEPENDENT_TOTALITY_VERIFICATIONS__THEN_ADMIT_ONE_AUTHENTIC_POSITIVE_SEMANTIC_RECEIPT_PER_ROOT__DO_NOT_REOPEN_SUBJECT_CLAIM_OR_SCOPE_CONSTRUCTION__KEEP_PROPERTY_TRUTH_12_OF_24_UNCHANGED_UNTIL_INDEPENDENT_RECEIPTS_PASS",
+  "exact_next": "RUN_FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION__IF_AND_ONLY_IF_PASS_RECONCILE_UVCK_V2_ASSURANCE_COMPILER_PROMOTION__KEEP_QUALITY_ACCEPTANCE_PROMOTION_AND_TERMINAL_AUTHORITY_FALSE_UNTIL_SEPARATE_GATES_PASS",
   "r12_v8_reuse_closure_current": {
     "path": "canonical/governance/PROFESSIONAL_V8_R12_REUSE_CLOSURE_20261010_V1.json",
     "git_blob_sha": "5ee3d7405ac9a16e6d872b3e05a147ec10abd419",

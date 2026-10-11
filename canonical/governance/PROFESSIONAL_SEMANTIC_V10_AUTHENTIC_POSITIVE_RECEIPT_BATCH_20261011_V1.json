@@ -1,0 +1,139 @@
+{
+  "acceptance_authority": false,
+  "admitted_semantic_leaf_count": 12,
+  "admitted_semantic_leaf_ids": [
+    "PQ::R10_ANALYSIS_DECISION::SEMANTIC",
+    "PQ::R11_ADAPTIVE_INTEGRITY_SECURITY::SEMANTIC",
+    "PQ::R12_META_COMPOSITION_CLOSURE::SEMANTIC",
+    "PQ::R1_TARGET_SPECIFICATION::SEMANTIC",
+    "PQ::R2_CANDIDATE_SEARCH::SEMANTIC",
+    "PQ::R3_REALIZATION_OBSERVATION::SEMANTIC",
+    "PQ::R4_MEASUREMENT_CONSTRUCT::SEMANTIC",
+    "PQ::R5_EVALUATOR_REFERENCE::SEMANTIC",
+    "PQ::R6_EVIDENCE_GROUNDING_DEPENDENCE::SEMANTIC",
+    "PQ::R7_CAUSAL_PRESCRIPTIVE::SEMANTIC",
+    "PQ::R8_POPULATION_CONTEXT_OPERATOR::SEMANTIC",
+    "PQ::R9_TEMPORAL_DEPLOYMENT::SEMANTIC"
+  ],
+  "date": "2026-10-11",
+  "incremental_spend_usd": 0,
+  "promotion_authority": false,
+  "property_truth_count": 12,
+  "quality_authority": false,
+  "records": [
+    {
+      "binder_status": "PASS__EXACT_CURRENT_CLAIM_PLUS_FOUR_ROOT_TOTALITY_AND_R4",
+      "leaf_id": "PQ::R10_ANALYSIS_DECISION::SEMANTIC",
+      "receipt_git_blob_sha": "41c6246124b5083150a23505105293eaf3be40d4",
+      "receipt_path": "canonical/verification/professional-semantic-v10-receipts/PQ__R10_ANALYSIS_DECISION__SEMANTIC.json",
+      "root_id": "R10_ANALYSIS_DECISION",
+      "totality_git_blob_sha": "982c352109f951b3236c22f315c8e216014f9553",
+      "totality_path": "canonical/verification/professional-semantic-v10-totality/PQ__R10_ANALYSIS_DECISION__SEMANTIC.json"
+    },
+    {
+      "binder_status": "PASS__EXACT_CURRENT_CLAIM_PLUS_FOUR_ROOT_TOTALITY_AND_R4",
+      "leaf_id": "PQ::R11_ADAPTIVE_INTEGRITY_SECURITY::SEMANTIC",
+      "receipt_git_blob_sha": "27572c6ecbdd13015265d7dc75ed0e1d7b27ade2",
+      "receipt_path": "canonical/verification/professional-semantic-v10-receipts/PQ__R11_ADAPTIVE_INTEGRITY_SECURITY__SEMANTIC.json",
+      "root_id": "R11_ADAPTIVE_INTEGRITY_SECURITY",
+      "totality_git_blob_sha": "feaaf7e107b61194005711053c04ead18dfd3882",
+      "totality_path": "canonical/verification/professional-semantic-v10-totality/PQ__R11_ADAPTIVE_INTEGRITY_SECURITY__SEMANTIC.json"
+    },
+    {
+      "binder_status": "PASS__EXACT_CURRENT_CLAIM_PLUS_FOUR_ROOT_TOTALITY_AND_R4",
+      "leaf_id": "PQ::R12_META_COMPOSITION_CLOSURE::SEMANTIC",
+      "receipt_git_blob_sha": "618a6c4d0992eb4f8a55039d4408900c1f0ccefd",
+      "receipt_path": "canonical/verification/professional-semantic-v10-receipts/PQ__R12_META_COMPOSITION_CLOSURE__SEMANTIC.json",
+      "root_id": "R12_META_COMPOSITION_CLOSURE",
+      "totality_git_blob_sha": "9930dedcbb6f9026448b749e5dff10032291e73a",
+      "totality_path": "canonical/verification/professional-semantic-v10-totality/PQ__R12_META_COMPOSITION_CLOSURE__SEMANTIC.json"
+    },
+    {
+      "binder_status": "PASS__EXACT_CURRENT_CLAIM_PLUS_FOUR_ROOT_TOTALITY_AND_R4",
+      "leaf_id": "PQ::R1_TARGET_SPECIFICATION::SEMANTIC",
+      "receipt_git_blob_sha": "c183795cf25576028e9fa00ae8a4f51559ed7f09",
+      "receipt_path": "canonical/verification/professional-semantic-v10-receipts/PQ__R1_TARGET_SPECIFICATION__SEMANTIC.json",
+      "root_id": "R1_TARGET_SPECIFICATION",
+      "totality_git_blob_sha": "1ecad9ecbe7d30c0ef94662fc3887079040f0ae6",
+      "totality_path": "canonical/verification/professional-semantic-v10-totality/PQ__R1_TARGET_SPECIFICATION__SEMANTIC.json"
+    },
+    {
+      "binder_status": "PASS__EXACT_CURRENT_CLAIM_PLUS_FOUR_ROOT_TOTALITY_AND_R4",
+      "leaf_id": "PQ::R2_CANDIDATE_SEARCH::SEMANTIC",
+      "receipt_git_blob_sha": "ab59523e59326dce6e2262dfe33d6e15c6598db5",
+      "receipt_path": "canonical/verification/professional-semantic-v10-receipts/PQ__R2_CANDIDATE_SEARCH__SEMANTIC.json",
+      "root_id": "R2_CANDIDATE_SEARCH",
+      "totality_git_blob_sha": "410e697ee9fda8ef8469089d301ab66c8941a544",
+      "totality_path": "canonical/verification/professional-semantic-v10-totality/PQ__R2_CANDIDATE_SEARCH__SEMANTIC.json"
+    },
+    {
+      "binder_status": "PASS__EXACT_CURRENT_CLAIM_PLUS_FOUR_ROOT_TOTALITY_AND_R4",
+      "leaf_id": "PQ::R3_REALIZATION_OBSERVATION::SEMANTIC",
+      "receipt_git_blob_sha": "1ef60c53add128cb58c280d6c8bccfc365904998",
+      "receipt_path": "canonical/verification/professional-semantic-v10-receipts/PQ__R3_REALIZATION_OBSERVATION__SEMANTIC.json",
+      "root_id": "R3_REALIZATION_OBSERVATION",
+      "totality_git_blob_sha": "a561cc14f24f91b389439f4d7ea07952782ae886",
+      "totality_path": "canonical/verification/professional-semantic-v10-totality/PQ__R3_REALIZATION_OBSERVATION__SEMANTIC.json"
+    },
+    {
+      "binder_status": "PASS__EXACT_CURRENT_CLAIM_PLUS_FOUR_ROOT_TOTALITY_AND_R4",
+      "leaf_id": "PQ::R4_MEASUREMENT_CONSTRUCT::SEMANTIC",
+      "receipt_git_blob_sha": "ce2aba34c6e115fa2bfaba60f0936fefc4441283",
+      "receipt_path": "canonical/verification/professional-semantic-v10-receipts/PQ__R4_MEASUREMENT_CONSTRUCT__SEMANTIC.json",
+      "root_id": "R4_MEASUREMENT_CONSTRUCT",
+      "totality_git_blob_sha": "5df7f2b20a8b0dc7657fb92f978eb409816356b0",
+      "totality_path": "canonical/verification/professional-semantic-v10-totality/PQ__R4_MEASUREMENT_CONSTRUCT__SEMANTIC.json"
+    },
+    {
+      "binder_status": "PASS__EXACT_CURRENT_CLAIM_PLUS_FOUR_ROOT_TOTALITY_AND_R4",
+      "leaf_id": "PQ::R5_EVALUATOR_REFERENCE::SEMANTIC",
+      "receipt_git_blob_sha": "ded8f2392bef35aa1d2039b848d5feccbdeb00cc",
+      "receipt_path": "canonical/verification/professional-semantic-v10-receipts/PQ__R5_EVALUATOR_REFERENCE__SEMANTIC.json",
+      "root_id": "R5_EVALUATOR_REFERENCE",
+      "totality_git_blob_sha": "5452ca75ed1d1d5accda1db731f2374e06052aa7",
+      "totality_path": "canonical/verification/professional-semantic-v10-totality/PQ__R5_EVALUATOR_REFERENCE__SEMANTIC.json"
+    },
+    {
+      "binder_status": "PASS__EXACT_CURRENT_CLAIM_PLUS_FOUR_ROOT_TOTALITY_AND_R4",
+      "leaf_id": "PQ::R6_EVIDENCE_GROUNDING_DEPENDENCE::SEMANTIC",
+      "receipt_git_blob_sha": "ff8e49dd64ad548ec5a7a9c11f47acb0e0873b7a",
+      "receipt_path": "canonical/verification/professional-semantic-v10-receipts/PQ__R6_EVIDENCE_GROUNDING_DEPENDENCE__SEMANTIC.json",
+      "root_id": "R6_EVIDENCE_GROUNDING_DEPENDENCE",
+      "totality_git_blob_sha": "f0a53d5b2f40ab08c40ea60e6e525d1abced4983",
+      "totality_path": "canonical/verification/professional-semantic-v10-totality/PQ__R6_EVIDENCE_GROUNDING_DEPENDENCE__SEMANTIC.json"
+    },
+    {
+      "binder_status": "PASS__EXACT_CURRENT_CLAIM_PLUS_FOUR_ROOT_TOTALITY_AND_R4",
+      "leaf_id": "PQ::R7_CAUSAL_PRESCRIPTIVE::SEMANTIC",
+      "receipt_git_blob_sha": "642b97f6dc76d4f44ec63db037440eeb1a1ef8d1",
+      "receipt_path": "canonical/verification/professional-semantic-v10-receipts/PQ__R7_CAUSAL_PRESCRIPTIVE__SEMANTIC.json",
+      "root_id": "R7_CAUSAL_PRESCRIPTIVE",
+      "totality_git_blob_sha": "f1785f64fb056bb08bdb71123e031b6c521dcfa4",
+      "totality_path": "canonical/verification/professional-semantic-v10-totality/PQ__R7_CAUSAL_PRESCRIPTIVE__SEMANTIC.json"
+    },
+    {
+      "binder_status": "PASS__EXACT_CURRENT_CLAIM_PLUS_FOUR_ROOT_TOTALITY_AND_R4",
+      "leaf_id": "PQ::R8_POPULATION_CONTEXT_OPERATOR::SEMANTIC",
+      "receipt_git_blob_sha": "94452d3794f3bae7d0333d7d5fc14b95378d4272",
+      "receipt_path": "canonical/verification/professional-semantic-v10-receipts/PQ__R8_POPULATION_CONTEXT_OPERATOR__SEMANTIC.json",
+      "root_id": "R8_POPULATION_CONTEXT_OPERATOR",
+      "totality_git_blob_sha": "8441becfa0767dfa9f03574c2cebb3c88e0bb4e7",
+      "totality_path": "canonical/verification/professional-semantic-v10-totality/PQ__R8_POPULATION_CONTEXT_OPERATOR__SEMANTIC.json"
+    },
+    {
+      "binder_status": "PASS__EXACT_CURRENT_CLAIM_PLUS_FOUR_ROOT_TOTALITY_AND_R4",
+      "leaf_id": "PQ::R9_TEMPORAL_DEPLOYMENT::SEMANTIC",
+      "receipt_git_blob_sha": "2607da39d420c2c723cdacc47618880d585cac0e",
+      "receipt_path": "canonical/verification/professional-semantic-v10-receipts/PQ__R9_TEMPORAL_DEPLOYMENT__SEMANTIC.json",
+      "root_id": "R9_TEMPORAL_DEPLOYMENT",
+      "totality_git_blob_sha": "12cebb7961d5e1490b0c671ccdc15016c839a85d",
+      "totality_path": "canonical/verification/professional-semantic-v10-totality/PQ__R9_TEMPORAL_DEPLOYMENT__SEMANTIC.json"
+    }
+  ],
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_SEMANTIC_V10_AUTHENTIC_POSITIVE_RECEIPT_BATCH_V1",
+  "status": "PASS__12_OF_12_EXACT_V10_SEMANTIC_RECEIPTS_ADMITTED_BY_BINDER_V3__ZERO_QUALITY_OR_TERMINAL_AUTHORITY",
+  "subject_id": "PROFESSIONAL_QUALITY_P1_V10_PARAMETERIZED_SEMANTIC_ADMISSION_SYSTEM_20261011_V9",
+  "subject_sha256": "0f6d54242b7e3e1eeb484b1c3b7384a8ce72246ef1e840687be2fe20de69e6b4",
+  "terminal_authority": false,
+  "terminal_credit_delta": 0
+}
