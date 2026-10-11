@@ -1,0 +1,24 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "date": "2026-10-11",
+  "objective": "BIND_CHARTOGRAPHY_89_WITH_TOOLS_PUBLIC_PROTOCOL_AND_IMPLEMENT_ONLY_THE_DISCLOSED_MISSING_CROP_TOOL_LOOP",
+  "highest_leverage_now": true,
+  "target_predicate": "CHARTOGRAPHY_TOOLS_GE_89",
+  "constraints": [
+    "ZERO_INCREMENTAL_SPEND",
+    "REUSE_EXISTING_QWEN_MULTIMODAL_ROUTE",
+    "NO_BENCHMARK_CASE_EXPOSURE_FOR_MECHANISM_PREFLIGHT",
+    "FAIL_CLOSED_NO_SCORE_CREDIT"
+  ],
+  "expected_effect": [
+    "DELETE_PROTOCOL_ARCHAEOLOGY",
+    "DELETE_GENERIC_CROP_TOOL_GAP",
+    "REDUCE_ROW_TO_REAL_MODEL_LOOP_BINDING_PLUS_AUTHENTIC_GE_89_SCORE_EVIDENCE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "row_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
