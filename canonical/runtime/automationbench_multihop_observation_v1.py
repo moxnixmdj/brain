@@ -27,13 +27,15 @@ def discovery_search_queries(prompt: str, *, max_queries: int = 6) -> list[str]:
 
     priority: list[str] = []
     if "salesforce" in apps:
-        priority.append("salesforce query records opportunity account case")
+        priority.append("salesforce SOQL query records")
     if "google_drive" in apps:
-        priority.append("google drive files list search")
+        priority.append("google drive list files")
     if "google_sheets" in apps:
-        priority.append("google sheets spreadsheets get values batch get")
+        priority.append("google sheets get spreadsheet metadata by id")
+        priority.append("google sheets batch get cell values ranges")
     if "gmail" in apps:
-        priority.append("gmail messages list get")
+        priority.append("gmail list mailbox messages")
+        priority.append("gmail get message by id")
     if "asana" in apps:
         priority.append("asana projects sections tasks get list")
 
@@ -142,6 +144,9 @@ def _observed_values(
         ep = endpoint_id.lower()
         if ep.startswith("gmail.") and low in {"id", "message_id", "messageid"}:
             if not any(k in rec for k in ("threadId", "thread_id", "labelIds", "label_ids")):
+                continue
+        if ep.startswith("google_drive.") and low in {"id", "file_id", "fileid"}:
+            if not any(k in rec for k in ("mimeType", "mime_type", "parents")):
                 continue
         if ep.startswith("sheets.") and low in {"spreadsheetid", "spreadsheet_id"}:
             mime = str(rec.get("mimeType") or rec.get("mime_type") or "").lower()
@@ -257,6 +262,37 @@ def call_fingerprint(tool: str, arguments: Mapping[str, Any]) -> str:
     )
 
 
+def _endpoint_allowed(endpoint_id: str, prompt: str) -> bool:
+    low_id = endpoint_id.lower()
+    low_prompt = prompt.lower()
+    if low_id.startswith("salesforce."):
+        return endpoint_id == "salesforce.query"
+    if low_id.startswith("google_drive."):
+        return endpoint_id == "google_drive.files.list"
+    if low_id.startswith("sheets."):
+        return endpoint_id in {
+            "sheets.spreadsheets.get",
+            "sheets.spreadsheets.values.get",
+            "sheets.spreadsheets.values.batchGet",
+        }
+    if low_id.startswith("gmail."):
+        if "draft" in low_prompt:
+            return "draft" in low_id or low_id in {
+                "gmail.users.messages.list",
+                "gmail.users.messages.get",
+            }
+        if "label" in low_prompt:
+            return "label" in low_id or low_id in {
+                "gmail.users.messages.list",
+                "gmail.users.messages.get",
+            }
+        return endpoint_id in {
+            "gmail.users.messages.list",
+            "gmail.users.messages.get",
+        }
+    return True
+
+
 def observation_expansion_plan(
     prompt: str,
     search_payloads: Iterable[str | Mapping[str, Any]],
@@ -298,6 +334,8 @@ def observation_expansion_plan(
         if str(ep.get("method") or "").upper() != "GET":
             continue
         endpoint_id = str(ep.get("id") or "")
+        if not _endpoint_allowed(endpoint_id, prompt):
+            continue
         base_url = str(ep.get("url") or "")
         if not base_url:
             continue
@@ -338,15 +376,28 @@ def observation_expansion_plan(
             if default is not None:
                 values = [str(default)]
             else:
+                low_name = name.lower().replace("-", "_")
+                observed_first = low_name in {
+                    "id",
+                    "gid",
+                    "message_id",
+                    "messageid",
+                    "file_id",
+                    "fileid",
+                    "spreadsheet_id",
+                    "spreadsheetid",
+                }
+                observed = _observed_values(
+                    name,
+                    prompt,
+                    observations,
+                    endpoint_id=endpoint_id,
+                )
                 prompt_value = _ground_from_prompt(name, prompt)
-                values = [prompt_value] if prompt_value is not None else []
-                if not values:
-                    values = _observed_values(
-                        name,
-                        prompt,
-                        observations,
-                        endpoint_id=endpoint_id,
-                    )
+                if observed_first:
+                    values = observed or ([prompt_value] if prompt_value is not None else [])
+                else:
+                    values = ([prompt_value] if prompt_value is not None else []) or observed
             if not values:
                 valid = False
                 break
