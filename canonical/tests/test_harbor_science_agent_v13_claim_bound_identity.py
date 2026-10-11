@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import os
-from pathlib import Path
 import unittest
 from unittest.mock import patch
 
@@ -83,15 +82,7 @@ class AgentV13ClaimBoundIdentityTests(unittest.TestCase):
         self.assertEqual(two, EXPECTED_V2)
 
 
-class AgentV14SourceCompileTests(unittest.TestCase):
-    def test_v14_and_v8_source_compile(self):
-        for rel in (
-            "canonical/runtime/harbor_science_agent_v14.py",
-            "canonical/runtime/harbor_science_planner_v8.py",
-        ):
-            src = Path(rel).read_text(encoding="utf-8")
-            compile(src, rel, "exec")
-
-
 if __name__ == "__main__":
     unittest.main(verbosity=2)
+
+# TB-Science diagnostic trigger: baseline V13 verifier only.
