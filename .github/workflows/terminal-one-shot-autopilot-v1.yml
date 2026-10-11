@@ -1,0 +1,94 @@
+name: Terminal one-shot autopilot V1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'canonical/astra_runtime/missions/ASTRA_TERMINAL_ONE_SHOT_20261007_V1.json'
+      - 'canonical/same_identity_worker/tasks/SI_TERMINAL_ONE_SHOT_20261007_V1.json'
+      - 'canonical/runtime/terminal_autopilot_v1.py'
+      - 'canonical/runtime/terminal_autopilot_executor_v1.py'
+      - '.github/workflows/terminal-one-shot-autopilot-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  terminal-one-shot:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install runtime requirements
+        run: |
+          python -m pip install --disable-pip-version-check --no-input "pydantic>=2,<3" pytest
+
+      - name: Verify exact mission bytes and autopilot gates
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib, pathlib
+          p=pathlib.Path('canonical/astra_runtime/missions/ASTRA_TERMINAL_ONE_SHOT_20261007_V1.json')
+          expected='47d932cb3bf543a80e3058fbc668b806391a38accdb14f4c19116fca1c042b10'
+          actual=hashlib.sha256(p.read_bytes()).hexdigest()
+          print({'mission_sha256':actual})
+          assert actual == expected
+          PY
+          python -m pytest -q             canonical/tests/test_terminal_autopilot_v1.py             canonical/tests/test_terminal_autopilot_executor_v1.py
+
+      - name: Execute global 13-obligation terminal route
+        id: execute
+        continue-on-error: true
+        shell: bash
+        run: |
+          set +e
+          PYTHONPATH=. python canonical/runtime/terminal_autopilot_executor_v1.py             > TERMINAL_ONE_SHOT_EXECUTOR_RESULT.json 2> TERMINAL_ONE_SHOT_EXECUTOR_STDERR.txt
+          rc=$?
+          echo "$rc" > TERMINAL_ONE_SHOT_EXECUTOR_RC.txt
+          cat TERMINAL_ONE_SHOT_EXECUTOR_RESULT.json || true
+          cat TERMINAL_ONE_SHOT_EXECUTOR_STDERR.txt >&2 || true
+          exit 0
+
+      - name: Re-evaluate mandatory terminal reducer
+        if: always()
+        shell: bash
+        run: |
+          set +e
+          python canonical/runtime/terminal_closure_reducer.py             canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json             > TERMINAL_ONE_SHOT_REDUCER_RESULT.json 2> TERMINAL_ONE_SHOT_REDUCER_STDERR.txt
+          echo "$?" > TERMINAL_ONE_SHOT_REDUCER_RC.txt
+          cat TERMINAL_ONE_SHOT_REDUCER_RESULT.json || true
+
+      - name: Capture exact execution delta
+        if: always()
+        shell: bash
+        run: |
+          git status --short > TERMINAL_ONE_SHOT_GIT_STATUS.txt
+          git diff --             canonical/astra_runtime/artifacts             canonical/same_identity_worker/state             canonical/same_identity_worker/evidence             > TERMINAL_ONE_SHOT_EXECUTION_DELTA.patch || true
+
+      - name: Upload exact one-shot evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: terminal-one-shot-autopilot-v1
+          if-no-files-found: warn
+          retention-days: 90
+          path: |
+            TERMINAL_ONE_SHOT_EXECUTOR_RESULT.json
+            TERMINAL_ONE_SHOT_EXECUTOR_STDERR.txt
+            TERMINAL_ONE_SHOT_EXECUTOR_RC.txt
+            TERMINAL_ONE_SHOT_REDUCER_RESULT.json
+            TERMINAL_ONE_SHOT_REDUCER_STDERR.txt
+            TERMINAL_ONE_SHOT_REDUCER_RC.txt
+            TERMINAL_ONE_SHOT_GIT_STATUS.txt
+            TERMINAL_ONE_SHOT_EXECUTION_DELTA.patch
+            canonical/astra_runtime/artifacts/TERMINAL_ONE_SHOT_RESULT_20261007_V1.json
+            canonical/same_identity_worker/state/SI-TERMINAL-ONE-SHOT-20261007-V1.json
+            canonical/same_identity_worker/evidence/SI-TERMINAL-ONE-SHOT-20261007-V1__*.json

@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-TERMINAL-ONE-SHOT-20261007-V1",
+  "purpose": "One-shot terminalization attempt for the exact current Project Brain terminal objective. Reuse all already-bound Brain capabilities and evidence. Prefer one stronger scope-complete proof over per-benchmark work. Apply Tournament failure correctly: acceptance-open is not capability-missing; do not build capability without a concrete policy-divergence witness.",
+  "goal": "Using only the checked-out canonical repository, all Brain-owned runtimes/proofs/evidence already present, and zero incremental spend, attack the exact 13 independent open acceptance obligations as one terminal system. First attempt a truthful scope-complete target-free proof that every terminally useful Opus-5.5 behavior in the frozen objective has a sound Brain-owned equal-or-better route. Aggressively reuse and compose existing proofs and capability mechanisms. Falsify the candidate proof by actively searching for the smallest counterexample. For every apparent gap, apply the Tournament-failure rule: construct indistinguishable surviving worlds and test whether their adequate-action sets intersect. If they intersect, close the gap with the common policy. If they do not, emit the smallest policy-divergence witness and the minimum discriminator; do not claim a missing capability without that witness. Do not spend effort on bytes compression, generic architecture, unrelated benchmarks, or status prose. Write canonical/astra_runtime/artifacts/TERMINAL_ONE_SHOT_RESULT_20261007_V1.json containing exact source bindings, the 13 obligations, all reused routes, falsification attempts, and exactly one truthful outcome: SCOPE_COMPLETE_PROOF_CANDIDATE with machine-checkable evidence references, or MINIMUM_COUNTEREXAMPLE_SET with the smallest causally sufficient residuals. Never self-certify terminal truth. Finish only after the artifact is internally consistent and content-addressable.",
+  "steps": [
+    {
+      "id": "terminal-one-shot-global-route",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 128,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "fresh_mission_identity": true,
+    "manual_supplier": false,
+    "manual_package_name": false,
+    "manual_capability_id": false,
+    "required_target_effects_supplied_by_mission": false,
+    "semantic_goal_proposals_supplied_by_mission": false,
+    "capability_problem_proposal_supplied_by_mission": false,
+    "controller_actions_supplied_by_mission": false,
+    "originating_mission_must_remain_byte_identical": true,
+    "verified_acquisition_required_before_replan": true,
+    "implementation_independent_verifier_required": true,
+    "current_platform_capability_required": true,
+    "terminal_verifier_must_use_distinct_implementation": true,
+    "user_device_required": false,
+    "val_town_forbidden": true
+  }
+}
