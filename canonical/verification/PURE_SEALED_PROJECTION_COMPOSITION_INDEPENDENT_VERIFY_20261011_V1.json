@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_PURE_SEALED_PROJECTION_COMPOSITION_INDEPENDENT_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__INDEPENDENT_SPRITE__EXACT_BRANCH_BYTES__37_OF_37__PURE_PLUS_SEALED_COMPOSITION__ZERO_CREDIT",
+  "subject_base_main_commit": "212665b9a15215e2063299c91de4718d9206ab6a",
+  "source_bindings": {
+    "canonical/runtime/pure_projection_consumer_guard_v1.py": "9b623c5219cfe4b6037323fd5e8fc4dbd2b32907",
+    "canonical/runtime/field_scoped_authority_projection_gate_v1.py": "770174d3f70e18d35dfe18449c613df0259c6dd2",
+    "canonical/runtime/sealed_field_projection_consumer_v1.py": "348cc225d0a114ef73e549e368c6554272fcb598",
+    "canonical/runtime/pure_sealed_projection_consumer_v1.py": "159f3e0889e3aaf05432226709b88b6ecb106f0d",
+    "canonical/tests/test_pure_projection_consumer_guard_v1.py": "f4e222491b09c0b5014be542c12ad1501d5ff1cd",
+    "canonical/tests/test_field_scoped_authority_projection_gate_v1.py": "fa34d56005cb8546e488bca60ad0fb5b762860e9",
+    "canonical/tests/test_sealed_field_projection_consumer_v1.py": "3c52d4fa485a802c08f2f0368637f4657af087f1",
+    "canonical/tests/test_pure_sealed_projection_consumer_v1.py": "361216e67a8e88a30ea4c1c93a5da59227d28f92"
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "sprite_name": "brain-field-projection-verify-20261011-v1",
+    "sprite_id": "sprite-f7ddb46b-7a9b-437e-8079-e815b9ab6fb5",
+    "python": "3.13.7",
+    "pytest": "9.1.1",
+    "tests_run": 37,
+    "tests_passed": 37,
+    "tests_failed": 0
+  },
+  "proved": [
+    "PURE_CONSUMER_SOURCE_IS_STATICALLY_RESTRICTED_BEFORE_ANY_SEALED_LAUNCH",
+    "SEALED_EXECUTION_RECEIVES_ONLY_DECLARED_FIELD_PROJECTION_GENERATED_RUNNER_AND_ONE_VERIFIED_CONSUMER_FILE",
+    "HELPER_FILES_ARE_FORBIDDEN_BY_COMPOSITION",
+    "IMPORT_ATTRIBUTE_AMBIENT_IO_DYNAMIC_EVALUATION_LOOPS_RECURSION_AND_UNKNOWN_GLOBAL_PATHS_REMAIN_REJECTED_BY_PURE_GUARD",
+    "UNRELATED_AUTHORITY_CHURN_DOES_NOT_CHANGE_PROJECTED_BINDING",
+    "DECLARED_AUTHORITY_FIELD_CHANGE_CHANGES_PROJECTED_BINDING",
+    "COMPOSITION_GRANTS_ZERO_EXECUTION_PROMOTION_ACCEPTANCE_CAPABILITY_OWNERSHIP_FRESH_REALITY_OR_TERMINAL_AUTHORITY"
+  ],
+  "hard_nonclaims": [
+    "NO_GENERAL_PYTHON_EXECUTION_SAFETY_CLAIM",
+    "NO_AUTHORITY_TRANSFER_FROM_SOURCE_DOCUMENTS",
+    "NO_CAPABILITY_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
