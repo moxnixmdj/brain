@@ -1,11 +1,8 @@
 """Strict OSWorld 2.1 adapter for a Brain-owned state-conditioned policy.
 
-This module closes only the harness/interface boundary:
-    reset()
-    predict(instruction, obs) -> (response, actions)
-
-It intentionally does not invent a policy. A caller must supply a policy_provider
-whose operative cognition is separately content-addressed and admissible.
+This module closes the harness/interface boundary while preserving OSWorld's
+native evaluator. Generic host-side browser and guest-state API operations are
+receipted back into the next policy cycle; graphical actions remain the fallback.
 """
 from __future__ import annotations
 
@@ -13,8 +10,14 @@ import hashlib
 from dataclasses import dataclass
 from typing import Any, Callable, Mapping, Sequence
 
-from canonical.runtime.osworld_v21_state_ops_v1 import compile_state_ops
-from canonical.runtime.osworld_v21_host_browser_ops_v1 import OSWorldHostBrowser
+from canonical.runtime.osworld_v21_host_browser_ops_v1 import (
+    BrowserOpsError,
+    OSWorldHostBrowser,
+)
+from canonical.runtime.osworld_v21_host_guest_ops_v1 import (
+    GuestOpsError,
+    OSWorldHostGuestOps,
+)
 
 SCHEMA = "PROJECT_BRAIN_OSWORLD_V21_AGENT_ADAPTER_V1"
 WIDTH = 1920
@@ -22,6 +25,7 @@ HEIGHT = 1080
 MAX_BATCH = 4
 MAX_HISTORY = 32
 MAX_TEXT = 4000
+MAX_ERROR = 2000
 
 PolicyProvider = Callable[[Mapping[str, Any]], Mapping[str, Any]]
 
@@ -67,6 +71,9 @@ def _compile_one(raw: Mapping[str, Any]) -> str:
             raise AdapterError(f"{kind}_HAS_UNSUPPORTED_FIELDS")
         return special
 
+    if kind in {"BROWSER_OP", "STATE_OPS"}:
+        raise AdapterError(kind + "_MUST_BE_SINGLETON_HOST_OPERATION")
+
     if kind in {"CLICK", "DOUBLE_CLICK", "RIGHT_CLICK", "MOVE"}:
         x = _int(raw.get("x"), "X", 0, WIDTH - 1)
         y = _int(raw.get("y"), "Y", 0, HEIGHT - 1)
@@ -110,11 +117,6 @@ def _compile_one(raw: Mapping[str, Any]) -> str:
             normalized.append(key)
         return "pyautogui.hotkey(" + ", ".join(repr(k) for k in normalized) + ")"
 
-    if kind == "STATE_OPS":
-        if set(raw) - {"type", "ops"}:
-            raise AdapterError("STATE_OPS_HAS_UNSUPPORTED_FIELDS")
-        return compile_state_ops({"ops": raw.get("ops")})
-
     if kind == "SCROLL":
         clicks = _int(raw.get("clicks"), "CLICKS", -100, 100)
         if clicks == 0:
@@ -153,6 +155,7 @@ class BrainOSWorldAgent:
         screen_width: int = WIDTH,
         screen_height: int = HEIGHT,
         browser_controller: Any | None = None,
+        guest_controller: Any | None = None,
         ocr_provider: Any | None = None,
     ) -> None:
         if not callable(policy_provider):
@@ -164,16 +167,21 @@ class BrainOSWorldAgent:
         self.policy_provider = policy_provider
         self.policy_id = policy_id.strip()
         self.browser_controller = browser_controller if browser_controller is not None else OSWorldHostBrowser()
+        self.guest_controller = guest_controller if guest_controller is not None else OSWorldHostGuestOps()
         self.ocr_provider = ocr_provider
         self.history: list[dict[str, Any]] = []
         self.runtime_logger = None
         self.task_current_date = None
 
     def bind_environment(self, environment: Any) -> None:
-        binder = getattr(self.browser_controller, "bind_environment", None)
-        if not callable(binder):
-            raise AdapterError("BROWSER_CONTROLLER_BIND_UNAVAILABLE")
-        binder(environment)
+        for name, controller in (
+            ("BROWSER", self.browser_controller),
+            ("GUEST", self.guest_controller),
+        ):
+            binder = getattr(controller, "bind_environment", None)
+            if not callable(binder):
+                raise AdapterError(name + "_CONTROLLER_BIND_UNAVAILABLE")
+            binder(environment)
 
     def reset(self, runtime_logger=None, **_: Any) -> None:
         self.history.clear()
@@ -207,53 +215,118 @@ class BrainOSWorldAgent:
             "history": [dict(x) for x in self.history[-MAX_HISTORY:]],
         }
 
+    def _record(
+        self,
+        state: Mapping[str, Any],
+        *,
+        response: str,
+        actions: list[str],
+        policy_receipt: Any = None,
+        **extra: Any,
+    ) -> None:
+        fingerprint_material = "\n".join(actions) + "\n" + repr(sorted(extra.items()))
+        receipt = {
+            "screenshot_sha256": state["screenshot_sha256"],
+            "action_fingerprint": hashlib.sha256(fingerprint_material.encode("utf-8")).hexdigest(),
+            "actions": list(actions),
+            "response": response,
+            **extra,
+        }
+        if isinstance(policy_receipt, Mapping):
+            receipt["policy_receipt"] = dict(policy_receipt)
+        self.history.append(receipt)
+        if len(self.history) > MAX_HISTORY:
+            del self.history[:-MAX_HISTORY]
+
+    def _recoverable_error(
+        self,
+        state: Mapping[str, Any],
+        raw: Mapping[str, Any] | None,
+        error: Exception,
+    ) -> tuple[str, list[str]]:
+        response = str((raw or {}).get("response") or "").strip()
+        message = type(error).__name__ + ":" + str(error)[:MAX_ERROR]
+        self._record(
+            state,
+            response=response,
+            actions=["WAIT"],
+            policy_receipt=(raw or {}).get("_policy_receipt"),
+            operation_error=message,
+        )
+        return response, ["WAIT"]
+
     def predict(self, instruction: str, obs: Mapping[str, Any]) -> tuple[str, list[str]]:
         state = self._observation(instruction, obs)
         raw = self.policy_provider(state)
         if not isinstance(raw, Mapping):
             raise AdapterError("POLICY_OUTPUT_NOT_OBJECT")
         raw_actions = raw.get("actions")
+        policy_receipt = raw.get("_policy_receipt")
+
         if (
             isinstance(raw_actions, list)
             and len(raw_actions) == 1
             and isinstance(raw_actions[0], Mapping)
-            and str(raw_actions[0].get("type") or "").strip().upper() == "BROWSER_OP"
         ):
-            if set(raw_actions[0]) - {"type", "op"}:
-                raise AdapterError("BROWSER_OP_HAS_UNSUPPORTED_FIELDS")
-            op = raw_actions[0].get("op")
-            if not isinstance(op, Mapping):
-                raise AdapterError("BROWSER_OP_OBJECT_REQUIRED")
-            result = self.browser_controller.run(op)
-            response = str(raw.get("response") or "").strip()
-            actions = ["WAIT"]
-            fingerprint = hashlib.sha256(
-                ("BROWSER_OP\n" + repr(sorted(result.items()))).encode("utf-8")
-            ).hexdigest()
-            receipt = {
-                "screenshot_sha256": state["screenshot_sha256"],
-                "action_fingerprint": fingerprint,
-                "actions": list(actions),
-                "response": response,
-                "browser_result": dict(result),
-            }
-            self.history.append(receipt)
-            if len(self.history) > MAX_HISTORY:
-                del self.history[:-MAX_HISTORY]
-            return response, actions
+            first = raw_actions[0]
+            kind = str(first.get("type") or "").strip().upper()
 
-        response, actions = compile_actions(raw)
-        fingerprint = hashlib.sha256("\n".join(actions).encode("utf-8")).hexdigest()
+            if kind == "BROWSER_OP":
+                if set(first) - {"type", "op"}:
+                    return self._recoverable_error(
+                        state, raw, AdapterError("BROWSER_OP_HAS_UNSUPPORTED_FIELDS")
+                    )
+                op = first.get("op")
+                if not isinstance(op, Mapping):
+                    return self._recoverable_error(
+                        state, raw, AdapterError("BROWSER_OP_OBJECT_REQUIRED")
+                    )
+                try:
+                    result = self.browser_controller.run(op)
+                except (BrowserOpsError, ValueError, RuntimeError) as exc:
+                    return self._recoverable_error(state, raw, exc)
+                response = str(raw.get("response") or "").strip()
+                actions = ["WAIT"]
+                self._record(
+                    state,
+                    response=response,
+                    actions=actions,
+                    policy_receipt=policy_receipt,
+                    browser_result=dict(result),
+                )
+                return response, actions
 
-        receipt = {
-            "screenshot_sha256": state["screenshot_sha256"],
-            "action_fingerprint": fingerprint,
-            "actions": list(actions),
-            "response": response,
-        }
-        self.history.append(receipt)
-        if len(self.history) > MAX_HISTORY:
-            del self.history[:-MAX_HISTORY]
+            if kind == "STATE_OPS":
+                if set(first) - {"type", "ops"}:
+                    return self._recoverable_error(
+                        state, raw, AdapterError("STATE_OPS_HAS_UNSUPPORTED_FIELDS")
+                    )
+                try:
+                    result = self.guest_controller.run({"ops": first.get("ops")})
+                except (GuestOpsError, ValueError, RuntimeError) as exc:
+                    return self._recoverable_error(state, raw, exc)
+                response = str(raw.get("response") or "").strip()
+                actions = ["WAIT"]
+                self._record(
+                    state,
+                    response=response,
+                    actions=actions,
+                    policy_receipt=policy_receipt,
+                    guest_result=dict(result),
+                )
+                return response, actions
+
+        try:
+            response, actions = compile_actions(raw)
+        except AdapterError as exc:
+            return self._recoverable_error(state, raw, exc)
+
+        self._record(
+            state,
+            response=response,
+            actions=actions,
+            policy_receipt=policy_receipt,
+        )
 
         if self.runtime_logger is not None:
             try:
