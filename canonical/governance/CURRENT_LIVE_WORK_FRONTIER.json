@@ -25,7 +25,7 @@
       },
       {
         "path": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-        "git_blob_sha": "46f0274dfb44b09a7b6ecd149f69f702ecaa3c4b"
+        "git_blob_sha": "896c53a898a9355b2c8cd3790e251a59fb13ed0f"
       },
       {
         "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
@@ -156,11 +156,11 @@
       "ready": "BLOCKED_ONLY_BY_FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION"
     },
     {
-      "work_id": "BYTES_EXACT_SYMBOLIC_V51_NEXT_PHYSICAL_CUT",
+      "work_id": "BYTES_EXACT_SYMBOLIC_V52_NEXT_PHYSICAL_CUT",
       "work_type": "EFFICIENCY_IMPROVEMENT",
       "source": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-      "causal_role": "CONTINUE_RESOURCE_REDUCTION_FROM_1719563_RAW_PYTHON_BYTES_USING_SPENT_NEXT57_ONLY__RERANK_BEFORE_NEW_PHYSICAL_CUT__DO_NOT_TOUCH_FROZEN_NEXT58_BEFORE_CUT",
-      "readiness": "ACTIONABLE_WITH_EXISTING_RECONSTRUCTION_AND_QUALIFICATION_MACHINERY__V51_CURRENT__MPC_POW_INT_N_MINUS_1_OR_2_SPECIALIZATION_VERIFIED",
+      "causal_role": "CONTINUE_RESOURCE_REDUCTION_FROM_1717214_RAW_PYTHON_BYTES_USING_SPENT_NEXT59_V2_ONLY__RERANK_BEFORE_NEW_PHYSICAL_CUT__DO_NOT_TOUCH_FROZEN_NEXT60_BEFORE_CUT",
+      "readiness": "ACTIONABLE_WITH_EXISTING_RECONSTRUCTION_AND_QUALIFICATION_MACHINERY__V52_CURRENT__PROFILE_CUT_PLUS_MPF_ATAN_MINIMUM_REPAIR_VERIFIED",
       "claims_new_primitive": false,
       "score_state": "UNBOUND",
       "scheduler_state": "READY_EXECUTION",
@@ -179,17 +179,17 @@
       "vector_evidence": {},
       "read_only_evidence": {
         "source": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-        "source_git_blob_sha": "46f0274dfb44b09a7b6ecd149f69f702ecaa3c4b",
-        "raw_python_source_bytes": 1719563,
-        "B_exec_raw_python_source_bytes": 1722323,
-        "qualification": "14950/14950",
-        "next_action": "RERANK_EXACT_V51_USING_SPENT_NEXT57_ONLY__MAKE_NEW_PHYSICAL_CUT_BEFORE_QUAL_SUCCESSOR_NEXT58_20261011_V1",
-        "next_frozen_qualification": "QUAL_SUCCESSOR_NEXT58_20261011_V1",
+        "source_git_blob_sha": "896c53a898a9355b2c8cd3790e251a59fb13ed0f",
+        "raw_python_source_bytes": 1717214,
+        "B_exec_raw_python_source_bytes": 1719974,
+        "qualification": "15410/15410",
+        "next_action": "RERANK_EXACT_V52_USING_SPENT_NEXT59_V2_ONLY__MAKE_NEW_PHYSICAL_CUT_BEFORE_QUAL_SUCCESSOR_NEXT60_20261011_V1",
+        "next_frozen_qualification": "QUAL_SUCCESSOR_NEXT60_20261011_V1",
         "next_frozen_spent": false,
-        "independent_verification": "canonical/verification/BYTES_EXACT_SYMBOLIC_MPC_POW_INT_V51_INDEPENDENT_VERIFY_20261011_V1.json",
+        "independent_verification": "canonical/verification/BYTES_EXACT_SYMBOLIC_PROFILE_CUT_ATAN_REPAIR_V52_INDEPENDENT_VERIFY_20261011_V1.json",
         "vector_bounds_complete": false
       },
-      "ready": "V51_CURRENT_AT_1719563_BYTES__CONTINUE_ONLY_NONCONFLICTING_RESOURCE_PARETO_CUT",
+      "ready": "V52_CURRENT_AT_1717214_BYTES__CONTINUE_ONLY_NONCONFLICTING_RESOURCE_PARETO_CUT",
       "source_git_blob_sha": "cc039dec0d7361bfb83c7121433eabcb82ce5581"
     },
     {
@@ -644,13 +644,13 @@
   },
   "bytes_current_frontier": {
     "path": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-    "observed_git_blob_sha": "46f0274dfb44b09a7b6ecd149f69f702ecaa3c4b",
-    "status": "ACTIVE_RESEARCH__MPC_POW_INT_V51_FRONTIER__SUCCESSOR_READY",
-    "raw_python_source_bytes": 1719563,
-    "B_exec_raw_python_source_bytes": 1722323,
-    "qualification": "14950/14950",
-    "next": "Rerank exact V51 using spent NEXT57 only; make a new physical cut before touching QUAL_SUCCESSOR_NEXT58_20261011_V1.",
-    "independent_verification_path": "canonical/verification/BYTES_EXACT_SYMBOLIC_MPC_POW_INT_V51_INDEPENDENT_VERIFY_20261011_V1.json",
+    "observed_git_blob_sha": "896c53a898a9355b2c8cd3790e251a59fb13ed0f",
+    "status": "ACTIVE_RESEARCH__PROFILE_CUT_ATAN_REPAIR_V52_FRONTIER__SUCCESSOR_READY",
+    "raw_python_source_bytes": 1717214,
+    "B_exec_raw_python_source_bytes": 1719974,
+    "qualification": "15410/15410",
+    "next": "Rerank exact V52 using spent NEXT59 V2 only; make a new physical cut before touching QUAL_SUCCESSOR_NEXT60_20261011_V1.",
+    "independent_verification_path": "canonical/verification/BYTES_EXACT_SYMBOLIC_PROFILE_CUT_ATAN_REPAIR_V52_INDEPENDENT_VERIFY_20261011_V1.json",
     "promotion_credit": 0,
     "observed_snapshot_is_non_authoritative_for_v15_runtime": true
   }
