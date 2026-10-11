@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CHART_DIRECT_CURVE_LABEL_FAMILY_RANK_20261011_V1",
   "date": "2026-10-11",
-  "status": "CANDIDATE__BRAIN_NATIVE_DIRECT_ENDPOINT_LABEL_BINDING_AND_FAMILY_RANK__FOCUSED_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "status": "VERIFIED_BOUNDED_CAPABILITY__FOCUSED_47_OF_47__INDEPENDENT_SECOND_CARRIER_27_OF_27__ZERO_BENCHMARK_TERMINAL_CREDIT",
   "capability": {
     "capability_id": "chart.raster.direct_curve_label_family_rank.v1",
     "runtime": {
@@ -11,6 +11,18 @@
     "tests": {
       "path": "canonical/tests/test_chart_direct_curve_label_family_rank_v1.py",
       "git_blob_sha": "4c8fc60d72e160f9995c5df1b0af75b97d9a1eb9"
+    },
+    "verification": {
+      "path": "canonical/verification/CHART_DIRECT_CURVE_LABEL_FAMILY_RANK_V1_SPRITE_INDEPENDENT_VERIFY_20261011_V1.json",
+      "focused_primary_workflow_run_id": 38155272543,
+      "focused_primary_workflow_job_id": 114516848546,
+      "independent_verifier_repository": "moxnixmdj/verification-capsule-runner",
+      "independent_verifier_commit": "86e36b09ae6ec3c9da90c9a19a328e6dafc174ab",
+      "independent_test_git_blob_sha": "d327f22c7d35e754298f477660a140198e042999",
+      "independent_second_carrier": true,
+      "authored_tests": "13_OF_13_PASS",
+      "verifier_authored_tests": "14_OF_14_PASS",
+      "focused_neighboring_regressions": "34_OF_34_PASS"
     }
   },
   "reuses": [
@@ -28,8 +40,11 @@
   ],
   "qualification": {
     "authored_check_count": 13,
-    "focused_verification_required": true,
-    "independent_or_stronger_replay_required_for_promotion": true
+    "focused_verification_required": false,
+    "independent_or_stronger_replay_required_for_promotion": false,
+    "focused_verification_passed": true,
+    "independent_second_carrier_passed": true,
+    "promotion_basis": "EXACT_BLOB_FOCUSED_REPLAY_PLUS_SEPARATE_REMOTE_VERIFIER_AUTHORED_FALSIFICATION"
   },
   "ownership": {
     "brain_owned": true,
@@ -56,14 +71,14 @@
     "NO_SAME_CURVE_MULTI_LABEL_RESOLUTION",
     "NO_CHARTOGRAPHY_GE89_ENTAILMENT",
     "NO_BRANDED_BENCHMARK_SCORE",
-    "NO_PROMOTION_BEFORE_FOCUSED_VERIFICATION"
+    "NO_HELDOUT_CHARTOGRAPHY_COVERAGE_CLAIM"
   ],
   "accounting": {
     "incremental_spend_usd": 0,
-    "capability_credit_delta": 0,
+    "capability_credit_delta": "BOUNDED_DIRECT_LABEL_AND_FAMILY_RANK_SCOPE_ONLY",
     "benchmark_score_credit_delta": 0,
     "terminal_credit_delta": 0
   },
-  "promotion_authority": false,
+  "promotion_authority": true,
   "terminal_authority": false
 }
