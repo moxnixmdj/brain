@@ -13,7 +13,7 @@ from canonical.runtime.independent_acceptance_model import assess as assess_inde
 CAPABILITY_ID = "python.software.acceptance.specification.v1"
 SCHEMA = "PROJECT_BRAIN_PYTHON_SOFTWARE_ACCEPTANCE_SPECIFICATION_V1"
 
-_PATH_RE = re.compile(r"(?:[A-Za-z0-9_.-]+/)+[A-Za-z0-9_.-]+|[A-Za-z0-9_.-]+[.]py")
+_PATH_RE = re.compile(r"(?:[A-Za-z0-9_.-]+/)+[A-Za-z0-9_.-]+|[A-Za-z0-9_.-]+[.][A-Za-z0-9_.-]+")
 _QUOTED_RE = re.compile(r'["\']([^"\']+)["\']')
 
 
