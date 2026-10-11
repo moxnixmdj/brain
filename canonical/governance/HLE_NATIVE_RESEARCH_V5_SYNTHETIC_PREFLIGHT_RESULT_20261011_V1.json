@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_NATIVE_RESEARCH_V5_SYNTHETIC_PREFLIGHT_RESULT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "SYNTHETIC_PREFLIGHT_FAILED__CONSUMED_DIAGNOSTIC_NOT_STARTED",
+  "frozen_subject": {
+    "preexposure_commit": "fd0561acfc40b9dbb78d9a88883ce5a19477ff61",
+    "research_solver_v5_blob": "6fd57f4f3591e4ab09b3e16ffbae399f7aaf93ae",
+    "evidence_synthesis_v3_blob": "1a37aac998436b023bb04e5494db91a54fbac8c8"
+  },
+  "runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2691,
+    "workflow_run_id": 38144796894,
+    "workflow_job_id": 114485787039
+  },
+  "results": {
+    "question_contract_v3_tests": "11/11 PASS",
+    "evidence_synthesis_v3_tests": "10/10 PASS",
+    "research_solver_v5_tests": "4/5 PASS"
+  },
+  "failure": {
+    "test": "test_cross_view_title",
+    "observed_candidate": "Vienna. Measure for Example",
+    "expected_candidate": "Measure for Example",
+    "cause": "WORK_TITLE_TOKEN_CLASS_ADMITTED_SENTENCE_ENDING_PERIOD_AND_ALLOWED_CROSS_SENTENCE_CAPTURE"
+  },
+  "repair": {
+    "commit": "73897aa22c7a6d1ca50259c90c7990e12453c2aa",
+    "new_evidence_synthesis_v3_blob": "ed2e0b572b33a5ed3c84d748689ee71645460dbf"
+  },
+  "exposure": {
+    "consumed_rows_25_to_49_executed": 0,
+    "fresh_rows_50_to_74_executed": 0,
+    "hle_cases_executed": 0
+  },
+  "target_score_claimed": false,
+  "hle_67_7_certified": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
