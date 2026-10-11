@@ -12,8 +12,13 @@ on:
       - 'canonical/**'
       - '.github/workflows/capability-transfer-governance.yml'
 
+concurrency:
+  group: capability-transfer-governance-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   verify:
+    timeout-minutes: 5
     runs-on: [self-hosted, Linux, X64, brain-low-ram]
     steps:
       - uses: actions/checkout@v4
