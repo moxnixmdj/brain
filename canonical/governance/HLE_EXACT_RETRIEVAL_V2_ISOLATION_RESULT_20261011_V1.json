@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_EXACT_RETRIEVAL_V2_ISOLATION_RESULT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "EXISTING_EXACT_RETRIEVAL_V2_ISOLATED_AND_FALSIFIED_AS_CURRENT_HLE_RESCUE",
+  "subject": {
+    "v2_blob": "1c9d1c9096af91e05f67c3ead3068b0daf0ab033",
+    "v1_blob": "11c6b01974b8c095a4243e000bb8e7bb579d7d54",
+    "tool_adapter_blob": "fa955ccc5e4f3d29aa79e2b380f713d30ee46e8f",
+    "tool_policy_blob": "d2a2427b483fe1c06c6b1e6bc98d72bf07e7a730"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2691,
+    "workflow_run_id": 38145027076,
+    "workflow_job_id": 114486470073,
+    "exact_blob_binding_passed": true,
+    "compile_passed": true,
+    "synthetic_no_model_check_passed": true
+  },
+  "diagnostic": {
+    "dataset": "ai-safety-institute/trivia_qa_verified",
+    "split": "validation",
+    "slice": "rows_25_to_49_ALREADY_CONSUMED",
+    "sample_size": 25,
+    "attempted": 13,
+    "attempt_rate": 0.52,
+    "normalized_exact": 0,
+    "normalized_exact_rate": 0,
+    "artifact_id": 11704336644,
+    "artifact_zip_sha256": "0738000d097236ccdca2695184f99ebe19d228108c9c5e6080d7daa3403034d8"
+  },
+  "falsified_hypothesis": "EXISTING_EXACT_RETRIEVAL_V2_CONTAINS_USEFUL_STANDALONE_ANSWER_SIGNAL_ON_THIS_CONSUMED_SLICE",
+  "causal_findings": [
+    "FETCHED_PAGE_CHROME_AND_NAVIGATION_TEXT_ENTER_CANDIDATE_POOL",
+    "GENERIC_CAPITALIZED_SPAN_EXTRACTION_IS_NOT_RELATION_BOUND",
+    "QUESTION_FORM_CLASSIFICATION_IS_WEAKER_THAN QUESTION_CONTRACT_V3",
+    "INDEPENDENT_HOST_COUNT_DOES_NOT_RESCUE A BAD CANDIDATE GENERATOR",
+    "THE_REUSABLE ASSET IS SEARCH_FETCH INFRASTRUCTURE NOT V2 ANSWER SELECTION"
+  ],
+  "decision": [
+    "DO_NOT_PROMOTE_EXACT_RETRIEVAL_V2_AS_A RESCUE LANE",
+    "DO_NOT_RUN_FRESH_ROWS_50_TO_74",
+    "INSPECT_RAW SEARCH_WIKIPEDIA RETRIEVAL TRACE ON CONSUMED ROWS BEFORE NEXT SELECTOR"
+  ],
+  "exposure": {
+    "fresh_public_rows_50_to_74": 0,
+    "hle_questions": 0,
+    "hle_gold": 0
+  },
+  "external_model_calls_total": 0,
+  "model_dependency_count_total": 0,
+  "hle_score_credit": 0,
+  "hle_67_7_certified": false,
+  "incremental_spend_usd": 0
+}
