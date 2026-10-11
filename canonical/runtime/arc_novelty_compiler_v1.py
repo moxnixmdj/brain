@@ -388,6 +388,101 @@ def _object_feature(component: Component, feature: str) -> str:
     raise ARCNoveltyCompilerError("OBJECT_FEATURE_UNSUPPORTED")
 
 
+def _connect_rows_same_color(grid: Grid) -> Grid:
+    out = [list(row) for row in grid]
+    for r, row in enumerate(grid):
+        positions: dict[int, list[int]] = {}
+        for c, value in enumerate(row):
+            if value != 0:
+                positions.setdefault(value, []).append(c)
+        for color, cols in positions.items():
+            if len(cols) >= 2:
+                for c in range(min(cols), max(cols) + 1):
+                    out[r][c] = color
+    return tuple(tuple(row) for row in out)
+
+
+def _connect_cols_same_color(grid: Grid) -> Grid:
+    out = [list(row) for row in grid]
+    h, w = _shape(grid)
+    for c in range(w):
+        positions: dict[int, list[int]] = {}
+        for r in range(h):
+            value = grid[r][c]
+            if value != 0:
+                positions.setdefault(value, []).append(r)
+        for color, rows in positions.items():
+            if len(rows) >= 2:
+                for r in range(min(rows), max(rows) + 1):
+                    out[r][c] = color
+    return tuple(tuple(row) for row in out)
+
+
+def _connect_both_same_color(grid: Grid) -> Grid:
+    return _connect_cols_same_color(_connect_rows_same_color(grid))
+
+
+def _enclosed_zero_cells(grid: Grid) -> set[tuple[int, int]]:
+    h, w = _shape(grid)
+    outside: set[tuple[int, int]] = set()
+    q: deque[tuple[int, int]] = deque()
+    for r in range(h):
+        for c in (0, w - 1):
+            if grid[r][c] == 0 and (r, c) not in outside:
+                outside.add((r, c))
+                q.append((r, c))
+    for c in range(w):
+        for r in (0, h - 1):
+            if grid[r][c] == 0 and (r, c) not in outside:
+                outside.add((r, c))
+                q.append((r, c))
+    while q:
+        r, c = q.popleft()
+        for nr, nc in ((r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)):
+            if 0 <= nr < h and 0 <= nc < w and grid[nr][nc] == 0 and (nr, nc) not in outside:
+                outside.add((nr, nc))
+                q.append((nr, nc))
+    return {
+        (r, c)
+        for r in range(h)
+        for c in range(w)
+        if grid[r][c] == 0 and (r, c) not in outside
+    }
+
+
+def _infer_enclosed_zero_fill(pairs: Sequence[tuple[Grid, Grid]]) -> int | None:
+    target: int | None = None
+    for inp, out in pairs:
+        if _shape(inp) != _shape(out):
+            return None
+        holes = _enclosed_zero_cells(inp)
+        if not holes:
+            return None
+        changed = {
+            (r, c)
+            for r in range(len(inp))
+            for c in range(len(inp[0]))
+            if inp[r][c] != out[r][c]
+        }
+        if changed != holes:
+            return None
+        values = {out[r][c] for r, c in holes}
+        if len(values) != 1:
+            return None
+        value = next(iter(values))
+        if target is not None and target != value:
+            return None
+        target = value
+    return target
+
+
+def _fill_enclosed_zero(grid: Grid, color: int) -> Grid:
+    out = [list(row) for row in grid]
+    for r, c in _enclosed_zero_cells(grid):
+        out[r][c] = color
+    return tuple(tuple(row) for row in out)
+
+
 def _local_feature(grid: Grid, r: int, c: int, feature: str) -> str:
     h, w = _shape(grid)
     v = grid[r][c]
@@ -535,6 +630,10 @@ def _predict(h: Mapping[str, Any], grid: Grid) -> Grid | None:
         return _object_recolor_predict(grid, h["feature"], h["mapping"])
     if kind == "LOCAL_NEIGHBORHOOD_RULE":
         return _local_rule_predict(grid, h["feature"], h["mapping"])
+    if kind == "CONNECT_ALIGNED_SAME_COLOR_BOTH_AXES":
+        return _connect_both_same_color(grid)
+    if kind == "FILL_ENCLOSED_ZERO_REGION":
+        return _fill_enclosed_zero(grid, int(h["color"]))
     raise ARCNoveltyCompilerError("HYPOTHESIS_KIND_UNSUPPORTED")
 
 
@@ -659,6 +758,16 @@ def compile_hypotheses(
             if _consistent(h, pairs):
                 candidates.append(h)
 
+    h = {"kind": "CONNECT_ALIGNED_SAME_COLOR_BOTH_AXES"}
+    if _consistent(h, pairs):
+        candidates.append(h)
+
+    fill_color = _infer_enclosed_zero_fill(pairs)
+    if fill_color is not None:
+        h = {"kind": "FILL_ENCLOSED_ZERO_REGION", "color": fill_color}
+        if _consistent(h, pairs):
+            candidates.append(h)
+
     crop = {"kind": "CROP_NON_BACKGROUND"}
     if _consistent(crop, pairs):
         candidates.append(crop)
@@ -709,6 +818,8 @@ def compile_hypotheses(
             "EQUAL_PANEL_CELLWISE_ZERO_NONZERO_RELATION",
             "LOCAL_NEIGHBORHOOD_OUTPUT_RULE",
             "CONNECTED_OBJECT_PROPERTY_RECOLOR",
+            "ALIGNED_SAME_COLOR_LINE_COMPLETION",
+            "ENCLOSED_ZERO_REGION_FILL",
             "NON_BACKGROUND_BOUNDING_BOX_CROP",
             "UNIQUE_LARGEST_OR_SMALLEST_COMPONENT_CROP",
         ],
