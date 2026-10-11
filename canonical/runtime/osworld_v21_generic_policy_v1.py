@@ -214,6 +214,207 @@ def _ocr_click(instruction: str, ocr: Any) -> dict[str, Any] | None:
     }
 
 
+def _browser_history(state: Mapping[str, Any]) -> tuple[Mapping[str, Any] | None, Mapping[str, Any] | None]:
+    history = state.get("history")
+    if not isinstance(history, list):
+        return None, None
+    for row in reversed(history):
+        if not isinstance(row, Mapping):
+            continue
+        result = row.get("browser_result")
+        if isinstance(result, Mapping):
+            submitted = row.get("submitted_operation")
+            return result, submitted if isinstance(submitted, Mapping) else None
+    return None, None
+
+
+def _url_equivalent(observed: Any, target: str) -> bool:
+    if not isinstance(observed, str):
+        return False
+    return observed.rstrip("/") == target.rstrip("/")
+
+
+def _simple_url_goal(instruction: str, url: str) -> bool:
+    remainder = instruction.replace(url, " ")
+    remainder = re.sub(
+        r"\b(?:open|navigate|go|visit|browse|to|the|website|webpage|page|site|url)\b",
+        " ",
+        remainder,
+        flags=re.I,
+    )
+    remainder = re.sub(r"[^\w]+", " ", remainder).strip()
+    return not remainder
+
+
+def _control_label(control: Mapping[str, Any]) -> str:
+    parts = [
+        control.get("text"),
+        control.get("aria_label"),
+        control.get("placeholder"),
+        control.get("name"),
+    ]
+    return " ".join(str(x).strip() for x in parts if isinstance(x, str) and x.strip())
+
+
+def _unique_control(controls: Any, target: str) -> Mapping[str, Any] | None:
+    if not isinstance(controls, list):
+        return None
+    q = _norm(target)
+    exact = []
+    for row in controls:
+        if not isinstance(row, Mapping):
+            continue
+        values = [
+            row.get("text"),
+            row.get("aria_label"),
+            row.get("placeholder"),
+            row.get("name"),
+        ]
+        normalized = {_norm(str(v)) for v in values if isinstance(v, str) and v.strip()}
+        if q in normalized:
+            exact.append(row)
+    return exact[0] if len(exact) == 1 else None
+
+
+def _browser_click_action(control: Mapping[str, Any], target: str) -> dict[str, Any]:
+    role = control.get("role")
+    aria = control.get("aria_label")
+    text = control.get("text")
+    if isinstance(role, str) and role.strip():
+        name = aria if isinstance(aria, str) and aria.strip() else text
+        if isinstance(name, str) and name.strip():
+            return {
+                "type": "BROWSER_OP",
+                "op": {
+                    "type": "CLICK_ROLE",
+                    "role": role.strip(),
+                    "name": name.strip(),
+                    "exact": True,
+                },
+            }
+    label = text if isinstance(text, str) and text.strip() else target
+    return {
+        "type": "BROWSER_OP",
+        "op": {"type": "CLICK_TEXT", "text": label.strip(), "exact": True},
+    }
+
+
+def _browser_search_control(controls: Any) -> Mapping[str, Any] | None:
+    if not isinstance(controls, list):
+        return None
+    hits = []
+    for row in controls:
+        if not isinstance(row, Mapping):
+            continue
+        label = _norm(_control_label(row))
+        typ = _norm(str(row.get("type") or ""))
+        if "search" in label or typ == "search":
+            hits.append(row)
+    return hits[0] if len(hits) == 1 else None
+
+
+def _browser_fill_action(control: Mapping[str, Any], value: str) -> dict[str, Any] | None:
+    placeholder = control.get("placeholder")
+    aria = control.get("aria_label")
+    if isinstance(placeholder, str) and placeholder.strip():
+        return {
+            "type": "BROWSER_OP",
+            "op": {
+                "type": "FILL_PLACEHOLDER",
+                "placeholder": placeholder.strip(),
+                "value": value,
+                "exact": True,
+            },
+        }
+    if isinstance(aria, str) and aria.strip():
+        return {
+            "type": "BROWSER_OP",
+            "op": {
+                "type": "FILL_LABEL",
+                "label": aria.strip(),
+                "value": value,
+                "exact": True,
+            },
+        }
+    return None
+
+
+def _browser_state_machine(state: Mapping[str, Any], instruction: str) -> dict[str, Any] | None:
+    result, submitted = _browser_history(state)
+    url_match = re.search(r"https?://[^\s<>\]\[)(']+", instruction)
+    target_url = url_match.group(0) if url_match else None
+
+    if target_url:
+        result_type = str((result or {}).get("type") or "").upper()
+        observed_url = (result or {}).get("active_url") or (result or {}).get("url")
+        if _url_equivalent(observed_url, target_url):
+            if result_type == "OBSERVE" and _simple_url_goal(instruction, target_url):
+                return {"response": "explicit URL goal verified", "actions": [{"type": "DONE"}]}
+            if result_type != "OBSERVE":
+                return {
+                    "response": "observe navigated page",
+                    "actions": [{"type": "BROWSER_OP", "op": {"type": "OBSERVE"}}],
+                }
+        elif not (
+            isinstance(submitted, Mapping)
+            and str(submitted.get("type") or "").upper() == "NAVIGATE"
+            and submitted.get("url") == target_url
+        ):
+            return {
+                "response": "open explicit URL",
+                "actions": [{"type": "BROWSER_OP", "op": {"type": "NAVIGATE", "url": target_url}}],
+            }
+
+    if isinstance(submitted, Mapping):
+        submitted_type = str(submitted.get("type") or "").upper()
+        if submitted_type in {
+            "NAVIGATE", "CLICK_TEXT", "CLICK_ROLE", "CLICK_SELECTOR",
+            "FILL_LABEL", "FILL_PLACEHOLDER", "FILL_SELECTOR",
+            "PRESS", "PRESS_SELECTOR", "SELECT_LABEL", "SELECT_SELECTOR",
+            "CHECK_SELECTOR", "UNCHECK_SELECTOR",
+        } and str((result or {}).get("type") or "").upper() != "OBSERVE":
+            return {
+                "response": "observe browser after mutation",
+                "actions": [{"type": "BROWSER_OP", "op": {"type": "OBSERVE"}}],
+            }
+
+    if isinstance(result, Mapping) and str(result.get("type") or "").upper() == "OBSERVE":
+        controls = result.get("controls")
+
+        if re.search(r"\bsearch\b", instruction, re.I):
+            value = _search_value(instruction)
+            if value:
+                if isinstance(submitted, Mapping) and str(submitted.get("type") or "").upper() in {
+                    "FILL_LABEL", "FILL_PLACEHOLDER", "FILL_SELECTOR"
+                }:
+                    return {
+                        "response": "submit filled search",
+                        "actions": [{"type": "BROWSER_OP", "op": {"type": "PRESS", "key": "Enter"}}],
+                    }
+                control = _browser_search_control(controls)
+                if control is not None:
+                    action = _browser_fill_action(control, value)
+                    if action is not None:
+                        return {"response": "fill uniquely observed search field", "actions": [action]}
+
+        target = _explicit_action_target(instruction)
+        if target:
+            control = _unique_control(controls, target)
+            if control is not None:
+                return {
+                    "response": "activate uniquely observed browser control",
+                    "actions": [_browser_click_action(control, target)],
+                }
+
+    browser_terms = re.search(r"\b(browser|chrome|website|webpage|web page|site|tab)\b", instruction, re.I)
+    if browser_terms and result is None:
+        return {
+            "response": "observe browser semantic state",
+            "actions": [{"type": "BROWSER_OP", "op": {"type": "OBSERVE"}}],
+        }
+    return None
+
+
 def _same_state_repeat(state: Mapping[str, Any]) -> bool:
     history = state.get("history")
     if not isinstance(history, list) or not history:
@@ -231,9 +432,9 @@ def decide(state: Mapping[str, Any]) -> dict[str, Any]:
     elements = parse_a11y(state.get("a11y_tree"))
     ni = _norm(instruction)
 
-    url = re.search(r"https?://[^\s<>\]\[)(']+", instruction)
-    if url and not _same_state_repeat(state):
-        return {"response": "open explicit URL", "actions": [{"type": "BROWSER_OP", "op": {"type": "NAVIGATE", "url": url.group(0)}}]}
+    browser_action = _browser_state_machine(state, instruction)
+    if browser_action is not None and not _same_state_repeat(state):
+        return browser_action
 
     searchboxes = [e for e in elements if e.editable and ("search" in _norm(e.label) or e.tag.endswith("searchbox"))]
     if re.search(r"\bsearch\b", ni) and len(searchboxes) == 1 and not _same_state_repeat(state):
