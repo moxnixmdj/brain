@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_OPUS55_MATCHED_TARGET_NORMALIZATION_PROVENANCE_V1",
-  "date": "2026-10-02",
+  "date": "2026-10-11",
   "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__11_OF_11_TARGETS__47_OF_47_ATOMS__10_OF_10_METRICS_SOURCE_BOUND__SEMANTIC_IMPLICATION_AND_BRAIN_WITNESS_NORMALIZATION_OPEN__ZERO_CREDIT",
   "objective": "Bind every normalized matched/scope target atom and metric requirement to at least one exact scalar literal in the frozen family protocol or atomic predicate row, without asserting semantic equivalence or stronger-scope proof.",
   "authority": {
@@ -10,7 +10,7 @@
     },
     "protocols": {
       "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
-      "git_blob_sha": "eb4bca0fe6a015d49d2854998fbe046c979c7ea9"
+      "git_blob_sha": "f8b661abf7cb1b628aa14d966658394b80093879"
     },
     "predicate_registry": {
       "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
