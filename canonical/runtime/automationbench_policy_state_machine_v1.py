@@ -21,6 +21,7 @@ from canonical.runtime.automationbench_mutation_compiler_v1 import (
 )
 from canonical.runtime.automationbench_communication_grounder_v1 import resolve_communication
 from canonical.runtime.automationbench_owned_policy_kernel_v1 import (
+    followup_observation_plan,
     observation_plan,
     rank_source_records,
     search_queries,
@@ -115,6 +116,25 @@ def next_policy_action(
         }
 
     observations = [_payload(x) for x in fetches]
+
+    # Expand list/search reads into detail reads only when identifiers were
+    # grounded by prior observations.
+    followups = followup_observation_plan(
+        prompt,
+        [_payload(x) for x in searches],
+        observations,
+        max_calls=max_parallel_calls,
+    )
+    if followups:
+        return {
+            "schema": SCHEMA,
+            "status": "CALL_TOOLS",
+            "phase": "OBSERVE_DETAILS",
+            "calls": [
+                {"tool": x["tool"], "arguments": x["arguments"]}
+                for x in followups
+            ],
+        }
 
     # Typed compiler 1: Salesforce mark-won.
     action = compile_salesforce_mark_won(prompt, observations)
