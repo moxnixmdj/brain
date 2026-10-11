@@ -1,0 +1,100 @@
+{
+  "schema": "PROJECT_BRAIN_SOFTWARE_SEMANTIC_ACCEPTANCE_SHARED_MINIMUM_COVER_VERIFY_V1",
+  "date": "2026-10-11",
+  "status": "PASS__REAL_CANONICAL_OBLIGATIONS_COMPILED_THROUGH_ACTIVE_MINIMUM_COVER_RUNTIME__ZERO_SCORE_CREDIT",
+  "base_main_commit": "5f0171d25a0e5492dbb8429f1fb9f1987e04efe7",
+  "runtime": {
+    "path": "canonical/runtime/minimum_capability_certificate_cover_v1.py",
+    "git_blob_sha": "007f328bcd1c2221827862420dcef49ed88db503"
+  },
+  "inputs": {
+    "certificate": {
+      "id": "V9_SHARED_SEMANTIC_ACCEPTANCE",
+      "proposition": "V9_BOUNDED_SOURCE_GROUNDED_SEMANTIC_ACCEPTANCE_VERIFIED",
+      "verification_path": "canonical/verification/PYTHON_SOFTWARE_REQUEST_SEMANTIC_ACCEPTANCE_V9_VERIFY_20261011_V1.json",
+      "verification_git_blob_sha": "0cd72f63a106a9c716ee38f51b6ffd7ad247e782",
+      "valid": true,
+      "scope_bound": true,
+      "donor_free": true,
+      "incremental_spend_usd": 0
+    },
+    "implication_edges": {
+      "V9_BOUNDED_SOURCE_GROUNDED_SEMANTIC_ACCEPTANCE_VERIFIED": [
+        "FRONTIERCODE_BOUNDED_EXPLICIT_PYTHON_ACCEPTANCE_SUBREGION_REDUCED",
+        "CURSORBENCH_SPEC_TO_ACCEPTANCE_BOUNDED_EXPLICIT_PYTHON_SUBREGION_REDUCED"
+      ]
+    }
+  },
+  "capability_cover_output": {
+    "schema": "PROJECT_BRAIN_MINIMUM_CAPABILITY_CERTIFICATE_COVER_V1",
+    "status": "COMPLETE_MINIMUM_COVER",
+    "selected_certificate_ids": [
+      "V9_SHARED_SEMANTIC_ACCEPTANCE"
+    ],
+    "required_propositions": [
+      "CURSORBENCH_SPEC_TO_ACCEPTANCE_BOUNDED_EXPLICIT_PYTHON_SUBREGION_REDUCED",
+      "FRONTIERCODE_BOUNDED_EXPLICIT_PYTHON_ACCEPTANCE_SUBREGION_REDUCED"
+    ],
+    "proved_propositions": [
+      "CURSORBENCH_SPEC_TO_ACCEPTANCE_BOUNDED_EXPLICIT_PYTHON_SUBREGION_REDUCED",
+      "FRONTIERCODE_BOUNDED_EXPLICIT_PYTHON_ACCEPTANCE_SUBREGION_REDUCED",
+      "V9_BOUNDED_SOURCE_GROUNDED_SEMANTIC_ACCEPTANCE_VERIFIED"
+    ],
+    "covered_obligation_ids": [
+      "CURSORBENCH_CAPABILITY_SUBREGION",
+      "FRONTIERCODE_CAPABILITY_SUBREGION"
+    ],
+    "unresolved_obligation_ids": [],
+    "unresolved_propositions": [],
+    "aggregate_cost": {
+      "incremental_spend_usd": 0,
+      "wall_clock_cost": 0,
+      "compute_cost": 0,
+      "evidence_risk": 0,
+      "complexity_cost": 0,
+      "certificate_count": 1
+    },
+    "credit_delta": 0
+  },
+  "literal_score_cover_output": {
+    "schema": "PROJECT_BRAIN_MINIMUM_CAPABILITY_CERTIFICATE_COVER_V1",
+    "status": "INCOMPLETE_NO_SUFFICIENT_COVER",
+    "selected_certificate_ids": [],
+    "required_propositions": [
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4"
+    ],
+    "proved_propositions": [],
+    "covered_obligation_ids": [],
+    "unresolved_obligation_ids": [
+      "CURSORBENCH_LITERAL_SCORE",
+      "FRONTIERCODE_LITERAL_SCORE"
+    ],
+    "unresolved_propositions": [
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4"
+    ],
+    "aggregate_cost": {
+      "incremental_spend_usd": 0,
+      "wall_clock_cost": 0,
+      "compute_cost": 0,
+      "evidence_risk": 0,
+      "complexity_cost": 0,
+      "certificate_count": 0
+    },
+    "credit_delta": 0
+  },
+  "falsification_checks": [
+    "ONE_SHARED_CERTIFICATE_SELECTED_FOR_TWO_CAPABILITY_PROGRESS_OBLIGATIONS",
+    "NO_LITERAL_SCORE_PREDICATE_COVERED_BY_V9",
+    "NO_REVERSE_INFERENCE_FROM_CAPABILITY_TO_SCORE",
+    "HARD_ZERO_SPEND_PRESERVED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "frontiercode_score_credit_delta": 0,
+    "cursorbench_score_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
