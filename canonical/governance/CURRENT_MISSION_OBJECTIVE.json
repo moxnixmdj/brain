@@ -245,12 +245,12 @@
   },
   "bytes_current_frontier": {
     "path": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-    "observed_git_blob_sha": "ef714a88c7192ddd650d253c7af946e25b03407a",
-    "status": "ACTIVE_RESEARCH__LIBMPF_COMPOSED_V70_FRONTIER__SUCCESSOR_READY",
-    "raw_python_source_bytes": 1707801,
-    "B_exec_raw_python_source_bytes": 1710561,
-    "qualification": "19550/19550",
-    "next": "Rerank exact V70 using spent NEXT77 only; make a new physical cut before touching QUAL_SUCCESSOR_NEXT78_20261011_V1.",
+    "observed_git_blob_sha": "05b0e4abf6c3f329cc34f11be6c0fc1bca55e53c",
+    "status": "ACTIVE_RESEARCH__NORMALIZE1_DELEGATE_V71_FRONTIER__SUCCESSOR_READY",
+    "raw_python_source_bytes": 1707438,
+    "B_exec_raw_python_source_bytes": 1710198,
+    "qualification": "19780/19780",
+    "next": "Rerank exact V71 using spent NEXT78 only; make a new physical cut before touching QUAL_SUCCESSOR_NEXT79_20261011_V1.",
     "promotion_credit": 0,
     "observed_snapshot_is_non_authoritative_for_v15_runtime": true
   },
@@ -265,9 +265,9 @@
   },
   "capability_frontier_currentness_reconciliation": {
     "path": "canonical/governance/CAPABILITY_FRONTIER_CURRENTNESS_RECONCILIATION_20261010_V1.json",
-    "observed_git_blob_sha": "0271fb492ad1f1fe04c7a681bda26a0b892c82b5",
-    "status": "CURRENTNESS_RECONCILED__PROFESSIONAL_24_OF_24__EXECUTION_12_OF_12__SEMANTIC_12_OF_12__REGRESSION_HOSTED_ACTIONS_BILLING_PRESTART_BLOCK__ESCAPE_WAKE_GATED__BYTES_V70_READY__R2_V91_WAKE_GATED__TB_CURRENT_PATH_DYNAMIC__ZERO_CREDIT",
-    "next": "RERANK_EXACT_V70_USING_SPENT_NEXT77_ONLY__MAKE_NEW_PHYSICAL_CUT_BEFORE_SPENDING_FROZEN_NEXT78__CONTINUE_OTHER_CAPABILITY_FIRST_GENERAL_DEVELOPMENT__DO_NOT_RUN_SAME_INFORMATION_CHECKPOINT_WORK"
+    "observed_git_blob_sha": "aff2253d2b3c6064126e806e64b8f5dcf70b8f85",
+    "status": "CURRENTNESS_RECONCILED__PROFESSIONAL_24_OF_24__EXECUTION_12_OF_12__SEMANTIC_12_OF_12__REGRESSION_HOSTED_ACTIONS_BILLING_PRESTART_BLOCK__ESCAPE_WAKE_GATED__BYTES_V71_READY__R2_V91_WAKE_GATED__TB_CURRENT_PATH_DYNAMIC__ZERO_CREDIT",
+    "next": "RERANK_EXACT_V71_USING_SPENT_NEXT78_ONLY__MAKE_NEW_PHYSICAL_CUT_BEFORE_SPENDING_FROZEN_NEXT79__CONTINUE_OTHER_CAPABILITY_FIRST_GENERAL_DEVELOPMENT__DO_NOT_RUN_SAME_INFORMATION_CHECKPOINT_WORK"
   },
   "professional_regression_carrier_diagnosis": {
     "path": "canonical/verification/FULL_PRIVATE_CURRENT_MAIN_REGRESSION_CARRIER_DIAGNOSIS_20261011_V3.json",
