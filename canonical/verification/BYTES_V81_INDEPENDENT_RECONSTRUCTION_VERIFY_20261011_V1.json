@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_V81_INDEPENDENT_RECONSTRUCTION_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__INDEPENDENT_SECOND_SESSION_RECONSTRUCTION__278_OF_278_BYTE_IDENTICAL__CAUSAL_FALSIFIER_REPLAY",
+  "carrier": "CHATGPT_CONTAINER_SECOND_SESSION_20261011",
+  "source_artifacts": {
+    "V78_archive": {
+      "library_file_id": "libfile_9c72d25362d08191829421c43d023c9b",
+      "sha256": "6995bcf7d300469d51d5f747ddeadc1fb6d48063737c0f34eee00df4b05b6464"
+    },
+    "rebuild_script": {
+      "library_file_id": "libfile_65fab72e116081919e6a64f060b3529f",
+      "sha256": "ac2ed4fd62d630b5837c4eb6daeb619f97d512af5bacdc792d2ce2a0a28520ce"
+    },
+    "V81_archive": {
+      "library_file_id": "libfile_02e90850fd5c8191bc3978930a598adb",
+      "sha256": "48ef04c2137a5af4a5bfc61e860b4caab84e90cd34dbffc29a3a2ccf92d5288c"
+    }
+  },
+  "reconstruction": {
+    "target_manifest_sha256": "c06813a7a46bb8dcbd172d4de02a3ba432408efa355971a6373f765b1d99a021",
+    "durable_files_expected": 278,
+    "durable_files_byte_identical": 278,
+    "byte_differences": 0,
+    "python_files": 277,
+    "raw_python_source_bytes": 1574321,
+    "compileall": "PASS"
+  },
+  "changed_python_files": [
+    "mpmath/ctx_mp_python.py",
+    "sympy/core/mul.py",
+    "sympy/core/power.py"
+  ],
+  "equivalence_checks": {
+    "sympy/core/mul.py": "AST_DUMP_EXCLUDING_ATTRIBUTES_IDENTICAL_TO_V78",
+    "sympy/core/power.py": "AST_DUMP_EXCLUDING_ATTRIBUTES_IDENTICAL_TO_V78",
+    "mpmath/ctx_mp_python.py": "EXACT_109_BYTE_MPCONTEXT_CONVERT_REPAIR_ONLY"
+  },
+  "causal_falsifier_replay": {
+    "op": "roots",
+    "p": [
+      4,
+      0,
+      4,
+      0,
+      5
+    ],
+    "expected_digest": "f97096b5e95d6526e039e184d7aa0bcd9ec689364071238e9bca5581ed13c1dc",
+    "V78_observation": "NotImplementedError",
+    "V81_observation": "RETURN_EXPECTED_DIGEST",
+    "result": "PASS"
+  },
+  "frozen_next": {
+    "id": "QUAL_SUCCESSOR_NEXT87_20261011_V1",
+    "cases": 21850,
+    "corpus_sha256": "f63d6eb3d8d556cf61b012e04715f1073a2c3e0a8a6d5f5cd36dc4e99396568f",
+    "action": "HASH_AND_LINE_COUNT_ONLY__NOT_EXECUTED",
+    "spent": false
+  },
+  "external_general_purpose_model_runtime_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "promotion_scope": "RESOURCE_PARETO_RESEARCH_FRONTIER_ONLY__NO_TERMINAL_CAPABILITY_CREDIT",
+  "hard_nonclaims": [
+    "NO_FULL_NEXT86_SECOND_CARRIER_REPLAY",
+    "NO_UNIVERSAL_EQUIVALENCE",
+    "NO_TERMINAL_CREDIT"
+  ]
+}
