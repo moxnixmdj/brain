@@ -107,3 +107,23 @@ and never means that no undiscovered strategy could exist.
 Any newly discovered candidate action, newly discovered terminal obligation, changed cost model, or invalidated evidence receipt immediately invalidates the freeze and requires global recomputation before new untouched information is spent.
 
 Independent admitted cut members are parallel. Wall-clock optimization therefore uses the maximum declared critical-path wall-clock of selected independent bundles, not the arithmetic sum of their wall clocks.
+
+
+## Benchmark-output information equivalence
+
+For every benchmark-linked obligation, the benchmark procedure is subordinate to the terminal decision information it is meant to provide.
+
+Before native benchmark execution, classify the terminal predicate as either:
+
+- `CAPABILITY_RELATION`: determine a capability ordering or measurement. Prefer an exact sufficient statistic or a proof-carrying stronger certificate when it determines the same decision with less new information.
+- `EXACT_BENCHMARK_STATISTIC`: determine the benchmark's exact realized score/statistic. A capability proof cannot substitute unless a formal exact-statistic bridge binds the frozen scorer state.
+
+The mandatory fail-closed rule is defined in:
+
+`canonical/laws/BENCHMARK_OUTPUT_INFORMATION_EQUIVALENCE_LAW_V1.md`
+
+and enforced structurally by:
+
+`canonical/runtime/benchmark_output_information_equivalence_gate_v1.py`
+
+Native benchmark execution has no scheduling privilege. Proxy metrics, private-answer reconstruction, target-output leakage, and silent switching between capability and exact-score predicates are forbidden.

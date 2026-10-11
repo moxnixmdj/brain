@@ -36,7 +36,8 @@
     "canonical/laws/CAPABILITY_TRANSFER_VS_COGNITION_OUTSOURCING_LAW_V1.md",
     "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
     "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
-    "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md"
+    "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+    "canonical/laws/BENCHMARK_OUTPUT_INFORMATION_EQUIVALENCE_LAW_V1.md"
   ],
   "boot_requirements": {
     "read_mandatory_laws_before_execution": true,
@@ -65,6 +66,12 @@
     "forbid_proxy_goal_substitution": true,
     "predicates_must_be_subordinate_to_live_capability_question": true,
     "benchmarks_must_be_subordinate_to_live_capability_question": true,
+    "benchmark_output_information_equivalence_required": true,
+    "benchmark_output_information_equivalence_law_path": "canonical/laws/BENCHMARK_OUTPUT_INFORMATION_EQUIVALENCE_LAW_V1.md",
+    "benchmark_output_information_equivalence_gate_path": "canonical/runtime/benchmark_output_information_equivalence_gate_v1.py",
+    "benchmark_native_execution_has_no_intrinsic_scheduling_privilege": true,
+    "benchmark_exact_score_vs_capability_relation_classification_required": true,
+    "benchmark_proxy_metric_substitution_without_entailment_forbidden": true,
     "capability_arbitrage_strategy_required": true,
     "capability_arbitrage_strategy_path": "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
     "inherit_verified_capability_gains": true,

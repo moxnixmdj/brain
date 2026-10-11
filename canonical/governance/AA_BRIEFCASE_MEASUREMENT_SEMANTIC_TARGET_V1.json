@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_MEASUREMENT_SEMANTIC_TARGET_V1",
+  "status": "ACTIVE__CAPABILITY_INFORMATION_TARGET__ZERO_SCORE_OVERCLAIM",
+  "benchmark_surface": {
+    "benchmark": "AA-Briefcase",
+    "version": "1.1",
+    "reference_model": "Claude Opus 5.5 Max",
+    "reference_elo": 1822
+  },
+  "terminal_predicate": {
+    "type": "CAPABILITY_RELATION",
+    "decision_output": "BRAIN_PROFESSIONAL_WORK_CAPABILITY_GE_CAPABILITY_EVIDENCED_BY_FROZEN_OPUS55_AA_BRIEFCASE_1822",
+    "goal_substitution_allowed": false
+  },
+  "interpretation": {
+    "benchmark_is_measurement_instrument": true,
+    "private_91_task_execution_intrinsically_required": false,
+    "exact_brain_aa_elo_is_not_this_terminal_predicate": true,
+    "minimum_sufficient_information_route_first": true,
+    "stronger_certificate_allowed_only_with_proved_entailment": true
+  },
+  "measurement_components": [
+    "TASK_SPECIFIC_REQUIREMENT_AND_RUBRIC_SATISFACTION",
+    "ANALYTICAL_QUALITY",
+    "PRESENTATION_QUALITY",
+    "RELIABILITY_ACROSS_THE_RELEVANT_PROFESSIONAL_WORK_SCOPE"
+  ],
+  "next_proof_obligation": "DERIVE_MINIMUM_PROOF_CARRYING_INFORMATION_SET_THAT_DETERMINES_THE_CAPABILITY_RELATION_WITHOUT_REQUIRING_PRIVATE_TASK_IDENTITY_OR_REALIZED_CROWD_BT_NOISE",
+  "hard_nonclaims": [
+    "DOES_NOT_CLAIM_OFFICIAL_BRAIN_AA_BRIEFCASE_ELO_GE_1822",
+    "DOES_NOT_INFER_PRIVATE_TASK_CONTENT",
+    "DOES_NOT_AUTHORIZE_PROXY_METRIC_SUBSTITUTION",
+    "DOES_NOT_GRANT_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_PROMOTION_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0
+}
