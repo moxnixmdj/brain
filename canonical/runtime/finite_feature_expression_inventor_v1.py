@@ -413,7 +413,7 @@ def invent_across_feature_packs(
     # invented predicates. Keep the smallest feature pack as the canonical carrier.
     by_signature={}
     for d in sorted(best,key=lambda x:(len(x["feature_pack"]),x["feature_pack"],x["predicate_ids"])):
-        sig=tuple(sorted(x["predicate_ids"]))
+        sig=tuple(sorted(d["predicate_ids"]))
         by_signature.setdefault(sig,d)
     best=sorted(by_signature.values(),key=lambda x:(x["predicate_ids"],x["feature_pack"]))
     return {
