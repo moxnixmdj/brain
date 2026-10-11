@@ -1,0 +1,122 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_CAPACITY_TRUTH_REPAIR_20261011_V1",
+  "date": "2026-10-11",
+  "status": "CANDIDATE__STALE_44_TASK_CAPACITY_PREMISE_FALSIFIED_BY_EXACT_SET_ACCOUNTING__CURRENT_EMPIRICAL_ROUTE_UNATTAINABLE_UNDER_NO_REPLAY__ZERO_CREDIT",
+  "target_predicate": "CODING_TB4_GE_66_4",
+  "objective": "Recompute TB4 empirical attainability from exact frozen task-set partitions without silently re-admitting pre-excluded spent or contaminated tasks.",
+  "exact_sources": {
+    "stage1_sample": {
+      "path": "canonical/capabilities/opus55/TB4_V5_STAGE1_PRECOMMITTED_SAMPLE_V1.json"
+    },
+    "attainability_manifest": {
+      "path": "canonical/governance/TB4_ATTAINABILITY_EVIDENCE_MANIFEST_V1.json",
+      "git_blob_sha": "36cfd7b29465a2da6c05667b18848bdcabcd22e6"
+    },
+    "minimum_recovery_cut": {
+      "path": "canonical/governance/TB4_MINIMUM_CARRIER_RECOVERY_CUT_V1.json",
+      "git_blob_sha": "fc5bb61b1b97e6aae46222b9de84e16797510bcc"
+    },
+    "current_frontier": {
+      "path": "canonical/governance/TB4_CURRENT_RESEARCH_FRONTIER_20261008_V1.json",
+      "git_blob_sha": "24c68a809cf356f1d37aabbeebff8f2a8fe55e91"
+    }
+  },
+  "exact_partition": {
+    "total_tasks": 66,
+    "preexcluded_spent_or_contaminated_tasks": [
+      "bun-sourcemap-leak",
+      "cargo-flight-dispatch",
+      "html-js-filter",
+      "interleaved-vigenere",
+      "nextjs-performance",
+      "payments-pipeline-fix",
+      "pretrain-shard-corruption",
+      "react-lead-form",
+      "risk-scorer-replay",
+      "wal-recovery-ordering"
+    ],
+    "preexcluded_count": 10,
+    "hardware_incompatible_count": 12,
+    "additional_irreversibly_zero_hardware_compatible_count": 18,
+    "preexcluded_overlap_with_frozen_56_order": 0,
+    "preexcluded_overlap_with_hardware_incompatible_set": 0,
+    "preexcluded_overlap_with_additional_irreversible_zero_set": 0,
+    "currently_clean_hardware_compatible_tasks": "66-10-12-18=26",
+    "result_currently_clean_hardware_compatible_count": 26
+  },
+  "inherited_bug": {
+    "manifest_reported_formula": "66-12-18=36",
+    "manifest_reported_remaining_creditable_task_count": 36,
+    "missing_subtraction": "10_PREEXCLUDED_SPENT_OR_CONTAMINATED_TASKS",
+    "corrected_formula": "66-10-12-18=26",
+    "corrected_remaining_clean_hardware_compatible_task_count": 26,
+    "consequence": "THE_LATER_36_PLUS_8_EQUALS_44_TASK_CAPACITY_CHAIN_INHERITS_A_TEN_TASK_OVERCOUNT_ABSENT_AN_EXPLICIT_SOUND_READMISSION_CERTIFICATE"
+  },
+  "current_buildkite_route": {
+    "clean_hardware_compatible_tasks": 26,
+    "recovered_clean_resource_tasks": 8,
+    "clean_tasks_with_five_unexposed_slots": 34,
+    "five_slot_capacity": 170,
+    "separately_certified_existing_success_slots": 1,
+    "existing_success_task": "wal-recovery-ordering",
+    "maximum_success_slots_under_current_NO_REPLAY_AND_NO_READMISSION_RULES": 171,
+    "target_success_slots": 219,
+    "gap_to_target": 48,
+    "attainable": false
+  },
+  "full_resource_hypothetical_under_same_no_replay_rules": {
+    "unrecovered_resource_tasks": [
+      "live-database-cutover",
+      "jax-speedrun-gpu",
+      "fp8-rmsnorm-gemm",
+      "math-eval-grader"
+    ],
+    "live_database_cutover_already_contaminated": true,
+    "still_clean_gpu_tasks": [
+      "jax-speedrun-gpu",
+      "fp8-rmsnorm-gemm",
+      "math-eval-grader"
+    ],
+    "maximum_additional_clean_tasks_from_resource_recovery": 3,
+    "maximum_clean_tasks_with_five_slots": 37,
+    "maximum_success_slots_from_clean_tasks": 185,
+    "plus_existing_wal_success": 1,
+    "absolute_empirical_upper_bound_under_current_no_replay_rules": 186,
+    "target_success_slots": 219,
+    "irreducible_gap_even_with_all_clean_gpu_resources": 33,
+    "attainable": false
+  },
+  "exact_reopen_classes": [
+    "SOUNDLY_READMIT_AT_LEAST_33_ADDITIONAL_SUCCESS_SLOTS_FROM_PREVIOUSLY_SPENT_OR_CONTAMINATED_TASKS_WITH_A_VERIFIER_INFORMATION_NONINTERFERENCE_AND_CONFIGURATION_DECONTAMINATION_PROOF",
+    "OR_REPLACE_EMPIRICAL_SLOT_ROUTE_WITH_A_SCOPE_COMPLETE_THRESHOLD_OR_TASK_CONDITIONED_DOMINANCE_CERTIFICATE",
+    "OR_BIND_NEW_AUTHENTIC_TARGET_SPECIFIC_EVIDENCE_THAT_CHANGES_REQUIRED_SUCCESS_MASS_OR_CREDITABLE_SLOT_STATUS"
+  ],
+  "clean_room_trial_reset_observation": {
+    "distinction": "TB4_N_TRIALS_ARE_DISTINCT_INDEPENDENT_ATTEMPTS__A_LATER_TRIAL_IS_NOT_LOGICALLY_THE_SAME_AS_REPAIR_AFTER_VERIFIER_FEEDBACK",
+    "sound_readmission_requires": [
+      "FROZEN_ACTOR_OR_TASK_CONDITIONED_ACTOR_CONFIGURATION_WITH_NO_CAUSAL_DESCENDANT_OF_THIS_TASKS_PRIOR_HIDDEN_VERIFIER_INFORMATION",
+      "FRESH_ISOLATED_TRIAL_PROCESS_OR_CARRIER",
+      "NO_ACCESS_TO_PRIOR_TRIAL_VERIFIER_RESULT_PROOF_OR_TASK_SPECIFIC_REPAIR",
+      "OUTPUT_FROZEN_BEFORE_ITS_OWN_VERIFIER_EXPOSURE",
+      "OFFICIAL_FROZEN_TASK_AND_VERIFIER_SEMANTICS",
+      "NO_CROSS_TRIAL_FEEDBACK_BEFORE_ALL_COUNTED_TRIAL_OUTPUTS_ARE_FROZEN"
+    ],
+    "current_status": "NOT_YET_PROVED_FOR_THE_BURNED_TASK_SET"
+  },
+  "hard_nonclaims": [
+    "NO_TB4_ACCEPTANCE_OR_SCORE_CREDIT",
+    "NO_CLAIM_THE_10_PREEXCLUDED_TASKS_CAN_NEVER_BE_READMITTED",
+    "NO_CLAIM_ALL_PRIOR_ATTEMPTS_WERE VALID_OFFICIAL_TRIALS",
+    "NO_PERMISSION_TO_REPAIR_FROM_HIDDEN_VERIFIER_FEEDBACK_AND_REPLAY",
+    "NO_NEW_BENCHMARK_EXECUTION_AUTHORITY",
+    "NO_TERMINAL_CASE_EXECUTION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "independent_verification_required": true,
+  "promotion_authority": false
+}
