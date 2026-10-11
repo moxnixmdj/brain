@@ -382,3 +382,31 @@ for cell in CELLS:
         raise AssertionError("SEMANTIC_KIND_UNSUPPORTED:"+str(kind))
 print("V9_SEMANTIC_ACCEPTANCE_PASS")
 """ % blob
+
+
+def run(args:dict[str,Any],root:str|pathlib.Path)->dict[str,Any]:
+    if not isinstance(args,dict):
+        raise SemanticAcceptanceError("ARGS_NOT_OBJECT")
+    task_text=str(args.get("task_text") or "").strip()
+    if not task_text:
+        raise SemanticAcceptanceError("TASK_TEXT_REQUIRED")
+    repo=pathlib.Path(root).resolve()
+    output=(repo/str(args.get("output_path") or "")).resolve()
+    if output==repo or repo not in output.parents:
+        raise SemanticAcceptanceError("OUTPUT_PATH_OUTSIDE_REPOSITORY")
+    result=compile_request(task_text)
+    if result.get("coverage_complete") is True:
+        program=render_test(result)
+        result={
+            **result,
+            "acceptance_program_sha256":_sha(program.encode("utf-8")),
+        }
+    output.parent.mkdir(parents=True,exist_ok=True)
+    output.write_text(json.dumps(result,indent=2,sort_keys=True)+"\n",encoding="utf-8")
+    raw=output.read_bytes()
+    return {
+        **result,
+        "output_path":str(output.relative_to(repo)).replace("\\","/"),
+        "output_sha256":_sha(raw),
+        "output_verified":True,
+    }
