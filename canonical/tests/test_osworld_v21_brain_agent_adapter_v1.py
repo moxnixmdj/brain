@@ -67,7 +67,12 @@ class _FakeGuest:
         self.payloads.append(dict(payload))
         if self.fail:
             raise RuntimeError("synthetic guest failure")
-        return {"type": "STATE_OPS", "ok": True, "status": "ok", "output": "verified"}
+        return {
+            "type": "STATE_OPS",
+            "ok": True,
+            "status": "ok",
+            "output": "ASSERT_PATH_EXISTS:PASS:/home/oai/share/a.txt",
+        }
 
 
 class _FakeBrowser:
@@ -80,7 +85,12 @@ class _FakeBrowser:
 
     def run(self, op):
         self.ops.append(dict(op))
-        return {"type": "OBSERVE", "active_url": "https://example.test/", "visible_text": "hello"}
+        kind = str(op.get("type") or "").upper()
+        return {
+            "type": kind,
+            "active_url": "https://example.test/",
+            "visible_text": "hello" if kind == "OBSERVE" else "",
+        }
 
 
 def test_browser_tool_loop_binds_environment_and_returns_wait():
@@ -88,7 +98,12 @@ def test_browser_tool_loop_binds_environment_and_returns_wait():
     calls = []
     def policy(state):
         calls.append(state)
-        if not state["history"]:
+        if len(state["history"]) == 0:
+            return {
+                "response": "mutate browser",
+                "actions": [{"type": "BROWSER_OP", "op": {"type": "CLICK_TEXT", "text": "Save"}}],
+            }
+        if len(state["history"]) == 1:
             return {
                 "response": "observe browser",
                 "actions": [{"type": "BROWSER_OP", "op": {"type": "OBSERVE"}}],
@@ -108,14 +123,19 @@ def test_browser_tool_loop_binds_environment_and_returns_wait():
     assert guest.bound is env
 
     response, actions = agent.predict("inspect page", {"screenshot": b"one"})
-    assert response == "observe browser"
+    assert response == "mutate browser"
     assert actions == ["WAIT"]
-    assert browser.ops == [{"type": "OBSERVE"}]
-    assert agent.history[-1]["browser_result"]["visible_text"] == "hello"
+    assert browser.ops == [{"type": "CLICK_TEXT", "text": "Save"}]
+    assert agent.history[-1]["browser_result"]["type"] == "CLICK_TEXT"
 
     response2, actions2 = agent.predict("inspect page", {"screenshot": b"two"})
-    assert response2 == "done"
-    assert actions2 == ["DONE"]
+    assert response2 == "observe browser"
+    assert actions2 == ["WAIT"]
+    assert agent.history[-1]["browser_result"]["visible_text"] == "hello"
+
+    response3, actions3 = agent.predict("inspect page", {"screenshot": b"three"})
+    assert response3 == "done"
+    assert actions3 == ["DONE"]
     assert calls[-1]["history"][-1]["browser_result"]["active_url"] == "https://example.test/"
 
 
@@ -188,7 +208,7 @@ def test_state_ops_execute_host_side_and_receipt_returns_to_next_cycle():
     _, actions = agent.predict("write file", {"screenshot": b"one"})
     assert actions == ["WAIT"]
     assert guest.payloads[0]["ops"][0]["type"] == "WRITE_TEXT"
-    assert agent.history[-1]["guest_result"]["output"] == "verified"
+    assert "ASSERT_PATH_EXISTS:PASS" in agent.history[-1]["guest_result"]["output"]
     assert agent.history[-1]["policy_receipt"]["model"] == "brain-qwen3.5-9b"
 
     _, actions2 = agent.predict("write file", {"screenshot": b"two"})
@@ -227,7 +247,7 @@ def test_done_after_unchanged_gui_state_is_rejected():
     assert first == ["pyautogui.click(10, 10)"]
     _, second = agent.predict("click then finish", {"screenshot": b"same"})
     assert second == ["WAIT"]
-    assert "DONE_WITHOUT_OBSERVABLE_STATE_CHANGE" in agent.history[-1]["operation_error"]
+    assert "DONE_WITHOUT_VERIFIED_COMPLETION_EVIDENCE" in agent.history[-1]["operation_error"]
 
 
 def test_done_after_receipted_state_verification_is_allowed():
