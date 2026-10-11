@@ -10,7 +10,7 @@
   "source_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_MUL_TOKEN_COMPACT_V79_SUCCESSOR_EXECUTION_20261011_V2.json",
   "exact_symbolic_state": {
     "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_MUL_TOKEN_COMPACT_V79_SUCCESSOR_EXECUTION_20261011_V2.json",
-    "evidence_git_blob_sha": null,
+    "evidence_git_blob_sha": "dd7cb9b38a6b3c234f4f9bc43bd908b567d6c408",
     "status": "CURRENT_VERIFIED_BYTES_RESEARCH_FRONTIER__MUL_TOKEN_INDENT_COMPACTION__NOT_PROMOTED_TO_OPUS_CAPABILITY",
     "raw_python_source_bytes": 1581283,
     "B_exec_raw_python_source_bytes": 1584043,
