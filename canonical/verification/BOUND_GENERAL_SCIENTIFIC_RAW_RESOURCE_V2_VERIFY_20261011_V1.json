@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_BOUND_GENERAL_SCIENTIFIC_RAW_RESOURCE_V2_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__TWO_ENVIRONMENT_DIRECT_ADAPTER_REPLAY__REPOSITORY_CONFINED",
+  "subject": {
+    "adapter_path": "canonical/runtime/bound_capabilities/general_scientific_raw_resource_v2.py",
+    "adapter_git_blob_sha": "19b53f73a86939ca516d6b0a5fe2320e70a9180f",
+    "test_path": "canonical/tests/test_bound_general_scientific_raw_resource_v2.py",
+    "test_git_blob_sha": "db364aa6135c57192f89242c3c2fb828379d81c2",
+    "delegated_runtime_path": "canonical/runtime/general_scientific_raw_resource_pipeline_v2.py",
+    "delegated_runtime_git_blob_sha": "51e7b8c75a2b62d5aa765661809276a38d11b114"
+  },
+  "verification": {
+    "environment_1": {
+      "sprite": "brain-canonical-apply-slice-verify-20261011-v1",
+      "sprite_id": "sprite-03e2d6c1-6a52-4c21-817f-eae043fd842c",
+      "tests_run": 6,
+      "tests_passed": 6
+    },
+    "environment_2": {
+      "sprite": "brain-live-runtime-v1-verify-20261008",
+      "sprite_id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13",
+      "tests_run": 6,
+      "tests_passed": 6
+    }
+  },
+  "proved": [
+    "REPOSITORY_LOCAL_SYMBOLIC_EXECUTION_VERIFIED",
+    "REPOSITORY_LOCAL_PARAPHRASE_EXECUTION_VERIFIED",
+    "ABSOLUTE_ROOT_FORBIDDEN",
+    "PARENT_ESCAPE_FORBIDDEN",
+    "MISSING_ROOT_FAILS_CLOSED",
+    "ZERO_MODEL_NETWORK_AND_BENCHMARK_IDENTITY_MARKERS"
+  ],
+  "model_dependency_count": 0,
+  "external_model_runtime_calls": 0,
+  "network_dependency_count": 0,
+  "terminal_authority": false,
+  "benchmark_credit_delta": 0
+}
