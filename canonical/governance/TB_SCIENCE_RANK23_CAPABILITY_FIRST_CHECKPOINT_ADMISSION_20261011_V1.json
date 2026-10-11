@@ -1,0 +1,102 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_FIRST_CHECKPOINT_ADMISSION_V2",
+  "date": "2026-10-11",
+  "status": "ADMIT_RANK23_ONE_SHOT__DONOR_FREE_DNA_STORAGE_HARBOR_CAPABILITY_VALIDATION__UNEXPOSED_PRECLAIM__ZERO_CREDIT",
+  "authorized": true,
+  "decision": "ADMIT_CHECKPOINT_AUDIT_EXECUTION",
+  "authorized_scope": "CHECKPOINT_AUDIT_DISPATCH_ONLY",
+  "objective": "VALIDATE_BRAIN_OWNED_DONOR_FREE_DNA_STORAGE_CAPABILITY_ON_ONE_FRESH_TERMINAL_BENCH_SCIENCE_SUBJECT",
+  "benchmark_role": "NEW_CAPABILITY_VALIDATION",
+  "rationale": "RANK22_FINAL_ZERO_LEFT_RANK23_AS_NEXT_FROZEN_UNEXPOSED_SUBJECT__A_DONOR_FREE_GENERAL_DNA_STORAGE_CODEC_ALREADY_EXISTED_UNEXPOSED_AND_WAS_INDEPENDENTLY_VERIFIED_11_OF_11__THE_VISIBLE_CONTRACT_ADAPTER_AND_FULL_HARBOR_ROUTE_WERE_THEN_BUILT_WITHOUT_READING_RANK23_AND_INDEPENDENTLY_VERIFIED_20_OF_20_AND_27_OF_27_ON_EXACT_BLOBS__THE_PUBLIC_FAMILY_NAME_DNA_STORAGE_CODEC_MATCHES_THE_QUALIFIED_GENERAL_CAPABILITY_BUT_EXACT_RANK23_CONTRACT_REMAINS_UNOBSERVED",
+  "slot": {
+    "ledger_schedule_rank": 23,
+    "frozen_manifest_schedule_order": 22,
+    "task_rank": 22,
+    "slot_id": "terminal-bench-science/dna-storage-codec::trial-0",
+    "task_digest": "sha256:bde6852289db3f5474aedc96c54aca201d11be6c61f4fef019998b2b689e65ac",
+    "task_content_read": false
+  },
+  "source_bindings": {
+    "current_pointer": {
+      "path": "canonical/governance/CURRENT_TB_SCIENCE_EXECUTION.json",
+      "git_blob_sha": "8fd94607b245214e64fa8f6cf0173002f51eeef5"
+    },
+    "current_ledger": {
+      "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261011_V73.json",
+      "git_blob_sha": "0ffeb04eef5286b70cd351a5b022ca50deba2d3d"
+    },
+    "frozen_manifest": {
+      "path": "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json",
+      "git_blob_sha": "6dfa880b1f68881531afbba6ca211681801fd19b"
+    },
+    "capability_verification": {
+      "path": "canonical/verification/TB_SCIENCE_DNA_STORAGE_HARBOR_ROUTE_V1_VERIFY_20261011_V1.json",
+      "git_blob_sha": "2a02191d1bcbe04a55c189792739274e50877e5c"
+    },
+    "capability_qualification": {
+      "path": "canonical/qualification/TB_SCIENCE_DNA_STORAGE_HARBOR_CAPABILITY_V1.json",
+      "git_blob_sha": "794a57817c8cd8d1471565af16625591b7816219"
+    },
+    "capability_transfer_law": {
+      "path": "canonical/laws/CAPABILITY_TRANSFER_VS_COGNITION_OUTSOURCING_LAW_V1.md",
+      "git_blob_sha": "86dfbdeb327bf981db6e32f22f460a675df56d57"
+    },
+    "runtime_blobs": {
+      "codec": "3734ad7c4674d9ebe77dbaf0592ea10d0a6cb451",
+      "adapter": "2009dabd5870218550fcc5af74dc6c4822269818",
+      "harbor_agent": "ef4832b8fff0197cb9f0fe87196fbe2521e312f5"
+    },
+    "independent_public_verification": {
+      "codec_pr": 2690,
+      "codec_run_id": 38143609577,
+      "adapter_pr": 2693,
+      "adapter_run_id": 38144925669,
+      "harbor_pr": 2694,
+      "harbor_run_id": 38145310956
+    }
+  },
+  "scheduler_work_item": {
+    "work_id": "TB_SCIENCE_RANK23_DNA_STORAGE_LIVE_VALIDATION",
+    "work_type": "BENCHMARK_INSTRUMENTATION",
+    "benchmark_role": "NEW_CAPABILITY_VALIDATION",
+    "claims_new_primitive": false,
+    "reusable_capability_under_validation": "DONOR_FREE_DNA_STORAGE_CODEC_WITH_VISIBLE_CONTRACT_ADAPTER_AND_CLAIM_BOUND_HARBOR_EXECUTION"
+  },
+  "controls": {
+    "logical_attempts_authorized_total": 1,
+    "retries_authorized": 0,
+    "replacement_allowed": false,
+    "incremental_spend_usd_max": 0,
+    "external_or_local_general_purpose_model_cognition_forbidden": true,
+    "task_read_before_exact_public_reseal_and_live_preflight_forbidden": true,
+    "durable_start_cas_required": true,
+    "agent_ready_before_durable_start_required": true,
+    "post_start_result_irreversible": true,
+    "uncertain_effect_replay_authority": false,
+    "rank22_replay_forbidden": true,
+    "different_subject_after_rank23_claim_forbidden": true
+  },
+  "task_read": false,
+  "task_started": false,
+  "benchmark_trials_consumed": 0,
+  "checkpoint_dispatch_admission": true,
+  "execution_claim_authority": false,
+  "execution_authority": false,
+  "activation_authority": false,
+  "promotion_authority": false,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "hard_nonclaims": [
+    "NO_RANK23_TASK_CONTENT_READ",
+    "NO_RANK23_EXECUTION_CLAIM_OR_LOGICAL_ATTEMPT_ID_YET",
+    "NO_RANK23_EXECUTION_OR_ACTIVATION_AUTHORITY_FROM_ADMISSION",
+    "NO_RANK22_RETRY_REPLAY_OR_REPLACEMENT",
+    "NO_EXTERNAL_OR_LOCAL_GENERAL_PURPOSE_MODEL_COGNITION",
+    "NO_CLAIM_GENERIC_DNA_CAPABILITY_PROVES_RANK23_WILL_PASS",
+    "NO_CAPABILITY_ACCEPTANCE_OR_TERMINAL_CREDIT_FROM_ADMISSION"
+  ],
+  "next": "BUILD_CONTENT_ADDRESSED_RANK23_PUBLIC_RESEAL_AND_CLAIM_BINDING__VERIFY_ZERO_EXPOSURE__THEN_MINT_NON_RETRY_EXECUTION_AUTHORITY"
+}
