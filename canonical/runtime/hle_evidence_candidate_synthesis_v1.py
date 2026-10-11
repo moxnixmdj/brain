@@ -92,12 +92,12 @@ _PERSON_VALUE = (
 _PERSON_PATTERNS = (
     re.compile(
         r"\b(?:discovered|invented|developed|introduced|proposed|founded|identified)"
-        r"\s+by\s+(" + _PERSON_VALUE + r")(?=\s*(?:[.;]|$))",
+        r"\s+by\s+(" + _PERSON_VALUE + r")(?=\s*(?:\b(?:in|at|during|for)\b|[.;]|$))",
         re.I,
     ),
     re.compile(
         r"\b(?:discoverer|inventor|developer|founder|author)\s+(?:was|is)\s+"
-        r"(" + _PERSON_VALUE + r")(?=\s*(?:[.;]|$))",
+        r"(" + _PERSON_VALUE + r")(?=\s*(?:\b(?:in|at|during|for)\b|[.;]|$))",
         re.I,
     ),
 )
