@@ -1,0 +1,142 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_NATIVE_QUESTION_CONTRACT_PREEXPOSURE_V1",
+  "date": "2026-10-11",
+  "status": "FROZEN_BEFORE_RUNTIME_IMPLEMENTATION__SYNTHETIC_NON_HLE__ZERO_CREDIT",
+  "objective": "Compile broad question surfaces into typed answer contracts and contamination-safer research focuses without models or gold.",
+  "tasks": [
+    {
+      "id": "WHO",
+      "q": "Who discovered the synthetic Zephyr particle in the fictional Alder experiment?",
+      "kind": "PERSON",
+      "polarity": "POSITIVE"
+    },
+    {
+      "id": "WHEN_YEAR",
+      "q": "In what year was the synthetic Meridian protocol first published?",
+      "kind": "YEAR",
+      "polarity": "POSITIVE"
+    },
+    {
+      "id": "WHEN_DATE",
+      "q": "When did the fictional Borealis mission reach its destination?",
+      "kind": "DATE_OR_TIME",
+      "polarity": "POSITIVE"
+    },
+    {
+      "id": "WHERE",
+      "q": "Where is the fictional Ardent observatory located?",
+      "kind": "LOCATION",
+      "polarity": "POSITIVE"
+    },
+    {
+      "id": "HOW_MANY",
+      "q": "How many synthetic modules are present in the fictional Kappa assembly?",
+      "kind": "NUMBER",
+      "polarity": "POSITIVE"
+    },
+    {
+      "id": "PERCENT",
+      "q": "What percentage of the synthetic sample showed the fictional Lambda phenotype?",
+      "kind": "NUMBER",
+      "polarity": "POSITIVE"
+    },
+    {
+      "id": "VALUE",
+      "q": "What is the value of the synthetic parameter zeta under the stated fictional conditions?",
+      "kind": "NUMBER_OR_EXPRESSION",
+      "polarity": "POSITIVE"
+    },
+    {
+      "id": "CALCULATE",
+      "q": "Calculate the synthetic quantity q from q = 7 * 6.",
+      "kind": "SYMBOLIC_OR_NUMBER",
+      "polarity": "POSITIVE"
+    },
+    {
+      "id": "SOLVE",
+      "q": "Solve the synthetic equation x + 4 = 9 for x.",
+      "kind": "SYMBOLIC_OR_NUMBER",
+      "polarity": "POSITIVE"
+    },
+    {
+      "id": "EQUATION",
+      "q": "What equation defines the fictional Tau coefficient in the stated convention?",
+      "kind": "SYMBOLIC_EXPRESSION",
+      "polarity": "POSITIVE"
+    },
+    {
+      "id": "IDENTIFY",
+      "q": "Identify the fictional enzyme responsible for the synthetic reaction.",
+      "kind": "ENTITY_OR_TERM",
+      "polarity": "POSITIVE"
+    },
+    {
+      "id": "NAME",
+      "q": "Name the fictional theorem that establishes the synthetic bound.",
+      "kind": "ENTITY_OR_TERM",
+      "polarity": "POSITIVE"
+    },
+    {
+      "id": "KNOWN_AS",
+      "q": "What is the fictional transformation known as in this convention?",
+      "kind": "ENTITY_OR_TERM",
+      "polarity": "POSITIVE"
+    },
+    {
+      "id": "WHICH_ENTITY",
+      "q": "Which fictional protein mediates the synthetic transport process?",
+      "kind": "ENTITY_OR_TERM",
+      "polarity": "POSITIVE"
+    },
+    {
+      "id": "WHAT_TEXT",
+      "q": "What mechanism explains the fictional phase transition?",
+      "kind": "SHORT_TEXT",
+      "polarity": "POSITIVE"
+    },
+    {
+      "id": "WHY",
+      "q": "Why does the fictional Alder effect disappear above the synthetic threshold?",
+      "kind": "EXPLANATION",
+      "polarity": "POSITIVE"
+    },
+    {
+      "id": "HOW_PROCESS",
+      "q": "How does the fictional Meridian process produce the synthetic signal?",
+      "kind": "EXPLANATION",
+      "polarity": "POSITIVE"
+    },
+    {
+      "id": "BOOLEAN",
+      "q": "Is the fictional Kappa rule valid under the synthetic boundary condition?",
+      "kind": "BOOLEAN",
+      "polarity": "POSITIVE"
+    },
+    {
+      "id": "NEGATIVE_WHICH",
+      "q": "Which fictional compound is NOT produced by the synthetic pathway?",
+      "kind": "ENTITY_OR_TERM",
+      "polarity": "NEGATIVE"
+    },
+    {
+      "id": "MCQ",
+      "q": "Which synthetic material has the highest fictional conductivity?\nAnswer Choices:\nA. Alder\nB. Borealis\nC. Cygnus",
+      "kind": "BARE_OPTION_LETTER",
+      "polarity": "POSITIVE",
+      "mcq": true
+    }
+  ],
+  "rules": [
+    "NO_HLE_QUESTION_OR_GOLD_CONTENT",
+    "NO_EXTERNAL_REASONING_MODEL",
+    "NO_ANSWER_TYPE_METADATA_REQUIRED_FOR_VISIBLE_MCQ_SYNTAX",
+    "FULL_RAW_QUESTION_MUST_NOT_BE_USED_VERBATIM_AS_WEB_QUERY",
+    "UNKNOWN_OR_AMBIGUOUS_SURFACES_FAIL_CLOSED",
+    "COMPILATION_IS_NOT_ANSWER_CORRECTNESS"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
