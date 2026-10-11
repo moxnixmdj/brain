@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_Q1_WAKE_GATE_TRUTH_REPAIR_20261011_V1",
+  "date": "2026-10-11",
+  "status": "Q1_REMAINS_UNRESOLVED__PUBLIC_SCOPE_INSUFFICIENT_FOR_TERMINAL_PAIRWISE_DOMINANCE__ACTIVE_ACQUISITION_WAKE_GATED__ZERO_CREDIT",
+  "target": "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+  "frozen_target": {
+    "value": 1822,
+    "basis": "SEPTEMBER_22_2026_OPUS_5_5_MAX_AA_BRIEFCASE_V1_1_RESULT",
+    "preserved": true
+  },
+  "public_protocol_truth": {
+    "official_task_count": 91,
+    "official_project_count": 4,
+    "private_dataset": true,
+    "grading": [
+      "BINARY_RUBRIC_CHECKS",
+      "PAIRWISE_ANALYTICAL_QUALITY",
+      "PAIRWISE_PRESENTATION_QUALITY"
+    ],
+    "public_fifth_scenario": "DEMONSTRATIVE_ONLY__NOT_PART_OF_OFFICIAL_RESULTS",
+    "current_scoring_note": "SEPTEMBER_2026_PAIRWISE_SCOPES_USE_CROWD_BT_FIT"
+  },
+  "proof": {
+    "professional_24_of_24_property_truth_sufficient_alone": false,
+    "reason": [
+      "PRIVATE_91_TASK_SCOPE_NOT_CONTENT_BOUND",
+      "PAIRWISE_ANALYTICAL_AND_PRESENTATION_OUTCOMES_NOT_ENTAILED_BY_GENERIC_PROPERTY_TRUTH",
+      "PUBLIC_DEMONSTRATIVE_SCENARIO_IS_NOT_OFFICIAL_SCOPE",
+      "PUBLIC_METADATA_DOES_NOT_IDENTIFY_PRIVATE_PAIRWISE_RELATION"
+    ],
+    "robust_common_policy_route_closed": false
+  },
+  "wake_condition": [
+    "MATCHED_EPOCH_COMPARABLE_BRAIN_AA_BRIEFCASE_RECEIPT",
+    "OWNER_ADMISSIBLE_PRIVATE_TASK_SCOPE_PLUS_PAIRWISE_RELATION_BINDING",
+    "SCOPE_COMPLETE_DOMINANCE_CERTIFICATE_COVERING_PRIVATE_91_TASK_POPULATION"
+  ],
+  "scheduler_effect": {
+    "q1_active_acquisition_budget": 0,
+    "next_primary_publicly_executable_row": "OSWORLD_2_1_PARTIAL_GE_81_8",
+    "preserve_q1_unresolved": true
+  },
+  "sources": [
+    "https://artificialanalysis.ai/evaluations/aa-briefcase?results=elo",
+    "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
+    "https://artificialanalysis.ai/articles/aa-briefcase"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "row_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
