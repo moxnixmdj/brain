@@ -144,6 +144,24 @@ class GenericGoalToolEffectPlannerV1Tests(unittest.TestCase):
         self.assertIn("shipment", p["resource_terms"])
         self.assertNotIn("statu", p["resource_terms"])
 
+    def test_noun_mentions_do_not_spawn_phantom_actions(self):
+        contract = compile_goal_contract(
+            "Review the work message. Find the invoice record. Check the schedule."
+        )
+        actions = [x["action_class"] for x in contract["intents"]]
+        self.assertEqual(actions, ["observe", "observe", "observe"])
+        self.assertNotIn("notify", actions)
+        self.assertNotIn("create", actions)
+
+    def test_ambiguous_action_words_still_work_as_imperative_verbs(self):
+        contract = compile_goal_contract(
+            "Message the operations team. Record the result. List the open orders."
+        )
+        actions = [x["action_class"] for x in contract["intents"]]
+        self.assertIn("notify", actions)
+        self.assertIn("create", actions)
+        self.assertIn("observe", actions)
+
     def test_missing_required_effect_fails_closed(self):
         endpoints = [
             {
