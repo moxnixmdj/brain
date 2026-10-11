@@ -3,7 +3,7 @@
   "date": "2026-10-11",
   "status": "SOUND_RUN_SCORE_MASS_REDUCTION_CANDIDATE__TASK_MASS_COROLLARY_CONDITIONAL_ON_AGGREGATION_BINDING__ZERO_CREDIT",
   "target_predicate": "FINANCE_AGENT_V2_GE_58_59",
-  "canonical_base_commit": "b2b3dfd8309b2c5f15e9692feb8412eb3f06f20c",
+  "canonical_base_commit": "019d296287297c67aaaf856b0e369ce39b8a820a",
   "first_party_bindings": {
     "benchmark_methodology": {
       "url": "https://www.vals.ai/benchmarks/fabv2",
