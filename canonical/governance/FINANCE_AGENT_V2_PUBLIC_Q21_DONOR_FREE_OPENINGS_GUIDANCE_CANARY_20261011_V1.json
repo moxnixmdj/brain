@@ -1,0 +1,119 @@
+{
+  "schema": "PROJECT_BRAIN_FINANCE_AGENT_V2_PUBLIC_Q21_DONOR_FREE_OPENINGS_GUIDANCE_CANARY_V1",
+  "date": "2026-10-11",
+  "status": "PUBLIC_CANARY_MUST_PASS_MATCH__DONOR_FREE_GUIDANCE_SERIES_BEAT_MISS_EXTREMA__ZERO_BENCHMARK_CREDIT",
+  "target_predicate": "FINANCE_AGENT_V2_GE_58_59",
+  "scope": "PUBLIC_QUESTION_ONLY__EARNINGS_ANALYSIS_BROS_CAVA_OPENINGS_GUIDANCE_MUST_PASS",
+  "benchmark_binding": {
+    "repository": "vals-ai/finance-agent-v2",
+    "commit": "502aab6fdaa3fb9294905c7453f89882baa8d39b",
+    "public_csv_path": "data/public.csv",
+    "public_csv_git_blob_sha": "fca7ec52abce7ca8351d0692d00a4aa74f680855",
+    "public_question_ordinal_1_based": 21,
+    "category": "Earnings Analysis",
+    "public_must_pass": {
+      "bros_min_beat_miss_percent": "-3.75",
+      "bros_max_beat_miss_percent": "-3.75",
+      "cava_min_beat_miss_percent": "4.35",
+      "cava_max_beat_miss_percent": "12.50"
+    }
+  },
+  "primary_sources": {
+    "bros": {
+      "q4_2024_release": "https://www.sec.gov/Archives/edgar/data/1866581/000186658125000035/a2024-q4_ex991.htm",
+      "q1_2025_release": "https://www.sec.gov/Archives/edgar/data/1866581/000186658125000129/a2025-q1_ex991.htm",
+      "q2_2025_release": "https://www.sec.gov/Archives/edgar/data/1866581/000186658125000185/a2025-q2_ex991.htm",
+      "q3_2025_release": "https://www.sec.gov/Archives/edgar/data/1866581/000186658125000226/a2025-q3_ex991.htm",
+      "q4_2025_release": "https://www.sec.gov/Archives/edgar/data/1866581/000186658126000003/a2025-q4_ex991.htm",
+      "guidance_points": [
+        160,
+        160,
+        160,
+        160
+      ],
+      "guidance_semantics": "AT_LEAST_OR_TARGETED_160__QUESTION_EXPLICITLY_ALLOWS_FLOOR_GUIDANCE_POINT",
+      "actual_new_shops": 154
+    },
+    "cava": {
+      "q4_2024_release": "https://www.sec.gov/Archives/edgar/data/1639438/000162828025007750/earningsrelease2024q4.htm",
+      "q1_2025_release": "https://www.sec.gov/Archives/edgar/data/1639438/000162828025025930/earningsrelease2025q1.htm",
+      "q2_2025_release": "https://www.sec.gov/Archives/edgar/data/1639438/000163943825000006/earningsrelease2025q2.htm",
+      "q3_2025_release": "https://www.sec.gov/Archives/edgar/data/1639438/000162828025048864/earningsrelease2025q3.htm",
+      "q4_2025_release": "https://www.sec.gov/Archives/edgar/data/1639438/000162828026011087/earningsrelease2025q4.htm",
+      "guidance_ranges": [
+        [
+          62,
+          66
+        ],
+        [
+          64,
+          68
+        ],
+        [
+          68,
+          70
+        ],
+        [
+          68,
+          70
+        ]
+      ],
+      "guidance_midpoints": [
+        64,
+        66,
+        69,
+        69
+      ],
+      "actual_net_new_restaurant_openings": 72
+    }
+  },
+  "recomputation": {
+    "formula": "BEAT_MISS_PERCENT=(ACTUAL/GUIDANCE_REFERENCE-1)*100",
+    "bros_series": [
+      "-3.7500",
+      "-3.7500",
+      "-3.7500",
+      "-3.7500"
+    ],
+    "bros_min": "-3.7500",
+    "bros_max": "-3.7500",
+    "cava_series": [
+      "12.500",
+      "9.0909090909090909090909090909090909090909090909100",
+      "4.3478260869565217391304347826086956521739130434800",
+      "4.3478260869565217391304347826086956521739130434800"
+    ],
+    "cava_min": "4.3478260869565217391304347826086956521739130434800",
+    "cava_max": "12.500",
+    "display": {
+      "bros_min": "-3.75",
+      "bros_max": "-3.75",
+      "cava_min": "4.35",
+      "cava_max": "12.50"
+    },
+    "optional_conclusion": "CAVA_GUIDANCE_IS_MORE_CONSERVATIVE_BY_STRICT_SERIES_DOMINANCE",
+    "public_must_pass_match": true
+  },
+  "brain_route": {
+    "midpoint_and_beat_miss_algebra": "canonical/runtime/finance_quantitative_algebra_v1.py",
+    "question_compiler": "canonical/runtime/finance_quantitative_question_contract_v1.py",
+    "dependency_compiler": "canonical/runtime/finance_quantitative_dependency_v1.py",
+    "runtime_external_model_cognition_required": false
+  },
+  "proved": [
+    "ALL_FOUR_PUBLIC_MUST_PASS_EXTREMA_CHECKS_FOR_Q21_RECOMPUTE_FROM_FIRST_PARTY_SEC_RELEASES",
+    "THE_OPTIONAL_MORE_CONSERVATIVE_CONCLUSION_FOLLOWS_FROM_STRICT_SERIES_DOMINANCE_WITHOUT_GENERAL_MODEL_COGNITION",
+    "NO_PRIVATE_TEST_OR_VALIDATION_CASE_WAS_ACCESSED"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_PUBLIC_Q21_PROVES_PRIVATE_TEST_TRANSFER",
+    "NO_CLAIM_FINANCE_AGENT_V2_SCORE_GE_58_59",
+    "NO_ACCEPTANCE_FAMILY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "private_cases_exposed": 0,
+    "benchmark_score_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
