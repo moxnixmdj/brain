@@ -1,14 +1,14 @@
 {
   "schema": "PROJECT_BRAIN_GDPVAL_DEFENSIBLE_FRESH_SUBMISSION_MANIFEST_20261011_V1",
   "date": "2026-10-11",
-  "status": "PARTIAL_CONTENT_ADDRESSED_MANIFEST__23_DEFENSIBLE_FRESH_SUBJECTS__FAIL_CLOSED_TOMBSTONES_PREVAIL",
+  "status": "PARTIAL_CONTENT_ADDRESSED_MANIFEST__24_DEFENSIBLE_FRESH_SUBJECTS__FAIL_CLOSED_TOMBSTONES_PREVAIL",
   "benchmark": "GDPval-AA v2.1",
   "dataset": {
     "revision_sha": "11e7900cdcac61bc4daf59e65feb238acda98fbf",
     "population_count": 220,
     "manifest_root_sha256": "f69af30fcea243ccb25d44c4a5380be0cdcac621287568525065034ce6cedae8"
   },
-  "fresh_subject_count": 23,
+  "fresh_subject_count": 24,
   "fresh_rows": [
     5,
     6,
@@ -32,7 +32,8 @@
     30,
     31,
     36,
-    40
+    40,
+    217
   ],
   "fresh_subjects": [
     {
@@ -241,6 +242,15 @@
       "precommit_commit": "c604f5006820ce3ca24d6afc2487a95a30886a6c",
       "output_freeze_commit": "d1a0f98c88aa3db238c7b2d044c21ef030a35d50",
       "status": "PASS__FRESH_ROW40_RENTAL_AGREEMENT_SELF_SERVICE_GUIDE_DOCX_FROZEN__RENDER_QA_PASS__ZERO_OWNER_SCORE_CREDIT"
+    },
+    {
+      "row_idx": 217,
+      "task_id": "854f3814-681c-4950-91ac-55b0db0e3781",
+      "receipt_path": "canonical/evidence/GDPVAL_SCALE_ROW217_854F3814_BRAIN_SUBMISSION_RECEIPT_20261011_V1.json",
+      "receipt_blob_sha": "c1ee97635b12bbd418e0a2486e38918a1ca5a21b",
+      "precommit_commit": "c604f5006820ce3ca24d6afc2487a95a30886a6c",
+      "output_freeze_commit": "eb59c154236159bb399ff4024bf454a4c22c9e46",
+      "status": "PASS__FRESH_ROW217_OVERPASSQL_MARKDOWN_FROZEN__LIVE_I40_SEED_PROBE_PASS__FULL_PUBLIC_MIRROR_REPLAY_INFRA_INCONCLUSIVE__ZERO_OWNER_SCORE_CREDIT"
     }
   ],
   "excluded_or_spent": [
@@ -290,10 +300,10 @@
     }
   ],
   "coverage": {
-    "fresh_frozen_tasks": 23,
+    "fresh_frozen_tasks": 24,
     "population_tasks": 220,
-    "fresh_fraction": 0.10454545454545454,
-    "remaining_without_defensible_fresh_submission": 197
+    "fresh_fraction": 0.10909090909090909,
+    "remaining_without_defensible_fresh_submission": 196
   },
   "precedence_rule": "EXPLICIT_CONTAMINATION_OR_IDENTITY_TOMBSTONE_OVERRIDES_ANY_LATER_RECEIPT_LABELLED_FRESH_FOR_THE_SAME_ROW",
   "boundary": [
@@ -308,5 +318,9 @@
     "incremental_spend_usd": 0,
     "acceptance_credit_delta": 0,
     "terminal_credit_delta": 0
+  },
+  "freshness_semantics_reconciliation": {
+    "path": "canonical/governance/GDPVAL_PREOUTPUT_PACKET_PRECOMMIT_ORDER_RECONCILIATION_20261011_V1.json",
+    "effect": "DETERMINISTIC_PRE_FREEZE_PROMPT_HASHING_IS_NOT_COGNITIVE_EXPOSURE__LITERAL_NO_PROMPT_READ_WORDING_RETIRED__EARLIER_PACKET_MANIFEST_NOT_A_FRESHNESS_PRECOMMIT"
   }
 }
