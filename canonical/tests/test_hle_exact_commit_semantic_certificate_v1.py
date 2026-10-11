@@ -52,10 +52,27 @@ class HLEExactCommitCertificateTests(unittest.TestCase):
     def test_threshold_is_8463(self):
         self.assertEqual(TARGET_NUMERATOR, 8463)
 
-    def test_no_grader_equivalence_claim(self):
+    def test_no_grader_equivalence_or_target_score_claim(self):
         r = score_exact_commitments(self.full(), self.refs)
         self.assertFalse(r["grader_equivalence_claimed"])
+        self.assertFalse(r["target_model_grader_score_claimed"])
+        self.assertTrue(r["supplementary_only"])
+        self.assertEqual(
+            r["prohibited_inference"],
+            "EXACT_GOLD_IDENTITY_DOES_NOT_IMPLY_TARGET_MODEL_GRADER_CORRECT",
+        )
         self.assertTrue(r["threshold_met"])
+
+    def test_manifest_hashes_are_permutation_invariant(self):
+        rows = self.full()
+        a = score_exact_commitments(rows, self.refs)
+        b = score_exact_commitments(list(reversed(rows)), list(reversed(self.refs)))
+        for key in (
+            "commitments_manifest_sha256",
+            "references_manifest_sha256",
+            "verdict_manifest_sha256",
+        ):
+            self.assertEqual(a[key], b[key])
 
 
 if __name__ == "__main__":
