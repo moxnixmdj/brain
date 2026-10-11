@@ -1,0 +1,148 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_V21_WEB_APP_PRODUCT_API_AND_STATIC_ROUTE_AUDIT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__PRODUCT_NATIVE_WEB_APP_BOUNDARY_INDEPENDENTLY_REPLAYED__58_OF_108_STATIC_FIRST_STEP_ROUTEABILITY__ZERO_BENCHMARK_EXECUTION__ZERO_SCORE_CREDIT",
+  "target_predicate": "OSWORLD_2_1_PARTIAL_GE_81_8",
+  "subject": {
+    "branch": "osworld-v21-direct-matched-run-20261011-v1",
+    "head_commit": "68da360f978669403d983587002d31b62a015669",
+    "subject_id": "brain-osworld-v21-model-independent-state-app-web-v3",
+    "operative_blobs": {
+      "host_web_app_ops": "1c71580ad74b03b4135e9a21b5bc807fe51de9c9",
+      "web_app_registry": "3ac6309541dc1a8b57914f4a9fcbbc00c7698328",
+      "web_app_policy_overlay": "35dfb1065d2b721d94f79cc03e55aa7d38980da9",
+      "adapter_v3": "37078c13ffa512421571baf24e2b30564b00f8d9",
+      "subject_v3": "73c821cca7976ad8831147973382b533e556aca1",
+      "owner_submission_binding_v3": "37d436dda9ec161feba3315e39de3461df18428b",
+      "owner_submission_entrypoint_v3": "df1b5d4a31bb37301cc1893d30b257c6c4b9b628"
+    }
+  },
+  "product_api_boundary": {
+    "rule": "PRODUCT_NATIVE_FEATURE_ENDPOINTS_ONLY__GENERIC_CONTROL_PLANE_STATE_WRITES_FORBIDDEN",
+    "forbidden": [
+      "/api/state",
+      "/state-manage",
+      "ARBITRARY_URL",
+      "ARBITRARY_HTTP_METHOD",
+      "RAW_JAVASCRIPT",
+      "RAW_PYTHON",
+      "RAW_SHELL"
+    ],
+    "current_apps": [
+      "mailhub",
+      "teamchat",
+      "calendar_web",
+      "cloudcrm",
+      "vaultbank",
+      "budgetwise",
+      "visaapplication"
+    ],
+    "source_release": {
+      "website_repo": "Task-Web/OSWorld-web",
+      "website_commit": "60c89fe6a8ed934668619d8d26132848239eb8ee"
+    }
+  },
+  "independent_replay": {
+    "carrier": {
+      "kind": "SPRITE",
+      "name": "brain-live-runtime-v1-verify-20261008",
+      "id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13"
+    },
+    "web_app_boundary": {
+      "result": "PASS_10_OF_10",
+      "receipt_sha256": "0eaea2c93e31b22f51cdcced5b61c012acbf664b25ad59097985dd434b7e3177",
+      "properties": [
+        "LIVE_BROWSER_COOKIE_CONTEXT_REUSED",
+        "FIXED_PRODUCT_ENDPOINT_PATHS",
+        "ONLY_ALLOWED_PRODUCT_FIELDS_SERIALIZED",
+        "UNKNOWN_OPERATION_REJECTED",
+        "CONTROL_FIELD_INJECTION_REJECTED",
+        "PROTECTED_BENCHMARK_PATH_REJECTED",
+        "WRONG_APP_TAB_IDENTITY_REJECTED",
+        "REGISTRY_HAS_NO_CONTROL_PLANE_STATE_OPERATION",
+        "BUDGETWISE_PRODUCT_SESSION_ENDPOINT_BOUND",
+        "VISA_SECTION_PATH_AND_BODY_BOUND"
+      ]
+    },
+    "policy_overlay": {
+      "result": "PASS_8_OF_8",
+      "receipt_sha256": "e80986408e9264f5b977583f4c2de0f7389fe02aa76712270f934d50a37f6812",
+      "properties": [
+        "TEAMCHAT_SOURCE_PRIORITY",
+        "VAULTBANK_PRODUCT_PROJECTION",
+        "GENERIC_EMAIL_SURFACE_DISCOVERY_BEFORE_PRODUCT_GUESS",
+        "THUNDERBIRD_NOT_MISROUTED_TO_MAILHUB",
+        "DISCOVERED_MAILHUB_PRODUCT_PROJECTION",
+        "SUCCESSFUL_PRODUCT_RECEIPT_NOT_REOBSERVED_FOREVER",
+        "BUDGETWISE_PRODUCT_SESSION_ROUTE",
+        "DS160_VALIDATED_PRODUCT_ROUTE"
+      ]
+    }
+  },
+  "public_instruction_static_audit": {
+    "purpose": "VALIDATION_ONLY__SCHEDULER_EVIDENCE__NEVER_RUNTIME_TASK_ID_LOOKUP_OR_POLICY_INPUT",
+    "public_reference_dataset": "simular-ai/sai-osworld-v21-reference-runs",
+    "public_reference_revision": "abfb5852189f49e81255c38d98287df29ae53658",
+    "corpus_task_count": 108,
+    "corpus_sha256": "b484eab2e9815f265a6806c38c6aab761dea05b6bb14a9ab490a86c9c4af6a47",
+    "audit_sha256": "fbaad4cea7dd3e2f820cceba7208fc0387564ccc5c3b1a1204d5013e05d8731a",
+    "routeable_first_step_tasks": 58,
+    "unresolved_tasks": 50,
+    "routeable_fraction": 0.5370370370370371,
+    "action_counts": {
+      "BROWSER_OP": 39,
+      "WEB_APP_OP": 15,
+      "APP_OP": 3,
+      "STATE_OPS": 1
+    },
+    "largest_unresolved_app_occurrences": {
+      "wps": 8,
+      "chrome": 5,
+      "vscode": 5,
+      "gimp": 4,
+      "shotcut": 4,
+      "thunderbird": 2,
+      "calendar": 2,
+      "libreoffice_impress": 2,
+      "excel": 2,
+      "file_manager": 2,
+      "zotero": 2,
+      "musescore": 2,
+      "reaper": 2,
+      "freecad": 2,
+      "pdf_viewer": 2,
+      "kicad": 2
+    }
+  },
+  "causal_update": {
+    "prior_static_routeable_tasks": 40,
+    "after_initial_product_web_overlay": 56,
+    "current_static_routeable_tasks": 58,
+    "total_routeability_gain": 18,
+    "implication": "PRODUCT_NATIVE_MACHINE_READABLE_STATE_AND_EXISTING_DETERMINISTIC_APP_OPERATIONS_REMOVE A MATERIAL FIRST_STEP_ROUTING GAP WITHOUT EXTERNAL MODEL COGNITION"
+  },
+  "next_cut": [
+    "EXPAND GENERIC DETERMINISTIC COVERAGE ONLY WHERE IT DOMINATES EXPECTED SCORE GAIN PER IMPLEMENTATION EFFORT",
+    "PREFER PRODUCT NATIVE APIS AND VERIFIED APP/FILE TRANSFORMS OVER PIXEL POLICIES",
+    "KEEP PUBLIC INSTRUCTION CORPUS VALIDATION ONLY",
+    "RUN AUTHENTIC OWNER OR SELF_HOSTED MATCHED EVALUATION ONLY AFTER SUBJECT FREEZE"
+  ],
+  "hard_nonclaims": [
+    "STATIC_ROUTEABILITY_IS_NOT_TASK_SUCCESS",
+    "STATIC_ROUTEABILITY_IS_NOT_PARTIAL_SCORE",
+    "NO_OSWORLD_TASK_WAS EXECUTED BY THIS AUDIT",
+    "NO_OSWORLD_SCORE OBSERVED",
+    "NO_81_8_CLAIM",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "benchmark_tasks_executed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false
+}
