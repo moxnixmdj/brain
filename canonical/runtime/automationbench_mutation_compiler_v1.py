@@ -229,7 +229,6 @@ def compile_asana_add_to_section(
     if "asana" not in low or "section" not in low:
         return None
 
-    # Public prompts commonly use either "'February' section" or "February section".
     m_section = re.search(r"['\"]([^'\"]{2,40})['\"]\s+section", prompt, re.I)
     if not m_section:
         m_section = re.search(
@@ -241,21 +240,47 @@ def compile_asana_add_to_section(
         return None
     section_name = m_section.group(1).strip()
 
+    project_match = re.search(r"\b(?:project\s+)?(proj[_-][A-Za-z0-9_-]+)\b", prompt, re.I)
+    project_gid = project_match.group(1) if project_match else None
+
+    # Recover the intended task name from authoritative observed source text.
+    target_names: list[str] = []
+    all_records = _records(observations)
+    for rec in all_records:
+        text = " ".join(
+            _s(rec.get(k))
+            for k in ("body","body_plain","text","description","subject","title")
+        )
+        m_name = re.search(r"(?:create\s+task|task)\s*:\s*([^\n.]+)", text, re.I)
+        if m_name:
+            target_names.append(m_name.group(1).strip())
+
+    if not target_names:
+        return None
+
     task_candidates: list[dict[str, Any]] = []
     section_candidates: list[dict[str, Any]] = []
-    for rec in _records(observations):
+    for rec in all_records:
         gid = _s(_ci_get(rec, "gid", "id", "Id"))
         name = _s(_ci_get(rec, "name", "title"))
-        if gid and name:
-            if name.lower() == section_name.lower():
-                section_candidates.append(rec)
-            if any(k in rec for k in ("due_on", "completed", "assignee", "workspace")):
-                task_candidates.append(rec)
+        if not gid or not name:
+            continue
+
+        if name.lower() == section_name.lower():
+            if project_gid:
+                project = _ci_get(rec, "project")
+                if isinstance(project, Mapping):
+                    pgid = _s(_ci_get(project, "gid", "id", "Id"))
+                    if pgid and pgid != project_gid:
+                        continue
+            section_candidates.append(rec)
+
+        if any(name.lower() == target.lower() for target in target_names):
+            task_candidates.append(rec)
 
     if not task_candidates or not section_candidates:
         return None
 
-    # Prefer the task whose name appears in a previously observed source line.
     task = task_candidates[-1]
     section = section_candidates[0]
     task_gid = _s(_ci_get(task, "gid", "id", "Id"))
@@ -274,7 +299,9 @@ def compile_asana_add_to_section(
         },
         "grounding": {
             "task_gid": task_gid,
+            "task_name": _s(_ci_get(task, "name", "title")),
             "section_gid": section_gid,
             "section_name": section_name,
+            "project_gid": project_gid,
         },
     }
