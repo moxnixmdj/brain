@@ -4230,7 +4230,10 @@
         "external_model_runtime_calls": 0,
         "network_dependency_count": 0,
         "incremental_spend_usd": 0,
-        "exact_adapter_blob_pending": true
+        "adapter_git_blob_sha": "86f48bc6998f5181be74d5903e53525fd4cbfe5a",
+        "resource_pipeline_git_blob_sha": "4025e2664a3919c4ca938923e79a1ffa78262949",
+        "resource_pipeline_verification_path": "canonical/verification/SCIENTIFIC_NUMERIC_RESOURCE_PIPELINE_V1_VERIFY_20261011_V1.json",
+        "resource_pipeline_verification_git_blob_sha": "c2a39ceeae65b8529e54307623f495f3793363be"
       }
     }
   },
