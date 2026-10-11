@@ -57,6 +57,10 @@ def run_native_example(
     scores: Any,
 ) -> Any:
     """Delegate scoring/execution to OSWorld's untouched native runner."""
+    setter = getattr(agent, "set_result_dir", None)
+    if not callable(setter):
+        raise RunnerBridgeError("BRAIN_OSWORLD_RESULT_DIR_BIND_UNAVAILABLE")
+    setter(result_dir)
     bind_agent_environment(agent, env)
     return lib_run_single.run_single_example(
         agent,
