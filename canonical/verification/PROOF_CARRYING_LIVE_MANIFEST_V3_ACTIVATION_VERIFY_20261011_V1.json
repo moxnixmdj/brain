@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_PROOF_CARRYING_LIVE_MANIFEST_V3_ACTIVATION_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__EXACT_CURRENT_MAIN__11_OF_11_BINDINGS__INDEPENDENT_18_OF_18__SEPARATE_LIVE_AUTHORITY_PRESERVED__ZERO_CREDIT",
+  "base_main_commit": "90e45c46bb3995eda14d25f5ef5867c4939195a2",
+  "checks": {
+    "runtime_exact": true,
+    "test_exact": true,
+    "independent_verification_exact": true,
+    "activation_runtime_binding": true,
+    "activation_verification_binding": true,
+    "scheduler_activation_binding": true,
+    "scheduler_runtime_binding": true,
+    "mission_scheduler_binding": true,
+    "mission_activation_binding": true,
+    "independent_adversarial_and_cross_layer_18_of_18": true,
+    "activation_and_promotion_authority_remain_false": true
+  },
+  "current_bindings": {
+    "runtime": [
+      "canonical/runtime/proof_carrying_live_manifest_v3.py",
+      "7f53a86e4fb5ee8794674fb97adabe8858b7f9d2"
+    ],
+    "tests": [
+      "canonical/tests/test_proof_carrying_live_manifest_v3.py",
+      "225a042989cd253fb22d70e8950337898ab0ad4a"
+    ],
+    "verification": [
+      "canonical/verification/PROOF_CARRYING_LIVE_MANIFEST_V3_INDEPENDENT_VERIFY_20261011_V1.json",
+      "ee0c1e2f08ae9dead9a5f96f42b36cf54f985067"
+    ],
+    "activation": [
+      "canonical/governance/PROOF_CARRYING_LIVE_MANIFEST_V3_ACTIVATION_20261011_V1.json",
+      "72e65f91d82a94af6665c946eb7172c65c913292"
+    ],
+    "scheduler": [
+      "canonical/governance/CURRENT_DEVELOPMENT_SCHEDULER.json",
+      "69da8a1ccfe16700133235ad9b9da33fe1569536"
+    ],
+    "mission": [
+      "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
+      "8c1f0351c1ae168f57eec1cc1506eeaf06d0900e"
+    ]
+  },
+  "result": {
+    "live_manifest_candidacy_gate_load_bearing": true,
+    "learned_v2_cross_layer_binding": true,
+    "activation_candidate_only": true,
+    "live_global_authority_required": true,
+    "activation_authority": false,
+    "promotion_authority": false,
+    "execution_authority": false,
+    "terminal_authority": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
