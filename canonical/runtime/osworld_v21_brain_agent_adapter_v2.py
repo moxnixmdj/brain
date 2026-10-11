@@ -41,6 +41,34 @@ class BrainOSWorldAgentV2(BrainOSWorldAgent):
             isinstance(raw_actions, list)
             and len(raw_actions) == 1
             and isinstance(raw_actions[0], Mapping)
+            and str(raw_actions[0].get("type") or "").strip().upper() == "DONE"
+            and self.history
+        ):
+            prior = self.history[-1]
+            app_result = prior.get("app_result")
+            if (
+                isinstance(app_result, Mapping)
+                and app_result.get("ok") is True
+                and not prior.get("operation_error")
+            ):
+                response = str(raw.get("response") or "").strip()
+                actions = ["DONE"]
+                self._record(
+                    state,
+                    response=response,
+                    actions=actions,
+                    policy_receipt=raw.get("_policy_receipt"),
+                    completion_evidence={
+                        "kind": "APP_OP_SUCCESS_RECEIPT",
+                        "app": app_result.get("app"),
+                        "operation": app_result.get("operation"),
+                    },
+                )
+                return response, actions
+        if (
+            isinstance(raw_actions, list)
+            and len(raw_actions) == 1
+            and isinstance(raw_actions[0], Mapping)
             and str(raw_actions[0].get("type") or "").strip().upper() == "APP_OP"
         ):
             first = raw_actions[0]
