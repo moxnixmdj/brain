@@ -1,0 +1,70 @@
+{
+  "schema": "PROJECT_BRAIN_FINANCE_INDEX_IRREDUCIBLE_NORMALIZATION_AUTHORITY_CUT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "VERIFIED_CAUSAL_COMPRESSION_CANDIDATE__SIX_COMPONENT_NUMERIC_ROUTE_COLLAPSED_TO_ONE_NORMALIZATION_OR_OWNER_EQUIVALENT_AUTHORITY_CLASS__STRONGER_BEHAVIORAL_ROUTE_DOES_NOT_INHERIT_NUMERIC_CHECKPOINT_CREDIT__ZERO_CREDIT",
+  "obligation_id": "FINANCE_ACCOUNTING_INDEX_GE_61",
+  "exact_target": "Artificial Analysis Finance & Accounting Index >= 61",
+  "current_verified": {
+    "outer_weights_and_evaluation_membership": true,
+    "direct_exact_rational_threshold_kernel": true,
+    "compensation_across_components_allowed": true,
+    "componentwise_opus_noninferiority_not_required": true,
+    "behavioral_private_surface_execution_dependency_redundancy": true
+  },
+  "irreducible_numeric_authority_class": {
+    "statement": "AT_LEAST_ONE_SOUND_ROUTE_MUST BIND THE BRAIN TO THE PUBLISHED INDEX SCALE: EITHER NORMALIZED_COMPONENT_LOWER_BOUND_RECEIPTS UNDER THE OWNER'S ACTUAL INNER NORMALIZATION, AN OWNER_ACCEPTED_EXACT_OR_EQUIVALENT_INDEX_RESULT, OR A SEPARATELY VERIFIED SCOPE_SAFE CERTIFICATE WHOSE CONCLUSION DIRECTLY IMPLIES THE NUMERIC INDEX PREDICATE.",
+    "currently_available": false,
+    "reason": "PUBLIC_METHODology exposes outer six-component weights and evaluation membership but not the inner capability-subscore normalization/breakdown; existing direct behavioral dominance proves execution-route redundancy but explicitly grants no benchmark/family score credit."
+  },
+  "reuse": {
+    "direct_threshold_theorem": {
+      "path": "canonical/governance/FINANCE_INDEX_DIRECT_THRESHOLD_THEOREM_V1.json",
+      "git_blob_sha": "37f47143f62fe2f59e56d8eca4a64bae18a1ce8b"
+    },
+    "threshold_reconciliation": {
+      "path": "canonical/governance/FINANCE_INDEX_DIRECT_THRESHOLD_AUTHORITY_RECONCILIATION_20261010_V1.json",
+      "git_blob_sha": "f17cea66e32ac5b65dd5506fd49d7a319d2b3a5e"
+    },
+    "component_mapping_refresh": {
+      "path": "canonical/governance/FINANCE_INDEX_PUBLIC_COMPONENT_MAPPING_REFRESH_20261010_V1.json",
+      "git_blob_sha": "08234ffe4fdea57329106547e1b1cfae60d08908"
+    },
+    "behavioral_route_binding": {
+      "path": "canonical/governance/FINANCE_INDEX_COMPONENT_ROUTE_BINDING_V1.json",
+      "git_blob_sha": "cf7d97e6ab5c3c1e647c0d92a82573399c90f1d1"
+    },
+    "private_surface_dominance": {
+      "path": "canonical/governance/PRIVATE_SURFACE_DOMINANCE_VERDICT_V2.json",
+      "git_blob_sha": "d656952a509f7e9f375cc817bee1bb20eee06b78"
+    }
+  },
+  "scheduler_effect": {
+    "delete": [
+      "SEARCH_FOR_SIX_INDEPENDENT_ARITHMETIC_FORMULAS",
+      "REPROVE_OUTER_WEIGHTS",
+      "REPEAT_STATIC_PUBLIC_COMPONENT_MAPPING_SEARCH",
+      "USE_BEHAVIORAL_ROUTE_REDUNDANCY_AS_NUMERIC_SCORE_CREDIT"
+    ],
+    "preserve": [
+      "WAKE_ON_OWNER_NORMALIZATION_OR_BREAKDOWN_PUBLICATION",
+      "WAKE_ON_CONTENT_ADDRESSED_NORMALIZED_COMPONENT_RECEIPT",
+      "WAKE_ON_OWNER_ACCEPTED_EXACT_OR_EQUIVALENT_RESULT",
+      "WAKE_ON_SCOPE_SAFE_DIRECT_NUMERIC_IMPLICATION_CERTIFICATE"
+    ],
+    "minimum_information_request": "OWNER_INNER_NORMALIZATION_OR_ONE_OWNER_ACCEPTED_SCALE_BINDING_SUFFICIENT_TO_CONVERT_EXISTING_BRAIN_EVIDENCE_INTO_A_VALID_NORMALIZED_LOWER_BOUND_OR_DIRECT_INDEX VERDICT"
+  },
+  "new_primitive_required": false,
+  "acceptance_authority": false,
+  "terminal_authority": false,
+  "hard_nonclaims": [
+    "NO_FINANCE_INDEX_ACCEPTANCE",
+    "NO_COMPONENT_SCORE_CREATED",
+    "NO_NORMALIZATION_INFERRED_FROM_BEHAVIORAL_PROOFS",
+    "NO_SCORE_INHERITANCE_FROM_PRIVATE_SURFACE_DOMINANCE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
