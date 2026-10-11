@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_FINANCE_AGENT_V2_PUBLIC_Q27_DONOR_FREE_DCF_CANARY_V1",
+  "date": "2026-10-11",
+  "status": "PUBLIC_CANARY_ALL_MUST_PASS_MATCH__DONOR_FREE_LMT_DCF__ZERO_BENCHMARK_CREDIT",
+  "target_predicate": "FINANCE_AGENT_V2_GE_58_59",
+  "scope": "PUBLIC_QUESTION_ONLY__FINANCIAL_MODELING_LMT_DCF_MUST_PASS",
+  "benchmark_binding": {
+    "repository": "vals-ai/finance-agent-v2",
+    "public_csv_path": "data/public.csv",
+    "public_question_ordinal_1_based": 27,
+    "category": "Financial Modeling",
+    "public_must_pass": {
+      "exit_multiple_per_share": "419.21",
+      "perpetual_growth_per_share": "521.62",
+      "higher_method": "PERPETUAL_GROWTH"
+    }
+  },
+  "primary_sources": {
+    "lmt_2025_10k": "https://www.sec.gov/Archives/edgar/data/936468/000162828026004195/lmt-20251231.htm",
+    "lmt_latest_2025_10q": "https://www.sec.gov/Archives/edgar/data/936468/000162828025045693/lmt-20250928.htm",
+    "facts_million_usd": {
+      "fy2024_revenue": "71043",
+      "fy2025_revenue": "75048",
+      "fy2025_operating_profit": "7731",
+      "fy2025_depreciation_and_amortization": "1687",
+      "fy2025_deferred_taxes": "372",
+      "other_operating_2025": "-754",
+      "other_operating_2024": "-509",
+      "other_operating_2023": "-140",
+      "net_debt": "17579"
+    },
+    "shares_outstanding_million": "231.4"
+  },
+  "assumptions": {
+    "wacc_percent": "8.0",
+    "exit_multiple_x": "10.0",
+    "terminal_growth_percent": "2.5",
+    "change_nwc_percent_revenue": "0.25",
+    "capex_percent_revenue": "2.0"
+  },
+  "recomputation": {
+    "exit_multiple_per_share": "419.21",
+    "perpetual_growth_per_share": "521.62",
+    "higher_method": "PERPETUAL_GROWTH",
+    "public_must_pass_match": true
+  },
+  "brain_route": {
+    "workflow": "canonical/runtime/finance_modeling_workflows_v1.py",
+    "algebra": "canonical/runtime/finance_quantitative_algebra_v1.py",
+    "runtime_external_model_cognition_required": false
+  },
+  "proved": [
+    "ALL_THREE_PUBLIC_Q27_MUST_PASS_CHECKS_RECOMPUTE_WITH_THE_DONOR_FREE_NATIVE_DCF",
+    "NO_PRIVATE_TEST_OR_VALIDATION_CASE_WAS_ACCESSED"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_PUBLIC_Q27_PROVES_PRIVATE_TEST_TRANSFER",
+    "NO_CLAIM_FINANCE_AGENT_V2_SCORE_GE_58_59",
+    "NO_BENCHMARK_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "private_cases_exposed": 0,
+    "benchmark_score_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
