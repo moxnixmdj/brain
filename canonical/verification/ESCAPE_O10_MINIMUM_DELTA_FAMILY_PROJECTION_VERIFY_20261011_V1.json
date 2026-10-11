@@ -1,0 +1,90 @@
+{
+  "schema": "PROJECT_BRAIN_ESCAPE_O10_MINIMUM_DELTA_FAMILY_PROJECTION_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__NATIVE_GIT_TREE_BOUND__INDEPENDENT_SPRITE_PYCOMPILE_AND_3_OF_3_TESTS__O10_EXACTLY_3_DELTA_FAMILIES__ZERO_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "base_main_commit": "63869c5abde6bf4faec61e5be89ecc78ac9d7dba",
+    "branch": "successor/escape-o10-minimum-delta-family-v1",
+    "pre_receipt_head": "384263bfb9023ed3da0ca29689732e047192c2eb",
+    "tree_sha": "2ffac78fb20cf32c8b5fe4914c3c2d084ff7da55"
+  },
+  "native_git_bindings": {
+    "runtime": [
+      "canonical/runtime/escape_o10_minimum_delta_family_projection_v1.py",
+      "463cb4b0b1b84cdad9d1894b13755827bca1af06"
+    ],
+    "tests": [
+      "canonical/tests/test_escape_o10_minimum_delta_family_projection_v1.py",
+      "d2bf5fb19521e4556727ae65f8d7aa76f5b7c0e3"
+    ],
+    "governance": [
+      "canonical/governance/CURRENT_ESCAPE_O10_MINIMUM_DELTA_FAMILIES_20261011_V1.json",
+      "330746e9cd29d4746c1220497473fa27de2497ac"
+    ],
+    "two_engine_source": [
+      "canonical/governance/CURRENT_ESCAPE_TWO_ENGINE_MINIMUM_DELTA_CUT_20261011_V1.json",
+      "ee4e082c02b2da84bb029bc0fe92660135aa2b49"
+    ],
+    "specialization_source": [
+      "canonical/governance/CURRENT_FRONTIER_REUSE_SPECIALIZATION_20261011_V1.json",
+      "8f6682d7217f90e82850173f7dd8231de66b8da5"
+    ]
+  },
+  "independent_execution": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-professional-hard-defect-verify-20261010",
+    "carrier_id": "sprite-1bbb86ed-1f7c-409f-8397-fadc4de7a62a",
+    "workspace": "/home/sprite/verify-o10-family",
+    "py_compile": "PASS",
+    "unittest": {
+      "command": "python3 -m unittest -v canonical.tests.test_escape_o10_minimum_delta_family_projection_v1",
+      "tests_run": 3,
+      "tests_passed": 3,
+      "tests_failed": 0
+    },
+    "direct_projection": {
+      "command": "python3 canonical/runtime/escape_o10_minimum_delta_family_projection_v1.py",
+      "status": "PASS__O10_COMPRESSED_TO_3_MINIMUM_DELTA_FAMILIES__ZERO_CREDIT",
+      "active_o_row_count": 10,
+      "minimum_delta_family_count": 3,
+      "row_counts": {
+        "THRESHOLD_OR_DECOMPOSITION_EVIDENCE": 3,
+        "SCOPE_COMPLETENESS": 4,
+        "OWNER_OR_EVALUATOR_INTERFACE": 3
+      }
+    },
+    "transport_note": "SPRITE_FILE_MATERIALIZATION_IS_SEMANTIC_TEXT_TRANSPORT__NATIVE_GIT_OBJECT_IDENTITIES_ARE_BOUND_SEPARATELY_BY_GITHUB_TREE_READ"
+  },
+  "proved": [
+    "THE_TEN_ACTIVE_O_ROWS_ARE_PARTITIONED_EXACTLY_ONCE_INTO_THREE_MINIMUM_DELTA_FAMILIES",
+    "THE_PARTITION_IS_DERIVED_FROM_THE_CURRENT_TWO_ENGINE_O10_SET_AND_CURRENT_ROW_SPECIALIZATION",
+    "ROW_SPECIFIC_EXACT_DELTAS_ARE_PRESERVED_UNCHANGED",
+    "THRESHOLD_DECOMPOSITION_SCOPE_COMPLETENESS_AND_OWNER_EVALUATOR_INTERFACE_ARE_SCHEDULING_SHAPES_NOT_NEW_ACCEPTANCE_PRIMITIVES",
+    "GOVERNANCE_PROJECTION_MATCHES_COMPILER_OUTPUT",
+    "ALL_EXECUTION_PROMOTION_ACCEPTANCE_OWNERSHIP_AND_TERMINAL_AUTHORITIES_REMAIN_FALSE"
+  ],
+  "scheduler_effect": [
+    "REPLACE_TEN_BESPOKE_O_ACQUISITION_PROGRAMS_WITH_THREE_SHARED_PROOF_OR_ACQUISITION_SHAPES",
+    "KEEP_ROW_LEVEL_DELTA_AS_THE_LEAF_BINDING",
+    "REENTER_EXISTING_V4_O_GATE_AFTER_EACH_NEW_FACT",
+    "STOP_WHEN_A_ROW_VERDICT_CHANGES",
+    "DO_NOT_INFER_ONE_FACT_CLOSES_AN_ENTIRE_FAMILY"
+  ],
+  "hard_nonclaims": [
+    "NO_ACTIVE_O_ROW_ACCEPTANCE_CLOSED",
+    "NO_Q2_RESULT",
+    "NO_NEW_PRIMITIVE",
+    "NO_CC_R3_OR_U_EMPTY",
+    "NO_CAPABILITY_ACCEPTANCE_OWNERSHIP_PROMOTION_OR_TERMINAL_CREDIT",
+    "NO_EXACT_BYTE_SPRITE_REPLAY_CLAIM"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "promotion_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
