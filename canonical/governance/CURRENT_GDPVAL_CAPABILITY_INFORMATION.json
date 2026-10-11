@@ -1,0 +1,82 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_GDPVAL_CAPABILITY_INFORMATION_V1",
+  "date": "2026-10-11",
+  "status": "ACTIVE__FROZEN_1846_CAPABILITY_TARGET__MINIMUM_BRIDGE_FRONTIER_V4__OLD_MECHANICAL_FIRST_DISPATCH_DEMOTED__ZERO_CREDIT",
+  "target": {
+    "predicate": "BRAIN_PROFESSIONAL_WORK_CAPABILITY_GE_CAPABILITY_EVIDENCED_BY_FROZEN_OPUS55_GDPVAL_AA_V2_1_1846",
+    "benchmark": "GDPval-AA",
+    "version": "2.1",
+    "reference_model": "Claude Opus 5.5",
+    "frozen_reference_elo": 1846,
+    "live_owner_score_is_target_rebase": false
+  },
+  "current_frontier": {
+    "path": "canonical/governance/GDPVAL_MINIMUM_BRIDGE_ACQUISITION_FRONTIER_20261011_V4.json",
+    "git_blob_sha": "aa6376fdc276c9d9c94731e39ef60811a4e96203"
+  },
+  "current_frontier_verification": {
+    "path": "canonical/verification/GDPVAL_MINIMUM_BRIDGE_ACQUISITION_FRONTIER_VERIFY_20261011_V4.json",
+    "git_blob_sha": "3c41e47e18a4dc1f1a3f5ab7efc5e72bf9988677"
+  },
+  "priority_reclassification": {
+    "path": "canonical/governance/GDPVAL_ESCAPE_PROGRESS_V4_PRIORITY_RECLASSIFICATION_20261011_V1.json",
+    "git_blob_sha": "fc2b9e65369f57b4fffaf9ec3a31a33e64f2bd25"
+  },
+  "supporting_truth": {
+    "public_grading_protocol": {
+      "path": "canonical/governance/GDPVAL_V21_PUBLIC_GRADING_PROTOCOL_CLOSURE_20261011_V1.json",
+      "git_blob_sha": "9073cca98109ea85a89715f9f94545a51ceaf2fb"
+    },
+    "common_anchor_transport_falsifier": {
+      "path": "canonical/governance/GDPVAL_V21_COMMON_ANCHOR_TRANSPORT_FALSIFIER_20261011_V1.json",
+      "git_blob_sha": "cb8a16c974d2f185152744102163a1099dd5ff71"
+    },
+    "checked_public_target_artifact_probe": {
+      "path": "canonical/verification/GDPVAL_TARGET_OPUS55_ZERO_SPEND_PUBLIC_ARTIFACT_PROBE_20261011_V1.json",
+      "git_blob_sha": "27b4a6efcc2ca917696a22767274791ae51ea05a"
+    },
+    "abstention_countermodel_reuse": {
+      "path": "canonical/governance/GDPVAL_24_OF_24_ABSTENTION_COUNTERMODEL_REUSE_20261011_V1.json",
+      "git_blob_sha": "9df7768f50737bd1ed14bcf4172fc5611bbe2418"
+    }
+  },
+  "route_state": {
+    "MATCHED_SCORE": "OPEN_SLEEP",
+    "TARGET_RELATIVE_PAIRWISE": "OPEN_SLEEP_CHECKED_PUBLIC_SURFACES",
+    "ABSOLUTE_DOMINANCE": "OPEN_ACTIVE",
+    "W_COVER": "OPEN_FIRST",
+    "W_QUALITY": "OPEN_AFTER_OR_PARALLEL_ONLY_IF_NONINTERFERING",
+    "capability_relation_proved": false,
+    "literal_gdpval_elo_ge_1846_proved": false
+  },
+  "active_next": "PROVE_OR_FALSIFY_GDPVAL_W_COVER_ESCAPE_PROGRESS_TOTALITY_OR_BIND_A_STRONGER_SCOPE_COMPLETE_POSITIVE_COVER_CERTIFICATE",
+  "off_path": [
+    "REMAINING_PUBLIC_220_SUBMISSION_GENERATION_BY_DEFAULT",
+    "OLD_92_OF_220_MECHANICAL_VERIFIER_ROUTE_AS_FIRST_DISPATCH",
+    "PUBLIC_RUBRIC_SELF_SCORE_AS_OWNER_QUALITY",
+    "REPEAT_SAME_ZERO_SPEND_OPUS55_ARTIFACT_SEARCH_WITHOUT_SURFACE_CHANGE",
+    "REPEAT_PUBLIC_SCORING_FORMULA_DISCOVERY",
+    "COMMON_ANCHOR_ONLY_1846_TO_LIVE_SCORE_TRANSPORT",
+    "TREAT_24_OF_24_FAIL_CLOSED_PROPERTY_TRUTH_AS_CAPABILITY_NONINFERIORITY"
+  ],
+  "wake_conditions": [
+    "AUTHENTIC_COMPARABLE_BRAIN_OWNER_SCORE",
+    "ZERO_SPEND_OWNER_SUBMISSION_OR_SCORING_ROUTE",
+    "FIRST_PARTY_TARGET_OPUS55_TASK_ARTIFACT_OR_OWNER_PAIRWISE_OUTCOME",
+    "EXACT_ENOUGH_OWNER_FIT_OR_COMPARABILITY_RECEIPT",
+    "SCOPE_COMPLETE_POSITIVE_COVER_CERTIFICATE",
+    "SCOPE_COMPLETE_QUALITY_ORDER_CERTIFICATE_ENTAILING_OWNER_JUDGE_PREFERENCE"
+  ],
+  "hard_nonclaims": [
+    "NO_GDPVAL_GE_1846",
+    "NO_BRAIN_GE_OPUS55",
+    "NO_W_COVER_OR_W_QUALITY_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
