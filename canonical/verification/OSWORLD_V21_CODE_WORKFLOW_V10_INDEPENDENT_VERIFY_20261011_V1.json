@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_V21_CODE_WORKFLOW_V10_INDEPENDENT_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__MODEL_INDEPENDENT_V10_CODE_WORKSPACE_EDIT_COMPILE_TEST_VERIFY__181_OF_181_SYNTHETIC_TESTS__ZERO_BENCHMARK_CASES__ZERO_SCORE_CREDIT",
+  "target_reference": "OSWORLD_2_1_PARTIAL_GE_81_8",
+  "subject": {
+    "branch": "osworld-v21-direct-matched-run-20261011-v1",
+    "verified_head_sha": "a2dfa2a944848c3a8c0bb93596210fe877973cf6",
+    "subject_id": "brain-osworld-v21-model-independent-code-workflow-v10",
+    "general_purpose_model_runtime_cognition": false,
+    "external_generation_provider": false
+  },
+  "independent_carrier": {
+    "type": "SPRITE",
+    "name": "brain-live-runtime-v1-verify-20261008",
+    "id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13",
+    "working_tree": "/home/sprite/osworld-v10-verify",
+    "base_tree": "prior independently verified V9 working tree",
+    "overlay_source": "exact GitHub branch file contents",
+    "incremental_spend_usd": 0
+  },
+  "replay": {
+    "command": "PYTHONPATH=. python3 -m pytest -q canonical/tests --ignore=canonical/tests/test_osworld_v21_browser_ops_v1.py",
+    "passed": 181,
+    "failed": 0,
+    "elapsed_seconds": 6.95,
+    "benchmark_cases_consumed": 0,
+    "excluded_obsolete_test": "canonical/tests/test_osworld_v21_browser_ops_v1.py",
+    "exclusion_reason": "obsolete direct-browser compiler is outside the credited loaded-module graph; current browser control is host-side BROWSER_OP"
+  },
+  "exact_new_blobs": {
+    "canonical/runtime/osworld_v21_brain_agent_adapter_v4.py": "0be999fbc1b3cc4c921b76b70b68853807f16a01",
+    "canonical/runtime/osworld_v21_brain_subject_v10.py": "14e498444fc4ea5d1de40c09165653cef8cf5047",
+    "canonical/runtime/osworld_v21_code_policy_overlay_v1.py": "32710dc1fcb2dbd18f39bacfda879a94ce2add2f",
+    "canonical/runtime/osworld_v21_host_code_ops_v1.py": "4cfc9d20e2c5ae4c3cadfcc091a8d79ed5b2f2c6",
+    "canonical/runtime/osworld_v21_unified_policy_v10.py": "2c77d1b5244d618de2f4bc35ff1d19abfc131c9a",
+    "canonical/runtime/osworld_v21_workflow_policy_v6.py": "132281417d019ecb510c3dfd5329aee4aa2be4dc",
+    "canonical/tests/test_osworld_v21_code_workflow_v10.py": "e8b76686b4d54ba2a3c58a1eca7e93654c98083c"
+  },
+  "newly_proved": [
+    "EXPLICIT_WORKSPACE_TEXT_REPLACEMENT_WITH_READBACK_RECEIPT",
+    "EXPLICIT_WORKSPACE_FILE_WRITE_WITH_READBACK_RECEIPT",
+    "PYTHON_SOURCE_COMPILE_VALIDATION_WITHOUT_SOURCE_EXECUTION",
+    "BOUNDED_FIXED_PYTEST_EXECUTION_WITH_WORKSPACE_SOURCE_QUARANTINE",
+    "BOUNDED_GIT_STATUS_OBSERVATION",
+    "FAILED_TESTS_DO_NOT_SATISFY_WORKFLOW_COMPLETION",
+    "EDIT_THEN_TEST_COMPOSES_ONLY_AFTER_POSTCONDITION_RECEIPTS",
+    "CODE_OP_ADAPTER_COMPLETION_REQUIRES_VERIFIED_CODE_RECEIPT",
+    "V10_RUNTIME_REMAINS_MODEL_INDEPENDENT_AND_TASK_ID_FREE"
+  ],
+  "remaining_general_residuals": [
+    "MEDIA_GEOMETRY_AND_TIMELINE_TRANSFORMATIONS",
+    "LONG_WORKFLOW_CONSTRAINT_PRESERVATION",
+    "IRREDUCIBLE_VISUAL_ONLY_GROUNDING_AND_RECOVERY",
+    "AUTHENTIC_OSWORLD_MEASUREMENT_ONLY_AFTER_CAPABILITY_MARGIN"
+  ],
+  "hard_nonclaims": [
+    "NO_OFFICIAL_OSWORLD_TASK_EXECUTED",
+    "NO_BRAIN_OSWORLD_SCORE",
+    "NO_CLAIM_181_SYNTHETIC_TESTS_IMPLY_81_8",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
