@@ -51,10 +51,11 @@
     "current_wake_gate": ["canonical/governance/CURRENT_O_TB4_MYSTERY_WAKE_GATE_RECONCILIATION_20261011_V1.json", "3c4f75a7d9208fa423e0282f6f0b0859ef7426c6"],
     "current_terminal_authority": ["canonical/governance/CURRENT_TERMINAL_AUTHORITY.json", "ae28dee5dd638813f4c42aa6d7c46d4950f1c0f8"]
   },
-  "implementation": {
-    "runtime": "canonical/runtime/mysterymechanism_intrinsic_noninferiority_certificate_v1.py",
-    "tests": "canonical/tests/test_mysterymechanism_intrinsic_noninferiority_certificate_v1.py",
-    "policy": "Fail closed on population, contract, scorer, receipt or independence mismatch."
+  "verification_policy": {
+    "proof_only": true,
+    "new_live_runtime_primitive_added": false,
+    "independent_verification_required_before_activation": true,
+    "fail_closed_on_population_contract_scorer_receipt_or_scope_mismatch": true
   },
   "hard_nonclaims": [
     "No claim Brain currently has 109 private successes.",
