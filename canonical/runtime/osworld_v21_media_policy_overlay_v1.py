@@ -54,10 +54,14 @@ def route_media(state:Mapping[str,Any]):
         return _finish(state,_emit("PROBE",{"input":paths[0]},"inspect media metadata"))
     if len(paths)!=2: return None
     src,dst=paths
-    nums=[float(x) for x in re.findall(r"\b\d+(?:\.\d+)?\b",instruction)]
 
-    if ("trim" in low or "cut" in low) and " from " in low and " to " in low and len(nums)>=2:
-        return _finish(state,_emit("TRIM",{"input":src,"output":dst,"start_s":nums[0],"end_s":nums[1]},"trim media interval"))
+    trim=re.search(r"\b(?:trim|cut)\b.*?\bfrom\s+(\d+(?:\.\d+)?)\s*(?:s|sec|seconds?)?\s+to\s+(\d+(?:\.\d+)?)",instruction,re.I)
+    if trim:
+        return _finish(state,_emit("TRIM",{"input":src,"output":dst,"start_s":float(trim.group(1)),"end_s":float(trim.group(2))},"trim media interval"))
+
+    crop=re.search(r"\bcrop\b.*?\bto\s+(\d{1,4})\s*[xX]\s*(\d{1,4}).*?\bat\s+(\d{1,4})\s*[,xX]\s*(\d{1,4})",instruction,re.I)
+    if crop:
+        return _finish(state,_emit("CROP",{"input":src,"output":dst,"width":int(crop.group(1)),"height":int(crop.group(2)),"x":int(crop.group(3)),"y":int(crop.group(4))},"crop media"))
 
     size=re.search(r"(\d{1,4})\s*[xX]\s*(\d{1,4})",instruction)
     if ("resize" in low or "scale" in low) and size:
@@ -71,7 +75,8 @@ def route_media(state:Mapping[str,Any]):
     if "extract" in low and "audio" in low:
         return _finish(state,_emit("EXTRACT_AUDIO",{"input":src,"output":dst},"extract audio"))
 
-    if "volume" in low and nums:
-        factor=nums[-1]/100.0 if "%" in instruction else nums[-1]
+    volume=re.search(r"\bvolume\b.*?\bto\s+(\d+(?:\.\d+)?)\s*(%)?",instruction,re.I)
+    if volume:
+        value=float(volume.group(1)); factor=value/100.0 if volume.group(2) else value
         return _finish(state,_emit("SET_VOLUME",{"input":src,"output":dst,"factor":factor},"adjust media volume"))
     return None
