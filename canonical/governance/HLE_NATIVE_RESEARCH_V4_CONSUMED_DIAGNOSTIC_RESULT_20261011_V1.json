@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_NATIVE_RESEARCH_V4_CONSUMED_DIAGNOSTIC_RESULT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "CONSUMED_PUBLIC_DIAGNOSTIC_FAILED__V4_RETIRED_FROM_FRESH_HOLDOUT",
+  "frozen_subject": {
+    "preexposure_v4_commit": "565a93766e30f7714784491b4c9ece7ad7b4c134",
+    "research_solver_v4_blob": "6e40197b55e387b83208095d2deb06da6f58ab57",
+    "evidence_synthesis_v2_blob": "66b6a9e8292b2f1404abbd6b890e36e026b03d51"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2691,
+    "workflow_run_id": 38144238299,
+    "workflow_job_id": 114484144702,
+    "exact_blob_binding_passed": true,
+    "compile_passed": true,
+    "synthetic_tests_passed": true
+  },
+  "diagnostic": {
+    "dataset": "ai-safety-institute/trivia_qa_verified",
+    "split": "validation",
+    "slice": "rows_25_to_49_ALREADY_CONSUMED",
+    "sample_size": 25,
+    "attempted": 11,
+    "attempt_rate": 0.44,
+    "normalized_exact": 0,
+    "normalized_exact_rate": 0,
+    "required_attempt_rate": 0.25,
+    "required_normalized_exact_rate": 0.2,
+    "gate_passed": false
+  },
+  "causal_findings": [
+    "QUESTION_SLOT_CLASSIFICATION_UNDERCOVERS_COMMON_WH_PREDICATE_FORMS_AND_MALFORMED_PUNCTUATION",
+    "PERSON_AND_LOCATION_CAPTURE_REGEXES_USED_GLOBAL_CASE_INSENSITIVITY_THAT_DESTROYS_CAPITALIZATION_AS_AN_ENTITY_BOUNDARY",
+    "SHORT_TEXT_WAS_ROUTED_THROUGH_GENERIC_TERM_EXTRACTION_AND_PROMOTED_UNRELATED_RELATIONS",
+    "DEMONYM_TO_COUNTRY_RULE_FIRED_ON_SUBNATIONAL_LOCATION_QUESTIONS",
+    "RETRIEVAL_RETURNED_SUBSTANTIAL_EVIDENCE_BUT_TYPED_SELECTION_CONVERTED_IT_INCORRECTLY",
+    "EXISTING_EXACT_RETRIEVAL_V2_AND_TOTAL_SOLVER_COMPOSITION_REMAIN_UNDERUSED"
+  ],
+  "decision": [
+    "DO_NOT_RUN_FRESH_ROWS_50_TO_74_WITH_V4",
+    "DO_NOT_RUN_HLE_TERMINAL_CASES_WITH_V4",
+    "BUILD_SUCCESSOR_USING_ROBUST_ANSWER_SLOT_CONTRACT_PLUS_CASE_SAFE_TYPED_RELATIONS_PLUS_EXISTING_EXACT_RETRIEVAL_COMPOSITION"
+  ],
+  "exposure": {
+    "fresh_public_rows_50_to_74_consumed": 0,
+    "hle_questions_consumed": 0,
+    "hle_gold_consumed": 0
+  },
+  "external_model_calls_total": 0,
+  "external_reasoning_model_calls_total": 0,
+  "model_dependency_count_total": 0,
+  "hle_score_credit": 0,
+  "hle_67_7_certified": false,
+  "incremental_spend_usd": 0
+}
