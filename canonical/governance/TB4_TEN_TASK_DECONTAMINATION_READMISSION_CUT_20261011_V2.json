@@ -1,0 +1,128 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_TEN_TASK_DECONTAMINATION_READMISSION_CUT_20261011_V2",
+  "date": "2026-10-11",
+  "status": "CANDIDATE__EXACT_TEN_ZERO_VERDICT_HARDWARE_COMPATIBLE_TASKS__CONDITIONAL_CAPACITY_221__ZERO_CREDIT",
+  "supersedes": "canonical/governance/TB4_TEN_TASK_DECONTAMINATION_READMISSION_CUT_20261011_V1.json",
+  "target_predicate": "CODING_TB4_GE_66_4",
+  "source_partition": {
+    "attainability_manifest_path": "canonical/governance/TB4_ATTAINABILITY_EVIDENCE_MANIFEST_V1.json",
+    "attainability_manifest_git_blob_sha": "36cfd7b29465a2da6c05667b18848bdcabcd22e6",
+    "selected_tasks_are_members_of_irreversibly_zero_hardware_compatible_set": true,
+    "selected_task_count": 10,
+    "selected_tasks_are_hardware_incompatible": false
+  },
+  "capacity_math": {
+    "corrected_current_cpu_route_max_success_slots": 171,
+    "recovered_slots_per_selected_task": 5,
+    "selected_task_count": 10,
+    "conditional_added_slots": 50,
+    "conditional_max_success_slots": 221,
+    "required_success_slots": 219,
+    "conditional_failure_slack": 2,
+    "proof": "171+5*10=221__AND__221>=219__AND__221-219=2"
+  },
+  "selected_tasks": [
+    {
+      "task": "hof-topology-interpenetration",
+      "rank": 3,
+      "receipt_path": "canonical/capabilities/opus55/HOF_TOPOLOGY_INTERPENETRATION_TB4_CONTAMINATION_20261001_V1.json",
+      "receipt_git_blob_sha": "ff24f42ccb7a07f65985ecf3f63b03816ba97453",
+      "zero_verdict_basis": "ABORTED_BEFORE_TERMINAL_VERIFIER__HIDDEN_VERIFIER_NOT_RUN"
+    },
+    {
+      "task": "gsea-proteomics",
+      "rank": 4,
+      "receipt_path": "canonical/capabilities/opus55/GSEA_PROTEOMICS_TB4_VERIFIER_INFRA_FAILURE_20261001_V1.json",
+      "receipt_git_blob_sha": "5a3051d9c979c7ea22387e53c0dd22a893fe3c50",
+      "zero_verdict_basis": "VERIFIER_INFRA_FAILURE_BEFORE_TEST_SCRIPT__REWARD_NOT_OBSERVED_OR_ADJUDICATED"
+    },
+    {
+      "task": "batched-eval-parity",
+      "rank": 5,
+      "receipt_path": "canonical/capabilities/opus55/BATCHED_EVAL_PARITY_TB4_CONTAMINATION_20261001_V1.json",
+      "receipt_git_blob_sha": "7fd70c0b66bd8387c65d2573d46478ed29ed700b",
+      "zero_verdict_basis": "CONTAMINATED__NO_HIDDEN_VERIFIER_RUN"
+    },
+    {
+      "task": "intrastat-meldung",
+      "rank": 8,
+      "receipt_path": "canonical/capabilities/opus55/INTRASTAT_MELDUNG_TB4_CONTAMINATED_20261001_V1.json",
+      "receipt_git_blob_sha": "198e3d84140da2cedffc5cd1e04e4127b74d258d",
+      "zero_verdict_basis": "FAILED_BEFORE_READY__CAPABILITY_SUCCESS_AND_FAILURE_BOTH_UNPROVED"
+    },
+    {
+      "task": "session-window-debug",
+      "rank": 16,
+      "receipt_path": "canonical/capabilities/opus55/SESSION_WINDOW_DEBUG_RANK16_CONTAMINATED_20261001_V1.json",
+      "receipt_git_blob_sha": "8769d3b26bd03a56dcfb243edf5f07a4d50f78f8",
+      "zero_verdict_basis": "CONTAMINATED__NO_TASK_EXECUTION__HIDDEN_VERIFIER_NOT_READ"
+    },
+    {
+      "task": "data-anonymization",
+      "rank": 17,
+      "receipt_path": "canonical/capabilities/opus55/DATA_ANONYMIZATION_RANK17_SOURCE_BOUNDARY_CONTAMINATED_20261001_V1.json",
+      "receipt_git_blob_sha": "850ed27e74a8fede786345064d688caf9acae358",
+      "zero_verdict_basis": "NO_CANDIDATE__NO_TERMINAL_SUBMISSION__HIDDEN_VERIFIER_NOT_READ"
+    },
+    {
+      "task": "vba-userform-port",
+      "rank": 20,
+      "receipt_path": "canonical/capabilities/opus55/VBA_USERFORM_PORT_RANK20_CONTAMINATION_LEDGER_V1.json",
+      "receipt_git_blob_sha": "331e50ea0fa4872fa8a738f069e11b3ac4070038",
+      "zero_verdict_basis": "CONTAMINATED_PRE_STAGE_C__TASK_COMMAND_NOT_EXECUTED__STAGE_C_REVOKED"
+    },
+    {
+      "task": "foodstuff-beta-activity",
+      "rank": 21,
+      "receipt_path": "canonical/capabilities/opus55/FOODSTUFF_BETA_ACTIVITY_RANK21_POST_EXPOSURE_CONTAMINATION_V1.json",
+      "receipt_git_blob_sha": "22bcef5feeb835a2e97164ecf867a147f7bd75b4",
+      "zero_verdict_basis": "TASK_EXECUTION_COUNT_ZERO__TERMINAL_VERIFIER_COUNT_ZERO"
+    },
+    {
+      "task": "rs-archive-clone",
+      "rank": 24,
+      "receipt_path": "canonical/capabilities/opus55/RS_ARCHIVE_CLONE_RANK24_POST_STAGE_B_CONTAMINATION_V1.json",
+      "receipt_git_blob_sha": "5c1e1d799945ac264696469532c24f81fd5d4830",
+      "zero_verdict_basis": "TASK_COMMAND_NOT_EXECUTED__TERMINAL_VERIFIER_COUNT_ZERO"
+    },
+    {
+      "task": "photonic-waveguide-routing",
+      "rank": 25,
+      "receipt_path": "canonical/action_intents/2026-09-30_VERIFY_INTERNALIZED_SUPREME_GE_OPUS55_V1.json",
+      "receipt_git_blob_sha": "8322607b33246fd246834822852115ef2089a3e3",
+      "zero_verdict_basis": "CONTAMINATED_BEFORE_EXECUTION__NO_SOLUTION_OR_VERIFIER_LOGIC_READ"
+    }
+  ],
+  "admissibility_rule": {
+    "necessary_prior_state": "ZERO_COUNTED_OFFICIAL_SLOT__NO_VALID_REWARD_VERDICT",
+    "required_new_certificate": [
+      "COMPLETE_INDEPENDENTLY_VERIFIED_ACTOR_DEPENDENCY_AND_EFFECT_CLOSURE",
+      "COMPLETE_INDEPENDENTLY_VERIFIED_TASK_SPECIFIC_FORBIDDEN_PROVENANCE_DESCENDANT_CLOSURE",
+      "ACTOR_PROVENANCE_ANCESTORS_DISJOINT_FROM_FORBIDDEN_PROVENANCE_DESCENDANTS",
+      "IMMUTABLE_ACTOR_SNAPSHOT__ZERO_PRIOR_TASK_SESSION_STATE__ZERO_PRIOR_VERIFIER_OR_TASK_SPECIFIC_REPAIR_ARTIFACTS",
+      "ZERO_DISCOVERY_SEARCH_AND_ZERO_CROSS_TRIAL_FEEDBACK",
+      "FIVE_DISTINCT_CONTENT_ADDRESSED_OUTPUTS_FROZEN_BEFORE_ANY_VERIFIER_EXPOSURE",
+      "OFFICIAL_FROZEN_TASK_AND_VERIFIER_SEMANTICS"
+    ],
+    "result_if_passed": "READMIT_UP_TO_FIVE_DISTINCT_TRIAL_SLOTS_FOR_THAT_TASK__NO_SUCCESS_CREDIT_FROM_GATE"
+  },
+  "route_effect": {
+    "current_capacity_reopened": false,
+    "exact_remaining_mechanical_gap": "IMPLEMENT_AND_INDEPENDENTLY_VERIFY_TASK_SPECIFIC_PROVENANCE_DISJOINTNESS_READMISSION_CERTIFICATE_FOR_ALL_TEN_SELECTED_TASKS",
+    "no_resource_recovery_required_for_selected_ten": true
+  },
+  "hard_nonclaims": [
+    "NO_SELECTED_TASK_IS_READMITTED_YET",
+    "NO_REWARD_ZERO_RESULT_IS_ERASED",
+    "NO_TB4_SUCCESS_SCORE_ACCEPTANCE_OR_TERMINAL_CREDIT",
+    "NO_BENCHMARK_EXECUTION_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "independent_verification_required": true,
+  "promotion_authority": false
+}
