@@ -350,7 +350,7 @@ def _infer_codec_contract(candidate,wheel_closure,root):
             raise AutoPyPIAcquisitionFailure("PYPI_PROBE_INSTALL_FAILED",proc.stderr[-1200:])
 
         modules=_module_candidates(root_wheel["path"])
-        probe_helper=(pathlib.Path(root)/"canonical"/"runtime"/"python_codec_probe.py").resolve()
+        probe_helper=pathlib.Path(__file__).with_name("python_codec_probe.py").resolve()
         if not probe_helper.is_file():
             raise AutoPyPIAcquisitionFailure("PYPI_PROBE_HELPER_MISSING",str(probe_helper))
         probe=subprocess.run(
