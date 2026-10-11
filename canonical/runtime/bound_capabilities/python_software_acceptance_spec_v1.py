@@ -407,3 +407,29 @@ def compile_and_verify(request: str, root: Any) -> dict[str, Any]:
         "plan": plan,
         "verification": verify_acceptance(plan, root),
     }
+
+
+def run(args: dict[str, Any], root: Any) -> dict[str, Any]:
+    if not isinstance(args, Mapping):
+        raise SoftwareAcceptanceSpecError("ARGS_INVALID")
+    operation = str(args.get("operation") or "compile_and_verify")
+    if operation == "compile":
+        request = args.get("request")
+        if not isinstance(request, str) or not request.strip():
+            raise SoftwareAcceptanceSpecError("REQUEST_REQUIRED")
+        return compile_request(
+            request,
+            root,
+            max_scope_baseline_files=int(args.get("max_scope_baseline_files", 2000)),
+        )
+    if operation == "verify":
+        plan = args.get("plan")
+        if not isinstance(plan, Mapping):
+            raise SoftwareAcceptanceSpecError("PLAN_REQUIRED")
+        return verify_acceptance(plan, root)
+    if operation == "compile_and_verify":
+        request = args.get("request")
+        if not isinstance(request, str) or not request.strip():
+            raise SoftwareAcceptanceSpecError("REQUEST_REQUIRED")
+        return compile_and_verify(request, root)
+    raise SoftwareAcceptanceSpecError("OPERATION_UNSUPPORTED:" + operation)

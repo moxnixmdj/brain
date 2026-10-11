@@ -5,7 +5,9 @@ import tempfile
 import unittest
 
 from canonical.runtime.bound_capabilities.python_software_acceptance_spec_v1 import (
+    SoftwareAcceptanceSpecError,
     compile_request,
+    run,
     verify_acceptance,
 )
 
@@ -114,6 +116,19 @@ class SoftwareAcceptanceSpecV1Tests(unittest.TestCase):
         out=verify_acceptance(plan,root)
         self.assertEqual(out["external_general_purpose_model_runtime_dependency_count"],0)
         self.assertIn("NO_FRONTIERCODE_SCORE_CREDIT",out["hard_nonclaims"])
+
+    def test_run_compile_then_verify_roundtrip(self):
+        td,root=self.repo()
+        self.addCleanup(td.cleanup)
+        plan=run({"operation":"compile","request":"pkg/app.py must compile"},root)
+        out=run({"operation":"verify","plan":plan},root)
+        self.assertTrue(out["pass"])
+
+    def test_run_unknown_operation_fails_closed(self):
+        td,root=self.repo()
+        self.addCleanup(td.cleanup)
+        with self.assertRaisesRegex(SoftwareAcceptanceSpecError,"OPERATION_UNSUPPORTED"):
+            run({"operation":"invent"},root)
 
 
 if __name__=="__main__":
