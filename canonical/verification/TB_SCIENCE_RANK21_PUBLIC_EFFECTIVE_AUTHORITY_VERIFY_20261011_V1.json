@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK21_PUBLIC_EFFECTIVE_AUTHORITY_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__RANK21_FRESH_ONE_SHOT_PUBLIC_SURFACE_PROMOTED__ZERO_EXPOSURE__AUTHORITY_EFFECTIVE__ACTIVATION_ABSENT",
+  "slot_id": "terminal-bench-science/ode-law-discovery::trial-0",
+  "task_digest": "sha256:767d16a0a6226f391208b1b4bb126a6f957e5d0c8156342b5c9410a755142d65",
+  "logical_attempt_id": "7eb619d40a65597b2b2dccbcf409c143aa47e1663ca4c0d8f098167cb252811a",
+  "execution_claim_binding_digest": "sha256:fb99e7f9d8d23a789c57506dc61e31c2abd25c442245f0309d94d65b29421697",
+  "canonical_admission": {
+    "path": "canonical/governance/TB_SCIENCE_RANK21_CAPABILITY_FIRST_CHECKPOINT_ADMISSION_20261011_V1.json",
+    "git_blob_sha": "2753d59268d6aac32f1f880b1c959ca8fa079445"
+  },
+  "canonical_authority": {
+    "path": "canonical/governance/TB_SCIENCE_RANK21_ONE_SLOT_EXECUTION_AUTHORITY_20261011_V1.json",
+    "git_blob_sha": "cc056211011df95034c6da8ff383eb3305f18782"
+  },
+  "canonical_staged_ledger": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261011_V63.json",
+    "git_blob_sha": "32a1b6fd01dfb9b1bd0e6db080e0c79f76ae306a"
+  },
+  "public_promotion": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2650,
+    "base_branch": "terminal-execution-v1",
+    "merge_commit_sha": "231ad9835f90c16955076b6e40d52b09b60ce959",
+    "execution_surface_git_blob_sha": "d83d9400a2d5f1f34d9b69d41b89cc1dcfa2d9c8",
+    "authority_git_blob_sha": "009e5be596023e64ad7e0e7cd5cc1bf1b8547042",
+    "ledger_git_blob_sha": "7f991f231fb135bdfe8ccc502305d5ffa08f0d2e",
+    "behavior_git_blob_sha": "54011a7b4005ca8998a5987892b7ecaa9bf3f884",
+    "claim_binding_git_blob_sha": "8d8465e8e2635c8051eed5ee3c10579e061e428f"
+  },
+  "structural_verification": {
+    "authority_graph_pass": true,
+    "critical_runtime_blob_graph_pass": true,
+    "shared_runtime_blob_graph_pass": true,
+    "causal_runtime_blob_graph_pass": true,
+    "rank20_subject_residue_absent": true,
+    "content_addressed_start_cas_dispatch_bound": true,
+    "exact_fresh_head_gate_present": true,
+    "exact_one_activation_path_gate_present": true
+  },
+  "state": {
+    "task_read_history": false,
+    "task_started": false,
+    "durable_start_cas_acquired": false,
+    "benchmark_trials_consumed": 0,
+    "activation_present": false
+  },
+  "controls": {
+    "logical_attempts_authorized_total": 1,
+    "retries_authorized": 0,
+    "replacement_allowed": false,
+    "rank20_replay_forbidden": true
+  },
+  "execution_authority_effective": true,
+  "task_read_authority_effective": true,
+  "activation_authority": false,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "pass": true,
+  "next": "MINT_FRESH_EXACT_ONE_FILE_RANK21_ACTIVATION_AUTHORITY__DO_NOT_CREATE_ACTIVATION_FILE_UNTIL_EXECUTION_IS_INTENDED"
+}
