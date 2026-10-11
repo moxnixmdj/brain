@@ -4148,6 +4148,90 @@
         "external_capability_provider_count": 0,
         "incremental_spend_usd": 0
       }
+    },
+    "science.numeric.resource.solve.stdlib": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "incremental_spend_usd": 0,
+      "cost": 1,
+      "requires": [],
+      "provides": [
+        "science.numeric.resource.solve.verified"
+      ],
+      "result_fields": [
+        "verified",
+        "status",
+        "family",
+        "selected_path",
+        "input_path",
+        "pipeline_receipt_sha256",
+        "model_dependency_count"
+      ],
+      "keywords": [
+        "science",
+        "scientific",
+        "numeric",
+        "dataset",
+        "table",
+        "csv",
+        "tsv",
+        "regression",
+        "predict",
+        "prediction",
+        "model",
+        "fit",
+        "period",
+        "periodic",
+        "periodicity",
+        "signal"
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "science.numeric.resource.solve.stdlib",
+          "goal": "${input.goal}",
+          "input_path": "${input.input_path}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "verified",
+          "value": true
+        }
+      },
+      "adapter_module": "scientific_numeric_resource_solver",
+      "entrypoint": "run",
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "limitations": [
+        "Requires the goal to explicitly name exactly one existing numeric table file bindable as input_path.",
+        "Current verified raw-task compiler scope is bounded to symbolic regression and shared-period fitting.",
+        "Ambiguous or unsupported scientific intent fails closed.",
+        "Does not use benchmark identifiers, network access, dynamic code, or external/general-purpose model cognition."
+      ],
+      "source": {
+        "type": "python_stdlib",
+        "modules": [
+          "csv",
+          "hashlib",
+          "json",
+          "math",
+          "pathlib",
+          "statistics",
+          "re"
+        ],
+        "adapter_path": "canonical/runtime/bound_capabilities/scientific_numeric_resource_solver.py"
+      },
+      "verification": {
+        "producer_independent": true,
+        "receipt_path": "canonical/verification/SCIENCE_NUMERIC_BOUND_CAPABILITY_V1_VERIFY_20261011_V1.json",
+        "model_dependency_count": 0,
+        "external_model_runtime_calls": 0,
+        "network_dependency_count": 0,
+        "incremental_spend_usd": 0,
+        "exact_adapter_blob_pending": true
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
