@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_R2_V91_GENERIC_AUTHORITY_CANDIDATE_MATERIALIZATION_RECONCILIATION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "RECONCILED__V90_TYPED_FOUR_WAY_PATH_PRESERVED__GENERIC_TEXT_AUTHORITY_CANDIDATE_TO_EXISTING_CHECKER_TEMPLATE_MATERIALIZATION_BOUND__NON_TEXT_AND_NO_TEMPLATE_CASES_REMAIN_OPEN__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_REMAINS__ZERO_CREDIT",
+  "prior_version": "V90",
+  "current_version": "V91",
+  "implementation": {
+    "merged_commit": "7e000a2b9f31ee423cb6015ff63b007ac208e754",
+    "materializer_path": "canonical/runtime/r2_authority_candidate_materialization_v1.py",
+    "generic_checker_adapter_path": "canonical/runtime/r2_generic_authority_candidate_checker_adapter_v1.py",
+    "controller_reused_adapter_path": "canonical/runtime/r2_regcap_authority_candidate_adapter_v1.py"
+  },
+  "verification": {
+    "path": "canonical/verification/R2_GENERIC_AUTHORITY_CANDIDATE_MATERIALIZATION_FOCUSED_VERIFY_20261011_V1.json"
+  },
+  "closed_delta": {
+    "delegated_authority_candidate_text_materialization": true,
+    "declared_authority_domain_redirect_guard": true,
+    "exact_raw_byte_digest_binding": true,
+    "existing_source_aligned_checker_template_reuse": true,
+    "downstream_identity_and_truth_recomputation_required": true,
+    "specialized_four_way_regcap_path_preserved": true
+  },
+  "authority_boundary": {
+    "provider_semantic_truth_authority": false,
+    "provider_source_truth_authority": false,
+    "generic_requested_predicate_label_authority": false,
+    "policy_adequacy_authority": false,
+    "acceptance_authority": false,
+    "promotion_authority": false,
+    "terminal_authority": false
+  },
+  "remaining_problem_class": [
+    "NON_TEXT_OR_NON_UTF8_CANDIDATE_REQUIRING_A_DIFFERENT_ALREADY_VERIFIED_CHECKER",
+    "CANDIDATE_WITHOUT_AN_EXISTING_COMPATIBLE_TRUTH_CHECKER_TEMPLATE",
+    "OPEN_WORLD_CONCEPT_OR_RELATION_WITHOUT_VERIFIER_BACKED_SCOPED_MAPPING_OR_BOUNDED_COMPLETE_UNIVERSE",
+    "STRONGER_EXTERNAL_FACT_AUTHENTICATION_BEYOND_CURRENT_BOUND_OBSERVATION_CHANNELS"
+  ],
+  "global_open_world_closure_delta": false,
+  "primary_internal_unsolved_count_delta": 0,
+  "acceptance_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
