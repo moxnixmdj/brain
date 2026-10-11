@@ -19,6 +19,7 @@ from pathlib import Path
 from typing import Any, Mapping
 
 from canonical.runtime import current_one_shot_projection_v1 as projection
+from canonical.runtime.runtime_cognition_credit_guard_v1 import assert_credit_path_cognition_governance
 
 ROOT = Path(__file__).resolve().parents[2]
 SCHEMA = "PROJECT_BRAIN_FINAL_TERMINAL_CLEANROOM_GATE_V1"
@@ -136,6 +137,7 @@ def evaluate(
     repo_root: str | Path = ROOT,
 ) -> dict[str, Any]:
     root = Path(repo_root).resolve(strict=True)
+    assert_credit_path_cognition_governance(root)
     dynamic = projection.evaluate(root)
     if dynamic.get("pass") is not True:
         return {
