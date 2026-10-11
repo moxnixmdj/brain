@@ -165,7 +165,7 @@
       "vector_evidence": {},
       "read_only_evidence": {
         "capability_frontier_path": "canonical/governance/CHARTOGRAPHY_CAPABILITY_PROOF_FRONTIER_V1.json",
-        "capability_frontier_git_blob_sha": "13d434a1de8145c5f141bdd459eba6b23146f776",
+        "capability_frontier_git_blob_sha": "399a5a42a5d9e09c2e76351d62f43938184fcc04",
         "verified_brain_subject": "canonical/governance/CHARTOGRAPHY_BRAIN_NATIVE_DETERMINISTIC_SUBJECT_V3.json",
         "verified_positioned_ocr_axis_binding": "canonical/verification/CHART_POSITIONED_OCR_AXIS_BINDING_V1_VERIFY_20261011.json",
         "verified_runtime_blob_sha": "1ccab094a14ae261a01912ad6e573ffc09fa8b35",
@@ -176,7 +176,9 @@
         "chartography_score_credit": 0,
         "legend_style_binding_verification": "canonical/verification/CHART_LEGEND_STYLE_BINDING_V1_VERIFY_20261011.json",
         "legend_style_runtime_blob_sha": "aeed8dc4dc231d1d1a794188974930e9457c7ecb",
-        "legend_style_tests": "7_OF_7_PASS"
+        "legend_style_tests": "7_OF_7_PASS",
+        "legend_style_verifier_run_id": 38151766527,
+        "legend_style_verifier_merge_sha": "9869d3163571c8260d6705a201d039df118f2c31"
       },
       "ready": "RECOMPUTE_CAPABILITY_RELATION_COVERAGE_NOW__SELECT_NEXT_NATIVE_FAMILY_BY_PROVED_MARGINAL_CLOSURE__NO_GATED_BENCHMARK_EXECUTION"
     },
@@ -786,5 +788,13 @@
     "current_nonbenchmark_exact_next_preserved": "PARALLEL:CODING_GENERAL_SOFTWARE_REPAIR_LOOP_V5_PLUS_CURRENT_BYTES_RESOURCE_PARETO_CUT_PLUS_OTHER_NONCONFLICTING_CAPABILITY_FIRST_GENERAL_DEVELOPMENT__PROFESSIONAL_WAKES_ONLY_ON_ZERO_SPEND_CARRIER_STATE_CHANGE_OR_STRONGER_VALID_REGRESSION_RECEIPT",
     "activation_path": "canonical/governance/CAPABILITY_PROOF_LATTICE_ACTIVATION_20261011_V1.json",
     "activation_git_blob_sha": "29f4630da045a63cceea8158681bd55c228c04c2"
-  }
+  },
+  "authority_facts": [
+    {
+      "id": "CHARTOGRAPHY_LEGEND_STYLE_BINDING_CURRENT",
+      "truth": "BRAIN_NATIVE_HORIZONTAL_TEXT_LABEL_TO_COLOR_STYLE_BINDING_INDEPENDENTLY_VERIFIED_7_OF_7__ZERO_MODEL__ZERO_HELDOUT__PATTERN_DASH_ROTATED_AND_DOMAIN_SEMANTICS_OPEN",
+      "source": "canonical/verification/CHART_LEGEND_STYLE_BINDING_V1_VERIFY_20261011.json",
+      "dynamic_current_pointer_follow": false
+    }
+  ]
 }
