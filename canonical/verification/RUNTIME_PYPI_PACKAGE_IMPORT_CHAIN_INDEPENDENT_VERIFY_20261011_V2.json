@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_RUNTIME_PYPI_PACKAGE_IMPORT_CHAIN_INDEPENDENT_VERIFY_20261011_V2",
+  "date": "2026-10-11",
+  "status": "PASS__REBASED_ON_CURRENT_MAIN__PYPI_PACKAGE_IMPORT_DEFECT_REPAIRED__50_OF_50_FOCUSED_AND_ADJACENT_TESTS_PASS__ZERO_TERMINAL_CREDIT",
+  "repository": "moxnixmdj/brain",
+  "base_main_commit": "47ab314c70b7ff4e92749019cbeb54d7357ba973",
+  "repair_branch": "repair/runtime-pypi-package-import-chain-20261011-v2",
+  "verified_pre_receipt_head": "e2cfcabd3e7b6b01420b38e77695c118091e4eb5",
+  "exact_changed_blobs": {
+    "canonical/runtime/independent_pypi_codec_verifier.py": "8c83302bf645a901bdcedd38e04081ae0ca5f6a5",
+    "canonical/runtime/auto_pypi_library_acquisition.py": "37decef0b7876428b7c4048ea3952888af18d374",
+    "canonical/tests/test_runtime_package_import_chain_v1.py": "9232b6961b99093c5327a5a24610b4edbcee59c3"
+  },
+  "current_main_noninterference": {
+    "prior_verified_base": "998805b648cda2a2b4425d3e998b65c9f2a10dd9",
+    "current_base": "47ab314c70b7ff4e92749019cbeb54d7357ba973",
+    "intervening_changed_paths": [
+      ".github/workflows/full-private-current-main-regression.yml"
+    ],
+    "overlap_with_repair_paths": [],
+    "conclusion": "PROVED_PATH_DISJOINT__FRESH_REPLAY_STILL_REQUIRED_AND_PASSED"
+  },
+  "defect_reproduction": {
+    "carrier": "brain-live-runtime-v1-verify-20261008",
+    "exact_current_pre_repair_blobs": {
+      "canonical/runtime/independent_pypi_codec_verifier.py": "7c8f68ac1dd8d7760794198f9ac0d8fb542be7e9",
+      "canonical/runtime/auto_pypi_library_acquisition.py": "6387bd7b8f1dba8bb9f66240e3ebb2627085dd2f",
+      "canonical/runtime/capability_discovery.py": "2acefaacfbcc9620cf97e9958c04eaff1d1d2937"
+    },
+    "observed_error": "ModuleNotFoundError: No module named 'auto_pypi_library_acquisition'",
+    "affected_declared_load_bearing_suites": 2
+  },
+  "independent_replay": {
+    "carrier": "brain-live-runtime-v1-verify-20261008",
+    "carrier_id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13",
+    "workspace": "/home/sprite/uvck-pypi-fix-v2-verify",
+    "tests_run": 50,
+    "tests_passed": 50,
+    "failures": 0,
+    "errors": 0
+  },
+  "boundaries": [
+    "PYPI_PACKAGE_IMPORT_INTEGRATION_ONLY",
+    "NOT_A_FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
