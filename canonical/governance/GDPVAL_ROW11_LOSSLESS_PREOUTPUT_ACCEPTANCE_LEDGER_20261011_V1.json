@@ -1,0 +1,59 @@
+{
+  "schema":"PROJECT_BRAIN_GDPVAL_ROW11_LOSSLESS_PREOUTPUT_ACCEPTANCE_LEDGER_20261011_V1",
+  "date":"2026-10-11",
+  "status":"FROZEN_BEFORE_STAGE_PLOT_GENERATION__31_RAW_PROMPT_OBLIGATIONS_RETAINED__ZERO_SCORE_CREDIT",
+  "benchmark":"GDPval-AA v2.1",
+  "row_idx":11,
+  "task_id":"f9a1c16c-53fd-4c8f-88cc-5c325ec2f0bb",
+  "task_sha256":"ee25b783d60b9509374f9d6a27be57a98f2154a57617d9e13950649c10209825",
+  "lossless_task_contract_sha256":"642e83587080d8d81e6c8eea72af6725bad50491b80bfb07c37cd04de798bcb7",
+  "raw_obligation_count":31,
+  "layout_lock":{
+    "page":"ONE_PAGE_LANDSCAPE_PDF",
+    "front_of_stage":"BOTTOM",
+    "stage_right_on_page":"LEFT",
+    "stage_left_on_page":"RIGHT",
+    "performers":["Bass","Vox1","Vox2","Guitar","Drums"],
+    "drums":"CENTER_UPSTAGE",
+    "bass":"STAGE_RIGHT",
+    "vox1":"CENTER_RIGHT",
+    "vox2":"CENTER_LEFT",
+    "guitar":"STAGE_LEFT"
+  },
+  "input_list":[
+    "Input 1 - Vox1 Vocal",
+    "Input 2 - Vox2 Vocal",
+    "Input 3 - Drums Vocal",
+    "Input 4 - Bass Speech Mic",
+    "Input 5 - Accordion DI",
+    "Input 6 - Acoustic Guitar DI"
+  ],
+  "output_list_counterclockwise_from_stage_right":[
+    "Output 1 - Bass wedge - bass fill",
+    "Output 2 - Vox1 wedge - Vox1 vocal",
+    "Output 3 - Vox2 wedge - Vox2 vocal",
+    "Output 4 - Guitar wedge - guitar fill",
+    "Output 5 - Drums wedge - Vox1 + Vox2 vocals",
+    "Output 6 - Vox1 IEM XLR split - Vox1 vocal to IEM; paired split also to FOH",
+    "Output 7 - Vox2 IEM XLR split - Vox2 vocal to IEM; paired split also to FOH"
+  ],
+  "graphic_obligations":[
+    "BASS_AMP_STAGE_RIGHT_BEHIND_BASS",
+    "GUITAR_AMP_STAGE_LEFT_BEHIND_GUITAR",
+    "TWO_DI_BOXES_AT_BASS_POSITION",
+    "TWO_IEM_SPLIT_ICONS_AT_VOX1_VOX2",
+    "FOUR_PIECE_DRUM_KIT_PLUS_HIHAT_TWO_CYMBALS_AND_RIDE",
+    "FIVE_MONITOR_WEDGES",
+    "DRUMS_WEDGE_DIAGONALLY_ABOUT_10_OCLOCK",
+    "MICS_FOR_VOX1_VOX2_DRUMS_AND_BASS_SPEECH",
+    "NO_EXTRA_INSTRUMENT_OR_DRUM_MICS"
+  ],
+  "general_defaults_transferred":[
+    "SHOW_SIDE_BY_SIDE_INPUT_OUTPUT_LISTS",
+    "USE_EXPLICIT_CONNECTOR_AND_SEND_LABELS",
+    "INCLUDE_MONITOR_CONTENT_NEXT_TO_EACH_WEDGE",
+    "USE_LEGEND_FOR_SPLITS_FOH_AND_IEM_DESTINATIONS",
+    "KEEP_VISUAL_DENSE_BUT_ONE_PAGE_READABLE"
+  ],
+  "accounting":{"incremental_spend_usd":0,"acceptance_credit_delta":0,"terminal_credit_delta":0}
+}
