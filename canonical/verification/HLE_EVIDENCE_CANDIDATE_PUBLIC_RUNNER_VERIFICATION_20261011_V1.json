@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_EVIDENCE_CANDIDATE_PUBLIC_RUNNER_VERIFICATION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__FROZEN_SYNTHETIC__ZERO_HLE_SCORE_CREDIT",
+  "subject": {
+    "preexposure": {
+      "path": "canonical/governance/HLE_EVIDENCE_CANDIDATE_PREEXPOSURE_20261011_V1.json",
+      "git_blob_sha": "2a6114a01507e959e7c1f11721a879c0242a739e"
+    },
+    "runtime": {
+      "path": "canonical/runtime/hle_evidence_candidate_synthesis_v1.py",
+      "git_blob_sha": "4cd588212d12fdff726b6e153631dbef1282e14e"
+    },
+    "tests": {
+      "path": "canonical/tests/test_hle_evidence_candidate_synthesis_v1.py",
+      "git_blob_sha": "147065ada36cbe7ca4118eb1a009192baf36e394"
+    }
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2666,
+    "head_commit": "60e695a91bedecc60eaecae961cecc14fdbfbc29",
+    "workflow_name": "Verify HLE evidence candidate synthesis V1",
+    "workflow_run_id": 38138668712,
+    "conclusion": "success"
+  },
+  "verified": [
+    "RELATION_BOUND_PERSON_YEAR_LOCATION_NUMBER_TERM_BOOLEAN_EXPLANATION_EXTRACTION",
+    "IRRELEVANT_EVIDENCE_REJECTION",
+    "AMBIGUITY_FAIL_CLOSED",
+    "NEGATIVE_CONTRACT_NO_POSITIVE_SUPPORT_AUTHORITY",
+    "OBJECTIVE_ANCHOR_COVERAGE_GATE",
+    "ZERO_MODEL_ZERO_GOLD_ACCOUNTING"
+  ],
+  "hard_nonclaims": [
+    "NO_REAL_HLE_TASK_EXECUTED",
+    "NO_OPEN_WORLD_ENTAILMENT_CLAIM",
+    "NO_CANDIDATE_CORRECTNESS_AUTHORITY",
+    "NO_HLE_SCORE_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
