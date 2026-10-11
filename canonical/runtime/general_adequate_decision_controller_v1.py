@@ -32,6 +32,7 @@ from canonical.runtime.r2_existing_policy_cover_observation_reuse_v1 import (
 from canonical.runtime import r2_raw_source_proof_material_adapter_v1 as source_proof_material
 from canonical.runtime import r2_bound_source_information_provider_v1 as bound_source_provider
 from canonical.runtime import r2_authority_domain_discovery_provider_v1 as authority_discovery_provider
+from canonical.runtime import r2_regcap_authority_candidate_adapter_v1 as authority_candidate_adapter
 from canonical.runtime import r2_grounded_candidate_policy_frontier_v1 as grounded_policy_frontier
 from canonical.runtime.minimum_information_origin_policy_v1 import (
     route as route_minimum_information_origin,
@@ -1644,8 +1645,52 @@ def run(
                 and provided.get("schema") == authority_discovery_provider.SCHEMA
             ):
                 if provided.get("pass") is True:
+                    adapted = authority_candidate_adapter.adapt(
+                        working,
+                        gap["predicate_id"],
+                        request_packet,
+                        provided,
+                    )
+                    if adapted.get("pass") is True:
+                        payloads = adapted.get("truth_payload_candidates")
+                        if (
+                            not isinstance(payloads, list)
+                            or not payloads
+                            or any(not isinstance(x, Mapping) for x in payloads)
+                        ):
+                            raise DecisionControllerError(
+                                "AUTHORITY_CANDIDATE_ADAPTER_PAYLOADS_INVALID"
+                            )
+                        for payload in payloads:
+                            _append_truth_payload(
+                                working,
+                                gap["predicate_id"],
+                                payload,
+                            )
+                        information_trace[-1]["ingestion_status"] = (
+                            "AUTHORITY_DISCOVERY_CANDIDATE_BOUND_TO_EXISTING_TRUTH_CHECKER"
+                        )
+                        information_trace[-1]["compiled_candidate_count"] = len(
+                            payloads
+                        )
+                        information_trace[-1][
+                            "downstream_checker_refetch_required"
+                        ] = adapted.get("downstream_checker_refetch_required") is True
+                        information_trace[-1][
+                            "original_predicate_identity_preserved"
+                        ] = adapted.get("original_predicate_identity_preserved") is True
+                        continue
+
+                    adapter_status = str(adapted.get("status") or "")
+                    if adapter_status == "FAIL_CLOSED":
+                        raise DecisionControllerError(
+                            "AUTHORITY_CANDIDATE_ADAPTER_FAIL_CLOSED:"
+                            + str(adapted.get("reason") or "UNKNOWN")
+                        )
                     information_trace[-1]["ingestion_status"] = (
                         "AUTHORITY_DISCOVERY_CANDIDATE_ONLY"
+                        if adapter_status.startswith("NOT_APPLICABLE__")
+                        else "AUTHORITY_DISCOVERY_CANDIDATE_REFINEMENT_UNRESOLVED"
                     )
                     return _open(
                         "OPEN__RETRIEVAL_CANDIDATE_MATERIALIZATION_REQUIRED",
@@ -1657,6 +1702,7 @@ def run(
                         ),
                         next_information_request=request_packet,
                         retrieval_candidate=deepcopy(dict(provided)),
+                        candidate_adapter_result=deepcopy(dict(adapted)),
                         decision_result=decision,
                         information_trace=information_trace,
                         goal_to_decision_binding=goal_binding,

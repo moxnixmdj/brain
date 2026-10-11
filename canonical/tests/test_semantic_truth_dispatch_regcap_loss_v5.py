@@ -4,7 +4,7 @@ import unittest
 from unittest.mock import patch
 
 from canonical.runtime import semantic_truth_dispatch_v1 as dispatch
-from canonical.runtime import regcap_loss_cushion_truth_certificate_v5 as cert5
+from canonical.runtime import regcap_loss_cushion_truth_certificate_v6 as cert6
 
 
 class Tests(unittest.TestCase):
@@ -23,7 +23,7 @@ class Tests(unittest.TestCase):
             "terminal_authority": False,
             "terminal_credit_delta": 0,
         }
-        with patch.object(cert5.grounding, "ground", return_value=v7_result):
+        with patch.object(cert6.grounding, "ground", return_value=v7_result):
             out = dispatch.evaluate({
                 "truth_kind": "REGCAP_LOSS_CUSHION_GROUNDING",
                 "predicate_id": "caller-label",
@@ -40,7 +40,7 @@ class Tests(unittest.TestCase):
         self.assertFalse(out["semantic_identity_authority"])
         self.assertFalse(out["global_identity_authority"])
         self.assertFalse(out["terminal_authority"])
-        self.assertEqual(out["grounding_result"]["schema"] if "schema" in out["grounding_result"] else cert5.grounding.SCHEMA, cert5.grounding.SCHEMA)
+        self.assertEqual(out["grounding_result"]["schema"] if "schema" in out["grounding_result"] else cert6.grounding.SCHEMA, cert6.grounding.SCHEMA)
 
     def test_unresolved_dispatch_exposes_typed_next_information_request(self):
         text = "loss-absorbing cushion"
@@ -65,7 +65,7 @@ class Tests(unittest.TestCase):
             "terminal_authority": False,
             "terminal_credit_delta": 0,
         }
-        with patch.object(cert5.grounding, "ground", return_value=v7_result):
+        with patch.object(cert6.grounding, "ground", return_value=v7_result):
             out = dispatch.evaluate({
                 "truth_kind": "REGCAP_LOSS_CUSHION_GROUNDING",
                 "predicate_id": "caller-label",
@@ -92,7 +92,7 @@ class Tests(unittest.TestCase):
             "predicate_truth": "TRUE",
         }
         with patch(
-            "canonical.runtime.regcap_loss_cushion_truth_certificate_v5.evaluate",
+            "canonical.runtime.regcap_loss_cushion_truth_certificate_v6.evaluate",
             return_value=expected,
         ) as routed:
             out = dispatch.evaluate({
@@ -102,20 +102,20 @@ class Tests(unittest.TestCase):
         self.assertEqual(out, expected)
         routed.assert_called_once()
 
-    def test_v4_remains_historical_not_live_dispatch_target(self):
+    def test_v5_remains_historical_not_live_dispatch_target(self):
         with patch(
+            "canonical.runtime.regcap_loss_cushion_truth_certificate_v6.evaluate",
+            return_value={"pass": True, "status": "V6", "predicate_truth": "TRUE"},
+        ) as v6, patch(
             "canonical.runtime.regcap_loss_cushion_truth_certificate_v5.evaluate",
-            return_value={"pass": True, "status": "V5", "predicate_truth": "TRUE"},
-        ) as v5, patch(
-            "canonical.runtime.regcap_loss_cushion_truth_certificate_v4.evaluate",
-            side_effect=AssertionError("historical V4 must not be dispatched"),
+            side_effect=AssertionError("historical V5 must not be dispatched"),
         ):
             out = dispatch.evaluate({
                 "truth_kind": "REGCAP_LOSS_CUSHION_GROUNDING",
                 "predicate_id": "x",
             })
-        self.assertEqual(out["status"], "V5")
-        v5.assert_called_once()
+        self.assertEqual(out["status"], "V6")
+        v6.assert_called_once()
 
     def test_unrelated_dispatch_family_is_unchanged(self):
         with patch.object(

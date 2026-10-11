@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_R2_AUTHORITY_CANDIDATE_FOUR_WAY_CONSUMPTION_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__FOCUSED_EXACT_BLOB_REMOTE_REPLAY__20_AUTHORED_TESTS__CONTROLLER_REENTRY__ZERO_CREDIT__PR_CANDIDATE",
+  "branch": "successor/r2-four-way-observation-consumption-20261011-v1",
+  "rebased_parent_main": "53d1d20321e0e57876c6d5d7bd1dcf1acb06904e",
+  "exact_blobs": {
+    "adapter": ["canonical/runtime/r2_regcap_authority_candidate_adapter_v1.py", "2ab15ccca4de3fbe6d322d80689d8a43d5166545"],
+    "candidate_observer": ["canonical/runtime/regcap_four_way_authority_candidate_observation_v1.py", "13a501a497b0078a61db6b3be0f8b197f559fc9a"],
+    "grounding_v8": ["canonical/runtime/loss_absorbing_cushion_regcap_grounding_v8.py", "2bda846def2f69380725bad107a6e148d93bae4a"],
+    "truth_v6": ["canonical/runtime/regcap_loss_cushion_truth_certificate_v6.py", "cabab00d1af35755424d7231ac9459750f3b8713"],
+    "truth_dispatch": ["canonical/runtime/semantic_truth_dispatch_v1.py", "7670414b0188764c3e72b7f88002e319efee9bb2"],
+    "controller": ["canonical/runtime/general_adequate_decision_controller_v1.py", "b5c609eb902cd0ea21d81710588dd538aa05cb4f"],
+    "adapter_tests": ["canonical/tests/test_r2_regcap_authority_candidate_adapter_v1.py", "d08369129a5f4fd0e3ad8c9c4d0c1c32d1fcb7ca"],
+    "observer_tests": ["canonical/tests/test_regcap_four_way_authority_candidate_observation_v1.py", "4ce04d504aaeec1f4ed86cf311bd260302953041"],
+    "grounding_tests": ["canonical/tests/test_loss_absorbing_cushion_regcap_grounding_v8.py", "48c43963f4623e4b2ea1e8687d601684663f3c27"],
+    "truth_tests": ["canonical/tests/test_regcap_loss_cushion_truth_certificate_v6.py", "dab7a07fd05f32082e92be878ded81b89ab7827e"],
+    "dispatch_tests": ["canonical/tests/test_semantic_truth_dispatch_regcap_loss_v5.py", "a2baf2064670f1401873b8de9d4395b85436e6bd"],
+    "controller_tests": ["canonical/tests/test_r2_authority_candidate_consumption_controller_v1.py", "f83f616199ac4bcb20bdc3ba61cb31455439f9b1"]
+  },
+  "remote_isolated_execution": {
+    "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "syntax": {
+      "controller": "1_OF_1_PASS",
+      "other_runtime_files": "5_OF_5_PASS",
+      "test_files": "6_OF_6_PASS"
+    },
+    "composition_replay": "4_OF_4_PASS__ADAPTER_OBSERVER_GROUNDING_V8_TRUTH_V6",
+    "authored_tests": {
+      "mechanism_tests": "14_OF_14_PASS",
+      "controller_reentry": "1_OF_1_PASS",
+      "dispatch_regressions": "5_OF_5_PASS",
+      "total": "20_OF_20_PASS"
+    },
+    "controller_trace": {
+      "p3_calls": 2,
+      "adapter_calls": 1,
+      "result": "SECOND_P3_CALL_RECEIVES_ENRICHED_PAYLOAD_UNDER_ORIGINAL_PREDICATE_ID"
+    },
+    "dependency_boundary": "UNCHANGED_DEPENDENCIES_STUBBED_ONLY_AT_ALREADY_VERIFIED_INTERFACES__NO_FULL_PRIVATE_REPOSITORY_CHECKOUT_AVAILABLE_IN_CARRIER"
+  },
+  "proved": [
+    "V89_AUTHORITY_DISCOVERY_CAN_REENTER_THE_EXISTING_P3_TRUTH_LOOP_FOR_THE_TYPED_FOUR_WAY_REGCAP_REQUEST",
+    "DISCOVERY_METADATA_CARRIES_ZERO_SEMANTIC_TRUTH_AUTHORITY",
+    "DOWNSTREAM_CHECKER_REFETCHES_THE_NOMINATED_AUTHORITY_DOMAIN_SOURCE",
+    "FINAL_REDIRECT_MUST_REMAIN_INSIDE_THE_DECLARED_AUTHORITY_DOMAIN_SET",
+    "EXISTING_REGCAP_AND_TLAC_MREL_COMPILERS_OWN_OBSERVATION_SEMANTICS",
+    "CONFLICTING_POSITIVE_OBSERVATIONS_FAIL_CLOSED",
+    "THE_ORIGINAL_V5_CHECKED_PREDICATE_ID_IS_PRESERVED_EXACTLY",
+    "AN_IDENTICAL_DISCOVERY_CANDIDATE_CANNOT_BE_APPENDED_INDEFINITELY",
+    "GENERIC_NON_REGCAP_V89_DISCOVERY_RETAINS_THE_PRIOR_CANDIDATE_ONLY_BEHAVIOR"
+  ],
+  "carrier_status": {
+    "github_hosted_full_regression": "STILL_PRE_STEP_BLOCKED",
+    "railway_existing_private_git_carrier": "STILL_NO_FIRST_DEPLOYMENT__SOURCE_REATTACH_REJECTED_USER_DOES_NOT_HAVE_ACCESS_TO_REPO__VARIABLE_TRIGGER_CREATED_ZERO_DEPLOYMENTS"
+  },
+  "hard_nonclaims": [
+    "NO_FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION_PASS",
+    "NO_GLOBAL_R2_CLOSURE",
+    "NO_FINANCE_SEMANTIC_TAIL_CLOSURE_WITHOUT_A_REAL_AUTHENTICATED_OBSERVATION",
+    "NO_LIVE_EXTERNAL_AUTHORITY_CANDIDATE_FACT_IS_ASSERTED_BY_THIS_RECEIPT",
+    "NO_MAIN_PROMOTION_FROM_THIS_RECEIPT_ALONE",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
