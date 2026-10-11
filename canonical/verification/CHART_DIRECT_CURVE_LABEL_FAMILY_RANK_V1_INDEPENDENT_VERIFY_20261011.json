@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_CHART_DIRECT_CURVE_LABEL_FAMILY_RANK_V1_INDEPENDENT_VERIFY_20261011",
+  "date": "2026-10-11",
+  "status": "PASS__EXACT_BRAIN_BLOBS__AUTHOR_TESTS_PLUS_INDEPENDENT_FALSIFICATION",
+  "capability_id": "chart.raster.direct_curve_label_family_rank.v1",
+  "brain_source_pr": 4666,
+  "brain_promotion_pr": 4670,
+  "verifier_repository": "moxnixmdj/verification-capsule-runner",
+  "verifier_pr": 2723,
+  "verifier_workflow_run_id": 38167990652,
+  "verifier_workflow_job_id": 114554450529,
+  "artifact_id": 11713120076,
+  "artifact_zip_sha256": "01db2835a3749ec4de880cd1793bb42776908aad508c243cf1a7388dc194e7c1",
+  "exact_blobs": {
+    "runtime": "e3be28bd83ce0a9359a2ce9cedc8415dbcf745d2",
+    "tests": "4c8fc60d72e160f9995c5df1b0af75b97d9a1eb9",
+    "image_ocr": "45714d7a0160802d986042910da1c4c6462676e5",
+    "positioned_ocr": "19f3087489ce7f6f935fc7baaebdc8cd672f4b62",
+    "axis_binding": "1ccab094a14ae261a01912ad6e573ffc09fa8b35",
+    "scene_graph": "258999b07287287db2037af777973d5bbb39116d",
+    "independent_tests": "d327f22c7d35e754298f477660a140198e042999"
+  },
+  "authored_tests_passed": 13,
+  "authored_tests_total": 13,
+  "independent_falsification_passed": 14,
+  "independent_falsification_total": 14,
+  "total_tests_passed": 27,
+  "total_tests": 27,
+  "heldout_chartography_cases_consumed": 0,
+  "external_general_purpose_model_runtime_dependency_count": 0,
+  "donor_general_purpose_model_runtime_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "chartography_score_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "proved_bounded_scope": [
+    "ENDPOINT_ADJACENT_ALPHA_OR_ALPHANUMERIC_OCR_LABEL_TO_EXACT_POLYLINE_BINDING",
+    "LEFT_AND_RIGHT_ENDPOINT_BINDING",
+    "NORMALIZED_DUPLICATE_LABEL_COLLISION_FAIL_CLOSED",
+    "SAME_COLOR_CURVES_REMAIN_DISTINCT_BY_POLYLINE_IDENTITY",
+    "CALIBRATED_BOUND_CURVE_FAMILY_HIGH_TO_LOW_RANK_AT_X",
+    "UNIQUE_NEAREST_BOUND_CURVE_TO_REQUESTED_Y_AT_X",
+    "LINEAR_AND_LOG10_Y_AXIS_VALUE_TRANSFORMS",
+    "VERTICAL_OVERLAP_DUPLICATE_BINDING_UNSUPPORTED_AXIS_NONFINITE_NEAREST_UNBRACKETED_AND_OUT_OF_PLOT_QUERIES_FAIL_CLOSED",
+    "ZERO_EXTERNAL_GENERAL_PURPOSE_MODEL_RUNTIME_COGNITION"
+  ],
+  "hard_nonclaims": [
+    "NO_DOMAIN_SEMANTIC_AUTHORITY",
+    "NO_INLINE_CONTOUR_LABEL_AUTHORITY",
+    "NO_ARBITRARY_DIRECT_LABEL_PLACEMENT_AUTHORITY",
+    "NO_CHARTOGRAPHY_GE89",
+    "NO_HELDOUT_COVERAGE_CLAIM"
+  ]
+}
