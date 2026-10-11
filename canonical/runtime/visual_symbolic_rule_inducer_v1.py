@@ -368,6 +368,8 @@ def induce(
     *,
     max_depth: int = 4,
     max_features_per_node: int = 12,
+    max_search_subproblems: int = 5000,
+    max_generated_split_nodes: int = 20000,
     top_k: int = 8,
 ) -> dict[str, Any]:
     try:
@@ -381,6 +383,18 @@ def induce(
             or max_features_per_node < 1
         ):
             raise VisualRuleInductionError("MAX_FEATURES_PER_NODE_INVALID")
+        if (
+            isinstance(max_search_subproblems, bool)
+            or not isinstance(max_search_subproblems, int)
+            or max_search_subproblems < 1
+        ):
+            raise VisualRuleInductionError("MAX_SEARCH_SUBPROBLEMS_INVALID")
+        if (
+            isinstance(max_generated_split_nodes, bool)
+            or not isinstance(max_generated_split_nodes, int)
+            or max_generated_split_nodes < 1
+        ):
+            raise VisualRuleInductionError("MAX_GENERATED_SPLIT_NODES_INVALID")
         if isinstance(top_k, bool) or not isinstance(top_k, int) or not 1 <= top_k <= 64:
             raise VisualRuleInductionError("TOP_K_INVALID")
         records, inputs, outputs = _records_from_examples(examples)
@@ -393,12 +407,19 @@ def induce(
         }
 
     record_map = {r.record_id: r for r in records}
+    feature_maps = {r.record_id: dict(r.features) for r in records}
     feature_names = sorted(name for name, _ in records[0].features)
     generated_nodes = 0
+    search_subproblems = 0
+    search_bound_hit = False
 
     @lru_cache(maxsize=None)
     def search(ids: tuple[int, ...], depth_left: int) -> tuple[dict[str, Any], ...]:
-        nonlocal generated_nodes
+        nonlocal generated_nodes, search_subproblems, search_bound_hit
+        search_subproblems += 1
+        if search_subproblems > max_search_subproblems:
+            search_bound_hit = True
+            return tuple()
         subset = [record_map[i] for i in ids]
         leaf = _leaf_action(subset)
         candidates: list[dict[str, Any]] = []
@@ -421,7 +442,7 @@ def induce(
         for feature in feature_names:
             groups: dict[str, list[int]] = {}
             for row in subset:
-                groups.setdefault(_feature_value(row, feature), []).append(row.record_id)
+                groups.setdefault(feature_maps[row.record_id][feature], []).append(row.record_id)
             if len(groups) <= 1:
                 continue
             frozen_groups = {k: tuple(sorted(v)) for k, v in groups.items()}
@@ -468,6 +489,9 @@ def induce(
                 combinations = nxt[:top_k]
 
             for branches in combinations:
+                if generated_nodes >= max_generated_split_nodes:
+                    search_bound_hit = True
+                    break
                 generated_nodes += 1
                 tree = _attach_stats(
                     {
@@ -495,20 +519,35 @@ def induce(
     trees = list(search(tuple(range(len(records))), max_depth))
     trees.sort(key=_tree_key)
 
+    if trees:
+        status = "EXACT_RULES_FOUND"
+    elif search_bound_hit:
+        status = "SEARCH_BOUND_REACHED__NO_EXACT_RULE"
+    else:
+        status = "REPRESENTATION_INSUFFICIENT"
+
     return {
         "schema": SCHEMA,
-        "status": "EXACT_RULES_FOUND" if trees else "REPRESENTATION_INSUFFICIENT",
+        "status": status,
         "example_count": len(inputs),
         "cell_record_count": len(records),
         "feature_count": len(feature_names),
         "feature_names": feature_names,
         "generated_split_nodes": generated_nodes,
+        "search_subproblems": search_subproblems,
+        "search_bound_hit": search_bound_hit,
+        "max_search_subproblems": max_search_subproblems,
+        "max_generated_split_nodes": max_generated_split_nodes,
         "rules": trees[:top_k],
         "best_rule": trees[0] if trees else None,
         "next_action": (
             "VERIFY_ON_UNTOUCHED_CASES"
             if trees
-            else "EXPAND_REPRESENTATION_OR_ACTION_LANGUAGE"
+            else (
+                "INCREASE_SEARCH_BOUND_OR_COMPRESS_SEARCH"
+                if search_bound_hit
+                else "EXPAND_REPRESENTATION_OR_ACTION_LANGUAGE"
+            )
         ),
         "scope": "SAME_SHAPE_PER_CELL_SYMBOLIC_DECISION_RULES",
         "external_learned_capability_calls": 0,
@@ -608,6 +647,8 @@ def solve(
     attempts: int = 2,
     max_depth: int = 4,
     max_features_per_node: int = 12,
+    max_search_subproblems: int = 5000,
+    max_generated_split_nodes: int = 20000,
 ) -> dict[str, Any]:
     train = task.get("train")
     test = task.get("test")
@@ -617,6 +658,8 @@ def solve(
         train,
         max_depth=max_depth,
         max_features_per_node=max_features_per_node,
+        max_search_subproblems=max_search_subproblems,
+        max_generated_split_nodes=max_generated_split_nodes,
         top_k=max(8, attempts * 4),
     )
     if result.get("status") != "EXACT_RULES_FOUND":
