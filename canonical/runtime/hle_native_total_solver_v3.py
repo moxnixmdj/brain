@@ -1,0 +1,269 @@
+#!/usr/bin/env python3
+"""Total Brain-native HLE proposal orchestrator V3.
+
+V3 inserts the independently-designed native research lane and makes external
+solver cognition structurally ineligible, even if an injected lane returns a
+plausible candidate.
+"""
+from __future__ import annotations
+
+import hashlib
+import json
+import re
+from typing import Any, Callable, Mapping
+
+SCHEMA = "PROJECT_BRAIN_HLE_NATIVE_TOTAL_SOLVER_V3"
+_MCQ = re.compile(r"(?mi)^\s*Answer Choices:\s*$")
+
+
+def _sha(v: str) -> str:
+    return hashlib.sha256(v.encode("utf-8")).hexdigest()
+
+
+def _confidence(r: Mapping[str, Any] | None, lane: str) -> int:
+    if not r:
+        return 0
+    band = str(r.get("confidence_band") or "").upper()
+    if band == "HIGH":
+        return 80 if lane == "NATIVE_RESEARCH_V3" else 70
+    if band == "MEDIUM":
+        return 60 if lane == "NATIVE_RESEARCH_V3" else 50
+    if band == "LOW":
+        return 25
+    if lane in {"SYMBOLIC_LARK_V2", "SYMBOLIC_SURFACE_V1"}:
+        return 60
+    return 35
+
+
+def _cognition_counts(r: Mapping[str, Any]) -> tuple[int, int, int]:
+    return (
+        int(r.get("external_model_calls", 0) or 0),
+        int(r.get("external_reasoning_model_calls", 0) or 0),
+        int(r.get("model_dependency_count", 0) or 0),
+    )
+
+
+def solve(
+    *,
+    task_id: str,
+    question: str,
+    image: str = "",
+    search_fn: Callable[..., Mapping[str, Any]] | None = None,
+    fetch_fn: Callable[..., Mapping[str, Any]] | None = None,
+    ocr_fn: Callable[[Any], str] | None = None,
+    mcq_proposer: Callable[..., Mapping[str, Any]] | None = None,
+    symbolic_lark_proposer: Callable[..., Mapping[str, Any]] | None = None,
+    symbolic_surface_proposer: Callable[..., Mapping[str, Any]] | None = None,
+    research_proposer: Callable[..., Mapping[str, Any]] | None = None,
+    retrieval_proposer: Callable[..., Mapping[str, Any]] | None = None,
+    image_observer: Callable[..., Mapping[str, Any]] | None = None,
+) -> dict[str, Any]:
+    if not isinstance(task_id, str) or not task_id.strip():
+        raise ValueError("TASK_ID_REQUIRED")
+    if not isinstance(question, str) or not question.strip():
+        raise ValueError("QUESTION_REQUIRED")
+    if not isinstance(image, str):
+        raise ValueError("IMAGE_MUST_BE_STRING")
+
+    if mcq_proposer is None:
+        from canonical.runtime.hle_mcq_retrieval_vote_v1 import propose as mcq_proposer
+    if symbolic_lark_proposer is None:
+        from canonical.runtime.hle_symbolic_lark_solver_v2 import propose as symbolic_lark_proposer
+    if symbolic_surface_proposer is None:
+        from canonical.runtime.hle_symbolic_surface_solver_v1 import propose as symbolic_surface_proposer
+    if research_proposer is None:
+        from canonical.runtime.hle_native_research_solver_v3 import propose as research_proposer
+    if retrieval_proposer is None:
+        from canonical.runtime.hle_exact_retrieval_extract_v2 import propose as retrieval_proposer
+    if image_observer is None:
+        from canonical.runtime.hle_image_observation_v1 import observe as image_observer
+
+    original_image = bool(image)
+    image_receipt = None
+    augmented = question
+    image_text_available = False
+    image_cognition_rejected = False
+    if original_image:
+        try:
+            image_receipt = dict(image_observer(image_data_uri=image, ocr_fn=ocr_fn))
+        except Exception as exc:
+            image_receipt = {
+                "status": "FAIL_CLOSED__IMAGE_OBSERVATION_FAILED",
+                "error_class": type(exc).__name__,
+                "intrinsic_brain_vision_claimed": False,
+                "external_model_calls": 0,
+                "external_reasoning_model_calls": 0,
+                "model_dependency_count": 0,
+            }
+        ext, reasoning, deps = _cognition_counts(image_receipt)
+        if ext or reasoning or deps:
+            image_cognition_rejected = True
+        elif image_receipt.get("status") == "OBSERVED":
+            text = str(image_receipt.get("ocr_text") or "").strip()
+            if text:
+                augmented = (
+                    "[LOCAL OCR TOOL OBSERVATION]\n"
+                    + text
+                    + "\n[END LOCAL OCR TOOL OBSERVATION]\n"
+                    + question
+                )
+                image_text_available = True
+
+    attempts: list[dict[str, Any]] = []
+    chosen: tuple[str, Mapping[str, Any]] | None = None
+    chosen_lane: str | None = None
+
+    def attempt(name: str, fn: Callable[..., Mapping[str, Any]], kwargs: dict[str, Any]) -> None:
+        nonlocal chosen, chosen_lane
+        try:
+            r = dict(fn(**kwargs))
+        except Exception as exc:
+            r = {
+                "status": "LANE_EXCEPTION",
+                "error_class": type(exc).__name__,
+                "candidate_answer": None,
+                "external_model_calls": 0,
+                "external_reasoning_model_calls": 0,
+                "model_dependency_count": 0,
+            }
+        cand = r.get("candidate_answer")
+        present = isinstance(cand, str) and bool(cand)
+        ext, reasoning, deps = _cognition_counts(r)
+        cognition_clean = ext == 0 and reasoning == 0 and deps == 0
+        eligible = present and cognition_clean
+        attempts.append({
+            "lane": name,
+            "status": r.get("status"),
+            "candidate_present": present,
+            "candidate_eligible": eligible,
+            "candidate_rejected_external_cognition": present and not cognition_clean,
+            "candidate_answer_authority": bool(r.get("candidate_answer_authority", False)),
+            "external_model_calls": ext,
+            "external_reasoning_model_calls": reasoning,
+            "model_dependency_count": deps,
+        })
+        if chosen is None and eligible:
+            chosen = (str(cand), r)
+            chosen_lane = name
+
+    transformed_image_flag = original_image and not image_text_available
+    if _MCQ.search(question):
+        attempt(
+            "MCQ_RETRIEVAL_VOTE",
+            mcq_proposer,
+            {
+                "task_id": task_id,
+                "question": augmented,
+                "has_nonempty_image_payload": transformed_image_flag,
+                "search_fn": search_fn,
+                "fetch_fn": fetch_fn,
+            },
+        )
+    else:
+        attempt(
+            "SYMBOLIC_LARK_V2",
+            symbolic_lark_proposer,
+            {
+                "task_id": task_id,
+                "question": augmented,
+                "has_nonempty_image_payload": transformed_image_flag,
+            },
+        )
+        if chosen is None:
+            attempt(
+                "SYMBOLIC_SURFACE_V1",
+                symbolic_surface_proposer,
+                {
+                    "task_id": task_id,
+                    "question": augmented,
+                    "has_nonempty_image_payload": transformed_image_flag,
+                },
+            )
+        if chosen is None:
+            attempt(
+                "NATIVE_RESEARCH_V3",
+                research_proposer,
+                {
+                    "task_id": task_id,
+                    "question": augmented,
+                    "has_nonempty_image_payload": transformed_image_flag,
+                    "search_fn": search_fn,
+                    "fetch_fn": fetch_fn,
+                },
+            )
+        if chosen is None:
+            attempt(
+                "EXACT_RETRIEVAL_V2",
+                retrieval_proposer,
+                {
+                    "task_id": task_id,
+                    "question": augmented,
+                    "has_nonempty_image_payload": transformed_image_flag,
+                    "search_fn": search_fn,
+                    "fetch_fn": fetch_fn,
+                },
+            )
+
+    if chosen is None:
+        answer = "UNKNOWN"
+        abstained = True
+        confidence = 0
+        explanation = "No cognition-clean Brain-native proposal lane produced a candidate."
+    else:
+        answer, receipt = chosen
+        abstained = False
+        confidence = _confidence(receipt, chosen_lane or "")
+        explanation = f"Brain-native proposal lane: {chosen_lane}."
+
+    response = f"Explanation: {explanation}\nAnswer: {answer}\nConfidence: {confidence}%"
+    binding = {
+        "task_id": task_id,
+        "question_sha256": _sha(question),
+        "image_data_uri_sha256": _sha(image) if image else None,
+    }
+    return {
+        "schema": SCHEMA,
+        "status": "PRECOMMITTABLE_CANDIDATE" if not abstained else "PRECOMMITTABLE_ABSTENTION",
+        "task_id": task_id,
+        "input_sha256": _sha(json.dumps(binding, sort_keys=True, separators=(",", ":"))),
+        "question_sha256": binding["question_sha256"],
+        "image_data_uri_sha256": binding["image_data_uri_sha256"],
+        "final_answer": answer,
+        "final_answer_sha256": _sha(answer),
+        "final_response": response,
+        "final_response_sha256": _sha(response),
+        "confidence_percent": confidence,
+        "abstained": abstained,
+        "selected_lane": chosen_lane,
+        "attempts": attempts,
+        "image_observation": (
+            {
+                "status": image_receipt.get("status"),
+                "image_sha256": image_receipt.get("image_sha256"),
+                "ocr_text_sha256": image_receipt.get("ocr_text_sha256"),
+                "ocr_chars": image_receipt.get("ocr_chars"),
+                "local_ocr_tool_used": image_receipt.get("local_ocr_tool_used", False),
+                "intrinsic_brain_vision_claimed": False,
+                "external_cognition_rejected": image_cognition_rejected,
+            }
+            if image_receipt
+            else None
+        ),
+        "answer_type_metadata_used": False,
+        "answer_type_inferred_from_visible_question_only": True,
+        "precommittable": True,
+        "gold_accessed": False,
+        "external_reasoning_model_calls": 0,
+        "external_model_solver_output_used": False,
+        "brain_capability_claim_from_external_model": False,
+        "external_cognition_candidate_rejection_enforced": True,
+        "correctness_claimed": False,
+        "target_score_claimed": False,
+        "terminal_authority": False,
+        "terminal_credit_delta": 0,
+        "hard_nonclaim": "TOTAL_PRECOMMITTABLE_OUTPUT_DOES_NOT_IMPLY_SCORE_ADEQUACY_OR_CORRECTNESS",
+    }
+
+
+if __name__ == "__main__":
+    print("IMPORT_OK")
