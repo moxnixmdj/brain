@@ -27,12 +27,13 @@ def _ocr(*, low_conf: bool = False, crop: bool = False, overlap: bool = False):
     if overlap:
         second = {"x0": 60, "y0": 42, "x1_exclusive": 240, "y1_exclusive": 58}
     conf = 20.0 if low_conf else 92.0
+    conf2 = 21.0 if low_conf else 91.0
     return {
         "page_width": 400,
         "page_height": 300,
         "text_items": [
             {"text": "Line one", "box": first, "confidence_mean": conf},
-            {"text": "Line two", "box": second, "confidence_mean": 91.0},
+            {"text": "Line two", "box": second, "confidence_mean": conf2},
         ],
     }
 
@@ -89,6 +90,45 @@ class ProfessionalArtifactVisualObserverV1Tests(unittest.TestCase):
             out = observer.analyze_page(p, _ocr(low_conf=True))
             self.assertFalse(out["pass"], out)
             self.assertFalse(out["gates"]["OCR_LINE_CONFIDENCE_BOUNDED"])
+
+    def test_single_zero_confidence_noise_line_does_not_veto_readable_page(self):
+        with tempfile.TemporaryDirectory() as td:
+            p = Path(td) / "page.png"
+            _page(p)
+            o = _ocr()
+            o["text_items"].append(
+                {
+                    "text": "noise",
+                    "box": {"x0": 40, "y0": 130, "x1_exclusive": 90, "y1_exclusive": 145},
+                    "confidence_mean": 0.0,
+                }
+            )
+            out = observer.analyze_page(p, o)
+            self.assertTrue(out["pass"], out)
+            self.assertGreaterEqual(out["confident_line_fraction"], 0.5)
+
+    def test_sparse_confident_text_page_is_not_misclassified_blank(self):
+        with tempfile.TemporaryDirectory() as td:
+            p = Path(td) / "page.png"
+            im = Image.new("RGB", (400, 300), "white")
+            d = ImageDraw.Draw(im)
+            d.rectangle((40, 40, 60, 42), fill="black")
+            im.save(p)
+            o = {
+                "page_width": 400,
+                "page_height": 300,
+                "text_items": [
+                    {
+                        "text": "Sparse",
+                        "box": {"x0": 40, "y0": 40, "x1_exclusive": 61, "y1_exclusive": 43},
+                        "confidence_mean": 85.0,
+                    }
+                ],
+            }
+            out = observer.analyze_page(p, o)
+            self.assertLess(out["ink_fraction"], 0.001)
+            self.assertTrue(out["gates"]["PAGE_NOT_BLANK"])
+            self.assertTrue(out["pass"], out)
 
     def test_ocr_geometry_mismatch_is_rejected(self):
         with tempfile.TemporaryDirectory() as td:
