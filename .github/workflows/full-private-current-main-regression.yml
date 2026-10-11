@@ -16,7 +16,7 @@ permissions:
 
 jobs:
   full-regression:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
@@ -103,4 +103,4 @@ jobs:
           path: /tmp/brain-regression/
           if-no-files-found: error
 
-# trigger: exact-current-main-regression-20261011-v1
+# trigger: exact-current-main-regression-ubuntu-22-04-carrier-20261011-v1
