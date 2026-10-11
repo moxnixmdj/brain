@@ -159,7 +159,7 @@ def test_malformed_mixed_browser_action_is_recoverable():
     response, actions = agent.predict("x", {"screenshot": b"x"})
     assert response == ""
     assert actions == ["WAIT"]
-    assert "BROWSER_OP_MUST_BE_SINGLETON_HOST_OPERATION" in agent.history[-1]["operation_error"]
+    assert "HOST_OPERATION_MUST_BE_SINGLETON_RUNTIME_ACTION:BROWSER_OP" in agent.history[-1]["operation_error"]
 
 
 def test_browser_failure_becomes_recovery_receipt():
@@ -248,7 +248,7 @@ def test_done_after_unchanged_gui_state_is_rejected():
         guest_controller=_FakeGuest(),
     )
     _, first = agent.predict("click then finish", {"screenshot": b"same"})
-    assert first == ["pyautogui.click(10, 10)"]
+    assert first == ["pyautogui.click(x=10, y=10, button=\'left\')"]
     _, second = agent.predict("click then finish", {"screenshot": b"same"})
     assert second == ["WAIT"]
     assert "DONE_WITHOUT_VERIFIED_COMPLETION_EVIDENCE" in agent.history[-1]["operation_error"]
