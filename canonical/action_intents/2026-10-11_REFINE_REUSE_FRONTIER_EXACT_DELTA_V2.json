@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "date": "2026-10-11",
+  "objective": "REFINE_CURRENT_REUSE_FIRST_FRONTIER_TO_DELETE_FALSIFIED_OR_REDUNDANT_WORK_AND_BIND_EACH_OPEN_OBLIGATION_TO_THE_SMALLEST_CURRENTLY_PROVED_EFFECT_DISTINGUISHING_DELTA",
+  "highest_leverage_now": true,
+  "load_bearing_primary": {
+    "open_obligation_ids": [
+      "CODING_TB4_GE_66_4",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_CURSORBENCH_GE_57_8",
+      "PROWORK_GDPVAL_GE_1846",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "AUTOMATIONBENCH_GE_40",
+      "HLE_TOOLS_GE_67_7",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER"
+    ],
+    "constructive_gap_for_open_obligation_ids": [
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "scope_complete_discharge": false,
+    "expected_obligation_discharge_lcb": "0",
+    "expected_obligation_unlock_lcb": "1",
+    "success_probability_lcb": "1",
+    "wall_clock_cost_ub": "1"
+  },
+  "constraints": [
+    "ZERO_INCREMENTAL_SPEND",
+    "REUSE_BEFORE_INVENTION",
+    "FAIL_CLOSED_NO_ROW_CREDIT_WITHOUT_AUTHENTICATED_PROOF",
+    "DO_NOT_RETRY_HOSTED_GITHUB_ACTIONS_UNTIL_EXECUTION_CARRIER_STATE_CHANGES",
+    "DO_NOT_WAKE_PARKED_TB_WITHOUT_FRESH_CAPABILITY_FIRST_ADMISSION_AND_NONRETRY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "base_main_commit": "c5ce5a5625173c5772b3b677940abb8272b23540"
+}
