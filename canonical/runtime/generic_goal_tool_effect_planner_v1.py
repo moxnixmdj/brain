@@ -320,6 +320,7 @@ def profile_endpoint(endpoint: Mapping[str, Any]) -> dict[str, Any]:
         "url": url,
         "action_class": _endpoint_action(method, text, operation_hint),
         "resource_terms": _resource_terms(text),
+        "operation_terms": _tokens(operation_hint),
         "raw": dict(endpoint),
     }
 
