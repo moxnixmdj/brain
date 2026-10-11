@@ -1,0 +1,76 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_MINIMUM_INFORMATION_FRONTIER_20261011_V3",
+  "date": "2026-10-11",
+  "status": "IDENTIFICATION_FIXED_POINT__PREEXISTING_TOP_SUPPORT_COLLAPSE_AUTHORITATIVE__NO_CURRENT_W_IDENTIFY_BRIDGE__ZERO_CREDIT",
+  "supersedes_for_active_strategy": {
+    "path": "canonical/governance/AA_BRIEFCASE_MINIMUM_INFORMATION_FRONTIER_20261011_V2.json",
+    "git_blob_sha": "49378e8af4cd215015b23a210240a658d1527ba6"
+  },
+  "terminal_target": {
+    "path": "canonical/governance/AA_BRIEFCASE_MEASUREMENT_SEMANTIC_TARGET_V1.json",
+    "git_blob_sha": "8f24ca30e6cceb8a58f619da1623037c0a4bda0b",
+    "predicate": "BRAIN_PROFESSIONAL_WORK_CAPABILITY_GE_CAPABILITY_EVIDENCED_BY_FROZEN_OPUS55_AA_BRIEFCASE_1822"
+  },
+  "authoritative_identification_boundary": {
+    "top_support_collapse": {
+      "path": "canonical/governance/AA_BRIEFCASE_TOP_SUPPORT_COLLAPSE_20261011_V1.json",
+      "git_blob_sha": "027a411b83ae51dc96a7c9e1f8730248a0b735da",
+      "verification_path": "canonical/verification/AA_BRIEFCASE_TOP_SUPPORT_COLLAPSE_LOCAL_VERIFY_20261011_V1.json",
+      "verification_git_blob_sha": "7fce0cdff6fb47c30086efa7eccbc11a4c22f933",
+      "result": "CURRENT_OPAQUE_AA_SUPERDOMAIN_HAS_NO_NONTRIVIAL_UNIVERSAL_TOP_SUPPORT"
+    },
+    "internal_top_support_bridge": {
+      "path": "canonical/runtime/aa_briefcase_internal_top_support_bridge_v1.py",
+      "git_blob_sha": "d1046ea238d07efc537b3d600410c18fbcf3c6ca",
+      "verification_path": "canonical/verification/AA_BRIEFCASE_INTERNAL_TOP_SUPPORT_BRIDGE_LOCAL_VERIFY_20261011_V1.json",
+      "verification_git_blob_sha": "c988e8ff53781e505492a1aced2ed50e3f9db4d9",
+      "result": "CURRENT_SELECTED_CELL_FAILS_CLOSED__UNIVERSAL_SOURCE_DOMAIN_TOP_LAW_PLUS_SCOPE_COMPLETE_AA_MAPPING_WOULD_BE_SUFFICIENT"
+    },
+    "zero_external_fixed_point": {
+      "path": "canonical/governance/AA_BRIEFCASE_INTERNAL_ONLY_ROUTE_EXHAUSTION_20261011_V4.json",
+      "git_blob_sha": "a8f54a72bdbf78646a34e4affd3eae3e98f69a74",
+      "reopen_event": "NEW_SOUND_RESTRICTION_OF_PRIVATE_RUBRIC_OR_JUDGE_CLASS_DISCOVERED"
+    },
+    "duplicate_reconciliation": "canonical/governance/AA_BRIEFCASE_IDENTIFICATION_PROOF_RECONCILIATION_20261011_V1.json"
+  },
+  "minimum_information_state": {
+    "W_IDENTIFY": {
+      "state": "OPEN__NO_CURRENT_CREDIT_BEARING_BRIDGE",
+      "required": "ONE_SOUND_RESTRICTION_OR_REFERENCE_RELATION_THAT_IDENTIFIES_THE_SCORE_BEARING_CAPABILITY_ORDER_ACROSS_RUBRIC_ANALYTICAL_QUALITY_AND_PRESENTATION",
+      "acceptable_forms": [
+        "SOUND_RESTRICTION_OF_ACTUAL_PRIVATE_RUBRIC_AND_JUDGE_CLASS_PLUS_MATERIAL_ORDER",
+        "MATCHED_REFERENCE_RELATION_ON_THE_ACTUAL_SCORE_BEARING_SCOPE",
+        "OWNER_ACCEPTED_OR_PROTOCOL_EQUIVALENT_RELATION_WITH_TERMINAL_ENTAILMENT"
+      ]
+    },
+    "W_COVER": {
+      "state": "NOT_SCHEDULABLE_FOR_TERMINAL_CREDIT_BEFORE_W_IDENTIFY",
+      "reason": "THE_RELEVANT_SCOPE_OR_REFERENCE_RELATION_IS_NOT_YET_IDENTIFIED"
+    },
+    "W_QUALITY": {
+      "state": "NOT_SCHEDULABLE_FOR_TERMINAL_CREDIT_BEFORE_W_IDENTIFY",
+      "reason": "THE_LOAD_BEARING_MATERIAL_ORDER_IS_NOT_YET_IDENTIFIED"
+    }
+  },
+  "same_information_search": {
+    "current_bound_sound_restriction_of_private_rubric_or_judge_class": false,
+    "current_credit_bearing_capability_identification_bridge_found": false,
+    "literal_route_v4_same_information_fixed_point": true,
+    "repeat_search_without_new_authority_or_source_generation": "ZERO_EXPECTED_INFORMATION_GAIN"
+  },
+  "optimal_action_under_no_new_external_information": "STOP_AA_SPECIFIC_PROOF_SEARCH_AT_THIS_FIXED_POINT__DO_NOT_RUN_BENCHMARK_RITUAL_OR_GENERIC_COVERAGE_QUALITY_WORK_AS_IF_IT_IDENTIFIED_THE_REFERENCE__ONLY_REOPEN_ON_A_NEW_W_IDENTIFY_DISTINGUISHING_PREMISE",
+  "hard_nonclaims": [
+    "NO_CLAIM_BRAIN_IS_INFERIOR_TO_OPUS_ON_PROFESSIONAL_WORK",
+    "NO_CLAIM_ACTUAL_PRIVATE_RUBRICS_ARE_ARBITRARY_INDICATORS",
+    "NO_CLAIM_FUTURE_NEW_INFORMATION_CANNOT_IDENTIFY_THE_RELATION",
+    "NO_CAPABILITY_NONINFERIORITY_CREDIT",
+    "NO_LITERAL_AA_ELO_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "benchmark_score_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
