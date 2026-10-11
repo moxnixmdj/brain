@@ -1,0 +1,153 @@
+{
+  "schema": "PROJECT_BRAIN_FINANCE_AGENT_V2_PARTIAL_CREDIT_SCORE_MASS_THEOREM_V1",
+  "date": "2026-10-11",
+  "status": "SOUND_RUN_SCORE_MASS_REDUCTION_CANDIDATE__TASK_MASS_COROLLARY_CONDITIONAL_ON_AGGREGATION_BINDING__ZERO_CREDIT",
+  "target_predicate": "FINANCE_AGENT_V2_GE_58_59",
+  "canonical_base_commit": "b2b3dfd8309b2c5f15e9692feb8412eb3f06f20c",
+  "first_party_bindings": {
+    "benchmark_methodology": {
+      "url": "https://www.vals.ai/benchmarks/fabv2",
+      "observed_date": "2026-10-11",
+      "facts": [
+        "PRIVATE_TEST_SPLIT_HAS_450_QUESTIONS",
+        "EACH_MODEL_IS_RUN_THREE_TIMES",
+        "REPORTED_SCORES_ARE_MEAN_OF_RUNS",
+        "PRIMARY_PARTIAL_CREDIT_IS_COMPUTED_PER_QUESTION_FROM_DEALBREAKER_GATED_SEVERITY_WEIGHTED_CHECKS",
+        "QUESTIONS_HAVE_A_TWO_HOUR_LIMIT_AND_TIMEOUT_SCORES_ZERO",
+        "PRIVATE_TEST_SPLIT_ALONE_DETERMINES_LEADERBOARD_RESULTS"
+      ],
+      "content_addressing": "CURRENT_FIRST_PARTY_WEB__NOT_GIT_CONTENT_ADDRESSED"
+    },
+    "public_runner_repo": {
+      "repository": "vals-ai/finance-agent-v2",
+      "main_commit": "502aab6fdaa3fb9294905c7453f89882baa8d39b",
+      "facts": [
+        "PUBLIC_DATA_HAS_27_QUESTIONS",
+        "DEFAULT_BENCHMARK_CONFIGURATION_USES_THE_PUBLISHED_AGENT_HARNESS",
+        "PUBLIC_RUNNER_SUPPORTS_CUSTOM_MODEL_ENDPOINT_INTEGRATION",
+        "PUBLIC_QUESTIONS_DO_NOT EXPOSE THE PRIVATE TEST POPULATION"
+      ]
+    },
+    "prior_scope_falsification": {
+      "path": "canonical/governance/FINANCE_AGENT_V2_PUBLISHED_CONTRACT_SCOPE_FALSIFICATION_20261007_V1.json",
+      "git_blob_sha": "01ebffa49705f3e06edddcec98a080bccc795ce7"
+    },
+    "prior_execution_mass": {
+      "path": "canonical/governance/FINANCE_AGENT_V2_HELDOUT_EXECUTION_MASS_REDUCTION_20261004_V1.json",
+      "git_blob_sha": "ec36936e92a6111aed6b1813a45225fb4ca867dc"
+    },
+    "reusable_mass_pattern": {
+      "path": "canonical/governance/LIVEBENCH_PARTIAL_CREDIT_MASS_THEOREM_V1.json"
+    }
+  },
+  "algebra": {
+    "unconditional_run_level": {
+      "notation": {
+        "a_r": "TRUE_FINANCE_AGENT_V2_SCORE_PERCENT_FOR_RUN_r",
+        "A": "REPORTED_SCORE_PERCENT"
+      },
+      "equations": [
+        "A=(a_1+a_2+a_3)/3",
+        "A>=58.59 IFF a_1+a_2+a_3>=175.77"
+      ],
+      "threshold_percent": "58.59",
+      "runs": 3,
+      "required_run_score_mass_percent": "175.77",
+      "authority": "DIRECTLY_SUPPORTED_BY_FIRST_PARTY_FINANCE_AGENT_V2_MEAN_OF_RUNS_METHODOLOGY"
+    },
+    "conditional_task_level": {
+      "prerequisite": "AUTHORITATIVE_BINDING_THAT_EACH_RUN_SCORE_IS_THE_ARITHMETIC_MEAN_OF_450_EQUALLY_WEIGHTED_TASK_SCORES",
+      "currently_content_addressed_bound": false,
+      "equations": [
+        "IF a_r=(100/450)*SUM_i(q_r_i) WITH q_r_i IN [0,1], THEN A=(100/1350)*SUM_r_i(q_r_i)",
+        "UNDER_THAT_BINDING A>=58.59 IFF SUM_r_i(q_r_i)>=790.965"
+      ],
+      "test_tasks_per_run": 450,
+      "total_task_run_executions": 1350,
+      "required_task_score_mass": "790.965"
+    }
+  },
+  "stronger_certificate": {
+    "unconditional_theorem": "ANY_SOUND_LOWER_BOUNDS_L1_L2_L3_ON_THE_THREE_TRUE_RUN_SCORES_WITH_L1+L2+L3>=175.77_PERCENTAGE_POINTS_ARE_SUFFICIENT_TO_PROVE_FINANCE_AGENT_V2_GE_58_59__COMPLETE_PRIVATE_SEMANTIC_RECONSTRUCTION_IS_NOT_NECESSARY",
+    "strict_weakening": "ONLY_ENOUGH_CERTIFIED_RUN_LEVEL_SCORE_MASS_TO_CROSS_THE_FIXED_THRESHOLD_IS_REQUIRED",
+    "conditional_task_mass_corollary": {
+      "condition": "EQUAL_TASK_AVERAGING_WITHIN_EACH_450_TASK_RUN_IS_AUTHORITATIVELY_BOUND",
+      "theorem": "ANY_SOUND_TASK_RUN_LOWER_BOUNDS_WITH_TOTAL_NORMALIZED_MASS>=790.965_FORCE_THE_TARGET",
+      "examples": {
+        "full_score_task_run_executions_sufficient": 791,
+        "full_score_task_run_executions_791_percent": "58.59259259259259",
+        "full_score_task_run_executions_790_percent": "58.51851851851852",
+        "hidden_tasks_universally_full_score_across_all_three_runs_sufficient": 264,
+        "hidden_tasks_264_mass": 792,
+        "hidden_tasks_264_percent": "58.66666666666667",
+        "hidden_tasks_263_mass": 789,
+        "hidden_tasks_263_percent": "58.44444444444444"
+      },
+      "acceptance_authority_without_prerequisite": false
+    }
+  },
+  "scheduler_repair": {
+    "delete_as_overstrong": [
+      "COMPLETE_HIDDEN_SEMANTICS_REQUIRED_BEFORE_ANY_STRONGER_CERTIFICATE_CAN_CLOSE_THE_58_59_THRESHOLD",
+      "EVERY_PRIVATE_TASK_CLASS_MUST_BE_SEMANTICALLY_CLOSED"
+    ],
+    "replace_with": [
+      "EXACT_OFFICIAL_BRAIN_SCORE_GE_58_59",
+      "OR_CERTIFIED_THREE_RUN_SCORE_LOWER_BOUND_MASS_GE_175_77_PERCENTAGE_POINTS",
+      "OR_IF_EQUAL_TASK_AGGREGATION_IS_AUTHORITATIVELY_BOUND__CERTIFIED_TASK_RUN_SCORE_MASS_GE_790_965",
+      "OR_ANOTHER_SOUND_CERTIFICATE_IMPLYING_THE_TARGET"
+    ],
+    "highest_leverage_next_evidence": [
+      "OFFICIAL_RESULT_RECEIPT",
+      "AUTHORIZED_PRIVATE_TEST_RUN_LEVEL_SCORE_RECEIPTS",
+      "A_STRONGER_CERTIFICATE_GIVING_LOWER_BOUNDS_ON_ALL_THREE_RUN_SCORES_WITH_SUM_GE_175_77",
+      "AUTHORITATIVE_WITHIN_RUN_AGGREGATION_BINDING_PLUS_ENOUGH_TASK_LEVEL_SCORE_MASS_EVIDENCE"
+    ]
+  },
+  "current_state": {
+    "target_closed": false,
+    "unconditional_certificate_shape_closed": true,
+    "unconditional_required_run_score_mass_percent": "175.77",
+    "certified_private_run_score_mass_claimed_here": "0",
+    "conditional_task_mass_required": "790.965",
+    "equal_task_average_authoritatively_bound_here": false,
+    "reason": "NO_ADMISSIBLE_PRIVATE_TEST_RUN_SCORE_RECEIPTS_OR_EQUIVALENT_LOWER_BOUNDS_ARE_BOUND_BY_THIS_ARTIFACT",
+    "prior_public_contract_falsifier_preserved": true,
+    "donor_model_or_external_model_score_substitution_forbidden": true,
+    "brain_score_identity_rule": "ONLY_EXECUTION_CAUSALLY_PRODUCED_BY_BRAIN_NATIVE_CAPABILITY_COUNTS_AS_BRAIN_SCORE"
+  },
+  "hard_nonclaims": [
+    "NO_FINANCE_AGENT_V2_BRAIN_SCORE_IS_CLAIMED",
+    "NO_EXTERNAL_OR_DONOR_MODEL_MAY_BE_USED_AS_THE_COGNITIVE_SOLVER_AND_RELABELED_AS_BRAIN",
+    "MODEL_WRAPPING_ROUTING_OR_ADAPTER_MATERIALITY_DOES_NOT_CONVERT_A_DONOR_MODEL_SCORE_INTO_A_BRAIN_SCORE",
+    "NO_PRIVATE_TEST_QUESTION_OR_RUBRIC_IS_INFERRED",
+    "NO_CLAIM_THE_450_TEST_QUESTIONS_ARE_50_PER_CATEGORY",
+    "NO_CATEGORY_DISTRIBUTION_IS_USED_TO_CREATE_SCORE_CREDIT",
+    "NO_PUBLIC_27_TASK_RESULT_IS_TRANSFERRED_TO_PRIVATE_TEST_MASS_WITHOUT_A_SOUND_TRANSFER_PROOF",
+    "NO_CLAIM_EQUAL_TASK_WEIGHTING_WITHIN_A_RUN_IS_CURRENTLY_CONTENT_ADDRESSED_OR_EXPLICITLY_PUBLISHED_FOR_FINANCE_AGENT_V2",
+    "THE_790_965_TASK_MASS_AND_791_EXECUTION_SHORTCUT_HAVE_NO_ACCEPTANCE_AUTHORITY_UNTIL_EQUAL_TASK_AVERAGING_IS_AUTHORITATIVELY_BOUND",
+    "NO_CURRENT_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "implementation": {
+    "runtime": "canonical/runtime/finance_agent_v2_score_mass_v1.py",
+    "tests": "canonical/tests/test_finance_agent_v2_score_mass_v1.py",
+    "fail_closed_rules": [
+      "MISSING_RUNS_CONTRIBUTE_ZERO_TO_RUN_SCORE_LOWER_BOUND",
+      "TASK_LEVEL_CERTIFICATE_REJECTED_UNLESS_EQUAL_TASK_AVERAGE_AGGREGATION_IS_AUTHORITATIVELY_BOUND"
+    ]
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "private_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false
+}
