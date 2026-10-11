@@ -25,7 +25,7 @@
       },
       {
         "path": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-        "git_blob_sha": "6987aa4f45231583b4631c83f775d94ada011b17"
+        "git_blob_sha": "12c50f2b83a10a1d9ff77ad369bed25d3aa9932d"
       },
       {
         "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
@@ -179,7 +179,7 @@
       "vector_evidence": {},
       "read_only_evidence": {
         "source": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-        "source_git_blob_sha": "6987aa4f45231583b4631c83f775d94ada011b17",
+        "source_git_blob_sha": "12c50f2b83a10a1d9ff77ad369bed25d3aa9932d",
         "raw_python_source_bytes": 1746554,
         "B_exec_raw_python_source_bytes": 1749314,
         "qualification": "12190/12190",
@@ -189,7 +189,7 @@
         "vector_bounds_complete": false
       },
       "ready": "V40_CURRENT_AT_1746554_BYTES__CONTINUE_ONLY_NONCONFLICTING_RESOURCE_PARETO_CUT",
-      "source_git_blob_sha": "6987aa4f45231583b4631c83f775d94ada011b17"
+      "source_git_blob_sha": "12c50f2b83a10a1d9ff77ad369bed25d3aa9932d"
     },
     {
       "work_id": "R2_FINANCE_SEMANTIC_ADEQUACY_TAIL",
