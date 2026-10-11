@@ -1,0 +1,94 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_NATIVE_SOLVER_STACK_V2_STATUS_20261011_V1",
+  "date": "2026-10-11",
+  "status": "NATIVE_STACK_COMPOSED__EXECUTION_TOTALITY_PRESENT_VIA_EXPLICIT_ABSTENTION__SCORE_ADEQUACY_UNPROVED__NO_EXTERNAL_SOLVER_MODEL",
+  "dataset_binding": {
+    "sha256": "6d0ee0602e8aea6b159509577e884f48ecac7b8e3f6822a35f51335a446c726a",
+    "rows": 2500,
+    "unique_ids": 2500,
+    "solver_input_sha256": "d4aad9ddefa650724b5a5784fde80dc07782bd553f1a82930d5b30317310d467"
+  },
+  "runtime_blobs": {
+    "canonical/runtime/hle_mcq_retrieval_vote_v1.py": "600aed54c599dc5541ce1319a5b0a91df8876f41",
+    "canonical/runtime/hle_exact_retrieval_extract_v2.py": "1c9d1c9096af91e05f67c3ead3068b0daf0ab033",
+    "canonical/runtime/hle_symbolic_surface_solver_v1.py": "1c9c08d0a9bb08884d682f4071cf485b38699f27",
+    "canonical/runtime/hle_symbolic_lark_solver_v2.py": "889f1dab5161c286ed2cbef83188d80e5d038398",
+    "canonical/runtime/hle_image_observation_v1.py": "bcc8e67319c54937745fb3d6d0934b838ec776a9",
+    "canonical/runtime/hle_native_total_solver_v2.py": "aba3541c400210686c33fff2a551b0f8a79785b5",
+    "canonical/runtime/root2_hle_opus55_tool_adapter_v1.py": "fa955ccc5e4f3d29aa79e2b380f713d30ee46e8f"
+  },
+  "composition_order": {
+    "mcq_visible_syntax": [
+      "MCQ_RETRIEVAL_VOTE",
+      "UNKNOWN"
+    ],
+    "non_mcq": [
+      "SYMBOLIC_LARK_V2",
+      "SYMBOLIC_SURFACE_V1",
+      "EXACT_RETRIEVAL_V2",
+      "UNKNOWN"
+    ],
+    "image_preprocessing": "LOCAL_OCR_TOOL_OBSERVATION_ONLY__DISCLOSED_AS_TOOL__NOT_INTRINSIC_BRAIN_VISION"
+  },
+  "verification": {
+    "exact_committed_runtime_replay_old_stack": {
+      "tests_run": 20,
+      "tests_passed": 20,
+      "repository_ci_claimed": false
+    },
+    "symbolic_lark_v2_precommit_synthetic": {
+      "tests_run": 9,
+      "tests_passed": 9,
+      "real_hle_tuning_used": false
+    },
+    "total_solver_v2_repository_ci_claimed": false,
+    "note": "No benchmark gold was used in solver construction or synthetic verification."
+  },
+  "population_safe_metadata": {
+    "official_answer_type_counts": {
+      "exactMatch": 1909,
+      "multipleChoice": 591
+    },
+    "image_rows": 342,
+    "visible_answer_choices_marker_rows": 592,
+    "answer_choices_marker_vs_official_type_mismatch_rows": 1,
+    "consequence": "The comparable solver does not consume answer_type metadata because the public CAIS solver prompt uses only question and image; one visible-syntax answer-type ambiguity remains."
+  },
+  "gate_split": {
+    "G1B_execution_totality": {
+      "status": "CLOSED_ONLY_AS_INTERFACE_PROPERTY",
+      "meaning": "For any syntactically valid input the orchestrator can emit a content-addressed final response; unsupported semantics produce Answer: UNKNOWN at 0% confidence."
+    },
+    "G1B_native_answer_adequacy": {
+      "status": "OPEN",
+      "meaning": "UNKNOWN totality and fallible proposals do not prove enough correct answers to reach the HLE target."
+    },
+    "G2_target_grader_binding": {
+      "status": "OPEN"
+    }
+  },
+  "anti_loophole_invariants": [
+    "UNKNOWN_OR_ABSTENTION_TOTALITY_MUST_NEVER_BE_USED_AS_EVIDENCE_OF_SCORE_ADEQUACY.",
+    "EXTERNAL_REASONING_MODEL_OUTPUT_MUST_NEVER_BE USED_AS_BRAIN_SOLVER_OUTPUT_OR_BRAIN_CAPABILITY CREDIT.",
+    "LOCAL_OCR_IS A DISCLOSED TOOL OBSERVATION AND MUST NEVER BE RELABELED AS INTRINSIC BRAIN VISION.",
+    "ANSWER_TYPE METADATA MUST NOT BE FED TO THE SOLVER UNLESS COMPARATOR PROTOCOL IS PROVEN TO PROVIDE IT.",
+    "NO REAL-HLE SCORE MAY BE CLAIMED WITHOUT PRECOMMITTED ANSWERS AND VALID TARGET GRADING."
+  ],
+  "score_status": {
+    "target_percent": 67.7,
+    "trials": 5,
+    "total_slots": 12500,
+    "conservative_success_threshold": 8463,
+    "achieved_successes": null,
+    "achieved_score": null,
+    "score_claimed": false
+  },
+  "remaining_critical_path": [
+    "RAISE_BRAIN_NATIVE_ANSWER_QUALITY_ENOUGH_TO MAKE_8463_OF_12500 PLAUSIBLE_AND THEN MEASURABLE",
+    "PROVIDE_SECURE_ZERO_INCREMENTAL_COST_EXECUTION_CHANNEL_WITH_GATED_DATASET_PLUS_WEB_RETRIEVAL",
+    "BIND_TARGET_OPUS_4_6_GRADER_OR_STRONGER_VALID_SCORE_RELATION"
+  ],
+  "terminal_run_occurred": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
