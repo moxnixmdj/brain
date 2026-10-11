@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_LITE_W1_T1_FRESH_FALSIFICATION_PRECOMMIT_V1",
+  "date": "2026-10-08",
+  "status": "PRECOMMITTED_BEFORE_W1_T1_PROMPT_SOURCE_GRADING_OR_SUBMISSION_REVIEW__ZERO_TERMINAL_CREDIT",
+  "objective": "FALSIFY THE REPAIRED AA_BRIEFCASE PROFESSIONAL DELIVERABLE ROUTE ON A DIFFERENT UNTOUCHED PUBLIC LITE TASK.",
+  "benchmark": {
+    "repository": "ArtificialAnalysis/AA-Briefcase-Lite",
+    "selected_task_id": "w1_t1",
+    "selected_task_name_from_public_inventory": "Market structure & competitive landscape",
+    "deliverables_from_public_inventory": [
+      "market_overview.tex",
+      "market_overview.pdf"
+    ],
+    "public_non_scoring": true
+  },
+  "untouched_check": {
+    "internal_repository_searches": [
+      "w1_t1",
+      "W1-T1",
+      "market_overview.tex",
+      "market_overview.pdf",
+      "Market Structure Map"
+    ],
+    "prior_brain_matches_found": 0,
+    "w1_t2_excluded_as_consumed": true,
+    "w1_t3_excluded_as_contaminated": true,
+    "w1_t4_excluded_because_prompt_was_exposed_during_inventory_search": true
+  },
+  "information_seen_before_precommit": [
+    "PUBLIC TASK ID w1_t1",
+    "PUBLIC INVENTORY LABEL Market structure & competitive landscape",
+    "PUBLIC DELIVERABLE NAMES market_overview.tex AND market_overview.pdf",
+    "GENERAL DUE DILIGENCE SCENARIO IDENTITY"
+  ],
+  "forbidden_before_output_freeze": [
+    "W1_T1 GRADING CHECKS OR RUBRIC CONTENT",
+    "W1_T1 TRACEABILITY/EVIDENCE CHAINS",
+    "W1_T1 MODEL OR REFERENCE SUBMISSIONS",
+    "W1_T1 JUDGE OUTPUTS"
+  ],
+  "allowed_after_precommit_before_freeze": [
+    "EXACT FILE tasks/w1_t1.md",
+    "SCENARIO AND WEEK OVERVIEWS",
+    "THE DECLARED W1_T1 SOURCE POOL",
+    "PRECOMMITTED BRAIN CAPABILITY ROUTES"
+  ],
+  "retrieval_rule": "USE EXACT DATASET FILE PATHS ONLY__DO_NOT NATURAL-LANGUAGE SEARCH FOR W1_T1 CONTENT BEFORE FREEZE.",
+  "route_order": [
+    "LOSSLESS HARNESS INGESTION",
+    "PARSE ALL DECLARED SOURCES OR BLOCK",
+    "AUTHORITY/CONVENTION SWEEP",
+    "FAIL_CLOSED PRE_GENERATION CONTRACT",
+    "GENERATE market_overview.tex AND market_overview.pdf",
+    "POST_BUILD REQUIREMENT DIMENSION CONVENTION SCENARIO RECONCILIATION SOURCE TRACE AND MECHANICAL AUDIT",
+    "FREEZE BOTH OUTPUT DIGESTS",
+    "ONLY THEN OPEN W1_T1 GRADING CHECKS OR REFERENCE SUBMISSIONS"
+  ],
+  "hard_nonclaims": [
+    "NO OFFICIAL AA_BRIEFCASE EVIDENCE",
+    "NO OPUS55 PARITY INFERENCE",
+    "NO CLAIM THIS FRESH TASK WILL PASS",
+    "NO FAMILY OR TERMINAL CREDIT"
+  ],
+  "terminal_credit_delta": 0
+}

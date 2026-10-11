@@ -1,0 +1,119 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_OWNER_ATTESTATION_REQUEST_CONTRACT_V1",
+  "date": "2026-10-08",
+  "status": "READY_EXTERNAL_REQUEST_CONTRACT__LOGICALLY_MINIMAL_CORE__CRYPTOGRAPHIC_OWNER_AUTHENTICATION_REQUIRED__NO_REQUEST_SENT__ZERO_TERMINAL_CREDIT",
+  "purpose": "ALLOW THE AA_BRIEFCASE OWNER OR AN AUTHORIZED EVALUATION OPERATOR TO PROVE CURRENT-EPOCH BRAIN NONINFERIORITY WITHOUT DISCLOSING PRIVATE BENCHMARK CONTENT.",
+  "requested_evaluation": {
+    "benchmark": "AA-Briefcase v1.1",
+    "comparator": "Claude Opus 5.5 (Max, Default Fallback)",
+    "requirement": "EVALUATE THE CONTENT-ADDRESSED BRAIN SUBJECT ON THE COMPLETE CURRENT SCORED PRIVATE AA_BRIEFCASE SCOPE AND DETERMINE WHETHER BRAIN WEAKLY DOMINATES THE CURRENT OPUS55 REFERENCE ON EVERY LOAD-BEARING GRADING RELATION.",
+    "accepted_terminal_relation": "BRAIN_WEAKLY_DOMINATES_CURRENT_OPUS55"
+  },
+  "preferred_response_format": {
+    "type": "ATTESTATION_STATEMENT_PLUS_AUTHENTICATED_SIGNATURE",
+    "current_executable_container": "PLAIN IN_TOTO_STYLE JSON STATEMENT SIGNED OVER CANONICAL JSON BYTES WITH ED25519_CANONICAL_JSON_V1",
+    "required_core_claims": [
+      "BRAIN SUBJECT SHA256",
+      "AA_BRIEFCASE_V1_1 IDENTITY",
+      "CURRENT OWNER EPOCH IDENTITY OR DATE",
+      "CURRENT OPUS55 MAX DEFAULT-FALLBACK COMPARATOR IDENTITY",
+      "CURRENT GRADING-PROTOCOL MANIFEST IDENTITY",
+      "TASK_COUNT_EQUALS_91",
+      "COMPLETE CURRENT SCORED PRIVATE SCOPE WAS USED",
+      "ALL LOAD-BEARING GRADING RELATIONS WERE INCLUDED",
+      "BRAIN WEAKLY DOMINATES CURRENT OPUS55",
+      "NO OFFICIAL OWNER ELO IS CLAIMED BY THIS DIRECT ATTESTATION",
+      "HISTORICAL 1822 EPOCH IS NOT REWRITTEN"
+    ],
+    "required_authentication": [
+      "VERIFIABLE OWNER OR AUTHORIZED-OPERATOR SIGNATURE",
+      "VERIFIED OWNER PUBLIC-KEY OR EQUIVALENT SIGNER-IDENTITY TRUST ANCHOR AUTHORIZED FOR AA_BRIEFCASE_V1_1"
+    ],
+    "optional_audit_commitments": [
+      "PRIVATE TASK POPULATION SHA256 OR EQUIVALENT OPAQUE COMMITMENT",
+      "LOAD-BEARING CHECK POPULATION SHA256 OR EQUIVALENT OPAQUE COMMITMENT",
+      "OPUS REFERENCE SUBJECT SHA256 OR EQUIVALENT OPAQUE COMMITMENT"
+    ],
+    "logical_sufficiency_boundary": "THE OPTIONAL PRIVATE POPULATION COMMITMENTS IMPROVE AUDITABILITY AND REPLAY BUT ARE NOT REQUIRED FOR LOGICAL SUFFICIENCY WHEN THE BENCHMARK OWNER ITSELF AUTHENTICALLY ATTESTS THE COMPLETE-SCOPE NONINFERIORITY PROPOSITION.",
+    "privacy": "NO PRIVATE TASK TEXT RUBRIC TEXT CHECK IDS PER-CHECK VERDICTS OR PRIVATE POPULATION HASHES NEED TO BE DISCLOSED FOR THE LOGICALLY MINIMAL CORE."
+  },
+  "preferred_in_toto_predicate": {
+    "_type": "https://in-toto.io/Statement/v1",
+    "subject": [
+      {
+        "name": "brain-aa-briefcase-candidate",
+        "digest": {
+          "sha256": "<BRAIN_SUBJECT_SHA256>"
+        }
+      }
+    ],
+    "predicateType": "https://project-brain.local/attestation/aa-briefcase-current-epoch-noninferiority/v2",
+    "predicate": {
+      "benchmark": "AA-Briefcase v1.1",
+      "target_model": "Claude Opus 5.5 (Max, Default Fallback)",
+      "target_observed_date": "2026-10-08",
+      "grading_protocol_manifest_git_blob_sha": "5c77f294e09d4933e3a3175c46af225b414f4702",
+      "task_count": 91,
+      "complete_current_scored_private_scope_used": true,
+      "all_load_bearing_grading_relations_included": true,
+      "brain_weakly_dominates_current_opus55": true,
+      "official_owner_elo_claimed": false,
+      "historical_1822_epoch_rewritten": false,
+      "audit_commitments": {
+        "optional": true,
+        "private_task_population_sha256": "<OPTIONAL_OPAQUE_SHA256>",
+        "load_bearing_check_population_sha256": "<OPTIONAL_OPAQUE_SHA256>",
+        "opus_reference_subject_sha256": "<OPTIONAL_OPAQUE_SHA256>"
+      }
+    }
+  },
+  "alternatives_if_owner_cannot_issue_scope_complete_attestation": [
+    "DETAILED SCOPE-COMPLETE E_M_U RECEIPT OVER PRIVATE CHECKS",
+    "ONE MATCHED CURRENT-EPOCH INDEPENDENT OR OWNER-VERIFIED BRAIN ELO RECEIPT"
+  ],
+  "explicitly_not_requested": [
+    "PRIVATE TASK CONTENT",
+    "PRIVATE RUBRIC CONTENT",
+    "PRIVATE CHECK IDENTIFIERS",
+    "PER-CHECK JUDGE TRANSCRIPTS",
+    "PRIVATE TASK/CHECK POPULATION HASHES UNLESS THE OWNER VOLUNTARILY INCLUDES THEM FOR AUDITABILITY",
+    "HISTORICAL 1822 EPOCH RECONSTRUCTION",
+    "A SECOND AA_BRIEFCASE RUN FOR THE SECOND FAMILY ALIAS"
+  ],
+  "hard_nonclaims": [
+    "NO REQUEST HAS BEEN SENT.",
+    "NO REAL ARTIFICIAL ANALYSIS OWNER PUBLIC KEY OR SIGNED ATTESTATION IS CURRENTLY BOUND.",
+    "NO CLAIM THE OWNER SUPPORTS THE PROJECT-BRAIN ED25519 CANONICAL-JSON FORMAT.",
+    "NO CLAIM OFFICIAL GITHUB PUBLICATION OR SIGSTORE/DSSE IS CURRENTLY EXECUTABLE WITHOUT A DEDICATED VERIFIER.",
+    "NO CLAIM THE OWNER WILL ISSUE OR PUBLISH THE ATTESTATION.",
+    "NO CLAIM THE SERVICE OR OWNER ACTION WOULD BE FREE.",
+    "NO ACCEPTANCE OR TERMINAL CREDIT."
+  ],
+  "preferred_delivery_routes": [
+    {
+      "rank": 1,
+      "id": "ED25519_CANONICAL_JSON_V1",
+      "current_runtime_support": true,
+      "instruction": "SIGN THE UTF-8 CANONICAL JSON BYTES WITH SORTED KEYS AND JSON SEPARATORS COMMA/COLON USING ED25519.",
+      "owner_key_requirement": "THE PUBLIC KEY MUST BE AUTHENTICATED TO ARTIFICIAL ANALYSIS OR AN AUTHORIZED AA_BRIEFCASE OPERATOR AND BOUND TO AA_BRIEFCASE_V1_1.",
+      "brain_validation": [
+        "canonical/runtime/aa_briefcase_owner_signature_verifier_v1.py",
+        "canonical/runtime/aa_briefcase_core_owner_attestation_v2.py"
+      ]
+    },
+    {
+      "rank": 2,
+      "id": "OFFICIAL_GITHUB_PUBLICATION",
+      "current_runtime_support": false,
+      "instruction": "PUBLICATION IN AN OFFICIAL OWNER-CONTROLLED REPOSITORY MAY PROVIDE AN AUTHENTICATED ORIGIN ROUTE.",
+      "boundary": "DO NOT TREAT PUBLICATION ALONE AS CURRENTLY EXECUTABLE AA CREDIT UNTIL AN OWNER-ORIGIN PUBLICATION VERIFIER/ADAPTER IS BOUND."
+    },
+    {
+      "rank": 3,
+      "id": "SIGSTORE_OR_DSSE",
+      "current_runtime_support": false,
+      "instruction": "A SIGSTORE/COSIGN OR DSSE ATTESTATION IS ACCEPTABLE IN PRINCIPLE IF ITS OWNER IDENTITY CAN BE VERIFIED.",
+      "boundary": "DO NOT LABEL THIS AS CURRENTLY EXECUTABLE UNTIL A DEDICATED DSSE/SIGSTORE VERIFIER IS BOUND."
+    }
+  ]
+}
