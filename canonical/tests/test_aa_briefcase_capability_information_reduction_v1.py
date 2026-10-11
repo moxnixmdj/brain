@@ -17,6 +17,7 @@ def candidate(cid, cover, cost=1, subject=SUBJECT):
         "subject_bound": True,
         "reference_bound": True,
         "reference_id": r.REFERENCE_ID,
+        "reference_vector_sha256": r.REFERENCE_VECTOR_SHA256,
         "subject_sha256": subject,
         "eliminates_failure_classes": cover,
         "action_cost": cost,
@@ -30,6 +31,7 @@ class AABriefcaseCapabilityInformationReductionV1Tests(unittest.TestCase):
             "version": "1.1",
             "literal_audit_threshold_elo": 1822,
             "reference_id": r.REFERENCE_ID,
+            "reference_vector_sha256": r.REFERENCE_VECTOR_SHA256,
             "literal_score_is_primary": False,
             "capability_comparison_is_primary": True,
             "score_bearing_dimensions": ["RUBRIC", "ANALYTICAL_QUALITY", "PRESENTATION"],
@@ -43,6 +45,7 @@ class AABriefcaseCapabilityInformationReductionV1Tests(unittest.TestCase):
                 "version": "1.1",
                 "literal_audit_threshold_elo": 1822,
                 "reference_id": r.REFERENCE_ID,
+                "reference_vector_sha256": r.REFERENCE_VECTOR_SHA256,
                 "literal_score_is_primary": True,
                 "capability_comparison_is_primary": True,
                 "score_bearing_dimensions": ["RUBRIC", "ANALYTICAL_QUALITY", "PRESENTATION"],
@@ -81,6 +84,13 @@ class AABriefcaseCapabilityInformationReductionV1Tests(unittest.TestCase):
         out = r.minimum_sufficient_basis([bad])
         self.assertFalse(out["capability_noninferiority_proved"])
         self.assertEqual(out["rejected_candidates"][0]["id"], "BAD")
+
+    def test_reference_vector_hash_is_mandatory(self):
+        bad = candidate("WRONG_VECTOR", sorted(r.FAILURE_CLASSES), 0)
+        bad["reference_vector_sha256"] = "0" * 64
+        out = r.minimum_sufficient_basis([bad])
+        self.assertFalse(out["capability_noninferiority_proved"])
+        self.assertIn("REFERENCE_VECTOR_MISMATCH", out["rejected_candidates"][0]["reason"])
 
     def test_reference_binding_is_mandatory(self):
         bad = candidate("NOREF", sorted(r.FAILURE_CLASSES), 0)
