@@ -3502,6 +3502,182 @@
         "discovered_and_repaired_defect": "STALE_PYTHON_BYTECODE_CACHE_ON_SAME_SIZE_RAPID_MUTATIONS",
         "runtime_sha256": "76ba334b9539def530b780c359d62d5ace90590f09c340148cec44f6c0c2c08b"
       }
+    },
+    "image.extract.ocr.tesseract": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "adapter_module": "image_ocr_tesseract",
+      "entrypoint": "run",
+      "cost": 1,
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "image",
+        "ocr",
+        "tesseract",
+        "text",
+        "raster"
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "requires": [
+        "image.file.available"
+      ],
+      "provides": [
+        "image.text.ocr.english"
+      ],
+      "limitations": [
+        "English raster text extraction only.",
+        "Pinned Tesseract package and eng.traineddata surface is verified at runtime.",
+        "No chart or domain semantic authority."
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "image.extract.ocr.tesseract",
+          "path": "${input.path}",
+          "language": "eng",
+          "psm_values": [
+            "6",
+            "7",
+            "11",
+            "3"
+          ]
+        },
+        "expect": {
+          "type": "field_nonempty",
+          "field": "text"
+        }
+      },
+      "source": {
+        "type": "brain_bound_system_tool",
+        "adapter_path": "canonical/runtime/bound_capabilities/image_ocr_tesseract.py",
+        "engine": "tesseract",
+        "language": "eng",
+        "model_sha256": "7d4322bd2a7749724879683fc3912cb542f19906c83bcc1a52132556427170b2"
+      },
+      "verification": {
+        "independent_verified": true,
+        "exact_runtime_blob_sha": "45714d7a0160802d986042910da1c4c6462676e5",
+        "receipt_path": "canonical/governance/TESSERACT_OCR_DEPENDENCY_ACCOUNTING_V1.json"
+      }
+    },
+    "chart.read.legend_linear_intersection.v1": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "adapter_module": "chartography_deterministic_professional_v1",
+      "entrypoint": "run",
+      "cost": 2,
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "chart",
+        "legend",
+        "line",
+        "series",
+        "intersection",
+        "axis"
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "requires": [
+        "image.file.available",
+        "chart.question.legend_linear_intersection.available"
+      ],
+      "provides": [
+        "chart.answer.legend_linear_intersection"
+      ],
+      "limitations": [
+        "Verified only for the declared legend-coded approximately linear multi-series family.",
+        "Requires supported numeric axes and prompt semantics.",
+        "No Chartography score or broader chart-format authority."
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "chart.read.legend_linear_intersection.v1",
+          "path": "${input.path}",
+          "prompt": "${input.prompt}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "pass",
+          "value": true
+        }
+      },
+      "source": {
+        "type": "brain_native_deterministic",
+        "adapter_path": "canonical/runtime/bound_capabilities/chartography_deterministic_professional_v1.py",
+        "solver_path": "canonical/runtime/chartography_deterministic_professional_solver_v1.py",
+        "bounded_learned_components": [
+          "image.extract.ocr.tesseract"
+        ],
+        "external_general_purpose_model_runtime_dependency_count": 0
+      },
+      "verification": {
+        "independent_verified": true,
+        "exact_solver_blob_sha": "3c3280b4baf6f77bc4fee32d503114d8b199374d",
+        "receipt_path": "canonical/verification/CHARTOGRAPHY_BRAIN_NATIVE_CURRENT_V3_VERIFY_20261011.json",
+        "public_verifier_run_id": 38147697520,
+        "verified_case": 1
+      }
+    },
+    "chart.read.binary_phase_solvus.v1": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "adapter_module": "chartography_deterministic_professional_v1",
+      "entrypoint": "run",
+      "cost": 2,
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "chart",
+        "phase",
+        "diagram",
+        "solvus",
+        "precipitation",
+        "composition"
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "requires": [
+        "image.file.available",
+        "chart.question.binary_phase_solvus.available"
+      ],
+      "provides": [
+        "chart.answer.binary_phase_solvus"
+      ],
+      "limitations": [
+        "Verified only for the declared binary phase-diagram precipitation-solvus family.",
+        "Requires supported numeric axes and prompt semantics.",
+        "No Chartography score or broader chart-format authority."
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "chart.read.binary_phase_solvus.v1",
+          "path": "${input.path}",
+          "prompt": "${input.prompt}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "pass",
+          "value": true
+        }
+      },
+      "source": {
+        "type": "brain_native_deterministic",
+        "adapter_path": "canonical/runtime/bound_capabilities/chartography_deterministic_professional_v1.py",
+        "solver_path": "canonical/runtime/chartography_deterministic_professional_solver_v1.py",
+        "bounded_learned_components": [
+          "image.extract.ocr.tesseract"
+        ],
+        "external_general_purpose_model_runtime_dependency_count": 0
+      },
+      "verification": {
+        "independent_verified": true,
+        "exact_solver_blob_sha": "3c3280b4baf6f77bc4fee32d503114d8b199374d",
+        "receipt_path": "canonical/verification/CHARTOGRAPHY_BRAIN_NATIVE_CURRENT_V3_VERIFY_20261011.json",
+        "public_verifier_run_id": 38147697520,
+        "verified_case": 2
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"

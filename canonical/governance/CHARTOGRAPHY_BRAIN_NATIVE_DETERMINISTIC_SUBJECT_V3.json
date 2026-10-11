@@ -1,0 +1,27 @@
+{
+  "schema": "PROJECT_BRAIN_CHARTOGRAPHY_CREDIT_SUBJECT_V3",
+  "repository": "moxnixmdj/brain",
+  "operative_solver_role": "BRAIN_OWNED_NATIVE_MECHANISM",
+  "brain_owned_operative_artifact": true,
+  "cognition_dependency_class": "MODEL_INDEPENDENT",
+  "producer_cognition_provenance_complete": true,
+  "runtime_dependency_inventory_complete": true,
+  "general_purpose_model_dependency_count": 0,
+  "external_general_purpose_model_runtime_dependency_count": 0,
+  "donor_general_purpose_model_runtime_dependency_count": 0,
+  "online_teacher_call_count": 0,
+  "teacher_fallback_path_count": 0,
+  "bounded_learned_components": [
+    {
+      "capability_id": "image.extract.ocr.tesseract",
+      "classification": "VERIFIED_BRAIN_OWNED_BOUNDED_COMPONENT",
+      "verification_path": "canonical/governance/TESSERACT_OCR_DEPENDENCY_ACCOUNTING_V1.json",
+      "donor_runtime_required": false,
+      "external_frontier_model_required": false
+    }
+  ],
+  "bounded_learned_component_provenance_complete": true,
+  "acquisition_donor_used": false,
+  "qualification_after_donor_removal": true,
+  "student_or_derived_artifact_distinct_from_donor": true
+}

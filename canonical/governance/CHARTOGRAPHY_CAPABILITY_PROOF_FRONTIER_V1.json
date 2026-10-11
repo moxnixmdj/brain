@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_CHARTOGRAPHY_CAPABILITY_PROOF_FRONTIER_V1",
+  "status": "ACTIVE__FAIL_CLOSED__CAPABILITY_FIRST",
+  "target_path": "canonical/governance/CHARTOGRAPHY_MEASUREMENT_SEMANTIC_TARGET_V1.json",
+  "ownership_subject_path": "canonical/governance/CHARTOGRAPHY_BRAIN_NATIVE_DETERMINISTIC_SUBJECT_V3.json",
+  "benchmark_execution_policy": "LAST_RESORT_FOR_IRREDUCIBLE_DECISION_INFORMATION",
+  "verified_existing_dependency_atoms": [
+    {
+      "atom": "PINNED_ENGLISH_RASTER_OCR_SENSOR",
+      "status": "VERIFIED_BOUNDED_COMPONENT",
+      "evidence": "canonical/governance/TESSERACT_OCR_DEPENDENCY_ACCOUNTING_V1.json",
+      "semantic_authority": false
+    }
+  ],
+  "chart_atoms_pending_current_blob_replay": [
+    {
+      "atom": "LEGEND_CODED_LINEAR_MULTI_SERIES_TARGET_INTERSECTION",
+      "status": "VERIFIED_CURRENT_BLOB_ON_OFFICIAL_NONHELDOUT_SAMPLE",
+      "evidence": "canonical/verification/CHARTOGRAPHY_BRAIN_NATIVE_CURRENT_V3_VERIFY_20261011.json"
+    },
+    {
+      "atom": "BINARY_PHASE_DIAGRAM_PRECIPITATION_SOLVUS",
+      "status": "VERIFIED_CURRENT_BLOB_ON_OFFICIAL_NONHELDOUT_SAMPLE",
+      "evidence": "canonical/verification/CHARTOGRAPHY_BRAIN_NATIVE_CURRENT_V3_VERIFY_20261011.json"
+    }
+  ],
+  "shared_residual_capability_classes": [
+    "GENERIC_CHART_SCENE_GRAPH_FROM_RASTER",
+    "LINEAR_AND_LOG_AXIS_CALIBRATION_WITH_UNCERTAINTY",
+    "LEGEND_AND_STYLE_BINDING_ACROSS_LAYOUTS",
+    "CURVE_POLYLINE_AND_OVERLAP_TRACING",
+    "CONTOUR_AND_ISOLINE_VALUE_QUERY",
+    "FLOW_TOPOLOGY_AND_SANKEY_QUANTIFICATION",
+    "CANDLESTICK_TIME_SERIES_SEMANTICS",
+    "SURVIVAL_AND_PERCENTILE_CURVE_QUERY",
+    "BODE_MAGNITUDE_PHASE_QUERY",
+    "DOMAIN_NATIVE_CALCULATION_AND_UNIT_REASONING",
+    "SELF_CHECKED_READABILITY_PRECISION"
+  ],
+  "next_cut": [
+    "PROMOTE_ONLY_THE_TWO_REPLAYED_NARROW_ATOMS_TO_LIVE_VERIFIED_REGISTRY",
+    "BUILD_GENERIC_BRAIN_NATIVE_CHART_SCENE_GRAPH_PRIMITIVES_SHARED_BY_MULTIPLE_OPEN_FORMATS",
+    "QUALIFY_NEW_PRIMITIVES_ON_SYNTHETIC_AND_PUBLIC_NONHELDOUT_ADVERSARIAL_CASES",
+    "COMPILE_COVERAGE_TO_TERMINAL_CAPABILITY_RELATION",
+    "MEASURE_ONLY_IRREDUCIBLE_RESIDUAL_DECISION_INFORMATION"
+  ],
+  "external_general_purpose_model_runtime_credit_allowed": false,
+  "full_benchmark_score_claimed": false,
+  "heldout_cases_consumed": 0,
+  "heldout_gold_consumed": 0,
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0
+}
