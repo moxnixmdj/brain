@@ -118,6 +118,19 @@ class AutomationBenchOwnedPolicyKernelV1Tests(unittest.TestCase):
         ]
         self.assertEqual([x["id"] for x in rank_source_records(prompt, records)], ["y"])
 
+    def test_policy_document_discussing_drafts_is_valid_evidence(self):
+        prompt = "Check the email processing policy before creating the task"
+        records = [
+            {
+                "id":"policy",
+                "title":"Email Processing Rules",
+                "description":"Draft Notification Policy: emails marked DRAFT or DO NOT ACTION must not trigger actions.",
+                "updated_at":"2026-01-29T00:00:00Z",
+            }
+        ]
+        ranked = rank_source_records(prompt, records, record_role="evidence")
+        self.assertEqual([x["id"] for x in ranked], ["policy"])
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
