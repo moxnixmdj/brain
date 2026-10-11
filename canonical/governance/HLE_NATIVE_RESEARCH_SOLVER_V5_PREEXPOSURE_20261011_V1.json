@@ -1,0 +1,92 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_NATIVE_RESEARCH_SOLVER_V5_PREEXPOSURE_20261011_V1",
+  "date": "2026-10-11",
+  "status": "FROZEN_BEFORE_ANY_V5_PUBLIC_DIAGNOSTIC__ZERO_FRESH_OR_HLE_EXPOSURE",
+  "subject": {
+    "research_solver_v5": {
+      "path": "canonical/runtime/hle_native_research_solver_v5.py",
+      "git_blob_sha": "6fd57f4f3591e4ab09b3e16ffbae399f7aaf93ae"
+    },
+    "research_solver_v5_tests": {
+      "path": "canonical/tests/test_hle_native_research_solver_v5.py",
+      "git_blob_sha": "40fd1ba846f5815a6be9b0949a85a366fa0051ac"
+    },
+    "question_contract_v3": {
+      "path": "canonical/runtime/hle_native_question_contract_v3.py",
+      "git_blob_sha": "0865d6baf59b465cf121963dbadd5409a1702671"
+    },
+    "question_contract_v3_tests": {
+      "path": "canonical/tests/test_hle_native_question_contract_v3.py",
+      "git_blob_sha": "905bd448d54c602dd0c31a36a852ac43c0737f9d"
+    },
+    "evidence_synthesis_v3": {
+      "path": "canonical/runtime/hle_evidence_candidate_synthesis_v3.py",
+      "git_blob_sha": "1a37aac998436b023bb04e5494db91a54fbac8c8"
+    },
+    "evidence_synthesis_v3_tests": {
+      "path": "canonical/tests/test_hle_evidence_candidate_synthesis_v3.py",
+      "git_blob_sha": "8353389de0d820458263545769adadeac24fb0dd"
+    },
+    "exact_retrieval_v2": {
+      "path": "canonical/runtime/hle_exact_retrieval_extract_v2.py",
+      "git_blob_sha": "1c9d1c9096af91e05f67c3ead3068b0daf0ab033"
+    },
+    "exact_retrieval_v1": {
+      "path": "canonical/runtime/hle_exact_retrieval_extract_v1.py",
+      "git_blob_sha": "11c6b01974b8c095a4243e000bb8e7bb579d7d54"
+    },
+    "question_contract_v2_blob": "403091eeb32e20baceed38cbcbb5cfc823871ad9",
+    "question_contract_v1_blob": "7acc064d880f266a28855eefe518ae40ff8ae49b",
+    "semantic_compiler_v1_blob": "238ebf2ffe23e527fceae919cbc30453a290fdd2",
+    "retrieval_helpers_v5_blob": "ae6006af1e578b0690357756e0b899a10323a5f4",
+    "tool_adapter_blob": "fa955ccc5e4f3d29aa79e2b380f713d30ee46e8f",
+    "tool_policy_blob": "d2a2427b483fe1c06c6b1e6bc98d72bf07e7a730"
+  },
+  "architecture": [
+    "ROBUST_VISIBLE_QUESTION_ANSWER_SLOT_CONTRACT_V3",
+    "CASE_SAFE_TYPED_EVIDENCE_SYNTHESIS_V3",
+    "MULTI_QUERY_BING_AND_WIKIPEDIA_RETRIEVAL",
+    "CROSS_VIEW_TITLE_CONSENSUS",
+    "EXISTING_EXACT_RETRIEVAL_V2_AS_AGREEMENT_OR_RESCUE_LANE_ONLY",
+    "NO_EXTERNAL_GENERAL_PURPOSE_MODEL_COGNITION"
+  ],
+  "verification_sequence": [
+    "EXACT_BLOB_BINDING",
+    "SYNTHETIC_UNIT_TESTS",
+    "ONLY_IF_SYNTHETIC_PASS__ALREADY_CONSUMED_PUBLIC_NONHLE_ROWS_25_TO_49",
+    "ONLY_IF_CONSUMED_DIAGNOSTIC_PASSES__SEPARATE_FRESH_ROWS_50_TO_74_ON_IDENTICAL_BYTES"
+  ],
+  "consumed_diagnostic": {
+    "dataset": "ai-safety-institute/trivia_qa_verified",
+    "split": "validation",
+    "slice": "rows_25_to_49",
+    "already_consumed": true,
+    "minimum_attempt_rate": 0.25,
+    "minimum_normalized_exact_rate": 0.2,
+    "generalization_credit": false,
+    "hle_score_credit": false
+  },
+  "protected_fresh_holdout": {
+    "dataset": "ai-safety-institute/trivia_qa_verified",
+    "split": "validation",
+    "slice": "rows_50_to_74",
+    "must_remain_unread_until_consumed_diagnostic_pass": true
+  },
+  "invariants": [
+    "NO_EXTERNAL_MODEL_SOLVER_OUTPUT_COUNTS_AS_BRAIN_CAPABILITY",
+    "EXACT_RETRIEVAL_V2_CANNOT_OVERRIDE_TYPED_EVIDENCE_BY_ITSELF",
+    "NO_HLE_QUESTION_OR_GOLD_CONTENT_USED_FOR_V5_DEVELOPMENT",
+    "NO_FRESH_ROWS_50_TO_74_BEFORE_CONSUMED_GATE_PASS",
+    "PUBLIC_DIAGNOSTIC_PASS_IS_NOT_GENERALIZATION_OR_HLE_SCORE",
+    "TARGET_GRADER_BINDING_REMAINS_SEPARATE"
+  ],
+  "exposure": {
+    "fresh_public_rows_50_to_74": 0,
+    "hle_questions": 0,
+    "hle_gold": 0
+  },
+  "target_score_claimed": false,
+  "hle_67_7_certified": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
