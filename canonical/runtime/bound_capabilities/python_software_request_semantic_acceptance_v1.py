@@ -1,11 +1,13 @@
 """One-sided sound semantic acceptance cells for explicit Python software requests.
 
-Every non-whitespace raw-task segment is preserved by the lossless raw-task
-contract. This compiler recognizes only a small exact grammar whose meaning can
-be rendered into deterministic executable checks. Unsupported or ambiguous
-segments remain blocking residuals.
+The lossless raw-task contract remains the source of truth for every non-whitespace
+task span. This compiler recognizes only an exact, bounded line grammar whose
+meaning can be rendered into deterministic executable checks. A recognized source
+line may cover multiple lossless raw obligations because the lossless contract
+intentionally splits at punctuation, including dots inside module/file names.
 
-This is intentionally not a general natural-language interpreter.
+Unsupported, malformed, or ambiguous lines leave all intersecting raw obligations
+as blocking residuals. This is deliberately not a general natural-language parser.
 """
 from __future__ import annotations
 
@@ -36,26 +38,44 @@ def _load_lossless():
 
 _LOSSLESS=_load_lossless()
 
-def _canon(v:Any)->str:
-    return json.dumps(v,sort_keys=True,separators=(",",":"),ensure_ascii=False,allow_nan=False)
+def _canon(value:Any)->str:
+    return json.dumps(
+        value,sort_keys=True,separators=(",",":"),ensure_ascii=False,allow_nan=False
+    )
 
-def _sha(v:Any)->str:
-    if isinstance(v,bytes):
-        raw=v
-    elif isinstance(v,str):
-        raw=v.encode("utf-8")
+def _sha(value:Any)->str:
+    if isinstance(value,bytes):
+        raw=value
+    elif isinstance(value,str):
+        raw=value.encode("utf-8")
     else:
-        raw=_canon(v).encode("utf-8")
+        raw=_canon(value).encode("utf-8")
     return hashlib.sha256(raw).hexdigest()
 
 _CALL=r"([A-Za-z_]\w*(?:\.[A-Za-z_]\w*)+)"
 _QJSON=r'("(?:\\.|[^"\\])*")'
-_CALL_EQ=re.compile(r"^Calling\s+"+_CALL+r"\s+with JSON arguments\s+(\[[\s\S]*\])\s+must equal\s+([\s\S]+?)[.!?]?$")
-_CALL_BOOL=re.compile(r"^Calling\s+"+_CALL+r"\s+with JSON arguments\s+(\[[\s\S]*\])\s+must be\s+(true|false)[.!?]?$",re.IGNORECASE)
-_CALL_RAISES=re.compile(r"^Calling\s+"+_CALL+r"\s+with JSON arguments\s+(\[[\s\S]*\])\s+must raise\s+([A-Za-z_]\w*)[.!?]?$")
-_FILE_CONTAINS=re.compile(r"^File\s+"+_QJSON+r"\s+must contain exact text\s+"+_QJSON+r"[.!?]?$")
-_FUNC_EXISTS=re.compile(r"^Python function\s+([A-Za-z_]\w*)\s+must exist in file\s+"+_QJSON+r"[.!?]?$")
-_CLASS_EXISTS=re.compile(r"^Python class\s+([A-Za-z_]\w*)\s+must exist in file\s+"+_QJSON+r"[.!?]?$")
+_CALL_EQ=re.compile(
+    r"^Calling\s+"+_CALL+
+    r"\s+with JSON arguments\s+(\[[\s\S]*\])\s+must equal\s+([\s\S]+)$"
+)
+_CALL_BOOL=re.compile(
+    r"^Calling\s+"+_CALL+
+    r"\s+with JSON arguments\s+(\[[\s\S]*\])\s+must be\s+(true|false)[.!?]?$",
+    re.IGNORECASE,
+)
+_CALL_RAISES=re.compile(
+    r"^Calling\s+"+_CALL+
+    r"\s+with JSON arguments\s+(\[[\s\S]*\])\s+must raise\s+([A-Za-z_]\w*)[.!?]?$"
+)
+_FILE_CONTAINS=re.compile(
+    r"^File\s+"+_QJSON+r"\s+must contain exact text\s+"+_QJSON+r"[.!?]?$"
+)
+_FUNC_EXISTS=re.compile(
+    r"^Python function\s+([A-Za-z_]\w*)\s+must exist in file\s+"+_QJSON+r"[.!?]?$"
+)
+_CLASS_EXISTS=re.compile(
+    r"^Python class\s+([A-Za-z_]\w*)\s+must exist in file\s+"+_QJSON+r"[.!?]?$"
+)
 
 def _json(raw:str,label:str)->Any:
     try:
@@ -63,15 +83,71 @@ def _json(raw:str,label:str)->Any:
     except Exception as exc:
         raise SemanticAcceptanceError(label+"_JSON_INVALID") from exc
 
+def _json_string(raw:str,label:str)->str:
+    value=_json(raw,label)
+    if not isinstance(value,str):
+        raise SemanticAcceptanceError(label+"_NOT_STRING")
+    return value
+
+def _json_expected(raw:str)->Any:
+    try:
+        return json.loads(raw)
+    except Exception:
+        if raw and raw[-1] in ".!?":
+            return _json(raw[:-1],"CALL_EXPECTED")
+        raise SemanticAcceptanceError("CALL_EXPECTED_JSON_INVALID")
+
 def _call_parts(callable_name:str)->tuple[str,str]:
     module,function=callable_name.rsplit(".",1)
     return module,function
 
-def _cell(obligation_id:str,kind:str,spec:dict[str,Any])->dict[str,Any]:
-    payload={"obligation_id":obligation_id,"kind":kind,"spec":spec}
+def _line_spans(text:str)->list[tuple[int,int,str]]:
+    rows=[]
+    cursor=0
+    for raw in text.splitlines(keepends=True):
+        start=cursor
+        end=cursor+len(raw)
+        cursor=end
+        while start<end and text[start].isspace():
+            start+=1
+        while end>start and text[end-1].isspace():
+            end-=1
+        if start<end:
+            rows.append((start,end,text[start:end]))
+    if cursor<len(text):
+        start=cursor
+        end=len(text)
+        while start<end and text[start].isspace():
+            start+=1
+        while end>start and text[end-1].isspace():
+            end-=1
+        if start<end:
+            rows.append((start,end,text[start:end]))
+    if not rows and text.strip():
+        start=next(i for i,ch in enumerate(text) if not ch.isspace())
+        end=len(text.rstrip())
+        rows.append((start,end,text[start:end]))
+    return rows
+
+def _cell(
+    obligation_ids:list[str],
+    kind:str,
+    spec:dict[str,Any],
+    source_span:list[int],
+)->dict[str,Any]:
+    payload={
+        "obligation_ids":sorted(obligation_ids),
+        "kind":kind,
+        "spec":spec,
+        "source_span":source_span,
+    }
     return {**payload,"cell_id":"SEMCELL:"+_sha(payload)}
 
-def _compile_segment(text:str,obligation_id:str)->dict[str,Any]|None:
+def _compile_line(
+    text:str,
+    obligation_ids:list[str],
+    source_span:list[int],
+)->dict[str,Any]|None:
     s=text.strip()
     m=_CALL_BOOL.match(s)
     if m:
@@ -80,50 +156,66 @@ def _compile_segment(text:str,obligation_id:str)->dict[str,Any]|None:
         if not isinstance(args,list):
             raise SemanticAcceptanceError("CALL_ARGS_NOT_ARRAY")
         module,function=_call_parts(callable_name)
-        return _cell(obligation_id,"PYTHON_CALL_EQUALS",{
-            "module":module,"function":function,"args":args,
+        return _cell(obligation_ids,"PYTHON_CALL_EQUALS",{
+            "module":module,
+            "function":function,
+            "args":args,
             "expected":value_raw.lower()=="true",
-        })
+        },source_span)
+
     m=_CALL_RAISES.match(s)
     if m:
-        callable_name,args_raw,exc_name=m.groups()
+        callable_name,args_raw,exception_name=m.groups()
         args=_json(args_raw,"CALL_ARGS")
         if not isinstance(args,list):
             raise SemanticAcceptanceError("CALL_ARGS_NOT_ARRAY")
         module,function=_call_parts(callable_name)
-        return _cell(obligation_id,"PYTHON_CALL_RAISES_BUILTIN",{
-            "module":module,"function":function,"args":args,"exception":exc_name,
-        })
+        return _cell(obligation_ids,"PYTHON_CALL_RAISES_BUILTIN",{
+            "module":module,
+            "function":function,
+            "args":args,
+            "exception":exception_name,
+        },source_span)
+
     m=_CALL_EQ.match(s)
     if m:
         callable_name,args_raw,expected_raw=m.groups()
         args=_json(args_raw,"CALL_ARGS")
-        expected=_json(expected_raw,"CALL_EXPECTED")
         if not isinstance(args,list):
             raise SemanticAcceptanceError("CALL_ARGS_NOT_ARRAY")
+        expected=_json_expected(expected_raw)
         module,function=_call_parts(callable_name)
-        return _cell(obligation_id,"PYTHON_CALL_EQUALS",{
-            "module":module,"function":function,"args":args,"expected":expected,
-        })
+        return _cell(obligation_ids,"PYTHON_CALL_EQUALS",{
+            "module":module,
+            "function":function,
+            "args":args,
+            "expected":expected,
+        },source_span)
+
     m=_FILE_CONTAINS.match(s)
     if m:
         path_raw,text_raw=m.groups()
-        return _cell(obligation_id,"FILE_TEXT_CONTAINS_EXACT",{
-            "path":_json(path_raw,"FILE_PATH"),
-            "text":_json(text_raw,"FILE_TEXT"),
-        })
+        return _cell(obligation_ids,"FILE_TEXT_CONTAINS_EXACT",{
+            "path":_json_string(path_raw,"FILE_PATH"),
+            "text":_json_string(text_raw,"FILE_TEXT"),
+        },source_span)
+
     m=_FUNC_EXISTS.match(s)
     if m:
         name,path_raw=m.groups()
-        return _cell(obligation_id,"PYTHON_TOP_LEVEL_FUNCTION_EXISTS",{
-            "path":_json(path_raw,"FUNCTION_PATH"),"name":name,
-        })
+        return _cell(obligation_ids,"PYTHON_TOP_LEVEL_FUNCTION_EXISTS",{
+            "path":_json_string(path_raw,"FUNCTION_PATH"),
+            "name":name,
+        },source_span)
+
     m=_CLASS_EXISTS.match(s)
     if m:
         name,path_raw=m.groups()
-        return _cell(obligation_id,"PYTHON_TOP_LEVEL_CLASS_EXISTS",{
-            "path":_json(path_raw,"CLASS_PATH"),"name":name,
-        })
+        return _cell(obligation_ids,"PYTHON_TOP_LEVEL_CLASS_EXISTS",{
+            "path":_json_string(path_raw,"CLASS_PATH"),
+            "name":name,
+        },source_span)
+
     return None
 
 def compile_request(task_text:str)->dict[str,Any]:
@@ -135,41 +227,80 @@ def compile_request(task_text:str)->dict[str,Any]:
     )
     if contract.get("pass") is not True:
         return {
-            "schema":SCHEMA,"status":"FAIL_CLOSED","pass":False,
+            "schema":SCHEMA,
+            "status":"FAIL_CLOSED",
+            "pass":False,
             "errors":["LOSSLESS_RAW_TASK_CONTRACT_FAILED"],
             "terminal_authority":False,
         }
+
     obligations=((contract.get("acceptance_contract") or {}).get("obligations") or [])
+    by_id={str(row.get("obligation_id")):row for row in obligations}
+    required=list(by_id)
+    assigned:set[str]=set()
     cells=[]
     residual=[]
     errors=[]
-    for row in obligations:
-        oid=str(row.get("obligation_id") or "")
-        text=str(row.get("text") or "")
+
+    for line_start,line_end,line_text in _line_spans(task_text):
+        intersecting=[]
+        for oid,row in by_id.items():
+            span=row.get("span")
+            if (
+                isinstance(span,list) and len(span)==2
+                and isinstance(span[0],int) and isinstance(span[1],int)
+                and max(line_start,span[0]) < min(line_end,span[1])
+            ):
+                intersecting.append(oid)
+        intersecting=sorted(set(intersecting))
+        if not intersecting:
+            raise SemanticAcceptanceError("SOURCE_LINE_WITHOUT_RAW_OBLIGATION")
+        if assigned.intersection(intersecting):
+            raise SemanticAcceptanceError("RAW_OBLIGATION_ASSIGNED_TO_MULTIPLE_LINES")
+        assigned.update(intersecting)
         try:
-            cell=_compile_segment(text,oid)
+            cell=_compile_line(line_text,intersecting,[line_start,line_end])
         except Exception as exc:
             cell=None
-            errors.append({"obligation_id":oid,"error":type(exc).__name__+":"+str(exc)})
+            errors.append({
+                "obligation_ids":intersecting,
+                "source_span":[line_start,line_end],
+                "error":type(exc).__name__+":"+str(exc),
+            })
         if cell is None:
-            residual.append(oid)
+            residual.extend(intersecting)
         else:
             cells.append(cell)
-    required=[str(x.get("obligation_id")) for x in obligations]
-    compiled=[x["obligation_id"] for x in cells]
-    if set(compiled).intersection(residual) or set(compiled)|set(residual)!=set(required):
-        raise SemanticAcceptanceError("OBLIGATION_PARTITION_INVALID")
+
+    missing=sorted(set(required)-assigned)
+    if missing:
+        residual.extend(missing)
+    residual=sorted(set(residual))
+    compiled=sorted({
+        oid
+        for cell in cells
+        for oid in cell["obligation_ids"]
+    })
+    if set(compiled).intersection(residual):
+        raise SemanticAcceptanceError("COMPILED_AND_RESIDUAL_OVERLAP")
+    if set(compiled)|set(residual)!=set(required):
+        raise SemanticAcceptanceError("RAW_OBLIGATION_PARTITION_INCOMPLETE")
+
     payload={
         "task_sha256":contract.get("task_sha256"),
         "required_obligation_ids":required,
         "cells":cells,
         "residual_obligation_ids":residual,
     }
+    coverage_complete=not residual and not errors and set(compiled)==set(required)
     return {
         "schema":SCHEMA,
-        "status":"COMPILED__ALL_RAW_SEGMENTS_HAVE_EXECUTABLE_SEMANTIC_CELLS" if not residual else "OPEN__SEMANTIC_RESIDUALS",
-        "pass":not residual and not errors,
-        "coverage_complete":not residual and not errors,
+        "status":(
+            "COMPILED__ALL_RAW_OBLIGATIONS_HAVE_EXECUTABLE_SEMANTIC_CELLS"
+            if coverage_complete else "OPEN__SEMANTIC_RESIDUALS"
+        ),
+        "pass":coverage_complete,
+        "coverage_complete":coverage_complete,
         "task_sha256":contract.get("task_sha256"),
         "lossless_task_contract_sha256":contract.get("task_contract_sha256"),
         "required_obligation_ids":required,
@@ -183,8 +314,8 @@ def compile_request(task_text:str)->dict[str,Any]:
         "incremental_spend_usd":0,
         "terminal_authority":False,
         "hard_nonclaims":[
-            "SUPPORTED_GRAMMAR_IS_NOT_GENERAL_NATURAL_LANGUAGE",
-            "UNMATCHED_OR_INVALID_SEGMENTS_REMAIN_BLOCKING_RESIDUALS",
+            "SUPPORTED_LINE_GRAMMAR_IS_NOT_GENERAL_NATURAL_LANGUAGE",
+            "UNMATCHED_OR_INVALID_LINES_REMAIN_BLOCKING_RESIDUALS",
             "CELL_COMPILATION_DOES_NOT_PROVE_THE_CANDIDATE_PASSES",
             "NO_FRONTIERCODE_SCORE_OR_TERMINAL_AUTHORITY",
         ],
@@ -206,17 +337,28 @@ def safe_path(raw):
     if p==ROOT or ROOT not in p.parents or not p.is_file() or p.is_symlink():
         raise AssertionError("SEMANTIC_PATH_INVALID:"+str(raw))
     return p
+def safe_module(name):
+    parts=str(name).split(".")
+    if not parts or any((not p.isidentifier()) for p in parts):
+        raise AssertionError("SEMANTIC_MODULE_INVALID:"+str(name))
+    file_path=ROOT.joinpath(*parts).with_suffix(".py")
+    package_path=ROOT.joinpath(*parts,"__init__.py")
+    candidates=[p.resolve() for p in (file_path,package_path) if p.is_file() and not p.is_symlink()]
+    candidates=[p for p in candidates if ROOT in p.parents]
+    if len(candidates)!=1:
+        raise AssertionError("SEMANTIC_MODULE_NOT_UNIQUE_REPOSITORY_LOCAL:"+str(name))
+    return importlib.import_module(name)
 for cell in CELLS:
     kind=cell["kind"];spec=cell["spec"];cid=cell["cell_id"]
     if kind=="PYTHON_CALL_EQUALS":
-        mod=importlib.import_module(spec["module"])
+        mod=safe_module(spec["module"])
         fn=getattr(mod,spec["function"])
         actual=fn(*spec["args"])
         assert actual==spec["expected"],cid
     elif kind=="PYTHON_CALL_RAISES_BUILTIN":
         exc=getattr(builtins,spec["exception"],None)
         assert isinstance(exc,type) and issubclass(exc,BaseException),cid
-        mod=importlib.import_module(spec["module"])
+        mod=safe_module(spec["module"])
         fn=getattr(mod,spec["function"])
         try:
             fn(*spec["args"])
