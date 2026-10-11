@@ -56,7 +56,7 @@ def evaluate(source: Mapping[str, Any], normalized: Mapping[str, Any], source_bl
             errors.append(f"WITNESS_{i}_SOURCE_PROOF_NOT_ADMISSIBLE")
     return {
         "schema":SCHEMA,
-        "status":"PASS__EXACT_CURRENT_14_CONTENT_ADDRESSED_WITNESS_NORMALIZATION__ZERO_SEMANTIC_CREDIT" if not errors else "FAIL_CLOSED",
+        "status":"PASS__EXACT_CURRENT_CONTENT_ADDRESSED_WITNESS_NORMALIZATION__ZERO_SEMANTIC_CREDIT" if not errors else "FAIL_CLOSED",
         "pass":not errors,
         "errors":sorted(set(errors)),
         "witness_count":len(expected),
