@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_WIKIDATA_RATE_AWARE_TRANSPORT_INDEPENDENT_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__LIVE_SHARED_SEARCH_GRAPH_SCHEDULER",
+  "subject": {
+    "runtime_blob": "49593c6df23389588eb605de3a89ebf39eb3ff56",
+    "tests_blob": "5814bee4a4f28a6341062a60cb727364b8945d66",
+    "entity_search_blob": "7dd5004e03d5df95273e666b63dc3cf670fc5bc8",
+    "neighborhood_blob": "051d224bd8f5b04f410e579c9b070cad0a3d89a6"
+  },
+  "runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify-wikidata-rate-aware-20261011-v1",
+    "head_sha": "5e702d79c6ef57e3e27ee8994d761bd18ce43a09",
+    "workflow_run_id": 38156576735,
+    "workflow_job_id": 114520686260,
+    "conclusion": "success"
+  },
+  "verified": {
+    "unit_tests": "3/3 PASS",
+    "live_queries": [
+      "Moulin Rouge",
+      "Essen",
+      "Troy"
+    ],
+    "live_search_graph_compositions": 3,
+    "api_requests": 9,
+    "retries": 0,
+    "failures": 0,
+    "shared_scheduler": true
+  },
+  "prior_failed_verification": {
+    "workflow_run_id": 38156505838,
+    "cause": "TEST_FIXTURE_USED_INVALID_URL_BEFORE_INJECTED_OPENER",
+    "runtime_changed": false,
+    "credit": 0
+  },
+  "external_model_calls": 0,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0
+}
