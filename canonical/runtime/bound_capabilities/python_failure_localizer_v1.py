@@ -31,6 +31,10 @@ def _safe_file(repo:pathlib.Path, raw:Any)->pathlib.Path:
 def _sha(data:bytes)->str:
     return hashlib.sha256(data).hexdigest()
 
+def _stable_evidence(text:str)->str:
+    lines=text.replace("\r\n","\n").split("\n")
+    return "\n".join(line for line in lines if not line.startswith("Ran "))
+
 def _run(repo:pathlib.Path, test:pathlib.Path, timeout_s:int)->dict[str,Any]:
     try:
         proc=subprocess.run(
@@ -126,7 +130,7 @@ def localize(args:Mapping[str,Any], root:str|os.PathLike[str])->dict[str,Any]:
         failures.append({
             "test_path":rel_test,
             "status":"FAILED",
-            "evidence_sha256":_sha(text.encode("utf-8")),
+            "evidence_sha256":_sha(_stable_evidence(text).encode("utf-8")),
         })
 
         frames=_traceback_frames(repo,text,test_set)
