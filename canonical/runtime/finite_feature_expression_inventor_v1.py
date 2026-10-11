@@ -184,27 +184,34 @@ def invent(rows:Sequence[LabeledRow])->dict[str,Any]:
     if not all_candidates:
         return {"schema":SCHEMA,"status":"NO_DERIVED_PREDICATES"}
 
-    # Keep a bounded frontier, while ensuring every retained predicate has
-    # observable discriminating value. Bound status is explicit if exceeded.
+    # Exact logical reduction for conjunctive synthesis:
+    # every predicate appearing in a valid conjunction must be true in every
+    # positive example. Predicates failing that condition can be removed without
+    # excluding any valid conjunctive rule. Also remove predicates true in every
+    # negative, because they cannot discriminate any negative.
+    positives=[r for r in population if r.positive]
+    negatives=[r for r in population if not r.positive]
     informative=[]
     for p in all_candidates:
-        pos_truth=[_predicate_truth(p,r.features) for r in population if r.positive]
-        neg_truth=[_predicate_truth(p,r.features) for r in population if not r.positive]
-        if any(pos_truth) and (not all(neg_truth) or not any(neg_truth)):
-            informative.append(p)
+        if not all(_predicate_truth(p,r.features) for r in positives):
+            continue
+        if all(_predicate_truth(p,r.features) for r in negatives):
+            continue
+        informative.append(p)
 
     if len(informative)>MAX_PREDICATES:
-        # Choose the smallest description-cost frontier with best class
-        # separation. This makes the search intentionally bounded, not complete
-        # over every generated atom.
-        def key(p):
-            pt=sum(_predicate_truth(p,r.features) for r in population if r.positive)
-            nt=sum(_predicate_truth(p,r.features) for r in population if not r.positive)
-            return (float(p["cost"]),-(pt-nt),p["predicate_id"])
-        informative=sorted(informative,key=key)[:MAX_PREDICATES]
-        frontier_complete=False
-    else:
-        frontier_complete=True
+        # The proof-preserving common-positive reduction was insufficient to fit
+        # the verified G0 predicate bound. Do not silently heuristic-prune a
+        # possibly necessary atom: report the bound explicitly.
+        return {
+            "schema":SCHEMA,
+            "status":"SEARCH_BOUND_EXCEEDED",
+            "reason":"COMMON_POSITIVE_PREDICATE_FRONTIER_TOO_LARGE",
+            "predicate_count":len(informative),
+            "max_predicates":MAX_PREDICATES,
+            "terminal_authority":False,
+        }
+    frontier_complete=True
 
     specs=[
         PredicateSpec(
