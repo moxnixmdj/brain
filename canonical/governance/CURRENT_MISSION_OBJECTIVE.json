@@ -32,7 +32,7 @@
     "primary_entrypoint": "plan_current_post_composition_frontier",
     "scalar_fallback_runtime": "canonical/runtime/capability_first_live_scheduler_v1.py",
     "status": "ACTIVE__POST_COMPOSITION_DYNAMIC_CURRENTNESS_V15__PROFESSIONAL_24_OF_24__CHECKPOINT_ROWS_ALL_WAKE_GATED__GITHUB_HOSTED_ACTIONS_BILLING_PRESTART_BLOCK__0_SAME_INFORMATION_CHECKPOINT_RUNS__CAPABILITY_FIRST_PRIMARY__ZERO_GLOBAL_CREDIT",
-    "observed_git_blob_sha": "fefe8a9759a93bf9b7253b54760cce22978fe037",
+    "observed_git_blob_sha": "30b21ce7fcdec291b2b475a8969d3da7ce4c0c9c",
     "semantic_reuse_policy": "canonical/governance/TWO_CLOCK_SEMANTIC_VALIDITY_AND_SCHEDULER_AUTHORITY_20261011_V4.json",
     "semantic_reuse_policy_git_blob_sha": "f08fd90474aa38f89db171c70e10a6d47e6d7ec5",
     "verified_improvement_loop": "canonical/governance/VERIFIED_IMPROVEMENT_LOOP_V2_ACTIVATION_20261011_V1.json",
@@ -58,15 +58,15 @@
   },
   "current_parallel_frontier_control": {
     "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
-    "observed_git_blob_sha": "b28c195d365f079f9bffd43f36d2d7a4ecc42814",
+    "observed_git_blob_sha": "1f97f90269520b97d4547fc73b66020fe1e53793",
     "status": "PROFESSIONAL_24_OF_24__HOSTED_ACTIONS_BILLING_PRESTART_BLOCK__12_CHECKPOINT_ROWS_WAKE_GATED__0_SAME_INFORMATION_CHECKPOINT_RUNS__CAPABILITY_FIRST_AND_RESOURCE_PARETO_WORK_PRIMARY__ZERO_TERMINAL_CREDIT",
     "binding": "MUTABLE_CURRENT_PATH_IDENTITY__SUPPORTED_PROFESSIONAL_ASSURANCE_BYTES_R2_PROJECTIONS_REFRESHED_AT_CALL_TIME__OTHER_SOURCE_DRIFT_FAILS_CLOSED",
     "snapshot_is_runtime_authority_for_supported_dynamic_families": false
   },
   "current_residual_reuse_classification": {
     "path": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
-    "observed_git_blob_sha": "8086e42df231620a07823fca8a72cd4b47c9815e",
-    "status": "DERIVED_CURRENT_CLASSIFICATION__O11_Q1_TWO_ENGINE_CURRENTNESS_BOUND__HISTORICAL_O11_SPARSE_SCAN_TRUTH_REPAIRED__CHECKPOINT_ROWS_WAKE_GATED_ON_DECISION_CHANGING_REALITY__PROFESSIONAL_24_OF_24__ZERO_CREDIT"
+    "observed_git_blob_sha": "7a68e3fbefc82231f9f6ba2463617b9deaaf352e",
+    "status": "DERIVED_CURRENT_CLASSIFICATION__O11_Q1_LOGICALLY_OPEN__12_WAKE_GATED__0_SAME_INFORMATION_RUNNABLE__0_ACTIVE_GAP_A_ACQUISITION__0_ACTIVE_GAP_B_STRICT_PROGRESS__1_PARKED_TB__PROFESSIONAL_24_OF_24__REGRESSION_CARRIER_WAKE_GATED__ZERO_CREDIT"
   },
   "professional_whole_leaf_control": {
     "scope_batch_activation": "canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_SCOPE_BATCH_ACTIVATION_20261010_V1.json",

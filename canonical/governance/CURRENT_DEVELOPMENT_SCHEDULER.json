@@ -27,7 +27,7 @@
   "planning_entrypoint": "canonical.runtime.capability_first_scheduler_v1.rank_work",
   "current_live_work_frontier": {
     "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
-    "git_blob_sha": "b28c195d365f079f9bffd43f36d2d7a4ecc42814",
+    "git_blob_sha": "1f97f90269520b97d4547fc73b66020fe1e53793",
     "status": "CURRENT_PROFESSIONAL_24_OF_24__FULL_PRIVATE_REGRESSION_GATE_OPEN__GITHUB_HOSTED_ACTIONS_BILLING_OR_SPENDING_LIMIT_PRESTART_BLOCK__12_CHECKPOINT_ROWS_WAKE_GATED__CAPABILITY_FIRST_AND_RESOURCE_PARETO_WORK_PRIMARY__ZERO_CREDIT",
     "professional_verified_root_subject_binding_count": 12,
     "professional_same_subject_composition_admissible": true,
@@ -123,7 +123,7 @@
     "semantic_shared_blocker_verification": "canonical/verification/PROFESSIONAL_QUALITY_SEMANTIC_SHARED_BLOCKER_INDEPENDENT_VERIFY_20261010_V1.json",
     "semantic_shared_blocker_git_blob_sha": "d5218f612e282f1b9339b5b3e84b5c74282b7042",
     "semantic_duplicate_programs_collapsed": true,
-    "escape_active_gap_a_count": 12,
+    "escape_active_gap_a_count": 0,
     "escape_active_gap_b_count": 0,
     "escape_parked_unresolved_count": 1,
     "bytes_current_frontier": "V51__1719563_RAW_PYTHON_BYTES__MPC_POW_INT_N_MINUS_1_OR_2_SPECIALIZATION_VERIFIED",
@@ -135,7 +135,8 @@
     "professional_parallel_policy": "WHILE_REGRESSION_CARRIER_BILLING_PRESTART_GATE_IS_UNCHANGED_AND_NO_CHECKPOINT_WAKE_EVENT__RUN_CAPABILITY_FIRST_GENERAL_DEVELOPMENT_AND_RESOURCE_PARETO_IMPROVEMENT__DO_NOT_RETRY_HOSTED_ACTIONS__DO_NOT_SPIN_ON_O11_Q1",
     "escape_open_checkpoint_count": 12,
     "escape_row_specific_same_information_runnable_count": 0,
-    "escape_wake_gated_open_count": 12
+    "escape_wake_gated_open_count": 12,
+    "escape_logically_open_checkpoint_count": 12
   },
   "post_composition_currentness_invariant": {
     "runtime_path": "canonical/runtime/capability_parallel_frontier_post_composition_v2.py",
@@ -230,7 +231,9 @@
     "row_specific_same_information_runnable_count": 0,
     "wake_gated_open_checkpoint_count": 12,
     "parked_checkpoint_count": 1,
-    "primary_without_wake_event": "CAPABILITY_FIRST_GENERAL_DEVELOPMENT_AND_RESOURCE_PARETO_IMPROVEMENT"
+    "primary_without_wake_event": "CAPABILITY_FIRST_GENERAL_DEVELOPMENT_AND_RESOURCE_PARETO_IMPROVEMENT",
+    "active_gap_a_acquisition_count": 0,
+    "active_gap_b_strict_progress_count": 0
   },
   "two_clock_semantic_validity_v3": {
     "path": "canonical/governance/TWO_CLOCK_SEMANTIC_VALIDITY_AND_SCHEDULER_AUTHORITY_20261011_V3.json",
