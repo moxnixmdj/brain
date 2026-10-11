@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_O_CODING_WAKE_GATE_RECONCILIATION_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__ALL_SEVEN_SOURCE_LOCKS_MATCH_CURRENT_MAIN__CURSORBENCH_AND_FRONTIERCODE_DEMOTION_PRESERVES_ACCEPTANCE_OBLIGATIONS__ZERO_CREDIT",
+  "subjects": {
+    "reconciliation": {
+      "path": "canonical/governance/CURRENT_O_CODING_WAKE_GATE_RECONCILIATION_20261011_V1.json",
+      "git_blob_sha": "5a90aedd955cc1e45904385e96b607b2e78328e1"
+    },
+    "specialization": {
+      "path": "canonical/governance/CURRENT_FRONTIER_REUSE_SPECIALIZATION_20261011_V1.json",
+      "git_blob_sha": "a54ded02d7351a4c24b75182c655f273deb5eb1b"
+    }
+  },
+  "source_lock_check": {
+    "checked": 7,
+    "matched": 7,
+    "mismatched": 0
+  },
+  "verified": [
+    "CURSORBENCH_SCOPE_COMPLETENESS_RECEIPT_IS_CURRENT_SOURCE_LOCKED",
+    "CURSORBENCH_CONSTRUCTIVE_NO_GO_AND_CURRENT_WAIT_STATE_ARE_CURRENT_SOURCE_LOCKED",
+    "FRONTIERCODE_ROBUST_BOUND_SCORE_MASS_AND_OWNER_ACCESS_ARTIFACTS_ARE_CURRENT_SOURCE_LOCKED",
+    "BOTH_ROWS_REMAIN_IN_ACTIVE_O_CHECKPOINT_LIST",
+    "ONLY_UNCONDITIONAL_INTERNAL_RETRY_IS_REMOVED",
+    "WAKE_CONDITIONS_PRESERVE_POLICY_CHANGING_INTERNAL_OR_EXTERNAL_REACTIVATION"
+  ],
+  "hard_nonclaims": [
+    "NO_ROW_ACCEPTANCE_CREDIT",
+    "NO_CLAIM_FUTURE_INTERNAL_SOLUTION_IS_IMPOSSIBLE",
+    "NO_ACTUAL_SCORE_INFERENCE",
+    "NO_CAPABILITY_OWNERSHIP_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
