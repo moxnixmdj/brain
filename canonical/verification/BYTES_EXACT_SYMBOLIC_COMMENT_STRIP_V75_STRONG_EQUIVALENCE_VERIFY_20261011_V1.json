@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_COMMENT_STRIP_V75_STRONG_EQUIVALENCE_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__CHANGED_SURFACE_3_OF_3_SIGNIFICANT_TOKEN_AST_RECURSIVE_CODE_IDENTICAL__CLEAN_RECONSTRUCTION_278_OF_278__PARTIAL_NEXT81_16760_OF_16760__NEXT82_UNSPENT",
+  "subject_manifest_sha256": "42c3255fe51bc6e7c30afd912d3fd3aabc422742b4671eed1e7b7fc50ce290f9",
+  "predecessor_manifest_sha256": "b0b5024dbd831e104d25373dc2bc2c14feed5892624d3cae4d5100bfaa1eb18f",
+  "changed_file_count": 3,
+  "saved_bytes": 144,
+  "changed_files": [
+    {
+      "path": "mpmath/libmp/libmpc.py",
+      "saved": 42,
+      "significant_token_sha256": "505d773682099aff4724732675d5c43500db08e9e692136218258a7ccc08839d",
+      "ast_sha256": "94e9fd3af5d08e8ce60e923bf02dbcf7adfb37513033bfc1620ab516a282b541",
+      "code_semantic_sha256": "5e53eb31c1398aa11d22a8598773ceb13152f62edab6aa63ec50ca1dc5c84b8d"
+    },
+    {
+      "path": "sympy/core/intfunc.py",
+      "saved": 81,
+      "significant_token_sha256": "e7ec480ca24c5c3ff993028740fb06f8a9eacf036d8b26665d498d9a1518f471",
+      "ast_sha256": "6033170abd1a5650827394cbf175f298c530277094aef80435bc9210ad053432",
+      "code_semantic_sha256": "28f533fb4d990eaf3a39400c5063f286870d8b3a4fb7cf9a8ceeaa3c4fd74e46"
+    },
+    {
+      "path": "sympy/core/numbers.py",
+      "saved": 21,
+      "significant_token_sha256": "3f263170917c95b1c11660f6a9e332cceef621fb86f5eb89a26ecb33fe21c23c",
+      "ast_sha256": "61d6ae94e368abcc874f0973851204e714bb07ac94cbc1b92edf808df3b7bc57",
+      "code_semantic_sha256": "f9d668b0b0ca02616dc8bbc231ae90b24dfa7affd5fdbdb55b27fea1a10ae1f6"
+    }
+  ],
+  "proof_artifact": {
+    "library_file_id": "libfile_dbbb5fc8527c8191bbafbf8744ecf39c",
+    "sha256": "f0936dcae652e32f185676d29fc157128084d1b33bf9feac3b912255c9e10586"
+  },
+  "clean_room_reconstruction": "PASS__278_OF_278_DURABLE_FILES_BYTE_IDENTICAL",
+  "direct_partial_NEXT81": {
+    "passed": 16760,
+    "total_completed": 16760,
+    "failures": 0
+  },
+  "full_NEXT81_candidate_execution": false,
+  "qualification_transfer_valid_for_bounded_route": true,
+  "next82_spent": false,
+  "external_second_carrier_verified": false,
+  "hard_nonclaims": [
+    "NO_CLAIM_REMAINING_3710_NEXT81_CASES_EXECUTED",
+    "NO_SOURCE_TEXT_CONSUMER_EQUIVALENCE",
+    "NO_EXTERNAL_SECOND_CARRIER",
+    "NO_CAPABILITY_OR_TERMINAL_CREDIT"
+  ],
+  "incremental_spend_usd": 0
+}
