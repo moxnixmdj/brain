@@ -667,34 +667,188 @@ def _github_json(path):
     with urllib.request.urlopen(req,timeout=20) as resp:
         return json.loads(resp.read().decode("utf-8"))
 
+def _github_graphql(query,variables):
+    token=os.environ.get("GITHUB_TOKEN")
+    if not token:
+        raise RuntimeError("GITHUB_DEDUPE_CONTEXT_MISSING")
+    body=json.dumps({"query":query,"variables":variables}).encode("utf-8")
+    req=urllib.request.Request(
+        "https://api.github.com/graphql",
+        data=body,
+        method="POST",
+        headers={
+            "Authorization":"Bearer "+token,
+            "Accept":"application/vnd.github+json",
+            "Content-Type":"application/json",
+            "X-GitHub-Api-Version":"2022-11-28",
+            "User-Agent":"ProjectBrain-DriftGuard/2",
+        },
+    )
+    with urllib.request.urlopen(req,timeout=30) as resp:
+        payload=json.loads(resp.read().decode("utf-8"))
+    if not isinstance(payload,dict) or payload.get("errors"):
+        raise RuntimeError("GITHUB_GRAPHQL_FAILED:"+json.dumps(payload.get("errors") if isinstance(payload,dict) else payload,sort_keys=True))
+    data=payload.get("data")
+    if not isinstance(data,dict):
+        raise RuntimeError("GITHUB_GRAPHQL_DATA_MISSING")
+    return data
+
+
+_OPEN_PR_PAGE_QUERY="""
+query($owner:String!,$name:String!,$cursor:String) {
+  repository(owner:$owner,name:$name) {
+    pullRequests(states:OPEN,first:100,after:$cursor,orderBy:{field:CREATED_AT,direction:ASC}) {
+      pageInfo { hasNextPage endCursor }
+      nodes {
+        number
+        headRefOid
+        files(first:100) {
+          pageInfo { hasNextPage endCursor }
+          nodes { path changeType }
+        }
+      }
+    }
+  }
+}
+"""
+
+
+def _open_pr_intents_from_apis(graphql,rest,repo,current):
+    try:
+        owner,name=repo.split("/",1)
+    except ValueError as exc:
+        raise RuntimeError("GITHUB_REPOSITORY_INVALID") from exc
+    if not owner or not name:
+        raise RuntimeError("GITHUB_REPOSITORY_INVALID")
+
+    def all_files(number):
+        rows=[]
+        for page in range(1,101):
+            payload=rest(f"/repos/{repo}/pulls/{number}/files?per_page=100&page={page}")
+            if not isinstance(payload,list):
+                raise RuntimeError(f"OPEN_PR_FILES_INVALID:{number}:{page}")
+            rows.extend(x for x in payload if isinstance(x,dict))
+            if len(payload)<100:
+                return rows
+        raise RuntimeError(f"OPEN_PR_FILES_PAGE_LIMIT:{number}")
+
+    def action_rows(pr):
+        number=pr.get("number")
+        head=str(pr.get("headRefOid") or "")
+        files=pr.get("files")
+        if isinstance(number,bool) or not isinstance(number,int) or number<=0 or len(head)!=40 or not isinstance(files,dict):
+            raise RuntimeError("OPEN_PR_GRAPHQL_NODE_INVALID")
+        page=files.get("pageInfo")
+        nodes=files.get("nodes")
+        if not isinstance(page,dict) or not isinstance(nodes,list):
+            raise RuntimeError(f"OPEN_PR_GRAPHQL_FILES_INVALID:{number}")
+        if page.get("hasNextPage") is True:
+            raw=all_files(number)
+            normalized=[
+                {"path":x.get("filename"),"changeType":str(x.get("status") or "").upper()}
+                for x in raw
+            ]
+        else:
+            normalized=[x for x in nodes if isinstance(x,dict)]
+
+        out=[]
+        seen=set()
+        for item in normalized:
+            path=str(item.get("path") or "")
+            change=str(item.get("changeType") or "").upper()
+            if change in {"DELETED","REMOVED"}:
+                continue
+            if not (path.startswith("canonical/action_intents/") and path.endswith(".json")):
+                continue
+            key=(number,path)
+            if key in seen:
+                continue
+            seen.add(key)
+            out.append({"pr":number,"head":head,"path":path})
+        return out
+
+    def read_intents(rows):
+        if not rows:
+            return []
+        fields=[]
+        for i,row in enumerate(rows):
+            expr=f"{row['head']}:{row['path']}"
+            fields.append(
+                f"i{i}: object(expression:{json.dumps(expr)}) "
+                "{ ... on Blob { text isBinary } }"
+            )
+        query=(
+            "query { repository(owner:"+json.dumps(owner)+",name:"+json.dumps(name)+") { "
+            +" ".join(fields)
+            +" } }"
+        )
+        data=graphql(query,{})
+        repo_data=data.get("repository")
+        if not isinstance(repo_data,dict):
+            raise RuntimeError("OPEN_PR_INTENT_BLOB_REPOSITORY_MISSING")
+        out=[]
+        for i,row in enumerate(rows):
+            obj=repo_data.get(f"i{i}")
+            if not isinstance(obj,dict) or obj.get("isBinary") is True or not isinstance(obj.get("text"),str):
+                raise RuntimeError(f"OPEN_PR_INTENT_BLOB_UNREADABLE:{row['pr']}:{row['path']}")
+            try:
+                intent=json.loads(obj["text"])
+            except Exception as exc:
+                raise RuntimeError(f"OPEN_PR_INTENT_READ_FAILED:{row['pr']}:{row['path']}:{type(exc).__name__}") from exc
+            if not isinstance(intent,dict):
+                raise RuntimeError(f"OPEN_PR_INTENT_NOT_OBJECT:{row['pr']}:{row['path']}")
+            out.append({"pr":row["pr"],"path":row["path"],"intent":intent})
+        return out
+
+    cursor=None
+    out=[]
+    seen_prs=set()
+    for page_number in range(1,101):
+        data=graphql(_OPEN_PR_PAGE_QUERY,{"owner":owner,"name":name,"cursor":cursor})
+        repo_data=data.get("repository")
+        conn=repo_data.get("pullRequests") if isinstance(repo_data,dict) else None
+        if not isinstance(conn,dict):
+            raise RuntimeError("OPEN_PR_GRAPHQL_CONNECTION_MISSING")
+        nodes=conn.get("nodes")
+        page=conn.get("pageInfo")
+        if not isinstance(nodes,list) or not isinstance(page,dict) or not isinstance(page.get("hasNextPage"),bool):
+            raise RuntimeError("OPEN_PR_GRAPHQL_PAGE_INVALID")
+
+        batch=[]
+        for pr in nodes:
+            if not isinstance(pr,dict):
+                raise RuntimeError("OPEN_PR_GRAPHQL_NODE_NOT_OBJECT")
+            number=pr.get("number")
+            if isinstance(number,bool) or not isinstance(number,int):
+                raise RuntimeError("OPEN_PR_GRAPHQL_NUMBER_INVALID")
+            if number in seen_prs:
+                raise RuntimeError(f"OPEN_PR_GRAPHQL_DUPLICATE:{number}")
+            seen_prs.add(number)
+            if number==current:
+                continue
+            batch.extend(action_rows(pr))
+        out.extend(read_intents(batch))
+
+        if page.get("hasNextPage") is not True:
+            return out
+        cursor=page.get("endCursor")
+        if not isinstance(cursor,str) or not cursor:
+            raise RuntimeError("OPEN_PR_GRAPHQL_CURSOR_MISSING")
+    raise RuntimeError("OPEN_PR_GRAPHQL_PAGE_LIMIT")
+
+
 def _open_pr_intents():
     repo=os.environ.get("GITHUB_REPOSITORY")
     current=int(os.environ.get("CURRENT_PR_NUMBER") or "0")
-    if not repo or not os.environ.get("GITHUB_TOKEN") or current<=0:
+    token=os.environ.get("GITHUB_TOKEN")
+    if not repo or not token or current<=0:
         return []
-    prs=_github_json(f"/repos/{repo}/pulls?state=open&per_page=100")
-    out=[]
-    for pr in prs:
-        number=int(pr.get("number") or 0)
-        if number==current:
-            continue
-        files=_github_json(f"/repos/{repo}/pulls/{number}/files?per_page=100")
-        for item in files:
-            path=str(item.get("filename") or "")
-            if not (path.startswith("canonical/action_intents/") and path.endswith(".json")):
-                continue
-            if item.get("status")=="removed":
-                continue
-            ref=str((pr.get("head") or {}).get("sha") or "")
-            encoded=urllib.parse.quote(path,safe="/")
-            try:
-                payload=_github_json(f"/repos/{repo}/contents/{encoded}?ref={urllib.parse.quote(ref,safe='')}")
-                raw=base64.b64decode(payload.get("content") or b"")
-                intent=json.loads(raw.decode("utf-8"))
-            except Exception as exc:
-                raise RuntimeError(f"OPEN_PR_INTENT_READ_FAILED:{number}:{path}:{type(exc).__name__}") from exc
-            out.append({"pr":number,"path":path,"intent":intent})
-    return out
+    return _open_pr_intents_from_apis(
+        _github_graphql,
+        _github_json,
+        repo,
+        current,
+    )
 
 def enforce_blocker_lease(intent):
     expected=blocker_lease_key(intent)
