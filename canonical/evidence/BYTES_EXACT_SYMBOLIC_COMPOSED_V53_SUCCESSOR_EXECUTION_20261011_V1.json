@@ -1,0 +1,101 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_COMPOSED_V53_SUCCESSOR_EXECUTION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "VERIFIED_RESEARCH_FRONTIER__CANONICAL_V52_PLUS_ORTHOGONAL_PROFILE_ATAN_CUT__FRESH_NEXT60_V2_PASS__CLEAN_ARCHIVE_REPLAY_PASS__NEXT61_FROZEN_UNSPENT__CURRENT_POINTER_ELIGIBLE__ZERO_PROMOTION_CREDIT",
+  "subject": {
+    "predecessor": "canonical/evidence/BYTES_EXACT_SYMBOLIC_MPF_POW_INT_V52_SUCCESSOR_EXECUTION_20261011_V1.json",
+    "predecessor_manifest_sha256": "5cfdaf054fafabd04894396739defc82fed40ec3aba24b2f1b06030421b9c62f",
+    "delta_spec": "canonical/research/bytes/BYTES_V53_COMPOSED_DELTA_20261011_V1.json",
+    "manifest_sha256": "913f83557de29d5ae29aceff38665455173060ed50361fdcbe41140f9675a7fa",
+    "python_files": 277,
+    "raw_python_source_bytes": 1715478,
+    "B_exec_raw_python_source_bytes": 1718238,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "raw_delta_vs_v52_bytes": -2349,
+    "raw_delta_vs_v51_bytes": -4085
+  },
+  "composition": {
+    "canonical_v52_component": "MPF_POW_INT_SQUARE_ONLY_SPECIALIZATION_V52",
+    "orthogonal_component": "V51_PROFILE_ZERO_HIT_CUT_PLUS_REAL_MPF_ATAN_MINIMUM_WRAPPER_ROUTE",
+    "overlap_with_canonical_v52_changed_body": false,
+    "composition_rule": "PRESERVE_CANONICAL_V52_MPF_POW_INT_SPECIALIZATION__APPLY_ONLY_DISJOINT_PROFILE_ATAN_DELTA__FAIL_CLOSED_ON_MANIFEST_DRIFT"
+  },
+  "development_replay": {
+    "spent_NEXT58": {
+      "id": "QUAL_SUCCESSOR_NEXT58_20261011_V1",
+      "cases": 15180,
+      "corpus_sha256": "fd7a32a07356c87a18e884f851320fd5d87dc316ca2436a4191275e5f3f57e0c",
+      "candidate": "15180/15180",
+      "failures": 0,
+      "spent": true
+    },
+    "prior_V52_specific_NEXT59_V2": {
+      "id": "QUAL_SUCCESSOR_NEXT59_20261011_V2",
+      "cases": 15410,
+      "corpus_sha256": "1f6ba1c37967f918258ed867aa77399d54e106f236978dd5be4c021c11fb217f",
+      "candidate": "15410/15410",
+      "failures": 0,
+      "role": "DEVELOPMENT_REPLAY_ONLY__NOT_FRESH_FOR_V53"
+    }
+  },
+  "fresh_qualification": {
+    "id": "QUAL_SUCCESSOR_NEXT60_20261011_V2",
+    "cases": 15640,
+    "seed": 3728074599,
+    "per_operation_budget": 1360,
+    "corpus_sha256": "f1a9a38ace8ba1297dd0761e6b4708fee96e25290de4b74683812ac9519dac14",
+    "candidate": "15640/15640",
+    "clean_archive_replay": "15640/15640",
+    "failures": 0,
+    "precommitted_before_execution": true,
+    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT60_20261011_V2.jsonl",
+    "library_file_id": "libfile_fdbd0eca11348191a1964ccdfaccc292",
+    "file_id": "file_00000000e2e08210a9a36d5d1b60fecb",
+    "spent": true
+  },
+  "reproducibility": {
+    "local_source_locked_v52_to_v53_transform": "PASS__EXACT_TARGET_MANIFEST",
+    "local_executable_transform_sha256": "e5227f414ea7d592f622dc21cca2b6cbc0081ed24d8fe3d08d2e8578c5ef10a2",
+    "canonical_declarative_delta_spec": "canonical/research/bytes/BYTES_V53_COMPOSED_DELTA_20261011_V1.json",
+    "exact_archive_is_primary_reconstruction_authority": true,
+    "archive_extraction_identity": "PASS__278_OF_278_DURABLE_FILES_BYTE_IDENTICAL",
+    "clean_archive_fresh_NEXT60_V2_replay": "15640/15640",
+    "external_second_carrier_verified": false
+  },
+  "durable_archive": {
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V53_COMPOSED_SUCCESSOR_20261011_V1.tar.xz",
+    "library_file_id": "libfile_eb8faee93b808191b23bf656587a95eb",
+    "file_id": "file_00000000486081f483b8d47e41fc63ca",
+    "bytes": 267880,
+    "sha256": "a1b8380d0f27eb927da630c48ded91e4b4e9b8e92a086c97f7fa6367bfdd5278",
+    "role": "PRIMARY_EXACT_RECONSTRUCTION_AUTHORITY"
+  },
+  "next_frozen": {
+    "id": "QUAL_SUCCESSOR_NEXT61_20261011_V1",
+    "cases": 15870,
+    "seed": 4092808385,
+    "per_operation_budget": 1380,
+    "corpus_sha256": "6555ec7fa2b618ea8e9c286ed77cea8f43bd36b5f20dfee5dea79ab09ff120d8",
+    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT61_20261011_V1.jsonl",
+    "library_file_id": "libfile_609ffec374d0819187c5a272055023f4",
+    "file_id": "file_00000000dbf881f4a326236dee120026",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT",
+    "spent": false
+  },
+  "truth_boundary": [
+    "MEASURED: V53 raw Python source is 1,715,478 bytes, 2,349 below canonical V52 and 4,085 below V51.",
+    "MEASURED: V53 passes complete spent NEXT58 15,180/15,180.",
+    "MEASURED: precommitted fresh NEXT60 V2 passes exact V53 15,640/15,640.",
+    "MEASURED: cleanly extracted sealed V53 archive also passes NEXT60 V2 15,640/15,640.",
+    "MEASURED: exact archive contains 278 durable files and is content-addressed.",
+    "MEASURED: NEXT61 is frozen at 15,870 cases and remains unexecuted.",
+    "NOT PROVED: universal mpmath equivalence outside the bounded exact-symbolic route.",
+    "NOT PROVED: organizationally independent external second-carrier replay.",
+    "NO CREDIT: no capability, acceptance, professional-quality, or terminal credit is granted."
+  ],
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "acceptance_credit_delta": 0,
+  "promotion_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
