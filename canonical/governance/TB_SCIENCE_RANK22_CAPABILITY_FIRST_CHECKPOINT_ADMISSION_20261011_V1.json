@@ -1,0 +1,96 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_FIRST_CHECKPOINT_ADMISSION_V2",
+  "date": "2026-10-11",
+  "status": "ADMIT_RANK22_ONE_SHOT__ZERO_MODEL_DETERMINISTIC_SCIENTIFIC_ROUTE_VALIDATION__UNEXPOSED_PRECLAIM__ZERO_CREDIT",
+  "authorized": true,
+  "decision": "ADMIT_CHECKPOINT_AUDIT_EXECUTION",
+  "authorized_scope": "CHECKPOINT_AUDIT_DISPATCH_ONLY",
+  "objective": "VALIDATE_BRAIN_OWNED_ZERO_MODEL_SCIENTIFIC_CAPABILITY_ON_ONE_FRESH_TERMINAL_BENCH_SCIENCE_SUBJECT",
+  "benchmark_role": "NEW_CAPABILITY_VALIDATION",
+  "rationale": "RANK21_FINAL_ZERO_IDENTIFIED_EXTERNAL_MODEL_COGNITION_AS_PERMANENTLY_NONCREDITABLE_AND_EXPOSED_TYPED_ACTION_PLANNER_FAILURES__A_SEPARATE_BRAIN_OWNED_PURE_STDLIB_ZERO_MODEL_SHARED_PERIOD_SCIENTIFIC_KERNEL_WAS_BUILT_BEFORE_RANK22_TASK_READ_AND_INDEPENDENTLY_VERIFIED_6_OF_6_ON_SYNTHETIC_HELDOUT_DATA__RANK22_IS_THE_NEXT_FROZEN_UNEXPOSED_MANIFEST_SUBJECT_AND_ITS_PUBLIC_FAMILY_NAME_MATCHES_THE_QUALIFIED_SHARED_PERIOD_RV_ASTROMETRY_FITTING_ROUTE",
+  "slot": {
+    "ledger_schedule_rank": 22,
+    "frozen_manifest_schedule_order": 21,
+    "task_rank": 21,
+    "slot_id": "terminal-bench-science/rv-astrometry-fitting::trial-0",
+    "task_digest": "sha256:8e086e1f7245067eaa9a67c259c1519204fa058d8664983066cd582ef258a1ea",
+    "task_content_read": false
+  },
+  "source_bindings": {
+    "current_pointer": {
+      "path": "canonical/governance/CURRENT_TB_SCIENCE_EXECUTION.json",
+      "git_blob_sha": "70842b437ae43102cb5a58fb967f5550383c6c7c"
+    },
+    "current_ledger": {
+      "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261011_V68.json",
+      "git_blob_sha": "ba3480ae80ba1fa7b51ed5ac91817a8915f4b8b0"
+    },
+    "frozen_manifest": {
+      "path": "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json",
+      "git_blob_sha": "6dfa880b1f68881531afbba6ca211681801fd19b"
+    },
+    "zero_model_route_verification": {
+      "path": "canonical/verification/TB_SCIENCE_ZERO_MODEL_SCIENTIFIC_ROUTE_VERIFY_20261011_V1.json",
+      "git_blob_sha": "782e1bdf01ac3bf6fe38277919bed5e22754f5b5"
+    },
+    "capability_transfer_law": {
+      "path": "canonical/laws/CAPABILITY_TRANSFER_VS_COGNITION_OUTSOURCING_LAW_V1.md",
+      "git_blob_sha": "86dfbdeb327bf981db6e32f22f460a675df56d57"
+    },
+    "kernel_git_blob_sha": "fae27cd575296d70a160a0c7f72d5a8127d8b9c1",
+    "agent_git_blob_sha": "79d9f08b5d3bb1a75842247bd427dd417f5d5e21",
+    "qualification_test_git_blob_sha": "e3bd23bab6697adb50237718e7632c1d61e3c392",
+    "public_reseal_candidate": {
+      "repository": "moxnixmdj/verification-capsule-runner",
+      "base_branch": "terminal-execution-v1",
+      "base_commit_sha": "2175d1792165e6b74b1d8883b7a8bb28797dc5dd",
+      "candidate_branch": "reseal/tb-science-rank22-zero-model-20261011-v1",
+      "workflow_git_blob_sha": "9dfb45e99cb0d9b93cabbcf6cbe79c3831b4adb7",
+      "behavior_git_blob_sha": "263c22b2027cdc1834b658cc7b68f74231ae5cf8"
+    }
+  },
+  "scheduler_work_item": {
+    "work_id": "TB_SCIENCE_RANK22_ZERO_MODEL_SCIENTIFIC_LIVE_VALIDATION",
+    "work_type": "BENCHMARK_INSTRUMENTATION",
+    "benchmark_role": "NEW_CAPABILITY_VALIDATION",
+    "claims_new_primitive": false,
+    "reusable_capability_under_validation": "ZERO_MODEL_SHARED_PERIOD_HARMONIC_SCIENTIFIC_FITTING_WITH_AUTHORITATIVE_ARTIFACT_MATERIALIZATION"
+  },
+  "controls": {
+    "logical_attempts_authorized_total": 1,
+    "retries_authorized": 0,
+    "replacement_allowed": false,
+    "incremental_spend_usd_max": 0,
+    "external_or_local_general_purpose_model_cognition_forbidden": true,
+    "task_read_before_exact_public_reseal_and_live_preflight_forbidden": true,
+    "durable_start_cas_required": true,
+    "agent_ready_before_durable_start_required": true,
+    "post_start_result_irreversible": true,
+    "uncertain_effect_replay_authority": false,
+    "rank21_replay_forbidden": true,
+    "different_subject_after_rank22_claim_forbidden": true
+  },
+  "task_read": false,
+  "task_started": false,
+  "benchmark_trials_consumed": 0,
+  "checkpoint_dispatch_admission": true,
+  "execution_claim_authority": false,
+  "execution_authority": false,
+  "activation_authority": false,
+  "promotion_authority": false,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "hard_nonclaims": [
+    "NO_RANK22_TASK_CONTENT_READ",
+    "NO_RANK22_EXECUTION_CLAIM_OR_LOGICAL_ATTEMPT_ID_YET",
+    "NO_RANK22_EXECUTION_OR_ACTIVATION_AUTHORITY_FROM_ADMISSION",
+    "NO_RANK21_RETRY_REPLAY_OR_REPLACEMENT",
+    "NO_EXTERNAL_OR_LOCAL_GENERAL_PURPOSE_MODEL_COGNITION",
+    "NO_CLAIM_SYNTHETIC_QUALIFICATION_PROVES_RANK22_WILL_PASS",
+    "NO_CAPABILITY_ACCEPTANCE_OR_TERMINAL_CREDIT_FROM_ADMISSION"
+  ],
+  "next": "BUILD_CONTENT_ADDRESSED_RANK22_CLAIM_BINDING_ON_EXACT_ZERO_MODEL_PUBLIC_RESEAL__VERIFY_ZERO_EXPOSURE__THEN_MINT_NON_RETRY_EXECUTION_AUTHORITY"
+}
