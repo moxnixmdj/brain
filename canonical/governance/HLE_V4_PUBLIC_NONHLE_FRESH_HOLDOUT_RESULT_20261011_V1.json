@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_V4_PUBLIC_NONHLE_FRESH_HOLDOUT_RESULT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "FAILED_FRESH_PUBLIC_NONHLE_HOLDOUT__TERMINAL_HLE_EXECUTION_REMAINS_FORBIDDEN__ZERO_HLE_CASES",
+  "subject": {
+    "path": "canonical/runtime/hle_native_open_domain_research_v4.py",
+    "frozen_git_blob_sha": "f7cd848f4369fd5e8da53723a2b52d799596fc66",
+    "freeze_path": "canonical/governance/HLE_V4_PUBLIC_NONHLE_FRESH_HOLDOUT_FREEZE_20261011_V1.json",
+    "verification_repository": "moxnixmdj/verification-capsule-runner",
+    "verification_pull_request": 2675,
+    "workflow_run_id": 38141144254,
+    "workflow_job_id": 114475094384,
+    "artifact_id": 11703401087,
+    "artifact_zip_sha256": "11e0380a5c5bbe6d996f71d0c33fa562dfdca2ac3e46ba60e81d492cd2ff1c4d"
+  },
+  "holdout": {
+    "dataset": "ai-safety-institute/trivia_qa_verified",
+    "split": "validation",
+    "slice": "rows_25_to_49",
+    "sample_size": 25,
+    "untouched_before_freeze": true,
+    "questions_manifest_sha256": "6db9eed03a6e41eb68c61e708b6a32c2e0cbb8f9cb667f98a67c7d7c6ff66f4c",
+    "commitments_manifest_sha256": "f60a637beec071461df1b959323ee1e332448e58d8efdebf2d0b8fa2f5300005",
+    "attempted": 4,
+    "attempt_rate": 0.16,
+    "normalized_exact": 2,
+    "normalized_exact_rate": 0.08,
+    "required_attempt_rate": 0.25,
+    "required_normalized_exact_rate": 0.2,
+    "promotion_gate_passed": false,
+    "status_counts": {
+      "CANDIDATE_GENERATED__STRUCTURED_OPEN_DOMAIN_V4": 4,
+      "NO_CANDIDATE__STRUCTURED_RETRIEVAL_NO_ANSWER": 21
+    }
+  },
+  "cognition_accounting": {
+    "external_model_calls_total": 0,
+    "external_reasoning_model_calls_total": 0,
+    "model_dependency_count_total": 0,
+    "cognition_outsourcing_detected": false
+  },
+  "benchmark_integrity": {
+    "gold_hidden_from_solver_until_commitments_sealed": true,
+    "hle_questions_consumed": 0,
+    "hle_gold_consumed": 0,
+    "hle_score_credit": 0
+  },
+  "consequences": [
+    "THE_CONSUMED_ROWS_0_TO_24_DIAGNOSTIC_PASS_DID_NOT_GENERALIZE",
+    "ROWS_25_TO_49_ARE_NOW_DIAGNOSTIC_ONLY_AND_MUST_NEVER_BE_REUSED_AS_FRESH_HOLDOUT",
+    "V4_MUST_NOT_BE_PROMOTED_TO_TERMINAL_HLE_EXECUTION",
+    "ANY_REPAIR_MUST_BE_TESTED_ON_A_NEW_UNTOUCHED_PUBLIC_SLICE"
+  ],
+  "target_score_claimed": false,
+  "hle_67_7_certified": false,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0
+}
