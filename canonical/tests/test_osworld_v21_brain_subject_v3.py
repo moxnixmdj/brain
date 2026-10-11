@@ -11,7 +11,7 @@ def test_v3_subject_is_model_independent_state_app_web_subject():
     assert isinstance(subject, BrainOSWorldAgentV3)
     assert SUBJECT_ID == "brain-osworld-v21-model-independent-state-app-web-v3"
     assert subject.policy_id == SUBJECT_ID
-    assert subject.policy_provider.__module__ == "canonical.runtime.osworld_v21_web_app_policy_overlay_v1"
+    assert subject.policy_provider.__module__ == "canonical.runtime.osworld_v21_workflow_policy_v1"
 
 
 def test_v3_operative_policy_chain_has_no_external_generation_provider_imports():
@@ -20,6 +20,7 @@ def test_v3_operative_policy_chain_has_no_external_generation_provider_imports()
         "canonical.runtime.osworld_v21_brain_agent_adapter_v3",
         "canonical.runtime.osworld_v21_brain_agent_adapter_v2",
         "canonical.runtime.osworld_v21_brain_agent_adapter_v1",
+        "canonical.runtime.osworld_v21_workflow_policy_v1",
         "canonical.runtime.osworld_v21_web_app_policy_overlay_v1",
         "canonical.runtime.osworld_v21_app_policy_overlay_v2",
         "canonical.runtime.osworld_v21_generic_policy_v1",
@@ -44,7 +45,7 @@ def test_v3_operative_policy_chain_has_no_external_generation_provider_imports()
 
 def test_v3_subject_source_has_no_task_id_or_reference_trajectory_lookup():
     import canonical.runtime.osworld_v21_brain_subject_v3 as subject_mod
-    import canonical.runtime.osworld_v21_web_app_policy_overlay_v1 as policy_mod
+    import canonical.runtime.osworld_v21_workflow_policy_v1 as policy_mod
 
     source = (inspect.getsource(subject_mod) + "\n" + inspect.getsource(policy_mod)).casefold()
     forbidden = (
