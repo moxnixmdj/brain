@@ -33,6 +33,9 @@ from canonical.runtime.capability_first_scheduler_v1 import update_pareto_fronti
 from canonical.runtime.capability_transfer_ownership_gate_v1 import (
     evaluate as evaluate_capability_transfer,
 )
+from canonical.runtime.runtime_cognition_credit_guard_v1 import (
+    assert_credit_path_cognition_governance,
+)
 from canonical.runtime.executable_skill_program_v7 import (
     ExecutableSkillProgramError,
     induce_candidate,
@@ -680,6 +683,7 @@ def advance_verification_queue(
     remains in its dedicated guarded repair paths. The independent verifier and
     existing authenticator remain the sole authority for promotion.
     """
+    assert_credit_path_cognition_governance(ROOT)
     if isinstance(max_actions, bool) or int(max_actions) < 1:
         raise SelfImprovementError("MAX_ACTIONS_INVALID")
     max_actions = int(max_actions)
@@ -1261,6 +1265,7 @@ def integrate_solver_output(
     verification_effect_root: str | Path | None = None,
 ) -> dict[str, Any]:
     """Persist only independently verified learning and update Pareto reuse state."""
+    assert_credit_path_cognition_governance(ROOT)
     if not isinstance(out, Mapping):
         raise SelfImprovementError("SOLVER_OUTPUT_NOT_OBJECT")
     state = load_state(state_path)
@@ -2439,6 +2444,7 @@ def run_learning_episode(
     any verified effect may already have occurred, full-search fallback is blocked
     to prevent blind replay.
     """
+    assert_credit_path_cognition_governance(ROOT)
     eid = _s(episode_id)
     scope = _s(scope_id)
     if not eid or not scope:
