@@ -95,3 +95,21 @@ def test_feature_pack_search_escapes_global_predicate_bound_without_heuristic_pr
         any(p["expr"][0]=="EQ" and set(p["expr"][1:])=={"a","b"} for p in d["predicates"])
         for d in packed["discriminators"]
     ), packed
+
+
+def test_large_duplicate_population_compresses_before_g0():
+    rows=[]
+    for i in range(120):
+        v=i%4
+        rows.append(LabeledRow(f"p{i}",{"a":v,"b":v},True))
+    for i in range(120):
+        v=i%4
+        rows.append(LabeledRow(f"n{i}",{"a":v,"b":(v+1)%4},False))
+    result=invent(rows)
+    assert result["status"]=="INVENTED_DISCRIMINATORS", result
+    assert result["original_example_count"]==240
+    assert result["compressed_example_count"]<128
+    assert any(
+        any(p["expr"][0]=="EQ" and set(p["expr"][1:])=={"a","b"} for p in d["predicates"])
+        for d in result["discriminators"]
+    ), result
