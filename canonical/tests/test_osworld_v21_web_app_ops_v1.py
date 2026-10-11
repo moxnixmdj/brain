@@ -132,8 +132,14 @@ def test_wrong_tab_identity_fails_closed():
 def test_registry_contains_no_control_plane_state_operation():
     path = Path(__file__).resolve().parents[1] / "runtime" / "osworld_v21_web_app_ops_registry_v1.json"
     raw = json.loads(path.read_text(encoding="utf-8"))
-    encoded = json.dumps(raw, sort_keys=True)
-    assert '"/api/state"' not in encoded
+    paths = [
+        op["path"]
+        for app in raw["apps"].values()
+        for op in app["operations"].values()
+    ]
+    assert "/api/state" not in paths
+    assert not any(path.startswith("/api/state/") for path in paths)
+    assert "/api/state" in raw["forbidden_surfaces"]
     assert "arbitrary_url" in raw["forbidden_surfaces"]
 
 
