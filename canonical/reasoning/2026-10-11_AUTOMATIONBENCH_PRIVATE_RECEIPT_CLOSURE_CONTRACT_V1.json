@@ -1,69 +1,61 @@
 {
-  "schema": "PROJECT_BRAIN_AUTOMATIONBENCH_PRIVATE_RECEIPT_CLOSURE_CONTRACT_20261011_V1",
+  "schema": "PROJECT_BRAIN_AUTOMATIONBENCH_PRIVATE_RECEIPT_CLOSURE_CONTRACT_20261011_V2",
   "date": "2026-10-11",
-  "status": "CANDIDATE__TARGET_REFERENCE_EPOCH_AMBIGUITY_REPAIRED__OWNER_MATCH_OR_BRIDGE_REQUIRED__ZERO_CREDIT",
+  "status": "CANDIDATE__CURRENT_OFFICIAL_PRIVATE_SURFACE_BOUND__OWNER_RESULT_ONLY_REMAINS__ZERO_CREDIT",
   "target_predicate": "AUTOMATIONBENCH_GE_40",
   "mission_lock": "SOLVE_ONLY_AUTOMATIONBENCH_GE_40",
-  "target_reference": {
-    "reference_system": "Claude Opus 5.5",
-    "reference_score_percent": 40,
-    "reference_origin": "ZAPIER_RUN_REPORTED_BY_ANTHROPIC",
-    "fallback_models_used": false,
-    "publicly_bound_facts": [
-      "ZAPIER_RAN_AND_REPORTED_THE_RESULT",
-      "OPUS55_EARLY_ACCESS_RESULT_IS_40_0_PERCENT",
-      "NO_FALLBACK_MODELS_WERE_USED"
-    ],
-    "not_publicly_bound_by_the_primary_opus55_source": [
-      "EXACT_PRIVATE_POPULATION_IDENTITY",
-      "EXACT_SCORE_BEARING_DENOMINATOR",
-      "EXACT_AUTOMATIONBENCH_VERSION_OR_EPOCH"
-    ],
-    "required_comparability_rule": "CANDIDATE_OWNER_RECEIPT_MUST_ATTEST_EXACT_REFERENCE_EPOCH_SCOPE_AND_PROTOCOL_MATCH_OR_AN_OWNER_VERIFIED_COMPARABILITY_BRIDGE__CURRENT_PUBLIC_VERSION_ALONE_IS_NOT_SUFFICIENT"
+  "canonical_acceptance_authority": {
+    "predicate_registry": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+    "family_closure_contract": "canonical/governance/BUSINESS_WORKFLOW_AUTOMATION_FAMILY_CLOSURE_CONTRACT_CURRENT_V1.json",
+    "acceptance": "AutomationBench >= 40.0%",
+    "reference_surface": "AutomationBench official leaderboard private held-out population",
+    "requires_opus55_early_access_epoch_match": false,
+    "public_600_is_admissible_substitute": false
   },
-  "public_methodology_evidence": {
-    "current_public_repository_version": "1.0.6",
-    "public_scored_population_size": 600,
-    "paper_private_population_description": "600+",
-    "paper_private_population_is_held_out": true,
-    "paper_private_population_is_harder_than_public": true,
-    "paper_private_hardening_exhaustively_specified": false,
-    "paper_step_limit": 50,
-    "paper_scoring": "PROGRAMMATIC_END_STATE__ALL_ASSERTIONS_REQUIRED_FOR_TASK_PASS",
-    "partner_automationbench_aa_population_size": 657,
-    "partner_metric_same_as_zapier_hosted_headline": false,
-    "critical_limit": "THE_657_PARTNER_POPULATION_IS_EVIDENCE_OF_A_PRIVATE_SPLIT_SIZE_BUT_DOES_NOT_BY_ITSELF_PROVE_THAT_OPUS55_40_0_USED_THAT_EXACT_POPULATION_OR_EPOCH"
+  "current_first_party_official_surface": {
+    "source": "https://zapier.com/benchmarks",
+    "benchmark_version": "1.0.6",
+    "population_kind": "PRIVATE_HELD_OUT",
+    "score_bearing_population_size": 657,
+    "population_size_evidence": "CURRENT_LEADERBOARD_NOTE_REPORTS_260_OF_657_TASKS_AND_THE_PAGE_DESCRIBES_ONE_HELD_OUT_PRIVATE_EVALUATION_SET",
+    "tool_mode": "api",
+    "max_steps_per_task": 50,
+    "headline_metric": "task_completed_correctly",
+    "metric_rule": "STRICT_PASS_FAIL__EVERY_SCORED_ASSERTION_MUST_PASS",
+    "public_population_size": 600,
+    "public_population_is_research_only": true,
+    "run_to_run_variance_statement": "TYPICALLY_WITHIN_1_PERCENT"
   },
   "threshold_arithmetic": {
-    "general_rule": "minimum_successes = ceil(0.40 * owner_attested_score_bearing_denominator)",
-    "if_owner_attested_denominator_is_657": {
-      "minimum_successes": 263,
-      "263_over_657_percent": 40.03044140030441,
-      "262_over_657_percent": 39.87823439878234
-    },
-    "guard": "DO_NOT_HARDCODE_657_UNLESS_THE_OWNER_MATCH_OR_BRIDGE_ATTESTS_IT_IS_THE_SCORE_BEARING_DENOMINATOR_COMPARABLE_TO_THE_OPUS55_40_0_REFERENCE"
+    "denominator": 657,
+    "threshold_percent": 40.0,
+    "minimum_successes": 263,
+    "proof": "ceil(0.40 * 657) = ceil(262.8) = 263",
+    "263_over_657_percent": 40.03044140030441,
+    "262_over_657_percent": 39.87823439878234
+  },
+  "fallback_policy": {
+    "automatic_rejection": false,
+    "reason": "CURRENT_OFFICIAL_ZAPIER_LEADERBOARD_INCLUDES_AND_RANKS_FALLBACK_CONFIGURATIONS",
+    "receipt_requirement": "FALLBACK_USE_MUST_BE_EXPLICIT_AND_ALL_EXECUTION_COMPONENTS_MUST_BE_BOUND_INTO_THE_FROZEN_CANDIDATE_IDENTITY"
   },
   "minimum_admissible_owner_receipt": {
-    "receipt_authority": "ZAPIER_OR_AN_OFFICIALLY_DELEGATED_AUTOMATIONBENCH_EVALUATOR",
+    "authority": "ZAPIER_OR_OFFICIALLY_DELEGATED_AUTOMATIONBENCH_EVALUATOR",
     "must_bind": [
-      "BENCHMARK_VERSION_OR_RUN_EPOCH",
+      "AUTOMATIONBENCH_1_0_6",
+      "OFFICIAL_PRIVATE_HELD_OUT_LEADERBOARD_POPULATION",
       "PRIVATE_POPULATION_IDENTITY_OR_OPAQUE_CONTENT_ADDRESS",
-      "SCORE_BEARING_DENOMINATOR",
-      "TOOL_PROTOCOL_AND_STEP_LIMIT",
-      "TASK_SUCCESS_METRIC",
-      "FALLBACK_POLICY_NO_FALLBACK_MODELS",
-      "CANDIDATE_SYSTEM_CONTENT_ADDRESS",
+      "DENOMINATOR_657",
+      "API_MODE",
+      "MAX_STEPS_50",
+      "TASK_COMPLETED_CORRECTLY",
+      "FALLBACK_POLICY_EXPLICIT",
+      "ALL_EXECUTION_COMPONENTS_BOUND_IN_FROZEN_CANDIDATE",
+      "CANDIDATE_CONTENT_SHA256",
+      "RUN_EPOCH",
       "SUCCESS_COUNT",
       "AGGREGATE_SCORE_PERCENT",
-      "OWNER_RECEIPT_CONTENT_ADDRESS",
-      "EXACT_OPUS55_40_0_REFERENCE_EPOCH_MATCH_OR_OWNER_VERIFIED_COMPARABILITY_BRIDGE"
-    ],
-    "reference_match_must_attest": [
-      "POPULATION_SCOPE_COMPARABLE",
-      "SCORING_SEMANTICS_COMPARABLE",
-      "TOOL_PROTOCOL_COMPARABLE",
-      "STEP_LIMIT_COMPARABLE",
-      "FALLBACK_POLICY_COMPARABLE"
+      "OWNER_RECEIPT_CONTENT_ADDRESS"
     ],
     "private_content_not_required": [
       "PRIVATE_PROMPTS",
@@ -73,23 +65,36 @@
       "PRIVATE_EVALUATOR_IMPLEMENTATION"
     ]
   },
+  "official_private_request_route": {
+    "source": "https://zapier.com/blog/introducing-automationbench/",
+    "fact": "VERIFIED_PRIVATE_SET_EVALUATION_IS_AVAILABLE_TO_MODEL_PROVIDERS_BY_REQUEST",
+    "route_exists": true,
+    "request_already_sent": true,
+    "request_channel": "DIRECT_EMAIL_TO_AUTOMATIONBENCH_AUTHORS",
+    "provider_reply_observed": false,
+    "submission_interface_observed": false,
+    "incremental_spend_usd_accepted_by_provider": "UNKNOWN"
+  },
+  "submission_readiness": {
+    "current_brain_runtime_content_address_exists": true,
+    "current_brain_runtime_package_sha256": "5c5e1d1e79862e71eca9217e3a34d2b1343cb3c7b03d4826fe0f4a56d3400072",
+    "historical_openai_compatible_gateway_pr": 865,
+    "historical_gateway_is_current_canonical_candidate": false,
+    "exact_provider_submission_interface_known": false,
+    "adapter_build_before_interface_known": "FORBIDDEN_AS_SPECULATIVE_CHURN",
+    "next_if_provider_accepts": "ADAPT_CURRENT_CONTENT_ADDRESSED_RUNTIME_TO_EXACT_ACCEPTED_INTERFACE__FREEZE_ALL_COMPONENTS__RUN_OFFICIAL_PRIVATE_V1_0_6__VERIFY_RECEIPT"
+  },
   "route_adjudication": {
-    "PUBLIC_600_DIRECT_ROUTE": "KILLED",
-    "FINITE_APP_API_STATE_TRANSITION_GRAMMAR_SUPERSET": "KILLED",
-    "PUBLIC_TO_PRIVATE_GENERALIZATION": "INSUFFICIENT",
-    "ASSUME_V1_0_6_EQUALS_OPUS55_EARLY_ACCESS_EPOCH": "KILLED_AS_UNBOUND",
-    "ASSUME_657_EQUALS_OPUS55_SCORE_DENOMINATOR": "KILLED_AS_UNBOUND",
-    "OWNER_PRIVATE_RESULT_WITH_EXACT_REFERENCE_MATCH_OR_BRIDGE": "LIVE_MINIMUM_CLOSURE_ROUTE",
-    "SCOPE_COMPLETE_STRONGER_PROOF": "PRESERVED_IF_NEW_LOAD_BEARING_PRIVATE_SCOPE_EVIDENCE_APPEARS"
+    "PUBLIC_600_DIRECT_ROUTE": "KILLED_FOR_PRIVATE_PROMOTION",
+    "FINITE_API_GRAMMAR_SCOPE_SHORTCUT": "KILLED",
+    "OPUS55_EARLY_ACCESS_EPOCH_BRIDGE_REQUIREMENT": "REMOVED_AS_UNNECESSARY_OVERCONSTRAINT",
+    "NO_FALLBACK_REQUIREMENT": "REMOVED_AS_UNNECESSARY_OVERCONSTRAINT",
+    "CURRENT_OFFICIAL_PRIVATE_V1_0_6_RESULT": "LIVE_MINIMUM_CLOSURE_ROUTE"
   },
   "current_observation": {
     "exact_official_candidate_private_result_observed": false,
-    "owner_reference_epoch_match_or_bridge_observed": false,
     "zapier_owner_run_reply_observed": false,
-    "predicate_closed": false,
-    "private_evaluation_route_publicly_confirmed": true,
-    "request_acceptance_observed": false,
-    "submission_interface_observed": false
+    "predicate_closed": false
   },
   "accounting": {
     "incremental_spend_usd": 0,
@@ -102,50 +107,10 @@
   },
   "execution_authority": false,
   "promotion_authority": false,
-  "fresh_reality_authority": false,
   "hard_nonclaims": [
     "NO_CLAIM_AUTOMATIONBENCH_GE_40_IS_ALREADY_PROVED",
-    "NO_CLAIM_OPUS55_40_0_IS_PUBLICLY_BOUND_TO_V1_0_6",
-    "NO_CLAIM_OPUS55_40_0_IS_PUBLICLY_BOUND_TO_657_TASKS",
-    "NO_CLAIM_PUBLIC_600_PREDICTS_PRIVATE_PERFORMANCE",
+    "NO_CLAIM_PUBLIC_600_PREDICTS_PRIVATE_657",
+    "NO_CLAIM_HISTORICAL_PR865_IS_CURRENT_CANONICAL_BRAIN",
     "NO_PRIVATE_TASK_CONTENT_WAS_READ"
-  ],
-  "official_request_route": {
-    "status": "PUBLICLY_CONFIRMED_BY_ZAPIER__ELIGIBILITY_AND_EXECUTION_DETAILS_PENDING",
-    "primary_source_url": "https://zapier.com/blog/introducing-automationbench/",
-    "primary_source_observation_date": "2026-10-11",
-    "primary_source_fact": "VERIFIED_PRIVATE_SET_EVALUATION_IS_AVAILABLE_TO_MODEL_PROVIDERS_BY_REQUEST",
-    "implications": [
-      "PRIVATE_EVALUATION_ROUTE_EXISTENCE_IS_NO_LONGER_UNKNOWN",
-      "NO_NEED_TO_SEARCH_FOR_A_PUBLIC_PRIVATE_TASK_DOWNLOAD",
-      "NEXT_EXTERNAL_DECISION_IS_REQUEST_ACCEPTANCE_AND_SUBMISSION_INTERFACE"
-    ],
-    "still_unknown": [
-      "WHETHER_AN_INDEPENDENTLY_CONFIGURED_EXTERNAL_SYSTEM_COUNTS_AS_AN_ELIGIBLE_MODEL_PROVIDER_OR_PARTNER",
-      "EXACT_SUBMISSION_OR_INTEGRATION_INTERFACE",
-      "WHETHER_THE_OWNER_RUN_CAN_BE_PERFORMED_AT_ZERO_INCREMENTAL_COST",
-      "EXACT_OPUS55_40_0_REFERENCE_EPOCH_POPULATION_AND_PROTOCOL_BINDING_OR_BRIDGE",
-      "WHEN_OR_WHETHER_ZAPIER_WILL_ACCEPT_THIS_REQUEST"
-    ],
-    "request_already_sent": true,
-    "request_channel": "DIRECT_EMAIL_TO_AUTOMATIONBENCH_AUTHORS",
-    "request_requires_private_task_disclosure": false
-  },
-  "submission_readiness": {
-    "status": "WAIT_FOR_PROVIDER_INTERFACE__NO_SPECULATIVE_ADAPTER_BUILD",
-    "private_evaluation_route_exists": true,
-    "request_sent": true,
-    "provider_reply_observed": false,
-    "current_brain_runtime_content_address_exists": true,
-    "current_brain_runtime_package_sha256": "5c5e1d1e79862e71eca9217e3a34d2b1343cb3c7b03d4826fe0f4a56d3400072",
-    "historical_openai_compatible_gateway_pr": 865,
-    "historical_gateway_is_current_canonical_candidate": false,
-    "exact_provider_submission_interface_known": false,
-    "next_if_provider_accepts": "ADAPT_CURRENT_CONTENT_ADDRESSED_RUNTIME_TO_THE_EXACT_PROVIDER_INTERFACE__FREEZE_CANDIDATE__RUN_PRIVATE_EVAL__VERIFY_RECEIPT",
-    "do_not_do": [
-      "DO_NOT_BUILD_UNKNOWN_INTERFACE_IN_ADVANCE",
-      "DO_NOT_CALL_HISTORICAL_UNMERGED_GATEWAY_CURRENT_BRAIN",
-      "DO_NOT_USE_PUBLIC_600_AS_PRIVATE_PROMOTION_EVIDENCE"
-    ]
-  }
+  ]
 }
