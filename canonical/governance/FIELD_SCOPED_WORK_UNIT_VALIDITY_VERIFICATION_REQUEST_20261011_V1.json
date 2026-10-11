@@ -1,27 +1,37 @@
 {
   "schema": "PROJECT_BRAIN_FIELD_SCOPED_WORK_UNIT_VALIDITY_VERIFICATION_REQUEST_20261011_V1",
   "date": "2026-10-11",
-  "status": "FROZEN_PENDING_INDEPENDENT_VERIFICATION__ZERO_CREDIT",
-  "objective": "Independently verify the exact field-scoped zero-reality semantic-validity guard before any activation in the atomic transaction or scheduler trust boundary.",
+  "status": "SUPERSEDED__ACTIVE_V4_EXECUTABLE_FIELD_SCOPED_ZERO_REALITY_REUSE_ALREADY_INDEPENDENTLY_VERIFIED_61_OF_61__DO_NOT_EXECUTE",
+  "objective": "Historical frozen verification request retained only for provenance. Do not execute: canonical V4 already provides a stronger executable field-scoped zero-reality verification-reuse gate with exact independent Sprite verification.",
   "source_main_commit_at_freeze": "dac3a084700ccd0e07709fc8643f9d8a046fc08c",
   "exact_subjects": [
-    {"path": "canonical/runtime/field_scoped_work_unit_validity_guard_v1.py", "git_blob_sha": "7afcc06a8071c5af9b6ac93e4ecceb8210e01d53", "role": "SUBJECT_RUNTIME"},
-    {"path": "canonical/tests/test_field_scoped_work_unit_validity_guard_v1.py", "git_blob_sha": "fab007fce6caa12a85955fcb836349769d1a98a1", "role": "SUBJECT_TESTS"},
-    {"path": "canonical/governance/FIELD_SCOPED_WORK_UNIT_DEPENDENCY_CLOSURE_CERTIFICATE_SCHEMA_V1.json", "git_blob_sha": "74d8e6d010fd2f830365cc99dfadd2b9f4b6cd08", "role": "SUBJECT_CONTRACT"},
-    {"path": "canonical/runtime/field_scoped_authority_projection_gate_v1.py", "git_blob_sha": "770174d3f70e18d35dfe18449c613df0259c6dd2", "role": "LOAD_BEARING_DEPENDENCY"},
-    {"path": "canonical/runtime/authority_epoch_guard_v1.py", "git_blob_sha": "9f7f06db978a9670e01b080de37b50dc04873361", "role": "LOAD_BEARING_DEPENDENCY"}
+    {
+      "path": "canonical/runtime/field_scoped_work_unit_validity_guard_v1.py",
+      "git_blob_sha": "7afcc06a8071c5af9b6ac93e4ecceb8210e01d53",
+      "role": "SUBJECT_RUNTIME"
+    },
+    {
+      "path": "canonical/tests/test_field_scoped_work_unit_validity_guard_v1.py",
+      "git_blob_sha": "fab007fce6caa12a85955fcb836349769d1a98a1",
+      "role": "SUBJECT_TESTS"
+    },
+    {
+      "path": "canonical/governance/FIELD_SCOPED_WORK_UNIT_DEPENDENCY_CLOSURE_CERTIFICATE_SCHEMA_V1.json",
+      "git_blob_sha": "74d8e6d010fd2f830365cc99dfadd2b9f4b6cd08",
+      "role": "SUBJECT_CONTRACT"
+    },
+    {
+      "path": "canonical/runtime/field_scoped_authority_projection_gate_v1.py",
+      "git_blob_sha": "770174d3f70e18d35dfe18449c613df0259c6dd2",
+      "role": "LOAD_BEARING_DEPENDENCY"
+    },
+    {
+      "path": "canonical/runtime/authority_epoch_guard_v1.py",
+      "git_blob_sha": "9f7f06db978a9670e01b080de37b50dc04873361",
+      "role": "LOAD_BEARING_DEPENDENCY"
+    }
   ],
-  "required_execution": [
-    "PYTHON_COMPILE_SUBJECT_RUNTIME_AND_TESTS",
-    "RUN_CANONICAL_TEST_MODULE_test_field_scoped_work_unit_validity_guard_v1",
-    "VERIFY_EXACT_GIT_BLOB_BINDINGS_BEFORE_EXECUTION",
-    "VERIFY_UNRELATED_SAME_FILE_CHURN_PRESERVES_SEMANTIC_REUSE",
-    "VERIFY_DECLARED_FIELD_DRIFT_INVALIDATES",
-    "VERIFY_STATIC_DEPENDENCY_DRIFT_INVALIDATES",
-    "VERIFY_WORK_PRODUCT_DRIFT_INVALIDATES",
-    "VERIFY_UNVERIFIED_OR_TAMPERED_CERTIFICATE_FAILS_CLOSED",
-    "VERIFY_FRESH_REALITY_EXECUTION_PROMOTION_AND_TERMINAL_AUTHORITY_REMAIN_FALSE"
-  ],
+  "required_execution": [],
   "required_receipt": {
     "location": "canonical/verification/",
     "independent_or_objective": true,
@@ -37,17 +47,13 @@
     "sprites_or_other_external_compute": "FORBIDDEN_UNLESS_INCREMENTAL_SPEND_USD_ZERO_IS_POSITIVELY_ESTABLISHED_BEFORE_EXECUTION",
     "user_laptop": "DO_NOT_USE"
   },
-  "activation_rule": "DO_NOT_ADD_FIELD_SCOPED_GUARD_TO_ATOMIC_TRANSACTION_OR_SCHEDULER_REUSE_AUTHORITY_UNTIL_EXACT_SUBJECT_BYTES_RECEIVE_A_VALID_INDEPENDENT_OR_OBJECTIVE_RECEIPT",
-  "wake_conditions": [
-    "PRIVATE_BRAIN_GITHUB_ACTIONS_RUNNER_ASSIGNED_AND_AT_LEAST_ONE_REAL_STEP_EXECUTES",
-    "AUTHORIZED_PRIVATE_EXTERNAL_CARRIER_WITH_PROVED_ZERO_INCREMENTAL_SPEND",
-    "VALID_OBJECTIVE_VERIFICATION_ROUTE_BINDING_THE_EXACT_PRIVATE_SOURCE_BYTES_WITHOUT_SELF_CERTIFICATION"
-  ],
+  "activation_rule": "FORBIDDEN__REQUEST_SUPERSEDED_BY_ACTIVE_V4__DO_NOT_ADD_HISTORICAL_SIBLING_GUARD_TO_SCHEDULER_OR_ATOMIC_REUSE_AUTHORITY",
+  "wake_conditions": [],
   "hard_nonclaims": [
-    "NO_INDEPENDENT_VERIFICATION_EXISTS_YET_FOR_THE_EXACT_NEW_GUARD",
-    "NO_FIELD_SCOPED_VERIFICATION_REUSE_AUTHORITY",
-    "NO_EXECUTION_PROMOTION_ACCEPTANCE_CAPABILITY_OWNERSHIP_FRESH_REALITY_OR_TERMINAL_AUTHORITY",
-    "NO_PUBLICATION_AUTHORITY_FOR_PRIVATE_BRAIN_SOURCE"
+    "HISTORICAL_REQUEST_ONLY__NOT_CURRENT_WORK",
+    "NO_FURTHER_VERIFICATION_SHOULD_BE_SCHEDULED_FOR_THE_SUPERSEDED_SIBLING_GUARD",
+    "ACTIVE_V4_GRANTS_ONLY_ZERO_REALITY_VERIFICATION_REUSE_UNDER_ITS_EXACT_BINDING_CONDITIONS",
+    "NO_EXECUTION_PROMOTION_ACCEPTANCE_CAPABILITY_OWNERSHIP_FRESH_REALITY_OR_TERMINAL_AUTHORITY_FROM_THIS_HISTORICAL_REQUEST"
   ],
   "accounting": {
     "incremental_spend_usd": 0,
@@ -59,5 +65,30 @@
   "execution_authority": false,
   "promotion_authority": false,
   "fresh_reality_authority": false,
-  "terminal_authority": false
+  "terminal_authority": false,
+  "supersession": {
+    "state": "SUPERSEDED_REDUNDANT_NOT_LOAD_BEARING",
+    "active_policy_path": "canonical/governance/TWO_CLOCK_SEMANTIC_VALIDITY_AND_SCHEDULER_AUTHORITY_20261011_V4.json",
+    "active_policy_git_blob_sha": "f08fd90474aa38f89db171c70e10a6d47e6d7ec5",
+    "active_runtime_path": "canonical/runtime/field_scoped_zero_reality_reuse_gate_v1.py",
+    "active_runtime_git_blob_sha": "e13cfd0549189c79f5be5fb2a20973cf79fb76cb",
+    "independent_verification_path": "canonical/verification/FIELD_SCOPED_ZERO_REALITY_REUSE_GATE_INDEPENDENT_VERIFY_20261011_V1.json",
+    "independent_verification_git_blob_sha": "f8baad527497dcbeaa3165b62d40494375239909",
+    "independent_result": "61_OF_61_PASS",
+    "incremental_spend_usd": 0,
+    "current_scheduler_path": "canonical/governance/CURRENT_DEVELOPMENT_SCHEDULER.json",
+    "scheduler_binds_v4": true,
+    "action": "DO_NOT_VERIFY_THE_HISTORICAL_SIBLING_GUARD__REUSE_ACTIVE_V4"
+  },
+  "historical_required_execution": [
+    "PYTHON_COMPILE_SUBJECT_RUNTIME_AND_TESTS",
+    "RUN_CANONICAL_TEST_MODULE_test_field_scoped_work_unit_validity_guard_v1",
+    "VERIFY_EXACT_GIT_BLOB_BINDINGS_BEFORE_EXECUTION",
+    "VERIFY_UNRELATED_SAME_FILE_CHURN_PRESERVES_SEMANTIC_REUSE",
+    "VERIFY_DECLARED_FIELD_DRIFT_INVALIDATES",
+    "VERIFY_STATIC_DEPENDENCY_DRIFT_INVALIDATES",
+    "VERIFY_WORK_PRODUCT_DRIFT_INVALIDATES",
+    "VERIFY_UNVERIFIED_OR_TAMPERED_CERTIFICATE_FAILS_CLOSED",
+    "VERIFY_FRESH_REALITY_EXECUTION_PROMOTION_AND_TERMINAL_AUTHORITY_REMAIN_FALSE"
+  ]
 }

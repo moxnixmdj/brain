@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_OPUS46_METADATA_PROBE_PRESTART_BLOCK_20261011_V1",
+  "date": "2026-10-11",
+  "status": "NOT_EXECUTED__GITHUB_HOSTED_JOB_FAILED_BEFORE_FIRST_STEP__ZERO_MODEL_CALLS__ZERO_SPEND__ZERO_CREDIT",
+  "objective": "Observe whether existing private Brain Anthropic/OpenRouter credentials expose Claude Opus 4.6 using metadata-only endpoints.",
+  "workflow": {
+    "path": ".github/workflows/hle-opus46-metadata-capacity-probe.yml",
+    "trigger_commit": "b35e37e1c82e4a70a60b6b42ac238518e601c9b4",
+    "pull_request": 4423,
+    "run_id": 38129324305,
+    "job_id": 114440170185,
+    "run_status": "completed",
+    "run_conclusion": "failure",
+    "job_status": "completed",
+    "job_conclusion": "failure",
+    "observed_steps": [],
+    "job_log_fetch": "NO_LOG_BLOB__GITHUB_RETURNED_BLOB_NOT_FOUND"
+  },
+  "probe_contract_if_executed": {
+    "model_inference_requests": 0,
+    "purchases_or_topups": 0,
+    "metadata_endpoints_only": [
+      "ANTHROPIC_GET_/v1/models_IF_SECRET_PRESENT",
+      "OPENROUTER_GET_/api/v1/models_IF_SECRET_PRESENT",
+      "OPENROUTER_GET_/api/v1/credits_IF_SECRET_PRESENT"
+    ]
+  },
+  "proved": [
+    "THE_FRESH_OPUS46_METADATA_PROBE_DID_NOT_EXECUTE_ANY_WORKFLOW_STEP",
+    "THE_FAILURE_IS_NOT_EVIDENCE_THAT_OPUS46_MODEL_ACCESS_IS_ABSENT",
+    "NO_MODEL_INFERENCE_REQUEST_WAS_SENT_BY_THIS_RUN",
+    "NO_BENCHMARK_CASE_WAS_READ_OR_CONSUMED_BY_THIS_RUN"
+  ],
+  "preserved_historical_evidence": {
+    "path": "canonical/verification/OPUS55_ZERO_SPEND_PRIVATE_BRAIN_CAPACITY_MODE.json",
+    "status": "BOTH_OPENROUTER_PREEXISTING_CREDIT_AND_ANTHROPIC_MODEL_ACCESS",
+    "scope_limit": "HISTORICAL_CLASSIFIER_WAS_EXPLICITLY_OPUS55_SCOPED__DO_NOT_PROJECT_TO_OPUS46_WITHOUT_FRESH_RECEIPT"
+  },
+  "remaining_question": "DO_EXISTING_PRIVATE_BRAIN_CREDENTIALS_CURRENTLY_EXPOSE_CLAUDE_OPUS_4_6",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "model_inference_requests": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

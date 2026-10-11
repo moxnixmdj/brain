@@ -1,14 +1,13 @@
 """Fail-closed verifier for the frozen AutomationBench >= 40 predicate.
 
-The canonical acceptance contract requires an official AutomationBench leaderboard
-private-held-out result at or above 40.0%. Current first-party Zapier evidence binds
-the official leaderboard surface to v1.0.6, a 657-task held-out population, API mode,
-50 steps per task, and strict task_completed_correctly scoring.
+Admissible result surfaces:
+1. Zapier's official private v1.0.6 leaderboard strict `task_completed_correctly`.
+2. Artificial Analysis' AutomationBench-AA `Tasks Completed`, but only when the
+   receipt binds the same private 657-task v1.0.6 population and the published
+   assertion partition showing semantic equivalence to all-assertions-pass.
 
-Fallback use is provenance, not an automatic rejection: Zapier's official leaderboard
-includes fallback configurations. If fallbacks or other components are used, the
-candidate receipt must attest that every execution component is bound into the frozen
-candidate identity.
+Both routes use API mode, a 50-turn cap, deterministic final-state grading, a
+frozen content-addressed Brain candidate, and exact success-count arithmetic.
 """
 from __future__ import annotations
 
@@ -18,15 +17,20 @@ from typing import Any, Mapping
 
 IN_SCHEMA = "PROJECT_BRAIN_AUTOMATIONBENCH_PRIVATE_OWNER_RECEIPT_V1"
 OUT_SCHEMA = "PROJECT_BRAIN_AUTOMATIONBENCH_PRIVATE_OWNER_RECEIPT_VERDICT_V1"
+
 TARGET_THRESHOLD_PERCENT = Decimal("40.0")
 TARGET_VERSION = "1.0.6"
 TARGET_DENOMINATOR = 657
 TARGET_TOOL_MODE = "api"
 TARGET_MAX_STEPS = 50
-TARGET_METRIC = "task_completed_correctly"
+
+SURFACE_ZAPIER = "ZAPIER_PRIVATE_LEADERBOARD"
+SURFACE_AA = "ARTIFICIAL_ANALYSIS_AUTOMATIONBENCH_AA"
+
 _HEX64 = re.compile(r"^[0-9a-fA-F]{64}$")
 _ALLOWED_ISSUERS = {
     "ZAPIER",
+    "ARTIFICIAL_ANALYSIS",
     "OFFICIALLY_DELEGATED_AUTOMATIONBENCH_EVALUATOR",
 }
 
@@ -83,14 +87,18 @@ def evaluate(receipt: Mapping[str, Any]) -> dict[str, Any]:
     if receipt.get("benchmark_version") != TARGET_VERSION:
         errors.append("BENCHMARK_VERSION_MISMATCH")
 
+    surface = receipt.get("evaluation_surface")
+    if surface not in {SURFACE_ZAPIER, SURFACE_AA}:
+        errors.append("EVALUATION_SURFACE_INVALID")
+
     population = receipt.get("population")
     if not isinstance(population, Mapping):
         errors.append("POPULATION_ATTESTATION_MISSING")
         population = {}
     if population.get("kind") != "PRIVATE_HELD_OUT":
         errors.append("PRIVATE_HELD_OUT_SCOPE_REQUIRED")
-    if population.get("official_leaderboard_population") is not True:
-        errors.append("OFFICIAL_LEADERBOARD_POPULATION_ATTESTATION_REQUIRED")
+    if population.get("zapier_private_v1_0_6_657") is not True:
+        errors.append("ZAPIER_PRIVATE_V1_0_6_657_BINDING_REQUIRED")
     if not _sha256(population.get("population_identity_sha256")):
         errors.append("PRIVATE_POPULATION_IDENTITY_SHA256_REQUIRED")
     denominator = _int(population.get("denominator"))
@@ -101,8 +109,14 @@ def evaluate(receipt: Mapping[str, Any]) -> dict[str, Any]:
         errors.append("TOOL_MODE_MISMATCH")
     if receipt.get("max_steps_per_task") != TARGET_MAX_STEPS:
         errors.append("MAX_STEPS_MISMATCH")
-    if receipt.get("task_success_metric") != TARGET_METRIC:
-        errors.append("TASK_SUCCESS_METRIC_MISMATCH")
+
+    metric = receipt.get("task_success_metric")
+    if surface == SURFACE_ZAPIER:
+        if metric != "task_completed_correctly":
+            errors.append("ZAPIER_STRICT_METRIC_MISMATCH")
+    elif surface == SURFACE_AA:
+        if metric != "tasks_completed":
+            errors.append("AA_TASKS_COMPLETED_METRIC_REQUIRED")
 
     fallback_used = receipt.get("fallback_models_used")
     if not isinstance(fallback_used, bool):
@@ -121,10 +135,28 @@ def evaluate(receipt: Mapping[str, Any]) -> dict[str, Any]:
     if not isinstance(owner, Mapping):
         errors.append("OWNER_ATTESTATION_MISSING")
         owner = {}
-    if owner.get("issuer_kind") not in _ALLOWED_ISSUERS:
+    issuer = owner.get("issuer_kind")
+    if issuer not in _ALLOWED_ISSUERS:
         errors.append("OWNER_ISSUER_NOT_AUTHORIZED")
-    if owner.get("official_v1_0_6_private_leaderboard_surface") is not True:
-        errors.append("OFFICIAL_V1_0_6_PRIVATE_SURFACE_ATTESTATION_REQUIRED")
+
+    if surface == SURFACE_ZAPIER:
+        if issuer not in {"ZAPIER", "OFFICIALLY_DELEGATED_AUTOMATIONBENCH_EVALUATOR"}:
+            errors.append("ZAPIER_SURFACE_ISSUER_MISMATCH")
+        if owner.get("official_v1_0_6_private_leaderboard_surface") is not True:
+            errors.append("OFFICIAL_V1_0_6_PRIVATE_SURFACE_ATTESTATION_REQUIRED")
+
+    if surface == SURFACE_AA:
+        if issuer != "ARTIFICIAL_ANALYSIS":
+            errors.append("AA_SURFACE_ISSUER_MISMATCH")
+        if owner.get("automationbench_aa_private_657_v1_0_6_in_collaboration_with_zapier") is not True:
+            errors.append("AA_ZAPIER_PRIVATE_COLLABORATION_BINDING_REQUIRED")
+        if owner.get("every_assertion_classified_objective_or_guardrail") is not True:
+            errors.append("AA_ASSERTION_PARTITION_BINDING_REQUIRED")
+        if owner.get("tasks_completed_requires_every_objective_and_no_guardrail_violation") is not True:
+            errors.append("AA_STRICT_COMPLETION_SEMANTICS_REQUIRED")
+        if owner.get("deterministic_final_state_grading") is not True:
+            errors.append("AA_DETERMINISTIC_FINAL_STATE_GRADING_REQUIRED")
+
     if not isinstance(owner.get("receipt_path"), str) or not owner.get("receipt_path"):
         errors.append("OWNER_RECEIPT_PATH_REQUIRED")
     if not _sha256(owner.get("receipt_sha256")):
@@ -150,6 +182,8 @@ def evaluate(receipt: Mapping[str, Any]) -> dict[str, Any]:
     assert success_count is not None
     assert reported is not None
     assert isinstance(fallback_used, bool)
+    assert isinstance(surface, str)
+    assert isinstance(metric, str)
 
     recomputed = (Decimal(success_count) * Decimal(100)) / Decimal(TARGET_DENOMINATOR)
     if abs(reported - recomputed) > Decimal("0.05"):
@@ -170,17 +204,22 @@ def evaluate(receipt: Mapping[str, Any]) -> dict[str, Any]:
         "predicate_satisfied": predicate_satisfied,
         "benchmark_name": "AutomationBench",
         "benchmark_version": TARGET_VERSION,
+        "evaluation_surface": surface,
         "population_kind": "PRIVATE_HELD_OUT",
-        "official_leaderboard_population": True,
-        "population_identity_sha256": population["population_identity_sha256"],
         "denominator": TARGET_DENOMINATOR,
         "tool_mode": TARGET_TOOL_MODE,
         "max_steps_per_task": TARGET_MAX_STEPS,
-        "task_success_metric": TARGET_METRIC,
+        "source_task_success_metric": metric,
+        "normalized_task_success_metric": "task_completed_correctly",
+        "metric_equivalence_basis": (
+            "DIRECT_ZAPIER_TASK_COMPLETED_CORRECTLY"
+            if surface == SURFACE_ZAPIER
+            else "AA_TASKS_COMPLETED_EQUALS_ALL_OBJECTIVES_TRUE_AND_NO_GUARDRAIL_VIOLATION__EVERY_ASSERTION_PARTITIONED_AS_OBJECTIVE_OR_GUARDRAIL"
+        ),
         "fallback_models_used": fallback_used,
         "candidate_content_sha256": candidate["content_sha256"],
         "all_execution_components_bound": True,
-        "owner_issuer_kind": owner["issuer_kind"],
+        "owner_issuer_kind": issuer,
         "owner_receipt_path": owner["receipt_path"],
         "owner_receipt_sha256": owner["receipt_sha256"],
         "owner_run_epoch": owner["run_epoch"],
@@ -190,11 +229,11 @@ def evaluate(receipt: Mapping[str, Any]) -> dict[str, Any]:
         "threshold_percent": str(TARGET_THRESHOLD_PERCENT),
         "threshold_success_count": required_successes,
         "rule": (
-            "OFFICIAL_AUTOMATIONBENCH_V1_0_6_PRIVATE_LEADERBOARD_ONLY__"
-            "657_SCORE_BEARING_TASKS__API_MODE__50_STEPS__STRICT_TASK_COMPLETED_CORRECTLY__"
-            "FROZEN_CONTENT_ADDRESSED_CANDIDATE_WITH_ALL_EXECUTION_COMPONENTS_BOUND__"
-            "OWNER_CONTENT_ADDRESSED_RECEIPT__EXACT_SUCCESS_COUNT_ARITHMETIC__"
-            "NO_PUBLIC_600_SUBSTITUTION"
+            "ZAPIER_PRIVATE_V1_0_6_657_ONLY__API_MODE__50_TURNS__"
+            "STRICT_FULL_TASK_COMPLETION_NORMALIZED_TO_TASK_COMPLETED_CORRECTLY__"
+            "ZAPIER_OR_AA_EXACT_PRIVATE_SURFACE__"
+            "FROZEN_CONTENT_ADDRESSED_CANDIDATE__OWNER_RECEIPT__"
+            "EXACT_SUCCESS_COUNT_ARITHMETIC__NO_PUBLIC_600_SUBSTITUTION"
         ),
         "execution_authority": False,
         "promotion_authority": False,

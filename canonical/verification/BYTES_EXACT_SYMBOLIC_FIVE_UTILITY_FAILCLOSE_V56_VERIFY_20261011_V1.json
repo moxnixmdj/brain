@@ -1,0 +1,81 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_FIVE_UTILITY_FAILCLOSE_V56_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__EXACT_V55_TO_V56_TRANSFORM__SPENT_NEXT61_15870_OF_15870__FRESH_NEXT62_16100_OF_16100__ARCHIVE_IDENTITY_278_OF_278__NEXT63_DURABLY_FROZEN_UNSPENT__ZERO_CREDIT",
+  "subject": {
+    "producer_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_FIVE_UTILITY_FAILCLOSE_V56_SUCCESSOR_EXECUTION_20261011_V1.json",
+    "producer_evidence_git_blob_sha": "2a1c35141bfd6ce796d505dcbc6933c04fa303a0",
+    "transform": "canonical/research/bytes/tools/conservative_mpmath_five_utility_failclose_prune_v56.py",
+    "transform_git_blob_sha": "500210997f6db21803f36f51bab382b0db986876",
+    "predecessor_manifest_sha256": "a401c2d9595af738a360f9df69da3162c4663e1624917e3d5d6a2b6bcd2ba3ef",
+    "candidate_manifest_sha256": "589f1dea175b4e541634ca6bcf252db889507da4a9fd318acb5d684fa297221c",
+    "candidate_raw_python_source_bytes": 1714166
+  },
+  "replay": {
+    "transform_application": {
+      "result": "PASS",
+      "saved_raw_python_bytes": 583,
+      "candidate_manifest_sha256": "589f1dea175b4e541634ca6bcf252db889507da4a9fd318acb5d684fa297221c"
+    },
+    "spent_NEXT61": {
+      "passed": 15870,
+      "total": 15870,
+      "failures": 0,
+      "corpus_sha256": "dd5fbbf9c9aced49b1280d31202af14c4797b21baf3b35b7c0e61decc8157df6"
+    },
+    "fresh_NEXT62": {
+      "passed": 16100,
+      "total": 16100,
+      "failures": 0,
+      "corpus_sha256": "7714d5ed1852f9099f2fd160f9cb6f0a43718c66426bc0a9d0dfafb4742d767f"
+    },
+    "archive_identity": {
+      "durable_files": 278,
+      "byte_identical_files": 278,
+      "archive_bytes": 267172,
+      "archive_sha256": "2c44504ed62931836755335f08fe97e69faaa348748b5f74ebe263c208342567",
+      "library_file_id": "libfile_fc355c4537ec819192b925b066b78ed0"
+    },
+    "next63_frozen_definition": {
+      "cases": 16330,
+      "seed": 2176592650,
+      "per_operation_budget": 1420,
+      "sha256": "6efce0ec04745f39dac6fef3060587f9f92a3edf86ff35fd137fe8e8803ff11e",
+      "library_file_id": "libfile_ebd09ea53ca0819191fdaee6ab10c268",
+      "spent": false,
+      "durable_persistence": true
+    }
+  },
+  "falsification": {
+    "rejected_donor_cuts": [
+      "from_float__IMPORT_TIME_LOAD_BEARING",
+      "to_float__IMPORT_TIME_LOAD_BEARING",
+      "mpf_rdiv_int__ROOTS_COUNTEREXAMPLE",
+      "mpf_hypot__ROOTS_COUNTEREXAMPLE",
+      "mpf_perturb_WHOLE_BODY__RARE_ROOTS_COUNTEREXAMPLE__SUPERSEDED_BY_V55_BRANCH_SPECIALIZATION"
+    ],
+    "accepted_nonoverlapping_cut_count": 5
+  },
+  "proved": [
+    "THE_V55_TO_V56_TRANSFORM_IS_EXACTLY_BASE_AND_TARGET_MANIFEST_GUARDED",
+    "THE_FIVE_TRANSPLANTED_FUNCTION_BODY_CUTS_DO_NOT_OVERWRITE_CANONICAL_V55_MPF_PERTURB_SPECIALIZATION",
+    "THE_EXACT_V56_CANDIDATE_PASSES_COMPLETE_SPENT_NEXT61",
+    "THE_PREVIOUSLY_FROZEN_NEXT62_CORPUS_PASSES_EXACT_V56_COMPLETELY",
+    "THE_SEALED_V56_ARCHIVE_IS_278_OF_278_BYTE_IDENTICAL_TO_THE_VERIFIED_CANDIDATE",
+    "NEXT63_ID_SEED_CASE_COUNT_CONTENT_SHA256_AND_LIBRARY_ARTIFACT_ARE_FROZEN_UNSPENT"
+  ],
+  "truth_boundary": [
+    "BOUNDED_EXACT_SYMBOLIC_ROUTE_ONLY",
+    "NO_UNIVERSAL_MPMATH_EQUIVALENCE",
+    "NO_EXTERNAL_ORGANIZATIONALLY_INDEPENDENT_SECOND_CARRIER_CLAIM",
+    "NEXT63_MUST_REMAIN_UNSPENT_UNTIL_A_NEW_PHYSICAL_CUT_EXISTS",
+    "NO_CAPABILITY_ACCEPTANCE_PROFESSIONAL_QUALITY_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "promotion_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
