@@ -1,5 +1,5 @@
 {
-  "schema": "PROJECT_BRAIN_AUTOMATIONBENCH_PRIVATE_RECEIPT_CLOSURE_CONTRACT_20261011_V4",
+  "schema": "PROJECT_BRAIN_AUTOMATIONBENCH_PRIVATE_RECEIPT_CLOSURE_CONTRACT_20261011_V5",
   "date": "2026-10-11",
   "status": "CANDIDATE__TWO_EXACT_PRIVATE_OWNER_ROUTES_BOUND__ZAPIER_OR_ARTIFICIAL_ANALYSIS_RESULT_ONLY_REMAINS__ZERO_CREDIT",
   "target_predicate": "AUTOMATIONBENCH_GE_40",
@@ -96,11 +96,11 @@
     "generic_tool_effect_planner_path": "canonical/runtime/generic_goal_tool_effect_planner_v1.py",
     "automationbench_stirrup_adapter_exists": true,
     "automationbench_stirrup_adapter_path": "canonical/runtime/automationbench_stirrup_client_v1.py",
-    "current_candidate_capability_status": "DEVELOPMENT__GENERIC_GOAL_TOOL_EFFECT_PLANNING__GENERIC_SCHEMA_ARGUMENT_BINDING__FRESH_REOBSERVATION__INDEPENDENT_OBSERVE_UPDATE_CREATE_VERIFICATION_BOUND__ASSOCIATE_DELETE_NOTIFY_VERIFICATION_AND_FULL_GENERALIZATION_REMAIN_OPEN",
+    "current_candidate_capability_status": "DEVELOPMENT__GENERIC_PLAN_BIND_EXECUTE_RECEIPT_FRESH_REOBSERVE_VERIFY_LOOP_BOUND__RECEIPT_BOUND_VERIFIER_V2_HAS_CONSERVATIVE_PREDICATES_FOR_OBSERVE_UPDATE_CREATE_ASSOCIATE_DELETE_NOTIFY__FRESH_READ_COVERAGE_AND_FULL_ARGUMENT_SYNTHESIS_REMAIN_INCOMPLETE",
     "generic_argument_binder_exists": true,
     "generic_argument_binder_path": "canonical/runtime/generic_tool_argument_binder_v1.py",
     "generic_independent_state_verifier_exists": true,
-    "generic_independent_state_verifier_path": "canonical/runtime/generic_goal_state_verifier_v1.py",
+    "generic_independent_state_verifier_path": "canonical/runtime/generic_goal_state_verifier_v2.py",
     "generic_closed_loop_test_path": "canonical/tests/test_generic_workflow_closed_loop_v1.py"
   },
   "route_adjudication": {
@@ -122,7 +122,10 @@
     "generic_schema_argument_binding_bound": true,
     "generic_fresh_reobservation_bound": true,
     "generic_independent_state_verification_bound": true,
-    "private_predicate_still_open": true
+    "private_predicate_still_open": true,
+    "generic_receipt_bound_verifier_v2_bound": true,
+    "all_six_generic_action_classes_have_conservative_verification_predicates": true,
+    "full_scope_generalization_proved": false
   },
   "accounting": {
     "incremental_spend_usd": 0,
@@ -143,7 +146,9 @@
     "NO_CLAIM_GENERIC_TOOL_EFFECT_PLANNER_IS_YET_SCOPE_COMPLETE_FOR_AUTOMATIONBENCH",
     "NO_CAPABILITY_OR_OWNERSHIP_CREDIT_FOR_APP_OR_TASK_SPECIFIC_MUTATION_BINDERS",
     "NO_CLAIM_GENERIC_ASSOCIATE_DELETE_OR_NOTIFY_STATE_VERIFICATION_IS_COMPLETE",
-    "NO_CLAIM_FOCUSED_MIRROR_REPLAY_IS_AN_EXACT_FULL_REPOSITORY_TEST_RUN"
+    "NO_CLAIM_FOCUSED_MIRROR_REPLAY_IS_AN_EXACT_FULL_REPOSITORY_TEST_RUN",
+    "NO_CLAIM_ALL_SIX_GENERIC_VERIFICATION_PREDICATES_ARE_REACHABLE_ON_EVERY_TOOL_SURFACE",
+    "NO_CLAIM_GENERIC_ARGUMENT_SYNTHESIS_IS_SCOPE_COMPLETE_FOR_COMPLEX_DYNAMIC_CONTENT"
   ],
   "now_impossibility_certificate": {
     "status": "PROVED_FOR_CURRENT_INFORMATION_AND_CONSTRAINT_SET__EXACT_TARGET_REMAINS_OPEN",
@@ -221,15 +226,25 @@
       "FAIL_CLOSED_OR_COMPLETE"
     ],
     "current_general_verifier_scope": [
-      "OBSERVE",
-      "UPDATE_EXACT_NORMALIZED_VALUE",
-      "CREATE_EXACT_NORMALIZED_NAME"
+      "OBSERVE_RELEVANT_FRESH_STATE",
+      "UPDATE_EXACT_VALUE_ON_ACTED_TARGET_WHEN_TARGET_ID_GROUNDED",
+      "CREATE_EXACT_NAME_AS_PRE_POST_DELTA",
+      "ASSOCIATE_GROUNDED_RELATION_AS_PRE_POST_DELTA",
+      "DELETE_EXACT_TARGET_WITH_MATCHED_FRESH_GET_AND_NOT_FOUND_PROOF",
+      "NOTIFY_FRESH_GROUNDED_RECIPIENT_CONTENT_ARTIFACT_AS_PRE_POST_DELTA"
     ],
-    "current_general_verifier_open_classes": [
-      "ASSOCIATE",
-      "DELETE",
-      "NOTIFY"
+    "current_general_verifier_open_classes": [],
+    "ambiguity_policy": "TIED_TOP_MUTATION_ROUTES_AND_TIED_TOP_ENTITY_IDS_FAIL_CLOSED",
+    "current_general_open_mechanism_gaps": [
+      "FRESH_VERIFICATION_READ_SELECTION_MAY_NOT_EXPOSE_ENOUGH_POST_STATE_FOR_EVERY_TOOL_SURFACE",
+      "GENERIC_NOTIFY_AND_OTHER_COMPLEX_CONTENT_ARGUMENT_SYNTHESIS_IS_NOT_SCOPE_COMPLETE",
+      "GENERIC_PLANNER_AND_BINDER_HAVE_NOT_YET_BEEN_PROVED_SCOPE_COMPLETE_OVER_THE_FULL_PRIVATE_ELIGIBLE_TASK_LANGUAGE"
     ],
-    "ambiguity_policy": "TIED_TOP_MUTATION_ROUTES_AND_TIED_TOP_ENTITY_IDS_FAIL_CLOSED"
+    "provenance_upgrade": {
+      "execution_receipt": "ACTION_CLASS__CAPABILITY_ID__ENDPOINT_ID__GROUNDED_BINDINGS__CONCRETE_ARGUMENTS",
+      "verification_receipt": "GET_ENDPOINT_ID__GROUNDED_BINDINGS__CONCRETE_ARGUMENTS",
+      "evaluator_transport": "STIRRUP_METADATA_PRESERVES_PROJECT_BRAIN_RECEIPTS",
+      "pre_action_boundary": "PRE_GENERIC_ACTION_API_FETCH_EVIDENCE_IS_SEPARATED_FROM_MUTATION_AND_VERIFICATION_RESULTS"
+    }
   }
 }
