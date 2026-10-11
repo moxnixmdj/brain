@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_V21_STATE_RECONSTRUCTION_V17_INDEPENDENT_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__V17_GENERIC_STATE_RECONSTRUCTION__59_OF_59_ACCUMULATED_SYNTHETIC_TESTS__8_FRESH_ADVERSARIAL_CASES__ZERO_BENCHMARK_CASES__ZERO_SCORE_CREDIT",
+  "target_reference": "OSWORLD_2_1_PARTIAL_GE_81_8",
+  "subject_id": "brain-osworld-v21-model-independent-state-reconstruction-v17",
+  "branch": "osworld-capability-first-v16-20261011",
+  "independent_carrier": {
+    "type": "SPRITE",
+    "name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "working_tree": "/tmp/osworld-v14-closure",
+    "incremental_spend_usd": 0
+  },
+  "exact_blobs": {
+    "canonical/runtime/osworld_v21_recovery_policy_v2.py": "8cdff0bb8ae5132716c234a80d628ddf93cb0b59",
+    "canonical/runtime/osworld_v21_unified_policy_v17.py": "e3317bc9820da8de84b86dbce08306816d9c00d9",
+    "canonical/runtime/osworld_v21_workflow_policy_v12.py": "e0e43c9e0308ab6c2603c77efd89916d072d0c6b",
+    "canonical/runtime/osworld_v21_brain_subject_v17.py": "6436d2804e50eb1824caf22f52a51fba471c3f6f",
+    "canonical/tests/test_osworld_v21_state_reconstruction_v17.py": "6c80b6332b87dd36a19236ee90813c8cc114c88b"
+  },
+  "replay": {
+    "command": "PYTHONPATH=. python3 -m pytest -q canonical/tests",
+    "python_compile_pass": true,
+    "passed": 59,
+    "failed": 0,
+    "warnings": 18,
+    "elapsed_seconds": 1.59,
+    "predecessor_tests_preserved": 51,
+    "fresh_adversarial_tests": 8,
+    "benchmark_cases_consumed": 0
+  },
+  "newly_proved": [
+    "FAILED_BROWSER_OPERATION_WITHOUT_SAFE_DIALOG_CONTROL_REOBSERVES_LIVE_BROWSER_STATE",
+    "REPEATED_BROWSER_RECONSTRUCTION_FAILURE_ON_SAME_STATE_IS_SUPPRESSED",
+    "VISIBLE_UNMODELED_MODAL_WITHOUT_SAFE_BUTTON_GETS_ONE_REVERSIBLE_ESCAPE",
+    "REPEATED_MODAL_ESCAPE_ON_SAME_STATE_IS_SUPPRESSED",
+    "NONBROWSER_ERROR_WITHOUT_GROUNDED_RECOVERY_REMAINS_FAIL_CLOSED",
+    "EXPLICIT_SAFE_RECOVERY_BUTTON_DOMINATES_GENERIC_RECONSTRUCTION",
+    "STATE_RECONSTRUCTION_PREEMPTS_NORMAL_GOAL_ACTION_AFTER_FAILURE",
+    "NO_RECOVERY_TRIGGER_PRESERVES_THE_PREDECESSOR_STACK"
+  ],
+  "hard_nonclaims": [
+    "NO_OFFICIAL_OSWORLD_TASK_EXECUTED",
+    "NO_BRAIN_OSWORLD_SCORE",
+    "NO_CLAIM_59_SYNTHETIC_TESTS_IMPLIES_81_8",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

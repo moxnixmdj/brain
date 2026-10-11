@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_V21_CAPABILITY_FIRST_EXECUTION_LOCK_20261011_V6",
+  "date": "2026-10-11",
+  "status": "ACTIVE_CAPABILITY_FIRST_LOCK_V6__V8_RELATIONAL_DATAFLOW_INDEPENDENTLY_VERIFIED__FORMULA_GENERATION_AND_VERIFICATION_NEXT__ZERO_SCORE_CREDIT",
+  "supersedes": "canonical/governance/OSWORLD_V21_CAPABILITY_FIRST_EXECUTION_LOCK_20261011_V5.json",
+  "target_reference": "OSWORLD_2_1_PARTIAL_GE_81_8",
+  "primary_objective": "MAXIMIZE_GENERAL_RELIABLE_COMPUTER_USE_CAPABILITY_PER_RESOURCE__OSWORLD_IS_FINAL_MEASUREMENT_ONLY",
+  "credited_subject": {
+    "id": "brain-osworld-v21-model-independent-relational-workflow-v8",
+    "runtime": "canonical/runtime/osworld_v21_brain_subject_v8.py",
+    "policy": "canonical/runtime/osworld_v21_workflow_policy_v5.py",
+    "dataflow": "canonical/runtime/osworld_v21_receipt_dataflow_v3.py",
+    "general_purpose_model_runtime_cognition": false
+  },
+  "verification": {
+    "evidence": "canonical/verification/OSWORLD_V21_RELATIONAL_WORKFLOW_V8_INDEPENDENT_VERIFY_20261011_V1.json",
+    "verified_head": "7914749a772395f1674798a10e6c208eea59043d",
+    "passed": 166,
+    "failed": 0,
+    "benchmark_cases_consumed": 0,
+    "incremental_spend_usd": 0
+  },
+  "newly_closed": [
+    "BOUNDED_RECEIPTED_COLLECTION_COUNTS",
+    "FIRST_LAST_ALL_SCALAR_PROJECTIONS",
+    "EXPLICIT_EQUALITY_FILTERED_RECORD_SELECTION",
+    "AMBIGUITY_AND_SENSITIVE_RELATIONAL_DATA_FAIL_CLOSED"
+  ],
+  "ranked_next": [
+    "FORMULA_GENERATION_AND_READ_BACK_VERIFICATION",
+    "CODE_WORKSPACE_EDIT_EXECUTE_VERIFY",
+    "MEDIA_GEOMETRY_AND_TIMELINE_TRANSFORMATIONS",
+    "LONG_WORKFLOW_CONSTRAINT_PRESERVATION",
+    "IRREDUCIBLE_VISUAL_ONLY_GROUNDING_AND_RECOVERY"
+  ],
+  "development_rule": "BUILD_GENERAL_MECHANISMS__VERIFY_ON_FRESH_SYNTHETIC_NEIGHBORS__KEEP_OSWORLD_AS_FINAL_MEASUREMENT_ONLY",
+  "score_state": {
+    "authentic_brain_score_observed": false,
+    "threshold_percent": 81.8,
+    "score_claim_allowed": false
+  },
+  "hard_nonclaims": [
+    "NO_OFFICIAL_OSWORLD_TASK_EXECUTED",
+    "NO_BRAIN_OSWORLD_SCORE",
+    "NO_CLAIM_166_SYNTHETIC_TESTS_IMPLY_81_8",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ]
+}

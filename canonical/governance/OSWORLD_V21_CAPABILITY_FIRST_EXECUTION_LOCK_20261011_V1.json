@@ -1,0 +1,128 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_V21_CAPABILITY_FIRST_EXECUTION_LOCK_20261011_V1",
+  "date": "2026-10-11",
+  "status": "ACTIVE_CAPABILITY_FIRST_LOCK__MODEL_INDEPENDENT_V3_IS_CREDITED_CANDIDATE__BENCHMARK_IS_MEASUREMENT_NOT_DEVELOPMENT_TARGET__ZERO_SCORE_CREDIT",
+  "benchmark_target_reference": "OSWORLD_2_1_PARTIAL_GE_81_8",
+  "primary_objective": "MAXIMIZE_GENERAL_RELIABLE_COMPUTER_USE_CAPABILITY_PER_RESOURCE__OSWORLD_IS_A_FINAL_MEASUREMENT_SURFACE",
+  "supersedes_for_scheduling": [
+    "BENCHMARK_FIRST_TASK_BY_TASK_OSWORLD_PATCHING",
+    "QWEN_OR_OTHER_GENERAL_PURPOSE_MODEL_AS_CREDITED_OSWORLD_RUNTIME_COGNITION",
+    "PUBLIC_REFERENCE_TRAJECTORY_OR_TASK_ID_DRIVEN_POLICY DEVELOPMENT",
+    "PRIVATE_OR_PUBLIC_BENCHMARK_ACCESS_AS_THE_PRIMARY_CAPABILITY_ROADMAP"
+  ],
+  "credited_subject": {
+    "id": "brain-osworld-v21-model-independent-state-app-web-v3",
+    "builder": "canonical/runtime/osworld_v21_brain_subject_v3.py",
+    "adapter": "canonical/runtime/osworld_v21_brain_agent_adapter_v3.py",
+    "policy": "canonical/runtime/osworld_v21_web_app_policy_overlay_v1.py",
+    "planner_runtime_general_purpose_model_dependency": false,
+    "external_generation_provider": false
+  },
+  "capability_loop": [
+    "UNDERSTAND_DECLARED_GOAL_AND_LOAD_BEARING_CONSTRAINTS",
+    "OBSERVE_CURRENT_STATE",
+    "CHOOSE_CHEAPEST_SOUND_STATE_TRANSFORMATION",
+    "EXECUTE_THROUGH_TYPED_BRAIN_OWNED_OPERATION",
+    "OBSERVE_POST_STATE",
+    "VERIFY_PROGRESS_OR_GOAL_POSTCONDITION",
+    "RECOVER_FROM_MISMATCH_WITH_FRESH_STATE",
+    "REPEAT_UNTIL_VERIFIED_DONE_OR_FAIL_CLOSED"
+  ],
+  "action_priority": [
+    "PRODUCT_NATIVE_WEB_APP_STATE_AND_OPERATION",
+    "BROWSER_CDP_SEMANTIC_OPERATION",
+    "APPLICATION_NATIVE_TYPED_OPERATION",
+    "DECLARATIVE_GUEST_STATE_OPERATION",
+    "ACCESSIBILITY_OR_POSITIONED_OCR_GROUNDING",
+    "TYPED_GUI_OPERATION",
+    "VISION_ONLY_GUI_FALLBACK_LAST"
+  ],
+  "development_law": {
+    "allowed": [
+      "SYNTHETIC_NON_BENCHMARK_TASKS",
+      "ADVERSARIAL_NEIGHBORING_TASKS",
+      "GENERAL_FAILURE_CLASS_DIAGNOSIS",
+      "GENERAL_MECHANISM_REPAIRS",
+      "PUBLIC_OSWORLD_SEMANTICS_AS_NON_RUNTIME_COVERAGE_AUDIT_ONLY"
+    ],
+    "forbidden": [
+      "TASK_ID_BRANCHING",
+      "REFERENCE_TRAJECTORY_REPLAY",
+      "HIDDEN_EXPECTED_ANSWER_INPUT",
+      "EVALUATOR_OR_TASK_SOURCE_INPUT_TO_POLICY",
+      "OUTCOME_DRIVEN_PATCHES TO FAILED BENCHMARK INSTANCES",
+      "EXTERNAL_GENERAL_PURPOSE_MODEL_LOAD_BEARING_FOR_CREDITED_RUNTIME_COGNITION"
+    ],
+    "promotion_rule": "A_REPAIR_IS_ADMISSIBLE_ONLY_IF_IT_IMPROVES_A_GENERAL_CAPABILITY_CLASS_AND_PASSES_FRESH_NEIGHBORING_OR_ADVERSARIAL_SYNTHETIC_CASES"
+  },
+  "current_verified_substrate": {
+    "typed_computer_surface": {
+      "runtime": "canonical/runtime/osworld_computer_surface_v1.py",
+      "independent_sprite_replay_20261011": "10_OF_10_PASS"
+    },
+    "positioned_text_grounding": {
+      "runtime": "canonical/runtime/text_ui_grounding_v1.py",
+      "independent_sprite_replay_20261011": "14_OF_14_PASS"
+    },
+    "prior_model_independent_stack": {
+      "evidence": "canonical/verification/OSWORLD_V21_MODEL_INDEPENDENT_STACK_INDEPENDENT_VERIFY_20261011_V4.json",
+      "result": "80_OF_80_SYNTHETIC_PASS",
+      "warning": "RECEIPT_BINDS_EARLIER_HEAD_0c688c43689e0841643669ce51f11abf6e1bc172__CURRENT_HEAD_REQUIRES_FRESH_REPLAY"
+    },
+    "current_public_instruction_static_audit": {
+      "tasks": 108,
+      "first_operation_routeable": 58,
+      "unresolved": 50,
+      "hard_boundary": "STATIC_ROUTEABILITY_IS_NOT_TASK_SUCCESS_AND_MUST_NOT_DRIVE_TASK_SPECIFIC_PATCHING"
+    }
+  },
+  "current_general_capability_residuals_ranked": [
+    {
+      "rank": 1,
+      "residual": "MULTI_STEP_GOAL_DECOMPOSITION_AND_POSTCONDITION_VERIFICATION_ACROSS_EXISTING_OPERATION_FAMILIES",
+      "reason": "TOOLS_EXIST_BUT_COMPLEX_CROSS_APP_AND_MULTI_CONSTRAINT_GOALS_REQUIRE_COMPOSITION"
+    },
+    {
+      "rank": 2,
+      "residual": "DOCUMENT_LAYOUT_SPREADSHEET_PRESENTATION_STATE_TRANSFORMATION",
+      "reason": "HIGH_REUSE_ACROSS_WPS_LIBREOFFICE_EXCEL_STYLE_WORK"
+    },
+    {
+      "rank": 3,
+      "residual": "CODE_WORKSPACE_REPOSITORY_EXECUTE_VERIFY_LOOP",
+      "reason": "GENERAL_FILE_EDIT_TEST_RUN_GIT_WORKFLOWS_RECUR_ACROSS_TASKS"
+    },
+    {
+      "rank": 4,
+      "residual": "IMAGE_VIDEO_AUDIO_TRANSFORMATION_WITH_GEOMETRIC_AND_TIMELINE_POSTCONDITIONS",
+      "reason": "GENERAL_MEDIA_CAPABILITY_FAMILY_NOT_ONE_BENCHMARK_APP"
+    },
+    {
+      "rank": 5,
+      "residual": "IRREDUCIBLE_VISUAL_ONLY_GROUNDING_AND_RECOVERY",
+      "reason": "USE_ONLY_WHEN_STATE_API_DOM_A11Y_OCR_AND_APP_NATIVE_ROUTES_CANNOT_IDENTIFY_ACTION"
+    }
+  ],
+  "immediate_execution_order": [
+    "INDEPENDENTLY_REPLAY_CURRENT_V3_DEPENDENCY_CONE",
+    "ADD_V3_SUBJECT_IDENTITY_AND_NO_EXTERNAL_COGNITION_TESTS",
+    "BUILD_FRESH_SYNTHETIC_MULTI_STEP_CROSS_TOOL_QUALIFICATION",
+    "REPAIR_ONLY_GENERAL_FAILURE_CLASSES",
+    "FREEZE_OPERATIVE_SUBJECT_AFTER_SYNTHETIC_GENERALIZATION_MARGIN",
+    "USE_OSWORLD_MATCHED_RUN_ONLY_AS_FINAL_MEASUREMENT"
+  ],
+  "hard_nonclaims": [
+    "NO_BRAIN_OSWORLD_SCORE",
+    "NO_CLAIM_STATIC_ROUTEABILITY_EQUALS_SUCCESS",
+    "NO_CLAIM_SYNTHETIC_PASS_RATE_IMPLIES_81_8",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false
+}

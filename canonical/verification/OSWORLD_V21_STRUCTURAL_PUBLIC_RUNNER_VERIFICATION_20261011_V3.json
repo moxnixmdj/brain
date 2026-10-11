@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_V21_STRUCTURAL_PUBLIC_RUNNER_VERIFICATION_20261011_V3",
+  "date": "2026-10-11",
+  "status": "PASS__35_OF_35_EXACT_OSWORLD_STRUCTURAL_TESTS__CURRENT_OCR_SAFE_ADAPTER_PLUS_RECEIPT_BINDING__PUBLIC_RUNNER__ZERO_BENCHMARK_CASES__ZERO_CREDIT",
+  "target_predicate": "OSWORLD_2_1_PARTIAL_GE_81_8",
+  "supersedes_for_current_blobs": "canonical/verification/OSWORLD_V21_STRUCTURAL_PUBLIC_RUNNER_VERIFICATION_20261011_V2.json",
+  "verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "osworld-v21-structural-verify-v1",
+    "workflow": ".github/workflows/osworld-v21-structural-verify-v1.yml",
+    "workflow_run_id": 38135866105,
+    "workflow_job_id": 114459474060,
+    "verifier_head_sha": "4f42506a218b07164702e2c7dc2af7e0433b70b2",
+    "result": "35 passed in 0.17s"
+  },
+  "exact_current_blobs": {
+    "canonical/runtime/osworld_v21_state_ops_v1.py": "0cba0ee052746e41988a666a2948c4e842e0a259",
+    "canonical/runtime/osworld_v21_host_browser_ops_v1.py": "bfaf6f36b5bbd739ceff34ddb71ed9c603dc4240",
+    "canonical/runtime/osworld_v21_host_guest_ops_v1.py": "f002bbb5aadc302c9bff644c59c85485fb3bb668",
+    "canonical/runtime/osworld_v21_brain_agent_adapter_v1.py": "1a203aa33ec89a172dab58804549258495308d52",
+    "canonical/runtime/osworld_v21_runner_bridge_v1.py": "e876439e8969de01e06c575ac1b60cce9d635838",
+    "canonical/runtime/osworld_v21_runner_binding_v1.py": "ec497c17cd33796a4d89dfb459a275359b954eaa",
+    "canonical/tests/test_osworld_v21_brain_agent_adapter_v1.py": "b924779c1e6888c0ff5b629336451580359dbd50",
+    "canonical/tests/test_osworld_v21_runner_binding_v1.py": "dc5b64af71f7faa62d408f1b387ba840d99660c8"
+  },
+  "newly_verified_delta": [
+    "THIN_UPSTREAM_RUNNER_HOOK_BINDS_AGENT_ENVIRONMENT_BEFORE_NATIVE_RUN_SINGLE_EXAMPLE",
+    "THIN_UPSTREAM_RUNNER_HOOK_BINDS_NATIVE_RESULT_DIRECTORY_BEFORE_DELEGATION",
+    "BRAIN_ACTION_RECEIPTS_CAN_BE_PERSISTED_WITHOUT_REPLACING_TASK_SETUP_STEPPING_EVALUATOR_SCORING_OR_AGGREGATION"
+  ],
+  "hard_nonclaims": [
+    "NO_OSWORLD_BENCHMARK_TASK_EXECUTED",
+    "NO_BRAIN_OSWORLD_SCORE",
+    "NO_POLICY_QUALITY_GE_81_8_CLAIM",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_osworld_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

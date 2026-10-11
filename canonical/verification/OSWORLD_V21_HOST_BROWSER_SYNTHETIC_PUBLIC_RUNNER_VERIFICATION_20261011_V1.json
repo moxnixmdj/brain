@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_V21_HOST_BROWSER_SYNTHETIC_PUBLIC_RUNNER_VERIFICATION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__EXACT_OPERATIVE_HOST_BROWSER_CDP_MODULE__SYNTHETIC_LIVE_CHROME__ZERO_BENCHMARK_CASES__ZERO_CREDIT",
+  "target_predicate": "OSWORLD_2_1_PARTIAL_GE_81_8",
+  "subject": {
+    "path": "canonical/runtime/osworld_v21_host_browser_ops_v1.py",
+    "git_blob_sha": "bfaf6f36b5bbd739ceff34ddb71ed9c603dc4240"
+  },
+  "verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "osw-host-browser-smoke-v1",
+    "head_sha": "79b19660139bfb0458a458c6c3f9f1ddb7519111",
+    "workflow": ".github/workflows/osw-host-browser-smoke-v1.yml",
+    "workflow_run_id": 38135120900,
+    "workflow_job_id": 114457305331,
+    "artifact_id": 11700652396,
+    "artifact_digest": "sha256:032d33f4cd7c3e73385e0f487441f7b38e5795b8d3efbc62913521a8a9eb1a57"
+  },
+  "observed": {
+    "live_chrome_cdp_connection": true,
+    "operations": [
+      "NAVIGATE",
+      "OBSERVE",
+      "FILL_PLACEHOLDER",
+      "CLICK_TEXT",
+      "OBSERVE"
+    ],
+    "post_fill_state_observed": true,
+    "post_click_state_observed": true,
+    "arbitrary_javascript_surface": false,
+    "benchmark_task_data_used": false,
+    "terminal_cases_consumed": 0
+  },
+  "proved": [
+    "EXACT_OPERATIVE_BROWSER_MODULE_CONNECTS_TO_LIVE_CDP",
+    "GENERIC_BROWSER_OBSERVATION_RETURNS_VISIBLE_STATE_AND_CONTROLS",
+    "GENERIC_FORM_FILL_AND_TEXT_CLICK_MUTATE_LIVE_PAGE",
+    "POST_ACTION_STATE_CAN_BE_REOBSERVED"
+  ],
+  "hard_nonclaims": [
+    "NO_OSWORLD_BENCHMARK_TASK_EXECUTED",
+    "NO_POLICY_QUALITY_OR_SCORE_CLAIM",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

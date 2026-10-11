@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_V21_STRUCTURAL_PUBLIC_RUNNER_VERIFICATION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__31_OF_31_EXACT_OSWORLD_STRUCTURAL_TESTS__PUBLIC_RUNNER__ZERO_BENCHMARK_CASES__ZERO_CREDIT",
+  "target_predicate": "OSWORLD_2_1_PARTIAL_GE_81_8",
+  "verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "osworld-v21-structural-verify-v1",
+    "workflow": ".github/workflows/osworld-v21-structural-verify-v1.yml",
+    "workflow_run_id": 38134732370,
+    "workflow_job_id": 114456175577,
+    "verifier_head_sha": "34ea82f38ec2f1dee2bbd50e8b5f6a53fb475e19",
+    "result": "31 passed in 0.24s"
+  },
+  "exact_subject_blobs": {
+    "canonical/runtime/osworld_v21_state_ops_v1.py": "0cba0ee052746e41988a666a2948c4e842e0a259",
+    "canonical/runtime/osworld_v21_host_browser_ops_v1.py": "bfaf6f36b5bbd739ceff34ddb71ed9c603dc4240",
+    "canonical/runtime/osworld_v21_host_guest_ops_v1.py": "f002bbb5aadc302c9bff644c59c85485fb3bb668",
+    "canonical/runtime/osworld_v21_brain_agent_adapter_v1.py": "bf7513f1d7837d42f782e714f77975e59d73994f",
+    "canonical/runtime/osworld_v21_runner_bridge_v1.py": "e876439e8969de01e06c575ac1b60cce9d635838",
+    "canonical/tests/test_osworld_v21_state_ops_v1.py": "9f41191588b57bec23a35f31857fddc3d0b9c9dc",
+    "canonical/tests/test_osworld_v21_host_guest_ops_v1.py": "b520a110d90689368b117c7d9ea3ddb0b934cfbd",
+    "canonical/tests/test_osworld_v21_brain_agent_adapter_v1.py": "d06844c74304927800884a4161e177e01830b6ce",
+    "canonical/tests/test_osworld_v21_runner_bridge_v1.py": "5eb41c62c14f43235f5ad891279fe1437deeb1ca"
+  },
+  "proved": [
+    "BOUNDED_GUEST_STATE_OPERATION_COMPILATION_AND_SECURITY_GATES",
+    "STATE_OPERATION_ALIAS_NORMALIZATION_FAILS_CLOSED_ON_CONFLICTS",
+    "HOST_GUEST_EXECUTION_RECEIPTS_FAIL_CLOSED_ON_MISSING_OR_ERROR_RESULTS",
+    "BROWSER_AND_GUEST_CONTROLLERS_BIND_TO_AGENT_INTERFACE",
+    "HOST_OPERATION_FAILURES_RETURN_RECOVERABLE_WAIT_RECEIPTS",
+    "MALFORMED_HOST_OPERATIONS_DO_NOT_GAIN EXECUTION AUTHORITY",
+    "DONE_REQUIRES_OBSERVED_COMPLETION_EVIDENCE",
+    "RUNNER_BRIDGE_BINDS_RESULT_DIRECTORY_AND_NATIVE_AGENT_ENVIRONMENT"
+  ],
+  "hard_nonclaims": [
+    "NO_OSWORLD_BENCHMARK_TASK_EXECUTED",
+    "NO_BRAIN_OSWORLD_SCORE",
+    "NO_CLAIM_LOCAL_PLANNER_POLICY_QUALITY_GE_81_8",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_osworld_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

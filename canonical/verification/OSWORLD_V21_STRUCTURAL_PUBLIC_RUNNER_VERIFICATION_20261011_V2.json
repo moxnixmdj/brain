@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_V21_STRUCTURAL_PUBLIC_RUNNER_VERIFICATION_20261011_V2",
+  "date": "2026-10-11",
+  "status": "PASS__32_OF_32_EXACT_OSWORLD_STRUCTURAL_TESTS__OCR_FAIL_SOFT_REPAIR_INCLUDED__PUBLIC_RUNNER__ZERO_BENCHMARK_CASES__ZERO_CREDIT",
+  "target_predicate": "OSWORLD_2_1_PARTIAL_GE_81_8",
+  "supersedes_for_current_blobs": "canonical/verification/OSWORLD_V21_STRUCTURAL_PUBLIC_RUNNER_VERIFICATION_20261011_V1.json",
+  "verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "osworld-v21-structural-verify-v1",
+    "workflow": ".github/workflows/osworld-v21-structural-verify-v1.yml",
+    "workflow_run_id": 38135575603,
+    "workflow_job_id": 114458626300,
+    "verifier_head_sha": "6e499534ffedc361ff5e39ad7e863a2911f9ed4e",
+    "result": "32 passed in 0.12s"
+  },
+  "exact_subject_blobs": {
+    "canonical/runtime/osworld_v21_state_ops_v1.py": "0cba0ee052746e41988a666a2948c4e842e0a259",
+    "canonical/runtime/osworld_v21_host_browser_ops_v1.py": "bfaf6f36b5bbd739ceff34ddb71ed9c603dc4240",
+    "canonical/runtime/osworld_v21_host_guest_ops_v1.py": "f002bbb5aadc302c9bff644c59c85485fb3bb668",
+    "canonical/runtime/osworld_v21_brain_agent_adapter_v1.py": "1a203aa33ec89a172dab58804549258495308d52",
+    "canonical/runtime/osworld_v21_runner_bridge_v1.py": "e876439e8969de01e06c575ac1b60cce9d635838",
+    "canonical/tests/test_osworld_v21_state_ops_v1.py": "9f41191588b57bec23a35f31857fddc3d0b9c9dc",
+    "canonical/tests/test_osworld_v21_host_guest_ops_v1.py": "b520a110d90689368b117c7d9ea3ddb0b934cfbd",
+    "canonical/tests/test_osworld_v21_brain_agent_adapter_v1.py": "b924779c1e6888c0ff5b629336451580359dbd50",
+    "canonical/tests/test_osworld_v21_runner_bridge_v1.py": "5eb41c62c14f43235f5ad891279fe1437deeb1ca"
+  },
+  "newly_verified_delta": [
+    "AUXILIARY_POSITIONED_OCR_FAILURE_BECOMES_A_RECEIPTED_NONAUTHORITATIVE_UNAVAILABLE_OBSERVATION_INSTEAD_OF_CRASHING_THE_AGENT",
+    "EXACT_POST_REPAIR_ADAPTER_AND_TEST_BLOBS_ARE_CONTENT_ADDRESS_BOUND"
+  ],
+  "preserved_proofs": [
+    "BOUNDED_GUEST_STATE_OPERATION_COMPILATION_AND_SECURITY_GATES",
+    "HOST_GUEST_EXECUTION_RECEIPTS_FAIL_CLOSED",
+    "BROWSER_AND_GUEST_CONTROLLERS_BIND_TO_AGENT_INTERFACE",
+    "HOST_OPERATION_FAILURES_RETURN_RECOVERABLE_WAIT_RECEIPTS",
+    "DONE_REQUIRES_OBSERVED_COMPLETION_EVIDENCE",
+    "RUNNER_BRIDGE_DELEGATES_TO_NATIVE_OSWORLD_SCORING"
+  ],
+  "hard_nonclaims": [
+    "NO_OSWORLD_BENCHMARK_TASK_EXECUTED",
+    "NO_BRAIN_OSWORLD_SCORE",
+    "NO_CLAIM_LOCAL_PLANNER_POLICY_QUALITY_GE_81_8",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_osworld_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

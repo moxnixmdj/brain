@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_V21_TERMINAL_AUTHORITY_V18_INDEPENDENT_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__V18_GUI_TERMINAL_AUTHORITY_HARDENED__67_OF_67_ACCUMULATED_SYNTHETIC_TESTS__ZERO_BENCHMARK_CASES__ZERO_SCORE_CREDIT",
+  "target_reference": "OSWORLD_2_1_PARTIAL_GE_81_8",
+  "subject_id": "brain-osworld-v21-model-independent-terminal-authority-v18",
+  "branch": "osworld-capability-first-v16-20261011",
+  "independent_carrier": {
+    "type": "SPRITE",
+    "name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "working_tree": "/tmp/osworld-v14-closure",
+    "incremental_spend_usd": 0
+  },
+  "exact_blobs": {
+    "canonical/runtime/osworld_v21_brain_agent_adapter_v7.py": "b868db8a8a4a49f045052b8b96053eec3ee1542a",
+    "canonical/runtime/osworld_v21_brain_subject_v18.py": "bf45769124ef99c3f09d7738ba3fa49184df9ec0",
+    "canonical/tests/test_osworld_v21_terminal_authority_v18.py": "fcb02bbc7e7285e180ba3b9af7b260d189b7dfc1"
+  },
+  "replay": {
+    "command": "PYTHONPATH=. python3 -m pytest -q canonical/tests",
+    "python_compile_pass": true,
+    "passed": 67,
+    "failed": 0,
+    "warnings": 18,
+    "elapsed_seconds": 1.51,
+    "predecessor_tests_preserved": 59,
+    "fresh_terminal_authority_tests": 8,
+    "benchmark_cases_consumed": 0
+  },
+  "newly_proved": [
+    "PLAIN_GUI_SCREEN_CHANGE_NO_LONGER_AUTHORIZES_DONE",
+    "EXPLICIT_CURRENT_STATE_GUI_GOAL_EVIDENCE_CAN_AUTHORIZE_DONE",
+    "APP_COMPLETION_RECEIPT_PRESERVED",
+    "WEB_APP_COMPLETION_NOW_HAS_EXPLICIT_STRUCTURED_RECEIPT",
+    "CODE_COMPLETION_RECEIPT_PRESERVED",
+    "MEDIA_COMPLETION_RECEIPT_PRESERVED",
+    "GUEST_ASSERTION_COMPLETION_PRESERVED",
+    "BROWSER_OBSERVATION_COMPLETION_PRESERVED"
+  ],
+  "next_general_residual": "DETERMINISTIC_CURRENT_STATE_GUI_GOAL_VERIFICATION_FOR_HIGH_CONFIDENCE_PREDICATES",
+  "hard_nonclaims": [
+    "NO_OFFICIAL_OSWORLD_TASK_EXECUTED",
+    "NO_BRAIN_OSWORLD_SCORE",
+    "NO_CLAIM_67_SYNTHETIC_TESTS_IMPLIES_81_8",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

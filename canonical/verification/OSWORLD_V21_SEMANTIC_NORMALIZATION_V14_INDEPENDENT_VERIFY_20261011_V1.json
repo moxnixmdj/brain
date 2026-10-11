@@ -1,0 +1,97 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_V21_SEMANTIC_NORMALIZATION_V14_INDEPENDENT_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__V14_SEMANTIC_NORMALIZATION_AND_GROUNDED_FIRST_POLICY_DELTA_INDEPENDENTLY_VERIFIED__18_OF_18_CURRENT_POLICY_TESTS__V13_PREDECESSOR_203_OF_203__ZERO_BENCHMARK_CASES__ZERO_SCORE_CREDIT",
+  "target_reference": "OSWORLD_2_1_PARTIAL_GE_81_8",
+  "subject": {
+    "branch": "osworld-v21-direct-matched-run-20261011-v1",
+    "subject_id": "brain-osworld-v21-model-independent-semantic-normalization-v14",
+    "predecessor_subject_id": "brain-osworld-v21-model-independent-visual-fallback-v13",
+    "predecessor_evidence": "canonical/verification/OSWORLD_V21_VISUAL_FALLBACK_V13_INDEPENDENT_VERIFY_20261011_V1.json",
+    "general_purpose_model_runtime_cognition": false,
+    "task_specific_policy_data": false
+  },
+  "independent_carrier": {
+    "type": "SPRITE",
+    "name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "working_tree": "/tmp/osworld-v14-closure",
+    "reconstruction": "MINIMUM_IMPORT_DRIVEN_CONTENT_ADDRESSED_POLICY_CLOSURE_FROM_CONNECTED_PRIVATE_GITHUB_SOURCE",
+    "incremental_spend_usd": 0
+  },
+  "exact_changed_blobs": {
+    "canonical/runtime/osworld_v21_semantic_normalizer_v1.py": "34aad3e04c87f757edfb0c20faeeaf8e027c016b",
+    "canonical/runtime/osworld_v21_unified_policy_v14.py": "816fe92849707e9adabc5ca69b048980014255d8",
+    "canonical/runtime/osworld_v21_workflow_policy_v9.py": "cecd89227dfbec92c5ed3bc6c5f75db8c2fb48db",
+    "canonical/runtime/osworld_v21_brain_subject_v14.py": "08a0d0e317facd5d2b43aa34274f3e9de45ad187",
+    "canonical/tests/test_osworld_v21_semantic_normalization_v14.py": "59efc17707096964405e3e4756f2f35585bee4b7"
+  },
+  "replay": {
+    "diagnostic_attempts": [
+      {
+        "carrier": "brain-live-runtime-v1-verify-20261008",
+        "result": "208 passed, 1 failed",
+        "failure": "FILL_IN_EMAIL_PARAPHRASE_WAS_PREEMPTED_BY_SPECULATIVE_WEB_MAIL_OBSERVATION",
+        "causal_repair": "DIRECT_UNIQUELY_GROUNDED_OBSERVABLE_UI_ACTIONS_NOW_OUTRANK_SPECULATIVE_PRODUCT_DISCOVERY",
+        "promotion_credit": false
+      },
+      {
+        "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+        "result": "COLLECTION_ERROR",
+        "failure": "LITERAL_BACKSLASH_N_IMPORT_SEPARATOR_IN_DERIVED_WORKFLOW_V9",
+        "causal_repair": "FIXED_SOURCE_GENERATION_IMPORT_SEPARATOR",
+        "promotion_credit": false
+      }
+    ],
+    "final": {
+      "dependencies": {
+        "pytest": "9.1.1",
+        "Pillow": "12.3.0"
+      },
+      "command": "PYTHONPATH=. python3 -m pytest -q canonical/tests/test_osworld_v21_semantic_normalization_v14.py canonical/tests/test_osworld_v21_generic_policy_v1.py",
+      "passed": 18,
+      "failed": 0,
+      "elapsed_seconds": 0.17,
+      "warnings": 1,
+      "benchmark_cases_consumed": 0,
+      "changed_blob_hashes_match_github": true
+    }
+  },
+  "newly_proved": [
+    "BOUNDED_ORDINARY_ACTION_PARAPHRASES_NORMALIZE_TO_EXISTING_VERIFIED_OPERATIONS",
+    "QUOTED_USER_DATA_IS_PRESERVED_WHILE_CONTROL_LANGUAGE_NORMALIZES",
+    "DIRECT_UNIQUELY_GROUNDED_OBSERVABLE_UI_ACTIONS_OUTRANK_SPECULATIVE_PRODUCT_DISCOVERY",
+    "PARAPHRASED_BROWSER_NAVIGATION_REUSES_EXISTING_NAVIGATION_MECHANISM",
+    "PARAPHRASED_GROUNDED_BUTTON_ACTIVATION_REUSES_EXISTING_A11Y_CLICK_MECHANISM",
+    "PARAPHRASED_FIELD_FILL_REUSES_EXISTING_GROUNDED_FILL_MECHANISM",
+    "PARAPHRASED_VISUAL_CLICK_REUSES_VERIFIED_V13_VISUAL_FALLBACK",
+    "V14_DELTA_REMAINS_MODEL_INDEPENDENT_AND_TASK_ID_FREE"
+  ],
+  "preserved_by_predecessor_chain": [
+    "V13_DETERMINISTIC_VISUAL_FALLBACK_203_OF_203",
+    "V12_INVARIANT_WORKFLOW_196_OF_196",
+    "V11_MEDIA_189_OF_189",
+    "V10_CODE_181_OF_181",
+    "V9_FORMULA_173_OF_173",
+    "V8_RELATIONAL_166_OF_166"
+  ],
+  "remaining_general_residuals": [
+    "SEMANTIC_NORMALIZATION_IS_BOUNDED_NOT_OPEN_ENDED_LANGUAGE_UNDERSTANDING",
+    "VISUAL_TARGETS_BEYOND_EXPLICIT_COLOR_GEOMETRY_SPATIAL_DESCRIPTIONS",
+    "GENERIC_RECOVERY_FROM_UNMODELED_DIALOGS_OR_STATE_MISMATCHES",
+    "AUTHENTIC_FINAL_OSWORLD_MEASUREMENT_ONLY_AFTER_CAPABILITY_MARGIN"
+  ],
+  "hard_nonclaims": [
+    "NO_OFFICIAL_OSWORLD_TASK_EXECUTED",
+    "NO_BRAIN_OSWORLD_SCORE",
+    "NO_CLAIM_18_DELTA_TESTS_PLUS_PREDECESSOR_RECEIPTS_IMPLY_81_8",
+    "NO_CLAIM_ALL_PARAPHRASES_ARE_SUPPORTED",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

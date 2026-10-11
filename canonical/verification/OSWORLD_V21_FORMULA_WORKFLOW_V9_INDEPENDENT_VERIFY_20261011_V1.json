@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_V21_FORMULA_WORKFLOW_V9_INDEPENDENT_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__MODEL_INDEPENDENT_V9_VERIFIED_SPREADSHEET_FORMULA_WORKFLOW__173_OF_173_SYNTHETIC_TESTS__ZERO_BENCHMARK_CASES__ZERO_SCORE_CREDIT",
+  "target_reference": "OSWORLD_2_1_PARTIAL_GE_81_8",
+  "subject": {
+    "branch": "osworld-v21-direct-matched-run-20261011-v1",
+    "verified_head_sha": "acc7272f0f0e0628400bc1dcee8fa9da886e0413",
+    "subject_id": "brain-osworld-v21-model-independent-verified-formula-workflow-v9",
+    "general_purpose_model_runtime_cognition": false,
+    "external_generation_provider": false
+  },
+  "independent_carrier": {
+    "type": "SPRITE",
+    "name": "brain-live-runtime-v1-verify-20261008",
+    "id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13",
+    "working_tree": "/home/sprite/osworld-v4-current-head-verify/osworld-v3-combined-verify",
+    "incremental_spend_usd": 0
+  },
+  "replay": {
+    "command": "PYTHONPATH=. python3 -m pytest -q canonical/tests --ignore=canonical/tests/test_osworld_v21_browser_ops_v1.py",
+    "passed": 173,
+    "failed": 0,
+    "elapsed_seconds": 1.91,
+    "benchmark_cases_consumed": 0
+  },
+  "exact_load_bearing_blobs": {
+    "canonical/runtime/osworld_v21_app_ops_registry_v1.json": "ba35ed9b0a10e04e47836a667ed70a4be400f3eb",
+    "canonical/runtime/osworld_v21_host_app_ops_v1.py": "0165f8b75736d77fc53ab3bb19d1d94390a24083",
+    "canonical/runtime/osworld_v21_app_policy_overlay_v5.py": "34b7217c1da3f0e6f022c1233250b59de575debe",
+    "canonical/runtime/osworld_v21_web_app_policy_overlay_v1.py": "cf4c03ee60eae7fb6b7828e9419ac68374e27228",
+    "canonical/runtime/osworld_v21_brain_subject_v9.py": "a54970c9f94917ec74f49552898d970e583641dd",
+    "canonical/tests/test_osworld_v21_formula_workflow_v1.py": "264eb23db0ec0fc0781bc32db144a9c045ab0951"
+  },
+  "newly_proved": [
+    "EXPLICIT_FORMULA_TEXT_IS_WRITTEN_AS_DATA_THROUGH_A_FIXED HOST PROGRAM",
+    "FORMULA_WRITE_IS_ACCEPTED_ONLY_AFTER_IMMEDIATE CELL_FORMULA_READBACK_EQUALITY",
+    "SUPPORTED_SUM_AVERAGE_MIN_MAX_COUNT_RANGE TEMPLATES_COMPILE_DETERMINISTICALLY",
+    "UNSUPPORTED_FORMULA_SEMANTICS_FAIL_CLOSED",
+    "FORMULA_OPERATIONS_COMPOSE_WITH_POSTCONDITION_GATED_MULTI_STEP_WORKFLOWS"
+  ],
+  "hard_nonclaims": [
+    "NO_OFFICIAL_OSWORLD_TASK_EXECUTED",
+    "NO_BRAIN_OSWORLD_SCORE",
+    "NO_CLAIM_173_SYNTHETIC_TESTS_IMPLY_81_8",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ]
+}

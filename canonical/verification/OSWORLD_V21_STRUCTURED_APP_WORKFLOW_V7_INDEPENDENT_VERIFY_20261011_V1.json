@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_V21_STRUCTURED_APP_WORKFLOW_V7_INDEPENDENT_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__MODEL_INDEPENDENT_V7_STRUCTURED_NATIVE_APP_OBSERVATION_AND_ADVANCED_SPREADSHEET_WORKFLOW__159_OF_159_SYNTHETIC_TESTS__ZERO_BENCHMARK_CASES__ZERO_SCORE_CREDIT",
+  "target_reference": "OSWORLD_2_1_PARTIAL_GE_81_8",
+  "subject": {
+    "branch": "osworld-v21-direct-matched-run-20261011-v1",
+    "verified_head_sha": "aa0f857bdee8a05781e2f07c5d5d1f8753fcd2f4",
+    "subject_id": "brain-osworld-v21-model-independent-structured-app-workflow-v7",
+    "general_purpose_model_runtime_cognition": false,
+    "external_generation_provider": false
+  },
+  "independent_carrier": {
+    "type": "SPRITE",
+    "name": "brain-live-runtime-v1-verify-20261008",
+    "id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13",
+    "working_tree": "/home/sprite/osworld-v4-current-head-verify/osworld-v3-combined-verify",
+    "incremental_spend_usd": 0
+  },
+  "replay": {
+    "command": "PYTHONPATH=. python3 -m pytest -q canonical/tests --ignore=canonical/tests/test_osworld_v21_browser_ops_v1.py",
+    "passed": 159,
+    "failed": 0,
+    "elapsed_seconds": 0.55,
+    "benchmark_cases_consumed": 0
+  },
+  "exact_load_bearing_blobs": {
+    "canonical/runtime/osworld_v21_host_app_ops_v1.py": "bd7ca2db25ecae549d00741e2567bee89317ec76",
+    "canonical/runtime/osworld_v21_app_ops_registry_v1.json": "6a8c9a8aab5cf710eb80f63fb1736e5f077ba539",
+    "canonical/runtime/osworld_v21_app_policy_overlay_v4.py": "5ba89236fdcf91078b490d1beefa94e18103b948",
+    "canonical/runtime/osworld_v21_web_app_policy_overlay_v1.py": "94d76122b6251f12d961893276b86ff597c079e3",
+    "canonical/runtime/osworld_v21_brain_subject_v7.py": "63a5fef08035580588c3a9a82a0c43bbe50772b3",
+    "canonical/tests/test_osworld_v21_app_policy_overlay_v4.py": "bf90409255dbb8c629e639c2a749512d5f9103f0",
+    "canonical/tests/test_osworld_v21_structured_app_dataflow_v1.py": "47e7c4b791a5b486bd5180dd8155f367aaa9d577"
+  },
+  "newly_proved": [
+    "NATIVE_APP_RESULTS_ARE_PRESERVED_AS_BOUNDED_STRUCTURED_RECEIPTS",
+    "CALC_WORKBOOK_AND_COLUMN_OBSERVATION_ROUTES",
+    "CALC_CHART_PIVOT_VALIDATION_COLUMN_VALUE_AND_REORDER_ROUTES",
+    "IMPRESS_SLIDE_COUNT_OBSERVATION_ROUTE",
+    "STRUCTURED_NATIVE_APP_FACT_CAN_FLOW_WITH_PROVENANCE_INTO_A_LATER_VERIFIED_FILE_ACTION",
+    "PRIOR_BROWSER_FILE_OFFICE_DATAFLOW_AND_WORKFLOW_SYNTHETIC_CAPABILITIES_REMAIN_GREEN"
+  ],
+  "remaining_general_residuals": [
+    "NONSCALAR_RELATIONAL_AND_AGGREGATE_DATAFLOW_OVER_LISTS_TABLES_AND_RECORDS",
+    "FORMULA_GENERATION_AND_VERIFICATION",
+    "CODE_WORKSPACE_REPOSITORY_EDIT_EXECUTE_VERIFY",
+    "MEDIA_GEOMETRY_AND_TIMELINE_TRANSFORMATION",
+    "IRREDUCIBLE_VISUAL_ONLY_GROUNDING_AND_RECOVERY",
+    "AUTHENTIC_OSWORLD_MEASUREMENT_ONLY_AFTER_CAPABILITY_MARGIN"
+  ],
+  "hard_nonclaims": [
+    "NO_OFFICIAL_OSWORLD_TASK_EXECUTED",
+    "NO_BRAIN_OSWORLD_SCORE",
+    "NO_CLAIM_159_SYNTHETIC_TESTS_IMPLY_81_8",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ]
+}

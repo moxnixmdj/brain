@@ -1,0 +1,83 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_V21_VISUAL_FALLBACK_V13_INDEPENDENT_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__MODEL_INDEPENDENT_V13_DETERMINISTIC_VISUAL_FALLBACK__203_OF_203_SYNTHETIC_TESTS__ZERO_BENCHMARK_CASES__ZERO_SCORE_CREDIT",
+  "target_reference": "OSWORLD_2_1_PARTIAL_GE_81_8",
+  "subject": {
+    "branch": "osworld-v21-direct-matched-run-20261011-v1",
+    "verified_head_sha": "a356089aa950a287664b574e18223e78e64374c0",
+    "subject_id": "brain-osworld-v21-model-independent-visual-fallback-v13",
+    "general_purpose_model_runtime_cognition": false,
+    "external_generation_provider": false
+  },
+  "independent_carrier": {
+    "type": "SPRITE",
+    "name": "brain-live-runtime-v1-verify-20261008",
+    "id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13",
+    "working_tree": "/home/sprite/osworld-v13-verify",
+    "base_tree": "/home/sprite/osworld-v12-verify",
+    "incremental_spend_usd": 0
+  },
+  "provenance": {
+    "candidate_files_hash_matched_before_execution": true,
+    "exact_blobs": {
+      "canonical/runtime/osworld_v21_visual_region_grounding_v1.py": "dabc1d58caa643160f55eace66e3586a7343cb08",
+      "canonical/runtime/osworld_v21_visual_policy_overlay_v1.py": "53a7770825512dc6dad19fd48c6dde5ea69bbf9e",
+      "canonical/runtime/osworld_v21_unified_policy_v13.py": "556717e7f1fcc6bce9c84dd58251aa2c4ec99309",
+      "canonical/runtime/osworld_v21_workflow_policy_v8.py": "f87add833ee8c193ac8515a53ba383e747dbf0ae",
+      "canonical/runtime/osworld_v21_brain_subject_v13.py": "d745629941cfd25c62007fe107e3b65059779542",
+      "canonical/tests/test_osworld_v21_visual_fallback_v13.py": "c7b289d3be36633e03089eda0480f0679ac0b089"
+    }
+  },
+  "replay": {
+    "first_attempt": {
+      "tests_started": false,
+      "failure_class": "VERIFIER_DEPENDENCY_MISSING",
+      "reason": "Pillow was not installed on the independent Sprite, causing ModuleNotFoundError during test collection.",
+      "candidate_code_failure": false
+    },
+    "dependency_repair": {
+      "package": "Pillow",
+      "installed_version": "12.3.0",
+      "candidate_files_changed": false,
+      "incremental_spend_usd": 0
+    },
+    "repaired_attempt": {
+      "command": "PYTHONPATH=. python3 -m pytest -q canonical/tests --ignore=canonical/tests/test_osworld_v21_browser_ops_v1.py",
+      "passed": 203,
+      "failed": 0,
+      "elapsed_seconds": 1.66,
+      "warnings": 8,
+      "warning_class": "Pillow deprecation warning for Image.getdata; no test failure",
+      "benchmark_cases_consumed": 0
+    }
+  },
+  "newly_proved": [
+    "EXPLICIT_COLOR_AND_GEOMETRY_VISUAL_REGION_GROUNDING_WITHOUT_GENERAL_PURPOSE_MODEL_RUNTIME_COGNITION",
+    "AMBIGUOUS_VISUAL_TARGETS_FAIL_CLOSED",
+    "EXPLICIT_SPATIAL_DISCRIMINATORS_RESOLVE_MULTIPLE_VISUAL_CANDIDATES",
+    "SAME_SCREENSHOT_REPEAT_SUPPRESSION_PREVENTS_VISUAL_NO_PROGRESS_LOOPS",
+    "CHANGED_SCREENSHOT_AFTER_VISUAL_CLICK_IS_BOUND_AS_TRANSITION_EVIDENCE",
+    "VISUAL_FALLBACK_COMPOSES_WITH_EXISTING_RECEIPT_GATED_STRUCTURED_WORKFLOWS",
+    "V13_OPERATIVE_VISUAL_STACK_IS_TASK_ID_FREE_AND_MODEL_INDEPENDENT"
+  ],
+  "residuals": [
+    "GENERAL_INSTRUCTION_TO_OPERATION_SEMANTIC_COVERAGE_AND_PARAPHRASE_ROBUSTNESS",
+    "VISUAL_TARGETS_OUTSIDE_EXPLICIT_COLOR_GEOMETRY_SPATIAL_LANGUAGE",
+    "RECOVERY_FROM UNMODELED_DIALOGS_OR_APPLICATION_STATE_TRANSITIONS",
+    "AUTHENTIC_FINAL_OSWORLD_MEASUREMENT_ONLY_AFTER_CAPABILITY_MARGIN"
+  ],
+  "hard_nonclaims": [
+    "NO_OFFICIAL_OSWORLD_TASK_EXECUTED",
+    "NO_BRAIN_OSWORLD_SCORE",
+    "NO_CLAIM_203_SYNTHETIC_TESTS_IMPLY_81_8",
+    "NO_CLAIM V13 COVERS ALL VISUAL COMPUTER_USE",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

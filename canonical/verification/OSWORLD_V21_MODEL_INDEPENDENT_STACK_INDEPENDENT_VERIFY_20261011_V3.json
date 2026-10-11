@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_V21_MODEL_INDEPENDENT_STACK_INDEPENDENT_VERIFY_20261011_V3",
+  "date": "2026-10-11",
+  "status": "PASS__MODEL_INDEPENDENT_CREDITED_OSWORLD_STACK__71_OF_71_SYNTHETIC_TESTS__DETERMINISTIC_BROWSER_STATE_MACHINE__ZERO_BENCHMARK_CASES__ZERO_SCORE_CREDIT",
+  "supersedes": "canonical/verification/OSWORLD_V21_MODEL_INDEPENDENT_STACK_INDEPENDENT_VERIFY_20261011_V2.json",
+  "target_predicate": "OSWORLD_2_1_PARTIAL_GE_81_8",
+  "subject": {
+    "branch": "osworld-v21-direct-matched-run-20261011-v1",
+    "head_sha": "e337714e5eec6105e228014e0d0cd4e6c5807d64",
+    "subject_id": "brain-osworld-v21-model-independent-state-first-v1",
+    "producer_cognition_general_purpose_model_dependency": false
+  },
+  "independent_carrier": {
+    "type": "SPRITE",
+    "name": "brain-live-runtime-v1-verify-20261008",
+    "id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13",
+    "incremental_spend_usd": 0
+  },
+  "verification": {
+    "tests_passed": 71,
+    "tests_failed": 0,
+    "benchmark_cases_consumed": 0,
+    "newly_verified": [
+      "URL_NAVIGATE_OBSERVE_DONE_STATE_MACHINE",
+      "SEARCH_OBSERVE_FILL_PRESS_OBSERVE_DONE_STATE_MACHINE",
+      "SEMANTIC_BROWSER_RECEIPTS_COUNT_AS_PROGRESS_INDEPENDENT_OF_PIXEL_CHANGE",
+      "UNIQUE_EXACT_OCR_AND_A11Y_GROUNDING_REMAIN_FAIL_CLOSED"
+    ]
+  },
+  "changed_runtime_sha256": {
+    "canonical/runtime/osworld_v21_generic_policy_v1.py": "a740b7c45bbcac8888b9fffbc27fe9fc9f3f7e9ac5787e6897072aaf6a29ff73"
+  },
+  "cognition_quarantine": "canonical/governance/OSWORLD_EXTERNAL_MODEL_COGNITION_QUARANTINE_20261011_V1.json",
+  "hard_nonclaims": [
+    "NO_OFFICIAL_OSWORLD_TASK_EXECUTED",
+    "NO_BRAIN_OSWORLD_SCORE",
+    "NO_CLAIM_71_SYNTHETIC_TESTS_IMPLY_81_8",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
