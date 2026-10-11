@@ -215,6 +215,27 @@ def _concept_candidates(question: str) -> list[dict[str, Any]]:
     return out
 
 
+def _metric_resolved(
+    resolved_keys: set[str],
+    *,
+    ticker: str,
+    metric_id: str,
+    question: str,
+) -> bool:
+    for candidate in _concept_candidates(question):
+        if str(candidate.get("metric_id") or "") != metric_id:
+            continue
+        key = _concept_key(
+            ticker,
+            metric_id,
+            str(candidate.get("taxonomy") or ""),
+            str(candidate.get("tag") or ""),
+        )
+        if key in resolved_keys:
+            return True
+    return False
+
+
 def _companyconcept_url(cik10: str, taxonomy: str, tag: str) -> str:
     return (
         "https://data.sec.gov/api/xbrl/companyconcept/"
@@ -285,6 +306,13 @@ def next_evidence_capability(payload: Mapping[str, Any]) -> dict[str, Any]:
             if identity is None:
                 continue
             for candidate in _concept_candidates(question):
+                if _metric_resolved(
+                    resolved,
+                    ticker=ticker,
+                    metric_id=str(candidate["metric_id"]),
+                    question=question,
+                ):
+                    continue
                 key = _concept_key(
                     ticker,
                     candidate["metric_id"],
@@ -446,6 +474,13 @@ def arguments(payload: Mapping[str, Any]) -> dict[str, Any]:
             if identity is None:
                 continue
             for candidate in _concept_candidates(question):
+                if _metric_resolved(
+                    resolved,
+                    ticker=ticker,
+                    metric_id=str(candidate["metric_id"]),
+                    question=question,
+                ):
+                    continue
                 key = _concept_key(
                     ticker,
                     candidate["metric_id"],
