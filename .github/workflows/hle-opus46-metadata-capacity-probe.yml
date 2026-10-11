@@ -213,3 +213,5 @@ jobs:
             sleep 2
           done
           exit 1
+
+# same-repo PR observability trigger 2026-10-11
