@@ -163,6 +163,26 @@ def ebitda_margin(ebitda: object, revenue: object) -> Decimal:
     return percent_of(ebitda, revenue)
 
 
+
+def ebitda_from_operating_income(
+    operating_income: object,
+    total_depreciation_and_amortization: object,
+) -> Decimal:
+    """GAAP-style EBITDA bridge used by explicit operating-income questions."""
+    return decimal(operating_income) + decimal(total_depreciation_and_amortization)
+
+
+def fixed_operating_lease_cost(
+    total_operating_lease_cost: object,
+    short_term_and_variable_lease_cost: object,
+) -> Decimal:
+    """Remove explicitly bundled short-term and variable components."""
+    fixed = decimal(total_operating_lease_cost) - decimal(short_term_and_variable_lease_cost)
+    if fixed < 0:
+        raise FinanceAlgebraError("FIXED_OPERATING_LEASE_COST_NEGATIVE")
+    return fixed
+
+
 def adjusted_ebitda(
     operating_income: object,
     depreciation_and_amortization: object,
@@ -333,10 +353,12 @@ __all__ = [
     "debt_to_total_capital",
     "decimal",
     "discount_factor",
+    "ebitda_from_operating_income",
     "ebitda_margin",
     "enterprise_value",
     "ev_to_ebitda",
     "fixed_charge_coverage_ratio",
+    "fixed_operating_lease_cost",
     "intensity",
     "market_sentiment_from_return",
     "midpoint",
