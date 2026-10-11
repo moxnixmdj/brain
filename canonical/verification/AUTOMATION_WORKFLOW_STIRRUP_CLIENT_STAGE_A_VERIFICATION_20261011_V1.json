@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_AUTOMATION_WORKFLOW_STIRRUP_CLIENT_STAGE_A_VERIFICATION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "CONTROLLER_LOCAL_BEHAVIOR_REPLAY_PASS__GITHUB_GUARD_ZERO_OBSERVABLE_STEPS__ZERO_CAPABILITY_OR_ACCEPTANCE_CREDIT",
+  "subject": {
+    "action_intent": "canonical/governance/AUTOMATIONBENCH_STIRRUP_BRAIN_CLIENT_ACTION_INTENT_20261011_V1.json",
+    "runtime": "canonical/runtime/brain_stirrup_automation_client_v1.py",
+    "runtime_git_blob_sha": "fec6b01278df37bbfe0e462595c9102c6ca3816f",
+    "tests": "canonical/tests/test_brain_stirrup_automation_client_v1.py",
+    "tests_git_blob_sha": "e06af6cea6e69c5a531a2d474fbebb6b8fc43aa9",
+    "policy_sha256": "a6d4822714f14dd56df21b998bde50885bed61f21233b3c7b74c3cb0da197325"
+  },
+  "controller_local_replay": {
+    "status": "PASS",
+    "check_count": 16,
+    "checks": [
+      "BENCHMARK_NEUTRAL_POLICY",
+      "POLICY_SHA256_WELL_FORMED",
+      "VALID_RESPONSE_IDENTITY_PRESERVED",
+      "ONE_BASE_CALL_PER_GENERATE",
+      "POLICY_INSERTED_AFTER_LEADING_SYSTEM_MESSAGES",
+      "INPUT_MESSAGE_LIST_NOT_MUTATED",
+      "BASE_DEPENDENCY_PROPERTIES_BOUND",
+      "VALID_SINGLE_TOOL_CALL_PASSES",
+      "TEXT_ONLY_RESPONSE_PASSES",
+      "UNDECLARED_TOOL_FAILS_CLOSED",
+      "INVALID_JSON_FAILS_CLOSED",
+      "NON_OBJECT_ARGUMENTS_FAIL_CLOSED",
+      "SCHEMA_INVALID_ARGUMENTS_FAIL_CLOSED",
+      "MULTIPLE_TOOL_CALLS_FAIL_CLOSED",
+      "MISSING_ASSISTANT_BLOCKS_FAILS_CLOSED",
+      "BASE_PROVIDER_FAILURE_PROPAGATES_WITHOUT_HIDDEN_RETRY"
+    ],
+    "environment": "CHATGPT_PRIVATE_PYTHON_REPLAY",
+    "independent_verifier_claimed": false
+  },
+  "github_guard": {
+    "workflow": "verify-reached-escape-no-bypass",
+    "run_id": 38130105006,
+    "job_id": 114442474638,
+    "conclusion": "failure",
+    "observable_steps": null,
+    "logs_url": null,
+    "interpretation": "CONTROL_PLANE_NON_EXECUTION__NO_CODE_LEVEL_PASS_OR_FAIL_INFERENCE"
+  },
+  "truth_boundary": {
+    "private_automationbench_tasks_read": 0,
+    "benchmark_tasks_executed": 0,
+    "private_score_observed": false,
+    "automationbench_ge_40_proved": false,
+    "stirrup_private_evaluator_acceptance_proved": false,
+    "capability_promotion_authorized": false,
+    "acceptance_promotion_authorized": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
