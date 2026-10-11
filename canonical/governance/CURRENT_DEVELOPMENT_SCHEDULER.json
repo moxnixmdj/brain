@@ -141,7 +141,17 @@
     "runtime_path": "canonical/runtime/capability_parallel_frontier_post_composition_v2.py",
     "runtime_git_blob_sha": "b8a86551545a3ecfe8ba8d6fa44d2347703aa42d",
     "focused_test_path": "canonical/tests/test_capability_parallel_frontier_post_composition_v2.py",
-    "rule": "SUPPORTED_PROFESSIONAL_ASSURANCE_BYTES_R2_CURRENT_POINTERS_ARE_REPROJECTED_ONLY_AFTER_FAMILY_INVARIANTS_PASS__UNMODELED_SOURCE_DRIFT_REMAINS_EXACT_HASH_FAIL_CLOSED"
+    "rule": "SUPPORTED_PROFESSIONAL_ASSURANCE_BYTES_R2_CURRENT_POINTERS_ARE_REPROJECTED_ONLY_AFTER_FAMILY_INVARIANTS_PASS__UNMODELED_SOURCE_DRIFT_REMAINS_EXACT_HASH_FAIL_CLOSED",
+    "field_scoped_zero_reality_reuse": {
+      "authority": "canonical/governance/TWO_CLOCK_SEMANTIC_VALIDITY_AND_SCHEDULER_AUTHORITY_20261011_V3.json",
+      "authority_git_blob_sha": "4df5e1547970cd58d235fe9ec0ece37dfb940cb4",
+      "pure_consumer_runtime": "canonical/runtime/pure_projection_consumer_guard_v1.py",
+      "pure_consumer_git_blob_sha": "9b623c5219cfe4b6037323fd5e8fc4dbd2b32907",
+      "sealed_consumer_runtime": "canonical/runtime/sealed_field_projection_consumer_v1.py",
+      "sealed_consumer_git_blob_sha": "348cc225d0a114ef73e549e368c6554272fcb598",
+      "independent_verification": "canonical/verification/SEALED_FIELD_PROJECTION_STACK_INDEPENDENT_VERIFY_20261011_V1.json",
+      "rule": "DECLARED_FIELD_CHURN_ONLY__ZERO_REALITY_SEMANTIC_REUSE__UNDECLARED_READS_STRUCTURALLY_EXCLUDED__ALL_CONSEQUENTIAL_AUTHORITY_LIVE"
+    }
   },
   "dynamic_post_composition_v2": {
     "runtime": "canonical/runtime/capability_parallel_frontier_post_composition_v2.py",
@@ -217,5 +227,18 @@
     "wake_gated_open_checkpoint_count": 12,
     "parked_checkpoint_count": 1,
     "primary_without_wake_event": "CAPABILITY_FIRST_GENERAL_DEVELOPMENT_AND_RESOURCE_PARETO_IMPROVEMENT"
+  },
+  "two_clock_semantic_validity_v3": {
+    "path": "canonical/governance/TWO_CLOCK_SEMANTIC_VALIDITY_AND_SCHEDULER_AUTHORITY_20261011_V3.json",
+    "git_blob_sha": "4df5e1547970cd58d235fe9ec0ece37dfb940cb4",
+    "status": "ACTIVE_ZERO_REALITY_SEMANTIC_REUSE_REFINEMENT__FIELD_SCOPED_ONLY_THROUGH_VERIFIED_PURE_OR_SEALED_CONSUMER__ZERO_CREDIT",
+    "rule": "ZERO_REALITY_WORK_MAY_SURVIVE_UNRELATED_AUTHORITY_FIELD_CHURN_ONLY_WHEN_EVERY_LOAD_BEARING_FIELD_IS_EXPLICITLY_PROJECTED_AND_THE_CONSUMER_CANNOT_OBSERVE_UNDECLARED_AUTHORITY__OTHERWISE_EXACT_DEPENDENCY_CURRENTNESS_REMAINS_FAIL_CLOSED",
+    "live_authority_preserved_for": [
+      "FRESH_REALITY",
+      "EXECUTION",
+      "PROMOTION",
+      "ACTIVE_AUTHORITY_MUTATION",
+      "IRREVERSIBLE_EXTERNAL_ACTION"
+    ]
   }
 }
