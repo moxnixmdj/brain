@@ -6,7 +6,7 @@
   "authority": {
     "protocols": {
       "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
-      "git_blob_sha": "eb4bca0fe6a015d49d2854998fbe046c979c7ea9"
+      "git_blob_sha": "f8b661abf7cb1b628aa14d966658394b80093879"
     },
     "compiler": "canonical/runtime/composition_interface_manifest_compiler_v1.py",
     "test": "canonical/tests/test_composition_interface_manifest_compiler_v1.py"

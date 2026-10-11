@@ -12,18 +12,16 @@ SCOPE = "finance:regulatory-capital:2026"
 TARGET = "CCOB"
 
 
-def _install_import_stubs():
+def _load_loop_with_scoped_import_stubs():
     robust = types.ModuleType(
         "canonical.runtime.p3_robust_policy_adequacy_cegar_v1"
     )
     robust.solve = lambda _problem: None
-    sys.modules[robust.__name__] = robust
 
     selection = types.ModuleType(
         "canonical.runtime.p3_source_positive_selection_cell_v1"
     )
     selection.evaluate = lambda _payload, repo_root=None: None
-    sys.modules[selection.__name__] = selection
 
     legacy = types.ModuleType(
         "canonical.runtime.selected_semantic_truth_certificate_v1"
@@ -34,13 +32,28 @@ def _install_import_stubs():
         "predicate_truth": "UNKNOWN",
         "truthful_precommitment_observation": False,
     }
-    sys.modules[legacy.__name__] = legacy
+
+    runtime_path = (
+        __import__("pathlib").Path(__file__).resolve().parents[1]
+        / "runtime"
+        / "p3_bound_relevance_cegar_loop_v1.py"
+    )
+    private_name = "_test_p3_bound_relevance_cegar_loop_v1_domain_mapping"
+    spec = importlib.util.spec_from_file_location(private_name, runtime_path)
+    assert spec is not None and spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    scoped_modules = {
+        robust.__name__: robust,
+        selection.__name__: selection,
+        legacy.__name__: legacy,
+        private_name: module,
+    }
+    with patch.dict(sys.modules, scoped_modules, clear=False):
+        spec.loader.exec_module(module)
+    return module
 
 
-_install_import_stubs()
-loop = importlib.import_module(
-    "canonical.runtime.p3_bound_relevance_cegar_loop_v1"
-)
+loop = _load_loop_with_scoped_import_stubs()
 
 
 def selected(atom):

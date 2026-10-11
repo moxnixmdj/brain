@@ -16,7 +16,7 @@ def git_blob_sha(rel):
 protocol_path = "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json"
 registry_path = "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json"
 evidence_path = "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json"
-matched_path = "canonical/governance/MATCHED_SCOPE_ABDUCTIVE_RESIDUAL_INPUT_V2.json"
+matched_path = "canonical/governance/MATCHED_SCOPE_ABDUCTIVE_RESIDUAL_INPUT_V3.json"
 candidate_path = "canonical/governance/OPUS55_MATCHED_TARGET_NORMALIZATION_CANDIDATE_V3.json"
 provenance_path = "canonical/governance/OPUS55_MATCHED_TARGET_NORMALIZATION_PROVENANCE_V3.json"
 
@@ -40,7 +40,7 @@ assert provenance["authority"]["matched_scope_residual"]["git_blob_sha"] == git_
 live = sorted({t for edge in matched["implications"] for t in edge["then"]})
 candidate_ids = sorted(x["predicate_id"] for x in candidate["targets"])
 provenance_ids = sorted(x["predicate_id"] for x in provenance["targets"])
-assert len(live) == 8
+assert len(live) == 6
 assert candidate_ids == live
 assert provenance_ids == live
 
@@ -49,9 +49,9 @@ assert proved.isdisjoint(live)
 
 out = evaluate(protocols, registry, candidate, provenance)
 assert out["status"] == "PASS__ALL_TARGET_ATOMS_AND_METRICS_BOUND_TO_EXACT_FROZEN_SOURCE_LITERALS", out
-assert out["verified_target_count"] == 8, out
-assert out["verified_atom_count"] == 37, out
-assert out["verified_metric_requirement_count"] == 7, out
+assert out["verified_target_count"] == 6, out
+assert out["verified_atom_count"] == 30, out
+assert out["verified_metric_requirement_count"] == 5, out
 assert out["semantic_implication_verified"] is False, out
 assert all(x["source_literal_binding_pass"] for x in out["target_results"]), out
 assert out["capability_credit_delta"] == 0

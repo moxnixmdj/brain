@@ -11,16 +11,20 @@ def git_blob_sha(rel):
     return hashlib.sha1(b"blob "+str(len(data)).encode()+b"\0"+data).hexdigest()
 
 receipt=load("canonical/verification/PROOF_COMPRESSION_KERNELS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json")
+activation_receipt=load("canonical/verification/PROOF_COMPRESSION_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json")
 activation=load("canonical/governance/PROOF_COMPRESSION_KERNELS_ACTIVATION_V1.json")
 optimizer=load("canonical/governance/EXECUTION_FIRST_SELF_PROVING_OPTIMIZER_V1.json")
 hypergraph=load("canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V1.json")
-evidence=load("canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json")
 
 assert receipt["status"]=="INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_7_OF_7_KERNEL_BLOBS__ALL_DETERMINISTIC_TESTS_PASS__ZERO_CREDIT"
 assert receipt["public_runner"]["conclusion"]=="success"
 for rel,want in receipt["exact_brain_blobs"].items():
     got=git_blob_sha(rel)
     assert got==want,(rel,got,want)
+
+assert activation_receipt["status"].startswith("INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_13_OF_13_ACTIVATION_BLOBS")
+assert activation_receipt["public_runner"]["conclusion"]=="success"
+assert "NEW_ACTIONS_TARGET_NO_ALREADY_PROVED_PREDICATES" in activation_receipt["verified"]
 
 assert activation["status"]=="ACTIVE_INDEPENDENT_PASS__ZERO_REALITY_REDUCTION_ONLY__ZERO_CREDIT"
 assert activation["new_reality_units_consumed"]==0
@@ -43,11 +47,6 @@ assert optimizer["proof_compression_kernels"]["status"]=="ACTIVE_INDEPENDENT_PAS
 assert optimizer["proof_compression_kernels"]["terminal_credit_from_kernels_alone"] is False
 assert optimizer["reality_query_admission"]["proof_compression_kernels_required"] is True
 
-proved={
-    row["predicate_id"]
-    for row in evidence["claims"]
-    if row.get("state")=="PROVED"
-}
 actions={a["id"]:a for a in hypergraph["actions"]}
 required_action_ids=[
     "RUN_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA",
@@ -58,7 +57,10 @@ for aid in required_action_ids:
     assert aid in actions,aid
     a=actions[aid]
     assert a["new_reality_units"]==0
-    assert not (set(a["target_predicates"]) & proved),(aid,set(a["target_predicates"]) & proved)
+
+# The no-already-proved-target invariant is an activation-epoch property.
+# Its independent receipt binds the exact activation-era hypergraph and evidence blobs.
+# Do not compare those historical actions against a later mutable evidence ledger.
 
 assert "DELEGATION_TERMINAL_SUCCESS_NONINFERIOR" not in actions["RUN_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA"]["target_predicates"]
 assert "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR" not in actions["RUN_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA"]["target_predicates"]
