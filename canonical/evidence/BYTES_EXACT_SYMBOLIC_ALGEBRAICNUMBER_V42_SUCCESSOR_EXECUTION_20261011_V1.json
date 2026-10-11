@@ -1,0 +1,89 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_ALGEBRAICNUMBER_V42_SUCCESSOR_EXECUTION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "VERIFIED_RESEARCH_FRONTIER__SPENT_NEXT46_AND_FRESH_NEXT47_PASS__NEXT48_FROZEN_UNSPENT__CURRENT_POINTER_ELIGIBLE__ZERO_PROMOTION_CREDIT",
+  "subject": {
+    "predecessor": "canonical/evidence/BYTES_EXACT_SYMBOLIC_COUNT_OPS_EXPR_V41_SUCCESSOR_EXECUTION_20261011_V1.json",
+    "predecessor_manifest_sha256": "975445352f47077530dadacab2e387c227a9787b4b693678c740c3e3b080af38",
+    "transform": "canonical/research/bytes/tools/conservative_algebraicnumber_prune_v42.py",
+    "manifest_sha256": "11b996be90057f3a9e1c8adcad7d47688515a7a3fb1b15713b9e04be76ae1676",
+    "python_files": 277,
+    "raw_python_source_bytes": 1743119,
+    "B_exec_raw_python_source_bytes": 1745879,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "raw_delta_vs_v41_bytes": -1749,
+    "B_exec_delta_vs_v41_bytes": -1749
+  },
+  "selection": {
+    "id": "ALGEBRAICNUMBER_NEW_OUTSIDE_BOUNDED_CONTRACT_V42",
+    "method": "REUSE_EXISTING_FAIL_CLOSED_BOUNDED_CONTRACT_SPECIALIZATION__REMOVE_ALGEBRAICNUMBER_CONSTRUCTOR_UNUSED_BY_EXACT_ROUTE",
+    "changed_body_count": 1,
+    "body": "sympy/core/numbers.py::AlgebraicNumber.__new__",
+    "exact_base_guard": true,
+    "exact_target_guard": true
+  },
+  "falsification_history": {
+    "sympy/printing/str.py::StrPrinter._print_Mul": "REJECTED__TWO_ROOTS_CASES_REQUIRE_IT",
+    "sympy/core/numbers.py::AlgebraicNumber.__new__": "ACCEPTED_ON_SPENT_AND_FRESH_CORPORA"
+  },
+  "qualification": {
+    "spent_NEXT46": {
+      "id": "QUAL_SUCCESSOR_NEXT46_20261011_V1",
+      "cases": 12420,
+      "corpus_sha256": "bc22c8306594b851f38f0374e91775fbc2d9670bcc57d048e582561c243836f3",
+      "candidate": "12420/12420",
+      "failures": 0,
+      "spent": true
+    },
+    "fresh_NEXT47": {
+      "id": "QUAL_SUCCESSOR_NEXT47_20261011_V1",
+      "cases": 12650,
+      "corpus_sha256": "e4848f81bf1bbf1ebc795d1ee5e3c4db1035f8227272ed60afc9fb59662a6fef",
+      "candidate": "12650/12650",
+      "failures": 0,
+      "spent": true
+    }
+  },
+  "reproducibility": {
+    "clean_room_v41_to_v42_reconstruction": "PASS__278_OF_278_FILES_BYTE_IDENTICAL",
+    "regenerated_manifest_sha256": "11b996be90057f3a9e1c8adcad7d47688515a7a3fb1b15713b9e04be76ae1676",
+    "external_second_carrier_verified": false
+  },
+  "durable_archive": {
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V42_SUCCESSOR_20261011_V1.tar.xz",
+    "library_file_id": "libfile_13b8870f26ec819196e1a670da0ee701",
+    "bytes": 272260,
+    "sha256": "958f8b8ac9a2fdf18058821eab96af445400d98fa131a1975d4d5cbb7413440b"
+  },
+  "next_frozen": {
+    "id": "QUAL_SUCCESSOR_NEXT48_20261011_V1",
+    "cases": 12880,
+    "seed": 1012594160,
+    "seed_derivation": "FIRST_32_BITS_SHA256_OF_QUAL_SUCCESSOR_NEXT48_20261011_V1_PIPE_V42_MANIFEST_IDENTITY",
+    "seed_material": "QUAL_SUCCESSOR_NEXT48_20261011_V1|11b996be90057f3a9e1c8adcad7d47688515a7a3fb1b15713b9e04be76ae1676",
+    "per_operation_budget": 1120,
+    "corpus_sha256": "7360ad57d9ded0269d40256aeab444125decf4ececbdc758a3bd095cdb05312f",
+    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT48_20261011_V1.jsonl",
+    "library_file_id": "libfile_89b8db64f2f481919a0de3e870588d27",
+    "generation_provenance": "PARALLEL_EXPECTED_OUTPUT_ACCELERATOR_PREVIOUSLY_BYTE_IDENTICAL_TO_CANONICAL_SERIAL_GENERATOR_ON_INDEPENDENT_CROSSCHECK",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT",
+    "spent": false
+  },
+  "truth_boundary": [
+    "MEASURED: V42 is 1,743,119 raw Python-source bytes, 1,749 bytes below V41.",
+    "MEASURED: V42 passes spent NEXT46 12,420/12,420 with zero failures.",
+    "MEASURED: previously untouched NEXT47 passes V42 12,650/12,650 with zero failures.",
+    "MEASURED: StrPrinter._print_Mul deletion is invalid because two roots cases require it.",
+    "MEASURED: clean-room V41-to-V42 reconstruction is 278/278 files byte-identical.",
+    "MEASURED: NEXT48 is durably frozen at 12,880 cases and remains unspent.",
+    "NOT PROVED: external second-carrier replay.",
+    "NOT PROMOTED: no capability, acceptance, ownership, quality, or terminal credit."
+  ],
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "quality_credit_delta": 0,
+  "promotion_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
