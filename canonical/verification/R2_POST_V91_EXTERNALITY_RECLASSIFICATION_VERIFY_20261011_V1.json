@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_R2_POST_V91_EXTERNALITY_RECLASSIFICATION_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__GOVERNANCE_CAUSAL_RECLASSIFICATION__ZERO_INTERNAL_R2_MECHANISM_RESIDUALS__TASK_SPECIFIC_EXTERNAL_OBSERVATION_FRONTIER_PRESERVED__ZERO_CREDIT",
+  "subject_main_commit": "2226e4b23dca71ede31973b7bb5975fee98715c7",
+  "premises": {
+    "r2_general_mechanism_missing": false,
+    "r2_general_control_mechanism_closed": true,
+    "minimum_policy_changing_information_request_bound": true,
+    "authority_domain_candidate_discovery_bound": true,
+    "generic_unbound_candidate_materialization_mechanism_bound": true,
+    "existing_truth_checker_reuse_bound": true,
+    "fixed_point_bound_truth_reentry_bound": true,
+    "live_external_finance_fact_bound": false,
+    "open_world_positive_action_coverage_complete": false,
+    "decisive_unobservable_reality_requires_abstention_or_information_acquisition": true,
+    "generic_materialization_independent_execution_replay_verified": false
+  },
+  "classification": {
+    "internal_r2_mechanism_unsolved_count": 0,
+    "task_specific_external_observation_frontier_count": 1,
+    "task_specific_frontier": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
+    "reason": "AFTER_V91_THE_REMAINING_UNKNOWN_IS_DECISIVE_EXTERNAL_WORLD_SEMANTIC_EVIDENCE_OR_TASK_SPECIFIC_BOUNDED_AUTHORITY__THE_BRAIN_HAS_THE_GENERIC_DISCOVER_MATERIALIZE_CHECK_REENTER_CONTROL_PATH__MISSING_REALITY_IS_NOT_A_MISSING_INTERNAL_REASONING_PRIMITIVE"
+  },
+  "oq_partition": {
+    "active_o_rows": 11,
+    "active_q_rows": 1,
+    "parked_tb_rows": 1,
+    "active_gap_b_rows": 0,
+    "source": "canonical/governance/CURRENT_REUSE_FRONTIER_EXACT_DELTA_CUT_20261011_V2.json"
+  },
+  "hard_nonclaims": [
+    "NO_FINANCE_TASK_INSTANCE_CLOSED_WITHOUT_REQUIRED_AUTHENTICATED_OBSERVATION",
+    "NO_OPEN_WORLD_ONTOLOGY_COMPLETENESS",
+    "NO_GLOBAL_POSITIVE_ACTION_COMPLETENESS",
+    "NO_GENERIC_MATERIALIZATION_INDEPENDENT_EXECUTION_REPLAY_PASS",
+    "NO_FULL_PRIVATE_CURRENT_MAIN_REGRESSION_PASS_OR_FAIL",
+    "NO_ACCEPTANCE_CAPABILITY_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

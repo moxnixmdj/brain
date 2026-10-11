@@ -132,7 +132,7 @@
     "professional_open_execution_leaf_count": 0,
     "professional_open_semantic_leaf_count": 0,
     "full_private_regression_execution_carrier_blocked": true,
-    "professional_parallel_policy": "WHILE_CARRIER_BLOCKED__CONTINUE_ESCAPE_O11_Q2_R2_AND_OTHER_NONCONFLICTING_REUSE_FIRST_FRONTIER_WORK"
+    "professional_parallel_policy": "WHILE_CARRIER_BLOCKED__CONTINUE_ESCAPE_O11_Q1_R2_AND_OTHER_NONCONFLICTING_REUSE_FIRST_FRONTIER_WORK"
   },
   "post_composition_currentness_invariant": {
     "runtime_path": "canonical/runtime/capability_parallel_frontier_post_composition_v2.py",
@@ -188,5 +188,19 @@
     "path": "canonical/verification/FULL_PRIVATE_CURRENT_MAIN_REGRESSION_CARRIER_DIAGNOSIS_20261011_V1.json",
     "git_blob_sha": "8dec86c9a39fd009ee25b8ca3b8ff7f905474f10",
     "status": "EXECUTION_CARRIER_BLOCKED__FOUR_ZERO_STEP_ACTIONS_FAILURES__NO_REGRESSION_RESULT__GATE_OPEN__ZERO_CREDIT"
+  },
+  "r2_post_v91_externality_policy": {
+    "internal_r2_mechanism_unsolved_count": 0,
+    "task_specific_external_observation_frontier_count": 1,
+    "wake_rule": "WAKE_FINANCE_SEMANTIC_FRONTIER_ONLY_ON_REAL_TASK_LOCAL_COUNTEREXAMPLE_OR_DECISIVE_UNBOUND_EXTERNAL_OBSERVATION_REQUIREMENT",
+    "generic_authority_path": "DISCOVER_AUTHORITY_DOMAIN_SOURCE__MATERIALIZE_EXACT_BYTES__REUSE_EXISTING_TRUTH_CHECKER__REENTER_FIXED_POINT",
+    "independent_generic_path_execution_replay_verified": false
+  },
+  "escape_oq_partition_current": {
+    "active_o_rows": 11,
+    "active_q_rows": 1,
+    "parked_tb_rows": 1,
+    "active_gap_b_rows": 0,
+    "source": "canonical/governance/CURRENT_REUSE_FRONTIER_EXACT_DELTA_CUT_20261011_V2.json"
   }
 }
