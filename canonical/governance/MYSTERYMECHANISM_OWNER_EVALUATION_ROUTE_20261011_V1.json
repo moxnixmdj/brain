@@ -1,0 +1,95 @@
+{
+  "schema": "PROJECT_BRAIN_MYSTERYMECHANISM_OWNER_EVALUATION_ROUTE_20261011_V1",
+  "date": "2026-10-11",
+  "status": "EXACT_EXTERNAL_WAKE_ROUTE_BOUND__MYSTERYMECHANISM_SERVICE_ACCESS_NOT_PUBLICLY_EXPOSED__ZERO_CREDIT",
+  "canonical_base_commit": "dac3a084700ccd0e07709fc8643f9d8a046fc08c",
+  "objective": "Reduce the remaining MysteryMechanism intrinsic noninferiority blocker to the smallest owner-side authorization needed for an admissible Brain result.",
+  "target": {
+    "benchmark": "Vals AI MysteryMechanism",
+    "test_population": 222,
+    "owner_reported_deployed_opus55_percent": 49.55,
+    "owner_reported_fallback_excluded_opus55_percent": 49.10,
+    "minimum_intrinsic_success_count": 109,
+    "same_population_and_scorer_required": true
+  },
+  "owner_public_contract": {
+    "task_shape": "anonymous inputs, physical bounds, two passive observations, persistent shell, 2d+1 experiment budget, one executable law",
+    "scoring": "binary functional-recovery credit on private continuously sampled structural probes using a task-specific noise-aware threshold",
+    "test_set_private": true,
+    "owner_runs_models_under_fixed_harness": true
+  },
+  "owner_infrastructure_discovery": {
+    "general_vals_v1_eval_api_public_framework": true,
+    "general_trial_tenant_mode_public_framework": true,
+    "trial_mode_can_return_score_only_results": true,
+    "hosted_services_require_authenticated_tenant_and_dataset_allowlist": true,
+    "public_registry_contains_mysterymechanism_service": false,
+    "public_mysterymechanism_runner_or_service_found": false,
+    "mysterymechanism_trial_access_publicly_bound": false
+  },
+  "minimum_owner_authorization_routes": [
+    {
+      "route": "OWNER_RUN_BRAIN",
+      "request": "Vals runs the Brain/scaffold under the fixed MysteryMechanism test harness and returns a content-bound final score or success count.",
+      "private_task_disclosure_required": false,
+      "sufficient_if": "same 222-task test population, same scorer/contract, no opaque target-capability fallback, result authentic and attributable to Brain"
+    },
+    {
+      "route": "SCORE_ONLY_TRIAL_TENANT",
+      "request": "Vals grants a score-only authenticated tenant or equivalent hosted submission route for MysteryMechanism test evaluation.",
+      "private_task_disclosure_required": false,
+      "sufficient_if": "Brain can submit through the fixed harness and receive an authentic aggregate result on the same 222-task test population"
+    }
+  ],
+  "acceptance_cut": {
+    "pass_condition": "Brain success count >= 109 on the same private 222-task population under the owner scorer and comparable harness",
+    "equivalent_displayed_percent_floor": 49.10,
+    "no_need_to_recover_complete_opus_private_capability_envelope": true
+  },
+  "public_source_bindings": [
+    {
+      "url": "https://www.vals.ai/benchmarks/mysterymechanism",
+      "retrieved": "2026-10-11",
+      "facts": ["222 private mechanisms", "fixed task contract", "binary functional-recovery scoring", "49.55% deployed Opus 5.5"]
+    },
+    {
+      "url": "https://www.vals.ai/models/anthropic_claude-opus-5-5",
+      "retrieved": "2026-10-11",
+      "facts": ["MysteryMechanism 49.55%", "counting fallback-assisted tasks as failures gives 49.10%", "compute effort max"]
+    },
+    {
+      "url": "https://github.com/vals-ai/create-benchmark-service",
+      "retrieved": "2026-10-11",
+      "facts": ["authenticated /v1 evaluation API framework", "tenant/dataset allowlists", "trial_mode score-only responses"]
+    },
+    {
+      "url": "https://github.com/vals-ai/public-benchmark-services-registry",
+      "retrieved": "2026-10-11",
+      "facts": ["public registry currently lists SWE-bench, Terminal-Bench and SkillsBench services", "no public MysteryMechanism service listed"]
+    },
+    {
+      "url": "https://www.vals.ai/about",
+      "retrieved": "2026-10-11",
+      "facts": ["Vals publicly invites benchmark/evaluation collaboration and provides contact@vals.ai"]
+    }
+  ],
+  "scheduler_effect": {
+    "same_public_scope_search_authority": false,
+    "next_information_positive_action": "OBTAIN_OWNER_AUTHORIZATION_FOR_OWNER_RUN_BRAIN_OR_SCORE_ONLY_MYSTERYMECHANISM_TEST_EVALUATION",
+    "wake_condition": "AUTHENTIC_MYSTERYMECHANISM_BRAIN_RESULT_OR_OWNER_GRANTED_SCORE_ONLY_TEST_ROUTE",
+    "do_not_request_private_test_mechanism_disclosure": true
+  },
+  "hard_nonclaims": [
+    "No claim a public MysteryMechanism evaluation endpoint exists.",
+    "No claim trial access is free or available for MysteryMechanism.",
+    "No claim Brain currently scores at least 49.10%.",
+    "No private task data was accessed.",
+    "No acceptance or terminal credit."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "private_test_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
