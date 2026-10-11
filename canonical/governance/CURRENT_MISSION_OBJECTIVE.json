@@ -32,7 +32,7 @@
     "primary_entrypoint": "plan_current_post_composition_frontier",
     "scalar_fallback_runtime": "canonical/runtime/capability_first_live_scheduler_v1.py",
     "status": "ACTIVE__POST_COMPOSITION_DYNAMIC_CURRENTNESS_V15__PROFESSIONAL_V10_24_OF_24__REGRESSION_CARRIER_WAKE_GATED__OTHER_REUSE_FIRST_FRONTIERS_CONTINUE__ZERO_GLOBAL_CREDIT",
-    "observed_git_blob_sha": "ea540b313aceebf345c09d22b9bfea665d64ab0d"
+    "observed_git_blob_sha": "459f3b57994d26130b1ee575d6296487bffb84de"
   },
   "scheduler_precedence": "REAL_MISSION_CAPABILITY_RESOURCE_PARETO_LEVERAGE_IS_PRIMARY__SAFE_NONCONFLICTING_PARALLELISM_MINIMIZES_WALL_CLOCK__CURRENTNESS_AND_DEPENDENCY_GATES_PRECEDE_SELECTION__DIMENSIONWISE_PARETO_DOMINANCE_PRECEDES_ANY_SCALAR_TRADEOFF__SCALARIZATION_REQUIRES_PROVED_TRADEOFF_CONTRACT__CURRENT_R2_SHARED_CAUSE_FANOUT_IS_SECONDARY_DISCRIMINATION_SIGNAL__OPUS_5_5_CHECKPOINT_WORK_IS_TERTIARY_AUDIT__EXPLICIT_NEW_PRIMITIVE_CLAIMS_REQUIRE_REUSE_FIRST_EXHAUSTION_PROOF",
   "current_professional_quality_execution": {
@@ -50,7 +50,7 @@
   },
   "current_parallel_frontier_control": {
     "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
-    "observed_git_blob_sha": "3daab779ee58b04e514f86c48ad9a957b535257c",
+    "observed_git_blob_sha": "8ed055de5aa597a507b5870a847382b8825de6ff",
     "status": "CURRENT_R2_V91_GENERIC_MATERIALIZATION_SECOND_CARRIER_11_OF_11_PASS__ZERO_INTERNAL_R2_MECHANISM_RESIDUALS__PROFESSIONAL_24_OF_24__FULL_PRIVATE_REGRESSION_CARRIER_WAKE_GATED__PARALLEL_REUSE_FIRST_FRONTIERS_CONTINUE__ZERO_TERMINAL_CREDIT",
     "binding": "MUTABLE_CURRENT_PATH_IDENTITY__SUPPORTED_PROFESSIONAL_ASSURANCE_BYTES_R2_PROJECTIONS_REFRESHED_AT_CALL_TIME__OTHER_SOURCE_DRIFT_FAILS_CLOSED",
     "snapshot_is_runtime_authority_for_supported_dynamic_families": false
@@ -233,12 +233,12 @@
   },
   "bytes_current_frontier": {
     "path": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-    "observed_git_blob_sha": "38812c2d6682b029ab3314c09376fd27fbbc7d91",
-    "status": "ACTIVE_RESEARCH__EVALF_POW_RATIONAL_V46_FRONTIER__SUCCESSOR_READY",
-    "raw_python_source_bytes": 1740366,
-    "B_exec_raw_python_source_bytes": 1743126,
-    "qualification": "13800/13800",
-    "next": "Rerank exact V46 using spent NEXT52 only; make a new physical cut before touching QUAL_SUCCESSOR_NEXT53_20261011_V1.",
+    "observed_git_blob_sha": "f04640bbd5df2e54ba64784c171cc4957410dfc9",
+    "status": "ACTIVE_RESEARCH__MPMATH_FDOT_V47_FRONTIER__SUCCESSOR_READY",
+    "raw_python_source_bytes": 1738721,
+    "B_exec_raw_python_source_bytes": 1741481,
+    "qualification": "14030/14030",
+    "next": "Rerank exact V47 using spent NEXT53 only; make a new physical cut before touching QUAL_SUCCESSOR_NEXT54_20261011_V1.",
     "promotion_credit": 0,
     "observed_snapshot_is_non_authoritative_for_v15_runtime": true
   },
@@ -253,9 +253,9 @@
   },
   "capability_frontier_currentness_reconciliation": {
     "path": "canonical/governance/CAPABILITY_FRONTIER_CURRENTNESS_RECONCILIATION_20261010_V1.json",
-    "observed_git_blob_sha": "eea76941e38c41b783eb79dc662fea332c90a2f4",
-    "status": "CURRENTNESS_RECONCILED__PROFESSIONAL_24_OF_24__EXECUTION_12_OF_12__SEMANTIC_12_OF_12__REGRESSION_CARRIER_WAKE_GATED__ESCAPE_12_ACTIVE_ACQUISITION__BYTES_V46__R2_V91_WAKE_GATED__TB_PARKED__ZERO_CREDIT",
-    "next": "INSTANTIATE_EXISTING_ESCAPE_ROW_PROOF_MACHINERY__DO_NOT_REOPEN_PROFESSIONAL_PROPERTY_TRUTH__WAKE_REGRESSION_ONLY_ON_REAL_CARRIER_STATE_CHANGE__PARALLELIZE_BYTES_V46_RESOURCE_WORK"
+    "observed_git_blob_sha": "e633c64e771d2736bc48ff17178b30e1353fdea7",
+    "status": "CURRENTNESS_RECONCILED__PROFESSIONAL_24_OF_24__EXECUTION_12_OF_12__SEMANTIC_12_OF_12__REGRESSION_CARRIER_WAKE_GATED__ESCAPE_12_ACTIVE_ACQUISITION__BYTES_V47__R2_V91_WAKE_GATED__TB_PARKED__ZERO_CREDIT",
+    "next": "INSTANTIATE_EXISTING_ESCAPE_ROW_PROOF_MACHINERY__DO_NOT_REOPEN_PROFESSIONAL_PROPERTY_TRUTH__WAKE_REGRESSION_ONLY_ON_REAL_CARRIER_STATE_CHANGE__PARALLELIZE_BYTES_V47_RESOURCE_WORK"
   },
   "professional_regression_carrier_diagnosis": {
     "path": "canonical/verification/FULL_PRIVATE_CURRENT_MAIN_REGRESSION_CARRIER_DIAGNOSIS_20261011_V1.json",
