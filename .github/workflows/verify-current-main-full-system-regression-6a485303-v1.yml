@@ -1,0 +1,49 @@
+name: Exact current-main full-system regression 6a485303 v1
+
+on:
+  push:
+    branches:
+      - verify/current-main-full-regression-6a485303-v1
+
+permissions:
+  contents: read
+
+jobs:
+  full-current-main-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout exact canonical subject
+        uses: actions/checkout@v4
+        with:
+          ref: 6a485303239529d5ced4f20287c4108535c4b6cf
+          fetch-depth: 1
+
+      - name: Use repository-standard Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Bind exact subject
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "6a485303239529d5ced4f20287c4108535c4b6cf"
+          git diff --exit-code
+          python --version
+          python - <<'PY'
+          from pathlib import Path
+          runtime=list(Path("canonical/runtime").glob("*.py"))
+          tests=list(Path("canonical/tests").glob("test_*.py"))
+          root_tests=list(Path("tests").glob("test_*.py"))
+          print(f"EXACT_SUBJECT=6a485303239529d5ced4f20287c4108535c4b6cf")
+          print(f"RUNTIME_MODULES={len(runtime)}")
+          print(f"CANONICAL_TEST_FILES={len(tests)}")
+          print(f"ROOT_TEST_FILES={len(root_tests)}")
+          PY
+
+      - name: Compile current runtime and tests
+        run: python -m compileall -q canonical/runtime canonical/tests tests
+
+      - name: Run full current repository regression
+        run: python -m pytest -q canonical/tests tests
