@@ -1,0 +1,60 @@
+{
+  "artifact": "HLE_QUARANTINED_SOLVER_VIEW_V1",
+  "canary_all_rows_match_public_expected": true,
+  "gold_columns_decoded_by_builder": false,
+  "hidden_from_solver": [
+    "answer",
+    "rationale",
+    "rationale_image.bytes",
+    "rationale_image.path"
+  ],
+  "invariants": [
+    "solver receives only solver_db",
+    "source parquet stays outside solver sandbox",
+    "grading may read source only after answer commitments are sealed",
+    "no gated HLE data is committed to Git"
+  ],
+  "solver_view": {
+    "bytes": 118648832,
+    "fields": [
+      "id",
+      "question",
+      "image",
+      "answer_type",
+      "raw_subject",
+      "category"
+    ],
+    "null_counts": {
+      "answer_type": 0,
+      "category": 0,
+      "id": 0,
+      "image": 0,
+      "question": 0,
+      "raw_subject": 0
+    },
+    "rows": 2500,
+    "sha256": "f2110c859a5acb6adb5299f541d8dc5877acd109dac0698889587ec64a404978",
+    "sorted_id_manifest_sha256": "349240c058f5a2918bb784b39852bcf0f69b231e4b5d92060d731725d1c80b42",
+    "unique_ids": 2500
+  },
+  "source": {
+    "bytes": 274276147,
+    "created_by": "parquet-cpp-arrow version 16.1.0",
+    "row_groups": 25,
+    "rows": 2500,
+    "sha256": "6d0ee0602e8aea6b159509577e884f48ecac7b8e3f6822a35f51335a446c726a"
+  },
+  "source_provenance": {
+    "dataset": "cais/hle",
+    "requested_revision": "5a81a4c7271a2a2a312b9a690f0c2fde837e4c29",
+    "public_card_expected_rows": 2500,
+    "public_card_expected_download_bytes": 274276147,
+    "note": "requested_revision records the authenticated download route used; it is not asserted as a cryptographic file-SHA binding"
+  },
+  "status": "PASS",
+  "benchmark_claims": {
+    "hle_score_at_least_67_7": false,
+    "target_grader_equivalence_proved": false,
+    "terminal_run_started": false
+  }
+}
