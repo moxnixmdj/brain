@@ -37,7 +37,7 @@
       },
       {
         "path": "canonical/governance/CURRENT_FRONTIERCODE_CAPABILITY_FIRST_RECONCILIATION_20261011_V1.json",
-        "git_blob_sha": "d28570345eb5f574c2ac31b0942f7384547b39a4"
+        "git_blob_sha": "8f53d085ab2d6aa7e85168f3ede2e18e9d0136ed"
       },
       {
         "path": "canonical/governance/CHARTOGRAPHY_CAPABILITY_PROOF_FRONTIER_V1.json",
@@ -126,7 +126,7 @@
       "vector_evidence": {},
       "read_only_evidence": {
         "capability_frontier_path": "canonical/governance/CURRENT_FRONTIERCODE_CAPABILITY_FIRST_RECONCILIATION_20261011_V1.json",
-        "capability_frontier_git_blob_sha": "d28570345eb5f574c2ac31b0942f7384547b39a4",
+        "capability_frontier_git_blob_sha": "8f53d085ab2d6aa7e85168f3ede2e18e9d0136ed",
         "verified_patch_search_capability": "python.patch.search.test_guided.ast.v1",
         "verified_sequential_multi_edit_capability": "python.software.repair.loop.test_guided.ast.v1",
         "verified_strict_progress_capability": "python.software.repair.loop.strict_progress.ast.v1",
@@ -143,7 +143,7 @@
         "dynamic_localizer_verification_path": "canonical/verification/PYTHON_DYNAMIC_FAULT_LOCALIZER_V1_VERIFY_20261011_V1.json",
         "dynamic_localizer_replay": "PRIMARY_7_OF_7__SECOND_SPRITE_7_OF_7",
         "proved_localization": "FAILING_ONLY_EXECUTION_OUTRANKS_SHARED_OR_PASSING_ONLY_CODE__AST_SYMBOL_OWNERSHIP__INTRA_SYMBOL_BACKWARD_DEF_USE",
-        "bound_capability_registry_git_blob_sha": "22824833b4c1d25c4a80cc3d67956bf1fa2f1bea",
+        "bound_capability_registry_git_blob_sha": "256186c0bc83944e4ff945876835681f3bea22e7",
         "verified_interprocedural_provenance": "python.fault.provenance.interprocedural.value.v1",
         "interprocedural_provenance_verification_path": "canonical/verification/PYTHON_INTERPROCEDURAL_VALUE_PROVENANCE_V1_VERIFY_20261011_V1.json",
         "interprocedural_provenance_replay": "PRIMARY_7_OF_7__SECOND_CARRIER_7_OF_7",
