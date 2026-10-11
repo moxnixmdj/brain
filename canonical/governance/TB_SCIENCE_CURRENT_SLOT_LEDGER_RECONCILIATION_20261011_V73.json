@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261011_V73",
+  "date": "2026-10-11",
+  "status": "CURRENT_RANK22_STARTED__ONE_TRIAL_CONSUMED__RESULT_PENDING__NO_RETRY__TWENTY_CONSUMED",
+  "predecessor": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261011_V72.json",
+    "git_blob_sha": "a3d5221a0207489a7d42a7524bad8437aab25346"
+  },
+  "verification": {
+    "path": "canonical/verification/TB_SCIENCE_RANK22_DURABLE_START_VERIFY_20261011_V1.json",
+    "git_blob_sha": "7aac3fe8eedc2e50e0db6b9b3e41cb23b1cdf388",
+    "pass": true
+  },
+  "counts": {
+    "benchmark_trials_consumed": 20,
+    "consumed_successes_final": 0,
+    "consumed_failures_final": 19,
+    "started_result_pending": 1,
+    "finalized_slots": 19,
+    "active_in_flight_slot_count": 1
+  },
+  "current_slot": {
+    "ledger_schedule_rank": 22,
+    "slot_id": "terminal-bench-science/rv-astrometry-fitting::trial-0",
+    "task_digest": "sha256:8e086e1f7245067eaa9a67c259c1519204fa058d8664983066cd582ef258a1ea",
+    "logical_attempt_id": "3d130e1bca77cc5849a1bf40647f1e5c0964c1bffc5a6795069cbc7898afb674",
+    "execution_claim_binding_digest": "sha256:0cf88bd2c59c384ad88b52f332f268c09ec44da95e3b81a335cb7c89aac4d4b3",
+    "activation_pull_request": 2681,
+    "workflow_run_id": 38142347152,
+    "workflow_job_id": 114478611498,
+    "task_read": true,
+    "task_started": true,
+    "durable_start_cas_acquired": true,
+    "benchmark_trials_consumed": 1,
+    "result_present": false,
+    "reward": null
+  },
+  "scheduler_state": "FROZEN_CURRENT_RANK22_IN_FLIGHT__NO_RETRY_OR_REPLACEMENT",
+  "execution_authority": false,
+  "task_read_authority": false,
+  "activation_authority": false,
+  "retry_authority": false,
+  "replacement_authority": false,
+  "replay_authority": false,
+  "finalization_authority": true,
+  "result_credit_authority": true,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "next": "FINALIZE_CURRENT_RANK22_RUN__NO_RETRY_OR_REPLACEMENT"
+}
