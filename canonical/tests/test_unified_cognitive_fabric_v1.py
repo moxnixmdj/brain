@@ -433,73 +433,41 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
         self.assertIsNone(kwargs["failure_repair_provider"])
         self.assertEqual(kwargs["max_actions"], 2)
 
-    def test_background_compounding_forwards_available_repair_authority(self):
-        tick = {
-            "schema": "PROJECT_BRAIN_R3_IMPROVEMENT_QUEUE_DRIVER_V1",
-            "status": "IMPROVEMENT_QUEUE_STABLE",
-            "pass": True,
-            "progress_count": 0,
-            "actions": [],
-            "terminal_authority": False,
+    def test_opaque_cognition_providers_are_forbidden_in_live_fabric(self):
+        request = {
+            "mode": "CAPABILITY_SCHEDULER",
+            "payload": {
+                "work": [{
+                    "work_id": "NO-OPAQUE-COGNITION",
+                    "work_type": "CAPABILITY_BUILD",
+                    "expected_capability_gain_lcb": 1,
+                    "expected_efficiency_gain_lcb": 0,
+                    "expected_reliability_gain_lcb": 1,
+                    "reuse_breadth_lcb": 1,
+                    "generalization_lcb": 1,
+                    "success_probability_lcb": 1,
+                    "wall_clock_cost_ub": 1,
+                    "compute_cost_ub": 1,
+                    "memory_cost_ub": 1,
+                    "complexity_cost_ub": 1,
+                }],
+            },
         }
-        component = {"id": "repairer"}
-        expander = Mock()
-        with (
-            patch(
-                "canonical.runtime.unified_cognitive_fabric_v1.improvement_driver.drain",
-                return_value=tick,
-            ) as drain,
-            patch(
-                "canonical.runtime.unified_cognitive_fabric_v1.live_runtime.execute_failure_repair_cycle",
-                return_value={"pass": False, "status": "BLOCKED"},
-            ) as repair_cycle,
-        ):
-            out = run(
-                {
-                    "mode": "CAPABILITY_SCHEDULER",
-                    "payload": {
-                        "work": [{
-                            "work_id": "R3-REPAIR-AUTHORITY",
-                            "work_type": "CAPABILITY_BUILD",
-                            "expected_capability_gain_lcb": 1,
-                            "expected_efficiency_gain_lcb": 0,
-                            "expected_reliability_gain_lcb": 1,
-                            "reuse_breadth_lcb": 1,
-                            "generalization_lcb": 1,
-                            "success_probability_lcb": 1,
-                            "wall_clock_cost_ub": 1,
-                            "compute_cost_ub": 1,
-                            "memory_cost_ub": 1,
-                            "complexity_cost_ub": 1,
-                        }],
-                    },
-                    "options": {
-                        "repair_components": [component],
-                        "self_improvement_max_actions": 2,
-                    },
-                },
-                capability_expander=expander,
-            )
-
-            provider = drain.call_args.kwargs["failure_repair_provider"]
-            self.assertIsNotNone(provider)
-            provider({
-                "payload": {
-                    "failure_fingerprint": "fp:pending",
-                    "retry_capsule_sha256": "retry:pending",
-                }
-            })
-
-        self.assertEqual(out["compounding_tick"], tick)
-        request = repair_cycle.call_args.args[0]
-        self.assertEqual(request["failure_fingerprint"], "fp:pending")
-        self.assertEqual(request["retry_capsule_sha256"], "retry:pending")
-        self.assertEqual(request["components"], [component])
-        self.assertTrue(request["autonomous"])
-        self.assertIs(
-            repair_cycle.call_args.kwargs["capability_expander"],
-            expander,
-        )
+        cases = {
+            "proposal_provider": {"proposal_provider": Mock()},
+            "capability_expander": {"capability_expander": Mock()},
+            "success_episode_adapter_provider": {"success_episode_adapter_provider": Mock()},
+            "one_shot_failure_repair_provider": {"one_shot_failure_repair_provider": Mock()},
+            "one_shot_capability_synthesis_provider": {"one_shot_capability_synthesis_provider": Mock()},
+        }
+        for name, kwargs in cases.items():
+            with self.subTest(provider=name):
+                out = run(request, **kwargs)
+                self.assertFalse(out["pass"], out)
+                self.assertIn(
+                    "OPAQUE_COGNITION_PROVIDER_FORBIDDEN_IN_LIVE_FABRIC:" + name,
+                    out["reason"],
+                )
 
     def test_auto_universal_escape_route_is_structurally_selected(self):
         out = run({
