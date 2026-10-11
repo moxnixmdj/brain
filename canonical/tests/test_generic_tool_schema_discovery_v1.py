@@ -51,5 +51,33 @@ class GenericToolSchemaDiscoveryV1Tests(unittest.TestCase):
             discovery_queries("Find the record.", max_queries=0)
 
 
+    def test_compound_identity_is_searchable(self):
+        qs = discovery_queries(
+            "Find the NovaGraph customer and update the NovaGraph status.",
+            max_queries=6,
+        )
+        joined = " | ".join(qs)
+        self.assertIn("novagraph", joined)
+
+    def test_round_robin_gives_each_intent_search_budget_first(self):
+        qs = discovery_queries(
+            "Find the NovaGraph customer. Send the BlueMesa summary.",
+            max_queries=2,
+        )
+        self.assertEqual(len(qs), 2)
+        self.assertIn("novagraph", qs[0])
+        self.assertIn("bluemesa", qs[1])
+
+    def test_focused_rounds_follow_broad_intent_round(self):
+        qs = discovery_queries(
+            "Find the NovaGraph customer. Update the AmberParcel status.",
+            max_queries=4,
+        )
+        self.assertIn("novagraph", qs[0])
+        self.assertIn("amberparcel", qs[1])
+        self.assertTrue(any(q.startswith("search ") for q in qs[2:]))
+        self.assertTrue(any(q.startswith("update ") for q in qs[2:]))
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
