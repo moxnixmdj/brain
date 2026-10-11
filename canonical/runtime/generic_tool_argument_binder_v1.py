@@ -228,7 +228,7 @@ def _request_fields(endpoint: Mapping[str, Any]) -> list[dict[str, Any]]:
 
     def put(name: str, *, required: bool, is_array: bool, raw_spec: Any) -> None:
         name = str(name or "").strip()
-        if not name or name in {"data","properties","body"}:
+        if not name or _norm_name(name) in {"data","properties","body"}:
             return
         prev = fields.get(name)
         row = {
