@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_CROWD_BT_INTERNAL_LOWER_BOUND_LOCAL_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__8_OF_8__INTERNAL_INFORMATION_CUT_VERIFIED__ZERO_CREDIT",
+  "subject": {
+    "runtime": "canonical/runtime/aa_briefcase_crowdbt_internal_lower_bound_v1.py",
+    "tests": "canonical/tests/test_aa_briefcase_crowdbt_internal_lower_bound_v1.py"
+  },
+  "replay": {
+    "tests_run": 8,
+    "tests_passed": 8,
+    "tests_failed": 0,
+    "verified": [
+      "ETA_HALF_ERASES_ALL_TRUE_PREFERENCE_SIGNAL",
+      "SIGNAL_SLOPE_NEGATIVE_ZERO_POSITIVE_AROUND_ETA_HALF",
+      "FINITE_ALL_LOSS_REALIZATION_REMAINS_POSSIBLE_BELOW_CERTAINTY",
+      "PERFECT_EXPECTED_PREFERENCE_NEEDS_PERFECT_SIGNAL_FOR_CERTAINTY",
+      "CURRENT_INTERNAL_STATE_FAILS_CLOSED_WITH_FIVE_BLOCKERS",
+      "SCOPE_AND_TOP_SUPPORT_ALONE_REMAIN_INSUFFICIENT",
+      "ETA_LOWER_BOUND_EQUAL_HALF_REMAINS_INSUFFICIENT",
+      "INFORMATION_CUT_CLEARS_ONLY_AFTER_ALL_INFORMATION_CLASSES_BOUND"
+    ]
+  },
+  "truth": {
+    "current_internal_finite_elo_lower_bound_exists": false,
+    "threshold_1822_certified": false,
+    "brain_score_failure_proved": false,
+    "brain_score_success_proved": false,
+    "information_theoretic_blocker_proved": true
+  },
+  "hard_nonclaims": [
+    "NO_OFFICIAL_AA_BRIEFCASE_SCORE",
+    "NO_CLAIM_ACTUAL_AA_JUDGE_QUALITY_EQUALS_HALF",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
