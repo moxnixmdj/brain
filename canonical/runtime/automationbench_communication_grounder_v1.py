@@ -102,7 +102,13 @@ def resolve_communication(
         or re.search(r"\bdue_on\b", low)
     )
 
-    if requests_task_name and requests_due:
+    refers_to_created_task = bool(
+        re.search(r"\bonce\s+it(?:'s|\s+is)\s+created\b", low)
+        or re.search(r"\bwhen\s+it(?:'s|\s+is)\s+created\b", low)
+        or re.search(r"\bafter\s+(?:the\s+)?task\s+is\s+created\b", low)
+    )
+
+    if (requests_task_name and requests_due) or refers_to_created_task:
         target_names = _source_task_names(records)
         candidates: list[dict[str, Any]] = []
         for row in records:
@@ -127,7 +133,11 @@ def resolve_communication(
             task = next(iter(unique.values()))
             result.update({
                 "schema": SCHEMA,
-                "status": "PASS__DERIVED_FROM_OBSERVED_TASK",
+                "status": (
+                    "PASS__DERIVED_CREATED_TASK_NOTIFICATION"
+                    if refers_to_created_task
+                    else "PASS__DERIVED_FROM_OBSERVED_TASK"
+                ),
                 "content_literal": f"{task['name']}\nDue: {task['due']}",
                 "content_has_placeholder": False,
                 "grounding_complete": True,
