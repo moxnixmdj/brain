@@ -137,3 +137,18 @@ def test_removed_global_ownership_guard_binding_fails_closed():
         e == "COGNITION_GUARD_CALL_COUNT_WEAKENED:" + path
         for e in out["errors"]
     )
+
+
+def test_stale_model_permissive_pointer_authority_fails_closed():
+    pointer, startup, runtime, bindings = _materials()
+    mutated = deepcopy(pointer)
+    mutated["mission_lock"]["authority_path"] = "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V9.md"
+    mutated["mission_lock"]["model_substrate_law"] = "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V3.md"
+    mutated["execution_governance"]["frontier_comparison_rule"] = "THE_WINNING_ROUTE_MAY_BE_MODEL_BASED"
+    out = evaluate_materials(mutated, startup, runtime, bindings)
+    assert out["pass"] is False
+    assert any(
+        e.startswith("STALE_OR_CONTRADICTORY_POINTER_AUTHORITY:")
+        or e == "STALE_MODEL_BASED_FRONTIER_COMPARISON_RULE"
+        for e in out["errors"]
+    )
