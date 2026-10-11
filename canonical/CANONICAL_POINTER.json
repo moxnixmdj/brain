@@ -278,7 +278,9 @@
     "runtime_cognition_credit_guard_self_improvement_binding_required": true,
     "runtime_cognition_credit_guard_terminal_closure_binding_required": true,
     "runtime_cognition_credit_guard_verification_path": "canonical/verification/RUNTIME_COGNITION_CREDIT_GUARD_REMOTE_VERIFY_20261011_V1.json",
-    "local_runner_for_cognition_governance_forbidden": true
+    "local_runner_for_cognition_governance_forbidden": true,
+    "runtime_cognition_credit_guard_ownership_promotion_binding_required": true,
+    "runtime_cognition_credit_guard_final_cleanroom_binding_required": true
   },
   "active_agent": {
     "agent_id": "ASTRA-OPERATIONAL-1",
