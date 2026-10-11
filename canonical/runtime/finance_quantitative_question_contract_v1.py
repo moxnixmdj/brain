@@ -15,6 +15,8 @@ import json
 import re
 from typing import Any
 
+from canonical.runtime.finance_metric_xbrl_registry_v1 import resolve_metric_aliases
+
 SCHEMA = "PROJECT_BRAIN_FINANCE_QUANTITATIVE_QUESTION_CONTRACT_V1"
 
 _TICKER = re.compile(r"\b(NASDAQ|NYSE)\s*:\s*([A-Z]{1,6})\b", re.I)
@@ -126,11 +128,14 @@ def compile_question(question: str) -> dict[str, Any]:
     quantitative_candidate = bool(operations)
     fully_structured_candidate = quantitative_candidate and not semantic_tail
 
+    metric_requests = resolve_metric_aliases(q)
+
     material = {
         "question_sha256": sha256(question.encode("utf-8")).hexdigest(),
         "tickers": tickers,
         "dates": dates,
         "operations": operations,
+        "metric_requests": metric_requests,
         "source_hints": sources,
         "semantic_tail_required": semantic_tail,
         "quantitative_candidate": quantitative_candidate,
