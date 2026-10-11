@@ -174,6 +174,7 @@ def invent(
     *,
     max_depth: int = 3,
     max_semantic_states_per_depth: int = 50000,
+    max_equivalent_programs_per_semantics: int = 8,
     top_k: int = 16,
 ) -> dict[str, Any]:
     try:
@@ -187,6 +188,13 @@ def invent(
             or max_semantic_states_per_depth < 1
         ):
             raise ProgramInventionError("MAX_SEMANTIC_STATES_INVALID")
+        if (
+            isinstance(max_equivalent_programs_per_semantics, bool)
+            or not isinstance(max_equivalent_programs_per_semantics, int)
+            or max_equivalent_programs_per_semantics < 1
+            or max_equivalent_programs_per_semantics > 128
+        ):
+            raise ProgramInventionError("MAX_EQUIVALENT_PROGRAMS_INVALID")
         if isinstance(top_k, bool) or not isinstance(top_k, int) or top_k < 1 or top_k > 128:
             raise ProgramInventionError("TOP_K_INVALID")
     except ProgramInventionError as exc:
@@ -200,6 +208,7 @@ def invent(
     target_key = _semantic_key(targets)
     exact: list[Program] = []
     state_counts: dict[str, int] = {}
+    representative_counts: dict[str, int] = {}
     generated_programs = 0
     pruned_by_semantics = 0
     bound_hit = False
@@ -209,15 +218,21 @@ def invent(
     if identity_outputs == target_key:
         exact.append(identity)
 
-    frontier: dict[tuple[Grid, ...], Program] = {_semantic_key(inputs): identity}
+    frontier: dict[tuple[Grid, ...], list[Program]] = {_semantic_key(inputs): [identity]}
 
     ordered_primitives = sorted(primitive_map.values(), key=lambda p: (float(p.cost), p.primitive_id))
 
     for depth in range(1, max_depth + 1):
-        next_frontier: dict[tuple[Grid, ...], Program] = {}
-        for previous_outputs, previous_program in sorted(
-            frontier.items(), key=lambda item: _objective(item[1])
-        ):
+        next_frontier: dict[tuple[Grid, ...], list[Program]] = {}
+        frontier_rows = sorted(
+            (
+                (semantic, program)
+                for semantic, programs in frontier.items()
+                for program in programs
+            ),
+            key=lambda item: _objective(item[1]),
+        )
+        for previous_outputs, previous_program in frontier_rows:
             if previous_program.depth != depth - 1:
                 continue
             for primitive in ordered_primitives:
@@ -247,19 +262,26 @@ def invent(
                     continue
 
                 key = _semantic_key(outputs)
-                incumbent = next_frontier.get(key)
-                if incumbent is not None and _objective(incumbent) <= _objective(program):
-                    pruned_by_semantics += 1
+                bucket = next_frontier.setdefault(key, [])
+                if any(p.primitive_ids == program.primitive_ids for p in bucket):
                     continue
-                next_frontier[key] = program
+                bucket.append(program)
+                bucket.sort(key=_objective)
+                if len(bucket) > max_equivalent_programs_per_semantics:
+                    bucket.pop()
+                    pruned_by_semantics += 1
                 if key == target_key:
                     exact.append(program)
 
         if len(next_frontier) > max_semantic_states_per_depth:
             bound_hit = True
-            ordered = sorted(next_frontier.items(), key=lambda item: _objective(item[1]))
-            next_frontier = dict(ordered[:max_semantic_states_per_depth])
+            ordered_states = sorted(
+                next_frontier.items(),
+                key=lambda item: _objective(item[1][0]),
+            )
+            next_frontier = dict(ordered_states[:max_semantic_states_per_depth])
         state_counts[str(depth)] = len(next_frontier)
+        representative_counts[str(depth)] = sum(len(v) for v in next_frontier.values())
         frontier = next_frontier
 
     unique_exact: dict[tuple[str, ...], Program] = {}
@@ -284,6 +306,8 @@ def invent(
         "max_depth": max_depth,
         "generated_program_count": generated_programs,
         "semantic_states_by_depth": state_counts,
+        "structural_representatives_by_depth": representative_counts,
+        "max_equivalent_programs_per_semantics": max_equivalent_programs_per_semantics,
         "semantic_dedup_pruned_count": pruned_by_semantics,
         "search_bound_hit": bound_hit,
         "exact_program_count": len(exact_programs),
@@ -355,12 +379,14 @@ def solve(
     max_depth: int = 3,
     attempts: int = 2,
     max_semantic_states_per_depth: int = 50000,
+    max_equivalent_programs_per_semantics: int = 8,
 ) -> dict[str, Any]:
     result = invent(
         examples,
         primitives,
         max_depth=max_depth,
         max_semantic_states_per_depth=max_semantic_states_per_depth,
+        max_equivalent_programs_per_semantics=max_equivalent_programs_per_semantics,
         top_k=128,
     )
     if result.get("status") != "EXACT_PROGRAMS_FOUND":
