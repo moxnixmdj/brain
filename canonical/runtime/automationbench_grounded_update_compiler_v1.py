@@ -121,6 +121,65 @@ def _valid_2d_values(values: Any) -> bool:
     return width > 0 and all(len(row) == width for row in values)
 
 
+
+def compile_google_sheets_row_update(obligation: Mapping[str, Any]) -> dict[str, Any]:
+    """Compile a named-cell row update using AutomationBench's API-mode row route."""
+    bad = _base_checks(obligation)
+    if bad is not None:
+        return bad
+    if str(obligation.get("app") or "").upper() != "GOOGLE_SHEETS":
+        return _fail("APP_MISMATCH")
+
+    spreadsheet_id = _s(obligation.get("spreadsheet_id"))
+    worksheet_id = _s(obligation.get("worksheet_id"))
+    row_id = _s(obligation.get("row_id"))
+    cells = obligation.get("cells")
+    if not spreadsheet_id or not _SAFE_ID.fullmatch(spreadsheet_id):
+        return _fail("SPREADSHEET_ID_INVALID")
+    if not worksheet_id or not _SAFE_ID.fullmatch(worksheet_id):
+        return _fail("WORKSHEET_ID_INVALID")
+    if not row_id or not _SAFE_ID.fullmatch(row_id):
+        return _fail("ROW_ID_INVALID")
+    if not isinstance(cells, Mapping) or not cells:
+        return _fail("NAMED_CELLS_REQUIRED")
+    if any(not _s(k) for k in cells):
+        return _fail("CELL_NAME_INVALID")
+
+    body = {"cells": dict(cells)}
+    url = (
+        "https://sheets.googleapis.com/v4/spreadsheets/"
+        + quote(spreadsheet_id, safe="")
+        + "/values/"
+        + quote(worksheet_id, safe="")
+        + "/rows/"
+        + quote(row_id, safe="")
+    )
+    return {
+        "schema": SCHEMA,
+        "pass": True,
+        "semantic_family": "UPDATE_STATE",
+        "semantic": f"UPDATE_STATE:GOOGLE_SHEETS_ROW:{spreadsheet_id}:{worksheet_id}:{row_id}",
+        "tool_call": {
+            "tool": "api_fetch",
+            "arguments": {
+                "method": "PUT",
+                "url": url,
+                "body": json.dumps(body, sort_keys=True),
+            },
+        },
+        "grounding": {
+            "spreadsheet_id": spreadsheet_id,
+            "worksheet_id": worksheet_id,
+            "row_id": row_id,
+            "cells": dict(cells),
+            "provenance": list(obligation.get("provenance") or []),
+        },
+        "network_io_performed": False,
+        "execution_authority": False,
+        "promotion_authority": False,
+    }
+
+
 def compile_google_sheets_update(obligation: Mapping[str, Any]) -> dict[str, Any]:
     bad = _base_checks(obligation)
     if bad is not None:
@@ -177,5 +236,7 @@ def compile_grounded_update(obligation: Mapping[str, Any]) -> dict[str, Any]:
     if app == "SALESFORCE":
         return compile_salesforce_update(obligation)
     if app == "GOOGLE_SHEETS":
+        if obligation.get("row_id") is not None:
+            return compile_google_sheets_row_update(obligation)
         return compile_google_sheets_update(obligation)
     return _fail("UPDATE_APP_UNSUPPORTED")
