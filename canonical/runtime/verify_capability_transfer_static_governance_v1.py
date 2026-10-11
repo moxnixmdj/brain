@@ -98,6 +98,7 @@ donor_source=(current.get("authoritative_sources") or {}).get("terminal_candidat
 assert donor_source.get("donor_independence_authority") is False
 assert donor_source.get("runtime_cognition_provenance_authority") is False
 assert donor_source.get("complete_runtime_dependency_inventory_authority") is False
+assert donor_source.get("git_blob_sha")==G("canonical/runtime/terminal_candidate_donor_independence_audit_v1.py")
 
 legacy=J("canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json")
 if (legacy.get("truth") or {}).get("donor_cleanroom")=="INDEPENDENT_PASS":
