@@ -1,0 +1,95 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_FIRST_CHECKPOINT_ADMISSION_V2",
+  "date": "2026-10-11",
+  "status": "ADMIT_RANK21_ONE_SHOT__GENERAL_CONTENT_ADDRESSED_BOUND_RUNTIME_CALLER_REPAIR_VALIDATION__UNEXPOSED_PRECLAIM__ZERO_CREDIT",
+  "authorized": true,
+  "decision": "ADMIT_CHECKPOINT_AUDIT_EXECUTION",
+  "authorized_scope": "CHECKPOINT_AUDIT_DISPATCH_ONLY",
+  "objective": "MAXIMIZE_REUSABLE_VERIFIED_CAPABILITY_GENERALIZATION_RELIABILITY_AND_EFFICIENCY_PER_RESOURCE",
+  "benchmark_role": "NEW_CAPABILITY_VALIDATION",
+  "rationale": "RANK20_V3_EXPOSED_A_GENERIC_POST_READY_START_CAS_CALLER_VERSION_SKEW_WITH_ZERO_DURABLE_START_AND_ZERO_TRIAL_CONSUMPTION__THE_GENERAL_CONTENT_ADDRESSED_BOUND_RUNTIME_CALLER_REPAIR_IS_VERIFIED_AND_MERGED_WITHOUT_REARMING_RANK20__THE_NEXT_FROZEN_MANIFEST_SUBJECT_RANK21_IS_UNEXPOSED_AND_IS_ADMITTED ONCE ONLY TO FALSIFY_OR_VALIDATE_THE_REPAIRED_GENERAL_EXECUTION_TRANSPORT",
+  "slot": {
+    "ledger_schedule_rank": 21,
+    "frozen_manifest_schedule_order": 20,
+    "task_rank": 20,
+    "slot_id": "terminal-bench-science/ode-law-discovery::trial-0",
+    "task_digest": "sha256:767d16a0a6226f391208b1b4bb126a6f957e5d0c8156342b5c9410a755142d65",
+    "task_content_read": false
+  },
+  "source_bindings": {
+    "scheduler_pointer": {
+      "path": "canonical/governance/CURRENT_DEVELOPMENT_SCHEDULER.json",
+      "git_blob_sha": "fbfb2ed8f24f14be84baddcd0bc35a183ad20def"
+    },
+    "frozen_manifest": {
+      "path": "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json",
+      "git_blob_sha": "6dfa880b1f68881531afbba6ca211681801fd19b"
+    },
+    "parked_rank20_current_pointer": {
+      "path": "canonical/governance/CURRENT_TB_SCIENCE_EXECUTION.json",
+      "git_blob_sha": "7678d9a56461b121ffd52dd4c9c8df464fda08d2"
+    },
+    "rank20_final_nonconsuming_verification": {
+      "path": "canonical/verification/TB_SCIENCE_RANK20_V3_FINAL_NONCONSUMING_VERIFY_20261010_V1.json",
+      "git_blob_sha": "8f77186beeb582c5aef8bbead0d7a98e32f818fa"
+    },
+    "general_bound_runtime_caller_repair_verification": {
+      "path": "canonical/verification/TB_SCIENCE_BOUND_START_CAS_CALLER_REPAIR_VERIFY_20261010_V1.json",
+      "git_blob_sha": "bf5aa5cddf6c1272a9664320273d39725470b2e5"
+    },
+    "public_repaired_base": {
+      "repository": "moxnixmdj/verification-capsule-runner",
+      "branch": "terminal-execution-v1",
+      "commit_sha": "a434b8f8d87b0916b1a9924b35ed3a40c32314d7"
+    },
+    "content_addressed_runtime_binding_git_blob_sha": "f5a77f98dcb80fc4dcbae3e04ac2b0853609a2a7",
+    "repaired_status_journal_runner_git_blob_sha": "954f3ad4188e0187071af2416cc3c260c1762d43"
+  },
+  "scheduler_work_item": {
+    "work_id": "TB_SCIENCE_RANK21_BOUND_RUNTIME_CALLER_LIVE_VALIDATION",
+    "work_type": "BENCHMARK_INSTRUMENTATION",
+    "benchmark_role": "NEW_CAPABILITY_VALIDATION",
+    "claims_new_primitive": false,
+    "verified_capability_defect_ids": [
+      "TB_SCIENCE_RANK20_POST_READY_START_CAS_CALLER_VERSION_SKEW_V7_VS_BOUND_V8"
+    ],
+    "task_local_counterexample_ids": [
+      "terminal-bench-science/hysteretic-aquifer-control::trial-0"
+    ],
+    "reusable_capability_under_validation": "CONTENT_ADDRESSED_BOUND_RUNTIME_CALLER_DISPATCH"
+  },
+  "controls": {
+    "logical_attempts_authorized_total": 1,
+    "retries_authorized": 0,
+    "replacement_allowed": false,
+    "incremental_spend_usd_max": 0,
+    "model_reasoning_before_durable_start_forbidden": true,
+    "task_read_before_public_reseal_and_live_preflight_forbidden": true,
+    "durable_start_cas_required": true,
+    "post_start_result_irreversible": true,
+    "uncertain_effect_replay_authority": false,
+    "rank20_replay_forbidden": true,
+    "different_subject_after_rank21_claim_forbidden": true
+  },
+  "task_read": false,
+  "task_started": false,
+  "benchmark_trials_consumed": 0,
+  "checkpoint_dispatch_admission": true,
+  "execution_claim_authority": false,
+  "execution_authority": false,
+  "activation_authority": false,
+  "promotion_authority": false,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "hard_nonclaims": [
+    "NO_RANK21_TASK_CONTENT_READ",
+    "NO_RANK21_EXECUTION_CLAIM_OR_LOGICAL_ATTEMPT_ID_YET",
+    "NO_RANK21_EXECUTION_OR_ACTIVATION_AUTHORITY_FROM_ADMISSION",
+    "NO_RANK20_RETRY_REPLAY_OR_REPLACEMENT",
+    "NO_CAPABILITY_ACCEPTANCE_OR_TERMINAL_CREDIT_FROM_ADMISSION"
+  ],
+  "next": "BUILD_CONTENT_ADDRESSED_RANK21_PUBLIC_RESEAL_AND_CLAIM_BINDING__VERIFY_ZERO_EXPOSURE__THEN_MINT_NON_RETRY_EXECUTION_AUTHORITY"
+}
