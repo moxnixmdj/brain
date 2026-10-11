@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_SEMANTIC_V10_TOTALITY_INDEPENDENT_VERIFY_V1",
+  "date": "2026-10-11",
+  "status": "PASS__SECOND_INDEPENDENT_SPRITE__6_OF_6_COMPILER_TESTS__12_OF_12_FROZEN_TOTALITIES_MATCH_RECOMPUTATION__12_OF_12_BINDER_V3_RECEIPTS_ADMITTED__SEMANTIC_PROPERTY_TRUTH_12_OF_12",
+  "base_main_commit": "06773ca213cdd839f5c9eacea580938bdfb4f1ff",
+  "subject": {
+    "compiler": {
+      "path": "canonical/runtime/professional_semantic_v10_totality_compiler_v1.py",
+      "git_blob_sha": "bcccbf8cdc769a5068567f99c81a00b3894e6752"
+    },
+    "tests": {
+      "path": "canonical/tests/test_professional_semantic_v10_totality_compiler_v1.py",
+      "git_blob_sha": "d9027f602db8e9b139265821af4d201a68639095"
+    },
+    "batch": {
+      "path": "canonical/governance/PROFESSIONAL_SEMANTIC_V10_AUTHENTIC_POSITIVE_RECEIPT_BATCH_20261011_V1.json",
+      "git_blob_sha": "be9b8d1f441675ba0e275f582b144c0e5c662119"
+    },
+    "v10_subject": {
+      "path": "canonical/governance/PROFESSIONAL_QUALITY_P1_V10_DECLARED_SYSTEM_SUBJECT_20261011_V9.json",
+      "git_blob_sha": "ea710423f0fb1e20d899653e98d84017011698b0"
+    },
+    "binder_v3": {
+      "path": "canonical/runtime/professional_quality_semantic_admission_binder_v3.py",
+      "git_blob_sha": "6e8e5ac7c4cf4cc38e5e7a6f0ad6a0c80f0683be"
+    }
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-professional-hard-defect-verify-20261010",
+    "carrier_id": "sprite-1bbb86ed-1f7c-409f-8397-fadc4de7a62a",
+    "workspace": "/home/sprite/v10-semantic-totality-independent",
+    "compiler_tests_run": 6,
+    "compiler_tests_passed": 6,
+    "compiler_tests_failed": 0,
+    "recomputed_totality_count": 12,
+    "frozen_totality_exact_match_count": 12,
+    "binder_v3_receipts_run": 12,
+    "binder_v3_receipts_passed": 12,
+    "binder_v3_receipts_failed": 0
+  },
+  "proof_decomposition": {
+    "universal_safety": "EXACT_V10_WHOLE_DOMAIN_PLUS_DECLARED_BINDER_V3_SEMANTIC_AUTHORITY__UNKNOWN_STALE_MISMATCHED_OR_INCOMPLETE_RECEIPTS_FAIL_CLOSED",
+    "positive_nonvacuity": "ONE_CONTENT_ADDRESSED_BOUNDED_SEMANTIC_WITNESS_PER_ROOT__WITNESS_SCOPE_NOT_TRANSPORTED_TO_GLOBAL_CLOSURE",
+    "exact_claim_binding": "12_OF_12_V10_CLAIM_IDS_SCOPE_HASHES_TARGET_HASHES_AND_SEMANTICS_HASHES_BOUND",
+    "totality": "12_OF_12_CLAIM_SCOPED_TOTALITY_VERIFICATIONS_RECOMPUTE_IDENTICALLY_ON_SECOND_CARRIER"
+  },
+  "truth": {
+    "semantic_leaf_property_truth_count": 12,
+    "execution_leaf_property_truth_count_existing": 12,
+    "total_property_truth_count_after": 24,
+    "total_leaf_count": 24,
+    "bounded_witness_global_scope_transport": false,
+    "quality_authority": false,
+    "acceptance_authority": false,
+    "promotion_authority": false,
+    "terminal_authority": false
+  },
+  "exact_next": "RUN_FULL_CURRENT_MAIN_FULL_SYSTEM_REGRESSION__THEN_RECOMPUTE_UVCK_V2_ASSURANCE_PROMOTION__NO_NEW_SEMANTIC_RESEARCH_IF_REGRESSION_PASSES",
+  "hard_nonclaims": [
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY_FROM_PROPERTY_TRUTH_ALONE",
+    "NO_BOUNDED_WITNESS_SCOPE_INFLATION",
+    "NO_FULL_CURRENT_MAIN_REGRESSION_YET"
+  ],
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
