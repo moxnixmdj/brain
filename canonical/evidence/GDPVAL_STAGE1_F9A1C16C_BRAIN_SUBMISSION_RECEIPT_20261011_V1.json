@@ -1,0 +1,42 @@
+{
+  "schema":"PROJECT_BRAIN_GDPVAL_STAGE1_BRAIN_SUBMISSION_RECEIPT_20261011_V1",
+  "date":"2026-10-11",
+  "status":"PASS__FRESH_ONE_PAGE_STAGE_PLOT_FROZEN__ZERO_OWNER_SCORE_CREDIT",
+  "benchmark":"GDPval-AA v2.1",
+  "stage":1,
+  "subject":{"row_idx":11,"task_id":"f9a1c16c-53fd-4c8f-88cc-5c325ec2f0bb","sector":"Information","occupation":"Audio and Video Technicians"},
+  "precommit":"canonical/governance/GDPVAL_STAGE1_FRESH_BATCH_PRECOMMIT_20261011_V2.json",
+  "preoutput_contract":"canonical/governance/GDPVAL_ROW11_LOSSLESS_PREOUTPUT_ACCEPTANCE_LEDGER_20261011_V1.json",
+  "lossless_contract":{"task_sha256":"ee25b783d60b9509374f9d6a27be57a98f2154a57617d9e13950649c10209825","task_contract_sha256":"642e83587080d8d81e6c8eea72af6725bad50491b80bfb07c37cd04de798bcb7","raw_obligation_count":31},
+  "freshness":{
+    "task_id_frozen_before_prompt_read":true,
+    "public_rubric_read_before_output_freeze":false,
+    "human_gold_deliverables_read_before_output_freeze":false,
+    "third_party_model_submissions_read_before_output_freeze":false,
+    "judge_feedback_read_before_output_freeze":false
+  },
+  "deliverable":{
+    "format":"pdf",
+    "filename":"GDPval_f9a1c16c_stage_plot.pdf",
+    "sha256":"ae3799adfba259da999b2e684194439753e9a6628971a09e3b03afa882c0e099",
+    "library_file_id":"libfile_1a85ace38504819184c1c58a2a10a671",
+    "rendered_page_count":1,
+    "orientation":"landscape",
+    "visual_inspection":"PASS__READABLE_NO_OVERLAP_AFTER_REPAIR"
+  },
+  "verified_content":{
+    "performer_count":5,
+    "input_count":6,
+    "output_count":7,
+    "wedge_count":5,
+    "iem_split_count":2,
+    "di_box_count":2,
+    "amps":["Bass amp stage right","Guitar amp stage left"],
+    "drum_kit":"4-piece + hi-hat + two cymbals + ride",
+    "drummer_wedge":"about 10 o'clock facing audience",
+    "wedge_numbering":"counterclockwise from stage right W1 Bass, W2 Vox1, W3 Vox2, W4 Guitar, W5 Drums",
+    "extra_instrument_or_drum_mics_added":false
+  },
+  "hard_nonclaims":["NO_ARTIFICIAL_ANALYSIS_OWNER_SCORE","NO_GDPVAL_1846_CLOSURE","NO_FULL_220_SUBMISSION_MANIFEST"],
+  "accounting":{"incremental_spend_usd":0,"acceptance_credit_delta":0,"terminal_credit_delta":0}
+}
