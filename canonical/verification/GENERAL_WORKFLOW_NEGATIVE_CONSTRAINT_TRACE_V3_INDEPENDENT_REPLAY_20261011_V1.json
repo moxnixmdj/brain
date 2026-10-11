@@ -1,0 +1,112 @@
+{
+  "schema": "PROJECT_BRAIN_GENERAL_WORKFLOW_NEGATIVE_CONSTRAINT_TRACE_V3_INDEPENDENT_REPLAY_20261011_V1",
+  "status": "PASS__GENERIC_FORBIDDEN_ACTION_GUARD_AND_COMPLETE_TRACE_VERIFICATION__ZERO_ACCEPTANCE_CREDIT",
+  "date": "2026-10-11",
+  "mission_scope": {
+    "development_target": "BENCHMARK_AGNOSTIC_GOAL_STATE_TOOL_EFFECT_LOOP",
+    "measurement_surface": "AutomationBench",
+    "exact_private_predicate": "AUTOMATIONBENCH_GE_40",
+    "exact_private_predicate_status": "OPEN",
+    "benchmark_role": "MEASUREMENT_ONLY",
+    "no_goal_substitution": true
+  },
+  "causal_repairs": [
+    {
+      "root_cause": "NEGATED_AMBIGUOUS_ACTION_VERBS_WERE_FILTERED_AS_NOUNS_BEFORE_FORBIDDEN_INTENT_CLASSIFICATION",
+      "repair": "AMBIGUOUS_VERB_CHECK_TREATS_NEGATION_PREFIX_AS_STRONG_VERB_EVIDENCE"
+    },
+    {
+      "root_cause": "NEGATION_PATTERN_REQUIRED_TRAILING_WHITESPACE_AFTER_PREFIX_STRIP",
+      "repair": "NEGATION_PATTERN_CHANGED_FROM_TRAILING_WHITESPACE_PLUS_TO_OPTIONAL_WHITESPACE"
+    },
+    {
+      "root_cause": "FORBIDDEN_NONDELETE_ACTIONS_LACKED_INDEPENDENT_NONEXECUTION_EVIDENCE",
+      "repair": "COMPLETE_EXECUTED_MUTATION_TRACE_PLUS_PREMUTATION_CONFLICT_GUARD"
+    }
+  ],
+  "candidate_components": {
+    "goal_compiler": {
+      "path": "canonical/runtime/generic_goal_tool_effect_planner_v1.py",
+      "git_blob_sha": "712177982d047f6e0629ed15f65a8b58432c46a5"
+    },
+    "constraint_guard": {
+      "path": "canonical/runtime/generic_goal_constraint_guard_v1.py",
+      "git_blob_sha": "7700ee50649d0263ec6564d734efcea886c5bf35"
+    },
+    "state_verifier": {
+      "path": "canonical/runtime/generic_goal_state_verifier_v3.py",
+      "git_blob_sha": "3bfac0306bfac6d42d28cecba59a4b63b243f104"
+    },
+    "transport_state_machine": {
+      "path": "canonical/runtime/automationbench_policy_state_machine_v3.py",
+      "git_blob_sha": "a83493dbea83430df2b186e9e567b12a4e8b76a1"
+    },
+    "stirrup_adapter": {
+      "path": "canonical/runtime/automationbench_stirrup_client_v1.py",
+      "git_blob_sha": "3f025f719567f618622242b215bba6213392dc3c"
+    }
+  },
+  "semantics": {
+    "pure_nondelete_forbidden_goal": "MAY_CLOSE_BY_COMPLETE_EMPTY_MUTATION_TRACE",
+    "forbidden_delete": "RETAINS_STRONG_POST_STATE_SURVIVAL_REQUIREMENT",
+    "mixed_positive_forbidden_same_action": "PREMUTATION_BLOCK_WHEN_TARGET_CONFLICT_CANNOT_BE_DISAMBIGUATED",
+    "distinct_strong_anchors": "ALLOW_NONCONFLICTING_SAME_ACTION_INTENTS",
+    "conflicting_executed_mutation": "FAILS_FORBIDDEN_CONSTRAINT_EVEN_IF_POST_STATE_WAS_LATER_REPAIRED",
+    "incomplete_execution_trace": "FAIL_CLOSED"
+  },
+  "independent_replay": {
+    "carrier": {
+      "type": "EXISTING_REMOTE_SPRITE",
+      "sprite_name": "brain-live-runtime-v1-verify-20261008",
+      "sprite_id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13",
+      "replay_directory": "/tmp/automationbench-general-v2-replay",
+      "laptop_used": false,
+      "new_sprite_provisioned": false
+    },
+    "first_falsification_run": {
+      "tests_run": 22,
+      "failures": 3,
+      "errors": 2,
+      "result": "FAIL",
+      "finding": "GENERIC_NEGATED_AMBIGUOUS_VERBS_NOT_COMPILED"
+    },
+    "focused_after_root_repair": {
+      "tests_run": 22,
+      "failures": 0,
+      "errors": 0,
+      "result": "PASS"
+    },
+    "full_compatibility_after_adapter_promotion": {
+      "tests_run": 111,
+      "failures": 0,
+      "errors": 0,
+      "result": "PASS"
+    }
+  },
+  "capability_purity": {
+    "app_or_task_specific_handlers_added": 0,
+    "private_content_used": false,
+    "external_model_runtime_cognition_used": false,
+    "generic_constraint_mechanism": true,
+    "vendor_specific_reasoning_added": false
+  },
+  "remaining_open_boundaries": [
+    "FULL_PRIVATE_657_SCOPE_COMPLETENESS",
+    "EXACT_PRIVATE_OWNER_RESULT",
+    "UNKNOWN_PRIVATE_TASK_FAILURE_CLASSES_NOT_EXPOSED_BY_PUBLIC_OR_SYNTHETIC_TESTS"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "private_tasks_exposed": 0,
+    "private_results_observed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "benchmark_score_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_AUTOMATIONBENCH_GE_40_IS_PROVED",
+    "NO_CLAIM_111_TEST_REPLAY_IS_SCOPE_COMPLETE_FOR_PRIVATE_657",
+    "NO_PUBLIC_TO_PRIVATE_SCORE_TRANSFER_CLAIM",
+    "NO_ACCEPTANCE_OR_FAMILY_PROMOTION_FROM_THIS_RECEIPT"
+  ]
+}
