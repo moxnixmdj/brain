@@ -200,6 +200,25 @@ def _scale_pixels(grid: Grid, row_factor: int, col_factor: int) -> Grid:
     return tuple(rows)
 
 
+def _hcat(a: Grid, b: Grid) -> Grid | None:
+    if len(a) != len(b):
+        return None
+    return tuple(tuple(x) + tuple(y) for x, y in zip(a, b))
+
+
+def _vcat(a: Grid, b: Grid) -> Grid | None:
+    if len(a[0]) != len(b[0]):
+        return None
+    return tuple(tuple(row) for row in (*a, *b))
+
+
+def _repeat_grid(grid: Grid, row_repeats: int, col_repeats: int) -> Grid:
+    if row_repeats < 1 or col_repeats < 1:
+        raise ARCNoveltyCompilerError("REPEAT_FACTOR_INVALID")
+    row_block = tuple(tuple(v for _ in range(col_repeats) for v in row) for row in grid)
+    return tuple(row for _ in range(row_repeats) for row in row_block)
+
+
 def _infer_recolor(pairs: Sequence[tuple[Grid, Grid]]) -> dict[int, int] | None:
     mapping: dict[int, int] = {}
     for inp, out in pairs:
@@ -241,6 +260,18 @@ def _predict(h: Mapping[str, Any], grid: Grid) -> Grid | None:
         return _apply_recolor(grid, mapping)
     if kind == "PIXEL_SCALE":
         return _scale_pixels(grid, int(h["row_factor"]), int(h["col_factor"]))
+    if kind == "GRID_REPEAT":
+        return _repeat_grid(grid, int(h["row_repeats"]), int(h["col_repeats"]))
+    if kind == "MIRROR_EXTEND_HORIZONTAL":
+        flipped = _flip_h(grid)
+        return _hcat(flipped, grid) if h["side"] == "LEFT" else _hcat(grid, flipped)
+    if kind == "MIRROR_EXTEND_VERTICAL":
+        flipped = _flip_v(grid)
+        return _vcat(flipped, grid) if h["side"] == "UP" else _vcat(grid, flipped)
+    if kind == "MIRROR_EXTEND_QUAD":
+        top = _hcat(grid, _flip_h(grid))
+        bottom = _hcat(_flip_v(grid), _rot180(grid))
+        return None if top is None or bottom is None else _vcat(top, bottom)
     if kind == "CROP_NON_BACKGROUND":
         bbox = _non_background_bbox(grid)
         return None if bbox is None else _crop_bbox(grid, bbox)
@@ -303,6 +334,34 @@ def compile_hypotheses(
         if _consistent(h, pairs):
             candidates.append(h)
 
+    repeat_factors: set[tuple[int, int]] = set()
+    for inp, out in pairs:
+        ih, iw = _shape(inp)
+        oh, ow = _shape(out)
+        if oh % ih == 0 and ow % iw == 0:
+            rr, cc = oh // ih, ow // iw
+            if rr >= 1 and cc >= 1 and (rr > 1 or cc > 1):
+                repeat_factors.add((rr, cc))
+    if len(repeat_factors) == 1:
+        rr, cc = next(iter(repeat_factors))
+        h = {"kind": "GRID_REPEAT", "row_repeats": rr, "col_repeats": cc}
+        if _consistent(h, pairs):
+            candidates.append(h)
+
+    for side in ("LEFT", "RIGHT"):
+        h = {"kind": "MIRROR_EXTEND_HORIZONTAL", "side": side}
+        if _consistent(h, pairs):
+            candidates.append(h)
+
+    for side in ("UP", "DOWN"):
+        h = {"kind": "MIRROR_EXTEND_VERTICAL", "side": side}
+        if _consistent(h, pairs):
+            candidates.append(h)
+
+    h = {"kind": "MIRROR_EXTEND_QUAD"}
+    if _consistent(h, pairs):
+        candidates.append(h)
+
     crop = {"kind": "CROP_NON_BACKGROUND"}
     if _consistent(crop, pairs):
         candidates.append(crop)
@@ -344,6 +403,10 @@ def compile_hypotheses(
             "GLOBAL_DIHEDRAL_GEOMETRY",
             "POSITIONWISE_DETERMINISTIC_RECOLOR",
             "EXACT_INTEGER_PIXEL_SCALE",
+            "WHOLE_GRID_INTEGER_REPEAT",
+            "HORIZONTAL_MIRROR_EXTENSION",
+            "VERTICAL_MIRROR_EXTENSION",
+            "TWO_AXIS_MIRROR_QUADRANT_EXTENSION",
             "NON_BACKGROUND_BOUNDING_BOX_CROP",
             "UNIQUE_LARGEST_OR_SMALLEST_COMPONENT_CROP",
         ],
