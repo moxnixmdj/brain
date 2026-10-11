@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_R2_GENERIC_AUTHORITY_MATERIALIZATION_RECONCILIATION_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__EXACT_MERGED_BLOB_STATIC_INTEGRATION_AUDIT__AUTHORED_TEST_SURFACE_BOUND__INDEPENDENT_EXECUTION_NOT_CLAIMED__ZERO_CREDIT",
+  "subject_main_commit": "7e000a2b9f31ee423cb6015ff63b007ac208e754",
+  "exact_blobs": {
+    "materializer": [
+      "canonical/runtime/r2_authority_candidate_materialization_v1.py",
+      "d277f60e454ecf2acbdbc3dc5d47123e02190366"
+    ],
+    "checker_adapter": [
+      "canonical/runtime/r2_generic_authority_candidate_checker_adapter_v1.py",
+      "9862e5089553f44911266e8d710d0f335c5fd1be"
+    ],
+    "regcap_adapter": [
+      "canonical/runtime/r2_regcap_authority_candidate_adapter_v1.py",
+      "5b8351dbe7d415bed6b6a4f6c4883ed2a9652281"
+    ],
+    "materializer_tests": [
+      "canonical/tests/test_r2_authority_candidate_materialization_v1.py",
+      "b746f20306284001a3b68ee63460d50031306e18"
+    ],
+    "checker_adapter_tests": [
+      "canonical/tests/test_r2_generic_authority_candidate_checker_adapter_v1.py",
+      "69b8ddf9474851e1bb6692251aaa3c7d9efb920e"
+    ],
+    "regcap_adapter_tests": [
+      "canonical/tests/test_r2_regcap_authority_candidate_adapter_v1.py",
+      "d08369129a5f4fd0e3ad8c9c4d0c1c32d1fcb7ca"
+    ]
+  },
+  "merged_source_pr": 4329,
+  "merged_commit": "7e000a2b9f31ee423cb6015ff63b007ac208e754",
+  "static_integration_audit": {
+    "delegated_candidate_requires_https_and_declared_authority_domain": true,
+    "redirects_rechecked_against_authority_domains": true,
+    "exact_raw_sha256_bound": true,
+    "materializer_grants_semantic_truth_authority": false,
+    "existing_truth_checker_template_required": true,
+    "source_replacement_is_proposal_only": true,
+    "downstream_checker_recomputes_predicate_identity_and_truth": true,
+    "regcap_adapter_generic_fallback_bound": true,
+    "prior_typed_four_way_path_preserved": true
+  },
+  "execution_truth": {
+    "pr_body_reports_focused_local_module_checks": true,
+    "independent_remote_execution_for_generic_path": false,
+    "github_hosted_full_regression": "PRE_STEP_BLOCKED",
+    "reason": "NO_CONTENT_ADDRESSED_INDEPENDENT_GENERIC_PATH_REPLAY_RECEIPT_PRESENT_IN_CANONICAL_VERIFICATION"
+  },
+  "proved": [
+    "GENERIC_UNBOUND_AUTHORITY_CANDIDATE_MATERIALIZATION_MECHANISM_EXISTS_ON_MAIN",
+    "GENERIC_MATERIALIZATION_CAN_PROPOSE_MATERIAL_ONLY_TO_ALREADY_EXISTING_TRUTH_CHECKER_TEMPLATES",
+    "MATERIALIZATION_DOES_NOT_SELF_CERTIFY_SEMANTIC_TRUTH",
+    "CURRENT_R2_POINTER_FIELD_MARKING_GENERIC_MATERIALIZATION_AS_MECHANISM_OPEN_IS_STALE"
+  ],
+  "hard_nonclaims": [
+    "NO_INDEPENDENT_EXECUTION_REPLAY_PASS_CLAIM_FOR_GENERIC_PATH",
+    "NO_LIVE_EXTERNAL_AUTHORITY_FACT_BOUND",
+    "NO_FINANCE_SEMANTIC_TAIL_CLOSURE",
+    "NO_POLICY_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
