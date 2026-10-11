@@ -117,3 +117,110 @@ def test_no_task_specific_or_model_producer_markers_in_policy_source():
     )
     for token in forbidden:
         assert token not in text
+
+
+def _browser_receipt(submitted, result, screenshot="old"):
+    return {
+        "screenshot_sha256": screenshot,
+        "actions": ["WAIT"],
+        "submitted_operation": submitted,
+        "browser_result": result,
+    }
+
+
+def test_simple_url_workflow_navigate_observe_done():
+    instruction = "Open https://example.com/docs"
+
+    first = decide(_state(instruction, screenshot="s0"))
+    assert first["actions"][0]["op"]["type"] == "NAVIGATE"
+
+    nav = _browser_receipt(
+        {"type": "NAVIGATE", "url": "https://example.com/docs"},
+        {"type": "NAVIGATE", "url": "https://example.com/docs"},
+        screenshot="s0",
+    )
+    second = decide(_state(instruction, history=[nav], screenshot="s1"))
+    assert second["actions"] == [{"type": "BROWSER_OP", "op": {"type": "OBSERVE"}}]
+
+    obs = _browser_receipt(
+        {"type": "OBSERVE"},
+        {
+            "type": "OBSERVE",
+            "active_url": "https://example.com/docs",
+            "visible_text": "Documentation",
+            "controls": [],
+        },
+        screenshot="s1",
+    )
+    third = decide(_state(instruction, history=[nav, obs], screenshot="s1"))
+    assert third["actions"] == [{"type": "DONE"}]
+
+
+def test_generic_search_workflow_observe_fill_press_observe_done():
+    instruction = "On the website, search for cats"
+
+    first = decide(_state(instruction, screenshot="s0"))
+    assert first["actions"] == [{"type": "BROWSER_OP", "op": {"type": "OBSERVE"}}]
+
+    observed = _browser_receipt(
+        {"type": "OBSERVE"},
+        {
+            "type": "OBSERVE",
+            "active_url": "https://example.test/",
+            "visible_text": "Search",
+            "controls": [
+                {
+                    "tag": "input",
+                    "role": "searchbox",
+                    "type": "search",
+                    "placeholder": "Search",
+                    "text": "",
+                }
+            ],
+        },
+        screenshot="s0",
+    )
+    second = decide(_state(instruction, history=[observed], screenshot="s0"))
+    assert second["actions"] == [{
+        "type": "BROWSER_OP",
+        "op": {
+            "type": "FILL_PLACEHOLDER",
+            "placeholder": "Search",
+            "value": "cats",
+            "exact": True,
+        },
+    }]
+
+    filled = _browser_receipt(
+        {
+            "type": "FILL_PLACEHOLDER",
+            "placeholder": "Search",
+            "value": "cats",
+            "exact": True,
+        },
+        {"type": "FILL_PLACEHOLDER", "placeholder": "Search", "url": "https://example.test/"},
+        screenshot="s0",
+    )
+    third = decide(_state(instruction, history=[observed, filled], screenshot="s1"))
+    assert third["actions"] == [{"type": "BROWSER_OP", "op": {"type": "PRESS", "key": "Enter"}}]
+
+    pressed = _browser_receipt(
+        {"type": "PRESS", "key": "Enter"},
+        {"type": "PRESS", "key": "Enter", "url": "https://example.test/?q=cats"},
+        screenshot="s1",
+    )
+    fourth = decide(_state(instruction, history=[observed, filled, pressed], screenshot="s2"))
+    assert fourth["actions"] == [{"type": "BROWSER_OP", "op": {"type": "OBSERVE"}}]
+
+    post = _browser_receipt(
+        {"type": "OBSERVE"},
+        {
+            "type": "OBSERVE",
+            "active_url": "https://example.test/?q=cats",
+            "visible_text": "Results for cats",
+            "controls": [],
+        },
+        screenshot="s2",
+    )
+    fifth = decide(_state(instruction, history=[observed, filled, pressed, post], screenshot="s2"))
+    assert fifth["actions"] == [{"type": "DONE"}]
