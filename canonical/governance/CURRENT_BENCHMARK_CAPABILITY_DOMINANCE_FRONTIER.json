@@ -1,0 +1,278 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_BENCHMARK_CAPABILITY_DOMINANCE_FRONTIER_V1",
+  "date": "2026-10-11",
+  "status": "ACTIVE_CANDIDATE__CAPABILITY_FIRST__12_CHECKPOINT_ROWS_WAKE_GATED__1_TB_SCIENCE_PARKED__ZERO_SCORE_OR_CAPABILITY_CREDIT_FROM_PROJECTION",
+  "mission": {
+    "terminal_goal": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "benchmark_role": "MILESTONE_MEASUREMENT_AND_AUDIT",
+    "capability_role": "PRIMARY_DEVELOPMENT_OBJECT",
+    "literal_benchmark_scores_remain_independent_obligations": true
+  },
+  "sources": {
+    "goal_override": {
+      "path": "canonical/governance/CURRENT_TERMINAL_GOAL_OVERRIDE.json",
+      "git_blob_sha": "be42319861a3ca1f286a493d09368c85f5ef43eb"
+    },
+    "wake_gate": {
+      "path": "canonical/governance/CURRENT_ALL_OPEN_CHECKPOINT_WAKE_GATE_RECONCILIATION_20261011_V1.json",
+      "git_blob_sha": "e10c7ebe00dac3f60eee2845df16c58a1fdd5791"
+    },
+    "live_frontier": {
+      "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
+      "git_blob_sha": "bb2f427bb5aa790e98ffa8d26b02df008827b802"
+    },
+    "global_family_universe": {
+      "path": "canonical/governance/GLOBAL_TERMINAL_UNIVERSE_V1.json",
+      "git_blob_sha": "ff97ffee7c9b25a491ff5ee231919ea4964f09e3"
+    },
+    "m0_global_necessity_falsifier": {
+      "path": "canonical/governance/M0_GLOBAL_SEMANTIC_DECOMPOSITION_NECESSITY_FALSIFIER_20261007_V1.json",
+      "git_blob_sha": "0c02f1c3a2b4eacf9d84b1cb81c09643305c6f8a"
+    }
+  },
+  "relation_policy": {
+    "projection_default": "SCHEDULING_HEURISTIC_ONLY",
+    "credit_relations": [
+      "EXACT_EQUIVALENCE",
+      "CONSERVATIVE_DOMINANCE",
+      "OWNER_ACCEPTED_RELATION"
+    ],
+    "rule": "HEURISTIC_PROJECTION_RANKS_ONLY__NEVER_CREATES_SCORE_OR_CAPABILITY_CREDIT"
+  },
+  "benchmark_rows": [
+    {
+      "id": "CODING_TB4_GE_66_4",
+      "scheduler_state": "WAKE_GATED",
+      "capability_projection": {
+        "relation": "SCHEDULING_HEURISTIC_ONLY",
+        "families": [
+          "ADVANCED_AGENTIC_CODING",
+          "COMPLEX_MULTI_TOOL_AGENCY",
+          "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+          "MULTI_CAPABILITY_COMPOSITION"
+        ]
+      }
+    },
+    {
+      "id": "CODING_FRONTIERCODE_GE_54_4",
+      "scheduler_state": "WAKE_GATED",
+      "capability_projection": {
+        "relation": "SCHEDULING_HEURISTIC_ONLY",
+        "families": [
+          "ADVANCED_AGENTIC_CODING",
+          "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT"
+        ]
+      }
+    },
+    {
+      "id": "CODING_CURSORBENCH_GE_57_8",
+      "scheduler_state": "WAKE_GATED",
+      "capability_projection": {
+        "relation": "SCHEDULING_HEURISTIC_ONLY",
+        "families": [
+          "ADVANCED_AGENTIC_CODING",
+          "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+          "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY"
+        ]
+      }
+    },
+    {
+      "id": "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "scheduler_state": "WAKE_GATED",
+      "capability_projection": {
+        "relation": "SCHEDULING_HEURISTIC_ONLY",
+        "families": [
+          "UNKNOWN_DOMAIN_ADAPTATION",
+          "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+          "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT"
+        ]
+      }
+    },
+    {
+      "id": "PROWORK_GDPVAL_GE_1846",
+      "scheduler_state": "WAKE_GATED",
+      "capability_projection": {
+        "relation": "SCHEDULING_HEURISTIC_ONLY",
+        "families": [
+          "PROFESSIONAL_KNOWLEDGE_WORK",
+          "COMMUNICATION_AND_SYNTHESIS",
+          "ARTIFACT_CREATION",
+          "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT"
+        ]
+      }
+    },
+    {
+      "id": "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "scheduler_state": "WAKE_GATED",
+      "capability_projection": {
+        "relation": "SCHEDULING_HEURISTIC_ONLY",
+        "families": [
+          "PROFESSIONAL_KNOWLEDGE_WORK",
+          "ARTIFACT_CREATION",
+          "COMMUNICATION_AND_SYNTHESIS",
+          "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT"
+        ]
+      }
+    },
+    {
+      "id": "AUTOMATIONBENCH_GE_40",
+      "scheduler_state": "WAKE_GATED",
+      "capability_projection": {
+        "relation": "SCHEDULING_HEURISTIC_ONLY",
+        "families": [
+          "BUSINESS_WORKFLOW_AUTOMATION",
+          "COMPUTER_AND_BROWSER_USE",
+          "COMPLEX_MULTI_TOOL_AGENCY",
+          "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+          "MULTI_CAPABILITY_COMPOSITION"
+        ]
+      }
+    },
+    {
+      "id": "HLE_TOOLS_GE_67_7",
+      "scheduler_state": "WAKE_GATED",
+      "capability_projection": {
+        "relation": "SCHEDULING_HEURISTIC_ONLY",
+        "families": [
+          "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+          "UNKNOWN_DOMAIN_ADAPTATION",
+          "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+          "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+          "MULTI_CAPABILITY_COMPOSITION"
+        ]
+      }
+    },
+    {
+      "id": "CHARTOGRAPHY_TOOLS_GE_89",
+      "scheduler_state": "WAKE_GATED",
+      "capability_projection": {
+        "relation": "SCHEDULING_HEURISTIC_ONLY",
+        "families": [
+          "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+          "ARTIFACT_CREATION",
+          "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT"
+        ]
+      }
+    },
+    {
+      "id": "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "scheduler_state": "WAKE_GATED",
+      "capability_projection": {
+        "relation": "SCHEDULING_HEURISTIC_ONLY",
+        "families": [
+          "COMPUTER_AND_BROWSER_USE",
+          "COMPLEX_MULTI_TOOL_AGENCY",
+          "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+          "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+          "MULTI_CAPABILITY_COMPOSITION"
+        ]
+      }
+    },
+    {
+      "id": "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "scheduler_state": "WAKE_GATED",
+      "capability_projection": {
+        "relation": "SCHEDULING_HEURISTIC_ONLY",
+        "families": [
+          "FINANCIAL_ANALYSIS",
+          "PROFESSIONAL_KNOWLEDGE_WORK",
+          "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT"
+        ]
+      }
+    },
+    {
+      "id": "FINANCE_AGENT_V2_GE_58_59",
+      "scheduler_state": "WAKE_GATED",
+      "capability_projection": {
+        "relation": "SCHEDULING_HEURISTIC_ONLY",
+        "families": [
+          "FINANCIAL_ANALYSIS",
+          "PROFESSIONAL_KNOWLEDGE_WORK",
+          "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+          "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+          "COMMUNICATION_AND_SYNTHESIS",
+          "MULTI_CAPABILITY_COMPOSITION"
+        ]
+      }
+    },
+    {
+      "id": "TB_SCIENCE_GE_58_7",
+      "scheduler_state": "PARKED",
+      "capability_projection": {
+        "relation": "SCHEDULING_HEURISTIC_ONLY",
+        "families": [
+          "AGENTIC_SCIENTIFIC_RESEARCH",
+          "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+          "UNKNOWN_DOMAIN_ADAPTATION",
+          "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+          "COMPLEX_MULTI_TOOL_AGENCY",
+          "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+          "MULTI_CAPABILITY_COMPOSITION"
+        ]
+      }
+    }
+  ],
+  "current_execution_candidates": [
+    {
+      "id": "RETRY_WAKE_GATED_CHECKPOINT_ROWS",
+      "type": "BENCHMARK_SPECIFIC",
+      "benchmark_row_id": "FINANCE_AGENT_V2_GE_58_59",
+      "new_policy_changing_evidence": false,
+      "waits_for_external_event": false,
+      "incremental_spend_usd": 0,
+      "external_runtime_cognition": 0
+    },
+    {
+      "id": "GLOBAL_M0_BUILD_FROM_PROJECTED_CENTRALITY",
+      "type": "CAPABILITY",
+      "proved_live_defect": false,
+      "verified_counterexample": false,
+      "authorized_discriminating_experiment": false,
+      "reusable_family_count": 7,
+      "projected_benchmark_row_count": 9,
+      "waits_for_external_event": false,
+      "incremental_spend_usd": 0,
+      "external_runtime_cognition": 0
+    },
+    {
+      "id": "BYTES_V77_RESOURCE_PARETO_CUT",
+      "type": "RESOURCE_PARETO",
+      "proof_preserving": true,
+      "reusable_family_count": 0,
+      "projected_benchmark_row_count": 0,
+      "wall_clock_rank": 1,
+      "waits_for_external_event": false,
+      "incremental_spend_usd": 0,
+      "external_runtime_cognition": 0
+    }
+  ],
+  "current_expected_plan": {
+    "benchmark_specific_selected": false,
+    "capability_work_selected_from_benchmark_projection_only": false,
+    "selected_existing_frontier_work": "BYTES_V77_RESOURCE_PARETO_CUT"
+  },
+  "ledgers": {
+    "CAPABILITY_COMPARISON_LEDGER": {
+      "closed_by_this_projection": [],
+      "open_relations_require_typed_entailment": true
+    },
+    "BRANDED_BENCHMARK_RECEIPT_LEDGER": {
+      "closed_by_this_projection": [],
+      "open_checkpoint_rows": 12,
+      "parked_checkpoint_rows": 1
+    }
+  },
+  "hard_nonclaims": [
+    "NO_BENCHMARK_SCORE_CREATED",
+    "NO_CAPABILITY_PARITY_CREATED_FROM_HEURISTIC_PROJECTION",
+    "NO_CLAIM_THE_PROJECTED_FAMILY_LISTS_ARE_SCOPE_COMPLETE",
+    "NO_GLOBAL_M0_WORK_AUTHORIZED_BY_GRAPH_CENTRALITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_score_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

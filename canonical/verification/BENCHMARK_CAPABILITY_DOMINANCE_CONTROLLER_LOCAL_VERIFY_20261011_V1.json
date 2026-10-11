@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_BENCHMARK_CAPABILITY_DOMINANCE_CONTROLLER_LOCAL_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "LOCAL_EXACT_LOGIC_REPLAY_PASS__NOT_INDEPENDENT__ZERO_CREDIT",
+  "subject": {
+    "law": {
+      "path": "canonical/laws/BENCHMARK_MEASUREMENT_VS_CAPABILITY_PROOF_LAW_V1.md",
+      "git_blob_sha": "8c6087074c5b055da55a0700cc62ef4a042303af"
+    },
+    "runtime": {
+      "path": "canonical/runtime/benchmark_capability_dominance_scheduler_v1.py",
+      "git_blob_sha": "c230258768141d44dc986f6d72d0e6a307532655"
+    },
+    "tests": {
+      "path": "canonical/tests/test_benchmark_capability_dominance_scheduler_v1.py",
+      "git_blob_sha": "13ae0ded0cec1d0a261f06a8cc46b89cc274f378"
+    },
+    "frontier": {
+      "path": "canonical/governance/CURRENT_BENCHMARK_CAPABILITY_DOMINANCE_FRONTIER.json",
+      "git_blob_sha": "02d7c98cc4a5f82103daaf87d7305028013bdd36"
+    }
+  },
+  "verified_results": [
+    "RUNTIME_LOGIC_REPLAY_10_OF_10_FOCUSED_CHECKS_PASS",
+    "HEURISTIC_PROJECTION_ZERO_CAPABILITY_CREDIT",
+    "CAPABILITY_PROOF_DOES_NOT_INVENT_BRANDED_SCORE",
+    "WAKE_GATED_BENCHMARK_RETRY_REJECTED",
+    "GRAPH_CENTRALITY_WITHOUT_LIVE_DEFECT_REJECTED",
+    "LIVE_REUSABLE_CAPABILITY_DEFECT_DOMINATES_RESOURCE_ONLY_WORK",
+    "PROOF_PRESERVING_ZERO_SPEND_RESOURCE_PARETO_WORK_ADMITTED_WHEN_NO_LIVE_DEFECT_EXISTS",
+    "EXTERNAL_RUNTIME_COGNITION_REJECTED",
+    "NONZERO_INCREMENTAL_SPEND_REJECTED"
+  ],
+  "current_projection": {
+    "benchmark_rows": 13,
+    "wake_gated_rows": 12,
+    "parked_rows": 1,
+    "benchmark_specific_same_information_work_selected": false,
+    "capability_work_from_heuristic_projection_only_selected": false,
+    "expected_existing_frontier_selection": "BYTES_V77_RESOURCE_PARETO_CUT"
+  },
+  "verification_authority": "LOCAL_REPLAY_ONLY__SEPARATE_INDEPENDENT_RUNNER_MIRROR_ATTEMPT_BLOCKED_BY_CONNECTOR",
+  "hard_nonclaims": [
+    "NO_INDEPENDENT_VERIFICATION_CLAIM",
+    "NO_BENCHMARK_SCORE_CREDIT",
+    "NO_CAPABILITY_PARITY_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_score_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
