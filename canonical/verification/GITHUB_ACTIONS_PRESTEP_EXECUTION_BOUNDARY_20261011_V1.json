@@ -1,0 +1,102 @@
+{
+  "schema": "PROJECT_BRAIN_GITHUB_ACTIONS_PRESTEP_EXECUTION_BOUNDARY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "GITHUB_HOSTED_EXECUTION_BLOCKED_BEFORE_ANY_STEP_ACROSS_MULTIPLE_WORKFLOWS_AND_RUNNER_CLASSES__EXACT_CONTROL_PLANE_CAUSE_UNBOUND__ZERO_CREDIT",
+  "objective": "LOCALIZE_THE_FULL_PRIVATE_REGRESSION_BLOCKER_WITHOUT_REPEATING_EXPENSIVE_OR_IDENTICAL_REGRESSION_ATTEMPTS",
+  "subject_main_commit_observed_before_branch": "e8fc64ac8214d5e017c93428076740029235a018",
+  "evidence": {
+    "full_regression": [
+      {
+        "run_id": 38106096053,
+        "runner_class": "ubuntu-latest",
+        "attempts_observed": 2,
+        "result": "FAILURE_BEFORE_STEPS",
+        "executed_steps": 0
+      },
+      {
+        "run_id": 38106437962,
+        "runner_class": "ubuntu-24.04",
+        "attempts_observed": 1,
+        "result": "FAILURE_BEFORE_STEPS",
+        "executed_steps": 0
+      },
+      {
+        "run_id": 38106537290,
+        "runner_class": "ubuntu-latest",
+        "attempts_observed": 3,
+        "result": "FAILURE_BEFORE_STEPS",
+        "executed_steps": 0
+      }
+    ],
+    "minimal_carrier_probe": {
+      "branch": "successor/actions-carrier-probe-ubuntu-slim-20261011-v1",
+      "commit": "e1aee64a8f2646ad612e993bdf42e4fc9fa30726",
+      "workflow": ".github/workflows/actions-carrier-probe-ubuntu-slim.yml",
+      "run_id": 38107791960,
+      "job_id": 114376873244,
+      "runner_class": "ubuntu-slim",
+      "workload": "ONE_SHELL_STEP__ECHO_CARRIER_STARTED_AND_UNAME",
+      "result": "FAILURE_BEFORE_STEPS",
+      "executed_steps": 0,
+      "logs_available": false
+    },
+    "cross_workflow_observation": {
+      "result": "UNRELATED_REPOSITORY_WORKFLOWS_ALSO_FAIL_IN_APPROXIMATELY_THREE_SECONDS_BEFORE_STEP_EXECUTION",
+      "consequence": "BLOCKER_IS_NOT_SPECIFIC_TO_PYTEST_ASSURANCE_RUNTIME_PROFESSIONAL_RUNTIME_OR_THE_FULL_REGRESSION_WORKFLOW_BODY"
+    }
+  },
+  "causal_reduction": {
+    "falsified_as_sufficient_causes": [
+      "FULL_REGRESSION_PYTEST_COMMAND",
+      "FULL_REGRESSION_PYTHON_IMPORT_CHAIN",
+      "FULL_REGRESSION_CHECKOUT_STEP",
+      "FULL_REGRESSION_SETUP_PYTHON_STEP",
+      "UBUNTU_LATEST_ONLY_RUNNER_IMAGE_DEFECT",
+      "UBUNTU_24_04_ONLY_RUNNER_IMAGE_DEFECT",
+      "FULL_REGRESSION_WORKFLOW_BODY_SPECIFIC_DEFECT"
+    ],
+    "surviving_cause_class": "GITHUB_HOSTED_PRESTEP_EXECUTION_CONTROL_OR_PROVISIONING_BOUNDARY",
+    "surviving_examples_not_claimed_as_fact": [
+      "ACCOUNT_OR_REPOSITORY_ACTIONS_POLICY",
+      "HOSTED_RUNNER_PROVISIONING_OR_ASSIGNMENT_CONTROL",
+      "BILLING_OR_INCLUDED_MINUTES_CONTROL",
+      "OTHER_GITHUB_CONTROL_PLANE_PRESTEP_REJECTION"
+    ],
+    "exact_cause_bound": false,
+    "why_exact_cause_unbound": "CURRENT_CONNECTED_GITHUB_INTERFACE_EXPOSES_ZERO_STEP_JOB_AND_RUN_STATE_BUT_NOT_THE_REQUIRED_ACTIONS_ADMIN_BILLING_OR_FULL_ANNOTATION_DETAIL"
+  },
+  "scheduler": {
+    "full_regression_state": "SLEEP",
+    "hosted_actions_execution_lanes_state": "WAKE_GATED_WHERE_THEIR_NEXT_STEP_REQUIRES_A_GITHUB_HOSTED_RUNNER",
+    "forbidden": "DO_NOT_REPEAT_MORE_GITHUB_HOSTED_FULL_REGRESSION_OR_LABEL_SHUFFLING_PROBES_WITHOUT_NEW_CONTROL_PLANE_INFORMATION_OR_OBSERVED_RUNNER_STEP_EXECUTION",
+    "parallel_next": [
+      "CONTINUE_NONCONFLICTING_REUSE_FIRST_ACCEPTANCE_AND_CAPABILITY_WORK_THAT_DOES_NOT_REQUIRE_GITHUB_HOSTED_ACTIONS",
+      "USE_AN_ALREADY_AUTHORIZED_NON_GITHUB_EXACT_PRIVATE_MAIN_CARRIER_IF_ONE_BECOMES_AVAILABLE",
+      "WAKE_ON_GITHUB_ACTIONS_CONTROL_PLANE_STATE_CHANGE_OR_A_RUN_RECORDING_AT_LEAST_ONE_REAL_STEP"
+    ]
+  },
+  "wake_conditions": [
+    "ANY_GITHUB_HOSTED_JOB_IN_THIS_REPOSITORY_RECORDS_A_REAL_EXECUTED_STEP",
+    "AUTHORIZED_GITHUB_ACTIONS_ADMIN_OR_BILLING_EVIDENCE_IDENTIFIES_AND_CLEARS_THE_PRESTEP_REJECTION",
+    "AN_AUTHORIZED_EXACT_PRIVATE_MAIN_NON_GITHUB_EXECUTION_CARRIER_BECOMES_AVAILABLE",
+    "A_STRONGER_VALID_FULL_PRIVATE_CURRENT_MAIN_REGRESSION_RECEIPT_APPEARS"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_GITHUB_ACTIONS_MINUTES_ARE_EXHAUSTED",
+    "NO_CLAIM_BILLING_IS_THE_CAUSE",
+    "NO_CLAIM_ACTIONS_ARE_DISABLED",
+    "NO_CLAIM_RUNNER_PROVISIONING_OUTAGE_IS_THE_CAUSE",
+    "NO_REGRESSION_PASS",
+    "NO_REGRESSION_FAIL_FROM_ZERO_STEP_JOBS",
+    "NO_UVCK_V2_PROMOTION",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "regression_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "promotion_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
