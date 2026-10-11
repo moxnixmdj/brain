@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CHART_DIRECT_CURVE_LABEL_FAMILY_RANK_20261011_V1",
   "date": "2026-10-11",
-  "status": "CANDIDATE__BRAIN_NATIVE_DIRECT_ENDPOINT_LABEL_BINDING_AND_FAMILY_RANK__FOCUSED_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "status": "PROMOTED_BOUNDED_CAPABILITY__FOCUSED_47_OF_47__SECOND_CARRIER_INDEPENDENT_27_OF_27",
   "capability": {
     "capability_id": "chart.raster.direct_curve_label_family_rank.v1",
     "runtime": {
@@ -28,8 +28,11 @@
   ],
   "qualification": {
     "authored_check_count": 13,
-    "focused_verification_required": true,
-    "independent_or_stronger_replay_required_for_promotion": true
+    "focused_verification_required": false,
+    "independent_or_stronger_replay_required_for_promotion": false,
+    "focused_total_passed": 47,
+    "independent_total_passed": 27,
+    "promotion_qualification_satisfied": true
   },
   "ownership": {
     "brain_owned": true,
@@ -60,10 +63,22 @@
   ],
   "accounting": {
     "incremental_spend_usd": 0,
-    "capability_credit_delta": 0,
+    "capability_credit_delta": 1,
     "benchmark_score_credit_delta": 0,
     "terminal_credit_delta": 0
   },
-  "promotion_authority": false,
-  "terminal_authority": false
+  "promotion_authority": true,
+  "terminal_authority": false,
+  "verification": {
+    "focused_receipt": "canonical/verification/CHART_DIRECT_CURVE_LABEL_FAMILY_RANK_V1_VERIFY_20261011.json",
+    "focused_workflow_run_id": 38155272543,
+    "focused_workflow_job_id": 114516848546,
+    "independent_receipt": "canonical/verification/CHART_DIRECT_CURVE_LABEL_FAMILY_RANK_V1_INDEPENDENT_VERIFY_20261011.json",
+    "independent_verifier_repository": "moxnixmdj/verification-capsule-runner",
+    "independent_verifier_pr": 2723,
+    "independent_workflow_run_id": 38167990652,
+    "independent_workflow_job_id": 114554450529,
+    "independent_artifact_id": 11713120076,
+    "independent_artifact_zip_sha256": "01db2835a3749ec4de880cd1793bb42776908aad508c243cf1a7388dc194e7c1"
+  }
 }
