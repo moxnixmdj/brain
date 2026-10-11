@@ -146,3 +146,48 @@ def evaluate_from_receipt(
             "errors": [type(exc).__name__ + ":" + str(exc)],
             "terminal_authority": False,
         }
+
+
+def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
+    if not isinstance(args, dict):
+        return {
+            "schema": SCHEMA,
+            "capability_id": CAPABILITY_ID,
+            "status": "FAIL_CLOSED",
+            "pass": False,
+            "acceptance_stop_authorized": False,
+            "errors": ["ARGS_NOT_OBJECT"],
+            "terminal_authority": False,
+        }
+    result = evaluate_from_receipt(
+        str(args.get("task_text") or ""),
+        measurement_receipt_path=str(args.get("measurement_receipt_path") or ""),
+        root=root,
+        response_text=(
+            str(args["response_text"]) if args.get("response_text") is not None else None
+        ),
+    )
+    output_raw = args.get("output_path")
+    if not output_raw:
+        return result
+    repo = pathlib.Path(root).resolve()
+    output = (repo / str(output_raw)).resolve()
+    if output == repo or repo not in output.parents:
+        return {
+            "schema": SCHEMA,
+            "capability_id": CAPABILITY_ID,
+            "status": "FAIL_CLOSED",
+            "pass": False,
+            "acceptance_stop_authorized": False,
+            "errors": ["OUTPUT_PATH_OUTSIDE_REPOSITORY"],
+            "terminal_authority": False,
+        }
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    raw = output.read_bytes()
+    return {
+        **result,
+        "output_path": str(output.relative_to(repo)).replace("\\", "/"),
+        "output_sha256": _sha_bytes(raw),
+        "output_verified": True,
+    }
