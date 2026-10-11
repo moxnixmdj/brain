@@ -18,7 +18,7 @@ class Tests(unittest.TestCase):
             sid=f.task_scope_id(task_id=tid,task_sha256=ts,obligation_digest=dig)
 
             scope={"id":"s","target_scope_id":sid,"basis":"EXACT_COMPLETE_TARGET_CASE_UNIVERSE",
-                   "verified":True,"independent":True,"scope_relation":"EXACT",
+                   "verified":False,"independent":False,"scope_relation":"EXACT",
                    "complete_target_case_set":True,"universe_identity_bound":True,
                    "case_universe_digest":dig,"obligation_universe_digest":dig,"producer_id":"scope-p"}
             sp=root/"canonical/evidence/scope.json";sb=w(sp,scope)
