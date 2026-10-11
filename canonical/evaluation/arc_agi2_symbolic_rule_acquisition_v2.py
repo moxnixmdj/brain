@@ -71,10 +71,10 @@ def run(
     data_dir: Path,
     *,
     partition: str,
-    max_depth: int = 5,
-    max_predicates_per_node: int = 16,
-    max_search_subproblems: int = 6000,
-    max_generated_split_nodes: int = 24000,
+    max_depth: int = 4,
+    max_predicates_per_node: int = 12,
+    max_search_subproblems: int = 5000,
+    max_generated_split_nodes: int = 20000,
     workers: int = 8,
 ) -> dict[str, Any]:
     all_files = sorted(data_dir.glob("*.json"))
