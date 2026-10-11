@@ -73,3 +73,38 @@ def test_git_removed_from_cli_allowlist():
         assert str(exc).startswith("RUN_CLI_EXECUTABLE_NOT_ALLOWED")
     else:
         raise AssertionError("expected git rejection")
+
+
+def test_script_capable_application_clis_removed():
+    for exe in ("blender", "freecadcmd", "FreeCADCmd", "tar", "unzip", "zip"):
+        try:
+            compile_state_ops({"ops": [{"type": "RUN_CLI", "argv": [exe, "--help"]}]})
+        except StateOpsError as exc:
+            assert str(exc).startswith("RUN_CLI_EXECUTABLE_NOT_ALLOWED")
+        else:
+            raise AssertionError("expected script-capable CLI rejection")
+
+
+def test_pandoc_filter_escape_hatches_rejected():
+    for argv in (
+        ["pandoc", "/home/oai/share/a.md", "--filter", "/home/oai/share/filter"],
+        ["pandoc", "/home/oai/share/a.md", "--lua-filter=/home/oai/share/f.lua"],
+        ["pandoc", "/home/oai/share/a.md", "-F", "/home/oai/share/filter"],
+        ["pandoc", "/home/oai/share/a.md", "-L", "/home/oai/share/f.lua"],
+    ):
+        try:
+            compile_state_ops({"ops": [{"type": "RUN_CLI", "argv": argv}]})
+        except StateOpsError as exc:
+            assert str(exc).startswith("RUN_CLI_ARGUMENT_NOT_ALLOWED:pandoc:")
+        else:
+            raise AssertionError("expected pandoc filter rejection")
+
+
+def test_libreoffice_remote_accept_rejected():
+    for exe in ("libreoffice", "soffice"):
+        try:
+            compile_state_ops({"ops": [{"type": "RUN_CLI", "argv": [exe, "--accept=socket,host=0.0.0.0,port=2002;urp;"]}]})
+        except StateOpsError as exc:
+            assert str(exc).startswith("RUN_CLI_ARGUMENT_NOT_ALLOWED:" + exe)
+        else:
+            raise AssertionError("expected office accept rejection")
