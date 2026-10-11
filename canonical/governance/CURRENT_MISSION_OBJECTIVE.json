@@ -32,7 +32,7 @@
     "primary_entrypoint": "plan_current_post_composition_frontier",
     "scalar_fallback_runtime": "canonical/runtime/capability_first_live_scheduler_v1.py",
     "status": "ACTIVE__POST_COMPOSITION_DYNAMIC_CURRENTNESS_V15__PROFESSIONAL_24_OF_24__CHECKPOINT_ROWS_ALL_WAKE_GATED__GITHUB_HOSTED_ACTIONS_BILLING_PRESTART_BLOCK__0_SAME_INFORMATION_CHECKPOINT_RUNS__CAPABILITY_FIRST_PRIMARY__ZERO_GLOBAL_CREDIT",
-    "observed_git_blob_sha": "2619dfcca6bfc388e073e36fb1e5a369c6d180e4",
+    "observed_git_blob_sha": "417475caa7a577f74d6b6a7ab5ac2a88d04fe02b",
     "semantic_reuse_policy": "canonical/governance/TWO_CLOCK_SEMANTIC_VALIDITY_AND_SCHEDULER_AUTHORITY_20261011_V4.json",
     "semantic_reuse_policy_git_blob_sha": "f08fd90474aa38f89db171c70e10a6d47e6d7ec5",
     "verified_improvement_loop": "canonical/governance/VERIFIED_IMPROVEMENT_LOOP_V2_ACTIVATION_20261011_V1.json",
@@ -58,8 +58,8 @@
   },
   "current_parallel_frontier_control": {
     "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
-    "observed_git_blob_sha": "1c6261ff81e4e9acb6aed1684a127ca853a21f69",
-    "status": "CURRENT_CAPABILITY_FIRST__CODING_V6_OBJECTIVE_RAW_TASK_ACCEPTANCE_VERIFIED__V6B_INDEPENDENT_MEASUREMENT_AND_SEMANTIC_ACCEPTANCE_NEXT__ZERO_SCORE_CREDIT",
+    "observed_git_blob_sha": "db5639eeea58f3b74950412b9ef921e7c830dbb6",
+    "status": "CURRENT_CAPABILITY_FIRST__CODING_V6B_INDEPENDENT_REQUEST_MEASUREMENT_VERIFIED__V6C_ACCEPTANCE_GUIDED_REPAIR_COMPOSITION_NEXT__ZERO_SCORE_CREDIT",
     "binding": "MUTABLE_CURRENT_PATH_IDENTITY__SUPPORTED_PROFESSIONAL_ASSURANCE_BYTES_R2_PROJECTIONS_REFRESHED_AT_CALL_TIME__OTHER_SOURCE_DRIFT_FAILS_CLOSED",
     "snapshot_is_runtime_authority_for_supported_dynamic_families": false
   },
@@ -319,5 +319,14 @@
     "path": "canonical/verification/CURRENT_ESCAPE_O11_SPARSE_WORKSPACE_TRUTH_REPAIR_20261011_V1.json",
     "observed_git_blob_sha": "560d7e25c717edcc68676d98be90ea2a6bef3ceb",
     "status": "REPOSITORY_WIDE_EXHAUSTION_INTERPRETATION_REVOKED__CURRENT_O11_Q1_PROJECTION_GATE_UNAFFECTED"
+  },
+  "coding_capability_first_current": {
+    "path": "canonical/governance/CURRENT_FRONTIERCODE_CAPABILITY_FIRST_RECONCILIATION_20261011_V1.json",
+    "observed_git_blob_sha": "a9ebd76d29171da4a8ad53489d5e2b5ffc25f5cc",
+    "status": "V6_OBJECTIVE_ACCEPTANCE_VERIFIED__V6B_BOUNDED_INDEPENDENT_MEASUREMENT_VERIFIED__V6C_COMPOSITION_NEXT",
+    "verified_capability": "python.software.request.acceptance.independent.v1",
+    "verification_path": "canonical/verification/PYTHON_REQUEST_ACCEPTANCE_MODEL_V3_VERIFY_20261011_V1.json",
+    "exact_next": "GENERAL_SOFTWARE_REPAIR_LOOP_V6C__ACCEPTANCE_GUIDED_REPAIR_COMPOSITION",
+    "frontiercode_score_credit": 0
   }
 }
