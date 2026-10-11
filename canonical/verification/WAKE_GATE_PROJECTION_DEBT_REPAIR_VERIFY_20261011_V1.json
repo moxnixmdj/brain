@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_WAKE_GATE_PROJECTION_DEBT_REPAIR_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__CURRENT_POINTER_CHAIN_COHERENT__12_LOGICALLY_OPEN__12_WAKE_GATED__0_SAME_INFORMATION_RUNNABLE__0_ACTIVE_GAP_A__0_ACTIVE_GAP_B__1_PARKED_TB__ZERO_CREDIT",
+  "base_main_commit": "1a806dd7b4e1b7082ef4c404457c0ff8d6764c88",
+  "source_truth": {
+    "path": "canonical/governance/CURRENT_ALL_OPEN_CHECKPOINT_WAKE_GATE_RECONCILIATION_20261011_V1.json",
+    "git_blob_sha": "e10c7ebe00dac3f60eee2845df16c58a1fdd5791"
+  },
+  "repaired_chain": [
+    {
+      "path": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
+      "git_blob_sha": "7a68e3fbefc82231f9f6ba2463617b9deaaf352e"
+    },
+    {
+      "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
+      "git_blob_sha": "1f97f90269520b97d4547fc73b66020fe1e53793"
+    },
+    {
+      "path": "canonical/governance/CURRENT_DEVELOPMENT_SCHEDULER.json",
+      "git_blob_sha": "30b21ce7fcdec291b2b475a8969d3da7ce4c0c9c"
+    },
+    {
+      "path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
+      "git_blob_sha": "c4fa10131b27c389475d4a8dff482d9ac2b71664"
+    }
+  ],
+  "checks": {
+    "logically_open_checkpoint_count": 12,
+    "wake_gated_checkpoint_count": 12,
+    "row_specific_same_information_runnable_count": 0,
+    "active_gap_a_acquisition_count": 0,
+    "active_gap_b_strict_progress_count": 0,
+    "parked_checkpoint_count": 1,
+    "stale_current_projection_pattern_hits": 0,
+    "json_parse_pass": true,
+    "pointer_chain_rebound": true
+  },
+  "repaired_contradictions": [
+    "CURRENT_RESIDUAL_REUSE_CLASSIFICATION_NO_LONGER_LABELS_12_WAKE_GATED_ROWS_AS_ACTIVE_GAP_A_ACQUISITION",
+    "STALE_TB_ACTIVE_GAP_B_2_PROJECTION_REPLACED_BY_CURRENT_ZERO_ACTIVE_GAP_B",
+    "CURRENT_LIVE_WORK_FRONTIER_READ_ONLY_EVIDENCE_NOW_BINDS_CURRENT_RESIDUAL_AND_WAKE_RECONCILIATION",
+    "CURRENT_DEVELOPMENT_SCHEDULER_POST_COMPOSITION_NOW_PROJECTS_ZERO_ACTIVE_GAP_A",
+    "CURRENT_MISSION_OBJECTIVE_REBOUND_TO_EXACT_REPAIRED_CURRENT_POINTER_BLOBS"
+  ],
+  "hard_nonclaims": [
+    "NO_CHECKPOINT_CLOSED",
+    "NO_NEW_EXTERNAL_REALITY_ACQUIRED",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_PROMOTION_OR_TERMINAL_CREDIT",
+    "NO_FULL_PRIVATE_REGRESSION_EXECUTED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
