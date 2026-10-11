@@ -1,0 +1,81 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_SCALE_BRAIN_SUBMISSION_RECEIPT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__FRESH_ROW52_ACCESSIBILITY_GUIDE_CHECKLIST_QUIZ_PDFS_FROZEN__ALL_RENDER_QA_PASS__ZERO_OWNER_SCORE_CREDIT",
+  "benchmark": "GDPval-AA v2.1",
+  "subject": {
+    "row_idx": 52,
+    "task_id": "9a8c8e28-ce76-408b-83c3-488422892e58",
+    "sector": "Information",
+    "occupation": "Editors"
+  },
+  "freshness": {
+    "precommit": "canonical/governance/GDPVAL_SCALE_FRESH_BATCH_ROWS35_219_PRECOMMIT_20261011_V1.json",
+    "precommit_commit": "c604f5006820ce3ca24d6afc2487a95a30886a6c",
+    "task_identity_frozen_before_prompt_reference_rubric_gold_model_output_or_judge_exposure": true,
+    "public_rubric_or_gold_used_before_output_freeze": false
+  },
+  "brain_execution_profile": {
+    "path": "canonical/capabilities/internalized/professional_work/stirrup_247f24d/BRAIN_EXECUTION_PROFILE_V1.json",
+    "cognition_surface": "CURRENT_CHATGPT_GPT_5_6_SOL_SESSION_OR_EQUIVALENT_ZERO_INCREMENTAL_BRAIN_APPROVED_SUBSTRATE",
+    "opaque_target_model_runtime_cognition": false,
+    "incremental_spend_usd": 0
+  },
+  "submissions": [
+    {
+      "library_path": "/Project Brain/GDPval/scale/row52/GDPval_row52_Accessibility_Framework_Guide.pdf",
+      "library_file_id": "libfile_2b81ac3165ac819196fbf4f66d6d2735",
+      "sha256": "0ea7fd80e83c8c147cd80f93a4a8db3d29cf8b7e28e95ee5f5b03771d1e2e260",
+      "format": "pdf",
+      "render_page_count": 3
+    },
+    {
+      "library_path": "/Project Brain/GDPval/scale/row52/GDPval_row52_Editorial_Accessibility_Checklist.pdf",
+      "library_file_id": "libfile_c0b4c203bfe48191a8a9fbf1faf54832",
+      "sha256": "c73cd48a2563828649b0c05a85f4337f278118c9622e5840fbb9623180848ada",
+      "format": "pdf",
+      "render_page_count": 1
+    },
+    {
+      "library_path": "/Project Brain/GDPval/scale/row52/GDPval_row52_Accessibility_Knowledge_Quiz.pdf",
+      "library_file_id": "libfile_7d25dfe841808191945630a66dc5afe1",
+      "sha256": "a4c13d672cf47f3dd9cd75fde7c0716d66a259b2981864e66d65b8fa761de275",
+      "format": "pdf",
+      "render_page_count": 3
+    }
+  ],
+  "prompt_requirements_qa": {
+    "three_separate_pdf_documents": true,
+    "framework_guide_present": true,
+    "day_to_day_checklist_present": true,
+    "multiple_choice_quiz_present": true,
+    "quiz_four_options_each": true,
+    "quiz_one_correct_answer_each": true,
+    "quiz_answer_key_explanations_and_scoring_guide_present": true,
+    "uk_equality_act_2010_context": true,
+    "public_sector_accessibility_regulations_2018_context": true,
+    "wcag_2_1_and_2_2_context": true,
+    "wcag_2_2_aa_working_target": true,
+    "editorial_text_images_graphics_audio_video_guidance": true,
+    "section_editor_escalation_instruction": true,
+    "slack_editorial_advice_training_notice": true,
+    "dev_team_boundary_for_cms_engineering_changes": true,
+    "further_reading_bibliography_with_urls": true,
+    "all_pdf_pages_render_inspected_after_final_revision": true,
+    "clipping_overlap_or_missing_glyphs_observed": false
+  },
+  "source_evidence": [
+    "https://www.legislation.gov.uk/ukpga/2010/15",
+    "https://www.legislation.gov.uk/uksi/2018/952",
+    "https://www.gov.uk/guidance/meet-the-requirements-of-equality-and-accessibility-regulations",
+    "https://www.w3.org/TR/WCAG22/",
+    "https://www.w3.org/WAI/standards-guidelines/wcag/glance/",
+    "https://www.w3.org/WAI/standards-guidelines/wcag/new-in-22/"
+  ],
+  "boundary": [
+    "NO_ARTIFICIAL_ANALYSIS_PAIRWISE_RESULT",
+    "NO_OWNER_ELO",
+    "NO_MATCHED_EPOCH_SCORE",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ]
+}
