@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_AUTOMATIONBENCH_PUBLIC_600_ZERO_COST_RUNTIME_BINDING_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__PUBLIC_600_POPULATION_AND_ZERO_PAID_PROVIDER_CLI_ROUTE_BOUND__PRIVATE_HELDOUT_SCOPE_REMAINS_DISTINCT__ZERO_CREDIT",
+  "target_predicate": "AUTOMATIONBENCH_GE_40",
+  "upstream": {
+    "repository": "zapier/AutomationBench",
+    "commit": "4a8e1061254004d9dac807054eed33fad7d1ff14",
+    "public_population_size": 600,
+    "domains": {
+      "sales": 100,
+      "marketing": 100,
+      "operations": 100,
+      "support": 100,
+      "finance": 100,
+      "hr": 100
+    },
+    "population_commitment_sha256": "73fb894dd1679968f1a2c7805f2e51a65208b321579d614e47aa45756899a9b9"
+  },
+  "runner_receipts": {
+    "population_run_id": 38110628872,
+    "population_job_id": 114385254037,
+    "population_artifact_id": 11691705409,
+    "population_artifact_zip_sha256": "6c7a008e59fac7b70ddde69961f2a2fe2af45b01ae6583c31797560545351db8",
+    "runtime_run_id": 38110628125,
+    "runtime_job_id": 114385252139,
+    "upstream_test_suite": "1398_PASSED_2_WARNINGS",
+    "strict_binary_metric_present": true,
+    "custom_base_url_route": "PASS",
+    "paid_provider_runtime_required_by_cli": false,
+    "terminal_task_execution": false,
+    "terminal_results_observed": 0
+  },
+  "reconciliation": {
+    "preserved_private_scope_cut": "canonical/governance/AUTOMATIONBENCH_PRIVATE_TASK_CONTRACT_SCOPE_FALSIFICATION_20261006_V1.json",
+    "proved": [
+      "THE_PUBLIC_RELEASE_POPULATION_IS_EXACTLY_600_ROWS_ACROSS_SIX_100_TASK_DOMAINS_AT_THE_PINNED_COMMIT",
+      "THE_PUBLIC_BENCHMARK_TEST_SUITE_PASSES_ON_THE_ZERO_COST_RUNNER",
+      "THE_CLI_SUPPORTS_CUSTOM_BASE_URL_AND_API_KEY_ROUTING_SO_A_PAID_PROVIDER_ENDPOINT_IS_NOT_INTRINSIC_TO_THE_EXECUTION_HARNESS",
+      "THE_STRICT_BINARY_ASSERTION_METRIC_IS_PRESENT"
+    ],
+    "not_proved": [
+      "PUBLIC_600_TASK_CONTRACT_SCOPE_EQUALS_THE_PRIVATE_HELDOUT_LEADERBOARD_SCOPE",
+      "PUBLIC_SCORE_TRANSFERS_TO_PRIVATE_SCORE",
+      "BRAIN_AUTOMATIONBENCH_SCORE_GE_40"
+    ]
+  },
+  "scheduler_effect": {
+    "delete": [
+      "TREAT_PUBLIC_POPULATION_SIZE_AS_UNKNOWN",
+      "TREAT_PAID_PROVIDER_ENDPOINT_AS_INTRINSIC_AUTOMATIONBENCH_RUNTIME_REQUIREMENT",
+      "REPEAT_PUBLIC_RELEASE_TEST_SUITE_PREFLIGHT"
+    ],
+    "preserve": [
+      "PRIVATE_TASK_CONTRACT_SCOPE_OR_EXACT_PRIVATE_RESULT_OR_STRONGER_TARGET_SCOPED_CERTIFICATE"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_PRIVATE_TASK_CONTENT_ACCESSED",
+    "NO_SCORE_RECEIPT",
+    "NO_PUBLIC_TO_PRIVATE_SCOPE_EQUIVALENCE",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_tasks_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
