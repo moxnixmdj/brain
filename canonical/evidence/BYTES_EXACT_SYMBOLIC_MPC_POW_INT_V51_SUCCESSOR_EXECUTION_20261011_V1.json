@@ -1,0 +1,119 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_MPC_POW_INT_V51_SUCCESSOR_EXECUTION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "VERIFIED_RESEARCH_FRONTIER__MPC_POW_INT_N_MINUS_1_OR_2_SPECIALIZATION__SPENT_NEXT56_AND_FRESH_NEXT57_PASS__NEXT58_FROZEN_UNSPENT__CURRENT_POINTER_ELIGIBLE__ZERO_PROMOTION_CREDIT",
+  "subject": {
+    "predecessor": "canonical/evidence/BYTES_EXACT_SYMBOLIC_MPMATH_PERIPHERAL_V50_SUCCESSOR_EXECUTION_20261011_V1.json",
+    "predecessor_manifest_sha256": "719e9d956c4b24f54474ebd0dea30fe3e2352e6037743ec5a07b911cdec071e2",
+    "transform": "canonical/research/bytes/tools/conservative_mpc_pow_int_n1_n2_prune_v51.py",
+    "manifest_sha256": "bab0e710a20ac41743feadf3a979e2c9d8d08fd621a42e4799ba658badb7ef37",
+    "python_files": 277,
+    "raw_python_source_bytes": 1719563,
+    "B_exec_raw_python_source_bytes": 1722323,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "raw_delta_vs_v50_bytes": -1117,
+    "B_exec_delta_vs_v50_bytes": -1117
+  },
+  "selection": {
+    "id": "MPC_POW_INT_N_MINUS_1_OR_2_SPECIALIZATION_V51",
+    "method": "PROFILE_COMPLETE_SPENT_NEXT56_ROOTS_POPULATION__PRESERVE_ONLY_OBSERVED_N_MINUS_1_RECIPROCAL_AND_N_2_SQUARE_ROUTES__FAIL_CLOSE_ALL_OTHER_MPC_INTEGER_POWER_BRANCHES__VERIFY_COMPLETE_SPENT_NEXT56_THEN_FRESH_NEXT57",
+    "changed_body_count": 1,
+    "body": "mpmath/libmp/libmpc.py::mpc_pow_int",
+    "preserved_branches": [
+      "N_MINUS_1_RECIPROCAL",
+      "N_2_SQUARE"
+    ],
+    "fail_closed_branches": [
+      "B_ZERO_REAL_FAST_PATH",
+      "A_ZERO_IMAGINARY_FAST_PATH",
+      "N_0",
+      "N_1",
+      "GENERIC_NEGATIVE_RECURSION",
+      "GENERIC_POSITIVE_EXACT_INTEGER_POWER",
+      "GENERIC_LARGE_FALLBACK_EXP_LOG"
+    ],
+    "exact_base_guard": true,
+    "exact_target_guard": true
+  },
+  "discovery_evidence": {
+    "corpus": "QUAL_SUCCESSOR_NEXT56_20261011_V1",
+    "role": "SPENT_DISCOVERY_ONLY__NOT_FRESH_QUALIFICATION",
+    "roots_cases_profiled": 1280,
+    "mpc_pow_int_calls": 1856,
+    "observed_calls": {
+      "n_minus_1": 1852,
+      "n_2": 4
+    },
+    "unobserved_call_classes": {
+      "b_zero": 0,
+      "a_zero": 0,
+      "n_0": 0,
+      "n_1": 0,
+      "other_negative": 0,
+      "generic_small_positive": 0,
+      "generic_large_positive": 0
+    }
+  },
+  "qualification": {
+    "spent_NEXT56": {
+      "id": "QUAL_SUCCESSOR_NEXT56_20261011_V1",
+      "cases": 14720,
+      "corpus_sha256": "a7c0c40d1d5a587b0434ce7d675b0763b358aff8bbafdd4dc9b1a1559f20fbcb",
+      "candidate": "14720/14720",
+      "failures": 0,
+      "spent": true
+    },
+    "fresh_NEXT57": {
+      "id": "QUAL_SUCCESSOR_NEXT57_20261011_V1",
+      "cases": 14950,
+      "corpus_sha256": "874b316cb3cb39d27371195ffbedf2542187e842e383d53bf635e4d42a97e8e4",
+      "candidate": "14950/14950",
+      "failures": 0,
+      "spent": true
+    }
+  },
+  "reproducibility": {
+    "clean_room_v50_to_v51_reconstruction": "PASS__278_OF_278_DURABLE_FILES_BYTE_IDENTICAL",
+    "archive_extraction_identity": "PASS__278_OF_278_DURABLE_FILES_BYTE_IDENTICAL_TO_VERIFIED_CANDIDATE",
+    "regenerated_manifest_sha256": "bab0e710a20ac41743feadf3a979e2c9d8d08fd621a42e4799ba658badb7ef37",
+    "external_second_carrier_verified": false
+  },
+  "durable_archive": {
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V51_SUCCESSOR_20261011_V1.tar.xz",
+    "library_file_id": "libfile_08f45f3ff7ac8191855d2736db134114",
+    "file_id": "file_00000000508882108c8612f948becccc",
+    "bytes": 268588,
+    "sha256": "0a8136c5abf38f76f67c429a8cd4e5123249e06e861e69f9650b8f49c721412a"
+  },
+  "next_frozen": {
+    "id": "QUAL_SUCCESSOR_NEXT58_20261011_V1",
+    "cases": 15180,
+    "seed": 2664458636,
+    "seed_derivation": "FIRST_32_BITS_BIG_ENDIAN_SHA256_OF_QUAL_ID_PIPE_V51_MANIFEST_IDENTITY",
+    "per_operation_budget": 1320,
+    "corpus_sha256": "fd7a32a07356c87a18e884f851320fd5d87dc316ca2436a4191275e5f3f57e0c",
+    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT58_20261011_V1(1).jsonl",
+    "library_file_id": "libfile_338e1f305de081918a776371feeb99d6",
+    "file_id": "file_000000001f388210a463230591bab4b3",
+    "duplicate_safe_name_reason": "AN_UNRELATED_PREEXISTING_NEXT58_FILENAME_WAS_ALREADY_PRESENT__CONTENT_ADDRESS_AND_FILE_ID_ARE_AUTHORITATIVE",
+    "generation_provenance": "STOCK_SYMPY_1_14_0_MPMATH_1_3_0_EXACT_ROUTE_EXPECTED_OUTPUTS__DETERMINISTIC_PARAMETER_STREAM__LOW_CONCURRENCY_CHUNKED_EXPECTED_OUTPUT_EVALUATION__CANONICAL_ROW_REASSEMBLY",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT",
+    "spent": false
+  },
+  "truth_boundary": [
+    "MEASURED: V51 raw Python bytes are 1,719,563, 1,117 bytes below V50.",
+    "MEASURED: complete spent NEXT56 passes V51 14,720/14,720 with zero failures.",
+    "MEASURED: previously untouched NEXT57 passes V51 14,950/14,950 with zero failures.",
+    "MEASURED: complete NEXT56 roots profiling observed 1,856 mpc_pow_int calls: 1,852 with n=-1 and 4 with n=2.",
+    "MEASURED: clean-room V50-to-V51 reconstruction and archive extraction are 278/278 durable files byte-identical.",
+    "MEASURED: NEXT58 is durably frozen at 15,180 cases and remains unspent.",
+    "NOT PROVED: universal mpmath equivalence outside the bounded route.",
+    "NOT PROVED: external second-carrier replay.",
+    "NOT PROMOTED: zero capability, acceptance, professional-quality, promotion, or terminal credit."
+  ],
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "acceptance_credit_delta": 0,
+  "promotion_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
