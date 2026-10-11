@@ -13,6 +13,8 @@ from typing import Any, Mapping, Sequence
 
 from canonical.runtime import regcap_four_way_governing_requirement_discriminator_v1 as four
 from canonical.runtime import r2_authority_domain_discovery_provider_v1 as discovery
+from canonical.runtime import r2_authority_candidate_materialization_v1 as generic_materialization
+from canonical.runtime import r2_generic_authority_candidate_checker_adapter_v1 as generic_checker_adapter
 
 SCHEMA = "PROJECT_BRAIN_R2_REGCAP_AUTHORITY_CANDIDATE_ADAPTER_V1"
 REQUEST_KIND = "ACQUIRE_ONE_AUTHENTICATED_GOVERNING_REQUIREMENT_OBSERVATION"
@@ -68,6 +70,62 @@ def _existing_payloads(
     raise ValueError("EXISTING_TRUTH_PAYLOAD_INVALID")
 
 
+def _generic_fallback(
+    decision_payload: Mapping[str, Any],
+    predicate_id: str,
+    request_packet: Mapping[str, Any],
+    candidate: Mapping[str, Any],
+) -> dict[str, Any]:
+    materialized = generic_materialization.materialize(request_packet, candidate)
+    material_status = str(materialized.get("status") or "")
+    if material_status == "FAIL_CLOSED":
+        return _base(
+            "FAIL_CLOSED",
+            reason="GENERIC_AUTHORITY_MATERIALIZATION:"
+            + str(materialized.get("reason") or "UNKNOWN"),
+        )
+    if materialized.get("pass") is not True:
+        return _base(
+            material_status or "OPEN__GENERIC_AUTHORITY_MATERIALIZATION_REQUIRED",
+            materialized_raw_sha256=materialized.get("raw_sha256"),
+        )
+
+    adapted = generic_checker_adapter.adapt(
+        decision_payload,
+        predicate_id,
+        request_packet,
+        materialized,
+    )
+    adapted_status = str(adapted.get("status") or "")
+    if adapted_status == "FAIL_CLOSED":
+        return _base(
+            "FAIL_CLOSED",
+            reason="GENERIC_AUTHORITY_CHECKER_ADAPTER:"
+            + str(adapted.get("reason") or "UNKNOWN"),
+        )
+    if adapted.get("pass") is not True:
+        return _base(
+            adapted_status
+            or "NOT_APPLICABLE__NO_GENERIC_SELECTED_SEMANTIC_TRUTH_CHECKER_TEMPLATE",
+            materialized_raw_sha256=materialized.get("raw_sha256"),
+        )
+
+    payloads = adapted.get("truth_payload_candidates")
+    if not isinstance(payloads, list) or not payloads:
+        return _base("FAIL_CLOSED", reason="GENERIC_TRUTH_PAYLOAD_CANDIDATES_INVALID")
+    return _base(
+        "PASS__GENERIC_AUTHORITY_CANDIDATE_MATERIALIZED_TO_EXISTING_TRUTH_CHECKER",
+        passed=True,
+        truth_payload_candidates=payloads,
+        candidate_count=len(payloads),
+        materialized_raw_sha256=materialized.get("raw_sha256"),
+        downstream_checker_refetch_required=False,
+        downstream_checker_recomputes_predicate_identity_and_truth=True,
+        original_predicate_identity_preserved=False,
+        original_requested_predicate_identity_is_non_authoritative=True,
+    )
+
+
 def adapt(
     decision_payload: Mapping[str, Any],
     predicate_id: str,
@@ -79,9 +137,13 @@ def adapt(
             return _base("FAIL_CLOSED", reason="PREDICATE_ID_REQUIRED")
         typed = request_packet.get("truth_next_information_request")
         if not isinstance(typed, Mapping):
-            return _base("NOT_APPLICABLE__NO_TYPED_TRUTH_INFORMATION_REQUEST")
+            return _generic_fallback(
+                decision_payload, predicate_id, request_packet, candidate
+            )
         if typed.get("request_kind") != REQUEST_KIND:
-            return _base("NOT_APPLICABLE__TRUTH_REQUEST_KIND_UNMODELED")
+            return _generic_fallback(
+                decision_payload, predicate_id, request_packet, candidate
+            )
         if typed.get("scope_id") != four.SCOPE_ID:
             return _base("FAIL_CLOSED", reason="FOUR_WAY_REQUEST_SCOPE_DRIFT")
         if typed.get("observation_id") != four.OBSERVATION_ID:
