@@ -1,0 +1,113 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_INTERNAL_ONLY_STRATEGY_OVERRIDE_20261011_V4",
+  "date": "2026-10-11",
+  "status": "INTERNAL_ONLY_FIXED_POINT_V4__COMPONENT_INVERSION_AND_PUBLIC_API_ROUTES_DELETED__TWO_EXACT_BLOCKERS_REMAIN__LITERAL_1822_OPEN__ZERO_CREDIT",
+  "supersedes": "canonical/governance/AA_BRIEFCASE_INTERNAL_ONLY_STRATEGY_OVERRIDE_20261011_V3.json",
+  "user_constraints": {
+    "external_help_allowed": false,
+    "waiting_for_owner_response_allowed": false,
+    "paid_access_allowed": false,
+    "goal_substitution_allowed": false,
+    "incremental_spend_usd": 0
+  },
+  "exact_target": {
+    "benchmark": "AA-Briefcase",
+    "version": "1.1",
+    "literal_threshold_elo": 1822,
+    "frozen_reference_owner_unrounded_elo": 1821.85,
+    "minimum_required_improvement_over_exact_reference_elo": 0.15,
+    "threshold_relaxation_allowed": false
+  },
+  "new_closed_false_shortcuts": [
+    {
+      "id": "DISPLAYED_COMPONENT_INVERSION",
+      "authority": "canonical/governance/AA_BRIEFCASE_COMPONENT_SUMMARY_NONINVERSION_20261011_V1.json",
+      "theorem": "PER_SCOPE_FITTED_ELO_SUMMARIES_ARE_NOT_SCORE_SUFFICIENT_FOR_A_COMBINED_REFIT_WHEN_HIDDEN_ROW_MULTIPLICITIES_GRAPH_STATE_OR_EQUIVALENT_LOAD_BEARING_STATE_REMAIN_UNBOUND",
+      "exact_counterexample_difference_elo": 88.73949984654246,
+      "consequence": "DO_NOT_RECONSTRUCT_LITERAL_1822_FROM_RUBRIC_PASS_RATE_AQ_ELO_PRESENTATION_ELO_OR_FINITE_REGRESSION"
+    },
+    {
+      "id": "PUBLIC_DATA_API_RAW_TRACE",
+      "authority": "canonical/governance/AA_BRIEFCASE_PUBLIC_DATA_API_TRACE_BOUNDARY_20261011_V1.json",
+      "theorem": "DOCUMENTED_ARTIFICIAL_ANALYSIS_V2_API_EXPOSES_MODEL_LEVEL_AA_BRIEFCASE_ELO_BUT_NO_AA_BRIEFCASE_RAW_RUBRIC_PAIRWISE_JUDGMENT_OR_SCORE_TRACE_ENDPOINT",
+      "consequence": "DO_NOT_SEARCH_THE_PUBLIC_DATA_API_FOR_THE_MISSING_SCORE_BEARING_SUFFICIENT_STATISTIC_WITHOUT_A_NEW_API_GENERATION_OR_SCHEMA_CHANGE"
+    }
+  ],
+  "rank1": {
+    "route": "QUANTITATIVE_SCORE_TRACE_LOWER_BOUND",
+    "blocker_count": 2,
+    "blockers": [
+      {
+        "id": "SCORER_BINDING",
+        "obligation": "SOUND_FROZEN_OWNER_SCORER_BINDING_SUFFICIENT_TO_MAP_A_CONTENT_ADDRESSED_BRAIN_SCORE_BEARING_TRACE_OR_STRONGER_CERTIFICATE_TO_AN_UNROUNDED_ELO_LOWER_BOUND",
+        "current": false,
+        "explicitly_deleted_substitutes": [
+          "DISPLAYED_COMPONENT_SUMMARIES",
+          "FINITE_COMPONENT_REGRESSION",
+          "PUBLIC_DATA_API_MODEL_RESULT_FIELD",
+          "CROWD_BT_NAME_AND_ANCHOR_WITHOUT_FROZEN_LOAD_BEARING_FIT_STATE"
+        ]
+      },
+      {
+        "id": "BRAIN_NUMERIC_FLOOR",
+        "obligation": "CONTENT_ADDRESSED_SCOPE_COMPLETE_BRAIN_UNROUNDED_AA_BRIEFCASE_ELO_LOWER_BOUND_GE_1822_UNDER_A_SOUNDLY_BOUND_FROZEN_SCORER",
+        "current": false,
+        "admissible_forms": [
+          "DIRECT_NUMERIC_FLOOR_GE_1822",
+          "FROZEN_REFERENCE_1821_85_PLUS_PROVED_MARGIN_GE_0_15",
+          "EQUIVALENT_STRONGER_SCORE_CERTIFICATE"
+        ]
+      }
+    ]
+  },
+  "rank2": {
+    "route": "UNIVERSAL_ALL_WORLD_THRESHOLD_INVARIANCE",
+    "state": "STRUCTURALLY_BLOCKED",
+    "proved": [
+      "TARGET_INDEPENDENT_SCOPE_COMPLETE_PUBLIC_INTERFACE_OUTCOME_SUPERDOMAIN"
+    ],
+    "blocking_authorities": [
+      "canonical/governance/AA_BRIEFCASE_PRIVATE_RUBRIC_EXPRESSIVITY_CUT_20261011_V1.json",
+      "canonical/governance/AA_BRIEFCASE_TOP_SUPPORT_COLLAPSE_20261011_V1.json",
+      "canonical/governance/AA_BRIEFCASE_RUBRIC_ONLY_BYPASS_FALSIFIER_20261011_V1.json",
+      "canonical/governance/AA_BRIEFCASE_CROWD_BT_INTERNAL_LOWER_BOUND_CUT_20261011_V1.json"
+    ],
+    "current_nontrivial_top_support_proved": false
+  },
+  "exact_route_completeness": {
+    "authority": "canonical/governance/AA_BRIEFCASE_INTERNAL_PROOF_ROUTE_COMPLETENESS_20261011_V1.json",
+    "statement": "ANY_SOUND_ZERO_EXTERNAL_PROOF_MUST_EITHER_IDENTIFY_ENOUGH_SCORE_RELEVANT_HIDDEN_STATE_OR_PROVE_THE_LITERAL_THRESHOLD_OVER_ALL_REMAINING_HIDDEN_STATES",
+    "no_magic_third_family": true
+  },
+  "scheduler": {
+    "forbid": [
+      "WAIT_FOR_ARTIFICIAL_ANALYSIS",
+      "SEND_NEW_OUTREACH",
+      "PAID_OR_APPROVAL_GATED_DATA_ROUTE",
+      "COMPONENT_SUMMARY_INVERSION",
+      "FINITE_REGRESSION_AS_SCORER_AUTHORITY",
+      "PUBLIC_DATA_API_TRACE_SEARCH_WITHOUT_SCHEMA_CHANGE",
+      "GENERIC_PROFESSIONAL_QUALITY_WORK_WITHOUT_AA_SCORE_BINDING",
+      "EXTERNAL_MODEL_SCORE_AS_BRAIN_CREDIT",
+      "RELAX_1822_TO_1821_85"
+    ],
+    "reopen_only_if": [
+      "PREEXISTING_EXPLICIT_OWNER_AUTHORED_FROZEN_SCORER_IMPLEMENTATION_OR_COMPLETE_FORMULA_AND_LOAD_BEARING_FIT_STATE_IS_DISCOVERED",
+      "PREEXISTING_CONTENT_ADDRESSED_BRAIN_AA_NUMERIC_FLOOR_GE_1822_OR_REFERENCE_PLUS_0_15_CERTIFICATE_IS_DISCOVERED",
+      "NEW_ALREADY_BOUND_FACT_PROVES_A_SOUND_RESTRICTION_OF_PRIVATE_RUBRIC_AND_JUDGE_CLASS_STRONG_ENOUGH_FOR_ALL_WORLD_THRESHOLD_INVARIANCE",
+      "NEW_PUBLIC_API_OR_PUBLIC_OWNER_SOURCE_GENERATION_MATERIALLY_EXPOSES_SCORE_BEARING_STATE"
+    ]
+  },
+  "exact_truth": {
+    "brain_ge_1822_proved": false,
+    "brain_lt_1822_proved": false,
+    "current_internal_and_public_information_decides_threshold": false,
+    "current_sound_zero_wait_zero_external_help_route_closes_now": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
