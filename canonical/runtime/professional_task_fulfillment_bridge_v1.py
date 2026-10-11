@@ -2,28 +2,31 @@
 
 Bounded evidence composer for one exact professional task/output pair.
 
-Positive authorization requires an independently verified complete obligation
-scope and one independently verified semantic-satisfaction receipt for every
-required obligation, all bound to the same exact task and realized artifact.
+Positive authorization requires:
+* a content-addressed obligation-scope certificate;
+* a separate independent verification receipt for that exact scope certificate;
+* one independently verified semantic-satisfaction receipt for every required
+  obligation, all bound to the same exact task and realized artifact.
 
-This module does not infer obligation completeness from a caller checklist and
+Caller booleans and checklists have zero completeness authority. This module
 grants no global quality, owner-evaluator, GDPval, acceptance, promotion, or
 terminal authority.
 """
 from __future__ import annotations
 
-from hashlib import sha1, sha256
+from hashlib import sha1,sha256
 import json
 from pathlib import Path
 from string import hexdigits
-from typing import Any, Mapping
+from typing import Any,Mapping
 
 from canonical.runtime import universal_scope_closure_compiler_v1 as scope_compiler
 
 SCHEMA="PROJECT_BRAIN_PROFESSIONAL_TASK_FULFILLMENT_BRIDGE_V1"
+SCOPE_VERIFY_SCHEMA="PROJECT_BRAIN_PROFESSIONAL_TASK_OBLIGATION_SCOPE_INDEPENDENT_VERIFY_V1"
 RECEIPT_SCHEMA="PROJECT_BRAIN_PROFESSIONAL_TASK_OBLIGATION_SEMANTIC_RECEIPT_V1"
 VERIFY_SCHEMA="PROJECT_BRAIN_PROFESSIONAL_TASK_OBLIGATION_SEMANTIC_VERIFY_V1"
-RECEIPT_PREFIXES=("canonical/evidence/","canonical/verification/")
+BOUND_PREFIXES=("canonical/governance/","canonical/evidence/","canonical/verification/")
 VERIFY_PREFIXES=("canonical/verification/",)
 
 
@@ -45,12 +48,10 @@ def git_blob_sha(path:Path)->str:
 
 
 def obligation_universe_digest(obligations:Any)->str:
-    if not isinstance(obligations,list):
-        raise ValueError("OBLIGATIONS_NOT_LIST")
+    if not isinstance(obligations,list): raise ValueError("OBLIGATIONS_NOT_LIST")
     rows=[];seen=set()
     for i,row in enumerate(obligations):
-        if not isinstance(row,Mapping):
-            raise ValueError(f"OBLIGATION_NOT_MAPPING:{i}")
+        if not isinstance(row,Mapping): raise ValueError(f"OBLIGATION_NOT_MAPPING:{i}")
         oid=str(row.get("obligation_id") or "").strip()
         semantics=str(row.get("semantics") or "").strip()
         if not oid: raise ValueError(f"OBLIGATION_ID_MISSING:{i}")
@@ -65,15 +66,15 @@ def obligation_universe_digest(obligations:Any)->str:
 
 
 def task_scope_id(*,task_id:str,task_sha256:str,obligation_digest:str)->str:
-    material={"task_id":task_id,"task_sha256":task_sha256,
-              "obligation_universe_digest":obligation_digest}
-    return "scope://professional-task-fulfillment/"+_sha(_canon(material))
+    return "scope://professional-task-fulfillment/"+_sha(_canon({
+      "task_id":task_id,"task_sha256":task_sha256,
+      "obligation_universe_digest":obligation_digest,
+    }))
 
 
 def _bound_json(root:Path,ref:Any,prefixes:tuple[str,...])->tuple[dict[str,Any],str,str]:
     if not isinstance(ref,Mapping): raise ValueError("BOUND_REF_REQUIRED")
-    rel=str(ref.get("path") or "").strip()
-    expected=str(ref.get("git_blob_sha") or "").strip()
+    rel=str(ref.get("path") or "").strip();expected=str(ref.get("git_blob_sha") or "").strip()
     p=Path(rel)
     if not rel or p.is_absolute() or ".." in p.parts: raise ValueError("BOUND_PATH_INVALID")
     if not any(rel.startswith(x) for x in prefixes): raise ValueError("BOUND_PATH_OUTSIDE_ALLOWED_SCOPE")
@@ -112,12 +113,15 @@ def verify(bundle:Any,*,repo_root:str|Path)->dict[str,Any]:
         if not task_id: raise ValueError("TASK_ID_REQUIRED")
         if not _is_sha256(task_sha): raise ValueError("TASK_SHA256_INVALID")
         if not _is_sha256(artifact_sha): raise ValueError("ARTIFACT_SHA256_INVALID")
-
         obligations=task.get("obligations")
         digest=obligation_universe_digest(obligations)
         expected_scope=task_scope_id(task_id=task_id,task_sha256=task_sha,obligation_digest=digest)
-        scope_cert=task.get("obligation_scope_certificate")
-        if not isinstance(scope_cert,Mapping): raise ValueError("OBLIGATION_SCOPE_CERT_REQUIRED")
+
+        root=Path(repo_root)
+        scope_binding=task.get("obligation_scope_binding")
+        if not isinstance(scope_binding,Mapping): raise ValueError("OBLIGATION_SCOPE_BINDING_REQUIRED")
+        scope_cert,scope_path,scope_blob=_bound_json(root,scope_binding.get("certificate"),BOUND_PREFIXES)
+        scope_verify,scope_verify_path,scope_verify_blob=_bound_json(root,scope_binding.get("verification"),VERIFY_PREFIXES)
         scope_out=scope_compiler.evaluate(scope_cert)
         if scope_out.get("scope_complete") is not True: raise ValueError("OBLIGATION_SCOPE_NOT_COMPLETE")
         if scope_out.get("target_scope_id")!=expected_scope: raise ValueError("OBLIGATION_SCOPE_TARGET_MISMATCH")
@@ -125,6 +129,22 @@ def verify(bundle:Any,*,repo_root:str|Path)->dict[str,Any]:
             raise ValueError("OBLIGATION_SCOPE_DIGEST_MISMATCH")
         if scope_cert.get("basis")=="EXACT_COMPLETE_TARGET_CASE_UNIVERSE" and scope_cert.get("case_universe_digest")!=digest:
             raise ValueError("OBLIGATION_EXACT_CASE_UNIVERSE_DIGEST_MISMATCH")
+        scope_producer=str(scope_cert.get("producer_id") or "").strip()
+        if not scope_producer: raise ValueError("OBLIGATION_SCOPE_PRODUCER_REQUIRED")
+        expected_scope_verify={
+          "schema":SCOPE_VERIFY_SCHEMA,"subject_git_blob_sha":scope_blob,
+          "task_id":task_id,"task_sha256":task_sha,
+          "obligation_universe_digest":digest,"target_scope_id":expected_scope,
+          "scope_complete":True,"pass":True,"independent_verified":True,
+          "scope_complete_verified":True,
+        }
+        for field,expected in expected_scope_verify.items():
+            if scope_verify.get(field)!=expected:
+                raise ValueError("OBLIGATION_SCOPE_VERIFY_FIELD_MISMATCH:"+field)
+        scope_verifier=str(scope_verify.get("independent_verifier_id") or "").strip()
+        if not scope_verifier: raise ValueError("OBLIGATION_SCOPE_VERIFIER_REQUIRED")
+        if scope_verifier==scope_producer:
+            raise ValueError("OBLIGATION_SCOPE_PRODUCER_VERIFIER_NOT_INDEPENDENT")
 
         bindings=bundle.get("obligation_bindings")
         if not isinstance(bindings,list): raise ValueError("OBLIGATION_BINDINGS_NOT_LIST")
@@ -141,11 +161,11 @@ def verify(bundle:Any,*,repo_root:str|Path)->dict[str,Any]:
             if missing: raise ValueError("OBLIGATION_BINDINGS_MISSING:"+",".join(missing))
             raise ValueError("UNDECLARED_OBLIGATION_BINDINGS:"+",".join(extra))
 
-        root=Path(repo_root);verified=[]
+        verified=[]
         for obligation in obligations:
             oid=str(obligation["obligation_id"]);sem_hash=_sha(str(obligation["semantics"]))
             binding=by_id[oid]
-            receipt,rpath,rblob=_bound_json(root,binding.get("receipt"),RECEIPT_PREFIXES)
+            receipt,rpath,rblob=_bound_json(root,binding.get("receipt"),BOUND_PREFIXES)
             verification,vpath,vblob=_bound_json(root,binding.get("verification"),VERIFY_PREFIXES)
             expected_receipt={
               "schema":RECEIPT_SCHEMA,"task_id":task_id,"task_sha256":task_sha,
@@ -181,18 +201,19 @@ def verify(bundle:Any,*,repo_root:str|Path)->dict[str,Any]:
             })
 
         return _base(
-          "PASS__EXACT_TASK_OBLIGATION_SCOPE_AND_ALL_SEMANTIC_SATISFACTION_RECEIPTS_BOUND",True,
+          "PASS__CONTENT_ADDRESSED_SCOPE_AND_ALL_TASK_OBLIGATION_SEMANTICS_BOUND",True,
           errors=[],task_id=task_id,task_sha256=task_sha,artifact_sha256=artifact_sha,
           target_scope_id=expected_scope,obligation_universe_digest=digest,
           scope_complete=True,scope_basis=scope_out.get("basis"),
+          scope_certificate_path=scope_path,scope_certificate_git_blob_sha=scope_blob,
+          scope_verification_path=scope_verify_path,scope_verification_git_blob_sha=scope_verify_blob,
+          scope_producer_id=scope_producer,scope_independent_verifier_id=scope_verifier,
           obligation_count=len(obligations),verified_obligation_count=len(verified),
           obligation_receipts=verified,
           hard_boundary=[
-            "NO_CALLER_CHECKLIST_SCOPE_SELF_CERTIFICATION",
-            "NO_OWNER_EVALUATOR_CONTAINMENT",
-            "NO_HOLISTIC_PRESENTATION_TOP",
-            "NO_GLOBAL_PROFESSIONAL_COVERAGE",
-            "NO_GDPVAL_SCORE_OR_BRAIN_GE_OPUS_CLAIM",
+            "NO_CALLER_CHECKLIST_OR_SCOPE_BOOLEAN_SELF_CERTIFICATION",
+            "NO_OWNER_EVALUATOR_CONTAINMENT","NO_HOLISTIC_PRESENTATION_TOP",
+            "NO_GLOBAL_PROFESSIONAL_COVERAGE","NO_GDPVAL_SCORE_OR_BRAIN_GE_OPUS_CLAIM",
           ],
         )
     except Exception as exc:
