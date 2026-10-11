@@ -1,0 +1,120 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_PUBLIC_SCORER_CONTRACT_V2_20261011",
+  "date": "2026-10-11",
+  "status": "PUBLIC_SCORER_SURFACE_MAXIMIZED__TEMPORAL_FIREWALL_PRESERVED__PRIVATE_TASK_AND_REALIZED_OUTCOME_STATE_REMAINS_UNBOUND__ZERO_CREDIT",
+  "target": {
+    "benchmark": "AA-Briefcase",
+    "version": "1.1",
+    "frozen_reference_date": "2026-09-22",
+    "frozen_reference_elo": 1822
+  },
+  "frozen_day_protocol": {
+    "exact_methodology_sha256": "3b2036f5dc54786604825be70dc3225f8fe0a382d168df4b55a82ef6bc426dc3",
+    "retrieved_at": "2026-09-22T07:47:17.990313+00:00",
+    "crowd_bt": true,
+    "v1_1_change": "ELO_FIT_ONLY",
+    "eta_fitted_per_scope_on_past_aa_briefcase_judgements": true,
+    "rubric_rating_comparison": "DETERMINISTIC_RATHER_THAN_JUDGE_NOISY",
+    "anchor_model": "GPT-5.5 (medium)",
+    "anchor_elo": 1000,
+    "note": "INLINE_MATH_PLACEHOLDERS_NOT_DIRECTLY_RECOVERED_FROM_FROZEN_NEXTJS_BUNDLE"
+  },
+  "frozen_era_grading_surface": {
+    "source_class": "PUBLIC_AA_METHODOLOGY_ARCHIVES_AROUND_2026_09_22_TO_2026_09_25",
+    "binary_rubric": "SINGLE_SUBMISSION_PASS_FAIL",
+    "analytical_quality": "PAIRWISE_A_TIE_B",
+    "presentation": "PAIRWISE_A_TIE_B",
+    "panel": [
+      "Claude Opus 4.8 (max effort)",
+      "GPT-5.5 (high reasoning)",
+      "Gemini 3.1 Pro Preview (high reasoning)"
+    ],
+    "assignment": "ONE_JUDGE_PER_RUBRIC_VERDICT_OR_PAIRWISE_COMPARISON__BALANCED_SAMPLING__SAME_RUBRIC_CHECK_FIXED_TO_SAME_JUDGE",
+    "temporal_claim": "FROZEN_ERA_PUBLIC_DISCLOSURE__DO_NOT_REPLACE_WITH_2026_10_11_CURRENT_SPLIT_PANEL_WITHOUT_EPOCH_EQUIVALENCE"
+  },
+  "current_2026_10_11_public_disclosure": {
+    "execution": {
+      "max_turns": 500,
+      "task_runs_independent": true,
+      "network": "OFFLINE",
+      "harness": "Stirrup",
+      "sandbox": "WEEK_SCOPED_E2B",
+      "tools": [
+        "code_exec",
+        "finish",
+        "abandon_task_finish",
+        "view_image_if_supported"
+      ],
+      "complete_agent_and_task_prompt_templates_public": true
+    },
+    "rubric": {
+      "exact_binary_judge_prompt_public": true,
+      "rubric_judge_panel": [
+        "Claude Opus 4.8 (max effort)",
+        "GPT-5.5 (high reasoning)",
+        "Gemini 3.1 Pro Preview (high reasoning)"
+      ]
+    },
+    "pairwise": {
+      "analytical_quality_prompt_semantics": "MORE_THOROUGH_ANALYTICALLY_RIGOROUS_AND_WELL_SUPPORTED",
+      "presentation_prompt_semantics": "MORE_PROFESSIONALLY_PRESENTED",
+      "pairwise_judge_panel": [
+        "Claude Opus 5 (high effort)",
+        "GPT-5.6 Sol (medium reasoning)",
+        "Gemini 3.8 Flash (high reasoning)"
+      ]
+    },
+    "assignment": "ONE_JUDGE_SAMPLED_FROM_RELEVANT_PANEL__BALANCED_ACROSS_CHECKS_AND_MATCHES__RUBRIC_CHECK_FIXED_TO_SAME_JUDGE",
+    "headline": "RUBRIC_PASS_RATE_PLUS_ANALYTICAL_QUALITY_PLUS_PRESENTATION__RUBRIC_CONVERTED_TO_ELO_VIA_SYNTHETIC_HEAD_TO_HEAD__MAXIMUM_LIKELIHOOD__EACH_SCOPE_CROWD_BT"
+  },
+  "public_reference_evidence": {
+    "exact_frozen_headline": 1822,
+    "earliest_full_post_launch_component_row": {
+      "date": "2026-09-23",
+      "overall_elo": 1821.85,
+      "rubric_pass_rate": 0.6121212121212121,
+      "analytical_quality_elo": 2206.92,
+      "presentation_elo": 1709.91
+    }
+  },
+  "unresolved_core": [
+    "PRIVATE_91_TASK_INSTRUCTIONS",
+    "PRIVATE_SOURCE_FILES",
+    "PRIVATE_TASK_SPECIFIC_RUBRIC_ITEMS",
+    "FROZEN_REFERENCE_AND_BRAIN_BINARY_RUBRIC_VERDICT_VECTORS",
+    "FROZEN_REFERENCE_AND_BRAIN_ANALYTICAL_PAIRWISE_VERDICTS",
+    "FROZEN_REFERENCE_AND_BRAIN_PRESENTATION_PAIRWISE_VERDICTS",
+    "EXACT_SYNTHETIC_RUBRIC_HEAD_TO_HEAD_CONSTRUCTION",
+    "FROZEN_PAIRWISE_ETA_VALUES_AND_COMPARISON_GRAPH_STATE",
+    "LOAD_BEARING_OWNER_FIT_REGULARIZATION_OR_EQUIVARIANCE_FACTS",
+    "BRAIN_SCORE_BEARING_TRACE"
+  ],
+  "proof_effect": {
+    "delete": [
+      "TREAT_AGENT_EXECUTION_PROMPT_AS_UNKNOWN",
+      "TREAT_BINARY_RUBRIC_JUDGE_PROMPT_AS_UNKNOWN",
+      "TREAT_PUBLIC_PAIRWISE_QUALITY_CONSTRUCT_AS_UNKNOWN",
+      "TREAT_JUDGE_ASSIGNMENT_POLICY_AS_WHOLLY_UNKNOWN",
+      "TREAT_FROZEN_CROWD_BT_AND_ANCHOR_AS_UNKNOWN"
+    ],
+    "preserve": "PRIVATE_TASK_CONTENT_AND_REALIZED_SCORE_BEARING_OUTCOMES_REMAIN_DECISIVE"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_CURRENT_2026_10_11_PAIRWISE_PANEL_EQUALS_FROZEN_2026_09_22_PANEL",
+    "NO_CLAIM_FROZEN_ERA_PANEL_ARCHIVE_ALONE_BINDS_EVERY_HISTORICAL_JUDGE_ASSIGNMENT",
+    "NO_CLAIM_PRIVATE_TASK_OR_RUBRIC_CONTENT_IS_PUBLIC",
+    "NO_BRAIN_SCORE_OR_TERMINAL_CREDIT"
+  ],
+  "sources": [
+    "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
+    "https://artificialanalysis.ai/articles/aa-briefcase",
+    "canonical/evidence/AA_BRIEFCASE_FROZEN_ERA_COMPONENT_ARCHIVE_20261011_V1.json",
+    "canonical/evidence/AA_BRIEFCASE_FROZEN_DAY_RUBRIC_CROWDBT_BINDING_20261011_V1.json"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
