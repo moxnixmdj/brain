@@ -1,14 +1,14 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_TB_SCIENCE_EXECUTION_POINTER_V2",
   "date": "2026-10-11",
-  "status": "RANK21_FINAL_ZERO__ZERO_MODEL_ROUTE_INDEPENDENTLY_QUALIFIED__RANK22_FROZEN_PENDING_CAPABILITY_FIRST_ONE_SHOT_AUTHORITY",
+  "status": "RANK22_ZERO_MODEL_CLAIM_BOUND_STAGED__UNREAD_UNSTARTED__PUBLIC_RESEAL_PENDING__NO_EFFECTIVE_EXECUTION_AUTHORITY",
   "current_result": {
     "path": "canonical/verification/TB_SCIENCE_RANK21_FINAL_ZERO_NONCREDITABLE_VERIFY_20261011_V1.json",
     "git_blob_sha": "3bbb3f32119e28f152c929a56ed43a70eda28b72"
   },
   "current_ledger": {
-    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261011_V68.json",
-    "git_blob_sha": "ba3480ae80ba1fa7b51ed5ac91817a8915f4b8b0"
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261011_V69.json",
+    "git_blob_sha": "32cb8b726532aac05e50b10d62d3469bb2de5fae"
   },
   "verification": {
     "path": "canonical/verification/TB_SCIENCE_RANK21_FINAL_ZERO_NONCREDITABLE_VERIFY_20261011_V1.json",
@@ -29,7 +29,7 @@
   },
   "acceptance_credit_delta": 0,
   "terminal_credit_delta": 0,
-  "next": "STAGE_RANK22_CAPABILITY_FIRST_VALIDATION_AND_FRESH_ONE_SHOT_AUTHORITY_ON_EXACT_VERIFIED_ZERO_MODEL_RUNTIME__NO_TASK_READ_BEFORE_PUBLIC_LIVE_PREFLIGHT",
+  "next": "PROMOTE_EXACT_RANK22_ZERO_MODEL_PUBLIC_RESEAL__VERIFY_ZERO_EXPOSURE__THEN_MAKE_ONE_SHOT_AUTHORITY_EFFECTIVE__NO_TASK_READ_YET",
   "finalized_rank18": {
     "ledger_schedule_rank": 18,
     "slot_id": "terminal-bench-science/longitudinal-clinical-agent::trial-0",
@@ -585,5 +585,20 @@
     "rank22_task_read": false,
     "rank22_task_started": false,
     "rank22_trials_consumed": 0
+  },
+  "rank22_staged_authority": {
+    "path": "canonical/governance/TB_SCIENCE_RANK22_ONE_SLOT_EXECUTION_AUTHORITY_20261011_V1.json",
+    "git_blob_sha": "a4a821bbc01f620b528ab8f7baae9204624f1598",
+    "execution_authority": true,
+    "execution_authority_effective": false,
+    "task_read_authority": true,
+    "task_read_authority_effective": false,
+    "activation_authority": false
+  },
+  "rank22_claim_binding": {
+    "path": "canonical/governance/TB_SCIENCE_RANK22_LOGICAL_ATTEMPT_CLAIM_BINDING_20261011_V1.json",
+    "git_blob_sha": "59a0397b4a970aae37a728a5094f3c3c030885e0",
+    "execution_claim_binding_digest": "sha256:a1b8c550de90ff8c924c99633aa5195615e2ab4361e8e637061b39be587af812",
+    "logical_attempt_id": "e958f9c8f996ba3ee3599ae573340c6970262634a5085cc2102c7b8321baf796"
   }
 }
