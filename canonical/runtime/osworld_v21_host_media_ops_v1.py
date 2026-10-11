@@ -100,7 +100,10 @@ class OSWorldHostMediaOps:
             src=root/("input"+PurePosixPath(input_path).suffix)
             dst=root/("output"+PurePosixPath(output_path).suffix)
             src.write_bytes(source)
-            cmd=[exe,"-hide_banner","-loglevel","error","-y",*args[:1],str(src),*args[1:],str(dst)] if args and args[0]=="-i" else [exe,"-hide_banner","-loglevel","error","-y",*args,str(dst)]
+            bound=[str(src) if x=="{input}" else x for x in args]
+            if "{input}" not in args:
+                raise MediaOpsError("MEDIA_INPUT_PLACEHOLDER_MISSING")
+            cmd=[exe,"-hide_banner","-loglevel","error","-y",*bound,str(dst)]
             r=subprocess.run(cmd,capture_output=True,text=True,timeout=180,check=False)
             if r.returncode!=0 or not dst.is_file() or dst.stat().st_size<=0:
                 raise MediaOpsError("FFMPEG_TRANSFORM_FAILED:"+r.stderr[-1500:])
@@ -139,36 +142,36 @@ class OSWorldHostMediaOps:
             start=_number(a.get("start_s"),"START",0,86400)
             end=_number(a.get("end_s"),"END",0,86400)
             if end<=start: raise MediaOpsError("TRIM_RANGE_INVALID")
-            result=self._transform(src,dst,["-ss",str(start),"-to",str(end),"-i"])
+            result=self._transform(src,dst,["-ss",str(start),"-i","{input}","-t",str(end-start)])
 
         elif op=="RESIZE":
             src=_path(a.get("input")); dst=_path(a.get("output"))
             w=_integer(a.get("width"),"WIDTH",1,8192); h=_integer(a.get("height"),"HEIGHT",1,8192)
-            result=self._transform(src,dst,["-i","-vf",f"scale={w}:{h}"])
+            result=self._transform(src,dst,["-i","{input}","-vf",f"scale={w}:{h}"])
 
         elif op=="CROP":
             src=_path(a.get("input")); dst=_path(a.get("output"))
             w=_integer(a.get("width"),"WIDTH",1,8192); h=_integer(a.get("height"),"HEIGHT",1,8192)
             x=_integer(a.get("x"),"X",0,8192); y=_integer(a.get("y"),"Y",0,8192)
-            result=self._transform(src,dst,["-i","-vf",f"crop={w}:{h}:{x}:{y}"])
+            result=self._transform(src,dst,["-i","{input}","-vf",f"crop={w}:{h}:{x}:{y}"])
 
         elif op=="ROTATE":
             src=_path(a.get("input")); dst=_path(a.get("output"))
             deg=_integer(a.get("degrees"),"DEGREES",0,360)
             filters={90:"transpose=1",180:"hflip,vflip",270:"transpose=2"}
             if deg not in filters: raise MediaOpsError("ROTATION_UNSUPPORTED")
-            result=self._transform(src,dst,["-i","-vf",filters[deg]])
+            result=self._transform(src,dst,["-i","{input}","-vf",filters[deg]])
 
         elif op=="EXTRACT_AUDIO":
             src=_path(a.get("input")); dst=_path(a.get("output"))
             suffix=PurePosixPath(dst).suffix.casefold()
             codec={".wav":["-c:a","pcm_s16le"],".mp3":["-c:a","libmp3lame"],".m4a":["-c:a","aac"]}.get(suffix,[])
-            result=self._transform(src,dst,["-i","-vn",*codec])
+            result=self._transform(src,dst,["-i","{input}","-vn",*codec])
 
         elif op=="SET_VOLUME":
             src=_path(a.get("input")); dst=_path(a.get("output"))
             factor=_number(a.get("factor"),"VOLUME_FACTOR",0,10)
-            result=self._transform(src,dst,["-i","-af",f"volume={factor}"])
+            result=self._transform(src,dst,["-i","{input}","-af",f"volume={factor}"])
 
         else:
             raise MediaOpsError("MEDIA_OPERATION_NOT_ALLOWED:"+op)
