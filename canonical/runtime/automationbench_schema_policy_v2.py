@@ -466,8 +466,12 @@ def compile_schema_grounded_action(
             if value is not None:
                 body_obj[field] = value
 
-        # Required body fields must be grounded.
-        if required - set(body_obj):
+        # Required markers in some public update schemas are inherited from
+        # create shapes. Enforce them only for true create endpoints.
+        is_create = "create" in str(ep.get("id") or "").lower() or (
+            "create" in _endpoint_text(ep) and "update" not in str(ep.get("id") or "").lower()
+        )
+        if is_create and required - set(body_obj):
             return None
         if not body_obj:
             return None
