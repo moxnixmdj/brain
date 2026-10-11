@@ -55,7 +55,9 @@
     },
     {
       "capability_id": "chart.raster.direct_curve_label_family_rank.v1",
-      "verification": "canonical/verification/CHART_DIRECT_CURVE_LABEL_FAMILY_RANK_V1_VERIFY_20261011.json"
+      "verification": "canonical/verification/CHART_DIRECT_CURVE_LABEL_FAMILY_RANK_V1_VERIFY_20261011.json",
+      "independent_verification": "canonical/verification/CHART_DIRECT_CURVE_LABEL_FAMILY_RANK_V1_INDEPENDENT_VERIFY_20261011.json",
+      "verification_state": "INDEPENDENT_PUBLIC_RUNNER_PASS__27_OF_27_TOTAL_CHECKS"
     }
   ],
   "declared_family_coverage": [
@@ -168,10 +170,12 @@
         "CONTOUR_MAP"
       ],
       "estimated_implementation_wall_clock_class": "MEDIUM",
-      "selection_state": "VERIFIED_PROMOTED__FOCUSED_47_OF_47",
+      "selection_state": "VERIFIED_PROMOTED__FOCUSED_47_OF_47__SECOND_CARRIER_27_OF_27",
       "proposition_closure_authority": false,
       "verification": "canonical/verification/CHART_DIRECT_CURVE_LABEL_FAMILY_RANK_V1_VERIFY_20261011.json",
-      "scope_note": "ENDPOINT_ADJACENT_DIRECT_LABELS_ONLY__NO_INLINE_CONTOUR_LABEL_AUTHORITY"
+      "scope_note": "ENDPOINT_ADJACENT_DIRECT_LABELS_ONLY__NO_INLINE_CONTOUR_LABEL_AUTHORITY",
+      "independent_verification": "canonical/verification/CHART_DIRECT_CURVE_LABEL_FAMILY_RANK_V1_INDEPENDENT_VERIFY_20261011.json",
+      "second_carrier_independent": true
     },
     {
       "id": "MULTI_PANEL_PLOT_DECOMPOSITION",
