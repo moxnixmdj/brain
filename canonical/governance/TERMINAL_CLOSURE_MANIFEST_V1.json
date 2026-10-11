@@ -522,9 +522,13 @@
     "required_reducer": "canonical/runtime/terminal_global_ownership_postconditions_reducer_v1.py"
   },
   "donor_deletion_cleanroom": {
-    "status": "INDEPENDENT_PASS",
-    "evidence": "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-    "evidence_blob_sha": "d3144bf0aa618b15ef594d24de54d55cbdb329fd"
+    "status": "INVALIDATED_BY_CAPABILITY_TRANSFER_V2_ZERO_MODEL_RUNTIME_COGNITION_REQUIREMENTS__REQUALIFICATION_REQUIRED",
+    "historical_evidence": "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "historical_evidence_blob_sha": "d3144bf0aa618b15ef594d24de54d55cbdb329fd",
+    "invalidation": "canonical/verification/CAPABILITY_TRANSFER_V2_DONOR_AUTHORITY_INVALIDATION_20261011_V1.json",
+    "current_authority": false,
+    "requalification_required": true,
+    "required_protocol": "canonical/governance/DONOR_DELETION_AND_DEPENDENCY_ACCOUNTING_PROTOCOL_V2.json"
   },
   "final_proof_bundle_state": {
     "status": "INVALIDATED_FOR_TERMINAL_OWNERSHIP_CLOSURE",
