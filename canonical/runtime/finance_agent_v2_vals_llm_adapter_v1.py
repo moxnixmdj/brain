@@ -155,11 +155,151 @@ def _query_terms(text: str) -> set[str]:
     }
 
 
+def _embedded_json_object(text: str) -> tuple[dict[str, Any], int, int] | None:
+    decoder = json.JSONDecoder()
+    candidates: list[tuple[int, int, dict[str, Any]]] = []
+    for match in re.finditer(r"\\{", text):
+        start = match.start()
+        try:
+            obj, consumed = decoder.raw_decode(text[start:])
+        except Exception:
+            continue
+        if isinstance(obj, dict):
+            candidates.append((consumed, start, obj))
+    if not candidates:
+        return None
+    consumed, start, obj = max(candidates, key=lambda x: x[0])
+    return obj, start, start + consumed
+
+
+def _sec_json_evidence(raw: str) -> str | None:
+    embedded = _embedded_json_object(raw)
+    if embedded is None:
+        return None
+    obj, start, _end = embedded
+    instruction = raw[:start]
+
+    # SEC ticker registry JSON.
+    if obj and all(isinstance(v, Mapping) for v in obj.values()):
+        registry_rows = [
+            v for v in obj.values()
+            if isinstance(v, Mapping)
+            and "ticker" in v
+            and "cik_str" in v
+            and "title" in v
+        ]
+        if registry_rows:
+            requested = {
+                x.upper()
+                for x in re.findall(
+                    r"(?:NASDAQ|NYSE)\\s*:\\s*([A-Z0-9.-]{1,12})",
+                    instruction,
+                    flags=re.I,
+                )
+            }
+            requested.update(
+                x.upper()
+                for x in re.findall(
+                    r"\\bticker\\s*[=:]\\s*([A-Z0-9.-]{1,12})",
+                    instruction,
+                    flags=re.I,
+                )
+            )
+            rows = [
+                {
+                    "ticker": str(row.get("ticker") or "").upper(),
+                    "cik_str": row.get("cik_str"),
+                    "title": row.get("title"),
+                }
+                for row in registry_rows
+                if not requested
+                or str(row.get("ticker") or "").upper() in requested
+            ]
+            if rows:
+                return _HELPER_PREFIX + "\n".join(
+                    "[SEC_TICKER_IDENTITY] "
+                    + json.dumps(row, sort_keys=True, default=str)
+                    for row in rows[:50]
+                )
+
+    # SEC CompanyConcept JSON.
+    units = obj.get("units")
+    if (
+        isinstance(units, Mapping)
+        and isinstance(obj.get("taxonomy"), str)
+        and isinstance(obj.get("tag"), str)
+        and obj.get("cik") is not None
+    ):
+        years = {
+            int(x)
+            for x in re.findall(r"\\b(20[0-3][0-9])\\b", instruction)
+        }
+        forms = {
+            x.upper()
+            for x in re.findall(r"\\b(10-K|10-Q|8-K)\\b", instruction, flags=re.I)
+        }
+        rows: list[dict[str, Any]] = []
+        for unit, raw_rows in units.items():
+            if not isinstance(raw_rows, list):
+                continue
+            for row in raw_rows:
+                if not isinstance(row, Mapping):
+                    continue
+                fy = row.get("fy")
+                form = str(row.get("form") or "").upper()
+                if years and fy not in years:
+                    continue
+                if forms and form not in forms:
+                    continue
+                rows.append({
+                    "unit": unit,
+                    "val": row.get("val"),
+                    "start": row.get("start"),
+                    "end": row.get("end"),
+                    "fy": fy,
+                    "fp": row.get("fp"),
+                    "form": row.get("form"),
+                    "filed": row.get("filed"),
+                    "accn": row.get("accn"),
+                    "frame": row.get("frame"),
+                })
+        rows.sort(
+            key=lambda row: (
+                str(row.get("filed") or ""),
+                str(row.get("end") or ""),
+                str(row.get("start") or ""),
+            ),
+            reverse=True,
+        )
+        header = {
+            "cik": obj.get("cik"),
+            "entityName": obj.get("entityName"),
+            "taxonomy": obj.get("taxonomy"),
+            "tag": obj.get("tag"),
+            "label": obj.get("label"),
+        }
+        return (
+            _HELPER_PREFIX
+            + "[SEC_COMPANYCONCEPT] "
+            + json.dumps(header, sort_keys=True, default=str)
+            + "\n"
+            + "\n".join(
+                "[SEC_FACT] " + json.dumps(row, sort_keys=True, default=str)
+                for row in rows[:80]
+            )
+        )
+    return None
+
+
 def extractive_helper_response(text: str, *, max_fragments: int = 36) -> str:
     """Return high-overlap source spans without semantic synthesis."""
     raw = str(text or "")
     if not raw.strip():
         raise FinanceValsLLMAdapterError("HELPER_PROMPT_EMPTY")
+
+    structured = _sec_json_evidence(raw)
+    if structured is not None:
+        return structured
     if (
         not isinstance(max_fragments, int)
         or isinstance(max_fragments, bool)
