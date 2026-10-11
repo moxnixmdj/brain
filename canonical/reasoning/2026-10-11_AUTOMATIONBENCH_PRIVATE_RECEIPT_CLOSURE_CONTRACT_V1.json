@@ -1,54 +1,69 @@
 {
   "schema": "PROJECT_BRAIN_AUTOMATIONBENCH_PRIVATE_RECEIPT_CLOSURE_CONTRACT_20261011_V1",
   "date": "2026-10-11",
-  "status": "CANDIDATE__EXACT_PRIVATE_RECEIPT_CONTRACT_FIXED__TARGET_REMAINS_OPEN_PENDING_OWNER_RESULT__ZERO_CREDIT",
+  "status": "CANDIDATE__TARGET_REFERENCE_EPOCH_AMBIGUITY_REPAIRED__OWNER_MATCH_OR_BRIDGE_REQUIRED__ZERO_CREDIT",
   "target_predicate": "AUTOMATIONBENCH_GE_40",
   "mission_lock": "SOLVE_ONLY_AUTOMATIONBENCH_GE_40",
-  "problem_eliminated": "AMBIGUITY_ABOUT_THE_MINIMUM_ADMISSIBLE_PRIVATE_HELDOUT_RESULT_AND_PROMOTION_RULE",
   "target_reference": {
     "reference_system": "Claude Opus 5.5",
     "reference_score_percent": 40.0,
-    "reference_score_origin": "Zapier-run AutomationBench evaluation reported by Anthropic",
-    "fallback_models_allowed_for_reference": false,
-    "required_comparability_rule": "CANDIDATE_RECEIPT_MUST_BIND_THE_SAME_OFFICIAL_PRIVATE_TARGET_SCOPE_AND_SCORE_SEMANTICS_AS_THE_40_0_REFERENCE__NO_CROSS_POPULATION_SUBSTITUTION"
+    "reference_origin": "ZAPIER_RUN_REPORTED_BY_ANTHROPIC",
+    "fallback_models_used": false,
+    "publicly_bound_facts": [
+      "ZAPIER_RAN_AND_REPORTED_THE_RESULT",
+      "OPUS55_EARLY_ACCESS_RESULT_IS_40_0_PERCENT",
+      "NO_FALLBACK_MODELS_WERE_USED"
+    ],
+    "not_publicly_bound_by_the_primary_opus55_source": [
+      "EXACT_PRIVATE_POPULATION_IDENTITY",
+      "EXACT_SCORE_BEARING_DENOMINATOR",
+      "EXACT_AUTOMATIONBENCH_VERSION_OR_EPOCH"
+    ],
+    "required_comparability_rule": "CANDIDATE_OWNER_RECEIPT_MUST_ATTEST_EXACT_REFERENCE_EPOCH_SCOPE_AND_PROTOCOL_MATCH_OR_AN_OWNER_VERIFIED_COMPARABILITY_BRIDGE__CURRENT_PUBLIC_VERSION_ALONE_IS_NOT_SUFFICIENT"
   },
-  "first_party_public_methodology_bound": {
-    "benchmark_version": "v1.0.6",
-    "official_population": "PRIVATE_HELD_OUT",
-    "reported_private_population_size": 657,
-    "tool_mode": "API",
-    "max_steps_per_task": 50,
-    "binary_metric": "task_completed_correctly",
-    "task_success_rule": "ALL_TASK_ASSERTIONS_PASS",
-    "public_population_is_substitute": false,
-    "public_population_size": 600,
-    "public_to_private_transfer_guaranteed": false,
-    "private_hardening_is_exhaustively_public": false
+  "public_methodology_evidence": {
+    "current_public_repository_version": "1.0.6",
+    "public_scored_population_size": 600,
+    "paper_private_population_description": "600+",
+    "paper_private_population_is_held_out": true,
+    "paper_private_population_is_harder_than_public": true,
+    "paper_private_hardening_exhaustively_specified": false,
+    "paper_step_limit": 50,
+    "paper_scoring": "PROGRAMMATIC_END_STATE__ALL_ASSERTIONS_REQUIRED_FOR_TASK_PASS",
+    "partner_automationbench_aa_population_size": 657,
+    "partner_metric_same_as_zapier_hosted_headline": false,
+    "critical_limit": "THE_657_PARTNER_POPULATION_IS_EVIDENCE_OF_A_PRIVATE_SPLIT_SIZE_BUT_DOES_NOT_BY_ITSELF_PROVE_THAT_OPUS55_40_0_USED_THAT_EXACT_POPULATION_OR_EPOCH"
   },
   "threshold_arithmetic": {
-    "condition": "successes / denominator >= 0.40",
-    "denominator_if_exact_target_population_is_657": 657,
-    "minimum_successes_if_denominator_is_657": 263,
-    "proof": "ceil(0.40 * 657) = ceil(262.8) = 263",
-    "263_over_657_percent": 40.03044140030441,
-    "262_over_657_percent": 39.87823439878234,
-    "critical_guard": "THE_263_THRESHOLD_IS_VALID_ONLY_IF_THE_OWNER_RECEIPT_ATTESTS_THAT_657_IS_THE_EXACT_SCORE_BEARING_POPULATION_MATCHED_TO_THE_TARGET_40_0_REFERENCE"
+    "general_rule": "minimum_successes = ceil(0.40 * owner_attested_score_bearing_denominator)",
+    "if_owner_attested_denominator_is_657": {
+      "minimum_successes": 263,
+      "263_over_657_percent": 40.03044140030441,
+      "262_over_657_percent": 39.87823439878234
+    },
+    "guard": "DO_NOT_HARDCODE_657_UNLESS_THE_OWNER_MATCH_OR_BRIDGE_ATTESTS_IT_IS_THE_SCORE_BEARING_DENOMINATOR_COMPARABLE_TO_THE_OPUS55_40_0_REFERENCE"
   },
   "minimum_admissible_owner_receipt": {
     "receipt_authority": "ZAPIER_OR_AN_OFFICIALLY_DELEGATED_AUTOMATIONBENCH_EVALUATOR",
     "must_bind": [
-      "BENCHMARK_NAME_AND_VERSION",
-      "TARGET_POPULATION_IDENTITY_OR_CONTENT_ADDRESS_SUFFICIENT_TO_ESTABLISH_SCOPE_MATCH_WITHOUT_DISCLOSING_PRIVATE_TASKS",
+      "BENCHMARK_VERSION_OR_RUN_EPOCH",
+      "PRIVATE_POPULATION_IDENTITY_OR_OPAQUE_CONTENT_ADDRESS",
       "SCORE_BEARING_DENOMINATOR",
-      "TOOL_MODE_API",
-      "MAX_STEPS_50",
-      "TASK_SUCCESS_METRIC_TASK_COMPLETED_CORRECTLY",
+      "TOOL_PROTOCOL_AND_STEP_LIMIT",
+      "TASK_SUCCESS_METRIC",
       "FALLBACK_POLICY_NO_FALLBACK_MODELS",
-      "CANDIDATE_SYSTEM_OR_CAPSULE_CONTENT_ADDRESS",
-      "RUN_TIMESTAMP_OR_FROZEN_EPOCH",
+      "CANDIDATE_SYSTEM_CONTENT_ADDRESS",
       "SUCCESS_COUNT",
       "AGGREGATE_SCORE_PERCENT",
-      "EVALUATOR_OR_OWNER_PROVENANCE"
+      "OWNER_RECEIPT_CONTENT_ADDRESS",
+      "EXACT_OPUS55_40_0_REFERENCE_EPOCH_MATCH_OR_OWNER_VERIFIED_COMPARABILITY_BRIDGE"
+    ],
+    "reference_match_must_attest": [
+      "POPULATION_SCOPE_COMPARABLE",
+      "SCORING_SEMANTICS_COMPARABLE",
+      "TOOL_PROTOCOL_COMPARABLE",
+      "STEP_LIMIT_COMPARABLE",
+      "FALLBACK_POLICY_COMPARABLE"
     ],
     "private_content_not_required": [
       "PRIVATE_PROMPTS",
@@ -56,44 +71,22 @@
       "PRIVATE_INITIAL_STATES",
       "PRIVATE_ANSWERS",
       "PRIVATE_EVALUATOR_IMPLEMENTATION"
-    ],
-    "promotion_if": [
-      "RECEIPT_PROVENANCE_IS_AUTHENTIC",
-      "TARGET_SCOPE_MATCH_IS_EXACT_OR_STRONGER_AND_FORMALLY_ADMISSIBLE",
-      "NO_FALLBACK_MODELS",
-      "SCORE_IS_RECOMPUTABLE_FROM_SUCCESS_COUNT_AND_DENOMINATOR",
-      "SCORE_PERCENT_GTE_40_0"
-    ],
-    "fail_closed_if": [
-      "POPULATION_SCOPE_UNKNOWN",
-      "DENOMINATOR_UNKNOWN",
-      "VERSION_OR_EPOCH_MISMATCH",
-      "FALLBACK_POLICY_UNKNOWN_OR_ENABLED",
-      "PUBLIC_600_USED_AS_PRIVATE_RESULT_SUBSTITUTE",
-      "ONLY_MODEL_SELF_REPORT_OR_UNATTESTED_SCREENSHOT_EXISTS",
-      "SCORE_CANNOT_BE_RECOMPUTED_FROM_RECEIPT"
     ]
   },
   "route_adjudication": {
-    "PUBLIC_600_DIRECT_ROUTE": "KILLED_FOR_PRIVATE_BAR_PROMOTION",
-    "FINITE_APP_API_STATE_TRANSITION_GRAMMAR_SUPERSET": "KILLED_AT_HIDDEN_TASK_CONTRACT_LAYER",
-    "PUBLIC_DISTRIBUTION_GENERALIZATION_ARGUMENT": "INSUFFICIENT_BECAUSE_FIRST_PARTY_SOURCES_DO_NOT_GUARANTEE_PUBLIC_TO_PRIVATE_TRANSFER_AND_PRIVATE_HARDENING_IS_NOT_EXHAUSTIVELY_PUBLIC",
-    "UNIVERSAL_PRIVATE_LANGUAGE_PROOF_FROM_CURRENT_PUBLIC_INFORMATION": "NOT_CURRENTLY_SOUND_BECAUSE_THE_FULL_PRIVATE_ELIGIBLE_TASK_CONTRACT_LANGUAGE_IS_NOT_PUBLICLY_BOUNDED",
-    "EXACT_OFFICIAL_PRIVATE_RESULT": "LIVE_MINIMUM_CLOSURE_ROUTE",
-    "STRONGER_SCOPE_COMPLETE_TARGET_SPECIFIC_PROOF": "PRESERVED_IF_NEW_LOAD_BEARING_PRIVATE_SCOPE_INFORMATION_APPEARS"
+    "PUBLIC_600_DIRECT_ROUTE": "KILLED",
+    "FINITE_APP_API_STATE_TRANSITION_GRAMMAR_SUPERSET": "KILLED",
+    "PUBLIC_TO_PRIVATE_GENERALIZATION": "INSUFFICIENT",
+    "ASSUME_V1_0_6_EQUALS_OPUS55_EARLY_ACCESS_EPOCH": "KILLED_AS_UNBOUND",
+    "ASSUME_657_EQUALS_OPUS55_SCORE_DENOMINATOR": "KILLED_AS_UNBOUND",
+    "OWNER_PRIVATE_RESULT_WITH_EXACT_REFERENCE_MATCH_OR_BRIDGE": "LIVE_MINIMUM_CLOSURE_ROUTE",
+    "SCOPE_COMPLETE_STRONGER_PROOF": "PRESERVED_IF_NEW_LOAD_BEARING_PRIVATE_SCOPE_EVIDENCE_APPEARS"
   },
   "current_observation": {
     "exact_official_candidate_private_result_observed": false,
+    "owner_reference_epoch_match_or_bridge_observed": false,
     "zapier_owner_run_reply_observed": false,
-    "public_automationbench_github_submission_question_answered_by_maintainer": false,
     "predicate_closed": false
-  },
-  "external_action_contract": {
-    "request": "RUN_THE_FROZEN_CANDIDATE_BLINDLY_ON_THE_OFFICIAL_PRIVATE_HELD_OUT_SCOPE_AND_RETURN_ONLY_THE_MINIMUM_ADMISSIBLE_OWNER_RECEIPT",
-    "privacy_preserving": true,
-    "incremental_spend_usd_required_by_project": 0,
-    "paid_or_custom_service_authorized": false,
-    "do_not_disclose_private_tasks": true
   },
   "accounting": {
     "incremental_spend_usd": 0,
@@ -104,15 +97,14 @@
     "capability_credit_delta": 0,
     "ownership_credit_delta": 0
   },
-  "scheduling_authority": false,
   "execution_authority": false,
   "promotion_authority": false,
   "fresh_reality_authority": false,
   "hard_nonclaims": [
     "NO_CLAIM_AUTOMATIONBENCH_GE_40_IS_ALREADY_PROVED",
-    "NO_CLAIM_657_IS_ACCEPTABLE_WITHOUT_OWNER_ATTESTATION_OF_EXACT_TARGET_SCOPE_MATCH",
-    "NO_CLAIM_PUBLIC_600_PREDICTS_PRIVATE_657_AT_OR_ABOVE_40",
-    "NO_PRIVATE_TASK_CONTENT_WAS_READ",
-    "NO_SCORE_OR_TERMINAL_CREDIT_CREATED"
+    "NO_CLAIM_OPUS55_40_0_IS_PUBLICLY_BOUND_TO_V1_0_6",
+    "NO_CLAIM_OPUS55_40_0_IS_PUBLICLY_BOUND_TO_657_TASKS",
+    "NO_CLAIM_PUBLIC_600_PREDICTS_PRIVATE_PERFORMANCE",
+    "NO_PRIVATE_TASK_CONTENT_WAS_READ"
   ]
 }
