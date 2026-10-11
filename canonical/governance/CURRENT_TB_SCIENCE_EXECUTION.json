@@ -1,18 +1,18 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_TB_SCIENCE_EXECUTION_POINTER_V2",
   "date": "2026-10-11",
-  "status": "RANK21_FRESH_ONE_SHOT_READY_FOR_EXACT_ACTIVATION__EXECUTION_AUTHORITY_EFFECTIVE__ACTIVATION_AUTHORIZED__ACTIVATION_ABSENT__ZERO_EXPOSURE__RANK20_RETIRED_NO_RETRY",
+  "status": "RANK21_STARTED__ONE_TRIAL_CONSUMED__RESULT_PENDING__NO_RETRY",
   "current_result": {
     "path": "canonical/verification/TB_SCIENCE_RANK20_V3_FINAL_NONCONSUMING_VERIFY_20261010_V1.json",
     "git_blob_sha": "8f77186beeb582c5aef8bbead0d7a98e32f818fa"
   },
   "current_ledger": {
-    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261011_V65.json",
-    "git_blob_sha": "71292566147b0d8423b87af77e596a0ad4e33cb5"
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261011_V66.json",
+    "git_blob_sha": "75ab2e5e8a79c31fba24d0efbbda1b40d8690614"
   },
   "verification": {
-    "path": "canonical/verification/TB_SCIENCE_RANK21_PUBLIC_EFFECTIVE_AUTHORITY_VERIFY_20261011_V1.json",
-    "git_blob_sha": "06c0cbb101d5ca7795699300b96bcd44e3ce7fb9"
+    "path": "canonical/verification/TB_SCIENCE_RANK21_DURABLE_START_VERIFY_20261011_V1.json",
+    "git_blob_sha": "99adaccaf9753e60ef8b98fcdb42b7ea6d9381ad"
   },
   "counts": {
     "benchmark_trials_consumed": 18,
@@ -29,7 +29,7 @@
   },
   "acceptance_credit_delta": 0,
   "terminal_credit_delta": 0,
-  "next": "CREATE_ONLY_CAPSULES_TB_SCIENCE_RANK21_20261011_V1_ACTIVATE_RANK21_V1_PR_JSON_ON_THE_ALREADY_FRESH_EXECUTION_BRANCH__OPEN_PR_TO_TERMINAL_EXECUTION_V1__NO_OTHER_DIFF__DO_NOT_MANUALLY_MERGE",
+  "next": "FINALIZE_CURRENT_RANK21_RUN__NO_RETRY_OR_REPLACEMENT",
   "finalized_rank18": {
     "ledger_schedule_rank": 18,
     "slot_id": "terminal-bench-science/longitudinal-clinical-agent::trial-0",
