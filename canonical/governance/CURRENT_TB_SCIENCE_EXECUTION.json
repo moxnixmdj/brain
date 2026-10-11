@@ -1,14 +1,14 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_TB_SCIENCE_EXECUTION_POINTER_V2",
   "date": "2026-10-11",
-  "status": "RANK21_FINAL_ZERO__PERMANENTLY_NONCREDITABLE_EXTERNAL_QWEN_COGNITION__RANK22_FROZEN_PENDING_ZERO_MODEL_ROUTE",
+  "status": "RANK21_FINAL_ZERO__ZERO_MODEL_ROUTE_INDEPENDENTLY_QUALIFIED__RANK22_FROZEN_PENDING_CAPABILITY_FIRST_ONE_SHOT_AUTHORITY",
   "current_result": {
     "path": "canonical/verification/TB_SCIENCE_RANK21_FINAL_ZERO_NONCREDITABLE_VERIFY_20261011_V1.json",
     "git_blob_sha": "3bbb3f32119e28f152c929a56ed43a70eda28b72"
   },
   "current_ledger": {
-    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261011_V67.json",
-    "git_blob_sha": "e8aaf494dd357708cd8b762fb2dc16fce97e9760"
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261011_V68.json",
+    "git_blob_sha": "ba3480ae80ba1fa7b51ed5ac91817a8915f4b8b0"
   },
   "verification": {
     "path": "canonical/verification/TB_SCIENCE_RANK21_FINAL_ZERO_NONCREDITABLE_VERIFY_20261011_V1.json",
@@ -29,7 +29,7 @@
   },
   "acceptance_credit_delta": 0,
   "terminal_credit_delta": 0,
-  "next": "VERIFY_ZERO_EXTERNAL_MODEL_COGNITION_TB_SCIENCE_ROUTE_BEFORE_ANY_RANK22_TASK_READ_OR_START",
+  "next": "STAGE_RANK22_CAPABILITY_FIRST_VALIDATION_AND_FRESH_ONE_SHOT_AUTHORITY_ON_EXACT_VERIFIED_ZERO_MODEL_RUNTIME__NO_TASK_READ_BEFORE_PUBLIC_LIVE_PREFLIGHT",
   "finalized_rank18": {
     "ledger_schedule_rank": 18,
     "slot_id": "terminal-bench-science/longitudinal-clinical-agent::trial-0",
@@ -102,7 +102,10 @@
     "NO_RANK21_RETRY_OR_REPLACEMENT_AUTHORITY",
     "RANK21_AUTHENTIC_REWARD_IS_ZERO",
     "RANK21_RESULT_IS_PERMANENTLY_NONCREDITABLE_AS_BRAIN_CAPABILITY",
-    "NO_RANK22_TASK_READ_OR_START_BEFORE_ZERO_EXTERNAL_MODEL_COGNITION_ROUTE_VERIFICATION"
+    "NO_RANK22_TASK_READ_OR_START_BEFORE_ZERO_EXTERNAL_MODEL_COGNITION_ROUTE_VERIFICATION",
+    "ZERO_MODEL_ROUTE_QUALIFICATION_DOES_NOT_PROVE_RANK22_BENCHMARK_SUCCESS",
+    "NO_RANK22_TASK_READ_OR_START_YET",
+    "NO_EXTERNAL_OR_LOCAL_GENERAL_PURPOSE_MODEL_COGNITION_MAY_BE_REINTRODUCED_IN_RANK22_CREDITED_RUNTIME"
   ],
   "public_effective_authority_reconciliation": {
     "path": "canonical/governance/TB_SCIENCE_RANK19_PUBLIC_EFFECTIVE_AUTHORITY_RECONCILIATION_20261010_V1.json",
@@ -564,5 +567,23 @@
     "result_credit_authority": false,
     "retry_authority": false,
     "replacement_authority": false
+  },
+  "zero_model_route_verification": {
+    "path": "canonical/verification/TB_SCIENCE_ZERO_MODEL_SCIENTIFIC_ROUTE_VERIFY_20261011_V1.json",
+    "git_blob_sha": "782e1bdf01ac3bf6fe38277919bed5e22754f5b5",
+    "public_repository": "moxnixmdj/verification-capsule-runner",
+    "public_pull_request": 2663,
+    "public_head_sha": "26505385be768961dfe326b666e7caff0b336d63",
+    "public_checked_merge_sha": "6a7d151bd6a647a76e4f1720d5e1b91d64ac1284",
+    "public_run_id": 38138191614,
+    "public_job_id": 114466335683,
+    "conclusion": "success",
+    "model_dependency_count": 0,
+    "external_model_runtime_calls": 0,
+    "network_dependency_count": 0,
+    "focused_tests_passed": 6,
+    "rank22_task_read": false,
+    "rank22_task_started": false,
+    "rank22_trials_consumed": 0
   }
 }

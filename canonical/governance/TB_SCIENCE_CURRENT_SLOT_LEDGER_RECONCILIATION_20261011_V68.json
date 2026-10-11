@@ -1,0 +1,77 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261011_V68",
+  "date": "2026-10-11",
+  "status": "RANK21_FINAL_ZERO__ZERO_MODEL_ROUTE_INDEPENDENTLY_QUALIFIED__RANK22_UNREAD_UNSTARTED__NO_EXECUTION_AUTHORITY",
+  "predecessor": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261011_V67.json",
+    "git_blob_sha": "e8aaf494dd357708cd8b762fb2dc16fce97e9760"
+  },
+  "verification": {
+    "path": "canonical/verification/TB_SCIENCE_RANK21_FINAL_ZERO_NONCREDITABLE_VERIFY_20261011_V1.json",
+    "pass": true,
+    "git_blob_sha": "3bbb3f32119e28f152c929a56ed43a70eda28b72"
+  },
+  "counts": {
+    "benchmark_trials_consumed": 19,
+    "consumed_successes_final": 0,
+    "consumed_failures_final": 19,
+    "started_result_pending": 0,
+    "finalized_slots": 19,
+    "active_in_flight_slot_count": 0
+  },
+  "finalized_current_slot": {
+    "ledger_schedule_rank": 21,
+    "slot_id": "terminal-bench-science/ode-law-discovery::trial-0",
+    "task_digest": "sha256:767d16a0a6226f391208b1b4bb126a6f957e5d0c8156342b5c9410a755142d65",
+    "logical_attempt_id": "7eb619d40a65597b2b2dccbcf409c143aa47e1663ca4c0d8f098167cb252811a",
+    "task_read": true,
+    "task_started": true,
+    "durable_start_cas_acquired": true,
+    "benchmark_trials_consumed": 1,
+    "result_present": true,
+    "reward": 0,
+    "final_classification": "FINAL_ZERO",
+    "result_credit_authority": false
+  },
+  "next_unexposed_candidate": {
+    "ledger_schedule_rank": 22,
+    "manifest_schedule_order": 21,
+    "slot_id": "terminal-bench-science/rv-astrometry-fitting::trial-0",
+    "task_digest": "sha256:8e086e1f7245067eaa9a67c259c1519204fa058d8664983066cd582ef258a1ea",
+    "source_manifest": "canonical/governance/TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1.json",
+    "source_manifest_git_blob_sha": "6dfa880b1f68881531afbba6ca211681801fd19b",
+    "task_read": false,
+    "task_started": false,
+    "benchmark_trials_consumed": 0,
+    "execution_authority": false,
+    "task_read_authority": false,
+    "activation_authority": false
+  },
+  "scheduler_state": "FROZEN_PENDING_RANK22_CAPABILITY_FIRST_ADMISSION_AND_FRESH_ONE_SHOT_AUTHORITY",
+  "retry_authority": false,
+  "replacement_authority": false,
+  "replay_authority": false,
+  "execution_authority": false,
+  "task_read_authority": false,
+  "activation_authority": false,
+  "finalization_authority": false,
+  "result_credit_authority": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "zero_model_route_verification": {
+    "path": "canonical/verification/TB_SCIENCE_ZERO_MODEL_SCIENTIFIC_ROUTE_VERIFY_20261011_V1.json",
+    "git_blob_sha": "782e1bdf01ac3bf6fe38277919bed5e22754f5b5",
+    "status": "PASS__ZERO_EXTERNAL_MODEL_COGNITION_ROUTE_INDEPENDENTLY_QUALIFIED__RANK22_UNREAD_UNSTARTED",
+    "kernel_git_blob_sha": "fae27cd575296d70a160a0c7f72d5a8127d8b9c1",
+    "agent_git_blob_sha": "79d9f08b5d3bb1a75842247bd427dd417f5d5e21",
+    "test_git_blob_sha": "e3bd23bab6697adb50237718e7632c1d61e3c392",
+    "public_run_id": 38138191614,
+    "public_job_id": 114466335683,
+    "public_conclusion": "success",
+    "model_dependency_count": 0,
+    "external_model_runtime_calls": 0,
+    "rank22_task_read": false,
+    "rank22_task_started": false,
+    "rank22_trials_consumed": 0
+  }
+}

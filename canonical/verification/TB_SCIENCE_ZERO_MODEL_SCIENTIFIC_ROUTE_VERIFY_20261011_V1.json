@@ -1,0 +1,84 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_ZERO_MODEL_SCIENTIFIC_ROUTE_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__ZERO_EXTERNAL_MODEL_COGNITION_ROUTE_INDEPENDENTLY_QUALIFIED__RANK22_UNREAD_UNSTARTED",
+  "objective": "Qualify a Brain-owned zero-model scientific Harbor route before any Rank22 task read or benchmark start.",
+  "candidate": {
+    "kernel_path": "canonical/runtime/tb_science_zero_model_scientific_kernel_v1.py",
+    "kernel_git_blob_sha": "fae27cd575296d70a160a0c7f72d5a8127d8b9c1",
+    "agent_path": "canonical/runtime/harbor_science_zero_model_agent_v1.py",
+    "agent_git_blob_sha": "79d9f08b5d3bb1a75842247bd427dd417f5d5e21",
+    "test_path": "canonical/tests/test_tb_science_zero_model_scientific_kernel_v1.py",
+    "test_git_blob_sha": "e3bd23bab6697adb50237718e7632c1d61e3c392",
+    "model_dependency_count": 0,
+    "external_model_runtime_calls": 0,
+    "network_dependency_count": 0,
+    "incremental_spend_usd": 0
+  },
+  "independent_public_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2663,
+    "base_branch": "verify/tb-science-zero-model-isolated-base-20261011",
+    "head_branch": "verify/tb-science-zero-model-isolated-run-20261011",
+    "head_commit_sha": "26505385be768961dfe326b666e7caff0b336d63",
+    "checked_merge_commit_sha": "6a7d151bd6a647a76e4f1720d5e1b91d64ac1284",
+    "workflow_name": "Verify abductive residual theorem v2",
+    "workflow_run_id": 38138191614,
+    "workflow_job_id": 114466335683,
+    "conclusion": "success",
+    "python_version": "3.12",
+    "runner": "ubuntu-24.04",
+    "focused_tests_passed": 6,
+    "exact_blob_binding_pass": true,
+    "static_no_model_import_audit_pass": true,
+    "synthetic_shared_period_fit_pass": true,
+    "authoritative_artifact_materialization_pass": true,
+    "bounded_network_free_transfer_pass": true
+  },
+  "rank22_zero_exposure_binding": {
+    "pointer_path": "canonical/governance/CURRENT_TB_SCIENCE_EXECUTION.json",
+    "pointer_git_blob_sha": "c04ccb9fc649c17fe8b369681a29f0a632b247f5",
+    "ledger_path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261011_V67.json",
+    "ledger_git_blob_sha": "e8aaf494dd357708cd8b762fb2dc16fce97e9760",
+    "slot_id": "terminal-bench-science/rv-astrometry-fitting::trial-0",
+    "task_digest": "sha256:8e086e1f7245067eaa9a67c259c1519204fa058d8664983066cd582ef258a1ea",
+    "task_read": false,
+    "task_started": false,
+    "benchmark_trials_consumed": 0,
+    "execution_authority": false,
+    "task_read_authority": false,
+    "activation_authority": false
+  },
+  "law_compliance": {
+    "capability_transfer_vs_cognition_outsourcing_law_path": "canonical/laws/CAPABILITY_TRANSFER_VS_COGNITION_OUTSOURCING_LAW_V1.md",
+    "law_git_blob_sha": "86dfbdeb327bf981db6e32f22f460a675df56d57",
+    "future_task_external_general_purpose_model_load_bearing": false,
+    "donor_model_required_at_qualification_or_deployment": false,
+    "credit_route_eligible_under_zero_model_requirement": true
+  },
+  "scope": {
+    "qualified_family": "SHARED_PERIOD_HARMONIC_FITTING",
+    "qualification_input": "synthetic two-series periodic numeric table with hidden period",
+    "hidden_rank22_task_semantics_observed": false,
+    "benchmark_success_claimed": false,
+    "general_tb_science_success_claimed": false
+  },
+  "hard_nonclaims": [
+    "NO_RANK22_TASK_READ",
+    "NO_RANK22_TASK_START",
+    "NO_RANK22_BENCHMARK_TRIAL_CONSUMPTION",
+    "NO_RANK22_EXECUTION_AUTHORITY_FROM_THIS_RECEIPT",
+    "NO_RANK22_ACTIVATION_AUTHORITY_FROM_THIS_RECEIPT",
+    "NO_CLAIM_SYNTHETIC_QUALIFICATION_PROVES_RANK22_WILL_PASS",
+    "NO_EXTERNAL_OR_LOCAL_GENERAL_PURPOSE_MODEL_COGNITION_IN_CREDITED_RUNTIME"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_trials_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": true,
+  "next": "PROMOTE_EXACT_VERIFIED_ROUTE_BYTES_THEN_STAGE_ONE_FRESH_RANK22_CAPABILITY_FIRST_VALIDATION_WITH_ZERO_MODEL_RUNTIME_ONLY"
+}
