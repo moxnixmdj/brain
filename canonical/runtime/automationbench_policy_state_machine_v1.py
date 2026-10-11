@@ -121,7 +121,7 @@ def next_policy_action(
                 "calls": [{"tool":action["tool"],"arguments":action["arguments"]}],
             }
 
-    # Continue a created Asana task into the explicitly requested section.
+    # Typed compiler 2: continue an already-created Asana task into its requested section.
     if _semantic_done(history, "ASANA_TASK_CREATE") and not _semantic_done(
         history, "ASANA_TASK_ADD_TO_SECTION"
     ):
@@ -135,7 +135,7 @@ def next_policy_action(
                 "calls": [{"tool": action["tool"], "arguments": action["arguments"]}],
             }
 
-    # Typed compiler 2: create an Asana task from the best eligible source record.
+    # Typed compiler 3: create an Asana task from the best eligible source record.
     all_records: list[dict[str, Any]] = []
     for obs in observations:
         all_records.extend(_flatten_records(obs))

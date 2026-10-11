@@ -126,7 +126,7 @@ def compile_asana_create_task(
     endpoint_url: str = "https://app.asana.com/api/1.0/tasks",
 ) -> dict[str, Any] | None:
     low = prompt.lower()
-    if "asana" not in low or not any(x in low for x in ("create","add")):
+    if "asana" not in low or "task" not in low or not any(x in low for x in ("create","add")):
         return None
 
     text = " ".join(_s(source_record.get(k)) for k in ("body","body_plain","text","description","subject","title"))

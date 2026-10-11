@@ -4,6 +4,7 @@ import json
 import unittest
 
 from canonical.runtime.automationbench_mutation_compiler_v1 import (
+    compile_asana_add_to_section,
     compile_asana_create_task,
     compile_salesforce_mark_won,
     compile_sheets_append,
@@ -70,6 +71,74 @@ class AutomationBenchMutationCompilerV1Tests(unittest.TestCase):
                 row_values=["x", None],
             )
         )
+
+    def test_asana_section_placement_binds_exact_created_task(self):
+        prompt = (
+            "Add the fire drill task to Asana project proj_facilities "
+            "under the 'February' section."
+        )
+        observations = [
+            {
+                "messages":[
+                    {
+                        "id":"source",
+                        "body_plain":"Create task: Monthly Fire Drill Checklist - February. Due: 2026-02-18."
+                    }
+                ]
+            },
+            {
+                "data":[
+                    {
+                        "gid":"sec_feb",
+                        "name":"February",
+                        "project":{"gid":"proj_facilities","name":"Facilities"}
+                    }
+                ]
+            },
+            {
+                "data":{
+                    "gid":"task_new",
+                    "name":"Monthly Fire Drill Checklist - February",
+                    "due_on":"2026-02-18",
+                    "completed":False,
+                    "workspace":{"gid":"ws_ops"}
+                }
+            }
+        ]
+        out = compile_asana_add_to_section(prompt, observations)
+        self.assertIsNotNone(out)
+        self.assertIn("/sections/sec_feb/addTask", out["arguments"]["url"])
+        self.assertEqual(json.loads(out["arguments"]["body"])["task"], "task_new")
+
+    def test_asana_section_placement_rejects_wrong_project_section(self):
+        prompt = (
+            "Add the fire drill task to Asana project proj_facilities "
+            "under the 'February' section."
+        )
+        observations = [
+            {
+                "body_plain":"Create task: Safety Review. Due: 2026-02-18.",
+                "id":"source"
+            },
+            {
+                "data":[
+                    {
+                        "gid":"sec_feb_wrong",
+                        "name":"February",
+                        "project":{"gid":"proj_other"}
+                    }
+                ]
+            },
+            {
+                "data":{
+                    "gid":"task_new",
+                    "name":"Safety Review",
+                    "due_on":"2026-02-18",
+                    "completed":False
+                }
+            }
+        ]
+        self.assertIsNone(compile_asana_add_to_section(prompt, observations))
 
     def test_negative_prompt_guard_blocks_create(self):
         action = compile_asana_create_task(
