@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_FRONTIERCODE_PARTNER_INTAKE_REQUEST_20261011_V1",
   "date": "2026-10-11",
-  "status": "SENT__NONCOMMITTING_INFORMATION_REQUEST__RESPONSE_PENDING__ZERO_SPEND__ZERO_CREDIT",
+  "status": "SENT__NONCOMMITTING_INFORMATION_REQUEST__OPTIONAL_MEASUREMENT_WAKE_EVENT__NONBLOCKING__ZERO_SPEND__ZERO_CREDIT",
   "target_predicate": "CODING_FRONTIERCODE_GE_54_4",
   "recipient": "apex@mercor.com",
   "cc": "info@cognition.ai",
@@ -34,9 +34,11 @@
     "zero_incremental_cost_terms_bound": false,
     "protocol_and_receipt_binding_bound": false,
     "execution_authority": false,
-    "classification": "WAKE_EVENT_ACQUIRED__DECISIVE_OWNER_OR_PARTNER_FACTS_PENDING"
+    "classification": "OPTIONAL_BENCHMARK_MEASUREMENT_WAKE_EVENT__NOT_CAPABILITY_GATE",
+    "primary_capability_gate": false,
+    "capability_development_continues_without_reply": true
   },
-  "next": "ON_REPLY__VERIFY_SENDER_AND_EXACT_CONTENT__BIND_ONLY_REPLIED_FACTS__IF_ELIGIBILITY_HARNESS_PROTOCOL_AND_ZERO_COST_ALL_PASS_THEN_FREEZE_PINNED_RUNNER_AND_REQUEST_OFFICIAL_SCORE_BEARING_EVALUATION__OTHERWISE_FAIL_CLOSED",
+  "next": "DO_NOT_WAIT_FOR_REPLY__CONTINUE_CAPABILITY_FIRST_CODING_BUILD__IF_REPLY_ARRIVES_VERIFY_SENDER_AND_BIND_ONLY_REPLIED_FACTS__RUN_OFFICIAL_EVALUATION_LATER_ONLY_IF_ZERO_COST_ADMISSIBLE_AND_USEFUL_AS_AUDIT",
   "accounting": {
     "incremental_spend_usd": 0,
     "acceptance_credit_delta": 0,
