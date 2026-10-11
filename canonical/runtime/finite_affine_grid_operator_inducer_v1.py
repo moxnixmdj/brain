@@ -54,24 +54,37 @@ class ShapeRule:
         raise AffineGridOperatorError("SHAPE_RULE_UNSUPPORTED")
 
 
+OFFSET_RULES=("ZERO","H_MINUS_1","W_MINUS_1","CONST_-3","CONST_-2","CONST_-1","CONST_1","CONST_2","CONST_3")
+
+
+def _offset_value(rule:str,h:int,w:int)->int:
+    if rule=="ZERO": return 0
+    if rule=="H_MINUS_1": return h-1
+    if rule=="W_MINUS_1": return w-1
+    if rule.startswith("CONST_"): return int(rule.removeprefix("CONST_"))
+    raise AffineGridOperatorError("OFFSET_RULE_UNSUPPORTED")
+
+
 @dataclass(frozen=True)
 class AffineOperator:
-    a:int;b:int;c:int;d:int;e:int;f:int
+    a:int;b:int;c:int;d:int;e_rule:str;f_rule:str
     shape_rule:str
 
-    def signature(self)->tuple[int,int,int,int,int,int,str]:
-        return (self.a,self.b,self.c,self.d,self.e,self.f,self.shape_rule)
+    def signature(self)->tuple[int,int,int,int,str,str,str]:
+        return (self.a,self.b,self.c,self.d,self.e_rule,self.f_rule,self.shape_rule)
 
 
 def _apply(g:Grid, op:AffineOperator)->Grid|None:
     ih,iw=_shape(g)
     oh,ow=ShapeRule(op.shape_rule).apply(ih,iw)
+    e=_offset_value(op.e_rule,ih,iw)
+    f=_offset_value(op.f_rule,ih,iw)
     out=[]
     for r in range(oh):
         row=[]
         for c in range(ow):
-            sr=op.a*r+op.b*c+op.e
-            sc=op.c*r+op.d*c+op.f
+            sr=op.a*r+op.b*c+e
+            sc=op.c*r+op.d*c+f
             if not (0<=sr<ih and 0<=sc<iw):
                 return None
             row.append(g[sr][sc])
@@ -114,8 +127,6 @@ def induce(
 
     exact=[]
     evaluated=0
-    ih0,iw0=_shape(pairs[0][0]);oh0,ow0=_shape(pairs[0][1])
-    offsets=tuple(_offset_candidates(ih0,iw0,oh0,ow0))
     for shape_rule in shape_rules:
         for a,b,c,d in product(coeff, repeat=4):
             # reject rank-zero maps and obvious coordinate collapse; V1 models
@@ -123,8 +134,8 @@ def induce(
             det=a*d-b*c
             if abs(det)!=1:
                 continue
-            for e in offsets:
-                for f in offsets:
+            for e_rule in OFFSET_RULES:
+                for f_rule in OFFSET_RULES:
                     evaluated+=1
                     if evaluated>max_candidates:
                         return {
@@ -134,7 +145,7 @@ def induce(
                             "complete_within_declared_bound":False,
                             "terminal_authority":False,
                         }
-                    op=AffineOperator(a,b,c,d,e,f,shape_rule)
+                    op=AffineOperator(a,b,c,d,e_rule,f_rule,shape_rule)
                     if all(_apply(inp,op)==out for inp,out in pairs):
                         exact.append(op)
 
@@ -143,14 +154,14 @@ def induce(
             "schema":SCHEMA,"status":"NO_OPERATOR",
             "candidates_evaluated":evaluated,
             "complete_within_declared_bound":True,
-            "completeness_scope":"UNIMODULAR_2D_INTEGER_AFFINE_MAPS_COEFF_NEG1_0_1_X_SAME_OR_SWAP_SHAPE",
+            "completeness_scope":"UNIMODULAR_2D_INTEGER_AFFINE_MAPS_COEFF_NEG1_0_1_X_SYMBOLIC_OFFSETS_X_SAME_OR_SWAP_SHAPE",
             "terminal_authority":False,
         }
 
     sigs=sorted({op.signature() for op in exact})
     return {
         "schema":SCHEMA,"status":"EXACT_OPERATORS",
-        "operators":[{"a":a,"b":b,"c":c,"d":d,"e":e,"f":f,"shape_rule":s} for a,b,c,d,e,f,s in sigs],
+        "operators":[{"a":a,"b":b,"c":c,"d":d,"e_rule":e,"f_rule":f,"shape_rule":s} for a,b,c,d,e,f,s in sigs],
         "operator_count":len(sigs),
         "ambiguity_preserved":len(sigs)>1,
         "candidates_evaluated":evaluated,
@@ -168,7 +179,7 @@ def predict(result:Mapping[str,Any], grid:Sequence[Sequence[int]])->dict[str,Any
         for raw in result["operators"]:
             op=AffineOperator(
                 int(raw["a"]),int(raw["b"]),int(raw["c"]),int(raw["d"]),
-                int(raw["e"]),int(raw["f"]),str(raw["shape_rule"])
+                str(raw["e_rule"]),str(raw["f_rule"]),str(raw["shape_rule"])
             )
             out=_apply(g,op)
             if out is not None:
