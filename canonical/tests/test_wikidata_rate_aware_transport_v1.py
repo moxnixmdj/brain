@@ -15,7 +15,7 @@ class Clock:
 class RateAwareTransportTests(unittest.TestCase):
     def test_serial_pacing(self):
         c=Clock(); f=RateAwareFetch(min_interval=1,opener=lambda *a,**k:Resp(),clock=c.now,sleeper=c.sleep)
-        self.assertEqual(f("u"),b"ok");self.assertEqual(f("u"),b"ok")
+        self.assertEqual(f("https://example.test/x"),b"ok");self.assertEqual(f("https://example.test/x"),b"ok")
         self.assertGreaterEqual(sum(c.sleeps),1.0)
         self.assertEqual(f.request_count,2)
 
@@ -27,7 +27,7 @@ class RateAwareTransportTests(unittest.TestCase):
                 raise urllib.error.HTTPError("u",429,"too many",{"Retry-After":"2"},io.BytesIO())
             return Resp(b"yes")
         f=RateAwareFetch(min_interval=0.1,max_retries=2,opener=op,clock=c.now,sleeper=c.sleep)
-        self.assertEqual(f("u"),b"yes")
+        self.assertEqual(f("https://example.test/x"),b"yes")
         self.assertEqual(f.retry_count,1)
         self.assertGreaterEqual(sum(c.sleeps),2)
 
@@ -35,7 +35,7 @@ class RateAwareTransportTests(unittest.TestCase):
         c=Clock()
         def op(*a,**k):raise urllib.error.HTTPError("u",404,"no",{},io.BytesIO())
         f=RateAwareFetch(opener=op,clock=c.now,sleeper=c.sleep)
-        with self.assertRaises(urllib.error.HTTPError):f("u")
+        with self.assertRaises(urllib.error.HTTPError):f("https://example.test/x")
         self.assertEqual(f.retry_count,0)
 
 if __name__=="__main__":unittest.main(verbosity=2)
