@@ -289,5 +289,45 @@ class GenericToolArgumentBinderV1Tests(unittest.TestCase):
         self.assertNotIn("Subject", body)
 
 
+    def test_required_search_query_binds_from_local_context(self):
+        endpoint = {
+            "id":"opaque.records.search",
+            "method":"GET",
+            "url":"https://opaque.invalid/records/search",
+            "parameters":{
+                "q":{"required":True,"type":"string"}
+            },
+            "response":"{records:[{id,name}]}",
+        }
+        out = bind_endpoint_call(
+            goal="Find the cobalt customer, then update its status to active.",
+            context_text="Find the cobalt customer.",
+            endpoint=endpoint,
+            observations=[],
+        )
+        self.assertTrue(out["pass"], out)
+        params = json.loads(out["arguments"]["params"])
+        self.assertEqual(params["q"], "cobalt customer")
+        self.assertNotIn("status", params["q"])
+
+    def test_undeclared_url_placeholder_still_fails_closed(self):
+        endpoint = {
+            "id":"opaque.records.search",
+            "method":"GET",
+            "url":"https://opaque.invalid/{tenantId}/records/search",
+            "parameters":{
+                "q":{"required":True,"type":"string"}
+            },
+        }
+        out = bind_endpoint_call(
+            goal="Find the cobalt customer.",
+            context_text="Find the cobalt customer.",
+            endpoint=endpoint,
+            observations=[],
+        )
+        self.assertFalse(out["pass"])
+        self.assertEqual(out["reason"], "UNRESOLVED_PATH_PLACEHOLDER")
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
