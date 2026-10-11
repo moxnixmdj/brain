@@ -1,0 +1,82 @@
+{
+  "schema": "PROJECT_BRAIN_CHARTOGRAPHY_89_PROTOCOL_IDENTITY_TRUTH_REPAIR_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PROTOCOL_IDENTITY_MISMATCH_PROVED__ANTHROPIC_89_WITH_TOOLS_IS_NOT_BOUND_TO_SURGE_CURRENT_NO_TOOLS_HARNESS__DIRECT_89_ROUTE_WAKE_GATED__ZERO_CREDIT",
+  "target_predicate": "CHARTOGRAPHY_TOOLS_GE_89",
+  "historical_target": {
+    "publisher": "Anthropic",
+    "source_url": "https://www.anthropic.com/claude-opus-5-5",
+    "publication_date": "2026-09-22",
+    "reported_result_percent": 89,
+    "label": "with tools",
+    "observed_companion_results": {
+      "fable_5_1": 88.4,
+      "opus_5": 83.4
+    },
+    "exact_tool_protocol_publicly_bound_here": false
+  },
+  "current_benchmark_owner_protocol": {
+    "publisher": "Surge AI",
+    "repository": "surge-ai/chartography",
+    "repository_url": "https://github.com/surge-ai/chartography",
+    "dataset_url": "https://huggingface.co/datasets/surgeai/chartography",
+    "task_count": 100,
+    "dataset_public_and_ungated": true,
+    "model_input": "CHART_IMAGE_PLUS_PROMPT",
+    "tool_use": "NO_MODEL_TOOLS_IN_CURRENT_PUBLIC_TASK_HARNESS",
+    "scorer": "GOLDEN_ANSWER_JUDGED_BY_CONFIGURED_JUDGE_MODEL",
+    "leaderboard_judge": "google/gemini-3.5-flash",
+    "epochs": 10,
+    "current_owner_opus_5_5_percent": 66.3,
+    "current_owner_leader_percent": 71.6,
+    "current_owner_leader": "Gemini 4 Argon (High)"
+  },
+  "proof": {
+    "same_protocol_proved": false,
+    "protocol_mismatch_load_bearing": true,
+    "reason": [
+      "ANTHROPIC_LABELS_89_0_EXPLICITLY_WITH_TOOLS",
+      "SURGE_CURRENT_PUBLIC_TASK_GENERATOR_PASSES_ONLY_CHART_IMAGE_AND_PROMPT_TO_MODEL",
+      "SURGE_CURRENT_OWNER_LEADERBOARD_REPORTS_OPUS_5_5_66_3_ON_CURRENT_CHARTOGRAPHY",
+      "CROSS_PROTOCOL_89_VS_CURRENT_NO_TOOLS_SCORE_COMPARISON_IS_NOT_ADMISSIBLE"
+    ],
+    "exact_missing_information_for_direct_89_route": [
+      "ANTHROPIC_WITH_TOOLS_TASK_POPULATION_IDENTITY_OR_PROOF_IT_EQUALS_CURRENT_SURGE_100",
+      "ANTHROPIC_WITH_TOOLS_TOOLSET_AND_TOOL_AUTHORITY",
+      "ANTHROPIC_WITH_TOOLS_AGENT_OR_HARNESS_CONFIGURATION",
+      "ANTHROPIC_WITH_TOOLS_SCORER_AND_AGGREGATION_BINDING",
+      "OWNER_ADMISSIBLE_OR_PROTOCOL_EQUIVALENT_BRAIN_WITH_TOOLS_CONFIGURATION"
+    ]
+  },
+  "scheduler_effect": {
+    "delete": [
+      "TREAT_PROJECT_SPECIFIC_GEMINI_3_5_FLASH_1000_CALL_CAPACITY_AS_THE_PRIMARY_DIRECT_89_BLOCKER",
+      "TREAT_SURGE_CURRENT_NO_TOOLS_HARNESS_AS_EXACT_ANTHROPIC_WITH_TOOLS_89_PROTOCOL",
+      "COMPARE_A_BRAIN_NO_TOOLS_SCORE_DIRECTLY_TO_89_0"
+    ],
+    "preserve": [
+      "PUBLIC_SURGE_100_TASK_DATASET_AS_NONTERMINAL_SCOPE_EVIDENCE",
+      "CURRENT_PUBLIC_NO_TOOLS_HARNESS_FOR_QUALIFICATION_OR_SEPARATE_MATCHED_CURRENT_PROTOCOL_EVIDENCE",
+      "EXISTING_QWEN3VL4B_VISION_ROUTE",
+      "UNDERLYING_PROFESSIONAL_CHART_READING_SCOPE",
+      "STRONGER_SCOPE_COMPLETE_CERTIFICATE_ROUTE"
+    ],
+    "direct_89_mode": "WAKE_GATED_ON_EXACT_WITH_TOOLS_PROTOCOL_BINDING_OR_OWNER_RECEIPT",
+    "direct_89_irreducible_delta": "BIND_EXACT_ANTHROPIC_WITH_TOOLS_PROTOCOL_AND_OWNER_ADMISSIBLE_OR_EQUIVALENT_BRAIN_CONFIGURATION__OR_PROVE_A_SCOPE_COMPLETE_STRONGER_CERTIFICATE_FOR_THE_UNDERLYING_PROFESSIONAL_CHART_REASONING_SCOPE"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_89_0_WAS_INCORRECTLY_REPORTED_BY_ANTHROPIC",
+    "NO_CLAIM_CURRENT_SURGE_NO_TOOLS_PROTOCOL_IS_WEAKER_IN_EVERY_BEHAVIORAL_DIMENSION",
+    "NO_CLAIM_66_3_REPLACES_THE_HISTORICAL_FROZEN_89_PREDICATE",
+    "NO_CHARTOGRAPHY_SCORE_FOR_BRAIN",
+    "NO_ROW_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "row_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
