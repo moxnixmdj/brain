@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CANONICAL_PROOF_ATOM_BASIS_V2_ACTIVATION_V1",
   "date": "2026-10-02",
-  "status": "CANDIDATE_FAIL_CLOSED__GENERIC_VERIFIED_REFINEMENT_OVERLAY_COMPILER__CI_AND_INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "status": "CANDIDATE_FAIL_CLOSED__GENERIC_VERIFIED_REFINEMENT_OVERLAY_COMPILER__BRAIN_CI_TRIGGERED__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
   "objective": "Generalize canonical proof-atom compilation so all independently verified refinement overlays can reduce sibling blocking without changing the 40-fact joint proof burden or granting acceptance credit.",
   "runtime": "canonical/runtime/canonical_proof_atom_basis_v2.py",
   "tests": "canonical/tests/test_canonical_proof_atom_basis_v2.py",
@@ -43,5 +43,11 @@
   "execution_authority": false,
   "promotion_authority": false,
   "runtime_git_blob_sha": "5b5957f353edab6c86a34f947ef253099822b0d1",
-  "tests_git_blob_sha": "0684ec41a44484361c95c346c9e0692f5eede813"
+  "tests_git_blob_sha": "0684ec41a44484361c95c346c9e0692f5eede813",
+  "brain_ci_trigger": {
+    "workflow": ".github/workflows/verify-canonical-proof-atom-basis-v2.yml",
+    "runtime_git_blob_sha": "5b5957f353edab6c86a34f947ef253099822b0d1",
+    "tests_git_blob_sha": "0684ec41a44484361c95c346c9e0692f5eede813",
+    "overlay_git_blob_sha": "898e450c62c06cf6d1a4a3f826a255da9161a229"
+  }
 }
