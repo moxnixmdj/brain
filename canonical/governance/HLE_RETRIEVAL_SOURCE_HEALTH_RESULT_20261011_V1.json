@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_RETRIEVAL_SOURCE_HEALTH_RESULT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "WIKIPEDIA_SURFACE_UNRELIABLE__BING_HEALTHY__WORKER_COUNT_NOT_ROOT_CAUSE",
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2691,
+    "head_sha": "b68407283d2512ff65ef12d647f9345797eab230",
+    "workflow_run_id": 38145869850,
+    "workflow_job_id": 114488967007,
+    "conclusion": "success"
+  },
+  "diagnostic": {
+    "dataset": "ai-safety-institute/trivia_qa_verified",
+    "split": "validation",
+    "slice": "rows_25_to_49_ALREADY_CONSUMED",
+    "query_calls": 113,
+    "concurrent_workers_4": {
+      "bing_nonempty_rate": 1,
+      "bing_status_counts": {
+        "PASS": 113
+      },
+      "wikipedia_nonempty_rate": 0.08849557522123894,
+      "wikipedia_status_counts": {
+        "EXCEPTION:HTTPError": 103,
+        "PASS": 10
+      }
+    },
+    "sequential_workers_1": {
+      "bing_nonempty_rate": 1,
+      "bing_status_counts": {
+        "PASS": 113
+      },
+      "wikipedia_nonempty_rate": 0,
+      "wikipedia_status_counts": {
+        "EXCEPTION:HTTPError": 113
+      }
+    }
+  },
+  "causal_conclusion": [
+    "BING_RSS_IS_HEALTHY_ON_THE_MEASURED_SOURCE_EPOCH",
+    "WIKIPEDIA_FAILURE_IS_NOT_EXPLAINED_BY_CONCURRENT_LOAD",
+    "REDUCING_WORKERS_DOES_NOT_REPAIR_WIKIPEDIA",
+    "SOURCE_DIVERSIFICATION_IS_HIGHER_LEVERAGE_THAN_WORKER_TUNING"
+  ],
+  "hle_cases_consumed": 0,
+  "external_model_calls_total": 0,
+  "model_dependency_count_total": 0,
+  "incremental_spend_usd": 0
+}
