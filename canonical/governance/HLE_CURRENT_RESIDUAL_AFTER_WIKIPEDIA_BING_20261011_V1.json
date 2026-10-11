@@ -1,0 +1,100 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_CURRENT_RESIDUAL_AFTER_WIKIPEDIA_BING_20261011_V1",
+  "date": "2026-10-11",
+  "status": "CONSUMED_PUBLIC_DIAGNOSTIC_RESIDUAL_REDUCED_FROM_9_TO_7",
+  "source_results": {
+    "prior_shared_miss_set_commit": "e36e3ac08a27be40c367ec718a9b711bb600b080",
+    "wikipedia_bing_causal_result_commit": "74b6a58052c5c965453e495c6468b6982231296e",
+    "prior_ids": [
+      27,
+      32,
+      37,
+      38,
+      39,
+      41,
+      43,
+      44,
+      45
+    ],
+    "recovered_ids": [
+      27,
+      44
+    ],
+    "remaining_ids": [
+      32,
+      37,
+      38,
+      39,
+      41,
+      43,
+      45
+    ]
+  },
+  "remaining_relation_shapes": [
+    {
+      "row_idx": 32,
+      "shape": "PAIRWISE_KINSHIP",
+      "candidate_methods": [
+        "PAIRWISE_RELATION",
+        "PAIRWISE_FAMILY_RELATION"
+      ]
+    },
+    {
+      "row_idx": 37,
+      "shape": "DESCRIPTIVE_PERSON_IDENTITY",
+      "candidate_methods": [
+        "DESCRIPTIVE_PERSON_IDENTITY"
+      ]
+    },
+    {
+      "row_idx": 38,
+      "shape": "DYNASTY_OR_FAMILY_ALIAS_IDENTITY",
+      "candidate_methods": [
+        "ALIAS_ENTITY_RELATION",
+        "ENTITY_PREDICATE_BRIDGE"
+      ]
+    },
+    {
+      "row_idx": 39,
+      "shape": "PROPERTY_TO_DEFINITION",
+      "candidate_methods": [
+        "DEFINITION_RELATION"
+      ]
+    },
+    {
+      "row_idx": 41,
+      "shape": "PERSON_TO_EDUCATION_INSTITUTION",
+      "candidate_methods": [
+        "SUBJECT_INSTITUTION_RELATION"
+      ]
+    },
+    {
+      "row_idx": 43,
+      "shape": "ORDINAL_MOUNTAINEER_IDENTITY",
+      "candidate_methods": [
+        "ORDINAL_PERSON_IDENTITY",
+        "DESCRIPTIVE_PERSON_IDENTITY"
+      ]
+    },
+    {
+      "row_idx": 45,
+      "shape": "SHARED_NAME_RELATION",
+      "candidate_methods": [
+        "SHARED_NAME_RELATION",
+        "DEFINITION_RELATION"
+      ]
+    }
+  ],
+  "current_top_action": "FALSIFY_OR_CONFIRM_REPAIRED_RELATION_REQUIREMENT_COMPILER_AS_ADDITIVE_BING_RSS_RETRIEVAL_GAIN",
+  "stop_rules": [
+    "DO_NOT_RETUNE_WIKIPEDIA_TRANSPORT_ON_IDS_27_OR_44",
+    "DO_NOT_CONSUME_FRESH_HLE",
+    "DO_NOT_PROMOTE_RELATION_COMPILER_UNTIL_SYNTHETIC_TESTS_AND_PAIRED_CAUSAL_REPLAY_PASS",
+    "IF_RELATION_COMPILER_ADDS_NO_UNIQUE_HITS_DEMOTE_IT_AND_RECLASSIFY_THE_SEVEN_BY_SOURCE_OR_EXTRACTION_FAILURE"
+  ],
+  "hle_questions_consumed": 0,
+  "hle_gold_consumed": 0,
+  "hle_score_credit": 0,
+  "hle_67_7_certified": false,
+  "incremental_spend_usd": 0
+}
