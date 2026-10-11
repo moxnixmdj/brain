@@ -890,7 +890,7 @@
         "path": "canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261010_V66.json",
         "git_blob_sha": "97e40427e90c4e3cc95ec829859b8de31d1c8531"
       },
-      "status": "ACTIVE_CURRENT_R2_AUTHORITY__V86__FORTY_DIRECT_ROUTES__THIRTY_SIX_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__DERIVED_TYPED_TERMINAL_SIGNATURES_ROUTE_BOUND__MREL_NECESSARY_PROPERTY_AUTHORITY_BOUND__LOSS_CUSHION_MREL_BOUND_FRONTIER_REPAIRED__LOSS_CUSHION_TLAC_MREL_PAIR_RECOMPOSITION_BOUND__LOSS_CUSHION_CCOB_CCYB_MREL_PAIR_REVALIDATION_BOUND__TLAC_MREL_SHARED_SIGNATURE_NONSEPARATION_AND_BOUNDED_IDENTITY_DISCRIMINATOR_BOUND__OEWN_DECISION_MANIFEST_LATTICE_LIVE_DYNAMIC_ROUTE_BOUND__REGCAP_NO_DESCRIPTOR_DIRECT_SIGNATURE_CONTEXT_BOUND__SCOPED_DOMAIN_EQUIVALENCE_INTERNALIZED__MARGIN_CONTEXT_IDENTITY_LIVE_BOUND__REGCAP_FACET_ROLE_LIVE_BOUND__REGCAP_DEFINITE_BUFFER_REFERENCE_LIVE_BOUND__SPREAD_RELATION_IDENTITY_LIVE_BOUND__REGCAP_MREL_NO_DESCRIPTOR_PAIR_DOMAIN_TRUTH_BOUND__FOUR_WAY_SHARED_LOSS_ABSORPTION_NONSEPARATION_BOUND__FOUR_WAY_MINIMUM_INFORMATION_ROUTING_BOUND__ALL_PAIRS_MREL_CONTEXT_LIFT_BOUND__V7_LIVE_TRUTH_DISPATCH_BOUND__ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_REMAINS__FOUR_WAY_GOVERNING_REQUIREMENT_ONE_OBSERVATION_REQUEST_BOUND__V7_REQUEST_LIFECYCLE_COHERENT__REGCAP_TRUTH_TYPED_NEXT_INFORMATION_REQUEST_BOUND__P3_CONTROLLER_CONCRETE_TRUTH_REQUEST_PROPAGATION_BOUND__FIXED_POINT_MONOTONIC_BOUND_TRUTH_ORIGIN_REPAIR_BOUND__BOUND_TRUTH_REENTRY_CONSUMPTION_VERIFIED",
+      "status": "ACTIVE_CURRENT_R2_AUTHORITY__V91__FORTY_DIRECT_ROUTES__THIRTY_SIX_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__DERIVED_TYPED_TERMINAL_SIGNATURES_ROUTE_BOUND__MREL_NECESSARY_PROPERTY_AUTHORITY_BOUND__LOSS_CUSHION_MREL_BOUND_FRONTIER_REPAIRED__LOSS_CUSHION_TLAC_MREL_PAIR_RECOMPOSITION_BOUND__LOSS_CUSHION_CCOB_CCYB_MREL_PAIR_REVALIDATION_BOUND__TLAC_MREL_SHARED_SIGNATURE_NONSEPARATION_AND_BOUNDED_IDENTITY_DISCRIMINATOR_BOUND__OEWN_DECISION_MANIFEST_LATTICE_LIVE_DYNAMIC_ROUTE_BOUND__REGCAP_NO_DESCRIPTOR_DIRECT_SIGNATURE_CONTEXT_BOUND__SCOPED_DOMAIN_EQUIVALENCE_INTERNALIZED__MARGIN_CONTEXT_IDENTITY_LIVE_BOUND__REGCAP_FACET_ROLE_LIVE_BOUND__REGCAP_DEFINITE_BUFFER_REFERENCE_LIVE_BOUND__SPREAD_RELATION_IDENTITY_LIVE_BOUND__REGCAP_MREL_NO_DESCRIPTOR_PAIR_DOMAIN_TRUTH_BOUND__FOUR_WAY_SHARED_LOSS_ABSORPTION_NONSEPARATION_BOUND__FOUR_WAY_MINIMUM_INFORMATION_ROUTING_BOUND__ALL_PAIRS_MREL_CONTEXT_LIFT_BOUND__V8_LIVE_TRUTH_DISPATCH_BOUND__ZERO_INTERNAL_R2_MECHANISM_RESIDUALS__ONE_TASK_SPECIFIC_EXTERNAL_FINANCE_OBSERVATION_FRONTIER_REMAINS__FOUR_WAY_GOVERNING_REQUIREMENT_ONE_OBSERVATION_REQUEST_BOUND__V7_REQUEST_LIFECYCLE_COHERENT__REGCAP_TRUTH_TYPED_NEXT_INFORMATION_REQUEST_BOUND__P3_CONTROLLER_CONCRETE_TRUTH_REQUEST_PROPAGATION_BOUND__FIXED_POINT_MONOTONIC_BOUND_TRUTH_ORIGIN_REPAIR_BOUND__BOUND_TRUTH_REENTRY_CONSUMPTION_VERIFIED__CHECKER_OWNED_RAW_SOURCE_INGESTION_RESTORED__TYPED_FOUR_WAY_REGCAP_AUTHORITY_CANDIDATE_TO_CHECKER_CONSUMPTION_BOUND__GENERIC_UNBOUND_AUTHORITY_CANDIDATE_MATERIALIZATION_MECHANISM_BOUND",
       "pointer_semantics": "MUTABLE_CURRENT_POINTER__PATH_IDENTITY_AUTHORITATIVE__IMMUTABLE_SCHEDULER_CUT_HASH_BOUND_BELOW",
       "mutable_pointer_blob_is_not_load_bearing": true
     },
@@ -1994,8 +1994,8 @@
     "r2_direct_adequacy_exact_cell_count": 3,
     "r2_direct_adequacy_bounded_family_count": 36,
     "r2_verified_finance_positive_subregion_count": 21,
-    "r2_primary_internal_unsolved_count": 1,
-    "r2_primary_internal_unsolved_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
+    "r2_primary_internal_unsolved_count": 0,
+    "r2_primary_internal_unsolved_cell": null,
     "r2_dormant_alternative_route_count": 1,
     "frontiercode_owner_evaluation_open_to_model_creators": true,
     "frontiercode_owner_evaluation_globally_unavailable": false,
@@ -2093,7 +2093,7 @@
     "cursorbench_first_authenticated_positive_adequacy_behavior_id": "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001",
     "cursorbench_first_positive_region_membership_self_certified": false,
     "cursorbench_first_positive_region_hidden_task_membership_proved": false,
-    "current_r2_semantic_revision": "V81_V7_LIVE_TRUTH_DISPATCH_BOUND__ONE_FINANCE_RESIDUAL_REMAINS",
+    "current_r2_semantic_revision": "V91_GENERIC_AUTHORITY_MATERIALIZATION_BOUND__ZERO_INTERNAL_R2_MECHANISM_RESIDUALS__ONE_TASK_SPECIFIC_EXTERNAL_FINANCE_OBSERVATION_FRONTIER",
     "current_r2_pointer_git_blob_sha": "94b6a52b28336030ac7307321ed6796ca003d6ad",
     "r2_source_explicit_semantic_autofill_bound": true,
     "r2_source_explicit_autofill_replaces_caller_claims": false,
@@ -2425,7 +2425,11 @@
     "tb_science_current_pointer_blob_is_load_bearing": false,
     "r2_four_way_shared_loss_absorption_nonseparation_bound": true,
     "r2_four_way_shared_loss_absorption_reverse_classification_authorized": false,
-    "r2_four_way_shared_loss_absorption_additional_authenticated_discriminator_required": true
+    "r2_four_way_shared_loss_absorption_additional_authenticated_discriminator_required": true,
+    "r2_task_specific_external_observation_frontier_count": 1,
+    "r2_task_specific_external_observation_frontier": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
+    "r2_generic_unbound_authority_candidate_materialization_mechanism_bound": true,
+    "r2_generic_materialization_independent_execution_replay_verified": false
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -3122,14 +3126,16 @@
     "enumerated_active_zero_reality_cell_count": 0,
     "enumerated_external_required_sleep_cell_count": 0,
     "historical_root2_scheduler_fields_authoritative_for_current_r2": false,
-    "rule": "CURRENT_R2_V81_OVERLAYS_ROOT2_V66__PRESERVE_ROUTE40_AND_36_BOUNDED_FAMILIES__REUSE_V7_ALL_PAIRS_MREL_CONTEXT_THROUGH_LIVE_V5_SEMANTIC_TRUTH_CERTIFICATE__REJECT_SHARED_LOSS_ABSORPTION_ALONE_AS_IDENTITY_DISCRIMINATOR__ROUTE_ONLY_STILL_MISSING_DISCRIMINATION_TO_MINIMUM_AUTHENTIC_INFORMATION__ONE_FINANCE_RESIDUAL_REMAINS",
+    "rule": "CURRENT_R2_V91_OVERLAYS_ROOT2_V66__GENERAL_MECHANISM_CLOSED__GENERIC_AUTHORITY_DISCOVER_MATERIALIZE_CHECK_REENTER_PATH_BOUND__ZERO_INTERNAL_R2_MECHANISM_RESIDUALS__TASK_SPECIFIC_EXTERNAL_OBSERVATION_FRONTIER_REMAINS_FAIL_CLOSED",
     "current_authority_pointer_mutable": true,
     "current_authority_pointer_blob_is_not_load_bearing": true,
     "binding_law": "CURRENT_POINTERS_BIND_BY_CANONICAL_PATH_IDENTITY__IMMUTABLE_VERSIONED_AUTHORITY_ARTIFACTS_BIND_BY_GIT_BLOB_SHA",
-    "primary_internal_unsolved_pending_acquisition_or_experiment_cell_count": 1,
+    "primary_internal_unsolved_pending_acquisition_or_experiment_cell_count": 0,
     "dormant_alternative_route_count": 1,
-    "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
-    "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER"
+    "primary_internal_cell": null,
+    "dormant_alternative_cell": "GDPVAL_AA_OWNER_LAYER",
+    "task_specific_external_observation_frontier_count": 1,
+    "task_specific_external_frontier": "FINANCE_SEMANTIC_ADEQUACY_TAIL"
   },
   "pointer_revision": 134,
   "capability_first_scheduler_20261008_v2": {
@@ -3194,9 +3200,11 @@
     "current_reclassified_unproved_external_sleep_count": 2,
     "current_information_theoretic_externality_proved_count": 0,
     "classification_without_certificate": "INTERNAL_UNSOLVED__PENDING_ACQUISITION_OR_EXPERIMENT",
-    "current_primary_internal_unsolved_count": 1,
+    "current_primary_internal_unsolved_count": 0,
     "current_dormant_alternative_route_count": 1,
-    "gdpval_owner_layer_current_fixed_bar_necessity": false
+    "gdpval_owner_layer_current_fixed_bar_necessity": false,
+    "current_task_specific_external_observation_frontier_count": 1,
+    "post_v91_reclassification_verification": "canonical/verification/R2_POST_V91_EXTERNALITY_RECLASSIFICATION_VERIFY_20261011_V1.json"
   },
   "gdpval_fixed_bar_owner_pairwise_nonnecessity": {
     "governance_path": "canonical/governance/GDPVAL_FIXED_BAR_OWNER_PAIRWISE_NONNECESSITY_20261009_V1.json",
@@ -5099,5 +5107,14 @@
     "global_mission_completion": false,
     "direct_route_count_delta": 0,
     "terminal_credit_delta": 0
+  },
+  "r2_post_v91_externality_reclassification": {
+    "status": "RECONCILED__ZERO_INTERNAL_R2_MECHANISM_RESIDUALS__ONE_TASK_SPECIFIC_EXTERNAL_OBSERVATION_FRONTIER__TERMINAL_STILL_FALSE",
+    "current_r2_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+    "verification_path": "canonical/verification/R2_POST_V91_EXTERNALITY_RECLASSIFICATION_VERIFY_20261011_V1.json",
+    "internal_unsolved_count": 0,
+    "task_specific_external_frontier_count": 1,
+    "finance_tail_globally_closed": false,
+    "terminal_authority": false
   }
 }
