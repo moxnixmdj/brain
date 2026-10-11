@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_GRID_REPRESENTATION_INVENTION_FRESH_SUITE_RESULT_V1",
+  "date": "2026-10-11",
+  "status": "FAIL__PRECOMMITTED_GATE_FALSIFIED__EARLY_STOP_AFTER_FIRST_IN_SCOPE_COUNTEREXAMPLE",
+  "precommit": "canonical/governance/GRID_REPRESENTATION_INVENTION_FRESH_SUITE_PRECOMMIT_20261011_V1.json",
+  "frozen_suite_blob_sha": "72bc8ef85f595af99e1ed067321564280ef62605",
+  "frozen_implementation": {
+    "feature_inventor_blob_sha": "441be03665a20f7da112ca457c86469a7fa5ebc2",
+    "grid_delta_v3_blob_sha": "b971b2ef6cb7a3e0cf709b97584c8101f4e8b0b3"
+  },
+  "pass_gate": "ALL_6_IN_SCOPE_FAMILIES_EXACT_ON_FRESH_TEST_INPUT",
+  "observed_before_early_stop": [
+    {
+      "index": 2,
+      "family": "OFF_DIAGONAL_BAND",
+      "expected_in_scope": true,
+      "induce_status": "VERIFIED_RULE_OPTIONS",
+      "route": "V3_DERIVED_FEATURE_EXPRESSION_INVENTION",
+      "predict_status": "PREDICTED",
+      "exact": true
+    },
+    {
+      "index": 4,
+      "family": "SINGLE_COMPONENT_COLOR",
+      "expected_in_scope": true,
+      "induce_status": "VERIFIED_RULE_OPTIONS",
+      "route": "V2_BASE_ATTRIBUTE_SYNTHESIS",
+      "predict_status": "PREDICTED",
+      "exact": false
+    }
+  ],
+  "early_stop_reason": "ONE_IN_SCOPE_FAILURE_IS_SUFFICIENT_TO FALSIFY ALL_6_EXACT_GATE__STOP_REMAINING_RUNS_TO_SAVE_COMPUTE",
+  "unobserved_indices_after_early_stop": [
+    0,
+    1,
+    3,
+    5,
+    6,
+    7
+  ],
+  "conclusion": {
+    "gate_pass": false,
+    "representation_invention_generalization_proven": false,
+    "evidence_supported": [
+      "V3_CAN_GENERALIZE_AT_LEAST_ONE_FRESH_RELATIONAL_FAMILY_VIA_DERIVED_FEATURE_EXPRESSION_INVENTION",
+      "CURRENT_V3_CAN_PREMATURELY_COMMIT_TO_A_TRAINING_EXACT_V2_RULE_THAT_FAILS_FRESH_TRANSFER"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_SUITE_PASS",
+    "NO_CAPABILITY_PROMOTION",
+    "NO_ARC_SCORE_CHANGE",
+    "NO_INFERENCE_ABOUT_UNOBSERVED_FAMILIES",
+    "NO_TASK_SPECIFIC_PATCH_AUTHORIZED"
+  ],
+  "terminal_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "promotion_authority": false
+}
