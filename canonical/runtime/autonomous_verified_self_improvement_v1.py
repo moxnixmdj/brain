@@ -87,6 +87,48 @@ def _items(value: Any) -> list[str]:
     return sorted({_s(x) for x in value if _s(x)})
 
 
+def _merge_acquisition_donor_provenance(*rows: Any) -> dict[str, Any]:
+    proposal_ids: set[str] = set()
+    expansion_ids: set[str] = set()
+    used = False
+    for row in rows:
+        if not isinstance(row, Mapping):
+            continue
+        if row.get("used") is True:
+            used = True
+        proposal_ids.update(_items(row.get("proposal_source_ids")))
+        expansion_ids.update(_items(row.get("capability_expansion_source_ids")))
+    used = used or bool(proposal_ids or expansion_ids)
+    return {
+        "used": used,
+        "proposal_source_ids": sorted(proposal_ids),
+        "capability_expansion_source_ids": sorted(expansion_ids),
+        "donor_role": "ACQUISITION_SOURCE_ONLY" if used else "NONE",
+        "runtime_credit_authority": False,
+        "transfer_gate_required_before_reuse": used,
+    }
+
+
+def _candidate_acquisition_donor_provenance(
+    state: Mapping[str, Any],
+    candidate: Mapping[str, Any] | None,
+    direct_provenance: Mapping[str, Any] | None,
+) -> dict[str, Any]:
+    rows: list[Any] = [direct_provenance]
+    if isinstance(candidate, Mapping):
+        source_ids = set(_items(candidate.get("source_episode_ids")))
+        episodes = state.get("episodes", {})
+        sidecars = state.get("episode_provenance", {})
+        if isinstance(episodes, Mapping) and isinstance(sidecars, Mapping):
+            for episode_key, episode in episodes.items():
+                if (
+                    isinstance(episode, Mapping)
+                    and _s(episode.get("episode_id")) in source_ids
+                ):
+                    rows.append(sidecars.get(str(episode_key)))
+    return _merge_acquisition_donor_provenance(*rows)
+
+
 def _validate_retry_value(value: Any, *, path: str = "retry", depth: int = 0) -> None:
     if depth > 32:
         raise SelfImprovementError("RETRY_CONTEXT_TOO_DEEP:" + path)
@@ -237,6 +279,7 @@ def _empty_state() -> dict[str, Any]:
         "schema": STATE_SCHEMA,
         "version": 1,
         "episodes": {},
+        "episode_provenance": {},
         "skills": {},
         "pareto_frontiers": {},
         "failures": {},
@@ -267,8 +310,9 @@ def load_state(path: str | Path = DEFAULT_STATE_PATH) -> dict[str, Any]:
     state.setdefault("reuse", {})
     state.setdefault("observations", {})
     state.setdefault("improvement_queue", {})
+    state.setdefault("episode_provenance", {})
     for key in (
-        "episodes", "skills", "pareto_frontiers", "failures", "reuse",
+        "episodes", "episode_provenance", "skills", "pareto_frontiers", "failures", "reuse",
         "observations", "improvement_queue", "stats",
     ):
         if not isinstance(state.get(key), Mapping):
@@ -1396,6 +1440,10 @@ def integrate_solver_output(
         episode_key = _episode_key(ep)
         episode_added = episode_key not in state["episodes"]
         state["episodes"][episode_key] = deepcopy(dict(ep))
+        direct_episode_provenance = out.get("acquisition_donor_provenance")
+        state["episode_provenance"][episode_key] = (
+            _merge_acquisition_donor_provenance(direct_episode_provenance)
+        )
         _resolve_improvements(
             state,
             kind="VERIFY_EPISODE",
@@ -1447,6 +1495,20 @@ def integrate_solver_output(
     active_skill_id = None
     verified_skill = out.get("verified_executable_skill")
     skill_candidate = out.get("skill_candidate")
+    provenance_subject = (
+        skill_candidate if isinstance(skill_candidate, Mapping)
+        else verified_skill if isinstance(verified_skill, Mapping)
+        else None
+    )
+    effective_donor_provenance = _candidate_acquisition_donor_provenance(
+        state,
+        provenance_subject,
+        (
+            out.get("acquisition_donor_provenance")
+            if isinstance(out.get("acquisition_donor_provenance"), Mapping)
+            else None
+        ),
+    )
     if (
         out.get("verified_skill_reuse_authorized") is True
         and isinstance(verified_skill, Mapping)
@@ -1490,10 +1552,8 @@ def integrate_solver_output(
                     "source_scopes": _items(skill_candidate.get("source_scopes")),
                     "postconditions": _items(skill_candidate.get("postconditions")),
                     "candidate": deepcopy(dict(skill_candidate)),
-                    "acquisition_donor_provenance": (
-                        deepcopy(dict(out.get("acquisition_donor_provenance")))
-                        if isinstance(out.get("acquisition_donor_provenance"), Mapping)
-                        else None
+                    "acquisition_donor_provenance": deepcopy(
+                        effective_donor_provenance
                     ),
                 },
             )
@@ -1517,11 +1577,8 @@ def integrate_solver_output(
                 },
             )
 
-    donor_provenance = out.get("acquisition_donor_provenance")
-    donor_derived = (
-        isinstance(donor_provenance, Mapping)
-        and donor_provenance.get("used") is True
-    )
+    donor_provenance = effective_donor_provenance
+    donor_derived = donor_provenance.get("used") is True
     transfer_gate_verdict = out.get("capability_transfer_gate_verdict")
     if (
         out.get("verified_skill_reuse_authorized") is True
