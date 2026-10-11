@@ -23,7 +23,7 @@ class Tests(unittest.TestCase):
         out=evaluate(owned_no_model())
         self.assertTrue(out["pass"],out)
 
-    def test_owned_general_substrate_route_passes(self):
+    def test_general_model_substrate_route_is_forbidden(self):
         route=owned_no_model()
         route.update({
             "model_role":"GENERAL_COGNITION_SUBSTRATE",
@@ -32,7 +32,9 @@ class Tests(unittest.TestCase):
             "general_substrate_test_pass":True,
         })
         out=evaluate(route)
-        self.assertTrue(out["pass"],out)
+        self.assertFalse(out["pass"],out)
+        self.assertIn("EXTERNAL_MODEL_COGNITION_DEPENDENCY_FORBIDDEN",out["errors"])
+        self.assertIn("MODEL_PRODUCER_ROLE_FORBIDDEN",out["errors"])
 
     def test_hidden_target_capability_provider_blocks(self):
         route=owned_no_model()
@@ -46,9 +48,10 @@ class Tests(unittest.TestCase):
         out=evaluate(route)
         self.assertFalse(out["pass"])
         self.assertIn("HIDDEN_TARGET_CAPABILITY_PROVIDER_NOT_ZERO",out["errors"])
-        self.assertIn("GENERAL_SUBSTRATE_TEST_NOT_PROVEN",out["errors"])
+        self.assertIn("EXTERNAL_MODEL_COGNITION_DEPENDENCY_FORBIDDEN",out["errors"])
+        self.assertIn("MODEL_PRODUCER_ROLE_FORBIDDEN",out["errors"])
 
-    def test_model_presence_alone_does_not_block(self):
+    def test_any_model_presence_blocks_brain_credit_path(self):
         route=owned_no_model()
         route.update({
             "model_role":"GENERAL_COGNITION_SUBSTRATE",
@@ -57,7 +60,8 @@ class Tests(unittest.TestCase):
             "general_substrate_test_pass":True,
         })
         out=evaluate(route)
-        self.assertTrue(out["pass"],out)
+        self.assertFalse(out["pass"],out)
+        self.assertIn("EXTERNAL_MODEL_COGNITION_DEPENDENCY_FORBIDDEN",out["errors"])
 
     def test_unclassified_model_role_fails_closed(self):
         route=owned_no_model()
