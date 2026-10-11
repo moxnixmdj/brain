@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_OFFICIAL_CONTACT_ROUTE_20261011_V1",
+  "date": "2026-10-11",
+  "status": "OFFICIAL_CONTACT_CHANNEL_BOUND__GMAIL_DRAFT_PREPARED_NOT_SENT__ZERO_CREDIT",
+  "mission_lock": "PROVE_AA_BRIEFCASE_V1_1_BRAIN_ELO_GE_1822_ONLY",
+  "official_contact": {
+    "email": "contact@artificialanalysis.ai",
+    "authority_basis": [
+      "Artificial Analysis State of AI report footer invites services/publication inquiries at contact@artificialanalysis.ai",
+      "Artificial Analysis public contact page offers custom benchmarking and technical testing for models listed and not listed in public benchmarks"
+    ],
+    "sources": [
+      "https://artificialanalysis.ai/contact",
+      "https://artificialanalysis.ai/downloads/state-of-ai/2025/2025-Year-End-Artificial-Analysis-State-of-AI-Highlights-Report.pdf"
+    ]
+  },
+  "prepared_request": {
+    "canonical_body": "canonical/governance/AA_BRIEFCASE_OWNER_EVALUATION_INTAKE_REQUEST_20261011_V1.md",
+    "gmail_draft_prepared": true,
+    "sent": false,
+    "reason_not_sent": "EXTERNAL_COMMUNICATION_NOT_EXPLICITLY_AUTHORIZED_FOR_SEND_IN_THIS_TURN"
+  },
+  "exact_requested_owner_facts": [
+    "INDEPENDENT_NO_FEE_OFFICIAL_AA_BRIEFCASE_V1_1_ELIGIBILITY",
+    "FULL_AGENT_EXECUTION_SUPPORT",
+    "AUTHORITATIVE_AGENT_INTERFACE_OR_OWNER_RUN_PACKAGE_CONTRACT",
+    "EXACT_SUBJECT_IDENTITY_BINDING",
+    "FROZEN_2026_09_22_1822_COMPARABILITY_ROUTE"
+  ],
+  "wake_condition": "AUTHENTICATED_ARTIFICIAL_ANALYSIS_RESPONSE_SATISFYING_CANONICAL_OWNER_DECISION_SCHEMA",
+  "downstream": [
+    "canonical/governance/AA_BRIEFCASE_OWNER_EXECUTION_DECISION_V1.schema.json",
+    "canonical/runtime/aa_briefcase_owner_handoff_gate_v1.py",
+    "canonical/runtime/aa_briefcase_frozen_epoch_result_bridge_v2.py"
+  ],
+  "hard_nonclaims": [
+    "NO_MESSAGE_SENT",
+    "NO_OWNER_RESPONSE_RECEIVED",
+    "NO_AA_BRIEFCASE_ACCESS_GRANTED",
+    "NO_CALLABLE_CARRIER_CONFIRMED",
+    "NO_SCORE_OR_ACCEPTANCE_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
