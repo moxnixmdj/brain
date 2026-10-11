@@ -89,6 +89,16 @@ assert "GLOBAL_OWNERSHIP_RECEIPT_REDUCER_BLOB_STALE" in terminal_reducer
 assert "DONOR_AUTHORITY_REPOSITORY_ROOT_REQUIRED" in terminal_reducer
 assert "GLOBAL_OWNERSHIP_ZERO_MODEL_PREDICATE_NOT_TRUE" in terminal_reducer
 
+donor_audit=(R/"canonical/runtime/terminal_candidate_donor_independence_audit_v1.py").read_text(encoding="utf-8")
+assert "\"donor_independence_authority\": False" in donor_audit
+assert "\"full_runtime_dependency_inventory_complete\": False" in donor_audit
+assert "STATIC_SOURCE_CLOSURE_PASS_DOES_NOT_PROVE_COMPLETE_RUNTIME_DEPENDENCY_CENSUS_OR_DONOR_INDEPENDENCE" in donor_audit
+current=J("canonical/governance/CURRENT_TERMINAL_AUTHORITY.json")
+donor_source=(current.get("authoritative_sources") or {}).get("terminal_candidate_donor_independence_audit") or {}
+assert donor_source.get("donor_independence_authority") is False
+assert donor_source.get("runtime_cognition_provenance_authority") is False
+assert donor_source.get("complete_runtime_dependency_inventory_authority") is False
+
 legacy=J("canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json")
 if (legacy.get("truth") or {}).get("donor_cleanroom")=="INDEPENDENT_PASS":
     assert mtp.get("final_donor_deletion_cleanroom_pass") is True
