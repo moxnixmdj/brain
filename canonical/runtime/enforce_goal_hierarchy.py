@@ -27,6 +27,8 @@ SENSITIVE_PREFIXES=(
 SENSITIVE_EXACT={"canonical/CANONICAL_POINTER.json"}
 PROTECTED_GUARD_PATHS={
     "canonical/laws/GOAL_HIERARCHY_AND_DRIFT_IMMUNITY_LAW_V1.md",
+    "canonical/laws/GOAL_HIERARCHY_AND_DRIFT_IMMUNITY_LAW_V2.md",
+    "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
     "canonical/laws/TRUTH_FIRST_AND_NO_DUPLICATE_EXECUTION_LAW_V1.md",
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V2.md",
@@ -55,15 +57,21 @@ PROTECTED_GUARD_PATHS={
     "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V9.json",
     "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V10.json",
     "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V11.json",
+    "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V12.json",
+    "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V13.json",
     "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V2.json",
     "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V3.json",
     "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V4.json",
     "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V5.json",
     "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V6.json",
+    "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V7.json",
     "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V8.json",
     "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V9.json",
     "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V10.json",
     "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V11.json",
+    "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V12.json",
+    "canonical/governance/CURRENT_DEVELOPMENT_AUTHORITY.json",
+    "canonical/laws/BENCHMARK_MEASUREMENT_VS_CAPABILITY_PROOF_LAW_V1.md",
     "canonical/governance/WHITE_BOX_CAPABILITY_CAPSULE_SCHEMA_V1.json",
     "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V2.json",
     "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V3.json",
@@ -100,7 +108,7 @@ ALLOWED_NO_PROBE_ACTIONS=GOVERNANCE_ACTIONS|REAL_TASK_ACTIONS|{
     "ORTHOGONAL_PROBE_SELECTION",
     "EVIDENCE_PRESERVATION",
 }
-OBS_DELETION_ORDER=("DELETE","BYPASS","REUSE","SUBSTITUTE","WHITE_BOX_HARVEST","COMPOSE","CONFIGURE","INTEGRATE")
+OBS_DELETION_ORDER=("DELETE","BYPASS","REUSE","ADAPT","SUBSTITUTE","COMPOSE","CONFIGURE","INTEGRATE","SYNTHESIZE_NEW_PRIMITIVE")
 WHITE_BOX_HARVEST_REQUIRED_FIELDS=(
     "residual_capability_contract","donor_admissibility","license_and_provenance",
     "causal_evidence","heldout_contamination_control","donor_deletion_plan",
@@ -619,7 +627,7 @@ def enforce_recursive_obs(intent,files,base):
                 fail("WHITE_BOX_HARVEST_DONOR_DELETION_PLAN_NOT_ASSERTED")
             if harvest.get("full_dependency_accounting") is not True:
                 fail("WHITE_BOX_HARVEST_FULL_DEPENDENCY_ACCOUNTING_NOT_ASSERTED")
-            if harvest.get("capability_capsule_schema_path")!="canonical/governance/WHITE_BOX_CAPABILITY_CAPSULE_SCHEMA_V1.json":
+            if harvest.get("capability_capsule_schema_path")!="canonical/governance/WHITE_BOX_CAPABILITY_CAPSULE_SCHEMA_V3.json":
                 fail("WHITE_BOX_HARVEST_CAPSULE_SCHEMA_MISMATCH")
 
     verification=obs.get("obs_verification") if isinstance(obs.get("obs_verification"),dict) else {}
@@ -1205,14 +1213,18 @@ def main():
         fail("POINTER_WHITE_BOX_ROUTE_ORDER_MISMATCH")
     expected_control_paths={
         "pre_action_gate_path":"canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V11.json",
-        "goal_hierarchy_action_gate_path":"canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V11.json",
-        "recursive_obs_receipt_schema_path":"canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V6.json",
-        "recursive_obs_action_intent_template_path":"canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V11.json",
-        "capability_acquisition_engine_law_path":"canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V7.md",
-        "capability_arbitrage_strategy_path":"canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V7.md",
-        "frontier_capability_obsolescence_mission_lock_path":"canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V7.md",
-        "white_box_capability_harvesting_law_path":"canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V1.md",
-        "white_box_capability_capsule_schema_path":"canonical/governance/WHITE_BOX_CAPABILITY_CAPSULE_SCHEMA_V1.json",
+        "goal_hierarchy_drift_immunity_law_path":"canonical/laws/GOAL_HIERARCHY_AND_DRIFT_IMMUNITY_LAW_V2.md",
+        "goal_hierarchy_action_gate_path":"canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V13.json",
+        "recursive_obs_receipt_schema_path":"canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V7.json",
+        "recursive_obs_action_intent_template_path":"canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V12.json",
+        "capability_acquisition_engine_law_path":"canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+        "capability_arbitrage_strategy_path":"canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+        "frontier_capability_obsolescence_mission_lock_path":"canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+        "white_box_capability_harvesting_law_path":"canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+        "white_box_capability_capsule_schema_path":"canonical/governance/WHITE_BOX_CAPABILITY_CAPSULE_SCHEMA_V3.json",
+        "general_capability_first_development_law_path":"canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+        "current_development_authority_path":"canonical/governance/CURRENT_DEVELOPMENT_AUTHORITY.json",
+        "benchmark_measurement_vs_capability_proof_law_path":"canonical/laws/BENCHMARK_MEASUREMENT_VS_CAPABILITY_PROOF_LAW_V1.md",
     }
     for key,expected in expected_control_paths.items():
         if boot.get(key)!=expected:
@@ -1229,9 +1241,9 @@ def main():
         fail("QUEUE_WHITE_BOX_ROUTE_ORDER_MISMATCH")
 
     try:
-        active_obs_schema=load("canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V6.json")
-        active_action_template=load("canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V8.json")
-        active_goal_gate=load("canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V8.json")
+        active_obs_schema=load("canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V7.json")
+        active_action_template=load("canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V12.json")
+        active_goal_gate=load("canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V13.json")
     except Exception as exc:
         fail("WHITE_BOX_CONTROL_SURFACE_LOAD_FAILED:"+type(exc).__name__)
         active_obs_schema=active_action_template=active_goal_gate={}
