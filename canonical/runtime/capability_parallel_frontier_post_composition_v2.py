@@ -46,31 +46,103 @@ def _cand_id(f:dict,wid:str):
 def _prof(f:dict,root:Path):
  d,sha=_load(root,PROF); status=str(d.get("status") or "")
  comp=d.get("same_subject_composition"); pf=d.get("property_truth_frontier")
- if "12_OF_12_COMPOSED" not in status or "24_OF_24_SCOPE_VERIFIED" not in status: raise PostCompositionFrontierV2Error("PROF_PHASE")
- if not isinstance(comp,Mapping) or comp.get("composition_admissible") is not True or comp.get("verified_root_subject_binding_count")!=12: raise PostCompositionFrontierV2Error("PROF_COMPOSITION")
+ if not isinstance(comp,Mapping) or comp.get("composition_admissible") is not True or comp.get("verified_root_subject_binding_count")!=12:
+  raise PostCompositionFrontierV2Error("PROF_COMPOSITION")
  if not isinstance(pf,Mapping): raise PostCompositionFrontierV2Error("PROF_FRONTIER")
  vals=[pf.get(k) for k in ("total_leaf_count","verified_leaf_count","verified_execution_leaf_count","open_execution_leaf_count","verified_semantic_leaf_count","open_semantic_leaf_count")]
  if any(isinstance(x,bool) or not isinstance(x,int) or x<0 for x in vals): raise PostCompositionFrontierV2Error("PROF_COUNTS")
- total,v,ve,oe,vs,os=vals; ids=pf.get("verified_leaf_ids")
- if total!=24 or v!=ve or vs!=0 or ve+oe!=12 or vs+os!=12: raise PostCompositionFrontierV2Error("PROF_PARTITION")
- if not isinstance(ids,list) or len(ids)!=v or len(set(ids))!=v or any(not isinstance(x,str) or not x.endswith("::EXECUTION") for x in ids): raise PostCompositionFrontierV2Error("PROF_IDS")
+ total,v,ve,oe,vs,os=vals
+ if total!=24 or v!=ve+vs or ve+oe!=12 or vs+os!=12:
+  raise PostCompositionFrontierV2Error("PROF_PARTITION")
+ ids=pf.get("verified_leaf_ids")
+ if not isinstance(ids,list) or len(ids)!=v or len(set(ids))!=v or any(not isinstance(x,str) or not x for x in ids):
+  raise PostCompositionFrontierV2Error("PROF_IDS")
+ exec_ids=[x for x in ids if x.endswith("::EXECUTION")]
+ sem_ids=[x for x in ids if x.endswith("::SEMANTIC")]
+ if len(exec_ids)!=ve or len(sem_ids)!=vs or len(exec_ids)+len(sem_ids)!=v:
+  raise PostCompositionFrontierV2Error("PROF_IDS")
+ if v==24:
+  if ve!=12 or oe!=0 or vs!=12 or os!=0 or "V10" not in status or "24_OF_24" not in status or "REGRESSION" not in status:
+   raise PostCompositionFrontierV2Error("PROF_PHASE")
+ else:
+  if "12_OF_12_COMPOSED" not in status or "24_OF_24_SCOPE_VERIFIED" not in status:
+   raise PostCompositionFrontierV2Error("PROF_PHASE")
  _source(f,PROF)["git_blob_sha"]=sha
- row=_cand_source(f,PROF); row["work_id"]=PROF_WORK; row["scheduler_state"]="READY_EVIDENCE"; row["evidence_acquisition_mode"]="READ_ONLY"
- row["readiness"]=f"PROPERTY_TRUTH_{v}_OF_24__{oe}_EXECUTION_LEAVES_OPEN__TWELVE_SEMANTIC_TOTALITY_REUSE"
- ev=dict(row.get("read_only_evidence") or {}); ev.update({"source":PROF,"source_git_blob_sha":sha,"whole_leaf_scope_complete_count":24,"property_truth_closed_count":v,"verified_property_truth_leaf_count":v,"verified_property_truth_leaf_ids":ids,"open_execution_leaf_count":oe,"open_semantic_leaf_count":os,"vector_bounds_complete":False,"dynamic_current_pointer_follow":True}); row["read_only_evidence"]=ev
- return {"git_blob_sha":sha,"property_truth_closed_count":v,"open_execution_leaf_count":oe}
+ row=_cand_source(f,PROF); row["work_id"]=PROF_WORK; row["evidence_acquisition_mode"]="READ_ONLY"
+ if v==24:
+  row["scheduler_state"]="BLOCKED"
+  row["readiness"]="PROPERTY_TRUTH_24_OF_24_COMPLETE__FULL_PRIVATE_CURRENT_MAIN_REGRESSION_WAKE_GATED"
+ else:
+  row["scheduler_state"]="READY_EVIDENCE"
+  row["readiness"]=f"PROPERTY_TRUTH_{v}_OF_24__{oe}_EXECUTION_LEAVES_OPEN__{os}_SEMANTIC_LEAVES_OPEN"
+ ev=dict(row.get("read_only_evidence") or {})
+ ev.update({
+  "source":PROF,
+  "source_git_blob_sha":sha,
+  "whole_leaf_scope_complete_count":24,
+  "property_truth_closed_count":v,
+  "verified_property_truth_leaf_count":v,
+  "verified_property_truth_leaf_ids":ids,
+  "verified_execution_leaf_count":ve,
+  "open_execution_leaf_count":oe,
+  "verified_semantic_leaf_count":vs,
+  "open_semantic_leaf_count":os,
+  "full_private_current_main_regression_open":pf.get("full_current_main_regression_open") is True,
+  "vector_bounds_complete":False,
+  "dynamic_current_pointer_follow":True
+ })
+ row["read_only_evidence"]=ev
+ return {"git_blob_sha":sha,"property_truth_closed_count":v,"verified_execution_leaf_count":ve,"open_execution_leaf_count":oe,"verified_semantic_leaf_count":vs,"open_semantic_leaf_count":os}
 
 def _assurance(f:dict,prof:Mapping[str,Any],root:Path):
  d,sha=_load(root,ASSURANCE)
- if d.get("terminal_authority") is not False or d.get("live_default") is not False: raise PostCompositionFrontierV2Error("ASSURANCE_AUTHORITY_BOUNDARY")
+ if d.get("terminal_authority") is not False or d.get("live_default") is not False:
+  raise PostCompositionFrontierV2Error("ASSURANCE_AUTHORITY_BOUNDARY")
  act=d.get("activation")
- if not isinstance(act,Mapping) or act.get("live_default") is not False: raise PostCompositionFrontierV2Error("ASSURANCE_ACTIVATION")
+ if not isinstance(act,Mapping) or act.get("live_default") is not False:
+  raise PostCompositionFrontierV2Error("ASSURANCE_ACTIVATION")
  blockers=act.get("required_before_promotion")
- if not isinstance(blockers,list) or "FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION" not in blockers: raise PostCompositionFrontierV2Error("ASSURANCE_BLOCKERS")
+ if not isinstance(blockers,list) or "FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION" not in blockers:
+  raise PostCompositionFrontierV2Error("ASSURANCE_BLOCKERS")
+ ppt=d.get("professional_property_truth_current")
+ if not isinstance(ppt,Mapping):
+  raise PostCompositionFrontierV2Error("ASSURANCE_PROFESSIONAL_BINDING")
+ expected={
+  "total_leaf_count":24,
+  "verified_leaf_count":prof["property_truth_closed_count"],
+  "verified_execution_leaf_count":prof["verified_execution_leaf_count"],
+  "open_execution_leaf_count":prof["open_execution_leaf_count"],
+  "verified_semantic_leaf_count":prof["verified_semantic_leaf_count"],
+  "open_semantic_leaf_count":prof["open_semantic_leaf_count"],
+ }
+ if any(ppt.get(k)!=v for k,v in expected.items()):
+  raise PostCompositionFrontierV2Error("ASSURANCE_PROFESSIONAL_BINDING")
+ if ppt.get("source_professional_pointer")!=PROF or ppt.get("required_remaining_gate")!="FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION":
+  raise PostCompositionFrontierV2Error("ASSURANCE_PROFESSIONAL_BINDING")
+ if ppt.get("quality_authority") is not False or ppt.get("promotion_authority") is not False or ppt.get("terminal_authority") is not False:
+  raise PostCompositionFrontierV2Error("ASSURANCE_AUTHORITY_BOUNDARY")
  _source(f,ASSURANCE)["git_blob_sha"]=sha
  row=_cand_id(f,ASSURANCE_WORK)
- ev=dict(row.get("read_only_evidence") or {}); ev.update({"source":ASSURANCE,"source_git_blob_sha":sha,"professional_current_git_blob_sha":prof["git_blob_sha"],"professional_property_truth_closed_count":prof["property_truth_closed_count"],"professional_open_execution_leaf_count":prof["open_execution_leaf_count"],"embedded_professional_snapshot_lags_live_frontier":True,"dynamic_current_pointer_follow":True,"vector_bounds_complete":False}); row["read_only_evidence"]=ev
- return {"git_blob_sha":sha}
+ if prof["property_truth_closed_count"]==24:
+  row["scheduler_state"]="BLOCKED"
+  row["readiness"]="BLOCKED__FULL_PRIVATE_CURRENT_MAIN_REGRESSION_WAKE_GATED"
+ ev=dict(row.get("read_only_evidence") or {})
+ ev.update({
+  "source":ASSURANCE,
+  "source_git_blob_sha":sha,
+  "professional_current_git_blob_sha":prof["git_blob_sha"],
+  "professional_property_truth_closed_count":prof["property_truth_closed_count"],
+  "professional_verified_execution_leaf_count":prof["verified_execution_leaf_count"],
+  "professional_open_execution_leaf_count":prof["open_execution_leaf_count"],
+  "professional_verified_semantic_leaf_count":prof["verified_semantic_leaf_count"],
+  "professional_open_semantic_leaf_count":prof["open_semantic_leaf_count"],
+  "professional_live_counts_reconciled":True,
+  "full_private_current_main_regression_required":True,
+  "dynamic_current_pointer_follow":True,
+  "vector_bounds_complete":False
+ })
+ row["read_only_evidence"]=ev
+ return {"git_blob_sha":sha,"professional_property_truth_closed_count":prof["property_truth_closed_count"]}
 
 def _bytes(f:dict,root:Path):
  d,sha=_load(root,BYTES); m=re.search(r"_V(\d+)_FRONTIER",str(d.get("status") or ""))
