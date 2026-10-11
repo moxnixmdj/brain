@@ -337,30 +337,41 @@ def _dominant_legend_color_and_style(
 ) -> tuple[tuple[int, int, int], str, dict[str, Any]]:
     rgb = im.convert("RGB")
     W, H = rgb.size
-    y = int(round(row["cy"]))
-    x1 = max(plot_right + 14, int(row["x0"]) - 5)
-    x0 = max(plot_right + 6, x1 - 60)
-    colored = []
-    for yy in range(max(0, y - 4), min(H, y + 5)):
-        for x in range(max(0, x0), min(W, x1)):
+    text_y = int(round(row["cy"]))
+    text_x = int(row["x0"])
+
+    # Legend swatches are normally immediately left of the semantic label, but
+    # their stroke center need not share the text's vertical center. Search a
+    # bounded 2D pre-label region, then recover the actual colored stroke row.
+    x1 = min(W, text_x + 4)
+    x0 = max(plot_right + 2, text_x - 105)
+    y0 = max(0, text_y - 16)
+    y1 = min(H, text_y + 17)
+    colored: list[tuple[int, int, tuple[int, int, int]]] = []
+    for yy in range(y0, y1):
+        for x in range(x0, x1):
             p = rgb.getpixel((x, yy))
             if _saturated(p):
-                colored.append(p)
+                colored.append((x, yy, p))
     if not colored:
-        raise ChartographyProfessionalSolverError("LEGEND_COLOR_MISSING")
-    # Pick a medoid-like representative among quantized saturated colors.
-    bins: dict[tuple[int, int, int], list[tuple[int, int, int]]] = {}
-    for p in colored:
+        raise ChartographyProfessionalSolverError(
+            f"LEGEND_COLOR_MISSING:{plot_right}:{text_x}:{text_y}:{x0}:{x1}:{y0}:{y1}"
+        )
+
+    bins: dict[tuple[int, int, int], list[tuple[int, int, tuple[int, int, int]]]] = {}
+    for item in colored:
+        p = item[2]
         q = tuple(int(round(v / 16) * 16) for v in p)
-        bins.setdefault(q, []).append(p)
+        bins.setdefault(q, []).append(item)
     _, pts = max(bins.items(), key=lambda kv: len(kv[1]))
-    color = tuple(int(round(_median(p[i] for p in pts))) for i in range(3))
+    color = tuple(int(round(_median(item[2][i] for item in pts))) for i in range(3))
+    stroke_y = int(round(_median(item[1] for item in pts)))
 
     occupancy = []
     for x in range(x0, x1):
         occupancy.append(any(
             _color_distance(rgb.getpixel((x, yy)), color) <= 70
-            for yy in range(max(0, y - 4), min(H, y + 5))
+            for yy in range(max(0, stroke_y - 2), min(H, stroke_y + 3))
         ))
     runs = []
     n = 0
@@ -379,10 +390,12 @@ def _dominant_legend_color_and_style(
     else:
         style = "DASHED"
     return color, style, {
-        "sample_box": [x0, max(0, y - 4), x1, min(H, y + 5)],
+        "search_box": [x0, y0, x1, y1],
+        "stroke_y": stroke_y,
         "coverage": coverage,
         "max_run": max_run,
         "run_lengths": runs,
+        "colored_pixel_count": len(pts),
     }
 
 
