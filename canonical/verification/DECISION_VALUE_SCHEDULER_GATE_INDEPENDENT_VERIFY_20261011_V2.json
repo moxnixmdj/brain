@@ -1,0 +1,86 @@
+{
+  "schema": "PROJECT_BRAIN_DECISION_VALUE_SCHEDULER_GATE_INDEPENDENT_VERIFY_20261011_V2",
+  "date": "2026-10-11",
+  "status": "PASS__ALL_12_CHECKPOINT_ROWS_WAKE_GATED__0_SAME_INFORMATION_CHECKPOINT_RUNS__BYTES_V48_ONLY_READY_LANE__46_OF_46_SCHEDULER_SLICE_PASS__CURRENT_PLAN_REPLAY_PASS__R2_SCALAR_FALLBACK_DRIFT_FAIL_CLOSED__ZERO_CREDIT",
+  "objective": "VERIFY_CURRENT_MAIN_DECISION_VALUE_PROJECTION_AFTER_ALL_OPEN_CHECKPOINT_WAKE_GATING_AND_BYTES_V48_PROMOTION",
+  "base_main_commit": "7b9912b847f7a647afe034a749b111bfa55fc6d3",
+  "subjects": {
+    "runtime": {
+      "path": "canonical/runtime/capability_parallel_frontier_post_composition_v2.py",
+      "git_blob_sha": "6a1e02ab6154e18b706867582cc93d1eb571c423"
+    },
+    "focused_tests": {
+      "path": "canonical/tests/test_capability_parallel_frontier_post_composition_v2.py",
+      "git_blob_sha": "7fc3d5fe59d4757b7471b9412c6a33c1bad6582e"
+    },
+    "live_frontier": {
+      "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
+      "git_blob_sha": "cbd9c5abe080f13d34b1ee99de6fc95bfe2a86ee"
+    },
+    "specialization": {
+      "path": "canonical/governance/CURRENT_FRONTIER_REUSE_SPECIALIZATION_20261011_V1.json",
+      "git_blob_sha": "fd829dd1f2c959302f346f74c72a65d8d24e7f7e"
+    },
+    "bytes": {
+      "path": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
+      "git_blob_sha": "cc039dec0d7361bfb83c7121433eabcb82ce5581"
+    },
+    "capability_first_scheduler_tests": {
+      "path": "canonical/tests/test_capability_first_scheduler_v1.py",
+      "git_blob_sha": "a9f7c285d72ef2282552ec335de93cab1ad59aab"
+    }
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "sprite_name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "dynamic_scheduler_tests_run": 23,
+    "dynamic_scheduler_tests_passed": 23,
+    "dynamic_scheduler_tests_failed": 0,
+    "current_plan_replay": "PASS",
+    "scheduler_slice_tests_run": 46,
+    "scheduler_slice_tests_passed": 46,
+    "scheduler_slice_tests_failed": 0
+  },
+  "current_plan_truth": {
+    "checkpoint_actionable_row_ids": [],
+    "checkpoint_sleeping_row_count": 12,
+    "ready_candidate_ids": [
+      "BYTES_EXACT_SYMBOLIC_V48_NEXT_PHYSICAL_CUT"
+    ],
+    "parallel_read_only_evidence_work_ids": [
+      "BYTES_EXACT_SYMBOLIC_V48_NEXT_PHYSICAL_CUT"
+    ],
+    "parallel_full_execution_work_ids": [],
+    "professional_property_truth_closed_count": 24,
+    "professional_open_execution_leaf_count": 0,
+    "professional_open_semantic_leaf_count": 0,
+    "professional_full_current_main_regression_open": true,
+    "r2_scalar_fallback_state": "BLOCKED_R2_POLICY_SOURCE_LOCK_DRIFT__PRIMARY_V17_ACTIVE",
+    "r2_scalar_fallback_drifted_sources": [
+      {
+        "path": "canonical/runtime/general_adequate_decision_controller_v1.py",
+        "policy_git_blob_sha": "368c6ac07e8feaf1a0c880de5388b618def912e2",
+        "current_git_blob_sha": "b5c609eb902cd0ea21d81710588dd538aa05cb4f"
+      },
+      {
+        "path": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
+        "policy_git_blob_sha": "cabe3bd1ec3748a595f3a959718c38accdacfb2f",
+        "current_git_blob_sha": "34d62b109b99f38e62995544871460b266d2c7df"
+      }
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CHECKPOINT_ACCEPTANCE_CREDIT",
+    "NO_CAPABILITY_OWNERSHIP_OR_PROMOTION_CREDIT",
+    "NO_CLAIM_ANY_WAKE_GATED_ROW_IS_IMPOSSIBLE_TO_CLOSE",
+    "NO_FULL_EXECUTION_AUTHORITY_FROM_THIS_SCHEDULER_REPAIR"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
