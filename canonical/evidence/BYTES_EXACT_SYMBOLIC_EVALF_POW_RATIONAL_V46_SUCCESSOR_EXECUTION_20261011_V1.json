@@ -1,0 +1,99 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_EVALF_POW_RATIONAL_V46_SUCCESSOR_EXECUTION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "VERIFIED_RESEARCH_FRONTIER__RATIONAL_EXPONENT_SPECIALIZATION__SPENT_NEXT51_AND_FRESH_NEXT52_PASS__NEXT53_FROZEN_UNSPENT__CURRENT_POINTER_ELIGIBLE__ZERO_PROMOTION_CREDIT",
+  "subject": {
+    "predecessor": "canonical/evidence/BYTES_EXACT_SYMBOLIC_EVALF_TRIG_BRANCH_V45_SUCCESSOR_EXECUTION_20261011_V1.json",
+    "predecessor_manifest_sha256": "3d7c21fdebe1db363cc3e4c5fdf57a2ddb76c5219cd832c34eab9a99d60f9576",
+    "transform": "canonical/research/bytes/tools/conservative_evalf_pow_rational_prune_v46.py",
+    "manifest_sha256": "92056a1de7d8c4a109dd6aca9bf295a9e3956a42a5f7672b321faf75aa842a9b",
+    "python_files": 277,
+    "raw_python_source_bytes": 1740366,
+    "B_exec_raw_python_source_bytes": 1743126,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "raw_delta_vs_v45_bytes": -290,
+    "B_exec_delta_vs_v45_bytes": -290
+  },
+  "selection": {
+    "id": "EVALF_POW_RATIONAL_EXPONENT_SPECIALIZATION_V46",
+    "method": "PROFILE_SPENT_NEXT51_EXPONENT_CLASSES__PRESERVE_INTEGER_HALF_AND_OTHER_RATIONAL_PATHS__FAIL_CLOSE_ARBITRARY_SYMBOLIC_EXPONENT_AND_UNUSED_E_BASE_ROUTE__VERIFY_SPENT_NEXT51_THEN_FRESH_NEXT52",
+    "changed_body_count": 1,
+    "body": "sympy/core/evalf.py::evalf_pow",
+    "exact_base_guard": true,
+    "exact_target_guard": true
+  },
+  "discovery_evidence": {
+    "corpus": "QUAL_SUCCESSOR_NEXT51_20261011_V1",
+    "role": "SPENT_DISCOVERY_ONLY__NOT_FRESH_QUALIFICATION",
+    "cases_profiled": 13570,
+    "evalf_pow_calls": 254963,
+    "exponent_classes": {
+      "half": 202803,
+      "rational_nonhalf": 51427,
+      "integer": 733,
+      "other": 0
+    },
+    "base_E_calls": 0
+  },
+  "qualification": {
+    "spent_NEXT51": {
+      "id": "QUAL_SUCCESSOR_NEXT51_20261011_V1",
+      "cases": 13570,
+      "corpus_sha256": "451f0b3f885c05d7d939b143bfe638b9e034283c0398c9ae80aac234775a90e5",
+      "candidate": "13570/13570",
+      "failures": 0,
+      "spent": true
+    },
+    "fresh_NEXT52": {
+      "id": "QUAL_SUCCESSOR_NEXT52_20261011_V1",
+      "cases": 13800,
+      "corpus_sha256": "30ea78acca28b10a42b24726fcc6c33ac592ce821de859f63faf1978100d2529",
+      "candidate": "13800/13800",
+      "failures": 0,
+      "spent": true
+    }
+  },
+  "reproducibility": {
+    "clean_room_v45_to_v46_reconstruction": "PASS__278_OF_278_FILES_BYTE_IDENTICAL",
+    "regenerated_manifest_sha256": "92056a1de7d8c4a109dd6aca9bf295a9e3956a42a5f7672b321faf75aa842a9b",
+    "external_second_carrier_verified": false
+  },
+  "durable_archive": {
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V46_SUCCESSOR_20261011_V1.tar.xz",
+    "library_file_id": "libfile_d5077f4f3e6881918eac0846ae2474d7",
+    "bytes": 271380,
+    "sha256": "678da00dcfc6f6870d3bb0da5ca93cacceee068ce227b148f33ddfe7e155aed5"
+  },
+  "next_frozen": {
+    "id": "QUAL_SUCCESSOR_NEXT53_20261011_V1",
+    "cases": 14030,
+    "seed": 2679718106,
+    "seed_derivation": "FIRST_32_BITS_SHA256_OF_QUAL_SUCCESSOR_NEXT53_20261011_V1_PIPE_V46_MANIFEST_IDENTITY",
+    "seed_material": "QUAL_SUCCESSOR_NEXT53_20261011_V1|92056a1de7d8c4a109dd6aca9bf295a9e3956a42a5f7672b321faf75aa842a9b",
+    "per_operation_budget": 1220,
+    "corpus_sha256": "7f1dd1549e6df0b47baf56e52c96fd10d11fbb946c6e84bda8c2cb805fedda3c",
+    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT53_20261011_V1.jsonl",
+    "library_file_id": "libfile_7abd855d38608191895965333f71f936",
+    "generation_provenance": "STOCK_SYMPY_1_14_0_MPMATH_1_3_0_EXACT_ROUTE_EXPECTED_OUTPUTS__DETERMINISTIC_PARAMETER_STREAM__CHUNKED_EXPECTED_OUTPUT_EVALUATION__CANONICAL_ROW_REASSEMBLY",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT",
+    "spent": false
+  },
+  "truth_boundary": [
+    "MEASURED: V46 is 1,740,366 raw Python-source bytes, 290 bytes below V45.",
+    "MEASURED: full spent NEXT51 profiling saw 254,963 evalf_pow calls and zero arbitrary non-rational exponents or E-base calls.",
+    "MEASURED: V46 passes spent NEXT51 13,570/13,570 with zero failures.",
+    "MEASURED: previously untouched NEXT52 passes V46 13,800/13,800 with zero failures.",
+    "MEASURED: clean-room V45-to-V46 reconstruction is 278/278 files byte-identical.",
+    "MEASURED: NEXT53 is durably frozen at 14,030 cases and remains unspent.",
+    "NOT PROVED: universal SymPy equivalence outside the bounded exact-symbolic route.",
+    "NOT PROVED: external second-carrier replay.",
+    "NOT PROMOTED: no capability, acceptance, ownership, quality, or terminal credit."
+  ],
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "quality_credit_delta": 0,
+  "promotion_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
