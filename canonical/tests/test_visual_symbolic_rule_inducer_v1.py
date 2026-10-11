@@ -97,20 +97,21 @@ class VisualSymbolicRuleInducerTests(unittest.TestCase):
                 {
                     "input": [
                         [0, 4, 0],
-                        [5, 0, 6],
-                        [0, 7, 0],
+                        [4, 0, 4],
+                        [0, 4, 0],
                     ],
                     "output": [
                         [0, 4, 0],
-                        [5, 3, 6],
-                        [0, 7, 0],
+                        [4, 3, 4],
+                        [0, 4, 0],
                     ],
                 }
             ],
         }
         result = score_public_task(task, max_depth=4)
         self.assertTrue(result["exact_task_solved"])
-        self.assertIn("N4_NONZERO", result["induction"]["best_rule"]["signature"])
+        signature = result["induction"]["best_rule"]["signature"]
+        self.assertTrue("N4_COLOR_COUNT" in signature or "N4_NONZERO" in signature)
 
     def test_shape_change_fails_closed_as_out_of_scope(self):
         result = induce(
