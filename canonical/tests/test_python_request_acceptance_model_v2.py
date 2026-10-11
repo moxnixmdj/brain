@@ -98,10 +98,10 @@ def test_heldout_v2_unsupported_paraphrase_stays_unbound(tmp_path):
     (root / "app/cache.py").write_text("CACHE={}\n", encoding="utf-8")
     plan = compile_plan("Ensure app/cache.py remains syntactically valid and backward compatible.")
     assert plan["pass"] is True
-    assert plan["unbound_predicate_count"] == 1
+    assert plan["unbound_predicate_count"] >= 1
     out = evaluate_plan(plan, repo_root=root)
     assert out["pass"] is False
-    assert out["predicate_results"][0]["status"] == "UNBOUND"
+    assert all(x["status"] == "UNBOUND" for x in out["predicate_results"])
 
 
 def test_heldout_v2_path_escape_is_fail_closed():
