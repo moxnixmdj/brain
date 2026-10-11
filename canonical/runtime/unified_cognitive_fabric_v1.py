@@ -513,7 +513,7 @@ def run(
             out = p3.evaluate(payload, repo_root=ROOT)
         elif mode == "ADAPTIVE_SOLVER":
             solver_kwargs = {
-                "proposal_provider_id": str(options.get("proposal_provider_id") or "HOST_GENERAL_COGNITION_SUBSTRATE"),
+                "proposal_provider_id": str(options.get("proposal_provider_id") or "HOST_ACQUISITION_DONOR_UNTRUSTED"),
                 "proposal_provider_max_candidates": int(options.get("proposal_provider_max_candidates", 4)),
                 "capability_expander_id": str(options.get("capability_expander_id") or "HOST_CAPABILITY_EXPANDER"),
                 "max_capability_expansions": int(options.get("max_capability_expansions", 4)),
@@ -883,7 +883,7 @@ def run(
                 known_absent_invalidators=options.get("known_absent_invalidators", ()),
                 proposal_provider=proposal_provider,
                 capability_expander=capability_expander,
-                proposal_provider_id=str(options.get("proposal_provider_id") or "HOST_GENERAL_COGNITION_SUBSTRATE"),
+                proposal_provider_id=str(options.get("proposal_provider_id") or "HOST_ACQUISITION_DONOR_UNTRUSTED"),
                 proposal_provider_max_candidates=int(options.get("proposal_provider_max_candidates", 4)),
                 capability_expander_id=str(options.get("capability_expander_id") or "HOST_CAPABILITY_EXPANDER"),
                 max_capability_expansions=int(options.get("max_capability_expansions", 4)),

@@ -2228,7 +2228,7 @@ def run_learning_episode(
     known_absent_invalidators: Sequence[str] = (),
     proposal_provider=None,
     capability_expander=None,
-    proposal_provider_id: str = "HOST_GENERAL_COGNITION_SUBSTRATE",
+    proposal_provider_id: str = "HOST_ACQUISITION_DONOR_UNTRUSTED",
     proposal_provider_max_candidates: int = 4,
     capability_expander_id: str = "HOST_CAPABILITY_EXPANDER",
     max_capability_expansions: int = 4,

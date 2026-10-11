@@ -295,7 +295,7 @@ def run(
         [Mapping[str, Any], int, Sequence[Mapping[str, Any]]],
         Mapping[str, Any] | None,
     ] | None = None,
-    proposal_provider_id: str = "HOST_GENERAL_COGNITION_SUBSTRATE",
+    proposal_provider_id: str = "HOST_ACQUISITION_DONOR_UNTRUSTED",
     proposal_provider_max_candidates: int = 4,
     capability_expander: Callable[
         [Mapping[str, Any], int, Mapping[str, Any]],
