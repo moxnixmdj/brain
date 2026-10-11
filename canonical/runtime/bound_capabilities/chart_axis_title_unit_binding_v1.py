@@ -408,8 +408,12 @@ def bind_axis_titles_and_units(image_path: str | pathlib.Path) -> dict[str, Any]
     # Left band captures the conventional y-axis title. Rotate both directions;
     # only one orientation should yield a uniquely strong semantic candidate.
     xl1 = min(w, max(1, left))
-    yl0 = max(0, top - int(0.06 * h))
-    yl1 = min(h, bottom + int(0.06 * h) + 1)
+    # Use full image height for the left axis band. Axis titles commonly
+    # extend above/below the plot rectangle; x-position already isolates the
+    # y-axis side, while vertical clipping can silently destroy leading/trailing
+    # title tokens after rotation.
+    yl0 = 0
+    yl1 = h
     y_band = image.crop((0, yl0, xl1, yl1))
 
     x_candidates = _ocr_pil(x_band, source="BOTTOM_BAND")
