@@ -1,0 +1,77 @@
+{
+  "schema": "PROJECT_BRAIN_CURSORBENCH_SIXTH_REGION_CURRENT_REGISTRY_AUDIT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "CURRENT_MAIN_AUDIT__NO_NEW_SIXTH_CONSTRUCTIVE_CODING_REGION_FOUND__ZERO_CREDIT",
+  "target_predicate": "CODING_CURSORBENCH_GE_57_8",
+  "observed_main_commit": "a49cec309d681703af4dc7add0df80ed379cc280",
+  "frozen_five_region_authority": {
+    "commit": "2fb619cf7e9d84a0da2680ecc2a86bc616fc0e22",
+    "path": "canonical/governance/CODING_SHARED_SPECIFICATION_COVERAGE_ONLY_SUCCESSOR_20261009_V4.json",
+    "registered_policy_count": 6,
+    "constructive_coding_region_count": 5,
+    "region_symbols": ["T","F","R","S","V"]
+  },
+  "current_registry": {
+    "path": "canonical/runtime/p3_conditioned_policy_adequacy_registry_v1.py",
+    "git_blob_sha": "0e6abf778d040932d556404c2e9852c1211563fe",
+    "same_blob_as_five_region_authority": true,
+    "registered_policy_count": 6,
+    "registered_policy_ids": [
+      "SYNTHESIS_CERTIFIED_VISIBLE_SUPPORT_POLICY_V1",
+      "BRAIN_INDEPENDENT_ACCEPTANCE_MODEL_TYPED_PLAN_V1",
+      "BRAIN_FINITE_CANDIDATE_EXACT_ORACLE_SOLVER_V1",
+      "BRAIN_ROBUST_FINITE_MULTI_INTERPRETATION_SOLVER_V1",
+      "BRAIN_STATIC_VERIFIED_CAPABILITY_ROUTE_SOLVER_V1",
+      "BRAIN_VISIBLE_COMPLETE_ACCEPTANCE_CONTRACT_V1"
+    ],
+    "new_registered_policy_since_five_region_authority": false
+  },
+  "post_2026_10_09_wider_search": {
+    "queries": [
+      "policy adequacy",
+      "constructive policy",
+      "coding solver",
+      "verified policy"
+    ],
+    "new_cursorbench_target_relevant_constructive_policy_found": false,
+    "notes": [
+      "POST_OCT9_POLICY_ADEQUACY_COMMITS_OUTSIDE_THE_KNOWN_CURSORBENCH_CHAIN_ARE_FINANCE_OR_NONCODING",
+      "NEW_CAPABILITY_TRANSFER_GOVERNANCE_DOES_NOT_ITSELF_SUPPLY_A_TARGET_RELEVANT_CODING_POLICY_ADEQUACY_CERTIFICATE",
+      "NEW_PROFESSIONAL_QUALITY_AND_BYTES_WORK_DOES_NOT_DEFINE_A_SIXTH_CURSORBENCH_CONSTRUCTIVE_REGION",
+      "NO_POST_OCT9_COMMIT_WAS_FOUND_THAT_STRICTLY_EXPANDS_T_F_R_S_V_WITH_INDEPENDENT_CONSTRUCTIVE_CODING_ADEQUACY"
+    ]
+  },
+  "proof_effect": {
+    "wake_condition_4_triggered": false,
+    "cursorbench_target_membership_proved": false,
+    "whole_cover_proved": false,
+    "score_threshold_proved": false,
+    "brain_ge_opus_relation_proved": false
+  },
+  "scheduler_effect": {
+    "same_information_sixth_region_search_authority": false,
+    "wake_only_on": [
+      "NEW_REGISTERED_OR_INDEPENDENTLY_VERIFIED_CONSTRUCTIVE_CODING_POLICY",
+      "MATERIAL_CHANGE_TO_P3_CONDITIONED_POLICY_REGISTRY",
+      "NEW_TARGET_RELEVANT_POLICY_ADEQUACY_CERTIFICATE_STRICTLY_EXPANDING_T_F_R_S_V"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_NO_SIXTH_REGION_CAN_EVER_BE_CONSTRUCTED",
+    "NO_CLAIM_PRIVATE_CURSORBENCH_TASK_MEMBERSHIP",
+    "NO_CLAIM_FIVE_REGIONS_COVER_CURSORBENCH",
+    "NO_CLAIM_BRAIN_CURSORBENCH_SCORE_IS_GE_57_8",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "promotion_authority": false,
+  "terminal_authority": false
+}
