@@ -1,37 +1,38 @@
 {
   "schema": "PROJECT_BRAIN_BYTES_ACTIVE_STATE_V1",
-  "status": "ACTIVE_RESEARCH__CONSERVATIVE_STRPRINTER_V34_FRONTIER__SUCCESSOR_READY",
+  "status": "ACTIVE_RESEARCH__CONSERVATIVE_HIGHLEVEL_PROFILE_V35_FRONTIER__SUCCESSOR_READY",
   "date": "2026-10-11",
   "mission_lock": "Find the minimum resource-feasible executable description of the required capability set conditional on already-owned Brain substrate.",
   "governing_laws": [
     "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V1.md",
     "canonical/laws/BYTES_RESOURCE_BOUNDED_MINIMUM_MECHANISM_LAW_V1.md"
   ],
-  "source_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_STRPRINTER_V34_SUCCESSOR_EXECUTION_20261011_V1.json",
+  "source_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_HIGHLEVEL_PROFILE_V35_SUCCESSOR_EXECUTION_20261011_V1.json",
   "exact_symbolic_state": {
-    "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_STRPRINTER_V34_SUCCESSOR_EXECUTION_20261011_V1.json",
+    "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_HIGHLEVEL_PROFILE_V35_SUCCESSOR_EXECUTION_20261011_V1.json",
+    "evidence_git_blob_sha": "79969ee781d5642f243f5356135332feca8f80d8",
     "status": "CURRENT_VERIFIED_BYTES_RESEARCH_FRONTIER__NOT_PROMOTED_TO_OPUS_CAPABILITY",
-    "raw_python_source_bytes": 1799848,
-    "B_exec_raw_python_source_bytes": 1802608,
+    "raw_python_source_bytes": 1789204,
+    "B_exec_raw_python_source_bytes": 1791964,
     "B_verify_semantic_digest_raw_bytes": 1358,
     "python_files": 277,
-    "final_untouched_qualification": "10810/10810",
-    "clean_room_execution": "10810/10810",
-    "archive_replay": "10810/10810",
-    "manifest_sha256": "fb7bc2ff8650b69a2a3e20a2d9c227c516ef34448903aa11a5f55a6a23e8a555",
-    "durable_archive_bytes": 276224,
-    "durable_archive_sha256": "aab185a2d2039b81dfa831813c36006fbb68221e5bc376e370867135b7542543",
-    "raw_improvement_vs_previous_frontier_bytes": 6889,
+    "final_untouched_qualification": "11040/11040",
+    "clean_room_execution": "11040/11040",
+    "archive_replay": "11040/11040",
+    "manifest_sha256": "c0299bf134c92e6d850b64d3b135df59d766ae91954ab7bf15bcfe48c4989ca8",
+    "durable_archive_bytes": 278232,
+    "durable_archive_sha256": "0071ecf92b42dfdb90d566e7e5089de415b22b5b448b0134020e175dc2c84873",
+    "raw_improvement_vs_previous_frontier_bytes": 10644,
     "promotion_credit_from_this_record": 0
   },
   "current_bottleneck": {
-    "subsystem": "POST_V34_RERANK_PENDING",
-    "last_structural_cut": "CONSERVATIVE_STRPRINTER_SPENT_NEXT38_V34",
+    "subsystem": "POST_V35_RERANK_PENDING",
+    "last_structural_cut": "CONSERVATIVE_HIGHLEVEL_PROFILE_SPENT_NEXT39_V35",
     "required_surface": [
       "complete bounded exact-symbolic route"
     ],
-    "next_action": "Rerank exact V34 using spent NEXT39 only; make a new physical cut before touching QUAL_SUCCESSOR_NEXT40_20261011_V1.",
-    "note": "Selected StrPrinter methods outside the bounded route fail closed; finite non-use is not universal proof."
+    "next_action": "Rerank exact V35 using spent NEXT40 only; make a new physical cut before touching QUAL_SUCCESSOR_NEXT41_20261011_V1.",
+    "note": "Selected high-level bodies fail closed outside the tested bounded route; finite non-use plus held-out qualification remains non-universal."
   },
   "rejected_do_not_reopen_without_new_evidence": [
     "parameter count as terminal metric",
@@ -65,14 +66,15 @@
   "fresh_local_donor_evidence": "canonical/evidence/BYTES_SYMPY_1_14_DEPENDENCY_CENSUS_20261010_V1.json",
   "execution_reconciliation": {
     "stock_donor_available_in_current_runtime": "SymPy 1.14.0 plus mpmath 1.3.0",
-    "predecessor_1806737_byte_candidate_superseded": true,
-    "fresh_candidate_raw_python_source_bytes": 1799848,
-    "fresh_candidate_B_exec_raw_python_source_bytes": 1802608,
-    "untouched_qualification": "10810/10810",
-    "clean_room_execution": "10810/10810",
-    "archive_replay": "10810/10810",
-    "action_taken": "Applied the exact BASE/TARGET-guarded conservative V34 StrPrinter cut to verified V33; only sympy/printing/str.py payload changed; passed frozen NEXT39 10810/10810 twice from separate fresh archive extractions.",
-    "physical_next_step": "Continue from 1,799,848 bytes using spent NEXT39 only; rerank before selecting the next physical cut."
+    "predecessor_v34_superseded": true,
+    "fresh_candidate_raw_python_source_bytes": 1789204,
+    "fresh_candidate_B_exec_raw_python_source_bytes": 1791964,
+    "spent_NEXT39_replay": "10810/10810",
+    "untouched_qualification": "11040/11040",
+    "clean_room_execution": "11040/11040",
+    "archive_replay": "11040/11040",
+    "action_taken": "Applied exact BASE/TARGET-guarded conservative V35 high-level profile cut to verified V34; 17 high-level bodies fail closed; full spent NEXT39 and previously untouched NEXT40 pass with zero failures.",
+    "physical_next_step": "Continue from 1,789,204 bytes using spent NEXT40 only; rerank before selecting the next physical cut."
   },
   "historical_reported_predecessor": {
     "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_DONOR_SLICE_CHECKPOINT_20261010_V1.json",
@@ -81,32 +83,33 @@
     "qualification": "1854/1854",
     "provenance": "USER_SUPPLIED_TRANSCRIPT_CHECKPOINT"
   },
-  "fresh_execution_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_STRPRINTER_V34_SUCCESSOR_EXECUTION_20261011_V1.json",
+  "fresh_execution_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_HIGHLEVEL_PROFILE_V35_SUCCESSOR_EXECUTION_20261011_V1.json",
   "next_frozen_qualification": {
-    "id": "QUAL_SUCCESSOR_NEXT40_20261011_V1",
-    "cases": 11040,
-    "seed": 2377298925,
-    "seed_derivation": "FIRST_32_BITS_SHA256_OF_QUAL_SUCCESSOR_NEXT40_20261011_V1_PIPE_V34_MANIFEST_IDENTITY",
-    "per_operation_budget": 960,
-    "corpus_sha256": "11dd26dc5a271fc77bdb3c2659d52b86599a98fd6a736f0d20d10532d2174694",
+    "id": "QUAL_SUCCESSOR_NEXT41_20261011_V1",
+    "cases": 11270,
+    "seed": 3341058422,
+    "seed_derivation": "FIRST_32_BITS_SHA256_OF_QUAL_SUCCESSOR_NEXT41_20261011_V1_PIPE_V35_MANIFEST_IDENTITY",
+    "per_operation_budget": 980,
+    "corpus_sha256": "7d69f6b15c39ccee83d19bc44a684d8580fbd7a2f7c792f272dab7e54c2a7c68",
     "generator": "canonical/research/bytes/tools/generate_qualification_v1.py",
     "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT",
     "spent": false,
-    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT40_20261011_V1.jsonl",
-    "library_file_id": "libfile_500c6a5c501c81918a218b6bca0a97ca"
+    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT41_20261011_V1.jsonl",
+    "library_file_id": "libfile_d7c662929c948191af64d6b56413c755"
   },
   "durable_artifact_persistence": {
     "candidate_manifest_and_measurements": "PERSISTED_IN_CANONICAL_GITHUB_EVIDENCE",
     "predecessor_reconstruction": "canonical/research/bytes/tools/conservative_strprinter_prune_v34.py",
+    "transform": "canonical/research/bytes/tools/conservative_highlevel_profile_prune_v35.py",
     "exact_route": "canonical/research/bytes/tools/exact_symbolic_route_v1.py",
     "qualification_generator": "canonical/research/bytes/tools/generate_qualification_v1.py",
     "library_binary_status": "PERSISTED_IN_CHATGPT_LIBRARY",
-    "library_file_id": "libfile_6af8e71ce8ec81919603b3d50a420c9b",
-    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V34_SUCCESSOR_20261010_V1.tar.xz",
-    "library_binary_bytes": 276224,
-    "library_binary_sha256": "aab185a2d2039b81dfa831813c36006fbb68221e5bc376e370867135b7542543",
-    "next_frozen_corpus_library_file_id": "libfile_500c6a5c501c81918a218b6bca0a97ca",
-    "rule": "GitHub evidence, exact V34 archive, and frozen NEXT40 corpus are durable; capability promotion credit remains zero."
+    "library_file_id": "libfile_9df9264dd54c819197ab41b479ecde06",
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V35_SUCCESSOR_20261011_V1.tar.xz",
+    "library_binary_bytes": 278232,
+    "library_binary_sha256": "0071ecf92b42dfdb90d566e7e5089de415b22b5b448b0134020e175dc2c84873",
+    "next_frozen_corpus_library_file_id": "libfile_d7c662929c948191af64d6b56413c755",
+    "rule": "GitHub evidence, exact V35 archive, and frozen NEXT41 corpus are durable; capability promotion credit remains zero."
   },
   "predecessor_fresh_execution_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_RECOVERY_EXECUTION_20261010_V1.json",
   "reserved_predecessor_qualification_qual8": {
@@ -118,13 +121,13 @@
   },
   "previous_fresh_execution_evidence": "canonical/evidence/BYTES_V33_POINTER_20261010.txt",
   "spent_successor_qualification": {
-    "id": "QUAL_SUCCESSOR_NEXT39_20261010_V1",
-    "cases": 10810,
-    "corpus_sha256": "1f86166f00a99a77e409f31fdd14448143bcf7767f4ed2eee7e7b5e025c6bf9b",
-    "candidate_result": "10810/10810",
-    "clean_room_replay": "10810/10810",
-    "archive_replay": "10810/10810",
-    "second_fresh_extraction_replay": "10810/10810",
+    "id": "QUAL_SUCCESSOR_NEXT40_20261011_V1",
+    "cases": 11040,
+    "corpus_sha256": "11dd26dc5a271fc77bdb3c2659d52b86599a98fd6a736f0d20d10532d2174694",
+    "candidate_result": "11040/11040",
+    "clean_room_replay": "11040/11040",
+    "archive_replay": "11040/11040",
+    "failures": 0,
     "external_second_carrier_verified": false,
     "spent": true
   },
