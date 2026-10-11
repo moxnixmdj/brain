@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_EXTERNAL_MODEL_COGNITION_QUARANTINE_20261011_V1",
+  "date": "2026-10-11",
+  "status": "ACTIVE_PERMANENT_QUARANTINE__MODEL_ASSISTED_OSWORLD_ROUTES_NONCREDITABLE",
+  "target_predicate": "OSWORLD_2_1_PARTIAL_GE_81_8",
+  "authority": [
+    "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md"
+  ],
+  "quarantined_routes": [
+    {
+      "path": "canonical/runtime/osworld_v21_local_qwen_policy_v1.py",
+      "role": "GENERAL_PURPOSE_LOCAL_QWEN_PLANNER",
+      "disposition": "DIAGNOSTIC_ONLY__ZERO_BRAIN_CREDIT"
+    },
+    {
+      "path": "canonical/runtime/osworld_v21_qwen35_planner_v1.py",
+      "role": "GENERAL_PURPOSE_LOCAL_QWEN_PLANNER",
+      "disposition": "DIAGNOSTIC_ONLY__ZERO_BRAIN_CREDIT"
+    }
+  ],
+  "prohibited_equivalences": [
+    "LOCAL_OPEN_WEIGHT_MODEL_COGNITION_EQUALS_BRAIN_COGNITION",
+    "BRAIN_WRAPPER_PLUS_LOCAL_QWEN_EQUALS_BRAIN_OWNED_OSWORLD_POLICY",
+    "MODEL_ASSISTED_OSWORLD_SCORE_EQUALS_BRAIN_OSWORLD_SCORE"
+  ],
+  "credited_subject": {
+    "path": "canonical/runtime/osworld_v21_brain_subject_v1.py",
+    "subject_id": "brain-osworld-v21-model-independent-state-first-v1",
+    "general_purpose_model_dependency": false
+  },
+  "allowed_components": [
+    "DETERMINISTIC_BROWSER_STATE_OPERATIONS",
+    "DECLARATIVE_GUEST_STATE_OPERATIONS",
+    "TYPED_GUI_ACTION_COMPILER",
+    "POSITIONED_OCR_IF_SEPARATELY_ADMISSIBLE_AS_NARROW_PERCEPTION_MECHANISM",
+    "DETERMINISTIC_TEXT_GROUNDING",
+    "DETERMINISTIC_INSTRUCTION_TO_ACTION_POLICY"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_CURRENT_MODEL_INDEPENDENT_SUBJECT_SCORES_81_8",
+    "NO_CLAIM_QWEN_ASSISTED_RUNS_CAN_EARN_BRAIN_BENCHMARK_CREDIT",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
