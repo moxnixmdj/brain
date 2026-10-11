@@ -85,9 +85,21 @@ def _relation_capture(patterns: Sequence[re.Pattern[str]], evidence: str) -> lis
     return out
 
 
+_PERSON_VALUE = (
+    r"(?:(?:Dr|Prof|Professor|Sir|Dame)\.\s+)?"
+    r"[A-Z][\w'’.-]+(?:\s+[A-Z][\w'’.-]+){1,5}"
+)
 _PERSON_PATTERNS = (
-    re.compile(r"\b(?:discovered|invented|developed|introduced|proposed|founded|identified)\s+by\s+(.+?)(?=[.;]|$)", re.I),
-    re.compile(r"\b(?:discoverer|inventor|developer|founder|author)\s+(?:was|is)\s+(.+?)(?=[.;]|$)", re.I),
+    re.compile(
+        r"\b(?:discovered|invented|developed|introduced|proposed|founded|identified)"
+        r"\s+by\s+(" + _PERSON_VALUE + r")(?=\s*(?:[.;]|$))",
+        re.I,
+    ),
+    re.compile(
+        r"\b(?:discoverer|inventor|developer|founder|author)\s+(?:was|is)\s+"
+        r"(" + _PERSON_VALUE + r")(?=\s*(?:[.;]|$))",
+        re.I,
+    ),
 )
 _LOCATION_PATTERNS = (
     re.compile(r"\b(?:is|was|are|were)\s+located\s+in\s+(.+?)(?=[.;]|$)", re.I),
@@ -159,8 +171,10 @@ def _extract_boolean(evidence: str, focus: Sequence[str]) -> list[str]:
 def _extract_explanation(evidence: str) -> list[str]:
     out = []
     for m in re.finditer(r"\b(because\s+.+?)(?=[.;]|$)", evidence, re.I):
-        x = _clean_phrase(m.group(1))
-        if x and x.casefold().startswith("because "):
+        # The regex already delimits the causal clause. Do not pass it through
+        # _clean_phrase(), whose generic boundary list includes "because".
+        x = _canon(m.group(1)).strip(" ,;:.()[]{}")
+        if x and x.casefold().startswith("because ") and len(x) <= 240:
             out.append(x)
     return list(dict.fromkeys(out))
 
