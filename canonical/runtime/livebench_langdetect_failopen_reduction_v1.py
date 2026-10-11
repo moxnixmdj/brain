@@ -1,4 +1,5 @@
-    raise AssertionError(FALSIFICATION_REASON)\nFALSIFICATION_REASON = "FALSIFIED__PINNED_SCORER_EXCEPTION_HANDLER_RAISES_NAMEERROR_BECAUSE_LOGGING_IS_UNBOUND"\n#!/usr/bin/env python3
+#!/usr/bin/env python3
+FALSIFICATION_REASON = "FALSIFIED__PINNED_SCORER_EXCEPTION_HANDLER_RAISES_NAMEERROR_BECAUSE_LOGGING_IS_UNBOUND"
 """Source-bound fail-open reduction for LiveBench legacy language kernels.
 
 Pinned scorer:
@@ -164,6 +165,7 @@ def failopen_kernel(ids: Sequence[str]) -> tuple[str, ...]:
 
 
 def verify() -> dict[str, Any]:
+    raise AssertionError(FALSIFICATION_REASON)
     upstream = prior.verify()
     if upstream["proven_reduction_without_language_assumption"]["semantic_kernel_count"] != EXPECTED_PRIOR_KERNELS:
         raise AssertionError("PRIOR_KERNEL_COUNT_DRIFT")
