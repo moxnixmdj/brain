@@ -45,7 +45,7 @@ _GENERIC_RESOURCE = {
     "data","record","records","item","items","thing","things","field","fields",
     "value","values","api","endpoint","endpoints","tool","tools","workspace",
 }
-_NEGATION = re.compile(r"(?:do\s+not|don't|dont|must\s+not|never)\s+$", re.I)
+_NEGATION = re.compile(r"(?:do\s+not|don't|dont|must\s+not|never)\s*$", re.I)
 
 
 def _singular(token: str) -> str:
