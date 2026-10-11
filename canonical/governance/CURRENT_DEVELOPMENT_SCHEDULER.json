@@ -27,8 +27,8 @@
   "planning_entrypoint": "canonical.runtime.capability_first_scheduler_v1.rank_work",
   "current_live_work_frontier": {
     "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
-    "git_blob_sha": "f038f9be052381ff355ef0aa60b6231db932b9d5",
-    "status": "CURRENT_PROFESSIONAL_V10_PROPERTY_TRUTH_24_OF_24__FULL_PRIVATE_REGRESSION_GATE_OPEN__EXECUTION_CARRIER_BLOCKED_ZERO_STEPS__PARALLEL_FRONTIER_CONTINUES__ZERO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT",
+    "git_blob_sha": "ca65fd89a12c89b592944b11507a3bc00ec5340c",
+    "status": "CURRENT_PROFESSIONAL_V10_PROPERTY_TRUTH_24_OF_24__FULL_PRIVATE_REGRESSION_GATE_OPEN__EXECUTION_CARRIER_BLOCKED_ZERO_STEPS__PARALLEL_FRONTIER_CONTINUES__BYTES_V32__ZERO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT",
     "professional_verified_root_subject_binding_count": 12,
     "professional_same_subject_composition_admissible": true,
     "professional_whole_leaf_scope_complete_count": 24,
@@ -38,7 +38,8 @@
     "binding": "MUTABLE_CURRENT_PATH_IDENTITY__SUPPORTED_MOVING_SOURCE_PROJECTIONS_REFRESHED_IN_MEMORY__OTHER_SOURCE_DRIFT_FAILS_CLOSED",
     "observed_blob_is_immutable_authority": false,
     "snapshot_fields_are_non_authoritative_for_supported_dynamic_families": true,
-    "professional_verified_semantic_leaf_count": 12
+    "professional_verified_semantic_leaf_count": 12,
+    "regression_carrier_wake_required": true
   },
   "live_score_contract": {
     "path": "canonical/governance/LIVE_WORK_SCORE_CALIBRATION_CONTRACT_20261010_V1.json",
@@ -126,7 +127,7 @@
     "escape_active_gap_a_count": 12,
     "escape_active_gap_b_count": 0,
     "escape_parked_unresolved_count": 1,
-    "bytes_current_frontier": "V31__1909906_RAW_PYTHON_BYTES",
+    "bytes_current_frontier": "V32__1844477_RAW_PYTHON_BYTES",
     "professional_execution_property_truth_closed_count": 12,
     "professional_semantic_property_truth_closed_count": 12,
     "professional_open_execution_leaf_count": 0,
@@ -180,13 +181,24 @@
     "c8_nonvacuity_transport_proved": false,
     "v9_executable_semantic_authority_verified": true,
     "real_v9_policy_cover_bound": false,
-    "exact_next": "REAL_V9_POLICY_COVER__EXECUTABLE_SEMANTIC_WITNESS__C8_CC_R3__R4",
+    "exact_next": "NONE__HISTORICAL_V9_EDGE_SUPERSEDED_BY_V10_24_OF_24_PROPERTY_TRUTH__DO_NOT_REOPEN_WITHOUT_EFFECT_DISTINGUISHING_COUNTEREVIDENCE",
     "wake_new_primitive_only_on": "EFFECT_DISTINGUISHING_COUNTEREXAMPLE_PLUS_VERIFIED_REUSE_EXHAUSTION",
-    "terminal_credit_delta": 0
+    "terminal_credit_delta": 0,
+    "historical_only_for_current_scheduling": true,
+    "current_property_truth_status": "SUPERSEDED_BY_V10_24_OF_24_PROPERTY_TRUTH"
   },
   "professional_regression_carrier_diagnosis": {
     "path": "canonical/verification/FULL_PRIVATE_CURRENT_MAIN_REGRESSION_CARRIER_DIAGNOSIS_20261011_V1.json",
     "git_blob_sha": "8dec86c9a39fd009ee25b8ca3b8ff7f905474f10",
     "status": "EXECUTION_CARRIER_BLOCKED__FOUR_ZERO_STEP_ACTIONS_FAILURES__NO_REGRESSION_RESULT__GATE_OPEN__ZERO_CREDIT"
+  },
+  "live_frontier_residual_currentness_20261011": {
+    "status": "RECONCILED__SOLVED_PROFESSIONAL_DEPLETION_REMOVED__ASSURANCE_SINGLE_GATE__BYTES_V32__NO_EXECUTION_OR_PROMOTION_AUTHORITY",
+    "path": "canonical/verification/LIVE_FRONTIER_SCHEDULING_CURRENTNESS_RECONCILIATION_20261011_V2.json",
+    "source_main_commit": "31f82e6ee004cbf2f08a9c9b5ff6c6f45d2fed06",
+    "live_frontier_git_blob_sha": "ca65fd89a12c89b592944b11507a3bc00ec5340c",
+    "execution_authority": false,
+    "promotion_authority": false,
+    "terminal_authority": false
   }
 }
