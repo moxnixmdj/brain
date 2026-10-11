@@ -1,5 +1,5 @@
 import unittest
-from execution_guard.v22_prewrite_admission import ACTIVE_POINTER_PATH, admission_errors
+from execution_guard.v22_prewrite_admission import ACTIVE_POINTER_PATH, admission_errors, referenced_receipt_paths
 
 POINTER={"exact_state":{"accepted_families":5,"open_families":14,"proved_atomic":14,"unresolved_atomic":24,"root1_positive_gap_count":0,"root2_touching_count":18,"root3_touching_count":9,"meta_envelope_open_count":8,"total_open_truth_obligations":32,"terminal":False},"current_shared_causal_interfaces":["EXTERNAL_RESULT_OR_ACCESS","UNIVERSAL_SCOPE_AND_COMPOSITION","BEHAVIORAL_QUOTIENT_AND_TRANSFER"],"dormant_wake_only":["HLE_GRADER_RELATION"],"meta_dormant_wake_only":["CREATIVE_DIAGRAM_SURFACE_NONINFERIOR"]}
 PTR="1"*40; COUNTER="2"*40; WAKE="3"*40; PROVISION="4"*40; EXHAUST="5"*40
@@ -151,6 +151,23 @@ class Tests(unittest.TestCase):
                 a,POINTER,pointer_blob_sha=PTR,action_kind="RECONCILE_FRONTIER",
                 receipt_blobs={"canonical/verification/counter.json":COUNTER},
             ),
+        )
+
+    def test_receipt_discovery_includes_benchmark_receipts(self):
+        a=external_benchmark()
+        info=a["benchmark_information_equivalence"]
+        info["internal_certificate_search_state"]="EXHAUSTED_OR_FALSIFIED"
+        info["certificate_exhaustion_receipt"]={"path":"canonical/verification/exhaustion.json","git_blob_sha":EXHAUST}
+        info["self_service_access_claimed"]=True
+        info["self_service_provisioning_verified"]=True
+        info["self_service_provisioning_receipt"]={"path":"canonical/verification/provider-provision.json","git_blob_sha":PROVISION}
+        self.assertEqual(
+            referenced_receipt_paths(a),
+            [
+                "canonical/verification/counter.json",
+                "canonical/verification/exhaustion.json",
+                "canonical/verification/provider-provision.json",
+            ],
         )
 
 if __name__=="__main__": unittest.main(verbosity=2)
