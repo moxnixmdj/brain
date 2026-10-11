@@ -1,0 +1,81 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_STAGE1_FRESH_SUBMISSION_RECEIPT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "FROZEN_UNSCORED_BRAIN_SUBMISSION__FORMAT_VERIFIED__ZERO_BENCHMARK_CREDIT",
+  "benchmark": "GDPval-AA v2.1",
+  "task": {
+    "row_idx": 5,
+    "task_id": "f84ea6ac-8f9f-428c-b96c-d0884e30f7c7",
+    "sector": "Government",
+    "occupation": "Administrative Services Managers",
+    "requested_artifact": "ONE_PAGE_WORD_RESEARCH_SUMMARY_TABLE",
+    "reference_file_count": 0
+  },
+  "freshness": {
+    "precommit_branch": "gdpval/stage1-fresh-submission-20261011-v1",
+    "precommit_commit": "6c9055f3d021bb9e01e4eca899844cbb475c1d3a",
+    "field_firewall_commit": "9a76330fe676877156d5d7e7e8cae078563c75cf",
+    "human_gold_read_before_freeze": false,
+    "third_party_model_submission_read_before_freeze": false,
+    "judge_feedback_read_before_freeze": false,
+    "task_specific_rubric_read_before_freeze": false
+  },
+  "brain_execution_profile": {
+    "path": "canonical/capabilities/internalized/professional_work/stirrup_247f24d/BRAIN_EXECUTION_PROFILE_V1.json",
+    "candidate_id": "OPUS55_PROFESSIONAL_KNOWLEDGE_WORK_STIRRUP_CONFIGURATION_V1",
+    "cognition_surface": "CURRENT_CHATGPT_GPT_5_6_SOL_SESSION",
+    "incremental_spend_usd": 0
+  },
+  "research_sources": [
+    {
+      "study": "Changing tasks and changing public servants? The digitalisation and automation of public administrative work",
+      "authors": "Philipp Graefe; Justine Marienfeldt; Liz Marla Wehmeier; Sabine Kuhlmann",
+      "publication_year": 2024,
+      "public_source": "https://doi.org/10.1177/13837605241289773"
+    },
+    {
+      "study": "Automation in the future of public sector employment: the case of Brazilian Federal Government",
+      "authors": "Willian Boschetti Adamczyk; Leonardo Monasterio; Adelar Fochezatto",
+      "publication_year": 2021,
+      "public_source": "https://repositorio.pucrs.br/dspace/handle/10923/20872"
+    },
+    {
+      "study": "Artificial Intelligence (AI) and Automation in Administrative Procedures: Potentials, Limitations, and Framework Conditions",
+      "authors": "Peter Parycek; Verena Schmid; Anna-Sophie Novak",
+      "publication_year": 2023,
+      "public_source": "https://doi.org/10.1007/s13132-023-01433-3"
+    },
+    {
+      "study": "Exploring artificial intelligence adoption in public organizations: a comparative case study",
+      "authors": "Oliver Neumann; Katharina Guirguis; Reto Steiner",
+      "publication_year": 2022,
+      "public_source": "https://doi.org/10.1080/14719037.2022.2048685"
+    },
+    {
+      "study": "Public value creation and robotic process automation: normative, descriptive and prescriptive issues in municipal administration",
+      "authors": "Joergen Johansson; Michel Thomsen; Maria Akesson",
+      "publication_year": 2022,
+      "public_source": "https://doi.org/10.1108/TG-11-2021-0193"
+    }
+  ],
+  "deliverable": {
+    "file_name": "GDPval_f84ea6ac_research_summary.docx",
+    "sha256": "a0b9b445c50394e43ea4c2b41cdcfb2b0ffa9212b5301dd5b82a44b8c94bf56a",
+    "library_path": "/Project Brain/GDPval/stage1/f84ea6ac-8f9f-428c-b96c-d0884e30f7c7/GDPval_f84ea6ac_research_summary.docx",
+    "library_file_id": "libfile_df35ff3645148191afee99163a044e06"
+  },
+  "format_verification": {
+    "renderer": "/home/oai/skills/docx/render_docx.py",
+    "rendered_page_count": 1,
+    "visual_inspection": "PASS__NO_CLIPPING_OVERLAP_OR_BROKEN_TABLES",
+    "render_pdf_sha256": "f06d30d1fdd3a7b0c4afe84576f023a8b6e3ea2d83bf670ef8da1c4ba08bdb79"
+  },
+  "hard_nonclaims": [
+    "NO_ARTIFICIAL_ANALYSIS_SCORE",
+    "NO_OWNER_PAIRWISE_JUDGMENT",
+    "NO_RUBRIC_SCORE",
+    "NO_CLAIM_THIS_ONE_TASK_PROVES_GDPVAL_GE_1846",
+    "NO_BENCHMARK_ACCEPTANCE_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ]
+}
