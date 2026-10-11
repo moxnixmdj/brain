@@ -35,9 +35,29 @@ assert b["runtime_cognition_credit_guard_self_improvement_binding_required"] is 
 assert b["runtime_cognition_credit_guard_terminal_closure_binding_required"] is True
 assert b["runtime_cognition_credit_guard_ownership_promotion_binding_required"] is True
 assert b["runtime_cognition_credit_guard_final_cleanroom_binding_required"] is True
+assert b["runtime_cognition_credit_guard_global_ownership_binding_required"] is True
+assert b["runtime_cognition_credit_guard_kstar_promotion_binding_required"] is True
 assert b["runtime_cognition_credit_guard_path"]=="canonical/runtime/runtime_cognition_credit_guard_v1.py"
 assert b["runtime_cognition_credit_guard_verification_path"]=="canonical/verification/RUNTIME_COGNITION_CREDIT_GUARD_REMOTE_VERIFY_20261011_V1.json"
 assert b["local_runner_for_cognition_governance_forbidden"] is True
+cf=p["current_frontier"]
+assert cf["frontier_capability_mission_lock_path"]=="canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md"
+assert cf["white_box_capability_harvest"]["law_path"]=="canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md"
+assert cf["white_box_capability_harvest"]["capsule_schema_path"]=="canonical/governance/WHITE_BOX_CAPABILITY_CAPSULE_SCHEMA_V3.json"
+eg=p["execution_governance"]
+assert eg["capability_realization_mission_lock"]=="canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md"
+assert eg["frontier_capability_mission_lock"]=="canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md"
+assert eg["white_box_capability_harvesting_law"]=="canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md"
+assert eg["white_box_capability_capsule_schema"]=="canonical/governance/WHITE_BOX_CAPABILITY_CAPSULE_SCHEMA_V3.json"
+assert "MODEL_BASED" not in eg["frontier_comparison_rule"]
+ml=p["mission_lock"]
+assert ml["authority_path"]=="canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md"
+assert ml["model_substrate_law"]=="canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md"
+assert ml["capability_transfer_boundary_law"]=="canonical/laws/CAPABILITY_TRANSFER_VS_COGNITION_OUTSOURCING_LAW_V1.md"
+assert ml["external_contribution_boundary_law"]=="canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md"
+assert ml["white_box_harvesting_law"]=="canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md"
+assert ml["capability_capsule_schema"]=="canonical/governance/WHITE_BOX_CAPABILITY_CAPSULE_SCHEMA_V3.json"
+assert ml["general_computation_substrate"]=="NON_MODEL_GENERAL_COMPUTATION_MAY_BE_EXTERNAL__TARGET_SOLVING_MODEL_COGNITION_FORBIDDEN_IN_CREDITED_PRODUCER_PATH"
 guard=(R/b["runtime_cognition_credit_guard_path"]).read_text(encoding="utf-8")
 for path, minimum in (
     ("canonical/runtime/live_integrated_brain_v1.py",2),
@@ -45,6 +65,8 @@ for path, minimum in (
     ("canonical/runtime/terminal_closure_reducer.py",2),
     ("canonical/runtime/ownership_promotion_compiler_v1.py",1),
     ("canonical/runtime/final_terminal_cleanroom_gate_v1.py",1),
+    ("canonical/runtime/terminal_global_ownership_postconditions_reducer_v1.py",1),
+    ("canonical/runtime/terminal_kstar_promotion_bridge_v1.py",1),
 ):
     source=(R/path).read_text(encoding="utf-8")
     assert "runtime_cognition_credit_guard_v1" in source
