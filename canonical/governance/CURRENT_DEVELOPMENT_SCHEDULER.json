@@ -11,7 +11,21 @@
   "r2_mechanism_policy": {
     "path": "canonical/governance/R2_MECHANISM_CLOSURE_OPEN_WORLD_FRONTIER_POLICY_20261010_V4.json",
     "status": "GENERAL_R2_MECHANISM_CLOSED__OPEN_WORLD_EVIDENCE_FRONTIER_WAKE_GATED__POLICY_COVER_SAFETY_CONTROLLER_REBOUND",
-    "scheduler_rule": "OPEN_WORLD_EVIDENCE_FRONTIER_IS_DEMOTED_UNLESS_BOUND_TO_TASK_LOCAL_COUNTEREXAMPLE_OR_VERIFIED_CAPABILITY_DEFECT"
+    "scheduler_rule": "OPEN_WORLD_EVIDENCE_FRONTIER_IS_DEMOTED_UNLESS_BOUND_TO_TASK_LOCAL_COUNTEREXAMPLE_OR_VERIFIED_CAPABILITY_DEFECT",
+    "currentness_state": "FAIL_CLOSED_IMMUTABLE_SOURCE_DRIFT",
+    "drifted_sources": [
+      {
+        "path": "canonical/runtime/general_adequate_decision_controller_v1.py",
+        "policy_git_blob_sha": "368c6ac07e8feaf1a0c880de5388b618def912e2",
+        "current_git_blob_sha": "b5c609eb902cd0ea21d81710588dd538aa05cb4f"
+      },
+      {
+        "path": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
+        "policy_git_blob_sha": "cabe3bd1ec3748a595f3a959718c38accdacfb2f",
+        "current_git_blob_sha": "34d62b109b99f38e62995544871460b266d2c7df"
+      }
+    ],
+    "operational_rule": "SCALAR_FALLBACK_INELIGIBLE_UNTIL_R2_POLICY_SOURCE_LOCKS_ARE_REQUALIFIED__PRIMARY_POST_COMPOSITION_V16_ACTIVE"
   },
   "shared_cause_residual_ledger": {
     "path": "canonical/governance/CURRENT_R2_SHARED_CAUSE_RESIDUAL_LEDGER.json",
@@ -222,5 +236,6 @@
     "path": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261011_V16.json",
     "git_blob_sha": "d30659e4b3385f299b98a5862a0e2f659c890c0c",
     "full_execution_authority": false
-  }
+  },
+  "scalar_fallback_state": "BLOCKED_R2_POLICY_SOURCE_LOCK_DRIFT__PRIMARY_V16_ACTIVE"
 }
