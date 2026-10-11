@@ -1,0 +1,119 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_LIBMPF_SEMANTIC_COMPACT_V62_SUCCESSOR_EXECUTION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "VERIFIED_RESEARCH_FRONTIER__SEMANTIC_EQUIVALENT_COMPRESSION__SPENT_NEXT68_AND_FRESH_NEXT69_PASS__NEXT70_FROZEN_UNSPENT__CURRENT_POINTER_ELIGIBLE__ZERO_PROMOTION_CREDIT",
+  "subject": {
+    "predecessor": "canonical/evidence/BYTES_EXACT_SYMBOLIC_LIBMPF_SEMANTIC_COMPACT_V61_SUCCESSOR_EXECUTION_20261011_V1.json",
+    "predecessor_manifest_sha256": "fd5c28fdb77149e30887c68e498580f6f630aba8857ae98e1f53975489d9b6f5",
+    "transform": "canonical/research/bytes/tools/conservative_libmpf_semantic_compact_v62.py",
+    "manifest_sha256": "97731686624e02e2c7de4286bf0c9c41a43f58ae54d23a4df05bd1a5e2379831",
+    "python_files": 277,
+    "raw_python_source_bytes": 1712634,
+    "B_exec_raw_python_source_bytes": 1715394,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "raw_delta_vs_v61_bytes": -224,
+    "B_exec_delta_vs_v61_bytes": -224
+  },
+  "selection": {
+    "id": "LIBMPF_SECOND_SIX_FUNCTION_SEMANTIC_COMPRESSION_V62",
+    "method": "ALGEBRAIC_FULL_SEMANTICS_COMPRESSION__NO_INTENTIONAL_BRANCH_REMOVAL",
+    "changed_body_count": 6,
+    "bodies": [
+      "from_pickable",
+      "from_int",
+      "mpf_neg",
+      "mpf_sign",
+      "mpf_lt",
+      "mpf_gt"
+    ],
+    "deltas": [
+      [
+        "from_pickable",
+        -23
+      ],
+      [
+        "from_int",
+        -27
+      ],
+      [
+        "mpf_neg",
+        -71
+      ],
+      [
+        "mpf_sign",
+        -73
+      ],
+      [
+        "mpf_lt",
+        -15
+      ],
+      [
+        "mpf_gt",
+        -15
+      ]
+    ],
+    "exact_base_guard": true,
+    "exact_target_guard": true
+  },
+  "qualification": {
+    "spent_NEXT68": {
+      "id": "QUAL_SUCCESSOR_NEXT68_20261011_V1",
+      "cases": 17480,
+      "corpus_sha256": "ee4eb1b62ce24c1c31e39c19585ce5a04e01fc6099b88c65a7530840a6c15e70",
+      "candidate": "17480/17480",
+      "failures": 0,
+      "spent": true
+    },
+    "fresh_NEXT69": {
+      "id": "QUAL_SUCCESSOR_NEXT69_20261011_V1",
+      "cases": 17710,
+      "corpus_sha256": "4021417dacd37954e8890c6d90bf82b3203d1e2c2ed5dc65bd4bb2d337afb7e7",
+      "candidate": "17710/17710",
+      "failures": 0,
+      "spent": true
+    }
+  },
+  "reproducibility": {
+    "clean_room_v61_to_v62_reconstruction": "PASS__278_OF_278_DURABLE_FILES_BYTE_IDENTICAL",
+    "regenerated_manifest_sha256": "97731686624e02e2c7de4286bf0c9c41a43f58ae54d23a4df05bd1a5e2379831",
+    "external_second_carrier_verified": false
+  },
+  "durable_archive": {
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V62_SUCCESSOR_20261011_V1.tar.xz",
+    "library_file_id": "libfile_8f81f8ebafd0819195255c8987816dda",
+    "bytes": 267236,
+    "sha256": "f04808f95ed72c9bf81e8e800b15943c8d0090824a51bcbd80a88992d81c1128"
+  },
+  "next_frozen": {
+    "id": "QUAL_SUCCESSOR_NEXT70_20261011_V1",
+    "cases": 17940,
+    "seed": 1056614696,
+    "seed_derivation": "FIRST_32_BITS_SHA256_OF_QUAL_SUCCESSOR_NEXT70_20261011_V1_PIPE_V62_MANIFEST_IDENTITY",
+    "seed_material": "QUAL_SUCCESSOR_NEXT70_20261011_V1|97731686624e02e2c7de4286bf0c9c41a43f58ae54d23a4df05bd1a5e2379831",
+    "per_operation_budget": 1560,
+    "corpus_sha256": "d6b932bdd316e19bbd1503bd65d665519677ee286d5ab09ebd1cf46322ce02e5",
+    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT70_20261011_V1.jsonl",
+    "library_file_id": "libfile_bd13488902dc81918413127d6ccfddf9",
+    "generation_provenance": "STOCK_SYMPY_1_14_0_MPMATH_1_3_0__SERIAL_RNG_PARAMETER_STREAM__PARALLEL_EXPECTED_OUTPUT_EVALUATION__CANONICAL_ROW_REASSEMBLY",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT",
+    "spent": false
+  },
+  "truth_boundary": [
+    "MEASURED: V62 is 1,712,634 raw Python bytes, 224 bytes below V61.",
+    "MEASURED: V62 passes spent NEXT68 17,480/17,480 with zero failures.",
+    "MEASURED: previously untouched NEXT69 passes V62 17,710/17,710 with zero failures.",
+    "MEASURED: clean-room V61-to-V62 reconstruction is 278/278 durable files byte-identical.",
+    "MEASURED: NEXT70 is durably frozen at 17,940 cases and remains unspent.",
+    "INFERRED: the six rewrites are algebraic compressions intended to preserve previous semantics; finite qualification is not a universal proof over arbitrary Python object classes.",
+    "NOT PROVED: universal SymPy/mpmath equivalence outside the bounded exact-symbolic route.",
+    "NOT PROVED: external second-carrier replay.",
+    "NOT PROMOTED: no capability, acceptance, ownership, quality, or terminal credit."
+  ],
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "quality_credit_delta": 0,
+  "promotion_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
