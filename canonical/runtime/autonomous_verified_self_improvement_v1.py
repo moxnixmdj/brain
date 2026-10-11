@@ -30,6 +30,9 @@ from pathlib import Path
 from typing import Any, Mapping, Sequence
 
 from canonical.runtime.capability_first_scheduler_v1 import update_pareto_frontier
+from canonical.runtime.capability_transfer_ownership_gate_v1 import (
+    evaluate as evaluate_capability_transfer,
+)
 from canonical.runtime.executable_skill_program_v7 import (
     ExecutableSkillProgramError,
     induce_candidate,
@@ -501,6 +504,76 @@ def next_improvement_action(
     return _next_improvement_from_state(load_state(state_path))
 
 
+def bind_capability_transfer_record(
+    candidate_sha256: str,
+    transfer_record: Mapping[str, Any],
+    *,
+    state_path: str | Path = DEFAULT_STATE_PATH,
+) -> dict[str, Any]:
+    """Bind a donor-deletion transfer proof to one exact pending skill candidate."""
+    cid = _s(candidate_sha256)
+    if not cid:
+        raise SelfImprovementError("TRANSFER_CANDIDATE_SHA_REQUIRED")
+    if not isinstance(transfer_record, Mapping):
+        raise SelfImprovementError("CAPABILITY_TRANSFER_RECORD_NOT_OBJECT")
+    record = deepcopy(dict(transfer_record))
+    if _s(record.get("brain_candidate_sha256")) != cid:
+        raise SelfImprovementError("CAPABILITY_TRANSFER_RECORD_CANDIDATE_MISMATCH")
+    _validate_retry_value(record, path="capability_transfer_record")
+    verdict = evaluate_capability_transfer(record)
+    if verdict.get("pass") is not True:
+        raise SelfImprovementError(
+            "CAPABILITY_TRANSFER_GATE_FAILED:"
+            + ",".join(str(x) for x in (verdict.get("errors") or []))
+        )
+
+    state = load_state(state_path)
+    matches = []
+    queue = state.get("improvement_queue", {})
+    if isinstance(queue, Mapping):
+        for wid, row in queue.items():
+            if not isinstance(row, dict) or row.get("status") != "PENDING":
+                continue
+            if row.get("kind") != "VERIFY_SKILL_CANDIDATE":
+                continue
+            identity = row.get("identity")
+            payload = row.get("payload")
+            if (
+                isinstance(identity, Mapping)
+                and _s(identity.get("candidate_sha256")) == cid
+                and isinstance(payload, dict)
+            ):
+                matches.append((str(wid), row, payload))
+    if len(matches) != 1:
+        raise SelfImprovementError(
+            "CAPABILITY_TRANSFER_PENDING_CANDIDATE_CARDINALITY:" + str(len(matches))
+        )
+
+    wid, row, payload = matches[0]
+    provenance = payload.get("acquisition_donor_provenance")
+    if not isinstance(provenance, Mapping) or provenance.get("used") is not True:
+        raise SelfImprovementError("CAPABILITY_TRANSFER_RECORD_WITHOUT_DONOR_DERIVATION")
+
+    payload["capability_transfer_record"] = record
+    payload["capability_transfer_gate_verdict"] = deepcopy(dict(verdict))
+    row["observations"] = int(row.get("observations", 0)) + 1
+    row["last_attempt_observations"] = None
+    row["last_attempt_status"] = "TRANSFER_GATE_BOUND"
+    row["last_attempt_reason"] = None
+    _refresh_stats(state)
+    _write_state(state, state_path)
+    return {
+        "schema": SCHEMA,
+        "status": "CAPABILITY_TRANSFER_GATE_BOUND_TO_PENDING_CANDIDATE",
+        "pass": True,
+        "work_id": wid,
+        "candidate_sha256": cid,
+        "transfer_gate": deepcopy(dict(verdict)),
+        "reuse_authority": False,
+        "terminal_authority": False,
+    }
+
+
 def _candidate_from_verified_skill(skill: Mapping[str, Any]) -> dict[str, Any]:
     """Recover the immutable candidate payload underlying a verified skill."""
     if not isinstance(skill, Mapping):
@@ -653,6 +726,31 @@ def advance_verification_queue(
                 requested_relation = "PROVEN_SUPERSET"
                 requested_predicate = VERIFIED_SUPERSET_SCOPE_PREDICATE
 
+        donor_provenance = payload.get("acquisition_donor_provenance")
+        donor_derived = (
+            isinstance(donor_provenance, Mapping)
+            and donor_provenance.get("used") is True
+        )
+        transfer_gate_verdict = payload.get("capability_transfer_gate_verdict")
+        if donor_derived and not (
+            isinstance(transfer_gate_verdict, Mapping)
+            and transfer_gate_verdict.get("pass") is True
+        ):
+            _record_improvement_attempt(
+                work_id,
+                status="BLOCKED__CAPABILITY_TRANSFER_GATE_REQUIRED",
+                reason="DONOR_DERIVED_CANDIDATE_REQUIRES_DONOR_DELETION_AND_POST_REMOVAL_QUALIFICATION",
+                state_path=state_path,
+            )
+            attempted += 1
+            results.append({
+                "work_id": work_id,
+                "kind": kind,
+                "pass": False,
+                "status": "BLOCKED__CAPABILITY_TRANSFER_GATE_REQUIRED",
+            })
+            continue
+
         if not isinstance(candidate, Mapping):
             _record_improvement_attempt(
                 work_id,
@@ -752,6 +850,16 @@ def advance_verification_queue(
                     "skill_candidate": deepcopy(dict(candidate)),
                     "verified_executable_skill": deepcopy(dict(verified)),
                     "verified_skill_reuse_authorized": True,
+                    "acquisition_donor_provenance": (
+                        deepcopy(dict(donor_provenance))
+                        if isinstance(donor_provenance, Mapping)
+                        else None
+                    ),
+                    "capability_transfer_gate_verdict": (
+                        deepcopy(dict(transfer_gate_verdict))
+                        if isinstance(transfer_gate_verdict, Mapping)
+                        else None
+                    ),
                 },
                 state_path=state_path,
                 repo_root=repo_root,
@@ -1382,6 +1490,11 @@ def integrate_solver_output(
                     "source_scopes": _items(skill_candidate.get("source_scopes")),
                     "postconditions": _items(skill_candidate.get("postconditions")),
                     "candidate": deepcopy(dict(skill_candidate)),
+                    "acquisition_donor_provenance": (
+                        deepcopy(dict(out.get("acquisition_donor_provenance")))
+                        if isinstance(out.get("acquisition_donor_provenance"), Mapping)
+                        else None
+                    ),
                 },
             )
     elif out.get("current_episode_verified") is True and not isinstance(skill_candidate, Mapping):
@@ -1403,6 +1516,24 @@ def integrate_solver_output(
                     "minimum_verified_episode_count": 2,
                 },
             )
+
+    donor_provenance = out.get("acquisition_donor_provenance")
+    donor_derived = (
+        isinstance(donor_provenance, Mapping)
+        and donor_provenance.get("used") is True
+    )
+    transfer_gate_verdict = out.get("capability_transfer_gate_verdict")
+    if (
+        out.get("verified_skill_reuse_authorized") is True
+        and donor_derived
+        and not (
+            isinstance(transfer_gate_verdict, Mapping)
+            and transfer_gate_verdict.get("pass") is True
+        )
+    ):
+        raise SelfImprovementError(
+            "DONOR_DERIVED_SKILL_PROMOTION_REQUIRES_CAPABILITY_TRANSFER_GATE_PASS"
+        )
 
     if (
         out.get("verified_skill_reuse_authorized") is True
@@ -1470,6 +1601,16 @@ def integrate_solver_output(
             "pareto_metrics": row,
             "active": bool(skill_admission.get("admitted")),
             "dominated_by": skill_admission.get("dominated_by"),
+            "acquisition_donor_provenance": (
+                deepcopy(dict(donor_provenance))
+                if isinstance(donor_provenance, Mapping)
+                else None
+            ),
+            "capability_transfer_gate_verdict": (
+                deepcopy(dict(transfer_gate_verdict))
+                if isinstance(transfer_gate_verdict, Mapping)
+                else None
+            ),
             "compression": {
                 "source_episode_count": len(_items(verified_skill.get("source_episode_ids"))),
                 "stored_program_step_count": len(list(verified_skill.get("steps") or [])),
