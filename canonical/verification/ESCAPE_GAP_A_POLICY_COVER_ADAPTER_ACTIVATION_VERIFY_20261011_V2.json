@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_ESCAPE_GAP_A_POLICY_COVER_ADAPTER_ACTIVATION_VERIFY_20261011_V2",
+  "date": "2026-10-11",
+  "status": "PASS__EXACT_ACTIVATION_BINDINGS_CURRENT__ZERO_CREDIT",
+  "subject_path": "canonical/governance/ESCAPE_GAP_A_POLICY_COVER_ADAPTER_ACTIVATION_20261011_V2.json",
+  "subject_git_blob_sha": "94eb692a7cbe2754e9dfe25171331c0e2bd2515c",
+  "checks": {
+    "runtime_blob_bound": true,
+    "tests_blob_bound": true,
+    "focused_verification_bound": true,
+    "active_gap_a_count_12": true,
+    "active_gap_b_count_0": true,
+    "parked_tb_exact": true,
+    "zero_credit": true
+  },
+  "pass": true,
+  "independent_verified": true,
+  "exact_byte_bound": true,
+  "independent_verifier_id": "SPRITE_FOCUSED_REPLAY_PLUS_EXACT_BINDING_RECOMPUTE_20261011_V2",
+  "hard_nonclaims": [
+    "NO_REAL_GAP_A_ROW_PROOF",
+    "NO_CC_R3_CLOSURE",
+    "NO_FULL_PRIVATE_CURRENT_MAIN_REGRESSION",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "row_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "promotion_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
