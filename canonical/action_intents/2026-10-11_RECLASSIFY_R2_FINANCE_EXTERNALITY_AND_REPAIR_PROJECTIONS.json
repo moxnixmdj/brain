@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "date": "2026-10-11",
+  "objective": "RECLASSIFY_POST_V91_FINANCE_SEMANTIC_TAIL_FROM_INTERNAL_MECHANISM_DEFICIT_TO_TASK_SPECIFIC_EXTERNAL_OBSERVATION_FRONTIER_AND_REPAIR_STALE_R2_AND_OQ_PROJECTIONS",
+  "load_bearing_primary": {
+    "open_obligation_ids": [
+      "R2_FINANCE_SEMANTIC_ADEQUACY_TAIL_ACCOUNTING",
+      "CURRENT_TERMINAL_R2_PROJECTION",
+      "CURRENT_LIVE_FRONTIER_R2_PROJECTION",
+      "CURRENT_DEVELOPMENT_SCHEDULER_OQ_PARTITION"
+    ],
+    "constructive_gap_for_open_obligation_ids": [],
+    "scope_complete_discharge": true,
+    "expected_obligation_discharge_lcb": "4",
+    "expected_obligation_unlock_lcb": "0",
+    "success_probability_lcb": "1",
+    "wall_clock_cost_ub": "1"
+  },
+  "constraints": [
+    "DO_NOT_CLAIM_OPEN_WORLD_POSITIVE_ACTION_COMPLETENESS",
+    "DO_NOT_CLAIM_GENERIC_PATH_INDEPENDENT_EXECUTION_VERIFIED",
+    "DO_NOT_CLOSE_TASK_SPECIFIC_EXTERNAL_FACT_REQUIREMENTS",
+    "PRESERVE_ABSTAIN_OR_ACQUIRE_FOR_DECISIVE_UNOBSERVABLE_REALITY",
+    "NO_ACCEPTANCE_CAPABILITY_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
