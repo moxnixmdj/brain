@@ -15,8 +15,8 @@ hypergraph=load("canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V1.jso
 ir=compile_ir(registry,evidence,hypergraph)
 assert ir["status"] in {"PASS","PASS_WITH_UNCOVERED_ACTION_TARGETS"}, ir
 assert ir["predicate_count"] == 38, ir
-assert ir["proved_predicate_count"] == 9, ir
-assert ir["unresolved_predicate_count"] == 29, ir
+assert ir["proved_predicate_count"] == 16, ir
+assert ir["unresolved_predicate_count"] == 22, ir
 actions={a["id"]:a for a in ir["actions"]}
 assert actions["RUN_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA"]["available_now"] is False, actions["RUN_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA"]
 assert actions["SEARCH_SCOPE_COMPLETE_STRONGER_PROOFS_FOR_MATCHED_RESIDUAL"]["available_now"] is True, actions["SEARCH_SCOPE_COMPLETE_STRONGER_PROOFS_FOR_MATCHED_RESIDUAL"]
@@ -24,8 +24,8 @@ assert actions["RUN_COMPOSITION_COMPONENT_PROOF_SLICER"]["available_now"] is Tru
 
 cut=cut_evaluate(ir)
 assert cut["status"] == "EXACT_TERMINAL_ACTION_CUT_COMPUTED", cut
-assert cut["unresolved_predicate_count"] == 29, cut
-assert cut["covered_predicate_count"] == 29, cut
+assert cut["unresolved_predicate_count"] == 22, cut
+assert cut["covered_predicate_count"] == 22, cut
 assert cut["uncovered_predicates"] == [], cut
 assert cut["selected_new_reality_units"] == 0, cut
 assert cut["capability_credit_delta"] == 0, cut
