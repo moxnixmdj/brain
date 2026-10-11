@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_RELATION_REQUIREMENT_COMPILER_HELDOUT_RESULT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "FROZEN_FRESH_PUBLIC_HELDOUT__NO_UNIQUE_RETRIEVAL_GAIN__GENERAL_PROMOTION_DENIED",
+  "subject": {
+    "relation_compiler_blob": "e922ba115ddf596bfcf78ae6988b67a0650e772d",
+    "freeze_commit": "8760e72dc6b7dcc86d743393ee5a26887a682fb5",
+    "independent_verify_commit": "6e3ca0ceacb6485eb62ff6d3dbc5b2ad2c9fd6c9",
+    "consumed_causal_result_commit": "dc63c06b28186f786139186ab587d40c7f80fa22"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "workflow_run_id": 38153789846,
+    "workflow_job_id": 114512455788,
+    "conclusion": "success",
+    "artifact_id": 11707995396,
+    "artifact_zip_sha256": "1d0817c1cd3ed08ee8535ba340feeecd20f597539533a98b57a349ee1ead7ded",
+    "trace_manifest_sha256": "7592872fe7019df395bd8c123543bd1bbe327aa80f7bf8e7cc96123aa37da083"
+  },
+  "heldout": {
+    "dataset": "ai-safety-institute/trivia_qa_verified",
+    "split": "validation",
+    "rows": "50_TO_74",
+    "sample_size": 25,
+    "relation_applicable_ids": [
+      53,
+      55,
+      57,
+      59,
+      60,
+      62,
+      66,
+      68,
+      71,
+      72,
+      73
+    ],
+    "relation_applicable_count": 11,
+    "baseline_hits": 11,
+    "baseline_hit_rate": 0.44,
+    "augmented_hits": 11,
+    "augmented_hit_rate": 0.44,
+    "relation_unique_gain_ids": [],
+    "relation_unique_gain_count": 0,
+    "baseline_unique_loss_ids": []
+  },
+  "conclusion": [
+    "THE_RELATION_COMPILER_CAUSED_ONE_GAIN_ON_THE_ALREADY_CONSUMED_RESIDUAL_BUT_DID_NOT_GENERALIZE_TO_A_FRESH_25_ROW_PUBLIC_SLICE",
+    "ZERO_UNIQUE_GAIN_WAS_OBSERVED_ACROSS_ELEVEN_HELDOUT_RELATION_APPLICABLE_ROWS",
+    "THE_COMPONENT_MAY_REMAIN_AS_AN_EXPERIMENTAL_OR_TASK_LOCAL_HELPER_BUT_MUST_NOT_RECEIVE_GENERAL_RETRIEVAL_CAPABILITY_PROMOTION",
+    "NO_POST_HELDOUT_RULE_TUNING_ON_ROWS_50_TO_74_IS_ALLOWED"
+  ],
+  "decision": [
+    "DENY_GENERAL_CAPABILITY_PROMOTION_FOR_RELATION_COMPILER_V1",
+    "PRESERVE_THE_CONSUMED_CAUSAL_RESULT_AS_LOCAL_EVIDENCE_ONLY",
+    "KEEP_ROW_39_IN_THE_GENERAL_CAPABILITY_RESIDUAL_UNLESS_A_SEPARATE_GENERALIZING_MECHANISM_CLOSES_IT",
+    "MOVE_TO_COMPOSITION_OR_DIFFERENT_GENERAL_CAUSAL_LEVER_WITH_FRESH_HELDOUT_VALIDATION"
+  ],
+  "hle_questions_consumed": 0,
+  "hle_gold_consumed": 0,
+  "external_model_calls_total": 0,
+  "model_dependency_count_total": 0,
+  "capability_credit_delta": 0,
+  "hle_score_credit": 0,
+  "hle_67_7_certified": false,
+  "incremental_spend_usd": 0
+}
