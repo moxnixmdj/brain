@@ -1,0 +1,78 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_HISTORICAL_ACTOR_COGNITION_REPRODUCIBILITY_CUT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "FAIL__HISTORICAL_V5_FILE_STATE_IS_CONTENT_ADDRESSED_BUT_ACTOR_COGNITION_IS_NOT__RECOVERY_CAPACITY_REMAINS_CONDITIONAL__ZERO_CREDIT",
+  "target_predicate": "CODING_TB4_GE_66_4",
+  "objective": "Determine whether checking out a pre-verifier Brain and runner root is sufficient to reconstruct the uncontaminated actor that generated TB4 actions.",
+  "exact_historical_sources": {
+    "composed_configuration": {
+      "repository": "moxnixmdj/brain",
+      "ref": "2b02287599d6878952a4a355fd05c4c6f219a34e",
+      "path": "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/COMPOSED_CONFIGURATION_V1.json",
+      "git_blob_sha": "d63d7656c7da293a7c22c32042a4f03f2d13593d"
+    },
+    "mini_swe_base_config": {
+      "repository": "moxnixmdj/brain",
+      "ref": "2b02287599d6878952a4a355fd05c4c6f219a34e",
+      "path": "canonical/capabilities/internalized/software_engineering/mini_swe_agent_2_4_6/vendored/src/minisweagent/config/mini.yaml",
+      "git_blob_sha": "8b72f71f8092ae805ec43221dbeaeefc2340cd3e"
+    },
+    "overlay_builder": {
+      "repository": "moxnixmdj/brain",
+      "ref": "2b02287599d6878952a4a355fd05c4c6f219a34e",
+      "path": "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/build_overlay.py",
+      "git_blob_sha": "cfbb58a31eebb15c224462f26864519406310fcc"
+    },
+    "runner_workflow": {
+      "repository": "moxnixmdj/verification-capsule-runner",
+      "ref": "53be3a64392ff8c184c8d7eb8bb1b4008560fcfe",
+      "path": ".github/workflows/session-mini-swe-fast-burst.yml",
+      "git_blob_sha": "ae78caa68527ea303df45e34c927ab3ba48dc42e"
+    },
+    "runner_controller": {
+      "repository": "moxnixmdj/verification-capsule-runner",
+      "ref": "53be3a64392ff8c184c8d7eb8bb1b4008560fcfe",
+      "path": "session_bridge/controller_fast.py",
+      "git_blob_sha": "a9097a3779efe67a1310cc882db0b63f53602256"
+    }
+  },
+  "verified_observations": [
+    "MINI_SWE_BASE_CONFIG_CONTAINS_MODEL_TEMPLATES_AND_DROP_PARAMS_BUT_NO_PINNED_MODEL_ID_OR_MODEL_STATE",
+    "COMPOSED_CONFIGURATION_CONTENT_ADDRESSES_HARNESS_METHODOLOGY_AND_COMPLETION_GATE_BUT_NOT_THE_EXTERNAL_REASONING_MODEL_STATE",
+    "RUNNER_WORKFLOW_EXECUTES_A_PERSISTENT_FAST_BURST_CONTROLLER__IT_DOES_NOT_INSTANTIATE_THE_BRAIN_REASONING_MODEL",
+    "RUNNER_CONTROLLER_ACCEPTS_AUTHORIZED_PR_COMMENT_COMMANDS_AND_EXECUTES_THEM_IN_THE_TASK_CONTAINER",
+    "THEREFORE_THE_ACTION_GENERATING_COGNITION_EXISTS_OUTSIDE_THE_CONTENT_ADDRESSED_RUNNER_ROOT"
+  ],
+  "countermodel": {
+    "world_A": "SAME_PREVERIFIER_GIT_ROOTS_PLUS_AN_UNCONTAMINATED_EXTERNAL_CONTROLLER_GENERATE_ACTIONS",
+    "world_B": "SAME_PREVERIFIER_GIT_ROOTS_PLUS_A_CURRENT_CONTROLLER_WITH_POSTVERIFIER_TASK_MEMORY_GENERATE_DIFFERENT_ACTIONS",
+    "both_preserve_file_roots": true,
+    "benchmark_admissibility_differs": true,
+    "conclusion": "FILE_ROOT_IDENTITY_ALONE_DOES_NOT_ENTAIL_COGNITIVE_CLEANLINESS"
+  },
+  "required_new_premise": [
+    "CONTENT_ADDRESSED_DETERMINISTIC_ACTOR_WITH_ALL_TRIAL_RELEVANT_RANDOMNESS_BOUND",
+    "OR_STATELESS_EXTERNAL_COGNITION_WITH_PINNED_MODEL_AND_CONFIGURATION__FRESH_SESSION__CONVERSATION_MEMORY_DISABLED__AND_NO_POSTVERIFIER_CONTEXT",
+    "PLUS_ACCOUNT_SPECIFIC_ZERO_INCREMENTAL_SPEND_HARD_STOP_BEFORE_ANY_EXTERNAL_AGENT_RUN"
+  ],
+  "effect_on_recovery_census": {
+    "census_path": "canonical/governance/TB4_UNSPENT_SLOT_RECOVERY_CENSUS_20261011_V1.json",
+    "conditional_slots": 70,
+    "current_creditable_capacity_remains": 220,
+    "conditional_capacity_if_shared_cognition_premise_later_closes": 290
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_HISTORICAL_SLOT_RECOVERY_IS_IMPOSSIBLE",
+    "NO_CLAIM_FILE_ISOLATION_IS_UNNECESSARY",
+    "NO_CURRENT_CAPACITY_CHANGE",
+    "NO_RECOVERED_SLOT_OR_SUCCESS_CREDIT",
+    "NO_EXECUTION_AUTHORITY",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "recovered_creditable_slots": 0,
+    "success_credit_delta": 0
+  }
+}
