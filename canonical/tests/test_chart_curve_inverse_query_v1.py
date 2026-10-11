@@ -56,9 +56,9 @@ class CurveInverseQueryV1Tests(unittest.TestCase):
 
     def test_log_y_query(self):
         pts=[[x,100-0.5*x] for x in range(20,101)]
-        out=query_curve_x_at_y(scene(pts,ax=axes(log_y=True)),legend(),label="Control",y_value=10**1.6)
-        self.assertAlmostEqual(out["target_pixel_y"],40.0,places=6)
-        self.assertAlmostEqual(out["value"],100.0,places=6)
+        out=query_curve_x_at_y(scene(pts,ax=axes(log_y=True)),legend(),label="Control",y_value=10**1.3)
+        self.assertAlmostEqual(out["target_pixel_y"],70.0,places=6)
+        self.assertAlmostEqual(out["value"],60.0,places=6)
 
     def test_nonmonotonic_multiple_crossings_fail_closed(self):
         pts=[[20,90],[40,50],[60,90],[80,50],[100,90]]
