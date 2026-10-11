@@ -1,0 +1,26 @@
+{
+  "schema": "PROJECT_BRAIN_CHARTOGRAPHY_MEASUREMENT_SEMANTIC_TARGET_V1",
+  "status": "ACTIVE__CAPABILITY_INFORMATION_TARGET",
+  "benchmark": "Chartography",
+  "frozen_harness_commit": "3f1bf837232d3918c2cc35c6e2418c9e70d2a57b",
+  "project_reference_threshold": 89.0,
+  "terminal_predicate": {
+    "type": "CAPABILITY_RELATION",
+    "decision_output": "BRAIN_PROFESSIONAL_CHART_REASONING_CAPABILITY_GE_REFERENCE_CAPABILITY_AT_89_WITH_TOOLS",
+    "goal_substitution_allowed": false
+  },
+  "benchmark_is_measurement_instrument": true,
+  "exact_brain_chartography_score_is_not_terminal_predicate": true,
+  "minimum_sufficient_information_route_first": true,
+  "external_general_purpose_runtime_cognition_receives_brain_credit": false,
+  "public_scope": {
+    "task_count": 100,
+    "domains": ["STEM", "FINANCE_INVESTING", "MANUFACTURING_SUPPLY_CHAIN", "HEALTHCARE"],
+    "example_formats": ["KAPLAN_MEIER", "CANDLESTICK", "CONTOUR_MAP", "SANKEY", "BODE_PLOT"],
+    "source_commit": "3f1bf837232d3918c2cc35c6e2418c9e70d2a57b"
+  },
+  "next_proof_obligation": "PROVE_BRAIN_NATIVE_CAPABILITY_COVERAGE_OR_MEASURE_ONLY_IRREDUCIBLE_RESIDUAL",
+  "official_score_claimed": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
