@@ -1,0 +1,24 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_STAGE1_OFFICIAL_ROW_FIELD_FIREWALL_REPAIR_20261011_V1",
+  "date": "2026-10-11",
+  "status": "ROW_4_SPENT__ROWS_5_6_REMAIN_FRESH__FIELD_PROJECTION_FIREWALL_REQUIRED",
+  "spent_subject": {
+    "row_idx": 4,
+    "task_id": "ee09d943-5a11-430a-b7a2-971b4e9b01b5",
+    "cause": "OFFICIAL_DATASET_ROW_WAS_PRINTED_WITH_PUBLIC_RUBRIC_AND_GOLD_DELIVERABLE_POINTER_FIELDS_BEFORE_SUBMISSION_FREEZE"
+  },
+  "remaining_fresh_subjects": [
+    {"row_idx": 5, "task_id": "f84ea6ac-8f9f-428c-b96c-d0884e30f7c7"},
+    {"row_idx": 6, "task_id": "a328feea-47db-4856-b4be-2bdc63dd88fb"}
+  ],
+  "field_firewall": {
+    "allowed_to_cognition_surface": ["task_id", "sector", "occupation", "prompt", "reference_files", "reference_file_urls", "reference_file_hf_uris"],
+    "forbidden_to_cognition_surface_before_submission": ["deliverable_files", "deliverable_file_urls", "deliverable_file_hf_uris", "rubric_pretty", "rubric_json"],
+    "implementation": "FETCH_OFFICIAL_ROW_INSIDE_SPRITE__PROJECT_ALLOWED_FIELDS_BEFORE_EMITTING_ANY_TEXT_TO_COGNITION_SURFACE"
+  },
+  "credit": {
+    "row_4_credit": 0,
+    "rows_5_6_credit": 0,
+    "terminal_credit_delta": 0
+  }
+}
