@@ -1,0 +1,74 @@
+{
+  "schema": "PROJECT_BRAIN_SOFTWARE_TASK_REPAIR_ORCHESTRATOR_V1_VERIFY_20261011",
+  "date": "2026-10-11",
+  "status": "PASS__EXACT_BRANCH_BYTES__TWO_CARRIER_8_OF_8_PLUS_8_OF_8__FAIL_CLOSED_END_TO_END__ZERO_MODEL__ZERO_SPEND",
+  "subject": {
+    "runtime_path": "canonical/runtime/bound_capabilities/software_task_repair_orchestrator_v1.py",
+    "runtime_git_blob_sha": "2e79d9fda71bb1186166d1850134deb8f236e3b0",
+    "runtime_sha256": "a08ccb1ecbec37145410fe35918e7a6bb2c41664617c8535d5fd9127bcb24931",
+    "test_path": "canonical/tests/test_software_task_repair_orchestrator_v1.py",
+    "test_git_blob_sha": "fa1d4fd82de4aa956752126dc5f94908986e7295",
+    "test_sha256": "f5cd46113f07e69fc55112eb7c14c7518ef2adb14a57d529145afabd7cbe971f",
+    "acceptance_dependency_git_blob_sha": "b4fbca159d3ff1a62ecbc7c63d5459a66d91c61f",
+    "repair_dependency_git_blob_sha": "8c426254bd0dc70394fab4c5f2f0d1b1bd90bcef",
+    "patch_basis_git_blob_sha": "9bd33aca208fca26270765e18b3563abcf841e0b"
+  },
+  "contract": {
+    "flow": "RAW_TASK_TEXT_TO_EXPLICIT_TEST_BOUND_ACCEPTANCE_TO_BOUNDED_MULTI_FILE_TWO_EDIT_REPAIR_TO_TWO_REPLAY_VERIFIED_CANDIDATE_DIFF",
+    "precondition": "EVERY_EXPLICIT_TASK_CLAUSE_BOUND_BY_EXACT_STRUCTURAL_TEST_EVIDENCE",
+    "incomplete_acceptance_behavior": "REPAIR_NOT_EXECUTED",
+    "already_satisfied_behavior": "PASS_NO_PATCH_REQUIRED",
+    "bounded_failure_behavior": "OPEN_NO_VERIFIED_CANDIDATE",
+    "source_persistence": "ORIGINAL_SOURCE_BYTES_RESTORED"
+  },
+  "first_carrier": {
+    "sprite": "brain-capability-first-scheduler-verify-20261008-v1",
+    "exact_branch_bytes": true,
+    "tests_executed": 8,
+    "tests_passed": 8,
+    "tests_failed": 0,
+    "runtime_sha256": "a08ccb1ecbec37145410fe35918e7a6bb2c41664617c8535d5fd9127bcb24931",
+    "test_sha256": "f5cd46113f07e69fc55112eb7c14c7518ef2adb14a57d529145afabd7cbe971f"
+  },
+  "second_carrier": {
+    "sprite": "brain-cad-proof-clean-20261009",
+    "exact_branch_bytes": true,
+    "tests_executed": 8,
+    "tests_passed": 8,
+    "tests_failed": 0,
+    "elapsed_reported_s": 2.359,
+    "runtime_sha256": "a08ccb1ecbec37145410fe35918e7a6bb2c41664617c8535d5fd9127bcb24931",
+    "test_sha256": "f5cd46113f07e69fc55112eb7c14c7518ef2adb14a57d529145afabd7cbe971f"
+  },
+  "discovered_and_repaired_defect": {
+    "defect": "EXPLICIT_SOURCE_PATH_ESCAPE_WAS_NOT_VALIDATED_AT_ORCHESTRATOR_BOUNDARY",
+    "repair": "PREVALIDATE_EXPLICIT_SOURCE_PATH_LIST_BEFORE_ACCEPTANCE_OR_REPAIR",
+    "regression": "test_source_escape_rejected_downstream",
+    "verified": true
+  },
+  "covered_cases": [
+    "TWO_FILE_TWO_EDIT_END_TO_END_REPAIR",
+    "INCOMPLETE_ACCEPTANCE_BLOCKS_REPAIR",
+    "ALREADY_SATISFIED_NO_PATCH_REQUIRED",
+    "AUTOMATIC_SOURCE_INFERENCE",
+    "BOUNDED_NO_CANDIDATE",
+    "OUTPUT_PATH_ESCAPE_REJECTION",
+    "SOURCE_PATH_ESCAPE_REJECTION_AT_ORCHESTRATOR_BOUNDARY",
+    "ZERO_MODEL_ZERO_SPEND"
+  ],
+  "authority": {
+    "declared_subset_end_to_end_task_to_verified_candidate": true,
+    "general_natural_language_semantics": false,
+    "repair_search_complete": false,
+    "mergeability_authority": false,
+    "general_software_engineering_complete": false,
+    "frontiercode_score_authority": false,
+    "promotion_authority": false,
+    "terminal_authority": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "model_dependency_count": 0,
+    "external_capability_provider_count": 0
+  }
+}
