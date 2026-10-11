@@ -1,0 +1,73 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_GRADER_RELATION_BRANCH_SATURATION_20261011_V2",
+  "date": "2026-10-11",
+  "status": "ACTIVE__DETERMINISTIC_GRADER_TRANSFER_BRANCH_SATURATED__EMPIRICAL_CALIBRATION_ONLY__ZERO_CREDIT",
+  "target_predicate": "HLE_WITH_TOOLS_REPORTED_SCORE_GE_67_7_UNDER_ANTHROPIC_TARGET_PROTOCOL",
+  "public_target_grader_fact": {
+    "grader_model": "CLAUDE_OPUS_4_6",
+    "deterministic_exact_match_override_publicly_bound": false,
+    "exact_target_grader_prompt_publicly_bound": false
+  },
+  "public_reference_scorer_fact": {
+    "source": "centerforaisafety/hle@22ed3074b1e7b134bcbc09028d0ba320839b0655/hle_eval/run_judge_results.py",
+    "metric_mechanism": "MODEL_JUDGE_EMITS_correct_yes_or_no__ACCURACY_COUNTS_yes_LABELS",
+    "machine_exact_match_override": false
+  },
+  "cross_judge_empirical_bridge": {
+    "source": "How Inference Compute Shapes Frontier LLM Evaluation__Appendix_A_5_2",
+    "hle_paired_strong_judge_labels": 2373,
+    "gpt_5_4_vs_claude_opus_4_6_agreements": 2370,
+    "disagreements": 3,
+    "agreement_fraction": 0.9987357774968394,
+    "same_in_experiment_prompt": "INSPECT_EVALS_HLE_JUDGE_PROMPT",
+    "public_paper_reports_direction_of_three_disagreements": false,
+    "weak_judge_vs_strong_consensus": {
+      "false_positives": 1,
+      "actually_incorrect": 2186,
+      "false_negatives": 22,
+      "actually_correct": 184
+    }
+  },
+  "new_falsification": {
+    "name": "FINITE_CROSS_JUDGE_AGREEMENT_CANNOT_PROVE_UNIVERSAL_ONE_SIDED_TRANSFER",
+    "statement": "For any finite calibration set on which proxy judge P and target judge T agree on all but finitely many examples, there remain functions T' that are identical to T on the entire calibration set but differ on an unseen future Brain transcript. Therefore finite agreement, including 2370/2373 agreement and even complete knowledge of the direction of the three observed disagreements, cannot by itself prove that P(x)=correct implies T(x)=correct for every future Brain output.",
+    "consequence": "RECOVERING_THE_DIRECTION_OF_THE_THREE_DISAGREEMENTS_MAY_IMPROVE_EMPIRICAL_CALIBRATION_BUT_CANNOT_CLOSE_THE_DETERMINISTIC_TARGET_PREDICATE"
+  },
+  "public_data_release_check": {
+    "aisi_bucket": "ai-safety-institute/2026-inference-scaling-paper",
+    "release_contains": [
+      "ANALYSIS_TABLES",
+      "HLE_INSPECT_EVAL_LOGS",
+      "SUBMISSION_DATA",
+      "TRAJECTORY_DATA"
+    ],
+    "ordinary_object_fetch_state_in_CURRENT_SESSION": "HTTP_401",
+    "evaleval_conversion_found": true,
+    "evaleval_aggregate_records_inspected_without_TASK_CONTENT": true,
+    "result": "NO_PUBLIC_AGGREGATE_METADATA_FOUND_THAT_PROVES_A_UNIVERSAL_ONE_SIDED_OPUS_4_6_RELATION"
+  },
+  "route_classification": {
+    "deterministic_proof_route": "CLOSED_WITH_CURRENT_PUBLIC_INFORMATION",
+    "empirical_comparable_grader_route": "STILL_POSSIBLE_BUT_STATISTICAL_AND_ASSUMPTION_BEARING",
+    "authentic_target_grader_route": "STILL_VALID_IF_TARGET_GRADER_PROTOCOL_OR_RECEIPT_BECOMES_AVAILABLE"
+  },
+  "remaining_exact_score_closure_options": [
+    "AUTHENTIC_TARGET_CLAUDE_OPUS_4_6_GRADER_RECEIPT_ON_BRAIN_TRANSCRIPTS",
+    "PUBLIC_REPRODUCIBLE_TARGET_GRADER_PROTOCOL_PLUS_ACCESS_TO_THE_PINNED_GRADER",
+    "A_NEW_MACHINE_CHECKABLE_TARGET_RULE_THAT_REMOVES_STOCHASTIC_GRADER_OUTPUT_FROM_THE_SCORE_PREDICATE"
+  ],
+  "separate_execution_gate": "AUTHORIZED_CAIS_HLE_DATASET_ACCESS_AND_TERMS_ACCEPTANCE",
+  "hard_nonclaims": [
+    "NO_HLE_SCORE_GE_67_7_CLAIM",
+    "NO_CROSS_JUDGE_EQUIVALENCE_CLAIM",
+    "NO_ONE_SIDED_RELATION_CLAIM",
+    "NO_HLE_TASK_OR_GOLD_CONTENT_READ_IN_THIS_BRANCH",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
