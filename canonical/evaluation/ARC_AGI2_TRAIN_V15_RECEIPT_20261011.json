@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_ARC_AGI2_TRAIN_V15_AGGREGATE_RECEIPT_V1",
+  "generated_at": "2026-10-11",
+  "status": "PASS_INDEPENDENT_EXECUTION",
+  "brain": {
+    "repository": "moxnixmdj/brain",
+    "branch": "successor/arc-symbolic-ensemble-v15-20261011",
+    "integration_commit": "eed4270a3aec369b7d5f5ba290d89291ba3b26d1",
+    "vendor_sha256": "95c01e84e5db7ee6e7323d8d7dc72f1e0c8462b59d7f846ab7c204a0585b34cc",
+    "detector_count": 321,
+    "external_model_used": false,
+    "external_inference_service_used": false
+  },
+  "corpus": {
+    "benchmark": "ARC-AGI-2",
+    "split": "public_training",
+    "repository": "arcprize/ARC-AGI-2",
+    "git_commit": "f3283f727488ad98fe575ea6a5ac981e4a188e49",
+    "training_tree_sha": "dac7259367cc5099ef6a7b604a50a93affbbee33",
+    "tasks": 1000
+  },
+  "execution": {
+    "environment": "isolated Sprite",
+    "workers": 8,
+    "result_sha256": "84d1f4ec66a7e1b0a7e594256cbf2e31a40b2513d3a70bd853a014980d1829dc",
+    "statuses": {
+      "OK": 1000
+    }
+  },
+  "result": {
+    "tasks_solved": 339,
+    "task_count": 1000,
+    "task_accuracy": 0.339,
+    "outputs_solved": 358,
+    "output_count": 1076,
+    "output_pass_at_2": 0.33271375464684017
+  },
+  "interpretation": {
+    "development_tasks_from_this_thread_not_used": true,
+    "task_level_failures_not_inspected_before_or_during_run": true,
+    "note": "This is a direct Brain V15 execution on ARC-AGI-2 public training, used as a cross-dataset generalization checkpoint.",
+    "external_model_answer_attribution": false
+  },
+  "nonclaims": [
+    "ARC-AGI-2 public evaluation score",
+    "official private score",
+    "Opus parity",
+    "terminal global promotion"
+  ]
+}
