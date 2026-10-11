@@ -54,6 +54,7 @@ def verify_exchange_dominance(cert: Mapping[str, Any]) -> dict[str, Any]:
         "no_unmatched_brain_or_opus_incident_comparisons",
         "comparison_roles_normalized_to_candidate_win",
         "brain_opus_symmetric_regularization",
+        "finite_global_mle_exists",
     )
     for key in required_true:
         if cert.get(key) is not True:
@@ -132,7 +133,7 @@ def verify_exchange_dominance(cert: Mapping[str, Any]) -> dict[str, Any]:
     material = {
         "matched_rows": normalized_rows,
         "same_fit_opus_rating_lower_bound": bound_floor,
-        "scorer_model": "FIXED_QUALITY_CROWD_BT_EQ5_WITH_BRAIN_OPUS_SYMMETRIC_REGULARIZATION",
+        "scorer_model": "FIXED_QUALITY_CROWD_BT_EQ5_WITH_BRAIN_OPUS_SYMMETRIC_REGULARIZATION_AND_FINITE_GLOBAL_MLE",
     }
 
     return {
@@ -148,11 +149,13 @@ def verify_exchange_dominance(cert: Mapping[str, Any]) -> dict[str, Any]:
             "DIRECT_BRAIN_OPUS_ROWS_WITH_Y_B_GE_HALF_ARE_ALSO_NONWORSE_UNDER_THE_SWAP.",
             "AT_LEAST_ONE_STRICT_OUTCOME_WITH_ETA_GT_HALF_MAKES_THE_ORDER_STRICT_OR_GIVES_A_POSITIVE_ANTISYMMETRIC_SCORE_DIRECTION_AT_EQUAL_RATINGS.",
             "SYMMETRIC_REGULARIZATION_IS_UNCHANGED_BY_THE_SWAP.",
+            "A_FINITE_GLOBAL_MLE_EXISTS_BY_BOUND_PREMISE__SO_THE_FITTED_RATINGS_ARE_WELL_DEFINED.",
             "THEREFORE_A_GLOBAL_MAXIMUM_CANNOT_HAVE_R_BRAIN_LE_R_OPUS.",
         ],
         "certificate_sha256": _sha(material),
         "hard_nonclaims": [
             "THIS_THEOREM_DOES_NOT_PROVE_THE_REQUIRED_MATCHED_REALIZED_OUTCOMES_EXIST.",
+            "THIS_THEOREM_DOES_NOT_PROVE_A_FINITE_GLOBAL_MLE_EXISTS_FOR_THE_OWNER_FIT__THAT_IS_AN_INPUT_PREMISE.",
             "THIS_THEOREM_DOES_NOT_PROVE_ARTIFICIAL_ANALYSIS_USES_A_BOUND_SAME_FIT_OPUS_FLOOR_OF_1822.",
             "WITHOUT_A_SAME_FIT_OPUS_RATING_FLOOR_GE_1822_THE_THEOREM_PROVES_ONLY_RELATIVE_RATING_ORDER_NOT_THE_FROZEN_1822_THRESHOLD.",
         ],
