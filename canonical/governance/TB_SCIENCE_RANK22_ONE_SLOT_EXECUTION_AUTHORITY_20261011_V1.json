@@ -1,0 +1,85 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK22_ONE_SLOT_EXECUTION_AUTHORITY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "STAGED_FRESH_RANK22_ZERO_MODEL_ONE_SHOT__EFFECTIVE_ONLY_AFTER_EXACT_PUBLIC_ZERO_EXPOSURE_RESEAL",
+  "slot": {
+    "ledger_schedule_rank": 22,
+    "id": "terminal-bench-science/rv-astrometry-fitting::trial-0",
+    "digest": "sha256:8e086e1f7245067eaa9a67c259c1519204fa058d8664983066cd582ef258a1ea"
+  },
+  "logical_attempt": {
+    "id": "e958f9c8f996ba3ee3599ae573340c6970262634a5085cc2102c7b8321baf796",
+    "execution_claim_binding_digest": "sha256:a1b8c550de90ff8c924c99633aa5195615e2ab4361e8e637061b39be587af812",
+    "identity_basis": "SLOT_ID_PLUS_TASK_DIGEST_PLUS_EXECUTION_CLAIM_BINDING_DIGEST",
+    "fresh_slot": true
+  },
+  "admission": {
+    "path": "canonical/governance/TB_SCIENCE_RANK22_CAPABILITY_FIRST_CHECKPOINT_ADMISSION_20261011_V1.json",
+    "git_blob_sha": "bcabbbb65af49901fb1f9f09c068cf293d4d8a15"
+  },
+  "claim": {
+    "path": "canonical/governance/TB_SCIENCE_RANK22_LOGICAL_ATTEMPT_CLAIM_BINDING_20261011_V1.json",
+    "git_blob_sha": "59a0397b4a970aae37a728a5094f3c3c030885e0"
+  },
+  "ledger": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261011_V69.json",
+    "git_blob_sha": "32cb8b726532aac05e50b10d62d3469bb2de5fae"
+  },
+  "zero_model_route_verification": {
+    "path": "canonical/verification/TB_SCIENCE_ZERO_MODEL_SCIENTIFIC_ROUTE_VERIFY_20261011_V1.json",
+    "git_blob_sha": "782e1bdf01ac3bf6fe38277919bed5e22754f5b5",
+    "verified": true,
+    "public_run_id": 38138191614,
+    "public_job_id": 114466335683
+  },
+  "public_reseal_condition": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "base_branch": "terminal-execution-v1",
+    "base_commit_at_staging": "2175d1792165e6b74b1d8883b7a8bb28797dc5dd",
+    "candidate_branch": "reseal/tb-science-rank22-zero-model-20261011-v1",
+    "workflow_git_blob_sha": "9dfb45e99cb0d9b93cabbcf6cbe79c3831b4adb7",
+    "behavior_git_blob_sha": "263c22b2027cdc1834b658cc7b68f74231ae5cf8",
+    "claim_binding_git_blob_sha": "59a0397b4a970aae37a728a5094f3c3c030885e0",
+    "zero_exposure_verifier_git_blob_sha": "40959abf009a9d73645f4e9e56f786a2205f6288",
+    "activation_must_be_absent": true,
+    "model_dependency_count_required": 0,
+    "external_model_runtime_calls_required": 0
+  },
+  "controls": {
+    "logical_attempts_authorized_total": 1,
+    "retries_authorized": 0,
+    "replacement_allowed": false,
+    "different_task_or_digest_forbidden": true,
+    "rank21_replay_forbidden": true,
+    "task_start_requires_durable_start_cas": true,
+    "agent_ready_must_precede_start_cas": true,
+    "external_or_local_general_purpose_model_cognition_forbidden": true,
+    "incremental_spend_usd_max": 0
+  },
+  "state": {
+    "task_read_history": false,
+    "task_started": false,
+    "start_cas_acquired": false,
+    "benchmark_trials_consumed": 0,
+    "activation_present": false
+  },
+  "execution_authority": true,
+  "execution_authority_effective": false,
+  "task_read_authority": true,
+  "task_read_authority_effective": false,
+  "activation_authority": false,
+  "effectivess_condition": "EXACT_RANK22_ZERO_MODEL_PUBLIC_RESEAL_MERGED_TO_TERMINAL_EXECUTION_V1__ACTIVATION_ABSENT__ZERO_EXPOSURE_VERIFIER_PASS",
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "hard_nonclaims": [
+    "NO_RANK22_TASK_READ_FROM_THIS_AUTHORITY_DOCUMENT",
+    "NO_RANK22_DURABLE_START_FROM_THIS_AUTHORITY_DOCUMENT",
+    "NO_RANK22_ACTIVATION_AUTHORITY_YET",
+    "NO_RETRY_OR_REPLACEMENT_AUTHORITY",
+    "NO_EXTERNAL_OR_LOCAL_GENERAL_PURPOSE_MODEL_COGNITION",
+    "NO_BENCHMARK_RESULT"
+  ],
+  "next": "PROMOTE_EXACT_RANK22_ZERO_MODEL_PUBLIC_RESEAL__VERIFY_ZERO_EXPOSURE__THEN_MAKE_AUTHORITY_EFFECTIVE_WITHOUT_READING_TASK"
+}
