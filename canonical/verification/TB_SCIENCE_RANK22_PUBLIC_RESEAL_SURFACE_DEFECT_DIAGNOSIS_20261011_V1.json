@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK22_PUBLIC_RESEAL_SURFACE_DEFECT_DIAGNOSIS_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__RANK22_RESEAL_FAILS_CLOSED_BEFORE_TASK_READ__CURRENT_SURFACE_STILL_RANK21",
+  "public_repository": "moxnixmdj/verification-capsule-runner",
+  "public_base_branch": "terminal-execution-v1",
+  "public_base_commit": "2175d1792165e6b74b1d8883b7a8bb28797dc5dd",
+  "public_reseal_branch": "reseal/tb-science-rank22-zero-model-20261011-v1",
+  "branch_delta": {
+    "ahead_by": 18,
+    "behind_by": 0,
+    "rank22_files_added": 17,
+    "current_surface_path": "execution_guard/CURRENT_TERMINAL_EXECUTION_SURFACE_V1.json",
+    "current_surface_changed_in_branch": false,
+    "inherited_surface_git_blob_sha": "782843f70550537ce33eea71f59dea54314c18af",
+    "inherited_surface_status": "REVOKED__EXTERNAL_MODEL_COGNITION_PRODUCER_PATH__NO_BRAIN_CREDIT",
+    "inherited_surface_slot_id": "terminal-bench-science/ode-law-discovery::trial-0"
+  },
+  "expected_rank22": {
+    "slot_id": "terminal-bench-science/rv-astrometry-fitting::trial-0",
+    "task_digest": "sha256:8e086e1f7245067eaa9a67c259c1519204fa058d8664983066cd582ef258a1ea",
+    "logical_attempt_id": "e958f9c8f996ba3ee3599ae573340c6970262634a5085cc2102c7b8321baf796",
+    "execution_claim_binding_digest": "sha256:a1b8c550de90ff8c924c99633aa5195615e2ab4361e8e637061b39be587af812",
+    "workflow_git_blob_sha": "9dfb45e99cb0d9b93cabbcf6cbe79c3831b4adb7",
+    "behavior_git_blob_sha": "263c22b2027cdc1834b658cc7b68f74231ae5cf8",
+    "claim_binding_git_blob_sha": "59a0397b4a970aae37a728a5094f3c3c030885e0",
+    "public_authority_binding_git_blob_sha": "1f9ae5a9374f6a0395e4ece297f6825ac23e5ab5",
+    "public_ledger_binding_git_blob_sha": "1a830d6a008fceadb17b178ecfd5ed25ce6d3256",
+    "zero_exposure_verifier_git_blob_sha": "40959abf009a9d73645f4e9e56f786a2205f6288"
+  },
+  "deterministic_failure": {
+    "verifier": "capsules/tb_science_rank22_20261011_v1/rank22_zero_exposure_reseal_verify_v1.py",
+    "preflight": "capsules/tb_science_rank22_20261011_v1/rank22_execution_preflight_v1.py --allow-staged",
+    "causes": [
+      "SURFACE_SLOT_OR_DIGEST_MISMATCH",
+      "SURFACE_WORKFLOW_MISMATCH",
+      "WORKFLOW_BLOB_MISMATCH",
+      "CLAIM_BOUND_IDENTITY_SURFACE_SLOT_OR_DIGEST_MISMATCH"
+    ]
+  },
+  "state": {
+    "rank22_task_read": false,
+    "rank22_task_started": false,
+    "rank22_benchmark_trials_consumed": 0,
+    "activation_present": false,
+    "execution_authority_effective": false,
+    "task_read_authority_effective": false
+  },
+  "authority": {
+    "public_reseal_merge_authority": false,
+    "activation_authority": false,
+    "task_read_authority_effective": false,
+    "execution_authority_effective": false
+  },
+  "exact_repair": "REPLACE_PUBLIC_RESEAL_BRANCH_CURRENT_SURFACE_WITH_STAGED_RANK22_ZERO_MODEL_SURFACE__RUN_ZERO_EXPOSURE_VERIFIER__ONLY_THEN_PROMOTE",
+  "hard_nonclaims": [
+    "NO_RANK22_TASK_READ",
+    "NO_RANK22_TASK_START",
+    "NO_RANK22_TRIAL_CONSUMPTION",
+    "NO_PUBLIC_RESEAL_MERGE_WHILE_CURRENT_SURFACE_IS_RANK21",
+    "NO_QWEN_OR_OTHER_GENERAL_PURPOSE_MODEL_COGNITION_IN_CREDITED_RANK22_RUNTIME"
+  ]
+}
