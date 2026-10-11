@@ -28,6 +28,27 @@ assert b["external_knowledge_target_solving_policy_or_answer_forbidden"] is True
 assert b["acquisition_donor_must_remain_transfer_gated_until_donor_deletion"] is True
 assert b["runtime_cognition_provider_forbidden_regardless_of_label_hosting_or_cost"] is True
 assert b["ambiguous_external_contribution_classification_fails_closed"] is True
+assert b["runtime_cognition_credit_guard_required"] is True
+assert b["runtime_cognition_credit_guard_fail_closed_before_credit"] is True
+assert b["runtime_cognition_credit_guard_live_execution_binding_required"] is True
+assert b["runtime_cognition_credit_guard_self_improvement_binding_required"] is True
+assert b["runtime_cognition_credit_guard_terminal_closure_binding_required"] is True
+assert b["runtime_cognition_credit_guard_path"]=="canonical/runtime/runtime_cognition_credit_guard_v1.py"
+assert b["runtime_cognition_credit_guard_verification_path"]=="canonical/verification/RUNTIME_COGNITION_CREDIT_GUARD_REMOTE_VERIFY_20261011_V1.json"
+assert b["local_runner_for_cognition_governance_forbidden"] is True
+guard=(R/b["runtime_cognition_credit_guard_path"]).read_text(encoding="utf-8")
+for path, minimum in (
+    ("canonical/runtime/live_integrated_brain_v1.py",2),
+    ("canonical/runtime/autonomous_verified_self_improvement_v1.py",3),
+    ("canonical/runtime/terminal_closure_reducer.py",2),
+):
+    source=(R/path).read_text(encoding="utf-8")
+    assert "runtime_cognition_credit_guard_v1" in source
+    assert source.count("assert_credit_path_cognition_governance(") >= minimum
+workflow=(R/".github/workflows/capability-transfer-governance.yml").read_text(encoding="utf-8")
+assert "LOCAL_RUNNER_FORBIDDEN_FOR_COGNITION_GOVERNANCE" in workflow
+assert "self-hosted" not in workflow
+assert "brain-low-ram" not in workflow
 s=J("canonical/governance/WHITE_BOX_CAPABILITY_CAPSULE_SCHEMA_V3.json")
 assert s["promotion_requires_transfer_gate_pass"] is True
 d=J("canonical/governance/DONOR_DELETION_AND_DEPENDENCY_ACCOUNTING_PROTOCOL_V2.json")
