@@ -1,0 +1,124 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_MPF_POW_INT_V52_SUCCESSOR_EXECUTION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "VERIFIED_RESEARCH_FRONTIER__MPF_POW_INT_SQUARE_ONLY_SPECIALIZATION__SPENT_NEXT57_AND_FRESH_NEXT58_PASS__SECOND_EXECUTION_CARRIER_NEXT58_PASS__NEXT59_DEFINITION_FROZEN_BUT_LIBRARY_PERSISTENCE_BLOCKED__CURRENT_POINTER_ELIGIBLE__ZERO_PROMOTION_CREDIT",
+  "subject": {
+    "predecessor": "canonical/evidence/BYTES_EXACT_SYMBOLIC_MPC_POW_INT_V51_SUCCESSOR_EXECUTION_20261011_V1.json",
+    "predecessor_manifest_sha256": "bab0e710a20ac41743feadf3a979e2c9d8d08fd621a42e4799ba658badb7ef37",
+    "transform": "canonical/research/bytes/tools/conservative_mpf_pow_int_square_only_prune_v52.py",
+    "transform_git_blob_sha": "ff448350fb3047e8eb9aed3dbca4736f6cc12e8c",
+    "manifest_sha256": "5cfdaf054fafabd04894396739defc82fed40ec3aba24b2f1b06030421b9c62f",
+    "python_files": 277,
+    "raw_python_source_bytes": 1717827,
+    "B_exec_raw_python_source_bytes": 1720587,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "raw_delta_vs_v51_bytes": -1736,
+    "B_exec_delta_vs_v51_bytes": -1736
+  },
+  "falsification_first": {
+    "rejected_candidate": "FAIL_CLOSE_ENTIRE_MPF_POW_INT_BODY",
+    "base": "V50",
+    "raw_saved_bytes": 2131,
+    "spent_NEXT56": "14720/14720",
+    "fresh_NEXT57": "14948/14950",
+    "failing_global_case_indexes": [
+      4678,
+      4962
+    ],
+    "failing_operation": "roots",
+    "failure": "NotImplementedError:outside Brain bounded exact-symbolic contract",
+    "conclusion": "WHOLE_BODY_DELETION_REJECTED__FRESH_NEXT57_PROVES_MPF_POW_INT_IS_LOAD_BEARING"
+  },
+  "discovery_evidence": {
+    "corpus": "QUAL_SUCCESSOR_NEXT57_20261011_V1",
+    "role": "SPENT_AFTER_FALSIFICATION__LOCALIZE_MINIMUM_SOUND_SPECIALIZATION",
+    "complete_cases": 14950,
+    "roots_cases_profiled": 1300,
+    "observed_mpf_pow_int_integer_exponents": [
+      2
+    ],
+    "other_observed_integer_exponents": [],
+    "interpretation": "WITHIN_COMPLETE_NEXT57_BOUNDED_ROUTE_MPF_POW_INT_IS_REQUIRED_ONLY_FOR_SQUARES__THIS_IS_NOT_UNIVERSAL_MPMATH_EQUIVALENCE"
+  },
+  "selection": {
+    "id": "MPF_POW_INT_SQUARE_ONLY_SPECIALIZATION_V52",
+    "method": "REUSE_EXISTING_EXACT_N_2_SQUARE_BRANCH__FAIL_CLOSE_ALL_OTHER_MPF_INTEGER_POWER_BRANCHES__VERIFY_COMPLETE_SPENT_NEXT57__THEN_SPEND_PREVIOUSLY_UNTOUCHED_NEXT58",
+    "changed_body_count": 1,
+    "body": "mpmath/libmp/libmpf.py::mpf_pow_int",
+    "preserved_branches": [
+      "N_2_SQUARE_WITH_ZERO_INF_NAN_EXACT_HANDLING"
+    ],
+    "fail_closed_branches": [
+      "N_0",
+      "N_1",
+      "N_MINUS_1",
+      "GENERIC_NEGATIVE",
+      "GENERIC_POSITIVE",
+      "GENERIC_LARGE_POWER"
+    ],
+    "exact_base_guard": true,
+    "exact_target_guard": true
+  },
+  "qualification": {
+    "spent_NEXT57": {
+      "id": "QUAL_SUCCESSOR_NEXT57_20261011_V1",
+      "cases": 14950,
+      "corpus_sha256": "874b316cb3cb39d27371195ffbedf2542187e842e383d53bf635e4d42a97e8e4",
+      "candidate": "14950/14950",
+      "failures": 0,
+      "spent": true
+    },
+    "fresh_NEXT58": {
+      "id": "QUAL_SUCCESSOR_NEXT58_20261011_V1",
+      "cases": 15180,
+      "corpus_sha256": "fd7a32a07356c87a18e884f851320fd5d87dc316ca2436a4191275e5f3f57e0c",
+      "candidate": "15180/15180",
+      "failures": 0,
+      "spent": true
+    }
+  },
+  "reproducibility": {
+    "v51_to_v52_transform_target_manifest_exact": true,
+    "sealed_archive_bytes": 267716,
+    "sealed_archive_sha256": "51be5680134e60c03a4e0c03a743810364fe640bad31f34d1db7c15dc8aec357",
+    "clean_archive_second_execution_carrier_NEXT58": "15180/15180",
+    "external_second_carrier_verified": false,
+    "transform_plus_content_addressed_v51_predecessor_is_reconstruction_authority": true
+  },
+  "durable_archive": {
+    "intended_library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V52_SUCCESSOR_20261011_V1.tar.xz",
+    "persistence_status": "NOT_PERSISTED__FILES_LIBRARY_CONTAINER_SESSION_BOUNDARY_REJECTED_UPLOAD",
+    "reconstructible_from_predecessor_and_transform": true,
+    "bytes": 267716,
+    "sha256": "51be5680134e60c03a4e0c03a743810364fe640bad31f34d1db7c15dc8aec357"
+  },
+  "next_frozen": {
+    "id": "QUAL_SUCCESSOR_NEXT59_20261011_V1",
+    "cases": 15410,
+    "seed": 1601787694,
+    "seed_derivation": "FIRST_32_BITS_BIG_ENDIAN_SHA256_OF_QUAL_ID_PIPE_V52_MANIFEST_IDENTITY",
+    "per_operation_budget": 1340,
+    "corpus_sha256": "5c7cf733614d58648dbe4fbfc855e7451651c652555eb895fcdcef39df780c92",
+    "generated_bytes": 1822027,
+    "generation_provenance": "STOCK_SYMPY_1_14_0_MPMATH_1_3_0_EXACT_ROUTE_EXPECTED_OUTPUTS__DETERMINISTIC_PARAMETER_STREAM",
+    "status": "DEFINITION_AND_GENERATED_CONTENT_HASH_FROZEN__DURABLE_LIBRARY_PERSISTENCE_BLOCKED__DO_NOT_EXECUTE_NEXT_PHYSICAL_CUT_UNTIL_EXACT_CORPUS_IS_DURABLY_PERSISTED_OR_REGENERATED_BYTE_IDENTICAL_TO_BOUND_SHA256",
+    "spent": false
+  },
+  "truth_boundary": [
+    "MEASURED: V52 raw Python bytes are 1,717,827, 1,736 bytes below V51.",
+    "MEASURED: complete spent NEXT57 passes exact V52 14,950/14,950.",
+    "MEASURED: previously untouched NEXT58 passes exact V52 15,180/15,180.",
+    "MEASURED: a clean archive extraction in a separate Python execution carrier passes NEXT58 15,180/15,180.",
+    "MEASURED: whole-body mpf_pow_int deletion was falsified by two fresh NEXT57 roots cases and is rejected.",
+    "MEASURED: complete NEXT57 profiling observed only exponent 2 at mpf_pow_int on the bounded route.",
+    "MEASURED: NEXT59 was deterministically generated as 15,410 cases with bound SHA-256, but durable Library upload failed because the Files service could not access the container session.",
+    "NOT PROVED: universal mpmath equivalence outside the bounded exact-symbolic route.",
+    "NOT CLAIMED: external organizationally independent second carrier.",
+    "NOT PROMOTED: zero capability, acceptance, professional-quality, promotion, or terminal credit."
+  ],
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "acceptance_credit_delta": 0,
+  "promotion_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
