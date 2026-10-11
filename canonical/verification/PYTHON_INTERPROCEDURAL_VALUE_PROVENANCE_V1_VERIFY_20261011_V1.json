@@ -9,7 +9,7 @@
   "runtime_sha256": "cfa9b3f5446a5c88d5d08b699c2af27e1470cb65620e0fae9b62d1d50182d477",
   "test_path": "canonical/tests/test_python_interprocedural_value_provenance_v1.py",
   "test_git_blob_sha": "82af855fc384d3d8193cf1426fd58e9a1a1443c8",
-  "test_sha256": "b4233d1843bdcc911d4ab1f5e24ca48bd28697efb2f3d52e2b86fd14fc790f9f",
+  "test_sha256": "94bb177c68eb1a48402b43e50108d4ebdada336763417ea5ff38b41e9bc19cbb",
   "carriers": [
     {
       "name": "brain-capability-first-scheduler-verify-20261008-v1",
@@ -44,5 +44,6 @@
     "benchmark_score_credit_delta": 0,
     "acceptance_credit_delta": 0,
     "terminal_credit_delta": 0
-  }
+  },
+  "exact_branch_combined_replay": "14/14 PASS with provenance-guided repair qualification"
 }
