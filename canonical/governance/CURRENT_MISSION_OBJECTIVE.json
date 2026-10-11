@@ -32,7 +32,7 @@
     "primary_entrypoint": "plan_current_post_composition_frontier",
     "scalar_fallback_runtime": "canonical/runtime/capability_first_live_scheduler_v1.py",
     "status": "ACTIVE__POST_COMPOSITION_DYNAMIC_CURRENTNESS_V15__PROFESSIONAL_24_OF_24__CHECKPOINT_ROWS_ALL_WAKE_GATED__GITHUB_HOSTED_ACTIONS_BILLING_PRESTART_BLOCK__0_SAME_INFORMATION_CHECKPOINT_RUNS__CAPABILITY_FIRST_PRIMARY__ZERO_GLOBAL_CREDIT",
-    "observed_git_blob_sha": "89384e05659fb83ed83d169570c8174a9835387f",
+    "observed_git_blob_sha": "cffdd14cb2753b608411e3e4e47b061e283bf5f9",
     "semantic_reuse_policy": "canonical/governance/TWO_CLOCK_SEMANTIC_VALIDITY_AND_SCHEDULER_AUTHORITY_20261011_V4.json",
     "semantic_reuse_policy_git_blob_sha": "f08fd90474aa38f89db171c70e10a6d47e6d7ec5",
     "verified_improvement_loop": "canonical/governance/VERIFIED_IMPROVEMENT_LOOP_V2_ACTIVATION_20261011_V1.json",
@@ -58,7 +58,7 @@
   },
   "current_parallel_frontier_control": {
     "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
-    "observed_git_blob_sha": "bb2f427bb5aa790e98ffa8d26b02df008827b802",
+    "observed_git_blob_sha": "1c3554caa3cae9bd8a204ef9b477f886d1c3c11a",
     "status": "CURRENT_PROFESSIONAL_24_OF_24__FULL_PRIVATE_REGRESSION_GATE_OPEN__GITHUB_HOSTED_ACTIONS_BILLING_OR_SPENDING_LIMIT_PRESTART_BLOCK__12_CHECKPOINT_ROWS_WAKE_GATED__CAPABILITY_FIRST_AND_RESOURCE_PARETO_WORK_PRIMARY__ZERO_CREDIT",
     "binding": "MUTABLE_CURRENT_PATH_IDENTITY__SUPPORTED_PROFESSIONAL_ASSURANCE_BYTES_R2_PROJECTIONS_REFRESHED_AT_CALL_TIME__OTHER_SOURCE_DRIFT_FAILS_CLOSED",
     "snapshot_is_runtime_authority_for_supported_dynamic_families": false
@@ -245,12 +245,12 @@
   },
   "bytes_current_frontier": {
     "path": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-    "observed_git_blob_sha": "ad0d4950424987ec6f57860cf1022fea818325ad",
-    "status": "ACTIVE_RESEARCH__FAILCLOSED_MESSAGE_V77_FRONTIER__SUCCESSOR_READY",
-    "raw_python_source_bytes": 1593651,
-    "B_exec_raw_python_source_bytes": 1596411,
-    "qualification": "V76_CORRECTED_NEXT82_20700_OF_20700__TRANSFERRED_BY_FAILCLOSED_MESSAGE_DECISION_EQUIVALENCE__V77_STRATIFIED_NEXT82_240_OF_240",
-    "next": "Rerank exact V77 using inherited spent corrected NEXT82 under fail-closed decision equivalence; make a new physical cut before touching QUAL_SUCCESSOR_NEXT83_20261011_V1.",
+    "observed_git_blob_sha": "7e43e9cf8b0d0d857a68c8f41051d70ac6d4bc0b",
+    "status": "ACTIVE_RESEARCH__OPERATOR_WHITESPACE_V78_FRONTIER__SUCCESSOR_READY",
+    "raw_python_source_bytes": 1589206,
+    "B_exec_raw_python_source_bytes": 1591966,
+    "qualification": "CORRECTED_NEXT82_TRANSFERRED_BY_TOKEN_AST_EQUIVALENCE__V78_STRATIFIED_240_OF_240",
+    "next": "Rerank exact V78 using inherited spent corrected NEXT82; make a non-equivalence physical cut before touching QUAL_SUCCESSOR_NEXT83_20261011_V1.",
     "promotion_credit": 0,
     "observed_snapshot_is_non_authoritative_for_v15_runtime": true
   },
@@ -265,8 +265,8 @@
   },
   "capability_frontier_currentness_reconciliation": {
     "path": "canonical/governance/CAPABILITY_FRONTIER_CURRENTNESS_RECONCILIATION_20261010_V1.json",
-    "observed_git_blob_sha": "c2b63a5d17f8cfb4705a978352daa99f7fea746f",
-    "status": "CURRENTNESS_RECONCILED__PROFESSIONAL_24_OF_24__EXECUTION_12_OF_12__SEMANTIC_12_OF_12__REGRESSION_HOSTED_ACTIONS_BILLING_PRESTART_BLOCK__ESCAPE_WAKE_GATED__BYTES_V77_READY__R2_V91_WAKE_GATED__TB_CURRENT_PATH_DYNAMIC__ZERO_CREDIT",
+    "observed_git_blob_sha": "3a42ef477b7b7f9acb9e8cb3f2c1a67b03beafd4",
+    "status": "CURRENTNESS_RECONCILED__PROFESSIONAL_24_OF_24__EXECUTION_12_OF_12__SEMANTIC_12_OF_12__REGRESSION_HOSTED_ACTIONS_BILLING_PRESTART_BLOCK__ESCAPE_WAKE_GATED__BYTES_V78_READY__R2_V91_WAKE_GATED__TB_CURRENT_PATH_DYNAMIC__ZERO_CREDIT",
     "next": "RERANK_EXACT_V77_USING_INHERITED_SPENT_CORRECTED_NEXT82_UNDER_FAILCLOSED_MESSAGE_DECISION_EQUIVALENCE__MAKE_NEW_PHYSICAL_CUT_BEFORE_SPENDING_FROZEN_NEXT83__CONTINUE_OTHER_CAPABILITY_FIRST_GENERAL_DEVELOPMENT__DO_NOT_RUN_SAME_INFORMATION_CHECKPOINT_WORK"
   },
   "professional_regression_carrier_diagnosis": {
