@@ -77,6 +77,48 @@ def _app_op(app: str, operation: str, args: Mapping[str, Any] | None = None):
     }
 
 
+def _history(state: Mapping[str, Any]) -> list[Mapping[str, Any]]:
+    raw = state.get("history")
+    if not isinstance(raw, list):
+        return []
+    return [row for row in raw if isinstance(row, Mapping)]
+
+
+def _latest_successful_app_operation(
+    state: Mapping[str, Any],
+) -> tuple[Mapping[str, Any] | None, Mapping[str, Any] | None]:
+    for row in reversed(_history(state)):
+        result = row.get("app_result")
+        submitted = row.get("submitted_operation")
+        if (
+            isinstance(result, Mapping)
+            and result.get("ok") is True
+            and isinstance(submitted, Mapping)
+        ):
+            return submitted, result
+    return None, None
+
+
+def _candidate_action(candidate: Mapping[str, Any]) -> Mapping[str, Any] | None:
+    actions = candidate.get("actions")
+    if (
+        isinstance(actions, list)
+        and len(actions) == 1
+        and isinstance(actions[0], Mapping)
+        and str(actions[0].get("type") or "").upper() == "APP_OP"
+    ):
+        return actions[0]
+    return None
+
+
+def _same_app_operation(left: Mapping[str, Any], right: Mapping[str, Any]) -> bool:
+    return (
+        left.get("app") == right.get("app")
+        and left.get("operation") == right.get("operation")
+        and dict(left.get("args") or {}) == dict(right.get("args") or {})
+    )
+
+
 def _writer(instruction: str):
     low = instruction.casefold()
     quoted = _quoted(instruction)
@@ -273,5 +315,24 @@ def decide(state: Mapping[str, Any]) -> Mapping[str, Any]:
     if router is not None:
         candidate = router(instruction)
         if candidate is not None:
+            action = _candidate_action(candidate)
+            submitted, result = _latest_successful_app_operation(state)
+            if (
+                action is not None
+                and submitted is not None
+                and result is not None
+                and _same_app_operation(action, submitted)
+            ):
+                return {
+                    "response": "app operation postcondition receipted",
+                    "actions": [{"type": "DONE"}],
+                    "_policy_receipt": {
+                        "route": "GENERIC_APP_OPERATION_VERIFIED_V2",
+                        "app": action.get("app"),
+                        "operation": action.get("operation"),
+                        "task_specific_policy_data": False,
+                        "external_model_dependency": False,
+                    },
+                }
             return candidate
     return base_decide(state)
