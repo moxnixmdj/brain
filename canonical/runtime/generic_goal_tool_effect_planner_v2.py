@@ -106,6 +106,14 @@ def _compatibility(
     operation_terms = {str(x).lower() for x in (profile.get("operation_terms") or [])}
     if trigger and trigger in operation_terms:
         score += 8
+
+    # Endpoint identity/path terms are stronger evidence than incidental request
+    # fields. This prevents, for example, an object field named "lead_source"
+    # from making a different object endpoint as lead-specific as a true lead
+    # endpoint. The rule is purely lexical over the dynamic schema.
+    intent_resources = {str(x).lower() for x in (intent.get("resource_terms") or [])}
+    identity_overlap = intent_resources & operation_terms
+    score += min(24, 8 * len(identity_overlap))
     return score, overlap
 
 
