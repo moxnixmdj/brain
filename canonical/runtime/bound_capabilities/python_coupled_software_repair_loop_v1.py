@@ -194,6 +194,15 @@ def _mutations(source: pathlib.Path, tests: list[pathlib.Path], limit: int):
         }
 
 
+def _mutation_site(desc: Mapping[str, Any]) -> tuple[Any, ...]:
+    return (
+        desc.get("lineno"),
+        desc.get("col_offset"),
+        desc.get("end_lineno"),
+        desc.get("end_col_offset"),
+    )
+
+
 def _run(repo: pathlib.Path, argv: list[str], timeout: int) -> dict[str, Any]:
     return patch._run_tests(repo, argv, timeout)
 
@@ -342,6 +351,14 @@ def run(args: Mapping[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]
                         for cand2 in _mutations(source2, tests, per_file):
                             if second_seen >= max_pair_second or tested_total >= total_budget:
                                 break
+                            # A "coupled" witness must not be one AST location
+                            # walked through two successive values (e.g. 2->3->4).
+                            # Same-file pairs remain allowed only at distinct sites.
+                            if (
+                                source2 == source1
+                                and _mutation_site(cand2["mutation"]) == _mutation_site(cand1["mutation"])
+                            ):
+                                continue
                             second_seen += 1
                             pair_probe_count += 1
                             tested_total += 1
