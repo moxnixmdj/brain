@@ -17,7 +17,7 @@ MAX_OPS = 32
 MAX_TEXT_BYTES = 1_000_000
 MAX_ARGS = 64
 ALLOWED_CLI = frozenset({
-    "bash", "python", "python3", "libreoffice", "soffice", "ffmpeg", "ffprobe",
+    "libreoffice", "soffice", "ffmpeg", "ffprobe",
     "blender", "freecadcmd", "FreeCADCmd", "git", "tar", "unzip", "zip",
     "convert", "magick", "identify", "pdftotext", "pandoc",
 })
@@ -119,6 +119,9 @@ def _compile_op(op: Mapping[str, Any]) -> str:
         exe = PurePosixPath(argv[0]).name
         if exe not in ALLOWED_CLI:
             raise StateOpsError("RUN_CLI_EXECUTABLE_NOT_ALLOWED:" + exe)
+        for arg in argv[1:]:
+            if arg.startswith("/"):
+                _path(arg)
         timeout = op.get("timeout_s", 60)
         if isinstance(timeout, bool) or not isinstance(timeout, int) or not 1 <= timeout <= 300:
             raise StateOpsError("RUN_CLI_TIMEOUT_INVALID")
