@@ -132,13 +132,24 @@ def _observation_can_supply(
     semantics = set(str(x) for x in profile.get("response_semantics") or [])
     overlap = bool(_resource_overlap(intent, profile))
 
+    profile_resources = {
+        canonical_field(x)
+        for x in (profile.get("resource_terms") or [])
+    }
+    if semantic in _RELATION_SEMANTICS:
+        if semantic == "id":
+            return "id" in semantics and overlap
+        return (
+            "id" in semantics
+            and overlap
+            and (
+                semantic in semantics
+                or semantic in profile_resources
+            )
+        )
     if semantic in semantics and overlap:
         return True
-    if semantic in _RELATION_SEMANTICS and "id" in semantics and overlap:
-        return True
-    # Rich text from a causally earlier explicit observation can encode named
-    # values (task name, due date, amount, recipient, etc.). The binder still
-    # validates that the concrete value actually exists before execution.
+    # Rich text can ground scalar values and names, but never relation IDs.
     if "text" in semantics and _earlier_observe_match(profile, intent, positive):
         return True
     return False
@@ -160,7 +171,16 @@ def _mutation_can_supply_later(
     if semantic in semantics:
         return True
     if semantic in _RELATION_SEMANTICS and "id" in semantics:
-        return True
+        if semantic == "id":
+            return True
+        current_resources = {
+            canonical_field(x)
+            for x in (
+                list(current_intent.get("resource_terms") or [])
+                + list(current_profile.get("resource_terms") or [])
+            )
+        }
+        return semantic in current_resources
     return False
 
 
