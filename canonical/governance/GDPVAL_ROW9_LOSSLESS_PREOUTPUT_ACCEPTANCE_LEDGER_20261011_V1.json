@@ -1,0 +1,70 @@
+{
+  "schema":"PROJECT_BRAIN_GDPVAL_ROW9_LOSSLESS_PREOUTPUT_ACCEPTANCE_LEDGER_20261011_V1",
+  "date":"2026-10-11",
+  "status":"FROZEN_BEFORE_DELIVERABLE_GENERATION__27_OF_27_RAW_PROMPT_SEGMENTS_RETAINED__ZERO_SCORE_CREDIT",
+  "benchmark":"GDPval-AA v2.1",
+  "row_idx":9,
+  "task_id":"c44e9b62-7cd8-4f72-8ad9-f8fbddb94083",
+  "task_sha256":"23f1b0f2b7f67d4d484052478ce9c34cebd04e58aa21e6d2aa19c2d8c70dc186",
+  "lossless_task_contract_sha256":"fe972a0e6fd5a3660a7f317fac3c59a404c816138bc2db26a42a6c858a09c3fa",
+  "raw_obligation_count":27,
+  "reference_sha256":{
+    "Budget Planning Principles.pdf":"8f1d9759f2c7795262331f9e115669b2a9abff81c5e8b3006cd0f3c57d5fcbb6",
+    "Fulltime Equivalent Report Administrative Support Services.xlsx":"648fdb0fd6aaf586c73f7c106e90f873d7a33e79c7e695d4b865ec8e9d32ccb1",
+    "Organizational Chart Administrative Support Services Branch.pdf":"71cb4f08b9002903e5b08a847ebbbf8626eef75c006c4787f9b916776c9a82d9"
+  },
+  "source_facts":{
+    "current_total_fte":237,
+    "minimum_reduction_fraction":0.04,
+    "minimum_reduction_fte_real":9.48,
+    "minimum_whole_fte_reduction":10,
+    "regional_managed_fte":60,
+    "regional_required_reduction_fraction":0.10,
+    "regional_reduction_fte":6,
+    "specified_attrition_reduction_fte":7,
+    "planned_total_reduction_fte":13,
+    "planned_fte":224,
+    "planned_reduction_fraction":0.05485232067510549
+  },
+  "regional_line_plan":[
+    {"position":"Regional Support Service Lead","current":10,"planned":9,"reduction":1},
+    {"position":"Regional Executive Assistant","current":10,"planned":9,"reduction":1},
+    {"position":"Administrative Assistant","current":20,"planned":18,"reduction":2},
+    {"position":"Clerk II","current":10,"planned":9,"reduction":1},
+    {"position":"Clerk I","current":10,"planned":9,"reduction":1}
+  ],
+  "attrition_plan":[
+    {"line":"Central Services Supervisor","position":"Data Clerk","reduction":3,"basis":"planned retirements and leaves"},
+    {"line":"IT Support Services Supervisor","position":"Clerk II","reduction":1,"basis":"leave"},
+    {"line":"IT Support Services Supervisor","position":"Data Clerk","reduction":2,"basis":"one leave plus one currently vacant position not filled"},
+    {"line":"Policy Supervisor","position":"Facilitator","reduction":1,"basis":"resignation"}
+  ],
+  "position_title_aggregate_plan":{
+    "Administrative Services Manager":[1,0,1],
+    "Supervisor":[6,0,6],
+    "Executive Assistant":[48,1,47],
+    "Policy Advisor":[2,0,2],
+    "Research Analyst":[1,0,1],
+    "Training Advisor":[1,0,1],
+    "Facilitator":[2,1,1],
+    "Intern":[1,0,1],
+    "Regional Support Service Lead":[10,1,9],
+    "Administrative Assistant":[57,2,55],
+    "Clerk II":[52,2,50],
+    "Clerk I":[11,1,10],
+    "Data Clerk":[35,5,30],
+    "Reception Clerk":[10,0,10]
+  },
+  "deliverable_obligations":[
+    "PDF_REVISED_ORG_CHART_REFLECTING_AT_LEAST_4_PERCENT_REDUCTION",
+    "VISUALLY_HIGHLIGHT_EVERY_POSITION_GROUP_REDUCED",
+    "XLSX_UPDATED_FTE_REPORT_BY_POSITION_TITLE",
+    "DOCX_BRIEFING_NOTE_WITH_BACKGROUND_PROPOSED_REDUCTIONS_AND_BUDGET_PRINCIPLE_ALIGNMENT",
+    "DOCX_EMPHASIZE_PRINCIPLE_7_STRATEGIC_HIRING_AND_NONAUTOMATIC_VACANCY_FILLING",
+    "REGIONAL_SUPERVISOR_LINE_ALL_MANAGED_FTES_REDUCED_10_PERCENT",
+    "ALL_SPECIFIED_ATTRITION_CASES_INCLUDED",
+    "ALL_LEAVES_RESIGNATIONS_RETIREMENTS_TREATED_AS_OCCURRING_BEFORE_FISCAL_YEAR_END"
+  ],
+  "hard_rule":"NO_DELIVERABLE_FREEZE_UNTIL_EVERY_RAW_PROMPT_SEGMENT_HAS_AN_EXPLICIT_SATISFACTION_LOCATION_OR_IS_MARKED_CONTEXT_PRESERVED",
+  "accounting":{"incremental_spend_usd":0,"acceptance_credit_delta":0,"terminal_credit_delta":0}
+}
