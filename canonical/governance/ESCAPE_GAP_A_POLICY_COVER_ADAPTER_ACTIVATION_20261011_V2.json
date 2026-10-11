@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_ESCAPE_GAP_A_POLICY_COVER_ADAPTER_ACTIVATION_20261011_V2",
+  "date": "2026-10-11",
+  "status": "ACTIVE_REUSABLE_CURRENT_PROJECTION_AWARE_GAP_A_PROOF_ADAPTER__FOCUSED_VERIFIED__ZERO_REAL_ROW_CREDIT",
+  "objective": "REUSE_EXISTING_AUTHENTICATED_OBSERVABLE_POLICY_COVER_TOTALITY_AND_CURRENT_V7_ROUTE_PROJECTION_TO_EMIT_GAP_A_ROW_PROOFS_ONLY_WHEN_CURRENT_ROW_PREMISES_ARE_INDEPENDENTLY_BOUND",
+  "predecessor": {
+    "path": "canonical/governance/ESCAPE_GAP_A_POLICY_COVER_ADAPTER_ACTIVATION_20261010_V1.json",
+    "git_blob_sha": "7eaa5c0a403cfd9e6d131cecdc7cb9a243843872"
+  },
+  "runtime": {
+    "path": "canonical/runtime/escape_gap_a_policy_cover_adapter_v1.py",
+    "git_blob_sha": "3c003f353d74dea26c7053f57dccd5ea5a1244d2"
+  },
+  "tests": {
+    "path": "canonical/tests/test_escape_gap_a_policy_cover_adapter_v1.py",
+    "git_blob_sha": "0e55c93011a0c25a545cef62f82a651b2002a7da"
+  },
+  "verification": {
+    "path": "canonical/verification/ESCAPE_GAP_A_POLICY_COVER_ADAPTER_VERIFY_20261011_V2.json",
+    "git_blob_sha": "d3243764d54f6797bd6d6a64fc7d9bbdb7cfaf08",
+    "result": "PYCOMPILE_PASS__13_OF_13_FOCUSED"
+  },
+  "currentness": {
+    "authority_chain": "CURRENT_RESIDUAL_REUSE_CLASSIFICATION -> V7_SHARED_GAP_BINDING -> CURRENT_EFFECTIVE_PROJECTION",
+    "route_group_overrides_applied": true,
+    "parked_rows_rejected": true,
+    "historical_manifest_route_labels_are_not_current_authority": true
+  },
+  "current_frontier_effect": {
+    "active_gap_a_rows": 12,
+    "active_gap_b_rows": 0,
+    "parked_rows": [
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "real_row_proofs_before": 0,
+    "real_row_proofs_after": 0,
+    "shared_adapter_missing": false,
+    "private_acquisition_authorized_by_adapter": false
+  },
+  "hard_nonclaims": [
+    "NO_ROW_CREDIT_FROM_ADAPTER_EXISTENCE_OR_CURRENTNESS_REPAIR",
+    "NO_PRIVATE_INFORMATION_ACQUISITION_AUTHORITY",
+    "NO_FULL_PRIVATE_CURRENT_MAIN_REGRESSION",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "row_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "promotion_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
