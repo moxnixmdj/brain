@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_V5_DIAGNOSTIC_HARNESS_TRUTH_REPAIR_20261011_V1",
+  "date": "2026-10-11",
+  "status": "OLD_SEQUENTIAL_AND_TRANSPORT_DIAGNOSTICS_DEMOTED__MISSING_POLICY_DEPENDENCY",
+  "affected_runner_evidence": {
+    "sequential": {
+      "repository": "moxnixmdj/verification-capsule-runner",
+      "pull_request": 2687,
+      "workflow_run_id": 38142922197,
+      "workflow_job_id": 114480288558,
+      "observed_result": "5_OF_25_ATTEMPTED__0_OF_25_NORMALIZED_EXACT",
+      "admissibility": "INVALID_AS_BRAIN_V5_CAPABILITY_MEASUREMENT"
+    },
+    "transport": {
+      "repository": "moxnixmdj/verification-capsule-runner",
+      "pull_request": 2689,
+      "workflow_run_id": 38143090064,
+      "workflow_job_id": 114480771506,
+      "observed_bing_failure": "FAILED_FILE_NOT_FOUND",
+      "admissibility": "INVALID_AS_BING_TRANSPORT_FAILURE_EVIDENCE"
+    }
+  },
+  "defect": {
+    "required_policy_path": "canonical/governance/HLE_OPUS55_TOOL_POLICY_V1.json",
+    "required_policy_blob": "d2a2427b483fe1c06c6b1e6bc98d72bf07e7a730",
+    "staged_in_affected_branches": false,
+    "code_path": "hle_native_open_domain_research_v5.rich_search -> root2_hle_opus55_tool_adapter_v1.load_policy",
+    "consequence": "RICH_SEARCH_RAISED_LOCAL_FILE_NOT_FOUND_BEFORE_BING_RESULT_ACCEPTANCE"
+  },
+  "preserved_evidence": {
+    "wikipedia_receipts": "SEPARATE_FROM_POLICY_DEPENDENCY_AND_REMAIN_DIAGNOSTIC_ONLY",
+    "short_seed_retrieval_run_commit": "63e58d35d7dc5993a58ed6add6b674830fedf891",
+    "short_seed_run_bound_policy": true,
+    "short_seed_retrieval_any_hit_rate": 0.52
+  },
+  "corrected_action": "RERUN_TRANSPORT_PROBE_WITH_EXACT_POLICY_STAGED_AND_REPORT_HTTP_ERROR_CODES",
+  "hard_nonclaims": [
+    "OLD_ZERO_EXACT_RESULT_DOES_NOT_PROVE_BRAIN_V5_ZERO_CAPABILITY",
+    "OLD_BING_FILENOTFOUND_DOES_NOT_PROVE_BING_NETWORK_FAILURE",
+    "NO_HLE_SCORE_CREDIT"
+  ],
+  "hle_score_credit": 0,
+  "hle_67_7_certified": false,
+  "incremental_spend_usd": 0
+}
