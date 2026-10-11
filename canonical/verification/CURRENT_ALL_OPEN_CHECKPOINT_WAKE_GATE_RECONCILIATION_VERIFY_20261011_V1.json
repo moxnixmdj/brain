@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_ALL_OPEN_CHECKPOINT_WAKE_GATE_RECONCILIATION_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__14_OF_14_SOURCE_LOCKS__3_OF_3_PROJECTIONS_CONSISTENT__12_OPEN__12_WAKE_GATED__0_SAME_INFORMATION_RUNNABLE__ZERO_CREDIT",
+  "subject": {
+    "reconciliation": "canonical/governance/CURRENT_ALL_OPEN_CHECKPOINT_WAKE_GATE_RECONCILIATION_20261011_V1.json",
+    "base_main_commit": "3d0f7a0c8ff0c2a5c4144ede3435af3471db814f"
+  },
+  "checks": {
+    "source_locks": "14_OF_14_MATCH_CURRENT_MAIN",
+    "current_frontier_reuse_specialization": "12_WAKE_GATED_ROWS__0_SAME_INFORMATION_RUNNABLE",
+    "current_escape_two_engine_cut": "12_WAKE_GATED_OPEN_ROWS__0_SAME_INFORMATION_RUNNABLE",
+    "current_development_scheduler": "12_OPEN__12_WAKE_GATED__0_SAME_INFORMATION_RUNNABLE__CAPABILITY_FIRST_PRIMARY"
+  },
+  "proved": [
+    "OPEN_CHECKPOINT_OBLIGATIONS_REMAIN_LOGICALLY_OPEN",
+    "UNCHANGED_INFORMATION_ROW_SPECIFIC_EXECUTION_HAS_ZERO_SCHEDULER_VALUE",
+    "NO_NEW_PRIMITIVE_IS_ESTABLISHED_BY_CURRENT_CHECKPOINT_EVIDENCE",
+    "CAPABILITY_FIRST_GENERAL_DEVELOPMENT_AND_RESOURCE_PARETO_WORK_IS_PRIMARY_WHEN_NO_WAKE_EVENT_EXISTS"
+  ],
+  "hard_nonclaims": [
+    "NO_CHECKPOINT_ACCEPTANCE_CREDIT",
+    "NO_CAPABILITY_OWNERSHIP_PROMOTION_OR_TERMINAL_CREDIT",
+    "NO_PRIVATE_OR_GATED_DATA_ACCESSED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
