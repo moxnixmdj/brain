@@ -5039,6 +5039,88 @@
         "external_general_purpose_model_runtime_dependency_count": 0,
         "incremental_spend_usd": 0
       }
+    },
+    "chart.raster.direct_curve_label_family_rank.v1": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "adapter_module": "chart_direct_curve_label_family_rank_v1",
+      "entrypoint": "run",
+      "cost": 2,
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "chart",
+        "curve",
+        "direct label",
+        "series",
+        "family",
+        "rank",
+        "nearest",
+        "growth",
+        "survival",
+        "raster"
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "requires": [
+        "image.file.available"
+      ],
+      "provides": [
+        "chart.raster.direct_curve.label_binding",
+        "chart.raster.curve_family.rank_at_x",
+        "chart.raster.curve_family.nearest_at_x_y"
+      ],
+      "limitations": [
+        "Direct-label binding is limited to alphabetic or alphanumeric OCR labels adjacent to a unique curve start or end point.",
+        "Ambiguous nearby endpoints, duplicate normalized labels, multiple direct labels for one curve, unbracketed queries, large interpolation gaps, vertical overlaps, unsupported axes, and nearest-value ties fail closed.",
+        "Same-color curves can be distinguished only when direct labels bind distinct polyline indices.",
+        "No arbitrary inline contour-label authority, domain semantic interpretation, heldout Chartography coverage, or Chartography score authority."
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "chart.raster.direct_curve_label_family_rank.v1",
+          "path": "${input.path}",
+          "x_value": "${input.x_value}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "pass",
+          "value": true
+        }
+      },
+      "source": {
+        "type": "brain_native_deterministic_composition",
+        "adapter_path": "canonical/runtime/bound_capabilities/chart_direct_curve_label_family_rank_v1.py",
+        "composed_capabilities": [
+          "chart.raster.scene_graph.v1",
+          "chart.raster.positioned_ocr_axis_binding.v1",
+          "image.extract.ocr.tesseract.positioned.tsv"
+        ],
+        "external_general_purpose_model_runtime_dependency_count": 0
+      },
+      "verification": {
+        "verified": true,
+        "verification_class": "FOCUSED_EXACT_BLOB_PLUS_NEIGHBORING_REGRESSION_PLUS_SECOND_CARRIER_INDEPENDENT",
+        "independently_verified": true,
+        "exact_runtime_blob_sha": "e3be28bd83ce0a9359a2ce9cedc8415dbcf745d2",
+        "exact_test_blob_sha": "4c8fc60d72e160f9995c5df1b0af75b97d9a1eb9",
+        "receipt_path": "canonical/verification/CHART_DIRECT_CURVE_LABEL_FAMILY_RANK_V1_VERIFY_20261011.json",
+        "focused_workflow_run_id": 38155272543,
+        "focused_workflow_job_id": 114516848546,
+        "focused_candidate_tests_passed": 13,
+        "focused_neighboring_regression_tests_passed": 34,
+        "independent_receipt_path": "canonical/verification/CHART_DIRECT_CURVE_LABEL_FAMILY_RANK_V1_INDEPENDENT_VERIFY_20261011.json",
+        "independent_verifier_repository": "moxnixmdj/verification-capsule-runner",
+        "independent_verifier_pr": 2723,
+        "independent_workflow_run_id": 38167990652,
+        "independent_workflow_job_id": 114554450529,
+        "independent_artifact_id": 11713120076,
+        "independent_artifact_zip_sha256": "01db2835a3749ec4de880cd1793bb42776908aad508c243cf1a7388dc194e7c1",
+        "independent_authored_tests_passed": 13,
+        "independent_falsification_tests_passed": 14,
+        "heldout_chartography_cases_consumed": 0,
+        "model_dependency_count": 0
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
