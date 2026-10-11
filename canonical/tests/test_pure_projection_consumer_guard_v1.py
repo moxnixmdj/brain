@@ -11,15 +11,13 @@ from canonical.runtime.pure_projection_consumer_guard_v1 import (
 
 GOOD = """
 def helper(x):
-    if x > 7:
-        return x - 1
-    return x
+    return x == 8
 
 def evaluate(projection):
     proved = projection["sources"][0]["projection"]["/authority/proved"]
     open_count = projection["sources"][0]["projection"]["/authority/open"]
     return {
-        "still_valid": helper(proved) == 7 and open_count == 12,
+        "still_valid": helper(proved) and open_count == 12,
         "count": len(projection["sources"]),
     }
 """
@@ -153,12 +151,12 @@ class PureProjectionConsumerGuardTests(unittest.TestCase):
         out = evaluate_pure_consumer(
             source=(
                 "def evaluate(projection):\n"
-                "    return {'x': set([1, 2])}\n"
+                "    return {'x': float('nan')}\n"
             ),
             projection=self.projection(),
         )
         self.assertFalse(out["pass"])
-        self.assertIn("TypeError", out["error"])
+        self.assertIn("ValueError", out["error"])
 
     def test_projection_is_json_re_materialized(self):
         class Evil(dict):
