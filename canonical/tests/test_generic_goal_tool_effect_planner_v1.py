@@ -105,6 +105,20 @@ class GenericGoalToolEffectPlannerV1Tests(unittest.TestCase):
         )
         self.assertEqual(out["steps"][1]["action_class"], "associate")
 
+    def test_negated_ambiguous_action_words_compile_as_forbidden_verbs(self):
+        for clause, action in (
+            ("Do not update the customer record.", "update"),
+            ("Never record the customer note.", "create"),
+            ("Do not message the customer.", "notify"),
+            ("Do not archive the customer record.", "delete"),
+        ):
+            out = compile_goal_contract(clause)
+            forbidden = [
+                x for x in out["intents"]
+                if x["forbidden"] and x["action_class"] == action
+            ]
+            self.assertEqual(len(forbidden), 1, (clause, out))
+
     def test_negative_instruction_is_constraint_not_target(self):
         endpoints = [
             {
