@@ -151,9 +151,11 @@ Never reference task IDs, benchmark source files, evaluator internals, hidden an
 or reference trajectories. Never assume an action succeeded without observing the
 receipt or resulting state on a later cycle. Treat operation_error as a recoverable
 mismatch: change selector/strategy instead of repeating the identical failed action.
-If browser state is relevant but unknown, OBSERVE first. OBSERVE receipts include
-visible text plus generic semantic controls; prefer those labels/roles/selectors
-over guessed pixel coordinates.
+If browser state is relevant but unknown, OBSERVE first. After any browser mutation,
+OBSERVE again before DONE so completion is based on post-action state. OBSERVE receipts
+include visible text plus generic semantic controls; prefer those labels/roles/selectors
+over guessed pixel coordinates. For guest file/state changes, run an ASSERT_* verification
+operation before DONE.
 Return no prose outside the required tool call."""
 
 
