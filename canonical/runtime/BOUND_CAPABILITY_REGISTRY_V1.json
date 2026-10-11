@@ -4784,8 +4784,8 @@
       },
       "verification": {
         "verified": true,
-        "verification_class": "FOCUSED_EXACT_BLOB_PLUS_NEIGHBORING_REGRESSION",
-        "independently_verified": false,
+        "verification_class": "FOCUSED_EXACT_BLOB_PLUS_NEIGHBORING_REGRESSION_PLUS_SECOND_CARRIER_INDEPENDENT",
+        "independently_verified": true,
         "exact_runtime_blob_sha": "e3be28bd83ce0a9359a2ce9cedc8415dbcf745d2",
         "exact_test_blob_sha": "4c8fc60d72e160f9995c5df1b0af75b97d9a1eb9",
         "receipt_path": "canonical/verification/CHART_DIRECT_CURVE_LABEL_FAMILY_RANK_V1_VERIFY_20261011.json",
@@ -4795,7 +4795,17 @@
         "neighboring_regression_tests_passed": 34,
         "total_tests_passed": 47,
         "heldout_chartography_cases_consumed": 0,
-        "model_dependency_count": 0
+        "model_dependency_count": 0,
+        "independent_receipt_path": "canonical/verification/CHART_DIRECT_CURVE_LABEL_FAMILY_RANK_V1_INDEPENDENT_VERIFY_20261011.json",
+        "independent_verifier_repository": "moxnixmdj/verification-capsule-runner",
+        "independent_verifier_pr": 2723,
+        "independent_workflow_run_id": 38167990652,
+        "independent_workflow_job_id": 114554450529,
+        "independent_artifact_id": 11713120076,
+        "independent_artifact_zip_sha256": "01db2835a3749ec4de880cd1793bb42776908aad508c243cf1a7388dc194e7c1",
+        "independent_authored_tests_passed": 13,
+        "independent_falsification_tests_passed": 14,
+        "independent_total_tests_passed": 27
       }
     }
   },
