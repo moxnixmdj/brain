@@ -1,0 +1,105 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_SCALE_BRAIN_SUBMISSION_RECEIPT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__FRESH_ROW19_TWO_DOCX_SUBMISSION_FROZEN__SOURCE_BOUND_FINANCIAL_AND_RENDER_QA_PASS__ZERO_OWNER_SCORE_CREDIT",
+  "benchmark": "GDPval-AA v2.1",
+  "subject": {
+    "row_idx": 19,
+    "task_id": "05389f78-589a-473c-a4ae-67c61050bfca",
+    "sector": "Manufacturing",
+    "occupation": "Buyers and Purchasing Agents"
+  },
+  "precommit": "canonical/governance/GDPVAL_SCALE_FRESH_BATCH_ROWS15_24_PRECOMMIT_20261011_V1.json",
+  "packet": {
+    "manifest_root_sha256": "f69af30fcea243ccb25d44c4a5380be0cdcac621287568525065034ce6cedae8",
+    "packet_sha256": "599e699d0400aff1b01213264f53a31d3308f58766b2ed77dde19a83e55c3253",
+    "prompt_sha256": "8899271b4be9dd49a86ebc545792f918bc535eec96303d9b34d33a035dcd7010",
+    "raw_obligation_count": 28,
+    "reference_count": 1
+  },
+  "freshness": {
+    "task_id_frozen_before_prompt_read": true,
+    "rubric_read_before_output_freeze": false,
+    "human_gold_read_before_output_freeze": false,
+    "third_party_model_submission_read_before_output_freeze": false,
+    "judge_feedback_read_before_output_freeze": false
+  },
+  "reference": {
+    "filename": "Model A HL quotes_1.docx",
+    "sha256": "c41747c5d1641a515ac32263e9a697d601ed029d46110764218771ed2f58efb9",
+    "bytes": 14174,
+    "extraction": "OFFICIAL_DATASET_BYTES__OOXML_STANDARD_LIBRARY_PARSE"
+  },
+  "financial_analysis": {
+    "four_year_volume": 530000,
+    "Juvoxa": {
+      "unit_price_inr": 5834,
+      "tooling_inr": 10000000,
+      "rd_inr": 2000000,
+      "lead_time_weeks": 6,
+      "modeled_program_cost_inr": 3104020000
+    },
+    "Autonexis": {
+      "unit_price_inr": 7286,
+      "tooling_inr": 40000000,
+      "rd_inr": 7000000,
+      "lead_time_weeks": 12,
+      "fx_exposure": "High",
+      "modeled_program_cost_inr": 3908580000,
+      "delta_vs_juvoxa_inr": 804560000
+    },
+    "Vendrax": {
+      "unit_price_inr": 6347,
+      "tooling_inr": 30000000,
+      "rd_inr": 4500000,
+      "lead_time_weeks": 6,
+      "fx_exposure": "Low-Medium",
+      "modeled_program_cost_inr": 3398410000,
+      "delta_vs_juvoxa_inr": 294390000
+    },
+    "requested_juvoxa_refund_inr": 3600000,
+    "vendrax_net_transition_premium_if_refund_recovered_inr": 290790000,
+    "vendrax_saving_vs_autonexis_inr": 510170000
+  },
+  "deliverables": [
+    {
+      "format":"docx",
+      "filename":"GDPval_05389f78_Juvoxa_termination_email.docx",
+      "sha256":"124b1e51156681921743b7e0a6b154538ff72002c84201b5ad54efc95651143c",
+      "library_path":"/Project Brain/GDPval/scale/05389f78-589a-473c-a4ae-67c61050bfca/GDPval_05389f78_Juvoxa_termination_email.docx",
+      "library_file_id":"libfile_e17714b4dd108191a955273c0da51527",
+      "rendered_page_count":1
+    },
+    {
+      "format":"docx",
+      "filename":"GDPval_05389f78_CPO_supplier_recovery_report.docx",
+      "sha256":"4aae27dbd0366eb64bf13f4ff5112454b427d9e87d35d8240c20034d4c9b347d",
+      "library_path":"/Project Brain/GDPval/scale/05389f78-589a-473c-a4ae-67c61050bfca/GDPval_05389f78_CPO_supplier_recovery_report.docx",
+      "library_file_id":"libfile_21a8e34cc61881918efd578b905e2fe3",
+      "rendered_page_count":2
+    }
+  ],
+  "verification": {
+    "email_visual_inspection":"PASS__ONE_PAGE__NO_CLIPPING_OVERLAP_OR_BROKEN_GLYPHS",
+    "email_addressees_include_ceo_design_head_relationship_manager":true,
+    "breach_and_commercial_impact_explicit":true,
+    "termination_model_a_and_future_programs_explicit":true,
+    "thirty_percent_refund_request_explicit_and_calculated":true,
+    "cpo_report_visual_inspection":"PASS__TWO_PAGES__NO_CLIPPING_OVERLAP_OR_BROKEN_GLYPHS",
+    "alternate_vendor_comparison_explicit":true,
+    "all_costs_and_calculations_in_inr":true,
+    "lead_time_and_fx_risk_compared":true,
+    "financial_transition_impact_explicit":true,
+    "specific_supplier_nomination_recommendation":"VENDRAX_COMPONENTS",
+    "recommendation_basis":"COST_RISK_TIMELINE_RECOVERY_AND_STRATEGIC_ALIGNMENT"
+  },
+  "hard_nonclaims": [
+    "REQUESTED_REFUND_RECOVERY_IS_NOT_ASSUMED_UNTIL_SETTLED",
+    "MODELED_PROGRAM_COST_EXCLUDES_UNPROVIDED_EXPEDITE_REVALIDATION_DUAL_RUN_FINANCING_AND_FX_MOVEMENT_COSTS",
+    "NO_ARTIFICIAL_ANALYSIS_OWNER_SCORE",
+    "NO_GDPVAL_ELO",
+    "NO_1846_THRESHOLD_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting":{"incremental_spend_usd":0,"acceptance_credit_delta":0,"terminal_credit_delta":0}
+}
