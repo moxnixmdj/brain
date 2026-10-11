@@ -1,0 +1,430 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_RECOVERED_SUBMISSION_CORPUS_V1",
+  "date": "2026-10-11",
+  "status": "PARTIAL_25_TASK_ROWS_WITH_CONCRETE_OUTPUTS__5_CANONICALLY_FRESH__ZERO_OWNER_SCORE_CREDIT",
+  "benchmark": "GDPval-AA v2.1",
+  "dataset": {
+    "owner": "openai",
+    "name": "gdpval",
+    "revision_sha": "11e7900cdcac61bc4daf59e65feb238acda98fbf",
+    "population_count": 220
+  },
+  "workspace_preoutput_manifest": {
+    "schema": "PROJECT_BRAIN_GDPVAL_220_PREOUTPUT_PACKET_MANIFEST_V1",
+    "root_sha256": "f69af30fcea243ccb25d44c4a5380be0cdcac621287568525065034ce6cedae8",
+    "observed_mtime_utc": "2026-10-11T10:40:40.016137+00:00",
+    "canonical_precommit_claimed": false
+  },
+  "counts": {
+    "task_rows_with_outputs": 25,
+    "canonically_fresh_task_rows": 5,
+    "workspace_ordered_noncanonical_task_rows": 16,
+    "recovered_without_freshness_proof": 4,
+    "remaining_without_recovered_outputs": 195
+  },
+  "rows": [
+    {
+      "row_idx": 5,
+      "task_id": "f84ea6ac-8f9f-428c-b96c-d0884e30f7c7",
+      "freshness_class": "CANONICAL_FRESH_FREEZE_AND_POSTFREEZE_EVIDENCE",
+      "eligible_as_clean_stage1_evidence": true,
+      "outputs": [
+        {
+          "filename": "GDPval_f84ea6ac_research_summary_final.docx",
+          "sha256": "a0b9b445c50394e43ea4c2b41cdcfb2b0ffa9212b5301dd5b82a44b8c94bf56a",
+          "bytes": 39738
+        }
+      ]
+    },
+    {
+      "row_idx": 6,
+      "task_id": "a328feea-47db-4856-b4be-2bdc63dd88fb",
+      "freshness_class": "CANONICAL_FRESH_FREEZE_AND_POSTFREEZE_EVIDENCE",
+      "eligible_as_clean_stage1_evidence": true,
+      "outputs": [
+        {
+          "filename": "gdpval_row6_966fbeb7.docx",
+          "sha256": "984e2cc6eba30d3c1c233f3450292f52c9b29c7a537d7b5d32dff6e10d925fe3",
+          "bytes": 39741
+        }
+      ]
+    },
+    {
+      "row_idx": 7,
+      "task_id": "27e8912c-8bd5-44ba-ad87-64066ea05264",
+      "freshness_class": "RECOVERED_OUTPUT_NO_FRESHNESS_PROOF",
+      "eligible_as_clean_stage1_evidence": false,
+      "outputs": [
+        {
+          "filename": "GDPval_27e8912c_workstation_ergonomics_checklist_final.pdf",
+          "sha256": "d76ceb373621931a592856c25a8f36c1e033bcd45dc320d3f3a0a4737c837d29",
+          "bytes": 215200
+        },
+        {
+          "filename": "GDPval_27e8912c_organizational_action_items_final.docx",
+          "sha256": "f4367fb90c667b5abc30446438aea489ae850f947ddb0fc1d29c431e20c05cd1",
+          "bytes": 38595
+        }
+      ]
+    },
+    {
+      "row_idx": 8,
+      "task_id": "17111c03-aac7-45c2-857d-c06d8223d6ad",
+      "freshness_class": "WORKSPACE_PREOUTPUT_ORDER_OBSERVED_NOT_CANONICAL_PRECOMMIT",
+      "eligible_as_clean_stage1_evidence": false,
+      "outputs": [
+        {
+          "filename": "GDPval_17111c03_cleanup_schedule.xlsx",
+          "sha256": "56264b240ba27113d69d9d0728f0132bdd491284bf5069f94305c1aac38dd5a2",
+          "bytes": 6240
+        },
+        {
+          "filename": "GDPval_17111c03_cleanup_memo.pdf",
+          "sha256": "5df1f0724cdf1a7850626edda52aef8aee2330513f0b204474b60bae1df74641",
+          "bytes": 61237
+        }
+      ]
+    },
+    {
+      "row_idx": 9,
+      "task_id": "c44e9b62-7cd8-4f72-8ad9-f8fbddb94083",
+      "freshness_class": "RECOVERED_OUTPUT_NO_FRESHNESS_PROOF",
+      "eligible_as_clean_stage1_evidence": false,
+      "outputs": [
+        {
+          "filename": "GDPval_c44e9b62_revised_organizational_chart_final.pdf",
+          "sha256": "4a24583030130664e63c61f0f083962517bc48bb6b1ed9c6080d180e4d9e2f09",
+          "bytes": 28948
+        },
+        {
+          "filename": "GDPval_c44e9b62_updated_FTE_report.xlsx",
+          "sha256": "a784e72aa09e39e5bca5423c87971b2d3bed305455313548933e2e8ae0f875d8",
+          "bytes": 7928
+        },
+        {
+          "filename": "GDPval_c44e9b62_FTE_reduction_briefing_note_final.docx",
+          "sha256": "e9f8c231cd5ebbe5d7b437e5b526854054893d88e7603ac1ab4cf657ed5d1a07",
+          "bytes": 39492
+        }
+      ]
+    },
+    {
+      "row_idx": 10,
+      "task_id": "99ac6944-4ec6-4848-959c-a460ac705c6f",
+      "freshness_class": "RECOVERED_OUTPUT_NO_FRESHNESS_PROOF",
+      "eligible_as_clean_stage1_evidence": false,
+      "outputs": [
+        {
+          "filename": "GDPval_99ac6944_mobile_IEM_setup.pdf",
+          "sha256": "daecde0703a5ee66648a5379ae392be6bc55f5de2616b5e030d292e8416f36b8",
+          "bytes": 419333
+        }
+      ]
+    },
+    {
+      "row_idx": 11,
+      "task_id": "f9a1c16c-53fd-4c8f-88cc-5c325ec2f0bb",
+      "freshness_class": "RECOVERED_OUTPUT_NO_FRESHNESS_PROOF",
+      "eligible_as_clean_stage1_evidence": false,
+      "outputs": [
+        {
+          "filename": "GDPval_f9a1c16c_stage_plot.pdf",
+          "sha256": "ae3799adfba259da999b2e684194439753e9a6628971a09e3b03afa882c0e099",
+          "bytes": 66065
+        }
+      ]
+    },
+    {
+      "row_idx": 12,
+      "task_id": "38889c3b-e3d4-49c8-816a-3cc8e5313aba",
+      "freshness_class": "WORKSPACE_PREOUTPUT_ORDER_OBSERVED_NOT_CANONICAL_PRECOMMIT",
+      "eligible_as_clean_stage1_evidence": false,
+      "outputs": [
+        {
+          "filename": "Deja_Vu_Instrumental_Delivery.zip",
+          "sha256": "7701df47ddf91d33ef4d407e2c989a7250f2b50c6d23f9f0a22034e07918333f",
+          "bytes": 128574855
+        }
+      ]
+    },
+    {
+      "row_idx": 13,
+      "task_id": "ff85ee58-bc9f-4aa2-806d-87edeabb1b81",
+      "freshness_class": "WORKSPACE_PREOUTPUT_ORDER_OBSERVED_NOT_CANONICAL_PRECOMMIT",
+      "eligible_as_clean_stage1_evidence": false,
+      "outputs": [
+        {
+          "filename": "Tavarua_Final_Mix.wav",
+          "sha256": "e3acf020940c6170503edd1f7de0516f50954c44fc5c7f64b19668e4f63f0ffe",
+          "bytes": 32140844
+        }
+      ]
+    },
+    {
+      "row_idx": 14,
+      "task_id": "4b894ae3-1f23-4560-b13d-07ed1132074e",
+      "freshness_class": "WORKSPACE_PREOUTPUT_ORDER_OBSERVED_NOT_CANONICAL_PRECOMMIT",
+      "eligible_as_clean_stage1_evidence": false,
+      "outputs": [
+        {
+          "filename": "State of Affairs_FULL_EDIT_MIX.wav",
+          "sha256": "08b4fff499c008bec5ac2841fa6dabb7ebad3d4cd503e232e94dbe6e5bb40b1e",
+          "bytes": 58752044
+        }
+      ]
+    },
+    {
+      "row_idx": 15,
+      "task_id": "1b1ade2d-f9f6-4a04-baa5-aa15012b53be",
+      "freshness_class": "WORKSPACE_PREOUTPUT_ORDER_OBSERVED_NOT_CANONICAL_PRECOMMIT",
+      "eligible_as_clean_stage1_evidence": false,
+      "outputs": [
+        {
+          "filename": "GDPval_1b1ade2d_revised_sourcing_nomination_workflow.docx",
+          "sha256": "aa369743e1d7760e045c5a3869fc4d8d4cfd90ff18a11584a96270c9ea41de7b",
+          "bytes": 43452
+        }
+      ]
+    },
+    {
+      "row_idx": 16,
+      "task_id": "93b336f3-61f3-4287-86d2-87445e1e0f90",
+      "freshness_class": "WORKSPACE_PREOUTPUT_ORDER_OBSERVED_NOT_CANONICAL_PRECOMMIT",
+      "eligible_as_clean_stage1_evidence": false,
+      "outputs": [
+        {
+          "filename": "GDPval_93b336f3_EV_battery_localisation_partnership_proposal.docx",
+          "sha256": "b20104aaaf5fd64af18c550ab43557a3f4d3dc59bd66416feb3d5a2e08abc7c0",
+          "bytes": 42974
+        }
+      ]
+    },
+    {
+      "row_idx": 17,
+      "task_id": "15ddd28d-8445-4baa-ac7f-f41372e1344e",
+      "freshness_class": "WORKSPACE_PREOUTPUT_ORDER_OBSERVED_NOT_CANONICAL_PRECOMMIT",
+      "eligible_as_clean_stage1_evidence": false,
+      "outputs": [
+        {
+          "filename": "GDPval_15ddd28d_LPI_tail_lamp_negotiation_strategy.docx",
+          "sha256": "451a87d2f6cd614f22587cf3db5a4cae5bbcad8175904562607c62f0db9c5bf8",
+          "bytes": 43228
+        }
+      ]
+    },
+    {
+      "row_idx": 18,
+      "task_id": "24d1e93f-9018-45d4-b522-ad89dfd78079",
+      "freshness_class": "WORKSPACE_PREOUTPUT_ORDER_OBSERVED_NOT_CANONICAL_PRECOMMIT",
+      "eligible_as_clean_stage1_evidence": false,
+      "outputs": [
+        {
+          "filename": "GDPval_24d1e93f_Model_I_headlamp_NPV_analysis.xlsx",
+          "sha256": "9dc1cb9ed65f9dc930ae3a54f1ca4bb5110c09c9acf4922b1c5bf606d760f662",
+          "bytes": 18604
+        }
+      ]
+    },
+    {
+      "row_idx": 19,
+      "task_id": "05389f78-589a-473c-a4ae-67c61050bfca",
+      "freshness_class": "WORKSPACE_PREOUTPUT_ORDER_OBSERVED_NOT_CANONICAL_PRECOMMIT",
+      "eligible_as_clean_stage1_evidence": false,
+      "outputs": [
+        {
+          "filename": "GDPval_05389f78_Juvoxa_termination_email.docx",
+          "sha256": "124b1e51156681921743b7e0a6b154538ff72002c84201b5ad54efc95651143c",
+          "bytes": 38479
+        },
+        {
+          "filename": "GDPval_05389f78_CPO_supplier_recovery_report.docx",
+          "sha256": "4aae27dbd0366eb64bf13f4ff5112454b427d9e87d35d8240c20034d4c9b347d",
+          "bytes": 40578
+        }
+      ]
+    },
+    {
+      "row_idx": 20,
+      "task_id": "575f8679-b4c1-47a2-8e96-d570d4ed9269",
+      "freshness_class": "WORKSPACE_PREOUTPUT_ORDER_OBSERVED_NOT_CANONICAL_PRECOMMIT",
+      "eligible_as_clean_stage1_evidence": false,
+      "outputs": [
+        {
+          "filename": "GDPval_575f8679_immigrant_family_mental_health_evaluation_plan_final.docx",
+          "sha256": "35ae1063098861bf999495a70424a8b9a3514aa5755619eec77823d686500bb7",
+          "bytes": 48297
+        }
+      ]
+    },
+    {
+      "row_idx": 21,
+      "task_id": "a74ead3b-f67d-4b1c-9116-f6bb81b29d4f",
+      "freshness_class": "WORKSPACE_PREOUTPUT_ORDER_OBSERVED_NOT_CANONICAL_PRECOMMIT",
+      "eligible_as_clean_stage1_evidence": false,
+      "outputs": [
+        {
+          "filename": "GDPval_a74ead3b_Session13_Safety_and_Protecting_Children_final.pptx",
+          "sha256": "edfade29b80534d606b69d224beda70ddb471797dcce68c5af28943f3b2b8970",
+          "bytes": 9146673
+        },
+        {
+          "filename": "GDPval_a74ead3b_Session14_Guiding_Behavior_final.pptx",
+          "sha256": "75c0ded4f2fa3b69e3bd4b5e778482508b8d2b9abe41a2bd06bf82806543d7f7",
+          "bytes": 10627949
+        }
+      ]
+    },
+    {
+      "row_idx": 22,
+      "task_id": "bbe0a93b-ebf0-40b0-98dc-8d9243099034",
+      "freshness_class": "WORKSPACE_PREOUTPUT_ORDER_OBSERVED_NOT_CANONICAL_PRECOMMIT",
+      "eligible_as_clean_stage1_evidence": false,
+      "outputs": [
+        {
+          "filename": "GDPval_bbe0a93b_Needs_Assessment_English.pdf",
+          "sha256": "3b8892bcc2acb9f84bd1504058378b0ed2d3d2af919567a32a197fc5af1bafda",
+          "bytes": 47478
+        },
+        {
+          "filename": "GDPval_bbe0a93b_Needs_Assessment_Spanish.pdf",
+          "sha256": "2c90d89cbbb9cf4547f0f7506774087b6845cb6c60f34d0ac8ca83b36308ce02",
+          "bytes": 48539
+        },
+        {
+          "filename": "GDPval_bbe0a93b_Kent_County_Resource_Guide.pdf",
+          "sha256": "d50607380d98277e0f209fa31d69c12467e81a064e3197912182848fa83fa5c1",
+          "bytes": 50804
+        }
+      ]
+    },
+    {
+      "row_idx": 23,
+      "task_id": "85d95ce5-b20c-41e2-834e-e788ce9622b6",
+      "freshness_class": "WORKSPACE_PREOUTPUT_ORDER_OBSERVED_NOT_CANONICAL_PRECOMMIT",
+      "eligible_as_clean_stage1_evidence": false,
+      "outputs": [
+        {
+          "filename": "J.S.pdf",
+          "sha256": "b840534093632da013615e102473218354ea284c281205c72159de1359a09023",
+          "bytes": 153305
+        }
+      ]
+    },
+    {
+      "row_idx": 24,
+      "task_id": "76d10872-9ffa-4ede-83ee-e0f1ec5e2b8d",
+      "freshness_class": "WORKSPACE_PREOUTPUT_ORDER_OBSERVED_NOT_CANONICAL_PRECOMMIT",
+      "eligible_as_clean_stage1_evidence": false,
+      "outputs": [
+        {
+          "filename": "GDPval_76d10872_New_Case_Creation_Report.pdf",
+          "sha256": "6e53bd01f8084b3a39dae9bf3a735480295cd3803feff8d10723aa9d0289aa7a",
+          "bytes": 62586
+        }
+      ]
+    },
+    {
+      "row_idx": 25,
+      "task_id": "36d567ba-e205-4313-9756-931c6e4691fe",
+      "freshness_class": "WORKSPACE_PREOUTPUT_ORDER_OBSERVED_NOT_CANONICAL_PRECOMMIT",
+      "eligible_as_clean_stage1_evidence": false,
+      "outputs": [
+        {
+          "filename": "Federal Applicant - Risk Assessment Tool.docx",
+          "sha256": "ba3cb57625194f09e04d9d36affa88aec359e3508bcf8e6cd1c5efd81dc7756b",
+          "bytes": 40352
+        }
+      ]
+    },
+    {
+      "row_idx": 26,
+      "task_id": "7bbfcfe9-132d-4194-82bb-d6f29d001b01",
+      "freshness_class": "WORKSPACE_PREOUTPUT_ORDER_OBSERVED_NOT_CANONICAL_PRECOMMIT",
+      "eligible_as_clean_stage1_evidence": false,
+      "outputs": [
+        {
+          "filename": "GDPval_7bbfcfe9_SCRA_Compliance_Test_Questions.xlsx",
+          "sha256": "5b152fc7e8bb5d2a0c1215efc1ac690f9bf9a2e0a154785263013d2b9d2fd634",
+          "bytes": 6521
+        }
+      ]
+    },
+    {
+      "row_idx": 83,
+      "task_id": "a95a5829-34bb-40f3-993b-558aed6dcdef",
+      "freshness_class": "CANONICAL_FRESH_WAVE_PRECOMMIT",
+      "eligible_as_clean_stage1_evidence": true,
+      "outputs": [
+        {
+          "filename": "GDPval_a95a5829_Training_Request_General_Order.docx",
+          "sha256": "5a0f7bc8c084c71f620c469f83c5baecb32150a33301ff7bd56a4acfc4805923",
+          "bytes": 43051
+        }
+      ]
+    },
+    {
+      "row_idx": 190,
+      "task_id": "b3573f20-5d3e-4954-948f-9461fda693d2",
+      "freshness_class": "CANONICAL_FRESH_WAVE_PRECOMMIT",
+      "eligible_as_clean_stage1_evidence": true,
+      "outputs": [
+        {
+          "filename": "GDPval_b3573f20_Brand_Data_Gathering.pdf",
+          "sha256": "4d6d579da2e2ae1c99c3d76a04de3d4379b96ffc9c84603b6267ce284e88b226",
+          "bytes": 7317
+        }
+      ]
+    },
+    {
+      "row_idx": 217,
+      "task_id": "854f3814-681c-4950-91ac-55b0db0e3781",
+      "freshness_class": "CANONICAL_FRESH_WAVE_PRECOMMIT",
+      "eligible_as_clean_stage1_evidence": true,
+      "outputs": [
+        {
+          "filename": "GDPval_854f3814_I40_ABQ_OKC_OverpassQL.md",
+          "sha256": "c5c38ab026b1919931dd2362077a753c5bd7aec74ff6ddf5a421739ef7753897",
+          "bytes": 3216
+        }
+      ]
+    }
+  ],
+  "fresh_wave_verification": {
+    "row_217": {
+      "live_overpass_runtime_probe": {
+        "status": "PASS",
+        "nodes": 10354,
+        "ways": 1785,
+        "relations": 18,
+        "total": 12157
+      }
+    },
+    "row_190": {
+      "status": "PASS__EXACT_THREE_PAGE_TEXT_PDF__NO_CLIPPING_AFTER_GLYPH_REPAIR",
+      "rendered_pages": 3
+    },
+    "row_83": {
+      "status": "PASS__THREE_PAGE_DOCX_RENDER__NO_CLIPPING_AFTER_COMPACTION",
+      "rendered_pages": 3
+    },
+    "row_23": {
+      "status": "PASS__PROMPT_CONFORMANT_8_TO_15_PAGE_RANGE_AND_NO_SOURCE_NAME_LEAK",
+      "rendered_pages": 10,
+      "source_name_leak_count": 0,
+      "john_reference_count": 58,
+      "school_placeholder_count": 60
+    }
+  },
+  "hard_nonclaims": [
+    "NO_220_COMPLETE_SUBMISSION_MANIFEST",
+    "NO_ARTIFICIAL_ANALYSIS_OWNER_SCORE",
+    "NO_ELO_1846_CLAIM",
+    "NO_OWNER_PAIRWISE_GRAPH",
+    "NONCANONICAL_WORKSPACE_ORDER_IS_NOT_PROMOTED_TO_CLEAN_EVIDENCE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "owner_score_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
