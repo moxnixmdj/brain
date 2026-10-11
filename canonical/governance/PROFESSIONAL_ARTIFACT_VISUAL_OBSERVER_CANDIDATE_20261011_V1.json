@@ -1,17 +1,17 @@
 {
   "schema": "PROJECT_BRAIN_PROFESSIONAL_ARTIFACT_VISUAL_OBSERVER_CANDIDATE_V1",
   "date": "2026-10-11",
-  "status": "CANDIDATE__BRAIN_NATIVE_RENDERED_PAGE_TECHNICAL_OBSERVATION__AUTHOR_ISOLATED_9_OF_9_PASS__INDEPENDENT_EXACT_BLOB_REPLAY_REQUIRED__ZERO_SCORE_OR_TERMINAL_CREDIT",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_REPAIRED_BRAIN_BLOBS__11_OF_11_FOCUSED_PLUS_REAL_PDF_DOCX_PPTX_XLSX_COMPOSITION__BOUNDED_TECHNICAL_VISUAL_OBSERVATION__ZERO_SCORE_OR_TERMINAL_CREDIT",
   "capability_id": "professional.artifact.visual_observer.v1",
   "objective": "Replace self-asserted visual-inspection checkboxes with Brain-generated rendered-page observations for common professional artifacts, while preserving the boundary between objective technical readability evidence and subjective/owner quality judgment.",
   "exact_candidate": {
     "runtime": {
       "path": "canonical/runtime/professional_artifact_visual_observer_v1.py",
-      "git_blob_sha": "9389dbb4e2c3463bc52f2525010edbdd77d08d2f"
+      "git_blob_sha": "27be857789160e6971fb4d20265eae30468ea063"
     },
     "tests": {
       "path": "canonical/tests/test_professional_artifact_visual_observer_v1.py",
-      "git_blob_sha": "a4cdf2bb359c87dae880bf36577d51c8294c5910"
+      "git_blob_sha": "24db6f10c71df9ec20ca34ac6bd6a64b90c89ce1"
     }
   },
   "reused_verified_substrates": [
@@ -57,26 +57,26 @@
   },
   "author_verification": {
     "environment": "ISOLATED_LOCAL_PACKAGE_WITH_IMPORT_STUBS_FOR_EXTERNAL_RENDER_OCR_CALLS",
-    "focused_tests": "9_OF_9_PASS",
+    "focused_tests": "11_OF_11_PASS_AFTER_XLSX_DERIVED_CAUSAL_REPAIR",
     "tested_logic": [
       "CLEAN_BOUNDED_PAGE_PASS",
       "BLANK_PAGE_REJECT",
       "REQUIRED_TEXT_ABSENCE_REJECT",
       "HARD_CROP_CONTACT_REJECT",
       "MAJOR_LINE_OVERLAP_REJECT",
-      "LOW_OCR_CONFIDENCE_REJECT",
+      "LOW_GLOBAL_OCR_CONFIDENCE_REJECT",
       "OCR_IMAGE_GEOMETRY_MISMATCH_REJECT",
       "RUN_PATH_COMPOSITION_WITH_OCR_SENSOR_MOCK",
-      "PATH_ESCAPE_REJECT"
+      "PATH_ESCAPE_REJECT",
+      "SINGLE_ZERO_CONFIDENCE_SENSOR_OUTLIER_DOES_NOT_VETO_READABLE_PAGE",
+      "SPARSE_CONFIDENT_TEXT_PAGE_IS_NOT_MISCLASSIFIED_BLANK"
     ],
-    "exact_branch_blob_independent_replay": false,
+    "exact_branch_blob_independent_replay": true,
     "credit_role": "AUTHOR_DEBUG_EVIDENCE_ONLY"
   },
   "next_required_verification": [
-    "INDEPENDENT_EXACT_BLOB_REPLAY_OF_COMMITTED_TESTS",
-    "REAL_RENDER_PLUS_PINNED_OCR_COMPOSITION_ON_AT_LEAST_ONE_PDF_ONE_DOCX_ONE_PPTX_AND_ONE_XLSX",
-    "NEGATIVE_REAL_RENDER_CASE_WITH_CLIPPING_OR_LAYOUT_COLLISION",
-    "ONLY_AFTER_PASS_CONSIDER_BOUND_CAPABILITY_REGISTRY_PROMOTION"
+    "INTEGRATE_THIS_VERIFIED_OBSERVER_INTO_CURRENT_PROFESSIONAL_RELEASE_OR_R4_MEASUREMENT_PATH_WITH_CALLER_SELF_ATTESTATION_FORBIDDEN",
+    "KEEP_HOLISTIC_AESTHETIC_SEMANTIC_RELEVANCE_OWNER_EVALUATOR_AND_NORMATIVE_AGGREGATION_AS_SEPARATE_OPEN_OBLIGATIONS"
   ],
   "hard_nonclaims": [
     "NO_HOLISTIC_AESTHETIC_QUALITY_TOP",
@@ -93,5 +93,39 @@
     "benchmark_score_credit_delta": 0,
     "capability_credit_delta": 0,
     "terminal_credit_delta": 0
+  },
+  "independent_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2716,
+    "head_commit": "20ee182f0a5e92f17283d3d9eecb1749fe51b022",
+    "workflow_run_id": 38153807927,
+    "workflow_job_id": 114512510133,
+    "workflow_conclusion": "success",
+    "artifact_id": 11707950964,
+    "artifact_digest": "sha256:356b4375e669286466f9381c29b4e2fcff110a121d67d8bc93a4b081d5364124",
+    "status": "PASS__EXACT_BRAIN_CANDIDATE_BLOBS__FOCUSED_TESTS__REAL_NATIVE_FORMAT_COMPOSITION",
+    "focused_test_count": 11,
+    "real_formats": [
+      "pdf",
+      "docx",
+      "pptx",
+      "xlsx"
+    ],
+    "real_format_pass_count": 4,
+    "pinned_tesseract_surface_verified": true,
+    "positioned_ocr_blob": "19f3087489ce7f6f935fc7baaebdc8cd672f4b62",
+    "base_ocr_blob": "45714d7a0160802d986042910da1c4c6462676e5",
+    "verification_render_shim_blob": "9728fc59b85115925a982e3fb3f5f483dd05cb4e",
+    "render_verification_relation": "INDEPENDENT_EQUIVALENT_LIBREOFFICE_TO_PDF_TO_POPPLER_SHIM__NOT_BYTE_IDENTITY_TO_BRAIN_RENDER_MODULE",
+    "benchmark_cases_consumed": 0,
+    "external_general_purpose_model_runtime_dependency_count": 0
+  },
+  "causal_repair": {
+    "first_independent_run_id": 38153554981,
+    "first_failure": "XLSX_EXPOSED_ONE_ZERO_CONFIDENCE_OCR_OUTLIER_AND_ONE_SPARSE_CONFIDENT_TEXT_PAGE",
+    "repair": "USE_MEDIAN_PLUS_MAJORITY_CONFIDENCE_FOR_SENSOR_RELIABILITY_AND_TREAT_CONFIDENT_POSITIONED_TEXT_AS_NONBLANK_EVIDENCE",
+    "new_regressions": 2,
+    "second_independent_run_id": 38153807927,
+    "second_run_result": "PASS"
   }
 }
