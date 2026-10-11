@@ -100,6 +100,20 @@ class DNAStorageTaskKernelV1Tests(unittest.TestCase):
             self.assertIn('def encode_bytes',source)
             self.assertIn('def decode_oligos',source)
 
+    def test_cli_entrypoint_executes_exact_payload(self):
+        import contextlib,io
+        with tempfile.TemporaryDirectory() as td:
+            root=pathlib.Path(td); data=root/'data'; results=root/'results'; data.mkdir()
+            src=data/'payload.bin'; raw=b"cli-payload"*37; src.write_bytes(raw)
+            request=root/'request.json'
+            request.write_text(json.dumps({'instruction':f"Encode {src} to DNA at {results/'archive.dna'}.",'artifacts':[str(results)],'roots':[str(data)]}),encoding='utf-8')
+            buf=io.StringIO()
+            with contextlib.redirect_stdout(buf):
+                self.assertEqual(k.main([str(request)]),0)
+            receipt=json.loads(buf.getvalue().strip().splitlines()[-1])
+            self.assertTrue(receipt['status'].startswith('PASS__'))
+            self.assertEqual(codec.decode_oligos((results/'archive.dna').read_text().splitlines()),raw)
+
     def test_no_model_or_network_dependencies(self):
         tree=ast.parse(pathlib.Path(k.__file__).read_text(encoding='utf-8'))
         imported=set()
