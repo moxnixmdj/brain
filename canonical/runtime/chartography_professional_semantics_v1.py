@@ -75,20 +75,33 @@ def _fit_affine(points: list[tuple[float, float]]) -> tuple[float, float, list[t
 
 
 def calibrate_axes(positioned_ocr: dict[str, Any]) -> dict[str, Any]:
+    """Calibrate Cartesian axes from word-level positioned OCR.
+
+    OCR is a sensor only. Geometry and numerical fitting remain deterministic.
+    Tick words are admitted by location, numeric syntax, and affine consensus.
+    """
     W = int(positioned_ocr["page_width"])
     H = int(positioned_ocr["page_height"])
+    observations = positioned_ocr.get("word_items") or positioned_ocr.get("text_items") or []
+
     xpts: list[tuple[float, float]] = []
     ypts: list[tuple[float, float]] = []
-    for item in positioned_ocr.get("text_items", []):
+    for item in observations:
         val = _pure_number(str(item.get("text", "")))
         if val is None:
             continue
         cx, cy = _center(item["box"])
-        # Tick labels only. Numeric annotations inside the plot are excluded
-        # geometrically rather than semantically.
-        if cy >= 0.78 * H and 0.04 * W <= cx <= 0.92 * W:
+
+        # X-axis tick words occupy the lower numeric band. Restricting to
+        # standalone numeric words prevents an entire OCR-grouped tick row from
+        # collapsing into one unusable observation.
+        if cy >= 0.86 * H and 0.05 * W <= cx <= 0.995 * W:
             xpts.append((cx, val))
-        if cx <= 0.16 * W and 0.04 * H <= cy <= 0.94 * H:
+
+        # Y-axis numeric ticks hug the left side but sit above the x tick row.
+        # This admits the zero/100 labels near the baseline while excluding the
+        # x-axis's first numeric word.
+        if cx <= 0.16 * W and 0.04 * H <= cy <= 0.87 * H:
             ypts.append((cy, val))
 
     ax, bx, xin = _fit_affine(xpts)
@@ -127,19 +140,91 @@ def _saturation(rgb: tuple[int, int, int]) -> int:
     return max(rgb) - min(rgb)
 
 
-def _find_matching_ocr_line(ocr: dict[str, Any], tokens: Iterable[str]) -> dict[str, Any]:
-    needed = [str(x).lower() for x in tokens if str(x).strip()]
-    candidates = []
+def _line_words(ocr: dict[str, Any], source_id: str) -> list[dict[str, Any]]:
+    words = [
+        w for w in ocr.get("word_items", [])
+        if w.get("line_source_id") == source_id
+    ]
+    return sorted(words, key=lambda w: (int(w.get("word_num", 0)), w["box"]["x0"]))
+
+
+def _right_legend_label_box(ocr: dict[str, Any], line: dict[str, Any]) -> dict[str, int]:
+    W = int(ocr["page_width"])
+    words = [
+        w for w in _line_words(ocr, str(line.get("source_id")))
+        if w["box"]["x1_exclusive"] >= 0.70 * W
+    ]
+    if not words:
+        # Fail closed rather than pretending a merged line box identifies a
+        # right-side legend label.
+        raise ChartographyProfessionalSemanticError("RIGHT_LEGEND_WORDS_NOT_FOUND")
+    return {
+        "x0": min(w["box"]["x0"] for w in words),
+        "y0": min(w["box"]["y0"] for w in words),
+        "x1_exclusive": max(w["box"]["x1_exclusive"] for w in words),
+        "y1_exclusive": max(w["box"]["y1_exclusive"] for w in words),
+    }
+
+
+def _find_legend_row(
+    ocr: dict[str, Any],
+    temperature: float,
+    gradient: float,
+) -> dict[str, Any]:
+    """Resolve one right-side legend row using redundant row evidence.
+
+    Gradient text selects the column family. Temperature anchors from the other
+    legend rows select the vertical band, which is robust to a single OCR digit
+    error such as 1100 -> 4100.
+    """
+    rows = []
+    gradient_token = format(gradient, "g")
     for item in ocr.get("text_items", []):
         text = str(item.get("text", "")).lower().replace("°", "")
-        score = sum(tok in text for tok in needed)
-        if score:
-            candidates.append((score, len(text), item))
-    if not candidates:
-        raise ChartographyProfessionalSemanticError("LEGEND_LABEL_NOT_FOUND")
-    score, _, item = max(candidates, key=lambda x: (x[0], x[1]))
-    if score < max(1, len(needed) - 1):
-        raise ChartographyProfessionalSemanticError("LEGEND_LABEL_AMBIGUOUS")
+        if "degc" not in text.replace(" ", "") and "deg" not in text:
+            continue
+        nums = [float(x) for x in _NUM.findall(text)]
+        if not nums:
+            continue
+        cx, cy = _center(item["box"])
+        if item["box"]["x1_exclusive"] < 0.70 * int(ocr["page_width"]):
+            continue
+        rows.append({"item": item, "text": text, "nums": nums, "cy": cy})
+
+    if not rows:
+        raise ChartographyProfessionalSemanticError("LEGEND_ROWS_NOT_FOUND")
+
+    grad_rows = []
+    for row in rows:
+        if any(abs(v - gradient) <= max(1e-6, abs(gradient) * 0.03) for v in row["nums"]):
+            grad_rows.append(row)
+    if not grad_rows:
+        raise ChartographyProfessionalSemanticError("LEGEND_GRADIENT_ROW_NOT_FOUND")
+
+    temp_anchors = []
+    for row in rows:
+        # Temperatures are the large values in legend labels; exact matches in
+        # redundant sibling rows establish the target vertical band.
+        if any(abs(v - temperature) <= max(0.5, abs(temperature) * 0.002) for v in row["nums"]):
+            temp_anchors.append(row["cy"])
+
+    if temp_anchors:
+        target_y = median(temp_anchors)
+        chosen = min(grad_rows, key=lambda row: abs(row["cy"] - target_y))
+    else:
+        # If OCR did not recognize any exact temperature anchor, choose by the
+        # monotone vertical rank implied by the observed temperature groups.
+        typed = []
+        for row in grad_rows:
+            large = [v for v in row["nums"] if v >= 100]
+            if large:
+                typed.append((large[0], row))
+        if not typed:
+            raise ChartographyProfessionalSemanticError("LEGEND_TEMPERATURE_EVIDENCE_MISSING")
+        chosen = min(typed, key=lambda vr: abs(vr[0] - temperature))[1]
+
+    item = dict(chosen["item"])
+    item["label_box"] = _right_legend_label_box(ocr, item)
     return item
 
 
@@ -147,29 +232,42 @@ def _swatch_observation(im: Image.Image, label_box: dict[str, int]) -> dict[str,
     rgb = im.convert("RGB")
     W, H = rgb.size
     cy = (label_box["y0"] + label_box["y1_exclusive"]) // 2
-    x1 = max(0, label_box["x0"] - 4)
-    x0 = max(0, x1 - max(36, int(0.045 * W)))
+
+    # Search only the right-side legend band. The first OCR word can include
+    # the swatch itself (e.g. "—700"), so include a small region inside the
+    # label box as well as the region immediately to its left.
+    x0 = max(0, int(0.735 * W))
+    x1 = min(W, label_box["x0"] + max(24, int(0.035 * W)))
     y0 = max(0, cy - 8)
     y1 = min(H, cy + 9)
-    colored = []
-    occupancy = []
+
+    colored_by_x: dict[int, list[tuple[int, int, int]]] = {}
     for x in range(x0, x1):
-        hit = False
         for y in range(y0, y1):
             p = rgb.getpixel((x, y))
             if _saturation(p) >= 45 and max(p) <= 250:
-                colored.append(p)
-                hit = True
-        occupancy.append(hit)
-    if len(colored) < 4:
+                colored_by_x.setdefault(x, []).append(p)
+
+    if len(colored_by_x) < 3:
         raise ChartographyProfessionalSemanticError("LEGEND_SWATCH_COLOR_NOT_FOUND")
 
-    # Coarse quantization makes antialiasing irrelevant.
+    colored = [p for vals in colored_by_x.values() for p in vals]
     buckets = Counter(tuple((v // 24) * 24 for v in p) for p in colored)
     dominant = buckets.most_common(1)[0][0]
     near = [p for p in colored if _rgb_dist(p, dominant) <= 48]
+    if not near:
+        raise ChartographyProfessionalSemanticError("LEGEND_SWATCH_DOMINANT_COLOR_AMBIGUOUS")
     color = tuple(int(median([p[k] for p in near])) for k in range(3))
 
+    color_xs = []
+    for x, vals in colored_by_x.items():
+        if any(_rgb_dist(p, color) <= 58 for p in vals):
+            color_xs.append(x)
+    if not color_xs:
+        raise ChartographyProfessionalSemanticError("LEGEND_SWATCH_X_SUPPORT_MISSING")
+
+    lo, hi = min(color_xs), max(color_xs)
+    occupancy = [x in set(color_xs) for x in range(lo, hi + 1)]
     runs = []
     start = None
     for i, on in enumerate(occupancy + [False]):
@@ -181,12 +279,18 @@ def _swatch_observation(im: Image.Image, label_box: dict[str, int]) -> dict[str,
     cov = sum(occupancy) / max(1, len(occupancy))
     if cov >= 0.72:
         style = "SOLID"
-    elif len(runs) >= 5 and median(runs) <= 3:
+    elif len(runs) >= 4 and median(runs) <= 4:
         style = "DOTTED"
     else:
         style = "DASHED"
 
-    return {"color": color, "style": style, "coverage": cov, "runs": runs}
+    return {
+        "color": color,
+        "style": style,
+        "coverage": cov,
+        "runs": runs,
+        "x_span": [lo, hi],
+    }
 
 
 def _classify_line_style(xs: set[int], xmin: int, xmax: int) -> str:
@@ -298,9 +402,9 @@ def _solve_linear_legend_series(image_path: Path, prompt: str, ocr: dict[str, An
     temp, gradient = m.group(1), m.group(2)
     y_target = float(target.group(1))
 
-    legend = _find_matching_ocr_line(ocr, [temp, gradient])
+    legend = _find_legend_row(ocr, float(temp), float(gradient))
     with Image.open(image_path) as im:
-        swatch = _swatch_observation(im, legend["box"])
+        swatch = _swatch_observation(im, legend["label_box"])
         trace = _trace_colored_linear_series(im, axes, swatch["color"], swatch["style"])
 
     a = float(trace["chosen"]["data_slope"])
