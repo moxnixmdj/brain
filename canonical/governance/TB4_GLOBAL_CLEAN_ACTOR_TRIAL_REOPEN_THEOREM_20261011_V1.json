@@ -1,0 +1,110 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_GLOBAL_CLEAN_ACTOR_TRIAL_REOPEN_THEOREM_20261011_V1",
+  "date": "2026-10-11",
+  "status": "CANDIDATE__OVERBROAD_NO_REPLAY_POLICY_REDUCED_TO_CAUSAL_NONINTERFERENCE__310_SLOT_ZERO_SPEND_RESOURCE_DOMAIN_CONDITIONALLY_REOPENED__ZERO_SCORE_CREDIT",
+  "target_predicate": "CODING_TB4_GE_66_4",
+  "objective": "Replace task-history-based permanent burn semantics with the stronger and benchmark-faithful causal requirement that every counted trial actor be independent of prior task-specific forbidden information.",
+  "authorities": {
+    "trial_parametricity": {
+      "path": "canonical/governance/TB4_TRIAL_PARAMETRICITY_TRUTH_REPAIR_20261008_V1.json",
+      "git_blob_sha": "6407174514e3a452043ceacb2c0b06e3a11244dd"
+    },
+    "post_freeze_noninterference": {
+      "path": "canonical/governance/TB4_POST_FREEZE_CERTIFIER_NONINTERFERENCE_CANDIDATE_20261008_V1.json"
+    },
+    "attainability_manifest": {
+      "path": "canonical/governance/TB4_ATTAINABILITY_EVIDENCE_MANIFEST_V1.json",
+      "git_blob_sha": "36cfd7b29465a2da6c05667b18848bdcabcd22e6"
+    },
+    "resource_reopen": {
+      "path": "canonical/governance/TB4_BUILDKITE_RESOURCE_REOPEN_BINDING_20261006_V1.json",
+      "git_blob_sha": "34822cd31912446abee480b5a0a6bb5dbdbf3ddc"
+    },
+    "resource_reopen_verification": {
+      "path": "canonical/verification/TB4_BUILDKITE_RESOURCE_REOPEN_SPRITE_VERIFICATION_20261006_V1.json",
+      "git_blob_sha": "b56499de130ebcc9b95ef245df10334fd49a2416"
+    },
+    "minimum_resource_cut": {
+      "path": "canonical/governance/TB4_MINIMUM_CARRIER_RECOVERY_CUT_V1.json",
+      "git_blob_sha": "fc5bb61b1b97e6aae46222b9de84e16797510bcc"
+    }
+  },
+  "semantic_correction": {
+    "invalid_overcompression": "TASK_WAS_EVER_EXPOSED_OR_A_PRIOR_ATTEMPT_EXISTED__THEREFORE_ALL_FUTURE_TRIAL_SLOTS_FOR_THAT_TASK_ARE_PERMANENTLY_INVALID",
+    "preserved_forbidden_case": "ACTOR_OR_ORCHESTRATION_CAUSALLY_RECEIVES_PRIOR_TASK_SPECIFIC_VERIFIER_SOLUTION_HINT_RESULT_OR_REPAIR_INFORMATION__THEN_RERUNS_AND_COUNTS_THE_RESULT",
+    "valid_independent_case": "A_NEW_TRIAL_USES_A_FROZEN_ACTOR_SNAPSHOT_AND_EXECUTION_ENVIRONMENT_WITH_NO_CAUSAL_PATH_FROM_ANY_PRIOR_TASK_SPECIFIC_FORBIDDEN_INFORMATION__THE_TRIAL_IS_A_DISTINCT_ATTEMPT_AND_IS_NOT_A_REPAIR_AFTER_FEEDBACK",
+    "reason": [
+      "TERMINAL_BENCH_SCORE_SEMANTICS_COUNT_DISTINCT_ATTEMPTS__FIVE_PER_TASK",
+      "THE_EXISTENCE_OF_PRIOR_EXTERNAL_OR_HUMAN_OBSERVATIONS_CANNOT_CHANGE_AN_ISOLATED_ACTOR_OUTCOME_WHEN_THOSE_OBSERVATIONS_HAVE_NO_CAUSAL_PATH_INTO_ACTOR_STATE_INPUTS_ENVIRONMENT_OR_ORCHESTRATION",
+      "THEREFORE_FRESHNESS_IS_A_NONINTERFERENCE_PROPERTY_OF_THE_COUNTED_ACTOR_TRIAL__NOT_A_PERMANENT_PROPERTY_OF_THE_TASK_NAME"
+    ]
+  },
+  "global_clean_actor_certificate": {
+    "actor_configuration": "ONE_COMMON_FROZEN_BRAIN_ACTOR_CONFIGURATION_FOR_ALL_COUNTED_TB4_TRIALS",
+    "required": [
+      "COMPLETE_CONTENT_ADDRESSED_ACTOR_DEPENDENCY_AND_EFFECT_CLOSURE",
+      "COMPLETE_CONTENT_ADDRESSED_CLOSURE_OF_ALL_TB4_TASK_SPECIFIC_FORBIDDEN_INFORMATION_AND_ALL_CAUSAL_DESCENDANTS_THAT_ENCODE_TASK_SPECIFIC_FEEDBACK",
+      "PROVE_ACTOR_PROVENANCE_ANCESTOR_CLOSURE_DISJOINT_FROM_THE_FORBIDDEN_TB4_DESCENDANT_CLOSURE",
+      "ZERO_AMBIENT_REPOSITORY_HISTORY_CHAT_MEMORY_PRIOR_TASK_SESSION_VERIFIER_RESULT_AND_TASK_SPECIFIC_REPAIR_STATE",
+      "NETWORK_AND_DISCOVERY_DISABLED_EXCEPT_PREDECLARED_NON_TASK_SPECIFIC_TOOL_CHANNELS_REQUIRED_BY_THE_FROZEN_BENCHMARK_PROTOCOL",
+      "OFFICIAL_TASK_RUNTIME_AND_INSTRUCTION_ENTER_ONLY_AS_THE_CURRENT_TRIAL_AUTHORIZED_INPUT",
+      "ACTOR_SNAPSHOT_IMMUTABLE_DURING_THE_COMPLETE_RUN",
+      "FULL_TRIAL_MANIFEST_TASK_SLOT_IDENTITIES_RESOURCE_ROUTE_AND_RANDOMNESS_POLICY_PRECOMMITTED_BEFORE_FIRST_VERIFIER_RESULT",
+      "NO_VERIFIER_RESULT_MAY_CHANGE_ACTOR_BYTES_ROUTING_POLICY_TOOL_POLICY_TRIAL_ORDER_OR_FUTURE_TRIAL_INPUTS",
+      "EACH_TRIAL_EXECUTES_IN_FRESH_ISOLATED_STATE_WITH_NO_CROSS_TRIAL_MEMORY"
+    ],
+    "reuse": [
+      "D_FINALITY_V2_COMPLETE_DEPENDENCY_EFFECT_CLOSURE",
+      "D_FINALITY_V2_ZERO_AMBIENT_REPLAY_ENVIRONMENT",
+      "D_FINALITY_V2_DONOR_ISOLATION",
+      "TB4_POST_FREEZE_CERTIFIER_NONINTERFERENCE",
+      "EXISTING_CONTAMINATION_ADMISSIBILITY_AND_SOURCE_COVERAGE_MACHINERY"
+    ],
+    "only_new_proof_primitive": "COMPLETE_FORBIDDEN_TB4_PROVENANCE_DESCENDANT_CLOSURE_PLUS_SET_DISJOINTNESS_AGAINST_ACTOR_PROVENANCE_ANCESTOR_CLOSURE"
+  },
+  "resource_domain_recompile": {
+    "total_tasks": 66,
+    "trials_per_task": 5,
+    "buildkite_verified_recovered_tasks": 8,
+    "tasks_remaining_outside_verified_resource_envelope": [
+      "live-database-cutover",
+      "jax-speedrun-gpu",
+      "fp8-rmsnorm-gemm",
+      "math-eval-grader"
+    ],
+    "verified_resource_reachable_task_count": 62,
+    "verified_resource_reachable_slot_count": 310,
+    "target_success_slots": 219,
+    "executable_slot_failure_slack_if_219_successes_reached": 91,
+    "required_success_rate_over_reachable_slots_percent": 70.64516129032258,
+    "proof": "(66-4)*5=310__AND__310-219=91__AND__100*219/310=70.6451612903_PERCENT",
+    "missing_twenty_slots_need_not_be_successful": true
+  },
+  "execution_rule_if_certificate_passes": {
+    "precommit_all_310_slots_before_first_result": true,
+    "sequential_stopping_allowed_after_219_certified_successes": true,
+    "stopping_reason": "ONCE_219_DISTINCT_POSITIVE_OFFICIAL_VERIFIER_RECEIPTS_EXIST__THE_FIXED_330_SLOT_SCORE_HAS_A_PROVED_LOWER_BOUND_OF_219_SUCCESSES_REGARDLESS_OF_UNEXECUTED_OR_FAILED_OTHER_SLOTS",
+    "actor_or_policy_mutation_after_results": false,
+    "success_credit_rule": "ONLY_ACTUAL_DISTINCT_OFFICIAL_VERIFIER_REWARD_GT_ZERO_RECEIPTS_COUNT__THE_CLEAN_ACTOR_CERTIFICATE_ITSELF_COUNTS_ZERO_SUCCESSES"
+  },
+  "effect_on_old_frontier": {
+    "permanently_burned_task_capacity_subtraction": "REVOKE_IF_AND_ONLY_IF_GLOBAL_CLEAN_ACTOR_CERTIFICATE_PASSES",
+    "old_44_task_220_slot_route": "NOT_PRIMARY__BASED_ON_OVERSTRICT_TASK_HISTORY_BURN_SEMANTICS_AND_SEPARATE_CAPACITY_ACCOUNTING_BUG",
+    "new_primary_empirical_route": "ONE_GLOBAL_CLEAN_ACTOR_CERTIFICATE__THEN_PRECOMMITTED_INDEPENDENT_TRIALS_OVER_62_RESOURCE_REACHABLE_TASKS__STOP_AT_219_CERTIFIED_SUCCESSES"
+  },
+  "hard_nonclaims": [
+    "NO_GLOBAL_CLEAN_ACTOR_CERTIFICATE_IS_CLAIMED_PASSED_YET",
+    "NO_PRIOR_REWARD_ZERO_RESULT_IS_REWRITTEN_AS_SUCCESS",
+    "NO_TASK_SPECIFIC_VERIFIER_FEEDBACK_MAY_BE_USED_TO_REPAIR_THE_COUNTED_ACTOR",
+    "NO_TB4_SCORE_OR_ACCEPTANCE_CREDIT",
+    "NO_BENCHMARK_EXECUTION_AUTHORITY_ADDED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "independent_verification_required": true,
+  "promotion_authority": false
+}
