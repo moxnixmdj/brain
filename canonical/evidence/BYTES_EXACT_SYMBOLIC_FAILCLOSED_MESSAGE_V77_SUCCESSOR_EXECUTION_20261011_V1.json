@@ -1,0 +1,97 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_FAILCLOSED_MESSAGE_V77_SUCCESSOR_EXECUTION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "VERIFIED_RESEARCH_FRONTIER__V76_DOCSTRING_PLUS_FAILCLOSED_MESSAGE_COMPOSITION__BOUNDED_DECISION_EQUIVALENCE__CLEAN_RECONSTRUCTION__NEXT83_FROZEN_UNSPENT__ZERO_PROMOTION_CREDIT",
+  "subject": {
+    "predecessor": "canonical/evidence/BYTES_EXACT_SYMBOLIC_DOCSTRING_STRIP_V76_SUCCESSOR_EXECUTION_20261011_V1.json",
+    "predecessor_manifest_sha256": "ea2958321bf8c5b35f6f3f6d98bee0f8498a52f51dff6826d76632e8b5a61940",
+    "transform": "canonical/research/bytes/tools/conservative_failclosed_message_compact_v77.py",
+    "manifest_sha256": "b03d2329afd48ac7f66fa8c90bd52d1bd454cf15547b67e305fabb2e1fb3111a",
+    "python_files": 277,
+    "raw_python_source_bytes": 1593651,
+    "B_exec_raw_python_source_bytes": 1596411,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "raw_delta_vs_v76_bytes": -21902
+  },
+  "selection": {
+    "id": "FAILCLOSED_NOTIMPLEMENTEDERROR_MESSAGE_COMPACTION_V77",
+    "exact_old_source": "raise NotImplementedError(\"outside Brain bounded exact-symbolic contract\")",
+    "exact_new_source": "raise NotImplementedError()",
+    "replacement_count": 466,
+    "changed_python_file_count": 61,
+    "deleted_source_bytes": 21902,
+    "same_exception_type": true,
+    "all_replacements_inside_function_bodies": true
+  },
+  "equivalence": {
+    "proof_library_path": "/Brain Evidence/Bytes/BYTES_V77_FAILCLOSED_MESSAGE_EQUIVALENCE_PROOF_20261011_V1.json",
+    "proof_library_file_id": "libfile_3d931c7e53e48191aa7adce9d83282f1",
+    "proof_sha256": "e77461ee91c82040629a1460f1a5223d4da2cc92bf564329309354765d74c616",
+    "qualification_harness": "canonical/research/bytes/tools/run_qualification_v1.py",
+    "qualification_harness_git_blob_sha": "9e04430af5b0b49a30c76737547c9c1a42fb5df6",
+    "explicit_NotImplementedError_handler_count": 17,
+    "explicit_NotImplementedError_handlers_bind_message_count": 0,
+    "bounded_harness_exception_message_used_for_scoring": false,
+    "theorem": "SUCCESSFUL_RETURN_VALUES_ARE_UNCHANGED__IF_A_REPLACED_FAILCLOSED_RAISE_EXECUTES_THE_EXCEPTION_CLASS_REMAINS_NOTIMPLEMENTEDERROR_AND_THE_QUALIFICATION_DECISION_REMAINS_FAILURE_INDEPENDENT_OF_MESSAGE_TEXT",
+    "predecessor_chain": "V76_CORRECTED_NEXT82_RESULT_IS_BOUND_TO_A_DIRECTLY_QUALIFIED_EXECUTABLE_REFERENCE__V77_PRESERVES_V76_PASS_FAIL_DECISIONS_FOR_THE_EXACT_CHANGED_SURFACE"
+  },
+  "qualification": {
+    "inherited_corrected_NEXT82": {
+      "id": "QUAL_SUCCESSOR_NEXT82_20261011_V1",
+      "cases": 20700,
+      "predecessor_V76": "20700/20700__TRANSFERRED_FROM_DIRECTLY_QUALIFIED_EXECUTABLE_REFERENCE",
+      "candidate_V77_full_execution": false,
+      "transfer_basis": "FAILCLOSED_MESSAGE_DECISION_EQUIVALENCE"
+    },
+    "direct_stratified_corrected_NEXT82": {
+      "sampling": "20_EVENLY_SPACED_CASES_PER_OPERATION_ACROSS_ALL_12_OPERATIONS",
+      "candidate_V77": "240/240",
+      "failures": 0,
+      "status": "SUPPORTING_ONLY__PRIMARY_PROOF_IS_BOUNDED_DECISION_EQUIVALENCE"
+    }
+  },
+  "reproducibility": {
+    "clean_room_v76_to_v77_reconstruction": "PASS__278_OF_278_DURABLE_FILES_BYTE_IDENTICAL",
+    "regenerated_manifest_sha256": "b03d2329afd48ac7f66fa8c90bd52d1bd454cf15547b67e305fabb2e1fb3111a",
+    "transform_sha256": "8ba1610e4fe50efaa9201c48209cddfebaa46fcacd4a9c002ad49cbddf1f803d",
+    "external_second_carrier_verified": false
+  },
+  "durable_archive": {
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V77_FAILCLOSED_SUCCESSOR_20261011_V1.tar.xz",
+    "library_file_id": "libfile_31d21e1d8af08191b41bb197ca5f8280",
+    "file_id": "file_00000000751c81f4b603cae83b5b7cc3",
+    "bytes": 261816,
+    "sha256": "9c53643693414a34cc8d3f9fabe26d99c08209261b5946aa59a39b49a2bce137"
+  },
+  "next_frozen": {
+    "id": "QUAL_SUCCESSOR_NEXT83_20261011_V1",
+    "cases": 20930,
+    "seed": 3766788354,
+    "corpus_sha256": "31fa9c3a1bde80da7ba8928f784ada57f9761241a938bf9bb7551ebb0d9bb8b8",
+    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT83_20261011_V1.jsonl",
+    "library_file_id": "libfile_330aad6cf77081918195a59fbd5ddea9",
+    "status": "FROZEN_UNSPENT__NOT_EXECUTED_FOR_V77",
+    "spent": false
+  },
+  "truth_boundary": [
+    "MEASURED: V77 is 1,593,651 raw Python-source bytes, 21,902 bytes below V76 and 23,271 bytes below V75.",
+    "MEASURED: 466 exact fail-closed message-bearing raises across 61 files were replaced by the same NotImplementedError type without a message.",
+    "MEASURED: all 466 replacements are inside function bodies; 17 explicit NotImplementedError handlers exist and zero bind the exception object.",
+    "MEASURED: qualification harness scoring depends on successful digest equality; any exception remains a failure and exception message text is diagnostic only.",
+    "MEASURED: stratified corrected-NEXT82 support replay passes 240/240 with zero failures.",
+    "MEASURED: clean-room V76-to-V77 reconstruction is 278/278 durable files byte-identical.",
+    "INFERRED WITH BOUNDED-HARNESS DECISION PROOF: V76 corrected-NEXT82 qualification decisions transfer to V77 for these exact message-only substitutions.",
+    "MEASURED: NEXT83 remains frozen and unspent.",
+    "NOT PROVED: equivalence for external consumers intentionally inspecting NotImplementedError.args or str(exception).",
+    "NOT CLAIMED: full V77 execution of corrected NEXT82 or NEXT83.",
+    "NOT PROMOTED: zero capability, acceptance, ownership, professional, quality, or terminal credit."
+  ],
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "professional_credit_delta": 0,
+  "quality_credit_delta": 0,
+  "promotion_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
