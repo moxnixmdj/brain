@@ -27,8 +27,10 @@ _LOC=(
     r"(?:\s+(?:[A-Z][A-Za-zÀ-ÖØ-öø-ÿ0-9'’.-]+|of|the|de|la|New|North|South|East|West)){0,6}"
 )
 _TITLE=(
-    r"[A-Z][A-Za-z0-9'’:&.-]+"
-    r"(?:\s+(?:[A-Z][A-Za-z0-9'’:&.-]+|for|of|the|and|a|an|to|in|on)){0,10}"
+    # Do not admit a sentence-ending period inside a title token. Otherwise
+    # the previous sentence's final proper noun can fuse with the next title.
+    r"[A-Z][A-Za-z0-9'’:&-]+"
+    r"(?:\s+(?:[A-Z][A-Za-z0-9'’:&-]+|for|of|the|and|a|an|to|in|on)){0,10}"
 )
 _KINSHIP="nephew|niece|son|daughter|brother|sister|uncle|aunt|grandson|granddaughter|grandfather|grandmother|cousin|husband|wife"
 _DEMONYM={
