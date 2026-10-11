@@ -1,0 +1,77 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_OPEN_WEB_FALLBACK_CONSUMED_RESULT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "INDEPENDENT_CONSUMED_DIAGNOSTIC_FALSIFIED_AS_RETRIEVAL_RECALL_REPAIR__STRICTLY_DOMINATED_ON_SLICE",
+  "subject": {
+    "runtime_blob": "f03db468c1b9a1d5425d1eaf49966e6c8484819a",
+    "tests_blob": "5e64895795f39e4a50e53664167dd0e3ec3bc3c4",
+    "independent_verification_commit": "ed552dba269a86fa4d4757efa29b0d926d694f9a"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2703,
+    "head_sha": "5891b03f9b5abb1218c6b0b5746459f21bee4393",
+    "workflow_run_id": 38149365456,
+    "workflow_job_id": 114499380553,
+    "conclusion": "success",
+    "artifact_id": 11706431063,
+    "artifact_sha256": "85b86f29a9d65f8da3a36b9f2e2c7255d83be766bde535dab46d43bd550e89aa",
+    "trace_manifest_sha256": "38557f5f007d3e9c650b8f865ddc0ca693959cd98ec87faa7a13eefb89165c1f"
+  },
+  "diagnostic": {
+    "dataset": "ai-safety-institute/trivia_qa_verified",
+    "split": "validation",
+    "slice": "rows_25_to_49_ALREADY_CONSUMED",
+    "sample_size": 25,
+    "baseline_full_retrieval_hits": 13,
+    "baseline_full_retrieval_any_hit_rate": 0.52,
+    "fallback_hits": 12,
+    "fallback_retrieval_any_hit_rate": 0.48,
+    "fallback_unique_hits_over_baseline": 0,
+    "baseline_unique_hits_over_fallback": 1,
+    "overlap_hits": 12,
+    "union_hits": 13,
+    "union_retrieval_any_hit_rate": 0.52,
+    "shared_misses": 12,
+    "backend_hit_counts": {
+      "BING_RSS": 12,
+      "DUCKDUCKGO_HTML": 0,
+      "CROSSREF": 0
+    },
+    "backend_health": {
+      "BING_RSS": {
+        "HEALTHY": 25
+      },
+      "CROSSREF": {
+        "DEGRADED": 13,
+        "HEALTHY": 2,
+        "UNAVAILABLE_RETRYABLE": 10
+      },
+      "DUCKDUCKGO_HTML": {
+        "DEGRADED": 3,
+        "HEALTHY_EMPTY_ON_THIS_SAMPLE": 11,
+        "UNAVAILABLE_RETRYABLE": 11
+      }
+    }
+  },
+  "causal_conclusion": [
+    "MULTIBACKEND_FALLBACK_IS_NOT_A_RECALL_REPAIR_ON_THIS_CONSUMED_SLICE",
+    "ALL_FALLBACK_HITS_ARE_A_SUBSET_OF_EXISTING_FULL_RETRIEVAL_HITS",
+    "DUCKDUCKGO_AND_CROSSREF_ADD_ZERO_GOLD_SURFACE_HITS_HERE",
+    "THE_NEXT_CAUSAL_LEVER_IS_QUERY_CONSTRUCTION_FOR_THE_SHARED_12_MISSES_NOT_MORE_BACKEND_FEDERATION"
+  ],
+  "decision": [
+    "KEEP_FALLBACK_ONLY_AS_SOURCE_HEALTH_AND_RETRYABILITY_INFRASTRUCTURE",
+    "DO_NOT_PROMOTE_IT_AS_HLE_RECALL_CAPABILITY_GAIN",
+    "BUILD_GENERAL_QUERY_PLANNER_V2_FROM_SHARED_FAILURE_RULES",
+    "SYNTHETIC_VERIFY_BEFORE_ANY_CONSUMED_ROW_REPLAY",
+    "DO_NOT_CONSUME_FRESH_HLE"
+  ],
+  "external_model_calls_total": 0,
+  "model_dependency_count_total": 0,
+  "hle_questions_consumed": 0,
+  "hle_gold_consumed": 0,
+  "hle_score_credit": 0,
+  "hle_67_7_certified": false,
+  "incremental_spend_usd": 0
+}
