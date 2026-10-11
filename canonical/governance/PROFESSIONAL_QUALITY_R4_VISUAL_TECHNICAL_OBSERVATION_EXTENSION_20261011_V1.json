@@ -1,0 +1,70 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R4_VISUAL_TECHNICAL_OBSERVATION_EXTENSION_V1",
+  "date": "2026-10-11",
+  "status": "VERIFIED_BOUNDED_R4_RENDERED_PAGE_TECHNICAL_OBSERVATION_EXTENSION__ZERO_GLOBAL_QUALITY_OR_TERMINAL_CREDIT",
+  "root_id": "R4_MEASUREMENT_CONSTRUCT",
+  "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+  "source_capability": {
+    "capability_id": "professional.artifact.visual_observer.v1",
+    "runtime_path": "canonical/runtime/professional_artifact_visual_observer_v1.py",
+    "runtime_git_blob_sha": "27be857789160e6971fb4d20265eae30468ea063",
+    "bound_registry_path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+    "independent_verification_path": "canonical/verification/PROFESSIONAL_ARTIFACT_VISUAL_OBSERVER_V1_VERIFY_20261011.json",
+    "independent_workflow_run_id": 38153807927,
+    "independent_workflow_job_id": 114512510133,
+    "independent_artifact_digest": "sha256:356b4375e669286466f9381c29b4e2fcff110a121d67d8bc93a4b081d5364124"
+  },
+  "newly_bound_measurement_semantics": {
+    "PAGE_NOT_BLANK": "Rendered page has nontrivial raster ink or at least one sufficiently confident positioned OCR text observation.",
+    "TEXT_PRESENT_WHEN_REQUIRED": "Pinned positioned OCR returns at least one text item when the artifact contract requires text.",
+    "OCR_LINE_CONFIDENCE_BOUNDED": "Median positioned-OCR line confidence meets the declared threshold and at least half of observed lines meet it.",
+    "TEXT_NOT_TOUCHING_HARD_CROP": "No positioned OCR line box touches the declared page-edge crop guard.",
+    "NO_MAJOR_OCR_LINE_OVERLAP": "No pair of positioned OCR line boxes exceeds the declared overlap fraction.",
+    "PAGE_CONTENT_SHA256": "Observation is bound to exact rendered-page bytes.",
+    "SOURCE_CONTENT_SHA256": "Observation is bound to exact source-artifact bytes."
+  },
+  "real_composition_evidence": {
+    "pdf": true,
+    "docx": true,
+    "pptx": true,
+    "xlsx": true,
+    "focused_adversarial_tests": "11_OF_11_PASS",
+    "pinned_tesseract_surface": true,
+    "external_general_purpose_model_runtime_dependency_count": 0,
+    "benchmark_cases_consumed": 0
+  },
+  "r4_delta": {
+    "previous_scope": "CONTENT_ADDRESSED_TYPED_MECHANICAL_ARTIFACT_FACTS_ONLY",
+    "added_scope": "CONTENT_ADDRESSED_RENDERED_PAGE_TECHNICAL_VISUAL_OBSERVATIONS",
+    "caller_visual_self_attestation_authority": false,
+    "bounded_rendered_page_technical_measurement_available": true,
+    "holistic_visual_quality_measured": false,
+    "automatic_rubric_construct_alignment_proved": false,
+    "semantic_relevance_or_correctness_measured": false,
+    "owner_evaluator_containment_proved": false,
+    "normative_aggregation_closure_proved": false,
+    "global_r4_semantic_leaf_closed": false,
+    "global_r4_root_closed": false
+  },
+  "effect_on_shared_dominance": {
+    "professional_quality": "OBJECTIVE_VISUAL_OBSERVATION_SUBGAP_REDUCED",
+    "gdpval_absolute_dominance": "ADVANCED_BUT_REMAINS_OPEN",
+    "aa_briefcase": "REUSABLE_BOUNDED_ARTIFACT_OBSERVATION_ONLY"
+  },
+  "hard_nonclaims": [
+    "NO_HOLISTIC_AESTHETIC_QUALITY_TOP",
+    "NO_SEMANTIC_RELEVANCE_OR_CORRECTNESS_TOP",
+    "NO_OWNER_EVALUATOR_CONTAINMENT",
+    "NO_NORMATIVE_AGGREGATION_CLOSURE",
+    "NO_GLOBAL_R4_ROOT_OR_SEMANTIC_LEAF_CLOSURE",
+    "NO_GDPVAL_OR_AA_BRIEFCASE_SCORE_CREDIT",
+    "NO_OPUS55_NONINFERIORITY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_score_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
