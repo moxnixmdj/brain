@@ -13,6 +13,7 @@ MAX_TEXT = 20000
 MAX_VALUE = 4000
 MAX_SELECTOR = 1000
 MAX_TABS = 32
+MAX_CONTROLS = 200
 MAX_ERROR = 2000
 
 
@@ -81,12 +82,33 @@ class OSWorldHostBrowser:
                     body = page.locator("body").inner_text(timeout=5000)
                 except Exception:
                     body = ""
+                controls = []
+                try:
+                    loc = page.locator("input, textarea, select, button, a, [role]")
+                    count = min(loc.count(), MAX_CONTROLS)
+                    for i in range(count):
+                        node = loc.nth(i)
+                        try:
+                            controls.append({
+                                "tag": node.evaluate("(el) => el.tagName.toLowerCase()"),
+                                "role": node.get_attribute("role"),
+                                "type": node.get_attribute("type"),
+                                "name": node.get_attribute("name"),
+                                "aria_label": node.get_attribute("aria-label"),
+                                "placeholder": node.get_attribute("placeholder"),
+                                "text": (node.inner_text(timeout=500) or "")[:500],
+                            })
+                        except Exception:
+                            continue
+                except Exception:
+                    controls = []
                 return {
                     "type": kind,
                     "active_url": page.url,
                     "active_title": page.title(),
                     "tabs": tabs,
                     "visible_text": body[:MAX_TEXT],
+                    "controls": controls,
                 }
 
             if kind == "NAVIGATE":
