@@ -12,6 +12,7 @@ grounded by Brain before this module is called.
 from __future__ import annotations
 
 import base64
+import hashlib
 import json
 import re
 from typing import Any, Mapping
@@ -55,10 +56,25 @@ def compile_simulated_communication(effect: Mapping[str, Any]) -> dict[str, Any]
     if not content:
         return _fail("MESSAGE_CONTENT_REQUIRED")
 
+    subject = str(effect.get("subject") or "").strip()
+    semantic_material = json.dumps(
+        {
+            "channel": kind,
+            "destination": destination,
+            "subject": subject,
+            "content": content,
+        },
+        sort_keys=True,
+        separators=(",", ":"),
+    )
+    semantic_instance = (
+        "COMMUNICATE_" + kind + "_"
+        + hashlib.sha256(semantic_material.encode("utf-8")).hexdigest()[:16].upper()
+    )
+
     if kind == "EMAIL":
         if _EMAIL.fullmatch(destination) is None:
             return _fail("EMAIL_DESTINATION_INVALID")
-        subject = str(effect.get("subject") or "").strip()
         headers = [{"name": "To", "value": destination}]
         if subject:
             headers.append({"name": "Subject", "value": subject})
@@ -72,7 +88,8 @@ def compile_simulated_communication(effect: Mapping[str, Any]) -> dict[str, Any]
             "schema": SCHEMA,
             "status": "PASS__SIMULATED_TOOL_CALL_COMPILED",
             "pass": True,
-            "semantic": "COMMUNICATE_EMAIL",
+            "semantic": semantic_instance,
+            "semantic_family": "COMMUNICATE_EMAIL",
             "tool_call": {
                 "tool": "api_fetch",
                 "arguments": {
@@ -98,7 +115,8 @@ def compile_simulated_communication(effect: Mapping[str, Any]) -> dict[str, Any]
             "schema": SCHEMA,
             "status": "PASS__SIMULATED_TOOL_CALL_COMPILED",
             "pass": True,
-            "semantic": "COMMUNICATE_SLACK",
+            "semantic": semantic_instance,
+            "semantic_family": "COMMUNICATE_SLACK",
             "tool_call": {
                 "tool": "api_fetch",
                 "arguments": {
