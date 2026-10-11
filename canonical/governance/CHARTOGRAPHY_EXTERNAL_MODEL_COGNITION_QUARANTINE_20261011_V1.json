@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_CHARTOGRAPHY_EXTERNAL_MODEL_COGNITION_QUARANTINE_20261011_V1",
+  "date": "2026-10-11",
+  "status": "ACTIVE_PERMANENT_QUARANTINE__MODEL_ASSISTED_CHARTOGRAPHY_ROUTES_NONCREDITABLE",
+  "target_predicate": "CHARTOGRAPHY_TOOLS_GE_89",
+  "authority": [
+    "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+    "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+    "canonical/laws/CAPABILITY_TRANSFER_VS_COGNITION_OUTSOURCING_LAW_V1.md"
+  ],
+  "executable_gate": "canonical/runtime/chartography_brain_credit_subject_gate_v1.py",
+  "quarantined_public_runner_prs": [
+    {
+      "pr": 2654,
+      "route": "QWEN3_VL_8B_NATIVE_TOOLS_SAMPLE",
+      "state": "CLOSED_NONCREDITABLE"
+    },
+    {
+      "pr": 2655,
+      "route": "QWEN3_VL_8B_FIVE_RUN_HELDOUT_EVALUATOR",
+      "state": "CLOSED_NONCREDITABLE"
+    },
+    {
+      "pr": 2656,
+      "route": "MINICPM_V_4_5_STATEFUL_TOOLS_SAMPLE",
+      "state": "CLOSED_NONCREDITABLE"
+    },
+    {
+      "pr": 2657,
+      "route": "MINICPM_V_4_5_FIVE_RUN_HELDOUT_EVALUATOR",
+      "state": "CLOSED_NONCREDITABLE"
+    }
+  ],
+  "attribution": {
+    "external_model_runtime_cognition_allowed_for_brain_credit": false,
+    "local_open_weight_exception": false,
+    "zero_cost_exception": false,
+    "content_addressed_model_exception": false,
+    "wrapper_or_router_exception": false,
+    "diagnostic_specimen_retention_allowed": true,
+    "brain_capability_credit": 0,
+    "brain_benchmark_credit": 0,
+    "brain_ownership_credit": 0,
+    "brain_promotion_credit": 0,
+    "terminal_credit": 0
+  },
+  "legitimate_transfer_rule": "DONOR_MAY_EXIST_ONLY_DURING_ACQUISITION__DONOR_AND_ALL_OTHER_GENERAL_PURPOSE_MODELS_ABSENT_DURING_QUALIFICATION_AND_DEPLOYMENT__DISTINCT_BRAIN_OWNED_DERIVED_MECHANISM_REQUIRED",
+  "current_internal_capability": {
+    "deterministic_geometry": "VERIFIED_BRAIN_OWNED",
+    "deterministic_relation_router": "VERIFIED_BRAIN_OWNED_FOR_DECLARED_SIMPLE_EXACT_COLOR_BMP_CLASS",
+    "bounded_crop_tool": "VERIFIED_BRAIN_OWNED",
+    "deterministic_lower_bound_scorer": "VERIFIED_BRAIN_OWNED",
+    "broader_professional_chart_semantic_recognition": "OPEN"
+  },
+  "exact_next": "EXTEND_OR_INTERNALIZE_BRAIN_OWNED_MODEL_INDEPENDENT_PROFESSIONAL_CHART_SEMANTIC_MECHANISM__QUALIFY_WITH_ZERO_MODEL_DEPENDENCIES__ONLY_THEN_SPEND_OR_REQUEST_OFFICIAL_HELDOUT_ACCESS",
+  "terminal_cases_consumed_by_quarantined_routes": 0,
+  "incremental_spend_usd": 0
+}
