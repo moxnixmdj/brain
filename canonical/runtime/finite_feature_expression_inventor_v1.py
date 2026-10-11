@@ -334,3 +334,103 @@ def invent(rows:Sequence[LabeledRow])->dict[str,Any]:
 
 def evaluate(discriminator:Mapping[str,Any],features:Mapping[str,int|float])->bool:
     return all(_predicate_truth(p,features) for p in discriminator["predicates"])
+
+
+def invent_across_feature_packs(
+    rows:Sequence[LabeledRow],
+    *,
+    max_pack_size:int=3,
+    max_packs:int=1000,
+)->dict[str,Any]:
+    """Enumerate every base-feature subset up to max_pack_size and synthesize exactly within each pack.
+
+    This is an exhaustive finite escape from the per-call predicate bound, not
+    heuristic feature selection. Equal-minimum discriminators from different
+    packs are preserved.
+    """
+    norm=_normalize(rows)
+    if isinstance(norm,dict):
+        return norm
+    population,keys=norm
+    if not isinstance(max_pack_size,int) or max_pack_size<1 or max_pack_size>len(keys):
+        return {"schema":SCHEMA,"status":"FAIL_CLOSED","reason":"MAX_PACK_SIZE_INVALID"}
+    if not isinstance(max_packs,int) or max_packs<1:
+        return {"schema":SCHEMA,"status":"FAIL_CLOSED","reason":"MAX_PACKS_INVALID"}
+
+    packs=[]
+    for size in range(1,max_pack_size+1):
+        packs.extend(combinations(keys,size))
+    if len(packs)>max_packs:
+        return {
+            "schema":SCHEMA,
+            "status":"SEARCH_BOUND_EXCEEDED",
+            "reason":"FEATURE_PACK_COUNT_EXCEEDS_BOUND",
+            "pack_count":len(packs),
+            "max_packs":max_packs,
+            "complete_within_declared_bound":False,
+            "terminal_authority":False,
+        }
+
+    accepted=[]
+    status_counts={}
+    for pack in packs:
+        projected=[
+            LabeledRow(
+                row.row_id,
+                {k:row.features[k] for k in pack},
+                row.positive,
+            )
+            for row in population
+        ]
+        result=invent(projected)
+        status=result.get("status")
+        status_counts[status]=status_counts.get(status,0)+1
+        if status!="INVENTED_DISCRIMINATORS":
+            continue
+        for d in result["discriminators"]:
+            accepted.append({
+                "feature_pack":list(pack),
+                "predicate_ids":list(d["predicate_ids"]),
+                "predicates":[dict(p) for p in d["predicates"]],
+                "behavior_class_ids":list(d.get("behavior_class_ids",[])),
+                "cost":float(d["cost"]),
+            })
+
+    if not accepted:
+        return {
+            "schema":SCHEMA,
+            "status":"NO_DISCRIMINATOR_ACROSS_FEATURE_PACKS",
+            "pack_count":len(packs),
+            "status_counts":status_counts,
+            "complete_within_declared_bound":True,
+            "max_pack_size":max_pack_size,
+            "terminal_authority":False,
+        }
+
+    min_cost=min(x["cost"] for x in accepted)
+    best=[x for x in accepted if x["cost"]==min_cost]
+    # Deduplicate descriptions that arise from supersets but contain the same
+    # invented predicates. Keep the smallest feature pack as the canonical carrier.
+    by_signature={}
+    for d in sorted(best,key=lambda x:(len(x["feature_pack"]),x["feature_pack"],x["predicate_ids"])):
+        sig=tuple(sorted(x["predicate_ids"]))
+        by_signature.setdefault(sig,d)
+    best=sorted(by_signature.values(),key=lambda x:(x["predicate_ids"],x["feature_pack"]))
+    return {
+        "schema":SCHEMA,
+        "status":"INVENTED_DISCRIMINATORS_ACROSS_FEATURE_PACKS",
+        "base_features":list(keys),
+        "discriminators":best,
+        "discriminator_count":len(best),
+        "minimum_cost":min_cost,
+        "ambiguity_preserved":len(best)>1,
+        "pack_count":len(packs),
+        "max_pack_size":max_pack_size,
+        "complete_within_declared_bound":True,
+        "status_counts":status_counts,
+        "population_full_replay_verified":True,
+        "grammar_scope":"EXHAUSTIVE_BASE_FEATURE_PACKS_X_FINITE_FEATURE_EXPRESSION_GRAMMAR",
+        "open_world_representation_invention_claimed":False,
+        "terminal_authority":False,
+        "promotion_authority":False,
+    }
