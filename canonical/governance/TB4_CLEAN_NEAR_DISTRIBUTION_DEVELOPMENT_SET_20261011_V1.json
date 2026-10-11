@@ -1,0 +1,117 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_CLEAN_NEAR_DISTRIBUTION_DEVELOPMENT_SET_20261011_V1",
+  "date": "2026-10-11",
+  "status": "CANDIDATE__EXACT_V3_MINUS_V4_CPU_DEV_SET__ZERO_TB4_TARGET_EXPOSURE__ZERO_CREDIT",
+  "purpose": "Provide a benchmark-near development surface for improving and selecting one globally frozen TB4 actor without consuming or learning from TB4 target tasks.",
+  "source": {
+    "repository": "harbor-framework/terminal-bench",
+    "v3_ref": "v3.0.0",
+    "v4_ref": "v4.0.0",
+    "v4_release_commit": "452bf305c6daa62fc59061d22133a7cbc7c1572e",
+    "derivation": "SET_DIFFERENCE_OF_TASK_ENTRIES_IN_tasks/dataset.toml__EXCLUDING_DATASET_NAME"
+  },
+  "exact_removed_tasks": [
+    "cli-2ph-simplex",
+    "erp-procurement-planning",
+    "exam-pdf-eval",
+    "fix-uautomizer-soundness",
+    "gpt2-codegolf",
+    "ico-path-patch",
+    "lean-midpoint-proof",
+    "memcached-backdoor"
+  ],
+  "resource_classification": {
+    "verified_buildkite_envelope": "8_CPU__32_GB_RAM__ZERO_INCREMENTAL_SPEND_ROUTE_ALREADY_BOUND_FOR_TB4",
+    "cpu_dev_tasks": [
+      {
+        "task": "cli-2ph-simplex",
+        "cpus": 1,
+        "memory_mb": 2048,
+        "storage_mb": 10240,
+        "gpus": 0
+      },
+      {
+        "task": "erp-procurement-planning",
+        "cpus": 4,
+        "memory_mb": 8192,
+        "storage_mb": 10240,
+        "gpus": 0
+      },
+      {
+        "task": "fix-uautomizer-soundness",
+        "cpus": 2,
+        "memory_mb": 8192,
+        "storage_mb": 20480,
+        "gpus": 0
+      },
+      {
+        "task": "gpt2-codegolf",
+        "cpus": 1,
+        "memory_mb": 8192,
+        "storage_mb": 10240,
+        "gpus": 0
+      },
+      {
+        "task": "ico-path-patch",
+        "cpus": 2,
+        "memory_mb": 4096,
+        "storage_mb": 10240,
+        "gpus": 0
+      },
+      {
+        "task": "lean-midpoint-proof",
+        "cpus": 1,
+        "memory_mb": 2048,
+        "storage_mb": 10240,
+        "gpus": 0
+      },
+      {
+        "task": "memcached-backdoor",
+        "cpus": 4,
+        "memory_mb": 12288,
+        "storage_mb": 8192,
+        "gpus": 0
+      }
+    ],
+    "gpu_excluded_dev_task": {
+      "task": "exam-pdf-eval",
+      "cpus": 4,
+      "memory_mb": 14336,
+      "storage_mb": 18432,
+      "gpus": 1
+    },
+    "cpu_dev_task_count": 7
+  },
+  "brain_exposure_check": {
+    "method": "EXACT_TASK_NAME_SEARCH_OVER_BRAIN_COMMIT_HISTORY_AND_DEFAULT_BRANCH_FILE_INDEX",
+    "cpu_dev_tasks_with_hits": [],
+    "cpu_dev_tasks_with_zero_hits": 7,
+    "current_result": "ALL_SEVEN_CPU_DEV_TASKS_HAVE_ZERO_BRAIN_FILE_AND_COMMIT_HISTORY_HITS"
+  },
+  "development_protocol": [
+    "ONLY_THE_SEVEN_CPU_DEV_TASKS_MAY_BE_USED_FOR_BENCHMARK_NEAR_ACTOR_TUNING_OR_FAILURE_DRIVEN_REPAIR",
+    "TB4_V4_TARGET_TASKS_ARE_EVALUATION_ONLY_AND_MUST_NOT_CHANGE_ACTOR_BYTES_POLICY_ROUTING_OR_PROMPTS",
+    "ANY_GENERIC_CAPABILITY_REPAIR_LEARNED_FROM_THE_SEVEN_DEV_TASKS_MUST_BE_STATED_WITHOUT_DEV_TASK_SPECIFIC_LITERALS_AND_REPLAYED_ON_AT_LEAST_ONE_OTHER_DEV_TASK_WHEN_APPLICABLE",
+    "SELECT_AND_FREEZE_ONE_COMMON_ACTOR_CONFIGURATION_BEFORE_ANY_COUNTED_TB4_VERIFIER_RESULT",
+    "AFTER_FREEZE__NO_ACTOR_OR_POLICY_MUTATION_FROM_TB4_RESULTS"
+  ],
+  "target_nonoverlap": {
+    "exact_v4_target_task_count": 66,
+    "intersection_cpu_dev_with_v4_target": [],
+    "disjoint": true
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_DEV_PERFORMANCE_PREDICTS_TB4_SCORE",
+    "NO_TB4_SCORE_OR_SUCCESS_CREDIT",
+    "NO_EXECUTION_AUTHORITY_ADDED",
+    "NO_CLAIM_GPU_DEV_TASK_IS_AVAILABLE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "independent_verification_required": true,
+  "promotion_authority": false
+}
