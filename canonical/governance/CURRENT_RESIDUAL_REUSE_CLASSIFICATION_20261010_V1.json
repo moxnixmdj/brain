@@ -255,10 +255,10 @@
         "ADAPT_EXISTING"
       ],
       "existing_binding": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V7.json",
-      "exact_remaining_class": "12_ACTIVE_ACQUISITION_EVIDENCE_ROWS__GDPVAL_AND_CHARTOGRAPHY_RECLASSIFIED_FROM_STALE_GAP_B_AFTER_CAUSAL_FALSIFICATION__SHARED_CONTENT_AUTHENTICATED_POLICY_COVER_REALIZATION_ADAPTER_LIVE_AND_VERIFIED__REAL_AUTHENTICATED_ROW_PROOFS_REMAIN_OPEN__PLUS_1_SEPARATELY_PARKED_TB_ROW_OUTSIDE_ACTIVE_GAP_A",
+      "exact_remaining_class": "12_LOGICALLY_OPEN_WAKE_GATED_EVIDENCE_ROWS__0_SAME_INFORMATION_RUNNABLE__GDPVAL_AND_CHARTOGRAPHY_HISTORICALLY_RECLASSIFIED_FROM_GAP_B_AFTER_CAUSAL_FALSIFICATION__SHARED_CONTENT_AUTHENTICATED_POLICY_COVER_REALIZATION_ADAPTER_LIVE_AND_VERIFIED__REAL_AUTHENTICATED_ROW_PROOFS_REMAIN_OPEN__PLUS_1_SEPARATELY_PARKED_TB_ROW",
       "new_primitive_status": "NOT_ESTABLISHED",
       "executable_audit": "canonical/runtime/escape_progress_shared_gap_audit_v5.py",
-      "current_gate_status": "CURRENT_TOPOLOGY_RECONCILED__ACTIVE_GAP_A_ROWS_12__POLICY_COVER_ADAPTER_AND_CURRENTNESS_AWARE_V5_GATE_VERIFIED__REAL_AUTHENTICATED_ROW_PROOFS_REMAIN_OPEN",
+      "current_gate_status": "CURRENT_TOPOLOGY_RECONCILED__12_LOGICALLY_OPEN__12_WAKE_GATED__0_SAME_INFORMATION_RUNNABLE__0_ACTIVE_GAP_A_ACQUISITION__POLICY_COVER_ADAPTER_AND_CURRENTNESS_AWARE_V5_GATE_VERIFIED",
       "causal_reclassification": {
         "path": "canonical/governance/ESCAPE_PROGRESS_FINANCE_INDEX_CAUSAL_RECLASSIFICATION_20261010_V1.json",
         "git_blob_sha": "ea256418ec1f8048c7566c6ecc74206d9d1ac529",
@@ -285,7 +285,7 @@
         "path": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_AUDIT_V5_ACTIVATION_20261010_V1.json",
         "git_blob_sha": "41a50db02a1b60a4ab47a02ddb29d5f9f3338019"
       },
-      "active_gap_a_count": 12,
+      "active_gap_a_count": 0,
       "parked_unresolved_count": 1,
       "parked_unresolved_rows": [
         "TB_SCIENCE_GE_58_7"
@@ -302,8 +302,11 @@
       "binding_reconciliation": {
         "path": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V7.json",
         "git_blob_sha": "2119d0bc2b5c06399da49adb5a86b4e9faf7e08f",
-        "reason": "CURRENT_TOPOLOGY_12_ACQUISITION_1_PARKED_TB__ZERO_ACTIVE_GAP_B"
-      }
+        "reason": "CURRENT_TOPOLOGY_12_LOGICALLY_OPEN__12_WAKE_GATED__0_SAME_INFORMATION_RUNNABLE__1_PARKED_TB__ZERO_ACTIVE_GAP_A__ZERO_ACTIVE_GAP_B"
+      },
+      "logically_open_checkpoint_count": 12,
+      "wake_gated_checkpoint_count": 12,
+      "same_information_runnable_count": 0
     },
     {
       "residual_id": "ESCAPE_GAP_B_INTERNAL_ROUTE_STRICT_PROGRESS",
@@ -372,7 +375,7 @@
       "binding_reconciliation": {
         "path": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V7.json",
         "git_blob_sha": "2119d0bc2b5c06399da49adb5a86b4e9faf7e08f",
-        "reason": "CURRENT_TOPOLOGY_12_ACQUISITION_1_PARKED_TB__ZERO_ACTIVE_GAP_B"
+        "reason": "CURRENT_TOPOLOGY_12_LOGICALLY_OPEN__12_WAKE_GATED__0_SAME_INFORMATION_RUNNABLE__1_PARKED_TB__ZERO_ACTIVE_GAP_A__ZERO_ACTIVE_GAP_B"
       }
     },
     {
@@ -686,9 +689,9 @@
     "professional_whole_leaf_readiness_audit_verification": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_CERTIFICATE_READINESS_AUDIT_VERIFY_20261010_V1.json",
     "professional_whole_leaf_v2_gate": "INDEPENDENTLY_VERIFIED__16_OF_16__DOMAIN_EQUIVALENCE_AND_SCOPE_COVER_SEPARATED__ZERO_PROPERTY_OR_TERMINAL_CREDIT",
     "professional_whole_leaf_v2_readiness": "INDEPENDENTLY_VERIFIED__0_OF_24_ADMISSIBLE_CHAINS__24_OF_24_CLAIM_SCOPE_CONSTRUCTION_REQUIRED__PROPERTY_TRUTH_READY_0",
-    "tb_rank20_v3_reclassification": "VERIFIED_RETIRED_NONCONSUMING__GENERAL_CALLER_REPAIR_MERGED__PARKED_OUTSIDE_ACTIVE_GAP_B__ACTIVE_GAP_B_2__ZERO_CREDIT",
+    "tb_rank20_v3_reclassification": "VERIFIED_RETIRED_NONCONSUMING__GENERAL_CALLER_REPAIR_MERGED__PARKED_OUTSIDE_ACTIVE_GAP_B__ACTIVE_GAP_B_0__ZERO_CREDIT",
     "tb_gap_b_v2_currentness_reconciled": true,
-    "tb_gap_b_active_count": 2,
+    "tb_gap_b_active_count": 0,
     "tb_parked_unresolved_count": 1,
     "tb_reclassification_v2": "canonical/governance/ESCAPE_TB_SCIENCE_CURRENT_ROUTE_RECLASSIFICATION_20261010_V2.json",
     "professional_whole_leaf_scope_batch": "PASS__24_OF_24_DOMAIN_EQUIVALENCE_AND_SCOPE_COMPLETE__ZERO_PROPERTY_TRUTH_OR_TERMINAL_CREDIT",
