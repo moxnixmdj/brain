@@ -1,0 +1,76 @@
+{
+  "schema": "PROJECT_BRAIN_RUNTIME_PYPI_PACKAGE_IMPORT_CHAIN_INDEPENDENT_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__CURRENT_MAIN_PYPI_PACKAGE_IMPORT_DEFECT_REPRODUCED__REPAIRED__50_OF_50_FOCUSED_AND_ADJACENT_TESTS_PASS__ZERO_TERMINAL_CREDIT",
+  "repository": "moxnixmdj/brain",
+  "base_main_commit": "998805b648cda2a2b4425d3e998b65c9f2a10dd9",
+  "repair_branch": "repair/runtime-pypi-package-import-chain-20261011-v1",
+  "verified_branch_head": "7678a525494877dc59d089c20bb3b8a7c246d527",
+  "defect_reproduction": {
+    "carrier": "brain-live-runtime-v1-verify-20261008",
+    "carrier_id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13",
+    "workspace": "/home/sprite/uvck-current-main-998805-exec-v1",
+    "exact_current_blobs": {
+      "canonical/runtime/independent_pypi_codec_verifier.py": "7c8f68ac1dd8d7760794198f9ac0d8fb542be7e9",
+      "canonical/runtime/auto_pypi_library_acquisition.py": "6387bd7b8f1dba8bb9f66240e3ebb2627085dd2f",
+      "canonical/runtime/capability_discovery.py": "2acefaacfbcc9620cf97e9958c04eaff1d1d2937"
+    },
+    "observed_in_declared_uvck_regression": {
+      "test_cases_run": 79,
+      "errors": 2,
+      "failures": 1,
+      "relevant_errors": 2,
+      "error": "ModuleNotFoundError: No module named 'auto_pypi_library_acquisition'"
+    }
+  },
+  "repair": {
+    "exact_changed_blobs": {
+      "canonical/runtime/independent_pypi_codec_verifier.py": "8c83302bf645a901bdcedd38e04081ae0ca5f6a5",
+      "canonical/runtime/auto_pypi_library_acquisition.py": "37decef0b7876428b7c4048ea3952888af18d374",
+      "canonical/tests/test_runtime_package_import_chain_v1.py": "9232b6961b99093c5327a5a24610b4edbcee59c3"
+    },
+    "unchanged_dependency_blob": {
+      "canonical/runtime/capability_discovery.py": "2acefaacfbcc9620cf97e9958c04eaff1d1d2937"
+    },
+    "changes": [
+      "PACKAGE_QUALIFY_INDEPENDENT_PYPI_VERIFIER_ACQUISITION_IMPORT",
+      "PACKAGE_QUALIFY_INDEPENDENT_PYPI_VERIFIER_CAPABILITY_DISCOVERY_IMPORT",
+      "PACKAGE_QUALIFY_AUTO_PYPI_ACQUISITION_CAPABILITY_DISCOVERY_IMPORT",
+      "EXTEND_SHARED_RUNTIME_PACKAGE_IMPORT_CHAIN_REGRESSION_TO_PYPI"
+    ]
+  },
+  "independent_replay": {
+    "carrier": "brain-live-runtime-v1-verify-20261008",
+    "carrier_id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13",
+    "workspace": "/home/sprite/uvck-pypi-fix-verify",
+    "py_compile": "PASS",
+    "focused_import_and_two_declared_r2_suites": {
+      "tests_run": 41,
+      "passed": 41
+    },
+    "external_pypi_artifact_bridge": {
+      "tests_run": 2,
+      "passed": 2
+    },
+    "pypi_provenance_direct_adequacy_and_integration": {
+      "tests_run": 7,
+      "passed": 7
+    },
+    "total_tests_run": 50,
+    "total_passed": 50,
+    "failures": 0,
+    "errors": 0
+  },
+  "boundaries": [
+    "THIS_CLOSES_THE_PYPI_PACKAGE_IMPORT_INTEGRATION_DEFECT_ONLY",
+    "THIS_DOES_NOT_CLOSE_THE_FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY_FROM_THIS_RECEIPT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
