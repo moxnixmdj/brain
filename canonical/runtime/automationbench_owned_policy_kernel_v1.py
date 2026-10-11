@@ -366,6 +366,10 @@ def rank_source_records(
             str(rec.get(k) or "")
             for k in ("subject","title","body","body_plain","text","description","notes")
         )
+        sender_text = " ".join(
+            str(rec.get(k) or "")
+            for k in ("from_", "from", "sender", "sender_email", "author")
+        )
         low = text.lower()
         blocked = record_role == "action_candidate" and any(
             marker in low
@@ -373,10 +377,12 @@ def rank_source_records(
         )
         terms = set(_content_terms(text))
         overlap = len(pterms & terms)
+        sender_terms = set(_content_terms(sender_text.replace("@", " ").replace(".", " ")))
+        sender_overlap = len(pterms & sender_terms)
         labels = {str(x).upper() for x in (rec.get("label_ids") or [])}
         unread = "UNREAD" in labels or rec.get("is_read") is False
         ts = _parse_dt(rec.get("date") or rec.get("updated_at") or rec.get("timestamp"))
-        score = overlap * 10 + (3 if unread else 0)
+        score = overlap * 10 + sender_overlap * 25 + (3 if unread else 0)
         rows.append((blocked, -score, -ts, idx, rec))
     rows.sort(key=lambda x: (x[0], x[1], x[2], x[3]))
     return [rec for blocked, _, _, _, rec in rows if not blocked]
