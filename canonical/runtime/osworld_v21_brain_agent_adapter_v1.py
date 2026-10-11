@@ -208,7 +208,15 @@ class BrainOSWorldAgent:
         if self.ocr_provider is not None:
             if not callable(self.ocr_provider):
                 raise AdapterError("OCR_PROVIDER_NOT_CALLABLE")
-            ocr = self.ocr_provider(screenshot_bytes)
+            try:
+                ocr = self.ocr_provider(screenshot_bytes)
+            except Exception as exc:
+                ocr = {
+                    "status": "UNAVAILABLE",
+                    "reason": type(exc).__name__ + ":" + str(exc)[:MAX_ERROR],
+                    "source_sha256": hashlib.sha256(screenshot_bytes).hexdigest(),
+                    "terminal_semantic_authority": False,
+                }
         return {
             "schema": SCHEMA,
             "policy_id": self.policy_id,
