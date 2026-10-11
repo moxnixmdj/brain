@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_NATIVE_RESEARCH_SOLVER_V5_PREEXPOSURE_20261011_V2",
+  "date": "2026-10-11",
+  "status": "REFROZEN_AFTER_SYNTHETIC_ONLY_WORK_TITLE_BOUNDARY_REPAIR",
+  "supersedes_for_future_execution": "HLE_NATIVE_RESEARCH_SOLVER_V5_PREEXPOSURE_20261011_V1",
+  "subject": {
+    "research_solver_v5_blob": "6fd57f4f3591e4ab09b3e16ffbae399f7aaf93ae",
+    "research_solver_v5_tests_blob": "40fd1ba846f5815a6be9b0949a85a366fa0051ac",
+    "question_contract_v3_blob": "0865d6baf59b465cf121963dbadd5409a1702671",
+    "question_contract_v3_tests_blob": "905bd448d54c602dd0c31a36a852ac43c0737f9d",
+    "evidence_synthesis_v3_blob": "ed2e0b572b33a5ed3c84d748689ee71645460dbf",
+    "evidence_synthesis_v3_tests_blob": "8353389de0d820458263545769adadeac24fb0dd",
+    "exact_retrieval_v2_blob": "1c9d1c9096af91e05f67c3ead3068b0daf0ab033",
+    "exact_retrieval_v1_blob": "11c6b01974b8c095a4243e000bb8e7bb579d7d54",
+    "question_contract_v2_blob": "403091eeb32e20baceed38cbcbb5cfc823871ad9",
+    "question_contract_v1_blob": "7acc064d880f266a28855eefe518ae40ff8ae49b",
+    "semantic_compiler_v1_blob": "238ebf2ffe23e527fceae919cbc30453a290fdd2",
+    "retrieval_helpers_v5_blob": "ae6006af1e578b0690357756e0b899a10323a5f4",
+    "tool_adapter_blob": "fa955ccc5e4f3d29aa79e2b380f713d30ee46e8f",
+    "tool_policy_blob": "d2a2427b483fe1c06c6b1e6bc98d72bf07e7a730"
+  },
+  "repair_basis": "SYNTHETIC_TEST_ONLY__ZERO_DIAGNOSTIC_ROWS_OBSERVED",
+  "next_gate": {
+    "synthetic_first": true,
+    "then_consumed_rows": "25-49",
+    "attempt_rate_min": 0.25,
+    "normalized_exact_rate_min": 0.2,
+    "fresh_rows_50_74_protected": true
+  },
+  "exposure": {
+    "consumed_rows_25_to_49": 0,
+    "fresh_rows_50_to_74": 0,
+    "hle_cases": 0
+  },
+  "target_score_claimed": false,
+  "hle_67_7_certified": false,
+  "incremental_spend_usd": 0
+}
