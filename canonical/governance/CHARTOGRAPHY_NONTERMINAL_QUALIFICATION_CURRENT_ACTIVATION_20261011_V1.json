@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CHARTOGRAPHY_NONTERMINAL_QUALIFICATION_CURRENT_ACTIVATION_20261011_V1",
   "date": "2026-10-11",
-  "status": "ACTIVE__EXACT_QWEN3VL4B_RUNTIME_FIT_PRECONDITION_SATISFIED__SIX_CASE_UNDERLYING_CHART_REASONING_QUALIFICATION_IN_FLIGHT__DIRECT_89_ROUTE_SEPARATELY_WAKE_GATED_ON_ANTHROPIC_WITH_TOOLS_PROTOCOL__ZERO_CREDIT",
+  "status": "QWEN_SIX_CASE_RESULT_4_OF_6__RELATIONAL_GEOMETRY_DEFECTS_LOCALIZED__BRAIN_DETERMINISTIC_REPAIR_12_OF_12_FROZEN_PLUS_METAMORPHIC__DIRECT_89_ROUTE_WAKE_GATED__ZERO_CREDIT",
   "target_predicate": "CHARTOGRAPHY_TOOLS_GE_89",
   "objective": "CLOSE_ONLY_THE_NONTERMINAL_SCOPE_RELEVANT_CHART_IMAGE_REASONING_QUALIFICATION_SUBBLOCKER_USING_THE_ALREADY_VERIFIED_EXACT_COMPACT_QWEN3VL_EXECUTION_SUBJECT_AND_SIX_DETERMINISTIC_ZERO_TERMINAL_CHART_CASES",
   "runtime_fit_authority": {
@@ -54,12 +54,13 @@
   "current_subblockers": {
     "exact_runtime_fit": "CLOSED",
     "synthetic_multimodal_transport": "CLOSED",
-    "underlying_nonterminal_chart_reasoning_qualification": "IN_FLIGHT",
-    "direct_historical_89_route": "WAKE_GATED_ON_EXACT_ANTHROPIC_WITH_TOOLS_PROTOCOL_AND_OWNER_ADMISSIBLE_OR_EQUIVALENT_BRAIN_CONFIGURATION_OR_STRONGER_SCOPE_COMPLETE_CERTIFICATE",
-    "surge_current_no_tools_gemini_judge_capacity": "NOT_PRIMARY_FOR_HISTORICAL_89_ROUTE",
-    "chartography_threshold_certificate_ge_89": "NOT_ADMISSIBLE_FROM_CURRENT_SURGE_NO_TOOLS_PROTOCOL_WITHOUT_SOUND_CROSS_PROTOCOL_BRIDGE"
+    "compact_vlm_simple_chart_semantics": "PARTIAL__4_OF_6",
+    "relational_simple_chart_geometry": "CLOSED_BY_DETERMINISTIC_COMPOSITION_FOR_TESTED_CLASS",
+    "broader_real_world_chart_semantic_recognition": "OPEN",
+    "direct_historical_89_route": "WAKE_GATED_ON_EXACT_ANTHROPIC_WITH_TOOLS_PROTOCOL_AND_OWNER_ADMISSIBLE_OR_EQUIVALENT_BRAIN_CONFIGURATION_OR_SCOPE_COMPLETE_STRONGER_CERTIFICATE",
+    "surge_current_no_tools_gemini_judge_capacity": "NOT_PRIMARY_FOR_HISTORICAL_89_ROUTE"
   },
-  "scheduler_rule": "CONTINUE_ALREADY_TRIGGERED_SIX_CASE_RUN_AS_UNDERLYING_CHART_REASONING_SCOPE_EVIDENCE__DO_NOT_TREAT_PASS_AS_DIRECT_89_CREDIT__DO_NOT_SPEND_PRIMARY_TIME_ON_SURGE_GEMINI_JUDGE_CAPACITY_FOR_THE_HISTORICAL_89_ROUTE__DIRECT_89_ROUTE_WAKES_ONLY_ON_EXACT_ANTHROPIC_WITH_TOOLS_PROTOCOL_BINDING_OWNER_RECEIPT_OR_SCOPE_COMPLETE_STRONGER_CERTIFICATE",
+  "scheduler_rule": "USE_DETERMINISTIC_GEOMETRY_COMPONENT_FOR_SIMPLE_BAR_LINE_SCATTER_RELATIONS_INSTEAD_OF_QWEN_ONLY_ROUTE__DO_NOT_TUNE_ON_FROZEN_CASE_ANSWERS__CONTINUE_BROADER_SEMANTIC_RECOGNITION_ONLY_IF_LOAD_BEARING__DIRECT_89_ROUTE_REMAINS_WAKE_GATED_ON_WITH_TOOLS_PROTOCOL_OR_SCOPE_COMPLETE_STRONGER_CERTIFICATE",
   "hard_nonclaims": [
     "NO_CHARTOGRAPHY_SCORE",
     "NO_CHARTOGRAPHY_GE_89_CERTIFICATE",
@@ -82,5 +83,40 @@
     "git_blob_sha": "c82810702fd2a9d47b1ec267024defad58f4dc8b",
     "direct_89_protocol_same_as_current_surge_no_tools": false,
     "current_six_case_role": "UNDERLYING_PROFESSIONAL_CHART_REASONING_SCOPE_EVIDENCE_ONLY"
+  },
+  "qualification_result": {
+    "workflow_run_id": 38109910675,
+    "job_id": 114383144067,
+    "result": "FAIL_4_OF_6",
+    "passed_case_ids": [
+      1,
+      2,
+      3,
+      5
+    ],
+    "failed_cases": [
+      {
+        "case_id": 4,
+        "skill": "LINE_CROSSING",
+        "expected": "BLUE",
+        "observed": "RED"
+      },
+      {
+        "case_id": 6,
+        "skill": "GROUPED_BAR_COMPARISON",
+        "expected": "RIGHT",
+        "observed": "LEFT"
+      }
+    ],
+    "artifact_id": 11690919231,
+    "artifact_zip_sha256": "e9f1b1ec63acad393511fc454d14bda7e53fe95a06b33a184e293221e7770b7a"
+  },
+  "deterministic_geometry_repair": {
+    "runtime_path": "canonical/runtime/chartography_deterministic_geometry_v1.py",
+    "runtime_git_blob_sha": "4a4ac24dd63ad69b7ecf9e8c0aa0963903825e44",
+    "verification_path": "canonical/verification/CHARTOGRAPHY_RELATIONAL_GEOMETRY_REPAIR_INDEPENDENT_VERIFY_20261011_V1.json",
+    "verification_git_blob_sha": "8e80f275af585a55ce82a3f400817021f8af1525",
+    "result": "PASS_12_OF_12__6_FROZEN_PLUS_6_METAMORPHIC",
+    "role": "BRAIN_OWNED_COMPOSITION_REPAIR_FOR_SIMPLE_COLOR_CODED_RELATIONAL_GEOMETRY"
   }
 }
