@@ -1,0 +1,100 @@
+{
+  "schema": "PROJECT_BRAIN_BENCHMARK_MEASUREMENT_MINIMUM_PROOF_COVER_POLICY_V1",
+  "date": "2026-10-11",
+  "status": "CANDIDATE__FAIL_CLOSED__ZERO_CREDIT",
+  "objective": "OBTAIN_THE_MINIMUM_SUFFICIENT_TRUSTWORTHY_INFORMATION_NEEDED_TO_ESTABLISH_CAPABILITY_RELATIONS__USE_NAMED_BENCHMARKS_ONLY_WHEN_NONDOMINATED",
+  "parent_authority": "canonical/governance/CURRENT_DEVELOPMENT_AUTHORITY.json",
+  "runtime": {
+    "path": "canonical/runtime/minimum_capability_certificate_cover_v1.py",
+    "test_path": "canonical/tests/test_minimum_capability_certificate_cover_v1.py"
+  },
+  "benchmark_abstraction": {
+    "rule": "A_BENCHMARK_IS_A_MEASUREMENT_INSTRUMENT__NOT_A_PARENT_OBJECTIVE",
+    "compile_every_named_benchmark_claim_into": [
+      "EXACT_CAPABILITY_PROPOSITION_OR_PROPOSITIONS_THE_RESULT_IS_INTENDED_TO_SUPPORT",
+      "OPTIONAL_LITERAL_NAMED_BENCHMARK_SCORE_PREDICATE_WHEN_THE_LITERAL_SCORE_ITSELF_IS_REQUIRED",
+      "EXPLICIT_SOUND_IMPLICATION_EDGES_ONLY"
+    ],
+    "forbidden_conflations": [
+      "CAPABILITY_NONINFERIORITY_EQUALS_LITERAL_BENCHMARK_SCORE",
+      "PUBLIC_OR_PRIVATE_BENCHMARK_ACCESS_EQUALS_CAPABILITY",
+      "SCORE_DELTA_EQUALS_GENERAL_CAPABILITY_GAIN",
+      "BENCHMARK_SPECIFIC_PATCH_EQUALS_TRANSFERRED_GENERAL_CAPABILITY"
+    ]
+  },
+  "claim_types": {
+    "capability_comparison": {
+      "object": "THE_CAPABILITY_RELATION_ITSELF",
+      "acceptable_evidence": [
+        "FORMAL_OR_CAUSAL_DOMINANCE_CERTIFICATE",
+        "SCOPE_COMPLETE_CAPABILITY_CERTIFICATE",
+        "INDEPENDENT_HIDDEN_ADVERSARIAL_MEASUREMENT_WITH_SOUND_COMPARATOR_BRIDGE",
+        "MATCHED_BENCHMARK_RESULT_IF_IT_IS_THE_CHEAPEST_NONDOMINATED_ROUTE"
+      ]
+    },
+    "literal_benchmark_score": {
+      "object": "THE_NAMED_SCORE_PREDICATE_ITSELF",
+      "rule": "REQUIRES_DIRECT_MATCHED_RESULT_OR_AN_EXPLICIT_SOUND_THEOREM_THAT_ENTAILS_THE_LITERAL_SCORE_PREDICATE",
+      "reverse_inference_from_general_capability_default": false
+    }
+  },
+  "minimum_proof_cover": {
+    "problem": "SELECT_THE_LOWEST_COST_SET_OF_ADMISSIBLE_CERTIFICATES_WHOSE_EXPLICIT_IMPLICATION_CLOSURE_COVERS_ALL_REQUIRED_PROPOSITIONS",
+    "exact_solver_limit": 20,
+    "hard_fail_closed_above_limit": true,
+    "cost_order": [
+      "INCREMENTAL_SPEND_USD",
+      "WALL_CLOCK",
+      "COMPUTE",
+      "EVIDENCE_RISK",
+      "COMPLEXITY",
+      "CERTIFICATE_COUNT"
+    ],
+    "hard_incremental_spend_usd": 0,
+    "cross_benchmark_multiplexing": "PREFERRED_WHEN_ONE_GENERAL_CERTIFICATE_SOUNDLY_DISCHARGES_MULTIPLE_CAPABILITY_PROPOSITIONS"
+  },
+  "evidence_admission": {
+    "required": [
+      "VALID",
+      "SCOPE_BOUND",
+      "PROVENANCE_PRESERVED",
+      "NO_ANSWER_LEAKAGE",
+      "NO_SELF_CERTIFICATION"
+    ],
+    "ownership_credit_additional_required": [
+      "DONOR_FREE_AT_CREDITED_RUNTIME",
+      "NO_EXTERNAL_GENERAL_PURPOSE_MODEL_REMAINS_LOAD_BEARING_FOR_CREDITED_COGNITION"
+    ],
+    "recommended": [
+      "FREEZE_SOLVER_BEFORE_HELDOUT_EVALUATION",
+      "CAUSAL_ABLATION_AND_RESCUE_WHEN_CAPABILITY_OWNERSHIP_IS_CLAIMED",
+      "NEIGHBORING_OR_ADVERSARIAL_GENERALIZATION_CHECKS"
+    ]
+  },
+  "scheduler": {
+    "before_any_benchmark_specific_action": [
+      "COMPILE_THE_EXACT_PROPOSITION",
+      "SEARCH_EXISTING_BRAIN_EVIDENCE_AND_CAPABILITIES",
+      "COMPUTE_THE_MINIMUM_CERTIFICATE_COVER",
+      "EXECUTE_THE_HIGHEST_LEVERAGE_NONDOMINATED_ACTION_ONLY"
+    ],
+    "benchmark_specific_action_authorized_only_if": [
+      "IT_IS_THE_CHEAPEST_NONDOMINATED_INFORMATION_SOURCE_FOR_AN_UNRESOLVED_PROPOSITION",
+      "OR_THE_LITERAL_NAMED_BENCHMARK_SCORE_ITSELF_IS_EXPLICITLY_REQUIRED"
+    ],
+    "external_approval_or_private_access": "LAST_RESORT_WHEN_NO_ZERO_WAIT_SOUND_CERTIFICATE_ROUTE_EXISTS"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "benchmark_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THAT_ALL_NAMED_BENCHMARKS_ARE_REPLACEABLE",
+    "NO_CLAIM_THAT_A_CUSTOM_EVALUATION_AUTOMATICALLY_EQUALS_AN_OFFICIAL_SCORE",
+    "NO_CLAIM_THAT_CAPABILITY_EVIDENCE_AUTOMATICALLY_ENTAILS_A_LITERAL_SCORE",
+    "NO_TERMINAL_GOAL_ACHIEVED_CLAIM"
+  ]
+}

@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_DEVELOPMENT_AUTHORITY_V1",
-  "date": "2026-10-10",
-  "status": "ACTIVE_FAIL_CLOSED__GENERAL_CAPABILITY_FIRST__BENCHMARKS_AUDIT_ONLY__REUSE_FIRST",
+  "date": "2026-10-11",
+  "status": "ACTIVE_FAIL_CLOSED__GENERAL_CAPABILITY_FIRST__BENCHMARKS_AUDIT_ONLY__MINIMUM_PROOF_COVER_REQUIRED__REUSE_FIRST",
   "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "authority": {
     "mission_law": "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
@@ -18,7 +18,9 @@
       "observed_blob_is_load_bearing": false
     },
     "goal_gate": "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V12.json",
-    "optimizer": "canonical/governance/EXECUTION_FIRST_SELF_PROVING_OPTIMIZER_V2.json"
+    "optimizer": "canonical/governance/EXECUTION_FIRST_SELF_PROVING_OPTIMIZER_V2.json",
+    "benchmark_measurement_policy": "canonical/governance/BENCHMARK_MEASUREMENT_MINIMUM_PROOF_COVER_POLICY_20261011_V1.json",
+    "minimum_certificate_cover_runtime": "canonical/runtime/minimum_capability_certificate_cover_v1.py"
   },
   "development_scheduler": {
     "primary_object": "MAXIMIZE_VERIFIED_GENERAL_REUSABLE_RELIABLE_RESOURCE_EFFICIENT_PROBLEM_SOLVING_CAPABILITY",
@@ -45,7 +47,10 @@
       "PROVENANCE",
       "OWNERSHIP_WHERE_CLAIMED",
       "NO_GOAL_SUBSTITUTION"
-    ]
+    ],
+    "benchmark_claim_compiler_required": true,
+    "minimum_certificate_cover_required_before_benchmark_specific_action": true,
+    "proof_multiplexing_priority": "PREFER_ONE_SOUND_GENERAL_CERTIFICATE_THAT_DISCHARGES_MULTIPLE_CAPABILITY_PROPOSITIONS_OVER_SEPARATE_BENCHMARK_RUNS"
   },
   "benchmark_policy": {
     "role": [
@@ -65,7 +70,11 @@
       "BENCHMARK_SPECIFIC_PATCH_PROMOTED_WITHOUT_TRANSFER",
       "FAMILY_RED_STATE_AS_AUTOMATIC_JOB"
     ],
-    "opus_5_5_role": "MILESTONE_CHECKPOINT_AND_CAPABILITY_SPECIMEN__NOT_ARCHITECTURAL_OPTIMIZATION_TARGET"
+    "opus_5_5_role": "MILESTONE_CHECKPOINT_AND_CAPABILITY_SPECIMEN__NOT_ARCHITECTURAL_OPTIMIZATION_TARGET",
+    "measurement_rule": "COMPILE_EACH_BENCHMARK_DERIVED_CLAIM_TO_EXACT_CAPABILITY_PROPOSITIONS_AND_OPTIONAL_SEPARATE_LITERAL_SCORE_PREDICATE_BEFORE_ACTION",
+    "literal_score_separation": "GENERAL_CAPABILITY_EVIDENCE_DOES_NOT_SATISFY_A_LITERAL_NAMED_BENCHMARK_SCORE_PREDICATE_WITHOUT_AN_EXPLICIT_SOUND_IMPLICATION_THEOREM",
+    "minimum_proof_cover": "canonical/governance/BENCHMARK_MEASUREMENT_MINIMUM_PROOF_COVER_POLICY_20261011_V1.json",
+    "external_access_policy": "LAST_RESORT_IF_NO_ZERO_WAIT_SOUND_CERTIFICATE_ROUTE_EXISTS_OR_LITERAL_SCORE_ITSELF_IS_REQUIRED"
   },
   "route_order": [
     "DELETE",
