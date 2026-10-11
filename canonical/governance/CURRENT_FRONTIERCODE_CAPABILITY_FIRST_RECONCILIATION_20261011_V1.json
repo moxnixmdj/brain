@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_FRONTIERCODE_CAPABILITY_FIRST_RECONCILIATION_20261011_V1",
   "date": "2026-10-11",
-  "status": "ACTIVE_CAPABILITY_FIRST__BENCHMARK_DEMOTED_TO_AUDIT__NONMONOTONIC_COUPLED_REPAIR_PLUS_DYNAMIC_SPECTRUM_SYMBOL_DEF_USE_LOCALIZATION_VERIFIED__FRONTIERCODE_SCORE_STILL_UNPROVED",
+  "status": "ACTIVE_CAPABILITY_FIRST__BENCHMARK_DEMOTED_TO_AUDIT__V5_INTERPROCEDURAL_PROVENANCE_AND_PROVENANCE_GUIDED_REPAIR_VERIFIED__FRONTIERCODE_SCORE_STILL_UNPROVED",
   "mission_lock": {
     "primary_objective": "MAKE_THE_UNDERLYING_SOFTWARE_ENGINEERING_CAPABILITY_REAL_INSIDE_BRAIN",
     "capability_target": "UNSEEN_REPOSITORY_PLUS_SOFTWARE_TASK_TO_INDEPENDENTLY_VERIFIED_MERGEABLE_PATCH",
@@ -74,6 +74,28 @@
         "model_dependency_count": 0,
         "external_capability_provider_count": 0,
         "incremental_spend_usd": 0
+      },
+      {
+        "capability_id": "python.fault.provenance.interprocedural.value.v1",
+        "runtime_git_blob_sha": "7e9a0201b89b5d2edf4647c868858288fd1a9820",
+        "test_git_blob_sha": "82af855fc384d3d8193cf1426fd58e9a1a1443c8",
+        "registry_git_blob_sha": "a96424d5434685509aa4c871703e30ccec8735f4",
+        "independent_replay": "canonical/verification/PYTHON_INTERPROCEDURAL_VALUE_PROVENANCE_V1_VERIFY_20261011_V1.json",
+        "capability_truth": "BOUNDED_REPOSITORY_LOCAL_DYNAMIC_CALL_RETURN_ARGUMENT_OBSERVATIONS__FAILING_VS_PASSING_CALL_EDGE_RANKING__STATIC_CALLSITE_ASSIGNMENT_BINDING__INTERPROCEDURAL_VALUE_PROVENANCE_HYPOTHESES",
+        "model_dependency_count": 0,
+        "external_capability_provider_count": 0,
+        "incremental_spend_usd": 0
+      },
+      {
+        "capability_id": "python.software.repair.guided.provenance.coupled.v1",
+        "runtime_git_blob_sha": "0b779992f229dbe27f665a8f68c89cbb5a39fc28",
+        "test_git_blob_sha": "4702f3d252e6047cfadc28a1e3363357e0541ec7",
+        "registry_git_blob_sha": "a96424d5434685509aa4c871703e30ccec8735f4",
+        "independent_replay": "canonical/verification/PYTHON_PROVENANCE_GUIDED_COUPLED_REPAIR_V1_VERIFY_20261011_V1.json",
+        "capability_truth": "VERIFIED_DYNAMIC_LOCALIZATION_PLUS_INTERPROCEDURAL_PROVENANCE_GUIDES_BOUNDED_SINGLE_OR_TWO_EDIT_PYTHON_REPAIR__CONTROLLED_CASE_PRESERVES_VALID_REPAIR_WHILE_REDUCING_CANDIDATE_ITEM_AND_PAIR_SPACE__FINAL_DOUBLE_REPLAY__SOURCE_RESTORED",
+        "model_dependency_count": 0,
+        "external_capability_provider_count": 0,
+        "incremental_spend_usd": 0
       }
     ]
   },
@@ -91,48 +113,53 @@
     {
       "stage": "REPOSITORY_UNDERSTANDING_AND_LOCALIZATION",
       "target": "CONTRACT_PLUS_REPOSITORY_TO_CAUSALLY_RELEVANT_FILES_SYMBOLS_AND_EXECUTION_PATHS",
-      "state": "PARTIAL_DYNAMIC_SPECTRUM_SYMBOL_DEF_USE_VERIFIED",
+      "state": "PARTIAL_INTERPROCEDURAL_VALUE_PROVENANCE_VERIFIED",
       "existing_support": [
         "python.source.audit.ast",
         "python.tests.audit.unittest",
         "python.software.repair.loop.coupled.ast.v1",
-        "python.fault.localize.dynamic.dataflow.v1"
+        "python.fault.localize.dynamic.dataflow.v1",
+        "python.fault.provenance.interprocedural.value.v1",
+        "python.software.repair.guided.provenance.coupled.v1"
       ],
-      "residual": "DYNAMIC_SPECTRUM_AND_INTRA_SYMBOL_BACKWARD_DEF_USE_DO_NOT_YET_ESTABLISH_GENERAL_INTERPROCEDURAL_VALUE_PROVENANCE_OR_COMPLETE_SEMANTIC_CAUSALITY"
+      "residual": "BOUNDED_DYNAMIC_CALL_RETURN_PROVENANCE_AND_STATIC_CALLSITE_BINDING_ARE_NOT_COMPLETE_SEMANTIC_CAUSALITY_OR_CROSS_LANGUAGE_REPOSITORY_UNDERSTANDING"
     },
     {
       "stage": "PATCH_CONSTRUCTION",
       "target": "RELEVANT_CONTEXT_TO_CORRECT_REPOSITORY_PATCH",
-      "state": "PARTIAL_BOUNDED_NONMONOTONIC_COUPLED_PAIR_VERIFIED",
+      "state": "PARTIAL_PROVENANCE_GUIDED_COUPLED_REPAIR_VERIFIED",
       "existing_support": [
         "python.patch.search.test_guided.ast.v1",
         "python.software.repair.loop.test_guided.ast.v1",
         "python.software.repair.loop.strict_progress.ast.v1",
-        "python.software.repair.loop.coupled.ast.v1"
+        "python.software.repair.loop.coupled.ast.v1",
+        "python.software.repair.guided.provenance.coupled.v1"
       ],
-      "residual": "TWO_EDIT_COUPLED_AST_SEARCH_IS_NOT_ARBITRARY_DEPTH_OR_ARBITRARY_PATCH_CONSTRUCTION"
+      "residual": "GUIDED_SINGLE_OR_TWO_EDIT_PYTHON_AST_SEARCH_IS_NOT_ARBITRARY_DEPTH_OR_ARBITRARY_PATCH_CONSTRUCTION"
     },
     {
       "stage": "ACTIVE_DIAGNOSIS_AND_REPAIR",
       "target": "FAILURE_EVIDENCE_TO_CAUSAL_HYPOTHESIS_TO_NEXT_PATCH_UNTIL_ACCEPTANCE_OR_FAIL_CLOSED",
-      "state": "PARTIAL_BOUNDED_COUPLED_REPAIR_PLUS_DYNAMIC_LOCALIZATION",
+      "state": "PARTIAL_INTERPROCEDURAL_PROVENANCE_GUIDED_REPAIR_VERIFIED",
       "existing_support": [
         "python.software.repair.loop.test_guided.ast.v1",
         "python.software.repair.loop.strict_progress.ast.v1",
         "python.software.repair.loop.coupled.ast.v1",
-        "python.fault.localize.dynamic.dataflow.v1"
+        "python.fault.localize.dynamic.dataflow.v1",
+        "python.fault.provenance.interprocedural.value.v1",
+        "python.software.repair.guided.provenance.coupled.v1"
       ],
-      "residual": "DYNAMIC_LOCALIZATION_IS_READ_ONLY_AND_NOT_YET_COMPOSED_WITH_INTERPROCEDURAL_VALUE_PROVENANCE__DEEPER_COUPLING_AND_GENERAL_CAUSAL_DIAGNOSIS_REMAIN"
+      "residual": "REPAIR_REMAINS_BOUND_TO_EXISTING_TEST_ORACLE_AND_BOUNDED_PYTHON_EDIT_BASIS__RAW_REQUEST_TO_INDEPENDENT_ACCEPTANCE_SEMANTICS_REMAINS_OPEN"
     },
     {
       "stage": "INDEPENDENT_VERIFICATION",
       "target": "REQUESTED_BEHAVIOR_PLUS_REGRESSION_PLUS_SCOPE_DISCIPLINE_PLUS_CODEBASE_STANDARDS",
-      "state": "PARTIAL",
+      "state": "PARTIAL_TEST_ORACLE_AND_PROFESSIONAL_PROPERTY_SUPPORT",
       "existing_support": [
         "python.tests.audit.unittest",
         "professional quality property stack"
       ],
-      "residual": "PASSING_BOUND_TESTS_DOES_NOT_ESTABLISH_COMPLETE_MERGEABILITY_OR_HIDDEN_REQUIREMENTS"
+      "residual": "PASSING_BOUND_TESTS_AND_BOUNDED_REPAIR_REPLAY_DO_NOT_ESTABLISH_COMPLETE_REQUEST_SEMANTICS__INDEPENDENT_ACCEPTANCE_MODEL_REMAINS_OPEN"
     },
     {
       "stage": "GENERALIZATION",
@@ -146,13 +173,14 @@
     "primary_work_class": "CAPABILITY_BUILD",
     "benchmark_instrumentation_state": "AUDIT_ONLY",
     "owner_wait_state": "NONBLOCKING_OPTIONAL_WAKE_EVENT",
-    "highest_leverage_next_build": "GENERAL_SOFTWARE_REPAIR_LOOP_V5__INTERPROCEDURAL_VALUE_PROVENANCE_AND_LOCALIZER_GUIDED_REPAIR",
+    "highest_leverage_next_build": "GENERAL_SOFTWARE_REPAIR_LOOP_V6__SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL",
     "next_build_contract": [
-      "TRACE_VALUES_ACROSS_FUNCTION_BOUNDARIES_WITH_EXPLICIT_BOUNDS_AND_NO_EXTERNAL_MODEL_COGNITION",
-      "CONSTRUCT_INTERPROCEDURAL_DEF_USE_OR_VALUE_PROVENANCE_HYPOTHESES_FROM_DYNAMIC_EVIDENCE",
-      "USE_DYNAMIC_LOCALIZER_RANKING_TO_RESTRICT_COUPLED_REPAIR_SEARCH_REGION",
-      "VERIFY_LOCALIZER_GUIDANCE_IMPROVES_SEARCH_OR_FAIL_CLOSED_ON_CONTROLLED_COUNTEREXAMPLES",
-      "INDEPENDENT_FINAL_REPLAY_SOURCE_RESTORATION_AND_EXPLICIT_RESOURCE_LIMITS",
+      "RAW_SOFTWARE_REQUEST_TO_EXPLICIT_BEHAVIORAL_PREDICATES_CONSTRAINTS_NEGATIVE_REQUIREMENTS_AND_SCOPE",
+      "BIND_EACH_ACCEPTANCE_PREDICATE_TO_AN_INDEPENDENT_EXECUTABLE_VERIFIER_OR_MARK_IT_UNBOUND",
+      "SEPARATE_EXISTING_TEST_EVIDENCE_FROM_REQUEST_SEMANTICS__TEST_PASS_MUST_NOT_IMPLY_COMPLETE_ACCEPTANCE",
+      "USE_ACCEPTANCE_PREDICATES_TO_GUIDE_AND_STOP_REPAIR_ONLY_WHEN_BOUND_VERIFICATION_CLEARS",
+      "QUALIFY_ON_UNSEEN_NON_BENCHMARK_SOFTWARE_TASKS_WITH_HELD_OUT_ACCEPTANCE_CASES",
+      "NO_EXTERNAL_GENERAL_PURPOSE_MODEL_RUNTIME_COGNITION",
       "NO_BENCHMARK_SCORE_INFERENCE"
     ],
     "stop_conditions": [
@@ -175,7 +203,10 @@
     "NO_CLAIM_COUPLED_PAIR_SEARCH_SOLVES_ARBITRARY_DEPTH_COUPLED_EDIT_TASKS",
     "NO_CLAIM_SYMBOL_RANKING_IS_GENERAL_SEMANTIC_CAUSAL_LOCALIZATION",
     "NO_CLAIM_DYNAMIC_SPECTRUM_LOCALIZATION_PROVES_GENERAL_SEMANTIC_CAUSALITY",
-    "NO_CLAIM_INTRA_SYMBOL_BACKWARD_DEF_USE_IS_INTERPROCEDURAL_VALUE_PROVENANCE"
+    "NO_CLAIM_INTRA_SYMBOL_BACKWARD_DEF_USE_IS_INTERPROCEDURAL_VALUE_PROVENANCE",
+    "NO_CLAIM_INTERPROCEDURAL_VALUE_PROVENANCE_IS_COMPLETE_SEMANTIC_CAUSALITY",
+    "NO_CLAIM_PROVENANCE_GUIDANCE_ALWAYS_REDUCES_SEARCH",
+    "NO_CLAIM_V5_REPAIR_CLOSES_RAW_REQUEST_ACCEPTANCE_SEMANTICS"
   ],
   "accounting": {
     "incremental_spend_usd": 0,
