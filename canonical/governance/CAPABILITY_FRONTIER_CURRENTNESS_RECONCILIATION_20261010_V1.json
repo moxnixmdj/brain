@@ -13,7 +13,7 @@
     },
     "bytes": {
       "path": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-      "git_blob_sha": "46f0274dfb44b09a7b6ecd149f69f702ecaa3c4b"
+      "git_blob_sha": "31ed2877cc5c861a4163a14d27acb227aac904db"
     },
     "r2": {
       "path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
@@ -66,5 +66,6 @@
   "next": "INSTANTIATE_EXISTING_AUTHENTICATED_POLICY_COVER_AND_ROW_PROOF_MACHINERY_FOR_ACTIVE_ESCAPE_ACQUISITION_ROWS__DO_NOT_REOPEN_24_OF_24_PROFESSIONAL_PROPERTY_TRUTH__WAKE_FULL_PRIVATE_CURRENT_MAIN_REGRESSION_ONLY_ON_REAL_CARRIER_STATE_CHANGE__PARALLELIZE_NONCONFLICTING_BYTES_V51_RESOURCE_WORK",
   "acceptance_credit_delta": 0,
   "capability_credit_delta": 0,
-  "terminal_credit_delta": 0
+  "terminal_credit_delta": 0,
+  "safe_parallel_ready": []
 }
