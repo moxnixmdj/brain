@@ -1,0 +1,85 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_CLEANROOM_UNSPENT_SLOT_RECOVERY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "CANDIDATE__CAUSAL_NO_LEAKAGE_RECOVERY_ROUTE__CAD_MODEL_FIRST_BINDING__ZERO_SUCCESS_CREDIT",
+  "target_predicate": "CODING_TB4_GE_66_4",
+  "objective": "Replace blanket task-identity no-replay with a stricter causal rule: previously unconsumed trial slots may be executed only from an exact pre-verifier state that cannot access any post-verifier/result artifact.",
+  "benchmark_semantics": {
+    "frozen_release_commit": "452bf305c6daa62fc59061d22133a7cbc7c1572e",
+    "trials_per_task": 5,
+    "trial_parametricity_authority": "canonical/governance/TB4_TRIAL_PARAMETRICITY_TRUTH_REPAIR_20261008_V1.json",
+    "observed_fact": "TB4_RUNS_DISTINCT_ATTEMPTS_PER_TASK__SAME_TASK_IDENTITY_ALONE_DOES_NOT_MAKE_LATER_ATTEMPTS_INVALID",
+    "preserved_rule": "ONE_EMPIRICAL_SUCCESS_NEVER_MULTIPLIES_TO_OTHER_TRIALS"
+  },
+  "prior_overconservative_rule": {
+    "source": "canonical/governance/TB4_ATTAINABILITY_EVIDENCE_MANIFEST_V1.json",
+    "behavior": "ONE_SPENT_OR_CONTAMINATED_TASK_WAS_TREATED_AS_ZERO_CREDIT_FOR_ALL_FIVE_SLOTS",
+    "correction": "ONLY_ACTUALLY_CONSUMED_OR_CAUSALLY_CONTAMINATED_SLOTS_ARE_ZERO__UNCONSUMED_SLOTS_REOPEN_IF_PROOF_CARRYING_CLEANROOM_ISOLATION_BREAKS_ALL_POST_EXPOSURE_CAUSAL_PATHS"
+  },
+  "admissibility_theorem": {
+    "premises": [
+      "EXACT_TASK_IDENTITY_AND_FROZEN_TASK_TREE_ARE_BOUND",
+      "A_CONTENT_ADDRESSED_BRAIN_ROOT_AND_RUNNER_ROOT_EXIST_FROM_BEFORE_FIRST_HIDDEN_VERIFIER_EXPOSURE",
+      "THE_HISTORICAL_ROOT_BINDS_THE_SAME_BRAIN_OWNED_CONFIGURED_ROUTE",
+      "THE_RECOVERY_EXECUTION_STARTS_FROM_THOSE_PREVERIFIER_ROOTS_IN_A_FRESH_ENVIRONMENT",
+      "NO_CURRENT_BRAIN_TREE_POSTRESULT_STORE_VERIFIER_OUTPUT_OR_SPENT_TRACE_IS_MOUNTED_OR_RETRIEVABLE_DURING_ACTOR_EXECUTION",
+      "HIDDEN_VERIFIER_MATERIAL_IS_UNAVAILABLE_TO_THE_ACTOR_UNTIL_OUTPUT_FREEZE_AND_WRITE_CLOSE",
+      "RECOVERED_TRIAL_INDICES_ARE_DISTINCT_AND_WERE_NOT_PREVIOUSLY_CONSUMED",
+      "NO_RESULT_FROM_ONE_RECOVERED_TRIAL_MAY_CHANGE_ANY_OTHER_RECOVERED_TRIAL_CONFIGURATION_OR_OUTPUT_GENERATION",
+      "EVERY_RECOVERED_SLOT_STILL_REQUIRES_ITS_OWN_OFFICIAL_VERIFIER_RECEIPT"
+    ],
+    "conclusion": "A_RECOVERED_SLOT_IS_A_NEW_DISTINCT_TB4_TRIAL_ATTEMPT_NOT_A_REPLAY_FOR_CREDIT_OF_THE_PRIOR_RESULT",
+    "nonclaim": "THIS_THEOREM_RECOVERS_CREDITABLE_CAPACITY_ONLY__IT DOES NOT ASSERT SUCCESS"
+  },
+  "cad_model_first_candidate": {
+    "task": "cad-model",
+    "task_tree_sha": "e0d9d5571c902b9cd810f37e53d4a3cae1db05f3",
+    "clean_brain_lease_commit": "2b02287599d6878952a4a355fd05c4c6f219a34e",
+    "clean_runner_launch_commit": "53be3a64392ff8c184c8d7eb8bb1b4008560fcfe",
+    "historical_failure_commit": "a4b8e6bd5b03ece0c2cd6c223e7f4cbbe52f799e",
+    "historical_failure_reward": 0,
+    "consumed_trial_slots": 1,
+    "candidate_unspent_trial_indices": [
+      2,
+      3,
+      4,
+      5
+    ],
+    "maximum_recoverable_capacity_delta": 4,
+    "current_bound_capacity_before_recovery": 220,
+    "conditional_capacity_after_verified_recovery": 224,
+    "current_required_successes": 219,
+    "conditional_failure_slack_after_verified_recovery": 5,
+    "current_state": "PENDING_INDEPENDENT_CLEANROOM_ROOT_AND_CAUSAL_ISOLATION_VERIFICATION"
+  },
+  "reuse": {
+    "clean_room_donor": "canonical/runtime/finality_gate_v2.py",
+    "clean_room_activation": "canonical/governance/D_FINALITY_GATE_V2_ACTIVATION_20261011_V1.json",
+    "reuse_rule": "REUSE_ZERO_AMBIENT_CONTENT_BOUND_ISOLATION_MECHANICS__DO_NOT_IMPORT_D_FINALITY_TERMINAL_SEMANTICS"
+  },
+  "scheduler_effect": [
+    "DO_NOT_TREAT_ALL_FIVE_SLOTS_AS_ZERO_SOLELY_BECAUSE_ONE_PRIOR_ATTEMPT_EXPOSED_A_VERIFIER",
+    "FIRST_VERIFY_CAD_MODEL_PREVERIFIER_ROOT_AND_CAUSAL_ISOLATION__IF_PASS_RECOMPILE_ATTAINABILITY_TO_224_SLOT_CAPACITY",
+    "THEN_APPLY_THE_SAME_GATE_TO_THE_OTHER_HISTORICAL_IRREVERSIBLE_ZERO_TASKS",
+    "DO_NOT_EXECUTE_ANY_RECOVERED_SLOT_UNTIL_THE_RECOVERY_GATE_IS_INDEPENDENTLY_VERIFIED_AND_CURRENT_AUTHORITY_RECOMPILED"
+  ],
+  "hard_nonclaims": [
+    "NO_CAD_MODEL_RECOVERED_SLOT_CREDIT_YET",
+    "NO_NEW_TB4_SUCCESS",
+    "NO_TB4_ACCEPTANCE_CREDIT",
+    "NO_REPEATED_USE_OF_THE_FAILED_TRIAL_SLOT",
+    "NO_USE_OF_POST_VERIFIER_INFORMATION_BY_RECOVERED_ACTOR_EXECUTIONS",
+    "NO_EXECUTION_AUTHORITY_ADDED",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "recovered_creditable_slots": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "independent_verification_required": true,
+  "execution_authority": false,
+  "promotion_authority": false
+}
