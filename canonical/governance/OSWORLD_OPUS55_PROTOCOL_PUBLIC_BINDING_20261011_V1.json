@@ -1,0 +1,88 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_OPUS55_PROTOCOL_PUBLIC_BINDING_20261011_V1",
+  "date": "2026-10-11",
+  "status": "ANTHROPIC_OPUS55_OSWORLD_PROTOCOL_SUBSTANTIALLY_PUBLICLY_BOUND__PUBLIC_REFERENCE_108_TASK_SEMANTICS_AVAILABLE__OWNER_BYTE_EQUIVALENCE_BRAIN_HARNESS_AND_SCORE_STILL_OPEN__ZERO_CREDIT",
+  "target_predicate": "OSWORLD_2_1_PARTIAL_GE_81_8",
+  "source_provenance": {
+    "owner": "Anthropic",
+    "owner_system_card_title": "Claude Opus 5.5 System Card",
+    "owner_system_card_date": "2026-09-22",
+    "owner_system_card_section": "8.13.3 OSWorld 2.0",
+    "owner_system_card_url": "https://www.anthropic.com/claude-opus-5-5-system-card",
+    "owner_launch_url": "https://www.anthropic.com/claude-opus-5-5",
+    "observed_faithful_html_rendering": "https://malob.github.io/ai-system-cards/anthropic/claude-opus-5-5/",
+    "public_reference_semantic_coverage": "canonical/governance/OSWORLD_V21_PUBLIC_REFERENCE_SEMANTIC_COVERAGE_20261011_V1.json",
+    "retrieval_note": "THE_OWNER_PDF_EXCEEDED_THE_CURRENT_RESEARCH_TOOL_INGEST_LIMIT__THE_SECTION_WAS_OBSERVED_IN_A_FAITHFUL_HTML_RENDERING_LINKED_TO_THE_OWNER_PDF__THE_81_8_PARTIAL_RESULT_IS_CORROBORATED_BY_THE_OWNER_LAUNCH_PAGE"
+  },
+  "published_protocol": {
+    "task_count": 108,
+    "task_asset_epoch": "2026-09-10",
+    "companion_web_app_epoch": "2026-09-10",
+    "screen_resolution": "1080p",
+    "maximum_action_steps_per_task": 500,
+    "reasoning_effort": "max",
+    "model_grader_for_tasks_requiring_model_grader": "Claude Opus 4.8",
+    "context_management": {
+      "retain_all_screenshots": true,
+      "server_side_context_management": true,
+      "compaction_threshold_tokens": 100000
+    },
+    "metrics": {
+      "partial_score": "MEAN_PER_TASK_CREDIT_ACROSS_WEIGHTED_CHECKPOINTS",
+      "strict_pass_rate": "FRACTION_OF_TASKS_WITH_EVERY_CHECKPOINT_SATISFIED",
+      "sampling": "PASS_AT_1_AVERAGED_OVER_FIVE_INDEPENDENT_RUNS"
+    },
+    "opus_5_5_partial_percent": 81.8,
+    "opus_5_5_strict_pass_percent": 48.7
+  },
+  "reconciliation": {
+    "public_reference_semantics": "108_OF_108_ACQUIRED_WITH_RELEASE_HASH_ATTESTATION_MATCHING_CANONICAL_PIN",
+    "now_bound": [
+      "ANTHROPIC_108_TASK_POPULATION_SIZE",
+      "SEPTEMBER_10_2026_TASK_ASSET_AND_COMPANION_WEBAPP_EPOCH",
+      "1080P_RESOLUTION",
+      "500_ACTION_STEP_LIMIT",
+      "MAX_REASONING_EFFORT",
+      "OPUS_4_8_MODEL_GRADER_WHERE_REQUIRED",
+      "ALL_SCREENSHOTS_RETAINED_WITH_SERVER_SIDE_COMPACTION_AFTER_100K_TOKENS",
+      "PARTIAL_AND_STRICT_METRIC_SEMANTICS",
+      "FIVE_INDEPENDENT_RUN_AGGREGATION"
+    ],
+    "still_open": [
+      "OWNER_OR_INDEPENDENTLY_STRONGER_BYTE_OR_SEMANTIC_EQUIVALENCE_BETWEEN_PUBLIC_REFERENCE_CORPUS_AND_PINNED_GATED_OWNER_TASK_IMPLEMENTATIONS",
+      "BRAIN_PROTOCOL_EQUIVALENT_OSWORLD_HARNESS_BINDING",
+      "AUTHENTIC_BRAIN_PARTIAL_SCORE_GE_81_8_OR_STRONGER_SCOPE_COMPLETE_CERTIFICATE",
+      "ONLY_IF_USING_A_SCOPE_SUPERSET_ROUTE__SOUND_TRANSFER_FROM_FINITE_108_TASK_46_APP_SUPPORT_TO_THE_CLAIMED_BROADER_APPLICATION_CLASS"
+    ]
+  },
+  "irreducible_delta": "BIND_OWNER_OR_INDEPENDENTLY_STRONGER_EQUIVALENCE_FOR_THE_PUBLIC_REFERENCE_108_TASK_SEMANTICS_TO_THE_PINNED_OWNER_TASK_IMPLEMENTATIONS__THEN_BIND_A_PROTOCOL_EQUIVALENT_BRAIN_HARNESS_AND_AUTHENTIC_PARTIAL_SCORE_GE_81_8__OR_PROVE_A_STRONGER_SCOPE_COMPLETE_CERTIFICATE",
+  "scheduler_effect": {
+    "delete": [
+      "BROAD_SEARCH_FOR_OSWORLD_TASK_SEMANTICS",
+      "SEARCH_FOR_ANTHROPIC_OSWORLD_SCREEN_RESOLUTION",
+      "SEARCH_FOR_ANTHROPIC_OSWORLD_ACTION_LIMIT",
+      "SEARCH_FOR_ANTHROPIC_OSWORLD_GRADER_IDENTITY",
+      "SEARCH_FOR_ANTHROPIC_OSWORLD_CONTEXT_POLICY",
+      "SEARCH_FOR_ANTHROPIC_OSWORLD_AGGREGATION_RULE"
+    ],
+    "activate": [
+      "VERIFY_REFERENCE_CORPUS_TO_PINNED_OWNER_SEMANTIC_EQUIVALENCE_USING_EXISTING_CONTENT_ADDRESS_AND_COVERAGE_MACHINERY",
+      "BIND_PROTOCOL_EQUIVALENT_BRAIN_OSWORLD_HARNESS",
+      "ONLY_THEN_OBTAIN_AUTHENTIC_MATCHED_PARTIAL_SCORE_OR_DISCHARGE_BY_STRONGER_SCOPE_COMPLETE_CERTIFICATE"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_OWNER_GATED_TASK_BYTES_ACCESSED_BY_THIS_BINDING",
+    "NO_CLAIM_PUBLIC_REFERENCE_CORPUS_IS_OWNER_SIGNED",
+    "NO_BRAIN_OSWORLD_SCORE",
+    "NO_OSWORLD_ACCEPTANCE",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
