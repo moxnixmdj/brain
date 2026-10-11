@@ -1,0 +1,121 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_FRONTIERCODE_CAPABILITY_FIRST_RECONCILIATION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "ACTIVE_CAPABILITY_FIRST__BENCHMARK_DEMOTED_TO_AUDIT__BOUNDED_DONOR_FREE_PATCH_SEARCH_VERIFIED__FRONTIERCODE_SCORE_STILL_UNPROVED",
+  "mission_lock": {
+    "primary_objective": "MAKE_THE_UNDERLYING_SOFTWARE_ENGINEERING_CAPABILITY_REAL_INSIDE_BRAIN",
+    "capability_target": "UNSEEN_REPOSITORY_PLUS_SOFTWARE_TASK_TO_INDEPENDENTLY_VERIFIED_MERGEABLE_PATCH",
+    "frozen_measurement_predicate": "CODING_FRONTIERCODE_GE_54_4",
+    "measurement_role": "AUDIT_AND_FALSIFICATION_ONLY__NOT_ARCHITECTURE_OR_PRIMARY_SCHEDULER",
+    "no_goal_substitution": true
+  },
+  "corrected_question": "WHAT_MINIMUM_BRAIN_OWNED_MECHANISMS_CAUSE_THE_REAL_CODING_BEHAVIOR_THAT_FRONTIERCODE_ATTEMPTS_TO_MEASURE__NOT_WHAT_MINIMUM_BENCHMARK_ACTIONS_PRODUCE_A_SCORE_RECEIPT",
+  "execution_truth": {
+    "new_verified_primitive": {
+      "capability_id": "python.patch.search.test_guided.ast.v1",
+      "main_commit": "b13e5dc4ae0733584f9d74a0ee4723674f608649",
+      "registry_git_blob_sha": "1579fd14c14fc303e0070fe5045382beeb1ca8bb",
+      "runtime_git_blob_sha": "9bd33aca208fca26270765e18b3563abcf841e0b",
+      "test_git_blob_sha": "0201af9a0168cb7f6596cbed395c19eeac24ed37",
+      "independent_replay": "canonical/verification/PYTHON_TEST_GUIDED_PATCH_SEARCH_MAIN_REPLAY_VERIFY_20261011_V1.json",
+      "capability_truth": "ONE_REPOSITORY_LOCAL_PYTHON_FILE__SINGLE_NODE_AST_MUTATIONS_PLUS_TEST_LITERAL_SUBSTITUTIONS__FAILING_PYTHON_TEST_ORACLE__CANDIDATE_ONLY__SOURCE_RESTORED",
+      "model_dependency_count": 0,
+      "external_capability_provider_count": 0,
+      "incremental_spend_usd": 0
+    },
+    "benchmark_truth": {
+      "current_certified_score_lower_bound_fraction": 0,
+      "actual_score_zero": false,
+      "target_proven": false,
+      "owner_or_partner_evaluation_required_for_capability_development": false,
+      "owner_or_partner_evaluation_optional_for_later_measurement": true
+    }
+  },
+  "capability_chain": [
+    {
+      "stage": "RAW_TASK_SEMANTICS",
+      "target": "RAW_SOFTWARE_REQUEST_TO_SOUND_EXPLICIT_BEHAVIORAL_AND_ACCEPTANCE_CONTRACT",
+      "state": "OPEN_GENERAL_CASE",
+      "existing_support": [
+        "goal_compiler.py",
+        "plain_goal.bound_capability.grounding.stdlib"
+      ],
+      "residual": "ARBITRARY_SOFTWARE_REQUEST_SEMANTICS_NOT_SCOPE_COMPLETE"
+    },
+    {
+      "stage": "REPOSITORY_UNDERSTANDING_AND_LOCALIZATION",
+      "target": "CONTRACT_PLUS_REPOSITORY_TO_CAUSALLY_RELEVANT_FILES_SYMBOLS_AND_EXECUTION_PATHS",
+      "state": "PARTIAL",
+      "existing_support": [
+        "python.source.audit.ast",
+        "python.tests.audit.unittest"
+      ],
+      "residual": "STRUCTURAL_AUDIT_IS_NOT_GENERAL_SEMANTIC_FAULT_LOCALIZATION"
+    },
+    {
+      "stage": "PATCH_CONSTRUCTION",
+      "target": "RELEVANT_CONTEXT_TO_CORRECT_REPOSITORY_PATCH",
+      "state": "PARTIAL_BOUNDED_VERIFIED",
+      "existing_support": [
+        "python.patch.search.test_guided.ast.v1"
+      ],
+      "residual": "SINGLE_FILE_SINGLE_EDIT_PYTHON_SEARCH_IS_NOT_ARBITRARY_MULTI_FILE_MULTI_EDIT_PATCH_CONSTRUCTION"
+    },
+    {
+      "stage": "ACTIVE_DIAGNOSIS_AND_REPAIR",
+      "target": "FAILURE_EVIDENCE_TO_CAUSAL_HYPOTHESIS_TO_NEXT_PATCH_UNTIL_ACCEPTANCE_OR_FAIL_CLOSED",
+      "state": "OPEN_GENERAL_CASE",
+      "existing_support": [],
+      "residual": "NO_GENERAL_BRAIN_OWNED_ITERATIVE_SOFTWARE_REPAIR_LOOP"
+    },
+    {
+      "stage": "INDEPENDENT_VERIFICATION",
+      "target": "REQUESTED_BEHAVIOR_PLUS_REGRESSION_PLUS_SCOPE_DISCIPLINE_PLUS_CODEBASE_STANDARDS",
+      "state": "PARTIAL",
+      "existing_support": [
+        "python.tests.audit.unittest",
+        "professional quality property stack"
+      ],
+      "residual": "PASSING_BOUND_TESTS_DOES_NOT_ESTABLISH_COMPLETE_MERGEABILITY_OR_HIDDEN_REQUIREMENTS"
+    },
+    {
+      "stage": "GENERALIZATION",
+      "target": "UNSEEN_REPOSITORIES_LANGUAGES_AND_TASK_FAMILIES",
+      "state": "OPEN",
+      "existing_support": [],
+      "residual": "CURRENT_NEW_PRIMITIVE_IS_PYTHON_AND_BOUNDED"
+    }
+  ],
+  "scheduler": {
+    "primary_work_class": "CAPABILITY_BUILD",
+    "benchmark_instrumentation_state": "AUDIT_ONLY",
+    "owner_wait_state": "NONBLOCKING_OPTIONAL_WAKE_EVENT",
+    "highest_leverage_next_build": "GENERAL_SOFTWARE_REPAIR_LOOP_V1",
+    "next_build_contract": [
+      "REPOSITORY_LOCAL_FAILING_TEST_EVIDENCE_TO_FILE_AND_SYMBOL_LOCALIZATION",
+      "MULTI_FILE_MULTI_EDIT_CANDIDATE_CONSTRUCTION_OVER_A_SYNTACTICALLY_UNIVERSAL_FINITE_EDIT_BASIS",
+      "BOUNDED_COUNTEREXAMPLE_GUIDED_SEARCH_WITH_EXPLICIT_RESOURCE_LIMITS",
+      "INDEPENDENT_REPLAY_AND_SOURCE_RESTORATION",
+      "NO_EXTERNAL_GENERAL_PURPOSE_MODEL_RUNTIME_COGNITION",
+      "FAIL_CLOSED_WHEN_ACCEPTANCE_EVIDENCE_IS_INSUFFICIENT"
+    ],
+    "stop_conditions": [
+      "DO_NOT_SPEND_PRIMARY_CYCLES_ON_PRIVATE_BENCHMARK_ARCHAEOLOGY",
+      "DO_NOT_WAIT_FOR_OWNER_OR_PARTNER_RESPONSE_TO_BUILD_CAPABILITY",
+      "DO_NOT_INFER_FRONTIERCODE_SCORE_FROM_GENERIC_CAPABILITY_PROGRESS",
+      "DO_NOT_PROMOTE_BOUNDED_PATCH_SEARCH_AS_GENERAL_SOFTWARE_ENGINEERING"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_FRONTIERCODE_SCORE_CREDIT",
+    "NO_CLAIM_CURRENT_PATCH_SEARCH_IS_GENERAL_OR_COMPLETE",
+    "NO_CLAIM_HIDDEN_FRONTIERCODE_TASKS_OR_RUBRICS_ARE_COVERED",
+    "NO_CLAIM_TEST_PASS_EQUALS_MERGEABILITY",
+    "NO_EXTERNAL_MODEL_COGNITION_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
