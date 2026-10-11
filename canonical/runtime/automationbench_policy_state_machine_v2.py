@@ -13,7 +13,7 @@ import hashlib
 import json
 from typing import Any, Mapping, Sequence
 
-from canonical.runtime.automationbench_owned_policy_kernel_v1 import search_queries
+from canonical.runtime.generic_tool_schema_discovery_v1 import discovery_queries
 from canonical.runtime.generic_goal_tool_effect_planner_v2 import (
     endpoint_rows_from_search_payloads,
     plan_goal_over_tool_schemas,
@@ -189,7 +189,7 @@ def next_policy_action(
     if not searches:
         calls = [
             {"tool": "api_search", "arguments": {"query": q, "top_k": 5}}
-            for q in search_queries(prompt, max_queries=max_parallel_calls)
+            for q in discovery_queries(prompt, max_queries=max_parallel_calls)
         ]
         return {
             "schema": SCHEMA,
