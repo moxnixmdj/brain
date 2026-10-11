@@ -17,7 +17,8 @@
       "git_blob_sha": "694c22ebc2f147a75a6744f7a29500b87ace263a"
     },
     "owner_metadata_reply": {
-      "path": "canonical/evidence/CURSORBENCH_OWNER_SCORING_METADATA_BOUNDARY_EVIDENCE_20261011_V1.json"
+      "path": "canonical/evidence/CURSORBENCH_OWNER_SCORING_METADATA_BOUNDARY_EVIDENCE_20261011_V1.json",
+      "git_blob_sha": "c5d6ec2d2b574fb99466a571b7e04ad0f1c4a2f8"
     }
   },
   "reduction": {
