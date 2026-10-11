@@ -254,10 +254,10 @@
       "audit_verification": "canonical/verification/ESCAPE_PROGRESS_SHARED_GAP_EXECUTABLE_AUDIT_V5_VERIFY_20261010_V1.json",
       "audit_verification_git_blob_sha": "db0d6ae5c19193f2966c9ec4cb47980652e2405e",
       "gap_a_policy_cover_adapter": {
-        "activation": "canonical/governance/ESCAPE_GAP_A_POLICY_COVER_ADAPTER_ACTIVATION_20261010_V1.json",
-        "behavioral_verification": "canonical/verification/ESCAPE_GAP_A_POLICY_COVER_ADAPTER_VERIFY_20261010_V1.json",
-        "activation_verification": "canonical/verification/ESCAPE_GAP_A_POLICY_COVER_ADAPTER_ACTIVATION_VERIFY_20261010_V1.json",
-        "role": "REALIZATION_BRIDGE_UNDER_OQ_PRIMARY_RESEARCH_COMPRESSION",
+        "activation": "canonical/governance/ESCAPE_GAP_A_POLICY_COVER_ADAPTER_ACTIVATION_20261011_V2.json",
+        "behavioral_verification": "canonical/verification/ESCAPE_GAP_A_POLICY_COVER_ADAPTER_VERIFY_20261011_V2.json",
+        "activation_verification": "canonical/verification/ESCAPE_GAP_A_POLICY_COVER_ADAPTER_ACTIVATION_VERIFY_20261011_V2.json",
+        "role": "REALIZATION_BRIDGE_UNDER_OQ_PRIMARY_RESEARCH_COMPRESSION__CURRENT_PROJECTION_AWARE",
         "real_row_proofs": 0
       },
       "structural_audit": "canonical/runtime/escape_progress_shared_gap_audit_v3.py",
@@ -652,7 +652,7 @@
     "successor_escape_binding_v5": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V5.json",
     "oq_frontier": "canonical/governance/CURRENT_ESCAPE_OQ_FRONTIER_REDUCTION_20261010_V1.json",
     "successor_escape_binding_v6": "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V6.json",
-    "gap_a_adapter_activation": "canonical/governance/ESCAPE_GAP_A_POLICY_COVER_ADAPTER_ACTIVATION_20261010_V1.json",
+    "gap_a_adapter_activation": "canonical/governance/ESCAPE_GAP_A_POLICY_COVER_ADAPTER_ACTIVATION_20261011_V2.json",
     "real_gap_a_row_proofs": 0,
     "successor_escape_audit_v4_projected": true,
     "successor_escape_audit_v4_verification": "canonical/verification/ESCAPE_PROGRESS_SHARED_GAP_EXECUTABLE_AUDIT_V4_REBASE_VERIFY_20261010_V1.json",
