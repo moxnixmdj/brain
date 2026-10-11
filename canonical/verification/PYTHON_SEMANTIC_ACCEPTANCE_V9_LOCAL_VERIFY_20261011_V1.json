@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_PYTHON_SEMANTIC_ACCEPTANCE_V9_LOCAL_VERIFY_V1",
+  "date": "2026-10-11",
+  "status": "PASS_WINDOWS_EXACT_BRANCH__LINUX_V9_REPLAY_CARRIER_UNAVAILABLE__ZERO_CREDIT",
+  "branch": "coding-v9-semantic-acceptance-current-20261011-v1",
+  "tested_head": "2313e041390eab443512d5b11b44293eb1d18e7e",
+  "root_dependency_fix": {
+    "merge_commit": "e609090ccacd4a9fdb360a9e35c4f4b1577bae75",
+    "property": "COUPLED_REPAIR_MUTATION_OFFSETS_USE_EXACT_SOURCE_BYTES",
+    "cross_platform_verification": {
+      "windows": {
+        "coupled": "9_OF_9_PASS",
+        "provenance_guided": "8_OF_8_PASS"
+      },
+      "linux": {
+        "coupled": "9_OF_9_PASS",
+        "provenance_guided": "8_OF_8_PASS"
+      }
+    }
+  },
+  "v9_windows_replay": {
+    "python": "3.14.7_x64",
+    "semantic_compiler": "13_OF_13_PASS",
+    "integrated_controller": "8_OF_8_PASS",
+    "total": "21_OF_21_PASS",
+    "exact_branch_head": "2313e041390eab443512d5b11b44293eb1d18e7e"
+  },
+  "linux_v9_replay": {
+    "attempted": true,
+    "code_result": null,
+    "carrier_result": "WSL_SERVICE_FAILURE_0x8007274c_BEFORE_TEST_EXECUTION",
+    "treated_as_code_failure": false
+  },
+  "verified_properties": [
+    "UNSUPPORTED_OR_AMBIGUOUS_REQUESTS_REMAIN_BLOCKING_RESIDUALS",
+    "SUPPORTED_EXPLICIT_PYTHON_SEMANTIC_CELLS_COMPILE_DETERMINISTICALLY",
+    "REPOSITORY_LOCAL_CALL_AND_FILE_OR_AST_ACCEPTANCE_CHECKS_EXECUTE",
+    "SEMANTIC_ACCEPTANCE_PROGRAM_IS_WITHHELD_FROM_REPAIR_SEARCH",
+    "SEMANTIC_FAILURE_CAN_FALSIFY_A_REGRESSION_PASSING_REPAIR",
+    "ALL_SEMANTIC_CELLS_MUST_CLEAR",
+    "SOURCE_BYTES_ARE_RESTORED",
+    "MODEL_DEPENDENCY_COUNT_ZERO",
+    "EXTERNAL_GENERAL_PURPOSE_MODEL_RUNTIME_DEPENDENCY_COUNT_ZERO",
+    "INCREMENTAL_SPEND_USD_ZERO"
+  ],
+  "scope": {
+    "capability_id": "python.software.repair.semantic_acceptance.v1",
+    "covered_region": "BOUNDED_EXPLICIT_PYTHON_SOFTWARE_REQUEST_LINE_GRAMMAR",
+    "not_covered": [
+      "GENERAL_NATURAL_LANGUAGE_SOFTWARE_SPECIFICATION",
+      "ARBITRARY_PATCH_CONSTRUCTION",
+      "NON_PYTHON_SOFTWARE_REPAIR",
+      "HIDDEN_REQUIREMENTS",
+      "GENERAL_MERGEABILITY"
+    ]
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "frontiercode_score_credit_delta": 0,
+    "cursorbench_score_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NOT_AN_INDEPENDENT_SECOND_CARRIER_V9_VERIFICATION",
+    "NO_FRONTIERCODE_GE_54_4_CLAIM",
+    "NO_CURSORBENCH_GE_57_8_CLAIM",
+    "NO_FULL_SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_CLOSURE",
+    "NO_TERMINAL_GOAL_ACHIEVED_CLAIM"
+  ]
+}
