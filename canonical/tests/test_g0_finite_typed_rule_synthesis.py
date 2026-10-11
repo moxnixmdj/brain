@@ -1,5 +1,4 @@
 import unittest
-from canonical.tests.test_general_scientific_capability_controller_v1 import GeneralScientificCapabilityControllerV1Tests
 
 from canonical.runtime.g0_finite_typed_rule_synthesis import (
     PredicateSpec,
