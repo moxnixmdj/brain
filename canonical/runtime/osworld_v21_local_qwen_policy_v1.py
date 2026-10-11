@@ -96,6 +96,8 @@ def state_prompt(state: Mapping[str, Any]) -> str:
             "actions": row.get("actions"),
             "response": _trim(row.get("response"), 500),
             "browser_result": _trim(row.get("browser_result"), 6000),
+            "guest_result": _trim(row.get("guest_result"), 6000),
+            "operation_error": _trim(row.get("operation_error"), 3000),
             "screenshot_sha256": row.get("screenshot_sha256"),
         })
 
@@ -126,6 +128,14 @@ Use generic state tools before pixel clicking when they are sufficient:
   {"type":"BROWSER_OP","op":{"type":"FILL_LABEL","label":"...","value":"...","exact":true}}
   {"type":"BROWSER_OP","op":{"type":"FILL_PLACEHOLDER","placeholder":"...","value":"...","exact":true}}
   {"type":"BROWSER_OP","op":{"type":"PRESS","key":"Enter"}}
+  {"type":"BROWSER_OP","op":{"type":"CLICK_SELECTOR","selector":"..."}}
+  {"type":"BROWSER_OP","op":{"type":"FILL_SELECTOR","selector":"...","value":"..."}}
+  {"type":"BROWSER_OP","op":{"type":"PRESS_SELECTOR","selector":"...","key":"Enter"}}
+  {"type":"BROWSER_OP","op":{"type":"SELECT_SELECTOR","selector":"...","value":"..."}}
+  {"type":"BROWSER_OP","op":{"type":"CHECK_SELECTOR","selector":"..."}}
+  {"type":"BROWSER_OP","op":{"type":"UNCHECK_SELECTOR","selector":"..."}}
+  {"type":"BROWSER_OP","op":{"type":"EXTRACT_TEXT","selector":"..."}}  # selector optional
+  {"type":"BROWSER_OP","op":{"type":"BACK"}} / FORWARD / RELOAD
 - Declarative guest end-state operations:
   {"type":"STATE_OPS","ops":[...]} where each op is MKDIR, WRITE_TEXT, COPY, MOVE,
   DELETE, JSON_SET, or RUN_CLI using only the adapter's allowlisted app CLIs.
@@ -137,7 +147,9 @@ Use generic state tools before pixel clicking when they are sufficient:
 
 Never reference task IDs, benchmark source files, evaluator internals, hidden answers,
 or reference trajectories. Never assume an action succeeded without observing the
-result on a later cycle. If browser state is relevant but unknown, OBSERVE first.
+receipt or resulting state on a later cycle. Treat operation_error as a recoverable
+mismatch: change selector/strategy instead of repeating the identical failed action.
+If browser state is relevant but unknown, OBSERVE first.
 Return no prose outside the required tool call."""
 
 
