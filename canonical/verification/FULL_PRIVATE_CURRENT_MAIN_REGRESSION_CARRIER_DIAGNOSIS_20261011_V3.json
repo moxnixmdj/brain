@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_FULL_PRIVATE_CURRENT_MAIN_REGRESSION_CARRIER_DIAGNOSIS_20261011_V3",
+  "date": "2026-10-11",
+  "status": "EXECUTION_CARRIER_ROOT_CAUSE_RECONFIRMED__FRESH_EXACT_CURRENT_MAIN_TRIGGER_FAILED_BEFORE_RUNNER_ASSIGNMENT_OR_ANY_STEP__NO_REGRESSION_RESULT__GATE_OPEN__ZERO_CREDIT",
+  "supersedes": {
+    "path": "canonical/verification/FULL_PRIVATE_CURRENT_MAIN_REGRESSION_CARRIER_DIAGNOSIS_20261011_V2.json",
+    "status": "REPOSITORY_WIDE_GITHUB_ACTIONS_PRESTEP_FAILURE"
+  },
+  "fresh_trigger": {
+    "commit": "70acbd87408cc79b7935cab4425163fd3acb13b2",
+    "workflow_run_id": 38112113681,
+    "workflow": "Full private current-main regression",
+    "job_id": 114389641541,
+    "runner_id": 0,
+    "runner_name": "",
+    "executed_steps": 0,
+    "conclusion": "failure"
+  },
+  "truth": {
+    "regression_executed": false,
+    "any_test_executed": false,
+    "semantic_failure_observed": false,
+    "regression_pass": false,
+    "regression_fail_proved": false,
+    "prestep_carrier_failure_reproduced": true
+  },
+  "causal_update": {
+    "repository_workflow_body_specific_failure": "FALSIFIED_AS_PRIMARY_CAUSE",
+    "runner_assigned": false,
+    "surviving_cause_class": "GITHUB_HOSTED_PRESTEP_EXECUTION_CONTROL_OR_PROVISIONING_BOUNDARY",
+    "exact_control_plane_cause_bound": false,
+    "identical_rerun_value": "ZERO_UNTIL_CONTROL_PLANE_OR_CARRIER_STATE_CHANGES"
+  },
+  "scheduler_rule": "SLEEP_FULL_PRIVATE_REGRESSION_UNTIL_A_GITHUB_JOB_RECORDS_A_REAL_STEP_OR_AN_AUTHORIZED_EXACT_PRIVATE_MAIN_NON_GITHUB_CARRIER_OR_STRONGER_VALID_RECEIPT_APPEARS__CONTINUE_NONCONFLICTING_REUSE_FIRST_WORK",
+  "hard_nonclaims": [
+    "NO_REGRESSION_PASS",
+    "NO_REGRESSION_FAIL_FROM_ZERO_STEP_JOB",
+    "NO_CLAIM_BILLING_QUOTA_POLICY_OR_OUTAGE_IS_THE_EXACT_CAUSE",
+    "NO_UVCK_V2_PROMOTION",
+    "NO_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "promotion_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
