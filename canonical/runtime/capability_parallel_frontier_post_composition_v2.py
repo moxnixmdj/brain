@@ -139,6 +139,6 @@ def refresh_post_composition_currentness(frontier:Mapping[str,Any],*,root:Path=c
 def plan_current_post_composition_frontier():
  f=refresh_post_composition_currentness(core.load_current_frontier())
  row=_cand_id(f,PROF_WORK); ev=row.get("read_only_evidence")
- if not isinstance(ev,Mapping) or ev.get("whole_leaf_scope_complete_count")!=24 or row.get("evidence_acquisition_mode")!="READ_ONLY": raise PostCompositionFrontierV2Error("POST_COMPOSITION_ASSERTION")
+ if not isinstance(ev,Mapping) or ev.get("whole_leaf_scope_complete_count")!=24 or row.get("scheduler_state")!="BLOCKED" or row.get("evidence_acquisition_mode")!="NONE": raise PostCompositionFrontierV2Error("POST_COMPOSITION_ASSERTION")
  out=core.plan_parallel_frontier(f)
  return {**out,"adapter_schema":SCHEMA,"post_composition_phase_verified":True,"dynamic_currentness":f["dynamic_currentness"],"execution_authority":False,"promotion_authority":False,"terminal_credit_delta":0}
