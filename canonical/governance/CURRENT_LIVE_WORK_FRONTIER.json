@@ -33,7 +33,7 @@
       },
       {
         "path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
-        "git_blob_sha": "9e839c5d2bd8657fdbfb2c10af306baa135d12c3"
+        "git_blob_sha": "eaeb22cef6a8d85d6bbcad2e06706457cb573d1a"
       }
     ],
     "base_main_commit_role": "OBSERVED_BEFORE_RECONCILIATION_COMMIT__DIAGNOSTIC_ONLY__CURRENT_POINTER_PATHS_WIN_ON_DRIFT"
@@ -197,7 +197,7 @@
       "frontier_class": "OPEN_WORLD_EVIDENCE_FRONTIER",
       "source": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
       "causal_role": "TASK_SPECIFIC_EXTERNAL_OBSERVATION_FRONTIER__NOT_INTERNAL_R2_MECHANISM_DEFICIT",
-      "readiness": "SLEEPING_UNLESS_TASK_LOCAL_COUNTEREXAMPLE_OR_VERIFIED_DEFECT_WAKES_IT__V90_TYPED_FOUR_WAY_REGCAP_AUTHORITY_CANDIDATE_TO_CHECKER_SEAM_CLOSED__GENERIC_OPEN_WORLD_MATERIALIZATION_REMAINS_OPEN__ONE_PRIMARY_FINANCE_RESIDUAL_REMAINS",
+      "readiness": "SLEEPING_UNLESS_TASK_LOCAL_COUNTEREXAMPLE_OR_VERIFIED_DEFECT_WAKES_IT__V91_GENERIC_UNBOUND_AUTHORITY_CANDIDATE_MATERIALIZATION_MECHANISM_BOUND__SECOND_CARRIER_11_OF_11_AUTHORED_TESTS_PASS__ZERO_INTERNAL_R2_MECHANISM_RESIDUALS__ONE_TASK_SPECIFIC_EXTERNAL_FINANCE_OBSERVATION_FRONTIER_REMAINS",
       "claims_new_primitive": false,
       "score_state": "INELIGIBLE_WHILE_WAKE_GATE_FALSE",
       "scheduler_state": "SLEEPING",
@@ -221,10 +221,13 @@
         "r2_current_version": "V91",
         "general_mechanism_missing": false,
         "generic_unbound_retrieval_candidate_to_checker_materialization_closed": true,
-        "generic_materialization_independent_execution_replay_verified": false,
+        "generic_materialization_independent_execution_replay_verified": true,
         "internal_r2_mechanism_unsolved_count": 0,
         "task_specific_external_observation_frontier_count": 1,
-        "verification_path": "canonical/verification/R2_POST_V91_EXTERNALITY_RECLASSIFICATION_VERIFY_20261011_V1.json"
+        "verification_path": "canonical/verification/R2_POST_V91_EXTERNALITY_RECLASSIFICATION_VERIFY_20261011_V1.json",
+        "source_git_blob_sha": "eaeb22cef6a8d85d6bbcad2e06706457cb573d1a",
+        "second_carrier_verification_path": "canonical/verification/R2_GENERIC_AUTHORITY_MATERIALIZATION_SECOND_CARRIER_VERIFY_20261011_V1.json",
+        "second_carrier_verification_git_blob_sha": "ace18878d4d66a8ceea2d0602d5ccbdceaa19247"
       },
       "execution_state": "WAKE_GATED_ON_REAL_TASK_LOCAL_COUNTEREXAMPLE_OR_REQUIRED_AUTHENTICATED_EXTERNAL_OBSERVATION",
       "blocker_class": "EXTERNAL_INFORMATION_OR_TASK_SPECIFIC_BOUNDED_AUTHORITY",
