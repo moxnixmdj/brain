@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_TB4_CLEANROOM_UNSPENT_SLOT_RECOVERY_20261011_V1",
   "date": "2026-10-11",
-  "status": "CANDIDATE__CAUSAL_NO_LEAKAGE_RECOVERY_ROUTE__CAD_MODEL_FIRST_BINDING__ZERO_SUCCESS_CREDIT",
+  "status": "ACTIVE_CANDIDATE__RECOVERY_GATE_AND_CAD_MODEL_PREVERIFIER_ROOTS_INDEPENDENTLY_VERIFIED__CLEANROOM_ISOLATION_OPEN__ZERO_SUCCESS_CREDIT",
   "target_predicate": "CODING_TB4_GE_66_4",
   "objective": "Replace blanket task-identity no-replay with a stricter causal rule: previously unconsumed trial slots may be executed only from an exact pre-verifier state that cannot access any post-verifier/result artifact.",
   "benchmark_semantics": {
@@ -50,7 +50,7 @@
     "conditional_capacity_after_verified_recovery": 224,
     "current_required_successes": 219,
     "conditional_failure_slack_after_verified_recovery": 5,
-    "current_state": "PENDING_INDEPENDENT_CLEANROOM_ROOT_AND_CAUSAL_ISOLATION_VERIFICATION"
+    "current_state": "PREVERIFIER_ROOT_VERIFIED__CLEANROOM_ISOLATION_RECEIPT_OPEN__ZERO_RECOVERED_SLOT_CREDIT"
   },
   "reuse": {
     "clean_room_donor": "canonical/runtime/finality_gate_v2.py",
@@ -58,10 +58,12 @@
     "reuse_rule": "REUSE_ZERO_AMBIENT_CONTENT_BOUND_ISOLATION_MECHANICS__DO_NOT_IMPORT_D_FINALITY_TERMINAL_SEMANTICS"
   },
   "scheduler_effect": [
-    "DO_NOT_TREAT_ALL_FIVE_SLOTS_AS_ZERO_SOLELY_BECAUSE_ONE_PRIOR_ATTEMPT_EXPOSED_A_VERIFIER",
-    "FIRST_VERIFY_CAD_MODEL_PREVERIFIER_ROOT_AND_CAUSAL_ISOLATION__IF_PASS_RECOMPILE_ATTAINABILITY_TO_224_SLOT_CAPACITY",
-    "THEN_APPLY_THE_SAME_GATE_TO_THE_OTHER_HISTORICAL_IRREVERSIBLE_ZERO_TASKS",
-    "DO_NOT_EXECUTE_ANY_RECOVERED_SLOT_UNTIL_THE_RECOVERY_GATE_IS_INDEPENDENTLY_VERIFIED_AND_CURRENT_AUTHORITY_RECOMPILED"
+    "CAD_MODEL_PREVERIFIER_ROOT_SEARCH_IS_CLOSED__DO_NOT_REPEAT",
+    "NEXT_ONLY_PROVE_OR_FALSIFY_CAD_MODEL_CLEANROOM_CAUSAL_ISOLATION",
+    "IF_ISOLATION_PASSES__RECOVER_ONLY_TRIAL_INDICES_2_3_4_5_AS_CREDITABLE_CAPACITY__KEEP_PRIOR_REWARD_ZERO_SLOT_CONSUMED",
+    "THEN_RECOMPILE_ATTAINABILITY_FROM_220_TO_224_MAXIMUM_CREDITABLE_SLOTS_WITH_THRESHOLD_219",
+    "AFTER_CAD_MODEL_BINDING__APPLY_THE_SAME_GATE_TO_OTHER_HISTORICAL_IRREVERSIBLE_ZERO_TASKS",
+    "NO_RECOVERED_SLOT_SUCCESS_CREDIT_WITHOUT_ITS_OWN_OFFICIAL_VERIFIER_RECEIPT"
   ],
   "hard_nonclaims": [
     "NO_CAD_MODEL_RECOVERED_SLOT_CREDIT_YET",
@@ -81,5 +83,15 @@
   },
   "independent_verification_required": true,
   "execution_authority": false,
-  "promotion_authority": false
+  "promotion_authority": false,
+  "verification": {
+    "recovery_gate": {
+      "path": "canonical/verification/TB4_CLEANROOM_UNSPENT_SLOT_RECOVERY_GATE_INDEPENDENT_VERIFY_20261011_V1.json",
+      "status": "PASS__6_OF_6"
+    },
+    "cad_model_preverifier_roots": {
+      "path": "canonical/verification/TB4_CAD_MODEL_PREVERIFIER_ROOTS_INDEPENDENT_VERIFY_20261011_V1.json",
+      "status": "PASS__EXACT_GIT_BLOB_REPLAY"
+    }
+  }
 }
