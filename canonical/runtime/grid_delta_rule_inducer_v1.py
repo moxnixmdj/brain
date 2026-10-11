@@ -12,6 +12,7 @@ from __future__ import annotations
 
 from collections import Counter, deque
 from dataclasses import dataclass
+from itertools import product
 from typing import Any, Mapping, Sequence
 
 from canonical.runtime.g0_finite_typed_rule_synthesis import (
@@ -219,34 +220,11 @@ def _apply_rule(grid: Grid, target: int, rule_ids: Sequence[str], predicate_ids:
     return tuple(tuple(row) for row in out)
 
 
-def induce(training_pairs: Sequence[Mapping[str, Sequence[Sequence[int]]]]) -> dict[str, Any]:
-    try:
-        pairs: list[tuple[Grid, Grid]] = []
-        if not isinstance(training_pairs, Sequence) or isinstance(training_pairs, (str, bytes)) or not training_pairs:
-            raise GridDeltaRuleError("TRAINING_PAIRS_INVALID")
-        for i, raw in enumerate(training_pairs):
-            inp = _grid(raw["input"], f"pair_{i}_input")
-            out = _grid(raw["output"], f"pair_{i}_output")
-            if _shape(inp) != _shape(out):
-                return {"schema": SCHEMA, "status": "UNSUPPORTED", "reason": "SHAPE_CHANGE"}
-            pairs.append((inp, out))
-    except (GridDeltaRuleError, KeyError, TypeError) as exc:
-        return {"schema": SCHEMA, "status": "FAIL_CLOSED", "reason": type(exc).__name__ + ":" + str(exc)}
-
-    changed_targets = {
-        out[r][c]
-        for inp, out in pairs
-        for r in range(len(inp))
-        for c in range(len(inp[0]))
-        if inp[r][c] != out[r][c]
-    }
-    if not changed_targets:
-        return {"schema": SCHEMA, "status": "UNSUPPORTED", "reason": "NO_CHANGE"}
-    if len(changed_targets) != 1:
-        return {"schema": SCHEMA, "status": "UNSUPPORTED", "reason": "MULTIPLE_CHANGED_TO_COLORS"}
-    target = next(iter(changed_targets))
-
-    colors = _observed_colors(pairs)
+def _synthesize_target_rules(
+    pairs: Sequence[tuple[Grid, Grid]],
+    target: int,
+    colors: Sequence[int],
+) -> list[dict[str, Any]]:
     verified: list[dict[str, Any]] = []
     for pack in ("LOCAL", "ROWCOL", "COMPONENT"):
         specs = _pack_specs(pack, colors)
@@ -255,16 +233,14 @@ def induce(training_pairs: Sequence[Mapping[str, Sequence[Sequence[int]]]]) -> d
         for pi, (inp, out) in enumerate(pairs):
             contexts = _contexts(inp)
             for (r, c), ctx in contexts.items():
-                positive = inp[r][c] != out[r][c]
-                all_records.append((f"p{pi}_r{r}_c{c}", _facts(ctx, pids), positive))
+                positive = inp[r][c] != out[r][c] and out[r][c] == target
+                all_records.append((f"t{target}_p{pi}_r{r}_c{c}", _facts(ctx, pids), positive))
 
         positives = [x for x in all_records if x[2]]
         negatives = [x for x in all_records if not x[2]]
         if not positives or not negatives:
             continue
 
-        # The underlying verified synthesizer is capped at 128 examples. Keep all
-        # positive fact patterns first, then diverse negative fact patterns.
         chosen: list[tuple[str, frozenset[str], bool]] = []
         seen_pos: set[frozenset[str]] = set()
         for rec in positives:
@@ -297,9 +273,22 @@ def induce(training_pairs: Sequence[Mapping[str, Sequence[Sequence[int]]]]) -> d
         )
         if result.get("status") not in ("SYNTHESIZED_UNIQUE", "SYNTHESIZED_AMBIGUOUS"):
             continue
+
         for rule in result["rules"]:
             ids = _rule_ids(rule)
-            if all(_apply_rule(inp, target, ids, pids) == out for inp, out in pairs):
+            # Verify the selector itself against every training cell, not merely
+            # the bounded sample supplied to the underlying synthesizer.
+            selector_ok = True
+            for inp, out in pairs:
+                contexts = _contexts(inp)
+                for (r, c), ctx in contexts.items():
+                    should_select = inp[r][c] != out[r][c] and out[r][c] == target
+                    if _matches_rule(ctx, ids, pids) != should_select:
+                        selector_ok = False
+                        break
+                if not selector_ok:
+                    break
+            if selector_ok:
                 verified.append(
                     {
                         "pack": pack,
@@ -309,47 +298,128 @@ def induce(training_pairs: Sequence[Mapping[str, Sequence[Sequence[int]]]]) -> d
                         "predicate_ids": pids,
                     }
                 )
+    return verified
 
-    if not verified:
+
+def _apply_rule_set(grid: Grid, rules: Sequence[Mapping[str, Any]]) -> Grid | None:
+    contexts = _contexts(grid)
+    out = [list(row) for row in grid]
+    for (r, c), ctx in contexts.items():
+        targets = {
+            int(rule["target_color"])
+            for rule in rules
+            if _matches_rule(
+                ctx,
+                tuple(rule["rule_predicates"]),
+                tuple(rule["predicate_ids"]),
+            )
+        }
+        if len(targets) > 1:
+            return None
+        if targets:
+            out[r][c] = next(iter(targets))
+    return tuple(tuple(row) for row in out)
+
+
+def induce(training_pairs: Sequence[Mapping[str, Sequence[Sequence[int]]]]) -> dict[str, Any]:
+    try:
+        pairs: list[tuple[Grid, Grid]] = []
+        if not isinstance(training_pairs, Sequence) or isinstance(training_pairs, (str, bytes)) or not training_pairs:
+            raise GridDeltaRuleError("TRAINING_PAIRS_INVALID")
+        for i, raw in enumerate(training_pairs):
+            inp = _grid(raw["input"], f"pair_{i}_input")
+            out = _grid(raw["output"], f"pair_{i}_output")
+            if _shape(inp) != _shape(out):
+                return {"schema": SCHEMA, "status": "UNSUPPORTED", "reason": "SHAPE_CHANGE"}
+            pairs.append((inp, out))
+    except (GridDeltaRuleError, KeyError, TypeError) as exc:
+        return {"schema": SCHEMA, "status": "FAIL_CLOSED", "reason": type(exc).__name__ + ":" + str(exc)}
+
+    changed_targets = sorted({
+        out[r][c]
+        for inp, out in pairs
+        for r in range(len(inp))
+        for c in range(len(inp[0]))
+        if inp[r][c] != out[r][c]
+    })
+    if not changed_targets:
+        return {"schema": SCHEMA, "status": "UNSUPPORTED", "reason": "NO_CHANGE"}
+
+    colors = _observed_colors(pairs)
+    per_target: list[list[dict[str, Any]]] = []
+    for target in changed_targets:
+        rules = _synthesize_target_rules(pairs, target, colors)
+        if not rules:
+            return {
+                "schema": SCHEMA,
+                "status": "NO_VERIFIED_RULE",
+                "failed_target_color": target,
+                "changed_target_colors": changed_targets,
+                "terminal_authority": False,
+            }
+        per_target.append(rules)
+
+    combinations_examined = 0
+    verified_sets: list[dict[str, Any]] = []
+    for combo in product(*per_target):
+        combinations_examined += 1
+        if combinations_examined > 512:
+            return {
+                "schema": SCHEMA,
+                "status": "SEARCH_BOUND_EXCEEDED",
+                "reason": "RULE_SET_COMBINATION_LIMIT",
+                "limit": 512,
+                "terminal_authority": False,
+            }
+        if all(_apply_rule_set(inp, combo) == out for inp, out in pairs):
+            verified_sets.append(
+                {
+                    "rules": [dict(rule) for rule in combo],
+                    "cost": sum(float(rule["cost"]) for rule in combo),
+                }
+            )
+
+    if not verified_sets:
         return {
             "schema": SCHEMA,
-            "status": "NO_VERIFIED_RULE",
-            "target_color": target,
+            "status": "NO_VERIFIED_RULE_SET",
+            "changed_target_colors": changed_targets,
             "terminal_authority": False,
         }
 
-    best_cost = min(x["cost"] for x in verified)
-    best = sorted(
-        [x for x in verified if x["cost"] == best_cost],
-        key=lambda x: (x["pack"], x["rule_predicates"]),
+    best_cost = min(x["cost"] for x in verified_sets)
+    best = [x for x in verified_sets if x["cost"] == best_cost]
+    best.sort(
+        key=lambda x: tuple(
+            (r["target_color"], r["pack"], tuple(r["rule_predicates"]))
+            for r in x["rules"]
+        )
     )
     return {
         "schema": SCHEMA,
-        "status": "VERIFIED_RULES",
-        "target_color": target,
+        "status": "VERIFIED_RULE_SETS",
+        "changed_target_colors": changed_targets,
         "minimum_cost": best_cost,
-        "rules": best,
-        "rule_count": len(best),
+        "rule_sets": best,
+        "rule_set_count": len(best),
         "ambiguity_preserved": len(best) > 1,
         "training_full_replay_verified": True,
         "synthesis_engine": "G0_FINITE_TYPED_RULE_SYNTHESIS_001",
-        "scope": "SAME_SHAPE_SINGLE_CHANGED_TO_COLOR_FINITE_PREDICATE_PACKS",
+        "scope": "SAME_SHAPE_MULTI_TARGET_FINITE_PREDICATE_PACKS",
         "terminal_authority": False,
         "promotion_authority": False,
     }
 
 
-def predict(rule: Mapping[str, Any], grid: Sequence[Sequence[int]]) -> dict[str, Any]:
+def predict(rule_set: Mapping[str, Any], grid: Sequence[Sequence[int]]) -> dict[str, Any]:
     try:
         g = _grid(grid, "grid")
-        out = _apply_rule(
-            g,
-            int(rule["target_color"]),
-            tuple(rule["rule_predicates"]),
-            tuple(rule["predicate_ids"]),
-        )
+        rules = rule_set["rules"]
+        out = _apply_rule_set(g, rules)
     except (GridDeltaRuleError, KeyError, TypeError, ValueError) as exc:
         return {"schema": SCHEMA, "status": "FAIL_CLOSED", "reason": type(exc).__name__ + ":" + str(exc)}
+    if out is None:
+        return {"schema": SCHEMA, "status": "UNDEFINED_CONFLICT", "prediction": None}
     return {
         "schema": SCHEMA,
         "status": "PREDICTED",
