@@ -39,6 +39,36 @@ def verified_episode(eid: str, scope: str = "scope") -> dict:
     }
 
 
+def valid_transfer_record(candidate_sha256: str) -> dict:
+    return {
+        "brain_candidate_sha256": candidate_sha256,
+        "transfer_method": "DISTILLATION",
+        "acquisition_and_deployment_phases_separated": True,
+        "donor_use_confined_to_acquisition": True,
+        "brain_owned_operative_artifact": True,
+        "operative_artifact_content_addressed": True,
+        "applicable_rights_and_provenance_closed": True,
+        "donor_access_disabled_during_qualification": True,
+        "donor_deletion_behavior_preserved": True,
+        "independent_heldout_qualification_pass": True,
+        "heldout_not_used_for_training_selection_or_tuning": True,
+        "causal_ablation_pass": True,
+        "causal_rescue_pass": True,
+        "full_runtime_dependency_inventory_complete": True,
+        "no_answer_leakage": True,
+        "future_use_requires_no_donor_rediscovery": True,
+        "donor_runtime_dependency_count": 0,
+        "external_model_runtime_dependency_count": 0,
+        "online_teacher_call_count": 0,
+        "teacher_fallback_path_count": 0,
+        "undeclared_runtime_dependency_count": 0,
+        "qualification_performed_after_donor_removal": True,
+        "donor_role": "ACQUISITION_SOURCE_ONLY",
+        "operative_solver_role": "BRAIN_OWNED_DERIVED_MECHANISM",
+        "student_or_derived_artifact_distinct_from_donor": True,
+    }
+
+
 def verified_skill(
     digest_char: str,
     *,
@@ -1406,6 +1436,139 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
             verification_effect_root=None,
         )
 
+
+    def test_donor_provenance_survives_episode_to_later_candidate(self):
+        state = loop._empty_state()
+        ep = verified_episode("teacher-episode")
+        key = loop._episode_key(ep)
+        state["episodes"][key] = ep
+        state["episode_provenance"][key] = {
+            "used": True,
+            "proposal_source_ids": ["teacher-model"],
+            "capability_expansion_source_ids": [],
+            "donor_role": "ACQUISITION_SOURCE_ONLY",
+            "runtime_credit_authority": False,
+            "transfer_gate_required_before_reuse": True,
+        }
+        candidate = {
+            "candidate_sha256": "sha256:" + ("9" * 64),
+            "source_episode_ids": ["teacher-episode"],
+            "source_scopes": ["scope"],
+            "postconditions": ["goal"],
+        }
+        provenance = loop._candidate_acquisition_donor_provenance(
+            state, candidate, None
+        )
+        self.assertTrue(provenance["used"])
+        self.assertEqual(provenance["proposal_source_ids"], ["teacher-model"])
+        self.assertTrue(provenance["transfer_gate_required_before_reuse"])
+
+    def test_donor_derived_candidate_blocks_verifier_until_transfer_gate_bound(self):
+        path = self.temp_state()
+        candidate_sha = "sha256:" + ("8" * 64)
+        candidate = {
+            "candidate_sha256": candidate_sha,
+            "source_episode_ids": ["teacher-episode"],
+            "source_scopes": ["scope"],
+            "postconditions": ["goal"],
+        }
+        out = loop.integrate_solver_output(
+            {
+                "pass": True,
+                "status": "SOLVED__SKILL_CANDIDATE_READY",
+                "skill_candidate": candidate,
+                "verified_executable_skill": None,
+                "verified_skill_reuse_authorized": False,
+                "acquisition_donor_provenance": {
+                    "used": True,
+                    "proposal_source_ids": ["teacher-model"],
+                    "capability_expansion_source_ids": [],
+                    "donor_role": "ACQUISITION_SOURCE_ONLY",
+                    "runtime_credit_authority": False,
+                    "transfer_gate_required_before_reuse": True,
+                },
+            },
+            state_path=path,
+        )
+        self.assertEqual(
+            out["status"],
+            "SKILL_CANDIDATE_AWAITS_INDEPENDENT_VERIFICATION",
+        )
+
+        verifier = mock.Mock(side_effect=AssertionError("must not be called"))
+        blocked = loop.advance_verification_queue(
+            state_path=path,
+            skill_verification_provider=verifier,
+        )
+        self.assertEqual(blocked["completed"], 0)
+        self.assertEqual(
+            blocked["results"][0]["status"],
+            "BLOCKED__CAPABILITY_TRANSFER_GATE_REQUIRED",
+        )
+        verifier.assert_not_called()
+
+        bound = loop.bind_capability_transfer_record(
+            candidate_sha,
+            valid_transfer_record(candidate_sha),
+            state_path=path,
+        )
+        self.assertTrue(bound["pass"])
+        self.assertFalse(bound["reuse_authority"])
+
+        verifier = mock.Mock(return_value=None)
+        after = loop.advance_verification_queue(
+            state_path=path,
+            skill_verification_provider=verifier,
+        )
+        self.assertEqual(
+            after["results"][0]["status"],
+            "BLOCKED__VERIFIER_RETURNED_NO_BINDING",
+        )
+        verifier.assert_called_once()
+
+    def test_transfer_record_must_bind_exact_candidate_hash(self):
+        path = self.temp_state()
+        candidate_sha = "sha256:" + ("7" * 64)
+        state = loop._empty_state()
+        wid = "work:test-transfer"
+        state["improvement_queue"][wid] = {
+            "work_id": wid,
+            "kind": "VERIFY_SKILL_CANDIDATE",
+            "priority": 10,
+            "identity": {"candidate_sha256": candidate_sha},
+            "payload": {
+                "candidate_sha256": candidate_sha,
+                "candidate": {
+                    "candidate_sha256": candidate_sha,
+                    "source_episode_ids": [],
+                    "source_scopes": ["scope"],
+                    "postconditions": ["goal"],
+                },
+                "acquisition_donor_provenance": {
+                    "used": True,
+                    "proposal_source_ids": ["teacher-model"],
+                    "capability_expansion_source_ids": [],
+                },
+            },
+            "status": "PENDING",
+            "observations": 1,
+            "reopen_count": 0,
+            "attempt_count": 0,
+            "last_attempt_observations": None,
+            "last_attempt_status": None,
+            "last_attempt_reason": None,
+        }
+        path.write_text(json.dumps(state), encoding="utf-8")
+        wrong = valid_transfer_record("sha256:" + ("6" * 64))
+        with self.assertRaisesRegex(
+            loop.SelfImprovementError,
+            "CAPABILITY_TRANSFER_RECORD_CANDIDATE_MISMATCH",
+        ):
+            loop.bind_capability_transfer_record(
+                candidate_sha,
+                wrong,
+                state_path=path,
+            )
 
     def test_policy_adequacy_gap_is_not_collapsed_into_generic_semantics(self):
         out = loop._diagnose_failure({
