@@ -1,0 +1,28 @@
+{
+  "schema": "PROJECT_BRAIN_WIKIDATA_ENTITY_NEIGHBORHOOD_INDEPENDENT_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__LIVE_ONE_HOP_GRAPH_HEALTHY__CANDIDATE_ONLY",
+  "subject": {
+    "runtime_blob": "051d224bd8f5b04f410e579c9b070cad0a3d89a6",
+    "tests_blob": "4276837a54218d0c2b177a72d6d7062853cd781c"
+  },
+  "runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify-wikidata-neighborhood-v1-20261011",
+    "head_sha": "62863f5da052df7cbda34040b9f608faea791749",
+    "workflow_run_id": 38156022116,
+    "workflow_job_id": 114519054913,
+    "conclusion": "success"
+  },
+  "verified": {
+    "unit_tests": "4/4 PASS",
+    "exact_blob_binding": true,
+    "live_q42_edge_count": 8,
+    "linked_property_and_entity_labels_resolved": true,
+    "external_model_calls": 0,
+    "model_dependency_count": 0,
+    "answer_authority": false
+  },
+  "capability_scope": "BOUNDED_ONE_HOP_WIKIDATA_GRAPH_RETRIEVAL_ONLY",
+  "incremental_spend_usd": 0
+}
