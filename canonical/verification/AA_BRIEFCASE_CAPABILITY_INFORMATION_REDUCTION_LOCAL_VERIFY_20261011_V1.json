@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_CAPABILITY_INFORMATION_REDUCTION_LOCAL_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__9_OF_9_AUTHORED_CASES__SAME_SUBJECT_AND_LITERAL_SCORE_SEPARATION_ENFORCED__ZERO_CREDIT",
+  "subject": {
+    "runtime_path": "canonical/runtime/aa_briefcase_capability_information_reduction_v1.py",
+    "runtime_git_blob_sha": "27c3d6b952a3cdcb458e7f6b40c3aa21f24e283d",
+    "tests_path": "canonical/tests/test_aa_briefcase_capability_information_reduction_v1.py",
+    "tests_git_blob_sha": "184d18e878af0430953ccbfbbeca9df419fcaa73"
+  },
+  "replay": {
+    "tests_run": 9,
+    "tests_passed": 9,
+    "tests_failed": 0,
+    "carrier": "LOCAL_ISOLATED_PYTHON_LOGIC_REPLAY",
+    "independent_second_carrier": false
+  },
+  "verified": [
+    "CAPABILITY_PRIMARY_LITERAL_SCORE_AUDIT_CONTRACT_ACCEPTED",
+    "LITERAL_SCORE_PRIMARY_MODE_REJECTED",
+    "ONE_COMPLETE_INTEGRATED_CERTIFICATE_SELECTED",
+    "EXACT_MINIMUM_TOTAL_ACTION_COST_BASIS_SELECTED",
+    "MIXED_BRAIN_SUBJECT_CERTIFICATE_COMPOSITION_REJECTED",
+    "UNVERIFIED_CERTIFICATE_REJECTED",
+    "UNBOUND_REFERENCE_CERTIFICATE_REJECTED",
+    "CURRENT_24_OF_24_PLUS_SELECTED_CELL_EVIDENCE_FAILS_CLOSED",
+    "CAPABILITY_PASS_NEVER_BACKPROPAGATES_TO_LITERAL_AA_ELO"
+  ],
+  "truth": {
+    "capability_noninferiority_currently_proved": false,
+    "literal_aa_elo_ge_1822_currently_proved": false,
+    "minimum_basis_selector_verified_for_authored_cases": true
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "benchmark_score_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
