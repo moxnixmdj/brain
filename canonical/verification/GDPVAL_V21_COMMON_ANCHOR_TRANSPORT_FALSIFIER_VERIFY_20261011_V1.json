@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_V21_COMMON_ANCHOR_TRANSPORT_FALSIFIER_VERIFY_V1",
+  "date": "2026-10-11",
+  "status": "PASS__EXACT_MLE_COUNTEREXAMPLE_ESTABLISHES_NONENTAILMENT_FROM_COMMON_ANCHOR_TO_IDENTICAL_FIT__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/GDPVAL_V21_COMMON_ANCHOR_TRANSPORT_FALSIFIER_20261011_V1.json",
+    "git_blob_sha": "cb8a16c974d2f185152744102163a1099dd5ff71"
+  },
+  "algebra_check": {
+    "log_likelihood": "ell(r) = w*log(r) - (w+l)*log(1+r)",
+    "first_derivative": "dell/dr = w/r - (w+l)/(1+r)",
+    "stationary_equation": "w*(1+r) = r*(w+l)",
+    "solution": "r_hat = w/l",
+    "epoch_1": "w=3,l=1 => r_hat=3",
+    "epoch_2": "w=3,l=2 => r_hat=3/2",
+    "same_anchor": true,
+    "same_nonanchor_fit": false
+  },
+  "methodology_consistency_check": {
+    "source": "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
+    "fixed_anchor": "DeepSeek V4.1 Flash (max) = 1600",
+    "fit_family": "Crowd-BT maximum-likelihood fitting over past GDPval-AA judgements",
+    "source_explicitly_says_scores_can_shift": true,
+    "intelligence_index_score_frozen_at_model_addition": true
+  },
+  "verified_implication": {
+    "statement": "SAME_FIXED_ANCHOR_ALONE_DOES_NOT_ENTAIL_IDENTICAL_FITTED_STRENGTH_OR_IDENTICAL_ELO_FOR_A_NONANCHOR_MODEL_ACROSS_DIFFERENT_JUDGEMENT_FIT_STATES",
+    "holds": true
+  },
+  "gdpval_effect": {
+    "accept_live_1866_as_exact_transport_of_frozen_1846_from_anchor_equality_alone": false,
+    "matched_score_route_closed_by_this_artifact": false,
+    "shortcut_rejected": true,
+    "next_wake": "FIT_STATE_EQUIVALENCE_EVIDENCE_OR_AUTHENTIC_OWNER_COMPARABILITY_RECEIPT"
+  },
+  "hard_nonclaims": [
+    "COUNTEREXAMPLE_DOES_NOT_SHOW_1866_IS INACCURATE",
+    "COUNTEREXAMPLE_DOES_NOT_SHOW_RANK_ORDER_CHANGED",
+    "COUNTEREXAMPLE_DOES_NOT_PROVE_NO_STRONGER_EPOCH_BRIDGE_CAN_EXIST",
+    "NO_GDPVAL_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

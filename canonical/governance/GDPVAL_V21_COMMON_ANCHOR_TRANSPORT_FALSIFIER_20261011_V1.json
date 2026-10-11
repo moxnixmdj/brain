@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_V21_COMMON_ANCHOR_TRANSPORT_FALSIFIER_V1",
+  "date": "2026-10-11",
+  "status": "PROVES_COMMON_FIXED_ANCHOR_ALONE_IS_INSUFFICIENT_FOR_EXACT_CROSS_FIT_SCORE_TRANSPORT__ZERO_CREDIT",
+  "frozen_target": {
+    "predicate": "BRAIN_PROFESSIONAL_WORK_CAPABILITY_GE_CAPABILITY_EVIDENCED_BY_FROZEN_OPUS55_GDPVAL_AA_V2_1_1846",
+    "frozen_reference_elo": 1846
+  },
+  "first_party_methodology": {
+    "url": "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
+    "observations": [
+      "GDPval-AA v2.1 pins DeepSeek V4.1 Flash (max) at 1600.",
+      "Ratings are fitted with a Crowd-BT model on past GDPval-AA judgements.",
+      "Every other rating is fitted relative to the fixed anchor.",
+      "Artificial Analysis states that Elo scores can shift while rank ordering is largely preserved.",
+      "For Intelligence Index integration, a model's GDPval-AA v2.1 Elo is frozen at the time of the model's addition."
+    ]
+  },
+  "logical_question": "DOES_SAME_FIXED_ANCHOR_IMPLY_IDENTICAL_NONANCHOR_FITTED_STRENGTH_ACROSS_DIFFERENT_JUDGEMENT_SETS",
+  "counterexample": {
+    "model": "ANCHOR_FIXED_BRADLEY_TERRY_SPECIAL_CASE",
+    "anchor_relative_strength": 1,
+    "candidate_relative_strength_symbol": "r",
+    "pairwise_probability_candidate_beats_anchor": "r/(1+r)",
+    "likelihood_for_w_wins_l_losses": "(r/(1+r))^w * (1/(1+r))^l",
+    "mle_when_w_and_l_are_positive": "r_hat = w/l",
+    "epoch_1": {
+      "wins": 3,
+      "losses": 1,
+      "anchor_relative_strength": 1,
+      "candidate_mle_relative_strength": 3
+    },
+    "epoch_2": {
+      "wins": 3,
+      "losses": 2,
+      "anchor_relative_strength": 1,
+      "candidate_mle_relative_strength": 1.5
+    },
+    "conclusion": "THE_ANCHOR_IS_IDENTICAL_IN_BOTH_FITS_BUT_THE_NONANCHOR_MLE_CHANGES;THEREFORE_ANCHOR_EQUALITY_ALONE_DOES_NOT_ENTAIL_FIT_STATE_OR_SCORE_IDENTITY"
+  },
+  "application_to_gdpval_v21": {
+    "common_1600_anchor_is": "NECESSARY_SCALE_COORDINATE_INFORMATION_BUT_NOT_A_COMPLETE_EPOCH_BRIDGE",
+    "frozen_1846_to_live_1866_exact_transport_from_anchor_alone": false,
+    "minimum_additional_information_for_exact_transport": [
+      "IDENTICAL_OR_PROVED_EQUIVALENT_JUDGEMENT_GRAPH_AND_OUTCOMES_FOR_LOAD_BEARING_COMPARISONS",
+      "IDENTICAL_OR_PROVED_EQUIVALENT_ANNOTATOR_OR_JUDGE_PARAMETERS_RELEVANT_TO_THE_FIT",
+      "IDENTICAL_OR_PROVED_EQUIVALENT_FITTING_OBJECTIVE_AND_REFERENCE_PARAMETERS",
+      "OR_A_DIRECT_OWNER_STATEMENT_OR_RECEIPT_ESTABLISHING_THE_TWO_SCORE_STATES_AS_EXACTLY_COMPARABLE_FOR_THE_TARGET_CLAIM"
+    ],
+    "effect_on_matched_score_route": "DO_NOT_ACCEPT_COMMON_ANCHOR_ALONE_AS_THE_EPOCH_OR_SCALE_BRIDGE"
+  },
+  "scheduler_effect": {
+    "dead_shortcut": "LIVE_1866_AND_FROZEN_1846_SHARE_1600_ANCHOR_THEREFORE_EXACTLY_TRANSPORTABLE",
+    "default_action": "REJECT_THIS_SHORTCUT_WITHOUT_RESEARCH_REPETITION",
+    "wake_condition": "NEW_FIT_STATE_EQUIVALENCE_EVIDENCE_OR_AUTHENTIC_OWNER_COMPARABILITY_RECEIPT"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_LIVE_1866_SCORE_IS_WRONG",
+    "NO_CLAIM_RANK_ORDER_MUST_CHANGE",
+    "NO_CLAIM_ALL_CROSS_EPOCH_TRANSPORT_IS_IMPOSSIBLE",
+    "NO_CLAIM_GDPVAL_GE_1846",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
