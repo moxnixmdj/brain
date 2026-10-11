@@ -1,0 +1,121 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_TWO_BODY_V52_SUCCESSOR_EXECUTION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "VERIFIED_RESEARCH_FRONTIER__SPENT_NEXT57_DISCOVERY__NEXT58_FALSIFICATION_AND_REPAIR__FRESH_NEXT59_PASS__NEXT60_FROZEN_UNSPENT__CURRENT_POINTER_ELIGIBLE__ZERO_PROMOTION_CREDIT",
+  "subject": {
+    "predecessor": "canonical/evidence/BYTES_EXACT_SYMBOLIC_MPC_POW_INT_V51_SUCCESSOR_EXECUTION_20261011_V1.json",
+    "predecessor_manifest_sha256": "bab0e710a20ac41743feadf3a979e2c9d8d08fd621a42e4799ba658badb7ef37",
+    "transform": "canonical/research/bytes/tools/conservative_spent_next57_two_body_prune_v52.py",
+    "transform_git_blob_sha": "9aaadd106b57cdba07ae94b8438eec0a369e50eb",
+    "manifest_sha256": "9cbaa7546f02a00ea1fffc90be3973d8ee09944d448a2441e2cf1d801c22c538",
+    "python_files": 277,
+    "raw_python_source_bytes": 1716288,
+    "B_exec_raw_python_source_bytes": 1719048,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "raw_delta_vs_v51_bytes": -3275,
+    "B_exec_delta_vs_v51_bytes": -3275
+  },
+  "selection": {
+    "id": "SPENT_NEXT57_TWO_BODY_FAIL_CLOSED_PRUNE_V52",
+    "method": "PROFILE_DIVERSE_SPENT_NEXT57_SAMPLE__TRY_LARGEST_UNCALLED_LOADED_BODIES__IMPORT_FAIL_CLOSED_CHECK__COMPLETE_NEXT57_FALSIFICATION__NEXT58_FALSIFICATION_AND_MINIMAL_REPAIR__FRESH_NEXT59_CONFIRMATION",
+    "changed_body_count": 2,
+    "bodies": [
+      "sympy/core/intfunc.py::integer_log",
+      "sympy/simplify/simplify.py::dotprodsimp.<locals>.count_ops_alg"
+    ],
+    "replacement": "raise NotImplementedError(\"outside Brain bounded exact-symbolic contract\")",
+    "candidate_search_history": {
+      "initial_profile_sample_cases": 240,
+      "initial_trial_body_count": 10,
+      "import_time_restores": [
+        "sympy/core/facts.py::FactRules.__init__",
+        "sympy/core/facts.py::apply_beta_to_alpha_route"
+      ],
+      "complete_NEXT57_restores": [
+        "sympy/functions/elementary/complexes.py::arg.eval",
+        "sympy/polys/matrices/sdm.py::sdm_irref",
+        "sympy/functions/elementary/trigonometric.py::atan2.eval",
+        "sympy/functions/elementary/trigonometric.py::atan.eval",
+        "mpmath/libmp/libmpf.py::mpf_pow_int"
+      ],
+      "NEXT58_fresh_falsification_restore": "sympy/core/function.py::Function._eval_evalf"
+    }
+  },
+  "qualification": {
+    "spent_NEXT57": {
+      "id": "QUAL_SUCCESSOR_NEXT57_20261011_V1",
+      "cases": 14950,
+      "corpus_sha256": "874b316cb3cb39d27371195ffbedf2542187e842e383d53bf635e4d42a97e8e4",
+      "candidate": "14950/14950",
+      "failures": 0,
+      "spent": true
+    },
+    "repair_NEXT58": {
+      "id": "QUAL_SUCCESSOR_NEXT58_20261011_V1",
+      "cases": 15180,
+      "corpus_sha256": "fd7a32a07356c87a18e884f851320fd5d87dc316ca2436a4191275e5f3f57e0c",
+      "role": "FIRST_USED_AS_FRESH_FALSIFIER_OF_THREE_BODY_CANDIDATE__EXPOSED_FUNCTION_EVALF_DEPENDENCY__THEN_REUSED_AS_SPENT_REPAIR_CORPUS",
+      "three_body_candidate_result": "15179/15180",
+      "final_two_body_candidate": "15180/15180",
+      "failures_final": 0,
+      "spent": true
+    },
+    "fresh_NEXT59": {
+      "id": "QUAL_SUCCESSOR_NEXT59_20261011_V1",
+      "cases": 15410,
+      "seed": 402473297,
+      "seed_derivation": "FIRST_32_BITS_BIG_ENDIAN_SHA256_OF_QUAL_ID_PIPE_V52_MANIFEST_IDENTITY",
+      "per_operation_budget": 1340,
+      "corpus_sha256": "45bc4a0834b4194447c8f5c5337083aef1df43f47c37b701cb9b105a57278a93",
+      "candidate": "15410/15410",
+      "failures": 0,
+      "spent": true,
+      "generation_provenance": "STOCK_SYMPY_1_14_0_MPMATH_1_3_0_EXACT_ROUTE_EXPECTED_OUTPUTS__DETERMINISTIC_PARAMETER_STREAM__PARALLEL_EXPECTED_OUTPUT_EVALUATION__CANONICAL_ROW_REASSEMBLY",
+      "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT59_20261011_V1(4).jsonl",
+      "library_file_id": "libfile_c0e2bd4c9aec8191a452b05ac6256082",
+      "file_id": "file_0000000041e48243af248145ccf01076"
+    }
+  },
+  "reproducibility": {
+    "clean_room_v51_to_v52_reconstruction": "PASS__278_OF_278_DURABLE_FILES_BYTE_IDENTICAL",
+    "regenerated_manifest_sha256": "9cbaa7546f02a00ea1fffc90be3973d8ee09944d448a2441e2cf1d801c22c538",
+    "external_second_carrier_verified": false
+  },
+  "durable_archive": {
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V52_SUCCESSOR_20261011_V1.tar(5).xz",
+    "library_file_id": "libfile_0a103966ee8881919a1a055b5136c81d",
+    "file_id": "file_00000000d114820a884158fd97f8d7cc",
+    "bytes": 267292,
+    "sha256": "e36d2834ff9214bd985f10cccfdb17a5e5a2c100738bbc42e4e04c55e90f10ad"
+  },
+  "next_frozen": {
+    "id": "QUAL_SUCCESSOR_NEXT60_20261011_V1",
+    "cases": 15640,
+    "seed": 1799473174,
+    "seed_derivation": "FIRST_32_BITS_BIG_ENDIAN_SHA256_OF_QUAL_ID_PIPE_V52_MANIFEST_IDENTITY",
+    "per_operation_budget": 1360,
+    "corpus_sha256": "f8430ea718092940c79ff229f548a123795a7f1bd63472d2c91684ad07092ca7",
+    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT60_20261011_V1.jsonl",
+    "library_file_id": "libfile_c38b252cabf48191afa68be6a5266fb0",
+    "file_id": "file_000000007bac81f498baa0396673f1c4",
+    "generation_provenance": "STOCK_SYMPY_1_14_0_MPMATH_1_3_0_EXACT_ROUTE_EXPECTED_OUTPUTS__DETERMINISTIC_PARAMETER_STREAM__PARALLEL_EXPECTED_OUTPUT_EVALUATION__CANONICAL_ROW_REASSEMBLY",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT",
+    "spent": false
+  },
+  "truth_boundary": [
+    "MEASURED: V52 raw Python bytes are 1,716,288, 3,275 bytes below V51.",
+    "MEASURED: complete spent NEXT57 passes final V52 14,950/14,950.",
+    "MEASURED: NEXT58 first falsified a three-body candidate at one roots case; restoring only Function._eval_evalf yields 15,180/15,180 on final V52.",
+    "MEASURED: previously untouched NEXT59 passes final V52 15,410/15,410.",
+    "MEASURED: clean-room V51-to-V52 reconstruction is 278/278 durable files byte-identical.",
+    "MEASURED: NEXT60 is durably frozen at 15,640 cases and remains unspent.",
+    "NOT PROVED: universal SymPy/mpmath equivalence outside the bounded route.",
+    "NOT PROVED: external second-carrier replay.",
+    "NOT PROMOTED: zero capability, acceptance, professional-quality, promotion, or terminal credit."
+  ],
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "acceptance_credit_delta": 0,
+  "promotion_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
