@@ -467,9 +467,13 @@ def _bind_semantic_value(
     if semantic == "name":
         if facts.get("name"):
             return facts["name"][0]
-        quoted = re.findall(r"['\"]([^'\"]{2,120})['\"]", goal)
-        if len(quoted) == 1:
-            return quoted[0]
+        named = re.search(
+            r"\b(?:named|called|titled|name|title)\s+['\"]([^'\"]{2,120})['\"]",
+            goal,
+            flags=re.I,
+        )
+        if named:
+            return named.group(1)
 
     if semantic == "date":
         dates = _DATE.findall(goal)
