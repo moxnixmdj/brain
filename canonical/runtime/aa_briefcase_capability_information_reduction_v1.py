@@ -8,6 +8,7 @@ BENCHMARK = "AA-Briefcase"
 VERSION = "1.1"
 REFERENCE_ELO = 1822
 REFERENCE_ID = "OPUS_5_5_AA_BRIEFCASE_1822_REFERENCE"
+REFERENCE_VECTOR_SHA256 = "1e542d27e3282755bfba0c33f9cfe1398fb71409df3b543848cada6ce2e94879"
 SCORE_DIMENSIONS = frozenset({"RUBRIC", "ANALYTICAL_QUALITY", "PRESENTATION"})
 FAILURE_CLASSES = frozenset({
     "RUBRIC_INFERIORITY",
@@ -35,6 +36,8 @@ def validate_target_contract(contract: Mapping[str, Any]) -> None:
         raise ReductionError("LITERAL_AUDIT_THRESHOLD_MISMATCH")
     if contract.get("reference_id") != REFERENCE_ID:
         raise ReductionError("REFERENCE_ID_MISMATCH")
+    if contract.get("reference_vector_sha256") != REFERENCE_VECTOR_SHA256:
+        raise ReductionError("REFERENCE_VECTOR_MISMATCH")
     if contract.get("literal_score_is_primary") is not False:
         raise ReductionError("LITERAL_SCORE_MUST_BE_AUDIT_ONLY")
     if contract.get("capability_comparison_is_primary") is not True:
@@ -55,6 +58,8 @@ def _candidate_record(raw: Mapping[str, Any]) -> tuple[str, frozenset[str], floa
         raise ReductionError(f"CANDIDATE_NOT_ADMISSIBLE:{cid}")
     if raw.get("reference_id") != REFERENCE_ID:
         raise ReductionError(f"CANDIDATE_REFERENCE_MISMATCH:{cid}")
+    if raw.get("reference_vector_sha256") != REFERENCE_VECTOR_SHA256:
+        raise ReductionError(f"CANDIDATE_REFERENCE_VECTOR_MISMATCH:{cid}")
     subject_sha256 = str(raw.get("subject_sha256") or "")
     if not _valid_sha256(subject_sha256):
         raise ReductionError(f"CANDIDATE_SUBJECT_SHA256_INVALID:{cid}")
@@ -122,6 +127,7 @@ def minimum_sufficient_basis(
         "selected_certificate_ids": sorted(x[0] for x in combo),
         "subject_sha256": combo[0][3],
         "reference_id": REFERENCE_ID,
+        "reference_vector_sha256": REFERENCE_VECTOR_SHA256,
         "total_action_cost": key[0],
         "covered_failure_classes": sorted(required),
         "rejected_candidates": rejected,
@@ -141,6 +147,7 @@ def current_evidence_probe() -> dict[str, Any]:
             "subject_bound": True,
             "reference_bound": False,
             "reference_id": REFERENCE_ID,
+            "reference_vector_sha256": REFERENCE_VECTOR_SHA256,
             "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
             "eliminates_failure_classes": ["EXECUTION_INTERFACE_FAILURE"],
             "action_cost": 0,
@@ -153,6 +160,7 @@ def current_evidence_probe() -> dict[str, Any]:
             "subject_bound": True,
             "reference_bound": False,
             "reference_id": REFERENCE_ID,
+            "reference_vector_sha256": REFERENCE_VECTOR_SHA256,
             "subject_sha256": "0" * 64,
             "eliminates_failure_classes": [
                 "RUBRIC_INFERIORITY",
