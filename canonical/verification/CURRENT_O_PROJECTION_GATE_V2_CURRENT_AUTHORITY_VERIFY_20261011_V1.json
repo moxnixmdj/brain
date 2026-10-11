@@ -1,0 +1,122 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_O_PROJECTION_GATE_V2_CURRENT_AUTHORITY_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__EXACT_CHANGED_BYTES__PYCOMPILE__14_OF_14_FOCUSED__56_OF_56_INHERITED_SEAM__REAL_CURRENT_PROJECTION_O11_Q1_TB_PARKED__174_JSON_V2_SCAN_ZERO_CANDIDATES__ZERO_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "repair/o-projection-v2-current-authority-20261011-v1",
+    "base_main_sha": "70197b3055a9f2ddc0948fe6f284bbd42d0a2f6f",
+    "tested_branch_head": "91c6ef472e6617166f27f8ed011b469bc2a53759",
+    "changed_blobs": {
+      "canonical/runtime/current_escape_o_objective_acceptance_law_gate_v2.py": "ea584f6d67d75e8c26df5af83005e34a6022d029",
+      "canonical/tests/test_current_escape_o_objective_acceptance_law_gate_v2.py": "ba8668c8f79c68d224ffbac88815fbbb7cd2884d",
+      "canonical/tests/test_current_escape_o_proof_instantiation_search_v2.py": "8889dabd0288f36d4a77f16881297c9ae9f4ef88"
+    },
+    "unchanged_search_runtime": [
+      "canonical/runtime/current_escape_o_proof_instantiation_search_v2.py",
+      "30ba7cdaab11da93dad7f07dc1ce84dca579a611"
+    ],
+    "current_authority_inputs": {
+      "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json": "a56af90a3af965d6be7f9bc5aac1312919626b28",
+      "canonical/governance/CURRENT_ESCAPE_TWO_ENGINE_MINIMUM_DELTA_CUT_20261011_V1.json": "07b3ca1b623209d224ade26b174da3f6247fefaf",
+      "canonical/governance/ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_20261010_V2.json": "f3a566a982dcd867c583eafd24c6f5dd3baa0530",
+      "canonical/governance/GDPVAL_CURRENT_FIXED_BAR_ENGINE_RECLASSIFICATION_20261011_V1.json": "c16a49726507d6611a24bde323e0436a65870b59",
+      "canonical/verification/GDPVAL_FIXED_BAR_OWNER_PAIRWISE_NONNECESSITY_VERIFICATION_20261009_V1.json": "0ff348665933ab801fb32b6e37d8c5d8438e5b42",
+      "canonical/governance/CURRENT_REUSE_FRONTIER_EXACT_DELTA_CUT_20261011_V2.json": "306d1d1a6e5b03e05e8d370cb875ecdc33ab459c"
+    },
+    "unchanged_reused_kernel_blobs": {
+      "canonical/runtime/benchmark_witness_elimination_compiler_v4.py": "1da07329d3bf35f598a5716c80519afe6b07dd64",
+      "canonical/runtime/benchmark_witness_elimination_compiler_v3.py": "ace06caa1a8680a0a52d5341345dd5413b0620aa",
+      "canonical/runtime/proof_carrying_scope_cover_v1.py": "3143bd707d51d4d66b2171396b3d596c9a26adf8"
+    }
+  },
+  "independent_execution": {
+    "carrier": {
+      "kind": "SPRITE",
+      "name": "brain-capability-first-scheduler-verify-20261008-v1",
+      "id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+      "isolated_path": "/home/sprite/o-projection-v2-current-authority-v1"
+    },
+    "exact_changed_blob_match": true,
+    "py_compile": {
+      "pass": true,
+      "files": [
+        "canonical/runtime/current_escape_o_objective_acceptance_law_gate_v2.py",
+        "canonical/runtime/current_escape_o_proof_instantiation_search_v2.py"
+      ]
+    },
+    "focused_tests": {
+      "tests_run": 14,
+      "passed": 14,
+      "failed": 0,
+      "errors": 0
+    },
+    "inherited_kernel_seam": {
+      "execution_method": "DIRECT_ZERO_ARGUMENT_TEST_FUNCTION_HARNESS__EXACT_TEST_FILES",
+      "tests_run": 56,
+      "passed": 56,
+      "failed": 0,
+      "errors": 0
+    },
+    "real_current_projection": {
+      "pass": true,
+      "active_o_count": 11,
+      "active_q_count": 1,
+      "parked_count": 1,
+      "gdpval_engine": "O_OBJECTIVE_ACCEPTANCE_INSTANTIATION",
+      "aa_briefcase_engine": "Q_ACCEPTANCE_RELATION_ROBUST_COMMON_POLICY",
+      "tb_science_state": "PARKED",
+      "cut_status": "CURRENT_ACTIVE_ESCAPE_COLLAPSED_TO_TWO_REUSE_ENGINES__O11_ACTIVE__Q1_ACTIVE__TB_PARKED__GDPVAL_FIXED_BAR_RECLASSIFIED_Q_TO_O__ZERO_CREDIT"
+    },
+    "refreshed_v2_claim_search": {
+      "pass": true,
+      "scanned_json_file_count": 174,
+      "scanned_json_bytes": 1514967,
+      "parse_failure_count": 0,
+      "candidate_count": 0,
+      "proved_candidate_count": 0,
+      "proved_obligation_count": 0,
+      "missing_obligation_count": 11
+    }
+  },
+  "repaired_defect": {
+    "prior_v2_behavior": "DATED_TWO_ENGINE_CUT_PATH_WAS_TRUSTED_DIRECTLY__MUTABLE_CURRENT_RESIDUAL_AUTHORITY_WAS_NOT_REQUIRED__GDPVAL_Q_TO_O_ROUTE_DID_NOT_REQUIRE_REVALIDATION_OF_ITS_INDEPENDENT_NONNECESSITY_RECEIPT",
+    "current_behavior": "MUTABLE_CURRENT_RESIDUAL_AUTHORITY_MUST_BIND_EXACT_TWO_ENGINE_CUT_BYTES_AND_STATUS__CUT_MUST_BIND_EXACT_MANIFEST_AND_GDPVAL_RECLASSIFICATION__GDPVAL_RECLASSIFICATION_MUST_BIND_EXACT_INDEPENDENT_NONNECESSITY_VERIFICATION__O_Q_PARKED_PARTITION_MUST_MATCH_CURRENT_TOPOLOGY",
+    "semantic_kernel_changed": false,
+    "acceptance_thresholds_changed": false,
+    "scope_law_changed": false,
+    "new_primitive_required": false
+  },
+  "proved": [
+    "V2_O_PROJECTION_NOW_FOLLOWS_MUTABLE_CURRENT_RESIDUAL_AUTHORITY_INSTEAD_OF_TRUSTING_A_DATED_CUT_PATH_DIRECTLY",
+    "STALE_CURRENT_CUT_POINTER_BYTES_FAIL_CLOSED",
+    "GDPVAL_Q_TO_O_ROUTING_REQUIRES_EXACT_BOUND_INDEPENDENT_NONNECESSITY_VERIFICATION",
+    "STALE_GDPVAL_VERIFICATION_BYTES_FAIL_CLOSED",
+    "GDPVAL_REMAINS_O__AA_BRIEFCASE_REMAINS_Q__TB_SCIENCE_REMAINS_PARKED",
+    "O_Q_PARKED_SETS_REMAIN_DISJOINT_EXHAUSTIVE_AND_COUNT_CONSISTENT",
+    "PRECISE_PREDECESSOR_DIAGNOSTIC_FAILURE_REASONS_ARE_PRESERVED",
+    "UNCHANGED_V4_V3_SCOPE_COVER_KERNEL_SEAM_PASSES_56_OF_56",
+    "REFRESHED_V2_READY_MADE_CLAIM_SEARCH_FINDS_ZERO_CANDIDATES__NO_ROW_CREDIT"
+  ],
+  "hard_nonclaims": [
+    "NO_O_ROW_ACCEPTANCE_CREDIT",
+    "NO_GDPVAL_SCORE_OR_FIXED_BAR_ACCEPTANCE",
+    "NO_AA_BRIEFCASE_RESULT",
+    "NO_TB_SCIENCE_REACTIVATION",
+    "NO_FULL_PRIVATE_CURRENT_MAIN_REGRESSION",
+    "NO_QUALITY_PROMOTION_OR_TERMINAL_AUTHORITY",
+    "NO_NEW_PRIMITIVE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "row_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "promotion_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false
+}
