@@ -744,18 +744,30 @@
         "bounded_learned_components"
       ],
       "source": {
-        "type": "system_tool",
-        "name": "project-brain-native-chartography-professional-v1",
-        "command": "python",
-        "version": "brain-owned",
-        "verification_command": [
-          "python",
-          "--version"
-        ],
-        "accepted_output_regex": "^Python 3[.]",
-        "bounded_learned_component": "image.extract.ocr.tesseract.positioned.tsv",
-        "donor_runtime_required": false,
-        "external_frontier_model_required": false
+        "type": "apt",
+        "origin": "Ubuntu",
+        "packages": [
+          {
+            "name": "tesseract-ocr",
+            "version": "5.3.4-1build5",
+            "sha256": "2dfac382d77215aee0c3de4a2a2205505d5f2195e72e79b54ad32154fc08da77"
+          },
+          {
+            "name": "tesseract-ocr-eng",
+            "version": "1:4.1.0-2",
+            "sha256": "b1996b3113c78663f4dd16cf18aa1f288b07e9624f8d4a0ddbd7d9b52a234ba7"
+          },
+          {
+            "name": "libtesseract5",
+            "version": "5.3.4-1build5",
+            "sha256": "a38438115dc203b5abc1e6a6b24eb5273ba82161a11faa2f619bf5f7622efb14"
+          },
+          {
+            "name": "python3-pil",
+            "version": "10.2.0-1ubuntu1.3",
+            "sha256": "7a2f1226161ca9d102d716dbb484d921ec33d5519fac4f943e1556deaf922c24"
+          }
+        ]
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
@@ -772,6 +784,13 @@
         "general_purpose_model_dependency_count": 0,
         "heldout_cases_consumed": 0,
         "full_benchmark_authority": false
+      },
+      "dependency_accounting": {
+        "resolver_repository": "moxnixmdj/verification-capsule-runner",
+        "resolver_pull_request": 2665,
+        "resolver_workflow_run_id": 38138634850,
+        "resolver_job_id": 114467650008,
+        "apt_metadata_snapshot_blob_sha": "426189ed3a8c37d3ecb515cc8f89ab31e927fd24"
       }
     },
     "decision.synthesis.typed.stdlib": {
@@ -1603,16 +1622,30 @@
         "image.raster.available"
       ],
       "source": {
-        "type": "verified_brain_owned_bounded_component",
-        "adapter_path": "canonical/runtime/bound_capabilities/image_ocr_tesseract_positioned.py",
-        "base_adapter_path": "canonical/runtime/bound_capabilities/image_ocr_tesseract.py",
-        "dependency_accounting_path": "canonical/governance/TESSERACT_OCR_DEPENDENCY_ACCOUNTING_V1.json",
-        "pinned_component_receipt": "canonical/capabilities/opus55/PINNED_IMAGE_OCR_TESSERACT_001.json",
-        "tesseract_version": "5.3.4",
-        "tesseract_package_version": "5.3.4-1build5",
-        "eng_traineddata_sha256": "7d4322bd2a7749724879683fc3912cb542f19906c83bcc1a52132556427170b2",
-        "donor_runtime_required": false,
-        "external_frontier_model_required": false
+        "type": "apt",
+        "origin": "Ubuntu",
+        "packages": [
+          {
+            "name": "tesseract-ocr",
+            "version": "5.3.4-1build5",
+            "sha256": "2dfac382d77215aee0c3de4a2a2205505d5f2195e72e79b54ad32154fc08da77"
+          },
+          {
+            "name": "tesseract-ocr-eng",
+            "version": "1:4.1.0-2",
+            "sha256": "b1996b3113c78663f4dd16cf18aa1f288b07e9624f8d4a0ddbd7d9b52a234ba7"
+          },
+          {
+            "name": "libtesseract5",
+            "version": "5.3.4-1build5",
+            "sha256": "a38438115dc203b5abc1e6a6b24eb5273ba82161a11faa2f619bf5f7622efb14"
+          },
+          {
+            "name": "python3-pil",
+            "version": "10.2.0-1ubuntu1.3",
+            "sha256": "7a2f1226161ca9d102d716dbb484d921ec33d5519fac4f943e1556deaf922c24"
+          }
+        ]
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
@@ -1623,6 +1656,13 @@
         "exact_runtime_blob_sha": "19f3087489ce7f6f935fc7baaebdc8cd672f4b62",
         "exact_base_runtime_blob_sha": "45714d7a0160802d986042910da1c4c6462676e5",
         "no_semantic_authority": true
+      },
+      "dependency_accounting": {
+        "resolver_repository": "moxnixmdj/verification-capsule-runner",
+        "resolver_pull_request": 2665,
+        "resolver_workflow_run_id": 38138634850,
+        "resolver_job_id": 114467650008,
+        "apt_metadata_snapshot_blob_sha": "426189ed3a8c37d3ecb515cc8f89ab31e927fd24"
       }
     },
     "image.qr.generate.qrencode": {
