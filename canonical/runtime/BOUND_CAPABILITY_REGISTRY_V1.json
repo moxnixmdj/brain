@@ -3618,6 +3618,102 @@
         "external_capability_provider_count": 0,
         "incremental_spend_usd": 0
       }
+    },
+    "python.software_task.acceptance.explicit_tests.v1": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "incremental_spend_usd": 0,
+      "cost": 1,
+      "requires": [
+        "python.test.corpus.available"
+      ],
+      "provides": [
+        "software.task.acceptance_contract.explicit_test_bound"
+      ],
+      "result_fields": [
+        "status",
+        "complete",
+        "task_text",
+        "task_sha256",
+        "test_paths",
+        "test_sha256",
+        "test_fact_count",
+        "test_facts",
+        "obligation_count",
+        "bound_obligation_count",
+        "obligations",
+        "acceptance_ready_for_test_oracle_only",
+        "model_dependency_count",
+        "external_capability_provider_count",
+        "incremental_spend_usd",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "keywords": [
+        "software",
+        "task",
+        "acceptance",
+        "requirements",
+        "tests",
+        "unittest",
+        "pytest",
+        "contract",
+        "semantic",
+        "explicit",
+        "fail-closed"
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "python.software_task.acceptance.explicit_tests.v1",
+          "task_text": "${input.goal}",
+          "test_paths": "${input.test_paths}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "software_task_acceptance_compiler_v1",
+      "entrypoint": "run",
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "limitations": [
+        "Binds only explicit task clauses that name a tested symbol and exact expected literal supported by structurally parsed unittest/pytest assertions.",
+        "Extra vocabulary that may carry semantics remains unbound instead of being silently ignored.",
+        "Duplicate matching test evidence is treated as ambiguous and fails contract completeness.",
+        "Does not perform general natural-language understanding, infer hidden requirements, prove the test suite exhaustive, or establish mergeability.",
+        "No FrontierCode score or acceptance credit by itself."
+      ],
+      "source": {
+        "type": "python_stdlib",
+        "modules": [
+          "ast",
+          "hashlib",
+          "json",
+          "os",
+          "pathlib",
+          "re"
+        ],
+        "adapter_path": "canonical/runtime/bound_capabilities/software_task_acceptance_compiler_v1.py"
+      },
+      "verification": {
+        "status": "INDEPENDENT_TWO_CARRIER_FOCUSED_FALSIFICATION_PASS",
+        "receipt_path": "canonical/verification/SOFTWARE_TASK_ACCEPTANCE_COMPILER_V1_VERIFY_20261011.json",
+        "first_carrier_test_count": 8,
+        "second_carrier_test_count": 8,
+        "runtime_git_blob_sha": "b4fbca159d3ff1a62ecbc7c63d5459a66d91c61f",
+        "runtime_sha256": "0fde73c1094fc9296f58336efb45b49a27ed105907678df26cea6c2d9800277c",
+        "test_git_blob_sha": "fcd6a41ab172d2b86ab1d644cd0a2b90a1984cb0",
+        "model_dependency_count": 0,
+        "external_capability_provider_count": 0,
+        "incremental_spend_usd": 0
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
