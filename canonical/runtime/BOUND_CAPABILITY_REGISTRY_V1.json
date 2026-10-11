@@ -3942,6 +3942,112 @@
         "geometry_cases_passed": 40,
         "axis_cases_passed": 13
       }
+    },
+    "python.software.repair.loop.coupled.ast.v1": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "incremental_spend_usd": 0,
+      "cost": 3,
+      "requires": [
+        "python.source.file.available",
+        "python.test.corpus.available"
+      ],
+      "provides": [
+        "python.patch.candidate.coupled.multi_round.test_verified"
+      ],
+      "result_fields": [
+        "status",
+        "pass",
+        "baseline_failure_score",
+        "rounds",
+        "accepted_groups",
+        "accepted_group_count",
+        "tested_candidate_count",
+        "final_verification_replays",
+        "patches",
+        "source_restored",
+        "model_dependency_count",
+        "external_capability_provider_count",
+        "incremental_spend_usd",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "keywords": [
+        "python",
+        "software",
+        "repair",
+        "coupled",
+        "atomic",
+        "multi-edit",
+        "multi-file",
+        "localization",
+        "symbol",
+        "tests",
+        "ast"
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "python.software.repair.loop.coupled.ast.v1",
+          "source_root": "${input.source_root}",
+          "test_paths": "${input.test_paths}",
+          "test_argv": "${input.test_argv}",
+          "output_path": "${input.output_path}",
+          "timeout_s": 30,
+          "max_rounds": 4,
+          "max_files": 8,
+          "max_mutations_per_file": 30,
+          "max_pairs": 1000,
+          "max_total_candidates": 4000
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "python_coupled_software_repair_loop_v1",
+      "entrypoint": "run",
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "limitations": [
+        "Deterministically ranks repository-local Python files using traceback paths, test imports, called symbols, and failure-text symbol evidence.",
+        "Can accept strict single-edit improvements or atomic two-edit groups across different Python files; pair evaluation can cross a flat single-edit failure-score plateau without retaining an unverified intermediate state.",
+        "Coupled search is bounded and cross-file only in V1; same-file coupled edits, groups larger than two, and arbitrary edit-basis completeness are not proved.",
+        "Localization is evidence-guided and symbol-aware but is not general semantic fault localization.",
+        "Candidate-only: original source bytes are restored before return; no automatic source write or promotion authority.",
+        "No non-Python completeness, hidden-requirements guarantee, general mergeability proof, or FrontierCode score credit."
+      ],
+      "source": {
+        "type": "python_stdlib_composition",
+        "modules": [
+          "ast",
+          "difflib",
+          "hashlib",
+          "importlib.util",
+          "json",
+          "os",
+          "pathlib",
+          "re",
+          "subprocess",
+          "sys",
+          "time"
+        ],
+        "adapter_path": "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py"
+      },
+      "verification": {
+        "status": "INDEPENDENT_EXACT_RUNTIME_6_OF_6_PLUS_CANONICAL_PATH_3_OF_3_PASS",
+        "runtime_git_blob_sha": "18fbe4b6f7f84a850d193c6d4fcb5f9555edeb1c",
+        "runtime_sha256": "f6142e21a8572f75a37b9dcc0185c0815ba9d7f2b3c33140a5ed8732f32e7093",
+        "test_git_blob_sha": "ccbe88f0d9a81e6be8b36db2f7e52bab33ba15c5",
+        "receipt_path": "canonical/verification/PYTHON_COUPLED_SOFTWARE_REPAIR_LOOP_V1_VERIFY_20261011_V1.json",
+        "model_dependency_count": 0,
+        "external_capability_provider_count": 0,
+        "incremental_spend_usd": 0
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
