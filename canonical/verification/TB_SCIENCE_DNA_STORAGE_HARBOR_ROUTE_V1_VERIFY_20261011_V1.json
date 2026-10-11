@@ -1,0 +1,114 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_DNA_STORAGE_HARBOR_ROUTE_V1_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "pass": true,
+  "status": "PASS__DONOR_FREE_DNA_STORAGE_CODEC_ADAPTER_AND_HARBOR_ROUTE_INDEPENDENTLY_VERIFIED__RANK23_UNREAD_UNSTARTED",
+  "subject": {
+    "codec": {
+      "path": "canonical/runtime/dna_storage_codec_v1.py",
+      "git_blob_sha": "3734ad7c4674d9ebe77dbaf0592ea10d0a6cb451"
+    },
+    "codec_test": {
+      "path": "canonical/tests/test_dna_storage_codec_v1.py",
+      "git_blob_sha": "cc4e9aadabb8ba4b146f2a5ace14fcb62488fca8"
+    },
+    "adapter": {
+      "path": "canonical/runtime/dna_storage_task_adapter_v1.py",
+      "git_blob_sha": "2009dabd5870218550fcc5af74dc6c4822269818"
+    },
+    "adapter_test": {
+      "path": "canonical/tests/test_dna_storage_task_adapter_v1.py",
+      "git_blob_sha": "0df88f2c40150d1861e3468515135b7087058a10"
+    },
+    "harbor_agent": {
+      "path": "canonical/runtime/harbor_science_dna_storage_agent_v1.py",
+      "git_blob_sha": "ef4832b8fff0197cb9f0fe87196fbe2521e312f5"
+    },
+    "harbor_agent_test": {
+      "path": "canonical/tests/test_harbor_science_dna_storage_agent_v1.py",
+      "git_blob_sha": "43432e4b118842046b76b9f5d2074125db4c704c"
+    },
+    "transport": {
+      "path": "canonical/runtime/harbor_environment_transport_v2.py",
+      "git_blob_sha": "9aebd804c6d71b07da5134ed4e2d14a6427de84c"
+    },
+    "command_policy": {
+      "path": "canonical/runtime/harbor_command_policy.py",
+      "git_blob_sha": "a525773417291c7a4841bf35e1baff5370350d0d"
+    },
+    "start_barrier": {
+      "path": "execution_guard/terminal_agent_start_barrier_v1.py",
+      "git_blob_sha": "be71f063b232429dc9e416bb58b4138f35341079"
+    },
+    "logical_attempt_identity": {
+      "path": "execution_guard/logical_attempt_identity_v2.py",
+      "git_blob_sha": "67ff638459af1bb50a094e9479fb4aa5e2a3de1c"
+    }
+  },
+  "independent_public_verification": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "gate1": {
+      "pull_request": 2693,
+      "base_branch": "verify/tb-science-dna-adapter-isolated-base-20261011",
+      "head_branch": "verify/tb-science-dna-adapter-isolated-run-20261011",
+      "head_sha": "09ab689ae4660d9eb8cf3c8cc9e089cc521c6c23",
+      "workflow_run_id": 38144925669,
+      "workflow_job_id": 114486172542,
+      "conclusion": "success",
+      "tests_run": 20,
+      "tests_passed": 20,
+      "exact_blob_binding_pass": true
+    },
+    "gate2": {
+      "pull_request": 2694,
+      "base_branch": "verify/tb-science-dna-harbor-isolated-base-20261011",
+      "head_branch": "verify/tb-science-dna-harbor-isolated-run-20261011",
+      "head_sha": "c07c2f4069fa0c444f99bfa41c2bd8c50cdee9b2",
+      "workflow_run_id": 38145310956,
+      "workflow_job_id": 114487301825,
+      "conclusion": "success",
+      "tests_run": 27,
+      "tests_passed": 27,
+      "exact_blob_binding_pass": true
+    }
+  },
+  "verified_capabilities": [
+    "DETERMINISTIC_BYTES_DNA_ROUNDTRIP_WITH_GF256_ERASURE_RECOVERY",
+    "VISIBLE_CONTRACT_TO_ENCODE_DECODE_ROUNDTRIP_OR_SOURCE_OPERATION",
+    "AMBIGUOUS_CONTRACT_FAIL_CLOSED",
+    "AUTHORITATIVE_ARTIFACT_DIRECTORY_PLUS_VISIBLE_BASENAME_RESOLUTION",
+    "CLAIM_BOUND_LOGICAL_ATTEMPT_IDENTITY",
+    "AGENT_READY_BEFORE_DURABLE_START_COMMIT",
+    "CONTENT_HASH_VERIFIED_LOCAL_RUNTIME_TRANSFER",
+    "BOUNDED_NETWORK_FREE_HARBOR_COMMANDS",
+    "OUTPUT_FILE_POSTCONDITION_VERIFICATION"
+  ],
+  "ownership": {
+    "model_dependency_count": 0,
+    "external_model_runtime_calls": 0,
+    "network_capability_acquisition_calls": 0,
+    "donor_model_required": false,
+    "copied_external_model": false,
+    "task_specific_answer_leakage": false
+  },
+  "rank23_state": {
+    "slot_id": "terminal-bench-science/dna-storage-codec::trial-0",
+    "task_digest": "sha256:bde6852289db3f5474aedc96c54aca201d11be6c61f4fef019998b2b689e65ac",
+    "task_read": false,
+    "task_started": false,
+    "benchmark_trials_consumed": 0
+  },
+  "promotion_authority": true,
+  "execution_authority": false,
+  "task_read_authority": false,
+  "activation_authority": false,
+  "acceptance_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "hard_nonclaims": [
+    "NO_RANK23_BENCHMARK_SUCCESS",
+    "NO_CLAIM_GENERIC_DNA_CAPABILITY_COVERS_THE_UNREAD_RANK23_CONTRACT",
+    "NO_RANK23_TASK_READ_OR_START",
+    "NO_EXECUTION_OR_ACTIVATION_AUTHORITY_FROM_THIS_VERIFICATION"
+  ]
+}
