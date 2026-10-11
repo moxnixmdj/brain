@@ -305,6 +305,7 @@ def next_policy_action(
         if not _semantic_done(history, verify_semantic):
             selected_ids = set(generic_plan.get("observation_endpoint_ids") or [])
             verification_calls: list[dict[str, Any]] = []
+            verification_receipts: list[dict[str, Any]] = []
             seen_calls: set[str] = set()
             for endpoint_id in selected_ids:
                 endpoint = endpoint_by_id.get(endpoint_id)
@@ -325,6 +326,12 @@ def next_policy_action(
                     continue
                 seen_calls.add(signature)
                 verification_calls.append({"tool":"api_fetch","arguments":args})
+                verification_receipts.append({
+                    "endpoint_id": endpoint_id,
+                    "method": "GET",
+                    "bindings": dict(bound.get("bindings") or {}),
+                    "arguments": dict(args),
+                })
                 if len(verification_calls) >= max_parallel_calls:
                     break
             if verification_calls:
@@ -334,6 +341,7 @@ def next_policy_action(
                     "phase": "VERIFY_STATE",
                     "planner_mode": "GENERIC_GOAL_TOOL_EFFECT_PLANNER",
                     "semantic": verify_semantic,
+                    "generic_verification_receipts": verification_receipts,
                     "calls": verification_calls,
                 }
             return {
@@ -349,10 +357,20 @@ def next_policy_action(
             history,
             verify_semantic,
         )
+        execution_receipts = _assistant_receipts(
+            history,
+            "project_brain/generic_execution_receipt",
+        )
+        verification_receipts = _assistant_receipts(
+            history,
+            "project_brain/generic_verification_receipts",
+        )
         verification = verify_goal_state(
             goal=prompt,
-            context_observations=observations,
+            context_observations=_pre_generic_action_observations(history),
             verification_observations=verification_observations,
+            execution_receipts=execution_receipts,
+            verification_receipts=verification_receipts,
         )
         if verification.get("pass") is True:
             return {
