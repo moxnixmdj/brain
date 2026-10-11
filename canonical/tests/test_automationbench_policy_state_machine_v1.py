@@ -125,6 +125,55 @@ class AutomationBenchPolicyStateMachineV1Tests(unittest.TestCase):
         out = next_policy_action(prompt=prompt, history=history)
         self.assertNotEqual(out.get("semantic"), "SALESFORCE_OPPORTUNITY_MARK_WON")
 
+    def test_created_asana_task_advances_to_section_placement(self):
+        prompt = (
+            "Add the fire drill task to Asana project proj_facilities "
+            "under the 'February' section."
+        )
+        history = [
+            {"kind":"tool_result","name":"api_search","content":'{"results":[]}'},
+            {
+                "kind":"tool_result",
+                "name":"api_fetch",
+                "content":json.dumps({
+                    "messages":[
+                        {
+                            "id":"source",
+                            "body_plain":"Create task: Monthly Fire Drill Checklist - February. Due: 2026-02-18."
+                        }
+                    ],
+                    "sections":[
+                        {
+                            "gid":"sec_feb",
+                            "name":"February",
+                            "project":{"gid":"proj_facilities"}
+                        }
+                    ]
+                })
+            },
+            {
+                "kind":"assistant_state",
+                "metadata":{
+                    "project_brain/automationbench_semantic":"ASANA_TASK_CREATE"
+                }
+            },
+            {
+                "kind":"tool_result",
+                "name":"api_fetch",
+                "content":json.dumps({
+                    "data":{
+                        "gid":"task_new",
+                        "name":"Monthly Fire Drill Checklist - February",
+                        "due_on":"2026-02-18",
+                        "completed":False
+                    }
+                })
+            }
+        ]
+        out = next_policy_action(prompt=prompt, history=history)
+        self.assertEqual(out["semantic"], "ASANA_TASK_ADD_TO_SECTION")
+        self.assertIn("/sections/sec_feb/addTask", out["calls"][0]["arguments"]["url"])
+
     def test_unsupported_semantics_fail_closed(self):
         history = [
             {"kind":"tool_result","name":"api_search","content":'{"results":[]}'},
