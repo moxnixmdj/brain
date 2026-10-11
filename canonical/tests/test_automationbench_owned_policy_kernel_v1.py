@@ -5,6 +5,7 @@ import unittest
 
 from canonical.runtime.automationbench_owned_policy_kernel_v1 import (
     classify,
+    followup_observation_plan,
     observation_plan,
     parse_search_payload,
     rank_endpoints,
@@ -142,6 +143,103 @@ class AutomationBenchOwnedPolicyKernelV1Tests(unittest.TestCase):
         plan = observation_plan(prompt, [payload])
         self.assertEqual(len(plan), 1)
         self.assertIn("/users/me/messages", plan[0]["arguments"]["url"])
+
+    def test_fire_drill_prompt_grounds_sheets_project_and_workspace_ids(self):
+        prompt = (
+            "Add it to Asana workspace ws_ops, project proj_facilities. "
+            "Check policy in spreadsheet ss_ops_policy (worksheet ws_email_rules)."
+        )
+        payload = {
+            "results":[
+                {
+                    "id":"sheets.values.get",
+                    "method":"GET",
+                    "url":"https://sheets.googleapis.com/v4/spreadsheets/{spreadsheetId}/values/{range}",
+                    "description":"Read cell contents from a specific range",
+                    "parameters":{
+                        "spreadsheetId":{"required":True,"location":"path"},
+                        "range":{"required":True,"location":"path"},
+                    },
+                },
+                {
+                    "id":"asana.sections.getForProject",
+                    "method":"GET",
+                    "url":"https://app.asana.com/api/1.0/projects/{project_gid}/sections",
+                    "description":"Retrieve all sections belonging to a project",
+                    "parameters":{
+                        "project_gid":{"required":True,"location":"path"}
+                    },
+                },
+            ]
+        }
+        plan = observation_plan(prompt, [payload], max_calls=6)
+        urls = [x["arguments"]["url"] for x in plan]
+        self.assertTrue(any("/spreadsheets/ss_ops_policy/values/ws_email_rules" in u for u in urls))
+        self.assertTrue(any("/projects/proj_facilities/sections" in u for u in urls))
+
+    def test_followup_expands_gmail_list_ids_into_message_gets(self):
+        prompt = "Check the latest unread email from the facilities team about a fire drill."
+        search = {
+            "results":[
+                {
+                    "id":"gmail.users.messages.get",
+                    "method":"GET",
+                    "url":"https://gmail.googleapis.com/gmail/v1/users/{userId}/messages/{id}",
+                    "description":"Fetch a specific email message by its ID.",
+                    "parameters":{
+                        "userId":{"required":True,"location":"path","default":"me"},
+                        "id":{"required":True,"location":"path"},
+                    },
+                }
+            ]
+        }
+        observed = {
+            "messages":[
+                {"id":"msg_fac_011","threadId":"thr_fac_011"},
+                {"id":"msg_fac_012","threadId":"thr_fac_012"},
+            ]
+        }
+        plan = followup_observation_plan(prompt, [search], [observed])
+        self.assertEqual(len(plan), 2)
+        urls = {x["arguments"]["url"] for x in plan}
+        self.assertIn(
+            "https://gmail.googleapis.com/gmail/v1/users/me/messages/msg_fac_011",
+            urls,
+        )
+        self.assertIn(
+            "https://gmail.googleapis.com/gmail/v1/users/me/messages/msg_fac_012",
+            urls,
+        )
+
+    def test_followup_does_not_refetch_detailed_gmail_message(self):
+        prompt = "Check the latest unread facilities email."
+        search = {
+            "results":[
+                {
+                    "id":"gmail.users.messages.get",
+                    "method":"GET",
+                    "url":"https://gmail.googleapis.com/gmail/v1/users/{userId}/messages/{id}",
+                    "description":"Fetch a specific email message by its ID.",
+                    "parameters":{
+                        "userId":{"required":True,"location":"path","default":"me"},
+                        "id":{"required":True,"location":"path"},
+                    },
+                }
+            ]
+        }
+        observed = [
+            {"messages":[{"id":"msg_1","threadId":"thr_1"}]},
+            {
+                "id":"msg_1",
+                "threadId":"thr_1",
+                "subject":"Fire drill",
+                "body_plain":"Create task: Safety Review. Due: 2026-02-18.",
+            },
+        ]
+        self.assertEqual(
+            followup_observation_plan(prompt, [search], observed),
+            [],
+        )
 
     def test_endpoint_ranking_prefers_read_for_observation(self):
         prompt = "Find the invoice messages before updating the tracker."
