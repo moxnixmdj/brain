@@ -1,0 +1,88 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_SCALE_SUBMISSION_RECEIPT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__FRESH_ROW217_OVERPASSQL_MARKDOWN_FROZEN__LIVE_I40_SEED_PROBE_PASS__FULL_PUBLIC_MIRROR_REPLAY_INFRA_INCONCLUSIVE__ZERO_OWNER_SCORE_CREDIT",
+  "benchmark": "GDPval-AA v2.1",
+  "row_idx": 217,
+  "task_id": "854f3814-681c-4950-91ac-55b0db0e3781",
+  "sector": "Professional, Scientific, and Technical Services",
+  "occupation": "Software Developers",
+  "freshness": {
+    "precommit": "canonical/governance/GDPVAL_SCALE_FRESH_BATCH_ROWS35_219_PRECOMMIT_20261011_V1.json",
+    "precommit_commit": "c604f5006820ce3ca24d6afc2487a95a30886a6c",
+    "chronology_reconciliation": "canonical/governance/GDPVAL_PREOUTPUT_PACKET_PRECOMMIT_ORDER_RECONCILIATION_20261011_V1.json",
+    "official_allowed_projection_sha256": "e0d1102a48ca38dbb4b5e359ba910a34d29d62b75498e42b82532fccc7ab3fe3",
+    "prompt_sha256": "bb9e56fe60fef50cdfbaced3e850039b6ca8105e4f66c6db6dd7b332b27f9457",
+    "reference_count": 0,
+    "gold_deliverable_read_before_freeze": false,
+    "rubric_read_before_freeze": false,
+    "third_party_model_submission_read_before_freeze": false
+  },
+  "brain_execution_profile": {
+    "path": "canonical/capabilities/internalized/professional_work/stirrup_247f24d/BRAIN_EXECUTION_PROFILE_V1.json",
+    "candidate_id": "OPUS55_PROFESSIONAL_KNOWLEDGE_WORK_STIRRUP_CONFIGURATION_V1",
+    "cognition_surface": "CURRENT_CHATGPT_GPT_5_6_SOL_SESSION",
+    "incremental_spend_usd": 0
+  },
+  "submission": {
+    "library_path": "/Project Brain/GDPval/scale/854f3814-681c-4950-91ac-55b0db0e3781/GDPval_854f3814_I40_ABQ_OKC_OverpassQL_fresh.md",
+    "library_file_id": "libfile_a8b7d2288ee081919d8d4b1a6df380bf",
+    "bytes": 5811,
+    "sha256": "e8bcd0eeac0ddbdd05f2347c32947bc1718d7cc8a7fb5b0a1f76ee08df047c2b",
+    "format": "markdown"
+  },
+  "verification": {
+    "authoritative_language_reference": "OpenStreetMap Wiki Overpass QL / Language Guide",
+    "live_seed_probe": {
+      "status": "PASS",
+      "endpoint": "https://overpass.kumi.systems/api/interpreter",
+      "observed_generator": "Overpass API 0.7.62.11 87bfad18",
+      "probe_scope": "ALBUQUERQUE_I40_MOTORWAY_WAYS",
+      "observed_ref": "I 40",
+      "observed_tags": [
+        "lanes",
+        "maxspeed",
+        "hgv",
+        "hgv:national_network",
+        "oneway",
+        "surface",
+        "bridge",
+        "shoulder"
+      ]
+    },
+    "full_structure_probe": {
+      "status": "INCONCLUSIVE__PUBLIC_MIRROR_INFRASTRUCTURE_ERRORS",
+      "primary_error": "HTTP_504__Dispatcher_Client_request_read_and_idx_timeout__server_probably_too_busy",
+      "alternate_error": "HTTP_500",
+      "interpretation": "NOT_COUNTED_AS_QUERY_PASS_OR_QUERY_FAIL"
+    }
+  },
+  "prompt_requirement_checks": {
+    "overpassql_query": "PASS",
+    "filtered_i40_abq_okc_corridor": "PASS",
+    "interstate_ways": "PASS",
+    "parent_route_relations": "PASS",
+    "member_nodes": "PASS",
+    "related_metadata": "PASS__OUT_META",
+    "speed_analysis_fields": "PASS",
+    "lane_availability_fields": "PASS",
+    "autonomous_freight_hgv_fields": "PASS",
+    "markdown_instructions": "PASS",
+    "overpass_turbo_workflow": "PASS",
+    "direct_api_workflow": "PASS",
+    "validation_checks": "PASS",
+    "limitations_and_authoritative_supplement_note": "PASS"
+  },
+  "hard_nonclaims": [
+    "NO_ARTIFICIAL_ANALYSIS_OWNER_GRADE",
+    "NO_GDPVAL_ELO",
+    "NO_CLAIM_FULL_CORRIDOR_QUERY_RUNTIME_COMPLETED",
+    "NO_CLAIM_SINGLE_TASK_IMPLIES_1846",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
