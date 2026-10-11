@@ -129,6 +129,16 @@ def test_strategic_investments_label_does_not_create_fake_semantic_tail():
     assert out["semantic_tail_required"] is False
 
 
+
+def test_question_contract_emits_bounded_metric_requests():
+    out = compile_question(
+        "Compare revenue, inventory, stockholders' equity and capex for NYSE:AAA."
+    )
+    ids = {x["metric_id"] for x in out["metric_requests"]}
+    assert {"REVENUE", "INVENTORY", "STOCKHOLDERS_EQUITY", "CAPEX"} <= ids
+    assert all(x["issuer_extension_required_if_no_standard_fact"] is True for x in out["metric_requests"])
+
+
 def test_source_hints_are_advisory_only():
     out = compile_question(
         "Use the 8-K and annual report plus closing share price to calculate a return."
