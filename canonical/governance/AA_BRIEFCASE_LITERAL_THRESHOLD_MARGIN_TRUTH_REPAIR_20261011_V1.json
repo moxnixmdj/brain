@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_LITERAL_THRESHOLD_MARGIN_TRUTH_REPAIR_20261011_V1",
+  "date": "2026-10-11",
+  "status": "TRUTH_REPAIR__EXACT_REFERENCE_TRACE_EQUALITY_IS_PARITY_ONLY__LITERAL_1822_REQUIRES_0_15_ELO_MARGIN_OR_DIRECT_FLOOR__ZERO_CREDIT",
+  "target": "AA-Briefcase v1.1 Brain Elo >= 1822 under frozen 2026-09-22 target semantics",
+  "authorities": {
+    "frozen_owner_row": "canonical/evidence/AA_BRIEFCASE_FROZEN_OWNER_NATIVE_ROW_20261011_V1.json",
+    "frozen_precision_reconciliation": "canonical/governance/AA_BRIEFCASE_FROZEN_TARGET_PRECISION_RECONCILIATION_20261011_V1.json",
+    "score_trace_theorem": "canonical/governance/AA_BRIEFCASE_SCORE_BEARING_SUFFICIENT_STATISTIC_THEOREM_20261011_V1.json",
+    "prior_internal_gate": "canonical/runtime/aa_briefcase_internal_only_certification_gate_v2.py"
+  },
+  "frozen_numbers": {
+    "owner_measured_unrounded_reference_elo": 1821.85,
+    "vendor_displayed_integer": 1822,
+    "canonical_literal_threshold_elo": 1822,
+    "threshold_changed": false,
+    "exact_reference_to_literal_threshold_gap_elo": 0.15
+  },
+  "defect": {
+    "prior_route_claim": "REFERENCE_AND_BRAIN_EXACT_SCORE_TRACE_EQUIVALENCE_PLUS_SCORER_EQUIVARIANCE_WAS_TREATED_AS_SUFFICIENT_FOR_LITERAL_1822",
+    "why_unsound": "EXACT_TRACE_AND_SCORER_EQUIVALENCE_REPRODUCES_THE_EXACT_OWNER_MEASURED_REFERENCE_1821_85__NOT_A_LITERAL_UNROUNDED_VALUE_GE_1822",
+    "affected_artifacts": [
+      "canonical/governance/AA_BRIEFCASE_SCORE_BEARING_SUFFICIENT_STATISTIC_THEOREM_20261011_V1.json",
+      "canonical/runtime/aa_briefcase_internal_only_certification_gate_v2.py",
+      "canonical/governance/AA_BRIEFCASE_INTERNAL_ONLY_STRATEGY_OVERRIDE_20261011_V1.json"
+    ]
+  },
+  "repaired_logic": {
+    "exact_trace_equality_effect": "PROVES_REFERENCE_PARITY_AT_1821_85_IF_OWNER_SCORER_EQUIVARIANCE_OR_UNIQUE_FIT_IS_ALSO_BOUND",
+    "literal_threshold_effect": "DOES_NOT_PROVE_BRAIN_GE_1822",
+    "sufficient_numeric_route": "CONTENT_ADDRESSED_SCOPE_COMPLETE_PROOF_OF_CANDIDATE_UNROUNDED_ELO_LOWER_BOUND_GE_1822",
+    "equivalent_margin_route": "CONTENT_ADDRESSED_SCOPE_COMPLETE_PROOF_BRAIN_UNROUNDED_ELO_GE_REFERENCE_UNROUNDED_ELO_PLUS_AT_LEAST_0_15",
+    "exchange_theorem_correction": "STRICT_R_BRAIN_GT_R_OPUS_ALONE_IS_INSUFFICIENT_WHEN_R_OPUS_IS_ONLY_BOUND_AT_1821_85__A_QUANTITATIVE_MARGIN_OR_DIRECT_1822_FLOOR_IS_REQUIRED"
+  },
+  "implementation": {
+    "gate_v3": "canonical/runtime/aa_briefcase_internal_only_certification_gate_v3.py",
+    "tests": "canonical/tests/test_aa_briefcase_internal_only_certification_gate_v3.py"
+  },
+  "current_effect": {
+    "exact_trace_equivalence_route_literal_closure": false,
+    "quantitative_score_trace_route_open_in_principle": true,
+    "current_candidate_unrounded_floor_ge_1822_bound": false,
+    "exact_1822_proved": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_BRAIN_SCORE_EQUALS_1821_85",
+    "NO_CLAIM_BRAIN_SCORE_IS_BELOW_1822",
+    "NO_THRESHOLD_RELAXATION_TO_1821_85",
+    "NO_SCORE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}

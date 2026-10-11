@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_LITERAL_THRESHOLD_MARGIN_GATE_V3_LOCAL_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__10_OF_10__TRACE_EQUALITY_PARITY_ONLY__LITERAL_1822_REQUIRES_QUANTITATIVE_FLOOR__ZERO_CREDIT",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/aa_briefcase_internal_only_certification_gate_v3.py",
+      "git_blob_sha": "6262c6ac09d4cd9d41041481be5c7c9ba75437b0"
+    },
+    "tests": {
+      "path": "canonical/tests/test_aa_briefcase_internal_only_certification_gate_v3.py",
+      "git_blob_sha": "2976d038d4dd39a610c96f7f402ba1b0c56a33ea"
+    }
+  },
+  "replay": {
+    "tests_run": 10,
+    "tests_passed": 10,
+    "tests_failed": 0,
+    "verified": [
+      "EXACT_REFERENCE_TRACE_EQUALITY_IS_REFERENCE_PARITY_ONLY",
+      "CANDIDATE_UNROUNDED_FLOOR_1822_CLOSES_QUANTITATIVE_ROUTE",
+      "FLOOR_1821_999_DOES_NOT_CLOSE",
+      "EXACT_REFERENCE_FLOOR_1821_85_DOES_NOT_CLOSE",
+      "WRONG_REFERENCE_PRECISION_FAILS_CLOSED",
+      "THRESHOLD_CHANGE_IS_REJECTED",
+      "COMPLETE_TOP_SUPPORT_ROUTE_REMAINS_ADMISSIBLE",
+      "EXTERNAL_HELP_MODE_REJECTED",
+      "MISSING_TARGET_IDENTITY_BLOCKS",
+      "REQUIRED_REFERENCE_TO_THRESHOLD_MARGIN_IS_0_15_ELO"
+    ]
+  },
+  "truth": {
+    "owner_reference_unrounded_elo": 1821.85,
+    "literal_threshold_elo": 1822,
+    "exact_trace_equality_sufficient_for_literal_threshold": false,
+    "minimum_required_improvement_over_exact_reference_elo": 0.15,
+    "current_literal_threshold_proved": false
+  },
+  "hard_nonclaims": [
+    "NO_BRAIN_SCORE",
+    "NO_CLAIM_BRAIN_EQUALS_REFERENCE",
+    "NO_THRESHOLD_RELAXATION",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
