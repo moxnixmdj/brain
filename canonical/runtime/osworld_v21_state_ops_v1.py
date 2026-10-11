@@ -90,7 +90,10 @@ def _compile_op(op: Mapping[str, Any]) -> str:
 
     if kind == "MKDIR":
         p = _path(op.get("path"))
-        return f"pathlib.Path({p!r}).mkdir(parents=True, exist_ok=True)"
+        return (
+            f"_p=pathlib.Path({p!r}); _p.mkdir(parents=True, exist_ok=True); "
+            f"print('MKDIR:PASS:{p}:exists='+str(_p.is_dir()))"
+        )
 
     if kind == "WRITE_TEXT":
         p = _path(op.get("path"))
@@ -101,7 +104,8 @@ def _compile_op(op: Mapping[str, Any]) -> str:
             raise StateOpsError("WRITE_TEXT_TOO_LARGE")
         return (
             f"_p=pathlib.Path({p!r}); _p.parent.mkdir(parents=True, exist_ok=True); "
-            f"_p.write_text({text!r}, encoding='utf-8')"
+            f"_n=_p.write_text({text!r}, encoding='utf-8'); "
+            f"_b=_p.read_bytes(); print('WRITE_TEXT:PASS:{p}:chars='+str(_n)+':bytes='+str(len(_b))+':sha256='+hashlib.sha256(_b).hexdigest())"
         )
 
     if kind == "COPY":
@@ -110,7 +114,8 @@ def _compile_op(op: Mapping[str, Any]) -> str:
         return (
             f"_s=pathlib.Path({src!r}); _d=pathlib.Path({dst!r}); "
             "_d.parent.mkdir(parents=True, exist_ok=True); "
-            "shutil.copy2(_s, _d)"
+            "shutil.copy2(_s, _d); _b=_d.read_bytes(); "
+            f"print('COPY:PASS:{src}->{dst}:bytes='+str(len(_b))+':sha256='+hashlib.sha256(_b).hexdigest())"
         )
 
     if kind == "MOVE":
@@ -119,14 +124,16 @@ def _compile_op(op: Mapping[str, Any]) -> str:
         return (
             f"_s=pathlib.Path({src!r}); _d=pathlib.Path({dst!r}); "
             "_d.parent.mkdir(parents=True, exist_ok=True); "
-            "shutil.move(str(_s), str(_d))"
+            "shutil.move(str(_s), str(_d)); "
+            f"print('MOVE:PASS:{src}->{dst}:exists='+str(_d.exists()))"
         )
 
     if kind == "DELETE":
         p = _path(op.get("path"))
         return (
             f"_p=pathlib.Path({p!r}); "
-            "shutil.rmtree(_p) if _p.is_dir() else (_p.unlink() if _p.exists() else None)"
+            "shutil.rmtree(_p) if _p.is_dir() else (_p.unlink() if _p.exists() else None); "
+            f"print('DELETE:PASS:{p}:exists='+str(_p.exists()))"
         )
 
     if kind == "READ_TEXT":
@@ -134,7 +141,10 @@ def _compile_op(op: Mapping[str, Any]) -> str:
         max_chars = op.get("max_chars", 8000)
         if isinstance(max_chars, bool) or not isinstance(max_chars, int) or not 1 <= max_chars <= 20000:
             raise StateOpsError("READ_TEXT_MAX_CHARS_INVALID")
-        return f"_p=pathlib.Path({p!r}); print(_p.read_text(encoding='utf-8')[:{max_chars}])"
+        return (
+            f"_p=pathlib.Path({p!r}); _v=_p.read_text(encoding='utf-8')[:{max_chars}]; "
+            f"print('READ_TEXT:PASS:{p}:chars='+str(len(_v))); print(_v)"
+        )
 
     if kind == "ASSERT_PATH_EXISTS":
         p = _path(op.get("path"))
@@ -159,7 +169,7 @@ def _compile_op(op: Mapping[str, Any]) -> str:
         p = _path(op.get("path"))
         return (
             f"_p=pathlib.Path({p!r}); "
-            "print(hashlib.sha256(_p.read_bytes()).hexdigest())"
+            f"print('SHA256_FILE:PASS:{p}:sha256='+hashlib.sha256(_p.read_bytes()).hexdigest())"
         )
 
     if kind == "JSON_SET":
@@ -172,7 +182,8 @@ def _compile_op(op: Mapping[str, Any]) -> str:
         return (
             f"_p=pathlib.Path({p!r}); _o=json.loads(_p.read_text(encoding='utf-8')); "
             f"_o[{key!r}]=json.loads({encoded!r}); "
-            "_p.write_text(json.dumps(_o,ensure_ascii=False,indent=2)+'\\n',encoding='utf-8')"
+            "_p.write_text(json.dumps(_o,ensure_ascii=False,indent=2)+'\\n',encoding='utf-8'); "
+            f"_b=_p.read_bytes(); print('JSON_SET:PASS:{p}:key={key}:sha256='+hashlib.sha256(_b).hexdigest())"
         )
 
     if kind == "RUN_CLI":
@@ -201,7 +212,8 @@ def _compile_op(op: Mapping[str, Any]) -> str:
             raise StateOpsError("RUN_CLI_TIMEOUT_INVALID")
         return (
             f"_r=subprocess.run({list(argv)!r},check=True,capture_output=True,text=True,"
-            f"timeout={timeout}); print(_r.stdout[-4000:])"
+            f"timeout={timeout}); print('RUN_CLI:PASS:{exe}:returncode='+str(_r.returncode)); "
+            "print(_r.stdout[-4000:]) if _r.stdout else None"
         )
 
     raise StateOpsError("UNSUPPORTED_STATE_OP:" + kind)
