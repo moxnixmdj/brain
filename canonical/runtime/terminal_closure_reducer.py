@@ -14,6 +14,8 @@ import json
 from pathlib import Path
 from typing import Any
 
+from canonical.runtime.runtime_cognition_credit_guard_v1 import assert_credit_path_cognition_governance
+
 REQUIRED_FAMILY_COUNT = 19
 REQUIRED_COUNTERS = (
     "uncontracted_required_behaviors",
@@ -285,6 +287,7 @@ def evaluate_manifest(
     manifest: dict[str, Any],
     repo_root: Path | None = None,
 ) -> dict[str, Any]:
+    assert_credit_path_cognition_governance(Path(__file__).resolve().parents[2])
     failures: list[str] = []
 
     if manifest.get("expected_family_count") != REQUIRED_FAMILY_COUNT:
@@ -413,6 +416,7 @@ def evaluate_frontier_state(
     Any disagreement about implementation authority, prequalification, or
     terminal-evidence admission fails closed instead of scheduling more work.
     """
+    assert_credit_path_cognition_governance(Path(__file__).resolve().parents[2])
     failures: list[str] = []
 
     if not all(
