@@ -1,4 +1,5 @@
 name: Full private current-main regression
+# trigger: exact-main regression 2026-10-11 v3
 
 on:
   pull_request:
