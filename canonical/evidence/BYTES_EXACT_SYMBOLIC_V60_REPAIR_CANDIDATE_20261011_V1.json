@@ -1,0 +1,154 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_V60_REPAIR_CANDIDATE_20261011_V1",
+  "date": "2026-10-11",
+  "status": "CANDIDATE_PRESERVED__SPENT_NEXT66_REPAIR_PASS__NEXT67_FROZEN_LOCALLY_UNSPENT__LIBRARY_PERSISTENCE_BLOCKED__DO_NOT_PROMOTE",
+  "objective": "Preserve the exact post-NEXT66 truth repair and six independently clean utility cuts without advancing the canonical Bytes frontier until the repaired archive and NEXT67 are durably persisted and NEXT67 is executed exactly once.",
+  "canonical_incumbent_at_discovery": {
+    "version": "V58",
+    "manifest_sha256": "409dd682c47e2a25acc2915af689650757f02cf828826a9854d06c0e386bb1c1",
+    "raw_python_source_bytes": 1713212,
+    "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_TWO_UTILITY_V58_SUCCESSOR_EXECUTION_20261011_V1.json"
+  },
+  "experimental_predecessor_v59": {
+    "status": "DURABLE_EXPERIMENTAL_PREDECESSOR__FALSIFIED_BY_NEXT66__NOT_CANONICAL_AUTHORITY",
+    "manifest_sha256": "694f9c52e40530f4c41fe46e4ba01001f8d0a672c8e1cf2024d2cee15bda757c",
+    "raw_python_source_bytes": 1713085,
+    "archive_sha256": "09f651ba9d38870c1b9f28536a9d30ccd07adcdb8fbe1ea38452257188ee546c",
+    "archive_library_file_id": "libfile_708521dbd4348191a0a5c48228684218",
+    "archive_library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V59_SUCCESSOR_20261011_V1.tar.xz",
+    "specialized_body": "mpmath/libmp/libmpf.py::mpf_abs",
+    "next66_pre_repair_result": "17018/17020"
+  },
+  "fresh_falsifier_now_spent": {
+    "id": "QUAL_SUCCESSOR_NEXT66_20261011_V1",
+    "cases": 17020,
+    "corpus_sha256": "6721df00b28a1d18d5efb16ae8a270b4dde24ebca33ded0e1d55d6655114e7f4",
+    "library_file_id": "libfile_a302cc7eab4081919d74cc4abdc29178",
+    "spent": true,
+    "failing_cases": [
+      {
+        "global_index": 5040,
+        "op": "roots",
+        "p": [
+          -1,
+          4,
+          -6,
+          4,
+          -4
+        ],
+        "expected": "3bc8b8...",
+        "root_cause": "V59_MPF_ABS_SPECIALIZATION_DROPPED_PRECISION_SPECIFIED_NORMALIZATION"
+      },
+      {
+        "global_index": 5890,
+        "op": "roots",
+        "p": [
+          -2,
+          1,
+          -6,
+          -4,
+          -4
+        ],
+        "expected": "52e7d0...",
+        "root_cause": "INHERITED_V55_MPF_PERTURB_FONE_ONLY_SPECIALIZATION_REJECTED_REQUIRED_POSITIVE_NONFONE_ROUND_DOWN_CLASS"
+      }
+    ],
+    "causal_bisect": [
+      "V54_PASSES_BOTH_CASES",
+      "V55_PASSES_CASE_5040_AND_FAILS_CASE_5890",
+      "V56_V57_V58_PASS_CASE_5040_AND_FAIL_CASE_5890",
+      "EXPERIMENTAL_V59_FAILS_BOTH_CASES"
+    ]
+  },
+  "repair": {
+    "transform_path": "canonical/research/bytes/tools/conservative_repaired_eight_delta_v60.py",
+    "transform_sha256": "f67856fd99dc72c3c9cf2b2535be25fc3f251a119b39e6eec1a618e4b0cd4c5e",
+    "base_manifest_sha256": "694f9c52e40530f4c41fe46e4ba01001f8d0a672c8e1cf2024d2cee15bda757c",
+    "target_manifest_sha256": "6ab3ad3366fe10d0d081784d61838d097eac1c242cee729453d78d48ede5033e",
+    "raw_python_source_bytes": 1713090,
+    "delta_vs_canonical_v58_bytes": -122,
+    "delta_vs_experimental_v59_bytes": 5,
+    "changes": [
+      {
+        "function": "mpf_abs",
+        "old_body_bytes": 126,
+        "new_body_bytes": 249,
+        "delta": 123,
+        "role": "RESTORE_ONLY_PRECISION_SPECIFIED_NORMALIZATION_AND_OBSERVED_SIGNED_NO_PREC_ROUTE"
+      },
+      {
+        "function": "mpf_perturb",
+        "old_body_bytes": 259,
+        "new_body_bytes": 283,
+        "delta": 24,
+        "role": "WIDEN_ONLY_POSITIVE_NONZERO_ROUND_DOWN_EPS_SIGN_0_OR_1"
+      },
+      {
+        "function": "mpf_nint",
+        "delta": -21,
+        "role": "FAIL_CLOSED"
+      },
+      {
+        "function": "mpf_ceil",
+        "delta": -21,
+        "role": "FAIL_CLOSED"
+      },
+      {
+        "function": "mpf_floor",
+        "delta": -19,
+        "role": "FAIL_CLOSED"
+      },
+      {
+        "function": "to_bstr",
+        "delta": -32,
+        "role": "FAIL_CLOSED"
+      },
+      {
+        "function": "to_man_exp",
+        "delta": -21,
+        "role": "FAIL_CLOSED"
+      },
+      {
+        "function": "mpf_eq",
+        "delta": -28,
+        "role": "FAIL_CLOSED"
+      }
+    ],
+    "spent_next66_replay": {
+      "passed": 17020,
+      "failed": 0
+    },
+    "clean_room_reconstruction": "PASS__278_OF_278_DURABLE_FILES_BYTE_IDENTICAL",
+    "deterministic_archive": {
+      "bytes": 267272,
+      "sha256": "9c721b1bc58fb3ea9a9e811c859a93da9b188bf7367953e93b9873679abf5f9f"
+    }
+  },
+  "next_frozen_candidate_corpus": {
+    "id": "QUAL_SUCCESSOR_NEXT67_20261011_V1",
+    "cases": 17250,
+    "seed": 3765437090,
+    "per_operation_budget": 1500,
+    "sha256": "aab6e4fb65f266211585f9d60c88c3dcc2834ca832d91c50357edd7bd2ac20be",
+    "bytes": 2039910,
+    "generator_git_blob_sha": "1a97ca1f7b93affc50ae7d22276672e4b74c4e30",
+    "status": "LOCALLY_FROZEN_UNSPENT__NOT_DURABLY_PERSISTED__DO_NOT_EXECUTE"
+  },
+  "persistence_block": {
+    "archive_target_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V60_REPAIRED_SUCCESSOR_20261011_V1.tar.xz",
+    "next67_target_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT67_20261011_V1.jsonl",
+    "files_manage_library_result": "FAILED__container_session_expired",
+    "consequence": "NO_PROMOTION_AND_NO_NEXT67_EXECUTION_UNTIL_DURABLE_LIBRARY_PERSISTENCE_SUCCEEDS"
+  },
+  "hard_nonclaims": [
+    "NO_V60_CANONICAL_FRONTIER_PROMOTION",
+    "NO_NEXT67_EXECUTION_OR_FRESHNESS_CONSUMPTION",
+    "NO_CLAIM_EXPERIMENTAL_V59_WAS_SOUND",
+    "NO_CAPABILITY_ACCEPTANCE_OWNERSHIP_QUALITY_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "acceptance_credit_delta": 0,
+  "promotion_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
