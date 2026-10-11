@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_SCALE_BRAIN_SUBMISSION_RECEIPT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__FRESH_ROW26_SCRA_COMPLIANCE_TEST_WORKBOOK_FROZEN__AUTHORITATIVE_STATUTORY_BINDING_AND_XLSX_QA_PASS__ZERO_OWNER_SCORE_CREDIT",
+  "benchmark": "GDPval-AA v2.1",
+  "subject": {
+    "row_idx": 26,
+    "task_id": "7bbfcfe9-132d-4194-82bb-d6f29d001b01",
+    "sector": "Government",
+    "occupation": "Compliance Officers"
+  },
+  "precommit": "canonical/governance/GDPVAL_SCALE_FRESH_BATCH_ROWS25_34_PRECOMMIT_20261011_V1.json",
+  "packet": {
+    "manifest_root_sha256": "f69af30fcea243ccb25d44c4a5380be0cdcac621287568525065034ce6cedae8",
+    "prompt_sha256": "9dd55e1859495454b7442fda329c8888d75cf3477259e8b275c283ff29f9972f",
+    "allowed_projection_sha256": "90d75a503233ee719e262258d2e93812f5e3fd2384fa82480743e3356de57757",
+    "reference_count": 0
+  },
+  "freshness": {
+    "task_id_frozen_before_prompt_read": true,
+    "official_dataset_field_firewall_used": true,
+    "rubric_read_before_output_freeze": false,
+    "human_gold_read_before_output_freeze": false,
+    "third_party_model_submission_read_before_output_freeze": false,
+    "judge_feedback_read_before_output_freeze": false
+  },
+  "authoritative_statutory_bindings": [
+    {
+      "citation": "50 U.S.C. § 3937",
+      "source": "U.S. Government Publishing Office, United States Code 2024 Edition",
+      "tests": ["SCRA-12a","SCRA-12b","SCRA-12c","SCRA-12d"]
+    },
+    {
+      "citation": "50 U.S.C. § 3919",
+      "source": "Office of the Law Revision Counsel, current preliminary United States Code",
+      "tests": ["SCRA-13","SCRA-14","SCRA-15","SCRA-16","SCRA-17","SCRA-18"]
+    }
+  ],
+  "deliverable": {
+    "format": "xlsx",
+    "filename": "GDPval_7bbfcfe9_SCRA_Compliance_Test_Questions.xlsx",
+    "sha256": "5b152fc7e8bb5d2a0c1215efc1ac690f9bf9a2e0a154785263013d2b9d2fd634",
+    "library_path": "/Project Brain/GDPval/scale/7bbfcfe9-132d-4194-82bb-d6f29d001b01/GDPval_7bbfcfe9_SCRA_Compliance_Test_Questions.xlsx",
+    "library_file_id": "libfile_2e4bf201568c8191a2862b06f45e43e6",
+    "sheet_count": 1,
+    "question_count": 10
+  },
+  "verification": {
+    "visual_render_inspection": "PASS__A1_F14__READABLE_NO_CLIPPING_OR_OVERLAP",
+    "formula_error_scan": "PASS__ZERO_MATCHES",
+    "exact_requested_identifiers_present": true,
+    "section_3937_question_count": 4,
+    "section_3919_question_count": 6,
+    "each_question_on_separate_row": true,
+    "citation_present_each_row": true,
+    "response_validation_values": ["Yes","No","Not Applicable"],
+    "reviewer_evidence_column_present": true,
+    "source_url_column_present": true
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_WORKBOOK_REPLACES_REGULATOR_SPECIFIC_EXAMINATION_PROCEDURES_OR_LEGAL_COUNSEL",
+    "NO_ARTIFICIAL_ANALYSIS_OWNER_SCORE",
+    "NO_GDPVAL_ELO",
+    "NO_1846_THRESHOLD_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
