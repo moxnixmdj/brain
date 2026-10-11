@@ -1,0 +1,101 @@
+{
+  "schema": "PROJECT_BRAIN_V6B_MEASURED_SEMANTIC_ACCEPTANCE_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__PRIMARY_44_OF_44__SECOND_CARRIER_44_OF_44__CONTENT_ADDRESSED_MEASUREMENT__SOURCE_GROUNDED_BEHAVIOR__LOSSLESS_COMPOSED_ACCEPTANCE__ZERO_MODEL__ZERO_SPEND",
+  "subject": {
+    "runtimes": [
+      {
+        "path": "canonical/runtime/independent_candidate_measurement_v1.py",
+        "git_blob_sha": "c4264a52f9c9ade5569a18fde9a61721d3a5fd1e"
+      },
+      {
+        "path": "canonical/runtime/measured_raw_task_acceptance_v1.py",
+        "git_blob_sha": "8aa3615418b1b118ec55e9f9bd16c51b1b5a4fd6"
+      },
+      {
+        "path": "canonical/runtime/source_grounded_python_behavior_acceptance_v1.py",
+        "git_blob_sha": "230f18380804ed7c4b2598badce20eefe3a73795"
+      },
+      {
+        "path": "canonical/runtime/composed_raw_software_acceptance_v1.py",
+        "git_blob_sha": "d2b59e09824fd57b3dd9139808f4d209dca69559"
+      }
+    ],
+    "tests": [
+      {
+        "path": "canonical/tests/test_independent_candidate_measurement_v1.py",
+        "git_blob_sha": "7a3142ba9a31ffee3c4fec838f4a97fc582b2764",
+        "count": 10
+      },
+      {
+        "path": "canonical/tests/test_measured_raw_task_acceptance_v1.py",
+        "git_blob_sha": "e26ea8f3a0356c4f5ee98cbad8ed3e40698cbd7b",
+        "count": 10
+      },
+      {
+        "path": "canonical/tests/test_source_grounded_python_behavior_acceptance_v1.py",
+        "git_blob_sha": "8b55f0298e6da3ecab8a3dbf66eab7ff0b8e415a",
+        "count": 13
+      },
+      {
+        "path": "canonical/tests/test_composed_raw_software_acceptance_v1.py",
+        "git_blob_sha": "c0642222e8d1ee0d982daf1a9198d7f139241888",
+        "count": 11
+      }
+    ],
+    "dependency_cone": {
+      "raw_task_objective_acceptance_executor_v1": "c138171744406edd8e75e4867634febdb596014b",
+      "lossless_raw_task_contract_v1": "53a440fccf91aa08f18abfff4f283e5fd18d9fcd",
+      "raw_task_acceptance_residual_localizer_v1": "f29616cf7726959aa28db4ed6541a9fc0bc2ac76",
+      "instruction_constraint_compiler_v1": "a4a3f87f827bd6f0f85fe70c77a1de5aa3237c6f",
+      "source_aligned_acceptance_program_v1": "742c183cccc2ec4bb5f94e88048590e2991dacd4",
+      "typed_acceptance_program_v1": "7fd2e575bd2d5c36f48c713f15177d5b0d7e68c5",
+      "structured_method_expression_ast_candidate_v2": "7623f68bab3c1b207e237389841a4b688e509ff3",
+      "explicit_requirement_index_v2": "525fac941302254a47710aaae30b0174fab2cb40",
+      "bounded_predicate_argument_semantics": "c7f190927e31fa2ab32f129b43402e98ea836498",
+      "bounded_task_directive_semantics_v1": "e3a4c01cc08e7a569692a5d6f03a6feec69934bf"
+    }
+  },
+  "replay": {
+    "primary": {
+      "carrier": "Sprites:brain-capability-first-scheduler-verify-20261008-v1",
+      "working_directory": "/home/sprite/v6b-independent-measurement-v1",
+      "passed": 44,
+      "total": 44
+    },
+    "independent": {
+      "carrier": "Sprites:brain-frontiercode-route-refresh-verify-20261008-v1",
+      "working_directory": "/home/sprite/v6b-composed-independent",
+      "passed": 44,
+      "total": 44
+    }
+  },
+  "proved": [
+    "CANDIDATE_TREE_AND_VERIFIER_BYTES_CONTENT_ADDRESSED",
+    "VERIFIER_EXECUTED_OUTSIDE_CANDIDATE_UNDER_ISOLATED_PYTHON",
+    "BUILDER_DECLARATIONS_CANNOT_OVERRIDE_INDEPENDENT_MEASUREMENT",
+    "MEASUREMENT_SCHEMA_EXTRA_OR_MISMATCH_FAILS_CLOSED",
+    "RAW_OBJECTIVE_TYPED_FIELDS_CONSUME_ONLY_INDEPENDENT_MEASUREMENT_RECEIPTS",
+    "EXPLICIT_SOURCE_SEGMENT_PYTHON_RETURN_AND_BUILTIN_EXCEPTION_BEHAVIOR_COMPILES_TO_DETERMINISTIC_VERIFIER",
+    "AMBIGUOUS_OR_UNSUPPORTED_SOURCE_TEXT_REMAINS_BLOCKING_SEMANTIC_RESIDUAL",
+    "OBJECTIVE_AND_BEHAVIOR_ACCEPTANCE_ROUTES_COMPOSE_OVER_ONE_LOSSLESS_RAW_OBLIGATION_LEDGER",
+    "ALL_ACCEPTANCE_MEASUREMENTS_BIND_ONE_CANDIDATE_SNAPSHOT",
+    "ACCEPTANCE_STOP_ONLY_WHEN_EVERY_RAW_OBLIGATION_IS_COVERED_AND_PASSES",
+    "ZERO_EXTERNAL_GENERAL_PURPOSE_MODEL_RUNTIME_COGNITION",
+    "ZERO_INCREMENTAL_SPEND"
+  ],
+  "open": [
+    "ARBITRARY_NATURAL_LANGUAGE_SEMANTIC_ACCEPTANCE",
+    "SIDE_EFFECT_STATEFUL_ASYNC_OBJECT_METHOD_CLI_API_FILE_IO_BEHAVIOR_FAMILIES",
+    "GENERAL_HIDDEN_REQUIREMENTS_AND_MERGEABILITY",
+    "PROVENANCE_GUIDED_REPAIR_LOOP_NOT_YET_CAUSALLY_DRIVEN_BY_THIS_ACCEPTANCE_CONTROLLER",
+    "NON_PYTHON_SEMANTIC_ACCEPTANCE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "model_dependency_count": 0,
+    "external_general_purpose_model_runtime_dependency_count": 0,
+    "frontiercode_score_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
