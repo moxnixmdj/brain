@@ -40,6 +40,20 @@ class AutomationBenchPolicyStateMachineV2Tests(unittest.TestCase):
         ]
         self.goal = "Find the Acme shipment order, then set the shipment status to delivered."
 
+    def test_discovery_phase_uses_generic_query_generator(self):
+        out = next_policy_action(
+            prompt="Find the cobalt shipment and update the status to complete.",
+            history=[],
+        )
+        self.assertEqual(out["phase"], "DISCOVER_ENDPOINTS")
+        queries = [x["arguments"]["query"] for x in out["calls"]]
+        joined = " | ".join(queries)
+        self.assertIn("shipment", joined)
+        self.assertTrue("update" in joined or "patch" in joined)
+        self.assertNotIn("gmail", joined.lower())
+        self.assertNotIn("salesforce", joined.lower())
+        self.assertNotIn("asana", joined.lower())
+
     def test_full_generic_observe_mutate_verify_loop(self):
         history = search_history(self.endpoints)
 
@@ -195,6 +209,7 @@ class AutomationBenchPolicyStateMachineV2Tests(unittest.TestCase):
     def test_v2_source_has_no_legacy_app_specific_compiler_import(self):
         source = inspect.getsource(state_machine_v2)
         self.assertNotIn("automationbench_mutation_compiler_v1", source)
+        self.assertNotIn("automationbench_owned_policy_kernel_v1", source)
         self.assertNotIn("compile_salesforce", source)
         self.assertNotIn("compile_asana", source)
 

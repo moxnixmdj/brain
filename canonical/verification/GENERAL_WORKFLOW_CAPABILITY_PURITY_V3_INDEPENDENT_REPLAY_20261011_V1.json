@@ -1,0 +1,102 @@
+{
+  "schema": "PROJECT_BRAIN_GENERAL_WORKFLOW_CAPABILITY_PURITY_V3_INDEPENDENT_REPLAY_20261011_V1",
+  "status": "PASS__GENERIC_DISCOVERY_ABLATION_AND_COMPATIBILITY_REPLAY__ZERO_ACCEPTANCE_CREDIT",
+  "date": "2026-10-11",
+  "mission_scope": {
+    "capability": "GENERAL_WORKFLOW_CAPABILITY_PURITY_V3",
+    "exact_private_predicate": "AUTOMATIONBENCH_GE_40",
+    "exact_private_predicate_status": "OPEN",
+    "benchmark_role": "MEASUREMENT_SURFACE_ONLY",
+    "development_target": "BENCHMARK_AGNOSTIC_GOAL_STATE_TOOL_EFFECT_LOOP",
+    "no_goal_substitution": true
+  },
+  "candidate": {
+    "branch": "general-workflow-capability-purity-v3-20261011-sol",
+    "verified_head_sha": "0cb735c04c35fd6ebd46d2bdf15f6b86744e8772",
+    "baseline_canonical_merge_sha": "8d33a34cb62da3f9ca6cb80016d75e24862d2d2f",
+    "generic_discovery_path": "canonical/runtime/generic_tool_schema_discovery_v1.py",
+    "generic_discovery_git_blob_sha": "c8065f1d481beb6360251b0fcaef1f90da027157",
+    "transport_state_machine_path": "canonical/runtime/automationbench_policy_state_machine_v2.py",
+    "transport_state_machine_git_blob_sha": "78ceb000468a5868f51eec922e677be292bd083a",
+    "general_planner_path": "canonical/runtime/generic_goal_tool_effect_planner_v2.py",
+    "general_argument_binder_path": "canonical/runtime/generic_tool_argument_binder_v1.py",
+    "general_state_verifier_path": "canonical/runtime/generic_goal_state_verifier_v2.py",
+    "stirrup_adapter_path": "canonical/runtime/automationbench_stirrup_client_v1.py"
+  },
+  "causal_finding": {
+    "pre_repair_defect": "ACTIVE_V2_TOOL_DISCOVERY_IMPORTED_AUTOMATIONBENCH_OWNED_POLICY_KERNEL_V1_SEARCH_QUERIES_WITH_VENDOR_AND_APP_ALIASES",
+    "why_load_bearing": "DISCOVERY_QUERIES_DETERMINE_WHICH_DYNAMIC_TOOL_SCHEMAS_ENTER_THE_GENERIC_PLANNER",
+    "repair": "REPLACE_WITH_GENERIC_TOOL_SCHEMA_DISCOVERY_V1_DERIVED_ONLY_FROM_GENERIC_ACTION_CLASSES_AND_RESOURCE_TERMS",
+    "app_or_task_specific_handlers_added": 0,
+    "private_content_used": false
+  },
+  "ablation": {
+    "active_v2_imports_legacy_mutation_compiler": false,
+    "active_v2_imports_app_alias_discovery_kernel": false,
+    "generic_discovery_contains_known_benchmark_or_vendor_literals": false,
+    "renamed_surface_tests_pass": true,
+    "old_app_specific_files_retained_only_as_transitional_zero_credit_scaffolding": true
+  },
+  "verification_carrier": {
+    "type": "EXISTING_REMOTE_SPRITE",
+    "sprite_name": "brain-live-runtime-v1-verify-20261008",
+    "sprite_id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13",
+    "new_sprite_provisioned": false,
+    "laptop_used": false,
+    "replay_directory": "/tmp/automationbench-general-v2-replay"
+  },
+  "replay": {
+    "focused_modules": [
+      "canonical.tests.test_generic_tool_schema_discovery_v1",
+      "canonical.tests.test_generic_goal_tool_effect_planner_v1",
+      "canonical.tests.test_generic_tool_argument_binder_v1",
+      "canonical.tests.test_generic_goal_tool_effect_planner_v2",
+      "canonical.tests.test_generic_goal_state_verifier_v1",
+      "canonical.tests.test_generic_goal_state_verifier_v2",
+      "canonical.tests.test_automationbench_policy_state_machine_v2",
+      "canonical.tests.test_automationbench_stirrup_client_v1"
+    ],
+    "focused_tests_run": 62,
+    "focused_failures": 0,
+    "focused_errors": 0,
+    "focused_result": "PASS",
+    "full_compatibility_modules": [
+      "canonical.tests.test_generic_tool_schema_discovery_v1",
+      "canonical.tests.test_generic_goal_tool_effect_planner_v1",
+      "canonical.tests.test_generic_tool_argument_binder_v1",
+      "canonical.tests.test_generic_goal_tool_effect_planner_v2",
+      "canonical.tests.test_generic_goal_state_verifier_v1",
+      "canonical.tests.test_generic_goal_state_verifier_v2",
+      "canonical.tests.test_automationbench_owned_policy_kernel_v1",
+      "canonical.tests.test_automationbench_mutation_compiler_v1",
+      "canonical.tests.test_automationbench_policy_state_machine_v1",
+      "canonical.tests.test_automationbench_policy_state_machine_v2",
+      "canonical.tests.test_automationbench_stirrup_client_v1"
+    ],
+    "full_tests_run": 88,
+    "full_failures": 0,
+    "full_errors": 0,
+    "full_result": "PASS"
+  },
+  "remaining_open_classes": [
+    "FORBIDDEN_ACTION_CLASSES_OTHER_THAN_DELETE_WHEN_NON_EXECUTION_CANNOT_BE_INDEPENDENTLY_ESTABLISHED",
+    "FULL_PRIVATE_657_SCOPE_COMPLETENESS",
+    "EXACT_PRIVATE_OWNER_RESULT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "private_tasks_exposed": 0,
+    "private_results_observed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_AUTOMATIONBENCH_GE_40_IS_PROVED",
+    "NO_CLAIM_88_TEST_REPLAY_IS_SCOPE_COMPLETE_FOR_PRIVATE_657",
+    "NO_PUBLIC_TO_PRIVATE_SCORE_TRANSFER_CLAIM",
+    "NO_CLAIM_UNSUPPORTED_NEGATIVE_CONSTRAINTS_ARE_SOLVED",
+    "NO_ACCEPTANCE_OR_FAMILY_PROMOTION_FROM_THIS_RECEIPT"
+  ]
+}
