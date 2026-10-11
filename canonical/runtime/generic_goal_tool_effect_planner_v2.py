@@ -231,23 +231,50 @@ def build_planning_problem(
         x for x in (contract.get("intents") or [])
         if not x.get("forbidden")
     ]
-    if not positive:
-        return {
-            "schema": SCHEMA,
-            "status": contract.get("status"),
-            "contract": contract,
-            "problem": None,
-            "capability_meta": {},
-            "endpoint_profiles": [],
-            "route_ambiguities": [],
-        }
-
     profiles: list[dict[str, Any]] = []
     for endpoint in endpoints:
         try:
             profiles.append(profile_endpoint(endpoint))
         except ValueError:
             continue
+
+    if not positive:
+        forbidden = [
+            x for x in (contract.get("intents") or [])
+            if x.get("forbidden")
+        ]
+        constraint_reads: list[str] = []
+        for intent in forbidden:
+            ranked: list[tuple[int, str]] = []
+            for profile in profiles:
+                if profile.get("action_class") != "observe":
+                    continue
+                overlap = _resource_overlap(intent, profile)
+                if not overlap:
+                    continue
+                score = 4 * len(overlap)
+                semantics = set(
+                    str(x) for x in profile.get("response_semantics") or []
+                )
+                if "id" in semantics:
+                    score += 2
+                if "name" in semantics:
+                    score += 1
+                ranked.append((score, str(profile["id"])))
+            ranked.sort(key=lambda x: (-x[0], x[1]))
+            for _, endpoint_id in ranked[:2]:
+                if endpoint_id not in constraint_reads:
+                    constraint_reads.append(endpoint_id)
+        return {
+            "schema": SCHEMA,
+            "status": contract.get("status"),
+            "contract": contract,
+            "problem": None,
+            "capability_meta": {},
+            "endpoint_profiles": profiles,
+            "route_ambiguities": [],
+            "constraint_verification_endpoint_ids": constraint_reads,
+        }
 
     candidate_map, ambiguities = _mutation_candidates(
         goal=goal,
@@ -444,9 +471,17 @@ def plan_goal_over_tool_schemas(
     if built.get("problem") is None:
         return {
             **built,
-            "pass": built.get("status") == "NO_POSITIVE_ACTION_REQUIRED",
+            "pass": built.get("status") == "NO_POSITIVE_ACTION_REQUIRED"
+            and bool(built.get("constraint_verification_endpoint_ids") or [])
+            or (
+                built.get("status") == "NO_POSITIVE_ACTION_REQUIRED"
+                and not (built.get("contract", {}).get("forbidden_intent_ids") or [])
+            ),
             "plan": [],
             "steps": [],
+            "verification_endpoint_ids": list(
+                built.get("constraint_verification_endpoint_ids") or []
+            ),
         }
     if built.get("route_ambiguities"):
         return {
