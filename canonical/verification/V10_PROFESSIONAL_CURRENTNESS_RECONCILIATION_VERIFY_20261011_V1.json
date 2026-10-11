@@ -1,0 +1,82 @@
+{
+  "schema": "PROJECT_BRAIN_V10_PROFESSIONAL_CURRENTNESS_RECONCILIATION_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__CONNECTOR_EXACT_BYTE_CURRENTNESS_RECOMPUTATION__15_OF_15__NONINDEPENDENT__ZERO_SEMANTIC_OR_TERMINAL_CREDIT",
+  "subject": {
+    "live": [
+      "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
+      "f038f9be052381ff355ef0aa60b6231db932b9d5"
+    ],
+    "professional": [
+      "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
+      "219fcd3aab318bde5d64e955a430ea7e60d7bf8e"
+    ],
+    "assurance": [
+      "canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json",
+      "27acc7e80c0b85a778b8f8dbbd77aefe312ceef8"
+    ],
+    "scheduler": [
+      "canonical/governance/CURRENT_DEVELOPMENT_SCHEDULER.json",
+      "60503f913b42886e96dd27564e38fbfa90d988dc"
+    ],
+    "reuse": [
+      "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
+      "fbc6d0517869923bbf0ee848d921db1f203a7a39"
+    ],
+    "mission": [
+      "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
+      "0e872c772f522afe362f7f8f192d424dd815f5ea"
+    ],
+    "carrier_diagnosis": [
+      "canonical/verification/FULL_PRIVATE_CURRENT_MAIN_REGRESSION_CARRIER_DIAGNOSIS_20261011_V1.json",
+      "8dec86c9a39fd009ee25b8ca3b8ff7f905474f10"
+    ]
+  },
+  "checks": {
+    "count": 15,
+    "passed": 15,
+    "failed": 0,
+    "verified": [
+      "PROFESSIONAL_PROPERTY_TRUTH_24_OF_24",
+      "PROFESSIONAL_SEMANTIC_PROPERTY_TRUTH_12_OF_12",
+      "LIVE_SELECTION_DOES_NOT_RESCHEDULE_CLOSED_V10_SEMANTIC_OR_V9_R12_WORK",
+      "LIVE_SELECTION_PARALLELIZES_ESCAPE_O11_Q2_R2",
+      "SCHEDULER_POST_COMPOSITION_PROPERTY_TRUTH_24_OF_24",
+      "SCHEDULER_PROFESSIONAL_EDGE_IS_ONLY_FULL_PRIVATE_REGRESSION_GATE",
+      "REUSE_CLASSIFIER_PROFESSIONAL_AND_ASSURANCE_RESIDUALS_BOTH_RECONCILED_TO_24_OF_24",
+      "MISSION_SNAPSHOT_PROPERTY_TRUTH_24_OF_24",
+      "MISSION_SNAPSHOT_ONLY_PROFESSIONAL_PROMOTION_GATE_IS_FULL_PRIVATE_REGRESSION",
+      "ZERO_STEP_CARRIER_DIAGNOSIS_DOES_NOT_CLAIM_PASS_OR_FAIL",
+      "LIVE_DIAGNOSIS_EXACT_BLOB_BINDING",
+      "PROFESSIONAL_DIAGNOSIS_EXACT_BLOB_BINDING",
+      "ASSURANCE_DIAGNOSIS_EXACT_BLOB_BINDING",
+      "SCHEDULER_DIAGNOSIS_EXACT_BLOB_BINDING",
+      "MISSION_DIAGNOSIS_EXACT_BLOB_BINDING"
+    ]
+  },
+  "truth": {
+    "professional_property_truth_closed": true,
+    "professional_property_truth_count": 24,
+    "professional_property_truth_required": 24,
+    "full_private_regression_gate_open": true,
+    "regression_execution_carrier_blocked": true,
+    "regression_pass": false,
+    "regression_fail_proved": false,
+    "uvck_v2_live_default_promoted": false,
+    "parallel_nonconflicting_reuse_first_work_authorized_by_currentness": true
+  },
+  "verification_class": "CONNECTOR_CURRENTNESS_RECOMPUTATION__NOT_INDEPENDENT_EXECUTION_CARRIER",
+  "hard_nonclaims": [
+    "NO_FULL_PRIVATE_REGRESSION_PASS",
+    "NO_FULL_PRIVATE_REGRESSION_FAIL",
+    "NO_UVCK_V2_PROMOTION",
+    "NO_NEW_SEMANTIC_PROPERTY_TRUTH_CREDIT_FROM_CURRENTNESS_RECONCILIATION",
+    "NO_ACCEPTANCE_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "promotion_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
