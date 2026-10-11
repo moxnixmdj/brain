@@ -1,0 +1,124 @@
+{
+  "schema": "PROJECT_BRAIN_LIVE_FRONTIER_24_OF_24_CURRENTNESS_RECONCILIATION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__NATIVE_GIT_TREE_BINDING_PLUS_INDEPENDENT_SEMANTIC_REPLAY_45_OF_45__STALE_12_OF_24_AND_9_OF_24_PROJECTIONS_REMOVED__ZERO_EXECUTION_PROMOTION_OR_TERMINAL_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "base_main_commit": "e0c2627ca80de041569d7af6398298129f82703f",
+    "repaired_branch": "successor/live-frontier-currentness-24of24-20261011-v1",
+    "repaired_branch_pre_receipt_commit": "2be7a33994a4f0a69b60ac9897e47bb4a0e12c70",
+    "repaired_tree_sha": "04ae23eabeeada48920ee2941c56223a7e4bf495"
+  },
+  "current_authorities": {
+    "professional": {
+      "path": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
+      "git_blob_sha": "65de0b8f8bf7c449f41a0267eba10f8c5164089d",
+      "property_truth_closed_count": 24,
+      "open_execution_leaf_count": 0,
+      "open_semantic_leaf_count": 0
+    },
+    "assurance": {
+      "path": "canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json",
+      "git_blob_sha": "a82d68cb141273c99cff8fff80e903ea003d12ca",
+      "required_remaining_gate": "FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION",
+      "carrier_wake_required": true
+    },
+    "residual_reuse": {
+      "path": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
+      "git_blob_sha": "ca54142b8ecd644df85f4ca2258961dd234f76c3",
+      "active_gap_a": 12,
+      "active_gap_b": 0,
+      "parked": 1
+    },
+    "r2": {
+      "path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+      "git_blob_sha": "91a2000e0972bc5ce4c03f9a2dcaed13a822ad58",
+      "general_mechanism_closed": true,
+      "wake_gated_tail": true
+    },
+    "bytes": {
+      "path": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
+      "git_blob_sha": "22bb42347a8c823f057dc1dcbe38e1e9b2d3c5b1",
+      "frontier": "V32",
+      "raw_python_source_bytes": 1844477,
+      "qualification": "10350/10350"
+    }
+  },
+  "diagnosed_stale_projection": [
+    "LIVE_FRONTIER_ID_STILL_ENCODED_12_OF_24_DESPITE_CURRENT_24_OF_24_AUTHORITY",
+    "PROFESSIONAL_PROPERTY_TRUTH_DEPLETION_REMAINED_SCHEDULABLE_WITH_9_OF_24_READ_ONLY_SNAPSHOT",
+    "ASSURANCE_CANDIDATE_STILL_REQUIRED_SUPERSEDED_PROFESSIONAL_DOMAIN_SEMANTIC_EVIDENCE",
+    "LIVE_FRONTIER_PARALLEL_CONTROL_STILL_POINTED_AT_POST_COMPOSITION_V1",
+    "DEVELOPMENT_SCHEDULER_EMBEDDED_12_OF_24_PROFESSIONAL_AND_V31_BYTES_SNAPSHOTS",
+    "MISSION_OBJECTIVE_EMBEDDED_12_OF_24_PROFESSIONAL_ASSURANCE_AND_V31_BYTES_SNAPSHOTS"
+  ],
+  "repairs": [
+    "REBIND_LIVE_FRONTIER_SOURCE_SET_TO_CURRENT_AUTHORITY_BLOBS",
+    "REMOVE_SOLVED_PROFESSIONAL_PROPERTY_TRUTH_DEPLETION_FROM_ACTIVE_CANDIDATES_AND_MARK_CLOSED",
+    "REDUCE_UVCK_PROMOTION_PREREQUISITES_TO_FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION_ONLY",
+    "BIND_REGRESSION_CARRIER_WAKE_AND_ZERO_STEP_EXTERNALITY_WITHOUT_PASS_OR_FAIL INFERENCE",
+    "ADVANCE_BYTES_CANDIDATE_FROM_V31_TO_CURRENT_V32",
+    "REBIND_R2_AND_ESCAPE_CANDIDATE_SOURCE_BLOBS",
+    "BIND_LIVE_PARALLEL_CONTROL_TO_VERIFIED_POST_COMPOSITION_V2_RUNTIME",
+    "REFRESH_DEVELOPMENT_SCHEDULER_TO_24_OF_24_ZERO_OPEN_LEAVES_AND_V32",
+    "REFRESH_MISSION_MUTABLE_CURRENT_SUMMARIES_TO_24_OF_24_ZERO_OPEN_LEAVES_AND_V32",
+    "PRESERVE_ALL_EXECUTION_PROMOTION_QUALITY_AND_TERMINAL_GATES"
+  ],
+  "repaired_native_git_blobs": {
+    "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json": "bd8b094b6e65b1bfa60f370d2850dc91b657db0c",
+    "canonical/governance/CURRENT_DEVELOPMENT_SCHEDULER.json": "7af44744b3738c0ee282b77a3d9534e16d92e79c",
+    "canonical/governance/CURRENT_MISSION_OBJECTIVE.json": "a0364b102826e0937d0b101e336afc09ecc1f9ca"
+  },
+  "native_git_tree_verification": {
+    "method": "GITHUB_GIT_COMMIT_AND_RECURSIVE_TREE_READ",
+    "tree_sha": "04ae23eabeeada48920ee2941c56223a7e4bf495",
+    "result": "PASS__ALL_THREE_REPAIRED_PATHS_PRESENT_AT_DECLARED_NATIVE_GIT_BLOB_IDS"
+  },
+  "independent_semantic_replay": {
+    "carrier": "SPRITE",
+    "carrier_name": "brain-professional-hard-defect-verify-20261010",
+    "carrier_id": "sprite-1bbb86ed-1f7c-409f-8397-fadc4de7a62a",
+    "isolated_path": "/home/sprite/verify-live-frontier-24",
+    "status": "PASS__INDEPENDENT_SEMANTIC_REPLAY__45_OF_45__ZERO_EXECUTION_PROMOTION_OR_TERMINAL_CREDIT",
+    "checks_run": 45,
+    "checks_passed": 45,
+    "checked_classes": [
+      "JSON_PARSE",
+      "PROFESSIONAL_24_OF_24_AND_ZERO_OPEN",
+      "SOLVED_CANDIDATE_REMOVAL",
+      "ASSURANCE_SINGLE_REMAINING_GATE",
+      "CARRIER_WAKE_BINDING",
+      "BYTES_V32_CURRENTNESS",
+      "R2_AND_ESCAPE_SOURCE_CURRENTNESS",
+      "POST_COMPOSITION_V2_BINDING",
+      "SCHEDULER_24_OF_24_CROSS_POINTER_COHERENCE",
+      "MISSION_POINTER_AND_COUNT_COHERENCE",
+      "NO_EXECUTION_PROMOTION_OR_TERMINAL_AUTHORITY"
+    ],
+    "transport_limitation": "GITHUB_CONNECTOR_MATERIALIZATION_DID_NOT_PRESERVE_NATIVE_GIT_BLOB_BYTE_IDENTITY_ON_SPRITE__THEREFORE_SPRITE_REPLAY_CLAIMS_SEMANTIC_INVARIANTS_ONLY__NATIVE_GIT_BLOB_IDENTITY_IS ESTABLISHED_SEPARATELY_BY_GITHUB_TREE_READ"
+  },
+  "regression_gate": {
+    "required": "FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION",
+    "executed_by_this_repair": false,
+    "pass_claimed": false,
+    "fail_claimed": false,
+    "carrier_blocked": true,
+    "carrier_diagnosis_path": "canonical/verification/FULL_PRIVATE_CURRENT_MAIN_REGRESSION_CARRIER_DIAGNOSIS_20261011_V1.json",
+    "carrier_diagnosis_git_blob_sha": "47dc643c94bb5e8ce978457f2534d2e42bd3316d"
+  },
+  "hard_nonclaims": [
+    "NO_FULL_PRIVATE_CURRENT_MAIN_REGRESSION_PASS",
+    "NO_FULL_PRIVATE_CURRENT_MAIN_REGRESSION_FAIL",
+    "NO_UVCK_V2_PROMOTION",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY",
+    "NO_NEW_CAPABILITY_OR_NEW_PRIMITIVE_CREDIT",
+    "NO_EXACT_BYTE_SPRITE_REPLAY_CLAIM"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "promotion_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
